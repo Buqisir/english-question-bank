@@ -1,0 +1,59 @@
+# macOS / editor
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.sw?
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.local
+*secret*
+*Secret*
+*.key
+*.pem
+*api-key*
+*API_KEY*
+
+# Dependencies / builds
+node_modules/
+app/node_modules/
+app/dist/
+app/dist-ssr/
+dist/
+dist-ssr/
+
+# Logs / runtime state
+*.log
+*.pid
+server/logs/
+.playwright-cli/
+app/.playwright-cli/
+
+# Local databases and scratch work
+*.sqlite
+*.sqlite-*
+*.db
+data/*
+!data/.gitkeep
+!data/sql/
+!data/sql/**
+.scratch/
+
+# Imported source files, generated exports, reports, and browser output
+imports/*
+!imports/.gitkeep
+exports/*
+!exports/.gitkeep
+reports/
+output/
+
+# Local model weights
+models/
+*.gguf
+*.safetensors
+
+# Rendered/generated document previews
+docs/rendered-*/

@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>英语题库工作台 · Open Design 原型</title>
+    <style>
+      :root {
+        --ink: #2c3033;
+        --ink-strong: #101315;
+        --muted: #6f777d;
+        --paper: #f6f3ee;
+        --surface: #f8faf9;
+        --panel: #ffffff;
+        --line: #dfe4e2;
+        --line-strong: #bbc5c1;
+        --accent: #bd5746;
+        --accent-dark: #944234;
+        --blue-soft: #e6f0f6;
+        --green-soft: #e7f3ec;
+        --amber-soft: #f6edce;
+        --coral-soft: #f7e2dc;
+        --shadow: 0 18px 45px rgba(37, 45, 49, 0.08);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+          sans-serif;
+        background: var(--surface);
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.72) 0 1px, transparent 1px 100%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0 1px, transparent 1px 100%),
+          var(--surface);
+        background-size: 28px 28px;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+
+      .shell {
+        min-height: 100vh;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+        padding: 20px 28px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .eyebrow {
+        margin: 0 0 5px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 0;
+        color: var(--ink-strong);
+        font-size: 27px;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 39px;
+        border-radius: 8px;
+        padding: 0 13px;
+        font-weight: 800;
+      }
+
+      .button.primary {
+        color: #fff;
+        background: var(--accent);
+      }
+
+      .button.secondary {
+        color: var(--ink-strong);
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .button.slim {
+        min-height: 34px;
+        padding: 0 11px;
+        color: #fff;
+        background: var(--accent);
+      }
+
+      .workbench {
+        display: grid;
+        grid-template-columns: 282px minmax(430px, 1fr) 372px;
+        min-height: calc(100vh - 82px);
+      }
+
+      .filters,
+      .library,
+      .basket {
+        min-width: 0;
+        padding: 22px;
+      }
+
+      .filters,
+      .basket {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .filters {
+        border-right: 1px solid var(--line);
+      }
+
+      .basket {
+        border-left: 1px solid var(--line);
+      }
+
+      .panel-title,
+      .library-header,
+      .meta,
+      .chips,
+      .basket-actions,
+      .switcher {
+        display: flex;
+        align-items: center;
+      }
+
+      .panel-title {
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .panel-title h2,
+      .library-header h2 {
+        margin: 0;
+        color: var(--ink-strong);
+        font-size: 19px;
+        letter-spacing: 0;
+      }
+
+      .field {
+        display: grid;
+        gap: 7px;
+        margin-bottom: 16px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .search,
+      select {
+        width: 100%;
+        height: 41px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 11px;
+      }
+
+      .search input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        color: var(--ink);
+        background: transparent;
+      }
+
+      select {
+        padding: 0 10px;
+        color: var(--ink);
+      }
+
+      .filter-note {
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        gap: 10px;
+        margin-top: 19px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--green-soft);
+      }
+
+      .icon-box {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        color: #fff;
+        background: var(--accent);
+        font-weight: 900;
+      }
+
+      .icon-box svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.25;
+      }
+
+      .filter-note strong {
+        display: block;
+        color: var(--ink-strong);
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .filter-note span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .library {
+        background: rgba(246, 248, 247, 0.76);
+      }
+
+      .library-header {
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 17px;
+      }
+
+      .switcher {
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .switcher button {
+        min-height: 31px;
+        border-radius: 6px;
+        padding: 0 11px;
+        color: var(--muted);
+        background: transparent;
+        font-weight: 800;
+      }
+
+      .switcher button.active {
+        color: #fff;
+        background: var(--ink-strong);
+      }
+
+      .group-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 126px;
+        gap: 18px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .meta {
+        flex-wrap: wrap;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .meta span {
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: var(--paper);
+      }
+
+      .card h3 {
+        margin: 12px 0 8px;
+        color: var(--ink-strong);
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .summary,
+      .hit,
+      .preview p,
+      .empty {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .hit {
+        margin-top: 10px;
+      }
+
+      .hit strong {
+        color: var(--ink);
+      }
+
+      .chips {
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 12px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        max-width: 100%;
+        padding: 4px 8px;
+        border-radius: 999px;
+        color: var(--ink);
+        background: var(--blue-soft);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .card-side {
+        display: grid;
+        align-content: start;
+        gap: 9px;
+      }
+
+      .badge {
+        display: inline-flex;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 5px 8px;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .badge.low {
+        color: #116044;
+        background: var(--green-soft);
+      }
+
+      .badge.medium {
+        color: #765000;
+        background: var(--amber-soft);
+      }
+
+      .badge.high {
+        color: #923529;
+        background: var(--coral-soft);
+      }
+
+      .badge.source {
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      .paper-title {
+        display: grid;
+        gap: 5px;
+        margin-bottom: 14px;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .paper-title span,
+      .preview span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .paper-title strong {
+        color: var(--ink-strong);
+        font-size: 16px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 14px 0;
+      }
+
+      .stats div {
+        display: grid;
+        gap: 3px;
+        padding: 10px;
+        border-radius: 8px;
+        background: var(--paper);
+        text-align: center;
+      }
+
+      .stats strong {
+        color: var(--ink-strong);
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      .stats span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .basket-list {
+        display: grid;
+        gap: 10px;
+        min-height: 126px;
+      }
+
+      .empty {
+        display: grid;
+        place-items: center;
+        min-height: 118px;
+        padding: 16px;
+        border: 1px dashed var(--line-strong);
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .basket-item {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr) 34px;
+        gap: 9px;
+        padding: 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .index {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        color: #fff;
+        background: var(--accent);
+        font-weight: 900;
+      }
+
+      .basket-content strong,
+      .basket-content span {
+        display: block;
+      }
+
+      .basket-content strong {
+        overflow: hidden;
+        color: var(--ink-strong);
+        font-size: 14px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .basket-content span {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .basket-content label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .basket-content input {
+        width: 62px;
+        height: 28px;
+        padding: 0 6px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+
+      .basket-actions {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .basket-actions button {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      .preview {
+        display: grid;
+        gap: 5px;
+        margin: 14px 0;
+        padding: 12px;
+        border-radius: 8px;
+        background: var(--blue-soft);
+      }
+
+      .export {
+        width: 100%;
+      }
+
+      @media (max-width: 1180px) {
+        .workbench {
+          grid-template-columns: 250px minmax(380px, 1fr);
+        }
+
+        .basket {
+          grid-column: 1 / -1;
+          border-top: 1px solid var(--line);
+          border-left: 0;
+        }
+      }
+
+      @media (max-width: 780px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 18px;
+        }
+
+        .actions {
+          width: 100%;
+        }
+
+        .actions .button {
+          flex: 1;
+        }
+
+        .workbench {
+          display: block;
+        }
+
+        .filters,
+        .basket {
+          border: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .library-header,
+        .card {
+          grid-template-columns: 1fr;
+        }
+
+        .library-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .card-side {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Local-first English Question Bank</p>
+          <h1>英语题库工作台</h1>
+        </div>
+        <div class="actions">
+          <button class="button secondary" type="button">AI 建议标签</button>
+          <button class="button primary" type="button">录题</button>
+        </div>
+      </header>
+
+      <main class="workbench">
+        <aside class="filters" aria-label="筛选">
+          <div class="panel-title">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 6h16" />
+                <path d="M7 12h10" />
+                <path d="M10 18h4" />
+              </svg>
+            </div>
+            <h2>筛选</h2>
+          </div>
+
+          <label class="field">
+            <span>关键词</span>
+            <div class="search">
+              <span>⌕</span>
+              <input id="query" placeholder="搜篇章、题干、标签" />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>来源</span>
+            <select id="source">
+              <option value="all">全部来源</option>
+              <option value="real">真题</option>
+              <option value="mock">模拟题</option>
+              <option value="self">自建</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>题型</span>
+            <select id="type">
+              <option value="all">全部题型</option>
+              <option value="reading">阅读理解</option>
+              <option value="cloze">完形填空</option>
+              <option value="grammar">语法填空</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>难度</span>
+            <select id="difficulty">
+              <option value="all">全部难度</option>
+              <option value="low">低</option>
+              <option value="medium">中</option>
+              <option value="high">高</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>标签</span>
+            <select id="tag">
+              <option value="all">全部标签</option>
+            </select>
+          </label>
+
+          <div class="filter-note">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 6h16" />
+                <path d="M4 12h16" />
+                <path d="M4 18h10" />
+              </svg>
+            </div>
+            <div>
+              <strong id="matchCount">0</strong>
+              <span>个题组匹配当前条件</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="library" aria-label="题库列表">
+          <div class="library-header">
+            <div>
+              <p class="eyebrow">Question Groups</p>
+              <h2>题组列表</h2>
+            </div>
+            <div class="switcher" aria-label="结果视图">
+              <button class="active" type="button">题组</button>
+              <button type="button">详情</button>
+            </div>
+          </div>
+
+          <div class="group-list" id="groupList"></div>
+        </section>
+
+        <aside class="basket" aria-label="组题篮">
+          <div class="panel-title">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M8 5h8" />
+                <path d="M9 3h6v4H9z" />
+                <path d="M6 7h12v14H6z" />
+                <path d="M9 12h6" />
+                <path d="M9 16h4" />
+              </svg>
+            </div>
+            <h2>组题篮</h2>
+          </div>
+
+          <div class="paper-title">
+            <span>题集标题</span>
+            <strong>高考阅读 B 主题训练</strong>
+          </div>
+
+          <div class="switcher" aria-label="版本切换">
+            <button class="active" id="studentMode" type="button">学生版</button>
+            <button id="teacherMode" type="button">教师版</button>
+          </div>
+
+          <div class="stats">
+            <div>
+              <strong id="basketGroups">0</strong>
+              <span>题组</span>
+            </div>
+            <div>
+              <strong id="basketQuestions">0</strong>
+              <span>小题</span>
+            </div>
+            <div>
+              <strong id="basketScore">0</strong>
+              <span>分</span>
+            </div>
+          </div>
+
+          <div class="basket-list" id="basketList">
+            <p class="empty">从左侧题组列表加入内容，右侧会生成试卷结构。</p>
+          </div>
+
+          <div class="preview">
+            <span>预览模式</span>
+            <p id="previewText">导出时隐藏答案与解析，保留材料、题干、选项和答题区域。</p>
+          </div>
+
+          <button class="button primary export" id="exportButton" type="button" disabled>
+            导出 DOCX
+          </button>
+        </aside>
+      </main>
+    </div>
+
+    <script>
+      const groups = [
+        {
+          id: "john-todd",
+          title: "John Todd 与 eco-machine 污染治理",
+          source: "2023 新课标 I B",
+          sourceType: "real",
+          type: "reading",
+          typeLabel: "阅读理解",
+          count: 4,
+          difficulty: "medium",
+          difficultyLabel: "中",
+          score: 2.5,
+          tags: ["生态智慧", "人与自然", "说明文", "问题解决"],
+          summary: "从童年观察溪流自净，到用植物、动物和微生物组成生态机器清理污泥和污水。",
+          hit: "Which words best describe Todd's approach to pollution treatment?"
+        },
+        {
+          id: "phone-box",
+          title: "旧电话亭变成社区小图书馆",
+          source: "2024 浙江 1月 B",
+          sourceType: "real",
+          type: "reading",
+          typeLabel: "阅读理解",
+          count: 4,
+          difficulty: "low",
+          difficultyLabel: "低",
+          score: 2.5,
+          tags: ["社区共享", "公共空间", "旧物新用"],
+          summary: "从一次被锁门时靠电话亭求助，到电话亭后来成为社区共享图书空间。",
+          hit: "What did the phone box mean to the writer at first?"
+        },
+        {
+          id: "writing-teacher",
+          title: "写作教师重新设计写作任务",
+          source: "2025 全国高考 I B",
+          sourceType: "real",
+          type: "reading",
+          typeLabel: "阅读理解",
+          count: 4,
+          difficulty: "medium",
+          difficultyLabel: "中",
+          score: 2.5,
+          tags: ["写作教育", "学生表达", "教育反思"],
+          summary: "学生对写作意义缺乏兴趣，教师调整任务后看见学生真实表达和连接他人的可能。",
+          hit: "Why did the teacher change the writing task?"
+        },
+        {
+          id: "body-image",
+          title: "家庭饮食规训与儿童身体观",
+          source: "2025 浙江 1月 B 改编训练",
+          sourceType: "mock",
+          type: "cloze",
+          typeLabel: "完形填空",
+          count: 15,
+          difficulty: "high",
+          difficultyLabel: "高",
+          score: 1,
+          tags: ["家庭教育", "身体观", "健康自主"],
+          summary: "母亲从孩子一句话回想童年饮食控制，尝试重新理解健康自主和家长边界。",
+          hit: "The mother chose to step back and let the child notice hunger and fullness."
+        },
+        {
+          id: "car-physics",
+          title: "汽车兴趣进入物理课堂",
+          source: "2026 浙江 1月 B 语法填空转化",
+          sourceType: "self",
+          type: "grammar",
+          typeLabel: "语法填空",
+          count: 10,
+          difficulty: "medium",
+          difficultyLabel: "中",
+          score: 1.5,
+          tags: ["真实生活", "兴趣驱动", "学习动机"],
+          summary: "教师把汽车爱好带进物理课堂，用轮胎讲摩擦，让学生重新感到学习与现实有关。",
+          hit: "The lesson was designed to make physics feel connected to daily life."
+        }
+      ];
+
+      const sourceLabels = { real: "真题", mock: "模拟题", self: "自建" };
+      const basket = [];
+      let teacherMode = false;
+
+      const byId = (id) => document.getElementById(id);
+      const allTags = Array.from(new Set(groups.flatMap((group) => group.tags)));
+
+      for (const tag of allTags) {
+        const option = document.createElement("option");
+        option.value = tag;
+        option.textContent = tag;
+        byId("tag").appendChild(option);
+      }
+
+      function filteredGroups() {
+        const query = byId("query").value.trim().toLowerCase();
+        const source = byId("source").value;
+        const type = byId("type").value;
+        const difficulty = byId("difficulty").value;
+        const tag = byId("tag").value;
+        return groups.filter((group) => {
+          const text = [
+            group.title,
+            group.source,
+            group.typeLabel,
+            group.summary,
+            group.hit,
+            ...group.tags
+          ].join(" ").toLowerCase();
+
+          return (
+            (!query || text.includes(query)) &&
+            (source === "all" || group.sourceType === source) &&
+            (type === "all" || group.type === type) &&
+            (difficulty === "all" || group.difficulty === difficulty) &&
+            (tag === "all" || group.tags.includes(tag))
+          );
+        });
+      }
+
+      function renderGroups() {
+        const list = byId("groupList");
+        const filtered = filteredGroups();
+        byId("matchCount").textContent = String(filtered.length);
+        list.innerHTML = "";
+
+        for (const group of filtered) {
+          const article = document.createElement("article");
+          article.className = "card";
+          article.innerHTML = `
+            <div>
+              <div class="meta">
+                <span>${group.source}</span>
+                <span>${group.typeLabel}</span>
+                <span>${group.count} 题</span>
+              </div>
+              <h3>${group.title}</h3>
+              <p class="summary">${group.summary}</p>
+              <p class="hit"><strong>命中：</strong>${group.hit}</p>
+              <div class="chips">
+                ${group.tags.map((tag) => `<span class="chip">${tag}</span>`).join("")}
+              </div>
+            </div>
+            <div class="card-side">
+              <span class="badge ${group.difficulty}">难度 ${group.difficultyLabel}</span>
+              <span class="badge source">${sourceLabels[group.sourceType]}</span>
+              <button class="button slim" type="button" data-add="${group.id}">
+                ${basket.find((item) => item.id === group.id) ? "已加入" : "加入"}
+              </button>
+            </div>
+          `;
+          list.appendChild(article);
+        }
+
+        for (const button of document.querySelectorAll("[data-add]")) {
+          const id = button.getAttribute("data-add");
+          button.disabled = basket.some((item) => item.id === id);
+          button.addEventListener("click", () => addToBasket(id));
+        }
+      }
+
+      function addToBasket(id) {
+        const group = groups.find((item) => item.id === id);
+        if (!group || basket.some((item) => item.id === id)) return;
+        basket.push({ ...group, scoreValue: group.score });
+        renderGroups();
+        renderBasket();
+      }
+
+      function renderBasket() {
+        const list = byId("basketList");
+        list.innerHTML = "";
+        if (basket.length === 0) {
+          list.innerHTML = '<p class="empty">从左侧题组列表加入内容，右侧会生成试卷结构。</p>';
+        } else {
+          basket.forEach((item, index) => {
+            const row = document.createElement("div");
+            row.className = "basket-item";
+            row.innerHTML = `
+              <div class="index">${index + 1}</div>
+              <div class="basket-content">
+                <strong>${item.title}</strong>
+                <span>${item.count} 题 · ${item.source}</span>
+                <label>
+                  分值
+                  <input data-score="${item.id}" min="0.5" step="0.5" type="number" value="${item.scoreValue}" />
+                </label>
+              </div>
+              <div class="basket-actions">
+                <button type="button" data-up="${item.id}" aria-label="上移">↑</button>
+                <button type="button" data-down="${item.id}" aria-label="下移">↓</button>
+                <button type="button" data-remove="${item.id}" aria-label="删除">×</button>
+              </div>
+            `;
+            list.appendChild(row);
+          });
+        }
+
+        for (const input of document.querySelectorAll("[data-score]")) {
+          input.addEventListener("input", () => {
+            const item = basket.find((entry) => entry.id === input.getAttribute("data-score"));
+            if (item) item.scoreValue = Number(input.value || item.score);
+            renderStats();
+          });
+        }
+
+        for (const button of document.querySelectorAll("[data-remove]")) {
+          button.addEventListener("click", () => {
+            const index = basket.findIndex((entry) => entry.id === button.getAttribute("data-remove"));
+            if (index >= 0) basket.splice(index, 1);
+            renderGroups();
+            renderBasket();
+          });
+        }
+
+        for (const button of document.querySelectorAll("[data-up], [data-down]")) {
+          button.addEventListener("click", () => {
+            const id = button.getAttribute("data-up") || button.getAttribute("data-down");
+            const direction = button.hasAttribute("data-up") ? -1 : 1;
+            const index = basket.findIndex((entry) => entry.id === id);
+            const next = index + direction;
+            if (index >= 0 && next >= 0 && next < basket.length) {
+              const [item] = basket.splice(index, 1);
+              basket.splice(next, 0, item);
+              renderBasket();
+            }
+          });
+        }
+
+        renderStats();
+      }
+
+      function renderStats() {
+        byId("basketGroups").textContent = String(basket.length);
+        byId("basketQuestions").textContent = String(basket.reduce((sum, item) => sum + item.count, 0));
+        byId("basketScore").textContent = basket
+          .reduce((sum, item) => sum + item.scoreValue * item.count, 0)
+          .toFixed(1);
+        byId("exportButton").disabled = basket.length === 0;
+      }
+
+      function setMode(isTeacher) {
+        teacherMode = isTeacher;
+        byId("studentMode").classList.toggle("active", !teacherMode);
+        byId("teacherMode").classList.toggle("active", teacherMode);
+        byId("previewText").textContent = teacherMode
+          ? "导出时显示答案与解析，适合课堂讲评和教师备课。"
+          : "导出时隐藏答案与解析，保留材料、题干、选项和答题区域。";
+      }
+
+      ["query", "source", "type", "difficulty", "tag"].forEach((id) => {
+        byId(id).addEventListener("input", renderGroups);
+        byId(id).addEventListener("change", renderGroups);
+      });
+
+      byId("studentMode").addEventListener("click", () => setMode(false));
+      byId("teacherMode").addEventListener("click", () => setMode(true));
+
+      renderGroups();
+      renderBasket();
+    </script>
+  </body>
+</html>

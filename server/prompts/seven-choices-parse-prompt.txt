@@ -1,0 +1,67 @@
+﻿七选五处理指令：
+**文章主旨**：本文就如何解决生产力问题提供了几条实用的建议。
+答案**：**36. D  37. C  38. B  39. G  40. A**
+
+**逐空解析**：
+
+- **36. D "What matters at this time is what you do with these situations."**翻译：
+    - **位置与上下文**：位于引言段落的结尾。前文是："But relax; it happens to everyone. __36__ We are here to help you..."
+    - **解析**：前文承认了大家都会遇到这个问题（a lot to do but little time），这里需要一个承上启下的句子。选项D中的 **"these situations"** 完美指代前文描述的普遍困境，而 **"what you do with them"** 则直接引出了下文即将给出的具体行动建议（即文章后续的几个方法）。这是一个非常自然的逻辑过渡。
+
+- **37. C "When the said task is done, you move on to the next one."**
+翻译：
+    - **位置与上下文**：在“专注单一任务”段落的结尾。前文是："Focus on one task at a time. This will allow you to complete that task with high standards. __37__"
+    - **解析**：本段的核心建议是“一次只做一件事”。在阐述了专注于一个任务的好处（高标准完成）之后，段落需要一个收尾句来描述这个工作流程的下一步。选项C中的 **"the said task"**（上述任务）指代的就是前一句里你正高标准完成的那个任务，而 **"move on to the next one"** 则清晰地勾勒出“完成一个，再下一个”的序列工作图景，使建议完整闭环。
+
+- **38. B "You will be given large and tough tasks at work."**翻译：
+    - **位置与上下文**：在“设定小而有效的目标”段落的开头。后文是："For efficiency, you can break any large task into small but manageable ones..."
+    - **解析**：此空需要为本段的核心建议——“分解任务”——提供**原因**或**前提**。选项B描述的 **"large and tough tasks"**（庞大且艰巨的任务）正是我们需要“设定小目标”和“分解任务”的直接原因。它引出了后文解决方案的必要性，逻辑关系是“提出问题（任务大而难）→ 给出解决方案（分解它）”。
+
+- **39. G "Stress is a bad thing, but self-imposed stress actually helps us focus."**翻译：
+    - **位置与上下文**：在“设定自我规定的截止日期”段落中。前一句是："Deadlines may cause stress. __39__ It can actually increase your productivity..."
+    - **解析**：这里存在一个逻辑上的转折。前句承认截止日期有压力，后句却说它能提高生产力。因此，中间需要一个句子来调和这个矛盾，解释“为什么这种压力是有益的”。选项G完美地充当了这个角色：它先让步承认 **"Stress is a bad thing"**，然后用 **"but"** 转折，点出 **"self-imposed stress"**（自我施加的压力）的独特好处——**"helps us focus"**（帮助我们集中注意力）。这正好解释了后文“它提高生产力”的原因。
+
+- **40. A "This is the best time to brainstorm."**翻译：
+    - **位置与上下文**：在“充分利用通勤时间”段落的结尾。前一句是："Come up with ideas that will actually make your job easy. __40__"
+    - **解析**：前文建议在通勤时“专注于自己的事”并“想出点子”（Come up with ideas）。选项A中的 **"brainstorm"**（头脑风暴）正是对 **"come up with ideas"** 的同义转述和概括。同时，它用 **"This"** 指代“通勤时间”，并强烈地断言这是 **"the best time"**（最佳时机），对全段建议进行了有力的总结和强调。
+按照以上模板，先给出选项答案，然后给出选项翻译： 位置与上下文：然后给出对应解析。
+你需要处理的文本：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

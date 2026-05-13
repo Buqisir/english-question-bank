@@ -1,0 +1,348 @@
+{
+  "version": "1.0",
+  "name": "gaokao-reading-synonym-difficulty-cards",
+  "scope": "高考英语阅读理解原文到正确选项的同义替换、SOLO层级与可教难度初判",
+  "rules": {
+    "candidateCardsOnly": true,
+    "difficultyDefaultSource": "program",
+    "maxCardsPerCall": 5,
+    "reviewNeededRules": "T9/T10默认复核；T6/T8置信度低于0.78复核；其他类型置信度低于0.72复核。",
+    "localModelRole": "8B用于题库搜索、相似题推荐、缺项提醒等本地管家任务，不承担正式阅读解析与难度判断。",
+    "deepSeekRole": "DeepSeek用于阅读解析、答案依据、同义替换难度、SOLO理论融合与教师版解析。"
+  },
+  "deepSeekTriggerRules": [
+    "review_needed=true",
+    "cardId in [T7,T8,T9,T10]",
+    "confidence < 0.72",
+    "boundaryFlags includes T1_T2, T2_T6, T3_T6, T4_T6, T5_T10, T7_T8, T6_T9",
+    "candidateCards length > 2",
+    "teacher_requested_deep_analysis"
+  ],
+  "cards": [
+    {
+      "cardId": "T1",
+      "name": "直接词汇复现",
+      "soloLevel": "单点类",
+      "higherOrderThinking": "不明显",
+      "difficultyDefault": 1,
+      "definition": "选项直接复现原文词汇或短语，无需转换。",
+      "signals": ["选项与原文存在相同词汇", "定位词唯一且明确", "无需理解语境即可匹配"],
+      "sourceToOptionPattern": "原文词/短语 -> 选项原词或大小写变体",
+      "studentBlocker": "定位词过多导致扫读遗漏。",
+      "teachingMove": "训练关键词扫读与快速定位。",
+      "review_needed": false,
+      "promptHintFor8B": "原文与选项高度重叠时判T1；若有词义转换则升T2。",
+      "positiveExamples": [
+        {
+          "paper": "2020广东卷 A",
+          "questionNo": "Q1(1)",
+          "sourceExpression": "ask at your local station",
+          "optionExpression": "Ask at the local station",
+          "whyThisType": "选项仅改大小写，原词直接复现。"
+        },
+        {
+          "paper": "2020广东卷 A",
+          "questionNo": "Q1(2)",
+          "sourceExpression": "located at Roma Street station",
+          "optionExpression": "Roma Street",
+          "whyThisType": "专有名词原词复现，无转换。"
+        }
+      ],
+      "caution": "选项若用同义词替换原文词汇则升为T2。"
+    },
+    {
+      "cardId": "T2",
+      "name": "单句同义改写",
+      "soloLevel": "单点类",
+      "higherOrderThinking": "不明显",
+      "difficultyDefault": 2,
+      "definition": "选项对原文单句进行同义词或句式替换。",
+      "signals": ["选项与原文同义但用词不同", "信息来源为单一句子", "句式或词汇有明显改写"],
+      "sourceToOptionPattern": "原文单句 -> 同义词/句式变换后的选项",
+      "studentBlocker": "同义词积累不足，无法识别改写。",
+      "teachingMove": "积累高频同义替换词对，做改写配对练习。",
+      "review_needed": false,
+      "promptHintFor8B": "单句内同义替换判T2；需跨句整合则升T4或T6。",
+      "positiveExamples": [
+        {
+          "paper": "2020广东卷 C",
+          "questionNo": "Q3(1)",
+          "sourceExpression": "rules require knees stay straight",
+          "optionExpression": "have to follow special rules",
+          "whyThisType": "require -> have to，单句同义改写。"
+        },
+        {
+          "paper": "2020广东卷 C",
+          "questionNo": "Q3(2)",
+          "sourceExpression": "contributing less injury",
+          "optionExpression": "less likely to cause knee injuries",
+          "whyThisType": "词性转换加同义替换，单句定位。"
+        }
+      ],
+      "caution": "若词义依赖语境才能确定则升T3。"
+    },
+    {
+      "cardId": "T3",
+      "name": "语境词义推断",
+      "soloLevel": "单点类",
+      "higherOrderThinking": "分析推断",
+      "difficultyDefault": 3,
+      "definition": "依赖局部语境推断词或短语在文中的具体含义。",
+      "signals": ["目标词有字面义与语境义之别", "习语、比喻或一词多义", "去掉上下文则无法确定词义"],
+      "sourceToOptionPattern": "原文词/短语（含语境） -> 语境义的同义表达",
+      "studentBlocker": "被字面义或常见义干扰，忽视语境重定义。",
+      "teachingMove": "用遮盖法：先猜词义再回文验证。",
+      "upgradeRule": "若词义推断依赖跨句逻辑或篇章语气，升为关联类。",
+      "review_needed": false,
+      "promptHintFor8B": "局部语境可解则判T3；需跨句或篇章语气支撑则升关联类。",
+      "positiveExamples": [
+        {
+          "paper": "2020广东卷 B",
+          "questionNo": "Q2(3)",
+          "sourceExpression": "rereading an author's work is the highest currency a reader can offer",
+          "optionExpression": "Reward",
+          "whyThisType": "currency比喻义需语境推断，字面义干扰强。"
+        },
+        {
+          "paper": "2023全国甲卷 B",
+          "questionNo": "Q8(1)",
+          "sourceExpression": "Terri Bolton is a dab hand when it comes to DIY",
+          "optionExpression": "A specialist",
+          "whyThisType": "dab hand为习语，需语境推断含义。"
+        },
+        {
+          "paper": "2024新课标II D",
+          "questionNo": "Q4(1)",
+          "sourceExpression": "In the wrong hands, such a book could prove as complicated...",
+          "optionExpression": "If written by someone less competent",
+          "whyThisType": "wrong hands语境重定义，非字面义。"
+        }
+      ],
+      "caution": "T2无需语境即可替换；T3必须依赖语境才能确定词义。"
+    },
+    {
+      "cardId": "T4",
+      "name": "多点信息拼合",
+      "soloLevel": "多点类",
+      "higherOrderThinking": "不明显",
+      "difficultyDefault": 3,
+      "definition": "需整合文中两处及以上信息才能得出答案。",
+      "signals": ["答案分散在文中多处", "需同时满足多个条件", "常见于表格、列表类文本"],
+      "sourceToOptionPattern": "原文多处信息 -> 拼合后对应选项",
+      "studentBlocker": "只找到一处信息便作答，遗漏其他条件。",
+      "teachingMove": "训练多条件核查清单，逐一比对。",
+      "review_needed": false,
+      "promptHintFor8B": "需两处以上原文支撑判T4；若有逻辑跳跃则升T6。",
+      "positiveExamples": [
+        {
+          "paper": "2020广东卷 A",
+          "questionNo": "Q1(3)",
+          "sourceExpression": "[时刻表：7:29pm | Central | Varsity Lakes]",
+          "optionExpression": "7:29 pm",
+          "whyThisType": "需同时比对时间、站点、方向三列信息。"
+        },
+        {
+          "paper": "2022全国乙卷 A",
+          "questionNo": "Q7(1)",
+          "sourceExpression": "[日程表跨行]",
+          "optionExpression": "Thurs. 30 Oct.",
+          "whyThisType": "需跨行拼合日期与星期信息。"
+        }
+      ],
+      "caution": "T4为信息拼合无需推断；T6需在信息间做逻辑跳跃。"
+    },
+    {
+      "cardId": "T5",
+      "name": "主旨覆盖归纳",
+      "soloLevel": "关联类",
+      "higherOrderThinking": "归纳建构",
+      "difficultyDefault": 4,
+      "definition": "选出最能覆盖全文或全段主要内容的选项。",
+      "signals": ["题干含best title/main idea/mainly about", "正确选项覆盖全文核心，非局部细节", "干扰项仅覆盖部分段落"],
+      "sourceToOptionPattern": "全文/全段多层信息 -> 最大覆盖度的概括标题",
+      "studentBlocker": "选择局部细节突出的选项，忽视整体覆盖度。",
+      "teachingMove": "用覆盖度测试：逐项检验选项能否统领全文。",
+      "review_needed": false,
+      "promptHintFor8B": "题干问全文主旨/标题且需覆盖性归纳判T5；若选项为抽象概念标签则升T10。",
+      "positiveExamples": [
+        {
+          "paper": "2022全国乙卷 C",
+          "questionNo": "Q9(4)",
+          "sourceExpression": "[全文：无人机铁路应用]",
+          "optionExpression": "How Drones Will Change the Future of Railways",
+          "whyThisType": "选项覆盖全文核心主题，非局部细节。"
+        },
+        {
+          "paper": "2022全国甲卷 B",
+          "questionNo": "Q8(4)",
+          "sourceExpression": "[全文：凤头鹦鹉形状分类实验]",
+          "optionExpression": "Cockatoos: Skilful Shape-Sorters",
+          "whyThisType": "标题覆盖实验主体与核心发现。"
+        }
+      ],
+      "caution": "T5归纳具体内容的主旨；T10从具体事例跳到抽象概念标签。"
+    },
+    {
+      "cardId": "T6",
+      "name": "隐含逻辑推断",
+      "soloLevel": "关联类",
+      "higherOrderThinking": "分析推断",
+      "difficultyDefault": 4,
+      "definition": "在原文信息间做逻辑跳跃，推断未明说的结论。",
+      "signals": ["原文未直接陈述答案", "需在事实间建立因果或条件关系", "选项为对原文的合理推断"],
+      "sourceToOptionPattern": "原文事实/现象 -> 逻辑推断后的隐含结论",
+      "studentBlocker": "停留在原文表层，不敢做逻辑跳跃。",
+      "teachingMove": "训练最小跳跃推断：从事实到最近一步结论。",
+      "review_needed": false,
+      "promptHintFor8B": "需逻辑跳跃且原文无直接表述判T6；跳跃过大或涉及价值判断升T9。",
+      "positiveExamples": [
+        {
+          "paper": "2022全国乙卷 B",
+          "questionNo": "Q8(2)",
+          "sourceExpression": "little privacy, rare baths, and...",
+          "optionExpression": "They suffered severe hardships",
+          "whyThisType": "列举具体困难 -> 推断整体处境，最小跳跃。"
+        },
+        {
+          "paper": "2024新课标II C",
+          "questionNo": "Q3(3)",
+          "sourceExpression": "BMF employees live out sustainability in their everyday lives",
+          "optionExpression": "They have a strong environmental awareness",
+          "whyThisType": "行为描述 -> 推断内在意识，一步逻辑跳跃。"
+        }
+      ],
+      "caution": "T4拼合信息无需推断；T6推断事实，T9判断态度立场。"
+    },
+    {
+      "cardId": "T7",
+      "name": "举例引用意图推断",
+      "soloLevel": "关联类",
+      "higherOrderThinking": "分析推断",
+      "difficultyDefault": 4,
+      "definition": "推断作者使用某例子或引用的修辞目的。",
+      "signals": ["题干含why does the author mention/give the example", "原文有具体事例、数据或引用", "需判断该例服务于哪个论点"],
+      "sourceToOptionPattern": "具体例子/引用 -> 该例在论证结构中的功能",
+      "studentBlocker": "描述例子内容而非判断其论证功能。",
+      "teachingMove": "训练找例子所服务的上下文论点。",
+      "review_needed": false,
+      "promptHintFor8B": "题干问举例/引用目的判T7；若问整段功能则升T8。先找上下文论点，不允许只从To show等选项标签反推。",
+      "positiveExamples": [
+        {
+          "paper": "2023新课标I B",
+          "questionNo": "Q2(3)",
+          "sourceExpression": "He also designed an eco-machine to clean canal water in Fuzhou",
+          "optionExpression": "To show an application of John's idea",
+          "whyThisType": "具体项目例子 -> 说明理念的实际应用。"
+        },
+        {
+          "paper": "2024浙江卷 C",
+          "questionNo": "Q3(3)",
+          "sourceExpression": "In 1999, I personally saw significant tornadoes form from a seeded storm cell in Kansas",
+          "optionExpression": "To indicate a possible danger of cloud seeding",
+          "whyThisType": "亲历事例 -> 指出技术潜在风险。"
+        }
+      ],
+      "caution": "T7针对具体例子/引用；T8针对整个段落的修辞功能。"
+    },
+    {
+      "cardId": "T8",
+      "name": "段落修辞功能判断",
+      "soloLevel": "关联类",
+      "higherOrderThinking": "分析推断",
+      "difficultyDefault": 4,
+      "definition": "判断某段落在全文论证结构中的修辞功能。",
+      "signals": ["题干含what is the function/purpose of paragraph", "需判断段落与全文的结构关系", "常见功能：举例、对比、引入、总结"],
+      "sourceToOptionPattern": "段落内容+篇章结构 -> 该段的修辞功能标签",
+      "studentBlocker": "复述段落内容而非判断其结构功能。",
+      "teachingMove": "训练识别常见修辞功能标签及其语言标志。",
+      "review_needed": false,
+      "promptHintFor8B": "题干问段落功能判T8；若问具体例子目的则降T7。先找段落服务的上下文论点，不允许只从By giving examples等选项标签反推。",
+      "positiveExamples": [
+        {
+          "paper": "2025新课标I D",
+          "questionNo": "Q14(1)",
+          "sourceExpression": "[第1段：列举塑料分布地点]",
+          "optionExpression": "By giving examples",
+          "whyThisType": "段落通过列举实现说明功能。"
+        },
+        {
+          "paper": "2025新课标II C",
+          "questionNo": "Q3(3)",
+          "sourceExpression": "[提到医生和律师]",
+          "optionExpression": "The importance of repeated efforts",
+          "whyThisType": "类比说明段落服务于核心论点。"
+        }
+      ],
+      "caution": "T8判断整段功能；T7判断具体例子或引用的意图。"
+    },
+    {
+      "cardId": "T9",
+      "name": "态度立场判断",
+      "soloLevel": "关联类",
+      "higherOrderThinking": "态度评价",
+      "difficultyDefault": 4,
+      "definition": "判断作者或文中人物对某事的态度或立场。",
+      "signals": ["题干含attitude/tone/feeling toward", "需综合全文或多处语气词判断", "选项为态度标签词"],
+      "sourceToOptionPattern": "全文/多处语气线索 -> 态度立场标签",
+      "studentBlocker": "被局部情绪词误导，忽视整体语气。",
+      "teachingMove": "训练识别语气词并做整体语气归纳。",
+      "review_needed": false,
+      "promptHintFor8B": "需综合语气判断态度判T9；若仅推断事实结论则降T6。",
+      "positiveExamples": [
+        {
+          "paper": "2020广东卷 C",
+          "questionNo": "Q3(4)",
+          "sourceExpression": "[全文：竞走利弊均陈述]",
+          "optionExpression": "Objective",
+          "whyThisType": "全文均衡陈述利弊，整体语气客观。"
+        },
+        {
+          "paper": "2025浙江卷（1月）B",
+          "questionNo": "Q2(1)",
+          "sourceExpression": "It really messed up my relationship with food",
+          "optionExpression": "She is critical of the way she was fed",
+          "whyThisType": "负面情绪词 -> 判断批评立场。"
+        }
+      ],
+      "caution": "T9判断态度立场；T6推断事实性隐含结论。"
+    },
+    {
+      "cardId": "T10",
+      "name": "抽象概念标签",
+      "soloLevel": "抽象拓展类",
+      "higherOrderThinking": "归纳建构",
+      "difficultyDefault": 5,
+      "definition": "从具体事例跳跃到抽象概念或主题标签。",
+      "signals": ["选项为高度抽象的概念词", "原文为具体事例，选项为其抽象提炼", "多个具体细节共同指向同一抽象标签"],
+      "sourceToOptionPattern": "具体事例/细节 -> 抽象概念/主题标签",
+      "studentBlocker": "停留在具体层面，无法完成抽象跳跃。",
+      "teachingMove": "训练具体到抽象的概念阶梯，积累抽象标签词。",
+      "review_needed": true,
+      "promptHintFor8B": "选项为抽象概念且需从具体跳跃判T10，默认标记review_needed=true。",
+      "positiveExamples": [
+        {
+          "paper": "2023新课标II B",
+          "questionNo": "Q2(3)",
+          "sourceExpression": "She adds that the program's benefits go beyond nutrition",
+          "optionExpression": "Far-reaching",
+          "whyThisType": "具体益处 -> 抽象程度标签，需概念跳跃。"
+        },
+        {
+          "paper": "2022全国甲卷 C",
+          "questionNo": "Q9(4)",
+          "sourceExpression": "[全文：野生动物/日出体验]",
+          "optionExpression": "An unforgettable experience",
+          "whyThisType": "具体体验细节 -> 抽象情感标签。"
+        },
+        {
+          "paper": "2023全国乙卷 D",
+          "questionNo": "Q10(1)",
+          "sourceExpression": "[多个古代文明历史记录]",
+          "optionExpression": "How past events should be presented",
+          "whyThisType": "具体史料 -> 抽象史学方法论标签。"
+        }
+      ],
+      "caution": "T5归纳具体内容的主旨覆盖；T10从具体跳到抽象概念层。"
+    }
+  ]
+}
