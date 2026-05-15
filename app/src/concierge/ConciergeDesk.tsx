@@ -8,6 +8,7 @@
 import { useId, useMemo, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { ConciergeResultRow } from './ConciergeResultRow.tsx'
+import { pickClarificationLine } from './clarificationCopy.ts'
 import type { ConciergeDeskState } from './useConciergeDesk.ts'
 
 export type ConciergeDeskProps = {
@@ -87,11 +88,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       {state.kind === 'clarification' && (
         <div className="concierge-clarification" role="status">
-          <strong>再确认一下：</strong>
-          <p>{state.question}</p>
-          <span className="concierge-clarification-hint">
-            刚才的搜索：「{state.pendingQuery}」。补一句就会重新搜。
-          </span>
+          <p className="concierge-clarification-line">
+            {pickClarificationLine(state.pendingQuery, state.question)}
+          </p>
+          <p className="concierge-clarification-examples">
+            比如：科技话题 / 中等难度 / 主旨概括 / 抽象推断。
+          </p>
         </div>
       )}
 

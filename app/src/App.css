@@ -4746,18 +4746,15 @@ button:disabled {
   gap: 4px;
 }
 
-.concierge-clarification strong {
-  font-size: 13px;
-  color: #1A1A1A;
-}
-
-.concierge-clarification p {
+.concierge-clarification-line {
   margin: 0;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #1A1A1A;
+  line-height: 1.5;
 }
 
-.concierge-clarification-hint {
+.concierge-clarification-examples {
+  margin: 0;
   font-size: 12px;
   color: #6B645C;
 }
@@ -4802,11 +4799,11 @@ button:disabled {
   border: 1px solid #E5E3DC;
   border-radius: 16px;
   background: #FFFDF8;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .concierge-result-list > li {
-  border-bottom: 1px solid #EEEAE3;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.06);
 }
 
 .concierge-result-list > li:last-child {
@@ -4826,7 +4823,8 @@ button:disabled {
   padding: 16px 14px;
   background: #FFFDF8;
   outline: none;
-  transition: background 0.12s;
+  border-radius: 6px;
+  transition: background 120ms ease, box-shadow 120ms ease;
   cursor: default;
 }
 
@@ -4834,6 +4832,7 @@ button:disabled {
 .concierge-row:focus-visible,
 .concierge-row:focus-within {
   background: #F4F2EC;
+  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.03);
 }
 
 .concierge-row:focus-visible {

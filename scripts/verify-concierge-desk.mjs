@@ -20,6 +20,7 @@ import {
   buildSimilarIntent,
 } from '../app/src/concierge/conciergeSearch.ts'
 import { cleanReason } from '../app/src/concierge/reason.ts'
+import { pickClarificationLine } from '../app/src/concierge/clarificationCopy.ts'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
@@ -572,11 +573,88 @@ console.log('\nTest 13: Import V1 collop — stage labels, dropzone copy, overfl
   const listRule = css.match(/\.concierge-result-list\s*\{[^}]*\}/)?.[0] || ''
   assert('result-list has 16px radius', /border-radius:\s*16px/.test(listRule), `got: ${listRule}`)
   assert('result-list has paper background', /background:\s*#FFFDF8/i.test(listRule), `got: ${listRule}`)
-  assert('result-list overflow hidden', /overflow:\s*hidden/.test(listRule), `got: ${listRule}`)
+  assert('result-list overflow visible (allows hover lift shadow)', /overflow:\s*visible/.test(listRule), `got: ${listRule}`)
   const liRule = css.match(/\.concierge-result-list\s*>\s*li\s*\{[^}]*\}/)?.[0] || ''
-  assert('row separator uses lighter #EEEAE3', /border-bottom:\s*1px solid #EEEAE3/i.test(liRule), `got: ${liRule}`)
+  assert('row separator uses light ink alpha (not dark line)', /border-bottom:\s*1px solid\s+rgba\(26,\s*26,\s*26,\s*0\.06\)/i.test(liRule), `got: ${liRule}`)
   const rowRule = css.match(/^\.concierge-row\s*\{[^}]*\}/m)?.[0] || ''
   assert('concierge-row padding now 16px 14px', /padding:\s*16px\s+14px/.test(rowRule), `got: ${rowRule}`)
+}
+
+// ------------------------------------------------------------------ Test 14
+console.log('\nTest 14: Clarification copy + row hover lift')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const desk = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
+
+  // 14.A Natural-language clarification — drop legacy phrases.
+  assert('clarification: 刚才的搜索 phrase removed', !/刚才的搜索/.test(desk), '')
+  assert('clarification: 补一句就会重新搜 removed', !/补一句就会重新搜/.test(desk), '')
+  assert('clarification: 学生做题思路像 removed', !/学生做题思路像/.test(desk), '')
+  assert('clarification: 文章讲的内容像 removed', !/文章讲的内容像/.test(desk), '')
+  assert('clarification: 再确认一下 strong removed', !/<strong>再确认一下/.test(desk), '')
+
+  // 14.A New copy is in place — used as a fallback template when backend question is mechanical.
+  assert('clarification template uses 我理解你想找 wording', /我理解你想找「\$\{pendingQuery\}」/.test(readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'clarificationCopy.ts'), 'utf8')), '')
+  assert('clarification template offers 主题/题型/难度/考法', /主题、题型、难度，或考法/.test(readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'clarificationCopy.ts'), 'utf8')), '')
+  assert('clarification examples line present', /比如：科技话题\s*\/\s*中等难度\s*\/\s*主旨概括\s*\/\s*抽象推断/.test(desk), '')
+
+  // 14.A Backend's clarificationQuestion is now passed through the picker, not blindly hidden.
+  assert('desk renders pickClarificationLine(pendingQuery, state.question)', /pickClarificationLine\(state\.pendingQuery,\s*state\.question\)/.test(desk), '')
+
+  // 14.A.1 Picker behavior: keeps natural backend question, replaces mechanical ones.
+  // Mechanical patterns must be replaced with the front-end template.
+  for (const mechanical of [
+    '你更想找学生做题思路像的，还是文章讲的内容像的？',
+    '刚才的搜索：「C 篇」。补一句就会重新搜。',
+    '再确认一下：你要哪类？',
+    '',
+    '   ',
+  ]) {
+    const out = pickClarificationLine('C 篇', mechanical)
+    assert(`mechanical/empty input replaced by template ("${mechanical.slice(0, 16)}…")`, /我理解你想找「C 篇」/.test(out), `got: ${out}`)
+  }
+
+  // Natural, specific backend questions are kept as-is.
+  for (const natural of [
+    '你想要中等难度的科技说明文，还是高难度的抽象推断？',
+    '想找按主旨概括出题的，还是按细节理解出题的？',
+    '指的是高考真题，还是模拟卷？',
+  ]) {
+    const out = pickClarificationLine('C 篇', natural)
+    assert(`natural input passes through ("${natural.slice(0, 16)}…")`, out === natural, `got: ${out}`)
+  }
+
+  // 14.A CSS for the new clarification text uses calm secondary ink.
+  const lineRule = css.match(/\.concierge-clarification-line\s*\{[^}]*\}/)?.[0] || ''
+  assert('clarification-line rule found', lineRule.length > 0, '')
+  assert('clarification-line text is ink #1A1A1A', /color:\s*#1A1A1A/i.test(lineRule), `got: ${lineRule}`)
+  const examplesRule = css.match(/\.concierge-clarification-examples\s*\{[^}]*\}/)?.[0] || ''
+  assert('clarification-examples rule found', examplesRule.length > 0, '')
+  assert('clarification-examples is muted #6B645C', /color:\s*#6B645C/i.test(examplesRule), `got: ${examplesRule}`)
+
+  // 14.A Old hint class CSS removed.
+  assert('legacy clarification-hint class CSS removed', !/\.concierge-clarification-hint\s*\{/.test(css), '')
+
+  // 14.B Row hover lift: extracted-feel without stamp decoration.
+  const rowBaseRule = css.match(/^\.concierge-row\s*\{[\s\S]*?\}/m)?.[0] || ''
+  assert('row base has soft transition (background + box-shadow only, no transform)', /transition:\s*background\s*120ms\s*ease,\s*box-shadow\s*120ms\s*ease;/.test(rowBaseRule), `got: ${rowBaseRule}`)
+  assert('row base does NOT animate transform (avoid layout jitter)', !/transform\s*120ms/.test(rowBaseRule), `got: ${rowBaseRule}`)
+
+  const rowHoverRule = css.match(/\.concierge-row:hover[\s\S]*?\.concierge-row:focus-within\s*\{[^}]*\}/)?.[0] || ''
+  assert('row hover does NOT translate (no jitter)', !/transform:\s*translateY/.test(rowHoverRule), `got: ${rowHoverRule}`)
+  assert('row hover applies single very soft shadow', /box-shadow:\s*0\s+1px\s+2px\s+rgba\(26,\s*26,\s*26,\s*0\.0[0-3]\)/.test(rowHoverRule), `got: ${rowHoverRule}`)
+  assert('row hover background stays warm #F4F2EC', /background:\s*#F4F2EC/i.test(rowHoverRule), `got: ${rowHoverRule}`)
+
+  // 14.B No stamp / dashed / serrated decoration on rows.
+  assert('row CSS has no dashed border anywhere', !/border[^:]*:\s*[^;]*\bdashed\b/.test(rowBaseRule + rowHoverRule), '')
+  assert('row CSS has no border-image (stamp-like)', !/border-image:/i.test(rowBaseRule + rowHoverRule), '')
+  // (no clip-path tricks used either)
+  assert('row CSS has no clip-path tricks', !/clip-path:/i.test(rowBaseRule + rowHoverRule), '')
+
+  // 14.B Container allows the lift shadow to be visible (overflow not clipped).
+  const listRule = css.match(/\.concierge-result-list\s*\{[^}]*\}/)?.[0] || ''
+  assert('result-list overflow is visible (so lift shadow can show)', /overflow:\s*visible/.test(listRule), `got: ${listRule}`)
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
