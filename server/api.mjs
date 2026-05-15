@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
+import { buildPrintHtml } from './print-renderer.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -341,6 +342,35 @@ function ensureDatabaseShape() {
     }
     if (!columns.includes('seven_choices_payload_json')) {
       db.exec("ALTER TABLE reading_parse_results ADD COLUMN seven_choices_payload_json TEXT NOT NULL DEFAULT '{}'")
+    }
+    const questionColumns = db
+      .prepare('PRAGMA table_info(questions)')
+      .all()
+      .map((column) => column.name)
+    if (questionColumns.length > 0) {
+      if (!questionColumns.includes('ai_difficulty_score')) {
+        db.exec('ALTER TABLE questions ADD COLUMN ai_difficulty_score INTEGER')
+      }
+      if (!questionColumns.includes('teacher_difficulty')) {
+        db.exec('ALTER TABLE questions ADD COLUMN teacher_difficulty INTEGER')
+      }
+      if (!questionColumns.includes('difficulty_override_reason')) {
+        db.exec("ALTER TABLE questions ADD COLUMN difficulty_override_reason TEXT NOT NULL DEFAULT ''")
+      }
+      if (!questionColumns.includes('difficulty_override_note')) {
+        db.exec("ALTER TABLE questions ADD COLUMN difficulty_override_note TEXT NOT NULL DEFAULT ''")
+      }
+      if (!questionColumns.includes('difficulty_tagged_at')) {
+        db.exec('ALTER TABLE questions ADD COLUMN difficulty_tagged_at TEXT')
+      }
+    }
+    // paper_sets layout_json migration
+    const paperSetColumns = db
+      .prepare('PRAGMA table_info(paper_sets)')
+      .all()
+      .map((column) => column.name)
+    if (paperSetColumns.length > 0 && !paperSetColumns.includes('layout_json')) {
+      db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
   } finally {
     db.close()
@@ -940,6 +970,11 @@ function getQuestionGroupDetail(id) {
           answer,
           explanation,
           difficulty,
+          ai_difficulty_score,
+          teacher_difficulty,
+          difficulty_override_reason,
+          difficulty_override_note,
+          difficulty_tagged_at,
           score,
           display_order,
           note
@@ -985,30 +1020,126 @@ function getQuestionGroupDetail(id) {
         wordCount: detail.word_count || null,
         note: detail.passage_note || '',
       },
-      questions: questions.map((question) => ({
-        id: question.id,
-        questionNo: question.question_no,
-        questionType: question.question_type,
-        stem: question.stem,
-        answer: question.answer,
-        explanation: question.explanation,
-        difficulty: question.difficulty,
-        score: question.score,
-        displayOrder: question.display_order,
-        note: question.note || '',
-        options: selectOptions.all(question.id).map((option) => ({
-          id: option.id,
-          label: option.label,
-          content: option.content,
-          displayOrder: option.display_order,
-        })),
-      })),
+      questions: questions.map((question) => rowToQuestionDetail(question, selectOptions.all(question.id))),
       readingParseResult,
       readingVerifyResult,
       clozeParseResult,
       grammarParseResult,
       sevenChoicesParseResult,
     }
+  } finally {
+    db.close()
+  }
+}
+
+function rowToQuestionDetail(question, options = []) {
+  return {
+    id: question.id,
+    questionNo: question.question_no,
+    questionType: question.question_type,
+    stem: question.stem,
+    answer: question.answer,
+    explanation: question.explanation,
+    difficulty: question.difficulty,
+    aiDifficultyScore: question.ai_difficulty_score ?? null,
+    teacherDifficulty: question.teacher_difficulty ?? null,
+    difficultyOverrideReason: question.difficulty_override_reason || '',
+    difficultyOverrideNote: question.difficulty_override_note || '',
+    difficultyTaggedAt: question.difficulty_tagged_at || '',
+    score: question.score,
+    displayOrder: question.display_order,
+    note: question.note || '',
+    options: options.map((option) => ({
+      id: option.id,
+      label: option.label,
+      content: option.content,
+      displayOrder: option.display_order,
+    })),
+  }
+}
+
+function getQuestionDetailById(db, questionId) {
+  const question = db
+    .prepare(
+      `
+      SELECT
+        id,
+        question_no,
+        question_type,
+        stem,
+        answer,
+        explanation,
+        difficulty,
+        ai_difficulty_score,
+        teacher_difficulty,
+        difficulty_override_reason,
+        difficulty_override_note,
+        difficulty_tagged_at,
+        score,
+        display_order,
+        note
+      FROM questions
+      WHERE id = ?
+      `,
+    )
+    .get(questionId)
+  if (!question) return null
+
+  const options = db
+    .prepare(
+      `
+      SELECT id, label, content, display_order
+      FROM options
+      WHERE question_id = ?
+      ORDER BY display_order, label
+      `,
+    )
+    .all(questionId)
+
+  return rowToQuestionDetail(question, options)
+}
+
+function saveQuestionDifficultyRating(questionId, input) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    const question = db
+      .prepare(
+        `
+        SELECT id, ai_difficulty_score
+        FROM questions
+        WHERE id = ?
+        `,
+      )
+      .get(questionId)
+    if (!question) return null
+
+    const inputAiDifficultyScore = normalizeAiDifficultyScore(input?.aiDifficultyScore || input?.ai_difficulty_score)
+    const validationQuestion = {
+      ...question,
+      ai_difficulty_score: question.ai_difficulty_score ?? inputAiDifficultyScore,
+    }
+    const payload = normalizeTeacherDifficultyPayload(input, validationQuestion)
+    db.prepare(
+      `
+      UPDATE questions
+      SET
+        ai_difficulty_score = COALESCE(ai_difficulty_score, ?),
+        teacher_difficulty = ?,
+        difficulty_override_reason = ?,
+        difficulty_override_note = ?,
+        difficulty_tagged_at = CASE WHEN ? IS NULL THEN NULL ELSE datetime('now') END
+      WHERE id = ?
+      `,
+    ).run(
+      inputAiDifficultyScore,
+      payload.teacherDifficulty,
+      payload.difficultyOverrideReason,
+      payload.difficultyOverrideNote,
+      payload.teacherDifficulty,
+      questionId,
+    )
+
+    return getQuestionDetailById(db, questionId)
   } finally {
     db.close()
   }
@@ -1058,6 +1189,72 @@ function requiredEnum(value, allowed, label) {
   }
 
   return value
+}
+
+function nullableIntegerInRange(value, min, max, label) {
+  if (value === null || value === undefined || value === '') return null
+  const number = Number(value)
+  if (!Number.isInteger(number) || number < min || number > max) {
+    throw new Error(`${label} is invalid`)
+  }
+  return number
+}
+
+function mapAiDifficultyScoreToFive(value) {
+  const score = nullableIntegerInRange(value, 1, 10, 'AI difficulty score')
+  if (score === null) return null
+  if (score <= 2) return 1
+  if (score <= 3) return 2
+  if (score <= 6) return 3
+  if (score <= 8) return 4
+  return 5
+}
+
+function normalizeAiDifficultyScore(value) {
+  if (value === null || value === undefined || value === '') return null
+  const number = Number(value)
+  if (!Number.isInteger(number) || number < 1 || number > 10) return null
+  return number
+}
+
+const TEACHER_DIFFICULTY_REASONS = new Set([
+  'vocab',
+  'syntax',
+  'location',
+  'abstractness',
+  'distractor',
+  'topic',
+  'other',
+])
+
+function normalizeTeacherDifficultyPayload(input, question) {
+  const teacherDifficulty = nullableIntegerInRange(input?.teacherDifficulty, 1, 5, 'teacherDifficulty')
+  const rawReason = optionalString(input?.difficultyOverrideReason || input?.reason)
+  const difficultyOverrideReason = rawReason && TEACHER_DIFFICULTY_REASONS.has(rawReason) ? rawReason : ''
+  const difficultyOverrideNote = safeTruncate(optionalString(input?.difficultyOverrideNote || input?.note), 500)
+
+  if (rawReason && !difficultyOverrideReason) {
+    throw new Error('difficultyOverrideReason is invalid')
+  }
+
+  if (teacherDifficulty === null) {
+    return {
+      teacherDifficulty: null,
+      difficultyOverrideReason: '',
+      difficultyOverrideNote: '',
+    }
+  }
+
+  const aiBucket = mapAiDifficultyScoreToFive(question?.ai_difficulty_score)
+  if (aiBucket !== null && aiBucket !== teacherDifficulty && !difficultyOverrideReason) {
+    throw new Error('老师确认难度偏离 AI 建议档位时，需要选择偏差原因。')
+  }
+
+  return {
+    teacherDifficulty,
+    difficultyOverrideReason,
+    difficultyOverrideNote,
+  }
 }
 
 function normalizeTags(value) {
@@ -1583,6 +1780,7 @@ function normalizeDraftText(text) {
   return String(text || '')
     .replace(/\\n/g, '\n')
     .replace(/\r\n?/g, '\n')
+    .replace(/<\/?w:[^>]*>/g, '')
     .replace(/\u00a0/g, ' ')
     .replace(/[\t]+/g, ' ')
     .replace(/[ ]{2,}/g, ' ')
@@ -1596,7 +1794,7 @@ function cleanDraftText(text) {
 
 function findSectionHeadings(text) {
   const headings = []
-  const headingPattern = /(^|\n)((?:第[一二三四五六七八九十]+(?:部分|节)|[一二三四五六七八九十]+、|语法填空|完形填空|七选五|阅读理解(?: [A-E])?)[^\n]{0,40})/g
+  const headingPattern = /(^|\n)((?:第[一二三四五六七八九十]+(?:部分|节)|[一二三四五六七八九十]+、|语法填空|完形填空|七选五|阅读理解(?: [A-E])?)[^\n]{0,120})/g
   let match = headingPattern.exec(text)
 
   while (match) {
@@ -1691,10 +1889,10 @@ function pushSectionItemBlock(blocks, text, start, end, itemNo) {
 
 function findStructuredExamItemBlocks(text) {
   const blocks = []
-  const readingStart = patternIndex(text, /(^|\n)第一节[^\n]*(?:(?:37\.5|30分|满分30分)[\s\S]{0,120}?阅读下列短文|阅读下列短文)/)
-  const sevenStart = patternIndex(text, /(^|\n)第二节[^\n]*(?:\n\s*)+(?:阅读下面短文[，,])?[^\n]{0,80}短文后的选项/)
-  const languageStart = patternIndex(text, /(^|\n)第三部分\s*语言(?:知识)?运用/)
-  const writingStart = patternIndex(text, /(^|\n)第四部分\s*写作/)
+  const readingStart = patternIndex(text, /(^|\n)第一节[^\n]*(?:(?:37\.5|30分|满分30分)[\s\S]{0,120}?阅读(?:下面|下列|上面)短文|阅读(?:下面|下列|上面)短文)/)
+  const sevenStart = patternIndex(text, /(^|\n)第二节[^\n]*(?:短文后的选项|(?:\n\s*)+(?:阅读下面短文[，,])?[^\n]{0,80}短文后的选项)/)
+  const languageStart = patternIndex(text, /(^|\n)第[二三]部分\s*(?:语言(?:知识)?|英语知识)运用/)
+  const writingStart = patternIndex(text, /(^|\n)第[三四]部分\s*写作/)
   const readingEnd = nextPositiveIndex(sevenStart, languageStart, writingStart)
 
   if (readingStart >= 0 && readingEnd > readingStart) {
@@ -1780,7 +1978,7 @@ function cleanItemBlockText(text) {
 
   while (result && result !== previous) {
     previous = result
-    result = result.replace(/\n(?:[A-D]|第[一二三四五六七八九十]+(?:部分|节)[^\n]*)\s*$/, '').trim()
+    result = result.replace(/\n(?:[A-D]|第[一二三四五六七八九十]+(?:部分|节)[^\n]*|[一二三四五六七八九十]+、[^\n]*)\s*$/, '').trim()
   }
 
   return result
@@ -1805,7 +2003,7 @@ function findOptionMarkers(text) {
 
 function findLineOptionMarkers(text) {
   const markers = []
-  const optionPattern = /(^|\n)(\s*)([A-G])(?:[．.、]|\s+(?=[A-Za-z]))\s*/g
+  const optionPattern = /(^|\n)(\s*)([A-G])[．.、]\s*/g
   let match = optionPattern.exec(text)
 
   while (match) {
@@ -2183,20 +2381,26 @@ function inferGroupType(sectionTitle, blockText, itemNo = '') {
   const compactText = cleanDraftText(blockText)
   const signalText = cleanDraftText(`${sectionName}\n${compactText}`)
 
-  if (/短文后的选项|多余选项|七选五/.test(signalText)) return 'seven_choices'
-  if (/在空白处填入|括号内单词|语法填空/.test(signalText)) return 'grammar_cloze'
-  if (/完形|可以填入空白处/.test(signalText)) return 'cloze'
-  if (/短文改错|修改作文|书面表达|写封邮件/.test(signalText)) return 'writing'
   if (sectionName.includes('完形')) return 'cloze'
   if (sectionName.includes('语法')) return 'grammar_cloze'
   if (sectionName.includes('七选五') || sectionName.includes('短文七')) return 'seven_choices'
   if (sectionName.includes('书信') || sectionName.includes('写作')) return 'writing'
+  if (/短文后的选项|多余选项|七选五/.test(signalText)) return 'seven_choices'
+  if (/在空白处|括号内单词|语法填空/.test(signalText)) return 'grammar_cloze'
+  if (/完形/.test(signalText)) return 'cloze'
+  if (/短文改错|修改作文|书面表达|写封邮件/.test(signalText)) return 'writing'
 
   const hasScoredQuestionMarkers = /\(\d{1,2}\)\s*\(([\d.]+)分\)/.test(compactText)
+  const scoredQuestionMarkerCount = [...compactText.matchAll(/[（(]\d{1,2}[）)]\s*[（(][\d.]+分[）)]/g)].length
   const optionCount = extractOptions(stripBracketAnswerBlocks(compactText)).length
-  const blankCount = new Set([...compactText.matchAll(/\((\d{1,2})\)/g)].map((match) => match[1])).size
+  const blankCount = new Set([...compactText.matchAll(/[（(](\d{1,2})[）)]/g)].map((match) => match[1])).size
+  const lineOptions = extractLineOptions(stripBracketAnswerBlocks(compactText))
+  const uniqueLineOptionLabels = new Set(lineOptions.map((option) => option.label))
   const lineStartQuestionCount = countLineStartQuestionMarkers(compactText)
 
+  if (blankCount >= 5 && uniqueLineOptionLabels.size >= 7) return 'seven_choices'
+  if (scoredQuestionMarkerCount >= 15 || (lineStartQuestionCount >= 15 && hasScoredQuestionMarkers)) return 'cloze'
+  if (/续写|段落开头语|写一篇|写篇|演讲稿|投稿|报道|邮件|短文参赛|书面表达|应用文/.test(signalText)) return 'writing'
   if (sectionName.includes('阅读')) return 'reading'
   if (lineStartQuestionCount >= 15 && optionCount >= lineStartQuestionCount * 3) return 'cloze'
   if (lineStartQuestionCount >= 1 && optionCount >= lineStartQuestionCount * 3) return 'reading'
@@ -4203,6 +4407,12 @@ function createPaperSet(input) {
       )
     })
 
+    // Write layout_json only if explicitly provided in input
+    if (Object.prototype.hasOwnProperty.call(input, 'layout')) {
+      const layoutJson = input.layout ? JSON.stringify(input.layout) : null
+      db.prepare('UPDATE paper_sets SET layout_json = ? WHERE id = ?').run(layoutJson, paperSetId)
+    }
+
     db.exec('COMMIT')
 
     return {
@@ -4573,6 +4783,10 @@ function getPaperSet(id) {
     const [summary] = selectPaperSetSummaries(db, 'WHERE ps.id = ?', [id])
     if (!summary) return null
 
+    // Read layout_json
+    const [psRow] = db.prepare('SELECT layout_json FROM paper_sets WHERE id = ?').all(id)
+    const rawLayoutJson = psRow?.layout_json || null
+
     const rows = db
       .prepare(
         `
@@ -4591,27 +4805,105 @@ function getPaperSet(id) {
       )
       .all(id)
 
+    const items = rows.map((item) => {
+      const [questionGroup] = selectQuestionGroupCards(db, 'WHERE id = ?', [item.item_id])
+
+      return {
+        id: item.id,
+        itemType: item.item_type,
+        itemId: item.item_id,
+        displayOrder: item.display_order,
+        score: Number.isFinite(Number(item.score_override))
+          ? Number(item.score_override)
+          : questionGroup?.defaultScore || 0,
+        sectionTitle: item.section_title || '',
+        note: item.note || '',
+        questionGroup,
+      }
+    })
+
+    // Sanitize layout against paper_items
+    const { layout, layoutWarnings } = sanitizePaperSetLayout(rawLayoutJson, items)
+
     return {
       ...summary,
-      items: rows.map((item) => {
-        const [questionGroup] = selectQuestionGroupCards(db, 'WHERE id = ?', [item.item_id])
-
-        return {
-          id: item.id,
-          itemType: item.item_type,
-          itemId: item.item_id,
-          displayOrder: item.display_order,
-          score: Number.isFinite(Number(item.score_override))
-            ? Number(item.score_override)
-            : questionGroup?.defaultScore || 0,
-          sectionTitle: item.section_title || '',
-          note: item.note || '',
-          questionGroup,
-        }
-      }),
+      items,
+      layout,
+      layoutWarnings,
     }
   } finally {
     db.close()
+  }
+}
+
+function sanitizePaperSetLayout(rawLayoutJson, items) {
+  const warnings = []
+  if (!rawLayoutJson) return { layout: null, layoutWarnings: [] }
+
+  let parsed
+  try {
+    parsed = JSON.parse(rawLayoutJson)
+  } catch {
+    return { layout: null, layoutWarnings: ['布局数据解析失败，已忽略'] }
+  }
+
+  if (!parsed || !Array.isArray(parsed.blocks)) {
+    return { layout: null, layoutWarnings: [] }
+  }
+
+  // paper_items is authoritative for valid groups and scores
+  const itemByGroupId = new Map(
+    items.filter((i) => i.questionGroup).map((i) => [i.itemId, i])
+  )
+
+  // Filter blocks: keep section_header/page_break, keep valid question_group (first occurrence only), remove invalid/duplicate
+  const sanitizedBlocks = []
+  const seenGroupIds = new Set()
+
+  for (const block of parsed.blocks) {
+    if (block.type === 'section_header' || block.type === 'page_break') {
+      sanitizedBlocks.push({
+        ...block,
+        id: block.id || `layout-block-${sanitizedBlocks.length + 1}`,
+      })
+    } else if (block.type === 'question_group' && block.questionGroupId) {
+      if (seenGroupIds.has(block.questionGroupId)) {
+        warnings.push(`布局中题组 ${block.questionGroupId} 重复出现，已移除多余块`)
+        continue
+      }
+      const item = itemByGroupId.get(block.questionGroupId)
+      if (item) {
+        // Use paper_items score as authority, not layout_json stale score
+        sanitizedBlocks.push({ ...block, id: block.id || `block-${item.itemId}`, score: item.score })
+        seenGroupIds.add(block.questionGroupId)
+      } else {
+        warnings.push(`布局中题组 ${block.questionGroupId} 已不存在，已移除`)
+      }
+    }
+  }
+
+  // Append missing groups from paper_items
+  for (const item of items) {
+    if (item.questionGroup && !seenGroupIds.has(item.itemId)) {
+      sanitizedBlocks.push({
+        id: `block-${item.itemId}`,
+        type: 'question_group',
+        questionGroupId: item.itemId,
+        score: item.score,
+      })
+      warnings.push(`题组「${item.questionGroup.title || item.itemId}」不在布局中，已追加到末尾`)
+    }
+  }
+
+  return {
+    layout: {
+      blocks: sanitizedBlocks,
+      questionNumberStart: Number.isInteger(parsed.questionNumberStart) && parsed.questionNumberStart >= 1
+        ? parsed.questionNumberStart
+        : 1,
+      printStyle: parsed.printStyle === 'handout' ? 'handout' : 'exam',
+    },
+    layoutWarnings: warnings,
   }
 }
 
@@ -5021,7 +5313,167 @@ function timestampPrefix() {
   return new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
 }
 
-function buildDocumentXml({ title, versionType, items }) {
+// --- Exam-style renderer: formal Gaokao-style paper layout ---
+function buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart }) {
+  const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
+  const body = []
+
+  // Header: centered title, no metadata line
+  body.push(paragraph([run(title || '英语试题', { bold: true, size: 32 })], { align: 'center', after: 60 }))
+  if (versionType === 'teacher') {
+    body.push(paragraph([run('（教师版 含答案解析）', { size: 20, color: '666666' })], { align: 'center', after: 200 }))
+  } else {
+    body.push(paragraph('', { after: 160 }))
+  }
+
+  const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
+
+  // Determine if we should use short-option two-column layout
+  function isShortOptions(options) {
+    if (!options || options.length === 0) return false
+    return options.every((o) => String(o.content || '').length <= 20)
+  }
+
+  function renderOptionsExam(body, options, groupType) {
+    if (!options || options.length === 0) return
+    if (groupType === 'cloze') {
+      // Cloze: inline
+      const inlineText = options.map((o) => `${o.label}. ${o.content}`).join('    ')
+      body.push(paragraph(inlineText, { after: 50, indentLeft: 420 }))
+      return
+    }
+    if (isShortOptions(options) && options.length === 4) {
+      // Two-column borderless table for short ABCD options
+      const row1 = [
+        `${options[0].label}. ${options[0].content}`,
+        `${options[1].label}. ${options[1].content}`,
+      ]
+      const row2 = [
+        `${options[2].label}. ${options[2].content}`,
+        `${options[3].label}. ${options[3].content}`,
+      ]
+      body.push(examOptionTable([row1, row2]))
+    } else {
+      // Single-column
+      options.forEach((option) => {
+        body.push(paragraph(`${option.label}. ${option.content}`, { after: 30, indentLeft: 420 }))
+      })
+    }
+  }
+
+  // Render blocks or legacy items
+  if (Array.isArray(blocks) && blocks.length > 0) {
+    let questionNum = startNum
+
+    for (const block of blocks) {
+      if (block.type === 'section_header' && block.title) {
+        body.push(paragraph([run(block.title, { bold: true, size: 24 })], { before: 280, after: 120, keepNext: true }))
+      } else if (block.type === 'page_break') {
+        body.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
+      } else if (block.type === 'question_group' && block.questionGroupId) {
+        const item = itemByGroupId.get(block.questionGroupId)
+        if (!item) continue
+        const { detail } = item
+        const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
+        const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
+
+        // Extract passage label (A/B/C/D) from sectionTitle if possible
+        const sectionTitle = block.sectionTitle || item.sectionTitle || ''
+        const passageLabelMatch = sectionTitle.match(/([A-D])$/)
+        const passageLabel = passageLabelMatch ? passageLabelMatch[1] : ''
+
+        if (passageLabel) {
+          body.push(paragraph([run(passageLabel, { bold: true, size: 22 })], { align: 'center', before: 160, after: 80, keepNext: true }))
+        }
+
+        // Passage text
+        if (passageLines.length > 0 && passageLines[0]) {
+          passageLines.forEach((line) => {
+            body.push(paragraph(line, { after: 60 }))
+          })
+          body.push(paragraph('', { after: 80 }))
+        }
+
+        // Questions
+        detail.questions.forEach((question) => {
+          body.push(
+            paragraph(
+              [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`)],
+              { before: 60, after: 50 },
+            ),
+          )
+          renderOptionsExam(body, question.options, detail.groupType)
+
+          // Teacher version: compact answer
+          if (versionType === 'teacher') {
+            body.push(paragraph([run(`【答案】${question.answer || '待补'}`, { size: 18, color: '333333' })], { after: 30, indentLeft: 420 }))
+            const explanation = question.explanation || question.note || ''
+            if (explanation) {
+              body.push(paragraph([run(`【解析】${explanation}`, { size: 18, color: '666666' })], { after: 50, indentLeft: 420 }))
+            }
+          }
+          questionNum++
+        })
+      }
+    }
+  } else {
+    // Legacy fallback for exam style
+    let questionNum = startNum
+    items.forEach((item) => {
+      const { detail } = item
+      const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
+
+      if (passageLines.length > 0 && passageLines[0]) {
+        passageLines.forEach((line) => {
+          body.push(paragraph(line, { after: 60 }))
+        })
+        body.push(paragraph('', { after: 80 }))
+      }
+
+      detail.questions.forEach((question) => {
+        body.push(
+          paragraph([run(`${questionNum}.  ${docxQuestionStem(detail, question)}`)], { before: 60, after: 50 }),
+        )
+        renderOptionsExam(body, question.options, detail.groupType)
+        if (versionType === 'teacher') {
+          body.push(paragraph([run(`【答案】${question.answer || '待补'}`, { size: 18, color: '333333' })], { after: 30, indentLeft: 420 }))
+        }
+        questionNum++
+      })
+    })
+  }
+
+  // TODO: Footer with page numbers (英语试题 第 PAGE 页（共 NUMPAGES 页）) requires
+  // header/footer parts in the DOCX package. Skipped in V1 to avoid destabilizing
+  // the zip package structure. Can be added by creating word/footer1.xml and
+  // referencing it in sectPr with <w:footerReference>.
+  body.push(
+    `<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr>`,
+  )
+
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>${body.join('')}</w:body>
+</w:document>`
+}
+
+// Borderless two-column option table for exam style
+function examOptionTable(rows) {
+  const colWidth = 4500
+  const rowXml = rows.map((cells) => {
+    const cellsXml = cells.map((cell) =>
+      `<w:tc><w:tcPr><w:tcW w:w="${colWidth}" w:type="dxa"/><w:tcBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tcBorders></w:tcPr>${paragraph(cell, { after: 30 })}</w:tc>`
+    ).join('')
+    return `<w:tr>${cellsXml}</w:tr>`
+  }).join('')
+  return `<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${colWidth}"/><w:gridCol w:w="${colWidth}"/></w:tblGrid>${rowXml}</w:tbl>`
+}
+
+function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle }) {
+  if (printStyle === 'exam') {
+    return buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart })
+  }
+  // Handout style (original behavior)
   const versionLabel = versionType === 'student' ? '学生版' : '教师版'
   const totalQuestions = items.reduce((sum, item) => sum + item.detail.questions.length, 0)
   const totalScore = items.reduce((sum, item) => sum + item.detail.questions.length * item.score, 0)
@@ -5034,67 +5486,150 @@ function buildDocumentXml({ title, versionType, items }) {
     }),
   ]
 
-  items.forEach((item, groupIndex) => {
-    const { detail, note, score, sectionTitle } = item
-    const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '暂无完整原文。')
+  const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
 
-    body.push(
-      paragraph(
-        [
-          run(`${groupIndex + 1}. `, { bold: true, size: 26 }),
-          run(sectionTitle || detail.title, { bold: true, size: 26 }),
-        ],
-        { before: groupIndex === 0 ? 0 : 240, after: 40, keepNext: true },
-      ),
-      paragraph(`${detail.title} · ${detail.source} · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分`, {
-        after: 120,
-      }),
-    )
-    if (versionType === 'teacher' && note) {
-      body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4' }))
-    }
-    body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
+  // If blocks are provided, render by block sequence
+  if (Array.isArray(blocks) && blocks.length > 0) {
+    let questionNum = startNum
+    const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
 
-    passageLines.forEach((line) => {
-      body.push(paragraph(line, { after: 80, indentLeft: 240 }))
-    })
+    for (const block of blocks) {
+      if (block.type === 'section_header' && block.title) {
+        body.push(
+          paragraph([run(block.title, { bold: true, size: 28 })], { before: 300, after: 120, keepNext: true }),
+        )
+      } else if (block.type === 'page_break') {
+        body.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
+      } else if (block.type === 'question_group' && block.questionGroupId) {
+        const item = itemByGroupId.get(block.questionGroupId)
+        if (!item) continue
+        const { detail, note, sectionTitle } = item
+        // Prefer block.score (from PaperExportBlock) over item.score
+        const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
+        const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '暂无完整原文。')
 
-    if (detail.groupType === 'seven_choices') {
-      const sharedOptions = uniqueDocxOptions(detail.questions)
+        body.push(
+          paragraph(
+            [
+              run(`${sectionTitle || detail.title}`, { bold: true, size: 26 }),
+            ],
+            { before: 240, after: 40, keepNext: true },
+          ),
+          paragraph(`${detail.title} · ${detail.source} · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分`, {
+            after: 120,
+          }),
+        )
+        if (versionType === 'teacher' && note) {
+          body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4' }))
+        }
+        body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
+        passageLines.forEach((line) => {
+          body.push(paragraph(line, { after: 80, indentLeft: 240 }))
+        })
 
-      if (sharedOptions.length > 0) {
-        body.push(paragraph([run('选项', { bold: true })], { before: 80, after: 50, keepNext: true }))
-        sharedOptions.forEach((option) => {
-          body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+        if (detail.groupType === 'seven_choices') {
+          const sharedOptions = uniqueDocxOptions(detail.questions)
+          if (sharedOptions.length > 0) {
+            body.push(paragraph([run('选项', { bold: true })], { before: 80, after: 50, keepNext: true }))
+            sharedOptions.forEach((option) => {
+              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+            })
+          }
+        }
+
+        detail.questions.forEach((question) => {
+          body.push(
+            paragraph(
+              [
+                run(`${questionNum}. `, { bold: true }),
+                run(docxQuestionStem(detail, question), { bold: true }),
+              ],
+              { before: 90, after: 70, keepNext: true },
+            ),
+          )
+          if (detail.groupType !== 'seven_choices') {
+            if (detail.groupType === 'cloze' && question.options.length > 0) {
+              const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
+              body.push(paragraph(inlineText, { after: 60, indentLeft: 360 }))
+            } else {
+              question.options.forEach((option) => {
+                body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+              })
+            }
+          }
+          pushDocxAnswerArea(body, detail, question, versionType)
+          questionNum++
         })
       }
     }
+  } else {
+    // Legacy fallback: render by items array (flat question group list without block structure).
+    // This path is kept for backward compatibility with older saved paper sets that don't have blocks.
+    // Once all clients send blocks, this branch can be removed.
+    let legacyQuestionNum = startNum
+    items.forEach((item, groupIndex) => {
+      const { detail, note, score, sectionTitle } = item
+      const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '暂无完整原文。')
 
-    detail.questions.forEach((question, questionIndex) => {
       body.push(
         paragraph(
           [
-            run(`${questionIndex + 1}. `, { bold: true }),
-            run(docxQuestionStem(detail, question), { bold: true }),
+            run(`${groupIndex + 1}. `, { bold: true, size: 26 }),
+            run(sectionTitle || detail.title, { bold: true, size: 26 }),
           ],
-          { before: 90, after: 70, keepNext: true },
+          { before: groupIndex === 0 ? 0 : 240, after: 40, keepNext: true },
         ),
+        paragraph(`${detail.title} · ${detail.source} · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分`, {
+          after: 120,
+        }),
       )
+      if (versionType === 'teacher' && note) {
+        body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4' }))
+      }
+      body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
 
-      if (detail.groupType !== 'seven_choices') {
-        if (detail.groupType === 'cloze' && question.options.length > 0) {
-          const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
-          body.push(paragraph(inlineText, { after: 60, indentLeft: 360 }))
-        } else {
-          question.options.forEach((option) => {
+      passageLines.forEach((line) => {
+        body.push(paragraph(line, { after: 80, indentLeft: 240 }))
+      })
+
+      if (detail.groupType === 'seven_choices') {
+        const sharedOptions = uniqueDocxOptions(detail.questions)
+
+        if (sharedOptions.length > 0) {
+          body.push(paragraph([run('选项', { bold: true })], { before: 80, after: 50, keepNext: true }))
+          sharedOptions.forEach((option) => {
             body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
           })
         }
       }
 
-      pushDocxAnswerArea(body, detail, question, versionType)
+      detail.questions.forEach((question) => {
+        body.push(
+          paragraph(
+            [
+              run(`${legacyQuestionNum}. `, { bold: true }),
+              run(docxQuestionStem(detail, question), { bold: true }),
+            ],
+            { before: 90, after: 70, keepNext: true },
+          ),
+        )
+
+        if (detail.groupType !== 'seven_choices') {
+          if (detail.groupType === 'cloze' && question.options.length > 0) {
+            const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
+            body.push(paragraph(inlineText, { after: 60, indentLeft: 360 }))
+          } else {
+            question.options.forEach((option) => {
+              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+            })
+          }
+        }
+
+        pushDocxAnswerArea(body, detail, question, versionType)
+        legacyQuestionNum++
+      })
     })
-  })
+  }
 
   body.push(
     `<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr>`,
@@ -5173,6 +5708,11 @@ function exportDocx(input) {
     throw new Error('items are required')
   }
 
+  const questionNumberStart = Number.isInteger(Number(input.questionNumberStart)) && Number(input.questionNumberStart) >= 1
+    ? Number(input.questionNumberStart)
+    : 1
+  const blocks = Array.isArray(input.blocks) ? input.blocks : null
+
   const exportItems = items.map((item) => {
     const itemInput = item && typeof item === 'object' ? item : {}
     const questionGroupId = requiredString(itemInput.questionGroupId, 'questionGroupId')
@@ -5193,7 +5733,8 @@ function exportDocx(input) {
   mkdirSync(exportDir, { recursive: true })
   const fileName = docxFileName(title, versionType)
   const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
-  const documentXml = buildDocumentXml({ title, versionType, items: exportItems })
+  const printStyle = input.printStyle === 'exam' ? 'exam' : 'handout'
+  const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle })
   const body = writeDocxPackage({ documentXml, outputPath, title })
 
   return {
@@ -5268,40 +5809,95 @@ function exportPdf(input) {
   }
 }
 
+function exportPrintHtml(input) {
+  const title = requiredString(input.title, 'title')
+  const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
+  const items = Array.isArray(input.items) ? input.items : []
+  if (items.length === 0) throw new Error('items are required')
+
+  const printStyle = input.printStyle === 'handout' ? 'handout' : 'exam'
+  const questionNumberStart = Number.isInteger(Number(input.questionNumberStart)) && Number(input.questionNumberStart) >= 1
+    ? Number(input.questionNumberStart) : 1
+  const blocks = Array.isArray(input.blocks) ? input.blocks : null
+
+  const exportItems = items.map((item) => {
+    const itemInput = item && typeof item === 'object' ? item : {}
+    const questionGroupId = requiredString(itemInput.questionGroupId, 'questionGroupId')
+    const detail = getQuestionGroupDetail(questionGroupId)
+    if (!detail) throw new Error(`questionGroupId not found: ${questionGroupId}`)
+    return {
+      detail,
+      note: optionalString(itemInput.note),
+      score: Math.max(0, Number.isFinite(Number(itemInput.score)) ? Number(itemInput.score) : detail.defaultScore),
+      sectionTitle: optionalString(itemInput.sectionTitle),
+    }
+  })
+
+  const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart })
+  const versionLabel = versionType === 'student' ? '学生版' : '教师版'
+  const fileName = `${title}-${versionLabel}-精排.html`
+
+  return { body: html, fileName }
+}
+
+function exportPrintPdf(input) {
+  const htmlResult = exportPrintHtml(input)
+  const title = requiredString(input.title, 'title')
+  const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
+  const versionLabel = versionType === 'student' ? '学生版' : '教师版'
+
+  // Find vivliostyle CLI
+  const vivliostylePaths = [
+    path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
+    path.join(rootDir, 'server', 'node_modules', '.bin', 'vivliostyle'),
+  ]
+  let vivliostyleBin = null
+  for (const p of vivliostylePaths) {
+    if (existsSync(p)) { vivliostyleBin = p; break }
+  }
+  if (!vivliostyleBin) {
+    throw new Error('vivliostyle CLI not found. Install with: npm install @vivliostyle/cli')
+  }
+
+  mkdirSync(exportDir, { recursive: true })
+  const tempDir = mkdtempSync(path.join(tmpdir(), 'question-bank-print-'))
+  const htmlPath = path.join(tempDir, 'paper.html')
+  const pdfPath = path.join(tempDir, 'paper.pdf')
+
+  try {
+    writeFileSync(htmlPath, htmlResult.body)
+    execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
+    const fileName = `${title}-${versionLabel}-精排.pdf`
+    const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
+    copyFileSync(pdfPath, outputPath)
+    return { body: readFileSync(outputPath), fileName, outputPath }
+  } finally {
+    rmSync(tempDir, { recursive: true, force: true })
+  }
+}
+
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || ''
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions'
 const DEFAULT_DEEPSEEK_MODEL = 'deepseek-v4-flash'
+const DEEPSEEK_HTTP_RETRY_COUNT = Number(process.env.DEEPSEEK_HTTP_RETRY_COUNT || 1)
+const DEEPSEEK_HTTP_RETRY_DELAY_MS = Number(process.env.DEEPSEEK_HTTP_RETRY_DELAY_MS || 800)
 const LOCAL_QWEN_CHAT_API_URL = process.env.LOCAL_QWEN_CHAT_API_URL || 'http://127.0.0.1:8791/v1/chat/completions'
 const LOCAL_QWEN_CHAT_MODEL = process.env.LOCAL_QWEN_CHAT_MODEL || 'qwen3-8b-local'
 const LOCAL_QWEN_CHAT_TIMEOUT_MS = Number(process.env.LOCAL_QWEN_CHAT_TIMEOUT_MS || 90000)
-const LOCAL_QWEN_EMBEDDING_API_URL =
-  process.env.LOCAL_QWEN_EMBEDDING_API_URL || 'http://127.0.0.1:8792/v1/embeddings'
-const LOCAL_QWEN_EMBEDDING_MODEL = process.env.LOCAL_QWEN_EMBEDDING_MODEL || 'qwen3-embedding-0.6b-local'
-const LOCAL_QWEN_RERANKER_API_URL =
-  process.env.LOCAL_QWEN_RERANKER_API_URL || 'http://127.0.0.1:8793/v1/rerank'
-const LOCAL_QWEN_RERANKER_MODEL = process.env.LOCAL_QWEN_RERANKER_MODEL || 'qwen3-reranker-0.6b-local'
 const LOCAL_QWEN_PROVIDER = 'qwen-local'
+const QUESTION_BANK_ENABLE_LOCAL_QWEN = process.env.QUESTION_BANK_ENABLE_LOCAL_QWEN === '1'
 const SYNONYM_DIFFICULTY_KNOWLEDGE_PATH = path.join(
   rootDir,
   'knowledge',
   'synonym-difficulty',
   'synonym_difficulty_cards.v1.json',
 )
-const LOCAL_SEMANTIC_PIPELINE = 'embedding-reranker'
-const LOCAL_SEMANTIC_SEARCH_PREFILTER_TOP_K = Number(process.env.LOCAL_SEMANTIC_SEARCH_PREFILTER_TOP_K || 72)
+const SEMANTIC_SEARCH_PREFILTER_TOP_K = Number(process.env.SEMANTIC_SEARCH_PREFILTER_TOP_K || 72)
 const SEMANTIC_SEARCH_TOP_K = Number(process.env.SEMANTIC_SEARCH_TOP_K || 12)
 const QUESTION_BANK_STEWARD_TOP_K = Number(process.env.QUESTION_BANK_STEWARD_TOP_K || 8)
-const LOCAL_EMBEDDING_BATCH_SIZE = Number(process.env.LOCAL_EMBEDDING_BATCH_SIZE || 24)
-const LOCAL_TOPIC_LABEL_EMBED_TOP_K = Number(process.env.LOCAL_TOPIC_LABEL_EMBED_TOP_K || 24)
-const LOCAL_TOPIC_LABEL_RETURN_TOP_K = Number(process.env.LOCAL_TOPIC_LABEL_RETURN_TOP_K || 4)
-const LOCAL_TOPIC_LABEL_CONFIDENCE_THRESHOLD = Number(process.env.LOCAL_TOPIC_LABEL_CONFIDENCE_THRESHOLD || 0.62)
-const localTopicLabelEmbeddingCache = new Map()
 const DEEPSEEK_MODEL_ALIASES = {
   'deepseek-v4-pro': 'deepseek-v4-pro',
   'deepseek-v4-flash': 'deepseek-v4-flash',
-  'qwen3-8b-local': LOCAL_QWEN_CHAT_MODEL,
-  'qwen3-8b': LOCAL_QWEN_CHAT_MODEL,
-  'local-qwen': LOCAL_QWEN_CHAT_MODEL,
 }
 
 function buildDeepSeekRequestOptions({ model, messages, temperature, maxTokens, thinkingMode, responseFormat }) {
@@ -5422,6 +6018,7 @@ const DEEPSEEK_READING_PARSE_PROMPT = `你是英语阅读题教学与阅卷助�
    - 抽象拓展类：T10 抽象概念标签。
 3. 高风险边界必须优先检查：
    - T2_T6：先问“原文说了没有？”原文已经说了这件事，只是换词/换句式，判 T2；原文没有直接说这件事，但给了足够信息让学生推出未说出的结论，判 T6。口诀：说了→T2；没说但能推→T6。
+   - why difficult / why hard 边界：若题干问为什么困难/很难，而原文只是给出现象或例子，正确选项概括其底层原因（如 rooted in people's mind），必须判 T6，不得判纯 T2。
    - T5_T10：概括文章讲什么，T5；从具体内容上升到抽象概念标签，T10。
    - 标题题补充：surfaceQuestion 仍可为 passage_main_idea；但若正确标题是 “Why the Rush?” 这类省略式/反讽式疑问标题，把全文具体批评压缩成抽象标题，则 synonymDifficulty 判 T10，并标 T5_T10。
    - T3_T6：目标是重定义词义本身，T3；目标是推出词义之外的结论，T6。
@@ -5429,7 +6026,7 @@ const DEEPSEEK_READING_PARSE_PROMPT = `你是英语阅读题教学与阅卷助�
    - writing_technique / paragraph_function 强制口径：只要题干问作者如何展开、如何呈现问题、段落如何组织或段落功能，synonymDifficulty 默认必须判 T8 段落修辞功能判断；不要因为正确选项是 "By giving examples"、"By comparison" 等短语就判 T2。
    - example_function 只用于题干问作者为什么提及/引用/举出某个例子、数字、人物、地点，或问该例子说明什么。若题干问某人/某群体 trying to do / intended to do / purpose / aim / goal，属于人物目的或行为目的，优先标 why_did 或 single_detail_normal，不得标 example_function。
    - coverage_test 强制口径：若 answeringMove=coverage_test，scope=paragraph/passage，则 surfaceQuestion.type 必须对应 paragraph_main_idea/passage_main_idea，不得标 single_detail_normal。
-   - adjective_summary 多证据口径：若正确选项是两个并列形容词，且原文证据来自两处描述（即使都在同一段），必须优先判 T4 多点信息拼合；不得因为每个形容词都能同义替换而判纯 T2。
+   - adjective_summary 强制口径：只要 surfaceQuestion.type=adjective_summary，不得判 T2/T3/T4。默认判 T10 抽象概念标签；只有当形容词为低抽象、客观性质，且证据集中在连续1-2句时，才可降为 T6，并必须加 T6_T10 与 reviewNeeded=true。
    - T4_T6：只是多处信息拼合，T4；拼合后还需建立逻辑关系，T6。
    - T7_T8：问具体例子/引用目的，T7；问整段展开方式或修辞功能，T8。
    - T6_T9：推断事实结论，T6；判断态度立场，T9。
@@ -5466,6 +6063,8 @@ const DEEPSEEK_READING_PARSE_PROMPT = `你是英语阅读题教学与阅卷助�
 7. adjective_summary 与 abstract_phrase_summary 边界：
    - adjective_summary：正确选项是一个或两个形容词，压缩人物/事件/经历/做法的性质。
    - abstract_phrase_summary：正确选项是抽象名词短语或概念短语，压缩一段具体描述。
+   - adjective_summary 默认属于抽象评价压缩，不是普通同义替换；不得判 T2。若选项为 Tasteful/Revolutionary/Pragmatic 等评价性形容词，优先判 T10，并标 T6_T10。
+   - adjective_summary 只有在形容词非常具体、客观，且证据集中在连续1-2句时，才允许判 T6；不得低于 T6。
    - 抽象标题压缩：正确选项若是省略式/反讽式疑问标题（如 Why the Rush?），且需要把全文多处具体内容压缩为标题含义，surfaceQuestion.type 用 passage_main_idea，但 synonymDifficulty.cardId 用 T10。
    - abstract_phrase_summary 默认优先检查 T10；只有当选项只是原文可直接推出的事实性结论，而非概念标签时，才降为 T6。
 8. infoSpan 必须输出 level、source、evidence：
@@ -6261,54 +6860,79 @@ function safeTruncate(rawText, maxLength = 320) {
   return `${text.slice(0, maxLength)}…`
 }
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 async function callDeepSeekCompletion(context) {
-  const requestStartAt = Date.now()
   const requestBody = buildDeepSeekRequestOptions(context)
+  const maxAttempts = Math.max(1, DEEPSEEK_HTTP_RETRY_COUNT + 1)
 
-  const response = await fetch(DEEPSEEK_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${context.apiKey}`,
-    },
-    body: JSON.stringify(requestBody),
-  })
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    const requestStartAt = Date.now()
+    let response
+    let rawStatusText = ''
 
-  const requestMs = elapsedMs(requestStartAt)
-  const rawStatusText = await response.text().catch(() => '')
-  if (typeof context.onHttpResponse === 'function') {
-    context.onHttpResponse({
-      rawStatusText,
-      status: response.status,
-      ok: response.ok,
+    try {
+      response = await fetch(DEEPSEEK_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${context.apiKey}`,
+        },
+        body: JSON.stringify(requestBody),
+      })
+      rawStatusText = await response.text().catch(() => '')
+    } catch (error) {
+      if (attempt < maxAttempts) {
+        await delay(DEEPSEEK_HTTP_RETRY_DELAY_MS)
+        continue
+      }
+      throw error
+    }
+
+    const requestMs = elapsedMs(requestStartAt)
+    if (typeof context.onHttpResponse === 'function') {
+      context.onHttpResponse({
+        rawStatusText,
+        status: response.status,
+        ok: response.ok,
+        latencyMs: requestMs,
+        attempt,
+      })
+    }
+
+    const data = parseJsonFromString(rawStatusText)
+
+    if (!response.ok) {
+      const errorText = safeTruncate(rawStatusText, 240)
+      throw new Error(`DeepSeek API 返回错误 ${response.status}: ${errorText}`)
+    }
+
+    if (!data) {
+      if (attempt < maxAttempts) {
+        await delay(DEEPSEEK_HTTP_RETRY_DELAY_MS)
+        continue
+      }
+      const errorText = safeTruncate(rawStatusText, 240)
+      throw new Error(`DeepSeek API 返回非 JSON：${errorText}`)
+    }
+
+    const raw = getDeepSeekMessageText(data?.choices?.[0]?.message || data)
+
+    const firstMessageText = collectDeepSeekMessageTexts(data).at(0)
+
+    return {
+      data,
+      rawText: raw,
+      firstMessageText,
       latencyMs: requestMs,
-    })
+      status: response.status,
+      rawStatusText,
+    }
   }
 
-  const data = parseJsonFromString(rawStatusText)
-
-  if (!response.ok) {
-    const errorText = safeTruncate(rawStatusText, 240)
-    throw new Error(`DeepSeek API 返回错误 ${response.status}: ${errorText}`)
-  }
-
-  if (!data) {
-    const errorText = safeTruncate(rawStatusText, 240)
-    throw new Error(`DeepSeek API 返回非 JSON：${errorText}`)
-  }
-
-  const raw = getDeepSeekMessageText(data?.choices?.[0]?.message || data)
-
-  const firstMessageText = collectDeepSeekMessageTexts(data).at(0)
-
-  return {
-    data,
-    rawText: raw,
-    firstMessageText,
-    latencyMs: requestMs,
-    status: response.status,
-    rawStatusText,
-  }
+  throw new Error('DeepSeek API 请求未完成。')
 }
 
 function buildLocalQwenRequestOptions({ model, messages, temperature, maxTokens }) {
@@ -6390,214 +7014,6 @@ async function callLocalQwenCompletion(context) {
     throw timeoutError
   } finally {
     clearTimeout(timeout)
-  }
-}
-
-function buildLocalQwenEmbeddingRequestOptions({ input, model }) {
-  return {
-    model: model || LOCAL_QWEN_EMBEDDING_MODEL,
-    input,
-  }
-}
-
-function normalizeEmbeddingVector(vector) {
-  if (!Array.isArray(vector)) return []
-  return vector.map((value) => Number(value)).filter((value) => Number.isFinite(value))
-}
-
-async function callLocalQwenEmbeddingRequest(context) {
-  const inputs = Array.isArray(context.input) ? context.input : [context.input]
-  const normalizedInputs = inputs
-    .map((item) => optionalString(item))
-    .filter(Boolean)
-
-  if (normalizedInputs.length === 0) {
-    return {
-      data: null,
-      embeddings: [],
-      latencyMs: 0,
-      rawStatusText: '',
-      status: 200,
-    }
-  }
-
-  const requestStartAt = Date.now()
-  const requestBody = buildLocalQwenEmbeddingRequestOptions({
-    input: normalizedInputs.length === 1 ? normalizedInputs[0] : normalizedInputs,
-    model: context.model,
-  })
-
-  const response = await fetch(LOCAL_QWEN_EMBEDDING_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody),
-  })
-
-  const requestMs = elapsedMs(requestStartAt)
-  const rawStatusText = await response.text().catch(() => '')
-  if (typeof context.onHttpResponse === 'function') {
-    context.onHttpResponse({
-      rawStatusText,
-      status: response.status,
-      ok: response.ok,
-      latencyMs: requestMs,
-    })
-  }
-
-  const data = parseJsonFromString(rawStatusText)
-
-  if (!response.ok) {
-    const errorText = safeTruncate(rawStatusText, 240)
-    throw new Error(`本地 Qwen Embedding 服务返回错误 ${response.status}: ${errorText}`)
-  }
-
-  if (!data) {
-    const errorText = safeTruncate(rawStatusText, 240)
-    throw new Error(`本地 Qwen Embedding 服务返回非 JSON：${errorText}`)
-  }
-
-  const rawEmbeddings = Array.isArray(data?.data) ? data.data : []
-  const embeddings = rawEmbeddings
-    .map((item, index) => {
-      const embedding = normalizeEmbeddingVector(item?.embedding)
-      const rawIndex = Number(item?.index)
-      return {
-        index: Number.isInteger(rawIndex) && rawIndex >= 0 ? rawIndex : index,
-        embedding,
-      }
-    })
-    .filter((item) => item.embedding.length > 0)
-    .sort((a, b) => a.index - b.index)
-    .map((item) => item.embedding)
-
-  if (embeddings.length !== normalizedInputs.length) {
-    throw new Error(`本地 Qwen Embedding 返回数量不匹配，期望 ${normalizedInputs.length} 条，实际 ${embeddings.length} 条`)
-  }
-
-  return {
-    data,
-    embeddings,
-    latencyMs: requestMs,
-    rawStatusText,
-    status: response.status,
-  }
-}
-
-async function callLocalQwenEmbeddings(context) {
-  const inputs = Array.isArray(context.input) ? context.input : [context.input]
-  const normalizedInputs = inputs.map((item) => optionalString(item)).filter(Boolean)
-
-  if (normalizedInputs.length === 0) {
-    return {
-      data: null,
-      embeddings: [],
-      latencyMs: 0,
-      rawStatusText: '',
-      status: 200,
-    }
-  }
-
-  try {
-    return await callLocalQwenEmbeddingRequest({
-      ...context,
-      input: normalizedInputs.length === 1 ? normalizedInputs[0] : normalizedInputs,
-    })
-  } catch (error) {
-    if (normalizedInputs.length <= 1) {
-      throw error
-    }
-
-    const embeddings = []
-    let totalLatencyMs = 0
-
-    for (const input of normalizedInputs) {
-      const result = await callLocalQwenEmbeddingRequest({ ...context, input })
-      embeddings.push(result.embeddings[0])
-      totalLatencyMs += result.latencyMs
-    }
-
-    return {
-      data: null,
-      embeddings,
-      latencyMs: totalLatencyMs,
-      rawStatusText: '',
-      status: 200,
-    }
-  }
-}
-
-async function callLocalQwenRerank(context) {
-  const documents = Array.isArray(context.documents) ? context.documents.map((document) => optionalString(document)).filter(Boolean) : []
-  if (!optionalString(context.query) || documents.length === 0) {
-    return {
-      data: null,
-      latencyMs: 0,
-      rawStatusText: '',
-      results: [],
-      status: 200,
-    }
-  }
-
-  const requestStartAt = Date.now()
-  const requestBody = {
-    model: context.model || LOCAL_QWEN_RERANKER_MODEL,
-    query: optionalString(context.query),
-    documents,
-    top_n: Number.isInteger(context.topN) && context.topN > 0 ? Math.min(context.topN, documents.length) : documents.length,
-  }
-
-  const response = await fetch(LOCAL_QWEN_RERANKER_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody),
-  })
-
-  const requestMs = elapsedMs(requestStartAt)
-  const rawStatusText = await response.text().catch(() => '')
-  if (typeof context.onHttpResponse === 'function') {
-    context.onHttpResponse({
-      rawStatusText,
-      status: response.status,
-      ok: response.ok,
-      latencyMs: requestMs,
-    })
-  }
-
-  const data = parseJsonFromString(rawStatusText)
-
-  if (!response.ok) {
-    const errorText = safeTruncate(rawStatusText, 240)
-    throw new Error(`本地 Qwen Reranker 服务返回错误 ${response.status}: ${errorText}`)
-  }
-
-  if (!data) {
-    const errorText = safeTruncate(rawStatusText, 240)
-    throw new Error(`本地 Qwen Reranker 服务返回非 JSON：${errorText}`)
-  }
-
-  const results = Array.isArray(data?.results)
-    ? data.results
-        .map((item, index) => ({
-          index: Number.isInteger(Number(item?.index)) && Number(item.index) >= 0 ? Number(item.index) : index,
-          relevanceScore: Number(item?.relevance_score ?? item?.score ?? item?.relevance ?? 0),
-        }))
-        .filter((item) => Number.isFinite(item.relevanceScore))
-    : []
-
-  if (results.length === 0) {
-    throw new Error('本地 Qwen Reranker 未返回有效结果。')
-  }
-
-  return {
-    data,
-    latencyMs: requestMs,
-    rawStatusText,
-    results,
-    status: response.status,
   }
 }
 
@@ -6804,6 +7220,40 @@ function inferCoverageScopeFromStem(stemText) {
   return 'paragraph'
 }
 
+function readingCorrectOptionTextFromContext(item, context = {}) {
+  const answer = normalizeAnswerValue(item?.answer || context?.originalQuestion?.answer).toUpperCase()
+  const answerLabel = answer.match(/[A-G]/)?.[0] || ''
+  const options = Array.isArray(context?.originalQuestion?.options) ? context.originalQuestion.options : []
+  const option = answerLabel
+    ? options.find((entry) => optionalString(entry.label).toUpperCase() === answerLabel)
+    : null
+  return (
+    optionalString(option?.content) ||
+    optionalString(option?.text) ||
+    optionalString(item?.synonymDifficulty?.optionExpression || item?.synonymDifficulty?.option_expression)
+  )
+}
+
+function optionLooksLikeAdjectiveSummary(optionText) {
+  const text = optionalString(optionText)
+    .replace(/^[A-G]\s*[.、)]\s*/i, '')
+    .replace(/[.。]+$/g, '')
+    .trim()
+  if (!text) return false
+  if (/^(?:to|for|by|because|why|how|what|when|where|who|the|a|an)\b/i.test(text)) return false
+  const words = text.split(/\s+/).filter(Boolean)
+  if (words.length < 1 || words.length > 3) return false
+  return words.every((word) => /^[A-Za-z][A-Za-z-]*$/.test(word))
+}
+
+function isAdjectiveSummaryStem(stemText, optionText) {
+  if (!optionLooksLikeAdjectiveSummary(optionText)) return false
+  return (
+    /\b(?:best\s+describes?|describe(?:s|d)?|what\s+does\s+.+?\s+think\s+of|how\s+does\s+.+?\s+(?:view|feel\s+about|see))\b/i.test(stemText) ||
+    /最能描述|如何评价|怎么看|认为.*怎么样/.test(stemText)
+  )
+}
+
 function normalizeReadingSurfaceQuestion(item, context = {}) {
   const source = objectValue(item?.surfaceQuestion || item?.surface_question)
   const type = normalizeEnumString(
@@ -6818,11 +7268,20 @@ function normalizeReadingSurfaceQuestion(item, context = {}) {
   let reason = optionalString(source.reason || source.analysis || item?.surfaceQuestionReason || item?.surface_question_reason)
   let normalizedType = type
   const stemText = readingQuestionStemText(item, context)
+  const correctOptionText = readingCorrectOptionTextFromContext(item, context)
   const asksExampleFunction = isExampleFunctionStem(stemText)
+  const asksAdjectiveSummary = isAdjectiveSummaryStem(stemText, correctOptionText)
   const asksPersonPurpose =
     /\b(?:trying to do|try to do|tried to do|intend(?:ed)? to|aim(?:ed)? to|goal|purpose|want(?:ed)? to|seek(?:ing)? to|call(?:ed)? on)\b/i.test(stemText) ||
     /为什么|为何|目的|试图|想要|旨在/.test(stemText)
 
+  if (asksAdjectiveSummary && normalizedType !== 'adjective_summary') {
+    normalizedType = 'adjective_summary'
+    answeringMove = 'description_to_adjective'
+    reason = reason
+      ? `${reason}（后端校正：题干要求用一两个形容词/评价词压缩原文描述，属于 adjective_summary。）`
+      : '后端校正：题干要求用一两个形容词/评价词压缩原文描述，属于 adjective_summary。'
+  }
   if (['why_did', 'single_detail_normal'].includes(type) && asksExampleFunction) {
     normalizedType = 'example_function'
     scope = 'example'
@@ -6854,6 +7313,23 @@ function normalizeReadingSurfaceQuestion(item, context = {}) {
         ? `${reason}（后端校正：coverage_test + passage 属于文章主旨/归纳，不是普通单细节。）`
         : '后端校正：coverage_test + passage 属于文章主旨/归纳，不是普通单细节。'
     }
+  }
+  if (
+    normalizedType === 'passage_main_idea' &&
+    /\b(?:author'?s?\s+purpose|purpose\s+in\s+writing|why\s+(?:does|did)\s+the\s+author\s+write)\b/i.test(stemText)
+  ) {
+    normalizedType = 'author_purpose'
+    scope = scope || 'passage'
+    answeringMove = answeringMove || 'coverage_test'
+    reason = reason
+      ? `${reason}（后端校正：题干问作者写作目的，surfaceQuestion.type 应为 author_purpose。）`
+      : '后端校正：题干问作者写作目的，surfaceQuestion.type 应为 author_purpose。'
+  }
+  if (normalizedType === 'why_did' && isWhyDifficultStem(stemText)) {
+    answeringMove = 'minimal_inference'
+    reason = reason
+      ? `${reason}（后端校正：why difficult/hard/challenging 题通常要求推出底层原因，做题动作为 minimal_inference。）`
+      : '后端校正：why difficult/hard/challenging 题通常要求推出底层原因，做题动作为 minimal_inference。'
   }
   const rawSynonymSource = objectValue(item?.synonymDifficulty || item?.synonym_difficulty)
   const rawSynonymCardId = normalizeSynonymCardId(rawSynonymSource.cardId || rawSynonymSource.card_id || rawSynonymSource.typeId || rawSynonymSource.type_id || rawSynonymSource.type)
@@ -6990,9 +7466,30 @@ function optionAddsMissingJudgment(sourceExpression, optionExpression) {
   return judgmentWords.some((word) => option.includes(word) && !source.includes(word))
 }
 
+function isWhyDifficultStem(stemText) {
+  const text = optionalString(stemText)
+  return /\bwhy\b.+\b(?:difficult|hard|challenging|challenge|tricky|complicated)\b/i.test(text) ||
+    /为什么.+(?:难|困难|不容易|有挑战)/.test(text)
+}
+
+function optionAddsUnderlyingCause(sourceExpression, optionExpression) {
+  const source = optionalString(sourceExpression).toLowerCase()
+  const option = optionalString(optionExpression).toLowerCase()
+  const causePatterns = [
+    /\brooted in\b/,
+    /\bdeep(?:ly)?\s+(?:rooted|held)\b/,
+    /\bfundamental\b/,
+    /\binherent\b/,
+    /\bunderlying\b/,
+    /\btendency\b/,
+  ]
+  return causePatterns.some((pattern) => pattern.test(option) && !pattern.test(source))
+}
+
 const READING_SURFACE_CARD_OVERRIDES = {
   paragraph_main_idea: 'T5',
   passage_main_idea: 'T5',
+  author_purpose: 'T5',
   inference_general: 'T6',
   example_function: 'T7',
   attitude_tone: 'T9',
@@ -7017,14 +7514,11 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
     context?.surfaceQuestion?.type === 'passage_main_idea' &&
     context?.surfaceQuestion?.answeringMove === 'coverage_test' &&
     isEllipticalQuestionTitle(optionExpression)
-  const hasParallelOptionExpression = /\b(?:and|or)\b|[,，、]/i.test(optionExpression)
-  const hasSegmentedSourceExpression = /[;；\n]/.test(sourceExpression)
   const forcedWordMeaningCard = isWordMeaningQuestion && rawCardId !== 'T1'
   const forcedAbstractPhraseCard = isAbstractPhraseSummary && rawCardId !== 'T10'
   const forcedAbstractTitleCard = isAbstractTitleCompression && rawCardId !== 'T10'
   const forcedWritingTechniqueCard = isWritingTechniqueQuestion && rawCardId !== 'T8'
-  const forcedAdjectiveMultiPointCard =
-    isAdjectiveSummary && hasParallelOptionExpression && hasSegmentedSourceExpression && rawCardId !== 'T4'
+  const forcedAdjectiveSummaryCard = isAdjectiveSummary && !['T6', 'T10'].includes(rawCardId)
   const forcedWhyDidInferenceCard =
     context?.surfaceQuestion?.type === 'why_did' &&
     rawCardId === 'T2' &&
@@ -7033,6 +7527,10 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
     rawCardId === 'T2' &&
     isCausalReadingStem(stemText) &&
     optionAddsMissingJudgment(sourceExpression, optionExpression)
+  const forcedWhyDifficultInferenceCard =
+    rawCardId === 'T2' &&
+    isWhyDifficultStem(stemText) &&
+    optionAddsUnderlyingCause(sourceExpression, optionExpression)
   const forcedMultiPointSelfDescribedCard =
     rawCardId === 'T2' &&
     hasCrossSentenceEvidence(sourceExpression) &&
@@ -7048,21 +7546,36 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
         ? 'T10'
         : forcedWritingTechniqueCard
           ? 'T8'
-          : forcedAdjectiveMultiPointCard
-            ? 'T4'
+          : forcedAdjectiveSummaryCard
+            ? 'T10'
             : forcedWhyDidInferenceCard
               ? 'T6'
               : forcedCausalJudgmentInferenceCard
                 ? 'T6'
-              : forcedMultiPointSelfDescribedCard
-                ? 'T4'
-                : forcedEntityPurposeMentionCard
-                  ? 'T2'
-                  : forcedSurfaceCard
-                    ? surfaceOverrideCardId
-                    : rawCardId
+                : forcedWhyDifficultInferenceCard
+                  ? 'T6'
+                  : forcedMultiPointSelfDescribedCard
+                    ? 'T4'
+                    : forcedEntityPurposeMentionCard
+                      ? 'T2'
+                      : forcedSurfaceCard
+                        ? surfaceOverrideCardId
+                        : rawCardId
   const card = knowledge.cardMap.get(cardId)
   if (!card) return null
+  const shouldFlagWhyDifficultInference =
+    cardId === 'T6' &&
+    isWhyDifficultStem(stemText) &&
+    optionAddsUnderlyingCause(sourceExpression, optionExpression)
+  const shouldFlagExampleFunctionBoundary =
+    context?.surfaceQuestion?.type === 'example_function' &&
+    cardId === 'T7'
+  const shouldFlagWritingTechniqueBoundary =
+    isWritingTechniqueQuestion &&
+    cardId === 'T8'
+  const shouldFlagMainIdeaBoundary =
+    ['paragraph_main_idea', 'passage_main_idea', 'author_purpose'].includes(context?.surfaceQuestion?.type) &&
+    ['T5', 'T10'].includes(cardId)
 
   const confidence = normalizeSynonymConfidence(item.confidence ?? item.score ?? item.conf, 0.82)
   const reviewThreshold = ['T6', 'T8'].includes(cardId) ? 0.78 : 0.72
@@ -7071,9 +7584,10 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
     forcedAbstractPhraseCard ||
     forcedAbstractTitleCard ||
     forcedWritingTechniqueCard ||
-    forcedAdjectiveMultiPointCard ||
+    forcedAdjectiveSummaryCard ||
     forcedWhyDidInferenceCard ||
     forcedCausalJudgmentInferenceCard ||
+    forcedWhyDifficultInferenceCard ||
     forcedMultiPointSelfDescribedCard ||
     forcedEntityPurposeMentionCard ||
     forcedSurfaceCard
@@ -7083,9 +7597,10 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
     isAbstractPhraseSummary ||
     forcedAbstractTitleCard ||
     forcedWritingTechniqueCard ||
-    forcedAdjectiveMultiPointCard ||
+    isAdjectiveSummary ||
     forcedWhyDidInferenceCard ||
     forcedCausalJudgmentInferenceCard ||
+    forcedWhyDifficultInferenceCard ||
     forcedMultiPointSelfDescribedCard ||
     forcedEntityPurposeMentionCard ||
     forcedSurfaceCard ||
@@ -7108,25 +7623,33 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
             ...boundaryFlags.filter((flag) => !['T1_T2', 'T2_T4', 'T2_T6', 'T3_T6', 'T4_T6', 'T6_T9', 'T7_T8'].includes(flag)),
             'T5_T10',
           ])
-      : forcedWritingTechniqueCard
+        : forcedWritingTechniqueCard || shouldFlagWritingTechniqueBoundary
         ? uniqueSynonymFlags([
             ...boundaryFlags.filter((flag) => !['T1_T2', 'T2_T4', 'T2_T6', 'T3_T6', 'T4_T6', 'T5_T10', 'T6_T9'].includes(flag)),
             'T7_T8',
           ])
-        : forcedAdjectiveMultiPointCard
+        : isAdjectiveSummary
           ? uniqueSynonymFlags([
-              ...boundaryFlags.filter((flag) => !['T1_T2', 'T2_T6', 'T3_T6', 'T4_T6', 'T5_T10', 'T6_T9'].includes(flag)),
-              'T2_T4',
+              ...boundaryFlags.filter((flag) => !['T1_T2', 'T2_T4', 'T2_T6', 'T3_T6', 'T4_T6', 'T5_T10', 'T6_T9'].includes(flag)),
+              'T6_T10',
             ])
           : forcedWhyDidInferenceCard
             ? uniqueSynonymFlags([...boundaryFlags, 'T2_T6'])
             : forcedCausalJudgmentInferenceCard
+            ? uniqueSynonymFlags([...boundaryFlags, 'T2_T6'])
+            : forcedWhyDifficultInferenceCard
               ? uniqueSynonymFlags([...boundaryFlags, 'T2_T6'])
-            : forcedMultiPointSelfDescribedCard
-              ? uniqueSynonymFlags([...boundaryFlags, 'T2_T4'])
-              : forcedEntityPurposeMentionCard
-                ? uniqueSynonymFlags(boundaryFlags.filter((flag) => flag !== 'T7_T8'))
-                : boundaryFlags
+              : shouldFlagWhyDifficultInference
+                ? uniqueSynonymFlags([...boundaryFlags, 'T2_T6'])
+                : shouldFlagExampleFunctionBoundary
+                  ? uniqueSynonymFlags([...boundaryFlags, 'T7_T8'])
+                  : shouldFlagMainIdeaBoundary
+                    ? uniqueSynonymFlags([...boundaryFlags, 'T5_T10'])
+                    : forcedMultiPointSelfDescribedCard
+                      ? uniqueSynonymFlags([...boundaryFlags, 'T2_T4'])
+                      : forcedEntityPurposeMentionCard
+                        ? uniqueSynonymFlags(boundaryFlags.filter((flag) => flag !== 'T7_T8'))
+                        : boundaryFlags
   const reason = forcedWordMeaningCard
     ? `单点类 T3：题干要求推测词/短语在语境中的含义，目标是确定词义本身，因此是${card.name}。`
     : forcedAbstractPhraseCard
@@ -7135,19 +7658,21 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
         ? `抽象拓展类 T10：题干虽是标题/主旨题，但正确标题是省略式疑问标题，需要将全文具体批评压缩为抽象标题，因此是${card.name}。`
         : forcedWritingTechniqueCard
           ? `关联类 T8：题干要求判断作者如何展开段落或呈现问题，目标是识别段落修辞/写作手法功能，因此是${card.name}。`
-          : forcedAdjectiveMultiPointCard
-          ? `多点类 T4：正确选项包含两个并列形容词，且原文证据来自两处描述，需要拼合后才能完整覆盖选项，因此是${card.name}。`
+          : forcedAdjectiveSummaryCard
+          ? `抽象拓展类 T10：题干要求把原文描述压缩成形容词评价标签，正确选项不是单句同义替换，而是性质概括，因此是${card.name}。`
           : forcedWhyDidInferenceCard
             ? `关联类 T6：题干问原因/目的，但答案需要跨句情感、因果或目的推断，不能只按单句同义改写处理，因此是${card.name}。`
             : forcedCausalJudgmentInferenceCard
               ? `关联类 T6：题干问原因/结果，正确选项加入了原文未直接给出的评价性判断，需要从原文原因线索推出，因此是${card.name}。`
-              : forcedMultiPointSelfDescribedCard
-                ? `多点类 T4：原文证据跨句，且解析自身说明存在多个动作/信息点，正确选项需要拼合这些信息后概括，因此是${card.name}。`
-                : forcedEntityPurposeMentionCard
-                  ? `单点类 T2：题干问法律/政策本身的目的，原文单句给出其保护对象或用途，选项只是同义概括，不是作者举例意图，因此是${card.name}。`
-                  : forcedSurfaceCard
-                    ? `${card.soloLevel || ''} ${cardId}：题型画像为${context?.surfaceQuestion?.type}，后端按题型轴将T卡校正为${card.name || cardId}。`.trim()
-                    : rawReason
+              : forcedWhyDifficultInferenceCard
+                ? `关联类 T6：题干问为什么困难，正确选项概括的是原文现象背后的底层原因，而非单句同义替换，因此是${card.name}。`
+                : forcedMultiPointSelfDescribedCard
+                  ? `多点类 T4：原文证据跨句，且解析自身说明存在多个动作/信息点，正确选项需要拼合这些信息后概括，因此是${card.name}。`
+                  : forcedEntityPurposeMentionCard
+                    ? `单点类 T2：题干问法律/政策本身的目的，原文单句给出其保护对象或用途，选项只是同义概括，不是作者举例意图，因此是${card.name}。`
+                    : forcedSurfaceCard
+                      ? `${card.soloLevel || ''} ${cardId}：题型画像为${context?.surfaceQuestion?.type}，后端按题型轴将T卡校正为${card.name || cardId}。`.trim()
+                      : rawReason
   const boundaryCheck = forcedWordMeaningCard
     ? '不是T2单句同义改写：猜词题的任务不是识别普通同义替换，而是根据上下文确定目标词在本文中的语境义。'
     : forcedAbstractPhraseCard
@@ -7156,19 +7681,21 @@ function normalizeReadingSynonymDifficulty(item, context = {}) {
         ? '不是普通T5主旨覆盖：本题正确标题不是直接概括文章讲什么，而是用省略式疑问将全文批评压缩成抽象标题。'
         : forcedWritingTechniqueCard
           ? '不是T2单句同义改写：正确选项即使是简短手法标签，也是在判断段落展开方式或修辞功能，而不是把某个单句换词表达。'
-          : forcedAdjectiveMultiPointCard
-            ? '不是T2单句同义改写：T2只适用于单句内一个信息点的换词；本题需要同时匹配两个形容词与两处原文证据。'
+          : forcedAdjectiveSummaryCard
+            ? '不是T2单句同义改写：形容词压缩题要求从具体描述概括性质或评价，学生要完成抽象标签匹配，而不是识别原文单句换词。'
             : forcedWhyDidInferenceCard
               ? '不是T2单句同义改写：答案不是单句直接换词，而是从跨句线索推出人物目的或原因。'
               : forcedCausalJudgmentInferenceCard
                 ? '不是T2单句同义改写：原文只给出原因线索，选项中的评价性判断不是原文原词或直接同义词。'
-                : forcedMultiPointSelfDescribedCard
-                  ? '不是T2单句同义改写：T2只适用于单句单点换词；跨句多个动作/信息点压缩成选项应判T4。'
-                  : forcedEntityPurposeMentionCard
-                    ? '不是T7举例引用意图：mentioned 在这里只是修饰 laws/policies，题干问法律/政策目的，不是作者为什么提及该例子。'
-                    : forcedSurfaceCard
-                      ? '后端一致性校正：surfaceQuestion.type 已经确定题型轴，synonymDifficulty.cardId 必须与题型轴一致。'
-                      : rawBoundaryCheck
+                : forcedWhyDifficultInferenceCard
+                  ? '不是T2单句同义改写：原文没有直接说出这个底层原因，而是需要从现象或例子推出为什么困难。'
+                  : forcedMultiPointSelfDescribedCard
+                    ? '不是T2单句同义改写：T2只适用于单句单点换词；跨句多个动作/信息点压缩成选项应判T4。'
+                    : forcedEntityPurposeMentionCard
+                      ? '不是T7举例引用意图：mentioned 在这里只是修饰 laws/policies，题干问法律/政策目的，不是作者为什么提及该例子。'
+                      : forcedSurfaceCard
+                        ? '后端一致性校正：surfaceQuestion.type 已经确定题型轴，synonymDifficulty.cardId 必须与题型轴一致。'
+                        : rawBoundaryCheck
 
   return {
     cardId,
@@ -7343,6 +7870,51 @@ function normalizeSavedVerifyResult(questionGroupId, group, payload) {
   }
 }
 
+function syncReadingAiDifficultyScores(db, questionGroupId, questions) {
+  const rows = db
+    .prepare(
+      `
+      SELECT id, question_no, display_order
+      FROM questions
+      WHERE group_id = ?
+      ORDER BY display_order, question_no
+      `,
+    )
+    .all(questionGroupId)
+  if (!rows.length || !Array.isArray(questions) || !questions.length) return []
+
+  const warnings = []
+  const rowsByNo = new Map(rows.map((row) => [String(row.question_no || '').trim(), row]))
+  const usedQuestionIds = new Set()
+  const update = db.prepare(
+    `
+    UPDATE questions
+    SET ai_difficulty_score = ?
+    WHERE id = ?
+    `,
+  )
+
+  questions.forEach((item, index) => {
+    const score = normalizeAiDifficultyScore(item?.difficultyProfile?.finalScore)
+    if (score === null) return
+
+    const questionNo = String(item?.questionNo || '').trim()
+    let row = questionNo ? rowsByNo.get(questionNo) : null
+    if (!row && rows[index] && !usedQuestionIds.has(rows[index].id)) {
+      row = rows[index]
+    }
+    if (!row || usedQuestionIds.has(row.id)) {
+      warnings.push(`第 ${questionNo || index + 1} 题 AI 难度分无法匹配数据库小题，已跳过。`)
+      return
+    }
+
+    usedQuestionIds.add(row.id)
+    update.run(score, row.id)
+  })
+
+  return warnings
+}
+
 function saveReadingParseResult(questionGroupId, input) {
   const db = openDatabase({ readOnly: false })
   const payload = input?.readingParseResult && typeof input.readingParseResult === 'object'
@@ -7469,12 +8041,14 @@ function saveReadingParseResult(questionGroupId, input) {
       )
     }
 
+    const difficultySyncWarnings = syncReadingAiDifficultyScores(db, questionGroupId, normalizedPayload.questions)
     const [questionGroup] = selectQuestionGroupCards(db, 'WHERE id = ?', [questionGroupId])
 
     return {
       readingParseResult: getSavedReadingParseResult(db, questionGroupId),
       verifyResult: getSavedReadingVerifyResult(db, questionGroupId),
       questionGroup: questionGroup || null,
+      difficultySyncWarnings,
     }
   } finally {
     db.close()
@@ -8191,6 +8765,10 @@ async function classifySynonymDifficultyQuestion(context) {
 }
 
 async function generateSynonymDifficultyByQuestionGroup(questionGroupId, input = {}) {
+  if (!QUESTION_BANK_ENABLE_LOCAL_QWEN) {
+    throw new Error('题库本地 Qwen 初判已停用。请使用 DeepSeek 阅读解析内置的 synonymDifficulty。')
+  }
+
   const startedAt = Date.now()
   const resolvedRequestId = input.requestId || randomUUID()
   const detail = getQuestionGroupDetail(questionGroupId)
@@ -8629,33 +9207,6 @@ function formatQuestionGroupForTopicLabel(detail) {
     .join('\n\n')
 }
 
-function formatQuestionGroupForLocalTopicLabel(detail) {
-  const questionText = (detail.questions || [])
-    .slice(0, 6)
-    .map((question) =>
-      [
-        `题号：${question.questionNo}`,
-        question.stem ? `题干：${safeTruncate(question.stem, 160)}` : '',
-        question.answer ? `答案：${question.answer}` : '',
-      ]
-        .filter(Boolean)
-        .join('\n'),
-    )
-    .join('\n\n')
-
-  return [
-    `题组类型：${groupTypeLabels[detail.groupType] || detail.groupType}`,
-    `题组标题：${detail.title}`,
-    `篇章标题：${detail.passage?.title || detail.passageTitle || ''}`,
-    detail.summary ? `摘要：${safeTruncate(detail.summary, 220)}` : '',
-    detail.instruction ? `题组说明：${safeTruncate(detail.instruction, 220)}` : '',
-    `原文：\n${safeTruncate(detail.passage?.materialText || '', 1800) || '（无完整原文）'}`,
-    questionText ? `题目信息：\n${questionText}` : '',
-  ]
-    .filter(Boolean)
-    .join('\n\n')
-}
-
 function formatQuestionGroupForSummary(detail) {
   const questionText = (detail.questions || [])
     .slice(0, 10)
@@ -8685,66 +9236,6 @@ function formatQuestionGroupForSummary(detail) {
 function clamp01(value) {
   if (!Number.isFinite(value)) return 0
   return Math.max(0, Math.min(1, value))
-}
-
-function cosineSimilarity(left, right) {
-  if (!Array.isArray(left) || !Array.isArray(right) || left.length === 0 || right.length === 0) return 0
-  const size = Math.min(left.length, right.length)
-  let dot = 0
-  let leftMagnitude = 0
-  let rightMagnitude = 0
-  for (let index = 0; index < size; index += 1) {
-    const leftValue = Number(left[index]) || 0
-    const rightValue = Number(right[index]) || 0
-    dot += leftValue * rightValue
-    leftMagnitude += leftValue * leftValue
-    rightMagnitude += rightValue * rightValue
-  }
-  if (leftMagnitude <= 0 || rightMagnitude <= 0) return 0
-  return dot / Math.sqrt(leftMagnitude * rightMagnitude)
-}
-
-function normalizeRelativeScores(values) {
-  if (!Array.isArray(values) || values.length === 0) return []
-  const finiteValues = values.map((value) => Number(value) || 0)
-  const min = Math.min(...finiteValues)
-  const max = Math.max(...finiteValues)
-  if (!Number.isFinite(min) || !Number.isFinite(max) || max <= min) {
-    return finiteValues.map(() => 1)
-  }
-  return finiteValues.map((value) => (value - min) / (max - min))
-}
-
-async function getCachedLocalEmbeddings(items, { cache, buildText, model = LOCAL_QWEN_EMBEDDING_MODEL, batchSize = LOCAL_EMBEDDING_BATCH_SIZE }) {
-  const normalizedItems = Array.isArray(items) ? items : []
-  const pending = []
-  const embeddings = new Map()
-
-  normalizedItems.forEach((item) => {
-    const text = optionalString(buildText(item))
-    if (!text) return
-    const cacheEntry = cache.get(item.id)
-    if (cacheEntry && cacheEntry.text === text && Array.isArray(cacheEntry.embedding) && cacheEntry.embedding.length > 0) {
-      embeddings.set(item.id, cacheEntry.embedding)
-      return
-    }
-    pending.push({ id: item.id, text })
-  })
-
-  for (let start = 0; start < pending.length; start += batchSize) {
-    const chunk = pending.slice(start, start + batchSize)
-    const result = await callLocalQwenEmbeddings({
-      input: chunk.map((entry) => entry.text),
-      model,
-    })
-    chunk.forEach((entry, index) => {
-      const embedding = result.embeddings[index] || []
-      cache.set(entry.id, { text: entry.text, embedding })
-      embeddings.set(entry.id, embedding)
-    })
-  }
-
-  return normalizedItems.map((item) => embeddings.get(item.id) || [])
 }
 
 const DEEPSEEK_SEMANTIC_RERANK_PROMPT = `你是高中英语题库语义检索重排助手。
@@ -8779,9 +9270,15 @@ const QUESTION_BANK_STEWARD_PROMPT = `你是高中英语题库搜索管家，只
 - source：来源相似，如浙江卷、全国卷、2023年、1月卷、真题/模拟题。
 - mixed：用户明确要求多个维度同时相似。
 
+交互口径：
+- 前台面对老师时只说自然语言，不说 skill/theme/difficulty/source，不说“按维度选择”。
+- 如果要澄清，用“做题思路像 / 文章内容像 / 学生卡点像”这类老师能直接理解的话。
+- 不要要求用户回复固定枚举；允许用户直接补一句描述。
+
 澄清规则：
 如果用户只说“找相似题/类似题/同款题/推荐几道”但没有说明相似维度，必须 needsClarification=true。
-澄清问题固定为：你想按哪方面相似：考查技能/SOLO T卡、文章主题、难度，还是来源年份？
+澄清问题必须用自然语言，不要暴露 skill/theme/difficulty/source、SOLO T卡、来源年份等内部字段。
+推荐口吻：你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。
 注意：“高阶题/T5-T10”是 skill 维度，不等于 difficultyLevels=high；只有用户明确说“高难/难度高”才设置 difficultyLevels。
 
 返回 JSON 对象，不要 markdown，不要额外说明：
@@ -8896,18 +9393,6 @@ function buildDeepSeekSemanticSearchReason(group, reason, rank, sourceName = 'De
     : `${sourceName} 检测第 ${rank + 1} 位。`
 }
 
-function buildLocalTopicLabelReason(detail, topicLabel, embeddingScore, rerankScore, rank) {
-  const evidence = [
-    detail.passage?.theme ? `篇章主题 ${detail.passage.theme}` : '',
-    detail.summary ? `摘要 ${safeTruncate(detail.summary, 48)}` : '',
-    topicLabel.label,
-  ]
-    .filter(Boolean)
-    .join(' / ')
-  const scoreText = `${Math.round(clamp01(embeddingScore) * 100)}% / ${Math.round(clamp01(rerankScore) * 100)}%`
-  return `本地 embedding + reranker 识别为第 ${rank + 1} 候选；${evidence}。综合相关度 ${scoreText}。`
-}
-
 function normalizeSemanticSearchText(value) {
   return optionalString(value)
     .toLowerCase()
@@ -8992,7 +9477,7 @@ function buildSemanticSearchCandidatePool(groups, query) {
       return left.index - right.index
     })
 
-  return scoredGroups.slice(0, Math.min(LOCAL_SEMANTIC_SEARCH_PREFILTER_TOP_K, scoredGroups.length))
+  return scoredGroups.slice(0, Math.min(SEMANTIC_SEARCH_PREFILTER_TOP_K, scoredGroups.length))
 }
 
 function normalizeStewardArray(value) {
@@ -9001,6 +9486,58 @@ function normalizeStewardArray(value) {
   }
   const normalized = optionalString(value)
   return normalized ? [normalized] : []
+}
+
+function inferStewardDimensionFromQuery(query) {
+  const text = optionalString(query)
+  if (!text) return ''
+
+  if (
+    /(做题思路|解题思路|解题方法|学生卡点|卡点|考法|考查方式|题型|题面|SOLO|T10|T[1-9]\b|猜词|词义|推断|主旨|标题|例子|引用|态度|写作手法|段落功能|why mention|why did|抽象概括|抽象压缩|抽象短语)/i.test(
+      text,
+    )
+  ) {
+    return 'skill'
+  }
+  if (/(文章内容|内容像|讲的内容|主题|话题|语篇|材料内容|科技|环保|城市|购物|自然|社会|文化|人物|故事)/i.test(text)) {
+    return 'theme'
+  }
+  if (/(难度|高难|难题|低难|简单|容易|中等|干扰|迷惑|词汇|语法|抽象度|信息跨度)/i.test(text)) {
+    return 'difficulty'
+  }
+  if (/(来源|年份|真题|模拟|浙江|全国|新课标|北京|上海|广东|深圳|一模|二模|20\d{2}|1月|6月|卷)/i.test(text)) {
+    return 'source'
+  }
+
+  return ''
+}
+
+function inferStewardSurfaceQuestionTypesFromQuery(query) {
+  const text = optionalString(query)
+  const types = []
+  const push = (type) => {
+    if (!types.includes(type)) types.push(type)
+  }
+
+  if (/(抽象概括|抽象压缩|抽象短语|low barrier|barrier to entry)/i.test(text)) push('abstract_phrase_summary')
+  if (/(形容词压缩|一两个形容词|adjective)/i.test(text)) push('adjective_summary')
+  if (/(猜词|词义|划线词|underlined word|underlined phrase)/i.test(text)) push('word_meaning')
+  if (/(例子功能|举例|引用|why mention|mentioning)/i.test(text)) push('example_function')
+  if (/(why did|为什么.*做|原因题)/i.test(text)) push('why_did')
+  if (/(段落主旨|paragraph main)/i.test(text)) push('paragraph_main_idea')
+  if (/(文章主旨|全文主旨|mainly about|passage main)/i.test(text)) push('passage_main_idea')
+  if (/(写作手法|writing technique|修辞手法)/i.test(text)) push('writing_technique')
+  if (/(态度|语气|attitude|tone)/i.test(text)) push('attitude_tone')
+  if (/(推断|infer|inference)/i.test(text)) push('inference_general')
+
+  return types
+}
+
+function inferStewardTCardIdsFromQuery(query) {
+  const text = optionalString(query)
+  return Array.from(text.matchAll(/\bT(10|[1-9])\b/gi))
+    .map((match) => normalizeSynonymCardId(match[0]))
+    .filter(Boolean)
 }
 
 function normalizeQuestionBankStewardPlan(payload, fallbackQuery) {
@@ -9029,6 +9566,9 @@ function normalizeQuestionBankStewardPlan(payload, fallbackQuery) {
   const groupType = optionalString(filters.groupType || filters.group_type)
   const sourceType = optionalString(filters.sourceType || filters.source_type)
   const queryText = optionalString(fallbackQuery)
+  const inferredDimension = inferStewardDimensionFromQuery(queryText)
+  const inferredSurfaceTypes = inferStewardSurfaceQuestionTypesFromQuery(queryText).filter((type) => allowedSurfaceTypes.has(type))
+  const inferredTCardIds = inferStewardTCardIdsFromQuery(queryText)
   const hasExplicitDifficultySignal =
     /(高难|难度高|难题|低难|难度低|简单|容易|中等难度|难度中等|difficulty)/i.test(queryText)
   const normalizedDifficultyLevels = normalizeStewardArray(filters.difficultyLevels || filters.difficulty_levels)
@@ -9051,7 +9591,9 @@ function normalizeQuestionBankStewardPlan(payload, fallbackQuery) {
       sourceType: ['real_exam', 'mock_exam', 'self_made'].includes(sourceType) ? sourceType : '',
       years: normalizeStewardArray(filters.years || filters.year),
       regions: normalizeStewardArray(filters.regions || filters.region),
-      tCardIds: normalizeStewardArray(filters.tCardIds || filters.t_card_ids).map(normalizeSynonymCardId).filter(Boolean),
+      tCardIds: Array.from(
+        new Set([...normalizeStewardArray(filters.tCardIds || filters.t_card_ids).map(normalizeSynonymCardId).filter(Boolean), ...inferredTCardIds]),
+      ),
       surfaceQuestionTypes: normalizeStewardArray(filters.surfaceQuestionTypes || filters.surface_question_types).filter((type) =>
         allowedSurfaceTypes.has(type),
       ),
@@ -9059,12 +9601,25 @@ function normalizeQuestionBankStewardPlan(payload, fallbackQuery) {
     },
     answer: optionalString(source.answer),
   }
+  if (inferredSurfaceTypes.length) {
+    normalized.filters.surfaceQuestionTypes = Array.from(new Set([...normalized.filters.surfaceQuestionTypes, ...inferredSurfaceTypes]))
+  }
+  if (normalized.similarityDimension === 'null' && inferredDimension) {
+    normalized.similarityDimension = inferredDimension
+  }
+  if (inferredDimension && normalized.needsClarification) {
+    normalized.needsClarification = false
+    normalized.clarificationQuestion = ''
+    if (normalized.intent === 'clarify') normalized.intent = 'find_similar'
+    if (!normalized.answer) normalized.answer = `我按${summarizeStewardDimension(normalized.similarityDimension)}来找。`
+  }
 
   if (normalized.intent === 'clarify') {
     normalized.needsClarification = true
   }
   if (normalized.needsClarification && !normalized.clarificationQuestion) {
-    normalized.clarificationQuestion = '你想按哪方面相似：考查技能/SOLO T卡、文章主题、难度，还是来源年份？'
+    normalized.clarificationQuestion =
+      '你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。'
   }
 
   return normalized
@@ -9076,7 +9631,7 @@ function shouldForceStewardClarification(query, plan) {
   const asksSimilar = /(相似|类似|同款|同类|推荐.*题|找.*题)/.test(text)
   if (!asksSimilar) return false
   const hasDimensionSignal =
-    /(技能|SOLO|T10|T[1-9]\b|题型|猜词|推断|主旨|标题|例子|引用|态度|写作手法|压缩|抽象|主题|话题|难度|高难|中等|简单|干扰|浙江|全国|新课标|北京|上海|真题|模拟|年份|20\d{2})/i.test(
+    /(做题思路|解题思路|学生卡点|文章内容|讲的内容|技能|SOLO|T10|T[1-9]\b|题型|猜词|推断|主旨|标题|例子|引用|态度|写作手法|压缩|抽象|主题|话题|难度|高难|中等|简单|干扰|浙江|全国|新课标|北京|上海|真题|模拟|年份|20\d{2})/i.test(
       text,
     )
   return !hasDimensionSignal && plan.similarityDimension === 'null'
@@ -9102,18 +9657,21 @@ function buildStewardSemanticQuery(query, plan) {
 
 function summarizeStewardDimension(dimension) {
   const labels = {
-    skill: '考查技能/SOLO T卡',
-    theme: '文章主题',
-    difficulty: '难度',
-    source: '来源年份',
-    mixed: '混合维度',
+    skill: '做题思路相似',
+    theme: '文章内容相似',
+    difficulty: '难度接近',
+    source: '真题风格相近',
+    mixed: '综合相似',
   }
   return labels[dimension] || '综合语义'
 }
 
 function buildQuestionBankStewardMessage(plan, searchResult) {
   if (plan.needsClarification) {
-    return plan.clarificationQuestion || '你想按哪方面相似：考查技能/SOLO T卡、文章主题、难度，还是来源年份？'
+    return (
+      plan.clarificationQuestion ||
+      '你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。'
+    )
   }
 
   const count = searchResult?.matches?.length || 0
@@ -9225,7 +9783,8 @@ async function planQuestionBankStewardSearch(query, apiKey, requestId) {
   if (shouldForceStewardClarification(query, plan)) {
     plan.intent = 'clarify'
     plan.needsClarification = true
-    plan.clarificationQuestion = '你想按哪方面相似：考查技能/SOLO T卡、文章主题、难度，还是来源年份？'
+    plan.clarificationQuestion =
+      '你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。'
   }
 
   return {
@@ -9238,7 +9797,7 @@ async function planQuestionBankStewardSearch(query, apiKey, requestId) {
 async function questionBankStewardSearch(query, apiKey, requestId) {
   const normalizedQuery = optionalString(query)
   if (!normalizedQuery) {
-    throw new Error('请输入想问题库管家的问题。')
+    throw new Error('请输入想让题库管家查找的问题。')
   }
 
   const resolvedRequestId = requestId || randomUUID()
@@ -9375,21 +9934,23 @@ async function generateQuestionGroupSummary(questionGroupId, apiKey, model, requ
     throw new Error('题组未找到。')
   }
 
-  const selectedModel = LOCAL_QWEN_CHAT_MODEL
+  const selectedModel = normalizeDeepSeekModel(model)
+  const keySource = describeKeySource(apiKey)
+  const key = String(apiKey || DEEPSEEK_API_KEY).trim()
   console.log(
-    `AI summary trace=${resolvedRequestId} group=${questionGroupId} model=${selectedModel} provider=${LOCAL_QWEN_PROVIDER}`,
+    `AI summary trace=${resolvedRequestId} group=${questionGroupId} model=${selectedModel} provider=deepseek thinking=off`,
   )
 
   const parsed = await callDeepSeekPassageSummary({
-    apiKey: '',
+    apiKey: key,
     model: selectedModel,
-    provider: LOCAL_QWEN_PROVIDER,
+    provider: 'deepseek',
     detail,
     thinkingMode: false,
   })
   const summary = normalizeSummaryPayload(parsed)
   if (!summary) {
-    throw new Error('本地 Qwen 未返回有效篇章简介。')
+    throw new Error('DeepSeek 未返回有效篇章简介。')
   }
 
   const questionGroup = saveQuestionGroupSummary(questionGroupId, summary)
@@ -9398,12 +9959,12 @@ async function generateQuestionGroupSummary(questionGroupId, apiKey, model, requ
     title: detail.title,
     summary,
     questionGroup,
-    provider: LOCAL_QWEN_PROVIDER,
+    provider: 'deepseek',
     model: selectedModel,
     thinkingMode: false,
-    keySource: 'local',
-    keyFingerprint: 'missing',
-    keyMask: 'missing',
+    keySource: keySource.source,
+    keyFingerprint: maskApiKey(key),
+    keyMask: maskApiKey(key),
     requestId: resolvedRequestId,
     totalLatencyMs: elapsedMs(startedAt),
   }
@@ -9560,158 +10121,41 @@ async function generateTopicLabelsByQuestionGroup(questionGroupId, apiKey, model
     throw new Error('题组未找到。')
   }
 
+  const selectedModel = normalizeDeepSeekModel(model)
+  const keySource = describeKeySource(apiKey)
+  const key = String(apiKey || DEEPSEEK_API_KEY).trim()
   console.log(
-    `AI topic labels trace=${resolvedRequestId} group=${questionGroupId} model=${LOCAL_QWEN_CHAT_MODEL} provider=${LOCAL_QWEN_PROVIDER}`,
+    `AI topic labels trace=${resolvedRequestId} group=${questionGroupId} model=${selectedModel} provider=deepseek thinking=off`,
   )
 
-  const queryText = formatQuestionGroupForLocalTopicLabel(detail)
-  let topicLabels = []
-  let fallbackUsed = false
-  let embeddingPipelineFailed = false
-
-  try {
-    const queryEmbeddingResult = await callLocalQwenEmbeddings({
-      input: queryText,
-      model: LOCAL_QWEN_EMBEDDING_MODEL,
-    })
-    const queryEmbedding = queryEmbeddingResult.embeddings[0] || []
-
-    const labelEmbeddings = await getCachedLocalEmbeddings(TOPIC_LABEL_TAXONOMY, {
-      cache: localTopicLabelEmbeddingCache,
-      buildText: (entry) => [
-        entry.label,
-        `主题：${entry.theme}`,
-        `主题群：${entry.themeGroup}`,
-        `子主题：${entry.subtopic}`,
-      ].join('\n'),
-      model: LOCAL_QWEN_EMBEDDING_MODEL,
-      batchSize: LOCAL_EMBEDDING_BATCH_SIZE,
-    })
-
-    const embeddingCandidates = TOPIC_LABEL_TAXONOMY.map((entry, index) => ({
-      entry,
-      index,
-      embeddingScore: cosineSimilarity(queryEmbedding, labelEmbeddings[index] || []),
-    }))
-      .sort((left, right) => right.embeddingScore - left.embeddingScore)
-      .slice(0, Math.min(LOCAL_TOPIC_LABEL_EMBED_TOP_K, TOPIC_LABEL_TAXONOMY.length))
-
-    let rankedCandidates = embeddingCandidates
-
-    try {
-      const rerankResult = await callLocalQwenRerank({
-        query: queryText,
-        documents: embeddingCandidates.map((candidate) =>
-          [
-            candidate.entry.label,
-            `主题：${candidate.entry.theme}`,
-            `主题群：${candidate.entry.themeGroup}`,
-            `子主题：${candidate.entry.subtopic}`,
-          ].join('\n'),
-        ),
-        model: LOCAL_QWEN_RERANKER_MODEL,
-        topN: Math.min(LOCAL_TOPIC_LABEL_RETURN_TOP_K, embeddingCandidates.length),
-      })
-      const rerankRelativeScores = normalizeRelativeScores(rerankResult.results.map((item) => item.relevanceScore))
-      rankedCandidates = rerankResult.results
-        .map((result, rank) => {
-          const candidate = embeddingCandidates[result.index]
-          if (!candidate) return null
-          const rerankScore = rerankRelativeScores[rank] || 0
-          return {
-            ...candidate,
-            rerankScore,
-            score: clamp01(0.7 * ((candidate.embeddingScore + 1) / 2) + 0.3 * rerankScore),
-            rank,
-          }
-        })
-        .filter(Boolean)
-        .sort((left, right) => right.score - left.score)
-    } catch {
-      rankedCandidates = embeddingCandidates.map((candidate, rank) => ({
-        ...candidate,
-        rerankScore: 0,
-        score: clamp01((candidate.embeddingScore + 1) / 2),
-        rank,
-      }))
-    }
-
-    const localTopicLabels = rankedCandidates
-      .slice(0, LOCAL_TOPIC_LABEL_RETURN_TOP_K)
-      .map((candidate, index) => ({
-        id: `local-topic-${questionGroupId}-${candidate.entry.label}`,
-        label: candidate.entry.label,
-        theme: candidate.entry.theme,
-        themeGroup: candidate.entry.themeGroup,
-        subtopic: candidate.entry.subtopic,
-        source: LOCAL_QWEN_PROVIDER,
-        reason: buildLocalTopicLabelReason(
-          detail,
-          candidate.entry,
-          (candidate.embeddingScore + 1) / 2,
-          candidate.rerankScore || 0,
-          index,
-        ),
-        confidence: clamp01(candidate.score),
-        createdAt: '',
-        updatedAt: '',
-      }))
-
-    const topCandidate = localTopicLabels[0]
-    const secondCandidate = localTopicLabels[1]
-    const shouldFallbackToChat =
-      !topCandidate ||
-      topCandidate.confidence === undefined ||
-      topCandidate.confidence < LOCAL_TOPIC_LABEL_CONFIDENCE_THRESHOLD ||
-      (secondCandidate && topCandidate.confidence - (secondCandidate.confidence || 0) < 0.08)
-
-    fallbackUsed = shouldFallbackToChat
-    topicLabels = shouldFallbackToChat
-      ? normalizeTopicLabelPayload(
-          await callDeepSeekTopicLabels({
-            apiKey: '',
-            model: LOCAL_QWEN_CHAT_MODEL,
-            provider: LOCAL_QWEN_PROVIDER,
-            detail,
-            thinkingMode: false,
-          }),
-        )
-      : localTopicLabels
-  } catch (error) {
-    embeddingPipelineFailed = true
-    console.warn(
-      `AI topic labels local embedding pipeline failed trace=${resolvedRequestId}: ${error instanceof Error ? error.message : String(error)}`,
-    )
-    topicLabels = normalizeTopicLabelPayload(
-      await callDeepSeekTopicLabels({
-        apiKey: '',
-        model: LOCAL_QWEN_CHAT_MODEL,
-        provider: LOCAL_QWEN_PROVIDER,
-        detail,
-        thinkingMode: false,
-      }),
-    )
-    fallbackUsed = true
-  }
+  const topicLabels = normalizeTopicLabelPayload(
+    await callDeepSeekTopicLabels({
+      apiKey: key,
+      model: selectedModel,
+      provider: 'deepseek',
+      detail,
+      thinkingMode: false,
+    }),
+  )
 
   if (topicLabels.length === 0) {
-    throw new Error('本地 Qwen 未返回有效话题标签。')
+    throw new Error('DeepSeek 未返回有效话题标签。')
   }
 
   return {
     questionGroupId,
     title: detail.title,
     topicLabels,
-    provider: LOCAL_QWEN_PROVIDER,
-    model: fallbackUsed ? LOCAL_QWEN_CHAT_MODEL : `${LOCAL_QWEN_EMBEDDING_MODEL}+${LOCAL_QWEN_RERANKER_MODEL}`,
+    provider: 'deepseek',
+    model: selectedModel,
     thinkingMode: false,
-    keySource: 'local',
-    keyFingerprint: 'missing',
-    keyMask: 'missing',
+    keySource: keySource.source,
+    keyFingerprint: maskApiKey(key),
+    keyMask: maskApiKey(key),
     requestId: resolvedRequestId,
     totalLatencyMs: elapsedMs(startedAt),
-    pipeline: fallbackUsed || embeddingPipelineFailed ? 'local-8b-fallback' : LOCAL_SEMANTIC_PIPELINE,
-    fallbackUsed,
+    pipeline: 'deepseek-flash-topic-labels',
+    fallbackUsed: false,
   }
 }
 
@@ -10263,6 +10707,7 @@ const server = createServer(async (request, response) => {
     const summaryMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/summary$/)
     const topicLabelsMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/topic-labels$/)
     const synonymDifficultyMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/synonym-difficulty$/)
+    const questionDifficultyMatch = url.pathname.match(/^\/api\/questions\/([^/]+)\/difficulty-rating$/)
     if (request.method === 'GET' && detailMatch) {
       const questionGroup = getQuestionGroupDetail(decodeURIComponent(detailMatch[1]))
       if (!questionGroup) {
@@ -10333,6 +10778,23 @@ const server = createServer(async (request, response) => {
       return
     }
 
+    if (request.method === 'PUT' && questionDifficultyMatch) {
+      const input = await readJsonBody(request, { maxBytes: 20_000 })
+      let question = null
+      try {
+        question = saveQuestionDifficultyRating(decodeURIComponent(questionDifficultyMatch[1]), input)
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+        return
+      }
+      if (!question) {
+        sendJson(response, 404, { error: 'Question not found' })
+        return
+      }
+      sendJson(response, 200, { question })
+      return
+    }
+
     if (request.method === 'POST' && grammarParseMatch) {
       const input = await readJsonBody(request)
       const result = await parseGrammarByQuestionGroup(
@@ -10380,6 +10842,13 @@ const server = createServer(async (request, response) => {
     }
 
     if (request.method === 'POST' && synonymDifficultyMatch) {
+      if (!QUESTION_BANK_ENABLE_LOCAL_QWEN) {
+        sendJson(response, 410, {
+          error: '题库本地 Qwen 初判已停用。请使用 DeepSeek 阅读解析内置的 synonymDifficulty。',
+          replacement: 'POST /api/question-groups/:id/reading-parse',
+        })
+        return
+      }
       const input = await readJsonBody(request, { maxBytes: 3_000_000 })
       const result = await generateSynonymDifficultyByQuestionGroup(
         decodeURIComponent(synonymDifficultyMatch[1]),
@@ -10467,6 +10936,34 @@ const server = createServer(async (request, response) => {
       const input = await readJsonBody(request)
       const result = exportPdf(input)
       sendPdf(response, result.body, result.fileName, result.outputPath)
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/exports/print-html') {
+      const input = await readJsonBody(request)
+      const result = exportPrintHtml(input)
+      response.writeHead(200, {
+        'access-control-allow-origin': 'http://127.0.0.1:5173',
+        'content-type': 'text/html; charset=utf-8',
+        'x-file-name': encodeURIComponent(result.fileName),
+      })
+      response.end(result.body)
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/exports/print-pdf') {
+      try {
+        const input = await readJsonBody(request)
+        const result = exportPrintPdf(input)
+        sendPdf(response, result.body, result.fileName, result.outputPath)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
+          sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
+        } else {
+          sendJson(response, 500, { error: message })
+        }
+      }
       return
     }
 

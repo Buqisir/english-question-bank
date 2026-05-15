@@ -1,0 +1,656 @@
+{
+  "version": "v1",
+  "reviewer": "claude-opus",
+  "generatedAt": "2026-05-15T00:00:00.000Z",
+  "reviewCount": 108,
+  "reviews": [
+    {
+      "questionId": "q-c5c4c55c-3a4c-4f74-a431-b48bcb349a55",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "原因定位题，原文明确提到wetlands dried，直接对应选项A"
+    },
+    {
+      "questionId": "q-50822127-5b21-4978-91ec-3d23bf8be639",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "上下文线索充分：killed/dried/reducing，可推出大规模破坏之意，选项区分度尚可"
+    },
+    {
+      "questionId": "q-26b0e820-bfee-4bd9-9f65-1317423ff109",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "需将duck stamp dollar与Act of 1934关联，有一步信息链接，但定位不难"
+    },
+    {
+      "questionId": "q-80ddcc94-5a35-484c-a371-0c0920ec2bf7",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "主旨题需覆盖全文，标题选项间有干扰，需综合三段信息判断"
+    },
+    {
+      "questionId": "q-0781100d-e7f4-4bcc-9630-a952934551c5",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "misunderstanding对应misunderstand，定位句长但关键词明确，选项D概括合理"
+    },
+    {
+      "questionId": "q-ec307728-4fbc-4d7e-ace3-c53e126d9c8d",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "例证题需从具体例子抽象到论点，doctor/cheater对比说明EI可善可恶，需推理一步"
+    },
+    {
+      "questionId": "q-dc8966ac-4144-4a22-a0a5-8e7ddaedce12",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "态度题需整合让步句run far ahead与转折more beneficial，区分favourably与其他选项"
+    },
+    {
+      "questionId": "q-6310021d-088a-49ab-a6f8-91587335464d",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "段落大意题但末段结构清晰，hope/future方向明确，概括难度不高"
+    },
+    {
+      "questionId": "q-3e095e49-238e-48ae-a88f-91bc4238a9fb",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "例证题但arugula故事紧接主题句，功能明确为说明食物浪费普遍性"
+    },
+    {
+      "questionId": "q-97cf9e4b-05c0-4c0d-a48b-8a26f8c450d4",
+      "difficulty": 1,
+      "experienceFit": "偏易",
+      "note": "environmental problem原文直述，几乎零推理，直接定位即可"
+    },
+    {
+      "questionId": "q-314f44d0-d38b-4d81-ba3e-d5c9dfd61b4d",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "公司业务直接定位，recovers food关键词与选项高度匹配"
+    },
+    {
+      "questionId": "q-b98916c6-bd6a-434c-b535-52b25f93649c",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "建议定位明确，not purchasing more than necessary，但需从段落中筛选"
+    },
+    {
+      "questionId": "q-8103f82f-beeb-4859-b629-73502e4bfa62",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "purpose题原文用to reduce loneliness直接表述，一步定位"
+    },
+    {
+      "questionId": "q-b0d7396e-077d-45b7-97b1-b89742f2ad70",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "Ruth Xavier引言直接表达感受，enjoying/useful与选项直接对应"
+    },
+    {
+      "questionId": "q-efd3d202-7cb2-40a8-8da0-e0fe50acfa89",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "embark on上下文有first to...the project，可推出\"开始参与\"，选项区分度足够"
+    },
+    {
+      "questionId": "q-6c5ad51e-f446-4f7f-b694-6a3006259533",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "末两段信息整合但态度一致（welcome/happy），选项回溯即可确认"
+    },
+    {
+      "questionId": "q-b12fc4f7-cb42-4522-9890-8f1e3ca37808",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "aim定位到goal of this book句，但选项间有一定干扰需仔细比对"
+    },
+    {
+      "questionId": "q-f34f1c2e-897a-430a-892d-c0c3b7af8724",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "declutter由de-+clutter构词线索加step away from语境，可推出\"清理\""
+    },
+    {
+      "questionId": "q-c37aeea4-dbc2-40dd-80f2-9b4d2f47a99b",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "final chapter of part one定位后，stories/strategies/traps与选项C匹配"
+    },
+    {
+      "questionId": "q-bbee1984-23ee-4fb1-834b-046a36548ef2",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "toolbox/particular circumstances暗示选择性使用，但需理解比喻略有门槛"
+    },
+    {
+      "questionId": "q-713774b4-ced2-456d-a62a-763f1db3d116",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "段落主旨需归纳抽象概念(误差抵消机制)，有一定概括难度"
+    },
+    {
+      "questionId": "q-261d1389-8994-4709-a773-30d7c1ccff6e",
+      "difficulty": 3,
+      "experienceFit": "偏难",
+      "note": "需理解discussion条件下准确率仍提升的反直觉结论，选项干扰较强"
+    },
+    {
+      "questionId": "q-739572a1-abe3-4d83-b667-b5e994faf4dd",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "直接定位follow-up study内容，原文有明确信号词"
+    },
+    {
+      "questionId": "q-b150eeca-ce74-449c-85eb-e98d55ba64c2",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "态度题需整合limitations与enormous两端信息，选项词汇有区分度"
+    },
+    {
+      "questionId": "q-72e86c57-019c-40c4-bf7d-39d66cc82871",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "bandwagon有上下文提示(sustainable lifestyle)，选项直白易排除"
+    },
+    {
+      "questionId": "q-40764e2b-1012-45da-b79e-905b2637e4a3",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "silly一词直接表达态度，定位简单"
+    },
+    {
+      "questionId": "q-aa9c286d-23b2-474f-bbad-2c70573a97be",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "多处细节支持作者积极行动的推断，信息跨度不大"
+    },
+    {
+      "questionId": "q-be729893-c723-49a6-a683-c976fe2df772",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "全文围绕在不支持环境中坚持可持续生活，主旨清晰"
+    },
+    {
+      "questionId": "q-269da639-b314-4c81-a415-edacd93035da",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "举例功能题，Noa Ovadia作为人类冠军被击败用以引出AI辩论话题"
+    },
+    {
+      "questionId": "q-d291bf07-af66-42c9-8916-77048e81d36d",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "ironed out搭配提供明确语境线索，指代errors/problems"
+    },
+    {
+      "questionId": "q-8375e8c0-7591-4ce0-908f-7ac087ceef47",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "Hammond原话直接定位，never knows what it's talking about"
+    },
+    {
+      "questionId": "q-08e9eeff-0ec3-41a8-8946-52b55157cdb3",
+      "difficulty": 3,
+      "experienceFit": "偏难",
+      "note": "末段句式复杂(social interaction vs computation)，需准确理解抽象对比"
+    },
+    {
+      "questionId": "q-a1f8580a-2b63-4e42-996d-0494a2047b52",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "haven't given much thought to what they put under them直接对应答案"
+    },
+    {
+      "questionId": "q-6393381f-c13d-436a-b3c2-0a34147863ce",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "InSPIRE目标句紧跟其名称出现，直接定位"
+    },
+    {
+      "questionId": "q-d8d159c0-ea47-454b-94c3-4fddc061d962",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "laws与pollinator habitat protection并列，目的需小幅推断"
+    },
+    {
+      "questionId": "q-5a0a3c17-586f-433c-a5e6-545121c90e04",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "标题需整合solar farms与pollinators双主线，选项有干扰"
+    },
+    {
+      "questionId": "q-1a89480c-3196-4d99-b514-b73a6eb7ca16",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "shine through语境明确(benefits particularly...)，选项区分度足够"
+    },
+    {
+      "questionId": "q-0a7090fc-449e-4098-8a29-b75d1f24d0f3",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "hypothesis内容紧跟定义句，但选项措辞需比对"
+    },
+    {
+      "questionId": "q-e4bfb30c-e206-46bc-84d8-80d72d26ad77",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "more engaging直接对应选项，因果关系显而易见"
+    },
+    {
+      "questionId": "q-36a8b20d-315c-436b-9f63-147cc2b6e815",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "末段隐含推断需理解not all media are the same的深层含义，有抽象要求"
+    },
+    {
+      "questionId": "q-b75a02b8-541e-410e-a505-4dc5daddc79a",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "直接定位coworkers态度，laugh at对应选项，干扰小"
+    },
+    {
+      "questionId": "q-4e947724-aac2-4707-9027-daae438e569c",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "why题但定位句明确，worked on veterinarian→work on patients逻辑清晰"
+    },
+    {
+      "questionId": "q-9a6b4adf-a325-412c-a5c4-fd2b9168c7b9",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "段落主旨需概括两个案例共性，需抽象为疗效/成功案例，有一定概括难度"
+    },
+    {
+      "questionId": "q-a229725e-41a3-45bb-bec8-6c8fd71f624a",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "例证题需理解数据增长→支撑holistic approach会流行的论点，功能推理有门槛"
+    },
+    {
+      "questionId": "q-1e2cb77e-b803-472b-a9ad-8ade6d3844cb",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "直接定位most records...digital records，选项对应明确"
+    },
+    {
+      "questionId": "q-14a4a443-89d3-42c3-b033-ebec1988bb44",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "定位Daru研究焦点，observational data需与选项匹配，有轻微干扰"
+    },
+    {
+      "questionId": "q-ea3164a1-b37a-47f6-939b-5c4e7988513d",
+      "difficulty": 3,
+      "experienceFit": "偏难",
+      "note": "bias原因需从sampling aspects提取，vocab如bias/sampling有门槛，干扰项需排除"
+    },
+    {
+      "questionId": "q-984090a7-bd3d-4ae5-8812-8955e694178e",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "建议题定位明确，inform users/lead them to对应选项D，表述直接"
+    },
+    {
+      "questionId": "q-810b380f-fdc0-403d-994c-212589aa2713",
+      "difficulty": 1,
+      "experienceFit": "偏易",
+      "note": "it指代就近回溯，make it seem指代flat/apartment，指代链极短"
+    },
+    {
+      "questionId": "q-07d343ed-ff8b-4307-bc69-cb4e766880f6",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "定位2006年事件，locked out→call获取spare key，因果链直白"
+    },
+    {
+      "questionId": "q-e6e7e2f3-e0fe-4d0f-8895-b739941ef2d6",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "mini community library特征直接定位，borrow/return/replace描述清晰"
+    },
+    {
+      "questionId": "q-921e153b-1597-4f27-9573-ee21f68b1e22",
+      "difficulty": 2,
+      "experienceFit": "偏易",
+      "note": "why题需理解unbeatable price-point→experiment with titles，因果需一步推理"
+    },
+    {
+      "questionId": "q-56ac9988-8a02-4bdd-b0c8-813795f2523a",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "项目目标定位明确，make ice crystals fall as rain before成hailstones"
+    },
+    {
+      "questionId": "q-dc4d088d-1b56-4949-9740-45b9c0941617",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "反对者直接定位farmers in east-central Alberta，无干扰"
+    },
+    {
+      "questionId": "q-b86404b0-03f6-4c48-a727-9dc469de7e3e",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "例证题需理解龙卷风案例→质疑cloud seeding安全性，功能推理+抽象概括"
+    },
+    {
+      "questionId": "q-c2f3c41d-d889-40b3-ba31-4d3bf4d8c709",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "推断题需整合末段legal safety含义，理解监管缺失允许私人工程继续"
+    },
+    {
+      "questionId": "q-a1fe7bad-2556-4b78-abf8-fdca8adf43da",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "waited 15 minutes直接对应选项，信息提取无障碍"
+    },
+    {
+      "questionId": "q-ce892b3b-bab3-43f2-9e42-1a89a6af673d",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "mismatch定位明确，same brains vs reshaped world，但vocab mismatch需理解"
+    },
+    {
+      "questionId": "q-05c35192-464e-4a37-af08-cb8a468a7c4c",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "建议定位明确，thoughtful about information consumption对应选项"
+    },
+    {
+      "questionId": "q-fb1a8f36-23db-4993-8a21-34517b96f4a9",
+      "difficulty": 4,
+      "experienceFit": "符合经验",
+      "note": "主旨题需整合marshmallow test→成人每日决策→信息消费，跨段抽象概括难度大"
+    },
+    {
+      "questionId": "q-618ae534-88dc-41c6-ae31-be68208d3355",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "第一段现象直接定位，信息明确，选项干扰弱"
+    },
+    {
+      "questionId": "q-10ef7254-2648-4d92-82f0-f926e2bf93e5",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "需定位Jane Jacobs身份并理解其诉求，细节略有转述负担"
+    },
+    {
+      "questionId": "q-6a551a97-ee3b-4369-ab01-f80da24e0ba9",
+      "difficulty": 3,
+      "experienceFit": "偏难",
+      "note": "需从although转折句推断运动未成功，逻辑抽象度较高"
+    },
+    {
+      "questionId": "q-76a168d7-10bb-4e66-b656-debd42114857",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "全文主旨概括题，信息跨度大，需整合多段内容选标题"
+    },
+    {
+      "questionId": "q-c340abb7-a148-4a5b-82b9-43e5ee972908",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "写作手法识别题，需判断列举多地点为举例说明普遍性"
+    },
+    {
+      "questionId": "q-e530af8d-bc48-4942-8235-0c0ea79123d4",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "关键句含calcium carbonate已标注中文，定位后直接匹配"
+    },
+    {
+      "questionId": "q-1a29a9b8-8c0d-4c6e-8f0e-909938628523",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "举例论证功能题，需从例子回溯到论点，有一定抽象性"
+    },
+    {
+      "questionId": "q-e5f16786-bd32-41fe-a477-6b66b68bfb84",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "人物建议直接引用，定位清晰，选项匹配简单"
+    },
+    {
+      "questionId": "q-e00c0de0-1a48-45ef-bf94-45bb770abf0a",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "需从messed up my relationship with food推断作者曾有饮食问题，需推理"
+    },
+    {
+      "questionId": "q-c80fda85-3464-4747-a3b1-a50c95df62f6",
+      "difficulty": 3,
+      "experienceFit": "偏难",
+      "note": "反向推理题需理解disapprove含义并逐项回文验证，干扰项有迷惑性"
+    },
+    {
+      "questionId": "q-a8d4faa3-12e0-4e76-acb4-af17d69be255",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "概念定义后直接给出孩子职责，信息单一明确"
+    },
+    {
+      "questionId": "q-fec5c25b-e1e5-4029-99af-e17cbca5934b",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "作者态度句直接表达less restrictive效果好，定位简单"
+    },
+    {
+      "questionId": "q-e75fc512-0a03-4d06-b497-a8b6d12b69de",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "Eschewing虽生僻但后文对比线索充分，可从语境推出避免之意"
+    },
+    {
+      "questionId": "q-2c7b3a82-9cd4-4e96-a4a1-6435936bb4a8",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "原因句was born when直接给出背景，定位即得答案"
+    },
+    {
+      "questionId": "q-0d7799aa-1356-4824-9c5e-59c0179d35bd",
+      "difficulty": 4,
+      "experienceFit": "符合经验",
+      "note": "需综合多个修饰短语概括风格，选项间区分度低，抽象性强"
+    },
+    {
+      "questionId": "q-d0f598eb-49f4-4590-9b60-7000c5f1f23c",
+      "difficulty": 3,
+      "experienceFit": "偏易",
+      "note": "matrix planting贯穿全文，主题明确，但需排除干扰标题"
+    },
+    {
+      "questionId": "q-88b9d6e3-f6a6-4522-8d78-b93a1af5bd90",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "fix this直接呼应前文性别偏见问题，定位简单"
+    },
+    {
+      "questionId": "q-7995784d-fa6a-46ec-9112-59c69f145c9f",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "实验操作rate their attachment直接对应选项，无需推理"
+    },
+    {
+      "questionId": "q-c7d84bfe-69f3-4774-98a7-0bec504b2b9d",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "原因在于人会自动赋予性别，需理解assign a gender含义"
+    },
+    {
+      "questionId": "q-80223de1-902a-4d54-a0cb-b34ead4bbe0a",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "末段含silver lining和anthropomorphism等词汇，段意概括有干扰"
+    },
+    {
+      "questionId": "q-e07dd6fe-3312-4ddc-a010-0805fb87f38d",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "直接定位题，原文明确说I've learnt to read music，几乎无干扰"
+    },
+    {
+      "questionId": "q-28c968c0-dcaa-443d-bef5-c041ce242a83",
+      "difficulty": 3,
+      "experienceFit": "偏难",
+      "note": "需综合多句归纳为一个形容词，但选项区分度尚可，4偏高，3更合理"
+    },
+    {
+      "questionId": "q-5a37008a-2857-45ae-ac71-8a412d56f9ce",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "定位不难但需区分主语Titterton练什么vs pianist练什么，有小陷阱"
+    },
+    {
+      "questionId": "q-b34796d8-636c-4b44-8383-39997cef5af6",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "原因定位在引语中，需理解言外之意：沉浸音乐而忘翻页，有一定推理量"
+    },
+    {
+      "questionId": "q-deb03895-702a-4342-a4e1-35909228b6c7",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "两段信息量不大，选项回溯即可排除，整体难度中等偏易"
+    },
+    {
+      "questionId": "q-1775f6ec-31ec-483f-a3db-2982057a95cf",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "why题需理解eco-machine实验流程，sludge目的需跨句推理，有干扰项"
+    },
+    {
+      "questionId": "q-b984becd-b2d5-4582-8efa-e2135f5eacbf",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "举例作用题属常见题型，需从段落结构判断论点，中等难度"
+    },
+    {
+      "questionId": "q-f3ccf919-6f37-4b69-ae6a-8db2d1932059",
+      "difficulty": 4,
+      "experienceFit": "符合经验",
+      "note": "全文主旨提炼题，需贯通John从观察自然到应用的逻辑线，抽象度高"
+    },
+    {
+      "questionId": "q-2eea03ef-6aa0-45b1-bd09-2eb915158765",
+      "difficulty": 2,
+      "experienceFit": "偏难",
+      "note": "开头人物均为学生作文角色，需读懂写作课语境，定位后不难但有理解门槛"
+    },
+    {
+      "questionId": "q-c7091b15-1ff0-42dd-9e60-4daf470d863b",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "原文直接给出原因：writing simply didn't strike them as important，一步定位"
+    },
+    {
+      "questionId": "q-13279516-9cfa-45a2-b240-603ad7f497b2",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "上下文正面情感线索充分(diverse, touched my heart)，猜词路径清晰"
+    },
+    {
+      "questionId": "q-571d4e11-6514-495e-b201-554aa1d913c3",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "需从末段提炼写作意义的启示，有干扰项且需一定抽象概括，难度适中"
+    },
+    {
+      "questionId": "q-fee0bdd2-fce3-4551-ba42-e0d30fdb1b08",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "直接定位Damián Blasi研究内容，信号句明确，无干扰"
+    },
+    {
+      "questionId": "q-35b8d25f-c9f7-4895-91ed-2c086f04b159",
+      "difficulty": 1,
+      "experienceFit": "符合经验",
+      "note": "原文因果句直接对应，aligned导致难以发labiodentals，路径清晰"
+    },
+    {
+      "questionId": "q-c2fcbb92-89ff-4f31-ac12-e8ed180e9ac6",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "段落主旨需概括两句话：数据库证实全球语音变化+现今采集者仍无此音"
+    },
+    {
+      "questionId": "q-0472f4d2-ea2c-4c45-9d94-c0b4f93e96fd",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "引语较长但核心观点明确：语音集合非固定而是生物与文化交互产物"
+    },
+    {
+      "questionId": "q-1a311ec4-5956-46d9-9c90-d5b467162a4c",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "首段直接给出battling student misconceptions，定位容易但选项需对应"
+    },
+    {
+      "questionId": "q-364fa248-b908-4e41-a2eb-9d78e2398a76",
+      "difficulty": 2,
+      "experienceFit": "偏难",
+      "note": "目的句紧跟动作句，so that结构清晰，干扰项不算强，难度偏2"
+    },
+    {
+      "questionId": "q-87794426-e78d-4747-8872-3e531d48f695",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "unexpected对应But转折句，信号词明显，定位快"
+    },
+    {
+      "questionId": "q-a5256453-42f9-4f25-889b-ddb7d687e1a6",
+      "difficulty": 4,
+      "experienceFit": "符合经验",
+      "note": "需全文综合归纳教师特质，选项形容词辨析有干扰，抽象度高"
+    },
+    {
+      "questionId": "q-aa36161e-9e38-4abf-b5e2-419f1f673123",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "段落含实验设计细节，需归纳为methodology/design，有一定抽象"
+    },
+    {
+      "questionId": "q-e7221678-8e17-46a5-999d-9462ec1fb28f",
+      "difficulty": 2,
+      "experienceFit": "偏难",
+      "note": "上下文positive明确对应glowing，选项区分度高，词义猜测路径短"
+    },
+    {
+      "questionId": "q-e401a66e-b310-4895-922c-166b0ca9014d",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "需整合长负面+详细信息+dispassionate三个条件，信息跨度较大"
+    },
+    {
+      "questionId": "q-0487207e-aa91-4e80-ba32-07e5eae7dd86",
+      "difficulty": 4,
+      "experienceFit": "符合经验",
+      "note": "需从AI写假评论+人类识别力有限推出悲观结论，多步推理加句法复杂"
+    },
+    {
+      "questionId": "q-fdec5cac-74e3-46f3-8cc5-fd6c52e43dc4",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "optimization aims to句直接给出目标，定位明确但需理解carbon stored"
+    },
+    {
+      "questionId": "q-5faac09c-971f-4388-a920-590ef42f6bb3",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "initially designed to track animal movement，目的句直接可定位"
+    },
+    {
+      "questionId": "q-d9492d0b-34bf-4eeb-80c5-28786efe2f49",
+      "difficulty": 2,
+      "experienceFit": "符合经验",
+      "note": "helps scientists find genes associated with characteristics，定位清晰"
+    },
+    {
+      "questionId": "q-d5a7b121-f40d-4c3a-9075-296f7032f2b3",
+      "difficulty": 3,
+      "experienceFit": "符合经验",
+      "note": "需理解比喻equal footing和greater than sum of parts暗示跨学科融合价值"
+    }
+  ]
+}

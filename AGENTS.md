@@ -2,6 +2,14 @@
 
 This repo builds the local-first English question bank workbench.
 
+## Persistent Working Memory
+
+- Use `kratos-memory` as the project-scoped working memory for this repo.
+- At the start of non-trivial question-bank tasks, search relevant Kratos memory from this repo root, for example `kratos-memory search "reading difficulty reviewer"`.
+- Save durable workflow decisions, recurring pitfalls, reviewer invocation preferences, and stable product rules to Kratos at the end of a task.
+- Do not save API keys, secrets, full copyrighted passages, private student/person data, or large raw model outputs to Kratos.
+- Keep Kratos project scope anchored to `/Users/huangxuewei/Projects/english-question-bank`; do not mix it with `Local Vaults` memory.
+
 ## Product Posture
 
 - Treat this as a formal product project, not a note vault.

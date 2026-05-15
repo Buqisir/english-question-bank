@@ -2,10 +2,12 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-MODEL_DIR="${QWEN_MODEL_DIR:-$ROOT_DIR/models/qwen}"
+MODEL_DIR="${QWEN_MODEL_DIR:-$HOME/Models/local-llms/qwen}"
 MODEL_PATH="${QWEN_CHAT_MODEL_PATH:-$MODEL_DIR/Qwen3-8B-Q4_K_M.gguf}"
 PORT="${QWEN_CHAT_PORT:-8791}"
 HOST="${QWEN_HOST:-127.0.0.1}"
+
+echo "Note: local Qwen chat is legacy/manual for question-bank; default flows should use DeepSeek." >&2
 
 if [[ ! -f "$MODEL_PATH" ]]; then
   echo "Missing model: $MODEL_PATH" >&2

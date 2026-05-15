@@ -17,6 +17,7 @@ function parseArgs(argv) {
     thinkingMode: process.env.EVAL_THINKING === 'false' ? false : true,
     output: '',
     rerun: false,
+    verbose: false,
   }
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -42,6 +43,8 @@ function parseArgs(argv) {
       index += 1
     } else if (arg === '--rerun') {
       args.rerun = true
+    } else if (arg === '--verbose') {
+      args.verbose = true
     }
   }
 
@@ -181,6 +184,11 @@ function compareRecord(record, parsePayload) {
     }))
 }
 
+function actualQuestionFor(record, parsePayload) {
+  const questionNo = String(record.source?.questionNo || '')
+  return (parsePayload?.questions || []).find((question) => String(question.questionNo) === questionNo) || null
+}
+
 function summarize(results) {
   const failed = results.filter((result) => result.status === 'FAIL')
   const byField = {}
@@ -224,6 +232,7 @@ async function main() {
   const results = records.map((record) => {
     const groupId = record.source?.evalGroupId || ''
     const parsePayload = payloadByGroup.get(groupId)
+    const actualQuestion = actualQuestionFor(record, parsePayload)
     const mismatches = parsePayload
       ? compareRecord(record, parsePayload)
       : [{ field: 'group', expected: groupId, actual: '(missing saved parse)' }]
@@ -231,6 +240,7 @@ async function main() {
       candidateId: record.candidateId,
       source: record.source,
       status: mismatches.length === 0 ? 'PASS' : 'FAIL',
+      actual: actualQuestion ? actualLabels(actualQuestion) : null,
       mismatches,
     }
   })
@@ -249,6 +259,14 @@ async function main() {
 
   console.log(`[golden-check] ${outputPath}`)
   console.log(`[summary] ${JSON.stringify(report.summary)}`)
+  if (args.verbose) {
+    for (const result of results) {
+      const actual = result.actual || {}
+      console.log(
+        `[${result.status}] ${result.candidateId} surface=${actual.surfaceType || ''} move=${actual.answeringMove || ''} card=${actual.tCardId || ''} flags=${(actual.boundaryFlags || []).join('|')} review=${actual.reviewNeeded === true} score=${actual.finalScore ?? ''} label=${actual.finalLabel || ''}`,
+      )
+    }
+  }
   for (const result of results.filter((item) => item.status === 'FAIL').slice(0, 10)) {
     console.log(`[FAIL] ${result.candidateId} ${result.mismatches.map((mismatch) => `${mismatch.field}: expected=${JSON.stringify(mismatch.expected)} actual=${JSON.stringify(mismatch.actual)}`).join('; ')}`)
   }

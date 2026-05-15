@@ -54,12 +54,20 @@ import {
   verdictLabel,
 } from './domain/questionBank'
 import {
+  computeQuestionNumbers,
+} from './domain/paperLayout'
+import { buildSavePayload } from './paperAssembly/paperExportPayload'
+import { usePaperBlocks } from './paperAssembly/usePaperBlocks'
+import { PaperBlockCanvas } from './paperAssembly/PaperBlockCanvas'
+import { ConciergeDesk } from './concierge/ConciergeDesk'
+import { useConciergeDesk } from './concierge/useConciergeDesk'
+import { usePaperExports } from './paperAssembly/usePaperExports'
+import { computeCalibrationPreview, getReasonLabel, type CalibrationInput } from './services/difficultyCalibration'
+import {
   applyImportAnswerAlignment,
   createQuestionGroup,
   deleteImportFile as deleteImportFileRequest,
   deleteQuestionGroup as deleteQuestionGroupRequest,
-  exportDocx,
-  exportPdf,
   fetchImportBatches,
   fetchImportBundles,
   fetchImportFiles,
@@ -83,6 +91,7 @@ import {
   saveClozeParseResultRequest,
   saveSevenChoicesParseResultRequest,
   saveGrammarParseResultRequest,
+  saveQuestionDifficultyRating as saveQuestionDifficultyRatingRequest,
   saveReadingParseResult as saveReadingParseResultRequest,
   updatePaperSet as updatePaperSetRequest,
   scanImportDirectory,
@@ -136,6 +145,12 @@ type AiEnhancementTask = 'summary' | 'topicLabels' | 'answerParse'
 type AiEnhancementTaskState = {
   status: 'idle' | 'running' | 'done' | 'skipped' | 'error'
   message: string
+}
+
+type DifficultyRatingDraft = {
+  teacherDifficulty: string
+  reason: string
+  note: string
 }
 
 function createEntryQuestion(questionNo: string): EntryQuestionForm {
@@ -248,6 +263,102 @@ const importBundleReadinessLabel: Record<ImportBundle['readiness'], string> = {
   reference_only: '参考资料',
 }
 
+/**
+ * Lifecycle stage of an import bundle, derived from existing fields only.
+ * No new backend or schema. Used to group the bundle list into
+ * 需要你处理 / 处理中 / 已完成 sections.
+ *
+ * Rules:
+ *   - 'processing'  : bundle still has files awaiting parse (parsedCount < fileCount)
+ *                     OR per-bundle async work (draft generation / answer alignment) is running.
+ *   - 'actionable'  : parsed but the next teacher action is needed:
+ *                     · readiness in missing_analysis / missing_question (补解析)
+ *                     · OR draft has not been generated yet (草稿确认)
+ *                     · OR draft generation just errored
+ *   - 'done'        : everything parsed AND readiness is single_file_ready / paired_files_ready
+ *                     AND no per-bundle async work in flight.
+ *   - reference_only stays in 'done' (it's a reference, no further action expected).
+ */
+type ImportBundleStage = 'actionable' | 'processing' | 'done'
+
+type BundleNextStep = {
+  /** Stage bucket for grouping. */
+  stage: ImportBundleStage
+  /** Human-language status message shown on the row. */
+  statusLabel: string
+  /** Suggested primary action's button label, or null when no primary action applies. */
+  primaryActionLabel: string | null
+  /**
+   * Which existing handler should the primary action invoke?
+   *   - 'generate-draft'  → handleGenerateImportDraft
+   *   - 'add-analysis'    → prepareAnswerAnalysisImport
+   *   - 'align-answers'   → handleGenerateAnswerAlignment
+   *   - null              → no primary action (stage = processing or done)
+   */
+  primaryAction: 'generate-draft' | 'add-analysis' | 'align-answers' | null
+}
+
+function deriveBundleNextStep(
+  bundle: ImportBundle,
+  perBundleDraftStatus: 'idle' | 'generating' | 'generated' | 'error' | undefined,
+  perBundleAlignmentStatus: 'idle' | 'generating' | 'generated' | 'error' | undefined,
+): BundleNextStep {
+  const isDraftRunning = perBundleDraftStatus === 'generating'
+  const isAlignRunning = perBundleAlignmentStatus === 'generating'
+
+  if (bundle.fileCount === 0) {
+    return { stage: 'processing', statusLabel: '等待文件上传', primaryActionLabel: null, primaryAction: null }
+  }
+
+  if (bundle.parsedCount < bundle.fileCount) {
+    return {
+      stage: 'processing',
+      statusLabel: `AI 解析中（${bundle.parsedCount}/${bundle.fileCount}）`,
+      primaryActionLabel: null,
+      primaryAction: null,
+    }
+  }
+
+  if (isDraftRunning) {
+    return { stage: 'processing', statusLabel: '正在生成草稿…', primaryActionLabel: null, primaryAction: null }
+  }
+  if (isAlignRunning) {
+    return { stage: 'processing', statusLabel: '正在对齐答案…', primaryActionLabel: null, primaryAction: null }
+  }
+
+  if (bundle.readiness === 'missing_analysis') {
+    return { stage: 'actionable', statusLabel: '这份资料还需要补解析', primaryActionLabel: '补解析', primaryAction: 'add-analysis' }
+  }
+  if (bundle.readiness === 'missing_question') {
+    return { stage: 'actionable', statusLabel: '缺题目文件，先补题目', primaryActionLabel: '补题目', primaryAction: 'add-analysis' }
+  }
+
+  // Parsed and either single_file_ready / paired_files_ready / reference_only.
+  // Heuristic: if no draft has been generated yet, prompt 草稿确认.
+  if (perBundleDraftStatus === 'idle' || perBundleDraftStatus === undefined) {
+    if (bundle.readiness === 'reference_only') {
+      return { stage: 'done', statusLabel: '已收作参考资料', primaryActionLabel: null, primaryAction: null }
+    }
+    return {
+      stage: 'actionable',
+      statusLabel: '草稿待生成，等你确认',
+      primaryActionLabel:
+        bundle.roleCounts.answerAnalysis > 0 || bundle.roleCounts.questionWithAnalysis > 0
+          ? '生成带答案草稿'
+          : '生成拆题草稿',
+      primaryAction: 'generate-draft',
+    }
+  }
+  if (perBundleDraftStatus === 'error') {
+    return { stage: 'actionable', statusLabel: '草稿生成出错，可以再试', primaryActionLabel: '重试生成草稿', primaryAction: 'generate-draft' }
+  }
+  if (perBundleAlignmentStatus === 'error') {
+    return { stage: 'actionable', statusLabel: '答案对齐出错，可以再试', primaryActionLabel: '重试答案对齐', primaryAction: 'align-answers' }
+  }
+
+  return { stage: 'done', statusLabel: '草稿已生成，等你确认', primaryActionLabel: null, primaryAction: null }
+}
+
 const importBatchStatusLabel: Record<ImportBatch['status'], string> = {
   scanned: '已扫描',
   importing: '导入中',
@@ -260,7 +371,6 @@ const DEEPSEEK_MODELS = [
   { value: 'deepseek-v4-flash', label: 'deepseek-v4-flash（推荐）' },
   { value: 'deepseek-v4-pro', label: 'deepseek-v4-pro（高性能）' },
 ] as const
-const LOCAL_QWEN_MODEL = 'qwen3-8b-local'
 
 const DEEPSEEK_MODEL_ALIASES: Record<string, string> = {
   'deepseek-v4-pro': 'deepseek-v4-pro',
@@ -287,8 +397,8 @@ const importBatchItemStatusLabel: Record<ImportBatch['items'][number]['status'],
 
 const objectiveImportGroupTypes = new Set<GroupType>(['reading', 'seven_choices', 'cloze', 'grammar_cloze'])
 const aiEnhancementTasks: Array<{ key: AiEnhancementTask; label: string; description: string }> = [
-  { key: 'summary', label: '简介生成', description: '用本地 8B 生成并写回题组摘要' },
-  { key: 'topicLabels', label: '主题划分', description: '先做本地候选，必要时回退 8B' },
+  { key: 'summary', label: '简介生成', description: '用 DeepSeek Flash 非思考生成并写回题组摘要' },
+  { key: 'topicLabels', label: '主题划分', description: '用 DeepSeek Flash 非思考推荐话题标签' },
   { key: 'answerParse', label: 'AI答案解析', description: '生成解析并保存到本地题库' },
 ]
 const aiEnhancementTaskLabel: Record<AiEnhancementTask, string> = {
@@ -344,6 +454,22 @@ const difficultyProfileLevelLabel: Record<string, string> = {
   high: '高',
   very_high: '极高',
 }
+const teacherDifficultyLabel: Record<number, string> = {
+  1: '很低',
+  2: '偏低',
+  3: '中等',
+  4: '偏高',
+  5: '很高',
+}
+const difficultyOverrideReasonLabel: Record<string, string> = {
+  vocab: '高难词汇',
+  syntax: '长难句',
+  location: '定位难',
+  abstractness: '抽象度',
+  distractor: '干扰项',
+  topic: '话题负荷',
+  other: '其他',
+}
 const infoSpanLabel: Record<string, string> = {
   single_point: '单点',
   multi_point: '多点',
@@ -390,6 +516,55 @@ const paperWorkflowStatusHint: Record<PaperWorkflow['status'], string> = {
 function labelOf(labels: Record<string, string>, value?: string) {
   if (!value) return '待判'
   return labels[value] || value
+}
+
+function mapAiDifficultyScoreToFive(score?: number | null) {
+  if (typeof score !== 'number' || !Number.isInteger(score) || score < 1 || score > 10) return null
+  if (score <= 2) return 1
+  if (score <= 3) return 2
+  if (score <= 6) return 3
+  if (score <= 8) return 4
+  return 5
+}
+
+function getDisplayDifficulty(question: QuestionGroupDetail['questions'][number], aiDifficultyScore = question.aiDifficultyScore) {
+  return question.teacherDifficulty ?? mapAiDifficultyScoreToFive(aiDifficultyScore)
+}
+
+function getDifficultyDraftForQuestion(question: QuestionGroupDetail['questions'][number]): DifficultyRatingDraft {
+  return {
+    teacherDifficulty: question.teacherDifficulty ? String(question.teacherDifficulty) : '',
+    reason: question.difficultyOverrideReason || '',
+    note: question.difficultyOverrideNote || '',
+  }
+}
+
+function requiresDifficultyReason(
+  question: QuestionGroupDetail['questions'][number],
+  draft: DifficultyRatingDraft,
+  aiDifficultyScore = question.aiDifficultyScore,
+) {
+  const teacherDifficulty = Number(draft.teacherDifficulty)
+  if (!Number.isInteger(teacherDifficulty)) return false
+  const aiBucket = mapAiDifficultyScoreToFive(aiDifficultyScore)
+  return aiBucket !== null && aiBucket !== teacherDifficulty
+}
+
+function applyReadingAiDifficultyScores(
+  questions: QuestionGroupDetail['questions'],
+  parseResult: ReadingParseQuestionGroupResult,
+) {
+  const parseByNo = new Map(
+    (parseResult.questions || []).map((item) => [String(item.questionNo || '').trim(), item]),
+  )
+
+  return questions.map((question, index) => {
+    const parseItem = parseByNo.get(String(question.questionNo).trim()) || parseResult.questions?.[index]
+    const score = Number(parseItem?.difficultyProfile?.finalScore || 0)
+    return Number.isInteger(score) && score >= 1 && score <= 10
+      ? { ...question, aiDifficultyScore: score }
+      : question
+  })
 }
 
 function formatFileSize(bytes: number) {
@@ -760,7 +935,7 @@ function App() {
     {
       id: 'steward-welcome',
       role: 'assistant',
-      content: '你可以直接说：找浙江卷T6推断题，或找主题像AI购物但难度低一点的题。',
+      content: '你可以直接说：找和城市交通那题做法像的，或者找同样要抽象概括的题。',
     },
   ])
   const [difficulty, setDifficulty] = useState<'all' | Difficulty>('all')
@@ -768,7 +943,21 @@ function App() {
   const [groupType, setGroupType] = useState<'all' | GroupType>('all')
   const [selectedTag, setSelectedTag] = useState('全部')
   const [versionType, setVersionType] = useState<VersionType>('student')
+  const [paperExportStyle, setPaperExportStyle] = useState<'exam' | 'handout'>('exam')
+  const [homeMode, setHomeMode] = useState<'ai' | 'classic'>(() =>
+    localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai',
+  )
+  const [aiBasketDrawerOpen, setAiBasketDrawerOpen] = useState(false)
   const [basket, setBasket] = useState<BasketItem[]>([])
+  const paperBlocksHook = usePaperBlocks({
+    onRemoveQuestionGroup: (questionGroupId) => removeFromBasket(questionGroupId),
+  })
+  const {
+    paperBlocks,
+    selectedPaperBlockId,
+    openInsertionIndex,
+  } = paperBlocksHook
+  const [questionNumberStart, setQuestionNumberStart] = useState(1)
   const [isEntryOpen, setEntryOpen] = useState(false)
   const [isImportOpen, setImportOpen] = useState(false)
   const [entryMode, setEntryMode] = useState<'create' | 'edit'>('create')
@@ -780,6 +969,9 @@ function App() {
   const [selectedDetail, setSelectedDetail] = useState<QuestionGroupDetail | null>(null)
   const [detailStatus, setDetailStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [detailError, setDetailError] = useState('')
+  const [difficultyDrafts, setDifficultyDrafts] = useState<Record<string, DifficultyRatingDraft>>({})
+  const [difficultySaveStatus, setDifficultySaveStatus] = useState<Record<string, 'idle' | 'saving' | 'saved' | 'error'>>({})
+  const [difficultySaveErrors, setDifficultySaveErrors] = useState<Record<string, string>>({})
   const [verifyResult, setVerifyResult] = useState<VerifyQuestionGroupResult | null>(null)
   const [verifyStatus, setVerifyStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [verifyError, setVerifyError] = useState('')
@@ -813,6 +1005,10 @@ function App() {
   const [aiApiKey, setAiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
   const [aiModel, setAiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
   const [aiThinkingMode, setAiThinkingMode] = useState(() => localStorage.getItem('ai-thinking-mode') === 'on')
+  const conciergeDesk = useConciergeDesk({
+    questionGroups,
+    apiKey: aiApiKey,
+  })
   const aiRunIdRef = useRef(0)
   const [previewDetails, setPreviewDetails] = useState<Record<string, QuestionGroupDetail>>({})
   const [previewStatus, setPreviewStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
@@ -829,10 +1025,6 @@ function App() {
   const [paperWorkflowsError, setPaperWorkflowsError] = useState('')
   const [loadPaperStatus, setLoadPaperStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [loadPaperError, setLoadPaperError] = useState('')
-  const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
-  const [exportError, setExportError] = useState('')
-  const [pdfExportStatus, setPdfExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
-  const [pdfExportError, setPdfExportError] = useState('')
   const [importBundles, setImportBundles] = useState<ImportBundle[]>([])
   const [importBundlesStatus, setImportBundlesStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
   const [importBundlesError, setImportBundlesError] = useState('')
@@ -910,6 +1102,17 @@ function App() {
   const [answerWritebackResultByGroupId, setAnswerWritebackResultByGroupId] = useState<
     Record<string, ApplyAnswerAlignmentResult>
   >({})
+
+  // Paper export flow hook — manages DOCX/PDF/PrintHTML/PrintPDF state and actions
+  const paperExports = usePaperExports({
+    basket,
+    paperBlocks,
+    questionNumberStart,
+    paperExportStyle,
+    paperTitle,
+    versionType,
+    onDocxOrPdfExported: () => { refreshPaperWorkflows() },
+  })
 
   useEffect(() => {
     let ignore = false
@@ -1015,6 +1218,27 @@ function App() {
     }
   }, [])
 
+  // Close insertion menu on outside click or Escape
+  const closeInsertionMenu = paperBlocksHook.setOpenInsertionIndex
+  useEffect(() => {
+    if (openInsertionIndex === null) return
+    function handleClick(e: MouseEvent) {
+      const target = e.target as HTMLElement
+      if (!target.closest('.paper-insertion-seam')) {
+        closeInsertionMenu(null)
+      }
+    }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') closeInsertionMenu(null)
+    }
+    document.addEventListener('pointerdown', handleClick)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', handleClick)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [openInsertionIndex, closeInsertionMenu])
+
   useEffect(() => {
     setAiEnhancementStatus((currentStatus) => {
       if (aiEnhancementTargets.length === 0) return {}
@@ -1027,6 +1251,23 @@ function App() {
       return nextStatus
     })
   }, [aiEnhancementTargets])
+
+  useEffect(() => {
+    if (!selectedDetail) {
+      setDifficultyDrafts({})
+      setDifficultySaveStatus({})
+      setDifficultySaveErrors({})
+      return
+    }
+
+    setDifficultyDrafts(
+      Object.fromEntries(
+        selectedDetail.questions.map((question) => [question.id, getDifficultyDraftForQuestion(question)]),
+      ),
+    )
+    setDifficultySaveStatus({})
+    setDifficultySaveErrors({})
+  }, [selectedDetail?.id])
 
   const allTags = useMemo(
     () =>
@@ -1184,9 +1425,7 @@ function App() {
         {
           id: `steward-assistant-${Date.now()}`,
           role: 'assistant',
-          content: result.needsClarification
-            ? `${result.assistantMessage} 你可以直接回复“按技能 / 按主题 / 按难度 / 按来源”。`
-            : result.assistantMessage,
+          content: result.assistantMessage,
         },
       ])
       if (!result.needsClarification && result.search) {
@@ -1216,11 +1455,13 @@ function App() {
   function addGroupsToBasket(groups: QuestionGroupCard[]) {
     setSaveStatus('idle')
     setPreviewStatus('idle')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
     setBasket((items) => {
       const existingIds = new Set(items.map((item) => item.id))
       const nextItems = groups.filter((group) => !existingIds.has(group.id)).map((group) => createBasketItem(group))
+      if (nextItems.length > 0) {
+        paperBlocksHook.appendForNewItems(nextItems)
+      }
       return nextItems.length > 0 ? [...items, ...nextItems] : items
     })
   }
@@ -1253,8 +1494,7 @@ function App() {
     setPaperBuildStatus('saving')
     setPaperBuildError('')
     setSaveError('')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
 
     try {
       const paperSetInput = {
@@ -1274,6 +1514,7 @@ function App() {
         : await savePaperSet(paperSetInput)
 
       setBasket(nextBasket)
+      rebuildBlocksFromBasket(nextBasket)
       setPaperTitle(title)
       setVersionType('student')
       setLastSavedPaper(paperSet)
@@ -1404,6 +1645,61 @@ function App() {
     }
   }
 
+  function updateDifficultyDraft(questionId: string, patch: Partial<DifficultyRatingDraft>) {
+    setDifficultyDrafts((drafts) => {
+      const previous =
+        drafts[questionId] ||
+        ({
+        teacherDifficulty: '',
+        reason: '',
+        note: '',
+        } satisfies DifficultyRatingDraft)
+      return {
+        ...drafts,
+        [questionId]: {
+          ...previous,
+          ...patch,
+        },
+      }
+    })
+    setDifficultySaveStatus((status) => ({ ...status, [questionId]: 'idle' }))
+    setDifficultySaveErrors((errors) => ({ ...errors, [questionId]: '' }))
+  }
+
+  async function handleSaveQuestionDifficulty(
+    question: QuestionGroupDetail['questions'][number],
+    aiDifficultyScore = question.aiDifficultyScore,
+  ) {
+    const draft = difficultyDrafts[question.id] || getDifficultyDraftForQuestion(question)
+    const teacherDifficulty = draft.teacherDifficulty ? Number(draft.teacherDifficulty) : null
+    setDifficultySaveStatus((status) => ({ ...status, [question.id]: 'saving' }))
+    setDifficultySaveErrors((errors) => ({ ...errors, [question.id]: '' }))
+
+    try {
+      const result = await saveQuestionDifficultyRatingRequest(question.id, {
+        teacherDifficulty,
+        aiDifficultyScore,
+        difficultyOverrideReason: draft.reason,
+        difficultyOverrideNote: draft.note,
+      })
+      setSelectedDetail((detail) =>
+        detail
+          ? {
+              ...detail,
+              questions: detail.questions.map((item) => (item.id === question.id ? result.question : item)),
+            }
+          : detail,
+      )
+      setDifficultySaveStatus((status) => ({ ...status, [question.id]: 'saved' }))
+    } catch (error) {
+      setDifficultySaveStatus((status) => ({ ...status, [question.id]: 'error' }))
+      setDifficultySaveErrors((errors) => ({
+        ...errors,
+        [question.id]: error instanceof Error ? error.message : String(error),
+      }))
+    }
+  }
+
   async function openPreview() {
     setViewMode('preview')
     await loadPreviewForBasketItems(basket)
@@ -1416,24 +1712,53 @@ function App() {
   function removeFromBasket(id: string) {
     setSaveStatus('idle')
     setPreviewStatus('idle')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
+    paperBlocksHook.setOpenInsertionIndex(null)
     setBasket((items) => items.filter((item) => item.id !== id))
+    paperBlocksHook.removeQuestionGroupBlock(id)
   }
 
   function clearBasket() {
     setSaveStatus('idle')
     setPreviewStatus('idle')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
+    paperBlocksHook.setOpenInsertionIndex(null)
     setLastSavedPaper(null)
     setBasket([])
+    paperBlocksHook.resetBlocks()
+  }
+
+  function removePaperBlock(blockId: string) {
+    paperBlocksHook.removeBlock(blockId)
+  }
+
+  function movePaperBlock(blockId: string, direction: -1 | 1) {
+    paperBlocksHook.moveBlock(blockId, direction)
+  }
+
+  function updatePaperBlockTitle(blockId: string, title: string) {
+    paperBlocksHook.updateSectionHeaderTitle(blockId, title)
+  }
+
+  function insertSectionHeaderBefore(blockId: string) {
+    paperBlocksHook.insertSectionHeaderBefore(blockId)
+  }
+
+  function insertPageBreakAfter(blockId: string) {
+    paperBlocksHook.insertPageBreakAfter(blockId)
+  }
+
+  function insertBlockAt(index: number, type: 'section_header' | 'page_break') {
+    paperBlocksHook.insertBlockAt(index, type)
+  }
+
+  function rebuildBlocksFromBasket(items: BasketItem[]) {
+    paperBlocksHook.rebuildFromBasket(items)
   }
 
   function moveBasketItem(id: string, direction: -1 | 1) {
     setSaveStatus('idle')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
     setBasket((items) => {
       const index = items.findIndex((item) => item.id === id)
       const nextIndex = index + direction
@@ -1443,19 +1768,20 @@ function App() {
       nextItems.splice(nextIndex, 0, item)
       return nextItems
     })
+    // Sync paperBlocks: find by questionGroupId, not by assumed block id format
+    paperBlocksHook.syncQuestionGroupOrder(id, direction)
   }
 
   function updateScore(id: string, score: number) {
     setSaveStatus('idle')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
     setBasket((items) => items.map((item) => (item.id === id ? { ...item, score } : item)))
+    paperBlocksHook.syncQuestionGroupScore(id, score)
   }
 
   function updateBasketItem<K extends 'sectionTitle' | 'note'>(id: string, field: K, value: BasketItem[K]) {
     setSaveStatus('idle')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
     setBasket((items) => items.map((item) => (item.id === id ? { ...item, [field]: value } : item)))
   }
 
@@ -2025,7 +2351,7 @@ function App() {
       if (selectedTasks.includes('summary')) {
         updateAiEnhancementTaskStatus(target.id, 'summary', { status: 'running', message: '正在生成简介' })
         try {
-          const result = await generateQuestionGroupSummaryRequest(detail.id, '', LOCAL_QWEN_MODEL, false)
+          const result = await generateQuestionGroupSummaryRequest(detail.id, key, DEFAULT_AI_MODEL, false)
           updateAiEnhancedQuestionGroup(result.questionGroup)
           updateAiEnhancementTaskStatus(target.id, 'summary', {
             status: 'done',
@@ -2042,7 +2368,7 @@ function App() {
       if (selectedTasks.includes('topicLabels')) {
         updateAiEnhancementTaskStatus(target.id, 'topicLabels', { status: 'running', message: '正在划分主题' })
         try {
-          const result = await generateTopicLabelsRequest(detail.id, '', LOCAL_QWEN_MODEL, false)
+          const result = await generateTopicLabelsRequest(detail.id, key, DEFAULT_AI_MODEL, false)
           setAiEnhancementTopicCandidates((candidates) => ({
             ...candidates,
             [target.id]: result.topicLabels,
@@ -2160,6 +2486,7 @@ function App() {
       await deleteQuestionGroupRequest(id)
       setQuestionGroups((groups) => groups.filter((g) => g.id !== id))
       setBasket((items) => items.filter((item) => item.id !== id))
+      paperBlocksHook.removeQuestionGroupBlock(id)
       await refreshPaperWorkflows()
     } catch {
       // silently ignore
@@ -2349,6 +2676,7 @@ function App() {
               ...(saved.questionGroup ?? {}),
               readingParseResult: saved.readingParseResult,
               readingVerifyResult: saved.verifyResult,
+              questions: applyReadingAiDifficultyScores(detail.questions, saved.readingParseResult),
               passage: {
                 ...detail.passage,
                 summary: saved.questionGroup?.summary ?? detail.passage.summary,
@@ -2462,7 +2790,7 @@ function App() {
     setTopicLabelBindError('')
 
     try {
-      const result = await generateTopicLabelsRequest(selectedDetail.id, '', LOCAL_QWEN_MODEL, false)
+      const result = await generateTopicLabelsRequest(selectedDetail.id, key, DEFAULT_AI_MODEL, false)
       setTopicLabelTrace(result)
       setTopicLabelRecommendations(result.topicLabels)
       setSelectedTopicLabelValues(result.topicLabels.map((topicLabel) => topicLabel.label))
@@ -2661,8 +2989,7 @@ function App() {
     setPaperBuildError('')
     setPaperBuildResult(null)
     setSaveError('')
-    setExportStatus('idle')
-    setPdfExportStatus('idle')
+    paperExports.resetExportStatuses()
 
     if (nextBasket.length === 0) {
       setPaperBuildStatus('error')
@@ -2688,6 +3015,7 @@ function App() {
         : await savePaperSet(paperSetInput)
 
       setBasket(nextBasket)
+      rebuildBlocksFromBasket(nextBasket)
       setPaperTitle(title)
       setVersionType('student')
       setLastSavedPaper(paperSet)
@@ -2713,15 +3041,7 @@ function App() {
     setSaveError('')
 
     try {
-      const paperSetInput = {
-        title: paperTitle.trim() || '未命名题集',
-        items: basket.map((item) => ({
-          questionGroupId: item.id,
-          score: item.score,
-          sectionTitle: item.sectionTitle,
-          note: item.note,
-        })),
-      }
+      const paperSetInput = buildSavePayload({ basket, paperBlocks, questionNumberStart, paperExportStyle, paperTitle, versionType })
 
       const paperSet = lastSavedPaper
         ? await updatePaperSetRequest(lastSavedPaper.id, paperSetInput)
@@ -2755,80 +3075,26 @@ function App() {
         )
 
       setBasket(loadedBasket)
+      if (paperSet.layout) {
+        paperBlocksHook.setBlocks(paperSet.layout.blocks)
+        setQuestionNumberStart(paperSet.layout.questionNumberStart || 1)
+        setPaperExportStyle(paperSet.layout.printStyle || 'exam')
+      } else {
+        rebuildBlocksFromBasket(loadedBasket)
+      }
+      if (paperSet.layoutWarnings && paperSet.layoutWarnings.length > 0) {
+        setLoadPaperError(`布局提示：${paperSet.layoutWarnings.join('；')}`)
+      }
       setPaperTitle(paperSet.title)
       setLastSavedPaper(paperSet)
       setSaveStatus('saved')
-      setExportStatus('idle')
-      setPdfExportStatus('idle')
+      paperExports.resetExportStatuses()
       setPreviewStatus('idle')
       setViewMode('list')
       setLoadPaperStatus('loaded')
     } catch (error) {
       setLoadPaperStatus('error')
       setLoadPaperError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function handleExportDocx() {
-    if (basket.length === 0) return
-
-    setExportStatus('exporting')
-    setExportError('')
-
-    try {
-      const result = await exportDocx({
-        title: paperTitle.trim() || '未命名题集',
-        versionType,
-        items: basket.map((item) => ({
-          questionGroupId: item.id,
-          score: item.score,
-          sectionTitle: item.sectionTitle,
-          note: item.note,
-        })),
-      })
-      downloadExportResult(result)
-      setExportStatus('exported')
-      await refreshPaperWorkflows()
-    } catch (error) {
-      setExportStatus('error')
-      setExportError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  function downloadExportResult(result: { blob: Blob; fileName: string }) {
-    const url = URL.createObjectURL(result.blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = result.fileName
-    document.body.appendChild(link)
-    link.click()
-    link.remove()
-    URL.revokeObjectURL(url)
-  }
-
-  async function handleExportPdf() {
-    if (basket.length === 0) return
-
-    setPdfExportStatus('exporting')
-    setPdfExportError('')
-
-    try {
-      const result = await exportPdf({
-        title: paperTitle.trim() || '未命名题集',
-        versionType,
-        items: basket.map((item) => ({
-          questionGroupId: item.id,
-          score: item.score,
-          sectionTitle: item.sectionTitle,
-          note: item.note,
-        })),
-      })
-      downloadExportResult(result)
-      setPdfExportStatus('exported')
-      await refreshPaperWorkflows()
-    } catch (error) {
-      setPdfExportStatus('error')
-      setPdfExportError(error instanceof Error ? error.message : String(error))
     }
   }
 
@@ -2918,57 +3184,78 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell home-mode-${homeMode}`}>
       <header className="topbar">
         <div>
           <p className="eyebrow">Local-first English Question Bank</p>
           <h1>英语题库工作台</h1>
         </div>
         <div className="topbar-actions">
-          <span className={`data-status ${dataStatus}`}>
-            {dataStatus === 'loading' ? '连接本地库' : dataStatus === 'sqlite' ? 'SQLite 已连接' : '样例数据'}
-          </span>
-          <span className="topbar-ai-group">
-            <Sparkles size={16} />
-            <input
-              className="ai-key-input"
-              type="password"
-              value={aiApiKey}
-              placeholder="DeepSeek Key"
-              onChange={(event) => setAiApiKey(event.target.value)}
-            />
-            <select
-              className="ai-model-select"
-              value={aiModel}
-              onChange={(event) => setAiModel(normalizeAiModel(event.target.value))}
-            >
-              {!DEEPSEEK_MODELS.some((option) => option.value === aiModel) && <option value={aiModel}>{aiModel}</option>}
-              {DEEPSEEK_MODELS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <label className="topbar-thinking-toggle">
+          {homeMode === 'classic' && (
+            <span className={`data-status ${dataStatus}`}>
+              {dataStatus === 'loading' ? '连接本地库' : dataStatus === 'sqlite' ? 'SQLite 已连接' : '样例数据'}
+            </span>
+          )}
+          {homeMode === 'classic' && (
+            <span className="topbar-ai-group">
+              <Sparkles size={16} />
               <input
-                type="checkbox"
-                checked={aiThinkingMode}
-                onChange={(event) => setAiThinkingMode(event.target.checked)}
+                className="ai-key-input"
+                type="password"
+                value={aiApiKey}
+                placeholder="DeepSeek Key"
+                onChange={(event) => setAiApiKey(event.target.value)}
               />
-              <span>推理模式</span>
-            </label>
-          </span>
-          <button className="ghost-button" type="button" onClick={() => setViewMode('workflow')}>
-            <ClipboardList size={18} />
-            闭环面板
-          </button>
+              <select
+                className="ai-model-select"
+                value={aiModel}
+                onChange={(event) => setAiModel(normalizeAiModel(event.target.value))}
+              >
+                {!DEEPSEEK_MODELS.some((option) => option.value === aiModel) && <option value={aiModel}>{aiModel}</option>}
+                {DEEPSEEK_MODELS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <label className="topbar-thinking-toggle">
+                <input
+                  type="checkbox"
+                  checked={aiThinkingMode}
+                  onChange={(event) => setAiThinkingMode(event.target.checked)}
+                />
+                <span>推理模式</span>
+              </label>
+            </span>
+          )}
+          {homeMode === 'classic' && (
+            <button className="ghost-button" type="button" onClick={() => setViewMode('workflow')}>
+              <ClipboardList size={18} />
+              闭环面板
+            </button>
+          )}
           <button className="ghost-button" type="button" onClick={openImportPanel}>
             <FileText size={18} />
             导入资料
           </button>
+          <button
+            className="home-mode-toggle"
+            type="button"
+            onClick={() => {
+              const next = homeMode === 'ai' ? 'classic' : 'ai'
+              setHomeMode(next)
+              localStorage.setItem('home-mode', next)
+              setViewMode('list')
+            }}
+            aria-label={homeMode === 'ai' ? '切换到经典模式' : '切换到 AI 模式'}
+            title={homeMode === 'ai' ? '切到经典模式（关键词 + 筛选）' : '切到 AI 模式（自然语言取题台）'}
+          >
+            {homeMode === 'ai' ? '经典模式' : 'AI 模式'}
+          </button>
         </div>
       </header>
 
+      {homeMode === 'classic' && (
       <section className="filter-bar" aria-label="筛选">
         <div className="filter-bar-row">
           <label className="filter-bar-field">
@@ -3028,6 +3315,7 @@ function App() {
 
         </div>
       </section>
+      )}
 
       <main className="workbench" aria-label="英语题库工作台">
         <section className="library-panel" aria-label="题库">
@@ -3320,6 +3608,18 @@ function App() {
               )}
             </div>
           ) : viewMode === 'list' ? (
+            homeMode === 'ai' ? (
+              <ConciergeDesk
+                intent={conciergeDesk.intent}
+                onIntentChange={conciergeDesk.setIntent}
+                onSubmit={() => { void conciergeDesk.submit() }}
+                state={conciergeDesk.state}
+                basketIds={new Set(basket.map((item) => item.id))}
+                onPreview={(group) => openDetail(group.id)}
+                onAdd={(group) => addToBasket(group)}
+                onSimilar={(group) => { void conciergeDesk.triggerSimilar(group) }}
+              />
+            ) : (
                 <div className="group-list">
                   {filteredGroups.map((group) => (
                     <article className="group-card" key={group.id}>
@@ -3388,6 +3688,7 @@ function App() {
                 </article>
               ))}
             </div>
+            )
           ) : viewMode === 'detail' ? (
             <div className="detail-view">
               <button className="back-button" type="button" onClick={backToList}>
@@ -3570,7 +3871,7 @@ function App() {
                     {topicLabelBindStatus === 'error' && <p className="form-error">{topicLabelBindError}</p>}
                     {topicLabelTrace && (
                       <p className="ai-meta">
-                        Provider: {topicLabelTrace.provider ?? 'qwen-local'} · 模型: {topicLabelTrace.model || LOCAL_QWEN_MODEL} ·
+                        Provider: {topicLabelTrace.provider ?? 'deepseek'} · 模型: {topicLabelTrace.model || DEFAULT_AI_MODEL} ·
                         推理模式: {topicLabelTrace.thinkingMode ? '开启' : '关闭'} · key 来源:{' '}
                         {topicLabelTrace.keySource === 'local'
                           ? '本地模型'
@@ -3817,6 +4118,249 @@ function App() {
                       <span>Questions</span>
                       <h3>小题与答案对比</h3>
                     </div>
+
+                    {/* Difficulty Review Queue + Stats */}
+                    {(() => {
+                      const reviewItems = selectedDetail.questions.map((q) => {
+                        const qNo = String(q.questionNo).trim()
+                        const rpi = readingParseByQuestionNo.get(qNo)
+                        const sp = rpi?.surfaceQuestion
+                        const sd = rpi?.synonymDifficulty
+                        const dp = rpi?.difficultyProfile
+                        const mBlockers = dp?.mainBlockers ?? []
+                        const effAiScore = q.aiDifficultyScore ?? dp?.finalScore ?? null
+                        const bucket = mapAiDifficultyScoreToFive(effAiScore)
+                        const calInput: CalibrationInput = {
+                          aiDifficultyScore: effAiScore,
+                          deepseekMappedDifficulty: bucket,
+                          surfaceType: sp?.type,
+                          answeringMove: sp?.answeringMove,
+                          tCardId: sd?.cardId,
+                          mainBlockers: mBlockers.length > 0 ? mBlockers : undefined,
+                          stem: q.stem,
+                        }
+                        const preview = computeCalibrationPreview(calInput)
+                        return { question: q, preview, bucket }
+                      })
+
+                      const totalQuestions = reviewItems.length
+                      const confirmedCount = reviewItems.filter((r) => r.question.teacherDifficulty != null).length
+                      const calibrationChangedCount = reviewItems.filter((r) => r.preview && r.preview.calibratedScore !== r.preview.rawScore).length
+                      const highCeilingCount = reviewItems.filter((r) => r.preview?.watchFlags.some((f) => f.code === 'high_ceiling_watch')).length
+                      const t10LowCount = reviewItems.filter((r) => r.preview?.watchFlags.some((f) => f.code === 't10_possible_overestimate')).length
+
+                      // Most common reason
+                      const reasonCounts = new Map<string, number>()
+                      for (const r of reviewItems) {
+                        for (const code of r.preview?.reasons ?? []) {
+                          reasonCounts.set(code, (reasonCounts.get(code) || 0) + 1)
+                        }
+                      }
+                      let topReason = ''
+                      let topReasonCount = 0
+                      for (const [code, count] of reasonCounts) {
+                        if (count > topReasonCount) { topReason = code; topReasonCount = count }
+                      }
+
+                      // Queue: questions needing review
+                      const needsReview = reviewItems.filter((r) => {
+                        if (r.question.teacherDifficulty == null) return true
+                        if (r.preview && r.preview.calibratedScore !== r.preview.rawScore) return true
+                        if (r.preview?.watchFlags.some((f) => f.code === 'high_ceiling_watch')) return true
+                        if (r.preview?.watchFlags.some((f) => f.code === 't10_possible_overestimate')) return true
+                        return false
+                      })
+                      const pendingCount = needsReview.length
+
+                      return (
+                        <div className="difficulty-review-panel">
+                          <div className="difficulty-review-stats">
+                            <span><strong>{totalQuestions}</strong> 总题</span>
+                            <span><strong>{confirmedCount}</strong> 已确认</span>
+                            <span><strong>{pendingCount}</strong> 待复核</span>
+                            <span><strong>{calibrationChangedCount}</strong> 校正调整</span>
+                            {highCeilingCount > 0 && <span className="watch"><strong>{highCeilingCount}</strong> 高天花板</span>}
+                            {t10LowCount > 0 && <span className="watch"><strong>{t10LowCount}</strong> T10低置信</span>}
+                            {topReason && <span className="reason">常见: {getReasonLabel(topReason as any)} ({topReasonCount})</span>}
+                          </div>
+                          {needsReview.length > 0 && (
+                            <details className="difficulty-review-queue">
+                              <summary>难度复核队列 ({needsReview.length} 题待处理)</summary>
+                              <div className="difficulty-review-queue-list">
+                                {needsReview.map((item) => {
+                                  const isHighCeiling = item.preview?.watchFlags.some((f) => f.code === 'high_ceiling_watch')
+                                  const isT10 = item.preview?.watchFlags.some((f) => f.code === 't10_possible_overestimate')
+                                  return (
+                                    <a
+                                      className={`difficulty-review-queue-item${isHighCeiling ? ' high-ceiling' : ''}${isT10 ? ' t10-low' : ''}`}
+                                      href={`#question-${item.question.id}`}
+                                      key={`review-q-${item.question.id}`}
+                                    >
+                                      <span className="review-q-no">Q{item.question.questionNo}</span>
+                                      <span className="review-q-stem">{compactPreview(item.question.stem, 48)}</span>
+                                      <span className="review-q-scores">
+                                        AI {item.bucket ?? '?'}
+                                        {item.preview && item.preview.calibratedScore !== item.preview.rawScore
+                                          ? ` → 校正 ${item.preview.calibratedScore}`
+                                          : ''}
+                                        {item.question.teacherDifficulty ? ` · 教师 ${item.question.teacherDifficulty}` : ''}
+                                      </span>
+                                      {item.preview && item.preview.reasons.length > 0 && (
+                                        <span className="review-q-reasons">
+                                          {item.preview.reasons.slice(0, 3).map((c) => getReasonLabel(c as any)).join('、')}
+                                        </span>
+                                      )}
+                                      {isHighCeiling && <span className="review-q-flag high-ceiling">高天花板</span>}
+                                      {isT10 && <span className="review-q-flag t10">T10低置信</span>}
+                                    </a>
+                                  )
+                                })}
+                              </div>
+                            </details>
+                          )}
+                        </div>
+                      )
+                    })()}
+
+                    {/* Difficulty Calibration Report */}
+                    {(() => {
+                      const reportItems = selectedDetail.questions.map((q) => {
+                        const qNo = String(q.questionNo).trim()
+                        const rpi = readingParseByQuestionNo.get(qNo)
+                        const sp = rpi?.surfaceQuestion
+                        const sd = rpi?.synonymDifficulty
+                        const dp = rpi?.difficultyProfile
+                        const mBlockers = dp?.mainBlockers ?? []
+                        const effAiScore = q.aiDifficultyScore ?? dp?.finalScore ?? null
+                        const bucket = mapAiDifficultyScoreToFive(effAiScore)
+                        const preview = computeCalibrationPreview({
+                          aiDifficultyScore: effAiScore,
+                          deepseekMappedDifficulty: bucket,
+                          surfaceType: sp?.type,
+                          answeringMove: sp?.answeringMove,
+                          tCardId: sd?.cardId,
+                          mainBlockers: mBlockers.length > 0 ? mBlockers : undefined,
+                          stem: q.stem,
+                        })
+                        return { question: q, bucket, preview, blockers: mBlockers }
+                      })
+
+                      const total = reportItems.length
+                      // Distributions
+                      const aiBucketDist = [1, 2, 3, 4, 5].map((s) => ({ score: s, count: reportItems.filter((r) => r.bucket === s).length }))
+                      const teacherDist = [1, 2, 3, 4, 5].map((s) => ({ score: s, count: reportItems.filter((r) => r.question.teacherDifficulty === s).length }))
+                      const calDist = [1, 2, 3, 4, 5].map((s) => ({ score: s, count: reportItems.filter((r) => r.preview?.calibratedScore === s).length }))
+                      const teacherConfirmedCount = reportItems.filter((r) => r.question.teacherDifficulty != null).length
+
+                      // AI vs teacher comparison
+                      const compared = reportItems.filter((r) => r.question.teacherDifficulty != null && r.bucket != null)
+                      const exactCount = compared.filter((r) => r.bucket === r.question.teacherDifficulty).length
+                      const aiLowerCount = compared.filter((r) => r.bucket! < r.question.teacherDifficulty!).length
+                      const aiHigherCount = compared.filter((r) => r.bucket! > r.question.teacherDifficulty!).length
+                      const gapTwoCount = compared.filter((r) => Math.abs(r.bucket! - r.question.teacherDifficulty!) >= 2).length
+
+                      // Top blockers/reasons
+                      const reasonCounts = new Map<string, number>()
+                      const blockerCounts = new Map<string, number>()
+                      for (const r of reportItems) {
+                        for (const code of r.preview?.reasons ?? []) reasonCounts.set(code, (reasonCounts.get(code) || 0) + 1)
+                        for (const b of r.blockers) blockerCounts.set(b, (blockerCounts.get(b) || 0) + 1)
+                      }
+                      const topReasons = [...reasonCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5)
+                      const topBlockers = [...blockerCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5)
+
+                      // Watch list
+                      const watchList = reportItems.filter((r) => {
+                        if (r.preview && r.preview.calibratedScore !== r.preview.rawScore) return true
+                        if (r.preview?.watchFlags.some((f) => f.code === 'high_ceiling_watch')) return true
+                        if (r.preview?.watchFlags.some((f) => f.code === 't10_possible_overestimate')) return true
+                        if (r.question.teacherDifficulty != null && r.bucket != null && Math.abs(r.bucket - r.question.teacherDifficulty) >= 2) return true
+                        return false
+                      })
+
+                      return (
+                        <details className="calibration-report">
+                          <summary>难度校正报告 · {total} 题 · 已确认 {teacherConfirmedCount}</summary>
+                          <div className="calibration-report-body">
+                            {/* Distributions */}
+                            <div className="calibration-report-section">
+                              <span className="calibration-report-label">分数分布</span>
+                              <table className="calibration-report-table">
+                                <thead>
+                                  <tr><th>档位</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+                                </thead>
+                                <tbody>
+                                  <tr><td>AI</td>{aiBucketDist.map((d) => <td key={`ai-${d.score}`}>{d.count || '-'}</td>)}</tr>
+                                  <tr><td>校正</td>{calDist.map((d) => <td key={`cal-${d.score}`}>{d.count || '-'}</td>)}</tr>
+                                  <tr><td>教师</td>{teacherConfirmedCount > 0 ? teacherDist.map((d) => <td key={`t-${d.score}`}>{d.count || '-'}</td>) : <td colSpan={5}>暂无老师确认样本</td>}</tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            {/* AI vs Teacher */}
+                            {compared.length > 0 && (
+                              <div className="calibration-report-section">
+                                <span className="calibration-report-label">AI vs 教师 ({compared.length} 题已对比)</span>
+                                <div className="calibration-report-chips">
+                                  <span>一致 <strong>{exactCount}</strong></span>
+                                  <span>AI偏低 <strong>{aiLowerCount}</strong></span>
+                                  <span>AI偏高 <strong>{aiHigherCount}</strong></span>
+                                  <span className={gapTwoCount > 0 ? 'warn' : ''}>差≥2 <strong>{gapTwoCount}</strong></span>
+                                </div>
+                              </div>
+                            )}
+                            {compared.length === 0 && (
+                              <div className="calibration-report-section">
+                                <span className="calibration-report-label">AI vs 教师</span>
+                                <span className="calibration-report-muted">暂无老师确认样本</span>
+                              </div>
+                            )}
+
+                            {/* Top reasons/blockers */}
+                            {(topReasons.length > 0 || topBlockers.length > 0) && (
+                              <div className="calibration-report-section">
+                                <span className="calibration-report-label">常见原因 / 阻断</span>
+                                <div className="calibration-report-chips">
+                                  {topReasons.map(([code, count]) => (
+                                    <span key={`r-${code}`}>{getReasonLabel(code as any)} <strong>{count}</strong></span>
+                                  ))}
+                                  {topBlockers.map(([b, count]) => (
+                                    <span key={`b-${b}`} className="blocker">{labelOf(mainBlockerLabel, b)} <strong>{count}</strong></span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Watch list */}
+                            {watchList.length > 0 && (
+                              <div className="calibration-report-section">
+                                <span className="calibration-report-label">关注列表 ({watchList.length})</span>
+                                <div className="calibration-report-watchlist">
+                                  {watchList.slice(0, 12).map((item) => (
+                                    <a className="calibration-report-watch-item" href={`#question-${item.question.id}`} key={`rw-${item.question.id}`}>
+                                      <strong>Q{item.question.questionNo}</strong>
+                                      <span>
+                                        AI {item.bucket ?? '?'}
+                                        {item.preview && item.preview.calibratedScore !== item.preview.rawScore ? ` → ${item.preview.calibratedScore}` : ''}
+                                        {item.question.teacherDifficulty != null ? ` · 教师 ${item.question.teacherDifficulty}` : ''}
+                                      </span>
+                                      {item.preview?.watchFlags.map((f) => (
+                                        <em key={`${item.question.id}-${f.code}`}>{f.code === 'high_ceiling_watch' ? '高天花板' : 'T10低置信'}</em>
+                                      ))}
+                                      {item.question.teacherDifficulty != null && item.bucket != null && Math.abs(item.bucket - item.question.teacherDifficulty) >= 2 && (
+                                        <em>差≥2</em>
+                                      )}
+                                    </a>
+                                  ))}
+                                  {watchList.length > 12 && <span className="calibration-report-muted">…还有 {watchList.length - 12} 题</span>}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </details>
+                      )
+                    })()}
+
                     <div className="question-list">
                         {selectedDetail.questions.map((question) => {
                         const questionNo = String(question.questionNo).trim()
@@ -3873,9 +4417,34 @@ function App() {
                               : '当前小题还没有答案，暂不能对比。'
                         const vocabBlockerWords = difficultyProfileItem?.vocabLoad?.blockerWords?.slice(0, 4) ?? []
                         const mainBlockers = difficultyProfileItem?.mainBlockers ?? []
+                        const effectiveAiDifficultyScore =
+                          question.aiDifficultyScore ?? difficultyProfileItem?.finalScore ?? null
+                        const difficultyDraft = difficultyDrafts[question.id] || getDifficultyDraftForQuestion(question)
+                        const displayDifficulty = getDisplayDifficulty(question, effectiveAiDifficultyScore)
+                        const aiDifficultyBucket = mapAiDifficultyScoreToFive(effectiveAiDifficultyScore)
+                        const difficultySource = question.teacherDifficulty
+                          ? '老师确认'
+                          : displayDifficulty
+                            ? 'AI建议'
+                            : ''
+                        const difficultyReasonRequired = requiresDifficultyReason(
+                          question,
+                          difficultyDraft,
+                          effectiveAiDifficultyScore,
+                        )
+                        const difficultyStatus = difficultySaveStatus[question.id] || 'idle'
+                        const questionCalibrationPreview = computeCalibrationPreview({
+                          aiDifficultyScore: effectiveAiDifficultyScore,
+                          deepseekMappedDifficulty: aiDifficultyBucket,
+                          surfaceType: surfaceQuestionItem?.type,
+                          answeringMove: surfaceQuestionItem?.answeringMove,
+                          tCardId: synonymDifficultyItem?.cardId,
+                          mainBlockers: mainBlockers.length > 0 ? mainBlockers : undefined,
+                          stem: question.stem,
+                        })
 
                         return (
-                          <article className="question-item" key={question.id}>
+                          <article className="question-item" id={`question-${question.id}`} key={question.id}>
                             <div className="question-topline">
                               <span>第 {question.questionNo} 题</span>
                               <span>{question.questionType}</span>
@@ -3905,6 +4474,133 @@ function App() {
                                 </div>
                               )}
 	                            </div>
+
+                              <div className="teacher-difficulty-card">
+                                <div className="teacher-difficulty-head">
+                                  <span>小题难度</span>
+                                  <strong>
+                                    {displayDifficulty
+                                      ? `${difficultySource} ${displayDifficulty} · ${teacherDifficultyLabel[displayDifficulty]}`
+                                      : '未评估'}
+                                  </strong>
+                                  <em>
+                                    AI {effectiveAiDifficultyScore ? `${effectiveAiDifficultyScore}/10` : '未评估'}
+                                    {aiDifficultyBucket ? ` → ${aiDifficultyBucket}档` : ''}
+                                  </em>
+                                </div>
+                                <div className="teacher-difficulty-controls" aria-label="老师确认难度">
+                                  {[1, 2, 3, 4, 5].map((level) => (
+                                    <button
+                                      className={difficultyDraft.teacherDifficulty === String(level) ? 'active' : ''}
+                                      key={`${question.id}-difficulty-${level}`}
+                                      type="button"
+                                      onClick={() => updateDifficultyDraft(question.id, { teacherDifficulty: String(level) })}
+                                    >
+                                      {level}
+                                    </button>
+                                  ))}
+                                  <button
+                                    className="ghost"
+                                    type="button"
+                                    onClick={() =>
+                                      updateDifficultyDraft(question.id, {
+                                        teacherDifficulty: '',
+                                        reason: '',
+                                        note: '',
+                                      })
+                                    }
+                                  >
+                                    清空
+                                  </button>
+                                  {aiDifficultyBucket && (
+                                    <button
+                                      className={`ghost${difficultyDraft.teacherDifficulty === String(aiDifficultyBucket) ? ' active' : ''}`}
+                                      type="button"
+                                      title={`设为AI建议 ${aiDifficultyBucket} 档`}
+                                      onClick={() => updateDifficultyDraft(question.id, { teacherDifficulty: String(aiDifficultyBucket) })}
+                                    >
+                                      同意AI
+                                    </button>
+                                  )}
+                                  {questionCalibrationPreview && questionCalibrationPreview.calibratedScore !== questionCalibrationPreview.rawScore && (
+                                    <button
+                                      className={`ghost${difficultyDraft.teacherDifficulty === String(questionCalibrationPreview.calibratedScore) ? ' active' : ''}`}
+                                      type="button"
+                                      title={`设为校正建议 ${questionCalibrationPreview.calibratedScore} 档`}
+                                      onClick={() => updateDifficultyDraft(question.id, { teacherDifficulty: String(questionCalibrationPreview.calibratedScore) })}
+                                    >
+                                      同意校正
+                                    </button>
+                                  )}
+                                </div>
+                                <div className="teacher-difficulty-meta">
+                                  <select
+                                    aria-label="难度偏差原因"
+                                    value={difficultyDraft.reason}
+                                    onChange={(event) => updateDifficultyDraft(question.id, { reason: event.target.value })}
+                                  >
+                                    <option value="">{difficultyReasonRequired ? '选择偏差原因' : '原因可选'}</option>
+                                    {Object.entries(difficultyOverrideReasonLabel).map(([value, label]) => (
+                                      <option key={value} value={value}>
+                                        {label}
+                                      </option>
+                                    ))}
+                                  </select>
+                                  <input
+                                    aria-label="难度备注"
+                                    placeholder="老师备注"
+                                    value={difficultyDraft.note}
+                                    onChange={(event) => updateDifficultyDraft(question.id, { note: event.target.value })}
+                                  />
+                                  <button
+                                    className="save-button"
+                                    disabled={difficultyStatus === 'saving'}
+                                    type="button"
+                                    onClick={() => handleSaveQuestionDifficulty(question, effectiveAiDifficultyScore)}
+                                  >
+                                    <Save size={16} />
+                                    {difficultyStatus === 'saving' ? '保存中' : '保存'}
+                                  </button>
+                                </div>
+                                {(difficultySaveErrors[question.id] || difficultyStatus === 'saved' || question.difficultyTaggedAt) && (
+                                  <p className={`teacher-difficulty-status ${difficultySaveErrors[question.id] ? 'error' : ''}`}>
+                                    {difficultySaveErrors[question.id] ||
+                                      (difficultyStatus === 'saved'
+                                        ? '已保存'
+                                        : question.difficultyTaggedAt
+                                          ? `已确认 · ${question.difficultyTaggedAt}`
+                                          : '')}
+                                  </p>
+                                )}
+                              </div>
+
+                              {(() => {
+                                const preview = questionCalibrationPreview
+                                if (!preview) return null
+                                const isT10Low = preview.watchFlags.some((f) => f.code === 't10_possible_overestimate')
+                                const isHighCeiling = preview.watchFlags.some((f) => f.code === 'high_ceiling_watch')
+                                return (
+                                  <div className={`calibration-preview-card${isT10Low ? ' low-confidence' : ''}`}>
+                                    <div className="calibration-preview-head">
+                                      <span>校正建议</span>
+                                      <strong>{preview.displayLabel}</strong>
+                                    </div>
+                                    {isHighCeiling && (
+                                      <p className="calibration-watch-flag high-ceiling">可能高天花板，需教师复核</p>
+                                    )}
+                                    {isT10Low && (
+                                      <p className="calibration-watch-flag t10-warning">抽象压缩样本不足，可能高估</p>
+                                    )}
+                                    {preview.reasons.length > 0 && (
+                                      <div className="calibration-reasons">
+                                        {preview.reasons.map((code) => (
+                                          <span key={`${question.id}-cal-${code}`}>{getReasonLabel(code)}</span>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
+                                )
+                              })()}
 
                               {showAi && (surfaceQuestionItem || difficultyProfileItem) && (
                                 <div className="reading-profile-card">
@@ -4324,169 +5020,44 @@ function App() {
                     </div>
                   </header>
 
-                  {basket.map((item, index) => {
-                    const detail = previewDetails[item.id]
-
-                    if (!detail) {
-                      return (
-                        <section className="paper-section" key={item.id}>
-                          <div className="paper-section-head">
-                            <span>{index + 1}</span>
-                            <div>
-                              <h4>{item.sectionTitle || item.title}</h4>
-                              <p>{compactGroupMeta(item.groupType, item.questionCount)}</p>
-                            </div>
-                          </div>
-                          <p className="detail-message">该题组详情还未载入。</p>
-                        </section>
-                      )
-                    }
-
-                    return (
-                      <section className="paper-section" key={detail.id}>
-                        <div className="paper-section-head">
-                          <span>{index + 1}</span>
-                          <div>
-                            <h4>{item.sectionTitle || detail.title}</h4>
-                            <p>{compactGroupMeta(detail.groupType, detail.questionCount)} · 每题 {item.score} 分</p>
-                          </div>
-                        </div>
-
-                        {versionType === 'teacher' && item.note && <p className="paper-instruction">讲评备注：{item.note}</p>}
-
-                        <div className="paper-passage">
-                          <h5>{detail.passage.title}</h5>
-                          <pre>{detail.passage.materialText || detail.passage.summary || '暂无完整原文。'}</pre>
-                        </div>
-
-                        <ol className="paper-question-list">
-                          {detail.questions.map((question) => (
-                            <li className="paper-question" key={question.id}>
-                              <p>{question.stem}</p>
-                              {question.options.length > 0 && (
-                                <div className={`paper-options${detail.groupType === 'cloze' ? ' paper-options-inline' : ''}`}>
-                                  {question.options.map((option) => (
-                                    <div key={option.id}>
-                                      <strong>{option.label}.</strong>
-                                      <span>{option.content}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-
-                              {versionType === 'teacher' && (
-                                <div className="teacher-answer">
-                                  <strong>答案：{question.answer || '待补'}</strong>
-                                  {detail.groupType === 'reading' && detail.readingParseResult?.questions ? (
-                                    (() => {
-                                      const aiQ = detail.readingParseResult.questions.find(
-                                        (q: {questionNo: string}) => String(q.questionNo) === String(question.questionNo)
-                                      )
-                                      if (aiQ?.explanation) {
-                                        return (
-                                          <div className="paper-ai-parse">
-                                            {aiQ.questionTranslation && <p className="ai-field">题目翻译：{aiQ.questionTranslation}</p>}
-                                            {aiQ.strategy && <p className="ai-field">题型策略：{aiQ.strategy}</p>}
-                                            <p className="ai-field"><strong>AI 解析：</strong>{aiQ.explanation}</p>
-                                            {aiQ.synonymMappings && aiQ.synonymMappings.length > 0 && (
-                                              <div className="ai-field">
-                                                <strong>同义替换：</strong>
-                                                {aiQ.synonymMappings!.map((m: {text: string, replacement: string}, i: number) => (
-                                                  <span key={i} className="ai-synonym">{m.text} = {m.replacement}</span>
-                                                ))}
-                                              </div>
-                                            )}
-                                          </div>
-                                        )
-                                      }
-                                      return <p>解析：{question.explanation || question.note || '待补'}</p>
-                                    })()
-                                  ) : detail.groupType === 'cloze' && detail.clozeParseResult?.questions ? (
-                                    (() => {
-                                      const aiQ = detail.clozeParseResult.questions.find(
-                                        (q: {questionNo: string}) => String(q.questionNo) === String(question.questionNo)
-                                      )
-                                      if (aiQ?.analysis) {
-                                        return (
-                                          <div className="paper-ai-parse">
-                                            <p className="ai-field">
-                                              <strong>AI 答案：</strong>
-                                              {aiQ.answer || '未返回'}
-                                              {aiQ.answerText ? ` · ${aiQ.answerText}` : ''}
-                                              {aiQ.answerMeaning ? `（${aiQ.answerMeaning}）` : ''}
-                                            </p>
-                                            <p className="ai-field"><strong>AI 解析：</strong>{aiQ.analysis}</p>
-                                            {aiQ.distractorAnalysis && aiQ.distractorAnalysis.length > 0 && (
-                                              <div className="ai-field">
-                                                <strong>干扰项：</strong>
-                                                {aiQ.distractorAnalysis.map((item, i: number) => (
-                                                  <span key={`${item.option}-${i}`} className="ai-synonym">
-                                                    {item.option}. {item.text}：{item.reason}
-                                                  </span>
-                                                ))}
-                                              </div>
-                                            )}
-                                          </div>
-                                        )
-                                      }
-                                      return <p>解析：{question.explanation || question.note || '待补'}</p>
-                                    })()
-                                  ) : detail.groupType === 'seven_choices' && detail.sevenChoicesParseResult?.questions ? (
-                                    (() => {
-                                      const aiQ = detail.sevenChoicesParseResult.questions.find(
-                                        (q: {questionNo: string}) => String(q.questionNo) === String(question.questionNo)
-                                      )
-                                      if (aiQ?.analysis) {
-                                        return (
-                                          <div className="paper-ai-parse">
-                                            <p className="ai-field">
-                                              <strong>AI 答案：</strong>
-                                              {aiQ.answer || '未返回'}
-                                              {aiQ.optionText ? ` · ${aiQ.optionText}` : ''}
-                                            </p>
-                                            {aiQ.optionTranslation && <p className="ai-field"><strong>选项翻译：</strong>{aiQ.optionTranslation}</p>}
-                                            {aiQ.positionContext && <p className="ai-field"><strong>上下文位置：</strong>{aiQ.positionContext}</p>}
-                                            <p className="ai-field"><strong>AI 解析：</strong>{aiQ.analysis}</p>
-                                          </div>
-                                        )
-                                      }
-                                      return <p>解析：{question.explanation || question.note || '待补'}</p>
-                                    })()
-                                  ) : detail.groupType === 'grammar_cloze' && detail.grammarParseResult?.questions ? (
-                                    (() => {
-                                      const aiQ = detail.grammarParseResult.questions.find(
-                                        (q: {questionNo: string}) => String(q.questionNo) === String(question.questionNo)
-                                      )
-                                      if (aiQ?.analysis) {
-                                        return (
-                                          <div className="paper-ai-parse">
-                                            <p className="ai-field"><strong>AI 答案：</strong>{aiQ.answer || '未返回'}</p>
-                                            {aiQ.hintMeaning && <p className="ai-field"><strong>提示词意思：</strong>{aiQ.hintMeaning}</p>}
-                                            <p className="ai-field"><strong>AI 解析：</strong>{aiQ.analysis}</p>
-                                            {aiQ.sentenceTranslation && <p className="ai-field"><strong>挖空句翻译：</strong>{aiQ.sentenceTranslation}</p>}
-                                          </div>
-                                        )
-                                      }
-                                      return <p>解析：{question.explanation || question.note || '待补'}</p>
-                                    })()
-                                  ) : (
-                                    <p>解析：{question.explanation || question.note || '待补'}</p>
-                                  )}
-                                </div>
-                              )}
-                            </li>
-                          ))}
-                        </ol>
-                      </section>
-                    )
-                  })}
+                  <PaperBlockCanvas
+                    paperBlocks={paperBlocks}
+                    basket={basket}
+                    previewDetails={previewDetails}
+                    versionType={versionType}
+                    questionNumberStart={questionNumberStart}
+                    selectedPaperBlockId={selectedPaperBlockId}
+                    openInsertionIndex={openInsertionIndex}
+                    onSelectBlock={paperBlocksHook.setSelectedPaperBlockId}
+                    onToggleInsertionSeam={paperBlocksHook.setOpenInsertionIndex}
+                    onMoveBlock={movePaperBlock}
+                    onRemoveBlock={removePaperBlock}
+                    onInsertBlockAt={insertBlockAt}
+                    onInsertSectionHeaderBefore={insertSectionHeaderBefore}
+                    onInsertPageBreakAfter={insertPageBreakAfter}
+                  />
                 </article>
               )}
             </div>
           )}
         </section>
 
-        <aside className="basket-panel" aria-label="组题篮">
+        <aside
+          className={`basket-panel${homeMode === 'ai' ? ' basket-panel-drawer' : ''}${homeMode === 'ai' && aiBasketDrawerOpen ? ' open' : ''}`}
+          aria-label="组题篮"
+          aria-hidden={homeMode === 'ai' && !aiBasketDrawerOpen ? true : undefined}
+        >
+          {homeMode === 'ai' && (
+            <button
+              type="button"
+              className="basket-drawer-close"
+              onClick={() => setAiBasketDrawerOpen(false)}
+              aria-label="收起组题篮"
+            >
+              ×
+            </button>
+          )}
+          {homeMode === 'classic' && (
           <section className="steward-chat-panel" aria-label="题库管家">
             <div className="panel-heading steward-heading">
               <Sparkles size={18} />
@@ -4520,7 +5091,7 @@ function App() {
               <input
                 value={stewardChatInput}
                 onChange={(event) => setStewardChatInput(event.target.value)}
-                placeholder="比如：找浙江卷T6推断题"
+                placeholder="比如：找同样要抽象概括的题"
               />
               <button
                 className="steward-submit-button"
@@ -4532,6 +5103,7 @@ function App() {
               </button>
             </form>
           </section>
+          )}
 
           <div className="panel-heading">
             <ClipboardList size={18} />
@@ -4561,8 +5133,7 @@ function App() {
               onChange={(event) => {
                 setPaperTitle(event.target.value)
                 setSaveStatus('idle')
-                setExportStatus('idle')
-                setPdfExportStatus('idle')
+                paperExports.resetExportStatuses()
               }}
             />
           </label>
@@ -4573,8 +5144,7 @@ function App() {
               type="button"
               onClick={() => {
                 setVersionType('student')
-                setExportStatus('idle')
-                setPdfExportStatus('idle')
+                paperExports.resetExportStatuses()
               }}
             >
               学生版
@@ -4584,11 +5154,27 @@ function App() {
               type="button"
               onClick={() => {
                 setVersionType('teacher')
-                setExportStatus('idle')
-                setPdfExportStatus('idle')
+                paperExports.resetExportStatuses()
               }}
             >
               教师版
+            </button>
+          </div>
+
+          <div className="version-toggle" aria-label="导出样式">
+            <button
+              className={paperExportStyle === 'exam' ? 'active' : ''}
+              type="button"
+              onClick={() => setPaperExportStyle('exam')}
+            >
+              试卷版
+            </button>
+            <button
+              className={paperExportStyle === 'handout' ? 'active' : ''}
+              type="button"
+              onClick={() => setPaperExportStyle('handout')}
+            >
+              讲义版
             </button>
           </div>
 
@@ -4660,6 +5246,155 @@ function App() {
               ))
             )}
           </div>
+
+          {/* Paper Blocks Outline */}
+          <details className="paper-blocks-outline" open={paperBlocks.length > 0}>
+            <summary>题集大纲 ({paperBlocks.length} 块)</summary>
+            <div className="paper-blocks-toolbar">
+              <label className="paper-blocks-start-num">
+                起始题号
+                <input type="number" min="1" value={questionNumberStart} onChange={(e) => setQuestionNumberStart(Math.max(1, Number(e.target.value) || 1))} />
+              </label>
+              <button className="ghost-button" type="button" onClick={() => insertBlockAt(paperBlocks.length, 'section_header')}>+ 大题标题</button>
+              <button className="ghost-button" type="button" onClick={() => insertBlockAt(paperBlocks.length, 'page_break')}>+ 分页</button>
+            </div>
+            <div className="paper-blocks-list">
+              {(() => {
+                const numberRanges = computeQuestionNumbers(paperBlocks, questionNumberStart, (gid) => {
+                  const detail = previewDetails[gid]
+                  const item = basket.find((i) => i.id === gid)
+                  return detail?.questions.length ?? item?.questionCount ?? 0
+                })
+                return paperBlocks.map((block, blockIdx) => {
+                  const range = numberRanges[blockIdx]
+                  if (block.type === 'section_header') {
+                    return (
+                      <div className={`paper-block-item section_header`} key={block.id}>
+                        <input
+                          className="paper-block-title-input"
+                          value={block.title}
+                          onChange={(e) => updatePaperBlockTitle(block.id, e.target.value)}
+                          placeholder="大题标题"
+                        />
+                        <div className="paper-block-actions">
+                          <button type="button" onClick={() => movePaperBlock(block.id, -1)} aria-label="上移"><ArrowUp size={13} /></button>
+                          <button type="button" onClick={() => movePaperBlock(block.id, 1)} aria-label="下移"><ArrowDown size={13} /></button>
+                          <button type="button" onClick={() => removePaperBlock(block.id)} aria-label="删除"><Trash2 size={13} /></button>
+                        </div>
+                      </div>
+                    )
+                  }
+                  if (block.type === 'page_break') {
+                    return (
+                      <div className={`paper-block-item page_break`} key={block.id}>
+                        <span className="paper-block-label">分页</span>
+                        <div className="paper-block-actions">
+                          <button type="button" onClick={() => movePaperBlock(block.id, -1)} aria-label="上移"><ArrowUp size={13} /></button>
+                          <button type="button" onClick={() => movePaperBlock(block.id, 1)} aria-label="下移"><ArrowDown size={13} /></button>
+                          <button type="button" onClick={() => removePaperBlock(block.id)} aria-label="删除"><Trash2 size={13} /></button>
+                        </div>
+                      </div>
+                    )
+                  }
+                  // question_group
+                  const item = basket.find((i) => i.id === block.questionGroupId)
+                  const numLabel = range.startNum != null && range.endNum != null
+                    ? (range.startNum === range.endNum ? `${range.startNum}` : `${range.startNum}–${range.endNum}`)
+                    : '?'
+                  return (
+                    <div className={`paper-block-item question_group`} key={block.id}>
+                      {item ? (
+                        <div className="paper-block-group-info">
+                          <strong><span className="paper-block-num">{numLabel}</span> {item.sectionTitle || item.title}</strong>
+                          <span>{compactGroupMeta(item.groupType, item.questionCount)} · {block.score} 分/题</span>
+                        </div>
+                      ) : <span className="paper-block-label">题组未找到</span>}
+                      <div className="paper-block-actions">
+                        <button type="button" onClick={() => movePaperBlock(block.id, -1)} aria-label="上移"><ArrowUp size={13} /></button>
+                        <button type="button" onClick={() => movePaperBlock(block.id, 1)} aria-label="下移"><ArrowDown size={13} /></button>
+                        <button type="button" onClick={() => removePaperBlock(block.id)} aria-label="删除"><Trash2 size={13} /></button>
+                      </div>
+                    </div>
+                  )
+                })
+              })()}
+              {paperBlocks.length === 0 && <p className="empty-state">加入题组后自动生成大纲块。</p>}
+            </div>
+          </details>
+
+          {/* Block Settings Panel */}
+          {selectedPaperBlockId && (() => {
+            const selBlock = paperBlocks.find((b) => b.id === selectedPaperBlockId)
+            if (!selBlock) return null
+            if (selBlock.type === 'section_header') {
+              return (
+                <div className="block-settings-panel">
+                  <span className="block-settings-label">大题标题设置</span>
+                  <input
+                    className="block-settings-input"
+                    value={selBlock.title}
+                    onChange={(e) => updatePaperBlockTitle(selBlock.id, e.target.value)}
+                    placeholder="标题"
+                  />
+                  <div className="block-settings-actions">
+                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, -1)}>上移</button>
+                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, 1)}>下移</button>
+                    <button className="ghost-button" type="button" onClick={() => removePaperBlock(selBlock.id)}>删除</button>
+                  </div>
+                </div>
+              )
+            }
+            if (selBlock.type === 'page_break') {
+              return (
+                <div className="block-settings-panel">
+                  <span className="block-settings-label">分页设置</span>
+                  <div className="block-settings-actions">
+                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, -1)}>上移</button>
+                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, 1)}>下移</button>
+                    <button className="ghost-button" type="button" onClick={() => removePaperBlock(selBlock.id)}>删除</button>
+                  </div>
+                </div>
+              )
+            }
+            // question_group
+            const bItem = basket.find((i) => i.id === selBlock.questionGroupId)
+            const bDetail = previewDetails[selBlock.questionGroupId]
+            const qCount = bDetail?.questions.length ?? bItem?.questionCount ?? 0
+            const selectedRanges = computeQuestionNumbers(paperBlocks, questionNumberStart, (gid) => {
+              const detail = previewDetails[gid]
+              const item = basket.find((i) => i.id === gid)
+              return detail?.questions.length ?? item?.questionCount ?? 0
+            })
+            const selectedRange = selectedRanges.find((range) => range.blockId === selBlock.id)
+            const rangeStart = selectedRange?.startNum ?? questionNumberStart
+            const rangeEnd = selectedRange?.endNum ?? rangeStart + qCount - 1
+            return (
+              <div className="block-settings-panel">
+                <span className="block-settings-label">题组设置</span>
+                <div className="block-settings-meta">
+                  <strong>{bItem?.sectionTitle || bItem?.title || '题组'}</strong>
+                  <span>题号 {rangeStart}–{rangeEnd} · {qCount} 题</span>
+                </div>
+                <label className="block-settings-score">
+                  每题分值
+                  <input
+                    type="number"
+                    min="0.5"
+                    step="0.5"
+                    value={selBlock.score}
+                    onChange={(e) => updateScore(selBlock.questionGroupId, Number(e.target.value))}
+                  />
+                </label>
+                <div className="block-settings-actions">
+                  <button className="ghost-button" type="button" onClick={() => insertSectionHeaderBefore(selBlock.id)}>+标题↑</button>
+                  <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, -1)}>上移</button>
+                  <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, 1)}>下移</button>
+                  <button className="ghost-button" type="button" onClick={() => insertPageBreakAfter(selBlock.id)}>+分页↓</button>
+                  <button className="ghost-button" type="button" onClick={() => removePaperBlock(selBlock.id)}>删除</button>
+                </div>
+              </div>
+            )
+          })()}
 
           <button className="save-button" type="button" disabled={basket.length === 0 || saveStatus === 'saving'} onClick={handleSavePaperSet}>
             <Save size={17} />
@@ -4740,30 +5475,78 @@ function App() {
           <button
             className="export-button"
             type="button"
-            disabled={basket.length === 0 || exportStatus === 'exporting'}
-            onClick={handleExportDocx}
+            disabled={basket.length === 0 || paperExports.statuses.docx === 'exporting'}
+            onClick={paperExports.exportDocx}
           >
             <FileDown size={18} />
-            {exportStatus === 'exporting' ? '导出中' : '导出 DOCX'}
+            {paperExports.statuses.docx === 'exporting' ? '导出中' : '导出 DOCX'}
           </button>
 
-          {exportStatus === 'exported' && <p className="save-state success">DOCX 已生成并下载。</p>}
-          {exportStatus === 'error' && <p className="save-state error">{exportError}</p>}
+          {paperExports.statuses.docx === 'exported' && <p className="save-state success">DOCX 已生成并下载。</p>}
+          {paperExports.statuses.docx === 'error' && <p className="save-state error">{paperExports.statuses.docxError}</p>}
 
           <button
-            className="export-button pdf"
+            className="export-button"
             type="button"
-            disabled={basket.length === 0 || pdfExportStatus === 'exporting'}
-            onClick={handleExportPdf}
+            disabled={basket.length === 0 || paperExports.statuses.printPdf === 'exporting'}
+            onClick={paperExports.exportPrintPdf}
           >
             <FileDown size={18} />
-            {pdfExportStatus === 'exporting' ? '导出中' : '导出 PDF'}
+            {paperExports.statuses.printPdf === 'exporting'
+              ? '生成中…'
+              : `导出精排 PDF（${versionType === 'student' ? '学生版' : '教师版'}）`}
           </button>
+          {paperExports.statuses.printPdf === 'exported' && <p className="save-state success">精排 PDF 已生成并下载。</p>}
+          {paperExports.statuses.printPdf === 'error' && <p className="save-state error">{paperExports.statuses.printPdfError}</p>}
 
-          {pdfExportStatus === 'exported' && <p className="save-state success">PDF 已生成并下载。</p>}
-          {pdfExportStatus === 'error' && <p className="save-state error">{pdfExportError}</p>}
+          <details className="export-secondary">
+            <summary>更多导出格式</summary>
+            <button
+              className="export-button pdf"
+              type="button"
+              disabled={basket.length === 0 || paperExports.statuses.pdf === 'exporting'}
+              onClick={paperExports.exportPdf}
+            >
+              <FileDown size={18} />
+              {paperExports.statuses.pdf === 'exporting' ? '导出中' : '导出 PDF（LibreOffice 转换）'}
+            </button>
+            {paperExports.statuses.pdf === 'exported' && <p className="save-state success">PDF 已生成并下载。</p>}
+            {paperExports.statuses.pdf === 'error' && <p className="save-state error">{paperExports.statuses.pdfError}</p>}
+
+            <button
+              className="export-button"
+              type="button"
+              disabled={basket.length === 0 || paperExports.statuses.printHtml === 'exporting'}
+              onClick={paperExports.exportPrintHtml}
+            >
+              <FileDown size={18} />
+              {paperExports.statuses.printHtml === 'exporting' ? '生成中' : '精排 HTML（用于浏览器打印预览）'}
+            </button>
+            {paperExports.statuses.printHtml === 'exported' && <p className="save-state success">精排 HTML 已下载。</p>}
+            {paperExports.statuses.printHtml === 'error' && <p className="save-state error">{paperExports.statuses.printHtmlError}</p>}
+          </details>
         </aside>
       </main>
+
+      {homeMode === 'ai' && !aiBasketDrawerOpen && (
+        <button
+          type="button"
+          className="basket-chip"
+          onClick={() => setAiBasketDrawerOpen(true)}
+          aria-label={`展开组题篮，已选 ${basket.length} 个题组`}
+        >
+          <ClipboardList size={15} />
+          <span>已选 {basket.length} 题组</span>
+        </button>
+      )}
+      {homeMode === 'ai' && aiBasketDrawerOpen && (
+        <button
+          type="button"
+          className="basket-drawer-backdrop"
+          onClick={() => setAiBasketDrawerOpen(false)}
+          aria-label="收起组题篮"
+        />
+      )}
 
       {isEntryOpen && (
         <div className="entry-backdrop" role="presentation">
@@ -5035,106 +5818,124 @@ function App() {
 
       {isImportOpen && (
         <div className="entry-backdrop" role="presentation">
-          <section className="entry-panel import-panel" aria-label="导入资料" role="dialog" aria-modal="true">
-            <div className="entry-header">
+          <section className="entry-panel import-panel intake-panel" aria-label="导入资料" role="dialog" aria-modal="true">
+            <div className="entry-header intake-header">
               <div>
-                <p className="eyebrow">Import Intake</p>
+                <p className="eyebrow">Import</p>
                 <h2>导入资料</h2>
-                <span className="entry-header-hint">一份带答案资料，生成草稿后逐组确认入库。</span>
+                <span className="entry-header-hint">把资料丢进来，我会判断类型，再交给你确认。</span>
               </div>
               <div className="entry-header-actions">
                 <button
                   className="ghost-button"
                   type="button"
                   onClick={() => { refreshImportFiles(); refreshImportBundles() }}
+                  aria-label="刷新资料组"
+                  title="刷新"
                 >
                   <RefreshCw size={16} />
-                  刷新
                 </button>
                 <button
-                  className="primary-button"
+                  className="icon-button"
                   type="button"
-                  disabled={importStatus === 'importing'}
-                  onClick={() => document.querySelector<HTMLFormElement>('.import-form')?.requestSubmit()}
+                  onClick={() => setImportOpen(false)}
+                  aria-label="关闭导入面板"
                 >
-                  {importStatus === 'importing' ? '导入中' : '导入资料'}
-                </button>
-                <button className="icon-button" type="button" onClick={() => setImportOpen(false)} aria-label="关闭导入面板">
                   <X size={18} />
                 </button>
               </div>
             </div>
 
-            <form className="entry-form import-form" onSubmit={handleImportSubmit}>
-              <fieldset>
-                <legend>文件</legend>
-                <label className="field">
-                  <span>资料角色</span>
-                  <select
-                    value={importContentRole}
-                    onChange={(event) => {
-                      setImportContentRole(event.target.value as ImportContentRole)
-                      setImportStatus('idle')
-                      setImportError('')
-                    }}
-                  >
-                    <option value="question_with_analysis">题目+解析同文件</option>
-                    <option value="question">题目文件</option>
-                    <option value="answer_analysis">答案解析文件</option>
-                    <option value="other">其他资料</option>
-                  </select>
-                </label>
-                <label className="field">
-                  <span>资料组名称</span>
-                  <input
-                    placeholder="双文件时保持同一个名称"
-                    value={importBundleTitle}
-                    onChange={(event) => {
-                      setImportBundleTitle(event.target.value)
-                      setImportBundleId('')
-                    }}
-                  />
-                </label>
-                <label className="field wide">
-                  <span>DOCX / PDF</span>
-                  <input
-                    accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    multiple
-                    type="file"
-                    onChange={(event) => {
-                      const files = Array.from(event.target.files || [])
-                      setSelectedImportFiles(files)
-                      if (files.length > 0 && !importBundleTitle.trim()) {
-                        setImportBundleTitle(files[0].name.replace(/\.[^.]+$/, ''))
-                      }
-                      setImportStatus('idle')
-                      setImportError('')
-                    }}
-                  />
-                </label>
-              </fieldset>
-
-              {importBundleId && (
-                <div className="import-target-hint">
-                  <CheckCircle2 size={16} />
-                  <span>将导入到资料组：{importBundleTitle}</span>
+            <form className="entry-form import-form intake-form" onSubmit={handleImportSubmit}>
+              {/* ── Intake hero: single drop-zone-style file input + primary action ── */}
+              <label className="intake-dropzone" htmlFor="import-file-input">
+                <div className="intake-dropzone-icon" aria-hidden="true">
+                  <FileText size={28} />
                 </div>
-              )}
+                <div className="intake-dropzone-copy">
+                  <strong>把答案卷、题解同文件，或整组文件拖到这里</strong>
+                  <span>识别资料类型后会先生成草稿，再交给你确认。</span>
+                </div>
+                <input
+                  id="import-file-input"
+                  className="intake-file-input"
+                  accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  multiple
+                  type="file"
+                  onChange={(event) => {
+                    const files = Array.from(event.target.files || [])
+                    setSelectedImportFiles(files)
+                    if (files.length > 0 && !importBundleTitle.trim()) {
+                      setImportBundleTitle(files[0].name.replace(/\.[^.]+$/, ''))
+                    }
+                    setImportStatus('idle')
+                    setImportError('')
+                  }}
+                />
+              </label>
 
               {selectedImportFiles.length > 0 && (
-                <div className="import-file-preview">
-                  <FileText size={18} />
-                  <div>
-                    <strong>{selectedImportFiles.length} 个文件</strong>
+                <div className="intake-file-preview" aria-label="已选择文件">
+                  <span className="intake-file-preview-count">{selectedImportFiles.length} 个文件</span>
+                  <ul>
                     {selectedImportFiles.map((file) => (
-                      <span key={file.name}>{file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                      <li key={file.name}>
+                        <span>{file.name}</span>
+                        <span className="intake-muted">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               )}
 
-              {importStatus === 'imported' && <p className="save-state success">资料已导入，等待后续解析。</p>}
-              {importStatus === 'error' && <p className="form-error">{importError}</p>}
+              <div className="intake-action-row">
+                <button
+                  className="intake-primary-button"
+                  type="submit"
+                  disabled={importStatus === 'importing' || selectedImportFiles.length === 0}
+                >
+                  {importStatus === 'importing' ? '导入中…' : '开始导入'}
+                </button>
+                {importStatus === 'imported' && <span className="intake-action-note success">资料已收到，等待解析。</span>}
+                {importStatus === 'error' && <span className="intake-action-note error">{importError || '导入失败，可以再试一次。'}</span>}
+                {importBundleId && (
+                  <span className="intake-action-note">将导入到资料组：{importBundleTitle || '未命名'}</span>
+                )}
+              </div>
+
+              {/* ── Advanced: bundle name + content role demoted under <details> ── */}
+              <details className="intake-advanced">
+                <summary>更多设置（资料类型、资料组归属）</summary>
+                <div className="intake-advanced-grid">
+                  <label className="intake-field">
+                    <span>资料类型</span>
+                    <select
+                      value={importContentRole}
+                      onChange={(event) => {
+                        setImportContentRole(event.target.value as ImportContentRole)
+                        setImportStatus('idle')
+                        setImportError('')
+                      }}
+                    >
+                      <option value="question_with_analysis">题目+解析同文件</option>
+                      <option value="question">题目文件</option>
+                      <option value="answer_analysis">答案解析文件</option>
+                      <option value="other">其他资料</option>
+                    </select>
+                  </label>
+                  <label className="intake-field">
+                    <span>资料组名称</span>
+                    <input
+                      placeholder="双文件时保持同一个名称"
+                      value={importBundleTitle}
+                      onChange={(event) => {
+                        setImportBundleTitle(event.target.value)
+                        setImportBundleId('')
+                      }}
+                    />
+                  </label>
+                </div>
+              </details>
 
               <details className="batch-import-panel batch-import-secondary">
                 <summary>
@@ -5283,109 +6084,141 @@ function App() {
                 )}
               </details>
 
-              <section className="import-bundles" aria-label="资料组工作台">
-                <div className="saved-paper-heading">
-                  <span>资料组工作台</span>
+              <section className="import-bundles intake-bundles" aria-label="资料组工作台">
+                <div className="intake-bundles-heading">
+                  <span>资料组</span>
                   <strong>{importBundles.length}</strong>
                 </div>
 
                 {importBundlesStatus === 'loading' && <p className="saved-paper-note">读取中...</p>}
                 {importBundlesStatus === 'error' && <p className="form-error">{importBundlesError}</p>}
                 {importBundlesStatus === 'loaded' && importBundles.length === 0 && (
-                  <p className="saved-paper-note">同一套题目和解析会在这里合并查看。</p>
+                  <p className="saved-paper-note">导入资料后，这里会按下一步该做什么自动归类。</p>
                 )}
 
-                {importBundles.length > 0 && (
-                  <div className="import-bundle-list">
-                    {importBundles.slice(0, 6).map((bundle) => (
-                      <article className="import-bundle-card" key={bundle.id}>
-                        <div className="import-bundle-topline">
-                          <div>
-                            <strong>{bundle.title}</strong>
-                            <span>{bundle.latestCreatedAt}</span>
-                          </div>
-                          <span className={`bundle-status ${bundle.readiness}`}>
-                            {importBundleReadinessLabel[bundle.readiness]}
+                {importBundles.length > 0 && (() => {
+                  const stages = importBundles.map((bundle) => ({
+                    bundle,
+                    next: deriveBundleNextStep(
+                      bundle,
+                      draftStatusByBundleId[bundle.id],
+                      answerAlignmentStatusByBundleId[bundle.id],
+                    ),
+                  }))
+
+                  const renderRow = (bundle: ImportBundle, next: BundleNextStep) => {
+                    const isDraftRunning = draftStatusByBundleId[bundle.id] === 'generating'
+                    const isAlignRunning = answerAlignmentStatusByBundleId[bundle.id] === 'generating'
+                    const draftError = draftStatusByBundleId[bundle.id] === 'error' ? draftErrorByBundleId[bundle.id] : ''
+                    const alignError = answerAlignmentStatusByBundleId[bundle.id] === 'error'
+                      ? answerAlignmentErrorByBundleId[bundle.id]
+                      : ''
+
+                    function runPrimary() {
+                      if (next.primaryAction === 'generate-draft') handleGenerateImportDraft(bundle)
+                      else if (next.primaryAction === 'add-analysis') prepareAnswerAnalysisImport(bundle)
+                      else if (next.primaryAction === 'align-answers') handleGenerateAnswerAlignment(bundle)
+                    }
+
+                    return (
+                      <li className="intake-row" key={bundle.id}>
+                        <div className="intake-row-anchor">
+                          <strong title={bundle.title}>{bundle.title}</strong>
+                          <span className="intake-muted">
+                            {bundle.latestCreatedAt} · {importBundleReadinessLabel[bundle.readiness]}
                           </span>
                         </div>
 
-                        <div className="bundle-role-row" aria-label="资料角色完整度">
-                          <span className={`bundle-role ${bundle.roleCounts.question > 0 ? 'ready' : 'missing'}`}>
-                            题目 {bundle.roleCounts.question}
-                          </span>
-                          <span className={`bundle-role ${bundle.roleCounts.answerAnalysis > 0 ? 'ready' : 'missing'}`}>
-                            解析 {bundle.roleCounts.answerAnalysis}
-                          </span>
-                          <span
-                            className={`bundle-role ${bundle.roleCounts.questionWithAnalysis > 0 ? 'ready' : 'missing'}`}
-                          >
-                            题解同文件 {bundle.roleCounts.questionWithAnalysis}
-                          </span>
-                        </div>
-
-                        <div className="bundle-metrics">
-                          <span>{bundle.fileCount} 个文件</span>
-                          <span>
-                            {bundle.parsedCount}/{bundle.fileCount} 已解析
-                          </span>
-                          <span>
-                            {bundle.totalLineCount} 行 / {bundle.totalCharCount} 字符
-                          </span>
-                        </div>
-
-                        {bundle.qualityWarnings.length > 0 && (
-                          <div className="bundle-quality-warnings">
-                            {bundle.qualityWarnings.map((warning) => (
-                              <span key={warning}>{warning}</span>
-                            ))}
-                          </div>
-                        )}
-
-                        <div className="bundle-actions">
-                          <button
-                            className="add-button"
-                            disabled={bundle.parsedCount === 0 || draftStatusByBundleId[bundle.id] === 'generating'}
-                            type="button"
-                            onClick={() => handleGenerateImportDraft(bundle)}
-                          >
-                            {draftStatusByBundleId[bundle.id] === 'generating'
-                              ? '生成中'
-                              : bundle.roleCounts.answerAnalysis > 0 || bundle.roleCounts.questionWithAnalysis > 0
-                                ? '生成带答案草稿'
-                                : '生成拆题草稿'}
-                          </button>
-                          <button className="detail-button" type="button" onClick={() => prepareAnswerAnalysisImport(bundle)}>
-                            补解析文件
-                          </button>
-                          <button
-                            className="detail-button"
-                            disabled={
-                              bundle.parsedCount === 0 || answerAlignmentStatusByBundleId[bundle.id] === 'generating'
-                            }
-                            type="button"
-                            onClick={() => handleGenerateAnswerAlignment(bundle)}
-                          >
-                            {answerAlignmentStatusByBundleId[bundle.id] === 'generating' ? '对齐中' : '正式库答案对齐'}
-                          </button>
-                          {draftStatusByBundleId[bundle.id] === 'error' && (
-                            <span className="form-error compact">{draftErrorByBundleId[bundle.id]}</span>
-                          )}
-                          {answerAlignmentStatusByBundleId[bundle.id] === 'error' && (
-                            <span className="form-error compact">{answerAlignmentErrorByBundleId[bundle.id]}</span>
+                        <div className="intake-row-body">
+                          <p className="intake-row-status">{next.statusLabel}</p>
+                          <p className="intake-row-metrics">
+                            <span>题目 {bundle.roleCounts.question}</span>
+                            <span>解析 {bundle.roleCounts.answerAnalysis}</span>
+                            <span>题解同文件 {bundle.roleCounts.questionWithAnalysis}</span>
+                            <span>{bundle.parsedCount}/{bundle.fileCount} 已解析</span>
+                          </p>
+                          {(draftError || alignError) && (
+                            <p className="intake-row-error">{draftError || alignError}</p>
                           )}
                         </div>
 
-                        <div className="bundle-file-line">
-                          {bundle.files.slice(0, 3).map((file) => (
-                            <span key={file.id}>
-                              {importContentRoleLabel[file.contentRole]}：{file.originalName}
-                            </span>
-                          ))}
+                        <div className="intake-row-actions" aria-label="资料组操作">
+                          {next.primaryAction && (
+                            <button
+                              className="intake-row-primary"
+                              type="button"
+                              onClick={runPrimary}
+                              disabled={isDraftRunning || isAlignRunning}
+                              aria-label={next.primaryActionLabel || '继续'}
+                              title={next.primaryActionLabel || '继续'}
+                            >
+                              {isDraftRunning || isAlignRunning ? '…' : '→'}
+                            </button>
+                          )}
+                          <details className="intake-row-more">
+                            <summary aria-label="更多操作">⋯</summary>
+                            <div className="intake-row-more-menu">
+                              <button
+                                type="button"
+                                disabled={bundle.parsedCount === 0 || isDraftRunning}
+                                onClick={() => handleGenerateImportDraft(bundle)}
+                              >
+                                {bundle.roleCounts.answerAnalysis > 0 || bundle.roleCounts.questionWithAnalysis > 0
+                                  ? '生成带答案草稿'
+                                  : '生成拆题草稿'}
+                              </button>
+                              <button type="button" onClick={() => prepareAnswerAnalysisImport(bundle)}>
+                                补解析文件
+                              </button>
+                              <button
+                                type="button"
+                                disabled={bundle.parsedCount === 0 || isAlignRunning}
+                                onClick={() => handleGenerateAnswerAlignment(bundle)}
+                              >
+                                正式库答案对齐
+                              </button>
+                            </div>
+                          </details>
                         </div>
-                      </article>
-                    ))}
-                  </div>
-                )}
+                      </li>
+                    )
+                  }
+
+                  const actionable = stages.filter((s) => s.next.stage === 'actionable').slice(0, 12)
+                  const processing = stages.filter((s) => s.next.stage === 'processing').slice(0, 12)
+                  const done = stages.filter((s) => s.next.stage === 'done').slice(0, 12)
+
+                  return (
+                    <>
+                      {actionable.length > 0 && (
+                        <div className="intake-stage-group">
+                          <h3 className="intake-stage-title">需要你处理 <span>{actionable.length}</span></h3>
+                          <ul className="intake-row-list">
+                            {actionable.map((s) => renderRow(s.bundle, s.next))}
+                          </ul>
+                        </div>
+                      )}
+                      {processing.length > 0 && (
+                        <div className="intake-stage-group">
+                          <h3 className="intake-stage-title">处理中 <span>{processing.length}</span></h3>
+                          <ul className="intake-row-list">
+                            {processing.map((s) => renderRow(s.bundle, s.next))}
+                          </ul>
+                        </div>
+                      )}
+                      {done.length > 0 && (
+                        <details className="intake-stage-group intake-stage-done">
+                          <summary>
+                            <h3 className="intake-stage-title">已完成 <span>{done.length}</span></h3>
+                          </summary>
+                          <ul className="intake-row-list">
+                            {done.map((s) => renderRow(s.bundle, s.next))}
+                          </ul>
+                        </details>
+                      )}
+                    </>
+                  )
+                })()}
               </section>
 
               {activeImportDraft && (

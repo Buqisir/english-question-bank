@@ -47,7 +47,10 @@ imports/*
 !imports/.gitkeep
 exports/*
 !exports/.gitkeep
-reports/
+reports/*
+!reports/difficulty-calibration-v1.md
+!reports/full-bcd-difficulty-calibration-v1.md
+!reports/print-visual-qa-guangdong-2026.md
 output/
 
 # Local model weights

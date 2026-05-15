@@ -76,6 +76,11 @@ export type QuestionDetail = {
   answer: string
   explanation: string
   difficulty: Difficulty
+  aiDifficultyScore?: number | null
+  teacherDifficulty?: number | null
+  difficultyOverrideReason?: string
+  difficultyOverrideNote?: string
+  difficultyTaggedAt?: string
   score: number
   displayOrder: number
   note: string
@@ -405,18 +410,38 @@ export type CreatePaperSetInput = {
     sectionTitle?: string
     note?: string
   }>
+  layout?: PaperSetLayout | null
+}
+
+export type PaperSetLayout = {
+  blocks: PaperBlock[]
+  questionNumberStart: number
+  printStyle: 'exam' | 'handout'
 }
 
 export type ExportDocxInput = {
   title: string
   versionType: VersionType
+  printStyle?: 'exam' | 'handout'
   items: Array<{
     questionGroupId: string
     score: number
     sectionTitle?: string
     note?: string
   }>
+  questionNumberStart?: number
+  blocks?: PaperExportBlock[]
 }
+
+export type PaperExportBlock =
+  | { type: 'section_header'; title: string }
+  | { type: 'page_break' }
+  | { type: 'question_group'; questionGroupId: string; score: number; sectionTitle?: string; note?: string }
+
+export type PaperBlock =
+  | { id: string; type: 'section_header'; title: string }
+  | { id: string; type: 'page_break' }
+  | { id: string; type: 'question_group'; questionGroupId: string; score: number }
 
 export type ExportDocxResult = {
   blob: Blob
@@ -450,6 +475,8 @@ export type PaperSetItem = {
 
 export type PaperSetDetail = PaperSetSummary & {
   items: PaperSetItem[]
+  layout?: PaperSetLayout | null
+  layoutWarnings?: string[]
 }
 
 export type PaperWorkflowStatus =

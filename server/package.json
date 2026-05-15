@@ -1,0 +1,10 @@
+{
+  "name": "english-question-bank-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Server-side runtime for English question bank (print renderer, exports, API)",
+  "dependencies": {
+    "@vivliostyle/cli": "^9.0.0"
+  }
+}

@@ -40,20 +40,10 @@ function stableCandidateId(report, row) {
     .join('__')
 }
 
-function hasParallelOptionConcepts(row) {
-  return /(?:\band\b|\bor\b|[,，、])/i.test(row.optionExpression || '')
-}
-
-function hasMultipleEvidencePoints(row) {
-  const source = String(row.sourceExpression || '')
-  const explicitParts = source.split(/\s*(?:;|；|\n|\|)\s*/).map((item) => item.trim()).filter(Boolean)
-  if (explicitParts.length >= 2) return true
-  const sentenceEnds = source.match(/[.!?。！？](?:\s|$)/g) || []
-  return sentenceEnds.length >= 2
-}
-
 export function expectedReviewCard(row) {
-  if (row.surfaceType === 'adjective_summary' && hasParallelOptionConcepts(row) && hasMultipleEvidencePoints(row)) return 'T4'
+  if (row.surfaceType === 'adjective_summary') {
+    return ['T6', 'T10'].includes(row.tCardId) ? '' : 'T10'
+  }
   return CARD_BY_SURFACE[row.surfaceType] || ''
 }
 

@@ -29,8 +29,16 @@ type QuestionGroupsResponse = {
   questionGroups: QuestionGroupCard[]
 }
 
+const API_ORIGIN = 'http://127.0.0.1:8787'
+
+function apiPath(path: string) {
+  if (typeof window === 'undefined') return path
+  if (window.location.port === '5173') return path
+  return `${API_ORIGIN}${path}`
+}
+
 export async function fetchQuestionGroups() {
-  const response = await fetch('/api/question-groups')
+  const response = await fetch(apiPath('/api/question-groups'))
 
   if (!response.ok) {
     throw new Error(`Failed to load question groups: ${response.status}`)
@@ -45,7 +53,7 @@ type QuestionGroupDetailResponse = {
 }
 
 export async function fetchQuestionGroupDetail(id: string) {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(id)}`)
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(id)}`))
 
   if (!response.ok) {
     const data = (await response.json().catch(() => null)) as { error?: string } | null
@@ -97,7 +105,7 @@ type ImportFileParseResponse = {
 }
 
 export async function fetchPaperSets() {
-  const response = await fetch('/api/paper-sets')
+  const response = await fetch(apiPath('/api/paper-sets'))
 
   if (!response.ok) {
     throw new Error(`Failed to load paper sets: ${response.status}`)
@@ -108,7 +116,7 @@ export async function fetchPaperSets() {
 }
 
 export async function fetchPaperWorkflows() {
-  const response = await fetch('/api/paper-workflows')
+  const response = await fetch(apiPath('/api/paper-workflows'))
 
   if (!response.ok) {
     throw new Error(`Failed to load paper workflows: ${response.status}`)
@@ -119,7 +127,7 @@ export async function fetchPaperWorkflows() {
 }
 
 export async function fetchImportFiles() {
-  const response = await fetch('/api/import-files')
+  const response = await fetch(apiPath('/api/import-files'))
 
   if (!response.ok) {
     throw new Error(`Failed to load import files: ${response.status}`)
@@ -130,7 +138,7 @@ export async function fetchImportFiles() {
 }
 
 export async function fetchImportBundles() {
-  const response = await fetch('/api/import-bundles')
+  const response = await fetch(apiPath('/api/import-bundles'))
 
   if (!response.ok) {
     throw new Error(`Failed to load import bundles: ${response.status}`)
@@ -141,7 +149,7 @@ export async function fetchImportBundles() {
 }
 
 export async function fetchImportBatches() {
-  const response = await fetch('/api/import-batches')
+  const response = await fetch(apiPath('/api/import-batches'))
 
   if (!response.ok) {
     throw new Error(`Failed to load import batches: ${response.status}`)
@@ -152,7 +160,7 @@ export async function fetchImportBatches() {
 }
 
 export async function scanImportDirectory(input: CreateImportBatchInput) {
-  const response = await fetch('/api/import-batches/scan', {
+  const response = await fetch(apiPath('/api/import-batches/scan'), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -170,7 +178,7 @@ export async function scanImportDirectory(input: CreateImportBatchInput) {
 }
 
 export async function runImportBatch(id: string, input: RunImportBatchInput = {}) {
-  const response = await fetch(`/api/import-batches/${encodeURIComponent(id)}/import`, {
+  const response = await fetch(apiPath(`/api/import-batches/${encodeURIComponent(id)}/import`), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -188,7 +196,7 @@ export async function runImportBatch(id: string, input: RunImportBatchInput = {}
 }
 
 async function postImportBundleDraft(id: string) {
-  const response = await fetch(`/api/import-bundles/${encodeURIComponent(id)}/draft`, {
+  const response = await fetch(apiPath(`/api/import-bundles/${encodeURIComponent(id)}/draft`), {
     method: 'POST',
   })
 
@@ -206,7 +214,7 @@ export async function generateImportBundleDraft(id: string) {
 }
 
 export async function generateImportAnswerAlignment(id: string) {
-  const response = await fetch(`/api/import-bundles/${encodeURIComponent(id)}/answer-alignment`, {
+  const response = await fetch(apiPath(`/api/import-bundles/${encodeURIComponent(id)}/answer-alignment`), {
     method: 'POST',
   })
 
@@ -226,7 +234,7 @@ export async function applyImportAnswerAlignment(
     overwrite?: boolean
   },
 ) {
-  const response = await fetch(`/api/import-bundles/${encodeURIComponent(id)}/answer-alignment/apply`, {
+  const response = await fetch(apiPath(`/api/import-bundles/${encodeURIComponent(id)}/answer-alignment/apply`), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -244,7 +252,7 @@ export async function applyImportAnswerAlignment(
 }
 
 export async function fetchImportFileParse(id: string) {
-  const response = await fetch(`/api/import-files/${encodeURIComponent(id)}/parse`)
+  const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}/parse`))
 
   if (!response.ok) {
     const data = (await response.json().catch(() => null)) as { error?: string } | null
@@ -260,7 +268,7 @@ type PaperSetDetailResponse = {
 }
 
 export async function fetchPaperSetDetail(id: string) {
-  const response = await fetch(`/api/paper-sets/${encodeURIComponent(id)}`)
+  const response = await fetch(apiPath(`/api/paper-sets/${encodeURIComponent(id)}`))
 
   if (!response.ok) {
     const data = (await response.json().catch(() => null)) as { error?: string } | null
@@ -276,7 +284,7 @@ type CreateQuestionGroupResponse = {
 }
 
 export async function createQuestionGroup(input: CreateQuestionGroupInput) {
-  const response = await fetch('/api/question-groups', {
+  const response = await fetch(apiPath('/api/question-groups'), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -294,7 +302,7 @@ export async function createQuestionGroup(input: CreateQuestionGroupInput) {
 }
 
 export async function updateQuestionGroup(id: string, input: UpdateQuestionGroupInput) {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(id)}`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(id)}`), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -312,7 +320,7 @@ export async function updateQuestionGroup(id: string, input: UpdateQuestionGroup
 }
 
 export async function deleteQuestionGroup(id: string) {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(id)}`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(id)}`), {
     method: 'DELETE',
   })
 
@@ -327,7 +335,7 @@ type CreateImportFileResponse = {
 }
 
 export async function uploadImportFile(input: CreateImportFileInput) {
-  const response = await fetch('/api/import-files', {
+  const response = await fetch(apiPath('/api/import-files'), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -345,7 +353,7 @@ export async function uploadImportFile(input: CreateImportFileInput) {
 }
 
 export async function parseImportFile(id: string) {
-  const response = await fetch(`/api/import-files/${encodeURIComponent(id)}/parse`, {
+  const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}/parse`), {
     method: 'POST',
   })
 
@@ -359,7 +367,7 @@ export async function parseImportFile(id: string) {
 }
 
 export async function deleteImportFile(id: string) {
-  const response = await fetch(`/api/import-files/${encodeURIComponent(id)}`, {
+  const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}`), {
     method: 'DELETE',
   })
 
@@ -374,7 +382,7 @@ type CreatePaperSetResponse = {
 }
 
 export async function savePaperSet(input: CreatePaperSetInput) {
-  const response = await fetch('/api/paper-sets', {
+  const response = await fetch(apiPath('/api/paper-sets'), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -392,7 +400,7 @@ export async function savePaperSet(input: CreatePaperSetInput) {
 }
 
 export async function updatePaperSet(id: string, input: CreatePaperSetInput) {
-  const response = await fetch(`/api/paper-sets/${encodeURIComponent(id)}`, {
+  const response = await fetch(apiPath(`/api/paper-sets/${encodeURIComponent(id)}`), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -420,7 +428,7 @@ function decodeHeaderValue(value: string | null) {
 }
 
 export async function exportDocx(input: ExportDocxInput): Promise<ExportDocxResult> {
-  const response = await fetch('/api/exports/docx', {
+  const response = await fetch(apiPath('/api/exports/docx'), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -440,7 +448,7 @@ export async function exportDocx(input: ExportDocxInput): Promise<ExportDocxResu
 }
 
 export async function exportPdf(input: ExportPdfInput): Promise<ExportPdfResult> {
-  const response = await fetch('/api/exports/pdf', {
+  const response = await fetch(apiPath('/api/exports/pdf'), {
     body: JSON.stringify(input),
     headers: {
       'content-type': 'application/json',
@@ -460,7 +468,7 @@ export async function exportPdf(input: ExportPdfInput): Promise<ExportPdfResult>
 }
 
 export async function verifyQuestionGroup(questionGroupId: string, apiKey: string, model: string, thinkingMode = false): Promise<import('../domain/questionBank').VerifyQuestionGroupResult> {
-  const response = await fetch('/api/ai/verify-question-group', {
+  const response = await fetch(apiPath('/api/ai/verify-question-group'), {
     body: JSON.stringify({ questionGroupId, apiKey, model, thinkingMode }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -473,7 +481,7 @@ export async function verifyQuestionGroup(questionGroupId: string, apiKey: strin
 }
 
 export async function parseGrammarGroup(questionGroupId: string, apiKey: string, model: string, thinkingMode = false): Promise<import('../domain/questionBank').GrammarParseQuestionGroupResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/grammar-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/grammar-parse`), {
     body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -486,7 +494,7 @@ export async function parseGrammarGroup(questionGroupId: string, apiKey: string,
 }
 
 export async function parseClozeGroup(questionGroupId: string, apiKey: string, model: string, thinkingMode = false): Promise<import('../domain/questionBank').ClozeParseQuestionGroupResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/cloze-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/cloze-parse`), {
     body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -499,7 +507,7 @@ export async function parseClozeGroup(questionGroupId: string, apiKey: string, m
 }
 
 export async function parseSevenChoicesGroup(questionGroupId: string, apiKey: string, model: string, thinkingMode = false): Promise<import('../domain/questionBank').SevenChoicesParseQuestionGroupResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/seven-choices-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/seven-choices-parse`), {
     body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -512,7 +520,7 @@ export async function parseSevenChoicesGroup(questionGroupId: string, apiKey: st
 }
 
 export async function saveClozeParseResultRequest(questionGroupId: string, clozeParseResult: import('../domain/questionBank').ClozeParseQuestionGroupResult): Promise<{ clozeParseResult: import('../domain/questionBank').ClozeParseQuestionGroupResult }> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/cloze-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/cloze-parse`), {
     body: JSON.stringify({ clozeParseResult }),
     headers: { 'content-type': 'application/json' },
     method: 'PUT',
@@ -525,7 +533,7 @@ export async function saveClozeParseResultRequest(questionGroupId: string, cloze
 }
 
 export async function saveSevenChoicesParseResultRequest(questionGroupId: string, sevenChoicesParseResult: import('../domain/questionBank').SevenChoicesParseQuestionGroupResult): Promise<{ sevenChoicesParseResult: import('../domain/questionBank').SevenChoicesParseQuestionGroupResult }> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/seven-choices-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/seven-choices-parse`), {
     body: JSON.stringify({ sevenChoicesParseResult }),
     headers: { 'content-type': 'application/json' },
     method: 'PUT',
@@ -538,7 +546,7 @@ export async function saveSevenChoicesParseResultRequest(questionGroupId: string
 }
 
 export async function saveGrammarParseResultRequest(questionGroupId: string, grammarParseResult: import('../domain/questionBank').GrammarParseQuestionGroupResult): Promise<{ grammarParseResult: import('../domain/questionBank').GrammarParseQuestionGroupResult }> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/grammar-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/grammar-parse`), {
     body: JSON.stringify({ grammarParseResult }),
     headers: { 'content-type': 'application/json' },
     method: 'PUT',
@@ -558,8 +566,9 @@ export async function saveReadingParseResult(
   readingParseResult: import('../domain/questionBank').ReadingParseQuestionGroupResult
   verifyResult: import('../domain/questionBank').VerifyQuestionGroupResult | null
   questionGroup?: import('../domain/questionBank').QuestionGroupCard | null
+  difficultySyncWarnings?: string[]
 }> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/reading-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/reading-parse`), {
     body: JSON.stringify({ readingParseResult, verifyResult }),
     headers: { 'content-type': 'application/json' },
     method: 'PUT',
@@ -572,7 +581,31 @@ export async function saveReadingParseResult(
     readingParseResult: import('../domain/questionBank').ReadingParseQuestionGroupResult
     verifyResult: import('../domain/questionBank').VerifyQuestionGroupResult | null
     questionGroup?: import('../domain/questionBank').QuestionGroupCard | null
+    difficultySyncWarnings?: string[]
   }
+}
+
+export type SaveQuestionDifficultyRatingInput = {
+  teacherDifficulty: number | null
+  aiDifficultyScore?: number | null
+  difficultyOverrideReason?: string
+  difficultyOverrideNote?: string
+}
+
+export async function saveQuestionDifficultyRating(
+  questionId: string,
+  input: SaveQuestionDifficultyRatingInput,
+): Promise<{ question: import('../domain/questionBank').QuestionDetail }> {
+  const response = await fetch(apiPath(`/api/questions/${encodeURIComponent(questionId)}/difficulty-rating`), {
+    body: JSON.stringify(input),
+    headers: { 'content-type': 'application/json' },
+    method: 'PUT',
+  })
+  if (!response.ok) {
+    const data = (await response.json().catch(() => null)) as { error?: string } | null
+    throw new Error(data?.error || `Failed to save difficulty rating: ${response.status}`)
+  }
+  return (await response.json()) as { question: import('../domain/questionBank').QuestionDetail }
 }
 
 export async function parseReadingQuestionGroup(
@@ -581,7 +614,7 @@ export async function parseReadingQuestionGroup(
   model: string,
   thinkingMode = false,
 ): Promise<import('../domain/questionBank').ReadingParseQuestionGroupResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/reading-parse`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/reading-parse`), {
     body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -597,7 +630,7 @@ export async function generateSynonymDifficulty(
   questionGroupId: string,
   readingParseResult?: import('../domain/questionBank').ReadingParseQuestionGroupResult | null,
 ): Promise<SynonymDifficultyQuestionGroupResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/synonym-difficulty`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/synonym-difficulty`), {
     body: JSON.stringify({ readingParseResult, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -632,7 +665,7 @@ export async function generateQuestionGroupSummary(
   model: string,
   thinkingMode = false,
 ): Promise<GenerateQuestionGroupSummaryResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/summary`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/summary`), {
     body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -666,7 +699,7 @@ export async function generateTopicLabels(
   model: string,
   thinkingMode = false,
 ): Promise<GenerateTopicLabelsResult> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/topic-labels`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/topic-labels`), {
     body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -682,7 +715,7 @@ export async function bindTopicLabels(
   questionGroupId: string,
   topicLabels: TopicLabel[],
 ): Promise<{ questionGroupId: string; topicLabels: TopicLabel[] }> {
-  const response = await fetch(`/api/question-groups/${encodeURIComponent(questionGroupId)}/topic-labels`, {
+  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/topic-labels`), {
     body: JSON.stringify({ topicLabels }),
     headers: { 'content-type': 'application/json' },
     method: 'PUT',
@@ -741,7 +774,7 @@ export type QuestionBankStewardResult = {
 }
 
 export async function semanticSearchQuestionGroups(query: string, apiKey: string): Promise<SemanticSearchResult> {
-  const response = await fetch('/api/ai/semantic-search', {
+  const response = await fetch(apiPath('/api/ai/semantic-search'), {
     body: JSON.stringify({
       query,
       apiKey,
@@ -760,7 +793,7 @@ export async function semanticSearchQuestionGroups(query: string, apiKey: string
 }
 
 export async function askQuestionBankSteward(message: string, apiKey: string): Promise<QuestionBankStewardResult> {
-  const response = await fetch('/api/ai/question-bank-steward', {
+  const response = await fetch(apiPath('/api/ai/question-bank-steward'), {
     body: JSON.stringify({
       message,
       apiKey,
@@ -776,4 +809,61 @@ export async function askQuestionBankSteward(message: string, apiKey: string): P
     throw new Error(data?.error || `Failed to ask question-bank steward: ${response.status}`)
   }
   return (await response.json()) as QuestionBankStewardResult
+}
+
+export async function exportPrintHtml(input: ExportDocxInput): Promise<ExportDocxResult> {
+  const response = await fetch(apiPath('/api/exports/print-html'), {
+    body: JSON.stringify(input),
+    headers: { 'content-type': 'application/json' },
+    method: 'POST',
+  })
+  if (!response.ok) {
+    const data = (await response.json().catch(() => null)) as { error?: string } | null
+    throw new Error(data?.error || `Failed to export print HTML: ${response.status}`)
+  }
+  return {
+    blob: await response.blob(),
+    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `${input.title}-精排.html`,
+  }
+}
+
+/**
+ * Map a print-pdf failure (status + message) to a friendly Chinese error string.
+ * Pure function for use by exportPrintPdf and verification scripts.
+ *
+ * Precedence:
+ *   1. Vivliostyle / 503 (renderer not installed) — most specific.
+ *   2. 404 / "not found" — route missing (likely stale backend process).
+ *   3. Other 5xx — generic wrapper.
+ */
+export function mapPrintPdfError(status: number, rawMessage: string): string {
+  if (status === 503 || /vivliostyle/i.test(rawMessage)) {
+    return '精排 PDF 渲染器未就绪：请在 server 目录运行 npm install 以安装 @vivliostyle/cli'
+  }
+  if (status === 404 || /not\s*found/i.test(rawMessage)) {
+    return '后端未加载精排 PDF 路由，请重启题库 API 服务（旧进程可能还在监听）'
+  }
+  return `精排 PDF 生成失败：${rawMessage}`
+}
+
+export async function exportPrintPdf(input: ExportDocxInput): Promise<ExportPdfResult> {
+  let response: Response
+  try {
+    response = await fetch(apiPath('/api/exports/print-pdf'), {
+      body: JSON.stringify(input),
+      headers: { 'content-type': 'application/json' },
+      method: 'POST',
+    })
+  } catch (networkError) {
+    throw new Error('题库 API 服务无法连接：请确认后端进程已启动')
+  }
+  if (!response.ok) {
+    const data = (await response.json().catch(() => null)) as { error?: string } | null
+    const rawMessage = data?.error || `导出精排 PDF 失败：${response.status}`
+    throw new Error(mapPrintPdfError(response.status, rawMessage))
+  }
+  return {
+    blob: await response.blob(),
+    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `${input.title}-精排.pdf`,
+  }
 }
