@@ -5853,8 +5853,9 @@ function App() {
                   <FileText size={28} />
                 </div>
                 <div className="intake-dropzone-copy">
-                  <strong>把答案卷、题解同文件，或整组文件拖到这里</strong>
-                  <span>识别资料类型后会先生成草稿，再交给你确认。</span>
+                  <strong>选择答案卷、题解同文件，或整组资料</strong>
+                  <span>我会识别资料类型，生成草稿后再交给你确认。</span>
+                  <span className="intake-dropzone-hint">点击选择文件，后续会支持拖拽导入。</span>
                 </div>
                 <input
                   id="import-file-input"
@@ -5937,14 +5938,14 @@ function App() {
                 </div>
               </details>
 
-              <details className="batch-import-panel batch-import-secondary">
+              <details className="batch-import-panel batch-import-secondary intake-batch-panel">
                 <summary>
-                  <span>辅助：文件夹批量导入</span>
-                  <strong>{importBatches.length} 批次</strong>
+                  <span>文件夹批量导入</span>
+                  <strong className="intake-batch-pill">{importBatches.length} 批次</strong>
                 </summary>
 
-                <div className="batch-import-grid">
-                  <label className="field wide">
+                <div className="batch-import-grid intake-batch-grid">
+                  <label className="field wide intake-field">
                     <span>本地文件夹路径</span>
                     <input
                       value={batchDirectoryPath}
@@ -5955,7 +5956,7 @@ function App() {
                       }}
                     />
                   </label>
-                  <label className="field">
+                  <label className="field intake-field">
                     <span>批次名称</span>
                     <input
                       placeholder="默认使用文件夹名"
@@ -5963,8 +5964,8 @@ function App() {
                       onChange={(event) => setBatchTitle(event.target.value)}
                     />
                   </label>
-                  <label className="field">
-                    <span>默认资料角色</span>
+                  <label className="field intake-field">
+                    <span>默认资料类型</span>
                     <select
                       value={batchContentRole}
                       onChange={(event) => setBatchContentRole(event.target.value as ImportContentRole)}
@@ -5975,7 +5976,7 @@ function App() {
                       <option value="other">其他资料</option>
                     </select>
                   </label>
-                  <label className="checkbox-field">
+                  <label className="checkbox-field intake-checkbox-field">
                     <input
                       checked={batchRecursive}
                       type="checkbox"
@@ -5983,7 +5984,7 @@ function App() {
                     />
                     <span>递归扫描子文件夹</span>
                   </label>
-                  <label className="field">
+                  <label className="field intake-field">
                     <span>单次导入</span>
                     <select value={batchImportLimit} onChange={(event) => setBatchImportLimit(event.target.value)}>
                       <option value="5">5 个文件</option>
@@ -5994,23 +5995,23 @@ function App() {
                   </label>
                 </div>
 
-                <div className="batch-import-actions">
+                <div className="batch-import-actions intake-batch-actions">
                   <button
-                    className="detail-button"
+                    className="intake-secondary-button"
                     disabled={batchScanStatus === 'scanning' || !batchDirectoryPath.trim()}
                     type="button"
                     onClick={handleScanImportDirectory}
                   >
-                    {batchScanStatus === 'scanning' ? '扫描中' : '扫描文件夹'}
+                    {batchScanStatus === 'scanning' ? '扫描中…' : '扫描文件夹'}
                   </button>
-                  {batchScanStatus === 'scanned' && <span className="writeback-result">已生成批量导入队列。</span>}
-                  {batchScanStatus === 'error' && <span className="form-error compact">{batchScanError}</span>}
+                  {batchScanStatus === 'scanned' && <span className="intake-action-note success">已生成批量导入队列。</span>}
+                  {batchScanStatus === 'error' && <span className="intake-action-note error">{batchScanError}</span>}
                 </div>
 
-                {importBatchesStatus === 'loading' && <p className="saved-paper-note">读取批次中...</p>}
-                {importBatchesStatus === 'error' && <p className="form-error">{importBatchesError}</p>}
+                {importBatchesStatus === 'loading' && <p className="intake-batch-note">读取批次中…</p>}
+                {importBatchesStatus === 'error' && <p className="intake-action-note error">{importBatchesError}</p>}
                 {importBatchesStatus === 'loaded' && importBatches.length === 0 && (
-                  <p className="saved-paper-note">扫描文件夹后，这里会显示每个 DOCX/PDF 的队列状态。</p>
+                  <p className="intake-batch-note">扫描文件夹后，这里会显示每个 DOCX/PDF 的队列状态。</p>
                 )}
 
                 {importBatches.length > 0 && (
@@ -6184,9 +6185,9 @@ function App() {
                     )
                   }
 
-                  const actionable = stages.filter((s) => s.next.stage === 'actionable').slice(0, 12)
-                  const processing = stages.filter((s) => s.next.stage === 'processing').slice(0, 12)
-                  const done = stages.filter((s) => s.next.stage === 'done').slice(0, 12)
+                  const actionable = stages.filter((s) => s.next.stage === 'actionable')
+                  const processing = stages.filter((s) => s.next.stage === 'processing')
+                  const done = stages.filter((s) => s.next.stage === 'done')
 
                   return (
                     <>
@@ -6194,26 +6195,35 @@ function App() {
                         <div className="intake-stage-group">
                           <h3 className="intake-stage-title">需要你处理 <span>{actionable.length}</span></h3>
                           <ul className="intake-row-list">
-                            {actionable.map((s) => renderRow(s.bundle, s.next))}
+                            {actionable.slice(0, 12).map((s) => renderRow(s.bundle, s.next))}
                           </ul>
+                          {actionable.length > 12 && (
+                            <p className="intake-stage-overflow">还有 {actionable.length - 12} 份资料未显示</p>
+                          )}
                         </div>
                       )}
                       {processing.length > 0 && (
                         <div className="intake-stage-group">
                           <h3 className="intake-stage-title">处理中 <span>{processing.length}</span></h3>
                           <ul className="intake-row-list">
-                            {processing.map((s) => renderRow(s.bundle, s.next))}
+                            {processing.slice(0, 12).map((s) => renderRow(s.bundle, s.next))}
                           </ul>
+                          {processing.length > 12 && (
+                            <p className="intake-stage-overflow">还有 {processing.length - 12} 份资料未显示</p>
+                          )}
                         </div>
                       )}
                       {done.length > 0 && (
                         <details className="intake-stage-group intake-stage-done">
                           <summary>
-                            <h3 className="intake-stage-title">已完成 <span>{done.length}</span></h3>
+                            <h3 className="intake-stage-title">草稿待确认 <span>{done.length}</span></h3>
                           </summary>
                           <ul className="intake-row-list">
-                            {done.map((s) => renderRow(s.bundle, s.next))}
+                            {done.slice(0, 12).map((s) => renderRow(s.bundle, s.next))}
                           </ul>
+                          {done.length > 12 && (
+                            <p className="intake-stage-overflow">还有 {done.length - 12} 份资料未显示</p>
+                          )}
                         </details>
                       )}
                     </>

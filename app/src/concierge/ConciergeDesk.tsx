@@ -69,8 +69,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         </button>
       </form>
 
-      <p className="concierge-subhead-hint">我会先判断你想按主题、题型、难度还是来源找。</p>
-
       {(state.kind === 'empty' || state.kind === 'error') && (
         <ul className="concierge-starter-chips" aria-label="示例搜索">
           {STARTER_CHIPS.map((chip) => (

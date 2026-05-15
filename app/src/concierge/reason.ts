@@ -1,13 +1,40 @@
 /**
- * Reason text helpers for the concierge result row.
+ * Strip the "DeepSeek 检测第 N 位；" prefix and other internal source markers
+ * from a steward reason string, and gently normalize ASCII single quotes around
+ * Chinese phrases.
  *
- * Steward-side reason strings sometimes start with the rank annotation
- * "DeepSeek 检测第 N 位" — which is a developer-facing breadcrumb, not a
- * teacher-facing rationale. Strip it before display so what's left is the
- * actual recommendation reason.
+ * Internal markers we never want shown to teachers:
+ *   - 管家规则过滤
+ *   - DeepSeek 检测第 N 位
+ *   - DeepSeek
+ *   - 检测第 N 位
+ *   - steward
+ *   - fallback
  */
+const INTERNAL_MARKERS = [
+  /管家规则过滤[；;]?\s*/g,
+  /DeepSeek\s*检测第\s*\d+\s*位[；;]?\s*/gi,
+  /\bDeepSeek\b[；;]?\s*/g,
+  /检测第\s*\d+\s*位[；;]?\s*/g,
+  /\bsteward\b[；;]?\s*/gi,
+  /\bfallback\b[；;]?\s*/gi,
+]
 
 export function cleanReason(raw: string): string {
   if (!raw) return ''
-  return raw.replace(/^\s*DeepSeek\s*检测第\s*\d+\s*位\s*[;；]?\s*/i, '').trim()
+  let text = raw
+  for (const marker of INTERNAL_MARKERS) {
+    text = text.replace(marker, '')
+  }
+  // Normalize straight single quotes around tight CJK phrases like '阅读理解C' → 阅读理解 C
+  // (drop the ASCII quote chrome; insert a space between Chinese letters and ASCII letters).
+  text = text.replace(/'([^']*)'/g, (_match, inner) => inner)
+  text = text.replace(/([\u4E00-\u9FFF])([A-Za-z])/g, '$1 $2')
+  text = text.replace(/([A-Za-z])([\u4E00-\u9FFF])/g, '$1 $2')
+  // Collapse stray whitespace and leading/trailing separators left behind by removals.
+  return text
+    .replace(/^\s*[，,；;。.\s]+/, '')
+    .replace(/[，,；;。.\s]+$/, '')
+    .replace(/\s+/g, ' ')
+    .trim()
 }

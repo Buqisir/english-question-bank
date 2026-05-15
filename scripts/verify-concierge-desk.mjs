@@ -368,6 +368,13 @@ console.log('\nTest 10: Recommendation reason — strip "DeepSeek 检测第 N �
   assert('empty input returns empty string', cleanReason('') === '', '')
   assert('only-prefix collapses to empty', cleanReason('DeepSeek 检测第 7 位；') === '', '')
 
+  // 10.1.1 (Part 2 F) Strips additional internal markers.
+  assert('strips 管家规则过滤 prefix', cleanReason('管家规则过滤；DeepSeek 检测第 1 位；标题含 阅读理解 C') === '标题含 阅读理解 C', `got: ${cleanReason('管家规则过滤；DeepSeek 检测第 1 位；标题含 阅读理解 C')}`)
+  assert('strips bare DeepSeek token', cleanReason('DeepSeek；主题相符') === '主题相符', `got: ${cleanReason('DeepSeek；主题相符')}`)
+  assert('strips steward token (case-insensitive)', cleanReason('Steward fallback；fallback；real reason') === 'real reason', `got: ${cleanReason('Steward fallback；fallback；real reason')}`)
+  assert('normalizes ASCII single quotes around CJK phrase', cleanReason("标题含'阅读理解C'，主题为书籍与阅读") === '标题含阅读理解 C，主题为书籍与阅读', `got: ${cleanReason("标题含'阅读理解C'，主题为书籍与阅读")}`)
+  assert('long internal-only string collapses to empty', cleanReason('管家规则过滤；DeepSeek 检测第 4 位；') === '', '')
+
   // 10.2 Row JSX renders reason on its own line, not inside .concierge-meta.
   const here = path.dirname(new URL(import.meta.url).pathname)
   const rowSrc = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeResultRow.tsx'), 'utf8')
@@ -471,11 +478,9 @@ console.log('\nTest 12: Quiet first-screen — subhead, hint line, starter chips
   assert('subhead does NOT mention 管家 / key / 兜底', !/(管家|兜底|key|API|DeepSeek)/i.test(subhead), `got: ${subhead}`)
   assert('subhead is one short line (<= 20 chars)', subhead.length > 0 && subhead.length <= 20, `got: "${subhead}" (${subhead.length})`)
 
-  // 12.2 Hint line under intent bar exists and matches expected wording.
-  const hintMatch = desk.match(/<p className="concierge-subhead-hint">([^<]+)<\/p>/)
-  assert('subhead-hint line exists', !!hintMatch, '')
-  const hint = hintMatch?.[1] || ''
-  assert('hint mentions 主题 / 题型 / 难度 / 来源', /主题/.test(hint) && /题型/.test(hint) && /难度/.test(hint) && /来源/.test(hint), `got: ${hint}`)
+  // 12.2 No legacy hint line (we used to render a "我会先判断…" subhead).
+  assert('subhead-hint legacy line removed', !/<p className="concierge-subhead-hint">/.test(desk), '')
+  assert('legacy hint copy removed', !/我会先判断你想按主题/.test(desk), '')
 
   // 12.3 Starter chips constant exists with the three required examples.
   assert('STARTER_CHIPS contains 生态主题 C 篇', /生态主题\s*C\s*篇/.test(desk), '')
@@ -510,6 +515,68 @@ console.log('\nTest 12: Quiet first-screen — subhead, hint line, starter chips
   assert('intent-bar rest background #FFFDF8', /background:\s*#FFFDF8/i.test(barRule), `got: ${barRule}`)
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
   assert('focus-within border-color #1A1A1A', /border-color:\s*#1A1A1A/i.test(focusRule), '')
+}
+
+// ------------------------------------------------------------------ Test 13
+console.log('\nTest 13: Import V1 collop — stage labels, dropzone copy, overflow, batch panel')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
+  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
+
+  // 13.A Stage labels: must say "草稿待确认", not "已完成".
+  assert('done stage UI label is 草稿待确认', /草稿待确认\s*<span>/.test(app), '')
+  assert('legacy 已完成 group label removed', !/<h3 className="intake-stage-title">已完成\s*<span>/.test(app), '')
+
+  // 13.B Dropzone copy: no longer promises drag, but adds a future-tense hint.
+  const dropzoneStrong = app.match(/<strong>([^<]*)<\/strong>\s*<span>([^<]*)<\/span>\s*<span className="intake-dropzone-hint">/)?.[0] || ''
+  assert('dropzone main copy says 选择…', /选择答案卷、题解同文件，或整组资料/.test(app), '')
+  assert('dropzone removed 拖到这里 strong promise', !/拖到这里/.test(app), '')
+  assert('dropzone has gentle drag-future hint', /点击选择文件，后续会支持拖拽导入/.test(app), '')
+  assert('dropzone-hint element wired', dropzoneStrong.length > 0 || /intake-dropzone-hint/.test(app), '')
+
+  // 13.C Overflow indicator for >12 bundles per stage.
+  assert('intake-stage-overflow line rendered conditionally', /actionable\.length\s*>\s*12[\s\S]{0,200}intake-stage-overflow/.test(app), '')
+  assert('overflow rendered for processing too', /processing\.length\s*>\s*12[\s\S]{0,200}intake-stage-overflow/.test(app), '')
+  assert('overflow rendered for done too', /done\.length\s*>\s*12[\s\S]{0,200}intake-stage-overflow/.test(app), '')
+  assert('overflow uses light copy "还有 N 份资料未显示"', /还有\s*\{[^}]+\}\s*份资料未显示/.test(app), '')
+  const overflowRule = css.match(/\.intake-stage-overflow\s*\{[^}]*\}/)?.[0] || ''
+  assert('overflow css rule found', overflowRule.length > 0, '')
+  assert('overflow text muted #9A9180', /color:\s*#9A9180/i.test(overflowRule), `got: ${overflowRule}`)
+
+  // 13.D Batch panel restyle: classnames, soft heading, no "辅助：" prefix, intake-secondary-button on scan.
+  assert('batch panel uses intake-batch-panel class', /intake-batch-panel/.test(app), '')
+  assert('batch panel summary copy is 文件夹批量导入 (no 辅助：)', /<span>文件夹批量导入<\/span>/.test(app) && !/辅助：文件夹批量导入/.test(app), '')
+  assert('batch count rendered as intake-batch-pill', /className="intake-batch-pill"/.test(app), '')
+  assert('scan button uses intake-secondary-button', /intake-secondary-button[\s\S]{0,600}扫描文件夹/.test(app), '')
+  assert('legacy detail-button on scan removed', !/className="detail-button"[\s\S]{0,80}扫描文件夹/.test(app), '')
+
+  const batchPanelRule = css.match(/\.intake-batch-panel\s*\{[^}]*\}/)?.[0] || ''
+  assert('batch panel CSS uses warm white background', /background:\s*#FFFDF8/i.test(batchPanelRule), `got: ${batchPanelRule}`)
+  assert('batch panel CSS uses 12px radius', /border-radius:\s*12px/.test(batchPanelRule), `got: ${batchPanelRule}`)
+  assert('batch panel CSS uses light border', /border:\s*1px solid #E5E3DC/i.test(batchPanelRule), `got: ${batchPanelRule}`)
+
+  const secondaryBtnRule = css.match(/\.intake-secondary-button\s*\{[^}]*\}/)?.[0] || ''
+  assert('intake-secondary-button rule found', secondaryBtnRule.length > 0, '')
+  assert('secondary button border #DED9CF', /border:\s*1px solid #DED9CF/i.test(secondaryBtnRule), `got: ${secondaryBtnRule}`)
+  assert('secondary button bg paper #FFFDF8', /background:\s*#FFFDF8/i.test(secondaryBtnRule), `got: ${secondaryBtnRule}`)
+  const secondaryBtnHover = css.match(/\.intake-secondary-button:hover:not\(:disabled\)\s*\{[^}]*\}/)?.[0] || ''
+  assert('secondary button hover #F4F2EC', /background:\s*#F4F2EC/i.test(secondaryBtnHover), `got: ${secondaryBtnHover}`)
+
+  // 13.F Reason cleansing covers internal markers (reuses cleanReason imported above).
+  // Already tested in Test 10.1.1 — re-state at row level: row source must read displayReason via cleanReason.
+  const rowSrc = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeResultRow.tsx'), 'utf8')
+  assert('row uses cleanReason on incoming reason', /const displayReason = cleanReason\(reason\)/.test(rowSrc), '')
+
+  // 13.G Result list visual softening: list has rounded container + lighter row separators.
+  const listRule = css.match(/\.concierge-result-list\s*\{[^}]*\}/)?.[0] || ''
+  assert('result-list has 16px radius', /border-radius:\s*16px/.test(listRule), `got: ${listRule}`)
+  assert('result-list has paper background', /background:\s*#FFFDF8/i.test(listRule), `got: ${listRule}`)
+  assert('result-list overflow hidden', /overflow:\s*hidden/.test(listRule), `got: ${listRule}`)
+  const liRule = css.match(/\.concierge-result-list\s*>\s*li\s*\{[^}]*\}/)?.[0] || ''
+  assert('row separator uses lighter #EEEAE3', /border-bottom:\s*1px solid #EEEAE3/i.test(liRule), `got: ${liRule}`)
+  const rowRule = css.match(/^\.concierge-row\s*\{[^}]*\}/m)?.[0] || ''
+  assert('concierge-row padding now 16px 14px', /padding:\s*16px\s+14px/.test(rowRule), `got: ${rowRule}`)
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
