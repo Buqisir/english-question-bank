@@ -464,6 +464,10 @@ console.log('\nTest 17: Auto-expand once + collapsible by user')
   assert('hook keeps a lastAutoExpandKeyRef sentinel', /lastAutoExpandKeyRef\s*=\s*useRef<string \| null>\(null\)/.test(hook), '')
   assert('hook auto-expands lone bucket inside useEffect', /useEffect\(\(\)\s*=>\s*\{[\s\S]{0,400}paperResults\.length === 1[\s\S]{0,400}setExpandedPaperKey\(onlyKey\)/.test(hook), '')
   assert('hook clears the sentinel for multi/empty result sets', /lastAutoExpandKeyRef\.current = null/.test(hook), '')
+  // The sentinel-clear path is the mechanism that lets a NEW search of a
+  // different lone paper auto-expand again. Spell that contract out so it
+  // doesn't quietly regress.
+  assert('hook clearExpansion ALSO resets the sentinel (so new search re-auto-expands)', /clearExpansion = useCallback\(\(\)\s*=>\s*\{\s*setExpandedPaperKey\(null\)[\s\S]{0,200}lastAutoExpandKeyRef\.current = null/.test(hook), '')
   assert('hook returns expandedPaperKey state directly (no render-time effective-key)', /expandedPaperKey,\s*togglePaper/.test(hook) && !/effectiveExpandedKey/.test(hook), '')
   // togglePaper still toggles by paperKey alone.
   const hookCode = hook.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
