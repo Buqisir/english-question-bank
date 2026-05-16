@@ -343,11 +343,81 @@ console.log('\n-- deriveReadingAnalysisViewState: selector OK --')
   )
   if (state.phase === 'real-without-evidence') {
     assertEqual(
-      'zero annotations → note literal',
+      'zero annotations → note literal (byte-equal vs Cut 4)',
       state.note,
       '真实数据：Phone Box · 第 2 题（暂无证据标注）',
     )
+    // Cut 5 — needs-annotation intent attached on this phase ONLY.
+    assertEqual(
+      'zero annotations → intent.kind=needs-annotation',
+      state.intent?.kind,
+      'needs-annotation',
+    )
+    assertEqual(
+      'zero annotations → intent.groupId comes from query',
+      state.intent?.groupId,
+      'g-1',
+    )
+    assertEqual(
+      'zero annotations → intent.questionCount = detail.questions.length',
+      state.intent?.questionCount,
+      2,
+    )
   }
+}
+
+{
+  // Cut 5 — intent.questionCount falls back to 0 when detail has no
+  // questions array (defensive: the selector would normally reject this
+  // path with reason='no-questions', but we lock the formula
+  // `detail.questions?.length ?? 0` against future shape changes).
+  const state = deriveReadingAnalysisViewState({
+    query: { source: 'view-param', groupId: 'g-empty', questionNo: null },
+    fetchOutcome: {
+      kind: 'ok',
+      detail: {
+        id: 'g-empty',
+        passage: { title: 'Empty' },
+        // questions intentionally omitted
+      },
+    },
+    selectorResult: makeSelectorOk({ annotations: [], warnings: [] }),
+  })
+  if (state.phase === 'real-without-evidence') {
+    assertEqual(
+      'zero annotations + no questions[] → intent.questionCount = 0',
+      state.intent?.questionCount,
+      0,
+    )
+  } else {
+    assert(
+      'zero annotations + no questions[]: phase=real-without-evidence',
+      false,
+      JSON.stringify(state),
+    )
+  }
+}
+
+{
+  // Cut 5 — guard the OTHER phases do NOT accidentally grow an intent.
+  // real-with-evidence is the most likely place for an accidental
+  // attachment because it shares the OK-path branch.
+  const state = deriveReadingAnalysisViewState({
+    query: { source: 'view-param', groupId: 'g-with', questionNo: '1' },
+    fetchOutcome: {
+      kind: 'ok',
+      detail: {
+        passage: { title: 'X' },
+        questions: [{ questionNo: '1' }],
+      },
+    },
+    selectorResult: makeSelectorOk({ annotations: [{}], warnings: [] }),
+  })
+  assertEqual(
+    'real-with-evidence has no intent field (Cut 5 guard)',
+    Object.prototype.hasOwnProperty.call(state, 'intent'),
+    false,
+  )
 }
 
 {

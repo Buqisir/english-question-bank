@@ -51,18 +51,55 @@ export type ReadingAnalysisRouteQuery = {
   questionNo: string | null
 }
 
+/* ─────────────────────────── intent shape ────────────────────────────── */
+
+/**
+ * Cut 5 — extremely small, additive intent attached only to the
+ * `real-without-evidence` phase.
+ *
+ * The existence of this intent answers a single product question:
+ * "this real group has no usable evidence annotation yet — what should
+ * the next surface offer?". For Cut 5 the answer is just a typed
+ * payload; **no UI is added in this cut**. The route component does
+ * not read `intent` and `ReadingAnalysisView` does not receive it.
+ *
+ * Future iterations may grow new `kind`s (e.g. `'awaiting-ai-draft'`,
+ * `'awaiting-teacher-review'`); the discriminated-union shape lets each
+ * one add new fields without retrofitting old call sites.
+ */
+export type ReadingAnalysisIntent = {
+  kind: 'needs-annotation'
+  /** The group the user is currently looking at. */
+  groupId: string
+  /** How many questions live in this group's detail. Used by future "去标注" entries to size the workload. */
+  questionCount: number
+}
+
 /* ─────────────────────────── view-state shape ─────────────────────────── */
 
 /**
  * What the route should render. The `phase` string discriminator is the
  * same one the previous inline `LoadState` used; no consumer should need
  * to read more than `phase` plus the fields branched off it.
+ *
+ * Cut 5 adds `intent` ONLY on the `real-without-evidence` branch — the
+ * `demo` and `real-with-evidence` branches do not carry an intent
+ * because both already render the full evidence surface (the demo
+ * fixture, or real located evidence). The `blocked` branch likewise
+ * has no intent — the user is looking at an error/loading screen, not
+ * at a real but un-annotated group.
  */
 export type ReadingAnalysisViewState =
   | {
-      phase: 'demo' | 'real-with-evidence' | 'real-without-evidence'
+      phase: 'demo' | 'real-with-evidence'
       fixture: ReadingAnalysisFixture
       note: string
+    }
+  | {
+      phase: 'real-without-evidence'
+      fixture: ReadingAnalysisFixture
+      note: string
+      intent: ReadingAnalysisIntent
     }
   | {
       phase: 'blocked'
@@ -159,6 +196,9 @@ export function getInitialReadingAnalysisViewState(
  * the structural type local (rather than importing `QuestionGroupDetail`)
  * so the pure module doesn't depend on the detail's full shape — easier
  * to test with hand-rolled fixtures.
+ *
+ * Cut 5 reads `questions.length` (in addition to `questions[0]?.questionNo`)
+ * to populate the `real-without-evidence` intent's `questionCount`.
  */
 export type ReadingAnalysisDetailLike = {
   id?: string
@@ -272,11 +312,22 @@ export function deriveReadingAnalysisViewState(
   // there is no evidence annotation yet". In practice we either had no
   // sidecar at all OR the sidecar entries all failed to locate; both
   // present the same UX: real material, no dashed lines, friendly note.
+  //
+  // Cut 5 — attach a tiny `intent: { kind: 'needs-annotation', ... }`
+  // payload so a future "去标注" surface knows which group it is and
+  // how many questions live in it. The `note` string is BYTE-EQUAL to
+  // the previous Cut-4 output; nothing visible changes in this cut.
   if (fixture.annotations.length === 0) {
+    const questionCount = detail.questions?.length ?? 0
     return {
       phase: 'real-without-evidence',
       fixture,
       note: `真实数据：${titlePart} · 第 ${effectiveQuestionNo} 题（暂无证据标注）`,
+      intent: {
+        kind: 'needs-annotation',
+        groupId: query.groupId,
+        questionCount,
+      },
     }
   }
 
