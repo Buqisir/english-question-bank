@@ -1,7 +1,8 @@
 /**
  * ConciergeGroupCard — a single 题组/篇章 card rendered INSIDE the expanded
  * area of a paper bucket row. Carries the per-group reason and the two
- * teacher-facing actions (加入草稿卷, 找类似).
+ * teacher-facing actions (加入草稿卷, 找类似), plus a lightweight 阅读解析
+ * entry (Cut 3) for groups that are eligible.
  *
  * Smallest add unit is still QuestionGroup. There is no per-question add UI.
  */
@@ -13,6 +14,10 @@ import {
   type Difficulty,
   type QuestionGroupCard,
 } from '../domain/questionBank.ts'
+import {
+  buildReadingAnalysisHref,
+  isReadingAnalysisCandidate,
+} from '../features/reading-analysis/readingAnalysisRoute.ts'
 
 const DIFFICULTY_CLASS: Record<Difficulty, string> = {
   low: 'concierge-difficulty-low',
@@ -81,6 +86,13 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
   const pills = buildTagPills(group)
+  // Reading-analysis entry is opt-in per group. The eligibility predicate
+  // lives in `readingAnalysisRoute.ts` so the rule (currently
+  // `groupType === 'reading' && questionCount > 0`) is not duplicated here.
+  const showReadingAnalysisEntry = isReadingAnalysisCandidate(group)
+  const readingAnalysisHref = showReadingAnalysisEntry
+    ? buildReadingAnalysisHref({ groupId: group.id })
+    : null
 
   return (
     <article className="concierge-group-card" aria-label={`${section || groupTypeLabel[group.groupType]} ${passageTitle}`}>
@@ -131,6 +143,20 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         >
           找类似
         </button>
+        {readingAnalysisHref && (
+          // Lightweight link, NOT a button — opens the analysis route in
+          // the same tab. Reuses `.concierge-action` styling so it visually
+          // belongs to the same row of group actions but doesn't compete
+          // with the primary 加入草稿卷.
+          <a
+            className="concierge-action concierge-action-reading-analysis"
+            href={readingAnalysisHref}
+            data-ra-entry="group-card"
+            data-ra-group-id={group.id}
+          >
+            阅读解析
+          </a>
+        )}
       </div>
     </article>
   )
