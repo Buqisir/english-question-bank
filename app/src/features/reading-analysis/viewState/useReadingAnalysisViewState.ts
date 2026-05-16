@@ -24,6 +24,7 @@
 
 import { useEffect, useState } from 'react'
 import { fetchQuestionGroupDetail } from '../../../services/questionGroups.ts'
+import type { QuestionGroupDetail } from '../../../domain/questionBank.ts'
 import {
   parseReadingAnalysisRoute,
   type ReadingAnalysisRouteMatch,
@@ -84,8 +85,13 @@ export function useReadingAnalysisViewState(): ReadingAnalysisViewState {
     let cancelled = false
 
     ;(async () => {
-      // 1. Fetch the question-group detail.
-      let fetchOutcome: ReadingAnalysisFetchOutcome
+      // 1. Fetch the question-group detail. We type the local outcome on
+      // the full `QuestionGroupDetail` so that when we hand
+      // `fetchOutcome.detail` to `selectReadingAnalysisFromDetail` below
+      // — which requires the full type — TypeScript sees the right shape
+      // rather than the structural `ReadingAnalysisDetailLike` the pure
+      // module reads.
+      let fetchOutcome: ReadingAnalysisFetchOutcome<QuestionGroupDetail>
       try {
         const detail = await fetchQuestionGroupDetail(query.groupId!)
         if (cancelled) return

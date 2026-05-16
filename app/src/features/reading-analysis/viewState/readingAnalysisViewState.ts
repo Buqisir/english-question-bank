@@ -168,9 +168,27 @@ export type ReadingAnalysisDetailLike = {
   questions?: Array<{ questionNo?: string }>
 }
 
-/** Discriminated result of the detail fetch. */
-export type ReadingAnalysisFetchOutcome =
-  | { kind: 'ok'; detail: ReadingAnalysisDetailLike }
+/**
+ * Discriminated result of the detail fetch.
+ *
+ * Generic in `TDetail` so the hook can preserve the full `QuestionGroupDetail`
+ * it received and hand it straight to `selectReadingAnalysisFromDetail`
+ * (which requires the full type) without widening through the structural
+ * `ReadingAnalysisDetailLike` shape this module reads. The default keeps
+ * the pure decision functions independent of the full detail type so they
+ * stay easy to test with hand-rolled fixtures (see
+ * `scripts/verify-reading-analysis-view-state.mjs`).
+ *
+ * Read positions only — `TDetail` appears under `'ok'.detail` and is never
+ * written. That makes `ReadingAnalysisFetchOutcome<Sub>` covariantly
+ * assignable to `ReadingAnalysisFetchOutcome<Super>`, which is what lets
+ * `deriveReadingAnalysisViewState` keep its non-generic parameter type
+ * while accepting outcomes parameterised on a wider detail type.
+ */
+export type ReadingAnalysisFetchOutcome<
+  TDetail extends ReadingAnalysisDetailLike = ReadingAnalysisDetailLike,
+> =
+  | { kind: 'ok'; detail: TDetail }
   | { kind: 'error'; message: string }
   | { kind: 'missing' }
 
