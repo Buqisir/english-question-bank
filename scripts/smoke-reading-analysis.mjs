@@ -59,6 +59,20 @@ const ARTIFACT_DIR = path.resolve(
 )
 mkdirSync(ARTIFACT_DIR, { recursive: true })
 
+// Fixture contract — hard-pinned to the demo fixture so Step 10 asserts the
+// actual active target instead of "whichever offscreen evidence happens to
+// come first in DOM order". Declared here (above the top-level `await
+// runFixtureSmoke(page)` below) so they are initialised before Step 10 runs:
+// `function` declarations hoist, but `const` initialisers do not — placing
+// these next to the function definitions further down would put them in the
+// TDZ at Step 10's call site (ReferenceError).
+//
+// If `readingAnalysisFixture.ts` ever rewires the correct option's link,
+// these constants will be wrong and Step 10's path-id sanity check fails
+// loudly instead of silently chasing the wrong anchor.
+const FIXTURE_CORRECT_OPTION_LINK_ID = 'link-c-evidence'
+const FIXTURE_CORRECT_OPTION_TARGET_ANCHOR_ID = 'ann-evidence-1'
+
 let passed = 0, failed = 0
 const issues = []
 function step(name, ok, detail = '') {
@@ -320,16 +334,11 @@ async function runFixtureSmoke(page) {
  *   4. Click the correct option.
  *   5. Wait for the path to render and the scroll animation to settle.
  *   6. Re-read ann-evidence-1's rect and the rendered path id.
+ *
+ * The two FIXTURE_CORRECT_OPTION_* constants used below are declared at the
+ * top of the file (above the top-level `await runFixtureSmoke(page)`) so
+ * that they are initialised before Step 10's call site reaches them.
  */
-
-// Fixture contract — we hard-pin against the demo fixture so that the smoke
-// asserts the actual active target instead of "whichever offscreen evidence
-// happens to come first". If `readingAnalysisFixture.ts` ever rewires the
-// correct option's link, these constants will be wrong and the smoke will
-// fail loudly on the path-id sanity check below.
-const FIXTURE_CORRECT_OPTION_LINK_ID = 'link-c-evidence'
-const FIXTURE_CORRECT_OPTION_TARGET_ANCHOR_ID = 'ann-evidence-1'
-
 async function runAutoScrollSmoke(page) {
   // Resize so the passage scroller becomes short enough that ann-evidence-1
   // (the last sentence's quote) starts below the fold. 72vh of 380px = ~273px.
