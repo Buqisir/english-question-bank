@@ -44,6 +44,7 @@ export {
   createAnimationInstanceState,
   detectReducedMotion,
   findActiveLink,
+  planScrollIntoView,
   rectsToEndpoints,
   resolveSource,
   resolveTarget,
@@ -57,6 +58,8 @@ export type {
   MatchMediaLike,
   RectLike,
   ResolvedTarget,
+  ScrollPlan,
+  ScrollPlanInput,
 } from './evidenceLinking.ts'
 
 export { useEvidenceLinkOverlay } from './useEvidenceLinkOverlay.ts'
