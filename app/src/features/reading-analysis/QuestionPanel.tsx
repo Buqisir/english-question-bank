@@ -5,11 +5,18 @@
  *   - clicking the stem area selects { kind: 'stem' }
  *   - clicking an option selects { kind: 'option', optionKey }
  *
- * Each clickable surface owns a stable data-ra-link-source so LinkOverlay can
- * resolve the SVG path's start anchor.
+ * Each clickable surface owns a stable anchor key produced by the shared
+ * `anchorKeys` module so LinkOverlay can resolve the SVG path's start
+ * anchor without having to know the format.
  */
 
 import { type ReactNode } from 'react'
+import {
+  ATTR_LINK_SOURCE,
+  ATTR_OPTION_ANCHOR,
+  formatOptionSourceKey,
+  formatStemSourceKey,
+} from './evidenceLinking/index.ts'
 import type { ActiveSelection, Question } from './readingAnalysisTypes.ts'
 
 export type QuestionPanelProps = {
@@ -29,7 +36,7 @@ export function QuestionPanel(props: QuestionPanelProps): ReactNode {
       <button
         type="button"
         className={`ra-question-stem${stemActive ? ' is-active' : ''}`}
-        data-ra-link-source={`q:${question.id}`}
+        {...{ [ATTR_LINK_SOURCE]: formatStemSourceKey(question.id) }}
         onClick={() => onSelect({ kind: 'stem', questionId: question.id })}
         aria-pressed={stemActive}
       >
@@ -44,12 +51,13 @@ export function QuestionPanel(props: QuestionPanelProps): ReactNode {
             selection.questionId === question.id &&
             selection.optionKey === opt.key
           const tone = opt.correct ? 'correct' : 'wrong'
+          const optionKey = formatOptionSourceKey(question.id, opt.key)
           return (
             <li key={opt.key}>
               <button
                 type="button"
                 className={`ra-option ra-option-${tone}${active ? ' is-active' : ''}`}
-                data-ra-link-source={`q:${question.id}:${opt.key}`}
+                {...{ [ATTR_LINK_SOURCE]: optionKey }}
                 data-ra-correct={opt.correct ? 'true' : 'false'}
                 onClick={() =>
                   onSelect({
@@ -62,7 +70,7 @@ export function QuestionPanel(props: QuestionPanelProps): ReactNode {
               >
                 <span
                   className="ra-option-key"
-                  data-ra-option-anchor={`q:${question.id}:${opt.key}`}
+                  {...{ [ATTR_OPTION_ANCHOR]: optionKey }}
                 >
                   {opt.key}
                 </span>
