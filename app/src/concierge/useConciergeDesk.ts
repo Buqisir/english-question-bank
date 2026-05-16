@@ -1,19 +1,30 @@
 /**
- * useConciergeDesk — owns the AI取题台 search state at App level so it survives
- * detail / preview round-trips. Mounting/unmounting ConciergeDesk no longer
- * loses intent / results / clarification / pendingQuery.
+ * useConciergeDesk — owns AI 取题台 V1.1 state.
  *
- * State is purely in-memory; per spec we do NOT persist results to localStorage.
+ * V1.1 IA:
+ *   - User searches in natural language (existing runConciergeSearch).
+ *   - The hits are aggregated client-side into "来源卷 / 试卷" rows
+ *     (see aggregatePaperResults).
+ *   - The desk expands ONE paper at a time (`expandedPaperKey`).
+ *   - Expanding a paper does NOT fetch question-group detail. We render the
+ *     groups inside the paper card from the cards we already have.
+ *   - `detailCache` is preserved (and exported) for future per-group detail
+ *     drawers, but no longer driven by the paper expand toggle.
+ *
+ * Important: this hook owns its own detailCache, separate from App.tsx's
+ * previewDetails / loadPreviewForBasketItems. They are NOT shared.
  */
 
-import { useCallback, useState } from 'react'
-import type { QuestionGroupCard } from '../domain/questionBank.ts'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type { QuestionGroupCard, QuestionGroupDetail } from '../domain/questionBank.ts'
+import { fetchQuestionGroupDetail } from '../services/questionGroups.ts'
 import {
   buildSimilarIntent,
   runConciergeSearch,
   type ConciergeSearchHit,
   type ConciergeSearchOutcome,
 } from './conciergeSearch.ts'
+import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 
 export type ConciergeDeskState =
   | { kind: 'empty' }
@@ -22,11 +33,20 @@ export type ConciergeDeskState =
   | { kind: 'clarification'; question: string; assistantMessage: string; pendingQuery: string }
   | { kind: 'error'; message: string; query: string }
 
+export type ConciergeDetailEntry =
+  | { status: 'loading' }
+  | { status: 'ready'; detail: QuestionGroupDetail }
+  | { status: 'error'; error: string }
+
+export type ConciergeDetailCache = Record<string, ConciergeDetailEntry>
+
 export type UseConciergeDeskInput = {
   questionGroups: QuestionGroupCard[]
   apiKey: string
   /** Test seam — replace network call. */
   searchOverride?: typeof runConciergeSearch
+  /** Test seam — replace the detail fetch. */
+  detailFetchOverride?: typeof fetchQuestionGroupDetail
 }
 
 export type UseConciergeDeskResult = {
@@ -36,20 +56,106 @@ export type UseConciergeDeskResult = {
   submit: (intentOverride?: string) => Promise<void>
   triggerSimilar: (group: QuestionGroupCard) => Promise<void>
   reset: () => void
+
+  // V1.1 paper-bucket expansion
+  paperResults: PaperResult[]
+  expandedPaperKey: string | null
+  togglePaper: (paperKey: string) => void
+
+  // Reserved for future per-group detail drawer (NOT used by paper expand).
+  detailCache: ConciergeDetailCache
+  retryGroupDetail: (groupId: string) => void
 }
 
 export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDeskResult {
   const [intent, setIntent] = useState('')
   const [state, setState] = useState<ConciergeDeskState>({ kind: 'empty' })
+  const [expandedPaperKey, setExpandedPaperKey] = useState<string | null>(null)
+  const [detailCache, setDetailCache] = useState<ConciergeDetailCache>({})
+
+  const fetchDetail = input.detailFetchOverride || fetchQuestionGroupDetail
+
+  const loadDetail = useCallback(
+    (groupId: string) => {
+      setDetailCache((prev) => ({ ...prev, [groupId]: { status: 'loading' } }))
+      Promise.resolve()
+        .then(() => fetchDetail(groupId))
+        .then((detail: QuestionGroupDetail | null | undefined) => {
+          if (!detail) {
+            setDetailCache((prev) => ({
+              ...prev,
+              [groupId]: { status: 'error', error: '题组详情未找到。' },
+            }))
+            return
+          }
+          setDetailCache((prev) => ({ ...prev, [groupId]: { status: 'ready', detail } }))
+        })
+        .catch((error: unknown) => {
+          const message = error instanceof Error ? error.message : String(error)
+          if (typeof console !== 'undefined' && console.warn) {
+            console.warn('[concierge] group detail fetch failed:', message)
+          }
+          setDetailCache((prev) => ({ ...prev, [groupId]: { status: 'error', error: message } }))
+        })
+    },
+    [fetchDetail],
+  )
+
+  const retryGroupDetail = useCallback(
+    (groupId: string) => {
+      loadDetail(groupId)
+    },
+    [loadDetail],
+  )
+
+  const clearExpansion = useCallback(() => {
+    setExpandedPaperKey(null)
+    setDetailCache({})
+    lastAutoExpandKeyRef.current = null
+  }, [])
+
+  // Aggregate hits → paper buckets.
+  const paperResults = useMemo<PaperResult[]>(
+    () => (state.kind === 'results' ? aggregatePaperResults(state.hits) : []),
+    [state],
+  )
+
+  // Single-paper auto-expand: when a fresh result set resolves to exactly one
+  // bucket, open it ONCE. After that, the user's explicit collapse (set to
+  // null via togglePaper) wins — do not snap it back open. We track which
+  // result set we already auto-expanded for via a ref keyed on the lone bucket.
+  const lastAutoExpandKeyRef = useRef<string | null>(null)
+  useEffect(() => {
+    if (paperResults.length === 1) {
+      const onlyKey = paperResults[0].key
+      if (lastAutoExpandKeyRef.current !== onlyKey) {
+        lastAutoExpandKeyRef.current = onlyKey
+        setExpandedPaperKey(onlyKey)
+      }
+      return
+    }
+    // Multi-bucket / empty → forget the auto-expand sentinel so a future
+    // single-bucket search can auto-open again.
+    lastAutoExpandKeyRef.current = null
+  }, [paperResults])
+
+  const togglePaper = useCallback((paperKey: string) => {
+    // Toggle: if already expanded, collapse; otherwise switch to this one.
+    // No fetch. No detail-cache touch. The paper expand renders directly from
+    // the cards we already have.
+    setExpandedPaperKey((current) => (current === paperKey ? null : paperKey))
+  }, [])
 
   const runSearch = useCallback(
     async (rawIntent: string, pendingQuery: string | null) => {
       const trimmed = rawIntent.trim()
       if (!trimmed) {
         setState({ kind: 'empty' })
+        clearExpansion()
         return
       }
       setState({ kind: 'loading', query: trimmed })
+      clearExpansion()
       try {
         const search = input.searchOverride || runConciergeSearch
         const outcome: ConciergeSearchOutcome = await search({
@@ -82,12 +188,12 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
         setState({ kind: 'error', message, query: trimmed })
       }
     },
-    [input.apiKey, input.questionGroups, input.searchOverride],
+    [clearExpansion, input.apiKey, input.questionGroups, input.searchOverride],
   )
 
   const submit = useCallback(
     async (intentOverride?: string) => {
-      const value = (intentOverride !== undefined ? intentOverride : intent)
+      const value = intentOverride !== undefined ? intentOverride : intent
       const pendingQuery = state.kind === 'clarification' ? state.pendingQuery : null
       await runSearch(value, pendingQuery)
       setIntent('')
@@ -99,6 +205,9 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     async (group: QuestionGroupCard) => {
       const similarIntent = buildSimilarIntent(group)
       setIntent('')
+      // Same pipeline as ordinary submit — results land back into runSearch,
+      // which feeds aggregatePaperResults via state.hits. So 找类似 always
+      // surfaces back as paper rows, never as a flat group list.
       await runSearch(similarIntent, null)
     },
     [runSearch],
@@ -107,7 +216,20 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   const reset = useCallback(() => {
     setIntent('')
     setState({ kind: 'empty' })
-  }, [])
+    clearExpansion()
+  }, [clearExpansion])
 
-  return { intent, setIntent, state, submit, triggerSimilar, reset }
+  return {
+    intent,
+    setIntent,
+    state,
+    submit,
+    triggerSimilar,
+    reset,
+    paperResults,
+    expandedPaperKey,
+    togglePaper,
+    detailCache,
+    retryGroupDetail,
+  }
 }

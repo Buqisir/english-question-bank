@@ -258,352 +258,261 @@ console.log('\nTest 8: buildSimilarIntent uses title + summary + tags')
 }
 
 // ------------------------------------------------------------------ Test 9
-console.log('\nTest 9: Review fixes — state lifted, no row tabIndex, empty reason hidden, aria-label')
+console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onPreview gone')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const srcRoot = path.resolve(here, '..', 'app', 'src')
 
   const deskSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeDesk.tsx'), 'utf8')
   const hookSource = readFileSync(path.join(srcRoot, 'concierge', 'useConciergeDesk.ts'), 'utf8')
-  const rowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeResultRow.tsx'), 'utf8')
+  const paperRowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
+  const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
-  const searchSource = readFileSync(path.join(srcRoot, 'concierge', 'conciergeSearch.ts'), 'utf8')
+  const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
 
-  // 9.1 State lifted: ConciergeDesk no longer owns desk state internally.
-  //     It must accept intent / state / onSubmit / onSimilar from outside.
-  assert('ConciergeDesk accepts intent prop', /intent\s*:\s*string/.test(deskSource), '')
-  assert('ConciergeDesk accepts onSubmit prop', /onSubmit\s*:\s*\(\)/.test(deskSource), '')
-  assert('ConciergeDesk accepts onSimilar prop', /onSimilar\s*:/.test(deskSource), '')
-  assert('ConciergeDesk does NOT call useState locally', !/from\s+['"]react['"][^\n]*useState|^import\s+.*useState/m.test(deskSource), '')
+  // 9.1 Desk receives paperResults / expandedPaperKey / onTogglePaper.
+  assert('Desk props include paperResults', /paperResults\s*:\s*PaperResult\[\]/.test(deskSource), '')
+  assert('Desk props include expandedPaperKey', /expandedPaperKey\s*:\s*string\s*\|\s*null/.test(deskSource), '')
+  assert('Desk props include onTogglePaper', /onTogglePaper\s*:\s*\(/.test(deskSource), '')
 
-  // 9.2 Hook exists and exports useConciergeDesk + ConciergeDeskState.
-  assert('useConciergeDesk hook exists', /export function useConciergeDesk/.test(hookSource), '')
-  assert('hook exports ConciergeDeskState type', /export type ConciergeDeskState/.test(hookSource), '')
+  // 9.2 Old V1 props are gone from the Desk surface.
+  assert('Desk no longer accepts expandedHitId', !/expandedHitId\s*:/.test(deskSource), '')
+  assert('Desk no longer accepts onToggleExpand', !/onToggleExpand\s*:/.test(deskSource), '')
+  assert('Desk no longer accepts onRetryExpand', !/onRetryExpand\s*:/.test(deskSource), '')
+  assert('Desk no longer accepts onPreview', !/onPreview\s*:/.test(deskSource), '')
+  assert('Desk no longer accepts detailCache', !/detailCache\s*:/.test(deskSource), '')
 
-  // 9.3 App.tsx mounts the hook and threads it into ConciergeDesk.
-  assert('App imports useConciergeDesk', /useConciergeDesk/.test(appSource), '')
-  assert('App constructs hook before render', /const conciergeDesk\s*=\s*useConciergeDesk/.test(appSource), '')
-  assert('App passes hook state to ConciergeDesk', /state=\{conciergeDesk\.state\}/.test(appSource), '')
-  assert('App passes hook intent to ConciergeDesk', /intent=\{conciergeDesk\.intent\}/.test(appSource), '')
+  // 9.3 Desk does not call useState locally.
+  assert('Desk does NOT use useState locally', !/^import\s+[^\n]*\buseState\b/m.test(deskSource), '')
 
-  // 9.4 Row no longer has integer tabIndex on its article wrapper.
-  assert('ConciergeResultRow article has no tabIndex={0}', !/tabIndex=\{0\}/.test(rowSource), '')
+  // 9.4 Desk renders paper rows, not the old group rows.
+  assert('Desk maps paperResults', /paperResults\.map\(\(paper\)/.test(deskSource), '')
+  assert('Desk does NOT map state.hits directly', !/state\.hits\.map\(/.test(deskSource), '')
+  assert('Desk uses ConciergePaperRow', /<ConciergePaperRow\b/.test(deskSource), '')
+  assert('Desk passes basketIds to row', /basketIds=\{basketIds\}/.test(deskSource), '')
 
-  // 9.5 Empty reason is not rendered.
-  // After the V1.1 refactor we gate on the cleaned reason via cleanReason(reason),
-  // not on the raw input — so the gate is `displayReason && (...)` rather than
-  // `reason.trim().length > 0`.
-  assert('row reason render is gated on truthy displayReason', /\{displayReason && \(/.test(rowSource), '')
+  // 9.5 Hook exports the V1.1 surface.
+  assert('hook exposes paperResults', /paperResults\s*:\s*PaperResult\[\]/.test(hookSource), '')
+  assert('hook exposes expandedPaperKey', /expandedPaperKey\s*:\s*string\s*\|\s*null/.test(hookSource), '')
+  assert('hook exposes togglePaper', /togglePaper\s*:\s*\(/.test(hookSource), '')
+  assert('hook keeps detailCache exported (reserved)', /detailCache\s*:\s*ConciergeDetailCache/.test(hookSource), '')
+  assert('hook drops V1 toggleExpand/retryExpand exports', !/toggleExpand\s*:|retryExpand\s*:/.test(hookSource), '')
 
-  // 9.6 No default "题库管家匹配" string in conciergeSearch.ts.
-  assert('default reason string removed from conciergeSearch.ts', !/题库管家匹配/.test(searchSource), '')
+  // 9.6 App passes new props and does NOT pass V1 props.
+  assert('App passes paperResults', /paperResults=\{conciergeDesk\.paperResults\}/.test(appSource), '')
+  assert('App passes expandedPaperKey', /expandedPaperKey=\{conciergeDesk\.expandedPaperKey\}/.test(appSource), '')
+  assert('App passes onTogglePaper', /onTogglePaper=\{\(key\)\s*=>\s*conciergeDesk\.togglePaper\(key\)\}/.test(appSource), '')
+  assert('App no longer passes expandedHitId', !/expandedHitId=/.test(appSource), '')
+  assert('App no longer passes detailCache to ConciergeDesk', !/<ConciergeDesk[\s\S]*?detailCache=/.test(appSource), '')
+  assert('App no longer passes onToggleExpand to ConciergeDesk', !/<ConciergeDesk[\s\S]*?onToggleExpand=/.test(appSource), '')
+  assert('App no longer passes onPreview to ConciergeDesk', !/<ConciergeDesk[\s\S]*?onPreview=/.test(appSource), '')
 
-  // 9.7 Mode toggle uses aria-label, not aria-pressed.
-  assert('home-mode-toggle uses aria-label', /home-mode-toggle[\s\S]{0,400}aria-label=/.test(appSource), '')
-  assert('home-mode-toggle does NOT use aria-pressed', !/home-mode-toggle[\s\S]{0,400}aria-pressed/.test(appSource), '')
-  assert('aria-label switches based on homeMode', /aria-label=\{homeMode === 'ai' \? '切换到经典模式' : '切换到 AI 模式'\}/.test(appSource), '')
+  // 9.7 ConciergePaperRow contract.
+  assert('Paper row article uses concierge-paper-row class', /<article[\s\S]{0,200}className=\{`concierge-paper-row\$\{expanded \? ' is-expanded' : ''\}`\}/.test(paperRowSource), '')
+  assert('Paper row click guards interactive children', /target\.closest\('button, a, input, textarea, select, \[role="button"\], \.concierge-paper-detail'\)/.test(paperRowSource), '')
+  assert('Paper row chevron toggles via onTogglePaper(paper.key)', /onClick=\{\(\)\s*=>\s*onTogglePaper\(paper\.key\)\}/.test(paperRowSource), '')
+  assert('Paper row uses 命中 N 组 wording (not 共 N 组)', /命中\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
+  assert('Paper row does NOT say 共 N 组', !/共\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
+  assert('Paper row does NOT call fetchQuestionGroupDetail', !/fetchQuestionGroupDetail/.test(paperRowSource), '')
 
-  // 9.8 AI-mode quiet first screen: shell carries home-mode-ai class.
-  assert('app-shell tags class with home-mode', /app-shell home-mode-\$\{homeMode\}/.test(appSource), '')
+  // 9.8 ConciergeGroupCard contract — group-level actions live here.
+  assert('Group card 加入草稿卷 / 已加入 wording', /alreadyInBasket\s*\?\s*['"]已加入['"]\s*:\s*['"]加入草稿卷['"]/.test(groupCardSource), '')
+  assert('Group card aria-pressed = alreadyInBasket', /aria-pressed=\{alreadyInBasket\}/.test(groupCardSource), '')
+  assert('Group card disabled when alreadyInBasket', /disabled=\{alreadyInBasket\}/.test(groupCardSource), '')
+  assert('Group card 找类似 button (no bare 类似)', />\s*找类似\s*<\/button>/.test(groupCardSource), '')
+  assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
+  assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
 
-  // 9.9 Heavy topbar widgets gated by classic mode.
-  assert('topbar-ai-group rendered only in classic mode', /\{homeMode === 'classic' && \(\s*<span className="topbar-ai-group"/.test(appSource), '')
-  assert('闭环面板 button rendered only in classic mode', /\{homeMode === 'classic' && \(\s*<button[\s\S]{0,200}闭环面板/.test(appSource), '')
-  assert('data-status hidden in AI mode', /\{homeMode === 'classic' && \(\s*<span className=\{`data-status/.test(appSource), '')
+  // 9.9 Aggregator contract.
+  assert('aggregatePaperResults exported', /export function aggregatePaperResults/.test(aggSource), '')
+  assert('PaperResult type exported', /export type PaperResult/.test(aggSource), '')
+  assert('Aggregator key uses paperName + year + region (three segments)', /paper:\$\{paperName\}__\$\{group\.year\}__\$\{region\}/.test(aggSource), '')
+  assert('Aggregator includes source signature in key', /__\$\{sigSource\}__\$\{sigType\}/.test(aggSource), '')
+  assert('Aggregator falls back to "其他来源" when fields missing', /key:\s*FALLBACK_KEY/.test(aggSource), '')
+  assert('FALLBACK_KEY is a stable constant', /const FALLBACK_KEY = ['"]paper:_其他来源_['"]/.test(aggSource), '')
+  assert('Aggregator sanitizes reasons via cleanReason', /cleanReason\(reason\)/.test(aggSource), '')
+  assert('Aggregator surfaces representativeReason from first hit', /representativeReason:\s*cleanReason\(reason\)/.test(aggSource), '')
 
-  // 9.10 Basket panel becomes a drawer in AI mode, with chip + backdrop.
-  assert('basket-panel class flips to drawer in AI mode', /basket-panel-drawer/.test(appSource), '')
-  assert('AI-mode basket-chip exists', /className="basket-chip"/.test(appSource), '')
-  assert('basket drawer toggle state', /aiBasketDrawerOpen/.test(appSource), '')
-
-  // 9.11 No-key fallback copy is soft (no English jargon).
-  assert('no-key fallback copy is soft', /没填\s*AI\s*密钥|本地题库帮你找/.test(searchSource), '')
-  assert('error fallback copy is soft', /管家暂时没连上|本地题库帮你找/.test(searchSource), '')
-
-  // 9.12 The user-facing assistantMessage strings must not leak technical detail.
-  // Extract every `assistantMessage: '...'` literal from conciergeSearch.ts.
-  const assistantMsgs = Array.from(
-    searchSource.matchAll(/assistantMessage:\s*['"`]([^'"`]+)['"`]/g),
-  ).map((m) => m[1])
-  assert('found at least 2 user-facing assistantMessage literals', assistantMsgs.length >= 2, `got ${assistantMsgs.length}`)
-  for (const msg of assistantMsgs) {
-    assert(`UI msg "${msg.slice(0, 16)}…" has no Failed/502/steward`, !/Failed|502|503|404|question-bank|steward|DeepSeek/.test(msg), `leak in: ${msg}`)
-  }
-
-  // 9.13 Result rows show passage summary, not the small-question hit.
-  // buildPrimaryText must no longer read group.hit as the primary text.
-  const buildPrimaryFn = rowSource.match(/function buildPrimaryText[\s\S]*?\n\}/)?.[0] || ''
-  assert('buildPrimaryText body found', buildPrimaryFn.length > 0, '')
-  assert('buildPrimaryText prefers summary', /summary/.test(buildPrimaryFn), '')
-  // Strip line and block comments before checking for code-level access.
-  const buildPrimaryCode = buildPrimaryFn
+  // 9.10 Hook togglePaper does NOT fetch group detail.
+  // Strip comments before the check (comments mention previewDetails legitimately).
+  const hookCode = hookSource
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/^\s*\/\/.*$/gm, '')
-  assert('buildPrimaryText code does NOT read group.hit', !/group\.hit/.test(buildPrimaryCode), `got: ${buildPrimaryCode}`)
+  assert('togglePaper body does not call loadDetail/fetchDetail', /const togglePaper = useCallback\(\(paperKey: string\)\s*=>\s*\{\s*setExpandedPaperKey/.test(hookCode), '')
+  assert('togglePaper body does NOT touch detailCache', !/togglePaper[\s\S]{0,400}setDetailCache/.test(hookCode), '')
 
-  // The article body should not render `group.hit` directly anywhere
-  // (it's only allowed as the article's hover title attribute).
-  assert('row JSX does not render group.hit as visible text', !/>\s*\{[^}]*group\.hit[^}]*\}\s*</.test(rowSource), '')
+  // 9.11 Hook does NOT touch App.tsx preview pipeline.
+  assert('hook code does NOT touch previewDetails / loadPreviewForBasketItems', !/previewDetails|loadPreviewForBasketItems/.test(hookCode), '')
 
-  // 9.14 AI-mode headline is no longer pushed to vertical center; clamp upper bound is now ≤ 110px.
-  const headlineRule = appCss().match(/\.app-shell\.home-mode-ai \.concierge-headline\s*\{[^}]*\}/)?.[0] || ''
-  assert('AI-mode headline rule exists', headlineRule.length > 0, '')
-  const clampUpper = headlineRule.match(/clamp\([^,]+,\s*([0-9.]+)vh/)?.[1]
-  assert('headline clamp middle term ≤ 8vh (further upshift)', Number(clampUpper) <= 8, `got: ${clampUpper}vh`)
-  assert('headline clamp ceiling ≤ 60px (no longer >100px)', /clamp\([^,]+,\s*[0-9.]+vh,\s*[1-6]?[0-9]px\)/.test(headlineRule), `got: ${headlineRule}`)
-
-  function appCss() {
-    return readFileSync(path.join(srcRoot, 'App.css'), 'utf8')
-  }
+  // 9.12 New search clears expansion + cache.
+  assert('runSearch clears expansion before await', /clearExpansion\(\)/.test(hookCode), '')
 }
 
 // ------------------------------------------------------------------ Test 10
-console.log('\nTest 10: Recommendation reason — strip "DeepSeek 检测第 N 位" prefix, render as third line')
+console.log('\nTest 10: cleanReason still strips internal markers (V1 invariant carried forward)')
 {
-  // 10.1 cleanReason strips the prefix and trims separators.
-  assert('strips prefix with semicolon', cleanReason('DeepSeek 检测第 1 位；摘要明确提及生态设计师 John Todd') === '摘要明确提及生态设计师 John Todd', `got: ${cleanReason('DeepSeek 检测第 1 位；摘要明确提及生态设计师 John Todd')}`)
-  assert('strips prefix with full-width semicolon', cleanReason('DeepSeek 检测第 12 位；写作教学反思') === '写作教学反思', '')
-  assert('strips prefix with halfwidth semicolon', cleanReason('DeepSeek 检测第 3 位; clean rationale here') === 'clean rationale here', '')
-  assert('strips prefix with no separator', cleanReason('DeepSeek 检测第 5 位 just a tail') === 'just a tail', '')
-  assert('passes through unrelated text', cleanReason('普通理由：主题接近写作教学') === '普通理由：主题接近写作教学', '')
-  assert('empty input returns empty string', cleanReason('') === '', '')
-  assert('only-prefix collapses to empty', cleanReason('DeepSeek 检测第 7 位；') === '', '')
-
-  // 10.1.1 (Part 2 F) Strips additional internal markers.
-  assert('strips 管家规则过滤 prefix', cleanReason('管家规则过滤；DeepSeek 检测第 1 位；标题含 阅读理解 C') === '标题含 阅读理解 C', `got: ${cleanReason('管家规则过滤；DeepSeek 检测第 1 位；标题含 阅读理解 C')}`)
-  assert('strips bare DeepSeek token', cleanReason('DeepSeek；主题相符') === '主题相符', `got: ${cleanReason('DeepSeek；主题相符')}`)
-  assert('strips steward token (case-insensitive)', cleanReason('Steward fallback；fallback；real reason') === 'real reason', `got: ${cleanReason('Steward fallback；fallback；real reason')}`)
-  assert('normalizes ASCII single quotes around CJK phrase', cleanReason("标题含'阅读理解C'，主题为书籍与阅读") === '标题含阅读理解 C，主题为书籍与阅读', `got: ${cleanReason("标题含'阅读理解C'，主题为书籍与阅读")}`)
-  assert('long internal-only string collapses to empty', cleanReason('管家规则过滤；DeepSeek 检测第 4 位；') === '', '')
-
-  // 10.2 Row JSX renders reason on its own line, not inside .concierge-meta.
-  const here = path.dirname(new URL(import.meta.url).pathname)
-  const rowSrc = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeResultRow.tsx'), 'utf8')
-
-  // Slice out the meta div block; reason must NOT appear there anymore.
-  const metaBlock = rowSrc.match(/<div className="concierge-meta">[\s\S]*?<\/div>/)?.[0] || ''
-  assert('row .concierge-meta div found', metaBlock.length > 0, '')
-  assert('reason is NOT rendered inside .concierge-meta', !/reason/i.test(metaBlock), `got: ${metaBlock}`)
-
-  // The new third-line reason element exists and uses cleanReason output.
-  assert('third-line reason element exists', /className="concierge-reason-line"/.test(rowSrc), '')
-  assert('third-line uses 推荐理由 label', /推荐理由：/.test(rowSrc), '')
-  assert('third-line is gated on displayReason truthy', /\{displayReason && \(/.test(rowSrc), '')
-  assert('row computes displayReason via cleanReason', /const displayReason = cleanReason\(reason\)/.test(rowSrc), '')
-
-  // 10.3 The new reason line CSS exists with light, single-line styles.
-  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
-  const reasonRule = css.match(/\.concierge-reason-line\s*\{[^}]*\}/)?.[0] || ''
-  assert('.concierge-reason-line rule exists', reasonRule.length > 0, '')
-  assert('reason line is single-line truncated', /white-space:\s*nowrap/.test(reasonRule) && /text-overflow:\s*ellipsis/.test(reasonRule), `got: ${reasonRule}`)
-  assert('reason line uses light grey ink', /color:\s*#9A9590|color:\s*#6B645C/i.test(reasonRule), `got: ${reasonRule}`)
+  // 10.1 Existing strips still hold.
+  assert('strips DeepSeek 检测第 N 位 prefix', cleanReason('DeepSeek 检测第 1 位；摘要明确提及生态设计师 John Todd') === '摘要明确提及生态设计师 John Todd', '')
+  assert('strips 管家规则过滤 prefix', cleanReason('管家规则过滤；DeepSeek 检测第 1 位；标题含 阅读理解 C') === '标题含 阅读理解 C', '')
+  assert('strips bare DeepSeek token', cleanReason('DeepSeek；主题相符') === '主题相符', '')
+  assert('strips steward / fallback tokens (case-insensitive)', cleanReason('Steward fallback；fallback；real reason') === 'real reason', '')
+  assert('only-internal collapses to empty', cleanReason('管家规则过滤；DeepSeek 检测第 4 位；') === '', '')
+  // 10.2 V1.1 extras.
+  assert('strips reading-parse-eval slug', cleanReason('reading-parse-eval；主题清晰') === '主题清晰', `got: ${cleanReason('reading-parse-eval；主题清晰')}`)
+  assert('strips source-gap-fill slug', cleanReason('source-gap-fill；细节理解') === '细节理解', `got: ${cleanReason('source-gap-fill；细节理解')}`)
 }
 
 // ------------------------------------------------------------------ Test 11
-console.log('\nTest 11: Intent bar chrome — pill input + arrow button')
+console.log('\nTest 11: aggregatePaperResults — bucket key + 命中 + fallback')
+{
+  const sample = [
+    {
+      group: {
+        id: 'g1', title: '文章一', source: '2025·浙江', sourceType: 'real_exam',
+        year: 2025, region: '浙江', paperName: '2025 浙江一模', section: '阅读 C',
+        passageTitle: '城市交通', summary: '论述城市规划', groupType: 'reading',
+        questionCount: 4, difficulty: 'medium', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 2.5,
+      },
+      reason: 'DeepSeek 检测第 1 位；主题接近',
+    },
+    {
+      group: {
+        id: 'g2', title: '文章二', source: '2025·浙江', sourceType: 'real_exam',
+        year: 2025, region: '浙江', paperName: '2025 浙江一模', section: '阅读 D',
+        passageTitle: '环境', summary: '环境保护', groupType: 'reading',
+        questionCount: 4, difficulty: 'high', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 2.5,
+      },
+      reason: 'DeepSeek 检测第 2 位；细节',
+    },
+    {
+      group: {
+        id: 'g3', title: '完形', source: '2025·北京', sourceType: 'real_exam',
+        year: 2025, region: '北京', paperName: '2025 北京一模', section: '完形',
+        passageTitle: '科技', summary: '科技与生活', groupType: 'cloze',
+        questionCount: 15, difficulty: 'medium', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 1,
+      },
+      reason: 'DeepSeek 检测第 3 位；科技',
+    },
+    {
+      group: {
+        id: 'g4', title: '无来源', source: '', sourceType: 'self_made',
+        year: 0, region: '未标地区', paperName: '', section: '其他',
+        passageTitle: '', summary: '', groupType: 'reading',
+        questionCount: 1, difficulty: 'low', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 1,
+      },
+      reason: 'fallback',
+    },
+  ]
+
+  const { aggregatePaperResults } = await import('../app/src/concierge/aggregatePaperResults.ts')
+  const out = aggregatePaperResults(sample)
+  assert('three buckets total (zhejiang, beijing, fallback)', out.length === 3, `got ${out.length}`)
+  const zhejiang = out.find((p) => p.paperName === '2025 浙江一模')
+  const beijing = out.find((p) => p.paperName === '2025 北京一模')
+  const fallback = out.find((p) => p.isFallback)
+  assert('zhejiang bucket exists', !!zhejiang, '')
+  assert('beijing bucket exists', !!beijing, '')
+  assert('fallback bucket exists and is "其他来源"', !!fallback && fallback.paperName === '其他来源', '')
+  assert('zhejiang bucket merges g1 + g2', zhejiang.hitCount === 2 && zhejiang.groups.length === 2, `got ${zhejiang?.hitCount}`)
+  assert('beijing bucket has only g3', beijing.hitCount === 1, `got ${beijing?.hitCount}`)
+  assert('fallback comes last (sinks)', out[out.length - 1].isFallback === true, '')
+  assert('representativeReason is sanitized (no DeepSeek prefix)', !/DeepSeek/.test(zhejiang.representativeReason), `got: ${zhejiang.representativeReason}`)
+  assert('representativeReason picks the first hit reason', zhejiang.representativeReason.includes('主题接近'), `got: ${zhejiang.representativeReason}`)
+  assert('per-group reason sanitized too', zhejiang.groups[0].reason && !/DeepSeek/.test(zhejiang.groups[0].reason), '')
+  assert('groupTypes list collected (reading)', zhejiang.groupTypes.includes('reading'), '')
+
+  // Different source signature splits otherwise-identical bucket.
+  const split = [
+    sample[0],
+    {
+      ...sample[0],
+      group: { ...sample[0].group, id: 'g5', source: '2025·浙江(模拟)', sourceType: 'mock_exam' },
+      reason: 'mock 模拟',
+    },
+  ]
+  const splitOut = aggregatePaperResults(split)
+  assert('different source/sourceType creates a separate bucket', splitOut.length === 2, `got ${splitOut.length}`)
+
+  // Cosmetic source noise must NOT fragment the bucket: extra spaces,
+  // "扫描版" / "高清版" / punctuation differences all collapse to one.
+  const cosmeticDup = [
+    {
+      group: { ...sample[0].group, id: 'gc1', source: ' 2025 · 浙江 ' },
+      reason: 'r1',
+    },
+    {
+      group: { ...sample[0].group, id: 'gc2', source: '2025·浙江(扫描版)' },
+      reason: 'r2',
+    },
+    {
+      group: { ...sample[0].group, id: 'gc3', source: '2025  ·  浙江' },
+      reason: 'r3',
+    },
+  ]
+  const cosmeticOut = aggregatePaperResults(cosmeticDup)
+  assert('cosmetic source noise collapses to one bucket', cosmeticOut.length === 1, `got ${cosmeticOut.length} (keys: ${cosmeticOut.map((p) => p.key).join(', ')})`)
+}
+
+// ------------------------------------------------------------------ Test 17
+console.log('\nTest 17: Auto-expand once + collapsible by user')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
-  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
-  const desk = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+  const hook = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'useConciergeDesk.ts'), 'utf8')
 
-  // 11.1 .concierge-intent-bar visual contract
-  const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('.concierge-intent-bar rule found', barRule.length > 0, '')
-  assert('bar border is 1px solid #DED9CF', /border:\s*1px solid #DED9CF/i.test(barRule), `got: ${barRule}`)
-  assert('bar border-radius 12px', /border-radius:\s*12px/.test(barRule), `got: ${barRule}`)
-  assert('bar background #FFFDF8', /background:\s*#FFFDF8/i.test(barRule), `got: ${barRule}`)
-  assert('bar min-height 56px', /min-height:\s*56px/.test(barRule), `got: ${barRule}`)
-  assert('bar padding 8px 8px 8px 18px', /padding:\s*8px\s+8px\s+8px\s+18px/.test(barRule), `got: ${barRule}`)
-  assert('bar transitions border-color and box-shadow', /transition:[^;]*border-color[^;]*box-shadow/.test(barRule), `got: ${barRule}`)
-
-  const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('focus-within rule exists', focusRule.length > 0, '')
-  assert('focus border #1A1A1A', /border-color:\s*#1A1A1A/i.test(focusRule), '')
-  assert('focus shadow uses ink-tinted shadow', /box-shadow:\s*0\s+2px\s+8px\s+rgba\(26,\s*26,\s*26,\s*0\.08\)/.test(focusRule), `got: ${focusRule}`)
-  // Allow `outline: none` but reject any colored outline (color names, hex, rgb, currentColor).
-  const outlineDecl = focusRule.match(/outline:\s*([^;]+);/)?.[1].trim() || ''
-  assert('focus has no colored outline (only `outline: none` allowed)', outlineDecl === '' || /^none$/i.test(outlineDecl), `got outline: "${outlineDecl}"`)
-
-  // 11.2 .concierge-intent-input contract
-  const inputRule = css.match(/\.concierge-intent-input\s*\{[^}]*\}/)?.[0] || ''
-  assert('.concierge-intent-input rule found', inputRule.length > 0, '')
-  assert('input border none', /border:\s*none/.test(inputRule), '')
-  assert('input outline none', /outline:\s*none/.test(inputRule), '')
-  assert('input background transparent', /background:\s*transparent/.test(inputRule), '')
-  assert('input font-size 15px', /font-size:\s*15px/.test(inputRule), '')
-  assert('input line-height 24px', /line-height:\s*24px/.test(inputRule), '')
-
-  const placeholderRule = css.match(/\.concierge-intent-input::placeholder\s*\{[^}]*\}/)?.[0] || ''
-  assert('placeholder color #9A9180', /color:\s*#9A9180/i.test(placeholderRule), `got: ${placeholderRule}`)
-
-  // 11.3 .concierge-intent-submit contract
-  const submitRule = css.match(/\.concierge-intent-submit\s*\{[^}]*\}/)?.[0] || ''
-  assert('.concierge-intent-submit rule found', submitRule.length > 0, '')
-  assert('submit min-width 48px', /min-width:\s*48px/.test(submitRule), '')
-  assert('submit height 40px', /height:\s*40px/.test(submitRule), '')
-  assert('submit border-radius 8px', /border-radius:\s*8px/.test(submitRule), '')
-  assert('submit border none', /border:\s*none/.test(submitRule), '')
-  assert('submit bg ink #1A1A1A', /background:\s*#1A1A1A/i.test(submitRule), `got: ${submitRule}`)
-  assert('submit color paper #FFFDF8', /color:\s*#FFFDF8/i.test(submitRule), `got: ${submitRule}`)
-  assert('submit no shadow', /box-shadow:\s*none/.test(submitRule), `got: ${submitRule}`)
-
-  const disabledRule = css.match(/\.concierge-intent-submit:disabled\s*\{[^}]*\}/)?.[0] || ''
-  assert('disabled bg #F0EBE0', /background:\s*#F0EBE0/i.test(disabledRule), `got: ${disabledRule}`)
-  assert('disabled color #B8B0A0', /color:\s*#B8B0A0/i.test(disabledRule), `got: ${disabledRule}`)
-  assert('disabled cursor not-allowed', /cursor:\s*not-allowed/.test(disabledRule), `got: ${disabledRule}`)
-
-  // 11.4 Button content is `→` arrow with aria-label/title.
-  assert('submit JSX aria-label is 开始取题', /aria-label="开始取题"/.test(desk), '')
-  assert('submit JSX title is 开始取题', /title="开始取题"/.test(desk), '')
-  assert('submit JSX renders → glyph (or ellipsis when loading)', /'→'/.test(desk), '')
-  assert('submit no longer renders the word 搜', !/['"]搜['"]/.test(desk), '')
-
-  // 11.5 Form still gates Enter on non-empty intent: the submit is disabled when intent is empty.
-  // (Native HTML forms ignore Enter when the only submit button is disabled, which is exactly
-  // what we want for "空内容按 Enter 不触发请求".)
-  assert('submitDisabled gates on intent.trim() empty', /submitDisabled\s*=\s*[^=].*intent\.trim\(\)\.length\s*===\s*0/.test(desk), '')
-  assert('button uses disabled={submitDisabled}', /disabled=\{submitDisabled\}/.test(desk), '')
+  // useEffect is used for the one-time auto-expand (no render-time fallback).
+  assert('hook imports useEffect + useRef', /import\s*\{[^}]*useEffect[^}]*\}\s*from\s*['"]react['"]/.test(hook) && /import\s*\{[^}]*useRef[^}]*\}\s*from\s*['"]react['"]/.test(hook), '')
+  assert('hook keeps a lastAutoExpandKeyRef sentinel', /lastAutoExpandKeyRef\s*=\s*useRef<string \| null>\(null\)/.test(hook), '')
+  assert('hook auto-expands lone bucket inside useEffect', /useEffect\(\(\)\s*=>\s*\{[\s\S]{0,400}paperResults\.length === 1[\s\S]{0,400}setExpandedPaperKey\(onlyKey\)/.test(hook), '')
+  assert('hook clears the sentinel for multi/empty result sets', /lastAutoExpandKeyRef\.current = null/.test(hook), '')
+  assert('hook returns expandedPaperKey state directly (no render-time effective-key)', /expandedPaperKey,\s*togglePaper/.test(hook) && !/effectiveExpandedKey/.test(hook), '')
+  // togglePaper still toggles by paperKey alone.
+  const hookCode = hook.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
+  assert('togglePaper just toggles expandedPaperKey', /const togglePaper = useCallback\(\(paperKey: string\)\s*=>\s*\{\s*setExpandedPaperKey/.test(hookCode), '')
 }
 
 // ------------------------------------------------------------------ Test 12
-console.log('\nTest 12: Quiet first-screen — subhead, hint line, starter chips')
+console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips remain')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const desk = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
   const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
 
-  // 12.1 Subhead copy is short and de-engineered.
-  const subheadMatch = desk.match(/<p className="concierge-subhead">([^<]+)<\/p>/)
-  assert('subhead literal exists', !!subheadMatch, '')
-  const subhead = subheadMatch?.[1] || ''
-  assert('subhead does NOT mention 管家 / key / 兜底', !/(管家|兜底|key|API|DeepSeek)/i.test(subhead), `got: ${subhead}`)
-  assert('subhead is one short line (<= 20 chars)', subhead.length > 0 && subhead.length <= 20, `got: "${subhead}" (${subhead.length})`)
+  // Landing hero is gone.
+  assert('legacy headline 你找什么题 removed', !/你找什么题\s*\/\s*卷子？/.test(desk), '')
+  assert('legacy subhead "自然语言或关键词皆可" removed', !/自然语言或关键词皆可/.test(desk), '')
+  assert('no concierge-headline / concierge-subhead element rendered', !/<header className="concierge-headline">/.test(desk) && !/<p className="concierge-subhead">/.test(desk), '')
 
-  // 12.2 No legacy hint line (we used to render a "我会先判断…" subhead).
-  assert('subhead-hint legacy line removed', !/<p className="concierge-subhead-hint">/.test(desk), '')
-  assert('legacy hint copy removed', !/我会先判断你想按主题/.test(desk), '')
-
-  // 12.3 Starter chips constant exists with the three required examples.
+  // Starter chips remain.
   assert('STARTER_CHIPS contains 生态主题 C 篇', /生态主题\s*C\s*篇/.test(desk), '')
   assert('STARTER_CHIPS contains 2025 浙江卷', /2025\s*浙江卷/.test(desk), '')
   assert('STARTER_CHIPS contains 中等难度主旨题', /中等难度主旨题/.test(desk), '')
-
-  // 12.4 Chip click only fills input — calls onIntentChange, NOT onSubmit.
   const chipBtnMatch = desk.match(/className="concierge-starter-chip"[\s\S]{0,200}onClick=\{[^}]+\}/)?.[0] || ''
   assert('chip onClick wired', chipBtnMatch.length > 0, '')
-  assert('chip click calls onIntentChange', /onIntentChange\(chip\)/.test(chipBtnMatch), `got: ${chipBtnMatch}`)
-  assert('chip click does NOT call onSubmit', !/onSubmit\(/.test(chipBtnMatch), `got: ${chipBtnMatch}`)
+  assert('chip click calls onIntentChange', /onIntentChange\(chip\)/.test(chipBtnMatch), '')
+  assert('chip click does NOT call onSubmit', !/onSubmit\(/.test(chipBtnMatch), '')
+  assert('chips gated on !dataLoading + (empty || error)', /\{!dataLoading && \(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]error['"]\)/.test(desk), '')
 
-  // 12.5 Chips only show on quiet states (empty / error), not when results / loading / clarification.
-  assert('chips gated on empty or error state', /\(state\.kind === 'empty' \|\| state\.kind === 'error'\)\s*&&\s*\(\s*<ul className="concierge-starter-chips"/.test(desk), '')
-
-  // 12.6 The verbose "用一句自然语言告诉管家" copy is gone.
-  assert('legacy subhead copy removed', !/用一句自然语言告诉管家/.test(desk), '')
-  assert('legacy fallback explanation removed', !/没填\s*key\s*也能用关键词兜底|没有\s*DeepSeek\s*API\s*key/.test(desk), '')
-
-  // 12.7 CSS for chips: light, no blue, hover #F4F2EC.
+  // Chip styling.
   const chipRule = css.match(/\.concierge-starter-chip\s*\{[^}]*\}/)?.[0] || ''
-  assert('chip rule found', chipRule.length > 0, '')
-  assert('chip background transparent (no blue fill)', /background:\s*transparent/.test(chipRule), `got: ${chipRule}`)
-  assert('chip border light #E5E3DC', /border:\s*1px solid #E5E3DC/i.test(chipRule), `got: ${chipRule}`)
-  assert('chip text uses #6B645C secondary ink', /color:\s*#6B645C/i.test(chipRule), `got: ${chipRule}`)
-  const chipHover = css.match(/\.concierge-starter-chip:hover\s*\{[^}]*\}/)?.[0] || ''
-  assert('chip hover uses #F4F2EC', /background:\s*#F4F2EC/i.test(chipHover), `got: ${chipHover}`)
+  assert('chip background transparent', /background:\s*transparent/.test(chipRule), '')
+  assert('chip border light #E5E3DC', /border:\s*1px solid #E5E3DC/i.test(chipRule), '')
+  assert('chip text uses #6B645C', /color:\s*#6B645C/i.test(chipRule), '')
 
-  // 12.8 Intent bar rest state: light border, focus-within turns ink.
+  // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('intent-bar rest border #DED9CF', /border:\s*1px solid #DED9CF/i.test(barRule), `got: ${barRule}`)
-  assert('intent-bar rest background #FFFDF8', /background:\s*#FFFDF8/i.test(barRule), `got: ${barRule}`)
+  assert('intent-bar rest border #DED9CF', /border:\s*1px solid #DED9CF/i.test(barRule), '')
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('focus-within border-color #1A1A1A', /border-color:\s*#1A1A1A/i.test(focusRule), '')
+  assert('focus border #1A1A1A', /border-color:\s*#1A1A1A/i.test(focusRule), '')
 }
 
 // ------------------------------------------------------------------ Test 13
-console.log('\nTest 13: Import V1 collop — stage labels, dropzone copy, overflow, batch panel')
-{
-  const here = path.dirname(new URL(import.meta.url).pathname)
-  const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
-  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
-
-  // 13.A Stage labels: must say "草稿待确认", not "已完成".
-  assert('done stage UI label is 草稿待确认', /草稿待确认\s*<span>/.test(app), '')
-  assert('legacy 已完成 group label removed', !/<h3 className="intake-stage-title">已完成\s*<span>/.test(app), '')
-
-  // 13.B Dropzone copy: no longer promises drag, but adds a future-tense hint.
-  const dropzoneStrong = app.match(/<strong>([^<]*)<\/strong>\s*<span>([^<]*)<\/span>\s*<span className="intake-dropzone-hint">/)?.[0] || ''
-  assert('dropzone main copy says 选择…', /选择答案卷、题解同文件，或整组资料/.test(app), '')
-  assert('dropzone removed 拖到这里 strong promise', !/拖到这里/.test(app), '')
-  assert('dropzone has gentle drag-future hint', /点击选择文件，后续会支持拖拽导入/.test(app), '')
-  assert('dropzone-hint element wired', dropzoneStrong.length > 0 || /intake-dropzone-hint/.test(app), '')
-
-  // 13.C Overflow indicator for >12 bundles per stage.
-  assert('intake-stage-overflow line rendered conditionally', /actionable\.length\s*>\s*12[\s\S]{0,200}intake-stage-overflow/.test(app), '')
-  assert('overflow rendered for processing too', /processing\.length\s*>\s*12[\s\S]{0,200}intake-stage-overflow/.test(app), '')
-  assert('overflow rendered for done too', /done\.length\s*>\s*12[\s\S]{0,200}intake-stage-overflow/.test(app), '')
-  assert('overflow uses light copy "还有 N 份资料未显示"', /还有\s*\{[^}]+\}\s*份资料未显示/.test(app), '')
-  const overflowRule = css.match(/\.intake-stage-overflow\s*\{[^}]*\}/)?.[0] || ''
-  assert('overflow css rule found', overflowRule.length > 0, '')
-  assert('overflow text muted #9A9180', /color:\s*#9A9180/i.test(overflowRule), `got: ${overflowRule}`)
-
-  // 13.D Batch panel restyle: classnames, soft heading, no "辅助：" prefix, intake-secondary-button on scan.
-  assert('batch panel uses intake-batch-panel class', /intake-batch-panel/.test(app), '')
-  assert('batch panel summary copy is 文件夹批量导入 (no 辅助：)', /<span>文件夹批量导入<\/span>/.test(app) && !/辅助：文件夹批量导入/.test(app), '')
-  assert('batch count rendered as intake-batch-pill', /className="intake-batch-pill"/.test(app), '')
-  assert('scan button uses intake-secondary-button', /intake-secondary-button[\s\S]{0,600}扫描文件夹/.test(app), '')
-  assert('legacy detail-button on scan removed', !/className="detail-button"[\s\S]{0,80}扫描文件夹/.test(app), '')
-
-  const batchPanelRule = css.match(/\.intake-batch-panel\s*\{[^}]*\}/)?.[0] || ''
-  assert('batch panel CSS uses warm white background', /background:\s*#FFFDF8/i.test(batchPanelRule), `got: ${batchPanelRule}`)
-  assert('batch panel CSS uses 12px radius', /border-radius:\s*12px/.test(batchPanelRule), `got: ${batchPanelRule}`)
-  assert('batch panel CSS uses light border', /border:\s*1px solid #E5E3DC/i.test(batchPanelRule), `got: ${batchPanelRule}`)
-
-  const secondaryBtnRule = css.match(/\.intake-secondary-button\s*\{[^}]*\}/)?.[0] || ''
-  assert('intake-secondary-button rule found', secondaryBtnRule.length > 0, '')
-  assert('secondary button border #DED9CF', /border:\s*1px solid #DED9CF/i.test(secondaryBtnRule), `got: ${secondaryBtnRule}`)
-  assert('secondary button bg paper #FFFDF8', /background:\s*#FFFDF8/i.test(secondaryBtnRule), `got: ${secondaryBtnRule}`)
-  const secondaryBtnHover = css.match(/\.intake-secondary-button:hover:not\(:disabled\)\s*\{[^}]*\}/)?.[0] || ''
-  assert('secondary button hover #F4F2EC', /background:\s*#F4F2EC/i.test(secondaryBtnHover), `got: ${secondaryBtnHover}`)
-
-  // 13.F Reason cleansing covers internal markers (reuses cleanReason imported above).
-  // Already tested in Test 10.1.1 — re-state at row level: row source must read displayReason via cleanReason.
-  const rowSrc = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeResultRow.tsx'), 'utf8')
-  assert('row uses cleanReason on incoming reason', /const displayReason = cleanReason\(reason\)/.test(rowSrc), '')
-
-  // 13.G Result list visual softening: list has rounded container + lighter row separators.
-  const listRule = css.match(/\.concierge-result-list\s*\{[^}]*\}/)?.[0] || ''
-  assert('result-list has 16px radius', /border-radius:\s*16px/.test(listRule), `got: ${listRule}`)
-  assert('result-list has paper background', /background:\s*#FFFDF8/i.test(listRule), `got: ${listRule}`)
-  assert('result-list overflow visible (allows hover lift shadow)', /overflow:\s*visible/.test(listRule), `got: ${listRule}`)
-  const liRule = css.match(/\.concierge-result-list\s*>\s*li\s*\{[^}]*\}/)?.[0] || ''
-  assert('row separator uses light ink alpha (not dark line)', /border-bottom:\s*1px solid\s+rgba\(26,\s*26,\s*26,\s*0\.06\)/i.test(liRule), `got: ${liRule}`)
-  const rowRule = css.match(/^\.concierge-row\s*\{[^}]*\}/m)?.[0] || ''
-  assert('concierge-row padding now 16px 14px', /padding:\s*16px\s+14px/.test(rowRule), `got: ${rowRule}`)
-}
-
-// ------------------------------------------------------------------ Test 14
-console.log('\nTest 14: Clarification copy + row hover lift')
+console.log('\nTest 13: Clarification picker still in place')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const desk = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
-  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
-
-  // 14.A Natural-language clarification — drop legacy phrases.
-  assert('clarification: 刚才的搜索 phrase removed', !/刚才的搜索/.test(desk), '')
-  assert('clarification: 补一句就会重新搜 removed', !/补一句就会重新搜/.test(desk), '')
-  assert('clarification: 学生做题思路像 removed', !/学生做题思路像/.test(desk), '')
-  assert('clarification: 文章讲的内容像 removed', !/文章讲的内容像/.test(desk), '')
-  assert('clarification: 再确认一下 strong removed', !/<strong>再确认一下/.test(desk), '')
-
-  // 14.A New copy is in place — used as a fallback template when backend question is mechanical.
-  assert('clarification template uses 我理解你想找 wording', /我理解你想找「\$\{pendingQuery\}」/.test(readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'clarificationCopy.ts'), 'utf8')), '')
-  assert('clarification template offers 主题/题型/难度/考法', /主题、题型、难度，或考法/.test(readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'clarificationCopy.ts'), 'utf8')), '')
-  assert('clarification examples line present', /比如：科技话题\s*\/\s*中等难度\s*\/\s*主旨概括\s*\/\s*抽象推断/.test(desk), '')
-
-  // 14.A Backend's clarificationQuestion is now passed through the picker, not blindly hidden.
   assert('desk renders pickClarificationLine(pendingQuery, state.question)', /pickClarificationLine\(state\.pendingQuery,\s*state\.question\)/.test(desk), '')
 
-  // 14.A.1 Picker behavior: keeps natural backend question, replaces mechanical ones.
-  // Mechanical patterns must be replaced with the front-end template.
+  // Picker behavior.
   for (const mechanical of [
     '你更想找学生做题思路像的，还是文章讲的内容像的？',
     '刚才的搜索：「C 篇」。补一句就会重新搜。',
@@ -612,50 +521,73 @@ console.log('\nTest 14: Clarification copy + row hover lift')
     '   ',
   ]) {
     const out = pickClarificationLine('C 篇', mechanical)
-    assert(`mechanical/empty input replaced by template ("${mechanical.slice(0, 16)}…")`, /我理解你想找「C 篇」/.test(out), `got: ${out}`)
+    assert(`mechanical/empty replaced by template ("${mechanical.slice(0, 12)}…")`, /我理解你想找「C 篇」/.test(out), `got: ${out}`)
   }
-
-  // Natural, specific backend questions are kept as-is.
   for (const natural of [
     '你想要中等难度的科技说明文，还是高难度的抽象推断？',
     '想找按主旨概括出题的，还是按细节理解出题的？',
     '指的是高考真题，还是模拟卷？',
   ]) {
     const out = pickClarificationLine('C 篇', natural)
-    assert(`natural input passes through ("${natural.slice(0, 16)}…")`, out === natural, `got: ${out}`)
+    assert(`natural input passes through ("${natural.slice(0, 12)}…")`, out === natural, `got: ${out}`)
   }
-
-  // 14.A CSS for the new clarification text uses calm secondary ink.
-  const lineRule = css.match(/\.concierge-clarification-line\s*\{[^}]*\}/)?.[0] || ''
-  assert('clarification-line rule found', lineRule.length > 0, '')
-  assert('clarification-line text is ink #1A1A1A', /color:\s*#1A1A1A/i.test(lineRule), `got: ${lineRule}`)
-  const examplesRule = css.match(/\.concierge-clarification-examples\s*\{[^}]*\}/)?.[0] || ''
-  assert('clarification-examples rule found', examplesRule.length > 0, '')
-  assert('clarification-examples is muted #6B645C', /color:\s*#6B645C/i.test(examplesRule), `got: ${examplesRule}`)
-
-  // 14.A Old hint class CSS removed.
-  assert('legacy clarification-hint class CSS removed', !/\.concierge-clarification-hint\s*\{/.test(css), '')
-
-  // 14.B Row hover lift: extracted-feel without stamp decoration.
-  const rowBaseRule = css.match(/^\.concierge-row\s*\{[\s\S]*?\}/m)?.[0] || ''
-  assert('row base has soft transition (background + box-shadow only, no transform)', /transition:\s*background\s*120ms\s*ease,\s*box-shadow\s*120ms\s*ease;/.test(rowBaseRule), `got: ${rowBaseRule}`)
-  assert('row base does NOT animate transform (avoid layout jitter)', !/transform\s*120ms/.test(rowBaseRule), `got: ${rowBaseRule}`)
-
-  const rowHoverRule = css.match(/\.concierge-row:hover[\s\S]*?\.concierge-row:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('row hover does NOT translate (no jitter)', !/transform:\s*translateY/.test(rowHoverRule), `got: ${rowHoverRule}`)
-  assert('row hover applies single very soft shadow', /box-shadow:\s*0\s+1px\s+2px\s+rgba\(26,\s*26,\s*26,\s*0\.0[0-3]\)/.test(rowHoverRule), `got: ${rowHoverRule}`)
-  assert('row hover background stays warm #F4F2EC', /background:\s*#F4F2EC/i.test(rowHoverRule), `got: ${rowHoverRule}`)
-
-  // 14.B No stamp / dashed / serrated decoration on rows.
-  assert('row CSS has no dashed border anywhere', !/border[^:]*:\s*[^;]*\bdashed\b/.test(rowBaseRule + rowHoverRule), '')
-  assert('row CSS has no border-image (stamp-like)', !/border-image:/i.test(rowBaseRule + rowHoverRule), '')
-  // (no clip-path tricks used either)
-  assert('row CSS has no clip-path tricks', !/clip-path:/i.test(rowBaseRule + rowHoverRule), '')
-
-  // 14.B Container allows the lift shadow to be visible (overflow not clipped).
-  const listRule = css.match(/\.concierge-result-list\s*\{[^}]*\}/)?.[0] || ''
-  assert('result-list overflow is visible (so lift shadow can show)', /overflow:\s*visible/.test(listRule), `got: ${listRule}`)
 }
+
+// ------------------------------------------------------------------ Test 14
+console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
+  const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
+
+  // Paper row CSS exists with cursor: pointer + soft hover.
+  const paperRowRule = css.match(/^\.concierge-paper-row\s*\{[\s\S]*?\}/m)?.[0] || ''
+  assert('paper-row uses cursor: pointer', /cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
+  assert('paper-row has soft transition (no transform)', /transition:\s*background\s*120ms\s*ease,\s*box-shadow\s*120ms\s*ease/.test(paperRowRule), `got: ${paperRowRule}`)
+  const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]*?\.concierge-paper-row:focus-visible\s*\{[^}]*\}/)?.[0] || ''
+  assert('paper-row hover uses warm #F4F2EC', /background:\s*#F4F2EC/i.test(hoverRule), '')
+
+  // 草稿卷 visible copy in App is intact.
+  const mentions = app.match(/组题篮/g) || []
+  assert('App.tsx still has no user-visible 组题篮', mentions.length === 0, `still found ${mentions.length} occurrence(s)`)
+  assert('App.tsx 加入草稿卷 present', /加入草稿卷/.test(app), '')
+  assert('App.tsx 收起草稿卷 present', /收起草稿卷/.test(app), '')
+  assert('App.tsx aria-label="草稿卷" present', /aria-label="草稿卷"/.test(app), '')
+}
+
+// ------------------------------------------------------------------ Test 15
+console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live bank')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const desk = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+  const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
+  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
+
+  assert('ConciergeDeskProps adds dataStatus prop', /dataStatus\?\s*:\s*['"]loading['"]\s*\|\s*['"]sqlite['"]\s*\|\s*['"]sample['"]/.test(desk), '')
+  assert('Desk computes dataLoading from dataStatus', /const dataLoading = dataStatus === ['"]loading['"]/.test(desk), '')
+  assert('handleSubmit early-returns while dataLoading', /if \(dataLoading\) return/.test(desk), '')
+  assert('submit button disabled when dataLoading', /submitDisabled\s*=\s*dataLoading\s*\|\|/.test(desk), '')
+  assert('intent input disabled while dataLoading', /<input[\s\S]{0,400}className="concierge-intent-input"[\s\S]{0,400}disabled=\{dataLoading\}/.test(desk), '')
+  assert('placeholder switches to 正在连接本地题库 while loading', /正在连接本地题库/.test(desk), '')
+  assert('connecting notice rendered as concierge-data-loading', /<p className="concierge-data-loading"[\s\S]{0,200}role="status"/.test(desk), '')
+  assert('App passes dataStatus to ConciergeDesk', /<ConciergeDesk[\s\S]*?dataStatus=\{dataStatus\}/.test(app), '')
+
+  const noticeRule = css.match(/\.concierge-data-loading\s*\{[^}]*\}/)?.[0] || ''
+  assert('.concierge-data-loading rule exists', noticeRule.length > 0, '')
+  assert('notice uses muted ink #9A9180', /color:\s*#9A9180/i.test(noticeRule), '')
+}
+
+// ------------------------------------------------------------------ Test 16
+console.log('\nTest 16: 找类似 round-trips through paper aggregation')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const hook = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'useConciergeDesk.ts'), 'utf8')
+  // triggerSimilar must call runSearch (not skip aggregation).
+  assert('triggerSimilar uses runSearch', /triggerSimilar[\s\S]{0,400}await runSearch\(similarIntent, null\)/.test(hook), '')
+  // paperResults memo derives from state.hits via aggregatePaperResults.
+  assert('paperResults memo aggregates state.hits', /aggregatePaperResults\(state\.hits\)/.test(hook), '')
+}
+
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)

@@ -18,6 +18,10 @@ const INTERNAL_MARKERS = [
   /检测第\s*\d+\s*位[；;]?\s*/g,
   /\bsteward\b[；;]?\s*/gi,
   /\bfallback\b[；;]?\s*/gi,
+  // V1.1 extras: surface dev-side eval slugs that occasionally leak through
+  // (these are pipeline tags from reading-parse / source-gap pipelines).
+  /\breading-parse(?:-eval)?\b[；;]?\s*/gi,
+  /\bsource-gap(?:-fill)?\b[；;]?\s*/gi,
 ]
 
 export function cleanReason(raw: string): string {

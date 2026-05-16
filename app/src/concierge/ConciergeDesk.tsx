@@ -1,14 +1,16 @@
 /**
- * ConciergeDesk — AI-mode home page of the question bank.
+ * ConciergeDesk — V1.1 AI 取题台 (源-卷优先).
  *
- * Stateless wrapper around the desk state owned by useConciergeDesk in App.tsx,
- * so search state survives detail / preview round-trips.
+ * Stateless wrapper over state owned by useConciergeDesk in App.tsx. The
+ * primary list now maps over paperResults (one row per source paper),
+ * and clicking expands the paper to show its matching question groups.
  */
 
 import { useId, useMemo, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
-import { ConciergeResultRow } from './ConciergeResultRow.tsx'
+import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine } from './clarificationCopy.ts'
+import type { PaperResult } from './aggregatePaperResults.ts'
 import type { ConciergeDeskState } from './useConciergeDesk.ts'
 
 export type ConciergeDeskProps = {
@@ -17,36 +19,59 @@ export type ConciergeDeskProps = {
   onSubmit: () => void
   state: ConciergeDeskState
   basketIds: Set<string>
-  onPreview: (group: QuestionGroupCard) => void
   onAdd: (group: QuestionGroupCard) => void
   onSimilar: (group: QuestionGroupCard) => void
+
+  // V1.1 paper-bucket props
+  paperResults: PaperResult[]
+  expandedPaperKey: string | null
+  onTogglePaper: (key: string) => void
+
+  /**
+   * App-level data connection status. While 'loading', the local question bank
+   * is still being fetched and the in-memory list is the bundled sample fixture.
+   * Searching against sample groups can return ids that don't exist in the live
+   * SQLite. We disable submit + show a calm notice until real data is in.
+   */
+  dataStatus?: 'loading' | 'sqlite' | 'sample'
 }
 
 const STARTER_CHIPS = ['生态主题 C 篇', '2025 浙江卷', '中等难度主旨题'] as const
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
-  const { intent, onIntentChange, onSubmit, state, basketIds, onPreview, onAdd, onSimilar } = props
+  const {
+    intent,
+    onIntentChange,
+    onSubmit,
+    state,
+    basketIds,
+    onAdd,
+    onSimilar,
+    paperResults,
+    expandedPaperKey,
+    onTogglePaper,
+    dataStatus,
+  } = props
   const inputId = useId()
+  const dataLoading = dataStatus === 'loading'
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (dataLoading) return
     onSubmit()
   }
 
   const placeholder = useMemo(() => {
+    if (dataLoading) return '正在连接本地题库…'
     if (state.kind === 'clarification') return '换个说法，比如：偏说明文 / 中等难度'
     return '比如：找一道讲生态恢复的阅读 C，中等难度'
-  }, [state])
+  }, [dataLoading, state])
 
-  const submitDisabled = state.kind === 'loading' || intent.trim().length === 0
+  const submitDisabled = dataLoading || state.kind === 'loading' || intent.trim().length === 0
 
   return (
-    <section className="concierge-desk" aria-label="题库取题台">
-      <header className="concierge-headline">
-        <h2>你找什么题 / 卷子？</h2>
-        <p className="concierge-subhead">自然语言或关键词皆可。</p>
-      </header>
-
+    <section className="concierge-desk" aria-label="题库取题流">
+      {/* Search input is the first focal element — no landing hero. */}
       <form className="concierge-intent-bar" onSubmit={handleSubmit}>
         <label htmlFor={inputId} className="visually-hidden">
           自然语言搜索
@@ -58,6 +83,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           onChange={(event) => onIntentChange(event.target.value)}
           placeholder={placeholder}
           autoComplete="off"
+          disabled={dataLoading}
+          aria-busy={dataLoading || undefined}
         />
         <button
           type="submit"
@@ -66,11 +93,17 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           aria-label="开始取题"
           title="开始取题"
         >
-          {state.kind === 'loading' ? '…' : '→'}
+          {state.kind === 'loading' || dataLoading ? '…' : '→'}
         </button>
       </form>
 
-      {(state.kind === 'empty' || state.kind === 'error') && (
+      {dataLoading && (
+        <p className="concierge-data-loading" role="status">
+          正在连接本地题库，稍候即可搜索。
+        </p>
+      )}
+
+      {!dataLoading && (state.kind === 'empty' || state.kind === 'error') && (
         <ul className="concierge-starter-chips" aria-label="示例搜索">
           {STARTER_CHIPS.map((chip) => (
             <li key={chip}>
@@ -114,19 +147,19 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           <p className="concierge-loading">正在为「{state.query}」找题…</p>
         )}
 
-        {state.kind === 'results' && state.hits.length === 0 && (
+        {state.kind === 'results' && paperResults.length === 0 && (
           <p className="concierge-empty">没找到匹配。可以换个说法，或在经典模式里精筛。</p>
         )}
 
-        {state.kind === 'results' && state.hits.length > 0 && (
-          <ul className="concierge-result-list">
-            {state.hits.map((hit) => (
-              <li key={hit.group.id}>
-                <ConciergeResultRow
-                  group={hit.group}
-                  reason={hit.reason}
-                  alreadyInBasket={basketIds.has(hit.group.id)}
-                  onPreview={onPreview}
+        {state.kind === 'results' && paperResults.length > 0 && (
+          <ul className="concierge-paper-list">
+            {paperResults.map((paper) => (
+              <li key={paper.key}>
+                <ConciergePaperRow
+                  paper={paper}
+                  expanded={expandedPaperKey === paper.key}
+                  basketIds={basketIds}
+                  onTogglePaper={onTogglePaper}
                   onAdd={onAdd}
                   onSimilar={onSimilar}
                 />

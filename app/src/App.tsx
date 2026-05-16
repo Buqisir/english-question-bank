@@ -3504,7 +3504,7 @@ function App() {
                             <div className="workflow-question-head">
                               <div>
                                 <strong>篇章题</strong>
-                                <span>{workflow.bank.groups.length} 题，可逐题加入组题篮</span>
+                                <span>{workflow.bank.groups.length} 题，可逐题加入草稿卷</span>
                               </div>
                               <button
                                 className="detail-button"
@@ -3615,9 +3615,12 @@ function App() {
                 onSubmit={() => { void conciergeDesk.submit() }}
                 state={conciergeDesk.state}
                 basketIds={new Set(basket.map((item) => item.id))}
-                onPreview={(group) => openDetail(group.id)}
                 onAdd={(group) => addToBasket(group)}
                 onSimilar={(group) => { void conciergeDesk.triggerSimilar(group) }}
+                paperResults={conciergeDesk.paperResults}
+                expandedPaperKey={conciergeDesk.expandedPaperKey}
+                onTogglePaper={(key) => conciergeDesk.togglePaper(key)}
+                dataStatus={dataStatus}
               />
             ) : (
                 <div className="group-list">
@@ -3725,7 +3728,7 @@ function App() {
                         disabled={basket.some((item) => item.id === selectedDetail.id)}
                       >
                         <Plus size={16} />
-                        {basket.some((item) => item.id === selectedDetail.id) ? '已加入' : '加入组题篮'}
+                        {basket.some((item) => item.id === selectedDetail.id) ? '已加入' : '加入草稿卷'}
                       </button>
                       {selectedDetail.groupType === 'reading' ? (
                         <>
@@ -5005,7 +5008,7 @@ function App() {
               )}
               {previewStatus === 'loading' && <p className="detail-message">正在生成排版预览...</p>}
               {previewStatus === 'error' && <p className="detail-message error">{previewError}</p>}
-              {basket.length === 0 && <p className="empty-state">先把题组加入右侧组题篮，再生成排版预览。</p>}
+              {basket.length === 0 && <p className="empty-state">先把题组加入右侧草稿卷，再生成排版预览。</p>}
 
               {basket.length > 0 && previewStatus === 'loaded' && (
                 <article className="paper-page" aria-label="试卷排版预览">
@@ -5044,7 +5047,7 @@ function App() {
 
         <aside
           className={`basket-panel${homeMode === 'ai' ? ' basket-panel-drawer' : ''}${homeMode === 'ai' && aiBasketDrawerOpen ? ' open' : ''}`}
-          aria-label="组题篮"
+          aria-label="草稿卷"
           aria-hidden={homeMode === 'ai' && !aiBasketDrawerOpen ? true : undefined}
         >
           {homeMode === 'ai' && (
@@ -5052,7 +5055,7 @@ function App() {
               type="button"
               className="basket-drawer-close"
               onClick={() => setAiBasketDrawerOpen(false)}
-              aria-label="收起组题篮"
+              aria-label="收起草稿卷"
             >
               ×
             </button>
@@ -5107,10 +5110,10 @@ function App() {
 
           <div className="panel-heading">
             <ClipboardList size={18} />
-            <h2>组题篮</h2>
+            <h2>草稿卷</h2>
           </div>
 
-          <div className="basket-toolbar" aria-label="组题篮快捷操作">
+          <div className="basket-toolbar" aria-label="草稿卷快捷操作">
             <button
               className="detail-button"
               disabled={filteredGroups.length === 0 || filteredGroups.every((group) => basket.some((item) => item.id === group.id))}
@@ -5433,7 +5436,7 @@ function App() {
             {savedPapersStatus === 'loading' && <p className="saved-paper-note">读取中...</p>}
             {savedPapersStatus === 'error' && <p className="save-state error">{savedPapersError}</p>}
             {loadPaperStatus === 'error' && <p className="save-state error">{loadPaperError}</p>}
-            {loadPaperStatus === 'loaded' && <p className="save-state success">已载入题集到组题篮。</p>}
+            {loadPaperStatus === 'loaded' && <p className="save-state success">已载入题集到草稿卷。</p>}
 
             {savedPapersStatus === 'loaded' && savedPapers.length === 0 && (
               <p className="saved-paper-note">保存后的题集会显示在这里。</p>
@@ -5533,7 +5536,7 @@ function App() {
           type="button"
           className="basket-chip"
           onClick={() => setAiBasketDrawerOpen(true)}
-          aria-label={`展开组题篮，已选 ${basket.length} 个题组`}
+          aria-label={`展开草稿卷，已选 ${basket.length} 个题组`}
         >
           <ClipboardList size={15} />
           <span>已选 {basket.length} 题组</span>
@@ -5544,7 +5547,7 @@ function App() {
           type="button"
           className="basket-drawer-backdrop"
           onClick={() => setAiBasketDrawerOpen(false)}
-          aria-label="收起组题篮"
+          aria-label="收起草稿卷"
         />
       )}
 
