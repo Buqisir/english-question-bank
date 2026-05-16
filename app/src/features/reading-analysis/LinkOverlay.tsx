@@ -1,16 +1,32 @@
 /**
- * LinkOverlay — draws the SVG dashed path from a question/option anchor to
- * a passage annotation anchor.
+ * LinkOverlay — draws the SVG dashed path from a question/option anchor to a
+ * passage annotation anchor.
  *
- * The overlay renders ONE absolutely-positioned SVG covering the whole
- * .reading-analysis-view container. On every selection/resize/scroll we
- * re-read the bounding rects of the source button and the target sentence
- * span, recompute a cubic-bezier path, and update the <path d="…">.
+ * Anchor priority (Cut 1):
  *
- * No dependencies — only React + DOM rects + SVG.
+ *   target:
+ *     1. `[data-ra-quote-anchor="<annotation.id>"]`        — preferred
+ *     2. `[data-ra-sentence-id="<annotation.target.sentenceId>"]` — fallback
+ *
+ *   source:
+ *     1. option   → `[data-ra-option-anchor="q:<qid>:<KEY>"]`     — preferred
+ *     2. option   → `[data-ra-link-source="q:<qid>:<KEY>"]`        — fallback
+ *     3. stem     → `[data-ra-link-source="q:<qid>"]`
+ *
+ * The path is drawn once when `activeLink.id` changes; scroll/resize updates
+ * `d` only — they do not re-trigger the draw animation. Reduced-motion users
+ * see the path immediately without animation.
  */
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 import type {
   ActiveSelection,
   EvidenceLink,
@@ -32,12 +48,6 @@ type Geometry = {
   height: number
 }
 
-function selectionToSourceKey(selection: ActiveSelection): string | null {
-  if (selection.kind === 'stem') return `q:${selection.questionId}`
-  if (selection.kind === 'option') return `q:${selection.questionId}:${selection.optionKey}`
-  return null
-}
-
 function findActiveLink(
   selection: ActiveSelection,
   links: EvidenceLink[],
@@ -55,12 +65,7 @@ function findActiveLink(
   ) ?? null
 }
 
-function buildPath(
-  sx: number,
-  sy: number,
-  tx: number,
-  ty: number,
-): string {
+function buildPath(sx: number, sy: number, tx: number, ty: number): string {
   // Horizontal bezier: control points pulled toward the midpoint.
   const dx = Math.max(60, Math.abs(tx - sx) * 0.45)
   const c1x = sx - dx
@@ -70,12 +75,81 @@ function buildPath(
   return `M ${sx.toFixed(1)} ${sy.toFixed(1)} C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${tx.toFixed(1)} ${ty.toFixed(1)}`
 }
 
+function resolveSource(
+  container: HTMLElement,
+  selection: ActiveSelection,
+): HTMLElement | null {
+  if (selection.kind === 'stem') {
+    return container.querySelector<HTMLElement>(
+      `[data-ra-link-source="${cssEscape(`q:${selection.questionId}`)}"]`,
+    )
+  }
+  if (selection.kind === 'option') {
+    const key = `q:${selection.questionId}:${selection.optionKey}`
+    return (
+      container.querySelector<HTMLElement>(
+        `[data-ra-option-anchor="${cssEscape(key)}"]`,
+      ) ??
+      container.querySelector<HTMLElement>(
+        `[data-ra-link-source="${cssEscape(key)}"]`,
+      )
+    )
+  }
+  return null
+}
+
+function resolveTarget(
+  container: HTMLElement,
+  annotation: ReadingAnnotation,
+): { el: HTMLElement; kind: 'quote' | 'sentence' } | null {
+  const quoteEl = container.querySelector<HTMLElement>(
+    `[data-ra-quote-anchor="${cssEscape(annotation.id)}"]`,
+  )
+  if (quoteEl) return { el: quoteEl, kind: 'quote' }
+  const sentenceEl = container.querySelector<HTMLElement>(
+    `[data-ra-sentence-id="${cssEscape(annotation.target.sentenceId)}"]`,
+  )
+  return sentenceEl ? { el: sentenceEl, kind: 'sentence' } : null
+}
+
+function detectReducedMotion(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 export function LinkOverlay(props: LinkOverlayProps): ReactNode {
   const { containerRef, scrollRefs, selection, links, annotations } = props
   const svgRef = useRef<SVGSVGElement | null>(null)
+  const pathRef = useRef<SVGPathElement | null>(null)
   const [geometry, setGeometry] = useState<Geometry | null>(null)
 
+  const annotationsById = useMemo(() => {
+    const m = new Map<string, ReadingAnnotation>()
+    for (const a of annotations) m.set(a.id, a)
+    return m
+  }, [annotations])
+
   const activeLink = findActiveLink(selection, links)
+  const activeLinkId = activeLink?.id ?? null
+
+  // Animation marker. Bump only when activeLink.id changes to a non-null
+  // value — scroll/resize triggered recomputes must not change this.
+  // The DOM path receives `data-link-instance="<n>"` so CSS keyframes can
+  // restart cleanly via a brief animation reset.
+  const lastLinkIdRef = useRef<string | null>(null)
+  const instanceCounterRef = useRef<number>(0)
+  const instance = useMemo(() => {
+    if (activeLinkId !== lastLinkIdRef.current) {
+      lastLinkIdRef.current = activeLinkId
+      if (activeLinkId !== null) {
+        instanceCounterRef.current += 1
+      }
+    }
+    return instanceCounterRef.current
+    // We deliberately depend on activeLinkId only — geometry changes from
+    // scroll/resize must not change the instance counter.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeLinkId])
 
   const recompute = useCallback(() => {
     const container = containerRef.current
@@ -83,36 +157,29 @@ export function LinkOverlay(props: LinkOverlayProps): ReactNode {
       setGeometry(null)
       return
     }
-    const annotation = annotations.find((a) => a.id === activeLink.toAnnotationId)
+    const annotation = annotationsById.get(activeLink.toAnnotationId)
     if (!annotation) {
       setGeometry(null)
       return
     }
-
-    const sourceKey = selectionToSourceKey(selection)
-    if (!sourceKey) {
-      setGeometry(null)
-      return
-    }
-    const sourceEl = container.querySelector<HTMLElement>(
-      `[data-ra-link-source="${cssEscape(sourceKey)}"]`,
-    )
-    const targetEl = container.querySelector<HTMLElement>(
-      `[data-ra-sentence-id="${cssEscape(annotation.target.sentenceId)}"]`,
-    )
-    if (!sourceEl || !targetEl) {
+    const sourceEl = resolveSource(container, selection)
+    const target = resolveTarget(container, annotation)
+    if (!sourceEl || !target) {
       setGeometry(null)
       return
     }
 
     const containerRect = container.getBoundingClientRect()
     const sourceRect = sourceEl.getBoundingClientRect()
-    const targetRect = targetEl.getBoundingClientRect()
+    const targetRect = target.el.getBoundingClientRect()
 
-    // Source anchor: left-middle of the question button (path starts going left).
+    // Source anchor: when the source is the small option-letter badge we
+    // start from its left-middle (it's a tiny circle, "left-middle" reads as
+    // "the side closer to the passage"). For the stem button we still leave
+    // from its left-middle. Both reduce to the same expression.
     const sx = sourceRect.left - containerRect.left
     const sy = sourceRect.top + sourceRect.height / 2 - containerRect.top
-    // Target anchor: right-middle of the sentence span.
+    // Target anchor: right-middle of the quote mark or sentence span.
     const tx = targetRect.right - containerRect.left
     const ty = targetRect.top + targetRect.height / 2 - containerRect.top
 
@@ -121,7 +188,7 @@ export function LinkOverlay(props: LinkOverlayProps): ReactNode {
       width: containerRect.width,
       height: containerRect.height,
     })
-  }, [activeLink, annotations, containerRef, selection])
+  }, [activeLink, annotationsById, containerRef, selection])
 
   // Re-measure on selection change and immediately after layout.
   useLayoutEffect(() => {
@@ -156,6 +223,21 @@ export function LinkOverlay(props: LinkOverlayProps): ReactNode {
     }
   }, [activeLink, containerRef, recompute, scrollRefs])
 
+  // Animation reset: when `instance` changes, momentarily strip the animate
+  // class then re-add it on the next frame. Reduced-motion users skip this.
+  useLayoutEffect(() => {
+    const path = pathRef.current
+    if (!path) return
+    if (detectReducedMotion()) {
+      path.classList.remove('ra-link-animate')
+      return
+    }
+    path.classList.remove('ra-link-animate')
+    // Force reflow so the next add re-triggers the keyframes.
+    void path.getBoundingClientRect()
+    path.classList.add('ra-link-animate')
+  }, [instance])
+
   if (!geometry || !activeLink) {
     return (
       <svg
@@ -180,8 +262,10 @@ export function LinkOverlay(props: LinkOverlayProps): ReactNode {
       viewBox={`0 0 ${geometry.width} ${geometry.height}`}
     >
       <path
+        ref={pathRef}
         data-link-id={activeLink.id}
         data-link-kind={activeLink.kind}
+        data-link-instance={instance}
         d={geometry.d}
         fill="none"
         stroke={stroke}

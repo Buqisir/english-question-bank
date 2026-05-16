@@ -60,7 +60,12 @@ export function QuestionPanel(props: QuestionPanelProps): ReactNode {
                 }
                 aria-pressed={active}
               >
-                <span className="ra-option-key">{opt.key}</span>
+                <span
+                  className="ra-option-key"
+                  data-ra-option-anchor={`q:${question.id}:${opt.key}`}
+                >
+                  {opt.key}
+                </span>
                 <span className="ra-option-text">{opt.text}</span>
                 {active && (
                   <span className="ra-option-rationale">{opt.rationale}</span>

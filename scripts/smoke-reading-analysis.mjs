@@ -125,6 +125,7 @@ async function activePath(page) {
     return {
       id: pathEl.getAttribute('data-link-id'),
       kind: pathEl.getAttribute('data-link-kind'),
+      instance: pathEl.getAttribute('data-link-instance'),
       d: pathEl.getAttribute('d') || '',
     }
   })
@@ -142,10 +143,26 @@ async function runFixtureSmoke(page) {
 
   // ── 3 & 4 ─────────────────────────────────────────────────────────────
   console.log('\nStep 3–4: passage shows evidence + trap highlights')
-  const evidenceCount = await page.locator('.ra-highlight-evidence').count()
-  step('.ra-highlight-evidence count ≥ 1', evidenceCount >= 1, `got ${evidenceCount}`)
-  const trapCount = await page.locator('.ra-highlight-trap').count()
-  step('.ra-highlight-trap count ≥ 1', trapCount >= 1, `got ${trapCount}`)
+  // Either form counts: when a quote locates, the sentence-level highlight
+  // is suppressed in favor of a tighter <mark data-ra-quote-anchor>; when it
+  // doesn't locate, the legacy sentence-level class is used as a fallback.
+  const evidenceCount =
+    (await page.locator('.ra-highlight-evidence').count()) +
+    (await page.locator('.ra-quote-mark-evidence').count())
+  step('evidence highlight (sentence or quote-mark) count ≥ 1',
+    evidenceCount >= 1, `got ${evidenceCount}`)
+  const trapCount =
+    (await page.locator('.ra-highlight-trap').count()) +
+    (await page.locator('.ra-quote-mark-trap').count())
+  step('trap highlight (sentence or quote-mark) count ≥ 1',
+    trapCount >= 1, `got ${trapCount}`)
+  const quoteAnchorCount = await page.locator('[data-ra-quote-anchor]').count()
+  step('[data-ra-quote-anchor] count ≥ 1 (quote-level marks rendered)',
+    quoteAnchorCount >= 1, `got ${quoteAnchorCount}`)
+  const evidenceQuoteCount = await page.locator('.ra-quote-mark-evidence').count()
+  step('.ra-quote-mark-evidence count ≥ 1', evidenceQuoteCount >= 1, `got ${evidenceQuoteCount}`)
+  const trapQuoteCount = await page.locator('.ra-quote-mark-trap').count()
+  step('.ra-quote-mark-trap count ≥ 1', trapQuoteCount >= 1, `got ${trapQuoteCount}`)
   await shot(page, '01-initial')
 
   // ── 5: stem click → path ──────────────────────────────────────────────
@@ -169,8 +186,15 @@ async function runFixtureSmoke(page) {
   )
   const correctPath = await activePath(page)
   step('correct option path kind=support', correctPath?.kind === 'support', `kind=${correctPath?.kind}`)
-  const correctTargetOk = await pathLandsOn(page, '.ra-highlight-evidence')
-  step('correct option path lands on an evidence span', correctTargetOk === true, '')
+  const correctEndpointOnQuoteAnchor = await pathLandsOn(page, '[data-ra-quote-anchor]')
+  step('correct option path endpoint lands inside [data-ra-quote-anchor]',
+    correctEndpointOnQuoteAnchor === true, '')
+  const correctEndpointOnEvidence = await pathLandsOn(page, '.ra-highlight-evidence, .ra-quote-mark-evidence')
+  step('correct option path endpoint lands on an evidence span (quote or sentence)',
+    correctEndpointOnEvidence === true, '')
+  const correctSourceOnBadge = await sourceStartsAtOptionBadge(page)
+  step('correct option path starts at .ra-option-key badge (not the full button)',
+    correctSourceOnBadge === true, '')
   await shot(page, '03-correct-clicked')
 
   // ── 7: wrong option → trap path ───────────────────────────────────────
@@ -185,12 +209,19 @@ async function runFixtureSmoke(page) {
   )
   const wrongPath = await activePath(page)
   step('wrong option path kind=trap', wrongPath?.kind === 'trap', `kind=${wrongPath?.kind}`)
-  const trapTargetOk = await pathLandsOn(page, '.ra-highlight-trap')
-  step('wrong option path lands on a trap span', trapTargetOk === true, '')
+  const wrongEndpointOnQuoteAnchor = await pathLandsOn(page, '[data-ra-quote-anchor]')
+  step('wrong option path endpoint lands inside [data-ra-quote-anchor]',
+    wrongEndpointOnQuoteAnchor === true, '')
+  const wrongEndpointOnTrap = await pathLandsOn(page, '.ra-highlight-trap, .ra-quote-mark-trap')
+  step('wrong option path endpoint lands on a trap span (quote or sentence)',
+    wrongEndpointOnTrap === true, '')
+  const wrongSourceOnBadge = await sourceStartsAtOptionBadge(page)
+  step('wrong option path starts at .ra-option-key badge (not the full button)',
+    wrongSourceOnBadge === true, '')
   await shot(page, '04-wrong-clicked')
 
   // ── 8: scroll → path d changes ───────────────────────────────────────
-  console.log('\nStep 8: scrolling the passage panel re-routes the path')
+  console.log('\nStep 8: scrolling the passage panel re-routes the path (no animation re-trigger)')
   await page.locator('.ra-option.ra-option-correct').first().click()
   await page.waitForFunction(
     () => {
@@ -199,7 +230,7 @@ async function runFixtureSmoke(page) {
     },
     { timeout: 5000 },
   )
-  const dBefore = (await activePath(page))?.d || ''
+  const beforeScroll = await activePath(page)
   await page.evaluate(() => {
     const sc = document.querySelector('.reading-analysis-passage-scroller')
     if (sc) sc.scrollTop = 60
@@ -209,12 +240,19 @@ async function runFixtureSmoke(page) {
       const p = document.querySelector('svg.ra-link-overlay path[data-link-id]')
       return p && p.getAttribute('d') !== prev
     },
-    dBefore,
+    beforeScroll?.d || '',
     { timeout: 5000 },
   )
-  const dAfter = (await activePath(page))?.d || ''
-  step('path d attribute changes after scroll', dBefore !== '' && dAfter !== '' && dBefore !== dAfter,
-    `before=${dBefore.slice(0, 40)}… after=${dAfter.slice(0, 40)}…`)
+  const afterScroll = await activePath(page)
+  step('path d attribute changes after scroll',
+    !!beforeScroll && !!afterScroll && beforeScroll.d !== afterScroll.d,
+    `before=${(beforeScroll?.d || '').slice(0, 40)}… after=${(afterScroll?.d || '').slice(0, 40)}…`)
+  step('path data-link-id is unchanged across scroll',
+    !!beforeScroll && !!afterScroll && beforeScroll.id === afterScroll.id,
+    `before=${beforeScroll?.id} after=${afterScroll?.id}`)
+  step('path data-link-instance is unchanged across scroll (no animation re-trigger)',
+    !!beforeScroll && !!afterScroll && beforeScroll.instance === afterScroll.instance,
+    `before=${beforeScroll?.instance} after=${afterScroll?.instance}`)
   await shot(page, '05-after-scroll')
 
   // ── 9: empty click → path cleared ────────────────────────────────────
@@ -262,8 +300,12 @@ async function runRealSmoke(page, sample) {
   step(`[${tag}] question stem is non-empty`, stem.trim().length > 0, `got "${stem}"`)
 
   // ── R5 / R6 ───────────────────────────────────────────────────────────
-  const evidenceCount = await page.locator('.ra-highlight-evidence').count()
-  const trapCount = await page.locator('.ra-highlight-trap').count()
+  const evidenceCount =
+    (await page.locator('.ra-highlight-evidence').count()) +
+    (await page.locator('.ra-quote-mark-evidence').count())
+  const trapCount =
+    (await page.locator('.ra-highlight-trap').count()) +
+    (await page.locator('.ra-quote-mark-trap').count())
   step(
     `[${tag}] annotation counts read without crash`,
     Number.isFinite(evidenceCount) && Number.isFinite(trapCount),
@@ -317,4 +359,37 @@ async function pathLandsOn(page, highlightSelector) {
       return tx >= left - 2 && tx <= right + 2 && ty >= top - 2 && ty <= bottom + 2
     })
   }, highlightSelector)
+}
+
+/**
+ * Returns whether the path's source endpoint (start of the `d` attribute)
+ * lies within the bounding rect of the active option's `.ra-option-key`
+ * badge. Tolerates a small slop on every side because the path may end
+ * its visible segment a couple of pixels inside the badge.
+ */
+async function sourceStartsAtOptionBadge(page) {
+  return page.evaluate(() => {
+    const pathEl = document.querySelector('svg.ra-link-overlay path[data-link-id]')
+    const view = document.querySelector('.reading-analysis-view')
+    const activeOption = document.querySelector('.ra-option.is-active')
+    if (!pathEl || !view || !activeOption) return false
+    const badge = activeOption.querySelector('.ra-option-key')
+    if (!badge) return false
+    const d = pathEl.getAttribute('d') || ''
+    const startMatch = d.match(/^M\s+([\d.]+)\s+([\d.]+)/)
+    if (!startMatch) return false
+    const sx = Number(startMatch[1])
+    const sy = Number(startMatch[2])
+    const viewRect = view.getBoundingClientRect()
+    const r = badge.getBoundingClientRect()
+    const left = r.left - viewRect.left
+    const right = r.right - viewRect.left
+    const top = r.top - viewRect.top
+    const bottom = r.bottom - viewRect.top
+    const tolerance = 4
+    return (
+      sx >= left - tolerance && sx <= right + tolerance &&
+      sy >= top - tolerance && sy <= bottom + tolerance
+    )
+  })
 }

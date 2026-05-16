@@ -135,6 +135,29 @@
   text-decoration-thickness: 1px;
 }
 
+/* Quote-level marks. When the selector successfully locates an annotation's
+ * quote inside a sentence, the passage renders <mark data-ra-quote-anchor>
+ * around just that fragment. The mark is the primary visual cue for the
+ * dashed link, so it gets a slightly stronger but still soft treatment than
+ * the sentence-level fallback above. */
+.ra-quote-mark {
+  background: transparent;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+.ra-quote-mark-evidence {
+  background: rgba(232, 192, 96, 0.22);
+  box-shadow: inset 0 -1px 0 rgba(204, 154, 60, 0.55);
+}
+
+.ra-quote-mark-trap {
+  background: transparent;
+  text-decoration: underline wavy rgba(184, 96, 32, 0.6);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
 .ra-passage-spacer {
   height: 240px;
 }
@@ -288,6 +311,41 @@
 
 .ra-link-overlay[data-empty='true'] {
   display: none;
+}
+
+/* One-shot draw animation. The dashed pattern itself is preserved via the
+ * inline `stroke-dasharray`; we animate opacity + a tiny horizontal slide so
+ * the line appears to come in from the option badge once when activeLink
+ * changes. CSS only restarts the animation when the path's
+ * data-link-instance changes (LinkOverlay momentarily removes/re-adds the
+ * `ra-link-animate` class to force the keyframes to re-trigger). Scroll and
+ * resize updates only mutate `d`, so the keyframes stay quiet.
+ */
+@keyframes ra-link-draw {
+  from {
+    opacity: 0;
+    transform: translateX(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ra-link-overlay path.ra-link-animate {
+  animation: ra-link-draw 260ms ease-out both;
+  /* Keep transform origin at the start of the path so the slide reads as
+   * "coming from the option badge". */
+  transform-origin: 100% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ra-link-overlay path,
+  .ra-link-overlay path.ra-link-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @media (max-width: 760px) {
