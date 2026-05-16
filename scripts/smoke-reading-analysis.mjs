@@ -16,6 +16,10 @@
  *               8. wrong option → trap path landing on a trap span
  *               9. scrolling the passage scroller mutates path's `d` attribute
  *              10. clicking empty space removes the path
+ *              11. with a tight passage viewport, clicking a stem/option whose
+ *                  evidence is offscreen auto-scrolls the passage scroller
+ *                  (and only the passage scroller) so the target enters view
+ *                  with comfortable breathing room
  *
  *   --real:   iterates `app/src/features/reading-analysis/sidecar/index.json`
  *             and for EACH listed group opens
@@ -265,6 +269,232 @@ async function runFixtureSmoke(page) {
   const cleared = await activePath(page)
   step('path[data-link-id] removed after background click', cleared === null, JSON.stringify(cleared))
   await shot(page, '06-cleared')
+
+  // ── 10: auto-scroll evidence into view ───────────────────────────────
+  console.log('\nStep 10: clicking option whose evidence is offscreen auto-scrolls the passage panel')
+  await runAutoScrollSmoke(page)
+}
+
+/**
+ * Evidence auto-scroll smoke (Cut 2).
+ *
+ * We force the passage scroller into a state where the evidence the option
+ * points to is NOT in view, then click the option and assert:
+ *
+ *   A) `passageScroller.scrollTop` strictly increases
+ *   B) the evidence target rect ends up inside the scroller's viewport, with
+ *      ~70-80px breathing room from the closer edge (matches the planner's
+ *      80px margin, with a small slop for sub-pixel rounding / smooth-scroll
+ *      animation tail)
+ *   C) `document.scrollingElement.scrollTop` (i.e. the window) is unchanged
+ *   D) the SVG path is still rendered (data-link-id present) — auto-scroll
+ *      reuses the same activeLink, so the path keeps the same id
+ *
+ * Method:
+ *   1. Resize the viewport so the .reading-analysis-passage-scroller
+ *      (max-height: 72vh) is short — ~270px tall — guaranteeing that the
+ *      .ra-passage-spacer (240px) plus content overflows.
+ *   2. Force passage scroller scrollTop to 0 (scroll to the top of the
+ *      passage). Window scrollTop stays at 0 too.
+ *   3. Find the first .ra-quote-mark-evidence whose rect is below the
+ *      scroller's viewport.
+ *   4. Click the option that points at it (we use the first correct option,
+ *      whose link.toAnnotationId resolves to the first evidence quote in
+ *      our fixture; the assertion is on the resulting visibility, not on
+ *      which specific evidence is targeted).
+ *   5. Wait for scrollTop to settle (smooth scroll animation tail).
+ *   6. Read all four expected post-conditions.
+ */
+async function runAutoScrollSmoke(page) {
+  // Resize so the passage scroller becomes short enough that .ra-passage-spacer
+  // pushes evidence below the fold. 72vh of 380px = ~273px scroller.
+  await page.setViewportSize({ width: 1280, height: 380 })
+  await page.waitForTimeout(120) // give layout a beat to settle
+
+  // Reset scroll positions: passage scroller to top, window to 0.
+  await page.evaluate(() => {
+    const sc = document.querySelector('.reading-analysis-passage-scroller')
+    if (sc) sc.scrollTop = 0
+    if (document.scrollingElement) document.scrollingElement.scrollTop = 0
+    window.scrollTo(0, 0)
+  })
+  await page.waitForTimeout(60)
+
+  // Capture the "before" snapshot. Pick the offscreen evidence target now
+  // so we can verify the same target ends up in view after the click.
+  const before = await page.evaluate(() => {
+    const sc = document.querySelector('.reading-analysis-passage-scroller')
+    if (!sc) return null
+    const scRect = sc.getBoundingClientRect()
+    const winScroll =
+      (document.scrollingElement && document.scrollingElement.scrollTop) || 0
+    const evidenceMarks = Array.from(
+      document.querySelectorAll('.ra-quote-mark-evidence'),
+    )
+    // Pick the first evidence mark that is below the visible region of
+    // the passage scroller (viewport bottom-relative).
+    const offscreen = evidenceMarks.find((el) => {
+      const r = el.getBoundingClientRect()
+      return r.top > scRect.bottom // strictly below the visible region
+    }) || evidenceMarks.find((el) => {
+      const r = el.getBoundingClientRect()
+      return r.top < scRect.top || r.bottom > scRect.bottom
+    })
+    return {
+      scrollerTop: scRect.top,
+      scrollerBottom: scRect.bottom,
+      scrollerScrollTop: sc.scrollTop,
+      scrollerClientHeight: sc.clientHeight,
+      scrollerScrollHeight: sc.scrollHeight,
+      windowScrollTop: winScroll,
+      offscreenAnchorId: offscreen
+        ? offscreen.getAttribute('data-ra-quote-anchor')
+        : null,
+      evidenceCount: evidenceMarks.length,
+    }
+  })
+
+  step(
+    'auto-scroll precondition: passage scroller is overflowing',
+    !!before && before.scrollerScrollHeight > before.scrollerClientHeight,
+    JSON.stringify(before),
+  )
+  step(
+    'auto-scroll precondition: at least one evidence mark exists',
+    !!before && before.evidenceCount >= 1,
+    `evidenceCount=${before?.evidenceCount}`,
+  )
+  step(
+    'auto-scroll precondition: at least one evidence mark is offscreen',
+    !!before && before.offscreenAnchorId !== null,
+    `offscreenAnchorId=${before?.offscreenAnchorId}`,
+  )
+
+  // Click the correct option — its support link resolves to the evidence
+  // quote, which is below the visible region after our viewport reset.
+  await page.locator('.ra-option.ra-option-correct').first().click()
+
+  // Wait for the dashed path to render.
+  await page.waitForSelector('svg.ra-link-overlay path[data-link-id]', {
+    timeout: 5000,
+  })
+
+  // Wait for the passage scroller's scrollTop to settle (smooth scroll has
+  // an animation tail; we poll until the value is stable for two ticks AND
+  // strictly greater than 0, so we never read a mid-animation snapshot).
+  await page.waitForFunction(
+    () => {
+      const sc = document.querySelector('.reading-analysis-passage-scroller')
+      if (!sc) return false
+      const stableSince = Number(sc.dataset.smokeStableSince || '-1')
+      const lastSeen = Number(sc.dataset.smokeLastScrollTop || '-1')
+      const now = sc.scrollTop
+      if (now <= 0) return false
+      if (now === lastSeen) {
+        // value unchanged this tick — increment the stable counter
+        const ticks = stableSince + 1
+        sc.dataset.smokeStableSince = String(ticks)
+        return ticks >= 2
+      }
+      // value moved this tick — restart the stable counter
+      sc.dataset.smokeLastScrollTop = String(now)
+      sc.dataset.smokeStableSince = '0'
+      return false
+    },
+    { timeout: 6000, polling: 100 },
+  )
+
+  const after = await page.evaluate(() => {
+    const sc = document.querySelector('.reading-analysis-passage-scroller')
+    const winScroll =
+      (document.scrollingElement && document.scrollingElement.scrollTop) || 0
+    const pathEl = document.querySelector(
+      'svg.ra-link-overlay path[data-link-id]',
+    )
+    if (!sc) return null
+    const scRect = sc.getBoundingClientRect()
+    return {
+      scrollerScrollTop: sc.scrollTop,
+      scrollerTop: scRect.top,
+      scrollerBottom: scRect.bottom,
+      scrollerClientHeight: sc.clientHeight,
+      windowScrollTop: winScroll,
+      pathId: pathEl ? pathEl.getAttribute('data-link-id') : null,
+      pathInstance: pathEl ? pathEl.getAttribute('data-link-instance') : null,
+    }
+  })
+
+  // A) scroller scrollTop strictly increased
+  step(
+    'auto-scroll: passage scroller scrollTop increased',
+    !!before && !!after && after.scrollerScrollTop > before.scrollerScrollTop,
+    `before=${before?.scrollerScrollTop} after=${after?.scrollerScrollTop}`,
+  )
+
+  // B) target rect now sits inside the scroller's viewport with breathing
+  // room. We re-resolve the same evidence anchor (offscreenAnchorId) so the
+  // verification doesn't drift to whichever element happens to be visible.
+  const margin = await page.evaluate((anchorId) => {
+    const sc = document.querySelector('.reading-analysis-passage-scroller')
+    if (!sc || !anchorId) return null
+    const target = document.querySelector(
+      `[data-ra-quote-anchor="${CSS.escape(anchorId)}"]`,
+    )
+    if (!target) return null
+    const scRect = sc.getBoundingClientRect()
+    const tRect = target.getBoundingClientRect()
+    return {
+      // distance from the target's top to the scroller's top edge (positive
+      // means there's breathing room above the target, which is what the
+      // planner aims for at ~80px when the target was originally below).
+      topGap: tRect.top - scRect.top,
+      // and the bottom-side gap, in case the target was originally above.
+      bottomGap: scRect.bottom - tRect.bottom,
+      visible: tRect.top >= scRect.top && tRect.bottom <= scRect.bottom,
+    }
+  }, before?.offscreenAnchorId)
+
+  step(
+    'auto-scroll: previously-offscreen evidence is now inside the scroller viewport',
+    !!margin && margin.visible === true,
+    JSON.stringify(margin),
+  )
+  // The planner targets ~80px breathing room from the closer edge. For a
+  // target that started below the visible region the closer edge is the
+  // top, so `topGap` should be ~80. Allow a slop band [40, 140] to tolerate
+  // sub-pixel rounding, mid-animation reads, and short scrollers where the
+  // planner clamps to maxScroll instead of hitting the ideal 80.
+  step(
+    'auto-scroll: target lands ~70-80px from the scroller top edge (slop 40..140)',
+    !!margin && margin.topGap >= 40 && margin.topGap <= 140,
+    JSON.stringify(margin),
+  )
+
+  // C) window scroll did NOT change.
+  step(
+    'auto-scroll: window/document scrollingElement.scrollTop did not change',
+    !!before && !!after && after.windowScrollTop === before.windowScrollTop,
+    `before=${before?.windowScrollTop} after=${after?.windowScrollTop}`,
+  )
+
+  // D) path is still rendered.
+  step(
+    'auto-scroll: SVG path[data-link-id] still present after auto-scroll',
+    !!after && after.pathId !== null,
+    JSON.stringify(after),
+  )
+
+  await shot(page, '07-auto-scrolled')
+
+  // Restore the original viewport so any later code (or a future smoke
+  // step appended after this one) sees the same environment.
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.evaluate(() => {
+    const sc = document.querySelector('.reading-analysis-passage-scroller')
+    if (!sc) return
+    delete sc.dataset.smokeStableSince
+    delete sc.dataset.smokeLastScrollTop
+  })
 }
 
 async function runRealSmoke(page, sample) {
