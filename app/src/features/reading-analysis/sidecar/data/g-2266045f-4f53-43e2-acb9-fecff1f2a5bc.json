@@ -1,0 +1,18 @@
+{
+  "groupId": "g-2266045f-4f53-43e2-acb9-fecff1f2a5bc",
+  "_note": "2025 新课标I 阅读 D — Microplastics. Sample case: cross-sentence (intentional miss) + partial-quote hit.",
+  "_case": "cross-sentence",
+  "entries": [
+    {
+      "questionNo": "2",
+      "kind": "evidence",
+      "quote": "this process relies on the water containing enough calcium carbonate (碳酸钙) to trap the plastics. In the study, boiling hard water containing 300 milligrams of calcium carbonate led to an almost 90 percent drop in plastics."
+    },
+    {
+      "questionNo": "2",
+      "optionLabel": "A",
+      "kind": "evidence",
+      "quote": "this process relies on the water containing enough calcium carbonate"
+    }
+  ]
+}

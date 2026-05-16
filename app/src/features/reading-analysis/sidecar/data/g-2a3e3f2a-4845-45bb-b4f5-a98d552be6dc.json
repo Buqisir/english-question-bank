@@ -1,0 +1,24 @@
+{
+  "groupId": "g-2a3e3f2a-4845-45bb-b4f5-a98d552be6dc",
+  "_note": "2021 全国乙 阅读 D — Open offices and creativity. Sample case: long-quote (full description sentence as evidence) + normal-hit short substring.",
+  "_case": "long-quote",
+  "entries": [
+    {
+      "questionNo": "1",
+      "kind": "evidence",
+      "quote": "Annoyed by the level of distraction (干扰) in his open office, he said, \"That's why I have a membership at the coworking space across the street—so I can focus.\""
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "A",
+      "kind": "evidence",
+      "quote": "Annoyed by the level of distraction"
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "B",
+      "kind": "trap",
+      "quote": "After all, coworking spaces also typically use an open office layout"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "groupId": "g-9c52ac23-4dee-46a3-bec5-d7e989debf9b",
+  "_note": "2025 新课标I 阅读 C — Movement / Take Back Our Streets. Sample case: long-quote + normal-hit.",
+  "_case": "long-quote",
+  "entries": [
+    {
+      "questionNo": "1",
+      "kind": "evidence",
+      "quote": "transport studies also show declines in pedestrian (行人) mobility, especially among young children"
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "C",
+      "kind": "evidence",
+      "quote": "Many parents say there's too much traffic on the roads for their children to walk safely to school, so they pack them into the car instead."
+    }
+  ]
+}

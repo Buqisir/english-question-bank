@@ -125,7 +125,7 @@ const missRatePct = (missRate * 100).toFixed(1)
 const lines = []
 lines.push('# Reading Analysis — Quote Coverage Report')
 lines.push('')
-lines.push(`Generated: ${new Date().toISOString()}`)
+lines.push('Generated: deterministic by `scripts/reading-analysis-report.mjs`')
 lines.push('')
 lines.push(`Source: \`app/src/features/reading-analysis/sidecar/index.json\` (${manifest.samples.length} samples)`)
 lines.push(`API:    \`${apiBase}\``)
@@ -212,7 +212,7 @@ lines.push('')
 
 lines.push('## Initial Recommendation')
 lines.push('')
-lines.push(buildRecommendation({ totalEntries, totalHits, totalMisses, reasonCounts }))
+lines.push(buildRecommendation({ totalEntries, totalHits, totalMisses, reasonCounts, okGroups }))
 lines.push('')
 
 writeFileSync(reportPath, lines.join('\n'))
@@ -242,57 +242,61 @@ function escapeQuote(value) {
   return value.replace(/\n+/g, ' ').trim()
 }
 
-function buildRecommendation({ totalEntries, totalHits, totalMisses, reasonCounts }) {
+function buildRecommendation({ totalEntries, totalHits, totalMisses, reasonCounts, okGroups }) {
   if (totalEntries === 0) {
     return '_Not enough sidecar entries to recommend a direction yet._'
   }
-  const missPct = (totalMisses / totalEntries) * 100
+  const SAMPLE_FLOOR = 30
   const lines = []
-  if (totalMisses === 0) {
+  lines.push(
+    `Hit rate ${(totalHits / totalEntries * 100).toFixed(1)}% across ${totalEntries} entries from ${okGroups} groups.`,
+  )
+  lines.push('')
+  if (totalEntries < SAMPLE_FLOOR) {
     lines.push(
-      'Current single-sentence `includes()` matcher covers every sampled sidecar entry. ' +
-        'No matcher upgrade is needed at this scale; expand sidecar samples before revisiting.',
+      `Sample size is below the working floor of ${SAMPLE_FLOOR} entries. ` +
+        'Do NOT use these numbers to argue for or against a matcher upgrade. ' +
+        'The right next step is to expand sidecar coverage on real groups.',
     )
   } else {
     lines.push(
-      `Hit rate ${(totalHits / totalEntries * 100).toFixed(1)}% across ${totalEntries} entries.`,
+      `Sample size is at or above the working floor (${SAMPLE_FLOOR} entries), but coverage is still narrow ` +
+        'and skewed toward 阅读 reading prompts. The numbers below are a first-look snapshot, not evidence ' +
+        'of representativeness — keep adding real samples before discussing any matcher policy change.',
     )
   }
+  lines.push('')
 
   if (reasonCounts.cross_sentence > 0) {
     lines.push(
-      '',
-      `Cross-sentence misses: ${reasonCounts.cross_sentence}. ` +
-        'Lowest-risk fix is an "adjacent-sentence concatenation" probe BEFORE introducing fuzzy matching — ' +
-        'try locating the quote across pairs of consecutive sentences in the same paragraph. ' +
-        'Defer fuzzy / token-level matchers until cross_sentence misses exceed ~20% of total entries.',
+      `- Cross-sentence misses: ${reasonCounts.cross_sentence}. Expected for the ` +
+        'current single-sentence matcher; sidecar authors can either tighten the ' +
+        'quote to a single sentence or accept the miss until matcher policy is revisited.',
     )
   }
   if (reasonCounts.multiple_matches > 0) {
     lines.push(
-      '',
-      `Ambiguous matches: ${reasonCounts.multiple_matches}. ` +
-        'Prefer requiring a longer quote in the sidecar over disambiguating heuristically.',
+      `- Ambiguous matches: ${reasonCounts.multiple_matches}. Prefer requiring ` +
+        'a longer quote in the sidecar over disambiguating heuristically.',
+    )
+  } else {
+    lines.push(
+      '- multiple_matches: 0 in current sample. If real candidates show up later ' +
+        'they should be flagged in this section, not silently disambiguated.',
     )
   }
   if (reasonCounts.not_found > 0) {
     lines.push(
-      '',
-      `Not-found misses: ${reasonCounts.not_found}. ` +
-        'Most likely a quote authoring error (typo / wrong group) — fix the sidecar JSON, not the matcher.',
+      `- Not-found misses: ${reasonCounts.not_found}. Most likely a quote authoring ` +
+        'error — fix the sidecar JSON, not the matcher.',
     )
   }
-  if (totalMisses > 0 && missPct < 20) {
-    lines.push(
-      '',
-      `Overall miss rate ${missPct.toFixed(1)}% is below the 20% upgrade threshold; do NOT add fuzzy matching yet.`,
-    )
-  } else if (missPct >= 20) {
-    lines.push(
-      '',
-      `Overall miss rate ${missPct.toFixed(1)}% has crossed the 20% threshold; consider adjacent-sentence support next.`,
-    )
-  }
+
+  lines.push('')
+  lines.push(
+    'Do not introduce fuzzy matching, adjacent-sentence concatenation, or ' +
+      'token-level matching at this stage. Continue observing as the sidecar grows.',
+  )
 
   return lines.join('\n')
 }

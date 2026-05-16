@@ -1,5 +1,5 @@
 {
-  "_note": "Reading Analysis sidecar manifest. Each entry must point at an existing data/<groupId>.json file. The report script (scripts/reading-analysis-report.mjs) and the real-mode smoke iterate this list.",
+  "_note": "Reading Analysis sidecar manifest. Each entry must point at an existing data/<groupId>.json file. The report script (scripts/reading-analysis-report.mjs) and the real-mode smoke iterate this list. Cases are observation tags, not selector contracts.",
   "samples": [
     {
       "groupId": "g-9b30c735-6824-4897-a938-6d5c42bee39a",
@@ -35,6 +35,66 @@
       "case": "same-sentence-multi",
       "title": "2021 新课标Ⅰ卷 阅读 B — Page Turner",
       "expect": "stem evidence + wrong-option trap both land on the same sentence; selector keeps both with a warning + same_sentence_multi diagnostic."
+    },
+    {
+      "groupId": "g-9c52ac23-4dee-46a3-bec5-d7e989debf9b",
+      "questionNo": "1",
+      "case": "long-quote",
+      "title": "2025 新课标I 阅读 C — Take Back Our Streets",
+      "expect": "long sentence quote about declining pedestrian mobility; substring still single-sentence so should hit cleanly."
+    },
+    {
+      "groupId": "g-2266045f-4f53-43e2-acb9-fecff1f2a5bc",
+      "questionNo": "2",
+      "case": "cross-sentence",
+      "title": "2025 新课标I 阅读 D — Microplastics + boiling",
+      "expect": "stem evidence intentionally crosses 'this process relies on…' and 'In the study, boiling…'; expected cross_sentence miss; option-A trimmed quote hits."
+    },
+    {
+      "groupId": "g-9a602eb7-691d-4b18-9fb8-bc3e40edddcd",
+      "questionNo": "1",
+      "case": "same-sentence-multi",
+      "title": "2025 新课标Ⅱ 阅读 C — Houseplant boom",
+      "expect": "stem evidence + correct-option support + wrong-option trap all on the same sentence about Detrinidad; multiple same_sentence_multi diagnostics expected."
+    },
+    {
+      "groupId": "g-de05a235-7aab-492a-bca8-e4be6d626336",
+      "questionNo": "2",
+      "case": "cross-sentence",
+      "title": "2025 新课标Ⅱ 阅读 D — wastED restaurant",
+      "expect": "stem quote spans two sentences (intro + Greenwich Village setup); expected cross_sentence miss; option-B clean hit."
+    },
+    {
+      "groupId": "g-4d8ec5a1-3c82-4707-b894-d61211d08ef4",
+      "questionNo": "1",
+      "case": "long-quote",
+      "title": "2025 浙江卷（1月）阅读 A — Interlibrary Loan",
+      "expect": "full ILL definition sentence is the stem evidence; substring eligibility check for option C."
+    },
+    {
+      "groupId": "g-6d8e85bb-8616-4304-b51b-309d0143f773",
+      "questionNo": "1",
+      "case": "punctuation-difference",
+      "title": "2025 浙江卷（1月）阅读 B — Don't talk about food",
+      "expect": "sidecar uses straight ASCII apostrophe ('); source passage uses curly (’). Normalization should still hit."
+    },
+    {
+      "groupId": "g-d0481f78-8f75-40da-8ac3-39c2baf9e97d",
+      "questionNo": "1",
+      "case": "punctuation-difference",
+      "title": "2025 新课标I 阅读 B — Ninth-grade writing",
+      "expect": "reverse direction: sidecar uses curly ’ where the source uses straight ASCII '. normalizeQuote() unifies both forms; entries should hit."
+    },
+    {
+      "groupId": "g-2a3e3f2a-4845-45bb-b4f5-a98d552be6dc",
+      "questionNo": "1",
+      "case": "long-quote",
+      "title": "2021 全国乙 阅读 D — Open offices and creativity",
+      "expect": "long quote with embedded straight quote, em dash, and parentheses; substring still single-sentence so should hit. Includes a wrong-option trap."
     }
-  ]
+  ],
+  "_observations": {
+    "multiple_matches": "Not deliberately authored. The matcher will surface multiple_matches if the leading 30 normalized chars of a quote appear in 2+ sentences. As of this writing no real candidate group has produced one in the live API; if one shows up later, add it explicitly here rather than synthesizing one.",
+    "题目版_groups_unsupported": "2026 浙江卷（1月）题目版 reading groups (e.g. g-6e87fbdf, g-76da9842) are NOT included because their questions store empty options arrays in the live API; the selector correctly rejects them with reason='unsupported-question-type'. They will become eligible once their 答案版 counterparts land."
+  }
 }

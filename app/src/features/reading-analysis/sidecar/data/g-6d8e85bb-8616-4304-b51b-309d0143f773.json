@@ -1,0 +1,18 @@
+{
+  "groupId": "g-6d8e85bb-8616-4304-b51b-309d0143f773",
+  "_note": "2025 浙江卷（1月）阅读 B — Don't talk about food with kids. Sample case: punctuation-difference (sidecar uses straight ASCII apostrophe, source uses curly) + normal-hit.",
+  "_case": "punctuation-difference",
+  "entries": [
+    {
+      "questionNo": "1",
+      "kind": "evidence",
+      "quote": "It really messed up my relationship with food"
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "B",
+      "kind": "evidence",
+      "quote": "I'm careful not to connect what my kids weigh with their worth as people"
+    }
+  ]
+}
