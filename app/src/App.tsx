@@ -935,8 +935,6 @@ function App() {
   const [sourceType, setSourceType] = useState<'all' | SourceType>('all')
   const [groupType, setGroupType] = useState<'all' | GroupType>('all')
   const [selectedTag, setSelectedTag] = useState('全部')
-  const [versionType, setVersionType] = useState<VersionType>('student')
-  const [paperExportStyle, setPaperExportStyle] = useState<'exam' | 'handout'>('exam')
   const [homeMode, setHomeMode] = useState<'ai' | 'classic'>(() =>
     localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai',
   )
@@ -954,8 +952,11 @@ function App() {
     paperBlocks,
     selectedPaperBlockId,
     openInsertionIndex,
+    paperTitle,
+    questionNumberStart,
+    paperExportStyle,
+    versionType,
   } = paperDraft
-  const [questionNumberStart, setQuestionNumberStart] = useState(1)
   const [isEntryOpen, setEntryOpen] = useState(false)
   const [isImportOpen, setImportOpen] = useState(false)
   const [entryMode, setEntryMode] = useState<'create' | 'edit'>('create')
@@ -1011,7 +1012,6 @@ function App() {
   const [previewDetails, setPreviewDetails] = useState<Record<string, QuestionGroupDetail>>({})
   const [previewStatus, setPreviewStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [previewError, setPreviewError] = useState('')
-  const [paperTitle, setPaperTitle] = useState('高考阅读 B 主题训练')
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [saveError, setSaveError] = useState('')
   const [lastSavedPaper, setLastSavedPaper] = useState<PaperSetSummary | null>(null)
@@ -1518,8 +1518,8 @@ function App() {
         : await savePaperSet(paperSetInput)
 
       paperDraft.replaceDraft({ basket: nextBasket })
-      setPaperTitle(title)
-      setVersionType('student')
+      paperDraft.setPaperTitle(title)
+      paperDraft.setVersionType('student')
       setLastSavedPaper(paperSet)
       setSavedPapers((paperSets) => [paperSet, ...paperSets.filter((item) => item.id !== paperSet.id)])
       setSavedPapersStatus('loaded')
@@ -1719,6 +1719,33 @@ function App() {
   function clearBasket() {
     setLastSavedPaper(null)
     paperDraft.clear()
+  }
+
+  // ── Paper-level config wrappers (Step 3) ──
+  // Hooks own the four config fields, but the legacy side effects (saveStatus
+  // idle, exports reset) stay here in App so we don't accidentally over- or
+  // under-reset on a config tweak. Behavior must match the pre-Step-3 source:
+  //   - title:   set + saveStatus idle + reset exports
+  //   - version: set + reset exports (no saveStatus change)
+  //   - style:   set only (no saveStatus / no reset)
+  //   - start:   set only (no saveStatus / no reset)
+  function handlePaperTitleChange(next: string) {
+    paperDraft.setPaperTitle(next)
+    setSaveStatus('idle')
+    paperExports.resetExportStatuses()
+  }
+
+  function handleVersionTypeChange(next: VersionType) {
+    paperDraft.setVersionType(next)
+    paperExports.resetExportStatuses()
+  }
+
+  function handlePaperExportStyleChange(next: 'exam' | 'handout') {
+    paperDraft.setPaperExportStyle(next)
+  }
+
+  function handleQuestionNumberStartChange(next: number) {
+    paperDraft.setQuestionNumberStart(Math.max(1, Number.isFinite(next) ? next : 1))
   }
 
   function removePaperBlock(blockId: string) {
@@ -2980,8 +3007,8 @@ function App() {
         : await savePaperSet(paperSetInput)
 
       paperDraft.replaceDraft({ basket: nextBasket })
-      setPaperTitle(title)
-      setVersionType('student')
+      paperDraft.setPaperTitle(title)
+      paperDraft.setVersionType('student')
       setLastSavedPaper(paperSet)
       setSavedPapers((paperSets) => [paperSet, ...paperSets.filter((item) => item.id !== paperSet.id)])
       setSavedPapersStatus('loaded')
@@ -3040,13 +3067,13 @@ function App() {
 
       paperDraft.replaceDraft({ basket: loadedBasket, layout: paperSet.layout })
       if (paperSet.layout) {
-        setQuestionNumberStart(paperSet.layout.questionNumberStart || 1)
-        setPaperExportStyle(paperSet.layout.printStyle || 'exam')
+        paperDraft.setQuestionNumberStart(paperSet.layout.questionNumberStart || 1)
+        paperDraft.setPaperExportStyle(paperSet.layout.printStyle || 'exam')
       }
       if (paperSet.layoutWarnings && paperSet.layoutWarnings.length > 0) {
         setLoadPaperError(`布局提示：${paperSet.layoutWarnings.join('；')}`)
       }
-      setPaperTitle(paperSet.title)
+      paperDraft.setPaperTitle(paperSet.title)
       setLastSavedPaper(paperSet)
       setSaveStatus('saved')
       paperExports.resetExportStatuses()
@@ -5095,9 +5122,7 @@ function App() {
             <input
               value={paperTitle}
               onChange={(event) => {
-                setPaperTitle(event.target.value)
-                setSaveStatus('idle')
-                paperExports.resetExportStatuses()
+                handlePaperTitleChange(event.target.value)
               }}
             />
           </label>
@@ -5107,8 +5132,7 @@ function App() {
               className={versionType === 'student' ? 'active' : ''}
               type="button"
               onClick={() => {
-                setVersionType('student')
-                paperExports.resetExportStatuses()
+                handleVersionTypeChange('student')
               }}
             >
               学生版
@@ -5117,8 +5141,7 @@ function App() {
               className={versionType === 'teacher' ? 'active' : ''}
               type="button"
               onClick={() => {
-                setVersionType('teacher')
-                paperExports.resetExportStatuses()
+                handleVersionTypeChange('teacher')
               }}
             >
               教师版
@@ -5129,14 +5152,14 @@ function App() {
             <button
               className={paperExportStyle === 'exam' ? 'active' : ''}
               type="button"
-              onClick={() => setPaperExportStyle('exam')}
+              onClick={() => handlePaperExportStyleChange('exam')}
             >
               试卷版
             </button>
             <button
               className={paperExportStyle === 'handout' ? 'active' : ''}
               type="button"
-              onClick={() => setPaperExportStyle('handout')}
+              onClick={() => handlePaperExportStyleChange('handout')}
             >
               讲义版
             </button>
@@ -5217,7 +5240,7 @@ function App() {
             <div className="paper-blocks-toolbar">
               <label className="paper-blocks-start-num">
                 起始题号
-                <input type="number" min="1" value={questionNumberStart} onChange={(e) => setQuestionNumberStart(Math.max(1, Number(e.target.value) || 1))} />
+                <input type="number" min="1" value={questionNumberStart} onChange={(e) => handleQuestionNumberStartChange(Number(e.target.value) || 1)} />
               </label>
               <button className="ghost-button" type="button" onClick={() => insertBlockAt(paperBlocks.length, 'section_header')}>+ 大题标题</button>
               <button className="ghost-button" type="button" onClick={() => insertBlockAt(paperBlocks.length, 'page_break')}>+ 分页</button>

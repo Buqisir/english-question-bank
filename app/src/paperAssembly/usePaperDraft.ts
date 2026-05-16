@@ -46,9 +46,12 @@ import type {
   PaperBlock,
   PaperSetLayout,
   QuestionGroupCard,
+  VersionType,
 } from '../domain/questionBank.ts'
 import { usePaperBlocks } from './usePaperBlocks.ts'
 import { createBasketItem, type PaperDraftEditReason } from './paperDraftModel.ts'
+
+export type PaperExportStyle = 'exam' | 'handout'
 
 export type UsePaperDraftInput = {
   /**
@@ -58,6 +61,14 @@ export type UsePaperDraftInput = {
    * patchBasketItemFromSavedGroup, which are reserved for load / sync flows.
    */
   onDraftEdited?: (reason: PaperDraftEditReason) => void
+  /** Initial paperTitle. Defaults to '高考阅读 B 主题训练' to preserve legacy behavior. */
+  initialPaperTitle?: string
+  /** Initial questionNumberStart. Defaults to 1. */
+  initialQuestionNumberStart?: number
+  /** Initial paperExportStyle. Defaults to 'exam'. */
+  initialPaperExportStyle?: PaperExportStyle
+  /** Initial versionType. Defaults to 'student'. */
+  initialVersionType?: VersionType
 }
 
 export type ReplaceDraftInput = {
@@ -105,11 +116,37 @@ export type UsePaperDraftResult = {
   // QuestionGroup in the entry panel). Updates only the matching basket entry
   // while preserving the user's score / sectionTitle / note overrides. No fire.
   patchBasketItemFromSavedGroup: (saved: QuestionGroupCard) => void
+
+  // ── Paper-level config (Step 3) ──
+  // The hook owns the state; App composes its own onChange wrappers to keep
+  // the legacy side effects (saveStatus, paperExports.resetExportStatuses)
+  // exactly as they were — those are NOT moved into this hook.
+  paperTitle: string
+  setPaperTitle: (next: string) => void
+  questionNumberStart: number
+  setQuestionNumberStart: (next: number) => void
+  paperExportStyle: PaperExportStyle
+  setPaperExportStyle: (next: PaperExportStyle) => void
+  versionType: VersionType
+  setVersionType: (next: VersionType) => void
 }
 
 export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResult {
   const { onDraftEdited } = input
   const [basket, setBasket] = useState<BasketItem[]>([])
+
+  // Paper-level config (Step 3). Owned here, but App keeps its own onChange
+  // wrappers to preserve the legacy save/preview/exports side effects.
+  const [paperTitle, setPaperTitle] = useState<string>(() => input.initialPaperTitle ?? '高考阅读 B 主题训练')
+  const [questionNumberStart, setQuestionNumberStart] = useState<number>(
+    () => input.initialQuestionNumberStart ?? 1,
+  )
+  const [paperExportStyle, setPaperExportStyle] = useState<PaperExportStyle>(
+    () => input.initialPaperExportStyle ?? 'exam',
+  )
+  const [versionType, setVersionType] = useState<VersionType>(
+    () => input.initialVersionType ?? 'student',
+  )
 
   // Authoritative basket mirror. Always read from this when computing the
   // next basket, never from a stale closure capture.
@@ -301,5 +338,13 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
     insertPageBreakAfter: blocks.insertPageBreakAfter,
     externalRemoveByGroupId,
     patchBasketItemFromSavedGroup,
+    paperTitle,
+    setPaperTitle,
+    questionNumberStart,
+    setQuestionNumberStart,
+    paperExportStyle,
+    setPaperExportStyle,
+    versionType,
+    setVersionType,
   }
 }

@@ -498,5 +498,119 @@ console.log('\nTest 5: usePaperDraft uses a basketRef + commitBasket, never read
   }
 }
 
+// ─── Test 6: paper-level config (Step 3) — owned by usePaperDraft, App
+//             keeps thin wrappers that preserve legacy side effects ──────
+console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps legacy side effects in wrappers)')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const hookFull = readFileSync(path.resolve(here, '..', 'app', 'src', 'paperAssembly', 'usePaperDraft.ts'), 'utf8')
+  const hook = hookFull
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^\s*\/\/.*$/gm, '')
+  const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
+
+  // 6.1 Hook now owns the four config fields.
+  assert('hook declares paperTitle state', /const \[paperTitle, setPaperTitle\] = useState<string>/.test(hook), '')
+  assert('hook declares questionNumberStart state', /const \[questionNumberStart, setQuestionNumberStart\] = useState<number>/.test(hook), '')
+  assert('hook declares paperExportStyle state', /const \[paperExportStyle, setPaperExportStyle\] = useState<PaperExportStyle>/.test(hook), '')
+  assert('hook declares versionType state', /const \[versionType, setVersionType\] = useState<VersionType>/.test(hook), '')
+  // Defaults preserved.
+  assert('paperTitle default = "高考阅读 B 主题训练"', /input\.initialPaperTitle\s*\?\?\s*'高考阅读 B 主题训练'/.test(hookFull), '')
+  assert('questionNumberStart default = 1', /input\.initialQuestionNumberStart\s*\?\?\s*1/.test(hookFull), '')
+  assert('paperExportStyle default = "exam"', /input\.initialPaperExportStyle\s*\?\?\s*'exam'/.test(hookFull), '')
+  assert('versionType default = "student"', /input\.initialVersionType\s*\?\?\s*'student'/.test(hookFull), '')
+
+  // 6.2 Hook returns the config and its setters.
+  for (const field of ['paperTitle', 'questionNumberStart', 'paperExportStyle', 'versionType']) {
+    assert(`hook returns ${field}`, new RegExp(`return \\{[\\s\\S]*?\\b${field}\\b[\\s\\S]*?\\}`).test(hook), '')
+    const setter = 'set' + field.charAt(0).toUpperCase() + field.slice(1)
+    assert(`hook returns ${setter}`, new RegExp(`return \\{[\\s\\S]*?\\b${setter}\\b[\\s\\S]*?\\}`).test(hook), '')
+  }
+
+  // 6.3 Hook does NOT own any saveStatus / paperExports mention — those are
+  // App's responsibility; the hook stays draft-only.
+  assert('hook source does NOT touch saveStatus', !/saveStatus/.test(hook), '')
+  assert('hook source does NOT touch paperExports', !/paperExports/.test(hook), '')
+
+  // 6.4 App.tsx no longer declares the four useState fields directly.
+  assert('App body has no `useState<VersionType>` for versionType',
+    !/useState<VersionType>\(['"]student['"]\)/.test(app), '')
+  assert('App body has no `useState<\\\'exam\\\' | \\\'handout\\\'>`',
+    !/useState<['"]exam['"]\s*\|\s*['"]handout['"]>\(['"]exam['"]\)/.test(app), '')
+  assert('App body has no `useState(1)` for questionNumberStart',
+    !/const \[questionNumberStart, setQuestionNumberStart\]\s*=\s*useState\(1\)/.test(app), '')
+  assert('App body has no `useState(\\\'高考阅读 B 主题训练\\\')`',
+    !/const \[paperTitle, setPaperTitle\]\s*=\s*useState\(['"]高考阅读 B 主题训练['"]\)/.test(app), '')
+
+  // 6.5 App reads the four config fields from paperDraft.
+  assert('App destructures paperTitle from paperDraft',
+    /const \{[\s\S]*?\bpaperTitle\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
+  assert('App destructures versionType from paperDraft',
+    /const \{[\s\S]*?\bversionType\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
+  assert('App destructures paperExportStyle from paperDraft',
+    /const \{[\s\S]*?\bpaperExportStyle\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
+  assert('App destructures questionNumberStart from paperDraft',
+    /const \{[\s\S]*?\bquestionNumberStart\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
+
+  // 6.6 App wrapper handlers preserve the legacy side effects exactly.
+  // ── title: set + saveStatus idle + reset exports
+  const titleH = app.match(/function handlePaperTitleChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
+  assert('handlePaperTitleChange exists', titleH.length > 0, '')
+  assert('handlePaperTitleChange calls paperDraft.setPaperTitle', /paperDraft\.setPaperTitle\(/.test(titleH), '')
+  assert('handlePaperTitleChange resets saveStatus to idle', /setSaveStatus\(['"]idle['"]\)/.test(titleH), '')
+  assert('handlePaperTitleChange resets exports', /paperExports\.resetExportStatuses\(\)/.test(titleH), '')
+
+  // ── version: set + reset exports (no saveStatus)
+  const verH = app.match(/function handleVersionTypeChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
+  assert('handleVersionTypeChange exists', verH.length > 0, '')
+  assert('handleVersionTypeChange calls paperDraft.setVersionType', /paperDraft\.setVersionType\(/.test(verH), '')
+  assert('handleVersionTypeChange resets exports', /paperExports\.resetExportStatuses\(\)/.test(verH), '')
+  assert('handleVersionTypeChange does NOT touch saveStatus', !/setSaveStatus\(/.test(verH), '')
+
+  // ── style: set only (no reset)
+  const styleH = app.match(/function handlePaperExportStyleChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
+  assert('handlePaperExportStyleChange exists', styleH.length > 0, '')
+  assert('handlePaperExportStyleChange calls paperDraft.setPaperExportStyle', /paperDraft\.setPaperExportStyle\(/.test(styleH), '')
+  assert('handlePaperExportStyleChange does NOT reset exports', !/paperExports\.resetExportStatuses\(/.test(styleH), '')
+  assert('handlePaperExportStyleChange does NOT touch saveStatus', !/setSaveStatus\(/.test(styleH), '')
+
+  // ── start: set only (no reset)
+  const startH = app.match(/function handleQuestionNumberStartChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
+  assert('handleQuestionNumberStartChange exists', startH.length > 0, '')
+  assert('handleQuestionNumberStartChange calls paperDraft.setQuestionNumberStart', /paperDraft\.setQuestionNumberStart\(/.test(startH), '')
+  assert('handleQuestionNumberStartChange does NOT reset exports', !/paperExports\.resetExportStatuses\(/.test(startH), '')
+  assert('handleQuestionNumberStartChange does NOT touch saveStatus', !/setSaveStatus\(/.test(startH), '')
+  assert('handleQuestionNumberStartChange clamps to ≥ 1', /Math\.max\(1,\s*Number\.isFinite\(next\)\s*\?\s*next\s*:\s*1\)/.test(startH), '')
+
+  // 6.7 UI bindings go through the wrappers (not raw setters).
+  assert('paper-title input uses handlePaperTitleChange', /<input[\s\S]{0,120}value=\{paperTitle\}[\s\S]{0,200}handlePaperTitleChange/.test(app), '')
+  assert('version-toggle 学生版 uses handleVersionTypeChange', /handleVersionTypeChange\(['"]student['"]\)/.test(app), '')
+  assert('version-toggle 教师版 uses handleVersionTypeChange', /handleVersionTypeChange\(['"]teacher['"]\)/.test(app), '')
+  assert('export-style 试卷版 uses handlePaperExportStyleChange', /handlePaperExportStyleChange\(['"]exam['"]\)/.test(app), '')
+  assert('export-style 讲义版 uses handlePaperExportStyleChange', /handlePaperExportStyleChange\(['"]handout['"]\)/.test(app), '')
+  assert('start-num input uses handleQuestionNumberStartChange', /handleQuestionNumberStartChange\(/.test(app), '')
+
+  // 6.8 replaceDraft does NOT auto-mutate config (load/workflow/objective
+  // still call paperDraft.setX explicitly from App).
+  const replaceBody = hook.match(/const replaceDraft\s*=\s*useCallback\(\s*\n([\s\S]*?)\n\s\s\)/)?.[1] || ''
+  assert('replaceDraft body extracted', replaceBody.length > 0, '')
+  assert('replaceDraft body does NOT call setPaperTitle', !/setPaperTitle\s*\(/.test(replaceBody), `body:\n${replaceBody}`)
+  assert('replaceDraft body does NOT call setVersionType', !/setVersionType\s*\(/.test(replaceBody), '')
+  assert('replaceDraft body does NOT call setQuestionNumberStart', !/setQuestionNumberStart\s*\(/.test(replaceBody), '')
+  assert('replaceDraft body does NOT call setPaperExportStyle', !/setPaperExportStyle\s*\(/.test(replaceBody), '')
+  // Load saved paper / workflow build / objective build still drive config explicitly.
+  assert('App still drives paperDraft.setPaperTitle in load/workflow/objective sites',
+    (app.match(/paperDraft\.setPaperTitle\(/g) || []).length >= 3, '')
+  assert('App still drives paperDraft.setVersionType in load/workflow/objective sites',
+    (app.match(/paperDraft\.setVersionType\(/g) || []).length >= 2, '')
+
+  // 6.9 buildSavePayload + usePaperExports still receive the same field set
+  // (just sourced from paperDraft destructure now).
+  assert('usePaperExports still receives paperTitle / versionType / paperExportStyle / questionNumberStart',
+    /usePaperExports\(\{[\s\S]*?paperTitle[\s\S]*?versionType[\s\S]*?paperExportStyle[\s\S]*?questionNumberStart[\s\S]*?\}\)/.test(app), '')
+  assert('buildSavePayload call still passes the 4 config fields',
+    /buildSavePayload\(\{\s*basket,\s*paperBlocks,\s*questionNumberStart,\s*paperExportStyle,\s*paperTitle,\s*versionType\s*\}\)/.test(app), '')
+}
+
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)
