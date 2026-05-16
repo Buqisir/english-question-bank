@@ -106,7 +106,6 @@ export function selectReadingAnalysisFromDetail(
   const warnings: string[] = []
   const annotations: ReadingAnnotation[] = []
   const links: EvidenceLink[] = []
-  const annotationByEntry = new Map<number, ReadingAnnotation>()
 
   const targetNoNormalized = normalizeQuestionNo(target.questionNo)
   const sidecarEntries = (sidecar?.entries ?? []).filter(
@@ -140,7 +139,6 @@ export function selectReadingAnalysisFromDetail(
       },
     }
     annotations.push(annotation)
-    annotationByEntry.set(i, annotation)
 
     const seenKinds = sentenceKindIndex.get(located.sentenceId) ?? new Set()
     seenKinds.add(entry.kind)

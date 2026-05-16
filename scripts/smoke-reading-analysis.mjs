@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Live UI smoke for the Reading Analysis PoC (题目 ↔ 原文证据虚线).
+ * Live UI smoke for the Reading Analysis demo (题目 ↔ 原文证据虚线).
  *
  * Two modes:
  *
@@ -71,7 +71,7 @@ async function shot(page, label) {
   }
 }
 
-console.log(`=== Reading Analysis PoC smoke (${REAL_MODE ? 'real' : 'fixture'}) ===`)
+console.log(`=== Reading Analysis demo smoke (${REAL_MODE ? 'real' : 'fixture'}) ===`)
 console.log(`Loading ${DEMO_URL}…`)
 
 const browser = await chromium.launch({ headless: true })

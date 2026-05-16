@@ -167,7 +167,9 @@ export function LinkOverlay(props: LinkOverlayProps): ReactNode {
     )
   }
 
-  const stroke = activeLink.kind === 'support' ? '#1F8F5B' : '#C76D2A'
+  // Slightly desaturated to match the calmer panel palette while remaining
+  // clearly readable as the page's primary visual cue.
+  const stroke = activeLink.kind === 'support' ? '#2E8C5F' : '#B8732E'
   return (
     <svg
       ref={svgRef}

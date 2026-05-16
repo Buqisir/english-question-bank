@@ -1,5 +1,5 @@
 /**
- * ReadingAnalysisView — pure render layer for the V0 PoC.
+ * ReadingAnalysisView — pure render layer for the Reading Analysis demo.
  *
  * No fetching, no URL reading, no fixture decisions live here. The demo
  * route (or anything else later) chooses a `ReadingAnalysisFixture` and
@@ -61,10 +61,7 @@ export function ReadingAnalysisView(props: ReadingAnalysisViewProps): ReactNode 
       onClick={handleBackgroundClick}
     >
       <header className="reading-analysis-header">
-        <h1 className="reading-analysis-title">阅读题目分析（PoC）</h1>
-        <p className="reading-analysis-sub">
-          点击题干或选项查看证据虚线。点击空白可清空。
-        </p>
+        <h1 className="reading-analysis-title">阅读解析</h1>
         {sourceNote && (
           <p className="reading-analysis-source-note" data-ra-source-note>
             {sourceNote}

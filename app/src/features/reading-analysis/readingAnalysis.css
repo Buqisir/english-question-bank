@@ -1,9 +1,9 @@
 /**
- * Reading Analysis Layer — V0 PoC styles.
+ * Reading Analysis — workbench styles.
  *
  * Visual goal: 像老师在纸上轻轻圈出推理路径。
  *  - 高亮要轻，不要荧光笔糊满。
- *  - 留白成熟，左文右题。
+ *  - 留白成熟，左文右题，硬边框被压到几乎不可见。
  *  - 虚线是视觉重点，但不要动画过度。
  *
  * All selectors are prefixed with `.reading-analysis-view` or `.ra-` so they
@@ -13,7 +13,7 @@
 .reading-analysis-view {
   position: relative;
   min-height: 100vh;
-  padding: 32px clamp(20px, 4vw, 48px) 64px;
+  padding: 40px clamp(20px, 4vw, 56px) 64px;
   background: #FAF8F2;
   color: #2A2620;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -21,27 +21,22 @@
 
 .reading-analysis-header {
   max-width: 1080px;
-  margin: 0 auto 24px;
+  margin: 0 auto 28px;
 }
 
 .reading-analysis-title {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   letter-spacing: 0.02em;
-  margin: 0 0 4px;
-}
-
-.reading-analysis-sub {
-  font-size: 13px;
-  color: #6B645C;
+  color: #1A1A1A;
   margin: 0;
 }
 
 .reading-analysis-source-note {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   font-size: 12px;
   color: #9A9180;
-  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 .reading-analysis-grid {
@@ -55,38 +50,41 @@
 }
 
 .reading-analysis-passage-scroller {
-  max-height: 70vh;
+  max-height: 72vh;
   overflow-y: auto;
   padding-right: 8px;
 }
 
 .reading-analysis-question-pane {
   position: sticky;
-  top: 24px;
+  top: 28px;
 }
 
 /* ── Passage ─────────────────────────────────────────────────────────────── */
 .reading-analysis-passage {
   background: #FFFFFF;
-  border: 1px solid #E5E1D7;
-  border-radius: 4px;
-  padding: 24px 28px;
-  line-height: 1.75;
+  border: none;
+  /* Hairline divider via shadow keeps the panel from feeling like a hard box. */
+  box-shadow: inset 0 0 0 1px rgba(45, 39, 30, 0.04);
+  border-radius: 6px;
+  padding: 28px 32px;
+  line-height: 1.8;
   font-size: 15px;
   color: #2A2620;
 }
 
 .ra-passage-header {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #EDE7DA;
+  border-bottom: 1px solid rgba(45, 39, 30, 0.06);
 }
 
 .ra-passage-title {
   margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B645C;
+  letter-spacing: 0.02em;
 }
 
 .ra-paragraph-list {
@@ -95,7 +93,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .ra-paragraph {
@@ -105,11 +103,12 @@
 }
 
 .ra-paragraph-num {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  color: #9A9180;
-  padding-top: 4px;
+  color: #C2B8A6;
+  padding-top: 6px;
   user-select: none;
+  letter-spacing: 0.04em;
 }
 
 .ra-paragraph-body {
@@ -122,16 +121,16 @@
   padding: 0 1px;
 }
 
-/* Light golden wash for evidence. */
+/* Soft golden wash for evidence — closer to a pencil note than a highlighter. */
 .ra-highlight-evidence {
-  background: rgba(241, 197, 90, 0.22);
-  box-shadow: inset 0 -1px 0 rgba(216, 161, 64, 0.45);
+  background: rgba(232, 192, 96, 0.14);
+  box-shadow: inset 0 -1px 0 rgba(204, 154, 60, 0.32);
 }
 
-/* Wavy orange underline for trap. */
+/* Restrained wavy underline for trap. Keeps the warning, drops the glow. */
 .ra-highlight-trap {
-  background: rgba(199, 109, 42, 0.06);
-  text-decoration: underline wavy rgba(199, 109, 42, 0.55);
+  background: transparent;
+  text-decoration: underline wavy rgba(184, 96, 32, 0.42);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
@@ -143,9 +142,10 @@
 /* ── Question panel ──────────────────────────────────────────────────────── */
 .reading-analysis-question {
   background: #FFFFFF;
-  border: 1px solid #E5E1D7;
-  border-radius: 4px;
-  padding: 20px 22px;
+  border: none;
+  box-shadow: inset 0 0 0 1px rgba(45, 39, 30, 0.04);
+  border-radius: 6px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -158,7 +158,7 @@
   text-align: left;
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 10px 12px;
   cursor: pointer;
   font: inherit;
@@ -167,25 +167,25 @@
 }
 
 .ra-question-stem:hover {
-  background: #F4F2EC;
+  background: rgba(45, 39, 30, 0.03);
 }
 
 .ra-question-stem.is-active {
-  background: #F4F2EC;
-  border-color: #1A1A1A;
+  background: rgba(45, 39, 30, 0.04);
+  border-color: rgba(45, 39, 30, 0.18);
 }
 
 .ra-question-stem-label {
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #9A9180;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #C2B8A6;
   text-transform: uppercase;
 }
 
 .ra-question-stem-text {
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: #1A1A1A;
 }
 
@@ -204,54 +204,57 @@
   gap: 10px;
   width: 100%;
   text-align: left;
-  background: #FCFBF6;
-  border: 1px solid #E5E1D7;
-  border-radius: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 1px rgba(45, 39, 30, 0.05);
+  border-radius: 5px;
   padding: 10px 12px;
   cursor: pointer;
   font: inherit;
   color: inherit;
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
 
 .ra-option:hover {
-  background: #F4F2EC;
+  background: rgba(45, 39, 30, 0.03);
 }
 
 .ra-option-key {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   border: 1px solid currentColor;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   align-self: start;
 }
 
 .ra-option-correct .ra-option-key {
-  color: #1F8F5B;
+  color: #2E8C5F;
 }
 
 .ra-option-wrong .ra-option-key {
-  color: #C76D2A;
+  color: #B8732E;
 }
 
 .ra-option-correct.is-active {
-  background: rgba(31, 143, 91, 0.08);
-  border-color: #1F8F5B;
+  background: rgba(46, 140, 95, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(46, 140, 95, 0.5);
+  border-color: transparent;
 }
 
 .ra-option-wrong.is-active {
-  background: rgba(199, 109, 42, 0.08);
-  border-color: #C76D2A;
+  background: rgba(184, 115, 46, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(184, 115, 46, 0.45);
+  border-color: transparent;
 }
 
 .ra-option-text {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #2A2620;
 }
 
@@ -259,19 +262,19 @@
   grid-column: 2 / 3;
   margin-top: 6px;
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #6B645C;
-  border-top: 1px dashed #DED9CF;
+  border-top: 1px dashed rgba(45, 39, 30, 0.12);
   padding-top: 6px;
 }
 
 .ra-question-explanation {
   margin: 0;
-  padding-top: 8px;
-  border-top: 1px solid #EDE7DA;
+  padding-top: 10px;
+  border-top: 1px solid rgba(45, 39, 30, 0.06);
   font-size: 12px;
-  line-height: 1.55;
-  color: #6B645C;
+  line-height: 1.6;
+  color: #8A8275;
 }
 
 /* ── Link overlay ────────────────────────────────────────────────────────── */

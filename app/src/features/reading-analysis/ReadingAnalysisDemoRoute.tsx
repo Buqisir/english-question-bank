@@ -1,12 +1,12 @@
 /**
- * ReadingAnalysisDemoRoute — boots the Reading Analysis PoC.
+ * ReadingAnalysisDemoRoute — boots the Reading Analysis demo.
  *
  * Reads `?groupId=…&questionNo=…` (and `&demo=reading-analysis` from the outer
  * router). When `groupId` is absent or any of {fetch, selector, sidecar}
  * fails, falls back to the hardcoded `READING_ANALYSIS_FIXTURE`. A small
  * source-note line in the header tells the user which dataset is on screen.
  *
- * No retry button, no toast — this is still V0 PoC.
+ * No retry button, no toast — this is still the V0 demo surface.
  */
 
 import { useEffect, useState, type ReactNode } from 'react'
@@ -40,21 +40,23 @@ type LoadState =
   | { phase: 'fallback'; fixture: ReadingAnalysisFixture; note: string }
 
 export function ReadingAnalysisDemoRoute(): ReactNode {
-  const initialQuery = readDemoQuery()
+  // Resolve URL query exactly once; lazy state init avoids re-reading window
+  // on every render and keeps StrictMode's double-invoke safe.
+  const [query] = useState<DemoQuery>(() => readDemoQuery())
   const [state, setState] = useState<LoadState>(() => {
-    if (!initialQuery.groupId) {
+    if (!query.groupId) {
       return { phase: 'idle', fixture: READING_ANALYSIS_FIXTURE, note: '示例数据' }
     }
     return {
       phase: 'loading',
       fixture: READING_ANALYSIS_FIXTURE,
-      note: `正在加载题组 ${initialQuery.groupId}…`,
+      note: `正在加载题组 ${query.groupId}…`,
     }
   })
 
   useEffect(() => {
     let cancelled = false
-    const { groupId, questionNo } = initialQuery
+    const { groupId, questionNo } = query
     if (!groupId) return
 
     ;(async () => {
@@ -94,8 +96,8 @@ export function ReadingAnalysisDemoRoute(): ReactNode {
         })
         return
       }
-      const titlePart = detail.passage?.title?.trim() || detail.passageTitle || detail.title || groupId
-      const questionLabel = result.fixture.question.id
+      const titlePart =
+        detail.passage?.title?.trim() || detail.passageTitle || detail.title || groupId
       const realNote =
         `真实数据：${titlePart} · 第 ${questionNo || pickFirstQuestionNo(detail)} 题` +
         (result.warnings.length > 0 ? `（${result.warnings.length} 条提醒）` : '')
@@ -105,22 +107,19 @@ export function ReadingAnalysisDemoRoute(): ReactNode {
         note: realNote,
         warnings: result.warnings,
       })
-      // questionLabel intentionally unused in the note; kept locally so future
-      // header surfaces (e.g. a debug drawer) don't have to recompute it.
-      void questionLabel
     })()
 
     return () => {
       cancelled = true
     }
-    // initialQuery is captured once at mount, not re-derived on each render.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [query])
 
   return <ReadingAnalysisView fixture={state.fixture} sourceNote={state.note} />
 }
 
-function pickFirstQuestionNo(detail: { questions?: Array<{ questionNo?: string }> } | null | undefined): string {
+function pickFirstQuestionNo(
+  detail: { questions?: Array<{ questionNo?: string }> } | null | undefined,
+): string {
   const first = detail?.questions?.[0]?.questionNo
   return first ? String(first) : '1'
 }
