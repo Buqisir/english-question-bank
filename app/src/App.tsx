@@ -3598,16 +3598,10 @@ function App() {
           ) : viewMode === 'list' ? (
             homeMode === 'ai' ? (
               <ConciergeDesk
-                intent={conciergeDesk.intent}
-                onIntentChange={conciergeDesk.setIntent}
-                onSubmit={() => { void conciergeDesk.submit() }}
-                state={conciergeDesk.state}
+                retrieval={conciergeDesk.retrieval}
+                actions={conciergeDesk.actions}
                 basketIds={new Set(basket.map((item) => item.id))}
                 onAdd={(group) => addToBasket(group)}
-                onSimilar={(group) => { void conciergeDesk.triggerSimilar(group) }}
-                paperResults={conciergeDesk.paperResults}
-                expandedPaperKey={conciergeDesk.expandedPaperKey}
-                onTogglePaper={(key) => conciergeDesk.togglePaper(key)}
                 dataStatus={dataStatus}
               />
             ) : (

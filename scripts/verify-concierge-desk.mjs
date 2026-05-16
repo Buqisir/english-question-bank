@@ -270,17 +270,37 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
 
-  // 9.1 Desk receives paperResults / expandedPaperKey / onTogglePaper.
-  assert('Desk props include paperResults', /paperResults\s*:\s*PaperResult\[\]/.test(deskSource), '')
-  assert('Desk props include expandedPaperKey', /expandedPaperKey\s*:\s*string\s*\|\s*null/.test(deskSource), '')
-  assert('Desk props include onTogglePaper', /onTogglePaper\s*:\s*\(/.test(deskSource), '')
+  // 9.1 Desk receives the deeper Retrieval Module surface (retrieval + actions),
+  //     not the V1 flat props.
+  assert('Desk props include retrieval: ConciergeRetrievalView',
+    /retrieval\s*:\s*ConciergeRetrievalView/.test(deskSource), '')
+  assert('Desk props include actions: ConciergeRetrievalActions',
+    /actions\s*:\s*ConciergeRetrievalActions/.test(deskSource), '')
+  assert('Desk props include basketIds + onAdd (Assembly Basket layer)',
+    /basketIds\s*:\s*Set<string>/.test(deskSource) && /onAdd\s*:\s*\(group\s*:\s*QuestionGroupCard\)\s*=>\s*void/.test(deskSource), '')
+  assert('Desk destructures intent/state/paperResults/expandedPaperKey from retrieval',
+    /const\s*\{\s*intent,\s*state,\s*paperResults,\s*expandedPaperKey\s*\}\s*=\s*retrieval/.test(deskSource), '')
+  assert('Desk destructures setIntent/submit/triggerSimilar/togglePaper from actions',
+    /const\s*\{\s*setIntent,\s*submit,\s*triggerSimilar,\s*togglePaper\s*\}\s*=\s*actions/.test(deskSource), '')
 
-  // 9.2 Old V1 props are gone from the Desk surface.
-  assert('Desk no longer accepts expandedHitId', !/expandedHitId\s*:/.test(deskSource), '')
-  assert('Desk no longer accepts onToggleExpand', !/onToggleExpand\s*:/.test(deskSource), '')
-  assert('Desk no longer accepts onRetryExpand', !/onRetryExpand\s*:/.test(deskSource), '')
-  assert('Desk no longer accepts onPreview', !/onPreview\s*:/.test(deskSource), '')
-  assert('Desk no longer accepts detailCache', !/detailCache\s*:/.test(deskSource), '')
+  // 9.2 Old V1 + Step-1 flat props are gone from the Desk surface.
+  for (const removed of [
+    'intent\\s*:\\s*string',
+    'onIntentChange\\s*:',
+    'onSubmit\\s*:',
+    'onSimilar\\s*:',
+    'paperResults\\s*:\\s*PaperResult\\[\\]',
+    'expandedPaperKey\\s*:\\s*string',
+    'onTogglePaper\\s*:',
+    'expandedHitId\\s*:',
+    'onToggleExpand\\s*:',
+    'onRetryExpand\\s*:',
+    'onPreview\\s*:',
+    'detailCache\\s*:',
+  ]) {
+    assert(`Desk no longer accepts ${removed}`,
+      !new RegExp(removed).test(deskSource), '')
+  }
 
   // 9.3 Desk does not call useState locally.
   assert('Desk does NOT use useState locally', !/^import\s+[^\n]*\buseState\b/m.test(deskSource), '')
@@ -290,22 +310,110 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Desk does NOT map state.hits directly', !/state\.hits\.map\(/.test(deskSource), '')
   assert('Desk uses ConciergePaperRow', /<ConciergePaperRow\b/.test(deskSource), '')
   assert('Desk passes basketIds to row', /basketIds=\{basketIds\}/.test(deskSource), '')
+  // Inner action wiring goes through the actions object, not stale prop names.
+  assert('Desk wires onTogglePaper to actions.togglePaper',
+    /onTogglePaper=\{togglePaper\}/.test(deskSource), '')
+  assert('Desk wires onSimilar to actions.triggerSimilar',
+    /onSimilar=\{\(group\)\s*=>\s*\{\s*void triggerSimilar\(group\)\s*\}\}/.test(deskSource), '')
+  assert('Desk submit handler uses actions.submit',
+    /void submit\(\)/.test(deskSource), '')
+  assert('Desk input onChange wires to actions.setIntent',
+    /onChange=\{\(event\)\s*=>\s*setIntent\(event\.target\.value\)\}/.test(deskSource), '')
+  assert('Desk starter chip click wires to actions.setIntent',
+    /onClick=\{\(\)\s*=>\s*setIntent\(chip\)\}/.test(deskSource), '')
 
-  // 9.5 Hook exports the V1.1 surface.
-  assert('hook exposes paperResults', /paperResults\s*:\s*PaperResult\[\]/.test(hookSource), '')
-  assert('hook exposes expandedPaperKey', /expandedPaperKey\s*:\s*string\s*\|\s*null/.test(hookSource), '')
-  assert('hook exposes togglePaper', /togglePaper\s*:\s*\(/.test(hookSource), '')
-  assert('hook keeps detailCache exported (reserved)', /detailCache\s*:\s*ConciergeDetailCache/.test(hookSource), '')
-  assert('hook drops V1 toggleExpand/retryExpand exports', !/toggleExpand\s*:|retryExpand\s*:/.test(hookSource), '')
+  // 9.5 Hook exposes the new deeper surface only, no flat fields leaked.
+  assert('hook exports ConciergeRetrievalView',
+    /export type ConciergeRetrievalView\s*=/.test(hookSource), '')
+  assert('hook exports ConciergeRetrievalActions',
+    /export type ConciergeRetrievalActions\s*=/.test(hookSource), '')
+  assert('hook exports UseConciergeDeskResult shape { retrieval, actions }',
+    /export type UseConciergeDeskResult\s*=\s*\{\s*retrieval\s*:\s*ConciergeRetrievalView\s*actions\s*:\s*ConciergeRetrievalActions\s*\}/.test(hookSource), '')
 
-  // 9.6 App passes new props and does NOT pass V1 props.
-  assert('App passes paperResults', /paperResults=\{conciergeDesk\.paperResults\}/.test(appSource), '')
-  assert('App passes expandedPaperKey', /expandedPaperKey=\{conciergeDesk\.expandedPaperKey\}/.test(appSource), '')
-  assert('App passes onTogglePaper', /onTogglePaper=\{\(key\)\s*=>\s*conciergeDesk\.togglePaper\(key\)\}/.test(appSource), '')
-  assert('App no longer passes expandedHitId', !/expandedHitId=/.test(appSource), '')
-  assert('App no longer passes detailCache to ConciergeDesk', !/<ConciergeDesk[\s\S]*?detailCache=/.test(appSource), '')
-  assert('App no longer passes onToggleExpand to ConciergeDesk', !/<ConciergeDesk[\s\S]*?onToggleExpand=/.test(appSource), '')
-  assert('App no longer passes onPreview to ConciergeDesk', !/<ConciergeDesk[\s\S]*?onPreview=/.test(appSource), '')
+  // ConciergeRetrievalView fields.
+  const retrievalDecl = hookSource.match(/export type ConciergeRetrievalView\s*=\s*\{([\s\S]*?)\n\}/)?.[1] || ''
+  assert('retrieval contains intent', /\bintent\s*:\s*string/.test(retrievalDecl), '')
+  assert('retrieval contains state', /\bstate\s*:\s*ConciergeDeskState/.test(retrievalDecl), '')
+  assert('retrieval contains paperResults', /\bpaperResults\s*:\s*PaperResult\[\]/.test(retrievalDecl), '')
+  assert('retrieval contains expandedPaperKey', /\bexpandedPaperKey\s*:\s*string\s*\|\s*null/.test(retrievalDecl), '')
+  assert('retrieval contains groupDetail.cache (reserved)',
+    /groupDetail\s*:\s*\{\s*cache\s*:\s*ConciergeDetailCache\s*\}/.test(retrievalDecl), '')
+
+  // ConciergeRetrievalActions fields.
+  const actionsDecl = hookSource.match(/export type ConciergeRetrievalActions\s*=\s*\{([\s\S]*?)\n\}/)?.[1] || ''
+  for (const member of ['setIntent', 'submit', 'triggerSimilar', 'togglePaper', 'retryGroupDetail', 'reset']) {
+    assert(`actions contains ${member}`, new RegExp(`\\b${member}\\s*:`).test(actionsDecl), `actions decl:\n${actionsDecl}`)
+  }
+
+  // Both retrieval + actions are stabilized via useMemo.
+  assert('retrieval is built with useMemo<ConciergeRetrievalView>',
+    /const retrieval = useMemo<ConciergeRetrievalView>/.test(hookSource), '')
+  assert('actions is built with useMemo<ConciergeRetrievalActions>',
+    /const actions = useMemo<ConciergeRetrievalActions>/.test(hookSource), '')
+
+  // The hook's return statement is just { retrieval, actions } — no flat fields leaked.
+  const returnBlock = hookSource.match(/return\s*\{[\s\S]*?\}\s*\n\}\s*\n/)?.[0] || ''
+  assert('hook return block extracted', returnBlock.length > 0, '')
+  assert('hook return is { retrieval, actions } only',
+    /return\s*\{\s*retrieval,\s*actions,?\s*\}/.test(returnBlock), `return block:\n${returnBlock}`)
+  for (const flat of [
+    'intent',
+    'setIntent',
+    'state',
+    'submit',
+    'triggerSimilar',
+    'paperResults',
+    'expandedPaperKey',
+    'togglePaper',
+    'detailCache',
+    'retryGroupDetail',
+    'reset',
+  ]) {
+    assert(`hook return block does NOT include flat ${flat}`,
+      !new RegExp(`^\\s*${flat}\\s*,?\\s*$`, 'm').test(returnBlock),
+      `flat field ${flat} leaked in return:\n${returnBlock}`)
+  }
+
+  // 9.6 App passes the deeper surface and only the deeper surface.
+  assert('App passes retrieval=conciergeDesk.retrieval',
+    /retrieval=\{conciergeDesk\.retrieval\}/.test(appSource), '')
+  assert('App passes actions=conciergeDesk.actions',
+    /actions=\{conciergeDesk\.actions\}/.test(appSource), '')
+  for (const stale of [
+    'intent=\\{conciergeDesk\\.',
+    'onIntentChange=\\{conciergeDesk\\.',
+    'state=\\{conciergeDesk\\.',
+    'paperResults=\\{conciergeDesk\\.',
+    'expandedPaperKey=\\{conciergeDesk\\.',
+    'onTogglePaper=\\{',
+    'onSimilar=\\{',
+    'onSubmit=\\{\\(\\)',
+    'expandedHitId=',
+    '<ConciergeDesk[\\s\\S]*?detailCache=',
+    '<ConciergeDesk[\\s\\S]*?onToggleExpand=',
+    '<ConciergeDesk[\\s\\S]*?onPreview=',
+  ]) {
+    assert(`App no longer wires ${stale.split('\\')[0]} on ConciergeDesk`,
+      !new RegExp(stale).test(appSource), `still present`)
+  }
+  // App.tsx must not reach into the hook's internal fields outside of
+  // .retrieval / .actions — that would defeat the encapsulation.
+  for (const internal of [
+    'conciergeDesk\\.intent',
+    'conciergeDesk\\.setIntent',
+    'conciergeDesk\\.state',
+    'conciergeDesk\\.submit',
+    'conciergeDesk\\.triggerSimilar',
+    'conciergeDesk\\.paperResults',
+    'conciergeDesk\\.expandedPaperKey',
+    'conciergeDesk\\.togglePaper',
+    'conciergeDesk\\.detailCache',
+    'conciergeDesk\\.retryGroupDetail',
+    'conciergeDesk\\.reset',
+  ]) {
+    assert(`App does NOT read ${internal.replace(/\\\\\./g, '.')}`,
+      !new RegExp(internal).test(appSource), 'internal read leaked')
+  }
 
   // 9.7 ConciergePaperRow contract.
   assert('Paper row article uses concierge-paper-row class', /<article[\s\S]{0,200}className=\{`concierge-paper-row\$\{expanded \? ' is-expanded' : ''\}`\}/.test(paperRowSource), '')
@@ -468,7 +576,7 @@ console.log('\nTest 17: Auto-expand once + collapsible by user')
   // different lone paper auto-expand again. Spell that contract out so it
   // doesn't quietly regress.
   assert('hook clearExpansion ALSO resets the sentinel (so new search re-auto-expands)', /clearExpansion = useCallback\(\(\)\s*=>\s*\{\s*setExpandedPaperKey\(null\)[\s\S]{0,200}lastAutoExpandKeyRef\.current = null/.test(hook), '')
-  assert('hook returns expandedPaperKey state directly (no render-time effective-key)', /expandedPaperKey,\s*togglePaper/.test(hook) && !/effectiveExpandedKey/.test(hook), '')
+  assert('hook does NOT compute a render-time effective-key', !/effectiveExpandedKey/.test(hook), '')
   // togglePaper still toggles by paperKey alone.
   const hookCode = hook.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
   assert('togglePaper just toggles expandedPaperKey', /const togglePaper = useCallback\(\(paperKey: string\)\s*=>\s*\{\s*setExpandedPaperKey/.test(hookCode), '')
@@ -492,8 +600,8 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips 
   assert('STARTER_CHIPS contains 中等难度主旨题', /中等难度主旨题/.test(desk), '')
   const chipBtnMatch = desk.match(/className="concierge-starter-chip"[\s\S]{0,200}onClick=\{[^}]+\}/)?.[0] || ''
   assert('chip onClick wired', chipBtnMatch.length > 0, '')
-  assert('chip click calls onIntentChange', /onIntentChange\(chip\)/.test(chipBtnMatch), '')
-  assert('chip click does NOT call onSubmit', !/onSubmit\(/.test(chipBtnMatch), '')
+  assert('chip click calls setIntent (actions.setIntent)', /setIntent\(chip\)/.test(chipBtnMatch), '')
+  assert('chip click does NOT call submit', !/submit\(/.test(chipBtnMatch), '')
   assert('chips gated on !dataLoading + (empty || error)', /\{!dataLoading && \(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]error['"]\)/.test(desk), '')
 
   // Chip styling.

@@ -1,31 +1,32 @@
 /**
  * ConciergeDesk — V1.1 AI 取题台 (源-卷优先).
  *
- * Stateless wrapper over state owned by useConciergeDesk in App.tsx. The
- * primary list now maps over paperResults (one row per source paper),
+ * Stateless wrapper over state owned by useConciergeDesk. Receives the
+ * Retrieval Module surface as `retrieval` (view) + `actions` (commands), so
+ * App.tsx no longer needs to know about paperResults / expandedPaperKey /
+ * triggerSimilar / etc.
+ *
+ * The primary list maps over retrieval.paperResults (one row per source paper),
  * and clicking expands the paper to show its matching question groups.
+ *
+ * `basketIds` and `onAdd` remain plain props because 加入草稿卷 belongs to
+ * the Assembly Basket layer, not Retrieval.
  */
 
 import { useId, useMemo, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine } from './clarificationCopy.ts'
-import type { PaperResult } from './aggregatePaperResults.ts'
-import type { ConciergeDeskState } from './useConciergeDesk.ts'
+import type {
+  ConciergeRetrievalActions,
+  ConciergeRetrievalView,
+} from './useConciergeDesk.ts'
 
 export type ConciergeDeskProps = {
-  intent: string
-  onIntentChange: (value: string) => void
-  onSubmit: () => void
-  state: ConciergeDeskState
+  retrieval: ConciergeRetrievalView
+  actions: ConciergeRetrievalActions
   basketIds: Set<string>
   onAdd: (group: QuestionGroupCard) => void
-  onSimilar: (group: QuestionGroupCard) => void
-
-  // V1.1 paper-bucket props
-  paperResults: PaperResult[]
-  expandedPaperKey: string | null
-  onTogglePaper: (key: string) => void
 
   /**
    * App-level data connection status. While 'loading', the local question bank
@@ -39,26 +40,16 @@ export type ConciergeDeskProps = {
 const STARTER_CHIPS = ['生态主题 C 篇', '2025 浙江卷', '中等难度主旨题'] as const
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
-  const {
-    intent,
-    onIntentChange,
-    onSubmit,
-    state,
-    basketIds,
-    onAdd,
-    onSimilar,
-    paperResults,
-    expandedPaperKey,
-    onTogglePaper,
-    dataStatus,
-  } = props
+  const { retrieval, actions, basketIds, onAdd, dataStatus } = props
+  const { intent, state, paperResults, expandedPaperKey } = retrieval
+  const { setIntent, submit, triggerSimilar, togglePaper } = actions
   const inputId = useId()
   const dataLoading = dataStatus === 'loading'
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (dataLoading) return
-    onSubmit()
+    void submit()
   }
 
   const placeholder = useMemo(() => {
@@ -80,7 +71,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           id={inputId}
           className="concierge-intent-input"
           value={intent}
-          onChange={(event) => onIntentChange(event.target.value)}
+          onChange={(event) => setIntent(event.target.value)}
           placeholder={placeholder}
           autoComplete="off"
           disabled={dataLoading}
@@ -110,7 +101,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               <button
                 type="button"
                 className="concierge-starter-chip"
-                onClick={() => onIntentChange(chip)}
+                onClick={() => setIntent(chip)}
               >
                 {chip}
               </button>
@@ -159,9 +150,11 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   paper={paper}
                   expanded={expandedPaperKey === paper.key}
                   basketIds={basketIds}
-                  onTogglePaper={onTogglePaper}
+                  onTogglePaper={togglePaper}
                   onAdd={onAdd}
-                  onSimilar={onSimilar}
+                  onSimilar={(group) => {
+                    void triggerSimilar(group)
+                  }}
                 />
               </li>
             ))}

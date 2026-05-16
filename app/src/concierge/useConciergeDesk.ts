@@ -8,8 +8,17 @@
  *   - The desk expands ONE paper at a time (`expandedPaperKey`).
  *   - Expanding a paper does NOT fetch question-group detail. We render the
  *     groups inside the paper card from the cards we already have.
- *   - `detailCache` is preserved (and exported) for future per-group detail
- *     drawers, but no longer driven by the paper expand toggle.
+ *   - `detailCache` is preserved (and exported on `retrieval.groupDetail.cache`)
+ *     for future per-group detail drawers, but no longer driven by the paper
+ *     expand toggle.
+ *
+ * Public surface:
+ *   - retrieval: a stable view object with the current 取题流 state.
+ *   - actions:   a stable action object with the 取题流 commands.
+ *
+ * App.tsx wires `retrieval` + `actions` straight through to ConciergeDesk and
+ * never reads the internal flat fields. This keeps the Retrieval Module's
+ * internals (paper buckets, expansion key, similar-trigger flow) opaque to App.
  *
  * Important: this hook owns its own detailCache, separate from App.tsx's
  * previewDetails / loadPreviewForBasketItems. They are NOT shared.
@@ -49,22 +58,30 @@ export type UseConciergeDeskInput = {
   detailFetchOverride?: typeof fetchQuestionGroupDetail
 }
 
-export type UseConciergeDeskResult = {
+/** View slice of the 取题流: read-only render input for ConciergeDesk. */
+export type ConciergeRetrievalView = {
   intent: string
-  setIntent: (value: string) => void
   state: ConciergeDeskState
-  submit: (intentOverride?: string) => Promise<void>
-  triggerSimilar: (group: QuestionGroupCard) => Promise<void>
-  reset: () => void
-
-  // V1.1 paper-bucket expansion
   paperResults: PaperResult[]
   expandedPaperKey: string | null
-  togglePaper: (paperKey: string) => void
+  groupDetail: {
+    cache: ConciergeDetailCache
+  }
+}
 
-  // Reserved for future per-group detail drawer (NOT used by paper expand).
-  detailCache: ConciergeDetailCache
+/** Action slice of the 取题流: every command ConciergeDesk can fire. */
+export type ConciergeRetrievalActions = {
+  setIntent: (value: string) => void
+  submit: (intentOverride?: string) => Promise<void>
+  triggerSimilar: (group: QuestionGroupCard) => Promise<void>
+  togglePaper: (paperKey: string) => void
   retryGroupDetail: (groupId: string) => void
+  reset: () => void
+}
+
+export type UseConciergeDeskResult = {
+  retrieval: ConciergeRetrievalView
+  actions: ConciergeRetrievalActions
 }
 
 export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDeskResult {
@@ -108,6 +125,12 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     [loadDetail],
   )
 
+  // Single-paper auto-expand: when a fresh result set resolves to exactly one
+  // bucket, open it ONCE. After that, the user's explicit collapse (set to
+  // null via togglePaper) wins — do not snap it back open. We track which
+  // result set we already auto-expanded for via a ref keyed on the lone bucket.
+  const lastAutoExpandKeyRef = useRef<string | null>(null)
+
   const clearExpansion = useCallback(() => {
     setExpandedPaperKey(null)
     setDetailCache({})
@@ -120,11 +143,6 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     [state],
   )
 
-  // Single-paper auto-expand: when a fresh result set resolves to exactly one
-  // bucket, open it ONCE. After that, the user's explicit collapse (set to
-  // null via togglePaper) wins — do not snap it back open. We track which
-  // result set we already auto-expanded for via a ref keyed on the lone bucket.
-  const lastAutoExpandKeyRef = useRef<string | null>(null)
   useEffect(() => {
     if (paperResults.length === 1) {
       const onlyKey = paperResults[0].key
@@ -219,17 +237,33 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     clearExpansion()
   }, [clearExpansion])
 
+  const retrieval = useMemo<ConciergeRetrievalView>(
+    () => ({
+      intent,
+      state,
+      paperResults,
+      expandedPaperKey,
+      groupDetail: {
+        cache: detailCache,
+      },
+    }),
+    [intent, state, paperResults, expandedPaperKey, detailCache],
+  )
+
+  const actions = useMemo<ConciergeRetrievalActions>(
+    () => ({
+      setIntent,
+      submit,
+      triggerSimilar,
+      togglePaper,
+      retryGroupDetail,
+      reset,
+    }),
+    [setIntent, submit, triggerSimilar, togglePaper, retryGroupDetail, reset],
+  )
+
   return {
-    intent,
-    setIntent,
-    state,
-    submit,
-    triggerSimilar,
-    reset,
-    paperResults,
-    expandedPaperKey,
-    togglePaper,
-    detailCache,
-    retryGroupDetail,
+    retrieval,
+    actions,
   }
 }
