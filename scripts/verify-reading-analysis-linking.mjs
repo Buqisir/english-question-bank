@@ -454,5 +454,183 @@ console.log('\n-- evidenceLinking: animation instance policy --')
   assertEqual('switching active link id bumps (2 → 3)', s.counter, 3)
 }
 
+/* ───────────────────── evidenceLinking: scroll planner ─────────────────── */
+
+console.log('\n-- evidenceLinking: planScrollIntoView (Cut 2) --')
+
+const {
+  planScrollIntoView,
+} = evidenceLinking
+
+// Helper to build a "scroller" snapshot.
+function scroller({
+  top = 0,
+  height = 600,
+  scrollTop = 0,
+  scrollHeight = 2000,
+  clientHeight = 600,
+}) {
+  return {
+    scrollerRect: {
+      left: 0,
+      top,
+      right: 800,
+      bottom: top + height,
+      width: 800,
+      height,
+    },
+    scrollerScrollTop: scrollTop,
+    scrollerScrollHeight: scrollHeight,
+    scrollerClientHeight: clientHeight,
+  }
+}
+
+// Helper to build a target rect at a given viewport top, with given height.
+function targetAt(top, height = 20) {
+  return {
+    left: 100,
+    top,
+    right: 200,
+    bottom: top + height,
+    width: 100,
+    height,
+  }
+}
+
+// 1. target already comfortably in view → noop
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 600, scrollTop: 200 }),
+    targetRect: targetAt(300, 20), // viewport y=300 → content y=500, comfort=[280,520]
+  })
+  assertEqual('comfortable in view → noop', plan.kind, 'noop')
+}
+
+// 2. target above the viewport → scroll up; nextScrollTop puts top at margin
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 600, scrollTop: 1000 }),
+    // target at viewport top -50 means it's 50px above the scroller top edge
+    // → in content coords, contentTop = 1000 + (-50 - 0) = 950
+    targetRect: targetAt(-50, 20),
+  })
+  assertEqual('above viewport → scroll', plan.kind, 'scroll')
+  // contentTop=950, margin=80 → desired scrollTop=950-80=870
+  assertEqual('above: nextScrollTop = contentTop - margin', plan.nextScrollTop, 870)
+  assertEqual('above: smooth by default', plan.behavior, 'smooth')
+}
+
+// 3. target below the viewport → scroll down; nextScrollTop puts bottom at clientHeight - margin
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 600, scrollTop: 100 }),
+    // viewport y=580 → content y=680. clientHeight=600, comfort bottom = 100+600-80 = 620.
+    // contentBottom = 680+20 = 700 > 620 → needs scroll down.
+    // next = contentBottom - clientHeight + margin = 700 - 600 + 80 = 180
+    targetRect: targetAt(580, 20),
+  })
+  assertEqual('below viewport → scroll', plan.kind, 'scroll')
+  assertEqual('below: nextScrollTop = contentBottom - clientHeight + margin', plan.nextScrollTop, 180)
+}
+
+// 4. target taller than usable viewport → align top with comfort top
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 400, clientHeight: 400, scrollTop: 0 }),
+    // usable = 400 - 160 = 240. target height 300 > 240.
+    // content y = 0 + (300 - 0) = 300.
+    targetRect: targetAt(300, 300),
+  })
+  assertEqual('overflow target → scroll', plan.kind, 'scroll')
+  assertEqual('overflow target: align top with comfort top', plan.nextScrollTop, 300 - 80)
+}
+
+// 5. clamping — proposed scrollTop above max is capped to (scrollHeight - clientHeight)
+{
+  const plan = planScrollIntoView({
+    ...scroller({
+      top: 0,
+      height: 600,
+      clientHeight: 600,
+      scrollTop: 0,
+      scrollHeight: 700, // maxScroll = 100
+    }),
+    // viewport y=590, height=30 → contentTop=590, contentBottom=620.
+    // desiredBottom = 0+600-80 = 520. 620 > 520 → scroll down.
+    // unclamped next = 620 - 600 + 80 = 100. maxScroll = 100. clamp leaves 100.
+    targetRect: targetAt(590, 30),
+  })
+  assertEqual('clamp: still scrolls when delta > 0 after clamp', plan.kind, 'scroll')
+  assertEqual('clamp: nextScrollTop = scrollHeight - clientHeight', plan.nextScrollTop, 100)
+}
+
+// 5a. clamping — when proposed > maxScroll AND already at maxScroll → noop
+{
+  const plan = planScrollIntoView({
+    ...scroller({
+      top: 0,
+      height: 600,
+      clientHeight: 600,
+      scrollTop: 100,
+      scrollHeight: 700, // maxScroll = 100, already there
+    }),
+    targetRect: targetAt(580, 20),
+  })
+  assertEqual('clamp: already at maxScroll → noop (delta=0)', plan.kind, 'noop')
+}
+
+// 5b. clamping — negative proposal is capped to 0
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 600, scrollTop: 0 }),
+    targetRect: targetAt(20, 20), // contentTop=20, desired=20-80=-60
+  })
+  // After clamping to >=0, delta from current scrollTop=0 is 0 → noop.
+  assertEqual('clamp: negative proposal at top yields noop', plan.kind, 'noop')
+}
+
+// 6. tolerance — sub-pixel delta becomes noop
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 600, scrollTop: 100 }),
+    // Engineer a scenario where the math says "scroll" but delta < 1.
+    // contentTop = 100 + (180 - 0) = 280. desired=180. → would request 180-80=100.
+    // delta = 100-100 = 0 → noop (and also hits the needsScroll=false branch first).
+    targetRect: targetAt(180, 20),
+    tolerance: 1,
+  })
+  assertEqual('tolerance: zero delta → noop', plan.kind, 'noop')
+}
+
+// 7. reduced motion → behavior:'auto'
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 600, scrollTop: 1000 }),
+    targetRect: targetAt(-50, 20),
+    reducedMotion: true,
+  })
+  assertEqual('reduced motion: behavior is auto', plan.behavior, 'auto')
+  assertEqual('reduced motion: still scrolls', plan.kind, 'scroll')
+}
+
+// 8. degenerate viewport (clientHeight too small for 2*margin) → overflow path
+{
+  const plan = planScrollIntoView({
+    ...scroller({ top: 0, height: 100, clientHeight: 100, scrollTop: 0 }),
+    targetRect: targetAt(50, 20),
+  })
+  // usable = 100 - 160 = -60 → degenerate, take overflow branch:
+  // contentTop = 0 + (50 - 0) = 50. next = 50 - 80 = -30 → clamp to 0 → delta=0 → noop.
+  assertEqual('degenerate viewport at top: clamps to 0 → noop', plan.kind, 'noop')
+
+  const plan2 = planScrollIntoView({
+    ...scroller({ top: 0, height: 100, clientHeight: 100, scrollTop: 500, scrollHeight: 5000 }),
+    targetRect: targetAt(50, 20),
+  })
+  // contentTop = 500 + 50 = 550. next = 550 - 80 = 470. delta = 470-500 = -30 → scroll.
+  assertEqual('degenerate viewport mid-scroll: scrolls to align top', plan2.kind, 'scroll')
+  assertEqual('degenerate viewport: nextScrollTop', plan2.nextScrollTop, 470)
+}
+
 console.log(`\nResult: ${passed} passed, ${failed} failed`)
 process.exit(failed === 0 ? 0 : 1)

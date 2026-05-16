@@ -288,3 +288,111 @@ export function detectReducedMotion(
   if (!mm) return false
   return mm('(prefers-reduced-motion: reduce)').matches
 }
+
+/* ─────────────────────────── Scroll-into-view planner ───────────────────── */
+
+/**
+ * Pure rules for "should the passage scroller scroll, and if so, where to?".
+ *
+ * Coordinate system: every input is in CSS pixels. `scrollerRect` and
+ * `targetRect` are viewport-relative `getBoundingClientRect()` outputs;
+ * `scrollerScrollTop`, `scrollerScrollHeight`, and `scrollerClientHeight`
+ * come from the scroller element's own properties. The planner converts
+ * the target's viewport position into the scroller's content coordinate
+ * system, then decides whether the comfort zone (viewport minus a top/
+ * bottom margin) already contains the target.
+ *
+ * Rules:
+ *   1. If the target's content range fits entirely within `[scrollTop +
+ *      margin, scrollTop + clientHeight - margin]`, return `{kind:'noop'}`.
+ *   2. If the target is taller than the usable viewport (`clientHeight -
+ *      2*margin <= 0` OR `targetHeight > usable`), align the target's top
+ *      with the comfort top (`contentTop - margin`).
+ *   3. Else if the target is above the comfort top, scroll up to put the
+ *      top at `contentTop - margin`.
+ *   4. Else (target below comfort bottom), scroll down to put the bottom
+ *      at `contentBottom - clientHeight + margin`.
+ *   5. The candidate scrollTop is clamped to `[0, scrollHeight - clientHeight]`.
+ *   6. If the resulting delta is below `tolerance` (default 1px), return
+ *      `{kind:'noop'}` so we never request a one-pixel jiggle.
+ *   7. `behavior` is `'auto'` when `reducedMotion` is true, else `'smooth'`.
+ *
+ * The planner makes no DOM calls — the caller passes the values it has
+ * already read. This is the only "should we scroll" decision in the
+ * codebase; tests cover every branch.
+ */
+export type ScrollPlan =
+  | { kind: 'noop' }
+  | { kind: 'scroll'; nextScrollTop: number; behavior: 'auto' | 'smooth' }
+
+export type ScrollPlanInput = {
+  scrollerRect: RectLike
+  scrollerScrollTop: number
+  scrollerScrollHeight: number
+  scrollerClientHeight: number
+  targetRect: RectLike
+  /** Comfortable breathing room at top/bottom. Default 80px. */
+  margin?: number
+  /** Sub-pixel tolerance — deltas below this are treated as noop. Default 1px. */
+  tolerance?: number
+  /** When true, the plan returns `behavior:'auto'` for instant scroll. */
+  reducedMotion?: boolean
+}
+
+export function planScrollIntoView(input: ScrollPlanInput): ScrollPlan {
+  const margin = input.margin ?? 80
+  const tolerance = input.tolerance ?? 1
+  const {
+    scrollerRect,
+    scrollerScrollTop,
+    scrollerScrollHeight,
+    scrollerClientHeight,
+    targetRect,
+  } = input
+
+  // Project the target into the scroller's content coordinate system.
+  const contentTop = scrollerScrollTop + (targetRect.top - scrollerRect.top)
+  const targetHeight = Math.max(0, targetRect.height)
+  const contentBottom = contentTop + targetHeight
+
+  const vpTop = scrollerScrollTop
+  const vpBottom = scrollerScrollTop + scrollerClientHeight
+  const desiredTop = vpTop + margin
+  const desiredBottom = vpBottom - margin
+  const usableViewport = scrollerClientHeight - 2 * margin
+
+  let next = scrollerScrollTop
+  let needsScroll = false
+
+  if (usableViewport <= 0 || targetHeight > usableViewport) {
+    // The target is taller than the comfort zone (or the comfort zone is
+    // degenerate). Align the target's top with the comfort top — the user
+    // can keep reading downward.
+    next = contentTop - margin
+    needsScroll = true
+  } else if (contentTop < desiredTop) {
+    // Target's top is above the comfort zone; scroll up.
+    next = contentTop - margin
+    needsScroll = true
+  } else if (contentBottom > desiredBottom) {
+    // Target's bottom is below the comfort zone; scroll down so the
+    // bottom lands at `clientHeight - margin` (i.e. comfort bottom).
+    next = contentBottom - scrollerClientHeight + margin
+    needsScroll = true
+  }
+
+  if (!needsScroll) return { kind: 'noop' }
+
+  const maxScroll = Math.max(0, scrollerScrollHeight - scrollerClientHeight)
+  next = Math.max(0, Math.min(next, maxScroll))
+
+  if (Math.abs(next - scrollerScrollTop) < tolerance) {
+    return { kind: 'noop' }
+  }
+
+  return {
+    kind: 'scroll',
+    nextScrollTop: next,
+    behavior: input.reducedMotion ? 'auto' : 'smooth',
+  }
+}
