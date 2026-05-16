@@ -6,9 +6,9 @@
  * groups (篇章) inside that source paper that matched the user's search.
  *
  * 重要事实:
- *   - QuestionGroup 仍然是最小加入单位。本聚合只改“展示分桶”。
+ *   - QuestionGroup 仍然是最小加入单位。本聚合只改"展示分桶"。
  *   - 草稿卷 (App.basket) 仍然按 group.id 加入。
- *   - 我们绝不在前端编造一张“整卷”进入 basket。
+ *   - 我们绝不在前端编造一张"整卷"进入 basket。
  *
  * Bucket key:
  *   `${paperName}__${year}__${region}` —— 三段组合保证稳定。
@@ -28,6 +28,63 @@ export type PaperResultGroup = {
   reason: string
 }
 
+/**
+ * Cut 6 — paper-level hit context.
+ *
+ * The current concierge search emits `ConciergeSearchHit` rows whose minimal
+ * unit is still a `QuestionGroup`. The teacher-facing question
+ * "this row matched the source paper as a whole vs. it matched specific
+ * passages inside the paper" is therefore a presentation-layer concern, not
+ * a search-API concern. `PaperHitContext` is a typed lens over the same
+ * hits the aggregator already collected, so the row UI can decide:
+ *
+ *   - what badge wording to use (e.g. "命中 N 个篇章" vs "试卷匹配 · …")
+ *   - which inner group to scroll to first when the row is expanded
+ *   - which inner groups to highlight as "this is what the search hit"
+ *
+ * V1 constraint: search hits are always passage-scoped, so every aggregated
+ * paper currently produces `scope: 'passage'`. The 'paper' and 'mixed'
+ * branches are reserved by type so future search-side changes (e.g. an
+ * intent classifier that recognises "this query is asking for a whole
+ * paper") can populate them without re-shaping `PaperResult`.
+ *
+ * We deliberately do NOT inspect the reason text to decide scope — the
+ * search hit object is the only source of truth for "what matched".
+ */
+export type PaperHitScope = 'passage' | 'paper' | 'mixed'
+
+export type PaperPassageHit = {
+  groupId: string
+  reason: string
+}
+
+export type PaperHitContext = {
+  /** What kind of search hit produced this row. V1 is always 'passage'. */
+  scope: PaperHitScope
+  /** Stable list of every group-id inside this paper that the search hit. */
+  hitGroupIds: string[]
+  /**
+   * The group the row UI should scroll into view first on expand. Equals
+   * the first hit group's id; null when the bucket somehow has no groups
+   * (the aggregator never produces such buckets in practice but we keep
+   * the type total).
+   */
+  primaryGroupId: string | null
+  /**
+   * Per-passage hit detail, in original hit order. Mirrors `groups` but
+   * keeps just the (id, reason) pair so the row UI doesn't reach into
+   * the full `QuestionGroupCard` shape just to decide what to render.
+   */
+  passageHits: PaperPassageHit[]
+  /**
+   * The reason string the row should display in the badge area. V1 keeps
+   * this aligned with `representativeReason` for forward-compat — the
+   * row UI may switch to `displayReason` in a future pass without
+   * needing a domain-level change.
+   */
+  displayReason: string
+}
+
 export type PaperResult = {
   /** Stable id used for expandedPaperKey & React key. */
   key: string
@@ -37,7 +94,7 @@ export type PaperResult = {
   region: string
   source: string
   sourceType: SourceType | null
-  /** "命中 N 组" */
+  /** Cardinality of `groups`. Kept for back-compat — verify scripts read this. */
   hitCount: number
   /** Distinct groupTypes inside this paper (used for the small chip strip). */
   groupTypes: string[]
@@ -47,6 +104,13 @@ export type PaperResult = {
   groups: PaperResultGroup[]
   /** True when key fields were missing → bucketed into "其他来源". */
   isFallback: boolean
+  /**
+   * Cut 6 — paper-level hit context. Additive: existing consumers that read
+   * `representativeReason` / `hitCount` / `groups` keep working unchanged.
+   * Cut 6 row UI consumes `hitContext` to choose badge wording, decide
+   * highlight, and decide which inner group to scroll to.
+   */
+  hitContext: PaperHitContext
 }
 
 function trim(value: unknown): string {
@@ -108,6 +172,17 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
         representativeReason: cleanReason(reason),
         groups: [],
         isFallback,
+        // Initialise the hit context with the same first-hit reason the
+        // representativeReason picks. We populate the rest of the fields
+        // (hitGroupIds / primaryGroupId / passageHits) once we know the
+        // full list of hits in this bucket — see the post-loop pass below.
+        hitContext: {
+          scope: 'passage',
+          hitGroupIds: [],
+          primaryGroupId: null,
+          passageHits: [],
+          displayReason: cleanReason(reason),
+        },
       }
       buckets.set(key, bucket)
     }
@@ -115,7 +190,21 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
     if (!bucket.groupTypes.includes(group.groupType)) {
       bucket.groupTypes.push(group.groupType)
     }
-    bucket.groups.push({ group, reason: cleanReason(reason) })
+    const cleanedReason = cleanReason(reason)
+    bucket.groups.push({ group, reason: cleanedReason })
+    bucket.hitContext.hitGroupIds.push(group.id)
+    bucket.hitContext.passageHits.push({
+      groupId: group.id,
+      reason: cleanedReason,
+    })
+  }
+  // Finalise primaryGroupId now that every bucket has its full hit list.
+  // V1 keeps scope === 'passage' for every bucket — the search API is the
+  // only place that could legitimately upgrade this to 'paper' or 'mixed',
+  // and the search API does not yet emit paper-scoped hits.
+  for (const bucket of buckets.values()) {
+    bucket.hitContext.primaryGroupId =
+      bucket.hitContext.hitGroupIds[0] ?? null
   }
   // Order: preserve first-hit order across paper rows; fallback bucket sinks to bottom.
   const ordered: PaperResult[] = []

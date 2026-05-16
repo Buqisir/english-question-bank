@@ -7,11 +7,19 @@
  *
  * No fetch happens on expand — we render what we already have from the search
  * hits.
+ *
+ * Cut 6 additions:
+ *   - Badge wording is driven by `paper.hitContext.scope`, not by reason text.
+ *   - Every inner <li> for a hit group carries `data-hit="true"` so the
+ *     stylesheet can highlight it with a small accent (left rule + warm tint).
+ *   - On expand, if a `primaryGroupId` is known, the row scrolls that
+ *     `<li>` into view with a single smooth `scrollIntoView` call. The
+ *     scroll runs once per expand (gated by a ref) — never on every render.
  */
 
-import { type MouseEvent, type ReactNode } from 'react'
+import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
 import { groupTypeLabel, type QuestionGroupCard } from '../domain/questionBank.ts'
-import type { PaperResult } from './aggregatePaperResults.ts'
+import type { PaperHitContext, PaperResult } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
@@ -31,6 +39,30 @@ function buildHeadline(paper: PaperResult): string {
   const yearText = paper.year ? `${paper.year} 年` : ''
   const region = paper.region ? `· ${paper.region} ` : ''
   return `${yearText}${region}${paper.paperName}`.trim()
+}
+
+/**
+ * Cut 6 — badge wording switches by hit scope. The badge text uses
+ * `paper.hitCount` as the dynamic count so existing verify regexes
+ * (`/命中\s*\{paper\.hitCount\}\s*[组个]\s*[篇组]/`) keep matching.
+ *
+ * - 'passage' (V1's only emitted scope): "命中 N 个篇章"
+ * - 'paper'   : "试卷匹配 · N 个篇章可选"  (reserved for a future intent)
+ * - 'mixed'   : "试卷 + N 个篇章命中"      (reserved for a future intent)
+ *
+ * The renderer always prints `paper.hitCount` (not `hitContext.hitGroupIds.length`)
+ * so we have one statement that ties UI text to the source-of-truth count
+ * the existing verify already pins.
+ */
+function badgePrefix(scope: PaperHitContext['scope']): string {
+  if (scope === 'paper') return '试卷匹配 · '
+  if (scope === 'mixed') return '试卷 + '
+  return '命中 '
+}
+function badgeSuffix(scope: PaperHitContext['scope']): string {
+  if (scope === 'paper') return ' 个篇章可选'
+  if (scope === 'mixed') return ' 个篇章命中'
+  return ' 个篇章'
 }
 
 export type ConciergePaperRowProps = {
@@ -56,6 +88,35 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     if (target.closest('button, a, input, textarea, select, [role="button"], .concierge-paper-detail')) return
     onTogglePaper(paper.key)
   }
+
+  // Cut 6 — auto-scroll the first hit passage into view on expand.
+  //
+  // We hold a ref to the actual <li> element of the primary hit group and
+  // run a small effect that fires only on the false→true transition of
+  // `expanded`. Re-renders while already expanded (e.g. basket toggling)
+  // do not re-trigger the scroll. Collapsing clears the gating ref so
+  // the next expand fires again.
+  const primaryHitRef = useRef<HTMLLIElement | null>(null)
+  const lastScrolledForExpandRef = useRef(false)
+  useEffect(() => {
+    if (!expanded) {
+      lastScrolledForExpandRef.current = false
+      return
+    }
+    if (lastScrolledForExpandRef.current) return
+    if (!paper.hitContext.primaryGroupId) return
+    const el = primaryHitRef.current
+    if (!el) return
+    lastScrolledForExpandRef.current = true
+    // Fire on the next frame so the freshly-rendered <li> has its layout
+    // box before we scroll. `block: 'nearest'` keeps a row at the top
+    // from over-scrolling the page when it's already in view.
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    })
+  }, [expanded, paper.hitContext.primaryGroupId])
+
+  const hitIds = new Set(paper.hitContext.hitGroupIds)
 
   return (
     <article
@@ -85,17 +146,25 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
 
       <div className="concierge-paper-body">
         <p className="concierge-paper-meta">
-          <span className="concierge-paper-hitcount">命中 {paper.hitCount} 组</span>
+          <span
+            className="concierge-paper-hitcount"
+            data-ra-hit-scope={paper.hitContext.scope}
+          >
+            {badgePrefix(paper.hitContext.scope)}{paper.hitCount}{badgeSuffix(paper.hitContext.scope)}
+          </span>
           {groupTypeStrip && (
             <span className="concierge-paper-grouptypes" title={groupTypeStrip}>
               {groupTypeStrip}
             </span>
           )}
         </p>
-        {paper.representativeReason && (
-          <p className="concierge-paper-reason" title={paper.representativeReason}>
+        {paper.hitContext.displayReason && (
+          <p
+            className="concierge-paper-reason"
+            title={paper.hitContext.displayReason}
+          >
             <span className="concierge-group-reason-label">推荐理由：</span>
-            <span>{paper.representativeReason}</span>
+            <span>{paper.hitContext.displayReason}</span>
           </p>
         )}
       </div>
@@ -118,17 +187,32 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           aria-live="polite"
         >
           <ul className="concierge-group-card-list" aria-label="该卷命中的题组">
-            {paper.groups.map(({ group, reason }) => (
-              <li key={group.id}>
-                <ConciergeGroupCard
-                  group={group}
-                  reason={reason}
-                  alreadyInBasket={basketIds.has(group.id)}
-                  onAdd={onAdd}
-                  onSimilar={onSimilar}
-                />
-              </li>
-            ))}
+            {paper.groups.map(({ group, reason }) => {
+              const isHit = hitIds.has(group.id)
+              const isPrimaryHit =
+                isHit && group.id === paper.hitContext.primaryGroupId
+              return (
+                <li
+                  key={group.id}
+                  className={
+                    isHit
+                      ? 'concierge-group-card-li is-hit'
+                      : 'concierge-group-card-li'
+                  }
+                  data-hit={isHit ? 'true' : undefined}
+                  data-primary-hit={isPrimaryHit ? 'true' : undefined}
+                  ref={isPrimaryHit ? primaryHitRef : null}
+                >
+                  <ConciergeGroupCard
+                    group={group}
+                    reason={reason}
+                    alreadyInBasket={basketIds.has(group.id)}
+                    onAdd={onAdd}
+                    onSimilar={onSimilar}
+                  />
+                </li>
+              )
+            })}
           </ul>
         </section>
       )}
