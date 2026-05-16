@@ -25,38 +25,28 @@ import type {
   ReadingAnalysisFixture,
   ReadingAnnotation,
 } from '../readingAnalysisTypes.ts'
+import {
+  classifyMissReason,
+  normalizeQuote,
+} from '../annotation/index.ts'
+import type {
+  ReadingAnalysisQuoteDiagnostic,
+  ReadingAnalysisSidecar,
+  ReadingAnnotationSidecarEntry,
+} from '../annotation/index.ts'
 
-export type ReadingAnnotationSidecarEntry = {
-  groupId: string
-  questionNo: string
-  optionLabel?: 'A' | 'B' | 'C' | 'D'
-  kind: 'evidence' | 'trap'
-  quote: string
+// Re-export the annotation-data types under their old names so existing
+// imports keep working without changing every caller. The single source
+// of truth for the shapes is now `../annotation/`.
+export type {
+  ReadingAnalysisQuoteDiagnostic,
+  ReadingAnalysisSidecar,
+  ReadingAnnotationSidecarEntry,
 }
-
-export type ReadingAnalysisSidecar = {
-  entries: ReadingAnnotationSidecarEntry[]
-}
-
-/**
- * Per-entry observation emitted alongside a successful selector run. The
- * report tooling uses this to summarize quote coverage on real groups; the
- * UI is unaffected.
- */
-export type ReadingAnalysisQuoteDiagnostic = {
-  groupId: string
-  questionNo: string
-  optionLabel?: 'A' | 'B' | 'C' | 'D'
-  kind: 'evidence' | 'trap'
-  quote: string
-  status: 'hit' | 'miss'
-  /**
-   * Why a miss happened, or — for hits — a coexistence note. Reasons are a
-   * bounded vocabulary picked specifically so a markdown report can group
-   * them; selector matching semantics are unchanged.
-   */
-  reason?: 'not_found' | 'cross_sentence' | 'multiple_matches' | 'same_sentence_multi'
-}
+// Re-export the quote normalization helper too — the existing
+// `verify-reading-analysis-selector.mjs` imports it from this file by
+// destructuring `normalizeQuote` off the selector module.
+export { normalizeQuote }
 
 export type SelectReadingAnalysisInput = {
   detail: QuestionGroupDetail
@@ -363,6 +353,12 @@ function normalizeQuestionNo(value: string | undefined | null): string {
  * Quote location
  * ═════════════════════════════════════════════════════════════════════════ */
 
+/**
+ * Locate a sidecar quote inside the rendered passage. Single-sentence
+ * substring match against `normalizeQuote`-canonicalised text. The
+ * normalizer lives in the annotation module so the report script and
+ * future UI surfaces use the exact same canonicalisation.
+ */
 function locateQuoteInPassage(
   passage: Passage,
   quote: string,
@@ -382,70 +378,9 @@ function locateQuoteInPassage(
 }
 
 /**
- * Normalize a quote for substring matching:
- *   - trim
- *   - collapse all whitespace (incl. NBSP, CJK ideographic space) to a single ASCII space
- *   - unify curly / straight apostrophes
- *   - unify dashes (-, –, —)
- *   - lowercase
- * Punctuation other than apostrophes/dashes is preserved so that "decline."
- * doesn't suddenly equal "decline?".
+ * Truncate a quote for human-readable warning messages. Kept private —
+ * formatting concerns shouldn't leak to other modules.
  */
-export function normalizeQuote(value: string): string {
-  return value
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace(/[\u2013\u2014]/g, '-')
-    .replace(/[\u00A0\u3000\s]+/g, ' ')
-    .trim()
-    .toLowerCase()
-}
-
-/**
- * Classify a quote miss into a coarse, fixed vocabulary so the report can
- * group failures. This is observation-only — selector matching is unchanged.
- *
- *   - cross_sentence : the quote contains an internal sentence terminator,
- *                       suggesting it was authored across two sentences
- *                       (e.g. "...refund. The last day...")
- *   - multiple_matches: the leading half of the quote appears in 2+ sentences
- *                       and is therefore ambiguous to a single-sentence
- *                       includes() match
- *   - not_found       : default — the quote simply isn't there
- */
-function classifyMissReason(
-  passage: Passage,
-  quote: string,
-): 'not_found' | 'cross_sentence' | 'multiple_matches' {
-  const trimmed = normalizeQuote(quote)
-  if (!trimmed) return 'not_found'
-
-  // Cross-sentence: any terminator that has at least one alphabetic/CJK char
-  // before AND after counts. Catches "...refund. The last day..." but not
-  // trailing "... refund." (single-sentence quote with terminal punctuation).
-  if (/[A-Za-z\u4e00-\u9fff][.!?。！？]\s+[A-Za-z\u4e00-\u9fff]/.test(trimmed)) {
-    return 'cross_sentence'
-  }
-
-  // Multiple matches: take the first ~30 normalized chars of the quote and
-  // see if they appear in 2+ distinct sentences. Empty/short quotes skip.
-  const probe = trimmed.slice(0, 30)
-  if (probe.length >= 8) {
-    let sentenceMatches = 0
-    for (const para of passage.paragraphs) {
-      for (const s of para.sentences) {
-        const hay = normalizeQuote(s.text)
-        if (hay.includes(probe)) {
-          sentenceMatches++
-          if (sentenceMatches > 1) return 'multiple_matches'
-        }
-      }
-    }
-  }
-
-  return 'not_found'
-}
-
 function truncateQuote(value: string, max = 40): string {
   if (value.length <= max) return value
   return value.slice(0, max - 1) + '…'

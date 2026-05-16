@@ -20,7 +20,7 @@
 import type {
   ReadingAnalysisSidecar,
   ReadingAnnotationSidecarEntry,
-} from '../selectors/selectReadingAnalysis.ts'
+} from '../annotation/index.ts'
 
 type SidecarFile = {
   groupId: string

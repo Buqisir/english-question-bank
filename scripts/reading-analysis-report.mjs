@@ -27,6 +27,10 @@ const selectorPath = path.resolve(
   repoRoot,
   'app/src/features/reading-analysis/selectors/selectReadingAnalysis.ts',
 )
+const annotationPath = path.resolve(
+  repoRoot,
+  'app/src/features/reading-analysis/annotation/index.ts',
+)
 const reportDir = path.resolve(repoRoot, 'reports')
 const reportPath = path.resolve(reportDir, 'reading-analysis-quote-coverage.md')
 const apiBase = process.env.READING_ANALYSIS_API_BASE || 'http://127.0.0.1:8787'
@@ -34,6 +38,10 @@ const apiBase = process.env.READING_ANALYSIS_API_BASE || 'http://127.0.0.1:8787'
 mkdirSync(reportDir, { recursive: true })
 
 const { selectReadingAnalysisFromDetail } = await import(selectorPath)
+// Coverage statistics live in the annotation module so this script and any
+// other consumer (verify, future UI) collapse the same diagnostic rows the
+// same way. The matcher itself stays in the selector.
+const { summarizeQuoteDiagnostics } = await import(annotationPath)
 const manifest = JSON.parse(readFileSync(indexPath, 'utf8'))
 if (!Array.isArray(manifest.samples) || manifest.samples.length === 0) {
   console.error('No samples in sidecar index.json; nothing to report.')
@@ -42,9 +50,6 @@ if (!Array.isArray(manifest.samples) || manifest.samples.length === 0) {
 
 const groupRows = []
 const allDiagnostics = []
-let totalEntries = 0
-let totalHits = 0
-let totalMisses = 0
 let okGroups = 0
 const failedGroups = []
 
@@ -89,9 +94,6 @@ for (const sample of manifest.samples) {
   const diagnostics = result.quoteDiagnostics
   const hits = diagnostics.filter((d) => d.status === 'hit').length
   const misses = diagnostics.filter((d) => d.status === 'miss').length
-  totalEntries += diagnostics.length
-  totalHits += hits
-  totalMisses += misses
   for (const d of diagnostics) {
     allDiagnostics.push({ ...d, groupTitle: sample.title, sampleCase: sample.case })
   }
@@ -107,18 +109,14 @@ for (const sample of manifest.samples) {
   })
 }
 
-const reasonCounts = {
-  not_found: 0,
-  cross_sentence: 0,
-  multiple_matches: 0,
-}
-for (const d of allDiagnostics) {
-  if (d.status === 'miss' && d.reason && d.reason in reasonCounts) {
-    reasonCounts[d.reason]++
-  }
-}
-
-const missRate = totalEntries === 0 ? 0 : totalMisses / totalEntries
+// Single source of truth for hit / miss / reason aggregates: the
+// annotation module's `summarizeQuoteDiagnostics` helper. Keeping the
+// accumulator here would risk drifting from the verify scripts and any
+// future "去标注" UI that reads coverage. Selector matching semantics
+// are not changed by this — `summarizeQuoteDiagnostics` only folds rows
+// the selector already produced.
+const coverage = summarizeQuoteDiagnostics(allDiagnostics)
+const { totalEntries, totalHits, totalMisses, reasonCounts, missRate } = coverage
 const missRatePct = (missRate * 100).toFixed(1)
 
 /* ─── Markdown writer ─────────────────────────────────────────────────── */
