@@ -123,30 +123,43 @@ export function usePaperBlocks(input: UsePaperBlocksInput): UsePaperBlocksResult
   const removeBlock = useCallback(
     (blockId: string) => {
       setOpenInsertionIndex(null)
-      const block = paperBlocks.find((b) => b.id === blockId)
-      if (!block) return
-      if (block.type === 'question_group') {
-        // Remove the block(s) first so callers' onRemoveQuestionGroup callbacks
-        // can be basket-only and never leave a stale block. The internal sync
-        // helpers (removeQuestionGroupBlock) are idempotent — if upstream also
-        // calls them, it's a no-op.
-        const targetGroupId = block.questionGroupId
-        const removedIds = paperBlocks
-          .filter((b) => b.type === 'question_group' && b.questionGroupId === targetGroupId)
-          .map((b) => b.id)
-        setPaperBlocks((blocks) =>
-          blocks.filter(
+      // Compute everything from the updater's `blocks` argument — never from
+      // the closure-captured `paperBlocks` — to avoid the same React updater
+      // timing class of bug we already fixed in usePaperDraft. The side
+      // effects (selection clear, onRemoveQuestionGroup) run AFTER the
+      // updater commits, never inside it (StrictMode can call updaters
+      // twice and we don't want the callback to fire twice).
+      let removedIds: string[] = []
+      let removedGroupId: string | null = null
+      setPaperBlocks((blocks) => {
+        const block = blocks.find((b) => b.id === blockId)
+        if (!block) {
+          removedIds = []
+          removedGroupId = null
+          return blocks
+        }
+        if (block.type === 'question_group') {
+          const targetGroupId = block.questionGroupId
+          removedGroupId = targetGroupId
+          removedIds = blocks
+            .filter((b) => b.type === 'question_group' && b.questionGroupId === targetGroupId)
+            .map((b) => b.id)
+          return blocks.filter(
             (b) => !(b.type === 'question_group' && b.questionGroupId === targetGroupId),
-          ),
-        )
-        setSelectedPaperBlockId((current) => (current && removedIds.includes(current) ? null : current))
-        onRemoveQuestionGroup(targetGroupId)
-      } else {
-        setPaperBlocks((blocks) => blocks.filter((b) => b.id !== blockId))
-        setSelectedPaperBlockId((current) => (current === blockId ? null : current))
+          )
+        }
+        removedGroupId = null
+        removedIds = [block.id]
+        return blocks.filter((b) => b.id !== blockId)
+      })
+      setSelectedPaperBlockId((current) =>
+        current && removedIds.includes(current) ? null : current,
+      )
+      if (removedGroupId !== null) {
+        onRemoveQuestionGroup(removedGroupId)
       }
     },
-    [paperBlocks, onRemoveQuestionGroup],
+    [onRemoveQuestionGroup],
   )
 
   const moveBlock = useCallback((blockId: string, direction: -1 | 1) => {

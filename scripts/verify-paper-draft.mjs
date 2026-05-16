@@ -406,17 +406,55 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
 }
 
 // ─── Test 4: usePaperBlocks.removeBlock removes block before notifying ────
-console.log('\nTest 4: usePaperBlocks.removeBlock filters block before invoking onRemoveQuestionGroup')
+//             + closure-snapshot watch (no closure paperBlocks reads, no
+//             onRemoveQuestionGroup inside the updater body, deps array
+//             does not include paperBlocks).
+console.log('\nTest 4: usePaperBlocks.removeBlock — updater-only state reads, no closure paperBlocks')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const blocks = readFileSync(path.resolve(here, '..', 'app', 'src', 'paperAssembly', 'usePaperBlocks.ts'), 'utf8')
-  const branch = blocks.match(/if \(block\.type === 'question_group'\)\s*\{[\s\S]*?\}\s*else/)?.[0] || ''
-  assert('question_group branch present in removeBlock', branch.length > 0, '')
-  const filterIdx = branch.indexOf('setPaperBlocks((blocks) =>')
-  const callbackIdx = branch.indexOf('onRemoveQuestionGroup(')
+
+  // Extract the full removeBlock useCallback expression — body + deps —
+  // mirroring the shape used for replaceDraft in Test 6.
+  const removeBlockExpr = blocks.match(/const removeBlock\s*=\s*useCallback\(\s*\n([\s\S]*?)\n  \)/)?.[1] || ''
+  assert('removeBlock useCallback expression extracted', removeBlockExpr.length > 0, '')
+
+  // Watch 1: removeBlock body must NOT read closure-captured paperBlocks.
+  // Same class of risk as the usePaperDraft updater-timing bug already fixed.
+  assert('removeBlock body does NOT contain paperBlocks.find( (closure read)',
+    !/\bpaperBlocks\.find\(/.test(removeBlockExpr), 'closure read still present')
+  assert('removeBlock body does NOT contain paperBlocks.filter( (closure read)',
+    !/\bpaperBlocks\.filter\(/.test(removeBlockExpr), 'closure read still present')
+  assert('removeBlock body does NOT have any paperBlocks.X member access',
+    !/\bpaperBlocks\./.test(removeBlockExpr), 'paperBlocks.X access still present')
+
+  // Watch 2: deps array does not include paperBlocks; only onRemoveQuestionGroup.
+  const depsMatch = removeBlockExpr.match(/\[([^\]]*)\]\s*,?\s*$/)
+  assert('removeBlock deps array extracted', depsMatch !== null,
+    `tail:\n${removeBlockExpr.slice(-200)}`)
+  const deps = depsMatch?.[1] || ''
+  assert('removeBlock deps DO NOT include paperBlocks',
+    !/\bpaperBlocks\b/.test(deps), `deps: [${deps}]`)
+  assert('removeBlock deps include onRemoveQuestionGroup',
+    /\bonRemoveQuestionGroup\b/.test(deps), `deps: [${deps}]`)
+
+  // Watch 3: onRemoveQuestionGroup must NOT appear inside the
+  // setPaperBlocks((blocks) => { ... }) updater body. StrictMode can call
+  // updaters twice, so side effects belong outside the updater.
+  const updaterBody = removeBlockExpr.match(
+    /setPaperBlocks\(\(blocks\)\s*=>\s*\{\n([\s\S]*?)\n      \}\)/,
+  )?.[1] || ''
+  assert('setPaperBlocks updater body extracted', updaterBody.length > 0, '')
+  assert('updater body does NOT call onRemoveQuestionGroup',
+    !/onRemoveQuestionGroup\(/.test(updaterBody), 'side effect leaked into updater body')
+
+  // Existing contract (strengthened): setPaperBlocks((blocks) => ...) runs
+  // BEFORE the onRemoveQuestionGroup side effect at the call site.
+  const setIdx = removeBlockExpr.indexOf('setPaperBlocks((blocks) =>')
+  const cbIdx = removeBlockExpr.indexOf('onRemoveQuestionGroup(')
   assert('setPaperBlocks runs BEFORE onRemoveQuestionGroup callback (no stale block)',
-    filterIdx !== -1 && callbackIdx !== -1 && filterIdx < callbackIdx,
-    `setPaperBlocks idx=${filterIdx}, onRemoveQuestionGroup idx=${callbackIdx}`)
+    setIdx !== -1 && cbIdx !== -1 && setIdx < cbIdx,
+    `setPaperBlocks idx=${setIdx}, onRemoveQuestionGroup idx=${cbIdx}`)
 }
 
 // ─── Test 5: usePaperDraft must NOT use the closure-capture-in-updater
