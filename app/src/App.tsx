@@ -57,7 +57,9 @@ import {
   computeQuestionNumbers,
 } from './domain/paperLayout'
 import { buildSavePayload } from './paperAssembly/paperExportPayload'
-import { usePaperBlocks } from './paperAssembly/usePaperBlocks'
+import { usePaperDraft } from './paperAssembly/usePaperDraft'
+import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
+import { createBasketItem } from './paperAssembly/paperDraftModel'
 import { PaperBlockCanvas } from './paperAssembly/PaperBlockCanvas'
 import { ConciergeDesk } from './concierge/ConciergeDesk'
 import { useConciergeDesk } from './concierge/useConciergeDesk'
@@ -634,15 +636,6 @@ function formatWorkflowExport(file: PaperWorkflow['exports']['studentDocx']) {
   return file.verified ? '已验收' : '已导出'
 }
 
-function createBasketItem(group: QuestionGroupCard, overrides: Partial<Pick<BasketItem, 'score' | 'sectionTitle' | 'note'>> = {}): BasketItem {
-  return {
-    ...group,
-    score: overrides.score ?? group.defaultScore,
-    sectionTitle: overrides.sectionTitle ?? groupTypeLabel[group.groupType],
-    note: overrides.note ?? '',
-  }
-}
-
 function workflowSectionLabel(groupTitle: string, paperTitle: string) {
   const prefix = `${paperTitle} `
   return groupTitle.startsWith(prefix) ? groupTitle.slice(prefix.length) : groupTitle
@@ -948,15 +941,20 @@ function App() {
     localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai',
   )
   const [aiBasketDrawerOpen, setAiBasketDrawerOpen] = useState(false)
-  const [basket, setBasket] = useState<BasketItem[]>([])
-  const paperBlocksHook = usePaperBlocks({
-    onRemoveQuestionGroup: (questionGroupId) => removeFromBasket(questionGroupId),
+  // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
+  // hook can be created BEFORE paperExports / saveStatus / previewStatus
+  // setters exist in this scope. The ref is wired up below as soon as the
+  // dependent state is in place.
+  const draftEditedHandlerRef = useRef<(reason: PaperDraftEditReason) => void>(() => {})
+  const paperDraft = usePaperDraft({
+    onDraftEdited: (reason) => draftEditedHandlerRef.current(reason),
   })
   const {
+    basket,
     paperBlocks,
     selectedPaperBlockId,
     openInsertionIndex,
-  } = paperBlocksHook
+  } = paperDraft
   const [questionNumberStart, setQuestionNumberStart] = useState(1)
   const [isEntryOpen, setEntryOpen] = useState(false)
   const [isImportOpen, setImportOpen] = useState(false)
@@ -1114,6 +1112,22 @@ function App() {
     onDocxOrPdfExported: () => { refreshPaperWorkflows() },
   })
 
+  // Wire the Paper Set Draft edit-event router. usePaperDraft is created above
+  // before paperExports exists; this effect binds the actual handler in once
+  // the dependent setters are reachable. Behavior preserved per legacy:
+  //   add / remove / clear : saveStatus idle + previewStatus idle + reset exports
+  //   reorder / score      : saveStatus idle + reset exports
+  //   meta                 : saveStatus idle + reset exports (legacy did the same)
+  useEffect(() => {
+    draftEditedHandlerRef.current = (reason) => {
+      setSaveStatus('idle')
+      paperExports.resetExportStatuses()
+      if (reason === 'add' || reason === 'remove' || reason === 'clear') {
+        setPreviewStatus('idle')
+      }
+    }
+  }, [paperExports])
+
   useEffect(() => {
     let ignore = false
 
@@ -1219,7 +1233,7 @@ function App() {
   }, [])
 
   // Close insertion menu on outside click or Escape
-  const closeInsertionMenu = paperBlocksHook.setOpenInsertionIndex
+  const closeInsertionMenu = paperDraft.setOpenInsertionIndex
   useEffect(() => {
     if (openInsertionIndex === null) return
     function handleClick(e: MouseEvent) {
@@ -1453,17 +1467,7 @@ function App() {
   }
 
   function addGroupsToBasket(groups: QuestionGroupCard[]) {
-    setSaveStatus('idle')
-    setPreviewStatus('idle')
-    paperExports.resetExportStatuses()
-    setBasket((items) => {
-      const existingIds = new Set(items.map((item) => item.id))
-      const nextItems = groups.filter((group) => !existingIds.has(group.id)).map((group) => createBasketItem(group))
-      if (nextItems.length > 0) {
-        paperBlocksHook.appendForNewItems(nextItems)
-      }
-      return nextItems.length > 0 ? [...items, ...nextItems] : items
-    })
+    paperDraft.addGroups(groups)
   }
 
   function addToBasket(group: QuestionGroupCard) {
@@ -1513,8 +1517,7 @@ function App() {
         ? await updatePaperSetRequest(existingPaperSet.id, paperSetInput)
         : await savePaperSet(paperSetInput)
 
-      setBasket(nextBasket)
-      rebuildBlocksFromBasket(nextBasket)
+      paperDraft.replaceDraft({ basket: nextBasket })
       setPaperTitle(title)
       setVersionType('student')
       setLastSavedPaper(paperSet)
@@ -1710,79 +1713,48 @@ function App() {
   }
 
   function removeFromBasket(id: string) {
-    setSaveStatus('idle')
-    setPreviewStatus('idle')
-    paperExports.resetExportStatuses()
-    paperBlocksHook.setOpenInsertionIndex(null)
-    setBasket((items) => items.filter((item) => item.id !== id))
-    paperBlocksHook.removeQuestionGroupBlock(id)
+    paperDraft.removeGroup(id)
   }
 
   function clearBasket() {
-    setSaveStatus('idle')
-    setPreviewStatus('idle')
-    paperExports.resetExportStatuses()
-    paperBlocksHook.setOpenInsertionIndex(null)
     setLastSavedPaper(null)
-    setBasket([])
-    paperBlocksHook.resetBlocks()
+    paperDraft.clear()
   }
 
   function removePaperBlock(blockId: string) {
-    paperBlocksHook.removeBlock(blockId)
+    paperDraft.removeBlock(blockId)
   }
 
   function movePaperBlock(blockId: string, direction: -1 | 1) {
-    paperBlocksHook.moveBlock(blockId, direction)
+    paperDraft.moveBlock(blockId, direction)
   }
 
   function updatePaperBlockTitle(blockId: string, title: string) {
-    paperBlocksHook.updateSectionHeaderTitle(blockId, title)
+    paperDraft.updateSectionHeaderTitle(blockId, title)
   }
 
   function insertSectionHeaderBefore(blockId: string) {
-    paperBlocksHook.insertSectionHeaderBefore(blockId)
+    paperDraft.insertSectionHeaderBefore(blockId)
   }
 
   function insertPageBreakAfter(blockId: string) {
-    paperBlocksHook.insertPageBreakAfter(blockId)
+    paperDraft.insertPageBreakAfter(blockId)
   }
 
   function insertBlockAt(index: number, type: 'section_header' | 'page_break') {
-    paperBlocksHook.insertBlockAt(index, type)
-  }
-
-  function rebuildBlocksFromBasket(items: BasketItem[]) {
-    paperBlocksHook.rebuildFromBasket(items)
+    paperDraft.insertBlockAt(index, type)
   }
 
   function moveBasketItem(id: string, direction: -1 | 1) {
-    setSaveStatus('idle')
-    paperExports.resetExportStatuses()
-    setBasket((items) => {
-      const index = items.findIndex((item) => item.id === id)
-      const nextIndex = index + direction
-      if (index < 0 || nextIndex < 0 || nextIndex >= items.length) return items
-      const nextItems = [...items]
-      const [item] = nextItems.splice(index, 1)
-      nextItems.splice(nextIndex, 0, item)
-      return nextItems
-    })
-    // Sync paperBlocks: find by questionGroupId, not by assumed block id format
-    paperBlocksHook.syncQuestionGroupOrder(id, direction)
+    paperDraft.moveGroup(id, direction)
   }
 
   function updateScore(id: string, score: number) {
-    setSaveStatus('idle')
-    paperExports.resetExportStatuses()
-    setBasket((items) => items.map((item) => (item.id === id ? { ...item, score } : item)))
-    paperBlocksHook.syncQuestionGroupScore(id, score)
+    paperDraft.updateGroupScore(id, score)
   }
 
   function updateBasketItem<K extends 'sectionTitle' | 'note'>(id: string, field: K, value: BasketItem[K]) {
-    setSaveStatus('idle')
-    paperExports.resetExportStatuses()
-    setBasket((items) => items.map((item) => (item.id === id ? { ...item, [field]: value } : item)))
+    paperDraft.updateGroupMeta(id, { [field]: value })
   }
 
   function openImportPanel() {
@@ -1890,13 +1862,7 @@ function App() {
           ? groups.map((group) => (group.id === saved.id ? saved : group))
           : [saved, ...groups.filter((group) => group.id !== saved.id)],
       )
-      setBasket((items) =>
-        items.map((item) =>
-          item.id === saved.id
-            ? createBasketItem(saved, { score: item.score, sectionTitle: item.sectionTitle, note: item.note })
-            : item,
-        ),
-      )
+      paperDraft.patchBasketItemFromSavedGroup(saved)
       setPreviewDetails((current) => {
         const next = { ...current }
         delete next[saved.id]
@@ -2485,8 +2451,7 @@ function App() {
     try {
       await deleteQuestionGroupRequest(id)
       setQuestionGroups((groups) => groups.filter((g) => g.id !== id))
-      setBasket((items) => items.filter((item) => item.id !== id))
-      paperBlocksHook.removeQuestionGroupBlock(id)
+      paperDraft.externalRemoveByGroupId(id)
       await refreshPaperWorkflows()
     } catch {
       // silently ignore
@@ -3014,8 +2979,7 @@ function App() {
         ? await updatePaperSetRequest(existingPaperSet.id, paperSetInput)
         : await savePaperSet(paperSetInput)
 
-      setBasket(nextBasket)
-      rebuildBlocksFromBasket(nextBasket)
+      paperDraft.replaceDraft({ basket: nextBasket })
       setPaperTitle(title)
       setVersionType('student')
       setLastSavedPaper(paperSet)
@@ -3074,13 +3038,10 @@ function App() {
           }),
         )
 
-      setBasket(loadedBasket)
+      paperDraft.replaceDraft({ basket: loadedBasket, layout: paperSet.layout })
       if (paperSet.layout) {
-        paperBlocksHook.setBlocks(paperSet.layout.blocks)
         setQuestionNumberStart(paperSet.layout.questionNumberStart || 1)
         setPaperExportStyle(paperSet.layout.printStyle || 'exam')
-      } else {
-        rebuildBlocksFromBasket(loadedBasket)
       }
       if (paperSet.layoutWarnings && paperSet.layoutWarnings.length > 0) {
         setLoadPaperError(`布局提示：${paperSet.layoutWarnings.join('；')}`)
@@ -5031,8 +4992,8 @@ function App() {
                     questionNumberStart={questionNumberStart}
                     selectedPaperBlockId={selectedPaperBlockId}
                     openInsertionIndex={openInsertionIndex}
-                    onSelectBlock={paperBlocksHook.setSelectedPaperBlockId}
-                    onToggleInsertionSeam={paperBlocksHook.setOpenInsertionIndex}
+                    onSelectBlock={paperDraft.setSelectedPaperBlockId}
+                    onToggleInsertionSeam={paperDraft.setOpenInsertionIndex}
                     onMoveBlock={movePaperBlock}
                     onRemoveBlock={removePaperBlock}
                     onInsertBlockAt={insertBlockAt}

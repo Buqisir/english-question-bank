@@ -287,6 +287,29 @@ async function main() {
   }
   await shot(page, '06-added')
 
+  // ── Step 6.5: open basket drawer and verify draft ↔ paperBlocks sync
+  // Regression guard for the React 19 closure-capture timing bug, where
+  // 加入草稿卷 used to update basket but never grow paperBlocks. We assert
+  // that .basket-item count equals .paper-block-item.question_group count,
+  // and the 题集大纲 summary is no longer "0 块".
+  console.log('\nStep 6.5: draft ↔ paperBlocks sync (basket drawer)')
+  await page.locator('button.basket-chip').first().click()
+  await page.waitForSelector('.basket-panel.basket-panel-drawer.open', { timeout: 5000 }).catch(() => {})
+  await page.waitForFunction(
+    () => Boolean(document.querySelector('.basket-panel .basket-item')),
+    null,
+    { timeout: 5000 },
+  ).catch(() => {})
+  const basketItemCount = await page.locator('.basket-panel .basket-item').count()
+  const blockGroupCount = await page.locator('.basket-panel .paper-block-item.question_group').count()
+  const outlineSummary = (await page.locator('.basket-panel .paper-blocks-outline > summary').textContent()) || ''
+  step('basket drawer has ≥ 1 .basket-item (the just-added group)', basketItemCount >= 1, `got ${basketItemCount}`)
+  step('paper blocks .question_group count matches basket-item count', blockGroupCount === basketItemCount, `basket=${basketItemCount} blocks=${blockGroupCount}`)
+  step('题集大纲 summary is no longer "0 块"', !/0\s*块/.test(outlineSummary), `got: "${outlineSummary.trim()}"`)
+  await shot(page, '065-basket-drawer-sync')
+  // Close the drawer so subsequent steps see the desk again.
+  await page.locator('.basket-drawer-close').first().click().catch(() => {})
+
   // ── Step 7: no banned per-question or preview UI
   console.log('\nStep 7: no per-question / 预览 UI anywhere')
   const expandedPanel = page.locator('.concierge-paper-list > li:first-child .concierge-paper-detail')

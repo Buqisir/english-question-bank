@@ -126,7 +126,21 @@ export function usePaperBlocks(input: UsePaperBlocksInput): UsePaperBlocksResult
       const block = paperBlocks.find((b) => b.id === blockId)
       if (!block) return
       if (block.type === 'question_group') {
-        onRemoveQuestionGroup(block.questionGroupId)
+        // Remove the block(s) first so callers' onRemoveQuestionGroup callbacks
+        // can be basket-only and never leave a stale block. The internal sync
+        // helpers (removeQuestionGroupBlock) are idempotent — if upstream also
+        // calls them, it's a no-op.
+        const targetGroupId = block.questionGroupId
+        const removedIds = paperBlocks
+          .filter((b) => b.type === 'question_group' && b.questionGroupId === targetGroupId)
+          .map((b) => b.id)
+        setPaperBlocks((blocks) =>
+          blocks.filter(
+            (b) => !(b.type === 'question_group' && b.questionGroupId === targetGroupId),
+          ),
+        )
+        setSelectedPaperBlockId((current) => (current && removedIds.includes(current) ? null : current))
+        onRemoveQuestionGroup(targetGroupId)
       } else {
         setPaperBlocks((blocks) => blocks.filter((b) => b.id !== blockId))
         setSelectedPaperBlockId((current) => (current === blockId ? null : current))
