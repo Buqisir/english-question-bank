@@ -5,7 +5,7 @@
  * Asserts (against the live dev stack on http://localhost:5173):
  *   1. Search "广东一模 阅读" returns at least one paper-level row.
  *   2. No row leaks internal slugs.
- *   3. Paper-level row shows 命中 N 组 (no 共 N 组), and a 展开题组 button.
+ *   3. Paper-level row shows 命中 N 个篇章 (no 共 N 组), and a 展开题组 button.
  *   4. Clicking the row body expands it; only one paper row expanded at a time.
  *   5. Inside expanded paper, group cards expose 加入草稿卷 + 找类似.
  *   6. Clicking 加入草稿卷 flips that group card to 已加入 (and disables it).
@@ -192,10 +192,15 @@ async function main() {
     step(`no leak of ${pattern}`, !leaked, leaked ? `matched: ${visibleText.match(pattern)?.[0]}` : '')
   }
 
-  // ── Step 3: paper-level wording: 命中 N 组 + 展开题组 button
+  // ── Step 3: paper-level wording: 命中 N 个篇章 + 展开题组 button
+  //
+  // Cut 6 changed the badge from "命中 N 组" to scope-aware wording —
+  // V1 always emits 'passage' scope, so the visible string today is
+  // "命中 N 个篇章". We still guard against the legacy "共 N 组" template,
+  // since that one was never the contract.
   console.log('\nStep 3: paper-level wording')
   const firstPaper = page.locator('.concierge-paper-list > li').first()
-  step('paper row shows 命中 N 组', /命中\s*\d+\s*组/.test(await firstPaper.innerText()))
+  step('paper row shows 命中 N 个篇章', /命中\s*\d+\s*个篇章/.test(await firstPaper.innerText()))
   step('paper row does NOT say 共 N 组', !/共\s*\d+\s*组/.test(await firstPaper.innerText()))
   step('paper row has 展开题组 button (or 收起 if auto-expanded)',
     await firstPaper.locator('button.concierge-action', { hasText: /展开题组|收起/ }).first().isVisible().catch(() => false))

@@ -6226,6 +6226,17 @@ button:disabled {
   background: linear-gradient(0deg, rgba(214, 154, 71, 0.06), rgba(214, 154, 71, 0.06)), #FFFDF8;
   border-color: rgba(214, 154, 71, 0.35);
 }
+/*
+ * The 2px warm-amber rule below is positioned via `::before { position:
+ * absolute }`, which requires a non-static positioning context. That
+ * context comes from the `position: relative` on the rule above, NOT
+ * from `.concierge-group-card-li` (the <li> stays as a default grid
+ * item — see note above). If `.concierge-group-card`'s `position:
+ * relative` is removed in a future refactor, the rule will jump to the
+ * nearest positioned ancestor (likely the `<article class="concierge-
+ * paper-row">`) and the highlight will visually break. Keep them
+ * paired.
+ */
 .concierge-group-card-li.is-hit > .concierge-group-card::before {
   content: '';
   position: absolute;
