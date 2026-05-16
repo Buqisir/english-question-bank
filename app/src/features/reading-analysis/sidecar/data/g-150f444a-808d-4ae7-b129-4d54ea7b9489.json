@@ -1,0 +1,24 @@
+{
+  "groupId": "g-150f444a-808d-4ae7-b129-4d54ea7b9489",
+  "_note": "2023 浙江卷（1月）阅读 A — Explorers Camp. Sample case: normal-hit + partial-quote.",
+  "_case": "normal-hit",
+  "entries": [
+    {
+      "questionNo": "1",
+      "kind": "evidence",
+      "quote": "The last day to cancel registration and receive a full refund （退款） is June 15."
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "A",
+      "kind": "evidence",
+      "quote": "is June 15"
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "B",
+      "kind": "trap",
+      "quote": "Fees: $365 per week"
+    }
+  ]
+}

@@ -38,6 +38,26 @@ export type ReadingAnalysisSidecar = {
   entries: ReadingAnnotationSidecarEntry[]
 }
 
+/**
+ * Per-entry observation emitted alongside a successful selector run. The
+ * report tooling uses this to summarize quote coverage on real groups; the
+ * UI is unaffected.
+ */
+export type ReadingAnalysisQuoteDiagnostic = {
+  groupId: string
+  questionNo: string
+  optionLabel?: 'A' | 'B' | 'C' | 'D'
+  kind: 'evidence' | 'trap'
+  quote: string
+  status: 'hit' | 'miss'
+  /**
+   * Why a miss happened, or — for hits — a coexistence note. Reasons are a
+   * bounded vocabulary picked specifically so a markdown report can group
+   * them; selector matching semantics are unchanged.
+   */
+  reason?: 'not_found' | 'cross_sentence' | 'multiple_matches' | 'same_sentence_multi'
+}
+
 export type SelectReadingAnalysisInput = {
   detail: QuestionGroupDetail
   sidecar?: ReadingAnalysisSidecar
@@ -55,6 +75,7 @@ export type SelectReadingAnalysisResult =
       ok: true
       fixture: ReadingAnalysisFixture
       warnings: string[]
+      quoteDiagnostics: ReadingAnalysisQuoteDiagnostic[]
     }
   | {
       ok: false
@@ -106,6 +127,7 @@ export function selectReadingAnalysisFromDetail(
   const warnings: string[] = []
   const annotations: ReadingAnnotation[] = []
   const links: EvidenceLink[] = []
+  const quoteDiagnostics: ReadingAnalysisQuoteDiagnostic[] = []
 
   const targetNoNormalized = normalizeQuestionNo(target.questionNo)
   const sidecarEntries = (sidecar?.entries ?? []).filter(
@@ -115,6 +137,9 @@ export function selectReadingAnalysisFromDetail(
   // Track annotations by sentenceId+kind so we can record the "same sentence
   // is both evidence and trap" warning the spec asks for.
   const sentenceKindIndex = new Map<string, Set<'evidence' | 'trap'>>()
+  // Track annotation count per sentence so the diagnostics can mark the
+  // 'same_sentence_multi' coexistence reason on hits.
+  const sentenceAnnCount = new Map<string, number>()
 
   for (let i = 0; i < sidecarEntries.length; i++) {
     const entry = sidecarEntries[i]
@@ -123,6 +148,15 @@ export function selectReadingAnalysisFromDetail(
       warnings.push(
         `quote-miss: question ${entry.questionNo}${entry.optionLabel ? ` option ${entry.optionLabel}` : ''}: 未在原文单句内找到引文 "${truncateQuote(entry.quote)}"`,
       )
+      quoteDiagnostics.push({
+        groupId: detail.id,
+        questionNo: entry.questionNo,
+        optionLabel: entry.optionLabel,
+        kind: entry.kind,
+        quote: entry.quote,
+        status: 'miss',
+        reason: classifyMissReason(passage, entry.quote),
+      })
       continue
     }
 
@@ -148,6 +182,20 @@ export function selectReadingAnalysisFromDetail(
         `same-sentence-evidence-and-trap: sentence ${located.sentenceId} 同时被标为 evidence + trap`,
       )
     }
+    const prevCount = sentenceAnnCount.get(located.sentenceId) ?? 0
+    sentenceAnnCount.set(located.sentenceId, prevCount + 1)
+
+    quoteDiagnostics.push({
+      groupId: detail.id,
+      questionNo: entry.questionNo,
+      optionLabel: entry.optionLabel,
+      kind: entry.kind,
+      quote: entry.quote,
+      status: 'hit',
+      // Coexistence note. The reason is *informational* on hits — it does not
+      // signal that this entry was rejected.
+      reason: prevCount + 1 > 1 ? 'same_sentence_multi' : undefined,
+    })
 
     const link: EvidenceLink = {
       id: `link-${i + 1}`,
@@ -164,6 +212,7 @@ export function selectReadingAnalysisFromDetail(
     ok: true,
     fixture: { passage, annotations, question, links },
     warnings,
+    quoteDiagnostics,
   }
 }
 
@@ -350,6 +399,51 @@ export function normalizeQuote(value: string): string {
     .replace(/[\u00A0\u3000\s]+/g, ' ')
     .trim()
     .toLowerCase()
+}
+
+/**
+ * Classify a quote miss into a coarse, fixed vocabulary so the report can
+ * group failures. This is observation-only — selector matching is unchanged.
+ *
+ *   - cross_sentence : the quote contains an internal sentence terminator,
+ *                       suggesting it was authored across two sentences
+ *                       (e.g. "...refund. The last day...")
+ *   - multiple_matches: the leading half of the quote appears in 2+ sentences
+ *                       and is therefore ambiguous to a single-sentence
+ *                       includes() match
+ *   - not_found       : default — the quote simply isn't there
+ */
+function classifyMissReason(
+  passage: Passage,
+  quote: string,
+): 'not_found' | 'cross_sentence' | 'multiple_matches' {
+  const trimmed = normalizeQuote(quote)
+  if (!trimmed) return 'not_found'
+
+  // Cross-sentence: any terminator that has at least one alphabetic/CJK char
+  // before AND after counts. Catches "...refund. The last day..." but not
+  // trailing "... refund." (single-sentence quote with terminal punctuation).
+  if (/[A-Za-z\u4e00-\u9fff][.!?。！？]\s+[A-Za-z\u4e00-\u9fff]/.test(trimmed)) {
+    return 'cross_sentence'
+  }
+
+  // Multiple matches: take the first ~30 normalized chars of the quote and
+  // see if they appear in 2+ distinct sentences. Empty/short quotes skip.
+  const probe = trimmed.slice(0, 30)
+  if (probe.length >= 8) {
+    let sentenceMatches = 0
+    for (const para of passage.paragraphs) {
+      for (const s of para.sentences) {
+        const hay = normalizeQuote(s.text)
+        if (hay.includes(probe)) {
+          sentenceMatches++
+          if (sentenceMatches > 1) return 'multiple_matches'
+        }
+      }
+    }
+  }
+
+  return 'not_found'
 }
 
 function truncateQuote(value: string, max = 40): string {

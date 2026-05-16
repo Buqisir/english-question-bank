@@ -17,39 +17,37 @@
  *               9. scrolling the passage scroller mutates path's `d` attribute
  *              10. clicking empty space removes the path
  *
- *   --real:   opens `?demo=reading-analysis&groupId=$READING_ANALYSIS_REAL_GROUP_ID`
- *             (defaults to the curated 2023 浙江卷 阅读理解 B fixture below).
- *             Locks the smaller "real data didn't crash" surface:
+ *   --real:   iterates `app/src/features/reading-analysis/sidecar/index.json`
+ *             and for EACH listed group opens
+ *               `?demo=reading-analysis&groupId=<id>&questionNo=<no>`
+ *             then asserts the smaller "real data didn't crash" surface:
  *              R1. demo opens
  *              R2. source-note shows 真实数据
  *              R3. real passage title is rendered (not 'When a Phone Box…')
  *              R4. question stem is non-empty
- *              R5. if any .ra-highlight-evidence exists, clicking the stem
- *                  still draws an svg path[data-link-id]
- *              R6. if no annotations, page still has 4 .ra-option items and
- *                  no path is drawn — but doesn't blow up
+ *              R5. annotation counts read without crashing
+ *              R6. if any .ra-highlight-evidence exists, clicking the stem
+ *                  may draw an svg path[data-link-id] (not required —
+ *                  cross_sentence samples are expected to miss).
  *
  * Screenshots → reports/artifacts/smoke-reading-analysis/
  */
 
 import { chromium } from '../app/node_modules/playwright/index.mjs'
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 const APP_URL = process.env.APP_URL || 'http://localhost:5173'
 const REAL_MODE = process.argv.includes('--real')
-const REAL_GROUP_ID =
-  process.env.READING_ANALYSIS_REAL_GROUP_ID ||
-  'g-9b30c735-6824-4897-a938-6d5c42bee39a'
-const REAL_QUESTION_NO = process.env.READING_ANALYSIS_REAL_QUESTION_NO || '1'
-
-const baseUrl = `${APP_URL.replace(/\/$/, '')}/?demo=reading-analysis`
-const DEMO_URL = REAL_MODE
-  ? `${baseUrl}&groupId=${encodeURIComponent(REAL_GROUP_ID)}&questionNo=${encodeURIComponent(REAL_QUESTION_NO)}`
-  : baseUrl
+const HERE = path.dirname(new URL(import.meta.url).pathname)
+const SIDECAR_INDEX = path.resolve(
+  HERE,
+  '..',
+  'app/src/features/reading-analysis/sidecar/index.json',
+)
 
 const ARTIFACT_DIR = path.resolve(
-  path.dirname(new URL(import.meta.url).pathname),
+  HERE,
   '..',
   'reports',
   'artifacts',
@@ -72,19 +70,34 @@ async function shot(page, label) {
 }
 
 console.log(`=== Reading Analysis demo smoke (${REAL_MODE ? 'real' : 'fixture'}) ===`)
-console.log(`Loading ${DEMO_URL}…`)
 
 const browser = await chromium.launch({ headless: true })
 const context = await browser.newContext({ viewport: { width: 1280, height: 900 } })
 const page = await context.newPage()
 
 try {
-  await page.goto(DEMO_URL, { waitUntil: 'domcontentloaded', timeout: 30000 })
-
   if (!REAL_MODE) {
+    const fixtureUrl = `${APP_URL.replace(/\/$/, '')}/?demo=reading-analysis`
+    console.log(`Loading ${fixtureUrl}…`)
+    await page.goto(fixtureUrl, { waitUntil: 'domcontentloaded', timeout: 30000 })
     await runFixtureSmoke(page)
   } else {
-    await runRealSmoke(page)
+    const manifest = JSON.parse(readFileSync(SIDECAR_INDEX, 'utf8'))
+    const samples = Array.isArray(manifest.samples) ? manifest.samples : []
+    if (samples.length === 0) {
+      throw new Error('sidecar index.json has no samples')
+    }
+    console.log(`Iterating ${samples.length} sidecar sample(s) from index.json`)
+    for (const sample of samples) {
+      const url =
+        `${APP_URL.replace(/\/$/, '')}/?demo=reading-analysis` +
+        `&groupId=${encodeURIComponent(sample.groupId)}` +
+        `&questionNo=${encodeURIComponent(sample.questionNo || '1')}`
+      console.log(`\n── ${sample.case} · ${sample.groupId} ──`)
+      console.log(`   ${url}`)
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
+      await runRealSmoke(page, sample)
+    }
   }
 } catch (err) {
   failed++
@@ -216,10 +229,9 @@ async function runFixtureSmoke(page) {
   await shot(page, '06-cleared')
 }
 
-async function runRealSmoke(page) {
+async function runRealSmoke(page, sample) {
+  const tag = `${sample.case}-${sample.groupId.slice(0, 16)}`
   // ── R1 ────────────────────────────────────────────────────────────────
-  console.log('\nReal Step 1: demo opens with real groupId')
-  // Source note starts as "正在加载…"; wait for either the real or fallback note.
   await page.waitForSelector('.reading-analysis-view', { timeout: 10000 })
   await page.waitForFunction(
     () => {
@@ -230,51 +242,58 @@ async function runRealSmoke(page) {
     },
     { timeout: 15000 },
   )
-  step('.reading-analysis-view present', true)
+  step(`[${tag}] .reading-analysis-view present`, true)
 
   // ── R2 ────────────────────────────────────────────────────────────────
-  console.log('\nReal Step 2: source note resolves to 真实数据')
   const note = (await page.locator('[data-ra-source-note]').textContent()) || ''
-  step('source note contains 真实数据 (real data path succeeded)', /真实数据/.test(note), `got "${note}"`)
-  await shot(page, 'real-01-loaded')
+  step(`[${tag}] source note contains 真实数据`, /真实数据/.test(note), `got "${note}"`)
+  await shot(page, `real-${tag}-loaded`)
 
   // ── R3 ────────────────────────────────────────────────────────────────
-  console.log('\nReal Step 3: real passage title is rendered')
   const passageTitle = (await page.locator('.ra-passage-title').textContent()) || ''
-  step('real passage title is non-empty + not the fixture title', passageTitle.trim().length > 0 && !/Phone Box Becomes a Library/.test(passageTitle),
-    `got "${passageTitle}"`)
+  step(
+    `[${tag}] real passage title is non-empty + not the fixture title`,
+    passageTitle.trim().length > 0 && !/Phone Box Becomes a Library/.test(passageTitle),
+    `got "${passageTitle}"`,
+  )
 
   // ── R4 ────────────────────────────────────────────────────────────────
-  console.log('\nReal Step 4: question stem is non-empty')
   const stem = (await page.locator('.ra-question-stem-text').textContent()) || ''
-  step('question stem is non-empty', stem.trim().length > 0, `got "${stem}"`)
+  step(`[${tag}] question stem is non-empty`, stem.trim().length > 0, `got "${stem}"`)
 
   // ── R5 / R6 ───────────────────────────────────────────────────────────
-  console.log('\nReal Step 5/6: optional path on stem click')
   const evidenceCount = await page.locator('.ra-highlight-evidence').count()
   const trapCount = await page.locator('.ra-highlight-trap').count()
-  step('annotation counts read without crash', Number.isFinite(evidenceCount) && Number.isFinite(trapCount),
-    `evidence=${evidenceCount} trap=${trapCount}`)
+  step(
+    `[${tag}] annotation counts read without crash`,
+    Number.isFinite(evidenceCount) && Number.isFinite(trapCount),
+    `evidence=${evidenceCount} trap=${trapCount}`,
+  )
 
   if (evidenceCount > 0) {
     await page.locator('.ra-question-stem').first().click()
-    // Path may or may not appear (depends on whether stem-only entry exists).
-    // Wait briefly; either outcome is acceptable.
     try {
       await page.waitForSelector('svg.ra-link-overlay path[data-link-id]', { timeout: 2500 })
       const real = await activePath(page)
-      step('stem click drew a path with kind ∈ {support, trap}',
+      step(
+        `[${tag}] stem click drew a path with kind ∈ {support, trap}`,
         real !== null && (real.kind === 'support' || real.kind === 'trap'),
-        JSON.stringify(real))
+        JSON.stringify(real),
+      )
     } catch {
-      step('stem click did NOT draw a path (no stem-only sidecar entry — acceptable)', true)
+      // For cross_sentence samples we explicitly accept "no path drawn".
+      const acceptable = sample.case === 'cross-sentence'
+      step(
+        `[${tag}] stem click did NOT draw a path (acceptable for ${sample.case})`,
+        acceptable,
+        `case=${sample.case}`,
+      )
     }
   } else {
-    // No annotations available — page must still show 4 options without blowing up.
     const optionCount = await page.locator('.ra-option').count()
-    step('with zero annotations, 4 options still render', optionCount === 4, `got ${optionCount}`)
+    step(`[${tag}] with zero annotations, 4 options still render`, optionCount === 4, `got ${optionCount}`)
   }
-  await shot(page, 'real-02-final')
+  await shot(page, `real-${tag}-final`)
 }
 
 async function pathLandsOn(page, highlightSelector) {

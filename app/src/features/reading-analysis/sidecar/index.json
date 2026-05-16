@@ -1,0 +1,40 @@
+{
+  "_note": "Reading Analysis sidecar manifest. Each entry must point at an existing data/<groupId>.json file. The report script (scripts/reading-analysis-report.mjs) and the real-mode smoke iterate this list.",
+  "samples": [
+    {
+      "groupId": "g-9b30c735-6824-4897-a938-6d5c42bee39a",
+      "questionNo": "1",
+      "case": "normal-hit",
+      "title": "2023 浙江卷（1月）阅读 B — jump on that bandwagon",
+      "expect": "all entries should hit; selector reports them as evidence/trap on a single sentence each."
+    },
+    {
+      "groupId": "g-150f444a-808d-4ae7-b129-4d54ea7b9489",
+      "questionNo": "1",
+      "case": "normal-hit",
+      "title": "2023 浙江卷（1月）阅读 A — Explorers Camp",
+      "expect": "full-sentence and short substring quotes both hit cleanly."
+    },
+    {
+      "groupId": "g-d948a878-d4cb-46b8-938f-ff5adb78add9",
+      "questionNo": "1",
+      "case": "cross-sentence",
+      "title": "2023 浙江卷（1月）阅读 C — Project Debater",
+      "expect": "the stem evidence quote spans two sentences; current single-sentence selector should classify it as cross_sentence miss."
+    },
+    {
+      "groupId": "g-f99df5e8-5d1c-4193-8ed9-a53b7273cfa5",
+      "questionNo": "1",
+      "case": "partial-quote",
+      "title": "2023 浙江卷（1月）阅读 D — Solar farms",
+      "expect": "quotes are mid-sentence substrings; should hit via includes()."
+    },
+    {
+      "groupId": "g-775ad76c-8382-4acc-be18-7282f8555a38",
+      "questionNo": "1",
+      "case": "same-sentence-multi",
+      "title": "2021 新课标Ⅰ卷 阅读 B — Page Turner",
+      "expect": "stem evidence + wrong-option trap both land on the same sentence; selector keeps both with a warning + same_sentence_multi diagnostic."
+    }
+  ]
+}

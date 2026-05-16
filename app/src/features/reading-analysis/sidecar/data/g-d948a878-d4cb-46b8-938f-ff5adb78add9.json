@@ -1,0 +1,18 @@
+{
+  "groupId": "g-d948a878-d4cb-46b8-938f-ff5adb78add9",
+  "_note": "2023 浙江卷（1月）阅读 C — Project Debater. Sample case: cross-sentence evidence (expected to miss).",
+  "_case": "cross-sentence",
+  "entries": [
+    {
+      "questionNo": "1",
+      "kind": "evidence",
+      "quote": "a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion. Brilliant though it is, Project Debater has some weaknesses."
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "B",
+      "kind": "evidence",
+      "quote": "a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion"
+    }
+  ]
+}

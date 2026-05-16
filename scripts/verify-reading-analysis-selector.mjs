@@ -157,6 +157,12 @@ console.log('\nTest 1: groupId + sidecar full-hit → ok=true, anns + links wire
       r.fixture.annotations.some((a) => a.id === link.toAnnotationId), '')
   }
   assert('warnings empty for full-hit', r.warnings.length === 0, JSON.stringify(r.warnings))
+  // Quote diagnostics: every entry recorded, both as `hit`, no reason needed.
+  assert('quoteDiagnostics length = 2', r.quoteDiagnostics.length === 2, `got ${r.quoteDiagnostics.length}`)
+  assert('every diagnostic status=hit', r.quoteDiagnostics.every((d) => d.status === 'hit'),
+    JSON.stringify(r.quoteDiagnostics.map((d) => d.status)))
+  assert('hit diagnostics carry no reason on distinct sentences',
+    r.quoteDiagnostics.every((d) => d.reason === undefined), JSON.stringify(r.quoteDiagnostics))
 }
 
 // ── Test 2: quote miss ───────────────────────────────────────────────────
@@ -185,6 +191,19 @@ console.log('\nTest 2: sidecar quote not present → entry dropped + warning')
   assert('only the matched entry → 1 annotation', r.fixture.annotations.length === 1, `got ${r.fixture.annotations.length}`)
   assert('only the matched entry → 1 link', r.fixture.links.length === 1, `got ${r.fixture.links.length}`)
   assert('warnings include quote-miss', r.warnings.some((w) => w.startsWith('quote-miss')), JSON.stringify(r.warnings))
+  // Diagnostics: both entries recorded — one miss, one hit.
+  assert('quoteDiagnostics length = 2', r.quoteDiagnostics.length === 2, `got ${r.quoteDiagnostics.length}`)
+  const missDiag = r.quoteDiagnostics.find((d) => d.status === 'miss')
+  const hitDiag = r.quoteDiagnostics.find((d) => d.status === 'hit')
+  assert('miss diagnostic recorded', !!missDiag, '')
+  assert('miss reason is one of the bounded vocabulary',
+    missDiag && ['not_found', 'cross_sentence', 'multiple_matches'].includes(missDiag.reason),
+    `got reason=${missDiag?.reason}`)
+  assert('miss diagnostic carries quote', missDiag?.quote.includes('does not appear'), `got: ${missDiag?.quote}`)
+  assert('miss diagnostic carries questionNo + kind',
+    missDiag?.questionNo === '1' && missDiag?.kind === 'evidence',
+    JSON.stringify(missDiag))
+  assert('hit diagnostic recorded', !!hitDiag, '')
 }
 
 // ── Test 3: questionNo not found ─────────────────────────────────────────
@@ -276,6 +295,12 @@ console.log('\nTest 8: same sentence both evidence + trap → both kept + warnin
     r.warnings.some((w) => w.startsWith('same-sentence-evidence-and-trap')),
     JSON.stringify(r.warnings))
   assert('links length = 2', r.fixture.links.length === 2, '')
+  // Diagnostics: both hits, the second one tagged same_sentence_multi.
+  assert('all diagnostics status=hit', r.quoteDiagnostics.every((d) => d.status === 'hit'),
+    JSON.stringify(r.quoteDiagnostics))
+  assert('second hit diagnostic reason=same_sentence_multi',
+    r.quoteDiagnostics[1]?.reason === 'same_sentence_multi',
+    JSON.stringify(r.quoteDiagnostics))
 }
 
 // ── Test 9: questionNo=2 selects the second question ─────────────────────
@@ -330,6 +355,43 @@ console.log('\nTest 11: passage title falls back through detail.passage.title �
   assert('ok=true', r.ok === true, '')
   if (!r.ok) throw new Error('test 11 failed')
   assert('falls back to detail.title', r.fixture.passage.title === 'GroupTitleOnly', `got: ${r.fixture.passage.title}`)
+}
+
+// ── Test 12: quote diagnostic miss reasons ───────────────────────────────
+console.log('\nTest 12: quote miss reason classification (cross_sentence vs not_found)')
+{
+  const detail = makeDetail()
+  const sidecar = {
+    entries: [
+      // Cross-sentence quote: contains an internal terminator+space+letter.
+      {
+        groupId: 'g-test',
+        questionNo: '1',
+        kind: 'evidence',
+        quote: 'first sentence introduces the topic. The second sentence develops the idea',
+      },
+      // Truly absent quote.
+      {
+        groupId: 'g-test',
+        questionNo: '1',
+        kind: 'evidence',
+        quote: 'this phrase is nowhere in the text',
+      },
+    ],
+  }
+  const r = selectReadingAnalysisFromDetail({ detail, sidecar })
+  assert('ok=true', r.ok === true, '')
+  if (!r.ok) throw new Error('test 12 failed')
+  assert('quoteDiagnostics length = 2', r.quoteDiagnostics.length === 2, `got ${r.quoteDiagnostics.length}`)
+  assert('all diagnostics status=miss', r.quoteDiagnostics.every((d) => d.status === 'miss'),
+    JSON.stringify(r.quoteDiagnostics))
+  const reasons = r.quoteDiagnostics.map((d) => d.reason)
+  assert('cross_sentence reason emitted for terminator-containing quote',
+    reasons.includes('cross_sentence'), JSON.stringify(reasons))
+  assert('not_found reason emitted for absent quote',
+    reasons.includes('not_found'), JSON.stringify(reasons))
+  assert('groupId on diagnostics matches detail.id',
+    r.quoteDiagnostics.every((d) => d.groupId === detail.id), '')
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
