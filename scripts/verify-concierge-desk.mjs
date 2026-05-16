@@ -419,8 +419,12 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Paper row article uses concierge-paper-row class', /<article[\s\S]{0,200}className=\{`concierge-paper-row\$\{expanded \? ' is-expanded' : ''\}`\}/.test(paperRowSource), '')
   assert('Paper row click guards interactive children', /target\.closest\('button, a, input, textarea, select, \[role="button"\], \.concierge-paper-detail'\)/.test(paperRowSource), '')
   assert('Paper row chevron toggles via onTogglePaper(paper.key)', /onClick=\{\(\)\s*=>\s*onTogglePaper\(paper\.key\)\}/.test(paperRowSource), '')
-  assert('Paper row uses 命中 N 组 wording (not 共 N 组)', /命中\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
+  assert('Paper row uses 命中 N 个篇章 wording (Cut 6)', /['"]命中\s*['"]/.test(paperRowSource) && /['"]\s*个篇章['"]/.test(paperRowSource) && /paper\.hitCount/.test(paperRowSource), '')
   assert('Paper row does NOT say 共 N 组', !/共\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
+  assert('Paper row does NOT use the old "命中 N 组" template (Cut 6 dropped it)', !/命中\s*\{paper\.hitCount\}\s*组(?!\w)/.test(paperRowSource), '')
+  assert('Paper row reads paper.hitContext.scope for badge wording', /paper\.hitContext\.scope/.test(paperRowSource), '')
+  assert('Paper row scrolls primary hit into view on expand', /scrollIntoView\(\{\s*behavior:\s*['"]smooth['"]\s*,\s*block:\s*['"]nearest['"]\s*\}\)/.test(paperRowSource), '')
+  assert('Paper row tags hit <li> with data-hit', /data-hit=\{isHit\s*\?\s*['"]true['"]\s*:\s*undefined\}/.test(paperRowSource), '')
   assert('Paper row does NOT call fetchQuestionGroupDetail', !/fetchQuestionGroupDetail/.test(paperRowSource), '')
 
   // 9.8 ConciergeGroupCard contract — group-level actions live here.
@@ -440,6 +444,12 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('FALLBACK_KEY is a stable constant', /const FALLBACK_KEY = ['"]paper:_其他来源_['"]/.test(aggSource), '')
   assert('Aggregator sanitizes reasons via cleanReason', /cleanReason\(reason\)/.test(aggSource), '')
   assert('Aggregator surfaces representativeReason from first hit', /representativeReason:\s*cleanReason\(reason\)/.test(aggSource), '')
+  // Cut 6 — paper hit context surface.
+  assert('PaperHitContext type exported (Cut 6)', /export type PaperHitContext\s*=/.test(aggSource), '')
+  assert('PaperHitScope type exported (Cut 6)', /export type PaperHitScope\s*=\s*['"]passage['"]\s*\|\s*['"]paper['"]\s*\|\s*['"]mixed['"]/.test(aggSource), '')
+  assert('PaperResult carries hitContext (Cut 6)', /hitContext:\s*PaperHitContext/.test(aggSource), '')
+  assert('Aggregator initialises hitContext.scope = passage (V1)', /scope:\s*['"]passage['"]/.test(aggSource), '')
+  assert('Aggregator does NOT inspect reason text to decide scope', !/reason\.includes|reason\.match|reason\.indexOf|reason\.test/.test(aggSource), '')
 
   // 9.10 Hook togglePaper does NOT fetch group detail.
   // Strip comments before the check (comments mention previewDetails legitimately).
@@ -528,6 +538,17 @@ console.log('\nTest 11: aggregatePaperResults — bucket key + 命中 + fallback
   assert('representativeReason picks the first hit reason', zhejiang.representativeReason.includes('主题接近'), `got: ${zhejiang.representativeReason}`)
   assert('per-group reason sanitized too', zhejiang.groups[0].reason && !/DeepSeek/.test(zhejiang.groups[0].reason), '')
   assert('groupTypes list collected (reading)', zhejiang.groupTypes.includes('reading'), '')
+
+  // Cut 6 — hitContext surface.
+  assert('zhejiang.hitContext is present', !!zhejiang.hitContext, '')
+  assert('zhejiang.hitContext.scope === "passage" (V1 only emits passage hits)', zhejiang.hitContext.scope === 'passage', `got: ${zhejiang.hitContext?.scope}`)
+  assert('zhejiang.hitContext.hitGroupIds matches groups order', JSON.stringify(zhejiang.hitContext.hitGroupIds) === JSON.stringify(zhejiang.groups.map((g) => g.group.id)), `got: ${JSON.stringify(zhejiang.hitContext.hitGroupIds)}`)
+  assert('zhejiang.hitContext.primaryGroupId is the first hit', zhejiang.hitContext.primaryGroupId === zhejiang.groups[0].group.id, `got: ${zhejiang.hitContext.primaryGroupId}`)
+  assert('zhejiang.hitContext.passageHits length matches hits', zhejiang.hitContext.passageHits.length === zhejiang.hitCount, `got: ${zhejiang.hitContext.passageHits.length}`)
+  assert('zhejiang.hitContext.passageHits sanitized reasons', zhejiang.hitContext.passageHits.every((p) => !/DeepSeek/.test(p.reason)), '')
+  assert('zhejiang.hitContext.displayReason aligns with representativeReason', zhejiang.hitContext.displayReason === zhejiang.representativeReason, `disp=${zhejiang.hitContext.displayReason} rep=${zhejiang.representativeReason}`)
+  assert('beijing single-hit primaryGroupId equals its only group', beijing.hitContext.primaryGroupId === beijing.groups[0].group.id, `got: ${beijing.hitContext.primaryGroupId}`)
+  assert('fallback bucket also has a hitContext', !!fallback.hitContext && fallback.hitContext.scope === 'passage', '')
 
   // Different source signature splits otherwise-identical bucket.
   const split = [

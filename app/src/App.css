@@ -6204,6 +6204,50 @@ button:disabled {
   gap: 10px;
 }
 
+/*
+ * Cut 6 — search-hit highlight on inner passage cards.
+ *
+ * `<li class="concierge-group-card-li is-hit" data-hit="true">` marks the
+ * passage cards (Question Group cards) that the source-paper bucket actually
+ * hit. The visual is intentionally restrained — a 2px warm-amber left rule
+ * plus a barely-perceptible cream-amber tint — so it never competes with
+ * the "已加入草稿卷" disabled state on the primary action button.
+ *
+ * `data-primary-hit="true"` is the single passage the row scrolled into
+ * view on expand; we leave it visually identical to other hits for now
+ * (the scroll itself is the primary-hit affordance).
+ *
+ * NOTE: the `<li>` itself stays as a default grid item — the grid columns
+ * on `.concierge-group-card-list` rely on each `<li>` taking one cell.
+ * Hit visuals live on the inner `.concierge-group-card`.
+ */
+.concierge-group-card-li.is-hit > .concierge-group-card {
+  position: relative;
+  background: linear-gradient(0deg, rgba(214, 154, 71, 0.06), rgba(214, 154, 71, 0.06)), #FFFDF8;
+  border-color: rgba(214, 154, 71, 0.35);
+}
+/*
+ * The 2px warm-amber rule below is positioned via `::before { position:
+ * absolute }`, which requires a non-static positioning context. That
+ * context comes from the `position: relative` on the rule above, NOT
+ * from `.concierge-group-card-li` (the <li> stays as a default grid
+ * item — see note above). If `.concierge-group-card`'s `position:
+ * relative` is removed in a future refactor, the rule will jump to the
+ * nearest positioned ancestor (likely the `<article class="concierge-
+ * paper-row">`) and the highlight will visually break. Keep them
+ * paired.
+ */
+.concierge-group-card-li.is-hit > .concierge-group-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: #B8732E;
+}
+
 .concierge-group-card {
   background: #FFFDF8;
   border: 1px solid #E5E3DC;
