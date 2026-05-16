@@ -1,0 +1,34 @@
+{
+  "groupId": "g-9b30c735-6824-4897-a938-6d5c42bee39a",
+  "_note": "Hand-curated PoC sidecar for 2023 浙江卷 阅读理解 B (jump on that bandwagon).",
+  "entries": [
+    {
+      "questionNo": "1",
+      "kind": "evidence",
+      "quote": "not everyone around you will be ready to jump on that bandwagon"
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "B",
+      "kind": "evidence",
+      "quote": "not everyone around you will be ready to jump on that bandwagon"
+    },
+    {
+      "questionNo": "1",
+      "optionLabel": "A",
+      "kind": "trap",
+      "quote": "I was living with my parents"
+    },
+    {
+      "questionNo": "2",
+      "kind": "evidence",
+      "quote": "my dad commented on how silly it was for me to carry jars everywhere"
+    },
+    {
+      "questionNo": "2",
+      "optionLabel": "A",
+      "kind": "evidence",
+      "quote": "my dad commented on how silly it was for me to carry jars everywhere"
+    }
+  ]
+}

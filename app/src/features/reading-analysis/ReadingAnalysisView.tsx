@@ -1,34 +1,44 @@
 /**
- * ReadingAnalysisView — V0 PoC for the "题目 ↔ 原文证据虚线" loop.
+ * ReadingAnalysisView — pure render layer for the V0 PoC.
+ *
+ * No fetching, no URL reading, no fixture decisions live here. The demo
+ * route (or anything else later) chooses a `ReadingAnalysisFixture` and
+ * passes it in.
  *
  * Layout:
  *   ┌──────────────────────────────────────────────────────┐
  *   │ PassageCanvas              │ QuestionPanel           │
  *   │ (left, scrollable)         │ (right, sticky)         │
  *   └──────────────────────────────────────────────────────┘
- *   The whole view is the LinkOverlay's coordinate root.
  *
- * Click the stem → support line to evidence.
- * Click the correct option → support line to evidence.
- * Click a wrong option → trap line to a trap span.
+ * Click stem → support line to evidence.
+ * Click correct option → support line to evidence.
+ * Click wrong option → trap line to a trap span.
  * Click empty space → clear.
- *
- * Hardcoded fixture, no backend, no `QuestionGroupDetail` integration.
  */
 
 import { useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import { PassageCanvas } from './PassageCanvas.tsx'
 import { QuestionPanel } from './QuestionPanel.tsx'
 import { LinkOverlay } from './LinkOverlay.tsx'
-import { READING_ANALYSIS_FIXTURE } from './readingAnalysisFixture.ts'
-import type { ActiveSelection } from './readingAnalysisTypes.ts'
+import type {
+  ActiveSelection,
+  ReadingAnalysisFixture,
+} from './readingAnalysisTypes.ts'
 import './readingAnalysis.css'
 
-export function ReadingAnalysisView(): ReactNode {
+export type ReadingAnalysisViewProps = {
+  fixture: ReadingAnalysisFixture
+  /** Small one-line note shown in the header — e.g. "示例数据" / "真实数据：…". */
+  sourceNote?: string
+}
+
+export function ReadingAnalysisView(props: ReadingAnalysisViewProps): ReactNode {
+  const { fixture, sourceNote } = props
+  const { passage, annotations, question, links } = fixture
   const [selection, setSelection] = useState<ActiveSelection>({ kind: 'none' })
   const containerRef = useRef<HTMLDivElement | null>(null)
   const passageScrollRef = useRef<HTMLDivElement | null>(null)
-  const { passage, annotations, question, links } = READING_ANALYSIS_FIXTURE
 
   const handleBackgroundClick = (event: MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement
@@ -55,6 +65,11 @@ export function ReadingAnalysisView(): ReactNode {
         <p className="reading-analysis-sub">
           点击题干或选项查看证据虚线。点击空白可清空。
         </p>
+        {sourceNote && (
+          <p className="reading-analysis-source-note" data-ra-source-note>
+            {sourceNote}
+          </p>
+        )}
       </header>
       <div className="reading-analysis-grid">
         <div ref={passageScrollRef} className="reading-analysis-passage-scroller">

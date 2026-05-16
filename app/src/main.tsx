@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { ReadingAnalysisView } from './features/reading-analysis/ReadingAnalysisView.tsx'
+import { ReadingAnalysisDemoRoute } from './features/reading-analysis/ReadingAnalysisDemoRoute.tsx'
 
 /**
  * Tiny demo router. The main app is unchanged; appending
@@ -21,6 +21,6 @@ const rootKind = pickRoot()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {rootKind === 'reading-analysis' ? <ReadingAnalysisView /> : <App />}
+    {rootKind === 'reading-analysis' ? <ReadingAnalysisDemoRoute /> : <App />}
   </StrictMode>,
 )
