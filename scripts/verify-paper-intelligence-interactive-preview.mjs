@@ -1202,6 +1202,100 @@ if (existsSync(path.join(ROOT, SMOKE))) {
   )
 }
 
+/* ─── 24b. QA #19: insight panel stacking / clipping fix ─────────── */
+
+{
+  const cssRel = 'app/src/features/paper-intelligence/paperIntelligence.css'
+  const cssSrc = readSrc(cssRel)
+  const cssNoComments = cssSrc
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|[^:])\/\/.*$/gm, '$1')
+
+  const insightRule = cssNoComments.match(/\.pi-insight-panel\s*\{([^}]*)\}/)
+  assert('QA #19: .pi-insight-panel CSS rule exists', Boolean(insightRule))
+  if (insightRule) {
+    const body = insightRule[1]
+    assert(
+      'QA #19: panel is position: fixed (escapes overflow ancestors)',
+      /position\s*:\s*fixed\b/.test(body),
+    )
+    const zMatch = body.match(/z-index\s*:\s*(\d+)/)
+    const z = zMatch ? Number(zMatch[1]) : NaN
+    assert(
+      'QA #19: panel z-index > .pi-line-overlay (5)',
+      Number.isFinite(z) && z > 5,
+      `z-index=${zMatch ? zMatch[1] : '<missing>'}`,
+    )
+    assert(
+      'QA #19: panel z-index < .pi-toast (100)',
+      Number.isFinite(z) && z < 100,
+      `z-index=${zMatch ? zMatch[1] : '<missing>'}`,
+    )
+    assert(
+      'QA #19: panel min-width >= 320px',
+      /min-width\s*:\s*320px\b/.test(body),
+    )
+    assert(
+      'QA #19: panel scrollable when content overflows (overflow-y: auto)',
+      /overflow-y\s*:\s*auto\b/.test(body),
+    )
+    assert(
+      'QA #19: panel has a max-height bound',
+      /max-height\s*:/.test(body),
+    )
+  }
+
+  // The component must portal the panel to document.body so no
+  // overflow:hidden / scroller / sticky ancestor can clip or trap it.
+  assert(
+    'QA #19: component imports createPortal from react-dom',
+    /import\s*\{[^}]*\bcreatePortal\b[^}]*\}\s*from\s*['"]react-dom['"]/.test(componentSrcCode),
+  )
+  assert(
+    'QA #19: component portals InsightPanel to document.body',
+    /createPortal\([\s\S]*?document\.body\s*,?\s*\)/.test(componentSrcCode),
+  )
+
+  // The panel must compute its position from the chip anchor's
+  // bounding box and reposition on scroll/resize so it tracks.
+  assert(
+    'QA #19: InsightPanel reads anchor getBoundingClientRect',
+    /getBoundingClientRect\s*\(\s*\)/.test(componentSrcCode),
+  )
+  assert(
+    'QA #19: InsightPanel listens to scroll in capture phase',
+    /addEventListener\(\s*['"]scroll['"][\s\S]{0,80}true\s*\)/.test(componentSrcCode),
+  )
+  assert(
+    'QA #19: InsightPanel listens to resize',
+    /addEventListener\(\s*['"]resize['"]/.test(componentSrcCode),
+  )
+
+  // Cut D1 product invariants must still hold:
+  //   - Still header-anchored popover, not inline.
+  //   - Click question still closes insight.
+  //   - Esc still closes insight.
+  //   - × close button still rendered.
+  assert(
+    'QA #19: handleSelectQuestion still closes insight',
+    /handleSelectQuestion[\s\S]*?setActiveInsightSection\(\s*null\s*\)/.test(componentSrcCode),
+  )
+  assert(
+    'QA #19: Esc handler still closes insight',
+    /Escape[\s\S]{0,200}setActiveInsightSection\(\s*null\s*\)/.test(componentSrcCode),
+  )
+  assert(
+    'QA #19: × close button still rendered (pi-insight-panel-close)',
+    componentSrcCode.includes('pi-insight-panel-close'),
+  )
+  assert(
+    'QA #19: insight panel still does NOT push PassageBody (no static/relative position)',
+    insightRule
+      ? !/position\s*:\s*(static|relative)\b/.test(insightRule[1])
+      : false,
+  )
+}
+
 /* ─── 25. regression: things that must remain locked ─────────────── */
 
 assert(

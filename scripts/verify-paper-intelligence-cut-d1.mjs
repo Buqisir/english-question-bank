@@ -109,7 +109,9 @@ console.log('\n─── 1. Left panel paper-like flow ───')
 }
 
 // The InsightPanel must NOT appear between header and PassageBody in document flow.
-// It must be positioned absolutely (popover anchored to header).
+// It must be positioned out of document flow (popover anchored to header).
+// QA #19 fix accepts `position: fixed` (portal-to-body strategy) in addition
+// to the original `position: absolute` — both keep PassageBody coords stable.
 {
   const cssSrc = readSrc('app/src/features/paper-intelligence/paperIntelligence.css')
   const cssSrcCode = stripComments(cssSrc)
@@ -118,12 +120,27 @@ console.log('\n─── 1. Left panel paper-like flow ───')
   if (insightRule) {
     const body = insightRule[1]
     assert(
-      '.pi-insight-panel is position: absolute (popover, not inline)',
-      /position\s*:\s*absolute\b/.test(body),
+      '.pi-insight-panel is position: absolute or fixed (popover, not inline)',
+      /position\s*:\s*(absolute|fixed)\b/.test(body),
     )
     assert(
       '.pi-insight-panel does not occupy document flow',
       !/position\s*:\s*(static|relative)\b/.test(body),
+    )
+    // QA #19: panel z-index must clear .pi-line-overlay (z-index: 5).
+    const zMatch = body.match(/z-index\s*:\s*(\d+)/)
+    const z = zMatch ? Number(zMatch[1]) : NaN
+    assert(
+      '.pi-insight-panel z-index > .pi-line-overlay (5)',
+      Number.isFinite(z) && z > 5,
+      `z-index=${zMatch ? zMatch[1] : '<missing>'}`,
+    )
+    // QA #19: panel z-index must stay below the toast (z-index: 100) so a
+    // basket toast remains visible.
+    assert(
+      '.pi-insight-panel z-index < .pi-toast (100)',
+      Number.isFinite(z) && z < 100,
+      `z-index=${zMatch ? zMatch[1] : '<missing>'}`,
     )
   }
   // Chip anchor must be position: relative
@@ -131,6 +148,22 @@ console.log('\n─── 1. Left panel paper-like flow ───')
     '.pi-insight-chip-anchor provides positioning context',
     /\.pi-insight-chip-anchor[\s\S]*?position\s*:\s*relative/.test(cssSrcCode),
   )
+
+  // QA #19: when the panel is `position: fixed`, the component must
+  // portal it to document.body (otherwise its `top`/`left` would be
+  // measured against the nearest positioned ancestor's stacking
+  // context — exactly the situation we are escaping). When the panel
+  // is `position: absolute`, this requirement does not apply.
+  if (insightRule && /position\s*:\s*fixed\b/.test(insightRule[1])) {
+    assert(
+      'component imports createPortal from react-dom (QA #19 portal)',
+      /import\s*\{[^}]*\bcreatePortal\b[^}]*\}\s*from\s*['"]react-dom['"]/.test(componentSrcCode),
+    )
+    assert(
+      'component portals InsightPanel to document.body (QA #19 portal)',
+      /createPortal\([\s\S]*?document\.body\s*,?\s*\)/.test(componentSrcCode),
+    )
+  }
 }
 
 // Clicking a question must close insight

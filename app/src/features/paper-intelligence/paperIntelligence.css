@@ -1045,11 +1045,24 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-insight-panel {
-  position: absolute;
-  top: 100%;
+  /*
+   * QA #19 fix: portal-rendered popover.
+   *
+   * `position: fixed` (paired with portal-to-body in TSX) escapes
+   * `.pi-passage { overflow: hidden }`, `.pi-main { overflow-y: auto }`,
+   * and `.pi-side { position: sticky }`'s stacking context. The TSX
+   * sets `top` / `left` from the chip anchor's `getBoundingClientRect`
+   * and reposition on scroll/resize, so the inline values below are
+   * just safe defaults until the first measurement lands.
+   *
+   * `z-index: 50` sits above the cross-column line overlay
+   * (`.pi-line-overlay { z-index: 5 }`) and below the toast
+   * (`.pi-toast { z-index: 100 }`).
+   */
+  position: fixed;
+  top: 0;
   left: 0;
-  right: auto;
-  z-index: 10;
+  z-index: 50;
   width: 360px;
   min-width: 320px;
   max-width: min(420px, calc(100vw - 32px));
@@ -1058,7 +1071,6 @@ button.pi-analysis-distractor:hover {
   background: var(--panel);
   padding: 12px 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  margin-top: 4px;
   max-height: 60vh;
   overflow-y: auto;
   animation: pi-insight-fade-in 120ms ease-out;

@@ -44,7 +44,16 @@
  *   - This file: fetch + state + render + effects.
  */
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from 'react'
+import { createPortal } from 'react-dom'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -483,6 +492,7 @@ function PassageSection(props: {
     availableQuestionGroupIds,
   })
   const insightOpen = activeInsightSection === passageView.paperSection
+  const insightChipAnchorRef = useRef<HTMLSpanElement | null>(null)
 
   return (
     <section className="pi-passage" data-pi-paper-section={passageView.paperSection}>
@@ -493,7 +503,7 @@ function PassageSection(props: {
         </h2>
         <div className="pi-passage-header-actions">
           {reportPassage && (
-            <span className="pi-insight-chip-anchor">
+            <span className="pi-insight-chip-anchor" ref={insightChipAnchorRef}>
               <button
                 type="button"
                 className={insightOpen ? 'pi-insight-chip pi-insight-chip--open' : 'pi-insight-chip'}
@@ -507,6 +517,7 @@ function PassageSection(props: {
               {insightOpen && (
                 <InsightPanel
                   reportPassage={reportPassage}
+                  anchorRef={insightChipAnchorRef}
                   onClose={() => onToggleInsight(passageView.paperSection)}
                 />
               )}
@@ -545,24 +556,107 @@ function PassageSection(props: {
 
 
 
-/* ─── Insight Panel (Cut D1) ─── */
+/* ─── Insight Panel (Cut D1, QA #19 fix) ─── */
 
 /**
  * Header-anchored popover that shows loads, outline, and key chunks.
- * Positioned absolutely below the insight chip — does NOT occupy
- * document flow, so PassageBody / mark[data-pi-evidence-id] layout
- * coordinates stay stable.
  *
- * Close via: × button (rendered here), Esc (handled at top level),
- * or clicking a question card (handled in handleSelectQuestion).
+ * QA #19 fix — root cause: when the panel was rendered inline as a
+ * `position: absolute` child of `.pi-insight-chip-anchor`, two
+ * ancestor properties combined to clip and / or stack-context-trap it:
+ *
+ *   - `.pi-passage` carries `overflow: hidden` (rounded-corner clip).
+ *     Any absolutely-positioned descendant overflowing the passage box
+ *     gets cropped at the bottom border of the passage header.
+ *   - `.pi-main` carries `overflow-y: auto` and is also a scroll
+ *     container. Even after escaping `.pi-passage`, the panel would
+ *     still be clipped by `.pi-main`'s scroll viewport.
+ *   - `.pi-side` is `position: sticky` and creates its own stacking
+ *     context, so a same-tree z-index never beats it.
+ *   - The cross-column line overlay `.pi-line-overlay` sits at z-index
+ *     5 inside `.pi-shell`; an inline absolute panel inside a passage
+ *     could not raise itself above the overlay across the column
+ *     boundary.
+ *
+ * Fix — portal the panel to `document.body` and switch to
+ * `position: fixed`, anchoring `top` to the chip's bottom edge and
+ * `left` to the chip's left edge via `getBoundingClientRect()`. This
+ * escapes every clipping ancestor (overflow:hidden / scroller) and
+ * every stacking context, so the configured z-index (50) is the only
+ * thing that decides paint order. We reposition on `scroll` (capture)
+ * and `resize` so the panel tracks its anchor while the user scrolls
+ * the left column, and we clamp the left edge to the viewport so the
+ * 360px panel never leaks off-screen on narrow viewports.
+ *
+ * Product constraints preserved:
+ *   - Still header-anchored — `top` follows the chip bottom edge.
+ *   - Still a popover, not inline — does NOT push `PassageBody` down.
+ *   - Layout coords of `mark[data-pi-evidence-id]` stay stable, so the
+ *     evidence-line geometry reads the same numbers as before.
+ *   - Close via × button (rendered here), Esc (handled at top level),
+ *     or clicking a question card (handled in handleSelectQuestion).
+ *   - Only one panel open at a time (`activeInsightSection: string |
+ *     null` state in the parent, unchanged).
  */
 function InsightPanel(props: {
   reportPassage: PassageReport
+  anchorRef: RefObject<HTMLSpanElement | null>
   onClose: () => void
 }): ReactNode {
-  const { reportPassage, onClose } = props
-  return (
-    <div className="pi-insight-panel" data-pi-insight-panel={reportPassage.paperSection} role="dialog" aria-label="篇章洞察">
+  const { reportPassage, anchorRef, onClose } = props
+
+  // SSR / pre-mount guard: createPortal needs document.body. We also
+  // gate the very first paint on a measured anchor rect so the panel
+  // never flashes at (0, 0).
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null)
+
+  useLayoutEffect(() => {
+    function reposition(): void {
+      const anchor = anchorRef.current
+      if (!anchor) return
+      const rect = anchor.getBoundingClientRect()
+      // Panel width — keep in sync with `.pi-insight-panel { width }` in CSS.
+      const PANEL_WIDTH = 360
+      const VIEWPORT_PAD = 16
+      const viewportW =
+        typeof window === 'undefined' ? PANEL_WIDTH + VIEWPORT_PAD * 2 : window.innerWidth
+      // Prefer aligning the panel's left edge with the chip's left
+      // edge, but clamp into the viewport with a 16px gutter on both
+      // sides so the 360px panel cannot leak off-screen.
+      const idealLeft = rect.left
+      const maxLeft = Math.max(VIEWPORT_PAD, viewportW - PANEL_WIDTH - VIEWPORT_PAD)
+      const clampedLeft = Math.min(Math.max(idealLeft, VIEWPORT_PAD), maxLeft)
+      // 4px gap between chip bottom and panel top, matching the prior
+      // inline `margin-top: 4px` look.
+      const top = rect.bottom + 4
+      setCoords({ top, left: clampedLeft })
+    }
+
+    reposition()
+
+    if (typeof window === 'undefined') return
+    // Capture-phase scroll listener so we catch every scroll container
+    // ancestor (`.pi-main`, the document, etc.) without enumerating
+    // them. Resize covers viewport changes including DPR / zoom.
+    window.addEventListener('scroll', reposition, true)
+    window.addEventListener('resize', reposition)
+    return () => {
+      window.removeEventListener('scroll', reposition, true)
+      window.removeEventListener('resize', reposition)
+    }
+  }, [anchorRef])
+
+  if (typeof document === 'undefined') return null
+  if (coords === null) return null
+
+  return createPortal(
+    <div
+      className="pi-insight-panel"
+      data-pi-insight-panel={reportPassage.paperSection}
+      role="dialog"
+      aria-label="篇章洞察"
+      style={{ top: `${coords.top}px`, left: `${coords.left}px` }}
+    >
       <div className="pi-insight-panel-header">
         <span className="pi-insight-panel-title">篇章洞察</span>
         <button
@@ -577,7 +671,8 @@ function InsightPanel(props: {
       <LoadsPanel loads={reportPassage.loads} />
       <OutlinePanel outline={reportPassage.passageOutline} />
       <ChunksSummary chunks={reportPassage.keyChunks} />
-    </div>
+    </div>,
+    document.body,
   )
 }
 

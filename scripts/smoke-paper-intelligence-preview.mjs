@@ -703,6 +703,215 @@ try {
     `data-pi-basket-count=${topbarState.basketCountAttr}`,
   )
 
+  /* ── 20b. QA #19: insight popover stacking & clipping. ────── */
+  // Capture PassageBody.top BEFORE opening insight so we can prove
+  // the popover does NOT push it down (Cut D1 invariant + QA #19).
+  const passageBodyTopBefore = await page.evaluate(() => {
+    const body = document.querySelector('.pi-passage[data-pi-paper-section="A"] .pi-passage-body')
+    return body ? Math.round(body.getBoundingClientRect().top) : null
+  })
+  step(
+    '20b. PassageBody A measurable before insight opens',
+    typeof passageBodyTopBefore === 'number',
+    `top=${passageBodyTopBefore}`,
+  )
+
+  const chipA = page.locator('[data-pi-insight-chip="A"]').first()
+  step(
+    '20b. insight chip for passage A is present',
+    (await chipA.count()) === 1,
+  )
+  await chipA.click()
+  await page.waitForTimeout(150)
+
+  const insightOpenState = await page.evaluate(() => {
+    const panel = document.querySelector('.pi-insight-panel[data-pi-insight-panel="A"]')
+    if (!panel) {
+      return { present: false }
+    }
+    const rect = panel.getBoundingClientRect()
+    const cs = window.getComputedStyle(panel)
+    const overlay = document.querySelector('.pi-line-overlay')
+    const overlayCs = overlay ? window.getComputedStyle(overlay) : null
+    const side = document.querySelector('.pi-side')
+    const sideCs = side ? window.getComputedStyle(side) : null
+    const main = document.querySelector('.pi-main')
+    const mainCs = main ? window.getComputedStyle(main) : null
+    // Walk ancestors and confirm none of them is `.pi-passage`,
+    // `.pi-main`, `.pi-side`, or anything with overflow:hidden/auto
+    // between the panel and document.body — i.e. the panel really
+    // escaped via portal-to-body.
+    let portaled = panel.parentElement === document.body
+    let clippingAncestor = null
+    let cur = panel.parentElement
+    while (cur && cur !== document.body) {
+      const ccs = window.getComputedStyle(cur)
+      if (
+        cur.classList.contains('pi-passage') ||
+        cur.classList.contains('pi-main') ||
+        cur.classList.contains('pi-side') ||
+        ccs.overflow === 'hidden' ||
+        ccs.overflowY === 'hidden' ||
+        ccs.overflow === 'auto' ||
+        ccs.overflowY === 'auto'
+      ) {
+        clippingAncestor = cur.className || cur.tagName
+        break
+      }
+      cur = cur.parentElement
+    }
+    return {
+      present: true,
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      visible: rect.width > 0 && rect.height > 0 && cs.display !== 'none' && cs.visibility !== 'hidden',
+      position: cs.position,
+      panelZ: Number(cs.zIndex),
+      overlayZ: overlayCs ? Number(overlayCs.zIndex) : null,
+      sideZ: sideCs ? Number(sideCs.zIndex) : null,
+      mainZ: mainCs ? Number(mainCs.zIndex) : null,
+      portaled,
+      clippingAncestor,
+      // Bounding box clamped into viewport — the panel must not stick
+      // out the bottom or sides; if max-height + scroll handles tall
+      // content, the rendered rect should be within viewport.
+      withinViewport:
+        rect.left >= 0 &&
+        rect.top >= 0 &&
+        rect.right <= window.innerWidth &&
+        rect.bottom <= window.innerHeight,
+      scrollHeight: panel.scrollHeight,
+      clientHeight: panel.clientHeight,
+    }
+  })
+
+  step(
+    '20b. .pi-insight-panel mounted and visible after chip click',
+    insightOpenState.present === true && insightOpenState.visible === true,
+    `state=${JSON.stringify(insightOpenState)}`,
+  )
+  step(
+    '20b. panel position is fixed (escapes scroll containers)',
+    insightOpenState.position === 'fixed',
+    `position=${insightOpenState.position}`,
+  )
+  step(
+    '20b. panel parent is document.body (portal escape)',
+    insightOpenState.portaled === true,
+    `clippingAncestor=${insightOpenState.clippingAncestor}`,
+  )
+  step(
+    '20b. panel width >= 320px (min-width contract)',
+    typeof insightOpenState.width === 'number' && insightOpenState.width >= 320,
+    `width=${insightOpenState.width}`,
+  )
+  // Either the rendered height is enough to reveal the content, OR
+  // the panel is internally scrollable (scrollHeight > clientHeight)
+  // so the teacher can scroll within it.
+  step(
+    '20b. panel content is reachable (height>=160 OR internally scrollable)',
+    typeof insightOpenState.height === 'number' &&
+      (insightOpenState.height >= 160 ||
+        insightOpenState.scrollHeight > insightOpenState.clientHeight),
+    `height=${insightOpenState.height} scroll=${insightOpenState.scrollHeight}/${insightOpenState.clientHeight}`,
+  )
+  step(
+    '20b. panel z-index > .pi-line-overlay z-index',
+    Number.isFinite(insightOpenState.panelZ) &&
+      Number.isFinite(insightOpenState.overlayZ) &&
+      insightOpenState.panelZ > insightOpenState.overlayZ,
+    `panel=${insightOpenState.panelZ} overlay=${insightOpenState.overlayZ}`,
+  )
+  step(
+    '20b. panel rect lies within viewport (no hard clip)',
+    insightOpenState.withinViewport === true,
+    `inViewport=${insightOpenState.withinViewport}`,
+  )
+
+  // Confirm an element from the panel center is actually painted on
+  // top: pick the panel's center point and ask the document what's
+  // there. It must be the panel itself (or one of its descendants),
+  // not e.g. .pi-line-overlay or a column ancestor.
+  const topElementCheck = await page.evaluate(() => {
+    const panel = document.querySelector('.pi-insight-panel[data-pi-insight-panel="A"]')
+    if (!panel) return { ok: false, reason: 'no panel' }
+    const rect = panel.getBoundingClientRect()
+    const x = Math.round(rect.left + rect.width / 2)
+    const y = Math.round(rect.top + Math.min(rect.height / 2, 24))
+    const top = document.elementFromPoint(x, y)
+    return {
+      ok: Boolean(top) && (top === panel || panel.contains(top)),
+      topClass: top ? (top.className && top.className.toString && top.className.toString()) || top.tagName : null,
+    }
+  })
+  step(
+    '20b. elementFromPoint at panel center returns the panel (paints on top)',
+    topElementCheck.ok === true,
+    `top=${topElementCheck.topClass}`,
+  )
+
+  // PassageBody top must NOT have shifted (popover did not push body
+  // down — Cut D1 invariant preserved).
+  const passageBodyTopAfter = await page.evaluate(() => {
+    const body = document.querySelector('.pi-passage[data-pi-paper-section="A"] .pi-passage-body')
+    return body ? Math.round(body.getBoundingClientRect().top) : null
+  })
+  step(
+    '20b. PassageBody A top unchanged after insight opens (still a popover)',
+    typeof passageBodyTopAfter === 'number' &&
+      typeof passageBodyTopBefore === 'number' &&
+      Math.abs(passageBodyTopAfter - passageBodyTopBefore) <= 1,
+    `before=${passageBodyTopBefore} after=${passageBodyTopAfter}`,
+  )
+
+  await shot(page, '03b-insight-open')
+
+  // Clicking any question card must close the insight panel
+  // (handleSelectQuestion → setActiveInsightSection(null)).
+  await page.locator('.pi-question-card').first().click()
+  await page.waitForTimeout(150)
+  const insightAfterQuestionClick = await page.evaluate(() =>
+    Boolean(document.querySelector('.pi-insight-panel[data-pi-insight-panel="A"]')),
+  )
+  step(
+    '20b. clicking a question closes the insight panel',
+    insightAfterQuestionClick === false,
+  )
+
+  // Re-open chip A → close via Esc key. We re-open here so the rest
+  // of the smoke (return-to-workbench, etc.) starts from a clean
+  // closed-insight state.
+  await chipA.click()
+  await page.waitForTimeout(120)
+  step(
+    '20b. chip re-opens insight panel',
+    await page.evaluate(() =>
+      Boolean(document.querySelector('.pi-insight-panel[data-pi-insight-panel="A"]')),
+    ),
+  )
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(120)
+  step(
+    '20b. Esc key closes the insight panel',
+    (await page.evaluate(() =>
+      Boolean(document.querySelector('.pi-insight-panel[data-pi-insight-panel="A"]')),
+    )) === false,
+  )
+
+  // Confirm V2 evidence-line smoke remains valid: pick the first
+  // question card again so subsequent steps that read line state
+  // continue working.
+  await page.locator('.pi-question-card').first().click()
+  await page.waitForTimeout(200)
+  {
+    const ls = await readLineState(page)
+    step(
+      '20b. existing evidence-line smoke still passes (one path after re-activation)',
+      ls.pathCount === 1,
+      `pathCount=${ls.pathCount}`,
+    )
+  }
+
   /* ── 21. Cut C: return-to-workbench preserves URL via replaceState. ── */
   // We hook the browser's navigation surface so we can prove the click
   // never triggers a full page load. `before/after Navigate Counter`
