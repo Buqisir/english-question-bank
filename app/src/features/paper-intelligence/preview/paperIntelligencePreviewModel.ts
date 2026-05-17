@@ -358,12 +358,30 @@ export function buildPreviewView(args: BuildPreviewArgs): PaperIntelligencePrevi
  *      different passage, OR the active question has no evidence rows
  *      with non-null quotes, return a single text segment with the
  *      whole passageBody.
- *   3. Otherwise, find verbatim non-overlapping matches for each
- *      relevant evidence row's quote. When two candidates overlap, the
- *      earlier-listed evidence wins (the adapter sorts support before
- *      traps, so support always beats traps; among traps, the smaller
- *      optionLabel wins).
- *   4. Walk passageBody once, emitting text segments around each
+ *   3. Otherwise, find verbatim matches for each relevant evidence
+ *      row's quote in `passageBody`. Then resolve overlaps in two
+ *      strict phases:
+ *
+ *        Phase 1 (support wins) —
+ *          Pick all `evidenceKind === 'support'` candidates first,
+ *          left-to-right, longer-span-first at the same start. A
+ *          support candidate is skipped only if it overlaps another
+ *          support candidate that was already picked.
+ *
+ *        Phase 2 (trap fills the gaps) —
+ *          Then walk the trap candidates in the same left-to-right /
+ *          longer-first order, but reject any trap candidate that
+ *          overlaps ANY chosen support candidate. Among traps, pick by
+ *          source order (the adapter emits traps by optionLabel ASC).
+ *
+ *      Net effect: support quotes are NEVER replaced or hidden by trap
+ *      quotes. If a support quote is a substring of a trap quote, the
+ *      support stays highlighted and the trap is dropped (or, if the
+ *      trap has another non-overlapping match elsewhere in the
+ *      passage, that other occurrence still renders).
+ *
+ *   4. Merge the two phases' choices into a single ordered list and
+ *      walk passageBody once, emitting text segments around each
  *      highlight span.
  */
 export function buildPassageSegments(args: {
@@ -390,9 +408,10 @@ export function buildPassageSegments(args: {
   type Candidate = {
     start: number
     end: number
-    /** index in `relevant` — the adapter's deterministic order is
-     *  support first, then traps by optionLabel ASC. We use this as the
-     *  tiebreaker when two candidates overlap. */
+    /** position of the originating EvidenceItem within the passage's
+     *  flat ordering. The adapter places support before traps, then
+     *  traps by optionLabel ASC, so within a single phase this acts as
+     *  a deterministic tiebreaker. */
     sourceOrder: number
     item: EvidenceItem
   }
@@ -418,24 +437,73 @@ export function buildPassageSegments(args: {
     return [{ kind: 'text', text: passageBody }]
   }
 
-  // resolve overlaps: greedy by start, longer-first as a secondary
-  // sort, source-order-first as a tertiary tiebreaker. After pick, skip
-  // any candidate that overlaps the chosen span.
-  candidates.sort((a, b) => {
+  /**
+   * Sort by (start ASC, length DESC, sourceOrder ASC). At a fixed
+   * (start,length), the smaller sourceOrder wins. We do NOT sort by
+   * `kind` here; instead, the two-phase pick below enforces support
+   * priority by phase, which is stronger than any per-candidate
+   * comparator could make it (a comparator could still let a non-
+   * overlapping trap slot in *before* a support and accidentally
+   * shadow a later overlapping support of the same span).
+   */
+  const ordered = candidates.slice().sort((a, b) => {
     if (a.start !== b.start) return a.start - b.start
     const aLen = a.end - a.start
     const bLen = b.end - b.start
-    if (aLen !== bLen) return bLen - aLen // prefer longer span at same start
+    if (aLen !== bLen) return bLen - aLen
     return a.sourceOrder - b.sourceOrder
   })
 
-  const chosen: Candidate[] = []
-  let cursor = 0
-  for (const c of candidates) {
-    if (c.start < cursor) continue // overlaps a chosen span
-    chosen.push(c)
-    cursor = c.end
+  // helper: does [aStart,aEnd) overlap [bStart,bEnd) ?
+  const overlaps = (
+    aStart: number,
+    aEnd: number,
+    bStart: number,
+    bEnd: number,
+  ): boolean => aStart < bEnd && bStart < aEnd
+
+  // Phase 1: pick non-overlapping support candidates, left-to-right.
+  const supportPicks: Candidate[] = []
+  for (const c of ordered) {
+    if (c.item.evidenceKind !== 'support') continue
+    let collidesWithSupport = false
+    for (const picked of supportPicks) {
+      if (overlaps(c.start, c.end, picked.start, picked.end)) {
+        collidesWithSupport = true
+        break
+      }
+    }
+    if (collidesWithSupport) continue
+    supportPicks.push(c)
   }
+
+  // Phase 2: pick trap candidates that do NOT overlap any chosen
+  // support candidate, and do not overlap each other.
+  const trapPicks: Candidate[] = []
+  for (const c of ordered) {
+    if (c.item.evidenceKind !== 'trap') continue
+    let collides = false
+    for (const sup of supportPicks) {
+      if (overlaps(c.start, c.end, sup.start, sup.end)) {
+        collides = true
+        break
+      }
+    }
+    if (collides) continue
+    for (const t of trapPicks) {
+      if (overlaps(c.start, c.end, t.start, t.end)) {
+        collides = true
+        break
+      }
+    }
+    if (collides) continue
+    trapPicks.push(c)
+  }
+
+  // Merge: support + trap, then resort by start so emission is in
+  // passage order. Support and trap picks are guaranteed not to
+  // overlap each other by construction.
+  const chosen = [...supportPicks, ...trapPicks].sort((a, b) => a.start - b.start)
 
   // emit segments
   const out: PassageSegment[] = []

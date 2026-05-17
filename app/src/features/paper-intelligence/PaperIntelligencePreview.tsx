@@ -2,15 +2,23 @@
  * PaperIntelligencePreview — interactive teacher-facing preview of a
  * Paper Intelligence V0 report (V1 layout).
  *
- * Cut summary:
+ * V1 product rules (locked in by reviewer):
  *   - Two-column shell: passages on the left, sticky Analysis Panel on
  *     the right.
- *   - Clicking a question row sets `activeQuestionId`, which highlights
- *     that question's evidence quotes inside the passage and renders
- *     the right panel.
+ *   - The right Analysis Panel is the SINGLE source of truth for
+ *     stem / answer / distractor / synonym / back-stage fields. The
+ *     left column shows clickable question card entrypoints ONLY.
+ *   - The previous V0 expandable detail rows (`QuestionsPanel` /
+ *     `DetailQuestionRow`) have been deleted to prevent the same
+ *     question's content from appearing twice.
  *   - V1 only does highlighting. No cross-column dotted lines, no
- *     animations, no auto-scroll. DOM anchors (`data-pi-*`) are placed
- *     so V2 can wire up the LinkOverlay-style system later.
+ *     animations, no auto-scroll. DOM anchors (`data-pi-*`) stay so V2
+ *     can wire up the LinkOverlay-style system later.
+ *   - Information density on the left is intentionally low:
+ *       * LoadRow shows score / label / shortReason only — the
+ *         per-load evidence list has been removed.
+ *       * Key chunks show a `重要词块 · N 个` summary only — the full
+ *         tag list is no longer rendered.
  *
  * Routing: still `?view=paper-intelligence&paperId=<id>` — no new
  * demo route, no new view param. The route parser is unchanged.
@@ -21,12 +29,8 @@
  *     `selectEvidence`) — this component never calls passage substring
  *     lookups or any other quote-matching primitive directly.
  *   - This file: fetch + state + render. Nothing else.
- *
- * Why we kept the read-only PassageSection: the existing loads / outline /
- * key-chunks / per-question detail card carries information teachers
- * still need (篇章负荷一览, key chunks, etc.). Those continue to render
- * below the new clickable question list. The V1 cut adds interactivity
- * without removing the existing summary rows.
+ *   - Active state is just `activeQuestionId`. Per reviewer guidance,
+ *     V1 does not introduce a separate `activeEvidenceId`.
  */
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
@@ -34,12 +38,10 @@ import type {
   PaperIntelligenceReport,
   PassageReport,
   LoadBar,
-  QuestionAnalysis,
   KeyChunk,
 } from './paperIntelligenceTypes'
 import {
   buildPreviewView,
-  buildQuestionId,
   type AnalysisDistractorRow,
   type AnalysisView,
   type PassagePreviewView,
@@ -57,10 +59,6 @@ type Props = {
  *   - the optional input.json fetch (passageBody for highlighting)
  *   - the `activeQuestionId` state
  *   - the memoized preview view (built from report+bodies+activeQuestionId)
- *
- * The component does not maintain any evidence-level active state —
- * everything keys off `activeQuestionId`. Per reviewer guidance, V1
- * does not introduce a separate `activeEvidenceId`.
  */
 export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
@@ -176,7 +174,12 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
             )
           })}
         </div>
-        <aside className="pi-side" aria-label="Analysis panel">
+        <aside
+          className="pi-side"
+          aria-label="Analysis panel"
+          aria-live="polite"
+          role="region"
+        >
           <AnalysisPanel analysis={view.activeAnalysis} />
         </aside>
       </div>
@@ -209,12 +212,12 @@ function ReportHeader({ report }: { report: PaperIntelligenceReport }): ReactNod
 
 /**
  * One passage block: header → passageBody (segmented for highlights) →
- * loads / outline / key chunks → clickable question cards →
- * (existing) read-only question detail rows.
+ * loads / outline / key-chunks summary → clickable question cards.
  *
- * The clickable cards are the new V1 surface; the rest is preserved
- * from the V0 read-only preview so teachers still see the loads /
- * outline / chunks without hunting.
+ * The clickable cards are the V1 left-column entrypoint. Per-question
+ * details (stem / distractor breakdown / synonym / back-stage labels)
+ * live ONLY in the right Analysis Panel — there is no expandable detail
+ * row here in V1.
  */
 function PassageSection(props: {
   passageView: PassagePreviewView
@@ -241,7 +244,7 @@ function PassageSection(props: {
         <>
           <LoadsPanel loads={reportPassage.loads} />
           <OutlinePanel outline={reportPassage.passageOutline} />
-          <ChunksPanel chunks={reportPassage.keyChunks} note={reportPassage.keyChunksNote} />
+          <ChunksSummary chunks={reportPassage.keyChunks} />
         </>
       )}
 
@@ -255,13 +258,6 @@ function PassageSection(props: {
           />
         ))}
       </div>
-
-      {reportPassage && (
-        <QuestionsPanel
-          questions={reportPassage.questions}
-          activeQuestionId={activeQuestionId}
-        />
-      )}
     </section>
   )
 }
@@ -305,7 +301,7 @@ function PassageBody({ segments }: { segments: PassageSegment[] }): ReactNode {
   )
 }
 
-/* ─── Loads (unchanged from V0) ─── */
+/* ─── Loads (V1: score / label / shortReason only) ─── */
 
 const LOAD_KEYS: { key: keyof import('./paperIntelligenceTypes').PassageLoads; label: string }[] = [
   { key: 'vocabularyChunkLoad', label: '词汇词块' },
@@ -332,50 +328,33 @@ function LoadsPanel({
   )
 }
 
+/**
+ * V1 LoadRow: shows score cells + label + shortReason. The previous V0
+ * "引文 / 收起" toggle and per-load evidence list have been removed —
+ * load-level evidence items are no longer surfaced on this page (the
+ * right Analysis Panel is the single home for evidence quotes).
+ */
 function LoadRow({ label, bar }: { label: string; bar: LoadBar }): ReactNode {
-  const [showEvidence, setShowEvidence] = useState(false)
-  const hasEvidence = bar.evidenceItems.length > 0
   return (
-    <div>
-      <div className="pi-load-row">
-        <span className="pi-load-label">{label}</span>
-        <div className="pi-load-bar">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <span
-              key={i}
-              className="pi-load-cell"
-              data-filled={i <= bar.score ? 'true' : undefined}
-              data-high={i <= bar.score && bar.score >= 4 ? 'true' : undefined}
-            />
-          ))}
-        </div>
-        <span className="pi-load-score">{bar.label}</span>
-        <span className="pi-load-reason">{bar.shortReason}</span>
-        {hasEvidence && (
-          <button
-            className="pi-load-evidence-toggle"
-            onClick={() => setShowEvidence(!showEvidence)}
-          >
-            {showEvidence ? '收起' : '引文'}
-          </button>
-        )}
+    <div className="pi-load-row">
+      <span className="pi-load-label">{label}</span>
+      <div className="pi-load-bar">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <span
+            key={i}
+            className="pi-load-cell"
+            data-filled={i <= bar.score ? 'true' : undefined}
+            data-high={i <= bar.score && bar.score >= 4 ? 'true' : undefined}
+          />
+        ))}
       </div>
-      {showEvidence && hasEvidence && (
-        <ul className="pi-load-evidence-list">
-          {bar.evidenceItems.map((ev, i) => (
-            <li key={i} className="pi-load-evidence-item">
-              <span className="pi-quote">"{ev.quote}"</span>
-              {ev.note && <span> — {ev.note}</span>}
-              {ev.paragraph != null && <span> (¶{ev.paragraph})</span>}
-            </li>
-          ))}
-        </ul>
-      )}
+      <span className="pi-load-score">{bar.label}</span>
+      <span className="pi-load-reason">{bar.shortReason}</span>
     </div>
   )
 }
 
-/* ─── Outline & Chunks (unchanged from V0) ─── */
+/* ─── Outline ─── */
 
 function OutlinePanel({
   outline,
@@ -394,27 +373,23 @@ function OutlinePanel({
   )
 }
 
-function ChunksPanel({ chunks, note }: { chunks: KeyChunk[]; note?: string }): ReactNode {
+/* ─── Key chunks (V1: summary only, no expanded list) ─── */
+
+/**
+ * V1 deliberately collapses the previous 8–12 tag list down to a single
+ * `重要词块 · N 个` summary line. Teachers who want the full chunk list
+ * can ask for it later — V1 keeps the left column low-density.
+ */
+function ChunksSummary({ chunks }: { chunks: KeyChunk[] }): ReactNode {
+  const count = Array.isArray(chunks) ? chunks.length : 0
   return (
     <div className="pi-chunks">
-      <h3 className="pi-chunks-title">重要词块{note ? ` · ${note}` : ''}</h3>
-      <div className="pi-chunk-list">
-        {chunks.map((chunk, i) => (
-          <span key={i} className="pi-chunk-tag">
-            <span className="pi-chunk-surface">{chunk.surface}</span>
-            <span className="pi-chunk-meta">
-              {chunk.kind === 'word' && chunk.ipa && `${chunk.ipa} `}
-              {chunk.kind === 'word' && chunk.pos && `${chunk.pos} `}
-              {chunk.meaning}
-            </span>
-          </span>
-        ))}
-      </div>
+      <h3 className="pi-chunks-title">重要词块 · {count} 个</h3>
     </div>
   )
 }
 
-/* ─── New: clickable question card ─── */
+/* ─── Clickable question card (V1 left-column entrypoint) ─── */
 
 function QuestionCard(props: {
   row: QuestionRow
@@ -455,109 +430,7 @@ function QuestionCard(props: {
   )
 }
 
-/* ─── Existing: per-question detail (V0) ─── */
-
-function QuestionsPanel({
-  questions,
-  activeQuestionId,
-}: {
-  questions: QuestionAnalysis[]
-  activeQuestionId: string | null
-}): ReactNode {
-  // The detail rows still ship below the clickable cards so teachers
-  // can see distractor reasons + tCard etc. without depending on the
-  // right panel. We open the row when its question is the active one.
-  return (
-    <div className="pi-questions">
-      {questions.map((q) => {
-        const id = buildQuestionId(q.paperSection, q.questionNo)
-        return <DetailQuestionRow key={q.questionNo} question={q} forceExpanded={id === activeQuestionId} />
-      })}
-    </div>
-  )
-}
-
-function DetailQuestionRow({
-  question,
-  forceExpanded,
-}: {
-  question: QuestionAnalysis
-  forceExpanded: boolean
-}): ReactNode {
-  const [expanded, setExpanded] = useState(forceExpanded)
-  // sync with active question — when user clicks a question card, expand
-  // its detail row; when they click another, collapse this one.
-  useEffect(() => {
-    setExpanded(forceExpanded)
-  }, [forceExpanded])
-  const q = question
-  return (
-    <div className="pi-question">
-      <div className="pi-question-header" onClick={() => setExpanded(!expanded)}>
-        <span className="pi-question-no">Q{q.questionNo}</span>
-        <span className="pi-question-type">{q.teacherQuestionType}</span>
-        <span className="pi-question-answer">答案 {q.answer}</span>
-        <span className="pi-question-backend">
-          <span className="pi-tcard">{q.tCard}</span>
-          {q.reviewNeeded && <span className="pi-review-badge">需复核</span>}
-        </span>
-        <span className="pi-question-expand">{expanded ? '▲' : '▼'}</span>
-      </div>
-      {expanded && <QuestionDetail question={q} />}
-    </div>
-  )
-}
-
-function QuestionDetail({ question }: { question: QuestionAnalysis }): ReactNode {
-  const q = question
-  return (
-    <div className="pi-question-detail">
-      <p className="pi-q-stem">{q.stem}</p>
-      <p className="pi-q-translation">{q.stemTranslation}</p>
-
-      <div className="pi-q-section">定位句 & 答案句</div>
-      <p style={{ fontSize: 12, color: 'var(--muted)', margin: '2px 0' }}>
-        定位：<span className="pi-quote">{q.locatingSentence}</span>
-      </p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', margin: '2px 0' }}>
-        答案：<span className="pi-quote">{q.answerSentence}</span>
-      </p>
-
-      <div className="pi-q-section">正确答案证据</div>
-      <div className="pi-evidence-box">
-        <span className="pi-quote">"{q.answerEvidence.quote}"</span>
-        <span className="pi-explanation">{q.answerEvidence.explanationZh}</span>
-      </div>
-
-      <div className="pi-q-section">干扰项分析</div>
-      {q.distractorAnalysis.map((d, i) => (
-        <div key={i} className="pi-distractor">
-          <span className="pi-distractor-label">{d.optionLabel}</span>
-          <span className="pi-distractor-category">
-            {d.category}
-            {d.subtype ? ` / ${d.subtype}` : ''}
-          </span>
-          <span> — {d.shortReason}</span>
-          {d.quote && (
-            <span style={{ display: 'block', marginTop: 2 }}>
-              <span className="pi-quote">"{d.quote}"</span>
-            </span>
-          )}
-        </div>
-      ))}
-
-      <div className="pi-synonym">同义替换：{q.synonymSummary}</div>
-
-      <div style={{ marginTop: 8, fontSize: 11, color: 'var(--muted)' }}>
-        surfaceType: {q.surfaceType} · answeringMove: {q.answeringMove}
-        {q.boundaryFlags.length > 0 && ` · boundary: ${q.boundaryFlags.join(', ')}`}
-        {q.confidence != null && ` · confidence: ${q.confidence}`}
-      </div>
-    </div>
-  )
-}
-
-/* ─── New: right-side Analysis Panel ─── */
+/* ─── Right-side Analysis Panel (V1: only home for question detail) ─── */
 
 function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNode {
   if (!analysis) {

@@ -3,28 +3,46 @@
  * verify-paper-intelligence-interactive-preview
  *
  * Static + functional checks for the V1 interactive Paper Intelligence
- * preview. Two themes:
+ * preview. Three themes:
  *
  *   1. Architecture lock-ins
- *      - The component still uses the existing route param
- *        `?view=paper-intelligence&paperId=...`.
- *      - The component does NOT hand-roll a quote matcher or import
+ *      - Route param surface unchanged: `?view=paper-intelligence&paperId=...`.
+ *      - Component does NOT hand-roll a quote matcher or import
  *        reading-analysis.
- *      - The new preview model is pure (no React / DOM / fetch / DB).
- *      - The new preview model uses the existing evidence adapter.
+ *      - Preview model is pure (no React / DOM / fetch / DB).
+ *      - Preview model uses the existing evidence adapter.
  *      - reading-analysis directory is not modified by this branch.
  *      - server / package.json / SQLite are not modified.
  *
- *   2. Runtime contract
+ *   2. V1 product rules (reviewer must-fix)
+ *      - The right Analysis Panel is the only home for
+ *        stem / answer / distractor / synonym / back-stage fields. The
+ *        old V0 detail layer (`QuestionsPanel`, `DetailQuestionRow`,
+ *        and its CSS classes `.pi-question`, `.pi-question-header`,
+ *        `.pi-question-detail`, `.pi-q-stem`, `.pi-q-translation`,
+ *        `.pi-q-section`, `.pi-evidence-box`, `.pi-distractor*`) is
+ *        gone.
+ *      - LoadRow has no `引文 / 收起` toggle and no
+ *        `.pi-load-evidence-toggle` / `.pi-load-evidence-list` CSS.
+ *      - Key chunks render as a `重要词块 · N 个` summary line — the
+ *        full tag list (`.pi-chunk-list` / `.pi-chunk-tag` /
+ *        `.pi-chunk-surface` / `.pi-chunk-meta`) is removed.
+ *      - The right panel carries an `aria-live="polite"` annotation
+ *        for screen-reader updates when the active question changes.
+ *      - Trap highlight uses a dim coral wash (opacity ≤ 0.10) — no
+ *        full-fluorescent red block.
+ *      - Dead `.pi-content` block is removed.
+ *
+ *   3. Runtime contract
  *      - `buildPreviewView(report, bodies, activeQuestionId)` builds a
  *        view with 4 passages and 15 questions for the bundled fixture.
  *      - With no active question, no highlight segments are produced.
  *      - With an active question, that question's passage carries at
- *        least one support and at least one trap highlight (the bundled
- *        fixture is built so this is the case for the first question of
- *        each passage that has detail_word_misleading distractors).
+ *        least one support and at least one trap highlight.
  *      - Question id format is `${paperSection}-${questionNo}` and
  *        round-trips through `parseQuestionId`.
+ *      - Overlap arbitration: support beats trap. Verified with three
+ *        synthetic edge cases.
  *      - DOM anchor attribute strings appear in the component source.
  *      - Highlight CSS classes appear in the stylesheet.
  *      - Right panel copy text appears in the component source.
@@ -89,6 +107,7 @@ function stripComments(src) {
     .replace(/(^|[^:])\/\/.*$/gm, '$1')
 }
 const componentSrcCode = stripComments(componentSrc)
+const cssSrcCode = stripComments(cssSrc)
 
 /* ─── 2. route surface unchanged ─────────────────────────────────── */
 
@@ -220,6 +239,17 @@ assert(
   componentSrc.includes('同义替换'),
 )
 
+/* ─── 6b. right Analysis Panel has aria-live announcement (V1) ─── */
+
+assert(
+  'right Analysis Panel sets aria-live="polite"',
+  /aria-live=['"]polite['"]/.test(componentSrcCode),
+)
+assert(
+  'right Analysis Panel sets role="region"',
+  /role=['"]region['"]/.test(componentSrcCode),
+)
+
 /* ─── 7. DOM anchors are present for V2 ──────────────────────────── */
 
 const requiredAnchors = [
@@ -251,13 +281,35 @@ for (const c of requiredCssClasses) {
 
 assert(
   'component does not use inline-style background for evidence highlights',
-  !/style=\{\{[^}]*background[^}]*\}\}/.test(componentSrc.replace(/\/\*[\s\S]*?\*\//g, '')) ||
-    // The existing V0 detail row uses inline color: var(--muted) for muted
-    // labels; we explicitly allow that. The forbidden case is anything
-    // that tries to substitute the `.pi-ev-highlight--*` class with an
-    // inline `background:` ON a `<mark className="pi-ev-highlight...`.
-    !/<mark\b[^>]*\bstyle=\{\{[^}]*background/.test(componentSrc),
+  !/<mark\b[^>]*\bstyle=\{\{[^}]*background/.test(componentSrcCode),
 )
+
+/* ─── 8b. trap highlight is dim (no fluorescent wash) ───────────── */
+
+{
+  // grab the body of the .pi-ev-highlight--trap rule
+  const trapRule = cssSrcCode.match(
+    /\.pi-ev-highlight--trap\s*\{([^}]*)\}/,
+  )
+  assert(
+    '.pi-ev-highlight--trap rule is present in stylesheet',
+    Boolean(trapRule),
+  )
+  if (trapRule) {
+    const body = trapRule[1]
+    const bgMatch = body.match(/background\s*:\s*rgba\([^)]*,\s*([\d.]+)\s*\)/)
+    assert(
+      '.pi-ev-highlight--trap background uses rgba(...) with alpha ≤ 0.10',
+      Boolean(bgMatch) && parseFloat(bgMatch[1]) <= 0.1,
+      bgMatch ? `alpha = ${bgMatch[1]}` : 'no rgba background',
+    )
+    assert(
+      '.pi-ev-highlight--trap keeps a dotted (or wavy) underline cue',
+      /border-bottom\s*:\s*[^;]*\b(dotted|wavy)\b/.test(body) ||
+        /text-decoration\s*:\s*[^;]*\b(dotted|wavy)\b/.test(body),
+    )
+  }
+}
 
 /* ─── 9. V1 should NOT yet draw cross-column dotted lines ────────── */
 
@@ -428,6 +480,273 @@ for (const p of input?.passages || []) {
   assert(
     'buildPassageSegments returns single text segment when sectionEvidence is missing',
     noEv.length === 1 && noEv[0].kind === 'text',
+  )
+}
+
+/* ─── 13. V1 must-fix: old V0 detail layer is gone ──────────────── */
+
+assert(
+  'component no longer defines DetailQuestionRow',
+  !/function\s+DetailQuestionRow\b/.test(componentSrcCode) &&
+    !/<DetailQuestionRow\b/.test(componentSrcCode),
+)
+assert(
+  'component no longer defines QuestionsPanel',
+  !/function\s+QuestionsPanel\b/.test(componentSrcCode) &&
+    !/<QuestionsPanel\b/.test(componentSrcCode),
+)
+assert(
+  'component no longer renders QuestionDetail (the old expanded body)',
+  !/function\s+QuestionDetail\b/.test(componentSrcCode) &&
+    !/<QuestionDetail\b/.test(componentSrcCode),
+)
+
+const removedDetailCssClasses = [
+  '.pi-question ',
+  '.pi-question{',
+  '.pi-question-header',
+  '.pi-question-detail',
+  '.pi-q-stem',
+  '.pi-q-translation',
+  '.pi-q-section',
+  '.pi-evidence-box',
+  '.pi-distractor',
+  '.pi-question-no',
+  '.pi-question-backend',
+  '.pi-question-expand',
+  '.pi-tcard',
+  '.pi-review-badge',
+  '.pi-quote',
+  '.pi-explanation',
+  '.pi-synonym',
+]
+for (const cls of removedDetailCssClasses) {
+  assert(
+    `stylesheet removes obsolete V0-detail rule ${cls}`,
+    !cssSrc.includes(cls),
+  )
+}
+
+/* ─── 13b. dead .pi-content block is gone ────────────────────────── */
+
+assert(
+  'stylesheet removes dead .pi-content rule',
+  !/\.pi-content\b/.test(cssSrc),
+)
+
+/* ─── 13c. LoadRow no longer has 引文/收起 toggle or evidence list ─ */
+
+assert(
+  'component no longer renders "引文" / "收起" toggle for load evidence',
+  !/引文/.test(componentSrcCode) && !/收起/.test(componentSrcCode),
+)
+assert(
+  'component no longer references showEvidence local state on LoadRow',
+  !/setShowEvidence\b/.test(componentSrcCode) && !/showEvidence\b/.test(componentSrcCode),
+)
+const removedLoadEvidenceCss = [
+  '.pi-load-evidence-toggle',
+  '.pi-load-evidence-list',
+  '.pi-load-evidence-item',
+]
+for (const cls of removedLoadEvidenceCss) {
+  assert(
+    `stylesheet removes load-evidence rule ${cls}`,
+    !cssSrc.includes(cls),
+  )
+}
+
+/* ─── 13d. Key chunks render only as a "重要词块 · N 个" summary ── */
+
+assert(
+  'component renders key-chunk summary "重要词块 · ... 个"',
+  /重要词块[^"`<]*·[^"`<]*个/.test(componentSrcCode),
+)
+assert(
+  'component no longer maps over keyChunks into individual chunk tags',
+  !/chunks\.map\(/.test(componentSrcCode) && !/keyChunks\.map\(/.test(componentSrcCode),
+)
+const removedChunkTagCss = [
+  '.pi-chunk-list',
+  '.pi-chunk-tag',
+  '.pi-chunk-surface',
+  '.pi-chunk-meta',
+]
+for (const cls of removedChunkTagCss) {
+  assert(
+    `stylesheet removes per-chunk tag rule ${cls}`,
+    !cssSrc.includes(cls),
+  )
+}
+
+/* ─── 14. V1 must-fix: support priority in overlap arbitration ──── */
+
+/**
+ * Helper: build a synthetic PassageEvidenceView with a controlled set
+ * of evidence items. The adapter normally builds these; here we hand-
+ * craft them so we can exercise overlap edge cases that the bundled
+ * fixture cannot reach.
+ */
+function makeSectionEvidence(items) {
+  return {
+    paperSection: 'X',
+    passageTitle: null,
+    passageBody: null,
+    evidenceItems: items,
+    questions: [],
+  }
+}
+function supportItem(id, quote) {
+  return {
+    id: `${id}-correct`,
+    paperSection: 'X',
+    questionNo: '1',
+    optionLabel: 'A',
+    evidenceKind: 'support',
+    questionAnswer: 'A',
+    quote,
+    explanationZh: '',
+    distractorCategory: null,
+    distractorSubtype: null,
+  }
+}
+function trapItem(id, label, quote) {
+  return {
+    id: `${id}-distractor-${label}`,
+    paperSection: 'X',
+    questionNo: '1',
+    optionLabel: label,
+    evidenceKind: 'trap',
+    questionAnswer: 'A',
+    quote,
+    explanationZh: '',
+    distractorCategory: 'detail_word_misleading',
+    distractorSubtype: null,
+  }
+}
+
+// 14a. support quote is a strict substring of a trap quote: support
+//      must be highlighted, trap must be dropped (no overlap allowed).
+{
+  const passageBody = 'The widely accepted theory predicts a universal pattern.'
+  const ev = makeSectionEvidence([
+    // adapter order = support, then traps by label ASC; we mimic that
+    supportItem('X-1', 'accepted theory'),
+    trapItem('X-1', 'B', 'widely accepted theory predicts'),
+  ])
+  const segs = buildPassageSegments({
+    passageBody,
+    activeQuestionId: 'X-1',
+    sectionEvidence: ev,
+  })
+  const highlights = segs.filter((s) => s.kind === 'highlight')
+  const supportHighlights = highlights.filter((s) => s.evidenceKind === 'support')
+  const trapHighlights = highlights.filter((s) => s.evidenceKind === 'trap')
+  assert(
+    '14a: support survives when trap quote is a superstring of support quote',
+    supportHighlights.length === 1 && supportHighlights[0].text === 'accepted theory',
+  )
+  assert(
+    '14a: trap is dropped (does not cover support) when fully overlapping support',
+    trapHighlights.length === 0,
+    `got trap highlights: ${JSON.stringify(trapHighlights.map((t) => t.text))}`,
+  )
+}
+
+// 14b. trap and support occupy the exact same span: support wins.
+{
+  const passageBody = 'The fragile balance shifts every season.'
+  const ev = makeSectionEvidence([
+    supportItem('X-1', 'fragile balance'),
+    trapItem('X-1', 'C', 'fragile balance'),
+  ])
+  const segs = buildPassageSegments({
+    passageBody,
+    activeQuestionId: 'X-1',
+    sectionEvidence: ev,
+  })
+  const highlights = segs.filter((s) => s.kind === 'highlight')
+  assert(
+    '14b: support wins exact-span tie against trap',
+    highlights.length === 1 && highlights[0].evidenceKind === 'support',
+  )
+}
+
+// 14c. partial overlap: trap starts inside a support span. Support
+//      keeps its full span; trap is dropped.
+{
+  const passageBody = 'Rapid technological change disrupts everything.'
+  const ev = makeSectionEvidence([
+    supportItem('X-1', 'technological change'),
+    trapItem('X-1', 'D', 'change disrupts'),
+  ])
+  const segs = buildPassageSegments({
+    passageBody,
+    activeQuestionId: 'X-1',
+    sectionEvidence: ev,
+  })
+  const highlights = segs.filter((s) => s.kind === 'highlight')
+  const supportHighlights = highlights.filter((s) => s.evidenceKind === 'support')
+  const trapHighlights = highlights.filter((s) => s.evidenceKind === 'trap')
+  assert(
+    '14c: support keeps full span when trap partially overlaps',
+    supportHighlights.length === 1 &&
+      supportHighlights[0].text === 'technological change',
+  )
+  assert(
+    '14c: partially-overlapping trap is dropped',
+    trapHighlights.length === 0,
+    `got trap highlights: ${JSON.stringify(trapHighlights.map((t) => t.text))}`,
+  )
+}
+
+// 14d. non-overlapping trap still renders alongside support.
+{
+  const passageBody = 'The first claim is bold; the second claim is cautious.'
+  const ev = makeSectionEvidence([
+    supportItem('X-1', 'first claim'),
+    trapItem('X-1', 'B', 'second claim'),
+  ])
+  const segs = buildPassageSegments({
+    passageBody,
+    activeQuestionId: 'X-1',
+    sectionEvidence: ev,
+  })
+  const highlights = segs.filter((s) => s.kind === 'highlight')
+  const supportHighlights = highlights.filter((s) => s.evidenceKind === 'support')
+  const trapHighlights = highlights.filter((s) => s.evidenceKind === 'trap')
+  assert(
+    '14d: support and non-overlapping trap both render',
+    supportHighlights.length === 1 && trapHighlights.length === 1,
+    `got ${supportHighlights.length} support and ${trapHighlights.length} trap highlights`,
+  )
+  // make sure they emit in passage order
+  const order = highlights.map((h) => h.evidenceKind)
+  assert(
+    '14d: highlights emit in left-to-right passage order',
+    order[0] === 'support' && order[1] === 'trap',
+  )
+}
+
+// 14e. trap appears only as a superstring of support — that single
+//      occurrence is dropped, and there is no other occurrence.
+{
+  const passageBody = 'The widely accepted theory predicts a universal pattern.'
+  const ev = makeSectionEvidence([
+    supportItem('X-1', 'accepted theory'),
+    trapItem('X-1', 'B', 'widely accepted theory'),
+  ])
+  const segs = buildPassageSegments({
+    passageBody,
+    activeQuestionId: 'X-1',
+    sectionEvidence: ev,
+  })
+  const trapHighlights = segs.filter(
+    (s) => s.kind === 'highlight' && s.evidenceKind === 'trap',
+  )
+  assert(
+    '14e: when trap exists only as a superstring of support, trap is fully dropped',
+    trapHighlights.length === 0,
   )
 }
 
