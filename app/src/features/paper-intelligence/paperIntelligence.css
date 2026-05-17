@@ -1,4 +1,4 @@
-/* Paper Intelligence Preview — readonly teacher-facing report view */
+/* Paper Intelligence Preview — readonly teacher-facing report view (V1) */
 
 .pi-view {
   min-height: 100vh;
@@ -46,13 +46,6 @@
   font-size: 12px;
   font-weight: 500;
   display: inline-block;
-}
-
-/* Content container */
-.pi-content {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
 }
 
 /* Passage section */
@@ -116,7 +109,7 @@
   color: var(--coral-text);
 }
 
-/* Load bars */
+/* Load bars (V1: score / label / shortReason only) */
 .pi-loads {
   padding: 16px 20px;
   border-bottom: 1px solid var(--line);
@@ -178,34 +171,6 @@
   flex: 1;
 }
 
-.pi-load-evidence-toggle {
-  font-size: 11px;
-  color: var(--accent);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.pi-load-evidence-list {
-  margin: 4px 0 8px 110px;
-  padding: 0;
-  list-style: none;
-}
-
-.pi-load-evidence-item {
-  font-size: 12px;
-  padding: 4px 8px;
-  margin-bottom: 3px;
-  background: var(--amber-soft);
-  border-radius: 4px;
-  color: var(--ink);
-}
-
-.pi-load-evidence-item .pi-quote {
-  font-style: italic;
-}
-
 /* Outline */
 .pi-outline {
   padding: 12px 20px;
@@ -227,209 +192,19 @@
   line-height: 1.6;
 }
 
-/* Key chunks */
+/* Key chunks (V1: summary only) */
 .pi-chunks {
   padding: 12px 20px;
   border-bottom: 1px solid var(--line);
 }
 
 .pi-chunks-title {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 12px;
   font-weight: 600;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.03em;
-}
-
-.pi-chunk-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.pi-chunk-tag {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  padding: 4px 8px;
-  background: var(--surface-strong);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  font-size: 12px;
-}
-
-.pi-chunk-surface {
-  font-weight: 600;
-  color: var(--ink-strong);
-}
-
-.pi-chunk-meta {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-/* Questions */
-.pi-questions {
-  padding: 12px 20px;
-}
-
-.pi-question {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-.pi-question-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  background: var(--surface-strong);
-  user-select: none;
-}
-
-.pi-question-header:hover {
-  background: var(--surface);
-}
-
-.pi-question-no {
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--accent);
-  min-width: 30px;
-}
-
-.pi-question-type {
-  font-size: 12px;
-  padding: 2px 8px;
-  background: var(--blue-soft);
-  color: var(--blue-text);
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.pi-question-answer {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--mint-text);
-}
-
-.pi-question-backend {
-  margin-left: auto;
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.pi-tcard {
-  font-size: 11px;
-  padding: 2px 6px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  color: var(--muted);
-}
-
-.pi-review-badge {
-  font-size: 10px;
-  padding: 2px 6px;
-  background: var(--amber-soft);
-  color: var(--amber-text);
-  border-radius: 4px;
-}
-
-.pi-question-expand {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Question detail (expanded) */
-.pi-question-detail {
-  padding: 14px;
-  border-top: 1px solid var(--line);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.pi-q-stem {
-  margin: 0 0 4px;
-  font-weight: 500;
-  color: var(--ink-strong);
-}
-
-.pi-q-translation {
-  margin: 0 0 10px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.pi-q-section {
-  margin: 10px 0 4px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.pi-quote {
-  display: inline;
-  padding: 1px 4px;
-  background: var(--amber-soft);
-  border-radius: 3px;
-  font-style: italic;
-  font-size: 12px;
-}
-
-.pi-evidence-box {
-  padding: 8px 12px;
-  margin: 6px 0;
-  background: var(--mint-soft);
-  border-radius: 6px;
-  border-left: 3px solid var(--mint-text);
-}
-
-.pi-evidence-box .pi-quote {
-  display: block;
-  margin-bottom: 4px;
-  background: none;
-  padding: 0;
-}
-
-.pi-evidence-box .pi-explanation {
-  font-size: 13px;
-  color: var(--ink);
-}
-
-.pi-distractor {
-  padding: 6px 10px;
-  margin: 4px 0;
-  background: var(--surface-strong);
-  border-radius: 6px;
-  font-size: 12px;
-}
-
-.pi-distractor-label {
-  font-weight: 700;
-  color: var(--coral-text);
-  margin-right: 6px;
-}
-
-.pi-distractor-category {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.pi-synonym {
-  margin-top: 8px;
-  padding: 6px 10px;
-  background: var(--blue-soft);
-  border-radius: 6px;
-  font-size: 12px;
-  color: var(--blue-text);
 }
 
 /* Error state */
@@ -452,4 +227,335 @@
 .pi-error p {
   color: var(--muted);
   font-size: 14px;
+}
+
+/* ─────────────────────────── V1 interactive layout ─────────────────── */
+
+/*
+ * Two-column shell. Left = passages + questions (scrolls). Right = sticky
+ * Analysis Panel (sticky inside the page, not position:fixed, so it
+ * scrolls with sibling content when the viewport is short).
+ *
+ * The header keeps full-width on top; only the content area is split.
+ */
+.pi-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 900px) {
+  .pi-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.pi-main {
+  min-width: 0;
+}
+
+.pi-side {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+@media (max-width: 900px) {
+  .pi-side {
+    position: static;
+    max-height: none;
+  }
+}
+
+.pi-passage-body {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  background: var(--surface-strong);
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+.pi-passage-body-empty {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 13px;
+}
+
+/*
+ * Evidence highlights — restrained tints, mark-style.
+ *
+ *   - support: mint underline + a low-opacity mint background tint.
+ *   - trap:    coral dotted underline + a near-transparent coral wash.
+ *
+ * V1 explicitly avoids any "wash of red" for trap quotes — the coral
+ * background is held to 0.06 opacity so the dotted underline carries
+ * the visual signal, not the fill.
+ */
+.pi-ev-highlight {
+  padding: 0 2px;
+  border-radius: 3px;
+  cursor: default;
+  text-decoration: none;
+}
+
+.pi-ev-highlight--support {
+  background: rgba(16, 185, 129, 0.18);
+  border-bottom: 2px solid rgba(16, 185, 129, 0.6);
+}
+
+.pi-ev-highlight--trap {
+  background: rgba(239, 68, 68, 0.06);
+  border-bottom: 2px dotted rgba(239, 68, 68, 0.55);
+}
+
+.pi-question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px 20px;
+}
+
+.pi-question-card {
+  text-align: left;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 10px 12px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 80ms ease, background 80ms ease;
+}
+
+.pi-question-card:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
+}
+
+.pi-question-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.pi-question-card--active {
+  border-color: var(--accent);
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.pi-question-card-head {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pi-question-card-no {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.pi-question-type {
+  font-size: 12px;
+  padding: 2px 8px;
+  background: var(--blue-soft);
+  color: var(--blue-text);
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.pi-question-answer {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mint-text);
+}
+
+.pi-question-card-stem {
+  font-size: 14px;
+  color: var(--ink-strong);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.pi-question-card-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .pi-question-card-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pi-question-card-option {
+  display: flex;
+  gap: 6px;
+}
+
+.pi-question-card-option-label {
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 16px;
+}
+
+.pi-analysis-empty {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+  padding: 8px 4px;
+}
+
+.pi-analysis-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.pi-analysis-question-no {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.pi-analysis-type {
+  font-size: 11px;
+  padding: 1px 6px;
+  background: var(--blue-soft);
+  color: var(--blue-text);
+  border-radius: 4px;
+}
+
+.pi-analysis-answer {
+  font-size: 12px;
+  color: var(--mint-text);
+  font-weight: 600;
+  background: var(--mint-soft);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.pi-analysis-stem {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--ink-strong);
+  line-height: 1.5;
+}
+
+.pi-analysis-section {
+  margin: 12px 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pi-analysis-evidence {
+  padding: 8px 10px;
+  background: var(--mint-soft);
+  border-left: 3px solid var(--mint-text);
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pi-analysis-evidence-quote {
+  display: block;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.pi-analysis-distractor {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pi-analysis-distractor-head {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.pi-analysis-distractor-label {
+  font-weight: 700;
+  color: var(--coral-text);
+}
+
+.pi-analysis-distractor-cat {
+  font-size: 10px;
+  color: var(--muted);
+  padding: 1px 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.pi-analysis-distractor-text-only {
+  font-size: 10px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.pi-analysis-distractor-quote {
+  display: block;
+  margin-top: 3px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.pi-analysis-synonym {
+  background: var(--blue-soft);
+  color: var(--blue-text);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pi-analysis-backstage {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pi-analysis-backstage-tag {
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.pi-analysis-review {
+  background: var(--amber-soft);
+  color: var(--amber-text);
+  border-color: var(--amber-text);
 }
