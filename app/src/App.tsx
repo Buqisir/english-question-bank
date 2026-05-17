@@ -108,8 +108,7 @@ import {
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
-// SPIKE: paper-surface prototype
-import type { PaperSurfaceRouteMatch } from './features/paper-surface/paperSurfaceRoute'
+// SPIKE: paper-surface prototype (rendered via surface=print query param)
 import { PaperSurfaceSpike } from './features/paper-surface/PaperSurfaceSpike'
 
 type EntryForm = {
@@ -918,7 +917,7 @@ function getParseSavedAt(
   return null
 }
 
-function App({ piRoute, psRoute }: { piRoute: PaperIntelligenceRouteMatch; psRoute: PaperSurfaceRouteMatch }) {
+function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // ─── Cut C: in-app PI ↔ workbench navigation ───
   // main.tsx parses the URL once at boot and passes the result in via the
   // `piRoute` prop. That snapshot can never change after mount on its own,
@@ -3259,12 +3258,14 @@ function App({ piRoute, psRoute }: { piRoute: PaperIntelligenceRouteMatch; psRou
   const piBasketCount = basket.length
 
   // ─── Paper Intelligence route rendering ───
-  // SPIKE: paper-surface prototype
-  if (psRoute.kind === 'paper-surface-spike') {
-    return <PaperSurfaceSpike paperId={psRoute.paperId} />
-  }
-
   if (currentPiRoute.kind === 'paper-intelligence') {
+    // Check if surface=print is requested for paper surface prototype
+    const surfaceParam = typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('surface')
+      : null
+    if (surfaceParam === 'print') {
+      return <PaperSurfaceSpike paperId={currentPiRoute.paperId} />
+    }
     return (
       <PaperIntelligencePreview
         paperId={currentPiRoute.paperId}

@@ -6,8 +6,8 @@
  * Uses only Node built-in modules (fs, path) -- no npm dependencies required.
  *
  * Coverage:
- *   1. Route parser source contains correct parse logic for
- *      ?view=paper-surface-spike&paperId=<id>
+ *   1. Route integration: paperSurfaceRoute.ts is deleted; routing uses
+ *      surface=print query param on existing PI route in App.tsx.
  *   2. docs/product/paper-surface-spike-report.md exists and has key sections.
  *   3. Prototype component file exists at expected path.
  *   4. CSS file exists at expected path with key class prefixes.
@@ -37,52 +37,45 @@ function readSrc(rel) {
 }
 
 /* ===================================================================
- * 1. Route parser -- regex-based source checks (no TS import needed)
+ * 1. Route integration -- surface=print on existing PI route
  * =================================================================== */
 
-console.log('\n--- 1. Route parser (paperSurfaceRoute.ts) ---')
+console.log('\n--- 1. Route integration (surface=print on PI route) ---')
 
-const ROUTE_FILE = 'app/src/features/paper-surface/paperSurfaceRoute.ts'
-assert('Route parser file exists', existsSync(path.join(ROOT, ROUTE_FILE)))
+const OLD_ROUTE_FILE = 'app/src/features/paper-surface/paperSurfaceRoute.ts'
+assert('Standalone route parser file deleted', !existsSync(path.join(ROOT, OLD_ROUTE_FILE)))
 
-const routeSrc = readSrc(ROUTE_FILE)
-
+const mainSrc = readSrc('app/src/main.tsx')
 assert(
-  'Exports parsePaperSurfaceRoute function',
-  /export\s+function\s+parsePaperSurfaceRoute\b/.test(routeSrc),
+  'main.tsx has no parsePaperSurfaceRoute import',
+  !mainSrc.includes('parsePaperSurfaceRoute'),
+)
+assert(
+  'main.tsx has no psRoute variable',
+  !mainSrc.includes('psRoute'),
+)
+assert(
+  'main.tsx passes only piRoute to App',
+  /\bApp\s+piRoute=\{piRoute\}\s*\/>/.test(mainSrc) ||
+    /<App\s+piRoute=\{piRoute\}\s*\/>/.test(mainSrc),
 )
 
+const appSrc = readSrc('app/src/App.tsx')
 assert(
-  'Checks for view=paper-surface-spike param',
-  routeSrc.includes("'paper-surface-spike'") || routeSrc.includes('"paper-surface-spike"'),
+  'App.tsx has no PaperSurfaceRouteMatch import',
+  !appSrc.includes('PaperSurfaceRouteMatch'),
 )
-
 assert(
-  'Returns kind: none when view does not match',
-  /kind:\s*['"]none['"]/.test(routeSrc),
+  'App.tsx has no psRoute in function signature',
+  !/\bpsRoute\b/.test(appSrc),
 )
-
 assert(
-  'Returns kind: paper-surface-spike when matched',
-  /kind:\s*['"]paper-surface-spike['"]/.test(routeSrc),
+  'App.tsx detects surface=print query param',
+  /surface.*print/.test(appSrc) || /['"]surface['"]/.test(appSrc),
 )
-
 assert(
-  'Extracts paperId from URL params',
-  /params\.get\(['"]paperId['"]\)/.test(routeSrc),
-)
-
-assert(
-  'Accepts location-like object with search property',
-  /location\s*:\s*PaperSurfaceLocationLike/.test(routeSrc) ||
-    /location\.search/.test(routeSrc),
-)
-
-// Simulate parse logic by evaluating the core algorithm via regex extraction
-// Verify the function uses URLSearchParams correctly
-assert(
-  'Uses URLSearchParams to parse query string',
-  /new URLSearchParams\(/.test(routeSrc),
+  'App.tsx still imports PaperSurfaceSpike',
+  appSrc.includes('PaperSurfaceSpike'),
 )
 
 /* ===================================================================
