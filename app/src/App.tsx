@@ -3255,6 +3255,33 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   }, [])
   const piBasketCount = basket.length
 
+  /*
+   * Issue #20: PI top bar now exposes a "草稿卷 N" button that opens a
+   * read-only popover listing what's in the Assembly Basket. PI must
+   * stay decoupled from BasketItem / QuestionGroupCard / usePaperDraft
+   * (Cut B / Cut C boundary), so we project a pure `BasketPreviewItem`
+   * array here. Total score is pre-computed (basket items store a
+   * per-question `score`; teachers expect the panel total).
+   *
+   * Order is preserved from `basket`, which is the authoritative
+   * insertion order owned by paperDraft. No sorting / filtering is
+   * applied — the popover should match exactly what the workbench
+   * basket would show.
+   */
+  const piBasketPreviewItems = useMemo(
+    () =>
+      basket.map((item) => ({
+        id: item.id,
+        paperSection: item.section,
+        passageTitle: item.passageTitle,
+        groupTypeLabel: groupTypeLabel[item.groupType],
+        questionCount: item.questionCount,
+        totalScore: item.score * item.questionCount,
+        sourcePaperName: item.paperName,
+      })),
+    [basket],
+  )
+
   // ─── Paper Intelligence route rendering ───
   if (currentPiRoute.kind === 'paper-intelligence') {
     return (
@@ -3264,6 +3291,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         availableQuestionGroupIds={piAvailableQuestionGroupIds}
         onAddQuestionGroup={piOnAddQuestionGroup}
         basketCount={piBasketCount}
+        basketPreviewItems={piBasketPreviewItems}
         onBackToWorkbench={piOnBackToWorkbench}
       />
     )

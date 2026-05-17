@@ -982,13 +982,192 @@ button.pi-analysis-distractor:hover {
 
 .pi-topbar-basket {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: inherit;
   font-size: 12px;
   font-weight: 600;
   color: var(--accent);
   background: var(--blue-soft);
+  border: 1px solid transparent;
   border-radius: 12px;
   padding: 4px 12px;
   white-space: nowrap;
+  cursor: pointer;
+  /*
+   * Issue #20: the badge is now a real button (was a static <span>) so
+   * teachers can open the basket preview popover without leaving the PI
+   * page. We preserve the original visual silhouette — same pill shape,
+   * same color tokens — and only add a hairline border + caret to signal
+   * the new interactivity. The `--open` modifier inverts the fill while
+   * the popover is mounted so the trigger reads as "active".
+   */
+  transition: background 80ms ease, border-color 80ms ease, color 80ms ease;
+}
+
+.pi-topbar-basket:hover {
+  border-color: var(--accent);
+}
+
+.pi-topbar-basket:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.pi-topbar-basket--open {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.pi-topbar-basket--open:hover {
+  filter: brightness(0.95);
+}
+
+.pi-topbar-basket-caret {
+  font-size: 10px;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+/*
+ * Basket preview popover (Issue #20).
+ *
+ * Renders into <body> via React Portal, positioned with viewport
+ * coordinates (top/left inline styles). The portal escapes the top
+ * bar's flex layout and any future stacking traps. z-index sits above
+ * the cross-column evidence line overlay (z:5) and the insight popover
+ * (z:60) so the basket popover wins when the teacher opens it after
+ * clicking an insight chip — it is the most recent action and should
+ * not be obscured. Below the toast layer (z:100) so a save-confirm
+ * toast can still surface above.
+ */
+.pi-basket-preview-popover {
+  position: fixed;
+  z-index: 70;
+  width: 320px;
+  max-width: calc(100vw - 24px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 12px 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+  animation: pi-basket-preview-fade-in 120ms ease-out;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+@keyframes pi-basket-preview-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-basket-preview-popover {
+    animation: none;
+  }
+}
+
+.pi-basket-preview-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pi-basket-preview-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+
+.pi-basket-preview-summary {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.pi-basket-preview-empty {
+  padding: 16px 4px 8px;
+  text-align: center;
+}
+
+.pi-basket-preview-empty p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.pi-basket-preview-empty-hint {
+  margin-top: 6px !important;
+  font-size: 11px !important;
+  color: var(--muted) !important;
+  line-height: 1.5;
+}
+
+.pi-basket-preview-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pi-basket-preview-item {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--surface);
+}
+
+.pi-basket-preview-item-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pi-basket-preview-item-section {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--blue-soft);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.pi-basket-preview-item-passage {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-strong);
+  line-height: 1.4;
+}
+
+.pi-basket-preview-item-meta {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.pi-basket-preview-item-source {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.85;
 }
 
 @media (max-width: 600px) {

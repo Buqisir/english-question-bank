@@ -63,6 +63,25 @@ import {
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import './paperIntelligence.css'
 
+/**
+ * Lightweight, props-only projection of one Assembly Basket item that the
+ * Paper Intelligence top-bar popover renders. The PI feature directory is
+ * deliberately decoupled from the workbench domain types and the basket
+ * draft hook, so App.tsx must pre-resolve every field a teacher needs to
+ * inspect — section, passage title, question count, total score, source
+ * paper name. PI never calls back with this `id`; it's only a stable React
+ * key. There is no remove / reorder / select operation in this surface.
+ */
+export type BasketPreviewItem = {
+  id: string
+  paperSection: string
+  passageTitle: string
+  groupTypeLabel: string
+  questionCount: number
+  totalScore: number
+  sourcePaperName: string
+}
+
 type Props = {
   paperId: string | null
   /** Set of question group ids currently in the draft basket. */
@@ -72,6 +91,12 @@ type Props = {
   onAddQuestionGroup: (questionGroupId: string) => void
   /** Number of items currently in the basket. */
   basketCount: number
+  /**
+   * Resolved, read-only projection of the current Assembly Basket so the
+   * top bar can show a preview popover. Order matches insertion order
+   * (App owns ordering). Empty array → empty-state copy is shown.
+   */
+  basketPreviewItems: ReadonlyArray<BasketPreviewItem>
   /** Navigate back to the workbench. */
   onBackToWorkbench: () => void
 }
@@ -89,6 +114,7 @@ export function PaperIntelligencePreview({
   availableQuestionGroupIds,
   onAddQuestionGroup,
   basketCount,
+  basketPreviewItems,
   onBackToWorkbench,
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
@@ -261,7 +287,11 @@ export function PaperIntelligencePreview({
   if (loading) {
     return (
       <div className="pi-view">
-        <PaperIntelligenceTopBar basketCount={basketCount} onBackToWorkbench={onBackToWorkbench} />
+        <PaperIntelligenceTopBar
+          basketCount={basketCount}
+          basketPreviewItems={basketPreviewItems}
+          onBackToWorkbench={onBackToWorkbench}
+        />
         <div className="pi-error"><p>加载中…</p></div>
       </div>
     )
@@ -270,7 +300,11 @@ export function PaperIntelligencePreview({
   if (error || !report || !view) {
     return (
       <div className="pi-view">
-        <PaperIntelligenceTopBar basketCount={basketCount} onBackToWorkbench={onBackToWorkbench} />
+        <PaperIntelligenceTopBar
+          basketCount={basketCount}
+          basketPreviewItems={basketPreviewItems}
+          onBackToWorkbench={onBackToWorkbench}
+        />
         <div className="pi-error">
           <h2>未找到 Paper Intelligence 报告</h2>
           <p>{error || '报告数据为空。'}</p>
@@ -310,7 +344,11 @@ export function PaperIntelligencePreview({
 
   return (
     <div className="pi-view">
-      <PaperIntelligenceTopBar basketCount={basketCount} onBackToWorkbench={onBackToWorkbench} />
+      <PaperIntelligenceTopBar
+        basketCount={basketCount}
+        basketPreviewItems={basketPreviewItems}
+        onBackToWorkbench={onBackToWorkbench}
+      />
       <ReportHeader report={report} />
       <div className="pi-shell" ref={shellRef}>
         <div className="pi-main" ref={mainScrollerRef}>
@@ -366,15 +404,48 @@ export function PaperIntelligencePreview({
 
 
 
-/* ─── Top bar (Cut C) ─── */
+/* ─── Top bar (Cut C + Issue #20 basket preview entry) ─── */
 
 function PaperIntelligenceTopBar({
   basketCount,
+  basketPreviewItems,
   onBackToWorkbench,
 }: {
   basketCount: number
+  basketPreviewItems: ReadonlyArray<BasketPreviewItem>
   onBackToWorkbench: () => void
 }): ReactNode {
+  /*
+   * Issue #20: the "草稿卷 N" badge used to be a static <span> — teachers
+   * could see the count grow but had to bounce back to the workbench to
+   * confirm what was actually inside. We now render it as a real button
+   * that opens a lightweight read-only popover.
+   *
+   * Scope is deliberately narrow:
+   *   - Local-only `isBasketPreviewOpen` state. It does NOT touch
+   *     activeQuestionId, activeEvidenceId, activeInsightSection, the
+   *     evidence line, or the route. Insight popover and basket popover
+   *     are independent surfaces.
+   *   - No remove / reorder / save / export. Read-only inspection.
+   *   - No auto-open. The popover is closed on every mount.
+   *
+   * Close paths: re-click the button, click outside the popover, press Esc.
+   */
+  const [isBasketPreviewOpen, setIsBasketPreviewOpen] = useState(false)
+  const basketButtonRef = useRef<HTMLButtonElement | null>(null)
+
+  // Auto-close when the basket count drops to 0 from a non-zero state
+  // would be counter-productive — the teacher might still want to see the
+  // empty state. We leave the open state alone and let the popover render
+  // its empty-state copy. The teacher closes it explicitly.
+
+  const toggleBasketPreview = (): void => {
+    setIsBasketPreviewOpen((prev) => !prev)
+  }
+  const closeBasketPreview = (): void => {
+    setIsBasketPreviewOpen(false)
+  }
+
   return (
     <div className="pi-topbar" role="navigation" aria-label="Paper Intelligence top bar">
       <button
@@ -388,15 +459,210 @@ function PaperIntelligenceTopBar({
         返回工作台
       </button>
       <span className="pi-topbar-tagline">一张卷，10 分钟看懂讲哪里</span>
-      <span
-        className="pi-topbar-basket"
-        aria-label={`草稿卷 ${basketCount} 题`}
+      <button
+        ref={basketButtonRef}
+        type="button"
+        className={
+          isBasketPreviewOpen
+            ? 'pi-topbar-basket pi-topbar-basket--open'
+            : 'pi-topbar-basket'
+        }
+        onClick={toggleBasketPreview}
+        aria-haspopup="dialog"
+        aria-expanded={isBasketPreviewOpen}
+        aria-controls="pi-basket-preview-popover"
+        aria-label={`草稿卷 ${basketCount} 题，点击查看`}
         data-pi-basket-count={basketCount}
+        data-pi-basket-toggle="true"
       >
         草稿卷 {basketCount}
-      </span>
+        <span aria-hidden="true" className="pi-topbar-basket-caret">▾</span>
+      </button>
+      {isBasketPreviewOpen && (
+        <BasketPreviewPopover
+          items={basketPreviewItems}
+          anchorRef={basketButtonRef}
+          onClose={closeBasketPreview}
+        />
+      )}
     </div>
   )
+}
+
+/* ─── Issue #20: basket preview popover ─── */
+
+/**
+ * Width / spacing constants for the basket preview popover, kept in sync
+ * with the matching `.pi-basket-preview-popover` rule in
+ * paperIntelligence.css. If one moves, move both.
+ */
+const BASKET_PREVIEW_WIDTH = 320
+const BASKET_PREVIEW_GAP = 6
+const BASKET_PREVIEW_VIEWPORT_PAD = 12
+
+function computeBasketPreviewPosition(
+  anchorRect: DOMRect,
+  viewportWidth: number,
+): { top: number; left: number } {
+  const top = anchorRect.bottom + BASKET_PREVIEW_GAP
+  // Right-align the popover to the basket button so it grows to the left
+  // (the button sits at the right edge of the top bar). Clamp into the
+  // viewport so the popover never disappears past either edge.
+  const desiredLeft = anchorRect.right - BASKET_PREVIEW_WIDTH
+  const minLeft = BASKET_PREVIEW_VIEWPORT_PAD
+  const maxLeft = Math.max(
+    minLeft,
+    viewportWidth - BASKET_PREVIEW_WIDTH - BASKET_PREVIEW_VIEWPORT_PAD,
+  )
+  const left = Math.min(Math.max(desiredLeft, minLeft), maxLeft)
+  return { top, left }
+}
+
+/**
+ * Read-only popover that lists the items currently in the Assembly Basket.
+ *
+ * Portal strategy mirrors `InsightPanel`: render into `document.body` so
+ * the popover escapes the top bar's flex layout and any future stacking
+ * traps. Positioning is recomputed on scroll (capture phase, to catch
+ * inner scrollers) and resize so the popover keeps tracking the basket
+ * button when the page reflows.
+ *
+ * Close paths handled here:
+ *   - Esc keydown.
+ *   - Mousedown outside both the popover and the anchor button. We use
+ *     mousedown rather than click so the close fires before the anchor
+ *     button's own click handler would otherwise re-open the popover.
+ *
+ * Re-clicking the basket button itself is handled at the top-bar level
+ * (the button's onClick toggles `isBasketPreviewOpen`); we explicitly skip
+ * outside-click handling when the event target is inside the anchor so
+ * the toggle closes cleanly without a double-flip.
+ */
+function BasketPreviewPopover(props: {
+  items: ReadonlyArray<BasketPreviewItem>
+  anchorRef: RefObject<HTMLButtonElement | null>
+  onClose: () => void
+}): ReactNode {
+  const { items, anchorRef, onClose } = props
+  const [position, setPosition] = useState<{ top: number; left: number } | null>(null)
+  const popoverRef = useRef<HTMLDivElement | null>(null)
+
+  useLayoutEffect(() => {
+    const anchor = anchorRef.current
+    if (!anchor) return
+
+    const update = (): void => {
+      const rect = anchor.getBoundingClientRect()
+      const vw =
+        typeof window !== 'undefined'
+          ? window.innerWidth || document.documentElement.clientWidth
+          : 1024
+      setPosition(computeBasketPreviewPosition(rect, vw))
+    }
+    update()
+
+    window.addEventListener('scroll', update, true)
+    window.addEventListener('resize', update)
+    return (): void => {
+      window.removeEventListener('scroll', update, true)
+      window.removeEventListener('resize', update)
+    }
+  }, [anchorRef])
+
+  // Esc closes.
+  useEffect(() => {
+    const handler = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  // Outside-click closes. We bind on mousedown so the close runs before
+  // the basket button's onClick re-opens the popover when the click
+  // happens on the anchor itself.
+  useEffect(() => {
+    const handler = (e: MouseEvent): void => {
+      const target = e.target as Node | null
+      if (!target) return
+      if (popoverRef.current && popoverRef.current.contains(target)) return
+      if (anchorRef.current && anchorRef.current.contains(target)) return
+      onClose()
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [anchorRef, onClose])
+
+  if (typeof document === 'undefined') return null
+  if (!position) return null
+
+  const isEmpty = items.length === 0
+
+  return createPortal(
+    <div
+      ref={popoverRef}
+      id="pi-basket-preview-popover"
+      className="pi-basket-preview-popover"
+      role="dialog"
+      aria-label="草稿卷预览"
+      data-pi-basket-popover="true"
+      data-pi-basket-popover-empty={isEmpty ? 'true' : 'false'}
+      style={{ top: position.top, left: position.left }}
+    >
+      <div className="pi-basket-preview-header">
+        <span className="pi-basket-preview-title">草稿卷</span>
+        <span className="pi-basket-preview-summary">
+          {isEmpty ? '尚未加入题组' : `已加入 ${items.length} 个题组`}
+        </span>
+      </div>
+      {isEmpty ? (
+        <div className="pi-basket-preview-empty" data-pi-basket-empty-state="true">
+          <p>草稿卷还是空的</p>
+          <p className="pi-basket-preview-empty-hint">
+            在篇章标题处点击「加入草稿卷」后会显示在这里
+          </p>
+        </div>
+      ) : (
+        <ul className="pi-basket-preview-list">
+          {items.map((item) => (
+            <li
+              key={item.id}
+              className="pi-basket-preview-item"
+              data-pi-basket-item-id={item.id}
+            >
+              <div className="pi-basket-preview-item-title">
+                <span className="pi-basket-preview-item-section">{item.paperSection}</span>
+                <span className="pi-basket-preview-item-passage">{item.passageTitle}</span>
+              </div>
+              <div className="pi-basket-preview-item-meta">
+                <span>{item.groupTypeLabel}</span>
+                <span aria-hidden="true">·</span>
+                <span>{item.questionCount}题</span>
+                <span aria-hidden="true">·</span>
+                <span>{formatBasketScore(item.totalScore)}分</span>
+              </div>
+              {item.sourcePaperName && (
+                <div className="pi-basket-preview-item-source">{item.sourcePaperName}</div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>,
+    document.body,
+  )
+}
+
+/**
+ * Format a basket score so whole numbers stay clean ("8") and half-point
+ * scores read as "7.5" rather than "7.50". Keeps the popover compact.
+ */
+function formatBasketScore(score: number): string {
+  if (!Number.isFinite(score)) return '0'
+  if (Number.isInteger(score)) return String(score)
+  return score.toFixed(1).replace(/\.0$/, '')
 }
 
 /* ─── Header ─── */

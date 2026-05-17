@@ -157,6 +157,26 @@ assert(
 )
 
 assert(
+  'App.tsx passes basketPreviewItems prop (Issue #20: PI basket preview entry)',
+  appSrc.includes('basketPreviewItems={'),
+  'Missing basketPreviewItems prop',
+)
+
+assert(
+  'App.tsx builds basketPreviewItems from basket via useMemo (no per-render allocation)',
+  /piBasketPreviewItems\s*=\s*useMemo\([\s\S]*?basket\.map/.test(appSrc),
+  'piBasketPreviewItems is not memoized off `basket`',
+)
+
+assert(
+  'piBasketPreviewItems projects only the lightweight fields PI needs',
+  /piBasketPreviewItems\s*=\s*useMemo\([\s\S]*?paperSection:[\s\S]*?passageTitle:[\s\S]*?groupTypeLabel:[\s\S]*?questionCount:[\s\S]*?totalScore:[\s\S]*?sourcePaperName:/.test(
+    appSrc,
+  ),
+  'piBasketPreviewItems is missing one of the required projection fields (paperSection, passageTitle, groupTypeLabel, questionCount, totalScore, sourcePaperName)',
+)
+
+assert(
   'App.tsx passes onBackToWorkbench prop',
   appSrc.includes('onBackToWorkbench={'),
   'Missing onBackToWorkbench prop',
@@ -188,6 +208,35 @@ assert(
   'Props type has basketCount',
   piPreviewSrc.includes('basketCount'),
   'Missing basketCount in props',
+)
+
+assert(
+  'Props type has basketPreviewItems (Issue #20: PI basket preview entry)',
+  piPreviewSrc.includes('basketPreviewItems'),
+  'Missing basketPreviewItems in props',
+)
+
+assert(
+  'Props type declares basketPreviewItems as a ReadonlyArray of a lightweight projection',
+  /basketPreviewItems:\s*ReadonlyArray<\s*BasketPreviewItem\s*>/.test(piPreviewSrc),
+  'basketPreviewItems should be ReadonlyArray<BasketPreviewItem> to keep PI immutable on its consumer',
+)
+
+assert(
+  'PI exports a BasketPreviewItem type so App can satisfy the contract',
+  /export\s+type\s+BasketPreviewItem\s*=\s*\{/.test(piPreviewSrc),
+  'BasketPreviewItem type is missing from PaperIntelligencePreview module',
+)
+
+assert(
+  'BasketPreviewItem only carries pre-resolved primitives (no QuestionGroupCard / BasketItem leakage)',
+  !/BasketPreviewItem\s*=\s*\{[\s\S]*?(QuestionGroupCard|BasketItem|defaultScore|sectionTitle:\s*string\s*\|\s*null)/.test(
+    piPreviewSrc,
+  ) &&
+    /BasketPreviewItem\s*=\s*\{[\s\S]*?paperSection:\s*string[\s\S]*?passageTitle:\s*string[\s\S]*?groupTypeLabel:\s*string[\s\S]*?questionCount:\s*number[\s\S]*?totalScore:\s*number[\s\S]*?sourcePaperName:\s*string[\s\S]*?\}/.test(
+      piPreviewSrc,
+    ),
+  'BasketPreviewItem must expose only the lightweight inspector fields',
 )
 
 assert(
@@ -683,6 +732,92 @@ assert(
   /data-pi-basket-count=/.test(piPreviewSrc),
   'missing data-pi-basket-count marker',
 )
+
+// Issue #20: the basket badge is now an interactive button (was a span).
+// We require both the toggle marker and the dialog wiring so a future
+// refactor can't silently downgrade the entry back to a static badge.
+assert(
+  'Issue #20: basket badge is rendered as a real <button> trigger',
+  /data-pi-basket-toggle="true"/.test(piPreviewSrc) &&
+    /<button[\s\S]*?data-pi-basket-toggle="true"/.test(piPreviewSrc),
+  'expected a <button data-pi-basket-toggle="true"> in the top bar',
+)
+
+assert(
+  'Issue #20: basket button announces popover via aria-haspopup="dialog"',
+  /aria-haspopup="dialog"/.test(piPreviewSrc),
+  'missing aria-haspopup="dialog" on the basket trigger',
+)
+
+assert(
+  'Issue #20: basket button exposes aria-expanded bound to the open state',
+  /aria-expanded=\{isBasketPreviewOpen\}/.test(piPreviewSrc),
+  'aria-expanded must reflect isBasketPreviewOpen state',
+)
+
+assert(
+  'Issue #20: basket popover is rendered into <body> via createPortal',
+  /createPortal\([\s\S]*?document\.body\b/.test(piPreviewSrc) &&
+    /data-pi-basket-popover="true"/.test(piPreviewSrc),
+  'expected createPortal(document.body) call AND a data-pi-basket-popover="true" element',
+)
+
+assert(
+  'Issue #20: basket popover closes on Esc keydown',
+  /BasketPreviewPopover[\s\S]*?Escape[\s\S]*?onClose/.test(piPreviewSrc) ||
+    /BasketPreviewPopover[\s\S]*?keydown[\s\S]*?Escape/.test(piPreviewSrc),
+  'no Esc keydown → onClose binding inside BasketPreviewPopover',
+)
+
+assert(
+  'Issue #20: basket popover closes on outside mousedown',
+  /BasketPreviewPopover[\s\S]*?mousedown[\s\S]*?onClose/.test(piPreviewSrc),
+  'no document mousedown → onClose binding inside BasketPreviewPopover',
+)
+
+assert(
+  'Issue #20: basket popover empty state copy is present',
+  /草稿卷还是空的/.test(piPreviewSrc) && /加入草稿卷/.test(piPreviewSrc),
+  'empty-state copy missing — popover would render blank when basket has 0 items',
+)
+
+assert(
+  'Issue #20: PI top bar uses local UI state (no global activeBasketItemId / route added)',
+  /useState[\s\S]*?\bisBasketPreviewOpen\b/.test(piPreviewSrc) &&
+    !/activeBasketItemId/.test(piPreviewSrc),
+  'expected local isBasketPreviewOpen useState; activeBasketItemId is NOT permitted',
+)
+
+// The basket popover must NOT touch any of the question / evidence /
+// insight states. Re-verify by scanning for setActiveQuestionId /
+// setActiveEvidenceId / setActiveInsightSection inside the basket
+// component definitions.
+{
+  const basketComponentRange =
+    piPreviewSrc.match(
+      /function\s+PaperIntelligenceTopBar[\s\S]*?function\s+ReportHeader\b/,
+    )?.[0] || ''
+  const popoverComponentRange =
+    piPreviewSrc.match(
+      /function\s+BasketPreviewPopover[\s\S]*?function\s+formatBasketScore\b/,
+    )?.[0] || ''
+  const basketSurface = basketComponentRange + popoverComponentRange
+  assert(
+    'Issue #20: basket entry components do not call setActiveQuestionId',
+    !/setActiveQuestionId\s*\(/.test(basketSurface),
+    'basket entry must not mutate activeQuestionId',
+  )
+  assert(
+    'Issue #20: basket entry components do not call setActiveEvidenceId',
+    !/setActiveEvidenceId\s*\(/.test(basketSurface),
+    'basket entry must not mutate activeEvidenceId',
+  )
+  assert(
+    'Issue #20: basket entry components do not call setActiveInsightSection',
+    !/setActiveInsightSection\s*\(/.test(basketSurface),
+    'basket entry must not mutate activeInsightSection',
+  )
+}
 
 // Strip block & line comments before the window.location / history check
 // so a comment that mentions the API name doesn't trigger a false positive.
