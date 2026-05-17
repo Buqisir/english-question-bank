@@ -495,6 +495,76 @@ for (const re of FORBIDDEN_PATHS) {
   )
 }
 
+/* ─── 9. Vite fs.allow is narrow (PR #32 review fix) ─────────────── */
+
+console.log('\nTest 9: app/vite.config.ts server.fs.allow is narrowly scoped')
+
+const VITE_CONFIG_REL = 'app/vite.config.ts'
+assert(
+  'app/vite.config.ts exists',
+  existsSync(path.join(ROOT, VITE_CONFIG_REL)),
+  VITE_CONFIG_REL,
+)
+const viteConfigSrc = readSrc(VITE_CONFIG_REL)
+// Strip /* ... */ comments for the structural / regression checks; the
+// header comment legitimately explains why repo-root is NOT allowed,
+// so it must not be flagged.
+const viteConfigNoComments = viteConfigSrc
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/(^|[^:])\/\/[^\n]*/g, '$1')
+
+assert(
+  'vite.config.ts allow-lists `path.resolve(__dirname, "../shared")`',
+  /path\.resolve\(\s*__dirname\s*,\s*['"]\.\.\/shared['"]\s*\)/.test(
+    viteConfigNoComments,
+  ),
+  'expected fs.allow to include path.resolve(__dirname, "../shared")',
+)
+assert(
+  'vite.config.ts does NOT allow-list the repo root (`path.resolve(__dirname, "..")`)',
+  !/path\.resolve\(\s*__dirname\s*,\s*['"]\.\.['"]\s*\)/.test(viteConfigNoComments),
+  'fs.allow must not include the whole repo root',
+)
+assert(
+  'vite.config.ts does NOT allow-list bare ".." or "../"',
+  !/allow\s*:\s*\[[^\]]*['"]\.\.\/?['"][^\]]*\]/s.test(viteConfigNoComments),
+  'fs.allow must not include a bare ".." entry',
+)
+assert(
+  'vite.config.ts does NOT allow-list "/" or filesystem root',
+  !/allow\s*:\s*\[[^\]]*['"]\/['"][^\]]*\]/s.test(viteConfigNoComments) &&
+    !/path\.resolve\(\s*['"]\/['"]\s*\)/.test(viteConfigNoComments),
+  'fs.allow must not include "/" or any absolute root path',
+)
+assert(
+  'vite.config.ts does NOT allow-list `process.cwd()` (which would resolve to repo root)',
+  !/allow\s*:\s*\[[^\]]*process\.cwd\(\)[^\]]*\]/s.test(viteConfigNoComments),
+  'fs.allow must not include process.cwd()',
+)
+assert(
+  'vite.config.ts does NOT use `searchForWorkspaceRoot` (whole-workspace allow)',
+  !/searchForWorkspaceRoot/.test(viteConfigNoComments),
+  'searchForWorkspaceRoot would broaden fs.allow to the whole workspace',
+)
+
+// Behavioral check: every entry in fs.allow must resolve to a path
+// strictly under `app/` or `shared/`. We do not actually evaluate the
+// config (no Vite available on the cloud sandbox), but we lock down
+// the expected literal shape: a single `path.resolve(__dirname, ...)`
+// call whose target is `../shared` or a deeper path inside it. Any
+// other shape needs explicit reviewer approval.
+const allowEntries = [
+  ...viteConfigNoComments.matchAll(
+    /path\.resolve\(\s*__dirname\s*,\s*['"]([^'"]+)['"]\s*\)/g,
+  ),
+].map((m) => m[1])
+assert(
+  'every fs.allow entry resolves to "../shared" or a path inside it',
+  allowEntries.length > 0 &&
+    allowEntries.every((p) => p === '../shared' || p.startsWith('../shared/')),
+  `entries: ${allowEntries.join(', ')}`,
+)
+
 /* ─── Summary ────────────────────────────────────────────────────── */
 
 console.log(`\n  ${passed} passed, ${failed} failed`)
