@@ -13,8 +13,6 @@ import {
   type AnalysisView,
   type AnalysisDistractorRow,
   type PassagePreviewView,
-  type PassageSegment,
-  type QuestionRow,
 } from '../paper-intelligence/preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from '../paper-intelligence/preview/paperIntelligenceEvidenceLine'
 import type { PaperIntelligenceReport, QuestionOption } from '../paper-intelligence/paperIntelligenceTypes'
