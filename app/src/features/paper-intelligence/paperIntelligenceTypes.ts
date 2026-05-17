@@ -104,6 +104,8 @@ export type QuestionAnalysis = {
 export type PassageReport = {
   paperSection: string
   passageTitle?: string
+  /** Stable id linking this passage to a local question group. */
+  questionGroupId?: string
   loads: PassageLoads
   aiInitialBand: AiInitialBand
   passageOutline: PassageOutline
