@@ -3,37 +3,46 @@
  * verify-paper-intelligence-interactive-preview
  *
  * Static + functional checks for the V1 interactive Paper Intelligence
- * preview. Three themes:
+ * preview. Themes:
  *
  *   1. Architecture lock-ins
  *      - Route param surface unchanged: `?view=paper-intelligence&paperId=...`.
  *      - Component does NOT hand-roll a quote matcher or import
  *        reading-analysis.
+ *      - Component does NOT import LinkOverlay.
  *      - Preview model is pure (no React / DOM / fetch / DB).
  *      - Preview model uses the existing evidence adapter.
  *      - reading-analysis directory is not modified by this branch.
  *      - server / package.json / SQLite are not modified.
+ *      - No `activeEvidenceId` top-level state.
  *
- *   2. V1 product rules (reviewer must-fix)
+ *   2. V1 product rules
  *      - The right Analysis Panel is the only home for
- *        stem / answer / distractor / synonym / back-stage fields. The
- *        old V0 detail layer (`QuestionsPanel`, `DetailQuestionRow`,
- *        and its CSS classes `.pi-question`, `.pi-question-header`,
- *        `.pi-question-detail`, `.pi-q-stem`, `.pi-q-translation`,
- *        `.pi-q-section`, `.pi-evidence-box`, `.pi-distractor*`) is
- *        gone.
+ *        stem / answer / distractor / synonym / back-stage fields.
  *      - LoadRow has no `引文 / 收起` toggle and no
  *        `.pi-load-evidence-toggle` / `.pi-load-evidence-list` CSS.
  *      - Key chunks render as a `重要词块 · N 个` summary line — the
- *        full tag list (`.pi-chunk-list` / `.pi-chunk-tag` /
- *        `.pi-chunk-surface` / `.pi-chunk-meta`) is removed.
- *      - The right panel carries an `aria-live="polite"` annotation
- *        for screen-reader updates when the active question changes.
- *      - Trap highlight uses a dim coral wash (opacity ≤ 0.10) — no
- *        full-fluorescent red block.
+ *        full tag list is removed.
+ *      - The right panel carries `aria-live="polite"` and
+ *        `role="region"`.
+ *      - Trap highlight uses a dim coral wash (opacity ≤ 0.10).
  *      - Dead `.pi-content` block is removed.
+ *      - V0 detail layer (DetailQuestionRow / QuestionsPanel /
+ *        QuestionDetail and their CSS) is gone.
  *
- *   3. Runtime contract
+ *   3. Smoke-polish surface (this revision)
+ *      - Component carries an auto-scroll effect that targets the
+ *        first support highlight when `activeQuestionId` flips.
+ *      - Auto-scroll scopes to `.pi-main` (left scroller); does not
+ *        scroll `window`.
+ *      - Auto-scroll honors `prefers-reduced-motion`.
+ *      - `.pi-main` is its own scroll container in CSS.
+ *      - `QuestionAnalysis.options` is typed (no longer read via
+ *        `Record<string, unknown>`).
+ *      - Multi-occurrence quote strategy is documented in JSDoc and
+ *        covered by a test case.
+ *
+ *   4. Runtime contract
  *      - `buildPreviewView(report, bodies, activeQuestionId)` builds a
  *        view with 4 passages and 15 questions for the bundled fixture.
  *      - With no active question, no highlight segments are produced.
@@ -41,8 +50,9 @@
  *        least one support and at least one trap highlight.
  *      - Question id format is `${paperSection}-${questionNo}` and
  *        round-trips through `parseQuestionId`.
- *      - Overlap arbitration: support beats trap. Verified with three
- *        synthetic edge cases.
+ *      - Overlap arbitration: support beats trap.
+ *      - Multi-occurrence: every non-overlapping match of the same
+ *        quote is highlighted.
  *      - DOM anchor attribute strings appear in the component source.
  *      - Highlight CSS classes appear in the stylesheet.
  *      - Right panel copy text appears in the component source.
@@ -83,16 +93,19 @@ const COMPONENT = 'app/src/features/paper-intelligence/PaperIntelligencePreview.
 const MODEL = 'app/src/features/paper-intelligence/preview/paperIntelligencePreviewModel.ts'
 const CSS = 'app/src/features/paper-intelligence/paperIntelligence.css'
 const ROUTE = 'app/src/features/paper-intelligence/paperIntelligenceRoute.ts'
+const TYPES = 'app/src/features/paper-intelligence/paperIntelligenceTypes.ts'
 
 assert('component file exists', existsSync(path.join(ROOT, COMPONENT)))
 assert('preview model file exists', existsSync(path.join(ROOT, MODEL)))
 assert('stylesheet exists', existsSync(path.join(ROOT, CSS)))
 assert('route parser exists', existsSync(path.join(ROOT, ROUTE)))
+assert('types file exists', existsSync(path.join(ROOT, TYPES)))
 
 const componentSrc = readSrc(COMPONENT)
 const modelSrc = readSrc(MODEL)
 const cssSrc = readSrc(CSS)
 const routeSrc = readSrc(ROUTE)
+const typesSrc = readSrc(TYPES)
 
 /**
  * Some assertions look for forbidden patterns in the *executable* code,
@@ -749,6 +762,284 @@ function trapItem(id, label, quote) {
     trapHighlights.length === 0,
   )
 }
+
+/* ─── 15. multi-occurrence quote: every match is highlighted ─────── */
+
+/**
+ * Smoke-polish requirement: when a quote string appears more than once
+ * in `passageBody`, every non-overlapping occurrence must render. We
+ * rely on this so the teacher sees the full landscape of where a
+ * surface phrase appears, rather than guessing which occurrence the
+ * model meant.
+ */
+{
+  // support quote occurs three times; trap quote occurs twice and does
+  // not overlap any support occurrence.
+  const passageBody =
+    'fragile balance · fragile balance again · and once more fragile balance · then warning sign · then warning sign'
+  const ev = makeSectionEvidence([
+    supportItem('X-1', 'fragile balance'),
+    trapItem('X-1', 'B', 'warning sign'),
+  ])
+  const segs = buildPassageSegments({
+    passageBody,
+    activeQuestionId: 'X-1',
+    sectionEvidence: ev,
+  })
+  const supportHighlights = segs.filter(
+    (s) => s.kind === 'highlight' && s.evidenceKind === 'support',
+  )
+  const trapHighlights = segs.filter(
+    (s) => s.kind === 'highlight' && s.evidenceKind === 'trap',
+  )
+  assert(
+    '15: support quote highlighted in all 3 non-overlapping occurrences',
+    supportHighlights.length === 3,
+    `got ${supportHighlights.length}`,
+  )
+  assert(
+    '15: trap quote highlighted in both non-overlapping occurrences',
+    trapHighlights.length === 2,
+    `got ${trapHighlights.length}`,
+  )
+  // each support highlight has identical text — sanity
+  assert(
+    '15: every support highlight slice equals the original quote text',
+    supportHighlights.every((s) => s.text === 'fragile balance'),
+  )
+  // model JSDoc explicitly documents the policy
+  assert(
+    'preview model JSDoc documents multi-occurrence quote strategy',
+    /Multi-occurrence quote strategy|every non-overlapping occurrence/i.test(modelSrc),
+  )
+}
+
+/* ─── 16. auto-scroll plumbing in the component ──────────────────── */
+
+/**
+ * Smoke-polish: clicking a question card in the left column should
+ * bring the first support highlight into view inside the LEFT
+ * scroller, never the document/window. The verify script can't render
+ * the component, so we assert on the source-level shape of the effect:
+ *
+ *   - useRef is imported and used for a left-scroller ref.
+ *   - that ref is attached to `.pi-main` (the only place we route
+ *     scroll into).
+ *   - a useEffect is keyed on `activeQuestionId` and calls
+ *     `.scrollIntoView(...)` on a target that lives INSIDE the
+ *     `.pi-main` ref.current — i.e. via `scroller.querySelector(...)`.
+ *   - the effect uses `block: 'nearest'` (so the browser can't fall
+ *     back to scrolling the window) and references
+ *     `prefers-reduced-motion` to pick `behavior`.
+ *
+ *   - `window.scrollTo` is NEVER called from this component.
+ *   - `document.scrollingElement` is NEVER manipulated.
+ *
+ * The smoke script (`scripts/smoke-paper-intelligence-preview.mjs`)
+ * exercises the actual scroll at runtime. These static checks just
+ * lock the shape so a refactor can't accidentally re-introduce a
+ * window-level scroll.
+ */
+assert(
+  'component imports useRef',
+  /\buseRef\b/.test(componentSrcCode) &&
+    /from ['"]react['"]/.test(componentSrc),
+)
+assert(
+  'component declares a ref for the left scroll container',
+  /useRef<HTMLDivElement \| null>\(null\)/.test(componentSrcCode) ||
+    /useRef<HTMLElement \| null>\(null\)/.test(componentSrcCode),
+)
+assert(
+  'component attaches the ref to the .pi-main scroller',
+  /<div\s+className=["']pi-main["'][^>]*\bref=\{[^}]+\}/.test(componentSrcCode),
+)
+assert(
+  'component has a useEffect keyed on activeQuestionId for the auto-scroll',
+  /useEffect\(\s*\(\)\s*=>\s*\{[\s\S]*?activeQuestionId[\s\S]*?\},\s*\[[^\]]*activeQuestionId[^\]]*\]/.test(
+    componentSrcCode,
+  ),
+)
+assert(
+  'component calls scrollIntoView (not window.scrollTo) for the highlight',
+  /\.scrollIntoView\s*\(/.test(componentSrcCode) &&
+    !/\bwindow\.scrollTo\s*\(/.test(componentSrcCode) &&
+    !/\bwindow\.scrollBy\s*\(/.test(componentSrcCode),
+)
+assert(
+  'auto-scroll uses block: "nearest" so the browser can\'t bubble to window',
+  /block\s*:\s*['"]nearest['"]/.test(componentSrcCode),
+)
+assert(
+  'component reads prefers-reduced-motion before choosing scroll behavior',
+  /prefers-reduced-motion/.test(componentSrcCode),
+)
+assert(
+  'auto-scroll branches scroll behavior on reduced motion (auto vs smooth)',
+  /behavior\s*:\s*reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(
+    componentSrcCode,
+  ) ||
+    // tolerate inverted ternary
+    /behavior\s*:\s*[a-zA-Z_$][\w$]*\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(
+      componentSrcCode,
+    ),
+)
+{
+  // The lookup must be scoped to the left scroller, never the global
+  // document. We accept any of:
+  //   (a) `ref.current?.querySelector(...)`
+  //   (b) `const scroller = ref.current; ... scroller.querySelector(...)`
+  // and we hard-fail if `document.querySelector` is used in the
+  // component anywhere.
+  const usesRefDirectly =
+    /mainScrollerRef\.current\??\.querySelector/.test(componentSrcCode) ||
+    /\b\w+Ref\.current\??\.querySelector/.test(componentSrcCode)
+  const usesLocalScroller =
+    /\bconst\s+scroller\s*=\s*\w+Ref\.current\b/.test(componentSrcCode) &&
+    /\bscroller\.querySelector\b/.test(componentSrcCode)
+  const noDocumentQuery = !/\bdocument\.querySelector\b/.test(componentSrcCode)
+  assert(
+    'auto-scroll target is fetched via the left scroller ref (not document.querySelector)',
+    (usesRefDirectly || usesLocalScroller) && noDocumentQuery,
+  )
+}
+assert(
+  'auto-scroll selector targets a support evidence highlight for the active question',
+  /data-pi-evidence-kind=["']support["']/.test(componentSrcCode) ||
+    /data-pi-evidence-kind="support"/.test(componentSrcCode) ||
+    /\\?["']support\\?["']/.test(componentSrcCode),
+)
+assert(
+  'component does NOT touch window.scrollTo / document.scrollTo',
+  !/\bwindow\.scroll(To|By)\b/.test(componentSrcCode) &&
+    !/\bdocument\.scrollingElement/.test(componentSrcCode),
+)
+
+/* ─── 17. left scroller is its own scroll container in CSS ───────── */
+
+{
+  const piMainRule = cssSrcCode.match(/\.pi-main\s*\{([^}]*)\}/)
+  assert('.pi-main rule exists in stylesheet', Boolean(piMainRule))
+  if (piMainRule) {
+    const body = piMainRule[1]
+    assert(
+      '.pi-main has overflow-y: auto so scrollIntoView resolves there',
+      /overflow-y\s*:\s*auto\b/.test(body),
+    )
+    assert(
+      '.pi-main has a max-height bound so it actually scrolls (vs. expanding the page)',
+      /max-height\s*:\s*[^;]+/.test(body),
+    )
+  }
+}
+
+/* ─── 18. QuestionAnalysis.options is typed (no more `unknown`) ── */
+
+assert(
+  'paperIntelligenceTypes declares optional QuestionAnalysis.options',
+  /QuestionOption\b/.test(typesSrc) &&
+    /options\s*\?\s*:\s*QuestionOption\[\]/.test(typesSrc),
+)
+assert(
+  'paperIntelligenceTypes exports QuestionOption type',
+  /export type QuestionOption\b/.test(typesSrc),
+)
+assert(
+  'preview model imports QuestionOption / QuestionAnalysis from types',
+  /import\s+type\s*\{[^}]*QuestionOption[^}]*\}\s*from\s*['"][^'"]*paperIntelligenceTypes/.test(
+    modelSrc,
+  ),
+)
+assert(
+  'preview model no longer reads options via Record<string, unknown> cast',
+  !/q\s+as\s+unknown\s+as\s+Record<string,\s*unknown>/.test(modelSrc),
+)
+assert(
+  'preview model readOptionsFromQuestion accepts a typed QuestionAnalysis',
+  /function\s+readOptionsFromQuestion\s*\(\s*q\s*:\s*QuestionAnalysis(\s*\|\s*null)?(\s*\|\s*undefined)?\s*\)/.test(
+    modelSrc,
+  ),
+)
+assert(
+  'preview model uses QuestionOption[] in QuestionRow.optionsForDisplay',
+  /optionsForDisplay\s*:\s*QuestionOption\[\]/.test(modelSrc),
+)
+
+/* ─── 19. companion smoke script exists and covers the new flow ── */
+
+const SMOKE = 'scripts/smoke-paper-intelligence-preview.mjs'
+assert(
+  'companion smoke script exists',
+  existsSync(path.join(ROOT, SMOKE)),
+)
+if (existsSync(path.join(ROOT, SMOKE))) {
+  const smokeSrc = readSrc(SMOKE)
+  // Smoke must hit the canonical route, not invent a new one.
+  assert(
+    'smoke script targets ?view=paper-intelligence&paperId=...',
+    /view=paper-intelligence/.test(smokeSrc) && /paperId=/.test(smokeSrc),
+  )
+  // Smoke must use the same playwright path as siblings (no new dep).
+  assert(
+    'smoke script imports playwright from app/node_modules/playwright',
+    /from\s+['"][^'"]*app\/node_modules\/playwright/.test(smokeSrc),
+  )
+  // Behaviorally, the script must exercise the auto-scroll AND prove
+  // the document scroller stays put. Both are reviewer-pinned.
+  assert(
+    'smoke asserts auto-scroll target lands inside .pi-main',
+    /\.pi-main\b/.test(smokeSrc) && /scrollTop/.test(smokeSrc),
+  )
+  assert(
+    'smoke asserts the document/window scrollY does not change during click',
+    /window\.scrollY/.test(smokeSrc),
+  )
+  // Smoke must also exercise toggle-off and switch-question paths.
+  assert(
+    'smoke clicks the same card twice (toggle-off check)',
+    /firstCard\.click\(\)[\s\S]*firstCard\.click\(\)/.test(smokeSrc),
+  )
+  assert(
+    'smoke clicks a different question card to verify switch-question cleanup',
+    /lastCard\.click\(\)|secondCard\.click\(\)/.test(smokeSrc),
+  )
+  // Smoke must guard the V0 regression surfaces too.
+  assert(
+    'smoke checks no LinkOverlay svg gets rendered',
+    /data-link-id/.test(smokeSrc) || /LinkOverlay/.test(smokeSrc),
+  )
+  assert(
+    'smoke checks no V0 .pi-question-detail row appears',
+    /\.pi-question-detail/.test(smokeSrc),
+  )
+}
+
+/* ─── 20. existing rules that must stay locked ─────────────────── */
+
+// Re-confirm the "no LinkOverlay / no reading-analysis / no
+// activeEvidenceId" checks from earlier sections by re-asserting them
+// here as a single named regression block. These duplicate earlier
+// asserts on purpose: a refactor that nudges the order of the file
+// shouldn't be able to silently weaken the contract.
+
+assert(
+  'regression: component still does NOT introduce activeEvidenceId state',
+  !/activeEvidenceId/.test(componentSrcCode),
+)
+assert(
+  'regression: component still does NOT import LinkOverlay',
+  !/LinkOverlay/.test(componentSrcCode),
+)
+assert(
+  'regression: component still does NOT import reading-analysis',
+  !/features\/reading-analysis/.test(componentSrcCode),
+)
+assert(
+  'regression: V0 detail components remain absent',
+  !/function\s+(DetailQuestionRow|QuestionsPanel|QuestionDetail)\b/.test(
+    componentSrcCode,
+  ),
+)
 
 console.log(`\n  ${passed} passed, ${failed} failed`)
 if (failed > 0) process.exit(1)

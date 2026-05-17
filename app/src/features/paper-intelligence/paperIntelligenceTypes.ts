@@ -57,6 +57,21 @@ export type AnswerEvidence = {
   explanationZh: string
 }
 
+/**
+ * One option on a multiple-choice question (`A` / `B` / `C` / `D`).
+ *
+ * The V0 schema does not formally require `options` on
+ * `QuestionAnalysis` (it lives on the input side, and was historically
+ * read through an `unknown` cast in the preview model). The Paper
+ * Intelligence pipeline DOES emit it on the output report in practice,
+ * so the field is typed here as an optional array — present for new
+ * reports, gracefully absent for legacy ones.
+ */
+export type QuestionOption = {
+  label: string
+  content: string
+}
+
 export type QuestionAnalysis = {
   questionNo: string
   paperSection: string
@@ -77,6 +92,13 @@ export type QuestionAnalysis = {
   boundaryFlags: string[]
   reviewNeeded: boolean
   confidence?: number
+  /**
+   * The displayable A/B/C/D options. Optional because legacy reports
+   * may not have this field. Reader must always handle the absent case.
+   * The order in this array is whatever the report producer used —
+   * downstream UI is expected to sort by `label` for display.
+   */
+  options?: QuestionOption[]
 }
 
 export type PassageReport = {

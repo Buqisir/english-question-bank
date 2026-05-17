@@ -11,14 +11,29 @@
  *   - The previous V0 expandable detail rows (`QuestionsPanel` /
  *     `DetailQuestionRow`) have been deleted to prevent the same
  *     question's content from appearing twice.
- *   - V1 only does highlighting. No cross-column dotted lines, no
- *     animations, no auto-scroll. DOM anchors (`data-pi-*`) stay so V2
- *     can wire up the LinkOverlay-style system later.
+ *   - V1 only does highlighting + a small "scroll the first support
+ *     highlight into view" affordance. No cross-column dotted lines,
+ *     no animations, no scroll linking. DOM anchors (`data-pi-*`) stay
+ *     so V2 can wire up the LinkOverlay-style system later.
  *   - Information density on the left is intentionally low:
  *       * LoadRow shows score / label / shortReason only — the
  *         per-load evidence list has been removed.
  *       * Key chunks show a `重要词块 · N 个` summary only — the full
  *         tag list is no longer rendered.
+ *
+ * Smoke-polish auto-scroll (this revision):
+ *   - When `activeQuestionId` flips to a non-null value, an effect
+ *     finds the first `<mark data-pi-evidence-kind="support"
+ *     data-pi-question-id="<id>">` inside the LEFT scroller and
+ *     scrolls only that scroller (not the window) so the support
+ *     highlight is visible.
+ *   - The left column is its own scroll container (`.pi-main` with
+ *     `overflow-y: auto`), so `scrollIntoView({ block: 'nearest' })`
+ *     resolves against `.pi-main` and never bubbles to the document.
+ *   - Honors `prefers-reduced-motion`: under reduced motion the scroll
+ *     uses `behavior: 'auto'` (instant); otherwise `'smooth'`.
+ *   - Effect runs only when `activeQuestionId` actually changes; when
+ *     it goes back to null we do NOT scroll.
  *
  * Routing: still `?view=paper-intelligence&paperId=<id>` — no new
  * demo route, no new view param. The route parser is unchanged.
@@ -28,12 +43,12 @@
  *   - That module uses the existing evidence adapter (`toEvidenceModel`,
  *     `selectEvidence`) — this component never calls passage substring
  *     lookups or any other quote-matching primitive directly.
- *   - This file: fetch + state + render. Nothing else.
+ *   - This file: fetch + state + render + the small auto-scroll effect.
  *   - Active state is just `activeQuestionId`. Per reviewer guidance,
  *     V1 does not introduce a separate `activeEvidenceId`.
  */
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -54,6 +69,23 @@ type Props = {
   paperId: string | null
 }
 
+/**
+ * Escape a question id (e.g. `A-21`) for safe inclusion inside an
+ * attribute-equals CSS selector. The model-side `buildQuestionId`
+ * already restricts ids to alphanumerics, dashes, and dots, but we
+ * defensively escape anything that isn't strictly word/dash so a future
+ * id schema change can't accidentally break the selector.
+ *
+ * `CSS.escape` is preferred when available; the manual fallback handles
+ * older runtimes (and the smoke-test sandbox).
+ */
+function cssAttr(value: string): string {
+  if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
+    return CSS.escape(value)
+  }
+  return value.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
+}
+
 /** Top-level container. Owns:
  *   - the report fetch
  *   - the optional input.json fetch (passageBody for highlighting)
@@ -66,6 +98,14 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
+
+  /**
+   * Ref to the left scroll container (`.pi-main`). The auto-scroll
+   * effect uses this to scope `scrollIntoView` to the left column only.
+   * If the ref is detached for any reason (e.g. error state), the effect
+   * is a no-op — we never fall back to scrolling the window.
+   */
+  const mainScrollerRef = useRef<HTMLDivElement | null>(null)
 
   // fetch report + (best-effort) input.json with passageBody
   useEffect(() => {
@@ -127,6 +167,55 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
     return buildPreviewView({ report, bodies, activeQuestionId })
   }, [report, bodies, activeQuestionId])
 
+  /**
+   * Auto-scroll: when the teacher activates a question, bring the
+   * first SUPPORT highlight into view inside the left scroller.
+   *
+   * Why support specifically: the support quote is the answer
+   * evidence, so it's the single most useful thing a teacher wants to
+   * see right after clicking. Trap quotes are secondary; the right
+   * Analysis Panel already lists them with their own captions.
+   *
+   * Why scope the scroll to `.pi-main`:
+   *   - The right Analysis Panel is sticky inside `.pi-shell`. We do
+   *     NOT want to scroll the page just because a teacher clicked a
+   *     question card — that would push the whole report header
+   *     offscreen.
+   *   - `.pi-main` carries `overflow-y: auto` (see CSS), so
+   *     `scrollIntoView({ block: 'nearest' })` resolves against
+   *     `.pi-main` and never against the document scroller.
+   *
+   * `prefers-reduced-motion`: when set, animation-style smooth scroll
+   * is replaced with `behavior: 'auto'` (instant). The query is read
+   * lazily inside the effect so it stays in sync with the user's
+   * current OS preference at the moment the click happens.
+   *
+   * The effect intentionally does nothing when `activeQuestionId`
+   * goes back to null (toggled off): collapsing into an empty panel
+   * shouldn't yank the passage view around.
+   */
+  useEffect(() => {
+    if (!activeQuestionId) return
+    const scroller = mainScrollerRef.current
+    if (!scroller) return
+    // Find the first support highlight for this question. Only the
+    // `<mark>` elements we render carry the `data-pi-evidence-kind`
+    // attribute, so the selector is unambiguous.
+    const target = scroller.querySelector<HTMLElement>(
+      `[data-pi-question-id="${cssAttr(activeQuestionId)}"][data-pi-evidence-kind="support"]`,
+    )
+    if (!target) return
+    const reduced =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+      behavior: reduced ? 'auto' : 'smooth',
+    })
+  }, [activeQuestionId, view])
+
   if (loading) {
     return (
       <div className="pi-view">
@@ -158,7 +247,7 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
     <div className="pi-view">
       <ReportHeader report={report} />
       <div className="pi-shell">
-        <div className="pi-main">
+        <div className="pi-main" ref={mainScrollerRef}>
           {view.passages.map((passageView) => {
             const reportPassage = report.passages.find(
               (rp) => rp.paperSection === passageView.paperSection,
