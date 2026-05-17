@@ -276,6 +276,21 @@ export function PaperIntelligencePreview({
     })
   }, [activeQuestionId, view])
 
+  // Clean up the toast timer on unmount so a navigation right after
+  // "加入草稿卷" doesn't fire setState on an unmounted component.
+  // NOTE: this effect MUST stay above the early returns below — React
+  // requires hook order to be stable across renders, and the loading /
+  // error branches return before any hook declared after this point
+  // would run.
+  useEffect(() => {
+    return (): void => {
+      if (toastTimerRef.current !== null) {
+        window.clearTimeout(toastTimerRef.current)
+        toastTimerRef.current = null
+      }
+    }
+  }, [])
+
   if (loading) {
     return (
       <div className="pi-view">
@@ -355,17 +370,6 @@ export function PaperIntelligencePreview({
       toastTimerRef.current = null
     }, 3000)
   }
-
-  // Clean up the toast timer on unmount so a navigation right after
-  // "加入草稿卷" doesn't fire setState on an unmounted component.
-  useEffect(() => {
-    return (): void => {
-      if (toastTimerRef.current !== null) {
-        window.clearTimeout(toastTimerRef.current)
-        toastTimerRef.current = null
-      }
-    }
-  }, [])
 
   return (
     <div className="pi-view">
