@@ -5,6 +5,8 @@ import App from './App.tsx'
 import { ReadingAnalysisDemoRoute } from './features/reading-analysis/ReadingAnalysisDemoRoute.tsx'
 import { parseReadingAnalysisRoute } from './features/reading-analysis/readingAnalysisRoute.ts'
 import { parsePaperIntelligenceRoute } from './features/paper-intelligence/paperIntelligenceRoute.ts'
+// SPIKE: paper-surface prototype
+import { parsePaperSurfaceRoute } from './features/paper-surface/paperSurfaceRoute.ts'
 
 /**
  * Tiny client-side router. The main app is unchanged; the URL is consulted
@@ -13,6 +15,7 @@ import { parsePaperIntelligenceRoute } from './features/paper-intelligence/paper
  *
  * Dispatch:
  *   - `?view=paper-intelligence&paperId=…`    → App shell renders PI preview
+ *   - `?view=paper-surface-spike&paperId=…`   → SPIKE: paper-surface prototype
  *   - `?view=reading-analysis[&groupId=…]`    → product entry
  *   - `?demo=reading-analysis` / `#reading-analysis` → dev/demo alias
  *   - anything else                           → `<App />`
@@ -25,6 +28,12 @@ const piRoute =
     ? { kind: 'none' as const }
     : parsePaperIntelligenceRoute(window.location)
 
+// SPIKE: paper-surface prototype
+const psRoute =
+  typeof window === 'undefined'
+    ? { kind: 'none' as const }
+    : parsePaperSurfaceRoute(window.location)
+
 const raRoute =
   typeof window === 'undefined'
     ? { kind: 'app' as const }
@@ -34,7 +43,7 @@ function RootComponent() {
   if (raRoute.kind === 'reading-analysis') {
     return <ReadingAnalysisDemoRoute />
   }
-  return <App piRoute={piRoute} />
+  return <App piRoute={piRoute} psRoute={psRoute} />
 }
 
 createRoot(document.getElementById('root')!).render(

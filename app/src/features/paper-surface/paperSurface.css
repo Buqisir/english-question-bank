@@ -1,0 +1,159 @@
+/**
+ * Paper Surface Spike — exam-paper CSS
+ *
+ * Class prefix: ps- (avoids conflicts with pi- classes)
+ * Typography: Times New Roman + SimSun, 10.5pt body
+ * Layout: A4-like single-column with proper margins
+ */
+
+/* ─── Page rules for print ─── */
+@page {
+  size: A4;
+  margin: 20mm 18mm;
+}
+
+/* ─── Container: A4-like paper surface ─── */
+.ps-paper {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm 18mm;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  font-family: 'Times New Roman', SimSun, serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  color: #000;
+}
+
+@media print {
+  .ps-paper {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+/* ─── Paper header ─── */
+.ps-header {
+  text-align: center;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.8em;
+}
+
+.ps-header-title {
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 0 0 0.3em;
+}
+
+.ps-header-subtitle {
+  font-size: 12pt;
+  margin: 0;
+}
+
+/* ─── Section headers ─── */
+.ps-section-header {
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 1.5em 0 0.8em;
+  padding-bottom: 0.3em;
+  border-bottom: 0.5px solid #999;
+}
+
+/* ─── Passage body ─── */
+.ps-passage-title {
+  font-size: 10.5pt;
+  font-weight: bold;
+  margin: 1em 0 0.5em;
+}
+
+.ps-passage-body {
+  text-indent: 2em;
+  margin: 0 0 1em;
+  text-align: justify;
+}
+
+/* ─── Questions ─── */
+.ps-question {
+  margin: 0.8em 0;
+}
+
+.ps-question-stem {
+  font-weight: bold;
+  margin: 0 0 0.3em;
+}
+
+.ps-question-number {
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+
+/* ─── Option grid ─── */
+.ps-options {
+  list-style: none;
+  padding: 0;
+  margin: 0.3em 0 0.8em 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2em 2em;
+}
+
+.ps-options--single-col {
+  grid-template-columns: 1fr;
+}
+
+.ps-option {
+  margin: 0;
+  padding: 0;
+}
+
+.ps-option-label {
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+
+/* ─── Loading / error states ─── */
+.ps-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  font-size: 12pt;
+  color: #666;
+}
+
+.ps-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  font-size: 12pt;
+  color: #c00;
+}
+
+/* ─── Back link ─── */
+.ps-back-link {
+  display: inline-block;
+  margin-bottom: 1em;
+  font-size: 10pt;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ps-back-link:hover {
+  text-decoration: underline;
+}
+
+/* ─── Spike banner ─── */
+.ps-spike-banner {
+  background: #fffae6;
+  border: 1px solid #e6c200;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  font-size: 9pt;
+  color: #665200;
+  border-radius: 3px;
+}
