@@ -1048,8 +1048,11 @@ button.pi-analysis-distractor:hover {
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
+  right: auto;
   z-index: 10;
+  width: 360px;
+  min-width: 320px;
+  max-width: min(420px, calc(100vw - 32px));
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -1230,6 +1233,13 @@ button.pi-analysis-distractor:hover {
   font-size: 12px;
   line-height: 1.5;
   color: var(--ink);
+}
+
+.pi-option-block-content {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-strong);
+  margin-bottom: 4px;
 }
 
 .pi-option-block-synonym {

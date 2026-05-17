@@ -1185,7 +1185,7 @@ if (existsSync(path.join(ROOT, SMOKE))) {
   )
   assert(
     'smoke clicks a quoted distractor to assert the line switches',
-    /pi-analysis-distractor(?!-text-only)/.test(smokeSrc),
+    /pi-option-block.*data-pi-evidence-kind.*trap|pi-analysis-distractor(?!-text-only)/.test(smokeSrc),
   )
   assert(
     'smoke covers a small-screen / narrow viewport scenario where the line is hidden',

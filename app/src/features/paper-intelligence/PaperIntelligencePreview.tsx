@@ -92,6 +92,7 @@ export function PaperIntelligencePreview({
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
   const [bodies, setBodies] = useState<Record<string, string>>({})
+  const [inputOptions, setInputOptions] = useState<Record<string, import('./paperIntelligenceTypes').QuestionOption[]>>({})
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
@@ -133,15 +134,39 @@ export function PaperIntelligencePreview({
         const reportData = (await reportRes.json()) as PaperIntelligenceReport
 
         let bodiesData: Record<string, string> = {}
+        let inputOptionsData: Record<string, import('./paperIntelligenceTypes').QuestionOption[]> = {}
         try {
           const inputRes = await fetch(inputUrl)
           if (inputRes.ok) {
             const inputJson = (await inputRes.json()) as {
-              passages?: Array<{ paperSection?: string; passageBody?: string }>
+              passages?: Array<{
+                paperSection?: string
+                passageBody?: string
+                questions?: Array<{
+                  questionNo?: string
+                  options?: Array<{ label?: string; content?: string }>
+                }>
+              }>
             }
             for (const p of inputJson?.passages || []) {
               if (p?.paperSection && typeof p.passageBody === 'string') {
                 bodiesData[p.paperSection] = p.passageBody
+              }
+              // Extract options from input.json for each question
+              if (p?.paperSection && Array.isArray(p.questions)) {
+                for (const q of p.questions) {
+                  if (!q?.questionNo || !Array.isArray(q.options)) continue
+                  const opts: import('./paperIntelligenceTypes').QuestionOption[] = []
+                  for (const o of q.options) {
+                    if (typeof o?.label === 'string' && typeof o?.content === 'string') {
+                      opts.push({ label: o.label, content: o.content })
+                    }
+                  }
+                  if (opts.length > 0) {
+                    const qid = `${p.paperSection}-${q.questionNo}`
+                    inputOptionsData[qid] = opts
+                  }
+                }
               }
             }
           }
@@ -152,6 +177,7 @@ export function PaperIntelligencePreview({
         if (cancelled) return
         setReport(reportData)
         setBodies(bodiesData)
+        setInputOptions(inputOptionsData)
         setLoading(false)
       } catch {
         if (cancelled) return
@@ -169,8 +195,8 @@ export function PaperIntelligencePreview({
   // derive view model
   const view = useMemo(() => {
     if (!report) return null
-    return buildPreviewView({ report, bodies, activeQuestionId })
-  }, [report, bodies, activeQuestionId])
+    return buildPreviewView({ report, bodies, activeQuestionId, inputOptions })
+  }, [report, bodies, activeQuestionId, inputOptions])
 
   /**
    * Reseed activeEvidenceId when activeQuestionId changes.
@@ -823,6 +849,12 @@ function AnalysisPanel(props: {
     distractorMap.set(d.optionLabel, d)
   }
 
+  // Build a map of option label → English content for quick lookup
+  const optionContentMap = new Map<string, string>()
+  for (const opt of analysis.optionsForDisplay) {
+    optionContentMap.set(opt.label, opt.content)
+  }
+
   // All option labels in order (A, B, C, D)
   const allLabels = ['A', 'B', 'C', 'D']
 
@@ -868,6 +900,7 @@ function AnalysisPanel(props: {
                 <span className="pi-option-block-label pi-option-block-label--correct">{label}</span>
                 <span className="pi-option-block-tag--correct">正确</span>
               </div>
+              <div className="pi-option-block-content">{optionContentMap.get(label) || '—'}</div>
               <div className="pi-option-block-explanation">
                 {analysis.answerEvidenceExplanationZh || '—'}
               </div>
@@ -920,6 +953,7 @@ function AnalysisPanel(props: {
                 )}
                 <span className="pi-option-block-text-only">text-only</span>
               </div>
+              <div className="pi-option-block-content">{optionContentMap.get(label) || '—'}</div>
               <div className="pi-option-block-explanation">
                 {distractor.shortReason}
               </div>
@@ -953,6 +987,7 @@ function AnalysisPanel(props: {
                 </span>
               )}
             </div>
+            <div className="pi-option-block-content">{optionContentMap.get(label) || '—'}</div>
             <div className="pi-option-block-explanation">
               {distractor.shortReason}
             </div>
