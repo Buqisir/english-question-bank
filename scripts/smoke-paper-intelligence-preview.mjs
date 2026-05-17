@@ -71,6 +71,17 @@
  *       first addable button shows the `.pi-toast`, flips that
  *       passage's state to `in-basket`, and does NOT disturb the
  *       teacher's active question or evidence line.
+ *   20. Cut C top bar: `[← 返回工作台]` button + tagline + `草稿卷 N`
+ *       badge. The basket badge updates after step 19's add.
+ *   21. Cut C return-to-workbench: clicking the back button
+ *       - strips `view=paper-intelligence` and `paperId=…` from the
+ *         URL via `history.replaceState` (no full page reload),
+ *       - unmounts `.pi-view`,
+ *       - mounts the workbench shell (`.app-shell` topbar) without
+ *         a navigation event,
+ *       - preserves `localStorage` `english-question-bank.assembly-basket-v1`
+ *         so the just-added passage is still in the draft after a hard
+ *         reload.
  *
  * Convention parity with `smoke-reading-analysis.mjs`:
  *   - imports playwright from `app/node_modules/playwright`,
@@ -620,6 +631,133 @@ try {
     '19. first passage action flips to in-basket after click',
     afterAddState.firstActionState === 'in-basket',
     `state=${afterAddState.firstActionState}`,
+  )
+
+  /* ── 20. Cut C: top bar surfaces back button + tagline + basket badge. ── */
+  const topbarState = await page.evaluate(() => {
+    const topbar = document.querySelector('.pi-topbar')
+    const back = topbar?.querySelector('[data-pi-back-to-workbench="true"]')
+    const tagline = topbar?.querySelector('.pi-topbar-tagline')
+    const basket = topbar?.querySelector('.pi-topbar-basket')
+    return {
+      topbarPresent: Boolean(topbar),
+      backIsButton: back?.tagName === 'BUTTON',
+      backText: (back?.textContent || '').trim(),
+      tagline: (tagline?.textContent || '').trim(),
+      basketIsSpan: basket?.tagName === 'SPAN',
+      basketText: (basket?.textContent || '').trim(),
+      basketCountAttr: basket?.getAttribute('data-pi-basket-count'),
+    }
+  })
+  step('20. .pi-topbar present above the report header', topbarState.topbarPresent)
+  step(
+    '20. back button is a real <button> (not a link)',
+    topbarState.backIsButton,
+    `tag=${topbarState.backIsButton}`,
+  )
+  step(
+    '20. back button text contains "返回工作台"',
+    topbarState.backText.includes('返回工作台'),
+    `text="${topbarState.backText}"`,
+  )
+  step(
+    '20. tagline reads "一张卷，10 分钟看懂讲哪里"',
+    topbarState.tagline === '一张卷，10 分钟看懂讲哪里',
+    `tagline="${topbarState.tagline}"`,
+  )
+  step(
+    '20. basket badge is a <span> (NOT a button → no drawer-open affordance)',
+    topbarState.basketIsSpan,
+    `tag=${topbarState.basketIsSpan}`,
+  )
+  step(
+    '20. basket badge text starts with "草稿卷"',
+    topbarState.basketText.startsWith('草稿卷'),
+    `text="${topbarState.basketText}"`,
+  )
+  // After step 19 added one passage, basketCount must be ≥ 1.
+  step(
+    '20. basket badge data-pi-basket-count reflects the just-added passage (≥ 1)',
+    Number(topbarState.basketCountAttr ?? '0') >= 1,
+    `data-pi-basket-count=${topbarState.basketCountAttr}`,
+  )
+
+  /* ── 21. Cut C: return-to-workbench preserves URL via replaceState. ── */
+  // We hook the browser's navigation surface so we can prove the click
+  // never triggers a full page load. `before/after Navigate Counter`
+  // increments on every `pagehide` / `unload` / `beforeunload`. None of
+  // those events should fire — `history.replaceState` is silent.
+  await page.evaluate(() => {
+    const w = /** @type {any} */ (window)
+    w.__piNavCount = 0
+    w.__piHistoryReplaceCount = 0
+    const handler = () => {
+      w.__piNavCount += 1
+    }
+    window.addEventListener('beforeunload', handler)
+    window.addEventListener('pagehide', handler)
+    window.addEventListener('unload', handler)
+    const origReplace = window.history.replaceState.bind(window.history)
+    window.history.replaceState = (...args) => {
+      w.__piHistoryReplaceCount += 1
+      return origReplace(...args)
+    }
+  })
+
+  // Read the basket BEFORE clicking back so we can assert it survives.
+  const basketLocalBefore = await page.evaluate(() =>
+    window.localStorage.getItem('assembly-basket-v1'),
+  )
+  step(
+    '21a. localStorage assembly-basket-v1 holds at least one basket item before back',
+    typeof basketLocalBefore === 'string' &&
+      basketLocalBefore.length > 0 &&
+      /"id"/.test(basketLocalBefore),
+    `value=${basketLocalBefore?.slice(0, 80)}…`,
+  )
+
+  await page.locator('[data-pi-back-to-workbench="true"]').first().click()
+  // Allow React to re-render and any deferred fetch effects to flush.
+  await page.waitForTimeout(600)
+
+  const afterBack = await page.evaluate(() => {
+    const w = /** @type {any} */ (window)
+    return {
+      navCount: w.__piNavCount ?? -1,
+      replaceCount: w.__piHistoryReplaceCount ?? -1,
+      url: window.location.href,
+      search: window.location.search,
+      piViewMounted: Boolean(document.querySelector('.pi-view')),
+      appShellMounted: Boolean(document.querySelector('.app-shell')),
+      basketLocal: window.localStorage.getItem('assembly-basket-v1'),
+    }
+  })
+  step(
+    '21b. no full-page navigation event fired (pagehide/unload/beforeunload count = 0)',
+    afterBack.navCount === 0,
+    `navCount=${afterBack.navCount}`,
+  )
+  step(
+    '21b. history.replaceState was called by the back handler',
+    afterBack.replaceCount >= 1,
+    `replaceCount=${afterBack.replaceCount}`,
+  )
+  step(
+    '21c. URL no longer contains view=paper-intelligence',
+    !afterBack.search.includes('view=paper-intelligence'),
+    `search="${afterBack.search}"`,
+  )
+  step(
+    '21c. URL no longer contains paperId',
+    !afterBack.search.includes('paperId='),
+    `search="${afterBack.search}"`,
+  )
+  step('21d. .pi-view is unmounted', !afterBack.piViewMounted)
+  step('21d. workbench .app-shell is mounted', afterBack.appShellMounted)
+  step(
+    '21e. localStorage assembly-basket-v1 is preserved after return-to-workbench',
+    afterBack.basketLocal === basketLocalBefore,
+    `before="${basketLocalBefore?.slice(0, 40)}…" after="${afterBack.basketLocal?.slice(0, 40)}…"`,
   )
 
   await shot(page, '04-final')

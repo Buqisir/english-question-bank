@@ -916,6 +916,16 @@ function getParseSavedAt(
 }
 
 function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
+  // ─── Cut C: in-app PI ↔ workbench navigation ───
+  // main.tsx parses the URL once at boot and passes the result in via the
+  // `piRoute` prop. That snapshot can never change after mount on its own,
+  // so we keep an internal `currentPiRoute` mirror that the App actually
+  // reads. `onBackToWorkbench` (below) flips this mirror to `{ kind: 'none' }`
+  // and rewrites the URL via `history.replaceState` — no full page reload,
+  // no `window.location.href` assignment, no `window.location.reload`.
+  // Workbench fetch effects depend on `currentPiRoute.kind` so they fire
+  // exactly once when the user returns from PI.
+  const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>(sampleQuestionGroups)
   const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
   const [query, setQuery] = useState('')
@@ -1138,11 +1148,12 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // against /api/* on PI-only sessions; reviewers flagged this as a P0 watch
   // on Cut A. We early-return inside each effect callback so hooks remain
   // unconditionally called (React's rules-of-hooks) but no fetch fires while
-  // piRoute.kind === 'paper-intelligence'. Each effect's dependency list
-  // includes piRoute.kind so Cut C (return-to-workbench) will retrigger the
-  // normal load when the user navigates back.
+  // currentPiRoute.kind === 'paper-intelligence'. Each effect's dependency
+  // list includes currentPiRoute.kind so Cut C return-to-workbench (which
+  // flips the in-app currentPiRoute to { kind: 'none' }) retriggers the
+  // normal load WITHOUT a full-page reload.
   useEffect(() => {
-    if (piRoute.kind === 'paper-intelligence') return
+    if (currentPiRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchQuestionGroups()
@@ -1160,10 +1171,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [piRoute.kind])
+  }, [currentPiRoute.kind])
 
   useEffect(() => {
-    if (piRoute.kind === 'paper-intelligence') return
+    if (currentPiRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchImportFiles()
@@ -1205,10 +1216,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [piRoute.kind])
+  }, [currentPiRoute.kind])
 
   useEffect(() => {
-    if (piRoute.kind === 'paper-intelligence') return
+    if (currentPiRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchPaperSets()
@@ -1226,10 +1237,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [piRoute.kind])
+  }, [currentPiRoute.kind])
 
   useEffect(() => {
-    if (piRoute.kind === 'paper-intelligence') return
+    if (currentPiRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchPaperWorkflows()
@@ -1247,7 +1258,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [piRoute.kind])
+  }, [currentPiRoute.kind])
 
   // Close insertion menu on outside click or Escape
   const closeInsertionMenu = paperDraft.setOpenInsertionIndex
@@ -3202,24 +3213,53 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // id → card → paperDraft.addGroups happens here. PI preview enforces button
   // state guards (basketIds / availableQuestionGroupIds) so this handler will
   // only ever be invoked for ids that actually resolve.
+  //
+  // Cut C P0 watch: the deps list intentionally pins the SPECIFIC handler
+  // (`addGroups`) instead of the whole `paperDraft` object — `paperDraft`
+  // is rebuilt every render and would force this useCallback to invalidate
+  // on every render, defeating the point of memoization. `addGroups` is
+  // stabilized via `useCallback` inside `usePaperDraft`, so identity stays
+  // constant across renders.
+  const { addGroups: paperDraftAddGroups } = paperDraft
   const piOnAddQuestionGroup = useCallback(
     (questionGroupId: string) => {
       const card = questionGroupById.get(questionGroupId)
       if (!card) return
-      paperDraft.addGroups([card])
+      paperDraftAddGroups([card])
     },
-    [questionGroupById, paperDraft],
+    [questionGroupById, paperDraftAddGroups],
   )
   const piOnBackToWorkbench = useCallback(() => {
-    // Cut C will implement return-to-workbench navigation.
+    // Cut C: in-app return-to-workbench. Three contracts:
+    //   1. Strip ?view=paper-intelligence and ?paperId=… from the URL
+    //      WITHOUT a full page reload — never use window.location.href / reload.
+    //   2. Flip currentPiRoute → { kind: 'none' } so App re-renders the
+    //      default workbench; the previously-guarded fetch effects retrigger.
+    //   3. Do NOT open the basket drawer, do NOT auto-save the Paper Set.
+    //      Assembly Basket and localStorage are preserved automatically because
+    //      we never touch usePaperDraft state here.
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('view')
+        url.searchParams.delete('paperId')
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        /* swallow — URL rewrite is best-effort; state flip below is what
+         * actually unmounts PI. */
+      }
+    }
+    setCurrentPiRoute({ kind: 'none' })
   }, [])
   const piBasketCount = basket.length
 
   // ─── Paper Intelligence route rendering ───
-  if (piRoute.kind === 'paper-intelligence') {
+  if (currentPiRoute.kind === 'paper-intelligence') {
     return (
       <PaperIntelligencePreview
-        paperId={piRoute.paperId}
+        paperId={currentPiRoute.paperId}
         basketIds={piBasketIds}
         availableQuestionGroupIds={piAvailableQuestionGroupIds}
         onAddQuestionGroup={piOnAddQuestionGroup}
