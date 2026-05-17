@@ -176,6 +176,9 @@ export function PaperSurfaceSpike({ paperId }: { paperId: string | null }) {
           onClick={(e) => {
             e.preventDefault()
             window.history.replaceState(null, '', '/')
+            // Spike-acceptable: full reload discards React state. Production should
+            // use the PI route's state-flip pattern (piOnBackToWorkbench callback
+            // with history.replaceState + state setter, no reload).
             window.location.reload()
           }}
         >
@@ -203,9 +206,13 @@ export function PaperSurfaceSpike({ paperId }: { paperId: string | null }) {
           />
         </aside>
 
-        {/* Evidence line: best-effort. Geometry may be unstable due to
-            different layout from pi-shell. The component is mounted so
-            evidence connections render when DOM anchors align. */}
+        {/* Evidence line: best-effort rendering. The CSS for pi-line-overlay is
+            duplicated in paperSurface.css (scoped to .ps-shell) to enable absolute
+            positioning of the SVG overlay. Geometry may still be unstable if
+            layout dimensions differ significantly from the original PI panel
+            proportions, since the evidence line hook uses getBoundingClientRect
+            relative to the container. The component is mounted so evidence
+            connections render when DOM anchors align. */}
         <PaperIntelligenceEvidenceLine
           containerRef={shellRef}
           leftScrollerRef={mainScrollerRef}

@@ -3260,9 +3260,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // ─── Paper Intelligence route rendering ───
   if (currentPiRoute.kind === 'paper-intelligence') {
     // Check if surface=print is requested for paper surface prototype
-    const surfaceParam = typeof window !== 'undefined'
-      ? new URLSearchParams(window.location.search).get('surface')
-      : null
+    const surfaceParam = new URLSearchParams(window.location.search).get('surface')
     if (surfaceParam === 'print') {
       return <PaperSurfaceSpike paperId={currentPiRoute.paperId} />
     }
