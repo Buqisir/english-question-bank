@@ -1045,11 +1045,19 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-insight-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: auto;
-  z-index: 10;
+  position: fixed;
+  /*
+   * QA #19 fix: panel is rendered into document.body via React Portal
+   * and positioned with viewport coordinates supplied by JS (top/left
+   * inline styles). This escapes the `.pi-main` overflow clip and the
+   * `.pi-side` sticky stacking context, both of which previously cut
+   * the popover off so it appeared "below" surrounding regions.
+   *
+   * z-index 60 sits above the cross-column line overlay (z:5) and
+   * any sticky/relative content in the page shell, but below the
+   * pi-toast layer (z:100) so a save-confirmation toast still wins.
+   */
+  z-index: 60;
   width: 360px;
   min-width: 320px;
   max-width: min(420px, calc(100vw - 32px));
@@ -1058,7 +1066,6 @@ button.pi-analysis-distractor:hover {
   background: var(--panel);
   padding: 12px 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  margin-top: 4px;
   max-height: 60vh;
   overflow-y: auto;
   animation: pi-insight-fade-in 120ms ease-out;
@@ -1082,12 +1089,14 @@ button.pi-analysis-distractor:hover {
 }
 
 /*
- * Anchor wrapper for the insight chip + popover. position:relative
- * so the absolutely-positioned panel resolves its top:100% from the
- * chip's bounding box.
+ * Anchor wrapper for the insight chip. The chip stays in document
+ * flow inside the passage header; the popover itself is portalled
+ * to <body> and positioned in viewport coordinates (see
+ * `.pi-insight-panel`), so this wrapper no longer establishes a
+ * positioning context for the panel. We keep the inline-flex layout
+ * so the chip aligns with sibling header actions.
  */
 .pi-insight-chip-anchor {
-  position: relative;
   display: inline-flex;
   align-items: center;
 }
