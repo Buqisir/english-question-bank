@@ -3,6 +3,7 @@
 Date: 2026-05-20
 Status: spike / technical evaluation
 Scope: Unified paper surface for Paper Intelligence interactive view, Assembly Basket preview, and PDF export
+Activation: `?view=paper-intelligence&paperId=paper-2024-xkb1-reading&surface=print`
 
 ## Executive Summary
 
@@ -192,10 +193,10 @@ The shared surface must:
 
 ### Phase 1: CSS-only paper surface prototype (this spike)
 
-**Scope**: Create an isolated prototype component that renders exam paper content (passage + questions) in a single DOM structure with two CSS modes (interactive and print-like). Demonstrate that the same DOM can display either layout by toggling a single class.
+**Scope**: Create an isolated prototype component that renders exam paper content (passage + questions) in a single DOM structure with two CSS modes (interactive and print-like). Demonstrate that the same DOM can display either layout by toggling a single class. The prototype is activated via `?view=paper-intelligence&paperId=...&surface=print` on the existing PI route (not a standalone route).
 
 **Deliverables**:
-- `app/src/features/paper-surface/PaperSurface.tsx` -- minimal prototype component
+- `app/src/features/paper-surface/PaperSurfaceSpike.tsx` -- minimal prototype component
 - CSS with interactive (two-column, scroll) and print (single-column, paged dimensions) modes
 - Verify script proving the component renders valid structure
 
@@ -224,6 +225,55 @@ The shared surface must:
 - Single source of truth for exam paper DOM structure
 
 **Does not include**: On-screen paginated preview (future Phase 4 candidate).
+
+---
+
+## Shared PaperSurface for Assembly Basket
+
+### Conceptual Model
+
+The current spike demonstrates:
+
+```
+PaperIntelligenceReport + input.json -> buildPreviewView() -> PaperSurfaceSpike (render)
+```
+
+The same paper surface architecture can serve the Assembly Basket preview:
+
+```
+BasketItem[] / QuestionGroupCard[] -> PaperSurfaceDocument -> PaperSurfaceRenderer
+```
+
+### PaperSurfaceDocument Interface (future)
+
+A shared `PaperSurfaceDocument` type would abstract over both data sources:
+
+- `header: { title, subtitle, year, region }` - rendered as the exam title area
+- `sections: PaperSurfaceSection[]` - each section contains:
+  - `label: string` (e.g., "A", "B", or custom section name)
+  - `passageBody: string` - the passage text
+  - `questions: PaperSurfaceQuestion[]` - questions with options
+
+This is the same structure the current spike already renders. The only difference is the data source:
+- PI path: data comes from report.json + input.json, view model via `buildPreviewView()`
+- Basket path: data comes from `BasketItem[]` resolved to `QuestionGroupCard[]` + their associated passages
+
+### How the Basket Path Would Work
+
+1. `usePaperDraft` already maintains `basket: BasketItem[]` with question group references
+2. Each `BasketItem` has a `questionGroupId` that resolves to a `QuestionGroupCard`
+3. `QuestionGroupCard` contains passage info, questions, and options
+4. A new adapter function `basketToPaperSurfaceDocument(items, groups)` would transform basket data into the `PaperSurfaceDocument` format
+5. The same `PaperSurfaceRenderer` component renders the exam-paper layout regardless of data source
+
+### What This Means for Draft Paper Preview
+
+The Assembly Basket's "preview" mode (issue #20) could reuse `ps-shell` / `ps-main` / `ps-side` layout:
+- Left panel: formal exam paper showing all basket items in paper order
+- Right panel: could show per-question metadata, difficulty, or be hidden entirely
+- Same CSS, same serif typography, same option grid logic
+
+This is NOT implemented in this spike PR. It is documented here as the intended future path.
 
 ---
 

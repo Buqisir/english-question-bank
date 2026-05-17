@@ -115,6 +115,18 @@ assert(
   `got ${reportContent.length} chars`,
 )
 
+assert(
+  'Report has Assembly Basket / shared PaperSurface section',
+  reportContent.includes('Assembly Basket') ||
+    reportContent.includes('BasketItem') ||
+    reportContent.includes('QuestionGroupCard'),
+)
+
+assert(
+  'Report mentions surface=print activation pattern',
+  reportContent.includes('surface=print'),
+)
+
 /* ===================================================================
  * 3. Prototype component file
  * =================================================================== */
@@ -166,6 +178,36 @@ assert(
   componentSrc.includes('./paperSurface.css'),
 )
 
+assert(
+  'Component imports buildPreviewView from paper-intelligence preview model',
+  componentSrc.includes('buildPreviewView'),
+)
+
+assert(
+  'Component imports or references PaperIntelligenceEvidenceLine',
+  componentSrc.includes('PaperIntelligenceEvidenceLine'),
+)
+
+assert(
+  'Component has activeQuestionId state',
+  componentSrc.includes('activeQuestionId'),
+)
+
+assert(
+  'Component has ps-shell class (two-panel wrapper)',
+  componentSrc.includes('ps-shell'),
+)
+
+assert(
+  'Component has ps-side class (right panel)',
+  componentSrc.includes('ps-side'),
+)
+
+assert(
+  'Component has ps-main class (left panel)',
+  componentSrc.includes('ps-main'),
+)
+
 /* ===================================================================
  * 4. CSS file
  * =================================================================== */
@@ -200,6 +242,36 @@ assert(
 assert(
   'CSS has question-related styles',
   cssSrc.includes('.ps-question'),
+)
+
+assert(
+  'CSS has font-family rule including SimSun',
+  /font-family:.*SimSun/.test(cssSrc),
+)
+
+assert(
+  'CSS has font-family rule including Times New Roman',
+  /font-family:.*Times New Roman/.test(cssSrc),
+)
+
+assert(
+  'CSS has .ps-shell class definition',
+  cssSrc.includes('.ps-shell'),
+)
+
+assert(
+  'CSS has .ps-side class definition',
+  cssSrc.includes('.ps-side'),
+)
+
+assert(
+  'CSS has .ps-main class definition',
+  cssSrc.includes('.ps-main'),
+)
+
+assert(
+  'CSS has .ps-question--active style (active question feedback)',
+  cssSrc.includes('.ps-question--active'),
 )
 
 /* =================================================================== */
