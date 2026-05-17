@@ -109,7 +109,7 @@ console.log('\n─── 1. Left panel paper-like flow ───')
 }
 
 // The InsightPanel must NOT appear between header and PassageBody in document flow.
-// It must be positioned absolutely (popover anchored to header).
+// It must be a popover (positioned fixed, portalled to <body> for QA #19 fix).
 {
   const cssSrc = readSrc('app/src/features/paper-intelligence/paperIntelligence.css')
   const cssSrcCode = stripComments(cssSrc)
@@ -118,18 +118,19 @@ console.log('\n─── 1. Left panel paper-like flow ───')
   if (insightRule) {
     const body = insightRule[1]
     assert(
-      '.pi-insight-panel is position: absolute (popover, not inline)',
-      /position\s*:\s*absolute\b/.test(body),
+      '.pi-insight-panel is position: fixed (popover, escapes overflow/stacking traps)',
+      /position\s*:\s*fixed\b/.test(body),
     )
     assert(
       '.pi-insight-panel does not occupy document flow',
-      !/position\s*:\s*(static|relative)\b/.test(body),
+      !/position\s*:\s*(static|relative|absolute)\b/.test(body),
     )
   }
-  // Chip anchor must be position: relative
+  // Panel is portalled to <body> via createPortal; chip-anchor no longer
+  // needs to be a positioning context.
   assert(
-    '.pi-insight-chip-anchor provides positioning context',
-    /\.pi-insight-chip-anchor[\s\S]*?position\s*:\s*relative/.test(cssSrcCode),
+    'InsightPanel uses createPortal to escape ancestor stacking contexts',
+    /createPortal\([\s\S]*?document\.body\b/.test(componentSrcCode),
   )
 }
 

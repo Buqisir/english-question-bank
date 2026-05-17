@@ -44,7 +44,8 @@
  *   - This file: fetch + state + render + effects.
  */
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
+import { createPortal } from 'react-dom'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -494,22 +495,12 @@ function PassageSection(props: {
         <div className="pi-passage-header-actions">
           {reportPassage && (
             <span className="pi-insight-chip-anchor">
-              <button
-                type="button"
-                className={insightOpen ? 'pi-insight-chip pi-insight-chip--open' : 'pi-insight-chip'}
-                onClick={() => onToggleInsight(passageView.paperSection)}
-                aria-expanded={insightOpen}
-                aria-label={insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
-                data-pi-insight-chip={passageView.paperSection}
-              >
-                {insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
-              </button>
-              {insightOpen && (
-                <InsightPanel
-                  reportPassage={reportPassage}
-                  onClose={() => onToggleInsight(passageView.paperSection)}
-                />
-              )}
+              <InsightChipAndPanel
+                paperSection={passageView.paperSection}
+                reportPassage={reportPassage}
+                insightOpen={insightOpen}
+                onToggle={() => onToggleInsight(passageView.paperSection)}
+              />
             </span>
           )}
           <span className="pi-band" data-band={passageView.bandLabel}>
@@ -548,21 +539,156 @@ function PassageSection(props: {
 /* ─── Insight Panel (Cut D1) ─── */
 
 /**
+ * Chip + popover panel pair.
+ *
+ * Portal strategy (QA #19 fix):
+ *   The popover is rendered into `document.body` via `createPortal`
+ *   and uses `position: fixed` coordinates derived from the chip's
+ *   `getBoundingClientRect()`. This deliberately bypasses two
+ *   stacking / clipping traps in the surrounding layout:
+ *
+ *     1. The left passage column (`.pi-main`) is its own scroll
+ *        container (`overflow-y: auto`). Per CSS overflow rules, a
+ *        non-`visible` `overflow-y` clamps `overflow-x` to `auto`
+ *        too, so an `position: absolute` popover anchored inside
+ *        `.pi-main` would be clipped horizontally as soon as it
+ *        extends beyond the column edge or vertically as soon as it
+ *        runs past the scroller's viewport.
+ *
+ *     2. The right Analysis Panel (`.pi-side`) is `position: sticky`
+ *        which establishes its own stacking context. Even bumping
+ *        the popover's z-index to a large number does not let an
+ *        element inside `.pi-main`'s stacking context paint above a
+ *        sibling sticky stacking context. Portaling to `<body>`
+ *        sidesteps that entirely — there is no longer a competing
+ *        ancestor stacking context, so a single high z-index wins.
+ *
+ *   We recompute coordinates on every scroll (capture phase, to
+ *   catch the inner `.pi-main` scroller as well as the document /
+ *   window) and on resize, so the popover tracks the chip while the
+ *   teacher scrolls. When the chip leaves the viewport we leave the
+ *   panel where it is — closing on scroll-out would be fighting the
+ *   teacher; the Esc key, the × button and re-clicking the chip
+ *   remain the explicit close paths.
+ */
+function InsightChipAndPanel(props: {
+  paperSection: string
+  reportPassage: PassageReport
+  insightOpen: boolean
+  onToggle: () => void
+}): ReactNode {
+  const { paperSection, reportPassage, insightOpen, onToggle } = props
+  const chipRef = useRef<HTMLButtonElement | null>(null)
+  return (
+    <>
+      <button
+        ref={chipRef}
+        type="button"
+        className={insightOpen ? 'pi-insight-chip pi-insight-chip--open' : 'pi-insight-chip'}
+        onClick={onToggle}
+        aria-expanded={insightOpen}
+        aria-label={insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
+        data-pi-insight-chip={paperSection}
+      >
+        {insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
+      </button>
+      {insightOpen && (
+        <InsightPanel
+          reportPassage={reportPassage}
+          chipRef={chipRef}
+          onClose={onToggle}
+        />
+      )}
+    </>
+  )
+}
+
+/**
+ * Panel width used by the position calculator. Kept in sync with
+ * `.pi-insight-panel { width: 360px }` in paperIntelligence.css. If
+ * one moves, move both.
+ */
+const INSIGHT_PANEL_WIDTH = 360
+const INSIGHT_PANEL_GAP = 4
+const INSIGHT_PANEL_VIEWPORT_PAD = 16
+
+type InsightPanelPosition = { top: number; left: number }
+
+function computeInsightPanelPosition(
+  chipRect: DOMRect,
+  viewportWidth: number,
+): InsightPanelPosition {
+  const top = chipRect.bottom + INSIGHT_PANEL_GAP
+  // Prefer left-aligning to the chip; clamp into the viewport so the
+  // popover never disappears past the right edge on narrow widths.
+  const desiredLeft = chipRect.left
+  const maxLeft = Math.max(
+    INSIGHT_PANEL_VIEWPORT_PAD,
+    viewportWidth - INSIGHT_PANEL_WIDTH - INSIGHT_PANEL_VIEWPORT_PAD,
+  )
+  const left = Math.min(Math.max(desiredLeft, INSIGHT_PANEL_VIEWPORT_PAD), maxLeft)
+  return { top, left }
+}
+
+/**
  * Header-anchored popover that shows loads, outline, and key chunks.
- * Positioned absolutely below the insight chip — does NOT occupy
- * document flow, so PassageBody / mark[data-pi-evidence-id] layout
- * coordinates stay stable.
+ * Renders into `document.body` via Portal so it escapes the left
+ * column's overflow clipping and the right panel's sticky stacking
+ * context. See `InsightChipAndPanel` for the rationale.
  *
  * Close via: × button (rendered here), Esc (handled at top level),
  * or clicking a question card (handled in handleSelectQuestion).
  */
 function InsightPanel(props: {
   reportPassage: PassageReport
+  chipRef: RefObject<HTMLButtonElement | null>
   onClose: () => void
 }): ReactNode {
-  const { reportPassage, onClose } = props
-  return (
-    <div className="pi-insight-panel" data-pi-insight-panel={reportPassage.paperSection} role="dialog" aria-label="篇章洞察">
+  const { reportPassage, chipRef, onClose } = props
+  const [position, setPosition] = useState<InsightPanelPosition | null>(null)
+
+  useLayoutEffect(() => {
+    const chip = chipRef.current
+    if (!chip) return
+
+    const update = (): void => {
+      const rect = chip.getBoundingClientRect()
+      const vw =
+        typeof window !== 'undefined'
+          ? window.innerWidth || document.documentElement.clientWidth
+          : 1024
+      setPosition(computeInsightPanelPosition(rect, vw))
+    }
+    update()
+
+    // Capture-phase scroll listener catches inner scrollers
+    // (`.pi-main`, sticky panels, etc.) that don't bubble scroll to
+    // window. Resize keeps the clamp accurate when the layout reflows.
+    window.addEventListener('scroll', update, true)
+    window.addEventListener('resize', update)
+    return (): void => {
+      window.removeEventListener('scroll', update, true)
+      window.removeEventListener('resize', update)
+    }
+  }, [chipRef])
+
+  if (typeof document === 'undefined') return null
+  if (!position) {
+    // First paint: layout effect hasn't measured yet. Render nothing
+    // so the panel doesn't flash at (0,0). The effect runs
+    // synchronously before paint, so this branch is effectively
+    // unreachable in the browser, but keeps SSR / tests safe.
+    return null
+  }
+
+  return createPortal(
+    <div
+      className="pi-insight-panel"
+      data-pi-insight-panel={reportPassage.paperSection}
+      role="dialog"
+      aria-label="篇章洞察"
+      style={{ top: position.top, left: position.left }}
+    >
       <div className="pi-insight-panel-header">
         <span className="pi-insight-panel-title">篇章洞察</span>
         <button
@@ -577,7 +703,8 @@ function InsightPanel(props: {
       <LoadsPanel loads={reportPassage.loads} />
       <OutlinePanel outline={reportPassage.passageOutline} />
       <ChunksSummary chunks={reportPassage.keyChunks} />
-    </div>
+    </div>,
+    document.body,
   )
 }
 
