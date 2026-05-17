@@ -633,6 +633,11 @@ function PassageAddAction(props: {
   const { addState, paperSection, questionGroupId, onAdd } = props
 
   if (addState === 'in-basket') {
+    // Mirror `data-pi-add-state` onto the inner button as well so smoke
+    // assertions that locate the action via `.pi-passage-action` (not the
+    // wrapping `.pi-passage-action-group`) see the flipped state. The other
+    // three branches return a single `<button>` that already carries the
+    // attribute; only this branch wraps the button in a status span.
     return (
       <span className="pi-passage-action-group" data-pi-add-state={addState}>
         <span className="pi-passage-action-status">已在草稿卷</span>
@@ -642,6 +647,7 @@ function PassageAddAction(props: {
           disabled
           aria-disabled="true"
           aria-label={`已加入草稿卷：阅读理解 ${paperSection}`}
+          data-pi-add-state={addState}
         >
           已加入
         </button>
