@@ -17,6 +17,7 @@
     {
       "paperSection": "A",
       "passageTitle": "Volunteering Opportunities",
+      "questionGroupId": "g-2024-xkb1-a",
       "loads": {
         "vocabularyChunkLoad": {
           "score": 1,
@@ -328,6 +329,7 @@
     {
       "paperSection": "B",
       "passageTitle": "A Scientist's Journey into Sound",
+      "questionGroupId": "g-2024-xkb1-b",
       "loads": {
         "vocabularyChunkLoad": {
           "score": 3,
@@ -601,6 +603,7 @@
     {
       "paperSection": "C",
       "passageTitle": "The Hidden Cost of Fast Fashion",
+      "questionGroupId": "g-2024-xkb1-c",
       "loads": {
         "vocabularyChunkLoad": {
           "score": 4,
@@ -925,6 +928,7 @@
     {
       "paperSection": "D",
       "passageTitle": "Rethinking Intelligence in Animals",
+      "questionGroupId": "g-2024-xkb1-d",
       "loads": {
         "vocabularyChunkLoad": {
           "score": 4,

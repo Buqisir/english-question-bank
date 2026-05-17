@@ -74,6 +74,16 @@ import './paperIntelligence.css'
 
 type Props = {
   paperId: string | null
+  /** Set of question group ids currently in the draft basket. */
+  basketIds: Set<string>
+  /** Set of question group ids that the local bank can resolve. */
+  availableQuestionGroupIds: Set<string>
+  /** Callback to add a question group to the basket. Cut A: wired but not invoked. */
+  onAddQuestionGroup: (questionGroupId: string) => void
+  /** Number of items currently in the basket. */
+  basketCount: number
+  /** Navigate back to the workbench. Cut A: wired but not invoked. */
+  onBackToWorkbench: () => void
 }
 
 /**
@@ -99,7 +109,14 @@ function cssAttr(value: string): string {
  *   - the auto-scroll effect (on activeQuestionId change)
  *   - the activeEvidenceId reseed effect (on view/activeQuestionId change)
  */
-export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
+export function PaperIntelligencePreview({
+  paperId,
+  basketIds: _basketIds,
+  availableQuestionGroupIds: _availableQuestionGroupIds,
+  onAddQuestionGroup: _onAddQuestionGroup,
+  basketCount: _basketCount,
+  onBackToWorkbench: _onBackToWorkbench,
+}: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [error, setError] = useState<string | null>(null)

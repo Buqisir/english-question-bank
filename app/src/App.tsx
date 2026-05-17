@@ -18,7 +18,7 @@ import {
   X,
 } from 'lucide-react'
 import type { FormEvent } from 'react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { questionGroups as sampleQuestionGroups } from './data/sampleQuestionGroups'
 import {
@@ -106,6 +106,8 @@ import {
   parseGrammarGroup as parseGrammarGroupRequest,
   parseImportFile as parseImportFileRequest,
 } from './services/questionGroups'
+import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
+import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
 
 type EntryForm = {
   sourceType: SourceType
@@ -913,7 +915,7 @@ function getParseSavedAt(
   return null
 }
 
-function App() {
+function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>(sampleQuestionGroups)
   const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
   const [query, setQuery] = useState('')
@@ -3169,6 +3171,37 @@ function App() {
       ['ready_to_commit', 'ready_to_paper', 'ready_to_export'].includes(workflow.status),
     ).length,
     review: paperWorkflows.filter((workflow) => workflow.status === 'needs_review').length,
+  }
+
+  // ─── Paper Intelligence bridge props (Cut A) ───
+  const piBasketIds = useMemo(
+    () => new Set(basket.map((item) => item.id)),
+    [basket],
+  )
+  const piAvailableQuestionGroupIds = useMemo(
+    () => new Set(questionGroups.map((group) => group.id)),
+    [questionGroups],
+  )
+  const piOnAddQuestionGroup = useCallback((_questionGroupId: string) => {
+    // Cut A: wired but intentionally no-op. Cut B will implement.
+  }, [])
+  const piOnBackToWorkbench = useCallback(() => {
+    // Cut A: wired but intentionally no-op. Cut C will implement.
+  }, [])
+  const piBasketCount = basket.length
+
+  // ─── Paper Intelligence route rendering ───
+  if (piRoute.kind === 'paper-intelligence') {
+    return (
+      <PaperIntelligencePreview
+        paperId={piRoute.paperId}
+        basketIds={piBasketIds}
+        availableQuestionGroupIds={piAvailableQuestionGroupIds}
+        onAddQuestionGroup={piOnAddQuestionGroup}
+        basketCount={piBasketCount}
+        onBackToWorkbench={piOnBackToWorkbench}
+      />
+    )
   }
 
   return (
