@@ -66,6 +66,11 @@
  *       work.
  *   18. Hard regressions: never any LinkOverlay svg with
  *       `data-link-id`, never any old V0 `.pi-question-detail` row.
+ *   19. Cut B passage-header basket action: each passage surfaces a
+ *       `.pi-passage-action` with `data-pi-add-state`; clicking the
+ *       first addable button shows the `.pi-toast`, flips that
+ *       passage's state to `in-basket`, and does NOT disturb the
+ *       teacher's active question or evidence line.
  *
  * Convention parity with `smoke-reading-analysis.mjs`:
  *   - imports playwright from `app/node_modules/playwright`,
@@ -541,6 +546,81 @@ try {
     ).length
   })
   step('18. every highlight mark carries a valid data-pi-evidence-kind', orphanMarks === 0)
+
+  /* ── 19. Cut B: passage-header basket action surface. ───────── */
+  // Each of the 4 passages must surface a `.pi-passage-action` element
+  // with a known `data-pi-add-state`. The default fixture+sample bank
+  // resolves all 4 ids to local groups, so the initial state is
+  // `addable` for every passage.
+  const addStates = await page.evaluate(() => {
+    return Array.from(
+      document.querySelectorAll('.pi-passage-action'),
+    ).map((el) => ({
+      state: el.getAttribute('data-pi-add-state'),
+      tag: el.tagName,
+      questionGroupId: el.getAttribute('data-pi-question-group-id'),
+      text: (el.textContent || '').trim(),
+    }))
+  })
+  step(
+    '19. four passage-header basket actions rendered',
+    addStates.length === 4,
+    `count=${addStates.length}`,
+  )
+  step(
+    '19. all four start in addable state with the expected button text',
+    addStates.every((s) => s.state === 'addable' && s.text === '加入草稿卷'),
+    JSON.stringify(addStates),
+  )
+
+  // Click the first addable action and assert: toast appears with the
+  // expected message; the button flips to the in-basket state; the
+  // teacher's active question + line state are NOT disturbed.
+  const beforeAddState = await page.evaluate(() => ({
+    activeId: document
+      .querySelector('.pi-question-card[aria-pressed="true"]')
+      ?.getAttribute('data-pi-question-id') ?? null,
+    pathCount: document.querySelectorAll('path.pi-line-path').length,
+  }))
+  const firstAction = page
+    .locator('.pi-passage-action[data-pi-add-state="addable"]')
+    .first()
+  const targetSection = await firstAction.evaluate((el) => {
+    const passage = el.closest('.pi-passage')
+    return passage?.getAttribute('data-pi-paper-section') ?? null
+  })
+  await firstAction.click()
+  await page.waitForSelector('.pi-toast', { timeout: 1500 })
+  const toastText = ((await page.locator('.pi-toast').textContent()) || '').trim()
+  step(
+    '19. toast appears with "已加入草稿卷：阅读理解 {section}"',
+    toastText === `已加入草稿卷：阅读理解 ${targetSection}`,
+    `toast="${toastText}" expected section=${targetSection}`,
+  )
+  const afterAddState = await page.evaluate(() => ({
+    activeId: document
+      .querySelector('.pi-question-card[aria-pressed="true"]')
+      ?.getAttribute('data-pi-question-id') ?? null,
+    pathCount: document.querySelectorAll('path.pi-line-path').length,
+    firstActionState: document
+      .querySelector('.pi-passage-action')
+      ?.getAttribute('data-pi-add-state') ?? null,
+  }))
+  step(
+    '19. add-to-basket does not change activeQuestionId',
+    afterAddState.activeId === beforeAddState.activeId,
+    `before=${beforeAddState.activeId} after=${afterAddState.activeId}`,
+  )
+  step(
+    '19. add-to-basket does not multiply the evidence line',
+    afterAddState.pathCount === beforeAddState.pathCount,
+    `before=${beforeAddState.pathCount} after=${afterAddState.pathCount}`,
+  )
+  step(
+    '19. first passage action flips to in-basket after click',
+    afterAddState.firstActionState === 'in-basket',
+    `state=${afterAddState.firstActionState}`,
+  )
 
   await shot(page, '04-final')
 } catch (err) {

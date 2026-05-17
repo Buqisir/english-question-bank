@@ -40,7 +40,7 @@
  * previewStatus, or export status — that orchestration lives in App.tsx.
  */
 
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type {
   BasketItem,
   PaperBlock,
@@ -50,6 +50,7 @@ import type {
 } from '../domain/questionBank.ts'
 import { usePaperBlocks } from './usePaperBlocks.ts'
 import { createBasketItem, type PaperDraftEditReason } from './paperDraftModel.ts'
+import { loadAssemblyBasket, saveAssemblyBasket } from './basketPersistence.ts'
 
 export type PaperExportStyle = 'exam' | 'handout'
 
@@ -133,7 +134,11 @@ export type UsePaperDraftResult = {
 
 export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResult {
   const { onDraftEdited } = input
-  const [basket, setBasket] = useState<BasketItem[]>([])
+  // Hydrate from localStorage on mount. The hydrate path is conservative —
+  // any parse failure / version mismatch / non-array `items` returns []
+  // (see basketPersistence.ts). We do NOT block render or display a banner;
+  // a corrupt local payload is silently treated as an empty basket.
+  const [basket, setBasket] = useState<BasketItem[]>(() => loadAssemblyBasket())
 
   // Paper-level config (Step 3). Owned here, but App keeps its own onChange
   // wrappers to preserve the legacy save/preview/exports side effects.
@@ -149,12 +154,19 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
   )
 
   // Authoritative basket mirror. Always read from this when computing the
-  // next basket, never from a stale closure capture.
-  const basketRef = useRef<BasketItem[]>([])
+  // next basket, never from a stale closure capture. Initialized to match
+  // the hydrated state above so the first op-after-mount sees the correct
+  // basket without an extra render.
+  const basketRef = useRef<BasketItem[]>(basket)
 
   const commitBasket = useCallback((next: BasketItem[]) => {
     basketRef.current = next
     setBasket(next)
+    // Persist immediately on every basket mutation. No debounce — Cut B
+    // reviewers explicitly required no debounce so a refresh right after
+    // "加入草稿卷" cannot drop the add. saveAssemblyBasket swallows storage
+    // errors so a quota issue cannot crash the workbench.
+    saveAssemblyBasket(next)
   }, [])
 
   const blocks = usePaperBlocks({
@@ -169,6 +181,20 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
       onDraftEdited?.('remove')
     },
   })
+
+  // One-shot seed: when we hydrate a non-empty basket from localStorage on
+  // mount, paperBlocks is still []. Rebuild block layout from the basket so
+  // invariant 2 (every basket item has exactly one question_group block)
+  // holds before any user interaction. We deliberately do NOT call
+  // onDraftEdited here — hydration is a load flow, not a user edit.
+  const didSeedBlocksRef = useRef(false)
+  useEffect(() => {
+    if (didSeedBlocksRef.current) return
+    didSeedBlocksRef.current = true
+    if (basketRef.current.length > 0) {
+      blocks.rebuildFromBasket(basketRef.current)
+    }
+  }, [blocks])
 
   const fire = useCallback(
     (reason: PaperDraftEditReason) => {

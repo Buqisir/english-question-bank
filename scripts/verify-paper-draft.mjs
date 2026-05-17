@@ -470,7 +470,14 @@ console.log('\nTest 5: usePaperDraft uses a basketRef + commitBasket, never read
     .replace(/^\s*\/\/.*$/gm, '')
 
   // 5.1 The hook keeps an authoritative ref + a commit helper.
-  assert('hook declares basketRef', /const basketRef = useRef<BasketItem\[\]>\(\[\]\)/.test(hook), '')
+  // The ref's initial value used to be `[]`; Cut B now seeds it with the
+  // hydrated basket from localStorage so the first op-after-mount sees the
+  // right basket without an extra render. Accept either form.
+  assert(
+    'hook declares basketRef',
+    /const basketRef = useRef<BasketItem\[\]>\((\[\]|basket)\)/.test(hook),
+    '',
+  )
   assert('hook defines commitBasket helper',
     /const commitBasket = useCallback\(\(next: BasketItem\[\]\)\s*=>\s*\{\s*basketRef\.current = next\s*setBasket\(next\)/.test(hook), '')
 

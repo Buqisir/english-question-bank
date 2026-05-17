@@ -757,3 +757,149 @@ button.pi-analysis-distractor:hover {
   border-color: var(--coral-text);
   box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.25);
 }
+
+
+
+/* ─────────────────────── Cut B: passage-header basket action ───────── */
+
+/*
+ * The passage header stays the same overall shape; we group the band
+ * chip and the "加入草稿卷" button inside `.pi-passage-header-actions`
+ * so they sit on the right of the header without crowding the title.
+ *
+ * On narrow viewports the title is allowed to wrap and the action
+ * group drops below it (instead of squeezing the button into a
+ * single-character ellipsis). The action is NEVER a floating button.
+ */
+.pi-passage-header {
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.pi-passage-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pi-passage-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.pi-passage-action-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pi-passage-action-status {
+  font-size: 11px;
+  color: var(--mint-text);
+  background: var(--mint-soft);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pi-passage-action {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color 80ms ease, background 80ms ease, color 80ms ease;
+  white-space: nowrap;
+}
+
+.pi-passage-action--addable {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+
+.pi-passage-action--addable:hover {
+  filter: brightness(0.95);
+}
+
+.pi-passage-action--addable:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.pi-passage-action--in-basket,
+.pi-passage-action--disabled {
+  background: var(--surface-strong);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  cursor: not-allowed;
+}
+
+.pi-passage-action[disabled],
+.pi-passage-action[aria-disabled="true"] {
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .pi-passage-header {
+    align-items: flex-start;
+  }
+
+  .pi-passage-header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* ─────────────────────── Cut B: lightweight add toast ──────────────── */
+
+/*
+ * The toast lives at the bottom-center of the viewport. We deliberately
+ * keep it outside the two-column shell so its z-index never collides
+ * with the cross-column evidence line overlay, and so a sticky right
+ * panel can never clip it. `position: fixed` is the simplest tool for
+ * the job; we offset from the bottom by 24px to avoid OS browser UIs
+ * (Safari iOS bar, etc.) when developers test on small screens.
+ *
+ * No external toast library — Cut B explicitly forbids new deps. The
+ * 3-second auto-dismiss is owned by the React component (timer ref);
+ * this CSS only sets visual styling and a fade-in keyframe.
+ */
+.pi-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: rgba(17, 24, 39, 0.92);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+  animation: pi-toast-fade-in 160ms ease-out;
+}
+
+@keyframes pi-toast-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-toast {
+    animation: none;
+  }
+}
