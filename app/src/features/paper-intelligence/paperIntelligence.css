@@ -1035,18 +1035,24 @@ button.pi-analysis-distractor:hover {
  * Basket preview popover (Issue #20).
  *
  * Renders into <body> via React Portal, positioned with viewport
- * coordinates (top/left inline styles). The portal escapes the top
- * bar's flex layout and any future stacking traps. z-index sits above
- * the cross-column evidence line overlay (z:5) and the insight popover
- * (z:60) so the basket popover wins when the teacher opens it after
- * clicking an insight chip — it is the most recent action and should
- * not be obscured. Below the toast layer (z:100) so a save-confirm
- * toast can still surface above.
+ * coordinates supplied by the shared AnchoredPopover module
+ * (top/left inline styles + position:fixed). The portal escapes the
+ * top bar's flex layout and any future stacking traps. z-index sits
+ * above the cross-column evidence line overlay (z:5) and the
+ * insight popover (z:60) so the basket popover wins when the
+ * teacher opens it after clicking an insight chip — it is the most
+ * recent action and should not be obscured. Below the toast layer
+ * (z:100) so a save-confirm toast can still surface above.
+ *
+ * Width is read from the `--anchored-popover-width` custom property
+ * set inline by AnchoredPopover (`widthPx={320}` in the caller). The
+ * fallback `320px` only matters if a future caller forgets to wire
+ * the prop — JS-side clamp and painted CSS width can never drift.
  */
 .pi-basket-preview-popover {
   position: fixed;
   z-index: 70;
-  width: 320px;
+  width: var(--anchored-popover-width, 320px);
   max-width: calc(100vw - 24px);
   background: var(--panel);
   border: 1px solid var(--line);
@@ -1227,17 +1233,23 @@ button.pi-analysis-distractor:hover {
   position: fixed;
   /*
    * QA #19 fix: panel is rendered into document.body via React Portal
-   * and positioned with viewport coordinates supplied by JS (top/left
-   * inline styles). This escapes the `.pi-main` overflow clip and the
-   * `.pi-side` sticky stacking context, both of which previously cut
-   * the popover off so it appeared "below" surrounding regions.
+   * and positioned with viewport coordinates supplied by the shared
+   * AnchoredPopover module (top/left inline styles). This escapes
+   * the `.pi-main` overflow clip and the `.pi-side` sticky stacking
+   * context, both of which previously cut the popover off so it
+   * appeared "below" surrounding regions.
    *
    * z-index 60 sits above the cross-column line overlay (z:5) and
    * any sticky/relative content in the page shell, but below the
    * pi-toast layer (z:100) so a save-confirmation toast still wins.
+   *
+   * Width is read from the `--anchored-popover-width` custom property
+   * set inline by AnchoredPopover (`widthPx={360}` in the caller). The
+   * fallback `360px` only matters if a future caller forgets to wire
+   * the prop — JS-side clamp and painted CSS width can never drift.
    */
   z-index: 60;
-  width: 360px;
+  width: var(--anchored-popover-width, 360px);
   min-width: 320px;
   max-width: min(420px, calc(100vw - 32px));
   border: 1px solid var(--line);
