@@ -89,10 +89,29 @@ export type EvidenceItem = {
 
   /* — distractor-only fields, always present but null on support rows — */
 
-  /** distractor category (e.g. detail_word_misleading). Null on support. */
+  /**
+   * Distractor category (e.g. `detail_word_misleading`).
+   *
+   * - On support rows: always `null`.
+   * - On trap rows: `null` if the distractor row had no `category` field
+   *   in the source report, the value was the empty string, or
+   *   whitespace-only.  Otherwise the raw category string.
+   *
+   * The null-vs-empty-string distinction matters for downstream UI: a
+   * concrete UI tag should be rendered only when this field is a non-
+   * empty string, and consumers can use `=== null` as a single missing-
+   * data check across both support and trap rows.
+   */
   distractorCategory: string | null
 
-  /** detail_word_misleading subtype, or null. Null on support. */
+  /**
+   * `detail_word_misleading` subtype, or `null`.
+   *
+   * Same null semantics as `distractorCategory`: support rows are always
+   * `null`; trap rows are `null` when the source report omitted the
+   * subtype (V0 schema explicitly allows `subtype: null` for the
+   * "subtype not chosen" case).
+   */
   distractorSubtype: string | null
 }
 
@@ -132,6 +151,25 @@ export type QuestionEvidenceView = {
   stem: string
   answer: string
   teacherQuestionType: string
+
+  /**
+   * Original-text "where to look" sentence, copied verbatim from
+   * `QuestionAnalysis.locatingSentence`.  Surfaced on the view (not just
+   * the underlying report) because the future right-side analysis panel
+   * needs it directly, and the audit script uses it as another verbatim
+   * hit point against `passageBody`.
+   *
+   * Empty string when the report omits the field.  This is a verbatim
+   * carry-over: do NOT trim or normalize it.
+   */
+  locatingSentence: string
+
+  /**
+   * Original-text "answer-bearing" sentence, copied verbatim from
+   * `QuestionAnalysis.answerSentence`.  Same role and same verbatim
+   * preservation rule as `locatingSentence`.
+   */
+  answerSentence: string
 
   /** this question's evidence rows (same items also live in the
    *  passage's flat `evidenceItems` array). */

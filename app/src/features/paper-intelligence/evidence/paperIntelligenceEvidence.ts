@@ -76,7 +76,24 @@ function safeString(value: unknown): string {
   return typeof value === 'string' ? value : ''
 }
 
-function safeStringOrNull(value: unknown): string | null {
+/**
+ * Return `value` exactly as given when it's a string with at least one
+ * non-whitespace character; otherwise return `null`.
+ *
+ * IMPORTANT: this helper uses `trim()` only to decide emptiness — it
+ * does NOT trim the returned value. That is intentional. quote-like
+ * fields (`answerEvidence.quote`, `distractor.quote`, `passageBody`)
+ * MUST be preserved byte-for-byte so the audit script can catch model
+ * drift such as leading/trailing whitespace, smart quotes, ellipses,
+ * or em/en-dash substitutions. If the adapter quietly trimmed quotes
+ * here, audit failures would be silently "fixed" by us instead of
+ * surfacing as a real model-output bug.
+ *
+ * If you find yourself wanting a normalized variant (e.g. for the UI
+ * layer, where collapsing whitespace is fine), introduce a separate
+ * helper next to its call site — do NOT change this one.
+ */
+function nonEmptyRawStringOrNull(value: unknown): string | null {
   if (typeof value !== 'string') return null
   const trimmed = value.trim()
   return trimmed.length > 0 ? value : null
@@ -99,7 +116,7 @@ function buildSupportItem(question: QuestionAnalysis): EvidenceItem | null {
   // We tolerate missing quote/explanation by emitting nulls rather than
   // dropping the row. Audit script will flag a null-quote support row
   // as a hit failure (vs. distractor null-quote which is allowed).
-  const quote = safeStringOrNull(ev?.quote)
+  const quote = nonEmptyRawStringOrNull(ev?.quote)
   const explanation = safeString(ev?.explanationZh)
   return {
     id: buildSupportEvidenceId(safeString(question.paperSection), safeString(question.questionNo)),
@@ -133,10 +150,10 @@ function buildTrapItem(
     optionLabel: safeString(distractor.optionLabel),
     evidenceKind: 'trap',
     questionAnswer: safeString(question.answer),
-    quote: safeStringOrNull(distractor.quote),
+    quote: nonEmptyRawStringOrNull(distractor.quote),
     explanationZh: safeString(distractor.shortReason),
-    distractorCategory: safeString(distractor.category),
-    distractorSubtype: safeStringOrNull(distractor.subtype),
+    distractorCategory: nonEmptyRawStringOrNull(distractor.category),
+    distractorSubtype: nonEmptyRawStringOrNull(distractor.subtype),
   }
 }
 
@@ -179,6 +196,8 @@ function buildQuestionView(question: QuestionAnalysis): QuestionEvidenceView | n
     stem: safeString(question.stem),
     answer: safeString(question.answer),
     teacherQuestionType: safeString(question.teacherQuestionType),
+    locatingSentence: safeString(question.locatingSentence),
+    answerSentence: safeString(question.answerSentence),
     evidenceItems,
     supportItem: support,
     trapItems,
@@ -202,7 +221,7 @@ function buildPassageView(
 ): PassageEvidenceView {
   const section = safeString(passage.paperSection)
   const passageBody = bodies && Object.prototype.hasOwnProperty.call(bodies, section)
-    ? safeStringOrNull(bodies[section])
+    ? nonEmptyRawStringOrNull(bodies[section])
     : null
 
   const sortedQuestions = (Array.isArray(passage.questions) ? passage.questions : [])
@@ -224,7 +243,7 @@ function buildPassageView(
 
   return {
     paperSection: section,
-    passageTitle: safeStringOrNull(passage.passageTitle),
+    passageTitle: nonEmptyRawStringOrNull(passage.passageTitle),
     passageBody,
     evidenceItems: flatItems,
     questions: questionViews,
@@ -298,9 +317,9 @@ export function selectEvidence(
   const items = Array.isArray(model.evidenceItems) ? model.evidenceItems : []
   if (!selector) return items.slice()
 
-  const wantSection = safeStringOrNull(selector.paperSection)
-  const wantQuestion = safeStringOrNull(selector.questionNo)
-  const wantOption = safeStringOrNull(selector.optionLabel)
+  const wantSection = nonEmptyRawStringOrNull(selector.paperSection)
+  const wantQuestion = nonEmptyRawStringOrNull(selector.questionNo)
+  const wantOption = nonEmptyRawStringOrNull(selector.optionLabel)
 
   return items.filter((it) => {
     if (wantSection !== null && it.paperSection !== wantSection) return false

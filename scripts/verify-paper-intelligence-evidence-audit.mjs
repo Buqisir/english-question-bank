@@ -99,6 +99,79 @@ assert(
   /toEvidenceModel/.test(adapterIndexTs) && /selectEvidence/.test(adapterIndexTs),
 )
 
+/* ─── 1a. Helper raw-quote intent (reviewer watch #1) ─────────────────
+ *
+ * The adapter must keep quote-like values byte-for-byte. To prevent a
+ * future contributor silently turning the helper into a `.trim()`-and-
+ * return helper, lock the contract in three ways:
+ *   - the helper name itself encodes the intent (`nonEmptyRawStringOrNull`),
+ *   - a comment explicitly says the returned value is NOT trimmed,
+ *   - no other helper in the adapter is allowed to be named with
+ *     `safeStringOrNull`, which was the prior, less explicit name.
+ *
+ * If you legitimately need a normalized variant in the future, add a
+ * separate helper next to its call site — do NOT relax this one.
+ */
+assert(
+  'adapter: helper renamed to nonEmptyRawStringOrNull (preserves raw quote)',
+  /\bfunction nonEmptyRawStringOrNull\b/.test(adapterTs) &&
+    !/\bfunction safeStringOrNull\b/.test(adapterTs),
+)
+assert(
+  'adapter: helper comment documents do-not-trim intent',
+  /does NOT trim the returned value|preserved byte-for-byte|byte-for-byte so the audit/.test(adapterTs),
+)
+assert(
+  'adapter: no `.trim()` is applied to a value before returning from a helper',
+  // matches `return value.trim()` or similar.  We allow `.trim()` only
+  // when used as a length probe (e.g. `value.trim().length > 0`); the
+  // assertion fires only if a helper returns the trimmed value.
+  !/return\s+\w+\.trim\(\)\s*[);,]/.test(adapterTs),
+)
+
+/* ─── 1b. QuestionEvidenceView surface (reviewer watch #2) ───────────
+ *
+ * The right-side analysis panel will read locatingSentence / answerSentence
+ * straight off QuestionEvidenceView.  Lock the type definition and the
+ * adapter implementation independently so a future commit can't quietly
+ * drop the fields and only the runtime would catch it.
+ */
+assert(
+  'types: QuestionEvidenceView declares locatingSentence: string',
+  /QuestionEvidenceView\s*=\s*\{[\s\S]*?\blocatingSentence:\s*string\b/.test(adapterTypesTs),
+)
+assert(
+  'types: QuestionEvidenceView declares answerSentence: string',
+  /QuestionEvidenceView\s*=\s*\{[\s\S]*?\banswerSentence:\s*string\b/.test(adapterTypesTs),
+)
+assert(
+  'adapter: question view copies locatingSentence from QuestionAnalysis',
+  /locatingSentence:\s*safeString\(question\.locatingSentence\)/.test(adapterTs),
+)
+assert(
+  'adapter: question view copies answerSentence from QuestionAnalysis',
+  /answerSentence:\s*safeString\(question\.answerSentence\)/.test(adapterTs),
+)
+
+/* ─── 1c. distractorCategory / distractorSubtype null semantics
+ *        (reviewer watch #3) ──────────────────────────────────────────
+ *
+ * Both fields are now `string | null`.  Support rows are always null;
+ * trap rows are null when the source report omitted the value, otherwise
+ * the raw string.  Lock the adapter wiring so neither field accidentally
+ * regresses to `safeString(...)` (which would return `''`).
+ */
+assert(
+  'adapter: distractorCategory uses nonEmptyRawStringOrNull (not safeString)',
+  /distractorCategory:\s*nonEmptyRawStringOrNull\(distractor\.category\)/.test(adapterTs) &&
+    !/distractorCategory:\s*safeString\(/.test(adapterTs),
+)
+assert(
+  'adapter: distractorSubtype uses nonEmptyRawStringOrNull (not safeString)',
+  /distractorSubtype:\s*nonEmptyRawStringOrNull\(distractor\.subtype\)/.test(adapterTs) &&
+    !/distractorSubtype:\s*safeString\(/.test(adapterTs),
+)
+
 const previewTsx = readSrc('app/src/features/paper-intelligence/PaperIntelligencePreview.tsx')
 assert(
   'PaperIntelligencePreview.tsx: no hand-rolled evidence matcher (no `passageBody.includes` or quote-resolver)',
@@ -175,8 +248,14 @@ const totalQuestions = model.passages.reduce(
   (n, p) => n + p.questions.length,
   0,
 )
+// NOTE: `15` is the contract of the bundled `paper-2024-xkb1-reading`
+// sample fixture (4 passages, fixed question counts per passage). It is
+// NOT a generic rule for the future runner — other papers may legitimately
+// have a different total. If/when this script is extended to audit a
+// different paperId, this assertion should be replaced with a sum derived
+// from the input.json.
 assert(
-  'EvidenceModel: 15 questions total (V0 fixed for A-D)',
+  'EvidenceModel: 15 questions total (paper-2024-xkb1-reading fixture contract)',
   totalQuestions === 15,
   `got ${totalQuestions}`,
 )
@@ -186,6 +265,170 @@ for (const p of model.passages) {
   assert(
     `passage ${p.paperSection}: passageBody resolved from input.json`,
     typeof p.passageBody === 'string' && p.passageBody.length > 0,
+  )
+}
+
+/* ─── 3a. report/input alignment (reviewer watch #4) ─────────────────
+ *
+ * The adapter trusts that input.json describes the same paper as
+ * report.json. If they drift apart (different paperId, missing passage,
+ * stray section), the audit's "verbatim against passageBody" claims
+ * become silently meaningless. Lock the alignment here.
+ */
+assert(
+  'alignment: input.sourcePaper.paperId === report.sourcePaper.paperId',
+  typeof input?.sourcePaper?.paperId === 'string' &&
+    input.sourcePaper.paperId === report?.sourcePaper?.paperId,
+  `input=${input?.sourcePaper?.paperId} vs report=${report?.sourcePaper?.paperId}`,
+)
+{
+  const ipn = input?.sourcePaper?.paperName
+  const rpn = report?.sourcePaper?.paperName
+  // Only enforce equality when both sides have a non-empty value; a
+  // missing paperName on one side is allowed (it's a soft cosmetic
+  // field, unlike paperId).
+  if (typeof ipn === 'string' && ipn.length > 0 && typeof rpn === 'string' && rpn.length > 0) {
+    assert(
+      'alignment: input.sourcePaper.paperName === report.sourcePaper.paperName (when both present)',
+      ipn === rpn,
+      `input="${ipn}" vs report="${rpn}"`,
+    )
+  } else {
+    assert(
+      'alignment: paperName equality skipped (one side missing — that is allowed)',
+      true,
+    )
+  }
+}
+
+const inputSections = (input?.passages || [])
+  .map((p) => p?.paperSection)
+  .filter((s) => typeof s === 'string')
+  .sort()
+  .join(',')
+const reportSections = (report?.passages || [])
+  .map((p) => p?.paperSection)
+  .filter((s) => typeof s === 'string')
+  .sort()
+  .join(',')
+assert(
+  'alignment: input passages and report passages cover the same paperSection set',
+  inputSections === reportSections && inputSections.length > 0,
+  `input=[${inputSections}] vs report=[${reportSections}]`,
+)
+for (const reportPassage of report?.passages || []) {
+  const section = reportPassage?.paperSection
+  if (!section) continue
+  assert(
+    `alignment: report passage ${section} has a matching passageBody in input.json`,
+    typeof bodies[section] === 'string' && bodies[section].length > 0,
+  )
+}
+
+/* ─── 3b. QuestionEvidenceView surface populated at runtime
+ *        (reviewer watch #2 — runtime side) ───────────────────────────
+ *
+ * The static checks above lock the type and the assignment site; this
+ * runtime check confirms that — for the bundled fixture — every question
+ * view actually carries non-empty locatingSentence and answerSentence
+ * strings, and that they match the report verbatim.
+ */
+{
+  const reportByQ = new Map()
+  for (const p of report.passages || []) {
+    for (const q of p?.questions || []) {
+      if (q?.questionNo) {
+        reportByQ.set(`${p.paperSection}|${q.questionNo}`, q)
+      }
+    }
+  }
+  let locatingPopulated = 0
+  let answerPopulated = 0
+  let locatingMatchesReport = 0
+  let answerMatchesReport = 0
+  let totalViews = 0
+  for (const p of model.passages) {
+    for (const v of p.questions) {
+      totalViews++
+      const src = reportByQ.get(`${p.paperSection}|${v.questionNo}`)
+      if (typeof v.locatingSentence === 'string' && v.locatingSentence.length > 0) {
+        locatingPopulated++
+        if (src && v.locatingSentence === src.locatingSentence) locatingMatchesReport++
+      }
+      if (typeof v.answerSentence === 'string' && v.answerSentence.length > 0) {
+        answerPopulated++
+        if (src && v.answerSentence === src.answerSentence) answerMatchesReport++
+      }
+    }
+  }
+  assert(
+    'runtime: every QuestionEvidenceView has non-empty locatingSentence',
+    locatingPopulated === totalViews,
+    `${locatingPopulated} of ${totalViews}`,
+  )
+  assert(
+    'runtime: every QuestionEvidenceView has non-empty answerSentence',
+    answerPopulated === totalViews,
+    `${answerPopulated} of ${totalViews}`,
+  )
+  assert(
+    'runtime: locatingSentence in view === locatingSentence in report (verbatim copy)',
+    locatingMatchesReport === totalViews,
+    `${locatingMatchesReport} of ${totalViews}`,
+  )
+  assert(
+    'runtime: answerSentence in view === answerSentence in report (verbatim copy)',
+    answerMatchesReport === totalViews,
+    `${answerMatchesReport} of ${totalViews}`,
+  )
+}
+
+/* ─── 3c. distractorCategory null semantics at runtime
+ *        (reviewer watch #3 — runtime side) ───────────────────────────
+ *
+ * support rows: distractorCategory MUST be null (and distractorSubtype too).
+ * trap rows: distractorCategory is either null (if the source omitted it)
+ *   OR a non-empty string. It is NEVER the empty string.
+ *
+ * Same for distractorSubtype.
+ */
+{
+  let supportCategoryNull = 0
+  let supportSubtypeNull = 0
+  let supportTotal = 0
+  let trapCategoryEmptyString = 0
+  let trapSubtypeEmptyString = 0
+  let trapTotal = 0
+  for (const e of model.evidenceItems) {
+    if (e.evidenceKind === 'support') {
+      supportTotal++
+      if (e.distractorCategory === null) supportCategoryNull++
+      if (e.distractorSubtype === null) supportSubtypeNull++
+    } else {
+      trapTotal++
+      if (e.distractorCategory === '') trapCategoryEmptyString++
+      if (e.distractorSubtype === '') trapSubtypeEmptyString++
+    }
+  }
+  assert(
+    'support rows: distractorCategory is always null',
+    supportCategoryNull === supportTotal,
+    `${supportCategoryNull} of ${supportTotal}`,
+  )
+  assert(
+    'support rows: distractorSubtype is always null',
+    supportSubtypeNull === supportTotal,
+    `${supportSubtypeNull} of ${supportTotal}`,
+  )
+  assert(
+    'trap rows: distractorCategory is never the empty string (null instead)',
+    trapCategoryEmptyString === 0,
+    `found ${trapCategoryEmptyString} empty-string occurrences across ${trapTotal} trap rows`,
+  )
+  assert(
+    'trap rows: distractorSubtype is never the empty string (null instead)',
+    trapSubtypeEmptyString === 0,
+    `found ${trapSubtypeEmptyString} empty-string occurrences across ${trapTotal} trap rows`,
   )
 }
 
@@ -231,8 +474,11 @@ let distractorQuoteCount = 0
 let distractorQuoteHitCount = 0
 let textOnlyDistractorCount = 0
 
-// audit walks the report directly so we also exercise locatingSentence /
-// answerSentence (which the EvidenceModel intentionally does not surface).
+// audit walks the report directly so the verbatim-against-passageBody
+// claim is anchored on the source-of-truth shape. The EvidenceModel does
+// surface locatingSentence / answerSentence as of this cut, but the
+// report-side walk is still the one that catches drift between the
+// model output and the original input.
 for (const passage of report.passages || []) {
   const section = passage?.paperSection
   const body = bodies[section]
