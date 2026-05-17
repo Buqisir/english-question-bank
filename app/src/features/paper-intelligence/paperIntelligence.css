@@ -585,3 +585,175 @@
   color: var(--amber-text);
   border-color: var(--amber-text);
 }
+
+
+/* ─────────────────────── V2 cross-column evidence line ─────────────── */
+
+/*
+ * `.pi-shell` already lays out the two columns. The overlay SVG sits
+ * absolutely positioned inside it so its viewBox covers both columns.
+ *
+ * `position: relative` is the only structural change at this level —
+ * everything else (grid, gap, max-width) is preserved from V1.
+ */
+.pi-shell {
+  position: relative;
+}
+
+/*
+ * The overlay itself.
+ *
+ *   - `position: absolute; inset: 0` makes the SVG cover the shell.
+ *   - `pointer-events: none` lets clicks fall through to the underlying
+ *     buttons / marks. Critically, the right-panel evidence buttons
+ *     and left-passage `<mark>`s sit BELOW this layer in the stacking
+ *     context, so the line never blocks teacher input.
+ *   - `z-index: 5` is enough to sit above the column grid but below
+ *     anything modal-like (we don't have modals here, but the value
+ *     leaves headroom).
+ *   - When the hook returns no geometry, the rendered `<svg>` carries
+ *     `data-empty="true"` and we explicitly hide it. We don't rely on
+ *     the SVG having no children — keeping the wrapper visible would
+ *     paint a transparent rectangle that browsers occasionally
+ *     promote to its own composited layer.
+ */
+.pi-line-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+}
+
+.pi-line-overlay[data-empty="true"] {
+  display: none;
+}
+
+/*
+ * The dashed evidence path.
+ *
+ *   - Mid-saturation accent stroke (mint-leaning) so the line reads
+ *     as "answer evidence" without competing with the support
+ *     highlight underline.
+ *   - 1.5px width keeps the line legible at 100% zoom without
+ *     dominating the passage body. We avoid CSS blur / shadow which
+ *     would invite GPU work on every scroll-driven recompute.
+ *   - Dasharray 5 5 is small enough to read as "annotation" rather
+ *     than "border" but big enough to render on hi-DPI displays
+ *     without aliasing into a solid line.
+ *   - `vector-effect: non-scaling-stroke` keeps the stroke width
+ *     stable when the SVG viewport scales (e.g. zoom / DPR change).
+ */
+.pi-line-path {
+  fill: none;
+  stroke: rgba(16, 185, 129, 0.65);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 5 5;
+  vector-effect: non-scaling-stroke;
+}
+
+/*
+ * One-shot draw-in animation when the evidence id activates or
+ * switches. We use `stroke-dashoffset` instead of opacity so the line
+ * appears to "draw itself" from source to target — the gentlest cue
+ * we can use to tell the teacher "this is the new connection".
+ *
+ * The pathLength fallback: SVG paths don't have a uniform length;
+ * a path of 800px would otherwise need a different starting offset
+ * than a path of 200px. We pick a generous offset (1000) that's
+ * larger than any plausible path; the animation simply settles into
+ * its final dasharray once the offset reaches 0.
+ */
+@keyframes pi-line-draw {
+  from {
+    stroke-dashoffset: 1000;
+    opacity: 0.4;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.pi-line-path--animated {
+  animation: pi-line-draw 280ms ease-out;
+}
+
+/*
+ * Reduced-motion: drop the draw-in animation entirely. The hook
+ * already detects `prefers-reduced-motion` and refuses to add the
+ * `--animated` class; this rule is belt-and-braces in case a future
+ * refactor adds the class unconditionally.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .pi-line-path--animated {
+    animation: none;
+  }
+}
+
+/*
+ * Small-screen strategy: when the shell collapses to one column, the
+ * line would have to run vertically through the passage body — the
+ * Bezier loses its semantic value. Hide the overlay outright; the
+ * highlight / panel update remain.
+ *
+ * The breakpoint matches `.pi-shell`'s grid collapse (900px).
+ */
+@media (max-width: 900px) {
+  .pi-line-overlay {
+    display: none;
+  }
+}
+
+/* ─────────────────────── right-panel button resets ─────────────────── */
+
+/*
+ * `.pi-analysis-evidence` is now sometimes a `<button>` (when the
+ * support evidence id is present) and sometimes a plain `<div>`
+ * (when it's not). The shared selector keeps the visual identical;
+ * the `button` selector adds the resets every UA imposes on
+ * default buttons (font, color, alignment).
+ *
+ * The same pattern applies to `.pi-analysis-distractor` — a quoted
+ * trap renders as `<button>`, a text-only one stays a `<div>`.
+ */
+button.pi-analysis-evidence,
+button.pi-analysis-distractor {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button.pi-analysis-evidence:focus-visible,
+button.pi-analysis-distractor:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button.pi-analysis-evidence:hover,
+button.pi-analysis-distractor:hover {
+  filter: brightness(0.98);
+}
+
+.pi-analysis-evidence--selected {
+  /*
+   * Slightly stronger left border + a soft accent ring so the teacher
+   * can tell at a glance "this is the row the dotted line connects
+   * to". We avoid changing the background color tone — the support
+   * row's mint background is already a strong cue; adding more
+   * contrast there would crowd it.
+   */
+  border-left-width: 4px;
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.25);
+}
+
+.pi-analysis-distractor--selected {
+  border-color: var(--coral-text);
+  box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.25);
+}

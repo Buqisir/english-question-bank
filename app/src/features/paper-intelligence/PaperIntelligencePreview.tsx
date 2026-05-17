@@ -1,51 +1,57 @@
 /**
  * PaperIntelligencePreview — interactive teacher-facing preview of a
- * Paper Intelligence V0 report (V1 layout).
+ * Paper Intelligence V0 report.
  *
- * V1 product rules (locked in by reviewer):
+ * V1 product rules (still in effect):
  *   - Two-column shell: passages on the left, sticky Analysis Panel on
  *     the right.
  *   - The right Analysis Panel is the SINGLE source of truth for
- *     stem / answer / distractor / synonym / back-stage fields. The
- *     left column shows clickable question card entrypoints ONLY.
- *   - The previous V0 expandable detail rows (`QuestionsPanel` /
- *     `DetailQuestionRow`) have been deleted to prevent the same
- *     question's content from appearing twice.
- *   - V1 only does highlighting + a small "scroll the first support
- *     highlight into view" affordance. No cross-column dotted lines,
- *     no animations, no scroll linking. DOM anchors (`data-pi-*`) stay
- *     so V2 can wire up the LinkOverlay-style system later.
- *   - Information density on the left is intentionally low:
- *       * LoadRow shows score / label / shortReason only — the
- *         per-load evidence list has been removed.
- *       * Key chunks show a `重要词块 · N 个` summary only — the full
- *         tag list is no longer rendered.
+ *     stem / answer / distractor / synonym / back-stage fields.
+ *   - V0 detail rows (`QuestionsPanel` / `DetailQuestionRow`) remain
+ *     deleted.
+ *   - Information density on the left stays low (LoadRow is score /
+ *     label / shortReason only; key chunks are a `重要词块 · N 个`
+ *     summary).
  *
- * Smoke-polish auto-scroll (this revision):
- *   - When `activeQuestionId` flips to a non-null value, an effect
- *     finds the first `<mark data-pi-evidence-kind="support"
- *     data-pi-question-id="<id>">` inside the LEFT scroller and
- *     scrolls only that scroller (not the window) so the support
- *     highlight is visible.
- *   - The left column is its own scroll container (`.pi-main` with
- *     `overflow-y: auto`), so `scrollIntoView({ block: 'nearest' })`
- *     resolves against `.pi-main` and never bubbles to the document.
- *   - Honors `prefers-reduced-motion`: under reduced motion the scroll
- *     uses `behavior: 'auto'` (instant); otherwise `'smooth'`.
- *   - Effect runs only when `activeQuestionId` actually changes; when
- *     it goes back to null we do NOT scroll.
+ * V1 smoke-polish (still in effect):
+ *   - Auto-scroll the first support highlight into view inside the
+ *     LEFT scroller (`.pi-main`) when `activeQuestionId` flips.
+ *   - Honors `prefers-reduced-motion`.
  *
- * Routing: still `?view=paper-intelligence&paperId=<id>` — no new
- * demo route, no new view param. The route parser is unchanged.
+ * V2 cross-column evidence line (this revision):
+ *   - Adds a SECONDARY `activeEvidenceId` state. `activeQuestionId`
+ *     is still the primary state — `activeEvidenceId` only exists to
+ *     pick which evidence the dotted line connects to. When
+ *     `activeQuestionId === null`, `activeEvidenceId` MUST be null.
+ *   - Default `activeEvidenceId` for a freshly-activated question is
+ *     that question's `supportEvidenceId`. The reviewer's contract:
+ *     activating a question always seeds the line on the support
+ *     evidence (the answer evidence), never on a distractor.
+ *   - Clicking an evidence row in the right Analysis Panel switches
+ *     `activeEvidenceId` (the support row, or any distractor row that
+ *     has a non-null quote). Text-only distractors are intentionally
+ *     not clickable for line purposes — they render as plain text.
+ *   - Clicking the active question card again clears BOTH ids; the
+ *     overlay disappears.
+ *   - Clicking a different question card sets `activeQuestionId` to
+ *     the new id and reseeds `activeEvidenceId` to that question's
+ *     support evidence.
+ *   - Only ONE line is drawn at a time. We never connect to load
+ *     evidence, key chunks, the outline, the locating sentence, or
+ *     back-stage fields.
  *
- * Architecture:
- *   - All evidence/quote logic lives in `./preview/paperIntelligencePreviewModel`.
- *   - That module uses the existing evidence adapter (`toEvidenceModel`,
- *     `selectEvidence`) — this component never calls passage substring
- *     lookups or any other quote-matching primitive directly.
- *   - This file: fetch + state + render + the small auto-scroll effect.
- *   - Active state is just `activeQuestionId`. Per reviewer guidance,
- *     V1 does not introduce a separate `activeEvidenceId`.
+ * Routing: still `?view=paper-intelligence&paperId=<id>` — unchanged.
+ *
+ * Architecture (kept clean):
+ *   - All evidence/quote logic lives in
+ *     `./preview/paperIntelligencePreviewModel`. The component never
+ *     calls `passageBody.indexOf` / `includes` itself.
+ *   - The line overlay lives in
+ *     `./preview/paperIntelligenceEvidenceLine`. We do NOT import
+ *     `reading-analysis/LinkOverlay` or any reading-analysis hook —
+ *     the reviewer's V1 lock-in stays in force.
+ *   - This file: fetch + state + render + the two small effects
+ *     (auto-scroll + activeEvidenceId reseed).
  */
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
@@ -63,6 +69,7 @@ import {
   type PassageSegment,
   type QuestionRow,
 } from './preview/paperIntelligencePreviewModel'
+import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import './paperIntelligence.css'
 
 type Props = {
@@ -75,9 +82,6 @@ type Props = {
  * already restricts ids to alphanumerics, dashes, and dots, but we
  * defensively escape anything that isn't strictly word/dash so a future
  * id schema change can't accidentally break the selector.
- *
- * `CSS.escape` is preferred when available; the manual fallback handles
- * older runtimes (and the smoke-test sandbox).
  */
 function cssAttr(value: string): string {
   if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
@@ -89,8 +93,11 @@ function cssAttr(value: string): string {
 /** Top-level container. Owns:
  *   - the report fetch
  *   - the optional input.json fetch (passageBody for highlighting)
- *   - the `activeQuestionId` state
- *   - the memoized preview view (built from report+bodies+activeQuestionId)
+ *   - the `activeQuestionId` (primary) and `activeEvidenceId`
+ *     (secondary, line-only) states
+ *   - the memoized preview view
+ *   - the auto-scroll effect (on activeQuestionId change)
+ *   - the activeEvidenceId reseed effect (on view/activeQuestionId change)
  */
 export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
@@ -100,12 +107,32 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
 
   /**
-   * Ref to the left scroll container (`.pi-main`). The auto-scroll
-   * effect uses this to scope `scrollIntoView` to the left column only.
-   * If the ref is detached for any reason (e.g. error state), the effect
-   * is a no-op — we never fall back to scrolling the window.
+   * SECONDARY state: which evidence row the cross-column dotted line
+   * connects to. Invariants enforced below:
+   *   - `activeEvidenceId === null` whenever `activeQuestionId === null`.
+   *   - When activating a question, this gets seeded to the question's
+   *     support evidence id (or null if support is missing — the line
+   *     just won't render).
+   *   - Clicking a non-text-only distractor row updates this only;
+   *     `activeQuestionId` stays put.
    */
+  const [activeEvidenceId, setActiveEvidenceId] = useState<string | null>(null)
+
+  /**
+   * Refs the line overlay needs:
+   *   - `shellRef`     → the `.pi-shell` element. The overlay sits
+   *     `position:absolute; inset:0` inside this, so its viewBox
+   *     covers both columns.
+   *   - `mainScrollerRef` → the `.pi-main` left scroller. Used by the
+   *     overlay for target lookup AND scroll-listener attachment;
+   *     also used by the auto-scroll effect (V1) to scope
+   *     `scrollIntoView`.
+   *   - `sidePanelRef` → the `.pi-side` right panel. Used for source
+   *     lookup AND scroll-listener attachment.
+   */
+  const shellRef = useRef<HTMLDivElement | null>(null)
   const mainScrollerRef = useRef<HTMLDivElement | null>(null)
+  const sidePanelRef = useRef<HTMLElement | null>(null)
 
   // fetch report + (best-effort) input.json with passageBody
   useEffect(() => {
@@ -125,8 +152,6 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
         if (!reportRes.ok) throw new Error(`HTTP ${reportRes.status}`)
         const reportData = (await reportRes.json()) as PaperIntelligenceReport
 
-        // input.json is best-effort: if it's missing, V1 still renders
-        // passages and questions, just without quote highlighting.
         let bodiesData: Record<string, string> = {}
         try {
           const inputRes = await fetch(inputUrl)
@@ -168,39 +193,50 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
   }, [report, bodies, activeQuestionId])
 
   /**
-   * Auto-scroll: when the teacher activates a question, bring the
-   * first SUPPORT highlight into view inside the left scroller.
+   * Reseed `activeEvidenceId` whenever the active question (and
+   * therefore the analysis projection) changes.
    *
-   * Why support specifically: the support quote is the answer
-   * evidence, so it's the single most useful thing a teacher wants to
-   * see right after clicking. Trap quotes are secondary; the right
-   * Analysis Panel already lists them with their own captions.
+   * Cases:
+   *   - `activeQuestionId === null` → clear the line. Invariant
+   *     enforced.
+   *   - `activeQuestionId` is non-null and the analysis carries a
+   *     `supportEvidenceId` → seed to it.
+   *   - `activeQuestionId` is non-null but support is missing (rare)
+   *     → leave the line off. We do NOT auto-pick a distractor; the
+   *     teacher would have to click one explicitly.
    *
-   * Why scope the scroll to `.pi-main`:
-   *   - The right Analysis Panel is sticky inside `.pi-shell`. We do
-   *     NOT want to scroll the page just because a teacher clicked a
-   *     question card — that would push the whole report header
-   *     offscreen.
-   *   - `.pi-main` carries `overflow-y: auto` (see CSS), so
-   *     `scrollIntoView({ block: 'nearest' })` resolves against
-   *     `.pi-main` and never against the document scroller.
+   * This effect runs only when the active *question* changes, NOT
+   * when the user clicks a distractor row. That click goes through
+   * `setActiveEvidenceId` directly (see `handleSelectEvidence`); this
+   * effect would race with that update if it were to fire on every
+   * render.
+   */
+  useEffect(() => {
+    if (!activeQuestionId) {
+      setActiveEvidenceId(null)
+      return
+    }
+    const supportId = view?.activeAnalysis?.supportEvidenceId ?? null
+    setActiveEvidenceId(supportId)
+    // Intentionally do NOT depend on `activeEvidenceId` — that would
+    // create a feedback loop with `handleSelectEvidence`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeQuestionId, view?.activeAnalysis?.supportEvidenceId])
+
+  /**
+   * Auto-scroll: V1 behavior preserved. When the teacher activates a
+   * question, bring the first SUPPORT highlight into view inside
+   * `.pi-main` only. The right Analysis Panel is sticky inside
+   * `.pi-shell`, so we never bubble the scroll to the document.
    *
-   * `prefers-reduced-motion`: when set, animation-style smooth scroll
-   * is replaced with `behavior: 'auto'` (instant). The query is read
-   * lazily inside the effect so it stays in sync with the user's
-   * current OS preference at the moment the click happens.
-   *
-   * The effect intentionally does nothing when `activeQuestionId`
-   * goes back to null (toggled off): collapsing into an empty panel
-   * shouldn't yank the passage view around.
+   * `prefers-reduced-motion`: replaces smooth scroll with `'auto'`
+   * (instant). Read lazily so it tracks the user's current OS
+   * preference at click time.
    */
   useEffect(() => {
     if (!activeQuestionId) return
     const scroller = mainScrollerRef.current
     if (!scroller) return
-    // Find the first support highlight for this question. Only the
-    // `<mark>` elements we render carry the `data-pi-evidence-kind`
-    // attribute, so the selector is unambiguous.
     const target = scroller.querySelector<HTMLElement>(
       `[data-pi-question-id="${cssAttr(activeQuestionId)}"][data-pi-evidence-kind="support"]`,
     )
@@ -238,15 +274,31 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
   }
 
   const handleSelectQuestion = (id: string): void => {
-    // toggle off when clicking the same row again so teachers can clear
-    // the highlight without scrolling to the empty-state panel
+    // Toggle off when clicking the same row again. The reseed effect
+    // will clear `activeEvidenceId` automatically when the new value
+    // resolves to null.
     setActiveQuestionId((prev) => (prev === id ? null : id))
+  }
+
+  /**
+   * Right-panel evidence row click. We update only
+   * `activeEvidenceId`; the active question stays put. The reseed
+   * effect ignores this transition (it only runs when the active
+   * question itself changes), so the click is a one-shot update.
+   *
+   * Invariant: callers MUST pass a non-null evidence id. Text-only
+   * distractor rows in the Analysis Panel are rendered as plain
+   * `<div>`s without a button, so they can't even reach this handler.
+   */
+  const handleSelectEvidence = (evidenceId: string): void => {
+    if (!activeQuestionId) return // defensive — UI shouldn't allow this
+    setActiveEvidenceId(evidenceId)
   }
 
   return (
     <div className="pi-view">
       <ReportHeader report={report} />
-      <div className="pi-shell">
+      <div className="pi-shell" ref={shellRef}>
         <div className="pi-main" ref={mainScrollerRef}>
           {view.passages.map((passageView) => {
             const reportPassage = report.passages.find(
@@ -268,9 +320,26 @@ export function PaperIntelligencePreview({ paperId }: Props): ReactNode {
           aria-label="Analysis panel"
           aria-live="polite"
           role="region"
+          ref={sidePanelRef}
         >
-          <AnalysisPanel analysis={view.activeAnalysis} />
+          <AnalysisPanel
+            analysis={view.activeAnalysis}
+            activeEvidenceId={activeEvidenceId}
+            onSelectEvidence={handleSelectEvidence}
+          />
         </aside>
+        {/*
+         * Cross-column evidence line. Rendered last so it stacks above
+         * the columns. It pointer-events: none in CSS so clicks fall
+         * through to the underlying buttons / marks.
+         */}
+        <PaperIntelligenceEvidenceLine
+          containerRef={shellRef}
+          leftScrollerRef={mainScrollerRef}
+          rightPanelRef={sidePanelRef}
+          activeQuestionId={activeQuestionId}
+          activeEvidenceId={activeEvidenceId}
+        />
       </div>
     </div>
   )
@@ -299,15 +368,6 @@ function ReportHeader({ report }: { report: PaperIntelligenceReport }): ReactNod
 
 /* ─── Passage Section ─── */
 
-/**
- * One passage block: header → passageBody (segmented for highlights) →
- * loads / outline / key-chunks summary → clickable question cards.
- *
- * The clickable cards are the V1 left-column entrypoint. Per-question
- * details (stem / distractor breakdown / synonym / back-stage labels)
- * live ONLY in the right Analysis Panel — there is no expandable detail
- * row here in V1.
- */
 function PassageSection(props: {
   passageView: PassagePreviewView
   reportPassage: PassageReport | undefined
@@ -365,10 +425,8 @@ function PassageBody({ segments }: { segments: PassageSegment[] }): ReactNode {
     <div className="pi-passage-body">
       {segments.map((seg, i) => {
         if (seg.kind === 'text') {
-          // plain text run; no DOM anchors needed
           return <span key={i}>{seg.text}</span>
         }
-        // highlight span — these are the V2 dotted-line anchors.
         const className =
           seg.evidenceKind === 'support'
             ? 'pi-ev-highlight pi-ev-highlight--support'
@@ -417,12 +475,6 @@ function LoadsPanel({
   )
 }
 
-/**
- * V1 LoadRow: shows score cells + label + shortReason. The previous V0
- * "引文 / 收起" toggle and per-load evidence list have been removed —
- * load-level evidence items are no longer surfaced on this page (the
- * right Analysis Panel is the single home for evidence quotes).
- */
 function LoadRow({ label, bar }: { label: string; bar: LoadBar }): ReactNode {
   return (
     <div className="pi-load-row">
@@ -462,13 +514,8 @@ function OutlinePanel({
   )
 }
 
-/* ─── Key chunks (V1: summary only, no expanded list) ─── */
+/* ─── Key chunks (V1: summary only) ─── */
 
-/**
- * V1 deliberately collapses the previous 8–12 tag list down to a single
- * `重要词块 · N 个` summary line. Teachers who want the full chunk list
- * can ask for it later — V1 keeps the left column low-density.
- */
 function ChunksSummary({ chunks }: { chunks: KeyChunk[] }): ReactNode {
   const count = Array.isArray(chunks) ? chunks.length : 0
   return (
@@ -478,7 +525,7 @@ function ChunksSummary({ chunks }: { chunks: KeyChunk[] }): ReactNode {
   )
 }
 
-/* ─── Clickable question card (V1 left-column entrypoint) ─── */
+/* ─── Clickable question card ─── */
 
 function QuestionCard(props: {
   row: QuestionRow
@@ -519,12 +566,23 @@ function QuestionCard(props: {
   )
 }
 
-/* ─── Right-side Analysis Panel (V1: only home for question detail) ─── */
+/* ─── Right-side Analysis Panel ─── */
 
-function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNode {
+function AnalysisPanel(props: {
+  analysis: AnalysisView | null
+  activeEvidenceId: string | null
+  onSelectEvidence: (evidenceId: string) => void
+}): ReactNode {
+  const { analysis, activeEvidenceId, onSelectEvidence } = props
   if (!analysis) {
     return <div className="pi-analysis-empty">点击左侧题目查看解析</div>
   }
+  const supportSelected =
+    analysis.supportEvidenceId !== null &&
+    analysis.supportEvidenceId === activeEvidenceId
+  const supportClass = supportSelected
+    ? 'pi-analysis-evidence pi-analysis-evidence--selected'
+    : 'pi-analysis-evidence'
   return (
     <div data-pi-question-id={analysis.questionId}>
       <div className="pi-analysis-head">
@@ -535,23 +593,53 @@ function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNo
       <p className="pi-analysis-stem">{analysis.stem}</p>
 
       <div className="pi-analysis-section">正确答案</div>
-      <div
-        className="pi-analysis-evidence"
-        data-pi-evidence-id={analysis.supportEvidenceId ?? undefined}
-        data-pi-question-id={analysis.questionId}
-      >
-        {analysis.answerEvidenceQuote && (
-          <span className="pi-analysis-evidence-quote">"{analysis.answerEvidenceQuote}"</span>
-        )}
-        <span>{analysis.answerEvidenceExplanationZh}</span>
-      </div>
+      {/*
+       * The support evidence row is a button so it can be focused with
+       * keyboard and announced to screen readers as an interactive
+       * element. It only reaches `onSelectEvidence` when the question
+       * actually has a support evidence id (the typical case); when
+       * `supportEvidenceId === null` we render a plain `<div>` so the
+       * teacher can still see the answer explanation.
+       */}
+      {analysis.supportEvidenceId ? (
+        <button
+          type="button"
+          className={supportClass}
+          data-pi-evidence-id={analysis.supportEvidenceId}
+          data-pi-evidence-kind="support"
+          data-pi-question-id={analysis.questionId}
+          aria-pressed={supportSelected}
+          onClick={() => onSelectEvidence(analysis.supportEvidenceId as string)}
+        >
+          {analysis.answerEvidenceQuote && (
+            <span className="pi-analysis-evidence-quote">"{analysis.answerEvidenceQuote}"</span>
+          )}
+          <span>{analysis.answerEvidenceExplanationZh}</span>
+        </button>
+      ) : (
+        <div
+          className={supportClass}
+          data-pi-question-id={analysis.questionId}
+        >
+          {analysis.answerEvidenceQuote && (
+            <span className="pi-analysis-evidence-quote">"{analysis.answerEvidenceQuote}"</span>
+          )}
+          <span>{analysis.answerEvidenceExplanationZh}</span>
+        </div>
+      )}
 
       <div className="pi-analysis-section">干扰项分析</div>
       {analysis.distractors.length === 0 && (
         <div className="pi-analysis-distractor-text-only">无干扰项数据</div>
       )}
       {analysis.distractors.map((d) => (
-        <DistractorRow key={d.evidenceId} row={d} questionId={analysis.questionId} />
+        <DistractorRow
+          key={d.evidenceId}
+          row={d}
+          questionId={analysis.questionId}
+          isSelected={d.evidenceId === activeEvidenceId}
+          onSelectEvidence={onSelectEvidence}
+        />
       ))}
 
       <div className="pi-analysis-section">同义替换</div>
@@ -572,18 +660,55 @@ function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNo
   )
 }
 
-function DistractorRow({
-  row,
-  questionId,
-}: {
+function DistractorRow(props: {
   row: AnalysisDistractorRow
   questionId: string
+  isSelected: boolean
+  onSelectEvidence: (evidenceId: string) => void
 }): ReactNode {
+  const { row, questionId, isSelected, onSelectEvidence } = props
+  const className = isSelected
+    ? 'pi-analysis-distractor pi-analysis-distractor--selected'
+    : 'pi-analysis-distractor'
+
+  /*
+   * Text-only distractors render as plain `<div>` — there's no quote
+   * to anchor a line to, so making them clickable would imply an
+   * action the overlay can't fulfill. Quoted distractors render as
+   * `<button>` and update `activeEvidenceId` on click.
+   */
+  if (row.quoteIsTextOnly) {
+    return (
+      <div
+        className={className}
+        data-pi-evidence-id={row.evidenceId}
+        data-pi-evidence-kind="trap"
+        data-pi-question-id={questionId}
+        data-pi-quote-text-only="true"
+      >
+        <div className="pi-analysis-distractor-head">
+          <span className="pi-analysis-distractor-label">{row.optionLabel}</span>
+          {row.category && (
+            <span className="pi-analysis-distractor-cat">
+              {row.category}
+              {row.subtype ? ` / ${row.subtype}` : ''}
+            </span>
+          )}
+          <span className="pi-analysis-distractor-text-only">text-only</span>
+        </div>
+        <span>{row.shortReason}</span>
+      </div>
+    )
+  }
   return (
-    <div
-      className="pi-analysis-distractor"
+    <button
+      type="button"
+      className={className}
       data-pi-evidence-id={row.evidenceId}
+      data-pi-evidence-kind="trap"
       data-pi-question-id={questionId}
+      aria-pressed={isSelected}
+      onClick={() => onSelectEvidence(row.evidenceId)}
     >
       <div className="pi-analysis-distractor-head">
         <span className="pi-analysis-distractor-label">{row.optionLabel}</span>
@@ -593,12 +718,9 @@ function DistractorRow({
             {row.subtype ? ` / ${row.subtype}` : ''}
           </span>
         )}
-        {row.quoteIsTextOnly && (
-          <span className="pi-analysis-distractor-text-only">text-only</span>
-        )}
       </div>
       <span>{row.shortReason}</span>
       {row.quote && <span className="pi-analysis-distractor-quote">"{row.quote}"</span>}
-    </div>
+    </button>
   )
 }

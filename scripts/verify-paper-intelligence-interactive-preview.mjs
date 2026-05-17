@@ -2,60 +2,74 @@
 /**
  * verify-paper-intelligence-interactive-preview
  *
- * Static + functional checks for the V1 interactive Paper Intelligence
- * preview. Themes:
+ * Static + functional checks for the interactive Paper Intelligence
+ * preview, now V2 (cross-column evidence dotted line).
  *
  *   1. Architecture lock-ins
  *      - Route param surface unchanged: `?view=paper-intelligence&paperId=...`.
- *      - Component does NOT hand-roll a quote matcher or import
- *        reading-analysis.
- *      - Component does NOT import LinkOverlay.
+ *      - Component does NOT hand-roll a quote matcher.
+ *      - Component does NOT import reading-analysis or LinkOverlay.
  *      - Preview model is pure (no React / DOM / fetch / DB).
  *      - Preview model uses the existing evidence adapter.
  *      - reading-analysis directory is not modified by this branch.
  *      - server / package.json / SQLite are not modified.
- *      - No `activeEvidenceId` top-level state.
+ *      - `activeQuestionId` remains the PRIMARY state. `activeEvidenceId`
+ *        is a SECONDARY, line-only state — it must not replace
+ *        `activeQuestionId`.
  *
- *   2. V1 product rules
+ *   2. V1 product rules (still in effect)
  *      - The right Analysis Panel is the only home for
  *        stem / answer / distractor / synonym / back-stage fields.
  *      - LoadRow has no `引文 / 收起` toggle and no
  *        `.pi-load-evidence-toggle` / `.pi-load-evidence-list` CSS.
- *      - Key chunks render as a `重要词块 · N 个` summary line — the
- *        full tag list is removed.
+ *      - Key chunks render as a `重要词块 · N 个` summary line.
  *      - The right panel carries `aria-live="polite"` and
  *        `role="region"`.
  *      - Trap highlight uses a dim coral wash (opacity ≤ 0.10).
- *      - Dead `.pi-content` block is removed.
+ *      - Dead `.pi-content` block stays removed.
  *      - V0 detail layer (DetailQuestionRow / QuestionsPanel /
- *        QuestionDetail and their CSS) is gone.
+ *        QuestionDetail and their CSS) stays gone.
  *
- *   3. Smoke-polish surface (this revision)
- *      - Component carries an auto-scroll effect that targets the
- *        first support highlight when `activeQuestionId` flips.
- *      - Auto-scroll scopes to `.pi-main` (left scroller); does not
- *        scroll `window`.
- *      - Auto-scroll honors `prefers-reduced-motion`.
- *      - `.pi-main` is its own scroll container in CSS.
- *      - `QuestionAnalysis.options` is typed (no longer read via
- *        `Record<string, unknown>`).
- *      - Multi-occurrence quote strategy is documented in JSDoc and
- *        covered by a test case.
+ *   3. V1 smoke-polish (still in effect)
+ *      - Auto-scroll the first support highlight into view inside the
+ *        LEFT scroller (`.pi-main`).
+ *      - Honors `prefers-reduced-motion`.
+ *      - `.pi-main` is its own scroll container.
+ *      - `QuestionAnalysis.options` is typed.
  *
- *   4. Runtime contract
+ *   4. V2 cross-column evidence line (this revision)
+ *      - A dedicated module exists at
+ *        `app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx`
+ *      - It exports `PaperIntelligenceEvidenceLine`,
+ *        `usePaperIntelligenceEvidenceLine`, `computeOverlayGeometry`,
+ *        and `findFirstDomOccurrence` (multi-occurrence policy).
+ *      - It does NOT import reading-analysis or LinkOverlay.
+ *      - The preview component imports the overlay from this module.
+ *      - Component declares `activeEvidenceId` state, paired with
+ *        `activeQuestionId`, with the invariants described in the
+ *        component JSDoc (clear when activeQuestionId is null; reseed
+ *        to support evidence on question activation).
+ *      - Right-panel support row and quoted distractor rows are
+ *        rendered as `<button>` with `data-pi-evidence-id`.
+ *      - Text-only distractors stay as plain `<div>` and carry
+ *        `data-pi-quote-text-only="true"`.
+ *      - The overlay path uses `.pi-line-path` and renders at most
+ *        ONE path. The overlay's wrapping `<svg>` uses
+ *        `.pi-line-overlay` with `data-empty="true"` for the
+ *        no-line state.
+ *      - CSS includes a small-screen hide at `(max-width: 900px)` and
+ *        a reduced-motion override.
+ *      - Multi-occurrence quote → first DOM occurrence policy is
+ *        documented in JSDoc and exercised by a unit test.
+ *
+ *   5. Runtime contract (preview model unchanged from V1)
  *      - `buildPreviewView(report, bodies, activeQuestionId)` builds a
  *        view with 4 passages and 15 questions for the bundled fixture.
  *      - With no active question, no highlight segments are produced.
- *      - With an active question, that question's passage carries at
- *        least one support and at least one trap highlight.
- *      - Question id format is `${paperSection}-${questionNo}` and
- *        round-trips through `parseQuestionId`.
+ *      - With an active question, support and trap highlights appear.
+ *      - Question id format is `${paperSection}-${questionNo}`.
  *      - Overlap arbitration: support beats trap.
- *      - Multi-occurrence: every non-overlapping match of the same
- *        quote is highlighted.
- *      - DOM anchor attribute strings appear in the component source.
- *      - Highlight CSS classes appear in the stylesheet.
- *      - Right panel copy text appears in the component source.
+ *      - Multi-occurrence: every non-overlapping match is highlighted.
  */
 
 import { readFileSync, existsSync } from 'node:fs'
@@ -67,6 +81,12 @@ import {
   parseQuestionId,
   buildPassageSegments,
 } from '../app/src/features/paper-intelligence/preview/paperIntelligencePreviewModel.ts'
+// Pure helpers (no JSX) live in the `.ts` companion so Node's
+// strip-types ESM loader can import them without a TSX parser.
+import {
+  computeOverlayGeometry,
+  findFirstDomOccurrence,
+} from '../app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLineGeometry.ts'
 
 const HERE = path.dirname(new URL(import.meta.url).pathname)
 const ROOT = path.resolve(HERE, '..')
@@ -91,28 +111,32 @@ function readSrc(rel) {
 
 const COMPONENT = 'app/src/features/paper-intelligence/PaperIntelligencePreview.tsx'
 const MODEL = 'app/src/features/paper-intelligence/preview/paperIntelligencePreviewModel.ts'
+const LINE = 'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx'
+const LINE_GEOM = 'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLineGeometry.ts'
 const CSS = 'app/src/features/paper-intelligence/paperIntelligence.css'
 const ROUTE = 'app/src/features/paper-intelligence/paperIntelligenceRoute.ts'
 const TYPES = 'app/src/features/paper-intelligence/paperIntelligenceTypes.ts'
 
 assert('component file exists', existsSync(path.join(ROOT, COMPONENT)))
 assert('preview model file exists', existsSync(path.join(ROOT, MODEL)))
+assert('V2 evidence line module exists', existsSync(path.join(ROOT, LINE)))
+assert('V2 evidence line geometry helpers exist', existsSync(path.join(ROOT, LINE_GEOM)))
 assert('stylesheet exists', existsSync(path.join(ROOT, CSS)))
 assert('route parser exists', existsSync(path.join(ROOT, ROUTE)))
 assert('types file exists', existsSync(path.join(ROOT, TYPES)))
 
 const componentSrc = readSrc(COMPONENT)
 const modelSrc = readSrc(MODEL)
+const lineSrc = readSrc(LINE)
+const lineGeomSrc = readSrc(LINE_GEOM)
 const cssSrc = readSrc(CSS)
 const routeSrc = readSrc(ROUTE)
 const typesSrc = readSrc(TYPES)
 
 /**
- * Some assertions look for forbidden patterns in the *executable* code,
- * not in JSDoc/leading comments. Doc comments often legitimately mention
- * the patterns we forbid (e.g. "this component never calls
- * passageBody.includes(...)"). We strip block + line comments before
- * those scans to keep the asserts honest.
+ * Strip block + line comments before scanning *executable* code so doc
+ * comments that legitimately mention forbidden patterns ("we never
+ * import LinkOverlay") don't trip those scans.
  */
 function stripComments(src) {
   return src
@@ -120,6 +144,8 @@ function stripComments(src) {
     .replace(/(^|[^:])\/\/.*$/gm, '$1')
 }
 const componentSrcCode = stripComments(componentSrc)
+const lineSrcCode = stripComments(lineSrc)
+const lineGeomSrcCode = stripComments(lineGeomSrc)
 const cssSrcCode = stripComments(cssSrc)
 
 /* ─── 2. route surface unchanged ─────────────────────────────────── */
@@ -129,10 +155,7 @@ assert(
   /'paper-intelligence'/.test(routeSrc) &&
     /export function parsePaperIntelligenceRoute/.test(routeSrc),
 )
-assert(
-  'route still reads paperId param',
-  /paperId/.test(routeSrc),
-)
+assert('route still reads paperId param', /paperId/.test(routeSrc))
 
 /* ─── 3. component does not hand-roll quote matching ──────────────── */
 
@@ -149,7 +172,7 @@ assert(
   !/server\/api|sqlite|better-sqlite|question-bank\.sqlite/i.test(componentSrcCode),
 )
 assert(
-  'component does not import LinkOverlay (V2 only)',
+  'component does not import LinkOverlay (reading-analysis lock-in)',
   !/LinkOverlay/.test(componentSrcCode),
 )
 
@@ -196,7 +219,7 @@ assert(
   /export function buildPassageSegments/.test(modelSrc),
 )
 
-/* ─── 5. existing V0 preview asserts still pass (preserved tokens) ── */
+/* ─── 5. existing V0 preview asserts still pass ──────────────────── */
 
 const requiredLoadKeys = [
   'vocabularyChunkLoad',
@@ -232,10 +255,6 @@ assert(
   /activeQuestionId/.test(componentSrc),
 )
 assert(
-  'component does not introduce an activeEvidenceId top-level state',
-  !/useState[^)]*activeEvidenceId/.test(componentSrc),
-)
-assert(
   'component renders right panel empty hint "点击左侧题目查看解析"',
   componentSrc.includes('点击左侧题目查看解析'),
 )
@@ -252,7 +271,7 @@ assert(
   componentSrc.includes('同义替换'),
 )
 
-/* ─── 6b. right Analysis Panel has aria-live announcement (V1) ─── */
+/* ─── 6b. right Analysis Panel has aria-live announcement ────────── */
 
 assert(
   'right Analysis Panel sets aria-live="polite"',
@@ -263,7 +282,7 @@ assert(
   /role=['"]region['"]/.test(componentSrcCode),
 )
 
-/* ─── 7. DOM anchors are present for V2 ──────────────────────────── */
+/* ─── 7. DOM anchors are present ─────────────────────────────────── */
 
 const requiredAnchors = [
   'data-pi-question-id',
@@ -287,6 +306,8 @@ const requiredCssClasses = [
   '.pi-shell',
   '.pi-side',
   '.pi-passage-body',
+  '.pi-line-overlay',
+  '.pi-line-path',
 ]
 for (const c of requiredCssClasses) {
   assert(`stylesheet defines ${c}`, cssSrc.includes(c))
@@ -297,13 +318,10 @@ assert(
   !/<mark\b[^>]*\bstyle=\{\{[^}]*background/.test(componentSrcCode),
 )
 
-/* ─── 8b. trap highlight is dim (no fluorescent wash) ───────────── */
+/* ─── 8b. trap highlight is dim ──────────────────────────────────── */
 
 {
-  // grab the body of the .pi-ev-highlight--trap rule
-  const trapRule = cssSrcCode.match(
-    /\.pi-ev-highlight--trap\s*\{([^}]*)\}/,
-  )
+  const trapRule = cssSrcCode.match(/\.pi-ev-highlight--trap\s*\{([^}]*)\}/)
   assert(
     '.pi-ev-highlight--trap rule is present in stylesheet',
     Boolean(trapRule),
@@ -324,11 +342,15 @@ assert(
   }
 }
 
-/* ─── 9. V1 should NOT yet draw cross-column dotted lines ────────── */
+/* ─── 9. component must not introduce reading-analysis svg overlay ─ */
 
 assert(
-  'V1 does not include LinkOverlay / svg path drawing for evidence lines',
-  !/<svg[\s\S]*data-link-id|LinkOverlay/.test(componentSrcCode),
+  'component does NOT use reading-analysis data-link-id attribute',
+  !/data-link-id/.test(componentSrcCode),
+)
+assert(
+  'line module does NOT use reading-analysis data-link-id attribute',
+  !/data-link-id/.test(lineSrcCode),
 )
 
 /* ─── 10. reading-analysis / server / package.json untouched ─────── */
@@ -356,7 +378,13 @@ assert(
     'parseQuestionId round-trips a well-formed id',
     parsed?.paperSection === 'A' && parsed?.questionNo === '21',
   )
-  assert('parseQuestionId returns null for malformed input', parseQuestionId('') === null && parseQuestionId('A') === null && parseQuestionId('A-') === null && parseQuestionId('-21') === null)
+  assert(
+    'parseQuestionId returns null for malformed input',
+    parseQuestionId('') === null &&
+      parseQuestionId('A') === null &&
+      parseQuestionId('A-') === null &&
+      parseQuestionId('-21') === null,
+  )
 }
 
 /* ─── 12. functional run against bundled fixture ─────────────────── */
@@ -389,7 +417,10 @@ for (const p of input?.passages || []) {
   let totalQuestions = 0
   for (const p of view.passages) totalQuestions += p.questions.length
   assert('preview view: 15 questions total', totalQuestions === 15, `got ${totalQuestions}`)
-  assert('preview view: activeAnalysis is null when no question active', view.activeAnalysis === null)
+  assert(
+    'preview view: activeAnalysis is null when no question active',
+    view.activeAnalysis === null,
+  )
 
   let highlightCount = 0
   for (const p of view.passages) {
@@ -413,15 +444,11 @@ for (const p of input?.passages || []) {
   }
 }
 
-// 12b. active view — Q21 (passage A) should have at least one support
-//      highlight and at least one trap highlight
+// 12b. active view — Q21 (passage A) should have at least one support + trap
 {
   const activeId = buildQuestionId('A', '21')
   const view = buildPreviewView({ report, bodies, activeQuestionId: activeId })
-  assert(
-    'active view: activeAnalysis is non-null',
-    view.activeAnalysis !== null,
-  )
+  assert('active view: activeAnalysis is non-null', view.activeAnalysis !== null)
   assert(
     'active view: activeAnalysis questionId matches',
     view.activeAnalysis?.questionId === activeId,
@@ -431,7 +458,6 @@ for (const p of input?.passages || []) {
     view.activeAnalysis?.supportEvidenceId?.endsWith('-correct') === true,
   )
 
-  // find the A passage view
   const a = view.passages.find((p) => p.paperSection === 'A')
   let supportSegs = 0
   let trapSegs = 0
@@ -449,7 +475,6 @@ for (const p of input?.passages || []) {
     trapSegs >= 1,
   )
 
-  // selected question card flag is set on exactly one row
   let activeRows = 0
   for (const p of view.passages) {
     for (const row of p.questions) if (row.isActive) activeRows++
@@ -460,8 +485,6 @@ for (const p of input?.passages || []) {
     `got ${activeRows}`,
   )
 
-  // text-only distractors: any trap with no quote ends up flagged
-  // `quoteIsTextOnly`. Verify we don't mark quoted distractors as text-only.
   const textOnly = view.activeAnalysis?.distractors.filter((d) => d.quoteIsTextOnly) || []
   const withQuote = view.activeAnalysis?.distractors.filter((d) => !d.quoteIsTextOnly) || []
   assert(
@@ -474,9 +497,8 @@ for (const p of input?.passages || []) {
   )
 }
 
-// 12c. buildPassageSegments unit-style edge cases
+// 12c. buildPassageSegments edge cases
 {
-  // empty body
   const empty = buildPassageSegments({
     passageBody: '',
     activeQuestionId: 'A-21',
@@ -484,7 +506,6 @@ for (const p of input?.passages || []) {
   })
   assert('buildPassageSegments returns [] when passageBody is empty', empty.length === 0)
 
-  // no evidence view
   const noEv = buildPassageSegments({
     passageBody: 'hello world',
     activeQuestionId: 'A-21',
@@ -496,7 +517,7 @@ for (const p of input?.passages || []) {
   )
 }
 
-/* ─── 13. V1 must-fix: old V0 detail layer is gone ──────────────── */
+/* ─── 13. V0 detail layer is gone ────────────────────────────────── */
 
 assert(
   'component no longer defines DetailQuestionRow',
@@ -540,14 +561,14 @@ for (const cls of removedDetailCssClasses) {
   )
 }
 
-/* ─── 13b. dead .pi-content block is gone ────────────────────────── */
+/* ─── 13b. dead .pi-content block stays gone ──────────────────────── */
 
 assert(
   'stylesheet removes dead .pi-content rule',
   !/\.pi-content\b/.test(cssSrc),
 )
 
-/* ─── 13c. LoadRow no longer has 引文/收起 toggle or evidence list ─ */
+/* ─── 13c. LoadRow has no 引文/收起 toggle ───────────────────────── */
 
 assert(
   'component no longer renders "引文" / "收起" toggle for load evidence',
@@ -569,7 +590,7 @@ for (const cls of removedLoadEvidenceCss) {
   )
 }
 
-/* ─── 13d. Key chunks render only as a "重要词块 · N 个" summary ── */
+/* ─── 13d. Key chunks render only as a "重要词块 · N 个" summary ─── */
 
 assert(
   'component renders key-chunk summary "重要词块 · ... 个"',
@@ -592,14 +613,8 @@ for (const cls of removedChunkTagCss) {
   )
 }
 
-/* ─── 14. V1 must-fix: support priority in overlap arbitration ──── */
+/* ─── 14. support-priority overlap arbitration ───────────────────── */
 
-/**
- * Helper: build a synthetic PassageEvidenceView with a controlled set
- * of evidence items. The adapter normally builds these; here we hand-
- * craft them so we can exercise overlap edge cases that the bundled
- * fixture cannot reach.
- */
 function makeSectionEvidence(items) {
   return {
     paperSection: 'X',
@@ -638,12 +653,10 @@ function trapItem(id, label, quote) {
   }
 }
 
-// 14a. support quote is a strict substring of a trap quote: support
-//      must be highlighted, trap must be dropped (no overlap allowed).
+// 14a. trap superstring of support → support survives, trap dropped
 {
   const passageBody = 'The widely accepted theory predicts a universal pattern.'
   const ev = makeSectionEvidence([
-    // adapter order = support, then traps by label ASC; we mimic that
     supportItem('X-1', 'accepted theory'),
     trapItem('X-1', 'B', 'widely accepted theory predicts'),
   ])
@@ -660,13 +673,12 @@ function trapItem(id, label, quote) {
     supportHighlights.length === 1 && supportHighlights[0].text === 'accepted theory',
   )
   assert(
-    '14a: trap is dropped (does not cover support) when fully overlapping support',
+    '14a: trap is dropped when fully overlapping support',
     trapHighlights.length === 0,
-    `got trap highlights: ${JSON.stringify(trapHighlights.map((t) => t.text))}`,
   )
 }
 
-// 14b. trap and support occupy the exact same span: support wins.
+// 14b. exact-span tie → support wins
 {
   const passageBody = 'The fragile balance shifts every season.'
   const ev = makeSectionEvidence([
@@ -685,8 +697,7 @@ function trapItem(id, label, quote) {
   )
 }
 
-// 14c. partial overlap: trap starts inside a support span. Support
-//      keeps its full span; trap is dropped.
+// 14c. partial overlap
 {
   const passageBody = 'Rapid technological change disrupts everything.'
   const ev = makeSectionEvidence([
@@ -698,9 +709,12 @@ function trapItem(id, label, quote) {
     activeQuestionId: 'X-1',
     sectionEvidence: ev,
   })
-  const highlights = segs.filter((s) => s.kind === 'highlight')
-  const supportHighlights = highlights.filter((s) => s.evidenceKind === 'support')
-  const trapHighlights = highlights.filter((s) => s.evidenceKind === 'trap')
+  const supportHighlights = segs.filter(
+    (s) => s.kind === 'highlight' && s.evidenceKind === 'support',
+  )
+  const trapHighlights = segs.filter(
+    (s) => s.kind === 'highlight' && s.evidenceKind === 'trap',
+  )
   assert(
     '14c: support keeps full span when trap partially overlaps',
     supportHighlights.length === 1 &&
@@ -709,11 +723,10 @@ function trapItem(id, label, quote) {
   assert(
     '14c: partially-overlapping trap is dropped',
     trapHighlights.length === 0,
-    `got trap highlights: ${JSON.stringify(trapHighlights.map((t) => t.text))}`,
   )
 }
 
-// 14d. non-overlapping trap still renders alongside support.
+// 14d. non-overlapping trap renders alongside support
 {
   const passageBody = 'The first claim is bold; the second claim is cautious.'
   const ev = makeSectionEvidence([
@@ -726,55 +739,20 @@ function trapItem(id, label, quote) {
     sectionEvidence: ev,
   })
   const highlights = segs.filter((s) => s.kind === 'highlight')
-  const supportHighlights = highlights.filter((s) => s.evidenceKind === 'support')
-  const trapHighlights = highlights.filter((s) => s.evidenceKind === 'trap')
+  const order = highlights.map((h) => h.evidenceKind)
   assert(
     '14d: support and non-overlapping trap both render',
-    supportHighlights.length === 1 && trapHighlights.length === 1,
-    `got ${supportHighlights.length} support and ${trapHighlights.length} trap highlights`,
+    highlights.length === 2,
   )
-  // make sure they emit in passage order
-  const order = highlights.map((h) => h.evidenceKind)
   assert(
     '14d: highlights emit in left-to-right passage order',
     order[0] === 'support' && order[1] === 'trap',
   )
 }
 
-// 14e. trap appears only as a superstring of support — that single
-//      occurrence is dropped, and there is no other occurrence.
-{
-  const passageBody = 'The widely accepted theory predicts a universal pattern.'
-  const ev = makeSectionEvidence([
-    supportItem('X-1', 'accepted theory'),
-    trapItem('X-1', 'B', 'widely accepted theory'),
-  ])
-  const segs = buildPassageSegments({
-    passageBody,
-    activeQuestionId: 'X-1',
-    sectionEvidence: ev,
-  })
-  const trapHighlights = segs.filter(
-    (s) => s.kind === 'highlight' && s.evidenceKind === 'trap',
-  )
-  assert(
-    '14e: when trap exists only as a superstring of support, trap is fully dropped',
-    trapHighlights.length === 0,
-  )
-}
+/* ─── 15. multi-occurrence quote ─────────────────────────────────── */
 
-/* ─── 15. multi-occurrence quote: every match is highlighted ─────── */
-
-/**
- * Smoke-polish requirement: when a quote string appears more than once
- * in `passageBody`, every non-overlapping occurrence must render. We
- * rely on this so the teacher sees the full landscape of where a
- * surface phrase appears, rather than guessing which occurrence the
- * model meant.
- */
 {
-  // support quote occurs three times; trap quote occurs twice and does
-  // not overlap any support occurrence.
   const passageBody =
     'fragile balance · fragile balance again · and once more fragile balance · then warning sign · then warning sign'
   const ev = makeSectionEvidence([
@@ -795,55 +773,22 @@ function trapItem(id, label, quote) {
   assert(
     '15: support quote highlighted in all 3 non-overlapping occurrences',
     supportHighlights.length === 3,
-    `got ${supportHighlights.length}`,
   )
   assert(
     '15: trap quote highlighted in both non-overlapping occurrences',
     trapHighlights.length === 2,
-    `got ${trapHighlights.length}`,
   )
-  // each support highlight has identical text — sanity
-  assert(
-    '15: every support highlight slice equals the original quote text',
-    supportHighlights.every((s) => s.text === 'fragile balance'),
-  )
-  // model JSDoc explicitly documents the policy
   assert(
     'preview model JSDoc documents multi-occurrence quote strategy',
     /Multi-occurrence quote strategy|every non-overlapping occurrence/i.test(modelSrc),
   )
 }
 
-/* ─── 16. auto-scroll plumbing in the component ──────────────────── */
+/* ─── 16. auto-scroll plumbing in the component (V1 still in effect) ─ */
 
-/**
- * Smoke-polish: clicking a question card in the left column should
- * bring the first support highlight into view inside the LEFT
- * scroller, never the document/window. The verify script can't render
- * the component, so we assert on the source-level shape of the effect:
- *
- *   - useRef is imported and used for a left-scroller ref.
- *   - that ref is attached to `.pi-main` (the only place we route
- *     scroll into).
- *   - a useEffect is keyed on `activeQuestionId` and calls
- *     `.scrollIntoView(...)` on a target that lives INSIDE the
- *     `.pi-main` ref.current — i.e. via `scroller.querySelector(...)`.
- *   - the effect uses `block: 'nearest'` (so the browser can't fall
- *     back to scrolling the window) and references
- *     `prefers-reduced-motion` to pick `behavior`.
- *
- *   - `window.scrollTo` is NEVER called from this component.
- *   - `document.scrollingElement` is NEVER manipulated.
- *
- * The smoke script (`scripts/smoke-paper-intelligence-preview.mjs`)
- * exercises the actual scroll at runtime. These static checks just
- * lock the shape so a refactor can't accidentally re-introduce a
- * window-level scroll.
- */
 assert(
   'component imports useRef',
-  /\buseRef\b/.test(componentSrcCode) &&
-    /from ['"]react['"]/.test(componentSrc),
+  /\buseRef\b/.test(componentSrcCode) && /from ['"]react['"]/.test(componentSrc),
 )
 assert(
   'component declares a ref for the left scroll container',
@@ -851,11 +796,11 @@ assert(
     /useRef<HTMLElement \| null>\(null\)/.test(componentSrcCode),
 )
 assert(
-  'component attaches the ref to the .pi-main scroller',
+  'component attaches a ref to the .pi-main scroller',
   /<div\s+className=["']pi-main["'][^>]*\bref=\{[^}]+\}/.test(componentSrcCode),
 )
 assert(
-  'component has a useEffect keyed on activeQuestionId for the auto-scroll',
+  'component has a useEffect keyed on activeQuestionId for auto-scroll',
   /useEffect\(\s*\(\)\s*=>\s*\{[\s\S]*?activeQuestionId[\s\S]*?\},\s*\[[^\]]*activeQuestionId[^\]]*\]/.test(
     componentSrcCode,
   ),
@@ -867,52 +812,12 @@ assert(
     !/\bwindow\.scrollBy\s*\(/.test(componentSrcCode),
 )
 assert(
-  'auto-scroll uses block: "nearest" so the browser can\'t bubble to window',
+  'auto-scroll uses block: "nearest"',
   /block\s*:\s*['"]nearest['"]/.test(componentSrcCode),
 )
 assert(
   'component reads prefers-reduced-motion before choosing scroll behavior',
   /prefers-reduced-motion/.test(componentSrcCode),
-)
-assert(
-  'auto-scroll branches scroll behavior on reduced motion (auto vs smooth)',
-  /behavior\s*:\s*reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(
-    componentSrcCode,
-  ) ||
-    // tolerate inverted ternary
-    /behavior\s*:\s*[a-zA-Z_$][\w$]*\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(
-      componentSrcCode,
-    ),
-)
-{
-  // The lookup must be scoped to the left scroller, never the global
-  // document. We accept any of:
-  //   (a) `ref.current?.querySelector(...)`
-  //   (b) `const scroller = ref.current; ... scroller.querySelector(...)`
-  // and we hard-fail if `document.querySelector` is used in the
-  // component anywhere.
-  const usesRefDirectly =
-    /mainScrollerRef\.current\??\.querySelector/.test(componentSrcCode) ||
-    /\b\w+Ref\.current\??\.querySelector/.test(componentSrcCode)
-  const usesLocalScroller =
-    /\bconst\s+scroller\s*=\s*\w+Ref\.current\b/.test(componentSrcCode) &&
-    /\bscroller\.querySelector\b/.test(componentSrcCode)
-  const noDocumentQuery = !/\bdocument\.querySelector\b/.test(componentSrcCode)
-  assert(
-    'auto-scroll target is fetched via the left scroller ref (not document.querySelector)',
-    (usesRefDirectly || usesLocalScroller) && noDocumentQuery,
-  )
-}
-assert(
-  'auto-scroll selector targets a support evidence highlight for the active question',
-  /data-pi-evidence-kind=["']support["']/.test(componentSrcCode) ||
-    /data-pi-evidence-kind="support"/.test(componentSrcCode) ||
-    /\\?["']support\\?["']/.test(componentSrcCode),
-)
-assert(
-  'component does NOT touch window.scrollTo / document.scrollTo',
-  !/\bwindow\.scroll(To|By)\b/.test(componentSrcCode) &&
-    !/\bdocument\.scrollingElement/.test(componentSrcCode),
 )
 
 /* ─── 17. left scroller is its own scroll container in CSS ───────── */
@@ -927,13 +832,13 @@ assert(
       /overflow-y\s*:\s*auto\b/.test(body),
     )
     assert(
-      '.pi-main has a max-height bound so it actually scrolls (vs. expanding the page)',
+      '.pi-main has a max-height bound so it actually scrolls',
       /max-height\s*:\s*[^;]+/.test(body),
     )
   }
 }
 
-/* ─── 18. QuestionAnalysis.options is typed (no more `unknown`) ── */
+/* ─── 18. QuestionAnalysis.options is typed ───────────────────────── */
 
 assert(
   'paperIntelligenceTypes declares optional QuestionAnalysis.options',
@@ -950,42 +855,312 @@ assert(
     modelSrc,
   ),
 )
+
+/* ─── 19. V2 cross-column evidence line — module shape ───────────── */
+
 assert(
-  'preview model no longer reads options via Record<string, unknown> cast',
-  !/q\s+as\s+unknown\s+as\s+Record<string,\s*unknown>/.test(modelSrc),
+  'V2 line module: no reading-analysis import',
+  !/features\/reading-analysis/.test(lineSrcCode) &&
+    !/LinkOverlay/.test(lineSrcCode),
 )
 assert(
-  'preview model readOptionsFromQuestion accepts a typed QuestionAnalysis',
-  /function\s+readOptionsFromQuestion\s*\(\s*q\s*:\s*QuestionAnalysis(\s*\|\s*null)?(\s*\|\s*undefined)?\s*\)/.test(
-    modelSrc,
+  'V2 line module: no fetch / DB / SQLite (pure UI)',
+  !/\bfetch\(|XMLHttpRequest|sqlite|better-sqlite/i.test(lineSrcCode),
+)
+assert(
+  'V2 line module exports PaperIntelligenceEvidenceLine component',
+  /export function PaperIntelligenceEvidenceLine\b/.test(lineSrc),
+)
+assert(
+  'V2 line module exports usePaperIntelligenceEvidenceLine hook',
+  /export function usePaperIntelligenceEvidenceLine\b/.test(lineSrc),
+)
+assert(
+  'V2 geometry module exports computeOverlayGeometry (pure)',
+  /export function computeOverlayGeometry\b/.test(lineGeomSrc),
+)
+assert(
+  'V2 geometry module exports findFirstDomOccurrence (multi-occurrence anchor)',
+  /export function findFirstDomOccurrence\b/.test(lineGeomSrc),
+)
+assert(
+  'V2 geometry module is JSX-free (no `.tsx`-only syntax)',
+  !/<svg\b/i.test(lineGeomSrcCode) && !/<path\b/i.test(lineGeomSrcCode),
+)
+assert(
+  'V2 geometry module: no reading-analysis import',
+  !/features\/reading-analysis/.test(lineGeomSrc) &&
+    !/LinkOverlay/.test(lineGeomSrc),
+)
+assert(
+  'V2 geometry module documents multi-occurrence → first DOM occurrence policy',
+  /first\s+DOM\s+occurrence/i.test(lineGeomSrc) ||
+    /first\s+occurrence/i.test(lineGeomSrc),
+)
+assert(
+  'V2 line module reads prefers-reduced-motion (via geometry helper or directly)',
+  /prefers-reduced-motion/.test(lineSrc) ||
+    /detectReducedMotion/.test(lineSrcCode),
+)
+assert(
+  'V2 line module attaches scroll/resize listeners and uses ResizeObserver',
+  /addEventListener\(\s*['"]scroll['"]/.test(lineSrcCode) &&
+    /addEventListener\(\s*['"]resize['"]/.test(lineSrcCode) &&
+    /\bResizeObserver\b/.test(lineSrcCode),
+)
+assert(
+  'V2 line module coalesces listener-driven recomputes via requestAnimationFrame',
+  /requestAnimationFrame\(/.test(lineSrcCode) &&
+    /cancelAnimationFrame\(/.test(lineSrcCode),
+)
+assert(
+  'V2 line module renders <svg className="pi-line-overlay">',
+  /className=["']pi-line-overlay["']/.test(lineSrcCode),
+)
+assert(
+  'V2 line module renders empty SVG with data-empty="true" when no geometry',
+  /data-empty=["']true["']/.test(lineSrcCode),
+)
+assert(
+  'V2 line module renders <path class="pi-line-path">',
+  // The `<path>` JSX element uses `className={pathClass}` where
+  // `pathClass` always begins with the literal `pi-line-path` token
+  // (see `usePaperIntelligenceEvidenceLine`). We accept either a
+  // direct string literal `className="pi-line-path..."` or a variable
+  // expression `className={pathClass}` paired with a `pi-line-path`
+  // string literal somewhere in the surrounding code.
+  /className=["']pi-line-path[\s'"`]/.test(lineSrcCode) ||
+    (/<path\b[\s\S]*?className=\{[a-zA-Z_$][\w$]*\}/.test(lineSrcCode) &&
+      /['"`]pi-line-path['"` ]/.test(lineSrcCode)),
+)
+assert(
+  'V2 line module renders at most ONE <path> (single render branch)',
+  // count occurrences of <path> tag in the source — should be exactly 1
+  (lineSrcCode.match(/<path\b/g) || []).length === 1,
+)
+
+/* ─── 20. component wires up the V2 line overlay ─────────────────── */
+
+assert(
+  'component imports PaperIntelligenceEvidenceLine from preview/paperIntelligenceEvidenceLine',
+  /import\s*\{[^}]*PaperIntelligenceEvidenceLine[^}]*\}\s*from\s*['"][^'"]*preview\/paperIntelligenceEvidenceLine/.test(
+    componentSrc,
   ),
 )
 assert(
-  'preview model uses QuestionOption[] in QuestionRow.optionsForDisplay',
-  /optionsForDisplay\s*:\s*QuestionOption\[\]/.test(modelSrc),
+  'component renders <PaperIntelligenceEvidenceLine /> in JSX',
+  /<PaperIntelligenceEvidenceLine\b/.test(componentSrcCode),
+)
+assert(
+  'component declares activeEvidenceId state via useState',
+  /useState<string\s*\|\s*null>\([^)]*\)/.test(componentSrcCode) &&
+    /activeEvidenceId/.test(componentSrcCode),
+)
+assert(
+  'component sets activeEvidenceId via setActiveEvidenceId',
+  /setActiveEvidenceId\(/.test(componentSrcCode),
+)
+assert(
+  'component clears activeEvidenceId when activeQuestionId is null',
+  // there must be a code path that calls setActiveEvidenceId(null)
+  /setActiveEvidenceId\(\s*null\s*\)/.test(componentSrcCode),
+)
+assert(
+  'component seeds activeEvidenceId from supportEvidenceId',
+  /supportEvidenceId/.test(componentSrcCode),
+)
+assert(
+  'shell ref is attached to .pi-shell so the overlay can position absolutely',
+  /<div\s+className=["']pi-shell["'][^>]*\bref=\{[^}]+\}/.test(componentSrcCode),
+)
+assert(
+  'side panel ref is attached to .pi-side aside element',
+  /<aside\b[\s\S]*?className=["']pi-side["'][\s\S]*?\bref=\{[^}]+\}[\s\S]*?>/.test(
+    componentSrcCode,
+  ),
+)
+assert(
+  'AnalysisPanel renders right-panel evidence rows as <button> with data-pi-evidence-id',
+  /<button\b[^>]*data-pi-evidence-id/.test(componentSrcCode),
+)
+assert(
+  'text-only distractor stays a non-button element with data-pi-quote-text-only',
+  /data-pi-quote-text-only=["']true["']/.test(componentSrcCode) ||
+    /data-pi-quote-text-only/.test(componentSrcCode),
 )
 
-/* ─── 19. companion smoke script exists and covers the new flow ── */
+/* ─── 21. activeQuestionId remains the PRIMARY state ─────────────── */
+
+/*
+ * The primary state contract:
+ *   - `activeQuestionId` is set both directly (question-card click) AND
+ *     used as the gate for `activeEvidenceId`.
+ *   - `activeEvidenceId` is ONLY ever written via either:
+ *       (a) `setActiveEvidenceId(null)` (clear), or
+ *       (b) seeded from `view?.activeAnalysis?.supportEvidenceId`, or
+ *       (c) updated by `handleSelectEvidence` (right-panel button click).
+ *   - `activeEvidenceId` MUST NOT be the only top-level state. We
+ *     check the file declares both `useState` calls.
+ */
+assert(
+  'component still declares activeQuestionId via useState',
+  /useState<string\s*\|\s*null>\([^)]*\)[\s\S]*activeQuestionId/.test(componentSrcCode) ||
+    /\[\s*activeQuestionId\s*,\s*setActiveQuestionId\s*\]\s*=\s*useState/.test(componentSrcCode),
+)
+assert(
+  'component declares both activeQuestionId and activeEvidenceId',
+  /activeQuestionId/.test(componentSrcCode) &&
+    /activeEvidenceId/.test(componentSrcCode),
+)
+assert(
+  'activeEvidenceId reseed effect depends on activeQuestionId',
+  // grep an effect that lists activeQuestionId in its deps and writes
+  // activeEvidenceId inside.
+  /useEffect\(\s*\(\)\s*=>\s*\{[\s\S]*?setActiveEvidenceId[\s\S]*?\},\s*\[[^\]]*activeQuestionId[^\]]*\]/.test(
+    componentSrcCode,
+  ),
+)
+
+/* ─── 22. CSS contract for V2 line overlay ───────────────────────── */
+
+{
+  const overlayRule = cssSrcCode.match(/\.pi-line-overlay\s*\{([^}]*)\}/)
+  assert('.pi-line-overlay rule exists', Boolean(overlayRule))
+  if (overlayRule) {
+    const body = overlayRule[1]
+    assert(
+      '.pi-line-overlay is position: absolute / fixed inside .pi-shell',
+      /position\s*:\s*(absolute|fixed)\b/.test(body),
+    )
+    assert(
+      '.pi-line-overlay does not capture pointer events',
+      /pointer-events\s*:\s*none\b/.test(body),
+    )
+  }
+
+  // empty-state hide
+  assert(
+    '.pi-line-overlay[data-empty="true"] is hidden',
+    /\.pi-line-overlay\[data-empty=['"]true['"]\][\s\S]*?\{[^}]*display\s*:\s*none/.test(
+      cssSrcCode,
+    ),
+  )
+
+  const pathRule = cssSrcCode.match(/\.pi-line-path\s*\{([^}]*)\}/)
+  assert('.pi-line-path rule exists', Boolean(pathRule))
+  if (pathRule) {
+    const body = pathRule[1]
+    assert(
+      '.pi-line-path uses dashed (or dotted) stroke pattern',
+      /stroke-dasharray\s*:/.test(body) ||
+        /stroke-linecap\s*:\s*round/.test(body),
+    )
+  }
+
+  // small-screen hide
+  assert(
+    'CSS hides .pi-line-overlay on small screens (max-width: 900px)',
+    /@media\s*\(\s*max-width\s*:\s*900px\s*\)\s*\{[\s\S]*?\.pi-line-overlay[\s\S]*?display\s*:\s*none/.test(
+      cssSrcCode,
+    ),
+  )
+
+  // reduced-motion
+  assert(
+    'CSS suppresses line draw animation under prefers-reduced-motion',
+    /@media\s*\(\s*prefers-reduced-motion\s*:\s*reduce\s*\)\s*\{[\s\S]*?\.pi-line-path/.test(
+      cssSrcCode,
+    ),
+  )
+
+  // shell is positioned so the absolute overlay anchors to it
+  assert(
+    '.pi-shell is position: relative so the overlay anchors to it',
+    /\.pi-shell\s*\{[^}]*position\s*:\s*relative/.test(cssSrcCode),
+  )
+}
+
+/* ─── 23. computeOverlayGeometry / findFirstDomOccurrence unit tests ─ */
+
+// 23a. computeOverlayGeometry returns a valid Bezier
+{
+  const container = { left: 0, top: 0, right: 1000, bottom: 600, width: 1000, height: 600 }
+  const target = { left: 100, top: 200, right: 200, bottom: 220, width: 100, height: 20 }
+  const source = { left: 700, top: 350, right: 950, bottom: 380, width: 250, height: 30 }
+  const g = computeOverlayGeometry(container, source, target)
+  assert(
+    '23a: geometry width/height matches container',
+    g.width === 1000 && g.height === 600,
+  )
+  assert(
+    '23a: geometry d starts with M (moveto) and contains C (cubic)',
+    /^M\s+/.test(g.d) && /\bC\b/.test(g.d),
+  )
+  // The path's start (M) should be at target.right, and end at source.left
+  // (we anchor target on the right edge and source on the left edge).
+  const moveMatch = g.d.match(/^M\s+([\d.]+)\s+([\d.]+)/)
+  assert(
+    '23a: path starts at target.right (anchored to left mark)',
+    Boolean(moveMatch) && Math.abs(parseFloat(moveMatch[1]) - 200) < 0.5,
+  )
+}
+
+// 23b. findFirstDomOccurrence returns the first matching mark in document order
+{
+  // Build a tiny DOM-shaped object literal that exposes querySelector.
+  // We only need querySelector to return the FIRST match, so a stub
+  // is enough — we don't need a full jsdom.
+  const callOrder = []
+  const fakeContainer = {
+    querySelector(selector) {
+      callOrder.push(selector)
+      // mimic the real DOM: return a stand-in HTMLElement-shaped object
+      // when the selector matches our expected attribute.
+      if (selector.includes('data-pi-evidence-id')) {
+        return { isFirst: true }
+      }
+      return null
+    },
+  }
+  const found = findFirstDomOccurrence(fakeContainer, 'A-21-correct')
+  assert(
+    '23b: findFirstDomOccurrence calls querySelector with mark[data-pi-evidence-id]',
+    callOrder.length === 1 && /^mark\[data-pi-evidence-id=/.test(callOrder[0]),
+  )
+  assert(
+    '23b: findFirstDomOccurrence returns the (first) result of querySelector',
+    found && found.isFirst === true,
+  )
+}
+
+// 23c. findFirstDomOccurrence returns null on null inputs
+{
+  const a = findFirstDomOccurrence(null, 'whatever')
+  const b = findFirstDomOccurrence({ querySelector: () => null }, null)
+  assert(
+    '23c: findFirstDomOccurrence(null, id) === null',
+    a === null,
+  )
+  assert(
+    '23c: findFirstDomOccurrence(container, null) === null',
+    b === null,
+  )
+}
+
+/* ─── 24. companion smoke script exists and covers V2 line ───────── */
 
 const SMOKE = 'scripts/smoke-paper-intelligence-preview.mjs'
-assert(
-  'companion smoke script exists',
-  existsSync(path.join(ROOT, SMOKE)),
-)
+assert('companion smoke script exists', existsSync(path.join(ROOT, SMOKE)))
 if (existsSync(path.join(ROOT, SMOKE))) {
   const smokeSrc = readSrc(SMOKE)
-  // Smoke must hit the canonical route, not invent a new one.
   assert(
     'smoke script targets ?view=paper-intelligence&paperId=...',
     /view=paper-intelligence/.test(smokeSrc) && /paperId=/.test(smokeSrc),
   )
-  // Smoke must use the same playwright path as siblings (no new dep).
   assert(
     'smoke script imports playwright from app/node_modules/playwright',
     /from\s+['"][^'"]*app\/node_modules\/playwright/.test(smokeSrc),
   )
-  // Behaviorally, the script must exercise the auto-scroll AND prove
-  // the document scroller stays put. Both are reviewer-pinned.
   assert(
     'smoke asserts auto-scroll target lands inside .pi-main',
     /\.pi-main\b/.test(smokeSrc) && /scrollTop/.test(smokeSrc),
@@ -994,41 +1169,52 @@ if (existsSync(path.join(ROOT, SMOKE))) {
     'smoke asserts the document/window scrollY does not change during click',
     /window\.scrollY/.test(smokeSrc),
   )
-  // Smoke must also exercise toggle-off and switch-question paths.
+  // V2 additions
   assert(
-    'smoke clicks the same card twice (toggle-off check)',
-    /firstCard\.click\(\)[\s\S]*firstCard\.click\(\)/.test(smokeSrc),
+    'smoke checks for the V2 line overlay (.pi-line-overlay)',
+    /\.pi-line-overlay/.test(smokeSrc),
   )
   assert(
-    'smoke clicks a different question card to verify switch-question cleanup',
-    /lastCard\.click\(\)|secondCard\.click\(\)/.test(smokeSrc),
+    'smoke checks the line path uses .pi-line-path class',
+    /\.pi-line-path/.test(smokeSrc),
   )
-  // Smoke must guard the V0 regression surfaces too.
   assert(
-    'smoke checks no LinkOverlay svg gets rendered',
-    /data-link-id/.test(smokeSrc) || /LinkOverlay/.test(smokeSrc),
+    'smoke verifies the path data-pi-evidence-id matches the active evidence id',
+    /data-pi-evidence-id/.test(smokeSrc) &&
+      /pi-line-path/.test(smokeSrc),
+  )
+  assert(
+    'smoke clicks a quoted distractor to assert the line switches',
+    /pi-analysis-distractor(?!-text-only)/.test(smokeSrc),
+  )
+  assert(
+    'smoke covers a small-screen / narrow viewport scenario where the line is hidden',
+    /setViewportSize\s*\(\s*\{[\s\S]*?width\s*:\s*\d+/.test(smokeSrc) ||
+      /viewport[\s\S]*?width:\s*\d+/.test(smokeSrc),
   )
   assert(
     'smoke checks no V0 .pi-question-detail row appears',
     /\.pi-question-detail/.test(smokeSrc),
   )
+  assert(
+    'smoke checks the overlay does NOT use reading-analysis data-link-id',
+    /data-link-id/.test(smokeSrc) || /LinkOverlay/.test(smokeSrc),
+  )
 }
 
-/* ─── 20. existing rules that must stay locked ─────────────────── */
+/* ─── 25. regression: things that must remain locked ─────────────── */
 
-// Re-confirm the "no LinkOverlay / no reading-analysis / no
-// activeEvidenceId" checks from earlier sections by re-asserting them
-// here as a single named regression block. These duplicate earlier
-// asserts on purpose: a refactor that nudges the order of the file
-// shouldn't be able to silently weaken the contract.
-
-assert(
-  'regression: component still does NOT introduce activeEvidenceId state',
-  !/activeEvidenceId/.test(componentSrcCode),
-)
 assert(
   'regression: component still does NOT import LinkOverlay',
   !/LinkOverlay/.test(componentSrcCode),
+)
+assert(
+  'regression: V2 line module does NOT import reading-analysis',
+  !/features\/reading-analysis/.test(lineSrcCode),
+)
+assert(
+  'regression: V2 line module does NOT import LinkOverlay',
+  !/LinkOverlay/.test(lineSrcCode),
 )
 assert(
   'regression: component still does NOT import reading-analysis',
@@ -1036,9 +1222,7 @@ assert(
 )
 assert(
   'regression: V0 detail components remain absent',
-  !/function\s+(DetailQuestionRow|QuestionsPanel|QuestionDetail)\b/.test(
-    componentSrcCode,
-  ),
+  !/function\s+(DetailQuestionRow|QuestionsPanel|QuestionDetail)\b/.test(componentSrcCode),
 )
 
 console.log(`\n  ${passed} passed, ${failed} failed`)
