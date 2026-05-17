@@ -126,11 +126,19 @@ console.log('\n─── 1. Left panel paper-like flow ───')
       !/position\s*:\s*(static|relative|absolute)\b/.test(body),
     )
   }
-  // Panel is portalled to <body> via createPortal; chip-anchor no longer
+  // Panel is portalled to <body> via createPortal inside the
+  // shared AnchoredPopover module; chip-anchor no longer
   // needs to be a positioning context.
+  const anchoredPopoverSrc = readSrc(
+    'app/src/features/paper-intelligence/preview/AnchoredPopover.tsx',
+  )
   assert(
-    'InsightPanel uses createPortal to escape ancestor stacking contexts',
-    /createPortal\([\s\S]*?document\.body\b/.test(componentSrcCode),
+    'AnchoredPopover module uses createPortal to escape ancestor stacking contexts',
+    /createPortal\([\s\S]*?document\.body\b/.test(stripComments(anchoredPopoverSrc)),
+  )
+  assert(
+    'PaperIntelligencePreview no longer calls createPortal directly (delegated to AnchoredPopover)',
+    !/createPortal\s*\(/.test(componentSrcCode),
   )
 }
 
@@ -327,8 +335,8 @@ assert(
   componentSrcCode.includes('pi-insight-panel-close'),
 )
 assert(
-  'Esc key handler for insight panel',
-  /Escape/.test(componentSrcCode) && /activeInsightSection/.test(componentSrcCode),
+  'Esc closes insight panel (delegated to AnchoredPopover via closeOnEscape)',
+  /InsightPanel[\s\S]*?<AnchoredPopover[\s\S]*?closeOnEscape/.test(componentSrcCode),
 )
 assert(
   'Only one insight open at a time (string | null state)',
@@ -393,6 +401,169 @@ assert(
   'reading-analysis directory still has ReadingAnalysisView.tsx',
   existsSync(path.join(ROOT, 'app/src/features/reading-analysis/ReadingAnalysisView.tsx')),
 )
+
+/* ═══════════════════════════════════════════════════════════════════
+ * 12. AnchoredPopover module: portal / positioning / scroll-resize /
+ *     Esc / outside-mousedown all live here, NOT in PaperIntelligencePreview.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+console.log('\n─── 12. AnchoredPopover module shape ───')
+
+const ANCHORED = 'app/src/features/paper-intelligence/preview/AnchoredPopover.tsx'
+assert('AnchoredPopover.tsx exists', existsSync(path.join(ROOT, ANCHORED)))
+
+const anchoredSrc = readSrc(ANCHORED)
+const anchoredCode = stripComments(anchoredSrc)
+
+assert(
+  'AnchoredPopover exports the component',
+  /export function AnchoredPopover\b/.test(anchoredSrc),
+)
+assert(
+  'AnchoredPopover uses createPortal(document.body) (only place that does)',
+  /createPortal\([\s\S]*?document\.body\b/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover renders position: fixed (inline style on root)',
+  /position:\s*['"]fixed['"]/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover writes --anchored-popover-width custom property',
+  /--anchored-popover-width/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover binds capture-phase scroll listener',
+  /addEventListener\(\s*['"]scroll['"]\s*,\s*\w+\s*,\s*true\s*\)/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover binds resize listener',
+  /addEventListener\(\s*['"]resize['"]/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover coalesces reposition through requestAnimationFrame',
+  /requestAnimationFrame\(/.test(anchoredCode) &&
+    /cancelAnimationFrame\(/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover supports closeOnEscape prop',
+  /closeOnEscape/.test(anchoredSrc) && /['"]Escape['"]/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover supports closeOnOutsidePointerDown prop',
+  /closeOnOutsidePointerDown/.test(anchoredSrc) &&
+    /addEventListener\(\s*['"]mousedown['"]/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover anchor is exempted from outside-mousedown (no double-flip on toggle)',
+  /anchorRef\.current[\s\S]*?\.contains\(target\)/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover has SSR / non-browser guard',
+  /typeof document === ['"]undefined['"]/.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover supports a narrow align prop (start | end), NO placement prop',
+  /align\?\s*:\s*['"]start['"]\s*\|\s*['"]end['"]/.test(anchoredSrc) &&
+    !/\bplacement\?\s*:/.test(anchoredSrc) &&
+    !/['"]top['"]\s*\|\s*['"]bottom['"]/.test(anchoredSrc),
+)
+assert(
+  'AnchoredPopover does NOT do focus trap',
+  !/focusTrap|trapFocus|focus-trap/i.test(anchoredCode),
+)
+assert(
+  'AnchoredPopover does NOT know about insight or basket domain',
+  !/insight|basket|草稿卷|洞察/i.test(anchoredCode),
+)
+
+/* ═══════════════════════════════════════════════════════════════════
+ * 13. Insight + Basket callers both use AnchoredPopover.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+console.log('\n─── 13. Both popovers migrated to AnchoredPopover ───')
+
+assert(
+  'PaperIntelligencePreview imports AnchoredPopover',
+  /import\s*\{\s*AnchoredPopover\s*\}\s*from\s*['"]\.\/preview\/AnchoredPopover['"]/.test(
+    componentSrc,
+  ),
+)
+assert(
+  'InsightPanel renders AnchoredPopover',
+  /function InsightPanel[\s\S]*?<AnchoredPopover\b/.test(componentSrcCode),
+)
+assert(
+  'InsightPanel uses align="start" to preserve left-aligned chip behavior',
+  /function InsightPanel[\s\S]*?<AnchoredPopover[\s\S]*?align=['"]start['"]/.test(
+    componentSrcCode,
+  ),
+)
+assert(
+  'InsightPanel passes closeOnEscape (no outside-pointerdown)',
+  /function InsightPanel[\s\S]*?<AnchoredPopover[\s\S]*?closeOnEscape[\s\S]*?<\/AnchoredPopover>/.test(
+    componentSrcCode,
+  ) &&
+    !/function InsightPanel[\s\S]*?closeOnOutsidePointerDown[\s\S]*?<\/AnchoredPopover>/.test(
+      componentSrcCode,
+    ),
+)
+assert(
+  'BasketPreviewPopover renders AnchoredPopover',
+  /function BasketPreviewPopover[\s\S]*?<AnchoredPopover\b/.test(componentSrcCode),
+)
+assert(
+  'BasketPreviewPopover uses align="end" to preserve right-aligned badge behavior',
+  /function BasketPreviewPopover[\s\S]*?<AnchoredPopover[\s\S]*?align=['"]end['"]/.test(
+    componentSrcCode,
+  ),
+)
+assert(
+  'BasketPreviewPopover passes closeOnEscape AND closeOnOutsidePointerDown',
+  /function BasketPreviewPopover[\s\S]*?closeOnEscape[\s\S]*?closeOnOutsidePointerDown/.test(
+    componentSrcCode,
+  ),
+)
+
+assert(
+  'PaperIntelligencePreview no longer hand-rolls scroll/resize reposition listeners',
+  !/addEventListener\(\s*['"]scroll['"]\s*,[^)]*,\s*true\s*\)/.test(componentSrcCode) &&
+    !/addEventListener\(\s*['"]resize['"]/.test(componentSrcCode),
+)
+assert(
+  'PaperIntelligencePreview no longer imports useLayoutEffect (delegated)',
+  !/\buseLayoutEffect\b/.test(componentSrcCode),
+)
+assert(
+  'PaperIntelligencePreview no longer imports createPortal directly',
+  !/from ['"]react-dom['"]/.test(componentSrcCode),
+)
+
+/* ═══════════════════════════════════════════════════════════════════
+ * 14. CSS uses --anchored-popover-width custom property.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+console.log('\n─── 14. CSS reads --anchored-popover-width ───')
+
+{
+  const cssSrc = readSrc('app/src/features/paper-intelligence/paperIntelligence.css')
+  // Strip CSS block comments before scanning so `width:` declarations
+  // inside doc-comments don't trip up the rule extractor.
+  const cssSrcCode = cssSrc.replace(/\/\*[\s\S]*?\*\//g, '')
+  const insightWidth = cssSrcCode.match(/\.pi-insight-panel\s*\{[^}]*?width\s*:\s*([^;]+);/)
+  assert(
+    '.pi-insight-panel reads var(--anchored-popover-width, 360px)',
+    Boolean(insightWidth) &&
+      /var\(--anchored-popover-width\s*,\s*360px\)/.test(insightWidth[1]),
+    insightWidth ? `width = ${insightWidth[1].trim()}` : 'no width declaration',
+  )
+  const basketWidth = cssSrcCode.match(/\.pi-basket-preview-popover\s*\{[^}]*?width\s*:\s*([^;]+);/)
+  assert(
+    '.pi-basket-preview-popover reads var(--anchored-popover-width, 320px)',
+    Boolean(basketWidth) &&
+      /var\(--anchored-popover-width\s*,\s*320px\)/.test(basketWidth[1]),
+    basketWidth ? `width = ${basketWidth[1].trim()}` : 'no width declaration',
+  )
+}
 
 /* ═══════════════════════════════════════════════════════════════════ */
 

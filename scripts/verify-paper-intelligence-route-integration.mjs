@@ -756,23 +756,33 @@ assert(
 )
 
 assert(
-  'Issue #20: basket popover is rendered into <body> via createPortal',
-  /createPortal\([\s\S]*?document\.body\b/.test(piPreviewSrc) &&
+  'Issue #20: basket popover is rendered into <body> via createPortal (delegated to AnchoredPopover)',
+  /<BasketPreviewPopover[\s\S]*?<AnchoredPopover\b/.test(piPreviewSrc) ||
+    /BasketPreviewPopover[\s\S]*?<AnchoredPopover\b/.test(piPreviewSrc),
+  'expected BasketPreviewPopover to render <AnchoredPopover>',
+)
+
+assert(
+  'Issue #20: basket popover root carries data-pi-basket-popover="true" smoke selector',
+  /data-pi-basket-popover['"]?\s*:\s*['"]true['"]/.test(piPreviewSrc) ||
     /data-pi-basket-popover="true"/.test(piPreviewSrc),
-  'expected createPortal(document.body) call AND a data-pi-basket-popover="true" element',
+  'expected a data-pi-basket-popover marker on the popover root',
 )
 
 assert(
-  'Issue #20: basket popover closes on Esc keydown',
-  /BasketPreviewPopover[\s\S]*?Escape[\s\S]*?onClose/.test(piPreviewSrc) ||
-    /BasketPreviewPopover[\s\S]*?keydown[\s\S]*?Escape/.test(piPreviewSrc),
-  'no Esc keydown → onClose binding inside BasketPreviewPopover',
+  'Issue #20: basket popover closes on Esc keydown (closeOnEscape on AnchoredPopover)',
+  /function BasketPreviewPopover[\s\S]*?<AnchoredPopover[\s\S]*?closeOnEscape/.test(
+    piPreviewSrc,
+  ),
+  'BasketPreviewPopover must pass closeOnEscape to AnchoredPopover',
 )
 
 assert(
-  'Issue #20: basket popover closes on outside mousedown',
-  /BasketPreviewPopover[\s\S]*?mousedown[\s\S]*?onClose/.test(piPreviewSrc),
-  'no document mousedown → onClose binding inside BasketPreviewPopover',
+  'Issue #20: basket popover closes on outside mousedown (closeOnOutsidePointerDown on AnchoredPopover)',
+  /function BasketPreviewPopover[\s\S]*?<AnchoredPopover[\s\S]*?closeOnOutsidePointerDown/.test(
+    piPreviewSrc,
+  ),
+  'BasketPreviewPopover must pass closeOnOutsidePointerDown to AnchoredPopover',
 )
 
 assert(

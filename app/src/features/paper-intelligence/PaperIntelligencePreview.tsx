@@ -44,8 +44,7 @@
  *   - This file: fetch + state + render + effects.
  */
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
-import { createPortal } from 'react-dom'
+import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -61,6 +60,7 @@ import {
   type QuestionRow,
 } from './preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
+import { AnchoredPopover } from './preview/AnchoredPopover'
 import './paperIntelligence.css'
 
 /**
@@ -135,6 +135,11 @@ export function PaperIntelligencePreview({
   /**
    * Cut D1: which passage's insight panel is currently expanded.
    * Only one at a time. null = all collapsed.
+   *
+   * Esc-to-close is owned by the AnchoredPopover module (the
+   * insight popover passes `closeOnEscape`); we no longer need a
+   * top-level keydown listener. Closing on left-side question
+   * selection still happens here in `handleSelectQuestion`.
    */
   const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
 
@@ -271,18 +276,16 @@ export function PaperIntelligencePreview({
   }, [])
 
   /**
-   * Global Esc handler: close insight panel when open.
+   * Insight panel close paths:
+   *   - Re-click chip / × button → caller-controlled state.
+   *   - Esc → owned by AnchoredPopover (closeOnEscape).
+   *   - Click a question card → handleSelectQuestion clears it.
+   *
+   * The panel is NOT wired to outside-pointerdown: the chip itself
+   * is the toggle, and clicking inside the passage body / question
+   * cards / right panel is meaningful interaction that should not
+   * dismiss the popover. `closeOnOutsidePointerDown` stays opt-in.
    */
-  useEffect(() => {
-    if (activeInsightSection === null) return
-    const handler = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') {
-        setActiveInsightSection(null)
-      }
-    }
-    document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
-  }, [activeInsightSection])
 
   if (loading) {
     return (
@@ -482,6 +485,7 @@ function PaperIntelligenceTopBar({
         <BasketPreviewPopover
           items={basketPreviewItems}
           anchorRef={basketButtonRef}
+          open={isBasketPreviewOpen}
           onClose={closeBasketPreview}
         />
       )}
@@ -492,124 +496,56 @@ function PaperIntelligenceTopBar({
 /* ─── Issue #20: basket preview popover ─── */
 
 /**
- * Width / spacing constants for the basket preview popover, kept in sync
- * with the matching `.pi-basket-preview-popover` rule in
- * paperIntelligence.css. If one moves, move both.
+ * Width / spacing for the basket preview popover. JS clamp + CSS
+ * width are kept in sync via `--anchored-popover-width` (set by
+ * `AnchoredPopover`); the matching `.pi-basket-preview-popover`
+ * rule reads it through `var(--anchored-popover-width, 320px)`.
  */
 const BASKET_PREVIEW_WIDTH = 320
-const BASKET_PREVIEW_GAP = 6
-const BASKET_PREVIEW_VIEWPORT_PAD = 12
-
-function computeBasketPreviewPosition(
-  anchorRect: DOMRect,
-  viewportWidth: number,
-): { top: number; left: number } {
-  const top = anchorRect.bottom + BASKET_PREVIEW_GAP
-  // Right-align the popover to the basket button so it grows to the left
-  // (the button sits at the right edge of the top bar). Clamp into the
-  // viewport so the popover never disappears past either edge.
-  const desiredLeft = anchorRect.right - BASKET_PREVIEW_WIDTH
-  const minLeft = BASKET_PREVIEW_VIEWPORT_PAD
-  const maxLeft = Math.max(
-    minLeft,
-    viewportWidth - BASKET_PREVIEW_WIDTH - BASKET_PREVIEW_VIEWPORT_PAD,
-  )
-  const left = Math.min(Math.max(desiredLeft, minLeft), maxLeft)
-  return { top, left }
-}
 
 /**
  * Read-only popover that lists the items currently in the Assembly Basket.
  *
- * Portal strategy mirrors `InsightPanel`: render into `document.body` so
- * the popover escapes the top bar's flex layout and any future stacking
- * traps. Positioning is recomputed on scroll (capture phase, to catch
- * inner scrollers) and resize so the popover keeps tracking the basket
- * button when the page reflows.
+ * Portal / fixed positioning / scroll-resize reposition / Esc /
+ * outside-mousedown all live in the shared
+ * {@link AnchoredPopover} module. This component only owns:
+ *   - The smoke selectors (`data-pi-basket-popover`, etc.).
+ *   - Empty-state copy.
+ *   - The list / item formatting.
  *
- * Close paths handled here:
- *   - Esc keydown.
- *   - Mousedown outside both the popover and the anchor button. We use
- *     mousedown rather than click so the close fires before the anchor
- *     button's own click handler would otherwise re-open the popover.
- *
- * Re-clicking the basket button itself is handled at the top-bar level
- * (the button's onClick toggles `isBasketPreviewOpen`); we explicitly skip
- * outside-click handling when the event target is inside the anchor so
- * the toggle closes cleanly without a double-flip.
+ * Re-clicking the basket button itself is handled at the top-bar
+ * level (the button's onClick toggles `isBasketPreviewOpen`); the
+ * popover module exempts the anchor from outside-mousedown so the
+ * toggle closes cleanly without a double-flip.
  */
 function BasketPreviewPopover(props: {
   items: ReadonlyArray<BasketPreviewItem>
   anchorRef: RefObject<HTMLButtonElement | null>
+  open: boolean
   onClose: () => void
 }): ReactNode {
-  const { items, anchorRef, onClose } = props
-  const [position, setPosition] = useState<{ top: number; left: number } | null>(null)
-  const popoverRef = useRef<HTMLDivElement | null>(null)
-
-  useLayoutEffect(() => {
-    const anchor = anchorRef.current
-    if (!anchor) return
-
-    const update = (): void => {
-      const rect = anchor.getBoundingClientRect()
-      const vw =
-        typeof window !== 'undefined'
-          ? window.innerWidth || document.documentElement.clientWidth
-          : 1024
-      setPosition(computeBasketPreviewPosition(rect, vw))
-    }
-    update()
-
-    window.addEventListener('scroll', update, true)
-    window.addEventListener('resize', update)
-    return (): void => {
-      window.removeEventListener('scroll', update, true)
-      window.removeEventListener('resize', update)
-    }
-  }, [anchorRef])
-
-  // Esc closes.
-  useEffect(() => {
-    const handler = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') {
-        onClose()
-      }
-    }
-    document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
-  }, [onClose])
-
-  // Outside-click closes. We bind on mousedown so the close runs before
-  // the basket button's onClick re-opens the popover when the click
-  // happens on the anchor itself.
-  useEffect(() => {
-    const handler = (e: MouseEvent): void => {
-      const target = e.target as Node | null
-      if (!target) return
-      if (popoverRef.current && popoverRef.current.contains(target)) return
-      if (anchorRef.current && anchorRef.current.contains(target)) return
-      onClose()
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [anchorRef, onClose])
-
-  if (typeof document === 'undefined') return null
-  if (!position) return null
-
+  const { items, anchorRef, open, onClose } = props
   const isEmpty = items.length === 0
 
-  return createPortal(
-    <div
-      ref={popoverRef}
+  return (
+    <AnchoredPopover
+      anchorRef={anchorRef}
+      open={open}
+      onClose={onClose}
       id="pi-basket-preview-popover"
-      className="pi-basket-preview-popover"
       role="dialog"
-      aria-label="草稿卷预览"
-      data-pi-basket-popover="true"
-      data-pi-basket-popover-empty={isEmpty ? 'true' : 'false'}
-      style={{ top: position.top, left: position.left }}
+      ariaLabel="草稿卷预览"
+      className="pi-basket-preview-popover"
+      widthPx={BASKET_PREVIEW_WIDTH}
+      gapPx={6}
+      viewportPaddingPx={12}
+      align="end"
+      closeOnEscape
+      closeOnOutsidePointerDown
+      dataAttributes={{
+        'data-pi-basket-popover': 'true',
+        'data-pi-basket-popover-empty': isEmpty ? 'true' : 'false',
+      }}
     >
       <div className="pi-basket-preview-header">
         <span className="pi-basket-preview-title">草稿卷</span>
@@ -650,8 +586,7 @@ function BasketPreviewPopover(props: {
           ))}
         </ul>
       )}
-    </div>,
-    document.body,
+    </AnchoredPopover>
   )
 }
 
@@ -807,35 +742,36 @@ function PassageSection(props: {
 /**
  * Chip + popover panel pair.
  *
- * Portal strategy (QA #19 fix):
- *   The popover is rendered into `document.body` via `createPortal`
- *   and uses `position: fixed` coordinates derived from the chip's
- *   `getBoundingClientRect()`. This deliberately bypasses two
- *   stacking / clipping traps in the surrounding layout:
+ * The portal / fixed-positioning / scroll-resize reposition / Esc
+ * plumbing now lives in the shared {@link AnchoredPopover} module.
+ * The chip stays a plain in-flow `<button>` here; `InsightPanel`
+ * below mounts the AnchoredPopover with the insight-specific
+ * config (`align="start"`, `closeOnEscape`, no outside-pointerdown).
  *
- *     1. The left passage column (`.pi-main`) is its own scroll
- *        container (`overflow-y: auto`). Per CSS overflow rules, a
- *        non-`visible` `overflow-y` clamps `overflow-x` to `auto`
- *        too, so an `position: absolute` popover anchored inside
- *        `.pi-main` would be clipped horizontally as soon as it
- *        extends beyond the column edge or vertically as soon as it
- *        runs past the scroller's viewport.
+ * The original QA #19 portal rationale still applies — it is just
+ * implemented one level deeper now. For reference, the two stacking
+ * / clipping traps the portal sidesteps are:
  *
- *     2. The right Analysis Panel (`.pi-side`) is `position: sticky`
- *        which establishes its own stacking context. Even bumping
- *        the popover's z-index to a large number does not let an
- *        element inside `.pi-main`'s stacking context paint above a
- *        sibling sticky stacking context. Portaling to `<body>`
- *        sidesteps that entirely — there is no longer a competing
- *        ancestor stacking context, so a single high z-index wins.
+ *   1. The left passage column (`.pi-main`) is its own scroll
+ *      container (`overflow-y: auto`). Per CSS overflow rules, a
+ *      non-`visible` `overflow-y` clamps `overflow-x` to `auto`
+ *      too, so a `position: absolute` popover anchored inside
+ *      `.pi-main` would be clipped horizontally as soon as it
+ *      extends beyond the column edge or vertically as soon as it
+ *      runs past the scroller's viewport.
  *
- *   We recompute coordinates on every scroll (capture phase, to
- *   catch the inner `.pi-main` scroller as well as the document /
- *   window) and on resize, so the popover tracks the chip while the
- *   teacher scrolls. When the chip leaves the viewport we leave the
- *   panel where it is — closing on scroll-out would be fighting the
- *   teacher; the Esc key, the × button and re-clicking the chip
- *   remain the explicit close paths.
+ *   2. The right Analysis Panel (`.pi-side`) is `position: sticky`
+ *      which establishes its own stacking context. Even bumping
+ *      the popover's z-index to a large number does not let an
+ *      element inside `.pi-main`'s stacking context paint above a
+ *      sibling sticky stacking context. Portaling to `<body>`
+ *      sidesteps that entirely — there is no longer a competing
+ *      ancestor stacking context, so a single high z-index wins.
+ *
+ * When the chip leaves the viewport we leave the panel where it is
+ * — closing on scroll-out would be fighting the teacher; the Esc
+ * key, the × button and re-clicking the chip remain the explicit
+ * close paths.
  */
 function InsightChipAndPanel(props: {
   paperSection: string
@@ -858,102 +794,68 @@ function InsightChipAndPanel(props: {
       >
         {insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
       </button>
-      {insightOpen && (
-        <InsightPanel
-          reportPassage={reportPassage}
-          chipRef={chipRef}
-          onClose={onToggle}
-        />
-      )}
+      <InsightPanel
+        reportPassage={reportPassage}
+        chipRef={chipRef}
+        insightOpen={insightOpen}
+        onClose={onToggle}
+      />
     </>
   )
 }
 
 /**
- * Panel width used by the position calculator. Kept in sync with
- * `.pi-insight-panel { width: 360px }` in paperIntelligence.css. If
- * one moves, move both.
+ * Width used by the insight panel. JS clamp + CSS width are kept
+ * in sync via `--anchored-popover-width` (set by `AnchoredPopover`);
+ * the matching `.pi-insight-panel` rule reads it through
+ * `var(--anchored-popover-width, 360px)`.
  */
 const INSIGHT_PANEL_WIDTH = 360
-const INSIGHT_PANEL_GAP = 4
-const INSIGHT_PANEL_VIEWPORT_PAD = 16
-
-type InsightPanelPosition = { top: number; left: number }
-
-function computeInsightPanelPosition(
-  chipRect: DOMRect,
-  viewportWidth: number,
-): InsightPanelPosition {
-  const top = chipRect.bottom + INSIGHT_PANEL_GAP
-  // Prefer left-aligning to the chip; clamp into the viewport so the
-  // popover never disappears past the right edge on narrow widths.
-  const desiredLeft = chipRect.left
-  const maxLeft = Math.max(
-    INSIGHT_PANEL_VIEWPORT_PAD,
-    viewportWidth - INSIGHT_PANEL_WIDTH - INSIGHT_PANEL_VIEWPORT_PAD,
-  )
-  const left = Math.min(Math.max(desiredLeft, INSIGHT_PANEL_VIEWPORT_PAD), maxLeft)
-  return { top, left }
-}
 
 /**
  * Header-anchored popover that shows loads, outline, and key chunks.
- * Renders into `document.body` via Portal so it escapes the left
- * column's overflow clipping and the right panel's sticky stacking
- * context. See `InsightChipAndPanel` for the rationale.
  *
- * Close via: × button (rendered here), Esc (handled at top level),
- * or clicking a question card (handled in handleSelectQuestion).
+ * Portal / fixed positioning / scroll-resize reposition / Esc all
+ * live in the shared {@link AnchoredPopover} module. The insight
+ * popover is left-aligned to the chip (`align="start"`) so it
+ * keeps the visual position teachers are used to from before this
+ * refactor.
+ *
+ * Close paths the caller still owns:
+ *   - Re-click the chip (caller toggles `insightOpen`).
+ *   - × button rendered here → `onClose`.
+ *   - Click a question card → `handleSelectQuestion` clears the
+ *     insight section, closing the panel as a side effect.
+ *
+ * Esc closing is delegated to AnchoredPopover (`closeOnEscape`).
+ * Outside-pointerdown is intentionally NOT enabled — clicking
+ * inside the passage body or right Analysis Panel is meaningful
+ * teacher input and should not dismiss the popover.
  */
 function InsightPanel(props: {
   reportPassage: PassageReport
   chipRef: RefObject<HTMLButtonElement | null>
+  insightOpen: boolean
   onClose: () => void
 }): ReactNode {
-  const { reportPassage, chipRef, onClose } = props
-  const [position, setPosition] = useState<InsightPanelPosition | null>(null)
+  const { reportPassage, chipRef, insightOpen, onClose } = props
 
-  useLayoutEffect(() => {
-    const chip = chipRef.current
-    if (!chip) return
-
-    const update = (): void => {
-      const rect = chip.getBoundingClientRect()
-      const vw =
-        typeof window !== 'undefined'
-          ? window.innerWidth || document.documentElement.clientWidth
-          : 1024
-      setPosition(computeInsightPanelPosition(rect, vw))
-    }
-    update()
-
-    // Capture-phase scroll listener catches inner scrollers
-    // (`.pi-main`, sticky panels, etc.) that don't bubble scroll to
-    // window. Resize keeps the clamp accurate when the layout reflows.
-    window.addEventListener('scroll', update, true)
-    window.addEventListener('resize', update)
-    return (): void => {
-      window.removeEventListener('scroll', update, true)
-      window.removeEventListener('resize', update)
-    }
-  }, [chipRef])
-
-  if (typeof document === 'undefined') return null
-  if (!position) {
-    // First paint: layout effect hasn't measured yet. Render nothing
-    // so the panel doesn't flash at (0,0). The effect runs
-    // synchronously before paint, so this branch is effectively
-    // unreachable in the browser, but keeps SSR / tests safe.
-    return null
-  }
-
-  return createPortal(
-    <div
-      className="pi-insight-panel"
-      data-pi-insight-panel={reportPassage.paperSection}
+  return (
+    <AnchoredPopover
+      anchorRef={chipRef}
+      open={insightOpen}
+      onClose={onClose}
       role="dialog"
-      aria-label="篇章洞察"
-      style={{ top: position.top, left: position.left }}
+      ariaLabel="篇章洞察"
+      className="pi-insight-panel"
+      widthPx={INSIGHT_PANEL_WIDTH}
+      gapPx={4}
+      viewportPaddingPx={16}
+      align="start"
+      closeOnEscape
+      dataAttributes={{
+        'data-pi-insight-panel': reportPassage.paperSection,
+      }}
     >
       <div className="pi-insight-panel-header">
         <span className="pi-insight-panel-title">篇章洞察</span>
@@ -969,8 +871,7 @@ function InsightPanel(props: {
       <LoadsPanel loads={reportPassage.loads} />
       <OutlinePanel outline={reportPassage.passageOutline} />
       <ChunksSummary chunks={reportPassage.keyChunks} />
-    </div>,
-    document.body,
+    </AnchoredPopover>
   )
 }
 
