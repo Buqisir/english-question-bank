@@ -1,0 +1,204 @@
+{
+  "sourcePaper": {
+    "paperId": "paper-2024-xkb1-reading",
+    "paperName": "2024年新课标I卷",
+    "year": 2024,
+    "region": "新课标I",
+    "section": "阅读理解第一节"
+  },
+  "passages": [
+    {
+      "paperSection": "A",
+      "passageTitle": "Volunteering Opportunities",
+      "passageBody": "Library Helper. Help readers find books and shelve returns at the Central Library. Volunteers must be at least 14 years old and available on weekday afternoons. Sign up for at least three months. Community Garden. Plant, weed, and harvest in our city centre garden. Basic gardening knowledge preferred. Be available on weekends. No long-term commitment required. Senior Centre Companion. Visit older residents and share stories or play games. No experience needed — just a friendly attitude. Sessions run on Tuesday and Thursday mornings. Animal Shelter Aide. Help feed and walk rescue dogs and cats. Volunteers must be at least 16 years old and comfortable around animals. Two-hour shifts, weekday evenings or Saturday mornings.",
+      "questions": [
+        {
+          "questionNo": "21",
+          "stem": "What is required to volunteer at the Animal Shelter?",
+          "options": [
+            { "label": "A", "content": "Three months of commitment." },
+            { "label": "B", "content": "Being at least 16 and at ease with animals." },
+            { "label": "C", "content": "A driver's licence." },
+            { "label": "D", "content": "Being available on weekends." }
+          ],
+          "answer": "B"
+        },
+        {
+          "questionNo": "22",
+          "stem": "Which programme requires no prior experience?",
+          "options": [
+            { "label": "A", "content": "Library Helper." },
+            { "label": "B", "content": "Community Garden." },
+            { "label": "C", "content": "Senior Centre Companion." },
+            { "label": "D", "content": "Animal Shelter Aide." }
+          ],
+          "answer": "C"
+        },
+        {
+          "questionNo": "23",
+          "stem": "Where do Library Helpers serve?",
+          "options": [
+            { "label": "A", "content": "At the Central Library." },
+            { "label": "B", "content": "At the Community Garden." },
+            { "label": "C", "content": "At the Senior Centre." },
+            { "label": "D", "content": "At the Animal Shelter." }
+          ],
+          "answer": "A"
+        },
+        {
+          "questionNo": "24",
+          "stem": "When are Senior Centre sessions held?",
+          "options": [
+            { "label": "A", "content": "Weekday afternoons." },
+            { "label": "B", "content": "Saturday mornings." },
+            { "label": "C", "content": "Tuesday and Thursday mornings." },
+            { "label": "D", "content": "Weekday evenings." }
+          ],
+          "answer": "C"
+        }
+      ]
+    },
+    {
+      "paperSection": "B",
+      "passageTitle": "A Scientist's Journey into Sound",
+      "passageBody": "Dr Helen Park stumbled upon the remarkable sound quality during a casual visit to an ancient Greek theatre. She had been on holiday with her family, but the moment she heard a child's whisper carry clearly across rows of stone seats, she could not let the puzzle go. Having spent years studying how sound travels through different materials, she became convinced that the geometry of the seats themselves filtered noise. Her early field trips were difficult. Equipment was heavy, weather was unpredictable, and local permits took months to arrange. It wasn't until her third expedition that she finally recorded the data she needed. The results changed how engineers think about modern halls. Today she works with architects on stadium roofs and concert venues, pushing acoustics into spaces it never used to reach.",
+      "questions": [
+        {
+          "questionNo": "25",
+          "stem": "What first sparked Dr Park's interest in acoustics?",
+          "options": [
+            { "label": "A", "content": "An accidental discovery at an ancient theatre." },
+            { "label": "B", "content": "A professor's recommendation in graduate school." },
+            { "label": "C", "content": "A childhood interest in architectural design." },
+            { "label": "D", "content": "A personal hearing problem." }
+          ],
+          "answer": "A"
+        },
+        {
+          "questionNo": "26",
+          "stem": "What can be inferred about her early field trips?",
+          "options": [
+            { "label": "A", "content": "They went smoothly from the start." },
+            { "label": "B", "content": "They suffered from a lack of funding." },
+            { "label": "C", "content": "They depended on architect partners." },
+            { "label": "D", "content": "They did not produce the data she wanted at first." }
+          ],
+          "answer": "D"
+        },
+        {
+          "questionNo": "27",
+          "stem": "What does Dr Park work on today?",
+          "options": [
+            { "label": "A", "content": "Underwater sound research." },
+            { "label": "B", "content": "Stadium roofs and concert venues." },
+            { "label": "C", "content": "Hearing aids for the elderly." },
+            { "label": "D", "content": "Ancient theatre restoration." }
+          ],
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "paperSection": "C",
+      "passageTitle": "The Hidden Cost of Fast Fashion",
+      "passageBody": "Cheap clothes feel like a small victory. A new shirt for the price of a coffee, a different outfit each weekend — this is what fast fashion sells, and millions of shoppers buy in. The true cost, however, extends far beyond price tags. Producing a single cotton T-shirt can use more than two thousand litres of water. Synthetic fabrics shed microplastics every time they are washed, and those microplastics shed from synthetic fabrics now appear in rivers, oceans and even drinking water. Once a garment goes out of style, it is usually not recycled. Tonnes of non-biodegradable textile waste end up in landfills, where they may take centuries to break down. The story is not hopeless. Some shoppers are slowing down their habits and asking simple questions: do I need this, will I wear it more than ten times, and what happens to it when I am done? Sustainable consumption begins with these small refusals.",
+      "questions": [
+        {
+          "questionNo": "28",
+          "stem": "What is the main idea of the passage?",
+          "options": [
+            { "label": "A", "content": "Microplastics are the worst part of fast fashion." },
+            { "label": "B", "content": "Fast fashion creates well-paid factory jobs." },
+            { "label": "C", "content": "Fast fashion has costs that go far beyond its low prices." },
+            { "label": "D", "content": "Sustainable consumption is the only complete answer." }
+          ],
+          "answer": "C"
+        },
+        {
+          "questionNo": "29",
+          "stem": "What does the underlined word \"shed\" most likely mean?",
+          "options": [
+            { "label": "A", "content": "Release in small pieces." },
+            { "label": "B", "content": "Catch and store." },
+            { "label": "C", "content": "Refuse to absorb." },
+            { "label": "D", "content": "Repair carefully." }
+          ],
+          "answer": "A"
+        },
+        {
+          "questionNo": "30",
+          "stem": "What problem do non-recycled clothes cause?",
+          "options": [
+            { "label": "A", "content": "They use too much electricity." },
+            { "label": "B", "content": "They sit in landfills for centuries." },
+            { "label": "C", "content": "They release greenhouse gases instantly." },
+            { "label": "D", "content": "They poison drinking water directly." }
+          ],
+          "answer": "B"
+        },
+        {
+          "questionNo": "31",
+          "stem": "What does the author suggest readers should do?",
+          "options": [
+            { "label": "A", "content": "Boycott all clothing brands." },
+            { "label": "B", "content": "Slow down their habits and ask simple questions." },
+            { "label": "C", "content": "Only buy second-hand from now on." },
+            { "label": "D", "content": "Invest in textile recycling start-ups." }
+          ],
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "paperSection": "D",
+      "passageTitle": "Rethinking Intelligence in Animals",
+      "passageBody": "What researchers once dismissed as mere instinct has, through decades of careful observation, revealed itself to be far more complex. Animals plan, count, recognise themselves in mirrors, and even appear to grieve. Cognitive scientists now talk seriously about metacognition — the ability to think about one's own thinking — in species other than humans. Crows in laboratory tests will refuse to choose a box when they are unsure of its contents, much as a careful student declines to guess on an exam. Bottlenose dolphins, when shown a mark on their own bodies, immediately swim to a mirror to inspect it. None of this is magic, and it does not make animals little humans. But this growing body of evidence challenges the long-held assumption that only humans possess true intelligence. The traditional dividing line, it turns out, is harder to draw than scientists once believed.",
+      "questions": [
+        {
+          "questionNo": "32",
+          "stem": "What does the underlined word \"metacognition\" refer to?",
+          "options": [
+            { "label": "A", "content": "The ability to think about one's own thinking." },
+            { "label": "B", "content": "A strong memory for past events." },
+            { "label": "C", "content": "Skill in social cooperation." },
+            { "label": "D", "content": "A kind of pure instinct." }
+          ],
+          "answer": "A"
+        },
+        {
+          "questionNo": "33",
+          "stem": "What do the crow and dolphin examples illustrate?",
+          "options": [
+            { "label": "A", "content": "Animals are physically stronger than expected." },
+            { "label": "B", "content": "Animals show forms of self-awareness and uncertainty." },
+            { "label": "C", "content": "Animals can be trained to mimic human speech." },
+            { "label": "D", "content": "Animals always outperform humans on memory tests." }
+          ],
+          "answer": "B"
+        },
+        {
+          "questionNo": "34",
+          "stem": "What is the author's attitude toward the traditional view of animal intelligence?",
+          "options": [
+            { "label": "A", "content": "Supportive." },
+            { "label": "B", "content": "Sceptical." },
+            { "label": "C", "content": "Neutral." },
+            { "label": "D", "content": "Confused." }
+          ],
+          "answer": "B"
+        },
+        {
+          "questionNo": "35",
+          "stem": "What is the best title for the passage?",
+          "options": [
+            { "label": "A", "content": "Why Mirrors Confuse Animals." },
+            { "label": "B", "content": "Crows Outsmart College Students." },
+            { "label": "C", "content": "Rethinking the Line Between Instinct and Intelligence." },
+            { "label": "D", "content": "Inside the Daily Life of Bottlenose Dolphins." }
+          ],
+          "answer": "C"
+        }
+      ]
+    }
+  ]
+}
