@@ -1,0 +1,818 @@
+{
+  "schemaVersion": "0.1.0",
+  "generatedAt": "2026-05-15T09:30:00.000Z",
+  "generator": {
+    "promptVersion": "paper-intelligence-v0",
+    "modelId": "claude-opus-4-0-20250514",
+    "runId": "run-2026-0515-experiment-01"
+  },
+  "sourcePaper": {
+    "paperId": "paper-2024-xkb1-reading",
+    "paperName": "2024年新课标I卷",
+    "year": 2024,
+    "region": "新课标I",
+    "section": "阅读理解第一节"
+  },
+  "passages": [
+    {
+      "paperSection": "A",
+      "passageTitle": "Volunteering Opportunities",
+      "loads": {
+        "vocabularyChunkLoad": {
+          "score": 1,
+          "label": "轻",
+          "shortReason": "应用文，基本生活词汇为主。",
+          "evidenceItems": []
+        },
+        "grammarLoad": {
+          "score": 1,
+          "label": "轻",
+          "shortReason": "短句为主，无复杂从句。",
+          "evidenceItems": []
+        },
+        "discourseStructureLoad": {
+          "score": 1,
+          "label": "轻",
+          "shortReason": "并列条目结构，直接可扫描。",
+          "evidenceItems": []
+        },
+        "topicBackgroundLoad": {
+          "score": 1,
+          "label": "轻",
+          "shortReason": "志愿活动常识。",
+          "evidenceItems": []
+        },
+        "evidenceFindingLoad": {
+          "score": 2,
+          "label": "较轻",
+          "shortReason": "需对照各项目条件。",
+          "evidenceItems": [
+            {
+              "quote": "must be at least 16 years old",
+              "paragraph": 2
+            }
+          ]
+        }
+      },
+      "aiInitialBand": {
+        "band": "偏易",
+        "basis": "aggregation"
+      },
+      "passageOutline": {
+        "mainIdea": "介绍四个志愿服务项目的时间、地点和要求。",
+        "logicalLayers": [
+          "段1：项目A——图书馆整理。",
+          "段2：项目B——社区花园。",
+          "段3：项目C——老年中心。",
+          "段4：项目D——动物收容所。"
+        ]
+      },
+      "keyChunks": [
+        {
+          "surface": "volunteer",
+          "kind": "word",
+          "ipa": "/ˌvɒlənˈtɪə/",
+          "pos": "v./n.",
+          "meaning": "志愿（者）"
+        },
+        {
+          "surface": "community garden",
+          "kind": "phrase",
+          "meaning": "社区花园",
+          "usageNote": "城市绿化与社区活动常见搭配。"
+        },
+        {
+          "surface": "shelter",
+          "kind": "word",
+          "ipa": "/ˈʃeltə/",
+          "pos": "n.",
+          "meaning": "收容所；庇护所"
+        },
+        {
+          "surface": "sign up for",
+          "kind": "chunk",
+          "meaning": "报名参加",
+          "usageNote": "应用文高频动作短语。"
+        },
+        {
+          "surface": "prior experience",
+          "kind": "phrase",
+          "meaning": "之前的经验",
+          "usageNote": "招聘/志愿条件常用表达。"
+        },
+        {
+          "surface": "be available on weekends",
+          "kind": "chunk",
+          "meaning": "周末有空",
+          "usageNote": "时间安排表达。"
+        }
+      ],
+      "keyChunksNote": "A 篇为短应用文，有教学价值词块不足 8 个，不凑数。",
+      "questions": [
+        {
+          "questionNo": "21",
+          "paperSection": "A",
+          "questionIndexInPassage": 1,
+          "stem": "What is required to volunteer at the animal shelter?",
+          "stemTranslation": "在动物收容所做志愿者需要什么条件？",
+          "answer": "B",
+          "teacherQuestionType": "细节理解题",
+          "keywords": [
+            "required",
+            "animal shelter"
+          ],
+          "locatingSentence": "Volunteers must be at least 16 years old and comfortable around animals.",
+          "answerSentence": "Volunteers must be at least 16 years old and comfortable around animals.",
+          "answerEvidence": {
+            "quote": "must be at least 16 years old and comfortable around animals",
+            "explanationZh": "原文直接列出年龄和与动物相处两项要求。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "A",
+              "category": "detail_word_misleading",
+              "subtype": "object_mismatch",
+              "shortReason": "把动物收容所的条件偷换成了图书馆的。",
+              "quote": "must be at least 16 years old"
+            },
+            {
+              "optionLabel": "C",
+              "category": "not_mentioned",
+              "subtype": null,
+              "shortReason": "原文未提及驾照要求。"
+            },
+            {
+              "optionLabel": "D",
+              "category": "detail_word_misleading",
+              "subtype": "scope_shift",
+              "shortReason": "周末要求属于社区花园项目，不是动物收容所。",
+              "quote": "be available on weekends"
+            }
+          ],
+          "synonymSummary": "required → must be",
+          "surfaceType": "single_detail_normal",
+          "answeringMove": "direct_locating",
+          "tCard": "T1",
+          "boundaryFlags": [],
+          "reviewNeeded": false,
+          "confidence": 0.95
+        },
+        {
+          "questionNo": "22",
+          "paperSection": "A",
+          "questionIndexInPassage": 2,
+          "stem": "Which project requires no prior experience?",
+          "stemTranslation": "哪个项目不需要之前的经验？",
+          "answer": "C",
+          "teacherQuestionType": "细节理解题",
+          "keywords": [
+            "no prior experience"
+          ],
+          "locatingSentence": "No experience needed — just a friendly attitude!",
+          "answerSentence": "No experience needed — just a friendly attitude!",
+          "answerEvidence": {
+            "quote": "No experience needed — just a friendly attitude",
+            "explanationZh": "老年中心项目明确写不需要经验。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "A",
+              "category": "not_mentioned",
+              "subtype": null,
+              "shortReason": "图书馆项目未明确说不需要经验。"
+            },
+            {
+              "optionLabel": "B",
+              "category": "detail_word_misleading",
+              "subtype": "opposite_direction",
+              "shortReason": "社区花园要求有园艺基础，与「无需经验」相反。",
+              "quote": "basic gardening knowledge preferred"
+            },
+            {
+              "optionLabel": "D",
+              "category": "detail_word_misleading",
+              "subtype": "object_mismatch",
+              "shortReason": "动物收容所需comfortable around animals，属于能力要求。",
+              "quote": "comfortable around animals"
+            }
+          ],
+          "synonymSummary": "no prior experience → No experience needed",
+          "surfaceType": "single_detail_normal",
+          "answeringMove": "direct_locating",
+          "tCard": "T1",
+          "boundaryFlags": [],
+          "reviewNeeded": false,
+          "confidence": 0.92
+        }
+      ]
+    },
+    {
+      "paperSection": "B",
+      "passageTitle": "A Scientist's Journey into Sound",
+      "loads": {
+        "vocabularyChunkLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "含 acoustics、frequency 等学科词。",
+          "evidenceItems": [
+            {
+              "quote": "the acoustics of ancient theatres",
+              "paragraph": 1
+            }
+          ]
+        },
+        "grammarLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "有较长定语从句和非谓语结构。",
+          "evidenceItems": [
+            {
+              "quote": "Having spent years studying how sound travels through different materials",
+              "paragraph": 2
+            }
+          ]
+        },
+        "discourseStructureLoad": {
+          "score": 2,
+          "label": "较轻",
+          "shortReason": "时间线叙事，逻辑清晰。",
+          "evidenceItems": []
+        },
+        "topicBackgroundLoad": {
+          "score": 2,
+          "label": "较轻",
+          "shortReason": "声学主题对高中生略陌生但有趣。",
+          "evidenceItems": []
+        },
+        "evidenceFindingLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "部分题需跨段定位。",
+          "evidenceItems": [
+            {
+              "quote": "It wasn't until her third expedition that she finally recorded",
+              "paragraph": 4
+            }
+          ]
+        }
+      },
+      "aiInitialBand": {
+        "band": "适中",
+        "basis": "aggregation"
+      },
+      "passageOutline": {
+        "mainIdea": "记叙一位科学家从偶然发现古剧场声学奥秘到专注研究的历程。",
+        "logicalLayers": [
+          "段1：偶然参观古剧场，发现声学现象。",
+          "段2：投入系统研究。",
+          "段3：实地考察中的困难。",
+          "段4：第三次远征终于突破。",
+          "段5：研究对现代建筑声学设计的启示。"
+        ]
+      },
+      "keyChunks": [
+        {
+          "surface": "acoustics",
+          "kind": "word",
+          "ipa": "/əˈkuːstɪks/",
+          "pos": "n.",
+          "meaning": "声学"
+        },
+        {
+          "surface": "frequency",
+          "kind": "word",
+          "ipa": "/ˈfriːkwənsi/",
+          "pos": "n.",
+          "meaning": "频率"
+        },
+        {
+          "surface": "expedition",
+          "kind": "word",
+          "ipa": "/ˌekspəˈdɪʃən/",
+          "pos": "n.",
+          "meaning": "远征；考察"
+        },
+        {
+          "surface": "stumble upon",
+          "kind": "chunk",
+          "meaning": "偶然发现",
+          "usageNote": "记叙文开篇常用，引出意外发现。"
+        },
+        {
+          "surface": "sound travels through",
+          "kind": "chunk",
+          "meaning": "声音穿过（某种介质）传播",
+          "usageNote": "物理学科跨学科表达。"
+        },
+        {
+          "surface": "architectural design",
+          "kind": "phrase",
+          "meaning": "建筑设计",
+          "usageNote": "学科交叉词块。"
+        },
+        {
+          "surface": "it wasn't until...that",
+          "kind": "chunk",
+          "meaning": "直到……才……",
+          "usageNote": "强调句型，高考常考点。"
+        },
+        {
+          "surface": "devote oneself to",
+          "kind": "chunk",
+          "meaning": "投身于",
+          "usageNote": "人物传记高频短语。"
+        }
+      ],
+      "questions": [
+        {
+          "questionNo": "23",
+          "paperSection": "B",
+          "questionIndexInPassage": 1,
+          "stem": "What first sparked the scientist's interest in acoustics?",
+          "stemTranslation": "是什么最初激发了这位科学家对声学的兴趣？",
+          "answer": "A",
+          "teacherQuestionType": "细节理解题",
+          "keywords": [
+            "first sparked",
+            "interest",
+            "acoustics"
+          ],
+          "locatingSentence": "She stumbled upon the remarkable sound quality during a casual visit to an ancient Greek theatre.",
+          "answerSentence": "She stumbled upon the remarkable sound quality during a casual visit to an ancient Greek theatre.",
+          "answerEvidence": {
+            "quote": "stumbled upon the remarkable sound quality during a casual visit to an ancient Greek theatre",
+            "explanationZh": "原文明确写是一次随意参观古希腊剧场时的偶然发现。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "B",
+              "category": "not_mentioned",
+              "subtype": null,
+              "shortReason": "导师推荐属于编造信息。"
+            },
+            {
+              "optionLabel": "C",
+              "category": "detail_word_misleading",
+              "subtype": "cause_effect_shift",
+              "shortReason": "建筑设计是她研究的结果应用方向，不是兴趣起源。",
+              "quote": "architectural design"
+            },
+            {
+              "optionLabel": "D",
+              "category": "common_sense_distractor",
+              "subtype": null,
+              "shortReason": "儿时经历属常识性猜测。"
+            }
+          ],
+          "synonymSummary": "first sparked interest → stumbled upon",
+          "surfaceType": "single_detail_normal",
+          "answeringMove": "direct_locating",
+          "tCard": "T2",
+          "boundaryFlags": [],
+          "reviewNeeded": false,
+          "confidence": 0.91
+        },
+        {
+          "questionNo": "24",
+          "paperSection": "B",
+          "questionIndexInPassage": 2,
+          "stem": "What can be inferred about the scientist's early expeditions?",
+          "stemTranslation": "关于这位科学家早期的考察可以推断出什么？",
+          "answer": "D",
+          "teacherQuestionType": "推理题",
+          "keywords": [
+            "inferred",
+            "early expeditions"
+          ],
+          "locatingSentence": "It wasn't until her third expedition that she finally recorded the data she needed.",
+          "answerSentence": "It wasn't until her third expedition that she finally recorded the data she needed.",
+          "answerEvidence": {
+            "quote": "It wasn't until her third expedition that she finally recorded",
+            "explanationZh": "强调句暗示前两次远征未能获得所需数据，即早期考察未达预期。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "A",
+              "category": "detail_word_misleading",
+              "subtype": "opposite_direction",
+              "shortReason": "原文暗示前两次不顺利，不是「一帆风顺「。",
+              "quote": "wasn't until her third expedition"
+            },
+            {
+              "optionLabel": "B",
+              "category": "not_mentioned",
+              "subtype": null,
+              "shortReason": "原文未提及资金问题。"
+            },
+            {
+              "optionLabel": "C",
+              "category": "detail_word_misleading",
+              "subtype": "scope_shift",
+              "shortReason": "团队合作是后文内容，不是「早期「。",
+              "quote": "collaborated with architects"
+            }
+          ],
+          "synonymSummary": "early expeditions did not achieve expected results → wasn't until her third",
+          "surfaceType": "inference_general",
+          "answeringMove": "minimal_inference",
+          "tCard": "T6",
+          "boundaryFlags": [
+            "T2_T6"
+          ],
+          "reviewNeeded": true,
+          "confidence": 0.78
+        }
+      ]
+    },
+    {
+      "paperSection": "C",
+      "passageTitle": "The Hidden Cost of Fast Fashion",
+      "loads": {
+        "vocabularyChunkLoad": {
+          "score": 4,
+          "label": "偏重",
+          "shortReason": "含 microplastics、biodegradable、textile waste 等高频学术词。",
+          "evidenceItems": [
+            {
+              "quote": "microplastics shed from synthetic fabrics",
+              "paragraph": 3
+            },
+            {
+              "quote": "non-biodegradable textile waste",
+              "paragraph": 4
+            }
+          ]
+        },
+        "grammarLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "议论文典型长句但结构可分析。",
+          "evidenceItems": [
+            {
+              "quote": "While consumers are drawn to the affordability that fast fashion offers, they rarely consider the environmental price",
+              "paragraph": 1
+            }
+          ]
+        },
+        "discourseStructureLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "总分总结构，但中间层次需辨析。",
+          "evidenceItems": []
+        },
+        "topicBackgroundLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "环保话题有一定背景要求。",
+          "evidenceItems": []
+        },
+        "evidenceFindingLoad": {
+          "score": 4,
+          "label": "偏重",
+          "shortReason": "主旨题和推理题需全文通读后归纳。",
+          "evidenceItems": [
+            {
+              "quote": "The true cost, however, extends far beyond price tags",
+              "paragraph": 1
+            }
+          ]
+        }
+      },
+      "aiInitialBand": {
+        "band": "偏难",
+        "basis": "aggregation"
+      },
+      "passageOutline": {
+        "mainIdea": "揭示快时尚低价背后的环境代价，呼吁消费者重新审视购买行为。",
+        "logicalLayers": [
+          "段1：快时尚的吸引力与隐性代价引出。",
+          "段2：生产环节的水污染与碳排放。",
+          "段3：微塑料对海洋生态的危害。",
+          "段4：废弃纺织品的填埋问题。",
+          "段5：呼吁可持续消费。"
+        ]
+      },
+      "keyChunks": [
+        {
+          "surface": "fast fashion",
+          "kind": "phrase",
+          "meaning": "快时尚",
+          "usageNote": "议论文高频话题词。"
+        },
+        {
+          "surface": "microplastics",
+          "kind": "word",
+          "ipa": "/ˌmaɪkrəʊˈplæstɪks/",
+          "pos": "n.",
+          "meaning": "微塑料"
+        },
+        {
+          "surface": "biodegradable",
+          "kind": "word",
+          "ipa": "/ˌbaɪəʊdɪˈɡreɪdəbl/",
+          "pos": "adj.",
+          "meaning": "可生物降解的"
+        },
+        {
+          "surface": "textile waste",
+          "kind": "phrase",
+          "meaning": "纺织废料",
+          "usageNote": "环保议论文核心词块。"
+        },
+        {
+          "surface": "carbon footprint",
+          "kind": "phrase",
+          "meaning": "碳足迹",
+          "usageNote": "环保类文章必备词块。"
+        },
+        {
+          "surface": "shed from",
+          "kind": "chunk",
+          "meaning": "从……脱落",
+          "usageNote": "科学描述中物质脱落的动词搭配。"
+        },
+        {
+          "surface": "extend far beyond",
+          "kind": "chunk",
+          "meaning": "远不止于",
+          "usageNote": "议论文扩展论述常用结构。"
+        },
+        {
+          "surface": "sustainable consumption",
+          "kind": "phrase",
+          "meaning": "可持续消费",
+          "usageNote": "呼应结尾呼吁，议论文总结常见。"
+        }
+      ],
+      "questions": [
+        {
+          "questionNo": "27",
+          "paperSection": "C",
+          "questionIndexInPassage": 1,
+          "stem": "What is the main idea of the passage?",
+          "stemTranslation": "这篇文章的主旨是什么？",
+          "answer": "C",
+          "teacherQuestionType": "主旨大意题",
+          "keywords": [
+            "main idea"
+          ],
+          "locatingSentence": "The true cost, however, extends far beyond price tags.",
+          "answerSentence": "The true cost, however, extends far beyond price tags.",
+          "answerEvidence": {
+            "quote": "The true cost extends far beyond price tags",
+            "explanationZh": "全文围绕快时尚的「隐性环境代价「展开论述。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "A",
+              "category": "detail_word_misleading",
+              "subtype": "scope_shift",
+              "shortReason": "微塑料只是其中一个方面，不是主旨。",
+              "quote": "microplastics shed from synthetic fabrics"
+            },
+            {
+              "optionLabel": "B",
+              "category": "common_sense_distractor",
+              "subtype": null,
+              "shortReason": "经济利益角度原文未重点讨论。"
+            },
+            {
+              "optionLabel": "D",
+              "category": "detail_word_misleading",
+              "subtype": "half_right_half_wrong",
+              "shortReason": "可持续消费是结尾呼吁，不是全文主旨概括。",
+              "quote": "sustainable consumption"
+            }
+          ],
+          "synonymSummary": "hidden cost of fast fashion → true cost extends far beyond price tags",
+          "surfaceType": "passage_main_idea",
+          "answeringMove": "coverage_test",
+          "tCard": "T5",
+          "boundaryFlags": [
+            "T5_T10"
+          ],
+          "reviewNeeded": true,
+          "confidence": 0.82
+        }
+      ]
+    },
+    {
+      "paperSection": "D",
+      "passageTitle": "Rethinking Intelligence in Animals",
+      "loads": {
+        "vocabularyChunkLoad": {
+          "score": 4,
+          "label": "偏重",
+          "shortReason": "含 cognitive、metacognition、hypothesis 等抽象学术词。",
+          "evidenceItems": [
+            {
+              "quote": "metacognition — the ability to think about one's own thinking",
+              "paragraph": 2
+            }
+          ]
+        },
+        "grammarLoad": {
+          "score": 4,
+          "label": "偏重",
+          "shortReason": "多层嵌套定语从句、插入语频繁。",
+          "evidenceItems": [
+            {
+              "quote": "What researchers once dismissed as mere instinct has, through decades of careful observation, revealed itself to be",
+              "paragraph": 1
+            }
+          ]
+        },
+        "discourseStructureLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "观点递进但标志词较明确。",
+          "evidenceItems": []
+        },
+        "topicBackgroundLoad": {
+          "score": 3,
+          "label": "适中",
+          "shortReason": "动物认知科学有一定专业门槛。",
+          "evidenceItems": []
+        },
+        "evidenceFindingLoad": {
+          "score": 4,
+          "label": "偏重",
+          "shortReason": "态度推理和写作手法题需综合多段信息。",
+          "evidenceItems": [
+            {
+              "quote": "What researchers once dismissed",
+              "paragraph": 1
+            },
+            {
+              "quote": "challenges the long-held assumption",
+              "paragraph": 5
+            }
+          ]
+        }
+      },
+      "aiInitialBand": {
+        "band": "偏难",
+        "basis": "aggregation"
+      },
+      "passageOutline": {
+        "mainIdea": "通过实验证据论证动物具有超越本能的认知能力，挑战传统观念。",
+        "logicalLayers": [
+          "段1：传统观点——动物行为仅是本能。「, 」段2：元认知概念引入。「, 」段3：实验证据一——乌鸦工具使用。「, 」段4：实验证据二——海豚自我认知。「, 」段5：结论——重新定义「智能」的边界。"
+        ]
+      },
+      "keyChunks": [
+        {
+          "surface": "cognitive",
+          "kind": "word",
+          "ipa": "/ˈkɒɡnɪtɪv/",
+          "pos": "adj.",
+          "meaning": "认知的"
+        },
+        {
+          "surface": "metacognition",
+          "kind": "word",
+          "ipa": "/ˌmetəkɒɡˈnɪʃən/",
+          "pos": "n.",
+          "meaning": "元认知"
+        },
+        {
+          "surface": "instinct",
+          "kind": "word",
+          "ipa": "/ˈɪnstɪŋkt/",
+          "pos": "n.",
+          "meaning": "本能"
+        },
+        {
+          "surface": "hypothesis",
+          "kind": "word",
+          "ipa": "/haɪˈpɒθəsɪs/",
+          "pos": "n.",
+          "meaning": "假说"
+        },
+        {
+          "surface": "dismiss as",
+          "kind": "chunk",
+          "meaning": "将……视为（不重要的）",
+          "usageNote": "学术议论中表达旧观点的贬义搭配。"
+        },
+        {
+          "surface": "long-held assumption",
+          "kind": "phrase",
+          "meaning": "长期持有的假设",
+          "usageNote": "学术文章中引出被挑战观点的常见搭配。"
+        },
+        {
+          "surface": "reveal itself to be",
+          "kind": "chunk",
+          "meaning": "显现为……",
+          "usageNote": "科学发现类文章中展示新证据的表达。"
+        },
+        {
+          "surface": "challenge the assumption",
+          "kind": "chunk",
+          "meaning": "挑战（传统）假设",
+          "usageNote": "议论文核心动作，常出现在结论段。"
+        }
+      ],
+      "questions": [
+        {
+          "questionNo": "31",
+          "paperSection": "D",
+          "questionIndexInPassage": 1,
+          "stem": "What does the underlined word 'metacognition' in paragraph 2 refer to?",
+          "stemTranslation": "第二段中划线词'metacognition'指什么？",
+          "answer": "A",
+          "teacherQuestionType": "猜词题",
+          "keywords": [
+            "metacognition",
+            "refer to"
+          ],
+          "locatingSentence": "metacognition — the ability to think about one's own thinking",
+          "answerSentence": "metacognition — the ability to think about one's own thinking",
+          "answerEvidence": {
+            "quote": "the ability to think about one's own thinking",
+            "explanationZh": "破折号后直接给出定义解释。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "B",
+              "category": "detail_word_misleading",
+              "subtype": "scope_shift",
+              "shortReason": "记忆能力只是认知的一部分，不是元认知的定义。",
+              "quote": "metacognition"
+            },
+            {
+              "optionLabel": "C",
+              "category": "common_sense_distractor",
+              "subtype": null,
+              "shortReason": "社交能力属于常识性联想。"
+            },
+            {
+              "optionLabel": "D",
+              "category": "detail_word_misleading",
+              "subtype": "object_mismatch",
+              "shortReason": "本能反应是文中被对比的旧概念，不是 metacognition。",
+              "quote": "mere instinct"
+            }
+          ],
+          "synonymSummary": "metacognition → the ability to think about one's own thinking",
+          "surfaceType": "word_meaning",
+          "answeringMove": "context_guessing",
+          "tCard": "T3",
+          "boundaryFlags": [],
+          "reviewNeeded": false,
+          "confidence": 0.96
+        },
+        {
+          "questionNo": "32",
+          "paperSection": "D",
+          "questionIndexInPassage": 2,
+          "stem": "What is the author's attitude towards the traditional view of animal intelligence?",
+          "stemTranslation": "作者对动物智能的传统观点持什么态度？",
+          "answer": "B",
+          "teacherQuestionType": "推理题",
+          "keywords": [
+            "author's attitude",
+            "traditional view"
+          ],
+          "locatingSentence": "What researchers once dismissed as mere instinct has revealed itself to be far more complex.",
+          "answerSentence": "This growing body of evidence challenges the long-held assumption that only humans possess true intelligence.",
+          "answerEvidence": {
+            "quote": "challenges the long-held assumption",
+            "explanationZh": "用 challenge 一词表明作者质疑传统观点。"
+          },
+          "distractorAnalysis": [
+            {
+              "optionLabel": "A",
+              "category": "detail_word_misleading",
+              "subtype": "opposite_direction",
+              "shortReason": "作者质疑而非赞同传统观点。",
+              "quote": "challenges the long-held assumption"
+            },
+            {
+              "optionLabel": "C",
+              "category": "not_mentioned",
+              "subtype": null,
+              "shortReason": "原文未表达中立态度。"
+            },
+            {
+              "optionLabel": "D",
+              "category": "common_sense_distractor",
+              "subtype": null,
+              "shortReason": "困惑不符合文本语气。"
+            }
+          ],
+          "synonymSummary": "critical/challenging → challenges the long-held assumption",
+          "surfaceType": "attitude_tone",
+          "answeringMove": "minimal_inference",
+          "tCard": "T6",
+          "boundaryFlags": [
+            "T6_T9"
+          ],
+          "reviewNeeded": true,
+          "confidence": 0.75
+        }
+      ]
+    }
+  ]
+}
