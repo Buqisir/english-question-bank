@@ -51,6 +51,8 @@ import type {
 import { toEvidenceModel, selectEvidence } from '../evidence/index.ts'
 import type {
   PaperIntelligenceReport,
+  QuestionAnalysis,
+  QuestionOption,
 } from '../paperIntelligenceTypes.ts'
 
 /* ─────────────────────────── id helpers ─────────────────────────────── */
@@ -134,7 +136,7 @@ export type QuestionRow = {
   stemTranslation: string
   answer: string
   teacherQuestionType: string
-  optionsForDisplay: { label: string; content: string }[]
+  optionsForDisplay: QuestionOption[]
   isActive: boolean
 }
 
@@ -271,11 +273,10 @@ export function buildPreviewView(args: BuildPreviewArgs): PaperIntelligencePrevi
 
   // index report-side question objects so we can fetch options without
   // walking nested arrays repeatedly.
-  type ReportOption = { label: string; content: string }
-  const optionsByQuestionId = new Map<string, ReportOption[]>()
+  const optionsByQuestionId = new Map<string, QuestionOption[]>()
   for (const passage of reportPassages) {
     for (const q of passage?.questions || []) {
-      const opts = readOptionsFromQuestion(q as unknown as Record<string, unknown>)
+      const opts = readOptionsFromQuestion(q)
       optionsByQuestionId.set(
         buildQuestionId(String(passage?.paperSection || ''), String(q?.questionNo || '')),
         opts,
@@ -383,6 +384,32 @@ export function buildPreviewView(args: BuildPreviewArgs): PaperIntelligencePrevi
  *   4. Merge the two phases' choices into a single ordered list and
  *      walk passageBody once, emitting text segments around each
  *      highlight span.
+ *
+ * Multi-occurrence quote strategy
+ * ────────────────────────────────
+ * If a quote string appears MORE THAN ONCE in `passageBody`, the model
+ * highlights EVERY non-overlapping occurrence — not just the first.
+ * Rationale:
+ *   - The V0 audit only verifies that a quote appears at least once.
+ *     The model has no signal about which occurrence the original
+ *     answer reasoning was anchored to.
+ *   - Highlighting all occurrences is safer than guessing: the teacher
+ *     sees every place the same surface phrase shows up and can decide
+ *     which is the intended anchor. Picking only the first risks
+ *     hiding the real evidence behind an earlier coincidence.
+ *   - Within a single phase (support / trap) we still apply the
+ *     left-to-right, longer-first overlap arbitration, so two
+ *     occurrences of the same support quote do not overlap each other
+ *     and trap occurrences never displace support occurrences.
+ *   - V2 may refine this with a paragraph hint or a positional anchor;
+ *     V1 keeps the rule simple and visible.
+ *
+ * The implementation walks `passageBody.indexOf(quote, from)` in a loop
+ * with `from = idx + Math.max(1, quote.length)` so consecutive but
+ * non-overlapping repeats are all enumerated; pure substring overlap
+ * within a single quote (e.g. `"aa"` inside `"aaa"`) is intentionally
+ * NOT generated as two candidates because that would create overlapping
+ * runs of the same evidence.
  */
 export function buildPassageSegments(args: {
   passageBody: string
@@ -598,20 +625,26 @@ function pickString(value: unknown, fallback: string): string {
 }
 
 /**
- * Read `options` off a report-side QuestionAnalysis. The V0 schema does
- * not formally include `options` on QuestionAnalysis (it lives on the
- * input side), but in practice the report sometimes carries them and
- * sometimes does not. We take whatever shape we get and normalize.
+ * Read `options` off a report-side QuestionAnalysis.
  *
- * If a question has no options on the report side, the left column will
- * still render the stem; options just won't appear. The interactive UI
- * does not treat that as an error — V1 only requires stems to be
- * clickable.
+ * Now that `QuestionAnalysis.options` is typed as
+ * `QuestionOption[] | undefined`, this function exists for two reasons:
+ *
+ *   1. Defensive normalization — older reports (or hand-edited
+ *      fixtures) may carry malformed entries. We filter out anything
+ *      that is not a `{ label: string, content: string }` shape, so
+ *      the React layer only sees clean rows.
+ *   2. Legacy null-safety — `options` is optional. When the field is
+ *      absent, this returns `[]`, and the left column simply renders
+ *      no options for that question (the stem still appears).
+ *
+ * The interactive UI does not treat missing options as an error — V1
+ * only requires stems to be clickable.
  */
-function readOptionsFromQuestion(q: Record<string, unknown>): { label: string; content: string }[] {
+function readOptionsFromQuestion(q: QuestionAnalysis | null | undefined): QuestionOption[] {
   const raw = q?.options
   if (!Array.isArray(raw)) return []
-  const out: { label: string; content: string }[] = []
+  const out: QuestionOption[] = []
   for (const o of raw) {
     if (!o || typeof o !== 'object') continue
     const label = (o as { label?: unknown }).label
@@ -622,7 +655,7 @@ function readOptionsFromQuestion(q: Record<string, unknown>): { label: string; c
   return out
 }
 
-function sortOptionsByLabel(options: { label: string; content: string }[]): { label: string; content: string }[] {
+function sortOptionsByLabel(options: QuestionOption[]): QuestionOption[] {
   return options.slice().sort((a, b) => (a.label < b.label ? -1 : a.label > b.label ? 1 : 0))
 }
 
@@ -631,12 +664,17 @@ function sortOptionsByLabel(options: { label: string; content: string }[]): { la
  * but are not surfaced through QuestionEvidenceView (e.g. stemTranslation).
  * Returns `''` when the field is missing — the React layer can decide
  * whether to render or skip.
+ *
+ * Now that `QuestionAnalysis` is fully typed, the only remaining
+ * dynamic access is the `field` parameter (it's a string, not a fixed
+ * key). We narrow with a switch instead of an `unknown` cast so the
+ * compiler still type-checks the return.
  */
 function getReportQuestionField(
   passages: PaperIntelligenceReport['passages'],
   paperSection: string,
   questionNo: string,
-  field: string,
+  field: 'stemTranslation',
 ): string {
   if (!Array.isArray(passages)) return ''
   for (const p of passages) {
@@ -644,9 +682,10 @@ function getReportQuestionField(
     const qs = Array.isArray(p.questions) ? p.questions : []
     for (const q of qs) {
       if (q?.questionNo !== questionNo) continue
-      const v = (q as unknown as Record<string, unknown>)[field]
-      if (typeof v === 'string') return v
-      return ''
+      switch (field) {
+        case 'stemTranslation':
+          return typeof q.stemTranslation === 'string' ? q.stemTranslation : ''
+      }
     }
   }
   return ''

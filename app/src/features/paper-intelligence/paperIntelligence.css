@@ -255,6 +255,32 @@
 
 .pi-main {
   min-width: 0;
+  /*
+   * Make `.pi-main` its own scroll container so the auto-scroll
+   * effect's `scrollIntoView({ block: 'nearest' })` resolves here
+   * instead of bubbling up to the window. The min-width:0 above keeps
+   * grid children from overflowing horizontally; the height bound
+   * below mirrors `.pi-side`'s sticky max-height so the two columns
+   * scroll independently of each other.
+   *
+   * On narrow viewports (<= 900px) the shell collapses to a single
+   * column; we lift the height bound there so the page falls back to
+   * normal document scroll and the right Analysis Panel sits below
+   * the passages.
+   */
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  /* Provide a stable scroll anchor for the smooth-scroll behavior so
+   * very tall passage bodies don't snap awkwardly when the highlight
+   * is brought into view. */
+  scroll-padding-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .pi-main {
+    max-height: none;
+    overflow-y: visible;
+  }
 }
 
 .pi-side {
