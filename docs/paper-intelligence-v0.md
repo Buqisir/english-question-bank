@@ -129,10 +129,13 @@ V0 不做：
   - 当 `kind === "word"` 时必给 `ipa`（音标）和 `pos`（词性）。
   - 当 `kind === "phrase"` 或 `"chunk"` 时**不给音标**，只给 `meaning` 和 `usageNote`（一句用法说明）。
   - `meaning`：中文释义/整体意思。
+  - **例外**：若 A 篇（短应用文）确实不足 8 个有教学价值词块，可输出 6–7 个，但必须在同级附加 `keyChunksNote: string` 说明"词块不足 8 个，不凑数"。不要为了满足数量硬编低价值词块。
 
 ### 4.3 后台字段（backend-only）
 
 后台字段仅供 reviewer / 教研复核使用，老师端默认不显示：
+
+> ⚠️ 当输入中**未提供** `existingLabels` 时，以下后台字段均为**模型初判**（model-inferred），不是已确认标签。Model-inferred backend labels should be treated as reviewable。对于边界类（boundaryFlags 非空）、T9/T10、以及低置信度（confidence < 0.8）的情况，`reviewNeeded` 应为 `true`。
 
 - `surfaceType`：与 `scripts/review/rules/reading-parse.md` 保持一致的枚举（`single_detail_normal` / `multi_detail_learn_from` / `word_meaning` / `inference_general` / `example_function` / `paragraph_function` / `writing_technique` / `paragraph_main_idea` / `passage_main_idea` / `author_purpose` / `attitude_tone` / `adjective_summary` / `abstract_phrase_summary` / `why_did` 等）。
 - `answeringMove`：`direct_locating` / `option_backtracking` / `context_guessing` / `coverage_test` / `function_to_argument` / `minimal_inference` / `rhetorical_method_identification` / `description_to_adjective` 等，遵循 reading-parse.md 已有规约。
@@ -163,8 +166,8 @@ V0 保留三大类干扰项（与现有教研口径一致）：
 
 引用规则补充：
 
-- `detail_word_misleading` **必须**引用原文短句。
-- `opposite_direction`（正话反说）**必须**引用原文短句，不论它落在 detail 还是 not_mentioned 下。
+- `detail_word_misleading` **必须**引用原文短句（包括所有子类，尤其是 `opposite_direction` 正话反说）。
+- `opposite_direction` **只能**作为 `detail_word_misleading` 的 subtype 出现。正话反说本质是与原文方向相反，属于细节词误导的一种；不存在"落在 not_mentioned 下的 opposite_direction"。
 - `not_mentioned` 与 `common_sense_distractor` 不强制引用。
 - 如果某个错误选项被判为**强干扰项**（容易整批学生选错），即使分类是 not_mentioned/common_sense，也**建议**补一条原文引文以便讲评。
 
@@ -212,7 +215,8 @@ PassageReport {
   loads: PassageLoads                            // 必填
   aiInitialBand: AiInitialBand                   // 必填
   passageOutline: PassageOutline                 // 必填
-  keyChunks: KeyChunk[]                          // 必填，长度 8-12
+  keyChunks: KeyChunk[]                          // 必填，长度 8-12（A 篇短应用文允许 6-7，须附 keyChunksNote）
+  keyChunksNote?: string                         // 条件必填：keyChunks.length < 8 时必填，说明不凑数原因
   questions: QuestionAnalysis[]                  // 必填
 }
 ```
@@ -234,6 +238,8 @@ LoadBar {
   label: "轻" | "较轻" | "适中" | "偏重" | "过重"    // 必填，与 score 一一对应
   shortReason: string                            // 必填，一句中文
   evidenceItems: LoadEvidence[]                  // 必填，可为空数组但不省略字段
+                                                 // 硬约束：score >= 4 时 evidenceItems.length >= 1
+                                                 // （偏重/过重负荷必须有原文证据支撑）
 }
 
 LoadEvidence {
@@ -257,7 +263,7 @@ QualityRiskItem {
 AiInitialBand {
   band: "偏易" | "适中" | "偏难"                   // 必填
   basis: "aggregation"                            // 必填，固定值，标识这是聚合产物
-  overrideExplanation?: string                    // 可选；若 band 与默认聚合规则不一致则必填
+  overrideExplanation?: string                    // 条件必填：当 band 与默认聚合规则不一致时必填；一致时可省略
 }
 ```
 
@@ -320,7 +326,7 @@ DistractorItem {
          | "half_right_half_wrong" | "misplaced_evidence"
          | null                                  // 仅 detail_word_misleading 可非 null
   shortReason: string                            // 必填
-  quote?: string                                 // detail_word_misleading 与 opposite_direction 必填；其余可选
+  quote?: string                                 // detail_word_misleading 必填（含所有 subtype，尤其 opposite_direction）；其余可选
 }
 ```
 

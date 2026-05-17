@@ -74,11 +74,12 @@ JSON 必填字段缺一个就视为不合格输出，调用方会拒收。
 - **正确答案证据必须给原文短引文 + 中文解释**。`answerEvidence.quote` 必须能在原文中精确找到（≤ 30 词），`answerEvidence.explanationZh` 用一句中文说清为什么这是正确答案。
 - **同义替换总结必填，且只总结正确答案**。`synonymSummary` 形如 `require → have to follow`、`contributing less injury → less likely to cause knee injuries`。**不要**总结错误选项的同义替换。
 - **干扰项全分析但简短**。每个错误选项给 `category` + `shortReason`（一句中文）；不要长篇展开。
-- **细节词误导和正话反说必须引用原文**。`detail_word_misleading` 与 `opposite_direction`（落在哪个 category 都一样）`quote` 必填；`not_mentioned` / `common_sense_distractor` 不强制，但**强干扰项建议补引**。
+- **细节词误导必须引用原文**。`detail_word_misleading`（含所有 subtype，尤其 `opposite_direction` 正话反说）`quote` 必填。`opposite_direction` **只能**作为 `detail_word_misleading` 的 subtype 出现——正话反说本质是与原文方向相反，属于细节词误导。`not_mentioned` / `common_sense_distractor` 不强制引用，但**强干扰项建议补引**。
 - **重要词块每篇 8–12 个**。
   - `kind="word"` 必须给 `ipa` 和 `pos`。
   - `kind="phrase"` 或 `"chunk"` 不给音标；给整体 `meaning` 和一句 `usageNote`。
-- **老师端题型只用四大类**：`细节理解题` / `主旨大意题` / `推理题` / `猜词题`。后台字段同时保留 `surfaceType` / `answeringMove` / `tCard` / `boundaryFlags`，由 reviewer 使用。
+  - **例外**：若 A 篇（短应用文）确实不足 8 个有教学价值的词块，可输出 6–7 个，但必须在该篇 `passageOutline` 或 `keyChunks` 同级附加 `keyChunksNote` 说明"词块不足 8 个，不凑数"。不要为了满足数量硬编低价值词块。
+- **老师端题型只用四大类**：`细节理解题` / `主旨大意题` / `推理题` / `猜词题`。后台字段同时保留 `surfaceType` / `answeringMove` / `tCard` / `boundaryFlags`，由 reviewer 使用。**当输入中无 `existingLabels` 时，这些后台字段均为模型初判（model-inferred），不是已确认标签。** Model-inferred backend labels should be treated as reviewable。对于边界类（boundaryFlags 非空）、T9/T10、低置信度（confidence < 0.8）的情况，`reviewNeeded` 必须为 `true`。
 - **遵守现有边界规则**。`surfaceType` / `tCard` / `boundaryFlags` 必须与 `scripts/review/rules/reading-parse.md` 一致（例如 `word_meaning → T3`、`abstract_phrase_summary → T10` 强制 `T6_T10`、`paragraph_main_idea` 在标题压缩场景可升 T10、`writing_technique` / `paragraph_function → T8` 等）。
 - **不要把整段原文复述进 JSON**。引文一律短引（≤ 30 词），需要长引时拆成多个短引。
 
@@ -101,7 +102,7 @@ JSON 必填字段缺一个就视为不合格输出，调用方会拒收。
 - `score`：`1` | `2` | `3` | `4` | `5`。
 - `label`：与 score 一一对应（`轻` / `较轻` / `适中` / `偏重` / `过重`）。
 - `shortReason`：一句中文，说明为什么打这个分。
-- `evidenceItems`：数组，每条 `{ quote, note?, paragraph? }`。`quote` 必须是该篇原文里的短引文。允许空数组，但**不允许省略该字段**；空数组时 `shortReason` 必须能独立说明判分依据。
+- `evidenceItems`：数组，每条 `{ quote, note?, paragraph? }`。`quote` 必须是该篇原文里的短引文。允许空数组，但**不允许省略该字段**；空数组时 `shortReason` 必须能独立说明判分依据。**硬约束：当 `score >= 4`（偏重/过重）时，`evidenceItems` 至少 1 条——偏重/过重负荷必须有原文证据支撑。**
 
 判分基线（仅作参考，最终以 `evidenceItems` 是否站得住为准）：
 
@@ -123,7 +124,7 @@ JSON 必填字段缺一个就视为不合格输出，调用方会拒收。
 aiInitialBand: {
   band: "偏易" | "适中" | "偏难",
   basis: "aggregation",
-  overrideExplanation?: string
+  overrideExplanation?: string          // 条件必填：band 与默认聚合规则不一致时必填；一致时可省略
 }
 ```
 
@@ -275,12 +276,14 @@ Markdown 预览**章节顺序固定**，对应一线老师阅卷讲评的处理�
 返回前请自查（仅供模型对自己内部检查使用，不要把这一节内容输出出来）：
 
 - 每篇 passage 是否齐 5 条负荷，每条是否有 `score / label / shortReason / evidenceItems`。
+- 当 `score >= 4` 时 `evidenceItems` 是否至少 1 条（偏重/过重必须有证据）。
 - `aiInitialBand` 是否符合默认聚合规则；不符合是否给了 `overrideExplanation`。
 - 每题 `answerEvidence.quote` 是否在原文中存在（短引、≤ 30 词）。
-- `detail_word_misleading` 与 `opposite_direction` 是否都引用了原文短句。
+- `detail_word_misleading`（含 `opposite_direction` subtype）是否都引用了原文短句。
 - `synonymSummary` 是否每题都填且只针对正确答案。
-- `keyChunks` 长度是否 8–12，`word` 是否带 `ipa / pos`，`phrase / chunk` 是否不带音标。
+- `keyChunks` 长度是否 8–12（A 篇短应用文可 6–7 并附 `keyChunksNote`），`word` 是否带 `ipa / pos`，`phrase / chunk` 是否不带音标。
 - 老师端是否只用了四大题型（细节理解 / 主旨大意 / 推理 / 猜词）。
 - 后台 `surfaceType / tCard / boundaryFlags` 是否符合 `scripts/review/rules/reading-parse.md` 的边界规则。
+- 当输入无 `existingLabels` 时，边界类（boundaryFlags 非空）、T9/T10、低置信度（confidence < 0.8）是否已设 `reviewNeeded = true`。
 - JSON 与 Markdown 是否互相一致；Markdown 章节顺序是否为：答案与解析 → 同义替换总结 → 文章脉络分析 → 词汇和地道语块积累。
 - 没有输出 `finalDifficulty` / `empiricalDifficulty` / 学生正答率预测等越界字段。
