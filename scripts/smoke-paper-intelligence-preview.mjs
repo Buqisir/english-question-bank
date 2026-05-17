@@ -31,13 +31,14 @@
  *         support evidence id (the "answer evidence" connector
  *         appears by default).
  *    9. The right `.pi-side` panel updates in place with section
- *       headers "正确答案" / "干扰项分析" / "同义替换".
+ *       header "选项解析" and 4 option blocks (A/B/C/D) containing
+ *       English option text, "正确" tag, and "同义替换".
  *   10. Auto-scroll: with the left scroller pre-scrolled to its
  *       bottom, the click brings the support highlight back into
  *       view INSIDE `.pi-main` and the document scroller stays put.
  *   11. The right panel's `data-pi-question-id` matches the clicked
  *       card's id (no cross-talk between questions).
- *   12. Clicking a quoted distractor button in the right panel:
+ *   12. Clicking a quoted distractor option block button in the right panel:
  *       - keeps the question active.
  *       - keeps EXACTLY ONE `<path.pi-line-path>` (line never multiplies).
  *       - the path's `data-pi-evidence-id` switches to the distractor's
@@ -314,10 +315,31 @@ try {
   step('9. right panel renders detail block', sidePanelQid !== null)
   step('9. right panel question id matches clicked card', sidePanelQid === firstQid)
   const sideText = (await page.locator('.pi-side').innerText()) || ''
-  step('9. right panel includes "正确答案" header', sideText.includes('正确答案'))
-  step('9. right panel includes "干扰项分析" header', sideText.includes('干扰项分析'))
+  step('9. right panel includes "选项解析" header', sideText.includes('选项解析'))
+  step('9. right panel includes "正确" tag', sideText.includes('正确'))
   step('9. right panel includes "同义替换" header', sideText.includes('同义替换'))
   step('9. empty hint is gone after click', !sideText.includes('点击左侧题目查看解析'))
+
+  // Cut D1: verify option blocks exist with English content
+  const optionBlocks = page.locator('.pi-side .pi-option-block')
+  const optionBlockCount = await optionBlocks.count()
+  step('9. right panel has 4 option blocks', optionBlockCount === 4, `count=${optionBlockCount}`)
+  const optionLabels = await page.locator('.pi-side [data-pi-option-label]').evaluateAll(
+    (els) => els.map((el) => el.getAttribute('data-pi-option-label')).sort().join(',')
+  )
+  step('9. A/B/C/D option blocks present', optionLabels === 'A,B,C,D', `labels=${optionLabels}`)
+  const correctBlock = page.locator('.pi-side .pi-option-block--correct')
+  const correctCount = await correctBlock.count()
+  step('9. correct option block exists', correctCount >= 1)
+  if (correctCount >= 1) {
+    const correctText = await correctBlock.first().innerText()
+    step('9. correct block contains "正确"', correctText.includes('正确'))
+    step('9. correct block contains "同义替换"', correctText.includes('同义替换'))
+  }
+  // Verify English option content is rendered (pi-option-block-content)
+  const contentEls = page.locator('.pi-side .pi-option-block-content')
+  const contentCount = await contentEls.count()
+  step('9. option blocks have English content elements', contentCount >= 4, `count=${contentCount}`)
 
   /* ── 10. Auto-scroll target visible, window unchanged. ───────── */
   const afterScroll = await page.evaluate((activeId) => {
@@ -353,10 +375,9 @@ try {
   await shot(page, '02-active-q1-line')
 
   /* ── 12. Click a quoted distractor → line switches. ─────────── */
-  // Find the first distractor BUTTON (not a div) — the button selector
-  // restriction is exactly what locks "text-only stays a div" in §13.
+  // Find the first quoted trap option block BUTTON (not a div/text-only).
   const distractorButtons = page.locator(
-    '.pi-side button.pi-analysis-distractor',
+    '.pi-side button.pi-option-block[data-pi-evidence-kind="trap"]:not([data-pi-quote-text-only="true"])',
   )
   const distractorButtonCount = await distractorButtons.count()
   step(

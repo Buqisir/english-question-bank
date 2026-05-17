@@ -212,6 +212,11 @@ export type AnalysisView = {
   distractors: AnalysisDistractorRow[]
   synonymSummary: string
 
+  /** A/B/C/D option texts for the right-panel option blocks. Sorted by
+   *  label. The component renders each option's English content inside
+   *  the corresponding pi-option-block. */
+  optionsForDisplay: QuestionOption[]
+
   /* — back-stage labels — */
   tCard: string
   reviewNeeded: boolean
@@ -247,6 +252,9 @@ export type BuildPreviewArgs = {
   report: PaperIntelligenceReport
   bodies: PassageBodyMap
   activeQuestionId: string | null
+  /** Optional: options from input.json, keyed by questionId. Used as
+   *  fallback when report-side options are absent. */
+  inputOptions?: Record<string, QuestionOption[]>
 }
 
 /* ─────────────────────────── public builder ─────────────────────────── */
@@ -259,7 +267,7 @@ export type BuildPreviewArgs = {
  * does not throw, and does not mutate its inputs.
  */
 export function buildPreviewView(args: BuildPreviewArgs): PaperIntelligencePreviewView {
-  const { report, bodies, activeQuestionId } = args
+  const { report, bodies, activeQuestionId, inputOptions } = args
 
   const evidenceModel = toEvidenceModel(report, { bodies })
   const reportPassages = Array.isArray(report?.passages) ? report.passages : []
@@ -276,11 +284,16 @@ export function buildPreviewView(args: BuildPreviewArgs): PaperIntelligencePrevi
   const optionsByQuestionId = new Map<string, QuestionOption[]>()
   for (const passage of reportPassages) {
     for (const q of passage?.questions || []) {
+      const qid = buildQuestionId(String(passage?.paperSection || ''), String(q?.questionNo || ''))
       const opts = readOptionsFromQuestion(q)
-      optionsByQuestionId.set(
-        buildQuestionId(String(passage?.paperSection || ''), String(q?.questionNo || '')),
-        opts,
-      )
+      // Fallback to inputOptions if report-side options are empty
+      if (opts.length > 0) {
+        optionsByQuestionId.set(qid, opts)
+      } else if (inputOptions && inputOptions[qid] && inputOptions[qid].length > 0) {
+        optionsByQuestionId.set(qid, inputOptions[qid])
+      } else {
+        optionsByQuestionId.set(qid, opts)
+      }
     }
   }
 
@@ -335,6 +348,7 @@ export function buildPreviewView(args: BuildPreviewArgs): PaperIntelligencePrevi
     activeQuestionId,
     evidenceModel,
     reportPassages,
+    optionsByQuestionId,
   })
 
   return {
@@ -566,8 +580,9 @@ function buildAnalysisView(args: {
   activeQuestionId: string | null
   evidenceModel: EvidenceModel
   reportPassages: PaperIntelligenceReport['passages']
+  optionsByQuestionId: Map<string, QuestionOption[]>
 }): AnalysisView | null {
-  const { activeQuestionId, evidenceModel, reportPassages } = args
+  const { activeQuestionId, evidenceModel, reportPassages, optionsByQuestionId } = args
   if (!activeQuestionId) return null
   const parsed = parseQuestionId(activeQuestionId)
   if (!parsed) return null
@@ -612,6 +627,7 @@ function buildAnalysisView(args: {
     answerSentence: qv.answerSentence,
     distractors: trapRows,
     synonymSummary: qv.synonymSummary,
+    optionsForDisplay: optionsByQuestionId.get(activeQuestionId) || [],
     tCard: qv.tCard,
     reviewNeeded: qv.reviewNeeded,
     confidence: qv.confidence,
@@ -660,6 +676,26 @@ function sortOptionsByLabel(options: QuestionOption[]): QuestionOption[] {
 }
 
 /**
+ * Find the raw QuestionAnalysis from the report passages for a given
+ * (paperSection, questionNo) pair. Returns null if not found.
+ */
+function findReportQuestion(
+  passages: PaperIntelligenceReport['passages'],
+  paperSection: string,
+  questionNo: string,
+): QuestionAnalysis | null {
+  if (!Array.isArray(passages)) return null
+  for (const p of passages) {
+    if (!p || p.paperSection !== paperSection) continue
+    const qs = Array.isArray(p.questions) ? p.questions : []
+    for (const q of qs) {
+      if (q?.questionNo === questionNo) return q
+    }
+  }
+  return null
+}
+
+/**
  * Lookup helper for fields that exist on the report's QuestionAnalysis
  * but are not surfaced through QuestionEvidenceView (e.g. stemTranslation).
  * Returns `''` when the field is missing — the React layer can decide
@@ -676,19 +712,12 @@ function getReportQuestionField(
   questionNo: string,
   field: 'stemTranslation',
 ): string {
-  if (!Array.isArray(passages)) return ''
-  for (const p of passages) {
-    if (!p || p.paperSection !== paperSection) continue
-    const qs = Array.isArray(p.questions) ? p.questions : []
-    for (const q of qs) {
-      if (q?.questionNo !== questionNo) continue
-      switch (field) {
-        case 'stemTranslation':
-          return typeof q.stemTranslation === 'string' ? q.stemTranslation : ''
-      }
-    }
+  const q = findReportQuestion(passages, paperSection, questionNo)
+  if (!q) return ''
+  switch (field) {
+    case 'stemTranslation':
+      return typeof q.stemTranslation === 'string' ? q.stemTranslation : ''
   }
-  return ''
 }
 
 /* ─────────────────────────── re-exports ─────────────────────────────── */
