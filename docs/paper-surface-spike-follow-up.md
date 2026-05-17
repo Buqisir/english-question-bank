@@ -29,24 +29,59 @@ treating the spike as production direction".
 The "print" namespace is now reserved for the real PDF/HTML export
 pipeline (`server/print-renderer.mjs`).
 
-## Gate 2 — CSS relationship with `server/print-renderer.mjs`: NOT decided
+## Gate 2 — CSS relationship with `server/print-renderer.mjs`: RESOLVED FOR B1 (A-thin)
 
-`paperSurfacePrototype.css` is **prototype-only visual reference**. It
-is **not** shared with `server/print-renderer.mjs`. The print renderer
-keeps its own emit logic and its own CSS path, unchanged.
+**Decision (Issue #21-B1):** The team picked the **A-thin** CSS
+strategy.
 
-Before any production PaperSurface module promotes this CSS, the team
-must pick one of:
+What that means in this cut:
 
-1. Extract shared paper-surface tokens / styles between the React
-   surface and `server/print-renderer.mjs`, and replace the prototype
-   CSS with consumers of the shared module.
-2. Discard the prototype CSS and rebuild B-level styles from
-   renderer-aligned styles instead.
+- B1 introduces `shared/papersurface/tokens.mjs` (paired with a
+  `tokens.d.ts` for type consumers). The module exports PRIMITIVE
+  values only — font stack, ink / muted / rule colors, passage and
+  question line heights, paragraph indent, and the four-options grid
+  descriptors.
+- The React prototype (`PaperSurfacePrototype.tsx`) imports those
+  primitives and injects them as CSS custom properties on the surface
+  root. `paperSurfacePrototype.css` consumes them via
+  `var(--pi-paper-...)` instead of hardcoding the same values.
+- `paperSurfacePrototype.css` is still **prototype-only visual
+  reference**. It is **not** shared with `server/print-renderer.mjs`.
+  No CSS text, HTML, JSX, or markup crosses the boundary.
+- `server/print-renderer.mjs` is **intentionally unchanged in B1**.
+  It still emits its own inlined CSS with its own — slightly different
+  — font stack. The current divergence is captured in the design-note
+  export `paperSurfaceServerCurrent` inside the shared tokens module
+  so a future contributor can see, in one place, what the server is
+  doing today.
 
-This cut intentionally does not pick. The same warning is duplicated
-at the top of `paperSurfacePrototype.css` so a future contributor sees
-it without having to find this file.
+What this resolution does **not** claim:
+
+- It does **not** claim the CSS is now fully shared, identical, or
+  aligned between the React surface and the server. Only the value
+  layer is shared, and only on the React side. The CSS texts remain
+  independent.
+- It does **not** retire the prototype CSS as production-ready. The
+  CSS file is still prototype-only and still carries the
+  prototype-only banner.
+
+### B2 follow-up (still owed)
+
+- Decide whether `server/print-renderer.mjs` should adopt
+  `paperSurfaceTokens` directly, or keep its own slightly-different
+  stack with the divergence explicitly re-justified.
+- If the server adopts shared tokens, rerun the print visual QA
+  (the existing Vivliostyle / `print-visual-qa-guangdong` pipeline)
+  to confirm no regression in PDF output.
+- Update `paperSurfaceServerCurrent` (or remove it) once B2 lands so
+  the design note no longer drifts from reality.
+
+The A-thin choice was a deliberate trade. Sharing CSS text or markup
+in B1 would have required touching `server/print-renderer.mjs`,
+running visual QA, and risking a print regression — none of which fit
+inside a CSS-strategy spike. Sharing only PRIMITIVE values keeps the
+spike small, reversible, and verifiable on the cloud sandbox without
+running a build, a Vite dev server, or a Vivliostyle render.
 
 ## Gate 3 — Plant no-op evidence anchors: DONE in this cut
 

@@ -377,6 +377,44 @@ assert(
   'data-pi-option-label anchor missing',
 )
 
+// Issue #21-B1 / Issue #30 gate 2 — A-thin: prototype imports the
+// shared primitive tokens and injects them as CSS custom properties on
+// the surface root. This is the single point where shared values cross
+// from the value layer into the rendered DOM. Detailed token contract
+// is locked down by `verify-paper-surface-tokens.mjs`; here we only
+// confirm the import + injection wiring exists.
+assert(
+  'Prototype imports paperSurfaceTokens from shared/papersurface/tokens.mjs',
+  /import\s*\{\s*paperSurfaceTokens\s*\}\s*from\s*['"][^'"]*shared\/papersurface\/tokens\.mjs['"]/.test(
+    prototypeSrc,
+  ),
+  'shared tokens import missing or wrong path',
+)
+assert(
+  'Prototype injects --pi-paper-font-stack from paperSurfaceTokens.paperFontStack',
+  /['"]--pi-paper-font-stack['"]\s*:\s*paperSurfaceTokens\.paperFontStack/.test(prototypeSrc),
+  'CSS var injection for font stack missing',
+)
+assert(
+  'Prototype injects --pi-paper-passage-line-height from paperSurfaceTokens',
+  /['"]--pi-paper-passage-line-height['"]\s*:\s*paperSurfaceTokens\.passageLineHeight/.test(
+    prototypeSrc,
+  ),
+  'passage line-height injection missing',
+)
+assert(
+  'Prototype injects --pi-paper-options-grid-columns from paperSurfaceTokens',
+  /['"]--pi-paper-options-grid-columns['"]\s*:\s*paperSurfaceTokens\.optionsGridColumns/.test(
+    prototypeSrc,
+  ),
+  'options grid columns injection missing',
+)
+assert(
+  'Surface root applies the token style (style={paperSurfaceTokenStyle})',
+  /style=\{\s*paperSurfaceTokenStyle\s*\}/.test(prototypeSrc),
+  'style={paperSurfaceTokenStyle} not applied to surface root',
+)
+
 // Bundled-sample-only contract.
 assert(
   'Prototype pins the supported paperId to paper-2024-xkb1-reading',
@@ -483,35 +521,28 @@ assert(
 
 console.log('\nTest 5: CSS naming and CSS-strategy documentation')
 
-assert(
-  'CSS declares Times New Roman in the font stack',
-  /"Times New Roman"/.test(cssSrc),
-  '"Times New Roman" not declared',
-)
-assert(
-  'CSS declares SimSun (宋体) in the font stack',
-  /"SimSun"/.test(cssSrc),
-  '"SimSun" not declared',
-)
-assert(
-  'CSS declares Songti SC fallback for macOS rendering',
-  /"Songti SC"/.test(cssSrc),
-  '"Songti SC" not declared',
-)
-assert(
-  'CSS declares STSong fallback',
-  /"STSong"/.test(cssSrc),
-  '"STSong" not declared',
-)
+// Issue #21-B1 / Issue #30 gate 2 — A-thin: the canonical font stack
+// has moved out of the CSS file and into
+// `shared/papersurface/tokens.mjs`. The CSS now consumes
+// `var(--pi-paper-font-stack)`, and the prototype injects that var
+// from the shared module. The font literal MUST NOT live in this CSS
+// anymore. Detailed token contract is locked down by
+// `verify-paper-surface-tokens.mjs`; here we only check the
+// React-side surface stays consistent with that move.
 assert(
   'CSS exposes a single --pi-paper-font-stack variable for reuse',
-  /--pi-paper-font-stack\s*:/.test(cssSrc),
-  'CSS variable missing',
+  /--pi-paper-font-stack\s*:/.test(cssSrc) || /var\(--pi-paper-font-stack\)/.test(cssSrc),
+  'CSS variable missing or never consumed',
 )
 assert(
   'CSS pins a paper-target page width via --pi-paper-page-width',
   /--pi-paper-page-width\s*:\s*\d+px/.test(cssSrc),
   'page width variable missing',
+)
+assert(
+  'CSS consumes --pi-paper-font-stack via var(...)',
+  /var\(--pi-paper-font-stack\)/.test(cssSrc),
+  'CSS does not consume --pi-paper-font-stack',
 )
 // Strip /* ... */ block comments from the CSS and // / /* ... */ from the
 // TSX before checking for legacy tokens. The header of each file
@@ -549,10 +580,15 @@ assert(
   'missing not-shared-with-server/print-renderer note',
 )
 assert(
-  'CSS header lists both gate-2 options (extract shared vs discard and rebuild)',
-  /(extract\s+shared)/i.test(cssSrc) &&
-    /(discard|rebuild)/i.test(cssSrc),
-  'gate-2 option list missing',
+  'CSS header records Gate 2 as RESOLVED FOR B1 with the A-thin strategy',
+  /Gate\s*2[\s\S]{0,200}RESOLVED\s+FOR\s+B1/i.test(cssSrc) &&
+    /A-thin/i.test(cssSrc),
+  'CSS header must mark Gate 2 as RESOLVED FOR B1 (A-thin)',
+)
+assert(
+  'CSS header points to shared/papersurface/tokens.mjs as the value source',
+  /shared\/papersurface\/tokens\.mjs/.test(cssSrc),
+  'CSS header missing reference to shared tokens module',
 )
 
 /* ─── 5b. data-pi-paper-* and data-pi-print-* hygiene in prototype ─ */
@@ -709,7 +745,7 @@ assert(
   'Prototype only imports React APIs from "react"',
   importLines
     .filter((line) => /from\s+['"]react['"]/.test(line))
-    .every((line) => /useEffect|useMemo|useState|ReactNode/.test(line)),
+    .every((line) => /useEffect|useMemo|useState|ReactNode|CSSProperties/.test(line)),
   'unexpected react import',
 )
 
