@@ -73,7 +73,14 @@
  *       passage's state to `in-basket`, and does NOT disturb the
  *       teacher's active question or evidence line.
  *   20. Cut C top bar: `[← 返回工作台]` button + tagline + `草稿卷 N`
- *       badge. The basket badge updates after step 19's add.
+ *       trigger button. Issue #20: the basket entry is now an
+ *       interactive `<button>` with `aria-haspopup="dialog"` and
+ *       `aria-expanded` toggling. Clicking it opens the basket preview
+ *       popover; clicking again / pressing Esc / clicking outside
+ *       closes it. Opening the popover does NOT change activeQuestionId
+ *       or the evidence line. The popover lists the items in the
+ *       basket, and on an empty basket renders a "草稿卷还是空的"
+ *       hint.
  *   21. Cut C return-to-workbench: clicking the back button
  *       - strips `view=paper-intelligence` and `paperId=…` from the
  *         URL via `history.replaceState` (no full page reload),
@@ -579,6 +586,130 @@ try {
   })
   step('18. every highlight mark carries a valid data-pi-evidence-kind', orphanMarks === 0)
 
+  /* ── 18b. Issue #20: empty-state basket popover BEFORE any add. ──
+   *
+   * The basket starts empty (fresh Playwright context, no
+   * localStorage). The top-bar button must therefore expose
+   * data-pi-basket-count="0" and clicking it must surface the
+   * empty-state popover. We also check that opening the popover does
+   * NOT mutate activeQuestionId or the evidence line state — that
+   * boundary is what makes the popover safe to use mid-讲题.
+   */
+  const basketTriggerInitial = await page.evaluate(() => {
+    const btn = document.querySelector('[data-pi-basket-toggle="true"]')
+    return {
+      tag: btn?.tagName ?? null,
+      hasPopup: btn?.getAttribute('aria-haspopup') ?? null,
+      ariaExpandedClosed: btn?.getAttribute('aria-expanded') ?? null,
+      basketCount: btn?.getAttribute('data-pi-basket-count') ?? null,
+      text: ((btn?.textContent || '').trim()),
+    }
+  })
+  step(
+    '18b. basket trigger is a real <button> (Issue #20: replaces static <span>)',
+    basketTriggerInitial.tag === 'BUTTON',
+    `tag=${basketTriggerInitial.tag}`,
+  )
+  step(
+    '18b. basket trigger declares aria-haspopup="dialog"',
+    basketTriggerInitial.hasPopup === 'dialog',
+    `aria-haspopup=${basketTriggerInitial.hasPopup}`,
+  )
+  step(
+    '18b. basket trigger starts with aria-expanded="false"',
+    basketTriggerInitial.ariaExpandedClosed === 'false',
+    `aria-expanded=${basketTriggerInitial.ariaExpandedClosed}`,
+  )
+  step(
+    '18b. basket count is 0 before any add',
+    basketTriggerInitial.basketCount === '0',
+    `data-pi-basket-count=${basketTriggerInitial.basketCount}`,
+  )
+  step(
+    '18b. basket trigger label includes "草稿卷"',
+    basketTriggerInitial.text.startsWith('草稿卷'),
+    `text="${basketTriggerInitial.text}"`,
+  )
+
+  // Snapshot baseline: opening the popover must not change these.
+  const beforeOpenEmpty = await page.evaluate(() => ({
+    activeId: document
+      .querySelector('.pi-question-card[aria-pressed="true"]')
+      ?.getAttribute('data-pi-question-id') ?? null,
+    pathCount: document.querySelectorAll('path.pi-line-path').length,
+  }))
+
+  await page.locator('[data-pi-basket-toggle="true"]').first().click()
+  await page.waitForSelector('[data-pi-basket-popover="true"]', { timeout: 1500 })
+
+  const emptyPopoverState = await page.evaluate(() => {
+    const popover = document.querySelector('[data-pi-basket-popover="true"]')
+    const btn = document.querySelector('[data-pi-basket-toggle="true"]')
+    return {
+      popoverPresent: Boolean(popover),
+      popoverEmpty: popover?.getAttribute('data-pi-basket-popover-empty') ?? null,
+      emptyHint: Boolean(popover?.querySelector('[data-pi-basket-empty-state="true"]')),
+      itemCount: popover?.querySelectorAll('[data-pi-basket-item-id]').length ?? 0,
+      ariaExpandedOpen: btn?.getAttribute('aria-expanded') ?? null,
+    }
+  })
+  step(
+    '18b. clicking trigger opens the basket popover (data-pi-basket-popover present)',
+    emptyPopoverState.popoverPresent,
+  )
+  step(
+    '18b. trigger aria-expanded flips to "true" while popover is open',
+    emptyPopoverState.ariaExpandedOpen === 'true',
+    `aria-expanded=${emptyPopoverState.ariaExpandedOpen}`,
+  )
+  step(
+    '18b. empty popover marks itself with data-pi-basket-popover-empty="true"',
+    emptyPopoverState.popoverEmpty === 'true',
+    `data-pi-basket-popover-empty=${emptyPopoverState.popoverEmpty}`,
+  )
+  step(
+    '18b. empty popover renders the empty-state hint block',
+    emptyPopoverState.emptyHint,
+  )
+  step(
+    '18b. empty popover renders zero item rows',
+    emptyPopoverState.itemCount === 0,
+    `itemCount=${emptyPopoverState.itemCount}`,
+  )
+
+  const afterOpenEmpty = await page.evaluate(() => ({
+    activeId: document
+      .querySelector('.pi-question-card[aria-pressed="true"]')
+      ?.getAttribute('data-pi-question-id') ?? null,
+    pathCount: document.querySelectorAll('path.pi-line-path').length,
+  }))
+  step(
+    '18b. opening basket popover does not change activeQuestionId',
+    afterOpenEmpty.activeId === beforeOpenEmpty.activeId,
+    `before=${beforeOpenEmpty.activeId} after=${afterOpenEmpty.activeId}`,
+  )
+  step(
+    '18b. opening basket popover does not multiply / drop the evidence line',
+    afterOpenEmpty.pathCount === beforeOpenEmpty.pathCount,
+    `before=${beforeOpenEmpty.pathCount} after=${afterOpenEmpty.pathCount}`,
+  )
+
+  // Esc closes the popover and resets aria-expanded.
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(150)
+  const afterEsc = await page.evaluate(() => ({
+    popoverGone: !document.querySelector('[data-pi-basket-popover="true"]'),
+    ariaExpanded: document
+      .querySelector('[data-pi-basket-toggle="true"]')
+      ?.getAttribute('aria-expanded') ?? null,
+  }))
+  step('18b. Escape closes the basket popover', afterEsc.popoverGone)
+  step(
+    '18b. trigger aria-expanded returns to "false" after Esc',
+    afterEsc.ariaExpanded === 'false',
+    `aria-expanded=${afterEsc.ariaExpanded}`,
+  )
+
   /* ── 19. Cut B: passage-header basket action surface. ───────── */
   // Each of the 4 passages must surface a `.pi-passage-action` element
   // with a known `data-pi-add-state`. The default fixture+sample bank
@@ -654,18 +785,22 @@ try {
     `state=${afterAddState.firstActionState}`,
   )
 
-  /* ── 20. Cut C: top bar surfaces back button + tagline + basket badge. ── */
+  /* ── 20. Cut C top bar + Issue #20 basket preview entry. ───── */
   const topbarState = await page.evaluate(() => {
     const topbar = document.querySelector('.pi-topbar')
     const back = topbar?.querySelector('[data-pi-back-to-workbench="true"]')
     const tagline = topbar?.querySelector('.pi-topbar-tagline')
-    const basket = topbar?.querySelector('.pi-topbar-basket')
+    const basket = topbar?.querySelector('[data-pi-basket-toggle="true"]')
     return {
       topbarPresent: Boolean(topbar),
       backIsButton: back?.tagName === 'BUTTON',
       backText: (back?.textContent || '').trim(),
       tagline: (tagline?.textContent || '').trim(),
-      basketIsSpan: basket?.tagName === 'SPAN',
+      // Issue #20: the basket entry is now a real button (was a span).
+      basketIsButton: basket?.tagName === 'BUTTON',
+      basketHasPopup: basket?.getAttribute('aria-haspopup') ?? null,
+      basketAriaControls: basket?.getAttribute('aria-controls') ?? null,
+      basketAriaExpanded: basket?.getAttribute('aria-expanded') ?? null,
       basketText: (basket?.textContent || '').trim(),
       basketCountAttr: basket?.getAttribute('data-pi-basket-count'),
     }
@@ -687,20 +822,179 @@ try {
     `tagline="${topbarState.tagline}"`,
   )
   step(
-    '20. basket badge is a <span> (NOT a button → no drawer-open affordance)',
-    topbarState.basketIsSpan,
-    `tag=${topbarState.basketIsSpan}`,
+    '20. Issue #20: basket entry is a real <button> (replaces former <span>)',
+    topbarState.basketIsButton,
+    `tag=${topbarState.basketIsButton}`,
   )
   step(
-    '20. basket badge text starts with "草稿卷"',
+    '20. Issue #20: basket entry exposes aria-haspopup="dialog"',
+    topbarState.basketHasPopup === 'dialog',
+    `aria-haspopup=${topbarState.basketHasPopup}`,
+  )
+  step(
+    '20. Issue #20: basket entry exposes aria-controls pointing at the popover id',
+    topbarState.basketAriaControls === 'pi-basket-preview-popover',
+    `aria-controls=${topbarState.basketAriaControls}`,
+  )
+  step(
+    '20. Issue #20: basket entry currently reports aria-expanded="false" (popover closed)',
+    topbarState.basketAriaExpanded === 'false',
+    `aria-expanded=${topbarState.basketAriaExpanded}`,
+  )
+  step(
+    '20. basket entry text starts with "草稿卷"',
     topbarState.basketText.startsWith('草稿卷'),
     `text="${topbarState.basketText}"`,
   )
   // After step 19 added one passage, basketCount must be ≥ 1.
   step(
-    '20. basket badge data-pi-basket-count reflects the just-added passage (≥ 1)',
+    '20. basket entry data-pi-basket-count reflects the just-added passage (≥ 1)',
     Number(topbarState.basketCountAttr ?? '0') >= 1,
     `data-pi-basket-count=${topbarState.basketCountAttr}`,
+  )
+
+  /* ── 20a. Issue #20: opening the popover after step 19 lists the
+   *    just-added passage and does NOT touch the active question or
+   *    evidence line. ─────────────────────────────────────────── */
+  const beforeOpenPopulated = await page.evaluate(() => ({
+    activeId: document
+      .querySelector('.pi-question-card[aria-pressed="true"]')
+      ?.getAttribute('data-pi-question-id') ?? null,
+    activeEvidenceId: document
+      .querySelector('path.pi-line-path')
+      ?.getAttribute('data-pi-evidence-id') ?? null,
+    pathCount: document.querySelectorAll('path.pi-line-path').length,
+  }))
+
+  await page.locator('[data-pi-basket-toggle="true"]').first().click()
+  await page.waitForSelector('[data-pi-basket-popover="true"]', { timeout: 1500 })
+
+  const populatedPopover = await page.evaluate(() => {
+    const popover = document.querySelector('[data-pi-basket-popover="true"]')
+    const items = Array.from(
+      popover?.querySelectorAll('[data-pi-basket-item-id]') || [],
+    )
+    return {
+      popoverPresent: Boolean(popover),
+      popoverEmpty: popover?.getAttribute('data-pi-basket-popover-empty') ?? null,
+      itemCount: items.length,
+      firstItemSection:
+        items[0]
+          ?.querySelector('.pi-basket-preview-item-section')
+          ?.textContent?.trim() ?? null,
+      firstItemPassage:
+        items[0]
+          ?.querySelector('.pi-basket-preview-item-passage')
+          ?.textContent?.trim() ?? null,
+      firstItemMeta:
+        items[0]
+          ?.querySelector('.pi-basket-preview-item-meta')
+          ?.textContent?.trim() ?? null,
+    }
+  })
+  step(
+    '20a. Issue #20: popover is rendered after click on populated basket',
+    populatedPopover.popoverPresent,
+  )
+  step(
+    '20a. Issue #20: popover marks itself non-empty (data-pi-basket-popover-empty="false")',
+    populatedPopover.popoverEmpty === 'false',
+    `data-pi-basket-popover-empty=${populatedPopover.popoverEmpty}`,
+  )
+  step(
+    '20a. Issue #20: popover lists ≥ 1 item rows for the populated basket',
+    populatedPopover.itemCount >= 1,
+    `itemCount=${populatedPopover.itemCount}`,
+  )
+  step(
+    '20a. Issue #20: first popover row carries a paper section badge',
+    typeof populatedPopover.firstItemSection === 'string' &&
+      populatedPopover.firstItemSection.length > 0,
+    `firstItemSection="${populatedPopover.firstItemSection}"`,
+  )
+  step(
+    '20a. Issue #20: first popover row carries a passage title',
+    typeof populatedPopover.firstItemPassage === 'string' &&
+      populatedPopover.firstItemPassage.length > 0,
+    `firstItemPassage="${populatedPopover.firstItemPassage}"`,
+  )
+  step(
+    '20a. Issue #20: first popover row meta includes "题" (question count) and "分" (score)',
+    typeof populatedPopover.firstItemMeta === 'string' &&
+      populatedPopover.firstItemMeta.includes('题') &&
+      populatedPopover.firstItemMeta.includes('分'),
+    `firstItemMeta="${populatedPopover.firstItemMeta}"`,
+  )
+
+  // Cross-cutting boundary: opening the popover must not disturb the
+  // teacher's active question / evidence line. This is the contract
+  // that keeps the popover safe to use mid-lesson.
+  const afterOpenPopulated = await page.evaluate(() => ({
+    activeId: document
+      .querySelector('.pi-question-card[aria-pressed="true"]')
+      ?.getAttribute('data-pi-question-id') ?? null,
+    activeEvidenceId: document
+      .querySelector('path.pi-line-path')
+      ?.getAttribute('data-pi-evidence-id') ?? null,
+    pathCount: document.querySelectorAll('path.pi-line-path').length,
+  }))
+  step(
+    '20a. Issue #20: opening basket popover does not change activeQuestionId',
+    afterOpenPopulated.activeId === beforeOpenPopulated.activeId,
+    `before=${beforeOpenPopulated.activeId} after=${afterOpenPopulated.activeId}`,
+  )
+  step(
+    '20a. Issue #20: opening basket popover does not change activeEvidenceId',
+    afterOpenPopulated.activeEvidenceId === beforeOpenPopulated.activeEvidenceId,
+    `before=${beforeOpenPopulated.activeEvidenceId} after=${afterOpenPopulated.activeEvidenceId}`,
+  )
+  step(
+    '20a. Issue #20: opening basket popover does not multiply / drop evidence line',
+    afterOpenPopulated.pathCount === beforeOpenPopulated.pathCount,
+    `before=${beforeOpenPopulated.pathCount} after=${afterOpenPopulated.pathCount}`,
+  )
+
+  /* ── 20b. Issue #20: clicking the trigger again toggles the
+   *    popover closed; aria-expanded flips back to "false". ───── */
+  await page.locator('[data-pi-basket-toggle="true"]').first().click()
+  await page.waitForTimeout(150)
+  const afterReClick = await page.evaluate(() => ({
+    popoverGone: !document.querySelector('[data-pi-basket-popover="true"]'),
+    ariaExpanded: document
+      .querySelector('[data-pi-basket-toggle="true"]')
+      ?.getAttribute('aria-expanded') ?? null,
+  }))
+  step(
+    '20b. Issue #20: re-clicking the basket trigger closes the popover',
+    afterReClick.popoverGone,
+  )
+  step(
+    '20b. Issue #20: trigger aria-expanded returns to "false" after re-click',
+    afterReClick.ariaExpanded === 'false',
+    `aria-expanded=${afterReClick.ariaExpanded}`,
+  )
+
+  /* ── 20c. Issue #20: outside-click closes the popover. ─────── */
+  await page.locator('[data-pi-basket-toggle="true"]').first().click()
+  await page.waitForSelector('[data-pi-basket-popover="true"]', { timeout: 1500 })
+  // Click somewhere clearly neutral. The report header is a safe target —
+  // it does not own a click handler that would change PI state.
+  await page.locator('.pi-header h1').first().click()
+  await page.waitForTimeout(150)
+  const afterOutsideClick = await page.evaluate(() => ({
+    popoverGone: !document.querySelector('[data-pi-basket-popover="true"]'),
+    ariaExpanded: document
+      .querySelector('[data-pi-basket-toggle="true"]')
+      ?.getAttribute('aria-expanded') ?? null,
+  }))
+  step(
+    '20c. Issue #20: clicking outside closes the basket popover',
+    afterOutsideClick.popoverGone,
+  )
+  step(
+    '20c. Issue #20: trigger aria-expanded returns to "false" after outside click',
+    afterOutsideClick.ariaExpanded === 'false',
+    `aria-expanded=${afterOutsideClick.ariaExpanded}`,
   )
 
   /* ── 21. Cut C: return-to-workbench preserves URL via replaceState. ── */
