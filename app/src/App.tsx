@@ -108,6 +108,10 @@ import {
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
+// Issue #21-A spike: isolated print-surface prototype. Activated only by
+// `?view=paper-intelligence&surface=print`. Default PI route is
+// unchanged when the surface field is absent.
+import { PaperPrintSurfacePrototype } from './features/paper-intelligence/print/PaperPrintSurfacePrototype'
 
 type EntryForm = {
   sourceType: SourceType
@@ -3284,6 +3288,20 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   // ─── Paper Intelligence route rendering ───
   if (currentPiRoute.kind === 'paper-intelligence') {
+    // Issue #21-A spike: when the URL carries `&surface=print`, render
+    // the isolated print-surface prototype instead of the default PI
+    // preview. Default surface (no `surface=` param, or any unknown
+    // value) keeps the existing render path untouched. The route parser
+    // normalizes unknown values to `'default'`, so this branch is the
+    // only place the spike is reachable from.
+    if (currentPiRoute.surface === 'print') {
+      return (
+        <PaperPrintSurfacePrototype
+          paperId={currentPiRoute.paperId}
+          onBackToWorkbench={piOnBackToWorkbench}
+        />
+      )
+    }
     return (
       <PaperIntelligencePreview
         paperId={currentPiRoute.paperId}
