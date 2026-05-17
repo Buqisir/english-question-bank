@@ -108,10 +108,13 @@ import {
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
-// Issue #21-A spike: isolated print-surface prototype. Activated only by
-// `?view=paper-intelligence&surface=print`. Default PI route is
-// unchanged when the surface field is absent.
-import { PaperPrintSurfacePrototype } from './features/paper-intelligence/print/PaperPrintSurfacePrototype'
+// Issue #21-A spike (Issue #30 gate 1: renamed from "print" to "paper"):
+// isolated paper-surface prototype. Activated only by
+// `?view=paper-intelligence&surface=paper`. Default PI route is
+// unchanged when the surface field is absent. There is no compat
+// branch for the legacy `surface=print` value — it falls back to
+// default like any other unknown surface.
+import { PaperSurfacePrototype } from './features/paper-intelligence/paperSurfacePrototype/PaperSurfacePrototype'
 
 type EntryForm = {
   sourceType: SourceType
@@ -3288,15 +3291,16 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   // ─── Paper Intelligence route rendering ───
   if (currentPiRoute.kind === 'paper-intelligence') {
-    // Issue #21-A spike: when the URL carries `&surface=print`, render
-    // the isolated print-surface prototype instead of the default PI
-    // preview. Default surface (no `surface=` param, or any unknown
-    // value) keeps the existing render path untouched. The route parser
-    // normalizes unknown values to `'default'`, so this branch is the
-    // only place the spike is reachable from.
-    if (currentPiRoute.surface === 'print') {
+    // Issue #21-A spike (Issue #30 gate 1): when the URL carries
+    // `&surface=paper`, render the isolated paper-surface prototype
+    // instead of the default PI preview. Default surface (no
+    // `surface=` param, or any unknown value including the retired
+    // `surface=print`) keeps the existing render path untouched. The
+    // route parser normalizes unknown values to `'default'`, so this
+    // branch is the only place the spike is reachable from.
+    if (currentPiRoute.surface === 'paper') {
       return (
-        <PaperPrintSurfacePrototype
+        <PaperSurfacePrototype
           paperId={currentPiRoute.paperId}
           onBackToWorkbench={piOnBackToWorkbench}
         />

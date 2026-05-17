@@ -1,5 +1,36 @@
 /*
- * paperPrintSurface.css — Issue #21-A spike print-surface prototype.
+ * paperSurfacePrototype.css — Issue #21-A spike paper-surface prototype.
+ *
+ * ---------------------------------------------------------------------
+ * CSS strategy note (Issue #30 gate 2 — DO NOT DELETE BEFORE READING)
+ * ---------------------------------------------------------------------
+ *
+ *   - This CSS is prototype-only visual reference. It validates the
+ *     宋体 / Times New Roman feel and proportional layout of an
+ *     on-screen paper surface. It is wired to the prototype mounted at
+ *     `?surface=paper` and to nothing else.
+ *
+ *   - This CSS is NOT yet shared with `server/print-renderer.mjs`.
+ *     The print renderer keeps its own emit logic and its own CSS path,
+ *     unchanged. The two are deliberately not aligned in this cut.
+ *
+ *   - Before any production PaperSurface module promotes this CSS, the
+ *     team MUST resolve Issue #30 by choosing one of:
+ *       1) Extract shared paper-surface tokens / styles between the
+ *          React surface and `server/print-renderer.mjs` (and replace
+ *          this file with consumers of the shared module), or
+ *       2) Discard this prototype CSS and rebuild B-level styles from
+ *          renderer-aligned styles instead.
+ *
+ *   - Do NOT promote this CSS to production without resolving Issue #30.
+ *     Do NOT add a third "shared by accident" surface that depends on
+ *     these selectors.
+ *
+ * Naming note (Issue #30 gate 1):
+ *   The prefixes are `pi-paper-*`, `--pi-paper-*`, `data-pi-paper-*`.
+ *   The previous `pi-print-*` / `--pi-print-*` / `data-pi-print-*`
+ *   names were A1-only placeholders and have been retired. There is
+ *   no compat shim — anything still referring to `pi-print-*` is dead.
  *
  * Goals:
  *   - Real-paper feel for 广东一模 / 高考真题 阅读理解第一节. No card
@@ -16,7 +47,9 @@
  *   - True print stylesheets / @page / page-break tuning. Future work.
  *   - Header / footer running titles. Future work.
  *   - Evidence highlights / cross-column lines / popovers. Reserved
- *     anchors only (data-pi-evidence-id is NOT painted by this spike).
+ *     anchors only — `.pi-paper-evidence-anchor` is a NEUTRAL hook
+ *     for the future evidence painter; this CSS deliberately does NOT
+ *     paint a highlight on it.
  */
 
 /* ─── Font stack ─────────────────────────────────────────────────────
@@ -29,18 +62,18 @@
  * Roman".
  */
 
-.pi-print-surface {
-  --pi-print-font-stack:
+.pi-paper-surface {
+  --pi-paper-font-stack:
     "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
-  --pi-print-page-width: 794px; /* ≈ A4 @ 96dpi */
-  --pi-print-page-padding: 56px;
-  --pi-print-ink: #111;
-  --pi-print-muted: #555;
-  --pi-print-rule: #d9d9d9;
-  --pi-print-active-rail: #d4ad60; /* warm gold; deliberately quiet */
+  --pi-paper-page-width: 794px; /* ≈ A4 @ 96dpi */
+  --pi-paper-page-padding: 56px;
+  --pi-paper-ink: #111;
+  --pi-paper-muted: #555;
+  --pi-paper-rule: #d9d9d9;
+  --pi-paper-active-rail: #d4ad60; /* warm gold; deliberately quiet */
 
-  font-family: var(--pi-print-font-stack);
-  color: var(--pi-print-ink);
+  font-family: var(--pi-paper-font-stack);
+  color: var(--pi-paper-ink);
   background: #ececec; /* desk surface tone, not white, so the page reads as a sheet */
   min-height: 100vh;
   display: flex;
@@ -49,7 +82,7 @@
 
 /* ─── Top bar ───────────────────────────────────────────────────── */
 
-.pi-print-topbar {
+.pi-paper-topbar {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -60,7 +93,7 @@
   font-size: 13px;
 }
 
-.pi-print-topbar-back {
+.pi-paper-topbar-back {
   background: transparent;
   border: 1px solid #6a6a6a;
   border-radius: 4px;
@@ -70,18 +103,18 @@
   font: inherit;
 }
 
-.pi-print-topbar-back:hover {
+.pi-paper-topbar-back:hover {
   background: #2a2a2a;
 }
 
-.pi-print-topbar-title {
+.pi-paper-topbar-title {
   font-weight: 500;
   letter-spacing: 0.04em;
 }
 
 /* ─── Spike notice ──────────────────────────────────────────────── */
 
-.pi-print-spike-notice {
+.pi-paper-spike-notice {
   background: #fff7d6;
   color: #6b4f00;
   border-bottom: 1px solid #e6cf6f;
@@ -93,7 +126,7 @@
 
 /* ─── Layout (page + sidecar) ───────────────────────────────────── */
 
-.pi-print-layout {
+.pi-paper-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
   gap: 24px;
@@ -106,19 +139,19 @@
 }
 
 @media (max-width: 1024px) {
-  .pi-print-layout {
+  .pi-paper-layout {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
 /* ─── The paper sheet ───────────────────────────────────────────── */
 
-.pi-print-page {
+.pi-paper-page {
   background: #fff;
-  width: var(--pi-print-page-width);
+  width: var(--pi-paper-page-width);
   max-width: 100%;
   margin: 0 auto;
-  padding: var(--pi-print-page-padding);
+  padding: var(--pi-paper-page-padding);
   box-sizing: border-box;
   box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
   /*
@@ -128,55 +161,55 @@
    */
 }
 
-.pi-print-error,
-.pi-print-page * {
-  font-family: var(--pi-print-font-stack);
+.pi-paper-error,
+.pi-paper-page * {
+  font-family: var(--pi-paper-font-stack);
 }
 
 /* ─── Header ───────────────────────────────────────────────────── */
 
-.pi-print-header {
+.pi-paper-header {
   text-align: center;
-  border-bottom: 2px solid var(--pi-print-ink);
+  border-bottom: 2px solid var(--pi-paper-ink);
   padding-bottom: 12px;
   margin-bottom: 18px;
 }
 
-.pi-print-header-title {
+.pi-paper-header-title {
   font-size: 22px;
   font-weight: 700;
   margin: 0 0 6px;
   letter-spacing: 0.02em;
 }
 
-.pi-print-header-meta {
+.pi-paper-header-meta {
   font-size: 13px;
-  color: var(--pi-print-muted);
+  color: var(--pi-paper-muted);
   display: inline-flex;
   gap: 18px;
 }
 
 /* ─── Section instruction ───────────────────────────────────────── */
 
-.pi-print-instruction {
+.pi-paper-instruction {
   margin-bottom: 18px;
 }
 
-.pi-print-instruction-heading {
+.pi-paper-instruction-heading {
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 4px;
   text-align: center;
 }
 
-.pi-print-instruction-subheading {
+.pi-paper-instruction-subheading {
   font-size: 14px;
   font-weight: 700;
   margin: 0 0 6px;
   text-align: center;
 }
 
-.pi-print-instruction-body {
+.pi-paper-instruction-body {
   font-size: 14px;
   margin: 0;
   text-indent: 2em; /* 中文段落首行缩进 */
@@ -184,23 +217,23 @@
 
 /* ─── Passage list (A → B → C → D continuous) ───────────────────── */
 
-.pi-print-passages {
+.pi-paper-passages {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.pi-print-passage {
+.pi-paper-passage {
   margin-bottom: 26px;
   padding-bottom: 18px;
-  border-bottom: 1px dashed var(--pi-print-rule);
+  border-bottom: 1px dashed var(--pi-paper-rule);
 }
 
-.pi-print-passage:last-child {
+.pi-paper-passage:last-child {
   border-bottom: none;
 }
 
-.pi-print-passage-marker {
+.pi-paper-passage-marker {
   font-size: 15px;
   font-weight: 700;
   margin: 0 0 8px;
@@ -209,48 +242,84 @@
   align-items: baseline;
 }
 
-.pi-print-passage-letter {
+.pi-paper-passage-letter {
   font-size: 16px;
   font-weight: 700;
 }
 
-.pi-print-passage-title {
+.pi-paper-passage-title {
   font-style: italic;
   font-weight: 700;
 }
 
-.pi-print-passage-body {
+.pi-paper-passage-body {
   font-size: 14.5px;
   line-height: 1.85;
   text-align: justify;
   hyphens: auto;
 }
 
-.pi-print-passage-paragraph {
+.pi-paper-passage-paragraph {
   margin: 0 0 8px;
   text-indent: 2em;
 }
 
+/* ─── Evidence anchors (Issue #30 gate 3 — neutral, no highlight) ─
+ *
+ * Anchors emitted by the prototype carry `data-pi-evidence-id` /
+ * `data-pi-evidence-kind` so future evidence wiring has stable hooks.
+ * They are visually invisible by design — no background, no underline,
+ * no color change. Inheriting from the surrounding text is the whole
+ * point: the prototype must not paint highlights yet (that is B-level
+ * work).
+ *
+ * Do NOT add a `:hover` style or an `[data-pi-evidence-id]` paint here
+ * without revisiting Issue #30 — neutrality is part of the contract.
+ */
+
+.pi-paper-evidence-anchor {
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  /*
+   * <mark> ships with a default yellow background in user-agent CSS;
+   * we have to neutralize it explicitly. Without this reset, every
+   * support-quote span would light up the page.
+   */
+}
+
+.pi-paper-evidence-placeholder {
+  /*
+   * Hidden placeholder anchor for questions whose support quote did
+   * not resolve verbatim. Zero-size, no flow, but still a real DOM
+   * element so future selectors can find it.
+   */
+  display: inline-block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 /* ─── Questions ─────────────────────────────────────────────────── */
 
-.pi-print-question-list {
+.pi-paper-question-list {
   list-style: none;
   margin: 14px 0 0;
   padding: 0;
 }
 
-.pi-print-question {
+.pi-paper-question {
   margin-bottom: 14px;
   padding-left: 6px;
   border-left: 2px solid transparent;
   transition: border-color 80ms ease;
 }
 
-.pi-print-question--active {
-  border-left-color: var(--pi-print-active-rail);
+.pi-paper-question--active {
+  border-left-color: var(--pi-paper-active-rail);
 }
 
-.pi-print-question-stem-button {
+.pi-paper-question-stem-button {
   display: flex;
   gap: 8px;
   align-items: baseline;
@@ -265,22 +334,22 @@
   color: inherit;
 }
 
-.pi-print-question-stem-button:focus-visible {
-  outline: 2px solid var(--pi-print-active-rail);
+.pi-paper-question-stem-button:focus-visible {
+  outline: 2px solid var(--pi-paper-active-rail);
   outline-offset: 2px;
 }
 
-.pi-print-question-no {
+.pi-paper-question-no {
   font-weight: 700;
   font-size: 14.5px;
 }
 
-.pi-print-question-stem {
+.pi-paper-question-stem {
   font-size: 14.5px;
   line-height: 1.7;
 }
 
-.pi-print-option-list {
+.pi-paper-option-list {
   list-style: none;
   margin: 6px 0 0;
   padding: 0 0 0 22px;
@@ -290,12 +359,12 @@
 }
 
 @media (max-width: 700px) {
-  .pi-print-option-list {
+  .pi-paper-option-list {
     grid-template-columns: 1fr;
   }
 }
 
-.pi-print-option {
+.pi-paper-option {
   display: flex;
   gap: 6px;
   align-items: baseline;
@@ -303,18 +372,18 @@
   line-height: 1.6;
 }
 
-.pi-print-option-label {
+.pi-paper-option-label {
   font-weight: 700;
 }
 
 /* ─── Sidecar (minimum verification panel) ─────────────────────── */
 
-.pi-print-sidecar {
+.pi-paper-sidecar {
   position: sticky;
   top: 24px;
   align-self: start;
   background: #fff;
-  border: 1px solid var(--pi-print-rule);
+  border: 1px solid var(--pi-paper-rule);
   padding: 16px;
   font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 13px;
@@ -327,50 +396,50 @@
    */
 }
 
-.pi-print-sidecar-empty {
-  color: var(--pi-print-muted);
+.pi-paper-sidecar-empty {
+  color: var(--pi-paper-muted);
 }
 
-.pi-print-sidecar-hint {
+.pi-paper-sidecar-hint {
   font-size: 12px;
   margin-top: 8px;
 }
 
-.pi-print-sidecar-meta {
+.pi-paper-sidecar-meta {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: var(--pi-print-muted);
+  color: var(--pi-paper-muted);
   margin-bottom: 6px;
 }
 
-.pi-print-sidecar-stem {
-  font-family: var(--pi-print-font-stack);
+.pi-paper-sidecar-stem {
+  font-family: var(--pi-paper-font-stack);
   font-size: 14px;
   margin: 0 0 8px;
 }
 
-.pi-print-sidecar-options {
+.pi-paper-sidecar-options {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: var(--pi-print-font-stack);
+  font-family: var(--pi-paper-font-stack);
 }
 
-.pi-print-sidecar-option {
+.pi-paper-sidecar-option {
   display: flex;
   gap: 6px;
   margin-bottom: 4px;
 }
 
-.pi-print-sidecar-option-label {
+.pi-paper-sidecar-option-label {
   font-weight: 700;
 }
 
 /* ─── Loading / error fallback ─────────────────────────────────── */
 
-.pi-print-error {
+.pi-paper-error {
   padding: 24px;
   text-align: center;
-  color: var(--pi-print-muted);
+  color: var(--pi-paper-muted);
 }
