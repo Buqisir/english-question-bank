@@ -1,0 +1,376 @@
+/*
+ * paperPrintSurface.css — Issue #21-A spike print-surface prototype.
+ *
+ * Goals:
+ *   - Real-paper feel for 广东一模 / 高考真题 阅读理解第一节. No card
+ *     chrome, no dashboard, no marketing hero, no decorative gradients.
+ *   - Hard font requirement: 中文宋体 / 英文 Times New Roman, applied
+ *     via a single shared stack so a mixed Chinese-English line falls
+ *     back to the right glyphs.
+ *   - A4-ish page width (≈ 794px @ 96dpi for portrait A4 minus margins).
+ *     We do NOT chase real pagination in the spike, but we cap the
+ *     content column so a teacher can immediately see the print-target
+ *     proportions.
+ *
+ * Out of scope:
+ *   - True print stylesheets / @page / page-break tuning. Future work.
+ *   - Header / footer running titles. Future work.
+ *   - Evidence highlights / cross-column lines / popovers. Reserved
+ *     anchors only (data-pi-evidence-id is NOT painted by this spike).
+ */
+
+/* ─── Font stack ─────────────────────────────────────────────────────
+ *
+ * The CSS variable lets a future page swap fonts without re-touching
+ * every selector. The order matters: Western glyphs match Times New
+ * Roman first, then CJK glyphs match the宋体 family chain. `serif`
+ * is the final fallback. We intentionally avoid Noto Serif CJK so the
+ * spike honors the explicit instruction "中文：宋体 / 英文：Times New
+ * Roman".
+ */
+
+.pi-print-surface {
+  --pi-print-font-stack:
+    "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+  --pi-print-page-width: 794px; /* ≈ A4 @ 96dpi */
+  --pi-print-page-padding: 56px;
+  --pi-print-ink: #111;
+  --pi-print-muted: #555;
+  --pi-print-rule: #d9d9d9;
+  --pi-print-active-rail: #d4ad60; /* warm gold; deliberately quiet */
+
+  font-family: var(--pi-print-font-stack);
+  color: var(--pi-print-ink);
+  background: #ececec; /* desk surface tone, not white, so the page reads as a sheet */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Top bar ───────────────────────────────────────────────────── */
+
+.pi-print-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: #1f1f1f;
+  color: #f5f5f5;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+}
+
+.pi-print-topbar-back {
+  background: transparent;
+  border: 1px solid #6a6a6a;
+  border-radius: 4px;
+  color: #f5f5f5;
+  padding: 4px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.pi-print-topbar-back:hover {
+  background: #2a2a2a;
+}
+
+.pi-print-topbar-title {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Spike notice ──────────────────────────────────────────────── */
+
+.pi-print-spike-notice {
+  background: #fff7d6;
+  color: #6b4f00;
+  border-bottom: 1px solid #e6cf6f;
+  padding: 6px 16px;
+  text-align: center;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+}
+
+/* ─── Layout (page + sidecar) ───────────────────────────────────── */
+
+.pi-print-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  padding: 24px;
+  align-items: start;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .pi-print-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ─── The paper sheet ───────────────────────────────────────────── */
+
+.pi-print-page {
+  background: #fff;
+  width: var(--pi-print-page-width);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--pi-print-page-padding);
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
+  /*
+   * No border-radius. Real exam papers do not have rounded corners.
+   * The slight shadow exists only to anchor the sheet on the desk
+   * background; it is intentionally muted.
+   */
+}
+
+.pi-print-error,
+.pi-print-page * {
+  font-family: var(--pi-print-font-stack);
+}
+
+/* ─── Header ───────────────────────────────────────────────────── */
+
+.pi-print-header {
+  text-align: center;
+  border-bottom: 2px solid var(--pi-print-ink);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.pi-print-header-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: 0.02em;
+}
+
+.pi-print-header-meta {
+  font-size: 13px;
+  color: var(--pi-print-muted);
+  display: inline-flex;
+  gap: 18px;
+}
+
+/* ─── Section instruction ───────────────────────────────────────── */
+
+.pi-print-instruction {
+  margin-bottom: 18px;
+}
+
+.pi-print-instruction-heading {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  text-align: center;
+}
+
+.pi-print-instruction-subheading {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.pi-print-instruction-body {
+  font-size: 14px;
+  margin: 0;
+  text-indent: 2em; /* 中文段落首行缩进 */
+}
+
+/* ─── Passage list (A → B → C → D continuous) ───────────────────── */
+
+.pi-print-passages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pi-print-passage {
+  margin-bottom: 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--pi-print-rule);
+}
+
+.pi-print-passage:last-child {
+  border-bottom: none;
+}
+
+.pi-print-passage-marker {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.pi-print-passage-letter {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.pi-print-passage-title {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.pi-print-passage-body {
+  font-size: 14.5px;
+  line-height: 1.85;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.pi-print-passage-paragraph {
+  margin: 0 0 8px;
+  text-indent: 2em;
+}
+
+/* ─── Questions ─────────────────────────────────────────────────── */
+
+.pi-print-question-list {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+.pi-print-question {
+  margin-bottom: 14px;
+  padding-left: 6px;
+  border-left: 2px solid transparent;
+  transition: border-color 80ms ease;
+}
+
+.pi-print-question--active {
+  border-left-color: var(--pi-print-active-rail);
+}
+
+.pi-print-question-stem-button {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.pi-print-question-stem-button:focus-visible {
+  outline: 2px solid var(--pi-print-active-rail);
+  outline-offset: 2px;
+}
+
+.pi-print-question-no {
+  font-weight: 700;
+  font-size: 14.5px;
+}
+
+.pi-print-question-stem {
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.pi-print-option-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0 0 0 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 18px;
+}
+
+@media (max-width: 700px) {
+  .pi-print-option-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pi-print-option {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.pi-print-option-label {
+  font-weight: 700;
+}
+
+/* ─── Sidecar (minimum verification panel) ─────────────────────── */
+
+.pi-print-sidecar {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  background: #fff;
+  border: 1px solid var(--pi-print-rule);
+  padding: 16px;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  /*
+   * Sidecar is intentionally not "card-like" in the marketing sense:
+   * no shadow, no rounded corners, no gradient. It is a margin note,
+   * not a panel. It exists to prove the click → activeQuestionId loop
+   * works; production work goes into a real Question Analysis surface.
+   */
+}
+
+.pi-print-sidecar-empty {
+  color: var(--pi-print-muted);
+}
+
+.pi-print-sidecar-hint {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.pi-print-sidecar-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--pi-print-muted);
+  margin-bottom: 6px;
+}
+
+.pi-print-sidecar-stem {
+  font-family: var(--pi-print-font-stack);
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+.pi-print-sidecar-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--pi-print-font-stack);
+}
+
+.pi-print-sidecar-option {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.pi-print-sidecar-option-label {
+  font-weight: 700;
+}
+
+/* ─── Loading / error fallback ─────────────────────────────────── */
+
+.pi-print-error {
+  padding: 24px;
+  text-align: center;
+  color: var(--pi-print-muted);
+}
