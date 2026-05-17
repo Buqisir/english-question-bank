@@ -119,8 +119,8 @@ export function PaperIntelligencePreview({
   basketIds,
   availableQuestionGroupIds,
   onAddQuestionGroup,
-  basketCount: _basketCount,
-  onBackToWorkbench: _onBackToWorkbench,
+  basketCount,
+  onBackToWorkbench,
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
   const [bodies, setBodies] = useState<Record<string, string>>({})
@@ -279,6 +279,10 @@ export function PaperIntelligencePreview({
   if (loading) {
     return (
       <div className="pi-view">
+        <PaperIntelligenceTopBar
+          basketCount={basketCount}
+          onBackToWorkbench={onBackToWorkbench}
+        />
         <div className="pi-error">
           <p>加载中…</p>
         </div>
@@ -289,6 +293,10 @@ export function PaperIntelligencePreview({
   if (error || !report || !view) {
     return (
       <div className="pi-view">
+        <PaperIntelligenceTopBar
+          basketCount={basketCount}
+          onBackToWorkbench={onBackToWorkbench}
+        />
         <div className="pi-error">
           <h2>未找到 Paper Intelligence 报告</h2>
           <p>{error || '报告数据为空。'}</p>
@@ -361,6 +369,10 @@ export function PaperIntelligencePreview({
 
   return (
     <div className="pi-view">
+      <PaperIntelligenceTopBar
+        basketCount={basketCount}
+        onBackToWorkbench={onBackToWorkbench}
+      />
       <ReportHeader report={report} />
       <div className="pi-shell" ref={shellRef}>
         <div className="pi-main" ref={mainScrollerRef}>
@@ -421,6 +433,61 @@ export function PaperIntelligencePreview({
           {toastMessage}
         </div>
       )}
+    </div>
+  )
+}
+
+/* ─── Top bar (Cut C) ─── */
+
+/**
+ * Lightweight top bar that sits above the report header.
+ *
+ * Surface (Cut C contract):
+ *   [← 返回工作台]   一张卷，10 分钟看懂讲哪里   草稿卷 N
+ *
+ * - The "返回工作台" button is a real `<button>` so it inherits keyboard
+ *   focus / `enter` / `space` semantics. Clicking it invokes the
+ *   `onBackToWorkbench` callback supplied by App; App is responsible for
+ *   the `history.replaceState` URL rewrite + flipping `currentPiRoute` to
+ *   `{ kind: 'none' }`. This component never touches `window.location` or
+ *   `history` itself — that keeps the PI feature directory free of
+ *   workbench-internal coupling.
+ * - The "草稿卷 N" badge displays the live basket count. It is a plain
+ *   `<span>` (NOT a button) — Cut C explicitly forbids opening the basket
+ *   drawer from this surface; it's purely informational.
+ * - The tagline in the middle is decorative and never wraps onto its own
+ *   line (the tag column flexes; on narrow viewports it clips with an
+ *   ellipsis instead of pushing the badge below).
+ */
+function PaperIntelligenceTopBar({
+  basketCount,
+  onBackToWorkbench,
+}: {
+  basketCount: number
+  onBackToWorkbench: () => void
+}): ReactNode {
+  return (
+    <div className="pi-topbar" role="navigation" aria-label="Paper Intelligence top bar">
+      <button
+        type="button"
+        className="pi-topbar-back"
+        onClick={onBackToWorkbench}
+        aria-label="返回工作台"
+        data-pi-back-to-workbench="true"
+      >
+        <span aria-hidden="true" className="pi-topbar-back-arrow">
+          ←
+        </span>
+        返回工作台
+      </button>
+      <span className="pi-topbar-tagline">一张卷，10 分钟看懂讲哪里</span>
+      <span
+        className="pi-topbar-basket"
+        aria-label={`草稿卷 ${basketCount} 题`}
+        data-pi-basket-count={basketCount}
+      >
+        草稿卷 {basketCount}
+      </span>
     </div>
   )
 }

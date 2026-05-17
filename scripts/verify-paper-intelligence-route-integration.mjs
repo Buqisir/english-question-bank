@@ -121,14 +121,14 @@ assert(
 )
 
 assert(
-  'App.tsx checks piRoute.kind === paper-intelligence',
-  appSrc.includes("piRoute.kind === 'paper-intelligence'"),
-  'App.tsx does not check piRoute.kind',
+  'App.tsx checks currentPiRoute.kind === paper-intelligence',
+  appSrc.includes("currentPiRoute.kind === 'paper-intelligence'"),
+  'App.tsx does not check currentPiRoute.kind',
 )
 
 assert(
-  'App.tsx passes paperId prop to PaperIntelligencePreview',
-  appSrc.includes('paperId={piRoute.paperId}'),
+  'App.tsx passes paperId prop (from currentPiRoute) to PaperIntelligencePreview',
+  appSrc.includes('paperId={currentPiRoute.paperId}'),
   'Missing paperId prop pass-through',
 )
 
@@ -286,9 +286,11 @@ assert(
   'PassageReport missing questionGroupId',
 )
 
-// ─── Test 8: PI-route fetch-effect guards (Cut B P0 watch) ───
+// ─── Test 8: PI-route fetch-effect guards (covered by Test 12 with
+// currentPiRoute.kind in Cut C; we keep the AST helper definition here
+// so Test 12 can call it) ───
 
-console.log('\nTest 8: App fetch effects guard against piRoute.kind === paper-intelligence')
+console.log('\nTest 8: App still has the workbench fetch effects (helper sanity check)')
 
 /**
  * Extract every `useEffect((...) => { ... }, [deps])` block from App.tsx.
@@ -346,27 +348,9 @@ assert(
   `found ${workbenchFetchEffects.length}`,
 )
 
-for (const token of workbenchFetchTokens) {
-  const owners = workbenchFetchEffects.filter((effect) => effect.includes(token))
-  assert(
-    `${token} guarded by piRoute.kind early return`,
-    owners.length > 0 &&
-      owners.every((effect) =>
-        /if\s*\(\s*piRoute\.kind\s*===\s*['"]paper-intelligence['"]\s*\)\s*return/.test(effect),
-      ),
-    'missing early-return guard',
-  )
-  assert(
-    `${token} effect's dependency array includes piRoute.kind`,
-    owners.length > 0 &&
-      owners.every((effect) => {
-        // The dep array is the last `[ ... ]` in the slice.
-        const m = effect.match(/\[([^\]]*)\]\s*\)\s*$/)
-        return m !== null && m[1].includes('piRoute.kind')
-      }),
-    'piRoute.kind missing from dep array',
-  )
-}
+// (Detailed Cut C guard / dep-array assertions live in Test 12 below where
+// they read `currentPiRoute.kind`. The Cut B-era `piRoute.kind`-only loops
+// have been removed.)
 
 // ─── Test 9: PI feature-directory isolation ───
 
@@ -492,8 +476,279 @@ assert(
 
 assert(
   'piOnAddQuestionGroup body calls a real basket-add path (paperDraft.addGroups or addGroupsToBasket)',
-  /paperDraft\.addGroups\(/.test(piAddCallback) || /addGroupsToBasket\(/.test(piAddCallback),
+  /paperDraft\.addGroups\(/.test(piAddCallback) ||
+    /paperDraftAddGroups\(/.test(piAddCallback) ||
+    /addGroupsToBasket\(/.test(piAddCallback),
   'no basket-add call in handler body',
+)
+
+// ─── Test 11: Cut C P0 watch — piOnAddQuestionGroup deps are specific ───
+//
+// Reviewer P0 watch from PR #16: depending on the entire `paperDraft`
+// object would invalidate the useCallback every render (since usePaperDraft
+// returns a fresh object each render). The Cut C contract is that the deps
+// list pins the SPECIFIC handler — `addGroups` (or any aliased handler that
+// is itself stabilized via useCallback inside usePaperDraft).
+
+console.log('\nTest 11: piOnAddQuestionGroup deps are specific (no whole-object dependency)')
+
+// The deps list is the trailing `[ ... ]` literal of the useCallback call.
+// We can't use a single regex because the body contains `[card]` array
+// literals which break a naive `[^\]]*` capture. Instead, scan from
+// `const piOnAddQuestionGroup = useCallback(` and balance braces / brackets
+// until we reach the deps array at the end.
+function extractPiOnAddDeps(src) {
+  const re = /const\s+piOnAddQuestionGroup\s*=\s*useCallback\s*\(/
+  const start = src.match(re)
+  if (!start || start.index === undefined) return ''
+  let i = (start.index || 0) + start[0].length
+  let depth = 1 // we're inside the useCallback paren
+  // Walk until we find the top-level comma that separates body from deps.
+  while (i < src.length && depth > 0) {
+    const ch = src[i]
+    if (ch === '(' || ch === '{' || ch === '[') depth++
+    else if (ch === ')' || ch === '}' || ch === ']') depth--
+    // The comma we want is at depth === 1 (inside useCallback's outer paren only).
+    if (ch === ',' && depth === 1) {
+      // Past this comma is the deps literal `[ ... ]`.
+      const tail = src.slice(i + 1)
+      const m = tail.match(/\s*\[([\s\S]*?)\]\s*\)/)
+      return m ? m[1] : ''
+    }
+    i++
+  }
+  return ''
+}
+
+const piAddCallbackDeps = extractPiOnAddDeps(appSrc)
+
+assert(
+  'piOnAddQuestionGroup deps array extracted',
+  piAddCallbackDeps.length > 0,
+  '',
+)
+
+// Whole-object dependency is the failure mode — the deps must NOT mention
+// `paperDraft` as a bare identifier. We allow `paperDraftAddGroups` (the
+// destructured handler alias) and any other suffixed identifier.
+assert(
+  'piOnAddQuestionGroup deps do NOT include the bare `paperDraft` object',
+  !/\bpaperDraft\b(?!Add|Add[A-Z])/.test(piAddCallbackDeps),
+  `deps=[${piAddCallbackDeps.trim()}] still references the whole paperDraft object`,
+)
+
+assert(
+  'piOnAddQuestionGroup deps include questionGroupById',
+  /\bquestionGroupById\b/.test(piAddCallbackDeps),
+  `deps=[${piAddCallbackDeps.trim()}]`,
+)
+
+assert(
+  'piOnAddQuestionGroup deps include the addGroups handler (any stable alias)',
+  /\baddGroups\b/.test(piAddCallbackDeps) ||
+    /\bpaperDraftAddGroups\b/.test(piAddCallbackDeps) ||
+    /\baddGroupsToBasket\b/.test(piAddCallbackDeps),
+  `deps=[${piAddCallbackDeps.trim()}] missing addGroups handler reference`,
+)
+
+// PI subtree must NOT import basket / draft internals (re-stating the Cut B
+// boundary so a future refactor can't sneak the import in via Cut C).
+for (const token of ['usePaperDraft', 'QuestionGroupCard', 'questionGroupById']) {
+  const offenders = []
+  for (const [file, src] of piSourcesByPath.entries()) {
+    if (src.includes(token)) {
+      offenders.push(path.relative(ROOT, file))
+    }
+  }
+  assert(
+    `PI subtree still does NOT reference "${token}" (Cut C boundary preserved)`,
+    offenders.length === 0,
+    `offending files: ${offenders.join(', ')}`,
+  )
+}
+
+// ─── Test 12: Cut C return-to-workbench wiring ───
+
+console.log('\nTest 12: Cut C return-to-workbench is wired without full-page reload')
+
+// App.tsx must own a currentPiRoute mirror that actually drives PI rendering.
+assert(
+  'App.tsx declares a currentPiRoute state seeded from the piRoute prop',
+  /const\s*\[\s*currentPiRoute\s*,\s*setCurrentPiRoute\s*\]\s*=\s*useState[\s\S]*?\(\s*piRoute\s*\)/.test(
+    appSrc,
+  ),
+  'missing currentPiRoute useState seeded from piRoute',
+)
+
+assert(
+  'App.tsx renders PaperIntelligencePreview based on currentPiRoute (NOT the boot prop)',
+  /currentPiRoute\.kind\s*===\s*['"]paper-intelligence['"]/.test(appSrc),
+  'PI gating still keys off the static piRoute prop',
+)
+
+assert(
+  'App.tsx pulls paperId from currentPiRoute when rendering PI',
+  /paperId\s*=\s*\{\s*currentPiRoute\.paperId\s*\}/.test(appSrc),
+  'PI render still threads paperId from the static piRoute prop',
+)
+
+// Workbench fetch effects must depend on currentPiRoute.kind so a Cut C
+// return-to-workbench actually retriggers the deferred loads.
+const workbenchFetchEffectsCutC = extractUseEffects(appSrc).filter((effect) =>
+  workbenchFetchTokens.some((token) => effect.includes(token)),
+)
+for (const token of workbenchFetchTokens) {
+  const owners = workbenchFetchEffectsCutC.filter((effect) => effect.includes(token))
+  assert(
+    `${token} early-return guard reads currentPiRoute.kind`,
+    owners.length > 0 &&
+      owners.every((effect) =>
+        /if\s*\(\s*currentPiRoute\.kind\s*===\s*['"]paper-intelligence['"]\s*\)\s*return/.test(
+          effect,
+        ),
+      ),
+    'effect still reads piRoute.kind directly',
+  )
+  assert(
+    `${token} effect's dependency array includes currentPiRoute.kind`,
+    owners.length > 0 &&
+      owners.every((effect) => {
+        const m = effect.match(/\[([^\]]*)\]\s*\)\s*$/)
+        return m !== null && m[1].includes('currentPiRoute.kind')
+      }),
+    'currentPiRoute.kind missing from dep array',
+  )
+}
+
+// piOnBackToWorkbench must call setCurrentPiRoute({ kind: 'none' }) and
+// rewrite the URL via history.replaceState — never via window.location.href
+// or window.location.reload.
+const piOnBackBody =
+  appSrc.match(
+    /const piOnBackToWorkbench\s*=\s*useCallback\s*\(\s*\(\)\s*=>\s*\{([\s\S]*?)\n\s*\}\s*,\s*\[/,
+  )?.[1] || ''
+
+assert(
+  'piOnBackToWorkbench useCallback body extracted',
+  piOnBackBody.length > 0,
+  '',
+)
+
+assert(
+  'piOnBackToWorkbench flips currentPiRoute → { kind: \'none\' }',
+  /setCurrentPiRoute\s*\(\s*\{\s*kind\s*:\s*['"]none['"]/.test(piOnBackBody),
+  'missing setCurrentPiRoute to none',
+)
+
+assert(
+  'piOnBackToWorkbench rewrites the URL via history.replaceState',
+  /window\.history\.replaceState\s*\(/.test(piOnBackBody),
+  'missing history.replaceState call',
+)
+
+assert(
+  'piOnBackToWorkbench does NOT use window.location.href assignment',
+  !/window\.location\.href\s*=/.test(piOnBackBody),
+  'piOnBackToWorkbench reassigns window.location.href',
+)
+
+assert(
+  'piOnBackToWorkbench does NOT call window.location.reload',
+  !/window\.location\.reload\s*\(/.test(piOnBackBody),
+  'piOnBackToWorkbench calls window.location.reload',
+)
+
+assert(
+  'piOnBackToWorkbench strips the view query param',
+  /searchParams\.delete\(\s*['"]view['"]/.test(piOnBackBody),
+  'missing view param strip',
+)
+
+assert(
+  'piOnBackToWorkbench strips the paperId query param',
+  /searchParams\.delete\(\s*['"]paperId['"]/.test(piOnBackBody),
+  'missing paperId param strip',
+)
+
+// PaperIntelligencePreview must render a back button surface that honors
+// the onBackToWorkbench prop without touching window.location itself.
+assert(
+  'PaperIntelligencePreview top bar surfaces a back-to-workbench button',
+  /data-pi-back-to-workbench=\s*['"]true['"]/.test(piPreviewSrc),
+  'missing data-pi-back-to-workbench marker',
+)
+
+assert(
+  'PaperIntelligencePreview top bar surfaces a basket badge with data-pi-basket-count',
+  /data-pi-basket-count=/.test(piPreviewSrc),
+  'missing data-pi-basket-count marker',
+)
+
+// Strip block & line comments before the window.location / history check
+// so a comment that mentions the API name doesn't trigger a false positive.
+const piPreviewCodeOnly = piPreviewSrc
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/(^|[^:])\/\/[^\n]*/g, '$1')
+
+assert(
+  'PaperIntelligencePreview never reaches into window.location itself',
+  !/window\.location\b/.test(piPreviewCodeOnly),
+  'PaperIntelligencePreview touches window.location directly',
+)
+
+assert(
+  'PaperIntelligencePreview never calls history.replaceState itself',
+  !/history\.replaceState\s*\(/.test(piPreviewCodeOnly),
+  'PaperIntelligencePreview calls history.replaceState directly',
+)
+
+// ─── Test 13: Cut C P0 watch — useConciergeDesk has no auto network ───
+//
+// Reviewer P0 watch from PR #16: when the App shell renders PI, it still
+// calls useConciergeDesk (the hook is composed unconditionally). Cut C
+// requirement: useConciergeDesk must NOT fire network / SSE / fetch on
+// mount; AI calls only happen via user-initiated submit / triggerSimilar /
+// retryGroupDetail. We verify this statically: no useEffect inside the
+// hook references runConciergeSearch / fetchQuestionGroupDetail (the two
+// network seams).
+
+console.log('\nTest 13: useConciergeDesk does NOT auto-fire network on mount')
+
+const conciergeSrc = readFileSync(
+  path.join(ROOT, 'app/src/concierge/useConciergeDesk.ts'),
+  'utf-8',
+)
+
+const conciergeEffects = extractUseEffects(conciergeSrc)
+for (const effect of conciergeEffects) {
+  assert(
+    'useConciergeDesk useEffect does not call runConciergeSearch',
+    !/runConciergeSearch\s*\(/.test(effect),
+    'useEffect auto-fires runConciergeSearch',
+  )
+  assert(
+    'useConciergeDesk useEffect does not call fetchQuestionGroupDetail',
+    !/fetchQuestionGroupDetail\s*\(/.test(effect),
+    'useEffect auto-fires fetchQuestionGroupDetail',
+  )
+  assert(
+    'useConciergeDesk useEffect does not open EventSource / SSE',
+    !/new\s+EventSource\s*\(|\.addEventListener\s*\(\s*['"]message['"]/.test(effect),
+    'useEffect opens an event stream',
+  )
+  assert(
+    'useConciergeDesk useEffect does not call fetch() at the top',
+    !/^\s*fetch\s*\(/m.test(effect),
+    'useEffect auto-fires raw fetch()',
+  )
+}
+
+assert(
+  'useConciergeDesk only invokes search via user-driven submit/triggerSimilar',
+  /const\s+submit\s*=\s*useCallback/.test(conciergeSrc) &&
+    /const\s+triggerSimilar\s*=\s*useCallback/.test(conciergeSrc) &&
+    /await\s+runSearch\s*\(/.test(conciergeSrc),
+  'submit/triggerSimilar flow not detected',
 )
 
 // ─── Summary ───
