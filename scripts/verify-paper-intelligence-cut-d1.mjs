@@ -108,6 +108,39 @@ console.log('\n─── 1. Left panel paper-like flow ───')
   }
 }
 
+// The InsightPanel must NOT appear between header and PassageBody in document flow.
+// It must be positioned absolutely (popover anchored to header).
+{
+  const cssSrc = readSrc('app/src/features/paper-intelligence/paperIntelligence.css')
+  const cssSrcCode = stripComments(cssSrc)
+  const insightRule = cssSrcCode.match(/\.pi-insight-panel\s*\{([^}]*)\}/)
+  assert('.pi-insight-panel CSS rule exists', Boolean(insightRule))
+  if (insightRule) {
+    const body = insightRule[1]
+    assert(
+      '.pi-insight-panel is position: absolute (popover, not inline)',
+      /position\s*:\s*absolute\b/.test(body),
+    )
+    assert(
+      '.pi-insight-panel does not occupy document flow',
+      !/position\s*:\s*(static|relative)\b/.test(body),
+    )
+  }
+  // Chip anchor must be position: relative
+  assert(
+    '.pi-insight-chip-anchor provides positioning context',
+    /\.pi-insight-chip-anchor[\s\S]*?position\s*:\s*relative/.test(cssSrcCode),
+  )
+}
+
+// Clicking a question must close insight
+{
+  assert(
+    'handleSelectQuestion closes insight (setActiveInsightSection(null))',
+    /handleSelectQuestion[\s\S]*?setActiveInsightSection\(\s*null\s*\)/.test(componentSrcCode),
+  )
+}
+
 /* ═══════════════════════════════════════════════════════════════════
  * 2. Question list still exists; 15 questions still clickable.
  * ═══════════════════════════════════════════════════════════════════ */
@@ -299,6 +332,10 @@ assert(
 assert(
   'Only one insight open at a time (string | null state)',
   /useState<string\s*\|\s*null>\(null\)/.test(componentSrcCode),
+)
+assert(
+  'Clicking a question closes insight panel',
+  /handleSelectQuestion[\s\S]*?setActiveInsightSection\(\s*null\s*\)/.test(componentSrcCode),
 )
 
 /* ═══════════════════════════════════════════════════════════════════

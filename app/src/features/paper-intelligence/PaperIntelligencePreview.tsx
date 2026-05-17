@@ -253,6 +253,9 @@ export function PaperIntelligencePreview({
   }
 
   const handleSelectQuestion = (id: string): void => {
+    // Close insight panel when user clicks a question (switching from
+    // "passage judgement" mode back to "teach question" mode).
+    setActiveInsightSection(null)
     setActiveQuestionId((prev) => (prev === id ? null : id))
   }
 
@@ -464,16 +467,24 @@ function PassageSection(props: {
         </h2>
         <div className="pi-passage-header-actions">
           {reportPassage && (
-            <button
-              type="button"
-              className={insightOpen ? 'pi-insight-chip pi-insight-chip--open' : 'pi-insight-chip'}
-              onClick={() => onToggleInsight(passageView.paperSection)}
-              aria-expanded={insightOpen}
-              aria-label={insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
-              data-pi-insight-chip={passageView.paperSection}
-            >
-              {insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
-            </button>
+            <span className="pi-insight-chip-anchor">
+              <button
+                type="button"
+                className={insightOpen ? 'pi-insight-chip pi-insight-chip--open' : 'pi-insight-chip'}
+                onClick={() => onToggleInsight(passageView.paperSection)}
+                aria-expanded={insightOpen}
+                aria-label={insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
+                data-pi-insight-chip={passageView.paperSection}
+              >
+                {insightOpen ? '收起洞察' : buildInsightChipLabel(reportPassage)}
+              </button>
+              {insightOpen && (
+                <InsightPanel
+                  reportPassage={reportPassage}
+                  onClose={() => onToggleInsight(passageView.paperSection)}
+                />
+              )}
+            </span>
           )}
           <span className="pi-band" data-band={passageView.bandLabel}>
             {passageView.bandLabel}
@@ -486,14 +497,6 @@ function PassageSection(props: {
           />
         </div>
       </div>
-
-      {/* Cut D1: insight panel — renders below header, above passage body, only when open */}
-      {insightOpen && reportPassage && (
-        <InsightPanel
-          reportPassage={reportPassage}
-          onClose={() => onToggleInsight(passageView.paperSection)}
-        />
-      )}
 
       <PassageBody segments={passageView.segments} />
 
@@ -519,11 +522,13 @@ function PassageSection(props: {
 /* ─── Insight Panel (Cut D1) ─── */
 
 /**
- * Expandable insight panel that shows loads, outline, and key chunks.
- * Rendered inside the passage section, between header and body,
- * only when the corresponding insight chip is active.
+ * Header-anchored popover that shows loads, outline, and key chunks.
+ * Positioned absolutely below the insight chip — does NOT occupy
+ * document flow, so PassageBody / mark[data-pi-evidence-id] layout
+ * coordinates stay stable.
  *
- * Close via: × button (rendered here) or Esc (handled at top level).
+ * Close via: × button (rendered here), Esc (handled at top level),
+ * or clicking a question card (handled in handleSelectQuestion).
  */
 function InsightPanel(props: {
   reportPassage: PassageReport
@@ -531,7 +536,7 @@ function InsightPanel(props: {
 }): ReactNode {
   const { reportPassage, onClose } = props
   return (
-    <div className="pi-insight-panel" data-pi-insight-panel={reportPassage.paperSection}>
+    <div className="pi-insight-panel" data-pi-insight-panel={reportPassage.paperSection} role="dialog" aria-label="篇章洞察">
       <div className="pi-insight-panel-header">
         <span className="pi-insight-panel-title">篇章洞察</span>
         <button

@@ -1045,20 +1045,30 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-insight-panel {
-  border-bottom: 1px solid var(--line);
-  background: var(--surface-strong);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
   padding: 12px 20px;
-  animation: pi-insight-slide-in 120ms ease-out;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  margin-top: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+  animation: pi-insight-fade-in 120ms ease-out;
 }
 
-@keyframes pi-insight-slide-in {
+@keyframes pi-insight-fade-in {
   from {
     opacity: 0;
-    max-height: 0;
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
-    max-height: 600px;
+    transform: translateY(0);
   }
 }
 
@@ -1066,6 +1076,17 @@ button.pi-analysis-distractor:hover {
   .pi-insight-panel {
     animation: none;
   }
+}
+
+/*
+ * Anchor wrapper for the insight chip + popover. position:relative
+ * so the absolutely-positioned panel resolves its top:100% from the
+ * chip's bounding box.
+ */
+.pi-insight-chip-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
 .pi-insight-panel-header {
