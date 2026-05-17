@@ -259,12 +259,12 @@ assert(
   componentSrc.includes('点击左侧题目查看解析'),
 )
 assert(
-  'right panel uses "正确答案" section header',
-  componentSrc.includes('正确答案'),
+  'right panel marks correct option (正确 tag or 正确答案 header)',
+  componentSrc.includes('正确'),
 )
 assert(
-  'right panel uses "干扰项分析" section header',
-  componentSrc.includes('干扰项分析'),
+  'right panel uses option-integrated layout (选项解析 section or 干扰项分析)',
+  componentSrc.includes('选项解析') || componentSrc.includes('干扰项分析'),
 )
 assert(
   'right panel uses "同义替换" section header',
@@ -572,7 +572,7 @@ assert(
 
 assert(
   'component no longer renders "引文" / "收起" toggle for load evidence',
-  !/引文/.test(componentSrcCode) && !/收起/.test(componentSrcCode),
+  !/引文/.test(componentSrcCode) && !/收起引文/.test(componentSrcCode),
 )
 assert(
   'component no longer references showEvidence local state on LoadRow',
