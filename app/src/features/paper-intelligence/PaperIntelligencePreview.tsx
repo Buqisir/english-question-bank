@@ -78,11 +78,16 @@ type Props = {
   basketIds: Set<string>
   /** Set of question group ids that the local bank can resolve. */
   availableQuestionGroupIds: Set<string>
-  /** Callback to add a question group to the basket. Cut A: wired but not invoked. */
+  /**
+   * Callback to add a question group to the basket. Cut B: invoked by the
+   * passage header "加入草稿卷" button. PaperIntelligencePreview only knows
+   * the questionGroupId; App owns the resolution from id → local question
+   * group → basket and the preview never imports App-internal modules.
+   */
   onAddQuestionGroup: (questionGroupId: string) => void
   /** Number of items currently in the basket. */
   basketCount: number
-  /** Navigate back to the workbench. Cut A: wired but not invoked. */
+  /** Navigate back to the workbench. Cut C will implement; Cut B does not invoke. */
   onBackToWorkbench: () => void
 }
 
@@ -111,9 +116,9 @@ function cssAttr(value: string): string {
  */
 export function PaperIntelligencePreview({
   paperId,
-  basketIds: _basketIds,
-  availableQuestionGroupIds: _availableQuestionGroupIds,
-  onAddQuestionGroup: _onAddQuestionGroup,
+  basketIds,
+  availableQuestionGroupIds,
+  onAddQuestionGroup,
   basketCount: _basketCount,
   onBackToWorkbench: _onBackToWorkbench,
 }: Props): ReactNode {
@@ -122,6 +127,8 @@ export function PaperIntelligencePreview({
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+  const toastTimerRef = useRef<number | null>(null)
 
   /**
    * SECONDARY state: which evidence row the cross-column dotted line
@@ -312,6 +319,46 @@ export function PaperIntelligencePreview({
     setActiveEvidenceId(evidenceId)
   }
 
+  /**
+   * Cut B passage-header "加入草稿卷" handler.
+   *
+   * Critically, this MUST NOT touch:
+   *   - activeQuestionId
+   *   - activeEvidenceId
+   *   - the auto-scroll target
+   * Adding to the basket is a side-channel action — the teacher's
+   * current evidence inspection state stays exactly where it is.
+   * Toast feedback is the only visible side effect.
+   *
+   * The button-state guard (resolved per-passage in PassageSection)
+   * already prevents this handler from running for unresolvable or
+   * already-added groups. We forward the call to App, which owns the
+   * resolution from id → local bank entry → basket-add path.
+   */
+  const handleAddQuestionGroup = (questionGroupId: string, paperSection: string): void => {
+    onAddQuestionGroup(questionGroupId)
+    const message = `已加入草稿卷：阅读理解 ${paperSection}`
+    setToastMessage(message)
+    if (toastTimerRef.current !== null) {
+      window.clearTimeout(toastTimerRef.current)
+    }
+    toastTimerRef.current = window.setTimeout(() => {
+      setToastMessage(null)
+      toastTimerRef.current = null
+    }, 3000)
+  }
+
+  // Clean up the toast timer on unmount so a navigation right after
+  // "加入草稿卷" doesn't fire setState on an unmounted component.
+  useEffect(() => {
+    return (): void => {
+      if (toastTimerRef.current !== null) {
+        window.clearTimeout(toastTimerRef.current)
+        toastTimerRef.current = null
+      }
+    }
+  }, [])
+
   return (
     <div className="pi-view">
       <ReportHeader report={report} />
@@ -328,6 +375,9 @@ export function PaperIntelligencePreview({
                 reportPassage={reportPassage}
                 activeQuestionId={activeQuestionId}
                 onSelectQuestion={handleSelectQuestion}
+                basketIds={basketIds}
+                availableQuestionGroupIds={availableQuestionGroupIds}
+                onAddQuestionGroup={handleAddQuestionGroup}
               />
             )
           })}
@@ -358,6 +408,19 @@ export function PaperIntelligencePreview({
           activeEvidenceId={activeEvidenceId}
         />
       </div>
+      {/*
+       * Lightweight toast for "加入草稿卷" feedback. Renders inside
+       * `.pi-view` as an `aria-live="polite"` region so assistive tech
+       * announces successive adds. The element stays mounted while
+       * `toastMessage` is non-null and unmounts when the 3s timer
+       * elapses; multiple successive adds reset the timer and update
+       * the visible text in place.
+       */}
+      {toastMessage !== null && (
+        <div className="pi-toast" role="status" aria-live="polite">
+          {toastMessage}
+        </div>
+      )}
     </div>
   )
 }
@@ -385,13 +448,58 @@ function ReportHeader({ report }: { report: PaperIntelligenceReport }): ReactNod
 
 /* ─── Passage Section ─── */
 
+/**
+ * Per-passage button state derived from the basket-bridge props.
+ *
+ * The four states are exhaustive and mutually exclusive — see the
+ * passage header layout below. Resolution is pure: it reads the
+ * passage's questionGroupId (binding emitted by the report) and
+ * checks against `basketIds` / `availableQuestionGroupIds` carried
+ * down from App.
+ *
+ *   - 'addable'      : passage has questionGroupId, available, not in basket
+ *   - 'in-basket'    : in basket (button disabled, "已加入" + status hint)
+ *   - 'not-bound'    : passage has no questionGroupId at all
+ *   - 'not-found'    : passage has questionGroupId but local bank can't resolve it
+ */
+type PassageAddState = 'addable' | 'in-basket' | 'not-bound' | 'not-found'
+
+function resolvePassageAddState(args: {
+  questionGroupId: string | undefined
+  basketIds: Set<string>
+  availableQuestionGroupIds: Set<string>
+}): PassageAddState {
+  const { questionGroupId, basketIds, availableQuestionGroupIds } = args
+  if (!questionGroupId) return 'not-bound'
+  if (basketIds.has(questionGroupId)) return 'in-basket'
+  if (!availableQuestionGroupIds.has(questionGroupId)) return 'not-found'
+  return 'addable'
+}
+
 function PassageSection(props: {
   passageView: PassagePreviewView
   reportPassage: PassageReport | undefined
   activeQuestionId: string | null
   onSelectQuestion: (id: string) => void
+  basketIds: Set<string>
+  availableQuestionGroupIds: Set<string>
+  onAddQuestionGroup: (questionGroupId: string, paperSection: string) => void
 }): ReactNode {
-  const { passageView, reportPassage, activeQuestionId, onSelectQuestion } = props
+  const {
+    passageView,
+    reportPassage,
+    activeQuestionId,
+    onSelectQuestion,
+    basketIds,
+    availableQuestionGroupIds,
+    onAddQuestionGroup,
+  } = props
+  const questionGroupId = reportPassage?.questionGroupId
+  const addState = resolvePassageAddState({
+    questionGroupId,
+    basketIds,
+    availableQuestionGroupIds,
+  })
   return (
     <section className="pi-passage" data-pi-paper-section={passageView.paperSection}>
       <div className="pi-passage-header">
@@ -399,9 +507,17 @@ function PassageSection(props: {
           <span className="pi-section-badge">{passageView.paperSection}</span>
           {passageView.passageTitle || `篇章 ${passageView.paperSection}`}
         </h2>
-        <span className="pi-band" data-band={passageView.bandLabel}>
-          {passageView.bandLabel}
-        </span>
+        <div className="pi-passage-header-actions">
+          <span className="pi-band" data-band={passageView.bandLabel}>
+            {passageView.bandLabel}
+          </span>
+          <PassageAddAction
+            addState={addState}
+            paperSection={passageView.paperSection}
+            questionGroupId={questionGroupId}
+            onAdd={onAddQuestionGroup}
+          />
+        </div>
       </div>
 
       <PassageBody segments={passageView.segments} />
@@ -425,6 +541,88 @@ function PassageSection(props: {
         ))}
       </div>
     </section>
+  )
+}
+
+/**
+ * Cut B "加入草稿卷" passage-header action.
+ *
+ * Renders one of four exhaustive states. We never use a floating
+ * button — the action sits inline next to the band chip in the
+ * header so it scales with the passage card itself. Disabled states
+ * still surface tooltip + aria-label so a screen-reader user
+ * understands why the action is unavailable.
+ */
+function PassageAddAction(props: {
+  addState: PassageAddState
+  paperSection: string
+  questionGroupId: string | undefined
+  onAdd: (questionGroupId: string, paperSection: string) => void
+}): ReactNode {
+  const { addState, paperSection, questionGroupId, onAdd } = props
+
+  if (addState === 'in-basket') {
+    return (
+      <span className="pi-passage-action-group" data-pi-add-state={addState}>
+        <span className="pi-passage-action-status">已在草稿卷</span>
+        <button
+          type="button"
+          className="pi-passage-action pi-passage-action--in-basket"
+          disabled
+          aria-disabled="true"
+          aria-label={`已加入草稿卷：阅读理解 ${paperSection}`}
+        >
+          已加入
+        </button>
+      </span>
+    )
+  }
+
+  if (addState === 'not-bound') {
+    return (
+      <button
+        type="button"
+        className="pi-passage-action pi-passage-action--disabled"
+        disabled
+        aria-disabled="true"
+        title="此篇暂无题组绑定"
+        aria-label="此篇暂无题组绑定"
+        data-pi-add-state={addState}
+      >
+        暂不可加入
+      </button>
+    )
+  }
+
+  if (addState === 'not-found') {
+    return (
+      <button
+        type="button"
+        className="pi-passage-action pi-passage-action--disabled"
+        disabled
+        aria-disabled="true"
+        title="本地题库未找到绑定题组"
+        aria-label="本地题库未找到绑定题组"
+        data-pi-add-state={addState}
+      >
+        题组未找到
+      </button>
+    )
+  }
+
+  // addable — questionGroupId is non-null per the resolver.
+  const targetId = questionGroupId as string
+  return (
+    <button
+      type="button"
+      className="pi-passage-action pi-passage-action--addable"
+      onClick={() => onAdd(targetId, paperSection)}
+      aria-label={`加入草稿卷：阅读理解 ${paperSection}`}
+      data-pi-add-state={addState}
+      data-pi-question-group-id={targetId}
+    >
+      加入草稿卷
+    </button>
   )
 }
 

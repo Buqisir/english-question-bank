@@ -1130,7 +1130,19 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }, [paperExports])
 
+  // ─── PI-route guard: skip workbench-only fetches while the App shell is
+  // rendering Paper Intelligence ───
+  // When the Paper Intelligence route is active, the App shell does NOT show
+  // any of the workbench panels (question bank list, imports, paper sets,
+  // workflows). The corresponding effects below would fire useless GETs
+  // against /api/* on PI-only sessions; reviewers flagged this as a P0 watch
+  // on Cut A. We early-return inside each effect callback so hooks remain
+  // unconditionally called (React's rules-of-hooks) but no fetch fires while
+  // piRoute.kind === 'paper-intelligence'. Each effect's dependency list
+  // includes piRoute.kind so Cut C (return-to-workbench) will retrigger the
+  // normal load when the user navigates back.
   useEffect(() => {
+    if (piRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchQuestionGroups()
@@ -1148,9 +1160,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [])
+  }, [piRoute.kind])
 
   useEffect(() => {
+    if (piRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchImportFiles()
@@ -1192,9 +1205,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [])
+  }, [piRoute.kind])
 
   useEffect(() => {
+    if (piRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchPaperSets()
@@ -1212,9 +1226,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [])
+  }, [piRoute.kind])
 
   useEffect(() => {
+    if (piRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     fetchPaperWorkflows()
@@ -1232,7 +1247,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [])
+  }, [piRoute.kind])
 
   // Close insertion menu on outside click or Escape
   const closeInsertionMenu = paperDraft.setOpenInsertionIndex
@@ -3173,7 +3188,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     review: paperWorkflows.filter((workflow) => workflow.status === 'needs_review').length,
   }
 
-  // ─── Paper Intelligence bridge props (Cut A) ───
+  // ─── Paper Intelligence bridge props (Cut B) ───
   const piBasketIds = useMemo(
     () => new Set(basket.map((item) => item.id)),
     [basket],
@@ -3182,11 +3197,21 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     () => new Set(questionGroups.map((group) => group.id)),
     [questionGroups],
   )
-  const piOnAddQuestionGroup = useCallback((_questionGroupId: string) => {
-    // Cut A: wired but intentionally no-op. Cut B will implement.
-  }, [])
+  // Real basket bridge: PaperIntelligencePreview only knows a questionGroupId
+  // (it does NOT know about QuestionGroupCard or paperDraft). Resolution from
+  // id → card → paperDraft.addGroups happens here. PI preview enforces button
+  // state guards (basketIds / availableQuestionGroupIds) so this handler will
+  // only ever be invoked for ids that actually resolve.
+  const piOnAddQuestionGroup = useCallback(
+    (questionGroupId: string) => {
+      const card = questionGroupById.get(questionGroupId)
+      if (!card) return
+      paperDraft.addGroups([card])
+    },
+    [questionGroupById, paperDraft],
+  )
   const piOnBackToWorkbench = useCallback(() => {
-    // Cut A: wired but intentionally no-op. Cut C will implement.
+    // Cut C will implement return-to-workbench navigation.
   }, [])
   const piBasketCount = basket.length
 

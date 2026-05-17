@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Verification: Paper Intelligence → App Shell route integration (Cut A).
+ * Verification: Paper Intelligence → App Shell route integration.
  *
- * Static checks (no browser needed):
+ * Cut A static checks (still in force):
  *   1. main.tsx does NOT directly render PaperIntelligencePreview.
  *   2. App.tsx renders PaperIntelligencePreview when piRoute is active.
  *   3. PaperIntelligencePreview props type includes basket bridge fields.
@@ -10,9 +10,26 @@
  *   5. All questionGroupIds resolve to sampleQuestionGroups entries.
  *   6. reading-analysis route still exists in main.tsx.
  *   7. No fuzzy matching logic (passageTitle / section guess).
+ *
+ * Cut B additions (P0 watch from PR #15 review):
+ *   8. App fetch-effect guards: each workbench fetch effect early-returns
+ *      when piRoute.kind === 'paper-intelligence' AND lists piRoute.kind
+ *      in its dependency array (so Cut C return-to-workbench retriggers
+ *      the load).
+ *   9. PI feature-directory isolation: nothing under
+ *      app/src/features/paper-intelligence/** may import App-internal
+ *      basket / draft modules (usePaperDraft / questionGroupById /
+ *      QuestionGroupCard / paperDraftModel / paperBlocks / sample data).
+ *  10. PaperIntelligencePreview props-only contract: it does not import
+ *      any App-internal module, and it never references QuestionGroupCard
+ *      or paperDraft directly. The basket bridge flows through props.
+ *  11. Cut A no-op marker for onAddQuestionGroup is gone; the real
+ *      handler resolves questionGroupId via questionGroupById and calls
+ *      paperDraft.addGroups (or addGroupsToBasket).
  */
 
 import { readFileSync } from 'node:fs'
+import { readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 
 const HERE = path.dirname(new URL(import.meta.url).pathname)
@@ -267,6 +284,216 @@ assert(
   'paperIntelligenceTypes includes questionGroupId field',
   piTypesSrc.includes('questionGroupId'),
   'PassageReport missing questionGroupId',
+)
+
+// ─── Test 8: PI-route fetch-effect guards (Cut B P0 watch) ───
+
+console.log('\nTest 8: App fetch effects guard against piRoute.kind === paper-intelligence')
+
+/**
+ * Extract every `useEffect((...) => { ... }, [deps])` block from App.tsx.
+ *
+ * We can't lean on the TypeScript AST (the verify script runs raw via the
+ * strip-types loader), so we balance braces / brackets manually after
+ * locating each `useEffect(` opener. The result is the full source slice
+ * for each effect including its dep array tail.
+ */
+function extractUseEffects(src) {
+  const effects = []
+  const re = /useEffect\s*\(\s*\(\)\s*=>\s*\{/g
+  let match
+  while ((match = re.exec(src)) !== null) {
+    const start = match.index
+    let i = match.index + match[0].length
+    let depth = 1
+    while (i < src.length && depth > 0) {
+      const ch = src[i]
+      if (ch === '{') depth++
+      else if (ch === '}') depth--
+      i++
+    }
+    // We're now just after the closing `}` of the callback. Scan to the
+    // matching `)` of the useEffect call (skipping the deps array).
+    while (i < src.length && src[i] !== ')') {
+      i++
+    }
+    if (i < src.length) i++
+    effects.push(src.slice(start, i))
+  }
+  return effects
+}
+
+const allEffects = extractUseEffects(appSrc)
+
+// Workbench-only fetch effects we need to gate. Mapping: effect must
+// contain at least one of these fetch-fn references.
+const workbenchFetchTokens = [
+  'fetchQuestionGroups(',
+  'fetchImportFiles(',
+  'fetchImportBundles(',
+  'fetchImportBatches(',
+  'fetchPaperSets(',
+  'fetchPaperWorkflows(',
+]
+
+const workbenchFetchEffects = allEffects.filter((effect) =>
+  workbenchFetchTokens.some((token) => effect.includes(token)),
+)
+
+assert(
+  'App.tsx still has the workbench fetch effects (>= 4 useEffect blocks)',
+  workbenchFetchEffects.length >= 4,
+  `found ${workbenchFetchEffects.length}`,
+)
+
+for (const token of workbenchFetchTokens) {
+  const owners = workbenchFetchEffects.filter((effect) => effect.includes(token))
+  assert(
+    `${token} guarded by piRoute.kind early return`,
+    owners.length > 0 &&
+      owners.every((effect) =>
+        /if\s*\(\s*piRoute\.kind\s*===\s*['"]paper-intelligence['"]\s*\)\s*return/.test(effect),
+      ),
+    'missing early-return guard',
+  )
+  assert(
+    `${token} effect's dependency array includes piRoute.kind`,
+    owners.length > 0 &&
+      owners.every((effect) => {
+        // The dep array is the last `[ ... ]` in the slice.
+        const m = effect.match(/\[([^\]]*)\]\s*\)\s*$/)
+        return m !== null && m[1].includes('piRoute.kind')
+      }),
+    'piRoute.kind missing from dep array',
+  )
+}
+
+// ─── Test 9: PI feature-directory isolation ───
+
+console.log('\nTest 9: app/src/features/paper-intelligence/** does NOT reach into App internals')
+
+const piFeatureDir = path.join(ROOT, 'app/src/features/paper-intelligence')
+
+async function listFeatureFiles(dir) {
+  const out = []
+  const entries = await readdir(dir)
+  for (const entry of entries) {
+    const full = path.join(dir, entry)
+    const st = await stat(full)
+    if (st.isDirectory()) {
+      out.push(...(await listFeatureFiles(full)))
+    } else if (/\.(ts|tsx)$/.test(entry)) {
+      out.push(full)
+    }
+  }
+  return out
+}
+
+const piFiles = await listFeatureFiles(piFeatureDir)
+const piSourcesByPath = new Map(piFiles.map((file) => [file, readFileSync(file, 'utf-8')]))
+
+assert(
+  'PI feature directory has source files to inspect',
+  piFiles.length > 0,
+  '',
+)
+
+/**
+ * Forbidden references — any of these strings appearing anywhere under
+ * features/paper-intelligence/** is a hard fail. PaperIntelligencePreview
+ * only knows questionGroupId; resolution to QuestionGroupCard happens
+ * inside App.tsx, never here.
+ */
+const FORBIDDEN_TOKENS = [
+  'usePaperDraft',
+  'questionGroupById',
+  'QuestionGroupCard',
+  'paperDraftModel',
+  'paperAssembly',
+  'sampleQuestionGroups',
+  'usePaperBlocks',
+  'PaperBlock',
+]
+
+for (const token of FORBIDDEN_TOKENS) {
+  const offenders = []
+  for (const [file, src] of piSourcesByPath.entries()) {
+    if (src.includes(token)) {
+      offenders.push(path.relative(ROOT, file))
+    }
+  }
+  assert(
+    `PI feature dir does not reference "${token}"`,
+    offenders.length === 0,
+    `offending files: ${offenders.join(', ')}`,
+  )
+}
+
+// PaperIntelligencePreview must not import anything from App, paperAssembly,
+// or any concierge / data / domain / services internals.
+const piPreviewImportLines = piPreviewSrc
+  .split('\n')
+  .filter((line) => /^\s*import\s/.test(line))
+  .join('\n')
+
+const FORBIDDEN_IMPORT_PATHS = [
+  '../../App',
+  '../../paperAssembly',
+  '../../concierge',
+  '../../services',
+  '../../data/sampleQuestionGroups',
+]
+
+for (const imp of FORBIDDEN_IMPORT_PATHS) {
+  assert(
+    `PaperIntelligencePreview does not import from "${imp}"`,
+    !piPreviewImportLines.includes(imp),
+    'forbidden import path',
+  )
+}
+
+// PaperIntelligencePreview props are still the only basket bridge.
+assert(
+  'PaperIntelligencePreview Props type names basketIds, availableQuestionGroupIds, onAddQuestionGroup',
+  /\bbasketIds:\s*Set<string>/.test(piPreviewSrc) &&
+    /\bavailableQuestionGroupIds:\s*Set<string>/.test(piPreviewSrc) &&
+    /\bonAddQuestionGroup:\s*\(questionGroupId:\s*string\)\s*=>\s*void/.test(piPreviewSrc),
+  '',
+)
+
+// ─── Test 10: Cut A no-op is gone, real onAddQuestionGroup wired ───
+
+console.log('\nTest 10: piOnAddQuestionGroup is no longer a no-op (Cut A marker removed)')
+
+assert(
+  'App.tsx no longer carries the Cut A "wired but intentionally no-op" marker for onAddQuestionGroup',
+  !appSrc.includes("Cut A: wired but intentionally no-op. Cut B will implement"),
+  'Cut A marker still present',
+)
+
+// Extract the piOnAddQuestionGroup useCallback body so we can prove it
+// actually does work. Tolerant matcher: any non-empty body that mentions
+// the resolution path.
+const piAddCallback =
+  appSrc.match(/const piOnAddQuestionGroup\s*=\s*useCallback\s*\(([\s\S]*?)\n\s*\)\s*\n/)?.[1] ||
+  ''
+
+assert(
+  'piOnAddQuestionGroup useCallback body extracted',
+  piAddCallback.length > 0,
+  '',
+)
+
+assert(
+  'piOnAddQuestionGroup body resolves questionGroupId via questionGroupById',
+  /questionGroupById\.get\(/.test(piAddCallback),
+  'missing questionGroupById.get(...) lookup',
+)
+
+assert(
+  'piOnAddQuestionGroup body calls a real basket-add path (paperDraft.addGroups or addGroupsToBasket)',
+  /paperDraft\.addGroups\(/.test(piAddCallback) || /addGroupsToBasket\(/.test(piAddCallback),
+  'no basket-add call in handler body',
 )
 
 // ─── Summary ───
