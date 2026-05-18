@@ -48,14 +48,14 @@
 
 .pi-ps-harness-shell {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 360px;
   flex: 1;
   overflow: hidden;
 }
 
 .pi-ps-harness-left {
   overflow-y: auto;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1rem;
   border-right: 1px solid #e2e2e2;
 }
 

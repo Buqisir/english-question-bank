@@ -1,7 +1,20 @@
 /**
  * verify-paper-intelligence-paper-surface-harness.mjs
  *
- * Issue #21-C1 static verify script.
+ * Issue #21-C1 / Issue #41-C2 static verify script.
+ *
+ * The C1 cut introduced PaperIntelligencePaperSurfaceHarness and forbade
+ * any edit to the PaperSurface module / shared papersurface module. C2
+ * is a bounded polish cut on top of C1: it intentionally edits a small,
+ * well-defined slice of PaperSurface.css and the harness CSS, and
+ * nothing else.
+ *
+ * This script rewrites the C1 PaperSurface-untouched guard into C2
+ * polish-boundary assertions: it pins the exact CSS values C2 is
+ * allowed to change, pins the structural invariants C2 is NOT allowed
+ * to change (sheet width, sheet padding, no border-radius, no gradient,
+ * outer-only sheet shadow), and keeps the C1 surface / route / scope /
+ * adapter / behavior contract assertions unchanged.
  *
  * Asserts:
  *   Route / surface:
@@ -10,16 +23,37 @@
  *     - surface=paper mounts PaperIntelligencePaperSurfaceHarness
  *     - no surface=paper-v2
  *
- *   Scope:
- *     - no server changes
- *     - no package/lockfile changes
- *     - no reading-analysis changes
- *     - no basket/paperAssembly changes
- *     - no shared/papersurface changes
- *     - no PaperSurface module changes
- *     - prototype files not deleted or modified
+ *   C2 polish boundary — PaperSurface.css polish slice:
+ *     - declares --ps-page-width: 794px
+ *     - declares --ps-page-padding: 56px
+ *     - .ps-surface padding: 16px
+ *     - .ps-passage-body font-size: 15px
+ *     - .ps-question-no font-size: 15px
+ *     - .ps-question-stem font-size: 15px
+ *     - .ps-option font-size: 14.5px
+ *     - no border-radius anywhere in PaperSurface.css
+ *     - no gradient anywhere in PaperSurface.css
+ *     - .ps-page selector group does NOT add inner box-shadow beyond the
+ *       single existing outer-sheet box-shadow (pattern: at most one
+ *       box-shadow declaration in the whole file, and it must live on
+ *       .ps-page)
  *
- *   Adapter boundaries:
+ *   C2 polish boundary — harness CSS polish slice:
+ *     - .pi-ps-harness-shell grid-template-columns: 1fr 360px
+ *     - .pi-ps-harness-left padding: 1rem 1rem
+ *
+ *   C2 polish boundary — files that MUST remain untouched by this cut:
+ *     - app/src/shared-ui/papersurface/PaperSurface.tsx
+ *     - shared/papersurface/tokens.mjs
+ *     - shared/papersurface/segmentPaperText.mjs
+ *     - shared/papersurface/anchorKeys.mjs
+ *     - server/
+ *     - app/src/features/reading-analysis/
+ *     - basket / paperAssembly
+ *     - adapter files under features/paper-intelligence/adapter/
+ *     - package.json, app/package.json, lockfiles
+ *
+ *   Adapter boundaries (carried from C1):
  *     - adapter files import no React
  *     - adapter files contain no hooks
  *     - adapter files contain no DOM APIs
@@ -27,7 +61,7 @@
  *     - adapter files live under features/paper-intelligence/adapter
  *     - PaperSurface does not import PI types
  *
- *   Behavior contract:
+ *   Behavior contract (carried from C1):
  *     - PaperQuestion id uses ${paperSection}-${questionNo} convention
  *     - PaperQuestion does not include answer/explanation/distractorAnalysis/synonymSummary
  *     - annotations are [] in C1
@@ -46,9 +80,12 @@ const ROOT = resolve(import.meta.dirname, '..')
 const APP = join(ROOT, 'app', 'src')
 const ADAPTER_DIR = join(APP, 'features', 'paper-intelligence', 'adapter')
 const HARNESS_PATH = join(APP, 'features', 'paper-intelligence', 'PaperIntelligencePaperSurfaceHarness.tsx')
+const HARNESS_CSS_PATH = join(APP, 'features', 'paper-intelligence', 'paperIntelligencePaperSurfaceHarness.css')
 const APP_TSX = join(APP, 'App.tsx')
 const ROUTE_PATH = join(APP, 'features', 'paper-intelligence', 'paperIntelligenceRoute.ts')
 const PAPER_SURFACE_DIR = join(APP, 'shared-ui', 'papersurface')
+const PAPER_SURFACE_CSS = join(PAPER_SURFACE_DIR, 'PaperSurface.css')
+const PAPER_SURFACE_TSX = join(PAPER_SURFACE_DIR, 'PaperSurface.tsx')
 const SHARED_PAPER_SURFACE = join(ROOT, 'shared', 'papersurface')
 const PROTOTYPE_DIR = join(APP, 'features', 'paper-intelligence', 'paperSurfacePrototype')
 
@@ -73,6 +110,10 @@ function fileExists(path) {
   return existsSync(path)
 }
 
+function stripCssComments(src) {
+  return src.replace(/\/\*[\s\S]*?\*\//g, '')
+}
+
 // ─── Route / surface ───
 
 console.log('\n=== Route / surface ===')
@@ -95,46 +136,218 @@ assert(
   "no surface=paper-v2 in App.tsx"
 )
 
-// ─── Scope ───
+// ─── C2 polish boundary — PaperSurface.css polish slice ───
 
-console.log('\n=== Scope ===')
+console.log('\n=== C2 polish boundary: PaperSurface.css ===')
 
-// Get git diff to check modified files
-let diffOutput = ''
-try {
-  diffOutput = execSync('git diff --name-only HEAD', { cwd: ROOT, encoding: 'utf-8' })
-  // Also include untracked files
-  const untrackedOutput = execSync('git ls-files --others --exclude-standard', { cwd: ROOT, encoding: 'utf-8' })
-  diffOutput += '\n' + untrackedOutput
-} catch {
-  // If git is not available, skip diff-based checks
-  diffOutput = ''
+const paperSurfaceCssRaw = readFile(PAPER_SURFACE_CSS)
+const paperSurfaceCss = stripCssComments(paperSurfaceCssRaw)
+
+assert(
+  /--ps-page-width\s*:\s*794px\b/.test(paperSurfaceCss),
+  "PaperSurface.css declares --ps-page-width: 794px"
+)
+assert(
+  /--ps-page-padding\s*:\s*56px\b/.test(paperSurfaceCss),
+  "PaperSurface.css declares --ps-page-padding: 56px"
+)
+
+// .ps-surface padding: 16px (the polished workspace padding).
+{
+  const match = paperSurfaceCss.match(/\.ps-surface\s*\{([\s\S]*?)\}/)
+  assert(
+    !!match && /(^|\s|;)padding\s*:\s*16px\s*;/.test(match ? match[1] : ''),
+    ".ps-surface declares padding: 16px"
+  )
 }
 
-const changedFiles = diffOutput.split('\n').filter(Boolean)
+// Body font sizes: 15px on .ps-passage-body / .ps-question-no / .ps-question-stem.
+for (const selector of ['.ps-passage-body', '.ps-question-no', '.ps-question-stem']) {
+  const escaped = selector.replace(/\./g, '\\.')
+  const re = new RegExp(`${escaped}\\s*\\{[^}]*?font-size\\s*:\\s*15px\\b`, 's')
+  assert(
+    re.test(paperSurfaceCss),
+    `${selector} declares font-size: 15px`
+  )
+}
+
+// Option font size: 14.5px.
+{
+  const re = /\.ps-option\s*\{[^}]*?font-size\s*:\s*14\.5px\b/s
+  assert(
+    re.test(paperSurfaceCss),
+    ".ps-option declares font-size: 14.5px"
+  )
+}
+
+// No border-radius anywhere.
+assert(
+  !/border-radius/.test(paperSurfaceCss),
+  "PaperSurface.css does NOT introduce border-radius"
+)
+
+// No gradient anywhere.
+assert(
+  !/gradient/.test(paperSurfaceCss),
+  "PaperSurface.css does NOT introduce gradient"
+)
+
+// box-shadow: at most ONE declaration in the file, and it must be in
+// the .ps-page selector. This pins the "outer sheet shadow only" rule
+// from the visual QA checklist and forbids inner sheet / question /
+// option shadows from creeping in.
+{
+  const boxShadowMatches = paperSurfaceCss.match(/box-shadow\s*:/g) || []
+  const psPageBlock = paperSurfaceCss.match(/\.ps-page\s*\{([\s\S]*?)\}/)
+  const boxShadowOnPsPage = !!psPageBlock && /box-shadow\s*:/.test(psPageBlock[1])
+
+  assert(
+    boxShadowMatches.length <= 1,
+    `PaperSurface.css has at most one box-shadow declaration (found ${boxShadowMatches.length})`
+  )
+  assert(
+    boxShadowMatches.length === 0 || boxShadowOnPsPage,
+    ".ps-page selector group does NOT add inner box-shadow beyond the existing allowed outer sheet shadow"
+  )
+}
+
+// ─── C2 polish boundary — harness CSS polish slice ───
+
+console.log('\n=== C2 polish boundary: harness CSS ===')
+
+const harnessCssRaw = readFile(HARNESS_CSS_PATH)
+const harnessCss = stripCssComments(harnessCssRaw)
+
+{
+  const shellMatch = harnessCss.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
+  assert(
+    !!shellMatch && /grid-template-columns\s*:\s*1fr\s+360px\s*;/.test(shellMatch ? shellMatch[1] : ''),
+    "harness CSS .pi-ps-harness-shell has grid-template-columns: 1fr 360px"
+  )
+}
+
+{
+  const leftMatch = harnessCss.match(/\.pi-ps-harness-left\s*\{([\s\S]*?)\}/)
+  assert(
+    !!leftMatch && /(^|\s|;)padding\s*:\s*1rem\s+1rem\s*;/.test(leftMatch ? leftMatch[1] : ''),
+    "harness CSS .pi-ps-harness-left has padding: 1rem 1rem"
+  )
+}
+
+// ─── C2 polish boundary — diff scope ───
+
+console.log('\n=== C2 polish boundary: diff scope ===')
+
+// Get git diff to check modified files. We compute the diff against
+// the merge-base with origin/main (or main) so this works in the cloud
+// sandbox the same way as locally.
+function safeGitDiffNames(args) {
+  try {
+    const out = execSync(`git diff --name-only ${args}`, {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    })
+      .toString()
+      .trim()
+    return out ? out.split('\n') : []
+  } catch {
+    return []
+  }
+}
+
+const baseRef = (() => {
+  try {
+    return execSync('git merge-base HEAD origin/main', {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    })
+      .toString()
+      .trim()
+  } catch {
+    try {
+      return execSync('git merge-base HEAD main', {
+        cwd: ROOT,
+        stdio: ['ignore', 'pipe', 'pipe'],
+      })
+        .toString()
+        .trim()
+    } catch {
+      return 'HEAD'
+    }
+  }
+})()
+
+let changedFiles = safeGitDiffNames(`${baseRef}...HEAD`)
+// Also include uncommitted working-tree changes so a half-finished
+// edit doesn't slip past the boundary.
+const workingTreeChanges = safeGitDiffNames('HEAD')
+for (const f of workingTreeChanges) {
+  if (!changedFiles.includes(f)) changedFiles.push(f)
+}
+try {
+  const untrackedOutput = execSync('git ls-files --others --exclude-standard', { cwd: ROOT, encoding: 'utf-8' })
+  for (const f of untrackedOutput.split('\n').filter(Boolean)) {
+    if (!changedFiles.includes(f)) changedFiles.push(f)
+  }
+} catch {
+  // ignore
+}
 
 assert(
   !changedFiles.some(f => f.startsWith('server/')),
-  "no server changes"
+  "server/ remains untouched"
 )
 assert(
-  !changedFiles.some(f => f === 'package.json' || f === 'pnpm-lock.yaml' || f === 'app/package.json' || f === 'app/pnpm-lock.yaml'),
-  "no package/lockfile changes"
+  !changedFiles.some(f =>
+    f === 'package.json' ||
+    f === 'pnpm-lock.yaml' ||
+    f === 'package-lock.json' ||
+    f === 'app/package.json' ||
+    f === 'app/pnpm-lock.yaml'
+  ),
+  "package.json and lockfiles remain untouched"
 )
 assert(
   !changedFiles.some(f => f.includes('features/reading-analysis')),
-  "no reading-analysis changes"
+  "reading-analysis remains untouched"
 )
 assert(
-  !changedFiles.some(f => f.includes('paperAssembly') || (f.includes('basket') && !f.includes('BasketPreviewItem'))),
-  "no basket/paperAssembly changes"
-)
-assert(
-  !changedFiles.some(f => f.includes('shared-ui/papersurface/') || f.includes('shared/papersurface/')),
-  "no shared/papersurface or PaperSurface module changes"
+  !changedFiles.some(f =>
+    f.includes('paperAssembly') ||
+    (f.includes('basket') && !f.includes('BasketPreviewItem'))
+  ),
+  "basket / paperAssembly remains untouched"
 )
 
-// Prototype files not deleted or modified
+// Adapter files under features/paper-intelligence/adapter/ must not
+// be modified by this C2 cut.
+assert(
+  !changedFiles.some(f => f.includes('features/paper-intelligence/adapter/')),
+  "adapter files remain untouched"
+)
+
+// PaperSurface.tsx (the React component) must remain untouched. C2 is
+// CSS-only on the PaperSurface module side.
+assert(
+  !changedFiles.some(f => f.endsWith('shared-ui/papersurface/PaperSurface.tsx')),
+  "PaperSurface.tsx remains untouched by this C2 cut"
+)
+
+// Shared papersurface primitives must remain untouched.
+assert(
+  !changedFiles.some(f => f === 'shared/papersurface/tokens.mjs' || f === 'shared/papersurface/tokens.d.ts'),
+  "shared/papersurface/tokens.mjs remains untouched"
+)
+assert(
+  !changedFiles.some(f => f === 'shared/papersurface/segmentPaperText.mjs' || f === 'shared/papersurface/segmentPaperText.d.ts'),
+  "shared/papersurface/segmentPaperText.mjs remains untouched"
+)
+assert(
+  !changedFiles.some(f => f === 'shared/papersurface/anchorKeys.mjs' || f === 'shared/papersurface/anchorKeys.d.ts'),
+  "shared/papersurface/anchorKeys.mjs remains untouched"
+)
+
+// Prototype files must still exist (they were not deleted).
 assert(
   fileExists(join(PROTOTYPE_DIR, 'PaperSurfacePrototype.tsx')),
   "prototype PaperSurfacePrototype.tsx still exists (not deleted)"
@@ -144,7 +357,10 @@ assert(
   "prototype paperSurfacePrototype.css still exists (not deleted)"
 )
 assert(
-  !changedFiles.some(f => f.includes('paperSurfacePrototype/PaperSurfacePrototype.tsx') || f.includes('paperSurfacePrototype/paperSurfacePrototype.css')),
+  !changedFiles.some(f =>
+    f.includes('paperSurfacePrototype/PaperSurfacePrototype.tsx') ||
+    f.includes('paperSurfacePrototype/paperSurfacePrototype.css')
+  ),
   "prototype files not modified"
 )
 
@@ -194,7 +410,7 @@ for (const file of adapterFiles) {
 }
 
 // PaperSurface does not import PI types
-const paperSurfaceComponent = readFile(join(PAPER_SURFACE_DIR, 'PaperSurface.tsx'))
+const paperSurfaceComponent = readFile(PAPER_SURFACE_TSX)
 assert(
   !paperSurfaceComponent.includes('paperIntelligenceTypes') &&
   !paperSurfaceComponent.includes('PaperIntelligenceReport'),

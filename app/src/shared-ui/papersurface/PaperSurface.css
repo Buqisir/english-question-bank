@@ -5,7 +5,8 @@
  *   - Paper width: 794px (A4 @ 96dpi)
  *   - Padding: 56px all sides
  *   - Serif font stack via shared token (--ps-font-stack)
- *   - Body: 14.5px
+ *   - Body: 15px (Issue #41 C2 polish — bumped from 14.5px)
+ *   - Option: 14.5px (Issue #41 C2 polish — bumped from 14px)
  *   - Passage line-height: 1.85 via token
  *   - Question line-height: 1.7 via token
  *   - Paragraph indent: 2em via token
@@ -37,7 +38,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px;
+  padding: 16px;
   box-sizing: border-box;
 }
 
@@ -70,7 +71,7 @@
 /* ─── Passage body ─────────────────────────────────────────────── */
 
 .ps-passage-body {
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: var(--ps-passage-line-height);
   text-align: justify;
   hyphens: auto;
@@ -156,11 +157,11 @@
 
 .ps-question-no {
   font-weight: 700;
-  font-size: 14.5px;
+  font-size: 15px;
 }
 
 .ps-question-stem {
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: var(--ps-question-line-height);
 }
 
@@ -187,7 +188,7 @@
   display: flex;
   gap: 6px;
   align-items: baseline;
-  font-size: 14px;
+  font-size: 14.5px;
   line-height: 1.6;
 }
 
