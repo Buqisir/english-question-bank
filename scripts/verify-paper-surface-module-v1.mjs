@@ -485,6 +485,163 @@ assert(
   'font-family not using --ps-font-stack var',
 )
 
+/* ─── 5b. Question-block focus delegation (PR #39 QA fix) ────────── */
+
+console.log('\nTest 5b: Question-block focus delegation (PR #39 QA fix)')
+
+// Locate the PaperSurfaceQuestionItem function body so we can assert on
+// the JSX that renders an individual question. The component is the
+// single focus target for the whole question block (number + stem +
+// options), implemented via event delegation on the outer <li>.
+{
+  const itemMatch = tsxNoComments.match(
+    /function\s+PaperSurfaceQuestionItem\s*\([\s\S]*?\)\s*:\s*ReactNode\s*\{([\s\S]*?)\n\}\s*(?=\n|$)/,
+  )
+
+  assert(
+    'PaperSurfaceQuestionItem function body is locatable',
+    !!itemMatch,
+    'could not find PaperSurfaceQuestionItem function body',
+  )
+
+  if (itemMatch) {
+    const itemBody = itemMatch[1]
+
+    // 1. Outer <li.ps-question> owns the focus click handler.
+    //    The handler must call onQuestionClick(question.id) and live on
+    //    the <li>, not on the inner <button>.
+    //
+    //    We can't use a naive `<li ...>` regex because the JSX attributes
+    //    contain arrow functions (`() => onQuestionClick(...)`) whose
+    //    `=>` sequence would terminate a non-greedy match too early.
+    //    Instead, slice from `<li ` to the first un-nested `>` by
+    //    tracking JSX expression brace depth.
+    const liStart = itemBody.indexOf('<li')
+    let liAttrs = ''
+    if (liStart >= 0) {
+      let depth = 0
+      let i = liStart + 3
+      while (i < itemBody.length) {
+        const ch = itemBody[i]
+        if (ch === '{') depth++
+        else if (ch === '}') depth--
+        else if (ch === '>' && depth === 0) break
+        i++
+      }
+      liAttrs = itemBody.slice(liStart + 3, i)
+    }
+    assert(
+      'PaperSurfaceQuestionItem renders an outer <li>',
+      liStart >= 0 && liAttrs.length > 0,
+      'no <li> opening tag inside PaperSurfaceQuestionItem',
+    )
+    assert(
+      'Outer <li> uses className ps-question (with active modifier)',
+      /ps-question/.test(liAttrs),
+      'ps-question class missing on outer <li>',
+    )
+    assert(
+      'Outer <li> owns onClick={() => onQuestionClick(question.id)}',
+      /onClick\s*=\s*\{\s*\(\s*\)\s*=>\s*onQuestionClick\(\s*question\.id\s*\)\s*\}/.test(
+        liAttrs,
+      ),
+      'outer <li> missing onClick={() => onQuestionClick(question.id)}',
+    )
+
+    // 2. <button.ps-question-stem-button> does NOT own a separate
+    //    onClick. Without an own onClick, mouse + keyboard activations
+    //    on the button still produce a click that bubbles to the <li>,
+    //    and we avoid the double-toggle that an own + bubbled click
+    //    would cause.
+    //
+    //    Use the same depth-tracking trick to slice the <button>
+    //    opening tag's attributes safely.
+    const buttonStart = itemBody.indexOf('<button')
+    let buttonAttrs = ''
+    if (buttonStart >= 0) {
+      let depth = 0
+      let i = buttonStart + 7
+      while (i < itemBody.length) {
+        const ch = itemBody[i]
+        if (ch === '{') depth++
+        else if (ch === '}') depth--
+        else if (ch === '>' && depth === 0) break
+        i++
+      }
+      buttonAttrs = itemBody.slice(buttonStart + 7, i)
+    }
+    assert(
+      'PaperSurfaceQuestionItem renders the stem <button>',
+      buttonStart >= 0 && buttonAttrs.length > 0,
+      'no <button> inside PaperSurfaceQuestionItem',
+    )
+    assert(
+      'Stem <button> uses className ps-question-stem-button',
+      /ps-question-stem-button/.test(buttonAttrs),
+      'ps-question-stem-button class missing',
+    )
+    assert(
+      'Stem <button> does NOT own its own onClick (keyboard click bubbles to <li>)',
+      !/onClick\s*=/.test(buttonAttrs),
+      'stem button still owns an onClick handler — double toggle risk',
+    )
+    assert(
+      'Stem <button> stays focusable / accessible (still aria-pressed + aria-label)',
+      /aria-pressed/.test(buttonAttrs) && /aria-label/.test(buttonAttrs),
+      'stem button accessibility attributes lost',
+    )
+
+    // 3. PaperSurfaceOptionList is rendered INSIDE the <li>, so option
+    //    clicks bubble to the question item delegate.
+    assert(
+      'PaperSurfaceOptionList is rendered inside PaperSurfaceQuestionItem',
+      /<PaperSurfaceOptionList\b/.test(itemBody),
+      'PaperSurfaceOptionList not rendered inside PaperSurfaceQuestionItem',
+    )
+
+    // 4. No new state hook is introduced inside PaperSurfaceQuestionItem.
+    //    (The whole module-wide useState/useReducer ban is already
+    //    asserted above; this guard is targeted at the QA fix scope to
+    //    catch a regression that adds local state to mediate the
+    //    delegation.)
+    assert(
+      'PaperSurfaceQuestionItem introduces no new state hook',
+      !/\b(useState|useReducer)\s*[<(]/.test(itemBody),
+      'state hook found inside PaperSurfaceQuestionItem',
+    )
+  }
+
+  // 5. PaperSurfaceOptionList renders options as plain <li> rows, not
+  //    as <button>s. The whole question block is one focus delegate;
+  //    options must NOT carry answer-selection semantics.
+  const optionListMatch = tsxNoComments.match(
+    /function\s+PaperSurfaceOptionList\s*\([\s\S]*?\)\s*:\s*ReactNode\s*\{([\s\S]*?)\n\}\s*(?=\n|$)/,
+  )
+  assert(
+    'PaperSurfaceOptionList function body is locatable',
+    !!optionListMatch,
+    'could not find PaperSurfaceOptionList function body',
+  )
+  if (optionListMatch) {
+    const optionBody = optionListMatch[1]
+    assert(
+      'Each option is rendered as a plain <li> (not a <button>)',
+      /<li\b/.test(optionBody) && !/<button\b/.test(optionBody),
+      'option rendered as <button> — answer-selection semantics leaked',
+    )
+    assert(
+      'PaperSurfaceOptionList does not call onQuestionClick directly',
+      !/onQuestionClick/.test(optionBody),
+      'option list calls onQuestionClick — must rely on event bubbling',
+    )
+    assert(
+      'PaperSurfaceOptionList does not attach its own onClick to options',
+      !/onClick\s*=/.test(optionBody),
+      'option list attaches its own onClick — must rely on bubbling',
+    )
+  }
+}
+
 /* ─── 6. Segmenter purity ─────────────────────────────────────────── */
 
 console.log('\nTest 6: Segmenter purity')
