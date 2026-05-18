@@ -19,12 +19,19 @@
  *   tracks centered together by symmetric flexible desk gutters:
  *
  *     [ outer-left desk gutter (1fr) ]
- *     [ paper track (≤ 794px)        ]
+ *     [ paper track (≤ 858px)        ]
  *     [ rail track  (≤ 380px)        ]
  *     [ outer-right desk gutter (1fr)]
  *
  *   with a fixed `column-gap: 24px`. The paper-to-rail seam is now
  *   exactly the column-gap, never leftover 1fr space.
+ *
+ *   The 858px paper track equals the 794px white A4 sheet plus the
+ *   32px symmetric horizontal matte PaperSurface paints on each side
+ *   (Issue #43 QA follow-up; browser QA micro-tune 24px → 28px → 32px).
+ *   Including the matte inside the paper track lets the outer desk
+ *   gutters shrink naturally and lets the sheet read as visually
+ *   centered inside its own gray frame.
  *
  * What this file does NOT change:
  *
@@ -90,9 +97,21 @@
 
 .pi-ps-harness-shell {
   display: grid;
+  /*
+   * Issue #43 final tune: paper track widened from 850px to 858px so
+   * the 32px symmetric horizontal matte the PaperSurface paints on
+   * each side fits inside the paper track exactly (858 = 794 white
+   * sheet + 32 × 2 matte). The white A4 sheet remains 794px and is
+   * centered inside its own matte; the outer shell desk gutters
+   * (the two `1fr` tracks) shrink naturally to absorb the 64px the
+   * matte now claims from them. The seam between paper track and
+   * rail track is still exactly the column-gap (24px), never
+   * leftover 1fr space.
+   * Browser QA progression: 842px → 850px → 858px (matte 24px → 28px → 32px).
+   */
   grid-template-columns:
     minmax(0, 1fr)
-    minmax(0, 794px)
+    minmax(0, 858px)
     minmax(0, 380px)
     minmax(0, 1fr);
   column-gap: 24px;
@@ -100,7 +119,10 @@
   overflow: hidden;
   /* Desk tone matches PaperSurface's own desk (#ececec) so the outer
      gutters read continuously as desk and the paper sheet shadow
-     stays readable. */
+     stays readable. The matte itself sits on a slightly darker base
+     (#e8e8e8) painted by .ps-surface; the matte's own gradient
+     fades back to #ececec at its outer edges so there is no seam
+     between the matte and these outer gutters. */
   background: #ececec;
 }
 

@@ -35,12 +35,58 @@
 
   font-family: var(--ps-font-stack);
   color: var(--ps-ink);
-  background: #ececec;
+  /* Issue #43 final visual micro-tune: subtler matte gray + softer
+     top/bottom transition.
+     The shell desk (#ececec) is the lighter base. The PaperSurface
+     matte sits on a slightly darker base (#e8e8e8 — 4 units of gray
+     darker than the desk; previously #e4e4e4) so the white A4 sheet
+     reads as resting on a calm paper-desk depth without the matte
+     ring reading as decorative.
+     Two layered gradients carry the transition:
+       - Bottom layer (paint order: drawn last, sits underneath):
+         horizontal fade from outer desk gray to matte gray across
+         the 32px on each side of the sheet — outer edges match the
+         desk so there is no visible seam where the matte meets the
+         outer gutters. The center band (between 32px and
+         calc(100% - 32px)) sits underneath the white page and is
+         never directly seen.
+         The teacher reads only the side ramps as the matte's
+         left/right edge.
+       - Top layer (paint order: drawn first, sits on top):
+         vertical mask that softly fades the desk color into a
+         transparent middle across the 16px vertical matte at the
+         top and bottom. Because the layer alpha drops to 0 in the
+         middle (between 16px and calc(100% - 16px)), the lower
+         horizontal matte gradient reads through the body of the
+         surface — only the top and bottom edges are blended back
+         toward the outer desk gray, giving a soft top/bottom edge
+         instead of the previous abrupt transition.
+     The step from #ececec to #e8e8e8 is intentionally tiny: it
+     should read as desk depth, not decoration. */
+  background:
+    linear-gradient(
+      to bottom,
+      #ececec 0,
+      rgb(236 236 236 / 0) 16px,
+      rgb(236 236 236 / 0) calc(100% - 16px),
+      #ececec 100%
+    ),
+    linear-gradient(
+      to right,
+      #ececec 0,
+      #e8e8e8 32px,
+      #e8e8e8 calc(100% - 32px),
+      #ececec 100%
+    );
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
+  /* Issue #43 final tune: horizontal matte 32px so the gray frame
+     around the white A4 sheet visibly and symmetrically wraps the
+     paper. Vertical matte stays 16px. Browser QA progression:
+     24px → 28px → 32px. */
+  padding: 16px 32px;
   box-sizing: border-box;
 }
 
