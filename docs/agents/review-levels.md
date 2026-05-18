@@ -66,12 +66,52 @@ Use these to prevent review from expanding forever.
 - **Follow-up Gate**: must be resolved before a named future stage.
 - **Nice-to-have**: do not schedule unless PO explicitly asks.
 
+## Module Deepening Cadence
+
+Module deepening is a short architecture check, not a default step before every cut. Use the `improve-codebase-architecture` skill for this check.
+
+Default cadence:
+
+- After every **3-5 feature cuts** in the same area, run one module-deepening check.
+- Run it sooner when a trigger appears.
+- Do not run it for every small PR.
+
+Triggers:
+
+- The same logic appears in a second place.
+- A file exceeds roughly **500-700 lines** and is still growing.
+- A concept has two competing names.
+- A second consumer appears for a feature or rendering surface.
+- CR repeats the same kind of `Should Watch`.
+- Verify becomes hard to write because the seam is unclear.
+- Reviewers must read an entire large file to understand a small change.
+- New feature work repeatedly starts by repairing old structure.
+
+Do not deepen when:
+
+- There is only one real use case.
+- The work is UI polish.
+- The requirement is still unstable.
+- The risk is product judgment, not code structure.
+- Deepening would reduce the number of verifiable paths.
+- The only reason is that the code could look more elegant.
+
+Deepening rules:
+
+- Deepen **one seam** at a time.
+- Reduce **one kind of repetition or leakage** at a time.
+- Keep the user-visible behaviour unchanged unless the cut is explicitly a product change.
+- Prefer tiny internal modules with strong verify.
+- Do not introduce a seam before the second real adapter / consumer unless the next cut is blocked without it.
+- Use the deletion test: if deleting the proposed module only moves the same complexity into one caller, it is too shallow; if deleting it spreads complexity across multiple callers, it is earning its keep.
+
 ## Operating Notes
 
 - Do not give every small cut an L3/L4 process. That burns time without improving quality.
 - Do not downgrade tree-trunk work just because the diff looks small. Data contracts and runtime surface boundaries can be high risk even with few lines.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
+- Module deepening is scheduled by cadence or trigger, not by anxiety. Use it to improve locality and leverage, not to polish for elegance.
 - Default simplification:
   - L0 does not need formal CR unless it makes a decision.
   - L1 uses PA or CR, not both by default.

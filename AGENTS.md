@@ -45,6 +45,7 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Docs-only and type-only cuts do not need browser QA.
 - Do not automatically turn `Should Watch` findings into tasks. Only `Must Fix` blocks the current PR; `Follow-up Gate` blocks a named future stage.
+- Run module deepening as a scheduled architecture check, not before every cut: after 3-5 related feature cuts, or sooner when a trigger appears (duplicate logic, second consumer, 500-700+ line growing file, repeated CR watch, unclear verify seam, or feature work repeatedly repairing old structure). Use `improve-codebase-architecture`; deepen one seam at a time.
 - Use role-coded Kiro handshakes such as `/kiro DEV1`, `/kiro PA`, and `/kiro CR`.
 - When giving the PO a prompt to paste into Kiro, put the entire prompt content in fenced code blocks. Do not put explanatory prose between the prompt code blocks.
 - Ask Kiro to wrap the entire completion report or review in exactly one fenced `text` code block, with no prose outside the block.
