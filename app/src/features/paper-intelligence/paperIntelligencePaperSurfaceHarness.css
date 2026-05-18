@@ -98,19 +98,20 @@
 .pi-ps-harness-shell {
   display: grid;
   /*
-   * Issue #43 QA follow-up: paper track widened from 794px to 850px
-   * so the PaperSurface gray matte (now 28px left + 28px right per
-   * .ps-surface) is included inside the paper track. The white A4
-   * sheet remains 794px and is centered inside its own matte; the
-   * outer shell desk gutters (the two `1fr` tracks) shrink naturally
-   * to absorb the 56px the matte now claims from them. The seam
-   * between paper track and rail track is still exactly the
-   * column-gap (24px), never leftover 1fr space.
-   * Browser QA micro-tune: paper track 842px → 850px (matte 24px → 28px).
+   * Issue #43 final tune: paper track widened from 850px to 858px so
+   * the 32px symmetric horizontal matte the PaperSurface paints on
+   * each side fits inside the paper track exactly (858 = 794 white
+   * sheet + 32 × 2 matte). The white A4 sheet remains 794px and is
+   * centered inside its own matte; the outer shell desk gutters
+   * (the two `1fr` tracks) shrink naturally to absorb the 64px the
+   * matte now claims from them. The seam between paper track and
+   * rail track is still exactly the column-gap (24px), never
+   * leftover 1fr space.
+   * Browser QA progression: 842px → 850px → 858px (matte 24px → 28px → 32px).
    */
   grid-template-columns:
     minmax(0, 1fr)
-    minmax(0, 850px)
+    minmax(0, 858px)
     minmax(0, 380px)
     minmax(0, 1fr);
   column-gap: 24px;
@@ -118,7 +119,10 @@
   overflow: hidden;
   /* Desk tone matches PaperSurface's own desk (#ececec) so the outer
      gutters read continuously as desk and the paper sheet shadow
-     stays readable. */
+     stays readable. The matte itself sits on a slightly darker base
+     (#e4e4e4) painted by .ps-surface; the matte's own gradient
+     fades back to #ececec at its outer edges so there is no seam
+     between the matte and these outer gutters. */
   background: #ececec;
 }
 

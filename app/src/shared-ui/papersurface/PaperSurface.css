@@ -35,17 +35,36 @@
 
   font-family: var(--ps-font-stack);
   color: var(--ps-ink);
-  background: #ececec;
+  /* Issue #43 final tune: subtle matte ↔ desk transition. The shell
+     desk (#ececec) is the lighter base. The PaperSurface matte sits
+     on a slightly darker base (#e4e4e4) so the white A4 sheet reads
+     as resting on a calm paper-desk depth. The horizontal linear
+     gradient softly fades the matte back to the desk gray over the
+     32px on each side of the sheet — outer edges match the desk so
+     there is no visible seam where the matte meets the outer
+     gutters; the visible darker matte ring is what the teacher
+     reads as the paper desk frame. The center band of the gradient
+     (between 32px and calc(100% - 32px)) sits underneath the white
+     paper page, so it is never directly seen — only the side ramps
+     are visible. The step from #ececec to #e4e4e4 (8 units of gray)
+     is intentionally tiny: it should read as desk depth, not
+     decoration. */
+  background: linear-gradient(
+    to right,
+    #ececec 0,
+    #e4e4e4 32px,
+    #e4e4e4 calc(100% - 32px),
+    #ececec 100%
+  );
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Issue #43 QA follow-up: symmetric matte. Vertical matte stays
-     16px; horizontal matte is 28px so the gray frame around the
-     white A4 sheet reads symmetric and visually centered inside the
-     harness paper track (850px = 794px page + 28px × 2 matte).
-     Browser QA micro-tune: 24px → 28px. */
-  padding: 16px 28px;
+  /* Issue #43 final tune: horizontal matte 32px so the gray frame
+     around the white A4 sheet visibly and symmetrically wraps the
+     paper. Vertical matte stays 16px. Browser QA progression:
+     24px → 28px → 32px. */
+  padding: 16px 32px;
   box-sizing: border-box;
 }
 

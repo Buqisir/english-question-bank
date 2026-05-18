@@ -33,25 +33,29 @@
  *   C2 polish boundary — PaperSurface.css polish slice:
  *     - declares --ps-page-width: 794px
  *     - declares --ps-page-padding: 56px
- *     - .ps-surface padding: 16px 28px (Issue #43 QA follow-up
- *       symmetric matte; browser QA micro-tune 24px → 28px)
+ *     - .ps-surface padding: 16px 32px (Issue #43 final tune
+ *       symmetric matte; browser QA progression 24px → 28px → 32px)
  *     - .ps-passage-body font-size: 16px
  *     - .ps-question-no font-size: 16px
  *     - .ps-question-stem font-size: 16px
  *     - .ps-option font-size: 16px
  *     - no border-radius anywhere in PaperSurface.css
- *     - no gradient anywhere in PaperSurface.css
+ *     - gradient is allowed ONLY on the .ps-surface matte (Issue #43
+ *       final tune: subtle horizontal fade from matte gray back to
+ *       outer desk gray at the matte's left/right edges); gradient
+ *       remains forbidden inside the .ps-page sheet
  *     - .ps-page selector group does NOT add inner box-shadow beyond the
  *       single existing outer-sheet box-shadow (pattern: at most one
  *       box-shadow declaration in the whole file, and it must live on
  *       .ps-page)
  *
  *   C2 polish boundary — harness CSS polish slice (Issue #43 redesign,
- *   QA follow-up: symmetric matte):
+ *   final tune: 32px symmetric matte):
  *     - .pi-ps-harness-shell uses 4-column centered workspace grid:
- *         minmax(0, 1fr) minmax(0, 850px) minmax(0, 380px) minmax(0, 1fr)
- *       (850px = 794px white sheet + 28px × 2 symmetric matte;
- *       browser QA micro-tune from 842px / 24px matte)
+ *         minmax(0, 1fr) minmax(0, 858px) minmax(0, 380px) minmax(0, 1fr)
+ *       (858px = 794px white sheet + 32px × 2 symmetric matte;
+ *       browser QA progression from 842px / 24px matte and
+ *       850px / 28px matte)
  *     - .pi-ps-harness-shell has column-gap: 24px
  *     - .pi-ps-harness-shell paints desk tone (#ececec)
  *     - .pi-ps-harness-left is on grid-column: 2 with overflow-y: auto
@@ -172,15 +176,15 @@ assert(
   "PaperSurface.css declares --ps-page-padding: 56px"
 )
 
-// .ps-surface padding: 16px 28px (Issue #43 QA follow-up — symmetric
-// matte: vertical matte 16px stays, horizontal matte is 28px so the
-// gray frame around the white A4 sheet reads symmetric. Browser QA
-// micro-tune 24px → 28px).
+// .ps-surface padding: 16px 32px (Issue #43 final tune — symmetric
+// matte: vertical matte 16px stays, horizontal matte is 32px so the
+// gray frame around the white A4 sheet visibly and symmetrically
+// wraps the paper. Browser QA progression 24px → 28px → 32px).
 {
   const match = paperSurfaceCss.match(/\.ps-surface\s*\{([\s\S]*?)\}/)
   assert(
-    !!match && /(^|\s|;)padding\s*:\s*16px\s+28px\s*;/.test(match ? match[1] : ''),
-    ".ps-surface declares padding: 16px 28px (symmetric matte)"
+    !!match && /(^|\s|;)padding\s*:\s*16px\s+32px\s*;/.test(match ? match[1] : ''),
+    ".ps-surface declares padding: 16px 32px (symmetric matte)"
   )
 }
 
@@ -209,11 +213,39 @@ assert(
   "PaperSurface.css does NOT introduce border-radius"
 )
 
-// No gradient anywhere.
-assert(
-  !/gradient/.test(paperSurfaceCss),
-  "PaperSurface.css does NOT introduce gradient"
-)
+// Gradient is allowed ONLY on the .ps-surface matte (Issue #43 final
+// tune introduces a subtle horizontal linear-gradient that fades the
+// matte gray back to the outer desk gray at the matte's left/right
+// edges, so the paper desk reads as having calm depth without a
+// visible decorative band). Gradient is still forbidden inside the
+// .ps-page sheet itself — the page must remain a clean white surface.
+{
+  const psSurfaceMatch = paperSurfaceCss.match(/\.ps-surface\s*\{([\s\S]*?)\}/)
+  const psPageMatch = paperSurfaceCss.match(/\.ps-page\s*\{([\s\S]*?)\}/)
+  const psSurfaceBody = psSurfaceMatch ? psSurfaceMatch[1] : ''
+  const psPageBody = psPageMatch ? psPageMatch[1] : ''
+
+  // .ps-page must NOT contain gradient.
+  assert(
+    !/gradient/.test(psPageBody),
+    ".ps-page sheet does NOT introduce gradient (paper stays a clean white surface)"
+  )
+
+  // Outside .ps-surface and .ps-page: no gradient allowed. We strip
+  // those two rule bodies and check the remainder is gradient-free.
+  const remainder = paperSurfaceCss
+    .replace(/\.ps-surface\s*\{[\s\S]*?\}/, '')
+    .replace(/\.ps-page\s*\{[\s\S]*?\}/, '')
+  assert(
+    !/gradient/.test(remainder),
+    "PaperSurface.css does NOT introduce gradient outside the .ps-surface matte"
+  )
+
+  // .ps-surface MAY use a gradient on its background (Issue #43 final
+  // tune). We don't require it — only assert that if any gradient
+  // exists in the file, it's confined to .ps-surface.
+  void psSurfaceBody
+}
 
 // box-shadow: at most ONE declaration in the file, and it must be in
 // the .ps-page selector. This pins the "outer sheet shadow only" rule
@@ -249,19 +281,20 @@ const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
   const shellMatch = harnessCssBase.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
   const shellBody = shellMatch ? shellMatch[1] : ''
 
-  // 4-column model: outer-left desk, paper track (850px = 794px sheet
-  // + 28px × 2 symmetric matte; browser QA micro-tune from 842px /
-  // 24px matte), rail track, outer-right desk.
+  // 4-column model: outer-left desk, paper track (858px = 794px sheet
+  // + 32px × 2 symmetric matte; browser QA progression 842px /
+  // 24px matte → 850px / 28px matte → 858px / 32px matte), rail
+  // track, outer-right desk.
   assert(
     !!shellMatch &&
-      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*850px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
+      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*858px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
         shellBody,
       ),
-    "harness CSS .pi-ps-harness-shell uses 4-column centered workspace grid (1fr / 850px / 380px / 1fr)"
+    "harness CSS .pi-ps-harness-shell uses 4-column centered workspace grid (1fr / 858px / 380px / 1fr)"
   )
   assert(
-    /minmax\(\s*0\s*,\s*850px\s*\)/.test(shellBody),
-    "harness CSS .pi-ps-harness-shell paper track is minmax(0, 850px) (794px sheet + 28px × 2 matte)"
+    /minmax\(\s*0\s*,\s*858px\s*\)/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell paper track is minmax(0, 858px) (794px sheet + 32px × 2 matte)"
   )
   assert(
     !/minmax\(\s*0\s*,\s*794px\s*\)/.test(shellBody),
@@ -270,6 +303,10 @@ const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
   assert(
     !/minmax\(\s*0\s*,\s*842px\s*\)/.test(shellBody),
     "harness CSS .pi-ps-harness-shell paper track no longer uses minmax(0, 842px)"
+  )
+  assert(
+    !/minmax\(\s*0\s*,\s*850px\s*\)/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell paper track no longer uses minmax(0, 850px)"
   )
   assert(
     /minmax\(\s*0\s*,\s*380px\s*\)/.test(shellBody),
