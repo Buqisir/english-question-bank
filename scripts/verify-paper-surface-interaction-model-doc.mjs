@@ -725,7 +725,9 @@ assert(
 
 const ALLOWED_PATTERNS = [
   /^docs\/adr\/0003-paper-surface-interaction-model\.md$/,
+  /^docs\/paper-surface-textmap-adapter-plan\.md$/,
   /^scripts\/verify-paper-surface-interaction-model-doc\.mjs$/,
+  /^scripts\/verify-paper-surface-textmap-adapter-plan\.mjs$/,
   /^shared\/papersurface\/anchorKeys\.mjs$/,
   /^shared\/papersurface\/anchorKeys\.d\.ts$/,
   /^shared\/papersurface\/types\.d\.ts$/,
