@@ -1,0 +1,206 @@
+/*
+ * PaperSurface.css — Production paper surface styles (Issue #21-B3).
+ *
+ * Visual requirements (from docs/paper-surface-guangdong-visual-qa-checklist.md):
+ *   - Paper width: 794px (A4 @ 96dpi)
+ *   - Padding: 56px all sides
+ *   - Serif font stack via shared token (--ps-font-stack)
+ *   - Body: 14.5px
+ *   - Passage line-height: 1.85 via token
+ *   - Question line-height: 1.7 via token
+ *   - Paragraph indent: 2em via token
+ *   - 2-column options grid via tokens
+ *   - No border-radius inside paper sheet
+ *   - No box-shadow inside paper sheet
+ *   - No gradient inside paper sheet
+ *   - No card-like UI inside paper area
+ *   - Evidence anchors visually neutral (invisible)
+ *
+ * Token injection:
+ *   The React component injects shared tokens as CSS custom properties
+ *   (--ps-*) on the .ps-surface root. This CSS consumes them via var().
+ *   Values that are screen-only (page width, page padding, active rail)
+ *   stay hardcoded here — they are NOT shared token candidates.
+ */
+
+/* ─── Surface root ─────────────────────────────────────────────── */
+
+.ps-surface {
+  --ps-page-width: 794px;
+  --ps-page-padding: 56px;
+  --ps-active-rail: #d4ad60;
+
+  font-family: var(--ps-font-stack);
+  color: var(--ps-ink);
+  background: #ececec;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* ─── The paper page ───────────────────────────────────────────── */
+
+.ps-page {
+  background: #fff;
+  width: var(--ps-page-width);
+  max-width: 100%;
+  padding: var(--ps-page-padding);
+  box-sizing: border-box;
+  /* Subtle outer shadow to separate from desk — allowed per QA checklist */
+  box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
+}
+
+/* ─── Section ──────────────────────────────────────────────────── */
+
+.ps-section {
+  margin-bottom: 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--ps-rule);
+}
+
+.ps-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* ─── Passage body ─────────────────────────────────────────────── */
+
+.ps-passage-body {
+  font-size: 14.5px;
+  line-height: var(--ps-passage-line-height);
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* ─── Paragraph ────────────────────────────────────────────────── */
+
+.ps-paragraph {
+  margin: 0 0 8px;
+  text-indent: var(--ps-passage-indent);
+}
+
+.ps-paragraph:last-child {
+  margin-bottom: 12px;
+}
+
+/* ─── Sentence ─────────────────────────────────────────────────── */
+
+.ps-sentence {
+  /* Sentences are inline spans; no special styling in B3. */
+}
+
+/* ─── Evidence anchors (neutral, invisible in B3) ──────────────── */
+
+.ps-evidence-anchor {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ─── Annotation anchors (neutral, invisible in B3) ────────────── */
+
+.ps-annotation-anchor {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ─── Question list ────────────────────────────────────────────── */
+
+.ps-question-list {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+/* ─── Question item ────────────────────────────────────────────── */
+
+.ps-question {
+  margin-bottom: 14px;
+  padding-left: 6px;
+  border-left: 2px solid transparent;
+  transition: border-color 80ms ease;
+}
+
+.ps-question--active {
+  border-left-color: var(--ps-active-rail);
+}
+
+/* ─── Question stem button ─────────────────────────────────────── */
+
+.ps-question-stem-button {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.ps-question-stem-button:focus-visible {
+  outline: 2px solid var(--ps-active-rail);
+  outline-offset: 2px;
+}
+
+.ps-question-no {
+  font-weight: 700;
+  font-size: 14.5px;
+}
+
+.ps-question-stem {
+  font-size: 14.5px;
+  line-height: var(--ps-question-line-height);
+}
+
+/* ─── Option list ──────────────────────────────────────────────── */
+
+.ps-option-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0 0 0 22px;
+  display: grid;
+  grid-template-columns: var(--ps-options-grid-columns);
+  gap: 4px var(--ps-options-grid-gap-x);
+}
+
+@media (max-width: 700px) {
+  .ps-option-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Option item ──────────────────────────────────────────────── */
+
+.ps-option {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ps-option-label {
+  font-weight: 700;
+}
+
+/* ─── Reading mode placeholder (B3) ───────────────────────────── */
+
+.ps-reading-placeholder {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--ps-muted);
+  font-size: 16px;
+  font-style: italic;
+}
