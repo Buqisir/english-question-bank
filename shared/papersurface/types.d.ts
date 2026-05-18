@@ -24,12 +24,25 @@
  *  Section index
  * --------------------------------------------------------------
  *   1. PaperTextMap  — read-only position map.
- *   2. PaperAnnotation — curated teacher annotation; references
- *                        TextMap, does not store own offsets.
+ *   2. PaperAnnotation — curated teacher annotation; SCOPE-SAFE
+ *                        discriminated union (question vs passage);
+ *                        references TextMap, does not store own
+ *                        offsets, does not embed explanation payload.
  *   3. PaperSurfaceMode + focus types (re-stated for completeness;
  *      the canonical narrative still lives in the ADR).
  *   4. FocusIntent — the host-bound message PaperSurface emits.
- *   5. PaperSurfaceProps — the controlled-component prop sketch.
+ *   5. PaperSurfaceProps — the controlled-component prop sketch;
+ *      includes the renderable PaperQuestion / PaperQuestionOption
+ *      pair the PaperSurface left column needs.
+ *
+ * --------------------------------------------------------------
+ *  Companion ADRs / plans
+ * --------------------------------------------------------------
+ *   - docs/adr/0003-paper-surface-interaction-model.md
+ *       (B1.5 locked design note — narrative source.)
+ *   - docs/paper-surface-textmap-adapter-plan.md
+ *       (B2 adapter plan — how PI / Assembly Basket /
+ *        reading-analysis materialise these types.)
  */
 
 /* ============================================================== *
@@ -158,22 +171,60 @@ export type PaperAnnotationImportance = 'core' | 'extended'
 export type PaperAnnotationScope = 'question' | 'passage'
 
 /**
- * Coarse classification of the annotation's subject matter. Kind is
- * METADATA only — it is NOT the primary axis of layout (ADR 0003 §2:
- * "Annotations are NOT bucketed into many sections by `kind`").
+ * v1 annotation kind taxonomy (single source of truth).
+ *
+ * This is the ONLY enumeration of annotation kinds in the
+ * PaperSurface contract. Earlier sketches floated multiple parallel
+ * taxonomies (a "5 coarse buckets" version and a "3 worked
+ * examples" version) — both have been retired. The v1 kinds below
+ * are the closed set; adding or removing a kind is an ADR-
+ * superseding change.
+ *
+ * Kind is METADATA only. Reading mode does NOT bucket annotations
+ * into many sections by `kind` (ADR 0003 §2). Display layout is
+ * driven by `importance` + `teachingPriority` + `sourceOrder`,
+ * not by kind.
+ *
+ * Kind groups (for documentation only — not encoded in the type):
+ *   sentence-level     : 'long-sentence', 'discourse-structure',
+ *                        'culture-context'
+ *   word/phrase-level  : 'derived-word', 'compound-word',
+ *                        'phrase-chunk', 'familiar-new-meaning',
+ *                        'synonym'
+ *   question-evidence  : 'evidence-support', 'evidence-trap'
+ *
+ * The two `evidence-*` kinds are intentionally part of the
+ * annotation taxonomy: when an evidence span is also a thing a
+ * teacher would teach about (and therefore part of the curated
+ * annotation pack), it is represented as an annotation with
+ * `kind: 'evidence-support' | 'evidence-trap'` and
+ * `scope: 'question'`. PaperEvidence (§5) remains the separate
+ * lightweight geometry channel that lecture-mode dotted lines
+ * paint against; the two are NOT in conflict.
  */
 export type PaperAnnotationKind =
-  | 'lexical'
-  | 'syntactic'
-  | 'discourse'
-  | 'rhetoric'
-  | 'culture'
+  | 'long-sentence'
+  | 'derived-word'
+  | 'compound-word'
+  | 'phrase-chunk'
+  | 'familiar-new-meaning'
+  | 'synonym'
+  | 'evidence-support'
+  | 'evidence-trap'
+  | 'discourse-structure'
+  | 'culture-context'
 
-export type PaperAnnotation = {
+/**
+ * The fields every PaperAnnotation carries, regardless of scope.
+ * The two scope-specific shapes below extend this with their
+ * scope-required (or scope-forbidden) fields.
+ */
+type PaperAnnotationCommon = {
   /** Stable id, unique within the annotation pack of this paper. */
   readonly id: string
 
-  /** Coarse classification. Metadata only. */
+  /** Coarse classification. Metadata only (see PaperAnnotationKind
+   *  doc above). */
   readonly kind: PaperAnnotationKind
 
   /** Position is addressed THROUGH a TextMap range. The annotation
@@ -186,15 +237,6 @@ export type PaperAnnotation = {
    *    - 'extended' — folded by default, surfaced on demand. */
   readonly importance: PaperAnnotationImportance
 
-  /** Whether this annotation is question-scoped (shown inside
-   *  Question Analysis) or passage-scoped (shown in reading mode). */
-  readonly scope: PaperAnnotationScope
-
-  /** When `scope === 'question'`, identifies the owning question.
-   *  Required for question-scoped annotations; ignored for
-   *  passage-scoped ones. */
-  readonly questionId?: string
-
   /** Sort key inside the same `importance` bucket. Lower is shown
    *  first. */
   readonly teachingPriority: number
@@ -203,6 +245,48 @@ export type PaperAnnotation = {
    *  `teachingPriority`. Lower is shown first. */
   readonly sourceOrder: number
 }
+
+/**
+ * Question-scoped annotation. Shown inside Question Analysis in
+ * lecture mode (and inside the active sentence's teaching flow when
+ * the sentence is the evidence sentence for this question). The
+ * `questionId` field is REQUIRED — at the type level, not via a
+ * comment.
+ */
+export type PaperQuestionAnnotation = PaperAnnotationCommon & {
+  readonly scope: 'question'
+  /** Owning question id. REQUIRED for question scope. */
+  readonly questionId: string
+}
+
+/**
+ * Passage-scoped annotation. Shown in reading mode against a
+ * paragraph / sentence span. The `questionId` field is FORBIDDEN at
+ * the type level — passage annotations have no owning question.
+ *
+ * The explicit `questionId?: never` carries the no-questionId rule
+ * structurally so a discriminated narrow on `scope === 'passage'`
+ * removes `questionId` from the inferred type entirely.
+ */
+export type PaperPassageAnnotation = PaperAnnotationCommon & {
+  readonly scope: 'passage'
+  /** Forbidden for passage scope. */
+  readonly questionId?: never
+}
+
+/**
+ * PaperAnnotation is a SCOPE-SAFE discriminated union.
+ *
+ *   - `scope: 'question'` MUST carry `questionId: string`.
+ *   - `scope: 'passage'`  MUST NOT carry `questionId` at all.
+ *
+ * The constraint is structural. It is not enforced by a runtime
+ * comment. A consumer that narrows on `scope` gets the correct
+ * `questionId` shape automatically.
+ */
+export type PaperAnnotation =
+  | PaperQuestionAnnotation
+  | PaperPassageAnnotation
 
 /* ============================================================== *
  * 3. PaperSurfaceMode + focus types
@@ -261,8 +345,29 @@ export type PaperSurfaceFocusIntent =
       readonly section: string
       readonly focus: ReadingFocus
     }
+  /**
+   * `request-read-this-sentence` is an ATOMIC intent.
+   *
+   * It expresses BOTH:
+   *   (a) switch the surface into reading mode, and
+   *   (b) focus this specific sentence (with the named section as
+   *       the active passage).
+   *
+   * It exists as a single intent — instead of being expressed as
+   * `request-mode` followed by `request-reading-focus` — to remove
+   * the half-state where the host has switched mode but not yet
+   * applied focus, or applied focus but not yet switched mode. Both
+   * orderings are observably wrong: one shows reading-mode chrome
+   * with the wrong sentence highlighted, the other keeps lecture
+   * chrome briefly on a sentence-focus state.
+   *
+   * Carrying mode + focus in a single intent is what lets the host
+   * apply them in one reducer step, so PaperSurface never observes
+   * the half-state.
+   */
   | {
       readonly kind: 'request-read-this-sentence'
+      readonly section: string
       readonly sentenceId: string
     }
 
@@ -298,13 +403,81 @@ export type PaperEvidence = {
   readonly range: PaperTextRange
 }
 
+/**
+ * One displayable option on a multiple-choice question.
+ *
+ * The PaperSurface left column needs to RENDER options inline with
+ * the question stem, so the option text and (optional) translation
+ * are part of the surface contract — not host-only metadata.
+ *
+ * What does NOT live here:
+ *   - which option is correct (`answer`),
+ *   - the per-option distractor analysis,
+ *   - synonym / paraphrase relationships against the correct option.
+ *
+ * Those remain host / right-panel concerns (Question Analysis), per
+ * ADR 0003 §7. Keeping them off PaperQuestionOption stops the wire
+ * payload for the left column from secretly leaking the answer key.
+ */
+export type PaperQuestionOption = {
+  /** Option letter as authored ('A' | 'B' | 'C' | 'D' for v1
+   *  multiple-choice; typed as `string` to leave room for future
+   *  question types without a schema break). */
+  readonly label: string
+
+  /** Displayable option text. */
+  readonly text: string
+
+  /** Optional Chinese translation of the option text. PaperSurface
+   *  may render it under the option as a faint companion line; the
+   *  host decides whether translations are visible. */
+  readonly translation?: string
+}
+
+/**
+ * One question, in the shape PaperSurface needs to render it.
+ *
+ * Renderable means: stem, options, and optional translations are
+ * all included. PaperSurface MUST NOT have to call back into a
+ * model / service to display a question.
+ *
+ * NOT included on PaperQuestion (host / right-panel concerns):
+ *   - the correct answer,
+ *   - explanation / `answerEvidence` / `synonymSummary`,
+ *   - distractor analysis,
+ *   - difficulty / boundary flags.
+ *
+ * Those are loaded by the host through Question Analysis when a
+ * question is focused (ADR 0003 §7). PaperQuestion remains a
+ * minimal surface payload.
+ */
 export type PaperQuestion = {
+  /** Stable id, unique within the paper. Matches the
+   *  `data-paper-question-id` DOM attribute when rendered. */
   readonly id: string
-  /** Document order within the paper. Lower renders first. */
-  readonly order: number
+
   /** The owning passage / section identifier, if any. Cloze /
    *  global questions may omit this. */
   readonly section?: string
+
+  /** Document order within the paper. Lower renders first. */
+  readonly order: number
+
+  /** Human-facing question number as it appears on the paper
+   *  (e.g. "21", "32", "70"). Kept as a string because real papers
+   *  use values like "21" / "B-3" / "(1)". */
+  readonly questionNo: string
+
+  /** Question stem text. */
+  readonly stem: string
+
+  /** Optional Chinese translation of the stem. */
+  readonly stemTranslation?: string
+
+  /** Displayable options in label order. May be empty for question
+   *  types that have no inline options (e.g. some writing tasks);
+   *  PaperSurface treats an empty array as "no options to render". */
+  readonly options: ReadonlyArray<PaperQuestionOption>
 }
 
 export type PaperSurfaceProps = {
