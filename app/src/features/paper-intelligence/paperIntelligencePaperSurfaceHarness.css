@@ -124,6 +124,16 @@
      fades back to #ececec at its outer edges so there is no seam
      between the matte and these outer gutters. */
   background: #ececec;
+  /*
+   * C3: positioning context for the cross-column evidence line
+   * overlay. The SVG sits absolutely inside the shell with `inset:0`
+   * and `pointer-events:none` so clicks fall through to the paper
+   * column / rail column underneath. Without `position:relative` the
+   * SVG would resolve its containing block to the viewport and the
+   * line geometry (computed in container-local coordinates) would
+   * misalign on every scroll.
+   */
+  position: relative;
 }
 
 .pi-ps-harness-left {
@@ -287,4 +297,127 @@
 .pi-ps-analysis-distractor-label {
   font-weight: 600;
   margin-right: 0.25rem;
+}
+
+
+
+/* ─── C3: cross-column evidence line overlay ──────────────────── */
+
+/*
+ * The SVG overlay sits absolute-positioned over the entire shell
+ * (which is now `position: relative`). Its viewBox spans the shell;
+ * the Bezier path coordinates are computed in container-local space
+ * by `paperIntelligenceEvidenceLineGeometry.ts`.
+ *
+ *   - `pointer-events: none` lets clicks fall through to the
+ *     PaperSurface left column AND the right Question Analysis
+ *     buttons underneath.
+ *   - `z-index: 5` sits above the grid columns and below any future
+ *     modal-like surface. Matches the `.pi-line-overlay` z-index
+ *     used by `PaperIntelligencePreview`.
+ *   - When the hook returns no geometry, the rendered <svg> carries
+ *     `data-empty="true"` and we hide it explicitly.
+ *
+ * Both the overlay class and the path classes are re-declared here
+ * (rather than inherited from `paperIntelligence.css`) so the harness
+ * surface stays self-contained — no implicit dependency on the
+ * preview's stylesheet being bundled. The class names match because
+ * the `PaperIntelligenceEvidenceLine` component emits them directly,
+ * and we want the same visual identity teachers see in the default
+ * PI route.
+ */
+.pi-ps-harness-shell .pi-line-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+}
+
+.pi-ps-harness-shell .pi-line-overlay[data-empty="true"] {
+  display: none;
+}
+
+.pi-ps-harness-shell .pi-line-path {
+  fill: none;
+  stroke: rgba(16, 185, 129, 0.65);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 5 5;
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes pi-ps-harness-line-draw {
+  from {
+    stroke-dashoffset: 1000;
+    opacity: 0.4;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.pi-ps-harness-shell .pi-line-path--animated {
+  animation: pi-ps-harness-line-draw 280ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-ps-harness-shell .pi-line-path--animated {
+    animation: none;
+  }
+}
+
+/* Stacked fallback: when the shell collapses to one column on narrow
+ * viewports the line cannot run cleanly between columns. Hide the
+ * overlay; the inline highlight + right-panel selection remain. */
+@media (max-width: 1199px) {
+  .pi-ps-harness-shell .pi-line-overlay {
+    display: none;
+  }
+}
+
+/* ─── C3: right-panel evidence row buttons ────────────────────── */
+
+/*
+ * The support evidence row and quoted distractor rows render as
+ * <button>s carrying `data-pi-evidence-id` so the line geometry can
+ * resolve them and so click handlers update `activeEvidenceId`.
+ * These selectors strip the default UA button chrome and keep the
+ * row visually identical to the read-only C1 styling.
+ */
+button.pi-ps-analysis-evidence,
+button.pi-ps-analysis-distractor {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+button.pi-ps-analysis-evidence:focus-visible,
+button.pi-ps-analysis-distractor:focus-visible {
+  outline: 2px solid #2a7c4f;
+  outline-offset: 2px;
+}
+
+/*
+ * Selected-row visual cue. Matches the support / trap palette from
+ * the PI preview's analysis panel so the teacher reads the same
+ * "this row is currently drawing the line" signal.
+ */
+.pi-ps-analysis-evidence--selected blockquote {
+  border-left-color: rgba(16, 185, 129, 0.65);
+  border-left-width: 4px;
+}
+
+.pi-ps-analysis-distractor--selected {
+  background: rgba(239, 68, 68, 0.04);
 }

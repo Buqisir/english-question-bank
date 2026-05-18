@@ -44,6 +44,50 @@ export type DOMRectLike = {
 /* ─────────────────────────── DOM lookup ─────────────────────────────── */
 
 /**
+ * Selector preset for the LEFT-side anchor lookup.
+ *
+ *   - 'pi-preview'    : `mark[data-pi-evidence-id="..."]`
+ *     The default PI preview surface (PaperIntelligencePreview)
+ *     emits highlighted evidence as `<mark data-pi-evidence-id>` in
+ *     the passage body; that selector is the historical contract
+ *     the geometry was originally written against.
+ *
+ *   - 'paper-surface' : `[data-paper-evidence-id="..."]`
+ *     The PaperSurface harness (surface=paper) emits evidence
+ *     anchors through the neutral `data-paper-*` namespace owned by
+ *     `paperSurfaceAnchorAttrs` (see `shared/papersurface/anchorKeys.mjs`).
+ *     PaperSurface does NOT emit `data-pi-*` and never will. The
+ *     element kind is intentionally NOT pinned to `<mark>` so an
+ *     active evidence anchor can be rendered as `<mark>` (visible)
+ *     or as a zero-size `<span>` (neutral / inactive).
+ *
+ * The right-side anchor lookup is unchanged: right Question Analysis
+ * remains host-owned and continues to emit `data-pi-evidence-id`
+ * regardless of which surface is active. See `findEvidenceSource`.
+ */
+export type EvidenceLineLeftSelectorPreset = 'pi-preview' | 'paper-surface'
+
+/**
+ * Map a left-selector preset to the concrete CSS selector string used
+ * inside the LEFT-column container. Pure helper, exported so the
+ * verify script can assert that both presets stay covered.
+ */
+export function leftSelectorForPreset(
+  preset: EvidenceLineLeftSelectorPreset,
+  evidenceId: string,
+): string {
+  const escaped =
+    typeof CSS !== 'undefined' && typeof CSS.escape === 'function'
+      ? CSS.escape(evidenceId)
+      : evidenceId.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
+  if (preset === 'paper-surface') {
+    return `[data-paper-evidence-id="${escaped}"]`
+  }
+  // default: pi-preview
+  return `mark[data-pi-evidence-id="${escaped}"]`
+}
+
+/**
  * Find the first DOM occurrence of an evidence id inside `container`.
  *
  * Multi-occurrence quote policy (locked):
@@ -58,13 +102,22 @@ export type DOMRectLike = {
  *     dance between occurrences when scroll changes which one is
  *     visible.
  *
- * The selector is restricted to `mark[data-pi-evidence-id="..."]`
- * because only `<mark>` highlights inside the passage body carry the
- * `data-pi-evidence-kind` attribute we render in
- * `PaperIntelligencePreview`. Right-panel rows ALSO carry
- * `data-pi-evidence-id`; this function lives behind a `containerEl`
- * scoped to the LEFT column, so right-panel matches are out of scope
- * by construction.
+ * Two selector presets are supported via `leftSelectorPreset`:
+ *
+ *   - 'pi-preview' (default) — historical contract. Restricted to
+ *     `mark[data-pi-evidence-id="..."]` because only `<mark>`
+ *     highlights inside the passage body carry the
+ *     `data-pi-evidence-kind` attribute we render in
+ *     `PaperIntelligencePreview`. Right-panel rows ALSO carry
+ *     `data-pi-evidence-id`; this function lives behind a
+ *     `containerEl` scoped to the LEFT column, so right-panel
+ *     matches are out of scope by construction.
+ *
+ *   - 'paper-surface' — Issue #21-C3. PaperSurface emits
+ *     `[data-paper-evidence-id="..."]` through the neutral
+ *     `data-paper-*` namespace; the element kind is intentionally
+ *     not pinned to `<mark>` so the same selector resolves both
+ *     visible (`<mark>`) and neutral (`<span>`) anchors.
  *
  * The argument types are intentionally loose (`unknown` for the
  * container) so this function can be exercised by Node's strip-types
@@ -73,15 +126,11 @@ export type DOMRectLike = {
 export function findFirstDomOccurrence(
   containerEl: ContainerLike | null,
   evidenceId: string | null,
+  leftSelectorPreset: EvidenceLineLeftSelectorPreset = 'pi-preview',
 ): HTMLElementLike | null {
   if (!containerEl || !evidenceId) return null
-  const escaped =
-    typeof CSS !== 'undefined' && typeof CSS.escape === 'function'
-      ? CSS.escape(evidenceId)
-      : evidenceId.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
-  return containerEl.querySelector(
-    `mark[data-pi-evidence-id="${escaped}"]`,
-  ) as HTMLElementLike | null
+  const selector = leftSelectorForPreset(leftSelectorPreset, evidenceId)
+  return containerEl.querySelector(selector) as HTMLElementLike | null
 }
 
 /**

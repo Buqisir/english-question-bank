@@ -55,6 +55,7 @@ import {
   detectReducedMotion,
   findEvidenceSource,
   findFirstDomOccurrence,
+  type EvidenceLineLeftSelectorPreset,
   type LineGeometry,
 } from './paperIntelligenceEvidenceLineGeometry.ts'
 
@@ -66,7 +67,7 @@ export {
   findEvidenceSource,
   findFirstDomOccurrence,
 }
-export type { LineGeometry }
+export type { EvidenceLineLeftSelectorPreset, LineGeometry }
 
 /* ─────────────────────────── React hook ────────────────────────────── */
 
@@ -83,6 +84,22 @@ export type UsePaperIntelligenceEvidenceLineArgs = {
   activeQuestionId: string | null
   /** Evidence-level focus. When null, the line is not drawn. */
   activeEvidenceId: string | null
+  /**
+   * Which selector to use for the LEFT-side anchor lookup.
+   *
+   *   - 'pi-preview' (default): historical contract used by
+   *     `PaperIntelligencePreview`. Looks up
+   *     `mark[data-pi-evidence-id="..."]` inside the passage body.
+   *
+   *   - 'paper-surface': Issue #21-C3. Looks up
+   *     `[data-paper-evidence-id="..."]` so the harness can bridge
+   *     `PaperSurface`'s neutral `data-paper-*` left anchors to the
+   *     host-owned `data-pi-evidence-id` right anchors. PaperSurface
+   *     never emits `data-pi-*`; the right-side selector is unchanged
+   *     because the right Question Analysis is host-owned and stays
+   *     in the PI namespace.
+   */
+  leftSelectorPreset?: EvidenceLineLeftSelectorPreset
 }
 
 export type UsePaperIntelligenceEvidenceLineResult = {
@@ -106,6 +123,7 @@ export function usePaperIntelligenceEvidenceLine(
     rightPanelRef,
     activeQuestionId,
     activeEvidenceId,
+    leftSelectorPreset = 'pi-preview',
   } = args
 
   const [geometry, setGeometry] = useState<LineGeometry | null>(null)
@@ -145,9 +163,11 @@ export function usePaperIntelligenceEvidenceLine(
     const sourceEl = findEvidenceSource(rightPanel, activeEvidenceId) as
       | HTMLElement
       | null
-    const targetEl = findFirstDomOccurrence(leftScroller, activeEvidenceId) as
-      | HTMLElement
-      | null
+    const targetEl = findFirstDomOccurrence(
+      leftScroller,
+      activeEvidenceId,
+      leftSelectorPreset,
+    ) as HTMLElement | null
     if (!sourceEl || !targetEl) {
       // Either the right panel doesn't have a button for this evidence
       // id (e.g. text-only distractor — which the parent shouldn't
@@ -175,6 +195,7 @@ export function usePaperIntelligenceEvidenceLine(
     containerRef,
     leftScrollerRef,
     rightPanelRef,
+    leftSelectorPreset,
   ])
 
   // Selection-change path: synchronous so the line appears the same

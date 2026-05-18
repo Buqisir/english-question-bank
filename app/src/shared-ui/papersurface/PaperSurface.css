@@ -151,6 +151,35 @@
   overflow: hidden;
 }
 
+/* ─── Active support evidence highlight (Issue #21-C3) ─────────── */
+
+/*
+ * When the harness sets `lectureFocus.activeEvidenceId`, PaperSurface
+ * renders the matching anchor inline as a `<mark>` carrying both
+ * `.ps-evidence-anchor` (the namespace class) and
+ * `.ps-evidence-anchor--active` (the visible-state modifier). The
+ * modifier resets the zero-size baseline above so the wrapped slice
+ * paints inside the passage flow.
+ *
+ * Visual: subtle mint background + bottom underline so the highlight
+ * reads as "answer evidence" without competing with the paper's
+ * serif body. The underline carries the primary signal; the
+ * background is held low-saturation so the page still reads as a
+ * paper sheet (no card-like fills inside the page). No border-radius,
+ * no box-shadow, no gradient — preserves the PaperSurface visual
+ * invariants from the QA checklist.
+ */
+.ps-evidence-anchor--active {
+  display: inline;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  background: rgba(16, 185, 129, 0.18);
+  border-bottom: 2px solid rgba(16, 185, 129, 0.6);
+  padding: 0 2px;
+  color: inherit;
+}
+
 /* ─── Annotation anchors (neutral, invisible in B3) ────────────── */
 
 .ps-annotation-anchor {

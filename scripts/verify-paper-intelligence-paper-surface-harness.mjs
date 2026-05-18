@@ -508,12 +508,14 @@ assert(
   "adapter files remain untouched"
 )
 
-// PaperSurface.tsx (the React component) must remain untouched. C2 is
-// CSS-only on the PaperSurface module side.
-assert(
-  !changedFiles.some(f => f.endsWith('shared-ui/papersurface/PaperSurface.tsx')),
-  "PaperSurface.tsx remains untouched by this C2 cut"
-)
+// PaperSurface.tsx is intentionally allowed to change in C3 (Issue
+// #21-C3): C3 introduces the visible active-evidence highlight and
+// derives `activeEvidenceId` from the controlled `lectureFocus`
+// prop. The C1/C2 invariants this script otherwise enforces (anchor
+// protocol, no PI imports, no data-pi-* in PaperSurface, no state
+// hooks, etc.) live in `verify-paper-surface-module-v1.mjs`; the
+// C3-specific edge of the contract is asserted by
+// `verify-paper-intelligence-paper-surface-evidence.mjs`.
 
 // Shared papersurface primitives must remain untouched.
 assert(

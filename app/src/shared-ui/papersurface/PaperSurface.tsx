@@ -134,6 +134,24 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
     return Array.from(sectionSet)
   }, [textMap])
 
+  /**
+   * Derive `activeEvidenceId` from the controlled `lectureFocus` prop.
+   *
+   * PaperSurface stays a dumb / data-driven renderer: it never owns
+   * "which evidence is active" state. The host (e.g. the harness)
+   * sets `lectureFocus.activeEvidenceId` and PaperSurface paints the
+   * matching anchor inline so the cross-column dotted line geometry
+   * has a real, sized DOM target on the LEFT side.
+   *
+   * `lectureFocus.activeEvidenceId` is optional in the shared types;
+   * a missing value (or any non-question lectureFocus shape) means
+   * "no active evidence" and PaperSurface paints no inline highlight.
+   */
+  const activeEvidenceId =
+    lectureFocus && lectureFocus.kind === 'question'
+      ? lectureFocus.activeEvidenceId ?? null
+      : null
+
   // Reading mode placeholder for B3.
   if (mode === 'reading') {
     return (
@@ -169,6 +187,7 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
             evidenceForSection={evidenceBySection.get(section) ?? []}
             annotationsBySentence={annotationsBySentence}
             lectureFocus={lectureFocus}
+            activeEvidenceId={activeEvidenceId}
             onQuestionClick={handleQuestionClick}
           />
         ))}
@@ -208,6 +227,7 @@ type PaperSurfaceSectionProps = {
   evidenceForSection: PaperEvidence[]
   annotationsBySentence: Map<string, PaperAnnotation[]>
   lectureFocus: LectureFocus | null
+  activeEvidenceId: string | null
   onQuestionClick: (questionId: string) => void
 }
 
@@ -218,6 +238,7 @@ function PaperSurfaceSection({
   evidenceForSection,
   annotationsBySentence,
   lectureFocus,
+  activeEvidenceId,
   onQuestionClick,
 }: PaperSurfaceSectionProps): ReactNode {
   const paragraphs = useMemo(
@@ -249,6 +270,7 @@ function PaperSurfaceSection({
             paragraph={para}
             evidenceBySentence={evidenceBySentence}
             annotationsBySentence={annotationsBySentence}
+            activeEvidenceId={activeEvidenceId}
           />
         ))}
       </div>
@@ -269,12 +291,14 @@ type PaperSurfaceParagraphProps = {
   paragraph: PaperTextParagraph
   evidenceBySentence: Map<string, PaperEvidence[]>
   annotationsBySentence: Map<string, PaperAnnotation[]>
+  activeEvidenceId: string | null
 }
 
 function PaperSurfaceParagraph({
   paragraph,
   evidenceBySentence,
   annotationsBySentence,
+  activeEvidenceId,
 }: PaperSurfaceParagraphProps): ReactNode {
   return (
     <p
@@ -287,6 +311,7 @@ function PaperSurfaceParagraph({
           sentence={sentence}
           evidenceItems={evidenceBySentence.get(sentence.id)}
           annotationItems={annotationsBySentence.get(sentence.id)}
+          activeEvidenceId={activeEvidenceId}
         />
       ))}
     </p>
@@ -299,34 +324,95 @@ type PaperSurfaceSentenceProps = {
   sentence: PaperTextSentence
   evidenceItems?: PaperEvidence[]
   annotationItems?: PaperAnnotation[]
+  activeEvidenceId: string | null
 }
 
 function PaperSurfaceSentence({
   sentence,
   evidenceItems,
   annotationItems,
+  activeEvidenceId,
 }: PaperSurfaceSentenceProps): ReactNode {
-  // Render sentence text as a span with the sentence anchor.
-  // Evidence and annotation anchors are emitted as neutral marks
-  // (no visual paint in B3).
+  // Resolve the active evidence (if any) that lives inside THIS
+  // sentence. PaperSurface stays dumb: the active id and the
+  // sentence range come from props (controlled state + read-only
+  // PaperEvidence record). No state, no hooks.
+  //
+  // Important: evidence anchors used to be zero-size sibling spans
+  // appended after the sentence text, which made a visible highlight
+  // impossible. C3 fixes that by slicing the sentence text into
+  // [pre][match][post] for the active evidence and wrapping the
+  // matching slice in a `<mark>` carrying the same neutral
+  // `data-paper-evidence-id` / `data-paper-evidence-kind` anchor
+  // attributes. The element kind shift (span → mark) is intentional:
+  // it makes the active anchor sized and visually paintable while
+  // leaving the neutral-anchor protocol untouched.
+  const activeEv =
+    activeEvidenceId && evidenceItems
+      ? evidenceItems.find(
+          (ev) =>
+            ev.id === activeEvidenceId && ev.range.sentenceId === sentence.id,
+        )
+      : undefined
+
+  // Clamp the range to the actual sentence text bounds so a stale or
+  // mis-resolved range never throws. If the resolved range is empty
+  // (start === end) we fall back to the neutral anchor — there is no
+  // text to wrap inline.
+  const text = sentence.text
+  const rawStart = activeEv ? activeEv.range.start : 0
+  const rawEnd = activeEv ? activeEv.range.end : 0
+  const activeStart = activeEv ? Math.max(0, Math.min(text.length, rawStart)) : 0
+  const activeEnd = activeEv
+    ? Math.max(activeStart, Math.min(text.length, rawEnd))
+    : 0
+  const hasInlineActive = !!activeEv && activeEnd > activeStart
+
   return (
     <span
       className="ps-sentence"
       {...{ [paperSurfaceAnchorAttrs.sentenceId]: sentence.id }}
     >
-      {sentence.text}
-      {/* Neutral evidence anchors — invisible in B3 */}
-      {evidenceItems && evidenceItems.map((ev) => (
-        <span
-          key={ev.id}
-          className="ps-evidence-anchor"
-          {...{
-            [paperSurfaceAnchorAttrs.evidenceId]: ev.id,
-            [paperSurfaceAnchorAttrs.evidenceKind]: ev.kind,
-          }}
-          aria-hidden="true"
-        />
-      ))}
+      {hasInlineActive && activeEv ? (
+        <>
+          {text.slice(0, activeStart)}
+          <mark
+            className="ps-evidence-anchor ps-evidence-anchor--active"
+            {...{
+              [paperSurfaceAnchorAttrs.evidenceId]: activeEv.id,
+              [paperSurfaceAnchorAttrs.evidenceKind]: activeEv.kind,
+            }}
+          >
+            {text.slice(activeStart, activeEnd)}
+          </mark>
+          {text.slice(activeEnd)}
+        </>
+      ) : (
+        text
+      )}
+      {/*
+        Neutral evidence anchors — invisible, zero-size span siblings.
+        We skip the active evidence here when it is already rendered
+        inline above, so the cross-column dotted line geometry's
+        first-DOM-occurrence policy resolves to the visible inline
+        `<mark>` rather than the zero-size sibling. Non-active evidence
+        keeps its neutral anchor (still queryable via
+        `[data-paper-evidence-id]`) for future cuts.
+      */}
+      {evidenceItems &&
+        evidenceItems.map((ev) =>
+          hasInlineActive && activeEv && ev.id === activeEv.id ? null : (
+            <span
+              key={ev.id}
+              className="ps-evidence-anchor"
+              {...{
+                [paperSurfaceAnchorAttrs.evidenceId]: ev.id,
+                [paperSurfaceAnchorAttrs.evidenceKind]: ev.kind,
+              }}
+              aria-hidden="true"
+            />
+          ),
+        )}
       {/* Neutral annotation anchors — invisible in B3 */}
       {annotationItems && annotationItems.map((ann) => (
         <span
