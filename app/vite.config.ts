@@ -10,9 +10,9 @@ export default defineConfig({
   server: {
     // Issue #21-B1 / Issue #30 gate 2 (PR #32 review fix): the React
     // paper-surface prototype imports primitive style tokens from
-    // `shared/papersurface/tokens.mjs` at the repo root. Vite's default
-    // `server.fs.allow` is rooted at the package (`app/`), so we widen
-    // it just enough to reach the `shared/` sibling — and only that.
+    // `shared/papersurface/tokens.mjs` at the repo root. Once fs.allow is
+    // explicit, Vite no longer implicitly allows the app package root, so
+    // keep `app/` itself plus the `shared/` sibling — and only those.
     //
     // We deliberately do NOT allow the whole repo root (`..`). The
     // narrower allow keeps the dev server from serving anything outside
@@ -21,7 +21,7 @@ export default defineConfig({
     // is pure ESM primitives — no CSS, no JSX, no React — so the
     // narrow allow is sufficient.
     fs: {
-      allow: [path.resolve(__dirname, '../shared')],
+      allow: [path.resolve(__dirname), path.resolve(__dirname, '../shared')],
     },
     proxy: {
       '/api': `http://127.0.0.1:${apiPort}`,

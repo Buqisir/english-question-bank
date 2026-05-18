@@ -389,15 +389,29 @@ function PaperSurfaceQuestionItem({
   isActive,
   onQuestionClick,
 }: PaperSurfaceQuestionItemProps): ReactNode {
+  // QA fix (PR #39): the whole question block is one focus target.
+  //
+  //   - The outer <li.ps-question> owns the click handler. Clicks on
+  //     the question number, the stem button, OR any option label /
+  //     text bubble to this single delegate.
+  //   - <button.ps-question-stem-button> stays as the accessible
+  //     keyboard / focus trigger (Enter / Space on the button still
+  //     fires a click event that bubbles to the <li>), but it has NO
+  //     own onClick. That avoids double toggling when the user
+  //     mouse-clicks the stem (button click + bubbled li click would
+  //     otherwise toggle twice and end up where it started).
+  //   - Options remain plain <li> rows. They are NOT buttons and they
+  //     do NOT carry answer-selection semantics — they are just hit
+  //     surface for the question's focus delegate.
   return (
     <li
       className={isActive ? 'ps-question ps-question--active' : 'ps-question'}
       {...{ [paperSurfaceAnchorAttrs.questionId]: question.id }}
+      onClick={() => onQuestionClick(question.id)}
     >
       <button
         type="button"
         className="ps-question-stem-button"
-        onClick={() => onQuestionClick(question.id)}
         aria-pressed={isActive}
         aria-label={`Focus question ${question.questionNo}`}
       >

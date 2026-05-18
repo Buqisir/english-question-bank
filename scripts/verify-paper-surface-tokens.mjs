@@ -514,6 +514,11 @@ const viteConfigNoComments = viteConfigSrc
   .replace(/(^|[^:])\/\/[^\n]*/g, '$1')
 
 assert(
+  'vite.config.ts allow-lists the app package root (`path.resolve(__dirname)`) explicitly',
+  /path\.resolve\(\s*__dirname\s*\)/.test(viteConfigNoComments),
+  'expected fs.allow to include path.resolve(__dirname)',
+)
+assert(
   'vite.config.ts allow-lists `path.resolve(__dirname, "../shared")`',
   /path\.resolve\(\s*__dirname\s*,\s*['"]\.\.\/shared['"]\s*\)/.test(
     viteConfigNoComments,
@@ -547,21 +552,25 @@ assert(
   'searchForWorkspaceRoot would broaden fs.allow to the whole workspace',
 )
 
-// Behavioral check: every entry in fs.allow must resolve to a path
-// strictly under `app/` or `shared/`. We do not actually evaluate the
-// config (no Vite available on the cloud sandbox), but we lock down
-// the expected literal shape: a single `path.resolve(__dirname, ...)`
-// call whose target is `../shared` or a deeper path inside it. Any
-// other shape needs explicit reviewer approval.
+// Behavioral check: every entry in fs.allow must resolve to the app
+// package root or a path strictly under `shared/`. We do not actually
+// evaluate the config (no Vite available on the cloud sandbox), but we
+// lock down the expected literal shape. Any other shape needs explicit
+// reviewer approval.
 const allowEntries = [
+  ...viteConfigNoComments.matchAll(/path\.resolve\(\s*__dirname\s*\)/g),
+].map(() => '.')
+allowEntries.push(
   ...viteConfigNoComments.matchAll(
     /path\.resolve\(\s*__dirname\s*,\s*['"]([^'"]+)['"]\s*\)/g,
-  ),
-].map((m) => m[1])
+  ).map((m) => m[1]),
+)
 assert(
-  'every fs.allow entry resolves to "../shared" or a path inside it',
+  'every fs.allow entry resolves to app root or "../shared" / inside it',
   allowEntries.length > 0 &&
-    allowEntries.every((p) => p === '../shared' || p.startsWith('../shared/')),
+    allowEntries.every(
+      (p) => p === '.' || p === '../shared' || p.startsWith('../shared/'),
+    ),
   `entries: ${allowEntries.join(', ')}`,
 )
 

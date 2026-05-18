@@ -108,13 +108,12 @@ import {
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
-// Issue #21-A spike (Issue #30 gate 1: renamed from "print" to "paper"):
-// isolated paper-surface prototype. Activated only by
+// Issue #21-C1: PaperSurface harness replaces the old prototype on
 // `?view=paper-intelligence&surface=paper`. Default PI route is
 // unchanged when the surface field is absent. There is no compat
 // branch for the legacy `surface=print` value — it falls back to
 // default like any other unknown surface.
-import { PaperSurfacePrototype } from './features/paper-intelligence/paperSurfacePrototype/PaperSurfacePrototype'
+import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
 
 type EntryForm = {
   sourceType: SourceType
@@ -3291,16 +3290,15 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   // ─── Paper Intelligence route rendering ───
   if (currentPiRoute.kind === 'paper-intelligence') {
-    // Issue #21-A spike (Issue #30 gate 1): when the URL carries
-    // `&surface=paper`, render the isolated paper-surface prototype
-    // instead of the default PI preview. Default surface (no
-    // `surface=` param, or any unknown value including the retired
-    // `surface=print`) keeps the existing render path untouched. The
-    // route parser normalizes unknown values to `'default'`, so this
-    // branch is the only place the spike is reachable from.
+    // Issue #21-C1: when the URL carries `&surface=paper`, render the
+    // PaperSurface harness (production PaperSurface module + PI adapter).
+    // Default surface (no `surface=` param, or any unknown value including
+    // the retired `surface=print`) keeps the existing render path untouched.
+    // The route parser normalizes unknown values to `'default'`, so this
+    // branch is the only place the harness is reachable from.
     if (currentPiRoute.surface === 'paper') {
       return (
-        <PaperSurfacePrototype
+        <PaperIntelligencePaperSurfaceHarness
           paperId={currentPiRoute.paperId}
           onBackToWorkbench={piOnBackToWorkbench}
         />
