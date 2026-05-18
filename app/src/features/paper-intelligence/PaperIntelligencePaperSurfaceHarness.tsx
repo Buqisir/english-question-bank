@@ -1,5 +1,5 @@
 /**
- * PaperIntelligencePaperSurfaceHarness — Issue #21-C1.
+ * PaperIntelligencePaperSurfaceHarness — Issue #21-C1 / C2 / C3.
  *
  * Host shell that mounts the production PaperSurface module inside the
  * Paper Intelligence route when `surface=paper` is active.
@@ -7,34 +7,66 @@
  * Layout:
  *   - Left slot: PaperSurface (passage text + questions).
  *   - Right slot: existing PI analysis view (reused from PaperIntelligencePreview).
+ *   - Cross-column dotted evidence line (C3) overlaid on the shell.
  *
- * Controlled state:
+ * Controlled state (host-owned):
  *   - mode: hardcoded 'lecture' (reading mode lands in B4a).
+ *   - activeQuestionId: which question card is selected on the left.
+ *   - activeEvidenceId (C3): which support evidence row is currently
+ *     "drawing the line". Reseeded from
+ *     `analysisView.supportEvidenceId` whenever activeQuestionId changes
+ *     — mirrors PaperIntelligencePreview behavior. Cleared when
+ *     activeQuestionId clears. The right-side analysis panel's evidence
+ *     buttons can override the seeded value (e.g. to switch the line to
+ *     a quoted distractor row); the harness owns the single writer.
  *   - lectureFocus: { kind: 'question', questionId, activeEvidenceId? }
- *     mapped from activeQuestionId.
- *   - readingFocusBySection: {} (empty, not used in C1).
- *   - annotations: [] (no annotation paint in C1).
+ *     Built from activeQuestionId + activeEvidenceId so PaperSurface
+ *     stays a dumb / data-driven renderer.
+ *   - readingFocusBySection: {} (empty, not used in C1/C2/C3).
+ *   - annotations: [] (no annotation paint in C1/C2/C3).
  *   - onFocusIntent: handles 'request-lecture-focus' only; others ignored.
  *
  * Right Question Analysis:
  *   - Reuses the same data derivation (buildPreviewView) from the existing
  *     PI preview model so the teacher sees the same analysis panel.
+ *   - C3: emits `data-pi-evidence-id` on the support / distractor rows
+ *     so the cross-column line geometry's right-side selector still
+ *     resolves the host-owned `data-pi-*` namespace, exactly the way
+ *     PaperIntelligencePreview does. PaperSurface (left side) does NOT
+ *     emit `data-pi-*` and never will.
+ *
+ * Cross-column evidence line (C3):
+ *   - Reuses the existing `PaperIntelligenceEvidenceLine` component.
+ *   - Configured with `leftSelectorPreset='paper-surface'` so the left
+ *     anchor lookup resolves `[data-paper-evidence-id]` (PaperSurface's
+ *     neutral namespace) instead of `mark[data-pi-evidence-id]`.
+ *   - Right-side selector remains `data-pi-evidence-id` because right
+ *     Question Analysis is host-owned and unchanged.
  *
  * What this harness does NOT do:
  *   - No insight chip / popover.
  *   - No basket interaction.
- *   - No evidence line geometry.
  *   - No reading mode.
  *   - No annotation pack UI.
+ *   - No flip of the default PI route.
  */
 
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { buildPaperSurfaceDataFromPi } from './adapter/index.ts'
 import {
   buildPreviewView,
+  type AnalysisDistractorRow,
   type AnalysisView,
 } from './preview/paperIntelligencePreviewModel'
+import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import type {
   PaperIntelligenceReport,
   QuestionOption,
@@ -47,6 +79,19 @@ type Props = {
   onBackToWorkbench: () => void
 }
 
+/**
+ * CSS attribute escape for `querySelector` calls. The harness uses
+ * the same shape as `PaperIntelligencePreview.cssAttr` so evidence ids
+ * carrying punctuation (e.g. `A-32-support`) round-trip safely through
+ * a selector string.
+ */
+function cssAttr(value: string): string {
+  if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
+    return CSS.escape(value)
+  }
+  return value.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
+}
+
 export function PaperIntelligencePaperSurfaceHarness({
   paperId,
   onBackToWorkbench,
@@ -57,6 +102,19 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
+  /**
+   * SECONDARY state (C3): which evidence row the cross-column dotted
+   * line connects to. Mirrors the role of `activeEvidenceId` in
+   * PaperIntelligencePreview. Reseeded from the active question's
+   * support evidence whenever activeQuestionId changes; cleared when
+   * activeQuestionId clears.
+   */
+  const [activeEvidenceId, setActiveEvidenceId] = useState<string | null>(null)
+
+  // Refs for the cross-column line geometry (C3).
+  const shellRef = useRef<HTMLDivElement | null>(null)
+  const leftScrollerRef = useRef<HTMLDivElement | null>(null)
+  const rightPanelRef = useRef<HTMLElement | null>(null)
 
   // ─── Fetch report + input.json ───
   useEffect(() => {
@@ -147,11 +205,30 @@ export function PaperIntelligencePaperSurfaceHarness({
     return view.activeAnalysis
   }, [report, bodies, activeQuestionId, inputOptions])
 
-  // ─── Lecture focus (controlled) ───
+  // ─── Reseed activeEvidenceId when activeQuestionId changes (C3) ───
+  //
+  // This mirrors the seed effect in PaperIntelligencePreview so the
+  // two surfaces feel identical when the teacher selects a question:
+  // the support evidence becomes the active line target by default.
+  // The right-side analysis panel may override the seeded id by
+  // clicking a quoted distractor row.
+  useEffect(() => {
+    if (!activeQuestionId) {
+      setActiveEvidenceId(null)
+      return
+    }
+    const supportId = analysisView?.supportEvidenceId ?? null
+    setActiveEvidenceId(supportId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeQuestionId, analysisView?.supportEvidenceId])
+
+  // ─── Lecture focus (controlled, includes activeEvidenceId) ───
   const lectureFocus: LectureFocus | null = useMemo(() => {
     if (!activeQuestionId) return null
-    return { kind: 'question', questionId: activeQuestionId }
-  }, [activeQuestionId])
+    return activeEvidenceId
+      ? { kind: 'question', questionId: activeQuestionId, activeEvidenceId }
+      : { kind: 'question', questionId: activeQuestionId }
+  }, [activeQuestionId, activeEvidenceId])
 
   // ─── Focus intent handler ───
   const handleFocusIntent = useCallback((intent: PaperSurfaceFocusIntent) => {
@@ -160,8 +237,48 @@ export function PaperIntelligencePaperSurfaceHarness({
         prev === intent.questionId ? null : intent.questionId,
       )
     }
-    // Other intents ignored in C1.
+    // Other intents ignored in C1/C2/C3.
   }, [])
+
+  // ─── Right-side evidence click handler (C3) ───
+  //
+  // The internal AnalysisPanel below renders the support / distractor
+  // rows as buttons carrying `data-pi-evidence-id`. Clicking one
+  // updates the active evidence id and reseats the cross-column line.
+  // This is the smallest possible host-owned handler — no events
+  // fired by PaperSurface, no new intent kind.
+  const handleSelectEvidence = useCallback((evidenceId: string) => {
+    if (!evidenceId) return
+    setActiveEvidenceId(evidenceId)
+  }, [])
+
+  // ─── Auto-scroll active evidence into the PaperSurface scroller (C3) ───
+  //
+  // Mirrors the auto-scroll effect in PaperIntelligencePreview but
+  // targets the neutral `[data-paper-evidence-id]` anchor PaperSurface
+  // emits on the LEFT side. We resolve the target inside the harness's
+  // own left scroller (`.pi-ps-harness-left`), which is the only
+  // overflowing ancestor between the anchor and the viewport.
+  // `prefers-reduced-motion` toggles `behavior` between 'smooth' (default)
+  // and 'auto' (instant) so the OS-level setting is honored.
+  useEffect(() => {
+    if (!activeEvidenceId) return
+    const scroller = leftScrollerRef.current
+    if (!scroller) return
+    const target = scroller.querySelector<HTMLElement>(
+      `[data-paper-evidence-id="${cssAttr(activeEvidenceId)}"]`,
+    )
+    if (!target) return
+    const reduced =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+      behavior: reduced ? 'auto' : 'smooth',
+    })
+  }, [activeEvidenceId])
 
   // ─── Render ───
   if (loading) {
@@ -171,7 +288,7 @@ export function PaperIntelligencePaperSurfaceHarness({
           <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
             <span aria-hidden="true">←</span> 返回工作台
           </button>
-          <span className="pi-ps-harness-tagline">Paper Surface (C1)</span>
+          <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
         </div>
         <div className="pi-ps-harness-loading">加载中…</div>
       </div>
@@ -200,10 +317,10 @@ export function PaperIntelligencePaperSurfaceHarness({
         <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
           <span aria-hidden="true">←</span> 返回工作台
         </button>
-        <span className="pi-ps-harness-tagline">Paper Surface (C1)</span>
+        <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
       </div>
-      <div className="pi-ps-harness-shell">
-        <div className="pi-ps-harness-left">
+      <div className="pi-ps-harness-shell" ref={shellRef}>
+        <div className="pi-ps-harness-left" ref={leftScrollerRef}>
           <PaperSurface
             textMap={surfaceData.textMap}
             annotations={[]}
@@ -215,9 +332,35 @@ export function PaperIntelligencePaperSurfaceHarness({
             onFocusIntent={handleFocusIntent}
           />
         </div>
-        <aside className="pi-ps-harness-right" aria-label="Question Analysis" aria-live="polite">
-          <AnalysisPanel analysis={analysisView} />
+        <aside
+          className="pi-ps-harness-right"
+          aria-label="Question Analysis"
+          aria-live="polite"
+          ref={rightPanelRef}
+        >
+          <AnalysisPanel
+            analysis={analysisView}
+            activeEvidenceId={activeEvidenceId}
+            onSelectEvidence={handleSelectEvidence}
+          />
         </aside>
+        {/*
+          Cross-column dotted evidence line (C3).
+          Reuses the existing PaperIntelligenceEvidenceLine component
+          but with `leftSelectorPreset='paper-surface'` so the left
+          anchor lookup resolves PaperSurface's neutral
+          `[data-paper-evidence-id]`. Right selector remains
+          `data-pi-evidence-id` because right Question Analysis is
+          host-owned and unchanged.
+        */}
+        <PaperIntelligenceEvidenceLine
+          containerRef={shellRef}
+          leftScrollerRef={leftScrollerRef}
+          rightPanelRef={rightPanelRef}
+          activeQuestionId={activeQuestionId}
+          activeEvidenceId={activeEvidenceId}
+          leftSelectorPreset="paper-surface"
+        />
       </div>
     </div>
   )
@@ -225,7 +368,32 @@ export function PaperIntelligencePaperSurfaceHarness({
 
 /* ─── Right panel: reuse existing PI analysis rendering ─── */
 
-function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNode {
+/**
+ * Right-panel analysis renderer.
+ *
+ * C3 widens this from C1's read-only display to a clickable
+ * surface. Each rendered row carries `data-pi-evidence-id` (the
+ * host-owned PI namespace) so the cross-column line geometry's
+ * right-side selector resolves them; clicking a row updates
+ * `activeEvidenceId` via `onSelectEvidence`. The internal classes
+ * (`pi-ps-analysis-*`) stay harness-local and are styled in
+ * `paperIntelligencePaperSurfaceHarness.css`; no styles leak from
+ * `paperIntelligence.css` into this surface.
+ *
+ * Text-only distractors (no quote) intentionally render as a plain
+ * `<div>` rather than a `<button>` — the cross-column line cannot
+ * anchor to a row whose evidence has no left-side range, so making
+ * the row clickable would be a dead control.
+ */
+function AnalysisPanel({
+  analysis,
+  activeEvidenceId,
+  onSelectEvidence,
+}: {
+  analysis: AnalysisView | null
+  activeEvidenceId: string | null
+  onSelectEvidence: (evidenceId: string) => void
+}): ReactNode {
   if (!analysis) {
     return (
       <div className="pi-ps-analysis-empty">
@@ -235,7 +403,7 @@ function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNo
   }
 
   return (
-    <div className="pi-ps-analysis">
+    <div className="pi-ps-analysis" data-pi-question-id={analysis.questionId}>
       <div className="pi-ps-analysis-header">
         <span className="pi-ps-analysis-qno">{analysis.questionNo}</span>
         <span className="pi-ps-analysis-type">{analysis.teacherQuestionType || '—'}</span>
@@ -264,25 +432,28 @@ function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNo
           ))}
         </ul>
       )}
-      {analysis.answerEvidenceQuote && (
-        <div className="pi-ps-analysis-evidence">
-          <h4>答案依据</h4>
-          <blockquote>{analysis.answerEvidenceQuote}</blockquote>
-          {analysis.answerEvidenceExplanationZh && (
-            <p className="pi-ps-analysis-explanation">{analysis.answerEvidenceExplanationZh}</p>
-          )}
-        </div>
+      {analysis.answerEvidenceQuote && analysis.supportEvidenceId && (
+        <SupportEvidenceRow
+          evidenceId={analysis.supportEvidenceId}
+          questionId={analysis.questionId}
+          quote={analysis.answerEvidenceQuote}
+          explanationZh={analysis.answerEvidenceExplanationZh}
+          isSelected={analysis.supportEvidenceId === activeEvidenceId}
+          onSelectEvidence={onSelectEvidence}
+        />
       )}
       {analysis.distractors.length > 0 && (
         <div className="pi-ps-analysis-distractors">
           <h4>干扰项分析</h4>
           <ul>
             {analysis.distractors.map((d) => (
-              <li key={d.evidenceId}>
-                <span className="pi-ps-analysis-distractor-label">{d.optionLabel}.</span>
-                <span>{d.shortReason}</span>
-                {d.quote && <blockquote className="pi-ps-analysis-distractor-quote">{d.quote}</blockquote>}
-              </li>
+              <DistractorRow
+                key={d.evidenceId}
+                row={d}
+                questionId={analysis.questionId}
+                isSelected={d.evidenceId === activeEvidenceId}
+                onSelectEvidence={onSelectEvidence}
+              />
             ))}
           </ul>
         </div>
@@ -294,5 +465,88 @@ function AnalysisPanel({ analysis }: { analysis: AnalysisView | null }): ReactNo
         </div>
       )}
     </div>
+  )
+}
+
+function SupportEvidenceRow(props: {
+  evidenceId: string
+  questionId: string
+  quote: string
+  explanationZh: string
+  isSelected: boolean
+  onSelectEvidence: (evidenceId: string) => void
+}): ReactNode {
+  const { evidenceId, questionId, quote, explanationZh, isSelected, onSelectEvidence } = props
+  const className = isSelected
+    ? 'pi-ps-analysis-evidence pi-ps-analysis-evidence--selected'
+    : 'pi-ps-analysis-evidence'
+  return (
+    <button
+      type="button"
+      className={className}
+      data-pi-evidence-id={evidenceId}
+      data-pi-evidence-kind="support"
+      data-pi-question-id={questionId}
+      aria-pressed={isSelected}
+      onClick={() => onSelectEvidence(evidenceId)}
+    >
+      <h4>答案依据</h4>
+      <blockquote>{quote}</blockquote>
+      {explanationZh && (
+        <p className="pi-ps-analysis-explanation">{explanationZh}</p>
+      )}
+    </button>
+  )
+}
+
+function DistractorRow(props: {
+  row: AnalysisDistractorRow
+  questionId: string
+  isSelected: boolean
+  onSelectEvidence: (evidenceId: string) => void
+}): ReactNode {
+  const { row, questionId, isSelected, onSelectEvidence } = props
+
+  // Text-only distractors: there is no left-side anchor for the line
+  // to connect to, so the row stays a plain <div>. The
+  // `data-pi-evidence-id` is still emitted so future cuts (e.g. a
+  // text-only badge target) can resolve the row, but no click
+  // handler is wired.
+  if (row.quoteIsTextOnly) {
+    return (
+      <li
+        className="pi-ps-analysis-distractor"
+        data-pi-evidence-id={row.evidenceId}
+        data-pi-evidence-kind="trap"
+        data-pi-question-id={questionId}
+        data-pi-quote-text-only="true"
+      >
+        <span className="pi-ps-analysis-distractor-label">{row.optionLabel}.</span>
+        <span>{row.shortReason}</span>
+      </li>
+    )
+  }
+
+  const className = isSelected
+    ? 'pi-ps-analysis-distractor pi-ps-analysis-distractor--selected'
+    : 'pi-ps-analysis-distractor'
+  return (
+    <li>
+      <button
+        type="button"
+        className={className}
+        data-pi-evidence-id={row.evidenceId}
+        data-pi-evidence-kind="trap"
+        data-pi-question-id={questionId}
+        aria-pressed={isSelected}
+        onClick={() => onSelectEvidence(row.evidenceId)}
+      >
+        <span className="pi-ps-analysis-distractor-label">{row.optionLabel}.</span>
+        <span>{row.shortReason}</span>
+        {row.quote && (
+          <blockquote className="pi-ps-analysis-distractor-quote">{row.quote}</blockquote>
+        )}
+      </button>
+    </li>
   )
 }
