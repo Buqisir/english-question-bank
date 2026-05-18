@@ -34,6 +34,21 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Do not use the Codex in-app browser for this project for now; it has been timing out on local UI checks.
 - Use local Chrome/headless Playwright for UI smoke tests and screenshots.
 
+## Collaboration Workflow
+
+- Use risk-based review gates from `docs/agents/review-levels.md`.
+- Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
+- Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
+- Default flow:
+  - **PA before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic.
+  - **CR after DEV** for any PR that will be merged.
+  - **QA before RM** only for user-visible or visual / interaction changes.
+- Docs-only and type-only cuts do not need browser QA.
+- Do not automatically turn `Should Watch` findings into tasks. Only `Must Fix` blocks the current PR; `Follow-up Gate` blocks a named future stage.
+- Use role-coded Kiro handshakes such as `/kiro DEV1`, `/kiro PA`, and `/kiro CR`.
+- When giving the PO a prompt to paste into Kiro, put the entire prompt content in fenced code blocks. Do not put explanatory prose between the prompt code blocks.
+- Ask Kiro to wrap the entire completion report or review in exactly one fenced `text` code block, with no prose outside the block.
+
 ## Agent skills
 
 ### Issue tracker
