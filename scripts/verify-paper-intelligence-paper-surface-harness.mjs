@@ -41,9 +41,13 @@
  *     - .ps-option font-size: 16px
  *     - no border-radius anywhere in PaperSurface.css
  *     - gradient is allowed ONLY on the .ps-surface matte (Issue #43
- *       final tune: subtle horizontal fade from matte gray back to
- *       outer desk gray at the matte's left/right edges); gradient
- *       remains forbidden inside the .ps-page sheet
+ *       final visual micro-tune: horizontal matte fade + vertical
+ *       top/bottom mask layered on the same .ps-surface background;
+ *       gradient remains forbidden inside the .ps-page sheet and
+ *       elsewhere in the file)
+ *     - matte gray is #e8e8e8 (subtler than the prior #e4e4e4 while
+ *       still slightly darker than the outer desk gray #ececec); the
+ *       prior matte gray #e4e4e4 must NOT remain in the file
  *     - .ps-page selector group does NOT add inner box-shadow beyond the
  *       single existing outer-sheet box-shadow (pattern: at most one
  *       box-shadow declaration in the whole file, and it must live on
@@ -214,11 +218,14 @@ assert(
 )
 
 // Gradient is allowed ONLY on the .ps-surface matte (Issue #43 final
-// tune introduces a subtle horizontal linear-gradient that fades the
-// matte gray back to the outer desk gray at the matte's left/right
-// edges, so the paper desk reads as having calm depth without a
-// visible decorative band). Gradient is still forbidden inside the
-// .ps-page sheet itself — the page must remain a clean white surface.
+// visual micro-tune layers two gradients on .ps-surface: a horizontal
+// fade from outer desk gray to matte gray at the left/right edges,
+// and a vertical mask that softly fades the desk color back in over
+// the 16px top/bottom matte so the matte transitions softly into the
+// outer desk gray on all four edges of the paper).
+// Gradient is still forbidden inside the .ps-page sheet (the page
+// must remain a clean white surface) and forbidden elsewhere in the
+// file.
 {
   const psSurfaceMatch = paperSurfaceCss.match(/\.ps-surface\s*\{([\s\S]*?)\}/)
   const psPageMatch = paperSurfaceCss.match(/\.ps-page\s*\{([\s\S]*?)\}/)
@@ -241,10 +248,18 @@ assert(
     "PaperSurface.css does NOT introduce gradient outside the .ps-surface matte"
   )
 
-  // .ps-surface MAY use a gradient on its background (Issue #43 final
-  // tune). We don't require it — only assert that if any gradient
-  // exists in the file, it's confined to .ps-surface.
-  void psSurfaceBody
+  // Matte gray invariant: subtler #e8e8e8 must appear in .ps-surface
+  // background; the previous #e4e4e4 matte gray must not remain in
+  // the file (case-insensitive, since CSS hex colors are
+  // case-insensitive).
+  assert(
+    /#e8e8e8/i.test(psSurfaceBody),
+    ".ps-surface matte uses subtler matte gray #e8e8e8"
+  )
+  assert(
+    !/#e4e4e4/i.test(paperSurfaceCss),
+    "PaperSurface.css no longer references prior matte gray #e4e4e4"
+  )
 }
 
 // box-shadow: at most ONE declaration in the file, and it must be in
