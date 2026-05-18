@@ -9,6 +9,13 @@
  * well-defined slice of PaperSurface.css and the harness CSS, and
  * nothing else.
  *
+ * C2 follow-up (browser QA): restore harness grid to 1fr 380px (the
+ * earlier 1fr 360px shrunk the right column in a way that visually
+ * widened the gray gap because freed pixels flowed back into the 1fr
+ * left column) and bump the paper body baseline to 16px (小四 ≈ 12pt
+ * ≈ 16px) so the A4 paper feel is realistic. .ps-option is also
+ * bumped to 16px so options share the body baseline.
+ *
  * This script rewrites the C1 PaperSurface-untouched guard into C2
  * polish-boundary assertions: it pins the exact CSS values C2 is
  * allowed to change, pins the structural invariants C2 is NOT allowed
@@ -27,10 +34,10 @@
  *     - declares --ps-page-width: 794px
  *     - declares --ps-page-padding: 56px
  *     - .ps-surface padding: 16px
- *     - .ps-passage-body font-size: 15px
- *     - .ps-question-no font-size: 15px
- *     - .ps-question-stem font-size: 15px
- *     - .ps-option font-size: 14.5px
+ *     - .ps-passage-body font-size: 16px
+ *     - .ps-question-no font-size: 16px
+ *     - .ps-question-stem font-size: 16px
+ *     - .ps-option font-size: 16px
  *     - no border-radius anywhere in PaperSurface.css
  *     - no gradient anywhere in PaperSurface.css
  *     - .ps-page selector group does NOT add inner box-shadow beyond the
@@ -39,7 +46,8 @@
  *       .ps-page)
  *
  *   C2 polish boundary — harness CSS polish slice:
- *     - .pi-ps-harness-shell grid-template-columns: 1fr 360px
+ *     - .pi-ps-harness-shell grid-template-columns: 1fr 380px
+ *     - .pi-ps-harness-shell grid-template-columns is NOT 1fr 360px
  *     - .pi-ps-harness-left padding: 1rem 1rem
  *
  *   C2 polish boundary — files that MUST remain untouched by this cut:
@@ -161,22 +169,22 @@ assert(
   )
 }
 
-// Body font sizes: 15px on .ps-passage-body / .ps-question-no / .ps-question-stem.
+// Body font sizes: 16px on .ps-passage-body / .ps-question-no / .ps-question-stem.
 for (const selector of ['.ps-passage-body', '.ps-question-no', '.ps-question-stem']) {
   const escaped = selector.replace(/\./g, '\\.')
-  const re = new RegExp(`${escaped}\\s*\\{[^}]*?font-size\\s*:\\s*15px\\b`, 's')
+  const re = new RegExp(`${escaped}\\s*\\{[^}]*?font-size\\s*:\\s*16px\\b`, 's')
   assert(
     re.test(paperSurfaceCss),
-    `${selector} declares font-size: 15px`
+    `${selector} declares font-size: 16px`
   )
 }
 
-// Option font size: 14.5px.
+// Option font size: 16px (matched to body baseline in the C2 follow-up).
 {
-  const re = /\.ps-option\s*\{[^}]*?font-size\s*:\s*14\.5px\b/s
+  const re = /\.ps-option\s*\{[^}]*?font-size\s*:\s*16px\b/s
   assert(
     re.test(paperSurfaceCss),
-    ".ps-option declares font-size: 14.5px"
+    ".ps-option declares font-size: 16px"
   )
 }
 
@@ -220,9 +228,14 @@ const harnessCss = stripCssComments(harnessCssRaw)
 
 {
   const shellMatch = harnessCss.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
+  const shellBody = shellMatch ? shellMatch[1] : ''
   assert(
-    !!shellMatch && /grid-template-columns\s*:\s*1fr\s+360px\s*;/.test(shellMatch ? shellMatch[1] : ''),
-    "harness CSS .pi-ps-harness-shell has grid-template-columns: 1fr 360px"
+    !!shellMatch && /grid-template-columns\s*:\s*1fr\s+380px\s*;/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell has grid-template-columns: 1fr 380px"
+  )
+  assert(
+    !/grid-template-columns\s*:\s*1fr\s+360px\s*;/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell does NOT have grid-template-columns: 1fr 360px"
   )
 }
 

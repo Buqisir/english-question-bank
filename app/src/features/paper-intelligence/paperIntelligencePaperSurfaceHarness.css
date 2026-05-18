@@ -48,7 +48,7 @@
 
 .pi-ps-harness-shell {
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 380px;
   flex: 1;
   overflow: hidden;
 }

@@ -29,7 +29,7 @@
 
 | Element | Value |
 |---------|-------|
-| Body font size | **15px** |
+| Body font size | **16px** |
 | Passage line-height | **1.85** |
 | Question line-height | **1.7** |
 | Paragraph indent | **2em** |
@@ -114,4 +114,4 @@ This checklist explicitly does **NOT** cover:
 
 ## 10. Changelog
 
-- **C2 polish #41** — updates body baseline from 14.5px to 15px and keeps A4 width/padding unchanged.
+- **C2 polish #41** — sets body baseline to 16px (小四 ≈ 12pt ≈ 16px) and keeps A4 width/padding unchanged.
