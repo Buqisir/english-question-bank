@@ -19,16 +19,16 @@
  *   tracks centered together by symmetric flexible desk gutters:
  *
  *     [ outer-left desk gutter (1fr) ]
- *     [ paper track (≤ 842px)        ]
+ *     [ paper track (≤ 858px)        ]
  *     [ rail track  (≤ 380px)        ]
  *     [ outer-right desk gutter (1fr)]
  *
  *   with a fixed `column-gap: 24px`. The paper-to-rail seam is now
  *   exactly the column-gap, never leftover 1fr space.
  *
- *   The 850px paper track equals the 794px white A4 sheet plus the
- *   28px symmetric horizontal matte PaperSurface paints on each side
- *   (Issue #43 QA follow-up; browser QA micro-tune 24px → 28px).
+ *   The 858px paper track equals the 794px white A4 sheet plus the
+ *   32px symmetric horizontal matte PaperSurface paints on each side
+ *   (Issue #43 QA follow-up; browser QA micro-tune 24px → 28px → 32px).
  *   Including the matte inside the paper track lets the outer desk
  *   gutters shrink naturally and lets the sheet read as visually
  *   centered inside its own gray frame.
@@ -120,7 +120,7 @@
   /* Desk tone matches PaperSurface's own desk (#ececec) so the outer
      gutters read continuously as desk and the paper sheet shadow
      stays readable. The matte itself sits on a slightly darker base
-     (#e4e4e4) painted by .ps-surface; the matte's own gradient
+     (#e8e8e8) painted by .ps-surface; the matte's own gradient
      fades back to #ececec at its outer edges so there is no seam
      between the matte and these outer gutters. */
   background: #ececec;
