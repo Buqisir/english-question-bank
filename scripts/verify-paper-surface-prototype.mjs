@@ -183,11 +183,13 @@ console.log('\nTest 2: App.tsx routes default vs paper surface correctly')
 const appSrc = readSrc('app/src/App.tsx')
 
 assert(
-  'App.tsx imports PaperSurfacePrototype from paperSurfacePrototype/',
+  'App.tsx imports PaperSurfacePrototype or PaperIntelligencePaperSurfaceHarness from paper-intelligence/',
   /import\s*\{\s*PaperSurfacePrototype\s*\}\s*from\s*['"][^'"]*paper-intelligence\/paperSurfacePrototype\/PaperSurfacePrototype['"]/.test(
     appSrc,
+  ) || /import\s*\{\s*PaperIntelligencePaperSurfaceHarness\s*\}\s*from\s*['"][^'"]*paper-intelligence\/PaperIntelligencePaperSurfaceHarness['"]/.test(
+    appSrc,
   ),
-  'paper-surface prototype import missing or wrong path',
+  'paper-surface prototype or harness import missing or wrong path',
 )
 
 assert(
@@ -246,9 +248,10 @@ assert(
 )
 
 assert(
-  'PI branch mounts <PaperSurfacePrototype> only on the paper branch',
-  /currentPiRoute\.surface\s*===\s*['"]paper['"][\s\S]*?<PaperSurfacePrototype\b/.test(piBranch),
-  'prototype component not mounted on paper branch',
+  'PI branch mounts <PaperSurfacePrototype> or <PaperIntelligencePaperSurfaceHarness> only on the paper branch',
+  /currentPiRoute\.surface\s*===\s*['"]paper['"][\s\S]*?<PaperSurfacePrototype\b/.test(piBranch) ||
+  /currentPiRoute\.surface\s*===\s*['"]paper['"][\s\S]*?<PaperIntelligencePaperSurfaceHarness\b/.test(piBranch),
+  'prototype or harness component not mounted on paper branch',
 )
 
 assert(
@@ -258,7 +261,10 @@ assert(
 )
 
 // The default PI mount must come AFTER the paper-surface short-circuit.
-const paperIdx = piBranch.search(/<PaperSurfacePrototype\b/)
+const paperIdx = Math.max(
+  piBranch.search(/<PaperSurfacePrototype\b/),
+  piBranch.search(/<PaperIntelligencePaperSurfaceHarness\b/),
+)
 const defaultIdx = piBranch.search(/<PaperIntelligencePreview\b/)
 assert(
   'Default PI mount appears after the paper-surface guard inside the PI branch',
@@ -266,8 +272,9 @@ assert(
   `paperIdx=${paperIdx}, defaultIdx=${defaultIdx}`,
 )
 
-// Extract the prototype mount JSX so we can verify its props.
-const prototypeMountMatch = piBranch.match(/<PaperSurfacePrototype\b([\s\S]*?)\/>/)
+// Extract the prototype/harness mount JSX so we can verify its props.
+const prototypeMountMatch = piBranch.match(/<PaperSurfacePrototype\b([\s\S]*?)\/>/) ||
+  piBranch.match(/<PaperIntelligencePaperSurfaceHarness\b([\s\S]*?)\/>/)
 const prototypeMountProps = prototypeMountMatch ? prototypeMountMatch[1] : ''
 assert(
   'Prototype mount JSX extracted',
