@@ -41,10 +41,11 @@
   flex-direction: column;
   align-items: center;
   /* Issue #43 QA follow-up: symmetric matte. Vertical matte stays
-     16px; horizontal matte bumps to 24px so the gray frame around
-     the white A4 sheet reads symmetric and visually centered inside
-     the harness paper track (842px = 794px page + 24px × 2 matte). */
-  padding: 16px 24px;
+     16px; horizontal matte is 28px so the gray frame around the
+     white A4 sheet reads symmetric and visually centered inside the
+     harness paper track (850px = 794px page + 28px × 2 matte).
+     Browser QA micro-tune: 24px → 28px. */
+  padding: 16px 28px;
   box-sizing: border-box;
 }
 

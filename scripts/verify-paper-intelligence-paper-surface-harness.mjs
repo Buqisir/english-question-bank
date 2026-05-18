@@ -33,8 +33,8 @@
  *   C2 polish boundary — PaperSurface.css polish slice:
  *     - declares --ps-page-width: 794px
  *     - declares --ps-page-padding: 56px
- *     - .ps-surface padding: 16px 24px (Issue #43 QA follow-up
- *       symmetric matte: vertical 16px stays, horizontal 24px)
+ *     - .ps-surface padding: 16px 28px (Issue #43 QA follow-up
+ *       symmetric matte; browser QA micro-tune 24px → 28px)
  *     - .ps-passage-body font-size: 16px
  *     - .ps-question-no font-size: 16px
  *     - .ps-question-stem font-size: 16px
@@ -49,8 +49,9 @@
  *   C2 polish boundary — harness CSS polish slice (Issue #43 redesign,
  *   QA follow-up: symmetric matte):
  *     - .pi-ps-harness-shell uses 4-column centered workspace grid:
- *         minmax(0, 1fr) minmax(0, 842px) minmax(0, 380px) minmax(0, 1fr)
- *       (842px = 794px white sheet + 24px × 2 symmetric matte)
+ *         minmax(0, 1fr) minmax(0, 850px) minmax(0, 380px) minmax(0, 1fr)
+ *       (850px = 794px white sheet + 28px × 2 symmetric matte;
+ *       browser QA micro-tune from 842px / 24px matte)
  *     - .pi-ps-harness-shell has column-gap: 24px
  *     - .pi-ps-harness-shell paints desk tone (#ececec)
  *     - .pi-ps-harness-left is on grid-column: 2 with overflow-y: auto
@@ -171,14 +172,15 @@ assert(
   "PaperSurface.css declares --ps-page-padding: 56px"
 )
 
-// .ps-surface padding: 16px 24px (Issue #43 QA follow-up — symmetric
-// matte: vertical matte 16px stays, horizontal matte bumps to 24px
-// so the gray frame around the white A4 sheet reads symmetric).
+// .ps-surface padding: 16px 28px (Issue #43 QA follow-up — symmetric
+// matte: vertical matte 16px stays, horizontal matte is 28px so the
+// gray frame around the white A4 sheet reads symmetric. Browser QA
+// micro-tune 24px → 28px).
 {
   const match = paperSurfaceCss.match(/\.ps-surface\s*\{([\s\S]*?)\}/)
   assert(
-    !!match && /(^|\s|;)padding\s*:\s*16px\s+24px\s*;/.test(match ? match[1] : ''),
-    ".ps-surface declares padding: 16px 24px (symmetric matte)"
+    !!match && /(^|\s|;)padding\s*:\s*16px\s+28px\s*;/.test(match ? match[1] : ''),
+    ".ps-surface declares padding: 16px 28px (symmetric matte)"
   )
 }
 
@@ -247,22 +249,27 @@ const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
   const shellMatch = harnessCssBase.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
   const shellBody = shellMatch ? shellMatch[1] : ''
 
-  // 4-column model: outer-left desk, paper track (842px = 794px sheet
-  // + 24px × 2 symmetric matte), rail track, outer-right desk.
+  // 4-column model: outer-left desk, paper track (850px = 794px sheet
+  // + 28px × 2 symmetric matte; browser QA micro-tune from 842px /
+  // 24px matte), rail track, outer-right desk.
   assert(
     !!shellMatch &&
-      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*842px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
+      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*850px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
         shellBody,
       ),
-    "harness CSS .pi-ps-harness-shell uses 4-column centered workspace grid (1fr / 842px / 380px / 1fr)"
+    "harness CSS .pi-ps-harness-shell uses 4-column centered workspace grid (1fr / 850px / 380px / 1fr)"
   )
   assert(
-    /minmax\(\s*0\s*,\s*842px\s*\)/.test(shellBody),
-    "harness CSS .pi-ps-harness-shell paper track is minmax(0, 842px) (794px sheet + 24px × 2 matte)"
+    /minmax\(\s*0\s*,\s*850px\s*\)/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell paper track is minmax(0, 850px) (794px sheet + 28px × 2 matte)"
   )
   assert(
     !/minmax\(\s*0\s*,\s*794px\s*\)/.test(shellBody),
     "harness CSS .pi-ps-harness-shell paper track no longer uses minmax(0, 794px)"
+  )
+  assert(
+    !/minmax\(\s*0\s*,\s*842px\s*\)/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell paper track no longer uses minmax(0, 842px)"
   )
   assert(
     /minmax\(\s*0\s*,\s*380px\s*\)/.test(shellBody),

@@ -26,11 +26,12 @@
  *   with a fixed `column-gap: 24px`. The paper-to-rail seam is now
  *   exactly the column-gap, never leftover 1fr space.
  *
- *   The 842px paper track equals the 794px white A4 sheet plus the
- *   24px symmetric horizontal matte PaperSurface paints on each side
- *   (Issue #43 QA follow-up). Including the matte inside the paper
- *   track lets the outer desk gutters shrink naturally and lets the
- *   sheet read as visually centered inside its own gray frame.
+ *   The 850px paper track equals the 794px white A4 sheet plus the
+ *   28px symmetric horizontal matte PaperSurface paints on each side
+ *   (Issue #43 QA follow-up; browser QA micro-tune 24px → 28px).
+ *   Including the matte inside the paper track lets the outer desk
+ *   gutters shrink naturally and lets the sheet read as visually
+ *   centered inside its own gray frame.
  *
  * What this file does NOT change:
  *
@@ -97,18 +98,19 @@
 .pi-ps-harness-shell {
   display: grid;
   /*
-   * Issue #43 QA follow-up: paper track widened from 794px to 842px
-   * so the PaperSurface gray matte (now 24px left + 24px right per
+   * Issue #43 QA follow-up: paper track widened from 794px to 850px
+   * so the PaperSurface gray matte (now 28px left + 28px right per
    * .ps-surface) is included inside the paper track. The white A4
    * sheet remains 794px and is centered inside its own matte; the
    * outer shell desk gutters (the two `1fr` tracks) shrink naturally
-   * to absorb the 48px the matte now claims from them. The seam
+   * to absorb the 56px the matte now claims from them. The seam
    * between paper track and rail track is still exactly the
    * column-gap (24px), never leftover 1fr space.
+   * Browser QA micro-tune: paper track 842px → 850px (matte 24px → 28px).
    */
   grid-template-columns:
     minmax(0, 1fr)
-    minmax(0, 842px)
+    minmax(0, 850px)
     minmax(0, 380px)
     minmax(0, 1fr);
   column-gap: 24px;
