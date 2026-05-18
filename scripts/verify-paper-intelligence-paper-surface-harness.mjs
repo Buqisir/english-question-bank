@@ -45,10 +45,18 @@
  *       box-shadow declaration in the whole file, and it must live on
  *       .ps-page)
  *
- *   C2 polish boundary — harness CSS polish slice:
- *     - .pi-ps-harness-shell grid-template-columns: 1fr 380px
- *     - .pi-ps-harness-shell grid-template-columns is NOT 1fr 360px
- *     - .pi-ps-harness-left padding: 1rem 1rem
+ *   C2 polish boundary — harness CSS polish slice (Issue #43 redesign):
+ *     - .pi-ps-harness-shell uses 4-column centered workspace grid:
+ *         minmax(0, 1fr) minmax(0, 794px) minmax(0, 380px) minmax(0, 1fr)
+ *     - .pi-ps-harness-shell has column-gap: 24px
+ *     - .pi-ps-harness-shell paints desk tone (#ececec)
+ *     - .pi-ps-harness-left is on grid-column: 2 with overflow-y: auto
+ *       and no border-right divider
+ *     - .pi-ps-harness-right is on grid-column: 3 with overflow-y: auto
+ *       and no explicit width override
+ *     - @media (max-width: 1199px) stacked fallback collapses the
+ *       shell to a single minmax(0, 1fr) column with column-gap: 0
+ *       and pins both left/right to grid-column: 1
  *
  *   C2 polish boundary — files that MUST remain untouched by this cut:
  *     - app/src/shared-ui/papersurface/PaperSurface.tsx
@@ -219,31 +227,123 @@ assert(
   )
 }
 
-// ─── C2 polish boundary — harness CSS polish slice ───
+// ─── Harness CSS boundary (Issue #43: 4-column centered workspace) ───
 
-console.log('\n=== C2 polish boundary: harness CSS ===')
+console.log('\n=== Issue #43: harness CSS 4-column workspace shell ===')
 
 const harnessCssRaw = readFile(HARNESS_CSS_PATH)
 const harnessCss = stripCssComments(harnessCssRaw)
 
+// Base-shell (non-media-query) block. We extract by stripping any
+// @media block first so 1.x assertions only inspect the base rules.
+const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
+
 {
-  const shellMatch = harnessCss.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
+  const shellMatch = harnessCssBase.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
   const shellBody = shellMatch ? shellMatch[1] : ''
+
+  // 4-column model: outer-left desk, paper track, rail track, outer-right desk.
   assert(
-    !!shellMatch && /grid-template-columns\s*:\s*1fr\s+380px\s*;/.test(shellBody),
-    "harness CSS .pi-ps-harness-shell has grid-template-columns: 1fr 380px"
+    !!shellMatch &&
+      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*794px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
+        shellBody,
+      ),
+    "harness CSS .pi-ps-harness-shell uses 4-column centered workspace grid (1fr / 794px / 380px / 1fr)"
+  )
+  assert(
+    /minmax\(\s*0\s*,\s*794px\s*\)/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell paper track is minmax(0, 794px)"
+  )
+  assert(
+    /minmax\(\s*0\s*,\s*380px\s*\)/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell rail track is minmax(0, 380px)"
+  )
+  assert(
+    /column-gap\s*:\s*24px\s*;/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell has column-gap: 24px"
+  )
+
+  // Legacy 2-column model is gone in the base shell.
+  assert(
+    !/grid-template-columns\s*:\s*1fr\s+380px\s*;/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell no longer uses legacy `1fr 380px` 2-column model"
   )
   assert(
     !/grid-template-columns\s*:\s*1fr\s+360px\s*;/.test(shellBody),
-    "harness CSS .pi-ps-harness-shell does NOT have grid-template-columns: 1fr 360px"
+    "harness CSS .pi-ps-harness-shell does NOT use `1fr 360px`"
   )
 }
 
 {
-  const leftMatch = harnessCss.match(/\.pi-ps-harness-left\s*\{([\s\S]*?)\}/)
+  const leftMatch = harnessCssBase.match(/\.pi-ps-harness-left\s*\{([\s\S]*?)\}/)
+  const leftBody = leftMatch ? leftMatch[1] : ''
   assert(
-    !!leftMatch && /(^|\s|;)padding\s*:\s*1rem\s+1rem\s*;/.test(leftMatch ? leftMatch[1] : ''),
-    "harness CSS .pi-ps-harness-left has padding: 1rem 1rem"
+    !!leftMatch && /grid-column\s*:\s*2\s*;/.test(leftBody),
+    "harness CSS .pi-ps-harness-left is on grid-column: 2 (paper track)"
+  )
+  assert(
+    /overflow-y\s*:\s*auto\s*;/.test(leftBody),
+    "harness CSS .pi-ps-harness-left keeps overflow-y: auto"
+  )
+  assert(
+    !/border-right\s*:/.test(leftBody),
+    "harness CSS .pi-ps-harness-left no longer paints a border-right divider"
+  )
+}
+
+{
+  const rightMatch = harnessCssBase.match(/\.pi-ps-harness-right\s*\{([\s\S]*?)\}/)
+  const rightBody = rightMatch ? rightMatch[1] : ''
+  assert(
+    !!rightMatch && /grid-column\s*:\s*3\s*;/.test(rightBody),
+    "harness CSS .pi-ps-harness-right is on grid-column: 3 (rail track)"
+  )
+  assert(
+    /overflow-y\s*:\s*auto\s*;/.test(rightBody),
+    "harness CSS .pi-ps-harness-right keeps overflow-y: auto"
+  )
+  // Width is implicit from the 380px rail track; no explicit width override.
+  assert(
+    !/(^|\s|;)width\s*:/.test(rightBody),
+    "harness CSS .pi-ps-harness-right does not add an explicit width override"
+  )
+}
+
+// Stacked fallback at max-width: 1199px.
+{
+  const mediaMatch = harnessCss.match(/@media\s*\(\s*max-width\s*:\s*1199px\s*\)\s*\{([\s\S]*?)\n\}/)
+  assert(
+    !!mediaMatch,
+    "harness CSS has @media (max-width: 1199px) stacked fallback"
+  )
+  const mediaBody = mediaMatch ? mediaMatch[1] : ''
+  assert(
+    /\.pi-ps-harness-shell\s*\{[^}]*grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s*;/s.test(
+      mediaBody,
+    ),
+    "stacked fallback collapses .pi-ps-harness-shell to a single minmax(0, 1fr) column"
+  )
+  assert(
+    /\.pi-ps-harness-shell\s*\{[^}]*column-gap\s*:\s*0\s*;/s.test(mediaBody),
+    "stacked fallback sets column-gap: 0 on the shell"
+  )
+  assert(
+    /\.pi-ps-harness-left\s*\{[^}]*grid-column\s*:\s*1\s*;/s.test(mediaBody),
+    "stacked fallback sets .pi-ps-harness-left to grid-column: 1"
+  )
+  assert(
+    /\.pi-ps-harness-right\s*\{[^}]*grid-column\s*:\s*1\s*;/s.test(mediaBody),
+    "stacked fallback sets .pi-ps-harness-right to grid-column: 1"
+  )
+}
+
+// Shell paints the desk tone so outer gutters read as desk.
+{
+  const shellMatch = harnessCssBase.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
+  const shellBody = shellMatch ? shellMatch[1] : ''
+  assert(
+    /(^|\s|;)background\s*:\s*#ececec\s*;/.test(shellBody),
+    "harness CSS .pi-ps-harness-shell paints desk tone (#ececec) so outer gutters read as desk"
   )
 }
 

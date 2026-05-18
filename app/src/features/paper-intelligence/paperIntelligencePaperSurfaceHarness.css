@@ -1,9 +1,49 @@
 /**
  * PaperIntelligencePaperSurfaceHarness — layout CSS.
- * Issue #21-C1.
  *
- * Minimal layout shell. PaperSurface owns its own internal styles via
- * PaperSurface.css and shared tokens.
+ * Issue #21-C1 introduced the harness shell.
+ * Issue #41-C2 polished typography and the prior 2-column shell.
+ * Issue #43 (this cut) replaces the prior `1fr 380px` 2-column shell
+ * with a 4-column centered workspace model so paper + rail center
+ * together as a single unit on a wider desk.
+ *
+ * Why 4 columns:
+ *
+ *   The earlier model `grid-template-columns: 1fr 380px` left the
+ *   paper (fixed 794px, centered inside the 1fr left column) absorbing
+ *   all extra screen width as gray gutter on the inside seam. Shrinking
+ *   the rail moved freed pixels back into the 1fr left column, so the
+ *   gulf got *wider*, not narrower.
+ *
+ *   The new model treats paper and rail as two side-by-side fixed
+ *   tracks centered together by symmetric flexible desk gutters:
+ *
+ *     [ outer-left desk gutter (1fr) ]
+ *     [ paper track (≤ 794px)        ]
+ *     [ rail track  (≤ 380px)        ]
+ *     [ outer-right desk gutter (1fr)]
+ *
+ *   with a fixed `column-gap: 24px`. The paper-to-rail seam is now
+ *   exactly the column-gap, never leftover 1fr space.
+ *
+ * What this file does NOT change:
+ *
+ *   - PaperSurface internals (PaperSurface.css, PaperSurface.tsx,
+ *     shared/papersurface/**) are untouched. The paper page width
+ *     (794px), page padding (56px), and right rail width (380px)
+ *     all remain pinned by their existing owners.
+ *   - No JSX change. Existing class hooks (.pi-ps-harness-shell,
+ *     .pi-ps-harness-left, .pi-ps-harness-right) are reused.
+ *   - No typography change.
+ *   - No evidence line, insight chip, basket, reading mode, or right
+ *     panel content change.
+ *
+ * Stacked fallback:
+ *
+ *   Below 1200px the 4-column model collapses to a single column and
+ *   the rail flows under the paper, preventing horizontal page-level
+ *   overflow on narrow viewports. Browser QA still required at
+ *   1440 / 1280 / 1024 / 1199–1200 boundary.
  */
 
 .pi-ps-harness {
@@ -46,23 +86,57 @@
   color: #888;
 }
 
+/* ─── Workspace shell: 4-column centered grid (Issue #43) ──────── */
+
 .pi-ps-harness-shell {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 794px)
+    minmax(0, 380px)
+    minmax(0, 1fr);
+  column-gap: 24px;
   flex: 1;
   overflow: hidden;
+  /* Desk tone matches PaperSurface's own desk (#ececec) so the outer
+     gutters read continuously as desk and the paper sheet shadow
+     stays readable. */
+  background: #ececec;
 }
 
 .pi-ps-harness-left {
+  grid-column: 2;
   overflow-y: auto;
-  padding: 1rem 1rem;
-  border-right: 1px solid #e2e2e2;
+  /* Horizontal padding intentionally 0: the paper track is sized to
+     the paper. PaperSurface (.ps-surface) already paints its own
+     desk-around-paper padding, so adding harness padding here would
+     reintroduce a seam between the paper track and the column-gap. */
+  padding: 1rem 0;
 }
 
 .pi-ps-harness-right {
+  grid-column: 3;
   overflow-y: auto;
   padding: 1rem 1.25rem;
   background: #fafbfc;
+}
+
+/* ─── Stacked fallback ─────────────────────────────────────────── */
+
+@media (max-width: 1199px) {
+  .pi-ps-harness-shell {
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
+  }
+
+  .pi-ps-harness-left {
+    grid-column: 1;
+    padding: 1rem;
+  }
+
+  .pi-ps-harness-right {
+    grid-column: 1;
+  }
 }
 
 .pi-ps-harness-loading,
