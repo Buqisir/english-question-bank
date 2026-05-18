@@ -16,7 +16,9 @@
  *   4. Token discipline — imports paperSurfaceTokens, CSS uses vars,
  *      no raw token literals.
  *   5. Visual hard requirements — 794px, 56px, no border-radius /
- *      box-shadow / gradient inside paper.
+ *      box-shadow / gradient inside the white paper sheet. The
+ *      surrounding .ps-surface matte may use its Issue #43 desk
+ *      gradient.
  *   6. Segmenter purity — no React/app/server imports, idempotent.
  *
  * Cloud-safe: no browser, no build, no node_modules needed.
@@ -52,6 +54,45 @@ function stripComments(src) {
   return src
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/(^|[^:])\/\/[^\n]*/g, '$1')
+}
+
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function findCssRuleRange(src, selector) {
+  const re = new RegExp(`(^|\\n)\\s*${escapeRegExp(selector)}\\s*\\{`)
+  const match = re.exec(src)
+  if (!match) return null
+
+  const selectorStart = match.index + (match[1] ? match[1].length : 0)
+  const openBrace = src.indexOf('{', selectorStart)
+  if (openBrace < 0) return null
+
+  let depth = 0
+  for (let i = openBrace; i < src.length; i++) {
+    const ch = src[i]
+    if (ch === '{') depth++
+    if (ch === '}') {
+      depth--
+      if (depth === 0) {
+        return { start: selectorStart, openBrace, end: i + 1 }
+      }
+    }
+  }
+  return null
+}
+
+function readCssRuleBody(src, selector) {
+  const range = findCssRuleRange(src, selector)
+  if (!range) return ''
+  return src.slice(range.openBrace + 1, range.end - 1)
+}
+
+function removeCssRule(src, selector) {
+  const range = findCssRuleRange(src, selector)
+  if (!range) return src
+  return `${src.slice(0, range.start)}${src.slice(range.end)}`
 }
 
 console.log('\n=== PaperSurface Module v1 (#21-B3) ===\n')
@@ -104,25 +145,21 @@ function safeGitDiffNames(args) {
 }
 
 const baseRef = (() => {
-  try {
-    return execSync('git merge-base HEAD origin/main', {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-  } catch {
+  const candidates = ['github/main', 'origin/main', 'main']
+  for (const ref of candidates) {
     try {
-      return execSync('git merge-base HEAD main', {
+      const out = execSync(`git merge-base HEAD ${ref}`, {
         cwd: ROOT,
         stdio: ['ignore', 'pipe', 'pipe'],
       })
         .toString()
         .trim()
+      if (out) return out
     } catch {
-      return 'HEAD'
+      // Try the next remote/local candidate.
     }
   }
+  return 'HEAD'
 })()
 
 const changed = safeGitDiffNames(`${baseRef}...HEAD`)
@@ -461,11 +498,30 @@ assert(
   'border-radius found in CSS',
 )
 
-// No gradient inside paper.
+// Issue #43 intentionally added a subtle matte gradient on .ps-surface
+// (the gray desk/paper-pad around the white page). The B3 invariant is
+// narrower: the white .ps-page sheet itself must remain a clean paper
+// surface, and no other PaperSurface selector may introduce gradients.
+const psSurfaceRule = readCssRuleBody(cssNoComments, '.ps-surface')
+const psPageRule = readCssRuleBody(cssNoComments, '.ps-page')
+const cssWithoutPsSurface = removeCssRule(cssNoComments, '.ps-surface')
+
 assert(
-  'No gradient in CSS',
-  !/gradient/.test(cssNoComments),
-  'gradient found in CSS',
+  '.ps-surface matte may own the only PaperSurface gradient',
+  /gradient/.test(psSurfaceRule),
+  '.ps-surface matte gradient missing',
+)
+
+assert(
+  '.ps-page sheet does NOT introduce gradient',
+  !/gradient/.test(psPageRule),
+  'gradient found in .ps-page sheet',
+)
+
+assert(
+  'No gradient outside the .ps-surface matte',
+  !/gradient/.test(cssWithoutPsSurface),
+  'gradient found outside .ps-surface matte',
 )
 
 // box-shadow is only on .ps-page (the outer sheet shadow, which is

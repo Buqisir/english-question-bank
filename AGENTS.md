@@ -45,6 +45,7 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Docs-only and type-only cuts do not need browser QA.
 - Do not automatically turn `Should Watch` findings into tasks. Only `Must Fix` blocks the current PR; `Follow-up Gate` blocks a named future stage.
+- PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
 - Use role-coded Kiro handshakes such as `/kiro DEV1`, `/kiro PA`, and `/kiro CR`.
 - When giving the PO a prompt to paste into Kiro, put the entire prompt content in fenced code blocks. Do not put explanatory prose between the prompt code blocks.
 - Ask Kiro to wrap the entire completion report or review in exactly one fenced `text` code block, with no prose outside the block.
