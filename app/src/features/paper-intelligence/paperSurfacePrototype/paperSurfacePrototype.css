@@ -2,7 +2,7 @@
  * paperSurfacePrototype.css — Issue #21-A spike paper-surface prototype.
  *
  * ---------------------------------------------------------------------
- * CSS strategy note (Issue #30 gate 2 — DO NOT DELETE BEFORE READING)
+ * CSS strategy note (Issue #30 gate 2 — RESOLVED FOR B1: A-thin)
  * ---------------------------------------------------------------------
  *
  *   - This CSS is prototype-only visual reference. It validates the
@@ -10,21 +10,31 @@
  *     on-screen paper surface. It is wired to the prototype mounted at
  *     `?surface=paper` and to nothing else.
  *
- *   - This CSS is NOT yet shared with `server/print-renderer.mjs`.
- *     The print renderer keeps its own emit logic and its own CSS path,
- *     unchanged. The two are deliberately not aligned in this cut.
+ *   - As of Issue #21-B1 the team has chosen the **A-thin** CSS
+ *     strategy (see `docs/paper-surface-spike-follow-up.md`):
  *
- *   - Before any production PaperSurface module promotes this CSS, the
- *     team MUST resolve Issue #30 by choosing one of:
- *       1) Extract shared paper-surface tokens / styles between the
- *          React surface and `server/print-renderer.mjs` (and replace
- *          this file with consumers of the shared module), or
- *       2) Discard this prototype CSS and rebuild B-level styles from
- *          renderer-aligned styles instead.
+ *       - Share PRIMITIVE values via `shared/papersurface/tokens.mjs`
+ *         (font stack, colors, line heights, paragraph indent, options
+ *         grid descriptors).
+ *       - DO NOT share CSS text. This file stays React-only.
+ *       - DO NOT share HTML markup or JSX with the server.
  *
- *   - Do NOT promote this CSS to production without resolving Issue #30.
- *     Do NOT add a third "shared by accident" surface that depends on
- *     these selectors.
+ *     The React prototype injects those primitives as CSS custom
+ *     properties on the surface root (`PaperSurfacePrototype.tsx`),
+ *     and this file consumes them via `var(--pi-paper-...)` instead
+ *     of hardcoding the same values. This is the single point where
+ *     "what is shared" becomes "what is rendered" on the React side.
+ *
+ *   - This CSS is still NOT shared with `server/print-renderer.mjs`.
+ *     The print renderer keeps its own emit logic, its own inlined
+ *     CSS, and (for now) its own slightly-different font stack. B2
+ *     must decide whether the server consumes the same shared tokens
+ *     and rerun the print visual QA accordingly.
+ *
+ *   - Values that are genuinely React-only (page width on screen,
+ *     active selection rail color, sidecar / topbar / spike chrome,
+ *     hover / focus colors, breakpoints) STAY hardcoded here. They
+ *     must NOT be promoted to the shared tokens module.
  *
  * Naming note (Issue #30 gate 1):
  *   The prefixes are `pi-paper-*`, `--pi-paper-*`, `data-pi-paper-*`.
@@ -36,12 +46,13 @@
  *   - Real-paper feel for 广东一模 / 高考真题 阅读理解第一节. No card
  *     chrome, no dashboard, no marketing hero, no decorative gradients.
  *   - Hard font requirement: 中文宋体 / 英文 Times New Roman, applied
- *     via a single shared stack so a mixed Chinese-English line falls
- *     back to the right glyphs.
+ *     via the SHARED `--pi-paper-font-stack` so a mixed Chinese-English
+ *     line falls back to the right glyphs.
  *   - A4-ish page width (≈ 794px @ 96dpi for portrait A4 minus margins).
  *     We do NOT chase real pagination in the spike, but we cap the
  *     content column so a teacher can immediately see the print-target
- *     proportions.
+ *     proportions. Page width stays React-only — it is a screen
+ *     concern, not a token.
  *
  * Out of scope:
  *   - True print stylesheets / @page / page-break tuning. Future work.
@@ -54,22 +65,28 @@
 
 /* ─── Font stack ─────────────────────────────────────────────────────
  *
- * The CSS variable lets a future page swap fonts without re-touching
- * every selector. The order matters: Western glyphs match Times New
- * Roman first, then CJK glyphs match the宋体 family chain. `serif`
- * is the final fallback. We intentionally avoid Noto Serif CJK so the
- * spike honors the explicit instruction "中文：宋体 / 英文：Times New
- * Roman".
+ * The font stack itself is now declared in `shared/papersurface/tokens.mjs`
+ * (Issue #21-B1, A-thin). The React prototype injects it as
+ * `--pi-paper-font-stack` on the `.pi-paper-surface` root via inline
+ * style. We keep the variable name on the surface so consumers can
+ * still override it from outside — but the canonical value comes from
+ * the shared module.
+ *
+ * The order matters: Western glyphs match Times New Roman first, then
+ * CJK glyphs match the宋体 family chain. `serif` is the final
+ * fallback. We intentionally avoid Noto Serif CJK so the spike honors
+ * the explicit instruction "中文：宋体 / 英文：Times New Roman".
  */
 
 .pi-paper-surface {
-  --pi-paper-font-stack:
-    "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+  /*
+   * Page width / padding stay React-only. They are screen-presentation
+   * concerns (how an A4-ish sheet looks on a 1280px desk), not paper
+   * typography primitives. Do NOT promote them to the shared tokens
+   * module without revisiting Issue #30 / B2.
+   */
   --pi-paper-page-width: 794px; /* ≈ A4 @ 96dpi */
   --pi-paper-page-padding: 56px;
-  --pi-paper-ink: #111;
-  --pi-paper-muted: #555;
-  --pi-paper-rule: #d9d9d9;
   --pi-paper-active-rail: #d4ad60; /* warm gold; deliberately quiet */
 
   font-family: var(--pi-paper-font-stack);
@@ -212,7 +229,7 @@
 .pi-paper-instruction-body {
   font-size: 14px;
   margin: 0;
-  text-indent: 2em; /* 中文段落首行缩进 */
+  text-indent: var(--pi-paper-passage-indent); /* 中文段落首行缩进 */
 }
 
 /* ─── Passage list (A → B → C → D continuous) ───────────────────── */
@@ -254,14 +271,14 @@
 
 .pi-paper-passage-body {
   font-size: 14.5px;
-  line-height: 1.85;
+  line-height: var(--pi-paper-passage-line-height);
   text-align: justify;
   hyphens: auto;
 }
 
 .pi-paper-passage-paragraph {
   margin: 0 0 8px;
-  text-indent: 2em;
+  text-indent: var(--pi-paper-passage-indent);
 }
 
 /* ─── Evidence anchors (Issue #30 gate 3 — neutral, no highlight) ─
@@ -346,7 +363,7 @@
 
 .pi-paper-question-stem {
   font-size: 14.5px;
-  line-height: 1.7;
+  line-height: var(--pi-paper-question-line-height);
 }
 
 .pi-paper-option-list {
@@ -354,8 +371,8 @@
   margin: 6px 0 0;
   padding: 0 0 0 22px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 18px;
+  grid-template-columns: var(--pi-paper-options-grid-columns);
+  gap: 4px var(--pi-paper-options-grid-gap-x);
 }
 
 @media (max-width: 700px) {

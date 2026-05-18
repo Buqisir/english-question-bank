@@ -18,13 +18,26 @@
  *   not a print-renderer alignment. There is intentionally NO compat
  *   branch for `surface=print`; unknown surfaces fall back to default.
  *
- * CSS strategy note (Issue #30 gate 2):
+ * CSS strategy note (Issue #30 gate 2 — RESOLVED FOR B1: A-thin):
  *   The companion `paperSurfacePrototype.css` is prototype-only visual
- *   reference. It is NOT shared with `server/print-renderer.mjs`. Before
- *   any production PaperSurface module promotes this CSS, the team must
- *   resolve Issue #30 — either extract shared paper-surface tokens with
- *   the print renderer, or discard this CSS and rebuild from
- *   renderer-aligned styles. See `docs/paper-surface-spike-follow-up.md`.
+ *   reference. It is NOT shared with `server/print-renderer.mjs`. As of
+ *   Issue #21-B1, the team has chosen the **A-thin** strategy:
+ *
+ *     - Share PRIMITIVE values (font stack, colors, line heights,
+ *       indents, simple grid descriptors) via
+ *       `shared/papersurface/tokens.mjs`.
+ *     - DO NOT share CSS text. Each surface keeps its own CSS file.
+ *     - DO NOT share HTML markup or JSX.
+ *     - The React prototype consumes those values via CSS custom
+ *       properties on the surface root.
+ *     - `server/print-renderer.mjs` is intentionally untouched in B1
+ *       and still uses its own slightly-different inlined font stack;
+ *       the divergence is recorded in `paperSurfaceServerCurrent`. B2
+ *       must decide whether the server adopts the shared tokens, and
+ *       rerun the print visual QA accordingly.
+ *
+ *   See `docs/paper-surface-spike-follow-up.md` for the full Gate 2
+ *   resolution and the B2 follow-up.
  *
  * Hard scope:
  *   - Read-only. No basket, no draft, no export, no insight popover, no
@@ -72,13 +85,27 @@
  *     source for evidence ids.
  */
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
 import './paperSurfacePrototype.css'
 import {
   toEvidenceModel,
   type EvidenceModel,
 } from '../evidence'
 import type { PaperIntelligenceReport } from '../paperIntelligenceTypes'
+// Issue #21-B1 / Issue #30 gate 2: A-thin CSS strategy. The prototype
+// imports primitive paper-surface tokens from the shared module and
+// injects them as CSS custom properties on the surface root. The
+// companion CSS reads `var(--pi-paper-...)`. We do NOT share CSS text,
+// HTML, or markup with `server/print-renderer.mjs` in this cut.
+import { paperSurfaceTokens } from '../../../../../shared/papersurface/tokens.mjs'
+
+/**
+ * React lets you set CSS custom properties via inline `style`, but the
+ * default `CSSProperties` type does not include them. We extend it
+ * locally so the surface root can advertise its CSS vars without
+ * widening the public API surface.
+ */
+type PaperSurfaceStyle = CSSProperties & Record<`--${string}`, string | number>
 
 /* ─── Local fixture types ────────────────────────────────────────────
  *
@@ -393,6 +420,25 @@ export type PaperSurfacePrototypeProps = {
 
 const SPIKE_SUPPORTED_PAPER_ID = 'paper-2024-xkb1-reading'
 
+/**
+ * Issue #21-B1: the surface root advertises every shared paper-surface
+ * token as a CSS custom property. The companion CSS file consumes them
+ * via `var(--pi-paper-...)` instead of hardcoding values. Anything that
+ * is genuinely React-only (page width on screen, active selection rail,
+ * sidecar / topbar / spike chrome) stays out of this object on purpose.
+ */
+const paperSurfaceTokenStyle: PaperSurfaceStyle = {
+  '--pi-paper-font-stack': paperSurfaceTokens.paperFontStack,
+  '--pi-paper-ink': paperSurfaceTokens.paperInk,
+  '--pi-paper-muted': paperSurfaceTokens.paperMuted,
+  '--pi-paper-rule': paperSurfaceTokens.paperRule,
+  '--pi-paper-passage-line-height': paperSurfaceTokens.passageLineHeight,
+  '--pi-paper-question-line-height': paperSurfaceTokens.questionLineHeight,
+  '--pi-paper-passage-indent': paperSurfaceTokens.passageIndent,
+  '--pi-paper-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
+  '--pi-paper-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
+}
+
 export function PaperSurfacePrototype({
   paperId,
   onBackToWorkbench,
@@ -478,7 +524,11 @@ export function PaperSurfacePrototype({
 
   if (loading) {
     return (
-      <div className="pi-paper-surface" data-pi-paper-surface="loading">
+      <div
+        className="pi-paper-surface"
+        data-pi-paper-surface="loading"
+        style={paperSurfaceTokenStyle}
+      >
         <PaperSurfaceTopBar onBackToWorkbench={onBackToWorkbench} />
         <div className="pi-paper-error">加载中…</div>
       </div>
@@ -487,7 +537,11 @@ export function PaperSurfacePrototype({
 
   if (error || !view) {
     return (
-      <div className="pi-paper-surface" data-pi-paper-surface="error">
+      <div
+        className="pi-paper-surface"
+        data-pi-paper-surface="error"
+        style={paperSurfaceTokenStyle}
+      >
         <PaperSurfaceTopBar onBackToWorkbench={onBackToWorkbench} />
         <div className="pi-paper-error">
           <h2>精排卷面 spike</h2>
@@ -502,6 +556,7 @@ export function PaperSurfacePrototype({
       className="pi-paper-surface"
       data-pi-paper-surface="ready"
       data-pi-paper-surface-paper-id={paperId || ''}
+      style={paperSurfaceTokenStyle}
     >
       <PaperSurfaceTopBar onBackToWorkbench={onBackToWorkbench} />
       <div className="pi-paper-spike-notice" role="note">
