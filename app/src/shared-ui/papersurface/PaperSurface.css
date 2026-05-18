@@ -151,7 +151,7 @@
   overflow: hidden;
 }
 
-/* ─── Active support evidence highlight (Issue #21-C3) ─────────── */
+/* ─── Active support evidence highlight (Issue #21-C3 / C3.6) ──── */
 
 /*
  * When the harness sets `lectureFocus.activeEvidenceId`, PaperSurface
@@ -161,23 +161,51 @@
  * modifier resets the zero-size baseline above so the wrapped slice
  * paints inside the passage flow.
  *
- * Visual: subtle mint background + bottom underline so the highlight
- * reads as "answer evidence" without competing with the paper's
- * serif body. The underline carries the primary signal; the
- * background is held low-saturation so the page still reads as a
- * paper sheet (no card-like fills inside the page). No border-radius,
- * no box-shadow, no gradient — preserves the PaperSurface visual
- * invariants from the QA checklist.
+ * Issue #21-C3.6 splits the visible palette by evidence kind. The
+ * `<mark>` already carries `data-paper-evidence-kind="support" |
+ * "trap" | "context"` (emitted by PaperSurface from the neutral
+ * `paperSurfaceAnchorAttrs.evidenceKind` constant), so the kind
+ * styling lives entirely in CSS and PaperSurface stays dumb — no PI
+ * types leak in, no `data-pi-*` is emitted.
+ *
+ * Visual contract:
+ *   - support: subtle mint background + solid mint underline. Reads
+ *     as "answer evidence" — the historical default before C3.6.
+ *   - trap:    subtle amber background + dotted amber underline.
+ *     Reads as "attention / misleading source". Amber is chosen
+ *     deliberately over red: the source text on the page is
+ *     confusable, not wrong, so we avoid the "you got it wrong" red
+ *     palette. Red is reserved for a future cut that explicitly
+ *     marks a student's answer as incorrect.
+ *
+ * The base `.ps-evidence-anchor--active` rule below carries only the
+ * shape resets (display/size/padding/color) so any kind not
+ * explicitly painted (e.g. 'context', or a missing attribute on a
+ * malformed anchor) still renders as visible text inside the passage
+ * flow without an aggressive default highlight. The mint-green
+ * support rule below restores the historical color for the support
+ * case.
+ *
+ * No border-radius, no box-shadow, no gradient — preserves the
+ * PaperSurface visual invariants from the QA checklist.
  */
 .ps-evidence-anchor--active {
   display: inline;
   width: auto;
   height: auto;
   overflow: visible;
-  background: rgba(16, 185, 129, 0.18);
-  border-bottom: 2px solid rgba(16, 185, 129, 0.6);
   padding: 0 2px;
   color: inherit;
+}
+
+.ps-evidence-anchor--active[data-paper-evidence-kind="support"] {
+  background: rgba(16, 185, 129, 0.18);
+  border-bottom: 2px solid rgba(16, 185, 129, 0.6);
+}
+
+.ps-evidence-anchor--active[data-paper-evidence-kind="trap"] {
+  background: rgba(245, 158, 11, 0.18);
+  border-bottom: 2px dotted rgba(245, 158, 11, 0.75);
 }
 
 /* ─── Annotation anchors (neutral, invisible in B3) ────────────── */

@@ -342,11 +342,56 @@
 
 .pi-ps-harness-shell .pi-line-path {
   fill: none;
+  /*
+   * Default / support palette — mint green.
+   *
+   * The default PI route's call site of <PaperIntelligenceEvidenceLine />
+   * does not pass `activeEvidenceKind`, so the path renders without a
+   * `pi-line-path--*` modifier and inherits this default. That is the
+   * historical visual contract: a green dotted line for answer
+   * evidence.
+   *
+   * The harness call site (surface=paper) passes
+   * `activeEvidenceKind={'support' | 'trap' | null}`. When it is
+   * 'support' or null the path keeps this default; when it is 'trap'
+   * the `.pi-line-path--trap` rule below overrides the stroke to
+   * amber.
+   */
   stroke: rgba(16, 185, 129, 0.65);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-dasharray: 5 5;
   vector-effect: non-scaling-stroke;
+}
+
+/* ─── C3.6 evidence kind palette ─────────────────────────────── */
+
+/*
+ * Issue #21-C3.6 — line stroke kind palette.
+ *
+ *   - Support (mint green) confirms the answer evidence. It is the
+ *     historical default; the explicit selector exists so a future
+ *     change to the default can re-target the support kind without
+ *     touching the base rule.
+ *   - Trap (amber, NOT red) marks a misleading source. Red is
+ *     reserved for "the student got the question wrong"; the trap
+ *     source on the page is itself just text — confusable, not
+ *     incorrect — so it gets the attention/caution amber tone.
+ *
+ * Both selectors target the dotted-line path. We expose two equivalent
+ * selectors per kind (the `pi-line-path--*` class modifier and the
+ * `[data-pi-evidence-kind="..."]` attribute selector) so consumers
+ * picking either form land on the same palette. Verify-script
+ * assertions tolerate either form.
+ */
+.pi-ps-harness-shell .pi-line-path--support,
+.pi-ps-harness-shell .pi-line-path[data-pi-evidence-kind="support"] {
+  stroke: rgba(16, 185, 129, 0.65);
+}
+
+.pi-ps-harness-shell .pi-line-path--trap,
+.pi-ps-harness-shell .pi-line-path[data-pi-evidence-kind="trap"] {
+  stroke: rgba(245, 158, 11, 0.85);
 }
 
 @keyframes pi-ps-harness-line-draw {
@@ -409,9 +454,14 @@ button.pi-ps-analysis-distractor:focus-visible {
 }
 
 /*
- * Selected-row visual cue. Matches the support / trap palette from
- * the PI preview's analysis panel so the teacher reads the same
- * "this row is currently drawing the line" signal.
+ * Selected-row visual cue.
+ *
+ * Issue #21-C3.6: the support row keeps its mint-green left bar; the
+ * distractor row uses an amber tint that pairs with the amber dotted
+ * line and the amber inline left highlight on PaperSurface. Red is
+ * intentionally NOT used here — the distractor source on the page is
+ * a misleading or confusable text fragment, not a wrong answer, so
+ * the visual stays in the attention/caution amber family.
  */
 .pi-ps-analysis-evidence--selected blockquote {
   border-left-color: rgba(16, 185, 129, 0.65);
@@ -419,5 +469,10 @@ button.pi-ps-analysis-distractor:focus-visible {
 }
 
 .pi-ps-analysis-distractor--selected {
-  background: rgba(239, 68, 68, 0.04);
+  background: rgba(245, 158, 11, 0.10);
+}
+
+.pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
+  border-left-color: rgba(245, 158, 11, 0.85);
+  border-left-width: 4px;
 }

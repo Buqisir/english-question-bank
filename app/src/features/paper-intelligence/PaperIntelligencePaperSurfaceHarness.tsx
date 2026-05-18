@@ -35,13 +35,22 @@
  *     PaperIntelligencePreview does. PaperSurface (left side) does NOT
  *     emit `data-pi-*` and never will.
  *
- * Cross-column evidence line (C3):
+ * Cross-column evidence line (C3 + C3.6):
  *   - Reuses the existing `PaperIntelligenceEvidenceLine` component.
  *   - Configured with `leftSelectorPreset='paper-surface'` so the left
  *     anchor lookup resolves `[data-paper-evidence-id]` (PaperSurface's
  *     neutral namespace) instead of `mark[data-pi-evidence-id]`.
  *   - Right-side selector remains `data-pi-evidence-id` because right
  *     Question Analysis is host-owned and unchanged.
+ *   - C3.6: the harness derives `activeEvidenceKind: 'support' | 'trap'
+ *     | null` from `analysisView` (Approach B — explicit, not DOM-read)
+ *     and threads it into the line component so the dotted line stroke
+ *     matches the role of the active evidence (mint green for the
+ *     answer evidence; amber for a distractor source). PaperSurface
+ *     paints the matching inline left highlight off the
+ *     `data-paper-evidence-kind` attribute it already emits — no PI
+ *     types leak into PaperSurface and PaperSurface emits no
+ *     `data-pi-*`.
  *
  * What this harness does NOT do:
  *   - No insight chip / popover.
@@ -205,6 +214,40 @@ export function PaperIntelligencePaperSurfaceHarness({
     return view.activeAnalysis
   }, [report, bodies, activeQuestionId, inputOptions])
 
+  // ─── Derive activeEvidenceKind (Issue #21-C3.6) ───
+  //
+  // Approach B: the harness explicitly resolves the role of the active
+  // evidence by reading its own analysisView (the data layer the right
+  // panel already consumes). PaperSurface stays dumb; the cross-column
+  // line component is told the kind through a prop, not by sniffing
+  // the active right-panel row's DOM attribute.
+  //
+  // Resolution order:
+  //   - 'support' — activeEvidenceId equals analysisView.supportEvidenceId
+  //   - 'trap'    — activeEvidenceId matches a quoted distractor's
+  //                 evidenceId on analysisView.distractors. Text-only
+  //                 distractors still appear here, but the harness
+  //                 never makes them the active line target (the
+  //                 right-panel row is non-clickable for them), so in
+  //                 practice the matched distractor will be a quoted
+  //                 one whenever the line geometry resolves.
+  //   - null      — no active evidence id, no analysisView, or the id
+  //                 doesn't resolve to a known role. Downstream the
+  //                 line palette falls back to its support-style green
+  //                 default and PaperSurface paints no kind-specific
+  //                 highlight (the active <mark> already carries
+  //                 `data-paper-evidence-kind` from PaperSurface, so
+  //                 the inline left highlight stays correct on its
+  //                 own).
+  const activeEvidenceKind = useMemo<'support' | 'trap' | null>(() => {
+    if (!activeEvidenceId || !analysisView) return null
+    if (analysisView.supportEvidenceId === activeEvidenceId) return 'support'
+    if (analysisView.distractors.some((d) => d.evidenceId === activeEvidenceId)) {
+      return 'trap'
+    }
+    return null
+  }, [activeEvidenceId, analysisView])
+
   // ─── Reseed activeEvidenceId when activeQuestionId changes (C3) ───
   //
   // This mirrors the seed effect in PaperIntelligencePreview so the
@@ -319,7 +362,11 @@ export function PaperIntelligencePaperSurfaceHarness({
         </button>
         <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
       </div>
-      <div className="pi-ps-harness-shell" ref={shellRef}>
+      <div
+        className="pi-ps-harness-shell"
+        ref={shellRef}
+        data-pi-active-evidence-kind={activeEvidenceKind ?? undefined}
+      >
         <div className="pi-ps-harness-left" ref={leftScrollerRef}>
           <PaperSurface
             textMap={surfaceData.textMap}
@@ -359,6 +406,7 @@ export function PaperIntelligencePaperSurfaceHarness({
           rightPanelRef={rightPanelRef}
           activeQuestionId={activeQuestionId}
           activeEvidenceId={activeEvidenceId}
+          activeEvidenceKind={activeEvidenceKind}
           leftSelectorPreset="paper-surface"
         />
       </div>
