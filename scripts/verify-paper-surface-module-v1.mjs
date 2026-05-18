@@ -339,6 +339,53 @@ assert(
   'PaperSurfaceProps not imported from shared types',
 )
 
+/* ─── 3b. Hook order — no hooks after conditional return ──────────── */
+
+console.log('\nTest 3b: Hook order (no hooks after reading-mode early return)')
+
+{
+  // Find the reading-mode early return position in the uncommented source.
+  const readingReturnPattern = /if\s*\(\s*mode\s*===\s*['"]reading['"]\s*\)\s*\{?\s*\n?\s*return\s/
+  const readingReturnMatch = readingReturnPattern.exec(tsxNoComments)
+
+  assert(
+    'Reading-mode early return exists',
+    !!readingReturnMatch,
+    'could not find `if (mode === \'reading\') { return` pattern',
+  )
+
+  if (readingReturnMatch) {
+    const returnPos = readingReturnMatch.index
+
+    // Get everything after the early return.
+    const afterReturn = tsxNoComments.slice(returnPos + readingReturnMatch[0].length)
+
+    // Detect hook calls that appear after the early return but still
+    // inside the PaperSurface function body (before the next top-level function).
+    // We look for the closing brace of PaperSurface by finding the next
+    // standalone function declaration or end of the export function scope.
+    // Simple heuristic: find the next `^function ` or `^}` at column 0.
+    const endOfComponent = afterReturn.search(/^\}\s*$/m)
+    const bodyAfterReturn = endOfComponent >= 0
+      ? afterReturn.slice(0, endOfComponent)
+      : afterReturn
+
+    // Match hook calls: useMemo(, useCallback(, useState(, useReducer(
+    const hookPattern = /\b(useMemo|useCallback|useState|useReducer)\s*\(/g
+    const hooksAfterReturn = []
+    let hookMatch
+    while ((hookMatch = hookPattern.exec(bodyAfterReturn)) !== null) {
+      hooksAfterReturn.push(hookMatch[1])
+    }
+
+    assert(
+      'No hook calls after reading-mode early return in PaperSurface',
+      hooksAfterReturn.length === 0,
+      `hooks found after early return: ${hooksAfterReturn.join(', ')}`,
+    )
+  }
+}
+
 /* ─── 4. Token discipline ─────────────────────────────────────────── */
 
 console.log('\nTest 4: Token discipline')

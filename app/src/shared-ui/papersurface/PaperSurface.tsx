@@ -124,6 +124,16 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
     return map
   }, [annotations])
 
+  // Group paragraphs by section for ordered rendering (lecture mode).
+  // Hook must execute unconditionally before any early return.
+  const sections = useMemo(() => {
+    const sectionSet = new Set<string>()
+    for (const para of textMap.paragraphs) {
+      sectionSet.add(para.section)
+    }
+    return Array.from(sectionSet)
+  }, [textMap])
+
   // Reading mode placeholder for B3.
   if (mode === 'reading') {
     return (
@@ -142,14 +152,6 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
   }
 
   // Lecture mode rendering.
-  // Group paragraphs by section for ordered rendering.
-  const sections = useMemo(() => {
-    const sectionSet = new Set<string>()
-    for (const para of textMap.paragraphs) {
-      sectionSet.add(para.section)
-    }
-    return Array.from(sectionSet)
-  }, [textMap])
 
   return (
     <div
