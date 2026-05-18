@@ -56,6 +56,40 @@
  *  15.  Companion + scope guards: ADR references the B1 follow-up
  *       doc and the shared tokens module; runtime files are NOT
  *       modified by this PR.
+ *  17.  Anchor namespace decision (Must Fix 1): ADR locks the
+ *       neutral `data-paper-*` namespace as the PaperSurface
+ *       public protocol; `data-pi-*` is PI-host- / prototype-
+ *       specific legacy and not the public protocol; the prototype
+ *       is NOT migrated in this PR; the PI host chrome anchors
+ *       (topbar / basket / insight popover) remain under
+ *       `data-pi-*`.
+ *  18.  `shared/papersurface/anchorKeys.mjs` exists and is
+ *       protocol-only: exports `paperSurfaceAnchorAttrs` wrapped in
+ *       `Object.freeze`, contains the nine `data-paper-*` constant
+ *       values, has no React / app/ / server/ imports, and has no
+ *       function or array declarations. Companion `.d.ts` declares
+ *       `PaperSurfaceAnchorAttrs`.
+ *  19.  `shared/papersurface/types.d.ts` (Must Fix 2) exists,
+ *       declares the listed types, and embeds the locked
+ *       invariants in JSDoc: TextMap is read-only / no active
+ *       state / no evidence dependency; Annotation references
+ *       TextMap and stores no independent char offset; Annotation
+ *       carries no explanation payload on the record; PaperSurface
+ *       MUST NOT useState; emits via `onFocusIntent`.
+ *  20.  reading-analysis relation (Must Fix 3): ADR explicitly
+ *       acknowledges `data-ra-*`, freezes it for the duration of
+ *       #21-B, forbids PaperSurface from copying / mirroring it,
+ *       defers the migration-vs-coexistence decision to B4a, and
+ *       maps reading-analysis sentence / quote anchor experience
+ *       into PaperTextMap / AnnotationModel.
+ *  21.  PaperSurface API constraints (Must Fix 4): MUST NOT
+ *       useState; mode and focus are host-passed-in props; emits
+ *       intents via `onFocusIntent`; MUST NOT fetch / model /
+ *       persist / read router / know about basket.
+ *  22.  B4 split (Must Fix 5): B4a is mode skeleton only (host
+ *       owns mode, no annotation pack, no sentence focus); B4b
+ *       ships annotation pack v1 (teacher-only / read-only /
+ *       core+extended / right-panel single slot).
  *
  * Cloud-safe:
  *   - never spawns a browser,
@@ -657,7 +691,6 @@ const changed = safeGitDiffNames(`${baseRef}...HEAD`)
 const FORBIDDEN_PATHS = [
   /^app\//,
   /^server\//,
-  /^shared\//,
   /^app\/package\.json$/,
   /^app\/pnpm-lock\.yaml$/,
   /^package\.json$/,
@@ -673,17 +706,491 @@ for (const re of FORBIDDEN_PATHS) {
   )
 }
 
+/* `shared/` is allowed for the three B1.5 protocol files only.
+ * Any other shared/ change would be a runtime expansion this PR is
+ * not authorised to make. */
+const SHARED_ALLOWED = new Set([
+  'shared/papersurface/anchorKeys.mjs',
+  'shared/papersurface/anchorKeys.d.ts',
+  'shared/papersurface/types.d.ts',
+])
+const sharedOffenders = changed.filter(
+  (p) => p.startsWith('shared/') && !SHARED_ALLOWED.has(p),
+)
+assert(
+  'shared/ changes restricted to anchorKeys + types-only files',
+  sharedOffenders.length === 0,
+  `offenders: ${sharedOffenders.join(', ')}`,
+)
+
 const ALLOWED_PATTERNS = [
   /^docs\/adr\/0003-paper-surface-interaction-model\.md$/,
   /^scripts\/verify-paper-surface-interaction-model-doc\.mjs$/,
+  /^shared\/papersurface\/anchorKeys\.mjs$/,
+  /^shared\/papersurface\/anchorKeys\.d\.ts$/,
+  /^shared\/papersurface\/types\.d\.ts$/,
 ]
 const unexpected = changed.filter(
   (p) => !ALLOWED_PATTERNS.some((re) => re.test(p)),
 )
 assert(
-  'PR diff contains only the ADR + the verify script (documentation-only cut)',
+  'PR diff contains only the ADR + verify + B1.5 protocol files (no runtime expansion)',
   unexpected.length === 0,
   `unexpected files in diff: ${unexpected.join(', ')}`,
+)
+
+/* ─── 17. Anchor namespace decision (Must Fix 1) ─────────────────── */
+
+console.log('\nTest 17: anchor namespace — neutral data-paper-* (Must Fix 1)')
+
+assert(
+  'ADR locks the neutral data-paper-* namespace as the PaperSurface public protocol',
+  /neutral\s+`?data-paper-\*`?\s+namespace/i.test(adrSrc),
+  'neutral data-paper-* namespace declaration missing',
+)
+assert(
+  'ADR says data-pi-* is PI-host- / prototype-specific (legacy / not the public protocol)',
+  /data-pi-\*[\s\S]{0,400}(?:PI[-\s]?host|prototype)[\s\S]{0,400}(?:legacy|historical|not\s+(?:the\s+)?(?:PaperSurface\s+)?(?:public\s+)?protocol)/i.test(
+    adrSrc,
+  ),
+  'data-pi-* legacy / non-public-protocol statement missing',
+)
+
+const NEUTRAL_ATTRS = [
+  'data-paper-section',
+  'data-paper-paragraph-id',
+  'data-paper-sentence-id',
+  'data-paper-question-id',
+  'data-paper-option-label',
+  'data-paper-evidence-id',
+  'data-paper-evidence-kind',
+  'data-paper-annotation-id',
+  'data-paper-annotation-kind',
+]
+for (const attr of NEUTRAL_ATTRS) {
+  assert(
+    `ADR enumerates the frozen attribute name: ${attr}`,
+    adrSrc.includes(attr),
+    `${attr} missing in ADR`,
+  )
+}
+
+assert(
+  'ADR says the prototype is NOT migrated in this PR (data-pi-* legacy stays for now)',
+  /(prototype[\s\S]{0,200}NOT\s+migrated[\s\S]{0,80}this\s+PR|prototype[\s\S]{0,200}keeps\s+emitting[\s\S]{0,200}data-pi-)/i.test(
+    adrSrc,
+  ),
+  'prototype non-migration scope statement missing',
+)
+assert(
+  'ADR says the PI host chrome anchors (topbar / basket / insight popover) remain under data-pi-*',
+  /PI\s+host[\s\S]{0,200}(?:topbar|basket|insight)[\s\S]{0,400}data-pi-\*/i.test(
+    adrSrc,
+  ),
+  'PI host chrome retains data-pi-* statement missing',
+)
+
+/* ─── 18. anchorKeys.mjs exists + protocol-only ─────────────────── */
+
+console.log('\nTest 18: shared/papersurface/anchorKeys.mjs exists and is protocol-only')
+
+const ANCHOR_KEYS_REL = 'shared/papersurface/anchorKeys.mjs'
+const ANCHOR_KEYS_DTS_REL = 'shared/papersurface/anchorKeys.d.ts'
+
+assert(
+  `${ANCHOR_KEYS_REL} exists`,
+  existsSync(path.join(ROOT, ANCHOR_KEYS_REL)),
+  ANCHOR_KEYS_REL,
+)
+assert(
+  `${ANCHOR_KEYS_DTS_REL} exists`,
+  existsSync(path.join(ROOT, ANCHOR_KEYS_DTS_REL)),
+  ANCHOR_KEYS_DTS_REL,
+)
+
+if (existsSync(path.join(ROOT, ANCHOR_KEYS_REL))) {
+  const anchorKeysSrc = readSrc(ANCHOR_KEYS_REL)
+
+  assert(
+    'anchorKeys.mjs exports paperSurfaceAnchorAttrs',
+    /export\s+const\s+paperSurfaceAnchorAttrs\s*=/.test(anchorKeysSrc),
+    'paperSurfaceAnchorAttrs export missing',
+  )
+  assert(
+    'anchorKeys.mjs wraps the export in Object.freeze',
+    /export\s+const\s+paperSurfaceAnchorAttrs\s*=\s*Object\.freeze\s*\(/.test(
+      anchorKeysSrc,
+    ),
+    'Object.freeze wrapping missing',
+  )
+
+  for (const attr of NEUTRAL_ATTRS) {
+    assert(
+      `anchorKeys.mjs contains the constant value '${attr}'`,
+      anchorKeysSrc.includes(`'${attr}'`) || anchorKeysSrc.includes(`"${attr}"`),
+      `${attr} not found as a string literal`,
+    )
+  }
+
+  assert(
+    'anchorKeys.mjs does NOT import React',
+    !/from\s+['"]react['"]/.test(anchorKeysSrc) &&
+      !/require\s*\(\s*['"]react['"]\s*\)/.test(anchorKeysSrc),
+    'unexpected react import in anchorKeys.mjs',
+  )
+  assert(
+    'anchorKeys.mjs does NOT import from app/',
+    !/from\s+['"][^'"]*\bapp\//.test(anchorKeysSrc),
+    'unexpected app/ import in anchorKeys.mjs',
+  )
+  assert(
+    'anchorKeys.mjs does NOT import from server/',
+    !/from\s+['"][^'"]*\bserver\//.test(anchorKeysSrc),
+    'unexpected server/ import in anchorKeys.mjs',
+  )
+  assert(
+    'anchorKeys.mjs does NOT declare a function (constants-only contract)',
+    !/^\s*(?:export\s+)?function\s+/m.test(anchorKeysSrc) &&
+      !/=>\s*\{/.test(anchorKeysSrc) &&
+      !/=\s*\(\s*[^)]*\)\s*=>/.test(anchorKeysSrc),
+    'unexpected function / arrow declaration in anchorKeys.mjs',
+  )
+
+  /* Light "primitive strings only" check: every property in the
+   * frozen object literal should be a string literal, not a
+   * computed expression / call / array. */
+  assert(
+    'anchorKeys.mjs has no array literals (constants-only)',
+    !/\[\s*[^\]]/m.test(anchorKeysSrc.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '')),
+    'unexpected array literal in anchorKeys.mjs',
+  )
+}
+
+if (existsSync(path.join(ROOT, ANCHOR_KEYS_DTS_REL))) {
+  const anchorKeysDts = readSrc(ANCHOR_KEYS_DTS_REL)
+  assert(
+    'anchorKeys.d.ts declares PaperSurfaceAnchorAttrs type',
+    /(?:type|interface)\s+PaperSurfaceAnchorAttrs\b/.test(anchorKeysDts),
+    'PaperSurfaceAnchorAttrs type declaration missing',
+  )
+  assert(
+    'anchorKeys.d.ts declares paperSurfaceAnchorAttrs value',
+    /export\s+const\s+paperSurfaceAnchorAttrs\s*:/.test(anchorKeysDts),
+    'paperSurfaceAnchorAttrs value declaration missing',
+  )
+}
+
+/* ─── 19. types.d.ts sketch (Must Fix 2) ─────────────────────────── */
+
+console.log('\nTest 19: shared/papersurface/types.d.ts (Must Fix 2)')
+
+const TYPES_REL = 'shared/papersurface/types.d.ts'
+
+assert(
+  `${TYPES_REL} exists`,
+  existsSync(path.join(ROOT, TYPES_REL)),
+  TYPES_REL,
+)
+
+if (existsSync(path.join(ROOT, TYPES_REL))) {
+  const typesSrc = readSrc(TYPES_REL)
+
+  /* Required type names. */
+  const REQUIRED_TYPES = [
+    'PaperTextMap',
+    'PaperTextParagraph',
+    'PaperTextSentence',
+    'PaperTextToken',
+    'PaperTextRange',
+    'PaperAnnotation',
+    'PaperAnnotationKind',
+    'PaperAnnotationImportance',
+    'PaperAnnotationScope',
+    'PaperSurfaceMode',
+    'LectureFocus',
+    'ReadingFocus',
+    'PaperSurfaceFocusState',
+    'PaperSurfaceFocusIntent',
+    'PaperSurfaceProps',
+  ]
+  for (const t of REQUIRED_TYPES) {
+    assert(
+      `types.d.ts declares ${t}`,
+      new RegExp(`(?:type|interface)\\s+${t}\\b`).test(typesSrc),
+      `${t} declaration missing`,
+    )
+  }
+
+  assert(
+    'types.d.ts declares FocusIntent (alias of PaperSurfaceFocusIntent)',
+    /(?:type|interface)\s+FocusIntent\b/.test(typesSrc),
+    'FocusIntent alias missing',
+  )
+
+  /* Invariant comments. */
+  assert(
+    'types.d.ts states PaperTextMap is a read-only position map',
+    /PaperTextMap[\s\S]{0,400}read-?only\s+position\s+map/i.test(typesSrc),
+    'PaperTextMap "read-only position map" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperTextMap does NOT contain active / selected / hover state',
+    /PaperTextMap[\s\S]{0,800}(?:does\s+NOT|not)\s+contain[\s\S]{0,200}(?:active|selected|hover|focus)\s+state/i.test(
+      typesSrc,
+    ) ||
+      /PaperTextMap[\s\S]{0,800}no\s+(?:active|selected|hover|focus)\s+state/i.test(
+        typesSrc,
+      ),
+    'PaperTextMap "no active state" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperTextMap does NOT depend on evidence',
+    /PaperTextMap[\s\S]{0,800}(?:does\s+NOT|not)\s+depend\s+on\s+evidence/i.test(
+      typesSrc,
+    ) ||
+      /PaperTextMap[\s\S]{0,800}no\s+evidence\s+(?:ids|dependency)/i.test(
+        typesSrc,
+      ),
+    'PaperTextMap "no evidence dependency" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperAnnotation does NOT store independent char offsets',
+    /PaperAnnotation[\s\S]{0,800}(?:do\s+NOT|does\s+not|not)[\s\S]{0,200}(?:store|carry)[\s\S]{0,200}(?:independent|own)\s+char(?:acter)?\s+offset/i.test(
+      typesSrc,
+    ) ||
+      /PaperAnnotation[\s\S]{0,1200}independent\s+char(?:acter)?\s+offsets[\s\S]{0,200}forbidden/i.test(
+        typesSrc,
+      ),
+    'PaperAnnotation "no independent char offset" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperAnnotation references TextMap anchor for position',
+    /PaperAnnotation[\s\S]{0,1600}(?:references?|carrying|via)[\s\S]{0,200}(?:TextMap|PaperTextRange)/i.test(
+      typesSrc,
+    ),
+    'PaperAnnotation "references TextMap" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperAnnotation does NOT carry an explanation payload on the record',
+    /PaperAnnotation[\s\S]{0,2400}(?:do\s+NOT|does\s+not|DO\s+NOT)[\s\S]{0,200}(?:carry|include|store)[\s\S]{0,200}explanation\s+payload/i.test(
+      typesSrc,
+    ),
+    'PaperAnnotation "no explanation payload" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperSurface MUST NOT useState for active state',
+    /PaperSurface[\s\S]{0,400}MUST\s+NOT[\s\S]{0,200}useState/i.test(typesSrc),
+    'PaperSurfaceProps "no useState" invariant comment missing',
+  )
+  assert(
+    'types.d.ts states PaperSurface only emits intents through onFocusIntent',
+    /onFocusIntent[\s\S]{0,400}(?:only|single)\s+(?:writer|callback|channel)|onFocusIntent\s*:\s*\(\s*intent\s*:\s*PaperSurfaceFocusIntent\s*\)\s*=>\s*void/i.test(
+      typesSrc,
+    ),
+    'PaperSurfaceProps "onFocusIntent only" invariant comment missing',
+  )
+  assert(
+    "types.d.ts states PaperAnnotationImportance = 'core' | 'extended'",
+    /PaperAnnotationImportance\s*=\s*['"]core['"]\s*\|\s*['"]extended['"]/.test(
+      typesSrc,
+    ),
+    "PaperAnnotationImportance literal missing",
+  )
+  assert(
+    "types.d.ts states PaperAnnotationScope = 'question' | 'passage'",
+    /PaperAnnotationScope\s*=\s*['"]question['"]\s*\|\s*['"]passage['"]/.test(
+      typesSrc,
+    ),
+    "PaperAnnotationScope literal missing",
+  )
+  assert(
+    "types.d.ts states PaperSurfaceMode = 'lecture' | 'reading'",
+    /PaperSurfaceMode\s*=\s*['"]lecture['"]\s*\|\s*['"]reading['"]/.test(
+      typesSrc,
+    ),
+    "PaperSurfaceMode literal missing",
+  )
+
+  /* Types file must NOT introduce a runtime initializer / value
+   * export and must NOT import React. */
+  assert(
+    'types.d.ts does NOT import React',
+    !/from\s+['"]react['"]/.test(typesSrc),
+    'unexpected react import in types.d.ts',
+  )
+  assert(
+    'types.d.ts does NOT import from app/',
+    !/from\s+['"][^'"]*\bapp\//.test(typesSrc),
+    'unexpected app/ import in types.d.ts',
+  )
+  assert(
+    'types.d.ts does NOT import from server/',
+    !/from\s+['"][^'"]*\bserver\//.test(typesSrc),
+    'unexpected server/ import in types.d.ts',
+  )
+}
+
+/* ─── 20. reading-analysis relation (Must Fix 3) ─────────────────── */
+
+console.log('\nTest 20: reading-analysis relation (Must Fix 3)')
+
+assert(
+  'ADR addresses reading-analysis explicitly',
+  /reading-?analysis/i.test(adrSrc),
+  'reading-analysis not mentioned',
+)
+assert(
+  'ADR acknowledges reading-analysis already ships data-ra-* anchors',
+  /reading-?analysis[\s\S]{0,1200}data-ra-\*/i.test(adrSrc) ||
+    /data-ra-\*[\s\S]{0,1200}reading-?analysis/i.test(adrSrc),
+  'data-ra-* / reading-analysis association missing',
+)
+assert(
+  'ADR freezes data-ra-* at its current scope for the duration of #21-B',
+  /data-ra-\*[\s\S]{0,400}(?:frozen|freeze|locked)[\s\S]{0,400}(?:#21-B|duration)/i.test(
+    adrSrc,
+  ) ||
+    /(?:frozen|freeze|locked)[\s\S]{0,200}data-ra-\*/i.test(adrSrc),
+  'data-ra-* freeze statement missing',
+)
+assert(
+  'ADR says PaperSurface anchor protocol does NOT copy / mirror data-ra-*',
+  /(does\s+NOT|not)\s+(?:copy|mirror|rename|duplicate)[\s\S]{0,200}data-ra-\*/i.test(
+    adrSrc,
+  ),
+  'no-mirror-data-ra rule missing',
+)
+assert(
+  'ADR says B4a must answer the reading-analysis migration question',
+  /B4a[\s\S]{0,800}reading-?analysis[\s\S]{0,400}(?:migration|migrate|coexist|long-?lived)/i.test(
+    adrSrc,
+  ) ||
+    /reading-?analysis[\s\S]{0,800}B4a[\s\S]{0,400}(?:migration|migrate|decide)/i.test(
+      adrSrc,
+    ),
+  'B4a-reading-analysis-decision rule missing',
+)
+assert(
+  'ADR says reading-analysis sentence / quote anchor experience folds into PaperTextMap / AnnotationModel',
+  /(?:sentence[\s\S]{0,200}quote|quote[\s\S]{0,200}sentence)[\s\S]{0,800}PaperTextMap[\s\S]{0,400}(?:PaperAnnotation|AnnotationModel)/i.test(
+    adrSrc,
+  ),
+  'absorption-into-TextMap/AnnotationModel statement missing',
+)
+
+/* ─── 21. PaperSurface API constraints (Must Fix 4) ───────────────── */
+
+console.log('\nTest 21: PaperSurface API constraints (Must Fix 4)')
+
+assert(
+  'ADR has a section restating PaperSurface API constraints',
+  /API\s+constraints/i.test(adrSrc) || /Must\s+Fix\s*4/i.test(adrSrc),
+  'API constraints section header missing',
+)
+assert(
+  'ADR says PaperSurface MUST NOT useState to hold active* state',
+  /PaperSurface[\s\S]{0,400}MUST\s+NOT[\s\S]{0,200}useState/i.test(adrSrc),
+  'no-useState-active rule missing',
+)
+assert(
+  'ADR says mode is host-passed-in (received as a prop)',
+  /mode[\s\S]{0,400}(?:host[\s\S]{0,40}prop|received[\s\S]{0,40}as\s+a?\s*prop|MUST[\s\S]{0,200}receive)/i.test(
+    adrSrc,
+  ),
+  'mode-from-host rule missing',
+)
+assert(
+  'ADR says lectureFocus / readingFocusBySection are host-passed-in',
+  /lectureFocus[\s\S]{0,400}(?:from\s+the\s+host|as\s+a?\s*prop|host-?owned)/i.test(
+    adrSrc,
+  ) &&
+    /readingFocusBySection[\s\S]{0,400}(?:from\s+the\s+host|as\s+a?\s*prop|host-?owned)/i.test(
+      adrSrc,
+    ),
+  'focus-from-host rules missing',
+)
+assert(
+  'ADR says PaperSurface emits intents through onFocusIntent',
+  /onFocusIntent/.test(adrSrc),
+  'onFocusIntent reference missing',
+)
+
+const FORBID_VERBS = [
+  ['fetch', /MUST\s+NOT\*{0,2}\s+fetch/i],
+  ['model', /MUST\s+NOT\*{0,2}\s+model/i],
+  ['persist', /MUST\s+NOT\*{0,2}\s+persist/i],
+  ['router', /MUST\s+NOT\*{0,2}\s+read\s+the\s+router/i],
+  ['basket', /MUST\s+NOT\*{0,2}\s+know\s+about\s+the\s+basket/i],
+]
+for (const [label, re] of FORBID_VERBS) {
+  assert(
+    `ADR says PaperSurface MUST NOT ${label}`,
+    re.test(adrSrc),
+    `MUST NOT ${label} rule missing`,
+  )
+}
+
+/* ─── 22. B4 split (Must Fix 5) ──────────────────────────────────── */
+
+console.log('\nTest 22: B4 split into B4a / B4b (Must Fix 5)')
+
+assert(
+  'ADR explicitly names B4a',
+  /\bB4a\b/.test(adrSrc),
+  'B4a naming missing',
+)
+assert(
+  'ADR explicitly names B4b',
+  /\bB4b\b/.test(adrSrc),
+  'B4b naming missing',
+)
+assert(
+  'ADR says B4a is mode skeleton only',
+  /B4a[\s\S]{0,400}(?:mode\s+skeleton(?:\s+only)?|skeleton\s+only)/i.test(
+    adrSrc,
+  ),
+  'B4a "mode skeleton only" rule missing',
+)
+assert(
+  'ADR says B4a host owns mode',
+  /B4a[\s\S]{0,1600}host\s+owns\s+`?mode`?/i.test(adrSrc),
+  'B4a host-owns-mode rule missing',
+)
+assert(
+  'ADR says B4a does NOT introduce the curated annotation pack',
+  /B4a[\s\S]{0,1600}(?:does\s+NOT|not)\s+introduce[\s\S]{0,200}(?:curated\s+)?annotation\s+pack/i.test(
+    adrSrc,
+  ),
+  'B4a no-annotation-pack rule missing',
+)
+assert(
+  'ADR says B4a does NOT introduce sentence focus highlight',
+  /B4a[\s\S]{0,1600}(?:does\s+NOT|not)\s+introduce[\s\S]{0,200}sentence[-\s]?focus(?:\s+highlight)?/i.test(
+    adrSrc,
+  ),
+  'B4a no-sentence-focus rule missing',
+)
+assert(
+  'ADR says B4b ships the annotation pack v1',
+  /B4b[\s\S]{0,800}annotation\s+pack(?:\s+v1)?/i.test(adrSrc),
+  'B4b annotation pack v1 rule missing',
+)
+assert(
+  'ADR says B4b is teacher-only / read-only / no export',
+  /B4b[\s\S]{0,1600}(?:teacher-?only|read-?only)/i.test(adrSrc),
+  'B4b teacher-only/read-only rule missing',
+)
+assert(
+  'ADR says B4b honours core / extended importance',
+  /B4b[\s\S]{0,1200}(?:core[\s\S]{0,80}extended|importance)/i.test(adrSrc),
+  'B4b core/extended rule missing',
+)
+assert(
+  'ADR says B4b adds the right-panel single-slot sentence flow',
+  /B4b[\s\S]{0,1600}(?:right\s+panel|right-?panel)[\s\S]{0,400}single[-\s]?slot/i.test(
+    adrSrc,
+  ),
+  'B4b right-panel single-slot rule missing',
 )
 
 /* ─── Summary ────────────────────────────────────────────────────── */

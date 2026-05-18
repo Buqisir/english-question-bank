@@ -11,6 +11,11 @@
 >   CSS strategy) follow-up gates.
 > - `shared/papersurface/tokens.mjs` — the shared primitive token
 >   surface introduced in B1.
+> - `shared/papersurface/anchorKeys.mjs` — the frozen, neutral
+>   `data-paper-*` anchor protocol introduced in B1.5 (Must Fix 1).
+> - `shared/papersurface/types.d.ts` — the types-only sketch of
+>   `PaperTextMap`, `PaperAnnotation`, `FocusIntent`, and
+>   `PaperSurfaceProps` introduced in B1.5 (Must Fix 2).
 >
 > Companion verify:
 > - `scripts/verify-paper-surface-interaction-model-doc.mjs` — locks
@@ -264,6 +269,175 @@ prototype. No file in `app/` or `server/` currently exports these
 types. They live here, in this design note, until a B-level
 implementation cut adopts them.
 
+### 9. Anchor namespace — neutral `data-paper-*` (Must Fix 1)
+
+The PaperSurface PUBLIC anchor protocol uses a **neutral
+`data-paper-*` namespace**. The legacy `data-pi-*` prefix is the
+historical naming used by the Paper Intelligence host (PI host
+chrome — topbar, basket, insight popover) and by the current
+`PaperSurfacePrototype` (Issue #21-A spike). It is PI-host- /
+prototype-specific. It is NOT, and going forward will NOT be, the
+PaperSurface public protocol.
+
+The frozen attribute names are:
+
+```
+data-paper-section
+data-paper-paragraph-id
+data-paper-sentence-id
+data-paper-question-id
+data-paper-option-label
+data-paper-evidence-id
+data-paper-evidence-kind
+data-paper-annotation-id
+data-paper-annotation-kind
+```
+
+These names are exported as primitive string constants from
+`shared/papersurface/anchorKeys.mjs` (companion `.d.ts` for
+TypeScript consumers). That module:
+
+- exports ONLY primitive string constants under
+  `paperSurfaceAnchorAttrs`,
+- the exported object is `Object.freeze`d,
+- does NOT import React,
+- does NOT import anything from `app/`,
+- does NOT import anything from `server/`,
+- contains NO DOM helpers and NO query helpers,
+- is intentionally NOT yet imported by any runtime caller. It only
+  freezes the protocol; B3 (and later) will be the first runtime
+  consumers.
+
+Migration scope of this PR (#21-B1.5):
+
+- The current `PaperSurfacePrototype.tsx` keeps emitting the
+  existing `data-pi-paper-*` / `data-pi-evidence-*` anchors. Those
+  anchors are NOT migrated in this PR. (PI-specific / prototype
+  legacy is allowed to live on under the PI namespace until B3.)
+- B3 ships the production `PaperSurface` and at that point the
+  prototype either retires or migrates onto the neutral
+  `data-paper-*` anchors above.
+- The PI host's own chrome anchors — for example
+  `data-pi-back-to-workbench`, `data-pi-basket-toggle`,
+  `data-pi-basket-popover`, the topbar / basket / insight popover
+  hooks — REMAIN under `data-pi-*` by design. They describe the PI
+  host shell, not the paper surface, and are not in scope for the
+  PaperSurface public protocol.
+
+### 10. reading-analysis relation (Must Fix 3)
+
+`reading-analysis` (the existing `?surface=reading-analysis` route)
+is the closest current relative of the PaperSurface reading mode.
+It already ships its own DOM anchor protocol under `data-ra-*` —
+including but not limited to `data-ra-source-note`,
+`data-ra-link-source`, `data-ra-option-anchor`,
+`data-ra-quote-anchor`, `data-ra-sentence-id`,
+`data-ra-anchor-id`, `data-ra-kind`, `data-ra-correct`,
+`data-ra-blocked`, `data-ra-entry`, `data-ra-group-id`,
+`data-ra-hit-scope`. This protocol is owned by the
+reading-analysis feature and is consumed by its overlay layer and
+its smoke (`scripts/smoke-reading-analysis.mjs`).
+
+Its relation to PaperSurface is decided here:
+
+- `reading-analysis` is the **front-runner / reference** for the
+  PaperSurface reading mode. The lessons it has already learned —
+  sentence-level anchoring, quote-level `<mark>` anchoring,
+  evidence-link overlay geometry — feed directly into
+  PaperSurface's `PaperTextMap` and `PaperAnnotation` design
+  (companion: `shared/papersurface/types.d.ts`).
+- The `data-ra-*` anchor protocol is **frozen at its current
+  scope** for the duration of #21-B. New `data-ra-*` attributes
+  MUST NOT be introduced before B4a, regardless of feature pull,
+  because every new `data-ra-*` attribute is a new compatibility
+  surface that B4a then has to migrate.
+- The PaperSurface anchor protocol does NOT copy / mirror /
+  rename `data-ra-*`. PaperSurface uses the neutral
+  `data-paper-*` namespace from §9. Two parallel namespaces is
+  acceptable for the duration of #21-B.
+- B4a MUST decide, as part of its scope, whether
+  `reading-analysis` migrates onto PaperSurface (and the
+  `data-ra-*` namespace retires) or whether it remains a
+  long-lived sibling surface. That decision lives in B4a's own
+  ADR / scope note, not here. This ADR only locks: **B4a cannot
+  ship without that decision.**
+- When the migration path is taken, the reading-analysis sentence
+  anchor + quote-mark anchor experience is absorbed into
+  `PaperTextMap` (sentence id, sentence text, optional token
+  ranges) and `PaperAnnotation` (range addressed THROUGH a
+  TextMap reference, not via independent character offsets).
+
+### 11. PaperSurface API constraints (Must Fix 4)
+
+The principles in §8 are restated below as **acceptance
+constraints**. These are not aspirations; they are MUST / MUST NOT
+rules that B3 (and any later cut) is verified against.
+
+The eventual `PaperSurface` module:
+
+- **MUST NOT** call `useState` (or any equivalent local store) to
+  hold `mode`, `lectureFocus`, `readingFocusBySection`,
+  `activeQuestionId`, `activeEvidenceId`, `activeSentenceId`, or
+  `activeAnnotationId`. Active state is host-owned without
+  exception.
+- **MUST** receive `mode` from the host as a prop.
+- **MUST** receive `lectureFocus` from the host as a prop.
+- **MUST** receive `readingFocusBySection` from the host as a prop.
+- **MUST** emit all mode / focus change requests through a single
+  `onFocusIntent(intent)` callback. The intent shape is the
+  `PaperSurfaceFocusIntent` (a.k.a. `FocusIntent`) discriminated
+  union sketched in `shared/papersurface/types.d.ts` — see §4 of
+  that file.
+- **MUST NOT** fetch. PaperSurface MUST NOT issue any network call
+  of any kind.
+- **MUST NOT** model. PaperSurface MUST NOT invoke a model / LLM
+  endpoint. Model output reaches the surface only as already-
+  rendered annotation pack data.
+- **MUST NOT** persist. PaperSurface MUST NOT write to
+  `localStorage`, `IndexedDB`, cookies, or any storage.
+- **MUST NOT** read the router. PaperSurface MUST NOT read the URL,
+  `window.location`, search params, or hash. Routing is a host
+  concern.
+- **MUST NOT** know about the basket. PaperSurface has no concept
+  of the draft paper basket; it does not import basket state, does
+  not call basket actions, does not render basket UI.
+
+### 12. Roadmap — B4 is split into B4a and B4b (Must Fix 5)
+
+B4 is **not** a single cut. The earlier "B4 brings reading mode end-
+to-end" framing was rejected during the #21-B1.5 grill on the
+grounds that it conflates a structural skeleton change (mode
+selection + reading mode entry) with a content-driven feature
+(curated annotation pack). Splitting B4 lets the skeleton land,
+stabilise, and verify before the annotation pack rides on top of
+it.
+
+**B4a — mode skeleton only.**
+
+- Introduce the segmented control `[讲题] [读文]` at the
+  PaperSurface chrome top-right (per §11 chrome placement rules).
+- Host owns `mode`. Host passes `mode` into PaperSurface as a
+  prop, per §11 acceptance constraints.
+- PaperSurface gains the basic structural rendering for reading
+  mode (passage column layout for the active passage; A/B/C/D
+  passage pills wired to host-emitted reading-focus intents).
+- B4a does NOT introduce the curated annotation pack.
+- B4a does NOT introduce sentence-focus highlighting.
+- B4a does NOT introduce the right-panel sentence teaching flow.
+- B4a is the cut where the `reading-analysis` migration decision
+  in §10 must be answered.
+
+**B4b — annotation pack v1.**
+
+- Introduce the curated, pre-generated, teacher-only, read-only
+  annotation pack (per §1).
+- Honour `core` / `extended` importance and the §2 sort order.
+- Sentence-focus highlight in reading mode (active sentence wins
+  visual priority, per §6).
+- Right panel single-slot sentence teaching flow (per §7).
+- B4b explicitly does NOT introduce export / PDF integration of
+  annotations (deferred per §1).
+
 ## Considered alternatives
 
 - **On-click annotation generation.** Rejected: classroom / lesson-prep
@@ -283,6 +457,22 @@ implementation cut adopts them.
   dedicated ADR if/when student audience is real.
 - **Plumbing annotations into export / PDF in v1.** Deferred: out of
   scope for v1; export integration is its own cut.
+- **Reusing `data-pi-*` as the PaperSurface public anchor protocol.**
+  Rejected: `data-pi-*` is the Paper Intelligence host's namespace
+  (topbar / basket / insight popover) and the Issue #21-A prototype's
+  internal naming. It is not a PaperSurface protocol; treating it as
+  one would couple the surface to PI host history. PaperSurface uses
+  the neutral `data-paper-*` namespace going forward (§9).
+- **Copying / mirroring the `data-ra-*` namespace for PaperSurface.**
+  Rejected: `data-ra-*` is owned by the existing `reading-analysis`
+  feature. Mirroring it under PaperSurface would create two parallel
+  protocols for the same anchors and force a confused migration
+  later. PaperSurface uses `data-paper-*` only; reading-analysis
+  keeps `data-ra-*` frozen at its current scope until B4a (§10).
+- **Doing all of B4 in a single cut (mode skeleton + annotation
+  pack).** Rejected: conflates structural skeleton change with a
+  content-driven feature. B4 is split into B4a (mode skeleton only)
+  and B4b (annotation pack v1) — see §12.
 
 ## Consequences
 
@@ -300,6 +490,16 @@ implementation cut adopts them.
   mode switches restore, never clear, the other mode's focus.
 - The right panel must remain a single slot. Adding tabs requires a
   superseding ADR.
+- The PaperSurface public anchor protocol is `data-paper-*` and
+  is frozen in `shared/papersurface/anchorKeys.mjs`. New attribute
+  names cannot be introduced silently; they require an ADR
+  superseding §9.
+- `reading-analysis`'s `data-ra-*` namespace is frozen at its
+  current scope for the duration of #21-B. B4a must answer the
+  reading-analysis migration question before it ships (§10).
+- B4 is not a single cut. B4a delivers mode skeleton only; B4b
+  delivers the curated annotation pack. Implementations that try
+  to merge them require a superseding ADR (§12).
 
 ## Verify
 
@@ -326,6 +526,30 @@ The verify script asserts the presence of, at minimum:
 - reading overview includes passage insight (篇章洞察)
 - right panel is a single slot
 - right panel is NOT an 8-tab panel
+- the PaperSurface public anchor protocol uses the neutral
+  `data-paper-*` namespace (§9)
+- `data-pi-*` is PI-host- / prototype-specific and is NOT the
+  PaperSurface public protocol (§9)
+- `shared/papersurface/anchorKeys.mjs` exists, exports primitive
+  string constants only, is `Object.freeze`d, and does not import
+  React / `app/` / `server/` (§9)
+- `shared/papersurface/types.d.ts` exists and documents
+  `PaperTextMap`, `PaperAnnotation`, `FocusIntent` /
+  `PaperSurfaceFocusIntent`, and `PaperSurfaceProps` (§8 + Must
+  Fix 2)
+- types document the invariant that `PaperTextMap` does NOT
+  contain active / selected / hover state (Must Fix 2)
+- types document the invariant that `PaperAnnotation` references
+  position via a TextMap range and does NOT store an independent
+  character offset (Must Fix 2)
+- the ADR explicitly addresses `reading-analysis` relation: its
+  `data-ra-*` namespace is frozen at its current scope for the
+  duration of #21-B, and B4a must answer the migration question
+  (§10)
+- the ADR explicitly splits B4 into B4a (mode skeleton only) and
+  B4b (annotation pack v1) (§12)
+- runtime code remains untouched: no edits under `app/src/`, no
+  edits under `server/`, no `package.json` / lockfile edits
 
 Run:
 
