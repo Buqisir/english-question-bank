@@ -774,7 +774,15 @@ button.pi-ps-analysis-distractor--selected {
     box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
   }
 
+  /*
+   * PR #52 C4 PO QA Must Fix — stacked mode collapsed: text must
+   * be completely hidden. Only show when rail is explicitly expanded
+   * (hover/focus/locked/detail-open).
+   */
   .pi-ps-insight-rail .pi-ps-insight-chip-text {
+    visibility: hidden;
+    width: 0;
+    overflow: hidden;
     opacity: 0;
   }
 
@@ -782,6 +790,9 @@ button.pi-ps-analysis-distractor--selected {
   .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
   .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
   .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+    visibility: visible;
+    width: auto;
+    overflow: visible;
     opacity: 1;
   }
 }
@@ -822,15 +833,20 @@ button.pi-ps-analysis-distractor--selected {
     box-shadow: none;
   }
 
-  .pi-ps-insight-rail .pi-ps-insight-chip-text {
-    opacity: 0;
-    pointer-events: none;
-  }
-
+  /*
+   * PR #52 C4 PO QA Must Fix — medium desktop: text must be
+   * completely hidden in ALL rail states (hover, focus, locked,
+   * detail-open). The rail stays 48px and ONLY the section badge
+   * icon is visible. No partial Chinese text. No expansion.
+   */
+  .pi-ps-insight-rail .pi-ps-insight-chip-text,
   .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
   .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
   .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
   .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+    visibility: hidden;
+    width: 0;
+    overflow: hidden;
     opacity: 0;
     pointer-events: none;
   }
@@ -991,23 +1007,43 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 /*
- * Chip text fades on the rail-width transition. Inside the desktop
- * rail the text starts at opacity 0 (rail collapsed) and eases to
- * 1 on rail expand. The stacked-mode topbar row overrides this to
- * always-visible above.
+ * Chip text — completely hidden in collapsed rail states.
+ *
+ * PR #52 C4 PO QA Must Fix: the previous `opacity: 0` approach left
+ * the text in layout flow. With the 48px collapsed rail, the icon
+ * (24px) + gap (8px) consumed 32px, leaving ~16px where a partial
+ * Chinese character could render as a clipped glyph artifact. Even
+ * at opacity:0, sub-pixel anti-aliasing and transition timing could
+ * leak visible fragments.
+ *
+ * Fix: collapsed state uses `visibility: hidden` + `width: 0` +
+ * `overflow: hidden` so the text occupies zero layout space and is
+ * completely invisible. Expanded state restores `visibility: visible`
+ * + `width: auto`. No partial text can ever render.
+ *
+ * Product rule: collapsed/constrained rail = icon-only. Text labels
+ * must be fully visible or fully hidden. No ellipsis. No partial
+ * Chinese character.
  */
 .pi-ps-insight-chip-text {
   display: inline-block;
-  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
   white-space: nowrap;
-  transition: opacity 120ms ease-out;
+  opacity: 0;
+  transition: opacity 120ms ease-out, width 0ms 120ms, visibility 0ms 120ms;
 }
 
 .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
 .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
 .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
 .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+  visibility: visible;
+  width: auto;
+  overflow: visible;
   opacity: 1;
+  transition: opacity 120ms ease-out, width 0ms 0ms, visibility 0ms 0ms;
 }
 
 /* ─── Inline insight detail (desktop, inside rail) ───────────── */

@@ -2033,6 +2033,201 @@ assert(
   "MF-7: isMediumDesktop is correctly derived from !isStackedMode && !isWideDesktop",
 )
 
+/* ─── TXT-checks: PR #52 C4 PO QA Must Fix — no partial text leak ─ */
+
+console.log('\n=== TXT-checks: PR #52 C4 PO QA — constrained rail text must be fully hidden ===')
+
+/*
+ * TXT-1. Base (collapsed) .pi-ps-insight-chip-text uses
+ *        visibility:hidden + width:0 (not just opacity:0).
+ *
+ * Product rule: collapsed/constrained rail = icon-only. Text labels
+ * must be fully visible or fully hidden. No partial Chinese character
+ * may be visible. opacity:0 alone is insufficient because the element
+ * still occupies layout space and partial glyphs can leak.
+ */
+{
+  const chipTextMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-insight-chip-text\s*\{([\s\S]*?)\}/,
+  )
+  const chipTextBody = chipTextMatch ? chipTextMatch[1] : ''
+  assert(
+    /\bvisibility\s*:\s*hidden\b/.test(chipTextBody),
+    "TXT-1: base .pi-ps-insight-chip-text uses visibility:hidden (not just opacity:0)",
+  )
+  assert(
+    /\bwidth\s*:\s*0\b/.test(chipTextBody),
+    "TXT-1: base .pi-ps-insight-chip-text uses width:0 (zero layout space in collapsed rail)",
+  )
+  assert(
+    /\boverflow\s*:\s*hidden\b/.test(chipTextBody),
+    "TXT-1: base .pi-ps-insight-chip-text uses overflow:hidden (belt-and-suspenders against glyph leak)",
+  )
+}
+
+/*
+ * TXT-2. Medium desktop (1200–1535px) chip-text rules use
+ *        visibility:hidden + width:0 in ALL rail states including
+ *        hover / focus-within / locked / detail-open.
+ */
+{
+  function extractAllMediumBodiesTXT(src) {
+    const out = []
+    let cursor = 0
+    while (cursor < src.length) {
+      const at = src.indexOf('@media', cursor)
+      if (at < 0) break
+      const close = src.indexOf(')', at)
+      if (close < 0) break
+      const nextClose = src.indexOf(')', close + 1)
+      const header = src.slice(at, nextClose >= 0 && nextClose < close + 60 ? nextClose + 1 : close + 1)
+      if (!/min-width\s*:\s*1200px/.test(header) || !/max-width\s*:\s*1535px/.test(header)) {
+        cursor = close + 1
+        continue
+      }
+      const open = src.indexOf('{', at + header.length - 1)
+      if (open < 0) break
+      let depth = 1
+      let i = open + 1
+      while (i < src.length && depth > 0) {
+        if (src[i] === '{') depth++
+        else if (src[i] === '}') depth--
+        i++
+      }
+      out.push(src.slice(open + 1, i - 1))
+      cursor = i
+    }
+    return out.join('\n')
+  }
+  const mediumBody = extractAllMediumBodiesTXT(harnessCssNoComments)
+
+  assert(
+    /\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*hidden\b/.test(mediumBody),
+    "TXT-2: medium desktop chip-text uses visibility:hidden",
+  )
+  assert(
+    /\.pi-ps-insight-chip-text[\s\S]*?\bwidth\s*:\s*0\b/.test(mediumBody),
+    "TXT-2: medium desktop chip-text uses width:0",
+  )
+  // Hover/focus/locked state must NOT restore visibility.
+  assert(
+    !/\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*visible\b/.test(mediumBody),
+    "TXT-2: medium desktop hover does NOT restore chip-text visibility",
+  )
+}
+
+/*
+ * TXT-3. Stacked mode (<=1199px) collapsed chip-text uses
+ *        visibility:hidden + width:0.
+ */
+{
+  function extractAllStackedBodiesTXT(src) {
+    const out = []
+    let cursor = 0
+    while (cursor < src.length) {
+      const at = src.indexOf('@media', cursor)
+      if (at < 0) break
+      const close = src.indexOf(')', at)
+      if (close < 0) break
+      const header = src.slice(at, close + 1)
+      if (!/max-width\s*:\s*1199px/.test(header)) {
+        cursor = close + 1
+        continue
+      }
+      const open = src.indexOf('{', close)
+      if (open < 0) break
+      let depth = 1
+      let i = open + 1
+      while (i < src.length && depth > 0) {
+        if (src[i] === '{') depth++
+        else if (src[i] === '}') depth--
+        i++
+      }
+      out.push(src.slice(open + 1, i - 1))
+      cursor = i
+    }
+    return out.join('\n')
+  }
+  const stackedBody = extractAllStackedBodiesTXT(harnessCssNoComments)
+
+  assert(
+    /\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*hidden\b/.test(stackedBody),
+    "TXT-3: stacked mode collapsed chip-text uses visibility:hidden",
+  )
+  assert(
+    /\.pi-ps-insight-chip-text[\s\S]*?\bwidth\s*:\s*0\b/.test(stackedBody),
+    "TXT-3: stacked mode collapsed chip-text uses width:0",
+  )
+  // Expanded stacked state restores text.
+  assert(
+    /\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*visible\b/.test(stackedBody) ||
+      /\.pi-ps-insight-rail\[data-rail-locked='true'\]\s+\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*visible\b/.test(stackedBody),
+    "TXT-3: stacked mode expanded state restores chip-text visibility",
+  )
+}
+
+/*
+ * TXT-4. Wide desktop expanded state restores visibility:visible +
+ *        width:auto (label fully visible when rail is wide enough).
+ */
+{
+  const expandedChipTextRe =
+    /\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?\{([\s\S]*?)\}/
+  const expandedMatch = harnessCssDesktopOnly.match(expandedChipTextRe)
+  const expandedBody = expandedMatch ? expandedMatch[1] : ''
+  assert(
+    /\bvisibility\s*:\s*visible\b/.test(expandedBody),
+    "TXT-4: wide desktop expanded chip-text restores visibility:visible",
+  )
+  assert(
+    /\bwidth\s*:\s*auto\b/.test(expandedBody),
+    "TXT-4: wide desktop expanded chip-text restores width:auto",
+  )
+}
+
+/*
+ * TXT-5. No text-overflow:ellipsis anywhere on rail text (belt-and-
+ *        suspenders: product rule says no ellipsis for header/control text).
+ */
+{
+  const railScopedAll = (() => {
+    const parts = []
+    const ruleRe = /([^{}]+?)\{([^{}]*)\}/g
+    let m
+    while ((m = ruleRe.exec(harnessCssNoComments)) !== null) {
+      const sel = m[1].trim()
+      if (
+        /\.pi-ps-insight-rail\b/.test(sel) ||
+        /\.pi-ps-insight-rail-/.test(sel) ||
+        /\.pi-ps-insight-chip-text\b/.test(sel) ||
+        (/\.pi-ps-insight-chip\b/.test(sel) &&
+          !/\.pi-ps-insight-chip-strip\b/.test(sel))
+      ) {
+        parts.push(m[2])
+      }
+    }
+    return parts.join('\n')
+  })()
+  assert(
+    !/text-overflow\s*:\s*ellipsis/.test(railScopedAll),
+    "TXT-5: no text-overflow:ellipsis on rail/chip-text (no partial text, no ellipsis)",
+  )
+}
+
+/*
+ * TXT-6. Accessible labels preserved — the toggle button and chips
+ *        still have aria-label attributes (visual text is hidden but
+ *        screen reader text is not).
+ */
+assert(
+  /pi-ps-insight-rail-toggle[\s\S]*?aria-label\s*=\s*\{/.test(harnessNoComments),
+  "TXT-6: rail toggle preserves aria-label (accessible name survives visual text hiding)",
+)
+assert(
+  /pi-ps-insight-chip[\s\S]*?aria-label\s*=\s*\{/.test(harnessNoComments),
+  "TXT-6: insight chip preserves aria-label (accessible name survives visual text hiding)",
+)
+
 /* ─── Summary ────────────────────────────────────────────────────── */
 
 console.log(`\n${'─'.repeat(50)}`)
