@@ -1209,6 +1209,11 @@ const allowedC4 = new Set([
   'app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx',
   'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
   'docs/paper-surface-watch-ledger.md',
+  'docs/product/mockups/paper-surface-c4-insight-layout/01-current-problem.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/02-target-default.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/03-left-rail-expanded.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/04-before-after.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/README.md',
 ])
 const unexpected = changedFiles.filter((f) => !allowedC4.has(f))
 assert(
