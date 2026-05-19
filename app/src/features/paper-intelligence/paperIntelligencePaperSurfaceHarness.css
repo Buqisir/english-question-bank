@@ -96,16 +96,18 @@
  *                                 viewport right edge
  */
 .pi-ps-harness {
+  --pi-ps-assistant-bg: #f8f6f1;
   --pi-ps-insight-ink: #2f2923;
   --pi-ps-insight-muted-ink: #6f665a;
-  --pi-ps-insight-rail-bg: #f6f3ec;
+  --pi-ps-insight-rail-bg: var(--pi-ps-assistant-bg);
   --pi-ps-insight-chip-bg: #f3f0e8;
-  --pi-ps-insight-chip-border: #d8d0c2;
-  --pi-ps-insight-active-bg: #e8e2d6;
+  --pi-ps-insight-chip-border: #e3ddd3;
+  --pi-ps-insight-active-bg: #f0ebe2;
   --pi-ps-insight-active-border: #7a6a58;
-  --pi-ps-insight-hairline: #d6cec0;
-  --pi-ps-paper-bleed-start: #f7f4ee;
-  --pi-ps-paper-bleed-end: #f6f3ec;
+  --pi-ps-insight-hairline: #e3ddd3;
+  --pi-ps-insight-detail-bg: #f0ebe2;
+  --pi-ps-paper-bleed-start: var(--pi-ps-assistant-bg);
+  --pi-ps-paper-bleed-end: var(--pi-ps-assistant-bg);
 
   display: flex;
   flex-direction: column;
@@ -196,8 +198,7 @@
   grid-template-columns:
     minmax(0, 1fr)
     minmax(0, 858px)
-    minmax(0, 380px)
-    minmax(0, 1fr);
+    minmax(0, 380px);
   column-gap: 24px;
   flex: 1;
   overflow: hidden;
@@ -270,20 +271,14 @@
   bottom: 0;
   left: 0;
   /*
-   * Stretch the painted background past the column's right edge to
-   * the viewport's right edge. `calc(50% - 50vw)` resolves to a
-   * negative value equal to the distance from the column's right
-   * edge to the viewport's right edge — the column is 380px and the
-   * viewport is wider, so the result is always ≤ 0 and the bleed
-   * paints rightward into the desk gutter without reaching the
-   * outer-left desk gutter or the paper track.
+   * Stretch the painted background to the viewport's right edge.
+   * With the 3-column grid (no right 1fr gutter), the right column
+   * is flush or near-flush with the viewport edge; this calc ensures
+   * the warm tone always reaches fully to the right regardless of
+   * any sub-pixel rounding.
    */
-  right: calc(50% - 50vw);
-  background: linear-gradient(
-    to right,
-    var(--pi-ps-paper-bleed-start),
-    var(--pi-ps-paper-bleed-end)
-  );
+  right: calc(-1 * (100vw - 100%));
+  background: var(--pi-ps-assistant-bg);
   pointer-events: none;
   z-index: 0;
 }
@@ -739,18 +734,26 @@ button.pi-ps-analysis-distractor--selected {
   padding: 12px 4px;
   background: transparent;
   border-right: 1px solid transparent;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   z-index: 25;
   transition: width 160ms ease-out, background 160ms ease-out,
     border-color 160ms ease-out;
 }
 
+/* State 2: hover / focus-within — short labels visible, 160px */
 .pi-ps-insight-rail:hover,
 .pi-ps-insight-rail:focus-within,
-.pi-ps-insight-rail[data-rail-locked='true'],
-.pi-ps-insight-rail[data-rail-popover-open='true'] {
-  width: 220px;
-  max-width: 240px;
+.pi-ps-insight-rail[data-rail-locked='true'] {
+  width: 160px;
+  background: var(--pi-ps-insight-rail-bg);
+  border-right-color: var(--pi-ps-insight-hairline);
+  box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+}
+
+/* State 3: active detail open — 240px */
+.pi-ps-insight-rail[data-rail-detail-open='true'] {
+  width: 240px;
   background: var(--pi-ps-insight-rail-bg);
   border-right-color: var(--pi-ps-insight-hairline);
   box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
@@ -759,7 +762,8 @@ button.pi-ps-analysis-distractor--selected {
 @media (prefers-reduced-motion: reduce) {
   .pi-ps-insight-rail,
   .pi-ps-insight-chip,
-  .pi-ps-insight-chip-text {
+  .pi-ps-insight-chip-text,
+  .pi-ps-insight-detail {
     transition: none !important;
   }
 }
@@ -919,8 +923,65 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
 .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
 .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
-.pi-ps-insight-rail[data-rail-popover-open='true'] .pi-ps-insight-chip-text {
+.pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
   opacity: 1;
+}
+
+/* ─── Inline insight detail (desktop, inside rail) ───────────── */
+
+/*
+ * PR #52 C4 UX Retune — inline detail replaces AnchoredPopover on
+ * desktop. The detail block renders inside `.pi-ps-insight-rail`
+ * below the active chip's row. All A/B/C/D controls remain in the
+ * DOM and visible above/below the detail. The detail does NOT cover
+ * paper text and does NOT portal outside the rail.
+ */
+.pi-ps-insight-detail {
+  background: var(--pi-ps-insight-detail-bg);
+  border: 1px solid var(--pi-ps-insight-hairline);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 4px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--pi-ps-insight-ink);
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+.pi-ps-insight-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.pi-ps-insight-detail-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-detail-close {
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--pi-ps-insight-muted-ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pi-ps-insight-detail-close:hover {
+  background: var(--pi-ps-insight-chip-bg);
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-detail-close:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border);
+  outline-offset: 1px;
 }
 
 /* ─── Insight popover panel ──────────────────────────────────── */

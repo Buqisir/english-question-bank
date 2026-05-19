@@ -133,6 +133,7 @@ import {
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { AnchoredPopover } from './preview/AnchoredPopover'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
+import { buildInsightChipShortLabel } from './insight/insightChipShortLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
 import type {
   PaperIntelligenceReport,
@@ -480,18 +481,24 @@ export function PaperIntelligencePaperSurfaceHarness({
   const handleRailKeyDown = useCallback(
     (e: KeyboardEvent<HTMLElement>): void => {
       if (e.key !== 'Escape') return
-      // PA must-fix: Esc inside rail collapses it and closes any
-      // open insight popover. We also blur the active focus target
-      // so :focus-within releases — otherwise the rail would stay
-      // expanded purely on focus state until the teacher Tabs out.
-      setRailLocked(false)
-      setActiveInsightSection(null)
-      const target = e.target as HTMLElement | null
-      if (target && typeof target.blur === 'function') {
-        target.blur()
+      // Two-phase Esc: detail first, lock second.
+      // Phase 1: if a detail is open, close it but keep the rail
+      // expanded (lock stays). Phase 2: if no detail is open but
+      // the rail is locked, unlock it and blur so :focus-within
+      // releases.
+      if (activeInsightSection) {
+        setActiveInsightSection(null)
+        return
+      }
+      if (railLocked) {
+        setRailLocked(false)
+        const target = e.target as HTMLElement | null
+        if (target && typeof target.blur === 'function') {
+          target.blur()
+        }
       }
     },
-    [],
+    [activeInsightSection, railLocked],
   )
 
   // ─── Right-side evidence click handler (C3) ───
@@ -600,7 +607,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const renderInsightChip = (p: PassageReport): ReactNode => {
     const isOpen = activeInsightSection === p.paperSection
     const chipLabel = buildInsightChipLabel(p)
-    const visibleText = isOpen ? '收起洞察' : chipLabel
+    const shortLabel = buildInsightChipShortLabel(p)
     return (
       <button
         key={p.paperSection}
@@ -620,7 +627,7 @@ export function PaperIntelligencePaperSurfaceHarness({
         <span className="pi-ps-insight-chip-section" aria-hidden="true">
           {p.paperSection}
         </span>
-        <span className="pi-ps-insight-chip-text">{visibleText}</span>
+        <span className="pi-ps-insight-chip-text">{shortLabel}</span>
       </button>
     )
   }
@@ -723,7 +730,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             className="pi-ps-insight-rail"
             aria-label="篇章洞察"
             data-rail-locked={railLocked ? 'true' : undefined}
-            data-rail-popover-open={
+            data-rail-detail-open={
               activeInsightSection ? 'true' : undefined
             }
             onKeyDown={handleRailKeyDown}
@@ -751,7 +758,34 @@ export function PaperIntelligencePaperSurfaceHarness({
               id="pi-ps-insight-rail-list"
               role="group"
             >
-              {report.passages.map(renderInsightChip)}
+              {report.passages.map((p) => (
+                <div key={p.paperSection}>
+                  {renderInsightChip(p)}
+                  {activeInsightSection === p.paperSection && activePassage && (
+                    <div
+                      className="pi-ps-insight-detail"
+                      id={`pi-ps-insight-panel-${p.paperSection}`}
+                      role="region"
+                      aria-label={`篇章洞察 · ${p.paperSection}`}
+                    >
+                      <div className="pi-ps-insight-detail-header">
+                        <span className="pi-ps-insight-detail-title">
+                          篇章洞察 · {p.paperSection}
+                        </span>
+                        <button
+                          type="button"
+                          className="pi-ps-insight-detail-close"
+                          onClick={handleCloseInsight}
+                          aria-label="关闭洞察面板"
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <HarnessInsightPanelContent reportPassage={activePassage} />
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </aside>
         )}
@@ -811,28 +845,14 @@ export function PaperIntelligencePaperSurfaceHarness({
           leftSelectorPreset="paper-surface"
         />
         {/*
-          C4: Insight popover.
+          C4 PR #52 UX Retune: Insight popover — stacked mode only.
 
-          The popover reuses `AnchoredPopover` unchanged from the
-          default PI route. The module portals its content to
-          `document.body`, so its z-index can sit above the C3
-          evidence-line overlay (`.pi-line-overlay { z-index: 5 }`)
-          without fighting the harness shell's stacking context.
-
-          Match default PI's intentional behavior:
-            - `align="start"` left-aligns the popover to the chip,
-            - `closeOnEscape` lets Esc dismiss,
-            - `closeOnOutsidePointerDown` is intentionally NOT enabled
-              (clicking the passage body or the right Question Analysis
-              is meaningful teacher input and must not dismiss).
-            - `widthPx={360}`, `gapPx={4}`, `viewportPaddingPx={16}`.
-
-          Body is the harness-local `<HarnessInsightPanelContent />`
-          (loads + outline + chunk count). Duplicates the default PI
-          panel JSX intentionally for C4; future dedupe target is
-          recorded in `docs/paper-surface-watch-ledger.md`.
+          On desktop (>=1200px), insight detail is rendered inline
+          inside `.pi-ps-insight-rail` (no overlay, no portal). The
+          AnchoredPopover is only used in stacked mode (<=1199px)
+          where the topbar chip row needs a positioned panel.
         */}
-        {activePassage && activeChipRef && (
+        {isStackedMode && activePassage && activeChipRef && (
           <AnchoredPopover
             anchorRef={activeChipRef as unknown as RefObject<HTMLElement | null>}
             open={activeInsightSection !== null}

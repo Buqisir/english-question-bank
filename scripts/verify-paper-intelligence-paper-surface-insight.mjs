@@ -504,15 +504,15 @@ assert(
   )
 }
 
-// 2h-bis. The rail aside carries the lock + popover-open hooks the
+// 2h-bis. The rail aside carries the lock + detail-open hooks the
 // CSS reads to keep the rail expanded across hover / focus loss.
 assert(
   /data-rail-locked\s*=\s*\{/.test(harnessNoComments),
   "rail aside emits `data-rail-locked` so CSS can keep the rail expanded after toggle click",
 )
 assert(
-  /data-rail-popover-open\s*=\s*\{/.test(harnessNoComments),
-  "rail aside emits `data-rail-popover-open` so the rail stays expanded while the popover is open (PA must-fix)",
+  /data-rail-detail-open\s*=\s*\{/.test(harnessNoComments),
+  "rail aside emits `data-rail-detail-open` so the rail expands to detail width while inline detail is open (PR #52 retune)",
 )
 
 // 2h-ter. Esc inside the rail clears the lock and closes the popover.
@@ -771,10 +771,10 @@ function stripAllMediaBlocks(src) {
 const harnessCssDesktopOnly = stripAllMediaBlocks(harnessCssNoComments)
 
 assert(
-  /grid-template-columns:\s*[\s\S]*?minmax\(\s*0\s*,\s*1fr\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*858px\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*380px\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*1fr\s*\)/.test(
+  /grid-template-columns:\s*[\s\S]*?minmax\(\s*0\s*,\s*1fr\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*858px\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*380px\s*\)/.test(
     harnessCssNoComments,
   ),
-  "harness CSS still declares the 4-column grid (1fr / 858px paper / 380px rail / 1fr)",
+  "harness CSS still declares the workspace grid (1fr / 858px paper / 380px rail — right gutter eliminated by PR #52 retune)",
 )
 assert(
   /column-gap:\s*24px/.test(harnessCssNoComments),
@@ -884,7 +884,7 @@ assert(
   ".pi-ps-insight-rail collapsed width is 48px",
 )
 
-// 6b.3 Expanded width 220-240px via :hover AND :focus-within.
+// 6b.3 Expanded width 160-180px via :hover AND :focus-within.
 assert(
   /\.pi-ps-insight-rail:hover\b/.test(harnessCssNoComments),
   ".pi-ps-insight-rail expands on :hover (mouse soft expand)",
@@ -895,16 +895,30 @@ assert(
 )
 {
   // Find the combined :hover / :focus-within / lock selector body
-  // and check the width inside it.
+  // and check the width inside it (State 2: 160-180px).
   const expandedBlockRe =
-    /\.pi-ps-insight-rail:(?:hover|focus-within|\[data-rail-(?:locked|popover-open)='true'\])(?:\s*,\s*\.pi-ps-insight-rail(?::hover|:focus-within|\[data-rail-(?:locked|popover-open)='true'\]))*\s*\{([\s\S]*?)\}/
+    /\.pi-ps-insight-rail:(?:hover|focus-within|\[data-rail-(?:locked|detail-open)='true'\])(?:\s*,\s*\.pi-ps-insight-rail(?::hover|:focus-within|\[data-rail-(?:locked|detail-open)='true'\]))*\s*\{([\s\S]*?)\}/
   const expandedMatch = harnessCssNoComments.match(expandedBlockRe)
   const expandedBody = expandedMatch ? expandedMatch[1] : ''
   const expandedW = (expandedBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
   const expandedNum = expandedW ? parseInt(expandedW, 10) : NaN
   assert(
-    Number.isFinite(expandedNum) && expandedNum >= 220 && expandedNum <= 240,
-    `.pi-ps-insight-rail expanded width is 220-240px (got ${expandedW ?? 'missing'}px)`,
+    Number.isFinite(expandedNum) && expandedNum >= 160 && expandedNum <= 180,
+    `.pi-ps-insight-rail hover/focus width is 160-180px (got ${expandedW ?? 'missing'}px)`,
+  )
+}
+
+// 6b.3-bis. Detail-open width is 240-260px.
+{
+  const detailOpenRe =
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{([\s\S]*?)\}/
+  const detailOpenMatch = harnessCssNoComments.match(detailOpenRe)
+  const detailOpenBody = detailOpenMatch ? detailOpenMatch[1] : ''
+  const detailW = (detailOpenBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
+  const detailNum = detailW ? parseInt(detailW, 10) : NaN
+  assert(
+    Number.isFinite(detailNum) && detailNum >= 240 && detailNum <= 260,
+    `.pi-ps-insight-rail detail-open width is 240-260px (got ${detailW ?? 'missing'}px)`,
   )
 }
 
@@ -950,10 +964,10 @@ assert(
 )
 const rightBleedBody = rightBleedMatch ? rightBleedMatch[1] : ''
 
-// 6c.2 Bleed reaches viewport edge via `50vw` / `100vw` / `calc(...)`.
+// 6c.2 Bleed reaches viewport edge via `100vw` / `50vw` / `calc(...)`.
 assert(
-  /50vw\b/.test(rightBleedBody) || /100vw\b/.test(rightBleedBody),
-  "right-panel bleed reaches the viewport edge (uses 50vw / 100vw)",
+  /100vw\b/.test(rightBleedBody) || /50vw\b/.test(rightBleedBody),
+  "right-panel bleed reaches the viewport edge (uses 100vw / 50vw)",
 )
 assert(
   /\bcalc\s*\(/.test(rightBleedBody),
@@ -993,20 +1007,23 @@ assert(
     /\.pi-ps-harness\s*\{([\s\S]*?)\}/,
   )
   const rootBody = rootMatch ? rootMatch[1] : ''
+  // PR #52 retune: --pi-ps-assistant-bg is the unified token.
+  // The bleed start/end tokens now reference it via var().
   assert(
-    /--pi-ps-paper-bleed-start\s*:\s*#f7f4ee\b/i.test(rootBody) ||
-      /--pi-ps-paper-bleed-start\s*:\s*#f6f3ec\b/i.test(rootBody),
-    "warm bleed start token (--pi-ps-paper-bleed-start) is in the #f7f4ee / #f6f3ec range",
+    /--pi-ps-assistant-bg\s*:\s*#f8f6f1\b/i.test(rootBody) ||
+      /--pi-ps-assistant-bg\s*:\s*#f7f4ee\b/i.test(rootBody),
+    "unified assistant-layer token (--pi-ps-assistant-bg) is warm white (#f8f6f1 or #f7f4ee)",
   )
   assert(
-    /--pi-ps-paper-bleed-end\s*:\s*#f6f3ec\b/i.test(rootBody) ||
-      /--pi-ps-paper-bleed-end\s*:\s*#f7f4ee\b/i.test(rootBody),
-    "warm bleed end token (--pi-ps-paper-bleed-end) is in the #f7f4ee / #f6f3ec range",
+    /--pi-ps-paper-bleed-start\s*:/.test(rootBody),
+    "warm bleed start token (--pi-ps-paper-bleed-start) is declared",
+  )
+  assert(
+    /--pi-ps-paper-bleed-end\s*:/.test(rootBody),
+    "warm bleed end token (--pi-ps-paper-bleed-end) is declared",
   )
   // Negative: cool SaaS off-white must NOT be the right-panel
-  // background. We check this both in the right-panel rule and in
-  // the bleed pseudo body (the previous C4 cut painted #fafbfc
-  // directly on .pi-ps-harness-right).
+  // background.
   const rightMainMatch = harnessCssDesktopOnly.match(
     /\.pi-ps-harness-right\s*\{([\s\S]*?)\}/,
   )
@@ -1206,6 +1223,7 @@ const allowedC4 = new Set([
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
   'app/src/features/paper-intelligence/insight/insightChipLabel.ts',
+  'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
   'app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx',
   'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
   'docs/paper-surface-watch-ledger.md',
@@ -1222,6 +1240,326 @@ assert(
     unexpected.join(', ') || 'none'
   })`,
 )
+
+/* ─── R-checks: PR #52 UX Retune product guards ─────────────────── */
+
+console.log('\n=== R-checks: PR #52 UX Retune product guards ===')
+
+/*
+ * R-1. AnchoredPopover is NOT mounted on desktop; gated on isStackedMode.
+ */
+assert(
+  /isStackedMode\s*&&\s*[\s\S]*?<AnchoredPopover\b/.test(harnessNoComments) ||
+    /isStackedMode\s*&&\s*activePassage\s*&&[\s\S]*?<AnchoredPopover\b/.test(harnessNoComments),
+  "R-1: AnchoredPopover is gated on isStackedMode (not mounted on desktop)",
+)
+
+/*
+ * R-2. `.pi-ps-insight-detail` inline block exists in TSX.
+ */
+assert(
+  /pi-ps-insight-detail/.test(harnessNoComments),
+  "R-2: `.pi-ps-insight-detail` inline block exists in TSX",
+)
+
+/*
+ * R-3. Hover/focus rail width is 160–180px.
+ * (Already validated in 6b.3 above — re-confirm here for product guard.)
+ */
+{
+  const expandedBlockRe =
+    /\.pi-ps-insight-rail:(?:hover|focus-within)(?:\s*,\s*\.pi-ps-insight-rail(?::hover|:focus-within|\[data-rail-locked='true'\]))*\s*\{([\s\S]*?)\}/
+  const expandedMatch = harnessCssNoComments.match(expandedBlockRe)
+  const expandedBody = expandedMatch ? expandedMatch[1] : ''
+  const expandedW = (expandedBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
+  const expandedNum = expandedW ? parseInt(expandedW, 10) : NaN
+  assert(
+    Number.isFinite(expandedNum) && expandedNum >= 160 && expandedNum <= 180,
+    `R-3: hover/focus rail width is 160–180px (got ${expandedW ?? 'missing'}px)`,
+  )
+}
+
+/*
+ * R-4. Detail-open rail width is 240–260px.
+ */
+{
+  const detailOpenRe =
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{([\s\S]*?)\}/
+  const detailOpenMatch = harnessCssNoComments.match(detailOpenRe)
+  const detailOpenBody = detailOpenMatch ? detailOpenMatch[1] : ''
+  const detailW = (detailOpenBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
+  const detailNum = detailW ? parseInt(detailW, 10) : NaN
+  assert(
+    Number.isFinite(detailNum) && detailNum >= 240 && detailNum <= 260,
+    `R-4: detail-open rail width is 240–260px (got ${detailW ?? 'missing'}px)`,
+  )
+}
+
+/*
+ * R-5. Rail has overflow-y:auto so inline detail scrolls within rail.
+ */
+assert(
+  /overflow-y\s*:\s*auto/.test(railBody),
+  "R-5: .pi-ps-insight-rail has overflow-y:auto",
+)
+
+/*
+ * R-6. Esc behavior is two-phase: detail first, lock second.
+ * Verify handleRailKeyDown checks activeInsightSection before railLocked.
+ */
+{
+  const onKeyDownMatch = harnessNoComments.match(
+    /handleRailKeyDown\s*=\s*useCallback\s*\(\s*\([\s\S]*?\)[^{]*\{([\s\S]*?)\}\s*,\s*\[/,
+  )
+  const body = onKeyDownMatch ? onKeyDownMatch[1] : ''
+  const detailIdx = body.indexOf('activeInsightSection')
+  const lockIdx = body.indexOf('setRailLocked')
+  assert(
+    detailIdx >= 0 && lockIdx >= 0 && detailIdx < lockIdx,
+    "R-6: Esc handles activeInsightSection (detail) before railLocked (two-phase)",
+  )
+}
+
+/*
+ * R-7. `buildInsightChipShortLabel` exists and is used for short hover text.
+ */
+assert(
+  /buildInsightChipShortLabel/.test(harnessNoComments),
+  "R-7: `buildInsightChipShortLabel` is used in the harness",
+)
+assert(
+  existsSync(join(INSIGHT_DIR, 'insightChipShortLabel.ts')),
+  "R-7: insight/insightChipShortLabel.ts exists",
+)
+
+/*
+ * R-8. `.pi-ps-insight-detail` border-radius <= 8px.
+ */
+{
+  const detailRuleMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-insight-detail\s*\{([\s\S]*?)\}/,
+  )
+  const detailRuleBody = detailRuleMatch ? detailRuleMatch[1] : ''
+  const radiusMatch = detailRuleBody.match(/\bborder-radius\s*:\s*(\d+)px\b/)
+  const radiusVal = radiusMatch ? parseInt(radiusMatch[1], 10) : NaN
+  assert(
+    Number.isFinite(radiusVal) && radiusVal <= 8,
+    `R-8: .pi-ps-insight-detail border-radius <= 8px (got ${radiusVal}px)`,
+  )
+}
+
+/*
+ * R-9. Desktop rail labels/details do NOT rely on ellipsis/text-overflow
+ *      to hide meaningful insight text.
+ */
+{
+  // Check that no rule scoped to the rail or chip uses text-overflow: ellipsis.
+  const railScopedAll = (() => {
+    const parts = []
+    const ruleRe = /([^{}]+?)\{([^{}]*)\}/g
+    let m
+    while ((m = ruleRe.exec(harnessCssNoComments)) !== null) {
+      const sel = m[1].trim()
+      if (
+        /\.pi-ps-insight-rail\b/.test(sel) ||
+        /\.pi-ps-insight-chip\b/.test(sel) ||
+        /\.pi-ps-insight-detail\b/.test(sel)
+      ) {
+        parts.push(m[2])
+      }
+    }
+    return parts.join('\n')
+  })()
+  assert(
+    !/text-overflow\s*:\s*ellipsis/.test(railScopedAll),
+    "R-9: rail/chip/detail CSS does NOT use text-overflow:ellipsis",
+  )
+}
+
+/*
+ * R-10. Detail-open state keeps all A/B/C/D controls in the DOM and
+ *       visibly represented in TSX/CSS; no detail state that replaces
+ *       the entire list.
+ *
+ * Strategy: the renderInsightChip function is called for every
+ * passage regardless of which one is active (the map iterates all
+ * passages and each chip stays in the DOM).
+ */
+assert(
+  /report\.passages\.map\s*\(/.test(harnessNoComments),
+  "R-10: all passages are mapped (A/B/C/D controls stay in DOM during detail-open)",
+)
+// The detail block appears INSIDE the map iteration, not as a replacement.
+assert(
+  /report\.passages\.map[\s\S]*?pi-ps-insight-detail/.test(harnessNoComments),
+  "R-10: inline detail is rendered inside the passages map (not replacing the list)",
+)
+
+/*
+ * R-11. Desktop detail block is rendered inside `.pi-ps-insight-rail`,
+ *       not portalled and not positioned as a fixed overlay.
+ */
+{
+  // The detail renders inside the rail's conditional block (!isStackedMode).
+  assert(
+    /!\s*isStackedMode[\s\S]*?pi-ps-insight-rail[\s\S]*?pi-ps-insight-detail/.test(
+      harnessNoComments,
+    ),
+    "R-11: .pi-ps-insight-detail is inside the desktop rail block (!isStackedMode), not portalled",
+  )
+  // Detail CSS does NOT use position: fixed.
+  const detailRuleMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-insight-detail\s*\{([\s\S]*?)\}/,
+  )
+  const detailRuleBody = detailRuleMatch ? detailRuleMatch[1] : ''
+  assert(
+    !/position\s*:\s*fixed/.test(detailRuleBody),
+    "R-11: .pi-ps-insight-detail is NOT position:fixed (inline, not overlay)",
+  )
+}
+
+/*
+ * R-12. Desktop does not render `.pi-ps-insight-panel`; stacked mode may.
+ *
+ * In TSX, the AnchoredPopover (which carries `.pi-ps-insight-panel`)
+ * must only render when isStackedMode is true.
+ */
+assert(
+  /isStackedMode\s*&&[\s\S]*?pi-ps-insight-panel/.test(harnessNoComments),
+  "R-12: `.pi-ps-insight-panel` (popover) is gated behind isStackedMode (desktop never renders it)",
+)
+
+/*
+ * R-13. Insight rail and right analysis full-bleed background share the
+ *       same assistant-layer color variable/token.
+ */
+{
+  const rootMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness\s*\{([\s\S]*?)\}/,
+  )
+  const rootBody = rootMatch ? rootMatch[1] : ''
+  // Rail bg references the assistant token.
+  assert(
+    /--pi-ps-insight-rail-bg\s*:\s*var\(\s*--pi-ps-assistant-bg\s*\)/.test(rootBody),
+    "R-13: --pi-ps-insight-rail-bg references --pi-ps-assistant-bg (shared token)",
+  )
+  // Bleed start/end reference the assistant token.
+  assert(
+    /--pi-ps-paper-bleed-start\s*:\s*var\(\s*--pi-ps-assistant-bg\s*\)/.test(rootBody) ||
+      /--pi-ps-paper-bleed-end\s*:\s*var\(\s*--pi-ps-assistant-bg\s*\)/.test(rootBody),
+    "R-13: bleed tokens reference --pi-ps-assistant-bg (unified warm layer)",
+  )
+}
+
+/*
+ * R-14. The assistant-layer color is warm white / soft paper, not cool
+ *       slate and not saturated yellow/brown.
+ */
+{
+  const rootMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness\s*\{([\s\S]*?)\}/,
+  )
+  const rootBody = rootMatch ? rootMatch[1] : ''
+  const assistantBgMatch = rootBody.match(
+    /--pi-ps-assistant-bg\s*:\s*(#[0-9a-fA-F]{6})\b/,
+  )
+  const hex = assistantBgMatch ? assistantBgMatch[1].toLowerCase() : ''
+  // Parse to RGB and ensure it's warm white (high lightness, slight warm tint).
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  const isWarmWhite =
+    r >= 240 && g >= 240 && b >= 230 && r >= b && (r - b) <= 15
+  assert(
+    isWarmWhite,
+    `R-14: --pi-ps-assistant-bg (${hex}) is warm white / soft paper (RGB: ${r},${g},${b})`,
+  )
+}
+
+/*
+ * R-15. Rail CSS does not use support green, trap amber, red, bright
+ *       blue, purple, neon, or gradients.
+ * (Re-validates 6d palette discipline — explicit product guard label.)
+ */
+{
+  const railScopedSrc = (() => {
+    const parts = []
+    const ruleRe = /([^{}]+?)\{([^{}]*)\}/g
+    let m
+    while ((m = ruleRe.exec(harnessCssNoComments)) !== null) {
+      const sel = m[1].trim()
+      if (
+        /\.pi-ps-insight-rail\b/.test(sel) ||
+        /\.pi-ps-insight-rail-/.test(sel) ||
+        /\.pi-ps-insight-detail\b/.test(sel) ||
+        (/\.pi-ps-insight-chip\b/.test(sel) &&
+          !/\.pi-ps-insight-chip-strip\b/.test(sel))
+      ) {
+        parts.push(m[2])
+      }
+    }
+    return parts.join('\n')
+  })()
+  const forbidden =
+    /#10b981\b|#2a7c4f\b|#f59e0b\b|#d97706\b|#dc2626\b|#ef4444\b|#3b82f6\b|#2563eb\b|#8b5cf6\b|#7c3aed\b/i
+  assert(
+    !forbidden.test(railScopedSrc),
+    "R-15: rail/detail CSS does not use reserved semantic colors",
+  )
+  assert(
+    !/\blinear-gradient\s*\(/i.test(railScopedSrc) &&
+      !/\bradial-gradient\s*\(/i.test(railScopedSrc),
+    "R-15: rail/detail CSS does not use gradients",
+  )
+}
+
+/*
+ * R-16. Right analysis content width remains bounded (max-width ~400px);
+ *       full-bleed affects background only, not text measure.
+ */
+{
+  const rightInnerMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness-right-inner\s*\{([\s\S]*?)\}/,
+  )
+  const innerBody = rightInnerMatch ? rightInnerMatch[1] : ''
+  const innerMaxW = (innerBody.match(/\bmax-width\s*:\s*(\d+)px\b/) || [])[1]
+  const innerNum = innerMaxW ? parseInt(innerMaxW, 10) : NaN
+  assert(
+    Number.isFinite(innerNum) && innerNum >= 380 && innerNum <= 420,
+    `R-16: .pi-ps-harness-right-inner max-width is 380-420px (got ${innerMaxW ?? 'missing'}px)`,
+  )
+}
+
+/*
+ * R-17. Workspace shell no longer leaves a right gray gutter at desktop
+ *       width: verify the right background bleed reaches viewport edge
+ *       via CSS (`right: calc(...)`, `100vw`, or equivalent).
+ *
+ * Strategy: the grid no longer has a 4th 1fr column (right gutter removed),
+ * AND the right ::before bleed uses 100vw or calc to reach the edge.
+ */
+{
+  // Grid must NOT have a 4th `1fr` track after the 380px track.
+  const gridRule = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/,
+  )
+  const gridBody = gridRule ? gridRule[1] : ''
+  // Count 1fr occurrences in grid-template-columns.
+  const gridColsMatch = gridBody.match(
+    /grid-template-columns\s*:([\s\S]*?);/,
+  )
+  const gridColsValue = gridColsMatch ? gridColsMatch[1] : ''
+  const frCount = (gridColsValue.match(/1fr/g) || []).length
+  assert(
+    frCount === 1,
+    `R-17: grid has only 1 flexible (1fr) track — no right gutter (found ${frCount} 1fr tracks)`,
+  )
+  // Right bleed reaches viewport edge.
+  assert(
+    /100vw\b/.test(rightBleedBody) || /50vw\b/.test(rightBleedBody),
+    "R-17: right ::before bleed uses 100vw/50vw to reach viewport edge",
+  )
+}
 
 /* ─── Summary ────────────────────────────────────────────────────── */
 
