@@ -100,6 +100,24 @@ export type UsePaperIntelligenceEvidenceLineArgs = {
    *     in the PI namespace.
    */
   leftSelectorPreset?: EvidenceLineLeftSelectorPreset
+  /**
+   * Optional role of the active evidence (Issue #21-C3.6).
+   *
+   *   - 'support' — the dotted line connects the answer evidence; the
+   *     stroke renders in mint green (the historical default).
+   *   - 'trap'    — the dotted line connects a distractor source; the
+   *     stroke renders in amber. The choice of amber (NOT red) is
+   *     deliberate: the source text on the page is misleading, not
+   *     wrong, so we avoid the "you got it wrong" red palette.
+   *   - null      — the host has no role for the active evidence; the
+   *     line falls back to the support-style green default. The
+   *     default PI route call site does NOT pass this prop, so its
+   *     visual contract is unchanged.
+   *
+   * Approach B (harness derives this explicitly): the host computes
+   * the role from its own analysis view and passes it down. The line
+   * component does NOT sniff the right-panel DOM for kind. */
+  activeEvidenceKind?: 'support' | 'trap' | null
 }
 
 export type UsePaperIntelligenceEvidenceLineResult = {
@@ -276,7 +294,19 @@ export type PaperIntelligenceEvidenceLineProps =
  *     the active evidence id.
  *   - `data-pi-line-kind="evidence"` — namespaces this overlay so any
  *     future overlay (e.g. a hover preview) can sit beside it.
+ *   - `data-pi-evidence-kind="support" | "trap"` (Issue #21-C3.6) —
+ *     present only when the host supplies `activeEvidenceKind`. The
+ *     CSS uses this attribute (and the matching `pi-line-path--*`
+ *     class modifier) to switch the stroke palette between the
+ *     mint-green support default and the amber trap accent. The
+ *     default PI route does not pass the prop, so neither the
+ *     attribute nor the modifier appears in that call site and the
+ *     existing green styling is preserved unchanged.
  *   - `class="pi-line-path"` — picks up dashed stroke styling.
+ *   - `class="pi-line-path--support"` / `class="pi-line-path--trap"`
+ *     (Issue #21-C3.6) — kind-specific modifier hook used by harness
+ *     CSS to switch the stroke palette without relying on attribute
+ *     selectors. Present only when `activeEvidenceKind` is set.
  *   - `class="pi-line-path--animated"` (only when reduced motion is
  *     OFF) — triggers the one-shot `pi-line-draw` keyframe animation.
  *
@@ -290,6 +320,7 @@ export function PaperIntelligenceEvidenceLine(
 ): ReactNode {
   const { geometry, drawnEvidenceId, reducedMotion } =
     usePaperIntelligenceEvidenceLine(props)
+  const { activeEvidenceKind } = props
 
   if (!geometry || !drawnEvidenceId) {
     return (
@@ -301,9 +332,21 @@ export function PaperIntelligenceEvidenceLine(
     )
   }
 
-  const pathClass = reducedMotion
-    ? 'pi-line-path'
-    : 'pi-line-path pi-line-path--animated'
+  // Compose the path's className from three independent axes:
+  //   - base       : always present
+  //   - kind hook  : 'pi-line-path--support' | 'pi-line-path--trap'
+  //                  | '' when the host did not pass a kind. The
+  //                  default PI route's call site stays in the
+  //                  no-kind branch so its visual remains identical.
+  //   - animation  : 'pi-line-path--animated' iff reduced motion off
+  const kindClass =
+    activeEvidenceKind === 'trap'
+      ? ' pi-line-path--trap'
+      : activeEvidenceKind === 'support'
+        ? ' pi-line-path--support'
+        : ''
+  const animClass = reducedMotion ? '' : ' pi-line-path--animated'
+  const pathClass = `pi-line-path${kindClass}${animClass}`
 
   return (
     <svg
@@ -316,6 +359,7 @@ export function PaperIntelligenceEvidenceLine(
       <path
         className={pathClass}
         data-pi-evidence-id={drawnEvidenceId}
+        data-pi-evidence-kind={activeEvidenceKind ?? undefined}
         data-pi-line-kind="evidence"
         d={geometry.d}
         fill="none"

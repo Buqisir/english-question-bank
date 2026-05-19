@@ -2,7 +2,7 @@
 /**
  * verify-paper-intelligence-paper-surface-evidence.mjs
  *
- * Issue #21-C3 static verify script.
+ * Issue #21-C3 / C3.6 static verify script.
  *
  * C3 introduces lecture-mode evidence parity on `surface=paper`:
  *
@@ -16,6 +16,26 @@
  *     namespace) to the RIGHT `[data-pi-evidence-id]` anchor (host-
  *     owned PI namespace) via a parameterized geometry preset.
  *   - The default PI route is unchanged.
+ *
+ * C3.6 layers evidence-kind color semantics on top of C3:
+ *
+ *   - The harness explicitly derives
+ *     `activeEvidenceKind: 'support' | 'trap' | null`
+ *     from its own `analysisView` (Approach B — not DOM-read) and
+ *     threads it down to `<PaperIntelligenceEvidenceLine />`. The
+ *     line component renders the kind on its <path> via both a
+ *     `data-pi-evidence-kind` attribute and a `pi-line-path--*`
+ *     class modifier so CSS can switch the stroke palette.
+ *   - PaperSurface keeps its dumb / data-driven contract: it already
+ *     emits `data-paper-evidence-kind` on the active evidence
+ *     `<mark>`, and PaperSurface.css uses an attribute selector to
+ *     paint the inline left highlight in mint green for support and
+ *     amber for trap. PaperSurface does not import PI types and does
+ *     not emit `data-pi-*`.
+ *   - Trap is amber, NOT red. The source text on the page is a
+ *     misleading / confusable fragment, not a wrong answer; red is
+ *     reserved for a future cut that explicitly marks a student's
+ *     answer as incorrect.
  *
  * What this script asserts (in order):
  *
@@ -43,6 +63,13 @@
  *
  *   5. Diff scope — no server, no package/lockfile, no reading-
  *      analysis, no basket / paperAssembly, no route default switch.
+ *
+ *   6. (C3.6) Evidence kind color semantics — harness derives
+ *      `activeEvidenceKind`, line component accepts and renders it,
+ *      both line palette (support / trap) and active-anchor palette
+ *      exist, the trap palette is amber (NOT red/rose), and the
+ *      default PI route call site stays valid without
+ *      `activeEvidenceKind`.
  *
  * What this script does NOT assert:
  *
@@ -102,6 +129,12 @@ const LINE_TSX_PATH = join(
   'paper-intelligence',
   'preview',
   'paperIntelligenceEvidenceLine.tsx',
+)
+const PREVIEW_TSX_PATH = join(
+  APP,
+  'features',
+  'paper-intelligence',
+  'PaperIntelligencePreview.tsx',
 )
 
 let passes = 0
@@ -393,25 +426,21 @@ function safeGitDiffNames(args) {
 }
 
 const baseRef = (() => {
-  try {
-    return execSync('git merge-base HEAD origin/main', {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-  } catch {
+  const candidates = ['github/main', 'origin/main', 'main']
+  for (const ref of candidates) {
     try {
-      return execSync('git merge-base HEAD main', {
+      const out = execSync(`git merge-base HEAD ${ref}`, {
         cwd: ROOT,
         stdio: ['ignore', 'pipe', 'pipe'],
       })
         .toString()
         .trim()
+      if (out) return out
     } catch {
-      return 'HEAD'
+      // Try the next remote/local candidate.
     }
   }
+  return 'HEAD'
 })()
 
 const changed = new Set()
@@ -490,6 +519,299 @@ assert(
   unexpected.length === 0,
   `no files changed outside the C3 scope (unexpected: ${unexpected.join(', ') || 'none'})`,
 )
+
+/* ─── 6. C3.6 evidence kind color semantics ─────────────────────── */
+
+console.log('\n=== 6. C3.6 evidence kind color semantics ===')
+
+// We strip CSS comments before running rule-body regexes so a doc
+// comment mentioning `.pi-line-path--trap` (or `data-paper-evidence-
+// kind="trap"`) cannot be the first match position and grab a
+// neighboring rule's body.
+const harnessCssNoComments = stripComments(harnessCss)
+const paperSurfaceCssNoCommentsForKind = stripComments(paperSurfaceCss)
+
+// 6a. Harness derives `activeEvidenceKind` explicitly (Approach B).
+//     The verify pins the type union AND the resolution against the
+//     harness's own analysisView so a future regression that infers
+//     kind by reading the DOM (Approach A) fails this script.
+assert(
+  /activeEvidenceKind/.test(harnessSrc),
+  "harness names an `activeEvidenceKind` value (Approach B — explicit derivation)",
+)
+assert(
+  /useMemo<\s*['"]support['"]\s*\|\s*['"]trap['"]\s*\|\s*null\s*>/.test(
+    harnessSrc,
+  ),
+  "harness types activeEvidenceKind as 'support' | 'trap' | null via useMemo",
+)
+assert(
+  /analysisView\??\.supportEvidenceId\s*===\s*activeEvidenceId/.test(
+    harnessNoComments,
+  ) ||
+    /activeEvidenceId\s*===\s*analysisView\??\.supportEvidenceId/.test(
+      harnessNoComments,
+    ),
+  "harness resolves 'support' kind via analysisView.supportEvidenceId === activeEvidenceId",
+)
+assert(
+  /analysisView[\s\S]{0,40}\.distractors\.some\([\s\S]*?\bevidenceId\b[\s\S]*?activeEvidenceId/.test(
+    harnessNoComments,
+  ) ||
+    /analysisView[\s\S]{0,40}\.distractors\.some\([\s\S]*?activeEvidenceId[\s\S]*?\bevidenceId\b/.test(
+      harnessNoComments,
+    ),
+  "harness resolves 'trap' kind via analysisView.distractors.some(...evidenceId === activeEvidenceId)",
+)
+// Approach B guard: kind must NOT come from a DOM read.
+assert(
+  !/getAttribute\s*\(\s*['"]data-pi-evidence-kind['"]/.test(harnessSrc) &&
+    !/getAttribute\s*\(\s*['"]data-paper-evidence-kind['"]/.test(harnessSrc),
+  "harness does NOT infer activeEvidenceKind by reading data-*-evidence-kind via getAttribute",
+)
+// And the harness threads it into the line component.
+assert(
+  /<PaperIntelligenceEvidenceLine\b[\s\S]*?activeEvidenceKind\s*=\s*\{\s*activeEvidenceKind\s*\}/.test(
+    harnessSrc,
+  ),
+  "harness passes activeEvidenceKind into <PaperIntelligenceEvidenceLine />",
+)
+
+// 6b. Line component accepts an optional activeEvidenceKind prop and
+//     renders it. We accept either the data attribute on the path or
+//     the class modifier (or both) so the visual identity is
+//     reachable by CSS authors picking either selector form.
+assert(
+  /activeEvidenceKind\s*\?\s*:\s*['"]support['"]\s*\|\s*['"]trap['"]\s*\|\s*null/.test(
+    lineTsxSrc,
+  ),
+  "line component declares optional `activeEvidenceKind?: 'support' | 'trap' | null`",
+)
+assert(
+  /data-pi-evidence-kind\s*=\s*\{\s*activeEvidenceKind/.test(lineTsxNoComments) ||
+    /pi-line-path--trap/.test(lineTsxNoComments),
+  "line component renders the kind on the path (data-pi-evidence-kind attr or pi-line-path--trap class)",
+)
+
+// 6c. Harness CSS has support and trap line palettes.
+assert(
+  /\.pi-line-path--support\b|\.pi-line-path\[data-pi-evidence-kind="support"\]/.test(
+    harnessCssNoComments,
+  ),
+  "harness CSS declares a support line rule (.pi-line-path--support or matching attribute selector)",
+)
+assert(
+  /\.pi-line-path--trap\b|\.pi-line-path\[data-pi-evidence-kind="trap"\]/.test(
+    harnessCssNoComments,
+  ),
+  "harness CSS declares a trap line rule (.pi-line-path--trap or matching attribute selector)",
+)
+// 6c-bis. Support stays mint green, trap is amber, and trap is NOT red.
+{
+  const trapMatch = harnessCssNoComments.match(
+    /(?:\.pi-line-path--trap|\.pi-line-path\[data-pi-evidence-kind="trap"\])[^{]*\{([\s\S]*?)\}/,
+  )
+  const trapBody = trapMatch ? trapMatch[1] : ''
+  assert(
+    !!trapMatch,
+    "trap line rule body is locatable",
+  )
+  assert(
+    /\b245\s*,\s*158\s*,\s*11\b/.test(trapBody) ||
+      /#f59e0b\b/i.test(trapBody) ||
+      /#fbbf24\b/i.test(trapBody) ||
+      /#d97706\b/i.test(trapBody),
+    "trap line stroke uses amber (rgb(245,158,11) / #f59e0b family)",
+  )
+  assert(
+    !/\b239\s*,\s*68\s*,\s*68\b/.test(trapBody) &&
+      !/#ef4444\b/i.test(trapBody) &&
+      !/#dc2626\b/i.test(trapBody) &&
+      !/#f43f5e\b/i.test(trapBody),
+    "trap line stroke does NOT use a red/rose palette",
+  )
+}
+
+// 6d. Harness CSS — selected-row palette tracks the line palette.
+//     Support row keeps green, trap row uses amber (NOT red).
+{
+  const supportSelectedMatch = harnessCssNoComments.match(
+    /\.pi-ps-analysis-evidence--selected[\s\S]*?\{([\s\S]*?)\}/,
+  )
+  const supportBody = supportSelectedMatch ? supportSelectedMatch[1] : ''
+  assert(
+    /\b16\s*,\s*185\s*,\s*129\b/.test(supportBody) || /#10b981\b/i.test(supportBody),
+    "support selected row uses mint green accent",
+  )
+}
+{
+  const distractorMatch = harnessCssNoComments.match(
+    /\.pi-ps-analysis-distractor--selected\s*\{([\s\S]*?)\}/,
+  )
+  const distractorBody = distractorMatch ? distractorMatch[1] : ''
+  assert(
+    !!distractorMatch,
+    "trap selected distractor row rule is locatable",
+  )
+  assert(
+    /\b245\s*,\s*158\s*,\s*11\b/.test(distractorBody) ||
+      /#f59e0b\b/i.test(distractorBody) ||
+      /#fbbf24\b/i.test(distractorBody),
+    "trap selected distractor row uses amber accent",
+  )
+  assert(
+    !/\b239\s*,\s*68\s*,\s*68\b/.test(distractorBody) &&
+      !/#ef4444\b/i.test(distractorBody) &&
+      !/#dc2626\b/i.test(distractorBody),
+    "trap selected distractor row does NOT use a red/rose palette",
+  )
+
+  // 6d-bis. Specificity guard (Issue #21-C3.6 browser-QA fix).
+  //
+  // The right-panel distractor rows are <button>s, so the harness has
+  // a base reset:
+  //
+  //   button.pi-ps-analysis-distractor { background: transparent; }
+  //
+  // That base rule has specificity (0,1,1). A bare
+  // `.pi-ps-analysis-distractor--selected` selected-row rule has
+  // specificity (0,1,0), so the amber tint loses the cascade and
+  // the selected trap row paints transparent in the real browser
+  // (computed: rgba(0,0,0,0)) even though the rule is "present".
+  //
+  // The static check: assert the selected-row rule lives on a
+  // selector at least as specific as the base button reset. Three
+  // shapes are accepted:
+  //
+  //   button.pi-ps-analysis-distractor--selected            (0,1,1)
+  //   button.pi-ps-analysis-distractor.pi-ps-analysis-distractor--selected
+  //                                                         (0,2,1)
+  //   .pi-ps-harness-shell .pi-ps-analysis-distractor--selected
+  //                                                         (0,2,0)
+  //
+  // The first form is what this PR ships and is the simplest fix.
+  // The other two are accepted so a future refactor that scopes the
+  // selected-row rule under the harness shell or compounds the
+  // selector still passes.
+  const specificityRule = harnessCssNoComments.match(
+    /(?:button\.pi-ps-analysis-distractor(?:\.pi-ps-analysis-distractor)?--selected|\.pi-ps-harness-shell\s+\.pi-ps-analysis-distractor--selected)\s*\{([\s\S]*?)\}/,
+  )
+  assert(
+    !!specificityRule,
+    "trap selected distractor row rule has specificity >= base `button.pi-ps-analysis-distractor` reset (use `button.pi-ps-analysis-distractor--selected` or scope under `.pi-ps-harness-shell`)",
+  )
+  // And: the higher-specificity rule itself must paint amber. This
+  // guards against the regression where someone moves the rule to a
+  // higher-specificity selector but accidentally drops the amber
+  // declaration in the move.
+  const specificityBody = specificityRule ? specificityRule[1] : ''
+  assert(
+    /\b245\s*,\s*158\s*,\s*11\b/.test(specificityBody) ||
+      /#f59e0b\b/i.test(specificityBody) ||
+      /#fbbf24\b/i.test(specificityBody),
+    "high-specificity selected distractor row rule paints amber (so it actually wins the cascade against `button.pi-ps-analysis-distractor { background: transparent }`)",
+  )
+}
+
+// 6e. PaperSurface.css declares kind-specific active-anchor rules.
+//     The base class keeps shape resets only; the support/trap
+//     palettes live in attribute-selector children.
+assert(
+  /\.ps-evidence-anchor--active\[data-paper-evidence-kind="support"\]/.test(
+    paperSurfaceCssNoCommentsForKind,
+  ),
+  "PaperSurface.css declares `.ps-evidence-anchor--active[data-paper-evidence-kind=\"support\"]`",
+)
+assert(
+  /\.ps-evidence-anchor--active\[data-paper-evidence-kind="trap"\]/.test(
+    paperSurfaceCssNoCommentsForKind,
+  ),
+  "PaperSurface.css declares `.ps-evidence-anchor--active[data-paper-evidence-kind=\"trap\"]`",
+)
+{
+  const supportMatch = paperSurfaceCssNoCommentsForKind.match(
+    /\.ps-evidence-anchor--active\[data-paper-evidence-kind="support"\]\s*\{([\s\S]*?)\}/,
+  )
+  const supportBody = supportMatch ? supportMatch[1] : ''
+  assert(
+    /\b16\s*,\s*185\s*,\s*129\b/.test(supportBody) || /#10b981\b/i.test(supportBody),
+    "support inline highlight uses mint green (rgb(16,185,129) / #10b981 family)",
+  )
+  assert(
+    /border-bottom\s*:[^;]*\bsolid\b/.test(supportBody),
+    "support inline highlight uses a solid underline",
+  )
+}
+{
+  const trapMatch = paperSurfaceCssNoCommentsForKind.match(
+    /\.ps-evidence-anchor--active\[data-paper-evidence-kind="trap"\]\s*\{([\s\S]*?)\}/,
+  )
+  const trapBody = trapMatch ? trapMatch[1] : ''
+  assert(
+    /\b245\s*,\s*158\s*,\s*11\b/.test(trapBody) || /#f59e0b\b/i.test(trapBody),
+    "trap inline highlight uses amber (rgb(245,158,11) / #f59e0b family)",
+  )
+  assert(
+    !/\b239\s*,\s*68\s*,\s*68\b/.test(trapBody) &&
+      !/#ef4444\b/i.test(trapBody) &&
+      !/#dc2626\b/i.test(trapBody),
+    "trap inline highlight does NOT use a red/rose palette",
+  )
+  assert(
+    /border-bottom\s*:[^;]*\bdotted\b/.test(trapBody),
+    "trap inline highlight uses a dotted underline",
+  )
+}
+
+// 6f. Default PI route call site stays valid without
+//     `activeEvidenceKind` (the prop is optional). The script reads
+//     PaperIntelligencePreview.tsx without modifying it; the file is
+//     out of the C3.6 scope and must remain unchanged. We only assert
+//     its existing call site shape.
+{
+  assert(
+    existsSync(PREVIEW_TSX_PATH),
+    "PaperIntelligencePreview.tsx exists (default PI route file)",
+  )
+  const previewSrc = readFile(PREVIEW_TSX_PATH)
+  const lineUsage = previewSrc.match(
+    /<PaperIntelligenceEvidenceLine\b[\s\S]*?\/>/,
+  )
+  assert(
+    !!lineUsage,
+    "default PI route still mounts <PaperIntelligenceEvidenceLine />",
+  )
+  assert(
+    !!lineUsage && !/activeEvidenceKind\s*=/.test(lineUsage[0]),
+    "default PI route call site does NOT pass activeEvidenceKind (optional prop preserved)",
+  )
+}
+
+// 6g. PaperSurface stays dumb / data-driven — no PI imports, no
+//     `data-pi-*`, no red/rose trap palette tied to
+//     `data-paper-evidence-kind="trap"`.
+assert(
+  !/from\s+['"][^'"]*features\/paper-intelligence/.test(paperSurfaceTsx),
+  "(C3.6 re-check) PaperSurface does NOT import PI feature modules",
+)
+assert(
+  !/data-pi-/.test(paperSurfaceTsxNoComments),
+  "(C3.6 re-check) PaperSurface emits no data-pi-* anywhere",
+)
+{
+  const trapBlocks = paperSurfaceCssNoComments.match(
+    /\[data-paper-evidence-kind="trap"\][^{]*\{([\s\S]*?)\}/g,
+  )
+  for (const block of trapBlocks || []) {
+    assert(
+      !/\b239\s*,\s*68\s*,\s*68\b/.test(block) &&
+        !/#ef4444\b/i.test(block) &&
+        !/#dc2626\b/i.test(block) &&
+        !/#f43f5e\b/i.test(block),
+      `no red/rose palette inside data-paper-evidence-kind="trap" block`,
+    )
+  }
+}
 
 /* ─── Summary ────────────────────────────────────────────────────── */
 
