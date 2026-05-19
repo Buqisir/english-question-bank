@@ -71,11 +71,10 @@
  *     button's `[data-rail-locked]`. At 1536px+ only, an active
  *     inline detail expands the rail to 240px.
  *   - One insight chip per `report.passages[*].paperSection` rendered
- *     either inside the rail (wide desktop, ≥1536px) or inside a
- *     topbar `.pi-ps-insight-topbar-row` (all non-wide widths). The
- *     chip is never double-rendered: `isWideDesktop` is the single
- *     switch for rail vs topbar and is driven by
- *     `matchMedia('(min-width: 1536px)')`.
+ *     always inside the left rail (`.pi-ps-insight-rail`). The rail is
+ *     always in the DOM at every viewport width. CSS media queries
+ *     control rail sizing and detail mode but never unmount the rail.
+ *     PA-approved rule: insight entry always lives on the left.
  *   - The right analysis aside paints a warm cream full-bleed
  *     background via `.pi-ps-harness-right::before` reaching to the
  *     viewport's right edge while the actual analysis text stays
@@ -330,20 +329,17 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── C4 PR #52: viewport-mode detection ───
   //
   // Listen to both `(max-width: 1199px)` and `(min-width: 1536px)`.
-  // The 240px inline rail detail is only geometrically safe once the
-  // viewport can contain:
-  //   240px rail + 858px paper/matte + 24px seam + 380px analysis
-  // with a little breathing room. Between 1200px and 1535px the paper
-  // and analysis stay side-by-side, but insight uses the topbar entry
-  // instead of the absolute desktop rail.
+  // The 240px inline rail detail is only geometrically safe at >=1536px.
+  // Between 1200px and 1535px the rail uses short labels and
+  // AnchoredPopover for detail. At <=1199px the rail becomes a fixed
+  // left handle with a drawer detail.
   //
-  // Q1 PA-approved invariant: when the breakpoint crosses we close
-  // any open insight detail/popover and clear the rail lock. The active
-  // chip's anchor ref points at a DOM node that is about to
-  // disappear (the desktop rail unmounts below 1536px, and the topbar
-  // row unmounts at 1536px+); without this
-  // clear, AnchoredPopover would keep its stale ref and paint at a
-  // ghost position until the teacher clicks somewhere else.
+  // PA-approved rule: the rail is always in the DOM. matchMedia only
+  // controls detail-surface selection and CSS sizing, NOT rail mount.
+  //
+  // When the breakpoint crosses we close any open insight detail/popover
+  // and clear the rail lock so stale state doesn't persist across
+  // viewport mode transitions.
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (typeof window.matchMedia !== 'function') return
@@ -603,16 +599,12 @@ export function PaperIntelligencePaperSurfaceHarness({
     : null
 
   /**
-   * Render a single insight chip. Used in both the desktop left
-   * rail (`.pi-ps-insight-rail`) and the stacked-mode topbar row
-   * (`.pi-ps-insight-topbar-row`).
+   * Render a single insight chip. Always rendered inside the left
+   * rail (`.pi-ps-insight-rail`).
    *
-   * Q1 PA-approved invariant: at most one of those two surfaces is
-   * mounted at a time (gated by `isStackedMode`), so this function
-   * is called from exactly one render path per breakpoint. Two
-   * `data-pi-insight-chip` nodes for the same section never coexist
-   * in the DOM, and the single `chipRefMap` ref always points at
-   * the live element.
+   * PA-approved rule: insight entry always lives on the left.
+   * The rail is always in the DOM; CSS controls sizing per breakpoint.
+   * Chips are never double-rendered.
    */
   const renderInsightChip = (p: PassageReport): ReactNode => {
     const isOpen = activeInsightSection === p.paperSection
@@ -678,29 +670,8 @@ export function PaperIntelligencePaperSurfaceHarness({
         <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
           <span aria-hidden="true">←</span> 返回工作台
         </button>
-        {/*
-          C4 PR #52 PA must-fix — stacked-mode insight entry.
-
-          When `isWideDesktop` is false (all widths below 1536px),
-          the desktop left rail is unmounted and the insight chips
-          render here instead, between the back button and the
-          tagline. This covers both the true stacked layout (≤1199px)
-          and the 1200–1535px side-by-side layout where a 240px
-          inline rail detail would collide with the paper.
-
-          Q1 PA-approved invariant: chips are NEVER double-rendered.
-          Either this row OR the desktop rail is mounted at any
-          given moment.
-        */}
-        {!isWideDesktop && (
-          <div
-            className="pi-ps-insight-topbar-row"
-            role="toolbar"
-            aria-label="篇章洞察"
-          >
-            {report.passages.map(renderInsightChip)}
-          </div>
-        )}
+        {/* C4 PA-approved: insight entry always lives on the left rail.
+           No topbar insight row at any breakpoint. */}
         <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
       </div>
       <div
@@ -709,98 +680,88 @@ export function PaperIntelligencePaperSurfaceHarness({
         data-pi-active-evidence-kind={activeEvidenceKind ?? undefined}
       >
         {/*
-          C4 PR #52 PA must-fix — desktop left insight rail.
+          C4 PA-approved — left insight rail (always rendered).
 
-          Replaces the prior top horizontal `.pi-ps-insight-chip-strip`
-          that lived inside `.pi-ps-harness-left`. The new rail:
+          The rail is `position: absolute; left:0; top:0; bottom:0`
+          inside `.pi-ps-harness-shell` (which is already
+          `position: relative`), so it does NOT consume a grid
+          column and the existing `1fr 858px 380px` shell is
+          unchanged.
 
-            - is `position: absolute; left:0; top:0; bottom:0` inside
-              `.pi-ps-harness-shell` (which is already
-              `position: relative`), so it does NOT consume a 4th
-              grid column and the existing `1fr 858px 380px` shell
-              is unchanged;
-            - lives in the harness layer, NOT inside PaperSurface
-              (PaperSurface.tsx / PaperSurface.css are forbidden in
-              C4 and untouched);
-            - collapses to 48px in the outer-left desk gutter;
-            - expands to 160px on `:hover`, `:focus-within`, or the
-              toggle's `[data-rail-locked="true"]`, and to 240px
-              while inline detail is open. CSS owns the visual
-              transition (160ms ease-out, respects
-              `prefers-reduced-motion`).
-            - Esc inside the rail clears the lock, closes any open
-              popover, and blurs focus so `:focus-within` releases.
+          The rail is always in the DOM at every viewport width.
+          CSS media queries control its sizing and detail mode:
+            - >=1536px: absolute in left gutter, 48→160→240px
+            - 1200–1535px: absolute left, 48→120–140px, short labels
+            - <=1199px: position:fixed; left:0, acts as a handle/drawer
 
-          Conditional render: only mounts on wide desktop
-          (`isWideDesktop`, currently min-width:1536px). Below that
-          threshold the topbar `.pi-ps-insight-topbar-row` above takes
-          over so the 240px inline detail never overlaps the paper.
-          Chips are NEVER double-mounted.
+          matchMedia state still controls WHICH detail surface is
+          used (inline vs AnchoredPopover vs left drawer) but NOT
+          the rail mount. Chips are never double-rendered.
         */}
-        {isWideDesktop && (
-          <aside
-            className="pi-ps-insight-rail"
-            aria-label="篇章洞察"
-            data-rail-locked={railLocked ? 'true' : undefined}
-            data-rail-detail-open={
-              activeInsightSection ? 'true' : undefined
-            }
-            onKeyDown={handleRailKeyDown}
+        <aside
+          className="pi-ps-insight-rail"
+          aria-label="篇章洞察"
+          data-rail-locked={railLocked ? 'true' : undefined}
+          data-rail-detail-open={
+            activeInsightSection ? 'true' : undefined
+          }
+          data-viewport-mode={isStackedMode ? 'stacked' : isWideDesktop ? 'wide' : 'medium'}
+          onKeyDown={handleRailKeyDown}
+        >
+          <button
+            type="button"
+            className="pi-ps-insight-rail-toggle"
+            onClick={handleToggleRailLock}
+            aria-expanded={railLocked}
+            aria-controls="pi-ps-insight-rail-list"
+            aria-label={railLocked ? '收起洞察栏' : '展开洞察栏'}
           >
-            <button
-              type="button"
-              className="pi-ps-insight-rail-toggle"
-              onClick={handleToggleRailLock}
-              aria-expanded={railLocked}
-              aria-controls="pi-ps-insight-rail-list"
-              aria-label={railLocked ? '收起洞察栏' : '展开洞察栏'}
+            <span
+              className="pi-ps-insight-rail-toggle-icon"
+              aria-hidden="true"
             >
-              <span
-                className="pi-ps-insight-rail-toggle-icon"
-                aria-hidden="true"
-              >
-                {railLocked ? '×' : '≡'}
-              </span>
-              <span className="pi-ps-insight-chip-text">
-                {railLocked ? '收起' : '洞察'}
-              </span>
-            </button>
-            <div
-              className="pi-ps-insight-rail-list"
-              id="pi-ps-insight-rail-list"
-              role="group"
-            >
-              {report.passages.map((p) => (
-                <div key={p.paperSection}>
-                  {renderInsightChip(p)}
-                  {activeInsightSection === p.paperSection && activePassage && (
-                    <div
-                      className="pi-ps-insight-detail"
-                      id={`pi-ps-insight-panel-${p.paperSection}`}
-                      role="region"
-                      aria-label={`篇章洞察 · ${p.paperSection}`}
-                    >
-                      <div className="pi-ps-insight-detail-header">
-                        <span className="pi-ps-insight-detail-title">
-                          篇章洞察 · {p.paperSection}
-                        </span>
-                        <button
-                          type="button"
-                          className="pi-ps-insight-detail-close"
-                          onClick={handleCloseInsight}
-                          aria-label="关闭洞察面板"
-                        >
-                          ×
-                        </button>
-                      </div>
-                      <HarnessInsightPanelContent reportPassage={activePassage} />
+              {railLocked ? '×' : '≡'}
+            </span>
+            <span className="pi-ps-insight-chip-text">
+              {railLocked ? '收起' : '洞察'}
+            </span>
+          </button>
+          <div
+            className="pi-ps-insight-rail-list"
+            id="pi-ps-insight-rail-list"
+            role="group"
+          >
+            {report.passages.map((p) => (
+              <div key={p.paperSection}>
+                {renderInsightChip(p)}
+                {/* Wide desktop (>=1536px): inline detail inside rail */}
+                {isWideDesktop && activeInsightSection === p.paperSection && activePassage && (
+                  <div
+                    className="pi-ps-insight-detail"
+                    id={`pi-ps-insight-panel-${p.paperSection}`}
+                    role="region"
+                    aria-label={`篇章洞察 · ${p.paperSection}`}
+                  >
+                    <div className="pi-ps-insight-detail-header">
+                      <span className="pi-ps-insight-detail-title">
+                        篇章洞察 · {p.paperSection}
+                      </span>
+                      <button
+                        type="button"
+                        className="pi-ps-insight-detail-close"
+                        onClick={handleCloseInsight}
+                        aria-label="关闭洞察面板"
+                      >
+                        ×
+                      </button>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </aside>
-        )}
+                    <HarnessInsightPanelContent reportPassage={activePassage} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </aside>
         <div className="pi-ps-harness-left" ref={leftScrollerRef}>
           <PaperSurface
             textMap={surfaceData.textMap}
@@ -858,12 +819,17 @@ export function PaperIntelligencePaperSurfaceHarness({
           leftSelectorPreset="paper-surface"
         />
         {/*
-          C4 PR #52 UX Retune: Insight popover — stacked mode only.
+          C4 PA-approved: left-side detail surfaces for non-wide viewports.
 
-          On wide desktop (>=1536px), insight detail is rendered inline
-          inside `.pi-ps-insight-rail` (no overlay, no portal). The
-          AnchoredPopover is only used below the wide-desktop threshold
-          where the topbar chip row needs a positioned panel.
+          Medium desktop (1200–1535px): AnchoredPopover anchored to the
+          rail chip. The popover opens to the right of the rail and must
+          not cover white paper body text.
+
+          Stacked/narrow (<=1199px): same AnchoredPopover mechanism but
+          styled as a left-side drawer via CSS.
+
+          Wide desktop (>=1536px): inline detail inside the rail (above).
+          AnchoredPopover is NOT mounted on wide desktop.
         */}
         {!isWideDesktop && activePassage && activeChipRef && (
           <AnchoredPopover
@@ -874,13 +840,14 @@ export function PaperIntelligencePaperSurfaceHarness({
             role="dialog"
             ariaLabel="篇章洞察"
             className="pi-ps-insight-panel"
-            widthPx={360}
+            widthPx={isStackedMode ? 220 : 320}
             gapPx={4}
             viewportPaddingPx={16}
             align="start"
             closeOnEscape
             dataAttributes={{
               'data-pi-insight-panel': activePassage.paperSection,
+              'data-pi-insight-mode': isStackedMode ? 'drawer' : 'popover',
             }}
           >
             <div className="pi-ps-insight-panel-header">

@@ -539,14 +539,16 @@ assert(
 }
 
 /*
- * 2i. PR #52 PA must-fix — Q1 invariant: chips never double-rendered.
+ * 2i. PR #52 PA must-fix — matchMedia responsive detection.
  *
  * The harness uses `matchMedia('(min-width: 1536px)')` + state to
- * conditionally render either the wide-desktop rail OR the topbar
- * chip row, never both. It also tracks `(max-width:1199px)` for the
- * stacked shell. The change handler clears `activeInsightSection`
+ * gate inline detail (wide desktop only). It also tracks
+ * `(max-width:1199px)` for stacked-mode drawer styling.
+ * PA-approved rule: the rail is always in the DOM; matchMedia
+ * only controls detail-surface selection, NOT rail mount.
+ * The change handler clears `activeInsightSection`
  * AND `railLocked` so AnchoredPopover's anchorRef cannot resolve to
- * a node that's about to unmount across a breakpoint cross.
+ * a stale position on breakpoint cross.
  */
 console.log('\n=== 2i. PR #52 PA must-fix — matchMedia responsive switch ===')
 
@@ -558,17 +560,17 @@ assert(
 )
 assert(
   /\b(?:setIsStackedMode|isStackedMode)\b/.test(harnessSrc),
-  "harness owns an `isStackedMode` state used to switch rail vs topbar chip row",
+  "harness owns an `isStackedMode` state used for responsive detail-surface selection",
 )
 assert(
   /matchMedia\s*\(\s*['"]\s*\(\s*min-width\s*:\s*1536px\s*\)\s*['"]/.test(
     harnessSrc,
   ),
-  "harness wires matchMedia(`(min-width: 1536px)`) for wide-desktop rail gating",
+  "harness wires matchMedia(`(min-width: 1536px)`) for wide-desktop inline-detail gating",
 )
 assert(
   /\b(?:setIsWideDesktop|isWideDesktop)\b/.test(harnessSrc),
-  "harness owns an `isWideDesktop` state used to switch rail vs topbar chip row",
+  "harness owns an `isWideDesktop` state used for inline-detail vs popover detail selection",
 )
 
 // matchMedia onChange handler clears the popover and the rail lock.
@@ -605,20 +607,25 @@ assert(
   )
 }
 
-// 2i-bis. Topbar chip row exists and is gated below wide desktop.
+// 2i-bis. PA-approved: no topbar chip row; rail always in DOM.
 assert(
-  /pi-ps-insight-topbar-row/.test(harnessSrc),
-  "harness renders a `.pi-ps-insight-topbar-row` for non-wide insight entry",
+  !/pi-ps-insight-topbar-row/.test(harnessNoComments),
+  "harness does NOT render any `.pi-ps-insight-topbar-row` (PA-approved: insight always on the left)",
 )
 assert(
-  /!\s*isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(
-    harnessSrc,
+  !/!\s*isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(
+    harnessNoComments,
   ),
-  "topbar chip row is conditionally rendered behind `!isWideDesktop &&` (covers 1200-1535 and stacked widths)",
+  "no topbar fallback conditional for insight chips (PA-approved: insight always left)",
+)
+// Rail is NOT gated by isWideDesktop — it renders unconditionally.
+assert(
+  /className\s*=\s*['"]pi-ps-insight-rail['"]/.test(harnessNoComments),
+  ".pi-ps-insight-rail exists in TSX (always rendered)",
 )
 assert(
-  /isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-rail\b/.test(harnessSrc),
-  "desktop left rail is conditionally rendered behind `isWideDesktop &&` (no overlap-prone rail below 1536px)",
+  !/isWideDesktop\s*&&\s*\([\s\S]{0,80}?pi-ps-insight-rail\b/.test(harnessNoComments),
+  "desktop left rail is NOT gated by `isWideDesktop &&` (rail always in DOM at every viewport)",
 )
 
 /* ─── 3. AnchoredPopover unchanged ───────────────────────────────── */
@@ -958,7 +965,7 @@ assert(
   )
 }
 
-// 6b.5 No top sticky horizontal chip strip remains.
+// 6b.5 No top sticky horizontal chip strip remains, AND no topbar row.
 assert(
   !/\.pi-ps-insight-chip-strip\b/.test(harnessCssNoComments),
   "harness CSS does NOT declare a `.pi-ps-insight-chip-strip` rule (PR #52 PA must-fix: top horizontal strip removed)",
@@ -966,6 +973,20 @@ assert(
 assert(
   !/pi-ps-insight-chip-strip/.test(harnessNoComments),
   "harness TSX does NOT render any `pi-ps-insight-chip-strip` element (PR #52 PA must-fix: top horizontal strip removed)",
+)
+// PA-approved: no topbar insight row in CSS or TSX.
+assert(
+  !/\.pi-ps-insight-topbar-row\s*\{/.test(harnessCssNoComments),
+  "harness CSS does NOT declare a `.pi-ps-insight-topbar-row` rule (PA-approved: insight always left)",
+)
+assert(
+  !/pi-ps-insight-topbar-row/.test(harnessNoComments),
+  "harness TSX does NOT render any `pi-ps-insight-topbar-row` element (PA-approved: insight always left)",
+)
+// PA-approved: .pi-ps-insight-rail is NOT display:none at any breakpoint.
+assert(
+  !/\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(harnessCssNoComments),
+  ".pi-ps-insight-rail is NOT `display:none` at any breakpoint (PA-approved: always visible)",
 )
 
 console.log('\n=== 6c. PR #52 PA must-fix — right-panel full-bleed ===')
@@ -1094,9 +1115,15 @@ assert(
     ),
     "stacked mode (max-width: 1199px) disables the .pi-ps-harness-right::before bleed",
   )
+  // PA-approved: rail is NOT display:none at any breakpoint.
   assert(
-    /\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(stackedBody),
-    "stacked mode hides the absolute desktop rail (.pi-ps-insight-rail display:none) so chips never double-render",
+    !/\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(stackedBody),
+    "stacked mode does NOT hide .pi-ps-insight-rail (PA-approved: rail always visible on the left)",
+  )
+  // Instead, rail uses position:fixed in stacked mode.
+  assert(
+    /\.pi-ps-insight-rail\s*\{[^}]*position\s*:\s*fixed/.test(stackedBody),
+    "stacked mode makes .pi-ps-insight-rail position:fixed (left handle/drawer)",
   )
 }
 
@@ -1585,6 +1612,139 @@ assert(
   )
 }
 
+/* ─── PA-approved: insight-always-left verify guards ─────────────── */
+
+console.log('\n=== PA: insight always lives on the left ===')
+
+/*
+ * PA-1. No `.pi-ps-insight-topbar-row` in TSX (active code).
+ */
+assert(
+  !/pi-ps-insight-topbar-row/.test(harnessNoComments),
+  "PA-1: no .pi-ps-insight-topbar-row in TSX active code",
+)
+
+/*
+ * PA-2. No `.pi-ps-insight-topbar-row` CSS rule.
+ */
+assert(
+  !/\.pi-ps-insight-topbar-row\s*[\{,]/.test(harnessCssNoComments),
+  "PA-2: no .pi-ps-insight-topbar-row CSS rule",
+)
+
+/*
+ * PA-3. No topbar fallback conditional for insight chips.
+ */
+assert(
+  !/!\s*isWideDesktop[\s\S]{0,200}?topbar/.test(harnessNoComments),
+  "PA-3: no topbar fallback conditional for insight chips",
+)
+
+/*
+ * PA-4. `.pi-ps-insight-rail` exists in TSX and is not gated by
+ *       `isWideDesktop`.
+ */
+assert(
+  /className\s*=\s*['"]pi-ps-insight-rail['"]/.test(harnessNoComments),
+  "PA-4: .pi-ps-insight-rail exists in TSX",
+)
+assert(
+  !/isWideDesktop\s*&&\s*\([\s\S]{0,80}?className\s*=\s*['"]pi-ps-insight-rail['"]/.test(
+    harnessNoComments,
+  ),
+  "PA-4: .pi-ps-insight-rail is NOT gated by isWideDesktop",
+)
+
+/*
+ * PA-5. `.pi-ps-insight-rail` is not `display:none` at any breakpoint.
+ */
+assert(
+  !/\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(harnessCssNoComments),
+  "PA-5: .pi-ps-insight-rail is not display:none at any breakpoint",
+)
+
+/*
+ * PA-6. Inline 240px detail expansion is gated to @media (min-width: 1536px).
+ */
+{
+  // The 240px detail-open rule must be inside a @media (min-width: 1536px) block.
+  const wideMediaRe = /@media\s*\(\s*min-width\s*:\s*1536px\s*\)\s*\{([\s\S]*?)\n\}/
+  const wideMediaMatch = harnessCssNoComments.match(wideMediaRe)
+  const wideMediaBody = wideMediaMatch ? wideMediaMatch[1] : ''
+  assert(
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*240px/.test(
+      wideMediaBody,
+    ),
+    "PA-6: inline 240px detail expansion is gated to @media (min-width: 1536px)",
+  )
+}
+
+/*
+ * PA-7. 1200–1535px does NOT use inline 240px detail.
+ */
+{
+  const mediumDesktopMedia =
+    /@media\s*\(\s*min-width\s*:\s*1200px\s*\)\s*and\s*\(\s*max-width\s*:\s*1535px\s*\)\s*\{([\s\S]*?)\n\}/
+  const mediumMatch = harnessCssNoComments.match(mediumDesktopMedia)
+  const mediumBody = mediumMatch ? mediumMatch[1] : ''
+  assert(
+    !/width\s*:\s*240px/.test(mediumBody),
+    "PA-7: 1200-1535px does NOT use 240px inline detail",
+  )
+}
+
+/*
+ * PA-8. 1200–1535px has left-side detail path (AnchoredPopover, not topbar).
+ */
+assert(
+  /!\s*isWideDesktop\s*&&\s*activePassage[\s\S]*?<AnchoredPopover\b/.test(
+    harnessNoComments,
+  ),
+  "PA-8: 1200-1535px has left-side detail path via AnchoredPopover anchored to rail chip",
+)
+
+/*
+ * PA-9. <=1199px has left-side handle/drawer path (rail position:fixed, not topbar).
+ */
+{
+  function extractAllStackedBodiesPA(src) {
+    const out = []
+    let cursor = 0
+    while (cursor < src.length) {
+      const at = src.indexOf('@media', cursor)
+      if (at < 0) break
+      const close = src.indexOf(')', at)
+      if (close < 0) break
+      const header = src.slice(at, close + 1)
+      if (!/max-width\s*:\s*1199px/.test(header)) {
+        cursor = close + 1
+        continue
+      }
+      const open = src.indexOf('{', close)
+      if (open < 0) break
+      let depth = 1
+      let i = open + 1
+      while (i < src.length && depth > 0) {
+        if (src[i] === '{') depth++
+        else if (src[i] === '}') depth--
+        i++
+      }
+      out.push(src.slice(open + 1, i - 1))
+      cursor = i
+    }
+    return out.join('\n')
+  }
+  const stackedBodyPA = extractAllStackedBodiesPA(harnessCssNoComments)
+  assert(
+    /\.pi-ps-insight-rail\s*\{[^}]*position\s*:\s*fixed/.test(stackedBodyPA),
+    "PA-9: <=1199px has left-side handle/drawer (rail position:fixed)",
+  )
+  assert(
+    !/pi-ps-insight-topbar-row/.test(stackedBodyPA),
+    "PA-9: <=1199px does NOT use topbar row",
+  )
+}
+
 /* ─── B-checks: PR #52 breakpoint guard after browser QA ───────── */
 
 console.log('\n=== B-checks: PR #52 wide-desktop breakpoint guard ===')
@@ -1603,22 +1763,24 @@ assert(
 
 /*
  * B-2. Inline rail detail never renders in the 1200-1535 side-by-side
- *      band that failed browser QA.
+ *      band that failed browser QA. The inline detail is gated by
+ *      isWideDesktop inside the rail. Non-wide viewports use
+ *      AnchoredPopover as left-side detail.
  */
 assert(
-  /isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-rail\b/.test(harnessSrc),
-  "B-2: desktop rail is TSX-gated by isWideDesktop",
+  /isWideDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "B-2: inline detail inside rail is gated by isWideDesktop (only at >=1536px)",
 )
 assert(
   /!\s*isWideDesktop\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
     harnessNoComments,
   ),
-  "B-2: non-wide widths use the topbar/AnchoredPopover path, not inline rail detail",
+  "B-2: non-wide widths use the left-rail-anchored AnchoredPopover path, not inline rail detail",
 )
 
 /*
- * B-3. CSS also guards 1200-1535px so leaked rail markup cannot
- *      overlap the PaperSurface matte.
+ * B-3. CSS declares a 1200-1535px medium-desktop rail rule that
+ *      narrows the rail (NOT hides it). The rail is always visible.
  */
 {
   const mediumDesktopMedia =
@@ -1627,23 +1789,27 @@ assert(
   const mediumBody = mediumMatch ? mediumMatch[1] : ''
   assert(
     !!mediumMatch,
-    "B-3: CSS declares a 1200-1535px medium-desktop rail guard",
+    "B-3: CSS declares a 1200-1535px medium-desktop rail rule",
   )
+  // PA-approved: rail is NOT display:none at 1200-1535px.
   assert(
-    /\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(mediumBody),
-    "B-3: 1200-1535px CSS guard hides .pi-ps-insight-rail",
+    !/\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(mediumBody),
+    "B-3: 1200-1535px CSS does NOT hide .pi-ps-insight-rail (PA-approved: always visible)",
+  )
+  // Medium rail narrows to 120px on hover (not 160px or 240px).
+  assert(
+    /\.pi-ps-insight-rail[\s\S]*?\bwidth\s*:\s*120px\b/.test(mediumBody),
+    "B-3: 1200-1535px medium-desktop rail uses 120px hover width (not 240px inline detail)",
   )
 }
 
 /*
- * B-4. The 1200-1535 band keeps insight reachable through the topbar
- *      chip row instead of dropping the feature.
+ * B-4. The 1200-1535 band keeps insight reachable through the LEFT
+ *      rail — no topbar chip row at any breakpoint.
  */
 assert(
-  /!\s*isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(
-    harnessSrc,
-  ),
-  "B-4: topbar chip row is available at every non-wide width, including 1200-1535px",
+  !/pi-ps-insight-topbar-row/.test(harnessNoComments),
+  "B-4: no topbar chip row at any width — insight always lives on the left rail",
 )
 
 /*

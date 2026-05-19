@@ -150,35 +150,12 @@
 }
 
 /*
- * ─── C4 stacked-mode topbar chip row (PR #52 PA must-fix) ───────
+ * ─── C4 topbar chip row REMOVED (PA-approved: insight always left) ──
  *
- * In stacked mode (≤1199px) the desktop left rail is hidden and the
- * insight entry collapses into a horizontal chip row inside the
- * harness topbar, between the back button and the tagline. The TSX
- * conditionally renders this row only when matchMedia signals
- * stacked mode, so chips are NEVER double-rendered.
- *
- * The chip role inside the topbar row reuses `.pi-ps-insight-chip`
- * so palette + a11y stays identical across modes; this rule
- * only toggles per-mode layout (always-expanded label, no hover
- * width animation).
+ * The `.pi-ps-insight-topbar-row` has been entirely removed per PA
+ * direction. Insight entry point must always stay on the left rail.
+ * No topbar insight row at any breakpoint.
  */
-.pi-ps-insight-topbar-row {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0.5rem;
-}
-
-.pi-ps-insight-topbar-row .pi-ps-insight-chip {
-  width: auto;
-  padding: 6px 10px;
-}
-
-.pi-ps-insight-topbar-row .pi-ps-insight-chip-text {
-  opacity: 1;
-}
 
 /* ─── Workspace shell: 3-column right-shifted grid (Issue #43/C4) ─ */
 
@@ -313,14 +290,10 @@
   }
 
   /*
-   * PR #52 PA must-fix: in stacked mode the absolute desktop rail
-   * does NOT float over the paper. The harness conditionally
-   * renders the topbar chip row instead (no double DOM, no double
-   * `data-pi-insight-chip`), and any leaked rail markup is hidden.
+   * PA-approved: the rail is always visible on the left. In stacked
+   * mode it becomes a fixed left handle/drawer (see rail responsive
+   * rules below). No display:none.
    */
-  .pi-ps-insight-rail {
-    display: none;
-  }
 
   /*
    * PR #52 PA must-fix: the right-panel viewport-wide bleed is
@@ -344,20 +317,8 @@
   }
 }
 
-/*
- * C4 UX retune geometry guard.
- *
- * The no-right-gutter desktop shell keeps paper + analysis side by
- * side at 1200–1535px, but there is not enough left gutter for the
- * 240px inline insight detail. The harness conditionally renders the
- * topbar chip row for this band; this CSS guard ensures any leaked
- * absolute rail cannot overlap the PaperSurface matte or white paper.
- */
-@media (min-width: 1200px) and (max-width: 1535px) {
-  .pi-ps-insight-rail {
-    display: none;
-  }
-}
+/* (Medium desktop 1200-1535px rail overrides are placed after
+   the base rail rules below.) */
 
 .pi-ps-harness-loading,
 .pi-ps-harness-error {
@@ -767,12 +728,83 @@ button.pi-ps-analysis-distractor--selected {
   box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
 }
 
-/* State 3: active detail open — 240px */
-.pi-ps-insight-rail[data-rail-detail-open='true'] {
-  width: 240px;
-  background: var(--pi-ps-insight-rail-bg);
-  border-right-color: var(--pi-ps-insight-hairline);
-  box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+/* State 3: active detail open — 240px (wide desktop only, >=1536px) */
+@media (min-width: 1536px) {
+  .pi-ps-insight-rail[data-rail-detail-open='true'] {
+    width: 240px;
+    background: var(--pi-ps-insight-rail-bg);
+    border-right-color: var(--pi-ps-insight-hairline);
+    box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+  }
+}
+
+/*
+ * ─── Stacked/narrow <=1199px: fixed left handle + drawer ─────────
+ *
+ * PA-approved rule: the rail remains visible as a fixed left handle.
+ * No topbar row. Click opens a narrow left-side drawer (200–240px).
+ * The drawer may temporarily overlay gray matte/desk but avoids
+ * covering white paper body where practical.
+ */
+@media (max-width: 1199px) {
+  .pi-ps-insight-rail {
+    position: fixed;
+    left: 0;
+    top: 48px; /* below the topbar */
+    bottom: 0;
+    width: 40px;
+    z-index: 25;
+    padding: 8px 2px;
+    background: rgba(248, 246, 241, 0.92);
+    border-right: 1px solid var(--pi-ps-insight-hairline);
+    backdrop-filter: blur(4px);
+  }
+
+  .pi-ps-insight-rail:hover,
+  .pi-ps-insight-rail:focus-within,
+  .pi-ps-insight-rail[data-rail-locked='true'] {
+    width: 200px;
+    background: var(--pi-ps-insight-rail-bg);
+    box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
+  }
+
+  .pi-ps-insight-rail[data-rail-detail-open='true'] {
+    width: 200px;
+    background: var(--pi-ps-insight-rail-bg);
+    box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
+  }
+
+  .pi-ps-insight-rail .pi-ps-insight-chip-text {
+    opacity: 0;
+  }
+
+  .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+    opacity: 1;
+  }
+}
+
+/*
+ * ─── Medium desktop 1200–1535px rail overrides ───────────────────
+ *
+ * C4 PA-approved: the rail stays visible on the left. It uses a
+ * narrower expansion width (120px hover, NOT 240px detail inline)
+ * and short labels from `buildInsightChipShortLabel`. Clicking a
+ * chip opens a left-side AnchoredPopover detail (handled in TSX,
+ * not inline). The rail must NOT expand to 240px at this breakpoint.
+ */
+@media (min-width: 1200px) and (max-width: 1535px) {
+  .pi-ps-insight-rail:hover,
+  .pi-ps-insight-rail:focus-within,
+  .pi-ps-insight-rail[data-rail-locked='true'] {
+    width: 120px;
+  }
+
+  .pi-ps-insight-rail[data-rail-detail-open='true'] {
+    width: 120px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1085,6 +1117,40 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-panel-close:focus-visible {
   outline: 2px solid #2a7c4f;
   outline-offset: 1px;
+}
+
+/*
+ * ─── Stacked mode: left-side drawer style for the popover ────────
+ *
+ * PA-approved: at <=1199px the AnchoredPopover is restyled as a
+ * left-side drawer anchored to the rail handle. It may overlay gray
+ * matte/desk but avoids covering white paper body.
+ */
+@media (max-width: 1199px) {
+  .pi-ps-insight-panel {
+    left: 40px !important;
+    top: 48px !important;
+    bottom: 0;
+    max-height: calc(100vh - 48px);
+    width: 220px;
+    min-width: 200px;
+    max-width: 240px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.10);
+  }
+}
+
+/*
+ * ─── Medium desktop 1200-1535px: left-side popover ───────────────
+ *
+ * PA-approved: at 1200-1535px the AnchoredPopover opens to the
+ * right of the rail. Must NOT cover white paper body text. The
+ * popover is narrower (320px max) and positioned left-side.
+ */
+@media (min-width: 1200px) and (max-width: 1535px) {
+  .pi-ps-insight-panel {
+    max-width: 320px;
+  }
 }
 
 /* ─── Insight panel body (loads / outline / chunks) ──────────── */
