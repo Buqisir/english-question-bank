@@ -19,6 +19,23 @@ This repo builds the local-first English question bank workbench.
 - V0 is local-first, single-user, no login, no cloud sync.
 - Open Design is for visual prototyping only. Production code belongs under `app/`.
 
+## Project Steering
+
+- For product, UI, PM, PA, CR, QA, RM, or DEV-prompt work, read
+  `.kiro/steering/README.md` and the relevant steering note before
+  giving advice or assigning implementation.
+- Product-scope discipline is mandatory. Before adding or preserving
+  visible AI-derived information, ask which teacher task it serves.
+  Do not accept "we have the data" as a reason to show the data.
+- Push back directly when a feature risks turning a focused teacher
+  workbench into an AI dashboard. A useful feature may still belong in
+  a different workflow, backlog, or future cut.
+- For PaperSurface specifically, insight should default to a short
+  passage map. Dense diagnostics such as vocabulary load, grammar load,
+  evidence difficulty, dot/bar systems, long key-chunk lists, or AI
+  difficulty dashboards need a separate task justification and usually
+  belong outside the A4 paper page.
+
 ## Super Teacher Boundary
 
 For teaching-domain decisions, preserve the Super Teacher judgment layer:
