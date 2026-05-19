@@ -59,15 +59,37 @@
  *   - No flip of the default PI route.
  *
  * What C4 ADDS to the harness (host-only, PaperSurface stays dumb):
+ *   - A compact left insight rail (`.pi-ps-insight-rail`) sits
+ *     `position: absolute` inside `.pi-ps-harness-shell` (so the
+ *     existing `1fr 858px 380px 1fr` 4-column grid stays unchanged
+ *     and no new grid track is introduced). Replaces the prior
+ *     top horizontal `.pi-ps-insight-chip-strip` after PR #52 PA
+ *     review (rejected the top strip; required a left rail + warm
+ *     full-bleed right analysis).
+ *   - The rail collapses to 48px in the outer-left desk gutter and
+ *     expands to 220px on `:hover`, `:focus-within`, the toggle
+ *     button's `[data-rail-locked]`, or the popover's
+ *     `[data-rail-popover-open]` — entirely CSS-owned animation.
  *   - One insight chip per `report.passages[*].paperSection` rendered
- *     in a strip at the top of `.pi-ps-harness-left` (above the
- *     PaperSurface, inside the left column's visual territory).
+ *     either inside the rail (desktop) or inside a topbar
+ *     `.pi-ps-insight-topbar-row` (stacked, ≤1199px). The chip is
+ *     never double-rendered: `isStackedMode` is the single switch
+ *     and is driven by `matchMedia('(max-width: 1199px)')`.
+ *   - The right analysis aside paints a warm cream full-bleed
+ *     background via `.pi-ps-harness-right::before` reaching to the
+ *     viewport's right edge while the actual analysis text stays
+ *     inside `.pi-ps-harness-right-inner` at `max-width: 400px`.
  *   - `activeInsightSection: string | null` state, max one open at a
  *     time.
+ *   - `railLocked: boolean` state, toggled by the rail's leading
+ *     button (a real `<button>` with `aria-expanded` / `aria-controls`).
  *   - Clicking a chip aligns the matching `[data-paper-section]`
  *     PaperSurface section root into the left scroller (this is the
  *     only DOM read against PaperSurface and it uses the existing
- *     section anchor — no new `data-paper-*` is introduced).
+ *     section anchor — no new `data-paper-*` is introduced). Because
+ *     the rail lives outside `.pi-ps-harness-left`, scrolling a
+ *     section into view never moves the chip out of the viewport,
+ *     so the popover anchor stays onscreen.
  *   - The active chip mounts an `<AnchoredPopover>` (reused unchanged
  *     from `preview/AnchoredPopover.tsx`) whose body is the harness-
  *     local `<HarnessInsightPanelContent />`. Popover config matches
@@ -76,9 +98,12 @@
  *     `closeOnOutsidePointerDown` (clicking the passage body or the
  *     right Question Analysis is meaningful teacher input and must
  *     not dismiss the panel).
- *   - `request-lecture-focus` clears `activeInsightSection` (matches
- *     default PI behavior — selecting a question card closes the
- *     insight popover).
+ *   - `request-lecture-focus` clears `activeInsightSection` AND
+ *     `railLocked` (matches default PI's "selecting a question card
+ *     closes the insight popover"; the rail compacts back too).
+ *   - matchMedia breakpoint changes clear `activeInsightSection` AND
+ *     `railLocked` so the popover anchor cannot resolve to a node
+ *     about to unmount.
  *   - Right-panel evidence/distractor click does NOT clear
  *     `activeInsightSection`.
  *   - PaperSurface is unchanged. The harness does not import any
@@ -94,6 +119,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type KeyboardEvent,
   type ReactNode,
   type RefObject,
 } from 'react'
@@ -161,6 +187,41 @@ export function PaperIntelligencePaperSurfaceHarness({
    * (insight + evidence are independent teacher views).
    */
   const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
+
+  /**
+   * C4 PR #52 PA must-fix: left insight rail expansion lock.
+   *
+   * The rail is normally collapsed (48px). Hovering or moving focus
+   * into the rail soft-expands it via CSS (`:hover` /
+   * `:focus-within`). A teacher who wants the rail pinned can click
+   * the leading toggle button, which sets `railLocked = true` and
+   * the harness paints `data-rail-locked="true"` on the aside so the
+   * CSS keeps it expanded without hover / focus.
+   *
+   * Esc inside the rail clears the lock and any active popover.
+   * `request-lecture-focus` (selecting a question card) also clears
+   * the lock so picking a question compacts the rail back.
+   * matchMedia breakpoint changes clear the lock too — the rail is
+   * gone in stacked mode and the lock should not re-engage when the
+   * teacher resizes back to desktop.
+   */
+  const [railLocked, setRailLocked] = useState<boolean>(false)
+
+  /**
+   * C4 PR #52 PA must-fix: stacked-mode detection for rail vs
+   * topbar chip-row conditional rendering.
+   *
+   * Q1 decision (PA-approved): `matchMedia` + state conditional
+   * render. Chips are NEVER double-rendered — exactly one
+   * `<button data-pi-insight-chip="...">` exists in the DOM at a
+   * time, so the popover's anchorRef cannot resolve to the wrong
+   * element on breakpoint cross.
+   *
+   * SSR seed is `false` so the desktop tree is the default; the
+   * mount effect below syncs to the real `matchMedia` value and
+   * subscribes to changes.
+   */
+  const [isStackedMode, setIsStackedMode] = useState<boolean>(false)
 
   // Refs for the cross-column line geometry (C3).
   const shellRef = useRef<HTMLDivElement | null>(null)
@@ -266,6 +327,43 @@ export function PaperIntelligencePaperSurfaceHarness({
     }
   }, [paperId])
 
+  // ─── C4 PR #52: stacked-mode detection ───
+  //
+  // Listen to `matchMedia('(max-width: 1199px)')` and toggle
+  // `isStackedMode` so the renderer can conditionally render either
+  // the desktop left rail or the topbar chip row, never both.
+  //
+  // Q1 PA-approved invariant: when the breakpoint crosses we close
+  // any open insight popover and clear the rail lock. The active
+  // chip's anchor ref points at a DOM node that is about to
+  // disappear (the desktop rail unmounts when entering stacked, and
+  // the topbar row unmounts when leaving stacked); without this
+  // clear, AnchoredPopover would keep its stale ref and paint at a
+  // ghost position until the teacher clicks somewhere else.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (typeof window.matchMedia !== 'function') return
+    const mql = window.matchMedia('(max-width: 1199px)')
+    // Sync once for the SSR-vs-client mismatch on first paint.
+    setIsStackedMode(mql.matches)
+    const onChange = (e: MediaQueryListEvent): void => {
+      setIsStackedMode(e.matches)
+      setActiveInsightSection(null)
+      setRailLocked(false)
+    }
+    if (typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', onChange)
+      return (): void => {
+        mql.removeEventListener('change', onChange)
+      }
+    }
+    // Older Safari / pre-2019 fallback.
+    mql.addListener(onChange)
+    return (): void => {
+      mql.removeListener(onChange)
+    }
+  }, [])
+
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (!report) return null
@@ -346,6 +444,12 @@ export function PaperIntelligencePaperSurfaceHarness({
       // PaperIntelligencePreview, where `setActiveInsightSection(null)`
       // runs on every question selection.
       setActiveInsightSection(null)
+      // C4 PR #52: also collapse the rail back to compact so the
+      // teacher's eye returns to the question card without a stale
+      // expanded rail competing for attention. The lock is a teacher
+      // intent ("pin the rail"), and starting question discussion
+      // implicitly cancels that intent.
+      setRailLocked(false)
       setActiveQuestionId((prev) =>
         prev === intent.questionId ? null : intent.questionId,
       )
@@ -367,6 +471,28 @@ export function PaperIntelligencePaperSurfaceHarness({
   const handleCloseInsight = useCallback((): void => {
     setActiveInsightSection(null)
   }, [])
+
+  // ─── C4 PR #52 rail toggle + Esc handlers ───
+  const handleToggleRailLock = useCallback((): void => {
+    setRailLocked((prev) => !prev)
+  }, [])
+
+  const handleRailKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLElement>): void => {
+      if (e.key !== 'Escape') return
+      // PA must-fix: Esc inside rail collapses it and closes any
+      // open insight popover. We also blur the active focus target
+      // so :focus-within releases — otherwise the rail would stay
+      // expanded purely on focus state until the teacher Tabs out.
+      setRailLocked(false)
+      setActiveInsightSection(null)
+      const target = e.target as HTMLElement | null
+      if (target && typeof target.blur === 'function') {
+        target.blur()
+      }
+    },
+    [],
+  )
 
   // ─── Right-side evidence click handler (C3) ───
   //
@@ -459,6 +585,46 @@ export function PaperIntelligencePaperSurfaceHarness({
     ? getChipRef(activeInsightSection)
     : null
 
+  /**
+   * Render a single insight chip. Used in both the desktop left
+   * rail (`.pi-ps-insight-rail`) and the stacked-mode topbar row
+   * (`.pi-ps-insight-topbar-row`).
+   *
+   * Q1 PA-approved invariant: at most one of those two surfaces is
+   * mounted at a time (gated by `isStackedMode`), so this function
+   * is called from exactly one render path per breakpoint. Two
+   * `data-pi-insight-chip` nodes for the same section never coexist
+   * in the DOM, and the single `chipRefMap` ref always points at
+   * the live element.
+   */
+  const renderInsightChip = (p: PassageReport): ReactNode => {
+    const isOpen = activeInsightSection === p.paperSection
+    const chipLabel = buildInsightChipLabel(p)
+    const visibleText = isOpen ? '收起洞察' : chipLabel
+    return (
+      <button
+        key={p.paperSection}
+        ref={getChipRef(p.paperSection) as RefObject<HTMLButtonElement>}
+        type="button"
+        className={
+          isOpen
+            ? 'pi-ps-insight-chip pi-ps-insight-chip--open'
+            : 'pi-ps-insight-chip'
+        }
+        onClick={() => handleToggleInsight(p.paperSection)}
+        aria-expanded={isOpen}
+        aria-controls={`pi-ps-insight-panel-${p.paperSection}`}
+        aria-label={isOpen ? '收起洞察' : chipLabel}
+        data-pi-insight-chip={p.paperSection}
+      >
+        <span className="pi-ps-insight-chip-section" aria-hidden="true">
+          {p.paperSection}
+        </span>
+        <span className="pi-ps-insight-chip-text">{visibleText}</span>
+      </button>
+    )
+  }
+
   if (loading) {
     return (
       <div className="pi-ps-harness">
@@ -495,6 +661,29 @@ export function PaperIntelligencePaperSurfaceHarness({
         <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
           <span aria-hidden="true">←</span> 返回工作台
         </button>
+        {/*
+          C4 PR #52 PA must-fix — stacked-mode insight entry.
+
+          When `isStackedMode` is true (matchMedia
+          `(max-width: 1199px)`) the desktop left rail is unmounted
+          and the insight chips render here instead, between the
+          back button and the tagline. The popover anchor still
+          flows through the shared `chipRefMap`, so AnchoredPopover's
+          anchorRef points at the topbar chip on stacked widths.
+
+          Q1 PA-approved invariant: chips are NEVER double-rendered.
+          Either this row OR the desktop rail is mounted at any
+          given moment.
+        */}
+        {isStackedMode && (
+          <div
+            className="pi-ps-insight-topbar-row"
+            role="toolbar"
+            aria-label="篇章洞察"
+          >
+            {report.passages.map(renderInsightChip)}
+          </div>
+        )}
         <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
       </div>
       <div
@@ -502,62 +691,71 @@ export function PaperIntelligencePaperSurfaceHarness({
         ref={shellRef}
         data-pi-active-evidence-kind={activeEvidenceKind ?? undefined}
       >
-        <div className="pi-ps-harness-left" ref={leftScrollerRef}>
-          {/*
-            C4: Insight chip strip.
+        {/*
+          C4 PR #52 PA must-fix — desktop left insight rail.
 
-            One `<button>` per `report.passages[*].paperSection`. The
-            strip lives inside `.pi-ps-harness-left` (the same column
-            that holds PaperSurface) so chips read as belonging to
-            the paper, not the topbar or right panel. Clicking a chip
-            uses the existing `[data-paper-section]` PaperSurface
-            anchor to scroll the corresponding section into view —
-            the only DOM read against PaperSurface in the whole C4
-            cut, and it goes through the existing neutral attribute
-            (no new `data-paper-*` introduced).
+          Replaces the prior top horizontal `.pi-ps-insight-chip-strip`
+          that lived inside `.pi-ps-harness-left`. The new rail:
 
-            Each chip is a real `<button>` with:
-              - `aria-expanded` reflecting popover state,
-              - `aria-controls` referencing the popover id,
-              - a readable `aria-label` (chip text or "收起洞察"),
-              - host-owned `data-pi-insight-chip="<section>"` so smoke
-                selectors and the static verify can find it.
-            PaperSurface is never told about chips, popovers, or
-            insight state.
-          */}
-          <div
-            className="pi-ps-insight-chip-strip"
-            role="toolbar"
+            - is `position: absolute; left:0; top:0; bottom:0` inside
+              `.pi-ps-harness-shell` (which is already
+              `position: relative`), so it does NOT consume a 5th
+              grid column and the existing `1fr 858px 380px 1fr` shell
+              is unchanged;
+            - lives in the harness layer, NOT inside PaperSurface
+              (PaperSurface.tsx / PaperSurface.css are forbidden in
+              C4 and untouched);
+            - collapses to 48px in the outer-left desk gutter;
+            - expands to 220px (max 240px) on `:hover`, `:focus-within`,
+              the toggle's `[data-rail-locked="true"]`, or the
+              popover's `[data-rail-popover-open="true"]`. CSS owns
+              the visual transition (160ms ease-out, respects
+              `prefers-reduced-motion`).
+            - Esc inside the rail clears the lock, closes any open
+              popover, and blurs focus so `:focus-within` releases.
+
+          Conditional render: only mounts on desktop (`!isStackedMode`).
+          On stacked widths the topbar `.pi-ps-insight-topbar-row`
+          above takes over. Chips are NEVER double-mounted.
+        */}
+        {!isStackedMode && (
+          <aside
+            className="pi-ps-insight-rail"
             aria-label="篇章洞察"
+            data-rail-locked={railLocked ? 'true' : undefined}
+            data-rail-popover-open={
+              activeInsightSection ? 'true' : undefined
+            }
+            onKeyDown={handleRailKeyDown}
           >
-            {report.passages.map((p) => {
-              const isOpen = activeInsightSection === p.paperSection
-              const chipLabel = buildInsightChipLabel(p)
-              const visibleText = isOpen ? '收起洞察' : chipLabel
-              return (
-                <button
-                  key={p.paperSection}
-                  ref={getChipRef(p.paperSection) as RefObject<HTMLButtonElement>}
-                  type="button"
-                  className={
-                    isOpen
-                      ? 'pi-ps-insight-chip pi-ps-insight-chip--open'
-                      : 'pi-ps-insight-chip'
-                  }
-                  onClick={() => handleToggleInsight(p.paperSection)}
-                  aria-expanded={isOpen}
-                  aria-controls={`pi-ps-insight-panel-${p.paperSection}`}
-                  aria-label={isOpen ? '收起洞察' : chipLabel}
-                  data-pi-insight-chip={p.paperSection}
-                >
-                  <span className="pi-ps-insight-chip-section" aria-hidden="true">
-                    {p.paperSection}
-                  </span>
-                  <span className="pi-ps-insight-chip-text">{visibleText}</span>
-                </button>
-              )
-            })}
-          </div>
+            <button
+              type="button"
+              className="pi-ps-insight-rail-toggle"
+              onClick={handleToggleRailLock}
+              aria-expanded={railLocked}
+              aria-controls="pi-ps-insight-rail-list"
+              aria-label={railLocked ? '收起洞察栏' : '展开洞察栏'}
+            >
+              <span
+                className="pi-ps-insight-rail-toggle-icon"
+                aria-hidden="true"
+              >
+                {railLocked ? '×' : '≡'}
+              </span>
+              <span className="pi-ps-insight-chip-text">
+                {railLocked ? '收起' : '洞察'}
+              </span>
+            </button>
+            <div
+              className="pi-ps-insight-rail-list"
+              id="pi-ps-insight-rail-list"
+              role="group"
+            >
+              {report.passages.map(renderInsightChip)}
+            </div>
+          </aside>
+        )}
+        <div className="pi-ps-harness-left" ref={leftScrollerRef}>
           <PaperSurface
             textMap={surfaceData.textMap}
             annotations={[]}
@@ -575,11 +773,24 @@ export function PaperIntelligencePaperSurfaceHarness({
           aria-live="polite"
           ref={rightPanelRef}
         >
-          <AnalysisPanel
-            analysis={analysisView}
-            activeEvidenceId={activeEvidenceId}
-            onSelectEvidence={handleSelectEvidence}
-          />
+          {/*
+            C4 PR #52 PA must-fix — readable analysis content.
+
+            The aside paints its warm full-bleed background via the
+            `::before` pseudo-element (extending to the viewport's
+            right edge with `right: calc(50% - 50vw)`); the actual
+            text content stays inside this inner wrapper at
+            `max-width: 400px` with a soft warm hairline on the
+            content's left edge so the panel reads as a notebook
+            page, not an edge-to-edge stripe.
+          */}
+          <div className="pi-ps-harness-right-inner">
+            <AnalysisPanel
+              analysis={analysisView}
+              activeEvidenceId={activeEvidenceId}
+              onSelectEvidence={handleSelectEvidence}
+            />
+          </div>
         </aside>
         {/*
           Cross-column dotted evidence line (C3).

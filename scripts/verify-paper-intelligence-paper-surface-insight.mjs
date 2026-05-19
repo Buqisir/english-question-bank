@@ -4,6 +4,11 @@
  *
  * Issue #21-C4 PaperSurface Insight Parity — static verify script.
  *
+ * Updated for PR #52 PA must-fix (replaces top horizontal sticky
+ * chip strip with a left insight rail and a warm full-bleed right
+ * analysis surface; see
+ * `docs/product/mockups/paper-surface-c4-insight-layout/`).
+ *
  * What this script asserts (in order):
  *
  *   1. PaperSurface boundary — PaperSurface.tsx, PaperSurface.css, and
@@ -18,6 +23,18 @@
  *      `mode="lecture"`, and renders chips that carry
  *      `data-pi-insight-chip` but no `data-paper-*`.
  *
+ *      Plus PR #52 PA must-fix:
+ *        - 2h: rail toggle is a real <button> with aria-expanded /
+ *          aria-controls / aria-label. Rail aside emits
+ *          `data-rail-locked` and `data-rail-popover-open`. Esc
+ *          inside the rail clears the lock and the popover.
+ *        - 2i: matchMedia('(max-width: 1199px)') + isStackedMode
+ *          state conditionally renders desktop rail XOR topbar chip
+ *          row (Q1 invariant: chips never double-rendered). The
+ *          change handler clears activeInsightSection AND railLocked
+ *          so the popover anchor cannot resolve to an unmounting
+ *          node on breakpoint cross.
+ *
  *   3. AnchoredPopover file is unchanged.
  *
  *   4. Insight modules are presentational / pure — no fetch, no
@@ -29,9 +46,25 @@
  *      preview/paperIntelligenceEvidenceLine*, evidence/**, adapter/**,
  *      paperIntelligenceRoute.ts, App.tsx.
  *
- *   6. Harness CSS still has its 4-column grid, 24px column-gap, 1199px
- *      stacked fallback, pi-line-overlay rule, and C3.6 support/trap
- *      palette rules.
+ *   6. Harness CSS:
+ *        - 6a: 4-column grid, 24px column-gap, 1199px stacked
+ *          fallback, pi-line-overlay rule, C3.6 support/trap palette
+ *          rules, chip + popover existence, popover z-index above
+ *          line.
+ *        - 6b: PR #52 PA must-fix — left rail rule exists, is left-
+ *          pinned, collapsed 48px, expanded 220-240px on :hover and
+ *          :focus-within, z-index ordered between line and popover,
+ *          and the legacy `.pi-ps-insight-chip-strip` is gone from
+ *          BOTH the CSS rules AND the TSX className references.
+ *        - 6c: PR #52 PA must-fix — right-panel ::before bleed
+ *          reaches viewport edge via `50vw` / `calc(...)`, content
+ *          inner wrapper max-width is 380-420px, the right-panel
+ *          inner wrapper is rendered by TSX, warm cream tokens
+ *          (#f7f4ee / #f6f3ec) are declared, and stacked mode
+ *          disables both the bleed and the rail.
+ *        - 6d: PR #52 PA must-fix — rail/chip palette discipline.
+ *          No support green, no trap amber, no red, no bright blue,
+ *          no brand purple, no gradient inside rail / chip rules.
  *
  *   7. Forbidden scopes untouched — server/, package files / lockfiles,
  *      reading-analysis/, basket / paperAssembly, App.tsx, route parser.
@@ -416,6 +449,162 @@ assert(
   "harness still hardcodes `mode=\"lecture\"` on PaperSurface (no reading-mode flip in C4)",
 )
 
+/*
+ * 2h. PR #52 PA must-fix — left rail wiring.
+ *
+ * The rail's leading toggle button must be a real <button> with
+ * aria-expanded / aria-controls / aria-label. Each chip's a11y
+ * plumbing is asserted in 2f above; this block focuses on the
+ * NEW toggle that drives the lock state.
+ */
+console.log('\n=== 2h. PR #52 PA must-fix — rail wiring ===')
+
+assert(
+  /className\s*=\s*['"]pi-ps-insight-rail-toggle['"]/.test(harnessNoComments),
+  "harness renders a `.pi-ps-insight-rail-toggle` element",
+)
+{
+  // Extract the rail toggle <button> opening tag with the same
+  // brace-balanced walk used for the chip in 2f.
+  function extractRailToggleTag(src) {
+    const attrIdx = src.indexOf('pi-ps-insight-rail-toggle')
+    if (attrIdx < 0) return null
+    const buttonStart = src.lastIndexOf('<button', attrIdx)
+    if (buttonStart < 0) return null
+    let i = attrIdx
+    let depth = 0
+    while (i < src.length) {
+      const ch = src[i]
+      if (ch === '{') depth++
+      else if (ch === '}') depth = Math.max(0, depth - 1)
+      else if (ch === '>' && depth === 0) {
+        return src.slice(buttonStart, i + 1)
+      }
+      i++
+    }
+    return null
+  }
+  const toggleTag = extractRailToggleTag(harnessNoComments)
+  assert(
+    toggleTag !== null && /^<button\b/.test(toggleTag),
+    "rail toggle is a real `<button>` (not a div / role hack)",
+  )
+  const tag = toggleTag || ''
+  assert(
+    /\baria-expanded\s*=\s*\{/.test(tag),
+    "rail toggle has aria-expanded",
+  )
+  assert(
+    /\baria-controls\s*=\s*['"][^'"]+['"]/.test(tag),
+    "rail toggle has aria-controls (references the rail list region)",
+  )
+  assert(
+    /\baria-label\s*=\s*\{/.test(tag),
+    "rail toggle has an aria-label",
+  )
+}
+
+// 2h-bis. The rail aside carries the lock + popover-open hooks the
+// CSS reads to keep the rail expanded across hover / focus loss.
+assert(
+  /data-rail-locked\s*=\s*\{/.test(harnessNoComments),
+  "rail aside emits `data-rail-locked` so CSS can keep the rail expanded after toggle click",
+)
+assert(
+  /data-rail-popover-open\s*=\s*\{/.test(harnessNoComments),
+  "rail aside emits `data-rail-popover-open` so the rail stays expanded while the popover is open (PA must-fix)",
+)
+
+// 2h-ter. Esc inside the rail clears the lock and closes the popover.
+{
+  const onKeyDownMatch = harnessNoComments.match(
+    /handleRailKeyDown\s*=\s*useCallback\s*\(\s*\([\s\S]*?\)[^{]*\{([\s\S]*?)\}\s*,\s*\[/,
+  )
+  const body = onKeyDownMatch ? onKeyDownMatch[1] : ''
+  assert(
+    /e\.key\s*(?:===|!==)\s*['"]Escape['"]/.test(body),
+    "handleRailKeyDown handles the Escape key",
+  )
+  assert(
+    /setRailLocked\s*\(\s*false\s*\)/.test(body),
+    "handleRailKeyDown clears the rail lock on Escape",
+  )
+  assert(
+    /setActiveInsightSection\s*\(\s*null\s*\)/.test(body),
+    "handleRailKeyDown closes the open insight popover on Escape",
+  )
+}
+
+/*
+ * 2i. PR #52 PA must-fix — Q1 invariant: chips never double-rendered.
+ *
+ * The harness uses `matchMedia('(max-width: 1199px)')` + state to
+ * conditionally render either the desktop rail OR the topbar chip
+ * row, never both. The change handler clears `activeInsightSection`
+ * AND `railLocked` so AnchoredPopover's anchorRef cannot resolve to
+ * a node that's about to unmount across a breakpoint cross.
+ */
+console.log('\n=== 2i. PR #52 PA must-fix — matchMedia stacked switch ===')
+
+assert(
+  /matchMedia\s*\(\s*['"]\s*\(\s*max-width\s*:\s*1199px\s*\)\s*['"]/.test(
+    harnessSrc,
+  ),
+  "harness wires matchMedia(`(max-width: 1199px)`) for stacked-mode detection",
+)
+assert(
+  /\b(?:setIsStackedMode|isStackedMode)\b/.test(harnessSrc),
+  "harness owns an `isStackedMode` state used to switch rail vs topbar chip row",
+)
+
+// matchMedia onChange handler clears the popover and the rail lock.
+{
+  /*
+   * Find the matchMedia effect block. We accept either of two
+   * shapes the harness might use:
+   *   1. A named handler (`onChange`) inside the effect.
+   *   2. An inline arrow listener passed to addEventListener.
+   * Both must call `setActiveInsightSection(null)` and
+   * `setRailLocked(false)` somewhere in the effect body so the
+   * popover / lock are cleared on breakpoint cross.
+   */
+  const mqlEffectMatch = harnessNoComments.match(
+    /matchMedia\s*\([\s\S]*?addEventListener[\s\S]*?\}/,
+  )
+  const effectBody = mqlEffectMatch ? mqlEffectMatch[0] : ''
+  // Fall back to a wider search if the regex didn't catch it.
+  const haystack =
+    /setActiveInsightSection\s*\(\s*null\s*\)/.test(effectBody) &&
+    /setRailLocked\s*\(\s*false\s*\)/.test(effectBody)
+      ? effectBody
+      : harnessNoComments
+
+  assert(
+    /matchMedia[\s\S]{0,2000}?setActiveInsightSection\s*\(\s*null\s*\)/.test(
+      haystack,
+    ),
+    "matchMedia change handler clears activeInsightSection (Q1 invariant: avoid stale popover anchor on breakpoint cross)",
+  )
+  assert(
+    /matchMedia[\s\S]{0,2000}?setRailLocked\s*\(\s*false\s*\)/.test(haystack),
+    "matchMedia change handler clears railLocked (Q1 invariant: rail lock does not survive breakpoint cross)",
+  )
+}
+
+// 2i-bis. Topbar chip row exists and is gated on stacked mode.
+assert(
+  /pi-ps-insight-topbar-row/.test(harnessSrc),
+  "harness renders a `.pi-ps-insight-topbar-row` for stacked-mode insight entry",
+)
+assert(
+  /isStackedMode\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(harnessSrc),
+  "topbar chip row is conditionally rendered behind `isStackedMode &&` (no double-DOM with the desktop rail)",
+)
+assert(
+  /!\s*isStackedMode\s*&&\s*\([\s\S]*?pi-ps-insight-rail\b/.test(harnessSrc),
+  "desktop left rail is conditionally rendered behind `!isStackedMode &&` (no double-DOM with the topbar row)",
+)
+
 /* ─── 3. AnchoredPopover unchanged ───────────────────────────────── */
 
 console.log('\n=== 3. AnchoredPopover unchanged ===')
@@ -540,6 +729,47 @@ console.log('\n=== 6. Harness CSS preserved ===')
 const harnessCss = readFile(HARNESS_CSS_PATH)
 const harnessCssNoComments = stripComments(harnessCss)
 
+/*
+ * Several PR #52 PA must-fix rules also have stacked-mode overrides
+ * inside `@media (max-width: 1199px) { ... }` blocks. The override
+ * for `.pi-ps-insight-rail` literally is `{ display: none }`, and
+ * it appears earlier in the file than the desktop rule — so a naive
+ * `\.pi-ps-insight-rail\s*\{([\s\S]*?)\}` regex captures the
+ * override's body and fails the assertions about `position`,
+ * `left`, `width`, `z-index`, etc.
+ *
+ * `harnessCssDesktopOnly` is the source with every
+ * `@media (...)` block (and its body) removed via brace-balanced
+ * walk. All "desktop rule body" extractions below run against this
+ * stripped string. The original `harnessCssNoComments` stays
+ * available for the stacked-mode assertions (which use
+ * `extractAllStackedBodies` further down).
+ */
+function stripAllMediaBlocks(src) {
+  let out = ''
+  let cursor = 0
+  while (cursor < src.length) {
+    const at = src.indexOf('@media', cursor)
+    if (at < 0) {
+      out += src.slice(cursor)
+      break
+    }
+    out += src.slice(cursor, at)
+    const open = src.indexOf('{', at)
+    if (open < 0) break
+    let depth = 1
+    let i = open + 1
+    while (i < src.length && depth > 0) {
+      if (src[i] === '{') depth++
+      else if (src[i] === '}') depth--
+      i++
+    }
+    cursor = i
+  }
+  return out
+}
+const harnessCssDesktopOnly = stripAllMediaBlocks(harnessCssNoComments)
+
 assert(
   /grid-template-columns:\s*[\s\S]*?minmax\(\s*0\s*,\s*1fr\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*858px\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*380px\s*\)\s*[\s\S]*?minmax\(\s*0\s*,\s*1fr\s*\)/.test(
     harnessCssNoComments,
@@ -595,64 +825,333 @@ const panelBody = panelMatch ? panelMatch[1] : ''
 }
 
 /*
- * C4 browser-QA Must Fix (PR #52) — chip strip stays visible during
- * section scrolling.
+ * C4 PR #52 PA must-fix — left insight rail (replaces top strip).
  *
- * Symptom (observed on surface=paper): clicking an insight chip
- * triggered `[data-paper-section]` scrollIntoView inside
- * `.pi-ps-harness-left`, which moved the chip strip itself out of the
- * scroller viewport. AnchoredPopover stayed anchored to the now-
- * offscreen chip and the popover rendered offscreen too.
+ * The sticky horizontal `.pi-ps-insight-chip-strip` was rejected by
+ * PA review for PR #52: it competed with the paper reading area and
+ * the right side still read as cool admin off-white. The fix moved
+ * insight to a compact left rail living `position: absolute` inside
+ * `.pi-ps-harness-shell`, with the right panel painting a warm
+ * full-bleed background to the viewport edge.
  *
- * Static fix: `.pi-ps-insight-chip-strip` is `position: sticky;
- * top: 0` (or otherwise pinned). Stacking ordering is asserted
- * strictly here so a future regression that bumps the popover or
- * line-overlay z-index without realigning the strip fails this
- * script.
+ * Asserts (in order):
+ *
+ *   1. The rail rule exists and is left-pinned (absolute / fixed,
+ *      `left: 0`).
+ *   2. Collapsed width is 48px.
+ *   3. Expanded width is 220px (max 240px), via `:hover`,
+ *      `:focus-within`, and a locked-state hook the rail toggle
+ *      can drive.
+ *   4. Rail z-index ordering: rail sits below the popover, above
+ *      the line overlay (popover always paints above; line draws
+ *      under the rail).
+ *   5. Top sticky horizontal chip strip is GONE — neither the CSS
+ *      rule nor the TSX className remain in the harness.
+ *   6. Right analysis aside paints a `::before` full-bleed reaching
+ *      the viewport edge with `50vw` / `calc(...)`. Stacked mode
+ *      disables the bleed.
+ *   7. Right analysis content stays readable (`.pi-ps-harness-right-inner`
+ *      max-width 380-420px).
+ *   8. Stacked fallback hides the absolute rail (`display: none`)
+ *      so the topbar chip row owns insight entry without competing
+ *      DOM.
+ *   9. Rail / chip palette discipline: no support green, no trap
+ *      amber, no red, no bright blue, no brand purple, no gradient
+ *      anywhere inside rail / chip-scoped rules. Reserved palettes
+ *      stay reserved for evidence semantics.
  */
+
+console.log('\n=== 6b. PR #52 PA must-fix — left rail ===')
+
+// 6b.1 Rail rule exists and is left-pinned.
+const railMatch = harnessCssDesktopOnly.match(
+  /\.pi-ps-insight-rail\s*\{([\s\S]*?)\}/,
+)
+assert(!!railMatch, ".pi-ps-insight-rail rule exists in harness CSS")
+const railBody = railMatch ? railMatch[1] : ''
+assert(
+  /\bposition\s*:\s*(?:absolute|fixed|sticky)\b/.test(railBody),
+  ".pi-ps-insight-rail uses absolute / fixed / sticky positioning (left-pinned, not in flow)",
+)
+assert(
+  /\bleft\s*:\s*0(?:px|\.0+)?\b/.test(railBody),
+  ".pi-ps-insight-rail anchors to the left edge (left: 0)",
+)
+
+// 6b.2 Collapsed width is 48px.
+assert(
+  /\bwidth\s*:\s*48px\b/.test(railBody),
+  ".pi-ps-insight-rail collapsed width is 48px",
+)
+
+// 6b.3 Expanded width 220-240px via :hover AND :focus-within.
+assert(
+  /\.pi-ps-insight-rail:hover\b/.test(harnessCssNoComments),
+  ".pi-ps-insight-rail expands on :hover (mouse soft expand)",
+)
+assert(
+  /\.pi-ps-insight-rail:focus-within\b/.test(harnessCssNoComments),
+  ".pi-ps-insight-rail expands on :focus-within (keyboard soft expand)",
+)
 {
-  const stripMatch = harnessCssNoComments.match(
-    /\.pi-ps-insight-chip-strip\s*\{([\s\S]*?)\}/,
-  )
+  // Find the combined :hover / :focus-within / lock selector body
+  // and check the width inside it.
+  const expandedBlockRe =
+    /\.pi-ps-insight-rail:(?:hover|focus-within|\[data-rail-(?:locked|popover-open)='true'\])(?:\s*,\s*\.pi-ps-insight-rail(?::hover|:focus-within|\[data-rail-(?:locked|popover-open)='true'\]))*\s*\{([\s\S]*?)\}/
+  const expandedMatch = harnessCssNoComments.match(expandedBlockRe)
+  const expandedBody = expandedMatch ? expandedMatch[1] : ''
+  const expandedW = (expandedBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
+  const expandedNum = expandedW ? parseInt(expandedW, 10) : NaN
   assert(
-    !!stripMatch,
-    "harness CSS declares the .pi-ps-insight-chip-strip rule",
+    Number.isFinite(expandedNum) && expandedNum >= 220 && expandedNum <= 240,
+    `.pi-ps-insight-rail expanded width is 220-240px (got ${expandedW ?? 'missing'}px)`,
   )
-  const stripBody = stripMatch ? stripMatch[1] : ''
-  const isSticky = /position\s*:\s*sticky\b/.test(stripBody)
-  const isFixed = /position\s*:\s*fixed\b/.test(stripBody)
-  assert(
-    isSticky || isFixed,
-    ".pi-ps-insight-chip-strip is pinned (position: sticky or fixed) so the chip stays visible during left-scroller section jumps (PR #52 Must Fix)",
-  )
-  if (isSticky) {
-    assert(
-      /\btop\s*:\s*0(?:px|\.0+)?\b/.test(stripBody),
-      ".pi-ps-insight-chip-strip has top: 0 (sticky pin engages at the scroller's top edge)",
-    )
-  }
-  const stripZ = (stripBody.match(/z-index:\s*(\d+)/) || [])[1]
-  assert(
-    !!stripZ,
-    `.pi-ps-insight-chip-strip declares an explicit z-index (got ${stripZ ?? 'missing'})`,
-  )
+}
+
+// 6b.4 Rail z-index ordering.
+const railZ = (railBody.match(/z-index:\s*(\d+)/) || [])[1]
+assert(
+  !!railZ,
+  `.pi-ps-insight-rail declares an explicit z-index (got ${railZ ?? 'missing'})`,
+)
+{
   const panelZ = (panelBody.match(/z-index:\s*(\d+)/) || [])[1]
   assert(
-    !!stripZ && !!panelZ && parseInt(stripZ, 10) < parseInt(panelZ, 10),
-    `.pi-ps-insight-chip-strip z-index (${stripZ ?? 'missing'}) is strictly below .pi-ps-insight-panel z-index (${panelZ ?? 'missing'}) so the popover always paints above its sticky anchor`,
+    !!railZ &&
+      !!panelZ &&
+      parseInt(railZ, 10) < parseInt(panelZ, 10),
+    `.pi-ps-insight-rail z-index (${railZ ?? 'missing'}) sits strictly below .pi-ps-insight-panel z-index (${panelZ ?? 'missing'})`,
   )
-  // Compatible with the line overlay (z-index 5): the strip sits
-  // above the line so the dotted line draws *under* the sticky
-  // header rather than cutting across it.
   assert(
-    !!stripZ && parseInt(stripZ, 10) > 5,
-    `.pi-ps-insight-chip-strip z-index (${stripZ ?? 'missing'}) sits above .pi-line-overlay (z-index 5) so the cross-column line draws under the sticky chip strip`,
+    !!railZ && parseInt(railZ, 10) > 5,
+    `.pi-ps-insight-rail z-index (${railZ ?? 'missing'}) sits above .pi-line-overlay (z-index 5) so the cross-column line draws under the rail`,
   )
-  // Solid background required so the paper text scrolling under
-  // the strip does not visually smear through.
+}
+
+// 6b.5 No top sticky horizontal chip strip remains.
+assert(
+  !/\.pi-ps-insight-chip-strip\b/.test(harnessCssNoComments),
+  "harness CSS does NOT declare a `.pi-ps-insight-chip-strip` rule (PR #52 PA must-fix: top horizontal strip removed)",
+)
+assert(
+  !/pi-ps-insight-chip-strip/.test(harnessNoComments),
+  "harness TSX does NOT render any `pi-ps-insight-chip-strip` element (PR #52 PA must-fix: top horizontal strip removed)",
+)
+
+console.log('\n=== 6c. PR #52 PA must-fix — right-panel full-bleed ===')
+
+// 6c.1 Right-panel ::before pseudo exists.
+const rightBleedMatch = harnessCssDesktopOnly.match(
+  /\.pi-ps-harness-right::before\s*\{([\s\S]*?)\}/,
+)
+assert(
+  !!rightBleedMatch,
+  ".pi-ps-harness-right::before pseudo-element rule exists (warm full-bleed background)",
+)
+const rightBleedBody = rightBleedMatch ? rightBleedMatch[1] : ''
+
+// 6c.2 Bleed reaches viewport edge via `50vw` / `100vw` / `calc(...)`.
+assert(
+  /50vw\b/.test(rightBleedBody) || /100vw\b/.test(rightBleedBody),
+  "right-panel bleed reaches the viewport edge (uses 50vw / 100vw)",
+)
+assert(
+  /\bcalc\s*\(/.test(rightBleedBody),
+  "right-panel bleed uses `calc(...)` so the painted width adapts to viewport",
+)
+
+// 6c.3 Inner content max-width 380-420px (analysis text stays readable).
+const rightInnerMatch = harnessCssDesktopOnly.match(
+  /\.pi-ps-harness-right-inner\s*\{([\s\S]*?)\}/,
+)
+assert(
+  !!rightInnerMatch,
+  ".pi-ps-harness-right-inner rule exists (constrains analysis content width)",
+)
+{
+  const innerBody = rightInnerMatch ? rightInnerMatch[1] : ''
+  const innerMaxW = (innerBody.match(/\bmax-width\s*:\s*(\d+)px\b/) || [])[1]
+  const innerNum = innerMaxW ? parseInt(innerMaxW, 10) : NaN
   assert(
-    /\bbackground(?:-color)?\s*:/.test(stripBody),
-    ".pi-ps-insight-chip-strip declares a background (matte/desk tone) so paper text doesn't smear through the sticky header",
+    Number.isFinite(innerNum) && innerNum >= 380 && innerNum <= 420,
+    `.pi-ps-harness-right-inner max-width is 380-420px (got ${innerMaxW ?? 'missing'}px)`,
+  )
+}
+
+// 6c.4 Right-panel inner wrapper is rendered by the harness TSX.
+assert(
+  /pi-ps-harness-right-inner/.test(harnessSrc),
+  "harness TSX renders the .pi-ps-harness-right-inner wrapper around AnalysisPanel",
+)
+
+// 6c.5 Bleed uses warm cream / paper tone (not cool SaaS off-white).
+{
+  // Pull the warm cream tokens out of the .pi-ps-harness root rule.
+  // The palette is exposed as CSS custom properties so callers can
+  // see a single source of truth for "the warm tone is X".
+  const rootMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness\s*\{([\s\S]*?)\}/,
+  )
+  const rootBody = rootMatch ? rootMatch[1] : ''
+  assert(
+    /--pi-ps-paper-bleed-start\s*:\s*#f7f4ee\b/i.test(rootBody) ||
+      /--pi-ps-paper-bleed-start\s*:\s*#f6f3ec\b/i.test(rootBody),
+    "warm bleed start token (--pi-ps-paper-bleed-start) is in the #f7f4ee / #f6f3ec range",
+  )
+  assert(
+    /--pi-ps-paper-bleed-end\s*:\s*#f6f3ec\b/i.test(rootBody) ||
+      /--pi-ps-paper-bleed-end\s*:\s*#f7f4ee\b/i.test(rootBody),
+    "warm bleed end token (--pi-ps-paper-bleed-end) is in the #f7f4ee / #f6f3ec range",
+  )
+  // Negative: cool SaaS off-white must NOT be the right-panel
+  // background. We check this both in the right-panel rule and in
+  // the bleed pseudo body (the previous C4 cut painted #fafbfc
+  // directly on .pi-ps-harness-right).
+  const rightMainMatch = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness-right\s*\{([\s\S]*?)\}/,
+  )
+  const rightMainBody = rightMainMatch ? rightMainMatch[1] : ''
+  const cool = /#fafbfc\b|#f8f9fa\b|#f5f6f7\b|#eef0f2\b/i
+  assert(
+    !cool.test(rightMainBody) && !cool.test(rightBleedBody),
+    "right-panel does NOT use cool SaaS off-white (#fafbfc / #f8f9fa / #f5f6f7 / #eef0f2)",
+  )
+}
+
+// 6c.6 Stacked fallback (≤1199px) disables the bleed and the rail.
+{
+  /*
+   * The CSS legitimately has more than one `@media (max-width: 1199px)`
+   * block (one for the original shell column collapse, one for
+   * `.pi-line-overlay { display: none }`, plus the new PR #52 block
+   * for rail + bleed). We extract every body that matches and
+   * concat them so the assertion finds rules across all of them.
+   */
+  function extractAllStackedBodies(src) {
+    const out = []
+    let cursor = 0
+    while (cursor < src.length) {
+      const at = src.indexOf('@media', cursor)
+      if (at < 0) break
+      const close = src.indexOf(')', at)
+      if (close < 0) break
+      const header = src.slice(at, close + 1)
+      if (!/max-width\s*:\s*1199px/.test(header)) {
+        cursor = close + 1
+        continue
+      }
+      const open = src.indexOf('{', close)
+      if (open < 0) break
+      let depth = 1
+      let i = open + 1
+      while (i < src.length && depth > 0) {
+        if (src[i] === '{') depth++
+        else if (src[i] === '}') depth--
+        i++
+      }
+      out.push(src.slice(open + 1, i - 1))
+      cursor = i
+    }
+    return out.join('\n')
+  }
+  const stackedBody = extractAllStackedBodies(harnessCssNoComments)
+  assert(
+    /\.pi-ps-harness-right::before\s*\{[^}]*display\s*:\s*none/.test(
+      stackedBody,
+    ),
+    "stacked mode (max-width: 1199px) disables the .pi-ps-harness-right::before bleed",
+  )
+  assert(
+    /\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(stackedBody),
+    "stacked mode hides the absolute desktop rail (.pi-ps-insight-rail display:none) so chips never double-render",
+  )
+}
+
+console.log('\n=== 6d. PR #52 PA must-fix — palette discipline ===')
+
+/*
+ * Palette discipline applies to rail + chip CSS rules ONLY. The
+ * line overlay (`.pi-line-path[--support|--trap]`) legitimately uses
+ * mint green and trap amber and lives in the same file; we skip
+ * those selectors.
+ *
+ * Strategy: walk every top-level rule in the harness CSS, keep the
+ * rules whose selector matches `.pi-ps-insight-rail` or
+ * `.pi-ps-insight-chip` (excluding `.pi-ps-insight-chip-strip`,
+ * which is asserted gone above), concat the bodies, and run grep
+ * negatives over the concat.
+ */
+{
+  const railScopedSrc = (() => {
+    const parts = []
+    const ruleRe = /([^{}]+?)\{([^{}]*)\}/g
+    let m
+    while ((m = ruleRe.exec(harnessCssNoComments)) !== null) {
+      const sel = m[1].trim()
+      // We accept both standalone and combined-selector forms
+      // (e.g. `.pi-ps-insight-rail:hover, .pi-ps-insight-rail:focus-within`).
+      if (
+        /\.pi-ps-insight-rail\b/.test(sel) ||
+        /\.pi-ps-insight-rail-/.test(sel) ||
+        // chip selector but NOT the (now-forbidden) chip-strip
+        (/\.pi-ps-insight-chip\b/.test(sel) &&
+          !/\.pi-ps-insight-chip-strip\b/.test(sel))
+      ) {
+        parts.push(m[2])
+      }
+    }
+    return parts.join('\n')
+  })()
+
+  // Reserved palette negatives.
+  assert(
+    !/#10b981\b/i.test(railScopedSrc) &&
+      !/rgba\s*\(\s*16\s*,\s*185\s*,\s*129\s*,/i.test(railScopedSrc) &&
+      !/#2a7c4f\b/i.test(railScopedSrc),
+    "rail/chip CSS does NOT use mint / support green (reserved for answer evidence)",
+  )
+  assert(
+    !/#f59e0b\b/i.test(railScopedSrc) &&
+      !/rgba\s*\(\s*245\s*,\s*158\s*,\s*11\s*,/i.test(railScopedSrc) &&
+      !/#d97706\b/i.test(railScopedSrc),
+    "rail/chip CSS does NOT use trap amber (reserved for distractor source)",
+  )
+  // Red shades (Tailwind reds + common pure red) — reserved for
+  // future "student got the question wrong" semantics.
+  assert(
+    !/#dc2626\b/i.test(railScopedSrc) &&
+      !/#ef4444\b/i.test(railScopedSrc) &&
+      !/#f87171\b/i.test(railScopedSrc) &&
+      !/#b91c1c\b/i.test(railScopedSrc) &&
+      !/#ff0000\b/i.test(railScopedSrc) &&
+      !/(?<![\w-])(?:red|crimson|tomato|firebrick)\b/i.test(railScopedSrc),
+    "rail/chip CSS does NOT use red (reserved for future student-wrong semantics)",
+  )
+  // Bright / cool blues — admin-dashboard tone the PA review
+  // explicitly rejected.
+  assert(
+    !/#3b82f6\b/i.test(railScopedSrc) &&
+      !/#2563eb\b/i.test(railScopedSrc) &&
+      !/#1d4ed8\b/i.test(railScopedSrc) &&
+      !/#60a5fa\b/i.test(railScopedSrc) &&
+      !/#0ea5e9\b/i.test(railScopedSrc),
+    "rail/chip CSS does NOT use bright / cool blue (PA review rejected blue admin tone)",
+  )
+  // Brand purples.
+  assert(
+    !/#8b5cf6\b/i.test(railScopedSrc) &&
+      !/#7c3aed\b/i.test(railScopedSrc) &&
+      !/#a855f7\b/i.test(railScopedSrc) &&
+      !/#6d28d9\b/i.test(railScopedSrc),
+    "rail/chip CSS does NOT use brand purple",
+  )
+  // Gradients are explicitly disallowed by PA review (rail must
+  // read as quiet pencil, not AI-toy fill).
+  assert(
+    !/\blinear-gradient\s*\(/i.test(railScopedSrc) &&
+      !/\bradial-gradient\s*\(/i.test(railScopedSrc) &&
+      !/\bconic-gradient\s*\(/i.test(railScopedSrc),
+    "rail/chip CSS does NOT use any gradient",
   )
 }
 
