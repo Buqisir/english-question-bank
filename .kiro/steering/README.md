@@ -86,6 +86,19 @@ cutting the feature.
 
 ---
 
+## Browser QA posture
+
+The Codex in-app browser may be used for PO-facing QA, live visual
+checks, and browser verification the user explicitly wants to watch.
+
+If the in-app browser times out, shows stale state, or cannot prove the
+claim, fall back to local Chrome/headless Playwright and capture the
+evidence there.
+
+Static verify is not browser QA for user-visible PaperSurface changes.
+
+---
+
 ## Current PaperSurface product taste
 
 The paper remains primary. AI support should be useful, quiet, and one
