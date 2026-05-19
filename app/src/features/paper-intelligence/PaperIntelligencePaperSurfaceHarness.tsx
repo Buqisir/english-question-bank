@@ -1,5 +1,5 @@
 /**
- * PaperIntelligencePaperSurfaceHarness — Issue #21-C1 / C2 / C3.
+ * PaperIntelligencePaperSurfaceHarness — Issue #21-C1 / C2 / C3 / C4.
  *
  * Host shell that mounts the production PaperSurface module inside the
  * Paper Intelligence route when `surface=paper` is active.
@@ -52,12 +52,60 @@
  *     types leak into PaperSurface and PaperSurface emits no
  *     `data-pi-*`.
  *
- * What this harness does NOT do:
- *   - No insight chip / popover.
+ * What this harness does NOT do (after C4):
  *   - No basket interaction.
  *   - No reading mode.
  *   - No annotation pack UI.
  *   - No flip of the default PI route.
+ *
+ * What C4 ADDS to the harness (host-only, PaperSurface stays dumb):
+ *   - A compact left passage-structure rail (`.pi-ps-insight-rail`) sits
+ *     `position: absolute` inside `.pi-ps-harness-shell` (so the
+ *     existing `1fr 858px 380px` no-right-gutter grid stays unchanged
+ *     and no new grid track is introduced). Replaces the prior
+ *     top horizontal `.pi-ps-insight-chip-strip` after PR #52 PA
+ *     review (rejected the top strip; required a left rail + warm
+ *     full-bleed right analysis).
+ *   - The rail collapses to 48px in the outer-left desk gutter and
+ *     expands to 160px on `:hover`, `:focus-within`, or the toggle
+ *     button's `[data-rail-locked]`. An active structure detail uses
+ *     a viewport-clamped rail width so normal 100% browser zoom can
+ *     still read the structure panel.
+ *   - One structure chip per `report.passages[*].paperSection` rendered
+ *     always inside the left rail (`.pi-ps-insight-rail`). The rail is
+ *     always in the DOM at every viewport width. CSS media queries
+ *     control rail sizing and detail mode but never unmount the rail.
+ *     PA-approved rule: passage structure entry always lives on the left.
+ *   - The right analysis aside paints a warm cream full-bleed
+ *     background via `.pi-ps-harness-right::before` reaching to the
+ *     viewport's right edge while the actual analysis text stays
+ *     inside `.pi-ps-harness-right-inner` at `max-width: 400px`.
+ *   - `activeInsightSection: string | null` state, max one open at a
+ *     time.
+ *   - `railLocked: boolean` state, toggled by the rail's leading
+ *     button (a real `<button>` with `aria-expanded` / `aria-controls`).
+ *   - Clicking a chip aligns the matching `[data-paper-section]`
+ *     PaperSurface section root into the left scroller (this is the
+ *     only DOM read against PaperSurface and it uses the existing
+ *     section anchor — no new `data-paper-*` is introduced). Because
+ *     the rail lives outside `.pi-ps-harness-left`, scrolling a
+ *     section into view never moves the chip out of the viewport.
+ *   - The active chip renders a lightweight inline structure detail
+ *     inside the rail. The full load/difficulty/chunk panel was
+ *     deliberately cut from PaperSurface; it belongs in a separate
+ *     AI-difficulty workflow, not in the A4 reading surface.
+ *   - `request-lecture-focus` clears `activeInsightSection` AND
+ *     `railLocked` (matches default PI's "selecting a question card
+ *     closes the structure detail"; the rail compacts back too).
+ *   - matchMedia breakpoint changes clear `activeInsightSection` AND
+ *     `railLocked` so a resized rail never keeps stale open state.
+ *   - Right-panel evidence/distractor click does NOT clear
+ *     `activeInsightSection`.
+ *   - PaperSurface is unchanged. The harness does not import any
+ *     new module from `shared-ui/papersurface`. PaperSurface still
+ *     emits no `data-pi-*`. The chip carries a host-owned
+ *     `data-pi-insight-chip="<section>"` attribute; PaperSurface is
+ *     never told about structure detail or basket.
  */
 
 import {
@@ -66,7 +114,9 @@ import {
   useMemo,
   useRef,
   useState,
+  type KeyboardEvent,
   type ReactNode,
+  type RefObject,
 } from 'react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { buildPaperSurfaceDataFromPi } from './adapter/index.ts'
@@ -76,8 +126,11 @@ import {
   type AnalysisView,
 } from './preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
+import { buildInsightChipLabel } from './insight/insightChipLabel'
+import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
 import type {
   PaperIntelligenceReport,
+  PassageReport,
   QuestionOption,
 } from './paperIntelligenceTypes'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
@@ -120,10 +173,77 @@ export function PaperIntelligencePaperSurfaceHarness({
    */
   const [activeEvidenceId, setActiveEvidenceId] = useState<string | null>(null)
 
+  /**
+   * C4: which passage's structure detail is currently expanded.
+   * Max one open at a time. Cleared by `request-lecture-focus`
+   * (selecting a question card) and by re-clicking the same chip.
+   * NOT cleared by right-panel evidence / distractor selection
+   * (insight + evidence are independent teacher views).
+   */
+  const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
+
+  /**
+   * C4 PR #52 PA must-fix: left insight rail expansion lock.
+   *
+   * The rail is normally collapsed (48px). Hovering or moving focus
+   * into the rail soft-expands it via CSS (`:hover` /
+   * `:focus-within`). A teacher who wants the rail pinned can click
+   * the leading toggle button, which sets `railLocked = true` and
+   * the harness paints `data-rail-locked="true"` on the aside so the
+   * CSS keeps it expanded without hover / focus.
+   *
+   * Esc inside the rail clears the lock and any active structure detail.
+   * `request-lecture-focus` (selecting a question card) also clears
+   * the lock so picking a question compacts the rail back.
+   * matchMedia breakpoint changes clear the lock too — the rail is
+   * gone in stacked mode and the lock should not re-engage when the
+   * teacher resizes back to desktop.
+   */
+  const [railLocked, setRailLocked] = useState<boolean>(false)
+
+  /**
+   * C4 PR #52 PA must-fix: viewport-mode detection for rail vs
+   * topbar chip-row conditional rendering.
+   *
+   * Q1 decision (PA-approved): `matchMedia` + state conditional
+   * render. Chips are NEVER double-rendered — exactly one
+   * `<button data-pi-insight-chip="...">` exists in the DOM at a
+   * time, so chip refs cannot resolve to the wrong
+   * element on breakpoint cross.
+   *
+   * SSR seed is `false` so the desktop tree is the default; the
+   * mount effect below syncs to the real `matchMedia` value and
+   * subscribes to changes.
+   */
+  const [isStackedMode, setIsStackedMode] = useState<boolean>(false)
+  const [isWideDesktop, setIsWideDesktop] = useState<boolean>(false)
+
   // Refs for the cross-column line geometry (C3).
   const shellRef = useRef<HTMLDivElement | null>(null)
   const leftScrollerRef = useRef<HTMLDivElement | null>(null)
   const rightPanelRef = useRef<HTMLElement | null>(null)
+
+  /**
+   * C4 chip ref map. The harness renders one `<button>` per passage
+   * section; each button gets a stable ref object keyed by section id
+   * so the insight chip element can be programmatically accessed for
+   * scroll-into-view and focus management.
+   *
+   * The map is keyed by `paperSection` (the same id space as
+   * PaperSurface's existing `[data-paper-section]` anchor). Refs are
+   * created lazily on first request and reused across renders, so
+   * React's ref attribute mutates the same object.
+   */
+  type ChipRef = { current: HTMLButtonElement | null }
+  const chipRefMap = useRef<Map<string, ChipRef>>(new Map())
+  const getChipRef = useCallback((paperSection: string): ChipRef => {
+    let ref = chipRefMap.current.get(paperSection)
+    if (!ref) {
+      ref = { current: null }
+      chipRefMap.current.set(paperSection, ref)
+    }
+    return ref
+  }, [])
 
   // ─── Fetch report + input.json ───
   useEffect(() => {
@@ -201,6 +321,53 @@ export function PaperIntelligencePaperSurfaceHarness({
     }
   }, [paperId])
 
+  // ─── C4 PR #52: viewport-mode detection ───
+  //
+  // Listen to both `(max-width: 1199px)` and `(min-width: 1536px)`.
+  // The wide flag remains useful for diagnostics / data attributes,
+  // but detail rendering is no longer gated by it. PR #52 PO QA found
+  // that normal 100% browser zoom often falls in the 1200-1535px band;
+  // hiding detail there made the rail look broken. The panel is now a
+  // lightweight passage-structure summary that can render in every
+  // non-empty rail state.
+  //
+  // PA-approved rule: the rail is always in the DOM. matchMedia only
+  // controls detail-surface selection and CSS sizing, NOT rail mount.
+  //
+  // When the breakpoint crosses we close any open structure detail
+  // and clear the rail lock so stale state doesn't persist across
+  // viewport mode transitions.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (typeof window.matchMedia !== 'function') return
+    const stackedMql = window.matchMedia('(max-width: 1199px)')
+    const wideDesktopMql = window.matchMedia('(min-width: 1536px)')
+    // Sync once for the SSR-vs-client mismatch on first paint.
+    setIsStackedMode(stackedMql.matches)
+    setIsWideDesktop(wideDesktopMql.matches)
+    const onChange = (): void => {
+      setIsStackedMode(stackedMql.matches)
+      setIsWideDesktop(wideDesktopMql.matches)
+      setActiveInsightSection(null)
+      setRailLocked(false)
+    }
+    if (typeof stackedMql.addEventListener === 'function') {
+      stackedMql.addEventListener('change', onChange)
+      wideDesktopMql.addEventListener('change', onChange)
+      return (): void => {
+        stackedMql.removeEventListener('change', onChange)
+        wideDesktopMql.removeEventListener('change', onChange)
+      }
+    }
+    // Older Safari / pre-2019 fallback.
+    stackedMql.addListener(onChange)
+    wideDesktopMql.addListener(onChange)
+    return (): void => {
+      stackedMql.removeListener(onChange)
+      wideDesktopMql.removeListener(onChange)
+    }
+  }, [])
+
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (!report) return null
@@ -276,12 +443,66 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Focus intent handler ───
   const handleFocusIntent = useCallback((intent: PaperSurfaceFocusIntent) => {
     if (intent.kind === 'request-lecture-focus') {
+      // C4: clear any open structure detail when the teacher selects
+      // a question card. Mirrors the default PI route's behavior in
+      // PaperIntelligencePreview, where `setActiveInsightSection(null)`
+      // runs on every question selection.
+      setActiveInsightSection(null)
+      // C4 PR #52: also collapse the rail back to compact so the
+      // teacher's eye returns to the question card without a stale
+      // expanded rail competing for attention. The lock is a teacher
+      // intent ("pin the rail"), and starting question discussion
+      // implicitly cancels that intent.
+      setRailLocked(false)
       setActiveQuestionId((prev) =>
         prev === intent.questionId ? null : intent.questionId,
       )
     }
-    // Other intents ignored in C1/C2/C3.
+    // Other intents ignored in C1/C2/C3/C4.
   }, [])
+
+  // ─── C4 insight chip handlers ───
+  //
+  // Toggle and close are intentionally simple host-owned setters.
+  // Re-clicking the active chip closes the panel; clicking another
+  // chip switches the panel without an intermediate "closed" state.
+  const handleToggleInsight = useCallback((paperSection: string): void => {
+    setActiveInsightSection((prev) =>
+      prev === paperSection ? null : paperSection,
+    )
+  }, [])
+
+  const handleCloseInsight = useCallback((): void => {
+    setActiveInsightSection(null)
+  }, [])
+
+  // ─── C4 PR #52 rail toggle + Esc handlers ───
+  const handleToggleRailLock = useCallback((): void => {
+    setRailLocked((prev) => !prev)
+  }, [])
+
+  const handleRailKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLElement>): void => {
+      if (e.key !== 'Escape') return
+      // Two-phase Esc: detail first, lock second.
+      // Phase 1: if a detail is open, close it but keep the rail
+      // expanded (lock stays). Phase 2: if no detail is open but
+      // the rail is locked, unlock it and blur so :focus-within
+      // releases.
+      if (activeInsightSection) {
+        setActiveInsightSection(null)
+        return
+      }
+      if (railLocked) {
+        setRailLocked(false)
+        const target = e.target as HTMLElement | null
+        if (target && typeof target.blur === 'function') {
+          target.blur()
+        }
+      }
+    },
+    [activeInsightSection, railLocked],
+  )
 
   // ─── Right-side evidence click handler (C3) ───
   //
@@ -290,10 +511,44 @@ export function PaperIntelligencePaperSurfaceHarness({
   // updates the active evidence id and reseats the cross-column line.
   // This is the smallest possible host-owned handler — no events
   // fired by PaperSurface, no new intent kind.
+  //
+  // C4 invariant: this handler does NOT clear `activeInsightSection`.
+  // Insight panel and evidence selection are independent teacher
+  // views — closing insight on every distractor click would force
+  // teachers to re-open the panel between questions.
   const handleSelectEvidence = useCallback((evidenceId: string) => {
     if (!evidenceId) return
     setActiveEvidenceId(evidenceId)
   }, [])
+
+  // ─── C4 align active insight section with [data-paper-section] ───
+  //
+  // When the teacher opens an insight chip we scroll the matching
+  // PaperSurface section root into view inside `.pi-ps-harness-left`,
+  // so the chip and the passage it describes stay visually aligned.
+  // We resolve the section root through the existing
+  // `[data-paper-section]` anchor (PaperSurface's neutral namespace);
+  // no new `data-paper-*` attribute is introduced.
+  // `prefers-reduced-motion` toggles `behavior` between 'smooth' and
+  // 'auto' so the OS-level setting is honored.
+  useEffect(() => {
+    if (!activeInsightSection) return
+    const scroller = leftScrollerRef.current
+    if (!scroller) return
+    const target = scroller.querySelector<HTMLElement>(
+      `[data-paper-section="${cssAttr(activeInsightSection)}"]`,
+    )
+    if (!target) return
+    const reduced =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({
+      block: 'start',
+      inline: 'nearest',
+      behavior: reduced ? 'auto' : 'smooth',
+    })
+  }, [activeInsightSection])
 
   // ─── Auto-scroll active evidence into the PaperSurface scroller (C3) ───
   //
@@ -324,6 +579,53 @@ export function PaperIntelligencePaperSurfaceHarness({
   }, [activeEvidenceId])
 
   // ─── Render ───
+  //
+  // Derive the active-passage report row and the live anchor ref for
+  // the structure detail. We resolve these once per render so the JSX
+  // below stays simple. `activePassage` is undefined (and the detail
+  // mount is gated on it) when:
+  //   - no chip is open (`activeInsightSection === null`), OR
+  //   - the active section id doesn't match any rendered passage,
+  //     which is a defensive guard against state drift.
+  const activePassage: PassageReport | undefined =
+    activeInsightSection && report
+      ? report.passages.find((p) => p.paperSection === activeInsightSection)
+      : undefined
+
+  /**
+   * Render a single insight chip. Always rendered inside the left
+   * rail (`.pi-ps-insight-rail`).
+   *
+   * PA-approved rule: insight entry always lives on the left.
+   * The rail is always in the DOM; CSS controls sizing per breakpoint.
+   * Chips are never double-rendered.
+   */
+  const renderInsightChip = (p: PassageReport): ReactNode => {
+    const isOpen = activeInsightSection === p.paperSection
+    const chipLabel = buildInsightChipLabel(p)
+    return (
+      <button
+        key={p.paperSection}
+        ref={getChipRef(p.paperSection) as RefObject<HTMLButtonElement>}
+        type="button"
+        className={
+          isOpen
+            ? 'pi-ps-insight-chip pi-ps-insight-chip--open'
+            : 'pi-ps-insight-chip'
+        }
+        onClick={() => handleToggleInsight(p.paperSection)}
+        aria-expanded={isOpen}
+        aria-controls={`pi-ps-insight-panel-${p.paperSection}`}
+        aria-label={isOpen ? '收起篇章结构' : chipLabel}
+        data-pi-insight-chip={p.paperSection}
+      >
+        <span className="pi-ps-insight-chip-section" aria-hidden="true">
+          {p.paperSection}
+        </span>
+      </button>
+    )
+  }
+
   if (loading) {
     return (
       <div className="pi-ps-harness">
@@ -331,7 +633,7 @@ export function PaperIntelligencePaperSurfaceHarness({
           <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
             <span aria-hidden="true">←</span> 返回工作台
           </button>
-          <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
+          <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
         </div>
         <div className="pi-ps-harness-loading">加载中…</div>
       </div>
@@ -360,13 +662,100 @@ export function PaperIntelligencePaperSurfaceHarness({
         <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
           <span aria-hidden="true">←</span> 返回工作台
         </button>
-        <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
+        {/* C4 PA-approved: insight entry always lives on the left rail.
+           No topbar insight row at any breakpoint. */}
+        <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
       </div>
       <div
         className="pi-ps-harness-shell"
         ref={shellRef}
         data-pi-active-evidence-kind={activeEvidenceKind ?? undefined}
       >
+        {/*
+          C4 PA-approved — left insight rail (always rendered).
+
+          The rail is `position: absolute; left:0; top:0; bottom:0`
+          inside `.pi-ps-harness-shell` (which is already
+          `position: relative`), so it does NOT consume a grid
+          column and the existing `1fr 858px 380px` shell is
+          unchanged.
+
+          The rail is always in the DOM at every viewport width.
+          CSS media queries control its sizing:
+            - >=1200px: absolute in left gutter, 48→160px, then a
+              viewport-clamped structure detail width when a chip is active
+            - <=1199px: position:fixed; left:0, acts as a handle/drawer
+
+          matchMedia state annotates the current viewport mode but
+          does NOT control rail mount. Chips are never double-rendered.
+
+          INVARIANT (PR #52 PO QA Must Fix):
+            data-rail-detail-open='true' is set by the same
+            activeInsightSection state that renders .pi-ps-insight-detail.
+            This guarantees: if rail expands beyond compact width,
+            structure detail is rendered. The forbidden state (rail
+            expanded + activeInsightSection set + detailCount == 0)
+            cannot occur.
+        */}
+        <aside
+          className="pi-ps-insight-rail"
+          aria-label="篇章结构"
+          data-rail-locked={railLocked ? 'true' : undefined}
+          data-rail-detail-open={activeInsightSection ? 'true' : undefined}
+          data-viewport-mode={isStackedMode ? 'stacked' : isWideDesktop ? 'wide' : 'medium'}
+          onKeyDown={handleRailKeyDown}
+        >
+          <button
+            type="button"
+            className="pi-ps-insight-rail-toggle"
+            onClick={handleToggleRailLock}
+            aria-expanded={railLocked}
+            aria-controls="pi-ps-insight-rail-list"
+            aria-label={railLocked ? '收起篇章结构栏' : '展开篇章结构栏'}
+          >
+            <span
+              className="pi-ps-insight-rail-toggle-icon"
+              aria-hidden="true"
+            >
+              {railLocked ? '×' : '≡'}
+            </span>
+          </button>
+          <div
+            className="pi-ps-insight-rail-list"
+            id="pi-ps-insight-rail-list"
+            role="group"
+          >
+            {report.passages.map((p) => (
+              <div key={p.paperSection}>
+                {renderInsightChip(p)}
+                {/* Inline structure detail inside rail at every viewport. */}
+                {activeInsightSection === p.paperSection && activePassage && (
+                  <div
+                    className="pi-ps-insight-detail"
+                    id={`pi-ps-insight-panel-${p.paperSection}`}
+                    role="region"
+                    aria-label={`篇章结构 · ${p.paperSection}`}
+                  >
+                    <div className="pi-ps-insight-detail-header">
+                      <span className="pi-ps-insight-detail-title">
+                        篇章结构 · {p.paperSection}
+                      </span>
+                      <button
+                        type="button"
+                        className="pi-ps-insight-detail-close"
+                        onClick={handleCloseInsight}
+                        aria-label="关闭篇章结构面板"
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <HarnessInsightPanelContent reportPassage={activePassage} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </aside>
         <div className="pi-ps-harness-left" ref={leftScrollerRef}>
           <PaperSurface
             textMap={surfaceData.textMap}
@@ -385,11 +774,25 @@ export function PaperIntelligencePaperSurfaceHarness({
           aria-live="polite"
           ref={rightPanelRef}
         >
-          <AnalysisPanel
-            analysis={analysisView}
-            activeEvidenceId={activeEvidenceId}
-            onSelectEvidence={handleSelectEvidence}
-          />
+          {/*
+            C4 PR #52 PA must-fix — readable analysis content.
+
+            The aside paints its warm full-bleed background via the
+            `::before` pseudo-element (extending to the viewport's
+            right edge with `right: calc(-1 * (100vw - 100%))`);
+            the actual
+            text content stays inside this inner wrapper at
+            `max-width: 400px` with a soft warm hairline on the
+            content's left edge so the panel reads as a notebook
+            page, not an edge-to-edge stripe.
+          */}
+          <div className="pi-ps-harness-right-inner">
+            <AnalysisPanel
+              analysis={analysisView}
+              activeEvidenceId={activeEvidenceId}
+              onSelectEvidence={handleSelectEvidence}
+            />
+          </div>
         </aside>
         {/*
           Cross-column dotted evidence line (C3).
@@ -409,6 +812,18 @@ export function PaperIntelligencePaperSurfaceHarness({
           activeEvidenceKind={activeEvidenceKind}
           leftSelectorPreset="paper-surface"
         />
+        {/*
+          C4 UX Must Fix (PR #52 browser QA / PO QA):
+
+          Detail surfaces by breakpoint:
+            - Side-by-side (>=1200px): inline structure detail inside
+              the left rail with viewport-clamped width.
+            - Stacked/narrow (<=1199px): inline structure detail inside
+              the fixed left drawer.
+
+          No AnchoredPopover for passage structure. The user-visible
+          expanded left area must contain the detail itself.
+        */}
       </div>
     </div>
   )

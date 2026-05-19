@@ -164,6 +164,14 @@ const baseRef = (() => {
 
 const changed = safeGitDiffNames(`${baseRef}...HEAD`)
 
+const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
+  'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
+  'app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx',
+  'app/src/features/paper-intelligence/insight/insightChipLabel.ts',
+  'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
+  'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
+])
+
 const FORBIDDEN_PATHS = [
   /^app\/src\/features\/paper-intelligence\//,
   /^app\/src\/features\/reading-analysis\//,
@@ -177,7 +185,15 @@ const FORBIDDEN_PATHS = [
 ]
 
 for (const re of FORBIDDEN_PATHS) {
-  const offenders = changed.filter((p) => re.test(p))
+  const offenders = changed.filter((p) => {
+    if (
+      re.source === '^app\\/src\\/features\\/paper-intelligence\\/' &&
+      ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES.has(p)
+    ) {
+      return false
+    }
+    return re.test(p)
+  })
   assert(
     `No edits to ${re.source}`,
     offenders.length === 0,

@@ -3,11 +3,12 @@
  *
  * Issue #21-C1 introduced the harness shell.
  * Issue #41-C2 polished typography and the prior 2-column shell.
- * Issue #43 (this cut) replaces the prior `1fr 380px` 2-column shell
- * with a 4-column centered workspace model so paper + rail center
- * together as a single unit on a wider desk.
+ * Issue #43 replaced the prior `1fr 380px` 2-column shell with a
+ * centered workspace model. C4 then removes the right flexible gutter
+ * so the paper + analysis workspace shifts right and the analysis
+ * background can reach the viewport edge.
  *
- * Why 4 columns:
+ * Why the current 3-column model:
  *
  *   The earlier model `grid-template-columns: 1fr 380px` left the
  *   paper (fixed 794px, centered inside the 1fr left column) absorbing
@@ -15,15 +16,15 @@
  *   the rail moved freed pixels back into the 1fr left column, so the
  *   gulf got *wider*, not narrower.
  *
- *   The new model treats paper and rail as two side-by-side fixed
- *   tracks centered together by symmetric flexible desk gutters:
+ *   The current model keeps the paper and analysis as fixed tracks,
+ *   gives all leftover space to the left desk gutter, and lets the
+ *   right analysis background bleed to the browser edge:
  *
  *     [ outer-left desk gutter (1fr) ]
  *     [ paper track (≤ 858px)        ]
- *     [ rail track  (≤ 380px)        ]
- *     [ outer-right desk gutter (1fr)]
+ *     [ analysis track (≤ 380px)     ]
  *
- *   with a fixed `column-gap: 24px`. The paper-to-rail seam is now
+ *   with a fixed `column-gap: 24px`. The paper-to-analysis seam is now
  *   exactly the column-gap, never leftover 1fr space.
  *
  *   The 858px paper track equals the 794px white A4 sheet plus the
@@ -47,13 +48,68 @@
  *
  * Stacked fallback:
  *
- *   Below 1200px the 4-column model collapses to a single column and
+ *   Below 1200px the desktop model collapses to a single column and
  *   the rail flows under the paper, preventing horizontal page-level
  *   overflow on narrow viewports. Browser QA still required at
  *   1440 / 1280 / 1024 / 1199–1200 boundary.
  */
 
+/*
+ * ─── C4 PaperSurface Insight Layout (PR #52 PA Must Fix) ─────────
+ *
+ * Palette tokens for the harness insight rail and the right analysis
+ * full-bleed background. PA review explicitly steered C4's insight
+ * surface away from the C3.6 evidence palette (mint green for
+ * support, amber for trap) so the insight rail does NOT visually
+ * compete with the meaning of the evidence line.
+ *
+ * Aesthetic north star (locked by PR #52 PA review):
+ *   - Teacher-facing paper workbench: A4 paper on a slate-gray mat,
+ *     a quiet pencil-holder rail on the left, a warm notebook-like
+ *     analysis surface on the right.
+ *   - NOT cool slate / blue admin dashboard.
+ *   - NOT generic SaaS card.
+ *   - NOT AI toy.
+ *
+ * Reserved palettes (do NOT use anywhere on the rail or chips):
+ *   - Mint green (#10b981, rgba(16,185,129,...), #2a7c4f) — reserved
+ *     for answer evidence on the C3.6 line and right-panel rows.
+ *   - Trap amber (#f59e0b, rgba(245,158,11,...)) — reserved for
+ *     distractor source on the C3.6 line and right-panel rows.
+ *   - Red — reserved for future "student got the question wrong"
+ *     semantics.
+ *
+ * Rail / chip palette (warm pencil + ink, suggested by PR #52 user
+ * decision):
+ *   --pi-ps-insight-ink           charcoal text for active state
+ *   --pi-ps-insight-muted-ink     pencil-gray text for inactive state
+ *   --pi-ps-insight-rail-bg       expanded rail panel background
+ *   --pi-ps-insight-chip-bg       inactive chip hover background
+ *   --pi-ps-insight-chip-border   inactive chip border
+ *   --pi-ps-insight-active-bg     active chip background (warm tan)
+ *   --pi-ps-insight-active-border active chip border (warm umber)
+ *   --pi-ps-insight-hairline      light hairline for the right-panel
+ *                                 content edge
+ *
+ * Right analysis bleed palette:
+ *   --pi-ps-paper-bleed-start     warm cream at the content edge
+ *   --pi-ps-paper-bleed-end       slightly darker cream toward the
+ *                                 viewport right edge
+ */
 .pi-ps-harness {
+  --pi-ps-assistant-bg: #f8f6f1;
+  --pi-ps-insight-ink: #2f2923;
+  --pi-ps-insight-muted-ink: #6f665a;
+  --pi-ps-insight-rail-bg: var(--pi-ps-assistant-bg);
+  --pi-ps-insight-chip-bg: #f3f0e8;
+  --pi-ps-insight-chip-border: #e3ddd3;
+  --pi-ps-insight-active-bg: #f0ebe2;
+  --pi-ps-insight-active-border: #7a6a58;
+  --pi-ps-insight-hairline: #e3ddd3;
+  --pi-ps-insight-detail-bg: #f0ebe2;
+  --pi-ps-paper-bleed-start: var(--pi-ps-assistant-bg);
+  --pi-ps-paper-bleed-end: var(--pi-ps-assistant-bg);
+
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -93,7 +149,15 @@
   color: #888;
 }
 
-/* ─── Workspace shell: 4-column centered grid (Issue #43) ──────── */
+/*
+ * ─── C4 topbar chip row REMOVED (PA-approved: insight always left) ──
+ *
+ * The `.pi-ps-insight-topbar-row` has been entirely removed per PA
+ * direction. Insight entry point must always stay on the left rail.
+ * No topbar insight row at any breakpoint.
+ */
+
+/* ─── Workspace shell: 3-column right-shifted grid (Issue #43/C4) ─ */
 
 .pi-ps-harness-shell {
   display: grid;
@@ -102,18 +166,17 @@
    * the 32px symmetric horizontal matte the PaperSurface paints on
    * each side fits inside the paper track exactly (858 = 794 white
    * sheet + 32 × 2 matte). The white A4 sheet remains 794px and is
-   * centered inside its own matte; the outer shell desk gutters
-   * (the two `1fr` tracks) shrink naturally to absorb the 64px the
-   * matte now claims from them. The seam between paper track and
-   * rail track is still exactly the column-gap (24px), never
-   * leftover 1fr space.
+   * centered inside its own matte. C4 removes the right `1fr` gutter
+   * so the analysis background can reach the viewport edge while the
+   * left `1fr` gutter absorbs the remaining space for the insight
+   * rail. The seam between paper track and analysis track is still
+   * exactly the column-gap (24px), never leftover 1fr space.
    * Browser QA progression: 842px → 850px → 858px (matte 24px → 28px → 32px).
    */
   grid-template-columns:
     minmax(0, 1fr)
     minmax(0, 858px)
-    minmax(0, 380px)
-    minmax(0, 1fr);
+    minmax(0, 380px);
   column-gap: 24px;
   flex: 1;
   overflow: hidden;
@@ -146,11 +209,67 @@
   padding: 1rem 0;
 }
 
+/*
+ * Right analysis column.
+ *
+ * The analysis track stays column 3 (~380px), so content measure is
+ * stable. The visual change is:
+ *
+ *   1. The cool SaaS off-white (#fafbfc) is replaced by a warm
+ *      paper / cream tone (#f7f4ee → #f6f3ec) painted on the
+ *      `::before` pseudo-element.
+ *   2. The pseudo extends right to the viewport edge using
+ *      `right: calc(-1 * (100vw - 100%))` so the warm tone reads as
+ *      continuous notebook surface instead of a card pinned to
+ *      a 380px column.
+ *   3. The actual analysis content stays constrained to ≤400px
+ *      (`.pi-ps-harness-right-inner`) so line length stays readable
+ *      and evidence-line geometry still aligns to row text near
+ *      the column's left edge.
+ *   4. A 1px hairline on the inner-content's left edge gives the
+ *      panel a notebook-binder feel — content reads as written on
+ *      a page, not floating on raw desk.
+ *
+ * Stacked mode (≤1199px) disables the bleed pseudo and falls back
+ * to a flat warm-cream background so the right panel flowing under
+ * the paper does not paint a viewport-wide stripe.
+ */
 .pi-ps-harness-right {
   grid-column: 3;
   overflow-y: auto;
   padding: 1rem 1.25rem;
-  background: #fafbfc;
+  position: relative;
+  background: transparent;
+}
+
+.pi-ps-harness-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  /*
+   * Stretch the painted background to the viewport's right edge.
+   * With the 3-column grid (no right 1fr gutter), the right column
+   * is flush or near-flush with the viewport edge; this calc ensures
+   * the warm tone always reaches fully to the right regardless of
+   * any sub-pixel rounding.
+   */
+  right: calc(-1 * (100vw - 100%));
+  background: var(--pi-ps-assistant-bg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pi-ps-harness-right > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pi-ps-harness-right-inner {
+  max-width: 400px;
+  padding-left: 12px;
+  border-left: 1px solid var(--pi-ps-insight-hairline);
 }
 
 /* ─── Stacked fallback ─────────────────────────────────────────── */
@@ -169,7 +288,36 @@
   .pi-ps-harness-right {
     grid-column: 1;
   }
+
+  /*
+   * PA-approved: the rail is always visible on the left. In stacked
+   * mode it becomes a fixed left handle/drawer (see rail responsive
+   * rules below). No display:none.
+   */
+
+  /*
+   * PR #52 PA must-fix: the right-panel viewport-wide bleed is
+   * disabled in stacked mode so the right panel flowing under the
+   * paper does not paint a horizontal warm stripe across the page.
+   * The right column falls back to a flat warm cream so the
+   * notebook tone is preserved without the bleed mechanism.
+   */
+  .pi-ps-harness-right::before {
+    display: none;
+  }
+
+  .pi-ps-harness-right {
+    background: var(--pi-ps-paper-bleed-end);
+  }
+
+  .pi-ps-harness-right-inner {
+    max-width: none;
+    padding-left: 0;
+    border-left: 0;
+  }
 }
+
+/* (Side-by-side rail overrides are placed after the base rail rules below.) */
 
 .pi-ps-harness-loading,
 .pi-ps-harness-error {
@@ -487,4 +635,613 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
   border-left-color: rgba(245, 158, 11, 0.85);
   border-left-width: 4px;
+}
+
+
+
+/* ─── C4: Insight rail + popover (PR #52 PA must-fix layout) ───── */
+
+/*
+ * Issue #21-C4 — PaperSurface Insight Parity (PR #52 PA-revised
+ * left-rail layout).
+ *
+ * History:
+ *   - Original C4 cut shipped a top horizontal `position: sticky`
+ *     chip strip inside `.pi-ps-harness-left`. Browser QA found the
+ *     strip competed with the paper reading area and the right-side
+ *     gutter still read as cool admin off-white. PA review for
+ *     PR #52 mandated:
+ *
+ *       1. Remove the top horizontal chip strip entirely. There must
+ *          be no sticky-top horizontal insight strip above the paper.
+ *       2. Replace the strip with a compact left-side insight rail
+ *          living in the harness layer (NOT inside PaperSurface).
+ *       3. Right analysis background must full-bleed to the viewport
+ *          right edge with a warm notebook tone (NOT cool SaaS
+ *          off-white). Analysis text content stays constrained.
+ *
+ * Spatial model:
+ *   - Existing 4-column shell (`1fr 858px 380px 1fr`) is unchanged.
+ *     The rail is NOT a 5th grid column.
+ *   - The rail is `position: absolute` inside `.pi-ps-harness-shell`
+ *     (which is already `position: relative`), so it lives in the
+ *     outer-left desk gutter when collapsed and only visually
+ *     overlaps the paper edge a few pixels at tight widths while
+ *     expanded — explicitly accepted by PA review for tighter
+ *     viewports as a user-invoked overlap.
+ *
+ * Behavior:
+ *   - Collapsed default: 48px wide, transparent background. The
+ *     toggle button + A/B/C/D chip badges remain visible; the full
+ *     chip label text fades out.
+ *   - Hover: rail expands to 220px (max 240px) and full chip labels
+ *     fade in.
+ *   - Focus-within: same expanded shape as hover so keyboard users
+ *     get the expanded rail when Tab moves into the rail. Tab out
+ *     collapses naturally because focus-within releases.
+ *   - Toggle button locks the expanded state via
+ *     `[data-rail-locked="true"]` so a teacher who wants the rail
+ *     pinned can click the toggle once and walk away from the
+ *     mouse / keyboard.
+ *   - Esc inside the rail (TSX-side) clears the lock and closes any
+ *     open popover.
+ *
+ * z-index ordering (single source of truth lives in this file):
+ *
+ *     .pi-line-overlay           z-index: 5    (cross-column line)
+ *     .pi-ps-insight-rail        z-index: 25   (left rail)
+ *     .pi-ps-insight-panel       z-index: 60   (popover, portalled)
+ *
+ *   The rail sits above the line overlay so the dotted line draws
+ *   under the rail rather than cutting across it; well below the
+ *   popover so the popover always paints above its own anchor.
+ */
+
+.pi-ps-insight-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 12px 4px;
+  background: transparent;
+  border-right: 1px solid transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 25;
+  transition: width 160ms ease-out, background 160ms ease-out,
+    border-color 160ms ease-out;
+}
+
+/* State 2: hover / focus-within — short labels visible, 160px */
+.pi-ps-insight-rail:hover,
+.pi-ps-insight-rail:focus-within,
+.pi-ps-insight-rail[data-rail-locked='true'] {
+  width: 160px;
+  background: var(--pi-ps-insight-rail-bg);
+  border-right-color: var(--pi-ps-insight-hairline);
+  box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+}
+
+/* State 3: active detail open — viewport-clamped structure detail
+ *
+ * INVARIANT (PR #52 PO QA Must Fix):
+ *   This rule ONLY fires when TSX sets data-rail-detail-open='true',
+ *   which the TSX sets from the same activeInsightSection state that
+ *   renders `.pi-ps-insight-detail`.
+ *   Therefore: if this rule expands the rail, the .pi-ps-insight-detail
+ *   div is guaranteed to be rendered in the DOM by the same render pass.
+ *   The forbidden state (expanded rail + no detail content) cannot occur.
+ *
+ * Width math:
+ *   White paper starts at approximately `100vw - 1230px` in the
+ *   side-by-side grid (left gutter + 24px gap + 32px matte).
+ *   The rail uses that value as its preferred width, capped at 300px
+ *   and floored at 200px now that the content is only passage
+ *   structure. At tight desktop widths this may sit near the paper
+ *   edge, but it no longer needs the old load-bar width.
+ */
+@media (min-width: 1200px) {
+  .pi-ps-insight-rail[data-rail-detail-open='true'] {
+    width: clamp(200px, calc(100vw - 1230px), 300px);
+    background: var(--pi-ps-insight-rail-bg);
+    border-right-color: var(--pi-ps-insight-hairline);
+    box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+  }
+}
+
+/*
+ * ─── Stacked/narrow <=1199px: fixed left handle + drawer ─────────
+ *
+ * PA-approved rule: the rail remains visible as a fixed left handle.
+ * No topbar row. Click opens a narrow left-side drawer (200–240px).
+ * The drawer may temporarily overlay gray matte/desk but avoids
+ * covering white paper body where practical.
+ */
+@media (max-width: 1199px) {
+  .pi-ps-insight-rail {
+    position: fixed;
+    left: 0;
+    top: 48px; /* below the topbar */
+    bottom: 0;
+    width: 40px;
+    z-index: 25;
+    padding: 8px 2px;
+    background: rgba(248, 246, 241, 0.92);
+    border-right: 1px solid var(--pi-ps-insight-hairline);
+    backdrop-filter: blur(4px);
+  }
+
+  .pi-ps-insight-rail:hover,
+  .pi-ps-insight-rail:focus-within,
+  .pi-ps-insight-rail[data-rail-locked='true'] {
+    width: 200px;
+    background: var(--pi-ps-insight-rail-bg);
+    box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
+  }
+
+  .pi-ps-insight-rail[data-rail-detail-open='true'] {
+    width: 260px;
+    background: var(--pi-ps-insight-rail-bg);
+    box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
+  }
+}
+
+/*
+ * ─── Side-by-side constrained desktop rail rules ─────────────────
+ *
+ * C4 PO QA correction:
+ *
+ * The earlier 1200–1535px rule kept the rail at 48px and suppressed
+ * detail entirely. At normal 100% zoom many desktop browser panes fall
+ * into that band, so clicking the rail looked broken: the active chip
+ * changed, but no content appeared.
+ *
+ * Product rule:
+ *   - Passage structure always lives on the left.
+ *   - Clicking a passage chip must show the structure detail.
+ *   - No topbar fallback.
+ *
+ * Implementation:
+ *   - Hover/focus/locked still use the compact 160px rail.
+ *   - Active detail uses the viewport-clamped structure-detail width
+ *     defined above.
+ *   - No AnchoredPopover renders; the expanded left area contains the
+ *     actual detail.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .pi-ps-insight-rail,
+  .pi-ps-insight-chip,
+  .pi-ps-insight-detail {
+    transition: none !important;
+  }
+}
+
+/*
+ * Rail toggle button — leading affordance.
+ *
+ * Shows a compact icon when collapsed; reveals the leading label
+ * (结构 / 收起) on expand. Real <button> with `aria-expanded` +
+ * `aria-controls` wired in TSX so screen-reader users can identify
+ * the affordance and the targeted list region.
+ */
+.pi-ps-insight-rail-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pi-ps-insight-muted-ink);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pi-ps-insight-rail-toggle:hover {
+  background: var(--pi-ps-insight-chip-bg);
+  border-color: var(--pi-ps-insight-chip-border);
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-rail-toggle:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border);
+  outline-offset: 1px;
+}
+
+.pi-ps-insight-rail-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pi-ps-insight-rail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Insight chip — used both in the desktop rail and the stacked-mode
+ * topbar row. Same a11y plumbing applies in both modes (real
+ * <button>, aria-expanded, aria-controls, aria-label,
+ * data-pi-insight-chip).
+ *
+ * Palette discipline:
+ *   - Inactive: pencil-gray text on transparent background, warm
+ *     pencil border.
+ *   - Hover: warm cream fill, ink text.
+ *   - Active (`--open`): warm tan fill, umber border, ink text.
+ *   - NEVER mint green, NEVER trap amber, NEVER red, NEVER bright
+ *     blue, NEVER brand purple, NEVER neon, NEVER gradient — those
+ *     palettes are reserved for evidence semantics.
+ */
+.pi-ps-insight-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pi-ps-insight-muted-ink);
+  background: transparent;
+  border: 1px solid var(--pi-ps-insight-chip-border);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 80ms ease, border-color 80ms ease,
+    color 80ms ease;
+}
+
+.pi-ps-insight-chip:hover {
+  background: var(--pi-ps-insight-chip-bg);
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-chip:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border);
+  outline-offset: 1px;
+}
+
+.pi-ps-insight-chip--open {
+  background: var(--pi-ps-insight-active-bg);
+  border-color: var(--pi-ps-insight-active-border);
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-chip--open:hover {
+  background: var(--pi-ps-insight-active-bg);
+  color: var(--pi-ps-insight-ink);
+  filter: brightness(0.98);
+}
+
+.pi-ps-insight-chip-section {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.pi-ps-insight-chip--open .pi-ps-insight-chip-section {
+  color: var(--pi-ps-insight-ink);
+}
+
+/* ─── Inline insight detail (desktop, inside rail) ───────────── */
+
+/*
+ * PR #52 C4 UX Retune — inline detail replaces AnchoredPopover on
+ * desktop. The detail block renders inside `.pi-ps-insight-rail`
+ * below the active chip's row. All A/B/C/D controls remain in the
+ * DOM and visible above/below the detail. The detail does NOT cover
+ * paper text and does NOT portal outside the rail.
+ */
+.pi-ps-insight-detail {
+  background: var(--pi-ps-insight-detail-bg);
+  border: 1px solid var(--pi-ps-insight-hairline);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 4px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--pi-ps-insight-ink);
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+.pi-ps-insight-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.pi-ps-insight-detail-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-detail-close {
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--pi-ps-insight-muted-ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pi-ps-insight-detail-close:hover {
+  background: var(--pi-ps-insight-chip-bg);
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-detail-close:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border);
+  outline-offset: 1px;
+}
+
+/* ─── Insight popover panel ──────────────────────────────────── */
+
+/*
+ * Popover root.
+ *
+ * `position: fixed` is set inline by `AnchoredPopover` (it computes
+ * `top`/`left` in viewport coordinates), but we restate it here so
+ * a teacher who manually inspects the panel still sees the painted
+ * rule. `z-index: 60` deliberately sits above the C3 evidence-line
+ * overlay (z:5) so the popover paints on top of the dotted line; if
+ * a future cut introduces a higher-stack surface the value is the
+ * single tunable to bump.
+ *
+ * Width is read from the `--anchored-popover-width` custom property
+ * `AnchoredPopover` writes (we pass `widthPx={360}` from the harness
+ * call site). The fallback `360px` only matters if a future caller
+ * forgets to wire the prop — JS-side viewport clamp and painted CSS
+ * width can never drift apart on real renders.
+ */
+.pi-ps-insight-panel {
+  position: fixed;
+  z-index: 60;
+  width: var(--anchored-popover-width, 360px);
+  min-width: 320px;
+  max-width: min(420px, calc(100vw - 32px));
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 12px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 60vh;
+  overflow-y: auto;
+  animation: pi-ps-insight-fade-in 120ms ease-out;
+}
+
+@keyframes pi-ps-insight-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-ps-insight-panel {
+    animation: none;
+  }
+}
+
+.pi-ps-insight-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.pi-ps-insight-panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.pi-ps-insight-panel-close {
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: #666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pi-ps-insight-panel-close:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.pi-ps-insight-panel-close:focus-visible {
+  outline: 2px solid #2a7c4f;
+  outline-offset: 1px;
+}
+
+/*
+ * ─── Stacked mode: left-side drawer style for the popover ────────
+ *
+ * PA-approved: at <=1199px the AnchoredPopover is restyled as a
+ * left-side drawer anchored to the rail handle. It may overlay gray
+ * matte/desk but avoids covering white paper body.
+ */
+@media (max-width: 1199px) {
+  .pi-ps-insight-panel {
+    left: 40px !important;
+    top: 48px !important;
+    bottom: 0;
+    max-height: calc(100vh - 48px);
+    width: 220px;
+    min-width: 200px;
+    max-width: 240px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.10);
+  }
+}
+
+/*
+ * ─── Medium desktop 1200-1535px: NO popover ─────────────────────
+ *
+ * C4 UX Must Fix (PR #52 browser QA):
+ * AnchoredPopover is NOT rendered at 1200-1535px (gated in TSX).
+ * This rule exists as a defensive fallback: if the panel somehow
+ * renders, hide it rather than overlap white paper.
+ */
+@media (min-width: 1200px) and (max-width: 1535px) {
+  .pi-ps-insight-panel {
+    display: none !important;
+  }
+}
+
+/* ─── Insight panel body (loads / outline / chunks) ──────────── */
+
+/*
+ * Harness-local copies of the default PI route's `pi-loads`,
+ * `pi-outline`, `pi-chunks` rules. The class names are deliberately
+ * different (`pi-ps-insight-...`) so the harness does not depend on
+ * `paperIntelligence.css`. Visual fidelity is intentional — both
+ * surfaces should read like the same panel.
+ */
+.pi-ps-insight-loads {
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pi-ps-insight-loads-title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pi-ps-insight-load-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.pi-ps-insight-load-label {
+  width: 72px;
+  flex-shrink: 0;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.pi-ps-insight-load-bar {
+  display: flex;
+  gap: 3px;
+}
+
+.pi-ps-insight-load-cell {
+  width: 16px;
+  height: 9px;
+  border-radius: 2px;
+  background: #e5e7eb;
+}
+
+.pi-ps-insight-load-cell[data-filled="true"] {
+  background: #2a7c4f;
+}
+
+.pi-ps-insight-load-cell[data-filled="true"][data-high="true"] {
+  background: #d97706;
+}
+
+.pi-ps-insight-load-score {
+  font-size: 12px;
+  color: #6b7280;
+  min-width: 24px;
+}
+
+.pi-ps-insight-load-reason {
+  color: #1f2937;
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.pi-ps-insight-outline {
+  padding: 10px 0;
+}
+
+.pi-ps-insight-outline-title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.pi-ps-insight-outline-idea {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+  overflow-wrap: break-word;
+}
+
+.pi-ps-insight-outline-layers {
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+.pi-ps-insight-outline-layers li {
+  margin-bottom: 4px;
+}
+
+.pi-ps-insight-chunks {
+  padding: 10px 0 4px;
+}
+
+.pi-ps-insight-chunks-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }

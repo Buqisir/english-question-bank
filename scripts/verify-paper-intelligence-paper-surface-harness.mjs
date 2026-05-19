@@ -53,13 +53,14 @@
  *       box-shadow declaration in the whole file, and it must live on
  *       .ps-page)
  *
- *   C2 polish boundary — harness CSS polish slice (Issue #43 redesign,
- *   final tune: 32px symmetric matte):
- *     - .pi-ps-harness-shell uses 4-column centered workspace grid:
- *         minmax(0, 1fr) minmax(0, 858px) minmax(0, 380px) minmax(0, 1fr)
+ *   C2/#43/C4 polish boundary — harness CSS polish slice (Issue #43
+ *   redesign, final tune: 32px symmetric matte, plus C4 right-shift):
+ *     - .pi-ps-harness-shell uses the C4 no-right-gutter grid:
+ *         minmax(0, 1fr) minmax(0, 858px) minmax(0, 380px)
  *       (858px = 794px white sheet + 32px × 2 symmetric matte;
  *       browser QA progression from 842px / 24px matte and
- *       850px / 28px matte)
+ *       850px / 28px matte; C4 removes the final right 1fr gutter so
+ *       the analysis background can reach the viewport edge)
  *     - .pi-ps-harness-shell has column-gap: 24px
  *     - .pi-ps-harness-shell paints desk tone (#ececec)
  *     - .pi-ps-harness-left is on grid-column: 2 with overflow-y: auto
@@ -281,9 +282,9 @@ assert(
   )
 }
 
-// ─── Harness CSS boundary (Issue #43: 4-column centered workspace) ───
+// ─── Harness CSS boundary (C4 retune: no-right-gutter workspace) ───
 
-console.log('\n=== Issue #43: harness CSS 4-column workspace shell ===')
+console.log('\n=== C4 retune: harness CSS no-right-gutter workspace shell ===')
 
 const harnessCssRaw = readFile(HARNESS_CSS_PATH)
 const harnessCss = stripCssComments(harnessCssRaw)
@@ -296,16 +297,22 @@ const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
   const shellMatch = harnessCssBase.match(/\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/)
   const shellBody = shellMatch ? shellMatch[1] : ''
 
-  // 4-column model: outer-left desk, paper track (858px = 794px sheet
-  // + 32px × 2 symmetric matte; browser QA progression 842px /
-  // 24px matte → 850px / 28px matte → 858px / 32px matte), rail
-  // track, outer-right desk.
+  // C4 retune model: outer-left desk, paper track (858px = 794px
+  // sheet + 32px × 2 symmetric matte), analysis track (380px), and
+  // no outer-right 1fr gutter. The right analysis background bleeds
+  // to the viewport edge; the text column remains bounded.
   assert(
     !!shellMatch &&
-      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*858px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
+      /grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*858px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s*;/.test(
         shellBody,
       ),
-    "harness CSS .pi-ps-harness-shell uses 4-column centered workspace grid (1fr / 858px / 380px / 1fr)"
+    "harness CSS .pi-ps-harness-shell uses C4 no-right-gutter grid (1fr / 858px / 380px)"
+  )
+  assert(
+    !/grid-template-columns\s*:\s*minmax\(\s*0\s*,\s*1fr\s*\)\s+minmax\(\s*0\s*,\s*858px\s*\)\s+minmax\(\s*0\s*,\s*380px\s*\)\s+minmax\(\s*0\s*,\s*1fr\s*\)\s*;/.test(
+      shellBody,
+    ),
+    "harness CSS .pi-ps-harness-shell no longer uses the old 4-column right-gutter grid"
   )
   assert(
     /minmax\(\s*0\s*,\s*858px\s*\)/.test(shellBody),
@@ -325,7 +332,7 @@ const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
   )
   assert(
     /minmax\(\s*0\s*,\s*380px\s*\)/.test(shellBody),
-    "harness CSS .pi-ps-harness-shell rail track is minmax(0, 380px)"
+    "harness CSS .pi-ps-harness-shell analysis track is minmax(0, 380px)"
   )
   assert(
     /column-gap\s*:\s*24px\s*;/.test(shellBody),

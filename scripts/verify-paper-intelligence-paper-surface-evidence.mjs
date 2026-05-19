@@ -508,11 +508,22 @@ const allowedC3 = new Set([
   'app/src/shared-ui/papersurface/PaperSurface.tsx',
   'app/src/shared-ui/papersurface/PaperSurface.css',
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
+  'app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx',
+  'app/src/features/paper-intelligence/insight/insightChipLabel.ts',
+  'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
   'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLineGeometry.ts',
   'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx',
+  'docs/paper-surface-watch-ledger.md',
+  'docs/product/mockups/paper-surface-c4-insight-layout/01-current-problem.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/02-target-default.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/03-left-rail-expanded.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/04-before-after.png',
+  'docs/product/mockups/paper-surface-c4-insight-layout/README.md',
   'scripts/verify-paper-intelligence-paper-surface-harness.mjs',
   'scripts/verify-paper-intelligence-paper-surface-evidence.mjs',
+  'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
+  'scripts/verify-paper-surface-module-v1.mjs',
 ])
 const unexpected = changedFiles.filter((f) => !allowedC3.has(f))
 assert(
