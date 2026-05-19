@@ -2078,11 +2078,73 @@ assert(
 )
 
 /*
- * TXT-8. Detail content still renders when chip is active.
+ * TXT-8. hover / focus / locked / detail-open do NOT restore chip text.
+ *
+ * Since `.pi-ps-insight-chip-text` no longer exists in DOM or CSS (TXT-1/TXT-2),
+ * there's no element to show. But we explicitly verify that no ::before/::after
+ * content property injects text into chip or chip-section in ANY state, and that
+ * no chip rule references `attr(data-label)` or similar text-injection patterns.
+ */
+{
+  // Collect all CSS rule bodies for any selector containing "insight-chip".
+  const chipRuleBodies = []
+  const ruleBodyRe = /([^{}]+?)\{([^{}]*)\}/g
+  let rm
+  while ((rm = ruleBodyRe.exec(harnessCssNoComments)) !== null) {
+    const sel = rm[1].trim()
+    if (/insight-chip/.test(sel)) {
+      chipRuleBodies.push({ sel, body: rm[2] })
+    }
+  }
+  // No `content:` property (standalone, not justify-content/align-content)
+  // that isn't 'none' or '' (empty string).
+  const contentInjectors = chipRuleBodies.filter((r) =>
+    /(?<![a-z-])content\s*:/.test(r.body) &&
+    !/(?<![a-z-])content\s*:\s*(?:none|''|"")\s*[;}]/.test(r.body),
+  )
+  assert(
+    contentInjectors.length === 0,
+    "TXT-8a: no ::before/::after content injection in any chip state (hover/focus/locked/detail-open cannot restore text)",
+  )
+  // No attr(data-...) text injection.
+  const attrInjectors = chipRuleBodies.filter((r) =>
+    /attr\s*\(\s*data-/.test(r.body),
+  )
+  assert(
+    attrInjectors.length === 0,
+    "TXT-8b: no attr(data-*) text injection in any chip rule (no dynamic label can appear)",
+  )
+  // :hover and :focus selectors on chip have no visibility/display/overflow change that reveals hidden text.
+  const hoverFocusRules = chipRuleBodies.filter((r) =>
+    /:(hover|focus|focus-within|focus-visible)\b/.test(r.sel),
+  )
+  const textRevealers = hoverFocusRules.filter((r) =>
+    /\b(white-space|text-overflow|overflow)\s*:\s*(?!hidden)/.test(r.body) &&
+    /insight-chip-text|chip-label|shortLabel/.test(r.sel + r.body),
+  )
+  assert(
+    textRevealers.length === 0,
+    "TXT-8c: hover/focus states do not reveal hidden chip text (no overflow/text-overflow reveal)",
+  )
+  // data-rail-locked and data-rail-detail-open selectors do not show chip text.
+  const lockedDetailRules = chipRuleBodies.filter((r) =>
+    /data-rail-locked|data-rail-detail-open/.test(r.sel),
+  )
+  const lockedTextRevealers = lockedDetailRules.filter((r) =>
+    /chip-text|shortLabel|chip-label/.test(r.sel + r.body),
+  )
+  assert(
+    lockedTextRevealers.length === 0,
+    "TXT-8d: locked/detail-open states do not restore chip text labels",
+  )
+}
+
+/*
+ * TXT-9. Detail content still renders when chip is active.
  */
 assert(
   /pi-ps-insight-detail/.test(harnessNoComments),
-  "TXT-8: .pi-ps-insight-detail still renders (detail content visible when active)",
+  "TXT-9: .pi-ps-insight-detail still renders (detail content visible when active)",
 )
 
 /* ─── Summary ────────────────────────────────────────────────────── */
