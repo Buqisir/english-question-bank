@@ -769,7 +769,7 @@ button.pi-ps-analysis-distractor--selected {
   }
 
   .pi-ps-insight-rail[data-rail-detail-open='true'] {
-    width: 200px;
+    width: 260px;
     background: var(--pi-ps-insight-rail-bg);
     box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
   }

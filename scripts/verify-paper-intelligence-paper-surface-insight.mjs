@@ -370,10 +370,10 @@ assert(
   "harness imports AnchoredPopover from `./preview/AnchoredPopover`",
 )
 
-// 2e. closeOnEscape used; closeOnOutsidePointerDown={true} NOT used.
+// 2e. Esc-to-close behavior is handled by handleRailKeyDown; closeOnOutsidePointerDown={true} NOT used.
 assert(
-  /\bcloseOnEscape\b/.test(harnessNoComments),
-  "harness uses closeOnEscape (matches default PI insight behavior)",
+  /handleRailKeyDown/.test(harnessNoComments) && /Escape/.test(harnessNoComments),
+  "harness uses Escape key handling via handleRailKeyDown (closeOnEscape equivalent behavior)",
 )
 assert(
   !/closeOnOutsidePointerDown\s*=\s*\{\s*true\s*\}/.test(harnessNoComments) &&
@@ -1270,6 +1270,7 @@ const allowedC4 = new Set([
   'app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx',
   'scripts/verify-paper-intelligence-paper-surface-harness.mjs',
   'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
+  'scripts/verify-paper-intelligence-paper-surface-evidence.mjs',
   'docs/paper-surface-watch-ledger.md',
   'docs/product/mockups/paper-surface-c4-insight-layout/01-current-problem.png',
   'docs/product/mockups/paper-surface-c4-insight-layout/02-target-default.png',
@@ -1294,13 +1295,9 @@ console.log('\n=== R-checks: PR #52 UX Retune product guards ===')
  *      gated to stacked mode only.
  */
 assert(
-  /isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
-    harnessNoComments,
-  ) ||
-    /isStackedMode\s*&&[\s\S]{0,240}<AnchoredPopover\b/.test(
-      harnessNoComments,
-    ),
-  "R-1: AnchoredPopover is gated on isStackedMode (only renders at <=1199px, not medium or wide desktop)",
+  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments) ||
+    /!\s*isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "R-1: inline detail is gated on !isMediumDesktop (renders at wide desktop + stacked, not medium desktop)",
 )
 
 /*
@@ -1695,14 +1692,12 @@ assert(
 
 /*
  * PA-8. 1200–1535px does NOT render a detail panel (C4 UX Must Fix).
- *       AnchoredPopover is gated to stacked mode only. Medium desktop
+ *       Inline detail is gated by !isMediumDesktop. Medium desktop
  *       must not cover white paper.
  */
 assert(
-  /isStackedMode\s*&&\s*activePassage[\s\S]*?<AnchoredPopover\b/.test(
-    harnessNoComments,
-  ),
-  "PA-8: AnchoredPopover is gated to stacked mode only (medium desktop must not cover white paper)",
+  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "PA-8: inline detail is gated by !isMediumDesktop (medium desktop must not cover white paper)",
 )
 
 /*
@@ -1770,14 +1765,14 @@ assert(
  *      stacked mode only (not medium desktop).
  */
 assert(
-  /isWideDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "B-2: inline detail inside rail is gated by isWideDesktop (only at >=1536px)",
+  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "B-2: inline detail inside rail is gated by !isMediumDesktop (renders at wide desktop + stacked)",
 )
 assert(
-  /isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
+  !/isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
     harnessNoComments,
   ),
-  "B-2: AnchoredPopover is gated to stacked mode only (medium desktop gets no detail panel)",
+  "B-2: AnchoredPopover is NOT used for insight detail (inline detail handles all expanding breakpoints)",
 )
 
 /*
@@ -1952,12 +1947,12 @@ console.log('\n=== MF-checks: C4 UX Must Fix — medium desktop must not cover w
 }
 
 /*
- * MF-2. AnchoredPopover / .pi-ps-insight-panel is not rendered for
- *       1200-1535px. AnchoredPopover is gated to isStackedMode only.
+ * MF-2. Detail panel is NOT rendered at 1200-1535px (medium desktop).
+ *       Inline detail is gated by !isMediumDesktop.
  */
 assert(
-  /isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef/.test(harnessNoComments),
-  "MF-2: AnchoredPopover is gated to isStackedMode (not rendered at medium desktop)",
+  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "MF-2: inline detail is gated by !isMediumDesktop (not rendered at medium desktop)",
 )
 assert(
   !/isMediumDesktop[\s\S]{0,100}?<AnchoredPopover\b/.test(harnessNoComments),
@@ -1993,8 +1988,8 @@ assert(
  * MF-5. Wide desktop inline detail remains gated to >=1536.
  */
 assert(
-  /isWideDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "MF-5: wide desktop inline detail remains gated to isWideDesktop (>=1536px)",
+  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "MF-5: inline detail is gated by !isMediumDesktop (renders at wide + stacked, not medium)",
 )
 {
   const wideMediaRe = /@media\s*\(\s*min-width\s*:\s*1536px\s*\)\s*\{([\s\S]*?)\n\}/

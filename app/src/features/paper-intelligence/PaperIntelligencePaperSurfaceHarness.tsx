@@ -95,9 +95,8 @@
  *     an active visual state but does NOT open a detail panel — no
  *     AnchoredPopover, no inline detail, no expansion beyond 48px.
  *     This is required to prevent white paper overlap at tight widths.
- *     At <=1199px (stacked), the active chip mounts an
- *     `<AnchoredPopover>` (reused unchanged from
- *     `preview/AnchoredPopover.tsx`) styled as a left-side drawer.
+ *     At <=1199px (stacked), the active chip renders inline detail
+ *     inside the expanded rail (same mechanism as wide desktop).
  *   - `request-lecture-focus` clears `activeInsightSection` AND
  *     `railLocked` (matches default PI's "selecting a question card
  *     closes the insight popover"; the rail compacts back too).
@@ -233,14 +232,13 @@ export function PaperIntelligencePaperSurfaceHarness({
   /**
    * C4 chip ref map. The harness renders one `<button>` per passage
    * section; each button gets a stable ref object keyed by section id
-   * so the AnchoredPopover anchorRef can stay a single object that
-   * always points at the currently-active chip.
+   * so the insight chip element can be programmatically accessed for
+   * scroll-into-view and focus management.
    *
    * The map is keyed by `paperSection` (the same id space as
    * PaperSurface's existing `[data-paper-section]` anchor). Refs are
    * created lazily on first request and reused across renders, so
-   * React's ref attribute mutates the same object the popover reads
-   * from.
+   * React's ref attribute mutates the same object.
    */
   type ChipRef = { current: HTMLButtonElement | null }
   const chipRefMap = useRef<Map<string, ChipRef>>(new Map())
@@ -604,9 +602,6 @@ export function PaperIntelligencePaperSurfaceHarness({
     activeInsightSection && report
       ? report.passages.find((p) => p.paperSection === activeInsightSection)
       : undefined
-  const activeChipRef: ChipRef | null = activeInsightSection
-    ? getChipRef(activeInsightSection)
-    : null
 
   /**
    * Render a single insight chip. Always rendered inside the left
@@ -745,8 +740,8 @@ export function PaperIntelligencePaperSurfaceHarness({
             {report.passages.map((p) => (
               <div key={p.paperSection}>
                 {renderInsightChip(p)}
-                {/* Wide desktop (>=1536px): inline detail inside rail */}
-                {isWideDesktop && activeInsightSection === p.paperSection && activePassage && (
+                {/* Inline detail inside rail (wide desktop + stacked; NOT medium desktop where rail stays 48px) */}
+                {!isMediumDesktop && activeInsightSection === p.paperSection && activePassage && (
                   <div
                     className="pi-ps-insight-detail"
                     id={`pi-ps-insight-panel-${p.paperSection}`}
@@ -830,53 +825,19 @@ export function PaperIntelligencePaperSurfaceHarness({
           leftSelectorPreset="paper-surface"
         />
         {/*
-          C4 UX Must Fix (PR #52 browser QA):
+          C4 UX Must Fix (PR #52 browser QA / PO QA):
 
           Detail surfaces by breakpoint:
             - Wide desktop (>=1536px): inline detail inside the rail (above).
             - Medium desktop (1200–1535px): NO detail panel. Chip click
-              sets active visual state only. No AnchoredPopover. Rail
-              stays 48px. Must not cover white paper.
-            - Stacked/narrow (<=1199px): AnchoredPopover styled as a
-              left-side drawer via CSS.
+              sets active visual state only. Rail stays 48px. Must not
+              cover white paper.
+            - Stacked/narrow (<=1199px): inline detail inside the rail
+              (same as wide desktop). Rail expands to show content.
 
-          AnchoredPopover is mounted ONLY in stacked mode.
+          Inline detail is used at all breakpoints where the rail
+          expands (wide + stacked). No AnchoredPopover for insight.
         */}
-        {isStackedMode && activePassage && activeChipRef && (
-          <AnchoredPopover
-            anchorRef={activeChipRef as unknown as RefObject<HTMLElement | null>}
-            open={activeInsightSection !== null}
-            onClose={handleCloseInsight}
-            id={`pi-ps-insight-panel-${activePassage.paperSection}`}
-            role="dialog"
-            ariaLabel="篇章洞察"
-            className="pi-ps-insight-panel"
-            widthPx={220}
-            gapPx={4}
-            viewportPaddingPx={16}
-            align="start"
-            closeOnEscape
-            dataAttributes={{
-              'data-pi-insight-panel': activePassage.paperSection,
-              'data-pi-insight-mode': 'drawer',
-            }}
-          >
-            <div className="pi-ps-insight-panel-header">
-              <span className="pi-ps-insight-panel-title">
-                篇章洞察 · {activePassage.paperSection}
-              </span>
-              <button
-                type="button"
-                className="pi-ps-insight-panel-close"
-                onClick={handleCloseInsight}
-                aria-label="关闭洞察面板"
-              >
-                ×
-              </button>
-            </div>
-            <HarnessInsightPanelContent reportPassage={activePassage} />
-          </AnchoredPopover>
-        )}
       </div>
     </div>
   )

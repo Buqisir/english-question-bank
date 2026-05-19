@@ -513,6 +513,7 @@ const allowedC3 = new Set([
   'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx',
   'scripts/verify-paper-intelligence-paper-surface-harness.mjs',
   'scripts/verify-paper-intelligence-paper-surface-evidence.mjs',
+  'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
 ])
 const unexpected = changedFiles.filter((f) => !allowedC3.has(f))
 assert(
