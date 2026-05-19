@@ -468,7 +468,19 @@ button.pi-ps-analysis-distractor:focus-visible {
   border-left-width: 4px;
 }
 
-.pi-ps-analysis-distractor--selected {
+/*
+ * Specificity note (Issue #21-C3.6 browser-QA fix):
+ * The base reset rule `button.pi-ps-analysis-distractor { background:
+ * transparent }` above has specificity (0,1,1), which beats a bare
+ * `.pi-ps-analysis-distractor--selected` (0,1,0) at cascade time, so
+ * the amber tint never paints in the browser. We bump this rule to
+ * `button.pi-ps-analysis-distractor--selected` (also (0,1,1)) so it
+ * matches and, being declared later, wins the cascade. Do NOT
+ * downgrade this back to `.pi-ps-analysis-distractor--selected`
+ * without also weakening the base button reset, or the C3.6 selected
+ * trap row visually regresses to a transparent background.
+ */
+button.pi-ps-analysis-distractor--selected {
   background: rgba(245, 158, 11, 0.10);
 }
 

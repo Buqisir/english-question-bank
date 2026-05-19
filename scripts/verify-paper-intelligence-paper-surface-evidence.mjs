@@ -665,6 +665,52 @@ assert(
       !/#dc2626\b/i.test(distractorBody),
     "trap selected distractor row does NOT use a red/rose palette",
   )
+
+  // 6d-bis. Specificity guard (Issue #21-C3.6 browser-QA fix).
+  //
+  // The right-panel distractor rows are <button>s, so the harness has
+  // a base reset:
+  //
+  //   button.pi-ps-analysis-distractor { background: transparent; }
+  //
+  // That base rule has specificity (0,1,1). A bare
+  // `.pi-ps-analysis-distractor--selected` selected-row rule has
+  // specificity (0,1,0), so the amber tint loses the cascade and
+  // the selected trap row paints transparent in the real browser
+  // (computed: rgba(0,0,0,0)) even though the rule is "present".
+  //
+  // The static check: assert the selected-row rule lives on a
+  // selector at least as specific as the base button reset. Three
+  // shapes are accepted:
+  //
+  //   button.pi-ps-analysis-distractor--selected            (0,1,1)
+  //   button.pi-ps-analysis-distractor.pi-ps-analysis-distractor--selected
+  //                                                         (0,2,1)
+  //   .pi-ps-harness-shell .pi-ps-analysis-distractor--selected
+  //                                                         (0,2,0)
+  //
+  // The first form is what this PR ships and is the simplest fix.
+  // The other two are accepted so a future refactor that scopes the
+  // selected-row rule under the harness shell or compounds the
+  // selector still passes.
+  const specificityRule = harnessCssNoComments.match(
+    /(?:button\.pi-ps-analysis-distractor(?:\.pi-ps-analysis-distractor)?--selected|\.pi-ps-harness-shell\s+\.pi-ps-analysis-distractor--selected)\s*\{([\s\S]*?)\}/,
+  )
+  assert(
+    !!specificityRule,
+    "trap selected distractor row rule has specificity >= base `button.pi-ps-analysis-distractor` reset (use `button.pi-ps-analysis-distractor--selected` or scope under `.pi-ps-harness-shell`)",
+  )
+  // And: the higher-specificity rule itself must paint amber. This
+  // guards against the regression where someone moves the rule to a
+  // higher-specificity selector but accidentally drops the amber
+  // declaration in the move.
+  const specificityBody = specificityRule ? specificityRule[1] : ''
+  assert(
+    /\b245\s*,\s*158\s*,\s*11\b/.test(specificityBody) ||
+      /#f59e0b\b/i.test(specificityBody) ||
+      /#fbbf24\b/i.test(specificityBody),
+    "high-specificity selected distractor row rule paints amber (so it actually wins the cascade against `button.pi-ps-analysis-distractor { background: transparent }`)",
+  )
 }
 
 // 6e. PaperSurface.css declares kind-specific active-anchor rules.
