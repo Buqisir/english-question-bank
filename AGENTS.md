@@ -31,9 +31,8 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ## Browser Verification
 
-- The Codex in-app browser is allowed for PO-facing QA, visual spot checks, and any browser verification the user explicitly asks to watch or discuss live.
-- If the in-app browser times out, gives stale state, or cannot prove the visual claim, fall back to local Chrome/headless Playwright for smoke tests and screenshots.
-- Do not treat "static verify passed" as "browser QA passed" for user-visible PaperSurface changes.
+- Do not use the Codex in-app browser for this project for now; it has been timing out on local UI checks.
+- Use local Chrome/headless Playwright for UI smoke tests and screenshots.
 
 ## Collaboration Workflow
 
