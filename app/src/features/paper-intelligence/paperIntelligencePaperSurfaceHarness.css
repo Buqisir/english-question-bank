@@ -728,10 +728,18 @@ button.pi-ps-analysis-distractor--selected {
   box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
 }
 
-/* State 3: active detail open — 240px (wide desktop only, >=1536px) */
+/* State 3: active detail open — 300px (wide desktop only, >=1536px)
+ *
+ * INVARIANT (PR #52 PO QA Must Fix):
+ *   This rule ONLY fires when TSX sets data-rail-detail-open='true',
+ *   which the TSX now gates on `!isMediumDesktop && activeInsightSection`.
+ *   Therefore: if this rule expands the rail, the .pi-ps-insight-detail
+ *   div is guaranteed to be rendered in the DOM by the same render pass.
+ *   The forbidden state (expanded rail + no detail content) cannot occur.
+ */
 @media (min-width: 1536px) {
   .pi-ps-insight-rail[data-rail-detail-open='true'] {
-    width: 240px;
+    width: 300px;
     background: var(--pi-ps-insight-rail-bg);
     border-right-color: var(--pi-ps-insight-hairline);
     box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
@@ -814,7 +822,7 @@ button.pi-ps-analysis-distractor--selected {
  *
  * Implementation:
  *   - Rail stays 48px in ALL states (hover, focus, locked, detail-open).
- *   - No 120px expansion. No 240px inline detail.
+ *   - No 120px expansion. No 300px inline detail.
  *   - No AnchoredPopover renders at this breakpoint (gated in TSX).
  *   - Chip text stays hidden (opacity:0) — only the section badge is
  *     visible. Clicking a chip sets an active visual state but does
@@ -1251,13 +1259,14 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-load-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   margin-bottom: 6px;
   font-size: 13px;
 }
 
 .pi-ps-insight-load-label {
-  width: 84px;
+  width: 72px;
   flex-shrink: 0;
   color: #6b7280;
   font-size: 12px;
@@ -1293,6 +1302,8 @@ button.pi-ps-analysis-distractor--selected {
   color: #1f2937;
   font-size: 12px;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .pi-ps-insight-outline {

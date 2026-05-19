@@ -55,7 +55,7 @@
  *          line.
  *        - 6b: PR #52 PA must-fix — left rail rule exists, is left-
  *          pinned, collapsed 48px, soft-expanded 160-180px on :hover
- *          and :focus-within, detail-open 240-260px, z-index ordered
+ *          and :focus-within, detail-open 260-320px, z-index ordered
  *          between line and popover,
  *          and the legacy `.pi-ps-insight-chip-strip` is gone from
  *          BOTH the CSS rules AND the TSX className references.
@@ -864,7 +864,7 @@ const panelBody = panelMatch ? panelMatch[1] : ''
  *   2. Collapsed width is 48px.
  *   3. Soft-expanded width is 160-180px, via `:hover`,
  *      `:focus-within`, and a locked-state hook the rail toggle
- *      can drive; inline-detail width is 240-260px.
+ *      can drive; inline-detail width is 260-320px.
  *   4. Rail z-index ordering: rail sits below the popover, above
  *      the line overlay (popover always paints above; line draws
  *      under the rail).
@@ -931,7 +931,7 @@ assert(
   )
 }
 
-// 6b.3-bis. Detail-open width is 240-260px.
+// 6b.3-bis. Detail-open width is 260-320px.
 {
   const detailOpenRe =
     /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{([\s\S]*?)\}/
@@ -940,8 +940,8 @@ assert(
   const detailW = (detailOpenBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
   const detailNum = detailW ? parseInt(detailW, 10) : NaN
   assert(
-    Number.isFinite(detailNum) && detailNum >= 240 && detailNum <= 260,
-    `.pi-ps-insight-rail detail-open width is 240-260px (got ${detailW ?? 'missing'}px)`,
+    Number.isFinite(detailNum) && detailNum >= 260 && detailNum <= 320,
+    `.pi-ps-insight-rail detail-open width is 260-320px (got ${detailW ?? 'missing'}px)`,
   )
 }
 
@@ -1326,7 +1326,7 @@ assert(
 }
 
 /*
- * R-4. Detail-open rail width is 240–260px.
+ * R-4. Detail-open rail width is 260–320px.
  */
 {
   const detailOpenRe =
@@ -1336,8 +1336,8 @@ assert(
   const detailW = (detailOpenBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
   const detailNum = detailW ? parseInt(detailW, 10) : NaN
   assert(
-    Number.isFinite(detailNum) && detailNum >= 240 && detailNum <= 260,
-    `R-4: detail-open rail width is 240–260px (got ${detailW ?? 'missing'}px)`,
+    Number.isFinite(detailNum) && detailNum >= 260 && detailNum <= 320,
+    `R-4: detail-open rail width is 260–320px (got ${detailW ?? 'missing'}px)`,
   )
 }
 
@@ -1661,23 +1661,23 @@ assert(
 )
 
 /*
- * PA-6. Inline 240px detail expansion is gated to @media (min-width: 1536px).
+ * PA-6. Inline detail expansion (260-320px) is gated to @media (min-width: 1536px).
  */
 {
-  // The 240px detail-open rule must be inside a @media (min-width: 1536px) block.
+  // The detail-open rule must be inside a @media (min-width: 1536px) block.
   const wideMediaRe = /@media\s*\(\s*min-width\s*:\s*1536px\s*\)\s*\{([\s\S]*?)\n\}/
   const wideMediaMatch = harnessCssNoComments.match(wideMediaRe)
   const wideMediaBody = wideMediaMatch ? wideMediaMatch[1] : ''
   assert(
-    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*240px/.test(
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*\d{3}px/.test(
       wideMediaBody,
     ),
-    "PA-6: inline 240px detail expansion is gated to @media (min-width: 1536px)",
+    "PA-6: inline detail expansion is gated to @media (min-width: 1536px)",
   )
 }
 
 /*
- * PA-7. 1200–1535px does NOT use inline 240px detail.
+ * PA-7. 1200–1535px does NOT use inline detail expansion.
  */
 {
   const mediumDesktopMedia =
@@ -1685,8 +1685,8 @@ assert(
   const mediumMatch = harnessCssNoComments.match(mediumDesktopMedia)
   const mediumBody = mediumMatch ? mediumMatch[1] : ''
   assert(
-    !/width\s*:\s*240px/.test(mediumBody),
-    "PA-7: 1200-1535px does NOT use 240px inline detail",
+    !/width\s*:\s*(24|30)0px/.test(mediumBody),
+    "PA-7: 1200-1535px does NOT use detail expansion width",
   )
 }
 
@@ -1996,10 +1996,10 @@ assert(
   const wideMediaMatch = harnessCssNoComments.match(wideMediaRe)
   const wideMediaBody = wideMediaMatch ? wideMediaMatch[1] : ''
   assert(
-    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*240px/.test(
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*\d{3}px/.test(
       wideMediaBody,
     ),
-    "MF-5: CSS 240px detail-open expansion is inside @media (min-width: 1536px) only",
+    "MF-5: CSS detail-open expansion is inside @media (min-width: 1536px) only",
   )
 }
 

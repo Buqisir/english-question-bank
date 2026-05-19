@@ -69,7 +69,7 @@
  *   - The rail collapses to 48px in the outer-left desk gutter and
  *     expands to 160px on `:hover`, `:focus-within`, or the toggle
  *     button's `[data-rail-locked]`. At 1536px+ only, an active
- *     inline detail expands the rail to 240px.
+ *     inline detail expands the rail to 300px.
  *   - One insight chip per `report.passages[*].paperSection` rendered
  *     always inside the left rail (`.pi-ps-insight-rail`). The rail is
  *     always in the DOM at every viewport width. CSS media queries
@@ -330,7 +330,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── C4 PR #52: viewport-mode detection ───
   //
   // Listen to both `(max-width: 1199px)` and `(min-width: 1536px)`.
-  // The 240px inline rail detail is only geometrically safe at >=1536px.
+  // The 300px inline rail detail is only geometrically safe at >=1536px.
   // Between 1200px and 1535px the rail stays 48px with no detail panel
   // (medium desktop must not cover white paper). At <=1199px the rail
   // becomes a fixed left handle with a drawer detail.
@@ -696,20 +696,28 @@ export function PaperIntelligencePaperSurfaceHarness({
 
           The rail is always in the DOM at every viewport width.
           CSS media queries control its sizing and detail mode:
-            - >=1536px: absolute in left gutter, 48→160→240px
+            - >=1536px: absolute in left gutter, 48→160→300px
             - 1200–1535px: absolute left, stays 48px always, no expansion, no detail panel
             - <=1199px: position:fixed; left:0, acts as a handle/drawer
 
           matchMedia state still controls WHICH detail surface is
           used (inline vs AnchoredPopover vs left drawer) but NOT
           the rail mount. Chips are never double-rendered.
+
+          INVARIANT (PR #52 PO QA Must Fix):
+            data-rail-detail-open='true' is ONLY set when detail
+            actually renders (!isMediumDesktop && activeInsightSection).
+            This guarantees: if rail expands beyond compact width,
+            detail is rendered and visible. If detail does not render,
+            rail remains compact. The forbidden state (rail expanded +
+            activeInsightSection set + detailCount == 0) cannot occur.
         */}
         <aside
           className="pi-ps-insight-rail"
           aria-label="篇章洞察"
           data-rail-locked={railLocked ? 'true' : undefined}
           data-rail-detail-open={
-            activeInsightSection ? 'true' : undefined
+            !isMediumDesktop && activeInsightSection ? 'true' : undefined
           }
           data-viewport-mode={isStackedMode ? 'stacked' : isWideDesktop ? 'wide' : 'medium'}
           onKeyDown={handleRailKeyDown}
