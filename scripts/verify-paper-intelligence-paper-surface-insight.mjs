@@ -582,15 +582,77 @@ assert(
   "harness CSS declares the .pi-ps-insight-panel rule (C4 popover)",
 )
 // Popover paints above the line overlay.
+const panelMatch = harnessCssNoComments.match(
+  /\.pi-ps-insight-panel\s*\{([\s\S]*?)\}/,
+)
+const panelBody = panelMatch ? panelMatch[1] : ''
 {
-  const panelMatch = harnessCssNoComments.match(
-    /\.pi-ps-insight-panel\s*\{([\s\S]*?)\}/,
-  )
-  const body = panelMatch ? panelMatch[1] : ''
-  const z = (body.match(/z-index:\s*(\d+)/) || [])[1]
+  const z = (panelBody.match(/z-index:\s*(\d+)/) || [])[1]
   assert(
     !!z && parseInt(z, 10) > 5,
     `.pi-ps-insight-panel z-index (${z ?? 'missing'}) sits strictly above .pi-line-overlay (z-index 5)`,
+  )
+}
+
+/*
+ * C4 browser-QA Must Fix (PR #52) — chip strip stays visible during
+ * section scrolling.
+ *
+ * Symptom (observed on surface=paper): clicking an insight chip
+ * triggered `[data-paper-section]` scrollIntoView inside
+ * `.pi-ps-harness-left`, which moved the chip strip itself out of the
+ * scroller viewport. AnchoredPopover stayed anchored to the now-
+ * offscreen chip and the popover rendered offscreen too.
+ *
+ * Static fix: `.pi-ps-insight-chip-strip` is `position: sticky;
+ * top: 0` (or otherwise pinned). Stacking ordering is asserted
+ * strictly here so a future regression that bumps the popover or
+ * line-overlay z-index without realigning the strip fails this
+ * script.
+ */
+{
+  const stripMatch = harnessCssNoComments.match(
+    /\.pi-ps-insight-chip-strip\s*\{([\s\S]*?)\}/,
+  )
+  assert(
+    !!stripMatch,
+    "harness CSS declares the .pi-ps-insight-chip-strip rule",
+  )
+  const stripBody = stripMatch ? stripMatch[1] : ''
+  const isSticky = /position\s*:\s*sticky\b/.test(stripBody)
+  const isFixed = /position\s*:\s*fixed\b/.test(stripBody)
+  assert(
+    isSticky || isFixed,
+    ".pi-ps-insight-chip-strip is pinned (position: sticky or fixed) so the chip stays visible during left-scroller section jumps (PR #52 Must Fix)",
+  )
+  if (isSticky) {
+    assert(
+      /\btop\s*:\s*0(?:px|\.0+)?\b/.test(stripBody),
+      ".pi-ps-insight-chip-strip has top: 0 (sticky pin engages at the scroller's top edge)",
+    )
+  }
+  const stripZ = (stripBody.match(/z-index:\s*(\d+)/) || [])[1]
+  assert(
+    !!stripZ,
+    `.pi-ps-insight-chip-strip declares an explicit z-index (got ${stripZ ?? 'missing'})`,
+  )
+  const panelZ = (panelBody.match(/z-index:\s*(\d+)/) || [])[1]
+  assert(
+    !!stripZ && !!panelZ && parseInt(stripZ, 10) < parseInt(panelZ, 10),
+    `.pi-ps-insight-chip-strip z-index (${stripZ ?? 'missing'}) is strictly below .pi-ps-insight-panel z-index (${panelZ ?? 'missing'}) so the popover always paints above its sticky anchor`,
+  )
+  // Compatible with the line overlay (z-index 5): the strip sits
+  // above the line so the dotted line draws *under* the sticky
+  // header rather than cutting across it.
+  assert(
+    !!stripZ && parseInt(stripZ, 10) > 5,
+    `.pi-ps-insight-chip-strip z-index (${stripZ ?? 'missing'}) sits above .pi-line-overlay (z-index 5) so the cross-column line draws under the sticky chip strip`,
+  )
+  // Solid background required so the paper text scrolling under
+  // the strip does not visually smear through.
+  assert(
+    /\bbackground(?:-color)?\s*:/.test(stripBody),
+    ".pi-ps-insight-chip-strip declares a background (matte/desk tone) so paper text doesn't smear through the sticky header",
   )
 }
 

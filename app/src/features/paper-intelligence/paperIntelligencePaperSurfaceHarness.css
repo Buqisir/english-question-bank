@@ -522,6 +522,36 @@ button.pi-ps-analysis-distractor--selected {
  * Bottom margin gives the paper sheet breathing room beneath the
  * strip; padding zero on the sides because `.pi-ps-harness-left`
  * already aligns to the paper track edges.
+ *
+ * C4 browser-QA Must Fix (PR #52):
+ *
+ *   The harness scrolls the matching `[data-paper-section="..."]`
+ *   PaperSurface section root into view when a chip is opened. With
+ *   the chip strip in normal flow that scroll moves the chip strip
+ *   itself out of the `.pi-ps-harness-left` scroller's viewport, so
+ *   AnchoredPopover stays anchored to a now-offscreen chip and the
+ *   popover renders offscreen too (browser QA: leftScrollTop 831,
+ *   active chip top -765, panel top -733, panelVisible: false).
+ *
+ *   Pinning the strip with `position: sticky; top: 0` keeps the
+ *   active chip onscreen across the section jump, so the popover's
+ *   anchor rect stays inside the viewport.
+ *
+ *   z-index ordering (single source of truth lives in this file):
+ *
+ *     .pi-line-overlay         z-index: 5    (cross-column line)
+ *     .pi-ps-insight-chip-strip z-index: 20  (sticky chip header)
+ *     .pi-ps-insight-panel     z-index: 60   (popover, portalled)
+ *
+ *   The chip strip sits above the line overlay so the dotted line
+ *   draws *under* the sticky header instead of cutting across it,
+ *   and well below the popover so the popover always paints above
+ *   its own anchor.
+ *
+ *   The solid `#ececec` background matches the harness shell's desk
+ *   tone so the paper body scrolling beneath the strip does not
+ *   visually smear through; bottom padding (12px) gives the paper
+ *   sheet edge breathing room as it slides under the strip.
  */
 .pi-ps-insight-chip-strip {
   display: flex;
@@ -531,6 +561,10 @@ button.pi-ps-analysis-distractor--selected {
   margin: 0 auto;
   width: 100%;
   max-width: 794px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #ececec;
 }
 
 .pi-ps-insight-chip {
