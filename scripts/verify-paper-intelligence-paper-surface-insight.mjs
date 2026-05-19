@@ -1290,17 +1290,17 @@ assert(
 console.log('\n=== R-checks: PR #52 UX Retune product guards ===')
 
 /*
- * R-1. AnchoredPopover is NOT mounted on wide desktop; gated below
- *      `isWideDesktop`.
+ * R-1. AnchoredPopover is NOT mounted on wide desktop or medium desktop;
+ *      gated to stacked mode only.
  */
 assert(
-  /!\s*isWideDesktop\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
+  /isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
     harnessNoComments,
   ) ||
-    /!\s*isWideDesktop\s*&&[\s\S]{0,240}<AnchoredPopover\b/.test(
+    /isStackedMode\s*&&[\s\S]{0,240}<AnchoredPopover\b/.test(
       harnessNoComments,
     ),
-  "R-1: AnchoredPopover is gated on !isWideDesktop (wide desktop uses inline detail, not popover)",
+  "R-1: AnchoredPopover is gated on isStackedMode (only renders at <=1199px, not medium or wide desktop)",
 )
 
 /*
@@ -1469,15 +1469,15 @@ assert(
 }
 
 /*
- * R-12. Wide desktop does not render `.pi-ps-insight-panel`; non-wide
- *       topbar mode may.
+ * R-12. Wide desktop and medium desktop do not render `.pi-ps-insight-panel`;
+ *       only stacked mode may.
  *
  * In TSX, the AnchoredPopover (which carries `.pi-ps-insight-panel`)
- * must only render when isWideDesktop is false.
+ * must only render when isStackedMode is true.
  */
 assert(
-  /!\s*isWideDesktop[\s\S]*?pi-ps-insight-panel/.test(harnessNoComments),
-  "R-12: `.pi-ps-insight-panel` (popover) is gated behind !isWideDesktop (wide desktop never renders it)",
+  /isStackedMode[\s\S]*?pi-ps-insight-panel/.test(harnessNoComments),
+  "R-12: `.pi-ps-insight-panel` (popover) is gated behind isStackedMode (only stacked mode renders it)",
 )
 
 /*
@@ -1694,13 +1694,15 @@ assert(
 }
 
 /*
- * PA-8. 1200–1535px has left-side detail path (AnchoredPopover, not topbar).
+ * PA-8. 1200–1535px does NOT render a detail panel (C4 UX Must Fix).
+ *       AnchoredPopover is gated to stacked mode only. Medium desktop
+ *       must not cover white paper.
  */
 assert(
-  /!\s*isWideDesktop\s*&&\s*activePassage[\s\S]*?<AnchoredPopover\b/.test(
+  /isStackedMode\s*&&\s*activePassage[\s\S]*?<AnchoredPopover\b/.test(
     harnessNoComments,
   ),
-  "PA-8: 1200-1535px has left-side detail path via AnchoredPopover anchored to rail chip",
+  "PA-8: AnchoredPopover is gated to stacked mode only (medium desktop must not cover white paper)",
 )
 
 /*
@@ -1764,23 +1766,24 @@ assert(
 /*
  * B-2. Inline rail detail never renders in the 1200-1535 side-by-side
  *      band that failed browser QA. The inline detail is gated by
- *      isWideDesktop inside the rail. Non-wide viewports use
- *      AnchoredPopover as left-side detail.
+ *      isWideDesktop inside the rail. AnchoredPopover is gated to
+ *      stacked mode only (not medium desktop).
  */
 assert(
   /isWideDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
   "B-2: inline detail inside rail is gated by isWideDesktop (only at >=1536px)",
 )
 assert(
-  /!\s*isWideDesktop\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
+  /isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
     harnessNoComments,
   ),
-  "B-2: non-wide widths use the left-rail-anchored AnchoredPopover path, not inline rail detail",
+  "B-2: AnchoredPopover is gated to stacked mode only (medium desktop gets no detail panel)",
 )
 
 /*
  * B-3. CSS declares a 1200-1535px medium-desktop rail rule that
- *      narrows the rail (NOT hides it). The rail is always visible.
+ *      constrains the rail to 48px in ALL states (NOT hides it).
+ *      The rail is always visible. No expansion beyond 48px.
  */
 {
   const mediumDesktopMedia =
@@ -1793,13 +1796,28 @@ assert(
   )
   // PA-approved: rail is NOT display:none at 1200-1535px.
   assert(
-    !/\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(mediumBody),
+    !/\.pi-ps-insight-rail[^{]*\{[^}]*display\s*:\s*none/.test(mediumBody),
     "B-3: 1200-1535px CSS does NOT hide .pi-ps-insight-rail (PA-approved: always visible)",
   )
-  // Medium rail narrows to 120px on hover (not 160px or 240px).
+  // C4 UX Must Fix: medium desktop rail stays 48px in all states.
   assert(
-    /\.pi-ps-insight-rail[\s\S]*?\bwidth\s*:\s*120px\b/.test(mediumBody),
-    "B-3: 1200-1535px medium-desktop rail uses 120px hover width (not 240px inline detail)",
+    /\.pi-ps-insight-rail[\s\S]*?\bwidth\s*:\s*48px\b/.test(mediumBody),
+    "B-3: 1200-1535px medium-desktop rail width is 48px (must not cover white paper)",
+  )
+  // No 120px expansion at medium desktop.
+  assert(
+    !/\bwidth\s*:\s*120px\b/.test(mediumBody),
+    "B-3: 1200-1535px medium-desktop rail does NOT expand to 120px",
+  )
+  // No 240px expansion at medium desktop.
+  assert(
+    !/\bwidth\s*:\s*240px\b/.test(mediumBody),
+    "B-3: 1200-1535px medium-desktop rail does NOT expand to 240px",
+  )
+  // No expansion on hover/focus/locked beyond 48px.
+  assert(
+    /\.pi-ps-insight-rail:hover[\s\S]*?\bwidth\s*:\s*48px\b/.test(mediumBody),
+    "B-3: 1200-1535px medium-desktop rail hover stays at 48px",
   )
 }
 
@@ -1870,6 +1888,149 @@ assert(
     isUnchanged('app/src/features/paper-intelligence/paperIntelligence.css') &&
     isUnchanged('app/src/features/paper-intelligence/paperIntelligenceRoute.ts'),
   "B-10: default PI route files remain unchanged",
+)
+
+/* ─── MF-checks: C4 UX Must Fix — medium desktop must not cover white paper ─ */
+
+console.log('\n=== MF-checks: C4 UX Must Fix — medium desktop must not cover white paper ===')
+
+/*
+ * MF-1. At 1200–1535px, .pi-ps-insight-rail must remain width:48px
+ *       in all states.
+ */
+{
+  const mediumDesktopMedia =
+    /@media\s*\(\s*min-width\s*:\s*1200px\s*\)\s*and\s*\(\s*max-width\s*:\s*1535px\s*\)/
+  assert(
+    mediumDesktopMedia.test(harnessCssNoComments),
+    "MF-1: medium desktop @media rule exists",
+  )
+
+  // Extract all 1200-1535 bodies (there may be more than one block).
+  function extractAllMediumBodies(src) {
+    const out = []
+    let cursor = 0
+    while (cursor < src.length) {
+      const at = src.indexOf('@media', cursor)
+      if (at < 0) break
+      const close = src.indexOf(')', at)
+      if (close < 0) break
+      const nextClose = src.indexOf(')', close + 1)
+      const header = src.slice(at, nextClose >= 0 && nextClose < close + 60 ? nextClose + 1 : close + 1)
+      if (!/min-width\s*:\s*1200px/.test(header) || !/max-width\s*:\s*1535px/.test(header)) {
+        cursor = close + 1
+        continue
+      }
+      const open = src.indexOf('{', at + header.length - 1)
+      if (open < 0) break
+      let depth = 1
+      let i = open + 1
+      while (i < src.length && depth > 0) {
+        if (src[i] === '{') depth++
+        else if (src[i] === '}') depth--
+        i++
+      }
+      out.push(src.slice(open + 1, i - 1))
+      cursor = i
+    }
+    return out.join('\n')
+  }
+  const mediumBody = extractAllMediumBodies(harnessCssNoComments)
+
+  assert(
+    /\.pi-ps-insight-rail[\s\S]*?width\s*:\s*48px/.test(mediumBody),
+    "MF-1: 1200-1535px rail width is 48px",
+  )
+  assert(
+    !/\bwidth\s*:\s*120px/.test(mediumBody),
+    "MF-1: no medium desktop rule expands rail to 120px",
+  )
+  assert(
+    !/\bwidth\s*:\s*160px/.test(mediumBody) && !/\bwidth\s*:\s*240px/.test(mediumBody),
+    "MF-1: no medium desktop detail/open state expands rail beyond 48px",
+  )
+}
+
+/*
+ * MF-2. AnchoredPopover / .pi-ps-insight-panel is not rendered for
+ *       1200-1535px. AnchoredPopover is gated to isStackedMode only.
+ */
+assert(
+  /isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef/.test(harnessNoComments),
+  "MF-2: AnchoredPopover is gated to isStackedMode (not rendered at medium desktop)",
+)
+assert(
+  !/isMediumDesktop[\s\S]{0,100}?<AnchoredPopover\b/.test(harnessNoComments),
+  "MF-2: AnchoredPopover is NOT rendered conditionally on isMediumDesktop",
+)
+
+/*
+ * MF-3. .pi-ps-insight-rail still renders at 1200/1280/1440 and must
+ *       not display:none.
+ */
+assert(
+  /className\s*=\s*['"]pi-ps-insight-rail['"]/.test(harnessNoComments),
+  "MF-3: .pi-ps-insight-rail renders unconditionally in TSX",
+)
+assert(
+  !/\.pi-ps-insight-rail[^{]*\{[^}]*display\s*:\s*none/.test(harnessCssNoComments),
+  "MF-3: .pi-ps-insight-rail is never display:none at any breakpoint",
+)
+
+/*
+ * MF-4. No .pi-ps-insight-topbar-row in TSX or CSS.
+ */
+assert(
+  !/pi-ps-insight-topbar-row/.test(harnessNoComments),
+  "MF-4: topbar remains absent from TSX",
+)
+assert(
+  !/\.pi-ps-insight-topbar-row\s*[\{,]/.test(harnessCssNoComments),
+  "MF-4: topbar remains absent from CSS",
+)
+
+/*
+ * MF-5. Wide desktop inline detail remains gated to >=1536.
+ */
+assert(
+  /isWideDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "MF-5: wide desktop inline detail remains gated to isWideDesktop (>=1536px)",
+)
+{
+  const wideMediaRe = /@media\s*\(\s*min-width\s*:\s*1536px\s*\)\s*\{([\s\S]*?)\n\}/
+  const wideMediaMatch = harnessCssNoComments.match(wideMediaRe)
+  const wideMediaBody = wideMediaMatch ? wideMediaMatch[1] : ''
+  assert(
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*240px/.test(
+      wideMediaBody,
+    ),
+    "MF-5: CSS 240px detail-open expansion is inside @media (min-width: 1536px) only",
+  )
+}
+
+/*
+ * MF-6. PaperSurface / default PI route / AnchoredPopover.tsx remain
+ *       untouched.
+ */
+assert(
+  isUnchanged('app/src/shared-ui/papersurface/PaperSurface.tsx'),
+  "MF-6: PaperSurface.tsx is unchanged",
+)
+assert(
+  isUnchanged('app/src/features/paper-intelligence/preview/AnchoredPopover.tsx'),
+  "MF-6: AnchoredPopover.tsx is unchanged",
+)
+assert(
+  isUnchanged('app/src/features/paper-intelligence/paperIntelligenceRoute.ts'),
+  "MF-6: paperIntelligenceRoute.ts is unchanged",
+)
+
+/*
+ * MF-7. isMediumDesktop is derived in the harness.
+ */
+assert(
+  /isMediumDesktop\s*=\s*!isStackedMode\s*&&\s*!isWideDesktop/.test(harnessNoComments),
+  "MF-7: isMediumDesktop is correctly derived from !isStackedMode && !isWideDesktop",
 )
 
 /* ─── Summary ────────────────────────────────────────────────────── */

@@ -91,10 +91,13 @@
  *     section into view never moves the chip out of the viewport,
  *     so the popover anchor stays onscreen.
  *   - On wide desktop, the active chip renders inline detail inside
- *     the rail. Below 1536px, the active topbar chip mounts an
+ *     the rail. At 1200–1535px (medium desktop), the chip click sets
+ *     an active visual state but does NOT open a detail panel — no
+ *     AnchoredPopover, no inline detail, no expansion beyond 48px.
+ *     This is required to prevent white paper overlap at tight widths.
+ *     At <=1199px (stacked), the active chip mounts an
  *     `<AnchoredPopover>` (reused unchanged from
- *     `preview/AnchoredPopover.tsx`) whose body is the harness-local
- *     `<HarnessInsightPanelContent />`.
+ *     `preview/AnchoredPopover.tsx`) styled as a left-side drawer.
  *   - `request-lecture-focus` clears `activeInsightSection` AND
  *     `railLocked` (matches default PI's "selecting a question card
  *     closes the insight popover"; the rail compacts back too).
@@ -330,9 +333,9 @@ export function PaperIntelligencePaperSurfaceHarness({
   //
   // Listen to both `(max-width: 1199px)` and `(min-width: 1536px)`.
   // The 240px inline rail detail is only geometrically safe at >=1536px.
-  // Between 1200px and 1535px the rail uses short labels and
-  // AnchoredPopover for detail. At <=1199px the rail becomes a fixed
-  // left handle with a drawer detail.
+  // Between 1200px and 1535px the rail stays 48px with no detail panel
+  // (medium desktop must not cover white paper). At <=1199px the rail
+  // becomes a fixed left handle with a drawer detail.
   //
   // PA-approved rule: the rail is always in the DOM. matchMedia only
   // controls detail-surface selection and CSS sizing, NOT rail mount.
@@ -370,6 +373,13 @@ export function PaperIntelligencePaperSurfaceHarness({
       wideDesktopMql.removeListener(onChange)
     }
   }, [])
+
+  // ─── C4 UX Must Fix: derived medium-desktop flag ───
+  //
+  // Medium desktop = not stacked AND not wide. At this breakpoint the
+  // rail stays 48px and no detail panel renders. Used to gate chip
+  // aria-expanded and AnchoredPopover mounting.
+  const isMediumDesktop = !isStackedMode && !isWideDesktop
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
@@ -621,9 +631,10 @@ export function PaperIntelligencePaperSurfaceHarness({
             : 'pi-ps-insight-chip'
         }
         onClick={() => handleToggleInsight(p.paperSection)}
-        aria-expanded={isOpen}
-        aria-controls={`pi-ps-insight-panel-${p.paperSection}`}
+        aria-expanded={isMediumDesktop ? false : isOpen}
+        aria-controls={isMediumDesktop ? undefined : `pi-ps-insight-panel-${p.paperSection}`}
         aria-label={isOpen ? '收起洞察' : chipLabel}
+        aria-pressed={isMediumDesktop ? isOpen : undefined}
         data-pi-insight-chip={p.paperSection}
       >
         <span className="pi-ps-insight-chip-section" aria-hidden="true">
@@ -691,7 +702,7 @@ export function PaperIntelligencePaperSurfaceHarness({
           The rail is always in the DOM at every viewport width.
           CSS media queries control its sizing and detail mode:
             - >=1536px: absolute in left gutter, 48→160→240px
-            - 1200–1535px: absolute left, 48→120–140px, short labels
+            - 1200–1535px: absolute left, stays 48px always, no expansion, no detail panel
             - <=1199px: position:fixed; left:0, acts as a handle/drawer
 
           matchMedia state still controls WHICH detail surface is
@@ -819,19 +830,19 @@ export function PaperIntelligencePaperSurfaceHarness({
           leftSelectorPreset="paper-surface"
         />
         {/*
-          C4 PA-approved: left-side detail surfaces for non-wide viewports.
+          C4 UX Must Fix (PR #52 browser QA):
 
-          Medium desktop (1200–1535px): AnchoredPopover anchored to the
-          rail chip. The popover opens to the right of the rail and must
-          not cover white paper body text.
+          Detail surfaces by breakpoint:
+            - Wide desktop (>=1536px): inline detail inside the rail (above).
+            - Medium desktop (1200–1535px): NO detail panel. Chip click
+              sets active visual state only. No AnchoredPopover. Rail
+              stays 48px. Must not cover white paper.
+            - Stacked/narrow (<=1199px): AnchoredPopover styled as a
+              left-side drawer via CSS.
 
-          Stacked/narrow (<=1199px): same AnchoredPopover mechanism but
-          styled as a left-side drawer via CSS.
-
-          Wide desktop (>=1536px): inline detail inside the rail (above).
-          AnchoredPopover is NOT mounted on wide desktop.
+          AnchoredPopover is mounted ONLY in stacked mode.
         */}
-        {!isWideDesktop && activePassage && activeChipRef && (
+        {isStackedMode && activePassage && activeChipRef && (
           <AnchoredPopover
             anchorRef={activeChipRef as unknown as RefObject<HTMLElement | null>}
             open={activeInsightSection !== null}
@@ -840,14 +851,14 @@ export function PaperIntelligencePaperSurfaceHarness({
             role="dialog"
             ariaLabel="篇章洞察"
             className="pi-ps-insight-panel"
-            widthPx={isStackedMode ? 220 : 320}
+            widthPx={220}
             gapPx={4}
             viewportPaddingPx={16}
             align="start"
             closeOnEscape
             dataAttributes={{
               'data-pi-insight-panel': activePassage.paperSection,
-              'data-pi-insight-mode': isStackedMode ? 'drawer' : 'popover',
+              'data-pi-insight-mode': 'drawer',
             }}
           >
             <div className="pi-ps-insight-panel-header">

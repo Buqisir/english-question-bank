@@ -789,21 +789,56 @@ button.pi-ps-analysis-distractor--selected {
 /*
  * ─── Medium desktop 1200–1535px rail overrides ───────────────────
  *
- * C4 PA-approved: the rail stays visible on the left. It uses a
- * narrower expansion width (120px hover, NOT 240px detail inline)
- * and short labels from `buildInsightChipShortLabel`. Clicking a
- * chip opens a left-side AnchoredPopover detail (handled in TSX,
- * not inline). The rail must NOT expand to 240px at this breakpoint.
+ * C4 UX Must Fix (PR #52 browser QA):
+ *
+ * At 1200–1535px the white paper page starts as close as x=56px
+ * (at 1280px). Any rail expansion beyond 48px overlaps white paper
+ * text. The 120px hover width and 320px AnchoredPopover both failed
+ * geometry QA.
+ *
+ * Product rule:
+ *   - Insight always lives on the left.
+ *   - Medium desktop must NOT cover white paper body.
+ *   - No topbar fallback.
+ *
+ * Implementation:
+ *   - Rail stays 48px in ALL states (hover, focus, locked, detail-open).
+ *   - No 120px expansion. No 240px inline detail.
+ *   - No AnchoredPopover renders at this breakpoint (gated in TSX).
+ *   - Chip text stays hidden (opacity:0) — only the section badge is
+ *     visible. Clicking a chip sets an active visual state but does
+ *     NOT open a detail panel.
+ *   - aria-expanded stays false at this breakpoint (TSX-gated).
  */
 @media (min-width: 1200px) and (max-width: 1535px) {
+  .pi-ps-insight-rail,
   .pi-ps-insight-rail:hover,
   .pi-ps-insight-rail:focus-within,
-  .pi-ps-insight-rail[data-rail-locked='true'] {
-    width: 120px;
+  .pi-ps-insight-rail[data-rail-locked='true'],
+  .pi-ps-insight-rail[data-rail-detail-open='true'] {
+    width: 48px;
+    background: transparent;
+    border-right-color: transparent;
+    box-shadow: none;
   }
 
-  .pi-ps-insight-rail[data-rail-detail-open='true'] {
-    width: 120px;
+  .pi-ps-insight-rail .pi-ps-insight-chip-text {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Hide the rail toggle label text at medium desktop */
+  .pi-ps-insight-rail-toggle {
+    justify-content: center;
+    padding: 6px 4px;
   }
 }
 
@@ -1141,15 +1176,16 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 /*
- * ─── Medium desktop 1200-1535px: left-side popover ───────────────
+ * ─── Medium desktop 1200-1535px: NO popover ─────────────────────
  *
- * PA-approved: at 1200-1535px the AnchoredPopover opens to the
- * right of the rail. Must NOT cover white paper body text. The
- * popover is narrower (320px max) and positioned left-side.
+ * C4 UX Must Fix (PR #52 browser QA):
+ * AnchoredPopover is NOT rendered at 1200-1535px (gated in TSX).
+ * This rule exists as a defensive fallback: if the panel somehow
+ * renders, hide it rather than overlap white paper.
  */
 @media (min-width: 1200px) and (max-width: 1535px) {
   .pi-ps-insight-panel {
-    max-width: 320px;
+    display: none !important;
   }
 }
 
