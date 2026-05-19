@@ -426,25 +426,21 @@ function safeGitDiffNames(args) {
 }
 
 const baseRef = (() => {
-  try {
-    return execSync('git merge-base HEAD origin/main', {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-  } catch {
+  const candidates = ['github/main', 'origin/main', 'main']
+  for (const ref of candidates) {
     try {
-      return execSync('git merge-base HEAD main', {
+      const out = execSync(`git merge-base HEAD ${ref}`, {
         cwd: ROOT,
         stdio: ['ignore', 'pipe', 'pipe'],
       })
         .toString()
         .trim()
+      if (out) return out
     } catch {
-      return 'HEAD'
+      // Try the next remote/local candidate.
     }
   }
+  return 'HEAD'
 })()
 
 const changed = new Set()
