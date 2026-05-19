@@ -127,7 +127,6 @@ import {
 } from './preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
-import { buildInsightChipShortLabel } from './insight/insightChipShortLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
 import type {
   PaperIntelligenceReport,
@@ -604,7 +603,6 @@ export function PaperIntelligencePaperSurfaceHarness({
   const renderInsightChip = (p: PassageReport): ReactNode => {
     const isOpen = activeInsightSection === p.paperSection
     const chipLabel = buildInsightChipLabel(p)
-    const shortLabel = buildInsightChipShortLabel(p)
     return (
       <button
         key={p.paperSection}
@@ -624,7 +622,6 @@ export function PaperIntelligencePaperSurfaceHarness({
         <span className="pi-ps-insight-chip-section" aria-hidden="true">
           {p.paperSection}
         </span>
-        <span className="pi-ps-insight-chip-text">{shortLabel}</span>
       </button>
     )
   }
@@ -721,9 +718,6 @@ export function PaperIntelligencePaperSurfaceHarness({
               aria-hidden="true"
             >
               {railLocked ? '×' : '≡'}
-            </span>
-            <span className="pi-ps-insight-chip-text">
-              {railLocked ? '收起' : '结构'}
             </span>
           </button>
           <div

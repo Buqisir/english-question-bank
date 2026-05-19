@@ -789,28 +789,6 @@ button.pi-ps-analysis-distractor--selected {
     background: var(--pi-ps-insight-rail-bg);
     box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
   }
-
-  /*
-   * PR #52 C4 PO QA Must Fix — stacked mode collapsed: text must
-   * be completely hidden. Only show when rail is explicitly expanded
-   * (hover/focus/locked/detail-open).
-   */
-  .pi-ps-insight-rail .pi-ps-insight-chip-text {
-    visibility: hidden;
-    width: 0;
-    overflow: hidden;
-    opacity: 0;
-  }
-
-  .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
-    visibility: visible;
-    width: auto;
-    overflow: visible;
-    opacity: 1;
-  }
 }
 
 /*
@@ -835,31 +813,9 @@ button.pi-ps-analysis-distractor--selected {
  *   - No AnchoredPopover renders; the expanded left area contains the
  *     actual detail.
  */
-@media (min-width: 1200px) and (max-width: 1535px) {
-  .pi-ps-insight-rail .pi-ps-insight-chip-text {
-    visibility: hidden;
-    width: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
-    visibility: visible;
-    width: auto;
-    overflow: visible;
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .pi-ps-insight-rail,
   .pi-ps-insight-chip,
-  .pi-ps-insight-chip-text,
   .pi-ps-insight-detail {
     transition: none !important;
   }
@@ -876,10 +832,10 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-rail-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  width: 100%;
-  min-height: 36px;
-  padding: 6px 8px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   font: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -888,9 +844,7 @@ button.pi-ps-analysis-distractor--selected {
   border: 1px solid transparent;
   border-radius: 6px;
   cursor: pointer;
-  white-space: nowrap;
   overflow: hidden;
-  text-align: left;
 }
 
 .pi-ps-insight-rail-toggle:hover {
@@ -943,10 +897,10 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  width: 100%;
-  min-height: 36px;
-  padding: 6px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   font: inherit;
   font-size: 12px;
   font-weight: 500;
@@ -955,9 +909,7 @@ button.pi-ps-analysis-distractor--selected {
   border: 1px solid var(--pi-ps-insight-chip-border);
   border-radius: 8px;
   cursor: pointer;
-  white-space: nowrap;
   overflow: hidden;
-  text-align: left;
   transition: background 80ms ease, border-color 80ms ease,
     color 80ms ease;
 }
@@ -988,60 +940,13 @@ button.pi-ps-analysis-distractor--selected {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
-  height: 24px;
-  padding: 0 6px;
-  border-radius: 4px;
-  background: var(--pi-ps-insight-chip-bg);
-  color: var(--pi-ps-insight-muted-ink);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  flex-shrink: 0;
+  line-height: 1;
 }
 
 .pi-ps-insight-chip--open .pi-ps-insight-chip-section {
-  background: rgba(47, 41, 35, 0.08);
   color: var(--pi-ps-insight-ink);
-}
-
-/*
- * Chip text — completely hidden in collapsed rail states.
- *
- * PR #52 C4 PO QA Must Fix: the previous `opacity: 0` approach left
- * the text in layout flow. With the 48px collapsed rail, the icon
- * (24px) + gap (8px) consumed 32px, leaving ~16px where a partial
- * Chinese character could render as a clipped glyph artifact. Even
- * at opacity:0, sub-pixel anti-aliasing and transition timing could
- * leak visible fragments.
- *
- * Fix: collapsed state uses `visibility: hidden` + `width: 0` +
- * `overflow: hidden` so the text occupies zero layout space and is
- * completely invisible. Expanded state restores `visibility: visible`
- * + `width: auto`. No partial text can ever render.
- *
- * Product rule: collapsed/constrained rail = icon-only. Text labels
- * must be fully visible or fully hidden. No ellipsis. No partial
- * Chinese character.
- */
-.pi-ps-insight-chip-text {
-  display: inline-block;
-  visibility: hidden;
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 120ms ease-out, width 0ms 120ms, visibility 0ms 120ms;
-}
-
-.pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
-.pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
-.pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
-.pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
-  visibility: visible;
-  width: auto;
-  overflow: visible;
-  opacity: 1;
-  transition: opacity 120ms ease-out, width 0ms 0ms, visibility 0ms 0ms;
 }
 
 /* ─── Inline insight detail (desktop, inside rail) ───────────── */
