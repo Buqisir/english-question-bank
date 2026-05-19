@@ -488,3 +488,300 @@ button.pi-ps-analysis-distractor--selected {
   border-left-color: rgba(245, 158, 11, 0.85);
   border-left-width: 4px;
 }
+
+
+
+/* ─── C4: Insight chip strip + popover ────────────────────────── */
+
+/*
+ * Issue #21-C4 — PaperSurface Insight Parity.
+ *
+ *   - One chip per passage section, rendered inside
+ *     `.pi-ps-harness-left` above the PaperSurface.
+ *   - The strip uses flex-wrap so chips reflow on narrower viewports
+ *     (the 4-column shell collapses to a single column at <=1199px;
+ *     the chip strip itself wraps earlier than that if many passages
+ *     push past the paper track width).
+ *   - The popover is `position: fixed` and portalled by
+ *     `AnchoredPopover` to `document.body`, so its `z-index: 60`
+ *     sits above the C3 evidence-line overlay (`z-index: 5`) without
+ *     fighting the harness shell's stacking context.
+ *
+ * Class names are harness-local (`pi-ps-insight-*`). They intentionally
+ * do NOT collide with the default PI route's `pi-insight-*` rules
+ * which live in `paperIntelligence.css` (the harness does not import
+ * `paperIntelligence.css`, so the harness must self-supply every
+ * insight visual).
+ */
+
+/*
+ * Chip strip — sits above the PaperSurface, inside the left column.
+ *
+ * `display: flex; flex-wrap: wrap` so a 4-passage report can break
+ * onto a second line on narrow viewports without horizontal scroll.
+ * Bottom margin gives the paper sheet breathing room beneath the
+ * strip; padding zero on the sides because `.pi-ps-harness-left`
+ * already aligns to the paper track edges.
+ */
+.pi-ps-insight-chip-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0 12px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 794px;
+}
+
+.pi-ps-insight-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2a7c4f;
+  background: #e8f5e9;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  padding: 4px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 80ms ease, border-color 80ms ease;
+}
+
+.pi-ps-insight-chip:hover {
+  border-color: #2a7c4f;
+}
+
+.pi-ps-insight-chip:focus-visible {
+  outline: 2px solid #2a7c4f;
+  outline-offset: 2px;
+}
+
+.pi-ps-insight-chip--open {
+  background: #2a7c4f;
+  color: #fff;
+}
+
+.pi-ps-insight-chip--open:hover {
+  border-color: #2a7c4f;
+  filter: brightness(0.95);
+}
+
+/*
+ * Section badge inside the chip — small uppercase letter (e.g. "A")
+ * that stays readable when the visible label collapses to "收起洞察"
+ * on the open state.
+ */
+.pi-ps-insight-chip-section {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.5);
+  color: inherit;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pi-ps-insight-chip--open .pi-ps-insight-chip-section {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pi-ps-insight-chip-text {
+  display: inline-block;
+}
+
+/* ─── Insight popover panel ──────────────────────────────────── */
+
+/*
+ * Popover root.
+ *
+ * `position: fixed` is set inline by `AnchoredPopover` (it computes
+ * `top`/`left` in viewport coordinates), but we restate it here so
+ * a teacher who manually inspects the panel still sees the painted
+ * rule. `z-index: 60` deliberately sits above the C3 evidence-line
+ * overlay (z:5) so the popover paints on top of the dotted line; if
+ * a future cut introduces a higher-stack surface the value is the
+ * single tunable to bump.
+ *
+ * Width is read from the `--anchored-popover-width` custom property
+ * `AnchoredPopover` writes (we pass `widthPx={360}` from the harness
+ * call site). The fallback `360px` only matters if a future caller
+ * forgets to wire the prop — JS-side viewport clamp and painted CSS
+ * width can never drift apart on real renders.
+ */
+.pi-ps-insight-panel {
+  position: fixed;
+  z-index: 60;
+  width: var(--anchored-popover-width, 360px);
+  min-width: 320px;
+  max-width: min(420px, calc(100vw - 32px));
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 12px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 60vh;
+  overflow-y: auto;
+  animation: pi-ps-insight-fade-in 120ms ease-out;
+}
+
+@keyframes pi-ps-insight-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-ps-insight-panel {
+    animation: none;
+  }
+}
+
+.pi-ps-insight-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.pi-ps-insight-panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.pi-ps-insight-panel-close {
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: #666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pi-ps-insight-panel-close:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.pi-ps-insight-panel-close:focus-visible {
+  outline: 2px solid #2a7c4f;
+  outline-offset: 1px;
+}
+
+/* ─── Insight panel body (loads / outline / chunks) ──────────── */
+
+/*
+ * Harness-local copies of the default PI route's `pi-loads`,
+ * `pi-outline`, `pi-chunks` rules. The class names are deliberately
+ * different (`pi-ps-insight-...`) so the harness does not depend on
+ * `paperIntelligence.css`. Visual fidelity is intentional — both
+ * surfaces should read like the same panel.
+ */
+.pi-ps-insight-loads {
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pi-ps-insight-loads-title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pi-ps-insight-load-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.pi-ps-insight-load-label {
+  width: 84px;
+  flex-shrink: 0;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.pi-ps-insight-load-bar {
+  display: flex;
+  gap: 3px;
+}
+
+.pi-ps-insight-load-cell {
+  width: 16px;
+  height: 9px;
+  border-radius: 2px;
+  background: #e5e7eb;
+}
+
+.pi-ps-insight-load-cell[data-filled="true"] {
+  background: #2a7c4f;
+}
+
+.pi-ps-insight-load-cell[data-filled="true"][data-high="true"] {
+  background: #d97706;
+}
+
+.pi-ps-insight-load-score {
+  font-size: 12px;
+  color: #6b7280;
+  min-width: 24px;
+}
+
+.pi-ps-insight-load-reason {
+  color: #1f2937;
+  font-size: 12px;
+  flex: 1;
+}
+
+.pi-ps-insight-outline {
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pi-ps-insight-outline-idea {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.pi-ps-insight-outline-layers {
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.pi-ps-insight-chunks {
+  padding: 10px 0 4px;
+}
+
+.pi-ps-insight-chunks-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}

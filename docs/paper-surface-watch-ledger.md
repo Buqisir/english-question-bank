@@ -56,3 +56,63 @@ Follow-up trigger:
 Preferred future fix:
 - Gate seeded `activeEvidenceId` on both left evidence range and right source row availability, or add a dev-only warning for unresolved source/target pairs.
 
+
+
+
+## C4 Insight Parity
+
+Source: PR #21-C4 PaperSurface Insight Parity, the harness route `?view=paper-intelligence&surface=paper`.
+
+Status: C4 ready for review. No Must Fix at the time of writing.
+
+### Duplicated Insight Panel Content (future dedupe target)
+
+The harness route renders its own insight popover body via `app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx` and a sibling pure helper `insight/insightChipLabel.ts`. Both intentionally duplicate the default PI route's `LoadsPanel` / `OutlinePanel` / `ChunksSummary` and `buildInsightChipLabel` from `PaperIntelligencePreview.tsx`.
+
+Current risk:
+- Two copies of the loads/outline/chunks rendering can drift visually or behaviorally if one route updates the panel content without updating the other.
+- Two copies of the chip-label thresholds (≤2 light, ≤3.5 medium, otherwise heavy) can drift if a future cut tunes the binning on one side only.
+
+Follow-up trigger:
+- A teacher reports an insight content mismatch between `surface=printable` and `surface=paper`.
+- A product cut adds new fields (e.g. estimated reading time) to the insight panel and the second route forgets to mirror them.
+- The print-mode mount story stabilizes and the default PI route is ready for a non-trivial refactor.
+
+Preferred future fix:
+- Extract a single shared `<InsightPanelContent />` and `buildInsightChipLabel` into `app/src/features/paper-intelligence/insight/` and have both `PaperIntelligencePreview.tsx` and `PaperIntelligencePaperSurfaceHarness.tsx` import from there.
+- The harness's local class-name prefix (`pi-ps-insight-*`) keeps the CSS dependency split — the shared component would need either CSS Modules or duplicated CSS bundles.
+
+### Chip Strip Reflow Watch
+
+The harness chip strip (`.pi-ps-insight-chip-strip`) sits at the top of `.pi-ps-harness-left`. It uses `display: flex; flex-wrap: wrap` with a `max-width: 794px` matching the white A4 sheet width.
+
+Current risk:
+- A report with many passages (e.g. >4) produces enough chips that the strip wraps to two lines, increasing the height of the chips region and pushing the paper sheet down. The popover anchor still works (the chip ref still resolves), but the chip-to-section visual alignment can break (two chip rows above one paper).
+- Localized chip labels can become long enough that even three chips wrap; non-Chinese labels were not tested.
+
+Follow-up trigger:
+- A real exam paper with five or more reading passages enters the report set.
+- The label format changes (e.g. adds an English subtitle).
+- Browser QA finds the chip strip pushing the paper out of view at 1280px.
+
+Preferred future fix:
+- Cap the chip strip height with `overflow-x: auto` and a horizontal scroll, OR
+- Render the strip as a sticky header inside `.pi-ps-harness-left` so it survives wrapping without pushing the paper, OR
+- Anchor each chip directly to its `[data-paper-section]` root via CSS (e.g. position: sticky inside the section header) once PaperSurface exposes a "section header slot".
+
+### Popover / Evidence-Line Z-index Watch
+
+`AnchoredPopover` portals the insight panel to `document.body` and sets `position: fixed`. The harness CSS pins `.pi-ps-insight-panel { z-index: 60 }`, which sits above the C3 cross-column evidence-line overlay (`.pi-line-overlay { z-index: 5 }`).
+
+Current risk:
+- A future cut that introduces a higher-stack surface inside the harness shell (e.g. a basket popover, a print preview overlay, or a teacher-mode toolbar) may collide with the insight popover at z=60.
+- A change to `AnchoredPopover`'s portal target (e.g. portalling to a relatively-positioned ancestor for SSR reasons) could re-introduce the pre-QA #19 stacking-context trap that originally drove the portal design.
+
+Follow-up trigger:
+- The harness gains a second popover-style surface.
+- `AnchoredPopover` is refactored or its portal target changes.
+- Browser QA finds the insight popover painting under another harness surface.
+
+Preferred future fix:
+- Centralize all harness z-index values in CSS custom properties (e.g. `--pi-ps-z-line: 5`, `--pi-ps-z-popover: 60`) so the single point of truth lives in `paperIntelligencePaperSurfaceHarness.css`.
+- Add a static verify assertion that the insight popover z-index is strictly greater than the line overlay z-index.

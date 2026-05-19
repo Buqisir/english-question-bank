@@ -1,5 +1,5 @@
 /**
- * PaperIntelligencePaperSurfaceHarness — Issue #21-C1 / C2 / C3.
+ * PaperIntelligencePaperSurfaceHarness — Issue #21-C1 / C2 / C3 / C4.
  *
  * Host shell that mounts the production PaperSurface module inside the
  * Paper Intelligence route when `surface=paper` is active.
@@ -52,12 +52,40 @@
  *     types leak into PaperSurface and PaperSurface emits no
  *     `data-pi-*`.
  *
- * What this harness does NOT do:
- *   - No insight chip / popover.
+ * What this harness does NOT do (after C4):
  *   - No basket interaction.
  *   - No reading mode.
  *   - No annotation pack UI.
  *   - No flip of the default PI route.
+ *
+ * What C4 ADDS to the harness (host-only, PaperSurface stays dumb):
+ *   - One insight chip per `report.passages[*].paperSection` rendered
+ *     in a strip at the top of `.pi-ps-harness-left` (above the
+ *     PaperSurface, inside the left column's visual territory).
+ *   - `activeInsightSection: string | null` state, max one open at a
+ *     time.
+ *   - Clicking a chip aligns the matching `[data-paper-section]`
+ *     PaperSurface section root into the left scroller (this is the
+ *     only DOM read against PaperSurface and it uses the existing
+ *     section anchor — no new `data-paper-*` is introduced).
+ *   - The active chip mounts an `<AnchoredPopover>` (reused unchanged
+ *     from `preview/AnchoredPopover.tsx`) whose body is the harness-
+ *     local `<HarnessInsightPanelContent />`. Popover config matches
+ *     default PI: `align="start"`, `widthPx={360}`, `gapPx={4}`,
+ *     `viewportPaddingPx={16}`, `closeOnEscape`, no
+ *     `closeOnOutsidePointerDown` (clicking the passage body or the
+ *     right Question Analysis is meaningful teacher input and must
+ *     not dismiss the panel).
+ *   - `request-lecture-focus` clears `activeInsightSection` (matches
+ *     default PI behavior — selecting a question card closes the
+ *     insight popover).
+ *   - Right-panel evidence/distractor click does NOT clear
+ *     `activeInsightSection`.
+ *   - PaperSurface is unchanged. The harness does not import any
+ *     new module from `shared-ui/papersurface`. PaperSurface still
+ *     emits no `data-pi-*`. The chip carries a host-owned
+ *     `data-pi-insight-chip="<section>"` attribute; PaperSurface is
+ *     never told about insights, popovers, or basket.
  */
 
 import {
@@ -67,6 +95,7 @@ import {
   useRef,
   useState,
   type ReactNode,
+  type RefObject,
 } from 'react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { buildPaperSurfaceDataFromPi } from './adapter/index.ts'
@@ -76,8 +105,12 @@ import {
   type AnalysisView,
 } from './preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
+import { AnchoredPopover } from './preview/AnchoredPopover'
+import { buildInsightChipLabel } from './insight/insightChipLabel'
+import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
 import type {
   PaperIntelligenceReport,
+  PassageReport,
   QuestionOption,
 } from './paperIntelligenceTypes'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
@@ -120,10 +153,42 @@ export function PaperIntelligencePaperSurfaceHarness({
    */
   const [activeEvidenceId, setActiveEvidenceId] = useState<string | null>(null)
 
+  /**
+   * C4: which passage's insight popover is currently expanded.
+   * Max one open at a time. Cleared by `request-lecture-focus`
+   * (selecting a question card) and by re-clicking the same chip.
+   * NOT cleared by right-panel evidence / distractor selection
+   * (insight + evidence are independent teacher views).
+   */
+  const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
+
   // Refs for the cross-column line geometry (C3).
   const shellRef = useRef<HTMLDivElement | null>(null)
   const leftScrollerRef = useRef<HTMLDivElement | null>(null)
   const rightPanelRef = useRef<HTMLElement | null>(null)
+
+  /**
+   * C4 chip ref map. The harness renders one `<button>` per passage
+   * section; each button gets a stable ref object keyed by section id
+   * so the AnchoredPopover anchorRef can stay a single object that
+   * always points at the currently-active chip.
+   *
+   * The map is keyed by `paperSection` (the same id space as
+   * PaperSurface's existing `[data-paper-section]` anchor). Refs are
+   * created lazily on first request and reused across renders, so
+   * React's ref attribute mutates the same object the popover reads
+   * from.
+   */
+  type ChipRef = { current: HTMLButtonElement | null }
+  const chipRefMap = useRef<Map<string, ChipRef>>(new Map())
+  const getChipRef = useCallback((paperSection: string): ChipRef => {
+    let ref = chipRefMap.current.get(paperSection)
+    if (!ref) {
+      ref = { current: null }
+      chipRefMap.current.set(paperSection, ref)
+    }
+    return ref
+  }, [])
 
   // ─── Fetch report + input.json ───
   useEffect(() => {
@@ -276,11 +341,31 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Focus intent handler ───
   const handleFocusIntent = useCallback((intent: PaperSurfaceFocusIntent) => {
     if (intent.kind === 'request-lecture-focus') {
+      // C4: clear any open insight popover when the teacher selects
+      // a question card. Mirrors the default PI route's behavior in
+      // PaperIntelligencePreview, where `setActiveInsightSection(null)`
+      // runs on every question selection.
+      setActiveInsightSection(null)
       setActiveQuestionId((prev) =>
         prev === intent.questionId ? null : intent.questionId,
       )
     }
-    // Other intents ignored in C1/C2/C3.
+    // Other intents ignored in C1/C2/C3/C4.
+  }, [])
+
+  // ─── C4 insight chip handlers ───
+  //
+  // Toggle and close are intentionally simple host-owned setters.
+  // Re-clicking the active chip closes the panel; clicking another
+  // chip switches the panel without an intermediate "closed" state.
+  const handleToggleInsight = useCallback((paperSection: string): void => {
+    setActiveInsightSection((prev) =>
+      prev === paperSection ? null : paperSection,
+    )
+  }, [])
+
+  const handleCloseInsight = useCallback((): void => {
+    setActiveInsightSection(null)
   }, [])
 
   // ─── Right-side evidence click handler (C3) ───
@@ -290,10 +375,44 @@ export function PaperIntelligencePaperSurfaceHarness({
   // updates the active evidence id and reseats the cross-column line.
   // This is the smallest possible host-owned handler — no events
   // fired by PaperSurface, no new intent kind.
+  //
+  // C4 invariant: this handler does NOT clear `activeInsightSection`.
+  // Insight panel and evidence selection are independent teacher
+  // views — closing insight on every distractor click would force
+  // teachers to re-open the panel between questions.
   const handleSelectEvidence = useCallback((evidenceId: string) => {
     if (!evidenceId) return
     setActiveEvidenceId(evidenceId)
   }, [])
+
+  // ─── C4 align active insight section with [data-paper-section] ───
+  //
+  // When the teacher opens an insight chip we scroll the matching
+  // PaperSurface section root into view inside `.pi-ps-harness-left`,
+  // so the chip and the passage it describes stay visually aligned.
+  // We resolve the section root through the existing
+  // `[data-paper-section]` anchor (PaperSurface's neutral namespace);
+  // no new `data-paper-*` attribute is introduced.
+  // `prefers-reduced-motion` toggles `behavior` between 'smooth' and
+  // 'auto' so the OS-level setting is honored.
+  useEffect(() => {
+    if (!activeInsightSection) return
+    const scroller = leftScrollerRef.current
+    if (!scroller) return
+    const target = scroller.querySelector<HTMLElement>(
+      `[data-paper-section="${cssAttr(activeInsightSection)}"]`,
+    )
+    if (!target) return
+    const reduced =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({
+      block: 'start',
+      inline: 'nearest',
+      behavior: reduced ? 'auto' : 'smooth',
+    })
+  }, [activeInsightSection])
 
   // ─── Auto-scroll active evidence into the PaperSurface scroller (C3) ───
   //
@@ -324,6 +443,22 @@ export function PaperIntelligencePaperSurfaceHarness({
   }, [activeEvidenceId])
 
   // ─── Render ───
+  //
+  // Derive the active-passage report row and the live anchor ref for
+  // the insight popover. We resolve these once per render so the JSX
+  // below stays simple. `activePassage` is undefined (and the popover
+  // mount is gated on it) when:
+  //   - no chip is open (`activeInsightSection === null`), OR
+  //   - the active section id doesn't match any rendered passage,
+  //     which is a defensive guard against state drift.
+  const activePassage: PassageReport | undefined =
+    activeInsightSection && report
+      ? report.passages.find((p) => p.paperSection === activeInsightSection)
+      : undefined
+  const activeChipRef: ChipRef | null = activeInsightSection
+    ? getChipRef(activeInsightSection)
+    : null
+
   if (loading) {
     return (
       <div className="pi-ps-harness">
@@ -331,7 +466,7 @@ export function PaperIntelligencePaperSurfaceHarness({
           <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
             <span aria-hidden="true">←</span> 返回工作台
           </button>
-          <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
+          <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
         </div>
         <div className="pi-ps-harness-loading">加载中…</div>
       </div>
@@ -360,7 +495,7 @@ export function PaperIntelligencePaperSurfaceHarness({
         <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
           <span aria-hidden="true">←</span> 返回工作台
         </button>
-        <span className="pi-ps-harness-tagline">Paper Surface (C3)</span>
+        <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
       </div>
       <div
         className="pi-ps-harness-shell"
@@ -368,6 +503,61 @@ export function PaperIntelligencePaperSurfaceHarness({
         data-pi-active-evidence-kind={activeEvidenceKind ?? undefined}
       >
         <div className="pi-ps-harness-left" ref={leftScrollerRef}>
+          {/*
+            C4: Insight chip strip.
+
+            One `<button>` per `report.passages[*].paperSection`. The
+            strip lives inside `.pi-ps-harness-left` (the same column
+            that holds PaperSurface) so chips read as belonging to
+            the paper, not the topbar or right panel. Clicking a chip
+            uses the existing `[data-paper-section]` PaperSurface
+            anchor to scroll the corresponding section into view —
+            the only DOM read against PaperSurface in the whole C4
+            cut, and it goes through the existing neutral attribute
+            (no new `data-paper-*` introduced).
+
+            Each chip is a real `<button>` with:
+              - `aria-expanded` reflecting popover state,
+              - `aria-controls` referencing the popover id,
+              - a readable `aria-label` (chip text or "收起洞察"),
+              - host-owned `data-pi-insight-chip="<section>"` so smoke
+                selectors and the static verify can find it.
+            PaperSurface is never told about chips, popovers, or
+            insight state.
+          */}
+          <div
+            className="pi-ps-insight-chip-strip"
+            role="toolbar"
+            aria-label="篇章洞察"
+          >
+            {report.passages.map((p) => {
+              const isOpen = activeInsightSection === p.paperSection
+              const chipLabel = buildInsightChipLabel(p)
+              const visibleText = isOpen ? '收起洞察' : chipLabel
+              return (
+                <button
+                  key={p.paperSection}
+                  ref={getChipRef(p.paperSection) as RefObject<HTMLButtonElement>}
+                  type="button"
+                  className={
+                    isOpen
+                      ? 'pi-ps-insight-chip pi-ps-insight-chip--open'
+                      : 'pi-ps-insight-chip'
+                  }
+                  onClick={() => handleToggleInsight(p.paperSection)}
+                  aria-expanded={isOpen}
+                  aria-controls={`pi-ps-insight-panel-${p.paperSection}`}
+                  aria-label={isOpen ? '收起洞察' : chipLabel}
+                  data-pi-insight-chip={p.paperSection}
+                >
+                  <span className="pi-ps-insight-chip-section" aria-hidden="true">
+                    {p.paperSection}
+                  </span>
+                  <span className="pi-ps-insight-chip-text">{visibleText}</span>
+                </button>
+              )
+            })}
+          </div>
           <PaperSurface
             textMap={surfaceData.textMap}
             annotations={[]}
@@ -409,6 +599,62 @@ export function PaperIntelligencePaperSurfaceHarness({
           activeEvidenceKind={activeEvidenceKind}
           leftSelectorPreset="paper-surface"
         />
+        {/*
+          C4: Insight popover.
+
+          The popover reuses `AnchoredPopover` unchanged from the
+          default PI route. The module portals its content to
+          `document.body`, so its z-index can sit above the C3
+          evidence-line overlay (`.pi-line-overlay { z-index: 5 }`)
+          without fighting the harness shell's stacking context.
+
+          Match default PI's intentional behavior:
+            - `align="start"` left-aligns the popover to the chip,
+            - `closeOnEscape` lets Esc dismiss,
+            - `closeOnOutsidePointerDown` is intentionally NOT enabled
+              (clicking the passage body or the right Question Analysis
+              is meaningful teacher input and must not dismiss).
+            - `widthPx={360}`, `gapPx={4}`, `viewportPaddingPx={16}`.
+
+          Body is the harness-local `<HarnessInsightPanelContent />`
+          (loads + outline + chunk count). Duplicates the default PI
+          panel JSX intentionally for C4; future dedupe target is
+          recorded in `docs/paper-surface-watch-ledger.md`.
+        */}
+        {activePassage && activeChipRef && (
+          <AnchoredPopover
+            anchorRef={activeChipRef as unknown as RefObject<HTMLElement | null>}
+            open={activeInsightSection !== null}
+            onClose={handleCloseInsight}
+            id={`pi-ps-insight-panel-${activePassage.paperSection}`}
+            role="dialog"
+            ariaLabel="篇章洞察"
+            className="pi-ps-insight-panel"
+            widthPx={360}
+            gapPx={4}
+            viewportPaddingPx={16}
+            align="start"
+            closeOnEscape
+            dataAttributes={{
+              'data-pi-insight-panel': activePassage.paperSection,
+            }}
+          >
+            <div className="pi-ps-insight-panel-header">
+              <span className="pi-ps-insight-panel-title">
+                篇章洞察 · {activePassage.paperSection}
+              </span>
+              <button
+                type="button"
+                className="pi-ps-insight-panel-close"
+                onClick={handleCloseInsight}
+                aria-label="关闭洞察面板"
+              >
+                ×
+              </button>
+            </div>
+            <HarnessInsightPanelContent reportPassage={activePassage} />
+          </AnchoredPopover>
+        )}
       </div>
     </div>
   )
