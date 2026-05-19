@@ -26,14 +26,16 @@
  *      Plus PR #52 PA must-fix:
  *        - 2h: rail toggle is a real <button> with aria-expanded /
  *          aria-controls / aria-label. Rail aside emits
- *          `data-rail-locked` and `data-rail-popover-open`. Esc
- *          inside the rail clears the lock and the popover.
- *        - 2i: matchMedia('(max-width: 1199px)') + isStackedMode
- *          state conditionally renders desktop rail XOR topbar chip
- *          row (Q1 invariant: chips never double-rendered). The
- *          change handler clears activeInsightSection AND railLocked
- *          so the popover anchor cannot resolve to an unmounting
- *          node on breakpoint cross.
+ *          `data-rail-locked` and `data-rail-detail-open`. Esc
+ *          inside the rail closes inline detail first, then clears
+ *          the lock.
+ *        - 2i: matchMedia('(min-width: 1536px)') + isWideDesktop
+ *          state conditionally renders wide-desktop rail XOR topbar
+ *          chip row (Q1 invariant: chips never double-rendered). The
+ *          harness also tracks `(max-width:1199px)` for stacked shell
+ *          CSS. The change handler clears activeInsightSection AND
+ *          railLocked so anchors cannot resolve to an unmounting node
+ *          on breakpoint cross.
  *
  *   3. AnchoredPopover file is unchanged.
  *
@@ -47,17 +49,18 @@
  *      paperIntelligenceRoute.ts, App.tsx.
  *
  *   6. Harness CSS:
- *        - 6a: 4-column grid, 24px column-gap, 1199px stacked
+ *        - 6a: 3-column no-right-gutter grid, 24px column-gap, 1199px stacked
  *          fallback, pi-line-overlay rule, C3.6 support/trap palette
  *          rules, chip + popover existence, popover z-index above
  *          line.
  *        - 6b: PR #52 PA must-fix — left rail rule exists, is left-
- *          pinned, collapsed 48px, expanded 220-240px on :hover and
- *          :focus-within, z-index ordered between line and popover,
+ *          pinned, collapsed 48px, soft-expanded 160-180px on :hover
+ *          and :focus-within, detail-open 240-260px, z-index ordered
+ *          between line and popover,
  *          and the legacy `.pi-ps-insight-chip-strip` is gone from
  *          BOTH the CSS rules AND the TSX className references.
  *        - 6c: PR #52 PA must-fix — right-panel ::before bleed
- *          reaches viewport edge via `50vw` / `calc(...)`, content
+ *          reaches viewport edge via `100vw` / `calc(...)`, content
  *          inner wrapper max-width is 380-420px, the right-panel
  *          inner wrapper is rendered by TSX, warm cream tokens
  *          (#f7f4ee / #f6f3ec) are declared, and stacked mode
@@ -538,13 +541,14 @@ assert(
 /*
  * 2i. PR #52 PA must-fix — Q1 invariant: chips never double-rendered.
  *
- * The harness uses `matchMedia('(max-width: 1199px)')` + state to
- * conditionally render either the desktop rail OR the topbar chip
- * row, never both. The change handler clears `activeInsightSection`
+ * The harness uses `matchMedia('(min-width: 1536px)')` + state to
+ * conditionally render either the wide-desktop rail OR the topbar
+ * chip row, never both. It also tracks `(max-width:1199px)` for the
+ * stacked shell. The change handler clears `activeInsightSection`
  * AND `railLocked` so AnchoredPopover's anchorRef cannot resolve to
  * a node that's about to unmount across a breakpoint cross.
  */
-console.log('\n=== 2i. PR #52 PA must-fix — matchMedia stacked switch ===')
+console.log('\n=== 2i. PR #52 PA must-fix — matchMedia responsive switch ===')
 
 assert(
   /matchMedia\s*\(\s*['"]\s*\(\s*max-width\s*:\s*1199px\s*\)\s*['"]/.test(
@@ -555,6 +559,16 @@ assert(
 assert(
   /\b(?:setIsStackedMode|isStackedMode)\b/.test(harnessSrc),
   "harness owns an `isStackedMode` state used to switch rail vs topbar chip row",
+)
+assert(
+  /matchMedia\s*\(\s*['"]\s*\(\s*min-width\s*:\s*1536px\s*\)\s*['"]/.test(
+    harnessSrc,
+  ),
+  "harness wires matchMedia(`(min-width: 1536px)`) for wide-desktop rail gating",
+)
+assert(
+  /\b(?:setIsWideDesktop|isWideDesktop)\b/.test(harnessSrc),
+  "harness owns an `isWideDesktop` state used to switch rail vs topbar chip row",
 )
 
 // matchMedia onChange handler clears the popover and the rail lock.
@@ -591,18 +605,20 @@ assert(
   )
 }
 
-// 2i-bis. Topbar chip row exists and is gated on stacked mode.
+// 2i-bis. Topbar chip row exists and is gated below wide desktop.
 assert(
   /pi-ps-insight-topbar-row/.test(harnessSrc),
-  "harness renders a `.pi-ps-insight-topbar-row` for stacked-mode insight entry",
+  "harness renders a `.pi-ps-insight-topbar-row` for non-wide insight entry",
 )
 assert(
-  /isStackedMode\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(harnessSrc),
-  "topbar chip row is conditionally rendered behind `isStackedMode &&` (no double-DOM with the desktop rail)",
+  /!\s*isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(
+    harnessSrc,
+  ),
+  "topbar chip row is conditionally rendered behind `!isWideDesktop &&` (covers 1200-1535 and stacked widths)",
 )
 assert(
-  /!\s*isStackedMode\s*&&\s*\([\s\S]*?pi-ps-insight-rail\b/.test(harnessSrc),
-  "desktop left rail is conditionally rendered behind `!isStackedMode &&` (no double-DOM with the topbar row)",
+  /isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-rail\b/.test(harnessSrc),
+  "desktop left rail is conditionally rendered behind `isWideDesktop &&` (no overlap-prone rail below 1536px)",
 )
 
 /* ─── 3. AnchoredPopover unchanged ───────────────────────────────── */
@@ -839,9 +855,9 @@ const panelBody = panelMatch ? panelMatch[1] : ''
  *   1. The rail rule exists and is left-pinned (absolute / fixed,
  *      `left: 0`).
  *   2. Collapsed width is 48px.
- *   3. Expanded width is 220px (max 240px), via `:hover`,
+ *   3. Soft-expanded width is 160-180px, via `:hover`,
  *      `:focus-within`, and a locked-state hook the rail toggle
- *      can drive.
+ *      can drive; inline-detail width is 240-260px.
  *   4. Rail z-index ordering: rail sits below the popover, above
  *      the line overlay (popover always paints above; line draws
  *      under the rail).
@@ -1225,6 +1241,7 @@ const allowedC4 = new Set([
   'app/src/features/paper-intelligence/insight/insightChipLabel.ts',
   'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
   'app/src/features/paper-intelligence/insight/HarnessInsightPanelContent.tsx',
+  'scripts/verify-paper-intelligence-paper-surface-harness.mjs',
   'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
   'docs/paper-surface-watch-ledger.md',
   'docs/product/mockups/paper-surface-c4-insight-layout/01-current-problem.png',
@@ -1246,12 +1263,17 @@ assert(
 console.log('\n=== R-checks: PR #52 UX Retune product guards ===')
 
 /*
- * R-1. AnchoredPopover is NOT mounted on desktop; gated on isStackedMode.
+ * R-1. AnchoredPopover is NOT mounted on wide desktop; gated below
+ *      `isWideDesktop`.
  */
 assert(
-  /isStackedMode\s*&&\s*[\s\S]*?<AnchoredPopover\b/.test(harnessNoComments) ||
-    /isStackedMode\s*&&\s*activePassage\s*&&[\s\S]*?<AnchoredPopover\b/.test(harnessNoComments),
-  "R-1: AnchoredPopover is gated on isStackedMode (not mounted on desktop)",
+  /!\s*isWideDesktop\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
+    harnessNoComments,
+  ) ||
+    /!\s*isWideDesktop\s*&&[\s\S]{0,240}<AnchoredPopover\b/.test(
+      harnessNoComments,
+    ),
+  "R-1: AnchoredPopover is gated on !isWideDesktop (wide desktop uses inline detail, not popover)",
 )
 
 /*
@@ -1396,16 +1418,17 @@ assert(
 )
 
 /*
- * R-11. Desktop detail block is rendered inside `.pi-ps-insight-rail`,
- *       not portalled and not positioned as a fixed overlay.
+ * R-11. Wide-desktop detail block is rendered inside
+ *       `.pi-ps-insight-rail`, not portalled and not positioned as a
+ *       fixed overlay.
  */
 {
-  // The detail renders inside the rail's conditional block (!isStackedMode).
+  // The detail renders inside the rail's conditional block (isWideDesktop).
   assert(
-    /!\s*isStackedMode[\s\S]*?pi-ps-insight-rail[\s\S]*?pi-ps-insight-detail/.test(
+    /isWideDesktop[\s\S]*?pi-ps-insight-rail[\s\S]*?pi-ps-insight-detail/.test(
       harnessNoComments,
     ),
-    "R-11: .pi-ps-insight-detail is inside the desktop rail block (!isStackedMode), not portalled",
+    "R-11: .pi-ps-insight-detail is inside the wide-desktop rail block (isWideDesktop), not portalled",
   )
   // Detail CSS does NOT use position: fixed.
   const detailRuleMatch = harnessCssDesktopOnly.match(
@@ -1419,14 +1442,15 @@ assert(
 }
 
 /*
- * R-12. Desktop does not render `.pi-ps-insight-panel`; stacked mode may.
+ * R-12. Wide desktop does not render `.pi-ps-insight-panel`; non-wide
+ *       topbar mode may.
  *
  * In TSX, the AnchoredPopover (which carries `.pi-ps-insight-panel`)
- * must only render when isStackedMode is true.
+ * must only render when isWideDesktop is false.
  */
 assert(
-  /isStackedMode\s*&&[\s\S]*?pi-ps-insight-panel/.test(harnessNoComments),
-  "R-12: `.pi-ps-insight-panel` (popover) is gated behind isStackedMode (desktop never renders it)",
+  /!\s*isWideDesktop[\s\S]*?pi-ps-insight-panel/.test(harnessNoComments),
+  "R-12: `.pi-ps-insight-panel` (popover) is gated behind !isWideDesktop (wide desktop never renders it)",
 )
 
 /*
@@ -1560,6 +1584,127 @@ assert(
     "R-17: right ::before bleed uses 100vw/50vw to reach viewport edge",
   )
 }
+
+/* ─── B-checks: PR #52 breakpoint guard after browser QA ───────── */
+
+console.log('\n=== B-checks: PR #52 wide-desktop breakpoint guard ===')
+
+/*
+ * B-1. The inline detail rail is only allowed where its 240px detail
+ *      width can fit: 240 rail + 858 paper + 24 gap + 380 analysis =
+ *      1502px. Product chose 1536px as the calm threshold.
+ */
+assert(
+  /matchMedia\s*\(\s*['"]\s*\(\s*min-width\s*:\s*1536px\s*\)\s*['"]/.test(
+    harnessSrc,
+  ),
+  "B-1: harness uses min-width:1536px as the wide-desktop inline-rail threshold",
+)
+
+/*
+ * B-2. Inline rail detail never renders in the 1200-1535 side-by-side
+ *      band that failed browser QA.
+ */
+assert(
+  /isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-rail\b/.test(harnessSrc),
+  "B-2: desktop rail is TSX-gated by isWideDesktop",
+)
+assert(
+  /!\s*isWideDesktop\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
+    harnessNoComments,
+  ),
+  "B-2: non-wide widths use the topbar/AnchoredPopover path, not inline rail detail",
+)
+
+/*
+ * B-3. CSS also guards 1200-1535px so leaked rail markup cannot
+ *      overlap the PaperSurface matte.
+ */
+{
+  const mediumDesktopMedia =
+    /@media\s*\(\s*min-width\s*:\s*1200px\s*\)\s*and\s*\(\s*max-width\s*:\s*1535px\s*\)\s*\{([\s\S]*?)\n\}/
+  const mediumMatch = harnessCssNoComments.match(mediumDesktopMedia)
+  const mediumBody = mediumMatch ? mediumMatch[1] : ''
+  assert(
+    !!mediumMatch,
+    "B-3: CSS declares a 1200-1535px medium-desktop rail guard",
+  )
+  assert(
+    /\.pi-ps-insight-rail\s*\{[^}]*display\s*:\s*none/.test(mediumBody),
+    "B-3: 1200-1535px CSS guard hides .pi-ps-insight-rail",
+  )
+}
+
+/*
+ * B-4. The 1200-1535 band keeps insight reachable through the topbar
+ *      chip row instead of dropping the feature.
+ */
+assert(
+  /!\s*isWideDesktop\s*&&\s*\([\s\S]*?pi-ps-insight-topbar-row/.test(
+    harnessSrc,
+  ),
+  "B-4: topbar chip row is available at every non-wide width, including 1200-1535px",
+)
+
+/*
+ * B-5/B-6. The shell geometry is the approved right-shifted 3-column
+ *          model, not the older centered 4-column model.
+ */
+{
+  const gridRule = harnessCssDesktopOnly.match(
+    /\.pi-ps-harness-shell\s*\{([\s\S]*?)\}/,
+  )
+  const gridBody = gridRule ? gridRule[1] : ''
+  const gridColsMatch = gridBody.match(/grid-template-columns\s*:([\s\S]*?);/)
+  const gridColsValue = gridColsMatch ? gridColsMatch[1] : ''
+  assert(
+    /minmax\(\s*0\s*,\s*1fr\s*\)[\s\S]*minmax\(\s*0\s*,\s*858px\s*\)[\s\S]*minmax\(\s*0\s*,\s*380px\s*\)/.test(
+      gridColsValue,
+    ),
+    "B-6: desktop grid is 1fr / 858px / 380px",
+  )
+  assert(
+    !/minmax\(\s*0\s*,\s*380px\s*\)[\s\S]*minmax\(\s*0\s*,\s*1fr\s*\)/.test(
+      gridColsValue,
+    ),
+    "B-5: desktop grid does NOT retain the old right 1fr gutter",
+  )
+}
+
+/*
+ * B-7/B-8. Right side still bleeds to the viewport edge, while the
+ *          stable geometry values remain pinned.
+ */
+assert(
+  /right\s*:\s*calc\(\s*-1\s*\*\s*\(\s*100vw\s*-\s*100%\s*\)\s*\)/.test(
+    rightBleedBody,
+  ),
+  "B-7: right analysis bleed reaches viewport edge with calc(-1 * (100vw - 100%))",
+)
+assert(
+  /column-gap\s*:\s*24px/.test(harnessCssDesktopOnly),
+  "B-8: paper-analysis seam remains 24px",
+)
+assert(
+  /minmax\(\s*0\s*,\s*858px\s*\)/.test(harnessCssDesktopOnly) &&
+    /minmax\(\s*0\s*,\s*380px\s*\)/.test(harnessCssDesktopOnly),
+  "B-8: paper track remains 858px and analysis track remains 380px",
+)
+
+/*
+ * B-9/B-10. Product boundary stays clean.
+ */
+assert(
+  isUnchanged('app/src/shared-ui/papersurface/PaperSurface.tsx') &&
+    isUnchanged('app/src/shared-ui/papersurface/PaperSurface.css'),
+  "B-9: PaperSurface.tsx and PaperSurface.css are unchanged by the breakpoint fix",
+)
+assert(
+  isUnchanged('app/src/features/paper-intelligence/PaperIntelligencePreview.tsx') &&
+    isUnchanged('app/src/features/paper-intelligence/paperIntelligence.css') &&
+    isUnchanged('app/src/features/paper-intelligence/paperIntelligenceRoute.ts'),
+  "B-10: default PI route files remain unchanged",
+)
 
 /* ─── Summary ────────────────────────────────────────────────────── */
 

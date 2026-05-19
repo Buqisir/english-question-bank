@@ -3,11 +3,12 @@
  *
  * Issue #21-C1 introduced the harness shell.
  * Issue #41-C2 polished typography and the prior 2-column shell.
- * Issue #43 (this cut) replaces the prior `1fr 380px` 2-column shell
- * with a 4-column centered workspace model so paper + rail center
- * together as a single unit on a wider desk.
+ * Issue #43 replaced the prior `1fr 380px` 2-column shell with a
+ * centered workspace model. C4 then removes the right flexible gutter
+ * so the paper + analysis workspace shifts right and the analysis
+ * background can reach the viewport edge.
  *
- * Why 4 columns:
+ * Why the current 3-column model:
  *
  *   The earlier model `grid-template-columns: 1fr 380px` left the
  *   paper (fixed 794px, centered inside the 1fr left column) absorbing
@@ -15,15 +16,15 @@
  *   the rail moved freed pixels back into the 1fr left column, so the
  *   gulf got *wider*, not narrower.
  *
- *   The new model treats paper and rail as two side-by-side fixed
- *   tracks centered together by symmetric flexible desk gutters:
+ *   The current model keeps the paper and analysis as fixed tracks,
+ *   gives all leftover space to the left desk gutter, and lets the
+ *   right analysis background bleed to the browser edge:
  *
  *     [ outer-left desk gutter (1fr) ]
  *     [ paper track (≤ 858px)        ]
- *     [ rail track  (≤ 380px)        ]
- *     [ outer-right desk gutter (1fr)]
+ *     [ analysis track (≤ 380px)     ]
  *
- *   with a fixed `column-gap: 24px`. The paper-to-rail seam is now
+ *   with a fixed `column-gap: 24px`. The paper-to-analysis seam is now
  *   exactly the column-gap, never leftover 1fr space.
  *
  *   The 858px paper track equals the 794px white A4 sheet plus the
@@ -47,7 +48,7 @@
  *
  * Stacked fallback:
  *
- *   Below 1200px the 4-column model collapses to a single column and
+ *   Below 1200px the desktop model collapses to a single column and
  *   the rail flows under the paper, preventing horizontal page-level
  *   overflow on narrow viewports. Browser QA still required at
  *   1440 / 1280 / 1024 / 1199–1200 boundary.
@@ -179,7 +180,7 @@
   opacity: 1;
 }
 
-/* ─── Workspace shell: 4-column centered grid (Issue #43) ──────── */
+/* ─── Workspace shell: 3-column right-shifted grid (Issue #43/C4) ─ */
 
 .pi-ps-harness-shell {
   display: grid;
@@ -188,11 +189,11 @@
    * the 32px symmetric horizontal matte the PaperSurface paints on
    * each side fits inside the paper track exactly (858 = 794 white
    * sheet + 32 × 2 matte). The white A4 sheet remains 794px and is
-   * centered inside its own matte; the outer shell desk gutters
-   * (the two `1fr` tracks) shrink naturally to absorb the 64px the
-   * matte now claims from them. The seam between paper track and
-   * rail track is still exactly the column-gap (24px), never
-   * leftover 1fr space.
+   * centered inside its own matte. C4 removes the right `1fr` gutter
+   * so the analysis background can reach the viewport edge while the
+   * left `1fr` gutter absorbs the remaining space for the insight
+   * rail. The seam between paper track and analysis track is still
+   * exactly the column-gap (24px), never leftover 1fr space.
    * Browser QA progression: 842px → 850px → 858px (matte 24px → 28px → 32px).
    */
   grid-template-columns:
@@ -234,14 +235,14 @@
 /*
  * Right analysis column.
  *
- * The grid track is unchanged (column 3, ~380px) so paper + rail
- * positioning stays identical to C3.6. The visual change is:
+ * The analysis track stays column 3 (~380px), so content measure is
+ * stable. The visual change is:
  *
  *   1. The cool SaaS off-white (#fafbfc) is replaced by a warm
  *      paper / cream tone (#f7f4ee → #f6f3ec) painted on the
  *      `::before` pseudo-element.
  *   2. The pseudo extends right to the viewport edge using
- *      `right: calc(50% - 50vw)` so the warm tone reads as
+ *      `right: calc(-1 * (100vw - 100%))` so the warm tone reads as
  *      continuous notebook surface instead of a card pinned to
  *      a 380px column.
  *   3. The actual analysis content stays constrained to ≤400px
@@ -340,6 +341,21 @@
     max-width: none;
     padding-left: 0;
     border-left: 0;
+  }
+}
+
+/*
+ * C4 UX retune geometry guard.
+ *
+ * The no-right-gutter desktop shell keeps paper + analysis side by
+ * side at 1200–1535px, but there is not enough left gutter for the
+ * 240px inline insight detail. The harness conditionally renders the
+ * topbar chip row for this band; this CSS guard ensures any leaked
+ * absolute rail cannot overlap the PaperSurface matte or white paper.
+ */
+@media (min-width: 1200px) and (max-width: 1535px) {
+  .pi-ps-insight-rail {
+    display: none;
   }
 }
 

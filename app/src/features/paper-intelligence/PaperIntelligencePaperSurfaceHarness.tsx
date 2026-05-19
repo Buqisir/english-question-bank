@@ -61,20 +61,21 @@
  * What C4 ADDS to the harness (host-only, PaperSurface stays dumb):
  *   - A compact left insight rail (`.pi-ps-insight-rail`) sits
  *     `position: absolute` inside `.pi-ps-harness-shell` (so the
- *     existing `1fr 858px 380px 1fr` 4-column grid stays unchanged
+ *     existing `1fr 858px 380px` no-right-gutter grid stays unchanged
  *     and no new grid track is introduced). Replaces the prior
  *     top horizontal `.pi-ps-insight-chip-strip` after PR #52 PA
  *     review (rejected the top strip; required a left rail + warm
  *     full-bleed right analysis).
  *   - The rail collapses to 48px in the outer-left desk gutter and
- *     expands to 220px on `:hover`, `:focus-within`, the toggle
- *     button's `[data-rail-locked]`, or the popover's
- *     `[data-rail-popover-open]` — entirely CSS-owned animation.
+ *     expands to 160px on `:hover`, `:focus-within`, or the toggle
+ *     button's `[data-rail-locked]`. At 1536px+ only, an active
+ *     inline detail expands the rail to 240px.
  *   - One insight chip per `report.passages[*].paperSection` rendered
- *     either inside the rail (desktop) or inside a topbar
- *     `.pi-ps-insight-topbar-row` (stacked, ≤1199px). The chip is
- *     never double-rendered: `isStackedMode` is the single switch
- *     and is driven by `matchMedia('(max-width: 1199px)')`.
+ *     either inside the rail (wide desktop, ≥1536px) or inside a
+ *     topbar `.pi-ps-insight-topbar-row` (all non-wide widths). The
+ *     chip is never double-rendered: `isWideDesktop` is the single
+ *     switch for rail vs topbar and is driven by
+ *     `matchMedia('(min-width: 1536px)')`.
  *   - The right analysis aside paints a warm cream full-bleed
  *     background via `.pi-ps-harness-right::before` reaching to the
  *     viewport's right edge while the actual analysis text stays
@@ -90,14 +91,11 @@
  *     the rail lives outside `.pi-ps-harness-left`, scrolling a
  *     section into view never moves the chip out of the viewport,
  *     so the popover anchor stays onscreen.
- *   - The active chip mounts an `<AnchoredPopover>` (reused unchanged
- *     from `preview/AnchoredPopover.tsx`) whose body is the harness-
- *     local `<HarnessInsightPanelContent />`. Popover config matches
- *     default PI: `align="start"`, `widthPx={360}`, `gapPx={4}`,
- *     `viewportPaddingPx={16}`, `closeOnEscape`, no
- *     `closeOnOutsidePointerDown` (clicking the passage body or the
- *     right Question Analysis is meaningful teacher input and must
- *     not dismiss the panel).
+ *   - On wide desktop, the active chip renders inline detail inside
+ *     the rail. Below 1536px, the active topbar chip mounts an
+ *     `<AnchoredPopover>` (reused unchanged from
+ *     `preview/AnchoredPopover.tsx`) whose body is the harness-local
+ *     `<HarnessInsightPanelContent />`.
  *   - `request-lecture-focus` clears `activeInsightSection` AND
  *     `railLocked` (matches default PI's "selecting a question card
  *     closes the insight popover"; the rail compacts back too).
@@ -209,7 +207,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [railLocked, setRailLocked] = useState<boolean>(false)
 
   /**
-   * C4 PR #52 PA must-fix: stacked-mode detection for rail vs
+   * C4 PR #52 PA must-fix: viewport-mode detection for rail vs
    * topbar chip-row conditional rendering.
    *
    * Q1 decision (PA-approved): `matchMedia` + state conditional
@@ -223,6 +221,7 @@ export function PaperIntelligencePaperSurfaceHarness({
    * subscribes to changes.
    */
   const [isStackedMode, setIsStackedMode] = useState<boolean>(false)
+  const [isWideDesktop, setIsWideDesktop] = useState<boolean>(false)
 
   // Refs for the cross-column line geometry (C3).
   const shellRef = useRef<HTMLDivElement | null>(null)
@@ -328,40 +327,51 @@ export function PaperIntelligencePaperSurfaceHarness({
     }
   }, [paperId])
 
-  // ─── C4 PR #52: stacked-mode detection ───
+  // ─── C4 PR #52: viewport-mode detection ───
   //
-  // Listen to `matchMedia('(max-width: 1199px)')` and toggle
-  // `isStackedMode` so the renderer can conditionally render either
-  // the desktop left rail or the topbar chip row, never both.
+  // Listen to both `(max-width: 1199px)` and `(min-width: 1536px)`.
+  // The 240px inline rail detail is only geometrically safe once the
+  // viewport can contain:
+  //   240px rail + 858px paper/matte + 24px seam + 380px analysis
+  // with a little breathing room. Between 1200px and 1535px the paper
+  // and analysis stay side-by-side, but insight uses the topbar entry
+  // instead of the absolute desktop rail.
   //
   // Q1 PA-approved invariant: when the breakpoint crosses we close
-  // any open insight popover and clear the rail lock. The active
+  // any open insight detail/popover and clear the rail lock. The active
   // chip's anchor ref points at a DOM node that is about to
-  // disappear (the desktop rail unmounts when entering stacked, and
-  // the topbar row unmounts when leaving stacked); without this
+  // disappear (the desktop rail unmounts below 1536px, and the topbar
+  // row unmounts at 1536px+); without this
   // clear, AnchoredPopover would keep its stale ref and paint at a
   // ghost position until the teacher clicks somewhere else.
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (typeof window.matchMedia !== 'function') return
-    const mql = window.matchMedia('(max-width: 1199px)')
+    const stackedMql = window.matchMedia('(max-width: 1199px)')
+    const wideDesktopMql = window.matchMedia('(min-width: 1536px)')
     // Sync once for the SSR-vs-client mismatch on first paint.
-    setIsStackedMode(mql.matches)
-    const onChange = (e: MediaQueryListEvent): void => {
-      setIsStackedMode(e.matches)
+    setIsStackedMode(stackedMql.matches)
+    setIsWideDesktop(wideDesktopMql.matches)
+    const onChange = (): void => {
+      setIsStackedMode(stackedMql.matches)
+      setIsWideDesktop(wideDesktopMql.matches)
       setActiveInsightSection(null)
       setRailLocked(false)
     }
-    if (typeof mql.addEventListener === 'function') {
-      mql.addEventListener('change', onChange)
+    if (typeof stackedMql.addEventListener === 'function') {
+      stackedMql.addEventListener('change', onChange)
+      wideDesktopMql.addEventListener('change', onChange)
       return (): void => {
-        mql.removeEventListener('change', onChange)
+        stackedMql.removeEventListener('change', onChange)
+        wideDesktopMql.removeEventListener('change', onChange)
       }
     }
     // Older Safari / pre-2019 fallback.
-    mql.addListener(onChange)
+    stackedMql.addListener(onChange)
+    wideDesktopMql.addListener(onChange)
     return (): void => {
-      mql.removeListener(onChange)
+      stackedMql.removeListener(onChange)
+      wideDesktopMql.removeListener(onChange)
     }
   }, [])
 
@@ -671,18 +681,18 @@ export function PaperIntelligencePaperSurfaceHarness({
         {/*
           C4 PR #52 PA must-fix — stacked-mode insight entry.
 
-          When `isStackedMode` is true (matchMedia
-          `(max-width: 1199px)`) the desktop left rail is unmounted
-          and the insight chips render here instead, between the
-          back button and the tagline. The popover anchor still
-          flows through the shared `chipRefMap`, so AnchoredPopover's
-          anchorRef points at the topbar chip on stacked widths.
+          When `isWideDesktop` is false (all widths below 1536px),
+          the desktop left rail is unmounted and the insight chips
+          render here instead, between the back button and the
+          tagline. This covers both the true stacked layout (≤1199px)
+          and the 1200–1535px side-by-side layout where a 240px
+          inline rail detail would collide with the paper.
 
           Q1 PA-approved invariant: chips are NEVER double-rendered.
           Either this row OR the desktop rail is mounted at any
           given moment.
         */}
-        {isStackedMode && (
+        {!isWideDesktop && (
           <div
             className="pi-ps-insight-topbar-row"
             role="toolbar"
@@ -706,26 +716,28 @@ export function PaperIntelligencePaperSurfaceHarness({
 
             - is `position: absolute; left:0; top:0; bottom:0` inside
               `.pi-ps-harness-shell` (which is already
-              `position: relative`), so it does NOT consume a 5th
-              grid column and the existing `1fr 858px 380px 1fr` shell
+              `position: relative`), so it does NOT consume a 4th
+              grid column and the existing `1fr 858px 380px` shell
               is unchanged;
             - lives in the harness layer, NOT inside PaperSurface
               (PaperSurface.tsx / PaperSurface.css are forbidden in
               C4 and untouched);
             - collapses to 48px in the outer-left desk gutter;
-            - expands to 220px (max 240px) on `:hover`, `:focus-within`,
-              the toggle's `[data-rail-locked="true"]`, or the
-              popover's `[data-rail-popover-open="true"]`. CSS owns
-              the visual transition (160ms ease-out, respects
+            - expands to 160px on `:hover`, `:focus-within`, or the
+              toggle's `[data-rail-locked="true"]`, and to 240px
+              while inline detail is open. CSS owns the visual
+              transition (160ms ease-out, respects
               `prefers-reduced-motion`).
             - Esc inside the rail clears the lock, closes any open
               popover, and blurs focus so `:focus-within` releases.
 
-          Conditional render: only mounts on desktop (`!isStackedMode`).
-          On stacked widths the topbar `.pi-ps-insight-topbar-row`
-          above takes over. Chips are NEVER double-mounted.
+          Conditional render: only mounts on wide desktop
+          (`isWideDesktop`, currently min-width:1536px). Below that
+          threshold the topbar `.pi-ps-insight-topbar-row` above takes
+          over so the 240px inline detail never overlaps the paper.
+          Chips are NEVER double-mounted.
         */}
-        {!isStackedMode && (
+        {isWideDesktop && (
           <aside
             className="pi-ps-insight-rail"
             aria-label="篇章洞察"
@@ -812,7 +824,8 @@ export function PaperIntelligencePaperSurfaceHarness({
 
             The aside paints its warm full-bleed background via the
             `::before` pseudo-element (extending to the viewport's
-            right edge with `right: calc(50% - 50vw)`); the actual
+            right edge with `right: calc(-1 * (100vw - 100%))`);
+            the actual
             text content stays inside this inner wrapper at
             `max-width: 400px` with a soft warm hairline on the
             content's left edge so the panel reads as a notebook
@@ -847,12 +860,12 @@ export function PaperIntelligencePaperSurfaceHarness({
         {/*
           C4 PR #52 UX Retune: Insight popover — stacked mode only.
 
-          On desktop (>=1200px), insight detail is rendered inline
+          On wide desktop (>=1536px), insight detail is rendered inline
           inside `.pi-ps-insight-rail` (no overlay, no portal). The
-          AnchoredPopover is only used in stacked mode (<=1199px)
+          AnchoredPopover is only used below the wide-desktop threshold
           where the topbar chip row needs a positioned panel.
         */}
-        {isStackedMode && activePassage && activeChipRef && (
+        {!isWideDesktop && activePassage && activeChipRef && (
           <AnchoredPopover
             anchorRef={activeChipRef as unknown as RefObject<HTMLElement | null>}
             open={activeInsightSection !== null}
