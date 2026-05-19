@@ -59,7 +59,7 @@
  *   - No flip of the default PI route.
  *
  * What C4 ADDS to the harness (host-only, PaperSurface stays dumb):
- *   - A compact left insight rail (`.pi-ps-insight-rail`) sits
+ *   - A compact left passage-structure rail (`.pi-ps-insight-rail`) sits
  *     `position: absolute` inside `.pi-ps-harness-shell` (so the
  *     existing `1fr 858px 380px` no-right-gutter grid stays unchanged
  *     and no new grid track is introduced). Replaces the prior
@@ -68,13 +68,14 @@
  *     full-bleed right analysis).
  *   - The rail collapses to 48px in the outer-left desk gutter and
  *     expands to 160px on `:hover`, `:focus-within`, or the toggle
- *     button's `[data-rail-locked]`. At 1536px+ only, an active
- *     inline detail expands the rail to 300px.
- *   - One insight chip per `report.passages[*].paperSection` rendered
+ *     button's `[data-rail-locked]`. An active structure detail uses
+ *     a viewport-clamped rail width so normal 100% browser zoom can
+ *     still read the structure panel.
+ *   - One structure chip per `report.passages[*].paperSection` rendered
  *     always inside the left rail (`.pi-ps-insight-rail`). The rail is
  *     always in the DOM at every viewport width. CSS media queries
  *     control rail sizing and detail mode but never unmount the rail.
- *     PA-approved rule: insight entry always lives on the left.
+ *     PA-approved rule: passage structure entry always lives on the left.
  *   - The right analysis aside paints a warm cream full-bleed
  *     background via `.pi-ps-harness-right::before` reaching to the
  *     viewport's right edge while the actual analysis text stays
@@ -88,28 +89,23 @@
  *     only DOM read against PaperSurface and it uses the existing
  *     section anchor — no new `data-paper-*` is introduced). Because
  *     the rail lives outside `.pi-ps-harness-left`, scrolling a
- *     section into view never moves the chip out of the viewport,
- *     so the popover anchor stays onscreen.
- *   - On wide desktop, the active chip renders inline detail inside
- *     the rail. At 1200–1535px (medium desktop), the chip click sets
- *     an active visual state but does NOT open a detail panel — no
- *     AnchoredPopover, no inline detail, no expansion beyond 48px.
- *     This is required to prevent white paper overlap at tight widths.
- *     At <=1199px (stacked), the active chip renders inline detail
- *     inside the expanded rail (same mechanism as wide desktop).
+ *     section into view never moves the chip out of the viewport.
+ *   - The active chip renders a lightweight inline structure detail
+ *     inside the rail. The full load/difficulty/chunk panel was
+ *     deliberately cut from PaperSurface; it belongs in a separate
+ *     AI-difficulty workflow, not in the A4 reading surface.
  *   - `request-lecture-focus` clears `activeInsightSection` AND
  *     `railLocked` (matches default PI's "selecting a question card
- *     closes the insight popover"; the rail compacts back too).
+ *     closes the structure detail"; the rail compacts back too).
  *   - matchMedia breakpoint changes clear `activeInsightSection` AND
- *     `railLocked` so the popover anchor cannot resolve to a node
- *     about to unmount.
+ *     `railLocked` so a resized rail never keeps stale open state.
  *   - Right-panel evidence/distractor click does NOT clear
  *     `activeInsightSection`.
  *   - PaperSurface is unchanged. The harness does not import any
  *     new module from `shared-ui/papersurface`. PaperSurface still
  *     emits no `data-pi-*`. The chip carries a host-owned
  *     `data-pi-insight-chip="<section>"` attribute; PaperSurface is
- *     never told about insights, popovers, or basket.
+ *     never told about structure detail or basket.
  */
 
 import {
@@ -130,7 +126,6 @@ import {
   type AnalysisView,
 } from './preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
-import { AnchoredPopover } from './preview/AnchoredPopover'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
 import { buildInsightChipShortLabel } from './insight/insightChipShortLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
@@ -180,7 +175,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [activeEvidenceId, setActiveEvidenceId] = useState<string | null>(null)
 
   /**
-   * C4: which passage's insight popover is currently expanded.
+   * C4: which passage's structure detail is currently expanded.
    * Max one open at a time. Cleared by `request-lecture-focus`
    * (selecting a question card) and by re-clicking the same chip.
    * NOT cleared by right-panel evidence / distractor selection
@@ -198,7 +193,7 @@ export function PaperIntelligencePaperSurfaceHarness({
    * the harness paints `data-rail-locked="true"` on the aside so the
    * CSS keeps it expanded without hover / focus.
    *
-   * Esc inside the rail clears the lock and any active popover.
+   * Esc inside the rail clears the lock and any active structure detail.
    * `request-lecture-focus` (selecting a question card) also clears
    * the lock so picking a question compacts the rail back.
    * matchMedia breakpoint changes clear the lock too — the rail is
@@ -214,7 +209,7 @@ export function PaperIntelligencePaperSurfaceHarness({
    * Q1 decision (PA-approved): `matchMedia` + state conditional
    * render. Chips are NEVER double-rendered — exactly one
    * `<button data-pi-insight-chip="...">` exists in the DOM at a
-   * time, so the popover's anchorRef cannot resolve to the wrong
+   * time, so chip refs cannot resolve to the wrong
    * element on breakpoint cross.
    *
    * SSR seed is `false` so the desktop tree is the default; the
@@ -330,15 +325,17 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── C4 PR #52: viewport-mode detection ───
   //
   // Listen to both `(max-width: 1199px)` and `(min-width: 1536px)`.
-  // The 300px inline rail detail is only geometrically safe at >=1536px.
-  // Between 1200px and 1535px the rail stays 48px with no detail panel
-  // (medium desktop must not cover white paper). At <=1199px the rail
-  // becomes a fixed left handle with a drawer detail.
+  // The wide flag remains useful for diagnostics / data attributes,
+  // but detail rendering is no longer gated by it. PR #52 PO QA found
+  // that normal 100% browser zoom often falls in the 1200-1535px band;
+  // hiding detail there made the rail look broken. The panel is now a
+  // lightweight passage-structure summary that can render in every
+  // non-empty rail state.
   //
   // PA-approved rule: the rail is always in the DOM. matchMedia only
   // controls detail-surface selection and CSS sizing, NOT rail mount.
   //
-  // When the breakpoint crosses we close any open insight detail/popover
+  // When the breakpoint crosses we close any open structure detail
   // and clear the rail lock so stale state doesn't persist across
   // viewport mode transitions.
   useEffect(() => {
@@ -371,13 +368,6 @@ export function PaperIntelligencePaperSurfaceHarness({
       wideDesktopMql.removeListener(onChange)
     }
   }, [])
-
-  // ─── C4 UX Must Fix: derived medium-desktop flag ───
-  //
-  // Medium desktop = not stacked AND not wide. At this breakpoint the
-  // rail stays 48px and no detail panel renders. Used to gate chip
-  // aria-expanded and AnchoredPopover mounting.
-  const isMediumDesktop = !isStackedMode && !isWideDesktop
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
@@ -454,7 +444,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Focus intent handler ───
   const handleFocusIntent = useCallback((intent: PaperSurfaceFocusIntent) => {
     if (intent.kind === 'request-lecture-focus') {
-      // C4: clear any open insight popover when the teacher selects
+      // C4: clear any open structure detail when the teacher selects
       // a question card. Mirrors the default PI route's behavior in
       // PaperIntelligencePreview, where `setActiveInsightSection(null)`
       // runs on every question selection.
@@ -592,8 +582,8 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Render ───
   //
   // Derive the active-passage report row and the live anchor ref for
-  // the insight popover. We resolve these once per render so the JSX
-  // below stays simple. `activePassage` is undefined (and the popover
+  // the structure detail. We resolve these once per render so the JSX
+  // below stays simple. `activePassage` is undefined (and the detail
   // mount is gated on it) when:
   //   - no chip is open (`activeInsightSection === null`), OR
   //   - the active section id doesn't match any rendered passage,
@@ -626,10 +616,9 @@ export function PaperIntelligencePaperSurfaceHarness({
             : 'pi-ps-insight-chip'
         }
         onClick={() => handleToggleInsight(p.paperSection)}
-        aria-expanded={isMediumDesktop ? false : isOpen}
-        aria-controls={isMediumDesktop ? undefined : `pi-ps-insight-panel-${p.paperSection}`}
-        aria-label={isOpen ? '收起洞察' : chipLabel}
-        aria-pressed={isMediumDesktop ? isOpen : undefined}
+        aria-expanded={isOpen}
+        aria-controls={`pi-ps-insight-panel-${p.paperSection}`}
+        aria-label={isOpen ? '收起篇章结构' : chipLabel}
         data-pi-insight-chip={p.paperSection}
       >
         <span className="pi-ps-insight-chip-section" aria-hidden="true">
@@ -695,30 +684,27 @@ export function PaperIntelligencePaperSurfaceHarness({
           unchanged.
 
           The rail is always in the DOM at every viewport width.
-          CSS media queries control its sizing and detail mode:
-            - >=1536px: absolute in left gutter, 48→160→300px
-            - 1200–1535px: absolute left, stays 48px always, no expansion, no detail panel
+          CSS media queries control its sizing:
+            - >=1200px: absolute in left gutter, 48→160px, then a
+              viewport-clamped structure detail width when a chip is active
             - <=1199px: position:fixed; left:0, acts as a handle/drawer
 
-          matchMedia state still controls WHICH detail surface is
-          used (inline vs AnchoredPopover vs left drawer) but NOT
-          the rail mount. Chips are never double-rendered.
+          matchMedia state annotates the current viewport mode but
+          does NOT control rail mount. Chips are never double-rendered.
 
           INVARIANT (PR #52 PO QA Must Fix):
-            data-rail-detail-open='true' is ONLY set when detail
-            actually renders (!isMediumDesktop && activeInsightSection).
+            data-rail-detail-open='true' is set by the same
+            activeInsightSection state that renders .pi-ps-insight-detail.
             This guarantees: if rail expands beyond compact width,
-            detail is rendered and visible. If detail does not render,
-            rail remains compact. The forbidden state (rail expanded +
-            activeInsightSection set + detailCount == 0) cannot occur.
+            structure detail is rendered. The forbidden state (rail
+            expanded + activeInsightSection set + detailCount == 0)
+            cannot occur.
         */}
         <aside
           className="pi-ps-insight-rail"
-          aria-label="篇章洞察"
+          aria-label="篇章结构"
           data-rail-locked={railLocked ? 'true' : undefined}
-          data-rail-detail-open={
-            !isMediumDesktop && activeInsightSection ? 'true' : undefined
-          }
+          data-rail-detail-open={activeInsightSection ? 'true' : undefined}
           data-viewport-mode={isStackedMode ? 'stacked' : isWideDesktop ? 'wide' : 'medium'}
           onKeyDown={handleRailKeyDown}
         >
@@ -728,7 +714,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             onClick={handleToggleRailLock}
             aria-expanded={railLocked}
             aria-controls="pi-ps-insight-rail-list"
-            aria-label={railLocked ? '收起洞察栏' : '展开洞察栏'}
+            aria-label={railLocked ? '收起篇章结构栏' : '展开篇章结构栏'}
           >
             <span
               className="pi-ps-insight-rail-toggle-icon"
@@ -737,7 +723,7 @@ export function PaperIntelligencePaperSurfaceHarness({
               {railLocked ? '×' : '≡'}
             </span>
             <span className="pi-ps-insight-chip-text">
-              {railLocked ? '收起' : '洞察'}
+              {railLocked ? '收起' : '结构'}
             </span>
           </button>
           <div
@@ -748,23 +734,23 @@ export function PaperIntelligencePaperSurfaceHarness({
             {report.passages.map((p) => (
               <div key={p.paperSection}>
                 {renderInsightChip(p)}
-                {/* Inline detail inside rail (wide desktop + stacked; NOT medium desktop where rail stays 48px) */}
-                {!isMediumDesktop && activeInsightSection === p.paperSection && activePassage && (
+                {/* Inline structure detail inside rail at every viewport. */}
+                {activeInsightSection === p.paperSection && activePassage && (
                   <div
                     className="pi-ps-insight-detail"
                     id={`pi-ps-insight-panel-${p.paperSection}`}
                     role="region"
-                    aria-label={`篇章洞察 · ${p.paperSection}`}
+                    aria-label={`篇章结构 · ${p.paperSection}`}
                   >
                     <div className="pi-ps-insight-detail-header">
                       <span className="pi-ps-insight-detail-title">
-                        篇章洞察 · {p.paperSection}
+                        篇章结构 · {p.paperSection}
                       </span>
                       <button
                         type="button"
                         className="pi-ps-insight-detail-close"
                         onClick={handleCloseInsight}
-                        aria-label="关闭洞察面板"
+                        aria-label="关闭篇章结构面板"
                       >
                         ×
                       </button>
@@ -836,15 +822,13 @@ export function PaperIntelligencePaperSurfaceHarness({
           C4 UX Must Fix (PR #52 browser QA / PO QA):
 
           Detail surfaces by breakpoint:
-            - Wide desktop (>=1536px): inline detail inside the rail (above).
-            - Medium desktop (1200–1535px): NO detail panel. Chip click
-              sets active visual state only. Rail stays 48px. Must not
-              cover white paper.
-            - Stacked/narrow (<=1199px): inline detail inside the rail
-              (same as wide desktop). Rail expands to show content.
+            - Side-by-side (>=1200px): inline structure detail inside
+              the left rail with viewport-clamped width.
+            - Stacked/narrow (<=1199px): inline structure detail inside
+              the fixed left drawer.
 
-          Inline detail is used at all breakpoints where the rail
-          expands (wide + stacked). No AnchoredPopover for insight.
+          No AnchoredPopover for passage structure. The user-visible
+          expanded left area must contain the detail itself.
         */}
       </div>
     </div>

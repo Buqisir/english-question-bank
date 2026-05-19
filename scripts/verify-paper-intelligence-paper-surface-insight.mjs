@@ -362,12 +362,12 @@ assert(
   )
 }
 
-// 2d. AnchoredPopover import shape.
+// 2d. AnchoredPopover is no longer used for the left structure rail.
 assert(
-  /import\s*\{\s*AnchoredPopover\s*\}\s*from\s*['"]\.\/preview\/AnchoredPopover['"]/.test(
+  !/import\s*\{\s*AnchoredPopover\s*\}\s*from\s*['"]\.\/preview\/AnchoredPopover['"]/.test(
     harnessSrc,
-  ),
-  "harness imports AnchoredPopover from `./preview/AnchoredPopover`",
+  ) && !/<AnchoredPopover\b/.test(harnessNoComments),
+  "harness does NOT import/render AnchoredPopover for the left structure rail",
 )
 
 // 2e. Esc-to-close behavior is handled by handleRailKeyDown; closeOnOutsidePointerDown={true} NOT used.
@@ -703,6 +703,30 @@ for (const path of insightFiles) {
       !/\buseCallback\s*\(/.test(panelNoComments),
     "HarnessInsightPanelContent.tsx is pure presentational (no useState/useEffect/useRef/useMemo/useCallback)",
   )
+  assert(
+    !/reportPassage\.loads\b|reportPassage\.keyChunks\b|pi-ps-insight-loads|pi-ps-insight-chunks/.test(
+      panelNoComments,
+    ),
+    "HarnessInsightPanelContent renders only passage structure (no load bars / chunk summary)",
+  )
+}
+
+{
+  const labelSrc = readFile(INSIGHT_LABEL_PATH)
+  const labelNoComments = stripComments(labelSrc)
+  assert(
+    !/\bloads\b|\bkeyChunks\b|负荷|证据|词块/.test(labelNoComments),
+    "insightChipLabel uses only passage-structure language (no load/evidence/chunk signals)",
+  )
+
+  const shortLabelSrc = readFile(
+    'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
+  )
+  const shortLabelNoComments = stripComments(shortLabelSrc)
+  assert(
+    !/\bloads\b|\bkeyChunks\b|负荷|证据|词块/.test(shortLabelNoComments),
+    "insightChipShortLabel uses only passage-structure language (no load/evidence/chunk signals)",
+  )
 }
 
 /* ─── 5. Default PI route files unchanged ────────────────────────── */
@@ -931,17 +955,17 @@ assert(
   )
 }
 
-// 6b.3-bis. Detail-open width is 260-320px.
+// 6b.3-bis. Detail-open width is viewport-clamped for 100% zoom.
 {
   const detailOpenRe =
     /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{([\s\S]*?)\}/
   const detailOpenMatch = harnessCssNoComments.match(detailOpenRe)
   const detailOpenBody = detailOpenMatch ? detailOpenMatch[1] : ''
-  const detailW = (detailOpenBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
-  const detailNum = detailW ? parseInt(detailW, 10) : NaN
   assert(
-    Number.isFinite(detailNum) && detailNum >= 260 && detailNum <= 320,
-    `.pi-ps-insight-rail detail-open width is 260-320px (got ${detailW ?? 'missing'}px)`,
+    /width\s*:\s*clamp\(\s*200px\s*,\s*calc\(\s*100vw\s*-\s*1230px\s*\)\s*,\s*300px\s*\)/.test(
+      detailOpenBody,
+    ),
+    ".pi-ps-insight-rail detail-open width is clamp(200px, calc(100vw - 1230px), 300px)",
   )
 }
 
@@ -1271,6 +1295,7 @@ const allowedC4 = new Set([
   'scripts/verify-paper-intelligence-paper-surface-harness.mjs',
   'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
   'scripts/verify-paper-intelligence-paper-surface-evidence.mjs',
+  'scripts/verify-paper-surface-module-v1.mjs',
   'docs/paper-surface-watch-ledger.md',
   'docs/product/mockups/paper-surface-c4-insight-layout/01-current-problem.png',
   'docs/product/mockups/paper-surface-c4-insight-layout/02-target-default.png',
@@ -1291,13 +1316,15 @@ assert(
 console.log('\n=== R-checks: PR #52 UX Retune product guards ===')
 
 /*
- * R-1. AnchoredPopover is NOT mounted on wide desktop or medium desktop;
- *      gated to stacked mode only.
+ * R-1. Inline detail renders whenever a passage is active. The 100%
+ *      zoom bug was caused by gating detail out of the medium desktop
+ *      band, so this guard rejects that old shape.
  */
 assert(
-  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments) ||
-    /!\s*isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "R-1: inline detail is gated on !isMediumDesktop (renders at wide desktop + stacked, not medium desktop)",
+  /data-rail-detail-open\s*=\s*\{\s*activeInsightSection\s*\?\s*['"]true['"]\s*:\s*undefined\s*\}/.test(
+    harnessNoComments,
+  ) && !/!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "R-1: data-rail-detail-open follows activeInsightSection directly (no medium-desktop no-detail gate)",
 )
 
 /*
@@ -1326,18 +1353,18 @@ assert(
 }
 
 /*
- * R-4. Detail-open rail width is 260–320px.
+ * R-4. Detail-open rail width is viewport-clamped.
  */
 {
   const detailOpenRe =
     /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{([\s\S]*?)\}/
   const detailOpenMatch = harnessCssNoComments.match(detailOpenRe)
   const detailOpenBody = detailOpenMatch ? detailOpenMatch[1] : ''
-  const detailW = (detailOpenBody.match(/\bwidth\s*:\s*(\d+)px\b/) || [])[1]
-  const detailNum = detailW ? parseInt(detailW, 10) : NaN
   assert(
-    Number.isFinite(detailNum) && detailNum >= 260 && detailNum <= 320,
-    `R-4: detail-open rail width is 260–320px (got ${detailW ?? 'missing'}px)`,
+    /width\s*:\s*clamp\(\s*200px\s*,\s*calc\(\s*100vw\s*-\s*1230px\s*\)\s*,\s*300px\s*\)/.test(
+      detailOpenBody,
+    ),
+    "R-4: detail-open rail width uses clamp(200px, calc(100vw - 1230px), 300px)",
   )
 }
 
@@ -1442,17 +1469,19 @@ assert(
 )
 
 /*
- * R-11. Wide-desktop detail block is rendered inside
+ * R-11. Structure detail block is rendered inside
  *       `.pi-ps-insight-rail`, not portalled and not positioned as a
  *       fixed overlay.
  */
 {
-  // The detail renders inside the rail's conditional block (isWideDesktop).
   assert(
-    /isWideDesktop[\s\S]*?pi-ps-insight-rail[\s\S]*?pi-ps-insight-detail/.test(
+    /className\s*=\s*["']pi-ps-insight-rail["'][\s\S]*?pi-ps-insight-detail/.test(
       harnessNoComments,
-    ),
-    "R-11: .pi-ps-insight-detail is inside the wide-desktop rail block (isWideDesktop), not portalled",
+    ) &&
+      /activeInsightSection\s*===\s*p\.paperSection[\s\S]*?pi-ps-insight-detail/.test(
+        harnessNoComments,
+      ),
+    "R-11: .pi-ps-insight-detail renders inside the rail for the active passage",
   )
   // Detail CSS does NOT use position: fixed.
   const detailRuleMatch = harnessCssDesktopOnly.match(
@@ -1466,15 +1495,13 @@ assert(
 }
 
 /*
- * R-12. Wide desktop and medium desktop do not render `.pi-ps-insight-panel`;
- *       only stacked mode may.
- *
- * In TSX, the AnchoredPopover (which carries `.pi-ps-insight-panel`)
- * must only render when isStackedMode is true.
+ * R-12. `.pi-ps-insight-panel` / AnchoredPopover is not used for
+ *       passage structure; detail is inline inside the left rail.
  */
 assert(
-  /isStackedMode[\s\S]*?pi-ps-insight-panel/.test(harnessNoComments),
-  "R-12: `.pi-ps-insight-panel` (popover) is gated behind isStackedMode (only stacked mode renders it)",
+  !/<AnchoredPopover\b/.test(harnessNoComments) &&
+    !/className\s*=\s*["']pi-ps-insight-panel["']/.test(harnessNoComments),
+  "R-12: AnchoredPopover / .pi-ps-insight-panel is not rendered for passage structure",
 )
 
 /*
@@ -1661,23 +1688,23 @@ assert(
 )
 
 /*
- * PA-6. Inline detail expansion (260-320px) is gated to @media (min-width: 1536px).
+ * PA-6. Inline detail expansion is available in the side-by-side
+ *       desktop layout and uses the viewport-clamped structure width.
  */
 {
-  // The detail-open rule must be inside a @media (min-width: 1536px) block.
-  const wideMediaRe = /@media\s*\(\s*min-width\s*:\s*1536px\s*\)\s*\{([\s\S]*?)\n\}/
-  const wideMediaMatch = harnessCssNoComments.match(wideMediaRe)
-  const wideMediaBody = wideMediaMatch ? wideMediaMatch[1] : ''
+  const desktopMediaRe = /@media\s*\(\s*min-width\s*:\s*1200px\s*\)\s*\{([\s\S]*?)\n\}/
+  const desktopMediaMatch = harnessCssNoComments.match(desktopMediaRe)
+  const desktopMediaBody = desktopMediaMatch ? desktopMediaMatch[1] : ''
   assert(
-    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*\d{3}px/.test(
-      wideMediaBody,
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*clamp\(\s*200px\s*,\s*calc\(\s*100vw\s*-\s*1230px\s*\)\s*,\s*300px\s*\)/.test(
+      desktopMediaBody,
     ),
-    "PA-6: inline detail expansion is gated to @media (min-width: 1536px)",
+    "PA-6: inline detail expansion is available at @media (min-width: 1200px) with viewport-clamped width",
   )
 }
 
 /*
- * PA-7. 1200–1535px does NOT use inline detail expansion.
+ * PA-7. 1200–1535px does not hide or suppress the left rail detail.
  */
 {
   const mediumDesktopMedia =
@@ -1685,19 +1712,20 @@ assert(
   const mediumMatch = harnessCssNoComments.match(mediumDesktopMedia)
   const mediumBody = mediumMatch ? mediumMatch[1] : ''
   assert(
-    !/width\s*:\s*(24|30)0px/.test(mediumBody),
-    "PA-7: 1200-1535px does NOT use detail expansion width",
+    !!mediumMatch && !/display\s*:\s*none/.test(mediumBody),
+    "PA-7: 1200-1535px keeps the left rail visible",
   )
 }
 
 /*
- * PA-8. 1200–1535px does NOT render a detail panel (C4 UX Must Fix).
- *       Inline detail is gated by !isMediumDesktop. Medium desktop
- *       must not cover white paper.
+ * PA-8. 1200–1535px DOES render structure detail when a chip is active.
+ *       This is the PO QA correction for the 100% zoom bug.
  */
 assert(
-  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "PA-8: inline detail is gated by !isMediumDesktop (medium desktop must not cover white paper)",
+  /activeInsightSection\s*===\s*p\.paperSection[\s\S]*?pi-ps-insight-detail/.test(
+    harnessNoComments,
+  ) && !/!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "PA-8: inline detail is not gated out of the 1200-1535px desktop band",
 )
 
 /*
@@ -1744,41 +1772,40 @@ assert(
 
 /* ─── B-checks: PR #52 breakpoint guard after browser QA ───────── */
 
-console.log('\n=== B-checks: PR #52 wide-desktop breakpoint guard ===')
+console.log('\n=== B-checks: PR #52 100%-zoom structure detail guard ===')
 
 /*
- * B-1. The inline detail rail is only allowed where its 240px detail
- *      width can fit: 240 rail + 858 paper + 24 gap + 380 analysis =
- *      1502px. Product chose 1536px as the calm threshold.
+ * B-1. The harness may still annotate wide desktop for diagnostics,
+ *      but the detail render path is not gated by this flag.
  */
 assert(
   /matchMedia\s*\(\s*['"]\s*\(\s*min-width\s*:\s*1536px\s*\)\s*['"]/.test(
     harnessSrc,
   ),
-  "B-1: harness uses min-width:1536px as the wide-desktop inline-rail threshold",
+  "B-1: harness still annotates min-width:1536px as wide desktop",
 )
 
 /*
- * B-2. Inline rail detail never renders in the 1200-1535 side-by-side
- *      band that failed browser QA. The inline detail is gated by
- *      isWideDesktop inside the rail. AnchoredPopover is gated to
- *      stacked mode only (not medium desktop).
+ * B-2. Inline rail detail renders from activeInsightSection directly,
+ *      including the 1200-1535 side-by-side band that failed browser QA.
  */
 assert(
-  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "B-2: inline detail inside rail is gated by !isMediumDesktop (renders at wide desktop + stacked)",
+  /data-rail-detail-open\s*=\s*\{\s*activeInsightSection\s*\?\s*['"]true['"]\s*:\s*undefined\s*\}/.test(
+    harnessNoComments,
+  ) &&
+    /activeInsightSection\s*===\s*p\.paperSection[\s\S]*?pi-ps-insight-detail/.test(
+      harnessNoComments,
+    ),
+  "B-2: active passage state opens the rail and renders inline detail",
 )
 assert(
-  !/isStackedMode\s*&&\s*activePassage\s*&&\s*activeChipRef\s*&&\s*\([\s\S]*?<AnchoredPopover\b/.test(
-    harnessNoComments,
-  ),
-  "B-2: AnchoredPopover is NOT used for insight detail (inline detail handles all expanding breakpoints)",
+  !/<AnchoredPopover\b/.test(harnessNoComments),
+  "B-2: AnchoredPopover is NOT used for passage structure detail",
 )
 
 /*
- * B-3. CSS declares a 1200-1535px medium-desktop rail rule that
- *      constrains the rail to 48px in ALL states (NOT hides it).
- *      The rail is always visible. No expansion beyond 48px.
+ * B-3. CSS declares a 1200-1535px constrained-desktop rule that keeps
+ *      text fully hidden when collapsed and fully visible when expanded.
  */
 {
   const mediumDesktopMedia =
@@ -1787,32 +1814,27 @@ assert(
   const mediumBody = mediumMatch ? mediumMatch[1] : ''
   assert(
     !!mediumMatch,
-    "B-3: CSS declares a 1200-1535px medium-desktop rail rule",
+    "B-3: CSS declares a 1200-1535px constrained-desktop rail rule",
   )
-  // PA-approved: rail is NOT display:none at 1200-1535px.
   assert(
     !/\.pi-ps-insight-rail[^{]*\{[^}]*display\s*:\s*none/.test(mediumBody),
     "B-3: 1200-1535px CSS does NOT hide .pi-ps-insight-rail (PA-approved: always visible)",
   )
-  // C4 UX Must Fix: medium desktop rail stays 48px in all states.
   assert(
-    /\.pi-ps-insight-rail[\s\S]*?\bwidth\s*:\s*48px\b/.test(mediumBody),
-    "B-3: 1200-1535px medium-desktop rail width is 48px (must not cover white paper)",
+    /\.pi-ps-insight-rail\s+\.pi-ps-insight-chip-text[\s\S]*?visibility\s*:\s*hidden/.test(
+      mediumBody,
+    ),
+    "B-3: 1200-1535px collapsed chip text is fully hidden",
   )
-  // No 120px expansion at medium desktop.
   assert(
-    !/\bwidth\s*:\s*120px\b/.test(mediumBody),
-    "B-3: 1200-1535px medium-desktop rail does NOT expand to 120px",
+    /\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?visibility\s*:\s*visible/.test(
+      mediumBody,
+    ),
+    "B-3: 1200-1535px expanded chip text is fully visible",
   )
-  // No 240px expansion at medium desktop.
   assert(
-    !/\bwidth\s*:\s*240px\b/.test(mediumBody),
-    "B-3: 1200-1535px medium-desktop rail does NOT expand to 240px",
-  )
-  // No expansion on hover/focus/locked beyond 48px.
-  assert(
-    /\.pi-ps-insight-rail:hover[\s\S]*?\bwidth\s*:\s*48px\b/.test(mediumBody),
-    "B-3: 1200-1535px medium-desktop rail hover stays at 48px",
+    !/data-rail-detail-open[\s\S]*?display\s*:\s*none/.test(mediumBody),
+    "B-3: 1200-1535px detail-open state is not hidden",
   )
 }
 
@@ -1885,20 +1907,20 @@ assert(
   "B-10: default PI route files remain unchanged",
 )
 
-/* ─── MF-checks: C4 UX Must Fix — medium desktop must not cover white paper ─ */
+/* ─── MF-checks: C4 PO QA — 100% zoom must show structure detail ─ */
 
-console.log('\n=== MF-checks: C4 UX Must Fix — medium desktop must not cover white paper ===')
+console.log('\n=== MF-checks: C4 PO QA — 100% zoom must show structure detail ===')
 
 /*
- * MF-1. At 1200–1535px, .pi-ps-insight-rail must remain width:48px
- *       in all states.
+ * MF-1. At 1200–1535px, the rail remains on the left and does not
+ *       hide expanded labels/detail.
  */
 {
   const mediumDesktopMedia =
     /@media\s*\(\s*min-width\s*:\s*1200px\s*\)\s*and\s*\(\s*max-width\s*:\s*1535px\s*\)/
   assert(
     mediumDesktopMedia.test(harnessCssNoComments),
-    "MF-1: medium desktop @media rule exists",
+    "MF-1: constrained desktop @media rule exists",
   )
 
   // Extract all 1200-1535 bodies (there may be more than one block).
@@ -1933,30 +1955,35 @@ console.log('\n=== MF-checks: C4 UX Must Fix — medium desktop must not cover w
   const mediumBody = extractAllMediumBodies(harnessCssNoComments)
 
   assert(
-    /\.pi-ps-insight-rail[\s\S]*?width\s*:\s*48px/.test(mediumBody),
-    "MF-1: 1200-1535px rail width is 48px",
+    !/\.pi-ps-insight-rail[^{]*\{[^}]*display\s*:\s*none/.test(mediumBody),
+    "MF-1: 1200-1535px rail is not hidden",
   )
   assert(
-    !/\bwidth\s*:\s*120px/.test(mediumBody),
-    "MF-1: no medium desktop rule expands rail to 120px",
+    /\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?visibility\s*:\s*visible/.test(
+      mediumBody,
+    ),
+    "MF-1: 1200-1535px expanded rail restores visible text",
   )
   assert(
-    !/\bwidth\s*:\s*160px/.test(mediumBody) && !/\bwidth\s*:\s*240px/.test(mediumBody),
-    "MF-1: no medium desktop detail/open state expands rail beyond 48px",
+    /@media\s*\(\s*min-width\s*:\s*1200px\s*\)[\s\S]*?width\s*:\s*clamp\(\s*200px\s*,\s*calc\(\s*100vw\s*-\s*1230px\s*\)\s*,\s*300px\s*\)/.test(
+      harnessCssNoComments,
+    ),
+    "MF-1: 1200px+ detail-open width is viewport-clamped for normal zoom",
   )
 }
 
 /*
- * MF-2. Detail panel is NOT rendered at 1200-1535px (medium desktop).
- *       Inline detail is gated by !isMediumDesktop.
+ * MF-2. Detail panel renders from activeInsightSection directly.
  */
 assert(
-  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "MF-2: inline detail is gated by !isMediumDesktop (not rendered at medium desktop)",
+  /activeInsightSection\s*===\s*p\.paperSection[\s\S]*?pi-ps-insight-detail/.test(
+    harnessNoComments,
+  ),
+  "MF-2: inline detail renders for the active passage",
 )
 assert(
-  !/isMediumDesktop[\s\S]{0,100}?<AnchoredPopover\b/.test(harnessNoComments),
-  "MF-2: AnchoredPopover is NOT rendered conditionally on isMediumDesktop",
+  !/!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
+  "MF-2: inline detail is not gated out of medium desktop",
 )
 
 /*
@@ -1985,21 +2012,24 @@ assert(
 )
 
 /*
- * MF-5. Wide desktop inline detail remains gated to >=1536.
+ * MF-5. Side-by-side inline detail is available at >=1200 with the
+ *       structure-only clamped width.
  */
 assert(
-  /!isMediumDesktop\s*&&\s*activeInsightSection/.test(harnessNoComments),
-  "MF-5: inline detail is gated by !isMediumDesktop (renders at wide + stacked, not medium)",
+  /data-rail-detail-open\s*=\s*\{\s*activeInsightSection\s*\?\s*['"]true['"]\s*:\s*undefined\s*\}/.test(
+    harnessNoComments,
+  ),
+  "MF-5: data-rail-detail-open follows activeInsightSection directly",
 )
 {
-  const wideMediaRe = /@media\s*\(\s*min-width\s*:\s*1536px\s*\)\s*\{([\s\S]*?)\n\}/
-  const wideMediaMatch = harnessCssNoComments.match(wideMediaRe)
-  const wideMediaBody = wideMediaMatch ? wideMediaMatch[1] : ''
+  const desktopMediaRe = /@media\s*\(\s*min-width\s*:\s*1200px\s*\)\s*\{([\s\S]*?)\n\}/
+  const desktopMediaMatch = harnessCssNoComments.match(desktopMediaRe)
+  const desktopMediaBody = desktopMediaMatch ? desktopMediaMatch[1] : ''
   assert(
-    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*\d{3}px/.test(
-      wideMediaBody,
+    /\.pi-ps-insight-rail\[data-rail-detail-open='true'\]\s*\{[^}]*width\s*:\s*clamp\(\s*200px\s*,\s*calc\(\s*100vw\s*-\s*1230px\s*\)\s*,\s*300px\s*\)/.test(
+      desktopMediaBody,
     ),
-    "MF-5: CSS detail-open expansion is inside @media (min-width: 1536px) only",
+    "MF-5: CSS detail-open expansion is inside @media (min-width: 1200px) with clamp width",
   )
 }
 
@@ -2021,11 +2051,11 @@ assert(
 )
 
 /*
- * MF-7. isMediumDesktop is derived in the harness.
+ * MF-7. The old isMediumDesktop no-detail gate is gone.
  */
 assert(
-  /isMediumDesktop\s*=\s*!isStackedMode\s*&&\s*!isWideDesktop/.test(harnessNoComments),
-  "MF-7: isMediumDesktop is correctly derived from !isStackedMode && !isWideDesktop",
+  !/\bisMediumDesktop\b/.test(harnessNoComments),
+  "MF-7: no isMediumDesktop no-detail branch remains",
 )
 
 /* ─── TXT-checks: PR #52 C4 PO QA Must Fix — no partial text leak ─ */
@@ -2061,9 +2091,9 @@ console.log('\n=== TXT-checks: PR #52 C4 PO QA — constrained rail text must be
 }
 
 /*
- * TXT-2. Medium desktop (1200–1535px) chip-text rules use
- *        visibility:hidden + width:0 in ALL rail states including
- *        hover / focus-within / locked / detail-open.
+ * TXT-2. Constrained desktop (1200–1535px) chip-text rules use
+ *        visibility:hidden + width:0 when collapsed and restore full
+ *        visibility when the rail is intentionally expanded.
  */
 {
   function extractAllMediumBodiesTXT(src) {
@@ -2104,10 +2134,9 @@ console.log('\n=== TXT-checks: PR #52 C4 PO QA — constrained rail text must be
     /\.pi-ps-insight-chip-text[\s\S]*?\bwidth\s*:\s*0\b/.test(mediumBody),
     "TXT-2: medium desktop chip-text uses width:0",
   )
-  // Hover/focus/locked state must NOT restore visibility.
   assert(
-    !/\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*visible\b/.test(mediumBody),
-    "TXT-2: medium desktop hover does NOT restore chip-text visibility",
+    /\.pi-ps-insight-rail:hover\s+\.pi-ps-insight-chip-text[\s\S]*?\bvisibility\s*:\s*visible\b/.test(mediumBody),
+    "TXT-2: medium desktop hover restores full chip-text visibility",
   )
 }
 

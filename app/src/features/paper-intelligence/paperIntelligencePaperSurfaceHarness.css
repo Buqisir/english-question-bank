@@ -317,8 +317,7 @@
   }
 }
 
-/* (Medium desktop 1200-1535px rail overrides are placed after
-   the base rail rules below.) */
+/* (Side-by-side rail overrides are placed after the base rail rules below.) */
 
 .pi-ps-harness-loading,
 .pi-ps-harness-error {
@@ -728,18 +727,27 @@ button.pi-ps-analysis-distractor--selected {
   box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
 }
 
-/* State 3: active detail open — 300px (wide desktop only, >=1536px)
+/* State 3: active detail open — viewport-clamped structure detail
  *
  * INVARIANT (PR #52 PO QA Must Fix):
  *   This rule ONLY fires when TSX sets data-rail-detail-open='true',
- *   which the TSX now gates on `!isMediumDesktop && activeInsightSection`.
+ *   which the TSX sets from the same activeInsightSection state that
+ *   renders `.pi-ps-insight-detail`.
  *   Therefore: if this rule expands the rail, the .pi-ps-insight-detail
  *   div is guaranteed to be rendered in the DOM by the same render pass.
  *   The forbidden state (expanded rail + no detail content) cannot occur.
+ *
+ * Width math:
+ *   White paper starts at approximately `100vw - 1230px` in the
+ *   side-by-side grid (left gutter + 24px gap + 32px matte).
+ *   The rail uses that value as its preferred width, capped at 300px
+ *   and floored at 200px now that the content is only passage
+ *   structure. At tight desktop widths this may sit near the paper
+ *   edge, but it no longer needs the old load-bar width.
  */
-@media (min-width: 1536px) {
+@media (min-width: 1200px) {
   .pi-ps-insight-rail[data-rail-detail-open='true'] {
-    width: 300px;
+    width: clamp(200px, calc(100vw - 1230px), 300px);
     background: var(--pi-ps-insight-rail-bg);
     border-right-color: var(--pi-ps-insight-hairline);
     box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
@@ -806,52 +814,29 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 /*
- * ─── Medium desktop 1200–1535px rail overrides ───────────────────
+ * ─── Side-by-side constrained desktop rail rules ─────────────────
  *
- * C4 UX Must Fix (PR #52 browser QA):
+ * C4 PO QA correction:
  *
- * At 1200–1535px the white paper page starts as close as x=56px
- * (at 1280px). Any rail expansion beyond 48px overlaps white paper
- * text. The 120px hover width and 320px AnchoredPopover both failed
- * geometry QA.
+ * The earlier 1200–1535px rule kept the rail at 48px and suppressed
+ * detail entirely. At normal 100% zoom many desktop browser panes fall
+ * into that band, so clicking the rail looked broken: the active chip
+ * changed, but no content appeared.
  *
  * Product rule:
- *   - Insight always lives on the left.
- *   - Medium desktop must NOT cover white paper body.
+ *   - Passage structure always lives on the left.
+ *   - Clicking a passage chip must show the structure detail.
  *   - No topbar fallback.
  *
  * Implementation:
- *   - Rail stays 48px in ALL states (hover, focus, locked, detail-open).
- *   - No 120px expansion. No 300px inline detail.
- *   - No AnchoredPopover renders at this breakpoint (gated in TSX).
- *   - Chip text stays hidden (opacity:0) — only the section badge is
- *     visible. Clicking a chip sets an active visual state but does
- *     NOT open a detail panel.
- *   - aria-expanded stays false at this breakpoint (TSX-gated).
+ *   - Hover/focus/locked still use the compact 160px rail.
+ *   - Active detail uses the viewport-clamped structure-detail width
+ *     defined above.
+ *   - No AnchoredPopover renders; the expanded left area contains the
+ *     actual detail.
  */
 @media (min-width: 1200px) and (max-width: 1535px) {
-  .pi-ps-insight-rail,
-  .pi-ps-insight-rail:hover,
-  .pi-ps-insight-rail:focus-within,
-  .pi-ps-insight-rail[data-rail-locked='true'],
-  .pi-ps-insight-rail[data-rail-detail-open='true'] {
-    width: 48px;
-    background: transparent;
-    border-right-color: transparent;
-    box-shadow: none;
-  }
-
-  /*
-   * PR #52 C4 PO QA Must Fix — medium desktop: text must be
-   * completely hidden in ALL rail states (hover, focus, locked,
-   * detail-open). The rail stays 48px and ONLY the section badge
-   * icon is visible. No partial Chinese text. No expansion.
-   */
-  .pi-ps-insight-rail .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
-  .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+  .pi-ps-insight-rail .pi-ps-insight-chip-text {
     visibility: hidden;
     width: 0;
     overflow: hidden;
@@ -859,10 +844,15 @@ button.pi-ps-analysis-distractor--selected {
     pointer-events: none;
   }
 
-  /* Hide the rail toggle label text at medium desktop */
-  .pi-ps-insight-rail-toggle {
-    justify-content: center;
-    padding: 6px 4px;
+  .pi-ps-insight-rail:hover .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail:focus-within .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail[data-rail-locked='true'] .pi-ps-insight-chip-text,
+  .pi-ps-insight-rail[data-rail-detail-open='true'] .pi-ps-insight-chip-text {
+    visibility: visible;
+    width: auto;
+    overflow: visible;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
@@ -879,7 +869,7 @@ button.pi-ps-analysis-distractor--selected {
  * Rail toggle button — leading affordance.
  *
  * Shows a compact icon when collapsed; reveals the leading label
- * (洞察 / 收起) on expand. Real <button> with `aria-expanded` +
+ * (结构 / 收起) on expand. Real <button> with `aria-expanded` +
  * `aria-controls` wired in TSX so screen-reader users can identify
  * the affordance and the targeted list region.
  */
@@ -1308,22 +1298,34 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-ps-insight-outline {
   padding: 10px 0;
-  border-bottom: 1px solid #e5e7eb;
+}
+
+.pi-ps-insight-outline-title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
 }
 
 .pi-ps-insight-outline-idea {
-  margin: 0 0 6px;
-  font-size: 14px;
+  margin: 0 0 8px;
+  font-size: 13px;
   font-weight: 500;
   color: #111827;
+  overflow-wrap: break-word;
 }
 
 .pi-ps-insight-outline-layers {
   margin: 0;
   padding: 0 0 0 18px;
-  font-size: 13px;
+  font-size: 12px;
   color: #6b7280;
   line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+.pi-ps-insight-outline-layers li {
+  margin-bottom: 4px;
 }
 
 .pi-ps-insight-chunks {
