@@ -203,6 +203,25 @@ Do not introduce:
 | Cut C | Return-to-workbench top bar and QA smoke strengthened. |
 | Cut D1 | Paper-like flow, option-integrated right analysis, insight chip/popover. |
 
+### 10. PaperSurface Structure Brace
+
+The PaperSurface route may show a Structure Brace (`结构钩`) as a quiet orientation marker for passage structure. It is not an analytics surface.
+
+Product rules:
+
+- The Structure Brace points to a whole passage body or one confirmed paragraph.
+- It uses C5a `passageStructure` paragraph ids such as `A-P1`; it must not invent paragraph ids.
+- The paragraph controls live inside the open passage structure detail panel, replacing text-only segment rows. They do not appear on the collapsed main rail.
+- The brace is drawn in the white `.ps-page` left padding, not in the gray matte and not over passage text.
+- The brace is visible only at desktop widths where the expanded rail cannot cover the paper padding: `>=1360px`.
+- At `<=1359px`, the paragraph controls still work and scroll the paper, but the brace is hidden. Do not force it visible with z-index.
+- The brace and evidence line may coexist. The brace is orientation furniture; the evidence line is teaching proof.
+- PaperSurface remains dumb. The harness queries existing `data-paper-section` and `data-paper-paragraph-id` anchors and owns all brace state.
+
+Reason:
+
+Browser QA showed that tight desktop widths can put the expanded left rail over the paper padding. Hiding the brace at `<=1359px` is the accepted product decision. Re-opening this requires a new rail layout decision, not a z-index tweak.
+
 ## Current Merge Baseline
 
 PR #18 merged into `main` as Cut D1.

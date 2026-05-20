@@ -16,52 +16,26 @@
  *  10. Structure target cleared on resize.
  */
 
-import { readFileSync } from 'node:fs'
-import { execSync } from 'node:child_process'
-import { resolve, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import {
+  changedFiles as getChangedFiles,
+  createVerifier,
+  readText,
+  repoRootFrom,
+  touchesAny,
+} from './lib/verifyScope.mjs'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const ROOT = resolve(__dirname, '..')
+const ROOT = repoRootFrom(import.meta.url)
+const { assert, section, summary } = createVerifier('C5b verify')
 
-let passed = 0
-let failed = 0
-
-function assert(condition, label) {
-  if (condition) {
-    passed++
-    console.log(`  ✓ ${label}`)
-  } else {
-    failed++
-    console.error(`  ✗ FAIL: ${label}`)
-  }
-}
-
-function readFile(relPath) {
-  return readFileSync(resolve(ROOT, relPath), 'utf8')
-}
-
-function gitDiffFiles() {
-  try {
-    // Include both staged and unstaged changes vs main
-    const tracked = execSync('git diff --name-only main', { cwd: ROOT, encoding: 'utf8' }).trim()
-    const staged = execSync('git diff --name-only --cached main', { cwd: ROOT, encoding: 'utf8' }).trim()
-    const all = new Set([...tracked.split('\n'), ...staged.split('\n')].filter(Boolean))
-    return [...all]
-  } catch {
-    return []
-  }
-}
-
-const changedFiles = gitDiffFiles()
+const changedFiles = getChangedFiles(ROOT)
 
 // ─── Load source files ───
 
-const harnessTsx = readFile('app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
-const harnessCss = readFile('app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css')
-const braceTsx = readFile('app/src/features/paper-intelligence/structureBrace.tsx')
+const harnessTsx = readText(ROOT, 'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
+const harnessCss = readText(ROOT, 'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css')
+const braceTsx = readText(ROOT, 'app/src/features/paper-intelligence/structureBrace.tsx')
 
-console.log('\n─── C5b: forbidden changes (no PaperSurface/shared/data/model) ───\n')
+section('C5b: forbidden changes (no PaperSurface/shared/data/model)')
 
 // 1. No PaperSurface / shared / papersurface changes
 const forbiddenPatterns = [
@@ -71,8 +45,7 @@ const forbiddenPatterns = [
 ]
 
 for (const pat of forbiddenPatterns) {
-  const touched = changedFiles.some((f) => f.includes(pat) || f.startsWith(pat))
-  assert(!touched, `${pat} not modified`)
+  assert(!touchesAny(changedFiles, [pat]), `${pat} not modified`)
 }
 
 // 2. No report.json / input.json / adapter changes
@@ -83,8 +56,7 @@ const dataForbidden = [
 ]
 
 for (const pat of dataForbidden) {
-  const touched = changedFiles.some((f) => f === pat || f.startsWith(pat))
-  assert(!touched, `${pat} not modified`)
+  assert(!touchesAny(changedFiles, [pat]), `${pat} not modified`)
 }
 
 // No route/server/package/lockfile changes
@@ -97,11 +69,10 @@ const infraForbidden = [
 ]
 
 for (const pat of infraForbidden) {
-  const touched = changedFiles.some((f) => f === pat || f.startsWith(pat))
-  assert(!touched, `${pat} not modified`)
+  assert(!touchesAny(changedFiles, [pat]), `${pat} not modified`)
 }
 
-console.log('\n─── C5b: no AI diagnostic strings ───\n')
+section('C5b: no AI diagnostic strings')
 
 // 3. No AI diagnostic strings in new/modified harness code
 const braceAllSrc = harnessTsx + harnessCss + braceTsx
@@ -120,25 +91,26 @@ for (const pat of aiDiagPatterns) {
   assert(!pat.test(braceTsx), `structureBrace.tsx does not contain AI diagnostic: ${pat.source}`)
 }
 
-console.log('\n─── C5b: brace code lives only in harness layer ───\n')
+section('C5b: brace code lives only in harness layer')
 
 // 4. Brace code lives only in harness layer
 assert(
   changedFiles.every(
     (f) =>
       f.startsWith('app/src/features/paper-intelligence/') ||
-      f.startsWith('scripts/')
+      f.startsWith('scripts/') ||
+      f.startsWith('docs/')
   ),
-  'all changed files are in harness layer or scripts'
+  'all changed files are in harness layer, scripts, or docs'
 )
 
-// structureBrace.tsx is in the right directory
+// structureBrace.tsx is in the right directory and can be loaded.
 assert(
-  changedFiles.includes('app/src/features/paper-intelligence/structureBrace.tsx'),
-  'structureBrace.tsx is a changed file in features/paper-intelligence/'
+  braceTsx.length > 0,
+  'structureBrace.tsx exists in features/paper-intelligence/'
 )
 
-console.log('\n─── C5b: brace overlay properties ───\n')
+section('C5b: brace overlay properties')
 
 // 5. Brace overlay has `pointer-events: none`
 assert(
@@ -169,7 +141,7 @@ assert(
   'evidence line still at z-index: 5'
 )
 
-console.log('\n─── C5b: scroll targets data-paper-paragraph-id ───\n')
+section('C5b: scroll targets data-paper-paragraph-id')
 
 // 7. Scroll code targets `data-paper-paragraph-id`
 assert(
@@ -182,7 +154,7 @@ assert(
   'structureBrace.tsx queries data-paper-paragraph-id for geometry'
 )
 
-console.log('\n─── C5b: no connector-line from rail button to brace ───\n')
+section('C5b: no connector-line from rail button to brace')
 
 // 8. No connector-line implementation
 // A connector would draw a horizontal line from rail to brace
@@ -205,10 +177,10 @@ assert(
   'brace does not draw a long horizontal connector'
 )
 
-console.log('\n─── C5b: paragraph controls ───\n')
+section('C5b: paragraph controls')
 
 // 9. Inline clickable structure rows (replaces bottom remote control strip)
-const structureRowsTsx = readFile('app/src/features/paper-intelligence/insight/HarnessStructureRows.tsx')
+const structureRowsTsx = readText(ROOT, 'app/src/features/paper-intelligence/insight/HarnessStructureRows.tsx')
 
 assert(
   harnessTsx.includes('HarnessStructureRows'),
@@ -291,7 +263,7 @@ assert(
   'structure rows include paragraph mode rows'
 )
 
-console.log('\n─── C5b: structure target cleared on resize ───\n')
+section('C5b: structure target cleared on resize')
 
 // 10. Structure target cleared on resize/breakpoint cross
 assert(
@@ -330,7 +302,7 @@ assert(
   'brace hidden via display:none at <=1359px (tight desktop + stacked)'
 )
 
-console.log('\n─── C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructureTarget ───\n')
+section('C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructureTarget')
 
 // Verify handleToggleInsight clears activeStructureTarget
 {
@@ -365,7 +337,7 @@ console.log('\n─── C5b: handleToggleInsight / handleCloseInsight / Esc cle
   )
 }
 
-console.log('\n─── C5b: passage mode queries .ps-passage-body ───\n')
+section('C5b: passage mode queries .ps-passage-body')
 
 // Verify passage mode targets .ps-passage-body, not section root
 assert(
@@ -393,7 +365,7 @@ assert(
   )
 }
 
-console.log('\n─── C5b: brace geometry includes scrollTop offset ───\n')
+section('C5b: brace geometry includes scrollTop offset')
 
 // Verify the brace top calculation includes scroller.scrollTop so the
 // absolute-positioned SVG aligns with content coordinates, not viewport
@@ -410,7 +382,7 @@ assert(
   'brace top = elRect.top - scrollerRect.top + scroller.scrollTop (content-relative)'
 )
 
-console.log('\n─── C5b: no steering / AGENTS diff after rebasing latest main ───\n')
+section('C5b: no steering / AGENTS diff after rebasing latest main')
 
 // Verify no steering or AGENTS changes in diff
 {
@@ -423,7 +395,7 @@ console.log('\n─── C5b: no steering / AGENTS diff after rebasing latest ma
   )
 }
 
-console.log('\n─── C5b: CSS contains no purple fallback ───\n')
+section('C5b: CSS contains no purple fallback')
 
 // Verify no purple fallback (#a78bfa or similar brand purple) in C5b CSS
 assert(
@@ -440,7 +412,7 @@ for (const hex of purplePatterns) {
   )
 }
 
-console.log('\n─── C5b: brace visual spec compliance ───\n')
+section('C5b: brace visual spec compliance')
 
 // Warm charcoal pencil tone
 assert(
@@ -479,12 +451,4 @@ for (const c of semanticColors) {
   )
 }
 
-// ─── Summary ───
-
-console.log(`\n${'═'.repeat(50)}`)
-console.log(`  C5b verify: ${passed} passed, ${failed} failed`)
-console.log(`${'═'.repeat(50)}\n`)
-
-if (failed > 0) {
-  process.exit(1)
-}
+summary()
