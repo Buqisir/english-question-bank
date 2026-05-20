@@ -69,6 +69,16 @@ assert(
   'asserts no AI diagnostic elements',
 )
 
+section('anti-false-positive guarantees')
+
+assert(smoke.includes('pi-ps-harness-error'), 'uses correct error selector (.pi-ps-harness-error not .pi-ps-error)')
+assert(!smoke.includes("step('A1. surface=paper harness loads', true)"), 'A1 does not pass unconditional true')
+assert(smoke.includes('assertCoreContentRendered'), 'has content guard helper to prevent vacuous passes')
+assert(smoke.includes('content guard failed'), 'forbidden checks fail when content guard fails')
+assert(smoke.includes('row activation failed'), 'tight-desktop brace check requires row activation success')
+assert(smoke.includes('pageErrors'), 'tracks page errors for final guard')
+assert(smoke.includes('FINAL. no uncaught page errors'), 'has final pageerror guard step')
+
 section('no forbidden patterns in smoke script')
 
 assert(!smoke.includes('PaperSurface.tsx'), 'smoke does not import PaperSurface.tsx')
