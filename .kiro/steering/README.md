@@ -86,6 +86,23 @@ Hard rule:
 - Record a short Cut Note immediately instead of relying on long chat
   memory or the 22:30 daily summary.
 
+### DEV completion protocol
+
+File: `dev-completion-protocol.md`
+
+Use for `/kiro DEV` and any implementation task that changes files.
+
+Hard rule:
+
+- Completion reports are review handoffs, not terminal transcripts.
+- Wrap the entire report in exactly one fenced `text` block with no
+  prose outside.
+- Keep the report short: PR URL, branch, commit, baseline, changed
+  files, verify summaries, browser QA, forbidden scopes, known risks,
+  and PO QA checklist link when applicable.
+- Do not paste raw verify logs. Summarize script names and pass/fail
+  counts.
+
 ---
 
 ## PM pushback standard
