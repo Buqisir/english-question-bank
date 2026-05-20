@@ -131,6 +131,7 @@ import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent
 import type {
   PaperIntelligenceReport,
   PassageReport,
+  PassageStructure,
   QuestionOption,
 } from './paperIntelligenceTypes'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
@@ -161,6 +162,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
+  const [passageStructures, setPassageStructures] = useState<Record<string, PassageStructure>>({})
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
@@ -265,6 +267,7 @@ export function PaperIntelligencePaperSurfaceHarness({
 
         let bodiesData: Record<string, string> = {}
         let inputOptionsData: Record<string, QuestionOption[]> = {}
+        let passageStructuresData: Record<string, PassageStructure> = {}
         try {
           const inputRes = await fetch(inputUrl)
           if (inputRes.ok) {
@@ -272,6 +275,14 @@ export function PaperIntelligencePaperSurfaceHarness({
               passages?: Array<{
                 paperSection?: string
                 passageBody?: string
+                passageStructure?: {
+                  section?: string
+                  paragraphs?: Array<{
+                    id?: string
+                    label?: string
+                    text?: string
+                  }>
+                }
                 questions?: Array<{
                   questionNo?: string
                   options?: Array<{ label?: string; content?: string }>
@@ -281,6 +292,30 @@ export function PaperIntelligencePaperSurfaceHarness({
             for (const p of inputJson?.passages || []) {
               if (p?.paperSection && typeof p.passageBody === 'string') {
                 bodiesData[p.paperSection] = p.passageBody
+              }
+              // C5a: extract confirmed passageStructure
+              if (p?.paperSection && p.passageStructure) {
+                const ps = p.passageStructure
+                if (
+                  typeof ps.section === 'string' &&
+                  Array.isArray(ps.paragraphs) &&
+                  ps.paragraphs.length > 0
+                ) {
+                  const paragraphs = ps.paragraphs
+                    .filter(
+                      (para): para is { id: string; label: string; text: string } =>
+                        typeof para.id === 'string' &&
+                        typeof para.label === 'string' &&
+                        typeof para.text === 'string' &&
+                        para.text.trim().length > 0
+                    )
+                  if (paragraphs.length > 0) {
+                    passageStructuresData[p.paperSection] = {
+                      section: ps.section,
+                      paragraphs,
+                    }
+                  }
+                }
               }
               if (p?.paperSection && Array.isArray(p.questions)) {
                 for (const q of p.questions) {
@@ -307,6 +342,7 @@ export function PaperIntelligencePaperSurfaceHarness({
         setReport(reportData)
         setBodies(bodiesData)
         setInputOptions(inputOptionsData)
+        setPassageStructures(passageStructuresData)
         setLoading(false)
       } catch {
         if (cancelled) return
@@ -371,8 +407,18 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (!report) return null
-    return buildPaperSurfaceDataFromPi({ report, bodies, inputOptions })
-  }, [report, bodies, inputOptions])
+    // C5a: buildPaperSurfaceDataFromPi will throw if passageStructure
+    // is missing for any passage — this is the official hard-fail path.
+    try {
+      return buildPaperSurfaceDataFromPi({ report, bodies, inputOptions, passageStructures })
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
+      // Surface the error so the harness renders the error state
+      // instead of crashing React.
+      console.error('[C5a] adapter build failed:', msg)
+      return null
+    }
+  }, [report, bodies, inputOptions, passageStructures])
 
   // ─── Build right-panel analysis view (reuse existing PI model) ───
   const analysisView = useMemo((): AnalysisView | null => {

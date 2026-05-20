@@ -11,6 +11,31 @@
       "paperSection": "A",
       "passageTitle": "Volunteering Opportunities",
       "passageBody": "Library Helper. Help readers find books and shelve returns at the Central Library. Volunteers must be at least 14 years old and available on weekday afternoons. Sign up for at least three months. Community Garden. Plant, weed, and harvest in our city centre garden. Basic gardening knowledge preferred. Be available on weekends. No long-term commitment required. Senior Centre Companion. Visit older residents and share stories or play games. No experience needed — just a friendly attitude. Sessions run on Tuesday and Thursday mornings. Animal Shelter Aide. Help feed and walk rescue dogs and cats. Volunteers must be at least 16 years old and comfortable around animals. Two-hour shifts, weekday evenings or Saturday mornings.",
+      "passageStructure": {
+        "section": "A",
+        "paragraphs": [
+          {
+            "id": "A-P1",
+            "label": "P1",
+            "text": "Library Helper. Help readers find books and shelve returns at the Central Library. Volunteers must be at least 14 years old and available on weekday afternoons. Sign up for at least three months."
+          },
+          {
+            "id": "A-P2",
+            "label": "P2",
+            "text": "Community Garden. Plant, weed, and harvest in our city centre garden. Basic gardening knowledge preferred. Be available on weekends. No long-term commitment required."
+          },
+          {
+            "id": "A-P3",
+            "label": "P3",
+            "text": "Senior Centre Companion. Visit older residents and share stories or play games. No experience needed — just a friendly attitude. Sessions run on Tuesday and Thursday mornings."
+          },
+          {
+            "id": "A-P4",
+            "label": "P4",
+            "text": "Animal Shelter Aide. Help feed and walk rescue dogs and cats. Volunteers must be at least 16 years old and comfortable around animals. Two-hour shifts, weekday evenings or Saturday mornings."
+          }
+        ]
+      },
       "questions": [
         {
           "questionNo": "21",
@@ -62,6 +87,26 @@
       "paperSection": "B",
       "passageTitle": "A Scientist's Journey into Sound",
       "passageBody": "Dr Helen Park stumbled upon the remarkable sound quality during a casual visit to an ancient Greek theatre. She had been on holiday with her family, but the moment she heard a child's whisper carry clearly across rows of stone seats, she could not let the puzzle go. Having spent years studying how sound travels through different materials, she became convinced that the geometry of the seats themselves filtered noise. Her early field trips were difficult. Equipment was heavy, weather was unpredictable, and local permits took months to arrange. It wasn't until her third expedition that she finally recorded the data she needed. The results changed how engineers think about modern halls. Today she works with architects on stadium roofs and concert venues, pushing acoustics into spaces it never used to reach.",
+      "passageStructure": {
+        "section": "B",
+        "paragraphs": [
+          {
+            "id": "B-P1",
+            "label": "P1",
+            "text": "Dr Helen Park stumbled upon the remarkable sound quality during a casual visit to an ancient Greek theatre. She had been on holiday with her family, but the moment she heard a child's whisper carry clearly across rows of stone seats, she could not let the puzzle go. Having spent years studying how sound travels through different materials, she became convinced that the geometry of the seats themselves filtered noise."
+          },
+          {
+            "id": "B-P2",
+            "label": "P2",
+            "text": "Her early field trips were difficult. Equipment was heavy, weather was unpredictable, and local permits took months to arrange. It wasn't until her third expedition that she finally recorded the data she needed. The results changed how engineers think about modern halls."
+          },
+          {
+            "id": "B-P3",
+            "label": "P3",
+            "text": "Today she works with architects on stadium roofs and concert venues, pushing acoustics into spaces it never used to reach."
+          }
+        ]
+      },
       "questions": [
         {
           "questionNo": "25",
@@ -102,6 +147,26 @@
       "paperSection": "C",
       "passageTitle": "The Hidden Cost of Fast Fashion",
       "passageBody": "Cheap clothes feel like a small victory. A new shirt for the price of a coffee, a different outfit each weekend — this is what fast fashion sells, and millions of shoppers buy in. The true cost, however, extends far beyond price tags. Producing a single cotton T-shirt can use more than two thousand litres of water. Synthetic fabrics shed microplastics every time they are washed, and those microplastics shed from synthetic fabrics now appear in rivers, oceans and even drinking water. Once a garment goes out of style, it is usually not recycled. Tonnes of non-biodegradable textile waste end up in landfills, where they may take centuries to break down. The story is not hopeless. Some shoppers are slowing down their habits and asking simple questions: do I need this, will I wear it more than ten times, and what happens to it when I am done? Sustainable consumption begins with these small refusals.",
+      "passageStructure": {
+        "section": "C",
+        "paragraphs": [
+          {
+            "id": "C-P1",
+            "label": "P1",
+            "text": "Cheap clothes feel like a small victory. A new shirt for the price of a coffee, a different outfit each weekend — this is what fast fashion sells, and millions of shoppers buy in."
+          },
+          {
+            "id": "C-P2",
+            "label": "P2",
+            "text": "The true cost, however, extends far beyond price tags. Producing a single cotton T-shirt can use more than two thousand litres of water. Synthetic fabrics shed microplastics every time they are washed, and those microplastics shed from synthetic fabrics now appear in rivers, oceans and even drinking water. Once a garment goes out of style, it is usually not recycled. Tonnes of non-biodegradable textile waste end up in landfills, where they may take centuries to break down."
+          },
+          {
+            "id": "C-P3",
+            "label": "P3",
+            "text": "The story is not hopeless. Some shoppers are slowing down their habits and asking simple questions: do I need this, will I wear it more than ten times, and what happens to it when I am done? Sustainable consumption begins with these small refusals."
+          }
+        ]
+      },
       "questions": [
         {
           "questionNo": "28",
@@ -153,6 +218,26 @@
       "paperSection": "D",
       "passageTitle": "Rethinking Intelligence in Animals",
       "passageBody": "What researchers once dismissed as mere instinct has, through decades of careful observation, revealed itself to be far more complex. Animals plan, count, recognise themselves in mirrors, and even appear to grieve. Cognitive scientists now talk seriously about metacognition — the ability to think about one's own thinking — in species other than humans. Crows in laboratory tests will refuse to choose a box when they are unsure of its contents, much as a careful student declines to guess on an exam. Bottlenose dolphins, when shown a mark on their own bodies, immediately swim to a mirror to inspect it. None of this is magic, and it does not make animals little humans. But this growing body of evidence challenges the long-held assumption that only humans possess true intelligence. The traditional dividing line, it turns out, is harder to draw than scientists once believed.",
+      "passageStructure": {
+        "section": "D",
+        "paragraphs": [
+          {
+            "id": "D-P1",
+            "label": "P1",
+            "text": "What researchers once dismissed as mere instinct has, through decades of careful observation, revealed itself to be far more complex. Animals plan, count, recognise themselves in mirrors, and even appear to grieve. Cognitive scientists now talk seriously about metacognition — the ability to think about one's own thinking — in species other than humans."
+          },
+          {
+            "id": "D-P2",
+            "label": "P2",
+            "text": "Crows in laboratory tests will refuse to choose a box when they are unsure of its contents, much as a careful student declines to guess on an exam. Bottlenose dolphins, when shown a mark on their own bodies, immediately swim to a mirror to inspect it."
+          },
+          {
+            "id": "D-P3",
+            "label": "P3",
+            "text": "None of this is magic, and it does not make animals little humans. But this growing body of evidence challenges the long-held assumption that only humans possess true intelligence. The traditional dividing line, it turns out, is harder to draw than scientists once believed."
+          }
+        ]
+      },
       "questions": [
         {
           "questionNo": "32",
