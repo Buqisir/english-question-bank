@@ -34,6 +34,7 @@ assert(smoke.includes('surface=paper'), 'navigates to surface=paper route')
 section('contract checklist coverage — 1360px and wider')
 
 assert(smoke.includes('1440') || smoke.includes('1360'), 'tests at >=1360px viewport')
+assert(smoke.includes('1360') && smoke.includes('1359'), 'tests exact boundary viewports 1360px and 1359px')
 assert(smoke.includes('data-pi-insight-chip'), 'interacts with passage chips')
 assert(smoke.includes('data-structure-row-mode="passage"'), 'clicks 篇章 row')
 assert(smoke.includes('data-structure-row-mode="paragraph"'), 'clicks Pn row')
@@ -53,6 +54,11 @@ section('contract checklist coverage — <=1199px (stacked)')
 
 assert(smoke.includes('1024') || smoke.includes('1100'), 'tests at stacked breakpoint')
 assert(smoke.includes('data-viewport-mode'), 'asserts stacked viewport mode')
+assert(smoke.includes('P1 row aria-pressed=true at 1024px'), 'stacked mode tests P1 row activation')
+assert(smoke.includes('structure rows appear after chip click'), 'stacked mode tests structure rows in drawer')
+assert(smoke.includes('target paragraph visible or scroll position changed at 1024px'), 'stacked mode tests scroll/visibility')
+assert(smoke.includes('brace hidden at 1024px'), 'stacked mode tests brace hidden')
+assert(smoke.includes('no topbar insight fallback after interaction'), 'stacked mode re-checks no topbar after interaction')
 
 section('contract checklist coverage — evidence coexistence')
 
@@ -77,7 +83,10 @@ assert(smoke.includes('assertCoreContentRendered'), 'has content guard helper to
 assert(smoke.includes('content guard failed'), 'forbidden checks fail when content guard fails')
 assert(smoke.includes('row activation failed'), 'tight-desktop brace check requires row activation success')
 assert(smoke.includes('pageErrors'), 'tracks page errors for final guard')
+assert(smoke.includes('consoleErrors'), 'tracks console errors for final guard')
+assert(smoke.includes('instrumentPage'), 'uses instrumentPage to attach listeners to all pages')
 assert(smoke.includes('FINAL. no uncaught page errors'), 'has final pageerror guard step')
+assert(smoke.includes('FINAL. no console errors'), 'has final console.error guard step')
 
 section('no forbidden patterns in smoke script')
 
