@@ -50,23 +50,30 @@ mechanical, go straight to DEV.
 
 For important UI work, follow this order:
 
-1. State which mockups should be generated.
-2. Generate 2-4 images.
-3. Let the user choose, reject, or modify the direction.
-4. Translate the chosen image into hard DEV constraints.
-5. Only then send the DEV prompt.
+1. Grill the product question first: teacher task, failure mode,
+   current cut vs. future cut, and what the PO actually needs to
+   decide.
+2. State which mockups should be generated.
+3. Generate 2-4 images.
+4. Let the user choose, reject, or modify the direction.
+5. Translate the chosen image into hard DEV constraints.
+6. Only then send the DEV prompt.
 
 Do not skip from "rough visual concern" directly to implementation
 when a quick mockup could clarify the spatial model.
+
+Hard brake: if two mockup rounds do not converge, stop generating
+images and return to problem definition. More images will not fix an
+unclear product question.
 
 ## 4. Recommended mockup set
 
 For layout work, prefer a small set like:
 
-1. current problem view
-2. target default state
+1. current problem view, or conservative option
+2. recommended target default state
 3. expanded / active interaction state
-4. before-vs-after comparison
+4. aggressive option, anti-pattern, or before-vs-after comparison
 
 For responsive work, first settle the desktop main state. Generate
 breakpoint mockups only if the desktop direction is approved or if the

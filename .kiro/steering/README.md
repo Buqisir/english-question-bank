@@ -37,6 +37,29 @@ PaperSurface default:
   difficulty, dot/bar systems, long key-chunk lists, and AI difficulty
   dashboards need a separate workflow justification.
 
+### Cut workflow
+
+File: `cut-workflow-protocol.md`
+
+Use for small, medium, and large product / engineering cuts, especially
+PaperSurface, Paper Intelligence, data-model, or multi-agent work.
+
+Hard rule:
+
+- Pick process by risk tier, not anxiety.
+- Small cuts use:
+  `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
+- Medium cuts use:
+  `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
+- Large cuts use:
+  `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
+  -> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA
+  -> RM -> Cut Note`.
+- Treat GitHub `main` and PR heads as the shared truth. Agent reports
+  are not truth until Codex verifies remote state.
+- Stop if mockups do not converge after 2 rounds, or if PA leaves more
+  than 3 unresolved PO decisions.
+
 ### UI mockup before DEV
 
 File: `ui-mockup-before-dev-protocol.md`

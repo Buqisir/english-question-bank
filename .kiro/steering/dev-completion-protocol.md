@@ -21,6 +21,10 @@ on those emails as the primary signal that work is ready for review.
 When a `/kiro DEV` task produces shippable changes, the agent MUST,
 in this exact order, before considering the task complete:
 
+0. Start from the requested baseline:
+   - fetch / sync the latest target branch specified in the prompt
+   - confirm required merge commits or PR baselines are present
+   - STOP and report if the baseline cannot be verified
 1. `git commit` with a clear, scoped message
 2. `github_push_to_remote` to push the branch
    - never `git push` directly via bash
@@ -76,19 +80,23 @@ this order, wrapped in exactly one fenced `text` code block:
 1. PR URL (or branch URL if a §2 exception applies)
 2. Branch name
 3. Commit hash (short SHA is fine)
-4. Verify script results
+4. Baseline / sync confirmation
+   - latest branch used
+   - required merge commit or PR head confirmed
+   - note any sync problem that blocked or changed the work
+5. Verify script results
    - which scripts were run
    - pass / fail count for each
    - identify any pre-existing known mismatches (e.g. the C3-class
      scope-guard mismatch in `verify-paper-surface-module-v1.mjs`)
-5. What was NOT run, and why
+6. What was NOT run, and why
    - e.g. "did not run app dev server because Linux sandbox forbids
      long-running processes" or "did not run pnpm install because
      package files are out of scope"
-6. Forbidden scopes confirmed unchanged
+7. Forbidden scopes confirmed unchanged
    - explicitly list the scopes that the task spec marked off-limits
      and confirm none of them were touched
-7. Browser QA still required (when applicable)
+8. Browser QA still required (when applicable)
    - if the change affects a visible surface, list what the owner
      should sight-check in the browser
 
