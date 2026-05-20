@@ -123,6 +123,42 @@ export type SourcePaperMeta = {
   sourceFile?: string
 }
 
+/* ============================================================== *
+ * Passage Structure — C5a confirmed paragraph anchors.
+ *
+ * `PassageStructure` is the authoritative paragraph source for the
+ * official PaperSurface path. Each passage in `input.json` MUST
+ * carry a `passageStructure` field when used by surface=paper.
+ * The adapter MUST use these confirmed paragraphs — it MUST NOT
+ * silently fall back to auto-segmentation.
+ *
+ * ID format: `{section}-P{n}` where n starts at 1.
+ *   e.g. A-P1, A-P2, B-P1, B-P2, B-P3
+ *
+ * Label format: `P{n}` (human-facing short label).
+ *   e.g. P1, P2, P3
+ *
+ * Normalization invariant:
+ *   normalize(paragraphs.map(p => p.text).join(' ')) === normalize(passageBody)
+ *   where normalize(s) = s.replace(/\s+/g, ' ').trim()
+ * ============================================================== */
+
+export type PassageParagraphStructure = {
+  /** Stable paragraph id. Format: `{section}-P{n}` (1-indexed). */
+  id: string
+  /** Human-facing short label. Format: `P{n}`. */
+  label: string
+  /** The verbatim paragraph text. Non-empty. */
+  text: string
+}
+
+export type PassageStructure = {
+  /** The owning section id, must match the passage's paperSection. */
+  section: string
+  /** Confirmed paragraphs in document order. Non-empty. */
+  paragraphs: PassageParagraphStructure[]
+}
+
 export type PaperIntelligenceReport = {
   schemaVersion: string
   generatedAt: string

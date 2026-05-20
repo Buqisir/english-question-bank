@@ -498,13 +498,19 @@ assert(
 )
 assert(
   !changedFiles.some((f) =>
-    f.includes('app/src/features/paper-intelligence/adapter/'),
+    f.includes('app/src/features/paper-intelligence/adapter/') &&
+    f !== 'app/src/features/paper-intelligence/adapter/index.ts' &&
+    f !== 'app/src/features/paper-intelligence/adapter/piToPaperTextMap.ts',
   ),
-  "no adapter/ changes",
+  "no adapter/ changes except approved C5a paragraph-structure adapter files",
 )
 
-// Sanity: the files we DID change are exactly the C3 surface.
-const allowedC3 = new Set([
+// Sanity: the files we DID change are exactly the C3 surface plus
+// approved downstream C4/C5a PaperSurface harness/data-model follow-ups.
+const allowedC3AndDownstream = new Set([
+  'app/public/reports/paper-intelligence/paper-2024-xkb1-reading/input.json',
+  'app/src/features/paper-intelligence/adapter/index.ts',
+  'app/src/features/paper-intelligence/adapter/piToPaperTextMap.ts',
   'app/src/shared-ui/papersurface/PaperSurface.tsx',
   'app/src/shared-ui/papersurface/PaperSurface.css',
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
@@ -512,6 +518,7 @@ const allowedC3 = new Set([
   'app/src/features/paper-intelligence/insight/insightChipLabel.ts',
   'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
+  'app/src/features/paper-intelligence/paperIntelligenceTypes.ts',
   'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLineGeometry.ts',
   'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx',
   'docs/paper-surface-watch-ledger.md',
@@ -524,11 +531,12 @@ const allowedC3 = new Set([
   'scripts/verify-paper-intelligence-paper-surface-evidence.mjs',
   'scripts/verify-paper-intelligence-paper-surface-insight.mjs',
   'scripts/verify-paper-surface-module-v1.mjs',
+  'scripts/verify-c5a-paragraph-structure-anchors.mjs',
 ])
-const unexpected = changedFiles.filter((f) => !allowedC3.has(f))
+const unexpected = changedFiles.filter((f) => !allowedC3AndDownstream.has(f))
 assert(
   unexpected.length === 0,
-  `no files changed outside the C3 scope (unexpected: ${unexpected.join(', ') || 'none'})`,
+  `no files changed outside the C3/C4/C5a PaperSurface scope (unexpected: ${unexpected.join(', ') || 'none'})`,
 )
 
 /* ─── 6. C3.6 evidence kind color semantics ─────────────────────── */
