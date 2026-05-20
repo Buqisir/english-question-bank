@@ -18,11 +18,14 @@
  */
 
 import { readFileSync } from 'node:fs'
-import { resolve, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
+import {
+  repoRootFrom,
+  safeGitNames,
+  safeGitOutput,
+} from './lib/verifyScope.mjs'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const ROOT = resolve(__dirname, '..')
+const ROOT = repoRootFrom(import.meta.url)
 
 const normalize = (s) => s.replace(/\s+/g, ' ').trim()
 
@@ -203,29 +206,9 @@ assert(
 
 console.log('\n─── C5a: forbidden changes check ───\n')
 
-// Verify no changes to shared/papersurface/types.d.ts (git diff)
-import { execSync } from 'node:child_process'
-
 function gitDiffCheck(filepath, label) {
-  try {
-    const diff = execSync(`git diff --name-only HEAD -- "${filepath}"`, {
-      cwd: ROOT,
-      encoding: 'utf8',
-    }).trim()
-    assert(diff === '', `${label} not modified`)
-  } catch {
-    // If git fails (e.g. not committed yet), check against main
-    try {
-      const diff = execSync(`git diff --name-only main -- "${filepath}"`, {
-        cwd: ROOT,
-        encoding: 'utf8',
-      }).trim()
-      assert(diff === '', `${label} not modified (vs main)`)
-    } catch {
-      // Can't check — skip gracefully
-      console.log(`  ⚠ Cannot verify ${label} (git diff unavailable)`)
-    }
-  }
+  const diffAgainstMain = safeGitNames(ROOT, `main -- "${filepath}"`)
+  assert(diffAgainstMain.length === 0, `${label} not modified`)
 }
 
 gitDiffCheck('shared/papersurface/types.d.ts', 'shared/papersurface/types.d.ts')
@@ -233,10 +216,10 @@ gitDiffCheck('shared/papersurface/segmentPaperText.mjs', 'shared/papersurface/se
 gitDiffCheck('app/public/reports/paper-intelligence/paper-2024-xkb1-reading/report.json', 'report.json')
 
 // Check PaperSurface.tsx and PaperSurface.css not modified
-const psFiles = execSync('find app/src -name "PaperSurface.tsx" -o -name "PaperSurface.css" 2>/dev/null', {
-  cwd: ROOT,
-  encoding: 'utf8',
-}).trim().split('\n').filter(Boolean)
+const psFiles = safeGitOutput(
+  ROOT,
+  'find app/src -name "PaperSurface.tsx" -o -name "PaperSurface.css" 2>/dev/null'
+).split('\n').filter(Boolean)
 
 for (const f of psFiles) {
   gitDiffCheck(f, f)

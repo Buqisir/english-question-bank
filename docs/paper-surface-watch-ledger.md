@@ -126,3 +126,29 @@ Follow-up trigger:
 Preferred future fix:
 - Centralize all harness z-index values in CSS custom properties (e.g. `--pi-ps-z-line: 5`, `--pi-ps-z-popover: 60`) so the single point of truth lives in `paperIntelligencePaperSurfaceHarness.css`.
 - Add a static verify assertion that the insight popover z-index is strictly greater than the line overlay z-index.
+
+
+## C5b Structure Brace
+
+Source: PR #60, `surface=paper` Structure Brace hotfix.
+
+Status: C5b merged. The accepted display rule is `>=1360px` visible, `<=1359px` hidden.
+
+### Tight Desktop Brace Visibility
+
+The Structure Brace lives in the white `.ps-page` left padding. Browser QA found that at tight desktop widths the expanded left rail can cover that padding area.
+
+Current rule:
+- `>=1360px`: brace may render in `.ps-page` left padding.
+- `1200-1359px`: paragraph rows still scroll the paper, but the brace is hidden.
+- `<=1199px`: stacked layout; paragraph rows still scroll, brace hidden.
+
+Do not fix tight desktop visibility by raising the brace z-index. The brace is intentionally below the evidence line and rail controls. If teachers need visible structure marking at tight desktop widths, reopen the rail layout rather than painting the brace above controls.
+
+Follow-up trigger:
+- A teacher explicitly needs Structure Brace visibility between `1200px` and `1359px`.
+- The left rail layout changes so it no longer covers the `.ps-page` padding.
+
+Preferred future fix:
+- Move the rail into a stable grid track or shrink the expanded rail before changing brace z-index.
+- Keep PaperSurface unchanged; the harness should continue querying `data-paper-*` anchors.
