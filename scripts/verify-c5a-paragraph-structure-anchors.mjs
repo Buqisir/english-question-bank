@@ -20,33 +20,22 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import {
+  createVerifier,
   repoRootFrom,
   safeGitNames,
   safeGitOutput,
 } from './lib/verifyScope.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
+const { assert, section, summary } = createVerifier('C5a verify')
 
 const normalize = (s) => s.replace(/\s+/g, ' ').trim()
-
-let passed = 0
-let failed = 0
-
-function assert(condition, label) {
-  if (condition) {
-    passed++
-    console.log(`  ✓ ${label}`)
-  } else {
-    failed++
-    console.error(`  ✗ FAIL: ${label}`)
-  }
-}
 
 // ─── Load input.json ───
 const INPUT_PATH = resolve(ROOT, 'app/public/reports/paper-intelligence/paper-2024-xkb1-reading/input.json')
 const input = JSON.parse(readFileSync(INPUT_PATH, 'utf8'))
 
-console.log('\n─── C5a: passageStructure presence & format ───\n')
+section('C5a: passageStructure presence & format')
 
 for (const passage of input.passages) {
   const section = passage.paperSection
@@ -72,7 +61,7 @@ for (const passage of input.passages) {
 
 // ─── Adapter integration test ───
 
-console.log('\n─── C5a: adapter output paragraph ids ───\n')
+section('C5a: adapter output paragraph ids')
 
 // Import the adapter (ESM)
 const adapterPath = resolve(ROOT, 'app/src/features/paper-intelligence/adapter/piToPaperTextMap.ts')
@@ -145,7 +134,7 @@ for (const passage of input.passages) {
 
 // ─── Hard-fail test: missing passageStructure throws ───
 
-console.log('\n─── C5a: missing passageStructure hard-fail ───\n')
+section('C5a: missing passageStructure hard-fail')
 
 let threwOnMissing = false
 try {
@@ -158,7 +147,7 @@ assert(threwOnMissing, 'piToPaperTextMap throws when passageStructure is missing
 
 // ─── Verify official path does NOT use legacy auto-segmentation ───
 
-console.log('\n─── C5a: no silent legacy fallback in official path ───\n')
+section('C5a: no silent legacy fallback in official path')
 
 // The adapter source must NOT call segmentPaperText(passageBody, ...) in the
 // official piToPaperTextMap function. It should only exist in the legacy export.
@@ -204,7 +193,7 @@ assert(
 
 // ─── Forbidden changes ───
 
-console.log('\n─── C5a: forbidden changes check ───\n')
+section('C5a: forbidden changes check')
 
 function gitDiffCheck(filepath, label) {
   const diffAgainstMain = safeGitNames(ROOT, `main -- "${filepath}"`)
@@ -225,12 +214,4 @@ for (const f of psFiles) {
   gitDiffCheck(f, f)
 }
 
-// ─── Summary ───
-
-console.log(`\n${'═'.repeat(50)}`)
-console.log(`  C5a verify: ${passed} passed, ${failed} failed`)
-console.log(`${'═'.repeat(50)}\n`)
-
-if (failed > 0) {
-  process.exit(1)
-}
+summary()

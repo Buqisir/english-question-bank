@@ -11,6 +11,47 @@ export function readText(root, relPath) {
   return readFileSync(resolve(root, relPath), 'utf8')
 }
 
+export function createVerifier(name) {
+  let passed = 0
+  let failed = 0
+
+  function assert(condition, label) {
+    if (condition) {
+      passed++
+      console.log(`  ✓ ${label}`)
+    } else {
+      failed++
+      console.error(`  ✗ FAIL: ${label}`)
+    }
+  }
+
+  function section(label) {
+    console.log(`\n─── ${label} ───\n`)
+  }
+
+  function summary() {
+    console.log(`\n${'═'.repeat(50)}`)
+    console.log(`  ${name}: ${passed} passed, ${failed} failed`)
+    console.log(`${'═'.repeat(50)}\n`)
+
+    if (failed > 0) {
+      process.exit(1)
+    }
+  }
+
+  return {
+    assert,
+    section,
+    summary,
+    get passed() {
+      return passed
+    },
+    get failed() {
+      return failed
+    },
+  }
+}
+
 export function safeGitNames(root, args) {
   try {
     const out = execSync(`git diff --name-only ${args}`, {
