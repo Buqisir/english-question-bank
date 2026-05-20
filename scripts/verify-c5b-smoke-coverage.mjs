@@ -1,0 +1,78 @@
+/**
+ * verify-c5b-smoke-coverage.mjs
+ *
+ * Static verify: asserts the C5b browser QA smoke script covers every
+ * mandatory PO QA checklist item from the contract. If someone adds a
+ * new checklist row to the contract without a matching smoke step,
+ * this verify fails loudly.
+ *
+ * Run:
+ *   node scripts/verify-c5b-smoke-coverage.mjs
+ */
+
+import {
+  createVerifier,
+  readText,
+  repoRootFrom,
+} from './lib/verifyScope.mjs'
+
+const ROOT = repoRootFrom(import.meta.url)
+const { assert, section, summary } = createVerifier('C5b smoke coverage verify')
+
+const contract = readText(ROOT, 'docs/product/paper-surface-c5b-po-qa-contract.md')
+const smoke = readText(ROOT, 'scripts/smoke-paper-surface-c5b.mjs')
+
+section('smoke script exists and follows conventions')
+
+assert(smoke.includes('#!/usr/bin/env node'), 'smoke has shebang')
+assert(smoke.includes("from '../app/node_modules/playwright/index.mjs'"), 'imports playwright from app/node_modules')
+assert(smoke.includes('APP_URL'), 'uses APP_URL env var')
+assert(smoke.includes('process.exit(1)'), 'exits non-zero on failure')
+assert(smoke.includes('smoke-paper-surface-c5b'), 'artifact dir matches script name')
+assert(smoke.includes('surface=paper'), 'navigates to surface=paper route')
+
+section('contract checklist coverage — 1360px and wider')
+
+assert(smoke.includes('1440') || smoke.includes('1360'), 'tests at >=1360px viewport')
+assert(smoke.includes('data-pi-insight-chip'), 'interacts with passage chips')
+assert(smoke.includes('data-structure-row-mode="passage"'), 'clicks 篇章 row')
+assert(smoke.includes('data-structure-row-mode="paragraph"'), 'clicks Pn row')
+assert(smoke.includes('aria-pressed'), 'asserts aria-pressed toggle')
+assert(smoke.includes('data-c5b-brace'), 'asserts brace SVG presence/absence')
+assert(smoke.includes('.ps-page'), 'checks brace placement relative to .ps-page')
+
+section('contract checklist coverage — 1200-1359px (tight desktop)')
+
+assert(smoke.includes('1280'), 'tests at tight desktop breakpoint')
+assert(
+  smoke.includes('brace is hidden') || smoke.includes('braceTightVisible'),
+  'asserts brace hidden at tight desktop',
+)
+
+section('contract checklist coverage — <=1199px (stacked)')
+
+assert(smoke.includes('1024') || smoke.includes('1100'), 'tests at stacked breakpoint')
+assert(smoke.includes('data-viewport-mode'), 'asserts stacked viewport mode')
+
+section('contract checklist coverage — evidence coexistence')
+
+assert(smoke.includes('coexist'), 'tests evidence + brace coexistence')
+assert(smoke.includes('pi-line-path'), 'asserts evidence line presence in coexist test')
+
+section('contract checklist coverage — forbidden regressions')
+
+assert(smoke.includes('pi-ps-structure-controls'), 'asserts no bottom button strip')
+assert(smoke.includes('connector'), 'asserts no connector line')
+assert(smoke.includes('topbar'), 'asserts no topbar insight fallback')
+assert(
+  smoke.includes('ai-difficulty') || smoke.includes('data-ai'),
+  'asserts no AI diagnostic elements',
+)
+
+section('no forbidden patterns in smoke script')
+
+assert(!smoke.includes('PaperSurface.tsx'), 'smoke does not import PaperSurface.tsx')
+assert(!smoke.includes('PaperSurface.css'), 'smoke does not import PaperSurface.css')
+assert(!smoke.includes('package.json'), 'smoke does not reference package.json')
+
+summary()
