@@ -37,17 +37,21 @@ PaperSurface default:
   difficulty, dot/bar systems, long key-chunk lists, and AI difficulty
   dashboards need a separate workflow justification.
 
-### Large cut workflow
+### Cut workflow
 
-File: `large-cut-workflow-protocol.md`
+File: `cut-workflow-protocol.md`
 
-Use for large product, UI, architecture, PaperSurface, data-model, or
-multi-agent cuts.
+Use for small, medium, and large product / engineering cuts, especially
+PaperSurface, Paper Intelligence, data-model, or multi-agent work.
 
 Hard rule:
 
 - Pick process by risk tier, not anxiety.
-- For large cuts, follow:
+- Small cuts use:
+  `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
+- Medium cuts use:
+  `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
+- Large cuts use:
   `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
   -> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA
   -> RM -> Cut Note`.

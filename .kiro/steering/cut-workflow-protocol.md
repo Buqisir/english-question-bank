@@ -2,15 +2,17 @@
 inclusion: auto
 ---
 
-# Large cut workflow protocol
+# Cut workflow protocol
 
-Scope: applies to large product, UI, architecture, PaperSurface, Paper
-Intelligence, data-model, and multi-agent cuts in the
-`Buqisir/english-question-bank` repository.
+Scope: applies to small, medium, and large product / engineering cuts
+in the `Buqisir/english-question-bank` repository, with special
+attention to PaperSurface, Paper Intelligence, data-model, and
+multi-agent work.
 
-Authoritative rule: large cuts must be paced by risk. The goal is not
-to make agents write code faster; the goal is to protect teacher value,
-PaperSurface readability, repo state truth, and rework cost.
+Authoritative rule: process must be paced by risk. The goal is not to
+make agents write code faster; the goal is to protect teacher value,
+PaperSurface readability, repo state truth, and rework cost without
+turning small fixes into rituals.
 
 ---
 
@@ -49,6 +51,42 @@ Sync -> fix/DEV -> verify -> CR-lite -> RM
 Usually no mockup, no Big PA, and no browser QA unless the visible UI
 changes.
 
+Small cuts are "tighten a screw" work.
+
+Use small-cut flow when all are true:
+
+- the intended change is easy to state in one sentence
+- no product direction is being decided
+- no data model, route, PaperSurface protocol, or architecture boundary
+  changes
+- the expected diff is narrow and easy to review
+- the verification needed is obvious
+
+Small-cut required checks:
+
+- sync first if the work depends on current repo state
+- confirm the diff scope before staging
+- run the smallest relevant verify command
+- always run `git diff --check` before PR / merge
+- if a PR is opened, confirm the PR head after push
+- after merge, fetch `main` and confirm the merge commit
+
+Small-cut skips by default:
+
+- Canvas / mockups
+- Big PA
+- multi-round product discussion
+- browser QA, unless the visible UI changed
+- Cut Note, unless the small cut changes a recurring rule or fixes a
+  bug pattern worth remembering
+
+Upgrade a small cut to medium if:
+
+- the fix changes visible behavior
+- the exact UI outcome is not obvious
+- the diff touches more than the expected file family
+- a "quick fix" starts requiring layout, state, or z-index reasoning
+
 ### Medium cut
 
 Examples: small interaction, limited CSS behavior, a known UI bug, a
@@ -61,6 +99,54 @@ Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM
 ```
 
 Use one quick mockup only when spatial judgment is the core risk.
+
+Medium cuts are "adjust one local mechanism" work.
+
+Use medium-cut flow when:
+
+- the direction is already known
+- the change affects a user-visible behavior or a bounded runtime path
+- the blast radius is local to one surface / module family
+- no data model or core protocol is being redefined
+- one browser QA pass can prove the main risk
+
+Quick PM grill should answer:
+
+- What exact user action currently fails or feels wrong?
+- Which teacher task is affected?
+- What is the expected before/after behavior?
+- Which files are allowed, and which are forbidden?
+- Is this still a local fix, or is it secretly a product redesign?
+
+Medium-cut required checks:
+
+- sync first and confirm branch / PR head
+- name allowed and forbidden files before DEV
+- run relevant static verify
+- run browser QA for visible UI changes
+- run PO QA when product feel or interaction handoff matters
+- keep CR focused on whether the implementation matches the known
+  direction
+
+Medium-cut skips by default:
+
+- Big PA
+- roadmap PA
+- multi-round Canvas exploration
+- broad Cut Note unless the medium cut changes direction or exposes a
+  recurring product pitfall
+
+Upgrade a medium cut to large if any appear:
+
+- PaperSurface core renderer or shared/papersurface protocol must change
+- data model, import/export contract, route behavior, or anchor protocol
+  must change
+- more than one breakpoint needs redesign
+- a quick mockup does not converge in one round
+- CR discovers DEV is inventing product behavior not in the prompt
+- QA shows "fixing this one thing breaks another thing" behavior
+- the user-visible goal cannot be explained as a local bug or local
+  interaction improvement
 
 ### Large cut
 
