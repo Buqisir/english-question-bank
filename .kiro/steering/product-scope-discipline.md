@@ -93,6 +93,10 @@ Push back when any of these happen:
   teacher workbench
 - QA keeps finding "it is visible but it blocks / crowds / confuses"
   bugs
+- the team keeps asking for more mockups or another PA pass because
+  nobody has made the product decision
+- a DEV implementation needs increasingly fragile width, z-index,
+  resize, or zoom workarounds to preserve a visual idea
 
 When these signs appear, first ask whether the feature belongs here.
 Do not keep polishing layout around a wrongly placed feature.
@@ -107,6 +111,10 @@ Prefer these moves:
 - split "orientation" from "analysis" instead of mixing them in one
   panel
 - cut the feature if it creates more UI debt than teacher value
+- stop after two inconclusive visual rounds and return to the teacher
+  task instead of generating more variants
+- stop before DEV when PA leaves more than three unresolved PO
+  decisions
 
 Example:
 

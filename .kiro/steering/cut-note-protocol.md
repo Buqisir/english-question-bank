@@ -57,6 +57,13 @@ Watch / next:
 Keep it short. The goal is to preserve product memory, not to write a
 second completion report.
 
+For large cuts, include the process lesson when there was one:
+
+- which mockup / PA / QA step changed the direction
+- whether a hard brake was triggered
+- what was cut, moved, or delayed because it did not serve the current
+  teacher task
+
 ## 3. Where the note lives
 
 Default behavior:
@@ -98,6 +105,7 @@ Usually yes:
 - any PR that changes PaperSurface, Paper Intelligence harness,
   evidence line, insight, basket, print, import, export, or route flow
 - any multi-agent sequence involving PA -> DEV -> CR -> QA -> RM
+- any large-cut workflow involving Codex + local PA + Kiro/cloud DEV
 
 Usually no:
 
