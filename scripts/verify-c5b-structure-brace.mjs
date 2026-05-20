@@ -34,6 +34,10 @@ const changedFiles = getChangedFiles(ROOT)
 const harnessTsx = readText(ROOT, 'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
 const harnessCss = readText(ROOT, 'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css')
 const braceTsx = readText(ROOT, 'app/src/features/paper-intelligence/structureBrace.tsx')
+const hostInteractionTs = readText(
+  ROOT,
+  'app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts',
+)
 
 section('C5b: forbidden changes (no PaperSurface/shared/data/model)')
 
@@ -267,8 +271,8 @@ section('C5b: structure target cleared on resize')
 
 // 10. Structure target cleared on resize/breakpoint cross
 assert(
-  harnessTsx.includes('setActiveStructureTarget(null)'),
-  'harness clears activeStructureTarget on resize'
+  /case 'resize':[\s\S]*activeStructureTarget:\s*null/.test(hostInteractionTs),
+  'host interaction reducer clears activeStructureTarget on resize'
 )
 
 // Verify harness owns a dedicated window resize handler that clears brace
@@ -284,13 +288,14 @@ assert(
 )
 
 // Verify it's inside the onChange handler (near the onChange's setIsStackedMode)
-// The onChange handler is the second occurrence of setIsStackedMode(stackedMql.matches)
-const firstIdx = harnessTsx.indexOf('setIsStackedMode(stackedMql.matches)')
-const onChangeIdx = harnessTsx.indexOf('setIsStackedMode(stackedMql.matches)', firstIdx + 1)
-const structureClearIdx = harnessTsx.indexOf('setActiveStructureTarget(null)')
+// The onChange handler dispatches sync-viewport; the reducer owns
+// the actual clear rule.
+const onChangeIdx = harnessTsx.indexOf('const onChange = (): void =>')
+const syncViewportIdx = harnessTsx.indexOf("type: 'sync-viewport'", onChangeIdx)
+const reducerClearIdx = hostInteractionTs.indexOf('activeStructureTarget: null')
 assert(
-  onChangeIdx > 0 && structureClearIdx > onChangeIdx && structureClearIdx - onChangeIdx < 200,
-  'activeStructureTarget cleared near viewport onChange handler'
+  onChangeIdx > 0 && syncViewportIdx > onChangeIdx && reducerClearIdx > 0,
+  'viewport onChange dispatches sync-viewport and reducer clears activeStructureTarget'
 )
 
 // Verify brace hidden at <=1359px in CSS (C5b hotfix follow-up:
@@ -310,8 +315,9 @@ section('C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructu
   const closeIdx = harnessTsx.indexOf('const handleCloseInsight')
   const toggleBody = harnessTsx.slice(toggleIdx, closeIdx)
   assert(
-    toggleBody.includes('setActiveStructureTarget(null)'),
-    'handleToggleInsight clears activeStructureTarget'
+    toggleBody.includes("type: 'toggle-insight'") &&
+      /case 'toggle-insight':[\s\S]*activeStructureTarget:\s*null/.test(hostInteractionTs),
+    'handleToggleInsight dispatches toggle-insight; reducer clears activeStructureTarget'
   )
 }
 
@@ -321,8 +327,9 @@ section('C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructu
   const nextHandler = harnessTsx.indexOf('const handle', closeIdx + 30)
   const closeBody = harnessTsx.slice(closeIdx, nextHandler)
   assert(
-    closeBody.includes('setActiveStructureTarget(null)'),
-    'handleCloseInsight clears activeStructureTarget'
+    closeBody.includes("type: 'close-insight'") &&
+      /case 'close-insight':[\s\S]*activeStructureTarget:\s*null/.test(hostInteractionTs),
+    'handleCloseInsight dispatches close-insight; reducer clears activeStructureTarget'
   )
 }
 
@@ -332,8 +339,11 @@ section('C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructu
   const nextHandler = harnessTsx.indexOf('const handle', escIdx + 30)
   const escBody = harnessTsx.slice(escIdx, nextHandler > 0 ? nextHandler : escIdx + 800)
   assert(
-    escBody.includes('setActiveStructureTarget(null)'),
-    'Esc path (handleRailKeyDown) clears activeStructureTarget'
+    escBody.includes("type: 'rail-escape'") &&
+      /case 'rail-escape':[\s\S]*activeInsightSection:\s*null[\s\S]*activeStructureTarget:\s*null/.test(
+        hostInteractionTs,
+      ),
+    'Esc path dispatches rail-escape; reducer clears activeStructureTarget'
   )
 }
 

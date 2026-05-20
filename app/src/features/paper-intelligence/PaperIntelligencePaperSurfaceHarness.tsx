@@ -112,6 +112,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useReducer,
   useRef,
   useState,
   type KeyboardEvent,
@@ -129,7 +130,11 @@ import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEviden
 import { buildInsightChipLabel } from './insight/insightChipLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
 import { HarnessStructureRows } from './insight/HarnessStructureRows'
-import { StructureBraceOverlay, type StructureTarget } from './structureBrace'
+import { StructureBraceOverlay } from './structureBrace'
+import {
+  paperSurfaceHostInitialState,
+  paperSurfaceHostInteractionReducer,
+} from './paperSurfaceHostInteraction'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -167,67 +172,26 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [passageStructures, setPassageStructures] = useState<Record<string, PassageStructure>>({})
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-  const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
+  const [hostState, dispatchHost] = useReducer(
+    paperSurfaceHostInteractionReducer,
+    paperSurfaceHostInitialState,
+  )
+  const {
+    activeQuestionId,
+    activeEvidenceId,
+    activeInsightSection,
+    activeStructureTarget,
+    railLocked,
+    isStackedMode,
+    isWideDesktop,
+  } = hostState
   /**
-   * SECONDARY state (C3): which evidence row the cross-column dotted
-   * line connects to. Mirrors the role of `activeEvidenceId` in
-   * PaperIntelligencePreview. Reseeded from the active question's
-   * support evidence whenever activeQuestionId changes; cleared when
-   * activeQuestionId clears.
+   * C5c architecture cut: host interaction state lives behind
+   * paperSurfaceHostInteractionReducer. The harness remains the DOM
+   * adapter: data loading, scrollIntoView calls, refs, and JSX stay
+   * local, while teacher-focus / insight / structure / rail reset
+   * rules are concentrated in the reducer.
    */
-  const [activeEvidenceId, setActiveEvidenceId] = useState<string | null>(null)
-
-  /**
-   * C4: which passage's structure detail is currently expanded.
-   * Max one open at a time. Cleared by `request-lecture-focus`
-   * (selecting a question card) and by re-clicking the same chip.
-   * NOT cleared by right-panel evidence / distractor selection
-   * (insight + evidence are independent teacher views).
-   */
-  const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
-
-  /**
-   * C5b: which paragraph or passage body the Structure Brace targets.
-   * Cleared on resize / breakpoint cross. Coexists with evidence line.
-   * Clicking the same active control clears the brace.
-   */
-  const [activeStructureTarget, setActiveStructureTarget] = useState<StructureTarget | null>(null)
-
-  /**
-   * C4 PR #52 PA must-fix: left insight rail expansion lock.
-   *
-   * The rail is normally collapsed (48px). Hovering or moving focus
-   * into the rail soft-expands it via CSS (`:hover` /
-   * `:focus-within`). A teacher who wants the rail pinned can click
-   * the leading toggle button, which sets `railLocked = true` and
-   * the harness paints `data-rail-locked="true"` on the aside so the
-   * CSS keeps it expanded without hover / focus.
-   *
-   * Esc inside the rail clears the lock and any active structure detail.
-   * `request-lecture-focus` (selecting a question card) also clears
-   * the lock so picking a question compacts the rail back.
-   * matchMedia breakpoint changes clear the lock too — the rail is
-   * gone in stacked mode and the lock should not re-engage when the
-   * teacher resizes back to desktop.
-   */
-  const [railLocked, setRailLocked] = useState<boolean>(false)
-
-  /**
-   * C4 PR #52 PA must-fix: viewport-mode detection for rail vs
-   * topbar chip-row conditional rendering.
-   *
-   * Q1 decision (PA-approved): `matchMedia` + state conditional
-   * render. Chips are NEVER double-rendered — exactly one
-   * `<button data-pi-insight-chip="...">` exists in the DOM at a
-   * time, so chip refs cannot resolve to the wrong
-   * element on breakpoint cross.
-   *
-   * SSR seed is `false` so the desktop tree is the default; the
-   * mount effect below syncs to the real `matchMedia` value and
-   * subscribes to changes.
-   */
-  const [isStackedMode, setIsStackedMode] = useState<boolean>(false)
-  const [isWideDesktop, setIsWideDesktop] = useState<boolean>(false)
 
   // Refs for the cross-column line geometry (C3).
   const shellRef = useRef<HTMLDivElement | null>(null)
@@ -274,9 +238,9 @@ export function PaperIntelligencePaperSurfaceHarness({
         if (!reportRes.ok) throw new Error(`HTTP ${reportRes.status}`)
         const reportData = (await reportRes.json()) as PaperIntelligenceReport
 
-        let bodiesData: Record<string, string> = {}
-        let inputOptionsData: Record<string, QuestionOption[]> = {}
-        let passageStructuresData: Record<string, PassageStructure> = {}
+        const bodiesData: Record<string, string> = {}
+        const inputOptionsData: Record<string, QuestionOption[]> = {}
+        const passageStructuresData: Record<string, PassageStructure> = {}
         try {
           const inputRes = await fetch(inputUrl)
           if (inputRes.ok) {
@@ -388,14 +352,17 @@ export function PaperIntelligencePaperSurfaceHarness({
     const stackedMql = window.matchMedia('(max-width: 1199px)')
     const wideDesktopMql = window.matchMedia('(min-width: 1536px)')
     // Sync once for the SSR-vs-client mismatch on first paint.
-    setIsStackedMode(stackedMql.matches)
-    setIsWideDesktop(wideDesktopMql.matches)
+    dispatchHost({
+      type: 'sync-viewport',
+      isStackedMode: stackedMql.matches,
+      isWideDesktop: wideDesktopMql.matches,
+    })
     const onChange = (): void => {
-      setIsStackedMode(stackedMql.matches)
-      setIsWideDesktop(wideDesktopMql.matches)
-      setActiveInsightSection(null)
-      setRailLocked(false)
-      setActiveStructureTarget(null)
+      dispatchHost({
+        type: 'sync-viewport',
+        isStackedMode: stackedMql.matches,
+        isWideDesktop: wideDesktopMql.matches,
+      })
     }
     if (typeof stackedMql.addEventListener === 'function') {
       stackedMql.addEventListener('change', onChange)
@@ -423,7 +390,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   useEffect(() => {
     if (typeof window === 'undefined') return
     const onResize = (): void => {
-      setActiveStructureTarget(null)
+      dispatchHost({ type: 'resize' })
     }
     window.addEventListener('resize', onResize)
     return (): void => {
@@ -497,12 +464,11 @@ export function PaperIntelligencePaperSurfaceHarness({
   // clicking a quoted distractor row.
   useEffect(() => {
     if (!activeQuestionId) {
-      setActiveEvidenceId(null)
+      dispatchHost({ type: 'seed-support-evidence', evidenceId: null })
       return
     }
     const supportId = analysisView?.supportEvidenceId ?? null
-    setActiveEvidenceId(supportId)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatchHost({ type: 'seed-support-evidence', evidenceId: supportId })
   }, [activeQuestionId, analysisView?.supportEvidenceId])
 
   // ─── Lecture focus (controlled, includes activeEvidenceId) ───
@@ -520,16 +486,10 @@ export function PaperIntelligencePaperSurfaceHarness({
       // a question card. Mirrors the default PI route's behavior in
       // PaperIntelligencePreview, where `setActiveInsightSection(null)`
       // runs on every question selection.
-      setActiveInsightSection(null)
-      // C4 PR #52: also collapse the rail back to compact so the
-      // teacher's eye returns to the question card without a stale
-      // expanded rail competing for attention. The lock is a teacher
-      // intent ("pin the rail"), and starting question discussion
-      // implicitly cancels that intent.
-      setRailLocked(false)
-      setActiveQuestionId((prev) =>
-        prev === intent.questionId ? null : intent.questionId,
-      )
+      dispatchHost({
+        type: 'request-lecture-focus',
+        questionId: intent.questionId,
+      })
     }
     // Other intents ignored in C1/C2/C3/C4.
   }, [])
@@ -540,38 +500,32 @@ export function PaperIntelligencePaperSurfaceHarness({
   // Re-clicking the active chip closes the panel; clicking another
   // chip switches the panel without an intermediate "closed" state.
   const handleToggleInsight = useCallback((paperSection: string): void => {
-    setActiveInsightSection((prev) =>
-      prev === paperSection ? null : paperSection,
-    )
-    // C5b: clear structure target when switching/closing passage chip.
-    // The brace is always tied to the active detail panel's section.
-    setActiveStructureTarget(null)
+    dispatchHost({ type: 'toggle-insight', paperSection })
   }, [])
 
   const handleCloseInsight = useCallback((): void => {
-    setActiveInsightSection(null)
-    // C5b: clear structure target when detail panel is closed.
-    setActiveStructureTarget(null)
+    dispatchHost({ type: 'close-insight' })
   }, [])
 
   // ─── C5b: structure target handlers ───
   //
   // Clicking `篇章` toggles whole-passage target. Clicking `Pn`
   // toggles paragraph target. Clicking the same active control clears.
-  const handleStructureTarget = useCallback((paperSection: string, mode: 'passage' | 'paragraph', paragraphId?: string): void => {
-    setActiveStructureTarget((prev) => {
-      // Toggle off if same target
-      if (prev && prev.paperSection === paperSection && prev.mode === mode) {
-        if (mode === 'passage') return null
-        if (mode === 'paragraph' && prev.paragraphId === paragraphId) return null
-      }
-      return { paperSection, mode, paragraphId }
-    })
-  }, [])
+  const handleStructureTarget = useCallback(
+    (paperSection: string, mode: 'passage' | 'paragraph', paragraphId?: string): void => {
+      dispatchHost({
+        type: 'toggle-structure-target',
+        paperSection,
+        mode,
+        paragraphId,
+      })
+    },
+    [],
+  )
 
   // ─── C4 PR #52 rail toggle + Esc handlers ───
   const handleToggleRailLock = useCallback((): void => {
-    setRailLocked((prev) => !prev)
+    dispatchHost({ type: 'toggle-rail-lock' })
   }, [])
 
   const handleRailKeyDown = useCallback(
@@ -582,14 +536,9 @@ export function PaperIntelligencePaperSurfaceHarness({
       // expanded (lock stays). Phase 2: if no detail is open but
       // the rail is locked, unlock it and blur so :focus-within
       // releases.
-      if (activeInsightSection) {
-        setActiveInsightSection(null)
-        // C5b: clear structure target when Esc closes the detail panel.
-        setActiveStructureTarget(null)
-        return
-      }
-      if (railLocked) {
-        setRailLocked(false)
+      const shouldBlur = !activeInsightSection && railLocked
+      dispatchHost({ type: 'rail-escape' })
+      if (shouldBlur) {
         const target = e.target as HTMLElement | null
         if (target && typeof target.blur === 'function') {
           target.blur()
@@ -612,8 +561,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   // views — closing insight on every distractor click would force
   // teachers to re-open the panel between questions.
   const handleSelectEvidence = useCallback((evidenceId: string) => {
-    if (!evidenceId) return
-    setActiveEvidenceId(evidenceId)
+    dispatchHost({ type: 'select-evidence', evidenceId })
   }, [])
 
   // ─── C4 align active insight section with [data-paper-section] ───
@@ -679,16 +627,14 @@ export function PaperIntelligencePaperSurfaceHarness({
     const scroller = leftScrollerRef.current
     if (!scroller) return
 
-    let el: HTMLElement | null = null
-    if (activeStructureTarget.mode === 'paragraph' && activeStructureTarget.paragraphId) {
-      el = scroller.querySelector<HTMLElement>(
-        `[data-paper-paragraph-id="${cssAttr(activeStructureTarget.paragraphId)}"]`
-      )
-    } else {
-      el = scroller.querySelector<HTMLElement>(
-        `[data-paper-section="${cssAttr(activeStructureTarget.paperSection)}"]`
-      )
-    }
+    const el =
+      activeStructureTarget.mode === 'paragraph' && activeStructureTarget.paragraphId
+        ? scroller.querySelector<HTMLElement>(
+            `[data-paper-paragraph-id="${cssAttr(activeStructureTarget.paragraphId)}"]`,
+          )
+        : scroller.querySelector<HTMLElement>(
+            `[data-paper-section="${cssAttr(activeStructureTarget.paperSection)}"]`,
+          )
     if (!el) return
     el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
   }, [activeStructureTarget])
