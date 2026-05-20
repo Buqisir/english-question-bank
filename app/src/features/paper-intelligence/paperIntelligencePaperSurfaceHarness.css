@@ -207,6 +207,10 @@
      desk-around-paper padding, so adding harness padding here would
      reintroduce a seam between the paper track and the column-gap. */
   padding: 1rem 0;
+  /* C5b: positioning context for the structure brace overlay SVG.
+     The brace is absolutely positioned inside this scroller and its
+     coordinates are scroller-relative (accounting for scrollTop). */
+  position: relative;
 }
 
 /*
@@ -1244,4 +1248,105 @@ button.pi-ps-analysis-distractor--selected {
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+}
+
+
+/* ─── C5b: Structure Brace Overlay ────────────────────────────── */
+
+/*
+ * Issue #21-C5b — Structure Brace (hotfix: moved into white paper
+ * left padding).
+ *
+ * The brace overlay is an absolutely positioned SVG inside the
+ * `.pi-ps-harness-left` scroller. It paints a quiet vertical bracket
+ * in the white paper's left padding area, marking the active paragraph
+ * or passage body for the teacher.
+ *
+ * Product intent: a quiet pencil mark on the paper margin. No glow,
+ * no gradient, no shadow, no connector line, no semantic color.
+ *
+ * z-index ordering:
+ *   .pi-ps-structure-brace-overlay   z-index: 3  (below evidence line z:5)
+ *   .pi-line-overlay                 z-index: 5  (cross-column line)
+ *   .pi-ps-insight-rail              z-index: 25 (left rail)
+ *
+ * The brace must NOT overlap passage text. Its x coordinate is
+ * computed in JS (structureBrace.tsx) and always stays inside the
+ * .ps-page left padding (56px), at least 12px before text starts.
+ */
+.pi-ps-structure-brace-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+
+.pi-ps-structure-brace-path {
+  fill: none;
+  stroke: #9e9e9e;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Hide brace in stacked/narrow mode (<=1199px). The structure rows
+ * still work for scroll-to-paragraph but the visual mark is hidden
+ * because the paper layout is too narrow for a side margin brace. */
+@media (max-width: 1199px) {
+  .pi-ps-structure-brace-overlay {
+    display: none;
+  }
+}
+
+
+/* ─── C5b: Structure paragraph rows ──────────────────────────── */
+
+.pi-ps-insight-structure-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 8px;
+  border-top: 1px solid var(--pi-ps-insight-hairline);
+  margin-top: 8px;
+}
+
+.pi-ps-insight-structure-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pi-ps-insight-muted-ink);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pi-ps-insight-structure-row:hover {
+  background: var(--pi-ps-insight-chip-bg);
+  color: var(--pi-ps-insight-ink);
+}
+
+.pi-ps-insight-structure-row:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border);
+  outline-offset: 1px;
+}
+
+.pi-ps-insight-structure-row--active {
+  background: var(--pi-ps-insight-active-bg);
+  border-color: var(--pi-ps-insight-active-border);
+  color: var(--pi-ps-insight-ink);
+  font-weight: 600;
+}
+
+.pi-ps-insight-structure-row-label {
+  font-size: 12px;
+  line-height: 1.4;
 }

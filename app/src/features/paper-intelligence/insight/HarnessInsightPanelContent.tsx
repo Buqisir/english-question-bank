@@ -1,21 +1,13 @@
 /**
- * HarnessInsightPanelContent.tsx — Issue #21-C4 PaperSurface Insight
- * Parity.
+ * HarnessInsightPanelContent.tsx — Issue #21-C4 / C5b PaperSurface
+ * Insight Parity.
  *
  * Harness-local presentational component that renders the body of the
  * passage-structure panel for `surface=paper`.
  *
- * Why a local copy:
- *
- *   - The harness lives at `surface=paper`. The default PI route is
- *     at `surface=printable` (and the rest of the PI feature). We
- *     intentionally avoid refactoring `PaperIntelligencePreview.tsx`
- *     in the C4 cut so the default route ships unchanged.
- *   - The PaperSurface page is an A4 reading surface, not the full
- *     Paper Intelligence dashboard. Browser QA showed that load bars
- *     and chunk counts were too heavy for the left rail at normal
- *     zoom. This panel now keeps only the article structure that
- *     helps the teacher orient the passage while reading the paper.
+ * C5b adds clickable paragraph rows and a passage-level "篇章" button
+ * that drive the structure brace overlay. Each row calls
+ * `onBraceTarget` with the appropriate target descriptor.
  *
  * Module discipline:
  *   - Presentational only. No hooks, no `useState`, no `useEffect`.
@@ -25,17 +17,32 @@
  *   - No basket / paperAssembly / draft action.
  *   - No annotation pack.
  *   - No "read this sentence" / `request-reading-focus` button.
- *   - Pure JSX off the read-only `PassageReport` type.
+ *   - Pure JSX off the read-only `PassageReport` type + structure data.
  */
 
 import type { ReactNode } from 'react'
-import type { PassageOutline, PassageReport } from '../paperIntelligenceTypes'
+import type { PassageOutline, PassageReport, PassageStructure } from '../paperIntelligenceTypes'
+import type { StructureBraceTarget } from '../structureBrace'
 
 export function HarnessInsightPanelContent(props: {
   reportPassage: PassageReport
+  passageStructure?: PassageStructure | null
+  braceTarget?: StructureBraceTarget
+  onBraceTarget?: (target: StructureBraceTarget) => void
 }): ReactNode {
-  const { reportPassage } = props
-  return <HarnessOutline outline={reportPassage.passageOutline} />
+  const { reportPassage, passageStructure, braceTarget, onBraceTarget } = props
+  return (
+    <>
+      <HarnessOutline outline={reportPassage.passageOutline} />
+      {passageStructure && onBraceTarget && (
+        <HarnessStructureRows
+          structure={passageStructure}
+          braceTarget={braceTarget ?? null}
+          onBraceTarget={onBraceTarget}
+        />
+      )}
+    </>
+  )
 }
 
 function HarnessOutline({ outline }: { outline: PassageOutline }): ReactNode {
@@ -48,6 +55,76 @@ function HarnessOutline({ outline }: { outline: PassageOutline }): ReactNode {
           <li key={i}>{layer}</li>
         ))}
       </ol>
+    </div>
+  )
+}
+
+/**
+ * C5b: Clickable paragraph structure rows + passage-level button.
+ *
+ * Each row is a real <button> so keyboard navigation works. Clicking
+ * a paragraph row sets the brace to paragraph mode; clicking "篇章"
+ * sets it to passage mode. Re-clicking the active row toggles the
+ * brace off (handled by the parent's toggle logic).
+ */
+function HarnessStructureRows(props: {
+  structure: PassageStructure
+  braceTarget: StructureBraceTarget
+  onBraceTarget: (target: StructureBraceTarget) => void
+}): ReactNode {
+  const { structure, braceTarget, onBraceTarget } = props
+
+  const isPassageActive =
+    braceTarget !== null &&
+    braceTarget.mode === 'passage' &&
+    braceTarget.section === structure.section
+
+  return (
+    <div className="pi-ps-insight-structure-rows">
+      <button
+        type="button"
+        className={
+          isPassageActive
+            ? 'pi-ps-insight-structure-row pi-ps-insight-structure-row--active'
+            : 'pi-ps-insight-structure-row'
+        }
+        onClick={() =>
+          onBraceTarget({ mode: 'passage', section: structure.section })
+        }
+        aria-pressed={isPassageActive}
+        data-structure-row="passage"
+      >
+        <span className="pi-ps-insight-structure-row-label">篇章</span>
+      </button>
+      {structure.paragraphs.map((para) => {
+        const isActive =
+          braceTarget !== null &&
+          braceTarget.mode === 'paragraph' &&
+          braceTarget.section === structure.section &&
+          braceTarget.paragraphId === para.id
+        return (
+          <button
+            key={para.id}
+            type="button"
+            className={
+              isActive
+                ? 'pi-ps-insight-structure-row pi-ps-insight-structure-row--active'
+                : 'pi-ps-insight-structure-row'
+            }
+            onClick={() =>
+              onBraceTarget({
+                mode: 'paragraph',
+                section: structure.section,
+                paragraphId: para.id,
+              })
+            }
+            aria-pressed={isActive}
+            data-structure-row={para.id}
+          >
+            <span className="pi-ps-insight-structure-row-label">{para.label}</span>
+          </button>
+        )
+      })}
     </div>
   )
 }

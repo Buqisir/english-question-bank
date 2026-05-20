@@ -128,6 +128,7 @@ import {
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
+import { StructureBraceOverlay, type StructureBraceTarget } from './structureBrace'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -202,6 +203,20 @@ export function PaperIntelligencePaperSurfaceHarness({
    * teacher resizes back to desktop.
    */
   const [railLocked, setRailLocked] = useState<boolean>(false)
+
+  /**
+   * C5b: Structure brace target.
+   *
+   * Tracks what the structure brace should highlight:
+   *   - { mode: 'paragraph', section, paragraphId } — single paragraph.
+   *   - { mode: 'passage', section } — entire passage body.
+   *   - null — brace hidden.
+   *
+   * Set by clicking paragraph rows or the passage-level "篇章" button
+   * in the structure detail panel. Cleared when the insight section
+   * closes or when a question is selected.
+   */
+  const [braceTarget, setBraceTarget] = useState<StructureBraceTarget>(null)
 
   /**
    * C4 PR #52 PA must-fix: viewport-mode detection for rail vs
@@ -494,6 +509,8 @@ export function PaperIntelligencePaperSurfaceHarness({
       // PaperIntelligencePreview, where `setActiveInsightSection(null)`
       // runs on every question selection.
       setActiveInsightSection(null)
+      // C5b: clear brace when question selected.
+      setBraceTarget(null)
       // C4 PR #52: also collapse the rail back to compact so the
       // teacher's eye returns to the question card without a stale
       // expanded rail competing for attention. The lock is a teacher
@@ -513,13 +530,38 @@ export function PaperIntelligencePaperSurfaceHarness({
   // Re-clicking the active chip closes the panel; clicking another
   // chip switches the panel without an intermediate "closed" state.
   const handleToggleInsight = useCallback((paperSection: string): void => {
-    setActiveInsightSection((prev) =>
-      prev === paperSection ? null : paperSection,
-    )
+    setActiveInsightSection((prev) => {
+      const next = prev === paperSection ? null : paperSection
+      // C5b: clear brace when switching sections or closing.
+      if (next !== prev) setBraceTarget(null)
+      return next
+    })
   }, [])
 
   const handleCloseInsight = useCallback((): void => {
     setActiveInsightSection(null)
+    setBraceTarget(null)
+  }, [])
+
+  /**
+   * C5b: handler for structure brace targeting from the insight panel.
+   * Called when the teacher clicks a paragraph row or the passage-level
+   * "篇章" button. Re-clicking the same target clears the brace.
+   */
+  const handleBraceTarget = useCallback((target: StructureBraceTarget): void => {
+    setBraceTarget((prev) => {
+      if (!target) return null
+      // Toggle off if clicking the same target.
+      if (
+        prev &&
+        prev.mode === target.mode &&
+        prev.section === target.section &&
+        (target.mode === 'passage' || (prev.mode === 'paragraph' && prev.paragraphId === target.paragraphId))
+      ) {
+        return null
+      }
+      return target
+    })
   }, [])
 
   // ─── C4 PR #52 rail toggle + Esc handlers ───
@@ -795,7 +837,12 @@ export function PaperIntelligencePaperSurfaceHarness({
                         ×
                       </button>
                     </div>
-                    <HarnessInsightPanelContent reportPassage={activePassage} />
+                    <HarnessInsightPanelContent
+                      reportPassage={activePassage}
+                      passageStructure={passageStructures[activePassage.paperSection] ?? null}
+                      braceTarget={braceTarget}
+                      onBraceTarget={handleBraceTarget}
+                    />
                   </div>
                 )}
               </div>
@@ -812,6 +859,13 @@ export function PaperIntelligencePaperSurfaceHarness({
             lectureFocus={lectureFocus}
             readingFocusBySection={{}}
             onFocusIntent={handleFocusIntent}
+          />
+          {/* C5b: Structure brace overlay — rendered inside the scroller
+              so it scrolls with the paper. Absolutely positioned over
+              the page's left padding area. Hidden at <=1199px via CSS. */}
+          <StructureBraceOverlay
+            scrollerRef={leftScrollerRef}
+            target={braceTarget}
           />
         </div>
         <aside
