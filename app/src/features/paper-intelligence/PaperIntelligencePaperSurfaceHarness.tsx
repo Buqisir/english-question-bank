@@ -413,6 +413,23 @@ export function PaperIntelligencePaperSurfaceHarness({
     }
   }, [])
 
+  // ─── C5b: window resize clears active Structure Brace (PO decision) ───
+  //
+  // PO decision for V0: resize clears the brace. Do NOT remeasure/redraw.
+  // The matchMedia handler above already clears on breakpoint cross;
+  // this handler covers all resize events (e.g. dragging browser edge)
+  // even when no breakpoint is crossed.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const onResize = (): void => {
+      setActiveStructureTarget(null)
+    }
+    window.addEventListener('resize', onResize)
+    return (): void => {
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
+
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (!report) return null
@@ -525,10 +542,15 @@ export function PaperIntelligencePaperSurfaceHarness({
     setActiveInsightSection((prev) =>
       prev === paperSection ? null : paperSection,
     )
+    // C5b: clear structure target when switching/closing passage chip.
+    // The brace is always tied to the active detail panel's section.
+    setActiveStructureTarget(null)
   }, [])
 
   const handleCloseInsight = useCallback((): void => {
     setActiveInsightSection(null)
+    // C5b: clear structure target when detail panel is closed.
+    setActiveStructureTarget(null)
   }, [])
 
   // ─── C5b: structure target handlers ───
@@ -561,6 +583,8 @@ export function PaperIntelligencePaperSurfaceHarness({
       // releases.
       if (activeInsightSection) {
         setActiveInsightSection(null)
+        // C5b: clear structure target when Esc closes the detail panel.
+        setActiveStructureTarget(null)
         return
       }
       if (railLocked) {

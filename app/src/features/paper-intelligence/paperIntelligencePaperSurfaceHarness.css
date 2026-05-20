@@ -1291,7 +1291,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-structure-btn:focus-visible {
-  outline: 2px solid var(--pi-ps-insight-active-border, #a78bfa);
+  outline: 2px solid var(--pi-ps-insight-active-border, #7a6a58);
   outline-offset: 1px;
 }
 

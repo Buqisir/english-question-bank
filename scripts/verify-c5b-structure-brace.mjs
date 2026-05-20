@@ -251,6 +251,18 @@ assert(
   'harness clears activeStructureTarget on resize'
 )
 
+// Verify harness owns a dedicated window resize handler that clears brace
+assert(
+  harnessTsx.includes("window.addEventListener('resize'") || harnessTsx.includes('window.addEventListener("resize"'),
+  'harness registers window resize handler'
+)
+
+// Verify the StructureBraceOverlay does NOT register window resize remeasurement
+assert(
+  !braceTsx.includes("window.addEventListener('resize'") && !braceTsx.includes('window.addEventListener("resize"'),
+  'StructureBraceOverlay does NOT register window resize remeasurement'
+)
+
 // Verify it's inside the onChange handler (near the onChange's setIsStackedMode)
 // The onChange handler is the second occurrence of setIsStackedMode(stackedMql.matches)
 const firstIdx = harnessTsx.indexOf('setIsStackedMode(stackedMql.matches)')
@@ -268,6 +280,99 @@ assert(
   harnessCss.includes('display: none'),
   'brace hidden via display:none at <=1199px'
 )
+
+console.log('\n─── C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructureTarget ───\n')
+
+// Verify handleToggleInsight clears activeStructureTarget
+{
+  const toggleIdx = harnessTsx.indexOf('const handleToggleInsight')
+  const closeIdx = harnessTsx.indexOf('const handleCloseInsight')
+  const toggleBody = harnessTsx.slice(toggleIdx, closeIdx)
+  assert(
+    toggleBody.includes('setActiveStructureTarget(null)'),
+    'handleToggleInsight clears activeStructureTarget'
+  )
+}
+
+// Verify handleCloseInsight clears activeStructureTarget
+{
+  const closeIdx = harnessTsx.indexOf('const handleCloseInsight')
+  const nextHandler = harnessTsx.indexOf('const handle', closeIdx + 30)
+  const closeBody = harnessTsx.slice(closeIdx, nextHandler)
+  assert(
+    closeBody.includes('setActiveStructureTarget(null)'),
+    'handleCloseInsight clears activeStructureTarget'
+  )
+}
+
+// Verify Esc path (handleRailKeyDown) clears activeStructureTarget
+{
+  const escIdx = harnessTsx.indexOf('const handleRailKeyDown')
+  const nextHandler = harnessTsx.indexOf('const handle', escIdx + 30)
+  const escBody = harnessTsx.slice(escIdx, nextHandler > 0 ? nextHandler : escIdx + 800)
+  assert(
+    escBody.includes('setActiveStructureTarget(null)'),
+    'Esc path (handleRailKeyDown) clears activeStructureTarget'
+  )
+}
+
+console.log('\n─── C5b: passage mode queries .ps-passage-body ───\n')
+
+// Verify passage mode targets .ps-passage-body, not section root
+assert(
+  braceTsx.includes('.ps-passage-body'),
+  'structureBrace.tsx queries .ps-passage-body for passage mode measurement'
+)
+
+// Verify it queries data-paper-section first (to find the section), then .ps-passage-body inside
+assert(
+  braceTsx.includes('data-paper-section') && braceTsx.includes('.ps-passage-body'),
+  'passage mode: queries section via data-paper-section then measures .ps-passage-body inside'
+)
+
+// Verify the section root is NOT directly assigned as el for passage mode
+// The pattern should be: find section, then querySelector .ps-passage-body
+{
+  const passageModeBlock = braceTsx.slice(
+    braceTsx.indexOf('// Passage mode'),
+    braceTsx.indexOf('if (!el)')
+  )
+  assert(
+    passageModeBlock.includes("querySelector<HTMLElement>('.ps-passage-body')") ||
+    passageModeBlock.includes('querySelector<HTMLElement>(\'.ps-passage-body\')'),
+    'passage mode measures .ps-passage-body element (not section root)'
+  )
+}
+
+console.log('\n─── C5b: no steering / AGENTS diff after rebasing latest main ───\n')
+
+// Verify no steering or AGENTS changes in diff
+{
+  const steeringFiles = changedFiles.filter(
+    (f) => f.startsWith('.kiro/steering/') || f === 'AGENTS.md' || f === 'CLAUDE.md'
+  )
+  assert(
+    steeringFiles.length === 0,
+    'no steering / AGENTS / CLAUDE diff exists after rebasing latest main'
+  )
+}
+
+console.log('\n─── C5b: CSS contains no purple fallback ───\n')
+
+// Verify no purple fallback (#a78bfa or similar brand purple) in C5b CSS
+assert(
+  !harnessCss.includes('#a78bfa'),
+  'CSS does not contain #a78bfa purple fallback'
+)
+
+// Also check for other purple shades that shouldn't appear
+const purplePatterns = ['#7c3aed', '#8b5cf6', '#a78bfa', '#c084fc', '#6d28d9']
+for (const hex of purplePatterns) {
+  assert(
+    !harnessCss.includes(hex),
+    `CSS does not contain purple hex ${hex}`
+  )
+}
 
 console.log('\n─── C5b: brace visual spec compliance ───\n')
 

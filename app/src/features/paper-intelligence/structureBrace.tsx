@@ -68,17 +68,16 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
           `[data-paper-paragraph-id="${target.paragraphId}"]`
         )
       } else {
-        // Passage mode: target the passage body container
-        // PaperSurface renders [data-paper-section="A"] on the section root.
-        // We want the passage body only (not questions), which is typically
-        // the first child or the element with paragraphs inside the section.
+        // Passage mode: target the passage body container (.ps-passage-body)
+        // inside the section. PaperSurface renders [data-paper-section="A"]
+        // on the section root, but that includes questions. We MUST measure
+        // only .ps-passage-body which contains just the passage text.
         const sectionEl = scroller.querySelector<HTMLElement>(
           `[data-paper-section="${target.paperSection}"]`
         )
         if (sectionEl) {
-          // The passage body is the section element itself minus question cards.
-          // We use the section element's bounding rect as the passage body rect.
-          el = sectionEl
+          const passageBody = sectionEl.querySelector<HTMLElement>('.ps-passage-body')
+          el = passageBody ?? null
         }
       }
 
@@ -105,26 +104,19 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
     // Measure immediately
     measure()
 
-    // Re-measure on scroll
+    // Re-measure on scroll (scroll remeasurement is OK)
     const scroller2 = leftScrollerRef.current
     if (scroller2) {
       scroller2.addEventListener('scroll', measure, { passive: true })
     }
 
-    // Re-measure on resize via RAF loop (debounced)
-    let resizeTimeout: ReturnType<typeof setTimeout> | null = null
-    const onResize = (): void => {
-      if (resizeTimeout) clearTimeout(resizeTimeout)
-      resizeTimeout = setTimeout(measure, 50)
-    }
-    window.addEventListener('resize', onResize)
+    // PO decision: resize clears the active Structure Brace (handled
+    // by the harness). The overlay does NOT remeasure on window resize.
 
     return () => {
       if (scroller2) {
         scroller2.removeEventListener('scroll', measure)
       }
-      window.removeEventListener('resize', onResize)
-      if (resizeTimeout) clearTimeout(resizeTimeout)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [target, leftScrollerRef, isStacked])
