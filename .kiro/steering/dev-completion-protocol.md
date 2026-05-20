@@ -75,7 +75,15 @@ report-only, no PR.
 ## 4. Completion report contract
 
 Every DEV completion report MUST include the following fields, in
-this order, wrapped in exactly one fenced `text` code block:
+this order, wrapped in exactly one fenced `text` code block, with no
+prose outside the fence. Put differently: no prose outside the
+fence.
+
+Recommended maximum: 60 lines. The report is a review handoff, not a
+terminal transcript.
+
+Use `docs/agents/dev-completion-report-template.md` as the canonical
+template.
 
 1. PR URL (or branch URL if a §2 exception applies)
 2. Branch name
@@ -84,21 +92,47 @@ this order, wrapped in exactly one fenced `text` code block:
    - latest branch used
    - required merge commit or PR head confirmed
    - note any sync problem that blocked or changed the work
-5. Verify script results
+5. Changed Files
+   - exact changed file paths, not only folders
+6. Verify script results
    - which scripts were run
    - pass / fail count for each
    - identify any pre-existing known mismatches (e.g. the C3-class
      scope-guard mismatch in `verify-paper-surface-module-v1.mjs`)
-6. What was NOT run, and why
+7. What was NOT run, and why
    - e.g. "did not run app dev server because Linux sandbox forbids
      long-running processes" or "did not run pnpm install because
      package files are out of scope"
-7. Forbidden scopes confirmed unchanged
+8. Forbidden Scopes confirmed unchanged
    - explicitly list the scopes that the task spec marked off-limits
      and confirm none of them were touched
-8. Browser QA still required (when applicable)
+9. Browser QA still required (when applicable)
    - if the change affects a visible surface, list what the owner
      should sight-check in the browser
+
+10. Known Risks / Expected False Positives
+   - short list, or `none`
+
+11. PO QA checklist link (when applicable)
+   - for visible PaperSurface / Paper Intelligence cuts, link the
+     relevant QA contract or checklist, e.g.
+     `docs/product/paper-surface-c5b-po-qa-contract.md`
+
+Hard report rules:
+
+- No prose outside the fence.
+- Do not paste raw verify output.
+- Use verify summaries only: script name, pass/fail counts, and a short
+  note for any expected false positive.
+- No raw command logs.
+- No tool-by-tool implementation diary.
+- Include exact changed files, not only folders.
+- If browser QA is required, state what was clicked and what passed.
+- If browser QA was not run or is not applicable, say why.
+- Static verify is not browser QA for visible PaperSurface changes.
+- Link the relevant PO QA checklist when the cut touches a visual
+  surface.
+- Keep known risks short and explicit. Do not bury them in prose.
 
 The report should be self-contained — the owner should be able to
 read it, click the PR link, and review without going back to chat

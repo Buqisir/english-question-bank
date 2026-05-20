@@ -81,7 +81,13 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
 - Use role-coded Kiro handshakes such as `/kiro DEV1`, `/kiro PA`, and `/kiro CR`.
 - When giving the PO a prompt to paste into Kiro, put the entire prompt content in fenced code blocks. Do not put explanatory prose between the prompt code blocks.
-- Ask Kiro to wrap the entire completion report or review in exactly one fenced `text` code block, with no prose outside the block.
+- Ask Kiro to follow `.kiro/steering/dev-completion-protocol.md`.
+  Completion reports must be one fenced `text` block, with no prose
+  outside the block, and should follow
+  `docs/agents/dev-completion-report-template.md`.
+- Do not accept raw terminal logs as a completion report. Require short
+  verify summaries, exact changed files, browser QA status, forbidden
+  scopes, known risks, and PO QA checklist link when applicable.
 
 ## Agent skills
 
