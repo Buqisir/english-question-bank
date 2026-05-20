@@ -4,7 +4,15 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 export function repoRootFrom(importMetaUrl) {
-  return resolve(dirname(fileURLToPath(importMetaUrl)), '..')
+  const startDir = dirname(fileURLToPath(importMetaUrl))
+  try {
+    return execSync('git rev-parse --show-toplevel', {
+      cwd: startDir,
+      encoding: 'utf8',
+    }).trim()
+  } catch {
+    return resolve(startDir, '..')
+  }
 }
 
 export function readText(root, relPath) {
