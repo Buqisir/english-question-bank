@@ -118,7 +118,7 @@ function segmentSentencesForParagraph(
   const segPara = segmented.paragraphs[0]
   if (!segPara) return []
 
-  return segPara.sentences.map((s: { id: string; text: string; tokens: unknown[] }, idx: number) => ({
+  return segPara.sentences.map((s, idx) => ({
     id: `${paraId}-s${idx}`,
     text: s.text,
     tokens: [] as never[],
@@ -165,7 +165,7 @@ export function piToPaperTextMapLegacy(input: PiTextMapLegacyInput): PaperTextMa
       paragraphs.push({
         id: para.id,
         section,
-        sentences: para.sentences.map((s: { id: string; text: string; tokens: unknown[] }) => ({
+        sentences: para.sentences.map((s) => ({
           id: s.id,
           text: s.text,
           tokens: [],
