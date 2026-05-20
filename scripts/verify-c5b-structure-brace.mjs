@@ -321,12 +321,13 @@ assert(
   'activeStructureTarget cleared near viewport onChange handler'
 )
 
-// Verify brace hidden at <=1199px in CSS
+// Verify brace hidden at <=1359px in CSS (C5b hotfix follow-up:
+// tight desktop widths where rail covers the brace zone).
 assert(
-  harnessCss.includes('@media (max-width: 1199px)') &&
+  harnessCss.includes('@media (max-width: 1359px)') &&
   harnessCss.includes('.pi-ps-structure-brace') &&
   harnessCss.includes('display: none'),
-  'brace hidden via display:none at <=1199px'
+  'brace hidden via display:none at <=1359px (tight desktop + stacked)'
 )
 
 console.log('\n─── C5b: handleToggleInsight / handleCloseInsight / Esc clear activeStructureTarget ───\n')
