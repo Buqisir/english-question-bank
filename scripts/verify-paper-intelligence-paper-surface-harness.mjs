@@ -509,10 +509,19 @@ assert(
 )
 
 // Adapter files under features/paper-intelligence/adapter/ must not
-// be modified by this C2 cut.
+// be modified by the original C2 cut. C5a is the first approved
+// downstream exception: it changes the PI adapter to feed confirmed
+// paragraph structure into the already-dumb PaperSurface contract.
+const allowedC5aAdapterFiles = new Set([
+  'app/src/features/paper-intelligence/adapter/index.ts',
+  'app/src/features/paper-intelligence/adapter/piToPaperTextMap.ts',
+])
 assert(
-  !changedFiles.some(f => f.includes('features/paper-intelligence/adapter/')),
-  "adapter files remain untouched"
+  !changedFiles.some(f =>
+    f.includes('features/paper-intelligence/adapter/') &&
+    !allowedC5aAdapterFiles.has(f)
+  ),
+  "adapter files remain untouched except approved C5a paragraph-structure adapter files"
 )
 
 // PaperSurface.tsx is intentionally allowed to change in C3 (Issue
