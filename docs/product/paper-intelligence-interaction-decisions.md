@@ -207,6 +207,11 @@ Do not introduce:
 
 The PaperSurface route may show a Structure Brace (`结构钩`) as a quiet orientation marker for passage structure. It is not an analytics surface.
 
+PO QA contract:
+
+- See `docs/product/paper-surface-c5b-po-qa-contract.md`.
+- That contract is the source of truth for C5b visual acceptance and forbidden regressions.
+
 Product rules:
 
 - The Structure Brace points to a whole passage body or one confirmed paragraph.
