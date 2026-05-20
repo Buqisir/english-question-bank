@@ -1,3 +1,7 @@
+---
+inclusion: auto
+---
+
 # Product scope discipline protocol
 
 Scope: applies to product and UI decisions in the

@@ -1,3 +1,7 @@
+---
+inclusion: auto
+---
+
 # UI mockup before DEV protocol
 
 Scope: applies to important UI, layout, and visual decisions in the

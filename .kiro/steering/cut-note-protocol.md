@@ -1,3 +1,7 @@
+---
+inclusion: auto
+---
+
 # Cut note protocol
 
 Scope: applies to large product / UI / architecture cuts in the

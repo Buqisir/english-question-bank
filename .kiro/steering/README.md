@@ -1,3 +1,7 @@
+---
+inclusion: auto
+---
+
 # Kiro steering index
 
 This folder contains project-specific operating rules for
@@ -81,7 +85,7 @@ Recommended question:
 > What is the teacher trying to do right now, and does this feature help
 > that task immediately?
 
-If the answer is weak, recommend shrinking, moving, backloging, or
+If the answer is weak, recommend shrinking, moving, backlogging, or
 cutting the feature.
 
 ---
