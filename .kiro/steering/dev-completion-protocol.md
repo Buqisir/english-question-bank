@@ -1,3 +1,7 @@
+---
+inclusion: auto
+---
+
 # DEV completion protocol
 
 Scope: applies to every `/kiro DEV` task in the

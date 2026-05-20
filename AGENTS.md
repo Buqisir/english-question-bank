@@ -19,6 +19,23 @@ This repo builds the local-first English question bank workbench.
 - V0 is local-first, single-user, no login, no cloud sync.
 - Open Design is for visual prototyping only. Production code belongs under `app/`.
 
+## Project Steering
+
+- For product, UI, PM, PA, CR, QA, RM, or DEV-prompt work, read
+  `.kiro/steering/README.md` and the relevant steering note before
+  giving advice or assigning implementation.
+- Product-scope discipline is mandatory. Before adding or preserving
+  visible AI-derived information, ask which teacher task it serves.
+  Do not accept "we have the data" as a reason to show the data.
+- Push back directly when a feature risks turning a focused teacher
+  workbench into an AI dashboard. A useful feature may still belong in
+  a different workflow, backlog, or future cut.
+- For PaperSurface specifically, insight should default to a short
+  passage map. Dense diagnostics such as vocabulary load, grammar load,
+  evidence difficulty, dot/bar systems, long key-chunk lists, or AI
+  difficulty dashboards need a separate task justification and usually
+  belong outside the A4 paper page.
+
 ## Super Teacher Boundary
 
 For teaching-domain decisions, preserve the Super Teacher judgment layer:
@@ -31,8 +48,9 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ## Browser Verification
 
-- Do not use the Codex in-app browser for this project for now; it has been timing out on local UI checks.
-- Use local Chrome/headless Playwright for UI smoke tests and screenshots.
+- The Codex in-app browser is allowed for PO-facing QA, visual spot checks, and any browser verification the user explicitly asks to watch or discuss live.
+- If the in-app browser times out, gives stale state, or cannot prove the visual claim, fall back to local Chrome/headless Playwright for smoke tests and screenshots.
+- Do not treat "static verify passed" as "browser QA passed" for user-visible PaperSurface changes.
 
 ## Collaboration Workflow
 
