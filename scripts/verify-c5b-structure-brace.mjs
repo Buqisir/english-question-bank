@@ -344,6 +344,23 @@ assert(
   )
 }
 
+console.log('\n─── C5b: brace geometry includes scrollTop offset ───\n')
+
+// Verify the brace top calculation includes scroller.scrollTop so the
+// absolute-positioned SVG aligns with content coordinates, not viewport
+// coordinates. Without this the brace drifts ~scrollTop px above the target
+// at 1536/1440/1280 when the scroller is scrolled.
+assert(
+  braceTsx.includes('scroller.scrollTop'),
+  'brace top calculation includes scroller.scrollTop for content-relative positioning'
+)
+
+// Verify the full expression pattern: elRect.top - scrollerRect.top + scroller.scrollTop
+assert(
+  braceTsx.includes('elRect.top - scrollerRect.top + scroller.scrollTop'),
+  'brace top = elRect.top - scrollerRect.top + scroller.scrollTop (content-relative)'
+)
+
 console.log('\n─── C5b: no steering / AGENTS diff after rebasing latest main ───\n')
 
 // Verify no steering or AGENTS changes in diff

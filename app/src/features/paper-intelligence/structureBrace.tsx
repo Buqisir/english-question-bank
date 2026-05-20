@@ -89,8 +89,15 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
       const scrollerRect = scroller.getBoundingClientRect()
       const elRect = el.getBoundingClientRect()
 
-      // Position relative to the scroller's viewport
-      const top = elRect.top - scrollerRect.top
+      // Position relative to the scroller's content origin.
+      // The brace SVG is `position: absolute` inside the scrolling
+      // .pi-ps-harness-left container, so its `top` must be
+      // content-relative (not viewport-relative). We add
+      // scroller.scrollTop to convert the viewport-relative delta
+      // into a content-relative coordinate. Without this offset the
+      // brace paints ~scrollTop pixels above the target when the
+      // scroller is scrolled (browser QA: 1536/1440/1280).
+      const top = elRect.top - scrollerRect.top + scroller.scrollTop
       const height = elRect.height
 
       if (height < 2) {
