@@ -30,10 +30,10 @@ This repo builds the local-first English question bank workbench.
 - Push back directly when a feature risks turning a focused teacher
   workbench into an AI dashboard. A useful feature may still belong in
   a different workflow, backlog, or future cut.
-- For large product / UI / architecture cuts, follow
-  `.kiro/steering/large-cut-workflow-protocol.md`: sync first, grill
-  the user, inspect mockups / Canvas directions, get Big PA, compress
-  to at most 3 PO decisions, then proceed to DEV / CR / QA / RM.
+- For product / engineering cuts, follow
+  `.kiro/steering/cut-workflow-protocol.md`: pick small / medium /
+  large process by risk, sync first, and avoid turning small fixes into
+  process rituals or large cuts into rushed DEV work.
 - For PaperSurface specifically, insight should default to a short
   passage map. Dense diagnostics such as vocabulary load, grammar load,
   evidence difficulty, dot/bar systems, long key-chunk lists, or AI
@@ -69,8 +69,10 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   - **PA before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic.
   - **CR after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
-- Large cut flow:
-  - `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA -> RM -> Cut Note`.
+- Cut tier flows:
+  - Small: `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
+  - Medium: `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
+  - Large: `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA -> RM -> Cut Note`.
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
