@@ -1404,9 +1404,19 @@ button.pi-ps-analysis-distractor--selected {
   position: relative;
 }
 
-/* ─── Breakpoint: hide brace at <=1199px ─── */
+/* ─── Breakpoint: hide brace at <=1359px ─── */
+/*
+ * C5b hotfix follow-up: at 1200–1359px the expanded left structure
+ * rail (~200–300px) covers the white paper left padding where the
+ * brace is drawn. Rather than raising z-index above the rail or
+ * redesigning the rail, hide the brace at tight desktop widths.
+ * Structure rows still work for scroll-to-paragraph at all widths.
+ *
+ * Visible: >=1360px (brace clearly visible in paper left padding).
+ * Hidden:  <=1359px (rail covers the brace zone).
+ */
 
-@media (max-width: 1199px) {
+@media (max-width: 1359px) {
   .pi-ps-structure-brace {
     display: none;
   }
