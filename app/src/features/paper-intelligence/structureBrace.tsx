@@ -2,20 +2,23 @@
  * structureBrace.tsx — C5b Structure Brace overlay component.
  *
  * Renders a harness-owned SVG overlay that draws a vertical bracket
- * (brace) in the left paper matte zone to indicate the currently
- * targeted passage body or paragraph.
+ * (brace) inside the white A4 paper's left padding area to indicate
+ * the currently targeted passage body or paragraph.
  *
  * Design constraints (locked):
  *   - `pointer-events: none` on the SVG overlay.
  *   - z-index below evidence line (< 5, uses 3).
  *   - Hidden at <=1199px (CSS handles this).
- *   - Lives in the left paper matte zone.
+ *   - Lives INSIDE the white .ps-page left padding (not in the gray
+ *     matte zone). Placement is computed from .ps-page rect so the
+ *     brace is always visible even when the left rail panel is open.
  *   - Shape: simple vertical bracket (vertical line + small top/bottom
- *     caps toward the paper). No curly brace, arrow, notch, shadow,
- *     glow, gradient, or semantic color.
+ *     caps toward the text). No curly brace, notch, or embellishment.
  *   - Color: warm charcoal pencil tone rgba(47, 41, 35, 0.45).
  *   - Stroke width ~1.5px, round caps.
  *   - No connector line from rail button to brace.
+ *   - Brace right edge must be at least 12px before the target
+ *     paragraph text left edge (must not overlap passage body text).
  */
 
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react'
@@ -26,7 +29,7 @@ export type StructureTarget = {
   paragraphId?: string
 }
 
-type BraceRect = { top: number; height: number } | null
+type BraceRect = { top: number; height: number; left: number } | null
 
 type Props = {
   target: StructureTarget | null
@@ -36,7 +39,7 @@ type Props = {
 
 /**
  * StructureBraceOverlay — harness-local SVG that paints the vertical
- * bracket in the left matte zone of .pi-ps-harness-left.
+ * bracket inside the white paper's left padding area.
  */
 export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Props): ReactNode {
   const [braceRect, setBraceRect] = useState<BraceRect>(null)
@@ -86,8 +89,16 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
         return
       }
 
+      // Find the .ps-page element to compute x inside the white paper.
+      const page = scroller.querySelector<HTMLElement>('.ps-page')
+      if (!page) {
+        setBraceRect(null)
+        return
+      }
+
       const scrollerRect = scroller.getBoundingClientRect()
       const elRect = el.getBoundingClientRect()
+      const pageRect = page.getBoundingClientRect()
 
       // Position relative to the scroller's content origin.
       // The brace SVG is `position: absolute` inside the scrolling
@@ -105,7 +116,22 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
         return
       }
 
-      setBraceRect({ top, height })
+      // Compute left: place the brace inside the .ps-page left padding.
+      // The page has 56px padding; we offset 16px from pageRect.left so
+      // the brace sits near the inner left edge of the white paper,
+      // leaving room for the bracket shape (SVG_WIDTH = 20px).
+      // Convert to scroller-relative coordinates.
+      const braceLeft = pageRect.left - scrollerRect.left + scroller.scrollLeft + 16
+
+      // Safety: ensure brace right edge (left + SVG_WIDTH) is at least
+      // 12px before the target element's text left edge, so the bracket
+      // never overlaps passage body text.
+      const targetLeftInScroller = elRect.left - scrollerRect.left + scroller.scrollLeft
+      const SVG_WIDTH = 20
+      const maxLeft = targetLeftInScroller - 12 - SVG_WIDTH
+      const finalLeft = Math.min(braceLeft, maxLeft)
+
+      setBraceRect({ top, height, left: finalLeft })
     }
 
     // Measure immediately
@@ -131,14 +157,14 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
   if (!braceRect || isStacked) return null
 
   // SVG bracket geometry:
-  // The bracket is positioned in the left matte zone of the paper.
+  // The bracket is positioned inside the white paper's left padding.
   // It's a vertical line with small horizontal caps at top and bottom
-  // pointing toward the paper (rightward).
+  // pointing toward the text (rightward).
   const CAP_LENGTH = 6
   const STROKE_WIDTH = 1.5
   const SVG_WIDTH = 20
-  const X_LINE = 8 // x position of the vertical line
-  const X_CAP_END = X_LINE + CAP_LENGTH // caps point right toward paper
+  const X_LINE = 8 // x position of the vertical line within the SVG
+  const X_CAP_END = X_LINE + CAP_LENGTH // caps point right toward text
 
   const y1 = 0
   const y2 = braceRect.height
@@ -157,7 +183,7 @@ export function StructureBraceOverlay({ target, leftScrollerRef, isStacked }: Pr
       style={{
         position: 'absolute',
         top: braceRect.top,
-        left: 0,
+        left: braceRect.left,
         width: SVG_WIDTH,
         height: braceRect.height,
         pointerEvents: 'none',
