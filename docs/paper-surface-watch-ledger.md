@@ -134,6 +134,8 @@ Source: PR #60, `surface=paper` Structure Brace hotfix.
 
 Status: C5b merged. The accepted display rule is `>=1360px` visible, `<=1359px` hidden.
 
+PO QA contract: `docs/product/paper-surface-c5b-po-qa-contract.md`.
+
 ### Tight Desktop Brace Visibility
 
 The Structure Brace lives in the white `.ps-page` left padding. Browser QA found that at tight desktop widths the expanded left rail can cover that padding area.
