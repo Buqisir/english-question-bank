@@ -128,6 +128,8 @@ import {
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
+import { HarnessStructureRows } from './insight/HarnessStructureRows'
+import { StructureBraceOverlay, type StructureTarget } from './structureBrace'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -183,6 +185,13 @@ export function PaperIntelligencePaperSurfaceHarness({
    * (insight + evidence are independent teacher views).
    */
   const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
+
+  /**
+   * C5b: which paragraph or passage body the Structure Brace targets.
+   * Cleared on resize / breakpoint cross. Coexists with evidence line.
+   * Clicking the same active control clears the brace.
+   */
+  const [activeStructureTarget, setActiveStructureTarget] = useState<StructureTarget | null>(null)
 
   /**
    * C4 PR #52 PA must-fix: left insight rail expansion lock.
@@ -386,6 +395,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       setIsWideDesktop(wideDesktopMql.matches)
       setActiveInsightSection(null)
       setRailLocked(false)
+      setActiveStructureTarget(null)
     }
     if (typeof stackedMql.addEventListener === 'function') {
       stackedMql.addEventListener('change', onChange)
@@ -401,6 +411,23 @@ export function PaperIntelligencePaperSurfaceHarness({
     return (): void => {
       stackedMql.removeListener(onChange)
       wideDesktopMql.removeListener(onChange)
+    }
+  }, [])
+
+  // ─── C5b: window resize clears active Structure Brace (PO decision) ───
+  //
+  // PO decision for V0: resize clears the brace. Do NOT remeasure/redraw.
+  // The matchMedia handler above already clears on breakpoint cross;
+  // this handler covers all resize events (e.g. dragging browser edge)
+  // even when no breakpoint is crossed.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const onResize = (): void => {
+      setActiveStructureTarget(null)
+    }
+    window.addEventListener('resize', onResize)
+    return (): void => {
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 
@@ -516,10 +543,30 @@ export function PaperIntelligencePaperSurfaceHarness({
     setActiveInsightSection((prev) =>
       prev === paperSection ? null : paperSection,
     )
+    // C5b: clear structure target when switching/closing passage chip.
+    // The brace is always tied to the active detail panel's section.
+    setActiveStructureTarget(null)
   }, [])
 
   const handleCloseInsight = useCallback((): void => {
     setActiveInsightSection(null)
+    // C5b: clear structure target when detail panel is closed.
+    setActiveStructureTarget(null)
+  }, [])
+
+  // ─── C5b: structure target handlers ───
+  //
+  // Clicking `篇章` toggles whole-passage target. Clicking `Pn`
+  // toggles paragraph target. Clicking the same active control clears.
+  const handleStructureTarget = useCallback((paperSection: string, mode: 'passage' | 'paragraph', paragraphId?: string): void => {
+    setActiveStructureTarget((prev) => {
+      // Toggle off if same target
+      if (prev && prev.paperSection === paperSection && prev.mode === mode) {
+        if (mode === 'passage') return null
+        if (mode === 'paragraph' && prev.paragraphId === paragraphId) return null
+      }
+      return { paperSection, mode, paragraphId }
+    })
   }, [])
 
   // ─── C4 PR #52 rail toggle + Esc handlers ───
@@ -537,6 +584,8 @@ export function PaperIntelligencePaperSurfaceHarness({
       // releases.
       if (activeInsightSection) {
         setActiveInsightSection(null)
+        // C5b: clear structure target when Esc closes the detail panel.
+        setActiveStructureTarget(null)
         return
       }
       if (railLocked) {
@@ -623,6 +672,26 @@ export function PaperIntelligencePaperSurfaceHarness({
       behavior: reduced ? 'auto' : 'smooth',
     })
   }, [activeEvidenceId])
+
+  // ─── C5b: scroll structure target into view (instant per PA decision) ───
+  useEffect(() => {
+    if (!activeStructureTarget) return
+    const scroller = leftScrollerRef.current
+    if (!scroller) return
+
+    let el: HTMLElement | null = null
+    if (activeStructureTarget.mode === 'paragraph' && activeStructureTarget.paragraphId) {
+      el = scroller.querySelector<HTMLElement>(
+        `[data-paper-paragraph-id="${cssAttr(activeStructureTarget.paragraphId)}"]`
+      )
+    } else {
+      el = scroller.querySelector<HTMLElement>(
+        `[data-paper-section="${cssAttr(activeStructureTarget.paperSection)}"]`
+      )
+    }
+    if (!el) return
+    el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
+  }, [activeStructureTarget])
 
   // ─── Render ───
   //
@@ -795,7 +864,18 @@ export function PaperIntelligencePaperSurfaceHarness({
                         ×
                       </button>
                     </div>
-                    <HarnessInsightPanelContent reportPassage={activePassage} />
+                    {/* C5b: inline clickable structure rows replace HarnessInsightPanelContent outline */}
+                    {passageStructures[p.paperSection] ? (
+                      <HarnessStructureRows
+                        paperSection={p.paperSection}
+                        paragraphs={passageStructures[p.paperSection].paragraphs}
+                        passageOutline={activePassage.passageOutline}
+                        activeStructureTarget={activeStructureTarget}
+                        onStructureTarget={handleStructureTarget}
+                      />
+                    ) : (
+                      <HarnessInsightPanelContent reportPassage={activePassage} />
+                    )}
                   </div>
                 )}
               </div>
@@ -812,6 +892,12 @@ export function PaperIntelligencePaperSurfaceHarness({
             lectureFocus={lectureFocus}
             readingFocusBySection={{}}
             onFocusIntent={handleFocusIntent}
+          />
+          {/* C5b: Structure Brace SVG overlay */}
+          <StructureBraceOverlay
+            target={activeStructureTarget}
+            leftScrollerRef={leftScrollerRef}
+            isStacked={isStackedMode}
           />
         </div>
         <aside

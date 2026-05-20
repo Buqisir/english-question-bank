@@ -1245,3 +1245,169 @@ button.pi-ps-analysis-distractor--selected {
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
+
+
+/* ================================================================
+ * C5b — Structure Brace / 结构钩
+ *
+ * Paragraph controls inside the opened inline structure detail panel,
+ * and the SVG brace overlay in the left paper matte zone.
+ *
+ * z-index ordering (addendum to existing source of truth above):
+ *   .pi-ps-structure-brace     z-index: 3    (below evidence line)
+ *   .pi-line-overlay           z-index: 5    (cross-column line)
+ *   .pi-ps-insight-rail        z-index: 25   (left rail)
+ * ================================================================ */
+
+/* ─── Paragraph controls row ─── */
+
+.pi-ps-structure-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--pi-ps-insight-hairline, rgba(0, 0, 0, 0.08));
+}
+
+.pi-ps-structure-btn {
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 4px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  color: #4b5563;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.pi-ps-structure-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #1f2937;
+}
+
+.pi-ps-structure-btn:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border, #7a6a58);
+  outline-offset: 1px;
+}
+
+.pi-ps-structure-btn--active {
+  background: rgba(47, 41, 35, 0.1);
+  border-color: rgba(47, 41, 35, 0.35);
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.pi-ps-structure-btn--active:hover {
+  background: rgba(47, 41, 35, 0.15);
+}
+
+/* ─── C5b: Inline clickable structure rows ─── */
+
+/*
+ * Replaces the bottom `.pi-ps-structure-controls` remote-control strip.
+ * Each row is a full-width button with a leading badge (篇章 / P1 / P2)
+ * and trailing summary text. Active row uses warm tan/umber consistent
+ * with the C4 insight palette.
+ */
+.pi-ps-structure-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+.pi-ps-structure-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--pi-ps-insight-muted-ink, #6f665a);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.pi-ps-structure-row:hover {
+  background: var(--pi-ps-insight-chip-bg, #f3f0e8);
+  border-color: var(--pi-ps-insight-chip-border, #e3ddd3);
+  color: var(--pi-ps-insight-ink, #2f2923);
+}
+
+.pi-ps-structure-row:focus-visible {
+  outline: 2px solid var(--pi-ps-insight-active-border, #7a6a58);
+  outline-offset: 1px;
+}
+
+.pi-ps-structure-row--active {
+  background: var(--pi-ps-insight-active-bg, #f0ebe2);
+  border-color: var(--pi-ps-insight-active-border, #7a6a58);
+  color: var(--pi-ps-insight-ink, #2f2923);
+}
+
+.pi-ps-structure-row--active:hover {
+  background: var(--pi-ps-insight-active-bg, #f0ebe2);
+  filter: brightness(0.97);
+}
+
+.pi-ps-structure-row-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--pi-ps-insight-muted-ink, #6f665a);
+  background: rgba(47, 41, 35, 0.06);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.pi-ps-structure-row--active .pi-ps-structure-row-badge {
+  color: var(--pi-ps-insight-ink, #2f2923);
+  background: rgba(47, 41, 35, 0.12);
+}
+
+.pi-ps-structure-row-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* ─── Structure Brace SVG overlay ─── */
+
+.pi-ps-structure-brace {
+  pointer-events: none;
+  z-index: 3;
+  /* Transition for subtle fade-in per PA decision */
+  opacity: 1;
+  transition: opacity 0.15s ease-in;
+}
+
+/* .pi-ps-harness-left needs position: relative so the brace
+   absolute positioning resolves against it. The existing rule
+   already has overflow-y: auto — we only add position. */
+.pi-ps-harness-left {
+  position: relative;
+}
+
+/* ─── Breakpoint: hide brace at <=1199px ─── */
+
+@media (max-width: 1199px) {
+  .pi-ps-structure-brace {
+    display: none;
+  }
+}
