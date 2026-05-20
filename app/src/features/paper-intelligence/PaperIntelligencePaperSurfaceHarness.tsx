@@ -128,6 +128,7 @@ import {
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
+import { StructureBraceOverlay, type StructureTarget } from './structureBrace'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -183,6 +184,13 @@ export function PaperIntelligencePaperSurfaceHarness({
    * (insight + evidence are independent teacher views).
    */
   const [activeInsightSection, setActiveInsightSection] = useState<string | null>(null)
+
+  /**
+   * C5b: which paragraph or passage body the Structure Brace targets.
+   * Cleared on resize / breakpoint cross. Coexists with evidence line.
+   * Clicking the same active control clears the brace.
+   */
+  const [activeStructureTarget, setActiveStructureTarget] = useState<StructureTarget | null>(null)
 
   /**
    * C4 PR #52 PA must-fix: left insight rail expansion lock.
@@ -386,6 +394,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       setIsWideDesktop(wideDesktopMql.matches)
       setActiveInsightSection(null)
       setRailLocked(false)
+      setActiveStructureTarget(null)
     }
     if (typeof stackedMql.addEventListener === 'function') {
       stackedMql.addEventListener('change', onChange)
@@ -522,6 +531,21 @@ export function PaperIntelligencePaperSurfaceHarness({
     setActiveInsightSection(null)
   }, [])
 
+  // ─── C5b: structure target handlers ───
+  //
+  // Clicking `篇章` toggles whole-passage target. Clicking `Pn`
+  // toggles paragraph target. Clicking the same active control clears.
+  const handleStructureTarget = useCallback((paperSection: string, mode: 'passage' | 'paragraph', paragraphId?: string): void => {
+    setActiveStructureTarget((prev) => {
+      // Toggle off if same target
+      if (prev && prev.paperSection === paperSection && prev.mode === mode) {
+        if (mode === 'passage') return null
+        if (mode === 'paragraph' && prev.paragraphId === paragraphId) return null
+      }
+      return { paperSection, mode, paragraphId }
+    })
+  }, [])
+
   // ─── C4 PR #52 rail toggle + Esc handlers ───
   const handleToggleRailLock = useCallback((): void => {
     setRailLocked((prev) => !prev)
@@ -623,6 +647,26 @@ export function PaperIntelligencePaperSurfaceHarness({
       behavior: reduced ? 'auto' : 'smooth',
     })
   }, [activeEvidenceId])
+
+  // ─── C5b: scroll structure target into view (instant per PA decision) ───
+  useEffect(() => {
+    if (!activeStructureTarget) return
+    const scroller = leftScrollerRef.current
+    if (!scroller) return
+
+    let el: HTMLElement | null = null
+    if (activeStructureTarget.mode === 'paragraph' && activeStructureTarget.paragraphId) {
+      el = scroller.querySelector<HTMLElement>(
+        `[data-paper-paragraph-id="${cssAttr(activeStructureTarget.paragraphId)}"]`
+      )
+    } else {
+      el = scroller.querySelector<HTMLElement>(
+        `[data-paper-section="${cssAttr(activeStructureTarget.paperSection)}"]`
+      )
+    }
+    if (!el) return
+    el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
+  }, [activeStructureTarget])
 
   // ─── Render ───
   //
@@ -796,6 +840,43 @@ export function PaperIntelligencePaperSurfaceHarness({
                       </button>
                     </div>
                     <HarnessInsightPanelContent reportPassage={activePassage} />
+                    {/* C5b: paragraph structure controls */}
+                    {passageStructures[p.paperSection] && (
+                      <div className="pi-ps-structure-controls" data-c5b-controls="true">
+                        <button
+                          type="button"
+                          className={
+                            activeStructureTarget?.paperSection === p.paperSection &&
+                            activeStructureTarget?.mode === 'passage'
+                              ? 'pi-ps-structure-btn pi-ps-structure-btn--active'
+                              : 'pi-ps-structure-btn'
+                          }
+                          onClick={() => handleStructureTarget(p.paperSection, 'passage')}
+                          aria-pressed={
+                            activeStructureTarget?.paperSection === p.paperSection &&
+                            activeStructureTarget?.mode === 'passage'
+                          }
+                        >
+                          篇章
+                        </button>
+                        {passageStructures[p.paperSection].paragraphs.map((para) => (
+                          <button
+                            key={para.id}
+                            type="button"
+                            className={
+                              activeStructureTarget?.paragraphId === para.id
+                                ? 'pi-ps-structure-btn pi-ps-structure-btn--active'
+                                : 'pi-ps-structure-btn'
+                            }
+                            onClick={() => handleStructureTarget(p.paperSection, 'paragraph', para.id)}
+                            aria-pressed={activeStructureTarget?.paragraphId === para.id}
+                            data-paper-paragraph-id-target={para.id}
+                          >
+                            {para.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -812,6 +893,12 @@ export function PaperIntelligencePaperSurfaceHarness({
             lectureFocus={lectureFocus}
             readingFocusBySection={{}}
             onFocusIntent={handleFocusIntent}
+          />
+          {/* C5b: Structure Brace SVG overlay */}
+          <StructureBraceOverlay
+            target={activeStructureTarget}
+            leftScrollerRef={leftScrollerRef}
+            isStacked={isStackedMode}
           />
         </div>
         <aside
