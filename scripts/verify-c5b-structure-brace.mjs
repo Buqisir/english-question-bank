@@ -207,40 +207,88 @@ assert(
 
 console.log('\n─── C5b: paragraph controls ───\n')
 
-// 9. Paragraph controls render P labels
+// 9. Inline clickable structure rows (replaces bottom remote control strip)
+const structureRowsTsx = readFile('app/src/features/paper-intelligence/insight/HarnessStructureRows.tsx')
+
 assert(
-  harnessTsx.includes('篇章'),
-  'harness renders 篇章 button label'
+  harnessTsx.includes('HarnessStructureRows'),
+  'harness imports and renders HarnessStructureRows'
 )
 
 assert(
-  harnessTsx.includes('para.label'),
-  'harness renders paragraph labels from passageStructure'
+  structureRowsTsx.includes('篇章'),
+  'HarnessStructureRows renders 篇章 row label'
 )
 
 assert(
-  harnessTsx.includes('pi-ps-structure-controls'),
-  'harness uses pi-ps-structure-controls class'
+  structureRowsTsx.includes('para.label') || structureRowsTsx.includes('{para.label}'),
+  'structure rows render paragraph labels from passageStructure'
 )
 
 assert(
-  harnessTsx.includes('pi-ps-structure-btn'),
-  'harness uses pi-ps-structure-btn class'
+  structureRowsTsx.includes('aria-pressed'),
+  'structure rows use aria-pressed for a11y'
 )
 
 assert(
-  harnessCss.includes('.pi-ps-structure-controls'),
-  'CSS defines .pi-ps-structure-controls'
+  structureRowsTsx.includes('pi-ps-structure-row'),
+  'structure rows use pi-ps-structure-row class'
 )
 
 assert(
-  harnessCss.includes('.pi-ps-structure-btn'),
-  'CSS defines .pi-ps-structure-btn'
+  harnessCss.includes('.pi-ps-structure-rows'),
+  'CSS defines .pi-ps-structure-rows container'
 )
 
 assert(
-  harnessCss.includes('.pi-ps-structure-btn--active'),
-  'CSS defines .pi-ps-structure-btn--active'
+  harnessCss.includes('.pi-ps-structure-row'),
+  'CSS defines .pi-ps-structure-row'
+)
+
+assert(
+  harnessCss.includes('.pi-ps-structure-row--active'),
+  'CSS defines .pi-ps-structure-row--active'
+)
+
+// Verify bottom remote-control strip is removed from harness TSX
+assert(
+  !harnessTsx.includes('pi-ps-structure-controls'),
+  'harness TSX no longer renders bottom .pi-ps-structure-controls strip'
+)
+
+assert(
+  !harnessTsx.includes('data-c5b-controls'),
+  'harness TSX no longer renders data-c5b-controls attribute'
+)
+
+// Verify structure rows are real <button> elements
+assert(
+  structureRowsTsx.includes('<button') && structureRowsTsx.includes('type="button"'),
+  'structure rows are real <button> elements for keyboard/a11y'
+)
+
+// Verify no P buttons on collapsed main rail (rows only inside detail panel)
+assert(
+  !harnessTsx.includes('pi-ps-structure-row') || harnessTsx.includes('HarnessStructureRows'),
+  'P buttons are NOT rendered on collapsed main rail (only inside detail via HarnessStructureRows)'
+)
+
+// Verify structure row targets use paragraph ids from passageStructure
+assert(
+  structureRowsTsx.includes('data-paper-paragraph-id-target'),
+  'structure rows carry data-paper-paragraph-id-target for paragraph targeting'
+)
+
+// Verify passage mode row exists
+assert(
+  structureRowsTsx.includes('data-structure-row-mode="passage"'),
+  'structure rows include a passage mode row'
+)
+
+// Verify paragraph mode rows exist
+assert(
+  structureRowsTsx.includes('data-structure-row-mode="paragraph"'),
+  'structure rows include paragraph mode rows'
 )
 
 console.log('\n─── C5b: structure target cleared on resize ───\n')

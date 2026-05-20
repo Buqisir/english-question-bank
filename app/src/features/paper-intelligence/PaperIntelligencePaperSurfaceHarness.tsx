@@ -128,6 +128,7 @@ import {
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { buildInsightChipLabel } from './insight/insightChipLabel'
 import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent'
+import { HarnessStructureRows } from './insight/HarnessStructureRows'
 import { StructureBraceOverlay, type StructureTarget } from './structureBrace'
 import type {
   PaperIntelligenceReport,
@@ -863,43 +864,17 @@ export function PaperIntelligencePaperSurfaceHarness({
                         ×
                       </button>
                     </div>
-                    <HarnessInsightPanelContent reportPassage={activePassage} />
-                    {/* C5b: paragraph structure controls */}
-                    {passageStructures[p.paperSection] && (
-                      <div className="pi-ps-structure-controls" data-c5b-controls="true">
-                        <button
-                          type="button"
-                          className={
-                            activeStructureTarget?.paperSection === p.paperSection &&
-                            activeStructureTarget?.mode === 'passage'
-                              ? 'pi-ps-structure-btn pi-ps-structure-btn--active'
-                              : 'pi-ps-structure-btn'
-                          }
-                          onClick={() => handleStructureTarget(p.paperSection, 'passage')}
-                          aria-pressed={
-                            activeStructureTarget?.paperSection === p.paperSection &&
-                            activeStructureTarget?.mode === 'passage'
-                          }
-                        >
-                          篇章
-                        </button>
-                        {passageStructures[p.paperSection].paragraphs.map((para) => (
-                          <button
-                            key={para.id}
-                            type="button"
-                            className={
-                              activeStructureTarget?.paragraphId === para.id
-                                ? 'pi-ps-structure-btn pi-ps-structure-btn--active'
-                                : 'pi-ps-structure-btn'
-                            }
-                            onClick={() => handleStructureTarget(p.paperSection, 'paragraph', para.id)}
-                            aria-pressed={activeStructureTarget?.paragraphId === para.id}
-                            data-paper-paragraph-id-target={para.id}
-                          >
-                            {para.label}
-                          </button>
-                        ))}
-                      </div>
+                    {/* C5b: inline clickable structure rows replace HarnessInsightPanelContent outline */}
+                    {passageStructures[p.paperSection] ? (
+                      <HarnessStructureRows
+                        paperSection={p.paperSection}
+                        paragraphs={passageStructures[p.paperSection].paragraphs}
+                        passageOutline={activePassage.passageOutline}
+                        activeStructureTarget={activeStructureTarget}
+                        onStructureTarget={handleStructureTarget}
+                      />
+                    ) : (
+                      <HarnessInsightPanelContent reportPassage={activePassage} />
                     )}
                   </div>
                 )}
