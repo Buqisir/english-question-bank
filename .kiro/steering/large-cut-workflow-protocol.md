@@ -1,0 +1,252 @@
+---
+inclusion: auto
+---
+
+# Large cut workflow protocol
+
+Scope: applies to large product, UI, architecture, PaperSurface, Paper
+Intelligence, data-model, and multi-agent cuts in the
+`Buqisir/english-question-bank` repository.
+
+Authoritative rule: large cuts must be paced by risk. The goal is not
+to make agents write code faster; the goal is to protect teacher value,
+PaperSurface readability, repo state truth, and rework cost.
+
+---
+
+## 1. First principles
+
+Optimize for:
+
+- the teacher task being served
+- the A4 paper remaining primary
+- fewer wrong-direction implementation loops
+- all agents reading the same repository state
+- each platform doing the job it is best at
+
+Do not optimize for:
+
+- starting DEV as quickly as possible
+- showing every available AI-generated datum
+- making a UI impressive before it is useful
+- using more agents as a substitute for making a product decision
+
+## 2. Risk tiers
+
+Use the smallest process that covers the risk.
+
+### Small cut
+
+Examples: typo, docs wording, verify-only update, narrow bug with one
+obvious fix.
+
+Default flow:
+
+```text
+Sync -> fix/DEV -> verify -> CR-lite -> RM
+```
+
+Usually no mockup, no Big PA, and no browser QA unless the visible UI
+changes.
+
+### Medium cut
+
+Examples: small interaction, limited CSS behavior, a known UI bug, a
+single harness change with bounded blast radius.
+
+Default flow:
+
+```text
+Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM
+```
+
+Use one quick mockup only when spatial judgment is the core risk.
+
+### Large cut
+
+Examples: PaperSurface layout, rail/drawer/overlay behavior, data model,
+anchor protocol, evidence geometry, import/export flow, or any sequence
+that uses Codex + local PA + Kiro/cloud DEV.
+
+Default flow:
+
+```text
+Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
+-> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA
+-> RM -> Cut Note
+```
+
+## 3. Multi-platform source of truth
+
+The remote GitHub `main` branch and the PR head are the shared truth.
+Agent reports are not truth until verified.
+
+Codex is responsible for local state control:
+
+- fetch latest `main` and PR branches before PA / CR / QA / RM
+- confirm merged PRs are actually present in `main`
+- confirm Kiro-reported commits are actually pushed to GitHub
+- confirm local checkout matches the branch being reviewed
+- confirm working tree cleanliness before merge-sensitive work
+
+Local PA tools such as Antigravity may help with high-level thinking,
+but they must be told to sync and verify the baseline before review.
+
+Cloud DEV tools such as Kiro must start from latest `main`, push their
+branch, open or update a PR, and report PR URL + commit hash. Their
+completion report is a lead, not a source of truth.
+
+## 4. Role split
+
+PM / product pacing:
+
+- grill the user's idea before DEV
+- distinguish current cut from future cut
+- compress PA output into 2-3 PO decisions
+- push back when the product starts drifting into an AI dashboard
+
+PO:
+
+- decides whether the product direction and visual feel are right
+- runs final PO QA after Codex browser QA
+- says "走" before RM merge
+
+Big PA:
+
+- handles architecture and product boundary review before DEV
+- identifies allowed / forbidden files
+- defines static verify and browser QA requirements
+- must not write implementation patches in PA mode
+
+DEV:
+
+- implements the approved prompt
+- must not redesign the product direction silently
+- stops and reports if implementation requires forbidden files or a
+  changed product decision
+
+CR:
+
+- checks whether DEV obeyed the spec
+- finds bugs, scope leaks, missing tests, and behavioral regressions
+- must not quietly redesign the feature during review; if product
+  direction is wrong, stop and route back to PM / PA
+
+QA:
+
+- Codex does first local / in-app browser QA
+- PO then does final user-visible QA
+- static verify does not replace browser QA for user-visible surfaces
+
+RM:
+
+- confirms PR head, mergeability, and clean state
+- merges with the agreed strategy
+- fetches `main` after merge and confirms the merge commit is present
+
+## 5. Grill before visual work
+
+Before important UI work, PM should ask:
+
+- What is the teacher trying to do right now?
+- What breaks if this feature does not exist?
+- Is this helping the paper, or competing with the paper?
+- Is this showing AI ability or serving a teacher workflow?
+- Is this current cut, future cut, or backlog?
+- What are the 2-3 decisions the PO actually needs to make?
+
+If the user cannot state the teacher task in one sentence, do not
+start DEV. Return to problem definition.
+
+## 6. Mockup / Canvas discipline
+
+Use Gemini Canvas, image mockups, or proportional diagrams when visual
+space, interaction feel, or layout trust is the risk.
+
+Mockups are for direction, not production truth.
+
+Default set:
+
+- conservative option
+- recommended option
+- aggressive option or explicit anti-pattern
+
+Hard brake A:
+
+- maximum 2 mockup rounds before decision or problem-definition reset
+
+If two rounds do not converge, stop generating images. The issue is
+not image quality; the product question is unclear.
+
+## 7. Big PA discipline
+
+Use high-reasoning PA for large cuts, especially when the decision
+affects PaperSurface, data contracts, geometry, or future cut
+sequencing.
+
+PA output must end with:
+
+- verdict
+- product principle
+- exact UX / architecture model
+- Must Fix Before DEV
+- Should Watch
+- allowed / forbidden files
+- static verify requirements
+- browser QA matrix
+- whether the DEV prompt is ready
+- at most 3 unresolved PO decisions
+
+Hard brake B:
+
+- if PA leaves more than 3 PO decisions, do not start DEV
+
+More than 3 open decisions means the PA did not converge. Compress or
+rerun PA instead of handing ambiguity to DEV.
+
+## 8. DEV prompt requirements
+
+Large-cut DEV prompts must include:
+
+- sync requirement and required baseline commit / merge commit
+- exact goal and out-of-scope list
+- allowed and forbidden files
+- locked product decisions
+- implementation boundaries
+- verify scripts to run
+- browser QA requirements
+- completion report format
+
+Do not tell DEV to "make it like the image." The image aligns intent;
+the prompt defines the implementation.
+
+## 9. CR and QA discipline
+
+CR should not become a second design session. If the implementation
+exposes a product flaw, stop and route back to PM / PA instead of
+quietly changing the design in review.
+
+Browser QA must include the failure modes that previously hurt the
+product:
+
+- browser zoom 100%
+- browser zoom 90%
+- tight desktop widths
+- stacked / narrow mode when relevant
+- long or last-item targets
+- scroll interactions
+- coexistence with evidence lines / existing overlays
+- no stale or unsynced code
+
+## 10. Cut Note
+
+After a large cut, record a Cut Note. Include:
+
+- what shipped
+- what was cut or moved
+- which wrong assumption was found
+- which rule prevented rework
+- what the next cut is
+
+The Cut Note should preserve why decisions were made, not merely list
+files changed.
