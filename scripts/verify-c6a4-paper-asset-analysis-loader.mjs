@@ -74,6 +74,7 @@ console.log('-- 1. Scope guard --')
 const allowed = new Set([
   'app/src/App.tsx',
   'app/src/concierge/ConciergeGroupCard.tsx',
+  'app/src/concierge/conciergeSearch.ts',
   'app/src/data/sampleQuestionGroups.ts',
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
   'app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts',
@@ -82,6 +83,7 @@ const allowed = new Set([
   'data/sql/seed-v0.sql',
   'scripts/verify-c6a3-reading-analysis-bridge.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
+  'scripts/verify-c6a5-search-entry-e2e.mjs',
 ])
 
 for (const file of changedFiles) {
