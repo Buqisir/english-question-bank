@@ -103,6 +103,27 @@ Hard rule:
 - Do not paste raw verify logs. Summarize script names and pass/fail
   counts.
 
+### Multi-agent DEV protocol
+
+File: `multi-agent-dev-protocol.md`
+
+Use for new Kiro sessions, cloud/local handoffs, dependency install
+decisions, verification, completion reports, and multi-platform PR work.
+
+Hard rule:
+
+- Treat GitHub `main` and PR heads as shared truth; verify branch/head
+  before writing.
+- Codex and Antigravity are local; Kiro is cloud. Cloud agents must not
+  rely on `/Users/...` local absolute paths unless the source is also
+  repo-local or attached.
+- Install dependencies when needed for build/test/browser QA, but do not
+  commit lockfile churn unless dependency changes are in scope.
+- Static verify is not browser QA for user-visible UI changes.
+- Completion reports must include branch, commit, changed files, verify
+  results, browser/build status, forbidden scopes, and local/remote head
+  match after push.
+
 ---
 
 ## PM pushback standard

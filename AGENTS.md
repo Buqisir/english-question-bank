@@ -34,6 +34,13 @@ This repo builds the local-first English question bank workbench.
   `.kiro/steering/cut-workflow-protocol.md`: pick small / medium /
   large process by risk, sync first, and avoid turning small fixes into
   process rituals or large cuts into rushed DEV work.
+- Before non-trivial DEV, CR, QA, dependency, or cloud/local handoff
+  work, read `.kiro/steering/multi-agent-dev-protocol.md`. Do not rely
+  on untracked local absolute paths for cloud work; put required source
+  files in the repo or attach them. If dependencies are missing and the
+  task needs build or browser QA, install them using the repo's package
+  manager, but do not commit lockfile churn unless dependency changes are
+  in scope.
 - For PaperSurface specifically, insight should default to a short
   passage map. Dense diagnostics such as vocabulary load, grammar load,
   evidence difficulty, dot/bar systems, long key-chunk lists, or AI
