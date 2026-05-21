@@ -3237,8 +3237,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   )
   const piOnBackToWorkbench = useCallback(() => {
     // Cut C: in-app return-to-workbench. Three contracts:
-    //   1. Strip ?view=paper-intelligence and ?paperId=… from the URL
-    //      WITHOUT a full page reload — never use window.location.href / reload.
+    //   1. Strip Paper Intelligence route params from the URL WITHOUT a full
+    //      page reload — never use window.location.href / reload.
     //   2. Flip currentPiRoute → { kind: 'none' } so App re-renders the
     //      default workbench; the previously-guarded fetch effects retrigger.
     //   3. Do NOT open the basket drawer, do NOT auto-save the Paper Set.
@@ -3247,8 +3247,9 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
         const url = new URL(window.location.href)
-        url.searchParams.delete('view')
-        url.searchParams.delete('paperId')
+        for (const param of ['view', 'source', 'paperId', 'surface', 'groupId', 'questionId']) {
+          url.searchParams.delete(param)
+        }
         const nextSearch = url.searchParams.toString()
         const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
         window.history.replaceState(window.history.state, '', nextUrl)

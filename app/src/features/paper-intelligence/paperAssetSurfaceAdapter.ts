@@ -376,6 +376,11 @@ function describeTrap(option: OptionAnalysisItem): string {
     case 'unsupportedClaim':
       return trap.explanation
   }
+  return assertNever(trap)
+}
+
+function assertNever(value: never): never {
+  throw new Error(`[C6a-4] unhandled trap diagnosis: ${JSON.stringify(value)}`)
 }
 
 function buildShellReport(input: {
