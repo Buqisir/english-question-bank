@@ -15,9 +15,11 @@ import {
   type QuestionGroupCard,
 } from '../domain/questionBank.ts'
 import {
-  buildReadingAnalysisHref,
   isReadingAnalysisCandidate,
 } from '../features/reading-analysis/readingAnalysisRoute.ts'
+import {
+  buildPaperSurfaceHref,
+} from '../features/paper-intelligence/paperIntelligenceRoute.ts'
 
 const DIFFICULTY_CLASS: Record<Difficulty, string> = {
   low: 'concierge-difficulty-low',
@@ -90,8 +92,18 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   // lives in `readingAnalysisRoute.ts` so the rule (currently
   // `groupType === 'reading' && questionCount > 0`) is not duplicated here.
   const showReadingAnalysisEntry = isReadingAnalysisCandidate(group)
+  // C6a-3: the 阅读解析 entry now targets the PaperSurface analysis
+  // harness instead of the legacy reading-analysis route. Stable IDs:
+  //   paperId  = paper-2024-jslk-english
+  //   groupId  = group-2024-jslk-reading-a
+  //   questionId = q-2024-jslk-021  (first question in Reading A)
+  //   surface  = paper (set by buildPaperSurfaceHref)
   const readingAnalysisHref = showReadingAnalysisEntry
-    ? buildReadingAnalysisHref({ groupId: group.id })
+    ? buildPaperSurfaceHref({
+        paperId: 'paper-2024-jslk-english',
+        groupId: 'group-2024-jslk-reading-a',
+        questionId: 'q-2024-jslk-021',
+      })
     : null
 
   return (

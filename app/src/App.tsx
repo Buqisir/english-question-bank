@@ -3300,6 +3300,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       return (
         <PaperIntelligencePaperSurfaceHarness
           paperId={currentPiRoute.paperId}
+          groupId={currentPiRoute.groupId}
+          questionId={currentPiRoute.questionId}
           onBackToWorkbench={piOnBackToWorkbench}
         />
       )
