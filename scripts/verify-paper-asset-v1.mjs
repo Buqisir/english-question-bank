@@ -380,6 +380,11 @@ if (existsSync(productDocPath)) {
   assert(docContent.includes('sourceLexicalTrap'), 'Product doc mentions sourceLexicalTrap');
   assert(docContent.includes('polarityReversal'), 'Product doc mentions polarityReversal');
   assert(docContent.includes('unsupportedClaim'), 'Product doc mentions unsupportedClaim');
+  assert(docContent.includes('JSON 文件输出标准'), 'Product doc defines external AI JSON file output standard');
+  assert(docContent.includes('首字符必须是 `{`，末字符必须是 `}`'), 'Product doc requires raw JSON object output boundaries');
+  assert(docContent.includes('不得输出顶层 `status`'), 'Product doc forbids top-level status wrapper for analysis files');
+  assert(docContent.includes('信息足够时必须立即生成 JSON 文件正文'), 'Product doc requires immediate JSON output when information is sufficient');
+  assert(docContent.includes('不做题目解析以外的无意义思考'), 'Product doc forbids unrelated deliberation in external AI output');
 }
 
 
@@ -406,6 +411,17 @@ if (existsSync(readingPromptPath)) {
   assert(rp.includes('entityMismatch'), 'Reading prompt includes controlled trap type: entityMismatch');
   assert(rp.includes('unsupportedClaim'), 'Reading prompt includes controlled trap type: unsupportedClaim');
   assert(rp.includes('NOT selectable') || rp.includes('not selectable') || (rp.includes('NOT') && rp.includes('selectable')), 'Reading prompt includes unsupportedClaim non-interactive rule');
+  assert(rp.includes('JSON file output contract'), 'Reading prompt defines JSON file output contract');
+  assert(rp.includes('suitable to save') && rp.includes('reading-choice-analysis-v1.json'), 'Reading prompt frames output as saveable JSON file content');
+  assert(rp.includes('The first character of the response MUST be `{`'), 'Reading prompt requires first character to be raw JSON object start');
+  assert(rp.includes('The final character of the response MUST be `}`'), 'Reading prompt requires final character to be raw JSON object end');
+  assert(rp.includes('If the supplied passage, questions, options, and answerKey are sufficient'), 'Reading prompt defines sufficient-information fast-output condition');
+  assert(rp.includes('MUST generate the JSON file immediately'), 'Reading prompt requires immediate generation when sufficient');
+  assert(rp.includes('MUST NOT output reasoning steps'), 'Reading prompt forbids outputting reasoning steps');
+  assert(rp.includes('**DO NOT** output `status`'), 'Reading prompt forbids top-level status wrapper');
+  assert(rp.includes('**DO NOT** output a top-level `analysis` wrapper'), 'Reading prompt forbids top-level analysis wrapper');
+  assertNot(rp.includes('"status": "ok"'), 'Reading prompt no longer includes old status ok wrapper');
+  assertNot(rp.includes('"status": "failed"'), 'Reading prompt no longer includes old status failed wrapper');
 }
 
 
