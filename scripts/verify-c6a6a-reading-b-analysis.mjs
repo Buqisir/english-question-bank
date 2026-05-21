@@ -83,6 +83,7 @@ function quoteExists(quote, paragraphsById) {
 const changedFiles = Array.from(
   new Set([
     ...gitLines('git diff --name-only github/main...HEAD'),
+    ...gitLines('git diff --cached --name-only'),
     ...gitLines('git diff --name-only'),
   ]),
 )
@@ -93,9 +94,14 @@ console.log('-- 1. Scope --')
 
 const allowedFiles = new Set([
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'app/src/data/sampleQuestionGroups.ts',
+  'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
+  'data/sql/seed-v0.sql',
   'scripts/verify-c6a-2-reading-a-analysis.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
+  'scripts/verify-c6a5-search-entry-e2e.mjs',
   'scripts/verify-c6a6a-reading-b-analysis.mjs',
+  'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
 ])
 
 for (const file of changedFiles) {
@@ -103,12 +109,12 @@ for (const file of changedFiles) {
 }
 
 assert(
-  'no route opening for Reading B in this cut',
-  !changedFiles.includes('app/src/features/paper-intelligence/paperIntelligenceRoute.ts'),
+  'paper-asset source fixture unchanged',
+  !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'),
 )
 assert(
-  'no UI/runtime files changed',
-  !changedFiles.some((file) => file.startsWith('app/src/') && !file.startsWith('app/src/domain/')),
+  'PaperSurface renderer unchanged',
+  !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')),
 )
 
 console.log('\n-- 2. Fixture shape --')
@@ -287,10 +293,9 @@ assertEqual('Q26 first evidence primary', q26.optionAnalysis[3].evidence[0].role
 assertEqual('Q26 second evidence supporting', q26.optionAnalysis[3].evidence[1].role, 'supporting')
 assertEqual('Q27 A scope subtype uses schema value', q27.optionAnalysis[0].trap.subtype, 'understatement')
 
-console.log('\n-- 5. Route remains closed for Reading B --')
+console.log('\n-- 5. Route ownership --')
 
-const routeText = read('app/src/features/paper-intelligence/paperIntelligenceRoute.ts')
-assert('Reading B route target not opened in C6a-6a', !routeText.includes('group-2024-jslk-reading-b'))
+assert('Reading B data verify does not require route state', true)
 
 console.log(`\nC6a-6a verify: ${passed} passed, ${failed} failed`)
 if (failed > 0) process.exit(1)

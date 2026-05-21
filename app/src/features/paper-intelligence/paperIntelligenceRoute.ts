@@ -169,6 +169,12 @@ const PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID: Record<
     groupId: 'group-2024-jslk-reading-a',
     questionId: 'q-2024-jslk-021',
   },
+  'group-2024-jslk-reading-b': {
+    paperId: 'paper-2024-jslk-english',
+    source: 'paper-asset',
+    groupId: 'group-2024-jslk-reading-b',
+    questionId: 'q-2024-jslk-024',
+  },
 }
 
 export function buildPaperSurfaceAnalysisHrefForGroupId(

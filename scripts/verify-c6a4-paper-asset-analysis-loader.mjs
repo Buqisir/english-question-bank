@@ -61,6 +61,7 @@ function gitLines(command) {
 const changedFiles = Array.from(
   new Set([
     ...gitLines('git diff --name-only github/main...HEAD'),
+    ...gitLines('git diff --cached --name-only'),
     ...gitLines('git diff --name-only'),
   ]),
 )
@@ -86,6 +87,7 @@ const allowed = new Set([
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
   'scripts/verify-c6a6a-reading-b-analysis.mjs',
+  'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 
