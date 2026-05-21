@@ -4,6 +4,7 @@ INSERT OR REPLACE INTO sources (id, source_type, year, region, paper_name, secti
 VALUES
   ('src-2023-n1-b', 'real_exam', 2023, '新课标 I', '全国高考', '阅读理解 B', 'V0 示例来源，只保存题库元数据，不复制原卷正文。'),
   ('src-2024-jslk-reading-a', 'real_exam', 2024, '九省联考', '高考综合改革适应性测试', '阅读理解 A', 'C6a-4 入口样本：题面与解析来自 paper-asset-v1。'),
+  ('src-2024-jslk-reading-b', 'real_exam', 2024, '九省联考', '高考综合改革适应性测试', '阅读理解 B', 'C6a-6b 入口样本：题面与解析来自 paper-asset-v1。'),
   ('src-2024-zj-jan-b', 'real_exam', 2024, '浙江', '1月首考', '阅读理解 B', 'V0 示例来源，只保存题库元数据，不复制原卷正文。'),
   ('src-2025-n1-b', 'real_exam', 2025, '全国 I', '全国高考', '阅读理解 B', 'V0 示例来源，只保存题库元数据，不复制原卷正文。'),
   ('src-2025-zj-body-cloze', 'mock_exam', 2025, '浙江', '主题专项', '完形填空', '由 2025 浙江 1月 B 主题转化的训练样例。'),
@@ -22,6 +23,18 @@ VALUES
     NULL,
     'medium',
     'C6a-4 paper-asset Reading A 入口。'
+  ),
+  (
+    'passage-2024-jslk-reading-b',
+    'src-2024-jslk-reading-b',
+    'Parrots are prey animals',
+    '见 app/public/paper-assets/paper-2024-jslk-english/paper-asset.json。C6a-6b 中题库只保存入口元数据，PaperSurface 从 paper-asset 读取正式题面。',
+    '说明鹦鹉作为被捕食动物的本能反应如何影响家庭行为，并给出饲养建议。',
+    '人与自然',
+    '说明文',
+    NULL,
+    'medium',
+    'C6a-6b paper-asset Reading B 入口。'
   ),
   (
     'passage-2023-john-todd',
@@ -88,6 +101,7 @@ INSERT OR REPLACE INTO question_groups (id, passage_id, group_type, title, instr
 VALUES
   ('g-2023-n1-b', 'passage-2023-john-todd', 'reading', 'John Todd 与 eco-machine 污染治理', 'Read the passage and answer the questions.', 1, 2.5, 'medium', ''),
   ('group-2024-jslk-reading-a', 'passage-2024-jslk-reading-a', 'reading', '2024九省联考 阅读 A 黄石公园海报展', 'Read the passage and answer the questions.', 1, 2.5, 'medium', 'C6a-4: 阅读解析进入 source=paper-asset PaperSurface。'),
+  ('group-2024-jslk-reading-b', 'passage-2024-jslk-reading-b', 'reading', '2024九省联考 阅读 B 鹦鹉本能与饲养建议', 'Read the passage and answer the questions.', 2, 2.5, 'medium', 'C6a-6b: 阅读解析进入 source=paper-asset PaperSurface。'),
   ('g-2024-zj-jan-b', 'passage-2024-phone-box', 'reading', '旧电话亭变成社区小图书馆', 'Read the passage and answer the questions.', 1, 2.5, 'low', ''),
   ('g-2025-n1-b', 'passage-2025-writing-teacher', 'reading', '写作教师重新设计写作任务', 'Read the passage and answer the questions.', 1, 2.5, 'medium', ''),
   ('g-mock-cloze-family', 'passage-2025-body-image', 'cloze', '家庭饮食规训与儿童身体观', 'Choose the best answer for each blank.', 1, 1, 'high', ''),
@@ -99,6 +113,10 @@ VALUES
   ('q-2024-jslk-021', 'group-2024-jslk-reading-a', '21', '细节理解', 'How long will the exhibition "Wonderland Illustrated" last?', 'C. Four months.', 'C6a-4：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 1, ''),
   ('q-2024-jslk-022', 'group-2024-jslk-reading-a', '22', '细节理解', 'What is a purpose of the exhibition?', 'C. To mark the anniversary of a national park.', 'C6a-4：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 2, ''),
   ('q-2024-jslk-023', 'group-2024-jslk-reading-a', '23', '细节理解', 'What do we know about the 1904 poster Henry Wellge designed?', 'A. It is rare in the world.', 'C6a-4：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 3, ''),
+  ('q-2024-jslk-024', 'group-2024-jslk-reading-b', '24', '细节理解', 'What is important for parrots to better survive from attacks in the wild?', 'A. Living in a group.', 'C6a-6b：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 1, ''),
+  ('q-2024-jslk-025', 'group-2024-jslk-reading-b', '25', '细节理解', 'What is parrots'' first response to an immediate risk?', 'B. To get away.', 'C6a-6b：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 2, ''),
+  ('q-2024-jslk-026', 'group-2024-jslk-reading-b', '26', '细节推断', 'Why would a balloon frighten a parrot?', 'D. It may move around quickly.', 'C6a-6b：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 3, ''),
+  ('q-2024-jslk-027', 'group-2024-jslk-reading-b', '27', '写作目的', 'What is the author''s purpose of writing the text?', 'B. To give advice on raising a parrot.', 'C6a-6b：正式解析见 paper-asset reviewed analysis JSON。', 'medium', 2.5, 4, ''),
   ('q-2024-phone-box-1', 'g-2024-zj-jan-b', '1', '细节理解', 'What did the phone box mean to the writer at first?', 'It was a source of timely help.', 'V0 示例解析：该题用于列表命中预览，正式解析后续录入。', 'low', 2.5, 1, ''),
   ('q-2025-writing-teacher-1', 'g-2025-n1-b', '1', '推理判断', 'Why did the teacher change the writing task?', 'To connect writing with lived experience.', 'V0 示例解析：该题用于列表命中预览，正式解析后续录入。', 'medium', 2.5, 1, ''),
   ('q-2025-body-image-1', 'g-mock-cloze-family', '1', '完形语义', 'The mother chose to step back and let the child notice hunger and fullness.', '自主选择与边界感相关。', 'V0 示例解析：该题用于列表命中预览，正式解析后续录入。', 'high', 1, 1, ''),

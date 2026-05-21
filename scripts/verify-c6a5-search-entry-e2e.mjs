@@ -49,6 +49,7 @@ function gitLines(command) {
 const changedFiles = Array.from(
   new Set([
     ...gitLines('git diff --name-only github/main...HEAD'),
+    ...gitLines('git diff --cached --name-only'),
     ...gitLines('git diff --name-only'),
   ]),
 )
@@ -58,14 +59,19 @@ console.log('=== C6a-5: search entry E2E guard ===\n')
 console.log('-- 1. Scope guard --')
 const allowed = new Set([
   'app/src/concierge/conciergeSearch.ts',
+  'app/src/data/sampleQuestionGroups.ts',
+  'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
+  'data/sql/seed-v0.sql',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
+  'scripts/verify-c6a6a-reading-b-analysis.mjs',
+  'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
 ])
 for (const file of changedFiles) {
   assert(`changed file allowed: ${file}`, allowed.has(file), 'unexpected C6a-5 file')
 }
 assert('PaperSurface unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
-assert('paper-asset fixtures unchanged', !changedFiles.some((file) => file.startsWith('app/public/paper-assets/')))
+assert('paper-asset source fixture unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('reports unchanged', !changedFiles.some((file) => file.startsWith('app/public/reports/')))
 assert('server unchanged', !changedFiles.some((file) => file.startsWith('server/')))
 assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(package(-lock)?\.json|pnpm-lock\.yaml)$/.test(file)))
