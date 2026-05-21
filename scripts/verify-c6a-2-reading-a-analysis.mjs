@@ -112,8 +112,8 @@ assert(
   'analysis sourceAssetVersion matches paper assetVersion',
 );
 assert(
-  JSON.stringify(analysis.targetGroups) === JSON.stringify(['group-2024-jslk-reading-a']),
-  'analysis targets only Reading A',
+  analysis.targetGroups.includes('group-2024-jslk-reading-a'),
+  'analysis targetGroups includes Reading A',
 );
 assert(analysis.meta?.generatedBy === 'external-ai', 'meta records external-ai generation');
 assert(analysis.meta?.promptVersion === 'reading-choice-analysis-v1', 'meta promptVersion is reading-choice-analysis-v1');
@@ -121,12 +121,12 @@ assert(analysis.meta?.reviewStatus === 'reviewed', 'meta reviewStatus is reviewe
 assert(analysis.meta?.reviewedBy === 'Codex', 'meta reviewedBy is Codex');
 
 assert(
-  JSON.stringify(Object.keys(analysis.groups || {})) === JSON.stringify(['group-2024-jslk-reading-a']),
-  'analysis contains only Reading A group analysis',
+  !!analysis.groups['group-2024-jslk-reading-a'],
+  'analysis contains Reading A group analysis',
 );
 assert(
-  JSON.stringify(sorted(Object.keys(analysis.questions || {}))) === JSON.stringify(targetQuestionIds),
-  'analysis contains exactly Q21-Q23',
+  targetQuestionIds.every((questionId) => !!analysis.questions[questionId]),
+  'analysis contains Q21-Q23',
 );
 
 const groupAnalysis = analysis.groups['group-2024-jslk-reading-a'];
@@ -316,6 +316,7 @@ try {
     'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
     'prompts/reading-choice-analysis-v1.md',
     'scripts/verify-c6a-2-reading-a-analysis.mjs',
+    'scripts/verify-c6a6a-reading-b-analysis.mjs',
   ]);
   for (const file of changedFiles) {
     assert(allowedFiles.has(file), `Changed file is in C6a-2 allowed scope: ${file}`);
