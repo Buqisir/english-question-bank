@@ -212,6 +212,9 @@ assert(
 assert('harness renders paper-asset analysis panel', harness.includes('PaperAssetAnalysisPanel'))
 assert('harness has 解析未发布 empty state', harness.includes('解析未发布'))
 assert('harness defaults paper-asset route to first question when groupId present', harness.includes('paperAssetModel.defaultQuestionId'))
+assert('back-to-workbench strips source route param', app.includes("'source'"))
+assert('back-to-workbench strips groupId route param', app.includes("'groupId'"))
+assert('back-to-workbench strips questionId route param', app.includes("'questionId'"))
 
 assert('adapter exports buildPaperAssetSurfaceModel', adapter.includes('buildPaperAssetSurfaceModel'))
 assert('adapter accepts groupId and reads asset.content.groups[groupId]', adapter.includes('asset.content.groups[groupId]'))
@@ -220,6 +223,10 @@ assert('adapter builds neutral PaperSurface questions', adapter.includes('PaperQ
 assert('adapter builds neutral PaperSurface evidence', adapter.includes('PaperEvidence[]'))
 assert('adapter uses reviewed optionAnalysis', adapter.includes('optionAnalysis'))
 assert('adapter maps trap labels for display', adapter.includes('原文词钩干扰') && adapter.includes('黑白颠倒'))
+assert(
+  'adapter has exhaustive trap diagnosis guard',
+  adapter.includes('function assertNever') && adapter.includes('return assertNever(trap)'),
+)
 assert(
   'adapter has no fetch/router/DOM side effects',
   !/\bfetch\s*\(|window\.|document\.|localStorage|location\./.test(adapter),
