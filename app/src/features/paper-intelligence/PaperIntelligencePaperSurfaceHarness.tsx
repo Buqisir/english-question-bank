@@ -146,6 +146,10 @@ import './paperIntelligencePaperSurfaceHarness.css'
 
 type Props = {
   paperId: string | null
+  /** C6a-3: optional group to focus on load (from concierge entry URL). */
+  groupId?: string | null
+  /** C6a-3: optional question to pre-select on load (from concierge entry URL). */
+  questionId?: string | null
   onBackToWorkbench: () => void
 }
 
@@ -164,6 +168,8 @@ function cssAttr(value: string): string {
 
 export function PaperIntelligencePaperSurfaceHarness({
   paperId,
+  groupId: initialGroupId,
+  questionId: initialQuestionId,
   onBackToWorkbench,
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
@@ -397,6 +403,53 @@ export function PaperIntelligencePaperSurfaceHarness({
       window.removeEventListener('resize', onResize)
     }
   }, [])
+
+  // ─── C6a-3: pre-select initial question from URL params ───
+  //
+  // When the concierge entry passes a questionId via the URL, we fire a
+  // synthetic 'request-lecture-focus' on the first render where the report
+  // has loaded. The ref guard ensures it fires at most once per mount so
+  // subsequent question selections by the teacher are not overridden.
+  //
+  // The questionId may be in paper-asset stable format (e.g. q-2024-jslk-021)
+  // or PI adapter format (e.g. A-21). We check both: direct match against
+  // adapter-derived IDs (${paperSection}-${questionNo}), and also check if
+  // any question's questionNo appears at the end of the URL questionId
+  // (for paper-asset IDs like q-2024-jslk-021 where "021" → questionNo "21").
+  const initialQuestionAppliedRef = useRef(false)
+  useEffect(() => {
+    if (initialQuestionAppliedRef.current) return
+    if (!report) return
+    if (!initialQuestionId) return
+    // Try to resolve the initialQuestionId to a harness-internal question ID.
+    // Harness IDs are `${paperSection}-${questionNo}`.
+    let resolvedId: string | null = null
+    for (const p of report.passages || []) {
+      if (initialGroupId && p.questionGroupId !== initialGroupId) continue
+      for (const q of p.questions || []) {
+        const derivedId = `${p.paperSection}-${q.questionNo}`
+        if (derivedId === initialQuestionId) {
+          resolvedId = derivedId
+          break
+        }
+        // Paper-asset stable IDs end with the zero-padded question number.
+        // e.g. q-2024-jslk-021 → questionNo "21"
+        const rawNo = String(q.questionNo || '')
+        if (rawNo && initialQuestionId.endsWith(rawNo.padStart(3, '0'))) {
+          resolvedId = derivedId
+          break
+        }
+        if (rawNo && initialQuestionId.endsWith(rawNo)) {
+          resolvedId = derivedId
+          break
+        }
+      }
+      if (resolvedId) break
+    }
+    if (!resolvedId) return
+    initialQuestionAppliedRef.current = true
+    dispatchHost({ type: 'request-lecture-focus', questionId: resolvedId })
+  }, [report, initialGroupId, initialQuestionId])
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {

@@ -56,6 +56,18 @@ export type PaperIntelligenceRouteMatch =
        * `surface=print`) collapse to `'default'`.
        */
       surface: PaperIntelligenceSurface
+      /**
+       * Optional group identifier carried in the URL. Used by the
+       * concierge entry (C6a-3) so the PaperSurface harness can focus
+       * the intended passage group on load.
+       */
+      groupId: string | null
+      /**
+       * Optional question identifier carried in the URL. Used by the
+       * concierge entry (C6a-3) so the PaperSurface harness can
+       * pre-select the intended question on load.
+       */
+      questionId: string | null
     }
 
 export type PaperIntelligenceLocationLike = {
@@ -76,5 +88,62 @@ export function parsePaperIntelligenceRoute(
   const paperId = params.get('paperId')?.trim() || null
   const rawSurface = params.get('surface')?.trim().toLowerCase() || ''
   const surface: PaperIntelligenceSurface = rawSurface === 'paper' ? 'paper' : 'default'
-  return { kind: 'paper-intelligence', paperId, surface }
+  const groupId = params.get('groupId')?.trim() || null
+  const questionId = params.get('questionId')?.trim() || null
+  return { kind: 'paper-intelligence', paperId, surface, groupId, questionId }
+}
+
+/* ─────────────────────────── href builder ────────────────────────────── */
+
+/**
+ * Build a canonical paper-intelligence PaperSurface URL for the concierge
+ * entry (C6a-3). Always sets `surface=paper` since the concierge 阅读解析
+ * entry always targets the PaperSurface harness, never the default PI
+ * preview. Optional `groupId` / `questionId` are included when provided
+ * so the harness can pre-select the intended passage and question.
+ */
+export type BuildPaperSurfaceHrefArgs = {
+  paperId: string
+  groupId?: string | null
+  questionId?: string | null
+}
+
+export function buildPaperSurfaceHref(args: BuildPaperSurfaceHrefArgs): string {
+  const params = new URLSearchParams()
+  params.set('view', 'paper-intelligence')
+  params.set('paperId', args.paperId)
+  params.set('surface', 'paper')
+  if (args.groupId) {
+    params.set('groupId', args.groupId)
+  }
+  if (args.questionId) {
+    params.set('questionId', args.questionId)
+  }
+  return `?${params.toString()}`
+}
+
+/**
+ * C6a-3 bridge targets for concierge 「阅读解析」 entries.
+ *
+ * This intentionally maps only groups backed by an existing
+ * `app/public/reports/paper-intelligence/<paperId>/report.json` fixture.
+ * The newer paper-asset-v1 JSON is not yet a PaperSurface data source, so
+ * routing concierge cards to paper-asset ids would open an error page.
+ */
+const PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID: Record<
+  string,
+  Required<BuildPaperSurfaceHrefArgs>
+> = {
+  'g-2024-xkb1-a': {
+    paperId: 'paper-2024-xkb1-reading',
+    groupId: 'g-2024-xkb1-a',
+    questionId: 'A-21',
+  },
+}
+
+export function buildPaperSurfaceAnalysisHrefForGroupId(
+  groupId: string | null | undefined,
+): string | null {
+  const target = groupId ? PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID[groupId] : undefined
+  return target ? buildPaperSurfaceHref(target) : null
 }

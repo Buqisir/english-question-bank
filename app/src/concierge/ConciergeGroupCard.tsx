@@ -15,9 +15,11 @@ import {
   type QuestionGroupCard,
 } from '../domain/questionBank.ts'
 import {
-  buildReadingAnalysisHref,
   isReadingAnalysisCandidate,
 } from '../features/reading-analysis/readingAnalysisRoute.ts'
+import {
+  buildPaperSurfaceAnalysisHrefForGroupId,
+} from '../features/paper-intelligence/paperIntelligenceRoute.ts'
 
 const DIFFICULTY_CLASS: Record<Difficulty, string> = {
   low: 'concierge-difficulty-low',
@@ -90,8 +92,11 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   // lives in `readingAnalysisRoute.ts` so the rule (currently
   // `groupType === 'reading' && questionCount > 0`) is not duplicated here.
   const showReadingAnalysisEntry = isReadingAnalysisCandidate(group)
+  // C6a-3: only groups backed by an existing PaperSurface report get the
+  // bridge entry. Unsupported reading groups stay quiet instead of sending
+  // teachers to an unrelated paper or an error page.
   const readingAnalysisHref = showReadingAnalysisEntry
-    ? buildReadingAnalysisHref({ groupId: group.id })
+    ? buildPaperSurfaceAnalysisHrefForGroupId(group.id)
     : null
 
   return (
