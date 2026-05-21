@@ -11,46 +11,72 @@ Produce clean reading-choice analysis for 阅读理解第一节 A-D groups.
 
 ## Output
 
-### Success output:
+### JSON file output contract
+
+The required output is the complete contents of a JSON file, suitable to save
+directly as `reading-choice-analysis-v1.json`.
+
+This is a reviewed-analysis data file generation task, not a chat answer, not a
+research report, and not a free-form explanation.
+
+The model should reason carefully internally about:
+
+- answer evidence
+- option traps
+- quote exactness
+- location/paraphrase relations
+- schema compliance
+
+But it MUST NOT output reasoning steps, planning text, markdown, comments, or
+human-facing explanation outside the JSON file.
+
+If the supplied passage, questions, options, and answerKey are sufficient, the
+model MUST generate the JSON file immediately. Do not spend time on unrelated
+thinking, task restatement, process narration, or confirmation.
+
+The first character of the response MUST be `{`.
+The final character of the response MUST be `}`.
+Do not write a filename heading.
+Do not write "Here is the JSON".
+Do not wrap the JSON in a ```json code fence.
+
+### Required top-level shape
 
 ```json
 {
-  "status": "ok",
-  "analysis": {
-    "meta": {
-      "generatedBy": "external-ai",
-      "model": "...",
-      "promptVersion": "reading-choice-analysis-v1",
-      "reviewedBy": "...",
-      "reviewedAt": "..."
-    },
-    "groups": { ... },
-    "questions": { ... }
-  }
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-...",
+  "sourceAssetVersion": 1,
+  "targetGroups": ["group-..."],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "...",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "...",
+    "reviewedAt": "..."
+  },
+  "groups": { "...": {} },
+  "questions": { "...": {} }
 }
 ```
 
-### Failure output (when answerKey conflicts with passage evidence):
-
-```json
-{
-  "status": "failed",
-  "errors": [
-    { "questionId": "...", "reason": "..." }
-  ]
-}
-```
-
-**Failed output CANNOT be imported.**
+This file is an import candidate only after human/code review. Dirty JSON,
+schema-drift JSON, or JSON with unmatched quotes must not be imported.
 
 ## STRICTLY FORBIDDEN
 
+- **DO NOT** output `status` — this is a JSON file, not a chat wrapper
+- **DO NOT** output a top-level `analysis` wrapper
 - **DO NOT** output `correctAnswer` — `answerKey` is the only answer authority
 - **DO NOT** generate content for non-reading question types
 - **DO NOT** include `unknown` or `reviewFlags`
 - **DO NOT** include markdown outside JSON
+- **DO NOT** include code fences, comments, headings, or filenames outside JSON
 - **DO NOT** invent paragraph IDs or change paragraph text
-- **DO NOT** guess answers — if answerKey conflicts with evidence, output failure
+- **DO NOT** output analysis reasoning steps
+- **DO NOT** restate the task or explain what you are about to do
+- **DO NOT** guess answers — answerKey is authoritative, but every correct option still needs exact evidence
 
 ---
 
@@ -383,10 +409,14 @@ Rules:
 
 Output must:
 - Parse as valid JSON
-- Have `status: "ok"` or `status: "failed"`
-- If `ok`: include complete analysis for all target questions
+- Be complete JSON file content with first character `{` and final character `}`
+- Have top-level `schemaVersion: "reading-choice-analysis-v1"`
+- Have top-level `paperId`, `sourceAssetVersion`, `targetGroups`, `meta`, `groups`, and `questions`
+- Have NO top-level `status`
+- Have NO top-level `analysis` wrapper
 - Have NO `correctAnswer` field anywhere
 - Have NO `unknown` or `reviewFlags`
+- Have NO markdown, code fence, comments, filename heading, or explanatory prose
 - Have exactly one `status: "correct"` option per question matching answerKey
 - All `quote` fields must exactly match content paragraphs
 - All `paragraphId` references must exist in content
@@ -394,3 +424,4 @@ Output must:
 - `unsupportedClaim` must not have `sourceQuote` or `trapEvidence`
 - Every wrong option must have trap diagnosis
 - Every question must have `stemTranslationZh` and `locationParaphrases`
+- If source information is sufficient, output immediately without unrelated deliberation text
