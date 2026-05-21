@@ -3,7 +3,8 @@
   "paperId": "paper-2024-jslk-english",
   "sourceAssetVersion": 1,
   "targetGroups": [
-    "group-2024-jslk-reading-a"
+    "group-2024-jslk-reading-a",
+    "group-2024-jslk-reading-b"
   ],
   "meta": {
     "generatedBy": "external-ai",
@@ -43,6 +44,39 @@
             "paragraphId": "para-2024-jslk-reading-a-p4",
             "summary": "本段介绍 Henry Wellge 于1904年创作的“Yellowstone National Park”海报，说明其现由 UW Libraries 收藏，曾用于广告宣传，并因保存下来的数量极少而独特。",
             "function": "聚焦具体展品，说明1904年海报的作者、用途、收藏归属和稀有性。"
+          }
+        ]
+      }
+    },
+    "group-2024-jslk-reading-b": {
+      "overview": "文章说明鹦鹉作为被捕食动物的本能反应会影响其家庭行为，并给出饲养中减少惊吓、提高适应性的建议。",
+      "discourseStructure": {
+        "summary": "全文先说明鹦鹉的被捕食者身份及其对家庭行为的影响，再介绍群居、逃跑和反击等生存机制，最后转向家庭饲养建议，说明应避免突然动作并通过安全的新体验提高鹦鹉适应性。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jslk-reading-b-p1",
+            "summary": "鹦鹉是被捕食动物，这一身份深刻影响其在家中的行为。",
+            "function": "提出全文核心背景，说明野外生存身份与家庭行为之间的关联。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-b-p2",
+            "summary": "鹦鹉在地面觅食时更易受伤，群体成员关系有助于安全和生存。",
+            "function": "解释群居对鹦鹉抵御捕食者攻击的重要作用，并列举常见捕食者。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-b-p3",
+            "summary": "鹦鹉会本能地警惕危险，首选逃飞，无法逃飞时才会反击。",
+            "function": "说明鹦鹉面对即时风险时的基本反应顺序。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-b-p4",
+            "summary": "鹦鹉对来自上方和后方的快速动作尤其敏感，家庭物品也可能引发强烈恐惧。",
+            "function": "把野外对天敌的本能反应联系到家庭环境，并提出避免突然动作的建议。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-b-p5",
+            "summary": "鹦鹉常害怕新的家庭物品或陌生人，应从小给予安全的新体验以提高适应性。",
+            "function": "进一步提供饲养建议，强调通过多样化经历培养鹦鹉的灵活性和适应能力。"
           }
         ]
       }
@@ -344,6 +378,343 @@
           "targetParagraphId": "para-2024-jslk-reading-a-p4",
           "relationType": "paraphrase",
           "note": "rare 对应 very few have survived，说明存世数量很少。"
+        }
+      ]
+    },
+    "q-2024-jslk-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查鹦鹉在野外更好地躲避捕食者攻击并提高生存机会的重要因素。",
+      "stemTranslationZh": "什么对鹦鹉在野外更好地从攻击中存活下来很重要？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "群居生活。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-b-p2",
+              "quote": "membership in a group plays an important function in ensuring their safety and improving their chances of survival from attacks by predators",
+              "anchor": "membership in a group"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "长出漂亮的羽毛。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Growing beautiful feathers.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在地面觅食。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "secondaryType": "sourceLexicalTrap",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Parrots are most easily hurt when feeding on the ground",
+            "sourceHighlight": "most easily hurt",
+            "optionText": "Feeding on the ground.",
+            "optionHighlight": "Feeding on the ground",
+            "explanation": "原文说鹦鹉在地面觅食时最容易受伤，选项却把它说成有助于存活的因素，意义相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p2",
+              "quote": "Parrots are most easily hurt when feeding on the ground",
+              "anchor": "feeding on the ground"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "避免在夜间出来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "secondaryType": "unsupportedClaim",
+            "sourceText": "night",
+            "optionText": "night",
+            "matchType": "exact",
+            "relationNote": "选项利用原文中的 night 误导，但原文只是说有些捕食者夜间捕猎，并未说鹦鹉通过避免夜间出来提高生存机会。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p2",
+              "quote": "Some predators make attacks only during the day while others hunt in the night.",
+              "anchor": "in the night"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "better survive from attacks",
+          "sourceRole": "stem",
+          "targetText": "improving their chances of survival from attacks by predators",
+          "targetParagraphId": "para-2024-jslk-reading-b-p2",
+          "relationType": "paraphrase",
+          "note": "题干中的更好地从攻击中存活，对应原文中提高从捕食者攻击中存活的机会。"
+        },
+        {
+          "sourceText": "Living in a group.",
+          "sourceRole": "correctOption",
+          "targetText": "membership in a group",
+          "targetParagraphId": "para-2024-jslk-reading-b-p2",
+          "relationType": "paraphrase",
+          "note": "正确选项的群居生活对应原文中的群体成员关系。"
+        }
+      ]
+    },
+    "q-2024-jslk-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查鹦鹉面对即时危险时的第一反应。",
+      "stemTranslationZh": "鹦鹉对即时风险的第一反应是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "反击。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "Their first choice is to take flight.However,if this is not possible,they will fight with their powerful beaks to defend themselves.",
+            "sourceHighlight": "However,if this is not possible",
+            "optionText": "To attack back.",
+            "optionHighlight": "attack back",
+            "explanation": "原文说首先选择飞走，只有无法飞走时才会反击，选项把后续反应误当成第一反应。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p3",
+              "quote": "Their first choice is to take flight.However,if this is not possible,they will fight with their powerful beaks to defend themselves.",
+              "anchor": "first choice"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "逃走。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-b-p3",
+              "quote": "Their first choice is to take flight.",
+              "anchor": "take flight"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保护幼鸟。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To protect the young.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "装死。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To play dead.",
+            "explanation": "原文未提及该信息。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "first response",
+          "sourceRole": "stem",
+          "targetText": "Their first choice",
+          "targetParagraphId": "para-2024-jslk-reading-b-p3",
+          "relationType": "paraphrase",
+          "note": "题干中的第一反应对应原文中的第一选择。"
+        },
+        {
+          "sourceText": "To get away.",
+          "sourceRole": "correctOption",
+          "targetText": "take flight",
+          "targetParagraphId": "para-2024-jslk-reading-b-p3",
+          "relationType": "paraphrase",
+          "note": "选项中的逃走对应原文中的飞走。"
+        }
+      ]
+    },
+    "q-2024-jslk-026": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查气球会让鹦鹉害怕的原因，需要结合鹦鹉对快速动作敏感以及气球可能被视为鹰来判断。",
+      "stemTranslationZh": "为什么气球会吓到鹦鹉？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它可能会突然爆炸。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It may explode suddenly.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它可能形状奇怪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It may be in a strange shape.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它可能颜色强烈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It may have a strong color.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它可能会快速移动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-b-p4",
+              "quote": "parrots are especially reactive to quick movements from above and behind",
+              "anchor": "quick movements"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-b-p4",
+              "quote": "a balloon may represent a hawk",
+              "anchor": "balloon"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "a balloon",
+          "sourceRole": "stem",
+          "targetText": "a balloon may represent a hawk",
+          "targetParagraphId": "para-2024-jslk-reading-b-p4",
+          "relationType": "locationCue",
+          "note": "题干中的气球可直接定位到原文气球可能代表鹰的例子。"
+        },
+        {
+          "sourceText": "move around quickly",
+          "sourceRole": "correctOption",
+          "targetText": "quick movements from above and behind",
+          "targetParagraphId": "para-2024-jslk-reading-b-p4",
+          "relationType": "paraphrase",
+          "note": "正确选项中的快速移动对应原文中来自上方和后方的快速动作。"
+        }
+      ]
+    },
+    "q-2024-jslk-027": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者写作目的，即通过解释鹦鹉本能反应为家庭饲养提供建议。",
+      "stemTranslationZh": "作者写这篇文章的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "解释野生鹦鹉的行为。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "This one factor influences parrots’ behavior in your house more than any other.",
+            "sourceHighlight": "in your house",
+            "optionText": "To explain wild parrots' behavior.",
+            "optionHighlight": "wild parrots' behavior",
+            "explanation": "原文虽从野外被捕食者身份说起，但重点是解释这种本能如何影响家中鹦鹉并指导饲养，选项把范围缩小为野生鹦鹉行为。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p1",
+              "quote": "This one factor influences parrots’ behavior in your house more than any other.",
+              "anchor": "in your house"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "就饲养鹦鹉给出建议。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-b-p4",
+              "quote": "it is wise to avoid quick,sudden movements near your bird",
+              "anchor": "avoid quick,sudden movements"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-b-p5",
+              "quote": "It is important to expose your bird to safe experiences and changes starting at a very young age to build flexibility and improve their adaptability.",
+              "anchor": "expose your bird"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "呼吁采取行动保护动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To call for action to protect animals.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "介绍一项关于鸟类生态学的研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To introduce a study on bird ecology.",
+            "explanation": "原文未提及该信息。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "author's purpose",
+          "sourceRole": "stem",
+          "targetText": "it is wise to avoid quick,sudden movements near your bird",
+          "targetParagraphId": "para-2024-jslk-reading-b-p4",
+          "relationType": "locationCue",
+          "note": "作者使用建议性表达，提示文章目的与饲养建议有关。"
+        },
+        {
+          "sourceText": "raising a parrot",
+          "sourceRole": "correctOption",
+          "targetText": "your bird",
+          "targetParagraphId": "para-2024-jslk-reading-b-p5",
+          "relationType": "paraphrase",
+          "note": "正确选项中的饲养鹦鹉对应原文反复出现的家中鸟、你的鸟等表达。"
         }
       ]
     }

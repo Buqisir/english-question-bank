@@ -82,8 +82,11 @@ const allowed = new Set([
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'data/sql/seed-v0.sql',
   'scripts/verify-c6a3-reading-analysis-bridge.mjs',
+  'scripts/verify-c6a-2-reading-a-analysis.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
+  'scripts/verify-c6a6a-reading-b-analysis.mjs',
+  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 
 for (const file of changedFiles) {
@@ -103,8 +106,8 @@ assert(
   !changedFiles.some((file) => file.startsWith('shared/papersurface/')),
 )
 assert(
-  'paper-asset fixture unchanged',
-  !changedFiles.some((file) => file.startsWith('app/public/paper-assets/')),
+  'paper-asset source fixture unchanged',
+  !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'),
 )
 assert(
   'legacy PI report fixture unchanged',
