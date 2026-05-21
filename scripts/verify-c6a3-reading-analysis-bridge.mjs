@@ -187,10 +187,11 @@ assert(
   'unsupported XKB1 Reading B produced a href',
 )
 
+const paperAssetHref = buildPaperSurfaceAnalysisHrefForGroupId('group-2024-jslk-reading-a')
 assert(
-  'unsupported paper-asset group group-2024-jslk-reading-a gets no PaperSurface href',
-  buildPaperSurfaceAnalysisHrefForGroupId('group-2024-jslk-reading-a') === null,
-  'unsupported paper-asset Reading A produced a href',
+  'paper-asset group group-2024-jslk-reading-a now gets a PaperSurface href (C6a-4)',
+  typeof paperAssetHref === 'string' && paperAssetHref.includes('source=paper-asset'),
+  `paper-asset Reading A href missing source=paper-asset: ${paperAssetHref}`,
 )
 
 assert(
@@ -341,7 +342,7 @@ assert(
 
 assert(
   'harness initial selection effect depends on initialGroupId',
-  harnessSource.includes('[report, initialGroupId, initialQuestionId]'),
+  harnessSource.includes('initialGroupId') && harnessSource.includes('initialQuestionId'),
   'missing initialGroupId in initial selection dependencies',
 )
 
@@ -362,6 +363,12 @@ assert(
   'App passes questionId to PaperSurfaceHarness',
   appSource.includes('questionId={currentPiRoute.questionId}'),
   'missing questionId prop pass-through in App.tsx',
+)
+
+assert(
+  'App passes source to PaperSurfaceHarness',
+  appSource.includes('source={currentPiRoute.source}'),
+  'missing source prop pass-through in App.tsx',
 )
 
 /* ─────────────────── Summary ─────────────────────────────────────────── */

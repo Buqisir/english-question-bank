@@ -132,6 +132,12 @@ import { HarnessInsightPanelContent } from './insight/HarnessInsightPanelContent
 import { HarnessStructureRows } from './insight/HarnessStructureRows'
 import { StructureBraceOverlay } from './structureBrace'
 import {
+  buildPaperAssetSurfaceModel,
+  type PaperAssetQuestionAnalysisView,
+  type PaperAssetSurfaceModel,
+  type ReviewedReadingChoiceAnalysisV1,
+} from './paperAssetSurfaceAdapter.ts'
+import {
   paperSurfaceHostInitialState,
   paperSurfaceHostInteractionReducer,
 } from './paperSurfaceHostInteraction'
@@ -141,11 +147,15 @@ import type {
   PassageStructure,
   QuestionOption,
 } from './paperIntelligenceTypes'
+import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
+import type { PaperIntelligenceSource } from './paperIntelligenceRoute.ts'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import './paperIntelligencePaperSurfaceHarness.css'
 
 type Props = {
   paperId: string | null
+  /** C6a-4: explicit data source. Defaults to legacy report fixtures. */
+  source?: PaperIntelligenceSource
   /** C6a-3: optional group to focus on load (from concierge entry URL). */
   groupId?: string | null
   /** C6a-3: optional question to pre-select on load (from concierge entry URL). */
@@ -168,11 +178,13 @@ function cssAttr(value: string): string {
 
 export function PaperIntelligencePaperSurfaceHarness({
   paperId,
+  source = 'legacy-report',
   groupId: initialGroupId,
   questionId: initialQuestionId,
   onBackToWorkbench,
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
+  const [paperAssetModel, setPaperAssetModel] = useState<PaperAssetSurfaceModel | null>(null)
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
   const [passageStructures, setPassageStructures] = useState<Record<string, PassageStructure>>({})
@@ -226,20 +238,56 @@ export function PaperIntelligencePaperSurfaceHarness({
     return ref
   }, [])
 
-  // ─── Fetch report + input.json ───
+  // ─── Fetch legacy PI report or C6a paper-asset source ───
   useEffect(() => {
     if (!paperId) {
       setError('未指定 paperId 参数。')
       setLoading(false)
       return
     }
-    const reportUrl = `/reports/paper-intelligence/${paperId}/report.json`
-    const inputUrl = `/reports/paper-intelligence/${paperId}/input.json`
 
     let cancelled = false
 
     async function load(): Promise<void> {
+      setLoading(true)
+      setError(null)
+      setReport(null)
+      setPaperAssetModel(null)
+      setBodies({})
+      setInputOptions({})
+      setPassageStructures({})
+
       try {
+        if (source === 'paper-asset') {
+          if (!initialGroupId) {
+            throw new Error('未指定 groupId 参数。')
+          }
+          const assetUrl = `/paper-assets/${paperId}/paper-asset.json`
+          const analysisUrl = `/paper-assets/${paperId}/analyses/reading-choice-analysis-v1.json`
+          const [assetRes, analysisRes] = await Promise.all([
+            fetch(assetUrl),
+            fetch(analysisUrl),
+          ])
+          if (!assetRes.ok) throw new Error(`未找到 Paper Asset：${paperId}`)
+          if (!analysisRes.ok) throw new Error(`未找到已审阅阅读解析：${paperId}`)
+
+          const asset = (await assetRes.json()) as PaperAssetV1
+          const analysis = (await analysisRes.json()) as ReviewedReadingChoiceAnalysisV1
+          const model = buildPaperAssetSurfaceModel({
+            asset,
+            analysis,
+            groupId: initialGroupId,
+          })
+          if (cancelled) return
+          setPaperAssetModel(model)
+          setReport(model.report)
+          setPassageStructures(model.passageStructures)
+          setLoading(false)
+          return
+        }
+
+        const reportUrl = `/reports/paper-intelligence/${paperId}/report.json`
+        const inputUrl = `/reports/paper-intelligence/${paperId}/input.json`
         const reportRes = await fetch(reportUrl)
         if (!reportRes.ok) throw new Error(`HTTP ${reportRes.status}`)
         const reportData = (await reportRes.json()) as PaperIntelligenceReport
@@ -323,9 +371,10 @@ export function PaperIntelligencePaperSurfaceHarness({
         setInputOptions(inputOptionsData)
         setPassageStructures(passageStructuresData)
         setLoading(false)
-      } catch {
+      } catch (e) {
         if (cancelled) return
-        setError(`未找到 Paper Intelligence 报告：${paperId}`)
+        const msg = e instanceof Error ? e.message : `未找到 Paper Intelligence 报告：${paperId}`
+        setError(msg)
         setLoading(false)
       }
     }
@@ -334,7 +383,7 @@ export function PaperIntelligencePaperSurfaceHarness({
     return (): void => {
       cancelled = true
     }
-  }, [paperId])
+  }, [paperId, source, initialGroupId])
 
   // ─── C4 PR #52: viewport-mode detection ───
   //
@@ -418,7 +467,23 @@ export function PaperIntelligencePaperSurfaceHarness({
   // (for paper-asset IDs like q-2024-jslk-021 where "021" → questionNo "21").
   const initialQuestionAppliedRef = useRef(false)
   useEffect(() => {
+    initialQuestionAppliedRef.current = false
+  }, [paperId, source, initialGroupId, initialQuestionId])
+  useEffect(() => {
     if (initialQuestionAppliedRef.current) return
+    if (source === 'paper-asset') {
+      if (!paperAssetModel) return
+      const candidateId =
+        initialQuestionId && paperAssetModel.surfaceData.questions.some((q) => q.id === initialQuestionId)
+          ? initialQuestionId
+          : initialGroupId
+            ? paperAssetModel.defaultQuestionId
+            : null
+      if (!candidateId) return
+      initialQuestionAppliedRef.current = true
+      dispatchHost({ type: 'request-lecture-focus', questionId: candidateId })
+      return
+    }
     if (!report) return
     if (!initialQuestionId) return
     // Try to resolve the initialQuestionId to a harness-internal question ID.
@@ -449,10 +514,13 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (!resolvedId) return
     initialQuestionAppliedRef.current = true
     dispatchHost({ type: 'request-lecture-focus', questionId: resolvedId })
-  }, [report, initialGroupId, initialQuestionId])
+  }, [source, paperAssetModel, report, initialGroupId, initialQuestionId])
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
+    if (source === 'paper-asset') {
+      return paperAssetModel?.surfaceData ?? null
+    }
     if (!report) return null
     // C5a: buildPaperSurfaceDataFromPi will throw if passageStructure
     // is missing for any passage — this is the official hard-fail path.
@@ -465,14 +533,21 @@ export function PaperIntelligencePaperSurfaceHarness({
       console.error('[C5a] adapter build failed:', msg)
       return null
     }
-  }, [report, bodies, inputOptions, passageStructures])
+  }, [source, paperAssetModel, report, bodies, inputOptions, passageStructures])
 
   // ─── Build right-panel analysis view (reuse existing PI model) ───
   const analysisView = useMemo((): AnalysisView | null => {
+    if (source === 'paper-asset') return null
     if (!report || !activeQuestionId) return null
     const view = buildPreviewView({ report, bodies, activeQuestionId, inputOptions })
     return view.activeAnalysis
-  }, [report, bodies, activeQuestionId, inputOptions])
+  }, [source, report, bodies, activeQuestionId, inputOptions])
+
+  const paperAssetAnalysisView = useMemo((): PaperAssetQuestionAnalysisView | null => {
+    if (source !== 'paper-asset') return null
+    if (!activeQuestionId) return null
+    return paperAssetModel?.analysisByQuestionId[activeQuestionId] ?? null
+  }, [source, paperAssetModel, activeQuestionId])
 
   // ─── Derive activeEvidenceKind (Issue #21-C3.6) ───
   //
@@ -500,13 +575,17 @@ export function PaperIntelligencePaperSurfaceHarness({
   //                 the inline left highlight stays correct on its
   //                 own).
   const activeEvidenceKind = useMemo<'support' | 'trap' | null>(() => {
+    if (source === 'paper-asset') {
+      if (!activeEvidenceId) return null
+      return paperAssetModel?.evidenceKindById[activeEvidenceId] ?? null
+    }
     if (!activeEvidenceId || !analysisView) return null
     if (analysisView.supportEvidenceId === activeEvidenceId) return 'support'
     if (analysisView.distractors.some((d) => d.evidenceId === activeEvidenceId)) {
       return 'trap'
     }
     return null
-  }, [activeEvidenceId, analysisView])
+  }, [source, paperAssetModel, activeEvidenceId, analysisView])
 
   // ─── Reseed activeEvidenceId when activeQuestionId changes (C3) ───
   //
@@ -520,9 +599,17 @@ export function PaperIntelligencePaperSurfaceHarness({
       dispatchHost({ type: 'seed-support-evidence', evidenceId: null })
       return
     }
-    const supportId = analysisView?.supportEvidenceId ?? null
+    const supportId =
+      source === 'paper-asset'
+        ? paperAssetAnalysisView?.supportEvidenceId ?? null
+        : analysisView?.supportEvidenceId ?? null
     dispatchHost({ type: 'seed-support-evidence', evidenceId: supportId })
-  }, [activeQuestionId, analysisView?.supportEvidenceId])
+  }, [
+    activeQuestionId,
+    source,
+    analysisView?.supportEvidenceId,
+    paperAssetAnalysisView?.supportEvidenceId,
+  ])
 
   // ─── Lecture focus (controlled, includes activeEvidenceId) ───
   const lectureFocus: LectureFocus | null = useMemo(() => {
@@ -918,11 +1005,20 @@ export function PaperIntelligencePaperSurfaceHarness({
             page, not an edge-to-edge stripe.
           */}
           <div className="pi-ps-harness-right-inner">
-            <AnalysisPanel
-              analysis={analysisView}
-              activeEvidenceId={activeEvidenceId}
-              onSelectEvidence={handleSelectEvidence}
-            />
+            {source === 'paper-asset' ? (
+              <PaperAssetAnalysisPanel
+                analysis={paperAssetAnalysisView}
+                hasActiveQuestion={!!activeQuestionId}
+                activeEvidenceId={activeEvidenceId}
+                onSelectEvidence={handleSelectEvidence}
+              />
+            ) : (
+              <AnalysisPanel
+                analysis={analysisView}
+                activeEvidenceId={activeEvidenceId}
+                onSelectEvidence={handleSelectEvidence}
+              />
+            )}
           </div>
         </aside>
         {/*
@@ -961,6 +1057,125 @@ export function PaperIntelligencePaperSurfaceHarness({
 }
 
 /* ─── Right panel: reuse existing PI analysis rendering ─── */
+
+/**
+ * C6a-4 right panel for reviewed paper-asset analysis.
+ *
+ * This panel consumes only `reading-choice-analysis-v1.json`. When the
+ * selected question exists on the paper but the reviewed analysis slice does
+ * not contain it, the panel shows "解析未发布" instead of inventing an
+ * answer-key explanation or falling back to legacy sidecars.
+ */
+function PaperAssetAnalysisPanel({
+  analysis,
+  hasActiveQuestion,
+  activeEvidenceId,
+  onSelectEvidence,
+}: {
+  analysis: PaperAssetQuestionAnalysisView | null
+  hasActiveQuestion: boolean
+  activeEvidenceId: string | null
+  onSelectEvidence: (evidenceId: string) => void
+}): ReactNode {
+  if (!hasActiveQuestion) {
+    return (
+      <div className="pi-ps-analysis-empty">
+        <p>点击左侧题目查看解析</p>
+      </div>
+    )
+  }
+
+  if (!analysis) {
+    return (
+      <div className="pi-ps-analysis-empty pi-ps-analysis-empty--unpublished">
+        <p>解析未发布</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="pi-ps-analysis" data-pi-question-id={analysis.questionId}>
+      <div className="pi-ps-analysis-header">
+        <span className="pi-ps-analysis-qno">{analysis.questionNo}</span>
+        <span className="pi-ps-analysis-type">{analysis.skillLabel}</span>
+        <span className="pi-ps-analysis-answer">答案 {analysis.answer}</span>
+      </div>
+      <div className="pi-ps-analysis-stem">
+        <p>{analysis.stem}</p>
+        <p className="pi-ps-analysis-stem-zh">{analysis.stemTranslationZh}</p>
+      </div>
+      <ul className="pi-ps-analysis-options pi-ps-analysis-options--with-translation">
+        {analysis.options.map((option) => (
+          <li
+            key={option.label}
+            className={
+              option.status === 'correct'
+                ? 'pi-ps-analysis-option pi-ps-analysis-option--correct'
+                : 'pi-ps-analysis-option'
+            }
+          >
+            <span className="pi-ps-analysis-option-label">{option.label}.</span>
+            <span className="pi-ps-analysis-option-body">
+              <span className="pi-ps-analysis-option-content">{option.text}</span>
+              {option.translationZh && (
+                <span className="pi-ps-analysis-option-zh">{option.translationZh}</span>
+              )}
+              {option.trapLabel && option.trapExplanation && (
+                <span className="pi-ps-analysis-option-trap">
+                  {option.trapLabel}：{option.trapExplanation}
+                </span>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+      {analysis.supportEvidenceRows.length > 0 && (
+        <div className="pi-ps-analysis-evidence-group">
+          <h4>答案依据</h4>
+          {analysis.supportEvidenceRows.map((row) => (
+            <button
+              key={row.evidenceId}
+              type="button"
+              className={
+                row.evidenceId === activeEvidenceId
+                  ? 'pi-ps-analysis-evidence pi-ps-analysis-evidence--selected'
+                  : 'pi-ps-analysis-evidence'
+              }
+              data-pi-evidence-id={row.evidenceId}
+              data-pi-evidence-kind="support"
+              data-pi-question-id={analysis.questionId}
+              aria-pressed={row.evidenceId === activeEvidenceId}
+              onClick={() => onSelectEvidence(row.evidenceId)}
+            >
+              <blockquote>{row.quote}</blockquote>
+            </button>
+          ))}
+        </div>
+      )}
+      {analysis.locationParaphrases.length > 0 && (
+        <div className="pi-ps-analysis-synonym">
+          <h4>定位关系 / 同义替换</h4>
+          <ul className="pi-ps-analysis-paraphrases">
+            {analysis.locationParaphrases.map((item, index) => (
+              <li key={`${item.sourceText}-${index}`}>
+                <span>{item.sourceText}</span>
+                <span aria-hidden="true"> → </span>
+                <strong>{item.targetText}</strong>
+                {item.note && <p>{item.note}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {analysis.questionFocus && (
+        <div className="pi-ps-analysis-question-focus">
+          <h4>考点</h4>
+          <p>{analysis.questionFocus}</p>
+        </div>
+      )}
+    </div>
+  )
+}
 
 /**
  * Right-panel analysis renderer.
