@@ -40,6 +40,7 @@
  * `'paper'` activates the paper-surface prototype (#21-A spike).
  */
 export type PaperIntelligenceSurface = 'default' | 'paper'
+export type PaperIntelligenceSource = 'legacy-report' | 'paper-asset'
 
 export type PaperIntelligenceRouteMatch =
   | { kind: 'none' }
@@ -56,6 +57,18 @@ export type PaperIntelligenceRouteMatch =
        * `surface=print`) collapse to `'default'`.
        */
       surface: PaperIntelligenceSurface
+      /**
+       * Which static data source the paper surface should read.
+       *
+       * - `'legacy-report'` keeps the C4/C5 regression fixture path:
+       *   `/reports/paper-intelligence/<paperId>/report.json`.
+       * - `'paper-asset'` activates the C6a whole-paper asset path:
+       *   `/paper-assets/<paperId>/paper-asset.json` plus reviewed
+       *   analysis JSON.
+       *
+       * The default is legacy-report so all old URLs keep working.
+       */
+      source: PaperIntelligenceSource
       /**
        * Optional group identifier carried in the URL. Used by the
        * concierge entry (C6a-3) so the PaperSurface harness can focus
@@ -88,9 +101,12 @@ export function parsePaperIntelligenceRoute(
   const paperId = params.get('paperId')?.trim() || null
   const rawSurface = params.get('surface')?.trim().toLowerCase() || ''
   const surface: PaperIntelligenceSurface = rawSurface === 'paper' ? 'paper' : 'default'
+  const rawSource = params.get('source')?.trim().toLowerCase() || ''
+  const source: PaperIntelligenceSource =
+    rawSource === 'paper-asset' ? 'paper-asset' : 'legacy-report'
   const groupId = params.get('groupId')?.trim() || null
   const questionId = params.get('questionId')?.trim() || null
-  return { kind: 'paper-intelligence', paperId, surface, groupId, questionId }
+  return { kind: 'paper-intelligence', paperId, surface, source, groupId, questionId }
 }
 
 /* ─────────────────────────── href builder ────────────────────────────── */
@@ -104,6 +120,7 @@ export function parsePaperIntelligenceRoute(
  */
 export type BuildPaperSurfaceHrefArgs = {
   paperId: string
+  source?: PaperIntelligenceSource | null
   groupId?: string | null
   questionId?: string | null
 }
@@ -111,6 +128,9 @@ export type BuildPaperSurfaceHrefArgs = {
 export function buildPaperSurfaceHref(args: BuildPaperSurfaceHrefArgs): string {
   const params = new URLSearchParams()
   params.set('view', 'paper-intelligence')
+  if (args.source && args.source !== 'legacy-report') {
+    params.set('source', args.source)
+  }
   params.set('paperId', args.paperId)
   params.set('surface', 'paper')
   if (args.groupId) {
@@ -125,10 +145,13 @@ export function buildPaperSurfaceHref(args: BuildPaperSurfaceHrefArgs): string {
 /**
  * C6a-3 bridge targets for concierge 「阅读解析」 entries.
  *
- * This intentionally maps only groups backed by an existing
- * `app/public/reports/paper-intelligence/<paperId>/report.json` fixture.
- * The newer paper-asset-v1 JSON is not yet a PaperSurface data source, so
- * routing concierge cards to paper-asset ids would open an error page.
+ * This intentionally maps only groups backed by an existing PaperSurface
+ * source:
+ * - legacy report fixtures under `app/public/reports/paper-intelligence`
+ * - reviewed paper-asset fixtures under `app/public/paper-assets`
+ *
+ * Unsupported reading groups stay quiet instead of sending teachers to
+ * an unrelated paper or an error page.
  */
 const PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID: Record<
   string,
@@ -136,8 +159,15 @@ const PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID: Record<
 > = {
   'g-2024-xkb1-a': {
     paperId: 'paper-2024-xkb1-reading',
+    source: 'legacy-report',
     groupId: 'g-2024-xkb1-a',
     questionId: 'A-21',
+  },
+  'group-2024-jslk-reading-a': {
+    paperId: 'paper-2024-jslk-english',
+    source: 'paper-asset',
+    groupId: 'group-2024-jslk-reading-a',
+    questionId: 'q-2024-jslk-021',
   },
 }
 

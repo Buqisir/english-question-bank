@@ -401,15 +401,36 @@
   flex-shrink: 0;
 }
 
+.pi-ps-analysis-option-body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.pi-ps-analysis-option-zh {
+  color: #6f7b8f;
+  font-size: 0.8125rem;
+}
+
+.pi-ps-analysis-option-trap {
+  color: #7a5a2b;
+  font-size: 0.75rem;
+}
+
 .pi-ps-analysis-evidence,
 .pi-ps-analysis-distractors,
-.pi-ps-analysis-synonym {
+.pi-ps-analysis-synonym,
+.pi-ps-analysis-evidence-group,
+.pi-ps-analysis-question-focus {
   margin-top: 1rem;
 }
 
 .pi-ps-analysis-evidence h4,
 .pi-ps-analysis-distractors h4,
-.pi-ps-analysis-synonym h4 {
+.pi-ps-analysis-synonym h4,
+.pi-ps-analysis-evidence-group h4,
+.pi-ps-analysis-question-focus h4 {
   font-size: 0.8125rem;
   font-weight: 600;
   color: #555;
@@ -430,6 +451,24 @@
   color: #666;
   font-size: 0.8125rem;
   margin-top: 0.25rem;
+}
+
+.pi-ps-analysis-paraphrases {
+  margin: 0;
+  padding-left: 1rem;
+  color: #555;
+  font-size: 0.8125rem;
+}
+
+.pi-ps-analysis-paraphrases li {
+  margin-bottom: 0.5rem;
+}
+
+.pi-ps-analysis-paraphrases p,
+.pi-ps-analysis-question-focus p {
+  margin: 0.125rem 0 0;
+  color: #666;
+  font-size: 0.8125rem;
 }
 
 .pi-ps-analysis-distractors ul {
