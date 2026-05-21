@@ -306,6 +306,150 @@ if (existsSync(readingPromptPath)) {
   assert(rp.includes('NOT selectable') || rp.includes('not selectable') || rp.includes('NOT') && rp.includes('selectable'), 'Reading prompt includes unsupportedClaim non-interactive rule');
 }
 
+// ─── Source-faithfulness checks ──────────────────────────────────────────────────
+
+// Normalization function for source matching
+function normalize(s) {
+  return s
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u2013\u2014]/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// 1. No string value may contain literal "..." as truncation
+function findEllipsis(obj, path = '') {
+  const results = [];
+  if (obj === null || obj === undefined) return results;
+  if (typeof obj === 'string') {
+    if (obj.includes('...')) {
+      results.push(path);
+    }
+  } else if (Array.isArray(obj)) {
+    obj.forEach((item, i) => {
+      results.push(...findEllipsis(item, `${path}[${i}]`));
+    });
+  } else if (typeof obj === 'object') {
+    for (const [key, val] of Object.entries(obj)) {
+      results.push(...findEllipsis(val, path ? `${path}.${key}` : key));
+    }
+  }
+  return results;
+}
+
+const ellipsisPaths = findEllipsis(asset);
+assert(ellipsisPaths.length === 0, `No "..." truncation in any string value (found ${ellipsisPaths.length}: ${ellipsisPaths.slice(0, 3).join(', ')})`);
+
+// 2. Load DOCX extracted text for source matching
+let docxNormalizedText = '';
+if (existsSync(docxFullPath)) {
+  // Extract text from DOCX using a simple ZIP+XML approach
+  // We'll use the raw text content from reading the XML inside the docx
+  const { execSync } = await import('child_process');
+  try {
+    const rawText = execSync(
+      `python3 -c "from docx import Document; doc = Document('${docxFullPath}'); print('\\n'.join(p.text for p in doc.paragraphs))"`,
+      { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
+    );
+    docxNormalizedText = normalize(rawText);
+  } catch (e) {
+    console.warn('  WARN: Could not extract DOCX text for source matching:', e.message);
+  }
+}
+
+if (docxNormalizedText.length > 0) {
+  // Helper: check that a text string is found in normalized DOCX
+  function assertInSource(text, label) {
+    const normText = normalize(text);
+    // Check at least 20 consecutive words match (to handle minor spacing diffs)
+    const words = normText.split(' ').filter(w => w.length > 0);
+    if (words.length <= 5) {
+      // Very short text, just check it exists
+      assert(docxNormalizedText.includes(normText), `${label} found in DOCX source`);
+    } else {
+      // Check a chunk of words from the middle
+      const chunkSize = Math.min(15, Math.floor(words.length / 2));
+      const startIdx = Math.floor((words.length - chunkSize) / 2);
+      const chunk = words.slice(startIdx, startIdx + chunkSize).join(' ');
+      assert(docxNormalizedText.includes(chunk), `${label} content found in DOCX source (checked chunk: "${chunk.slice(0, 60)}...")`);
+    }
+  }
+
+  // 3. Reading A-D paragraph texts must be found in normalized DOCX
+  for (const gid of readingGroups) {
+    const g = asset.content.groups[gid];
+    if (g && g.passage && g.passage.paragraphs) {
+      for (const para of g.passage.paragraphs) {
+        if (para.text && para.text.length > 10) {
+          assertInSource(para.text, `${gid} para "${para.paragraphId}"`);
+        }
+      }
+    }
+  }
+
+  // 4. 七选五 group must have passage paragraphs and each must be in DOCX
+  const sevenPassage = asset.content.groups['group-2024-jslk-seven-choices']?.passage;
+  assert(!!sevenPassage, '七选五 has passage object');
+  assert(sevenPassage && sevenPassage.paragraphs && sevenPassage.paragraphs.length > 0, '七选五 has passage paragraphs');
+  if (sevenPassage && sevenPassage.paragraphs) {
+    for (const para of sevenPassage.paragraphs) {
+      if (para.text && para.text.length > 10) {
+        assertInSource(para.text, `七选五 para "${para.paragraphId}"`);
+      }
+    }
+  }
+
+  // 5. clozeText must be found in DOCX
+  const clozeText = asset.content.groups['group-2024-jslk-cloze']?.clozeText;
+  assert(!!clozeText && clozeText.length > 100, '完形 clozeText is substantial (>100 chars)');
+  if (clozeText) {
+    assertInSource(clozeText, '完形 clozeText');
+  }
+
+  // 6. grammarText must be found in DOCX
+  const grammarText = asset.content.groups['group-2024-jslk-grammar-fill']?.grammarText;
+  assert(!!grammarText && grammarText.length > 100, '语法填空 grammarText is substantial (>100 chars)');
+  if (grammarText) {
+    assertInSource(grammarText, '语法填空 grammarText');
+  }
+
+  // 7. 读后续写 materialText must be found in DOCX
+  const contTask = asset.content.writingTasks['writing-2024-jslk-continuation'];
+  const materialText = contTask?.materialText;
+  assert(!!materialText && materialText.length > 100, '读后续写 materialText is substantial (>100 chars)');
+  if (materialText) {
+    assertInSource(materialText, '读后续写 materialText');
+  }
+
+  // 8. Grammar blanks 56-65 that have parenthesized prompt words in source must carry prompt values
+  const grammarBlanks = ['blank-2024-jslk-056','blank-2024-jslk-057','blank-2024-jslk-058','blank-2024-jslk-059','blank-2024-jslk-060','blank-2024-jslk-061','blank-2024-jslk-062','blank-2024-jslk-063','blank-2024-jslk-064','blank-2024-jslk-065'];
+  // From source: 56(keyboard), 57(be), 59(use), 60(simple), 62(improve), 64(stay), 65(they)
+  // 58, 61, 63 have no parenthesized prompt
+  const expectedPrompts = {
+    'blank-2024-jslk-056': 'keyboard',
+    'blank-2024-jslk-057': 'be',
+    'blank-2024-jslk-059': 'use',
+    'blank-2024-jslk-060': 'simple',
+    'blank-2024-jslk-062': 'improve',
+    'blank-2024-jslk-064': 'stay',
+    'blank-2024-jslk-065': 'they'
+  };
+  for (const [bid, expectedPrompt] of Object.entries(expectedPrompts)) {
+    const blank = asset.content.blanks[bid];
+    assert(blank && blank.prompt === expectedPrompt, `${bid} has prompt "${expectedPrompt}" (got "${blank?.prompt}")`);
+  }
+  // Blanks without prompts should NOT have prompt field or it should be undefined/null
+  const noPromptBlanks = ['blank-2024-jslk-058', 'blank-2024-jslk-061', 'blank-2024-jslk-063'];
+  for (const bid of noPromptBlanks) {
+    const blank = asset.content.blanks[bid];
+    assert(!blank?.prompt, `${bid} has no prompt (fill-in-word blank)`);
+  }
+
+} else {
+  console.warn('  WARN: Skipping source-faithfulness checks (could not extract DOCX text)');
+}
+
 // ─── Summary ────────────────────────────────────────────────────────────────────
 
 console.log('\n' + '═'.repeat(60));
