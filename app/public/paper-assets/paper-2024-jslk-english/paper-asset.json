@@ -1,0 +1,2384 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2024-jslk-english",
+    "title": "2024年高考综合改革适应性测试英语试题",
+    "subject": "English",
+    "source": "2024 九省联考 / 高考综合改革适应性测试",
+    "assetVersion": 1,
+    "status": "draft"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2024-jslk-english-source.docx",
+      "sha256": "86f2bf55b857cb51f16b97a8c46c7ac6110e1fb8f048881687cc1a0fcc915d57",
+      "sourcePath": "docs/sources/paper-2024-jslk-english/2024-jslk-english-source.docx",
+      "extractedTextSummary": "Full text of 2024 九省联考 English exam: Listening (Q1-20), Reading (Q21-40), Language Use (Q41-65), Writing (2 tasks). Total 150 marks."
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2024-jslk-listening",
+        "title": "第一部分 听力",
+        "sections": [
+          {
+            "sectionId": "section-2024-jslk-listening-1",
+            "title": "第一节",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-listening-s1",
+                "title": "听力第一节 Q1-5"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2024-jslk-listening-2",
+            "title": "第二节",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-listening-m6",
+                "title": "听第6段材料 Q6-7"
+              },
+              {
+                "groupId": "group-2024-jslk-listening-m7",
+                "title": "听第7段材料 Q8-9"
+              },
+              {
+                "groupId": "group-2024-jslk-listening-m8",
+                "title": "听第8段材料 Q10-12"
+              },
+              {
+                "groupId": "group-2024-jslk-listening-m9",
+                "title": "听第9段材料 Q13-16"
+              },
+              {
+                "groupId": "group-2024-jslk-listening-m10",
+                "title": "听第10段材料 Q17-20"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2024-jslk-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2024-jslk-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2024-jslk-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2024-jslk-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2024-jslk-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2024-jslk-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2024-jslk-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2024-jslk-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2024-jslk-grammar",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2024-jslk-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-2024-jslk-writing-application",
+            "title": "第一节 应用文",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2024-jslk-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-2024-jslk-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "notice",
+        "text": "注意事项：1. 答卷前，考生务必将自己的姓名、准考证号填写在答题卡上。2. 回答选择题时，选出每小题答案后，用铅笔把答题卡上对应题目的答案标号涂黑。如需改动，用橡皮擦干净后，再选涂其他答案标号。回答非选择题时，将答案写在答题卡上，写在本试卷上无效。3. 考试结束后，将本试卷和答题卡一并交回。"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2024-jslk-listening",
+        "text": "第一部分 听力(共两节，满分30分)"
+      },
+      {
+        "type": "instruction",
+        "text": "做题时，先将答案标在试卷上。录音内容结束后，你将有两分钟的时间将试卷上的答案转涂到答题卡上。"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-listening-1",
+        "text": "第一节 (共5小题；每小题1.5分，满分7.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "听下面5段对话。每段对话后有一个小题，从题中所给的A、B、C三个选项中选出最佳选项。听完每段对话后，你都有10秒钟的时间来回答有关小题和阅读下一小题。每段对话仅读一遍。"
+      },
+      {
+        "type": "exampleQuestion",
+        "text": "例：How much is the shirt? A.£19.15. B.£9.18. C.£9.15 答案是C。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-listening-s1"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-listening-2",
+        "text": "第二节(共15小题；每小题1.5分，满分22.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "听下面5段对话或独白。每段对话或独白后有几个小题，从题中所给的A、B、C三个选项中选出最佳选项。听每段对话或独白前，你将有时间阅读各个小题，每小题5秒钟；听完后，各小题给出5秒钟的作答时间。每段对话或独白读两遍。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-listening-m6"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-listening-m7"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-listening-m8"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-listening-m9"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-listening-m10"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2024-jslk-reading",
+        "text": "第二部分 阅读(共两节，满分50分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-reading-choice",
+        "text": "第一节 (共15小题；每小题2.5分，满分37.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2024-jslk-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-grammar",
+        "text": "第二节 (共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2024-jslk-writing",
+        "text": "第四部分 写作(共两节，满分40分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-writing-application",
+        "text": "第一节 (满分15分)"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-writing-application"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "writing-2024-jslk-application",
+        "label": "Welcome to Join the English Writing Competition"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2024-jslk-writing-continuation",
+        "text": "第二节 (满分25分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2024-jslk-writing-continuation"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "writing-2024-jslk-continuation",
+        "label": "续写答题区"
+      }
+    ],
+    "groups": {
+      "group-2024-jslk-listening-s1": {
+        "groupId": "group-2024-jslk-listening-s1",
+        "groupType": "listening",
+        "title": "听力第一节",
+        "questionIds": [
+          "q-2024-jslk-001",
+          "q-2024-jslk-002",
+          "q-2024-jslk-003",
+          "q-2024-jslk-004",
+          "q-2024-jslk-005"
+        ]
+      },
+      "group-2024-jslk-listening-m6": {
+        "groupId": "group-2024-jslk-listening-m6",
+        "groupType": "listening",
+        "title": "听第6段材料",
+        "questionIds": [
+          "q-2024-jslk-006",
+          "q-2024-jslk-007"
+        ]
+      },
+      "group-2024-jslk-listening-m7": {
+        "groupId": "group-2024-jslk-listening-m7",
+        "groupType": "listening",
+        "title": "听第7段材料",
+        "questionIds": [
+          "q-2024-jslk-008",
+          "q-2024-jslk-009"
+        ]
+      },
+      "group-2024-jslk-listening-m8": {
+        "groupId": "group-2024-jslk-listening-m8",
+        "groupType": "listening",
+        "title": "听第8段材料",
+        "questionIds": [
+          "q-2024-jslk-010",
+          "q-2024-jslk-011",
+          "q-2024-jslk-012"
+        ]
+      },
+      "group-2024-jslk-listening-m9": {
+        "groupId": "group-2024-jslk-listening-m9",
+        "groupType": "listening",
+        "title": "听第9段材料",
+        "questionIds": [
+          "q-2024-jslk-013",
+          "q-2024-jslk-014",
+          "q-2024-jslk-015",
+          "q-2024-jslk-016"
+        ]
+      },
+      "group-2024-jslk-listening-m10": {
+        "groupId": "group-2024-jslk-listening-m10",
+        "groupType": "listening",
+        "title": "听第10段材料",
+        "questionIds": [
+          "q-2024-jslk-017",
+          "q-2024-jslk-018",
+          "q-2024-jslk-019",
+          "q-2024-jslk-020"
+        ]
+      },
+      "group-2024-jslk-reading-a": {
+        "groupId": "group-2024-jslk-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2024-jslk-021",
+          "q-2024-jslk-022",
+          "q-2024-jslk-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-title",
+              "text": "Yellowstone Poster Exhibition to Be on View at UW’s Coe Library"
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p1",
+              "text": "A first-of-its-kind exhibition that focuses on the history of Yellowstone National Park posters will be on display at the University of Wyoming’s Coe Library beginning Tuesday,February l."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p2",
+              "text": "“Wonderland Ilustrated” will present posters and poster-style illustrations of the park spanning from the 1870s through 2022.The exhibition will be located on Level 3 of Coe Library. It will be on view through Tuesday,May 31.The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.The posters in the exhibition serve the purpose of both advertising and art."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p3",
+              "text": "“We’re thrilled to be working with Yellowstone collectors Jack and Susan Davis,and Larry and Thea Lancaster to bring this exhibition to the University of Wyoming as part of year-long celebrations recognizing Yellowstone’s 150th anniversary,” says Tamsen Hert,head of UW Libraries’ Emmett D.Chisum Special Collections. “This exhibition involves the history of printing,art,photography and advertising over 16 decades.The images reproduced are found on travel brochures,postcards and maps-many of which are held in our collections.”"
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p4",
+              "text": "One poster from the exhibition -Henry Wellge’s “Yellowstone National Park” from 1904 - was recently purchased with donated funds and is now part of UW Libraries’ Emmett D.Chisum Special Collections.Wellge,a productive bird’s-eye-view artist,designed the piece for the Northern Pacific Railroad,which used it to advertise the park.This is a unique piece, as posters such as this one were printed on soft paper and very few have survived."
+            }
+          ]
+        }
+      },
+      "group-2024-jslk-reading-b": {
+        "groupId": "group-2024-jslk-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2024-jslk-024",
+          "q-2024-jslk-025",
+          "q-2024-jslk-026",
+          "q-2024-jslk-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p1",
+              "text": "Parrots are prey animals,which means that other predators (捕食者) in the wild,such as hawks or snakes,are looking to make them into a meal.This one factor influences parrots’ behavior in your house more than any other."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p2",
+              "text": "Parrots are most easily hurt when feeding on the ground;membership in a group plays an important function in ensuring their safety and improving their chances of survival from attacks by predators.The most common predators of parrots include hawks,snakes,cats, monkeys,and bats.Some predators make attacks only during the day while others hunt in the night."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p3",
+              "text": "As prey animals,parrots are constantly watching out for danger and they instinctively (本能地)react to risks.Their first choice is to take flight.However,if this is not possible,they will fight with their powerful beaks to defend themselves."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p4",
+              "text": "Because their biggest enemy is the hawk,parrots are especially reactive to quick movements from above and behind.For this reason,it is wise to avoid quick,sudden movements near your bird.This is a built-in reaction not subject to logic or reason.Simple and relatively harmless household objects can draw extreme fear responses from a bird.For example,a balloon may represent a hawk or a vacuum hose (吸尘器软管)may be the same as a snake in your bird’s mind."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-b-p5",
+              "text": "As prey animals,parrots are often frightened by exposure to new household items or strangers.It is important to expose your bird to safe experiences and changes starting at a very young age to build flexibility and improve their adaptability.Variety in diet and toys,travel, and exposure to new people and places all help to make your bird more flexible and adaptable to change."
+            }
+          ]
+        }
+      },
+      "group-2024-jslk-reading-c": {
+        "groupId": "group-2024-jslk-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2024-jslk-028",
+          "q-2024-jslk-029",
+          "q-2024-jslk-030",
+          "q-2024-jslk-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p1",
+              "text": "In his 1936 work How to Win Friends and Influence People,Dale Carnegie wrote:“I have come to the conclusion that there is only one way to get the best of an argument -and that is to avoid it.”This distaste for arguments is common,but it depends on a mistaken view of arguments that causes problems for our personal and social lives -and in many ways misses the point of arguing in the first place."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p2",
+              "text": "Camegie would be right if arguments were fights,which is how we often think of them. Like physical fights,verbal(言语的)fights can leave both sides bloodied.Even when you win,you end up no better off. You would be feeling almost as bad if arguments were even just competitions -like,say,tennis tournament. Pairs of opponents hit the ball back and forth until one winner comes out from all who entered.Everybody else loses.This kind of thinking explains why so many people try to avoid arguments."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p3",
+              "text": "However,there are ways to win an argument every time.When you state your position, formulate (阐述)an argument for what you claim and honestly ask yourself whether your argument is any good.When you talk with someone who takes a stand,ask them to give you a reason for their view and spell out their argument fully.Assess its strength and weakness Raise objections(异议) and listen carefully to their replies.This method will require effort,but practice will make you better at it."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p4",
+              "text": "These tools can help you win every argument -not in the unhelpful sense of beating your opponents but in the better sense of learning about what divides people,learning why they disagree with us and learning to talk and work together with them.If we readjust our view of arguments-from a verbal fight or tennis game to a reasoned exchange through which we all gain respect and understanding from each other -then we change the very nature of what it means to“win”an argument."
+            }
+          ]
+        }
+      },
+      "group-2024-jslk-reading-d": {
+        "groupId": "group-2024-jslk-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2024-jslk-032",
+          "q-2024-jslk-033",
+          "q-2024-jslk-034",
+          "q-2024-jslk-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p1",
+              "text": "For lots of kids,toddlerhood(幼儿期) is an important time for friendship.Studies show that the earlier kids learn to form positive relationships,the better they are at relating to others as teenagers and adults.Playing together also helps these kids practice social behaviors,such as kindness,sharing,and cooperation."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p2",
+              "text": "Even so,how quickly your child develops into a social creature may also depend on his temperament (性格).Some toddlers are very social,but others are shy.In addition,the way that toddlers demonstrate that they like other children is markedly different from what adults think of as expressions of friendship.Research at Ohio State University in Columbus found that a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p3",
+              "text": "This seemingly unusual way of demonstrating fondness can result in unpleasant behavior. Regardless of how much they like a playmate,they may still grab his toys,refuse to share, and get bossy.But experts say that this is a normal and necessary part of friendship for kids this age.Through play experiences,toddlers learn social rules.That’s why it’s so important to take an active role in your toddler’s social encounters by setting limits and offering frequent reminders of what they are.When you establish these guidelines,explain the reasons behind them."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p4",
+              "text": "Begin by helping your child learn sympathy (“Ben is crying.What’s making him so sad?”),then suggest how he could resolve the problem(“Maybe he would feel better if you let him play the ball.”).When your child shares or shows empathy(同理心)toward a friend, praise him(“Ben stopped crying!You made him feel better.”)."
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p5",
+              "text": "Another way to encourage healthy social interaction is by encouraging kids to use words -not fists -to express how they feel.It’s also important to be mindful of how your child’s personality affects playtime.Kids are easy to get angry when they’re sleepy or hungry,so schedule playtime when they’re refreshed."
+            }
+          ]
+        }
+      },
+      "group-2024-jslk-seven-choices": {
+        "groupId": "group-2024-jslk-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五 Common Mistakes New Runners Make",
+        "questionIds": [
+          "q-2024-jslk-036",
+          "q-2024-jslk-037",
+          "q-2024-jslk-038",
+          "q-2024-jslk-039",
+          "q-2024-jslk-040"
+        ],
+        "blankIds": [
+          "blank-2024-jslk-036",
+          "blank-2024-jslk-037",
+          "blank-2024-jslk-038",
+          "blank-2024-jslk-039",
+          "blank-2024-jslk-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Not taking rest days"
+          },
+          {
+            "label": "B",
+            "text": "If you’re just starting out"
+          },
+          {
+            "label": "C",
+            "text": "Comparing yourself to others"
+          },
+          {
+            "label": "D",
+            "text": "Running can be uncomfortable at times"
+          },
+          {
+            "label": "E",
+            "text": "It’s important not to use the same muscles"
+          },
+          {
+            "label": "F",
+            "text": "While it may be true that you don’t need expensive equipment to take up running"
+          },
+          {
+            "label": "G",
+            "text": "Experts suggest increasing your running distance by no more than 10%each week"
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-seven-title",
+              "text": "Common Mistakes New Runners Make"
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-intro",
+              "text": "Running is a great way to get in shape and just about everyone can do it.However,many make a number of common mistakes,which can interfere(妨碍)with training or lead to injury. 36 ,keep these things in mind to help you increase your chances of running success."
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-h1",
+              "text": "•Doing too much too soon"
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-p1",
+              "text": "One of the biggest mistakes new runners make is doing too much too soon.Slowly easing into a training program will help reduce the risk of injury,so you can continue on with your new running routine. 37 ."
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-h2",
+              "text": "•38 "
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-p2",
+              "text": "Beginners might think they need to run every day(or nearly every day)to meet their fitness or weight-loss goals,but this couldn’t be further from the truth.Running is a high-impact activity which can be really hard on your body.So it’s important to give your body a rest between workouts."
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-h3",
+              "text": "•Not wearing the right equipment"
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-p3",
+              "text": "39 ,it’s important that you wear properly for your workouts.The most important piece of equipment for running is a good pair of running shoes,so be sure to do some research before you purchase a pair.Visit a running specialty store and ask an employee to fit you for a shoe."
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-h4",
+              "text": "•Running through pain"
+            },
+            {
+              "paragraphId": "para-2024-jslk-seven-p4",
+              "text": "40 .If something hurts when you run,you need to stop and treat the pain. Remember:It doesn’t make you less of a runner if you listen to your body to keep it healthy."
+            }
+          ]
+        }
+      },
+      "group-2024-jslk-cloze": {
+        "groupId": "group-2024-jslk-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2024-jslk-041",
+          "q-2024-jslk-042",
+          "q-2024-jslk-043",
+          "q-2024-jslk-044",
+          "q-2024-jslk-045",
+          "q-2024-jslk-046",
+          "q-2024-jslk-047",
+          "q-2024-jslk-048",
+          "q-2024-jslk-049",
+          "q-2024-jslk-050",
+          "q-2024-jslk-051",
+          "q-2024-jslk-052",
+          "q-2024-jslk-053",
+          "q-2024-jslk-054",
+          "q-2024-jslk-055"
+        ],
+        "blankIds": [
+          "blank-2024-jslk-041",
+          "blank-2024-jslk-042",
+          "blank-2024-jslk-043",
+          "blank-2024-jslk-044",
+          "blank-2024-jslk-045",
+          "blank-2024-jslk-046",
+          "blank-2024-jslk-047",
+          "blank-2024-jslk-048",
+          "blank-2024-jslk-049",
+          "blank-2024-jslk-050",
+          "blank-2024-jslk-051",
+          "blank-2024-jslk-052",
+          "blank-2024-jslk-053",
+          "blank-2024-jslk-054",
+          "blank-2024-jslk-055"
+        ],
+        "clozeText": "I was halfway across Indiana headed home to Kentucky when my car broke down.My phone was 41, too.I managed to get to a gas station,but it was Sunday in the early fall, and there was no 42 on duty.I was working my way through university then and had little money for 43 the car.\nI sat alongside my car for several hours trying to 44 the heat when an older gentleman 45 to fuel his car. He asked about my car, and I  46 my predicament (困境). To my 47 ,the gentleman told me that he had a daughter my age,and then he opened his trunk and 48 a tool set.\nRight then and there,this total  49 examined my engine,explaining as he worked that my spark plugs(火花塞)hadn’t been changed for so long that they were 50 to function.After about an hour,he 51 that my car was safe to finish the trip.\n52 came at the hands of a stranger.  53 his clothes,working on a hot September afternoon,this man 54  a college student from disaster,  just because she could have been his  55 ."
+      },
+      "group-2024-jslk-grammar-fill": {
+        "groupId": "group-2024-jslk-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2024-jslk-056",
+          "q-2024-jslk-057",
+          "q-2024-jslk-058",
+          "q-2024-jslk-059",
+          "q-2024-jslk-060",
+          "q-2024-jslk-061",
+          "q-2024-jslk-062",
+          "q-2024-jslk-063",
+          "q-2024-jslk-064",
+          "q-2024-jslk-065"
+        ],
+        "blankIds": [
+          "blank-2024-jslk-056",
+          "blank-2024-jslk-057",
+          "blank-2024-jslk-058",
+          "blank-2024-jslk-059",
+          "blank-2024-jslk-060",
+          "blank-2024-jslk-061",
+          "blank-2024-jslk-062",
+          "blank-2024-jslk-063",
+          "blank-2024-jslk-064",
+          "blank-2024-jslk-065"
+        ],
+        "grammarText": "Whenever you have to write a paper,a letter,or any other document for work or school, you probably head toward the computer. Now, most people reach for  56   (keyboard) faster than they pick up pens.In a Scottish primary school,however,Mr.Norman Lewis is taking a different approach. He feels that neat handwriting 57 (be) still an important skill,so he has his students write not only by hand but also  58 old-fashioned fountain pens.\nFountain pens 59 (use)in schools long ago and have been regaining popularity lately because they are refillable.Today, a writer 60 (simple) throws an empty pen away and gets 61 new one.\nSo far,Mr.Lewis is pleased with the results of his experiment.He reports that his students are taking more care with their work,and their self-confidence has improved as well. He is happy with the 62 (improve)he sees in his students’ writing 63 in his own writing.He knows that computers are here 64 (stay)and that they will not disappear. However,he believes that the practice with fountain pens helps students to focus,to write faster,and they can feel proud of 65 (they)."
+      },
+      "group-2024-jslk-writing-application": {
+        "groupId": "group-2024-jslk-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "writing-2024-jslk-application"
+      },
+      "group-2024-jslk-writing-continuation": {
+        "groupId": "group-2024-jslk-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "writing-2024-jslk-continuation"
+      }
+    },
+    "questions": {
+      "q-2024-jslk-001": {
+        "questionId": "q-2024-jslk-001",
+        "questionNo": 1,
+        "groupId": "group-2024-jslk-listening-s1",
+        "stem": "What will Chris do next?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Drink some coffee."
+          },
+          {
+            "label": "B",
+            "text": "Watch the World Cup."
+          },
+          {
+            "label": "C",
+            "text": "Go to sleep."
+          }
+        ]
+      },
+      "q-2024-jslk-002": {
+        "questionId": "q-2024-jslk-002",
+        "questionNo": 2,
+        "groupId": "group-2024-jslk-listening-s1",
+        "stem": "What is the probable relationship between the speakers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Strangers."
+          },
+          {
+            "label": "B",
+            "text": "Classmates."
+          },
+          {
+            "label": "C",
+            "text": "Relatives."
+          }
+        ]
+      },
+      "q-2024-jslk-003": {
+        "questionId": "q-2024-jslk-003",
+        "questionNo": 3,
+        "groupId": "group-2024-jslk-listening-s1",
+        "stem": "What is the woman's attitude to the man's suggestion?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Favorable."
+          },
+          {
+            "label": "B",
+            "text": "Tolerant."
+          },
+          {
+            "label": "C",
+            "text": "Negative."
+          }
+        ]
+      },
+      "q-2024-jslk-004": {
+        "questionId": "q-2024-jslk-004",
+        "questionNo": 4,
+        "groupId": "group-2024-jslk-listening-s1",
+        "stem": "What can we learn about Tom?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He's smart for his age."
+          },
+          {
+            "label": "B",
+            "text": "He's unwilling to study."
+          },
+          {
+            "label": "C",
+            "text": "He's difficult to get along with."
+          }
+        ]
+      },
+      "q-2024-jslk-005": {
+        "questionId": "q-2024-jslk-005",
+        "questionNo": 5,
+        "groupId": "group-2024-jslk-listening-s1",
+        "stem": "What did Kevin do yesterday?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He went swimming."
+          },
+          {
+            "label": "B",
+            "text": "He cleaned up his house."
+          },
+          {
+            "label": "C",
+            "text": "He talked with his grandparents."
+          }
+        ]
+      },
+      "q-2024-jslk-006": {
+        "questionId": "q-2024-jslk-006",
+        "questionNo": 6,
+        "groupId": "group-2024-jslk-listening-m6",
+        "stem": "Who is arranging the meeting?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Peter."
+          },
+          {
+            "label": "B",
+            "text": "David."
+          },
+          {
+            "label": "C",
+            "text": "Janet."
+          }
+        ]
+      },
+      "q-2024-jslk-007": {
+        "questionId": "q-2024-jslk-007",
+        "questionNo": 7,
+        "groupId": "group-2024-jslk-listening-m6",
+        "stem": "When does the man prefer to have the meeting?",
+        "options": [
+          {
+            "label": "A",
+            "text": "This Wednesday."
+          },
+          {
+            "label": "B",
+            "text": "This Friday."
+          },
+          {
+            "label": "C",
+            "text": "Next Monday."
+          }
+        ]
+      },
+      "q-2024-jslk-008": {
+        "questionId": "q-2024-jslk-008",
+        "questionNo": 8,
+        "groupId": "group-2024-jslk-listening-m7",
+        "stem": "What are the speakers talking about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Travel experiences."
+          },
+          {
+            "label": "B",
+            "text": "Vacation plans."
+          },
+          {
+            "label": "C",
+            "text": "Favorite seasons."
+          }
+        ]
+      },
+      "q-2024-jslk-009": {
+        "questionId": "q-2024-jslk-009",
+        "questionNo": 9,
+        "groupId": "group-2024-jslk-listening-m7",
+        "stem": "What does the man want to do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Go to the beach."
+          },
+          {
+            "label": "B",
+            "text": "Find a summer job."
+          },
+          {
+            "label": "C",
+            "text": "Move to Washington."
+          }
+        ]
+      },
+      "q-2024-jslk-010": {
+        "questionId": "q-2024-jslk-010",
+        "questionNo": 10,
+        "groupId": "group-2024-jslk-listening-m8",
+        "stem": "What does the news say about big online spenders in the US?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The number of them grows slowly."
+          },
+          {
+            "label": "B",
+            "text": "There are more men than women."
+          },
+          {
+            "label": "C",
+            "text": "They make up half of all shoppers."
+          }
+        ]
+      },
+      "q-2024-jslk-011": {
+        "questionId": "q-2024-jslk-011",
+        "questionNo": 11,
+        "groupId": "group-2024-jslk-listening-m8",
+        "stem": "How much did Americans spend shopping online last year?",
+        "options": [
+          {
+            "label": "A",
+            "text": "$453 billion."
+          },
+          {
+            "label": "B",
+            "text": "$990 billion."
+          },
+          {
+            "label": "C",
+            "text": "$1,500 billion."
+          }
+        ]
+      },
+      "q-2024-jslk-012": {
+        "questionId": "q-2024-jslk-012",
+        "questionNo": 12,
+        "groupId": "group-2024-jslk-listening-m8",
+        "stem": "What did George buy online last Sunday?",
+        "options": [
+          {
+            "label": "A",
+            "text": "An adventure novel."
+          },
+          {
+            "label": "B",
+            "text": "A software package."
+          },
+          {
+            "label": "C",
+            "text": "A note by Mark Twain."
+          }
+        ]
+      },
+      "q-2024-jslk-013": {
+        "questionId": "q-2024-jslk-013",
+        "questionNo": 13,
+        "groupId": "group-2024-jslk-listening-m9",
+        "stem": "What has Richard been doing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Visiting a museum."
+          },
+          {
+            "label": "B",
+            "text": "Watching TV."
+          },
+          {
+            "label": "C",
+            "text": "Studying."
+          }
+        ]
+      },
+      "q-2024-jslk-014": {
+        "questionId": "q-2024-jslk-014",
+        "questionNo": 14,
+        "groupId": "group-2024-jslk-listening-m9",
+        "stem": "Why does Susan call Richard?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To ask for help."
+          },
+          {
+            "label": "B",
+            "text": "To give thanks."
+          },
+          {
+            "label": "C",
+            "text": "To make an appointment."
+          }
+        ]
+      },
+      "q-2024-jslk-015": {
+        "questionId": "q-2024-jslk-015",
+        "questionNo": 15,
+        "groupId": "group-2024-jslk-listening-m9",
+        "stem": "What does Susan want to do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "See an exhibition."
+          },
+          {
+            "label": "B",
+            "text": "Buy a new cell phone."
+          },
+          {
+            "label": "C",
+            "text": "Take pictures of the snow."
+          }
+        ]
+      },
+      "q-2024-jslk-016": {
+        "questionId": "q-2024-jslk-016",
+        "questionNo": 16,
+        "groupId": "group-2024-jslk-listening-m9",
+        "stem": "What will the speakers probably do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Go to a park."
+          },
+          {
+            "label": "B",
+            "text": "Play football."
+          },
+          {
+            "label": "C",
+            "text": "Attend a party."
+          }
+        ]
+      },
+      "q-2024-jslk-017": {
+        "questionId": "q-2024-jslk-017",
+        "questionNo": 17,
+        "groupId": "group-2024-jslk-listening-m10",
+        "stem": "Where did the speaker learn about college?",
+        "options": [
+          {
+            "label": "A",
+            "text": "From the movies."
+          },
+          {
+            "label": "B",
+            "text": "From her family."
+          },
+          {
+            "label": "C",
+            "text": "From the books."
+          }
+        ]
+      },
+      "q-2024-jslk-018": {
+        "questionId": "q-2024-jslk-018",
+        "questionNo": 18,
+        "groupId": "group-2024-jslk-listening-m10",
+        "stem": "What helped change the speaker's attitude towards study?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Her professor's advice."
+          },
+          {
+            "label": "B",
+            "text": "Her graduate program."
+          },
+          {
+            "label": "C",
+            "text": "Her trip to Africa."
+          }
+        ]
+      },
+      "q-2024-jslk-019": {
+        "questionId": "q-2024-jslk-019",
+        "questionNo": 19,
+        "groupId": "group-2024-jslk-listening-m10",
+        "stem": "How does the speaker feel when she talks about her past experiences?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Regretful."
+          },
+          {
+            "label": "B",
+            "text": "Relieved."
+          },
+          {
+            "label": "C",
+            "text": "Grateful."
+          }
+        ]
+      },
+      "q-2024-jslk-020": {
+        "questionId": "q-2024-jslk-020",
+        "questionNo": 20,
+        "groupId": "group-2024-jslk-listening-m10",
+        "stem": "Who is the speaker probably talking to?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Conservation workers."
+          },
+          {
+            "label": "B",
+            "text": "High school students."
+          },
+          {
+            "label": "C",
+            "text": "College teachers."
+          }
+        ]
+      },
+      "q-2024-jslk-021": {
+        "questionId": "q-2024-jslk-021",
+        "questionNo": 21,
+        "groupId": "group-2024-jslk-reading-a",
+        "stem": "How long will the exhibition \"Wonderland Illustrated\" last?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Two weeks."
+          },
+          {
+            "label": "B",
+            "text": "Three months."
+          },
+          {
+            "label": "C",
+            "text": "Four months."
+          },
+          {
+            "label": "D",
+            "text": "One year."
+          }
+        ]
+      },
+      "q-2024-jslk-022": {
+        "questionId": "q-2024-jslk-022",
+        "questionNo": 22,
+        "groupId": "group-2024-jslk-reading-a",
+        "stem": "What is a purpose of the exhibition?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To remember a famous artist."
+          },
+          {
+            "label": "B",
+            "text": "To raise fund for Coe Library."
+          },
+          {
+            "label": "C",
+            "text": "To mark the anniversary of a national park."
+          },
+          {
+            "label": "D",
+            "text": "To tell the history of the University of Wyoming."
+          }
+        ]
+      },
+      "q-2024-jslk-023": {
+        "questionId": "q-2024-jslk-023",
+        "questionNo": 23,
+        "groupId": "group-2024-jslk-reading-a",
+        "stem": "What do we know about the 1904 poster Henry Wellge designed?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is rare in the world."
+          },
+          {
+            "label": "B",
+            "text": "It is in black and white."
+          },
+          {
+            "label": "C",
+            "text": "It is printed on cloth."
+          },
+          {
+            "label": "D",
+            "text": "It is owned by a professor."
+          }
+        ]
+      },
+      "q-2024-jslk-024": {
+        "questionId": "q-2024-jslk-024",
+        "questionNo": 24,
+        "groupId": "group-2024-jslk-reading-b",
+        "stem": "What is important for parrots to better survive from attacks in the wild?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Living in a group."
+          },
+          {
+            "label": "B",
+            "text": "Growing beautiful feathers."
+          },
+          {
+            "label": "C",
+            "text": "Feeding on the ground."
+          },
+          {
+            "label": "D",
+            "text": "Avoiding coming out at night."
+          }
+        ]
+      },
+      "q-2024-jslk-025": {
+        "questionId": "q-2024-jslk-025",
+        "questionNo": 25,
+        "groupId": "group-2024-jslk-reading-b",
+        "stem": "What is parrots' first response to an immediate risk?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To attack back."
+          },
+          {
+            "label": "B",
+            "text": "To get away."
+          },
+          {
+            "label": "C",
+            "text": "To protect the young."
+          },
+          {
+            "label": "D",
+            "text": "To play dead."
+          }
+        ]
+      },
+      "q-2024-jslk-026": {
+        "questionId": "q-2024-jslk-026",
+        "questionNo": 26,
+        "groupId": "group-2024-jslk-reading-b",
+        "stem": "Why would a balloon frighten a parrot?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It may explode suddenly."
+          },
+          {
+            "label": "B",
+            "text": "It may be in a strange shape."
+          },
+          {
+            "label": "C",
+            "text": "It may have a strong color."
+          },
+          {
+            "label": "D",
+            "text": "It may move around quickly."
+          }
+        ]
+      },
+      "q-2024-jslk-027": {
+        "questionId": "q-2024-jslk-027",
+        "questionNo": 27,
+        "groupId": "group-2024-jslk-reading-b",
+        "stem": "What is the author's purpose of writing the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To explain wild parrots' behavior."
+          },
+          {
+            "label": "B",
+            "text": "To give advice on raising a parrot."
+          },
+          {
+            "label": "C",
+            "text": "To call for action to protect animals."
+          },
+          {
+            "label": "D",
+            "text": "To introduce a study on bird ecology."
+          }
+        ]
+      },
+      "q-2024-jslk-028": {
+        "questionId": "q-2024-jslk-028",
+        "questionNo": 28,
+        "groupId": "group-2024-jslk-reading-c",
+        "stem": "What is the author's attitude toward Carnegie's understanding of argument?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Critical."
+          },
+          {
+            "label": "B",
+            "text": "Supportive."
+          },
+          {
+            "label": "C",
+            "text": "Tolerant."
+          },
+          {
+            "label": "D",
+            "text": "Uncertain."
+          }
+        ]
+      },
+      "q-2024-jslk-029": {
+        "questionId": "q-2024-jslk-029",
+        "questionNo": 29,
+        "groupId": "group-2024-jslk-reading-c",
+        "stem": "Why do many people try to avoid arguments?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They lack debating skills."
+          },
+          {
+            "label": "B",
+            "text": "They may feel bad even if they win."
+          },
+          {
+            "label": "C",
+            "text": "They fear being ignored."
+          },
+          {
+            "label": "D",
+            "text": "They are not confident in themselves."
+          }
+        ]
+      },
+      "q-2024-jslk-030": {
+        "questionId": "q-2024-jslk-030",
+        "questionNo": 30,
+        "groupId": "group-2024-jslk-reading-c",
+        "stem": "What does the underlined phrase \"spell out\" in paragraph 3 probably mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Defend."
+          },
+          {
+            "label": "B",
+            "text": "Explain."
+          },
+          {
+            "label": "C",
+            "text": "Conclude."
+          },
+          {
+            "label": "D",
+            "text": "Repeat."
+          }
+        ]
+      },
+      "q-2024-jslk-031": {
+        "questionId": "q-2024-jslk-031",
+        "questionNo": 31,
+        "groupId": "group-2024-jslk-reading-c",
+        "stem": "What is the key to \"winning\" an argument according to the author?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Sense of logic."
+          },
+          {
+            "label": "B",
+            "text": "Solid supporting evidence."
+          },
+          {
+            "label": "C",
+            "text": "Proper manners."
+          },
+          {
+            "label": "D",
+            "text": "Understanding from both sides."
+          }
+        ]
+      },
+      "q-2024-jslk-032": {
+        "questionId": "q-2024-jslk-032",
+        "questionNo": 32,
+        "groupId": "group-2024-jslk-reading-d",
+        "stem": "What does it indicate when toddlers copy their playmates' behavior?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They are interested in acting."
+          },
+          {
+            "label": "B",
+            "text": "They are shy with the strangers."
+          },
+          {
+            "label": "C",
+            "text": "They are fond of their playmates."
+          },
+          {
+            "label": "D",
+            "text": "They are tired of playing games."
+          }
+        ]
+      },
+      "q-2024-jslk-033": {
+        "questionId": "q-2024-jslk-033",
+        "questionNo": 33,
+        "groupId": "group-2024-jslk-reading-d",
+        "stem": "What does the author suggest parents do for their kids?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Design games for them."
+          },
+          {
+            "label": "B",
+            "text": "Find them suitable playmates."
+          },
+          {
+            "label": "C",
+            "text": "Play together with them."
+          },
+          {
+            "label": "D",
+            "text": "Help them understand social rules."
+          }
+        ]
+      },
+      "q-2024-jslk-034": {
+        "questionId": "q-2024-jslk-034",
+        "questionNo": 34,
+        "groupId": "group-2024-jslk-reading-d",
+        "stem": "What is the function of the quoted statements in paragraph 4?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Giving examples."
+          },
+          {
+            "label": "B",
+            "text": "Explaining concepts."
+          },
+          {
+            "label": "C",
+            "text": "Providing evidence."
+          },
+          {
+            "label": "D",
+            "text": "Making comparisons."
+          }
+        ]
+      },
+      "q-2024-jslk-035": {
+        "questionId": "q-2024-jslk-035",
+        "questionNo": 35,
+        "groupId": "group-2024-jslk-reading-d",
+        "stem": "Which of the following is the best title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "How Children Adapt to Changes."
+          },
+          {
+            "label": "B",
+            "text": "How to Be a Role Model for Children."
+          },
+          {
+            "label": "C",
+            "text": "How Your Baby Learns to Love."
+          },
+          {
+            "label": "D",
+            "text": "How to Communicate with Your Kid."
+          }
+        ]
+      },
+      "q-2024-jslk-036": {
+        "questionId": "q-2024-jslk-036",
+        "questionNo": 36,
+        "groupId": "group-2024-jslk-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2024-jslk-036"
+      },
+      "q-2024-jslk-037": {
+        "questionId": "q-2024-jslk-037",
+        "questionNo": 37,
+        "groupId": "group-2024-jslk-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2024-jslk-037"
+      },
+      "q-2024-jslk-038": {
+        "questionId": "q-2024-jslk-038",
+        "questionNo": 38,
+        "groupId": "group-2024-jslk-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2024-jslk-038"
+      },
+      "q-2024-jslk-039": {
+        "questionId": "q-2024-jslk-039",
+        "questionNo": 39,
+        "groupId": "group-2024-jslk-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2024-jslk-039"
+      },
+      "q-2024-jslk-040": {
+        "questionId": "q-2024-jslk-040",
+        "questionNo": 40,
+        "groupId": "group-2024-jslk-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2024-jslk-040"
+      },
+      "q-2024-jslk-041": {
+        "questionId": "q-2024-jslk-041",
+        "questionNo": 41,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "41",
+        "blankId": "blank-2024-jslk-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "busy"
+          },
+          {
+            "label": "B",
+            "text": "loud"
+          },
+          {
+            "label": "C",
+            "text": "dead"
+          },
+          {
+            "label": "D",
+            "text": "secure"
+          }
+        ]
+      },
+      "q-2024-jslk-042": {
+        "questionId": "q-2024-jslk-042",
+        "questionNo": 42,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "42",
+        "blankId": "blank-2024-jslk-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "mechanic"
+          },
+          {
+            "label": "B",
+            "text": "policeman"
+          },
+          {
+            "label": "C",
+            "text": "manager"
+          },
+          {
+            "label": "D",
+            "text": "guide"
+          }
+        ]
+      },
+      "q-2024-jslk-043": {
+        "questionId": "q-2024-jslk-043",
+        "questionNo": 43,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "43",
+        "blankId": "blank-2024-jslk-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "washing"
+          },
+          {
+            "label": "B",
+            "text": "parking"
+          },
+          {
+            "label": "C",
+            "text": "purchasing"
+          },
+          {
+            "label": "D",
+            "text": "maintaining"
+          }
+        ]
+      },
+      "q-2024-jslk-044": {
+        "questionId": "q-2024-jslk-044",
+        "questionNo": 44,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "44",
+        "blankId": "blank-2024-jslk-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "feel"
+          },
+          {
+            "label": "B",
+            "text": "beat"
+          },
+          {
+            "label": "C",
+            "text": "absorb"
+          },
+          {
+            "label": "D",
+            "text": "produce"
+          }
+        ]
+      },
+      "q-2024-jslk-045": {
+        "questionId": "q-2024-jslk-045",
+        "questionNo": 45,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "45",
+        "blankId": "blank-2024-jslk-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "promised"
+          },
+          {
+            "label": "B",
+            "text": "refused"
+          },
+          {
+            "label": "C",
+            "text": "stopped"
+          },
+          {
+            "label": "D",
+            "text": "volunteered"
+          }
+        ]
+      },
+      "q-2024-jslk-046": {
+        "questionId": "q-2024-jslk-046",
+        "questionNo": 46,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "46",
+        "blankId": "blank-2024-jslk-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "solved"
+          },
+          {
+            "label": "B",
+            "text": "noticed"
+          },
+          {
+            "label": "C",
+            "text": "escaped"
+          },
+          {
+            "label": "D",
+            "text": "explained"
+          }
+        ]
+      },
+      "q-2024-jslk-047": {
+        "questionId": "q-2024-jslk-047",
+        "questionNo": 47,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "47",
+        "blankId": "blank-2024-jslk-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "surprise"
+          },
+          {
+            "label": "B",
+            "text": "regret"
+          },
+          {
+            "label": "C",
+            "text": "amusement"
+          },
+          {
+            "label": "D",
+            "text": "disappointment"
+          }
+        ]
+      },
+      "q-2024-jslk-048": {
+        "questionId": "q-2024-jslk-048",
+        "questionNo": 48,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "48",
+        "blankId": "blank-2024-jslk-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "called up"
+          },
+          {
+            "label": "B",
+            "text": "pulled out"
+          },
+          {
+            "label": "C",
+            "text": "put down"
+          },
+          {
+            "label": "D",
+            "text": "threw away"
+          }
+        ]
+      },
+      "q-2024-jslk-049": {
+        "questionId": "q-2024-jslk-049",
+        "questionNo": 49,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "49",
+        "blankId": "blank-2024-jslk-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "liar"
+          },
+          {
+            "label": "B",
+            "text": "beginner"
+          },
+          {
+            "label": "C",
+            "text": "stranger"
+          },
+          {
+            "label": "D",
+            "text": "loser"
+          }
+        ]
+      },
+      "q-2024-jslk-050": {
+        "questionId": "q-2024-jslk-050",
+        "questionNo": 50,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "50",
+        "blankId": "blank-2024-jslk-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "free"
+          },
+          {
+            "label": "B",
+            "text": "ready"
+          },
+          {
+            "label": "C",
+            "text": "uncertain"
+          },
+          {
+            "label": "D",
+            "text": "unable"
+          }
+        ]
+      },
+      "q-2024-jslk-051": {
+        "questionId": "q-2024-jslk-051",
+        "questionNo": 51,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "51",
+        "blankId": "blank-2024-jslk-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "pronounced"
+          },
+          {
+            "label": "B",
+            "text": "agreed"
+          },
+          {
+            "label": "C",
+            "text": "discovered"
+          },
+          {
+            "label": "D",
+            "text": "doubted"
+          }
+        ]
+      },
+      "q-2024-jslk-052": {
+        "questionId": "q-2024-jslk-052",
+        "questionNo": 52,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "52",
+        "blankId": "blank-2024-jslk-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "Tiredness"
+          },
+          {
+            "label": "B",
+            "text": "Kindness"
+          },
+          {
+            "label": "C",
+            "text": "Loneliness"
+          },
+          {
+            "label": "D",
+            "text": "Carefulness"
+          }
+        ]
+      },
+      "q-2024-jslk-053": {
+        "questionId": "q-2024-jslk-053",
+        "questionNo": 53,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "53",
+        "blankId": "blank-2024-jslk-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "Folding"
+          },
+          {
+            "label": "B",
+            "text": "Drying"
+          },
+          {
+            "label": "C",
+            "text": "Soiling"
+          },
+          {
+            "label": "D",
+            "text": "Mending"
+          }
+        ]
+      },
+      "q-2024-jslk-054": {
+        "questionId": "q-2024-jslk-054",
+        "questionNo": 54,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "54",
+        "blankId": "blank-2024-jslk-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "saved"
+          },
+          {
+            "label": "B",
+            "text": "called"
+          },
+          {
+            "label": "C",
+            "text": "judged"
+          },
+          {
+            "label": "D",
+            "text": "banned"
+          }
+        ]
+      },
+      "q-2024-jslk-055": {
+        "questionId": "q-2024-jslk-055",
+        "questionNo": 55,
+        "groupId": "group-2024-jslk-cloze",
+        "stem": "55",
+        "blankId": "blank-2024-jslk-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "friend"
+          },
+          {
+            "label": "B",
+            "text": "daughter"
+          },
+          {
+            "label": "C",
+            "text": "coworker"
+          },
+          {
+            "label": "D",
+            "text": "customer"
+          }
+        ]
+      },
+      "q-2024-jslk-056": {
+        "questionId": "q-2024-jslk-056",
+        "questionNo": 56,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-2024-jslk-056"
+      },
+      "q-2024-jslk-057": {
+        "questionId": "q-2024-jslk-057",
+        "questionNo": 57,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-2024-jslk-057"
+      },
+      "q-2024-jslk-058": {
+        "questionId": "q-2024-jslk-058",
+        "questionNo": 58,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-2024-jslk-058"
+      },
+      "q-2024-jslk-059": {
+        "questionId": "q-2024-jslk-059",
+        "questionNo": 59,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-2024-jslk-059"
+      },
+      "q-2024-jslk-060": {
+        "questionId": "q-2024-jslk-060",
+        "questionNo": 60,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-2024-jslk-060"
+      },
+      "q-2024-jslk-061": {
+        "questionId": "q-2024-jslk-061",
+        "questionNo": 61,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2024-jslk-061"
+      },
+      "q-2024-jslk-062": {
+        "questionId": "q-2024-jslk-062",
+        "questionNo": 62,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2024-jslk-062"
+      },
+      "q-2024-jslk-063": {
+        "questionId": "q-2024-jslk-063",
+        "questionNo": 63,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2024-jslk-063"
+      },
+      "q-2024-jslk-064": {
+        "questionId": "q-2024-jslk-064",
+        "questionNo": 64,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2024-jslk-064"
+      },
+      "q-2024-jslk-065": {
+        "questionId": "q-2024-jslk-065",
+        "questionNo": 65,
+        "groupId": "group-2024-jslk-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2024-jslk-065"
+      }
+    },
+    "blanks": {
+      "blank-2024-jslk-036": {
+        "blankId": "blank-2024-jslk-036",
+        "groupId": "group-2024-jslk-seven-choices",
+        "questionId": "q-2024-jslk-036",
+        "position": "paragraph-gap-36"
+      },
+      "blank-2024-jslk-037": {
+        "blankId": "blank-2024-jslk-037",
+        "groupId": "group-2024-jslk-seven-choices",
+        "questionId": "q-2024-jslk-037",
+        "position": "paragraph-gap-37"
+      },
+      "blank-2024-jslk-038": {
+        "blankId": "blank-2024-jslk-038",
+        "groupId": "group-2024-jslk-seven-choices",
+        "questionId": "q-2024-jslk-038",
+        "position": "paragraph-gap-38"
+      },
+      "blank-2024-jslk-039": {
+        "blankId": "blank-2024-jslk-039",
+        "groupId": "group-2024-jslk-seven-choices",
+        "questionId": "q-2024-jslk-039",
+        "position": "paragraph-gap-39"
+      },
+      "blank-2024-jslk-040": {
+        "blankId": "blank-2024-jslk-040",
+        "groupId": "group-2024-jslk-seven-choices",
+        "questionId": "q-2024-jslk-040",
+        "position": "paragraph-gap-40"
+      },
+      "blank-2024-jslk-041": {
+        "blankId": "blank-2024-jslk-041",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-041",
+        "position": "inline-41"
+      },
+      "blank-2024-jslk-042": {
+        "blankId": "blank-2024-jslk-042",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-042",
+        "position": "inline-42"
+      },
+      "blank-2024-jslk-043": {
+        "blankId": "blank-2024-jslk-043",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-043",
+        "position": "inline-43"
+      },
+      "blank-2024-jslk-044": {
+        "blankId": "blank-2024-jslk-044",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-044",
+        "position": "inline-44"
+      },
+      "blank-2024-jslk-045": {
+        "blankId": "blank-2024-jslk-045",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-045",
+        "position": "inline-45"
+      },
+      "blank-2024-jslk-046": {
+        "blankId": "blank-2024-jslk-046",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-046",
+        "position": "inline-46"
+      },
+      "blank-2024-jslk-047": {
+        "blankId": "blank-2024-jslk-047",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-047",
+        "position": "inline-47"
+      },
+      "blank-2024-jslk-048": {
+        "blankId": "blank-2024-jslk-048",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-048",
+        "position": "inline-48"
+      },
+      "blank-2024-jslk-049": {
+        "blankId": "blank-2024-jslk-049",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-049",
+        "position": "inline-49"
+      },
+      "blank-2024-jslk-050": {
+        "blankId": "blank-2024-jslk-050",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-050",
+        "position": "inline-50"
+      },
+      "blank-2024-jslk-051": {
+        "blankId": "blank-2024-jslk-051",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-051",
+        "position": "inline-51"
+      },
+      "blank-2024-jslk-052": {
+        "blankId": "blank-2024-jslk-052",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-052",
+        "position": "inline-52"
+      },
+      "blank-2024-jslk-053": {
+        "blankId": "blank-2024-jslk-053",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-053",
+        "position": "inline-53"
+      },
+      "blank-2024-jslk-054": {
+        "blankId": "blank-2024-jslk-054",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-054",
+        "position": "inline-54"
+      },
+      "blank-2024-jslk-055": {
+        "blankId": "blank-2024-jslk-055",
+        "groupId": "group-2024-jslk-cloze",
+        "questionId": "q-2024-jslk-055",
+        "position": "inline-55"
+      },
+      "blank-2024-jslk-056": {
+        "blankId": "blank-2024-jslk-056",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-056",
+        "position": "inline-56",
+        "prompt": "keyboard"
+      },
+      "blank-2024-jslk-057": {
+        "blankId": "blank-2024-jslk-057",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-057",
+        "position": "inline-57",
+        "prompt": "be"
+      },
+      "blank-2024-jslk-058": {
+        "blankId": "blank-2024-jslk-058",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-058",
+        "position": "inline-58"
+      },
+      "blank-2024-jslk-059": {
+        "blankId": "blank-2024-jslk-059",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-059",
+        "position": "inline-59",
+        "prompt": "use"
+      },
+      "blank-2024-jslk-060": {
+        "blankId": "blank-2024-jslk-060",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-060",
+        "position": "inline-60",
+        "prompt": "simple"
+      },
+      "blank-2024-jslk-061": {
+        "blankId": "blank-2024-jslk-061",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-061",
+        "position": "inline-61"
+      },
+      "blank-2024-jslk-062": {
+        "blankId": "blank-2024-jslk-062",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-062",
+        "position": "inline-62",
+        "prompt": "improve"
+      },
+      "blank-2024-jslk-063": {
+        "blankId": "blank-2024-jslk-063",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-063",
+        "position": "inline-63"
+      },
+      "blank-2024-jslk-064": {
+        "blankId": "blank-2024-jslk-064",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-064",
+        "position": "inline-64",
+        "prompt": "stay"
+      },
+      "blank-2024-jslk-065": {
+        "blankId": "blank-2024-jslk-065",
+        "groupId": "group-2024-jslk-grammar-fill",
+        "questionId": "q-2024-jslk-065",
+        "position": "inline-65",
+        "prompt": "they"
+      }
+    },
+    "writingTasks": {
+      "writing-2024-jslk-application": {
+        "writingTaskId": "writing-2024-jslk-application",
+        "groupId": "group-2024-jslk-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "你校英文报计划举办主题为“携手行动，节约粮食”的作文比赛。请你写一则活动通知，内容包括：(1)介绍活动目的；(2)说明参赛要求。",
+        "wordCountTarget": 80
+      },
+      "writing-2024-jslk-continuation": {
+        "writingTaskId": "writing-2024-jslk-continuation",
+        "groupId": "group-2024-jslk-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。",
+        "wordCountTarget": 150,
+        "continuationStarters": [
+          "“This is Maya’s secret,”Hilda said with a big smile.",
+          "Now Katherine realized what had been going on."
+        ],
+        "materialText": "Last summer,Hilda worked as a volunteer with dolphin trainers at a sea life park.Her job was to make sure the tanks were free of any items so that the trainers could train the dolphins to fetch specific items.However,one day after cleaning,one of the dolphins,Maya, presented Hilda with a candy wrapper from the tank.When Katherine,the trainer,saw this, she blamed Hilda for her carelessness.Upset but not discouraged by this event,Hilda decided to do some spying on Maya.\nThe next morning,Hilda arrived at the park early.She put on her scuba gear (水下呼吸器) and jumped into the tank for her usual,underwater sweep.Finding nothing in the tank,she climbed out of the water just in time to see Katherine jumping in on the other side.After what happened yesterday,Hilda knew what she was doing.She watched as Katherine performed her underwater search,but Hilda wasn’t surprised when she surfaced empty-handed.\nDuring the tank sweeps,Maya had been swimming playfully,but now the dolphin stopped suddenly and swam to the back part of the tank where the filter(过滤) box was located.She stuck her nose down behind the box and then swam away.What was Maya doing back there? Hilda wondered.She jumped back into the water and swam over to take a look behind the box,and her question was answered.Hilda then swam across the tank following Maya’s path and emerged from the water to find Katherine removing her scuba gear.As Katherine turned around,her mouth dropped open.There was Maya at the edge of the tank with a comb(梳子)in her mouth waiting for her treat.\n“Maya!Where did you get that?”demanded Katherine,taking the comb and throwing her a fish.“I know where she got it,”declared Hilda climbing out of the tank with a handful of items still wet from their watery,resting place.“What’s all this?”Katherine asked, obviously confused."
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2024-jslk-001": {
+        "questionId": "q-2024-jslk-001",
+        "questionNo": 1,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-002": {
+        "questionId": "q-2024-jslk-002",
+        "questionNo": 2,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-003": {
+        "questionId": "q-2024-jslk-003",
+        "questionNo": 3,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-004": {
+        "questionId": "q-2024-jslk-004",
+        "questionNo": 4,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-005": {
+        "questionId": "q-2024-jslk-005",
+        "questionNo": 5,
+        "answer": "B",
+        "score": 1.5
+      },
+      "q-2024-jslk-006": {
+        "questionId": "q-2024-jslk-006",
+        "questionNo": 6,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-007": {
+        "questionId": "q-2024-jslk-007",
+        "questionNo": 7,
+        "answer": "B",
+        "score": 1.5
+      },
+      "q-2024-jslk-008": {
+        "questionId": "q-2024-jslk-008",
+        "questionNo": 8,
+        "answer": "B",
+        "score": 1.5
+      },
+      "q-2024-jslk-009": {
+        "questionId": "q-2024-jslk-009",
+        "questionNo": 9,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-010": {
+        "questionId": "q-2024-jslk-010",
+        "questionNo": 10,
+        "answer": "B",
+        "score": 1.5
+      },
+      "q-2024-jslk-011": {
+        "questionId": "q-2024-jslk-011",
+        "questionNo": 11,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-012": {
+        "questionId": "q-2024-jslk-012",
+        "questionNo": 12,
+        "answer": "B",
+        "score": 1.5
+      },
+      "q-2024-jslk-013": {
+        "questionId": "q-2024-jslk-013",
+        "questionNo": 13,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-014": {
+        "questionId": "q-2024-jslk-014",
+        "questionNo": 14,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-015": {
+        "questionId": "q-2024-jslk-015",
+        "questionNo": 15,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-016": {
+        "questionId": "q-2024-jslk-016",
+        "questionNo": 16,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-017": {
+        "questionId": "q-2024-jslk-017",
+        "questionNo": 17,
+        "answer": "A",
+        "score": 1.5
+      },
+      "q-2024-jslk-018": {
+        "questionId": "q-2024-jslk-018",
+        "questionNo": 18,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-019": {
+        "questionId": "q-2024-jslk-019",
+        "questionNo": 19,
+        "answer": "C",
+        "score": 1.5
+      },
+      "q-2024-jslk-020": {
+        "questionId": "q-2024-jslk-020",
+        "questionNo": 20,
+        "answer": "B",
+        "score": 1.5
+      },
+      "q-2024-jslk-021": {
+        "questionId": "q-2024-jslk-021",
+        "questionNo": 21,
+        "answer": "C",
+        "score": 2.5
+      },
+      "q-2024-jslk-022": {
+        "questionId": "q-2024-jslk-022",
+        "questionNo": 22,
+        "answer": "C",
+        "score": 2.5
+      },
+      "q-2024-jslk-023": {
+        "questionId": "q-2024-jslk-023",
+        "questionNo": 23,
+        "answer": "A",
+        "score": 2.5
+      },
+      "q-2024-jslk-024": {
+        "questionId": "q-2024-jslk-024",
+        "questionNo": 24,
+        "answer": "A",
+        "score": 2.5
+      },
+      "q-2024-jslk-025": {
+        "questionId": "q-2024-jslk-025",
+        "questionNo": 25,
+        "answer": "B",
+        "score": 2.5
+      },
+      "q-2024-jslk-026": {
+        "questionId": "q-2024-jslk-026",
+        "questionNo": 26,
+        "answer": "D",
+        "score": 2.5
+      },
+      "q-2024-jslk-027": {
+        "questionId": "q-2024-jslk-027",
+        "questionNo": 27,
+        "answer": "B",
+        "score": 2.5
+      },
+      "q-2024-jslk-028": {
+        "questionId": "q-2024-jslk-028",
+        "questionNo": 28,
+        "answer": "A",
+        "score": 2.5
+      },
+      "q-2024-jslk-029": {
+        "questionId": "q-2024-jslk-029",
+        "questionNo": 29,
+        "answer": "B",
+        "score": 2.5
+      },
+      "q-2024-jslk-030": {
+        "questionId": "q-2024-jslk-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2.5
+      },
+      "q-2024-jslk-031": {
+        "questionId": "q-2024-jslk-031",
+        "questionNo": 31,
+        "answer": "D",
+        "score": 2.5
+      },
+      "q-2024-jslk-032": {
+        "questionId": "q-2024-jslk-032",
+        "questionNo": 32,
+        "answer": "C",
+        "score": 2.5
+      },
+      "q-2024-jslk-033": {
+        "questionId": "q-2024-jslk-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2.5
+      },
+      "q-2024-jslk-034": {
+        "questionId": "q-2024-jslk-034",
+        "questionNo": 34,
+        "answer": "A",
+        "score": 2.5
+      },
+      "q-2024-jslk-035": {
+        "questionId": "q-2024-jslk-035",
+        "questionNo": 35,
+        "answer": "C",
+        "score": 2.5
+      }
+    }
+  },
+  "analysis": {}
+}
