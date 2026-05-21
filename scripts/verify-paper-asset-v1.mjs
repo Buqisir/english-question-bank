@@ -448,16 +448,7 @@ try {
 // Helper: assert text is contained in normalized DOCX source (whitespace-stripped match)
 function assertInSource(text, label) {
   const normText = normalizeForSourceMatch(text);
-  // For very short texts, require full containment
-  if (normText.length <= 20) {
-    assert(docxNormalizedText.includes(normText), `${label} found in DOCX source`);
-    return;
-  }
-  // For longer texts, check a substantial middle chunk (handles minor boundary differences)
-  const chunkLen = Math.min(normText.length, Math.max(40, Math.floor(normText.length * 0.6)));
-  const startIdx = Math.floor((normText.length - chunkLen) / 2);
-  const chunk = normText.slice(startIdx, startIdx + chunkLen);
-  assert(docxNormalizedText.includes(chunk), `${label} content found in DOCX source`);
+  assert(docxNormalizedText.includes(normText), `${label} full text found in DOCX source`);
 }
 
 // 3. Reading A-D paragraph texts must be found in normalized DOCX
