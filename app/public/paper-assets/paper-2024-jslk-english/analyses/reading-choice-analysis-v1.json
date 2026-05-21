@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2024-jslk-english",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-jslk-reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "GPT-5.5 Thinking",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "Codex",
+    "reviewedAt": "2026-05-21"
+  },
+  "groups": {
+    "group-2024-jslk-reading-a": {
+      "overview": "文章介绍了怀俄明大学 Coe Library 举办的“Wonderland Illustrated”黄石国家公园海报展，包括展览时间、地点、主题、纪念意义以及其中一张1904年海报的来历和稀有性。",
+      "discourseStructure": {
+        "summary": "文章先用标题和首段点明展览主题与开放地点，再介绍展览名称、展期、地点和纪念背景，随后引用馆方人员的话说明展览的合作方、内容跨度和收藏价值，最后聚焦一张1904年的代表性海报，说明其作者、用途、收藏情况和稀有性。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jslk-reading-a-title",
+            "summary": "标题点明黄石国家公园海报展将在怀俄明大学 Coe Library 展出。",
+            "function": "概括文章核心信息，引出展览主题和展出地点。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-a-p1",
+            "summary": "首段说明这是一个关注黄石国家公园海报历史的首创性展览，并将于2月1日起在 Coe Library 展出。",
+            "function": "交代展览性质、主题、地点和开始时间，为全文提供基本背景。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-a-p2",
+            "summary": "本段介绍“Wonderland Illustrated”展览涵盖的时间跨度、展出地点、结束时间、与黄石国家公园150周年纪念的关系，以及海报兼具广告和艺术功能。",
+            "function": "补充展览的核心信息，提供解答展期和纪念目的相关题目的关键依据。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-a-p3",
+            "summary": "本段引用 Tamsen Hert 的话，说明展览由大学图书馆与收藏者合作举办，是黄石150周年全年庆祝活动的一部分，并展示印刷、艺术、摄影和广告等方面的历史。",
+            "function": "通过馆方人员说明展览的合作背景、纪念意义和文化价值。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-a-p4",
+            "summary": "本段介绍 Henry Wellge 于1904年创作的“Yellowstone National Park”海报，说明其现由 UW Libraries 收藏，曾用于广告宣传，并因保存下来的数量极少而独特。",
+            "function": "聚焦具体展品，说明1904年海报的作者、用途、收藏归属和稀有性。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-jslk-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查学生根据展览开始和结束时间推断展览持续时长的能力。",
+      "stemTranslationZh": "“Wonderland Illustrated”展览将持续多长时间？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "两周。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Two weeks.",
+            "explanation": "原文未提及展览持续两周；原文给出的是从2月1日开始，到5月31日结束。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "三个月。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "It will be on view through Tuesday,May 31.",
+            "sourceHighlight": "through Tuesday,May 31",
+            "optionText": "Three months.",
+            "optionHighlight": "Three months",
+            "explanation": "原文需要合并开始时间 beginning Tuesday,February l 和结束时间 through Tuesday,May 31，持续约四个月；“Three months”缩小了展览持续时间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p1",
+              "quote": "beginning Tuesday,February l",
+              "anchor": "beginning"
+            },
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p2",
+              "quote": "It will be on view through Tuesday,May 31.",
+              "anchor": "through Tuesday,May 31"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "四个月。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-a-p1",
+              "quote": "beginning Tuesday,February l",
+              "anchor": "beginning"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-a-p2",
+              "quote": "It will be on view through Tuesday,May 31.",
+              "anchor": "through Tuesday,May 31"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一年。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "year-long celebrations",
+            "optionText": "One year.",
+            "matchType": "exact",
+            "relationNote": "选项利用原文中的 year-long 进行误导，但 year-long 修饰的是庆祝活动 celebrations，并不是展览持续时间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p3",
+              "quote": "as part of year-long celebrations recognizing Yellowstone’s 150th anniversary",
+              "anchor": "year-long celebrations"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How long will the exhibition \"Wonderland Illustrated\" last?",
+          "sourceRole": "stem",
+          "targetText": "beginning Tuesday,February l",
+          "targetParagraphId": "para-2024-jslk-reading-a-p1",
+          "relationType": "locationCue",
+          "note": "题干问展览持续时间，需要先定位开始时间 beginning Tuesday, February 1。"
+        },
+        {
+          "sourceText": "last",
+          "sourceRole": "stem",
+          "targetText": "It will be on view through Tuesday,May 31.",
+          "targetParagraphId": "para-2024-jslk-reading-a-p2",
+          "relationType": "paraphrase",
+          "note": "last 对应原文 will be on view through，表示展览一直持续到5月31日。"
+        }
+      ]
+    },
+    "q-2024-jslk-022": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查学生根据展览举办背景判断展览目的的能力。",
+      "stemTranslationZh": "这个展览的一个目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "纪念一位著名艺术家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Wellge,a productive bird’s-eye-view artist,designed the piece for the Northern Pacific Railroad",
+            "sourceEntity": "Wellge",
+            "optionText": "To remember a famous artist.",
+            "optionEntity": "a famous artist",
+            "explanation": "原文提到艺术家 Wellge 是为了介绍一张1904年的海报，并非说明展览目的是纪念这位艺术家。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p4",
+              "quote": "Wellge,a productive bird’s-eye-view artist,designed the piece for the Northern Pacific Railroad",
+              "anchor": "Wellge"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为 Coe Library 筹集资金。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "donated funds",
+            "optionText": "To raise fund for Coe Library.",
+            "matchType": "wordFamily",
+            "relationNote": "选项中的 fund 与原文 donated funds 属于词族关联，但原文说这张海报是用捐赠资金购买的，并不是说展览目的是为 Coe Library 筹款。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p4",
+              "quote": "was recently purchased with donated funds",
+              "anchor": "donated funds"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "纪念一个国家公园的周年纪念。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-a-p3",
+              "quote": "as part of year-long celebrations recognizing Yellowstone’s 150th anniversary",
+              "anchor": "recognizing Yellowstone’s 150th anniversary"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-a-p2",
+              "quote": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
+              "anchor": "150th anniversary"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "讲述怀俄明大学的历史。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "A first-of-its-kind exhibition that focuses on the history of Yellowstone National Park posters",
+            "sourceEntity": "Yellowstone National Park posters",
+            "optionText": "To tell the history of the University of Wyoming.",
+            "optionEntity": "the University of Wyoming",
+            "explanation": "原文说明展览关注的是黄石国家公园海报的历史，而不是怀俄明大学的历史。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p1",
+              "quote": "focuses on the history of Yellowstone National Park posters",
+              "anchor": "history of Yellowstone National Park posters"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "purpose of the exhibition",
+          "sourceRole": "stem",
+          "targetText": "as part of year-long celebrations recognizing Yellowstone’s 150th anniversary",
+          "targetParagraphId": "para-2024-jslk-reading-a-p3",
+          "relationType": "paraphrase",
+          "note": "题干问展览目的，原文 as part of... celebrations recognizing... 表明展览是纪念活动的一部分。"
+        },
+        {
+          "sourceText": "mark the anniversary of a national park",
+          "sourceRole": "correctOption",
+          "targetText": "this year’s 150th anniversary of the creation of Yellowstone National Park",
+          "targetParagraphId": "para-2024-jslk-reading-a-p2",
+          "relationType": "paraphrase",
+          "note": "mark the anniversary 对应原文 150th anniversary；a national park 对应 Yellowstone National Park。"
+        }
+      ]
+    },
+    "q-2024-jslk-023": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查学生理解1904年 Henry Wellge 设计的海报现存数量少、因而稀有的细节信息。",
+      "stemTranslationZh": "关于 Henry Wellge 设计的1904年海报，我们知道什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它在世界上很稀有。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-a-p4",
+              "quote": "This is a unique piece, as posters such as this one were printed on soft paper and very few have survived.",
+              "anchor": "very few have survived"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是黑白的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is in black and white.",
+            "explanation": "原文未提及这张1904年海报是黑白的。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它印在布上。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "posters such as this one were printed on soft paper",
+            "sourceEntity": "soft paper",
+            "optionText": "It is printed on cloth.",
+            "optionEntity": "cloth",
+            "explanation": "原文说明这类海报印在 soft paper 上，选项改成 cloth，材料对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p4",
+              "quote": "posters such as this one were printed on soft paper",
+              "anchor": "printed on soft paper"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它由一位教授拥有。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "is now part of UW Libraries’ Emmett D.Chisum Special Collections",
+            "sourceEntity": "UW Libraries’ Emmett D.Chisum Special Collections",
+            "optionText": "It is owned by a professor.",
+            "optionEntity": "a professor",
+            "explanation": "原文说明这张海报现在属于 UW Libraries 的 Emmett D.Chisum Special Collections，而不是由一位教授拥有。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-a-p4",
+              "quote": "is now part of UW Libraries’ Emmett D.Chisum Special Collections",
+              "anchor": "part of UW Libraries’ Emmett D.Chisum Special Collections"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the 1904 poster Henry Wellge designed",
+          "sourceRole": "stem",
+          "targetText": "Henry Wellge’s “Yellowstone National Park” from 1904",
+          "targetParagraphId": "para-2024-jslk-reading-a-p4",
+          "relationType": "locationCue",
+          "note": "题干中的 the 1904 poster Henry Wellge designed 对应原文 Henry Wellge’s “Yellowstone National Park” from 1904。"
+        },
+        {
+          "sourceText": "rare in the world",
+          "sourceRole": "correctOption",
+          "targetText": "very few have survived",
+          "targetParagraphId": "para-2024-jslk-reading-a-p4",
+          "relationType": "paraphrase",
+          "note": "rare 对应 very few have survived，说明存世数量很少。"
+        }
+      ]
+    }
+  }
+}

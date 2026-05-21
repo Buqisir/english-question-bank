@@ -132,7 +132,7 @@ For each reading question:
 
 ### optionAnalysis
 
-MUST include all four options A-D:
+MUST be an array, never an object. MUST include all four options A-D in order:
 
 ```json
 [
@@ -150,6 +150,15 @@ MUST include all four options A-D:
     "evidence": [ ... ]
   }
 ]
+```
+
+Forbidden shape:
+
+```json
+{
+  "A": { "...": "..." },
+  "B": { "...": "..." }
+}
 ```
 
 Rules:
@@ -174,6 +183,9 @@ Rules:
 ```
 
 - Every `quote` must EXACTLY match text in the referenced content paragraph
+- Every `quote`, `sourceQuote`, `targetText`, and evidence quote must be copied exactly from the supplied paragraph text
+- Do not normalize punctuation, convert curly quotes to straight quotes, or add/remove spaces inside copied text
+- If a long quote is hard to copy exactly, choose a shorter exact substring
 - `paragraphId` must reference an existing paragraph
 
 ---
@@ -232,6 +244,7 @@ Chinese label: 黑白颠倒
 - `sourceQuote` must match content paragraph
 - `sourceHighlight` must be substring of `sourceQuote`
 - `optionHighlight` must be substring of `optionText`
+- Material mismatch such as `soft paper` vs `cloth` is NOT polarityReversal; use `entityMismatch` or `unsupportedClaim` depending on whether a source anchor exists
 
 ### scopeShift
 
@@ -287,15 +300,21 @@ Future UI: NOT selectable, no evidence/trap line, no original text highlight.
 Required for: `sourceLexicalTrap`, `polarityReversal`
 May be used for: `scopeShift`, `entityMismatch`
 **MUST NOT** be used for: `unsupportedClaim`
+`trapEvidence` MUST be a sibling of `trap` on the option object, never nested inside `trap`.
 
 ```json
-"trapEvidence": [
-  {
-    "paragraphId": "para-...",
-    "quote": "exact quote from paragraph",
-    "anchor": "short human anchor"
-  }
-]
+{
+  "label": "B",
+  "status": "wrong",
+  "trap": { "...": "..." },
+  "trapEvidence": [
+    {
+      "paragraphId": "para-...",
+      "quote": "exact quote from paragraph",
+      "anchor": "short human anchor"
+    }
+  ]
+}
 ```
 
 ---
