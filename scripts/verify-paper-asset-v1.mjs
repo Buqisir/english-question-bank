@@ -2,12 +2,16 @@
 /**
  * Verification script for paper-asset-v1 fixture.
  * Run: node scripts/verify-paper-asset-v1.mjs
+ *
+ * Zero external dependencies — uses only Node.js built-in modules.
+ * DOCX text is extracted via built-in zlib (ZIP local-file parsing) + regex on word/document.xml.
  */
 
 import { readFileSync, existsSync } from 'fs';
 import { createHash } from 'crypto';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { inflateRawSync } from 'zlib';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -30,6 +34,102 @@ function assertNot(condition, msg) {
   assert(!condition, msg);
 }
 
+
+// ─── DOCX text extraction (pure Node.js, no external deps) ──────────────────────
+
+/**
+ * Extract all text from a .docx file by reading word/document.xml from the ZIP.
+ * Uses only Node.js built-in zlib (inflateRawSync) for decompression.
+ * Returns the full concatenated text with paragraph boundaries as newlines.
+ */
+function extractDocxText(docxPath) {
+  const buf = readFileSync(docxPath);
+  const xmlContent = readZipEntry(buf, 'word/document.xml');
+  if (!xmlContent) {
+    throw new Error('Could not find word/document.xml inside DOCX ZIP');
+  }
+  // Parse paragraphs: split on <w:p ...> boundaries, extract <w:t ...>text</w:t> within each
+  const paragraphs = [];
+  // Split by paragraph open tags
+  const paraChunks = xmlContent.split(/<w:p[\s>]/);
+  for (let i = 1; i < paraChunks.length; i++) {
+    const chunk = paraChunks[i];
+    // Extract all <w:t> text nodes within this paragraph
+    const textParts = [];
+    const wtRegex = /<w:t[^>]*>([^<]*)<\/w:t>/g;
+    let m;
+    while ((m = wtRegex.exec(chunk)) !== null) {
+      textParts.push(decodeXmlEntities(m[1]));
+    }
+    if (textParts.length > 0) {
+      paragraphs.push(textParts.join(''));
+    }
+  }
+  return paragraphs.join('\n');
+}
+
+
+/**
+ * Read a single file entry from a ZIP buffer (minimal ZIP local-file-header parser).
+ * Supports both STORED and DEFLATED entries.
+ */
+function readZipEntry(zipBuf, targetName) {
+  let offset = 0;
+  while (offset < zipBuf.length - 4) {
+    const sig = zipBuf.readUInt32LE(offset);
+    if (sig !== 0x04034b50) break; // Not a local file header
+    const method = zipBuf.readUInt16LE(offset + 8);
+    const compSize = zipBuf.readUInt32LE(offset + 18);
+    const uncompSize = zipBuf.readUInt32LE(offset + 22);
+    const nameLen = zipBuf.readUInt16LE(offset + 26);
+    const extraLen = zipBuf.readUInt16LE(offset + 28);
+    const name = zipBuf.toString('utf8', offset + 30, offset + 30 + nameLen);
+    const dataStart = offset + 30 + nameLen + extraLen;
+
+    if (name === targetName) {
+      const compressed = zipBuf.subarray(dataStart, dataStart + compSize);
+      if (method === 0) {
+        // STORED
+        return compressed.toString('utf8');
+      } else if (method === 8) {
+        // DEFLATED
+        const decompressed = inflateRawSync(compressed);
+        return decompressed.toString('utf8');
+      } else {
+        throw new Error(`Unsupported ZIP method ${method} for ${name}`);
+      }
+    }
+    offset = dataStart + compSize;
+  }
+  return null;
+}
+
+function decodeXmlEntities(s) {
+  return s
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'");
+}
+
+
+// ─── Normalization for source matching ──────────────────────────────────────────
+
+/**
+ * Normalize for source matching: normalize punctuation then REMOVE all whitespace.
+ * This makes matching robust against DOCX spacing artifacts.
+ */
+function normalizeForSourceMatch(s) {
+  return s
+    .replace(/[\u201c\u201d\u00ab\u00bb]/g, '"')
+    .replace(/[\u2018\u2019\u0060\u00b4]/g, "'")
+    .replace(/[\u2013\u2014\u2015]/g, '-')
+    .replace(/\u00a0/g, ' ')  // NBSP → space
+    .replace(/\s+/g, '')      // Remove ALL whitespace
+    .toLowerCase();
+}
+
 // ─── Load fixture ───────────────────────────────────────────────────────────────
 
 const fixturePath = resolve(ROOT, 'app/public/paper-assets/paper-2024-jslk-english/paper-asset.json');
@@ -49,6 +149,7 @@ try {
 // ─── Schema version ─────────────────────────────────────────────────────────────
 
 assert(asset.schemaVersion === 'paper-asset-v1', 'schemaVersion is paper-asset-v1');
+
 
 // ─── Top-level sections exist ───────────────────────────────────────────────────
 
@@ -91,6 +192,7 @@ function deepCheck(obj, path = '') {
 }
 deepCheck(asset);
 
+
 // ─── Paper metadata ─────────────────────────────────────────────────────────────
 
 assert(typeof asset.paper.paperId === 'string' && asset.paper.paperId.length > 0, 'paper.paperId is stable string');
@@ -124,6 +226,7 @@ for (const gid of layoutGroupIds) {
   assert(contentGroupIds.has(gid), `layoutTree group "${gid}" exists in content.groups`);
 }
 
+
 // ─── Reading A-D ────────────────────────────────────────────────────────────────
 
 const readingGroups = ['group-2024-jslk-reading-a', 'group-2024-jslk-reading-b', 'group-2024-jslk-reading-c', 'group-2024-jslk-reading-d'];
@@ -132,7 +235,6 @@ for (const gid of readingGroups) {
   const g = asset.content.groups[gid];
   if (g) {
     assert(g.passage && g.passage.paragraphs && g.passage.paragraphs.length > 0, `${gid} has passage paragraphs`);
-    // Paragraph IDs unique within group
     const pIds = g.passage.paragraphs.map(p => p.paragraphId);
     const uniquePIds = new Set(pIds);
     assert(pIds.length === uniquePIds.size, `${gid} paragraph IDs are unique`);
@@ -169,6 +271,7 @@ for (const gid of readingGroups) {
   }
 }
 
+
 // ─── 七选五 ─────────────────────────────────────────────────────────────────────
 
 const sevenGroup = asset.content.groups['group-2024-jslk-seven-choices'];
@@ -195,10 +298,10 @@ if (clozeGroup) {
     assert(q && q.blankId, `${qid} links to blankId`);
     assert(q && q.options && q.options.length === 4, `${qid} has A-D options`);
   }
-  // Question numbers 41-55
   const clozeNos = clozeGroup.questionIds.map(qid => asset.content.questions[qid]?.questionNo).sort((a, b) => a - b);
   assert(clozeNos[0] === 41 && clozeNos[clozeNos.length - 1] === 55, '完形 covers Q41-55');
 }
+
 
 // ─── 语法填空 ───────────────────────────────────────────────────────────────────
 
@@ -207,11 +310,9 @@ assert(!!grammarGroup, '语法填空 group exists');
 if (grammarGroup) {
   assert(grammarGroup.questionIds.length === 10, '语法填空 has 10 questions (56-65)');
   assert(grammarGroup.blankIds && grammarGroup.blankIds.length === 10, '语法填空 has 10 blanks');
-  // Check prompt words exist for some blanks
   const blanks = asset.content.blanks || {};
   const hasPrompt = grammarGroup.blankIds.some(bid => blanks[bid]?.prompt);
   assert(hasPrompt, '语法填空 has at least one blank with prompt word');
-  // Question numbers 56-65
   const gramNos = grammarGroup.questionIds.map(qid => asset.content.questions[qid]?.questionNo).sort((a, b) => a - b);
   assert(gramNos[0] === 56 && gramNos[gramNos.length - 1] === 65, '语法填空 covers Q56-65');
 }
@@ -234,12 +335,12 @@ assert(blockTypes.includes('partHeading'), 'Blocks include partHeading');
 assert(blockTypes.includes('sectionHeading'), 'Blocks include sectionHeading');
 assert(blockTypes.includes('group'), 'Blocks include group');
 
-// Verify all group block references exist in content.groups
 for (const block of blocks) {
   if (block.type === 'group') {
     assert(contentGroupIds.has(block.groupId), `Block group ref "${block.groupId}" exists in content.groups`);
   }
 }
+
 
 // ─── ID uniqueness ──────────────────────────────────────────────────────────────
 
@@ -281,6 +382,7 @@ if (existsSync(productDocPath)) {
   assert(docContent.includes('unsupportedClaim'), 'Product doc mentions unsupportedClaim');
 }
 
+
 const extractPromptPath = resolve(ROOT, 'prompts/paper-asset-extract-v1.md');
 const readingPromptPath = resolve(ROOT, 'prompts/reading-choice-analysis-v1.md');
 
@@ -303,33 +405,20 @@ if (existsSync(readingPromptPath)) {
   assert(rp.includes('scopeShift'), 'Reading prompt includes controlled trap type: scopeShift');
   assert(rp.includes('entityMismatch'), 'Reading prompt includes controlled trap type: entityMismatch');
   assert(rp.includes('unsupportedClaim'), 'Reading prompt includes controlled trap type: unsupportedClaim');
-  assert(rp.includes('NOT selectable') || rp.includes('not selectable') || rp.includes('NOT') && rp.includes('selectable'), 'Reading prompt includes unsupportedClaim non-interactive rule');
+  assert(rp.includes('NOT selectable') || rp.includes('not selectable') || (rp.includes('NOT') && rp.includes('selectable')), 'Reading prompt includes unsupportedClaim non-interactive rule');
 }
 
-// ─── Source-faithfulness checks ──────────────────────────────────────────────────
 
-// Normalization function for source matching
-function normalize(s) {
-  return s
-    .replace(/[\u201c\u201d]/g, '"')
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u2013\u2014]/g, '-')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+// ─── Source-faithfulness checks (NON-SKIPPABLE) ─────────────────────────────────
 
 // 1. No string value may contain literal "..." as truncation
 function findEllipsis(obj, path = '') {
   const results = [];
   if (obj === null || obj === undefined) return results;
   if (typeof obj === 'string') {
-    if (obj.includes('...')) {
-      results.push(path);
-    }
+    if (obj.includes('...')) results.push(path);
   } else if (Array.isArray(obj)) {
-    obj.forEach((item, i) => {
-      results.push(...findEllipsis(item, `${path}[${i}]`));
-    });
+    obj.forEach((item, i) => results.push(...findEllipsis(item, `${path}[${i}]`)));
   } else if (typeof obj === 'object') {
     for (const [key, val] of Object.entries(obj)) {
       results.push(...findEllipsis(val, path ? `${path}.${key}` : key));
@@ -341,114 +430,108 @@ function findEllipsis(obj, path = '') {
 const ellipsisPaths = findEllipsis(asset);
 assert(ellipsisPaths.length === 0, `No "..." truncation in any string value (found ${ellipsisPaths.length}: ${ellipsisPaths.slice(0, 3).join(', ')})`);
 
-// 2. Load DOCX extracted text for source matching
+// 2. Extract DOCX text using built-in Node.js ZIP parsing — MUST NOT be skipped
 let docxNormalizedText = '';
-if (existsSync(docxFullPath)) {
-  // Extract text from DOCX using a simple ZIP+XML approach
-  // We'll use the raw text content from reading the XML inside the docx
-  const { execSync } = await import('child_process');
-  try {
-    const rawText = execSync(
-      `python3 -c "from docx import Document; doc = Document('${docxFullPath}'); print('\\n'.join(p.text for p in doc.paragraphs))"`,
-      { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
-    );
-    docxNormalizedText = normalize(rawText);
-  } catch (e) {
-    console.warn('  WARN: Could not extract DOCX text for source matching:', e.message);
-  }
+assert(existsSync(docxFullPath), 'Source DOCX must exist for source-faithfulness extraction');
+
+try {
+  const rawDocxText = extractDocxText(docxFullPath);
+  assert(rawDocxText.length > 1000, `DOCX extraction produced substantial text (${rawDocxText.length} chars)`);
+  docxNormalizedText = normalizeForSourceMatch(rawDocxText);
+} catch (e) {
+  assert(false, `DOCX text extraction FAILED (non-skippable): ${e.message}`);
+  console.error('\nCannot continue — source-faithfulness checks require DOCX text extraction.');
+  process.exit(1);
 }
 
-if (docxNormalizedText.length > 0) {
-  // Helper: check that a text string is found in normalized DOCX
-  function assertInSource(text, label) {
-    const normText = normalize(text);
-    // Check at least 20 consecutive words match (to handle minor spacing diffs)
-    const words = normText.split(' ').filter(w => w.length > 0);
-    if (words.length <= 5) {
-      // Very short text, just check it exists
-      assert(docxNormalizedText.includes(normText), `${label} found in DOCX source`);
-    } else {
-      // Check a chunk of words from the middle
-      const chunkSize = Math.min(15, Math.floor(words.length / 2));
-      const startIdx = Math.floor((words.length - chunkSize) / 2);
-      const chunk = words.slice(startIdx, startIdx + chunkSize).join(' ');
-      assert(docxNormalizedText.includes(chunk), `${label} content found in DOCX source (checked chunk: "${chunk.slice(0, 60)}...")`);
-    }
-  }
 
-  // 3. Reading A-D paragraph texts must be found in normalized DOCX
-  for (const gid of readingGroups) {
-    const g = asset.content.groups[gid];
-    if (g && g.passage && g.passage.paragraphs) {
-      for (const para of g.passage.paragraphs) {
-        if (para.text && para.text.length > 10) {
-          assertInSource(para.text, `${gid} para "${para.paragraphId}"`);
-        }
-      }
-    }
+// Helper: assert text is contained in normalized DOCX source (whitespace-stripped match)
+function assertInSource(text, label) {
+  const normText = normalizeForSourceMatch(text);
+  // For very short texts, require full containment
+  if (normText.length <= 20) {
+    assert(docxNormalizedText.includes(normText), `${label} found in DOCX source`);
+    return;
   }
+  // For longer texts, check a substantial middle chunk (handles minor boundary differences)
+  const chunkLen = Math.min(normText.length, Math.max(40, Math.floor(normText.length * 0.6)));
+  const startIdx = Math.floor((normText.length - chunkLen) / 2);
+  const chunk = normText.slice(startIdx, startIdx + chunkLen);
+  assert(docxNormalizedText.includes(chunk), `${label} content found in DOCX source`);
+}
 
-  // 4. 七选五 group must have passage paragraphs and each must be in DOCX
-  const sevenPassage = asset.content.groups['group-2024-jslk-seven-choices']?.passage;
-  assert(!!sevenPassage, '七选五 has passage object');
-  assert(sevenPassage && sevenPassage.paragraphs && sevenPassage.paragraphs.length > 0, '七选五 has passage paragraphs');
-  if (sevenPassage && sevenPassage.paragraphs) {
-    for (const para of sevenPassage.paragraphs) {
+// 3. Reading A-D paragraph texts must be found in normalized DOCX
+for (const gid of readingGroups) {
+  const g = asset.content.groups[gid];
+  if (g && g.passage && g.passage.paragraphs) {
+    for (const para of g.passage.paragraphs) {
       if (para.text && para.text.length > 10) {
-        assertInSource(para.text, `七选五 para "${para.paragraphId}"`);
+        assertInSource(para.text, `${gid} para "${para.paragraphId}"`);
       }
     }
   }
-
-  // 5. clozeText must be found in DOCX
-  const clozeText = asset.content.groups['group-2024-jslk-cloze']?.clozeText;
-  assert(!!clozeText && clozeText.length > 100, '完形 clozeText is substantial (>100 chars)');
-  if (clozeText) {
-    assertInSource(clozeText, '完形 clozeText');
-  }
-
-  // 6. grammarText must be found in DOCX
-  const grammarText = asset.content.groups['group-2024-jslk-grammar-fill']?.grammarText;
-  assert(!!grammarText && grammarText.length > 100, '语法填空 grammarText is substantial (>100 chars)');
-  if (grammarText) {
-    assertInSource(grammarText, '语法填空 grammarText');
-  }
-
-  // 7. 读后续写 materialText must be found in DOCX
-  const contTask = asset.content.writingTasks['writing-2024-jslk-continuation'];
-  const materialText = contTask?.materialText;
-  assert(!!materialText && materialText.length > 100, '读后续写 materialText is substantial (>100 chars)');
-  if (materialText) {
-    assertInSource(materialText, '读后续写 materialText');
-  }
-
-  // 8. Grammar blanks 56-65 that have parenthesized prompt words in source must carry prompt values
-  const grammarBlanks = ['blank-2024-jslk-056','blank-2024-jslk-057','blank-2024-jslk-058','blank-2024-jslk-059','blank-2024-jslk-060','blank-2024-jslk-061','blank-2024-jslk-062','blank-2024-jslk-063','blank-2024-jslk-064','blank-2024-jslk-065'];
-  // From source: 56(keyboard), 57(be), 59(use), 60(simple), 62(improve), 64(stay), 65(they)
-  // 58, 61, 63 have no parenthesized prompt
-  const expectedPrompts = {
-    'blank-2024-jslk-056': 'keyboard',
-    'blank-2024-jslk-057': 'be',
-    'blank-2024-jslk-059': 'use',
-    'blank-2024-jslk-060': 'simple',
-    'blank-2024-jslk-062': 'improve',
-    'blank-2024-jslk-064': 'stay',
-    'blank-2024-jslk-065': 'they'
-  };
-  for (const [bid, expectedPrompt] of Object.entries(expectedPrompts)) {
-    const blank = asset.content.blanks[bid];
-    assert(blank && blank.prompt === expectedPrompt, `${bid} has prompt "${expectedPrompt}" (got "${blank?.prompt}")`);
-  }
-  // Blanks without prompts should NOT have prompt field or it should be undefined/null
-  const noPromptBlanks = ['blank-2024-jslk-058', 'blank-2024-jslk-061', 'blank-2024-jslk-063'];
-  for (const bid of noPromptBlanks) {
-    const blank = asset.content.blanks[bid];
-    assert(!blank?.prompt, `${bid} has no prompt (fill-in-word blank)`);
-  }
-
-} else {
-  console.warn('  WARN: Skipping source-faithfulness checks (could not extract DOCX text)');
 }
+
+// 4. 七选五 group must have passage paragraphs and each must be in DOCX
+const sevenPassage = asset.content.groups['group-2024-jslk-seven-choices']?.passage;
+assert(!!sevenPassage, '七选五 has passage object');
+assert(sevenPassage && sevenPassage.paragraphs && sevenPassage.paragraphs.length > 0, '七选五 has passage paragraphs');
+if (sevenPassage && sevenPassage.paragraphs) {
+  for (const para of sevenPassage.paragraphs) {
+    if (para.text && para.text.length > 10) {
+      assertInSource(para.text, `七选五 para "${para.paragraphId}"`);
+    }
+  }
+}
+
+// 5. clozeText must be found in DOCX
+const clozeText = asset.content.groups['group-2024-jslk-cloze']?.clozeText;
+assert(!!clozeText && clozeText.length > 100, '完形 clozeText is substantial (>100 chars)');
+if (clozeText) assertInSource(clozeText, '完形 clozeText');
+
+// 6. grammarText must be found in DOCX
+const grammarText = asset.content.groups['group-2024-jslk-grammar-fill']?.grammarText;
+assert(!!grammarText && grammarText.length > 100, '语法填空 grammarText is substantial (>100 chars)');
+if (grammarText) assertInSource(grammarText, '语法填空 grammarText');
+
+// 7. 读后续写 materialText must be found in DOCX
+const contTask = asset.content.writingTasks['writing-2024-jslk-continuation'];
+const materialText = contTask?.materialText;
+assert(!!materialText && materialText.length > 100, '读后续写 materialText is substantial (>100 chars)');
+if (materialText) assertInSource(materialText, '读后续写 materialText');
+
+
+// 8. Grammar blanks prompt words
+const expectedPrompts = {
+  'blank-2024-jslk-056': 'keyboard',
+  'blank-2024-jslk-057': 'be',
+  'blank-2024-jslk-059': 'use',
+  'blank-2024-jslk-060': 'simple',
+  'blank-2024-jslk-062': 'improve',
+  'blank-2024-jslk-064': 'stay',
+  'blank-2024-jslk-065': 'they'
+};
+for (const [bid, expectedPrompt] of Object.entries(expectedPrompts)) {
+  const blank = asset.content.blanks[bid];
+  assert(blank && blank.prompt === expectedPrompt, `${bid} has prompt "${expectedPrompt}" (got "${blank?.prompt}")`);
+}
+const noPromptBlanks = ['blank-2024-jslk-058', 'blank-2024-jslk-061', 'blank-2024-jslk-063'];
+for (const bid of noPromptBlanks) {
+  const blank = asset.content.blanks[bid];
+  assert(!blank?.prompt, `${bid} has no prompt (fill-in-word blank)`);
+}
+
+// ─── Anti-regression: verify this script has no forbidden patterns ───────────────
+
+const selfSource = readFileSync(resolve(ROOT, 'scripts/verify-paper-asset-v1.mjs'), 'utf8');
+// Use split-string technique so the check strings don't match themselves in source
+const FORBIDDEN_IMPORT = 'from docx import ' + 'Document';
+const FORBIDDEN_PKG = 'python' + '-docx';
+const FORBIDDEN_SKIP = 'Skipping source-faithfulness' + ' checks';
+assertNot(selfSource.includes(FORBIDDEN_IMPORT), 'Script does not use python docx import');
+assertNot(selfSource.includes(FORBIDDEN_PKG), 'Script does not reference python docx package');
+assertNot(selfSource.includes(FORBIDDEN_SKIP), 'Script has no skip path for source-faithfulness');
+
 
 // ─── Summary ────────────────────────────────────────────────────────────────────
 
