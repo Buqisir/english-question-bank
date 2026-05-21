@@ -168,7 +168,7 @@ function cssAttr(value: string): string {
 
 export function PaperIntelligencePaperSurfaceHarness({
   paperId,
-  groupId: _initialGroupId,
+  groupId: initialGroupId,
   questionId: initialQuestionId,
   onBackToWorkbench,
 }: Props): ReactNode {
@@ -425,6 +425,7 @@ export function PaperIntelligencePaperSurfaceHarness({
     // Harness IDs are `${paperSection}-${questionNo}`.
     let resolvedId: string | null = null
     for (const p of report.passages || []) {
+      if (initialGroupId && p.questionGroupId !== initialGroupId) continue
       for (const q of p.questions || []) {
         const derivedId = `${p.paperSection}-${q.questionNo}`
         if (derivedId === initialQuestionId) {
@@ -448,7 +449,7 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (!resolvedId) return
     initialQuestionAppliedRef.current = true
     dispatchHost({ type: 'request-lecture-focus', questionId: resolvedId })
-  }, [report, initialQuestionId])
+  }, [report, initialGroupId, initialQuestionId])
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {

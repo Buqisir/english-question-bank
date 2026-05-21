@@ -121,3 +121,29 @@ export function buildPaperSurfaceHref(args: BuildPaperSurfaceHrefArgs): string {
   }
   return `?${params.toString()}`
 }
+
+/**
+ * C6a-3 bridge targets for concierge 「阅读解析」 entries.
+ *
+ * This intentionally maps only groups backed by an existing
+ * `app/public/reports/paper-intelligence/<paperId>/report.json` fixture.
+ * The newer paper-asset-v1 JSON is not yet a PaperSurface data source, so
+ * routing concierge cards to paper-asset ids would open an error page.
+ */
+const PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID: Record<
+  string,
+  Required<BuildPaperSurfaceHrefArgs>
+> = {
+  'g-2024-xkb1-a': {
+    paperId: 'paper-2024-xkb1-reading',
+    groupId: 'g-2024-xkb1-a',
+    questionId: 'A-21',
+  },
+}
+
+export function buildPaperSurfaceAnalysisHrefForGroupId(
+  groupId: string | null | undefined,
+): string | null {
+  const target = groupId ? PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID[groupId] : undefined
+  return target ? buildPaperSurfaceHref(target) : null
+}

@@ -18,7 +18,7 @@ import {
   isReadingAnalysisCandidate,
 } from '../features/reading-analysis/readingAnalysisRoute.ts'
 import {
-  buildPaperSurfaceHref,
+  buildPaperSurfaceAnalysisHrefForGroupId,
 } from '../features/paper-intelligence/paperIntelligenceRoute.ts'
 
 const DIFFICULTY_CLASS: Record<Difficulty, string> = {
@@ -92,18 +92,11 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   // lives in `readingAnalysisRoute.ts` so the rule (currently
   // `groupType === 'reading' && questionCount > 0`) is not duplicated here.
   const showReadingAnalysisEntry = isReadingAnalysisCandidate(group)
-  // C6a-3: the 阅读解析 entry now targets the PaperSurface analysis
-  // harness instead of the legacy reading-analysis route. Stable IDs:
-  //   paperId  = paper-2024-jslk-english
-  //   groupId  = group-2024-jslk-reading-a
-  //   questionId = q-2024-jslk-021  (first question in Reading A)
-  //   surface  = paper (set by buildPaperSurfaceHref)
+  // C6a-3: only groups backed by an existing PaperSurface report get the
+  // bridge entry. Unsupported reading groups stay quiet instead of sending
+  // teachers to an unrelated paper or an error page.
   const readingAnalysisHref = showReadingAnalysisEntry
-    ? buildPaperSurfaceHref({
-        paperId: 'paper-2024-jslk-english',
-        groupId: 'group-2024-jslk-reading-a',
-        questionId: 'q-2024-jslk-021',
-      })
+    ? buildPaperSurfaceAnalysisHrefForGroupId(group.id)
     : null
 
   return (
