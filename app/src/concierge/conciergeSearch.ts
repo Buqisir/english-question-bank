@@ -28,6 +28,8 @@ export type ConciergeSearchInput = {
   apiKey: string
   /** Optional override for tests; defaults to the real ask call. */
   doStewardCall?: (message: string, apiKey: string) => Promise<QuestionBankStewardResult>
+  /** Test hook; production keeps this short enough to avoid a stuck search UI. */
+  stewardTimeoutMs?: number
 }
 
 export type ConciergeSearchHit = {
@@ -149,6 +151,26 @@ function buildSentMessage(intent: string, pendingQuery: string | null | undefine
   return trimmed
 }
 
+const DEFAULT_STEWARD_TIMEOUT_MS = 6000
+
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = globalThis.setTimeout(() => {
+      reject(new Error(`${label} timed out after ${timeoutMs}ms`))
+    }, timeoutMs)
+    promise.then(
+      (value) => {
+        globalThis.clearTimeout(timer)
+        resolve(value)
+      },
+      (error) => {
+        globalThis.clearTimeout(timer)
+        reject(error)
+      },
+    )
+  })
+}
+
 export async function runConciergeSearch(
   input: ConciergeSearchInput,
 ): Promise<ConciergeSearchOutcome> {
@@ -170,7 +192,11 @@ export async function runConciergeSearch(
   }
 
   try {
-    const result = await doStewardCall(sentMessage, apiKey)
+    const result = await withTimeout(
+      doStewardCall(sentMessage, apiKey),
+      input.stewardTimeoutMs ?? DEFAULT_STEWARD_TIMEOUT_MS,
+      'question-bank steward',
+    )
     if (result.needsClarification) {
       return {
         kind: 'clarification',
