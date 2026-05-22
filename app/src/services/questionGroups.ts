@@ -33,7 +33,7 @@ const API_ORIGIN = 'http://127.0.0.1:8787'
 
 function apiPath(path: string) {
   if (typeof window === 'undefined') return path
-  if (window.location.port === '5173') return path
+  if (['127.0.0.1', 'localhost', '::1'].includes(window.location.hostname)) return path
   return `${API_ORIGIN}${path}`
 }
 

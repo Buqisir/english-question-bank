@@ -219,7 +219,7 @@ console.log('\nTest 6: Steward error → fallback runs, page does not blow up')
 {
   const stub = async () => { throw new Error('DeepSeek 503') }
   const out = await runConciergeSearch({
-    intent: '汽车 物理',
+    intent: '汽车',
     pendingQuery: null,
     questionGroups: sampleGroups,
     apiKey: 'sk-test',
@@ -428,9 +428,9 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Paper row does NOT call fetchQuestionGroupDetail', !/fetchQuestionGroupDetail/.test(paperRowSource), '')
 
   // 9.8 ConciergeGroupCard contract — group-level actions live here.
-  assert('Group card 加入草稿卷 / 已加入 wording', /alreadyInBasket\s*\?\s*['"]已加入['"]\s*:\s*['"]加入草稿卷['"]/.test(groupCardSource), '')
-  assert('Group card aria-pressed = alreadyInBasket', /aria-pressed=\{alreadyInBasket\}/.test(groupCardSource), '')
-  assert('Group card disabled when alreadyInBasket', /disabled=\{alreadyInBasket\}/.test(groupCardSource), '')
+  assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
+  assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
+  assert('Group card disables only unavailable draft state', /disabled=\{draftState === ['"]disabled['"]\}/.test(groupCardSource), '')
   assert('Group card 找类似 button (no bare 类似)', />\s*找类似\s*<\/button>/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
@@ -717,8 +717,13 @@ console.log('\nTest 16: 找类似 round-trips through paper aggregation')
   const hook = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'useConciergeDesk.ts'), 'utf8')
   // triggerSimilar must call runSearch (not skip aggregation).
   assert('triggerSimilar uses runSearch', /triggerSimilar[\s\S]{0,400}await runSearch\(similarIntent, null\)/.test(hook), '')
-  // paperResults memo derives from state.hits via aggregatePaperResults.
-  assert('paperResults memo aggregates state.hits', /aggregatePaperResults\(state\.hits\)/.test(hook), '')
+  // paperResults memo derives from state.hits and then swaps in live group
+  // card data so C8 draft-button state can update without a new search.
+  assert(
+    'paperResults memo aggregates live-mapped state.hits',
+    /state\.hits\.map/.test(hook) && /latestGroupById\.get\(hit\.group\.id\)/.test(hook) && /aggregatePaperResults\(/.test(hook),
+    '',
+  )
 }
 
 

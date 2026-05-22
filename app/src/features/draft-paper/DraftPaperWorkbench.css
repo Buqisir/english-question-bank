@@ -1,0 +1,272 @@
+.draft-workbench-shell {
+  min-height: 100vh;
+  background: #f2f0eb;
+  color: #24201b;
+  padding: 18px 22px 28px;
+}
+
+.draft-toolbar {
+  align-items: center;
+  background: #fbfaf7;
+  border: 1px solid #d9d2c7;
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto minmax(260px, 1fr) auto minmax(180px, auto) auto;
+  padding: 12px;
+  position: sticky;
+  top: 12px;
+  z-index: 10;
+}
+
+.draft-back-button,
+.draft-export-menu button,
+.draft-outline-actions button,
+.draft-suggestions button,
+.draft-undo-toast button {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #cfc6b8;
+  border-radius: 6px;
+  color: #2e2922;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.draft-export-menu button:disabled {
+  color: #9b9388;
+  cursor: not-allowed;
+}
+
+.draft-title-field {
+  display: grid;
+  gap: 4px;
+}
+
+.draft-title-field span {
+  color: #746b60;
+  font-size: 12px;
+}
+
+.draft-title-field input,
+.draft-recent-select {
+  background: #fffdf8;
+  border: 1px solid #cfc6b8;
+  border-radius: 6px;
+  color: #24201b;
+  font: inherit;
+  min-height: 36px;
+  padding: 6px 9px;
+}
+
+.draft-save-status {
+  color: #746b60;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.draft-save-status.saving {
+  color: #8a5b22;
+}
+
+.draft-save-status.saved {
+  color: #476239;
+}
+
+.draft-save-status.error,
+.draft-error {
+  color: #9a3327;
+}
+
+.draft-export-menu {
+  position: relative;
+}
+
+.draft-export-menu summary {
+  background: #2f2a23;
+  border-radius: 6px;
+  color: #fffaf0;
+  cursor: pointer;
+  list-style: none;
+  min-height: 36px;
+  padding: 8px 14px;
+}
+
+.draft-export-menu[open] {
+  z-index: 20;
+}
+
+.draft-export-menu[open] > button {
+  display: flex;
+  margin-top: 6px;
+  min-width: 132px;
+}
+
+.draft-loading,
+.draft-empty-export,
+.draft-success {
+  color: #746b60;
+  margin: 14px 0 0;
+}
+
+.draft-workbench-layout {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  margin-top: 18px;
+}
+
+.draft-preview-desk {
+  min-width: 0;
+}
+
+.draft-preview-meta {
+  color: #746b60;
+  display: flex;
+  gap: 14px;
+  margin: 0 0 10px;
+}
+
+.draft-a4-sheet {
+  background: #fff;
+  border: 1px solid #d8d2c8;
+  box-shadow: 0 20px 44px rgba(41, 35, 27, 0.14);
+  margin: 0 auto;
+  max-width: min(100%, 900px);
+  min-height: 70vh;
+  overflow: hidden;
+}
+
+.draft-a4-sheet iframe {
+  border: 0;
+  display: block;
+  height: 78vh;
+  width: 100%;
+}
+
+.draft-a4-empty {
+  align-items: center;
+  color: #8f867b;
+  display: flex;
+  min-height: 420px;
+  justify-content: center;
+}
+
+.draft-outline-panel {
+  align-self: start;
+  background: #fbfaf7;
+  border: 1px solid #d9d2c7;
+  border-radius: 8px;
+  padding: 12px;
+  position: sticky;
+  top: 88px;
+}
+
+.draft-outline-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.draft-outline-head span,
+.draft-outline-item span,
+.draft-outline-item em,
+.draft-outline-item small {
+  color: #746b60;
+  display: block;
+  font-style: normal;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.draft-suggestions {
+  background: #f4eee3;
+  border-radius: 6px;
+  display: grid;
+  gap: 6px;
+  margin: 12px 0;
+  padding: 10px;
+}
+
+.draft-outline-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.draft-outline-item {
+  background: #fffdf8;
+  border: 1px solid #ded6c9;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.draft-outline-item.has-break {
+  border-color: #a37b45;
+}
+
+.draft-break-marker {
+  background: #e5d5bf;
+  border-radius: 999px;
+  color: #6a4b25;
+  display: inline-flex;
+  font-size: 12px;
+  margin-bottom: 8px;
+  padding: 2px 8px;
+}
+
+.draft-outline-item-main {
+  align-items: start;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: auto 1fr;
+}
+
+.draft-outline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.draft-outline-empty {
+  color: #746b60;
+}
+
+.draft-undo-toast {
+  align-items: center;
+  background: #2f2a23;
+  border-radius: 8px;
+  bottom: 22px;
+  color: #fffaf0;
+  display: flex;
+  gap: 12px;
+  left: 50%;
+  padding: 10px 12px;
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 30;
+}
+
+@media (max-width: 980px) {
+  .draft-toolbar {
+    grid-template-columns: 1fr;
+    position: static;
+  }
+
+  .draft-workbench-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .draft-outline-panel {
+    position: static;
+  }
+
+  .draft-a4-sheet iframe {
+    height: 66vh;
+  }
+}

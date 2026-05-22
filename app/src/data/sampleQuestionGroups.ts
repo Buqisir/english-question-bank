@@ -1,6 +1,11 @@
 import type { QuestionGroupCard } from '../domain/questionBank'
 
-export const questionGroups: QuestionGroupCard[] = [
+type SampleQuestionGroupCard = Omit<
+  QuestionGroupCard,
+  'canAddToDraftPaper' | 'draftPaperButtonState' | 'currentDraftPaperId' | 'printUnavailableReason'
+>
+
+const rawQuestionGroups: SampleQuestionGroupCard[] = [
   {
     id: 'g-2024-xkb1-a',
     title: '2024新课标I A 志愿服务项目',
@@ -262,5 +267,13 @@ export const questionGroups: QuestionGroupCard[] = [
     defaultScore: 1.5,
   },
 ]
+
+export const questionGroups: QuestionGroupCard[] = rawQuestionGroups.map((group) => ({
+  ...group,
+  canAddToDraftPaper: false,
+  draftPaperButtonState: 'disabled',
+  currentDraftPaperId: null,
+  printUnavailableReason: '样例数据未连接本地草稿卷',
+}))
 
 export const allTags = Array.from(new Set(questionGroups.flatMap((group) => group.tags)))

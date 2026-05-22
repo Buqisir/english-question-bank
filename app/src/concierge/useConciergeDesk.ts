@@ -137,11 +137,23 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     lastAutoExpandKeyRef.current = null
   }, [])
 
-  // Aggregate hits → paper buckets.
-  const paperResults = useMemo<PaperResult[]>(
-    () => (state.kind === 'results' ? aggregatePaperResults(state.hits) : []),
-    [state],
+  const latestGroupById = useMemo(
+    () => new Map(input.questionGroups.map((group) => [group.id, group])),
+    [input.questionGroups],
   )
+
+  // Aggregate hits → paper buckets. Hits keep the query/reason context, but
+  // the card data itself must stay live so add-to-draft state can update in
+  // the existing result list without forcing the teacher to search again.
+  const paperResults = useMemo<PaperResult[]>(() => {
+    if (state.kind !== 'results') return []
+    return aggregatePaperResults(
+      state.hits.map((hit) => ({
+        ...hit,
+        group: latestGroupById.get(hit.group.id) || hit.group,
+      })),
+    )
+  }, [latestGroupById, state])
 
   useEffect(() => {
     if (paperResults.length === 1) {

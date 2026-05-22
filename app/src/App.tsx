@@ -115,6 +115,8 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 // default like any other unknown surface.
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
 import { PaperImportWorkbench } from './features/paper-import/PaperImportWorkbench'
+import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
+import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 
 type EntryForm = {
   sourceType: SourceType
@@ -943,6 +945,17 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'paper-import'
   })
+  const [draftPaperRoute, setDraftPaperRoute] = useState(() => {
+    if (typeof window === 'undefined') {
+      return { active: false, draftPaperId: null as string | null, focusGroupId: null as string | null }
+    }
+    const params = new URLSearchParams(window.location.search)
+    return {
+      active: params.get('view') === 'draft-paper',
+      draftPaperId: params.get('draftPaperId'),
+      focusGroupId: params.get('focusGroupId'),
+    }
+  })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>(sampleQuestionGroups)
   const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
   const [query, setQuery] = useState('')
@@ -1038,6 +1051,17 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     apiKey: aiApiKey,
   })
   const aiRunIdRef = useRef(0)
+  const refreshQuestionGroups = useCallback(async (ignore?: () => boolean) => {
+    try {
+      const groups = await fetchQuestionGroups()
+      if (ignore?.()) return
+      setQuestionGroups(mergeQuestionGroupsWithSamples(groups))
+      setDataStatus('sqlite')
+    } catch {
+      if (ignore?.()) return
+      setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
+    }
+  }, [])
   const [previewDetails, setPreviewDetails] = useState<Record<string, QuestionGroupDetail>>({})
   const [previewStatus, setPreviewStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [previewError, setPreviewError] = useState('')
@@ -1173,12 +1197,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (currentPiRoute.kind === 'paper-intelligence') return
     let ignore = false
 
-    fetchQuestionGroups()
-      .then((groups) => {
-        if (ignore) return
-        setQuestionGroups(mergeQuestionGroupsWithSamples(groups))
-        setDataStatus('sqlite')
-      })
+    refreshQuestionGroups(() => ignore)
       .catch(() => {
         if (ignore) return
         setQuestionGroups(sampleQuestionGroups)
@@ -1188,7 +1207,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [currentPiRoute.kind])
+  }, [currentPiRoute.kind, refreshQuestionGroups])
 
   useEffect(() => {
     if (currentPiRoute.kind === 'paper-intelligence') return
@@ -1511,23 +1530,47 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  function addGroupsToBasket(groups: QuestionGroupCard[]) {
-    paperDraft.addGroups(groups)
+  async function addGroupsToBasket(groups: QuestionGroupCard[]) {
+    const addableGroups = groups.filter((group) => group.draftPaperButtonState === 'add' && group.canAddToDraftPaper)
+    if (addableGroups.length === 0) {
+      const existing = groups.find((group) => group.draftPaperButtonState === 'in_current_draft')
+      if (existing) {
+        openDraftPaperWorkbench(existing.currentDraftPaperId, existing.id)
+        return
+      }
+      const blocked = groups.find((group) => group.printUnavailableReason)
+      if (blocked) {
+        window.alert(blocked.printUnavailableReason || '该题组暂不可加入草稿卷。')
+      }
+      return
+    }
+    try {
+      for (const group of addableGroups) {
+        await addGroupToCurrentDraftPaperRequest(group.id)
+      }
+      await refreshQuestionGroups()
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : String(error))
+    }
   }
 
   function addToBasket(group: QuestionGroupCard) {
-    addGroupsToBasket([group])
+    if (group.draftPaperButtonState === 'in_current_draft') {
+      openDraftPaperWorkbench(group.currentDraftPaperId, group.id)
+      return
+    }
+    void addGroupsToBasket([group])
   }
 
   function addFilteredGroupsToBasket() {
-    addGroupsToBasket(filteredGroups)
+    void addGroupsToBasket(filteredGroups)
   }
 
   function addWorkflowGroupsToBasket(workflow: PaperWorkflow) {
     const groups = sortedWorkflowBankGroups(workflow)
       .map((group) => questionGroupById.get(group.id))
       .filter((group): group is QuestionGroupCard => Boolean(group))
-    addGroupsToBasket(groups)
+    void addGroupsToBasket(groups)
   }
 
   async function handleBuildWorkflowPaperSet(workflow: PaperWorkflow) {
@@ -2509,16 +2552,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  async function refreshQuestionGroups() {
-    try {
-      const groups = await fetchQuestionGroups()
-      setQuestionGroups(mergeQuestionGroupsWithSamples(groups))
-      setDataStatus('sqlite')
-    } catch {
-      setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
-    }
-  }
-
   async function handleDeleteQuestionGroup(id: string) {
     try {
       await deleteQuestionGroupRequest(id)
@@ -3300,6 +3333,58 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     [basket],
   )
 
+  const currentDraftPaperId = useMemo(
+    () => questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null,
+    [questionGroups],
+  )
+  const currentDraftGroupCount = useMemo(
+    () => questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length,
+    [questionGroups],
+  )
+
+  const openDraftPaperWorkbench = useCallback((draftPaperId?: string | null, focusGroupId?: string | null) => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'draft-paper')
+      if (draftPaperId) {
+        url.searchParams.set('draftPaperId', draftPaperId)
+      } else {
+        url.searchParams.delete('draftPaperId')
+      }
+      if (focusGroupId) {
+        url.searchParams.set('focusGroupId', focusGroupId)
+      } else {
+        url.searchParams.delete('focusGroupId')
+      }
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setPaperImportRouteActive(false)
+    setCurrentPiRoute({ kind: 'none' })
+    setDraftPaperRoute({
+      active: true,
+      draftPaperId: draftPaperId || null,
+      focusGroupId: focusGroupId || null,
+    })
+  }, [])
+
+  const draftPaperOnBackToWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        for (const param of ['view', 'draftPaperId', 'focusGroupId']) {
+          url.searchParams.delete(param)
+        }
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    void refreshQuestionGroups()
+  }, [refreshQuestionGroups])
+
   const paperImportOnBackToWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
@@ -3325,6 +3410,17 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   }, [])
 
   // ─── Paper Intelligence route rendering ───
+  if (draftPaperRoute.active) {
+    return (
+      <DraftPaperWorkbench
+        draftPaperId={draftPaperRoute.draftPaperId}
+        focusGroupId={draftPaperRoute.focusGroupId}
+        onBackToWorkbench={draftPaperOnBackToWorkbench}
+        onDraftChanged={() => void refreshQuestionGroups()}
+      />
+    )
+  }
+
   if (paperImportRouteActive) {
     return <PaperImportWorkbench onBackToWorkbench={paperImportOnBackToWorkbench} />
   }
@@ -3373,6 +3469,16 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             <span className={`data-status ${dataStatus}`}>
               {dataStatus === 'loading' ? '连接本地库' : dataStatus === 'sqlite' ? 'SQLite 已连接' : '样例数据'}
             </span>
+          )}
+          {currentDraftPaperId && (
+            <button
+              className="ghost-button"
+              type="button"
+              onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
+            >
+              <FileText size={16} />
+              当前草稿卷{currentDraftGroupCount > 0 ? ` · ${currentDraftGroupCount} 组` : ''}
+            </button>
           )}
           {homeMode === 'classic' && (
             <span className="topbar-ai-group">
@@ -3850,10 +3956,15 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                       className="add-button"
                       type="button"
                       onClick={() => addToBasket(group)}
-                      disabled={basket.some((item) => item.id === group.id)}
+                      disabled={group.draftPaperButtonState === 'disabled'}
+                      title={group.draftPaperButtonState === 'disabled' ? group.printUnavailableReason || '暂不可组卷' : undefined}
                     >
                       <Plus size={16} />
-                      {basket.some((item) => item.id === group.id) ? '已加入' : '加入'}
+                      {group.draftPaperButtonState === 'in_current_draft'
+                        ? '已在草稿卷中'
+                        : group.draftPaperButtonState === 'disabled'
+                          ? '暂不可组卷'
+                          : '加入草稿卷'}
                     </button>
                     <button
                       className="icon-button"
@@ -3901,10 +4012,19 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                         className="add-button"
                         type="button"
                         onClick={() => addToBasket(selectedDetail)}
-                        disabled={basket.some((item) => item.id === selectedDetail.id)}
+                        disabled={selectedDetail.draftPaperButtonState === 'disabled'}
+                        title={
+                          selectedDetail.draftPaperButtonState === 'disabled'
+                            ? selectedDetail.printUnavailableReason || '暂不可组卷'
+                            : undefined
+                        }
                       >
                         <Plus size={16} />
-                        {basket.some((item) => item.id === selectedDetail.id) ? '已加入' : '加入草稿卷'}
+                        {selectedDetail.draftPaperButtonState === 'in_current_draft'
+                          ? '已在草稿卷中'
+                          : selectedDetail.draftPaperButtonState === 'disabled'
+                            ? '暂不可组卷'
+                            : '加入草稿卷'}
                       </button>
                       {selectedDetail.groupType === 'reading' ? (
                         <>

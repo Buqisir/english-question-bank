@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Verification: Assembly Basket localStorage persistence (Cut B).
+ * Verification: Assembly Basket legacy migration seam.
  *
  * Static + behavioral checks (no browser):
  *   1. Pure helpers in `paperAssembly/basketPersistence.ts`:
@@ -10,14 +10,14 @@
  *      - parse rejects non-object payload
  *      - parse rejects non-array items
  *      - parse handles null / undefined / empty input
- *   2. usePaperDraft source contracts:
+ *   2. C8 retirement contracts:
  *      - imports loadAssemblyBasket / saveAssemblyBasket from
  *        ./basketPersistence
  *      - useState basket initializer calls loadAssemblyBasket()
- *      - commitBasket calls saveAssemblyBasket(next) on every commit
- *      - no debounce wrapper around the save
- *      - replaceDraft routes through commitBasket so loaded layouts
- *        also persist
+ *      - saveAssemblyBasket is a compatibility no-op, so new writes to
+ *        assembly-basket-v1 are removed
+ *      - replaceDraft routes through commitBasket so old in-memory flows
+ *        still stay coherent
  */
 
 import { readFileSync } from 'node:fs'
@@ -53,6 +53,7 @@ const {
   ASSEMBLY_BASKET_SCHEMA_VERSION,
   serializeAssemblyBasket,
   parseAssemblyBasket,
+  saveAssemblyBasket,
 } = persistence
 
 console.log('Test 1: pure helpers')
@@ -163,7 +164,7 @@ const hookSrc = readFileSync(
   'utf-8',
 )
 
-console.log('\nTest 2: usePaperDraft wires persistence helpers')
+console.log('\nTest 2: C8 keeps read/migration seam but removes new writes')
 
 assert(
   'usePaperDraft imports loadAssemblyBasket / saveAssemblyBasket',
@@ -182,6 +183,24 @@ assert(
   '',
 )
 
+const persistenceSrc = readFileSync(
+  path.join(ROOT, 'app/src/paperAssembly/basketPersistence.ts'),
+  'utf-8',
+)
+
+assert(
+  'saveAssemblyBasket is a no-op compatibility seam',
+  saveAssemblyBasket([sampleItem]) === undefined &&
+    /export function saveAssemblyBasket\(items: BasketItem\[\]\): void \{[\s\S]*?void items[\s\S]*?\}/.test(persistenceSrc),
+  '',
+)
+
+assert(
+  'basketPersistence no longer writes assembly-basket-v1 to localStorage',
+  !/localStorage\.setItem\(\s*ASSEMBLY_BASKET_STORAGE_KEY/.test(persistenceSrc),
+  '',
+)
+
 // Strip comments before scanning for write call (so doc-block mentions
 // of "no debounce" don't sneak through).
 const codeOnly = hookSrc
@@ -189,7 +208,7 @@ const codeOnly = hookSrc
   .replace(/^\s*\/\/.*$/gm, '')
 
 assert(
-  'commitBasket persists via saveAssemblyBasket(next)',
+  'commitBasket still routes through the no-op compatibility seam',
   /const commitBasket\s*=\s*useCallback\(\(next:\s*BasketItem\[\]\)\s*=>\s*\{[\s\S]*?saveAssemblyBasket\(next\)/m.test(
     codeOnly,
   ),
@@ -197,7 +216,7 @@ assert(
 )
 
 assert(
-  'no setTimeout / debounce wrapping the save (immediate write)',
+  'no setTimeout / debounce around the retired seam',
   !/setTimeout\([^,]*saveAssemblyBasket/.test(codeOnly),
   'debounce-style timer detected',
 )

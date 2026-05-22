@@ -100,19 +100,11 @@ export function loadAssemblyBasket(): BasketItem[] {
 }
 
 /**
- * Persist the basket. Silently swallows storage errors (quota, denied
- * access in private mode) — the in-memory basket is still authoritative
- * for the current session, and we don't want a quota error to crash
- * the workbench.
+ * C8 PR A retires new Assembly Basket writes. Keep this function as a
+ * compatibility no-op for older hook code paths while the Draft Paper
+ * server entity becomes the add-to-draft source of truth. Read helpers
+ * above remain active only for one-time migration.
  */
 export function saveAssemblyBasket(items: BasketItem[]): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(
-      ASSEMBLY_BASKET_STORAGE_KEY,
-      serializeAssemblyBasket(items),
-    )
-  } catch {
-    /* swallow — see fn comment */
-  }
+  void items
 }

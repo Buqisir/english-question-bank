@@ -382,7 +382,11 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
   assert('App body has no `paperBlocksHook =`', !/const\s+paperBlocksHook\s*=/.test(app), '')
   assert('App body has no inline createBasketItem function', !/^function createBasketItem\(/m.test(app), '')
 
-  assert('addGroupsToBasket delegates to paperDraft.addGroups', /paperDraft\.addGroups\(groups\)/.test(app), '')
+  assert(
+    'addGroupsToBasket uses C8 server draft API',
+    /addGroupToCurrentDraftPaperRequest\(group\.id\)/.test(app) && /refreshQuestionGroups\(\)/.test(app),
+    '',
+  )
   assert('removeFromBasket delegates to paperDraft.removeGroup', /paperDraft\.removeGroup\(id\)/.test(app), '')
   assert('clearBasket delegates to paperDraft.clear', /paperDraft\.clear\(\)/.test(app), '')
   assert('moveBasketItem delegates to paperDraft.moveGroup', /paperDraft\.moveGroup\(id, direction\)/.test(app), '')

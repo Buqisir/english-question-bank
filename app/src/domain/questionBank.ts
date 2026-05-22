@@ -48,6 +48,10 @@ export type QuestionGroupCard = {
   defaultScore: number
   hasPaperSurfaceAnalysis?: boolean
   paperSurfaceHref?: string | null
+  canAddToDraftPaper: boolean
+  draftPaperButtonState: 'add' | 'in_current_draft' | 'disabled'
+  currentDraftPaperId: string | null
+  printUnavailableReason: string | null
 }
 
 export type TopicLabel = {
@@ -121,6 +125,43 @@ export type BasketItem = QuestionGroupCard & {
   score: number
   sectionTitle: string
   note: string
+}
+
+export type DraftPaperSummary = {
+  id: string
+  title: string
+  subject: string
+  status: 'active' | 'deleted'
+  isCurrent: boolean
+  itemCount: number
+  totalQuestions: number
+  createdAt: string
+  updatedAt: string
+  lastPrintedAt: string | null
+}
+
+export type DraftPaperItem = {
+  id: string
+  draftPaperId: string
+  groupId: string
+  sourcePaperId: string
+  orderIndex: number
+  pageBreakBefore: boolean
+  printReady: boolean
+  printUnavailableReason: string | null
+  questionGroup: QuestionGroupCard | null
+  createdAt: string
+  updatedAt: string
+}
+
+export type DraftPaper = DraftPaperSummary & {
+  items: DraftPaperItem[]
+  pageBreakSuggestions: Array<{
+    itemId: string
+    groupId: string
+    reason: string
+  }>
+  printHtml: string
 }
 
 export type CreateQuestionGroupInput = {
