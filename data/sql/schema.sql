@@ -233,6 +233,29 @@ CREATE TABLE IF NOT EXISTS reading_parse_results (
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+CREATE TABLE IF NOT EXISTS paper_asset_versions (
+  id TEXT PRIMARY KEY,
+  paper_id TEXT NOT NULL,
+  asset_version INTEGER NOT NULL,
+  version_name TEXT NOT NULL,
+  version_dir TEXT NOT NULL,
+  source_file_sha256 TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'published' CHECK (status IN ('published', 'failed')),
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(paper_id, asset_version)
+);
+
+CREATE TABLE IF NOT EXISTS paper_import_runs (
+  id TEXT PRIMARY KEY,
+  paper_id TEXT NOT NULL,
+  asset_version INTEGER NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('validated', 'published', 'failed')),
+  validation_report_json TEXT NOT NULL DEFAULT '{}',
+  publish_report_json TEXT NOT NULL DEFAULT '{}',
+  error_message TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 CREATE TABLE IF NOT EXISTS export_jobs (
   id TEXT PRIMARY KEY,
   paper_set_id TEXT NOT NULL REFERENCES paper_sets(id) ON DELETE CASCADE,
@@ -254,6 +277,8 @@ CREATE INDEX IF NOT EXISTS idx_tag_links_target ON tag_links(target_type, target
 CREATE INDEX IF NOT EXISTS idx_paper_items_set ON paper_items(paper_set_id, display_order);
 CREATE INDEX IF NOT EXISTS idx_import_file_texts_import ON import_file_texts(import_file_id);
 CREATE INDEX IF NOT EXISTS idx_import_batch_items_batch ON import_batch_items(batch_id, status);
+CREATE INDEX IF NOT EXISTS idx_paper_asset_versions_paper ON paper_asset_versions(paper_id, asset_version);
+CREATE INDEX IF NOT EXISTS idx_paper_import_runs_paper ON paper_import_runs(paper_id, asset_version);
 
 DROP VIEW IF EXISTS v_question_group_cards;
 

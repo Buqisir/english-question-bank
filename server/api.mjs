@@ -18,13 +18,17 @@ import { DatabaseSync } from 'node:sqlite'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
+import { parsePaperImportMultipart } from './paper-import/multipart.mjs'
+import { ensurePaperImportDatabaseShape, publishPaperImportPackage } from './paper-import/publisher.mjs'
+import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
+import { makePublicValidationReport, validatePaperImportPackage } from './paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question-bank.sqlite')
 const exportDir = path.join(rootDir, 'exports')
 const importDir = path.join(rootDir, 'imports')
-const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
+const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
 const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
@@ -219,8 +223,7 @@ function getPaperSurfaceAnalysisAvailabilityByGroupId() {
     if (!entry.isDirectory()) continue
 
     const assetDir = path.join(paperAssetsDir, entry.name)
-    const assetPath = path.join(assetDir, 'paper-asset.json')
-    const analysisPath = path.join(assetDir, 'analyses', readingChoiceAnalysisFileName)
+    const { assetPath, analysisPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
     if (!existsSync(assetPath) || !existsSync(analysisPath)) continue
 
     try {
@@ -362,6 +365,46 @@ function sendPdf(response, body, fileName, outputPath) {
   })
 }
 
+function sendPaperAssetStatic(response, urlPath) {
+  const relativePath = decodeURIComponent(urlPath.replace(/^\/paper-assets\/?/, ''))
+  if (!relativePath || relativePath.includes('..') || path.isAbsolute(relativePath)) {
+    sendJson(response, 400, { error: 'Invalid paper asset path' })
+    return
+  }
+  const paperAssetRoot = path.resolve(paperAssetsDir)
+  let filePath = path.resolve(paperAssetsDir, relativePath)
+  const isInsideRoot = filePath === paperAssetRoot || filePath.startsWith(`${paperAssetRoot}${path.sep}`)
+  if (!isInsideRoot) {
+    sendJson(response, 400, { error: 'Invalid paper asset path' })
+    return
+  }
+  if (!existsSync(filePath)) {
+    const parts = relativePath.split('/')
+    if (parts.length > 2 && parts[1] === 'latest') {
+      const versions = listPaperAssetVersions(paperAssetsDir, parts[0])
+      if (versions.length > 0) {
+        filePath = path.resolve(paperAssetsDir, parts[0], 'versions', `v${versions[versions.length - 1]}`, ...parts.slice(2))
+      }
+    }
+  }
+  if (!filePath.startsWith(`${paperAssetRoot}${path.sep}`) || !existsSync(filePath) || statSync(filePath).isDirectory()) {
+    sendJson(response, 404, { error: 'Paper asset file not found' })
+    return
+  }
+  const ext = path.extname(filePath).toLowerCase()
+  const contentType =
+    ext === '.json'
+      ? 'application/json; charset=utf-8'
+      : ext === '.docx'
+        ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        : 'application/octet-stream'
+  response.writeHead(200, {
+    'access-control-allow-origin': '*',
+    'content-type': contentType,
+  })
+  response.end(readFileSync(filePath))
+}
+
 function openDatabase({ readOnly = true } = {}) {
   if (!existsSync(dbPath)) {
     throw new Error(`Database not found at ${dbPath}. Run scripts/init-db.sh first.`)
@@ -454,6 +497,7 @@ function ensureDatabaseShape() {
     if (paperSetColumns.length > 0 && !paperSetColumns.includes('layout_json')) {
       db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
+    ensurePaperImportDatabaseShape(db)
   } finally {
     db.close()
   }
@@ -10621,6 +10665,11 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || '127.0.0.1'}`)
 
   try {
+    if (request.method === 'GET' && url.pathname.startsWith('/paper-assets/')) {
+      sendPaperAssetStatic(response, url.pathname)
+      return
+    }
+
     if (request.method === 'GET' && url.pathname === '/api/health') {
       sendJson(response, 200, { ok: true, dbPath })
       return
@@ -10690,6 +10739,47 @@ const server = createServer(async (request, response) => {
 
     if (request.method === 'GET' && url.pathname === '/api/import-bundles') {
       sendJson(response, 200, { importBundles: listImportBundles() })
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/paper-import/validate') {
+      let files = []
+      try {
+        ;({ files } = await parsePaperImportMultipart(request))
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+        return
+      }
+      const validation = validatePaperImportPackage(files)
+      sendJson(response, validation.ok ? 200 : 422, { validation: makePublicValidationReport(validation) })
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/paper-import/publish') {
+      let files = []
+      try {
+        ;({ files } = await parsePaperImportMultipart(request))
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+        return
+      }
+      const db = openDatabase({ readOnly: false })
+      try {
+        const result = publishPaperImportPackage({ files, db, paperAssetsDir })
+        paperSurfaceAnalysisAvailabilityByGroupIdCache = null
+        sendJson(response, result.ok ? 201 : 422, result)
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/paper-import/revalidate-latest') {
+      paperSurfaceAnalysisAvailabilityByGroupIdCache = null
+      sendJson(response, 200, {
+        ok: true,
+        analysisEntryCount: getPaperSurfaceAnalysisAvailabilityByGroupId().size,
+      })
       return
     }
 
@@ -11119,6 +11209,7 @@ const server = createServer(async (request, response) => {
 })
 
 ensureDatabaseShape()
+cleanupPaperImportTempArtifacts(paperAssetsDir)
 
 server.listen(port, '127.0.0.1', () => {
   console.log(`Question bank API listening on http://127.0.0.1:${port}`)

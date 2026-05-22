@@ -160,6 +160,8 @@ type Props = {
   groupId?: string | null
   /** C6a-3: optional question to pre-select on load (from concierge entry URL). */
   questionId?: string | null
+  /** C7: optional immutable paper-asset version, e.g. v1. Missing means latest. */
+  version?: string | null
   onBackToWorkbench: () => void
 }
 
@@ -181,6 +183,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   source = 'legacy-report',
   groupId: initialGroupId,
   questionId: initialQuestionId,
+  version: initialVersion = null,
   onBackToWorkbench,
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
@@ -263,12 +266,17 @@ export function PaperIntelligencePaperSurfaceHarness({
           if (!initialGroupId) {
             throw new Error('未指定 groupId 参数。')
           }
-          const assetUrl = `/paper-assets/${paperId}/paper-asset.json`
-          const analysisUrl = `/paper-assets/${paperId}/analyses/reading-choice-analysis-v1.json`
-          const [assetRes, analysisRes] = await Promise.all([
-            fetch(assetUrl),
-            fetch(analysisUrl),
-          ])
+          const assetBase = initialVersion
+            ? `/paper-assets/${paperId}/versions/${initialVersion}`
+            : `/paper-assets/${paperId}/latest`
+          const assetUrl = `${assetBase}/paper-asset.json`
+          const analysisUrl = `${assetBase}/analyses/reading-choice-analysis-v1.json`
+          let [assetRes, analysisRes] = await Promise.all([fetch(assetUrl), fetch(analysisUrl)])
+          if (!initialVersion && (!assetRes.ok || !analysisRes.ok)) {
+            const legacyAssetUrl = `/paper-assets/${paperId}/paper-asset.json`
+            const legacyAnalysisUrl = `/paper-assets/${paperId}/analyses/reading-choice-analysis-v1.json`
+            ;[assetRes, analysisRes] = await Promise.all([fetch(legacyAssetUrl), fetch(legacyAnalysisUrl)])
+          }
           if (!assetRes.ok) throw new Error(`未找到 Paper Asset：${paperId}`)
           if (!analysisRes.ok) throw new Error(`未找到已审阅阅读解析：${paperId}`)
 
@@ -384,7 +392,7 @@ export function PaperIntelligencePaperSurfaceHarness({
     return (): void => {
       cancelled = true
     }
-  }, [paperId, source, initialGroupId])
+  }, [paperId, source, initialGroupId, initialVersion])
 
   // ─── C4 PR #52: viewport-mode detection ───
   //

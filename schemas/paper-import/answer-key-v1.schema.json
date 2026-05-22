@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "answer-key-v1.schema.json",
+  "title": "Answer Key V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "sourceAssetVersion", "answers"],
+  "properties": {
+    "schemaVersion": { "const": "answer-key-v1" },
+    "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "sourceAssetVersion": { "type": "integer", "minimum": 1 },
+    "answers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["questionId", "questionNo", "answer"],
+        "properties": {
+          "questionId": { "type": "string" },
+          "questionNo": { "type": "integer", "minimum": 1 },
+          "answer": { "type": "string", "minLength": 1 },
+          "score": { "type": "number" },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

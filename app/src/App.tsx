@@ -114,6 +114,7 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 // branch for the legacy `surface=print` value — it falls back to
 // default like any other unknown surface.
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
+import { PaperImportWorkbench } from './features/paper-import/PaperImportWorkbench'
 
 type EntryForm = {
   sourceType: SourceType
@@ -938,6 +939,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // Workbench fetch effects depend on `currentPiRoute.kind` so they fire
   // exactly once when the user returns from PI.
   const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
+  const [paperImportRouteActive, setPaperImportRouteActive] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'paper-import'
+  })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>(sampleQuestionGroups)
   const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
   const [query, setQuery] = useState('')
@@ -3253,7 +3258,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
         const url = new URL(window.location.href)
-        for (const param of ['view', 'source', 'paperId', 'surface', 'groupId', 'questionId']) {
+        for (const param of ['view', 'source', 'paperId', 'surface', 'groupId', 'questionId', 'version']) {
           url.searchParams.delete(param)
         }
         const nextSearch = url.searchParams.toString()
@@ -3295,7 +3300,35 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     [basket],
   )
 
+  const paperImportOnBackToWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('view')
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setPaperImportRouteActive(false)
+  }, [])
+
+  const openPaperImportWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'paper-import')
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setPaperImportRouteActive(true)
+  }, [])
+
   // ─── Paper Intelligence route rendering ───
+  if (paperImportRouteActive) {
+    return <PaperImportWorkbench onBackToWorkbench={paperImportOnBackToWorkbench} />
+  }
+
   if (currentPiRoute.kind === 'paper-intelligence') {
     // Issue #21-C1: when the URL carries `&surface=paper`, render the
     // PaperSurface harness (production PaperSurface module + PI adapter).
@@ -3310,6 +3343,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           source={currentPiRoute.source}
           groupId={currentPiRoute.groupId}
           questionId={currentPiRoute.questionId}
+          version={currentPiRoute.version}
           onBackToWorkbench={piOnBackToWorkbench}
         />
       )
@@ -3381,6 +3415,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           <button className="ghost-button" type="button" onClick={openImportPanel}>
             <FileText size={18} />
             导入资料
+          </button>
+          <button className="ghost-button" type="button" onClick={openPaperImportWorkbench}>
+            <FileText size={18} />
+            整卷导入
           </button>
           <button
             className="home-mode-toggle"

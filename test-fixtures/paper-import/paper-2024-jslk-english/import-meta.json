@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2024-jslk-english",
+  "sourceFileName": "2024-jslk-english-source.docx",
+  "sourceFileSha256": "86f2bf55b857cb51f16b97a8c46c7ac6110e1fb8f048881687cc1a0fcc915d57",
+  "importedBy": "fixture",
+  "importedAt": "2026-05-22T00:00:00.000Z",
+  "paper": {
+    "year": 2024,
+    "region": "九省联考",
+    "paperName": "2024年高考综合改革适应性测试英语试题",
+    "examCode": "jslk",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "2024",
+      "九省联考",
+      "英语"
+    ]
+  },
+  "groups": {
+    "group-2024-jslk-listening-s1": {
+      "groupId": "group-2024-jslk-listening-s1",
+      "difficulty": "中",
+      "summary": "听力第一节",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-listening-m6": {
+      "groupId": "group-2024-jslk-listening-m6",
+      "difficulty": "中",
+      "summary": "听第6段材料",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-listening-m7": {
+      "groupId": "group-2024-jslk-listening-m7",
+      "difficulty": "中",
+      "summary": "听第7段材料",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-listening-m8": {
+      "groupId": "group-2024-jslk-listening-m8",
+      "difficulty": "中",
+      "summary": "听第8段材料",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-listening-m9": {
+      "groupId": "group-2024-jslk-listening-m9",
+      "difficulty": "中",
+      "summary": "听第9段材料",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-listening-m10": {
+      "groupId": "group-2024-jslk-listening-m10",
+      "difficulty": "中",
+      "summary": "听第10段材料",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-reading-a": {
+      "groupId": "group-2024-jslk-reading-a",
+      "difficulty": "中",
+      "summary": "Reading A",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-reading-b": {
+      "groupId": "group-2024-jslk-reading-b",
+      "difficulty": "中",
+      "summary": "Reading B",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-reading-c": {
+      "groupId": "group-2024-jslk-reading-c",
+      "difficulty": "中",
+      "summary": "Reading C",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-reading-d": {
+      "groupId": "group-2024-jslk-reading-d",
+      "difficulty": "中",
+      "summary": "Reading D",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-seven-choices": {
+      "groupId": "group-2024-jslk-seven-choices",
+      "difficulty": "中",
+      "summary": "七选五 Common Mistakes New Runners Make",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-cloze": {
+      "groupId": "group-2024-jslk-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-grammar-fill": {
+      "groupId": "group-2024-jslk-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-writing-application": {
+      "groupId": "group-2024-jslk-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    },
+    "group-2024-jslk-writing-continuation": {
+      "groupId": "group-2024-jslk-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "2024",
+        "九省联考"
+      ],
+      "topicLabels": []
+    }
+  }
+}

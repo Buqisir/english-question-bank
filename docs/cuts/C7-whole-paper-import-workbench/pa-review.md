@@ -1,7 +1,8 @@
 # C7 PA Review Summary
 
-Source: external Opus PA review, corrected to C7 after one mistaken C6b
-review.
+Source: external Opus PA review for C7. An earlier session
+inadvertently briefed the C6b cut to PA; that review belongs to the
+C6b cut context, not this C7 review.
 
 ## Verdict From PA
 
@@ -49,11 +50,24 @@ PA left five decisions. They are resolved as follows:
 
 ## PA Items Reframed As Should Watch
 
-- Whether `versions/` should be committed or ignored is a DEV / repo
-  policy watch item. C7 must avoid accidental giant fixture churn.
+- `versions/` is local-only generated history and is gitignored.
+  `latest/` is the teacher-facing snapshot that may be committed when a
+  published fixture needs to ship with the repo.
 - Future cloud migration is documentation only in C7.
 - Existing import-file / import-batch endpoints should not be merged
   into C7 unless needed for the import workbench.
+
+## Explicit Implementation Exceptions
+
+- `app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx`
+  is normally outside C7's renderer boundary, but C7 permits narrow URL
+  routing and version-param plumbing so latest and version-pinned QA
+  links can both open PaperSurface. PaperSurface renderer/shared files
+  remain forbidden.
+- `data/sql/schema.sql` may add C7 sidecar tables for
+  `paper_asset_versions` and `paper_import_runs`. This is an additive
+  local persistence change, not a migration of existing question-bank
+  tables.
 
 ## DEV Readiness After This Planning PR
 
