@@ -37,6 +37,87 @@ const groupTypeLabels = {
   listening: '听力',
   other: '其他',
 }
+const jslkPaperAssetPath = path.join(
+  rootDir,
+  'app/public/paper-assets/paper-2024-jslk-english/paper-asset.json',
+)
+const jslkReadingFixtures = [
+  {
+    sourceId: 'src-2024-jslk-reading-a',
+    passageId: 'passage-2024-jslk-reading-a',
+    groupId: 'group-2024-jslk-reading-a',
+    section: 'A',
+    sourceSection: '阅读理解 A',
+    groupTitle: '2024九省联考 阅读 A 黄石公园海报展',
+    passageTitle: 'Yellowstone Poster Exhibition to Be on View at UW’s Coe Library',
+    summary: '介绍怀俄明大学 Coe Library 举办黄石国家公园海报展的时间、地点、纪念意义和代表展品。',
+    theme: '人与社会',
+    discourseType: '应用文',
+    note: 'C6a-4 paper-asset Reading A 入口。',
+    questionTypes: {
+      'q-2024-jslk-021': '细节理解',
+      'q-2024-jslk-022': '细节理解',
+      'q-2024-jslk-023': '细节理解',
+    },
+  },
+  {
+    sourceId: 'src-2024-jslk-reading-b',
+    passageId: 'passage-2024-jslk-reading-b',
+    groupId: 'group-2024-jslk-reading-b',
+    section: 'B',
+    sourceSection: '阅读理解 B',
+    groupTitle: '2024九省联考 阅读 B 鹦鹉本能与饲养建议',
+    passageTitle: 'Parrots are prey animals',
+    summary: '说明鹦鹉作为被捕食动物的本能反应如何影响家庭行为，并给出饲养建议。',
+    theme: '人与自然',
+    discourseType: '说明文',
+    note: 'C6a-6b paper-asset Reading B 入口。',
+    questionTypes: {
+      'q-2024-jslk-024': '细节理解',
+      'q-2024-jslk-025': '细节理解',
+      'q-2024-jslk-026': '细节推断',
+      'q-2024-jslk-027': '写作目的',
+    },
+  },
+  {
+    sourceId: 'src-2024-jslk-reading-c',
+    passageId: 'passage-2024-jslk-reading-c',
+    groupId: 'group-2024-jslk-reading-c',
+    section: 'C',
+    sourceSection: '阅读理解 C',
+    groupTitle: '2024九省联考 阅读 C 重新理解争论',
+    passageTitle: 'Rethinking Arguments',
+    summary: '批判把争论视作打斗或比赛的旧观念，主张通过理性交换获得尊重与理解。',
+    theme: '人与社会',
+    discourseType: '议论文',
+    note: 'C6a-9 paper-asset Reading C 入口。',
+    questionTypes: {
+      'q-2024-jslk-028': '态度观点',
+      'q-2024-jslk-029': '细节理解',
+      'q-2024-jslk-030': '词义猜测',
+      'q-2024-jslk-031': '主旨大意',
+    },
+  },
+  {
+    sourceId: 'src-2024-jslk-reading-d',
+    passageId: 'passage-2024-jslk-reading-d',
+    groupId: 'group-2024-jslk-reading-d',
+    section: 'D',
+    sourceSection: '阅读理解 D',
+    groupTitle: '2024九省联考 阅读 D 幼儿友谊与社交规则',
+    passageTitle: 'How Your Baby Learns to Love',
+    summary: '说明幼儿通过模仿表达喜欢，并建议父母用规则、共情和语言表达引导健康社交。',
+    theme: '人与自我',
+    discourseType: '说明文',
+    note: 'C6a-9 paper-asset Reading D 入口。',
+    questionTypes: {
+      'q-2024-jslk-032': '细节推断',
+      'q-2024-jslk-033': '细节理解',
+      'q-2024-jslk-034': '篇章结构',
+      'q-2024-jslk-035': '标题归纳',
+    },
+  },
+]
 const objectivePaperSections = [
   { title: '阅读理解 A', groupType: 'reading' },
   { title: '阅读理解 B', groupType: 'reading' },
@@ -290,6 +371,184 @@ function openDatabase({ readOnly = true } = {}) {
   return db
 }
 
+function readJsonFile(filePath) {
+  return JSON.parse(readFileSync(filePath, 'utf8'))
+}
+
+function jslkQuestionAnswerText(asset, question) {
+  const answerLabel = String(asset?.answerKey?.answers?.[question.questionId]?.answer || '').trim()
+  if (!answerLabel) return ''
+  const answerOption = (question.options || []).find((option) => option.label === answerLabel)
+  return answerOption?.text ? `${answerLabel}. ${answerOption.text}` : answerLabel
+}
+
+function ensureJslkReadingPaperAssetEntries(db) {
+  if (!existsSync(jslkPaperAssetPath)) return
+
+  const asset = readJsonFile(jslkPaperAssetPath)
+  if (asset?.schemaVersion !== 'paper-asset-v1') return
+
+  const insertSource = db.prepare(`
+    INSERT INTO sources (id, source_type, year, region, paper_name, section, note)
+    VALUES (?, 'real_exam', 2024, '九省联考', '高考综合改革适应性测试', ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      source_type = excluded.source_type,
+      year = excluded.year,
+      region = excluded.region,
+      paper_name = excluded.paper_name,
+      section = excluded.section,
+      note = excluded.note,
+      updated_at = datetime('now')
+  `)
+  const insertPassage = db.prepare(`
+    INSERT INTO passages (
+      id,
+      source_id,
+      title,
+      material_text,
+      summary,
+      theme,
+      discourse_type,
+      word_count,
+      difficulty,
+      note
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, NULL, 'medium', ?)
+    ON CONFLICT(id) DO UPDATE SET
+      source_id = excluded.source_id,
+      title = excluded.title,
+      material_text = excluded.material_text,
+      summary = excluded.summary,
+      theme = excluded.theme,
+      discourse_type = excluded.discourse_type,
+      word_count = excluded.word_count,
+      difficulty = excluded.difficulty,
+      note = excluded.note,
+      updated_at = datetime('now')
+  `)
+  const insertGroup = db.prepare(`
+    INSERT INTO question_groups (
+      id,
+      passage_id,
+      group_type,
+      title,
+      instruction,
+      display_order,
+      default_score,
+      difficulty,
+      note
+    )
+    VALUES (?, ?, 'reading', ?, 'Read the passage and answer the questions.', ?, 2.5, 'medium', ?)
+    ON CONFLICT(id) DO UPDATE SET
+      passage_id = excluded.passage_id,
+      group_type = excluded.group_type,
+      title = excluded.title,
+      instruction = excluded.instruction,
+      display_order = excluded.display_order,
+      default_score = excluded.default_score,
+      difficulty = excluded.difficulty,
+      note = excluded.note,
+      updated_at = datetime('now')
+  `)
+  const insertQuestion = db.prepare(`
+    INSERT INTO questions (
+      id,
+      group_id,
+      question_no,
+      question_type,
+      stem,
+      answer,
+      explanation,
+      difficulty,
+      score,
+      display_order,
+      note
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, 'medium', 2.5, ?, '')
+    ON CONFLICT(id) DO UPDATE SET
+      group_id = excluded.group_id,
+      question_no = excluded.question_no,
+      question_type = excluded.question_type,
+      stem = excluded.stem,
+      answer = excluded.answer,
+      explanation = excluded.explanation,
+      difficulty = excluded.difficulty,
+      score = excluded.score,
+      display_order = excluded.display_order,
+      note = excluded.note,
+      updated_at = datetime('now')
+  `)
+  const insertOption = db.prepare(`
+    INSERT INTO options (id, question_id, label, content, display_order)
+    VALUES (?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      question_id = excluded.question_id,
+      label = excluded.label,
+      content = excluded.content,
+      display_order = excluded.display_order
+  `)
+
+  db.exec('BEGIN')
+  try {
+    for (const fixture of jslkReadingFixtures) {
+      const group = asset.content?.groups?.[fixture.groupId]
+      if (!group) continue
+      const displayOrder = fixture.section.charCodeAt(0) - 'A'.charCodeAt(0) + 1
+
+      insertSource.run(
+        fixture.sourceId,
+        fixture.sourceSection,
+        `C6a 正式题库入口：${fixture.sourceSection} 题面与解析来自 paper-asset-v1。`,
+      )
+      insertPassage.run(
+        fixture.passageId,
+        fixture.sourceId,
+        fixture.passageTitle,
+        `见 ${path.relative(rootDir, jslkPaperAssetPath)}。题库只保存入口元数据，PaperSurface 从 paper-asset 读取正式题面。`,
+        fixture.summary,
+        fixture.theme,
+        fixture.discourseType,
+        fixture.note,
+      )
+      insertGroup.run(
+        fixture.groupId,
+        fixture.passageId,
+        fixture.groupTitle,
+        displayOrder,
+        `C6a 正式题库入口：阅读 ${fixture.section} 进入 source=paper-asset PaperSurface。`,
+      )
+
+      for (const [index, questionId] of group.questionIds.entries()) {
+        const question = asset.content?.questions?.[questionId]
+        if (!question) continue
+        insertQuestion.run(
+          question.questionId,
+          fixture.groupId,
+          String(question.questionNo),
+          fixture.questionTypes[question.questionId] || '阅读理解',
+          question.stem,
+          jslkQuestionAnswerText(asset, question),
+          '正式解析见 paper-asset reviewed analysis JSON。',
+          index + 1,
+        )
+        for (const [optionIndex, option] of (question.options || []).entries()) {
+          insertOption.run(
+            `opt-${question.questionId}-${String(option.label).toLowerCase()}`,
+            question.questionId,
+            option.label,
+            option.text,
+            optionIndex + 1,
+          )
+        }
+      }
+    }
+    db.exec('COMMIT')
+  } catch (error) {
+    db.exec('ROLLBACK')
+    throw error
+  }
+}
+
 function ensureDatabaseShape() {
   if (!existsSync(dbPath)) return
 
@@ -372,6 +631,7 @@ function ensureDatabaseShape() {
     if (paperSetColumns.length > 0 && !paperSetColumns.includes('layout_json')) {
       db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
+    ensureJslkReadingPaperAssetEntries(db)
   } finally {
     db.close()
   }

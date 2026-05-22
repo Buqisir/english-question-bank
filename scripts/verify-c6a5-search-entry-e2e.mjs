@@ -72,6 +72,8 @@ const allowed = new Set([
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
   'scripts/verify-c6a10-concierge-local-search.mjs',
+  'scripts/verify-c6a11-formal-jslk-reading-api-data.mjs',
+  'server/api.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 for (const file of changedFiles) {
@@ -80,7 +82,11 @@ for (const file of changedFiles) {
 assert('PaperSurface unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
 assert('paper-asset source fixture unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('reports unchanged', !changedFiles.some((file) => file.startsWith('app/public/reports/')))
-assert('server unchanged', !changedFiles.some((file) => file.startsWith('server/')))
+assert(
+  'server changes are limited to C6a-11 formal JSLK API migration',
+  !changedFiles.some((file) => file.startsWith('server/') && file !== 'server/api.mjs') &&
+    (!changedFiles.includes('server/api.mjs') || read('server/api.mjs').includes('ensureJslkReadingPaperAssetEntries')),
+)
 assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(package(-lock)?\.json|pnpm-lock\.yaml)$/.test(file)))
 
 console.log('\n-- 2. Timeout fallback contract --')
