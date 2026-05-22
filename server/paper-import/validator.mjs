@@ -26,6 +26,14 @@ const paperIdPattern = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
 const readingChoiceSuffixPattern = /reading-[abcd]$/i
 
 let ajvCache = null
+const schemaCache = new Map()
+
+function loadSchema(schemaFileName) {
+  if (!schemaCache.has(schemaFileName)) {
+    schemaCache.set(schemaFileName, JSON.parse(readFileSync(path.join(schemaDir, schemaFileName), 'utf8')))
+  }
+  return schemaCache.get(schemaFileName)
+}
 
 function makeAjv() {
   if (ajvCache) return ajvCache
@@ -36,7 +44,7 @@ function makeAjv() {
     'import-meta-v1.schema.json',
     'reading-choice-analysis-v1.schema.json',
   ]) {
-    const schema = JSON.parse(readFileSync(path.join(schemaDir, fileName), 'utf8'))
+    const schema = loadSchema(fileName)
     ajv.addSchema(schema, schema.$id)
   }
   ajvCache = ajv
@@ -165,6 +173,51 @@ function validateSchema(schemaId, data, fileName) {
       suggestedFix: '按 schema 修正字段、类型或枚举值后重新上传。',
     }),
   )
+}
+
+function pointerFor(pathParts) {
+  if (pathParts.length === 0) return '/'
+  return `/${pathParts.map((part) => String(part).replace(/~/g, '~0').replace(/\//g, '~1')).join('/')}`
+}
+
+function stripUnknownFields(value, schema, warnings, fileName, pathParts = []) {
+  if (!schema || typeof schema !== 'object' || !value || typeof value !== 'object') {
+    return
+  }
+
+  if (Array.isArray(value)) {
+    if (schema.items) {
+      value.forEach((item, index) => stripUnknownFields(item, schema.items, warnings, fileName, [...pathParts, index]))
+    }
+    return
+  }
+
+  const properties = schema.properties && typeof schema.properties === 'object' ? schema.properties : {}
+  const hasKnownProperties = Object.keys(properties).length > 0
+  if (schema.additionalProperties === false && hasKnownProperties) {
+    for (const key of Object.keys(value)) {
+      if (!Object.prototype.hasOwnProperty.call(properties, key)) {
+        delete value[key]
+        const pathValue = pointerFor([...pathParts, key])
+        warnings.push(issue('warning', 'json.unknownFieldStripped', `${fileName}: 已移除未知字段 ${pathValue}。`, {
+          fileName,
+          path: pathValue,
+          suggestedFix: '删除 schema 未定义字段后重新导出 JSON。',
+        }))
+      }
+    }
+  }
+
+  for (const [key, childSchema] of Object.entries(properties)) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      stripUnknownFields(value[key], childSchema, warnings, fileName, [...pathParts, key])
+    }
+  }
+}
+
+function stripUnknownFieldsForSchema(schemaId, data, warnings, fileName) {
+  const schema = loadSchema(schemaId)
+  stripUnknownFields(data, schema, warnings, fileName)
 }
 
 function classifyFile(file) {
@@ -507,6 +560,7 @@ export function validatePaperImportPackage(files, options = {}) {
         }))
         continue
       }
+      stripUnknownFieldsForSchema(`${schemaVersion}.schema.json`, parsed, warnings, file.fileName)
       const schemaIssues = validateSchema(`${schemaVersion}.schema.json`, parsed, file.fileName)
       blockingIssues.push(...schemaIssues)
       parsedFiles.push({ fileName: file.fileName, schemaVersion, data: parsed })

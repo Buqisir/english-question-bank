@@ -147,6 +147,18 @@ assert(
   warningCodes(unsupportedEvidence).has('analysis.unsupportedClaimEvidenceStripped'),
 )
 
+const unknownField = validatePaperImportPackage(
+  mutateJsonFile(fixtureFiles, 'answer-key.json', (json) => {
+    json.extraGeneratedNote = 'AI added this, importer should strip it.'
+  }),
+)
+assert('unknown fields are warning, not blocking', unknownField.ok)
+assert('unknown fields report stripped warning', warningCodes(unknownField).has('json.unknownFieldStripped'))
+assert(
+  'unknown fields are removed from normalized package',
+  !Object.prototype.hasOwnProperty.call(unknownField.packageData?.answerKey || {}, 'extraGeneratedNote'),
+)
+
 const arrayJson = validatePaperImportPackage([
   ...fixtureFiles.filter((file) => file.fileName !== 'answer-key.json'),
   { fileName: 'answer-key.json', buffer: Buffer.from('[]\n') },
