@@ -16,6 +16,10 @@ Produce clean reading-choice analysis for 阅读理解第一节 A-D groups.
 The required output is the complete contents of a JSON file, suitable to save
 directly as `reading-choice-analysis-v1.json`.
 
+If the chat/product supports downloadable files, create a downloadable `.json`
+file with the requested filename. If file attachment is not supported, output
+the complete JSON file contents directly in the chat.
+
 This is a reviewed-analysis data file generation task, not a chat answer, not a
 research report, and not a free-form explanation.
 
@@ -64,13 +68,57 @@ Do not wrap the JSON in a ```json code fence.
 This file is an import candidate only after human/code review. Dirty JSON,
 schema-drift JSON, or JSON with unmatched quotes must not be imported.
 
+### Schema obedience rule
+
+Use the field names and enum values below EXACTLY. Do not invent synonymous
+fields, translated fields, renamed fields, alternate enum values, or wrapper
+objects. Strong reasoning is welcome internally; schema creativity is not.
+
+Common failure examples that are STRICTLY INVALID:
+
+```json
+{
+  "skill": ["detail"],
+  "explanationZh": "...",
+  "analysisZh": "...",
+  "questionNumber": 28,
+  "stem": "...",
+  "answer": "A",
+  "relationType": "inferenceBridge",
+  "subtype": "conditionDrop"
+}
+```
+
+Correct shape examples:
+
+```json
+{
+  "skill": { "primary": "detail" },
+  "trap": {
+    "primaryType": "scopeShift",
+    "subtype": "conditionRemoved",
+    "explanation": "..."
+  },
+  "locationParaphrases": [
+    {
+      "relationType": "paraphrase"
+    }
+  ]
+}
+```
+
 ## STRICTLY FORBIDDEN
 
 - **DO NOT** output `status` — this is a JSON file, not a chat wrapper
 - **DO NOT** output a top-level `analysis` wrapper
 - **DO NOT** output `correctAnswer` — `answerKey` is the only answer authority
+- **DO NOT** output `answer` inside question analysis
+- **DO NOT** output `questionId`, `groupId`, `questionNumber`, `stem`, or `optionText` inside question analysis unless that field is explicitly listed in the schema for that nested object
 - **DO NOT** generate content for non-reading question types
 - **DO NOT** include `unknown` or `reviewFlags`
+- **DO NOT** rename fields into Chinese or hybrid variants such as `explanationZh`, `analysisZh`, `questionSide`, or `sourceSide`
+- **DO NOT** use arrays for `skill`; `skill` must be an object
+- **DO NOT** invent enum values such as `conditionDrop`, `scopeNarrowing`, `valueReversal`, `inferenceBridge`, or `semantic`
 - **DO NOT** include markdown outside JSON
 - **DO NOT** include code fences, comments, headings, or filenames outside JSON
 - **DO NOT** invent paragraph IDs or change paragraph text
@@ -149,6 +197,18 @@ For each reading question:
 
 `secondary` is optional. If present, MUST be `inference`.
 `secondary: "inference"` is legal ONLY when `primary` is `detail` or `attitude`.
+
+Forbidden:
+
+```json
+"skill": ["detail"]
+```
+
+Required:
+
+```json
+"skill": { "primary": "detail" }
+```
 
 ### stemTranslationZh
 
@@ -248,6 +308,7 @@ Rules:
 - `optionText` must match option text
 - `exact`: relationNote explains it uses the original word to mislead
 - `wordFamily`: relationNote explains the word-family relation
+- `matchType` MUST be `exact` or `wordFamily`; do not use `semantic`
 
 Future UI: amber word-level highlight only when wrong option selected/expanded.
 
@@ -271,6 +332,7 @@ Chinese label: 黑白颠倒
 - `sourceHighlight` must be substring of `sourceQuote`
 - `optionHighlight` must be substring of `optionText`
 - Material mismatch such as `soft paper` vs `cloth` is NOT polarityReversal; use `entityMismatch` or `unsupportedClaim` depending on whether a source anchor exists
+- `subtype` MUST be one of the listed enum values. Do not use `valueReversal`; usually use `oppositeAttitude`, `oppositeTrend`, or another listed subtype instead.
 
 ### scopeShift
 
@@ -287,6 +349,8 @@ Chinese label: 范围偷换
   "explanation": "Chinese explanation"
 }
 ```
+
+- `subtype` MUST be one of the listed enum values. Do not use `conditionDrop`; use `conditionRemoved`. Do not use `scopeNarrowing`; use `understatement` or another listed subtype.
 
 ### entityMismatch
 
@@ -375,6 +439,7 @@ Rules:
   - `wordFamily` — 词族关联
   - `calculation` — 计算/推算
 - `note`: Chinese, preserving key English expressions
+- Do not use `inferenceBridge`; choose `paraphrase` or `locationCue`.
 
 ### Example:
 
@@ -409,14 +474,19 @@ Rules:
 
 Output must:
 - Parse as valid JSON
+- Be saveable directly as a `.json` file
 - Be complete JSON file content with first character `{` and final character `}`
 - Have top-level `schemaVersion: "reading-choice-analysis-v1"`
 - Have top-level `paperId`, `sourceAssetVersion`, `targetGroups`, `meta`, `groups`, and `questions`
 - Have NO top-level `status`
 - Have NO top-level `analysis` wrapper
 - Have NO `correctAnswer` field anywhere
+- Have NO question-level `answer`, `stem`, `questionId`, `groupId`, or `questionNumber` fields
+- Have NO `explanationZh`, `analysisZh`, `questionSide`, or `sourceSide`
 - Have NO `unknown` or `reviewFlags`
+- Have NO invented enum values such as `conditionDrop`, `scopeNarrowing`, `valueReversal`, `inferenceBridge`, or `semantic`
 - Have NO markdown, code fence, comments, filename heading, or explanatory prose
+- Have `skill` as an object, never an array
 - Have exactly one `status: "correct"` option per question matching answerKey
 - All `quote` fields must exactly match content paragraphs
 - All `paragraphId` references must exist in content
