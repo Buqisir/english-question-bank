@@ -205,6 +205,7 @@ PO:
 Big PA:
 
 - handles architecture and product boundary review before DEV
+- follows `docs/agents/pa-persona.md`
 - identifies allowed / forbidden files
 - defines static verify and browser QA requirements
 - must not write implementation patches in PA mode
@@ -276,6 +277,8 @@ not image quality; the product question is unclear.
 Use high-reasoning PA for large cuts, especially when the decision
 affects PaperSurface, data contracts, geometry, or future cut
 sequencing.
+
+External PA must read `docs/agents/pa-persona.md` before review.
 
 PA output must end with:
 
