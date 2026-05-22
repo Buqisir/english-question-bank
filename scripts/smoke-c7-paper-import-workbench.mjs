@@ -116,9 +116,21 @@ async function main() {
     await page.getByRole('button', { name: '发布' }).click()
     await page.getByText('发布完成。').waitFor({ timeout: 10_000 })
     await page.getByRole('link', { name: /Reading D 最新解析/ }).waitFor()
+    await page.getByRole('link', { name: /Reading D v1 解析/ }).waitFor()
     pass('Workbench publishes and renders Reading A-D QA links')
 
-    await page.getByRole('link', { name: /Reading D 最新解析/ }).click()
+    const latestReadingDHref = await page.getByRole('link', { name: /Reading D 最新解析/ }).getAttribute('href')
+    const versionReadingDHref = await page.getByRole('link', { name: /Reading D v1 解析/ }).getAttribute('href')
+    if (!latestReadingDHref || !versionReadingDHref) {
+      fail('Reading D QA links are missing hrefs')
+    }
+
+    await page.goto(new URL(versionReadingDHref, `http://127.0.0.1:${vitePort}/`).toString())
+    await page.waitForURL(/version=v1/)
+    await page.locator('.pi-ps-analysis[data-pi-question-id="q-2024-jslk-032"]').waitFor({ timeout: 15_000 })
+    pass('Reading D version link opens PaperSurface analysis')
+
+    await page.goto(new URL(latestReadingDHref, `http://127.0.0.1:${vitePort}/`).toString())
     await page.waitForURL(/group-2024-jslk-reading-d/)
     await page.locator('.pi-ps-analysis[data-pi-question-id="q-2024-jslk-032"]').waitFor({ timeout: 15_000 })
     pass('Reading D latest link opens PaperSurface analysis')

@@ -276,6 +276,11 @@
   gap: 10px;
 }
 
+.pi-import-link-pair {
+  display: inline-flex;
+  gap: 6px;
+}
+
 .pi-import-links a {
   display: inline-flex;
   min-height: 36px;

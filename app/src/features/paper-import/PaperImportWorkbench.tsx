@@ -438,9 +438,10 @@ export function PaperImportWorkbench({ onBackToWorkbench }: PaperImportWorkbench
           {publishResult?.ok && publishResult.publish ? (
             <div className="pi-import-links">
               {publishResult.publish.qaLinks.map((link) => (
-                <a key={link.groupId} href={link.latestHref}>
-                  {link.title} 最新解析
-                </a>
+                <span key={link.groupId} className="pi-import-link-pair">
+                  <a href={link.latestHref}>{link.title} 最新解析</a>
+                  <a href={link.versionHref}>{link.title} v{publishResult.publish?.assetVersion} 解析</a>
+                </span>
               ))}
             </div>
           ) : (
