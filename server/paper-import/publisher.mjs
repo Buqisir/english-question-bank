@@ -403,23 +403,23 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
     }
     if (writtenVersion) {
       removePaperImportVersion({ paperAssetsDir, paperId, versionName: writtenVersion.versionName })
-    }
-    try {
-      ensurePaperImportDatabaseShape(db)
-      db.prepare(
-        `
-        INSERT INTO paper_import_runs (id, paper_id, asset_version, status, validation_report_json, publish_report_json, error_message)
-        VALUES (?, ?, ?, 'failed', ?, '{}', ?)
-        `,
-      ).run(
-        `pir-${randomUUID()}`,
-        paperId,
-        version,
-        JSON.stringify(publicValidation),
-        error instanceof Error ? error.message : String(error),
-      )
-    } catch {
-      // Failure recording must not hide the publish failure.
+      try {
+        ensurePaperImportDatabaseShape(db)
+        db.prepare(
+          `
+          INSERT INTO paper_import_runs (id, paper_id, asset_version, status, validation_report_json, publish_report_json, error_message)
+          VALUES (?, ?, ?, 'failed', ?, '{}', ?)
+          `,
+        ).run(
+          `pir-${randomUUID()}`,
+          paperId,
+          version,
+          JSON.stringify(publicValidation),
+          error instanceof Error ? error.message : String(error),
+        )
+      } catch {
+        // Failure recording must not hide the publish failure.
+      }
     }
     throw error
   }
