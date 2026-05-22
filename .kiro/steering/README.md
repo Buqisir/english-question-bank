@@ -65,6 +65,24 @@ Hard rule:
 - Stop if mockups do not converge after 2 rounds, or if PA leaves more
   than 3 unresolved PO decisions.
 
+### PA persona
+
+File: `docs/agents/pa-persona.md`
+
+Use when asking an external high-reasoning agent to act as PA.
+
+Hard rule:
+
+- PA is not DEV and must not write code.
+- PA exists to find wrong-direction implementation risk before Codex
+  starts building.
+- PA must read `docs/agents/review-levels.md`,
+  `.kiro/steering/cut-workflow-protocol.md`, and
+  `.kiro/steering/product-scope-discipline.md`.
+- PA must output verdict, product principle, exact model, Must Fix,
+  Should Watch, allowed / forbidden files, static verify, browser QA,
+  DEV readiness, and at most 3 open PO decisions.
+
 ### UI mockup before DEV
 
 File: `ui-mockup-before-dev-protocol.md`

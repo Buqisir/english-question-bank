@@ -7,7 +7,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 ## Roles
 
 - **PO**: product owner / final acceptance.
-- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Usually external / high-reasoning only for large cuts.
+- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Usually external / high-reasoning only for large cuts. External PA must follow `docs/agents/pa-persona.md`.
 - **DEV**: implementation agent. Codex is the default DEV.
 - **CR**: code reviewer. Codex performs routine CR-lite / CR; external big CR is occasional and reserved for high-risk cuts.
 - **QA**: product / browser / visual acceptance. Codex does first QA; the owner does final PO QA.

@@ -67,6 +67,9 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   direction checks, and occasional big CR. Do not route routine small or
   medium implementation work through external DEV agents unless the
   owner explicitly asks for that exception.
+- External PA must read and follow `docs/agents/pa-persona.md` before
+  reviewing a plan. Its job is to find direction, boundary, data-contract,
+  and rework risks before Codex DEV starts.
 - Remote GitHub `main` and PR heads are the shared source of truth.
   Codex must fetch and confirm local / remote state before PA, CR, QA,
   and RM. External PA / CR reports are useful input, not truth, until
