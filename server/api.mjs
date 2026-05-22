@@ -10728,14 +10728,26 @@ const server = createServer(async (request, response) => {
     }
 
     if (request.method === 'POST' && url.pathname === '/api/paper-import/validate') {
-      const { files } = await parsePaperImportMultipart(request)
+      let files = []
+      try {
+        ;({ files } = await parsePaperImportMultipart(request))
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+        return
+      }
       const validation = validatePaperImportPackage(files)
       sendJson(response, validation.ok ? 200 : 422, { validation: makePublicValidationReport(validation) })
       return
     }
 
     if (request.method === 'POST' && url.pathname === '/api/paper-import/publish') {
-      const { files } = await parsePaperImportMultipart(request)
+      let files = []
+      try {
+        ;({ files } = await parsePaperImportMultipart(request))
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+        return
+      }
       const db = openDatabase({ readOnly: false })
       try {
         const result = publishPaperImportPackage({ files, db, paperAssetsDir })
