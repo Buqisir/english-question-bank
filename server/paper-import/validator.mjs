@@ -418,6 +418,30 @@ function buildStructurePreview(asset) {
   }))
 }
 
+function validateNonReadingCompleteness({ asset, answerKey, warnings }) {
+  for (const group of Object.values(asset?.content?.groups || {})) {
+    const isReadingChoiceGroup = group?.groupType === 'reading' && readingChoiceSuffixPattern.test(group.groupId)
+    if (isReadingChoiceGroup) continue
+
+    for (const questionId of group?.questionIds || []) {
+      if (!asset.content.questions?.[questionId]) {
+        warnings.push(issue('warning', 'nonReading.questionMissing', `${group.groupId}: ${questionId} 不存在。非 Reading A-D 暂不阻断发布。`, {
+          suggestedFix: '后续开放该题型前，补齐 paper-asset.content.questions。',
+          groupId: group.groupId,
+          questionId,
+        }))
+      }
+      if (!answerKey.answers?.[questionId]) {
+        warnings.push(issue('warning', 'nonReading.answerKeyMissing', `${group.groupId}: ${questionId} 缺少 answer-key。非 Reading A-D 暂不阻断发布。`, {
+          suggestedFix: '后续开放该题型前，补齐 answer-key.json。',
+          groupId: group.groupId,
+          questionId,
+        }))
+      }
+    }
+  }
+}
+
 function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
   const paperAssetEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'paper-asset-v1')
   const answerKeyEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'answer-key-v1')
@@ -478,6 +502,7 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     blockingIssues,
     warnings,
   })
+  validateNonReadingCompleteness({ asset: paperAsset, answerKey, warnings })
 
   return {
     paperAsset,

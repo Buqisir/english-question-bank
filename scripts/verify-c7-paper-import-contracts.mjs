@@ -159,6 +159,28 @@ assert(
   !Object.prototype.hasOwnProperty.call(unknownField.packageData?.answerKey || {}, 'extraGeneratedNote'),
 )
 
+const nonReadingMissingAnswer = validatePaperImportPackage(
+  mutateJsonFile(fixtureFiles, 'answer-key.json', (json) => {
+    delete json.answers['q-2024-jslk-036']
+  }),
+)
+assert('non Reading A-D missing answer-key is warning, not blocking', nonReadingMissingAnswer.ok)
+assert(
+  'non Reading A-D missing answer-key reports warning',
+  warningCodes(nonReadingMissingAnswer).has('nonReading.answerKeyMissing'),
+)
+
+const nonReadingMissingQuestion = validatePaperImportPackage(
+  mutateJsonFile(fixtureFiles, 'paper-asset.json', (json) => {
+    json.content.groups['group-2024-jslk-seven-choices'].questionIds.push('q-2024-jslk-999')
+  }),
+)
+assert('non Reading A-D missing question is warning, not blocking', nonReadingMissingQuestion.ok)
+assert(
+  'non Reading A-D missing question reports warning',
+  warningCodes(nonReadingMissingQuestion).has('nonReading.questionMissing'),
+)
+
 const arrayJson = validatePaperImportPackage([
   ...fixtureFiles.filter((file) => file.fileName !== 'answer-key.json'),
   { fileName: 'answer-key.json', buffer: Buffer.from('[]\n') },
