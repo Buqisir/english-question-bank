@@ -23,15 +23,16 @@ Optimize for:
 - the teacher task being served
 - the A4 paper remaining primary
 - fewer wrong-direction implementation loops
-- all agents reading the same repository state
-- each platform doing the job it is best at
+- Codex owning daily PM / DEV / CR-lite / QA / RM work end to end
+- external high-reasoning review only where it actually changes risk
 
 Do not optimize for:
 
 - starting DEV as quickly as possible
 - showing every available AI-generated datum
 - making a UI impressive before it is useful
-- using more agents as a substitute for making a product decision
+- using more agents or platforms as a substitute for making a product
+  decision
 
 ## 2. Risk tiers
 
@@ -152,13 +153,13 @@ Upgrade a medium cut to large if any appear:
 
 Examples: PaperSurface layout, rail/drawer/overlay behavior, data model,
 anchor protocol, evidence geometry, import/export flow, or any sequence
-that uses Codex + local PA + Kiro/cloud DEV.
+where a wrong direction would create substantial rework.
 
 Default flow:
 
 ```text
 Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
--> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA
+-> Codex DEV -> Codex CR -> Codex browser QA -> PO QA
 -> RM -> Cut Note
 ```
 
@@ -171,16 +172,19 @@ Codex is responsible for local state control:
 
 - fetch latest `main` and PR branches before PA / CR / QA / RM
 - confirm merged PRs are actually present in `main`
-- confirm Kiro-reported commits are actually pushed to GitHub
+- confirm any externally reported commits are actually pushed to GitHub
 - confirm local checkout matches the branch being reviewed
 - confirm working tree cleanliness before merge-sensitive work
 
-Local PA tools such as Antigravity may help with high-level thinking,
-but they must be told to sync and verify the baseline before review.
+External high-reasoning PA tools such as Antigravity / Opus may help
+with high-level thinking, large-cut direction, and occasional big CR.
+They must be told to sync and verify the baseline before review.
 
-Cloud DEV tools such as Kiro must start from latest `main`, push their
-branch, open or update a PR, and report PR URL + commit hash. Their
-completion report is a lead, not a source of truth.
+External DEV is no longer part of the default daily workflow. Use it
+only when the owner explicitly asks for that exception. In that case,
+the external DEV must start from latest `main`, push its branch, open or
+update a PR, and report PR URL + commit hash. Its completion report is a
+lead, not a source of truth.
 
 ## 4. Role split
 
@@ -195,6 +199,7 @@ PO:
 
 - decides whether the product direction and visual feel are right
 - runs final PO QA after Codex browser QA
+- does not need to read code or perform code review
 - says "走" before RM merge
 
 Big PA:
@@ -203,17 +208,19 @@ Big PA:
 - identifies allowed / forbidden files
 - defines static verify and browser QA requirements
 - must not write implementation patches in PA mode
+- is reserved for large cuts, direction checks, and occasional big CR,
+  not routine small-cut work
 
 DEV:
 
-- implements the approved prompt
+- Codex implements the approved cut by default
 - must not redesign the product direction silently
 - stops and reports if implementation requires forbidden files or a
   changed product decision
 
 CR:
 
-- checks whether DEV obeyed the spec
+- Codex checks whether DEV obeyed the spec
 - finds bugs, scope leaks, missing tests, and behavioral regressions
 - must not quietly redesign the feature during review; if product
   direction is wrong, stop and route back to PM / PA
@@ -305,6 +312,9 @@ Large-cut DEV prompts must include:
 
 Do not tell DEV to "make it like the image." The image aligns intent;
 the prompt defines the implementation.
+
+External DEV prompts are exception-only. Do not generate them by
+default for routine cuts.
 
 ## 9. CR and QA discipline
 

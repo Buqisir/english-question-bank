@@ -4,10 +4,12 @@ inclusion: auto
 
 # DEV completion protocol
 
-Scope: applies to every `/kiro DEV` task in the
-`Buqisir/english-question-bank` repository. Authoritative — agents
-must follow this protocol unless the user overrides it inline for a
-specific task.
+Scope: applies to implementation work in the
+`Buqisir/english-question-bank` repository. Codex is the default DEV.
+External DEV handoffs are exception-only and should use this
+protocol only when the owner explicitly asks for external implementation.
+Authoritative — agents must follow this protocol unless the user
+overrides it inline for a specific task.
 
 This document was written in response to the agreed rule口径
 ("DEV 完工默认开 PR、@me、报告里给链接") so GitHub notification
@@ -18,7 +20,7 @@ on those emails as the primary signal that work is ready for review.
 
 ## 1. Default flow (must)
 
-When a `/kiro DEV` task produces shippable changes, the agent MUST,
+When a DEV task produces shippable changes, the agent MUST,
 in this exact order, before considering the task complete:
 
 0. Start from the requested baseline:
@@ -26,9 +28,11 @@ in this exact order, before considering the task complete:
    - confirm required merge commits or PR baselines are present
    - STOP and report if the baseline cannot be verified
 1. `git commit` with a clear, scoped message
-2. `github_push_to_remote` to push the branch
-   - never `git push` directly via bash
-3. `github_create_pull_request` to open a PR against `main`
+2. Push the branch to GitHub
+   - Codex may use local `git` / `gh`
+   - external agents should use their approved GitHub connector when
+     available
+3. Open a PR against `main`
    - never push directly to `main` / `master`
 4. Provide the PR URL in the completion report
 5. @-mention the repo owner so GitHub notification email fires
@@ -156,8 +160,8 @@ Recommended pattern, matching existing PRs in this repo:
 
 - `<issue>-<slug>` for issue-driven work, e.g.
   `c3-6-papersurface-evidence-kind-color-semantics`
-- `kiro-<area>-<slug>` for agent-internal protocol / steering /
-  tooling changes, e.g. `kiro-steering-dev-completion-protocol`
+- `agent-<area>-<slug>` for agent-internal protocol / steering /
+  tooling changes, e.g. `agent-steering-dev-completion-protocol`
 
 Avoid:
 
