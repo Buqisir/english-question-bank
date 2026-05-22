@@ -3253,7 +3253,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
         const url = new URL(window.location.href)
-        for (const param of ['view', 'source', 'paperId', 'surface', 'groupId', 'questionId']) {
+        for (const param of ['view', 'source', 'paperId', 'surface', 'groupId', 'questionId', 'version']) {
           url.searchParams.delete(param)
         }
         const nextSearch = url.searchParams.toString()
@@ -3310,6 +3310,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           source={currentPiRoute.source}
           groupId={currentPiRoute.groupId}
           questionId={currentPiRoute.questionId}
+          version={currentPiRoute.version}
           onBackToWorkbench={piOnBackToWorkbench}
         />
       )

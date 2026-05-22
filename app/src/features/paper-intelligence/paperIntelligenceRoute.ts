@@ -81,6 +81,11 @@ export type PaperIntelligenceRouteMatch =
        * pre-select the intended question on load.
        */
       questionId: string | null
+      /**
+       * Optional C7 paper-asset version, for example `v1`. Missing means
+       * "latest" with a legacy root fixture fallback.
+       */
+      version: string | null
     }
 
 export type PaperIntelligenceLocationLike = {
@@ -106,7 +111,9 @@ export function parsePaperIntelligenceRoute(
     rawSource === 'paper-asset' ? 'paper-asset' : 'legacy-report'
   const groupId = params.get('groupId')?.trim() || null
   const questionId = params.get('questionId')?.trim() || null
-  return { kind: 'paper-intelligence', paperId, surface, source, groupId, questionId }
+  const rawVersion = params.get('version')?.trim() || null
+  const version = rawVersion && /^v\d+$/.test(rawVersion) ? rawVersion : null
+  return { kind: 'paper-intelligence', paperId, surface, source, groupId, questionId, version }
 }
 
 /* ─────────────────────────── href builder ────────────────────────────── */
@@ -123,6 +130,7 @@ export type BuildPaperSurfaceHrefArgs = {
   source?: PaperIntelligenceSource | null
   groupId?: string | null
   questionId?: string | null
+  version?: string | null
 }
 
 export function buildPaperSurfaceHref(args: BuildPaperSurfaceHrefArgs): string {
@@ -138,6 +146,9 @@ export function buildPaperSurfaceHref(args: BuildPaperSurfaceHrefArgs): string {
   }
   if (args.questionId) {
     params.set('questionId', args.questionId)
+  }
+  if (args.version) {
+    params.set('version', args.version)
   }
   return `?${params.toString()}`
 }

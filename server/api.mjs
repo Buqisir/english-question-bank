@@ -18,13 +18,17 @@ import { DatabaseSync } from 'node:sqlite'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
+import { parsePaperImportMultipart } from './paper-import/multipart.mjs'
+import { ensurePaperImportDatabaseShape, publishPaperImportPackage } from './paper-import/publisher.mjs'
+import { resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
+import { makePublicValidationReport, validatePaperImportPackage } from './paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question-bank.sqlite')
 const exportDir = path.join(rootDir, 'exports')
 const importDir = path.join(rootDir, 'imports')
-const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
+const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
 const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
@@ -219,8 +223,7 @@ function getPaperSurfaceAnalysisAvailabilityByGroupId() {
     if (!entry.isDirectory()) continue
 
     const assetDir = path.join(paperAssetsDir, entry.name)
-    const assetPath = path.join(assetDir, 'paper-asset.json')
-    const analysisPath = path.join(assetDir, 'analyses', readingChoiceAnalysisFileName)
+    const { assetPath, analysisPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
     if (!existsSync(assetPath) || !existsSync(analysisPath)) continue
 
     try {
@@ -454,6 +457,7 @@ function ensureDatabaseShape() {
     if (paperSetColumns.length > 0 && !paperSetColumns.includes('layout_json')) {
       db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
+    ensurePaperImportDatabaseShape(db)
   } finally {
     db.close()
   }
@@ -10690,6 +10694,35 @@ const server = createServer(async (request, response) => {
 
     if (request.method === 'GET' && url.pathname === '/api/import-bundles') {
       sendJson(response, 200, { importBundles: listImportBundles() })
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/paper-import/validate') {
+      const { files } = await parsePaperImportMultipart(request)
+      const validation = validatePaperImportPackage(files)
+      sendJson(response, validation.ok ? 200 : 422, { validation: makePublicValidationReport(validation) })
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/paper-import/publish') {
+      const { files } = await parsePaperImportMultipart(request)
+      const db = openDatabase({ readOnly: false })
+      try {
+        const result = publishPaperImportPackage({ files, db, paperAssetsDir })
+        paperSurfaceAnalysisAvailabilityByGroupIdCache = null
+        sendJson(response, result.ok ? 201 : 422, result)
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/paper-import/revalidate-latest') {
+      paperSurfaceAnalysisAvailabilityByGroupIdCache = null
+      sendJson(response, 200, {
+        ok: true,
+        analysisEntryCount: getPaperSurfaceAnalysisAvailabilityByGroupId().size,
+      })
       return
     }
 
