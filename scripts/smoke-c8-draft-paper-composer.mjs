@@ -175,6 +175,30 @@ async function main() {
       const data = await fetch('/api/question-groups').then((response) => response.json())
       return data.questionGroups.some((group) => group.id === 'g-c8-smoke-pagebreak' && group.canAddToDraftPaper)
     })
+    await page.waitForFunction(async () => {
+      const data = await fetch('/api/question-groups').then((response) => response.json())
+      const groups = new Map(data.questionGroups.map((group) => [group.id, group]))
+      return [
+        'group-2024-jslk-reading-a',
+        'group-2024-jslk-reading-b',
+        'group-2024-jslk-reading-c',
+        'group-2024-jslk-reading-d',
+      ].every((groupId) => groups.get(groupId)?.canAddToDraftPaper)
+    })
+    pass('Paper-asset Reading A-D groups can be added to draft')
+    const paperAssetDetail = await page.evaluate(async () => {
+      const response = await fetch('/api/question-groups/group-2024-jslk-reading-a')
+      const data = await response.json()
+      const group = data.questionGroup
+      return {
+        hasRealMaterial: group.passage.materialText.includes('Yellowstone Poster Exhibition'),
+        firstOptionCount: group.questions[0]?.options?.length || 0,
+      }
+    })
+    if (!paperAssetDetail.hasRealMaterial || paperAssetDetail.firstOptionCount !== 4) {
+      fail('Paper-asset detail should feed draft preview with real material and options', JSON.stringify(paperAssetDetail))
+    }
+    pass('Paper-asset detail feeds draft preview with real material and options')
     await page.getByPlaceholder(/找一道|正在连接|比如/).fill('分页建议压力测试')
     await page.getByRole('button', { name: '开始取题' }).click()
     await expandFirstPaperIfNeeded(page)

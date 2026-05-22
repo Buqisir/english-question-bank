@@ -303,6 +303,56 @@ function findPaperAssetGroup(groupId) {
   return null
 }
 
+function normalizePaperAssetGroupType(groupType) {
+  const value = String(groupType || '')
+  if (value === 'sevenChoices') return 'seven_choices'
+  if (value === 'grammarFill') return 'grammar_cloze'
+  return value
+}
+
+function paperAssetParagraphText(group) {
+  const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
+  return paragraphs
+    .map((paragraph) => String(paragraph?.text || '').trim())
+    .filter(Boolean)
+    .join('\n\n')
+}
+
+function getPaperAssetPrintReady(asset, group) {
+  const groupType = normalizePaperAssetGroupType(group?.groupType)
+  const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+  const questions = asset?.content?.questions && typeof asset.content.questions === 'object'
+    ? asset.content.questions
+    : {}
+  if (questionIds.length === 0) return { ok: false, reason: '题组没有小题' }
+
+  for (const questionId of questionIds) {
+    const question = questions[questionId]
+    if (!question) return { ok: false, reason: `paper-asset 引用了不存在的小题 ${questionId}` }
+    const stem = String(question.stem ?? question.blankId ?? question.questionNo ?? '').trim()
+    if (!stem) return { ok: false, reason: '存在空题干' }
+    if ((groupType === 'reading' || groupType === 'cloze')) {
+      const options = Array.isArray(question.options) ? question.options : []
+      if (options.length === 0 || options.some((option) => !String(option?.label || '').trim() || !String(option?.text || '').trim())) {
+        return { ok: false, reason: '存在空选项' }
+      }
+    }
+  }
+
+  if (groupType === 'seven_choices') {
+    const optionBank = Array.isArray(group?.optionBank) ? group.optionBank : []
+    if (optionBank.length === 0 || optionBank.some((option) => !String(option?.label || '').trim() || !String(option?.text || '').trim())) {
+      return { ok: false, reason: '存在空选项' }
+    }
+  }
+
+  if (groupType === 'writing' || groupType === 'continuation' || groupType === 'reading' || groupType === 'seven_choices' || groupType === 'cloze') {
+    if (!paperAssetParagraphText(group)) return { ok: false, reason: '题组缺少材料或提示' }
+  }
+
+  return { ok: true, reason: null }
+}
+
 export function isGroupPrintReady(db, groupId) {
   const group = db
     .prepare(
@@ -336,6 +386,9 @@ export function isGroupPrintReady(db, groupId) {
     if (group.group_type === 'listening') return { ok: false, reason: '听力题组暂不支持打印' }
     return { ok: false, reason: '题型暂不支持打印' }
   }
+  const paperAssetMatch = findPaperAssetGroup(groupId)
+  if (paperAssetMatch) return getPaperAssetPrintReady(paperAssetMatch.asset, paperAssetMatch.group)
+
   if (Number(group.question_count || 0) <= 0) return { ok: false, reason: '题组没有小题' }
   if (Number(group.missing_stem_count || 0) > 0) return { ok: false, reason: '存在空题干' }
   if (OBJECTIVE_PRINT_GROUP_TYPES.has(group.group_type) && Number(group.missing_option_count || 0) > 0) {
@@ -344,15 +397,6 @@ export function isGroupPrintReady(db, groupId) {
   if ((group.group_type === 'writing' || group.group_type === 'continuation')) {
     const material = String(group.material_text || group.summary || group.instruction || '').trim()
     if (!material) return { ok: false, reason: '写作题组缺少材料或提示' }
-  }
-
-  const paperAssetMatch = findPaperAssetGroup(groupId)
-  if (paperAssetMatch) {
-    const { asset, group: assetGroup } = paperAssetMatch
-    const questionIds = Array.isArray(assetGroup.questionIds) ? assetGroup.questionIds.map(String) : []
-    const assetQuestionIds = normalizePaperAssetQuestions(asset)
-    const dangling = questionIds.find((questionId) => !assetQuestionIds.has(questionId))
-    if (dangling) return { ok: false, reason: `paper-asset 引用了不存在的小题 ${dangling}` }
   }
 
   return { ok: true, reason: null }
@@ -1723,6 +1767,66 @@ function listQuestionGroups() {
   }
 }
 
+function buildQuestionDetailsFromPaperAsset(asset, group, dbQuestions) {
+  const dbQuestionById = new Map(dbQuestions.map((question) => [question.id, question]))
+  const answerById = asset?.answerKey?.answers && typeof asset.answerKey.answers === 'object'
+    ? asset.answerKey.answers
+    : {}
+  const assetQuestions = asset?.content?.questions && typeof asset.content.questions === 'object'
+    ? asset.content.questions
+    : {}
+  const sharedOptionBank = Array.isArray(group?.optionBank) ? group.optionBank : []
+  const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+
+  return questionIds.map((questionId, index) => {
+    const assetQuestion = assetQuestions[questionId] || {}
+    const dbQuestion = dbQuestionById.get(questionId) || {}
+    const answer = answerById[questionId] || {}
+    const options = Array.isArray(assetQuestion.options) && assetQuestion.options.length > 0
+      ? assetQuestion.options
+      : sharedOptionBank
+
+    return {
+      id: questionId,
+      questionNo: String(assetQuestion.questionNo ?? answer.questionNo ?? dbQuestion.question_no ?? index + 1),
+      questionType: dbQuestion.question_type || '',
+      stem: String(assetQuestion.stem ?? assetQuestion.blankId ?? dbQuestion.stem ?? '').trim(),
+      answer: String(answer.answer ?? dbQuestion.answer ?? '').trim(),
+      explanation: dbQuestion.explanation || '',
+      difficulty: dbQuestion.difficulty || '',
+      aiDifficultyScore: dbQuestion.ai_difficulty_score ?? null,
+      teacherDifficulty: dbQuestion.teacher_difficulty ?? null,
+      difficultyOverrideReason: dbQuestion.difficulty_override_reason || '',
+      difficultyOverrideNote: dbQuestion.difficulty_override_note || '',
+      difficultyTaggedAt: dbQuestion.difficulty_tagged_at || '',
+      score: Number(answer.score ?? dbQuestion.score ?? 0),
+      displayOrder: index + 1,
+      note: dbQuestion.note || '',
+      options: options.map((option, optionIndex) => ({
+        id: `${questionId}-${String(option?.label || optionIndex + 1).toLowerCase()}`,
+        label: String(option?.label || '').trim(),
+        content: String(option?.text || option?.content || '').trim(),
+        displayOrder: optionIndex + 1,
+      })).filter((option) => option.label && option.content),
+    }
+  })
+}
+
+function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuestions) {
+  const materialText = paperAssetParagraphText(group)
+  const groupType = normalizePaperAssetGroupType(group?.groupType) || baseDetail.groupType
+  return {
+    ...baseDetail,
+    groupType,
+    passage: {
+      ...baseDetail.passage,
+      materialText: materialText || baseDetail.passage.materialText,
+      title: String(group?.title || baseDetail.passage.title || '').trim(),
+    },
+    questions: buildQuestionDetailsFromPaperAsset(asset, group, dbQuestions),
+  }
+}
+
 function getQuestionGroupDetail(id) {
   const db = openDatabase()
 
@@ -1796,7 +1900,7 @@ function getQuestionGroupDetail(id) {
     const clozeParseResult = getSavedClozeParseResult(db, id)
     const sevenChoicesParseResult = getSavedSevenChoicesParseResult(db, id)
 
-    return {
+    const baseDetail = {
       ...card,
       instruction: detail.instruction,
       note: detail.group_note || '',
@@ -1824,6 +1928,11 @@ function getQuestionGroupDetail(id) {
       grammarParseResult,
       sevenChoicesParseResult,
     }
+    const paperAssetMatch = findPaperAssetGroup(id)
+    if (paperAssetMatch) {
+      return applyPaperAssetToQuestionGroupDetail(baseDetail, paperAssetMatch.asset, paperAssetMatch.group, questions)
+    }
+    return baseDetail
   } finally {
     db.close()
   }
