@@ -77,12 +77,14 @@ const allowed = new Set([
   'app/src/concierge/ConciergeGroupCard.tsx',
   'app/src/concierge/conciergeSearch.ts',
   'app/src/data/sampleQuestionGroups.ts',
+  'app/src/domain/questionBank.ts',
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
   'app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
   'app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'data/sql/seed-v0.sql',
+  'server/api.mjs',
   'scripts/verify-c6a3-reading-analysis-bridge.mjs',
   'scripts/verify-c6a-2-reading-a-analysis.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
@@ -93,6 +95,7 @@ const allowed = new Set([
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
   'scripts/verify-c6b1-option-anchored-analysis.mjs',
+  'scripts/verify-c6b2-analysis-entry-gate.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 
@@ -120,11 +123,6 @@ assert(
   'legacy PI report fixture unchanged',
   !changedFiles.some((file) => file.startsWith('app/public/reports/')),
 )
-assert(
-  'server runtime unchanged',
-  !changedFiles.some((file) => file.startsWith('server/')),
-)
-
 /* ───────────────────── 2. Data entry exists ───────────────────── */
 
 console.log('\n-- 2. Concierge/search entry data exists --')
@@ -167,12 +165,22 @@ const routeModulePath = path.join(
 )
 const routeModule = await import(routeModulePath)
 const {
-  buildPaperSurfaceAnalysisHrefForGroupId,
+  buildPaperSurfaceHref,
   parsePaperIntelligenceRoute,
 } = routeModule
 
-const legacyHref = buildPaperSurfaceAnalysisHrefForGroupId('g-2024-xkb1-a')
-const assetHref = buildPaperSurfaceAnalysisHrefForGroupId('group-2024-jslk-reading-a')
+const legacyHref = buildPaperSurfaceHref({
+  paperId: 'paper-2024-xkb1-reading',
+  source: 'legacy-report',
+  groupId: 'g-2024-xkb1-a',
+  questionId: 'A-21',
+})
+const assetHref = buildPaperSurfaceHref({
+  paperId: 'paper-2024-jslk-english',
+  source: 'paper-asset',
+  groupId: 'group-2024-jslk-reading-a',
+  questionId: 'q-2024-jslk-021',
+})
 
 assert('legacy XKB1 group still has href', typeof legacyHref === 'string')
 assert('paper-asset Reading A group has href', typeof assetHref === 'string')
@@ -198,12 +206,12 @@ if (parsedAsset.kind === 'paper-intelligence') {
 
 const parsedLegacy = parsePaperIntelligenceRoute({ search: legacyHref || '' })
 if (parsedLegacy.kind === 'paper-intelligence') {
-  assertEqual('parsed legacy route defaults source', parsedLegacy.source, 'legacy-report')
+assertEqual('parsed legacy route defaults source', parsedLegacy.source, 'legacy-report')
 }
 
 assert(
-  'unsupported reading group still produces null',
-  buildPaperSurfaceAnalysisHrefForGroupId('g-2024-xkb1-b') === null,
+  'paper-asset entry availability now lives outside route helper',
+  !read('app/src/features/paper-intelligence/paperIntelligenceRoute.ts').includes('buildPaperSurfaceAnalysisHrefForGroupId'),
 )
 
 /* ───────────────────── 4. Loader contract ───────────────────── */

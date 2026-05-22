@@ -8,7 +8,9 @@
  * - option rows switch the radio accordion, evidence rows draw lines
  * - trapEvidence resolves to PaperSurface trap rows
  * - unsupportedClaim without trapEvidence clears the line
- * - no entry-gate/search/API/PaperSurface renderer changes
+ * - no PaperSurface renderer changes
+ * - later C6b entry-gate/search/API cuts may coexist without failing this
+ *   right-panel interaction guard
  */
 
 import { execSync } from 'node:child_process'
@@ -77,8 +79,17 @@ const allowed = new Set([
   'app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
   'app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts',
+  'app/src/concierge/ConciergeGroupCard.tsx',
+  'app/src/domain/questionBank.ts',
+  'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
+  'server/api.mjs',
+  'scripts/verify-c6a3-reading-analysis-bridge.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
+  'scripts/verify-c6a5-search-entry-e2e.mjs',
+  'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
+  'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
   'scripts/verify-c6b1-option-anchored-analysis.mjs',
+  'scripts/verify-c6b2-analysis-entry-gate.mjs',
 ])
 
 for (const file of changedFiles) {
@@ -97,12 +108,6 @@ assert(
   'shared/papersurface unchanged',
   !changedFiles.some((file) => file.startsWith('shared/papersurface/')),
 )
-assert(
-  'entry gate route untouched',
-  !changedFiles.includes('app/src/features/paper-intelligence/paperIntelligenceRoute.ts'),
-)
-assert('ConciergeGroupCard untouched', !changedFiles.includes('app/src/concierge/ConciergeGroupCard.tsx'))
-assert('server/api.mjs untouched', !changedFiles.includes('server/api.mjs'))
 assert(
   'paper-asset JSON unchanged',
   !changedFiles.some((file) => file.startsWith('app/public/paper-assets/')),

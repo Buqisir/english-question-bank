@@ -92,9 +92,9 @@ assert(
 )
 
 assert(
-  'ConciergeGroupCard imports supported PaperSurface bridge helper',
-  cardSource.includes('buildPaperSurfaceAnalysisHrefForGroupId'),
-  'missing buildPaperSurfaceAnalysisHrefForGroupId import',
+  'ConciergeGroupCard consumes API-provided PaperSurface href',
+  cardSource.includes('group.hasPaperSurfaceAnalysis') && cardSource.includes('group.paperSurfaceHref'),
+  'card no longer owns route target selection',
 )
 
 assert(
@@ -136,15 +136,20 @@ const routeModulePath = path.join(
 )
 const routeModule = await import(routeModulePath)
 const {
-  buildPaperSurfaceAnalysisHrefForGroupId,
+  buildPaperSurfaceHref,
   parsePaperIntelligenceRoute,
 } = routeModule
 
 // Build the exact href that the supported ConciergeGroupCard should produce.
-const expectedHref = buildPaperSurfaceAnalysisHrefForGroupId('g-2024-xkb1-a')
+const expectedHref = buildPaperSurfaceHref({
+  source: 'paper-asset',
+  paperId: 'paper-2024-jslk-english',
+  groupId: 'group-2024-jslk-reading-a',
+  questionId: 'q-2024-jslk-021',
+})
 
 assert(
-  'supported group g-2024-xkb1-a gets a PaperSurface href',
+  'supported paper-asset group gets a PaperSurface href',
   typeof expectedHref === 'string',
   `got: ${expectedHref}`,
 )
@@ -158,21 +163,21 @@ assert(
 const hrefParams = new URLSearchParams((expectedHref || '').slice(1))
 
 assertEqual(
-  'href contains paperId=paper-2024-xkb1-reading',
+  'href contains paperId=paper-2024-jslk-english',
   hrefParams.get('paperId'),
-  'paper-2024-xkb1-reading',
+  'paper-2024-jslk-english',
 )
 
 assertEqual(
-  'href contains groupId=g-2024-xkb1-a',
+  'href contains groupId=group-2024-jslk-reading-a',
   hrefParams.get('groupId'),
-  'g-2024-xkb1-a',
+  'group-2024-jslk-reading-a',
 )
 
 assertEqual(
-  'href contains questionId=A-21',
+  'href contains questionId=q-2024-jslk-021',
   hrefParams.get('questionId'),
-  'A-21',
+  'q-2024-jslk-021',
 )
 
 assertEqual(
@@ -182,22 +187,8 @@ assertEqual(
 )
 
 assert(
-  'unsupported reading group g-2024-xkb1-b gets no PaperSurface href',
-  buildPaperSurfaceAnalysisHrefForGroupId('g-2024-xkb1-b') === null,
-  'unsupported XKB1 Reading B produced a href',
-)
-
-const paperAssetHref = buildPaperSurfaceAnalysisHrefForGroupId('group-2024-jslk-reading-a')
-assert(
-  'paper-asset group group-2024-jslk-reading-a now gets a PaperSurface href (C6a-4)',
-  typeof paperAssetHref === 'string' && paperAssetHref.includes('source=paper-asset'),
-  `paper-asset Reading A href missing source=paper-asset: ${paperAssetHref}`,
-)
-
-assert(
-  'generic unsupported reading group gets no PaperSurface href',
-  buildPaperSurfaceAnalysisHrefForGroupId('g-unmapped-reading') === null,
-  'generic unsupported reading group produced a href',
+  'paper-asset entry availability now lives outside route helper',
+  !readFileSync(routeModulePath, 'utf-8').includes('buildPaperSurfaceAnalysisHrefForGroupId'),
 )
 
 /* ─────────────────── 3. Route target is PaperSurface-based ──────────── */
@@ -211,9 +202,9 @@ const parsed = parsePaperIntelligenceRoute({ search: expectedHref || '' })
 assertEqual('parsed route kind is paper-intelligence', parsed.kind, 'paper-intelligence')
 if (parsed.kind === 'paper-intelligence') {
   assertEqual('parsed surface is paper', parsed.surface, 'paper')
-  assertEqual('parsed paperId', parsed.paperId, 'paper-2024-xkb1-reading')
-  assertEqual('parsed groupId', parsed.groupId, 'g-2024-xkb1-a')
-  assertEqual('parsed questionId', parsed.questionId, 'A-21')
+  assertEqual('parsed paperId', parsed.paperId, 'paper-2024-jslk-english')
+  assertEqual('parsed groupId', parsed.groupId, 'group-2024-jslk-reading-a')
+  assertEqual('parsed questionId', parsed.questionId, 'q-2024-jslk-021')
 }
 
 // Confirm the href never matches the reading-analysis route.
