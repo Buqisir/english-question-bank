@@ -50,6 +50,28 @@ function compactSource(item: DraftPaperItem) {
   return [group.year, group.region, group.paperName, group.section].filter(Boolean).join(' · ')
 }
 
+function buildA4PreviewHtml(printHtml: string) {
+  if (!printHtml) return ''
+  const previewCss = `
+@media screen {
+  html {
+    background: #e8e4db;
+  }
+
+  body {
+    background: #fff;
+    box-sizing: border-box;
+    margin: 0 auto;
+    min-height: 297mm;
+    padding: 20mm 18mm;
+    width: 210mm;
+  }
+}
+`
+  if (printHtml.includes('</style>')) return printHtml.replace('</style>', `${previewCss}\n</style>`)
+  return printHtml.replace('</head>', `<style>${previewCss}</style></head>`)
+}
+
 function reorderItems(items: DraftPaperItem[], itemId: string, direction: -1 | 1) {
   const index = items.findIndex((item) => item.id === itemId)
   const nextIndex = index + direction
@@ -154,6 +176,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     () => draftPaper?.items.reduce((sum, item) => sum + Number(item.questionGroup?.questionCount || 0), 0) || 0,
     [draftPaper],
   )
+  const previewHtml = useMemo(() => buildA4PreviewHtml(draftPaper?.printHtml || ''), [draftPaper?.printHtml])
 
   async function persistItems(nextItems: DraftPaperItem[]) {
     if (!draftPaper) return
@@ -364,8 +387,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             <span>学生卷</span>
           </div>
           <div className="draft-a4-sheet">
-            {draftPaper.printHtml ? (
-              <iframe title="草稿卷 A4 预览" srcDoc={draftPaper.printHtml} />
+            {previewHtml ? (
+              <iframe title="草稿卷 A4 预览" srcDoc={previewHtml} />
             ) : (
               <div className="draft-a4-empty">请先添加题组</div>
             )}

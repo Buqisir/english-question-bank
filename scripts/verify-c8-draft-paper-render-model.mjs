@@ -65,7 +65,8 @@ assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPr
 assert('empty export uses Chinese reason', server.includes('请先添加题组'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')
-assert('preview uses iframe srcDoc from server HTML', /<iframe[\s\S]{0,120}srcDoc=\{draftPaper\.printHtml\}/.test(workbench))
+assert('preview uses iframe srcDoc from A4 preview HTML', /<iframe[\s\S]{0,120}srcDoc=\{previewHtml\}/.test(workbench))
+assert('preview injects screen-only A4 dimensions', workbench.includes('buildA4PreviewHtml') && workbench.includes('width: 210mm') && workbench.includes('padding: 20mm 18mm'))
 assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
 assert('outline shows source metadata outside preview', workbench.includes('compactSource(item)'))
