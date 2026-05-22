@@ -34,6 +34,15 @@ export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = nu
       analysisPath: path.join(latestBaseDir, 'analyses', readingChoiceAnalysisFileName),
     }
   }
+  const versions = listPaperAssetVersions(paperAssetsDir, paperId)
+  if (versions.length > 0) {
+    const latestVersion = `v${versions[versions.length - 1]}`
+    return {
+      baseDir: path.join(paperDir, 'versions', latestVersion),
+      assetPath: path.join(paperDir, 'versions', latestVersion, 'paper-asset.json'),
+      analysisPath: path.join(paperDir, 'versions', latestVersion, 'analyses', readingChoiceAnalysisFileName),
+    }
+  }
   return {
     baseDir: paperDir,
     assetPath: path.join(paperDir, 'paper-asset.json'),
@@ -97,15 +106,20 @@ export function writePaperImportVersion({
   mkdirSync(path.join(tempDir, 'analyses'), { recursive: true })
 
   const artifacts = makeVersionedArtifacts(packageData, version)
-  writeFileSync(path.join(tempDir, 'raw', packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
-  writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
-  writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
-  writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
-  writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
-  writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
-  writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
+  try {
+    writeFileSync(path.join(tempDir, 'raw', packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
+    writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
+    writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
+    writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
+    writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
+    writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
+    writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
 
-  renameSync(tempDir, versionDir)
+    renameSync(tempDir, versionDir)
+  } catch (error) {
+    if (existsSync(tempDir)) rmSync(tempDir, { recursive: true, force: true })
+    throw error
+  }
   return { versionName, versionDir, artifacts }
 }
 
@@ -152,6 +166,32 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
   }
 
   return latestDir
+}
+
+export function cleanupPaperImportTempArtifacts(paperAssetsDir) {
+  if (!existsSync(paperAssetsDir)) return []
+  const removed = []
+  for (const paperEntry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    if (!paperEntry.isDirectory()) continue
+    const paperDir = path.join(paperAssetsDir, paperEntry.name)
+    for (const entry of readdirSync(paperDir, { withFileTypes: true })) {
+      if (entry.isDirectory() && (/^\.latest-tmp-/.test(entry.name) || /^\.latest-prev-/.test(entry.name))) {
+        const target = path.join(paperDir, entry.name)
+        rmSync(target, { recursive: true, force: true })
+        removed.push(target)
+      }
+    }
+    const versionsDir = path.join(paperDir, 'versions')
+    if (!existsSync(versionsDir)) continue
+    for (const entry of readdirSync(versionsDir, { withFileTypes: true })) {
+      if (entry.isDirectory() && /^\.tmp-/.test(entry.name)) {
+        const target = path.join(versionsDir, entry.name)
+        rmSync(target, { recursive: true, force: true })
+        removed.push(target)
+      }
+    }
+  }
+  return removed
 }
 
 export function readLatestPaperAssetVersion(paperAssetsDir, paperId) {

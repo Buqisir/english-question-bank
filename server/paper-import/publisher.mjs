@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import {
   computeNextPaperAssetVersion,
+  cleanupPaperImportTempArtifacts,
   removePaperImportVersion,
   swapPaperImportLatest,
   writePaperImportVersion,
@@ -283,11 +284,6 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
     `
     INSERT INTO paper_asset_versions (id, paper_id, asset_version, version_name, version_dir, source_file_sha256, status)
     VALUES (?, ?, ?, ?, ?, ?, 'published')
-    ON CONFLICT(paper_id, asset_version) DO UPDATE SET
-      version_name = excluded.version_name,
-      version_dir = excluded.version_dir,
-      source_file_sha256 = excluded.source_file_sha256,
-      status = 'published'
     `,
   ).run(
     `pav-${paper.paperId}-v${version}`,
@@ -334,6 +330,7 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
   }
 
   const paperId = validation.packageData.paperAsset.paper.paperId
+  cleanupPaperImportTempArtifacts(paperAssetsDir)
   const version = computeNextPaperAssetVersion(paperAssetsDir, paperId)
   const readingGroups = getReadingChoiceGroups(validation.packageData.paperAsset).map((group) => ({
     groupId: group.groupId,

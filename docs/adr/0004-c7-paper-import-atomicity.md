@@ -26,28 +26,43 @@ Publish uses a latest-last flow:
 7. start DB transaction
 8. upsert DB/search latest rows
 9. commit DB transaction
-10. atomically swap latest directory
+10. swap latest directory after DB commit
 11. write publish report / import run
 ```
 
 If validation fails, C7 writes no publish files and performs no DB
 upsert.
 
-If versioned file writing fails, C7 does not start the DB transaction.
+If versioned file writing fails, C7 deletes the partial `.tmp-vN-*`
+directory and does not start the DB transaction.
 
 If DB upsert fails, C7 rolls back the DB transaction and leaves the
 existing latest directory untouched.
 
 The latest directory is the teacher-facing file view. It changes last.
+During the short local filesystem swap window, readers must fall back
+to the highest available `versions/vN/` snapshot if `latest/` is
+temporarily absent. This fallback is part of the C7 contract for
+PaperSurface fetches and search availability derivation.
+
+Canonical version numbers are consumed only by successful publishes.
+If a publish fails after writing `versions/vN/` but before the latest
+swap, C7 removes that version directory and records a failed
+`paper_import_runs` attempt with its own run id. The next successful
+publish may reuse the same `vN`; the audit trail lives in
+`paper_import_runs`, while `paper_asset_versions` contains only
+published versions.
 
 ## Consequences
 
 - A failed publish cannot make teacher links point at half-published
   latest files.
-- Version files may exist for failed attempts only if explicitly marked
-  by a failed publish report; teacher routes must not use them.
+- Failed attempts do not create canonical version directories or
+  `paper_asset_versions` rows.
 - Browser smoke must include a failure case proving old latest remains
   usable after a simulated DB failure.
+- Startup and publish-time cleanup may remove stale `.latest-tmp-*`,
+  `.latest-prev-*`, and `versions/.tmp-*` directories left by a crash.
 
 ## Non-goals
 

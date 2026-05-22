@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
+import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from '../server/paper-import/storage.mjs'
 import { readImportPackageFromDirectory } from '../server/paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -37,6 +38,7 @@ function tableExists(db, tableName) {
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-c7-publish-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const paperAssetsDir = path.join(tempRoot, 'paper-assets')
+const paperId = 'paper-2024-jslk-english'
 const db = new DatabaseSync(dbPath)
 
 try {
@@ -70,11 +72,11 @@ try {
 
   const first = publishPaperImportPackage({ files, db, paperAssetsDir })
   assert('first publish succeeds', first.ok, JSON.stringify(first, null, 2))
-  assert('first publish creates v1 dir', existsSync(path.join(paperAssetsDir, 'paper-2024-jslk-english/versions/v1/paper-asset.json')))
-  assert('first publish creates latest dir', existsSync(path.join(paperAssetsDir, 'paper-2024-jslk-english/latest/paper-asset.json')))
+  assert('first publish creates v1 dir', existsSync(path.join(paperAssetsDir, `${paperId}/versions/v1/paper-asset.json`)))
+  assert('first publish creates latest dir', existsSync(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)))
   assert(
     'latest assetVersion is v1 after first publish',
-    readJson(path.join(paperAssetsDir, 'paper-2024-jslk-english/latest/paper-asset.json')).paper.assetVersion === 1,
+    readJson(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)).paper.assetVersion === 1,
   )
   assert(
     'publish returns four QA links',
@@ -94,9 +96,17 @@ try {
   )
   assert(
     'DB has one published paper asset version row',
-    db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get('paper-2024-jslk-english').count === 1,
+    db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get(paperId).count === 1,
   )
-  const latestBeforeFailureBytes = readFileSync(path.join(paperAssetsDir, 'paper-2024-jslk-english/latest/paper-asset.json'))
+  const latestDir = path.join(paperAssetsDir, `${paperId}/latest`)
+  const hiddenLatest = path.join(paperAssetsDir, `${paperId}/.latest-prev-window-test`)
+  renameSync(latestDir, hiddenLatest)
+  const fallbackPaths = resolvePaperAssetReadPaths(paperAssetsDir, paperId)
+  assert('missing latest read falls back to latest version dir', fallbackPaths.assetPath.includes('/versions/v1/paper-asset.json'))
+  assert('missing latest fallback reads v1 asset', readJson(fallbackPaths.assetPath).paper.assetVersion === 1)
+  renameSync(hiddenLatest, latestDir)
+
+  const latestBeforeFailureBytes = readFileSync(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`))
 
   let forcedFailure = null
   try {
@@ -105,19 +115,47 @@ try {
     forcedFailure = error
   }
   assert('forced DB failure throws', Boolean(forcedFailure))
-  assert('failed v2 dir was removed', !existsSync(path.join(paperAssetsDir, 'paper-2024-jslk-english/versions/v2')))
+  assert('failed v2 dir was removed', !existsSync(path.join(paperAssetsDir, `${paperId}/versions/v2`)))
   assert(
     'latest remains old v1 after DB failure',
-    readJson(path.join(paperAssetsDir, 'paper-2024-jslk-english/latest/paper-asset.json')).paper.assetVersion === 1,
+    readJson(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)).paper.assetVersion === 1,
   )
   assert(
     'latest bytes remain unchanged after DB failure',
-    Buffer.compare(latestBeforeFailureBytes, readFileSync(path.join(paperAssetsDir, 'paper-2024-jslk-english/latest/paper-asset.json'))) === 0,
+    Buffer.compare(latestBeforeFailureBytes, readFileSync(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`))) === 0,
   )
   assert(
     'DB published version count remains one after failure',
-    db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get('paper-2024-jslk-english').count === 1,
+    db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get(paperId).count === 1,
   )
+
+  const second = publishPaperImportPackage({ files, db, paperAssetsDir })
+  assert('second publish succeeds after failed v2 attempt', second.ok)
+  assert('second publish reuses v2 after failed attempt', second.publish?.assetVersion === 2)
+  assert('second publish creates v2 dir', existsSync(path.join(paperAssetsDir, `${paperId}/versions/v2/paper-asset.json`)))
+  assert(
+    'latest swaps to v2 after second publish',
+    readJson(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)).paper.assetVersion === 2,
+  )
+  assert(
+    'DB has v1 and v2 published version rows',
+    db.prepare("SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ? AND status = 'published'").get(paperId).count === 2,
+  )
+  assert(
+    'import run audit preserves success/fail/success sequence',
+    db.prepare('SELECT COUNT(*) AS count FROM paper_import_runs WHERE paper_id = ?').get(paperId).count === 3,
+  )
+
+  const staleLatestTmp = path.join(paperAssetsDir, `${paperId}/.latest-tmp-stale`)
+  const staleLatestPrev = path.join(paperAssetsDir, `${paperId}/.latest-prev-stale`)
+  const staleVersionTmp = path.join(paperAssetsDir, `${paperId}/versions/.tmp-v3-stale`)
+  mkdirSync(staleLatestTmp, { recursive: true })
+  mkdirSync(staleLatestPrev, { recursive: true })
+  mkdirSync(staleVersionTmp, { recursive: true })
+  const removed = cleanupPaperImportTempArtifacts(paperAssetsDir)
+  assert('cleanup removes stale latest temp dirs', !existsSync(staleLatestTmp) && !existsSync(staleLatestPrev))
+  assert('cleanup removes stale version temp dirs', !existsSync(staleVersionTmp))
+  assert('cleanup reports removed temp artifacts', removed.length >= 3)
 } finally {
   db.close()
   rmSync(tempRoot, { recursive: true, force: true })

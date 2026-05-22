@@ -47,6 +47,7 @@ imports/*
 !imports/.gitkeep
 exports/*
 !exports/.gitkeep
+app/public/paper-assets/*/versions/
 reports/*
 !reports/difficulty-calibration-v1.md
 !reports/full-bcd-difficulty-calibration-v1.md

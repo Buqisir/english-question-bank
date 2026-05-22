@@ -20,7 +20,7 @@ import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
 import { parsePaperImportMultipart } from './paper-import/multipart.mjs'
 import { ensurePaperImportDatabaseShape, publishPaperImportPackage } from './paper-import/publisher.mjs'
-import { resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
+import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { makePublicValidationReport, validatePaperImportPackage } from './paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -371,8 +371,23 @@ function sendPaperAssetStatic(response, urlPath) {
     sendJson(response, 400, { error: 'Invalid paper asset path' })
     return
   }
-  const filePath = path.join(paperAssetsDir, relativePath)
-  if (!filePath.startsWith(path.resolve(paperAssetsDir)) || !existsSync(filePath) || statSync(filePath).isDirectory()) {
+  const paperAssetRoot = path.resolve(paperAssetsDir)
+  let filePath = path.resolve(paperAssetsDir, relativePath)
+  const isInsideRoot = filePath === paperAssetRoot || filePath.startsWith(`${paperAssetRoot}${path.sep}`)
+  if (!isInsideRoot) {
+    sendJson(response, 400, { error: 'Invalid paper asset path' })
+    return
+  }
+  if (!existsSync(filePath)) {
+    const parts = relativePath.split('/')
+    if (parts.length > 2 && parts[1] === 'latest') {
+      const versions = listPaperAssetVersions(paperAssetsDir, parts[0])
+      if (versions.length > 0) {
+        filePath = path.resolve(paperAssetsDir, parts[0], 'versions', `v${versions[versions.length - 1]}`, ...parts.slice(2))
+      }
+    }
+  }
+  if (!filePath.startsWith(`${paperAssetRoot}${path.sep}`) || !existsSync(filePath) || statSync(filePath).isDirectory()) {
     sendJson(response, 404, { error: 'Paper asset file not found' })
     return
   }
@@ -11194,6 +11209,7 @@ const server = createServer(async (request, response) => {
 })
 
 ensureDatabaseShape()
+cleanupPaperImportTempArtifacts(paperAssetsDir)
 
 server.listen(port, '127.0.0.1', () => {
   console.log(`Question bank API listening on http://127.0.0.1:${port}`)
