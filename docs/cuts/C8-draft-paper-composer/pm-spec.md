@@ -110,6 +110,9 @@ draft_paper_items
 
 Rules:
 
+- C8 introduces Draft Paper as a distinct entity. See
+  `docs/adr/0006-draft-paper-as-distinct-entity.md`.
+- C8 does not reuse `paper_sets` as the Draft Paper storage model.
 - `status` may reserve `active` / `archived`, but C8 does not need an
   archive UI.
 - One draft has at most one item per `group_id`.
@@ -118,6 +121,9 @@ Rules:
 - Current draft is a single-user preference / marker.
 - Draft paper title is auto-generated and editable.
 - Draft data is the source of truth for workbench state.
+- The legacy localStorage Assembly Basket is retired by C8. On first C8
+  open, the app migrates `assembly-basket-v1` into a new unnamed Draft
+  Paper if that key has groups and no current Draft Paper exists.
 
 ### My Space
 
@@ -149,6 +155,11 @@ Rules:
 - Folder depth is one level only.
 - PDF is stored on disk, not as a DB blob.
 - Suggested file path: `data/user-space/files/<artifactId>.pdf`.
+- `data/user-space/files/` is gitignored and created on server boot.
+- PDFs are served by `GET /user-space/files/:artifactId.pdf`.
+- The static handler must reject path traversal by comparing resolved
+  root and file paths.
+- Vite dev proxy must route `/user-space` to the API server.
 - Deleting an artifact deletes the PDF file and DB row.
 - Deleting an artifact does not delete the source draft.
 - Opening a source draft opens the original editable draft.
@@ -166,8 +177,8 @@ type QuestionGroupSearchResult = {
   // existing fields
   canAddToDraftPaper: boolean
   draftPaperButtonState: 'add' | 'in_current_draft' | 'disabled'
-  currentDraftPaperId?: string
-  printUnavailableReason?: string
+  currentDraftPaperId: string | null
+  printUnavailableReason: string | null
 }
 ```
 
@@ -180,15 +191,30 @@ Backend add-to-draft API must re-check:
 
 ## Print-Ready Gate
 
-Only print-ready groups can be added.
+Only print-ready groups can be added. Search and add-to-draft both use
+one shared backend function:
 
-V1 may define print-ready conservatively:
+```ts
+isGroupPrintReady(group): { ok: boolean; reason: string | null }
+```
 
-- group exists in the structured question bank / paper asset layer
-- group has stable group id and question ids
-- group has body/content needed by its group type
-- objective groups have options where needed
-- rendering adapter can produce printable blocks
+A group is print-ready iff all are true:
+
+- group exists in `question_groups`
+- `group.group_type` is one of `reading`, `cloze`, `seven_choices`,
+  `grammar_cloze`, `writing`, `continuation`
+- every question in the group has non-empty stem text
+- objective groups (`reading`, `cloze`, `seven_choices`,
+  `grammar_cloze`) have non-empty options for every question
+- writing / continuation groups have non-empty passage material or
+  explicit prompt text
+- if the group belongs to a paper asset, the paper asset has no dangling
+  questionId references for that group
+
+Listening groups are not print-ready in C8 because print output does
+not include audio.
+
+`printUnavailableReason` returns the first failed clause.
 
 Do not allow bad groups into draft papers and show error blocks later.
 The search action should be disabled or hidden before the teacher adds
@@ -305,8 +331,14 @@ Export rules:
 - No source labels inside the PDF.
 - No student info bar.
 - Footer: draft paper title + page number.
-- PDF generation should use browser rendering / print-to-PDF from the
-  workbench print surface.
+- Preview and PDF use one HTML source of truth.
+- The HTML source is `server/print-renderer.mjs::buildPrintHtml`.
+- C8 calls `buildPrintHtml` without modifying its body, adding a
+  `printStyle`, adding a `versionType`, or adding block kinds.
+- The client preview mounts the returned HTML in an iframe or equivalent
+  print-surface container. Do not build a parallel React print template.
+- PDF generation uses the same HTML and browser / Vivliostyle
+  print-to-PDF path.
 
 Save-to-My-Space dialog:
 
@@ -357,6 +389,13 @@ Artifact actions:
 - open source draft
 - delete artifact, with confirmation
 
+If the source draft has been deleted, the artifact row remains and PDF
+download still works. Clicking `open source draft` shows:
+
+```text
+原草稿卷已删除，PDF 仍可下载
+```
+
 ## State / Interaction Rules
 
 ### Add Group
@@ -392,12 +431,21 @@ click add page break before group
 ### Page-Break Suggestion
 
 ```text
-layout engine detects ugly group split risk
+server-side pre-measurement detects ugly group split risk
 -> right outline: 建议分页 · 采纳
 -> gray page gap hint appears
 -> teacher clicks 采纳
 -> page_break_before=true
 ```
+
+Heuristic v1 is deterministic and conservative. Suggest a break before
+a group when any is true:
+
+- the group is reading or seven_choices and its passage/material text is
+  over 600 English words
+- the group has more than 4 questions and total option count is over 16
+- the estimated group block exceeds 70% of one A4 page after the
+  previous block estimate
 
 ## Implementation Checkpoints
 
@@ -414,13 +462,20 @@ PA may challenge these, but PM recommends this order:
 C8 may become multiple PRs. Do not force all checkpoints into one PR if
 state/API, PDF export, or My Space proves independently risky.
 
+Recommended PR split after Opus PA:
+
+- PR A: C8-1 through C8-5, the complete composer-to-PDF loop.
+- PR B: C8-6 through C8-7, My Space plus end-to-end smoke and cut note.
+
+PR B must not start until PR A is merged.
+
 ## Allowed Files
 
 Planning / docs:
 
 ```text
 docs/cuts/C8-draft-paper-composer/**
-docs/adr/*c8*.md
+docs/adr/0006-draft-paper-as-distinct-entity.md
 docs/product/**
 ```
 
@@ -430,6 +485,9 @@ Likely runtime files:
 server/api.mjs
 server/draft-paper/**
 server/my-space/**
+server/print-renderer.mjs                          (READ-ONLY: callers
+                                                    may use buildPrintHtml;
+                                                    do not modify body)
 data/sql/schema.sql
 data/sql/migrations/**
 app/src/concierge/conciergeSearch.ts
@@ -440,18 +498,12 @@ app/src/services/draftPaper.ts
 app/src/services/mySpace.ts
 app/src/App.tsx
 app/src/domain/questionBank.ts
+app/vite.config.ts                                 (proxy /user-space)
+.gitignore                                         (exclude
+                                                    data/user-space/files/)
 scripts/verify-c8-*.mjs
 scripts/smoke-c8-*.mjs
 ```
-
-PDF export may require either:
-
-```text
-server/print-renderer.mjs
-```
-
-or a new C8-specific print module. PA should decide which boundary is
-cleaner.
 
 ## Forbidden Files
 
@@ -462,12 +514,15 @@ shared/papersurface/**
 app/src/features/reading-analysis/**
 app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts
 app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx
+app/src/features/paper-intelligence/**
 app/public/reports/**
 app/public/paper-assets/**
 ```
 
 Do not change imported source paper assets to make draft rendering pass.
 C8 consumes existing structured assets; it does not rewrite them.
+`server/print-renderer.mjs::buildPrintHtml` body is logically forbidden:
+no new `printStyle`, `versionType`, or block kind in C8.
 
 ## Static Verify Requirements
 
@@ -477,13 +532,21 @@ Suggested scripts:
 scripts/verify-c8-draft-paper-contracts.mjs
 scripts/verify-c8-draft-paper-render-model.mjs
 scripts/verify-c8-my-space-contracts.mjs
+scripts/verify-c8-print-ready-gate.mjs
 scripts/verify-c8-forbidden-scope.mjs
 ```
 
 Required assertions:
 
 - draft tables / API routes exist
+- ADR 0006 exists and `CONTEXT.md` names Draft Paper as distinct from
+  Paper Set
 - add-to-draft rejects non-print-ready groups
+- `isGroupPrintReady` returns failure reasons for listening, missing
+  options, missing stem, missing writing prompt/material, and dangling
+  questionId
+- `isGroupPrintReady` returns ok for fixture reading, seven_choices,
+  cloze, and grammar_cloze groups
 - same group cannot be added twice to one draft
 - search results expose `canAddToDraftPaper` and button state
 - draft items preserve order
@@ -492,7 +555,10 @@ Required assertions:
 - continuous renumbering produces no gaps
 - source metadata does not render inside student paper
 - export artifact type is `student-paper`
+- preview HTML and PDF HTML use the same `buildPrintHtml` output block
+  structure
 - My Space PDF files live outside SQLite blob storage
+- `/user-space/files/:artifactId.pdf` has traversal guard assertions
 - artifact delete does not delete source draft
 - forbidden PaperSurface / reading-analysis / paper-asset fixture scopes
   are untouched
@@ -521,8 +587,28 @@ Required assertions:
 | 18 | Delete artifact | Confirms, deletes artifact/PDF, source draft remains |
 | 19 | Narrow viewport | A4 preview above, outline collapsible below |
 | 20 | Source metadata | Visible in outline, absent from A4/PDF |
+| 21 | Download PDF, save to disk, reopen | PDF visually matches preview block-for-block |
+| 22 | Browser zoom 90% | A4 preview readable, outline does not overlap A4 |
+| 23 | Browser zoom 100% | Same as 22 |
+| 24 | Delete current draft, then add group from search | New unnamed draft created, card becomes `已在草稿卷中` |
+| 25 | Two draft tabs, add in tab A, refresh tab B | Tab B shows added group |
+| 26 | Listening group card | Add button hidden/disabled with visible reason |
+| 27 | Group with dangling questionId | Add button disabled with reason |
+| 28 | Save artifact, delete source draft, return My Space | Artifact remains, PDF downloads, open-source shows source-gone toast |
+| 29 | Generate PDF then save to My Space within 30s | Does not invoke a second PDF generation |
+| 30 | PDF renderer unavailable | Export shows actionable error, not stack trace |
+| 31 | Empty folder | Delete folder succeeds |
+| 32 | Non-empty folder | Delete folder blocked with reason |
+| 33 | Empty draft, click export | Export disabled or explains `请先添加题组` |
 
 ## Open PO Decisions
 
-None after PM grill. PA should still challenge if any decision is
-contradictory or unverifiable.
+None after PM grill + Opus PA compression. Opus left three decisions;
+PM/PO accepted all recommended choices:
+
+- Draft Paper is a distinct entity; see ADR 0006.
+- Assembly Basket is retired with one-time migration.
+- My Space artifact stays valid when source draft is deleted.
+
+PA should still challenge if any decision is contradictory or
+unverifiable.
