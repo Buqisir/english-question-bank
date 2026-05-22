@@ -9,6 +9,16 @@ Project: english-question-bank / PaperSurface / question bank
 Cut: C8 — Draft Paper Composer / 草稿卷组卷与个人空间 V1
 Mode: PA only. Do NOT implement. Do NOT edit files. Do NOT write code.
 
+Exception to "Do NOT edit files":
+You MUST write your final PA report to this exact repo path:
+
+docs/cuts/C8-draft-paper-composer/pa-review-opus.md
+
+Only create or replace that one markdown file. Do not edit any product,
+runtime, schema, test, or other documentation file. The report file is
+the handoff artifact so the owner does not need to copy/paste your
+review back to Codex.
+
 First read:
 - AGENTS.md
 - .kiro/steering/README.md
@@ -62,4 +72,10 @@ Review focus:
   teacher workflow?
 
 If more than 3 PO decisions remain, verdict must be DEV NOT READY.
+
+After writing the file, reply with only:
+- the report path
+- your verdict
+- the number of Must Fix items
+- the number of Open PO Decisions
 ```
