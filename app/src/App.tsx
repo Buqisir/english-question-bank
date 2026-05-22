@@ -394,6 +394,12 @@ function normalizeAiModel(value: string) {
   return DEEPSEEK_MODEL_ALIASES[normalized] || DEEPSEEK_MODELS[0].value
 }
 
+function mergeQuestionGroupsWithSamples(groups: QuestionGroupCard[]): QuestionGroupCard[] {
+  const seen = new Set(groups.map((group) => group.id))
+  const missingSamples = sampleQuestionGroups.filter((group) => !seen.has(group.id))
+  return [...groups, ...missingSamples]
+}
+
 const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 
 const importBatchItemStatusLabel: Record<ImportBatch['items'][number]['status'], string> = {
@@ -1165,7 +1171,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     fetchQuestionGroups()
       .then((groups) => {
         if (ignore) return
-        setQuestionGroups(groups)
+        setQuestionGroups(mergeQuestionGroupsWithSamples(groups))
         setDataStatus('sqlite')
       })
       .catch(() => {
@@ -2501,7 +2507,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   async function refreshQuestionGroups() {
     try {
       const groups = await fetchQuestionGroups()
-      setQuestionGroups(groups)
+      setQuestionGroups(mergeQuestionGroupsWithSamples(groups))
       setDataStatus('sqlite')
     } catch {
       setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))

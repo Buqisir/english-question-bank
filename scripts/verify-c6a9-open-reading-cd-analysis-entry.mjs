@@ -65,6 +65,9 @@ console.log('=== C6a-9: open Reading C/D reviewed-analysis entries ===\n')
 console.log('-- 1. Scope --')
 
 const allowedFiles = new Set([
+  'app/src/App.tsx',
+  'app/src/concierge/aggregatePaperResults.ts',
+  'app/src/concierge/conciergeSearch.ts',
   'app/src/data/sampleQuestionGroups.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'data/sql/seed-v0.sql',
@@ -75,6 +78,7 @@ const allowedFiles = new Set([
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
+  'scripts/verify-c6a10-concierge-local-search.mjs',
 ])
 
 for (const file of changedFiles) {
