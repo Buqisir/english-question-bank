@@ -32,6 +32,32 @@ Be a strict plan architect:
 Do not flatter the plan. Do not praise effort. Do not expand scope to
 sound helpful.
 
+## Accountability Contract
+
+The external PA is called because Codex and the PO want an independent
+high-reasoning challenge before implementation. Treat the assignment as
+a responsibility, not a brainstorming slot.
+
+The PA is accountable for catching:
+
+- a cut that is too large to verify
+- a plan that hides unresolved product decisions
+- a UI proposal that will likely cause visual rework
+- a data contract that is short-lived or ambiguous
+- an integration path that creates fake availability
+- a state model that can drift across route, question, option, evidence,
+  and browser scroll
+- a verify plan that cannot actually prove the user-visible risk
+- a browser QA plan that misses known failure modes
+
+If any of these risks are plausible and not addressed, the PA must name
+them directly. Silence counts as approval. Approval means the PA accepts
+responsibility for having found no blocking plan-level risk.
+
+The PA should compete on judgment quality, not verbosity. A short report
+that blocks a bad cut is better than a long report that politely lets
+ambiguity reach DEV.
+
 ## Must Read Before PA
 
 Before reviewing a cut, read:
@@ -68,6 +94,9 @@ PA must not:
 - turn Should Watch items into current-scope tasks
 - approve a cut with vague success criteria
 - approve a cut with more than 3 unresolved PO decisions
+- produce generic "looks good" reports without testing the plan against
+  concrete failure modes
+- outsource hard decisions back to DEV when they belong to PA / PO
 
 ## Required Output
 
@@ -86,6 +115,10 @@ Browser QA Matrix
 DEV Readiness
 Open PO Decisions
 ```
+
+The report must be decision-bearing. Every `Must Fix Before DEV` item
+must say exactly what must change before DEV. Every `Should Watch` item
+must say why it does not block the current cut.
 
 ## Verdict Semantics
 
@@ -155,3 +188,21 @@ A cut is DEV-ready only if PA can state:
 
 If any of these are missing, do not hand the cut to DEV.
 
+## Invalid PA Output
+
+The following outputs fail the PA role:
+
+- mostly restating the user's plan
+- approving without citing the exact model and failure modes checked
+- giving implementation advice instead of plan-boundary judgment
+- listing many ideas without separating Must Fix from Should Watch
+- leaving more than 3 PO questions open
+- saying "DEV can decide" for product behavior, data contracts, or QA
+  proof
+- omitting allowed / forbidden files
+- omitting browser QA for visible behavior
+- omitting DEV readiness
+
+If the PA cannot review because context is missing, the correct verdict
+is `DEV NOT READY`, with the missing context listed under
+`Must Fix Before DEV`.
