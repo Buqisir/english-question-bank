@@ -24,9 +24,11 @@ const rootDir = path.resolve(__dirname, '..')
 const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question-bank.sqlite')
 const exportDir = path.join(rootDir, 'exports')
 const importDir = path.join(rootDir, 'imports')
+const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
 const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
+const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const groupTypeLabels = {
   reading: '阅读理解',
   cloze: '完形填空',
@@ -178,6 +180,86 @@ const TOPIC_LABEL_BY_LABEL = new Map(TOPIC_LABEL_TAXONOMY.map((entry) => [entry.
 const TOPIC_LABEL_BY_COMPACT_LABEL = new Map(
   TOPIC_LABEL_TAXONOMY.map((entry) => [compactTopicLabelText(entry.label), entry]),
 )
+
+let paperSurfaceAnalysisAvailabilityByGroupIdCache = null
+
+function readJsonFile(filePath) {
+  return JSON.parse(readFileSync(filePath, 'utf8'))
+}
+
+function buildPaperSurfaceHref(args) {
+  const params = new URLSearchParams()
+  params.set('view', 'paper-intelligence')
+  if (args.source && args.source !== 'legacy-report') {
+    params.set('source', args.source)
+  }
+  params.set('paperId', args.paperId)
+  params.set('surface', 'paper')
+  if (args.groupId) {
+    params.set('groupId', args.groupId)
+  }
+  if (args.questionId) {
+    params.set('questionId', args.questionId)
+  }
+  return `?${params.toString()}`
+}
+
+function getPaperSurfaceAnalysisAvailabilityByGroupId() {
+  if (paperSurfaceAnalysisAvailabilityByGroupIdCache) {
+    return paperSurfaceAnalysisAvailabilityByGroupIdCache
+  }
+
+  const availabilityByGroupId = new Map()
+  if (!existsSync(paperAssetsDir)) {
+    paperSurfaceAnalysisAvailabilityByGroupIdCache = availabilityByGroupId
+    return availabilityByGroupId
+  }
+
+  for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+
+    const assetDir = path.join(paperAssetsDir, entry.name)
+    const assetPath = path.join(assetDir, 'paper-asset.json')
+    const analysisPath = path.join(assetDir, 'analyses', readingChoiceAnalysisFileName)
+    if (!existsSync(assetPath) || !existsSync(analysisPath)) continue
+
+    try {
+      const asset = readJsonFile(assetPath)
+      const analysis = readJsonFile(analysisPath)
+      const paperId = String(asset?.paper?.paperId || entry.name)
+      if (analysis?.schemaVersion !== 'reading-choice-analysis-v1') continue
+      if (analysis?.paperId !== paperId) continue
+
+      const groups = asset?.content?.groups && typeof asset.content.groups === 'object'
+        ? Object.values(asset.content.groups)
+        : []
+      for (const group of groups) {
+        const groupId = String(group?.groupId || '')
+        const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+        if (!groupId || group?.groupType !== 'reading' || questionIds.length === 0) continue
+        if (Array.isArray(analysis?.targetGroups) && !analysis.targetGroups.includes(groupId)) continue
+        const hasReviewedAnalysisForEveryQuestion = questionIds.every((questionId) =>
+          Boolean(analysis?.questions?.[questionId]),
+        )
+        if (!hasReviewedAnalysisForEveryQuestion) continue
+
+        availabilityByGroupId.set(groupId, {
+          href: buildPaperSurfaceHref({
+            source: 'paper-asset',
+            paperId,
+            groupId,
+            questionId: questionIds[0],
+          }),
+        })
+      }
+    } catch (error) {
+      console.warn(`[paper-surface-analysis] ignored invalid paper asset analysis in ${assetDir}:`, error)
+    }
+  }
+
+  paperSurfaceAnalysisAvailabilityByGroupIdCache = availabilityByGroupId
+  return availabilityByGroupId
+}
 
 function topicSubtopicAliasKey(theme, subtopic) {
   return `${compactTopicLabelText(theme)}|${compactTopicLabelText(subtopic)}`
@@ -852,7 +934,8 @@ function saveSevenChoicesParseResult(questionGroupId, input) {
   }
 }
 
-function rowToQuestionGroupCard(row) {
+function rowToQuestionGroupCard(row, paperSurfaceAnalysisAvailabilityByGroupId = new Map()) {
+  const paperSurfaceAnalysis = paperSurfaceAnalysisAvailabilityByGroupId.get(row.id)
   return {
     id: row.id,
     title: row.title,
@@ -872,6 +955,8 @@ function rowToQuestionGroupCard(row) {
     hit: row.hit,
     answerPreview: row.answer_preview,
     defaultScore: row.default_score,
+    hasPaperSurfaceAnalysis: Boolean(paperSurfaceAnalysis?.href),
+    paperSurfaceHref: paperSurfaceAnalysis?.href || null,
   }
 }
 
@@ -907,12 +992,13 @@ function selectQuestionGroupCards(db, whereClause = '', params = []) {
     db,
     rows.map((row) => row.id),
   )
+  const paperSurfaceAnalysisAvailabilityByGroupId = getPaperSurfaceAnalysisAvailabilityByGroupId()
 
   return rows.map((row) =>
     rowToQuestionGroupCard({
       ...row,
       topicLabels: topicLabelsByGroupId.get(row.id) || [],
-    }),
+    }, paperSurfaceAnalysisAvailabilityByGroupId),
   )
 }
 

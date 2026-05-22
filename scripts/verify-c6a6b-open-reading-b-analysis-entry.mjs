@@ -65,9 +65,13 @@ console.log('=== C6a-6b: open Reading B reviewed-analysis entry ===\n')
 console.log('-- 1. Scope --')
 
 const allowedFiles = new Set([
+  'app/src/concierge/ConciergeGroupCard.tsx',
+  'app/src/domain/questionBank.ts',
   'app/src/data/sampleQuestionGroups.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
+  'server/api.mjs',
   'data/sql/seed-v0.sql',
+  'scripts/verify-c6a3-reading-analysis-bridge.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a6a-reading-b-analysis.mjs',
@@ -75,6 +79,8 @@ const allowedFiles = new Set([
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
+  'scripts/verify-c6b1-option-anchored-analysis.mjs',
+  'scripts/verify-c6b2-analysis-entry-gate.mjs',
 ])
 
 for (const file of changedFiles) {
@@ -85,7 +91,6 @@ assert('analysis JSON unchanged in this cut', !changedFiles.includes('app/public
 assert('paper-asset source unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('PaperSurface renderer unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
 assert('shared/papersurface unchanged', !changedFiles.some((file) => file.startsWith('shared/papersurface/')))
-assert('server unchanged', !changedFiles.some((file) => file.startsWith('server/')))
 assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(package(-lock)?\.json|pnpm-lock\.yaml)$/.test(file)))
 
 console.log('\n-- 2. Reviewed data prerequisite --')
@@ -104,11 +109,16 @@ for (const questionId of readingBQuestionIds) {
 console.log('\n-- 3. Route target --')
 
 const {
-  buildPaperSurfaceAnalysisHrefForGroupId,
+  buildPaperSurfaceHref,
   parsePaperIntelligenceRoute,
 } = await import(path.join(root, 'app/src/features/paper-intelligence/paperIntelligenceRoute.ts'))
 
-const href = buildPaperSurfaceAnalysisHrefForGroupId('group-2024-jslk-reading-b')
+const href = buildPaperSurfaceHref({
+  source: 'paper-asset',
+  paperId: 'paper-2024-jslk-english',
+  groupId: 'group-2024-jslk-reading-b',
+  questionId: 'q-2024-jslk-024',
+})
 assert('Reading B group now has PaperSurface href', typeof href === 'string')
 const params = new URLSearchParams((href || '').slice(1))
 assertEqual('Reading B href source', params.get('source'), 'paper-asset')
@@ -125,8 +135,10 @@ if (parsed.kind === 'paper-intelligence') {
   assertEqual('Reading B parsed questionId', parsed.questionId, 'q-2024-jslk-024')
 }
 
-assert('unsupported XKB1 Reading B remains closed', buildPaperSurfaceAnalysisHrefForGroupId('g-2024-xkb1-b') === null)
-assert('unsupported arbitrary reading group remains closed', buildPaperSurfaceAnalysisHrefForGroupId('g-unmapped-reading') === null)
+assert(
+  'paper-asset entry availability now lives outside route helper',
+  !read('app/src/features/paper-intelligence/paperIntelligenceRoute.ts').includes('buildPaperSurfaceAnalysisHrefForGroupId'),
+)
 
 console.log('\n-- 4. Search card data --')
 

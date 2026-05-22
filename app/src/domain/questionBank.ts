@@ -46,6 +46,8 @@ export type QuestionGroupCard = {
   hit: string
   answerPreview: string
   defaultScore: number
+  hasPaperSurfaceAnalysis?: boolean
+  paperSurfaceHref?: string | null
 }
 
 export type TopicLabel = {

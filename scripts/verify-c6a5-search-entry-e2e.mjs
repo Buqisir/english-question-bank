@@ -59,11 +59,15 @@ console.log('=== C6a-5: search entry E2E guard ===\n')
 console.log('-- 1. Scope guard --')
 const allowed = new Set([
   'app/src/App.tsx',
+  'app/src/concierge/ConciergeGroupCard.tsx',
   'app/src/concierge/aggregatePaperResults.ts',
   'app/src/concierge/conciergeSearch.ts',
   'app/src/data/sampleQuestionGroups.ts',
+  'app/src/domain/questionBank.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
+  'server/api.mjs',
   'data/sql/seed-v0.sql',
+  'scripts/verify-c6a3-reading-analysis-bridge.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
   'scripts/verify-c6a6a-reading-b-analysis.mjs',
@@ -72,6 +76,8 @@ const allowed = new Set([
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
   'scripts/verify-c6a10-concierge-local-search.mjs',
+  'scripts/verify-c6b1-option-anchored-analysis.mjs',
+  'scripts/verify-c6b2-analysis-entry-gate.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 for (const file of changedFiles) {
@@ -80,7 +86,6 @@ for (const file of changedFiles) {
 assert('PaperSurface unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
 assert('paper-asset source fixture unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('reports unchanged', !changedFiles.some((file) => file.startsWith('app/public/reports/')))
-assert('server unchanged', !changedFiles.some((file) => file.startsWith('server/')))
 assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(package(-lock)?\.json|pnpm-lock\.yaml)$/.test(file)))
 
 console.log('\n-- 2. Timeout fallback contract --')
@@ -133,10 +138,15 @@ if (outcome.kind === 'results') {
 }
 
 console.log('\n-- 4. PaperSurface entry contract still covered --')
-const { buildPaperSurfaceAnalysisHrefForGroupId } = await import(
+const { buildPaperSurfaceHref } = await import(
   path.join(root, 'app/src/features/paper-intelligence/paperIntelligenceRoute.ts')
 )
-const href = buildPaperSurfaceAnalysisHrefForGroupId('group-2024-jslk-reading-a')
+const href = buildPaperSurfaceHref({
+  source: 'paper-asset',
+  paperId: 'paper-2024-jslk-english',
+  groupId: 'group-2024-jslk-reading-a',
+  questionId: 'q-2024-jslk-021',
+})
 assert('JSLK Reading A has Reading Analysis href', typeof href === 'string')
 if (href) {
   const params = new URLSearchParams(href.slice(1))
