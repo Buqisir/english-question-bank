@@ -90,6 +90,7 @@ const allowed = new Set([
   'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
+  'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 

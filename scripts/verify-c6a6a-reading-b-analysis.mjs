@@ -104,6 +104,7 @@ const allowedFiles = new Set([
   'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
+  'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
 ])
 
 for (const file of changedFiles) {

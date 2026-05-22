@@ -175,6 +175,18 @@ const PAPER_SURFACE_ANALYSIS_TARGETS_BY_GROUP_ID: Record<
     groupId: 'group-2024-jslk-reading-b',
     questionId: 'q-2024-jslk-024',
   },
+  'group-2024-jslk-reading-c': {
+    paperId: 'paper-2024-jslk-english',
+    source: 'paper-asset',
+    groupId: 'group-2024-jslk-reading-c',
+    questionId: 'q-2024-jslk-028',
+  },
+  'group-2024-jslk-reading-d': {
+    paperId: 'paper-2024-jslk-english',
+    source: 'paper-asset',
+    groupId: 'group-2024-jslk-reading-d',
+    questionId: 'q-2024-jslk-032',
+  },
 }
 
 export function buildPaperSurfaceAnalysisHrefForGroupId(
