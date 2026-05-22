@@ -413,6 +413,8 @@ if (existsSync(readingPromptPath)) {
   assert(rp.includes('NOT selectable') || rp.includes('not selectable') || (rp.includes('NOT') && rp.includes('selectable')), 'Reading prompt includes unsupportedClaim non-interactive rule');
   assert(rp.includes('JSON file output contract'), 'Reading prompt defines JSON file output contract');
   assert(rp.includes('suitable to save') && rp.includes('reading-choice-analysis-v1.json'), 'Reading prompt frames output as saveable JSON file content');
+  assert(rp.includes('downloadable `.json`'), 'Reading prompt asks for downloadable JSON file when supported');
+  assert(rp.includes('Schema obedience rule'), 'Reading prompt defines schema obedience rule');
   assert(rp.includes('The first character of the response MUST be `{`'), 'Reading prompt requires first character to be raw JSON object start');
   assert(rp.includes('The final character of the response MUST be `}`'), 'Reading prompt requires final character to be raw JSON object end');
   assert(rp.includes('If the supplied passage, questions, options, and answerKey are sufficient'), 'Reading prompt defines sufficient-information fast-output condition');
@@ -420,6 +422,14 @@ if (existsSync(readingPromptPath)) {
   assert(rp.includes('MUST NOT output reasoning steps'), 'Reading prompt forbids outputting reasoning steps');
   assert(rp.includes('**DO NOT** output `status`'), 'Reading prompt forbids top-level status wrapper');
   assert(rp.includes('**DO NOT** output a top-level `analysis` wrapper'), 'Reading prompt forbids top-level analysis wrapper');
+  assert(rp.includes('**DO NOT** output `answer` inside question analysis'), 'Reading prompt forbids question-level answer field');
+  assert(rp.includes('**DO NOT** output `questionId`, `groupId`, `questionNumber`, `stem`, or `optionText` inside question analysis'), 'Reading prompt forbids duplicated question fields');
+  assert(rp.includes('`skill` must be an object'), 'Reading prompt locks skill object shape');
+  assert(rp.includes('Do not use `conditionDrop`; use `conditionRemoved`'), 'Reading prompt forbids conditionDrop enum drift');
+  assert(rp.includes('Do not use `scopeNarrowing`; use `understatement`'), 'Reading prompt forbids scopeNarrowing enum drift');
+  assert(rp.includes('Do not use `valueReversal`'), 'Reading prompt forbids valueReversal enum drift');
+  assert(rp.includes('Do not use `inferenceBridge`; choose `paraphrase` or `locationCue`'), 'Reading prompt forbids inferenceBridge enum drift');
+  assert(rp.includes('do not use `semantic`'), 'Reading prompt forbids semantic matchType drift');
   assertNot(rp.includes('"status": "ok"'), 'Reading prompt no longer includes old status ok wrapper');
   assertNot(rp.includes('"status": "failed"'), 'Reading prompt no longer includes old status failed wrapper');
 }
