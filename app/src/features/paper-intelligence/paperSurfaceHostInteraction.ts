@@ -7,6 +7,7 @@ export type PaperSurfaceHostStructureTarget = {
 export type PaperSurfaceHostInteractionState = {
   activeQuestionId: string | null
   activeEvidenceId: string | null
+  activeOptionLabel: string | null
   activeInsightSection: string | null
   activeStructureTarget: PaperSurfaceHostStructureTarget | null
   railLocked: boolean
@@ -15,8 +16,15 @@ export type PaperSurfaceHostInteractionState = {
 }
 
 export type PaperSurfaceHostInteractionAction =
-  | { type: 'request-lecture-focus'; questionId: string }
+  | {
+      type: 'request-lecture-focus'
+      questionId: string
+      optionLabel?: string | null
+      evidenceId?: string | null
+    }
   | { type: 'seed-support-evidence'; evidenceId: string | null }
+  | { type: 'seed-option-evidence'; optionLabel: string | null; evidenceId: string | null }
+  | { type: 'select-option-evidence'; optionLabel: string; evidenceId: string | null }
   | { type: 'select-evidence'; evidenceId: string }
   | { type: 'toggle-insight'; paperSection: string }
   | { type: 'close-insight' }
@@ -34,6 +42,7 @@ export type PaperSurfaceHostInteractionAction =
 export const paperSurfaceHostInitialState: PaperSurfaceHostInteractionState = {
   activeQuestionId: null,
   activeEvidenceId: null,
+  activeOptionLabel: null,
   activeInsightSection: null,
   activeStructureTarget: null,
   railLocked: false,
@@ -47,10 +56,15 @@ export function paperSurfaceHostInteractionReducer(
 ): PaperSurfaceHostInteractionState {
   switch (action.type) {
     case 'request-lecture-focus': {
+      const shouldClearLegacyFocus =
+        state.activeQuestionId === action.questionId &&
+        action.optionLabel === undefined &&
+        action.evidenceId === undefined
       return {
         ...state,
-        activeQuestionId:
-          state.activeQuestionId === action.questionId ? null : action.questionId,
+        activeQuestionId: shouldClearLegacyFocus ? null : action.questionId,
+        activeEvidenceId: shouldClearLegacyFocus ? null : action.evidenceId ?? null,
+        activeOptionLabel: shouldClearLegacyFocus ? null : action.optionLabel ?? null,
         activeInsightSection: null,
         railLocked: false,
       }
@@ -58,6 +72,20 @@ export function paperSurfaceHostInteractionReducer(
     case 'seed-support-evidence': {
       return {
         ...state,
+        activeEvidenceId: action.evidenceId,
+      }
+    }
+    case 'seed-option-evidence': {
+      return {
+        ...state,
+        activeOptionLabel: action.optionLabel,
+        activeEvidenceId: action.evidenceId,
+      }
+    }
+    case 'select-option-evidence': {
+      return {
+        ...state,
+        activeOptionLabel: action.optionLabel,
         activeEvidenceId: action.evidenceId,
       }
     }
