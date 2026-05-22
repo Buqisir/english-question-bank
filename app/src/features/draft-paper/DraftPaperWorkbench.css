@@ -145,19 +145,17 @@
 }
 
 .draft-a4-sheet {
-  background: #fff;
-  border: 1px solid #bfb6a8;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 18px 36px rgba(41, 35, 27, 0.18),
-    0 3px 10px rgba(41, 35, 27, 0.12);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   margin: 0 auto;
   max-width: min(100%, 820px);
   overflow: hidden;
-  width: min(100%, 820px);
+  width: 100%;
 }
 
 .draft-a4-sheet iframe {
+  background: #e8e4db;
   border: 0;
   display: block;
   height: min(calc(100vh - 190px), 1160px);
