@@ -80,6 +80,7 @@ const allowed = new Set([
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
   'app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
+  'app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'data/sql/seed-v0.sql',
   'scripts/verify-c6a3-reading-analysis-bridge.mjs',
@@ -91,6 +92,7 @@ const allowed = new Set([
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
+  'scripts/verify-c6b1-option-anchored-analysis.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 

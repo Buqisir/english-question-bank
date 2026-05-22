@@ -57,6 +57,26 @@ export type ReviewedReadingChoiceAnalysisV1 = {
   questions: Record<string, ReadingChoiceAnalysis>
 }
 
+export type PaperAssetEvidenceRowView = {
+  evidenceId: string
+  role: 'primary' | 'supporting' | 'trap'
+  paragraphId: string
+  quote: string
+}
+
+export type PaperAssetOptionAnalysisView = {
+  label: string
+  text: string
+  translationZh: string
+  status: 'correct' | 'wrong'
+  trapLabel: string | null
+  trapPrimaryType: string | null
+  trapSecondaryLabel: string | null
+  trapSubtype: string | null
+  trapExplanation: string | null
+  trapEvidenceRows: PaperAssetEvidenceRowView[]
+}
+
 export type PaperAssetQuestionAnalysisView = {
   questionId: string
   questionNo: string
@@ -66,20 +86,8 @@ export type PaperAssetQuestionAnalysisView = {
   stemTranslationZh: string
   answer: string
   supportEvidenceId: string | null
-  supportEvidenceRows: Array<{
-    evidenceId: string
-    role: 'primary' | 'supporting'
-    paragraphId: string
-    quote: string
-  }>
-  options: Array<{
-    label: string
-    text: string
-    translationZh: string
-    status: 'correct' | 'wrong'
-    trapLabel: string | null
-    trapExplanation: string | null
-  }>
+  supportEvidenceRows: PaperAssetEvidenceRowView[]
+  options: PaperAssetOptionAnalysisView[]
   locationParaphrases: LocationParaphrase[]
 }
 
@@ -274,6 +282,21 @@ function buildEvidence(
         range,
       })
     }
+    for (const option of questionAnalysis.optionAnalysis) {
+      if (option.status !== 'wrong') continue
+      for (let index = 0; index < (option.trapEvidence ?? []).length; index++) {
+        const item = option.trapEvidence?.[index]
+        if (!item?.quote) continue
+        const range = resolveQuoteInTextMap(item.paragraphId, item.quote, textMap)
+        if (!range) continue
+        evidence.push({
+          id: `${questionId}-trap-${option.label.toLowerCase()}-${index + 1}`,
+          questionId,
+          kind: 'trap',
+          range,
+        })
+      }
+    }
   }
   return evidence
 }
@@ -310,12 +333,7 @@ function buildAnalysisViews(
   group: PaperContentGroup,
   evidence: PaperEvidence[],
 ): Record<string, PaperAssetQuestionAnalysisView> {
-  const evidenceIdsByQuestion = new Map<string, string[]>()
-  for (const item of evidence) {
-    const ids = evidenceIdsByQuestion.get(item.questionId) ?? []
-    ids.push(item.id)
-    evidenceIdsByQuestion.set(item.questionId, ids)
-  }
+  const evidenceIdSet = new Set(evidence.map((item) => item.id))
 
   const out: Record<string, PaperAssetQuestionAnalysisView> = {}
   for (const questionId of group.questionIds) {
@@ -323,14 +341,20 @@ function buildAnalysisViews(
     const questionAnalysis = analysis.questions[questionId]
     if (!questionAnalysis) continue
 
-    const supportEvidenceIds = evidenceIdsByQuestion.get(questionId) ?? []
     const correct = questionAnalysis.optionAnalysis.find((item) => item.status === 'correct')
-    const supportEvidenceRows = (correct?.evidence ?? []).map((item, index) => ({
-      evidenceId: supportEvidenceIds[index] ?? '',
-      role: item.role,
-      paragraphId: item.paragraphId,
-      quote: item.quote,
-    })).filter((item) => item.evidenceId)
+    const supportEvidenceRows: PaperAssetEvidenceRowView[] = (correct?.evidence ?? []).flatMap(
+      (item, index) => {
+        const evidenceId = `${questionId}-support-${index + 1}`
+        return evidenceIdSet.has(evidenceId)
+          ? [{
+              evidenceId,
+              role: item.role,
+              paragraphId: item.paragraphId,
+              quote: item.quote,
+            }]
+          : []
+      },
+    )
 
     out[questionId] = {
       questionId,
@@ -344,23 +368,59 @@ function buildAnalysisViews(
       supportEvidenceRows,
       options: (question.options ?? []).map((option) => {
         const row = questionAnalysis.optionAnalysis.find((item) => item.label === option.label)
+        const trapEvidenceRows: PaperAssetEvidenceRowView[] = (row?.trapEvidence ?? []).flatMap(
+          (item, index) => {
+            const evidenceId = `${questionId}-trap-${option.label.toLowerCase()}-${index + 1}`
+            return evidenceIdSet.has(evidenceId)
+              ? [{
+                  evidenceId,
+                  role: 'trap',
+                  paragraphId: item.paragraphId,
+                  quote: item.quote,
+                }]
+              : []
+          },
+        )
+        const trap = row?.status === 'wrong' ? row.trap : undefined
         return {
           label: option.label,
           text: option.text,
           translationZh: row?.optionTranslationZh ?? '',
           status: row?.status ?? 'wrong',
-          trapLabel: row && row.status === 'wrong' && row.trap
-            ? trapLabels[row.trap.primaryType] ?? row.trap.primaryType
+          trapLabel: trap
+            ? trapLabels[trap.primaryType] ?? trap.primaryType
             : null,
-          trapExplanation: row && row.status === 'wrong' && row.trap
+          trapPrimaryType: trap?.primaryType ?? null,
+          trapSecondaryLabel: trap?.secondaryType
+            ? trapLabels[trap.secondaryType] ?? trap.secondaryType
+            : null,
+          trapSubtype: trap && 'subtype' in trap ? formatTrapSubtype(trap.subtype) : null,
+          trapExplanation: row && row.status === 'wrong' && trap
             ? describeTrap(row)
             : null,
+          trapEvidenceRows,
         }
       }),
       locationParaphrases: questionAnalysis.locationParaphrases,
     }
   }
   return out
+}
+
+function formatTrapSubtype(subtype: string): string {
+  const labels: Record<string, string> = {
+    oppositeAction: '动作相反',
+    oppositeAttitude: '态度相反',
+    oppositeTrend: '趋势相反',
+    causeEffectReversal: '因果颠倒',
+    timeOrderReversal: '顺序颠倒',
+    negationReversal: '否定反转',
+    overgeneralization: '以偏概全',
+    overstatement: '范围扩大',
+    understatement: '范围缩小',
+    conditionRemoved: '条件丢失',
+  }
+  return labels[subtype] ?? subtype
 }
 
 function describeTrap(option: OptionAnalysisItem): string {
