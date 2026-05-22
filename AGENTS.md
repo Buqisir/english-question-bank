@@ -61,30 +61,35 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
-- For multi-platform work, remote GitHub `main` and PR heads are the
-  shared source of truth. Codex must fetch and confirm local / remote
-  state before PA, CR, QA, and RM; Kiro and local PA reports are not
-  accepted as fact until their commits or baselines are verified.
+- Default operating model: Codex is the daily PM / DEV / CR-lite / QA /
+  RM agent. The owner is PO and does final product QA, not code review.
+- External high-reasoning agents are reserved for large-cut PA,
+  direction checks, and occasional big CR. Do not route routine small or
+  medium implementation work through external DEV agents unless the
+  owner explicitly asks for that exception.
+- Remote GitHub `main` and PR heads are the shared source of truth.
+  Codex must fetch and confirm local / remote state before PA, CR, QA,
+  and RM. External PA / CR reports are useful input, not truth, until
+  Codex verifies the baseline, diff, and pushed commits.
 - Default flow:
-  - **PA before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic.
-  - **CR after DEV** for any PR that will be merged.
+  - **PM grill before DEV** whenever product behavior is still fuzzy.
+  - **PA before DEV** only for architecture, data contracts, future-facing user-visible flows, migrations, export logic, or other large cuts.
+  - **Codex CR-lite after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Cut tier flows:
   - Small: `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
   - Medium: `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
-  - Large: `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA -> RM -> Cut Note`.
+  - Large: `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> Codex DEV -> Codex CR -> Codex browser QA -> PO QA -> RM -> Cut Note`.
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
 - Docs-only and type-only cuts do not need browser QA.
 - Do not automatically turn `Should Watch` findings into tasks. Only `Must Fix` blocks the current PR; `Follow-up Gate` blocks a named future stage.
 - PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
-- Use role-coded Kiro handshakes such as `/kiro DEV1`, `/kiro PA`, and `/kiro CR`.
-- When giving the PO a prompt to paste into Kiro, put the entire prompt content in fenced code blocks. Do not put explanatory prose between the prompt code blocks.
-- Ask Kiro to follow `.kiro/steering/dev-completion-protocol.md`.
-  Completion reports must be one fenced `text` block, with no prose
-  outside the block, and should follow
-  `docs/agents/dev-completion-report-template.md`.
+- Historical external-agent handoff rules are no longer the default
+  workflow. Only use external DEV prompts when the owner explicitly
+  asks. In that exception, put the entire prompt in fenced code blocks
+  and require `.kiro/steering/dev-completion-protocol.md`.
 - Do not accept raw terminal logs as a completion report. Require short
   verify summaries, exact changed files, browser QA status, forbidden
   scopes, known risks, and PO QA checklist link when applicable.

@@ -7,11 +7,11 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 ## Roles
 
 - **PO**: product owner / final acceptance.
-- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation.
-- **DEV**: implementation agent.
-- **CR**: code reviewer. Reviews the real diff after DEV finishes.
-- **QA**: product / browser / visual acceptance.
-- **RM**: release manager. Merges after approval and syncs `main`.
+- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Usually external / high-reasoning only for large cuts.
+- **DEV**: implementation agent. Codex is the default DEV.
+- **CR**: code reviewer. Codex performs routine CR-lite / CR; external big CR is occasional and reserved for high-risk cuts.
+- **QA**: product / browser / visual acceptance. Codex does first QA; the owner does final PO QA.
+- **RM**: release manager. Codex merges after approval and syncs `main`.
 
 ## Default Rule
 
@@ -72,12 +72,11 @@ Use these to prevent review from expanding forever.
 - Do not downgrade tree-trunk work just because the diff looks small. Data contracts and runtime surface boundaries can be high risk even with few lines.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
+- Default operating model: Codex owns daily PM / DEV / CR-lite / QA / RM. The owner does PO QA, not code review. External high-reasoning agents are used for large PA, direction checks, and occasional big CR only.
 - Default simplification:
   - L0 does not need formal CR unless it makes a decision.
   - L1 uses PA or CR, not both by default.
   - L2 uses PA + CR.
   - L3 adds QA.
   - L4 may add second CR / release checklist.
-- For Kiro prompts, use a short role-coded handshake first, then send the full task after the session is ready. Example role codes: `DEV1`, `DEV2`, `PA`, `CR`, `QA`, `RM`.
-- When Codex gives the PO prompt text to paste into Kiro, the prompt text itself must be delivered only as fenced code blocks. Do not place explanatory prose between the handshake block and the full-task block.
-- Require Kiro completion reports and reviews to be wrapped in exactly one fenced `text` code block, with no prose outside the block, so the PO can copy them back into Codex cleanly.
+- External DEV prompts are exception-only. Use them only when the owner explicitly asks. In that exception, put prompt text in fenced code blocks and require the external agent to report PR URL, commit, exact changed files, verify, browser QA status, and forbidden scopes.

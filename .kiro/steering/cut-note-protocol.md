@@ -105,7 +105,8 @@ Usually yes:
 - any PR that changes PaperSurface, Paper Intelligence harness,
   evidence line, insight, basket, print, import, export, or route flow
 - any multi-agent sequence involving PA -> DEV -> CR -> QA -> RM
-- any large cut workflow involving Codex + local PA + Kiro/cloud DEV
+- any large cut workflow involving Codex plus external high-reasoning
+  PA / big CR
 
 Usually no:
 

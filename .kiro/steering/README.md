@@ -2,7 +2,7 @@
 inclusion: auto
 ---
 
-# Kiro steering index
+# Agent steering index
 
 This folder contains project-specific operating rules for
 `Buqisir/english-question-bank`.
@@ -53,9 +53,14 @@ Hard rule:
   `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
 - Large cuts use:
   `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
-  -> Kiro DEV -> Codex sync + CR -> Codex browser QA -> PO QA
+  -> Codex DEV -> Codex CR -> Codex browser QA -> PO QA
   -> RM -> Cut Note`.
-- Treat GitHub `main` and PR heads as the shared truth. Agent reports
+- Codex is the default PM / DEV / CR-lite / QA / RM agent.
+- The owner is PO and final product QA, not code reviewer.
+- External high-reasoning agents are for large-cut PA, direction checks,
+  and occasional big CR. Do not use external DEV for routine small or
+  medium cuts unless the owner explicitly asks.
+- Treat GitHub `main` and PR heads as the shared truth. External reports
   are not truth until Codex verifies remote state.
 - Stop if mockups do not converge after 2 rounds, or if PA leaves more
   than 3 unresolved PO decisions.
@@ -90,7 +95,8 @@ Hard rule:
 
 File: `dev-completion-protocol.md`
 
-Use for `/kiro DEV` and any implementation task that changes files.
+Use for Codex DEV and, only by explicit owner request, external DEV
+handoffs that change files.
 
 Hard rule:
 

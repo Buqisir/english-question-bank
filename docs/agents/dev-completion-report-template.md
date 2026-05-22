@@ -1,6 +1,7 @@
 # DEV Completion Report Template
 
-Use this template for `/kiro DEV` and other agent implementation reports.
+Use this template for Codex DEV and any explicit external-agent
+implementation report.
 
 Goal: make reports short enough for the PO to read and precise enough for Codex to CR without digging through chat logs.
 
