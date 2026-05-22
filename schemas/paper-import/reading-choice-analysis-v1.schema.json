@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reading-choice-analysis-v1.schema.json",
+  "title": "Reading Choice Analysis V1 Core",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "paperId", "sourceAssetVersion", "targetGroups", "groups", "questions"],
+  "properties": {
+    "schemaVersion": { "const": "reading-choice-analysis-v1" },
+    "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "sourceAssetVersion": { "type": "integer", "minimum": 1 },
+    "targetGroups": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "meta": { "type": "object" },
+    "groups": { "type": "object" },
+    "questions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["skill", "questionFocus", "stemTranslationZh", "optionAnalysis", "locationParaphrases"],
+        "properties": {
+          "skill": { "type": "object" },
+          "questionFocus": { "type": "string" },
+          "stemTranslationZh": { "type": "string" },
+          "optionAnalysis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["label", "optionTranslationZh", "status"],
+              "additionalProperties": true,
+              "properties": {
+                "label": { "type": "string" },
+                "optionTranslationZh": { "type": "string" },
+                "status": { "type": "string", "enum": ["correct", "wrong"] },
+                "evidence": { "type": "array" },
+                "trap": { "type": "object" },
+                "trapEvidence": { "type": "array" }
+              }
+            }
+          },
+          "locationParaphrases": { "type": "array" }
+        }
+      }
+    }
+  }
+}

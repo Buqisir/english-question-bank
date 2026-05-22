@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paper-asset-v1.schema.json",
+  "title": "Paper Asset V1 Core",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paper", "sources", "layoutTree", "content", "answerKey", "analysis"],
+  "properties": {
+    "schemaVersion": { "const": "paper-asset-v1" },
+    "paper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paperId", "title", "subject", "source", "assetVersion", "status"],
+      "properties": {
+        "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "subject": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "assetVersion": { "type": "integer", "minimum": 1 },
+        "status": { "type": "string", "enum": ["draft", "published"] }
+      }
+    },
+    "sources": { "type": "object" },
+    "layoutTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parts"],
+      "properties": {
+        "parts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["partId", "title", "sections"],
+            "additionalProperties": true,
+            "properties": {
+              "partId": { "type": "string" },
+              "title": { "type": "string" },
+              "sections": { "type": "array" }
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blocks", "groups", "questions"],
+      "properties": {
+        "blocks": { "type": "array" },
+        "groups": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["groupId", "groupType", "title", "questionIds"],
+            "properties": {
+              "groupId": { "type": "string" },
+              "groupType": {
+                "type": "string",
+                "enum": ["reading", "cloze", "sevenChoices", "grammarFill", "listening", "writing"]
+              },
+              "title": { "type": "string" },
+              "questionIds": { "type": "array", "items": { "type": "string" } },
+              "passage": { "type": "object" }
+            }
+          }
+        },
+        "questions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["questionId", "questionNo", "groupId", "stem"],
+            "properties": {
+              "questionId": { "type": "string" },
+              "questionNo": { "type": "integer" },
+              "groupId": { "type": "string" },
+              "stem": { "type": "string" },
+              "options": { "type": "array" }
+            }
+          }
+        },
+        "blanks": { "type": "object" },
+        "writingTasks": { "type": "object" }
+      }
+    },
+    "answerKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["answers"],
+      "properties": { "answers": { "type": "object" } }
+    },
+    "analysis": { "type": "object" }
+  }
+}
