@@ -4,7 +4,8 @@
   "sourceAssetVersion": 1,
   "targetGroups": [
     "group-2024-jslk-reading-a",
-    "group-2024-jslk-reading-b"
+    "group-2024-jslk-reading-b",
+    "group-2024-jslk-reading-c"
   ],
   "meta": {
     "generatedBy": "external-ai",
@@ -12,7 +13,7 @@
     "promptVersion": "reading-choice-analysis-v1",
     "reviewStatus": "reviewed",
     "reviewedBy": "Codex",
-    "reviewedAt": "2026-05-21"
+    "reviewedAt": "2026-05-22"
   },
   "groups": {
     "group-2024-jslk-reading-a": {
@@ -77,6 +78,34 @@
             "paragraphId": "para-2024-jslk-reading-b-p5",
             "summary": "鹦鹉常害怕新的家庭物品或陌生人，应从小给予安全的新体验以提高适应性。",
             "function": "进一步提供饲养建议，强调通过多样化经历培养鹦鹉的灵活性和适应能力。"
+          }
+        ]
+      }
+    },
+    "group-2024-jslk-reading-c": {
+      "overview": "文章批判把争论看作打斗或比赛并因此回避争论的观念，主张通过理性交换获得分歧理解和相互尊重。",
+      "discourseStructure": {
+        "summary": "全文先引用 Carnegie 的“避免争论”观点并指出其基于错误理解，再解释人们为何因把争论看作打斗或比赛而回避争论，随后提出理性展开和评估论证的方法，最后重新定义“赢得争论”为理解分歧、共同交流并获得彼此尊重。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jslk-reading-c-p1",
+            "summary": "作者引用 Carnegie 主张避免争论的观点，并指出这种厌恶争论的态度源于对争论的错误理解。",
+            "function": "引出待批判观点，确立全文论点：回避争论错失了争论本身的意义。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-c-p2",
+            "summary": "作者解释人们常把争论看作打斗或比赛，因此认为即使获胜也不会感觉更好。",
+            "function": "分析回避争论的心理来源，为后文重新理解争论铺垫。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-c-p3",
+            "summary": "作者提出通过阐述观点、要求理由、完整说明论证、评估强弱并倾听回应来更好地争论。",
+            "function": "给出理性争论的具体方法，说明争论可以被训练和改善。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-c-p4",
+            "summary": "作者重新定义“赢得争论”：不是击败对手，而是理解分歧、学会交流合作并获得相互尊重。",
+            "function": "收束全文，完成从“争论即输赢对抗”到“争论即理性交流”的价值重构。"
           }
         ]
       }
@@ -715,6 +744,354 @@
           "targetParagraphId": "para-2024-jslk-reading-b-p5",
           "relationType": "paraphrase",
           "note": "正确选项中的饲养鹦鹉对应原文反复出现的家中鸟、你的鸟等表达。"
+        }
+      ]
+    },
+    "q-2024-jslk-028": {
+      "skill": {
+        "primary": "attitude",
+        "secondary": "inference"
+      },
+      "questionFocus": "判断作者对 Carnegie 关于 argument 的理解所持的态度。",
+      "stemTranslationZh": "作者对 Carnegie 关于争论的理解持什么态度？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "批判的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-c-p1",
+              "quote": "it depends on a mistaken view of arguments that causes problems for our personal and social lives",
+              "anchor": "mistaken view"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "支持的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Camegie would be right if arguments were fights,which is how we often think of them.",
+            "sourceHighlight": "if arguments were fights",
+            "optionText": "Supportive.",
+            "optionHighlight": "Supportive",
+            "explanation": "原文只是在“如果争论是打斗”这一条件下说 Carnegie 会是对的，选项把有条件的让步误读成作者支持 Carnegie 的理解。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p2",
+              "quote": "Camegie would be right if arguments were fights,which is how we often think of them.",
+              "anchor": "if arguments were fights"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "宽容的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Tolerant.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不确定的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "it depends on a mistaken view of arguments that causes problems for our personal and social lives",
+            "sourceHighlight": "mistaken view",
+            "optionText": "Uncertain.",
+            "optionHighlight": "Uncertain",
+            "explanation": "作者明确把这种理解称为 mistaken view，并说明它会造成问题，不是不确定态度。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p1",
+              "quote": "it depends on a mistaken view of arguments that causes problems for our personal and social lives",
+              "anchor": "mistaken view"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Carnegie's understanding of argument",
+          "sourceRole": "stem",
+          "targetText": "there is only one way to get the best of an argument -and that is to avoid it",
+          "targetParagraphId": "para-2024-jslk-reading-c-p1",
+          "relationType": "locationCue",
+          "note": "题干中的 Carnegie 对争论的理解，对应第一段中 Carnegie 主张避免争论的引文。"
+        },
+        {
+          "sourceText": "Critical.",
+          "sourceRole": "correctOption",
+          "targetText": "mistaken view of arguments",
+          "targetParagraphId": "para-2024-jslk-reading-c-p1",
+          "relationType": "paraphrase",
+          "note": "作者用 mistaken view 评价该观点，可推断其态度为批判。"
+        }
+      ]
+    },
+    "q-2024-jslk-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "说明许多人避免争论的原因。",
+      "stemTranslationZh": "为什么许多人尽量避免争论？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们缺乏辩论技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They lack debating skills.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "即使赢了，他们也可能感觉不好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-c-p2",
+              "quote": "Even when you win,you end up no better off.",
+              "anchor": "no better off"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-c-p2",
+              "quote": "This kind of thinking explains why so many people try to avoid arguments.",
+              "anchor": "avoid arguments"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们害怕被忽视。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They fear being ignored.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们对自己没有信心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are not confident in themselves.",
+            "explanation": "原文未提及该信息。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "try to avoid arguments",
+          "sourceRole": "stem",
+          "targetText": "This kind of thinking explains why so many people try to avoid arguments.",
+          "targetParagraphId": "para-2024-jslk-reading-c-p2",
+          "relationType": "locationCue",
+          "note": "题干直接对应第二段末句，是定位原因的提示。"
+        },
+        {
+          "sourceText": "They may feel bad even if they win.",
+          "sourceRole": "correctOption",
+          "targetText": "Even when you win,you end up no better off.",
+          "targetParagraphId": "para-2024-jslk-reading-c-p2",
+          "relationType": "paraphrase",
+          "note": "feel bad even if they win 概括了 even when you win,you end up no better off 的意思。"
+        }
+      ]
+    },
+    "q-2024-jslk-030": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "根据上下文判断第三段中 spell out 的含义。",
+      "stemTranslationZh": "第三段中画线短语“spell out”最可能是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "辩护；捍卫。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "ask them to give you a reason for their view and spell out their argument fully",
+            "sourceHighlight": "spell out their argument fully",
+            "optionText": "Defend.",
+            "optionHighlight": "Defend",
+            "explanation": "原文要求对方把论证充分说清楚，不只是为观点辩护。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p3",
+              "quote": "ask them to give you a reason for their view and spell out their argument fully",
+              "anchor": "spell out their argument fully"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "解释；说明。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-c-p3",
+              "quote": "ask them to give you a reason for their view and spell out their argument fully",
+              "anchor": "spell out their argument fully"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "总结；得出结论。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Conclude.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "重复。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "ask them to give you a reason for their view and spell out their argument fully",
+            "sourceHighlight": "fully",
+            "optionText": "Repeat.",
+            "optionHighlight": "Repeat",
+            "explanation": "原文强调 fully 展开论证，不是简单重复观点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p3",
+              "quote": "ask them to give you a reason for their view and spell out their argument fully",
+              "anchor": "fully"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "spell out",
+          "sourceRole": "stem",
+          "targetText": "ask them to give you a reason for their view and spell out their argument fully",
+          "targetParagraphId": "para-2024-jslk-reading-c-p3",
+          "relationType": "locationCue",
+          "note": "题干指定第三段画线短语，定位到含有 spell out 的句子。"
+        },
+        {
+          "sourceText": "Explain.",
+          "sourceRole": "correctOption",
+          "targetText": "spell out their argument fully",
+          "targetParagraphId": "para-2024-jslk-reading-c-p3",
+          "relationType": "paraphrase",
+          "note": "fully 提示此处是把 argument 充分说明、解释清楚。"
+        }
+      ]
+    },
+    "q-2024-jslk-031": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "概括作者认为赢得争论的关键。",
+      "stemTranslationZh": "根据作者的观点，“赢得”争论的关键是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "逻辑感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "a reasoned exchange through which we all gain respect and understanding from each other",
+            "sourceHighlight": "respect and understanding from each other",
+            "optionText": "Sense of logic.",
+            "optionHighlight": "Sense of logic",
+            "explanation": "原文提到 reasoned exchange，但关键不是单方面的逻辑感，而是双方通过理性交换获得尊重和理解。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-c-p4",
+              "quote": "a reasoned exchange through which we all gain respect and understanding from each other",
+              "anchor": "respect and understanding"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有力的支撑证据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Solid supporting evidence.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "得体的礼仪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Proper manners.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "双方的相互理解。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-c-p4",
+              "quote": "we all gain respect and understanding from each other",
+              "anchor": "understanding from each other"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-c-p4",
+              "quote": "learning why they disagree with us and learning to talk and work together with them",
+              "anchor": "talk and work together"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the key to \"winning\" an argument",
+          "sourceRole": "stem",
+          "targetText": "we change the very nature of what it means to“win”an argument",
+          "targetParagraphId": "para-2024-jslk-reading-c-p4",
+          "relationType": "locationCue",
+          "note": "题干中的 winning 对应第四段对 win an argument 含义的重新定义。"
+        },
+        {
+          "sourceText": "Understanding from both sides.",
+          "sourceRole": "correctOption",
+          "targetText": "we all gain respect and understanding from each other",
+          "targetParagraphId": "para-2024-jslk-reading-c-p4",
+          "relationType": "paraphrase",
+          "note": "from both sides 概括了 from each other，强调双方通过争论获得理解。"
         }
       ]
     }
