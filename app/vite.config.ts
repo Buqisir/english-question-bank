@@ -25,6 +25,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': `http://127.0.0.1:${apiPort}`,
+      '/paper-assets': `http://127.0.0.1:${apiPort}`,
     },
   },
 })

@@ -365,6 +365,31 @@ function sendPdf(response, body, fileName, outputPath) {
   })
 }
 
+function sendPaperAssetStatic(response, urlPath) {
+  const relativePath = decodeURIComponent(urlPath.replace(/^\/paper-assets\/?/, ''))
+  if (!relativePath || relativePath.includes('..') || path.isAbsolute(relativePath)) {
+    sendJson(response, 400, { error: 'Invalid paper asset path' })
+    return
+  }
+  const filePath = path.join(paperAssetsDir, relativePath)
+  if (!filePath.startsWith(path.resolve(paperAssetsDir)) || !existsSync(filePath) || statSync(filePath).isDirectory()) {
+    sendJson(response, 404, { error: 'Paper asset file not found' })
+    return
+  }
+  const ext = path.extname(filePath).toLowerCase()
+  const contentType =
+    ext === '.json'
+      ? 'application/json; charset=utf-8'
+      : ext === '.docx'
+        ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        : 'application/octet-stream'
+  response.writeHead(200, {
+    'access-control-allow-origin': '*',
+    'content-type': contentType,
+  })
+  response.end(readFileSync(filePath))
+}
+
 function openDatabase({ readOnly = true } = {}) {
   if (!existsSync(dbPath)) {
     throw new Error(`Database not found at ${dbPath}. Run scripts/init-db.sh first.`)
@@ -10625,6 +10650,11 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || '127.0.0.1'}`)
 
   try {
+    if (request.method === 'GET' && url.pathname.startsWith('/paper-assets/')) {
+      sendPaperAssetStatic(response, url.pathname)
+      return
+    }
+
     if (request.method === 'GET' && url.pathname === '/api/health') {
       sendJson(response, 200, { ok: true, dbPath })
       return
