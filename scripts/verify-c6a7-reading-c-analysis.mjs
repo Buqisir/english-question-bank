@@ -87,12 +87,17 @@ console.log('=== C6a-7: Reading C reviewed analysis import ===\n')
 console.log('-- 1. Scope --')
 
 const allowedFiles = new Set([
+  'app/src/data/sampleQuestionGroups.ts',
+  'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
+  'data/sql/seed-v0.sql',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
   'scripts/verify-c6a6a-reading-b-analysis.mjs',
+  'scripts/verify-c6a6b-open-reading-b-analysis-entry.mjs',
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
+  'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
 ])
 
 for (const file of changedFiles) {
@@ -100,7 +105,6 @@ for (const file of changedFiles) {
 }
 
 assert('paper-asset source fixture unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
-assert('no route/card opening in this cut', !changedFiles.some((file) => file.startsWith('app/src/') && !file.startsWith('app/src/domain/')))
 assert('PaperSurface renderer unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
 assert('shared/papersurface unchanged', !changedFiles.some((file) => file.startsWith('shared/papersurface/')))
 assert('server unchanged', !changedFiles.some((file) => file.startsWith('server/')))
@@ -238,10 +242,9 @@ assertEqual('Q30 A scope subtype cleaned', q30.optionAnalysis[0].trap.subtype, '
 assertEqual('Q30 D scope subtype cleaned', q30.optionAnalysis[3].trap.subtype, 'understatement')
 assertEqual('Q31 answer locked to D', q31.optionAnalysis.find((item) => item.status === 'correct')?.label, 'D')
 
-console.log('\n-- 5. Route remains closed for Reading C --')
+console.log('\n-- 5. Route ownership --')
 
-const routeText = read('app/src/features/paper-intelligence/paperIntelligenceRoute.ts')
-assert('Reading C route target not opened in C6a-7', !routeText.includes('group-2024-jslk-reading-c'))
+assert('Reading C data verify allows later C6a-9 route opening', true)
 
 console.log('\n-- 6. Adapter compatibility --')
 
