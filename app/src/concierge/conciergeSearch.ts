@@ -82,13 +82,95 @@ function normalize(text: string) {
 }
 
 function tokenize(query: string): string[] {
-  // Split on whitespace and Chinese punctuation; keep words >= 2 chars (or any CJK char).
+  // Split on whitespace and Chinese punctuation. Single-letter Latin tokens
+  // are kept for paper labels such as "Reading C", but matching below treats
+  // them as standalone labels so "c" does not hit ordinary words like "Coe".
   const raw = query
     .replace(/[，。、；：！？,.!?;:()（）【】"'《》<>\\/|]/g, ' ')
     .split(/\s+/)
     .map((t) => t.trim())
     .filter(Boolean)
   return raw
+}
+
+type KeywordCandidate = {
+  group: QuestionGroupCard
+  hits: number
+  matchedTokens: string[]
+}
+
+function escapeRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function extractReadingSectionLabel(group: QuestionGroupCard): string | null {
+  const text = [group.section, group.source, group.title].join(' ')
+  const match = text.match(/阅读(?:理解)?\s*([A-D])/i)
+  return match ? match[1].toLowerCase() : null
+}
+
+function buildKeywordHaystack(group: QuestionGroupCard): string {
+  const readingSection = extractReadingSectionLabel(group)
+  const aliases =
+    group.groupType === 'reading'
+      ? [
+          'reading',
+          'reading comprehension',
+          readingSection ? `reading ${readingSection}` : '',
+          readingSection ? `passage ${readingSection}` : '',
+          readingSection ? `阅读 ${readingSection}` : '',
+          readingSection ? `阅读${readingSection}` : '',
+          readingSection ? `阅读理解 ${readingSection}` : '',
+        ]
+      : []
+
+  return [
+    ...KEYWORD_FIELDS.map((field) => String(group[field] ?? '')),
+    ...(group.tags || []),
+    ...(group.topicLabels || []).map((label) => label.label),
+    ...aliases,
+  ]
+    .filter(Boolean)
+    .map(normalize)
+    .join(' ')
+}
+
+function tokenMatchesHaystack(haystack: string, token: string): boolean {
+  if (/^[a-z]$/.test(token)) {
+    return new RegExp(`(^|[^a-z0-9])${escapeRegex(token)}([^a-z0-9]|$)`, 'i').test(
+      haystack,
+    )
+  }
+  return haystack.includes(token)
+}
+
+function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): KeywordCandidate[] {
+  const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
+  if (tokens.length === 0) {
+    return groups.map((group) => ({ group, hits: 0, matchedTokens: [] }))
+  }
+  const scored = groups.map((group) => {
+    const haystack = buildKeywordHaystack(group)
+    let hits = 0
+    const matchedTokens: string[] = []
+    for (const token of tokens) {
+      if (tokenMatchesHaystack(haystack, token)) {
+        hits += 1
+        matchedTokens.push(token)
+      }
+    }
+    return { group, hits, matchedTokens }
+  })
+  return scored
+    .filter((entry) => entry.hits > 0)
+    .sort((a, b) => b.hits - a.hits)
+}
+
+function toSearchHit({ group, matchedTokens }: KeywordCandidate): ConciergeSearchHit {
+  return {
+    group,
+    reason: matchedTokens.length > 0 ? `匹配关键词：${matchedTokens.join('、')}` : '关键词匹配',
+  }
 }
 
 /** Keyword fallback ranking: count hits across known card fields + tags + topicLabels. */
@@ -101,32 +183,24 @@ export function rankByKeywords(
   if (tokens.length === 0) {
     return groups.slice(0, limit).map((group) => ({ group, reason: '近期题组' }))
   }
-  const scored = groups.map((group) => {
-    const haystack = [
-      ...KEYWORD_FIELDS.map((field) => String(group[field] ?? '')),
-      ...(group.tags || []),
-      ...(group.topicLabels || []).map((label) => label.label),
-    ]
-      .map(normalize)
-      .join(' ')
-    let hits = 0
-    const matchedTokens: string[] = []
-    for (const token of tokens) {
-      if (haystack.includes(token)) {
-        hits += 1
-        matchedTokens.push(token)
-      }
-    }
-    return { group, hits, matchedTokens }
-  })
-  return scored
-    .filter((entry) => entry.hits > 0)
-    .sort((a, b) => b.hits - a.hits)
+  return rankKeywordCandidates(groups, query)
     .slice(0, limit)
-    .map(({ group, matchedTokens }) => ({
-      group,
-      reason: matchedTokens.length > 0 ? `匹配关键词：${matchedTokens.join('、')}` : '关键词匹配',
-    }))
+    .map(toSearchHit)
+}
+
+function highConfidenceLocalHits(
+  groups: QuestionGroupCard[],
+  query: string,
+  limit = 12,
+): ConciergeSearchHit[] {
+  const candidates = rankKeywordCandidates(groups, query)
+  const topScore = candidates[0]?.hits ?? 0
+  if (topScore < 2) return []
+
+  return candidates
+    .filter((candidate) => candidate.hits === topScore)
+    .slice(0, limit)
+    .map(toSearchHit)
 }
 
 function hitsFromStewardMatches(
@@ -178,6 +252,19 @@ export async function runConciergeSearch(
   const sentMessage = buildSentMessage(intent, input.pendingQuery)
   const apiKey = (input.apiKey || '').trim()
   const doStewardCall = input.doStewardCall || askQuestionBankSteward
+  const localDirectHits = highConfidenceLocalHits(input.questionGroups, intent)
+
+  if (localDirectHits.length > 0) {
+    return {
+      kind: 'results',
+      hits: localDirectHits,
+      assistantMessage: '已按本地题库精确信息匹配。',
+      query: intent,
+      sentMessage,
+      source: 'fallback',
+      fallbackReason: 'local-direct-match',
+    }
+  }
 
   if (!apiKey) {
     return {

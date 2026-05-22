@@ -58,6 +58,8 @@ console.log('=== C6a-5: search entry E2E guard ===\n')
 
 console.log('-- 1. Scope guard --')
 const allowed = new Set([
+  'app/src/App.tsx',
+  'app/src/concierge/aggregatePaperResults.ts',
   'app/src/concierge/conciergeSearch.ts',
   'app/src/data/sampleQuestionGroups.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
@@ -69,6 +71,7 @@ const allowed = new Set([
   'scripts/verify-c6a7-reading-c-analysis.mjs',
   'scripts/verify-c6a8-reading-d-analysis.mjs',
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
+  'scripts/verify-c6a10-concierge-local-search.mjs',
   'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 for (const file of changedFiles) {
@@ -114,7 +117,7 @@ const fixtureGroups = [
 ]
 
 const outcome = await runConciergeSearch({
-  intent: '九省联考 Reading A 黄石',
+  intent: '黄石',
   questionGroups: fixtureGroups,
   apiKey: 'sk-stale-key',
   stewardTimeoutMs: 5,

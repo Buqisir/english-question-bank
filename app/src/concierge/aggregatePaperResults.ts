@@ -128,6 +128,11 @@ function normalizeSourceSignature(value: unknown): string {
   let text = String(value ?? '')
   // Drop common provenance-noise tokens that appear inconsistently.
   text = text.replace(/扫描版|高清版|word\s*版|pdf\s*版|教师版|学生版|完整版|整理版/gi, ' ')
+  // Passage-level labels should not split one source paper into separate
+  // buckets. "2024 九省联考 阅读 C" and "2024 九省联考 阅读 D" are the same
+  // paper row with different matched groups inside it.
+  text = text.replace(/阅读(?:理解)?\s*[A-G]/gi, ' ')
+  text = text.replace(/reading\s*[A-G]/gi, ' ')
   // Collapse all whitespace (incl. CJK full-width space) to nothing.
   text = text.replace(/[\s\u3000]+/g, '')
   // Drop common punctuation that shows up only in some copies.
