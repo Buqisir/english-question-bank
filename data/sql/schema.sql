@@ -142,6 +142,10 @@ CREATE TABLE IF NOT EXISTS draft_paper_items (
   UNIQUE(draft_paper_id, group_id)
 );
 
+CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
+ON draft_papers(current_marker)
+WHERE current_marker = 1;
+
 CREATE TABLE IF NOT EXISTS import_files (
   id TEXT PRIMARY KEY,
   original_name TEXT NOT NULL,

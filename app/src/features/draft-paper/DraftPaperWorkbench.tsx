@@ -82,6 +82,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [saveError, setSaveError] = useState('')
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
   const [exportError, setExportError] = useState('')
+  const [migrationNotice, setMigrationNotice] = useState('')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
   const titleSaveTimerRef = useRef<number | null>(null)
@@ -95,6 +96,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const loadDraft = useCallback(async () => {
     setLoadStatus('loading')
     setLoadError('')
+    setMigrationNotice('')
     try {
       let next: DraftPaper
       if (draftPaperId) {
@@ -108,6 +110,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             const migration = await migrateAssemblyBasketToDraftPaper(groupIds)
             clearLegacyBasket()
             next = migration.draftPaper
+            if (migration.skippedCount > 0) {
+              setMigrationNotice(`已迁移 ${migration.migratedCount} 个题组到草稿卷；${migration.skippedCount} 个题组因不可打印被跳过。`)
+            }
           } else {
             next = await fetchCurrentDraftPaper(true)
           }
@@ -347,6 +352,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       {draftPaper.items.length === 0 && (
         <p className="draft-empty-export" role="status">请先添加题组，再导出 PDF 或打印。</p>
       )}
+      {migrationNotice && <p className="draft-warning" role="status">{migrationNotice}</p>}
       {exportStatus === 'error' && <p className="draft-error">{exportError}</p>}
       {exportStatus === 'exported' && <p className="draft-success">PDF 已开始下载。</p>}
 

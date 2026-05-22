@@ -1134,6 +1134,19 @@ function ensureDatabaseShape() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now')),
         UNIQUE(draft_paper_id, group_id)
       );
+      UPDATE draft_papers
+      SET current_marker = 0
+      WHERE current_marker = 1
+        AND id NOT IN (
+          SELECT id
+          FROM draft_papers
+          WHERE current_marker = 1
+          ORDER BY updated_at DESC, created_at DESC
+          LIMIT 1
+        );
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
+      ON draft_papers(current_marker)
+      WHERE current_marker = 1;
       CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
       CREATE INDEX IF NOT EXISTS idx_draft_paper_items_draft ON draft_paper_items(draft_paper_id, order_index);
       CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
@@ -11425,12 +11438,11 @@ const server = createServer(async (request, response) => {
       try {
         const id = decodeURIComponent(draftPaperMatch[1])
         const draftPaper = getDraftPaper(db, id)
-        if (!draftPaper) {
-          sendJson(response, 404, { error: 'Draft paper not found' })
-          return
-        }
-        markCurrentDraftPaper(db, id)
-        sendJson(response, 200, { draftPaper: getDraftPaper(db, id) })
+      if (!draftPaper) {
+        sendJson(response, 404, { error: 'Draft paper not found' })
+        return
+      }
+        sendJson(response, 200, { draftPaper })
       } finally {
         db.close()
       }

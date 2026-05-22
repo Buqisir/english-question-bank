@@ -60,8 +60,9 @@ assert('no imported fixture changes', !changedFiles.some((file) => /app\/public\
 assert('print renderer file untouched', !changedFiles.includes('server/print-renderer.mjs'))
 assert('no My Space route files', !changedFiles.some((file) => file.includes('my-space') || file.includes('user-space')))
 
-const allChangedText = changedFiles
+const implementationText = changedFiles
   .filter((file) => !/\.(png|jpg|jpeg|gif|pdf|docx|sqlite)$/.test(file))
+  .filter((file) => /^(app\/src|server\/|data\/sql|scripts\/)/.test(file))
   .map((file) => {
     try {
       return readFileSync(path.join(rootDir, file), 'utf8')
@@ -75,8 +76,8 @@ const appAndServerText = changedFiles
   .map((file) => readFileSync(path.join(rootDir, file), 'utf8'))
   .join('\n')
 
-assert('no personal-space view implementation', !allChangedText.includes(`view=${'my'}-space`))
-assert('no user-space route implementation', !allChangedText.includes(`/${'user'}-space`))
+assert('no personal-space view implementation', !implementationText.includes(`view=${'my'}-space`))
+assert('no user-space route implementation', !implementationText.includes(`/${'user'}-space`))
 const personalSpacePattern = new RegExp(`保存到个人空间|加入个人空间|${'My'} Space|${'my'} space`, 'i')
 const answerVersionPattern = new RegExp(`${'答案'}版|${'解析'}版`)
 const draftUiText = readFileSync(path.join(rootDir, 'app/src/features/draft-paper/DraftPaperWorkbench.tsx'), 'utf8')
@@ -94,6 +95,7 @@ const allowedPrefixes = [
   'app/src/services/draftPapers.ts',
   'app/src/services/questionGroups.ts',
   'data/sql/schema.sql',
+  'docs/cuts/C8-draft-paper-composer/big-cr-report-opus.md',
   'server/api.mjs',
   'scripts/verify-basket-persistence.mjs',
   'scripts/verify-concierge-desk.mjs',

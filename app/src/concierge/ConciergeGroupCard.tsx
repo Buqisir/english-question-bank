@@ -99,7 +99,11 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         : '加入当前草稿卷'
 
   return (
-    <article className="concierge-group-card" aria-label={`${section || groupTypeLabel[group.groupType]} ${passageTitle}`}>
+    <article
+      className="concierge-group-card"
+      data-group-id={group.id}
+      aria-label={`${section || groupTypeLabel[group.groupType]} ${passageTitle}`}
+    >
       <header className="concierge-group-head">
         <div className="concierge-group-head-text">
           {section && <span className="concierge-group-section">{section}</span>}

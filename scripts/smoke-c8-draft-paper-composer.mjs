@@ -178,12 +178,9 @@ async function main() {
     await page.getByPlaceholder(/找一道|正在连接|比如/).fill('分页建议压力测试')
     await page.getByRole('button', { name: '开始取题' }).click()
     await expandFirstPaperIfNeeded(page)
-    const pageBreakCard = page
-      .locator('.concierge-group-card')
-      .filter({ hasText: '分页建议压力测试' })
-      .filter({ hasText: '5 题' })
-      .first()
+    const pageBreakCard = page.locator('[data-group-id="g-c8-smoke-pagebreak"]').first()
     await pageBreakCard.waitFor({ timeout: 10_000 })
+    await pageBreakCard.getByText('5 题').waitFor({ timeout: 10_000 })
     await pageBreakCard.getByRole('button', { name: '加入草稿卷' }).click()
     const updatedPageBreakCard = pageBreakCard
     await updatedPageBreakCard.getByRole('button', { name: '已在草稿卷中' }).waitFor({ timeout: 10_000 })

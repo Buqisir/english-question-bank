@@ -108,9 +108,14 @@
 
 .draft-loading,
 .draft-empty-export,
-.draft-success {
+.draft-success,
+.draft-warning {
   color: #746b60;
   margin: 14px 0 0;
+}
+
+.draft-warning {
+  color: #8a5b22;
 }
 
 .draft-workbench-layout {
