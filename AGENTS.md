@@ -34,6 +34,10 @@ This repo builds the local-first English question bank workbench.
   `.kiro/steering/cut-workflow-protocol.md`: pick small / medium /
   large process by risk, sync first, and avoid turning small fixes into
   process rituals or large cuts into rushed DEV work.
+- Medium / large cuts use repo-routed context, not chat-only context:
+  create or update `docs/cuts/<CUT>/agent-entrypoint.md`, use
+  `docs/cuts/_templates/` when starting a cut, and keep handoff / Cut
+  Note records there when the cut pauses or lands.
 - For PaperSurface specifically, insight should default to a short
   passage map. Dense diagnostics such as vocabulary load, grammar load,
   evidence difficulty, dot/bar systems, long key-chunk lists, or AI
@@ -96,6 +100,8 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Do not accept raw terminal logs as a completion report. Require short
   verify summaries, exact changed files, browser QA status, forbidden
   scopes, known risks, and PO QA checklist link when applicable.
+- Before choosing verify commands, check `scripts/README.md` for the
+  narrowest script that proves the current risk.
 
 ## Agent skills
 
