@@ -63,6 +63,20 @@ async function expandFirstPaperIfNeeded(page) {
   await expandButton.click()
 }
 
+function waitForDraftMutation(page, method) {
+  return page.waitForResponse(
+    (response) =>
+      response.url().includes('/api/draft-papers/') &&
+      response.request().method() === method,
+    { timeout: 10_000 },
+  )
+}
+
+async function assertOkResponse(name, response) {
+  if (response.status() >= 200 && response.status() < 300) return
+  fail(name, await response.text().catch(() => `HTTP ${response.status()}`))
+}
+
 function seedSmokeDatabase() {
   const db = new DatabaseSync(dbPath)
   db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
@@ -164,38 +178,67 @@ async function main() {
     await page.getByPlaceholder(/找一道|正在连接|比如/).fill('分页建议压力测试')
     await page.getByRole('button', { name: '开始取题' }).click()
     await expandFirstPaperIfNeeded(page)
-    const pageBreakCard = page.locator('.concierge-group-card').filter({ hasText: '分页建议压力测试' }).first()
+    const pageBreakCard = page
+      .locator('.concierge-group-card')
+      .filter({ hasText: '分页建议压力测试' })
+      .filter({ hasText: '5 题' })
+      .first()
     await pageBreakCard.waitFor({ timeout: 10_000 })
     await pageBreakCard.getByRole('button', { name: '加入草稿卷' }).click()
     const updatedPageBreakCard = pageBreakCard
     await updatedPageBreakCard.getByRole('button', { name: '已在草稿卷中' }).waitFor({ timeout: 10_000 })
     pass('Search add changes card state to already in draft')
 
-    await page.evaluate(async () => {
+    const secondGroupAdd = await page.evaluate(async () => {
       const response = await fetch('/api/draft-papers/current/items', {
         body: JSON.stringify({ groupId: 'g-c8-smoke-reading' }),
         headers: { 'content-type': 'application/json' },
         method: 'POST',
       })
-      if (!response.ok) throw new Error(await response.text())
+      return { ok: response.ok, status: response.status, body: await response.text() }
     })
+    if (!secondGroupAdd.ok) {
+      fail('Second smoke group should be addable', secondGroupAdd.body || `HTTP ${secondGroupAdd.status}`)
+    }
+    const secondGroupDraft = JSON.parse(secondGroupAdd.body)
+    if (secondGroupDraft.draftPaper.items.length < 2) {
+      fail('Second smoke group should appear in draft API response', secondGroupAdd.body)
+    }
     await updatedPageBreakCard.getByRole('button', { name: '已在草稿卷中' }).click()
     await page.waitForURL(/view=draft-paper/)
     await page.locator('.draft-a4-sheet iframe').waitFor()
+    await page.waitForFunction(() => document.querySelectorAll('.draft-outline-item').length >= 2)
     pass('Already-added click opens draft-paper route with A4 preview')
 
+    const reorderSaved = waitForDraftMutation(page, 'PATCH')
     await page.getByRole('button', { name: '下移' }).first().click()
-    await page.getByRole('button', { name: '删除题组' }).first().click()
-    await page.getByRole('button', { name: /撤销/ }).click()
-    pass('Reorder and delete/undo controls work')
+    await assertOkResponse('Reorder mutation should succeed', await reorderSaved)
+    pass('Reorder control works and auto-saves')
 
-    await page.getByRole('button', { name: /前置分页/ }).first().click()
-    await page.getByText('分页').first().waitFor()
-    pass('Manual page break can be applied before a group')
+    const firstOutlineItem = page.locator('.draft-outline-item').first()
+    const firstItemPageBreakButtons = await firstOutlineItem.getByRole('button', { name: /前置分页/ }).count()
+    if (firstItemPageBreakButtons > 0) {
+      fail('First draft group must not expose a leading page-break control')
+    }
+    pass('First draft group cannot create a leading blank page')
 
     const suggestion = page.getByText(/建议分页|分页建议|题量和选项较多/).first()
     await suggestion.waitFor({ timeout: 10_000 })
     pass('Server-side page break suggestion appears')
+
+    const pageBreakSaved = waitForDraftMutation(page, 'PATCH')
+    await page.getByRole('button', { name: /前置分页/ }).first().click()
+    await assertOkResponse('Page-break mutation should succeed', await pageBreakSaved)
+    await page.getByText('分页').first().waitFor()
+    pass('Manual page break can be applied before a group')
+
+    const deleteSaved = waitForDraftMutation(page, 'DELETE')
+    await page.getByRole('button', { name: '删除题组' }).first().click()
+    await assertOkResponse('Delete mutation should succeed', await deleteSaved)
+    const restoreSaved = waitForDraftMutation(page, 'POST')
+    await page.getByRole('button', { name: /撤销/ }).click()
+    await assertOkResponse('Restore mutation should succeed', await restoreSaved)
+    pass('Delete/undo controls work')
 
     const downloadPromise = page.waitForEvent('download', { timeout: 30_000 })
     await page.locator('.draft-export-menu summary').click()

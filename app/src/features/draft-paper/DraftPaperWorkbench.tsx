@@ -388,42 +388,47 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           )}
 
           <div className="draft-outline-list">
-            {draftPaper.items.map((item, index) => (
-              <article
-                className={`draft-outline-item${item.pageBreakBefore ? ' has-break' : ''}`}
-                data-draft-group-id={item.groupId}
-                draggable
-                key={item.id}
-                onDragStart={() => setDraggedItemId(item.id)}
-                onDragOver={(event) => event.preventDefault()}
-                onDrop={() => handleDrop(item.id)}
-              >
-                {item.pageBreakBefore && <div className="draft-break-marker">分页</div>}
-                <div className="draft-outline-item-main">
-                  <GripVertical size={15} aria-hidden="true" />
-                  <div>
-                    <strong>{index + 1}. {item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId}</strong>
-                    <span>{groupTypeLabel[item.questionGroup?.groupType || 'other']} · {item.questionGroup?.questionCount || 0} 题</span>
-                    <em>{compactSource(item)}</em>
-                    {!item.printReady && <small>{item.printUnavailableReason}</small>}
+            {draftPaper.items.map((item, index) => {
+              const canPageBreakBefore = index > 0
+              return (
+                <article
+                  className={`draft-outline-item${canPageBreakBefore && item.pageBreakBefore ? ' has-break' : ''}`}
+                  data-draft-group-id={item.groupId}
+                  draggable
+                  key={item.id}
+                  onDragStart={() => setDraggedItemId(item.id)}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDrop={() => handleDrop(item.id)}
+                >
+                  {canPageBreakBefore && item.pageBreakBefore && <div className="draft-break-marker">分页</div>}
+                  <div className="draft-outline-item-main">
+                    <GripVertical size={15} aria-hidden="true" />
+                    <div>
+                      <strong>{index + 1}. {item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId}</strong>
+                      <span>{groupTypeLabel[item.questionGroup?.groupType || 'other']} · {item.questionGroup?.questionCount || 0} 题</span>
+                      <em>{compactSource(item)}</em>
+                      {!item.printReady && <small>{item.printUnavailableReason}</small>}
+                    </div>
                   </div>
-                </div>
-                <div className="draft-outline-actions">
-                  <button type="button" onClick={() => moveItem(item.id, -1)} aria-label="上移">
-                    <ArrowUp size={14} />
-                  </button>
-                  <button type="button" onClick={() => moveItem(item.id, 1)} aria-label="下移">
-                    <ArrowDown size={14} />
-                  </button>
-                  <button type="button" onClick={() => togglePageBreak(item, !item.pageBreakBefore)}>
-                    {item.pageBreakBefore ? '取消分页' : '前置分页'}
-                  </button>
-                  <button type="button" onClick={() => deleteItem(item)} aria-label="删除题组">
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              </article>
-            ))}
+                  <div className="draft-outline-actions">
+                    <button type="button" onClick={() => moveItem(item.id, -1)} aria-label="上移">
+                      <ArrowUp size={14} />
+                    </button>
+                    <button type="button" onClick={() => moveItem(item.id, 1)} aria-label="下移">
+                      <ArrowDown size={14} />
+                    </button>
+                    {canPageBreakBefore && (
+                      <button type="button" onClick={() => togglePageBreak(item, !item.pageBreakBefore)}>
+                        {item.pageBreakBefore ? '取消分页' : '前置分页'}
+                      </button>
+                    )}
+                    <button type="button" onClick={() => deleteItem(item)} aria-label="删除题组">
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </article>
+              )
+            })}
             {draftPaper.items.length === 0 && <p className="draft-outline-empty">从搜索结果添加题组。</p>}
           </div>
         </aside>

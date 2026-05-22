@@ -431,9 +431,9 @@ function buildDraftPaperBlocks(items) {
   const blocks = []
   let previousType = ''
   let sectionIndex = 0
-  for (const item of items) {
+  for (const [index, item] of items.entries()) {
     const groupType = item.questionGroup?.groupType || item.groupType || ''
-    if (item.pageBreakBefore) blocks.push({ type: 'page_break' })
+    if (index > 0 && item.pageBreakBefore) blocks.push({ type: 'page_break' })
     if (groupType !== previousType) {
       sectionIndex += 1
       blocks.push({
@@ -514,7 +514,7 @@ function estimateEnglishWords(text) {
 function buildPageBreakSuggestions(items) {
   const suggestions = []
   let previousEstimate = 0
-  for (const item of items) {
+  for (const [index, item] of items.entries()) {
     const detail = getQuestionGroupDetail(item.groupId)
     if (!detail) continue
     const materialWords = estimateEnglishWords(`${detail.passage.materialText || ''}\n${detail.passage.summary || ''}`)
@@ -528,7 +528,7 @@ function buildPageBreakSuggestions(items) {
     } else if (previousEstimate > 0 && estimate > 700 && previousEstimate + estimate > 1000) {
       reason = '预计会超过当前 A4 页面 70%'
     }
-    if (reason && !item.pageBreakBefore) {
+    if (index > 0 && reason && !item.pageBreakBefore) {
       suggestions.push({ itemId: item.id, groupId: item.groupId, reason })
     }
     previousEstimate = estimate
