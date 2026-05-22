@@ -163,6 +163,75 @@ Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
 -> RM -> Cut Note
 ```
 
+## 2.5 Size gates and cut records
+
+These gates exist to keep reviewable units reviewable. They are not a
+reason to add ceremony to small fixes.
+
+### Single-PR size gate
+
+Target limits for one PR:
+
+- at most 3,500 changed lines
+- at most 15 runtime files
+
+Runtime files are application, server, schema, script, and migration
+files. Docs, prompts, cut notes, and review artifacts do not count as
+runtime files, but they still count toward reviewer attention.
+
+If a PR exceeds either target, the cut must either:
+
+- split into smaller PRs with explicit merge order, or
+- record a PA / PM-approved exception in the cut entrypoint and PR
+  body, including rollback boundary and verification evidence.
+
+Do not rely on "one goal" to mean "one PR." A goal may contain multiple
+ordered PRs.
+
+### Cut entrypoint and handoff
+
+Medium and large cuts must have a stable routing file before external
+PA / CR or long-running DEV begins:
+
+```text
+docs/cuts/<CUT>/agent-entrypoint.md
+```
+
+The entrypoint lists the cut id, current stage, required reading, output
+path, allowed / forbidden scope, and the next expected artifact. Chat
+messages should route agents to this file; decisions belong in repo
+files, not only in chat.
+
+When a cut pauses, changes owner, or crosses a context boundary, write:
+
+```text
+docs/cuts/<CUT>/handoff.md
+```
+
+The handoff records current truth, remaining gates, known risks, and the
+next concrete action.
+
+Use the templates in `docs/cuts/_templates/`.
+
+### Cut Note gate
+
+Large cuts must have a Cut Note before RM merge. Medium cuts need one
+when they change a recurring product rule, expose a repeated bug
+pattern, or leave follow-up risk.
+
+Minimum Cut Note fields:
+
+- what shipped
+- what was cut, moved, or deliberately not done
+- wrong assumptions discovered
+- verify and browser QA evidence
+- follow-up gates / watch items
+- start date, merge date, PA rounds, Big CR rounds, Must Fix count
+
+Should Watch items from PA / CR must either be copied into the cut note
+or linked to the relevant ledger. Do not let watch items live only in
+chat history.
+
 ## 3. Multi-platform source of truth
 
 The remote GitHub `main` branch and the PR head are the shared truth.
