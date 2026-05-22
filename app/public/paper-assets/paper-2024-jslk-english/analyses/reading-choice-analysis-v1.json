@@ -5,7 +5,8 @@
   "targetGroups": [
     "group-2024-jslk-reading-a",
     "group-2024-jslk-reading-b",
-    "group-2024-jslk-reading-c"
+    "group-2024-jslk-reading-c",
+    "group-2024-jslk-reading-d"
   ],
   "meta": {
     "generatedBy": "external-ai",
@@ -106,6 +107,39 @@
             "paragraphId": "para-2024-jslk-reading-c-p4",
             "summary": "作者重新定义“赢得争论”：不是击败对手，而是理解分歧、学会交流合作并获得相互尊重。",
             "function": "收束全文，完成从“争论即输赢对抗”到“争论即理性交流”的价值重构。"
+          }
+        ]
+      }
+    },
+    "group-2024-jslk-reading-d": {
+      "overview": "本文围绕幼儿期友谊与社会性发展展开，说明幼儿会用模仿等成人看来不典型的方式表达喜欢，也会在玩耍中出现抢玩具、不分享等行为；作者进一步建议父母通过设定规则、解释原因、引导共情、鼓励语言表达并合理安排玩耍时间，帮助孩子学习健康的社会互动。",
+      "discourseStructure": {
+        "summary": "文章先指出幼儿期友谊的重要性，再解释幼儿表达喜欢的特殊方式，接着说明不愉快行为仍是学习社会规则的正常过程，最后给出父母可采用的具体引导方法。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jslk-reading-d-p1",
+            "summary": "幼儿期是发展友谊和积极关系的重要阶段，共同玩耍能帮助孩子练习亲社会行为。",
+            "function": "引出主题，说明幼儿友谊和早期社会关系发展的价值。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-d-p2",
+            "summary": "幼儿社交发展受性格影响，他们表达喜欢的方式与成人理解的友谊表达不同，常通过模仿朋友行为来表示喜欢。",
+            "function": "解释幼儿表达友好和喜欢的特殊表现，为后文讨论行为引导作铺垫。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-d-p3",
+            "summary": "幼儿表达喜欢时也可能伴随抢玩具、不分享、发号施令等不愉快行为，但这些是学习社会规则的正常且必要过程。",
+            "function": "指出幼儿友谊中的问题行为并提出父母应主动设限和说明规则。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-d-p4",
+            "summary": "父母可以通过提问、建议和表扬来帮助孩子理解同情、解决问题并表现同理心。",
+            "function": "用具体话语示例展示父母如何引导孩子进行积极的社会互动。"
+          },
+          {
+            "paragraphId": "para-2024-jslk-reading-d-p5",
+            "summary": "父母还应鼓励孩子用语言而非拳头表达感受，并考虑孩子性格和身体状态对玩耍的影响。",
+            "function": "补充促进健康社交互动的其他实用建议，收束全文。"
           }
         ]
       }
@@ -1092,6 +1126,336 @@
           "targetParagraphId": "para-2024-jslk-reading-c-p4",
           "relationType": "paraphrase",
           "note": "from both sides 概括了 from each other，强调双方通过争论获得理解。"
+        }
+      ]
+    },
+    "q-2024-jslk-032": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查考生能否根据第2段研究结论判断幼儿模仿玩伴行为所表达的含义。",
+      "stemTranslationZh": "当幼儿模仿玩伴的行为时，这表明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们对表演感兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are interested in acting.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们在陌生人面前害羞。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "secondaryType": "unsupportedClaim",
+            "sourceText": "shy",
+            "optionText": "shy",
+            "matchType": "exact",
+            "relationNote": "利用原文中的 shy 误导；原文中 shy 说明部分幼儿的性格，并不表示模仿玩伴行为的含义，也没有提到 strangers。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p2",
+              "quote": "Some toddlers are very social,but others are shy.",
+              "anchor": "shy"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们喜欢自己的玩伴。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-d-p2",
+              "quote": "a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior",
+              "anchor": "copying a friend’s behavior"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们厌倦了玩游戏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are tired of playing games.",
+            "explanation": "原文未提及该信息。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "copy their playmates' behavior",
+          "sourceRole": "stem",
+          "targetText": "copying a friend’s behavior",
+          "targetParagraphId": "para-2024-jslk-reading-d-p2",
+          "relationType": "paraphrase",
+          "note": "题干中的 playmates' behavior 对应原文中的 friend’s behavior，copy 对应 copying。"
+        },
+        {
+          "sourceText": "fond of their playmates",
+          "sourceRole": "correctOption",
+          "targetText": "a toddler’s way of saying “I like you”",
+          "targetParagraphId": "para-2024-jslk-reading-d-p2",
+          "relationType": "paraphrase",
+          "note": "正确选项把原文的 “I like you” 概括为喜欢玩伴。"
+        }
+      ]
+    },
+    "q-2024-jslk-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查考生能否定位第3段中作者对父母的建议，并概括为帮助孩子理解社会规则。",
+      "stemTranslationZh": "作者建议父母为孩子做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为他们设计游戏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Design games for them.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为他们寻找合适的玩伴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Find them suitable playmates.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "和他们一起玩。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "secondaryType": "entityMismatch",
+            "sourceText": "Playing together",
+            "optionText": "Play together",
+            "matchType": "wordFamily",
+            "relationNote": "playing/play 属于同一词族；原文指孩子之间一起玩能练习社交行为，并非建议父母和孩子一起玩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p1",
+              "quote": "Playing together also helps these kids practice social behaviors,such as kindness,sharing,and cooperation.",
+              "anchor": "Playing together"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "帮助他们理解社会规则。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-d-p3",
+              "quote": "Through play experiences,toddlers learn social rules.",
+              "anchor": "learn social rules"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-d-p3",
+              "quote": "When you establish these guidelines,explain the reasons behind them.",
+              "anchor": "explain the reasons"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What does the author suggest parents do for their kids?",
+          "sourceRole": "stem",
+          "targetText": "take an active role in your toddler’s social encounters",
+          "targetParagraphId": "para-2024-jslk-reading-d-p3",
+          "relationType": "locationCue",
+          "note": "题干问父母该做什么，对应原文直接给出的 take an active role。"
+        },
+        {
+          "sourceText": "Help them understand social rules",
+          "sourceRole": "correctOption",
+          "targetText": "toddlers learn social rules",
+          "targetParagraphId": "para-2024-jslk-reading-d-p3",
+          "relationType": "paraphrase",
+          "note": "正确选项的 understand social rules 概括原文的 learn social rules 以及解释规则原因。"
+        }
+      ]
+    },
+    "q-2024-jslk-034": {
+      "skill": {
+        "primary": "structure"
+      },
+      "questionFocus": "考查考生能否判断第4段引号内话语在段落中的修辞和结构功能。",
+      "stemTranslationZh": "第4段中引号内话语的作用是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "举例。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-d-p4",
+              "quote": "Ben is crying",
+              "anchor": "Ben is crying"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-d-p4",
+              "quote": "Maybe he would feel better if you let him play the ball.",
+              "anchor": "Maybe he would feel better"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "解释概念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Explaining concepts.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "提供证据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Providing evidence.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作比较。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Making comparisons.",
+            "explanation": "原文未提及该信息。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "quoted statements in paragraph 4",
+          "sourceRole": "stem",
+          "targetText": "“Ben is crying.What’s making him so sad?”",
+          "targetParagraphId": "para-2024-jslk-reading-d-p4",
+          "relationType": "locationCue",
+          "note": "题干中的 quoted statements 指向第4段括号中的具体引语。"
+        },
+        {
+          "sourceText": "Giving examples",
+          "sourceRole": "correctOption",
+          "targetText": "“Maybe he would feel better if you let him play the ball.”",
+          "targetParagraphId": "para-2024-jslk-reading-d-p4",
+          "relationType": "locationCue",
+          "note": "正确选项的举例功能对应段中给出的具体引导话语示例。"
+        }
+      ]
+    },
+    "q-2024-jslk-035": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查考生能否概括全文主题，选出能覆盖幼儿如何发展友谊、表达喜欢并学习健康互动的标题。",
+      "stemTranslationZh": "下列哪一项是本文的最佳标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "孩子如何适应变化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How Children Adapt to Changes.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "如何成为孩子的榜样。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How to Be a Role Model for Children.",
+            "explanation": "原文未提及该信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "你的宝宝如何学会爱。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jslk-reading-d-p1",
+              "quote": "toddlerhood(幼儿期) is an important time for friendship.",
+              "anchor": "friendship"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2024-jslk-reading-d-p2",
+              "quote": "a toddler’s way of saying “I like you” during play",
+              "anchor": "I like you"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如何与你的孩子沟通。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Another way to encourage healthy social interaction is by encouraging kids to use words -not fists -to express how they feel.",
+            "sourceHighlight": "use words -not fists -to express how they feel",
+            "optionText": "How to Communicate with Your Kid.",
+            "optionHighlight": "Communicate",
+            "explanation": "原文确实提到鼓励孩子用语言表达感受，但这只是健康社交互动建议之一，选项把全文主题缩小为亲子沟通。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jslk-reading-d-p5",
+              "quote": "Another way to encourage healthy social interaction is by encouraging kids to use words -not fists -to express how they feel.",
+              "anchor": "use words"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "best title",
+          "sourceRole": "stem",
+          "targetText": "toddlerhood(幼儿期) is an important time for friendship",
+          "targetParagraphId": "para-2024-jslk-reading-d-p1",
+          "relationType": "locationCue",
+          "note": "标题题需要抓住全文主题，首段点明幼儿期与友谊发展的关系。"
+        },
+        {
+          "sourceText": "learns to love",
+          "sourceRole": "correctOption",
+          "targetText": "learn to form positive relationships",
+          "targetParagraphId": "para-2024-jslk-reading-d-p1",
+          "relationType": "paraphrase",
+          "note": "正确标题中的 learns to love 概括原文的 learn to form positive relationships。"
         }
       ]
     }
