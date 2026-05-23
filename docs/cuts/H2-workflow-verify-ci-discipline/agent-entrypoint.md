@@ -1,7 +1,7 @@
 # H2 Agent Entrypoint
 
 Cut: H2 Workflow / Verify / CI Discipline
-Stage: Goal ready. Implementation not started.
+Stage: H2-A implemented; H2-B verify / CI discipline next
 Owner: Codex by default
 Date: 2026-05-23
 
