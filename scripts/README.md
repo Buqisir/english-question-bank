@@ -63,7 +63,7 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 | `verify-basket-persistence.mjs` | Basket persistence | yes |
 | `verify-paper-draft.mjs` | Draft paper model / behavior | yes |
 | `verify-concierge-desk.mjs` | Concierge desk behavior used by draft entry points | yes |
-| `verify-c8-draft-paper-contracts.mjs` | C8 PR A added-file/API contract; cut-specific | no |
+| `verify-c8-draft-paper-contracts.mjs` | C8 draft-paper API/search/workbench contract | yes |
 | `verify-c8-my-space-contracts.mjs` | C8 PR B My Space storage/API/UI contract; cut-specific | no |
 | `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model | yes |
 | `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |

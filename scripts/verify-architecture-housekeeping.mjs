@@ -46,16 +46,16 @@ assert('tokens define spacing scale', tokensCss.includes('--eqb-space-1') && tok
 
 const verifyCi = read('scripts/verify-ci.mjs')
 assert('verify-ci keeps C7 import contracts in stable suite', verifyCi.includes('verify-c7-paper-import-contracts.mjs'))
+assert('verify-ci keeps C8 draft paper contracts in stable suite', verifyCi.includes('verify-c8-draft-paper-contracts.mjs'))
 assert('verify-ci keeps draft render contract in stable suite', verifyCi.includes('verify-c8-draft-paper-render-model.mjs'))
 assert('verify-ci excludes C8 forbidden-scope cut script', !verifyCi.includes('verify-c8-forbidden-scope.mjs'))
-assert('verify-ci excludes C8 added-file contract script', !verifyCi.includes('verify-c8-draft-paper-contracts.mjs'))
 assert('verify-ci excludes host interaction cut forbidden-scope script', !verifyCi.includes('verify-paper-surface-host-interaction.mjs'))
 
 const scriptsReadme = read('scripts/README.md')
 assert('scripts README documents stable CI entrypoint', scriptsReadme.includes('Stable CI entrypoint'))
 assert('scripts README documents workflow-scope install constraint', scriptsReadme.includes('requires a token with workflow scope'))
 assert('scripts README marks host interaction as not CI', scriptsReadme.includes('Host interaction reducer / state rules; includes cut-specific forbidden-scope checks | no'))
-assert('scripts README marks C8 added-file contract as not CI', scriptsReadme.includes('C8 PR A added-file/API contract; cut-specific | no'))
+assert('scripts README marks C8 draft paper contracts as CI', scriptsReadme.includes('C8 draft-paper API/search/workbench contract | yes'))
 
 const codeStyle = read('docs/code-style.md')
 assert('code-style documents file suffix rules', codeStyle.includes('Server runtime code uses `.mjs`'))
