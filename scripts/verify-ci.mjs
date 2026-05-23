@@ -21,6 +21,7 @@ const scripts = [
   'scripts/verify-h1-router-skeleton.mjs',
   'scripts/verify-h1c-paper-import-routes.mjs',
   'scripts/verify-h1d-analysis-availability.mjs',
+  'scripts/verify-h1e-export-routes.mjs',
 ]
 
 function run(command, args, label, options = {}) {

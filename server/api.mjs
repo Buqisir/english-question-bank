@@ -20,6 +20,7 @@ import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
 import { createDraftPaperRoutes } from './draft-paper/draftPaperRoutes.mjs'
 import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
+import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
@@ -48,8 +49,13 @@ const serverContext = {
   userSpaceFilesDir,
   openDatabase,
   readJsonBody,
+  sendDocx,
   sendPdf,
   sendJson,
+  exportDocx,
+  exportPdf,
+  exportPrintHtml,
+  exportPrintPdf,
   getPaperSurfaceAnalysisAvailabilityByGroupId,
   invalidatePaperSurfaceAnalysisAvailability,
 }
@@ -376,6 +382,7 @@ const serverRoutes = [
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createPaperImportRoutes(),
+  ...createExportRoutes(),
 ]
 
 function getDraftSearchContext(db) {
@@ -11286,48 +11293,6 @@ const server = createServer(async (request, response) => {
         return
       }
       sendJson(response, 200, { parse })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/exports/docx') {
-      const input = await readJsonBody(request)
-      const result = exportDocx(input)
-      sendDocx(response, result.body, result.fileName, result.outputPath)
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/exports/pdf') {
-      const input = await readJsonBody(request)
-      const result = exportPdf(input)
-      sendPdf(response, result.body, result.fileName, result.outputPath)
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/exports/print-html') {
-      const input = await readJsonBody(request)
-      const result = exportPrintHtml(input)
-      response.writeHead(200, {
-        'access-control-allow-origin': 'http://127.0.0.1:5173',
-        'content-type': 'text/html; charset=utf-8',
-        'x-file-name': encodeURIComponent(result.fileName),
-      })
-      response.end(result.body)
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/exports/print-pdf') {
-      try {
-        const input = await readJsonBody(request)
-        const result = exportPrintPdf(input)
-        sendPdf(response, result.body, result.fileName, result.outputPath)
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error)
-        if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
-          sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
-        } else {
-          sendJson(response, 500, { error: message })
-        }
-      }
       return
     }
 
