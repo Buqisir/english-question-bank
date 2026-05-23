@@ -1,14 +1,15 @@
 # H2 Agent Entrypoint
 
 Cut: H2 Workflow / Verify / CI Discipline
-Stage: H2-B implemented; H2-C closeout proof next
+Stage: Closed. Do not add H2-D.
 Owner: Codex by default
 Date: 2026-05-23
 
 ## Current Objective
 
-Make the repo's workflow, verify, and CI discipline enforceable from files.
-This is a process / verification cut, not a product-feature cut.
+H2 is closed. It made the repo's workflow, verify, and CI discipline
+enforceable from files. Future housekeeping must route to H3, H4, H5, or a new
+named cut instead of extending H2.
 
 ## Required Reading
 
@@ -28,6 +29,10 @@ This is a process / verification cut, not a product-feature cut.
 - Base branch: `main`
 - Current goal artifact:
   `docs/cuts/H2-workflow-verify-ci-discipline/goal-h2-workflow-verify-ci.md`
+- Cut Note:
+  `docs/cuts/H2-workflow-verify-ci-discipline/cut-note.md`
+- Handoff:
+  `docs/cuts/H2-workflow-verify-ci-discipline/handoff.md`
 - H1 closeout:
   `docs/cuts/H1-architecture-housekeeping/cut-note.md`
 
@@ -54,18 +59,9 @@ This is a process / verification cut, not a product-feature cut.
 
 ## Output Required
 
-For each H2 phase, write the next material artifact into:
-
-```text
-docs/cuts/H2-workflow-verify-ci-discipline/
-```
-
-Examples:
-
-- `dev-notes-h2-a.md`
-- `cr-lite-h2-a.md`
-- `handoff.md`
-- `cut-note.md`
+No further H2 implementation artifact is expected. If new workflow / verify /
+CI work is needed, start a new named cut or explicitly reopen H2 with PO
+approval and a fresh entrypoint update.
 
 Repo-file handoff rule:
 
