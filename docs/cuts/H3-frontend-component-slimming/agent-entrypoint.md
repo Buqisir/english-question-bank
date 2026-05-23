@@ -1,14 +1,18 @@
 # H3 Agent Entrypoint
 
 Cut: H3 Frontend Component Slimming
-Stage: Goal ready. Implementation not started.
+Stage: Closed. Do not start new H3 implementation work.
 Owner: Codex by default
-Date: 2026-05-23
+Date: 2026-05-24
 
 ## Current Objective
 
-Slim large frontend workbench / harness files by extracting deeper
-feature-local modules with small interfaces, while preserving behavior exactly.
+H3 is closed. Read `cut-note.md` and `handoff.md` for the completed slices and
+follow-up routing.
+
+The completed objective was to slim large frontend workbench / harness files by
+extracting deeper feature-local modules with small interfaces, while preserving
+behavior exactly.
 
 ## Required Reading
 
@@ -31,7 +35,7 @@ feature-local modules with small interfaces, while preserving behavior exactly.
 
 ## Recommended First Slice
 
-Start with H3-A:
+Historical. H3 started with H3-A:
 
 ```text
 Draft Paper Preview / Export Locality
@@ -67,7 +71,7 @@ Reason:
 
 ## Output Required
 
-For each H3 phase, write material artifacts into:
+Historical output path:
 
 ```text
 docs/cuts/H3-frontend-component-slimming/
@@ -79,6 +83,8 @@ Examples:
 - `cr-lite-h3-a.md`
 - `handoff.md`
 - `cut-note.md`
+
+Do not add new H3 implementation phases. Start a new cut for follow-up work.
 
 Repo-file handoff rule:
 
