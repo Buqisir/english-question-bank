@@ -9,6 +9,10 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 `docs/ci/verify-workflow-template.yml`; installing it under
 `.github/workflows/verify.yml` requires a token with workflow scope.
 
+Current install state: the workflow is not installed under `.github/workflows/`
+because the available GitHub token has `repo` scope but not `workflow` scope.
+See `docs/ci/verify-workflow-install.md`.
+
 ## Stable CI entrypoint
 
 | Script | Scope | Runs in CI? |
@@ -37,10 +41,10 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 | `verify-paper-surface-module-v1.mjs` | Shared PaperSurface module contract; includes historical forbidden-scope checks | no |
 | `verify-paper-surface-host-interaction.mjs` | Host interaction reducer / state rules; includes cut-specific forbidden-scope checks | no |
 | `verify-paper-surface-mjs-declaration-parity.mjs` | `.mjs` declaration parity | yes |
-| `verify-paper-intelligence-paper-surface-harness.mjs` | Paper Intelligence harness contract |
-| `verify-paper-intelligence-paper-surface-evidence.mjs` | Evidence-line behavior |
-| `verify-paper-intelligence-paper-surface-insight.mjs` | Insight panel behavior |
-| `verify-paper-intelligence-route-integration.mjs` | Paper Intelligence route integration |
+| `verify-paper-intelligence-paper-surface-harness.mjs` | Paper Intelligence harness contract | no |
+| `verify-paper-intelligence-paper-surface-evidence.mjs` | Evidence-line behavior | no |
+| `verify-paper-intelligence-paper-surface-insight.mjs` | Insight panel behavior | no |
+| `verify-paper-intelligence-route-integration.mjs` | Paper Intelligence route integration | no |
 
 ## C5 / C6 reading-analysis cuts
 
@@ -73,13 +77,13 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 | `verify-c8-my-space-contracts.mjs` | C8 PR B My Space storage/API/UI contract; cut-specific | no |
 | `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model | yes |
 | `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |
-| `verify-paper-blocks-numbering.mjs` | Paper block numbering |
-| `verify-paper-layout-roundtrip.mjs` | Layout model roundtrip |
-| `verify-paper-export-flow.mjs` | Export flow |
-| `verify-paper-export-payload.mjs` | Export payload |
-| `verify-exam-export.mjs` | Exam export |
-| `verify-print-renderer.mjs` | Print renderer |
-| `verify-print-pdf-export-flow.mjs` | Print PDF export flow |
+| `verify-paper-blocks-numbering.mjs` | Paper block numbering | no |
+| `verify-paper-layout-roundtrip.mjs` | Layout model roundtrip | no |
+| `verify-paper-export-flow.mjs` | Export flow | no |
+| `verify-paper-export-payload.mjs` | Export payload | no |
+| `verify-exam-export.mjs` | Exam export | no |
+| `verify-print-renderer.mjs` | Print renderer | no |
+| `verify-print-pdf-export-flow.mjs` | Print PDF export flow | no |
 
 ## Concierge and reading-analysis legacy
 
