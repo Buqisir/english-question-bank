@@ -71,6 +71,7 @@ assert('preview injects screen-only A4 dimensions', workbench.includes('buildA4P
 assert('preview builds paginated long-scroll A4 pages', workbench.includes('paginateA4Preview') && workbench.includes('preview-page') && workbench.includes("'第 ' + pageNumber + ' 页'"))
 assert('preview iframe does not add a second mat color', workbench.includes('html {\n    background: transparent') && workbench.includes('body {\n    background: transparent') && workbenchCss.includes('.draft-a4-sheet iframe {\n  background: transparent'))
 assert('preview outer desk keeps subtle paper mat', workbenchCss.includes('linear-gradient(180deg, #fbfaf6 0%, #f3efe7 100%)'))
+assert('preview iframe is tall enough to show a full A4 page', workbenchCss.includes('height: 1188px'))
 assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
 assert('outline shows source metadata outside preview', workbench.includes('compactSource(item)'))

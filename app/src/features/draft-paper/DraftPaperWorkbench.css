@@ -157,7 +157,7 @@
   background: transparent;
   border: 0;
   display: block;
-  height: min(calc(100vh - 190px), 1160px);
+  height: 1188px;
   width: 100%;
 }
 
