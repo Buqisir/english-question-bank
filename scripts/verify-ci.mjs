@@ -14,6 +14,7 @@ const scripts = [
   'scripts/verify-paper-draft.mjs',
   'scripts/verify-basket-persistence.mjs',
   'scripts/verify-concierge-desk.mjs',
+  'scripts/verify-c8-draft-paper-contracts.mjs',
   'scripts/verify-c8-draft-paper-render-model.mjs',
   'scripts/verify-c8-print-ready-gate.mjs',
   'scripts/verify-architecture-housekeeping.mjs',

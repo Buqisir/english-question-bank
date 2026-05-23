@@ -11760,7 +11760,7 @@ const server = createServer(async (request, response) => {
     const draftPaperPrintPdfMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)\/print-pdf$/)
 
     if (request.method === 'GET' && draftPaperMatch) {
-      const db = openDatabase({ readOnly: false })
+      const db = openDatabase({ readOnly: true })
       try {
         const id = decodeURIComponent(draftPaperMatch[1])
         const draftPaper = getDraftPaper(db, id)

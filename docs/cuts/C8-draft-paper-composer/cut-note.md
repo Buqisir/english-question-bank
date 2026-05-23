@@ -2,11 +2,15 @@
 
 ## PR B — My Space Artifact Storage
 
-Status: implementation in progress.
+Status: merged.
 
 Start date: 2026-05-23
+Merged date: 2026-05-23
+Merged PR: #96
+Merge commit: `f2d64a10466334bee1e03e1c6d66ed7b11b96c7f`
 PA rounds: 1 total C8 PA before PR A/PR B split.
-Big CR rounds: pending for PR B after Codex CR + browser QA.
+Big CR rounds: 1 for PR B.
+PO QA: passed.
 
 ### Shipped In PR B
 
@@ -39,3 +43,32 @@ Big CR rounds: pending for PR B after Codex CR + browser QA.
 - Watch repeated saves: multiple artifacts from the same draft are allowed, but names should stay teacher-readable.
 - Watch generated files: `data/user-space/files/` must stay gitignored.
 - Watch browser cache on `/user-space/files/:artifactId.pdf`; artifact IDs are immutable, so stale cache should not affect regenerated artifacts.
+- Watch V0-only artifact atomicity: a process crash between PDF file write and DB insert can leave an orphan file. Add a boot sweep before adding more artifact types.
+- Watch static PDF serving: range requests are not implemented because C8 PDFs are small V0 artifacts.
+- Watch page count: `countPdfPages` is approximate for compressed PDFs.
+
+## PR B+1 — Current Draft Follow-Up
+
+Status: in progress.
+
+### Why This Exists
+
+Opus PR B Big CR flagged that My Space's `打开原草稿` flow could expose an older
+Draft Paper GET behavior: fetching a draft by id should not silently switch the
+teacher's current draft. The latest `main` already had the runtime behavior
+mostly correct, but the contract was not pinned down by verify.
+
+### Change
+
+- `GET /api/draft-papers/:id` is explicitly read-only.
+- `verify-c8-draft-paper-contracts.mjs` now asserts the draft-by-id GET route
+  does not call `markCurrentDraftPaper`.
+- The same verify script no longer depends on "new file in this PR" diff
+  assertions after C8 PR A has merged; it checks the workbench files exist
+  instead.
+
+### Validation Target
+
+- `node scripts/verify-c8-draft-paper-contracts.mjs`
+- `npm run verify:all`
+- `npm run build`

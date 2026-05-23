@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { execFileSync } from 'node:child_process'
+import { existsSync } from 'node:fs'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -21,23 +21,6 @@ function assert(name, condition, details = '') {
   } else {
     failed += 1
     console.error(`FAIL ${name}${details ? `\n  ${details}` : ''}`)
-  }
-}
-
-function git(args) {
-  return execFileSync('git', args, {
-    cwd: rootDir,
-    encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe'],
-  }).trim()
-}
-
-function baselineRef() {
-  try {
-    git(['rev-parse', '--verify', 'github/main'])
-    return 'github/main'
-  } catch {
-    return 'main'
   }
 }
 
@@ -63,6 +46,10 @@ assert('server exposes draft PDF route', server.includes('/print-pdf'))
 assert('server updates draft title', /UPDATE draft_papers SET title = \?/.test(server))
 assert('server updates item order_index', /UPDATE draft_paper_items\s+SET order_index = \?/.test(server))
 assert('server updates page_break_before', /page_break_before = \?/.test(server))
+const getDraftByIdRoute = server.match(/if \(request\.method === 'GET' && draftPaperMatch\) \{([\s\S]*?)\n    \}\n\n    if \(request\.method === 'PATCH' && draftPaperMatch\)/)?.[1] || ''
+assert('server draft-by-id GET route exists', Boolean(getDraftByIdRoute))
+assert('server draft-by-id GET opens read-only DB', getDraftByIdRoute.includes('openDatabase({ readOnly: true })'))
+assert('server draft-by-id GET does not change current draft marker', !getDraftByIdRoute.includes('markCurrentDraftPaper'))
 
 const domain = read('app/src/domain/questionBank.ts')
 assert('QuestionGroupCard has canAddToDraftPaper', /canAddToDraftPaper:\s*boolean/.test(domain))
@@ -102,12 +89,8 @@ assert('legacy basket key remains readable for migration', basket.includes("ASSE
 assert('legacy basket save is no-op', /export function saveAssemblyBasket\(items: BasketItem\[\]\): void \{\s*void items\s*\}/.test(basket))
 assert('legacy basket write path removed', !basket.includes('localStorage.setItem'))
 
-const changed = [
-  ...git(['diff', '--name-only', baselineRef()]).split('\n').filter(Boolean),
-  ...git(['ls-files', '--others', '--exclude-standard']).split('\n').filter(Boolean),
-]
-assert('DraftPaperWorkbench TSX added', changed.includes('app/src/features/draft-paper/DraftPaperWorkbench.tsx'))
-assert('DraftPaperWorkbench CSS added', changed.includes('app/src/features/draft-paper/DraftPaperWorkbench.css'))
+assert('DraftPaperWorkbench TSX exists', existsSync(path.join(rootDir, 'app/src/features/draft-paper/DraftPaperWorkbench.tsx')))
+assert('DraftPaperWorkbench CSS exists', existsSync(path.join(rootDir, 'app/src/features/draft-paper/DraftPaperWorkbench.css')))
 
 if (failed > 0) {
   console.error(`\nC8 draft paper contracts verify FAILED: ${passed} passed, ${failed} failed`)
