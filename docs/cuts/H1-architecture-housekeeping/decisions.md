@@ -1,6 +1,6 @@
 # H1 Architecture Housekeeping Decisions
 
-Status: small external PA complete. Ready for DEV after planning PR merge.
+Status: Closed at H1-G on 2026-05-23. Do not add H1-H.
 
 ## Cut Identity
 
@@ -9,6 +9,8 @@ Status: small external PA complete. Ready for DEV after planning PR merge.
 - The motivating debt is `server/api.mjs`, currently about 12.4k lines after C8.
 - H1 exists to make future PA / CR work cheaper and safer by creating smaller
   reviewable server modules.
+- Closeout note: H1 is now specifically the **Server Route Ownership** cut.
+  Broader housekeeping work must start as H2/H3/H4/H5 rather than extending H1.
 
 ## Scope Decision
 
@@ -141,4 +143,4 @@ previous PR is merged.
 
 ## Open PO Decisions
 
-0. H1 is ready for DEV after planning PR merge.
+0. H1 is closed. See `cut-note.md` and `handoff.md`.
