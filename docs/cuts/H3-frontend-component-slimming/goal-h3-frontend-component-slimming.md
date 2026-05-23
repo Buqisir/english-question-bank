@@ -1,6 +1,6 @@
 # H3 Goal — Frontend Component Slimming
 
-Status: Goal in progress. H3-A complete; H3-B outline locality implemented.
+Status: Goal in progress. H3-A and H3-B complete; H3-C panel locality implemented.
 Date: 2026-05-24
 
 ## Objective
@@ -137,6 +137,10 @@ Likely files:
 - `app/src/features/paper-intelligence/PaperAssetAnalysisPanel.tsx`
 - `app/src/features/paper-intelligence/LegacyAnalysisPanel.tsx`
 
+Status: implemented in H3-C. The harness now imports feature-local
+paper-asset and legacy analysis panel components while retaining host-owned
+focus, evidence, line, loading, and PaperSurface props.
+
 ### H3-D — PaperSurface Data / Focus Hook Locality
 
 Only after H3-C lands.
@@ -152,6 +156,9 @@ Likely files:
 - `app/src/features/paper-intelligence/usePaperSurfaceData.ts`
 - `app/src/features/paper-intelligence/usePaperSurfaceFocusSync.ts`
 - harness verify scripts.
+
+Status: optional. Current judgment after H3-C is to skip unless a future pass
+finds a deeper hook seam than the current host orchestration boundary.
 
 ## Gates
 
