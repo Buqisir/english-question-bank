@@ -39,6 +39,7 @@ function run(command, args, label, options = {}) {
 }
 
 run('git', ['diff', '--check'], 'git diff --check')
+run('npm', ['run', 'build', '--prefix', 'app'], 'app build/typecheck')
 
 for (const script of scripts) {
   run(process.execPath, [script], script)

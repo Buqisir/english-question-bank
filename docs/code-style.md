@@ -69,4 +69,5 @@ Check `scripts/README.md` before choosing verify commands. Prefer the smallest
 script that proves the current risk.
 
 Use `node scripts/verify-ci.mjs` or `npm run verify:all` from `app/` for the
-stable core suite. Cut-specific scripts remain available for focused review.
+stable core suite, including app build/typecheck. Cut-specific scripts remain
+available for focused review.

@@ -38,6 +38,8 @@ cp docs/ci/verify-workflow-template.yml .github/workflows/verify.yml
 Then run:
 
 ```bash
+pnpm --dir app install --frozen-lockfile
+npm ci --prefix server
 git diff --check
 node scripts/verify-architecture-housekeeping.mjs
 npm run verify:all --prefix app
