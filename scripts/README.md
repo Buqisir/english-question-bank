@@ -4,23 +4,33 @@ This directory contains many cut-specific verify scripts. Prefer the
 smallest script that proves the current risk. Do not run every script
 just to create confidence theater.
 
-CI status: manual unless a workflow explicitly calls a script.
+Stable local/CI entrypoint: `npm run verify:all` from `app/`, which delegates
+to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
+`docs/ci/verify-workflow-template.yml`; installing it under
+`.github/workflows/verify.yml` requires a token with workflow scope.
+
+## Stable CI entrypoint
+
+| Script | Scope | Runs in CI? |
+| --- | --- | --- |
+| `verify-ci.mjs` | Stable core contracts used by GitHub Actions | yes |
+| `verify-architecture-housekeeping.mjs` | Housekeeping guardrails: CI, code style, tokens, verify index | yes |
 
 ## Core data and import
 
-| Script | Scope |
-| --- | --- |
-| `verify-paper-asset-v1.mjs` | `paper-asset-v1` fixture and source-faithfulness contract |
-| `verify-c7-paper-import-contracts.mjs` | C7 schema / offline validator contracts |
-| `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol |
+| Script | Scope | Runs in CI? |
+| --- | --- | --- |
+| `verify-paper-asset-v1.mjs` | `paper-asset-v1` fixture and source-faithfulness contract | yes |
+| `verify-c7-paper-import-contracts.mjs` | C7 schema / offline validator contracts | yes |
+| `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol | yes |
 
 ## PaperSurface and Paper Intelligence
 
-| Script | Scope |
-| --- | --- |
-| `verify-paper-surface-module-v1.mjs` | Shared PaperSurface module contract |
-| `verify-paper-surface-host-interaction.mjs` | Host interaction reducer / state rules |
-| `verify-paper-surface-mjs-declaration-parity.mjs` | `.mjs` declaration parity |
+| Script | Scope | Runs in CI? |
+| --- | --- | --- |
+| `verify-paper-surface-module-v1.mjs` | Shared PaperSurface module contract; includes historical forbidden-scope checks | no |
+| `verify-paper-surface-host-interaction.mjs` | Host interaction reducer / state rules; includes cut-specific forbidden-scope checks | no |
+| `verify-paper-surface-mjs-declaration-parity.mjs` | `.mjs` declaration parity | yes |
 | `verify-paper-intelligence-paper-surface-harness.mjs` | Paper Intelligence harness contract |
 | `verify-paper-intelligence-paper-surface-evidence.mjs` | Evidence-line behavior |
 | `verify-paper-intelligence-paper-surface-insight.mjs` | Insight panel behavior |
@@ -48,10 +58,14 @@ CI status: manual unless a workflow explicitly calls a script.
 
 ## Draft paper / export
 
-| Script | Scope |
-| --- | --- |
-| `verify-basket-persistence.mjs` | Basket persistence |
-| `verify-paper-draft.mjs` | Draft paper model / behavior |
+| Script | Scope | Runs in CI? |
+| --- | --- | --- |
+| `verify-basket-persistence.mjs` | Basket persistence | yes |
+| `verify-paper-draft.mjs` | Draft paper model / behavior | yes |
+| `verify-concierge-desk.mjs` | Concierge desk behavior used by draft entry points | yes |
+| `verify-c8-draft-paper-contracts.mjs` | C8 PR A added-file/API contract; cut-specific | no |
+| `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model | yes |
+| `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |
 | `verify-paper-blocks-numbering.mjs` | Paper block numbering |
 | `verify-paper-layout-roundtrip.mjs` | Layout model roundtrip |
 | `verify-paper-export-flow.mjs` | Export flow |
@@ -64,7 +78,6 @@ CI status: manual unless a workflow explicitly calls a script.
 
 | Script | Scope |
 | --- | --- |
-| `verify-concierge-desk.mjs` | Concierge desk behavior |
 | `verify-reading-analysis-route.mjs` | Legacy reading-analysis route |
 | `verify-reading-analysis-selector.mjs` | Reading-analysis selector |
 | `verify-reading-analysis-view-state.mjs` | Reading-analysis view state |

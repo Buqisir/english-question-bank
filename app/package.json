@@ -9,7 +9,8 @@
     "dev:vite": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verify:all": "node ../scripts/verify-ci.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.14.0",
