@@ -1,7 +1,7 @@
 # H8 CR-Lite — PaperSurface Host Interaction Run-Form
 
 Cut: H8 PaperSurface Host Interaction Run-Form
-PR: pending
+PR: #117
 Reviewer: Codex
 Date: 2026-05-24
 

@@ -3,7 +3,7 @@
 Cut: H8 PaperSurface Host Interaction Run-Form
 Last updated: 2026-05-24
 Branch: `codex/h8-run-form-verify`
-PR: pending
+PR: #117
 
 ## Current Truth
 
@@ -19,7 +19,7 @@ PR: pending
 
 ## Still Open
 
-- Open the PR after final verification.
+- Merge / close PR #117 after review.
 - Decide whether any adjacent pure seams deserve the same treatment.
 
 ## Must Not Forget

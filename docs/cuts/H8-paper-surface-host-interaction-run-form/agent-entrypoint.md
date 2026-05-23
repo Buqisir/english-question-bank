@@ -1,7 +1,7 @@
 # H8 Agent Entrypoint
 
 Cut: H8 PaperSurface Host Interaction Run-Form
-Stage: DEV in progress
+Stage: PR open
 Owner: Codex by default
 Date: 2026-05-24
 
@@ -33,6 +33,7 @@ Skim only if unfamiliar or not already loaded in this session.
 - Base branch: `github/main`
 - Base commit: `1c2626e`
 - Current branch: `codex/h8-run-form-verify`
+- PR: #117
 - Latest accepted artifact: this entrypoint
 
 ## Goal / PR Split
