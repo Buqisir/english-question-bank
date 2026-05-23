@@ -16,6 +16,7 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 | `verify-ci.mjs` | Stable core contracts used by GitHub Actions | yes |
 | `verify-architecture-housekeeping.mjs` | Housekeeping guardrails: CI, code style, tokens, verify index | yes |
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
+| `verify-h1c-paper-import-routes.mjs` | H1-C Paper Import route extraction contract | yes |
 
 ## Core data and import
 

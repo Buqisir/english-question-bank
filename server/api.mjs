@@ -20,10 +20,9 @@ import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
 import { createDraftPaperRoutes } from './draft-paper/draftPaperRoutes.mjs'
 import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
-import { parsePaperImportMultipart } from './paper-import/multipart.mjs'
-import { ensurePaperImportDatabaseShape, publishPaperImportPackage } from './paper-import/publisher.mjs'
+import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
+import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
-import { makePublicValidationReport, validatePaperImportPackage } from './paper-import/validator.mjs'
 import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
@@ -50,6 +49,8 @@ const serverContext = {
   readJsonBody,
   sendPdf,
   sendJson,
+  getPaperSurfaceAnalysisAvailabilityByGroupId,
+  invalidatePaperSurfaceAnalysisAvailability,
 }
 const h1Routes = [
   defineRoute('GET', /^\/api\/health$/, ({ response, context }) => {
@@ -287,6 +288,10 @@ function getPaperSurfaceAnalysisAvailabilityByGroupId() {
   return availabilityByGroupId
 }
 
+function invalidatePaperSurfaceAnalysisAvailability() {
+  paperSurfaceAnalysisAvailabilityByGroupIdCache = null
+}
+
 const PRINT_READY_GROUP_TYPES = new Set([
   'reading',
   'cloze',
@@ -440,6 +445,7 @@ const serverRoutes = [
   ...h1Routes,
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
+  ...createPaperImportRoutes(),
 ]
 
 function getDraftSearchContext(db) {
@@ -11032,47 +11038,6 @@ const server = createServer(async (request, response) => {
 
     if (request.method === 'GET' && url.pathname === '/api/import-bundles') {
       sendJson(response, 200, { importBundles: listImportBundles() })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/paper-import/validate') {
-      let files = []
-      try {
-        ;({ files } = await parsePaperImportMultipart(request))
-      } catch (error) {
-        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
-        return
-      }
-      const validation = validatePaperImportPackage(files)
-      sendJson(response, validation.ok ? 200 : 422, { validation: makePublicValidationReport(validation) })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/paper-import/publish') {
-      let files = []
-      try {
-        ;({ files } = await parsePaperImportMultipart(request))
-      } catch (error) {
-        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
-        return
-      }
-      const db = openDatabase({ readOnly: false })
-      try {
-        const result = publishPaperImportPackage({ files, db, paperAssetsDir })
-        paperSurfaceAnalysisAvailabilityByGroupIdCache = null
-        sendJson(response, result.ok ? 201 : 422, result)
-      } finally {
-        db.close()
-      }
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/paper-import/revalidate-latest') {
-      paperSurfaceAnalysisAvailabilityByGroupIdCache = null
-      sendJson(response, 200, {
-        ok: true,
-        analysisEntryCount: getPaperSurfaceAnalysisAvailabilityByGroupId().size,
-      })
       return
     }
 
