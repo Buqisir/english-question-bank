@@ -138,6 +138,11 @@ export function createMySpaceFolder(db, input) {
 export function renameMySpaceFolder(db, folderId, input) {
   const name = cleanName(input?.name, '')
   if (!name) throw new Error('文件夹名称不能为空')
+  const current = db.prepare('SELECT * FROM my_space_folders WHERE id = ?').get(folderId)
+  if (!current) throw new Error('文件夹不存在')
+  const count = db.prepare('SELECT COUNT(*) AS count FROM my_space_artifacts WHERE folder_id = ?').get(folderId)?.count || 0
+  if (current.name === name) return rowToFolder(current, Number(count))
+
   let result
   try {
     result = db.prepare('UPDATE my_space_folders SET name = ?, updated_at = datetime(\'now\') WHERE id = ?').run(name, folderId)
@@ -146,7 +151,6 @@ export function renameMySpaceFolder(db, folderId, input) {
     throw error
   }
   if (result.changes === 0) throw new Error('文件夹不存在')
-  const count = db.prepare('SELECT COUNT(*) AS count FROM my_space_artifacts WHERE folder_id = ?').get(folderId)?.count || 0
   return rowToFolder(db.prepare('SELECT * FROM my_space_folders WHERE id = ?').get(folderId), Number(count))
 }
 

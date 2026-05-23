@@ -164,8 +164,13 @@ async function main() {
     await page.getByRole('button', { name: '查看个人空间' }).click()
     await page.waitForURL(/view=my-space/)
     await page.getByText('Smoke 文件夹').waitFor({ timeout: 10_000 })
-    await page.locator('.my-space-artifact-row').filter({ hasText: '0523 英语草稿卷' }).first().waitFor({ timeout: 10_000 })
+    const artifactTitle = artifactPayload.artifact.title || artifactPayload.artifact.fileName
+    await page.locator('.my-space-artifact-row').filter({ hasText: artifactTitle }).first().waitFor({ timeout: 10_000 })
     pass('My Space page lists saved artifact')
+
+    await page.locator('.my-space-folder-row').filter({ hasText: 'Smoke 文件夹' }).getByLabel('删除文件夹').click()
+    await page.getByText('文件夹中还有文件，不能删除').waitFor({ timeout: 10_000 })
+    pass('Folder with artifacts cannot be deleted')
 
     const downloadResponsePromise = page.waitForResponse(
       (response) => response.url().includes(`/user-space/files/${artifactPayload.artifact.id}.pdf`),

@@ -565,6 +565,21 @@ function buildDraftPrintHtml(draftPaper) {
 
 const recentDraftPdfExports = new Map()
 
+function clearRecentDraftPdfExport(draftPaperId, outputPath) {
+  const cached = recentDraftPdfExports.get(draftPaperId)
+  if (!outputPath || cached?.outputPath === outputPath) recentDraftPdfExports.delete(draftPaperId)
+  if (!outputPath) return
+
+  const resolvedOutputPath = path.resolve(outputPath)
+  const resolvedExportDir = path.resolve(exportDir)
+  if (resolvedOutputPath === resolvedExportDir || !resolvedOutputPath.startsWith(`${resolvedExportDir}${path.sep}`)) return
+  try {
+    rmSync(resolvedOutputPath, { force: true })
+  } catch {
+    // Best-effort cleanup for staging PDFs; the My Space copy is already persisted.
+  }
+}
+
 function draftPaperPrintSignature(draftPaper) {
   return JSON.stringify({
     id: draftPaper.id,
@@ -11656,8 +11671,9 @@ const server = createServer(async (request, response) => {
     if (request.method === 'POST' && url.pathname === '/api/my-space/artifacts') {
       const input = await readJsonBody(request, { maxBytes: 500_000 })
       const draftPaperId = String(input.draftPaperId || '').trim()
+      let result = null
       try {
-        const result = exportDraftPaperPdf(draftPaperId, { preferRecent: true })
+        result = exportDraftPaperPdf(draftPaperId, { preferRecent: true })
         const db = openDatabase({ readOnly: false })
         try {
           const artifact = saveMySpaceArtifact(db, {
@@ -11668,11 +11684,13 @@ const server = createServer(async (request, response) => {
             folderId: input.folderId,
             fileName: input.fileName,
           })
+          clearRecentDraftPdfExport(draftPaperId, result.outputPath)
           sendJson(response, 201, { artifact, reusedRecentPdf: result.reusedRecent === true })
         } finally {
           db.close()
         }
       } catch (error) {
+        clearRecentDraftPdfExport(draftPaperId, result?.outputPath)
         const message = error instanceof Error ? error.message : String(error)
         if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
           sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
