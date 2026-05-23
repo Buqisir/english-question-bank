@@ -20,6 +20,7 @@ const scripts = [
   'scripts/verify-architecture-housekeeping.mjs',
   'scripts/verify-h1-router-skeleton.mjs',
   'scripts/verify-h1c-paper-import-routes.mjs',
+  'scripts/verify-h1d-analysis-availability.mjs',
 ]
 
 function run(command, args, label, options = {}) {
