@@ -2,12 +2,12 @@
 
 Cut: H3 Frontend Component Slimming
 Last updated: 2026-05-24
-Branch: `codex/h3-c-paper-intelligence`
-PR: H3-C implementation PR
+Branch: `codex/h3-closeout`
+PR: H3 closeout PR
 
 ## Current Truth
 
-- H3 is open as the next housekeeping cut after H2.
+- H3 is closed.
 - H3 is about frontend locality, not visual redesign.
 - H3-A Draft Paper Preview / Export Locality has been implemented.
 - H3-B Draft Paper Outline Locality has been implemented.
@@ -36,13 +36,15 @@ PR: H3-C implementation PR
 - H3-C updated the PaperSurface harness verify script to guard the new panel
   seam.
 - H3-C dev notes and CR-lite written.
+- H3 cut note written.
+- Agent entrypoint and CLI handoff marked closed / historical.
 
 ## Still Open
 
-- H3 final closeout cut note has not been written yet.
-- H3-D PaperSurface Data / Focus Hook Locality remains intentionally optional.
-  Current judgment: skip unless a later pass finds a deeper seam than the
-  current host orchestration boundary.
+- No H3 implementation work remains.
+- H3-D PaperSurface Data / Focus Hook Locality remains intentionally skipped.
+  Reopen as a new cut only if a later pass finds a deeper seam than the current
+  host orchestration boundary.
 
 ## Must Not Forget
 
@@ -99,10 +101,10 @@ PR: H3-C implementation PR
 
 ## Next Action
 
-After H3-C merges, close H3 with a docs-only cut note unless H3-D finds a real
-hook seam:
+Start a new cut for follow-up work. Do not add H3-E.
 
 ```text
-H3-D is optional. Extract hooks only if the hook owns a meaningful data/focus
-contract. Do not move lines just to reduce file length.
+Recommended next options: H4 design-token / UI consistency, H5 server
+implementation extraction, or a Claude-feedback infrastructure cut for CI
+workflow installation / targeted run-form verify expansion.
 ```

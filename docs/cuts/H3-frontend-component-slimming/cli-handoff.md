@@ -4,14 +4,20 @@ Date: 2026-05-23
 Prepared for: CLI agent
 Current repo head: `0b5b199`
 
+Status: historical. H3 is now closed; use `cut-note.md` and `handoff.md` for
+current truth.
+
 ## Current State
 
-H3 is the active housekeeping cut for frontend component slimming.
+H3 was the active housekeeping cut for frontend component slimming.
 
 Already merged:
 
 - PR #112 — H3 goal / agent entrypoint / handoff docs.
 - PR #113 — H3-A Draft Paper Preview / Export Locality.
+- PR #114 — H3 CLI handoff.
+- PR #118 — H3-B Draft Paper Outline Locality.
+- PR #119 — H3-C PaperSurface Analysis Panel Locality.
 
 H3-A extracted `buildA4PreviewHtml(printHtml)` from:
 
@@ -48,7 +54,12 @@ scripts/README.md
 
 ## Next Recommended Work
 
-Start H3-B:
+Historical instruction. Do not start H3-B from this file.
+
+H3-B and H3-C have landed. H3-B-2 and H3-D were skipped because their seams were
+not deep enough.
+
+Original next work was:
 
 ```text
 Draft Paper Outline / My Space Dialog Locality
@@ -144,6 +155,8 @@ docs/cuts/H3-frontend-component-slimming/handoff.md
 ```
 
 ## Short CLI Prompt
+
+Historical prompt. Do not use after H3 closeout.
 
 ```text
 Read docs/cuts/H3-frontend-component-slimming/cli-handoff.md.
