@@ -18,6 +18,7 @@ const scripts = [
   'scripts/verify-c8-draft-paper-render-model.mjs',
   'scripts/verify-c8-print-ready-gate.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
+  'scripts/verify-h1-router-skeleton.mjs',
 ]
 
 function run(command, args, label, options = {}) {
