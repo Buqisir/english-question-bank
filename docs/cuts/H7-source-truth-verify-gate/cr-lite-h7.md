@@ -1,7 +1,7 @@
 # H7 CR-Lite — Source Truth + Verify Gate
 
 Cut: H7 Source Truth + Verify Gate
-PR: pending
+PR: #116
 Reviewer: Codex
 Date: 2026-05-23
 

@@ -3,7 +3,7 @@
 Cut: H7 Source Truth + Verify Gate
 Last updated: 2026-05-23
 Branch: `codex/h7-source-truth-verify-gate`
-PR: pending
+PR: #116
 
 ## Current Truth
 
@@ -26,7 +26,7 @@ PR: pending
 
 ## Still Open
 
-- PR number must be filled after opening the PR.
+- Merge / close PR #116 after review.
 
 ## Must Not Forget
 

@@ -1,7 +1,7 @@
 # H7 Agent Entrypoint
 
 Cut: H7 Source Truth + Verify Gate
-Stage: DEV in progress
+Stage: PR open
 Owner: Codex by default
 Date: 2026-05-23
 
@@ -36,6 +36,7 @@ Skim only if unfamiliar or not already loaded in this session.
 - Base branch: `github/main`
 - Base commit: `63be1e9`
 - Current branch: `codex/h7-source-truth-verify-gate`
+- PR: #116
 - Latest accepted artifact: this entrypoint
 
 ## Goal / PR Split
