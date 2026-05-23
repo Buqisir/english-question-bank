@@ -146,6 +146,27 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
 ON draft_papers(current_marker)
 WHERE current_marker = 1;
 
+CREATE TABLE IF NOT EXISTS my_space_folders (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS my_space_artifacts (
+  id TEXT PRIMARY KEY,
+  folder_id TEXT REFERENCES my_space_folders(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  file_name TEXT NOT NULL,
+  file_path TEXT NOT NULL,
+  artifact_type TEXT NOT NULL DEFAULT 'student-paper' CHECK (artifact_type IN ('student-paper')),
+  source_draft_paper_id TEXT NOT NULL,
+  page_count INTEGER NOT NULL DEFAULT 0,
+  generated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 CREATE TABLE IF NOT EXISTS import_files (
   id TEXT PRIMARY KEY,
   original_name TEXT NOT NULL,
@@ -305,6 +326,8 @@ CREATE INDEX IF NOT EXISTS idx_paper_items_set ON paper_items(paper_set_id, disp
 CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
 CREATE INDEX IF NOT EXISTS idx_draft_paper_items_draft ON draft_paper_items(draft_paper_id, order_index);
 CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
+CREATE INDEX IF NOT EXISTS idx_my_space_artifacts_folder ON my_space_artifacts(folder_id, generated_at);
+CREATE INDEX IF NOT EXISTS idx_my_space_artifacts_draft ON my_space_artifacts(source_draft_paper_id);
 CREATE INDEX IF NOT EXISTS idx_import_file_texts_import ON import_file_texts(import_file_id);
 CREATE INDEX IF NOT EXISTS idx_import_batch_items_batch ON import_batch_items(batch_id, status);
 CREATE INDEX IF NOT EXISTS idx_paper_asset_versions_paper ON paper_asset_versions(paper_id, asset_version);

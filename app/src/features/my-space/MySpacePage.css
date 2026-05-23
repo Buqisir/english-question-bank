@@ -1,0 +1,199 @@
+.my-space-shell {
+  background: #f2f0eb;
+  color: #24201b;
+  min-height: 100vh;
+  padding: 18px 22px 32px;
+}
+
+.my-space-toolbar {
+  align-items: center;
+  background: #fbfaf7;
+  border: 1px solid #d9d2c7;
+  border-radius: 8px;
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+}
+
+.my-space-toolbar p,
+.my-space-section-head p {
+  color: #746b60;
+  font-size: 12px;
+  margin: 0 0 3px;
+}
+
+.my-space-toolbar h1,
+.my-space-section-head h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.my-space-back,
+.my-space-folders button,
+.my-space-new-folder button,
+.my-space-folder-row button,
+.my-space-artifact-actions button {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #cfc6b8;
+  border-radius: 6px;
+  color: #2e2922;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.my-space-folders button:disabled,
+.my-space-new-folder button:disabled,
+.my-space-folder-row button:disabled,
+.my-space-artifact-actions button:disabled {
+  color: #9b9388;
+  cursor: not-allowed;
+}
+
+.my-space-message,
+.my-space-empty {
+  color: #746b60;
+  margin: 14px 0 0;
+}
+
+.my-space-error {
+  color: #9a3327;
+}
+
+.my-space-layout {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  margin-top: 18px;
+}
+
+.my-space-folders,
+.my-space-artifacts {
+  background: #fbfaf7;
+  border: 1px solid #d9d2c7;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.my-space-folders {
+  align-self: start;
+  display: grid;
+  gap: 8px;
+  position: sticky;
+  top: 18px;
+}
+
+.my-space-folders > button,
+.my-space-folder-row > button:first-child {
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.my-space-folders > button.active,
+.my-space-folder-row.active > button:first-child {
+  background: #f2eadf;
+  border-color: #b88950;
+}
+
+.my-space-folder-row {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: 1fr auto auto;
+}
+
+.my-space-folder-row input,
+.my-space-new-folder input {
+  background: #fffdf8;
+  border: 1px solid #cfc6b8;
+  border-radius: 6px;
+  color: #24201b;
+  font: inherit;
+  min-height: 34px;
+  min-width: 0;
+  padding: 6px 9px;
+}
+
+.my-space-new-folder {
+  border-top: 1px solid #e1dacd;
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+.my-space-section-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.my-space-artifact-list {
+  display: grid;
+  gap: 10px;
+}
+
+.my-space-artifact-row {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #ded6c9;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 12px;
+}
+
+.my-space-artifact-main {
+  align-items: start;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+  min-width: 0;
+}
+
+.my-space-artifact-main strong,
+.my-space-artifact-main span {
+  display: block;
+}
+
+.my-space-artifact-main strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-space-artifact-main span {
+  color: #746b60;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.my-space-artifact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 920px) {
+  .my-space-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .my-space-folders {
+    position: static;
+  }
+
+  .my-space-artifact-row {
+    grid-template-columns: 1fr;
+  }
+
+  .my-space-artifact-actions {
+    justify-content: flex-start;
+  }
+}

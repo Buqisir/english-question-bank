@@ -2,6 +2,7 @@ import {
   ArrowDown,
   ArrowLeft,
   ArrowUp,
+  Archive,
   BookOpen,
   CheckCircle2,
   ClipboardList,
@@ -116,6 +117,7 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
 import { PaperImportWorkbench } from './features/paper-import/PaperImportWorkbench'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
+import { MySpacePage } from './features/my-space/MySpacePage'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 
 type EntryForm = {
@@ -944,6 +946,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [paperImportRouteActive, setPaperImportRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'paper-import'
+  })
+  const [mySpaceRouteActive, setMySpaceRouteActive] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'my-space'
   })
   const [draftPaperRoute, setDraftPaperRoute] = useState(() => {
     if (typeof window === 'undefined') {
@@ -3359,6 +3365,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setPaperImportRouteActive(false)
+    setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
     setDraftPaperRoute({
       active: true,
@@ -3385,6 +3392,36 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
 
+  const openMySpace = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'my-space')
+      url.searchParams.delete('draftPaperId')
+      url.searchParams.delete('focusGroupId')
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    setPaperImportRouteActive(false)
+    setMySpaceRouteActive(true)
+    setCurrentPiRoute({ kind: 'none' })
+  }, [])
+
+  const mySpaceOnBackToWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('view')
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setMySpaceRouteActive(false)
+    void refreshQuestionGroups()
+  }, [refreshQuestionGroups])
+
   const paperImportOnBackToWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
@@ -3398,6 +3435,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       }
     }
     setPaperImportRouteActive(false)
+    setMySpaceRouteActive(false)
   }, [])
 
   const openPaperImportWorkbench = useCallback(() => {
@@ -3407,6 +3445,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setPaperImportRouteActive(true)
+    setMySpaceRouteActive(false)
   }, [])
 
   // ─── Paper Intelligence route rendering ───
@@ -3417,6 +3456,16 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         focusGroupId={draftPaperRoute.focusGroupId}
         onBackToWorkbench={draftPaperOnBackToWorkbench}
         onDraftChanged={() => void refreshQuestionGroups()}
+        onOpenMySpace={openMySpace}
+      />
+    )
+  }
+
+  if (mySpaceRouteActive) {
+    return (
+      <MySpacePage
+        onBackToWorkbench={mySpaceOnBackToWorkbench}
+        onOpenDraft={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
       />
     )
   }
@@ -3480,6 +3529,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               当前草稿卷{currentDraftGroupCount > 0 ? ` · ${currentDraftGroupCount} 组` : ''}
             </button>
           )}
+          <button className="ghost-button" type="button" onClick={openMySpace}>
+            <Archive size={16} />
+            个人空间
+          </button>
           {homeMode === 'classic' && (
             <span className="topbar-ai-group">
               <Sparkles size={16} />

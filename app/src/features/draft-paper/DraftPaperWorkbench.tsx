@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { ArrowDown, ArrowLeft, ArrowUp, FileDown, GripVertical, Printer, RotateCcw, Trash2 } from 'lucide-react'
-import type { DraftPaper, DraftPaperItem, DraftPaperSummary } from '../../domain/questionBank'
+import { Archive, ArrowDown, ArrowLeft, ArrowUp, FileDown, FolderPlus, GripVertical, Printer, RotateCcw, Trash2 } from 'lucide-react'
+import type { DraftPaper, DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
 import { groupTypeLabel } from '../../domain/questionBank'
 import {
   deleteDraftPaperItem,
@@ -14,6 +14,11 @@ import {
   updateDraftPaper,
 } from '../../services/draftPapers'
 import {
+  createMySpaceFolder,
+  fetchMySpace,
+  saveDraftPaperToMySpace,
+} from '../../services/mySpace'
+import {
   ASSEMBLY_BASKET_STORAGE_KEY,
   parseAssemblyBasket,
 } from '../../paperAssembly/basketPersistence'
@@ -24,6 +29,7 @@ export type DraftPaperWorkbenchProps = {
   focusGroupId?: string | null
   onBackToWorkbench: () => void
   onDraftChanged?: () => void
+  onOpenMySpace?: () => void
 }
 
 type RemovedDraftItem = {
@@ -201,7 +207,7 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
-  const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged } = props
+  const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, onOpenMySpace } = props
   const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
@@ -211,6 +217,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [saveError, setSaveError] = useState('')
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
   const [exportError, setExportError] = useState('')
+  const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
+  const [spaceFolders, setSpaceFolders] = useState<MySpaceFolder[]>([])
+  const [spaceFolderId, setSpaceFolderId] = useState('')
+  const [spaceFileName, setSpaceFileName] = useState('')
+  const [spaceNewFolderName, setSpaceNewFolderName] = useState('')
+  const [spaceStatus, setSpaceStatus] = useState<'idle' | 'loading' | 'saving' | 'saved' | 'error'>('idle')
+  const [spaceMessage, setSpaceMessage] = useState('')
   const [migrationNotice, setMigrationNotice] = useState('')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
@@ -404,6 +417,58 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
+  async function openSpaceDialog() {
+    if (!draftPaper || draftPaper.items.length === 0) return
+    setSpaceDialogOpen(true)
+    setSpaceStatus('loading')
+    setSpaceMessage('')
+    setSpaceFileName(`${draftPaper.title || '英语草稿卷'}-学生卷.pdf`)
+    try {
+      const snapshot = await fetchMySpace()
+      setSpaceFolders(snapshot.folders)
+      setSpaceFolderId(snapshot.folders[0]?.id || '')
+      setSpaceStatus('idle')
+    } catch (error) {
+      setSpaceStatus('error')
+      setSpaceMessage(error instanceof Error ? error.message : String(error))
+    }
+  }
+
+  async function createFolderInDialog() {
+    const name = spaceNewFolderName.trim()
+    if (!name) return
+    setSpaceStatus('saving')
+    setSpaceMessage('')
+    try {
+      const folder = await createMySpaceFolder(name)
+      setSpaceFolders((folders) => [folder, ...folders.filter((entry) => entry.id !== folder.id)])
+      setSpaceFolderId(folder.id)
+      setSpaceNewFolderName('')
+      setSpaceStatus('idle')
+    } catch (error) {
+      setSpaceStatus('error')
+      setSpaceMessage(error instanceof Error ? error.message : String(error))
+    }
+  }
+
+  async function saveToMySpace() {
+    if (!draftPaper) return
+    setSpaceStatus('saving')
+    setSpaceMessage('')
+    try {
+      await saveDraftPaperToMySpace({
+        draftPaperId: draftPaper.id,
+        fileName: spaceFileName,
+        folderId: spaceFolderId || null,
+      })
+      setSpaceStatus('saved')
+      setSpaceMessage('已保存到个人空间。')
+    } catch (error) {
+      setSpaceStatus('error')
+      setSpaceMessage(error instanceof Error ? error.message : String(error))
+    }
+  }
+
   function browserPrint() {
     if (!draftPaper?.printHtml) return
     const printWindow = window.open('', '_blank')
@@ -476,7 +541,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button type="button" disabled={draftPaper.items.length === 0} onClick={browserPrint}>
             <Printer size={15} /> 浏览器打印
           </button>
+          <button type="button" disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'} onClick={openSpaceDialog}>
+            <Archive size={15} /> 保存到个人空间
+          </button>
         </details>
+        {onOpenMySpace && (
+          <button className="draft-my-space-link" type="button" onClick={onOpenMySpace}>
+            个人空间
+          </button>
+        )}
       </header>
 
       {draftPaper.items.length === 0 && (
@@ -576,6 +649,62 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button type="button" onClick={undoDelete}>
             <RotateCcw size={14} /> 撤销
           </button>
+        </div>
+      )}
+      {spaceDialogOpen && (
+        <div className="draft-modal-backdrop" role="presentation">
+          <form
+            aria-label="保存到个人空间"
+            className="draft-save-space-dialog"
+            onSubmit={(event) => {
+              event.preventDefault()
+              void saveToMySpace()
+            }}
+          >
+            <div className="draft-dialog-head">
+              <strong>保存到个人空间</strong>
+              <button type="button" onClick={() => setSpaceDialogOpen(false)}>关闭</button>
+            </div>
+            <label>
+              <span>文件名</span>
+              <input value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
+            </label>
+            <label>
+              <span>文件夹</span>
+              <select value={spaceFolderId} onChange={(event) => setSpaceFolderId(event.target.value)}>
+                <option value="">未归档</option>
+                {spaceFolders.map((folder) => (
+                  <option key={folder.id} value={folder.id}>{folder.name}</option>
+                ))}
+              </select>
+            </label>
+            <div className="draft-new-folder-row">
+              <input
+                value={spaceNewFolderName}
+                onChange={(event) => setSpaceNewFolderName(event.target.value)}
+                placeholder="新建文件夹"
+              />
+              <button type="button" onClick={createFolderInDialog} disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}>
+                <FolderPlus size={15} /> 新建
+              </button>
+            </div>
+            {spaceStatus === 'loading' && <p className="draft-dialog-note">正在读取文件夹...</p>}
+            {spaceStatus === 'error' && <p className="draft-error">{spaceMessage}</p>}
+            {spaceStatus === 'saved' && (
+              <p className="draft-success">
+                {spaceMessage}
+                {onOpenMySpace && (
+                  <button type="button" onClick={onOpenMySpace}>查看个人空间</button>
+                )}
+              </p>
+            )}
+            <div className="draft-dialog-actions">
+              <button type="button" onClick={() => setSpaceDialogOpen(false)}>取消</button>
+              <button type="submit" disabled={spaceStatus === 'saving' || draftPaper.items.length === 0}>
+                {spaceStatus === 'saving' ? '保存中...' : '保存'}
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </div>
