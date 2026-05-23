@@ -33,6 +33,8 @@ assert('CI verify entrypoint exists', existsSync(path.join(rootDir, 'scripts/ver
 assert('CR-lite template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/cr-lite.md')))
 assert('external review template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/external-review-report.md')))
 assert('watch ledger template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/watch-ledger.md')))
+assert('H2 cut note exists', existsSync(path.join(rootDir, 'docs/cuts/H2-workflow-verify-ci-discipline/cut-note.md')))
+assert('H2 handoff exists', existsSync(path.join(rootDir, 'docs/cuts/H2-workflow-verify-ci-discipline/handoff.md')))
 
 const workflowTemplate = read('docs/ci/verify-workflow-template.yml')
 assert('workflow template installs app dependencies with pnpm', workflowTemplate.includes('pnpm install --frozen-lockfile'))
@@ -166,6 +168,13 @@ assert('external review template includes baseline and cost sections', externalR
 
 const watchLedgerTemplate = read('docs/cuts/_templates/watch-ledger.md')
 assert('watch ledger template includes status vocabulary', watchLedgerTemplate.includes('converted-to-follow-up'))
+
+const h2Entrypoint = read('docs/cuts/H2-workflow-verify-ci-discipline/agent-entrypoint.md')
+const h2CutNote = read('docs/cuts/H2-workflow-verify-ci-discipline/cut-note.md')
+const h2Handoff = read('docs/cuts/H2-workflow-verify-ci-discipline/handoff.md')
+assert('H2 entrypoint is closed', h2Entrypoint.includes('Stage: Closed. Do not add H2-D.'))
+assert('H2 cut note routes away from H2-D', h2CutNote.includes('Do not add H2-D.'))
+assert('H2 handoff routes future housekeeping away from H2', h2Handoff.includes('Do not create H2-D.'))
 
 if (failed > 0) {
   console.error(`\nArchitecture housekeeping verify FAILED: ${passed} passed, ${failed} failed`)
