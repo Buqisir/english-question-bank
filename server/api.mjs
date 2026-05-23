@@ -22,6 +22,7 @@ import { parsePaperImportMultipart } from './paper-import/multipart.mjs'
 import { ensurePaperImportDatabaseShape, publishPaperImportPackage } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { makePublicValidationReport, validatePaperImportPackage } from './paper-import/validator.mjs'
+import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import {
   createMySpaceFolder,
   deleteMySpaceArtifact,
@@ -45,6 +46,22 @@ const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
+const serverContext = {
+  rootDir,
+  dbPath,
+  exportDir,
+  importDir,
+  paperAssetsDir,
+  userSpaceFilesDir,
+  openDatabase,
+  readJsonBody,
+  sendJson,
+}
+const h1Routes = [
+  defineRoute('GET', /^\/api\/health$/, ({ response, context }) => {
+    context.sendJson(response, 200, { ok: true, dbPath: context.dbPath })
+  }),
+]
 const groupTypeLabels = {
   reading: '阅读理解',
   cloze: '完形填空',
@@ -2132,29 +2149,7 @@ function saveQuestionDifficultyRating(questionId, input) {
 }
 
 function readJsonBody(request, { maxBytes = 1_000_000 } = {}) {
-  return new Promise((resolve, reject) => {
-    let body = ''
-    let bytes = 0
-
-    request.on('data', (chunk) => {
-      bytes += chunk.length
-      body += chunk
-      if (bytes > maxBytes) {
-        request.destroy()
-        reject(new Error('Request body too large'))
-      }
-    })
-
-    request.on('end', () => {
-      try {
-        resolve(body ? JSON.parse(body) : {})
-      } catch {
-        reject(new Error('Invalid JSON body'))
-      }
-    })
-
-    request.on('error', reject)
-  })
+  return readJsonRouteBody(request, { maxBytes })
 }
 
 function requiredString(value, label) {
@@ -11585,8 +11580,7 @@ const server = createServer(async (request, response) => {
       return
     }
 
-    if (request.method === 'GET' && url.pathname === '/api/health') {
-      sendJson(response, 200, { ok: true, dbPath })
+    if (await runRoutes(h1Routes, { request, response, url, context: serverContext })) {
       return
     }
 
