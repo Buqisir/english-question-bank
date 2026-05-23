@@ -22,6 +22,17 @@ import { parsePaperImportMultipart } from './paper-import/multipart.mjs'
 import { ensurePaperImportDatabaseShape, publishPaperImportPackage } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { makePublicValidationReport, validatePaperImportPackage } from './paper-import/validator.mjs'
+import {
+  createMySpaceFolder,
+  deleteMySpaceArtifact,
+  deleteMySpaceFolder,
+  ensureMySpaceDatabaseShape,
+  ensureMySpaceFilesRoot,
+  listMySpace,
+  renameMySpaceFolder,
+  resolveMySpaceArtifactForDownload,
+  saveMySpaceArtifact,
+} from './my-space/mySpace.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -29,6 +40,7 @@ const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question
 const exportDir = path.join(rootDir, 'exports')
 const importDir = path.join(rootDir, 'imports')
 const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
+const userSpaceFilesDir = process.env.QUESTION_BANK_USER_SPACE_ROOT || path.join(rootDir, 'data/user-space/files')
 const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
@@ -551,6 +563,37 @@ function buildDraftPrintHtml(draftPaper) {
   )
 }
 
+const recentDraftPdfExports = new Map()
+
+function clearRecentDraftPdfExport(draftPaperId, outputPath) {
+  const cached = recentDraftPdfExports.get(draftPaperId)
+  if (!outputPath || cached?.outputPath === outputPath) recentDraftPdfExports.delete(draftPaperId)
+  if (!outputPath) return
+
+  const resolvedOutputPath = path.resolve(outputPath)
+  const resolvedExportDir = path.resolve(exportDir)
+  if (resolvedOutputPath === resolvedExportDir || !resolvedOutputPath.startsWith(`${resolvedExportDir}${path.sep}`)) return
+  try {
+    rmSync(resolvedOutputPath, { force: true })
+  } catch {
+    // Best-effort cleanup for staging PDFs; the My Space copy is already persisted.
+  }
+}
+
+function draftPaperPrintSignature(draftPaper) {
+  return JSON.stringify({
+    id: draftPaper.id,
+    title: draftPaper.title,
+    items: draftPaper.items.map((item) => ({
+      id: item.id,
+      groupId: item.groupId,
+      orderIndex: item.orderIndex,
+      pageBreakBefore: item.pageBreakBefore,
+      updatedAt: item.updatedAt,
+    })),
+  })
+}
+
 function estimateEnglishWords(text) {
   return String(text || '').match(/[A-Za-z]+(?:['-][A-Za-z]+)?/g)?.length || 0
 }
@@ -1064,6 +1107,42 @@ function sendPaperAssetStatic(response, urlPath) {
   response.end(readFileSync(filePath))
 }
 
+function sendMySpaceArtifactStatic(response, urlPath) {
+  const match = urlPath.match(/^\/user-space\/files\/([^/]+)\.pdf$/)
+  if (!match) {
+    sendJson(response, 400, { error: 'Invalid user-space path' })
+    return
+  }
+  let artifactId
+  try {
+    artifactId = decodeURIComponent(match[1])
+  } catch {
+    sendJson(response, 400, { error: 'Invalid artifact id' })
+    return
+  }
+  if (!/^artifact-[a-z0-9-]+$/i.test(artifactId)) {
+    sendJson(response, 400, { error: 'Invalid artifact id' })
+    return
+  }
+  const db = openDatabase()
+  try {
+    const artifact = resolveMySpaceArtifactForDownload(db, userSpaceFilesDir, artifactId)
+    if (!artifact) {
+      sendJson(response, 404, { error: 'PDF file not found' })
+      return
+    }
+    response.writeHead(200, {
+      'access-control-allow-origin': '*',
+      'content-disposition': `inline; filename="${encodeURIComponent(artifact.fileName)}"; filename*=UTF-8''${encodeURIComponent(artifact.fileName)}`,
+      'content-type': 'application/pdf',
+      'x-file-name': encodeURIComponent(artifact.fileName),
+    })
+    response.end(artifact.body)
+  } finally {
+    db.close()
+  }
+}
+
 function openDatabase({ readOnly = true } = {}) {
   if (!existsSync(dbPath)) {
     throw new Error(`Database not found at ${dbPath}. Run scripts/init-db.sh first.`)
@@ -1196,6 +1275,7 @@ function ensureDatabaseShape() {
       CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
     `)
     ensurePaperImportDatabaseShape(db)
+    ensureMySpaceDatabaseShape(db)
   } finally {
     db.close()
   }
@@ -6782,12 +6862,24 @@ function exportPrintPdf(input) {
   }
 }
 
-function exportDraftPaperPdf(draftPaperId) {
+function exportDraftPaperPdf(draftPaperId, { preferRecent = false } = {}) {
   const db = openDatabase({ readOnly: false })
   try {
     const draftPaper = getDraftPaper(db, draftPaperId)
     if (!draftPaper) throw new Error('Draft paper not found')
     if (!draftPaper.items.length) throw new Error('请先添加题组')
+    const signature = draftPaperPrintSignature(draftPaper)
+    const recent = recentDraftPdfExports.get(draftPaperId)
+    if (
+      preferRecent &&
+      recent &&
+      recent.signature === signature &&
+      Date.now() - recent.createdAt <= 30_000 &&
+      existsSync(recent.outputPath)
+    ) {
+      db.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+      return { body: readFileSync(recent.outputPath), fileName: recent.fileName, outputPath: recent.outputPath, draftPaper, reusedRecent: true }
+    }
     const html = buildDraftPrintHtml(draftPaper)
     const vivliostylePaths = [
       path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
@@ -6814,7 +6906,8 @@ function exportDraftPaperPdf(draftPaperId) {
       const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
       copyFileSync(pdfPath, outputPath)
       db.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
-      return { body: readFileSync(outputPath), fileName, outputPath }
+      recentDraftPdfExports.set(draftPaperId, { signature, fileName, outputPath, createdAt: Date.now() })
+      return { body: readFileSync(outputPath), fileName, outputPath, draftPaper, reusedRecent: false }
     } finally {
       rmSync(tempDir, { recursive: true, force: true })
     }
@@ -11487,6 +11580,11 @@ const server = createServer(async (request, response) => {
       return
     }
 
+    if (request.method === 'GET' && url.pathname.startsWith('/user-space/files/')) {
+      sendMySpaceArtifactStatic(response, url.pathname)
+      return
+    }
+
     if (request.method === 'GET' && url.pathname === '/api/health') {
       sendJson(response, 200, { ok: true, dbPath })
       return
@@ -11494,6 +11592,125 @@ const server = createServer(async (request, response) => {
 
     if (request.method === 'GET' && url.pathname === '/api/question-groups') {
       sendJson(response, 200, { questionGroups: listQuestionGroups() })
+      return
+    }
+
+    if (request.method === 'GET' && url.pathname === '/api/my-space') {
+      const db = openDatabase()
+      try {
+        sendJson(response, 200, listMySpace(db, { folderId: url.searchParams.get('folderId') }))
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'GET' && url.pathname === '/api/my-space/folders') {
+      const db = openDatabase()
+      try {
+        const snapshot = listMySpace(db)
+        sendJson(response, 200, { folders: snapshot.folders })
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'GET' && url.pathname === '/api/my-space/artifacts') {
+      const db = openDatabase()
+      try {
+        const snapshot = listMySpace(db, { folderId: url.searchParams.get('folderId') })
+        sendJson(response, 200, { artifacts: snapshot.artifacts })
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/my-space/folders') {
+      const input = await readJsonBody(request, { maxBytes: 100_000 })
+      const db = openDatabase({ readOnly: false })
+      try {
+        const folder = createMySpaceFolder(db, input)
+        sendJson(response, 201, { folder })
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    const mySpaceFolderMatch = url.pathname.match(/^\/api\/my-space\/folders\/([^/]+)$/)
+    if (mySpaceFolderMatch && request.method === 'PATCH') {
+      const input = await readJsonBody(request, { maxBytes: 100_000 })
+      const db = openDatabase({ readOnly: false })
+      try {
+        const folder = renameMySpaceFolder(db, decodeURIComponent(mySpaceFolderMatch[1]), input)
+        sendJson(response, 200, { folder })
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (mySpaceFolderMatch && request.method === 'DELETE') {
+      const db = openDatabase({ readOnly: false })
+      try {
+        sendJson(response, 200, deleteMySpaceFolder(db, decodeURIComponent(mySpaceFolderMatch[1])))
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/my-space/artifacts') {
+      const input = await readJsonBody(request, { maxBytes: 500_000 })
+      const draftPaperId = String(input.draftPaperId || '').trim()
+      let result = null
+      try {
+        result = exportDraftPaperPdf(draftPaperId, { preferRecent: true })
+        const db = openDatabase({ readOnly: false })
+        try {
+          const artifact = saveMySpaceArtifact(db, {
+            filesRoot: userSpaceFilesDir,
+            draftPaper: result.draftPaper,
+            pdfBody: result.body,
+            sourcePdfPath: result.outputPath,
+            folderId: input.folderId,
+            fileName: input.fileName,
+          })
+          clearRecentDraftPdfExport(draftPaperId, result.outputPath)
+          sendJson(response, 201, { artifact, reusedRecentPdf: result.reusedRecent === true })
+        } finally {
+          db.close()
+        }
+      } catch (error) {
+        clearRecentDraftPdfExport(draftPaperId, result?.outputPath)
+        const message = error instanceof Error ? error.message : String(error)
+        if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
+          sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
+        } else {
+          sendJson(response, 400, { error: message })
+        }
+      }
+      return
+    }
+
+    const mySpaceArtifactMatch = url.pathname.match(/^\/api\/my-space\/artifacts\/([^/]+)$/)
+    if (mySpaceArtifactMatch && request.method === 'DELETE') {
+      const db = openDatabase({ readOnly: false })
+      try {
+        sendJson(response, 200, deleteMySpaceArtifact(db, userSpaceFilesDir, decodeURIComponent(mySpaceArtifactMatch[1])))
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      } finally {
+        db.close()
+      }
       return
     }
 
@@ -12203,6 +12420,7 @@ const server = createServer(async (request, response) => {
 
 ensureDatabaseShape()
 cleanupPaperImportTempArtifacts(paperAssetsDir)
+ensureMySpaceFilesRoot(userSpaceFilesDir)
 
 server.listen(port, '127.0.0.1', () => {
   console.log(`Question bank API listening on http://127.0.0.1:${port}`)

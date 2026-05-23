@@ -40,6 +40,7 @@ data/*
 !data/.gitkeep
 !data/sql/
 !data/sql/**
+data/user-space/files/
 .scratch/
 
 # Imported source files, generated exports, reports, and browser output

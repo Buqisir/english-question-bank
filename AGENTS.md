@@ -38,6 +38,13 @@ This repo builds the local-first English question bank workbench.
   create or update `docs/cuts/<CUT>/agent-entrypoint.md`, use
   `docs/cuts/_templates/` when starting a cut, and keep handoff / Cut
   Note records there when the cut pauses or lands.
+- Hard rule: substantive multi-agent context must live in repo files,
+  not in chat. PM specs, PA prompts, PA reports, Big CR prompts,
+  Big CR reports, DEV goal prompts, handoffs, decisions, and Cut Notes
+  belong under `docs/cuts/<CUT>/` or another named repo path. Chat
+  messages should only route agents to those files and state the next
+  action. Do not depend on copy/pasted long chat history as the source
+  of truth.
 - For PaperSurface specifically, insight should default to a short
   passage map. Dense diagnostics such as vocabulary load, grammar load,
   evidence difficulty, dot/bar systems, long key-chunk lists, or AI

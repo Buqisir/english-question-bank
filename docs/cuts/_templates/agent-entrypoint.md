@@ -39,6 +39,13 @@ Write the next artifact to:
 docs/cuts/<CUT>/<artifact>.md
 ```
 
+Repo-file handoff rule:
+
+- Put substantive PA / CR / DEV / QA / RM context in repo files, not chat.
+- Chat should only route agents to this entrypoint and the expected output path.
+- If a material decision was made in chat, copy it into `decisions.md`,
+  `pm-spec.md`, `handoff.md`, or this entrypoint before the next agent acts.
+
 Reply with only:
 
 - report path

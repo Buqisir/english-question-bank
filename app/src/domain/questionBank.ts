@@ -164,6 +164,30 @@ export type DraftPaper = DraftPaperSummary & {
   printHtml: string
 }
 
+export type MySpaceFolder = {
+  id: string
+  name: string
+  artifactCount: number
+  createdAt: string
+  updatedAt: string
+}
+
+export type MySpaceArtifact = {
+  id: string
+  folderId: string | null
+  title: string
+  fileName: string
+  fileUrl: string
+  artifactType: 'student-paper'
+  sourceDraftPaperId: string
+  sourceDraftTitle: string
+  sourceDraftExists: boolean
+  pageCount: number
+  generatedAt: string
+  createdAt: string
+  updatedAt: string
+}
+
 export type CreateQuestionGroupInput = {
   sourceType: SourceType
   year: number

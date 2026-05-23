@@ -12,7 +12,7 @@
   border-radius: 8px;
   display: grid;
   gap: 12px;
-  grid-template-columns: auto minmax(260px, 1fr) auto minmax(180px, auto) auto;
+  grid-template-columns: auto minmax(260px, 1fr) auto minmax(180px, auto) auto auto;
   padding: 12px;
   position: sticky;
   top: 12px;
@@ -20,10 +20,14 @@
 }
 
 .draft-back-button,
+.draft-my-space-link,
 .draft-export-menu button,
 .draft-outline-actions button,
 .draft-suggestions button,
-.draft-undo-toast button {
+.draft-undo-toast button,
+.draft-dialog-actions button,
+.draft-new-folder-row button,
+.draft-dialog-head button {
   align-items: center;
   background: #fffdf8;
   border: 1px solid #cfc6b8;
@@ -263,6 +267,74 @@
   position: fixed;
   transform: translateX(-50%);
   z-index: 30;
+}
+
+.draft-modal-backdrop {
+  align-items: center;
+  background: rgba(36, 32, 27, 0.28);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 18px;
+  position: fixed;
+  z-index: 40;
+}
+
+.draft-save-space-dialog {
+  background: #fbfaf7;
+  border: 1px solid #d9d2c7;
+  border-radius: 8px;
+  box-shadow: 0 18px 46px rgba(36, 32, 27, 0.22);
+  display: grid;
+  gap: 12px;
+  max-width: 440px;
+  padding: 16px;
+  width: min(100%, 440px);
+}
+
+.draft-dialog-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.draft-save-space-dialog label {
+  display: grid;
+  gap: 5px;
+}
+
+.draft-save-space-dialog label span,
+.draft-dialog-note {
+  color: #746b60;
+  font-size: 12px;
+}
+
+.draft-save-space-dialog input,
+.draft-save-space-dialog select {
+  background: #fffdf8;
+  border: 1px solid #cfc6b8;
+  border-radius: 6px;
+  color: #24201b;
+  font: inherit;
+  min-height: 36px;
+  padding: 6px 9px;
+}
+
+.draft-new-folder-row {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.draft-dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.draft-success button {
+  margin-left: 10px;
 }
 
 @media (max-width: 980px) {
