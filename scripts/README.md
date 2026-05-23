@@ -20,6 +20,7 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 | `verify-h1d-analysis-availability.mjs` | H1-D PaperSurface analysis availability owner contract | yes |
 | `verify-h1e-export-routes.mjs` | H1-E export route dispatch contract | yes |
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
+| `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
 
 ## Core data and import
 

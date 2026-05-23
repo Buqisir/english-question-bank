@@ -25,6 +25,7 @@ import { createLegacyImportRoutes } from './imports/legacyImportRoutes.mjs'
 import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
+import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
 import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
@@ -48,6 +49,7 @@ const serverContext = {
   importDir,
   paperAssetsDir,
   userSpaceFilesDir,
+  localQwenEnabled: process.env.QUESTION_BANK_ENABLE_LOCAL_QWEN === '1',
   openDatabase,
   readJsonBody,
   sendDocx,
@@ -58,19 +60,37 @@ const serverContext = {
   exportPrintHtml,
   exportPrintPdf,
   applyAnswerAlignment,
+  bindTopicLabelsToQuestionGroup,
   createImportFile,
+  createQuestionGroup,
   deleteImportFile,
+  deleteQuestionGroup,
+  generateQuestionGroupSummary,
   generateAnswerAlignmentDraft,
   generateImportBundleDraft,
+  generateSynonymDifficultyByQuestionGroup,
+  generateTopicLabelsByQuestionGroup,
+  getQuestionGroupDetail,
   getPaperSurfaceAnalysisAvailabilityByGroupId,
   getImportFileParse,
   invalidatePaperSurfaceAnalysisAvailability,
   listImportBatches,
   listImportBundles,
   listImportFiles,
+  listQuestionGroups,
+  parseClozeByQuestionGroup,
+  parseGrammarByQuestionGroup,
   parseImportFile,
+  parseReadingByQuestionGroup,
+  parseSevenChoicesByQuestionGroup,
   runImportBatch,
+  saveClozeParseResult,
+  saveGrammarParseResult,
+  saveQuestionDifficultyRating,
+  saveReadingParseResult,
+  saveSevenChoicesParseResult,
   scanImportDirectory,
+  updateQuestionGroup,
 }
 const h1Routes = [
   defineRoute('GET', /^\/api\/health$/, ({ response, context }) => {
@@ -397,6 +417,7 @@ const serverRoutes = [
   ...createPaperImportRoutes(),
   ...createExportRoutes(),
   ...createLegacyImportRoutes(),
+  ...createQuestionGroupRoutes(),
 ]
 
 function getDraftSearchContext(db) {
@@ -10925,11 +10946,6 @@ const server = createServer(async (request, response) => {
       return
     }
 
-    if (request.method === 'GET' && url.pathname === '/api/question-groups') {
-      sendJson(response, 200, { questionGroups: listQuestionGroups() })
-      return
-    }
-
     if (request.method === 'GET' && url.pathname === '/api/ai/verify-trace') {
       const traceId = url.searchParams.get('traceId')?.trim()
       if (!traceId) {
@@ -10990,200 +11006,6 @@ const server = createServer(async (request, response) => {
         return
       }
       sendJson(response, 200, { paperSet })
-      return
-    }
-
-    const detailMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)$/)
-    const readingParseMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/reading-parse$/)
-    const clozeParseMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/cloze-parse$/)
-    const sevenChoicesParseMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/seven-choices-parse$/)
-    const grammarParseMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/grammar-parse$/)
-    const summaryMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/summary$/)
-    const topicLabelsMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/topic-labels$/)
-    const synonymDifficultyMatch = url.pathname.match(/^\/api\/question-groups\/([^/]+)\/synonym-difficulty$/)
-    const questionDifficultyMatch = url.pathname.match(/^\/api\/questions\/([^/]+)\/difficulty-rating$/)
-    if (request.method === 'GET' && detailMatch) {
-      const questionGroup = getQuestionGroupDetail(decodeURIComponent(detailMatch[1]))
-      if (!questionGroup) {
-        sendJson(response, 404, { error: 'Question group not found' })
-        return
-      }
-      sendJson(response, 200, { questionGroup })
-      return
-    }
-
-    if (request.method === 'PUT' && readingParseMatch) {
-      const input = await readJsonBody(request, { maxBytes: 3_000_000 })
-      const result = saveReadingParseResult(decodeURIComponent(readingParseMatch[1]), input)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && readingParseMatch) {
-      const input = await readJsonBody(request)
-      const result = await parseReadingByQuestionGroup(
-        decodeURIComponent(readingParseMatch[1]),
-        input.apiKey,
-        input.model,
-        input.requestId,
-        input.thinkingMode,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && clozeParseMatch) {
-      const input = await readJsonBody(request)
-      const result = await parseClozeByQuestionGroup(
-        decodeURIComponent(clozeParseMatch[1]),
-        input.apiKey,
-        input.model,
-        input.requestId,
-        input.thinkingMode,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'PUT' && clozeParseMatch) {
-      const input = await readJsonBody(request, { maxBytes: 3_000_000 })
-      const result = saveClozeParseResult(decodeURIComponent(clozeParseMatch[1]), input)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && sevenChoicesParseMatch) {
-      const input = await readJsonBody(request)
-      const result = await parseSevenChoicesByQuestionGroup(
-        decodeURIComponent(sevenChoicesParseMatch[1]),
-        input.apiKey,
-        input.model,
-        input.requestId,
-        input.thinkingMode,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'PUT' && sevenChoicesParseMatch) {
-      const input = await readJsonBody(request, { maxBytes: 3_000_000 })
-      const result = saveSevenChoicesParseResult(decodeURIComponent(sevenChoicesParseMatch[1]), input)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'PUT' && questionDifficultyMatch) {
-      const input = await readJsonBody(request, { maxBytes: 20_000 })
-      let question = null
-      try {
-        question = saveQuestionDifficultyRating(decodeURIComponent(questionDifficultyMatch[1]), input)
-      } catch (error) {
-        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
-        return
-      }
-      if (!question) {
-        sendJson(response, 404, { error: 'Question not found' })
-        return
-      }
-      sendJson(response, 200, { question })
-      return
-    }
-
-    if (request.method === 'POST' && grammarParseMatch) {
-      const input = await readJsonBody(request)
-      const result = await parseGrammarByQuestionGroup(
-        decodeURIComponent(grammarParseMatch[1]),
-        input.apiKey,
-        input.model,
-        input.requestId,
-        input.thinkingMode,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'PUT' && grammarParseMatch) {
-      const input = await readJsonBody(request, { maxBytes: 3_000_000 })
-      const result = saveGrammarParseResult(decodeURIComponent(grammarParseMatch[1]), input)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && summaryMatch) {
-      const input = await readJsonBody(request)
-      const result = await generateQuestionGroupSummary(
-        decodeURIComponent(summaryMatch[1]),
-        input.apiKey,
-        input.model,
-        input.requestId,
-        input.thinkingMode,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && topicLabelsMatch) {
-      const input = await readJsonBody(request)
-      const result = await generateTopicLabelsByQuestionGroup(
-        decodeURIComponent(topicLabelsMatch[1]),
-        input.apiKey,
-        input.model,
-        input.requestId,
-        input.thinkingMode,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && synonymDifficultyMatch) {
-      if (!QUESTION_BANK_ENABLE_LOCAL_QWEN) {
-        sendJson(response, 410, {
-          error: '题库本地 Qwen 初判已停用。请使用 DeepSeek 阅读解析内置的 synonymDifficulty。',
-          replacement: 'POST /api/question-groups/:id/reading-parse',
-        })
-        return
-      }
-      const input = await readJsonBody(request, { maxBytes: 3_000_000 })
-      const result = await generateSynonymDifficultyByQuestionGroup(
-        decodeURIComponent(synonymDifficultyMatch[1]),
-        input,
-      )
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'PUT' && topicLabelsMatch) {
-      const input = await readJsonBody(request, { maxBytes: 1_000_000 })
-      const result = bindTopicLabelsToQuestionGroup(decodeURIComponent(topicLabelsMatch[1]), input)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/question-groups') {
-      const input = await readJsonBody(request)
-      const questionGroup = createQuestionGroup(input)
-      sendJson(response, 201, { questionGroup })
-      return
-    }
-
-    if (request.method === 'PUT' && detailMatch) {
-      const input = await readJsonBody(request)
-      const questionGroup = updateQuestionGroup(decodeURIComponent(detailMatch[1]), input)
-      if (!questionGroup) {
-        sendJson(response, 404, { error: 'Question group not found' })
-        return
-      }
-      sendJson(response, 200, { questionGroup })
-      return
-    }
-
-    if (request.method === 'DELETE' && detailMatch) {
-      const result = deleteQuestionGroup(decodeURIComponent(detailMatch[1]))
-      if (!result) {
-        sendJson(response, 404, { error: 'Question group not found' })
-        return
-      }
-      sendJson(response, 200, { ok: true })
       return
     }
 
