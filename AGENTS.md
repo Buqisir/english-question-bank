@@ -45,6 +45,20 @@ This repo builds the local-first English question bank workbench.
   messages should only route agents to those files and state the next
   action. Do not depend on copy/pasted long chat history as the source
   of truth.
+- Use prompt templates for external PA and Big CR instead of rewriting
+  boilerplate by hand:
+  `docs/cuts/_templates/pa-prompt-template.md` and
+  `docs/cuts/_templates/big-cr-prompt-template.md`.
+- Cut decision ledgers should expose freshness. New `decisions.md`
+  files should include `Last synced` and
+  `Open items from external review`, and external PA / Big CR follow-up
+  must update those fields before another agent depends on the file.
+- Agent entrypoints should split reading into `Must Read` and
+  `Background`. Keep Must Read cut-specific and short; Background may
+  be skipped when already loaded in the same session.
+- External PA / Big CR agents may stop with an escalation signal instead
+  of writing a partial report: `CONTEXT INSUFFICIENT`,
+  `BRANCH CONFLICT`, `SPEC CONTRADICTS`, or `SCOPE UNCLEAR`.
 - For PaperSurface specifically, insight should default to a short
   passage map. Dense diagnostics such as vocabulary load, grammar load,
   evidence difficulty, dot/bar systems, long key-chunk lists, or AI

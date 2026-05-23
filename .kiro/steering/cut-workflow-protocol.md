@@ -202,6 +202,29 @@ path, allowed / forbidden scope, and the next expected artifact. Chat
 messages should route agents to this file; decisions belong in repo
 files, not only in chat.
 
+Entry points should split reading into two layers:
+
+- `Must Read`: cut-specific, at most 5 files, needed for the immediate
+  task.
+- `Background`: steering / domain / process files to skim only if the
+  agent is unfamiliar or has not already loaded them in the session.
+
+Do not put files in Must Read merely because they might be useful.
+
+### External prompt templates
+
+Use templates instead of rewriting PA / Big CR boilerplate by hand:
+
+```text
+docs/cuts/_templates/pa-prompt-template.md
+docs/cuts/_templates/big-cr-prompt-template.md
+```
+
+Prompt files should fill only the cut id, branch / PR, output path,
+cut-specific reading, review focus, and extra counts. Shared role
+boundaries, escalation signals, output path expectations, and chat
+reply format live in the templates.
+
 ### Repo-file handoff rule
 
 For multi-agent work, repo files are the transport layer. The following
@@ -226,6 +249,34 @@ If a material decision was made in chat during a grill, it must be
 copied into the cut's `decisions.md`, `pm-spec.md`, `agent-entrypoint.md`,
 or `handoff.md` before DEV or external review continues.
 
+### Decisions sync status
+
+Cut decision ledgers should say how fresh they are. New or updated
+`decisions.md` files should include:
+
+```text
+Last synced: <date> after <event>.
+Open items from external review: <N>
+```
+
+After PA or Big CR writes a report, Codex must update the decision
+status in the same PR before another agent treats `decisions.md` as
+authoritative.
+
+If review opens decisions:
+
+```text
+Last synced: <date> after <PA / Big CR>.
+Open items from external review: <N> (see <report path> §<section>)
+```
+
+After PM / PO compression resolves them:
+
+```text
+Last synced: <date> after <PA / Big CR> + PM compression.
+Open items from external review: 0
+```
+
 When a cut pauses, changes owner, or crosses a context boundary, write:
 
 ```text
@@ -234,6 +285,16 @@ docs/cuts/<CUT>/handoff.md
 
 The handoff records current truth, remaining gates, known risks, and the
 next concrete action.
+
+After a large cut, record both:
+
+```text
+docs/cuts/<CUT>/cut-note.md
+docs/cuts/<CUT>/handoff.md
+```
+
+The Cut Note records what shipped, moved, and was learned. The handoff
+records what the next cut must know to avoid repeating mistakes.
 
 Use the templates in `docs/cuts/_templates/`.
 
@@ -263,7 +324,8 @@ docs/cuts/<CUT>/watch-ledger.md
 ```
 
 Use the templates in `docs/cuts/_templates/` for entrypoints, handoffs,
-Cut Notes, CR-lite reports, external review reports, and watch ledgers.
+Cut Notes, decisions, PA prompts, Big CR prompts, CR-lite reports,
+external review reports, and watch ledgers.
 
 ## 3. Multi-platform source of truth
 
@@ -281,6 +343,26 @@ Codex is responsible for local state control:
 External high-reasoning PA tools such as Antigravity / Opus may help
 with high-level thinking, large-cut direction, and occasional big CR.
 They must be told to sync and verify the baseline before review.
+
+External agents may escalate instead of writing partial reports. The
+standard signals are:
+
+- `CONTEXT INSUFFICIENT`: required reading file is missing, empty, or
+  unreadable.
+- `BRANCH CONFLICT`: target branch or PR cannot be inspected because of
+  local worktree / checkout state.
+- `SPEC CONTRADICTS`: PM spec, decisions, ADR, or entrypoint disagree
+  on a key point.
+- `SCOPE UNCLEAR`: review focus asks a question the spec does not
+  answer.
+
+Format:
+
+```text
+ESCALATION: <SIGNAL> — <one sentence explanation>
+```
+
+Codex or the owner resolves the escalation before the agent proceeds.
 
 External DEV is no longer part of the default daily workflow. Use it
 only when the owner explicitly asks for that exception. In that case,
@@ -447,6 +529,17 @@ The failure / attack angle is not a security theater exercise. It is a
 forcing function to review process holes, stale assumptions, fallback
 paths, and misleading green checks before RM.
 
+Big CR should not repeat a full manual forbidden-scope audit when a
+passing verify script already covers it. In that case, the report should
+say:
+
+```text
+Covered by verify; spot-checked <N> files.
+```
+
+Then review the higher-value risks: behavior, data contracts, state
+flow, stale fallbacks, and verification gaps.
+
 Browser QA must include the failure modes that previously hurt the
 product:
 
@@ -459,9 +552,10 @@ product:
 - coexistence with evidence lines / existing overlays
 - no stale or unsynced code
 
-## 10. Cut Note
+## 10. Cut Note And Handoff
 
-After a large cut, record a Cut Note. Include:
+After a large cut, record a Cut Note and a handoff. Include in the Cut
+Note:
 
 - what shipped
 - what was cut or moved
@@ -471,3 +565,6 @@ After a large cut, record a Cut Note. Include:
 
 The Cut Note should preserve why decisions were made, not merely list
 files changed.
+
+The handoff should preserve what the next cut must know. Keep it short:
+three items is good, more than five suggests the cut was too large.

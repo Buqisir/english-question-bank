@@ -35,6 +35,10 @@ Token / cost notes:
 - Watch ledger:
 - Follow-up gates:
 
+## Handoff
+
+- Next-cut handoff:
+
 ## Next Cut
 
 - 
