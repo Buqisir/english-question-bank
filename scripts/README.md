@@ -17,6 +17,7 @@ to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
 | `verify-architecture-housekeeping.mjs` | Housekeeping guardrails: CI, code style, tokens, verify index | yes |
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
 | `verify-h1c-paper-import-routes.mjs` | H1-C Paper Import route extraction contract | yes |
+| `verify-h1d-analysis-availability.mjs` | H1-D PaperSurface analysis availability owner contract | yes |
 
 ## Core data and import
 
