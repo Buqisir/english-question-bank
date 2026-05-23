@@ -1,6 +1,6 @@
 # H1 Architecture Housekeeping Decisions
 
-Status: PM locked after PO grill. Ready for small external PA.
+Status: small external PA complete. Ready for DEV after planning PR merge.
 
 ## Cut Identity
 
@@ -67,6 +67,13 @@ Not allowed in H1:
 - global error-code rewrites;
 - replacing the server with Express / Fastify / another framework.
 
+`readJsonRouteBody` is a route-infrastructure wrapper around the existing
+`readJsonBody` behavior. It must preserve the current default `maxBytes` value
+and may not silently change body-size limits.
+
+H1-A may move at most the health-check route through the registry. Larger
+routes wait for the surface-specific PRs.
+
 ## PR Split
 
 H1 must be split into four implementation PRs:
@@ -81,6 +88,14 @@ H1 must be split into four implementation PRs:
    - Keep / reuse `server/my-space/mySpace.mjs`, and move My Space route
      dispatch / static file route out of `server/api.mjs`.
    - Cover C8 draft + My Space smoke.
+   - Keep `selectQuestionGroupCards`, `getQuestionGroupDetail`,
+     `getDraftSearchContext`, and `isGroupPrintReady` in `server/api.mjs` for
+     this PR; pass them by context if extracted Draft Paper modules need them.
+   - Move only Draft Paper-owned helpers such as `markCurrentDraftPaper`,
+     `buildDraftPaperBlocks`, `buildDraftPaperExportInput`,
+     `buildDraftPrintHtml`, and `estimateEnglishWords`.
+   - If the diff exceeds 2000 lines, split into H1-B1 Draft Paper and H1-B2
+     My Space.
 
 3. **H1-C C7 Paper Import**
    - Extract validate / publish / revalidate-latest route dispatch.
@@ -91,6 +106,12 @@ H1 must be split into four implementation PRs:
    - Extract export route dispatch.
    - Extract PaperSurface analysis availability / search availability seams.
    - Preserve current search card fields and PDF/DOCX behavior.
+   - Keep a single owner for `paperSurfaceAnalysisAvailabilityByGroupIdCache`.
+     The cache and invalidation can remain in `server/api.mjs` until H1-D, or
+     H1-D can move them together into
+     `server/search/paperSurfaceAvailability.mjs`. They must not be duplicated.
+   - Paper Import publish / revalidate invalidation and search-card enrichment
+     must call the same cache owner.
 
 Do not merge these in parallel. Each PR starts from latest `main` after the
 previous PR is merged.
@@ -120,4 +141,4 @@ previous PR is merged.
 
 ## Open PO Decisions
 
-0. H1 is ready for small PA.
+0. H1 is ready for DEV after planning PR merge.

@@ -1,6 +1,6 @@
 # H1 Architecture Housekeeping PM Spec
 
-Status: ready for small external PA.
+Status: small external PA complete; ready for DEV after planning PR merge.
 
 ## Problem
 
@@ -164,6 +164,26 @@ Requirements:
 - Preserve Save-to-My-Space staging-PDF cleanup.
 - Preserve C8 preview / PDF behavior.
 
+Shared helper boundary:
+
+- Move Draft Paper-owned helpers into `server/draft-paper/draftPaperStore.mjs`
+  when they are only used by Draft Paper routes or Draft Paper print output.
+  Known candidates include `markCurrentDraftPaper`,
+  `buildDraftPaperBlocks`, `buildDraftPaperExportInput`,
+  `buildDraftPrintHtml`, and `estimateEnglishWords`.
+- Keep broad question-bank/search helpers in `server/api.mjs` for H1-B and
+  pass them through the server context when a Draft Paper module needs them.
+  Do not move `selectQuestionGroupCards`, `getQuestionGroupDetail`,
+  `getDraftSearchContext`, or `isGroupPrintReady` in H1-B.
+- Generic plumbing (`openDatabase`, `readJsonRouteBody`, `sendJson`,
+  `sendPdf`, shared path roots) is context-provided, not redefined in Draft
+  Paper modules.
+- `buildPrintHtml` remains owned by `server/print-renderer.mjs`. Extracted
+  Draft Paper modules may import the existing export, but H1 must not change
+  the body of `server/print-renderer.mjs`.
+- If H1-B exceeds 2000 diff lines, split it into H1-B1 Draft Paper and H1-B2
+  My Space before review.
+
 ### H1-C C7 Paper Import
 
 Purpose: extract the C7 import route dispatch while preserving atomic publish
@@ -209,8 +229,11 @@ Requirements:
 
 - Preserve existing export behavior.
 - Preserve existing search-card response fields.
-- Preserve cache behavior unless a verify-covered mechanical context move is
-  required.
+- Preserve cache behavior. The PaperSurface analysis availability cache must
+  have exactly one owner. It may remain in `server/api.mjs` until H1-D, or H1-D
+  may move it to `server/search/paperSurfaceAvailability.mjs`, but it must not
+  be duplicated across modules. Paper Import invalidation and search enrichment
+  must call the same owner.
 
 ## Verification Gates
 
@@ -220,6 +243,14 @@ Every H1 PR:
 - `npm run verify:all` from `app/`
 - `npm run build` from `app/`
 - focused H1 verify for that PR
+
+H1-A additionally:
+
+- verify that `server/router/` exports only `defineRoute`, `runRoutes`, and
+  `readJsonRouteBody`;
+- verify that `readJsonRouteBody` preserves the current `readJsonBody`
+  default `maxBytes` behavior;
+- move at most the health-check route through the registry.
 
 H1-B additionally:
 
@@ -267,6 +298,8 @@ the PM spec / PA before coding further.
   may be changing behavior.
 - `server/api.mjs` line count. Record before/after, but do not chase a number
   at the expense of safe boundaries.
+- Shared-state splitting. If PaperSurface availability cache invalidation is
+  reachable from two owners, stop and re-centralize it.
 
 ## External PA Questions
 
