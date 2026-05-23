@@ -2,27 +2,31 @@
 
 Cut: H3 Frontend Component Slimming
 Last updated: 2026-05-23
-Branch: `codex/h3-goal-plan`
-PR: planning PR
+Branch: `codex/h3-a-draft-preview-locality`
+PR: H3-A implementation PR
 
 ## Current Truth
 
 - H3 is open as the next housekeeping cut after H2.
 - H3 is about frontend locality, not visual redesign.
-- Recommended first implementation slice is H3-A:
-  Draft Paper Preview / Export Locality.
-- Do not start by slimming PaperSurface harness unless PO explicitly redirects.
+- H3-A Draft Paper Preview / Export Locality has been implemented.
+- Do not start by slimming PaperSurface harness unless PO explicitly redirects
+  after the Draft Paper slices are complete.
 
 ## Completed
 
 - Goal doc written.
 - Agent entrypoint written.
 - First-slice recommendation recorded.
+- H3-A extracted A4 preview HTML generation from
+  `DraftPaperWorkbench.tsx` into `draftPaperPreviewHtml.ts`.
+- H3-A dev notes and CR-lite written.
 
 ## Still Open
 
-- H3-A implementation has not started.
-- No browser QA has run for H3 because no runtime code has changed.
+- H3-B Draft Paper Outline / My Space Dialog Locality has not started.
+- No browser QA has run for H3-A because the slice is a pure extraction and the
+  render-model verify protects the behavior.
 
 ## Must Not Forget
 
@@ -33,15 +37,16 @@ PR: planning PR
 
 ## Verify / QA State
 
-- Planning docs should pass `git diff --check`.
-- Implementation slices must run their narrow verify scripts.
+- `node scripts/verify-c8-draft-paper-render-model.mjs` passed for H3-A.
+- `npm run build` from `app/` passed for H3-A.
+- `git diff --check` passed for H3-A.
 
 ## Next Action
 
-Start H3-A:
+Start H3-B:
 
 ```text
-Extract Draft Paper A4 preview HTML generation from DraftPaperWorkbench.tsx
-into a feature-local module, preserve preview/PDF/print behavior, and run
-scripts/verify-c8-draft-paper-render-model.mjs plus git diff --check.
+Extract Draft Paper outline / page-break / reorder UI from
+DraftPaperWorkbench.tsx into a feature-local component while preserving behavior
+exactly.
 ```
