@@ -87,7 +87,7 @@ assert('scripts README documents stable CI entrypoint', scriptsReadme.includes('
 assert('scripts README documents build/typecheck in stable CI', scriptsReadme.includes('build/typecheck'))
 assert('scripts README documents server dependency install', scriptsReadme.includes('npm ci') && scriptsReadme.includes('server/'))
 assert('scripts README documents workflow-scope install constraint', scriptsReadme.includes('requires a token with workflow scope'))
-assert('scripts README marks host interaction as not CI', scriptsReadme.includes('Host interaction reducer / state rules; includes cut-specific forbidden-scope checks | no'))
+assert('scripts README marks host interaction as not CI', scriptsReadme.includes('Host interaction reducer run-form behavior and seam rules; includes cut-specific forbidden-scope checks | no'))
 assert('scripts README marks C8 draft paper contracts as CI', scriptsReadme.includes('C8 draft-paper API/search/workbench contract | yes'))
 
 function extractVerifyCiScripts(source) {
