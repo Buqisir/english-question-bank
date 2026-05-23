@@ -30,6 +30,12 @@ assert('GitHub Actions workflow install note exists', existsSync(path.join(rootD
 assert('code-style doc exists', existsSync(path.join(rootDir, 'docs/code-style.md')))
 assert('shared UI token file exists', existsSync(path.join(rootDir, 'app/src/shared-ui/tokens.css')))
 assert('CI verify entrypoint exists', existsSync(path.join(rootDir, 'scripts/verify-ci.mjs')))
+assert('agent entrypoint template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/agent-entrypoint.md')))
+assert('handoff template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/handoff.md')))
+assert('cut note template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/cut-note.md')))
+assert('decisions template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/decisions.md')))
+assert('PA prompt template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/pa-prompt-template.md')))
+assert('Big CR prompt template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/big-cr-prompt-template.md')))
 assert('CR-lite template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/cr-lite.md')))
 assert('external review template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/external-review-report.md')))
 assert('watch ledger template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/watch-ledger.md')))
@@ -159,15 +165,45 @@ const cutWorkflow = read('.kiro/steering/cut-workflow-protocol.md')
 assert('workflow protocol requires CR-lite failure angle', cutWorkflow.includes('failure / attack angle'))
 assert('workflow protocol defines watch ledger destination', cutWorkflow.includes('docs/cuts/<CUT>/watch-ledger.md'))
 assert('workflow protocol asks external review for token metadata', cutWorkflow.includes('token usage / estimated cost'))
+assert('workflow protocol names PA prompt template', cutWorkflow.includes('pa-prompt-template.md'))
+assert('workflow protocol names Big CR prompt template', cutWorkflow.includes('big-cr-prompt-template.md'))
+assert('workflow protocol requires layered reading', cutWorkflow.includes('Must Read') && cutWorkflow.includes('Background'))
+assert('workflow protocol requires decisions sync status', cutWorkflow.includes('Open items from external review'))
+assert('workflow protocol defines escalation signals', cutWorkflow.includes('CONTEXT INSUFFICIENT') && cutWorkflow.includes('SPEC CONTRADICTS'))
+assert('workflow protocol requires large-cut handoff with cut note', cutWorkflow.includes('docs/cuts/<CUT>/cut-note.md') && cutWorkflow.includes('docs/cuts/<CUT>/handoff.md'))
+assert('workflow protocol delegates covered forbidden scope to verify', cutWorkflow.includes('Covered by verify; spot-checked <N> files.'))
+
+const agentEntrypointTemplate = read('docs/cuts/_templates/agent-entrypoint.md')
+assert('agent entrypoint template splits Must Read and Background', agentEntrypointTemplate.includes('## Must Read') && agentEntrypointTemplate.includes('## Background'))
+assert('agent entrypoint template includes escalation signals', agentEntrypointTemplate.includes('ESCALATION: <SIGNAL>') && agentEntrypointTemplate.includes('BRANCH CONFLICT'))
+
+const decisionsTemplate = read('docs/cuts/_templates/decisions.md')
+assert('decisions template includes sync status fields', decisionsTemplate.includes('Last synced:') && decisionsTemplate.includes('Open items from external review:'))
 
 const crLiteTemplate = read('docs/cuts/_templates/cr-lite.md')
 assert('CR-lite template includes failure angle section', crLiteTemplate.includes('## Failure / Attack Angle'))
 
 const externalReviewTemplate = read('docs/cuts/_templates/external-review-report.md')
 assert('external review template includes baseline and cost sections', externalReviewTemplate.includes('## Baseline Reviewed') && externalReviewTemplate.includes('## Token / Cost Metadata'))
+assert('external review template includes decision sync section', externalReviewTemplate.includes('## Decision Sync'))
+assert('external review template includes forbidden-scope verify handoff', externalReviewTemplate.includes('Covered by verify; spot-checked'))
+
+const paPromptTemplate = read('docs/cuts/_templates/pa-prompt-template.md')
+assert('PA prompt template has layered reading and escalation', paPromptTemplate.includes('## Must Read') && paPromptTemplate.includes('## Background') && paPromptTemplate.includes('ESCALATION: <SIGNAL>'))
+assert('PA prompt template requires repo output path', paPromptTemplate.includes('Write the full report to:'))
+
+const bigCrPromptTemplate = read('docs/cuts/_templates/big-cr-prompt-template.md')
+assert('Big CR prompt template has layered reading and escalation', bigCrPromptTemplate.includes('## Must Read') && bigCrPromptTemplate.includes('## Background') && bigCrPromptTemplate.includes('ESCALATION: <SIGNAL>'))
+assert('Big CR prompt template avoids duplicate forbidden-scope audit', bigCrPromptTemplate.includes('Covered by verify; spot-checked <N> files.'))
+
+const handoffTemplate = read('docs/cuts/_templates/handoff.md')
+assert('handoff template captures next-cut lessons', handoffTemplate.includes('Things The Next Cut Must Know') && handoffTemplate.includes('Evidence:') && handoffTemplate.includes('Rule:'))
 
 const watchLedgerTemplate = read('docs/cuts/_templates/watch-ledger.md')
 assert('watch ledger template includes status vocabulary', watchLedgerTemplate.includes('converted-to-follow-up'))
+
+const paPersona = read('docs/agents/pa-persona.md')
+assert('PA persona documents escalation signals', paPersona.includes('## Escalation Signals') && paPersona.includes('SCOPE UNCLEAR'))
 
 const h2Entrypoint = read('docs/cuts/H2-workflow-verify-ci-discipline/agent-entrypoint.md')
 const h2CutNote = read('docs/cuts/H2-workflow-verify-ci-discipline/cut-note.md')

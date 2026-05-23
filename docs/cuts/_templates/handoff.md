@@ -21,6 +21,12 @@ PR:
 
 - 
 
+## Things The Next Cut Must Know
+
+1. Pattern:
+   - Evidence:
+   - Rule:
+
 ## Verify / QA State
 
 - 

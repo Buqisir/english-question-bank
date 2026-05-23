@@ -40,6 +40,16 @@ Date:
 
 - Allowed scope respected:
 - Forbidden scope touched:
+- Forbidden-scope audit:
+  - Covered by verify; spot-checked `<N>` files.
+  - OR manual audit because no verify covered forbidden scope:
+
+## Decision Sync
+
+- `decisions.md` status update required: yes / no
+- If yes:
+  - Last synced:
+  - Open items from external review:
 
 ## Recommendation
 

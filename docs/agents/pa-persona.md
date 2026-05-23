@@ -62,14 +62,40 @@ ambiguity reach DEV.
 
 Before reviewing a cut, read:
 
-- `docs/agents/review-levels.md`
-- `.kiro/steering/cut-workflow-protocol.md`
-- `.kiro/steering/product-scope-discipline.md`
+- the `Must Read` files named in the cut prompt or
+  `agent-entrypoint.md`
+- `docs/agents/review-levels.md`,
+  `.kiro/steering/cut-workflow-protocol.md`, and
+  `.kiro/steering/product-scope-discipline.md` only when they are not
+  already loaded in the current session or the prompt names them as
+  Must Read
 - any cut-specific product contract, ADR, or watch-ledger entry named
   in the task prompt
 
 If these files are unavailable, say so and review with reduced
 confidence.
+
+## Escalation Signals
+
+If the PA cannot write a reliable report, do not write a partial report.
+Reply in chat with exactly one escalation line:
+
+```text
+ESCALATION: <SIGNAL> — <one sentence explanation>
+```
+
+Signals:
+
+- `CONTEXT INSUFFICIENT`: required reading file is missing, empty, or
+  unreadable.
+- `BRANCH CONFLICT`: target branch / PR cannot be inspected because of
+  local worktree or checkout state.
+- `SPEC CONTRADICTS`: PM spec, decisions, ADR, or entrypoint disagree
+  on a key point.
+- `SCOPE UNCLEAR`: review focus contains a question the spec does not
+  answer.
+
+Codex or the owner resolves the escalation before PA proceeds.
 
 ## Duties
 

@@ -62,6 +62,12 @@ Hard rule:
   medium cuts unless the owner explicitly asks.
 - Treat GitHub `main` and PR heads as the shared truth. External reports
   are not truth until Codex verifies remote state.
+- Use `docs/cuts/_templates/pa-prompt-template.md` and
+  `docs/cuts/_templates/big-cr-prompt-template.md` for external PA /
+  Big CR prompts; do not hand-write repeated prompt boilerplate.
+- External agents may escalate instead of producing partial reports
+  with `CONTEXT INSUFFICIENT`, `BRANCH CONFLICT`, `SPEC CONTRADICTS`,
+  or `SCOPE UNCLEAR`.
 - Stop if mockups do not converge after 2 rounds, or if PA leaves more
   than 3 unresolved PO decisions.
 

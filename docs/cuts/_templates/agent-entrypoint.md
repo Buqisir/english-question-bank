@@ -9,12 +9,24 @@ Date:
 
 State the smallest current objective in one paragraph.
 
-## Required Reading
+## Must Read
+
+Keep this list cut-specific and at most 5 files.
+
+- `docs/cuts/<CUT>/pm-spec.md`
+- `docs/cuts/<CUT>/decisions.md`
+- Cut-specific ADR / contract:
+
+## Background
+
+Skim only if unfamiliar or not already loaded in this session.
 
 - `AGENTS.md`
 - `.kiro/steering/cut-workflow-protocol.md`
+- `.kiro/steering/product-scope-discipline.md`
 - `docs/agents/review-levels.md`
-- Cut-specific PM / PA / CR docs:
+- `docs/agents/pa-persona.md` for external PA only
+- `scripts/README.md`
 
 ## Source Of Truth
 
@@ -52,7 +64,20 @@ Repo-file handoff rule:
 - If a material decision was made in chat, copy it into `decisions.md`,
   `pm-spec.md`, `handoff.md`, or this entrypoint before the next agent acts.
 
-Reply with only:
+Escalation signals:
+
+- `CONTEXT INSUFFICIENT` — required reading file missing, empty, or
+  unreadable.
+- `BRANCH CONFLICT` — target branch / PR cannot be inspected because of
+  local worktree or checkout state.
+- `SPEC CONTRADICTS` — PM spec, decisions, ADR, or entrypoint disagree
+  on a key point.
+- `SCOPE UNCLEAR` — task asks a question the spec does not answer.
+
+Reply with `ESCALATION: <SIGNAL> — <one sentence explanation>` before
+writing a partial artifact.
+
+Chat reply format after writing the repo file:
 
 - report path
 - verdict / status
