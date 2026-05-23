@@ -256,6 +256,15 @@ Should Watch items from PA / CR must either be copied into the cut note
 or linked to the relevant ledger. Do not let watch items live only in
 chat history.
 
+When a cut has more than three watch items, create or update:
+
+```text
+docs/cuts/<CUT>/watch-ledger.md
+```
+
+Use the templates in `docs/cuts/_templates/` for entrypoints, handoffs,
+Cut Notes, CR-lite reports, external review reports, and watch ledgers.
+
 ## 3. Multi-platform source of truth
 
 The remote GitHub `main` branch and the PR head are the shared truth.
@@ -375,6 +384,8 @@ External PA must read `docs/agents/pa-persona.md` before review.
 
 PA output must end with:
 
+- report path
+- reviewed branch / commit baseline
 - verdict
 - product principle
 - exact UX / architecture model
@@ -385,6 +396,7 @@ PA output must end with:
 - browser QA matrix
 - whether the DEV prompt is ready
 - at most 3 unresolved PO decisions
+- token usage / estimated cost when available; if unavailable, say so
 
 Hard brake B:
 
@@ -417,6 +429,23 @@ default for routine cuts.
 CR should not become a second design session. If the implementation
 exposes a product flaw, stop and route back to PM / PA instead of
 quietly changing the design in review.
+
+Every mergeable PR needs a CR-lite record, even when the change is
+docs-only. For small cuts this can be a short PR-body section. For
+medium / large cuts, write it to the cut directory.
+
+CR-lite must include:
+
+- changed-scope summary
+- Must Fix findings, if any
+- verify evidence
+- residual risk
+- a short "failure / attack angle" paragraph: how this change could
+  fail, be misunderstood, or be misused by a future agent
+
+The failure / attack angle is not a security theater exercise. It is a
+forcing function to review process holes, stale assumptions, fallback
+paths, and misleading green checks before RM.
 
 Browser QA must include the failure modes that previously hurt the
 product:

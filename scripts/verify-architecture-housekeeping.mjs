@@ -29,6 +29,9 @@ assert('GitHub Actions workflow template exists', existsSync(path.join(rootDir, 
 assert('code-style doc exists', existsSync(path.join(rootDir, 'docs/code-style.md')))
 assert('shared UI token file exists', existsSync(path.join(rootDir, 'app/src/shared-ui/tokens.css')))
 assert('CI verify entrypoint exists', existsSync(path.join(rootDir, 'scripts/verify-ci.mjs')))
+assert('CR-lite template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/cr-lite.md')))
+assert('external review template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/external-review-report.md')))
+assert('watch ledger template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/watch-ledger.md')))
 
 const workflowTemplate = read('docs/ci/verify-workflow-template.yml')
 assert('workflow template installs app dependencies with pnpm', workflowTemplate.includes('pnpm install --frozen-lockfile'))
@@ -61,6 +64,20 @@ const codeStyle = read('docs/code-style.md')
 assert('code-style documents file suffix rules', codeStyle.includes('Server runtime code uses `.mjs`'))
 assert('code-style documents server module targets', codeStyle.includes('server/question-bank/'))
 assert('code-style documents CSS token policy', codeStyle.includes('app/src/shared-ui/tokens.css'))
+
+const cutWorkflow = read('.kiro/steering/cut-workflow-protocol.md')
+assert('workflow protocol requires CR-lite failure angle', cutWorkflow.includes('failure / attack angle'))
+assert('workflow protocol defines watch ledger destination', cutWorkflow.includes('docs/cuts/<CUT>/watch-ledger.md'))
+assert('workflow protocol asks external review for token metadata', cutWorkflow.includes('token usage / estimated cost'))
+
+const crLiteTemplate = read('docs/cuts/_templates/cr-lite.md')
+assert('CR-lite template includes failure angle section', crLiteTemplate.includes('## Failure / Attack Angle'))
+
+const externalReviewTemplate = read('docs/cuts/_templates/external-review-report.md')
+assert('external review template includes baseline and cost sections', externalReviewTemplate.includes('## Baseline Reviewed') && externalReviewTemplate.includes('## Token / Cost Metadata'))
+
+const watchLedgerTemplate = read('docs/cuts/_templates/watch-ledger.md')
+assert('watch ledger template includes status vocabulary', watchLedgerTemplate.includes('converted-to-follow-up'))
 
 if (failed > 0) {
   console.error(`\nArchitecture housekeeping verify FAILED: ${passed} passed, ${failed} failed`)

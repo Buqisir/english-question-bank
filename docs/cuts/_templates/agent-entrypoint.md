@@ -23,6 +23,12 @@ State the smallest current objective in one paragraph.
 - PR:
 - Latest accepted artifact:
 
+## Goal / PR Split
+
+- Goal:
+- Current PR slice:
+- Explicitly not in this PR:
+
 ## Allowed Scope
 
 - 

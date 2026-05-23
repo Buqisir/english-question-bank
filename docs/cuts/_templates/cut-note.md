@@ -6,6 +6,7 @@ Merge date:
 PA rounds:
 Big CR rounds:
 Must Fix count:
+Token / cost notes:
 
 ## Shipped
 
@@ -31,7 +32,8 @@ Must Fix count:
 
 ## Watch / Follow-Up
 
-- 
+- Watch ledger:
+- Follow-up gates:
 
 ## Next Cut
 
