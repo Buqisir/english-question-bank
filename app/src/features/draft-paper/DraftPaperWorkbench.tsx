@@ -55,12 +55,13 @@ function buildA4PreviewHtml(printHtml: string) {
   const previewCss = `
 @media screen {
   html {
-    background: #ebe6dd;
+    background:
+      linear-gradient(180deg, #f7f4ee 0%, #ede8df 34%, #e5ded2 100%);
+    min-height: 100%;
   }
 
   body {
-    background:
-      linear-gradient(180deg, #f7f4ee 0%, #ede8df 34%, #e5ded2 100%);
+    background: transparent;
     box-sizing: border-box;
     margin: 0;
     min-height: 100vh;

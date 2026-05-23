@@ -127,8 +127,7 @@
 
 .draft-preview-desk {
   background:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.72), rgba(232, 228, 219, 0.72)),
-    #e8e4db;
+    linear-gradient(180deg, #f7f4ee 0%, #ede8df 34%, #e5ded2 100%);
   border: 1px solid #d3cbbd;
   border-radius: 8px;
   min-width: 0;
