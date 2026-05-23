@@ -3,6 +3,9 @@
  *
  * The reducer must concentrate interaction state and reset rules while
  * the harness remains the DOM/rendering adapter.
+ *
+ * H8: reducer reset rules are checked by running the exported reducer,
+ * not by regexing switch branches.
  */
 
 import {
@@ -12,6 +15,10 @@ import {
   repoRootFrom,
   touchesAny,
 } from './lib/verifyScope.mjs'
+import {
+  paperSurfaceHostInitialState,
+  paperSurfaceHostInteractionReducer,
+} from '../app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('PaperSurface host interaction verify')
@@ -24,7 +31,32 @@ const reducer = readText(
   ROOT,
   'app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts',
 )
-const files = changedFiles(ROOT)
+const files = changedFiles(ROOT, { baseRef: 'github/main' })
+
+function state(overrides = {}) {
+  return {
+    ...paperSurfaceHostInitialState,
+    ...overrides,
+  }
+}
+
+function sameValue(actual, expected) {
+  if (actual === expected) return true
+  if (typeof actual !== typeof expected) return false
+  if (actual && expected && typeof actual === 'object') {
+    return JSON.stringify(actual) === JSON.stringify(expected)
+  }
+  return false
+}
+
+function assertStateSubset(label, actual, expected) {
+  for (const [key, value] of Object.entries(expected)) {
+    assert(
+      sameValue(actual[key], value),
+      `${label}: ${key} === ${JSON.stringify(value)}`,
+    )
+  }
+}
 
 section('host interaction module shape')
 
@@ -96,48 +128,251 @@ for (const name of removedUseStateNames) {
   )
 }
 
-section('interaction reset rules')
+section('run-form reducer behavior')
 
-const reducerMustContain = [
-  'request-lecture-focus',
-  'seed-support-evidence',
-  'select-evidence',
-  'toggle-insight',
-  'close-insight',
-  'toggle-structure-target',
-  'toggle-rail-lock',
-  'rail-escape',
-  'sync-viewport',
-  'resize',
-]
+assertStateSubset(
+  'initial state',
+  paperSurfaceHostInitialState,
+  {
+    activeQuestionId: null,
+    activeEvidenceId: null,
+    activeOptionLabel: null,
+    activeInsightSection: null,
+    activeStructureTarget: null,
+    railLocked: false,
+    isStackedMode: false,
+    isWideDesktop: false,
+  },
+)
 
-for (const token of reducerMustContain) {
-  assert(reducer.includes(token), `reducer handles ${token}`)
+const focusedQuestion = paperSurfaceHostInteractionReducer(
+  state({
+    activeInsightSection: 'reading-a',
+    railLocked: true,
+  }),
+  {
+    type: 'request-lecture-focus',
+    questionId: 'q-1',
+    optionLabel: 'B',
+    evidenceId: 'ev-1',
+  },
+)
+assert(
+  focusedQuestion.activeQuestionId === 'q-1' &&
+    focusedQuestion.activeOptionLabel === 'B' &&
+    focusedQuestion.activeEvidenceId === 'ev-1' &&
+    focusedQuestion.activeInsightSection === null &&
+    focusedQuestion.railLocked === false,
+  'request-lecture-focus sets question focus and clears insight / rail lock',
+)
+
+const clearedLegacyFocus = paperSurfaceHostInteractionReducer(
+  state({
+    activeQuestionId: 'q-1',
+    activeOptionLabel: 'B',
+    activeEvidenceId: 'ev-1',
+  }),
+  {
+    type: 'request-lecture-focus',
+    questionId: 'q-1',
+  },
+)
+assertStateSubset('legacy focus toggle off', clearedLegacyFocus, {
+  activeQuestionId: null,
+  activeOptionLabel: null,
+  activeEvidenceId: null,
+})
+
+const supportEvidence = paperSurfaceHostInteractionReducer(state(), {
+  type: 'seed-support-evidence',
+  evidenceId: 'support-1',
+})
+assertStateSubset('seed-support-evidence', supportEvidence, {
+  activeEvidenceId: 'support-1',
+})
+
+const optionEvidence = paperSurfaceHostInteractionReducer(supportEvidence, {
+  type: 'seed-option-evidence',
+  optionLabel: 'C',
+  evidenceId: 'option-1',
+})
+assertStateSubset('seed-option-evidence', optionEvidence, {
+  activeOptionLabel: 'C',
+  activeEvidenceId: 'option-1',
+})
+
+const selectedOptionEvidence = paperSurfaceHostInteractionReducer(optionEvidence, {
+  type: 'select-option-evidence',
+  optionLabel: 'D',
+  evidenceId: null,
+})
+assertStateSubset('select-option-evidence', selectedOptionEvidence, {
+  activeOptionLabel: 'D',
+  activeEvidenceId: null,
+})
+
+const selectedEvidence = paperSurfaceHostInteractionReducer(selectedOptionEvidence, {
+  type: 'select-evidence',
+  evidenceId: 'ev-2',
+})
+assertStateSubset('select-evidence', selectedEvidence, {
+  activeEvidenceId: 'ev-2',
+})
+
+const ignoredEmptyEvidence = paperSurfaceHostInteractionReducer(selectedEvidence, {
+  type: 'select-evidence',
+  evidenceId: '',
+})
+assert(ignoredEmptyEvidence === selectedEvidence, 'empty select-evidence returns same state')
+
+const structureTarget = {
+  paperSection: 'reading-a',
+  mode: 'paragraph',
+  paragraphId: 'p-1',
 }
+const openedInsight = paperSurfaceHostInteractionReducer(
+  state({
+    activeStructureTarget: structureTarget,
+  }),
+  {
+    type: 'toggle-insight',
+    paperSection: 'reading-a',
+  },
+)
+assertStateSubset('toggle-insight opens panel and clears structure target', openedInsight, {
+  activeInsightSection: 'reading-a',
+  activeStructureTarget: null,
+})
 
-assert(
-  /case 'toggle-insight':[\s\S]*activeStructureTarget:\s*null/.test(reducer),
-  'toggle-insight clears activeStructureTarget',
+const closedInsight = paperSurfaceHostInteractionReducer(openedInsight, {
+  type: 'toggle-insight',
+  paperSection: 'reading-a',
+})
+assertStateSubset('toggle-insight closes current panel', closedInsight, {
+  activeInsightSection: null,
+})
+
+const closeInsight = paperSurfaceHostInteractionReducer(
+  state({
+    activeInsightSection: 'reading-b',
+    activeStructureTarget: structureTarget,
+  }),
+  {
+    type: 'close-insight',
+  },
+)
+assertStateSubset('close-insight clears insight and structure target', closeInsight, {
+  activeInsightSection: null,
+  activeStructureTarget: null,
+})
+
+const openedStructureTarget = paperSurfaceHostInteractionReducer(state(), {
+  type: 'toggle-structure-target',
+  paperSection: 'reading-a',
+  mode: 'paragraph',
+  paragraphId: 'p-1',
+})
+assertStateSubset('toggle-structure-target opens paragraph target', openedStructureTarget, {
+  activeStructureTarget: structureTarget,
+})
+
+const closedStructureTarget = paperSurfaceHostInteractionReducer(openedStructureTarget, {
+  type: 'toggle-structure-target',
+  paperSection: 'reading-a',
+  mode: 'paragraph',
+  paragraphId: 'p-1',
+})
+assertStateSubset('toggle-structure-target toggles same target closed', closedStructureTarget, {
+  activeStructureTarget: null,
+})
+
+const switchedStructureTarget = paperSurfaceHostInteractionReducer(openedStructureTarget, {
+  type: 'toggle-structure-target',
+  paperSection: 'reading-a',
+  mode: 'paragraph',
+  paragraphId: 'p-2',
+})
+assertStateSubset('toggle-structure-target switches paragraph target', switchedStructureTarget, {
+  activeStructureTarget: {
+    paperSection: 'reading-a',
+    mode: 'paragraph',
+    paragraphId: 'p-2',
+  },
+})
+
+const railLocked = paperSurfaceHostInteractionReducer(state(), {
+  type: 'toggle-rail-lock',
+})
+assertStateSubset('toggle-rail-lock flips lock on', railLocked, {
+  railLocked: true,
+})
+
+const escapeClosesInsightFirst = paperSurfaceHostInteractionReducer(
+  state({
+    activeInsightSection: 'reading-a',
+    activeStructureTarget: structureTarget,
+    railLocked: true,
+  }),
+  {
+    type: 'rail-escape',
+  },
+)
+assertStateSubset('rail-escape closes insight before rail lock', escapeClosesInsightFirst, {
+  activeInsightSection: null,
+  activeStructureTarget: null,
+  railLocked: true,
+})
+
+const escapeUnlocksRail = paperSurfaceHostInteractionReducer(
+  state({
+    railLocked: true,
+  }),
+  {
+    type: 'rail-escape',
+  },
+)
+assertStateSubset('rail-escape unlocks rail when no insight is open', escapeUnlocksRail, {
+  railLocked: false,
+})
+
+const idleState = state()
+const idleEscape = paperSurfaceHostInteractionReducer(idleState, {
+  type: 'rail-escape',
+})
+assert(idleEscape === idleState, 'idle rail-escape returns same state')
+
+const syncedViewport = paperSurfaceHostInteractionReducer(
+  state({
+    activeInsightSection: 'reading-a',
+    activeStructureTarget: structureTarget,
+    railLocked: true,
+  }),
+  {
+    type: 'sync-viewport',
+    isStackedMode: true,
+    isWideDesktop: false,
+  },
+)
+assertStateSubset('sync-viewport updates viewport and clears transient focus', syncedViewport, {
+  isStackedMode: true,
+  isWideDesktop: false,
+  activeInsightSection: null,
+  activeStructureTarget: null,
+  railLocked: false,
+})
+
+const resized = paperSurfaceHostInteractionReducer(
+  state({
+    activeQuestionId: 'q-1',
+    activeStructureTarget: structureTarget,
+  }),
+  {
+    type: 'resize',
+  },
 )
 assert(
-  /case 'close-insight':[\s\S]*activeStructureTarget:\s*null/.test(reducer),
-  'close-insight clears activeStructureTarget',
-)
-assert(
-  /case 'rail-escape':[\s\S]*activeInsightSection:\s*null[\s\S]*activeStructureTarget:\s*null/.test(
-    reducer,
-  ),
-  'rail-escape closes detail and clears activeStructureTarget',
-)
-assert(
-  /case 'sync-viewport':[\s\S]*activeInsightSection:\s*null[\s\S]*railLocked:\s*false[\s\S]*activeStructureTarget:\s*null/.test(
-    reducer,
-  ),
-  'sync-viewport clears insight, rail lock, and structure target',
-)
-assert(
-  /case 'resize':[\s\S]*activeStructureTarget:\s*null/.test(reducer),
-  'resize clears activeStructureTarget',
+  resized.activeQuestionId === 'q-1' && resized.activeStructureTarget === null,
+  'resize clears structure target without clearing question focus',
 )
 
 section('DOM adapter remains in harness')

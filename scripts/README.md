@@ -42,7 +42,7 @@ See `docs/ci/verify-workflow-install.md`.
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-paper-surface-module-v1.mjs` | Shared PaperSurface module contract; includes historical forbidden-scope checks | no |
-| `verify-paper-surface-host-interaction.mjs` | Host interaction reducer / state rules; includes cut-specific forbidden-scope checks | no |
+| `verify-paper-surface-host-interaction.mjs` | Host interaction reducer run-form behavior and seam rules; includes cut-specific forbidden-scope checks | no |
 | `verify-paper-surface-mjs-declaration-parity.mjs` | `.mjs` declaration parity | yes |
 | `verify-paper-intelligence-paper-surface-harness.mjs` | Paper Intelligence harness contract | no |
 | `verify-paper-intelligence-paper-surface-evidence.mjs` | Evidence-line behavior | no |
