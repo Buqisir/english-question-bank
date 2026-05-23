@@ -1,7 +1,7 @@
 # H2 Agent Entrypoint
 
 Cut: H2 Workflow / Verify / CI Discipline
-Stage: H2-A implemented; H2-B verify / CI discipline next
+Stage: H2-B implemented; H2-C closeout proof next
 Owner: Codex by default
 Date: 2026-05-23
 
