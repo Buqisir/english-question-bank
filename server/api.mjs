@@ -21,6 +21,7 @@ import { buildPrintHtml } from './print-renderer.mjs'
 import { createDraftPaperRoutes } from './draft-paper/draftPaperRoutes.mjs'
 import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
+import { createLegacyImportRoutes } from './imports/legacyImportRoutes.mjs'
 import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
@@ -56,8 +57,20 @@ const serverContext = {
   exportPdf,
   exportPrintHtml,
   exportPrintPdf,
+  applyAnswerAlignment,
+  createImportFile,
+  deleteImportFile,
+  generateAnswerAlignmentDraft,
+  generateImportBundleDraft,
   getPaperSurfaceAnalysisAvailabilityByGroupId,
+  getImportFileParse,
   invalidatePaperSurfaceAnalysisAvailability,
+  listImportBatches,
+  listImportBundles,
+  listImportFiles,
+  parseImportFile,
+  runImportBatch,
+  scanImportDirectory,
 }
 const h1Routes = [
   defineRoute('GET', /^\/api\/health$/, ({ response, context }) => {
@@ -383,6 +396,7 @@ const serverRoutes = [
   ...createDraftPaperRoutes(),
   ...createPaperImportRoutes(),
   ...createExportRoutes(),
+  ...createLegacyImportRoutes(),
 ]
 
 function getDraftSearchContext(db) {
@@ -10968,97 +10982,6 @@ const server = createServer(async (request, response) => {
       return
     }
 
-    if (request.method === 'GET' && url.pathname === '/api/import-files') {
-      sendJson(response, 200, { importFiles: listImportFiles() })
-      return
-    }
-
-    if (request.method === 'GET' && url.pathname === '/api/import-bundles') {
-      sendJson(response, 200, { importBundles: listImportBundles() })
-      return
-    }
-
-    if (request.method === 'GET' && url.pathname === '/api/import-batches') {
-      sendJson(response, 200, { importBatches: listImportBatches() })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/import-batches/scan') {
-      const input = await readJsonBody(request)
-      const importBatch = scanImportDirectory(input)
-      sendJson(response, 201, { importBatch })
-      return
-    }
-
-    const importBatchRunMatch = url.pathname.match(/^\/api\/import-batches\/([^/]+)\/import$/)
-    if (request.method === 'POST' && importBatchRunMatch) {
-      const input = await readJsonBody(request)
-      const importBatch = runImportBatch(decodeURIComponent(importBatchRunMatch[1]), input)
-      if (!importBatch) {
-        sendJson(response, 404, { error: 'Import batch not found' })
-        return
-      }
-      sendJson(response, 200, { importBatch })
-      return
-    }
-
-    const importBundleDraftMatch = url.pathname.match(/^\/api\/import-bundles\/([^/]+)\/draft$/)
-    if (request.method === 'POST' && importBundleDraftMatch) {
-      const input = await readJsonBody(request)
-      const draft = await generateImportBundleDraft(decodeURIComponent(importBundleDraftMatch[1]), input)
-      if (!draft) {
-        sendJson(response, 404, { error: 'Parsed import bundle not found' })
-        return
-      }
-      sendJson(response, 200, { draft })
-      return
-    }
-
-    const answerAlignmentMatch = url.pathname.match(/^\/api\/import-bundles\/([^/]+)\/answer-alignment$/)
-    if (request.method === 'POST' && answerAlignmentMatch) {
-      const alignment = generateAnswerAlignmentDraft(decodeURIComponent(answerAlignmentMatch[1]))
-      if (!alignment) {
-        sendJson(response, 404, { error: 'Import bundle not found' })
-        return
-      }
-      sendJson(response, 200, { alignment })
-      return
-    }
-
-    const answerAlignmentApplyMatch = url.pathname.match(/^\/api\/import-bundles\/([^/]+)\/answer-alignment\/apply$/)
-    if (request.method === 'POST' && answerAlignmentApplyMatch) {
-      const input = await readJsonBody(request)
-      const result = applyAnswerAlignment(decodeURIComponent(answerAlignmentApplyMatch[1]), input)
-      if (!result) {
-        sendJson(response, 404, { error: 'Import bundle not found' })
-        return
-      }
-      sendJson(response, 200, { result })
-      return
-    }
-
-    const importFileParseMatch = url.pathname.match(/^\/api\/import-files\/([^/]+)\/parse$/)
-    if (request.method === 'GET' && importFileParseMatch) {
-      const parse = getImportFileParse(decodeURIComponent(importFileParseMatch[1]))
-      if (!parse) {
-        sendJson(response, 404, { error: 'Import parse not found' })
-        return
-      }
-      sendJson(response, 200, { parse })
-      return
-    }
-
-    const deleteImportFileMatch = url.pathname.match(/^\/api\/import-files\/([^/]+)$/)
-    if (request.method === 'DELETE' && deleteImportFileMatch) {
-      const result = deleteImportFile(decodeURIComponent(deleteImportFileMatch[1]))
-      if (!result) {
-        sendJson(response, 404, { error: 'Import file not found' })
-        return
-      }
-      sendJson(response, 200, { ok: true })
-      return
-    }
-
     const paperSetMatch = url.pathname.match(/^\/api\/paper-sets\/([^/]+)$/)
     if (request.method === 'GET' && paperSetMatch) {
       const paperSet = getPaperSet(decodeURIComponent(paperSetMatch[1]))
@@ -11276,23 +11199,6 @@ const server = createServer(async (request, response) => {
       const updateInput = { ...input, id: decodeURIComponent(paperSetMatch[1]) }
       const paperSet = createPaperSet(updateInput)
       sendJson(response, 200, { paperSet })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/import-files') {
-      const input = await readJsonBody(request, { maxBytes: 35_000_000 })
-      const importFile = createImportFile(input)
-      sendJson(response, 201, { importFile })
-      return
-    }
-
-    if (request.method === 'POST' && importFileParseMatch) {
-      const parse = parseImportFile(decodeURIComponent(importFileParseMatch[1]))
-      if (!parse) {
-        sendJson(response, 404, { error: 'Import file not found' })
-        return
-      }
-      sendJson(response, 200, { parse })
       return
     }
 
