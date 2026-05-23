@@ -18,6 +18,8 @@ Route the request to one of these cuts:
 1. **H2 Workflow / Verify / CI Discipline**
    - Use when the request is about PR size rules, cut notes, watch ledgers,
      verify scripts, CI, or external-agent process.
+   - Goal file:
+     `docs/cuts/H2-workflow-verify-ci-discipline/goal-h2-workflow-verify-ci.md`
 
 2. **H3 Frontend Component Slimming**
    - Use when the request is about `PaperSurfaceHarness`,
