@@ -55,8 +55,7 @@ function buildA4PreviewHtml(printHtml: string) {
   const previewCss = `
 @media screen {
   html {
-    background:
-      linear-gradient(180deg, #f7f4ee 0%, #ede8df 34%, #e5ded2 100%);
+    background: transparent;
     min-height: 100%;
   }
 

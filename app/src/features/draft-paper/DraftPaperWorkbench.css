@@ -127,7 +127,7 @@
 
 .draft-preview-desk {
   background:
-    linear-gradient(180deg, #f7f4ee 0%, #ede8df 34%, #e5ded2 100%);
+    linear-gradient(180deg, #fbfaf6 0%, #f3efe7 100%);
   border: 1px solid #d3cbbd;
   border-radius: 8px;
   min-width: 0;
@@ -154,8 +154,7 @@
 }
 
 .draft-a4-sheet iframe {
-  background:
-    linear-gradient(180deg, #f7f4ee 0%, #ede8df 34%, #e5ded2 100%);
+  background: transparent;
   border: 0;
   display: block;
   height: min(calc(100vh - 190px), 1160px);
