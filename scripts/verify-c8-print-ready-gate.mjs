@@ -26,6 +26,7 @@ function assert(name, condition, details = '') {
 console.log('C8 verify: print-ready gate')
 
 const server = read('server/api.mjs')
+const draftStore = read('server/draft-paper/draftPaperStore.mjs')
 
 assert('server exports shared isGroupPrintReady gate', /export function isGroupPrintReady\(db,\s*groupId\)/.test(server))
 assert('print-ready group type allowlist exists', server.includes('PRINT_READY_GROUP_TYPES'))
@@ -46,13 +47,13 @@ assert('search derives print-ready field canAddToDraftPaper', server.includes('c
 assert('search derives draftPaperButtonState', server.includes('draftPaperButtonState'))
 assert('search derives currentDraftPaperId', server.includes('currentDraftPaperId: draftContext.currentDraftPaperId'))
 assert('search derives printUnavailableReason', server.includes('printUnavailableReason: printReady.ok ? null : printReady.reason'))
-assert('add group reuses print-ready gate before insert', /const ready = isGroupPrintReady\(db,\s*groupId\)/.test(server))
+assert('add group reuses print-ready gate before insert', /const ready = isGroupPrintReady\(db,\s*groupId\)/.test(draftStore))
 assert('disabled state comes from print-ready failure', /if \(!printReady\.ok\) return 'disabled'/.test(server))
 assert('paper-asset detail feeds draft preview', server.includes('applyPaperAssetToQuestionGroupDetail'))
 assert('paper-asset detail maps options into print detail', server.includes('buildQuestionDetailsFromPaperAsset') && server.includes('option?.text'))
 
 const decisions = read('docs/cuts/C8-draft-paper-composer/decisions.md')
-const serverHeuristic = server.slice(server.indexOf('function buildPageBreakSuggestions'))
+const serverHeuristic = draftStore.slice(draftStore.indexOf('function buildPageBreakSuggestions'))
 assert('heuristic checks reading/seven choices 600 words', /reading[\s\S]{0,120}seven_choices[\s\S]{0,240}600/.test(serverHeuristic))
 assert('heuristic checks more than 4 questions and option count over 16', /questions\.length > 4[\s\S]{0,120}optionCount > 16/.test(serverHeuristic))
 assert('heuristic checks estimated block over 70 percent after previous estimate', /estimate > 700[\s\S]{0,160}previousEstimate/.test(serverHeuristic))
