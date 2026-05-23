@@ -2,8 +2,8 @@
 
 Cut: H3 Frontend Component Slimming
 Last updated: 2026-05-24
-Branch: `codex/h3-b-draft-outline`
-PR: H3-B implementation PR
+Branch: `codex/h3-c-paper-intelligence`
+PR: H3-C implementation PR
 
 ## Current Truth
 
@@ -11,8 +11,11 @@ PR: H3-B implementation PR
 - H3 is about frontend locality, not visual redesign.
 - H3-A Draft Paper Preview / Export Locality has been implemented.
 - H3-B Draft Paper Outline Locality has been implemented.
-- My Space dialog extraction is not included in H3-B unless a later pass finds
-  a real module boundary instead of pass-through state.
+- H3-B-2 My Space dialog extraction was skipped because it did not present a
+  clearly smaller module boundary than the workbench-owned export state.
+- H3-C PaperSurface Analysis Panel Locality has been implemented.
+- H3-D hook extraction should be skipped unless a future pass identifies a real
+  data/focus seam instead of a pass-through hook.
 
 ## Completed
 
@@ -27,13 +30,19 @@ PR: H3-B implementation PR
 - H3-B updated the Draft Paper render-model verify script to guard the new
   outline seam.
 - H3-B dev notes and CR-lite written.
+- H3-C extracted paper-asset and legacy right-side analysis panel rendering
+  from `PaperIntelligencePaperSurfaceHarness.tsx` into
+  `PaperAssetAnalysisPanel.tsx` and `LegacyAnalysisPanel.tsx`.
+- H3-C updated the PaperSurface harness verify script to guard the new panel
+  seam.
+- H3-C dev notes and CR-lite written.
 
 ## Still Open
 
-- H3-B-2 My Space dialog extraction remains optional. Skip it unless the
-  interface is clearly smaller than the implementation it moves.
-- H3-C PaperSurface Analysis Panel Locality has not started.
-- H3-D PaperSurface Data / Focus Hook Locality has not started.
+- H3 final closeout cut note has not been written yet.
+- H3-D PaperSurface Data / Focus Hook Locality remains intentionally optional.
+  Current judgment: skip unless a later pass finds a deeper seam than the
+  current host orchestration boundary.
 
 ## Must Not Forget
 
@@ -41,6 +50,8 @@ PR: H3-B implementation PR
 - Do not touch `shared/papersurface/**`.
 - Do not change print renderer behavior.
 - Use `scripts/verify-c8-draft-paper-render-model.mjs` for Draft Paper slices.
+- Use `scripts/verify-paper-intelligence-paper-surface-harness.mjs` for
+  PaperSurface harness slices.
 - Browser QA is required for user-visible / interactive extraction slices.
 
 ## Things The Next Cut Must Know
@@ -59,6 +70,15 @@ PR: H3-B implementation PR
      preview sync.
    - Rule: static verify is not enough for moved interactive JSX.
 
+3. Pattern: right-panel components may render rows, but the harness owns
+   PaperSurface focus and line state.
+   - Evidence: H3-C moved `PaperAssetAnalysisPanel` and
+     `LegacyAnalysisPanel`, while keeping reducer dispatch, selected evidence,
+     PaperSurface props, and line geometry in
+     `PaperIntelligencePaperSurfaceHarness.tsx`.
+   - Rule: extracted analysis panels should emit small callbacks; they should
+     not own PaperSurface focus state or data loading.
+
 ## Verify / QA State
 
 - `node scripts/verify-c8-draft-paper-render-model.mjs` passed for H3-A.
@@ -69,13 +89,20 @@ PR: H3-B implementation PR
 - `npm run verify:all --prefix app` passed for H3-B.
 - `git diff --check` passed for H3-B.
 - Browser QA passed for H3-B outline interactions.
+- `node scripts/verify-paper-intelligence-paper-surface-harness.mjs` passed for
+  H3-C.
+- `npm run build --prefix app` passed for H3-C.
+- `npm run verify:all --prefix app` passed for H3-C.
+- `git diff --check` passed for H3-C.
+- Browser QA passed for H3-C paper-asset option / evidence interaction and
+  legacy report panel rendering.
 
 ## Next Action
 
-Evaluate H3-B-2 quickly:
+After H3-C merges, close H3 with a docs-only cut note unless H3-D finds a real
+hook seam:
 
 ```text
-Extract My Space dialog only if it creates real locality. If it would only pass
-workbench state through a child component, skip it and move to H3-C PaperSurface
-Analysis Panel Locality.
+H3-D is optional. Extract hooks only if the hook owns a meaningful data/focus
+contract. Do not move lines just to reduce file length.
 ```

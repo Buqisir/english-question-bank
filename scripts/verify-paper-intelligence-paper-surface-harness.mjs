@@ -109,6 +109,8 @@ const ROOT = resolve(import.meta.dirname, '..')
 const APP = join(ROOT, 'app', 'src')
 const ADAPTER_DIR = join(APP, 'features', 'paper-intelligence', 'adapter')
 const HARNESS_PATH = join(APP, 'features', 'paper-intelligence', 'PaperIntelligencePaperSurfaceHarness.tsx')
+const PAPER_ASSET_ANALYSIS_PANEL_PATH = join(APP, 'features', 'paper-intelligence', 'PaperAssetAnalysisPanel.tsx')
+const LEGACY_ANALYSIS_PANEL_PATH = join(APP, 'features', 'paper-intelligence', 'LegacyAnalysisPanel.tsx')
 const HARNESS_CSS_PATH = join(APP, 'features', 'paper-intelligence', 'paperIntelligencePaperSurfaceHarness.css')
 const APP_TSX = join(APP, 'App.tsx')
 const ROUTE_PATH = join(APP, 'features', 'paper-intelligence', 'paperIntelligenceRoute.ts')
@@ -427,9 +429,8 @@ const harnessCssBase = harnessCss.replace(/@media[^{]*\{[\s\S]*?\n\}/g, '')
 
 console.log('\n=== C2 polish boundary: diff scope ===')
 
-// Get git diff to check modified files. We compute the diff against
-// the merge-base with origin/main (or main) so this works in the cloud
-// sandbox the same way as locally.
+// Get git diff to check modified files. Prefer the shared GitHub remote used
+// by this repo, then fall back to older local names.
 function safeGitDiffNames(args) {
   try {
     const out = execSync(`git diff --name-only ${args}`, {
@@ -445,25 +446,19 @@ function safeGitDiffNames(args) {
 }
 
 const baseRef = (() => {
-  try {
-    return execSync('git merge-base HEAD origin/main', {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-  } catch {
+  for (const candidate of ['github/main', 'origin/main', 'main']) {
     try {
-      return execSync('git merge-base HEAD main', {
+      return execSync(`git merge-base HEAD ${candidate}`, {
         cwd: ROOT,
         stdio: ['ignore', 'pipe', 'pipe'],
       })
         .toString()
         .trim()
     } catch {
-      return 'HEAD'
+      // try the next candidate
     }
   }
+  return 'HEAD'
 })()
 
 let changedFiles = safeGitDiffNames(`${baseRef}...HEAD`)
@@ -653,6 +648,55 @@ assert(
 assert(
   harnessContent.includes("'request-lecture-focus'") || harnessContent.includes('"request-lecture-focus"'),
   "onFocusIntent handles request-lecture-focus"
+)
+
+// ─── H3 panel locality ───
+
+console.log('\n=== H3 panel locality ===')
+
+const paperAssetAnalysisPanelContent = readFile(PAPER_ASSET_ANALYSIS_PANEL_PATH)
+const legacyAnalysisPanelContent = readFile(LEGACY_ANALYSIS_PANEL_PATH)
+
+assert(
+  fileExists(PAPER_ASSET_ANALYSIS_PANEL_PATH),
+  "PaperAssetAnalysisPanel component file exists"
+)
+assert(
+  fileExists(LEGACY_ANALYSIS_PANEL_PATH),
+  "LegacyAnalysisPanel component file exists"
+)
+assert(
+  harnessContent.includes("from './PaperAssetAnalysisPanel'") &&
+    harnessContent.includes("from './LegacyAnalysisPanel'"),
+  "harness imports extracted right-panel components"
+)
+assert(
+  harnessContent.includes('<PaperAssetAnalysisPanel') &&
+    harnessContent.includes('<LegacyAnalysisPanel'),
+  "harness renders extracted right-panel components"
+)
+assert(
+  !harnessContent.includes('function PaperAssetAnalysisPanel') &&
+    !harnessContent.includes('function AnalysisPanel') &&
+    !harnessContent.includes('function SupportEvidenceRow') &&
+    !harnessContent.includes('function DistractorRow'),
+  "harness no longer owns right-panel rendering internals"
+)
+assert(
+  paperAssetAnalysisPanelContent.includes('export function PaperAssetAnalysisPanel') &&
+    paperAssetAnalysisPanelContent.includes('pi-ps-analysis-options--accordion') &&
+    paperAssetAnalysisPanelContent.includes('pi-ps-analysis-empty--unpublished'),
+  "PaperAssetAnalysisPanel owns reviewed paper-asset analysis UI"
+)
+assert(
+  legacyAnalysisPanelContent.includes('export function LegacyAnalysisPanel') &&
+    legacyAnalysisPanelContent.includes('function SupportEvidenceRow') &&
+    legacyAnalysisPanelContent.includes('function DistractorRow'),
+  "LegacyAnalysisPanel owns legacy support and distractor row rendering"
+)
+assert(
+  legacyAnalysisPanelContent.includes('data-pi-quote-text-only="true"'),
+  "LegacyAnalysisPanel preserves text-only distractor non-button marker"
 )
 
 // ─── Summary ───
