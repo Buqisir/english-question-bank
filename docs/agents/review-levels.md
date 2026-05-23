@@ -73,6 +73,11 @@ Use these to prevent review from expanding forever.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
 - Default operating model: Codex owns daily PM / DEV / CR-lite / QA / RM. The owner does PO QA, not code review. External high-reasoning agents are used for large PA, direction checks, and occasional big CR only.
+- Multi-agent handoff context is repo-first. PA / CR prompts and
+  reports, DEV goal prompts, decisions, handoffs, QA contracts, and Cut
+  Notes should be written to named repo paths. Chat messages route the
+  agent to those files; chat history is not an authoritative review
+  artifact.
 - Default simplification:
   - L0 does not need formal CR unless it makes a decision.
   - L1 uses PA or CR, not both by default.

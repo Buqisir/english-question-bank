@@ -202,6 +202,30 @@ path, allowed / forbidden scope, and the next expected artifact. Chat
 messages should route agents to this file; decisions belong in repo
 files, not only in chat.
 
+### Repo-file handoff rule
+
+For multi-agent work, repo files are the transport layer. The following
+artifacts must be written to a named repo path before they are used by
+another agent:
+
+- PM specs and decision ledgers
+- PA prompts and PA reports
+- Big CR prompts and Big CR reports
+- DEV goal prompts for long-running goals
+- browser QA checklists / PO QA contracts
+- handoffs, Cut Notes, and watch ledgers
+
+Chat should only contain routing text such as "read this file, write the
+next report to that file." Do not ask the owner to copy/paste long PA,
+CR, or DEV prompts through chat when a repo file can carry the same
+context. If an external agent cannot write directly to the repo, reserve
+a target path in the prompt and have the owner or Codex place the
+artifact there before it becomes authoritative.
+
+If a material decision was made in chat during a grill, it must be
+copied into the cut's `decisions.md`, `pm-spec.md`, `agent-entrypoint.md`,
+or `handoff.md` before DEV or external review continues.
+
 When a cut pauses, changes owner, or crosses a context boundary, write:
 
 ```text
