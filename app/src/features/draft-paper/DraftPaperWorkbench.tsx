@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowLeft, ArrowUp, FileDown, FolderPlus, GripVertical, Printer, RotateCcw, Trash2 } from 'lucide-react'
+import { Archive, ArrowLeft, FileDown, FolderPlus, Printer, RotateCcw } from 'lucide-react'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
-import { groupTypeLabel } from '../../domain/questionBank'
 import {
   deleteDraftPaperItem,
   downloadDraftPaperPdf,
@@ -22,6 +21,7 @@ import {
   ASSEMBLY_BASKET_STORAGE_KEY,
   parseAssemblyBasket,
 } from '../../paperAssembly/basketPersistence'
+import { DraftPaperOutline } from './DraftPaperOutline'
 import { buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
 
@@ -49,12 +49,6 @@ function getLegacyBasketGroupIds() {
 function clearLegacyBasket() {
   if (typeof window === 'undefined') return
   window.localStorage.removeItem(ASSEMBLY_BASKET_STORAGE_KEY)
-}
-
-function compactSource(item: DraftPaperItem) {
-  const group = item.questionGroup
-  if (!group) return '来源未载入'
-  return [group.year, group.region, group.paperName, group.section].filter(Boolean).join(' · ')
 }
 
 function reorderItems(items: DraftPaperItem[], itemId: string, direction: -1 | 1) {
@@ -447,72 +441,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           </div>
         </section>
 
-        <aside className="draft-outline-panel" aria-label="题组目录">
-          <div className="draft-outline-head">
-            <strong>题组目录</strong>
-            <span>拖动或按钮调整顺序</span>
-          </div>
-
-          {draftPaper.pageBreakSuggestions.length > 0 && (
-            <div className="draft-suggestions">
-              <strong>分页建议</strong>
-              {draftPaper.pageBreakSuggestions.map((suggestion) => {
-                const item = draftPaper.items.find((entry) => entry.id === suggestion.itemId)
-                if (!item) return null
-                return (
-                  <button key={suggestion.itemId} type="button" onClick={() => togglePageBreak(item, true)}>
-                    在「{item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId}」前分页 · {suggestion.reason}
-                  </button>
-                )
-              })}
-            </div>
-          )}
-
-          <div className="draft-outline-list">
-            {draftPaper.items.map((item, index) => {
-              const canPageBreakBefore = index > 0
-              return (
-                <article
-                  className={`draft-outline-item${canPageBreakBefore && item.pageBreakBefore ? ' has-break' : ''}`}
-                  data-draft-group-id={item.groupId}
-                  draggable
-                  key={item.id}
-                  onDragStart={() => setDraggedItemId(item.id)}
-                  onDragOver={(event) => event.preventDefault()}
-                  onDrop={() => handleDrop(item.id)}
-                >
-                  {canPageBreakBefore && item.pageBreakBefore && <div className="draft-break-marker">分页</div>}
-                  <div className="draft-outline-item-main">
-                    <GripVertical size={15} aria-hidden="true" />
-                    <div>
-                      <strong>{index + 1}. {item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId}</strong>
-                      <span>{groupTypeLabel[item.questionGroup?.groupType || 'other']} · {item.questionGroup?.questionCount || 0} 题</span>
-                      <em>{compactSource(item)}</em>
-                      {!item.printReady && <small>{item.printUnavailableReason}</small>}
-                    </div>
-                  </div>
-                  <div className="draft-outline-actions">
-                    <button type="button" onClick={() => moveItem(item.id, -1)} aria-label="上移">
-                      <ArrowUp size={14} />
-                    </button>
-                    <button type="button" onClick={() => moveItem(item.id, 1)} aria-label="下移">
-                      <ArrowDown size={14} />
-                    </button>
-                    {canPageBreakBefore && (
-                      <button type="button" onClick={() => togglePageBreak(item, !item.pageBreakBefore)}>
-                        {item.pageBreakBefore ? '取消分页' : '前置分页'}
-                      </button>
-                    )}
-                    <button type="button" onClick={() => deleteItem(item)} aria-label="删除题组">
-                      <Trash2 size={14} />
-                    </button>
-                  </div>
-                </article>
-              )
-            })}
-            {draftPaper.items.length === 0 && <p className="draft-outline-empty">从搜索结果添加题组。</p>}
-          </div>
-        </aside>
+        <DraftPaperOutline
+          items={draftPaper.items}
+          pageBreakSuggestions={draftPaper.pageBreakSuggestions}
+          onDragStart={(itemId) => setDraggedItemId(itemId)}
+          onDrop={handleDrop}
+          onMoveItem={moveItem}
+          onTogglePageBreak={togglePageBreak}
+          onDeleteItem={deleteItem}
+        />
       </main>
 
       {removedItem && (
