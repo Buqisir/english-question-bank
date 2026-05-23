@@ -84,9 +84,26 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const pills = buildTagPills(group)
   const readingAnalysisHref =
     group.hasPaperSurfaceAnalysis && group.paperSurfaceHref ? group.paperSurfaceHref : null
+  const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
+  const draftButtonLabel =
+    draftState === 'in_current_draft'
+      ? '已在草稿卷中'
+      : draftState === 'disabled'
+        ? '暂不可组卷'
+        : '加入草稿卷'
+  const draftButtonTitle =
+    draftState === 'disabled'
+      ? group.printUnavailableReason || '该题组暂不可加入草稿卷'
+      : draftState === 'in_current_draft'
+        ? '打开当前草稿卷并定位到该题组'
+        : '加入当前草稿卷'
 
   return (
-    <article className="concierge-group-card" aria-label={`${section || groupTypeLabel[group.groupType]} ${passageTitle}`}>
+    <article
+      className="concierge-group-card"
+      data-group-id={group.id}
+      aria-label={`${section || groupTypeLabel[group.groupType]} ${passageTitle}`}
+    >
       <header className="concierge-group-head">
         <div className="concierge-group-head-text">
           {section && <span className="concierge-group-section">{section}</span>}
@@ -122,10 +139,11 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           type="button"
           className="concierge-action concierge-action-add"
           onClick={() => onAdd(group)}
-          disabled={alreadyInBasket}
-          aria-pressed={alreadyInBasket}
+          disabled={draftState === 'disabled'}
+          aria-pressed={draftState === 'in_current_draft'}
+          title={draftButtonTitle}
         >
-          {alreadyInBasket ? '已加入' : '加入草稿卷'}
+          {draftButtonLabel}
         </button>
         <button
           type="button"

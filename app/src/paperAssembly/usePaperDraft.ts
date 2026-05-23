@@ -162,10 +162,10 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
   const commitBasket = useCallback((next: BasketItem[]) => {
     basketRef.current = next
     setBasket(next)
-    // Persist immediately on every basket mutation. No debounce — Cut B
-    // reviewers explicitly required no debounce so a refresh right after
-    // "加入草稿卷" cannot drop the add. saveAssemblyBasket swallows storage
-    // errors so a quota issue cannot crash the workbench.
+    // C8 retires Assembly Basket as a write target. This call is deliberately
+    // retained as a no-op compatibility seam while old in-memory draft flows
+    // continue to work and the one-time localStorage migration can still read
+    // the legacy key.
     saveAssemblyBasket(next)
   }, [])
 

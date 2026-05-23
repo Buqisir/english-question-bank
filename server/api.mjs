@@ -264,6 +264,665 @@ function getPaperSurfaceAnalysisAvailabilityByGroupId() {
   return availabilityByGroupId
 }
 
+const PRINT_READY_GROUP_TYPES = new Set([
+  'reading',
+  'cloze',
+  'seven_choices',
+  'grammar_cloze',
+  'writing',
+  'continuation',
+])
+
+const OBJECTIVE_PRINT_GROUP_TYPES = new Set([
+  'reading',
+  'cloze',
+  'seven_choices',
+  'grammar_cloze',
+])
+
+function normalizePaperAssetQuestions(asset) {
+  const questions = asset?.content?.questions
+  if (!questions || typeof questions !== 'object') return new Set()
+  return new Set(Object.keys(questions).map(String))
+}
+
+function findPaperAssetGroup(groupId) {
+  if (!existsSync(paperAssetsDir)) return null
+  for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
+    if (!existsSync(assetPath)) continue
+    try {
+      const asset = readJsonFile(assetPath)
+      const group = asset?.content?.groups?.[groupId]
+      if (group) return { asset, group }
+    } catch {
+      // Ignore invalid paper-asset files; import validation owns that error.
+    }
+  }
+  return null
+}
+
+function normalizePaperAssetGroupType(groupType) {
+  const value = String(groupType || '')
+  if (value === 'sevenChoices') return 'seven_choices'
+  if (value === 'grammarFill') return 'grammar_cloze'
+  return value
+}
+
+function paperAssetParagraphText(group) {
+  const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
+  return paragraphs
+    .map((paragraph) => String(paragraph?.text || '').trim())
+    .filter(Boolean)
+    .join('\n\n')
+}
+
+function getPaperAssetPrintReady(asset, group) {
+  const groupType = normalizePaperAssetGroupType(group?.groupType)
+  const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+  const questions = asset?.content?.questions && typeof asset.content.questions === 'object'
+    ? asset.content.questions
+    : {}
+  if (questionIds.length === 0) return { ok: false, reason: '题组没有小题' }
+
+  for (const questionId of questionIds) {
+    const question = questions[questionId]
+    if (!question) return { ok: false, reason: `paper-asset 引用了不存在的小题 ${questionId}` }
+    const stem = String(question.stem ?? question.blankId ?? question.questionNo ?? '').trim()
+    if (!stem) return { ok: false, reason: '存在空题干' }
+    if ((groupType === 'reading' || groupType === 'cloze')) {
+      const options = Array.isArray(question.options) ? question.options : []
+      if (options.length === 0 || options.some((option) => !String(option?.label || '').trim() || !String(option?.text || '').trim())) {
+        return { ok: false, reason: '存在空选项' }
+      }
+    }
+  }
+
+  if (groupType === 'seven_choices') {
+    const optionBank = Array.isArray(group?.optionBank) ? group.optionBank : []
+    if (optionBank.length === 0 || optionBank.some((option) => !String(option?.label || '').trim() || !String(option?.text || '').trim())) {
+      return { ok: false, reason: '存在空选项' }
+    }
+  }
+
+  if (groupType === 'writing' || groupType === 'continuation' || groupType === 'reading' || groupType === 'seven_choices' || groupType === 'cloze') {
+    if (!paperAssetParagraphText(group)) return { ok: false, reason: '题组缺少材料或提示' }
+  }
+
+  return { ok: true, reason: null }
+}
+
+export function isGroupPrintReady(db, groupId) {
+  const group = db
+    .prepare(
+      `
+      SELECT
+        qg.id,
+        qg.group_type,
+        qg.instruction,
+        p.material_text,
+        p.summary,
+        COUNT(q.id) AS question_count,
+        SUM(CASE WHEN trim(q.stem) = '' THEN 1 ELSE 0 END) AS missing_stem_count,
+        SUM(CASE WHEN option_counts.option_count IS NULL OR option_counts.option_count = 0 THEN 1 ELSE 0 END) AS missing_option_count
+      FROM question_groups qg
+      JOIN passages p ON p.id = qg.passage_id
+      LEFT JOIN questions q ON q.group_id = qg.id
+      LEFT JOIN (
+        SELECT question_id, COUNT(*) AS option_count
+        FROM options
+        WHERE trim(content) <> ''
+        GROUP BY question_id
+      ) option_counts ON option_counts.question_id = q.id
+      WHERE qg.id = ?
+      GROUP BY qg.id, qg.group_type, qg.instruction, p.material_text, p.summary
+      `,
+    )
+    .get(groupId)
+
+  if (!group) return { ok: false, reason: '题组不存在' }
+  if (!PRINT_READY_GROUP_TYPES.has(group.group_type)) {
+    if (group.group_type === 'listening') return { ok: false, reason: '听力题组暂不支持打印' }
+    return { ok: false, reason: '题型暂不支持打印' }
+  }
+  const paperAssetMatch = findPaperAssetGroup(groupId)
+  if (paperAssetMatch) return getPaperAssetPrintReady(paperAssetMatch.asset, paperAssetMatch.group)
+
+  if (Number(group.question_count || 0) <= 0) return { ok: false, reason: '题组没有小题' }
+  if (Number(group.missing_stem_count || 0) > 0) return { ok: false, reason: '存在空题干' }
+  if (OBJECTIVE_PRINT_GROUP_TYPES.has(group.group_type) && Number(group.missing_option_count || 0) > 0) {
+    return { ok: false, reason: '存在空选项' }
+  }
+  if ((group.group_type === 'writing' || group.group_type === 'continuation')) {
+    const material = String(group.material_text || group.summary || group.instruction || '').trim()
+    if (!material) return { ok: false, reason: '写作题组缺少材料或提示' }
+  }
+
+  return { ok: true, reason: null }
+}
+
+function getCurrentDraftPaperRow(db) {
+  return db
+    .prepare(
+      `
+      SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
+      FROM draft_papers
+      WHERE status = 'active' AND current_marker = 1
+      ORDER BY updated_at DESC
+      LIMIT 1
+      `,
+    )
+    .get() || null
+}
+
+function makeDraftPaperTitle() {
+  const now = new Date()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${month}${day} 英语草稿卷`
+}
+
+function createDraftPaper(db, title = makeDraftPaperTitle()) {
+  const id = `draft-paper-${randomUUID()}`
+  db.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1').run()
+  db.prepare(
+    `
+    INSERT INTO draft_papers (id, title, subject, status, current_marker)
+    VALUES (?, ?, 'english', 'active', 1)
+    `,
+  ).run(id, String(title || '').trim() || makeDraftPaperTitle())
+  return getDraftPaper(db, id)
+}
+
+function touchDraftPaper(db, draftPaperId) {
+  db.prepare('UPDATE draft_papers SET updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+}
+
+function markCurrentDraftPaper(db, draftPaperId) {
+  db.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1 AND id <> ?').run(draftPaperId)
+  db.prepare('UPDATE draft_papers SET current_marker = 1, updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+}
+
+function getDraftSearchContext(db) {
+  const current = getCurrentDraftPaperRow(db)
+  if (!current) {
+    return { currentDraftPaperId: null, groupIds: new Set() }
+  }
+  const rows = db
+    .prepare('SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ?')
+    .all(current.id)
+  return {
+    currentDraftPaperId: current.id,
+    groupIds: new Set(rows.map((row) => row.group_id)),
+  }
+}
+
+function buildDraftButtonState(printReady, draftContext, groupId) {
+  if (draftContext.groupIds.has(groupId)) return 'in_current_draft'
+  if (!printReady.ok) return 'disabled'
+  return 'add'
+}
+
+function cnSectionNumber(index) {
+  const numerals = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
+  if (index <= 10) return numerals[index]
+  if (index < 20) return `十${numerals[index - 10]}`
+  return String(index)
+}
+
+function buildDraftPaperBlocks(items) {
+  const blocks = []
+  let previousType = ''
+  let sectionIndex = 0
+  for (const [index, item] of items.entries()) {
+    const groupType = item.questionGroup?.groupType || item.groupType || ''
+    if (index > 0 && item.pageBreakBefore) blocks.push({ type: 'page_break' })
+    if (groupType !== previousType) {
+      sectionIndex += 1
+      blocks.push({
+        type: 'section_header',
+        title: `第${cnSectionNumber(sectionIndex)}部分 ${groupTypeLabels[groupType] || '综合练习'}`,
+      })
+      previousType = groupType
+    }
+    blocks.push({
+      type: 'question_group',
+      questionGroupId: item.groupId,
+      score: Number(item.questionGroup?.defaultScore || item.defaultScore || 0),
+    })
+  }
+  return blocks
+}
+
+function buildDraftPaperExportInput(draftPaper) {
+  return {
+    title: draftPaper.title || '未命名英语练习卷',
+    versionType: 'student',
+    printStyle: 'exam',
+    questionNumberStart: 1,
+    items: draftPaper.items.map((item) => ({
+      questionGroupId: item.groupId,
+      score: Number(item.questionGroup?.defaultScore || 0),
+      sectionTitle: '',
+      note: '',
+    })),
+    blocks: buildDraftPaperBlocks(draftPaper.items),
+  }
+}
+
+function addDraftFooterCss(html, title) {
+  const safeTitle = String(title || '英语练习卷').replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+  const footerCss = `
+@page {
+  @bottom-center {
+    content: "${safeTitle} · " counter(page);
+    font-size: 9pt;
+    color: #666;
+  }
+}
+`
+  return html.replace('</style>', `${footerCss}\n</style>`)
+}
+
+function buildDraftPrintHtml(draftPaper) {
+  if (!draftPaper.items.length) return ''
+  const input = buildDraftPaperExportInput(draftPaper)
+  const exportItems = input.items.map((item) => {
+    const detail = getQuestionGroupDetail(item.questionGroupId)
+    if (!detail) throw new Error(`questionGroupId not found: ${item.questionGroupId}`)
+    return {
+      detail,
+      note: '',
+      score: Math.max(0, Number.isFinite(Number(item.score)) ? Number(item.score) : detail.defaultScore),
+      sectionTitle: '',
+    }
+  })
+  return addDraftFooterCss(
+    buildPrintHtml({
+      title: input.title,
+      versionType: input.versionType,
+      printStyle: input.printStyle,
+      items: exportItems,
+      blocks: input.blocks,
+      questionNumberStart: input.questionNumberStart,
+    }),
+    input.title,
+  )
+}
+
+function estimateEnglishWords(text) {
+  return String(text || '').match(/[A-Za-z]+(?:['-][A-Za-z]+)?/g)?.length || 0
+}
+
+function buildPageBreakSuggestions(items) {
+  const suggestions = []
+  let previousEstimate = 0
+  for (const [index, item] of items.entries()) {
+    const detail = getQuestionGroupDetail(item.groupId)
+    if (!detail) continue
+    const materialWords = estimateEnglishWords(`${detail.passage.materialText || ''}\n${detail.passage.summary || ''}`)
+    const optionCount = detail.questions.reduce((sum, question) => sum + question.options.length, 0)
+    const estimate = materialWords * 1.2 + detail.questions.length * 80 + optionCount * 12
+    let reason = ''
+    if ((detail.groupType === 'reading' || detail.groupType === 'seven_choices') && materialWords > 600) {
+      reason = '长篇材料超过 600 词'
+    } else if (detail.questions.length > 4 && optionCount > 16) {
+      reason = '题量和选项较多'
+    } else if (previousEstimate > 0 && estimate > 700 && previousEstimate + estimate > 1000) {
+      reason = '预计会超过当前 A4 页面 70%'
+    }
+    if (index > 0 && reason && !item.pageBreakBefore) {
+      suggestions.push({ itemId: item.id, groupId: item.groupId, reason })
+    }
+    previousEstimate = estimate
+  }
+  return suggestions
+}
+
+function rowToDraftPaperSummary(row, itemRows = []) {
+  return {
+    id: row.id,
+    title: row.title,
+    subject: row.subject,
+    status: row.status,
+    isCurrent: Number(row.current_marker || 0) === 1,
+    itemCount: itemRows.length,
+    totalQuestions: itemRows.reduce((sum, item) => sum + Number(item.questionGroup?.questionCount || 0), 0),
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    lastPrintedAt: row.last_printed_at || null,
+  }
+}
+
+function getDraftPaperItems(db, draftPaperId) {
+  const rows = db
+    .prepare(
+      `
+      SELECT id, draft_paper_id, group_id, source_paper_id, order_index, page_break_before, created_at, updated_at
+      FROM draft_paper_items
+      WHERE draft_paper_id = ?
+      ORDER BY order_index ASC, created_at ASC
+      `,
+    )
+    .all(draftPaperId)
+
+  return rows.map((row) => {
+    const questionGroup = selectQuestionGroupCards(db, 'WHERE id = ?', [row.group_id])[0] || null
+    const printReady = isGroupPrintReady(db, row.group_id)
+    return {
+      id: row.id,
+      draftPaperId: row.draft_paper_id,
+      groupId: row.group_id,
+      sourcePaperId: row.source_paper_id || '',
+      orderIndex: Number(row.order_index || 0),
+      pageBreakBefore: Number(row.page_break_before || 0) === 1,
+      printReady: printReady.ok,
+      printUnavailableReason: printReady.reason,
+      questionGroup,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }
+  })
+}
+
+function getDraftPaper(db, draftPaperId, { includePrintHtml = true } = {}) {
+  const row = db
+    .prepare(
+      `
+      SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
+      FROM draft_papers
+      WHERE id = ? AND status = 'active'
+      `,
+    )
+    .get(draftPaperId)
+  if (!row) return null
+  const items = getDraftPaperItems(db, draftPaperId)
+  const draftPaper = {
+    ...rowToDraftPaperSummary(row, items),
+    items,
+    pageBreakSuggestions: buildPageBreakSuggestions(items),
+  }
+  return {
+    ...draftPaper,
+    printHtml: includePrintHtml && items.length > 0 ? buildDraftPrintHtml(draftPaper) : '',
+  }
+}
+
+function listDraftPapers() {
+  const db = openDatabase()
+  try {
+    const rows = db
+      .prepare(
+        `
+        SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
+        FROM draft_papers
+        WHERE status = 'active'
+        ORDER BY updated_at DESC, created_at DESC
+        LIMIT 12
+        `,
+      )
+      .all()
+    return rows.map((row) => rowToDraftPaperSummary(row, getDraftPaperItems(db, row.id)))
+  } finally {
+    db.close()
+  }
+}
+
+function getOrCreateCurrentDraftPaper({ createIfMissing = true } = {}) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    let current = getCurrentDraftPaperRow(db)
+    if (!current && createIfMissing) {
+      db.exec('BEGIN')
+      try {
+        const draft = createDraftPaper(db)
+        db.exec('COMMIT')
+        return draft
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      }
+    }
+    return current ? getDraftPaper(db, current.id) : null
+  } finally {
+    db.close()
+  }
+}
+
+function sourcePaperIdFromCard(card) {
+  return [card?.year, card?.region, card?.paperName].filter(Boolean).join('__')
+}
+
+function normalizeDraftItemOrder(db, draftPaperId) {
+  const rows = db
+    .prepare('SELECT id FROM draft_paper_items WHERE draft_paper_id = ? ORDER BY order_index ASC, created_at ASC')
+    .all(draftPaperId)
+  const update = db.prepare('UPDATE draft_paper_items SET order_index = ?, updated_at = datetime(\'now\') WHERE id = ?')
+  rows.forEach((row, index) => update.run(index + 1, row.id))
+}
+
+function addGroupToDraftPaper(db, draftPaperId, groupId, { insertIndex = null, pageBreakBefore = false } = {}) {
+  const [card] = selectQuestionGroupCards(db, 'WHERE id = ?', [groupId])
+  if (!card) throw new Error(`questionGroupId not found: ${groupId}`)
+  const ready = isGroupPrintReady(db, groupId)
+  if (!ready.ok) throw new Error(ready.reason || '题组暂不可打印')
+  const existing = db
+    .prepare('SELECT id FROM draft_paper_items WHERE draft_paper_id = ? AND group_id = ?')
+    .get(draftPaperId, groupId)
+  if (existing) return existing.id
+  const count = db
+    .prepare('SELECT COUNT(*) AS count FROM draft_paper_items WHERE draft_paper_id = ?')
+    .get(draftPaperId)?.count || 0
+  const targetIndex = Number.isInteger(Number(insertIndex)) && Number(insertIndex) >= 0
+    ? Math.min(Number(insertIndex), Number(count))
+    : Number(count)
+  db.prepare(
+    `
+    UPDATE draft_paper_items
+    SET order_index = order_index + 1, updated_at = datetime('now')
+    WHERE draft_paper_id = ? AND order_index > ?
+    `,
+  ).run(draftPaperId, targetIndex)
+  const itemId = `draft-item-${randomUUID()}`
+  db.prepare(
+    `
+    INSERT INTO draft_paper_items (id, draft_paper_id, group_id, source_paper_id, order_index, page_break_before)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `,
+  ).run(itemId, draftPaperId, groupId, sourcePaperIdFromCard(card), targetIndex + 1, pageBreakBefore ? 1 : 0)
+  touchDraftPaper(db, draftPaperId)
+  normalizeDraftItemOrder(db, draftPaperId)
+  return itemId
+}
+
+function addGroupToCurrentDraftPaper(groupId) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    db.exec('BEGIN')
+    try {
+      let current = getCurrentDraftPaperRow(db)
+      if (!current) {
+        createDraftPaper(db)
+        current = getCurrentDraftPaperRow(db)
+      }
+      addGroupToDraftPaper(db, current.id, groupId)
+      markCurrentDraftPaper(db, current.id)
+      db.exec('COMMIT')
+      return getDraftPaper(db, current.id)
+    } catch (error) {
+      db.exec('ROLLBACK')
+      throw error
+    }
+  } finally {
+    db.close()
+  }
+}
+
+function updateDraftPaper(draftPaperId, input) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    db.exec('BEGIN')
+    try {
+      const existing = getDraftPaper(db, draftPaperId, { includePrintHtml: false })
+      if (!existing) throw new Error('Draft paper not found')
+      if (Object.prototype.hasOwnProperty.call(input, 'title')) {
+        const title = String(input.title || '').trim() || makeDraftPaperTitle()
+        db.prepare('UPDATE draft_papers SET title = ?, updated_at = datetime(\'now\') WHERE id = ?').run(title, draftPaperId)
+      }
+      if (Array.isArray(input.items)) {
+        const knownItems = new Set(
+          db.prepare('SELECT id FROM draft_paper_items WHERE draft_paper_id = ?').all(draftPaperId).map((row) => row.id),
+        )
+        const updateItem = db.prepare(
+          `
+          UPDATE draft_paper_items
+          SET order_index = ?, page_break_before = ?, updated_at = datetime('now')
+          WHERE id = ? AND draft_paper_id = ?
+          `,
+        )
+        input.items.forEach((item, index) => {
+          if (!knownItems.has(item.id)) return
+          updateItem.run(index + 1, item.pageBreakBefore ? 1 : 0, item.id, draftPaperId)
+        })
+        normalizeDraftItemOrder(db, draftPaperId)
+        touchDraftPaper(db, draftPaperId)
+      }
+      markCurrentDraftPaper(db, draftPaperId)
+      db.exec('COMMIT')
+      return getDraftPaper(db, draftPaperId)
+    } catch (error) {
+      db.exec('ROLLBACK')
+      throw error
+    }
+  } finally {
+    db.close()
+  }
+}
+
+function patchDraftPaperItem(draftPaperId, itemId, input) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    db.exec('BEGIN')
+    try {
+      const existing = db
+        .prepare('SELECT id FROM draft_paper_items WHERE id = ? AND draft_paper_id = ?')
+        .get(itemId, draftPaperId)
+      if (!existing) throw new Error('Draft item not found')
+      if (Object.prototype.hasOwnProperty.call(input, 'pageBreakBefore')) {
+        db.prepare(
+          'UPDATE draft_paper_items SET page_break_before = ?, updated_at = datetime(\'now\') WHERE id = ? AND draft_paper_id = ?',
+        ).run(input.pageBreakBefore ? 1 : 0, itemId, draftPaperId)
+      }
+      touchDraftPaper(db, draftPaperId)
+      markCurrentDraftPaper(db, draftPaperId)
+      db.exec('COMMIT')
+      return getDraftPaper(db, draftPaperId)
+    } catch (error) {
+      db.exec('ROLLBACK')
+      throw error
+    }
+  } finally {
+    db.close()
+  }
+}
+
+function deleteDraftPaperItem(draftPaperId, itemId) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    db.exec('BEGIN')
+    try {
+      const row = db
+        .prepare(
+          `
+          SELECT dpi.*, qg.id AS group_id
+          FROM draft_paper_items dpi
+          JOIN question_groups qg ON qg.id = dpi.group_id
+          WHERE dpi.id = ? AND dpi.draft_paper_id = ?
+          `,
+        )
+        .get(itemId, draftPaperId)
+      if (!row) throw new Error('Draft item not found')
+      db.prepare('DELETE FROM draft_paper_items WHERE id = ? AND draft_paper_id = ?').run(itemId, draftPaperId)
+      normalizeDraftItemOrder(db, draftPaperId)
+      touchDraftPaper(db, draftPaperId)
+      markCurrentDraftPaper(db, draftPaperId)
+      db.exec('COMMIT')
+      return {
+        draftPaper: getDraftPaper(db, draftPaperId),
+        removed: {
+          itemId: row.id,
+          groupId: row.group_id,
+          orderIndex: Number(row.order_index || 1),
+          pageBreakBefore: Number(row.page_break_before || 0) === 1,
+        },
+      }
+    } catch (error) {
+      db.exec('ROLLBACK')
+      throw error
+    }
+  } finally {
+    db.close()
+  }
+}
+
+function restoreDraftPaperItem(draftPaperId, input) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    db.exec('BEGIN')
+    try {
+      const groupId = String(input.groupId || '').trim()
+      if (!groupId) throw new Error('groupId is required')
+      const insertIndex = Number.isInteger(Number(input.orderIndex)) ? Number(input.orderIndex) - 1 : null
+      addGroupToDraftPaper(db, draftPaperId, groupId, {
+        insertIndex,
+        pageBreakBefore: input.pageBreakBefore === true,
+      })
+      markCurrentDraftPaper(db, draftPaperId)
+      db.exec('COMMIT')
+      return getDraftPaper(db, draftPaperId)
+    } catch (error) {
+      db.exec('ROLLBACK')
+      throw error
+    }
+  } finally {
+    db.close()
+  }
+}
+
+function migrateAssemblyBasketToDraftPaper(input) {
+  const groupIds = Array.isArray(input?.groupIds) ? input.groupIds.map((id) => String(id || '').trim()).filter(Boolean) : []
+  const db = openDatabase({ readOnly: false })
+  try {
+    db.exec('BEGIN')
+    try {
+      let current = getCurrentDraftPaperRow(db)
+      if (current) {
+        db.exec('COMMIT')
+        return { draftPaper: getDraftPaper(db, current.id), migratedCount: 0, skippedCount: groupIds.length }
+      }
+      const draft = createDraftPaper(db)
+      let migratedCount = 0
+      let skippedCount = 0
+      for (const groupId of groupIds) {
+        try {
+          addGroupToDraftPaper(db, draft.id, groupId)
+          migratedCount += 1
+        } catch {
+          skippedCount += 1
+        }
+      }
+      db.exec('COMMIT')
+      return { draftPaper: getDraftPaper(db, draft.id), migratedCount, skippedCount }
+    } catch (error) {
+      db.exec('ROLLBACK')
+      throw error
+    }
+  } finally {
+    db.close()
+  }
+}
+
 function topicSubtopicAliasKey(theme, subtopic) {
   return `${compactTopicLabelText(theme)}|${compactTopicLabelText(subtopic)}`
 }
@@ -325,7 +984,7 @@ addTopicSubtopicAlias('人与自然', '自然科学研究成果', '自然生态'
 function sendJson(response, status, body) {
   response.writeHead(status, {
     'access-control-allow-origin': 'http://127.0.0.1:5173',
-    'access-control-allow-methods': 'GET, POST, PUT, OPTIONS',
+    'access-control-allow-methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
     'access-control-allow-headers': 'content-type',
     'access-control-expose-headers': 'x-verify-request-id, x-parse-request-id',
     'content-type': 'application/json; charset=utf-8',
@@ -497,6 +1156,45 @@ function ensureDatabaseShape() {
     if (paperSetColumns.length > 0 && !paperSetColumns.includes('layout_json')) {
       db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS draft_papers (
+        id TEXT PRIMARY KEY,
+        title TEXT NOT NULL,
+        subject TEXT NOT NULL DEFAULT 'english',
+        status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'deleted')),
+        current_marker INTEGER NOT NULL DEFAULT 0 CHECK (current_marker IN (0, 1)),
+        last_printed_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE TABLE IF NOT EXISTS draft_paper_items (
+        id TEXT PRIMARY KEY,
+        draft_paper_id TEXT NOT NULL REFERENCES draft_papers(id) ON DELETE CASCADE,
+        group_id TEXT NOT NULL REFERENCES question_groups(id) ON DELETE RESTRICT,
+        source_paper_id TEXT NOT NULL DEFAULT '',
+        order_index INTEGER NOT NULL DEFAULT 0,
+        page_break_before INTEGER NOT NULL DEFAULT 0 CHECK (page_break_before IN (0, 1)),
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(draft_paper_id, group_id)
+      );
+      UPDATE draft_papers
+      SET current_marker = 0
+      WHERE current_marker = 1
+        AND id NOT IN (
+          SELECT id
+          FROM draft_papers
+          WHERE current_marker = 1
+          ORDER BY updated_at DESC, created_at DESC
+          LIMIT 1
+        );
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
+      ON draft_papers(current_marker)
+      WHERE current_marker = 1;
+      CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
+      CREATE INDEX IF NOT EXISTS idx_draft_paper_items_draft ON draft_paper_items(draft_paper_id, order_index);
+      CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
+    `)
     ensurePaperImportDatabaseShape(db)
   } finally {
     db.close()
@@ -978,8 +1676,15 @@ function saveSevenChoicesParseResult(questionGroupId, input) {
   }
 }
 
-function rowToQuestionGroupCard(row, paperSurfaceAnalysisAvailabilityByGroupId = new Map()) {
+function rowToQuestionGroupCard(
+  row,
+  paperSurfaceAnalysisAvailabilityByGroupId = new Map(),
+  draftContext = { currentDraftPaperId: null, groupIds: new Set() },
+  printReadyOverride = null,
+) {
   const paperSurfaceAnalysis = paperSurfaceAnalysisAvailabilityByGroupId.get(row.id)
+  const printReady = printReadyOverride || { ok: false, reason: '未验证打印状态' }
+  const draftPaperButtonState = buildDraftButtonState(printReady, draftContext, row.id)
   return {
     id: row.id,
     title: row.title,
@@ -1001,6 +1706,10 @@ function rowToQuestionGroupCard(row, paperSurfaceAnalysisAvailabilityByGroupId =
     defaultScore: row.default_score,
     hasPaperSurfaceAnalysis: Boolean(paperSurfaceAnalysis?.href),
     paperSurfaceHref: paperSurfaceAnalysis?.href || null,
+    canAddToDraftPaper: printReady.ok && draftPaperButtonState === 'add',
+    draftPaperButtonState,
+    currentDraftPaperId: draftContext.currentDraftPaperId,
+    printUnavailableReason: printReady.ok ? null : printReady.reason,
   }
 }
 
@@ -1037,13 +1746,15 @@ function selectQuestionGroupCards(db, whereClause = '', params = []) {
     rows.map((row) => row.id),
   )
   const paperSurfaceAnalysisAvailabilityByGroupId = getPaperSurfaceAnalysisAvailabilityByGroupId()
+  const draftContext = getDraftSearchContext(db)
 
-  return rows.map((row) =>
-    rowToQuestionGroupCard({
+  return rows.map((row) => {
+    const printReady = isGroupPrintReady(db, row.id)
+    return rowToQuestionGroupCard({
       ...row,
       topicLabels: topicLabelsByGroupId.get(row.id) || [],
-    }, paperSurfaceAnalysisAvailabilityByGroupId),
-  )
+    }, paperSurfaceAnalysisAvailabilityByGroupId, draftContext, printReady)
+  })
 }
 
 function listQuestionGroups() {
@@ -1053,6 +1764,66 @@ function listQuestionGroups() {
     return selectQuestionGroupCards(db)
   } finally {
     db.close()
+  }
+}
+
+function buildQuestionDetailsFromPaperAsset(asset, group, dbQuestions) {
+  const dbQuestionById = new Map(dbQuestions.map((question) => [question.id, question]))
+  const answerById = asset?.answerKey?.answers && typeof asset.answerKey.answers === 'object'
+    ? asset.answerKey.answers
+    : {}
+  const assetQuestions = asset?.content?.questions && typeof asset.content.questions === 'object'
+    ? asset.content.questions
+    : {}
+  const sharedOptionBank = Array.isArray(group?.optionBank) ? group.optionBank : []
+  const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+
+  return questionIds.map((questionId, index) => {
+    const assetQuestion = assetQuestions[questionId] || {}
+    const dbQuestion = dbQuestionById.get(questionId) || {}
+    const answer = answerById[questionId] || {}
+    const options = Array.isArray(assetQuestion.options) && assetQuestion.options.length > 0
+      ? assetQuestion.options
+      : sharedOptionBank
+
+    return {
+      id: questionId,
+      questionNo: String(assetQuestion.questionNo ?? answer.questionNo ?? dbQuestion.question_no ?? index + 1),
+      questionType: dbQuestion.question_type || '',
+      stem: String(assetQuestion.stem ?? assetQuestion.blankId ?? dbQuestion.stem ?? '').trim(),
+      answer: String(answer.answer ?? dbQuestion.answer ?? '').trim(),
+      explanation: dbQuestion.explanation || '',
+      difficulty: dbQuestion.difficulty || '',
+      aiDifficultyScore: dbQuestion.ai_difficulty_score ?? null,
+      teacherDifficulty: dbQuestion.teacher_difficulty ?? null,
+      difficultyOverrideReason: dbQuestion.difficulty_override_reason || '',
+      difficultyOverrideNote: dbQuestion.difficulty_override_note || '',
+      difficultyTaggedAt: dbQuestion.difficulty_tagged_at || '',
+      score: Number(answer.score ?? dbQuestion.score ?? 0),
+      displayOrder: index + 1,
+      note: dbQuestion.note || '',
+      options: options.map((option, optionIndex) => ({
+        id: `${questionId}-${String(option?.label || optionIndex + 1).toLowerCase()}`,
+        label: String(option?.label || '').trim(),
+        content: String(option?.text || option?.content || '').trim(),
+        displayOrder: optionIndex + 1,
+      })).filter((option) => option.label && option.content),
+    }
+  })
+}
+
+function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuestions) {
+  const materialText = paperAssetParagraphText(group)
+  const groupType = normalizePaperAssetGroupType(group?.groupType) || baseDetail.groupType
+  return {
+    ...baseDetail,
+    groupType,
+    passage: {
+      ...baseDetail.passage,
+      materialText: materialText || baseDetail.passage.materialText,
+      title: String(group?.title || baseDetail.passage.title || '').trim(),
+    },
+    questions: buildQuestionDetailsFromPaperAsset(asset, group, dbQuestions),
   }
 }
 
@@ -1129,7 +1900,7 @@ function getQuestionGroupDetail(id) {
     const clozeParseResult = getSavedClozeParseResult(db, id)
     const sevenChoicesParseResult = getSavedSevenChoicesParseResult(db, id)
 
-    return {
+    const baseDetail = {
       ...card,
       instruction: detail.instruction,
       note: detail.group_note || '',
@@ -1157,6 +1928,11 @@ function getQuestionGroupDetail(id) {
       grammarParseResult,
       sevenChoicesParseResult,
     }
+    const paperAssetMatch = findPaperAssetGroup(id)
+    if (paperAssetMatch) {
+      return applyPaperAssetToQuestionGroupDetail(baseDetail, paperAssetMatch.asset, paperAssetMatch.group, questions)
+    }
+    return baseDetail
   } finally {
     db.close()
   }
@@ -6006,6 +6782,47 @@ function exportPrintPdf(input) {
   }
 }
 
+function exportDraftPaperPdf(draftPaperId) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    const draftPaper = getDraftPaper(db, draftPaperId)
+    if (!draftPaper) throw new Error('Draft paper not found')
+    if (!draftPaper.items.length) throw new Error('请先添加题组')
+    const html = buildDraftPrintHtml(draftPaper)
+    const vivliostylePaths = [
+      path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
+      path.join(rootDir, 'server', 'node_modules', '.bin', 'vivliostyle'),
+      path.join(rootDir, 'app', 'node_modules', '.bin', 'vivliostyle'),
+    ]
+    let vivliostyleBin = null
+    for (const p of vivliostylePaths) {
+      if (existsSync(p)) { vivliostyleBin = p; break }
+    }
+    if (!vivliostyleBin) {
+      throw new Error('vivliostyle CLI not found. Install with: npm install @vivliostyle/cli')
+    }
+
+    mkdirSync(exportDir, { recursive: true })
+    const tempDir = mkdtempSync(path.join(tmpdir(), 'draft-paper-print-'))
+    const htmlPath = path.join(tempDir, 'draft-paper.html')
+    const pdfPath = path.join(tempDir, 'draft-paper.pdf')
+    try {
+      writeFileSync(htmlPath, html)
+      execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
+      const safeTitle = String(draftPaper.title || '英语草稿卷').replace(/[\\/:*?"<>|]/g, '-')
+      const fileName = `${safeTitle}-学生卷.pdf`
+      const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
+      copyFileSync(pdfPath, outputPath)
+      db.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+      return { body: readFileSync(outputPath), fileName, outputPath }
+    } finally {
+      rmSync(tempDir, { recursive: true, force: true })
+    }
+  } finally {
+    db.close()
+  }
+}
+
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || ''
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions'
 const DEFAULT_DEEPSEEK_MODEL = 'deepseek-v4-flash'
@@ -10677,6 +11494,182 @@ const server = createServer(async (request, response) => {
 
     if (request.method === 'GET' && url.pathname === '/api/question-groups') {
       sendJson(response, 200, { questionGroups: listQuestionGroups() })
+      return
+    }
+
+    if (request.method === 'GET' && url.pathname === '/api/draft-papers') {
+      sendJson(response, 200, { draftPapers: listDraftPapers() })
+      return
+    }
+
+    if (request.method === 'GET' && url.pathname === '/api/draft-papers/current') {
+      const createIfMissing = url.searchParams.get('create') === '1'
+      const draftPaper = getOrCreateCurrentDraftPaper({ createIfMissing })
+      if (!draftPaper) {
+        sendJson(response, 404, { error: 'Current draft paper not found' })
+        return
+      }
+      sendJson(response, 200, { draftPaper })
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/draft-papers/current/items') {
+      const input = await readJsonBody(request)
+      try {
+        const draftPaper = addGroupToCurrentDraftPaper(String(input.groupId || ''))
+        sendJson(response, 201, { draftPaper })
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      }
+      return
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/draft-papers/migrate-assembly-basket') {
+      const input = await readJsonBody(request, { maxBytes: 1_000_000 })
+      try {
+        const result = migrateAssemblyBasketToDraftPaper(input)
+        sendJson(response, 201, result)
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      }
+      return
+    }
+
+    const draftPaperMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)$/)
+    const draftPaperItemsMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)\/items$/)
+    const draftPaperItemMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)\/items\/([^/]+)$/)
+    const draftPaperRestoreMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)\/items\/restore$/)
+    const draftPaperPrintHtmlMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)\/print-html$/)
+    const draftPaperPrintPdfMatch = url.pathname.match(/^\/api\/draft-papers\/([^/]+)\/print-pdf$/)
+
+    if (request.method === 'GET' && draftPaperMatch) {
+      const db = openDatabase({ readOnly: false })
+      try {
+        const id = decodeURIComponent(draftPaperMatch[1])
+        const draftPaper = getDraftPaper(db, id)
+      if (!draftPaper) {
+        sendJson(response, 404, { error: 'Draft paper not found' })
+        return
+      }
+        sendJson(response, 200, { draftPaper })
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'PATCH' && draftPaperMatch) {
+      const input = await readJsonBody(request, { maxBytes: 1_000_000 })
+      try {
+        const draftPaper = updateDraftPaper(decodeURIComponent(draftPaperMatch[1]), input)
+        sendJson(response, 200, { draftPaper })
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      }
+      return
+    }
+
+    if (request.method === 'POST' && draftPaperItemsMatch) {
+      const input = await readJsonBody(request)
+      const db = openDatabase({ readOnly: false })
+      try {
+        const draftPaperId = decodeURIComponent(draftPaperItemsMatch[1])
+        db.exec('BEGIN')
+        try {
+          addGroupToDraftPaper(db, draftPaperId, String(input.groupId || ''), {
+            insertIndex: input.insertIndex,
+            pageBreakBefore: input.pageBreakBefore === true,
+          })
+          markCurrentDraftPaper(db, draftPaperId)
+          db.exec('COMMIT')
+          sendJson(response, 201, { draftPaper: getDraftPaper(db, draftPaperId) })
+        } catch (error) {
+          db.exec('ROLLBACK')
+          sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+        }
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'POST' && draftPaperRestoreMatch) {
+      const input = await readJsonBody(request)
+      try {
+        const draftPaper = restoreDraftPaperItem(decodeURIComponent(draftPaperRestoreMatch[1]), input)
+        sendJson(response, 200, { draftPaper })
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      }
+      return
+    }
+
+    if (request.method === 'PATCH' && draftPaperItemMatch) {
+      const input = await readJsonBody(request)
+      try {
+        const draftPaper = patchDraftPaperItem(
+          decodeURIComponent(draftPaperItemMatch[1]),
+          decodeURIComponent(draftPaperItemMatch[2]),
+          input,
+        )
+        sendJson(response, 200, { draftPaper })
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      }
+      return
+    }
+
+    if (request.method === 'DELETE' && draftPaperItemMatch) {
+      try {
+        const result = deleteDraftPaperItem(
+          decodeURIComponent(draftPaperItemMatch[1]),
+          decodeURIComponent(draftPaperItemMatch[2]),
+        )
+        sendJson(response, 200, result)
+      } catch (error) {
+        sendJson(response, 400, { error: error instanceof Error ? error.message : String(error) })
+      }
+      return
+    }
+
+    if (request.method === 'GET' && draftPaperPrintHtmlMatch) {
+      const db = openDatabase({ readOnly: false })
+      try {
+        const draftPaperId = decodeURIComponent(draftPaperPrintHtmlMatch[1])
+        const draftPaper = getDraftPaper(db, draftPaperId)
+        if (!draftPaper) {
+          sendJson(response, 404, { error: 'Draft paper not found' })
+          return
+        }
+        if (!draftPaper.items.length) {
+          sendJson(response, 400, { error: '请先添加题组' })
+          return
+        }
+        const html = buildDraftPrintHtml(draftPaper)
+        response.writeHead(200, {
+          'access-control-allow-origin': 'http://127.0.0.1:5173',
+          'content-type': 'text/html; charset=utf-8',
+          'x-file-name': encodeURIComponent(`${draftPaper.title}-学生卷.html`),
+        })
+        response.end(html)
+      } finally {
+        db.close()
+      }
+      return
+    }
+
+    if (request.method === 'POST' && draftPaperPrintPdfMatch) {
+      try {
+        const result = exportDraftPaperPdf(decodeURIComponent(draftPaperPrintPdfMatch[1]))
+        sendPdf(response, result.body, result.fileName, result.outputPath)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
+          sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
+        } else {
+          sendJson(response, 400, { error: message })
+        }
+      }
       return
     }
 
