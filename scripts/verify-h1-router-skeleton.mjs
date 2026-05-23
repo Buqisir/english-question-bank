@@ -106,7 +106,11 @@ assert('api imports router skeleton', apiSource.includes("from './router/index.m
 assert('api defines H1 route registry', /const h1Routes = \[/.test(apiSource))
 assert('api moves only health route into H1 registry', /defineRoute\('GET', \/\^\\\/api\\\/health/.test(apiSource))
 assert('api no longer has inline health if branch', !apiSource.includes("url.pathname === '/api/health'"))
-assert('api uses runRoutes before question group route', apiSource.indexOf('await runRoutes(h1Routes') < apiSource.indexOf("url.pathname === '/api/question-groups'"))
+assert('api uses server route registry', apiSource.includes('await runRoutes(serverRoutes'))
+assert(
+  'api uses runRoutes before remaining inline AI routes',
+  apiSource.indexOf('await runRoutes(serverRoutes') < apiSource.indexOf("url.pathname === '/api/ai/verify-trace'"),
+)
 assert('router does not contain Draft Paper routes', !/draft-papers|my-space|paper-import|exports\/pdf/.test(routerSource))
 assert('verify-ci includes H1 router skeleton verify', verifyCiSource.includes('verify-h1-router-skeleton.mjs'))
 assert('scripts README documents H1 router skeleton verify', scriptsReadme.includes('verify-h1-router-skeleton.mjs'))
