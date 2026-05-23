@@ -44,13 +44,26 @@ assert('H2 handoff exists', existsSync(path.join(rootDir, 'docs/cuts/H2-workflow
 
 const workflowTemplate = read('docs/ci/verify-workflow-template.yml')
 assert('workflow template installs app dependencies with pnpm', workflowTemplate.includes('pnpm install --frozen-lockfile'))
-assert('workflow template runs app build', workflowTemplate.includes('pnpm run build'))
+assert('workflow template installs server dependencies with npm ci', workflowTemplate.includes('npm ci') && workflowTemplate.includes('working-directory: server'))
 assert('workflow template runs stable verify entrypoint', workflowTemplate.includes('pnpm run verify:all'))
+assert(
+  'workflow template delegates app build to stable verify entrypoint',
+  workflowTemplate.includes('Run app build and core verify scripts') && !workflowTemplate.includes('pnpm run build'),
+)
 
 const workflowInstallNote = read('docs/ci/verify-workflow-install.md')
 const realWorkflowExists = existsSync(path.join(rootDir, '.github/workflows/verify.yml'))
 assert('workflow install state is documented or installed', realWorkflowExists || workflowInstallNote.includes('Status: Not installed.'))
 assert('workflow install note documents workflow scope requirement', workflowInstallNote.includes('workflow') && workflowInstallNote.includes('.github/workflows/verify.yml'))
+assert('workflow install note includes server dependencies', workflowInstallNote.includes('npm ci --prefix server'))
+
+const claudeInstructions = read('CLAUDE.md')
+const agentInstructions = read('AGENTS.md')
+const issueTracker = read('docs/agents/issue-tracker.md')
+assert('CLAUDE delegates to AGENTS single source', claudeInstructions.includes('Read `AGENTS.md`') && claudeInstructions.includes('single source of truth'))
+assert('CLAUDE does not duplicate browser rules', !claudeInstructions.includes('Codex in-app browser'))
+assert('AGENTS declares single source of truth', agentInstructions.includes('single source of truth for agent rules'))
+assert('issue tracker doc marks scratch as local-only', issueTracker.includes('gitignored local scratch space') && issueTracker.includes('must not be treated as shared source of truth'))
 
 const appPackage = read('app/package.json')
 assert('app exposes verify:all script', appPackage.includes('"verify:all": "node ../scripts/verify-ci.mjs"'))
@@ -62,6 +75,7 @@ assert('tokens define core color namespace', tokensCss.includes('--eqb-color-pap
 assert('tokens define spacing scale', tokensCss.includes('--eqb-space-1') && tokensCss.includes('--eqb-space-5'))
 
 const verifyCi = read('scripts/verify-ci.mjs')
+assert('verify-ci runs app build/typecheck', verifyCi.includes("['run', 'build', '--prefix', 'app']"))
 assert('verify-ci keeps C7 import contracts in stable suite', verifyCi.includes('verify-c7-paper-import-contracts.mjs'))
 assert('verify-ci keeps C8 draft paper contracts in stable suite', verifyCi.includes('verify-c8-draft-paper-contracts.mjs'))
 assert('verify-ci keeps draft render contract in stable suite', verifyCi.includes('verify-c8-draft-paper-render-model.mjs'))
@@ -70,6 +84,8 @@ assert('verify-ci excludes host interaction cut forbidden-scope script', !verify
 
 const scriptsReadme = read('scripts/README.md')
 assert('scripts README documents stable CI entrypoint', scriptsReadme.includes('Stable CI entrypoint'))
+assert('scripts README documents build/typecheck in stable CI', scriptsReadme.includes('build/typecheck'))
+assert('scripts README documents server dependency install', scriptsReadme.includes('npm ci') && scriptsReadme.includes('server/'))
 assert('scripts README documents workflow-scope install constraint', scriptsReadme.includes('requires a token with workflow scope'))
 assert('scripts README marks host interaction as not CI', scriptsReadme.includes('Host interaction reducer / state rules; includes cut-specific forbidden-scope checks | no'))
 assert('scripts README marks C8 draft paper contracts as CI', scriptsReadme.includes('C8 draft-paper API/search/workbench contract | yes'))
@@ -160,6 +176,7 @@ const codeStyle = read('docs/code-style.md')
 assert('code-style documents file suffix rules', codeStyle.includes('Server runtime code uses `.mjs`'))
 assert('code-style documents server module targets', codeStyle.includes('server/question-bank/'))
 assert('code-style documents CSS token policy', codeStyle.includes('app/src/shared-ui/tokens.css'))
+assert('code-style documents build/typecheck in stable suite', codeStyle.includes('including app build/typecheck'))
 
 const cutWorkflow = read('.kiro/steering/cut-workflow-protocol.md')
 assert('workflow protocol requires CR-lite failure angle', cutWorkflow.includes('failure / attack angle'))

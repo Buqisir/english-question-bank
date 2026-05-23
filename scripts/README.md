@@ -5,8 +5,11 @@ smallest script that proves the current risk. Do not run every script
 just to create confidence theater.
 
 Stable local/CI entrypoint: `npm run verify:all` from `app/`, which delegates
-to `scripts/verify-ci.mjs`. The GitHub Actions template lives at
-`docs/ci/verify-workflow-template.yml`; installing it under
+to `scripts/verify-ci.mjs`. It runs `git diff --check`, app
+build/typecheck, then stable contract scripts. Install app dependencies with
+`pnpm install --frozen-lockfile` from `app/` and server dependencies with
+`npm ci` from `server/` before running it in a clean worktree. The GitHub
+Actions template lives at `docs/ci/verify-workflow-template.yml`; installing it under
 `.github/workflows/verify.yml` requires a token with workflow scope.
 
 Current install state: the workflow is not installed under `.github/workflows/`
@@ -17,7 +20,7 @@ See `docs/ci/verify-workflow-install.md`.
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
-| `verify-ci.mjs` | Stable core contracts used by GitHub Actions | yes |
+| `verify-ci.mjs` | Stable app build/typecheck plus core contracts used by GitHub Actions | yes |
 | `verify-architecture-housekeeping.mjs` | Housekeeping guardrails: CI, code style, tokens, verify index | yes |
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
 | `verify-h1c-paper-import-routes.mjs` | H1-C Paper Import route extraction contract | yes |

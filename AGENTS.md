@@ -2,6 +2,10 @@
 
 This repo builds the local-first English question bank workbench.
 
+`AGENTS.md` is the single source of truth for agent rules in this repo.
+Other agent entry files, including `CLAUDE.md`, should point here instead
+of duplicating workflow or browser rules.
+
 ## Persistent Working Memory
 
 - Use `kratos-memory` as the project-scoped working memory for this repo.
@@ -128,7 +132,11 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ### Issue tracker
 
-Issues and PRDs are tracked as local markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+`.scratch/` is local-only scratch space for temporary issue and PRD drafts.
+It is not shared source of truth because it is gitignored. Shared cut
+context, accepted decisions, PA / CR reports, and handoffs must live under
+tracked repo paths such as `docs/cuts/<CUT>/`. See
+`docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
