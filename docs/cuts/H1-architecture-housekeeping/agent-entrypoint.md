@@ -22,6 +22,8 @@ to review.
 - `docs/cuts/H1-architecture-housekeeping/pm-spec.md`
 - `docs/cuts/H1-architecture-housekeeping/decisions.md`
 - `docs/cuts/H1-architecture-housekeeping/pa-review-opus.md`
+- `docs/cuts/H1-architecture-housekeeping/goal-h1-a-b.md` for the H1-A/B
+  execution plan
 - `docs/code-style.md`
 - `scripts/README.md`
 
