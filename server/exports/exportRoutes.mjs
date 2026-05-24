@@ -13,31 +13,40 @@ function sendHtml(response, { body, fileName }) {
   response.end(body)
 }
 
-export function createExportRoutes() {
+export function createExportRoutes(exportImplementation) {
+  const {
+    exportDocx,
+    exportPdf,
+    exportPrintHtml,
+    exportPrintPdf,
+    sendDocx,
+    sendPdf,
+  } = exportImplementation
+
   return [
     defineRoute('POST', /^\/api\/exports\/docx$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request)
-      const result = context.exportDocx(input)
-      context.sendDocx(response, result.body, result.fileName, result.outputPath)
+      const result = exportDocx(input)
+      sendDocx(response, result.body, result.fileName, result.outputPath)
     }),
 
     defineRoute('POST', /^\/api\/exports\/pdf$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request)
-      const result = context.exportPdf(input)
-      context.sendPdf(response, result.body, result.fileName, result.outputPath)
+      const result = exportPdf(input)
+      sendPdf(response, result.body, result.fileName, result.outputPath)
     }),
 
     defineRoute('POST', /^\/api\/exports\/print-html$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request)
-      const result = context.exportPrintHtml(input)
+      const result = exportPrintHtml(input)
       sendHtml(response, result)
     }),
 
     defineRoute('POST', /^\/api\/exports\/print-pdf$/, async ({ request, response, context }) => {
       try {
         const input = await context.readJsonBody(request)
-        const result = context.exportPrintPdf(input)
-        context.sendPdf(response, result.body, result.fileName, result.outputPath)
+        const result = exportPrintPdf(input)
+        sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
         const message = routeError(error)
         if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
