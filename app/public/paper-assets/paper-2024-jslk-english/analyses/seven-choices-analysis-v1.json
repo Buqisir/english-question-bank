@@ -117,7 +117,16 @@
           "reason": "像是常见错误的一类。；本段还没有进入具体错误列表，且空后需要条件从句而不是名词短语标题。"
         }
       ],
-      "teachingNote": "看到空后是逗号加祈使句时，优先检查选项中是否有 If / While 等从属连词；再用标题 New Runners 锁定目标读者。"
+      "teachingNote": "看到空后是逗号加祈使句时，优先检查选项中是否有 If / While 等从属连词；再用标题 New Runners 锁定目标读者。",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "If",
+          "signalSide": "option",
+          "targetText": "keep these things in mind",
+          "relation": "If 引出适用对象，与空后 keep these things in mind 构成条件—建议关系。"
+        }
+      ]
     },
     "q-2024-jslk-037": {
       "blankId": "blank-2024-jslk-037",
@@ -263,7 +272,16 @@
           "reason": "Running 与 workouts 有关联。；它不能和空后的逗号及 it’s important that 构成自然句法，也不对应 equipment。"
         }
       ],
-      "teachingNote": "遇到空后逗号加完整主句时，要优先检查从属连词；本题 While 与 it’s important that 构成让步转折，是比单纯词汇复现更强的证据。"
+      "teachingNote": "遇到空后逗号加完整主句时，要优先检查从属连词；本题 While 与 it’s important that 构成让步转折，是比单纯词汇复现更强的证据。",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "While",
+          "signalSide": "option",
+          "targetText": "it’s important that you wear properly for your workouts",
+          "relation": "While 引出让步，和空后 it’s important that 形成“虽然不一定昂贵，但仍要穿戴合适”的让步—转折关系。"
+        }
+      ]
     },
     "q-2024-jslk-040": {
       "blankId": "blank-2024-jslk-040",
@@ -313,7 +331,16 @@
           "reason": "似乎也和身体有关。；same muscles 不对应本段的 pain、hurts 和 stop and treat the pain。"
         }
       ],
-      "teachingNote": "段首句常先概括，再由下一句具体展开。这里用 uncomfortable 概括 hurts/pain，不要把“身体相关”的选项都当成正确项。"
+      "teachingNote": "段首句常先概括，再由下一句具体展开。这里用 uncomfortable 概括 hurts/pain，不要把“身体相关”的选项都当成正确项。",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.synonym-paraphrase",
+          "signalText": "uncomfortable",
+          "signalSide": "option",
+          "targetText": "hurts / pain",
+          "relation": "uncomfortable 与空后 hurts、pain 构成疼痛/不适话题的词汇呼应。"
+        }
+      ]
     }
   }
 }

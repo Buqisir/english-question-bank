@@ -85,6 +85,8 @@ For every blank/question, include:
 - `supportingMechanismFacets` when useful, max 2
 - `topicClues`
 - `contextEvidence`
+- `mechanismSignals` when the blank uses logical connector or referential
+  cohesion
 - `optionFit`
 - optional `keyDistractors`, max 2
 - `teachingNote`
@@ -116,6 +118,19 @@ Mechanism rules:
 - `roleFacet = seven-choices.role.topic` or
   `seven-choices.role.summary` must not include `primaryMechanismFacet`.
 - `supportingMechanismFacets` may contain at most 2 items.
+- `mechanismSignals` is required when a blank uses
+  `seven-choices.cohesion.grammatical.logical-connector` or
+  `seven-choices.cohesion.grammatical.referential-cohesion`, whether the
+  mechanism is primary or supporting.
+
+`mechanismSignals` rules:
+
+- Use it for the exact logical connector, pronoun, demonstrative, or other
+  concrete cohesion signal that should be highlightable.
+- Each item includes `mechanismFacet`, `signalText`, `signalSide`,
+  `targetText`, and `relation`.
+- `signalSide` must be `context` or `option`.
+- Do not put broad topic-field words here; use `topicClues` for that.
 
 `topicClues` rules:
 

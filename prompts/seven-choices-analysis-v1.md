@@ -123,6 +123,15 @@ Each `questions[questionId]` item analyzes one blank.
     "beforeQuote": "Short exact context before the blank",
     "afterQuote": "Short exact context after the blank"
   },
+  "mechanismSignals": [
+    {
+      "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "signalText": "If",
+      "signalSide": "option",
+      "targetText": "keep these things in mind",
+      "relation": "If 引出适用条件，与空后祈使句构成条件—建议关系。"
+    }
+  ],
   "optionFit": {
     "correctOptionLabel": "G",
     "fitSummary": "Chinese explanation of why the option fits",
@@ -184,6 +193,47 @@ final facet keys listed above exactly.
 - If `roleFacet` is `seven-choices.role.topic` or
   `seven-choices.role.summary`, `primaryMechanismFacet` MUST be absent.
 - `supportingMechanismFacets` is optional and may contain at most 2 items.
+- `mechanismSignals` is required when the blank uses
+  `seven-choices.cohesion.grammatical.logical-connector` or
+  `seven-choices.cohesion.grammatical.referential-cohesion`, whether the
+  mechanism is primary or supporting.
+
+## Mechanism Signals
+
+Use `mechanismSignals` for the exact logical connector, pronoun, demonstrative,
+or other concrete cohesion signal that should be highlightable in the UI.
+
+Each item must include:
+
+- `mechanismFacet`
+- `signalText`
+- `signalSide`: `context` or `option`
+- `targetText` when useful
+- `relation` in Chinese
+
+Examples:
+
+```json
+[
+  {
+    "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+    "signalText": "If",
+    "signalSide": "option",
+    "targetText": "keep these things in mind",
+    "relation": "If 引出适用条件，与空后祈使句构成条件—建议关系。"
+  },
+  {
+    "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+    "signalText": "these things",
+    "signalSide": "context",
+    "targetText": "common mistakes",
+    "relation": "these things 指代前文 common mistakes。"
+  }
+]
+```
+
+Do NOT put broad topic-field words in `mechanismSignals`; use `topicClues` for
+that.
 
 ## Topic Clues
 

@@ -36,6 +36,13 @@ const mechanismFacets = new Set([
   'seven-choices.cohesion.lexical.synonym-paraphrase',
 ])
 
+const requiredSignalMechanisms = new Set([
+  'seven-choices.cohesion.grammatical.referential-cohesion',
+  'seven-choices.cohesion.grammatical.logical-connector',
+])
+
+const signalSides = new Set(['context', 'option'])
+
 const failures = []
 
 function assert(condition, message) {
@@ -108,10 +115,12 @@ function selfCheck() {
   assert(prompt.includes('seven-choices-analysis-v1.json'), 'prompt names output file')
   assert(prompt.includes('topic-field-recurrence'), 'prompt uses final lexical facet key')
   assert(prompt.includes('referential-cohesion'), 'prompt uses final reference facet key')
+  assert(prompt.includes('mechanismSignals'), 'prompt includes mechanismSignals field')
   assert(!prompt.includes('topic-word-echo'), 'prompt excludes stale topic-word-echo key')
   assert(!prompt.includes('pronoun-reference'), 'prompt excludes stale pronoun-reference key')
 
   const input = readFileSync(resolve(ROOT, 'docs/cuts/I0-seven-choices-analysis-prompt/external-ai-input-seven-choices.md'), 'utf8')
+  assert(input.includes('mechanismSignals'), 'external input includes mechanismSignals instruction')
   Object.entries(expectedAnswers).forEach(([questionId, answer]) => {
     assert(input.includes(questionId), `external input includes ${questionId}`)
     assert(input.includes(`"${questionId}": "${answer}"`), `external input includes fixture answer ${questionId}=${answer}`)
@@ -188,9 +197,34 @@ function validateAnalysis(analysisPath) {
       assert(mechanismFacets.has(facet), `${questionId}: valid supporting mechanism ${facet}`)
     })
 
-    assert(Array.isArray(item.topicClues) && item.topicClues.length > 0, `${questionId}: topicClues non-empty`)
     const correctLabel = item.optionFit?.correctOptionLabel
     const correctOptionText = normalize(optionByLabel.get(correctLabel))
+    const activeMechanisms = [item.primaryMechanismFacet, ...supporting].filter(Boolean)
+    const mechanismSignals = Array.isArray(item.mechanismSignals) ? item.mechanismSignals : []
+    const needsSignal = activeMechanisms.some((facet) => requiredSignalMechanisms.has(facet))
+    if (needsSignal) {
+      assert(mechanismSignals.length > 0, `${questionId}: grammatical cohesion has mechanismSignals`)
+    }
+    for (const signal of mechanismSignals) {
+      assert(mechanismFacets.has(signal.mechanismFacet), `${questionId}: mechanismSignal has valid mechanismFacet`)
+      assert(activeMechanisms.includes(signal.mechanismFacet), `${questionId}: mechanismSignal facet is active on question`)
+      assert(optionalString(signal.signalText), `${questionId}: mechanismSignal.signalText exists`)
+      assert(signalSides.has(signal.signalSide), `${questionId}: mechanismSignal.signalSide is context or option`)
+      assert(optionalString(signal.relation), `${questionId}: mechanismSignal.relation exists`)
+      assert(!containsBlankMarker(questionId, signal.signalText), `${questionId}: mechanismSignal.signalText excludes blank marker`)
+      const signalText = normalize(signal.signalText)
+      if (signal.signalSide === 'context') {
+        assert(passageText.includes(signalText), `${questionId}: context-side mechanismSignal appears in passage: ${signal.signalText}`)
+      } else if (correctOptionText) {
+        assert(correctOptionText.includes(signalText), `${questionId}: option-side mechanismSignal appears in correct option: ${signal.signalText}`)
+      }
+      const targetText = optionalString(signal.targetText)
+      if (targetText) {
+        assert(!containsBlankMarker(questionId, targetText), `${questionId}: mechanismSignal.targetText excludes blank marker`)
+      }
+    }
+
+    assert(Array.isArray(item.topicClues) && item.topicClues.length > 0, `${questionId}: topicClues non-empty`)
     for (const clue of item.topicClues || []) {
       const normalizedClue = normalize(clue)
       assert(normalizedClue.length > 0, `${questionId}: topicClue is non-empty`)

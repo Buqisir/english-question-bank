@@ -87,6 +87,15 @@ Each `questions[questionId]` item analyzes one blank.
     "beforeQuote": "Short exact context before the blank",
     "afterQuote": "Short exact context after the blank"
   },
+  "mechanismSignals": [
+    {
+      "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "signalText": "If",
+      "signalSide": "option",
+      "targetText": "keep these things in mind",
+      "relation": "If introduces the condition for the following advice."
+    }
+  ],
   "optionFit": {
     "correctOptionLabel": "G",
     "fitSummary": "Chinese explanation of why the option fits",
@@ -126,6 +135,11 @@ It is optional when `roleFacet` is `seven-choices.role.bridge`.
 It must be absent when `roleFacet` is `seven-choices.role.topic` or
 `seven-choices.role.summary`.
 
+`mechanismSignals` is required when a blank uses grammatical cohesion through
+logical connectors or referential cohesion, whether the mechanism appears in
+`primaryMechanismFacet` or `supportingMechanismFacets`. It is optional for
+lexical cohesion and for topic / summary roles.
+
 ## Facet Rules
 
 Facet values must be I0-A leaf keys.
@@ -151,6 +165,40 @@ Valid mechanism facets:
 - `seven-choices.cohesion.lexical.synonym-paraphrase`
 
 Do not use parent keys as blank-level facet values.
+
+## Mechanism Signals
+
+`mechanismSignals` records concrete, highlightable signals for the cohesion
+mechanism. It answers: which word or phrase is doing the logical / referential
+work, where is it, and what does it connect to?
+
+```json
+[
+  {
+    "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+    "signalText": "If",
+    "signalSide": "option",
+    "targetText": "keep these things in mind",
+    "relation": "If 引出适用条件，与空后祈使句构成条件—建议关系。"
+  },
+  {
+    "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+    "signalText": "these things",
+    "signalSide": "context",
+    "targetText": "common mistakes",
+    "relation": "these things 指代前文 common mistakes。"
+  }
+]
+```
+
+Rules:
+
+- `mechanismFacet` must be one of the valid mechanism facets above.
+- `signalText` is the exact word or phrase to highlight.
+- `signalSide` is `context` or `option`.
+- `targetText` is the connected word or phrase, when useful.
+- `relation` explains the connection in Chinese.
+- Do not put broad topic clues here. Use `topicClues` for topic-field clues.
 
 ## Topic Clues
 

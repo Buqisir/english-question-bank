@@ -1,9 +1,9 @@
 # Decisions — I0-C Seven Choices Prompt + Verify
 
 Cut: I0-C 七选五 prompt + external input + verify
-Status: implemented, ready to commit after Claude lite CR follow-up
+Status: implemented, plus mechanism signal contract patch
 Last synced: 2026-05-24
-Open items from external review: 1 watch item retained for later human review
+Open items from external review: 1 teaching-label watch item retained for later human review
 
 ## Locked Decisions
 
@@ -85,6 +85,33 @@ Verification passed:
 ```text
 node scripts/verify-i0c-seven-choices-analysis-v1.mjs
 ```
+
+## I0-C+ Mechanism Signals
+
+During I0-D product grilling, the owner clarified that logical-connector and
+referential-cohesion labels are not enough for UI highlighting. The UI needs the
+specific signal word or phrase that realizes the cohesion mechanism.
+
+Accepted patch:
+
+- Add optional `mechanismSignals` to each `questions[questionId]` item.
+- Require `mechanismSignals` when the blank uses either:
+  - `seven-choices.cohesion.grammatical.logical-connector`
+  - `seven-choices.cohesion.grammatical.referential-cohesion`
+- Each signal records:
+  - `mechanismFacet`
+  - `signalText`
+  - `signalSide`: `context` or `option`
+  - `targetText`, when useful
+  - `relation`
+- `mechanismSignals` is for concrete highlightable cohesion signals, not broad
+  topic-field clues.
+
+The first fixture now includes:
+
+- q36: option-side `If` as logical connector.
+- q39: option-side `While` as logical connector.
+- q40: option-side `uncomfortable` as lexical signal for `hurts / pain`.
 
 ## Claude Lite CR Follow-Up
 
