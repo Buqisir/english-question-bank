@@ -87,6 +87,11 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ## Collaboration Workflow
 
+- Before proposing a plan for a task, first state in one line:
+  `cut size: small / medium / large / irreversible; touches schema, data contract, product boundary, or teaching interpretation: yes/no`.
+- If the cut is small and touches none of those four areas, proceed directly.
+- Otherwise ask: "Should we consult Claude first, or proceed to plan?"
+  Wait for the owner's answer before proceeding.
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
