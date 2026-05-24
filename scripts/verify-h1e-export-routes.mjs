@@ -50,7 +50,7 @@ const routeSource = read('server/exports/exportRoutes.mjs')
 const verifyCi = read('scripts/verify-ci.mjs')
 const scriptsReadme = read('scripts/README.md')
 
-assert('export routes module exports createExportRoutes', /export function createExportRoutes\(\)/.test(routeSource))
+assert('export routes module exports createExportRoutes', /export function createExportRoutes\([^)]*\)/.test(routeSource))
 assert('export routes module uses minimal router helper', routeSource.includes("from '../router/index.mjs'"))
 assert('docx export route registered', routeSource.includes('/api\\/exports\\/docx$'))
 assert('pdf export route registered', routeSource.includes('/api\\/exports\\/pdf$'))
@@ -59,29 +59,18 @@ assert('print-pdf export route registered', routeSource.includes('/api\\/exports
 assert('print-pdf preserves vivliostyle unavailable 503 mapping', routeSource.includes('精排 PDF 不可用') && routeSource.includes("message.includes('vivliostyle')"))
 assert('print-pdf preserves generic 500 mapping', routeSource.includes('context.sendJson(response, 500, { error: message })'))
 
+assert('api imports export implementation module', api.includes("from './exports/exportImplementation.mjs'"))
 assert('api imports export routes module', api.includes("from './exports/exportRoutes.mjs'"))
-assert('api registers export routes in serverRoutes', api.includes('...createExportRoutes(),'))
-assert('api exposes sendDocx through context', api.includes('sendDocx,'))
-assert('api exposes exportDocx through context', api.includes('exportDocx,'))
-assert('api exposes exportPdf through context', api.includes('exportPdf,'))
-assert('api exposes exportPrintHtml through context', api.includes('exportPrintHtml,'))
-assert('api exposes exportPrintPdf through context', api.includes('exportPrintPdf,'))
-assert('api still owns export implementation for this slice', /function exportDocx\(input\)/.test(api) && /function exportPrintPdf\(input\)/.test(api))
+assert('api registers export routes with implementation', api.includes('...createExportRoutes(exportImplementation),'))
+assert('api no longer exposes sendDocx through context', !api.includes('sendDocx,'))
+assert('api no longer exposes exportDocx through context', !api.includes('exportDocx,'))
+assert('api no longer exposes exportPdf through context', !api.includes('exportPdf,'))
+assert('api no longer exposes exportPrintHtml through context', !api.includes('exportPrintHtml,'))
+assert('api no longer exposes exportPrintPdf through context', !api.includes('exportPrintPdf,'))
+assert('api no longer owns export implementation', !/function exportDocx\(input\)/.test(api) && !/function exportPrintPdf\(input\)/.test(api))
 assert('api no longer owns inline export route branches', !api.includes("url.pathname === '/api/exports/docx'") && !api.includes("url.pathname === '/api/exports/pdf'") && !api.includes("url.pathname === '/api/exports/print-html'") && !api.includes("url.pathname === '/api/exports/print-pdf'"))
 
-const routes = createExportRoutes()
-assert('createExportRoutes returns four routes', routes.length === 4)
-
-const input = { ok: true }
-const request = { method: 'POST' }
-let readCount = 0
-const calls = []
-const context = {
-  async readJsonBody(receivedRequest) {
-    readCount += 1
-    assert('route passes request into readJsonBody', receivedRequest === request)
-    return input
-  },
+const implementation = {
   exportDocx(receivedInput) {
     calls.push('exportDocx')
     assert('docx route passes parsed input to exportDocx', receivedInput === input)
@@ -108,6 +97,21 @@ const context = {
     calls.push(`sendPdf:${fileName}:${outputPath}:${body.toString()}`)
     response.writeHead(200, { 'content-type': 'pdf' })
     response.end(body)
+  },
+}
+
+const routes = createExportRoutes(implementation)
+assert('createExportRoutes returns four routes', routes.length === 4)
+
+const input = { ok: true }
+const request = { method: 'POST' }
+let readCount = 0
+const calls = []
+const context = {
+  async readJsonBody(receivedRequest) {
+    readCount += 1
+    assert('route passes request into readJsonBody', receivedRequest === request)
+    return input
   },
   sendJson(response, statusCode, body) {
     calls.push(`sendJson:${statusCode}:${body.error || ''}`)

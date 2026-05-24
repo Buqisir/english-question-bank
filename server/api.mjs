@@ -20,6 +20,7 @@ import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
 import { createDraftPaperRoutes } from './draft-paper/draftPaperRoutes.mjs'
 import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
+import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createLegacyImportRoutes } from './imports/legacyImportRoutes.mjs'
 import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
@@ -42,6 +43,15 @@ const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
+const exportImplementation = createExportImplementation({
+  rootDir,
+  exportDir,
+  getQuestionGroupDetail,
+  buildDocumentXml,
+  writeDocxPackage,
+  buildPrintHtml,
+  convertDocxToPdf,
+})
 const serverContext = {
   rootDir,
   dbPath,
@@ -52,13 +62,8 @@ const serverContext = {
   localQwenEnabled: process.env.QUESTION_BANK_ENABLE_LOCAL_QWEN === '1',
   openDatabase,
   readJsonBody,
-  sendDocx,
-  sendPdf,
+  sendPdf: exportImplementation.sendPdf,
   sendJson,
-  exportDocx,
-  exportPdf,
-  exportPrintHtml,
-  exportPrintPdf,
   applyAnswerAlignment,
   bindTopicLabelsToQuestionGroup,
   createImportFile,
@@ -415,7 +420,7 @@ const serverRoutes = [
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createPaperImportRoutes(),
-  ...createExportRoutes(),
+  ...createExportRoutes(exportImplementation),
   ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),
 ]
@@ -507,38 +512,6 @@ function sendJson(response, status, body) {
     'content-type': 'application/json; charset=utf-8',
   })
   response.end(JSON.stringify(body))
-}
-
-function sendBinary(response, { body, fileName, outputPath, contentType }) {
-  response.writeHead(200, {
-    'access-control-allow-origin': 'http://127.0.0.1:5173',
-    'access-control-allow-methods': 'GET, POST, PUT, OPTIONS',
-    'access-control-allow-headers': 'content-type',
-    'access-control-expose-headers': 'content-disposition, x-file-name, x-output-path',
-    'content-disposition': `attachment; filename="${encodeURIComponent(fileName)}"; filename*=UTF-8''${encodeURIComponent(fileName)}`,
-    'content-type': contentType,
-    'x-file-name': encodeURIComponent(fileName),
-    'x-output-path': encodeURIComponent(outputPath),
-  })
-  response.end(body)
-}
-
-function sendDocx(response, body, fileName, outputPath) {
-  sendBinary(response, {
-    body,
-    fileName,
-    outputPath,
-    contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  })
-}
-
-function sendPdf(response, body, fileName, outputPath) {
-  sendBinary(response, {
-    body,
-    fileName,
-    outputPath,
-    contentType: 'application/pdf',
-  })
 }
 
 function sendPaperAssetStatic(response, urlPath) {
@@ -5696,21 +5669,6 @@ function pushDocxAnswerArea(body, detail, question, versionType) {
   body.push(paragraph(`解析：${docxQuestionExplanation(detail, question)}`, { after: 120, shading: 'EEF2F4' }))
 }
 
-function docxFileName(title, versionType) {
-  const versionLabel = versionType === 'student' ? '学生版' : '教师版'
-  const cleanTitle = String(title || '英语题集')
-    .replace(/[\\/:*?"<>|]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 80)
-
-  return `${cleanTitle || '英语题集'}-${versionLabel}.docx`
-}
-
-function pdfFileName(title, versionType) {
-  return docxFileName(title, versionType).replace(/\.docx$/, '.pdf')
-}
-
 function timestampPrefix() {
   return new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
 }
@@ -6101,51 +6059,6 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
   }
 }
 
-function exportDocx(input) {
-  const title = requiredString(input.title, 'title')
-  const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-  const items = Array.isArray(input.items) ? input.items : []
-
-  if (items.length === 0) {
-    throw new Error('items are required')
-  }
-
-  const questionNumberStart = Number.isInteger(Number(input.questionNumberStart)) && Number(input.questionNumberStart) >= 1
-    ? Number(input.questionNumberStart)
-    : 1
-  const blocks = Array.isArray(input.blocks) ? input.blocks : null
-
-  const exportItems = items.map((item) => {
-    const itemInput = item && typeof item === 'object' ? item : {}
-    const questionGroupId = requiredString(itemInput.questionGroupId, 'questionGroupId')
-    const detail = getQuestionGroupDetail(questionGroupId)
-
-    if (!detail) {
-      throw new Error(`questionGroupId not found: ${questionGroupId}`)
-    }
-
-    return {
-      detail,
-      note: optionalString(itemInput.note),
-      score: Math.max(0, Number.isFinite(Number(itemInput.score)) ? Number(itemInput.score) : detail.defaultScore),
-      sectionTitle: optionalString(itemInput.sectionTitle),
-    }
-  })
-
-  mkdirSync(exportDir, { recursive: true })
-  const fileName = docxFileName(title, versionType)
-  const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
-  const printStyle = input.printStyle === 'exam' ? 'exam' : 'handout'
-  const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle })
-  const body = writeDocxPackage({ documentXml, outputPath, title })
-
-  return {
-    body,
-    fileName,
-    outputPath,
-  }
-}
-
 function findSoffice() {
   const candidates = [
     process.env.SOFFICE_PATH,
@@ -6191,90 +6104,6 @@ function convertDocxToPdf(docxPath, outputPath) {
     }
   } finally {
     rmSync(profileDir, { recursive: true, force: true })
-  }
-}
-
-function exportPdf(input) {
-  const title = requiredString(input.title, 'title')
-  const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-  const docxResult = exportDocx({ ...input, title, versionType })
-  const fileName = pdfFileName(title, versionType)
-  const outputPath = docxResult.outputPath.replace(/\.docx$/, '.pdf')
-
-  convertDocxToPdf(docxResult.outputPath, outputPath)
-  rmSync(docxResult.outputPath, { force: true })
-
-  return {
-    body: readFileSync(outputPath),
-    fileName,
-    outputPath,
-  }
-}
-
-function exportPrintHtml(input) {
-  const title = requiredString(input.title, 'title')
-  const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-  const items = Array.isArray(input.items) ? input.items : []
-  if (items.length === 0) throw new Error('items are required')
-
-  const printStyle = input.printStyle === 'handout' ? 'handout' : 'exam'
-  const questionNumberStart = Number.isInteger(Number(input.questionNumberStart)) && Number(input.questionNumberStart) >= 1
-    ? Number(input.questionNumberStart) : 1
-  const blocks = Array.isArray(input.blocks) ? input.blocks : null
-
-  const exportItems = items.map((item) => {
-    const itemInput = item && typeof item === 'object' ? item : {}
-    const questionGroupId = requiredString(itemInput.questionGroupId, 'questionGroupId')
-    const detail = getQuestionGroupDetail(questionGroupId)
-    if (!detail) throw new Error(`questionGroupId not found: ${questionGroupId}`)
-    return {
-      detail,
-      note: optionalString(itemInput.note),
-      score: Math.max(0, Number.isFinite(Number(itemInput.score)) ? Number(itemInput.score) : detail.defaultScore),
-      sectionTitle: optionalString(itemInput.sectionTitle),
-    }
-  })
-
-  const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart })
-  const versionLabel = versionType === 'student' ? '学生版' : '教师版'
-  const fileName = `${title}-${versionLabel}-精排.html`
-
-  return { body: html, fileName }
-}
-
-function exportPrintPdf(input) {
-  const htmlResult = exportPrintHtml(input)
-  const title = requiredString(input.title, 'title')
-  const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-  const versionLabel = versionType === 'student' ? '学生版' : '教师版'
-
-  // Find vivliostyle CLI
-  const vivliostylePaths = [
-    path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
-    path.join(rootDir, 'server', 'node_modules', '.bin', 'vivliostyle'),
-  ]
-  let vivliostyleBin = null
-  for (const p of vivliostylePaths) {
-    if (existsSync(p)) { vivliostyleBin = p; break }
-  }
-  if (!vivliostyleBin) {
-    throw new Error('vivliostyle CLI not found. Install with: npm install @vivliostyle/cli')
-  }
-
-  mkdirSync(exportDir, { recursive: true })
-  const tempDir = mkdtempSync(path.join(tmpdir(), 'question-bank-print-'))
-  const htmlPath = path.join(tempDir, 'paper.html')
-  const pdfPath = path.join(tempDir, 'paper.pdf')
-
-  try {
-    writeFileSync(htmlPath, htmlResult.body)
-    execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
-    const fileName = `${title}-${versionLabel}-精排.pdf`
-    const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
-    copyFileSync(pdfPath, outputPath)
-    return { body: readFileSync(outputPath), fileName, outputPath }
-  } finally {
-    rmSync(tempDir, { recursive: true, force: true })
   }
 }
 
