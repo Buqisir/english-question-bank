@@ -113,6 +113,26 @@ The first fixture now includes:
 - q39: option-side `While` as logical connector.
 - q40: option-side `uncomfortable` as lexical signal for `hurts / pain`.
 
+## I0-D Terminology Clarification
+
+The owner clarified that I0-D should not introduce "context clue" /
+"上下文线索" as a formal UI or data concept.
+
+Accepted terminology:
+
+- Position: paragraph start / middle / end; source field `positionFacet`.
+- Sentence role: topic / summary / bridge / cohesion; source field `roleFacet`.
+- Solving mechanism: logical connector / referential cohesion / lexical
+  recurrence; source fields `primaryMechanismFacet` and
+  `supportingMechanismFacets`.
+- Solving clues: concrete logical words, reference words, and topic-field words
+  that can be highlighted; source fields `mechanismSignals` and `topicClues`.
+- Evidence range: where to look and audit the blank; source field
+  `contextEvidence`.
+
+`contextEvidence` is not itself a clue type. It answers "where to look", not
+"what solved the blank".
+
 ## Claude Lite CR Follow-Up
 
 Claude lite CR reported 0 Must Fix and 4 Should Watch items.

@@ -140,6 +140,28 @@ logical connectors or referential cohesion, whether the mechanism appears in
 `primaryMechanismFacet` or `supportingMechanismFacets`. It is optional for
 lexical cohesion and for topic / summary roles.
 
+## Terminology
+
+Do not use "context clue" / "上下文线索" as a formal 七选五 analysis term in
+this contract. It is too broad and can blur several different concepts.
+
+Use these terms instead:
+
+- `positionFacet`: where the blank appears, such as paragraph start / middle /
+  end.
+- `roleFacet`: what the inserted sentence does, such as topic, summary, bridge,
+  or cohesion.
+- `primaryMechanismFacet` / `supportingMechanismFacets`: how the sentence
+  connects, such as logical connector, referential cohesion, or lexical
+  recurrence.
+- `mechanismSignals`: concrete logical words, reference words, or lexical
+  signals that can be highlighted.
+- `topicClues`: context-side topic-field words or chunks that help solve the
+  blank.
+- `contextEvidence`: the evidence range used to locate and audit the blank,
+  such as the paragraph ID, heading, and before / after quotes. It answers
+  "where to look", not "what type of clue solved the blank".
+
 ## Facet Rules
 
 Facet values must be I0-A leaf keys.
