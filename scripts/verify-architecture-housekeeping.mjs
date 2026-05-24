@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { spawnSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -74,13 +75,49 @@ assert('index.css imports shared tokens first', indexCss.startsWith('@import "./
 assert('tokens define core color namespace', tokensCss.includes('--eqb-color-paper') && tokensCss.includes('--eqb-color-primary'))
 assert('tokens define spacing scale', tokensCss.includes('--eqb-space-1') && tokensCss.includes('--eqb-space-5'))
 
-const verifyCi = read('scripts/verify-ci.mjs')
-assert('verify-ci runs app build/typecheck', verifyCi.includes("['run', 'build', '--prefix', 'app']"))
-assert('verify-ci keeps C7 import contracts in stable suite', verifyCi.includes('verify-c7-paper-import-contracts.mjs'))
-assert('verify-ci keeps C8 draft paper contracts in stable suite', verifyCi.includes('verify-c8-draft-paper-contracts.mjs'))
-assert('verify-ci keeps draft render contract in stable suite', verifyCi.includes('verify-c8-draft-paper-render-model.mjs'))
-assert('verify-ci excludes C8 forbidden-scope cut script', !verifyCi.includes('verify-c8-forbidden-scope.mjs'))
-assert('verify-ci excludes host interaction cut forbidden-scope script', !verifyCi.includes('verify-paper-surface-host-interaction.mjs'))
+function readVerifyCiRegistry() {
+  const result = spawnSync(process.execPath, ['scripts/verify-ci.mjs', '--list-json'], {
+    cwd: rootDir,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+  if (result.status !== 0) {
+    return {
+      ok: false,
+      error: result.stderr || result.stdout || `exit ${result.status}`,
+      preflight: [],
+      scripts: [],
+    }
+  }
+  try {
+    const registry = JSON.parse(result.stdout)
+    return {
+      ok: true,
+      error: '',
+      preflight: Array.isArray(registry.preflight) ? registry.preflight : [],
+      scripts: Array.isArray(registry.scripts) ? registry.scripts : [],
+    }
+  } catch (error) {
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : String(error),
+      preflight: [],
+      scripts: [],
+    }
+  }
+}
+
+const verifyCiRegistry = readVerifyCiRegistry()
+assert('verify-ci exposes executable --list-json registry', verifyCiRegistry.ok, verifyCiRegistry.error)
+const verifyCiScripts = verifyCiRegistry.scripts
+const verifyCiPreflightLabels = verifyCiRegistry.preflight.map((step) => step?.label)
+assert('verify-ci runs git diff --check', verifyCiPreflightLabels.includes('git diff --check'))
+assert('verify-ci runs app build/typecheck', verifyCiPreflightLabels.includes('app build/typecheck'))
+assert('verify-ci keeps C7 import contracts in stable suite', verifyCiScripts.includes('scripts/verify-c7-paper-import-contracts.mjs'))
+assert('verify-ci keeps C8 draft paper contracts in stable suite', verifyCiScripts.includes('scripts/verify-c8-draft-paper-contracts.mjs'))
+assert('verify-ci keeps draft render contract in stable suite', verifyCiScripts.includes('scripts/verify-c8-draft-paper-render-model.mjs'))
+assert('verify-ci excludes C8 forbidden-scope cut script', !verifyCiScripts.includes('scripts/verify-c8-forbidden-scope.mjs'))
+assert('verify-ci excludes host interaction cut forbidden-scope script', !verifyCiScripts.includes('scripts/verify-paper-surface-host-interaction.mjs'))
 
 const scriptsReadme = read('scripts/README.md')
 assert('scripts README documents stable CI entrypoint', scriptsReadme.includes('Stable CI entrypoint'))
@@ -89,14 +126,6 @@ assert('scripts README documents server dependency install', scriptsReadme.inclu
 assert('scripts README documents workflow-scope install constraint', scriptsReadme.includes('requires a token with workflow scope'))
 assert('scripts README marks host interaction as not CI', scriptsReadme.includes('Host interaction reducer run-form behavior and seam rules; includes cut-specific forbidden-scope checks | no'))
 assert('scripts README marks C8 draft paper contracts as CI', scriptsReadme.includes('C8 draft-paper API/search/workbench contract | yes'))
-
-function extractVerifyCiScripts(source) {
-  const match = source.match(/const scripts = \[([\s\S]*?)\]/)
-  if (!match) {
-    return []
-  }
-  return [...match[1].matchAll(/'([^']+\.mjs)'/g)].map((item) => item[1])
-}
 
 function parseReadmeCiRows(source) {
   const rows = []
@@ -134,7 +163,6 @@ function normalizeReadmeScript(script) {
   return bare.startsWith('scripts/') ? bare : `scripts/${bare}`
 }
 
-const verifyCiScripts = extractVerifyCiScripts(verifyCi)
 const readmeCiRows = parseReadmeCiRows(scriptsReadme)
 const malformedRows = readmeCiRows.filter((row) => row.cellCount !== 3 || !['yes', 'no'].includes(row.ci))
 assert(

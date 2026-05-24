@@ -11,6 +11,8 @@ build/typecheck, then stable contract scripts. Install app dependencies with
 `npm ci` from `server/` before running it in a clean worktree. The GitHub
 Actions template lives at `docs/ci/verify-workflow-template.yml`; installing it under
 `.github/workflows/verify.yml` requires a token with workflow scope.
+To inspect the stable verify registry without running it, use
+`node scripts/verify-ci.mjs --list-json`.
 
 Current install state: the workflow is not installed under `.github/workflows/`
 because the available GitHub token has `repo` scope but not `workflow` scope.

@@ -6,7 +6,12 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
-const scripts = [
+const registry = {
+  preflight: [
+    { command: 'git', args: ['diff', '--check'], label: 'git diff --check' },
+    { command: 'npm', args: ['run', 'build', '--prefix', 'app'], label: 'app build/typecheck' },
+  ],
+  scripts: [
   'scripts/verify-paper-asset-v1.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',
   'scripts/verify-c7-paper-import-contracts.mjs',
@@ -24,7 +29,13 @@ const scripts = [
   'scripts/verify-h1e-export-routes.mjs',
   'scripts/verify-h1f-legacy-import-routes.mjs',
   'scripts/verify-h1g-question-group-routes.mjs',
-]
+  ],
+}
+
+if (process.argv.includes('--list-json')) {
+  console.log(JSON.stringify(registry, null, 2))
+  process.exit(0)
+}
 
 function run(command, args, label, options = {}) {
   console.log(`\n==> ${label}`)
@@ -38,10 +49,11 @@ function run(command, args, label, options = {}) {
   }
 }
 
-run('git', ['diff', '--check'], 'git diff --check')
-run('npm', ['run', 'build', '--prefix', 'app'], 'app build/typecheck')
+for (const step of registry.preflight) {
+  run(step.command, step.args, step.label)
+}
 
-for (const script of scripts) {
+for (const script of registry.scripts) {
   run(process.execPath, [script], script)
 }
 
