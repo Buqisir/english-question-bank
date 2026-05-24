@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -37,6 +38,133 @@ function baselineRef() {
   }
 }
 
+function createDraftPaperRenderFixture() {
+  const groupTypeLabels = {
+    reading: '阅读理解',
+    cloze: '完形填空',
+    seven_choices: '七选五',
+    grammar_cloze: '语法填空',
+    writing: '写作',
+    continuation: '读后续写',
+    listening: '听力',
+    other: '其他',
+  }
+
+  const groups = {
+    'reading-a': {
+      id: 'reading-a',
+      title: 'Reading A',
+      groupType: 'reading',
+      defaultScore: 2,
+      passage: { materialText: 'Alpha passage.', summary: '' },
+      questions: [
+        {
+          stem: 'Question A?',
+          options: [
+            { label: 'A', content: 'First' },
+            { label: 'B', content: 'Second' },
+            { label: 'C', content: 'Third' },
+            { label: 'D', content: 'Fourth' },
+          ],
+          answer: 'A',
+          explanation: 'Alpha explanation.',
+          note: '',
+        },
+      ],
+    },
+    'cloze-a': {
+      id: 'cloze-a',
+      title: 'Cloze A',
+      groupType: 'cloze',
+      defaultScore: 3,
+      passage: { materialText: 'Beta passage.', summary: '' },
+      questions: [
+        {
+          stem: 'Question B?',
+          options: [
+            { label: 'A', content: 'One' },
+            { label: 'B', content: 'Two' },
+            { label: 'C', content: 'Three' },
+            { label: 'D', content: 'Four' },
+          ],
+          answer: 'B',
+          explanation: 'Beta explanation.',
+          note: '',
+        },
+      ],
+    },
+    'reading-b': {
+      id: 'reading-b',
+      title: 'Reading B',
+      groupType: 'reading',
+      defaultScore: 4,
+      passage: { materialText: 'Gamma passage.', summary: '' },
+      questions: [
+        {
+          stem: 'Question C?',
+          options: [
+            { label: 'A', content: 'Left' },
+            { label: 'B', content: 'Right' },
+            { label: 'C', content: 'Up' },
+            { label: 'D', content: 'Down' },
+          ],
+          answer: 'C',
+          explanation: 'Gamma explanation.',
+          note: '',
+        },
+      ],
+    },
+  }
+
+  const store = createDraftPaperStore({
+    exportDir: '/tmp/eqb-h9-draft-render-run-form',
+    getQuestionGroupDetail: (groupId) => groups[groupId] || null,
+    groupTypeLabels,
+    isGroupPrintReady: () => ({ ok: true, reason: null }),
+    openDatabase: () => {
+      throw new Error('openDatabase should not be called in the render run-form fixture')
+    },
+    rootDir,
+    selectQuestionGroupCards: () => [],
+  })
+
+  const draftPaper = {
+    id: 'draft-paper-test',
+    title: 'H9 Draft',
+    items: [
+      {
+        id: 'item-1',
+        groupId: 'reading-a',
+        orderIndex: 1,
+        pageBreakBefore: false,
+        groupType: 'reading',
+        defaultScore: 2,
+        questionGroup: { groupType: 'reading', defaultScore: 2 },
+      },
+      {
+        id: 'item-2',
+        groupId: 'cloze-a',
+        orderIndex: 2,
+        pageBreakBefore: true,
+        groupType: 'cloze',
+        defaultScore: 3,
+        questionGroup: { groupType: 'cloze', defaultScore: 3 },
+      },
+      {
+        id: 'item-3',
+        groupId: 'reading-b',
+        orderIndex: 3,
+        pageBreakBefore: false,
+        groupType: 'reading',
+        defaultScore: 4,
+        questionGroup: { groupType: 'reading', defaultScore: 4 },
+      },
+    ],
+  }
+
+  return { store, draftPaper }
+}
+
 console.log('C8 verify: draft paper render model')
 
 const server = read('server/api.mjs')
@@ -49,18 +177,23 @@ const printRendererDiff = execFileSync('git', ['diff', baselineRef(), '--', 'ser
 })
 
 assert('print-renderer body untouched', printRendererDiff.trim() === '')
-assert('draft render calls buildPrintHtml', /buildPrintHtml\(\s*\{[\s\S]{0,260}questionNumberStart/.test(draftStore))
-assert('draft render uses student version only', /versionType:\s*'student'/.test(draftStore))
-assert('draft render uses exam print style', /printStyle:\s*'exam'/.test(draftStore))
-assert('draft render starts numbering at 1', /questionNumberStart:\s*1/.test(draftStore))
-assert('draft render emits section_header blocks', /type:\s*'section_header'/.test(draftStore))
-assert('draft render emits page_break blocks', /type:\s*'page_break'/.test(draftStore))
-assert('draft render emits question_group blocks', /type:\s*'question_group'/.test(draftStore))
-assert('draft render never emits leading page break before first group', /index > 0 && item\.pageBreakBefore/.test(draftStore))
-assert('draft page break suggestions skip the first group', /index > 0 && reason && !item\.pageBreakBefore/.test(draftStore))
-assert('section heading helper uses Chinese numbering', draftStore.includes('cnSectionNumber'))
-assert('section headings are based on group type transitions', /const groupType = item\.questionGroup\?\.groupType[\s\S]{0,240}previousType/.test(draftStore))
-assert('non-contiguous same type can create new later heading by transition logic', /previousType = groupType/.test(draftStore))
+const draftRenderFixture = createDraftPaperRenderFixture()
+const draftHtml = draftRenderFixture.store.buildDraftPrintHtml(draftRenderFixture.draftPaper)
+const draftBody = draftHtml.slice(draftHtml.indexOf('<body'))
+const firstSection = draftBody.indexOf('第一部分 阅读理解')
+const firstQuestion = draftBody.indexOf('Question A?')
+const pageBreak = draftBody.indexOf('<div class="page-break"></div>')
+const secondSection = draftBody.indexOf('第二部分 完形填空')
+const thirdSection = draftBody.indexOf('第三部分 阅读理解')
+
+assert('draft render produces printable HTML via buildDraftPrintHtml', draftHtml.includes('<!DOCTYPE html>') && draftHtml.includes('H9 Draft'))
+assert('draft render starts numbering at 1', /<span class="qnum">1\.<\/span>/.test(draftBody))
+assert('draft render uses exam print style', !draftBody.includes('group-meta'))
+assert('draft render uses student version only', !draftBody.includes('【答案】') && !draftBody.includes('【解析】'))
+assert('draft render emits section headers in type order', firstSection >= 0 && secondSection > firstSection && thirdSection > secondSection)
+assert('draft render emits a page break before the second group only', firstSection >= 0 && firstQuestion > firstSection && pageBreak > firstQuestion && secondSection > pageBreak)
+assert('draft render reopens a new section when group type returns later', thirdSection > secondSection)
+assert('draft render keeps footer title and page counter', draftHtml.includes('H9 Draft · ') && draftHtml.includes('counter(page)'))
 assert('footer is injected outside print renderer body', draftStore.includes('addDraftFooterCss'))
 assert('footer contains title and page counter', /counter\(page\)/.test(draftStore))
 assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
