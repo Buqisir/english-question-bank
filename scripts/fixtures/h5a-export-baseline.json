@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "h5a-export-baseline-v1",
+  "capturedAt": "2026-05-24T04:35:00.000Z",
+  "source": "Captured before H5-A implementation extraction from the pre-extraction export helper behaviour, using deterministic render/package/pdf test doubles for byte-stable assertions.",
+  "fixedTimestampPrefix": "2026-05-24T04-00-00",
+  "detailByGroupId": {
+    "g-h5a-reading": {
+      "id": "g-h5a-reading",
+      "title": "H5A Reading Fixture",
+      "source": "H5-A Fixture Source",
+      "groupType": "reading",
+      "defaultScore": 2.5,
+      "passage": {
+        "title": "Fixture Passage",
+        "materialText": "First paragraph.\nSecond paragraph.",
+        "summary": ""
+      },
+      "questions": [
+        {
+          "id": "q-h5a-1",
+          "questionNo": "21",
+          "stem": "What is tested?",
+          "answer": "A",
+          "explanation": "The export path is tested.",
+          "note": "",
+          "options": [
+            { "label": "A", "content": "Export behaviour" },
+            { "label": "B", "content": "Search behaviour" },
+            { "label": "C", "content": "Import behaviour" },
+            { "label": "D", "content": "AI behaviour" }
+          ]
+        }
+      ]
+    }
+  },
+  "inputs": {
+    "docxStudent": {
+      "title": "H5A Export Fixture",
+      "versionType": "student",
+      "printStyle": "handout",
+      "questionNumberStart": 21,
+      "items": [
+        {
+          "questionGroupId": "g-h5a-reading",
+          "score": 2.5,
+          "sectionTitle": "Reading A",
+          "note": ""
+        }
+      ]
+    },
+    "docxTeacher": {
+      "title": "H5A Export Fixture",
+      "versionType": "teacher",
+      "printStyle": "handout",
+      "questionNumberStart": 21,
+      "items": [
+        {
+          "questionGroupId": "g-h5a-reading",
+          "score": 2.5,
+          "sectionTitle": "Reading A",
+          "note": "Teacher note"
+        }
+      ]
+    },
+    "printHtml": {
+      "title": "H5A Print Fixture",
+      "versionType": "student",
+      "printStyle": "exam",
+      "questionNumberStart": 21,
+      "items": [
+        {
+          "questionGroupId": "g-h5a-reading",
+          "score": 2.5,
+          "sectionTitle": "Reading A",
+          "note": ""
+        }
+      ],
+      "blocks": [
+        { "type": "section_header", "title": "第一部分 阅读理解" },
+        {
+          "type": "question_group",
+          "questionGroupId": "g-h5a-reading",
+          "score": 2.5,
+          "sectionTitle": "Reading A"
+        }
+      ]
+    },
+    "printPdf": {
+      "title": "H5A Print Fixture",
+      "versionType": "teacher",
+      "printStyle": "exam",
+      "questionNumberStart": 21,
+      "items": [
+        {
+          "questionGroupId": "g-h5a-reading",
+          "score": 2.5,
+          "sectionTitle": "Reading A",
+          "note": "Teacher note"
+        }
+      ],
+      "blocks": [
+        { "type": "section_header", "title": "第一部分 阅读理解" },
+        {
+          "type": "question_group",
+          "questionGroupId": "g-h5a-reading",
+          "score": 2.5,
+          "sectionTitle": "Reading A"
+        }
+      ]
+    }
+  },
+  "expected": {
+    "docxStudent": {
+      "fileName": "H5A Export Fixture-学生版.docx",
+      "outputPathSuffix": "2026-05-24T04-00-00-H5A Export Fixture-学生版.docx",
+      "bodyUtf8": "docx:H5A Export Fixture:documentXml:H5A Export Fixture:student:handout:21:1:0"
+    },
+    "docxTeacher": {
+      "fileName": "H5A Export Fixture-教师版.docx",
+      "outputPathSuffix": "2026-05-24T04-00-00-H5A Export Fixture-教师版.docx",
+      "bodyUtf8": "docx:H5A Export Fixture:documentXml:H5A Export Fixture:teacher:handout:21:1:0"
+    },
+    "pdfStudent": {
+      "fileName": "H5A Export Fixture-学生版.pdf",
+      "outputPathSuffix": "2026-05-24T04-00-00-H5A Export Fixture-学生版.pdf",
+      "bodyUtf8": "pdf:2026-05-24T04-00-00-H5A Export Fixture-学生版.pdf"
+    },
+    "printHtml": {
+      "fileName": "H5A Print Fixture-学生版-精排.html",
+      "bodyUtf8": "html:H5A Print Fixture:student:exam:21:1:2"
+    },
+    "printPdf": {
+      "fileName": "H5A Print Fixture-教师版-精排.pdf",
+      "outputPathSuffix": "2026-05-24T04-00-00-H5A Print Fixture-教师版-精排.pdf",
+      "bodyUtf8": "pdf:html:H5A Print Fixture:teacher:exam:21:1:2"
+    }
+  }
+}
