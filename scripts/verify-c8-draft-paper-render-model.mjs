@@ -26,16 +26,19 @@ function assert(name, condition, details = '') {
 }
 
 function baselineRef() {
-  try {
-    execFileSync('git', ['rev-parse', '--verify', 'github/main'], {
-      cwd: rootDir,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-    return 'github/main'
-  } catch {
-    return 'main'
+  for (const candidate of ['github/main', 'origin/main', 'main']) {
+    try {
+      execFileSync('git', ['rev-parse', '--verify', candidate], {
+        cwd: rootDir,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      })
+      return candidate
+    } catch {
+      // Try the next shared-main spelling. GitHub Actions uses origin/main.
+    }
   }
+  throw new Error('No shared main ref found for print-renderer diff')
 }
 
 function createDraftPaperRenderFixture() {
