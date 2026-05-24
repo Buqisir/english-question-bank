@@ -245,6 +245,17 @@ context. If an external agent cannot write directly to the repo, reserve
 a target path in the prompt and have the owner or Codex place the
 artifact there before it becomes authoritative.
 
+External agents must write to the intended repo/worktree, not merely to
+the same relative path in a side worktree. Prompts that ask an external
+agent to write a repo artifact must include the target repo root, target
+branch / PR, and target absolute path. Before writing, the agent must
+confirm `pwd`, `git rev-parse --show-toplevel`, and branch. If the
+current worktree is not the requested repo root / branch / PR, the
+agent must stop with `ESCALATION: BRANCH CONFLICT` instead of writing
+under `.claude/worktrees/` or another side checkout. After writing, the
+agent must confirm the absolute report path and `git status --short`
+entry for the file.
+
 If a material decision was made in chat during a grill, it must be
 copied into the cut's `decisions.md`, `pm-spec.md`, `agent-entrypoint.md`,
 or `handoff.md` before DEV or external review continues.

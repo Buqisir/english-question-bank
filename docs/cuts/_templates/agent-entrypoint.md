@@ -57,6 +57,18 @@ Write the next artifact to:
 docs/cuts/<CUT>/<artifact>.md
 ```
 
+Worktree check for external agents:
+
+- Target repo root: `<ABSOLUTE_REPO_ROOT>`
+- Target branch / PR: `<BRANCH_OR_PR>`
+- Target absolute path:
+  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT>/<artifact>.md`
+- Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and
+  branch. If they do not match the target repo root and target branch /
+  PR, stop with `ESCALATION: BRANCH CONFLICT`.
+- After writing, confirm the absolute artifact path and
+  `git status --short` entry for the file.
+
 Repo-file handoff rule:
 
 - Put substantive PA / CR / DEV / QA / RM context in repo files, not chat.

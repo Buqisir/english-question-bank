@@ -81,6 +81,19 @@ Write the full report to:
 docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md
 ```
 
+Worktree check before writing:
+
+- Target repo root: `<ABSOLUTE_REPO_ROOT>`
+- Target branch / PR: `<BRANCH_OR_PR>`
+- Target absolute report path:
+  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+- Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and
+  branch. If they do not match the target repo root and target branch /
+  PR, stop with `ESCALATION: BRANCH CONFLICT` instead of writing in a
+  side worktree such as `.claude/worktrees/`.
+- After writing, confirm the absolute report path and `git status --short`
+  entry for the file.
+
 Include:
 
 - baseline reviewed
@@ -104,6 +117,9 @@ Open items from external review: <N> (see <report> §<section>)
 After writing the repo file, reply in chat with only:
 
 - Report path
+- Absolute report path
+- Git branch
+- Git status entry for report file
 - Verdict
 - Must Fix count
 - Should Watch count
