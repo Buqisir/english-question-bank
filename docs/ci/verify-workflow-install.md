@@ -1,7 +1,7 @@
 # Verify Workflow Install Note
 
-Date: 2026-05-23
-Status: Not installed.
+Date: 2026-05-24
+Status: Installed.
 
 ## Current State
 
@@ -11,20 +11,11 @@ The stable CI workflow template exists at:
 docs/ci/verify-workflow-template.yml
 ```
 
-It is intentionally not copied to:
+It has been copied to:
 
 ```text
 .github/workflows/verify.yml
 ```
-
-because the current GitHub token reports these scopes:
-
-```text
-gist, read:org, repo
-```
-
-It does not include `workflow`, which GitHub requires for creating or updating
-workflow files through the API / HTTPS push path.
 
 ## Install When Ready
 

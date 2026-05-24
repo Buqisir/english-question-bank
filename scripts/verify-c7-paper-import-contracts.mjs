@@ -34,6 +34,18 @@ function runGit(args) {
   }).trim()
 }
 
+function baselineRef() {
+  for (const candidate of ['github/main', 'origin/main', 'main']) {
+    try {
+      runGit(['rev-parse', '--verify', candidate])
+      return candidate
+    } catch {
+      // Try the next shared-main spelling. GitHub Actions uses origin/main.
+    }
+  }
+  throw new Error('No shared main ref found for forbidden-scope diff')
+}
+
 function cloneFiles(files) {
   return files.map((file) => ({
     fileName: file.fileName,
@@ -195,7 +207,7 @@ const codeFenceJson = validatePaperImportPackage([
 assert('code-fenced JSON is blocking', !codeFenceJson.ok)
 assert('code-fenced JSON reports json.parseFailed', codes(codeFenceJson).has('json.parseFailed'))
 
-const changedFiles = runGit(['diff', '--name-only', 'github/main'])
+const changedFiles = runGit(['diff', '--name-only', baselineRef()])
   .split('\n')
   .filter(Boolean)
 const forbiddenPrefixes = [
