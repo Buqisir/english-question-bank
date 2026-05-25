@@ -864,9 +864,9 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-rail:focus-within,
 .pi-ps-insight-rail[data-rail-locked='true'] {
   width: 160px;
-  background: transparent;
-  border-right-color: transparent;
-  box-shadow: none;
+  background: var(--pi-ps-insight-rail-bg);
+  border-right-color: var(--pi-ps-insight-hairline);
+  box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
 }
 
 /* State 3: active detail open — viewport-clamped structure detail
@@ -890,9 +890,9 @@ button.pi-ps-analysis-distractor--selected {
 @media (min-width: 1200px) {
   .pi-ps-insight-rail[data-rail-detail-open='true'] {
     width: clamp(200px, calc(100vw - 1230px), 300px);
-    background: transparent;
-    border-right-color: transparent;
-    box-shadow: none;
+    background: var(--pi-ps-insight-rail-bg);
+    border-right-color: var(--pi-ps-insight-hairline);
+    box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
   }
 }
 
@@ -1101,7 +1101,7 @@ button.pi-ps-analysis-distractor--selected {
  * paper text and does NOT portal outside the rail.
  */
 .pi-ps-insight-detail {
-  background: transparent;
+  background: var(--pi-ps-insight-detail-bg);
   border: 0;
   border-radius: 0;
   padding: 8px 0 4px;
@@ -1109,8 +1109,8 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 12px;
   line-height: 1.5;
   color: var(--pi-ps-insight-ink);
-  overflow-y: auto;
-  max-height: 50vh;
+  overflow-y: visible;
+  max-height: none;
 }
 
 .pi-ps-insight-detail-header {
