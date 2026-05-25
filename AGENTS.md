@@ -135,7 +135,7 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   workflow. Only use external DEV prompts when the owner explicitly
   asks. In that exception, put the entire prompt in a repo file or a
   fenced chat block, and require the report shape from
-  `docs/agents/dev-completion-report-template.md`.
+  `docs/agents/dev-completion-report-template.md` and `docs/steering/dev-completion-protocol.md`.
 - Do not accept raw terminal logs as a completion report. Require short
   verify summaries, exact changed files, browser QA status, forbidden
   scopes, known risks, and PO QA checklist link when applicable.

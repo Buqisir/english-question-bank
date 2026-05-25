@@ -11,8 +11,8 @@ import {
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('DEV completion report contract verify')
 
-const steering = readText(ROOT, '.kiro/steering/dev-completion-protocol.md')
-const readme = readText(ROOT, '.kiro/steering/README.md')
+const steering = readText(ROOT, 'docs/steering/dev-completion-protocol.md')
+const readme = readText(ROOT, 'docs/steering/README.md')
 const agents = readText(ROOT, 'AGENTS.md')
 const template = readText(ROOT, 'docs/agents/dev-completion-report-template.md')
 

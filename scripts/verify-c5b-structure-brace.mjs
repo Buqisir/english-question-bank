@@ -397,7 +397,7 @@ section('C5b: no steering / AGENTS diff after rebasing latest main')
 // Verify no steering or AGENTS changes in diff
 {
   const steeringFiles = changedFiles.filter(
-    (f) => f.startsWith('.kiro/steering/') || f === 'AGENTS.md' || f === 'CLAUDE.md'
+    (f) => f.startsWith('docs/steering/') || f === 'AGENTS.md' || f === 'CLAUDE.md'
   )
   assert(
     steeringFiles.length === 0,
