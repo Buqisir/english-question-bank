@@ -1,0 +1,89 @@
+# Cut Artifact Naming
+
+These rules apply to new cuts. Do not rename historical cut artifacts just to
+match this convention.
+
+## Default Directory
+
+Medium and large cuts may use:
+
+```text
+docs/cuts/<cut-id>/
+```
+
+Small cuts should usually not create a cut directory. Use chat, a PR
+description, or the code diff unless the work needs durable handoff.
+
+## Standard Files
+
+Use the smallest file set that preserves the work:
+
+```text
+docs/cuts/<cut-id>/
+  goal.md       # DEV execution contract; required before medium/large DEV
+  decisions.md  # accepted product / architecture decisions, when decisions exist
+  pa.md         # formal PA report; required for large PA, optional otherwise
+  cr.md         # formal CR / Big CR report; required for large/high-risk CR
+  cut-note.md   # large-cut closeout record
+  handoff.md    # only when work crosses agent/session/day boundaries
+```
+
+Optional prompt archive files:
+
+```text
+  pa-prompt.md  # only when a one-off PA prompt must be preserved
+  cr-prompt.md  # only when a one-off CR / Big CR prompt must be preserved
+```
+
+If external AI input material is substantial and worth preserving, prefer
+including it inside `pa-prompt.md`, `cr-prompt.md`, or `goal.md` rather than
+creating another generic context file. Avoid vague names such as `context.md`.
+
+## Review Naming
+
+- Do not encode `lite` / `big` in filenames by default.
+- Formal PA reports use `pa.md` whether the review was light or deep.
+- Formal CR / Big CR reports use `cr.md`.
+- CR-lite findings for routine small / medium PRs may live in the PR
+description or final Codex summary instead of `cr.md`.
+- PA-lite findings may be compressed into `goal.md` / `decisions.md` instead of
+creating `pa.md`, unless the review itself is an important handoff artifact.
+
+## Commit Rules
+
+- Commit `goal.md` before starting medium / large DEV.
+- Commit `pa.md` / `cr.md` when they are formal external review records.
+- Commit `cut-note.md` before closing a large cut.
+- Do not commit prompt files merely because they existed in chat; commit them
+only when future agents need to rerun, audit, or resume from them.
+
+## External Agent Rule
+
+Default external-agent behavior is chat-first while the team is still deciding.
+Codex writes the final accepted rule or artifact into the repo.
+
+External agents may write directly to repo only when the prompt gives:
+
+- target repo root
+- target branch / PR
+- target absolute output path
+- required worktree check
+- exact allowed output file
+
+If any of those are missing, the external agent should return advice in chat
+instead of writing files.
+
+## Ten Hard Rules
+
+1. Small cuts do not create `docs/cuts/<cut-id>/` by default.
+2. Medium / large cuts must commit `goal.md` before DEV starts.
+3. Formal PA reports are named `pa.md`.
+4. Formal CR / Big CR reports are named `cr.md`.
+5. Routine CR-lite can stay in the PR description or Codex final summary.
+6. Prompt archive files are optional and named `pa-prompt.md` or `cr-prompt.md`.
+7. External AI input should be folded into a prompt or goal file unless it is a
+   durable standalone artifact.
+8. Claude / external agents discuss in chat until Codex or the owner asks them
+   to write a specific repo path.
+9. Large cuts need `cut-note.md` before closeout.
+10. Keep the file set minimal; do not fill templates just to satisfy ceremony.

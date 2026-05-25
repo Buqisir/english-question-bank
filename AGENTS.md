@@ -43,16 +43,24 @@ of duplicating workflow or browser rules.
   `docs/cuts/_templates/` when starting a cut, and keep handoff / Cut
   Note records there when the cut pauses or lands.
 - Hard rule: substantive multi-agent context must live in repo files,
-  not in chat. PM specs, PA prompts, PA reports, Big CR prompts,
-  Big CR reports, DEV goal prompts, handoffs, decisions, and Cut Notes
-  belong under `docs/cuts/<CUT>/` or another named repo path. Chat
-  messages should only route agents to those files and state the next
-  action. Do not depend on copy/pasted long chat history as the source
-  of truth.
+  not in chat. For new medium / large cuts, use the artifact naming
+  rules in `docs/cuts/_templates/README.md`. Chat messages should only
+  route agents to those files and state the next action. Do not depend
+  on copy/pasted long chat history as the source of truth.
 - Use prompt templates for external PA and Big CR instead of rewriting
   boilerplate by hand:
   `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md`.
+- Cut artifact naming is intentionally simple for new cuts:
+  `goal.md` for the DEV execution contract, `pa.md` for formal PA,
+  `cr.md` for formal CR / Big CR, optional `pa-prompt.md` /
+  `cr-prompt.md` only when a prompt must be archived, and
+  `cut-note.md` for large-cut closeout. Do not rename historical cut
+  artifacts only to match this convention.
+- Small cuts should not create `docs/cuts/<CUT>/` ceremony. Medium cuts
+  require a committed `goal.md` before DEV. Large cuts require committed
+  `goal.md`, formal PA / CR records as applicable, and `cut-note.md`
+  before closeout.
 - Cut decision ledgers should expose freshness. New `decisions.md`
   files should include `Last synced` and
   `Open items from external review`, and external PA / Big CR follow-up
@@ -125,8 +133,9 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
 - Historical external-agent handoff rules are no longer the default
   workflow. Only use external DEV prompts when the owner explicitly
-  asks. In that exception, put the entire prompt in fenced code blocks
-  and require `.kiro/steering/dev-completion-protocol.md`.
+  asks. In that exception, put the entire prompt in a repo file or a
+  fenced chat block, and require the report shape from
+  `docs/agents/dev-completion-report-template.md`.
 - Do not accept raw terminal logs as a completion report. Require short
   verify summaries, exact changed files, browser QA status, forbidden
   scopes, known risks, and PO QA checklist link when applicable.
