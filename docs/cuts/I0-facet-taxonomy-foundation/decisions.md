@@ -78,10 +78,10 @@ If a sentence only makes adjacent sentences read smoothly, use `cohesion`.
 `seven-choices.cohesion.*` names cohesion mechanism, not a subtype of
 `seven-choices.role.cohesion`.
 
-- `role=cohesion`: one primary mechanism is required.
-- `role=bridge`: mechanisms are optional; if recorded, they are drawn from
-  reference, logic, or topic-field alignment.
-- `role=topic` and `role=summary`: mechanisms are not attached in v1.
+- Every blank has one primary mechanism.
+- `role=cohesion` often uses reference, logic, or topic-field alignment.
+- `role=bridge` often uses reference, logic, or topic-field alignment.
+- `role=topic` and `role=summary` often use topic-field alignment.
 
 A blank can have one primary mechanism and up to two supporting mechanisms in a
 future analysis contract. In the taxonomy file, only the reusable facet keys are

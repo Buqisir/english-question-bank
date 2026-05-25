@@ -2,7 +2,7 @@
 
 Cut: I0-B 七选五 reviewed-analysis contract
 Status: accepted for docs-only implementation
-Last synced: 2026-05-24
+Last synced: 2026-05-25
 Open items from external review: none
 
 ## Locked Decisions
@@ -74,11 +74,9 @@ The contract uses I0-A leaf facet keys.
 
 - `positionFacet`: required, exactly one `seven-choices.position.*` leaf.
 - `roleFacet`: required, exactly one `seven-choices.role.*` leaf.
-- `primaryMechanismFacet`:
-  - required when `roleFacet` is `seven-choices.role.cohesion`
-  - optional when `roleFacet` is `seven-choices.role.bridge`
-  - absent when `roleFacet` is `seven-choices.role.topic` or
-    `seven-choices.role.summary`
+- `primaryMechanismFacet`: required for every blank. `roleFacet` says what the
+  inserted sentence does; `primaryMechanismFacet` says how the blank is solved.
+  Topic and summary blanks often use topic-field alignment.
 - `supportingMechanismFacets`: optional array, max 2, leaf keys only.
 
 Mechanism facets must come from:
@@ -112,6 +110,10 @@ Rules:
 
 It is not a facet. It is text evidence connecting the option side to the
 context side, especially for topic-field alignment.
+
+For topic-field alignment, `mechanismSignals` must include both sides of the
+highlightable match when exact text exists: at least one `context` signal and
+at least one `option` signal.
 
 ### Context Evidence
 

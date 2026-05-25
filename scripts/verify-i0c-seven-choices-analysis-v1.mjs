@@ -40,6 +40,8 @@ const requiredSignalMechanisms = new Set([
   'seven-choices.cohesion.grammatical.logical-connector',
 ])
 
+const topicFieldMechanism = 'seven-choices.cohesion.lexical.topic-field-alignment'
+
 const signalSides = new Set(['context', 'option'])
 
 const failures = []
@@ -117,6 +119,8 @@ function selfCheck() {
   assert(!prompt.includes('synonym-paraphrase'), 'prompt excludes stale synonym-paraphrase key')
   assert(prompt.includes('referential-cohesion'), 'prompt uses final reference facet key')
   assert(prompt.includes('mechanismSignals'), 'prompt includes mechanismSignals field')
+  assert(prompt.includes('Every blank MUST include primaryMechanismFacet'), 'prompt requires primaryMechanismFacet for every blank')
+  assert(prompt.includes('For topic-field alignment'), 'prompt requires paired topic-field signals')
   assert(!prompt.includes('topic-word-echo'), 'prompt excludes stale topic-word-echo key')
   assert(!prompt.includes('pronoun-reference'), 'prompt excludes stale pronoun-reference key')
 
@@ -183,14 +187,7 @@ function validateAnalysis(analysisPath) {
     assert(positionFacets.has(item.positionFacet), `${questionId}: valid positionFacet`)
     assert(roleFacets.has(item.roleFacet), `${questionId}: valid roleFacet`)
 
-    const hasPrimary = hasOwn(item, 'primaryMechanismFacet')
-    if (item.roleFacet === 'seven-choices.role.cohesion') {
-      assert(hasPrimary && mechanismFacets.has(item.primaryMechanismFacet), `${questionId}: cohesion role has valid primaryMechanismFacet`)
-    } else if (item.roleFacet === 'seven-choices.role.bridge') {
-      assert(!hasPrimary || mechanismFacets.has(item.primaryMechanismFacet), `${questionId}: bridge role primaryMechanismFacet is absent or valid`)
-    } else {
-      assert(!hasPrimary, `${questionId}: topic/summary role must not include primaryMechanismFacet`)
-    }
+    assert(mechanismFacets.has(item.primaryMechanismFacet), `${questionId}: valid primaryMechanismFacet`)
 
     const supporting = Array.isArray(item.supportingMechanismFacets) ? item.supportingMechanismFacets : []
     assert(supporting.length <= 2, `${questionId}: supportingMechanismFacets length <= 2`)
@@ -205,6 +202,11 @@ function validateAnalysis(analysisPath) {
     const needsSignal = activeMechanisms.some((facet) => requiredSignalMechanisms.has(facet))
     if (needsSignal) {
       assert(mechanismSignals.length > 0, `${questionId}: grammatical cohesion has mechanismSignals`)
+    }
+    if (activeMechanisms.includes(topicFieldMechanism)) {
+      const topicSignals = mechanismSignals.filter((signal) => signal.mechanismFacet === topicFieldMechanism)
+      assert(topicSignals.some((signal) => signal.signalSide === 'context'), `${questionId}: topic-field alignment has context-side mechanismSignal`)
+      assert(topicSignals.some((signal) => signal.signalSide === 'option'), `${questionId}: topic-field alignment has option-side mechanismSignal`)
     }
     for (const signal of mechanismSignals) {
       assert(mechanismFacets.has(signal.mechanismFacet), `${questionId}: mechanismSignal has valid mechanismFacet`)

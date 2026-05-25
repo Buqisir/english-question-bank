@@ -185,22 +185,24 @@ final facet keys listed above exactly.
 
 ## Mechanism Rules
 
-- If `roleFacet` is `seven-choices.role.cohesion`, `primaryMechanismFacet` is
-  required.
-- If `roleFacet` is `seven-choices.role.bridge`, `primaryMechanismFacet` is
-  optional.
-- If `roleFacet` is `seven-choices.role.topic` or
-  `seven-choices.role.summary`, `primaryMechanismFacet` MUST be absent.
+Every blank MUST include primaryMechanismFacet.
+
+`roleFacet` answers what the inserted sentence does. `primaryMechanismFacet`
+answers how the blank is solved. Topic and summary blanks still need a solving
+mechanism, usually `seven-choices.cohesion.lexical.topic-field-alignment`.
+
 - `supportingMechanismFacets` is optional and may contain at most 2 items.
 - `mechanismSignals` is required when the blank uses
   `seven-choices.cohesion.grammatical.logical-connector` or
   `seven-choices.cohesion.grammatical.referential-cohesion`, whether the
   mechanism is primary or supporting.
+- For topic-field alignment, `mechanismSignals` MUST include at least one
+  context-side signal and at least one option-side signal.
 
 ## Mechanism Signals
 
 Use `mechanismSignals` for the exact logical connector, pronoun, demonstrative,
-or other concrete cohesion signal that should be highlightable in the UI.
+or topic-field word chunk that should be highlightable in the UI.
 
 Each item must include:
 
@@ -214,6 +216,20 @@ Examples:
 
 ```json
 [
+  {
+    "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+    "signalText": "hurts",
+    "signalSide": "context",
+    "targetText": "uncomfortable",
+    "relation": "hurts 与选项 uncomfortable 属于疼痛/不适话题场。"
+  },
+  {
+    "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+    "signalText": "uncomfortable",
+    "signalSide": "option",
+    "targetText": "hurts / pain",
+    "relation": "uncomfortable 概括空后 hurts、pain。"
+  },
   {
     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
     "signalText": "If",
@@ -231,8 +247,8 @@ Examples:
 ]
 ```
 
-Do NOT put broad topic-field words in `mechanismSignals`; use `topicClues` for
-that.
+For topic-field alignment, put only the compact matched words or chunks in
+`mechanismSignals`. Put the broader context-side clue set in `topicClues`.
 
 ## Topic Clues
 

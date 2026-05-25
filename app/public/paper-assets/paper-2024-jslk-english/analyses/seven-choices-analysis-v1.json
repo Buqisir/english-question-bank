@@ -125,6 +125,27 @@
           "signalSide": "option",
           "targetText": "keep these things in mind",
           "relation": "If 引出适用对象，与空后 keep these things in mind 构成条件—建议关系。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "New Runners",
+          "signalSide": "context",
+          "targetText": "you’re just starting out",
+          "relation": "New Runners 与选项 you’re just starting out 指向刚开始跑步的人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "you’re just starting out",
+          "signalSide": "option",
+          "targetText": "New Runners",
+          "relation": "you’re just starting out 对应标题中的 New Runners。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these things",
+          "signalSide": "context",
+          "targetText": "common mistakes",
+          "relation": "these things 指代前文 common mistakes，承接后文将要列出的错误。"
         }
       ]
     },
@@ -132,9 +153,6 @@
       "blankId": "blank-2024-jslk-037",
       "positionFacet": "seven-choices.position.paragraph-end",
       "roleFacet": "seven-choices.role.summary",
-      "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.topic-field-alignment"
-      ],
       "topicClues": [
         "Doing too much too soon",
         "doing too much too soon",
@@ -174,15 +192,29 @@
           "reason": "也是新跑者的常见错误。；它更适合作为下一段的标题，不能总结本段“too much too soon”。"
         }
       ],
-      "teachingNote": "段末空常考“总结或具体化”。先看小标题 Doing too much too soon，再找选项中能把 too much/soon 量化为训练规则的句子。"
+      "teachingNote": "段末空常考“总结或具体化”。先看小标题 Doing too much too soon，再找选项中能把 too much/soon 量化为训练规则的句子。",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Slowly easing into a training program",
+          "signalSide": "context",
+          "targetText": "no more than 10%each week",
+          "relation": "Slowly easing into a training program 与每周增加不超过 10% 都指向循序渐进训练。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no more than 10%each week",
+          "signalSide": "option",
+          "targetText": "Slowly easing into a training program",
+          "relation": "no more than 10%each week 是对 slowly easing 的具体量化。"
+        }
+      ]
     },
     "q-2024-jslk-038": {
       "blankId": "blank-2024-jslk-038",
       "positionFacet": "seven-choices.position.paragraph-start",
       "roleFacet": "seven-choices.role.topic",
-      "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.topic-field-alignment"
-      ],
       "topicClues": [
         "run every day(or nearly every day)",
         "high-impact activity",
@@ -220,7 +252,24 @@
           "reason": "同样是训练建议。；G 讲跑量递增，属于上一段 Doing too much too soon 的内容。"
         }
       ],
-      "teachingNote": "标题空要向下看整段，尤其看 but/so 后的结论句；本段结论词是 rest，不要被泛泛的训练建议带偏。"
+      "teachingNote": "标题空要向下看整段，尤其看 but/so 后的结论句；本段结论词是 rest，不要被泛泛的训练建议带偏。",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "give your body a rest between workouts",
+          "signalSide": "context",
+          "targetText": "rest days",
+          "relation": "give your body a rest between workouts 与选项 rest days 对应，说明本段主题是休息日。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "rest days",
+          "signalSide": "option",
+          "targetText": "give your body a rest between workouts",
+          "relation": "rest days 概括空后 give your body a rest between workouts。"
+        }
+      ]
     },
     "q-2024-jslk-039": {
       "blankId": "blank-2024-jslk-039",
@@ -228,8 +277,7 @@
       "roleFacet": "seven-choices.role.bridge",
       "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
       "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.topic-field-alignment",
-        "seven-choices.cohesion.grammatical.referential-cohesion"
+        "seven-choices.cohesion.lexical.topic-field-alignment"
       ],
       "topicClues": [
         "Not wearing the right equipment",
@@ -278,6 +326,20 @@
           "signalSide": "option",
           "targetText": "it’s important that you wear properly for your workouts",
           "relation": "While 引出让步，和空后 it’s important that 形成“虽然不一定昂贵，但仍要穿戴合适”的让步—转折关系。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "right equipment",
+          "signalSide": "context",
+          "targetText": "expensive equipment",
+          "relation": "right equipment 与 expensive equipment 都属于本段装备话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "expensive equipment",
+          "signalSide": "option",
+          "targetText": "right equipment",
+          "relation": "expensive equipment 承接小标题和下文反复出现的 equipment。"
         }
       ]
     },
@@ -286,9 +348,6 @@
       "positionFacet": "seven-choices.position.paragraph-start",
       "roleFacet": "seven-choices.role.bridge",
       "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
-      "supportingMechanismFacets": [
-        "seven-choices.cohesion.grammatical.referential-cohesion"
-      ],
       "topicClues": [
         "Running through pain",
         "something hurts when you run",
@@ -332,10 +391,24 @@
       "mechanismSignals": [
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "hurts",
+          "signalSide": "context",
+          "targetText": "uncomfortable",
+          "relation": "hurts 与选项 uncomfortable 属于疼痛/不适话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "pain",
+          "signalSide": "context",
+          "targetText": "uncomfortable",
+          "relation": "pain 与 uncomfortable 呼应，说明本段围绕跑步疼痛展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "uncomfortable",
           "signalSide": "option",
           "targetText": "hurts / pain",
-          "relation": "uncomfortable 与空后 hurts、pain 构成疼痛/不适话题的词汇呼应。"
+          "relation": "uncomfortable 概括空后 hurts、pain。"
         }
       ]
     }

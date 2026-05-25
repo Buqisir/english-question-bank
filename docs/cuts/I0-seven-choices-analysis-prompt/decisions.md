@@ -94,7 +94,8 @@ specific signal word or phrase that realizes the cohesion mechanism.
 
 Accepted patch:
 
-- Add optional `mechanismSignals` to each `questions[questionId]` item.
+- Add `mechanismSignals` to each `questions[questionId]` item when the solving
+  mechanism needs highlightable signals.
 - Require `mechanismSignals` when the blank uses either:
   - `seven-choices.cohesion.grammatical.logical-connector`
   - `seven-choices.cohesion.grammatical.referential-cohesion`
@@ -106,6 +107,11 @@ Accepted patch:
   - `relation`
 - `mechanismSignals` is for concrete highlightable cohesion signals, not broad
   topic-field clues.
+- 2026-05-25 patch: every blank now requires `primaryMechanismFacet`.
+  Topic / summary roles can still use topic-field alignment as the solving
+  mechanism. When a blank uses topic-field alignment, `mechanismSignals` must
+  include compact highlightable signals from both the context side and the
+  option side.
 
 The first fixture now includes:
 

@@ -81,7 +81,7 @@ For every blank/question, include:
 - `blankId`
 - `positionFacet`
 - `roleFacet`
-- `primaryMechanismFacet` when required
+- `primaryMechanismFacet`
 - `supportingMechanismFacets` when useful, max 2
 - `topicClues`
 - `contextEvidence`
@@ -112,15 +112,19 @@ seven-choices.cohesion.lexical.topic-field-alignment
 
 Mechanism rules:
 
-- `roleFacet = seven-choices.role.cohesion` requires `primaryMechanismFacet`.
-- `roleFacet = seven-choices.role.bridge` may include `primaryMechanismFacet`.
-- `roleFacet = seven-choices.role.topic` or
-  `seven-choices.role.summary` must not include `primaryMechanismFacet`.
+- Every blank must include `primaryMechanismFacet`.
+- `roleFacet` says what the sentence does; `primaryMechanismFacet` says how the
+  blank is solved.
+- Topic and summary blanks usually use
+  `seven-choices.cohesion.lexical.topic-field-alignment`.
 - `supportingMechanismFacets` may contain at most 2 items.
 - `mechanismSignals` is required when a blank uses
   `seven-choices.cohesion.grammatical.logical-connector` or
   `seven-choices.cohesion.grammatical.referential-cohesion`, whether the
   mechanism is primary or supporting.
+- For `seven-choices.cohesion.lexical.topic-field-alignment`,
+  `mechanismSignals` must include at least one context-side signal and at least
+  one option-side signal.
 
 `mechanismSignals` rules:
 
@@ -129,7 +133,8 @@ Mechanism rules:
 - Each item includes `mechanismFacet`, `signalText`, `signalSide`,
   `targetText`, and `relation`.
 - `signalSide` must be `context` or `option`.
-- Do not put broad topic-field words here; use `topicClues` for that.
+- For topic-field alignment, put compact matched words/chunks in
+  `mechanismSignals`; put broader context clue sets in `topicClues`.
 
 `topicClues` rules:
 

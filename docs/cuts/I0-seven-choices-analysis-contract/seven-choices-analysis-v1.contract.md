@@ -124,21 +124,27 @@ For each blank:
 - `blankId`
 - `positionFacet`
 - `roleFacet`
+- `primaryMechanismFacet`
 - `topicClues`
 - `contextEvidence`
 - `optionFit`
 - `teachingNote`
 
-`primaryMechanismFacet` is required when `roleFacet` is
-`seven-choices.role.cohesion`.
-It is optional when `roleFacet` is `seven-choices.role.bridge`.
-It must be absent when `roleFacet` is `seven-choices.role.topic` or
-`seven-choices.role.summary`.
+Every blank MUST include `primaryMechanismFacet`.
+
+`roleFacet` answers what the inserted sentence does in discourse. It does not
+decide whether the blank has a solving mechanism. Topic and summary blanks also
+usually have a mechanism, often
+`seven-choices.cohesion.lexical.topic-field-alignment`.
 
 `mechanismSignals` is required when a blank uses grammatical cohesion through
 logical connectors or referential cohesion, whether the mechanism appears in
-`primaryMechanismFacet` or `supportingMechanismFacets`. It is optional for
-lexical cohesion and for topic / summary roles.
+`primaryMechanismFacet` or `supportingMechanismFacets`.
+
+For topic-field alignment, `mechanismSignals` must include at least one
+context-side signal and at least one option-side signal. These are the compact,
+highlightable word chunks that directly prove the topic-field match. Broader
+context-side clue lists still belong in `topicClues`.
 
 ## Terminology
 
@@ -189,12 +195,26 @@ Do not use parent keys as blank-level facet values.
 
 ## Mechanism Signals
 
-`mechanismSignals` records concrete, highlightable signals for the cohesion
-mechanism. It answers: which word or phrase is doing the logical / referential
-work, where is it, and what does it connect to?
+`mechanismSignals` records concrete, highlightable signals for the solving
+mechanism. It answers: which word or phrase is doing the logical /
+referential / topic-field work, where is it, and what does it connect to?
 
 ```json
 [
+  {
+    "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+    "signalText": "hurts",
+    "signalSide": "context",
+    "targetText": "uncomfortable",
+    "relation": "hurts 与选项 uncomfortable 属于疼痛/不适话题场。"
+  },
+  {
+    "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+    "signalText": "uncomfortable",
+    "signalSide": "option",
+    "targetText": "hurts / pain",
+    "relation": "uncomfortable 概括空后 hurts、pain。"
+  },
   {
     "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
     "signalText": "If",
@@ -219,7 +239,10 @@ Rules:
 - `signalSide` is `context` or `option`.
 - `targetText` is the connected word or phrase, when useful.
 - `relation` explains the connection in Chinese.
-- Do not put broad topic clues here. Use `topicClues` for topic-field clues.
+- For topic-field alignment, include both context-side and option-side signals
+  when both sides have exact highlightable text.
+- Do not put the whole broad topic-clue list here. Use `topicClues` for broader
+  context-side topic-field clues.
 
 ## Topic Clues
 
