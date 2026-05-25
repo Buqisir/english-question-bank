@@ -27,8 +27,8 @@ Keep this list cut-specific and at most 5 files.
 Skim only if unfamiliar or not already loaded in this session.
 
 - `AGENTS.md`
-- `.kiro/steering/cut-workflow-protocol.md`
-- `.kiro/steering/product-scope-discipline.md`
+- `docs/steering/cut-workflow-protocol.md`
+- `docs/steering/product-scope-discipline.md`
 - `docs/agents/review-levels.md`
 - `scripts/README.md`
 

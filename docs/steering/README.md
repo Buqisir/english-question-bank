@@ -83,8 +83,8 @@ Hard rule:
 - PA exists to find wrong-direction implementation risk before Codex
   starts building.
 - PA must read `docs/agents/review-levels.md`,
-  `.kiro/steering/cut-workflow-protocol.md`, and
-  `.kiro/steering/product-scope-discipline.md`.
+  `docs/steering/cut-workflow-protocol.md`, and
+  `docs/steering/product-scope-discipline.md`.
 - PA must output verdict, product principle, exact model, Must Fix,
   Should Watch, allowed / forbidden files, static verify, browser QA,
   DEV readiness, and at most 3 open PO decisions.

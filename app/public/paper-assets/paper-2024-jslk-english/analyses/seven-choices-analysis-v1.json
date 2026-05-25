@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2024-jslk-english",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-jslk-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "GPT-5.5 Thinking",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "external-ai+codex-cleaned",
+    "reviewedAt": "2026-05-24"
+  },
+  "groups": {
+    "group-2024-jslk-seven-choices": {
+      "overview": "本文围绕新跑者常见错误展开，先总述跑步容易入门但常见错误会影响训练或导致受伤，再依次说明循序渐进、安排休息、穿戴合适装备和不要带痛硬跑等建议。",
+      "discourseStructure": {
+        "summary": "全文采用“总起提醒 + 四个错误小标题”的结构。七选五空位既包括引入读者对象的段中承启句，也包括段末具体建议、小标题主旨句和段首承接句。",
+        "units": [
+          {
+            "unitId": "unit-seven-intro",
+            "heading": "Common Mistakes New Runners Make",
+            "paragraphIds": [
+              "para-2024-jslk-seven-title",
+              "para-2024-jslk-seven-intro"
+            ],
+            "summary": "总述跑步适合大众，但新跑者常见错误会妨碍训练或导致受伤，引出后文建议。"
+          },
+          {
+            "unitId": "unit-seven-too-much",
+            "heading": "Doing too much too soon",
+            "paragraphIds": [
+              "para-2024-jslk-seven-h1",
+              "para-2024-jslk-seven-p1"
+            ],
+            "summary": "说明新跑者容易训练过量，应逐步增加训练量以降低受伤风险。"
+          },
+          {
+            "unitId": "unit-seven-rest-days",
+            "heading": "Not taking rest days",
+            "paragraphIds": [
+              "para-2024-jslk-seven-h2",
+              "para-2024-jslk-seven-p2"
+            ],
+            "summary": "说明每天跑步并不合适，跑步冲击大，身体需要在训练间休息。"
+          },
+          {
+            "unitId": "unit-seven-equipment",
+            "heading": "Not wearing the right equipment",
+            "paragraphIds": [
+              "para-2024-jslk-seven-h3",
+              "para-2024-jslk-seven-p3"
+            ],
+            "summary": "说明虽然跑步不一定需要昂贵装备，但应穿戴合适，尤其要选好跑鞋。"
+          },
+          {
+            "unitId": "unit-seven-pain",
+            "heading": "Running through pain",
+            "paragraphIds": [
+              "para-2024-jslk-seven-h4",
+              "para-2024-jslk-seven-p4"
+            ],
+            "summary": "说明跑步有时不舒服，但真正疼痛时应停下处理并倾听身体。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-jslk-036": {
+      "blankId": "blank-2024-jslk-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-recurrence",
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Common Mistakes New Runners Make",
+        "Running is a great way to get in shape",
+        "many make a number of common mistakes",
+        "keep these things in mind",
+        "running success"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jslk-seven-intro",
+        "beforeQuote": "However,many make a number of common mistakes,which can interfere(妨碍)with training or lead to injury.",
+        "afterQuote": "keep these things in mind to help you increase your chances of running success."
+      },
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "correctOptionText": "If you’re just starting out",
+        "matchedClues": [
+          {
+            "optionSide": "you’re just starting out",
+            "contextSide": "New Runners",
+            "relation": "语义对应：刚开始跑步的人就是 new runners。"
+          },
+          {
+            "optionSide": "If",
+            "contextSide": "keep these things in mind",
+            "relation": "语法衔接：If 从句接空后祈使句，形成条件建议。"
+          }
+        ],
+        "fitSummary": "36 空的核心是补出“如果你刚开始跑步”这个条件，把标题中的新跑者和空后的建议句连接起来。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "running 与全文主题一致。；它不能和空后的 keep these things in mind 构成自然的条件建议结构。"
+        },
+        {
+          "optionLabel": "C",
+          "reason": "像是常见错误的一类。；本段还没有进入具体错误列表，且空后需要条件从句而不是名词短语标题。"
+        }
+      ],
+      "teachingNote": "看到空后是逗号加祈使句时，优先检查选项中是否有 If / While 等从属连词；再用标题 New Runners 锁定目标读者。",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "If",
+          "signalSide": "option",
+          "targetText": "keep these things in mind",
+          "relation": "If 引出适用对象，与空后 keep these things in mind 构成条件—建议关系。"
+        }
+      ]
+    },
+    "q-2024-jslk-037": {
+      "blankId": "blank-2024-jslk-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.synonym-paraphrase",
+        "seven-choices.cohesion.lexical.topic-field-recurrence"
+      ],
+      "topicClues": [
+        "Doing too much too soon",
+        "doing too much too soon",
+        "Slowly easing into a training program",
+        "reduce the risk of injury",
+        "new running routine"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jslk-seven-p1",
+        "headingAnchor": "Doing too much too soon",
+        "beforeQuote": "Slowly easing into a training program will help reduce the risk of injury,so you can continue on with your new running routine."
+      },
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "correctOptionText": "Experts suggest increasing your running distance by no more than 10%each week",
+        "matchedClues": [
+          {
+            "optionSide": "increasing your running distance by no more than 10%each week",
+            "contextSide": "Doing too much too soon",
+            "relation": "反向对应：不要过快增加跑量。"
+          },
+          {
+            "optionSide": "no more than 10%each week",
+            "contextSide": "Slowly easing into a training program",
+            "relation": "具体化：用 10% 规则说明 slowly easing。"
+          }
+        ],
+        "fitSummary": "37 空位于段末，正确项把“不要一下做太多”落实为每周跑量增加不超过 10% 的具体规则。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "也含有 It’s important，像建议句。；same muscles 讨论的是肌肉使用，不对应本段的跑量、速度和循序渐进。"
+        },
+        {
+          "optionLabel": "A",
+          "reason": "也是新跑者的常见错误。；它更适合作为下一段的标题，不能总结本段“too much too soon”。"
+        }
+      ],
+      "teachingNote": "段末空常考“总结或具体化”。先看小标题 Doing too much too soon，再找选项中能把 too much/soon 量化为训练规则的句子。"
+    },
+    "q-2024-jslk-038": {
+      "blankId": "blank-2024-jslk-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.synonym-paraphrase",
+        "seven-choices.cohesion.lexical.topic-field-recurrence"
+      ],
+      "topicClues": [
+        "run every day(or nearly every day)",
+        "high-impact activity",
+        "hard on your body",
+        "give your body a rest between workouts"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jslk-seven-p2",
+        "afterQuote": "So it’s important to give your body a rest between workouts."
+      },
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "correctOptionText": "Not taking rest days",
+        "matchedClues": [
+          {
+            "optionSide": "Not taking rest days",
+            "contextSide": "run every day(or nearly every day)",
+            "relation": "语义对应：每天跑就是没有休息日。"
+          },
+          {
+            "optionSide": "rest days",
+            "contextSide": "give your body a rest between workouts",
+            "relation": "词汇复现：rest 是本段核心词。"
+          }
+        ],
+        "fitSummary": "38 空是小标题，要概括下文“不要每天跑，要在训练之间休息”，所以选 A。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "它也以 It’s important 开头，和下文句式相似。；本段重点是休息日，不是同一肌肉的重复使用。"
+        },
+        {
+          "optionLabel": "G",
+          "reason": "同样是训练建议。；G 讲跑量递增，属于上一段 Doing too much too soon 的内容。"
+        }
+      ],
+      "teachingNote": "标题空要向下看整段，尤其看 but/so 后的结论句；本段结论词是 rest，不要被泛泛的训练建议带偏。"
+    },
+    "q-2024-jslk-039": {
+      "blankId": "blank-2024-jslk-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-recurrence",
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Not wearing the right equipment",
+        "wear properly for your workouts",
+        "piece of equipment",
+        "a good pair of running shoes",
+        "purchase a pair"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jslk-seven-p3",
+        "headingAnchor": "Not wearing the right equipment",
+        "afterQuote": "The most important piece of equipment for running is a good pair of running shoes,so be sure to do some research before you purchase a pair."
+      },
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "correctOptionText": "While it may be true that you don’t need expensive equipment to take up running",
+        "matchedClues": [
+          {
+            "optionSide": "While it may be true",
+            "contextSide": "it’s important that you wear properly for your workouts",
+            "relation": "逻辑衔接：While 让步从句与空后主句构成完整句。"
+          },
+          {
+            "optionSide": "expensive equipment",
+            "contextSide": "right equipment / piece of equipment / running shoes",
+            "relation": "话题复现：equipment 与本段装备主题一致。"
+          }
+        ],
+        "fitSummary": "39 空的关键是语法和话题双锁定：F 的 While 从句能接空后的 it’s important that，同时 equipment 对应本段装备主题。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "也能与 it’s important 形成表面重复。；空后已经有 it’s important that，放入 E 会造成句法冲突，并且 same muscles 不属于装备话题。"
+        },
+        {
+          "optionLabel": "D",
+          "reason": "Running 与 workouts 有关联。；它不能和空后的逗号及 it’s important that 构成自然句法，也不对应 equipment。"
+        }
+      ],
+      "teachingNote": "遇到空后逗号加完整主句时，要优先检查从属连词；本题 While 与 it’s important that 构成让步转折，是比单纯词汇复现更强的证据。",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "While",
+          "signalSide": "option",
+          "targetText": "it’s important that you wear properly for your workouts",
+          "relation": "While 引出让步，和空后 it’s important that 形成“虽然不一定昂贵，但仍要穿戴合适”的让步—转折关系。"
+        }
+      ]
+    },
+    "q-2024-jslk-040": {
+      "blankId": "blank-2024-jslk-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.synonym-paraphrase",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-recurrence",
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Running through pain",
+        "something hurts when you run",
+        "stop and treat the pain",
+        "listen to your body",
+        "keep it healthy"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jslk-seven-p4",
+        "headingAnchor": "Running through pain",
+        "afterQuote": "Remember:It doesn’t make you less of a runner if you listen to your body to keep it healthy."
+      },
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "correctOptionText": "Running can be uncomfortable at times",
+        "matchedClues": [
+          {
+            "optionSide": "uncomfortable at times",
+            "contextSide": "something hurts when you run",
+            "relation": "近义衔接：uncomfortable 概括下文 hurts/pain。"
+          },
+          {
+            "optionSide": "Running",
+            "contextSide": "Running through pain",
+            "relation": "话题复现：Running 承接小标题中的跑步主题。"
+          }
+        ],
+        "fitSummary": "40 空用一般性的“跑步有时会不舒服”引出下句“如果疼就停下来处理”，形成从总说到具体处理的衔接。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "新跑者主题贯穿全文。；它是条件从句，不能单独放在句号前，也不直接回应 pain/hurts。"
+        },
+        {
+          "optionLabel": "E",
+          "reason": "似乎也和身体有关。；same muscles 不对应本段的 pain、hurts 和 stop and treat the pain。"
+        }
+      ],
+      "teachingNote": "段首句常先概括，再由下一句具体展开。这里用 uncomfortable 概括 hurts/pain，不要把“身体相关”的选项都当成正确项。",
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.synonym-paraphrase",
+          "signalText": "uncomfortable",
+          "signalSide": "option",
+          "targetText": "hurts / pain",
+          "relation": "uncomfortable 与空后 hurts、pain 构成疼痛/不适话题的词汇呼应。"
+        }
+      ]
+    }
+  }
+}

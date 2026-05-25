@@ -206,7 +206,7 @@ assert('code-style documents server module targets', codeStyle.includes('server/
 assert('code-style documents CSS token policy', codeStyle.includes('app/src/shared-ui/tokens.css'))
 assert('code-style documents build/typecheck in stable suite', codeStyle.includes('including app build/typecheck'))
 
-const cutWorkflow = read('.kiro/steering/cut-workflow-protocol.md')
+const cutWorkflow = read('docs/steering/cut-workflow-protocol.md')
 assert('workflow protocol requires CR-lite failure angle', cutWorkflow.includes('failure / attack angle'))
 assert('workflow protocol defines watch ledger destination', cutWorkflow.includes('docs/cuts/<CUT>/watch-ledger.md'))
 assert('workflow protocol asks external review for token metadata', cutWorkflow.includes('token usage / estimated cost'))
