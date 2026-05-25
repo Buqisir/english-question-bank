@@ -239,7 +239,15 @@
   overflow-y: auto;
   padding: 1rem 1.25rem;
   position: relative;
-  background: transparent;
+  /*
+   * Keep the scroll container itself warm. The ::before layer below
+   * paints the full-bleed extension to the viewport edge, but an
+   * absolutely positioned pseudo only covers the visible container
+   * height. When an expanded analysis makes this column scroll, the
+   * container background must carry the paper pad tone underneath
+   * the whole scrolled viewport.
+   */
+  background: var(--pi-ps-assistant-bg);
 }
 
 .pi-ps-harness-right::before {
