@@ -142,6 +142,40 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Before choosing verify commands, check `scripts/README.md` for the
   narrowest script that proves the current risk.
 
+## UI Collaboration
+
+- Claude may own UI polish work for CSS, visual styling, interaction
+  details, color systems, and small display-layer changes. Codex remains
+  owner for server logic, data layers, APIs, adapters, harness state
+  contracts, verification scripts, schemas, and medium / large cut
+  planning.
+- Claude may directly edit CSS and pure display-component code, but must
+  not touch `server/**`, `scripts/verify-*`, `app/src/domain/**`,
+  `schemas/**`, `app/public/paper-assets/**`, `*Adapter.ts`,
+  `shared/papersurface/**`, or print / PDF / export styling unless Codex
+  explicitly assigns that scope in a committed goal.
+- Grey-zone files such as `SevenChoicesAnalysisPanel.tsx`,
+  `DraftPaperWorkbench.tsx`, and
+  `PaperIntelligencePaperSurfaceHarness.tsx` may receive display-only UI
+  edits, but Claude must not change reducers, state contracts, data
+  fetching, URL state, adapter inputs / outputs, or cross-component
+  synchronization there.
+- Atomic UI fast path is allowed only when all are true: CSS-only diff,
+  no new class / data attribute / selector structure, no TS / TSX change,
+  no layout or scroll behavior change, visual-parameter-only change, small
+  diff, and no `shared/papersurface/**` or print / PDF / export styling.
+  This path still requires a lightweight Codex sanity check, not zero
+  review.
+- Any TSX change, new interaction, new selector structure, layout /
+  scroll / positioning change, A4 / PaperSurface / print-preview impact,
+  responsive behavior impact, or owner feedback such as "weird",
+  "uncomfortable", or "not like A4" upgrades the work to normal UI
+  CR-lite plus browser / PO QA as appropriate.
+- For UI branches, Claude should start from latest `main`, commit and
+  push a branch, then report branch, commit, changed files, visual intent,
+  and QA status. Avoid direct pushes to `main` for multi-agent UI work
+  unless the owner explicitly asks for that fast path.
+
 ## Agent skills
 
 ### Issue tracker
