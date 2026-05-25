@@ -65,7 +65,7 @@ export function SevenChoicesAnalysisPanel({
   }
 
   const jumpToOption = (label: string, chain: SevenChoicesChainView | undefined): void => {
-    if (chain && !openSet.has(chain.questionId)) {
+    if (chain) {
       onToggleChain(chain.questionId)
       window.setTimeout(() => scrollToOption(label), 0)
       return
@@ -114,7 +114,8 @@ export function SevenChoicesAnalysisPanel({
               data-seven-color={chain?.colorIndex ?? undefined}
               data-active={isOpen ? 'true' : undefined}
               onClick={() => jumpToOption(option.label, chain)}
-              aria-label={`跳转到选项 ${option.label}`}
+              aria-pressed={isOpen}
+              aria-label={`${isOpen ? '收起' : '展开'}选项 ${option.label}`}
             >
               {option.label}
             </button>
