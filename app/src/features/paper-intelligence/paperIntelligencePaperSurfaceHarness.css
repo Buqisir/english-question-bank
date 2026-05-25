@@ -1464,14 +1464,12 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-structure-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  display: flow-root;
   width: 100%;
   padding: 6px 8px;
   font: inherit;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.6;
   text-align: left;
   color: var(--pi-ps-insight-muted-ink, #6f665a);
   background: transparent;
@@ -1504,18 +1502,19 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-structure-row-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  float: left;
   min-width: 28px;
+  margin-right: 8px;
+  margin-bottom: 2px;
   padding: 1px 5px;
   font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
+  text-align: center;
   color: var(--pi-ps-insight-muted-ink, #6f665a);
   background: rgba(47, 41, 35, 0.06);
   border-radius: 3px;
-  flex-shrink: 0;
 }
 
 .pi-ps-structure-row--active .pi-ps-structure-row-badge {
@@ -1524,8 +1523,6 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-structure-row-text {
-  flex: 1;
-  min-width: 0;
   overflow-wrap: break-word;
 }
 
