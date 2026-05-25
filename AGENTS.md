@@ -26,7 +26,7 @@ of duplicating workflow or browser rules.
 ## Project Steering
 
 - For product, UI, PM, PA, CR, QA, RM, or DEV-prompt work, read
-  `.kiro/steering/README.md` and the relevant steering note before
+  `docs/steering/README.md` and the relevant steering note before
   giving advice or assigning implementation.
 - Product-scope discipline is mandatory. Before adding or preserving
   visible AI-derived information, ask which teacher task it serves.
@@ -35,7 +35,7 @@ of duplicating workflow or browser rules.
   workbench into an AI dashboard. A useful feature may still belong in
   a different workflow, backlog, or future cut.
 - For product / engineering cuts, follow
-  `.kiro/steering/cut-workflow-protocol.md`: pick small / medium /
+  `docs/steering/cut-workflow-protocol.md`: pick small / medium /
   large process by risk, sync first, and avoid turning small fixes into
   process rituals or large cuts into rushed DEV work.
 - Medium / large cuts use repo-routed context, not chat-only context:

@@ -65,8 +65,8 @@ Before reviewing a cut, read:
 - the `Must Read` files named in the cut prompt or
   `agent-entrypoint.md`
 - `docs/agents/review-levels.md`,
-  `.kiro/steering/cut-workflow-protocol.md`, and
-  `.kiro/steering/product-scope-discipline.md` only when they are not
+  `docs/steering/cut-workflow-protocol.md`, and
+  `docs/steering/product-scope-discipline.md` only when they are not
   already loaded in the current session or the prompt names them as
   Must Read
 - any cut-specific product contract, ADR, or watch-ledger entry named
