@@ -15,7 +15,7 @@ import type {
   QuestionAnalysis,
 } from './paperIntelligenceTypes.ts'
 
-export type SevenChoicesSignalSide = 'context' | 'option'
+export type SevenChoicesSignalSide = 'context-before' | 'context-after' | 'option'
 
 export type SevenChoicesMechanismSignal = {
   mechanismFacet: string
@@ -278,7 +278,7 @@ function buildChainViews(input: {
     const questionNo = String(assetQuestion.questionNo)
     const correctOptionLabel = item.optionFit.correctOptionLabel
     const correctOptionText = optionTextByLabel.get(correctOptionLabel) ?? item.optionFit.correctOptionText ?? ''
-    const contextSignals = (item.mechanismSignals ?? []).filter((signal) => signal.signalSide === 'context')
+    const contextSignals = (item.mechanismSignals ?? []).filter((signal) => signal.signalSide === 'context-before' || signal.signalSide === 'context-after')
     const optionSignals = (item.mechanismSignals ?? []).filter((signal) => signal.signalSide === 'option')
     const unresolvedClues: string[] = []
     const leftHighlights: SevenChoicesHighlightRange[] = []

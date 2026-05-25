@@ -54,7 +54,7 @@ for (const questionId of group.questionIds) {
   assert(optionText, `${questionId}: correct option label resolves to optionBank`)
   assert(normalize(optionText) === normalize(item.optionFit?.correctOptionText || optionText), `${questionId}: UI can derive option text from optionBank`)
 
-  const contextSignals = (item.mechanismSignals || []).filter((signal) => signal.signalSide === 'context')
+  const contextSignals = (item.mechanismSignals || []).filter((signal) => signal.signalSide === 'context-before' || signal.signalSide === 'context-after')
   const optionSignals = (item.mechanismSignals || []).filter((signal) => signal.signalSide === 'option')
   for (const signal of contextSignals) {
     assert(passageText.includes(signal.signalText), `${questionId}: context signal appears in passage: ${signal.signalText}`)

@@ -137,9 +137,25 @@ decide whether the blank has a solving mechanism. Topic and summary blanks also
 usually have a mechanism, often
 `seven-choices.cohesion.lexical.topic-field-alignment`.
 
-`mechanismSignals` is required when a blank uses grammatical cohesion through
-logical connectors or referential cohesion, whether the mechanism appears in
-`primaryMechanismFacet` or `supportingMechanismFacets`.
+Choose `primaryMechanismFacet` by this teaching priority:
+
+1. logical connector cohesion
+2. referential cohesion
+3. topic-field alignment
+
+Topic-field alignment can support a logical / referential blank, but it should
+not become primary when a real logical connector or reference relation is doing
+the main work.
+
+`mechanismSignals` is required for every blank. Each blank must have 2-5
+signals, with at least one `option` signal and at least one context-side signal
+(`context-before` or `context-after`).
+
+For logical connector cohesion, signals must include the logical connector and
+at least one logical object it connects to.
+
+For referential cohesion, signals must include the reference word and its
+antecedent / referent.
 
 For topic-field alignment, `mechanismSignals` must include at least one
 context-side signal and at least one option-side signal. These are the compact,
@@ -204,7 +220,7 @@ referential / topic-field work, where is it, and what does it connect to?
   {
     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
     "signalText": "hurts",
-    "signalSide": "context",
+    "signalSide": "context-after",
     "targetText": "uncomfortable",
     "relation": "hurts 与选项 uncomfortable 属于疼痛/不适话题场。"
   },
@@ -225,7 +241,7 @@ referential / topic-field work, where is it, and what does it connect to?
   {
     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
     "signalText": "these things",
-    "signalSide": "context",
+    "signalSide": "context-after",
     "targetText": "common mistakes",
     "relation": "these things 指代前文 common mistakes。"
   }
@@ -236,11 +252,16 @@ Rules:
 
 - `mechanismFacet` must be one of the valid mechanism facets above.
 - `signalText` is the exact word or phrase to highlight.
-- `signalSide` is `context` or `option`.
+- `signalSide` is `option`, `context-before`, or `context-after`.
 - `targetText` is the connected word or phrase, when useful.
 - `relation` explains the connection in Chinese.
 - For topic-field alignment, include both context-side and option-side signals
   when both sides have exact highlightable text.
+- `signalText` must be an exact substring of its source. `option` signals must
+  appear in the correct option; context-side signals must appear in the passage
+  or heading.
+- Prefer short `signalText` chunks, usually 1-8 English words. Use `targetText`
+  for larger explanation objects.
 - Do not put the whole broad topic-clue list here. Use `topicClues` for broader
   context-side topic-field clues.
 
@@ -266,6 +287,8 @@ Bad examples:
 The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
 `topicClues`.
 
+`topicClues` should contain 3-6 items per blank.
+
 ## Option Fit
 
 `optionFit` links the correct option to the context.
@@ -274,6 +297,8 @@ The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
   authoritative.
 - `matchedClues` should compare option-side language with context-side clues.
 - `fitSummary` explains the main solving move in Chinese.
+- `fitSummary` should be 1-2 Chinese sentences and explain why the correct
+  option fits this blank.
 
 ## Distractors
 
@@ -281,6 +306,11 @@ The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
 
 Use it only for the most teachable wrong options. Do not give distractors their
 own facet keys in v1.
+
+## Teaching Note
+
+`teachingNote` should be one Chinese sentence. It should state the transferable
+solving move, not repeat the whole `fitSummary`.
 
 ## Strictly Out Of Scope For I0-B
 

@@ -102,7 +102,7 @@ Accepted patch:
 - Each signal records:
   - `mechanismFacet`
   - `signalText`
-  - `signalSide`: `context` or `option`
+  - `signalSide`: `option`, `context-before`, or `context-after`
   - `targetText`, when useful
   - `relation`
 - `mechanismSignals` is for concrete highlightable cohesion signals, not broad
@@ -139,6 +139,41 @@ Accepted terminology:
 
 `contextEvidence` is not itself a clue type. It answers "where to look", not
 "what solved the blank".
+
+## I0-C++ Prompt Hardening Decisions
+
+During the 2026-05-25 / 2026-05-26 PM grill, the owner locked the following
+prompt rules before asking Claude lite to review the draft:
+
+- Generation priority is structure first, signal accuracy second, prose quality
+  third.
+- Every blank requires `primaryMechanismFacet`.
+- Primary mechanism follows a hard teaching priority:
+  1. logical connector cohesion
+  2. referential cohesion
+  3. topic-field alignment
+- `mechanismSignals.signalSide` uses three values: `option`,
+  `context-before`, and `context-after`.
+- Every blank needs 2-5 `mechanismSignals`.
+- Every blank needs at least one option-side signal and at least one
+  context-side signal.
+- `signalText` must be an exact substring of its source. Use `targetText` for
+  larger or composite explanation objects.
+- Logical connector blanks must include the logical connector and at least one
+  logical object.
+- Referential cohesion blanks must include the reference word and its
+  antecedent / referent.
+- Topic-field alignment blanks use compact matched word chunks as strong
+  signals. Broader语境 chunks stay in `topicClues`.
+- `topicClues` remains a string array and should contain 3-6 context-side items
+  per blank.
+- `optionFit.matchedClues` stays in the contract, but is for expanded detail
+  explanation, not highlighting.
+- `fitSummary` explains why this option fits this blank in 1-2 Chinese
+  sentences.
+- `teachingNote` gives one transferable solving move in one Chinese sentence.
+- `keyDistractors` is optional and allowed, but the prompt should not optimize
+  for distractor analysis in this version.
 
 ## Claude Lite CR Follow-Up
 

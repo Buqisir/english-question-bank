@@ -129,7 +129,7 @@
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "New Runners",
-          "signalSide": "context",
+          "signalSide": "context-before",
           "targetText": "you’re just starting out",
           "relation": "New Runners 与选项 you’re just starting out 指向刚开始跑步的人。"
         },
@@ -143,7 +143,7 @@
         {
           "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
           "signalText": "these things",
-          "signalSide": "context",
+          "signalSide": "context-after",
           "targetText": "common mistakes",
           "relation": "these things 指代前文 common mistakes，承接后文将要列出的错误。"
         }
@@ -198,7 +198,7 @@
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "Slowly easing into a training program",
-          "signalSide": "context",
+          "signalSide": "context-before",
           "targetText": "no more than 10%each week",
           "relation": "Slowly easing into a training program 与每周增加不超过 10% 都指向循序渐进训练。"
         },
@@ -258,7 +258,7 @@
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "give your body a rest between workouts",
-          "signalSide": "context",
+          "signalSide": "context-after",
           "targetText": "rest days",
           "relation": "give your body a rest between workouts 与选项 rest days 对应，说明本段主题是休息日。"
         },
@@ -330,7 +330,7 @@
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "right equipment",
-          "signalSide": "context",
+          "signalSide": "context-before",
           "targetText": "expensive equipment",
           "relation": "right equipment 与 expensive equipment 都属于本段装备话题场。"
         },
@@ -392,14 +392,14 @@
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "hurts",
-          "signalSide": "context",
+          "signalSide": "context-after",
           "targetText": "uncomfortable",
           "relation": "hurts 与选项 uncomfortable 属于疼痛/不适话题场。"
         },
         {
           "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "pain",
-          "signalSide": "context",
+          "signalSide": "context-before",
           "targetText": "uncomfortable",
           "relation": "pain 与 uncomfortable 呼应，说明本段围绕跑步疼痛展开。"
         },

@@ -38,7 +38,7 @@ Reason carefully internally about:
 - grammatical / lexical cohesion
 - topic clues from the context
 - correct-option fit
-- 1-2 teachable distractors
+- optional teachable distractors, only when genuinely useful
 - exact field names and enum values
 
 But output only the downloadable JSON file.
@@ -46,6 +46,15 @@ But output only the downloadable JSON file.
 If the supplied passage, option bank, questions, blanks, and answer labels are
 sufficient, generate the file immediately. Do not spend time on unrelated
 thinking, task restatement, process narration, or confirmation.
+
+Priority order:
+
+1. JSON structure and enum values must be valid.
+2. `mechanismSignals.signalText` must be exact and locatable.
+3. Chinese explanation quality comes after structure and signal accuracy.
+
+If you are unsure, preserve valid structure and exact signal text first. Do not
+write prettier prose at the cost of wrong fields or non-locatable signals.
 
 ## Required Top-Level Shape
 
@@ -191,13 +200,36 @@ Every blank MUST include primaryMechanismFacet.
 answers how the blank is solved. Topic and summary blanks still need a solving
 mechanism, usually `seven-choices.cohesion.lexical.topic-field-alignment`.
 
+Choose `primaryMechanismFacet` by this hard priority order:
+
+1. If the correct option and the before / after context form a clear logical
+   connector relation, use
+   `seven-choices.cohesion.grammatical.logical-connector`.
+2. Otherwise, if they form a clear referential relation, use
+   `seven-choices.cohesion.grammatical.referential-cohesion`.
+3. Otherwise, use `seven-choices.cohesion.lexical.topic-field-alignment`.
+
+Topic-field alignment can be supporting evidence, but it must not override a
+real logical connector or referential mechanism as the primary mechanism.
+
 - `supportingMechanismFacets` is optional and may contain at most 2 items.
-- `mechanismSignals` is required when the blank uses
-  `seven-choices.cohesion.grammatical.logical-connector` or
-  `seven-choices.cohesion.grammatical.referential-cohesion`, whether the
-  mechanism is primary or supporting.
-- For topic-field alignment, `mechanismSignals` MUST include at least one
-  context-side signal and at least one option-side signal.
+- `mechanismSignals` is required for every blank.
+- Each blank must have 2-5 `mechanismSignals`.
+- Each blank must include at least one option-side signal and at least one
+  context-side signal (`context-before` or `context-after`).
+- A logical-connector blank must include the logical connector and at least one
+  logical object it connects to.
+- A referential-cohesion blank must include the reference word and its
+  antecedent / referent.
+- A topic-field-alignment blank must include compact matched word chunks from
+  both the context side and option side.
+
+Common logical connectors include, but are not limited to: if, while, however,
+therefore, so, also, instead, for example, in addition, as a result, because,
+although, but, yet.
+
+Common reference words include, but are not limited to: this, that, these,
+those, it, they, such, one, ones, the former, the latter.
 
 ## Mechanism Signals
 
@@ -208,9 +240,23 @@ Each item must include:
 
 - `mechanismFacet`
 - `signalText`
-- `signalSide`: `context` or `option`
+- `signalSide`: `option`, `context-before`, or `context-after`
 - `targetText` when useful
 - `relation` in Chinese
+
+`signalText` rules:
+
+- It MUST be an exact substring of its source.
+- `option` signal text must appear in the correct option.
+- `context-before` / `context-after` signal text must appear in the passage or
+  heading.
+- Prefer short chunks, usually 1-8 English words.
+- Logical connectors and reference words may be a single word.
+- Do not put a whole sentence or paragraph in `signalText`; use `targetText`
+  for larger explanation objects.
+
+`targetText` may be a summary or multi-part explanation. It does not need to be
+independently highlightable.
 
 Examples:
 
@@ -219,7 +265,7 @@ Examples:
   {
     "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
     "signalText": "hurts",
-    "signalSide": "context",
+    "signalSide": "context-after",
     "targetText": "uncomfortable",
     "relation": "hurts 与选项 uncomfortable 属于疼痛/不适话题场。"
   },
@@ -240,15 +286,16 @@ Examples:
   {
     "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
     "signalText": "these things",
-    "signalSide": "context",
+    "signalSide": "context-after",
     "targetText": "common mistakes",
     "relation": "these things 指代前文 common mistakes。"
   }
 ]
 ```
 
-For topic-field alignment, put only the compact matched words or chunks in
-`mechanismSignals`. Put the broader context-side clue set in `topicClues`.
+For topic-field alignment, put only the compact matched words or chunks that
+decide the answer in `mechanismSignals`. Put the broader context-side clue set
+in `topicClues`.
 
 ## Topic Clues
 
@@ -259,6 +306,7 @@ unit that belong to the same topic field and help solve the blank.
 
 Rules:
 
+- Include 3-6 items per blank.
 - Include nearby context / heading clues only.
 - Do NOT include words that appear only in the correct option.
 - Do NOT collect generic high-frequency words.
@@ -286,6 +334,8 @@ The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
 - `correctOptionLabel` must match the supplied answer label.
 - `matchedClues` must compare option-side language with context-side clues.
 - `fitSummary` must explain the main solving move in Chinese.
+- `fitSummary` should be 1-2 Chinese sentences. It explains why this option
+  fits this blank.
 
 ## Distractors
 
@@ -293,6 +343,14 @@ The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
 
 Use it only for the most teachable wrong options. Do NOT give distractors their
 own facet keys.
+
+Do not spend effort filling distractors if it harms the correct-option signal
+quality. The current surface does not display distractors.
+
+## Teaching Note
+
+`teachingNote` should be one Chinese sentence. It should state the transferable
+solving move, not repeat the whole `fitSummary`.
 
 ## Strictly Forbidden
 

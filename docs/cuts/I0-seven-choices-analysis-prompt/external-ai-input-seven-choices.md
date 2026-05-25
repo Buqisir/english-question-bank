@@ -85,8 +85,7 @@ For every blank/question, include:
 - `supportingMechanismFacets` when useful, max 2
 - `topicClues`
 - `contextEvidence`
-- `mechanismSignals` when the blank uses logical connector or referential
-  cohesion
+- `mechanismSignals` (required for every blank; see signal rules below)
 - `optionFit`
 - optional `keyDistractors`, max 2
 - `teachingNote`
@@ -117,14 +116,21 @@ Mechanism rules:
   blank is solved.
 - Topic and summary blanks usually use
   `seven-choices.cohesion.lexical.topic-field-alignment`.
+- Choose `primaryMechanismFacet` by hard priority:
+  1. logical connector cohesion
+  2. referential cohesion
+  3. topic-field alignment
 - `supportingMechanismFacets` may contain at most 2 items.
-- `mechanismSignals` is required when a blank uses
-  `seven-choices.cohesion.grammatical.logical-connector` or
-  `seven-choices.cohesion.grammatical.referential-cohesion`, whether the
-  mechanism is primary or supporting.
-- For `seven-choices.cohesion.lexical.topic-field-alignment`,
-  `mechanismSignals` must include at least one context-side signal and at least
-  one option-side signal.
+- `mechanismSignals` is required for every blank.
+- Each blank must have 2-5 `mechanismSignals`.
+- Each blank must include at least one `option` signal and at least one
+  `context-before` or `context-after` signal.
+- Logical connector blanks must include the logical connector and at least one
+  logical object it connects to.
+- Referential cohesion blanks must include the reference word and its
+  antecedent / referent.
+- Topic-field alignment blanks must include compact matched word chunks from
+  both context and option sides.
 
 `mechanismSignals` rules:
 
@@ -132,13 +138,16 @@ Mechanism rules:
   concrete cohesion signal that should be highlightable.
 - Each item includes `mechanismFacet`, `signalText`, `signalSide`,
   `targetText`, and `relation`.
-- `signalSide` must be `context` or `option`.
+- `signalSide` must be `option`, `context-before`, or `context-after`.
+- `signalText` must be an exact substring of its source. Prefer 1-8 English
+  words. Use `targetText` for larger explanation objects.
 - For topic-field alignment, put compact matched words/chunks in
   `mechanismSignals`; put broader context clue sets in `topicClues`.
 
 `topicClues` rules:
 
 - Required for every blank.
+- Include 3-6 items per blank.
 - Include only context-side word chunks from nearby passage text or heading.
 - Do not include words that appear only in the correct option.
 
@@ -147,6 +156,9 @@ Mechanism rules:
 - `correctOptionLabel` must match the supplied answer label.
 - `matchedClues` must compare option-side language with context-side clues.
 - `fitSummary` must explain the main solving move in Chinese.
+- `fitSummary` should be 1-2 Chinese sentences.
+- `teachingNote` should be one Chinese sentence and should state the
+  transferable solving move.
 
 Do not invent IDs. Use only the source data below.
 

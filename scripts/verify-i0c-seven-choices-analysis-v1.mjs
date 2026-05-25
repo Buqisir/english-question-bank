@@ -42,7 +42,8 @@ const requiredSignalMechanisms = new Set([
 
 const topicFieldMechanism = 'seven-choices.cohesion.lexical.topic-field-alignment'
 
-const signalSides = new Set(['context', 'option'])
+const contextSignalSides = new Set(['context-before', 'context-after'])
+const signalSides = new Set(['context-before', 'context-after', 'option'])
 
 const failures = []
 
@@ -110,6 +111,7 @@ function selfCheck() {
   })
 
   const prompt = readFileSync(resolve(ROOT, 'prompts/seven-choices-analysis-v1.md'), 'utf8')
+  const normalizedPrompt = prompt.replace(/\s+/g, ' ')
   assert(prompt.includes('downloadable `.json` file'), 'prompt requires downloadable JSON file')
   assert(prompt.includes('Do NOT output JSON in chat'), 'prompt forbids chat JSON')
   assert(prompt.includes('UNABLE_TO_CREATE_FILE'), 'prompt has no JSON fallback and defines failure token')
@@ -121,6 +123,11 @@ function selfCheck() {
   assert(prompt.includes('mechanismSignals'), 'prompt includes mechanismSignals field')
   assert(prompt.includes('Every blank MUST include primaryMechanismFacet'), 'prompt requires primaryMechanismFacet for every blank')
   assert(prompt.includes('For topic-field alignment'), 'prompt requires paired topic-field signals')
+  assert(prompt.includes('hard priority order'), 'prompt defines primary mechanism priority')
+  assert(prompt.includes('2-5 `mechanismSignals`'), 'prompt requires bounded mechanismSignals')
+  assert(normalizedPrompt.includes('at least one option-side signal'), 'prompt requires option-side signal')
+  assert(normalizedPrompt.includes('at least one context-side signal'), 'prompt requires context-side signal')
+  assert(prompt.includes('1-8 English words'), 'prompt prefers short signalText chunks')
   assert(!prompt.includes('topic-word-echo'), 'prompt excludes stale topic-word-echo key')
   assert(!prompt.includes('pronoun-reference'), 'prompt excludes stale pronoun-reference key')
 
@@ -199,24 +206,32 @@ function validateAnalysis(analysisPath) {
     const correctOptionText = normalize(optionByLabel.get(correctLabel))
     const activeMechanisms = [item.primaryMechanismFacet, ...supporting].filter(Boolean)
     const mechanismSignals = Array.isArray(item.mechanismSignals) ? item.mechanismSignals : []
+    assert(mechanismSignals.length >= 2 && mechanismSignals.length <= 5, `${questionId}: mechanismSignals length is 2-5`)
+    assert(mechanismSignals.some((signal) => signal.signalSide === 'option'), `${questionId}: mechanismSignals include option-side signal`)
+    assert(mechanismSignals.some((signal) => contextSignalSides.has(signal.signalSide)), `${questionId}: mechanismSignals include context-side signal`)
     const needsSignal = activeMechanisms.some((facet) => requiredSignalMechanisms.has(facet))
     if (needsSignal) {
       assert(mechanismSignals.length > 0, `${questionId}: grammatical cohesion has mechanismSignals`)
     }
+    requiredSignalMechanisms.forEach((facet) => {
+      if (activeMechanisms.includes(facet)) {
+        assert(mechanismSignals.some((signal) => signal.mechanismFacet === facet), `${questionId}: active grammatical mechanism has matching signal ${facet}`)
+      }
+    })
     if (activeMechanisms.includes(topicFieldMechanism)) {
       const topicSignals = mechanismSignals.filter((signal) => signal.mechanismFacet === topicFieldMechanism)
-      assert(topicSignals.some((signal) => signal.signalSide === 'context'), `${questionId}: topic-field alignment has context-side mechanismSignal`)
+      assert(topicSignals.some((signal) => contextSignalSides.has(signal.signalSide)), `${questionId}: topic-field alignment has context-side mechanismSignal`)
       assert(topicSignals.some((signal) => signal.signalSide === 'option'), `${questionId}: topic-field alignment has option-side mechanismSignal`)
     }
     for (const signal of mechanismSignals) {
       assert(mechanismFacets.has(signal.mechanismFacet), `${questionId}: mechanismSignal has valid mechanismFacet`)
       assert(activeMechanisms.includes(signal.mechanismFacet), `${questionId}: mechanismSignal facet is active on question`)
       assert(optionalString(signal.signalText), `${questionId}: mechanismSignal.signalText exists`)
-      assert(signalSides.has(signal.signalSide), `${questionId}: mechanismSignal.signalSide is context or option`)
+      assert(signalSides.has(signal.signalSide), `${questionId}: mechanismSignal.signalSide is option, context-before, or context-after`)
       assert(optionalString(signal.relation), `${questionId}: mechanismSignal.relation exists`)
       assert(!containsBlankMarker(questionId, signal.signalText), `${questionId}: mechanismSignal.signalText excludes blank marker`)
       const signalText = normalize(signal.signalText)
-      if (signal.signalSide === 'context') {
+      if (contextSignalSides.has(signal.signalSide)) {
         assert(passageText.includes(signalText), `${questionId}: context-side mechanismSignal appears in passage: ${signal.signalText}`)
       } else if (correctOptionText) {
         assert(correctOptionText.includes(signalText), `${questionId}: option-side mechanismSignal appears in correct option: ${signal.signalText}`)
@@ -227,7 +242,7 @@ function validateAnalysis(analysisPath) {
       }
     }
 
-    assert(Array.isArray(item.topicClues) && item.topicClues.length > 0, `${questionId}: topicClues non-empty`)
+    assert(Array.isArray(item.topicClues) && item.topicClues.length >= 3 && item.topicClues.length <= 6, `${questionId}: topicClues length is 3-6`)
     for (const clue of item.topicClues || []) {
       const normalizedClue = normalize(clue)
       assert(normalizedClue.length > 0, `${questionId}: topicClue is non-empty`)
