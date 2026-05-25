@@ -1,7 +1,7 @@
 /**
  * ConciergeGroupCard — a single 题组/篇章 card rendered INSIDE the expanded
  * area of a paper bucket row. Carries the per-group reason and the two
- * teacher-facing actions (加入草稿卷, 找类似), plus a lightweight 阅读解析
+ * teacher-facing actions (加入草稿卷, 找类似), plus a lightweight PaperSurface
  * entry (Cut 3) for groups that are eligible.
  *
  * Smallest add unit is still QuestionGroup. There is no per-question add UI.
@@ -82,8 +82,10 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
   const pills = buildTagPills(group)
-  const readingAnalysisHref =
-    group.hasPaperSurfaceAnalysis && group.paperSurfaceHref ? group.paperSurfaceHref : null
+  const paperSurfaceAnalysisHref =
+    group.hasPaperSurfaceAnalysis && group.paperSurfaceHref && group.paperSurfaceLabel
+      ? group.paperSurfaceHref
+      : null
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
   const draftButtonLabel =
     draftState === 'in_current_draft'
@@ -152,18 +154,18 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         >
           找类似
         </button>
-        {readingAnalysisHref && (
+        {paperSurfaceAnalysisHref && (
           // Lightweight link, NOT a button — opens the analysis route in
           // the same tab. Reuses `.concierge-action` styling so it visually
           // belongs to the same row of group actions but doesn't compete
           // with the primary 加入草稿卷.
           <a
             className="concierge-action concierge-action-reading-analysis"
-            href={readingAnalysisHref}
+            href={paperSurfaceAnalysisHref}
             data-ra-entry="group-card"
             data-ra-group-id={group.id}
           >
-            阅读解析
+            {group.paperSurfaceLabel}
           </a>
         )}
       </div>

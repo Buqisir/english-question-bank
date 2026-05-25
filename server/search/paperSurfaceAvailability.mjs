@@ -2,6 +2,21 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
+const analysisConfigs = [
+  {
+    schemaVersion: 'reading-choice-analysis-v1',
+    fileName: 'reading-choice-analysis-v1.json',
+    groupType: 'reading',
+    label: '阅读解析',
+  },
+  {
+    schemaVersion: 'seven-choices-analysis-v1',
+    fileName: 'seven-choices-analysis-v1.json',
+    groupType: 'sevenChoices',
+    label: '七选五解析',
+  },
+]
+
 function readJsonFile(filePath) {
   return JSON.parse(readFileSync(filePath, 'utf8'))
 }
@@ -26,6 +41,35 @@ function buildPaperSurfaceHref(args) {
 export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = console.warn }) {
   let availabilityByGroupIdCache = null
 
+  function addAvailabilityForAnalysis({ availabilityByGroupId, asset, analysis, config, paperId }) {
+    if (analysis?.schemaVersion !== config.schemaVersion) return
+    if (analysis?.paperId !== paperId) return
+
+    const groups = asset?.content?.groups && typeof asset.content.groups === 'object'
+      ? Object.values(asset.content.groups)
+      : []
+    for (const group of groups) {
+      const groupId = String(group?.groupId || '')
+      const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+      if (!groupId || group?.groupType !== config.groupType || questionIds.length === 0) continue
+      if (Array.isArray(analysis?.targetGroups) && !analysis.targetGroups.includes(groupId)) continue
+      const hasReviewedAnalysisForEveryQuestion = questionIds.every((questionId) =>
+        Boolean(analysis?.questions?.[questionId]),
+      )
+      if (!hasReviewedAnalysisForEveryQuestion) continue
+
+      availabilityByGroupId.set(groupId, {
+        href: buildPaperSurfaceHref({
+          source: 'paper-asset',
+          paperId,
+          groupId,
+          questionId: questionIds[0],
+        }),
+        label: config.label,
+      })
+    }
+  }
+
   function getByGroupId() {
     if (availabilityByGroupIdCache) {
       return availabilityByGroupIdCache
@@ -41,36 +85,23 @@ export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = 
       if (!entry.isDirectory()) continue
 
       const assetDir = path.join(paperAssetsDir, entry.name)
-      const { assetPath, analysisPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
-      if (!existsSync(assetPath) || !existsSync(analysisPath)) continue
+      const { assetPath, baseDir } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
+      if (!existsSync(assetPath)) continue
 
       try {
         const asset = readJsonFile(assetPath)
-        const analysis = readJsonFile(analysisPath)
         const paperId = String(asset?.paper?.paperId || entry.name)
-        if (analysis?.schemaVersion !== 'reading-choice-analysis-v1') continue
-        if (analysis?.paperId !== paperId) continue
 
-        const groups = asset?.content?.groups && typeof asset.content.groups === 'object'
-          ? Object.values(asset.content.groups)
-          : []
-        for (const group of groups) {
-          const groupId = String(group?.groupId || '')
-          const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
-          if (!groupId || group?.groupType !== 'reading' || questionIds.length === 0) continue
-          if (Array.isArray(analysis?.targetGroups) && !analysis.targetGroups.includes(groupId)) continue
-          const hasReviewedAnalysisForEveryQuestion = questionIds.every((questionId) =>
-            Boolean(analysis?.questions?.[questionId]),
-          )
-          if (!hasReviewedAnalysisForEveryQuestion) continue
-
-          availabilityByGroupId.set(groupId, {
-            href: buildPaperSurfaceHref({
-              source: 'paper-asset',
-              paperId,
-              groupId,
-              questionId: questionIds[0],
-            }),
+        for (const config of analysisConfigs) {
+          const analysisPath = path.join(baseDir, 'analyses', config.fileName)
+          if (!existsSync(analysisPath)) continue
+          const analysis = readJsonFile(analysisPath)
+          addAvailabilityForAnalysis({
+            availabilityByGroupId,
+            asset,
+            analysis,
+            config,
+            paperId,
           })
         }
       } catch (error) {

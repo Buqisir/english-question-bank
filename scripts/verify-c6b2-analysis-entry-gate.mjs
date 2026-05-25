@@ -58,6 +58,9 @@ const allowedChangedFiles = new Set([
   'app/src/concierge/ConciergeGroupCard.tsx',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'server/api.mjs',
+  'server/search/paperSurfaceAvailability.mjs',
+  'scripts/README.md',
+  'scripts/verify-ci.mjs',
   'scripts/verify-c6a3-reading-analysis-bridge.mjs',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
@@ -113,21 +116,22 @@ assert(
 assert('route still exports generic buildPaperSurfaceHref', /export function buildPaperSurfaceHref/.test(routeSource))
 
 const serverSource = read('server/api.mjs')
+const availabilitySource = read('server/search/paperSurfaceAvailability.mjs')
 assert(
-  'server scans paper-assets directory',
-  serverSource.includes("app/public/paper-assets") && serverSource.includes('paper-asset.json'),
+  'availability owner scans paper-assets directory',
+  serverSource.includes("app/public/paper-assets") && availabilitySource.includes('assetPath'),
 )
 assert(
-  'server reads reviewed reading-choice analysis file',
-  serverSource.includes('reading-choice-analysis-v1.json') && serverSource.includes('reading-choice-analysis-v1'),
+  'availability owner reads reviewed reading-choice analysis file',
+  availabilitySource.includes('reading-choice-analysis-v1.json') && availabilitySource.includes('reading-choice-analysis-v1'),
 )
 assert(
-  'server checks every group question has reviewed analysis',
-  /questionIds\.every\(\(questionId\)\s*=>[\s\S]{0,120}analysis\?\.questions\?\.\[questionId\]/.test(serverSource),
+  'availability owner checks every group question has reviewed analysis',
+  /questionIds\.every\(\(questionId\)\s*=>[\s\S]{0,120}analysis\?\.questions\?\.\[questionId\]/.test(availabilitySource),
 )
 assert('server writes hasPaperSurfaceAnalysis field', serverSource.includes('hasPaperSurfaceAnalysis: Boolean'))
 assert('server writes paperSurfaceHref field', serverSource.includes('paperSurfaceHref: paperSurfaceAnalysis?.href'))
-assert('server builds paper-asset hrefs, not legacy-report hrefs', serverSource.includes("source: 'paper-asset'"))
+assert('availability owner builds paper-asset hrefs, not legacy-report hrefs', availabilitySource.includes("source: 'paper-asset'"))
 
 const assetRelPath = 'app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'
 const analysisRelPath = 'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json'

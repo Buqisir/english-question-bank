@@ -27,6 +27,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
 | `verify-h1c-paper-import-routes.mjs` | H1-C Paper Import route extraction contract | yes |
 | `verify-h1d-analysis-availability.mjs` | H1-D PaperSurface analysis availability owner contract | yes |
+| `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
 | `verify-h1e-export-routes.mjs` | H1-E export route dispatch contract | yes |
 | `verify-h5a-export-implementation.mjs` | H5-A export implementation extraction contract | yes |
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
@@ -51,6 +52,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-paper-intelligence-paper-surface-evidence.mjs` | Evidence-line behavior | no |
 | `verify-paper-intelligence-paper-surface-insight.mjs` | Insight panel behavior | no |
 | `verify-paper-intelligence-route-integration.mjs` | Paper Intelligence route integration | no |
+| `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
 
 ## C5 / C6 reading-analysis cuts
 

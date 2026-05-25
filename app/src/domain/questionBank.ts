@@ -48,6 +48,7 @@ export type QuestionGroupCard = {
   defaultScore: number
   hasPaperSurfaceAnalysis?: boolean
   paperSurfaceHref?: string | null
+  paperSurfaceLabel?: string | null
   canAddToDraftPaper: boolean
   draftPaperButtonState: 'add' | 'in_current_draft' | 'disabled'
   currentDraftPaperId: string | null

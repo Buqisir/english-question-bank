@@ -1197,11 +1197,129 @@ function rowToQuestionGroupCard(
     defaultScore: row.default_score,
     hasPaperSurfaceAnalysis: Boolean(paperSurfaceAnalysis?.href),
     paperSurfaceHref: paperSurfaceAnalysis?.href || null,
+    paperSurfaceLabel: paperSurfaceAnalysis?.label || null,
     canAddToDraftPaper: printReady.ok && draftPaperButtonState === 'add',
     draftPaperButtonState,
     currentDraftPaperId: draftContext.currentDraftPaperId,
     printUnavailableReason: printReady.ok ? null : printReady.reason,
   }
+}
+
+function paperAssetExamYear(asset) {
+  const text = [asset?.paper?.paperId, asset?.paper?.title, asset?.paper?.source].join(' ')
+  const match = text.match(/\b(20\d{2})\b/)
+  return match ? Number(match[1]) : new Date().getFullYear()
+}
+
+function paperAssetRegion(asset) {
+  const source = String(asset?.paper?.source || '')
+  if (source.includes('九省')) return '九省联考'
+  if (source.includes('新课标')) return '新课标'
+  return '未标地区'
+}
+
+function paperAssetGroupSection(group) {
+  const groupType = normalizePaperAssetGroupType(group?.groupType)
+  const title = String(group?.title || '').trim()
+  const readingMatch = title.match(/Reading\s*([A-G])/i)
+  if (groupType === 'reading' && readingMatch) return `阅读理解 ${readingMatch[1].toUpperCase()}`
+  if (groupType === 'seven_choices') return '七选五'
+  return title || groupTypeLabels[groupType] || '题组'
+}
+
+function paperAssetPassageTitle(group) {
+  const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
+  const first = String(paragraphs[0]?.text || '').trim()
+  const title = String(group?.title || '').trim()
+  return first || title || '篇章题组'
+}
+
+function paperAssetSummary(group) {
+  const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
+  return paragraphs
+    .slice(0, 2)
+    .map((paragraph) => String(paragraph?.text || '').trim())
+    .filter(Boolean)
+    .join(' ')
+    .slice(0, 180)
+}
+
+function paperAssetFirstQuestionHit(asset, group) {
+  const questionId = Array.isArray(group?.questionIds) ? String(group.questionIds[0] || '') : ''
+  const question = questionId ? asset?.content?.questions?.[questionId] : null
+  return String(question?.stem ?? question?.blankId ?? question?.questionNo ?? '').trim()
+}
+
+function paperAssetAnswerPreview(asset, group) {
+  const questionId = Array.isArray(group?.questionIds) ? String(group.questionIds[0] || '') : ''
+  const answer = questionId ? asset?.answerKey?.answers?.[questionId] : null
+  return String(answer?.answer || '').trim()
+}
+
+function buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext) {
+  const groupId = String(group?.groupId || '')
+  const groupType = normalizePaperAssetGroupType(group?.groupType) || 'other'
+  const printReady = getPaperAssetPrintReady(asset, group)
+  const draftPaperButtonState = buildDraftButtonState(printReady, draftContext, groupId)
+  const section = paperAssetGroupSection(group)
+  const passageTitle = paperAssetPassageTitle(group)
+  const paperTitle = String(asset?.paper?.title || 'paper-asset 试卷').trim()
+  const source = String(asset?.paper?.source || '').trim()
+  const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
+
+  return {
+    id: groupId,
+    title: `${source || paperTitle} ${section}`.trim(),
+    source: source || paperTitle,
+    sourceType: 'real_exam',
+    year: paperAssetExamYear(asset),
+    region: paperAssetRegion(asset),
+    paperName: paperTitle,
+    section,
+    passageTitle,
+    summary: paperAssetSummary(group),
+    groupType,
+    questionCount: questionIds.length,
+    difficulty: 'medium',
+    tags: [paperAssetRegion(asset), groupTypeLabels[groupType]].filter(Boolean),
+    topicLabels: [],
+    hit: paperAssetFirstQuestionHit(asset, group),
+    answerPreview: paperAssetAnswerPreview(asset, group),
+    defaultScore: groupType === 'seven_choices' ? 2.5 : 2.5,
+    hasPaperSurfaceAnalysis: Boolean(paperSurfaceAnalysis?.href),
+    paperSurfaceHref: paperSurfaceAnalysis?.href || null,
+    paperSurfaceLabel: paperSurfaceAnalysis?.label || null,
+    canAddToDraftPaper: printReady.ok && draftPaperButtonState === 'add',
+    draftPaperButtonState,
+    currentDraftPaperId: draftContext.currentDraftPaperId,
+    printUnavailableReason: printReady.ok ? null : printReady.reason,
+  }
+}
+
+function listPaperAssetAnalysisGroupCards(paperSurfaceAnalysisAvailabilityByGroupId, draftContext, existingGroupIds = new Set()) {
+  if (!existsSync(paperAssetsDir)) return []
+  const cards = []
+  for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
+    if (!existsSync(assetPath)) continue
+    try {
+      const asset = readJsonFile(assetPath)
+      const groups = asset?.content?.groups && typeof asset.content.groups === 'object'
+        ? Object.values(asset.content.groups)
+        : []
+      for (const group of groups) {
+        const groupId = String(group?.groupId || '')
+        if (!groupId || existingGroupIds.has(groupId)) continue
+        const paperSurfaceAnalysis = paperSurfaceAnalysisAvailabilityByGroupId.get(groupId)
+        if (!paperSurfaceAnalysis?.href || !paperSurfaceAnalysis?.label) continue
+        cards.push(buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext))
+      }
+    } catch {
+      // Invalid paper assets are ignored here; import validation owns data errors.
+    }
+  }
+  return cards
 }
 
 function selectQuestionGroupCards(db, whereClause = '', params = []) {
@@ -1239,13 +1357,21 @@ function selectQuestionGroupCards(db, whereClause = '', params = []) {
   const paperSurfaceAnalysisAvailabilityByGroupId = getPaperSurfaceAnalysisAvailabilityByGroupId()
   const draftContext = getDraftSearchContext(db)
 
-  return rows.map((row) => {
+  const cards = rows.map((row) => {
     const printReady = isGroupPrintReady(db, row.id)
     return rowToQuestionGroupCard({
       ...row,
       topicLabels: topicLabelsByGroupId.get(row.id) || [],
     }, paperSurfaceAnalysisAvailabilityByGroupId, draftContext, printReady)
   })
+  if (!whereClause) {
+    cards.push(...listPaperAssetAnalysisGroupCards(
+      paperSurfaceAnalysisAvailabilityByGroupId,
+      draftContext,
+      new Set(cards.map((card) => card.id)),
+    ))
+  }
+  return cards
 }
 
 function listQuestionGroups() {
