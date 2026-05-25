@@ -1461,7 +1461,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-structure-rows {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   margin-top: 6px;
 }
 
@@ -1475,31 +1475,29 @@ button.pi-ps-analysis-distractor--selected {
   text-align: left;
   color: var(--pi-ps-insight-muted-ink, #6f665a);
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 5px;
+  border: 0;
+  border-radius: 0;
   cursor: pointer;
-  transition: background 0.1s, border-color 0.1s, color 0.1s;
+  transition: color 0.1s;
 }
 
 .pi-ps-structure-row:hover {
-  background: rgba(255, 255, 255, 0.34);
-  border-color: rgba(126, 104, 78, 0.10);
+  background: transparent;
   color: var(--pi-ps-insight-ink, #2f2923);
 }
 
 .pi-ps-structure-row:focus-visible {
   outline: 2px solid var(--pi-ps-insight-active-border, #7a6a58);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 
 .pi-ps-structure-row--active {
-  background: rgba(47, 41, 35, 0.055);
-  border-color: rgba(126, 104, 78, 0.14);
+  background: transparent;
   color: var(--pi-ps-insight-ink, #2f2923);
 }
 
 .pi-ps-structure-row--active:hover {
-  background: rgba(47, 41, 35, 0.075);
+  background: transparent;
 }
 
 .pi-ps-structure-row-badge {
@@ -1520,7 +1518,7 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-ps-structure-row--active .pi-ps-structure-row-badge {
   color: var(--pi-ps-insight-ink, #2f2923);
-  background: rgba(47, 41, 35, 0.12);
+  background: rgba(47, 41, 35, 0.08);
 }
 
 .pi-ps-structure-row-text {
