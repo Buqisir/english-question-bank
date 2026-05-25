@@ -52,14 +52,16 @@ of duplicating workflow or browser rules.
   `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md`.
 - Cut artifact naming is intentionally simple for new cuts:
-  `goal.md` for the DEV execution contract, `pa.md` for formal PA,
+  `plan.md` for the DEV execution contract, `pa.md` for formal PA,
   `cr.md` for formal CR / Big CR, optional `pa-prompt.md` /
   `cr-prompt.md` only when a prompt must be archived, and
-  `cut-note.md` for large-cut closeout. Do not rename historical cut
-  artifacts only to match this convention.
+  `cut-note.md` for large-cut closeout. Historical cuts may use the
+  legacy `goal.md` name; do not rename historical artifacts only to match
+  this convention. The names `goal` and `loop` are reserved for run-mode
+  commands and must not be used as document names in new cuts.
 - Small cuts should not create `docs/cuts/<CUT>/` ceremony. Medium cuts
-  require a committed `goal.md` before DEV. Large cuts require committed
-  `goal.md`, formal PA / CR records as applicable, and `cut-note.md`
+  require a committed `plan.md` before DEV. Large cuts require committed
+  `plan.md`, formal PA / CR records as applicable, and `cut-note.md`
   before closeout.
 - Cut decision ledgers should expose freshness. New `decisions.md`
   files should include `Last synced` and
@@ -193,3 +195,4 @@ Use the default local triage vocabulary: `needs-triage`, `needs-info`, `ready-fo
 ### Domain docs
 
 Single-context project. Read `CONTEXT.md` and relevant ADRs under `docs/adr/` before changing product structure, domain model, tests, or architecture. See `docs/agents/domain.md`.
+

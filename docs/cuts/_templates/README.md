@@ -20,7 +20,8 @@ Use the smallest file set that preserves the work:
 
 ```text
 docs/cuts/<cut-id>/
-  goal.md       # DEV execution contract; required before medium/large DEV
+  plan.md       # DEV execution contract; required before medium/large DEV
+                # (historical cuts may use the legacy name `goal.md`)
   decisions.md  # accepted product / architecture decisions, when decisions exist
   pa.md         # formal PA report; required for large PA, optional otherwise
   cr.md         # formal CR / Big CR report; required for large/high-risk CR
@@ -36,8 +37,11 @@ Optional prompt archive files:
 ```
 
 If external AI input material is substantial and worth preserving, prefer
-including it inside `pa-prompt.md`, `cr-prompt.md`, or `goal.md` rather than
+including it inside `pa-prompt.md`, `cr-prompt.md`, or `plan.md` rather than
 creating another generic context file. Avoid vague names such as `context.md`.
+
+The names `goal` and `loop` are reserved for run-mode commands and must not be
+used as document names in new cuts.
 
 ## Review Naming
 
@@ -46,12 +50,12 @@ creating another generic context file. Avoid vague names such as `context.md`.
 - Formal CR / Big CR reports use `cr.md`.
 - CR-lite findings for routine small / medium PRs may live in the PR
 description or final Codex summary instead of `cr.md`.
-- PA-lite findings may be compressed into `goal.md` / `decisions.md` instead of
+- PA-lite findings may be compressed into `plan.md` / `decisions.md` instead of
 creating `pa.md`, unless the review itself is an important handoff artifact.
 
 ## Commit Rules
 
-- Commit `goal.md` before starting medium / large DEV.
+- Commit `plan.md` before starting medium / large DEV.
 - Commit `pa.md` / `cr.md` when they are formal external review records.
 - Commit `cut-note.md` before closing a large cut.
 - Do not commit prompt files merely because they existed in chat; commit them
@@ -76,7 +80,7 @@ instead of writing files.
 ## Ten Hard Rules
 
 1. Small cuts do not create `docs/cuts/<cut-id>/` by default.
-2. Medium / large cuts must commit `goal.md` before DEV starts.
+2. Medium / large cuts must commit `plan.md` before DEV starts.
 3. Formal PA reports are named `pa.md`.
 4. Formal CR / Big CR reports are named `cr.md`.
 5. Routine CR-lite can stay in the PR description or Codex final summary.
