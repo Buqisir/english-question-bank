@@ -22,6 +22,7 @@ export type PaperSurfaceHostInteractionAction =
       optionLabel?: string | null
       evidenceId?: string | null
     }
+  | { type: 'clear-lecture-focus' }
   | { type: 'seed-support-evidence'; evidenceId: string | null }
   | { type: 'seed-option-evidence'; optionLabel: string | null; evidenceId: string | null }
   | { type: 'select-option-evidence'; optionLabel: string; evidenceId: string | null }
@@ -55,6 +56,14 @@ export function paperSurfaceHostInteractionReducer(
   action: PaperSurfaceHostInteractionAction,
 ): PaperSurfaceHostInteractionState {
   switch (action.type) {
+    case 'clear-lecture-focus': {
+      return {
+        ...state,
+        activeQuestionId: null,
+        activeEvidenceId: null,
+        activeOptionLabel: null,
+      }
+    }
     case 'request-lecture-focus': {
       const shouldClearLegacyFocus =
         state.activeQuestionId === action.questionId &&

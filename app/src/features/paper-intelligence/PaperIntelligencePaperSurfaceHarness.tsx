@@ -132,12 +132,21 @@ import { HarnessStructureRows } from './insight/HarnessStructureRows'
 import { StructureBraceOverlay } from './structureBrace'
 import { LegacyAnalysisPanel } from './LegacyAnalysisPanel'
 import { PaperAssetAnalysisPanel } from './PaperAssetAnalysisPanel'
+import { SevenChoicesAnalysisPanel } from './SevenChoicesAnalysisPanel'
 import {
   buildPaperAssetSurfaceModel,
   type PaperAssetQuestionAnalysisView,
   type PaperAssetSurfaceModel,
   type ReviewedReadingChoiceAnalysisV1,
 } from './paperAssetSurfaceAdapter.ts'
+import {
+  buildSevenChoicesSurfaceModel,
+  type ReviewedSevenChoicesAnalysisV1,
+  type SevenChoicesSurfaceModel,
+} from './sevenChoicesSurfaceAdapter.ts'
+import {
+  useSevenChoicesPaperHighlights,
+} from './useSevenChoicesPaperHighlights.ts'
 import {
   paperSurfaceHostInitialState,
   paperSurfaceHostInteractionReducer,
@@ -189,6 +198,8 @@ export function PaperIntelligencePaperSurfaceHarness({
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
   const [paperAssetModel, setPaperAssetModel] = useState<PaperAssetSurfaceModel | null>(null)
+  const [sevenChoicesModel, setSevenChoicesModel] = useState<SevenChoicesSurfaceModel | null>(null)
+  const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
   const [passageStructures, setPassageStructures] = useState<Record<string, PassageStructure>>({})
@@ -258,6 +269,8 @@ export function PaperIntelligencePaperSurfaceHarness({
       setError(null)
       setReport(null)
       setPaperAssetModel(null)
+      setSevenChoicesModel(null)
+      setOpenSevenChoiceQuestionIds([])
       setBodies({})
       setInputOptions({})
       setPassageStructures({})
@@ -271,25 +284,68 @@ export function PaperIntelligencePaperSurfaceHarness({
             ? `/paper-assets/${paperId}/versions/${initialVersion}`
             : `/paper-assets/${paperId}/latest`
           const assetUrl = `${assetBase}/paper-asset.json`
-          const analysisUrl = `${assetBase}/analyses/reading-choice-analysis-v1.json`
-          let [assetRes, analysisRes] = await Promise.all([fetch(assetUrl), fetch(analysisUrl)])
-          if (!initialVersion && (!assetRes.ok || !analysisRes.ok)) {
-            const legacyAssetUrl = `/paper-assets/${paperId}/paper-asset.json`
-            const legacyAnalysisUrl = `/paper-assets/${paperId}/analyses/reading-choice-analysis-v1.json`
-            ;[assetRes, analysisRes] = await Promise.all([fetch(legacyAssetUrl), fetch(legacyAnalysisUrl)])
+          let resolvedAssetBase = assetBase
+          let assetRes = await fetch(assetUrl)
+          if (!initialVersion && !assetRes.ok) {
+            resolvedAssetBase = `/paper-assets/${paperId}`
+            assetRes = await fetch(`${resolvedAssetBase}/paper-asset.json`)
           }
           if (!assetRes.ok) throw new Error(`未找到 Paper Asset：${paperId}`)
-          if (!analysisRes.ok) throw new Error(`未找到已审阅阅读解析：${paperId}`)
 
-          const asset = (await assetRes.json()) as PaperAssetV1
-          const analysis = (await analysisRes.json()) as ReviewedReadingChoiceAnalysisV1
-          const model = buildPaperAssetSurfaceModel({
-            asset,
-            analysis,
-            groupId: initialGroupId,
-          })
+          let asset = (await assetRes.json()) as PaperAssetV1
+          let group = asset.content.groups[initialGroupId]
+          if (!group) {
+            throw new Error(`未找到题组：${initialGroupId}`)
+          }
+          let analysisFile =
+            group.groupType === 'sevenChoices'
+              ? 'seven-choices-analysis-v1.json'
+              : 'reading-choice-analysis-v1.json'
+          let analysisRes = await fetch(`${resolvedAssetBase}/analyses/${analysisFile}`)
+          if (!initialVersion && !analysisRes.ok && resolvedAssetBase !== `/paper-assets/${paperId}`) {
+            resolvedAssetBase = `/paper-assets/${paperId}`
+            const legacyAssetRes = await fetch(`${resolvedAssetBase}/paper-asset.json`)
+            if (legacyAssetRes.ok) {
+              asset = (await legacyAssetRes.json()) as PaperAssetV1
+              group = asset.content.groups[initialGroupId]
+              if (!group) {
+                throw new Error(`未找到题组：${initialGroupId}`)
+              }
+              analysisFile =
+                group.groupType === 'sevenChoices'
+                  ? 'seven-choices-analysis-v1.json'
+                  : 'reading-choice-analysis-v1.json'
+              analysisRes = await fetch(`${resolvedAssetBase}/analyses/${analysisFile}`)
+            }
+          }
+          if (!analysisRes.ok) {
+            throw new Error(
+              group.groupType === 'sevenChoices'
+                ? `未找到已审阅七选五解析：${paperId}`
+                : `未找到已审阅阅读解析：${paperId}`,
+            )
+          }
+          const analysis = await analysisRes.json()
+          const model =
+            group.groupType === 'sevenChoices'
+              ? buildSevenChoicesSurfaceModel({
+                  asset,
+                  analysis: analysis as ReviewedSevenChoicesAnalysisV1,
+                  groupId: initialGroupId,
+                })
+              : buildPaperAssetSurfaceModel({
+                  asset,
+                  analysis: analysis as ReviewedReadingChoiceAnalysisV1,
+                  groupId: initialGroupId,
+                })
           if (cancelled) return
-          setPaperAssetModel(model)
+          if (group.groupType === 'sevenChoices') {
+            setSevenChoicesModel(model as SevenChoicesSurfaceModel)
+            setPaperAssetModel(null)
+          } else {
+            setPaperAssetModel(model as PaperAssetSurfaceModel)
+            setSevenChoicesModel(null)
+          }
           setReport(model.report)
           setPassageStructures(model.passageStructures)
           setLoading(false)
@@ -482,6 +538,27 @@ export function PaperIntelligencePaperSurfaceHarness({
   useEffect(() => {
     if (initialQuestionAppliedRef.current) return
     if (source === 'paper-asset') {
+      if (sevenChoicesModel) {
+        const candidateId =
+          initialQuestionId && sevenChoicesModel.chainsByQuestionId[initialQuestionId]
+            ? initialQuestionId
+            : null
+        initialQuestionAppliedRef.current = true
+        queueMicrotask(() => {
+          setOpenSevenChoiceQuestionIds(candidateId ? [candidateId] : [])
+        })
+        dispatchHost(
+          candidateId
+            ? {
+                type: 'request-lecture-focus',
+                questionId: candidateId,
+                optionLabel: null,
+                evidenceId: null,
+              }
+            : { type: 'clear-lecture-focus' },
+        )
+        return
+      }
       if (!paperAssetModel) return
       const candidateId =
         initialQuestionId && paperAssetModel.surfaceData.questions.some((q) => q.id === initialQuestionId)
@@ -530,12 +607,12 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (!resolvedId) return
     initialQuestionAppliedRef.current = true
     dispatchHost({ type: 'request-lecture-focus', questionId: resolvedId })
-  }, [source, paperAssetModel, report, initialGroupId, initialQuestionId])
+  }, [source, sevenChoicesModel, paperAssetModel, report, initialGroupId, initialQuestionId])
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (source === 'paper-asset') {
-      return paperAssetModel?.surfaceData ?? null
+      return sevenChoicesModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
     }
     if (!report) return null
     // C5a: buildPaperSurfaceDataFromPi will throw if passageStructure
@@ -549,7 +626,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       console.error('[C5a] adapter build failed:', msg)
       return null
     }
-  }, [source, paperAssetModel, report, bodies, inputOptions, passageStructures])
+  }, [source, sevenChoicesModel, paperAssetModel, report, bodies, inputOptions, passageStructures])
 
   // ─── Build right-panel analysis view (reuse existing PI model) ───
   const analysisView = useMemo((): AnalysisView | null => {
@@ -561,9 +638,10 @@ export function PaperIntelligencePaperSurfaceHarness({
 
   const paperAssetAnalysisView = useMemo((): PaperAssetQuestionAnalysisView | null => {
     if (source !== 'paper-asset') return null
+    if (sevenChoicesModel) return null
     if (!activeQuestionId) return null
     return paperAssetModel?.analysisByQuestionId[activeQuestionId] ?? null
-  }, [source, paperAssetModel, activeQuestionId])
+  }, [source, sevenChoicesModel, paperAssetModel, activeQuestionId])
 
   // ─── Derive activeEvidenceKind (Issue #21-C3.6) ───
   //
@@ -592,6 +670,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   //                 own).
   const activeEvidenceKind = useMemo<'support' | 'trap' | null>(() => {
     if (source === 'paper-asset') {
+      if (sevenChoicesModel) return null
       if (!activeEvidenceId) return null
       return paperAssetModel?.evidenceKindById[activeEvidenceId] ?? null
     }
@@ -601,7 +680,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       return 'trap'
     }
     return null
-  }, [source, paperAssetModel, activeEvidenceId, analysisView])
+  }, [source, sevenChoicesModel, paperAssetModel, activeEvidenceId, analysisView])
 
   // ─── Reseed activeEvidenceId when activeQuestionId changes (C3) ───
   //
@@ -616,6 +695,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       return
     }
     if (source === 'paper-asset') {
+      if (sevenChoicesModel) return
       dispatchHost({
         type: 'seed-option-evidence',
         optionLabel: paperAssetAnalysisView?.answer ?? null,
@@ -629,6 +709,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   }, [
     activeQuestionId,
     source,
+    sevenChoicesModel,
     analysisView?.supportEvidenceId,
     paperAssetAnalysisView?.answer,
     paperAssetAnalysisView?.supportEvidenceId,
@@ -743,6 +824,26 @@ export function PaperIntelligencePaperSurfaceHarness({
     [],
   )
 
+  const handleToggleSevenChoiceChain = useCallback((questionId: string): void => {
+    setOpenSevenChoiceQuestionIds((prev) =>
+      prev.includes(questionId)
+        ? prev.filter((id) => id !== questionId)
+        : [...prev, questionId],
+    )
+    dispatchHost({ type: 'clear-lecture-focus' })
+  }, [])
+
+  const handleShowAllSevenChoiceChains = useCallback((): void => {
+    if (!sevenChoicesModel) return
+    setOpenSevenChoiceQuestionIds(sevenChoicesModel.chains.map((chain) => chain.questionId))
+    dispatchHost({ type: 'clear-lecture-focus' })
+  }, [sevenChoicesModel])
+
+  const handleHideAllSevenChoiceChains = useCallback((): void => {
+    setOpenSevenChoiceQuestionIds([])
+    dispatchHost({ type: 'clear-lecture-focus' })
+  }, [])
+
   // ─── C4 align active insight section with [data-paper-section] ───
   //
   // When the teacher opens an insight chip we scroll the matching
@@ -817,6 +918,13 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (!el) return
     el.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
   }, [activeStructureTarget])
+
+  const sevenChoiceOverlay = useSevenChoicesPaperHighlights({
+    enabled: !!sevenChoicesModel,
+    leftScrollerRef,
+    openQuestionIds: openSevenChoiceQuestionIds,
+    chains: sevenChoicesModel?.chains ?? [],
+  })
 
   // ─── Render ───
   //
@@ -1018,6 +1126,34 @@ export function PaperIntelligencePaperSurfaceHarness({
             readingFocusBySection={{}}
             onFocusIntent={handleFocusIntent}
           />
+          {sevenChoicesModel && (sevenChoiceOverlay.marks.length > 0 || sevenChoiceOverlay.labels.length > 0) && (
+            <div className="pi-seven-blank-overlay" aria-hidden="true">
+              {sevenChoiceOverlay.marks.map((mark) => (
+                <span
+                  key={mark.id}
+                  className={`pi-seven-clue-mark pi-seven-clue-mark--${mark.kind}`}
+                  data-seven-color={mark.colorIndex}
+                  style={{
+                    transform: `translate(${mark.left}px, ${mark.top}px)`,
+                    width: `${mark.width}px`,
+                    height: `${mark.height}px`,
+                  }}
+                />
+              ))}
+              {sevenChoiceOverlay.labels.map((label) => (
+                <span
+                  key={label.questionId}
+                  className="pi-seven-blank-overlay-label"
+                  data-seven-color={label.colorIndex}
+                  style={{
+                    transform: `translate(${label.left}px, ${label.top}px)`,
+                  }}
+                >
+                  {label.questionNo} · {label.answerLabel}
+                </span>
+              ))}
+            </div>
+          )}
           {/* C5b: Structure Brace SVG overlay */}
           <StructureBraceOverlay
             target={activeStructureTarget}
@@ -1044,7 +1180,16 @@ export function PaperIntelligencePaperSurfaceHarness({
             page, not an edge-to-edge stripe.
           */}
           <div className="pi-ps-harness-right-inner">
-            {source === 'paper-asset' ? (
+            {sevenChoicesModel ? (
+              <SevenChoicesAnalysisPanel
+                options={sevenChoicesModel.options}
+                chains={sevenChoicesModel.chains}
+                openQuestionIds={openSevenChoiceQuestionIds}
+                onToggleChain={handleToggleSevenChoiceChain}
+                onShowAll={handleShowAllSevenChoiceChains}
+                onHideAll={handleHideAllSevenChoiceChains}
+              />
+            ) : source === 'paper-asset' ? (
               <PaperAssetAnalysisPanel
                 analysis={paperAssetAnalysisView}
                 hasActiveQuestion={!!activeQuestionId}
@@ -1071,15 +1216,17 @@ export function PaperIntelligencePaperSurfaceHarness({
           `data-pi-evidence-id` because right Question Analysis is
           host-owned and unchanged.
         */}
-        <PaperIntelligenceEvidenceLine
-          containerRef={shellRef}
-          leftScrollerRef={leftScrollerRef}
-          rightPanelRef={rightPanelRef}
-          activeQuestionId={activeQuestionId}
-          activeEvidenceId={activeEvidenceId}
-          activeEvidenceKind={activeEvidenceKind}
-          leftSelectorPreset="paper-surface"
-        />
+        {!sevenChoicesModel && (
+          <PaperIntelligenceEvidenceLine
+            containerRef={shellRef}
+            leftScrollerRef={leftScrollerRef}
+            rightPanelRef={rightPanelRef}
+            activeQuestionId={activeQuestionId}
+            activeEvidenceId={activeEvidenceId}
+            activeEvidenceKind={activeEvidenceKind}
+            leftSelectorPreset="paper-surface"
+          />
+        )}
         {/*
           C4 UX Must Fix (PR #52 browser QA / PO QA):
 
