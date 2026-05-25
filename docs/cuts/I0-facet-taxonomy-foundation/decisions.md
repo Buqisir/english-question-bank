@@ -2,7 +2,7 @@
 
 Cut: I0-A 七选五辅助检索 facet taxonomy
 Status: accepted for docs-only implementation
-Last synced: 2026-05-24
+Last synced: 2026-05-25
 Open items from external review: none
 
 ## Locked Decisions
@@ -28,14 +28,14 @@ The accepted PO teaching tree is:
 ├── 段中
 │   └── 衔接句
 │       ├── 语法衔接（指代衔接 / 逻辑词衔接）
-│       └── 词汇衔接（话题场复现 / 同义替换）
+│       └── 词汇衔接（话题场对应）
 │
 └── 段尾
     ├── 概括句（归纳收束）
     ├── 承启句（承上启下）
     └── 衔接句
         ├── 语法衔接（指代衔接 / 逻辑词衔接）
-        └── 词汇衔接（话题场复现 / 同义替换）
+        └── 词汇衔接（话题场对应）
 ```
 
 Teaching basis:
@@ -80,12 +80,17 @@ If a sentence only makes adjacent sentences read smoothly, use `cohesion`.
 
 - `role=cohesion`: one primary mechanism is required.
 - `role=bridge`: mechanisms are optional; if recorded, they are drawn from
-  reference, logic, topic-field recurrence, or synonym paraphrase.
+  reference, logic, or topic-field alignment.
 - `role=topic` and `role=summary`: mechanisms are not attached in v1.
 
 A blank can have one primary mechanism and up to two supporting mechanisms in a
 future analysis contract. In the taxonomy file, only the reusable facet keys are
 defined.
+
+Lexical cohesion is intentionally generalized as topic-field alignment. It
+covers exact word recurrence, synonym / near-synonym, antonym, hypernym /
+hyponym, same-scene vocabulary, and related chunks. Do not split these into
+separate blank-level facet keys in v1.
 
 ### Facet Attachment
 
@@ -129,10 +134,10 @@ Example:
 taxonomy contains:
 seven-choices.cohesion
 seven-choices.cohesion.lexical
-seven-choices.cohesion.lexical.topic-field-recurrence
+seven-choices.cohesion.lexical.topic-field-alignment
 
 blank tag uses:
-seven-choices.cohesion.lexical.topic-field-recurrence
+seven-choices.cohesion.lexical.topic-field-alignment
 ```
 
 The system can roll up to parent keys through `parent_key`.

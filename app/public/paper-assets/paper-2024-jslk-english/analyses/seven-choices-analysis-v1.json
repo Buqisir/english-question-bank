@@ -75,7 +75,7 @@
       "roleFacet": "seven-choices.role.bridge",
       "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
       "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.topic-field-recurrence",
+        "seven-choices.cohesion.lexical.topic-field-alignment",
         "seven-choices.cohesion.grammatical.referential-cohesion"
       ],
       "topicClues": [
@@ -133,8 +133,7 @@
       "positionFacet": "seven-choices.position.paragraph-end",
       "roleFacet": "seven-choices.role.summary",
       "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.synonym-paraphrase",
-        "seven-choices.cohesion.lexical.topic-field-recurrence"
+        "seven-choices.cohesion.lexical.topic-field-alignment"
       ],
       "topicClues": [
         "Doing too much too soon",
@@ -182,8 +181,7 @@
       "positionFacet": "seven-choices.position.paragraph-start",
       "roleFacet": "seven-choices.role.topic",
       "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.synonym-paraphrase",
-        "seven-choices.cohesion.lexical.topic-field-recurrence"
+        "seven-choices.cohesion.lexical.topic-field-alignment"
       ],
       "topicClues": [
         "run every day(or nearly every day)",
@@ -230,7 +228,7 @@
       "roleFacet": "seven-choices.role.bridge",
       "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
       "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.topic-field-recurrence",
+        "seven-choices.cohesion.lexical.topic-field-alignment",
         "seven-choices.cohesion.grammatical.referential-cohesion"
       ],
       "topicClues": [
@@ -287,9 +285,8 @@
       "blankId": "blank-2024-jslk-040",
       "positionFacet": "seven-choices.position.paragraph-start",
       "roleFacet": "seven-choices.role.bridge",
-      "primaryMechanismFacet": "seven-choices.cohesion.lexical.synonym-paraphrase",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
       "supportingMechanismFacets": [
-        "seven-choices.cohesion.lexical.topic-field-recurrence",
         "seven-choices.cohesion.grammatical.referential-cohesion"
       ],
       "topicClues": [
@@ -334,7 +331,7 @@
       "teachingNote": "段首句常先概括，再由下一句具体展开。这里用 uncomfortable 概括 hurts/pain，不要把“身体相关”的选项都当成正确项。",
       "mechanismSignals": [
         {
-          "mechanismFacet": "seven-choices.cohesion.lexical.synonym-paraphrase",
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
           "signalText": "uncomfortable",
           "signalSide": "option",
           "targetText": "hurts / pain",

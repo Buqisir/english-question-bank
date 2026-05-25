@@ -156,8 +156,7 @@ const ROLE_LABELS: Record<string, string> = {
 const MECHANISM_LABELS: Record<string, string> = {
   'seven-choices.cohesion.grammatical.referential-cohesion': '指代衔接',
   'seven-choices.cohesion.grammatical.logical-connector': '逻辑词衔接',
-  'seven-choices.cohesion.lexical.topic-field-recurrence': '话题场复现',
-  'seven-choices.cohesion.lexical.synonym-paraphrase': '同义/反义/原词呼应',
+  'seven-choices.cohesion.lexical.topic-field-alignment': '话题场对应',
 }
 
 const SEVEN_CHOICES_SECTION = '七选五'

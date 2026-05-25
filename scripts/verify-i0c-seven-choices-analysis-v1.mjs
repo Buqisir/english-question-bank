@@ -32,8 +32,7 @@ const roleFacets = new Set([
 const mechanismFacets = new Set([
   'seven-choices.cohesion.grammatical.referential-cohesion',
   'seven-choices.cohesion.grammatical.logical-connector',
-  'seven-choices.cohesion.lexical.topic-field-recurrence',
-  'seven-choices.cohesion.lexical.synonym-paraphrase',
+  'seven-choices.cohesion.lexical.topic-field-alignment',
 ])
 
 const requiredSignalMechanisms = new Set([
@@ -113,7 +112,9 @@ function selfCheck() {
   assert(prompt.includes('Do NOT output JSON in chat'), 'prompt forbids chat JSON')
   assert(prompt.includes('UNABLE_TO_CREATE_FILE'), 'prompt has no JSON fallback and defines failure token')
   assert(prompt.includes('seven-choices-analysis-v1.json'), 'prompt names output file')
-  assert(prompt.includes('topic-field-recurrence'), 'prompt uses final lexical facet key')
+  assert(prompt.includes('topic-field-alignment'), 'prompt uses final lexical facet key')
+  assert(!prompt.includes('topic-field-recurrence'), 'prompt excludes stale topic-field-recurrence key')
+  assert(!prompt.includes('synonym-paraphrase'), 'prompt excludes stale synonym-paraphrase key')
   assert(prompt.includes('referential-cohesion'), 'prompt uses final reference facet key')
   assert(prompt.includes('mechanismSignals'), 'prompt includes mechanismSignals field')
   assert(!prompt.includes('topic-word-echo'), 'prompt excludes stale topic-word-echo key')

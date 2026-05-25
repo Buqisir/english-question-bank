@@ -85,8 +85,7 @@ Mechanism facets must come from:
 
 - `seven-choices.cohesion.grammatical.referential-cohesion`
 - `seven-choices.cohesion.grammatical.logical-connector`
-- `seven-choices.cohesion.lexical.topic-field-recurrence`
-- `seven-choices.cohesion.lexical.synonym-paraphrase`
+- `seven-choices.cohesion.lexical.topic-field-alignment`
 
 Do not use parent keys such as `seven-choices.cohesion.lexical` as blank-level
 mechanism labels.
@@ -112,7 +111,7 @@ Rules:
 `optionFit` explains how the correct option fits the context.
 
 It is not a facet. It is text evidence connecting the option side to the
-context side, especially for topic-field recurrence and synonym paraphrase.
+context side, especially for topic-field alignment.
 
 ### Context Evidence
 

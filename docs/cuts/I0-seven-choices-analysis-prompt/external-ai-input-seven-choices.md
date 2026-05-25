@@ -107,8 +107,7 @@ seven-choices.role.bridge
 seven-choices.role.cohesion
 seven-choices.cohesion.grammatical.referential-cohesion
 seven-choices.cohesion.grammatical.logical-connector
-seven-choices.cohesion.lexical.topic-field-recurrence
-seven-choices.cohesion.lexical.synonym-paraphrase
+seven-choices.cohesion.lexical.topic-field-alignment
 ```
 
 Mechanism rules:

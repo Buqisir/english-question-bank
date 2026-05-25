@@ -1,7 +1,7 @@
 # Seven Choices Analysis V1 Contract
 
 Cut: I0-B 七选五 reviewed-analysis contract
-Last synced: 2026-05-24
+Last synced: 2026-05-25
 
 This document defines the intended reviewed-analysis JSON shape for 七选五.
 It is not yet a JSON Schema, TypeScript runtime type, validator, or prompt.
@@ -74,7 +74,7 @@ Each `questions[questionId]` item analyzes one blank.
   "roleFacet": "seven-choices.role.cohesion",
   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
   "supportingMechanismFacets": [
-    "seven-choices.cohesion.lexical.topic-field-recurrence"
+    "seven-choices.cohesion.lexical.topic-field-alignment"
   ],
   "topicClues": [
     "new runners",
@@ -152,8 +152,8 @@ Use these terms instead:
 - `roleFacet`: what the inserted sentence does, such as topic, summary, bridge,
   or cohesion.
 - `primaryMechanismFacet` / `supportingMechanismFacets`: how the sentence
-  connects, such as logical connector, referential cohesion, or lexical
-  recurrence.
+  connects, such as logical connector, referential cohesion, or topic-field
+  alignment.
 - `mechanismSignals`: concrete logical words, reference words, or lexical
   signals that can be highlighted.
 - `topicClues`: context-side topic-field words or chunks that help solve the
@@ -183,8 +183,7 @@ Valid mechanism facets:
 
 - `seven-choices.cohesion.grammatical.referential-cohesion`
 - `seven-choices.cohesion.grammatical.logical-connector`
-- `seven-choices.cohesion.lexical.topic-field-recurrence`
-- `seven-choices.cohesion.lexical.synonym-paraphrase`
+- `seven-choices.cohesion.lexical.topic-field-alignment`
 
 Do not use parent keys as blank-level facet values.
 

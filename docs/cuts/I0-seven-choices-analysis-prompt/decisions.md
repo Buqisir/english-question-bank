@@ -2,7 +2,7 @@
 
 Cut: I0-C 七选五 prompt + external input + verify
 Status: implemented, plus mechanism signal contract patch
-Last synced: 2026-05-24
+Last synced: 2026-05-25
 Open items from external review: 1 teaching-label watch item retained for later human review
 
 ## Locked Decisions
@@ -111,7 +111,8 @@ The first fixture now includes:
 
 - q36: option-side `If` as logical connector.
 - q39: option-side `While` as logical connector.
-- q40: option-side `uncomfortable` as lexical signal for `hurts / pain`.
+- q40: option-side `uncomfortable` as topic-field alignment signal for
+  `hurts / pain`.
 
 ## I0-D Terminology Clarification
 
@@ -122,8 +123,8 @@ Accepted terminology:
 
 - Position: paragraph start / middle / end; source field `positionFacet`.
 - Sentence role: topic / summary / bridge / cohesion; source field `roleFacet`.
-- Solving mechanism: logical connector / referential cohesion / lexical
-  recurrence; source fields `primaryMechanismFacet` and
+- Solving mechanism: logical connector / referential cohesion / topic-field
+  alignment; source fields `primaryMechanismFacet` and
   `supportingMechanismFacets`.
 - Solving clues: concrete logical words, reference words, and topic-field words
   that can be highlighted; source fields `mechanismSignals` and `topicClues`.

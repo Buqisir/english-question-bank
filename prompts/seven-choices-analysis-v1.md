@@ -110,7 +110,7 @@ Each `questions[questionId]` item analyzes one blank.
   "roleFacet": "seven-choices.role.cohesion",
   "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
   "supportingMechanismFacets": [
-    "seven-choices.cohesion.lexical.topic-field-recurrence"
+    "seven-choices.cohesion.lexical.topic-field-alignment"
   ],
   "topicClues": [
     "new runners",
@@ -176,8 +176,7 @@ Use ONLY these mechanism facets:
 
 - `seven-choices.cohesion.grammatical.referential-cohesion`
 - `seven-choices.cohesion.grammatical.logical-connector`
-- `seven-choices.cohesion.lexical.topic-field-recurrence`
-- `seven-choices.cohesion.lexical.synonym-paraphrase`
+- `seven-choices.cohesion.lexical.topic-field-alignment`
 
 Do NOT use parent keys as blank-level facet values.
 Do NOT invent new facet keys.

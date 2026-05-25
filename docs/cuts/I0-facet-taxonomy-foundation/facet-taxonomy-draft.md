@@ -1,7 +1,7 @@
 # Facet Taxonomy Draft — I0-A Seven Choices
 
 Cut: I0-A 七选五辅助检索 facet taxonomy
-Last synced: 2026-05-24
+Last synced: 2026-05-25
 
 Rules:
 
@@ -29,5 +29,4 @@ Rules:
 | `seven-choices.cohesion.grammatical.referential-cohesion` | 指代衔接 | Referential Cohesion | `seven-choices.cohesion.grammatical` |
 | `seven-choices.cohesion.grammatical.logical-connector` | 逻辑词衔接 | Logical Connector | `seven-choices.cohesion.grammatical` |
 | `seven-choices.cohesion.lexical` | 词汇衔接 | Lexical Cohesion | `seven-choices.cohesion` |
-| `seven-choices.cohesion.lexical.topic-field-recurrence` | 话题场复现 | Topic Field Recurrence | `seven-choices.cohesion.lexical` |
-| `seven-choices.cohesion.lexical.synonym-paraphrase` | 同义替换 | Synonym Paraphrase | `seven-choices.cohesion.lexical` |
+| `seven-choices.cohesion.lexical.topic-field-alignment` | 话题场对应 | Topic Field Alignment | `seven-choices.cohesion.lexical` |
