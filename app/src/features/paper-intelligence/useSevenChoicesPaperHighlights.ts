@@ -2,15 +2,6 @@ import { useEffect, useState, type RefObject } from 'react'
 import type { PaperTextRange } from '../../../../shared/papersurface/types'
 import type { SevenChoicesChainView } from './sevenChoicesSurfaceAdapter.ts'
 
-export type SevenChoicesBlankOverlayLabel = {
-  questionId: string
-  questionNo: string
-  answerLabel: string
-  colorIndex: number
-  left: number
-  top: number
-}
-
 export type SevenChoicesClueOverlayMark = {
   id: string
   questionId: string
@@ -23,7 +14,6 @@ export type SevenChoicesClueOverlayMark = {
 }
 
 export type SevenChoicesOverlayState = {
-  labels: SevenChoicesBlankOverlayLabel[]
   marks: SevenChoicesClueOverlayMark[]
 }
 
@@ -35,7 +25,6 @@ export function useSevenChoicesPaperHighlights(args: {
 }): SevenChoicesOverlayState {
   const { enabled, leftScrollerRef, openQuestionIds, chains } = args
   const [overlay, setOverlay] = useState<SevenChoicesOverlayState>({
-    labels: [],
     marks: [],
   })
 
@@ -48,11 +37,10 @@ export function useSevenChoicesPaperHighlights(args: {
     const update = (): void => {
       const scroller = leftScrollerRef.current
       if (!scroller) {
-        setOverlay({ labels: [], marks: [] })
+        setOverlay({ marks: [] })
         return
       }
 
-      const nextLabels: SevenChoicesBlankOverlayLabel[] = []
       const nextMarks: SevenChoicesClueOverlayMark[] = []
       const openSet = new Set(openQuestionIds)
       const openChains = chains.filter((chain) => openSet.has(chain.questionId))
@@ -78,24 +66,8 @@ export function useSevenChoicesPaperHighlights(args: {
           })
           domRange.detach()
         }
-
-        if (chain.blankRange) {
-          const blankDomRange = createDomRange(scroller, chain.blankRange.range)
-          const rect = blankDomRange?.getBoundingClientRect()
-          if (rect && rect.width > 0 && rect.height > 0) {
-            nextLabels.push({
-              questionId: chain.questionId,
-              questionNo: chain.questionNo,
-              answerLabel: chain.correctOptionLabel,
-              colorIndex: chain.colorIndex,
-              left: rect.left - scrollerRect.left + scroller.scrollLeft - 4,
-              top: rect.top - scrollerRect.top + scroller.scrollTop - 3,
-            })
-          }
-          blankDomRange?.detach()
-        }
       }
-      setOverlay({ labels: nextLabels, marks: nextMarks })
+      setOverlay({ marks: nextMarks })
     }
 
     const schedule = (): void => {

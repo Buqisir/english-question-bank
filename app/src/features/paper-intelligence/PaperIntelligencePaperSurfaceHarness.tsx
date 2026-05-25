@@ -1126,7 +1126,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             readingFocusBySection={{}}
             onFocusIntent={handleFocusIntent}
           />
-          {sevenChoicesModel && (sevenChoiceOverlay.marks.length > 0 || sevenChoiceOverlay.labels.length > 0) && (
+          {sevenChoicesModel && sevenChoiceOverlay.marks.length > 0 && (
             <div className="pi-seven-blank-overlay" aria-hidden="true">
               {sevenChoiceOverlay.marks.map((mark) => (
                 <span
@@ -1139,18 +1139,6 @@ export function PaperIntelligencePaperSurfaceHarness({
                     height: `${mark.height}px`,
                   }}
                 />
-              ))}
-              {sevenChoiceOverlay.labels.map((label) => (
-                <span
-                  key={label.questionId}
-                  className="pi-seven-blank-overlay-label"
-                  data-seven-color={label.colorIndex}
-                  style={{
-                    transform: `translate(${label.left}px, ${label.top}px)`,
-                  }}
-                >
-                  {label.questionNo} · {label.answerLabel}
-                </span>
               ))}
             </div>
           )}

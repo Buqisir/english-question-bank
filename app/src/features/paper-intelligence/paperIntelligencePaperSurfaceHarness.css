@@ -1836,24 +1836,6 @@ button.pi-ps-analysis-distractor--selected {
   z-index: 4;
 }
 
-.pi-seven-blank-overlay-label {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: inline-flex;
-  align-items: center;
-  height: 22px;
-  padding: 0 7px;
-  border: 1px solid var(--seven-border, rgba(122, 106, 88, 0.45));
-  border-radius: 999px;
-  background: var(--seven-strong, rgba(255, 253, 248, 0.92));
-  color: #221b15;
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1;
-  box-shadow: 0 1px 4px rgba(47, 41, 35, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.24);
-}
-
 .pi-seven-clue-mark {
   position: absolute;
   left: 0;
@@ -1875,7 +1857,6 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-seven-option-card[data-seven-color='0'],
 .pi-seven-option-jump-chip[data-seven-color='0'],
-.pi-seven-blank-overlay-label[data-seven-color='0'],
 .pi-seven-clue-mark[data-seven-color='0'] {
   --seven-soft: rgba(231, 171, 86, 0.18);
   --seven-strong: rgba(231, 171, 86, 0.34);
@@ -1887,7 +1868,6 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-seven-option-card[data-seven-color='1'],
 .pi-seven-option-jump-chip[data-seven-color='1'],
-.pi-seven-blank-overlay-label[data-seven-color='1'],
 .pi-seven-clue-mark[data-seven-color='1'] {
   --seven-soft: rgba(103, 174, 150, 0.18);
   --seven-strong: rgba(103, 174, 150, 0.34);
@@ -1899,7 +1879,6 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-seven-option-card[data-seven-color='2'],
 .pi-seven-option-jump-chip[data-seven-color='2'],
-.pi-seven-blank-overlay-label[data-seven-color='2'],
 .pi-seven-clue-mark[data-seven-color='2'] {
   --seven-soft: rgba(123, 151, 210, 0.18);
   --seven-strong: rgba(123, 151, 210, 0.34);
@@ -1911,7 +1890,6 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-seven-option-card[data-seven-color='3'],
 .pi-seven-option-jump-chip[data-seven-color='3'],
-.pi-seven-blank-overlay-label[data-seven-color='3'],
 .pi-seven-clue-mark[data-seven-color='3'] {
   --seven-soft: rgba(192, 130, 175, 0.18);
   --seven-strong: rgba(192, 130, 175, 0.34);
@@ -1923,7 +1901,6 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-seven-option-card[data-seven-color='4'],
 .pi-seven-option-jump-chip[data-seven-color='4'],
-.pi-seven-blank-overlay-label[data-seven-color='4'],
 .pi-seven-clue-mark[data-seven-color='4'] {
   --seven-soft: rgba(160, 151, 91, 0.2);
   --seven-strong: rgba(160, 151, 91, 0.34);
