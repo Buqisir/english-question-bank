@@ -1924,10 +1924,10 @@ button.pi-ps-analysis-distractor--selected {
 .pi-seven-option-card[data-seven-color='4'],
 .pi-seven-option-jump-chip[data-seven-color='4'],
 .pi-seven-clue-mark[data-seven-color='4'] {
-  --seven-soft: rgba(160, 151, 91, 0.2);
-  --seven-strong: rgba(160, 151, 91, 0.34);
-  --seven-border: rgba(112, 103, 45, 0.48);
-  --seven-mark-topic: rgba(160, 151, 91, 0.2);
-  --seven-mark-signal: rgba(160, 151, 91, 0.36);
-  --seven-mark-context: rgba(160, 151, 91, 0.12);
+  --seven-soft: rgba(225, 111, 86, 0.18);
+  --seven-strong: rgba(225, 111, 86, 0.34);
+  --seven-border: rgba(176, 72, 54, 0.48);
+  --seven-mark-topic: rgba(225, 111, 86, 0.18);
+  --seven-mark-signal: rgba(225, 111, 86, 0.34);
+  --seven-mark-context: rgba(225, 111, 86, 0.11);
 }
