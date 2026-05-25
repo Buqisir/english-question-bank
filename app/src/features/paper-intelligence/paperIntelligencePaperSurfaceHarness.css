@@ -1603,7 +1603,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-seven-panel-actions {
   display: flex;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .pi-seven-panel-actions button,
@@ -1622,6 +1622,49 @@ button.pi-ps-analysis-distractor--selected {
   cursor: default;
   color: #a49a8e;
   background: rgba(255, 255, 255, 0.28);
+}
+
+.pi-seven-option-jump {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  padding: 7px 0 10px;
+  margin-bottom: 8px;
+  background: linear-gradient(180deg, #f7f1e6 0%, rgba(247, 241, 230, 0.92) 70%, rgba(247, 241, 230, 0) 100%);
+}
+
+.pi-seven-option-jump-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(122, 106, 88, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  color: #5f554a;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pi-seven-option-jump-chip[data-seven-color] {
+  border-color: var(--seven-border, rgba(122, 106, 88, 0.34));
+  background: var(--seven-soft, rgba(255, 255, 255, 0.5));
+}
+
+.pi-seven-option-jump-chip[data-active='true'] {
+  background: var(--seven-strong, rgba(47, 41, 35, 0.12));
+  color: #221b15;
+  box-shadow: inset 0 0 0 1px var(--seven-border, rgba(122, 106, 88, 0.34));
+}
+
+.pi-seven-option-jump-chip:focus-visible {
+  outline: 2px solid var(--seven-border, #7a6a58);
+  outline-offset: 2px;
 }
 
 .pi-seven-option-list {
@@ -1803,12 +1846,12 @@ button.pi-ps-analysis-distractor--selected {
   padding: 0 7px;
   border: 1px solid var(--seven-border, rgba(122, 106, 88, 0.45));
   border-radius: 999px;
-  background: #fffdf8;
+  background: var(--seven-strong, rgba(255, 253, 248, 0.92));
   color: #221b15;
   font-size: 12px;
   font-weight: 800;
   line-height: 1;
-  box-shadow: 0 1px 4px rgba(47, 41, 35, 0.16);
+  box-shadow: 0 1px 4px rgba(47, 41, 35, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.24);
 }
 
 .pi-seven-clue-mark {
@@ -1831,6 +1874,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-card[data-seven-color='0'],
+.pi-seven-option-jump-chip[data-seven-color='0'],
 .pi-seven-blank-overlay-label[data-seven-color='0'],
 .pi-seven-clue-mark[data-seven-color='0'] {
   --seven-soft: rgba(231, 171, 86, 0.18);
@@ -1842,6 +1886,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-card[data-seven-color='1'],
+.pi-seven-option-jump-chip[data-seven-color='1'],
 .pi-seven-blank-overlay-label[data-seven-color='1'],
 .pi-seven-clue-mark[data-seven-color='1'] {
   --seven-soft: rgba(103, 174, 150, 0.18);
@@ -1853,6 +1898,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-card[data-seven-color='2'],
+.pi-seven-option-jump-chip[data-seven-color='2'],
 .pi-seven-blank-overlay-label[data-seven-color='2'],
 .pi-seven-clue-mark[data-seven-color='2'] {
   --seven-soft: rgba(123, 151, 210, 0.18);
@@ -1864,6 +1910,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-card[data-seven-color='3'],
+.pi-seven-option-jump-chip[data-seven-color='3'],
 .pi-seven-blank-overlay-label[data-seven-color='3'],
 .pi-seven-clue-mark[data-seven-color='3'] {
   --seven-soft: rgba(192, 130, 175, 0.18);
@@ -1875,6 +1922,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-card[data-seven-color='4'],
+.pi-seven-option-jump-chip[data-seven-color='4'],
 .pi-seven-blank-overlay-label[data-seven-color='4'],
 .pi-seven-clue-mark[data-seven-color='4'] {
   --seven-soft: rgba(160, 151, 91, 0.2);

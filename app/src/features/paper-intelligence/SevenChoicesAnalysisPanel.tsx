@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { useMemo, useRef, useState, type ReactNode } from 'react'
 import type {
   SevenChoicesChainView,
   SevenChoicesMechanismSignal,
@@ -23,8 +23,20 @@ export function SevenChoicesAnalysisPanel({
   onHideAll,
 }: Props): ReactNode {
   const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
+  const optionCardRefs = useRef<Record<string, HTMLElement | null>>({})
   const openSet = useMemo(() => new Set(openQuestionIds), [openQuestionIds])
   const openCount = openQuestionIds.length
+
+  const chainByOptionLabel = useMemo(() => {
+    return new Map(chains.map((chain) => [chain.correctOptionLabel, chain]))
+  }, [chains])
+
+  const scrollToOption = (label: string): void => {
+    optionCardRefs.current[label]?.scrollIntoView({
+      block: 'start',
+      behavior: 'smooth',
+    })
+  }
 
   const toggleDetails = (questionId: string): void => {
     setExpandedDetails((prev) => {
@@ -55,6 +67,25 @@ export function SevenChoicesAnalysisPanel({
           全部隐藏
         </button>
       </div>
+      <div className="pi-seven-option-jump" aria-label="A-G 选项跳转">
+        {options.map((option) => {
+          const chain = chainByOptionLabel.get(option.label)
+          const isOpen = !!chain && openSet.has(chain.questionId)
+          return (
+            <button
+              key={`jump-${option.label}`}
+              type="button"
+              className="pi-seven-option-jump-chip"
+              data-seven-color={chain?.colorIndex ?? undefined}
+              data-active={isOpen ? 'true' : undefined}
+              onClick={() => scrollToOption(option.label)}
+              aria-label={`跳转到选项 ${option.label}`}
+            >
+              {option.label}
+            </button>
+          )
+        })}
+      </div>
       <div className="pi-seven-option-list">
         {options.map((option) => {
           const chain = option.chain
@@ -64,6 +95,9 @@ export function SevenChoicesAnalysisPanel({
           return (
             <article
               key={option.label}
+              ref={(node) => {
+                optionCardRefs.current[option.label] = node
+              }}
               className={[
                 'pi-seven-option-card',
                 isCorrect ? 'pi-seven-option-card--correct' : '',
