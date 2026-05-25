@@ -228,12 +228,21 @@ function buildSevenChoicesTextMap(
   asset: PaperAssetV1,
   group: PaperContentGroup,
 ): PaperTextMap {
+  const blankQuestionNos = group.questionIds
+    .map((questionId) => asset.content.questions[questionId]?.questionNo)
+    .filter((questionNo) => questionNo !== undefined && questionNo !== null)
+    .map((questionNo) => String(questionNo))
+
   return {
     paperId: asset.paper.paperId,
     paragraphs: (group.passage?.paragraphs ?? []).map((paragraph) => ({
       id: paragraph.paragraphId,
       section: SEVEN_CHOICES_SECTION,
-      sentences: segmentSentencesForParagraph(paragraph.text, paragraph.paragraphId),
+      sentences: segmentSentencesForParagraph(
+        paragraph.text,
+        paragraph.paragraphId,
+        blankQuestionNos,
+      ),
     })),
   }
 }
@@ -241,6 +250,7 @@ function buildSevenChoicesTextMap(
 function segmentSentencesForParagraph(
   text: string,
   paragraphId: string,
+  blankQuestionNos: string[],
 ): Array<{ id: string; text: string; tokens: never[] }> {
   if (!text.trim()) return []
   const segmented = segmentPaperText(text, { sectionId: paragraphId })
@@ -248,7 +258,7 @@ function segmentSentencesForParagraph(
   if (!first) return []
   return first.sentences.map((sentence, index) => ({
     id: `${paragraphId}-s${index}`,
-    text: sentence.text,
+    text: formatSevenChoicesBlankMarkers(sentence.text, blankQuestionNos),
     tokens: [] as never[],
   }))
 }
@@ -403,6 +413,67 @@ function findBlankRange(
     }
   }
   return null
+}
+
+function formatSevenChoicesBlankMarkers(text: string, questionNos: string[]): string {
+  return questionNos.reduce((nextText, questionNo) => {
+    return formatSingleSevenChoicesBlankMarker(nextText, questionNo)
+  }, text)
+}
+
+function formatSingleSevenChoicesBlankMarker(text: string, questionNo: string): string {
+  const pattern = new RegExp(escapeRegExp(questionNo), 'g')
+  let output = ''
+  let cursor = 0
+  let match: RegExpExecArray | null
+
+  while ((match = pattern.exec(text)) !== null) {
+    const start = match.index
+    const end = start + questionNo.length
+    const prev = start > 0 ? text[start - 1] : ''
+    const next = end < text.length ? text[end] : ''
+    if (isDigit(prev) || isDigit(next)) continue
+
+    const prefix = text.slice(cursor, start)
+    const prefixTrimmed = prefix.replace(/[ \t\u00A0]+$/g, '')
+    output += prefixTrimmed
+    if (prefixTrimmed && !/[\s([{'"“‘-]$/.test(prefixTrimmed)) {
+      output += ' '
+    }
+
+    output += formatSevenChoicesBlank(questionNo)
+
+    let nextCursor = end
+    while (nextCursor < text.length && /[ \t\u00A0]/.test(text[nextCursor])) {
+      nextCursor += 1
+    }
+
+    if (nextCursor < text.length && /[,.;:?!]/.test(text[nextCursor])) {
+      output += text[nextCursor]
+      nextCursor += 1
+      while (nextCursor < text.length && /[ \t\u00A0]/.test(text[nextCursor])) {
+        nextCursor += 1
+      }
+      if (nextCursor < text.length && /\S/.test(text[nextCursor])) {
+        output += ' '
+      }
+    } else if (nextCursor < text.length && /\S/.test(text[nextCursor])) {
+      output += ' '
+    }
+
+    cursor = nextCursor
+  }
+
+  output += text.slice(cursor)
+  return output
+}
+
+function formatSevenChoicesBlank(questionNo: string): string {
+  return `${'\u00A0'.repeat(3)}${questionNo}${'\u00A0'.repeat(3)}`
+}
+
+function isDigit(value: string): boolean {
+  return /^[0-9]$/.test(value)
 }
 
 function escapeRegExp(value: string): string {

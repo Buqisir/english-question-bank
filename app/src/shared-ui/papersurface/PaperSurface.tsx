@@ -58,6 +58,8 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
 }
 
+const sevenChoicesBlankPattern = /\u00A0{3}(\d{1,3})\u00A0{3}/g
+
 export function PaperSurface(props: PaperSurfaceProps): ReactNode {
   const {
     textMap,
@@ -375,7 +377,7 @@ function PaperSurfaceSentence({
     >
       {hasInlineActive && activeEv ? (
         <>
-          {text.slice(0, activeStart)}
+          {renderTextWithSevenChoicesBlanks(text.slice(0, activeStart), `${sentence.id}-pre`)}
           <mark
             className="ps-evidence-anchor ps-evidence-anchor--active"
             {...{
@@ -383,12 +385,12 @@ function PaperSurfaceSentence({
               [paperSurfaceAnchorAttrs.evidenceKind]: activeEv.kind,
             }}
           >
-            {text.slice(activeStart, activeEnd)}
+            {renderTextWithSevenChoicesBlanks(text.slice(activeStart, activeEnd), `${sentence.id}-active`)}
           </mark>
-          {text.slice(activeEnd)}
+          {renderTextWithSevenChoicesBlanks(text.slice(activeEnd), `${sentence.id}-post`)}
         </>
       ) : (
-        text
+        renderTextWithSevenChoicesBlanks(text, sentence.id)
       )}
       {/*
         Neutral evidence anchors — invisible, zero-size span siblings.
@@ -428,6 +430,31 @@ function PaperSurfaceSentence({
       {' '}
     </span>
   )
+}
+
+function renderTextWithSevenChoicesBlanks(text: string, keyPrefix: string): ReactNode {
+  if (!sevenChoicesBlankPattern.test(text)) return text
+  sevenChoicesBlankPattern.lastIndex = 0
+  const nodes: ReactNode[] = []
+  let cursor = 0
+  let match: RegExpExecArray | null
+  let index = 0
+  while ((match = sevenChoicesBlankPattern.exec(text)) !== null) {
+    if (match.index > cursor) {
+      nodes.push(text.slice(cursor, match.index))
+    }
+    nodes.push(
+      <span key={`${keyPrefix}-seven-blank-${index}`} className="ps-seven-choice-blank">
+        {match[1]}
+      </span>,
+    )
+    cursor = match.index + match[0].length
+    index += 1
+  }
+  if (cursor < text.length) {
+    nodes.push(text.slice(cursor))
+  }
+  return nodes
 }
 
 /* ─── Question list renderer ───────────────────────────────────── */
