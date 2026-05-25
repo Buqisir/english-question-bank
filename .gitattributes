@@ -1,0 +1,15 @@
+# Tracked-file attributes.
+#
+# claude-mem-strip filter: removes auto-appended <claude-mem-context>...</claude-mem-context>
+# blocks from a tracked file before staging or comparing against HEAD. The block
+# is injected by the claude-mem plugin's PostToolUse hook
+# (~/.claude/plugins/cache/thedotmack/claude-mem/.../hooks/hooks.json), so without
+# this filter the dump would land in commits whenever you run `git add` after a
+# Claude Code session.
+#
+# The filter is opt-in per machine: each developer registers the clean command
+# locally (see docs/agents/local-environment.md). On machines without the
+# filter configured, git silently passes content through (required=false), so
+# this attribute file is safe to commit and does not affect collaborators who
+# do not use claude-mem.
+AGENTS.md filter=claude-mem-strip
