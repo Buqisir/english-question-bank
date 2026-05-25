@@ -24,6 +24,8 @@ export function SevenChoicesAnalysisPanel({
 }: Props): ReactNode {
   const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
   const optionCardRefs = useRef<Record<string, HTMLElement | null>>({})
+  const jumpedCardRef = useRef<HTMLElement | null>(null)
+  const jumpResetRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const openSet = useMemo(() => new Set(openQuestionIds), [openQuestionIds])
   const openCount = openQuestionIds.length
 
@@ -31,11 +33,44 @@ export function SevenChoicesAnalysisPanel({
     return new Map(chains.map((chain) => [chain.correctOptionLabel, chain]))
   }, [chains])
 
+  const flashOption = (label: string): void => {
+    const target = optionCardRefs.current[label]
+    jumpedCardRef.current?.removeAttribute('data-jumped')
+    target?.removeAttribute('data-jumped')
+    if (target) {
+      // Restart the short attention animation even when the teacher clicks the same chip twice.
+      window.getComputedStyle(target).opacity
+      target.setAttribute('data-jumped', 'true')
+      jumpedCardRef.current = target
+    }
+    if (jumpResetRef.current) {
+      clearTimeout(jumpResetRef.current)
+    }
+    jumpResetRef.current = setTimeout(() => {
+      target?.removeAttribute('data-jumped')
+      if (jumpedCardRef.current === target) {
+        jumpedCardRef.current = null
+      }
+      jumpResetRef.current = null
+    }, 1000)
+  }
+
   const scrollToOption = (label: string): void => {
-    optionCardRefs.current[label]?.scrollIntoView({
-      block: 'start',
+    const target = optionCardRefs.current[label]
+    target?.scrollIntoView({
+      block: 'center',
       behavior: 'smooth',
     })
+    flashOption(label)
+  }
+
+  const jumpToOption = (label: string, chain: SevenChoicesChainView | undefined): void => {
+    if (chain && !openSet.has(chain.questionId)) {
+      onToggleChain(chain.questionId)
+      window.setTimeout(() => scrollToOption(label), 0)
+      return
+    }
+    scrollToOption(label)
   }
 
   const toggleDetails = (questionId: string): void => {
@@ -78,7 +113,7 @@ export function SevenChoicesAnalysisPanel({
               className="pi-seven-option-jump-chip"
               data-seven-color={chain?.colorIndex ?? undefined}
               data-active={isOpen ? 'true' : undefined}
-              onClick={() => scrollToOption(option.label)}
+              onClick={() => jumpToOption(option.label, chain)}
               aria-label={`跳转到选项 ${option.label}`}
             >
               {option.label}

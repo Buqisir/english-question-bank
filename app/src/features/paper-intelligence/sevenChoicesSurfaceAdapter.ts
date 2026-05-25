@@ -274,14 +274,14 @@ function buildChainViews(input: {
     const unresolvedClues: string[] = []
     const leftHighlights: SevenChoicesHighlightRange[] = []
 
-    for (const signal of contextSignals) {
+    for (const [signalIndex, signal] of contextSignals.entries()) {
       const ranges = findAllTextRanges(textMap, signal.signalText)
       if (ranges.length === 0) {
         unresolvedClues.push(`mechanism:${signal.signalText}`)
       }
       ranges.forEach((range, rangeIndex) => {
         leftHighlights.push({
-          id: `${questionId}-signal-${rangeIndex + 1}`,
+          id: `${questionId}-signal-${signalIndex + 1}-${rangeIndex + 1}`,
           questionId,
           kind: 'signal',
           text: signal.signalText,
@@ -290,14 +290,14 @@ function buildChainViews(input: {
       })
     }
 
-    for (const clue of item.topicClues ?? []) {
+    for (const [clueIndex, clue] of (item.topicClues ?? []).entries()) {
       const ranges = findAllTextRanges(textMap, clue)
       if (ranges.length === 0) {
         unresolvedClues.push(`topic:${clue}`)
       }
       ranges.forEach((range, rangeIndex) => {
         leftHighlights.push({
-          id: `${questionId}-topic-${rangeIndex + 1}`,
+          id: `${questionId}-topic-${clueIndex + 1}-${rangeIndex + 1}`,
           questionId,
           kind: 'topic',
           text: clue,
