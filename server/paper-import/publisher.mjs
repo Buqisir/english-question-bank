@@ -100,6 +100,20 @@ function upsertQuestionGroupTags(db, groupId, tags) {
   }
 }
 
+function getLatestDbAssetVersion(db, paperId) {
+  const table = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'paper_asset_versions'").get()
+  if (!table) return 0
+  const row = db.prepare('SELECT MAX(asset_version) AS version FROM paper_asset_versions WHERE paper_id = ?').get(paperId)
+  const version = Number(row?.version)
+  return Number.isInteger(version) && version > 0 ? version : 0
+}
+
+function computeNextPublishVersion({ db, paperAssetsDir, paperId }) {
+  const diskNext = computeNextPaperAssetVersion(paperAssetsDir, paperId)
+  const dbNext = getLatestDbAssetVersion(db, paperId) + 1
+  return Math.max(diskNext, dbNext)
+}
+
 export function ensurePaperImportDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS paper_asset_versions (
@@ -365,7 +379,7 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
 
   const paperId = validation.packageData.paperAsset.paper.paperId
   cleanupPaperImportTempArtifacts(paperAssetsDir)
-  const version = computeNextPaperAssetVersion(paperAssetsDir, paperId)
+  const version = computeNextPublishVersion({ db, paperAssetsDir, paperId })
   const readingGroups = getReadingChoiceGroups(validation.packageData.paperAsset).map((group) => ({
     groupId: group.groupId,
     title: group.title,
