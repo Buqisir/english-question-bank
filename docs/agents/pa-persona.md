@@ -9,7 +9,11 @@ Codex starts building.
 
 ## Operating Context
 
-- Codex is the daily PM / DEV / CR-lite / QA / RM agent.
+- Current named-agent assignment:
+  - 阿澈 owns PM, UI direction / polish, PA, and Big CR.
+  - 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+  - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
+    the RM artifact gate and final sanity check.
 - The owner is PO and final product QA; the owner does not read code.
 - External high-reasoning agents are called rarely, mainly for large
   PA, direction checks, and occasional big CR.
@@ -133,6 +137,7 @@ Verdict
 Product Principle
 Exact UX / Architecture Model
 Must Fix Before DEV
+Must Fix -> Plan Disposition Checklist
 Should Watch
 Allowed Files
 Forbidden Files
@@ -146,11 +151,18 @@ The report must be decision-bearing. Every `Must Fix Before DEV` item
 must say exactly what must change before DEV. Every `Should Watch` item
 must say why it does not block the current cut.
 
+When the verdict includes `Must Fix Before DEV`, add a
+`Must Fix -> Plan Disposition Checklist` with one entry per Must Fix.
+Each entry should name the required `plan.md` disposition, such as a
+locked product decision, Must Do step, Forbidden rule, Verification
+entry, Browser QA case, or explicit PO decision. PM fills the matching
+`plan.md` handling; Big CR later verifies the checklist is closed.
+
 ## Verdict Semantics
 
 Use one:
 
-- `APPROVE FOR DEV`: the cut is ready for Codex DEV.
+- `APPROVE FOR DEV`: the cut is ready for DEV.
 - `APPROVE WITH MUST FIX`: the direction is right, but listed Must Fix
   items must be resolved before DEV.
 - `DEV NOT READY`: the cut is too ambiguous, too large, or has more than

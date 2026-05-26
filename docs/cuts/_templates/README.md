@@ -61,6 +61,24 @@ creating `pa.md`, unless the review itself is an important handoff artifact.
 - Do not commit prompt files merely because they existed in chat; commit them
 only when future agents need to rerun, audit, or resume from them.
 
+## RM Artifact Gate
+
+Before RM merge, required artifacts must exist and be non-empty. Missing
+required artifacts stop the merge with `ESCALATION: CONTEXT
+INSUFFICIENT`.
+
+Medium cuts:
+
+- `plan.md`
+- `pa.md`, or PA-lite recorded in `plan.md` / `decisions.md` when PA was
+  used
+- `cr.md`, or PR-description / final-summary CR record when Big CR was
+  triggered
+
+Large cuts additionally require:
+
+- `cut-note.md`
+
 ## External Agent Rule
 
 Default external-agent behavior is chat-first while the team is still deciding.
@@ -77,7 +95,7 @@ External agents may write directly to repo only when the prompt gives:
 If any of those are missing, the external agent should return advice in chat
 instead of writing files.
 
-## Ten Hard Rules
+## Hard Rules
 
 1. Small cuts do not create `docs/cuts/<cut-id>/` by default.
 2. Medium / large cuts must commit `plan.md` before DEV starts.
@@ -89,5 +107,6 @@ instead of writing files.
    durable standalone artifact.
 8. Claude / external agents discuss in chat until Codex or the owner asks them
    to write a specific repo path.
-9. Large cuts need `cut-note.md` before closeout.
-10. Keep the file set minimal; do not fill templates just to satisfy ceremony.
+9. RM merge stops when required medium / large artifacts are missing or empty.
+10. Large cuts need `cut-note.md` before closeout.
+11. Keep the file set minimal; do not fill templates just to satisfy ceremony.

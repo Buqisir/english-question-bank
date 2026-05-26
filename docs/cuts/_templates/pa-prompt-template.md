@@ -81,6 +81,12 @@ Worktree check before writing:
 
 Use `docs/agents/pa-persona.md` output sections.
 
+If PA returns any Must Fix items, include a
+`Must Fix -> Plan Disposition Checklist` with one entry per Must Fix.
+Each entry should state where the PM must reflect the disposition in
+`plan.md`, such as `Locked Product Decisions`, `Must Do`, `Forbidden`,
+`Verification`, `Browser QA Matrix`, or `PA Follow-Up Decisions`.
+
 If PA opens or changes decisions, state the required `decisions.md`
 status update explicitly:
 

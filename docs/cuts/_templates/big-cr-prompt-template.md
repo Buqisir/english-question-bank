@@ -100,9 +100,16 @@ Include:
 - verdict
 - Must Fix
 - Should Watch
+- PA -> `plan.md` disposition checklist status, when a PA checklist
+  exists
+- CR-lite `Self-Review Blind Spots`, when a CR-lite report exists
 - verify / QA gaps
 - scope notes
 - recommendation
+
+Before broad review, first inspect any PA -> `plan.md` disposition
+checklist and any CR-lite `Self-Review Blind Spots`. Then continue with
+normal risk-based Big CR.
 
 If CR opens or changes decisions, state the required `decisions.md`
 status update explicitly:

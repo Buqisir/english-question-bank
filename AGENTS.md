@@ -63,10 +63,21 @@ of duplicating workflow or browser rules.
   require a committed `plan.md` before DEV. Large cuts require committed
   `plan.md`, formal PA / CR records as applicable, and `cut-note.md`
   before closeout.
+- Before RM merge for medium / large cuts, 阿澈 must run an artifact
+  gate: required cut files must exist and be non-empty, and missing
+  required artifacts stop the merge. Medium cuts require `plan.md`, plus
+  `pa.md` or PA-lite recorded in `plan.md` when PA was used, and `cr.md`
+  or PR-description / final-summary CR record when Big CR was triggered.
+  Large cuts additionally require non-empty `cut-note.md`.
 - Cut decision ledgers should expose freshness. New `decisions.md`
   files should include `Last synced` and
   `Open items from external review`, and external PA / Big CR follow-up
   must update those fields before another agent depends on the file.
+- When PA returns Must Fix items, `pa.md` must include a checklist that
+  maps each Must Fix to the required `plan.md` disposition, and
+  `plan.md` must record the matching PM / PO handling under
+  `PA Follow-Up Decisions`. Big CR must verify this mapping before
+  treating the PA loop as closed.
 - Agent entrypoints should split reading into `Must Read` and
   `Background`. Keep Must Read cut-specific and short; Background may
   be skipped when already loaded in the same session.
@@ -105,33 +116,48 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
-- Default operating model: Codex is the daily PM / DEV / CR-lite / QA /
-  RM agent. The owner is PO and does final product QA, not code review.
+- Current named-agent assignment:
+  - 阿澈 owns PM, UI direction / polish, PA, and Big CR.
+  - 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+  - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
+    the RM artifact gate and final sanity check.
+  - Either agent may cover another role when quota or availability requires,
+    but role contracts and gates do not downgrade.
+- The owner is PO and does final product QA, not code review.
 - External high-reasoning agents are reserved for large-cut PA,
   direction checks, and occasional big CR. Do not route routine small or
   medium implementation work through external DEV agents unless the
   owner explicitly asks for that exception.
 - External PA must read and follow `docs/agents/pa-persona.md` before
   reviewing a plan. Its job is to find direction, boundary, data-contract,
-  and rework risks before Codex DEV starts.
+  and rework risks before DEV starts.
 - Remote GitHub `main` and PR heads are the shared source of truth.
-  Codex must fetch and confirm local / remote state before PA, CR, QA,
-  and RM. External PA / CR reports are useful input, not truth, until
-  Codex verifies the baseline, diff, and pushed commits.
+  The responsible agent must fetch and confirm local / remote state
+  before PA, CR, QA, and RM. External PA / CR reports are useful input,
+  not truth, until 阿澈 verifies the baseline, diff, and pushed commits.
 - Default flow:
   - **PM grill before DEV** whenever product behavior is still fuzzy.
   - **PA before DEV** only for architecture, data contracts, future-facing user-visible flows, migrations, export logic, or other large cuts.
-  - **Codex CR-lite after DEV** for any PR that will be merged.
+  - **CR-lite after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Cut tier flows:
   - Small: `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
   - Medium: `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
-  - Large: `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> Codex DEV -> Codex CR -> Codex browser QA -> PO QA -> RM -> Cut Note`.
+  - Large: `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA -> RM -> Cut Note`.
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
+  - If the owner asks an agent to skip or bypass a required gate, artifact,
+    review, QA, or RM check, the agent must stop and push back strongly.
+    Do not continue by treating the instruction as a normal override.
+    Continue only after the owner either follows the current flow or
+    explicitly changes the process rule / cut size in repo context.
 - Docs-only and type-only cuts do not need browser QA.
 - Do not automatically turn `Should Watch` findings into tasks. Only `Must Fix` blocks the current PR; `Follow-up Gate` blocks a named future stage.
+- When CR-lite feeds a later Big CR, CR-lite must include
+  `Self-Review Blind Spots`: places the implementer / reviewer suspects
+  may be weak but cannot confidently judge. Big CR should inspect those
+  first, then continue with normal risk-based review.
 - PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
 - Historical external-agent handoff rules are no longer the default
   workflow. Only use external DEV prompts when the owner explicitly
@@ -146,16 +172,18 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ## UI Collaboration
 
-- Claude may own UI polish work for CSS, visual styling, interaction
-  details, color systems, and small display-layer changes. Codex remains
-  owner for server logic, data layers, APIs, adapters, harness state
-  contracts, verification scripts, schemas, and medium / large cut
-  planning.
-- Claude may directly edit CSS and pure display-component code, but must
-  not touch `server/**`, `scripts/verify-*`, `app/src/domain/**`,
-  `schemas/**`, `app/public/paper-assets/**`, `*Adapter.ts`,
-  `shared/papersurface/**`, or print / PDF / export styling unless Codex
-  explicitly assigns that scope in a committed goal.
+- 阿澈 owns UI direction / polish: visual tone, layout judgment,
+  interaction detail, color systems, and whether a surface feels right
+  for the teacher workflow.
+- 小川 may implement UI code as DEV when assigned, but UI product /
+  visual direction stays with 阿澈 unless the owner changes the role
+  assignment in repo context.
+- 小川 may directly edit CSS and pure display-component code when the
+  cut assigns that DEV scope, but must not touch `server/**`,
+  `scripts/verify-*`, `app/src/domain/**`, `schemas/**`,
+  `app/public/paper-assets/**`, `*Adapter.ts`, `shared/papersurface/**`,
+  or print / PDF / export styling unless 阿澈 explicitly assigns that
+  scope in a committed `plan.md`.
 - Grey-zone files such as `SevenChoicesAnalysisPanel.tsx`,
   `DraftPaperWorkbench.tsx`, and
   `PaperIntelligencePaperSurfaceHarness.tsx` may receive display-only UI
@@ -173,7 +201,7 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   responsive behavior impact, or owner feedback such as "weird",
   "uncomfortable", or "not like A4" upgrades the work to normal UI
   CR-lite plus browser / PO QA as appropriate.
-- For UI branches, Claude should start from latest `main`, commit and
+- For UI branches, 小川 should start from latest `main`, commit and
   push a branch, then report branch, commit, changed files, visual intent,
   and QA status. Avoid direct pushes to `main` for multi-agent UI work
   unless the owner explicitly asks for that fast path.

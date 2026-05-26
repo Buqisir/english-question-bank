@@ -53,15 +53,21 @@ Hard rule:
   `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
 - Large cuts use:
   `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
-  -> Codex DEV -> Codex CR -> Codex browser QA -> PO QA
+  -> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA
   -> RM -> Cut Note`.
-- Codex is the default PM / DEV / CR-lite / QA / RM agent.
+- Current named-agent assignment:
+  - 阿澈 owns PM, UI direction / polish, PA, and Big CR.
+  - 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+  - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
+    the RM artifact gate and final sanity check.
+  - Either agent may cover another role when quota or availability
+    requires, but role contracts and gates do not downgrade.
 - The owner is PO and final product QA, not code reviewer.
 - External high-reasoning agents are for large-cut PA, direction checks,
   and occasional big CR. Do not use external DEV for routine small or
   medium cuts unless the owner explicitly asks.
 - Treat GitHub `main` and PR heads as the shared truth. External reports
-  are not truth until Codex verifies remote state.
+  are not truth until 阿澈 verifies remote state.
 - Use `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md` for external PA /
   Big CR prompts; do not hand-write repeated prompt boilerplate.
@@ -70,6 +76,10 @@ Hard rule:
   or `SCOPE UNCLEAR`.
 - Stop if mockups do not converge after 2 rounds, or if PA leaves more
   than 3 unresolved PO decisions.
+- Before RM merge for medium / large cuts, run the artifact gate in
+  `cut-workflow-protocol.md`; missing required artifacts stop the merge.
+- If the owner asks to bypass a required workflow gate, stop and push
+  back; do not treat the instruction as an ad hoc override.
 
 ### PA persona
 
@@ -80,14 +90,15 @@ Use when asking an external high-reasoning agent to act as PA.
 Hard rule:
 
 - PA is not DEV and must not write code.
-- PA exists to find wrong-direction implementation risk before Codex
+- PA exists to find wrong-direction implementation risk before DEV
   starts building.
 - PA must read `docs/agents/review-levels.md`,
   `docs/steering/cut-workflow-protocol.md`, and
   `docs/steering/product-scope-discipline.md`.
 - PA must output verdict, product principle, exact model, Must Fix,
-  Should Watch, allowed / forbidden files, static verify, browser QA,
-  DEV readiness, and at most 3 open PO decisions.
+  Must Fix -> `plan.md` disposition checklist, Should Watch, allowed /
+  forbidden files, static verify, browser QA, DEV readiness, and at most
+  3 open PO decisions.
 
 ### UI mockup before DEV
 
@@ -119,7 +130,7 @@ Hard rule:
 
 File: `dev-completion-protocol.md`
 
-Use for Codex DEV and, only by explicit owner request, external DEV
+Use for 小川 DEV and, only by explicit owner request, external DEV
 handoffs that change files.
 
 Hard rule:

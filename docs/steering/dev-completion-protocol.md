@@ -5,8 +5,10 @@ inclusion: auto
 # DEV completion protocol
 
 Scope: applies to implementation work in the
-`Buqisir/english-question-bank` repository. Codex is the default DEV.
-External DEV handoffs are exception-only and should use this
+`Buqisir/english-question-bank` repository. 小川 is the default DEV
+under the current named-agent assignment; 阿澈 may cover DEV when quota
+or availability requires, but the DEV completion contract does not
+downgrade. External DEV handoffs are exception-only and should use this
 protocol only when the owner explicitly asks for external implementation.
 Authoritative — agents must follow this protocol unless the user
 overrides it inline for a specific task.
