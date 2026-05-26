@@ -3,6 +3,8 @@ import path from 'node:path'
 import mammoth from 'mammoth'
 
 const READING_LABELS = ['A', 'B', 'C', 'D']
+const SEVEN_CHOICES_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+const SEVEN_CHOICES_QUESTION_NOS = ['36', '37', '38', '39', '40']
 const MAX_SKIPPED_RAW_LENGTH = 1600
 const IMAGE_OPTION_PLACEHOLDER = '图片选项，需查看原卷'
 
@@ -368,6 +370,108 @@ function uniqueSkipped(skipped) {
   })
 }
 
+// ---- Seven-choices parsing ----
+
+function isSevenChoicesOptionLine(line) {
+  return /^([A-G])[\.．、]\s*\S/.test(normalizeLine(line))
+}
+
+function parseSevenChoicesOptionBank(lines) {
+  // Scan backwards from the end: collect A-G option lines.
+  const optionLines = []
+  let splitIndex = lines.length
+  for (let i = lines.length - 1; i >= 0; i -= 1) {
+    if (isSevenChoicesOptionLine(lines[i])) {
+      optionLines.unshift(lines[i])
+      splitIndex = i
+    } else if (optionLines.length > 0) {
+      break
+    }
+  }
+  if (optionLines.length < 5) return null
+
+  const options = {}
+  for (const line of optionLines) {
+    const match = normalizeLine(line).match(/^([A-G])[\.．、]\s*(.+)$/)
+    if (match) {
+      const label = match[1]
+      const text = compactOptionText(match[2])
+      if (text && !options[label]) options[label] = text
+    }
+  }
+
+  const labels = Object.keys(options).sort()
+  if (labels.length < 5) return null
+
+  return {
+    optionBank: labels.map((label) => ({ label, text: options[label] })),
+    passageLines: lines.slice(0, splitIndex),
+  }
+}
+
+function parseSevenChoicesGroup(sectionLines, { answerMap, paperTail }) {
+  const parsed = parseSevenChoicesOptionBank(sectionLines)
+  if (!parsed) {
+    return {
+      group: null,
+      error: { reason: 'seven_choices_missing_option_bank', rawText: safeRawText(sectionLines) },
+    }
+  }
+
+  const questions = SEVEN_CHOICES_QUESTION_NOS.map((questionNo, index) => {
+    const answerKey = answerMap.get(questionNo) || ''
+    const padded = String(questionNo).padStart(3, '0')
+    return {
+      id: `q-${paperTail}-${padded}`,
+      stem: questionNo,
+      answerKey,
+      blankId: `blank-${paperTail}-${padded}`,
+    }
+  })
+
+  const groupId = `group-${paperTail}-seven-choices`
+  const paragraphs = parsed.passageLines
+    .filter((line) => !isStopSectionLine(line) && !/^第[一二三]/.test(normalizeLine(line)))
+    .map((line, index) => ({
+      id: `para-${paperTail}-seven-${index === 0 ? 'title' : `p${index}`}`,
+      text: line,
+    }))
+
+  if (paragraphs.length === 0) {
+    return {
+      group: null,
+      error: { reason: 'seven_choices_missing_passage', rawText: safeRawText(sectionLines) },
+    }
+  }
+
+  return {
+    group: {
+      groupId,
+      groupType: 'sevenChoices',
+      title: '七选五',
+      order: 4,
+      paragraphs,
+      optionBank: parsed.optionBank,
+      questions,
+      blankIds: questions.map((q) => q.blankId),
+    },
+    error: null,
+  }
+}
+
+function findSevenChoicesSections(lines) {
+  const sections = []
+  for (let index = 0; index < lines.length; index += 1) {
+    const section = classifySectionLine(lines[index])
+    if (section !== 'seven_choices') continue
+    // Don't double-count adjacent seven_choices marker lines.
+    if (sections.length > 0 && index - sections[sections.length - 1].startIndex <= 2) continue
+    const end = findNextMajorSection(lines, index + 1) ?? lines.length
+    sections.push({ startIndex: index, endIndex: end })
+  }
+  return sections
+}
+
 export function parseReadingCandidatesFromText(rawText, options = {}) {
   const sourceFilename = options.sourceFilename || 'paper.docx'
   const sourceHash = options.sourceHash || sha256(Buffer.from(String(rawText || '')))
@@ -393,6 +497,26 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
     }
   }
 
+  // Parse seven-choices sections.
+  const scSections = findSevenChoicesSections(lines)
+  let sevenChoicesGroup = null
+  let sevenChoicesError = null
+  if (scSections.length > 0) {
+    // Take the first七选五 section only (one standard section per paper).
+    const sc = scSections[0]
+    const scLines = lines.slice(sc.startIndex, sc.endIndex)
+    const parsed = parseSevenChoicesGroup(scLines, { answerMap, paperTail })
+    sevenChoicesGroup = parsed.group
+    sevenChoicesError = parsed.error
+  }
+
+  const allSkipped = uniqueSkipped([...skipped, ...collectSkippedSections(lines)])
+
+  // If七选五 was successfully parsed, remove the deferred skip entry.
+  const filteredSkipped = sevenChoicesGroup
+    ? allSkipped.filter((item) => item.reason !== 'seven_choices_deferred_to_i2')
+    : allSkipped
+
   return {
     paper: {
       paperId,
@@ -401,7 +525,9 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
       answerSourceFilename: options.answerSourceFilename || '',
     },
     readingGroups: readingGroups.sort((a, b) => a.order - b.order),
-    skipped: uniqueSkipped([...skipped, ...collectSkippedSections(lines)]),
+    sevenChoicesGroup,
+    sevenChoicesError,
+    skipped: filteredSkipped,
   }
 }
 

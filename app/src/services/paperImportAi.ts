@@ -13,6 +13,27 @@ export type PaperImportAiReadingGroup = {
   questions: PaperImportAiQuestion[]
 }
 
+export type PaperImportAiSevenChoicesGroup = {
+  groupId: string
+  groupType: 'sevenChoices'
+  title: string
+  order: number
+  paragraphs: Array<{ id: string; text: string }>
+  optionBank: Array<{ label: string; text: string }>
+  questions: Array<{
+    id: string
+    stem: string
+    answerKey: string
+    blankId: string
+  }>
+  blankIds: string[]
+}
+
+export type PaperImportAiSevenChoicesError = {
+  reason: string
+  rawText: string
+}
+
 export type PaperImportAiSkippedItem = {
   rawText: string
   reason: string
@@ -26,6 +47,8 @@ export type PaperImportAiParseResult = {
     answerSourceFilename: string
   }
   readingGroups: PaperImportAiReadingGroup[]
+  sevenChoicesGroup: PaperImportAiSevenChoicesGroup | null
+  sevenChoicesError: PaperImportAiSevenChoicesError | null
   skipped: PaperImportAiSkippedItem[]
 }
 
@@ -109,10 +132,30 @@ export async function analyzePaperImportAiReadingGroup(input: {
   return (await response.json()) as PaperImportAiAnalysisResult
 }
 
+export async function analyzePaperImportAiSevenChoicesGroup(input: {
+  paper: PaperImportAiParseResult['paper']
+  group: PaperImportAiSevenChoicesGroup
+  providerId: PaperImportAiProviderId
+}) {
+  const response = await fetch(apiPath('/api/paper-import-ai/analyze-seven-choices'), {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(input),
+  })
+  if (!response.ok) {
+    throw await parseError(response, `Failed to analyze seven-choices group: ${response.status}`)
+  }
+  return (await response.json()) as PaperImportAiAnalysisResult
+}
+
 export async function publishPaperImportAiAnalysis(input: {
   file: File
   parseResult: PaperImportAiParseResult
   analysesByGroupId: Record<string, Record<string, unknown>>
+  sevenChoicesGroup?: PaperImportAiSevenChoicesGroup | null
+  sevenChoicesAnalysis?: Record<string, unknown> | null
 }) {
   const formData = new FormData()
   formData.append('files', input.file, input.file.name)
@@ -122,6 +165,8 @@ export async function publishPaperImportAiAnalysis(input: {
       JSON.stringify({
         parseResult: input.parseResult,
         analysesByGroupId: input.analysesByGroupId,
+        sevenChoicesGroup: input.sevenChoicesGroup || null,
+        sevenChoicesAnalysis: input.sevenChoicesAnalysis || null,
       }),
     ], { type: 'application/json' }),
     'paper-import-ai-publish.json',

@@ -2,6 +2,7 @@ import { parsePaperImportMultipart } from '../paper-import/multipart.mjs'
 import { publishPaperImportPackage } from '../paper-import/publisher.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { analyzeReadingImportCandidate } from './analyzeReading.mjs'
+import { analyzeSevenChoicesImportCandidate } from './analyzeSevenChoices.mjs'
 import { parseReadingDocxBuffer } from './docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from './packageBuilder.mjs'
 
@@ -73,6 +74,7 @@ function parsePublishPayload(files, fields) {
 
 export function createPaperImportAiRoutes(services = {}) {
   const analyzeReading = services.analyzeReading || analyzeReadingImportCandidate
+  const analyzeSevenChoices = services.analyzeSevenChoices || analyzeSevenChoicesImportCandidate
   return [
     defineRoute('POST', /^\/api\/paper-import-ai\/parse$/, async ({ request, response, context }) => {
       let files = []
@@ -109,6 +111,15 @@ export function createPaperImportAiRoutes(services = {}) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
     }),
+    defineRoute('POST', /^\/api\/paper-import-ai\/analyze-seven-choices$/, async ({ request, response, context }) => {
+      try {
+        const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
+        const result = await analyzeSevenChoices(input)
+        context.sendJson(response, 200, result)
+      } catch (error) {
+        context.sendJson(response, 422, { error: routeError(error) })
+      }
+    }),
     defineRoute('POST', /^\/api\/paper-import-ai\/publish$/, async ({ request, response, context }) => {
       let files = []
       let fields = {}
@@ -125,6 +136,8 @@ export function createPaperImportAiRoutes(services = {}) {
         packageFiles = buildPaperImportAiPackageFiles({
           parseResult: payload.parseResult,
           analysesByGroupId: payload.analysesByGroupId,
+          sevenChoicesGroup: payload.sevenChoicesGroup || null,
+          sevenChoicesAnalysis: payload.sevenChoicesAnalysis || null,
           sourceDocx: {
             fileName: readableFileName(paperFile),
             contentType: paperFile.contentType,

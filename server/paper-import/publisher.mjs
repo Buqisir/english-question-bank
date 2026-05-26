@@ -296,8 +296,19 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
   )
 }
 
-function buildQaLinks(paperId, version, readingGroups) {
-  return readingGroups.map((group) => {
+function getSevenChoicesGroups(asset) {
+  const groups = asset?.content?.groups || {}
+  return Object.values(groups)
+    .filter((group) => group?.groupType === 'sevenChoices')
+    .map((group) => ({
+      groupId: group.groupId,
+      title: group.title || '七选五',
+      defaultQuestionId: group.questionIds?.[0] || null,
+    }))
+}
+
+function buildQaLinks(paperId, version, readingGroups, scGroups) {
+  const readingLinks = readingGroups.map((group) => {
     const latestParams = new URLSearchParams()
     latestParams.set('view', 'paper-intelligence')
     latestParams.set('source', 'paper-asset')
@@ -316,6 +327,28 @@ function buildQaLinks(paperId, version, readingGroups) {
       versionHref: `?${versionParams.toString()}`,
     }
   })
+
+  const scLinks = (scGroups || []).map((group) => {
+    const latestParams = new URLSearchParams()
+    latestParams.set('view', 'paper-intelligence')
+    latestParams.set('source', 'paper-asset')
+    latestParams.set('paperId', paperId)
+    latestParams.set('surface', 'paper')
+    latestParams.set('groupId', group.groupId)
+    latestParams.set('questionId', group.defaultQuestionId)
+
+    const versionParams = new URLSearchParams(latestParams)
+    versionParams.set('version', `v${version}`)
+
+    return {
+      groupId: group.groupId,
+      title: group.title,
+      latestHref: `?${latestParams.toString()}`,
+      versionHref: `?${versionParams.toString()}`,
+    }
+  })
+
+  return [...readingLinks, ...scLinks]
 }
 
 export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFailure = false }) {
@@ -338,12 +371,13 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
     title: group.title,
     defaultQuestionId: group.questionIds?.[0] || null,
   }))
+  const scGroups = getSevenChoicesGroups(validation.packageData.paperAsset)
   const publishReport = {
     ok: true,
     paperId,
     assetVersion: version,
     versionName: `v${version}`,
-    qaLinks: buildQaLinks(paperId, version, readingGroups),
+    qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups),
     searchHref: '/?q=2024%20九省联考',
     generatedAt: new Date().toISOString(),
   }

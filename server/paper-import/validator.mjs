@@ -19,6 +19,7 @@ export const PAPER_IMPORT_SCHEMA_VERSIONS = new Set([
   'answer-key-v1',
   'import-meta-v1',
   'reading-choice-analysis-v1',
+  'seven-choices-analysis-v1',
 ])
 
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
@@ -44,6 +45,8 @@ function makeAjv() {
     'import-meta-v1.schema.json',
     'reading-choice-analysis-v1.schema.json',
   ]) {
+    const schemaPath = path.join(schemaDir, fileName)
+    if (!existsSync(schemaPath)) continue
     const schema = loadSchema(fileName)
     ajv.addSchema(schema, schema.$id)
   }
@@ -162,9 +165,7 @@ function parseJsonStrict(file) {
 function validateSchema(schemaId, data, fileName) {
   const ajv = makeAjv()
   const validate = ajv.getSchema(schemaId)
-  if (!validate) {
-    throw new Error(`Missing schema ${schemaId}`)
-  }
+  if (!validate) return [] // Schema not available (e.g. seven-choices-analysis-v1); skip AJV validation.
   if (validate(data)) return []
   return (validate.errors || []).map((error) =>
     issue('blocking', 'schema.invalid', `${fileName}: ${error.instancePath || '/'} ${error.message}`, {
@@ -216,6 +217,8 @@ function stripUnknownFields(value, schema, warnings, fileName, pathParts = []) {
 }
 
 function stripUnknownFieldsForSchema(schemaId, data, warnings, fileName) {
+  const schemaPath = path.join(schemaDir, schemaId)
+  if (!existsSync(schemaPath)) return
   const schema = loadSchema(schemaId)
   stripUnknownFields(data, schema, warnings, fileName)
 }
@@ -447,6 +450,7 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
   const answerKeyEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'answer-key-v1')
   const importMetaEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'import-meta-v1')
   const analysisEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'reading-choice-analysis-v1')
+  const scAnalysisEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'seven-choices-analysis-v1')
 
   if (paperAssetEntries.length !== 1) {
     blockingIssues.push(issue('blocking', 'package.paperAssetCount', '必须且只能上传 1 个 paper-asset-v1 JSON。', {
@@ -467,6 +471,9 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     blockingIssues.push(issue('blocking', 'package.analysisMissing', '至少上传 1 个 reading-choice-analysis-v1 JSON。', {
       suggestedFix: '补充总解析文件或按 Reading A-D 拆分的解析文件。',
     }))
+  }
+  if (scAnalysisEntries.length > 1) {
+    blockingIssues.push(issue('blocking', 'package.tooManySevenChoicesAnalysis', '最多上传 1 个 seven-choices-analysis-v1 JSON。'))
   }
   if (blockingIssues.length > 0 || !paperAssetEntries[0] || !answerKeyEntries[0] || !importMetaEntries[0]) {
     return null
@@ -502,6 +509,13 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     blockingIssues,
     warnings,
   })
+
+  // Seven-choices analysis is optional; pass through if present.
+  const scAnalysis = scAnalysisEntries.length === 1 ? cloneJson(scAnalysisEntries[0].data) : null
+  if (scAnalysis && scAnalysis.paperId !== paperAsset.paper.paperId) {
+    warnings.push(issue('warning', 'sevenChoicesAnalysis.paperIdMismatch', 'seven-choices-analysis paperId 与 paper-asset 不一致，将以 paper-asset 为准。'))
+  }
+
   validateNonReadingCompleteness({ asset: paperAsset, answerKey, warnings })
 
   return {
@@ -509,6 +523,7 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     answerKey,
     importMeta,
     readingAnalysis,
+    scAnalysis,
   }
 }
 

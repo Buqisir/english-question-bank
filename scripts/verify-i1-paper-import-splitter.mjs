@@ -73,6 +73,8 @@ function assertAllowedScope() {
     'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
     'app/src/features/paper-import-ai/paperImportAiWorkbench.css',
     'app/src/services/paperImportAi.ts',
+    'docs/cuts/I2-seven-choices-ai-import/agent-entrypoint.md',
+    'docs/cuts/I2-seven-choices-ai-import/plan.md',
     'server/api.mjs',
     'server/ai-providers/chatCompletions.mjs',
     'server/ai-providers/deepseek.mjs',
@@ -80,7 +82,10 @@ function assertAllowedScope() {
     'server/package.json',
     'server/package-lock.json',
     'server/paper-import/publisher.mjs',
+    'server/paper-import/storage.mjs',
+    'server/paper-import/validator.mjs',
     'server/paper-import-ai/analyzeReading.mjs',
+    'server/paper-import-ai/analyzeSevenChoices.mjs',
     'server/paper-import-ai/docxSplitter.mjs',
     'server/paper-import-ai/packageBuilder.mjs',
     'server/paper-import-ai/routes.mjs',
@@ -90,6 +95,7 @@ function assertAllowedScope() {
     'scripts/verify-i1-paper-import-analysis.mjs',
     'scripts/verify-i1-paper-import-route.mjs',
     'scripts/verify-i1-paper-import-splitter.mjs',
+    'scripts/verify-i2-seven-choices-ai-import.mjs',
   ])
   const files = changedFiles()
   const unexpected = files.filter((file) => !allowed.has(file))
@@ -179,8 +185,8 @@ function assertTextFixture() {
   )
   assert('later non-reading headings do not leak into reading group fields', !/第二节|第三部分/.test(readingGroupText(result.readingGroups)))
   assert(
-    'seven choices section is skipped for I2',
-    result.skipped.some((entry) => entry.reason === 'seven_choices_deferred_to_i2')
+    'seven choices section detected but missing option bank is observable',
+    result.sevenChoicesError && result.sevenChoicesError.reason === 'seven_choices_missing_option_bank'
   )
   assert(
     'non-reading sections are recorded as skipped',
@@ -306,8 +312,16 @@ async function assertRealDocxFixtures() {
     'ABCD'
   )
   assert(
-    'canonical 2024 JSLK skips seven choices for I2',
-    canonical.skipped.some((entry) => entry.reason === 'seven_choices_deferred_to_i2')
+    'canonical 2024 JSLK parses seven choices group (I2)',
+    canonical.sevenChoicesGroup && canonical.sevenChoicesGroup.groupType === 'sevenChoices'
+  )
+  assert(
+    'canonical 2024 JSLK seven choices group has 5 questions',
+    canonical.sevenChoicesGroup?.questions?.length === 5
+  )
+  assert(
+    'canonical 2024 JSLK seven choices group has A-G option bank',
+    canonical.sevenChoicesGroup?.optionBank?.length === 7
   )
   assert('canonical 2024 JSLK option text does not absorb later section heading', !/第二节|第三部分|第四部分/.test(readingGroupText(canonical.readingGroups)))
 

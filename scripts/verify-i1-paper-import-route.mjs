@@ -64,6 +64,7 @@ function assertAllowedScope() {
     'server/paper-import-ai/',
     'server/ai-providers/',
     'app/src/features/paper-import-ai/',
+    'docs/cuts/I2-seven-choices-ai-import/',
   ]
   const allowed = new Set([
     'app/src/App.tsx',
@@ -74,7 +75,10 @@ function assertAllowedScope() {
     'scripts/verify-i1-paper-import-analysis.mjs',
     'scripts/verify-i1-paper-import-route.mjs',
     'scripts/verify-i1-paper-import-splitter.mjs',
+    'scripts/verify-i2-seven-choices-ai-import.mjs',
     'server/paper-import/publisher.mjs',
+    'server/paper-import/storage.mjs',
+    'server/paper-import/validator.mjs',
   ])
   const files = changedFiles()
   const unexpected = files.filter((file) => !allowed.has(file) && !allowedPrefixes.some((prefix) => file.startsWith(prefix)))

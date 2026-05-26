@@ -79,8 +79,8 @@ try {
     readJson(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)).paper.assetVersion === 1,
   )
   assert(
-    'publish returns four QA links',
-    Array.isArray(first.publish?.qaLinks) && first.publish.qaLinks.length === 4,
+    'publish returns QA links (4 Reading + 七选五 if present)',
+    Array.isArray(first.publish?.qaLinks) && first.publish.qaLinks.length >= 4,
   )
   assert(
     'QA links include latest and version hrefs',

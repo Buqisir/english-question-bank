@@ -2,6 +2,7 @@ import { AlertTriangle, ArrowLeft, CheckCircle2, ExternalLink, FileText, Loader2
 import { useRef, useState } from 'react'
 import {
   analyzePaperImportAiReadingGroup,
+  analyzePaperImportAiSevenChoicesGroup,
   parsePaperImportAiDocx,
   publishPaperImportAiAnalysis,
   type PaperImportAiAnalysisResult,
@@ -10,6 +11,7 @@ import {
   type PaperImportAiPublishResult,
   type PaperImportAiQuestion,
   type PaperImportAiReadingGroup,
+  type PaperImportAiSevenChoicesGroup,
 } from '../../services/paperImportAi'
 import './paperImportAiWorkbench.css'
 
@@ -47,7 +49,6 @@ function firstPassageLine(group: PaperImportAiReadingGroup) {
 }
 
 function reasonLabel(reason: string) {
-  if (reason === 'seven_choices_deferred_to_i2') return '七选五留到 I2'
   if (reason.endsWith('_out_of_scope_for_i1')) return 'I1 范围外'
   if (reason.includes('missing_questions_or_options')) return '题干或选项不完整'
   if (reason.includes('missing_passage')) return '缺少语篇正文'
@@ -230,12 +231,14 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const [message, setMessage] = useState('')
   const [providerId, setProviderId] = useState<PaperImportAiProviderId>('deepseek-v4-pro')
   const [analysisByGroupId, setAnalysisByGroupId] = useState<Record<string, AnalysisState>>({})
+  const [scAnalysisState, setScAnalysisState] = useState<AnalysisState>({ status: 'idle', message: '', result: null })
   const [publishState, setPublishState] = useState<PublishState>({ status: 'idle', message: '', result: null })
 
   function resetParsedResult() {
     setMessage('')
     setResult(null)
     setAnalysisByGroupId({})
+    setScAnalysisState({ status: 'idle', message: '', result: null })
     setPublishState({ status: 'idle', message: '', result: null })
   }
 
@@ -293,12 +296,34 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
 
   async function handleAnalyzeAll() {
     if (!result) return
-    await Promise.all(
-      result.readingGroups.map((group) => {
-        if (analysisByGroupId[group.groupId]?.status === 'done') return Promise.resolve()
-        return handleAnalyze(group)
-      }),
-    )
+    const tasks = result.readingGroups.map((group) => {
+      if (analysisByGroupId[group.groupId]?.status === 'done') return Promise.resolve()
+      return handleAnalyze(group)
+    })
+    if (result.sevenChoicesGroup && scAnalysisState.status !== 'done') {
+      tasks.push(handleAnalyzeSevenChoices(result.sevenChoicesGroup))
+    }
+    await Promise.all(tasks)
+  }
+
+  async function handleAnalyzeSevenChoices(group: PaperImportAiSevenChoicesGroup) {
+    if (!result) return
+    setScAnalysisState({ status: 'analyzing', message: '', result: null })
+    try {
+      const analysis = await analyzePaperImportAiSevenChoicesGroup({
+        paper: result.paper,
+        group,
+        providerId,
+      })
+      setScAnalysisState({ status: 'done', message: '七选五解析已生成。', result: analysis })
+      setPublishState({ status: 'idle', message: '', result: null })
+    } catch (error) {
+      setScAnalysisState({
+        status: 'error',
+        message: error instanceof Error ? error.message : String(error),
+        result: null,
+      })
+    }
   }
 
   async function handleAnalyze(group: PaperImportAiReadingGroup) {
@@ -348,14 +373,20 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         : []
     })
   }) || []
-  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || false
+  const scGroup = result?.sevenChoicesGroup || null
+  const scError = result?.sevenChoicesError || null
+  const scHasAnswers = scGroup ? scGroup.questions.every((q) => q.answerKey) : true
+  const scMissingAnswers = scGroup ? scGroup.questions.filter((q) => !q.answerKey).length : 0
+  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
+  const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
   const canPublish = Boolean(
     file &&
     result &&
     result.paper.answerSourceFilename &&
     result.readingGroups.length === 4 &&
     allGroupsAnalyzed &&
+    scAnalyzed &&
     missingAnswerCount === 0 &&
     answerConflicts.length === 0 &&
     publishState.status !== 'publishing',
@@ -372,6 +403,8 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         file,
         parseResult: result,
         analysesByGroupId,
+        sevenChoicesGroup: result.sevenChoicesGroup || null,
+        sevenChoicesAnalysis: scAnalysisState.result?.analysis || null,
       })
       setPublishState({ status: 'done', message: '已保存为正式试卷资产。', result: published })
     } catch (error) {
@@ -414,7 +447,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         >
           <UploadCloud size={38} aria-hidden="true" />
           <h2>导入完整试卷</h2>
-          <p>先识别阅读理解 A-D；可同时上传答案解析版，用官方答案和 AI 判断做对照。</p>
+          <p>识别阅读理解 A-D + 七选五；可同时上传答案解析版，用官方答案和 AI 判断做对照。</p>
           <button className="primary-button" type="button" onClick={() => inputRef.current?.click()}>
             选择 DOCX
           </button>
@@ -530,6 +563,10 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <CheckCircle2 size={15} aria-hidden="true" />
               答案无冲突
             </p>
+            <p className={scGroup ? (scAnalyzed && scHasAnswers ? 'is-ok' : '') : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              {scGroup ? '七选五就绪' : '无七选五'}
+            </p>
           </div>
           {missingReadingLabels.length > 0 && result ? (
             <p className="pi-ai-warning">缺少 Reading {missingReadingLabels.join(' / ')}，暂不保存。</p>
@@ -545,6 +582,15 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
                 </p>
               ))}
             </div>
+          ) : null}
+          {scGroup && scMissingAnswers > 0 ? (
+            <p className="pi-ai-warning">七选五还有 {scMissingAnswers} 道题没有答案解析版答案。</p>
+          ) : null}
+          {scGroup && scAnalysisState.status === 'error' ? (
+            <p className="pi-ai-error">七选五解析失败：{scAnalysisState.message}</p>
+          ) : null}
+          {scGroup && scAnalysisState.status === 'idle' ? (
+            <p className="pi-ai-warning">检测到七选五，请先完成解析。</p>
           ) : null}
           <button className="primary-button pi-ai-publish-button" type="button" disabled={!canPublish} onClick={() => void handlePublish()}>
             {publishState.status === 'publishing' ? <Loader2 size={16} aria-hidden="true" /> : <Save size={16} aria-hidden="true" />}
@@ -636,6 +682,66 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           )}
         </section>
 
+        {scGroup ? (
+          <section className="pi-ai-panel pi-ai-groups">
+            <div className="pi-ai-panel-heading">
+              <h2>七选五 预览</h2>
+              <span>{scAnalysisState.status === 'done' ? '已解析' : scAnalysisState.status === 'analyzing' ? '解析中' : scAnalysisState.status === 'error' ? '失败' : '待解析'}</span>
+            </div>
+            <article className="pi-ai-group-card">
+              <header>
+                <div>
+                  <strong>{scGroup.title}</strong>
+                  <span>{scGroup.groupId}</span>
+                </div>
+                <em>{scGroup.questions.length} 题 · {scGroup.optionBank.length} 选项 · {scGroup.paragraphs.length} 段</em>
+              </header>
+              <p>{scGroup.paragraphs[0]?.text || '未识别到段落文本'}</p>
+              <ol>
+                {scGroup.questions.map((q) => (
+                  <li key={q.id}>
+                    <span>{q.stem}</span>
+                    <em>答案 {q.answerKey || '待核对'}</em>
+                  </li>
+                ))}
+              </ol>
+              <div className="pi-ai-analysis-actions">
+                <button
+                  className="primary-button"
+                  type="button"
+                  disabled={scAnalysisState.status === 'analyzing'}
+                  onClick={() => void handleAnalyzeSevenChoices(scGroup)}
+                >
+                  {scAnalysisState.status === 'analyzing' ? (
+                    <Loader2 size={16} aria-hidden="true" />
+                  ) : (
+                    <Sparkles size={16} aria-hidden="true" />
+                  )}
+                  生成七选五解析
+                </button>
+                {scAnalysisState.status === 'error' ? (
+                  <span className="pi-ai-error">{scAnalysisState.message}</span>
+                ) : null}
+                {scAnalysisState.result ? (
+                  <span className="pi-ai-muted">
+                    {scAnalysisState.result.provider} · {scAnalysisState.result.model} · {scAnalysisState.result.latencyMs}ms
+                  </span>
+                ) : null}
+              </div>
+            </article>
+          </section>
+        ) : scError ? (
+          <section className="pi-ai-panel">
+            <div className="pi-ai-panel-heading">
+              <h2>七选五 检测</h2>
+              <span><AlertTriangle size={15} aria-hidden="true" /></span>
+            </div>
+            <p className="pi-ai-warning">
+              检测到七选五但无法解析：{scError.reason === 'seven_choices_missing_option_bank' ? '缺少 A-G 选项池' : scError.reason === 'seven_choices_missing_passage' ? '缺少篇章正文' : scError.reason}
+            </p>
+          </section>
+        ) : null}
+
         <section className="pi-ai-panel pi-ai-skipped">
           <div className="pi-ai-panel-heading">
             <h2>跳过项</h2>
@@ -654,7 +760,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               ))}
             </div>
           ) : (
-            <p className="pi-ai-muted">七选五、完形、语法填空等非 I1 范围内容会单独列在这里。</p>
+            <p className="pi-ai-muted">完形、语法填空等非当前范围内容会单独列在这里。</p>
           )}
         </section>
       </div>
