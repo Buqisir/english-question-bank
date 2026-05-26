@@ -13,7 +13,6 @@ of duplicating workflow or browser rules.
 - Save durable workflow decisions, recurring pitfalls, reviewer invocation preferences, and stable product rules to Kratos at the end of a task.
 - Do not save API keys, secrets, full copyrighted passages, private student/person data, or large raw model outputs to Kratos.
 - Keep Kratos project scope anchored to `/Users/huangxuewei/Projects/english-question-bank`; do not mix it with `Local Vaults` memory.
-- Per-machine setup (not tracked in repo state) lives in `docs/agents/local-environment.md`. Notably: register the `claude-mem-strip` git filter so the `claude-mem` plugin's hook output does not pollute commits.
 
 ## Product Posture
 
@@ -196,4 +195,3 @@ Use the default local triage vocabulary: `needs-triage`, `needs-info`, `ready-fo
 ### Domain docs
 
 Single-context project. Read `CONTEXT.md` and relevant ADRs under `docs/adr/` before changing product structure, domain model, tests, or architecture. See `docs/agents/domain.md`.
-
