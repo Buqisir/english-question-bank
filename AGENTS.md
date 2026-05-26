@@ -111,8 +111,10 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Before proposing a plan for a task, first state in one line:
   `cut size: small / medium / large / irreversible; touches schema, data contract, product boundary, or teaching interpretation: yes/no`.
 - If the cut is small and touches none of those four areas, proceed directly.
-- Otherwise ask: "Should we consult Claude first, or proceed to plan?"
-  Wait for the owner's answer before proceeding.
+- For medium / large / irreversible cuts, 阿澈 owns PM / PA and should
+  create or update the repo-routed `plan.md` before DEV starts. External
+  PA / Big CR is triggered by risk or explicit owner request, not by a
+  default external-review gate.
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
