@@ -41,6 +41,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-c7-paper-import-contracts.mjs` | C7 schema / offline validator contracts | yes |
 | `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol | yes |
 | `verify-i1-paper-import-splitter.mjs` | I1 DOCX reading splitter endpoint and parser contract | no |
+| `verify-i1-paper-import-route.mjs` | I1 owner-only `?view=paper-import-ai` parse preview route | no |
 
 ## PaperSurface and Paper Intelligence
 

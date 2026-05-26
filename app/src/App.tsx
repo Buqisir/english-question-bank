@@ -116,6 +116,7 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 // default like any other unknown surface.
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
 import { PaperImportWorkbench } from './features/paper-import/PaperImportWorkbench'
+import { PaperImportAiWorkbench } from './features/paper-import-ai/PaperImportAiWorkbench'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
@@ -946,6 +947,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [paperImportRouteActive, setPaperImportRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'paper-import'
+  })
+  const [paperImportAiRouteActive, setPaperImportAiRouteActive] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'paper-import-ai'
   })
   const [mySpaceRouteActive, setMySpaceRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
@@ -3365,6 +3370,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setPaperImportRouteActive(false)
+    setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
     setDraftPaperRoute({
@@ -3402,6 +3408,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperImportRouteActive(false)
+    setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(true)
     setCurrentPiRoute({ kind: 'none' })
   }, [])
@@ -3438,6 +3445,23 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setMySpaceRouteActive(false)
   }, [])
 
+  const paperImportAiOnBackToWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('view')
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setPaperImportAiRouteActive(false)
+    setPaperImportRouteActive(false)
+    setMySpaceRouteActive(false)
+  }, [])
+
   const openPaperImportWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
       const url = new URL(window.location.href)
@@ -3445,7 +3469,20 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setPaperImportRouteActive(true)
+    setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(false)
+  }, [])
+
+  const openPaperImportAiWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'paper-import-ai')
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setPaperImportAiRouteActive(true)
+    setPaperImportRouteActive(false)
+    setMySpaceRouteActive(false)
+    setCurrentPiRoute({ kind: 'none' })
   }, [])
 
   // ─── Paper Intelligence route rendering ───
@@ -3472,6 +3509,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   if (paperImportRouteActive) {
     return <PaperImportWorkbench onBackToWorkbench={paperImportOnBackToWorkbench} />
+  }
+
+  if (paperImportAiRouteActive) {
+    return <PaperImportAiWorkbench onBackToWorkbench={paperImportAiOnBackToWorkbench} />
   }
 
   if (currentPiRoute.kind === 'paper-intelligence') {
@@ -3578,6 +3619,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           <button className="ghost-button" type="button" onClick={openPaperImportWorkbench}>
             <FileText size={18} />
             整卷导入
+          </button>
+          <button className="ghost-button" type="button" onClick={openPaperImportAiWorkbench}>
+            <Sparkles size={18} />
+            AI 导题
           </button>
           <button
             className="home-mode-toggle"
