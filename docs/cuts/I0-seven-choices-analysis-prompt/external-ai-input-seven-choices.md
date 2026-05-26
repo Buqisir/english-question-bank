@@ -120,6 +120,8 @@ Mechanism rules:
   1. logical connector cohesion
   2. referential cohesion
   3. topic-field alignment
+- When no logical connector or referential cohesion is doing the main solving
+  work, topic-field alignment is not weak. It is the primary solving mechanism.
 - `supportingMechanismFacets` may contain at most 2 items.
 - `mechanismSignals` is required for every blank.
 - Each blank must have 2-5 `mechanismSignals`.
@@ -136,13 +138,15 @@ Mechanism rules:
 
 - Use it for the exact logical connector, pronoun, demonstrative, or other
   concrete cohesion signal that should be highlightable.
+- Treat these as strong solving signals that a future UI may highlight strongly.
 - Each item includes `mechanismFacet`, `signalText`, `signalSide`,
   `targetText`, and `relation`.
 - `signalSide` must be `option`, `context-before`, or `context-after`.
 - `signalText` must be an exact substring of its source. Prefer 1-8 English
   words. Use `targetText` for larger explanation objects.
 - For topic-field alignment, put compact matched words/chunks in
-  `mechanismSignals`; put broader context clue sets in `topicClues`.
+  `mechanismSignals`; put broader context-side topic-field chunks in
+  `topicClues`.
 
 `topicClues` rules:
 
@@ -150,11 +154,21 @@ Mechanism rules:
 - Include 3-6 items per blank.
 - Include only context-side word chunks from nearby passage text or heading.
 - Do not include words that appear only in the correct option.
+- Treat these as broader, weaker context-side topic-field clues. A future UI may
+  render them with weaker marks such as underlines or wave marks.
+
+Do not create a formal `contextClues` field, and do not use "context clue" or
+"上下文线索" as a formal category. That wording blurs `mechanismSignals`,
+`topicClues`, and `contextEvidence`.
+
+`contextEvidence` is the audit location for where to look. It is not a clue
+type and should not be treated as the thing that solved the blank.
 
 `optionFit` rules:
 
 - `correctOptionLabel` must match the supplied answer label.
 - `matchedClues` must compare option-side language with context-side clues.
+  It is expanded explanation detail, not a UI highlighting source.
 - `fitSummary` must explain the main solving move in Chinese.
 - `fitSummary` should be 1-2 Chinese sentences.
 - `teachingNote` should be one Chinese sentence and should state the
