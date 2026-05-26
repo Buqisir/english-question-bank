@@ -98,6 +98,26 @@ try {
     'DB has one published paper asset version row',
     db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get(paperId).count === 1,
   )
+
+  const existingTagDb = new DatabaseSync(path.join(tempRoot, 'existing-tag.sqlite'))
+  const existingTagAssets = path.join(tempRoot, 'existing-tag-paper-assets')
+  existingTagDb.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
+  existingTagDb.prepare(
+    "INSERT INTO tags (id, name, category, description, is_active) VALUES ('tag-existing-2024', '2024', '教师标签', '', 1)",
+  ).run()
+  const existingTagPublish = publishPaperImportPackage({ files, db: existingTagDb, paperAssetsDir: existingTagAssets })
+  assert('publish reuses existing tag names without UNIQUE failure', existingTagPublish.ok)
+  assert(
+    'existing 2024 tag remains single row after publish',
+    existingTagDb.prepare("SELECT COUNT(*) AS count FROM tags WHERE name = '2024'").get().count === 1,
+  )
+  assert(
+    'existing 2024 tag is linked to imported groups',
+    existingTagDb.prepare(
+      "SELECT COUNT(*) AS count FROM tag_links WHERE tag_id = 'tag-existing-2024' AND target_type = 'question_group'",
+    ).get().count > 0,
+  )
+  existingTagDb.close()
   const latestDir = path.join(paperAssetsDir, `${paperId}/latest`)
   const hiddenLatest = path.join(paperAssetsDir, `${paperId}/.latest-prev-window-test`)
   renameSync(latestDir, hiddenLatest)

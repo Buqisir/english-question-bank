@@ -70,12 +70,25 @@ function changedFiles() {
 
 function assertAllowedScope() {
   const allowed = new Set([
+    'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
+    'app/src/features/paper-import-ai/paperImportAiWorkbench.css',
+    'app/src/services/paperImportAi.ts',
     'server/api.mjs',
+    'server/ai-providers/chatCompletions.mjs',
+    'server/ai-providers/deepseek.mjs',
+    'server/ai-providers/gptRelay.mjs',
     'server/package.json',
     'server/package-lock.json',
+    'server/paper-import/publisher.mjs',
+    'server/paper-import-ai/analyzeReading.mjs',
     'server/paper-import-ai/docxSplitter.mjs',
+    'server/paper-import-ai/packageBuilder.mjs',
     'server/paper-import-ai/routes.mjs',
     'scripts/README.md',
+    'scripts/verify-c7-paper-import-publish.mjs',
+    'scripts/verify-ci.mjs',
+    'scripts/verify-i1-paper-import-analysis.mjs',
+    'scripts/verify-i1-paper-import-route.mjs',
     'scripts/verify-i1-paper-import-splitter.mjs',
   ])
   const files = changedFiles()
@@ -173,6 +186,58 @@ function assertTextFixture() {
     'non-reading sections are recorded as skipped',
     result.skipped.some((entry) => entry.reason === 'grammar_or_language_out_of_scope_for_i1' || entry.reason === 'cloze_out_of_scope_for_i1')
   )
+
+  const looseMarkerResult = parseReadingCandidatesFromText(
+    `
+21-24 BCDA
+第二部分 阅读理解
+A
+Birding Road Tour offers transport and expert guiding for visitors.
+21. What does Birding Road Tour offer?
+A. Free transportation. B. Informative guiding. C Expert photo service. D Tailored travel routes.
+B
+The second passage has ordinary option punctuation.
+22. What does the passage describe?
+A. A writer. B. A driver. C. A swimmer. D. A painter.
+C
+The third passage uses a missing final option dot.
+23. What is common among ordinary people?
+A. Sleep tracking. B. Number games. C. Fitness tracking. D It guarantees performance.
+D
+The fourth passage has a missing C marker dot.
+24. What does the scientist suggest?
+A. Listen to physical signals. B. Predict responses from data. C Abandon devices. D. Set clear targets.
+`,
+    { sourceFilename: 'loose-option-markers.docx', paperId: 'paper-loose-option-markers' },
+  )
+  const looseQuestions = looseMarkerResult.readingGroups.flatMap((group) => group.questions)
+  assertEqual('loose option marker fixture extracts all questions', looseQuestions.length, 4)
+  assertEqual('loose option marker fixture applies answer range', looseQuestions.map((question) => question.answerKey).join(''), 'BCDA')
+  assert('loose option marker fixture keeps missing-dot C option', looseQuestions[0].options.C === 'Expert photo service.')
+  assert('loose option marker fixture keeps missing-dot D option', looseQuestions[2].options.D === 'It guarantees performance.')
+  assert('loose option marker fixture keeps missing-dot C before dotted D', looseQuestions[3].options.C === 'Abandon devices.')
+
+  const imageOptionResult = parseReadingCandidatesFromText(
+    `
+32-35 CDBA
+第二部分 阅读理解
+D
+A passage explains a rain-powered device.
+32. What problem do the researchers aim to solve?
+A. The difficulty of separating charges. B. The lack of clean electricity sources. C. The inefficiency of charge harvesting. D. The damage of traditional hydropower.
+33. Which of the following best illustrates plug flow?
+A. B. C. D.
+34. What is the last paragraph mainly about concerning the model?
+A. Its potential cost in urban areas. B. Its promising use in green energy. C. Its complex design for rain power. D. Its practical need for more devices.
+35. What is a suitable title for the text?
+A. Revolutionary Energy from Raindrops B. Urgent Demand for Sustainable Energy C. Capturing Raindrops through Innovation D. Turning Charge Separation into Electricity
+`,
+    { sourceFilename: 'image-options.docx', paperId: 'paper-image-options' },
+  )
+  const imageQuestions = imageOptionResult.readingGroups.flatMap((group) => group.questions)
+  assertEqual('image option marker fixture keeps all questions', imageQuestions.length, 4)
+  assertEqual('image option marker fixture applies answer range', imageQuestions.map((question) => question.answerKey).join(''), 'CDBA')
+  assert('image option marker fixture marks image-only options for review', imageQuestions[1].options.A.includes('图片选项'))
 }
 
 function assertFalsePositiveRejection() {

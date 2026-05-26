@@ -4,6 +4,7 @@ import mammoth from 'mammoth'
 
 const READING_LABELS = ['A', 'B', 'C', 'D']
 const MAX_SKIPPED_RAW_LENGTH = 1600
+const IMAGE_OPTION_PLACEHOLDER = '图片选项，需查看原卷'
 
 function normalizeLine(value) {
   return String(value || '')
@@ -115,6 +116,16 @@ function parseAnswerRanges(rawText) {
   return answers
 }
 
+function mergeAnswerMaps(...maps) {
+  const merged = new Map()
+  for (const map of maps) {
+    for (const [questionNo, answer] of map.entries()) {
+      if (!merged.has(questionNo)) merged.set(questionNo, answer)
+    }
+  }
+  return merged
+}
+
 function questionStart(line) {
   const numbered = normalizeLine(line).match(/^(\d{1,2})[\.\uff0e、]\s*(.+)$/)
   if (numbered) return { questionNo: numbered[1], stem: normalizeLine(numbered[2]) }
@@ -133,7 +144,7 @@ function compactOptionText(value) {
 
 function extractInlineOptions(blockText) {
   const normalized = String(blockText || '').replace(/\s+/g, ' ')
-  const markerPattern = /(^|\s)([A-D])[\.\uff0e、]\s*/g
+  const markerPattern = /(^|\s)([A-D])(?:([\.\uff0e、])|\s+(?=[A-Z“"']))/g
   const markers = []
   let match
   while ((match = markerPattern.exec(normalized))) {
@@ -141,19 +152,41 @@ function extractInlineOptions(blockText) {
       label: match[2],
       markerStart: match.index + match[1].length,
       contentStart: markerPattern.lastIndex,
+      isStrong: Boolean(match[3]),
     })
   }
-  if (markers.length < 2) return {}
+  const selectedMarkers = selectOptionMarkers(markers)
+  if (selectedMarkers.length < 2) return {}
 
   const options = {}
-  for (let index = 0; index < markers.length; index += 1) {
-    const marker = markers[index]
-    const next = markers[index + 1]
+  for (let index = 0; index < selectedMarkers.length; index += 1) {
+    const marker = selectedMarkers[index]
+    const next = selectedMarkers[index + 1]
     const raw = normalized.slice(marker.contentStart, next ? next.markerStart : normalized.length)
     const text = compactOptionText(raw)
     if (text) options[marker.label] = text
   }
+  if (
+    selectedMarkers.length === READING_LABELS.length &&
+    Object.keys(options).length === 0 &&
+    selectedMarkers.every((marker) => marker.isStrong)
+  ) {
+    return Object.fromEntries(READING_LABELS.map((label) => [label, `${IMAGE_OPTION_PLACEHOLDER} ${label}`]))
+  }
   return options
+}
+
+function selectOptionMarkers(markers) {
+  const selected = []
+  let previousStart = -1
+  for (const label of READING_LABELS) {
+    const candidates = markers.filter((marker) => marker.label === label && marker.markerStart > previousStart)
+    const marker = candidates.find((item) => item.isStrong) || candidates[0]
+    if (!marker) break
+    selected.push(marker)
+    previousStart = marker.markerStart
+  }
+  return selected
 }
 
 function extractAnalysisLineOption(line) {
@@ -198,10 +231,11 @@ function parseQuestionBlock(lines, { answerMap, paperTail }) {
   const firstStem = questionStart(stemLines[0])?.stem || start.stem
   const continuation = stemLines.slice(1).map(normalizeLine).join(' ')
   const stem = normalizeLine([firstStem, continuation].filter(Boolean).join(' '))
-  const blockText = lines.join('\n')
+  const optionLines = optionStart >= 0 ? lines.slice(optionStart) : lines
+  const blockText = optionLines.join('\n')
   const answerLine = parseAnswerLine(lines)
   const inlineOptions = extractInlineOptions(blockText)
-  const options = mergeAnalysisLineOptions(lines, inlineOptions)
+  const options = mergeAnalysisLineOptions(optionLines, inlineOptions)
   if (answerLine?.optionText && !options[answerLine.answerKey]) {
     options[answerLine.answerKey] = answerLine.optionText
   }
@@ -340,7 +374,7 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
   const paperId = options.paperId || derivePaperId(sourceFilename, sourceHash)
   const paperTail = tailFromPaperId(paperId)
   const lines = toLines(rawText)
-  const answerMap = parseAnswerRanges(rawText)
+  const answerMap = mergeAnswerMaps(parseAnswerRanges(rawText), parseAnswerRanges(options.answerKeyText || ''))
   const markers = findReadingMarkers(lines)
   const readingGroups = []
   const skipped = []
@@ -364,6 +398,7 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
       paperId,
       sourceFilename,
       sourceHash,
+      answerSourceFilename: options.answerSourceFilename || '',
     },
     readingGroups: readingGroups.sort((a, b) => a.order - b.order),
     skipped: uniqueSkipped([...skipped, ...collectSkippedSections(lines)]),
@@ -374,9 +409,15 @@ export async function parseReadingDocxBuffer(buffer, options = {}) {
   const sourceFilename = options.sourceFilename || 'paper.docx'
   const sourceHash = sha256(buffer)
   const result = await mammoth.extractRawText({ buffer })
+  let answerKeyText = options.answerKeyText || ''
+  if (!answerKeyText && options.answerKeyBuffer) {
+    answerKeyText = (await mammoth.extractRawText({ buffer: options.answerKeyBuffer })).value
+  }
   return parseReadingCandidatesFromText(result.value, {
     sourceFilename,
     sourceHash,
     paperId: options.paperId,
+    answerKeyText,
+    answerSourceFilename: options.answerSourceFilename,
   })
 }
