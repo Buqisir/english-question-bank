@@ -388,7 +388,7 @@ function parseSevenChoicesOptionBank(lines) {
       break
     }
   }
-  if (optionLines.length < 5) return null
+  if (optionLines.length < SEVEN_CHOICES_LABELS.length) return null
 
   const options = {}
   for (const line of optionLines) {
@@ -400,11 +400,11 @@ function parseSevenChoicesOptionBank(lines) {
     }
   }
 
-  const labels = Object.keys(options).sort()
-  if (labels.length < 5) return null
+  const missingLabels = SEVEN_CHOICES_LABELS.filter((label) => !options[label])
+  if (missingLabels.length > 0) return null
 
   return {
-    optionBank: labels.map((label) => ({ label, text: options[label] })),
+    optionBank: SEVEN_CHOICES_LABELS.map((label) => ({ label, text: options[label] })),
     passageLines: lines.slice(0, splitIndex),
   }
 }
@@ -512,8 +512,8 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
 
   const allSkipped = uniqueSkipped([...skipped, ...collectSkippedSections(lines)])
 
-  // If七选五 was successfully parsed, remove the deferred skip entry.
-  const filteredSkipped = sevenChoicesGroup
+  // If七选五 was detected, the structured group or error panel is the source of truth.
+  const filteredSkipped = scSections.length > 0
     ? allSkipped.filter((item) => item.reason !== 'seven_choices_deferred_to_i2')
     : allSkipped
 

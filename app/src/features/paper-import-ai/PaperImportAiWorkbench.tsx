@@ -287,7 +287,10 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         (sum, group) => sum + group.questions.filter((question) => question.answerKey).length,
         0,
       )
-      setMessage(`已识别 ${parsed.readingGroups.length} 个 Reading 题组${answerFile ? `，匹配 ${keyedCount} 个答案。` : '。'}`)
+      const sevenChoicesMessage = parsed.sevenChoicesGroup
+        ? `，七选五 ${parsed.sevenChoicesGroup.questions.length} 题 / ${parsed.sevenChoicesGroup.optionBank.length} 选项`
+        : parsed.sevenChoicesError ? '，检测到七选五但未能完整解析' : ''
+      setMessage(`已识别 ${parsed.readingGroups.length} 个 Reading 题组${answerFile ? `，匹配 ${keyedCount} 个答案` : ''}${sevenChoicesMessage}。`)
     } catch (error) {
       setStatus('error')
       setMessage(error instanceof Error ? error.message : String(error))
@@ -380,14 +383,15 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
+  const allImportAnalyzed = allGroupsAnalyzed && scAnalyzed
   const canPublish = Boolean(
     file &&
     result &&
     result.paper.answerSourceFilename &&
     result.readingGroups.length === 4 &&
-    allGroupsAnalyzed &&
-    scAnalyzed &&
+    allImportAnalyzed &&
     missingAnswerCount === 0 &&
+    scHasAnswers &&
     answerConflicts.length === 0 &&
     publishState.status !== 'publishing',
   )
@@ -474,7 +478,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <span>{file.name}</span>
             </div>
           ) : (
-            <p className="pi-ai-muted">拖入或选择一个 `.docx`，系统会先拆出阅读理解 A-D。</p>
+            <p className="pi-ai-muted">拖入或选择一个 `.docx`，系统会先拆出阅读理解 A-D 和七选五。</p>
           )}
           <div className="pi-ai-answer-file-row">
             <button className="ghost-button" type="button" onClick={() => answerInputRef.current?.click()}>
@@ -555,7 +559,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <CheckCircle2 size={15} aria-hidden="true" />
               Reading A-D
             </p>
-            <p className={allGroupsAnalyzed ? 'is-ok' : ''}>
+            <p className={allImportAnalyzed ? 'is-ok' : ''}>
               <CheckCircle2 size={15} aria-hidden="true" />
               解析已生成
             </p>
@@ -621,7 +625,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <button
                 className="primary-button pi-ai-analyze-all-button"
                 type="button"
-                disabled={isAnyAnalyzing || allGroupsAnalyzed}
+                disabled={isAnyAnalyzing || allImportAnalyzed}
                 onClick={() => void handleAnalyzeAll()}
               >
                 {isAnyAnalyzing ? <Loader2 size={16} aria-hidden="true" /> : <Sparkles size={16} aria-hidden="true" />}

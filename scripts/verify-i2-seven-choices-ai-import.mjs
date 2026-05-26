@@ -173,6 +173,31 @@ Some passage about running.
   })
   assert('missing option bank produces null group', result.sevenChoicesGroup === null)
   assert('missing option bank produces observable error', result.sevenChoicesError && result.sevenChoicesError.reason === 'seven_choices_missing_option_bank')
+  assert('missing option bank does not keep legacy deferred skip', !result.skipped.some((s) => s.reason === 'seven_choices_deferred_to_i2'))
+}
+
+function assertSplitterIncompleteOptionBank() {
+  const text = `
+第二节
+阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。
+Some passage about running. 36 . 37 . 38 . 39 . 40 .
+A. Option A text here.
+B. Option B text here.
+C. Option C text here.
+B. Duplicate label that means D is missing.
+E. Option E text here.
+F. Option F text here.
+G. Option G text here.
+36-40 FEGBC
+第三部分 语言运用
+`
+  const result = parseReadingCandidatesFromText(text, {
+    sourceFilename: 'i2-incomplete-options.docx',
+    paperId: 'paper-i2-incomplete-options',
+  })
+  assert('incomplete A-G option bank produces null group', result.sevenChoicesGroup === null)
+  assert('incomplete A-G option bank produces observable error', result.sevenChoicesError && result.sevenChoicesError.reason === 'seven_choices_missing_option_bank')
+  assert('incomplete A-G option bank does not keep legacy deferred skip', !result.skipped.some((s) => s.reason === 'seven_choices_deferred_to_i2'))
 }
 
 function assertSplitterMissingAnswers() {
@@ -561,6 +586,9 @@ function assertRouteContract() {
   const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
   assert('I2 page shows seven-choices panel', pageSource.includes('七选五 预览'))
   assert('I2 page imports seven-choices API', pageSource.includes('analyzePaperImportAiSevenChoicesGroup'))
+  assert('I2 page copy includes seven-choices splitter scope', pageSource.includes('阅读理解 A-D 和七选五'))
+  assert('I2 one-click analyze completion includes seven-choices', pageSource.includes('allImportAnalyzed') && pageSource.includes('disabled={isAnyAnalyzing || allImportAnalyzed}'))
+  assert('I2 publish requires seven-choices answers when present', pageSource.includes('scHasAnswers'))
 }
 
 // ---- Real DOCX ----
@@ -587,6 +615,7 @@ async function main() {
   assertAllowedScope()
   assertSplitterTextFixture()
   assertSplitterMissingOptionBank()
+  assertSplitterIncompleteOptionBank()
   assertSplitterMissingAnswers()
   assertPromptBuilding()
   await assertAnalysisValidation()
