@@ -211,6 +211,9 @@ Choose `primaryMechanismFacet` by this hard priority order:
 
 Topic-field alignment can be supporting evidence, but it must not override a
 real logical connector or referential mechanism as the primary mechanism.
+When no logical connector or referential cohesion is doing the main solving
+work, topic-field alignment is not a weak mechanism. It is the primary solving
+mechanism, and its compact matched signals belong in `mechanismSignals`.
 
 - `supportingMechanismFacets` is optional and may contain at most 2 items.
 - `mechanismSignals` is required for every blank.
@@ -235,6 +238,8 @@ those, it, they, such, one, ones, the former, the latter.
 
 Use `mechanismSignals` for the exact logical connector, pronoun, demonstrative,
 or topic-field word chunk that should be highlightable in the UI.
+They are the strong solving signals. A future surface may render them as strong
+highlights.
 
 Each item must include:
 
@@ -303,6 +308,13 @@ in `topicClues`.
 
 They are context-side word chunks in the blank's semantic paragraph or content
 unit that belong to the same topic field and help solve the blank.
+They are broader than `mechanismSignals`: useful context-side topic-field clues,
+not the strongest solving signal. A future surface may render them as weaker
+marks such as underlines or wave marks.
+
+Do NOT introduce `contextClues`, "context clue", or "上下文线索" as a formal
+field or category. That wording is too broad and blurs `mechanismSignals`,
+`topicClues`, and `contextEvidence`.
 
 Rules:
 
@@ -333,9 +345,20 @@ The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
 
 - `correctOptionLabel` must match the supplied answer label.
 - `matchedClues` must compare option-side language with context-side clues.
+  It is expanded explanation detail, not a UI highlighting source.
 - `fitSummary` must explain the main solving move in Chinese.
 - `fitSummary` should be 1-2 Chinese sentences. It explains why this option
   fits this blank.
+
+## Context Evidence
+
+`contextEvidence` is the audit location for the blank. It tells the reviewer
+where to look: paragraph ID, optional heading anchor, and exact before / after
+quotes.
+
+It is not a clue type and should not be treated as the thing that solved the
+blank. Put concrete solving signals in `mechanismSignals`; put broader
+context-side topic-field chunks in `topicClues`.
 
 ## Distractors
 

@@ -175,6 +175,28 @@ prompt rules before asking Claude lite to review the draft:
 - `keyDistractors` is optional and allowed, but the prompt should not optimize
   for distractor analysis in this version.
 
+## I0 Prompt Alignment Patch
+
+2026-05-26 small patch, owner-approved without external Claude consultation.
+
+This patch only aligns prompt / external-input wording with the latest field
+semantics. It does not change schema, runtime code, UI, verifier fixture
+behavior, or the reviewed `seven-choices-analysis-v1.json` fixture.
+
+Locked wording:
+
+- `mechanismSignals` are strong, exact, highlightable solving signals.
+- `topicClues` are broader, weaker context-side topic-field clues.
+- `contextEvidence` is an audit location, not a clue type.
+- `optionFit.matchedClues` is expanded explanation detail, not a UI highlight
+  source.
+- When no logical connector or referential cohesion is doing the main solving
+  work, topic-field alignment is not weak; it is the primary solving mechanism.
+- Do not introduce `contextClues`, "context clue", or "上下文线索" as a formal
+  field / category.
+
+This patch does not re-review q36-q40 teaching quality.
+
 ## Claude Lite CR Follow-Up
 
 Claude lite CR reported 0 Must Fix and 4 Should Watch items.
@@ -194,5 +216,5 @@ Retained watch item:
 
 - q37 `roleFacet = seven-choices.role.summary` is debatable because option G
   gives a concrete 10% rule rather than merely restating the paragraph. This is
-  acceptable for I0-C as a first reviewed sample, but should receive human
+  retained after the 2026-05-26 prompt alignment patch. It should receive human
   review before the label is used as a search-training signal.
