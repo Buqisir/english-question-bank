@@ -461,6 +461,7 @@ const REQUIRED_CSS_VARS = [
   '--ps-passage-indent',
   '--ps-options-grid-columns',
   '--ps-options-grid-gap-x',
+  '--ps-seven-choice-blank-width',
 ]
 
 for (const v of REQUIRED_CSS_VARS) {
@@ -490,6 +491,46 @@ for (const re of FORBIDDEN_CSS_LITERALS) {
     'raw token literal found in CSS',
   )
 }
+
+const tokensSrc = readSrc('shared/papersurface/tokens.mjs')
+const tokensDtsSrc = readSrc('shared/papersurface/tokens.d.ts')
+const tokensDmtsSrc = readSrc('shared/papersurface/tokens.d.mts')
+const sevenBlankRule = readCssRuleBody(cssSrc, '.ps-seven-choice-blank')
+
+assert(
+  'PaperSurface tokens define seven-choice blank width as 72px',
+  /sevenChoiceBlankWidth:\s*['"]72px['"]/.test(tokensSrc),
+  'sevenChoiceBlankWidth must stay at the 2024 JSLK calibrated 72px standard',
+)
+assert(
+  'PaperSurface token declarations include sevenChoiceBlankWidth',
+  /readonly\s+sevenChoiceBlankWidth:\s*string/.test(tokensDtsSrc) &&
+    /readonly\s+sevenChoiceBlankWidth:\s*string/.test(tokensDmtsSrc),
+  'sevenChoiceBlankWidth declaration missing from .d.ts or .d.mts',
+)
+assert(
+  'PaperSurface injects seven-choice blank width token',
+  /--ps-seven-choice-blank-width['"]?:\s*paperSurfaceTokens\.sevenChoiceBlankWidth/.test(tsxSrc),
+  'PaperSurface.tsx does not inject --ps-seven-choice-blank-width',
+)
+assert(
+  'Seven-choice blank consumes the width token',
+  /width\s*:\s*var\(\s*--ps-seven-choice-blank-width\s*\)/.test(sevenBlankRule),
+  '.ps-seven-choice-blank must use var(--ps-seven-choice-blank-width)',
+)
+assert(
+  'Seven-choice blank keeps centered tabular number on fixed line',
+  /display\s*:\s*inline-flex/.test(sevenBlankRule) &&
+    /justify-content\s*:\s*center/.test(sevenBlankRule) &&
+    /font-variant-numeric\s*:\s*tabular-nums/.test(sevenBlankRule) &&
+    /text-indent\s*:\s*0/.test(sevenBlankRule),
+  '.ps-seven-choice-blank must center the number without paragraph indent',
+)
+assert(
+  'Seven-choice blank does not use font-relative width',
+  !/width\s*:\s*4\.5em/.test(sevenBlankRule),
+  'font-relative blank width would drift away from the 72px PaperSurface standard',
+)
 
 /* ─── 5. Visual hard requirements ─────────────────────────────────── */
 
