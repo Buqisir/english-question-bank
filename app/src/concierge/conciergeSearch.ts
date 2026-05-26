@@ -225,7 +225,7 @@ function buildSentMessage(intent: string, pendingQuery: string | null | undefine
   return trimmed
 }
 
-const DEFAULT_STEWARD_TIMEOUT_MS = 15_000
+const DEFAULT_STEWARD_TIMEOUT_MS = 6000
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -263,6 +263,18 @@ export async function runConciergeSearch(
       sentMessage,
       source: 'fallback',
       fallbackReason: 'local-direct-match',
+    }
+  }
+
+  if (!apiKey) {
+    return {
+      kind: 'results',
+      hits: rankByKeywords(input.questionGroups, intent),
+      assistantMessage: '没填 AI 密钥，先用本地题库帮你找。',
+      query: intent,
+      sentMessage,
+      source: 'fallback',
+      fallbackReason: 'missing-api-key',
     }
   }
 
