@@ -514,6 +514,11 @@ assert(
   'PaperSurface.tsx does not inject --ps-seven-choice-blank-width',
 )
 assert(
+  'Seven-choice blank renderer consumes imported underline wrappers',
+  /const\s+sevenChoicesBlankPattern\s*=\s*\/\(\?:_\{3,\}\|\\u00A0\{3,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{3,\}\|\\u00A0\{3,\}\)\/g/.test(tsxSrc),
+  '_____39_____ must render as one standard blank, not three visible lines',
+)
+assert(
   'Seven-choice blank consumes the width token',
   /width\s*:\s*var\(\s*--ps-seven-choice-blank-width\s*\)/.test(sevenBlankRule),
   '.ps-seven-choice-blank must use var(--ps-seven-choice-blank-width)',
