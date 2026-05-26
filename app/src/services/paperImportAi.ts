@@ -39,6 +39,29 @@ export type PaperImportAiAnalysisResult = {
   latencyMs: number
 }
 
+export type PaperImportAiPublishResult = {
+  ok: boolean
+  status: string
+  error?: string
+  detail?: Record<string, unknown>
+  validation?: {
+    ok: boolean
+    blockingIssues: Array<{ message: string; code?: string }>
+    warnings: Array<{ message: string; code?: string }>
+  }
+  publish?: {
+    paperId: string
+    assetVersion: number
+    versionName: string
+    qaLinks: Array<{
+      groupId: string
+      title: string
+      latestHref: string
+      versionHref: string
+    }>
+  }
+}
+
 const API_ORIGIN = 'http://127.0.0.1:8787'
 
 function apiPath(path: string) {
@@ -84,4 +107,32 @@ export async function analyzePaperImportAiReadingGroup(input: {
     throw await parseError(response, `Failed to analyze paper import AI group: ${response.status}`)
   }
   return (await response.json()) as PaperImportAiAnalysisResult
+}
+
+export async function publishPaperImportAiAnalysis(input: {
+  file: File
+  parseResult: PaperImportAiParseResult
+  analysesByGroupId: Record<string, Record<string, unknown>>
+}) {
+  const formData = new FormData()
+  formData.append('files', input.file, input.file.name)
+  formData.append(
+    'files',
+    new Blob([
+      JSON.stringify({
+        parseResult: input.parseResult,
+        analysesByGroupId: input.analysesByGroupId,
+      }),
+    ], { type: 'application/json' }),
+    'paper-import-ai-publish.json',
+  )
+  const response = await fetch(apiPath('/api/paper-import-ai/publish'), {
+    method: 'POST',
+    body: formData,
+  })
+  const data = (await response.json().catch(() => null)) as PaperImportAiPublishResult | null
+  if (!response.ok) {
+    throw new Error(data?.error || data?.validation?.blockingIssues?.[0]?.message || `Failed to publish paper import AI analysis: ${response.status}`)
+  }
+  return data as PaperImportAiPublishResult
 }

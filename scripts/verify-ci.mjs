@@ -31,6 +31,8 @@ const registry = {
   'scripts/verify-h5a-export-implementation.mjs',
   'scripts/verify-h1f-legacy-import-routes.mjs',
   'scripts/verify-h1g-question-group-routes.mjs',
+  'scripts/verify-i1-paper-import-route.mjs',
+  'scripts/verify-i1-paper-import-analysis.mjs',
   ],
 }
 

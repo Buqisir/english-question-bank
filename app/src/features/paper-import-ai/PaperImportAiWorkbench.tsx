@@ -1,11 +1,13 @@
-import { AlertTriangle, ArrowLeft, FileText, Loader2, Sparkles, UploadCloud } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, CheckCircle2, ExternalLink, FileText, Loader2, Save, Sparkles, UploadCloud } from 'lucide-react'
 import { useRef, useState } from 'react'
 import {
   analyzePaperImportAiReadingGroup,
   parsePaperImportAiDocx,
+  publishPaperImportAiAnalysis,
   type PaperImportAiAnalysisResult,
   type PaperImportAiParseResult,
   type PaperImportAiProviderId,
+  type PaperImportAiPublishResult,
   type PaperImportAiQuestion,
   type PaperImportAiReadingGroup,
 } from '../../services/paperImportAi'
@@ -22,6 +24,12 @@ type AnalysisState = {
 }
 
 type AnalysisRecord = Record<string, unknown>
+
+type PublishState = {
+  status: 'idle' | 'publishing' | 'error' | 'done'
+  message: string
+  result: PaperImportAiPublishResult | null
+}
 
 const providerOptions: Array<{ value: PaperImportAiProviderId; label: string }> = [
   { value: 'deepseek-v4-pro', label: 'DeepSeek v4 Pro' },
@@ -106,6 +114,11 @@ function optionNote(option: AnalysisRecord) {
 function correctLabelFromAnalysis(questionAnalysis: AnalysisRecord) {
   const correct = asArray(questionAnalysis.optionAnalysis).find((option) => option.status === 'correct')
   return textOf(correct?.label)
+}
+
+function groupLetter(group: PaperImportAiReadingGroup) {
+  const match = group.groupId.match(/reading-([abcd])$/i)
+  return match ? match[1].toUpperCase() : ''
 }
 
 function answerState(question: PaperImportAiQuestion, questionAnalysis: AnalysisRecord) {
@@ -217,11 +230,13 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const [message, setMessage] = useState('')
   const [providerId, setProviderId] = useState<PaperImportAiProviderId>('deepseek-v4-pro')
   const [analysisByGroupId, setAnalysisByGroupId] = useState<Record<string, AnalysisState>>({})
+  const [publishState, setPublishState] = useState<PublishState>({ status: 'idle', message: '', result: null })
 
   function resetParsedResult() {
     setMessage('')
     setResult(null)
     setAnalysisByGroupId({})
+    setPublishState({ status: 'idle', message: '', result: null })
   }
 
   function acceptFile(nextFile: File | null) {
@@ -292,6 +307,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         ...current,
         [group.groupId]: { status: 'done', message: 'JSON preview ready.', result: analysis },
       }))
+      setPublishState({ status: 'idle', message: '', result: null })
     } catch (error) {
       setAnalysisByGroupId((current) => ({
         ...current,
@@ -305,6 +321,56 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   }
 
   const questionCount = result?.readingGroups.reduce((sum, group) => sum + group.questions.length, 0) || 0
+  const analyzedCount = result?.readingGroups.filter((group) => analysisByGroupId[group.groupId]?.status === 'done').length || 0
+  const missingReadingLabels = ['A', 'B', 'C', 'D'].filter((label) => !result?.readingGroups.some((group) => groupLetter(group) === label))
+  const missingAnswerCount = result?.readingGroups.reduce(
+    (sum, group) => sum + group.questions.filter((question) => !question.answerKey).length,
+    0,
+  ) || 0
+  const answerConflicts = result?.readingGroups.flatMap((group) => {
+    const analysis = asRecord(analysisByGroupId[group.groupId]?.result?.analysis)
+    const questions = asRecord(analysis.questions)
+    return group.questions.flatMap((question) => {
+      const official = question.answerKey
+      const ai = correctLabelFromAnalysis(asRecord(questions[question.id]))
+      return official && ai && official !== ai
+        ? [{ groupTitle: group.title, questionId: question.id, official, ai }]
+        : []
+    })
+  }) || []
+  const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
+  const canPublish = Boolean(
+    file &&
+    result &&
+    result.paper.answerSourceFilename &&
+    result.readingGroups.length === 4 &&
+    allGroupsAnalyzed &&
+    missingAnswerCount === 0 &&
+    answerConflicts.length === 0 &&
+    publishState.status !== 'publishing',
+  )
+
+  async function handlePublish() {
+    if (!file || !result || !canPublish) return
+    setPublishState({ status: 'publishing', message: '', result: null })
+    try {
+      const analysesByGroupId = Object.fromEntries(
+        result.readingGroups.map((group) => [group.groupId, analysisByGroupId[group.groupId]?.result?.analysis || {}]),
+      )
+      const published = await publishPaperImportAiAnalysis({
+        file,
+        parseResult: result,
+        analysesByGroupId,
+      })
+      setPublishState({ status: 'done', message: '已保存为正式试卷资产。', result: published })
+    } catch (error) {
+      setPublishState({
+        status: 'error',
+        message: error instanceof Error ? error.message : String(error),
+        result: null,
+      })
+    }
+  }
 
   return (
     <main className="pi-ai-shell">
@@ -317,7 +383,9 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           <p className="eyebrow">Local-first Paper Import</p>
           <h1>AI 导题工作台</h1>
         </div>
-        <div className="pi-ai-status">{status === 'parsing' ? '拆题中' : '预览未保存'}</div>
+        <div className="pi-ai-status">
+          {publishState.status === 'done' ? '已保存' : status === 'parsing' ? '拆题中' : '预览未保存'}
+        </div>
       </header>
 
       <div className="pi-ai-layout">
@@ -408,7 +476,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               ))}
             </select>
           </label>
-          <p className="pi-ai-muted">当前只生成解析 JSON 预览；保存与合并留到下一步。</p>
+          <p className="pi-ai-muted">生成解析后可保存为正式试卷资产；答案冲突会先拦住。</p>
         </section>
 
         <section className="pi-ai-panel pi-ai-summary">
@@ -427,6 +495,63 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
             <strong>{result?.skipped.length || 0}</strong>
             <span>跳过项</span>
           </div>
+        </section>
+
+        <section className="pi-ai-panel pi-ai-publish">
+          <div className="pi-ai-panel-heading">
+            <h2>保存</h2>
+            {publishState.result?.publish ? <span>v{publishState.result.publish.assetVersion}</span> : <span>{analyzedCount}/{result?.readingGroups.length || 0}</span>}
+          </div>
+          <div className="pi-ai-publish-checks">
+            <p className={result?.paper.answerSourceFilename ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              答案解析版
+            </p>
+            <p className={missingReadingLabels.length === 0 && result?.readingGroups.length === 4 ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              Reading A-D
+            </p>
+            <p className={allGroupsAnalyzed ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              解析已生成
+            </p>
+            <p className={missingAnswerCount === 0 && answerConflicts.length === 0 && Boolean(result) ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              答案无冲突
+            </p>
+          </div>
+          {missingReadingLabels.length > 0 && result ? (
+            <p className="pi-ai-warning">缺少 Reading {missingReadingLabels.join(' / ')}，暂不保存。</p>
+          ) : null}
+          {missingAnswerCount > 0 ? (
+            <p className="pi-ai-warning">还有 {missingAnswerCount} 道题没有答案解析版答案。</p>
+          ) : null}
+          {answerConflicts.length > 0 ? (
+            <div className="pi-ai-conflict-list">
+              {answerConflicts.map((item) => (
+                <p key={item.questionId}>
+                  {item.groupTitle} · {item.questionId}: 答案版 {item.official} / AI {item.ai}
+                </p>
+              ))}
+            </div>
+          ) : null}
+          <button className="primary-button pi-ai-publish-button" type="button" disabled={!canPublish} onClick={() => void handlePublish()}>
+            {publishState.status === 'publishing' ? <Loader2 size={16} aria-hidden="true" /> : <Save size={16} aria-hidden="true" />}
+            保存为正式试卷
+          </button>
+          {publishState.message ? (
+            <p className={publishState.status === 'error' ? 'pi-ai-error' : 'pi-ai-muted'}>{publishState.message}</p>
+          ) : null}
+          {publishState.result?.publish ? (
+            <div className="pi-ai-publish-links">
+              {publishState.result.publish.qaLinks.map((link) => (
+                <a key={link.groupId} href={link.latestHref}>
+                  <ExternalLink size={14} aria-hidden="true" />
+                  {link.title} 讲评页
+                </a>
+              ))}
+            </div>
+          ) : null}
         </section>
 
         <section className="pi-ai-panel pi-ai-groups">

@@ -1,7 +1,9 @@
 import { parsePaperImportMultipart } from '../paper-import/multipart.mjs'
+import { publishPaperImportPackage } from '../paper-import/publisher.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { analyzeReadingImportCandidate } from './analyzeReading.mjs'
 import { parseReadingDocxBuffer } from './docxSplitter.mjs'
+import { buildPaperImportAiPackageFiles } from './packageBuilder.mjs'
 
 const I1_PARSE_LIMITS = {
   maxFiles: 2,
@@ -9,7 +11,14 @@ const I1_PARSE_LIMITS = {
   maxTotalBytes: 16_000_000,
 }
 
+const I1_PUBLISH_LIMITS = {
+  maxFiles: 2,
+  maxFileBytes: 8_000_000,
+  maxTotalBytes: 16_000_000,
+}
+
 function routeError(error) {
+  if (error && typeof error === 'object' && 'message' in error) return String(error.message)
   return error instanceof Error ? error.message : String(error)
 }
 
@@ -48,6 +57,20 @@ function splitPaperAndAnswerFiles(files) {
   return { paperFile: paperFiles[0], answerFile: answerFiles[0], error: '' }
 }
 
+function parsePublishPayload(files, fields) {
+  const payloadFile = files.find((file) => /\.json$/i.test(readableFileName(file)))
+  const payloadText = payloadFile?.buffer?.toString('utf8') || fields?.payload || ''
+  if (!payloadText.trim()) {
+    throw new Error('缺少发布 payload。')
+  }
+  const payload = JSON.parse(payloadText)
+  const paperFile = files.find((file) => isDocxFile(file) && !isAnswerDocxFile(file)) || files.find(isDocxFile)
+  if (!paperFile) {
+    throw new Error('发布需要同时上传试卷版 DOCX。')
+  }
+  return { payload, paperFile }
+}
+
 export function createPaperImportAiRoutes(services = {}) {
   const analyzeReading = services.analyzeReading || analyzeReadingImportCandidate
   return [
@@ -84,6 +107,45 @@ export function createPaperImportAiRoutes(services = {}) {
         context.sendJson(response, 200, result)
       } catch (error) {
         context.sendJson(response, 422, { error: routeError(error) })
+      }
+    }),
+    defineRoute('POST', /^\/api\/paper-import-ai\/publish$/, async ({ request, response, context }) => {
+      let files = []
+      let fields = {}
+      try {
+        ;({ files, fields } = await parsePaperImportMultipart(request, { limits: I1_PUBLISH_LIMITS }))
+      } catch (error) {
+        context.sendJson(response, 400, { error: routeError(error) })
+        return
+      }
+
+      let packageFiles = []
+      try {
+        const { payload, paperFile } = parsePublishPayload(files, fields)
+        packageFiles = buildPaperImportAiPackageFiles({
+          parseResult: payload.parseResult,
+          analysesByGroupId: payload.analysesByGroupId,
+          sourceDocx: {
+            fileName: readableFileName(paperFile),
+            contentType: paperFile.contentType,
+            buffer: paperFile.buffer,
+          },
+        })
+      } catch (error) {
+        const detail = error && typeof error === 'object' ? error : {}
+        context.sendJson(response, 422, { ok: false, status: detail.status || 'package_failed', error: routeError(error), detail })
+        return
+      }
+
+      const db = context.openDatabase({ readOnly: false })
+      try {
+        const result = publishPaperImportPackage({ files: packageFiles, db, paperAssetsDir: context.paperAssetsDir })
+        if (result.ok) context.invalidatePaperSurfaceAnalysisAvailability()
+        context.sendJson(response, result.ok ? 201 : 422, result)
+      } catch (error) {
+        context.sendJson(response, 500, { ok: false, status: 'publish_failed', error: routeError(error) })
+      } finally {
+        db.close()
       }
     }),
   ]

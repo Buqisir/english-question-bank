@@ -147,7 +147,17 @@ function validateAnalysisShape(analysis, { paper, group }) {
   if (JSON.stringify(actualQuestionIds) !== JSON.stringify(expectedQuestionIds)) {
     throw new Error(`AI JSON questionIds 不匹配：expected ${expectedQuestionIds.join(', ')}, got ${actualQuestionIds.join(', ')}`)
   }
+  const paragraphsById = new Map(group.paragraphs.map((paragraph) => [paragraph.id, paragraph.text]))
+  const assertExactQuote = (questionId, fieldName, reference = {}) => {
+    const paragraphId = optionalString(reference.paragraphId || reference.targetParagraphId)
+    const quote = optionalString(reference.quote || reference.targetText)
+    if (!paragraphId || !quote) return
+    const paragraphText = paragraphsById.get(paragraphId)
+    if (!paragraphText) throw new Error(`${questionId}: ${fieldName} 引用了不存在的 paragraphId：${paragraphId}`)
+    if (!paragraphText.includes(quote)) throw new Error(`${questionId}: ${fieldName} quote 必须精确匹配原文。`)
+  }
   for (const questionId of expectedQuestionIds) {
+    const sourceQuestion = group.questions.find((question) => question.id === questionId)
     const item = analysis.questions[questionId]
     if (!item || typeof item !== 'object') throw new Error(`${questionId}: 缺少题目分析。`)
     if (!item.skill || typeof item.skill !== 'object' || Array.isArray(item.skill)) throw new Error(`${questionId}: skill 必须是对象。`)
@@ -157,6 +167,19 @@ function validateAnalysisShape(analysis, { paper, group }) {
     if (!Array.isArray(item.locationParaphrases)) throw new Error(`${questionId}: locationParaphrases 必须是数组。`)
     const correctCount = item.optionAnalysis.filter((option) => option?.status === 'correct').length
     if (correctCount !== 1) throw new Error(`${questionId}: optionAnalysis 必须有且只有一个 correct。`)
+    const correctOption = item.optionAnalysis.find((option) => option?.status === 'correct')
+    if (sourceQuestion?.answerKey && correctOption?.label !== sourceQuestion.answerKey) {
+      throw new Error(`${questionId}: AI 答案与答案解析版不一致：官方 ${sourceQuestion.answerKey}，AI ${correctOption?.label || '空'}。`)
+    }
+    for (const option of item.optionAnalysis) {
+      for (const evidence of option?.evidence || []) assertExactQuote(questionId, 'evidence', evidence)
+      for (const evidence of option?.trapEvidence || []) assertExactQuote(questionId, 'trapEvidence', evidence)
+      if (option?.trap?.sourceQuote) assertExactQuote(questionId, 'trap.sourceQuote', {
+        paragraphId: option.trap.paragraphId || option.trap.targetParagraphId,
+        quote: option.trap.sourceQuote,
+      })
+    }
+    for (const relation of item.locationParaphrases) assertExactQuote(questionId, 'locationParaphrases.targetText', relation)
   }
 }
 
@@ -168,23 +191,52 @@ async function callProvider({ providerId, messages, providerCallers }) {
   return (providerCallers?.deepseek || callDeepSeekJson)({ messages, model: 'deepseek-v4-pro' })
 }
 
+async function callProviderWithRetry(args, { retries = 1 } = {}) {
+  let lastError
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await callProvider(args)
+    } catch (error) {
+      lastError = error
+      if (attempt >= retries) break
+    }
+  }
+  throw lastError
+}
+
+function isRetryableAnalysisError(error) {
+  const message = error instanceof Error ? error.message : String(error || '')
+  if (/答案解析版不一致/.test(message)) return false
+  return /JSON|schemaVersion|questionIds|精确匹配原文|缺少|必须|不匹配|无效/.test(message)
+}
+
 export async function analyzeReadingImportCandidate(input, options = {}) {
   assertReadingAnalyzeInput(input)
   const requestId = options.requestId || randomUUID()
   const providerId = normalizeProviderId(input.providerId)
   const messages = buildReadingAnalysisMessages(input)
-  const providerResult = await callProvider({
-    providerId,
-    messages,
-    providerCallers: options.providerCallers,
-  })
-  const analysis = extractFirstJsonObject(providerResult.rawText)
-  validateAnalysisShape(analysis, input)
-  return {
-    analysis,
-    provider: providerResult.provider,
-    model: providerResult.model,
-    requestId,
-    latencyMs: providerResult.latencyMs,
+  const analysisRetries = Number.isInteger(options.analysisRetries) ? options.analysisRetries : 1
+  let lastError
+  for (let attempt = 0; attempt <= analysisRetries; attempt += 1) {
+    const providerResult = await callProviderWithRetry({
+      providerId,
+      messages,
+      providerCallers: options.providerCallers,
+    }, { retries: Number.isInteger(options.providerRetries) ? options.providerRetries : 1 })
+    try {
+      const analysis = extractFirstJsonObject(providerResult.rawText)
+      validateAnalysisShape(analysis, input)
+      return {
+        analysis,
+        provider: providerResult.provider,
+        model: providerResult.model,
+        requestId,
+        latencyMs: providerResult.latencyMs,
+      }
+    } catch (error) {
+      lastError = error
+      if (attempt >= analysisRetries || !isRetryableAnalysisError(error)) break
+    }
   }
+  throw lastError
 }

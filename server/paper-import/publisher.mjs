@@ -79,17 +79,18 @@ function getDefaultScore(group, answers) {
 function upsertQuestionGroupTags(db, groupId, tags) {
   db.prepare("DELETE FROM tag_links WHERE target_type = 'question_group' AND target_id = ?").run(groupId)
   for (const tagName of tags.filter(Boolean)) {
-    const tagId = `tag-${String(tagName).trim().replace(/\s+/g, '-').toLowerCase()}`
-    db.prepare(
-      `
-      INSERT INTO tags (id, name, category, description, is_active, updated_at)
-      VALUES (?, ?, '导入标签', '', 1, datetime('now'))
-      ON CONFLICT(id) DO UPDATE SET
-        name = excluded.name,
-        is_active = 1,
-        updated_at = datetime('now')
-      `,
-    ).run(tagId, tagName)
+    const existing = db.prepare('SELECT id FROM tags WHERE name = ?').get(tagName)
+    const tagId = existing?.id || `tag-${randomUUID()}`
+    if (existing?.id) {
+      db.prepare("UPDATE tags SET is_active = 1, updated_at = datetime('now') WHERE id = ?").run(tagId)
+    } else {
+      db.prepare(
+        `
+        INSERT INTO tags (id, name, category, description, is_active, updated_at)
+        VALUES (?, ?, '导入标签', '', 1, datetime('now'))
+        `,
+      ).run(tagId, tagName)
+    }
     db.prepare(
       `
       INSERT OR IGNORE INTO tag_links (id, tag_id, target_type, target_id)
