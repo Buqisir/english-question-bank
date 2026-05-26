@@ -63,15 +63,15 @@ Hard rule:
   - Either agent may cover another role when quota or availability
     requires, but role contracts and gates do not downgrade.
 - The owner is PO and final product QA, not code reviewer.
-- External high-reasoning agents are for large-cut PA, direction checks,
-  and occasional big CR. Do not use external DEV for routine small or
-  medium cuts unless the owner explicitly asks.
-- Treat GitHub `main` and PR heads as the shared truth. External reports
+- External high-reasoning agents are exception tools for large-cut PA,
+  direction checks, and occasional big CR. 阿澈 owns PA by default.
+- Treat GitHub `main` and PR heads as the shared truth. Outside reports
   are not truth until 阿澈 verifies remote state.
 - Use `docs/cuts/_templates/pa-prompt-template.md` and
-  `docs/cuts/_templates/big-cr-prompt-template.md` for external PA /
-  Big CR prompts; do not hand-write repeated prompt boilerplate.
-- External agents may escalate instead of producing partial reports
+  `docs/cuts/_templates/big-cr-prompt-template.md` only when an outside
+  PA / Big CR is explicitly requested; do not hand-write repeated prompt
+  boilerplate.
+- PA / Big CR agents may escalate instead of producing partial reports
   with `CONTEXT INSUFFICIENT`, `BRANCH CONFLICT`, `SPEC CONTRADICTS`,
   or `SCOPE UNCLEAR`.
 - Stop if mockups do not converge after 2 rounds, or if PA leaves more
@@ -85,7 +85,7 @@ Hard rule:
 
 File: `docs/agents/pa-persona.md`
 
-Use when asking an external high-reasoning agent to act as PA.
+Use only when asking an external high-reasoning agent to act as PA.
 
 Hard rule:
 

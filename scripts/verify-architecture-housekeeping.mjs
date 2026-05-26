@@ -213,7 +213,7 @@ assert('workflow protocol asks external review for token metadata', cutWorkflow.
 assert('workflow protocol names PA prompt template', cutWorkflow.includes('pa-prompt-template.md'))
 assert('workflow protocol names Big CR prompt template', cutWorkflow.includes('big-cr-prompt-template.md'))
 assert('workflow protocol requires layered reading', cutWorkflow.includes('Must Read') && cutWorkflow.includes('Background'))
-assert('workflow protocol requires decisions sync status', cutWorkflow.includes('Open items from external review'))
+assert('workflow protocol requires decisions sync status', cutWorkflow.includes('Open review items'))
 assert('workflow protocol defines escalation signals', cutWorkflow.includes('CONTEXT INSUFFICIENT') && cutWorkflow.includes('SPEC CONTRADICTS'))
 assert('workflow protocol requires large-cut handoff with cut note', cutWorkflow.includes('docs/cuts/<CUT>/cut-note.md') && cutWorkflow.includes('docs/cuts/<CUT>/handoff.md'))
 assert('workflow protocol delegates covered forbidden scope to verify', cutWorkflow.includes('Covered by verify; spot-checked <N> files.'))
@@ -223,7 +223,7 @@ assert('agent entrypoint template splits Must Read and Background', agentEntrypo
 assert('agent entrypoint template includes escalation signals', agentEntrypointTemplate.includes('ESCALATION: <SIGNAL>') && agentEntrypointTemplate.includes('BRANCH CONFLICT'))
 
 const decisionsTemplate = read('docs/cuts/_templates/decisions.md')
-assert('decisions template includes sync status fields', decisionsTemplate.includes('Last synced:') && decisionsTemplate.includes('Open items from external review:'))
+assert('decisions template includes sync status fields', decisionsTemplate.includes('Last synced:') && decisionsTemplate.includes('Open review items:'))
 
 const crLiteTemplate = read('docs/cuts/_templates/cr-lite.md')
 assert('CR-lite template includes failure angle section', crLiteTemplate.includes('## Failure / Attack Angle'))

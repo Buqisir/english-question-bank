@@ -105,8 +105,8 @@ instead of writing files.
 6. Prompt archive files are optional and named `pa-prompt.md` or `cr-prompt.md`.
 7. External AI input should be folded into a prompt or goal file unless it is a
    durable standalone artifact.
-8. Claude / external agents discuss in chat until Codex or the owner asks them
-   to write a specific repo path.
+8. Outside agents discuss in chat until 阿澈 or the owner asks them to write a
+   specific repo path. 阿澈 remains the default PA.
 9. RM merge stops when required medium / large artifacts are missing or empty.
 10. Large cuts need `cut-note.md` before closeout.
 11. Keep the file set minimal; do not fill templates just to satisfy ceremony.

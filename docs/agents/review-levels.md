@@ -7,7 +7,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 ## Roles
 
 - **PO**: product owner / final acceptance.
-- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Usually external / high-reasoning only for large cuts. External PA must follow `docs/agents/pa-persona.md`.
+- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. 阿澈 owns PA by default; external high-reasoning PA is exception-only for large cuts, direction checks, or explicit owner request and must follow `docs/agents/pa-persona.md`.
 - **DEV**: implementation agent. 小川 is the default DEV.
 - **CR**: code reviewer. 小川 performs routine CR-lite; 阿澈 owns Big CR and medium / large final sanity gates.
 - **QA**: product / browser / visual acceptance. 阿澈 does first QA for UI direction and user-visible quality unless assigned otherwise; the owner does final PO QA.
@@ -20,7 +20,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
   2. **Visibility**: Can a teacher/user see it? If yes, use QA.
   3. **Runtime risk**: Does it enter runtime code? If yes, use CR.
   4. **Evidence fit**: Prefer static verify when it proves the risk. Do not run heavy gates that cannot observe the changed surface.
-- Use **PA before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic.
+- Use **阿澈 PA / plan review before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic. External PA is not the default.
 - Use **CR after DEV** for any PR that will be merged.
 - Use **QA before RM** only when the change is user-visible or affects visual / interaction behavior.
 - Docs-only and type-only cuts do not need browser QA.

@@ -47,8 +47,8 @@ of duplicating workflow or browser rules.
   rules in `docs/cuts/_templates/README.md`. Chat messages should only
   route agents to those files and state the next action. Do not depend
   on copy/pasted long chat history as the source of truth.
-- Use prompt templates for external PA and Big CR instead of rewriting
-  boilerplate by hand:
+- Use external-review prompt templates only when the owner or risk tier
+  explicitly calls for an outside PA / Big CR:
   `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md`.
 - Cut artifact naming is intentionally simple for new cuts:
@@ -71,8 +71,8 @@ of duplicating workflow or browser rules.
   Large cuts additionally require non-empty `cut-note.md`.
 - Cut decision ledgers should expose freshness. New `decisions.md`
   files should include `Last synced` and
-  `Open items from external review`, and external PA / Big CR follow-up
-  must update those fields before another agent depends on the file.
+  `Open review items`, and PA / Big CR follow-up must update those fields
+  before another agent depends on the file.
 - When PA returns Must Fix items, `pa.md` must include a checklist that
   maps each Must Fix to the required `plan.md` disposition, and
   `plan.md` must record the matching PM / PO handling under
@@ -81,8 +81,8 @@ of duplicating workflow or browser rules.
 - Agent entrypoints should split reading into `Must Read` and
   `Background`. Keep Must Read cut-specific and short; Background may
   be skipped when already loaded in the same session.
-- External PA / Big CR agents may stop with an escalation signal instead
-  of writing a partial report: `CONTEXT INSUFFICIENT`,
+- PA / Big CR agents may stop with an escalation signal instead of
+  writing a partial report: `CONTEXT INSUFFICIENT`,
   `BRANCH CONFLICT`, `SPEC CONTRADICTS`, or `SCOPE UNCLEAR`.
 - For PaperSurface specifically, insight should default to a short
   passage map. Dense diagnostics such as vocabulary load, grammar load,
@@ -114,7 +114,7 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - For medium / large / irreversible cuts, 阿澈 owns PM / PA and should
   create or update the repo-routed `plan.md` before DEV starts. External
   PA / Big CR is triggered by risk or explicit owner request, not by a
-  default external-review gate.
+  default review gate.
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
@@ -130,16 +130,18 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   direction checks, and occasional big CR. Do not route routine small or
   medium implementation work through external DEV agents unless the
   owner explicitly asks for that exception.
-- External PA must read and follow `docs/agents/pa-persona.md` before
-  reviewing a plan. Its job is to find direction, boundary, data-contract,
-  and rework risks before DEV starts.
+- When an external PA is explicitly used, it must read and follow
+  `docs/agents/pa-persona.md` before reviewing a plan. Its job is to find
+  direction, boundary, data-contract, and rework risks before DEV starts.
 - Remote GitHub `main` and PR heads are the shared source of truth.
   The responsible agent must fetch and confirm local / remote state
   before PA, CR, QA, and RM. External PA / CR reports are useful input,
   not truth, until 阿澈 verifies the baseline, diff, and pushed commits.
 - Default flow:
   - **PM grill before DEV** whenever product behavior is still fuzzy.
-  - **PA before DEV** only for architecture, data contracts, future-facing user-visible flows, migrations, export logic, or other large cuts.
+  - **阿澈 PA / plan review before DEV** for architecture, data contracts,
+    future-facing user-visible flows, migrations, export logic, or other
+    large cuts. External PA is not the default.
   - **CR-lite after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Cut tier flows:
@@ -189,7 +191,7 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Grey-zone files such as `SevenChoicesAnalysisPanel.tsx`,
   `DraftPaperWorkbench.tsx`, and
   `PaperIntelligencePaperSurfaceHarness.tsx` may receive display-only UI
-  edits, but Claude must not change reducers, state contracts, data
+  edits, but 小川 must not change reducers, state contracts, data
   fetching, URL state, adapter inputs / outputs, or cross-component
   synchronization there.
 - Atomic UI fast path is allowed only when all are true: CSS-only diff,

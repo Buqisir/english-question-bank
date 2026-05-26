@@ -49,7 +49,7 @@ Skim only if unfamiliar or not already loaded in this session.
 - `docs/steering/cut-workflow-protocol.md`
 - `docs/steering/product-scope-discipline.md`
 - `docs/agents/review-levels.md`
-- `docs/agents/pa-persona.md` for external PA only
+- `docs/agents/pa-persona.md` only when an outside PA is explicitly used
 - `scripts/README.md`
 
 ## Source Of Truth

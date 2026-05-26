@@ -59,7 +59,7 @@ closure.
 - `decisions.md` status update required: yes / no
 - If yes:
   - Last synced:
-  - Open items from external review:
+  - Open review items:
 
 ## Recommendation
 
