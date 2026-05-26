@@ -17,6 +17,12 @@ Run these checks before reading or writing the next artifact:
   non-empty before PA / DEV / CR / QA / RM agents act.
 - Before DEV starts, `docs/cuts/<CUT>/plan.md` must already be committed
   to the repo.
+- Before DEV starts a non-trivial cut, search project Kratos from the
+  repo root with 2-3 relevant keywords. Record only useful hits in the
+  handoff / report. If no relevant hits appear, say
+  `Kratos: no relevant hits`.
+- Kratos is context, not truth. Current repo files, `main`, PR diff, and
+  cut artifacts remain authoritative.
 - If this entrypoint depends on a prior artifact such as `pa.md`,
   `cr.md`, `cut-note.md`, `decisions.md`, or an ADR, that file must
   exist and be non-empty.
