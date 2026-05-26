@@ -23,7 +23,7 @@ Optimize for:
 - the teacher task being served
 - the A4 paper remaining primary
 - fewer wrong-direction implementation loops
-- Codex owning daily PM / DEV / CR-lite / QA / RM work end to end
+- the current named-agent assignment being explicit and auditable
 - external high-reasoning review only where it actually changes risk
 
 Do not optimize for:
@@ -159,7 +159,7 @@ Default flow:
 
 ```text
 Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
--> Codex DEV -> Codex CR -> Codex browser QA -> PO QA
+-> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA
 -> RM -> Cut Note
 ```
 
@@ -330,7 +330,7 @@ chat history.
 
 ### RM artifact gate
 
-Before RM merge for medium / large cuts, Codex must check the required
+Before RM merge for medium / large cuts, 阿澈 must check the required
 cut artifacts. Missing or empty required artifacts stop the merge; do
 not paper over the gap in chat.
 
@@ -340,7 +340,7 @@ Medium cut checklist:
 - If PA was used, either `docs/cuts/<CUT>/pa.md` exists and is non-empty
   or PA-lite findings are recorded in `plan.md` / `decisions.md`.
 - If Big CR was triggered, either `docs/cuts/<CUT>/cr.md` exists and is
-  non-empty or the PR description / final Codex summary contains the
+  non-empty or the PR description / final agent summary contains the
   Big CR record.
 
 Large cut extra checklist:
@@ -369,7 +369,7 @@ external review reports, and watch ledgers.
 The remote GitHub `main` branch and the PR head are the shared truth.
 Agent reports are not truth until verified.
 
-Codex is responsible for local state control:
+The responsible agent is responsible for local state control:
 
 - fetch latest `main` and PR branches before PA / CR / QA / RM
 - confirm merged PRs are actually present in `main`
@@ -399,7 +399,7 @@ Format:
 ESCALATION: <SIGNAL> — <one sentence explanation>
 ```
 
-Codex or the owner resolves the escalation before the agent proceeds.
+阿澈 or the owner resolves the escalation before the agent proceeds.
 
 External DEV is no longer part of the default daily workflow. Use it
 only when the owner explicitly asks for that exception. In that case,
@@ -434,6 +434,15 @@ point is to protect the owner from over-commanding during momentum.
 
 ## 4. Role split
 
+Current named-agent assignment:
+
+- 阿澈 owns PM, UI direction / polish, PA, and Big CR.
+- 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+- For medium / large RM, 小川 may execute the merge only after 阿澈 runs
+  the RM artifact gate and final sanity check.
+- Either agent may cover another role when quota or availability
+  requires, but role contracts and gates do not downgrade.
+
 PM / product pacing:
 
 - grill the user's idea before DEV
@@ -444,7 +453,7 @@ PM / product pacing:
 PO:
 
 - decides whether the product direction and visual feel are right
-- runs final PO QA after Codex browser QA
+- runs final PO QA after 阿澈 browser QA
 - does not need to read code or perform code review
 - says "走" before RM merge
 - may change process deliberately, but not by accidental one-off bypass;
@@ -463,21 +472,23 @@ Big PA:
 
 DEV:
 
-- Codex implements the approved cut by default
+- 小川 implements the approved cut by default
 - must not redesign the product direction silently
 - stops and reports if implementation requires forbidden files or a
   changed product decision
 
 CR:
 
-- Codex checks whether DEV obeyed the spec
+- 小川 owns routine CR-lite. 阿澈 owns Big CR and any final sanity gate
+  needed before medium / large RM.
 - finds bugs, scope leaks, missing tests, and behavioral regressions
 - must not quietly redesign the feature during review; if product
   direction is wrong, stop and route back to PM / PA
 
 QA:
 
-- Codex does first local / in-app browser QA
+- 阿澈 does first local / in-app browser QA for UI direction and
+  user-visible quality unless the cut explicitly assigns QA elsewhere.
 - PO then does final user-visible QA
 - static verify does not replace browser QA for user-visible surfaces
 
@@ -487,6 +498,9 @@ RM:
 - runs the medium / large artifact gate before merge
 - merges with the agreed strategy
 - fetches `main` after merge and confirms the merge commit is present
+- 小川 owns small-cut RM / release execution. For medium / large cuts,
+  阿澈 runs the artifact gate and final sanity check before 小川 executes
+  the merge.
 
 ## 5. Grill before visual work
 
