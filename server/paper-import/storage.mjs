@@ -11,6 +11,7 @@ import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
+const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 
 function readJsonMaybe(filePath) {
   if (!existsSync(filePath)) return null
@@ -80,7 +81,13 @@ function makeVersionedArtifacts(packageData, version) {
   paperAsset.paper.status = 'published'
   answerKey.sourceAssetVersion = version
   readingAnalysis.sourceAssetVersion = version
-  return { paperAsset, answerKey, importMeta, readingAnalysis }
+
+  const scAnalysis = packageData.scAnalysis
+    ? JSON.parse(JSON.stringify(packageData.scAnalysis))
+    : null
+  if (scAnalysis) scAnalysis.sourceAssetVersion = version
+
+  return { paperAsset, answerKey, importMeta, readingAnalysis, scAnalysis }
 }
 
 export function writePaperImportVersion({
@@ -112,6 +119,9 @@ export function writePaperImportVersion({
     writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
     writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
+    if (artifacts.scAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', sevenChoicesAnalysisFileName), artifacts.scAnalysis)
+    }
     writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
     writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
 
@@ -144,6 +154,13 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
     path.join(tempLatest, 'analyses', readingChoiceAnalysisFileName),
     readFileSync(path.join(versionDir, 'analyses', readingChoiceAnalysisFileName)),
   )
+  const scAnalysisPath = path.join(versionDir, 'analyses', sevenChoicesAnalysisFileName)
+  if (existsSync(scAnalysisPath)) {
+    writeFileSync(
+      path.join(tempLatest, 'analyses', sevenChoicesAnalysisFileName),
+      readFileSync(scAnalysisPath),
+    )
+  }
 
   let movedPrevious = false
   try {

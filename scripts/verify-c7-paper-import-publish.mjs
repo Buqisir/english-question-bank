@@ -79,8 +79,8 @@ try {
     readJson(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)).paper.assetVersion === 1,
   )
   assert(
-    'publish returns four QA links',
-    Array.isArray(first.publish?.qaLinks) && first.publish.qaLinks.length === 4,
+    'publish returns QA links (4 Reading + 七选五 if present)',
+    Array.isArray(first.publish?.qaLinks) && first.publish.qaLinks.length >= 4,
   )
   assert(
     'QA links include latest and version hrefs',
@@ -118,6 +118,38 @@ try {
     ).get().count > 0,
   )
   existingTagDb.close()
+
+  const dbOnlyVersionDb = new DatabaseSync(path.join(tempRoot, 'db-only-version.sqlite'))
+  const dbOnlyVersionAssets = path.join(tempRoot, 'db-only-version-paper-assets')
+  dbOnlyVersionDb.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
+  dbOnlyVersionDb.exec(`
+    CREATE TABLE IF NOT EXISTS paper_asset_versions (
+      id TEXT PRIMARY KEY,
+      paper_id TEXT NOT NULL,
+      asset_version INTEGER NOT NULL,
+      version_name TEXT NOT NULL,
+      version_dir TEXT NOT NULL,
+      source_file_sha256 TEXT NOT NULL DEFAULT '',
+      status TEXT NOT NULL DEFAULT 'published' CHECK (status IN ('published', 'failed')),
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE(paper_id, asset_version)
+    )
+  `)
+  dbOnlyVersionDb.prepare(
+    `
+    INSERT INTO paper_asset_versions (id, paper_id, asset_version, version_name, version_dir, source_file_sha256, status)
+    VALUES ('pav-db-only-v1', ?, 1, 'v1', 'missing-on-disk', 'sha', 'published')
+    `,
+  ).run(paperId)
+  const dbOnlyPublish = publishPaperImportPackage({ files, db: dbOnlyVersionDb, paperAssetsDir: dbOnlyVersionAssets })
+  assert('publish skips DB-only existing version', dbOnlyPublish.publish?.assetVersion === 2)
+  assert('DB-only version publish creates v2 dir', existsSync(path.join(dbOnlyVersionAssets, `${paperId}/versions/v2/paper-asset.json`)))
+  assert(
+    'DB-only version publish preserves both DB rows',
+    dbOnlyVersionDb.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get(paperId).count === 2,
+  )
+  dbOnlyVersionDb.close()
+
   const latestDir = path.join(paperAssetsDir, `${paperId}/latest`)
   const hiddenLatest = path.join(paperAssetsDir, `${paperId}/.latest-prev-window-test`)
   renameSync(latestDir, hiddenLatest)
