@@ -283,8 +283,10 @@ function buildChainViews(input: {
     const unresolvedClues: string[] = []
     const leftHighlights: SevenChoicesHighlightRange[] = []
 
+    const blankParagraphId = item.contextEvidence.paragraphId || undefined
+
     for (const [signalIndex, signal] of contextSignals.entries()) {
-      const ranges = findAllTextRanges(textMap, signal.signalText)
+      const ranges = findAllTextRanges(textMap, signal.signalText, blankParagraphId)
       if (ranges.length === 0) {
         unresolvedClues.push(`mechanism:${signal.signalText}`)
       }
@@ -300,7 +302,7 @@ function buildChainViews(input: {
     }
 
     for (const [clueIndex, clue] of (item.topicClues ?? []).entries()) {
-      const ranges = findAllTextRanges(textMap, clue)
+      const ranges = findAllTextRanges(textMap, clue, blankParagraphId)
       if (ranges.length === 0) {
         unresolvedClues.push(`topic:${clue}`)
       }
@@ -317,7 +319,7 @@ function buildChainViews(input: {
 
     if (leftHighlights.length === 0) {
       const fallbackText = item.contextEvidence.beforeQuote || item.contextEvidence.afterQuote || ''
-      const fallbackRanges = fallbackText ? findAllTextRanges(textMap, fallbackText) : []
+      const fallbackRanges = fallbackText ? findAllTextRanges(textMap, fallbackText, blankParagraphId) : []
       fallbackRanges.forEach((range, rangeIndex) => {
         leftHighlights.push({
           id: `${questionId}-context-${rangeIndex + 1}`,
@@ -361,11 +363,14 @@ function buildChainViews(input: {
   })
 }
 
-function findAllTextRanges(textMap: PaperTextMap, needle: string): PaperTextRange[] {
+function findAllTextRanges(textMap: PaperTextMap, needle: string, paragraphId?: string): PaperTextRange[] {
   const trimmed = needle.trim()
   if (!trimmed) return []
   const ranges: PaperTextRange[] = []
-  for (const paragraph of textMap.paragraphs) {
+  const paragraphs = paragraphId
+    ? textMap.paragraphs.filter((p) => p.id === paragraphId)
+    : textMap.paragraphs
+  for (const paragraph of paragraphs) {
     for (const sentence of paragraph.sentences) {
       let start = sentence.text.indexOf(trimmed)
       while (start !== -1) {
