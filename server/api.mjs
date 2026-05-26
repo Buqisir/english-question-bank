@@ -23,6 +23,7 @@ import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createLegacyImportRoutes } from './imports/legacyImportRoutes.mjs'
+import { createPaperImportAiRoutes } from './paper-import-ai/routes.mjs'
 import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
@@ -419,6 +420,7 @@ const serverRoutes = [
   ...h1Routes,
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
+  ...createPaperImportAiRoutes(),
   ...createPaperImportRoutes(),
   ...createExportRoutes(exportImplementation),
   ...createLegacyImportRoutes(),
