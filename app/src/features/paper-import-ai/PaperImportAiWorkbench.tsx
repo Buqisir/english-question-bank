@@ -1,8 +1,12 @@
-import { AlertTriangle, ArrowLeft, FileText, Loader2, UploadCloud } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, FileText, Loader2, Sparkles, UploadCloud } from 'lucide-react'
 import { useRef, useState } from 'react'
 import {
+  analyzePaperImportAiReadingGroup,
   parsePaperImportAiDocx,
+  type PaperImportAiAnalysisResult,
   type PaperImportAiParseResult,
+  type PaperImportAiProviderId,
+  type PaperImportAiQuestion,
   type PaperImportAiReadingGroup,
 } from '../../services/paperImportAi'
 import './paperImportAiWorkbench.css'
@@ -10,6 +14,19 @@ import './paperImportAiWorkbench.css'
 type PaperImportAiWorkbenchProps = {
   onBackToWorkbench: () => void
 }
+
+type AnalysisState = {
+  status: 'idle' | 'analyzing' | 'error' | 'done'
+  message: string
+  result: PaperImportAiAnalysisResult | null
+}
+
+type AnalysisRecord = Record<string, unknown>
+
+const providerOptions: Array<{ value: PaperImportAiProviderId; label: string }> = [
+  { value: 'deepseek-v4-pro', label: 'DeepSeek v4 Pro' },
+  { value: 'gpt-5.5', label: 'GPT 5.5 中转' },
+]
 
 function formatSize(bytes: number) {
   if (bytes < 1024) return `${bytes} B`
@@ -29,16 +46,186 @@ function reasonLabel(reason: string) {
   return reason
 }
 
+function asRecord(value: unknown): AnalysisRecord {
+  return value && typeof value === 'object' && !Array.isArray(value) ? (value as AnalysisRecord) : {}
+}
+
+function asArray(value: unknown): AnalysisRecord[] {
+  return Array.isArray(value) ? value.map(asRecord) : []
+}
+
+function textOf(value: unknown, fallback = '') {
+  return typeof value === 'string' && value.trim() ? value.trim() : fallback
+}
+
+function statusLabel(status: unknown) {
+  if (status === 'correct') return '正确'
+  if (status === 'wrong') return '干扰项'
+  return textOf(status, '待核对')
+}
+
+function trapTypeLabel(type: unknown) {
+  if (type === 'sourceLexicalTrap') return '原文词钩干扰'
+  if (type === 'polarityReversal') return '黑白颠倒'
+  if (type === 'scopeShift') return '范围偷换'
+  if (type === 'entityMismatch') return '对象错配'
+  if (type === 'unsupportedClaim') return '无中生有'
+  return textOf(type, '干扰诊断')
+}
+
+function relationTypeLabel(type: unknown) {
+  if (type === 'locationCue') return '定位线索'
+  if (type === 'paraphrase') return '同义替换'
+  if (type === 'wordFamily') return '词族关联'
+  if (type === 'calculation') return '计算/推算'
+  return textOf(type, '定位关系')
+}
+
+function skillText(skill: unknown) {
+  const record = asRecord(skill)
+  const primary = textOf(record.primary)
+  const secondary = textOf(record.secondary)
+  return [primary, secondary].filter(Boolean).join(' / ') || '未标注'
+}
+
+function optionNote(option: AnalysisRecord) {
+  const evidence = asArray(option.evidence)
+  if (evidence.length > 0) {
+    return textOf(evidence[0].anchor) || textOf(evidence[0].quote)
+  }
+  const trap = asRecord(option.trap)
+  return (
+    textOf(trap.relationNote) ||
+    textOf(trap.explanation) ||
+    textOf(trap.claim) ||
+    textOf(trap.sourceQuote) ||
+    textOf(trap.sourceText)
+  )
+}
+
+function correctLabelFromAnalysis(questionAnalysis: AnalysisRecord) {
+  const correct = asArray(questionAnalysis.optionAnalysis).find((option) => option.status === 'correct')
+  return textOf(correct?.label)
+}
+
+function answerState(question: PaperImportAiQuestion, questionAnalysis: AnalysisRecord) {
+  const official = question.answerKey
+  const ai = correctLabelFromAnalysis(questionAnalysis)
+  if (!official && ai) return { label: `AI 判断 ${ai}`, tone: 'pending' }
+  if (official && !ai) return { label: `答案 ${official} · AI 未标出`, tone: 'warning' }
+  if (official && ai && official !== ai) return { label: `冲突：答案版 ${official} / AI ${ai}`, tone: 'danger' }
+  if (official && ai) return { label: `一致：${official}`, tone: 'ok' }
+  return { label: '待核对', tone: 'pending' }
+}
+
+function AnalysisReadablePreview({
+  group,
+  result,
+}: {
+  group: PaperImportAiReadingGroup
+  result: PaperImportAiAnalysisResult
+}) {
+  const analysis = asRecord(result.analysis)
+  const groups = asRecord(analysis.groups)
+  const groupAnalysis = asRecord(groups[group.groupId])
+  const questions = asRecord(analysis.questions)
+  const overview = textOf(groupAnalysis.overview, 'AI 未返回篇章概览。')
+  const structure = asRecord(groupAnalysis.discourseStructure)
+  const structureSummary = textOf(structure.summary)
+
+  return (
+    <section className="pi-ai-readable-preview" aria-label={`${group.title} 解析预览`}>
+      <div className="pi-ai-readable-head">
+        <div>
+          <h3>解析预览</h3>
+          <p>{overview}</p>
+        </div>
+        <span>{result.provider} · {result.model} · {result.latencyMs}ms</span>
+      </div>
+      {structureSummary ? <p className="pi-ai-structure-summary">{structureSummary}</p> : null}
+
+      <div className="pi-ai-question-preview-list">
+        {group.questions.map((question, index) => {
+          const questionAnalysis = asRecord(questions[question.id])
+          const state = answerState(question, questionAnalysis)
+          const options = asArray(questionAnalysis.optionAnalysis)
+          const locations = asArray(questionAnalysis.locationParaphrases)
+          return (
+            <article key={question.id} className="pi-ai-question-preview">
+              <header>
+                <div>
+                  <strong>第 {index + 1} 题</strong>
+                  <span>{skillText(questionAnalysis.skill)}</span>
+                </div>
+                <em className={`pi-ai-answer-state pi-ai-answer-state--${state.tone}`}>{state.label}</em>
+              </header>
+              <p className="pi-ai-question-focus">{textOf(questionAnalysis.questionFocus, question.stem)}</p>
+              {textOf(questionAnalysis.stemTranslationZh) ? (
+                <p className="pi-ai-stem-translation">{textOf(questionAnalysis.stemTranslationZh)}</p>
+              ) : null}
+
+              {options.length > 0 ? (
+                <ul className="pi-ai-option-list">
+                  {options.map((option) => (
+                    <li key={textOf(option.label)} className={option.status === 'correct' ? 'is-correct' : ''}>
+                      <div>
+                        <strong>{textOf(option.label)}</strong>
+                        <span>{statusLabel(option.status)}</span>
+                        {option.status !== 'correct' ? <em>{trapTypeLabel(asRecord(option.trap).primaryType)}</em> : null}
+                      </div>
+                      <p>{textOf(option.optionTranslationZh, question.options[textOf(option.label) as 'A' | 'B' | 'C' | 'D'] || '未返回选项翻译')}</p>
+                      {optionNote(option) ? <small>{optionNote(option)}</small> : null}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="pi-ai-muted">AI 未返回选项解析。</p>
+              )}
+
+              {locations.length > 0 ? (
+                <div className="pi-ai-location-list">
+                  <h4>定位关系 / 同义替换</h4>
+                  {locations.map((location, locationIndex) => (
+                    <p key={`${question.id}-location-${locationIndex}`}>
+                      <strong>{relationTypeLabel(location.relationType)}</strong>
+                      <span>{textOf(location.sourceText)} → {textOf(location.targetText)}</span>
+                      {textOf(location.note) ? <em>{textOf(location.note)}</em> : null}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+            </article>
+          )
+        })}
+      </div>
+
+      <details className="pi-ai-raw-json">
+        <summary>查看原始 JSON</summary>
+        <pre className="pi-ai-json-preview">{JSON.stringify(result.analysis, null, 2)}</pre>
+      </details>
+    </section>
+  )
+}
+
 export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkbenchProps) {
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const answerInputRef = useRef<HTMLInputElement | null>(null)
   const [file, setFile] = useState<File | null>(null)
+  const [answerFile, setAnswerFile] = useState<File | null>(null)
   const [result, setResult] = useState<PaperImportAiParseResult | null>(null)
   const [status, setStatus] = useState<'idle' | 'parsing' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  const [providerId, setProviderId] = useState<PaperImportAiProviderId>('deepseek-v4-pro')
+  const [analysisByGroupId, setAnalysisByGroupId] = useState<Record<string, AnalysisState>>({})
 
-  function acceptFile(nextFile: File | null) {
+  function resetParsedResult() {
     setMessage('')
     setResult(null)
+    setAnalysisByGroupId({})
+  }
+
+  function acceptFile(nextFile: File | null) {
+    resetParsedResult()
     if (!nextFile) {
       setFile(null)
       return
@@ -53,18 +240,67 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     setFile(nextFile)
   }
 
+  function acceptAnswerFile(nextFile: File | null) {
+    resetParsedResult()
+    if (!nextFile) {
+      setAnswerFile(null)
+      return
+    }
+    if (!/\.docx$/i.test(nextFile.name)) {
+      setAnswerFile(null)
+      setStatus('error')
+      setMessage('答案解析版也需要是 .docx 文件。')
+      return
+    }
+    setStatus('idle')
+    setAnswerFile(nextFile)
+  }
+
   async function handleParse() {
     if (!file) return
     setStatus('parsing')
     setMessage('')
     try {
-      const parsed = await parsePaperImportAiDocx(file)
+      const parsed = await parsePaperImportAiDocx(file, answerFile)
       setResult(parsed)
+      setAnalysisByGroupId({})
       setStatus('idle')
-      setMessage(`已识别 ${parsed.readingGroups.length} 个 Reading 题组。`)
+      const keyedCount = parsed.readingGroups.reduce(
+        (sum, group) => sum + group.questions.filter((question) => question.answerKey).length,
+        0,
+      )
+      setMessage(`已识别 ${parsed.readingGroups.length} 个 Reading 题组${answerFile ? `，匹配 ${keyedCount} 个答案。` : '。'}`)
     } catch (error) {
       setStatus('error')
       setMessage(error instanceof Error ? error.message : String(error))
+    }
+  }
+
+  async function handleAnalyze(group: PaperImportAiReadingGroup) {
+    if (!result) return
+    setAnalysisByGroupId((current) => ({
+      ...current,
+      [group.groupId]: { status: 'analyzing', message: '', result: current[group.groupId]?.result || null },
+    }))
+    try {
+      const analysis = await analyzePaperImportAiReadingGroup({
+        paper: result.paper,
+        group,
+        providerId,
+      })
+      setAnalysisByGroupId((current) => ({
+        ...current,
+        [group.groupId]: { status: 'done', message: 'JSON preview ready.', result: analysis },
+      }))
+    } catch (error) {
+      setAnalysisByGroupId((current) => ({
+        ...current,
+        [group.groupId]: {
+          status: 'error',
+          message: error instanceof Error ? error.message : String(error),
+          result: current[group.groupId]?.result || null,
+        },
+      }))
     }
   }
 
@@ -78,10 +314,10 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           返回题库
         </button>
         <div>
-          <p className="eyebrow">I1 Owner-only Paper Import AI</p>
-          <h1>AI 导题预检台</h1>
+          <p className="eyebrow">Local-first Paper Import</p>
+          <h1>AI 导题工作台</h1>
         </div>
-        <div className="pi-ai-status">{status === 'parsing' ? 'Parsing' : 'Preview only'}</div>
+        <div className="pi-ai-status">{status === 'parsing' ? '拆题中' : '预览未保存'}</div>
       </header>
 
       <div className="pi-ai-layout">
@@ -90,12 +326,16 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           onDragOver={(event) => event.preventDefault()}
           onDrop={(event) => {
             event.preventDefault()
-            acceptFile(event.dataTransfer.files.item(0))
+            const dropped = Array.from(event.dataTransfer.files).filter((item) => /\.docx$/i.test(item.name))
+            const answer = dropped.find((item) => /答案|解析|参考答案/i.test(item.name)) || null
+            const paper = dropped.find((item) => item !== answer) || dropped[0] || null
+            acceptFile(paper)
+            acceptAnswerFile(answer)
           }}
         >
           <UploadCloud size={38} aria-hidden="true" />
-          <h2>上传完整试卷 DOCX</h2>
-          <p>当前只做本地拆题预检：识别 Reading A-D、展示跳过项，不调用 LLM，不保存文件。</p>
+          <h2>导入完整试卷</h2>
+          <p>先识别阅读理解 A-D；可同时上传答案解析版，用官方答案和 AI 判断做对照。</p>
           <button className="primary-button" type="button" onClick={() => inputRef.current?.click()}>
             选择 DOCX
           </button>
@@ -122,8 +362,25 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <span>{file.name}</span>
             </div>
           ) : (
-            <p className="pi-ai-muted">拖入或选择一个 `.docx`，预检台会调用 `/api/paper-import-ai/parse`。</p>
+            <p className="pi-ai-muted">拖入或选择一个 `.docx`，系统会先拆出阅读理解 A-D。</p>
           )}
+          <div className="pi-ai-answer-file-row">
+            <button className="ghost-button" type="button" onClick={() => answerInputRef.current?.click()}>
+              <FileText size={16} aria-hidden="true" />
+              选择答案解析版
+            </button>
+            <span>{answerFile ? answerFile.name : '可选，用于答案对照'}</span>
+          </div>
+          <input
+            ref={answerInputRef}
+            className="pi-ai-file-input"
+            type="file"
+            accept=".docx"
+            onChange={(event) => {
+              acceptAnswerFile(event.target.files?.item(0) || null)
+              event.currentTarget.value = ''
+            }}
+          />
           <button className="primary-button pi-ai-parse-button" type="button" disabled={!file || status === 'parsing'} onClick={handleParse}>
             {status === 'parsing' ? <Loader2 size={16} aria-hidden="true" /> : <FileText size={16} aria-hidden="true" />}
             拆题预检
@@ -133,11 +390,35 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           ) : null}
         </section>
 
+        <section className="pi-ai-panel">
+          <div className="pi-ai-panel-heading">
+            <h2>模型通道</h2>
+            <span>解析预览</span>
+          </div>
+          <label className="pi-ai-provider-field">
+            <span>模型通道</span>
+            <select
+              value={providerId}
+              onChange={(event) => setProviderId(event.target.value as PaperImportAiProviderId)}
+            >
+              {providerOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <p className="pi-ai-muted">当前只生成解析 JSON 预览；保存与合并留到下一步。</p>
+        </section>
+
         <section className="pi-ai-panel pi-ai-summary">
           <div className="pi-ai-panel-heading">
             <h2>识别概览</h2>
             <span>{result ? result.paper.paperId : '未生成'}</span>
           </div>
+          {result?.paper.answerSourceFilename ? (
+            <p className="pi-ai-answer-source">答案来源：{result.paper.answerSourceFilename}</p>
+          ) : null}
           <div className="pi-ai-summary-grid">
             <strong>{result?.readingGroups.length || 0}</strong>
             <span>Reading 题组</span>
@@ -173,6 +454,33 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
                       </li>
                     ))}
                   </ol>
+                  <div className="pi-ai-analysis-actions">
+                    <button
+                      className="primary-button"
+                      type="button"
+                      disabled={analysisByGroupId[group.groupId]?.status === 'analyzing'}
+                      onClick={() => void handleAnalyze(group)}
+                    >
+                      {analysisByGroupId[group.groupId]?.status === 'analyzing' ? (
+                        <Loader2 size={16} aria-hidden="true" />
+                      ) : (
+                        <Sparkles size={16} aria-hidden="true" />
+                      )}
+                      生成解析
+                    </button>
+                    {analysisByGroupId[group.groupId]?.status === 'error' ? (
+                      <span className="pi-ai-error">{analysisByGroupId[group.groupId]?.message}</span>
+                    ) : null}
+                    {analysisByGroupId[group.groupId]?.result ? (
+                      <span className="pi-ai-muted">
+                        {analysisByGroupId[group.groupId]?.result?.provider} · {analysisByGroupId[group.groupId]?.result?.model} ·{' '}
+                        {analysisByGroupId[group.groupId]?.result?.latencyMs}ms
+                      </span>
+                    ) : null}
+                  </div>
+                  {analysisByGroupId[group.groupId]?.result ? (
+                    <AnalysisReadablePreview group={group} result={analysisByGroupId[group.groupId].result!} />
+                  ) : null}
                 </article>
               ))}
             </div>

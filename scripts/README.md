@@ -42,6 +42,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol | yes |
 | `verify-i1-paper-import-splitter.mjs` | I1 DOCX reading splitter endpoint and parser contract | no |
 | `verify-i1-paper-import-route.mjs` | I1 owner-only `?view=paper-import-ai` parse preview route | no |
+| `verify-i1-paper-import-analysis.mjs` | I1 owner-only analysis endpoint, provider seam, and JSON preview contract | no |
 
 ## PaperSurface and Paper Intelligence
 

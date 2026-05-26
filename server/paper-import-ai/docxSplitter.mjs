@@ -115,6 +115,16 @@ function parseAnswerRanges(rawText) {
   return answers
 }
 
+function mergeAnswerMaps(...maps) {
+  const merged = new Map()
+  for (const map of maps) {
+    for (const [questionNo, answer] of map.entries()) {
+      if (!merged.has(questionNo)) merged.set(questionNo, answer)
+    }
+  }
+  return merged
+}
+
 function questionStart(line) {
   const numbered = normalizeLine(line).match(/^(\d{1,2})[\.\uff0e、]\s*(.+)$/)
   if (numbered) return { questionNo: numbered[1], stem: normalizeLine(numbered[2]) }
@@ -340,7 +350,7 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
   const paperId = options.paperId || derivePaperId(sourceFilename, sourceHash)
   const paperTail = tailFromPaperId(paperId)
   const lines = toLines(rawText)
-  const answerMap = parseAnswerRanges(rawText)
+  const answerMap = mergeAnswerMaps(parseAnswerRanges(rawText), parseAnswerRanges(options.answerKeyText || ''))
   const markers = findReadingMarkers(lines)
   const readingGroups = []
   const skipped = []
@@ -364,6 +374,7 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
       paperId,
       sourceFilename,
       sourceHash,
+      answerSourceFilename: options.answerSourceFilename || '',
     },
     readingGroups: readingGroups.sort((a, b) => a.order - b.order),
     skipped: uniqueSkipped([...skipped, ...collectSkippedSections(lines)]),
@@ -374,9 +385,15 @@ export async function parseReadingDocxBuffer(buffer, options = {}) {
   const sourceFilename = options.sourceFilename || 'paper.docx'
   const sourceHash = sha256(buffer)
   const result = await mammoth.extractRawText({ buffer })
+  let answerKeyText = options.answerKeyText || ''
+  if (!answerKeyText && options.answerKeyBuffer) {
+    answerKeyText = (await mammoth.extractRawText({ buffer: options.answerKeyBuffer })).value
+  }
   return parseReadingCandidatesFromText(result.value, {
     sourceFilename,
     sourceHash,
     paperId: options.paperId,
+    answerKeyText,
+    answerSourceFilename: options.answerSourceFilename,
   })
 }

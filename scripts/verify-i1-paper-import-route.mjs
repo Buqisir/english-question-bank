@@ -60,21 +60,24 @@ function changedFiles() {
 }
 
 function assertAllowedScope() {
+  const allowedPrefixes = [
+    'server/paper-import-ai/',
+    'server/ai-providers/',
+    'app/src/features/paper-import-ai/',
+  ]
   const allowed = new Set([
     'app/src/App.tsx',
-    'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
-    'app/src/features/paper-import-ai/paperImportAiWorkbench.css',
     'app/src/services/paperImportAi.ts',
     'scripts/README.md',
+    'scripts/verify-i1-paper-import-analysis.mjs',
     'scripts/verify-i1-paper-import-route.mjs',
   ])
   const files = changedFiles()
-  const unexpected = files.filter((file) => !allowed.has(file))
-  assert('I1 Step 2 changed files stay in the route whitelist', unexpected.length === 0, unexpected.join('\n'))
+  const unexpected = files.filter((file) => !allowed.has(file) && !allowedPrefixes.some((prefix) => file.startsWith(prefix)))
+  assert('I1 paper-import-ai route changed files stay in the route whitelist', unexpected.length === 0, unexpected.join('\n'))
 
   const forbidden = files.filter(
     (file) =>
-      file.startsWith('server/') ||
       file.startsWith('prompts/') ||
       file.startsWith('shared/papersurface/') ||
       file.startsWith('app/src/domain/') ||
@@ -97,17 +100,17 @@ function assertRouteUiContract() {
   assert('App renders PaperImportAiWorkbench route', appSource.includes('<PaperImportAiWorkbench onBackToWorkbench={paperImportAiOnBackToWorkbench} />'))
   assert('App keeps C7 paper-import route distinct', appSource.includes("get('view') === 'paper-import'"))
 
-  assert('service calls only Step 1 parse endpoint', serviceSource.includes('/api/paper-import-ai/parse'))
-  assert('service does not call analyze endpoint', !serviceSource.includes('/api/paper-import-ai/analyze'))
+  assert('service calls Step 1 parse endpoint', serviceSource.includes('/api/paper-import-ai/parse'))
   assert('service does not call save endpoint', !serviceSource.includes('/api/paper-import-ai/save'))
-  assert('service accepts a single DOCX File upload', serviceSource.includes("formData.append('files', file, file.name)"))
+  assert('service accepts paper DOCX upload', serviceSource.includes("formData.append('files', file, file.name)"))
+  assert('service accepts optional answer DOCX upload', serviceSource.includes('answerFile') && serviceSource.includes("formData.append('files', answerFile, answerFile.name)"))
 
-  assert('page labels owner-only I1 route', pageSource.includes('I1 Owner-only Paper Import AI'))
-  assert('page states no LLM call', pageSource.includes('不调用 LLM'))
-  assert('page states no save behavior', pageSource.includes('不保存文件'))
+  assert('page labels local paper import route', pageSource.includes('Local-first Paper Import'))
+  assert('page states answer comparison purpose', pageSource.includes('官方答案和 AI 判断做对照'))
+  assert('page states no save behavior', pageSource.includes('保存与合并留到下一步'))
+  assert('page supports optional answer analysis file', pageSource.includes('选择答案解析版') && pageSource.includes('答案来源'))
   assert('page displays reading group preview', pageSource.includes('Reading A-D 预览'))
   assert('page displays skipped panel separately', pageSource.includes('跳过项'))
-  assert('page has no Analyze button', !/Analyze|分析/.test(pageSource))
   assert('page has no save endpoint or handler', !/\/save|handleSave|savePaperImportAi/i.test(pageSource))
   assert('page CSS is distinct from C7 import CSS', cssSource.includes('.pi-ai-shell') && !cssSource.includes('.pi-import-shell'))
 }
