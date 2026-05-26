@@ -116,7 +116,7 @@ status update explicitly:
 
 ```text
 Last synced: <date> after Big CR.
-Open items from external review: <N> (see <report> §<section>)
+Open review items: <N> (see <report> §<section>)
 ```
 
 ## Chat Reply Format

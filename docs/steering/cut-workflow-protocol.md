@@ -258,7 +258,7 @@ entry for the file.
 
 If a material decision was made in chat during a grill, it must be
 copied into the cut's `decisions.md`, `pm-spec.md`, `agent-entrypoint.md`,
-or `handoff.md` before DEV or external review continues.
+or `handoff.md` before DEV or review continues.
 
 ### Decisions sync status
 
@@ -267,7 +267,7 @@ Cut decision ledgers should say how fresh they are. New or updated
 
 ```text
 Last synced: <date> after <event>.
-Open items from external review: <N>
+Open review items: <N>
 ```
 
 After PA or Big CR writes a report, Codex must update the decision
@@ -278,14 +278,14 @@ If review opens decisions:
 
 ```text
 Last synced: <date> after <PA / Big CR>.
-Open items from external review: <N> (see <report path> §<section>)
+Open review items: <N> (see <report path> §<section>)
 ```
 
 After PM / PO compression resolves them:
 
 ```text
 Last synced: <date> after <PA / Big CR> + PM compression.
-Open items from external review: 0
+Open review items: 0
 ```
 
 When a cut pauses, changes owner, or crosses a context boundary, write:
@@ -538,11 +538,13 @@ not image quality; the product question is unclear.
 
 ## 7. Big PA discipline
 
-Use high-reasoning PA for large cuts, especially when the decision
-affects PaperSurface, data contracts, geometry, or future cut
-sequencing.
+Use 阿澈 PA by default. Consider outside high-reasoning PA only for large
+cuts, explicit direction checks, or owner-requested independent review,
+especially when the decision affects PaperSurface, data contracts,
+geometry, or future cut sequencing.
 
-External PA must read `docs/agents/pa-persona.md` before review.
+External PA, when explicitly used, must read `docs/agents/pa-persona.md`
+before review.
 
 PA output must end with:
 
