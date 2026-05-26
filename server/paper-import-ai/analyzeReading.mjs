@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
 import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
+import { isValidTopicLabel } from '../shared/topicTaxonomy.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -139,6 +140,24 @@ function validateAnalysisShape(analysis, { paper, group }) {
   if (!analysis.groups || typeof analysis.groups !== 'object' || !analysis.groups[group.groupId]) {
     throw new Error('AI JSON 缺少当前题组分析。')
   }
+  const groupAnalysis = analysis.groups[group.groupId]
+  if (groupAnalysis.topicLabels !== undefined) {
+    if (!Array.isArray(groupAnalysis.topicLabels) || groupAnalysis.topicLabels.length === 0) {
+      throw new Error('topicLabels 必须是非空数组。')
+    }
+    if (groupAnalysis.topicLabels.length > 2) {
+      throw new Error('topicLabels 最多 2 个。')
+    }
+    for (const label of groupAnalysis.topicLabels) {
+      if (!label.theme || !label.themeGroup || !label.subtopic) {
+        throw new Error(`topicLabel 缺少 theme/themeGroup/subtopic：${JSON.stringify(label)}`)
+      }
+      if (!isValidTopicLabel(label.theme, label.themeGroup, label.subtopic)) {
+        throw new Error(`topicLabel 不在分类体系中：${label.theme}-${label.themeGroup}-${label.subtopic}`)
+      }
+    }
+  }
+
   if (!analysis.questions || typeof analysis.questions !== 'object' || Array.isArray(analysis.questions)) {
     throw new Error('AI JSON questions 必须是对象。')
   }

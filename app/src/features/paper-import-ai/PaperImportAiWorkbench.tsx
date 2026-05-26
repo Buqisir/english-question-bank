@@ -291,6 +291,16 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     }
   }
 
+  async function handleAnalyzeAll() {
+    if (!result) return
+    await Promise.all(
+      result.readingGroups.map((group) => {
+        if (analysisByGroupId[group.groupId]?.status === 'done') return Promise.resolve()
+        return handleAnalyze(group)
+      }),
+    )
+  }
+
   async function handleAnalyze(group: PaperImportAiReadingGroup) {
     if (!result) return
     setAnalysisByGroupId((current) => ({
@@ -338,6 +348,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         : []
     })
   }) || []
+  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const canPublish = Boolean(
     file &&
@@ -560,7 +571,17 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
             <span>{result?.readingGroups.length || 0}/4</span>
           </div>
           {result?.readingGroups.length ? (
-            <div className="pi-ai-group-list">
+            <>
+              <button
+                className="primary-button pi-ai-analyze-all-button"
+                type="button"
+                disabled={isAnyAnalyzing || allGroupsAnalyzed}
+                onClick={() => void handleAnalyzeAll()}
+              >
+                {isAnyAnalyzing ? <Loader2 size={16} aria-hidden="true" /> : <Sparkles size={16} aria-hidden="true" />}
+                一键解析 ({analyzedCount}/{result.readingGroups.length})
+              </button>
+              <div className="pi-ai-group-list">
               {result.readingGroups.map((group) => (
                 <article key={group.groupId} className="pi-ai-group-card">
                   <header>
@@ -609,6 +630,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
                 </article>
               ))}
             </div>
+            </>
           ) : (
             <p className="pi-ai-muted">拆题后会按题组显示段落、题干、选项和答案键预览。</p>
           )}

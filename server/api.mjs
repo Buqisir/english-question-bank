@@ -10050,7 +10050,7 @@ function matchStewardFilter(match, plan) {
   if (filters.groupType && group.groupType !== filters.groupType) return false
   if (filters.sourceType && group.sourceType !== filters.sourceType) return false
   if (filters.years?.length && !filters.years.includes(String(group.year || ''))) return false
-  if (filters.regions?.length && !filters.regions.some((region) => optionalString(group.region).includes(region))) return false
+  if (filters.regions?.length && !filters.regions.some((region) => optionalString(group.region).includes(region) || optionalString(group.paperName).includes(region))) return false
   if (filters.tCardIds?.length) {
     const groupCards = Array.isArray(signals.tCardIds) ? signals.tCardIds : []
     if (!filters.tCardIds.some((cardId) => groupCards.includes(cardId))) return false

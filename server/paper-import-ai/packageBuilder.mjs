@@ -21,6 +21,18 @@ function yearFromTitle(title) {
   return match ? Number(match[0]) : new Date().getFullYear()
 }
 
+function regionFromTitle(title) {
+  const text = String(title || '')
+  // Strip leading date prefix like "26.3" or "2026."
+  const stripped = text.replace(/^\d{2}\.\d+\s*/, '').replace(/^\d{4}[.\s]\s*/, '')
+  // Match Chinese characters before exam keywords
+  const match = stripped.match(/^([一-鿿]{2,8}?)(?:高三|高考|中考|初\d|高\d|一模|二模|三模|联考|卷|试题|英语|数学|语文)/)
+  if (match) return match[1]
+  // Fallback: first 2-6 Chinese chars
+  const fallback = stripped.match(/^([一-鿿]{2,6})/)
+  return fallback ? fallback[1] : ''
+}
+
 function examCodeFromPaperId(paperId) {
   return String(paperId || 'paper-ai-import')
     .replace(/^paper-/, '')
@@ -277,7 +289,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     importedAt: new Date().toISOString(),
     paper: {
       year: yearFromTitle(title),
-      region: 'AI 导入',
+      region: regionFromTitle(title) || 'AI 导入',
       paperName: title,
       examCode: examCodeFromPaperId(paperId),
       subject: 'English',

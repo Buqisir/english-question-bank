@@ -285,6 +285,11 @@
   grid-column: 1 / -1;
 }
 
+.pi-ai-analyze-all-button {
+  width: fit-content;
+  margin-bottom: 4px;
+}
+
 .pi-ai-group-list,
 .pi-ai-skipped-list {
   display: grid;
