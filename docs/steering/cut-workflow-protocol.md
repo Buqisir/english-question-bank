@@ -328,6 +328,32 @@ Should Watch items from PA / CR must either be copied into the cut note
 or linked to the relevant ledger. Do not let watch items live only in
 chat history.
 
+### RM artifact gate
+
+Before RM merge for medium / large cuts, Codex must check the required
+cut artifacts. Missing or empty required artifacts stop the merge; do
+not paper over the gap in chat.
+
+Medium cut checklist:
+
+- `docs/cuts/<CUT>/plan.md` exists and is non-empty.
+- If PA was used, either `docs/cuts/<CUT>/pa.md` exists and is non-empty
+  or PA-lite findings are recorded in `plan.md` / `decisions.md`.
+- If Big CR was triggered, either `docs/cuts/<CUT>/cr.md` exists and is
+  non-empty or the PR description / final Codex summary contains the
+  Big CR record.
+
+Large cut extra checklist:
+
+- `docs/cuts/<CUT>/cut-note.md` exists and is non-empty before closeout
+  / RM merge.
+
+If the artifact gate fails, RM must stop with:
+
+```text
+ESCALATION: CONTEXT INSUFFICIENT — required RM artifact missing or empty: <path or record>
+```
+
 When a cut has more than three watch items, create or update:
 
 ```text
@@ -381,6 +407,31 @@ the external DEV must start from latest `main`, push its branch, open or
 update a PR, and report PR URL + commit hash. Its completion report is a
 lead, not a source of truth.
 
+### Owner process brake
+
+The owner has product authority, but cannot accidentally waive process
+gates through an in-the-moment command. If the owner asks an agent to
+skip a required artifact, review, QA pass, RM check, or hard brake, the
+agent must stop and push back directly.
+
+Use this response shape:
+
+```text
+PROCESS BRAKE: this skips <required gate>. I should not continue this
+way. Next valid step is <specific flow step or repo artifact>.
+```
+
+After a process brake, continue only when one of these is true:
+
+- the owner agrees to the next valid flow step;
+- the owner explicitly changes the cut size / process rule in repo
+  context before work proceeds;
+- the agent shows that the requested action does not actually bypass a
+  required gate.
+
+Do not soften this into "noted" or silently execute the shortcut. The
+point is to protect the owner from over-commanding during momentum.
+
 ## 4. Role split
 
 PM / product pacing:
@@ -396,6 +447,9 @@ PO:
 - runs final PO QA after Codex browser QA
 - does not need to read code or perform code review
 - says "走" before RM merge
+- may change process deliberately, but not by accidental one-off bypass;
+  process changes must be made explicit in repo context before agents
+  proceed past a required gate
 
 Big PA:
 
@@ -430,6 +484,7 @@ QA:
 RM:
 
 - confirms PR head, mergeability, and clean state
+- runs the medium / large artifact gate before merge
 - merges with the agreed strategy
 - fetches `main` after merge and confirms the merge commit is present
 
@@ -483,6 +538,7 @@ PA output must end with:
 - product principle
 - exact UX / architecture model
 - Must Fix Before DEV
+- Must Fix -> `plan.md` disposition checklist, when Must Fix exists
 - Should Watch
 - allowed / forbidden files
 - static verify requirements
@@ -497,6 +553,12 @@ Hard brake B:
 
 More than 3 open decisions means the PA did not converge. Compress or
 rerun PA instead of handing ambiguity to DEV.
+
+When PA returns Must Fix items, the PA report must include a checklist
+that maps each Must Fix to the expected `plan.md` disposition. PM
+compression then records the matching handling under `PA Follow-Up
+Decisions` in `plan.md`. Big CR must verify that every PA Must Fix has
+a corresponding plan disposition before treating the PA loop as closed.
 
 ## 8. DEV prompt requirements
 
@@ -532,6 +594,8 @@ CR-lite must include:
 - changed-scope summary
 - Must Fix findings, if any
 - verify evidence
+- Self-Review Blind Spots, when the CR-lite author also implemented or
+  is close to the implementation
 - residual risk
 - a short "failure / attack angle" paragraph: how this change could
   fail, be misunderstood, or be misused by a future agent
@@ -539,6 +603,11 @@ CR-lite must include:
 The failure / attack angle is not a security theater exercise. It is a
 forcing function to review process holes, stale assumptions, fallback
 paths, and misleading green checks before RM.
+
+Self-Review Blind Spots are not extra tasks. They are the places the
+author suspects may hide a problem but cannot confidently judge. If a
+later Big CR runs, it should inspect those first, then continue with
+normal risk-based review.
 
 Big CR should not repeat a full manual forbidden-scope audit when a
 passing verify script already covers it. In that case, the report should

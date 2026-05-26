@@ -133,6 +133,7 @@ Verdict
 Product Principle
 Exact UX / Architecture Model
 Must Fix Before DEV
+Must Fix -> Plan Disposition Checklist
 Should Watch
 Allowed Files
 Forbidden Files
@@ -145,6 +146,13 @@ Open PO Decisions
 The report must be decision-bearing. Every `Must Fix Before DEV` item
 must say exactly what must change before DEV. Every `Should Watch` item
 must say why it does not block the current cut.
+
+When the verdict includes `Must Fix Before DEV`, add a
+`Must Fix -> Plan Disposition Checklist` with one entry per Must Fix.
+Each entry should name the required `plan.md` disposition, such as a
+locked product decision, Must Do step, Forbidden rule, Verification
+entry, Browser QA case, or explicit PO decision. PM fills the matching
+`plan.md` handling; Big CR later verifies the checklist is closed.
 
 ## Verdict Semantics
 

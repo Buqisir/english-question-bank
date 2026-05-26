@@ -15,8 +15,8 @@ Touches schema, data contract, product boundary, or teaching interpretation: <ye
 
 <PM 已拍板、DEV 不需要再猜的决定。每条一句话>
 
-- 
-- 
+- <decision 1>
+- <decision 2>
 
 ## Must Do
 
@@ -24,35 +24,35 @@ Touches schema, data contract, product boundary, or teaching interpretation: <ye
 
 ### Step 1 — <名称>
 
-- 
-- 
+- <step 1 task 1>
+- <step 1 task 2>
 
 ### Step 2 — <名称>
 
-- 
-- 
+- <step 2 task 1>
+- <step 2 task 2>
 
 ## Forbidden
 
 <绝对不能碰的东西。文件路径、模块、行为>
 
-- 
-- 
+- <forbidden scope 1>
+- <forbidden scope 2>
 
 ## Suggested Files
 
 <建议的文件列表，DEV 可根据实际情况调整>
 
-- 
+- <suggested file>
 
 ## Verification
 
 <每步的验证方式：脚本、命令、手动检查>
 
 - Step 1:
-  - 
+  - <verification command / check>
 - Step 2:
-  - 
+  - <verification command / check>
 
 ## Browser QA Matrix
 
@@ -73,4 +73,9 @@ Touches schema, data contract, product boundary, or teaching interpretation: <ye
 
 <仅当本 cut 经过了 PA 且有 Must Fix 或 PO 决策时填写。记录 PA 发现的问题和 PM/PO 的处置>
 
-- 
+Every PA Must Fix must map back to the checklist in `pa.md`. Big CR
+verifies this table before treating the PA loop as closed.
+
+| PA item | `pa.md` required disposition | `plan.md` handling | Status |
+| --- | --- | --- | --- |
+| `MF-1` |  |  |  |

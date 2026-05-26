@@ -9,11 +9,29 @@ Date:
 
 State the smallest current objective in one paragraph.
 
+## Prerequisites (check before acting)
+
+Run these checks before reading or writing the next artifact:
+
+- For medium / large cuts, `docs/cuts/<CUT>/plan.md` must exist and be
+  non-empty before PA / DEV / CR / QA / RM agents act.
+- Before DEV starts, `docs/cuts/<CUT>/plan.md` must already be committed
+  to the repo.
+- If this entrypoint depends on a prior artifact such as `pa.md`,
+  `cr.md`, `cut-note.md`, `decisions.md`, or an ADR, that file must
+  exist and be non-empty.
+
+If a required prerequisite is missing, stop and reply:
+
+```text
+ESCALATION: CONTEXT INSUFFICIENT — required prerequisite missing or empty: <path>
+```
+
 ## Must Read
 
 Keep this list cut-specific and at most 5 files.
 
-- `docs/cuts/<CUT>/pm-spec.md`
+- `docs/cuts/<CUT>/plan.md`
 - `docs/cuts/<CUT>/decisions.md`
 - Cut-specific ADR / contract:
 

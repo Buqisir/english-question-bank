@@ -70,6 +70,10 @@ Hard rule:
   or `SCOPE UNCLEAR`.
 - Stop if mockups do not converge after 2 rounds, or if PA leaves more
   than 3 unresolved PO decisions.
+- Before RM merge for medium / large cuts, run the artifact gate in
+  `cut-workflow-protocol.md`; missing required artifacts stop the merge.
+- If the owner asks to bypass a required workflow gate, stop and push
+  back; do not treat the instruction as an ad hoc override.
 
 ### PA persona
 
@@ -86,8 +90,9 @@ Hard rule:
   `docs/steering/cut-workflow-protocol.md`, and
   `docs/steering/product-scope-discipline.md`.
 - PA must output verdict, product principle, exact model, Must Fix,
-  Should Watch, allowed / forbidden files, static verify, browser QA,
-  DEV readiness, and at most 3 open PO decisions.
+  Must Fix -> `plan.md` disposition checklist, Should Watch, allowed /
+  forbidden files, static verify, browser QA, DEV readiness, and at most
+  3 open PO decisions.
 
 ### UI mockup before DEV
 

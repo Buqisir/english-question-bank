@@ -26,15 +26,25 @@ Date:
 
 ## Must Fix
 
-- 
+- <must fix finding or none>
+
+## PA -> Plan Disposition Checklist
+
+For PA reports only. If there are Must Fix items, map each one to the
+required `plan.md` disposition so PM compression and Big CR can verify
+closure.
+
+| PA item | Required `plan.md` disposition |
+| --- | --- |
+| `MF-1` |  |
 
 ## Should Watch
 
-- 
+- <should watch item or none>
 
 ## Verify / QA Gaps
 
-- 
+- <verify / QA gap or none>
 
 ## Scope Notes
 
@@ -53,4 +63,4 @@ Date:
 
 ## Recommendation
 
-- 
+- <recommendation>

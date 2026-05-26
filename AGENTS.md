@@ -63,10 +63,21 @@ of duplicating workflow or browser rules.
   require a committed `plan.md` before DEV. Large cuts require committed
   `plan.md`, formal PA / CR records as applicable, and `cut-note.md`
   before closeout.
+- Before RM merge for medium / large cuts, Codex must run an artifact
+  gate: required cut files must exist and be non-empty, and missing
+  required artifacts stop the merge. Medium cuts require `plan.md`, plus
+  `pa.md` or PA-lite recorded in `plan.md` when PA was used, and `cr.md`
+  or PR-description / final-summary CR record when Big CR was triggered.
+  Large cuts additionally require non-empty `cut-note.md`.
 - Cut decision ledgers should expose freshness. New `decisions.md`
   files should include `Last synced` and
   `Open items from external review`, and external PA / Big CR follow-up
   must update those fields before another agent depends on the file.
+- When PA returns Must Fix items, `pa.md` must include a checklist that
+  maps each Must Fix to the required `plan.md` disposition, and
+  `plan.md` must record the matching PM / PO handling under
+  `PA Follow-Up Decisions`. Big CR must verify this mapping before
+  treating the PA loop as closed.
 - Agent entrypoints should split reading into `Must Read` and
   `Background`. Keep Must Read cut-specific and short; Background may
   be skipped when already loaded in the same session.
@@ -130,8 +141,17 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
+  - If the owner asks an agent to skip or bypass a required gate, artifact,
+    review, QA, or RM check, the agent must stop and push back strongly.
+    Do not continue by treating the instruction as a normal override.
+    Continue only after the owner either follows the current flow or
+    explicitly changes the process rule / cut size in repo context.
 - Docs-only and type-only cuts do not need browser QA.
 - Do not automatically turn `Should Watch` findings into tasks. Only `Must Fix` blocks the current PR; `Follow-up Gate` blocks a named future stage.
+- When CR-lite feeds a later Big CR, CR-lite must include
+  `Self-Review Blind Spots`: places the implementer / reviewer suspects
+  may be weak but cannot confidently judge. Big CR should inspect those
+  first, then continue with normal risk-based review.
 - PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
 - Historical external-agent handoff rules are no longer the default
   workflow. Only use external DEV prompts when the owner explicitly
