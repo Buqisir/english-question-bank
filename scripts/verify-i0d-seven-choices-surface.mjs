@@ -7,6 +7,7 @@ const PAPER_ID = 'paper-2024-jslk-english'
 const GROUP_ID = 'group-2024-jslk-seven-choices'
 const ASSET_PATH = `app/public/paper-assets/${PAPER_ID}/paper-asset.json`
 const ANALYSIS_PATH = `app/public/paper-assets/${PAPER_ID}/analyses/seven-choices-analysis-v1.json`
+const ADAPTER_PATH = 'app/src/features/paper-intelligence/sevenChoicesSurfaceAdapter.ts'
 
 const failures = []
 
@@ -28,6 +29,7 @@ function questionNo(questionId) {
 
 const asset = readJson(ASSET_PATH)
 const analysis = readJson(ANALYSIS_PATH)
+const adapterSource = readFileSync(resolve(ROOT, ADAPTER_PATH), 'utf8')
 const group = asset.content.groups[GROUP_ID]
 const passageText = group.passage.paragraphs.map((paragraph) => paragraph.text).join('\n')
 const optionByLabel = new Map(group.optionBank.map((option) => [option.label, option.text]))
@@ -76,6 +78,8 @@ for (const questionId of group.questionIds) {
 
 assert(correctLabels.size === 5, 'five distinct correct options map to five blank chains')
 assert(group.optionBank.some((option) => !correctLabels.has(option.label)), 'at least one wrong option remains plain')
+assert(adapterSource.includes('SEVEN_CHOICES_BLANK_WRAPPER_RUN'), 'surface adapter owns a seven-choices blank wrapper normalizer')
+assert(adapterSource.includes('[_＿]{3,}') && adapterSource.includes('formatSingleSevenChoicesBlankMarker'), 'surface adapter consumes underline-wrapped blank markers')
 
 if (failures.length > 0) {
   console.error(`FAILED ${failures.length} assertion(s):`)

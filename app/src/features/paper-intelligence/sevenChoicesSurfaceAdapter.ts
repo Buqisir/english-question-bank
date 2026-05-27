@@ -160,6 +160,7 @@ const MECHANISM_LABELS: Record<string, string> = {
 }
 
 const SEVEN_CHOICES_SECTION = '七选五'
+const SEVEN_CHOICES_BLANK_WRAPPER_RUN = String.raw`(?:[_＿]{3,}|\u00A0{3,}|[-‐‑‒–—―]{3,})`
 
 export function buildSevenChoicesSurfaceModel(
   input: BuildSevenChoicesSurfaceModelInput,
@@ -426,14 +427,17 @@ function formatSevenChoicesBlankMarkers(text: string, questionNos: string[]): st
 }
 
 function formatSingleSevenChoicesBlankMarker(text: string, questionNo: string): string {
-  const pattern = new RegExp(escapeRegExp(questionNo), 'g')
+  const pattern = new RegExp(
+    `(?:${SEVEN_CHOICES_BLANK_WRAPPER_RUN})?[ \\t\\u00A0]*${escapeRegExp(questionNo)}[ \\t\\u00A0]*(?:${SEVEN_CHOICES_BLANK_WRAPPER_RUN})?`,
+    'g',
+  )
   let output = ''
   let cursor = 0
   let match: RegExpExecArray | null
 
   while ((match = pattern.exec(text)) !== null) {
     const start = match.index
-    const end = start + questionNo.length
+    const end = start + match[0].length
     const prev = start > 0 ? text[start - 1] : ''
     const next = end < text.length ? text[end] : ''
     if (isDigit(prev) || isDigit(next)) continue
