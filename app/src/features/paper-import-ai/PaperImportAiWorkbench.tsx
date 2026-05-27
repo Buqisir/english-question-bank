@@ -380,6 +380,10 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const scError = result?.sevenChoicesError || null
   const scHasAnswers = scGroup ? scGroup.questions.every((q) => q.answerKey) : true
   const scMissingAnswers = scGroup ? scGroup.questions.filter((q) => !q.answerKey).length : 0
+  const clGroup = result?.clozeGroup || null
+  const clError = result?.clozeError || null
+  const clHasAnswers = clGroup ? clGroup.questions.every((q) => q.answerKey) : true
+  const clMissingAnswers = clGroup ? clGroup.questions.filter((q) => !q.answerKey).length : 0
   const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
@@ -392,6 +396,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     allImportAnalyzed &&
     missingAnswerCount === 0 &&
     scHasAnswers &&
+    clHasAnswers &&
     answerConflicts.length === 0 &&
     publishState.status !== 'publishing',
   )
@@ -409,6 +414,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         analysesByGroupId,
         sevenChoicesGroup: result.sevenChoicesGroup || null,
         sevenChoicesAnalysis: scAnalysisState.result?.analysis || null,
+        clozeGroup: result.clozeGroup || null,
       })
       setPublishState({ status: 'done', message: '已保存为正式试卷资产。', result: published })
     } catch (error) {
@@ -571,6 +577,10 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <CheckCircle2 size={15} aria-hidden="true" />
               {scGroup ? '七选五就绪' : '无七选五'}
             </p>
+            <p className={clGroup ? (clHasAnswers ? 'is-ok' : '') : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              {clGroup ? '完形就绪' : '无完形'}
+            </p>
           </div>
           {missingReadingLabels.length > 0 && result ? (
             <p className="pi-ai-warning">缺少 Reading {missingReadingLabels.join(' / ')}，暂不保存。</p>
@@ -595,6 +605,12 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           ) : null}
           {scGroup && scAnalysisState.status === 'idle' ? (
             <p className="pi-ai-warning">检测到七选五，请先完成解析。</p>
+          ) : null}
+          {clGroup && clMissingAnswers > 0 ? (
+            <p className="pi-ai-warning">完形还有 {clMissingAnswers} 道题没有答案解析版答案。</p>
+          ) : null}
+          {clError ? (
+            <p className="pi-ai-error">完形解析失败：{clError.reason}</p>
           ) : null}
           <button className="primary-button pi-ai-publish-button" type="button" disabled={!canPublish} onClick={() => void handlePublish()}>
             {publishState.status === 'publishing' ? <Loader2 size={16} aria-hidden="true" /> : <Save size={16} aria-hidden="true" />}
@@ -742,6 +758,43 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
             </div>
             <p className="pi-ai-warning">
               检测到七选五但无法解析：{scError.reason === 'seven_choices_missing_option_bank' ? '缺少 A-G 选项池' : scError.reason === 'seven_choices_missing_passage' ? '缺少篇章正文' : scError.reason}
+            </p>
+          </section>
+        ) : null}
+
+        {clGroup ? (
+          <section className="pi-ai-panel pi-ai-groups">
+            <div className="pi-ai-panel-heading">
+              <h2>完形填空 预览</h2>
+              <span>{clGroup.questions.length} 题 · {clGroup.paragraphs.length} 段</span>
+            </div>
+            <article className="pi-ai-group-card">
+              <header>
+                <div>
+                  <strong>{clGroup.title}</strong>
+                  <span>{clGroup.groupId}</span>
+                </div>
+                <em>{clGroup.questions.length} 题 · {clGroup.paragraphs.length} 段</em>
+              </header>
+              <p>{clGroup.paragraphs[0]?.text || '未识别到段落文本'}</p>
+              <ol>
+                {clGroup.questions.slice(0, 5).map((q) => (
+                  <li key={q.id}>
+                    <span>{q.stem}</span>
+                    <em>答案 {q.answerKey || '待核对'}</em>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          </section>
+        ) : clError ? (
+          <section className="pi-ai-panel">
+            <div className="pi-ai-panel-heading">
+              <h2>完形填空 检测</h2>
+              <span><AlertTriangle size={15} aria-hidden="true" /></span>
+            </div>
+            <p className="pi-ai-warning">
+              检测到完形但无法解析：{clError.reason}
             </p>
           </section>
         ) : null}

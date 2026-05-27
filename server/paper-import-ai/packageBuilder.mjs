@@ -162,7 +162,7 @@ export function mergePaperImportAiAnalyses(parseResult, analysesByGroupId) {
   return normalizeAnalysisForOfficialAnswers(merged, parseResult)
 }
 
-export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, sourceDocx }) {
+export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, sourceDocx }) {
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
@@ -344,6 +344,73 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     }
   }
 
+  // --- Cloze group ---
+  if (clozeGroup) {
+    for (const q of clozeGroup.questions) {
+      if (!compact(q.answerKey)) {
+        throw issue('cloze_answer_missing', `${q.id} 缺少答案解析版答案，不能发布。`, { questionId: q.id })
+      }
+    }
+
+    const clQuestionIds = []
+    for (const q of clozeGroup.questions) {
+      const questionNo = Number(q.stem) || 41
+      clQuestionIds.push(q.id)
+      questions[q.id] = {
+        questionId: q.id,
+        questionNo,
+        groupId: clozeGroup.groupId,
+        stem: q.stem,
+        blankId: q.blankId,
+        options: ['A', 'B', 'C', 'D'].map((label) => ({
+          label,
+          text: q.options?.[label] || '',
+        })),
+      }
+      answerEntries[q.id] = {
+        questionId: q.id,
+        questionNo,
+        answer: q.answerKey,
+        score: 1,
+        note: 'AI 导题：答案解析版抽取',
+      }
+    }
+
+    contentGroups[clozeGroup.groupId] = {
+      groupId: clozeGroup.groupId,
+      groupType: 'cloze',
+      title: clozeGroup.title,
+      questionIds: clQuestionIds,
+      blankIds: clozeGroup.blankIds,
+      passage: {
+        paragraphs: clozeGroup.paragraphs.map((p) => ({
+          paragraphId: p.id,
+          text: p.text,
+        })),
+      },
+    }
+
+    // Add cloze section to layout (under 语言运用 part).
+    const langPart = layoutTree.parts.find((p) => p.partId.includes('language')) ||
+      (() => {
+        const part = { partId: `part-${examCodeFromPaperId(paperId)}-language`, title: '第三部分 语言运用', sections: [] }
+        layoutTree.parts.push(part)
+        return part
+      })()
+    langPart.sections.push({
+      sectionId: `section-${examCodeFromPaperId(paperId)}-cloze`,
+      title: '第一节 完形填空',
+      groups: [{ groupId: clozeGroup.groupId, title: clozeGroup.title }],
+    })
+
+    // Add cloze blocks.
+    blocks.push({ type: 'pageBreakHint' })
+    blocks.push({ type: 'partHeading', partId: langPart.partId, text: '第三部分 语言运用(共两节，满分30分)' })
+    blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-cloze`, text: '第一节(共15小题；每小题1分，满分15分)' })
+    blocks.push({ type: 'instruction', text: '阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。' })
+    blocks.push({ type: 'group', groupId: clozeGroup.groupId })
+  }
+
   const readingAnalysis = mergePaperImportAiAnalyses(parseResult, analysesByGroupId)
   const paperAsset = {
     schemaVersion: 'paper-asset-v1',
@@ -404,6 +471,16 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
       summary: sevenChoicesAnalysis?.groups?.[sevenChoicesGroup.groupId]?.overview || '七选五',
       tags: ['七选五'],
       displayTitleOverride: sevenChoicesGroup.title,
+    }
+  }
+
+  if (clozeGroup) {
+    importMetaGroups[clozeGroup.groupId] = {
+      groupId: clozeGroup.groupId,
+      difficulty: '中',
+      summary: '完形填空',
+      tags: ['完形填空'],
+      displayTitleOverride: clozeGroup.title,
     }
   }
 

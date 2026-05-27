@@ -145,6 +145,10 @@ import {
   type SevenChoicesSurfaceModel,
 } from './sevenChoicesSurfaceAdapter.ts'
 import {
+  buildClozePaperView,
+  type ClozePaperViewModel,
+} from './clozePaperViewAdapter.ts'
+import {
   useSevenChoicesPaperHighlights,
 } from './useSevenChoicesPaperHighlights.ts'
 import {
@@ -199,6 +203,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
   const [paperAssetModel, setPaperAssetModel] = useState<PaperAssetSurfaceModel | null>(null)
   const [sevenChoicesModel, setSevenChoicesModel] = useState<SevenChoicesSurfaceModel | null>(null)
+  const [clozeModel, setClozeModel] = useState<ClozePaperViewModel | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
@@ -297,6 +302,19 @@ export function PaperIntelligencePaperSurfaceHarness({
           if (!group) {
             throw new Error(`未找到题组：${initialGroupId}`)
           }
+          // Cloze: no analysis file; render plain paper view directly.
+          if (group.groupType === 'cloze') {
+            const model = buildClozePaperView({ asset, groupId: initialGroupId })
+            if (cancelled) return
+            setClozeModel(model)
+            setSevenChoicesModel(null)
+            setPaperAssetModel(null)
+            setReport(model.report)
+            setPassageStructures(model.passageStructures)
+            setLoading(false)
+            return
+          }
+
           let analysisFile =
             group.groupType === 'sevenChoices'
               ? 'seven-choices-analysis-v1.json'
@@ -559,21 +577,24 @@ export function PaperIntelligencePaperSurfaceHarness({
         )
         return
       }
-      if (!paperAssetModel) return
+      const activeReadingModel = paperAssetModel ?? clozeModel
+      if (!activeReadingModel) return
       const candidateId =
-        initialQuestionId && paperAssetModel.surfaceData.questions.some((q) => q.id === initialQuestionId)
+        initialQuestionId && activeReadingModel.surfaceData.questions.some((q) => q.id === initialQuestionId)
           ? initialQuestionId
           : initialGroupId
-            ? paperAssetModel.defaultQuestionId
+            ? activeReadingModel.defaultQuestionId
             : null
       if (!candidateId) return
-      const candidateAnalysis = paperAssetModel.analysisByQuestionId[candidateId] ?? null
+      const candidateAnalysis = activeReadingModel.analysisByQuestionId[candidateId] ?? null
+      const candidateAnswer = candidateAnalysis && 'answer' in candidateAnalysis ? (candidateAnalysis as PaperAssetQuestionAnalysisView).answer : null
+      const candidateEvidence = candidateAnalysis && 'supportEvidenceId' in candidateAnalysis ? (candidateAnalysis as PaperAssetQuestionAnalysisView).supportEvidenceId : null
       initialQuestionAppliedRef.current = true
       dispatchHost({
         type: 'request-lecture-focus',
         questionId: candidateId,
-        optionLabel: candidateAnalysis?.answer ?? null,
-        evidenceId: candidateAnalysis?.supportEvidenceId ?? null,
+        optionLabel: candidateAnswer,
+        evidenceId: candidateEvidence,
       })
       return
     }
@@ -612,7 +633,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (source === 'paper-asset') {
-      return sevenChoicesModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
+      return sevenChoicesModel?.surfaceData ?? clozeModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
     }
     if (!report) return null
     // C5a: buildPaperSurfaceDataFromPi will throw if passageStructure
@@ -640,8 +661,9 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (source !== 'paper-asset') return null
     if (sevenChoicesModel) return null
     if (!activeQuestionId) return null
-    return paperAssetModel?.analysisByQuestionId[activeQuestionId] ?? null
-  }, [source, sevenChoicesModel, paperAssetModel, activeQuestionId])
+    const entry = (paperAssetModel ?? clozeModel)?.analysisByQuestionId[activeQuestionId] ?? null
+    return entry && 'questionId' in entry ? (entry as PaperAssetQuestionAnalysisView) : null
+  }, [source, sevenChoicesModel, paperAssetModel, clozeModel, activeQuestionId])
 
   // ─── Derive activeEvidenceKind (Issue #21-C3.6) ───
   //
@@ -670,7 +692,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   //                 own).
   const activeEvidenceKind = useMemo<'support' | 'trap' | null>(() => {
     if (source === 'paper-asset') {
-      if (sevenChoicesModel) return null
+      if (sevenChoicesModel || clozeModel) return null
       if (!activeEvidenceId) return null
       return paperAssetModel?.evidenceKindById[activeEvidenceId] ?? null
     }
@@ -731,10 +753,11 @@ export function PaperIntelligencePaperSurfaceHarness({
         // a question card. Mirrors the default PI route's behavior in
         // PaperIntelligencePreview, where `setActiveInsightSection(null)`
         // runs on every question selection.
-        const nextAnalysis =
+        const nextEntry =
           source === 'paper-asset'
-            ? paperAssetModel?.analysisByQuestionId[intent.questionId] ?? null
+            ? (paperAssetModel ?? clozeModel)?.analysisByQuestionId[intent.questionId] ?? null
             : null
+        const nextAnalysis = nextEntry && 'questionId' in nextEntry ? (nextEntry as PaperAssetQuestionAnalysisView) : null
         dispatchHost({
           type: 'request-lecture-focus',
           questionId: intent.questionId,
