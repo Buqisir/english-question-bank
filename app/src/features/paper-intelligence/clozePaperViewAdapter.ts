@@ -3,20 +3,27 @@ import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import type { PaperSurfaceData } from './adapter/index.ts'
 import type {
+  AiInitialBand,
+  LoadBar,
   PaperIntelligenceReport,
+  PassageOutline,
+  PassageReport,
   PassageStructure,
-  QuestionAnalysis,
 } from './paperIntelligenceTypes.ts'
 
 export type ClozePaperViewModel = {
   report: PaperIntelligenceReport
   passageStructures: Record<string, PassageStructure>
   surfaceData: PaperSurfaceData
-  analysisByQuestionId: Record<string, QuestionAnalysis | null>
+  analysisByQuestionId: Record<string, null>
   defaultQuestionId: string | null
 }
 
 const CLOZE_SECTION = '完形填空'
+
+const ZERO_LOAD_BAR: LoadBar = { score: 0, label: '', shortReason: '', evidenceItems: [] }
+const ZERO_INITIAL_BAND: AiInitialBand = { band: '', basis: '' }
+const ZERO_OUTLINE: PassageOutline = { mainIdea: '', logicalLayers: [] }
 
 export function buildClozePaperView(input: {
   asset: PaperAssetV1
@@ -50,6 +57,23 @@ export function buildClozePaperView(input: {
     }
   })
 
+  const passageReport: PassageReport = {
+    paperSection: CLOZE_SECTION,
+    passageTitle: group.title || CLOZE_SECTION,
+    questionGroupId: groupId,
+    loads: {
+      vocabularyChunkLoad: ZERO_LOAD_BAR,
+      grammarLoad: ZERO_LOAD_BAR,
+      discourseStructureLoad: ZERO_LOAD_BAR,
+      topicBackgroundLoad: ZERO_LOAD_BAR,
+      evidenceFindingLoad: ZERO_LOAD_BAR,
+    },
+    aiInitialBand: ZERO_INITIAL_BAND,
+    passageOutline: ZERO_OUTLINE,
+    keyChunks: [],
+    questions: [],
+  }
+
   return {
     report: {
       schemaVersion: 'paper-intelligence-report-v1',
@@ -61,19 +85,12 @@ export function buildClozePaperView(input: {
       },
       sourcePaper: {
         paperId: asset.paper.paperId,
-        sourceName: asset.paper.title,
-        subject: asset.paper.subject,
-        paperYear: new Date().getFullYear(),
+        paperName: asset.paper.title,
+        year: new Date().getFullYear(),
+        region: '',
+        section: CLOZE_SECTION,
       },
-      passages: [
-        {
-          section: CLOZE_SECTION,
-          groupId,
-          passageTitle: group.title || CLOZE_SECTION,
-          questions: [] as never[],
-          loads: { vocabularyLoad: null, grammarLoad: null, backgroundLoad: null, evidenceDifficulty: null },
-        },
-      ],
+      passages: [passageReport],
     },
     passageStructures: { [CLOZE_SECTION]: passageStructure },
     surfaceData: {
@@ -87,12 +104,15 @@ export function buildClozePaperView(input: {
 }
 
 function buildClozeTextMap(asset: PaperAssetV1, group: PaperAssetV1['content']['groups'][string]): PaperTextMap {
+  const paragraphs: PaperTextMap['paragraphs'] = []
+  const rawParagraphs = (group.passage?.paragraphs ?? [])
+  if (rawParagraphs.length > 0) {
+    const joined = rawParagraphs.map((p) => p.text).join('\n\n')
+    const segmented = segmentPaperText(joined, { sectionId: CLOZE_SECTION })
+    paragraphs.push(...segmented.paragraphs)
+  }
   return {
     paperId: asset.paper.paperId,
-    paragraphs: (group.passage?.paragraphs ?? []).map((p) => ({
-      id: p.paragraphId,
-      section: CLOZE_SECTION,
-      sentences: segmentPaperText(p.text, p.paragraphId),
-    })),
+    paragraphs,
   }
 }
