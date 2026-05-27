@@ -6,6 +6,7 @@ const READING_LABELS = ['A', 'B', 'C', 'D']
 const SEVEN_CHOICES_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 const SEVEN_CHOICES_QUESTION_NOS = ['36', '37', '38', '39', '40']
 const CLOZE_QUESTION_NOS = Array.from({ length: 15 }, (_, i) => String(41 + i))
+const GRAMMAR_FILL_QUESTION_NOS = Array.from({ length: 10 }, (_, i) => String(56 + i))
 const MAX_SKIPPED_RAW_LENGTH = 1600
 const IMAGE_OPTION_PLACEHOLDER = '图片选项，需查看原卷'
 
@@ -115,6 +116,26 @@ function parseAnswerRanges(rawText) {
     for (let offset = 0; offset <= end - start; offset += 1) {
       answers.set(String(start + offset), letters[offset])
     }
+  }
+  return answers
+}
+
+function parseGrammarFillAnswers(rawText) {
+  const answers = new Map()
+  const text = String(rawText || '')
+  // Match individual answer lines or compact continuous answer blocks.
+  // Answers are actual English words (not single letters).
+  // Use greedy match with explicit terminator: next numbered answer, end-of-line, or Chinese text.
+  const pattern = /(\d{2})\.\s+([^\d]+?)(?=\s*\d{2}\.\s+|\s*$|[一-鿿])/g
+  let match
+  while ((match = pattern.exec(text))) {
+    const questionNo = String(Number(match[1]))
+    if (!GRAMMAR_FILL_QUESTION_NOS.includes(questionNo)) continue
+    let answer = match[2].trim()
+    // Strip trailing Chinese explanation text.
+    answer = answer.replace(/[一-鿿][^A-Za-z]*$/, '').trim()
+    answer = answer.replace(/\s+/g, ' ')
+    if (answer) answers.set(questionNo, answer)
   }
   return answers
 }
@@ -564,6 +585,182 @@ function parseClozeGroup(lines, { answerMap, paperTail }) {
   }
 }
 
+// ---- Grammar-fill parsing ----
+
+function findGrammarFillSection(lines) {
+  // Position-based detection: grammar-fill is the second section under 语言运用,
+  // after cloze (第一节 完形填空) and before writing. Many real DOCX files do
+  // not render blank numbers or section headings as visible extracted text,
+  // so we locate the grammar-fill passage by its position between cloze text
+  // and writing section markers.
+
+  // Find the writing section start.
+  let writingStart = lines.length
+  for (let j = 0; j < lines.length; j += 1) {
+    const jtext = normalizeLine(lines[j])
+    if (/写作|书面表达|续写/.test(jtext)) { writingStart = j; break }
+  }
+
+  // Find the cloze section; grammar-fill is between cloze options and writing.
+  const cloze = findClozeSection(lines)
+  if (!cloze) return null
+
+  // Search between cloze option start and writing for passage content.
+  const searchStart = cloze.optionStartIndex
+  const searchEnd = writingStart
+
+  // Find the first non-empty, non-cloze-option line after the cloze option block.
+  // This is typically the grammar-fill passage content.
+  let sectionStart = -1
+  for (let i = cloze.optionStartIndex; i < searchEnd; i += 1) {
+    const text = normalizeLine(lines[i])
+    if (!text) continue
+    // Skip cloze option lines (numbered A-D options).
+    if (/^\d{2}\.\s+[A-D]/.test(text)) continue
+    // Skip section heading lines (like "第一节", "第二节").
+    if (/^第[一二三四五六]/.test(text) && text.length < 20) continue
+    // Skip instruction lines.
+    if (/阅读下面|从每题|从短文|在空白处|共\d+小题|满分\d+分/.test(text) && text.length < 40) continue
+    // Found first content line — this is the start.
+    sectionStart = i
+    break
+  }
+
+  if (sectionStart < 0) {
+    // Fallback: look for "语法填空" anywhere.
+    for (let i = 0; i < lines.length; i += 1) {
+      if (/语法填空/.test(normalizeLine(lines[i]))) { sectionStart = i; break }
+    }
+  }
+
+  if (sectionStart < 0) return null
+
+  return { startIndex: sectionStart, endIndex: searchEnd }
+}
+
+function countGrammarFillBlanks(lines, start, end) {
+  const blanks = new Set()
+  for (let i = start; i < end; i += 1) {
+    const text = normalizeLine(lines[i])
+    for (const no of GRAMMAR_FILL_QUESTION_NOS) {
+      // Match blank numbers in various formats: " 56 ", "__56__", "56.", "(56)", etc.
+      if (new RegExp(`(?:^|[\\s_({])${no}(?:[\\s_.,;:!?)}）]|\$)`).test(text)) blanks.add(no)
+    }
+  }
+  return blanks.size
+}
+
+function extractGrammarFillPrompts(lines) {
+  // Extract prompt words from parenthesized text near blanks.
+  // e.g. "56 (wear)" or "(wear)" near blank 56.
+  const prompts = new Map()
+  for (const line of lines) {
+    const text = normalizeLine(line)
+    // Find question numbers with adjacent parenthesized prompts.
+    for (const no of GRAMMAR_FILL_QUESTION_NOS) {
+      // Patterns: "56. (wear)", "56 (wear)", "(wear)" near 56
+      const patterns = [
+        new RegExp(`${no}[.、．]?\\s*[(（]([^)）]+)[)）]`),
+        new RegExp(`[(（]([^)）]+)[)）]\\s*${no}`),
+      ]
+      for (const pat of patterns) {
+        const m = text.match(pat)
+        if (m) {
+          prompts.set(no, m[1].trim())
+          break
+        }
+      }
+    }
+  }
+  return prompts
+}
+
+function parseGrammarFillGroup(lines, { answerMap, paperTail }) {
+  const section = findGrammarFillSection(lines)
+  if (!section) return null
+
+  const sectionLines = lines.slice(section.startIndex, section.endIndex)
+  const prompts = extractGrammarFillPrompts(sectionLines)
+
+  // Extract passage paragraphs: filter out section headers and instructions.
+  const passageLines = sectionLines.filter((line) => {
+    const text = normalizeLine(line)
+    if (!text) return false
+    // Skip section headings.
+    if (/^第[一二三四五六]/.test(text) && text.length < 20) return false
+    // Skip cloze option lines.
+    if (/^\d{2}\.\s+[A-D]/.test(text)) return false
+    // Skip instruction lines.
+    if (/阅读下面|从每题|从短文|在空白处|共\d+小题|满分\d+分/.test(text) && text.length < 40) return false
+    // Skip non-grammar-fill headings.
+    if (/语法填空/.test(text) && text.length < 15) return false
+    // Skip numbered reading question stems (e.g. "32. What effect...").
+    if (/^\d{2}\.\s+(?:What|Which|How|Why|Where|The|In)\s/.test(text)) return false
+    if (isStopSectionLine(text)) return false
+    return text.length > 0
+  })
+
+  if (passageLines.length === 0) {
+    return { group: null, error: { reason: 'grammar_fill_missing_passage', rawText: safeRawText(sectionLines) } }
+  }
+
+  const paragraphs = passageLines.map((line, index) => ({
+    id: `para-${paperTail}-grammar-fill-${index === 0 ? 'title' : `p${index}`}`,
+    text: line,
+  }))
+
+  // Verify blank count: we need exactly 10 blanks (q56-q65).
+  const foundBlanks = new Set()
+  for (const line of passageLines) {
+    const text = normalizeLine(line)
+    for (const no of GRAMMAR_FILL_QUESTION_NOS) {
+      if (new RegExp(`(?:^|[\\s_({])${no}(?:[\\s_.,;:!?)}）]|\$)`).test(text)) foundBlanks.add(no)
+    }
+  }
+
+  // Relaxed blank check: many DOCX files don't render blank numbers as text.
+  // Accept 0 found blanks if the passage text is substantial (>= 100 chars).
+  const passageText = passageLines.map((l) => normalizeLine(l)).join(' ')
+  if (foundBlanks.size < 10 && passageText.length < 100) {
+    return {
+      group: null,
+      error: {
+        reason: 'grammar_fill_incomplete_blanks',
+        rawText: safeRawText(sectionLines),
+        foundBlanks: [...foundBlanks].sort(),
+      },
+    }
+  }
+
+  const orderedQuestionNos = [...GRAMMAR_FILL_QUESTION_NOS].sort()
+  const questions = orderedQuestionNos.map((questionNo) => {
+    const padded = String(questionNo).padStart(3, '0')
+    const answerKey = answerMap.get(questionNo) || ''
+    const prompt = prompts.get(questionNo) || null
+    return {
+      id: `q-${paperTail}-${padded}`,
+      stem: questionNo,
+      answerKey,
+      blankId: `blank-${paperTail}-${padded}`,
+      prompt,
+    }
+  })
+
+  const groupId = `group-${paperTail}-grammar-fill`
+  return {
+    group: {
+      groupId,
+      groupType: 'grammarFill',
+      title: '语法填空',
+      order: 6,
+      paragraphs,
+      questions,
+      blankIds: questions.map((q) => q.blankId),
+    },
+    error: null,
+  }
+}
+
 // ---- Seven-choices parsing ----
 
 function isSevenChoicesOptionLine(line) {
@@ -672,7 +869,12 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
   const paperId = options.paperId || derivePaperId(sourceFilename, sourceHash)
   const paperTail = tailFromPaperId(paperId)
   const lines = toLines(rawText)
-  const answerMap = mergeAnswerMaps(parseAnswerRanges(rawText), parseAnswerRanges(options.answerKeyText || ''))
+  const grammarFillAnswerMap = parseGrammarFillAnswers(options.answerKeyText || '')
+  const answerMap = mergeAnswerMaps(
+    parseAnswerRanges(rawText),
+    parseAnswerRanges(options.answerKeyText || ''),
+    grammarFillAnswerMap,
+  )
   const markers = findReadingMarkers(lines)
   const readingGroups = []
   const skipped = []
@@ -708,12 +910,18 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
   const clozeGroup = clozeParsed?.group || null
   const clozeError = clozeParsed?.error || null
 
+  // Parse grammar-fill section.
+  const grammarFillParsed = parseGrammarFillGroup(lines, { answerMap, paperTail })
+  const grammarFillGroup = grammarFillParsed?.group || null
+  const grammarFillError = grammarFillParsed?.error || null
+
   const allSkipped = uniqueSkipped([...skipped, ...collectSkippedSections(lines)])
 
   // Remove successfully-parsed groups from skipped.
   const filteredSkipped = allSkipped.filter((item) => {
     if (item.reason === 'seven_choices_deferred_to_i2' && sevenChoicesGroup) return false
     if (item.reason === 'cloze_out_of_scope_for_i1' && clozeGroup) return false
+    if (item.reason === 'grammar_or_language_out_of_scope_for_i1' && grammarFillGroup) return false
     return true
   })
 
@@ -729,6 +937,8 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
     sevenChoicesError,
     clozeGroup,
     clozeError,
+    grammarFillGroup,
+    grammarFillError,
     skipped: filteredSkipped,
   }
 }

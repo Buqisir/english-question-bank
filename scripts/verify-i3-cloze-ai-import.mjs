@@ -177,6 +177,26 @@ function clFixture() {
         })),
         blankIds: [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55].map(n => `blank-i3-${String(n).padStart(3,'0')}`),
       },
+      sevenChoicesGroup: {
+        groupId: 'group-i3-seven-choices', groupType: 'sevenChoices', title: '七选五', order: 4,
+        paragraphs: [{ id: 'para-i3-seven-p1', text: 'Seven choices passage.' }],
+        optionBank: ['A','B','C','D','E','F','G'].map(l => ({ label: l, text: `Option ${l}` })),
+        questions: [36,37,38,39,40].map(n => ({
+          id: `q-i3-${String(n).padStart(3,'0')}`, stem: String(n),
+          answerKey: 'A', blankId: `blank-i3-${String(n).padStart(3,'0')}`,
+        })),
+        blankIds: [36,37,38,39,40].map(n => `blank-i3-${String(n).padStart(3,'0')}`),
+      },
+      grammarFillGroup: {
+        groupId: 'group-i3-grammar-fill', groupType: 'grammarFill', title: '语法填空', order: 6,
+        paragraphs: [{ id: 'para-i3-gf-p1', text: 'Grammar fill passage with  56  and  57  .' }],
+        questions: [56,57,58,59,60,61,62,63,64,65].map(n => ({
+          id: `q-i3-${String(n).padStart(3,'0')}`, stem: String(n),
+          answerKey: 'word', blankId: `blank-i3-${String(n).padStart(3,'0')}`,
+          prompt: n === 56 ? 'be' : null,
+        })),
+        blankIds: [56,57,58,59,60,61,62,63,64,65].map(n => `blank-i3-${String(n).padStart(3,'0')}`),
+      },
     },
     readingAnalyses: Object.fromEntries(['A','B','C','D'].map((l) => {
       const gid = `group-i3-reading-${l.toLowerCase()}`
@@ -194,11 +214,19 @@ function assertPackageBuilder() {
   const fix = clFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
 
-  // Success: package with cloze.
+  // Success: package with all four families.
   const files = buildPaperImportAiPackageFiles({
     parseResult: fix.parseResult,
     analysesByGroupId: fix.readingAnalyses,
+    sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
+    sevenChoicesAnalysis: {
+      schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
+      targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
+      groups: { 'group-i3-seven-choices': { overview: 'SC overview.' } },
+      questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
+    },
     clozeGroup: fix.parseResult.clozeGroup,
+    grammarFillGroup: fix.parseResult.grammarFillGroup,
     sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
   })
   const validation = validatePaperImportPackage(files)
@@ -218,18 +246,35 @@ function assertPackageBuilder() {
     buildPaperImportAiPackageFiles({
       parseResult: { ...fix.parseResult, clozeGroup: noAnsGroup },
       analysesByGroupId: fix.readingAnalyses,
+      sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
+      sevenChoicesAnalysis: {
+        schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
+        targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
+        groups: { 'group-i3-seven-choices': { overview: 'SC overview.' } },
+        questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
+      },
       clozeGroup: noAnsGroup,
+      grammarFillGroup: fix.parseResult.grammarFillGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
     }),
   /缺少答案解析版答案/)
 
-  // No cloze: package works without cloze.
-  const noClozeFiles = buildPaperImportAiPackageFiles({
-    parseResult: { ...fix.parseResult, clozeGroup: null },
-    analysesByGroupId: fix.readingAnalyses,
-    sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
-  })
-  assert('I3 package without cloze passes C7', validatePaperImportPackage(noClozeFiles).ok)
+  // No cloze: I4-A blocks missing objective family.
+  assertRejects('I4-A blocks missing cloze family', () =>
+    buildPaperImportAiPackageFiles({
+      parseResult: { ...fix.parseResult, clozeGroup: null },
+      analysesByGroupId: fix.readingAnalyses,
+      sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
+      sevenChoicesAnalysis: {
+        schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
+        targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
+        groups: { 'group-i3-seven-choices': { overview: 'SC overview.' } },
+        questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
+      },
+      grammarFillGroup: fix.parseResult.grammarFillGroup,
+      sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
+    }),
+  /缺少完形填空/)
 }
 
 // ---- Route ----

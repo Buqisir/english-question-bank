@@ -55,6 +55,27 @@ export type PaperImportAiClozeError = {
   rawText: string
 }
 
+export type PaperImportAiGrammarFillGroup = {
+  groupId: string
+  groupType: 'grammarFill'
+  title: string
+  order: number
+  paragraphs: Array<{ id: string; text: string }>
+  questions: Array<{
+    id: string
+    stem: string
+    answerKey: string
+    blankId: string
+    prompt: string | null
+  }>
+  blankIds: string[]
+}
+
+export type PaperImportAiGrammarFillError = {
+  reason: string
+  rawText: string
+}
+
 export type PaperImportAiSkippedItem = {
   rawText: string
   reason: string
@@ -72,6 +93,8 @@ export type PaperImportAiParseResult = {
   sevenChoicesError: PaperImportAiSevenChoicesError | null
   clozeGroup: PaperImportAiClozeGroup | null
   clozeError: PaperImportAiClozeError | null
+  grammarFillGroup: PaperImportAiGrammarFillGroup | null
+  grammarFillError: PaperImportAiGrammarFillError | null
   skipped: PaperImportAiSkippedItem[]
 }
 
@@ -180,6 +203,7 @@ export async function publishPaperImportAiAnalysis(input: {
   sevenChoicesGroup?: PaperImportAiSevenChoicesGroup | null
   sevenChoicesAnalysis?: Record<string, unknown> | null
   clozeGroup?: PaperImportAiClozeGroup | null
+  grammarFillGroup?: PaperImportAiGrammarFillGroup | null
 }) {
   const formData = new FormData()
   formData.append('files', input.file, input.file.name)
@@ -192,6 +216,7 @@ export async function publishPaperImportAiAnalysis(input: {
         sevenChoicesGroup: input.sevenChoicesGroup || null,
         sevenChoicesAnalysis: input.sevenChoicesAnalysis || null,
         clozeGroup: input.clozeGroup || null,
+        grammarFillGroup: input.grammarFillGroup || null,
       }),
     ], { type: 'application/json' }),
     'paper-import-ai-publish.json',

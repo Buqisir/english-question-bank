@@ -162,7 +162,26 @@ export function mergePaperImportAiAnalyses(parseResult, analysesByGroupId) {
   return normalizeAnalysisForOfficialAnswers(merged, parseResult)
 }
 
-export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, sourceDocx }) {
+function normalizeGrammarFillText(text) {
+  // Normalize blank numbers: two spaces before and after the number.
+  return String(text || '')
+    // Standardize "56." or "(56)" to bare number.
+    .replace(/\b(\d{2})[.．、](?=\s)/g, '$1')
+    // Add two spaces around blank numbers 56-65.
+    .replace(/(^|\s)(5[6-9]|6[0-5])(\s|$)/g, '$1  $2  $3')
+    // Collapse multiple spaces.
+    .replace(/[ ]{3,}/g, '  ')
+    // Ensure space after English punctuation.
+    .replace(/([.,;:!?])([A-Za-z])/g, '$1 $2')
+    // Normalize prompt parentheses spacing: "56(wear)" → "56 (wear)".
+    .replace(/(\d{2})[(（]/g, '$1 (')
+    .replace(/[)）](?=\S)/g, ') ')
+    // Clean trailing Chinese from answers.
+    .replace(/[一-鿿]+$/, '')
+    .trim()
+}
+
+export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup, sourceDocx }) {
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
@@ -172,6 +191,17 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     if (!letters.has(label)) {
       throw issue('reading_group_missing', `缺少 Reading ${label}，不能发布。`, { groupLabel: label })
     }
+  }
+
+  // Enforce four-family completeness for standard objective paper publish.
+  if (!sevenChoicesGroup) {
+    throw issue('seven_choices_group_missing', '缺少七选五，不能发布。')
+  }
+  if (!clozeGroup) {
+    throw issue('cloze_group_missing', '缺少完形填空，不能发布。')
+  }
+  if (!grammarFillGroup) {
+    throw issue('grammar_fill_group_missing', '缺少语法填空，不能发布。')
   }
 
   const paperId = parseResult.paper.paperId
@@ -411,6 +441,80 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     blocks.push({ type: 'group', groupId: clozeGroup.groupId })
   }
 
+  // --- Grammar-fill group ---
+  // Validate grammar-fill blank count.
+  if (grammarFillGroup.questions.length !== 10) {
+    throw issue('grammar_fill_blank_count_invalid', `语法填空应为 10 题，实际检测到 ${grammarFillGroup.questions.length} 题。`)
+  }
+  for (const q of grammarFillGroup.questions) {
+    if (!compact(q.answerKey)) {
+      throw issue('grammar_fill_answer_missing', `${q.id} 缺少答案解析版答案，不能发布。`, { questionId: q.id })
+    }
+  }
+
+  const blanks = {}
+  const gfQuestionIds = []
+  for (const q of grammarFillGroup.questions) {
+    const questionNo = Number(q.stem) || 56
+    gfQuestionIds.push(q.id)
+    questions[q.id] = {
+      questionId: q.id,
+      questionNo,
+      groupId: grammarFillGroup.groupId,
+      stem: q.stem,
+      blankId: q.blankId,
+    }
+    answerEntries[q.id] = {
+      questionId: q.id,
+      questionNo,
+      answer: q.answerKey,
+      score: 1.5,
+      note: 'AI 导题：答案解析版抽取',
+    }
+    // Populate content.blanks entries.
+    blanks[q.blankId] = {
+      blankId: q.blankId,
+      groupId: grammarFillGroup.groupId,
+      questionId: q.id,
+      ...(q.prompt ? { prompt: q.prompt } : {}),
+    }
+  }
+
+  // Normalize grammar-fill passage text.
+  const gfParagraphs = grammarFillGroup.paragraphs.map((p) => ({
+    paragraphId: p.id,
+    text: normalizeGrammarFillText(p.text),
+  }))
+
+  contentGroups[grammarFillGroup.groupId] = {
+    groupId: grammarFillGroup.groupId,
+    groupType: 'grammarFill',
+    title: grammarFillGroup.title,
+    questionIds: gfQuestionIds,
+    blankIds: grammarFillGroup.blankIds,
+    passage: {
+      paragraphs: gfParagraphs,
+    },
+  }
+
+  // Add grammar-fill section to layout (第二节 under 语言运用).
+  const langPart = layoutTree.parts.find((p) => p.partId.includes('language')) ||
+    (() => {
+      const part = { partId: `part-${examCodeFromPaperId(paperId)}-language`, title: '第三部分 语言运用', sections: [] }
+      layoutTree.parts.push(part)
+      return part
+    })()
+  langPart.sections.push({
+    sectionId: `section-${examCodeFromPaperId(paperId)}-grammar-fill`,
+    title: '第二节 语法填空',
+    groups: [{ groupId: grammarFillGroup.groupId, title: grammarFillGroup.title }],
+  })
+
+  // Add grammar-fill blocks.
+  blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-grammar-fill`, text: '第二节(共10小题；每小题1.5分，满分15分)' })
+  blocks.push({ type: 'instruction', text: '阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。' })
+  blocks.push({ type: 'group', groupId: grammarFillGroup.groupId })
+
   const readingAnalysis = mergePaperImportAiAnalyses(parseResult, analysesByGroupId)
   const paperAsset = {
     schemaVersion: 'paper-asset-v1',
@@ -438,6 +542,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
       blocks,
       groups: contentGroups,
       questions,
+      ...(Object.keys(blanks).length > 0 ? { blanks } : {}),
     },
     answerKey: { answers: answerEntries },
     analysis: {
@@ -482,6 +587,14 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
       tags: ['完形填空'],
       displayTitleOverride: clozeGroup.title,
     }
+  }
+
+  importMetaGroups[grammarFillGroup.groupId] = {
+    groupId: grammarFillGroup.groupId,
+    difficulty: '中',
+    summary: '语法填空',
+    tags: ['语法填空'],
+    displayTitleOverride: grammarFillGroup.title,
   }
 
   const importMeta = {
