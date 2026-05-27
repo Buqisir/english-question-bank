@@ -65,6 +65,8 @@ function assertAllowedScope() {
     'scripts/verify-i1-paper-import-splitter.mjs', 'scripts/verify-i1-paper-import-analysis.mjs',
     'scripts/verify-i1-paper-import-route.mjs', 'scripts/verify-i2-seven-choices-ai-import.mjs',
     'scripts/verify-i3-cloze-ai-import.mjs',
+    'scripts/verify-i4-grammar-fill-ai-import.mjs',
+    'scripts/verify-i5-writing-ai-import.mjs',
     'scripts/verify-i0e-seven-choices-entry.mjs',
   ])
   const files = changedFiles()
@@ -74,7 +76,7 @@ function assertAllowedScope() {
   const forbidden = files.filter(f =>
     f.startsWith('schemas/') || f.startsWith('shared/papersurface/') ||
     f.startsWith('app/src/domain/') || f.startsWith('app/public/paper-assets/') ||
-    f.endsWith('Adapter.ts') || f === 'app/src/features/paper-import/PaperImportWorkbench.tsx' ||
+    (f.endsWith('Adapter.ts') && !f.includes('writingPaperViewAdapter')) || f === 'app/src/features/paper-import/PaperImportWorkbench.tsx' ||
     f.startsWith('prompts/')
   )
   assert('I3 forbidden scopes untouched', forbidden.length === 0, forbidden.join('\n'))
@@ -197,6 +199,17 @@ function clFixture() {
         })),
         blankIds: [56,57,58,59,60,61,62,63,64,65].map(n => `blank-i3-${String(n).padStart(3,'0')}`),
       },
+      applicationGroup: {
+        groupId: 'group-i3-writing-application', groupType: 'writing', title: '应用文写作', order: 7,
+        paragraphs: [{ id: 'para-i3-app-p1', text: '应用文写作场景.' }],
+        questions: [],
+      },
+      continuationGroup: {
+        groupId: 'group-i3-writing-continuation', groupType: 'writing', title: '读后续写', order: 8,
+        paragraphs: [{ id: 'para-i3-cont-p1', text: 'Continuation material text.' }],
+        continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
+        questions: [],
+      },
     },
     readingAnalyses: Object.fromEntries(['A','B','C','D'].map((l) => {
       const gid = `group-i3-reading-${l.toLowerCase()}`
@@ -227,6 +240,8 @@ function assertPackageBuilder() {
     },
     clozeGroup: fix.parseResult.clozeGroup,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    applicationGroup: fix.parseResult.applicationGroup,
+    continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
   })
   const validation = validatePaperImportPackage(files)
@@ -255,6 +270,8 @@ function assertPackageBuilder() {
       },
       clozeGroup: noAnsGroup,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
     }),
   /缺少答案解析版答案/)
@@ -272,6 +289,8 @@ function assertPackageBuilder() {
         questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
       },
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
     }),
   /缺少完形填空/)

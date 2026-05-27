@@ -216,6 +216,17 @@ function gfPackageFixture() {
         })),
         blankIds: [56,57,58,59,60,61,62,63,64,65].map(n => `blank-i4-${String(n).padStart(3,'0')}`),
       },
+      applicationGroup: {
+        groupId: 'group-i4-writing-application', groupType: 'writing', title: '应用文写作', order: 7,
+        paragraphs: [{ id: 'para-i4-app-p1', text: '应用文写作场景.' }],
+        questions: [],
+      },
+      continuationGroup: {
+        groupId: 'group-i4-writing-continuation', groupType: 'writing', title: '读后续写', order: 8,
+        paragraphs: [{ id: 'para-i4-cont-p1', text: 'Continuation material text.' }],
+        continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
+        questions: [],
+      },
     },
     readingAnalyses: Object.fromEntries(['A','B','C','D'].map((l) => {
       const gid = `group-i4-reading-${l.toLowerCase()}`
@@ -239,7 +250,7 @@ function assertPackageBuilder() {
   const fix = gfPackageFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
 
-  // Success: package with all four families.
+  // Success: package with all six families.
   const files = buildPaperImportAiPackageFiles({
     parseResult: fix.parseResult,
     analysesByGroupId: fix.readingAnalyses,
@@ -247,6 +258,8 @@ function assertPackageBuilder() {
     sevenChoicesAnalysis: fix.scAnalysis,
     clozeGroup: fix.parseResult.clozeGroup,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    applicationGroup: fix.parseResult.applicationGroup,
+    continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
   })
   const validation = validatePaperImportPackage(files)
@@ -279,6 +292,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
       grammarFillGroup: null,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
     }),
   /缺少语法填空/)
@@ -294,6 +309,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
       grammarFillGroup: noAnsGf,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
     }),
   /缺少答案解析版答案/)
@@ -309,6 +326,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
       grammarFillGroup: wrongCountGf,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
     }),
   /语法填空应为 10 题/)
