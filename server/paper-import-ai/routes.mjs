@@ -140,6 +140,8 @@ export function createPaperImportAiRoutes(services = {}) {
           sevenChoicesAnalysis: payload.sevenChoicesAnalysis || null,
           clozeGroup: payload.clozeGroup || null,
           grammarFillGroup: payload.grammarFillGroup || null,
+          applicationGroup: payload.applicationGroup || null,
+          continuationGroup: payload.continuationGroup || null,
           sourceDocx: {
             fileName: readableFileName(paperFile),
             contentType: paperFile.contentType,

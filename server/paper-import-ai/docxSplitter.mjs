@@ -850,6 +850,178 @@ function parseSevenChoicesGroup(sectionLines, { answerMap, paperTail }) {
   }
 }
 
+// ---- Writing parsing ----
+
+function findWritingSectionStart(lines) {
+  for (let i = 0; i < lines.length; i += 1) {
+    const text = normalizeLine(lines[i])
+    if (/^第[四五六七八]+\s*部分.*(?:写作|书面表达)/.test(text)) return i
+  }
+  for (let i = 0; i < lines.length; i += 1) {
+    const text = normalizeLine(lines[i])
+    if ((/写作/.test(text) || /书面表达/.test(text)) && !/听力/.test(text)) return i
+  }
+  return -1
+}
+
+function findSectionMarker(lines, startIndex, pattern) {
+  for (let i = startIndex; i < Math.min(lines.length, startIndex + 50); i += 1) {
+    if (new RegExp(pattern).test(normalizeLine(lines[i]))) return i
+  }
+  return -1
+}
+
+function isWritingStandardLine(line) {
+  const text = normalizeLine(line)
+  if (/^第[一二三四五六七八]+\s*[节部分]/.test(text)) return true
+  if (/^注意[：:]/.test(text)) return true
+  if (/写作词数|续写词数/.test(text)) return true
+  if (/请按如下格式|请在答题卡|在答题卡的相应位置/.test(text)) return true
+  if (/满分\d+分/.test(text) && text.length < 25) return true
+  if (/阅读下面材料.*续写两段/.test(text)) return true
+  if (/共[两三四五]节/.test(text) && /满分/.test(text)) return true
+  return false
+}
+
+function extractApplicationParagraphs(lines, paperTail) {
+  const contentLines = []
+  for (const line of lines) {
+    const text = normalizeLine(line)
+    if (!text) continue
+    if (isWritingStandardLine(text)) continue
+    contentLines.push(text)
+  }
+  if (contentLines.length === 0) return { paragraphs: [], error: { reason: 'application_missing_content' } }
+  return {
+    paragraphs: contentLines.map((text, index) => ({
+      id: `para-${paperTail}-writing-app-${index === 0 ? 'title' : `p${index}`}`,
+      text,
+    })),
+    error: null,
+  }
+}
+
+function extractContinuationContent(lines, paperTail) {
+  const materialLines = []
+  const starterLines = []
+  let afterNoteBlock = false
+  let inNoteBlock = false
+
+  for (const line of lines) {
+    const text = normalizeLine(line)
+    if (!text) continue
+    if (/^第[一二三四五六七八]+\s*[节部分]/.test(text)) continue
+    if (/满分\d+分/.test(text) && text.length < 25) continue
+    if (/阅读下面材料.*续写两段/.test(text)) continue
+
+    // Detect note block.
+    if (/^注意[：:]/.test(text)) {
+      inNoteBlock = true
+      continue
+    }
+    if (inNoteBlock) {
+      if (/续写词数|请按如下格式|在答题卡的相应位置/.test(text)) continue
+      // End of numbered note items — remaining text is starters.
+      if (!/^\d+[\.、．]\s*(?:写作词数|续写词数|请按|请在|在答题卡)/.test(text)) {
+        inNoteBlock = false
+        afterNoteBlock = true
+      } else {
+        continue
+      }
+    }
+
+    if (afterNoteBlock) {
+      starterLines.push(text)
+    } else {
+      materialLines.push(text)
+    }
+  }
+
+  if (materialLines.length === 0) {
+    return { materialParagraphs: [], starters: [], error: { reason: 'continuation_material_missing' } }
+  }
+  if (starterLines.length < 2) {
+    return {
+      materialParagraphs: materialLines.map((text, index) => ({
+        id: `para-${paperTail}-writing-cont-${index === 0 ? 'title' : `p${index}`}`,
+        text,
+      })),
+      starters: starterLines,
+      error: starterLines.length === 0 ? { reason: 'continuation_starters_missing' } : { reason: 'continuation_starters_incomplete', found: starterLines.length },
+    }
+  }
+
+  return {
+    materialParagraphs: materialLines.map((text, index) => ({
+      id: `para-${paperTail}-writing-cont-${index === 0 ? 'title' : `p${index}`}`,
+      text,
+    })),
+    starters: starterLines.slice(0, 2),
+    error: null,
+  }
+}
+
+function parseWritingGroups(lines, paperTail) {
+  const writingStart = findWritingSectionStart(lines)
+  if (writingStart < 0) return { applicationGroup: null, continuationGroup: null, applicationError: null, continuationError: null }
+
+  const appStart = findSectionMarker(lines, writingStart, '^第一节')
+  const contStart = findSectionMarker(lines, Math.max(writingStart, appStart >= 0 ? appStart + 1 : writingStart + 1), '^第二节|读后续写|续写')
+
+  // Application parsing.
+  let applicationGroup = null
+  let applicationError = null
+  const appEndIndex = contStart >= 0 ? contStart : lines.length
+  const appLines = appStart >= 0 ? lines.slice(appStart + 1, appEndIndex) : lines.slice(writingStart + 1, appEndIndex)
+
+  const appResult = extractApplicationParagraphs(appLines, paperTail)
+  if (appResult.error) {
+    applicationError = appResult.error
+  } else if (appResult.paragraphs.length === 0) {
+    applicationError = { reason: 'application_content_empty' }
+  } else {
+    const groupId = `group-${paperTail}-writing-application`
+    applicationGroup = {
+      groupId,
+      groupType: 'writing',
+      title: '应用文写作',
+      order: 7,
+      paragraphs: appResult.paragraphs,
+      questions: [],
+    }
+  }
+
+  // Continuation parsing.
+  let continuationGroup = null
+  let continuationError = null
+  if (contStart >= 0) {
+    const contLines = lines.slice(contStart + 1)
+    const contResult = extractContinuationContent(contLines, paperTail)
+
+    if (contResult.error && contResult.error.reason === 'continuation_material_missing') {
+      continuationError = contResult.error
+    } else if (contResult.materialParagraphs.length === 0) {
+      continuationError = { reason: 'continuation_content_empty' }
+    } else {
+      const groupId = `group-${paperTail}-writing-continuation`
+      continuationGroup = {
+        groupId,
+        groupType: 'writing',
+        title: '读后续写',
+        order: 8,
+        paragraphs: contResult.materialParagraphs,
+        continuationStarters: contResult.starters,
+        questions: [],
+      }
+      if (contResult.error) continuationError = contResult.error
+    }
+  } else {
+    continuationError = { reason: 'continuation_section_not_found' }
+  }
+
+  return { applicationGroup, continuationGroup, applicationError, continuationError }
+}
+
 function findSevenChoicesSections(lines) {
   const sections = []
   for (let index = 0; index < lines.length; index += 1) {
@@ -915,6 +1087,13 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
   const grammarFillGroup = grammarFillParsed?.group || null
   const grammarFillError = grammarFillParsed?.error || null
 
+  // Parse writing section.
+  const writingParsed = parseWritingGroups(lines, paperTail)
+  const applicationGroup = writingParsed.applicationGroup
+  const continuationGroup = writingParsed.continuationGroup
+  const applicationError = writingParsed.applicationError
+  const continuationError = writingParsed.continuationError
+
   const allSkipped = uniqueSkipped([...skipped, ...collectSkippedSections(lines)])
 
   // Remove successfully-parsed groups from skipped.
@@ -922,6 +1101,7 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
     if (item.reason === 'seven_choices_deferred_to_i2' && sevenChoicesGroup) return false
     if (item.reason === 'cloze_out_of_scope_for_i1' && clozeGroup) return false
     if (item.reason === 'grammar_or_language_out_of_scope_for_i1' && grammarFillGroup) return false
+    if (item.reason === 'writing_out_of_scope_for_i1' && applicationGroup) return false
     return true
   })
 
@@ -939,6 +1119,10 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
     clozeError,
     grammarFillGroup,
     grammarFillError,
+    applicationGroup,
+    continuationGroup,
+    applicationError,
+    continuationError,
     skipped: filteredSkipped,
   }
 }
