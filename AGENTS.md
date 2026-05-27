@@ -90,6 +90,32 @@ of duplicating workflow or browser rules.
   difficulty dashboards need a separate task justification and usually
   belong outside the A4 paper page.
 
+## Context / Output Economy
+
+- Prefer narrow reads before broad scans. Start from the current PR,
+  current cut `plan.md`, failing CI / error files, and necessary diffs;
+  stop once the evidence is enough to act.
+- Keep chat output short by default: state whether it can proceed, what
+  blocks it, and who does the next step. Expand only when the owner asks
+  or the risk needs explanation.
+- Use compact fixed formats for recurring workflow reports. RM artifact
+  gate reports should default to:
+
+  ```text
+  Gate: PASS / FAIL
+  Blocker:
+  Scope:
+  Verify:
+  Next:
+  ```
+
+- Keep each stage thread-thin. PM, PA, DEV, CR, QA, and RM context should
+  live in repo artifacts; chat should route agents to files and summarize
+  conclusions instead of copying long reports.
+- Do not duplicate verification. If GitHub CI already proves the current
+  risk, do not rerun broad local suites; run only the narrowest missing
+  command needed for confidence.
+
 ## Super Teacher Boundary
 
 For teaching-domain decisions, preserve the Super Teacher judgment layer:

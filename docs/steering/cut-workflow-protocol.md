@@ -349,6 +349,19 @@ Large cut extra checklist:
 - `docs/cuts/<CUT>/cut-note.md` exists and is non-empty before closeout
   / RM merge.
 
+Default gate reply format should stay compact:
+
+```text
+Gate: PASS / FAIL
+Blocker:
+Scope:
+Verify:
+Next:
+```
+
+Use links to PR comments, CI jobs, or repo artifacts instead of pasting
+long logs into chat.
+
 If the artifact gate fails, RM must stop with:
 
 ```text
