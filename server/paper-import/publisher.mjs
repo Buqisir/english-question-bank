@@ -332,7 +332,18 @@ function getClozeGroups(asset) {
     }))
 }
 
-function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups) {
+function getGrammarFillGroups(asset) {
+  const groups = asset?.content?.groups || {}
+  return Object.values(groups)
+    .filter((group) => group?.groupType === 'grammarFill')
+    .map((group) => ({
+      groupId: group.groupId,
+      title: group.title || '语法填空',
+      defaultQuestionId: group.questionIds?.[0] || null,
+    }))
+}
+
+function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, grammarFillGroups) {
   const readingLinks = readingGroups.map((group) => {
     const latestParams = new URLSearchParams()
     latestParams.set('view', 'paper-intelligence')
@@ -393,7 +404,27 @@ function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups) {
     }
   })
 
-  return [...readingLinks, ...scLinks, ...clozeLinks]
+  const gfLinks = (grammarFillGroups || []).map((group) => {
+    const latestParams = new URLSearchParams()
+    latestParams.set('view', 'paper-intelligence')
+    latestParams.set('source', 'paper-asset')
+    latestParams.set('paperId', paperId)
+    latestParams.set('surface', 'paper')
+    latestParams.set('groupId', group.groupId)
+    latestParams.set('questionId', group.defaultQuestionId)
+
+    const versionParams = new URLSearchParams(latestParams)
+    versionParams.set('version', `v${version}`)
+
+    return {
+      groupId: group.groupId,
+      title: group.title,
+      latestHref: `?${latestParams.toString()}`,
+      versionHref: `?${versionParams.toString()}`,
+    }
+  })
+
+  return [...readingLinks, ...scLinks, ...clozeLinks, ...gfLinks]
 }
 
 export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFailure = false }) {
@@ -418,12 +449,13 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
   }))
   const scGroups = getSevenChoicesGroups(validation.packageData.paperAsset)
   const clozeGroups = getClozeGroups(validation.packageData.paperAsset)
+  const gfGroups = getGrammarFillGroups(validation.packageData.paperAsset)
   const publishReport = {
     ok: true,
     paperId,
     assetVersion: version,
     versionName: `v${version}`,
-    qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups),
+    qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, gfGroups),
     searchHref: '/?q=2024%20九省联考',
     generatedAt: new Date().toISOString(),
   }

@@ -149,6 +149,10 @@ import {
   type ClozePaperViewModel,
 } from './clozePaperViewAdapter.ts'
 import {
+  buildGrammarFillPaperView,
+  type GrammarFillPaperViewModel,
+} from './grammarFillPaperViewAdapter.ts'
+import {
   useSevenChoicesPaperHighlights,
 } from './useSevenChoicesPaperHighlights.ts'
 import {
@@ -204,6 +208,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [paperAssetModel, setPaperAssetModel] = useState<PaperAssetSurfaceModel | null>(null)
   const [sevenChoicesModel, setSevenChoicesModel] = useState<SevenChoicesSurfaceModel | null>(null)
   const [clozeModel, setClozeModel] = useState<ClozePaperViewModel | null>(null)
+  const [grammarFillModel, setGrammarFillModel] = useState<GrammarFillPaperViewModel | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
@@ -307,6 +312,21 @@ export function PaperIntelligencePaperSurfaceHarness({
             const model = buildClozePaperView({ asset, groupId: initialGroupId })
             if (cancelled) return
             setClozeModel(model)
+            setSevenChoicesModel(null)
+            setPaperAssetModel(null)
+            setGrammarFillModel(null)
+            setReport(model.report)
+            setPassageStructures(model.passageStructures)
+            setLoading(false)
+            return
+          }
+
+          // Grammar-fill: no analysis file; render plain paper view directly.
+          if (group.groupType === 'grammarFill') {
+            const model = buildGrammarFillPaperView({ asset, groupId: initialGroupId })
+            if (cancelled) return
+            setGrammarFillModel(model)
+            setClozeModel(null)
             setSevenChoicesModel(null)
             setPaperAssetModel(null)
             setReport(model.report)
@@ -577,7 +597,7 @@ export function PaperIntelligencePaperSurfaceHarness({
         )
         return
       }
-      const activeReadingModel = paperAssetModel ?? clozeModel
+      const activeReadingModel = paperAssetModel ?? clozeModel ?? grammarFillModel
       if (!activeReadingModel) return
       const candidateId =
         initialQuestionId && activeReadingModel.surfaceData.questions.some((q) => q.id === initialQuestionId)
@@ -633,7 +653,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (source === 'paper-asset') {
-      return sevenChoicesModel?.surfaceData ?? clozeModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
+      return sevenChoicesModel?.surfaceData ?? clozeModel?.surfaceData ?? grammarFillModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
     }
     if (!report) return null
     // C5a: buildPaperSurfaceDataFromPi will throw if passageStructure
@@ -661,9 +681,9 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (source !== 'paper-asset') return null
     if (sevenChoicesModel) return null
     if (!activeQuestionId) return null
-    const entry = (paperAssetModel ?? clozeModel)?.analysisByQuestionId[activeQuestionId] ?? null
+    const entry = (paperAssetModel ?? clozeModel ?? grammarFillModel)?.analysisByQuestionId[activeQuestionId] ?? null
     return entry && 'questionId' in entry ? (entry as PaperAssetQuestionAnalysisView) : null
-  }, [source, sevenChoicesModel, paperAssetModel, clozeModel, activeQuestionId])
+  }, [source, sevenChoicesModel, paperAssetModel, clozeModel, grammarFillModel, activeQuestionId])
 
   // ─── Derive activeEvidenceKind (Issue #21-C3.6) ───
   //
@@ -692,7 +712,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   //                 own).
   const activeEvidenceKind = useMemo<'support' | 'trap' | null>(() => {
     if (source === 'paper-asset') {
-      if (sevenChoicesModel || clozeModel) return null
+      if (sevenChoicesModel || clozeModel || grammarFillModel) return null
       if (!activeEvidenceId) return null
       return paperAssetModel?.evidenceKindById[activeEvidenceId] ?? null
     }
@@ -755,7 +775,7 @@ export function PaperIntelligencePaperSurfaceHarness({
         // runs on every question selection.
         const nextEntry =
           source === 'paper-asset'
-            ? (paperAssetModel ?? clozeModel)?.analysisByQuestionId[intent.questionId] ?? null
+            ? (paperAssetModel ?? clozeModel ?? grammarFillModel)?.analysisByQuestionId[intent.questionId] ?? null
             : null
         const nextAnalysis = nextEntry && 'questionId' in nextEntry ? (nextEntry as PaperAssetQuestionAnalysisView) : null
         dispatchHost({
@@ -767,7 +787,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       }
       // Other intents ignored in C1/C2/C3/C4.
     },
-    [paperAssetModel, source],
+    [paperAssetModel, clozeModel, grammarFillModel, source],
   )
 
   // ─── C4 insight chip handlers ───

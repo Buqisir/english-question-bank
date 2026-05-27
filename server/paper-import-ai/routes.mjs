@@ -139,6 +139,7 @@ export function createPaperImportAiRoutes(services = {}) {
           sevenChoicesGroup: payload.sevenChoicesGroup || null,
           sevenChoicesAnalysis: payload.sevenChoicesAnalysis || null,
           clozeGroup: payload.clozeGroup || null,
+          grammarFillGroup: payload.grammarFillGroup || null,
           sourceDocx: {
             fileName: readableFileName(paperFile),
             contentType: paperFile.contentType,

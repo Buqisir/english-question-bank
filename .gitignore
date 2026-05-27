@@ -44,6 +44,7 @@ data/user-space/files/
 .scratch/
 
 # Imported source files, generated exports, reports, and browser output
+真题例卷/
 imports/*
 !imports/.gitkeep
 exports/*

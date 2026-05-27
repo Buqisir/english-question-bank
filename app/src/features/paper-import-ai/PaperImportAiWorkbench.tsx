@@ -384,10 +384,19 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const clError = result?.clozeError || null
   const clHasAnswers = clGroup ? clGroup.questions.every((q) => q.answerKey) : true
   const clMissingAnswers = clGroup ? clGroup.questions.filter((q) => !q.answerKey).length : 0
+  const gfGroup = result?.grammarFillGroup || null
+  const gfError = result?.grammarFillError || null
+  const gfHasAnswers = gfGroup ? gfGroup.questions.every((q) => q.answerKey) : true
+  const gfMissingAnswers = gfGroup ? gfGroup.questions.filter((q) => !q.answerKey).length : 0
+  const gfPromptCount = gfGroup ? gfGroup.questions.filter((q) => q.prompt).length : 0
+  const gfNoPromptCount = gfGroup ? gfGroup.questions.filter((q) => !q.prompt).length : 0
   const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
   const allImportAnalyzed = allGroupsAnalyzed && scAnalyzed
+  const scReady = Boolean(scGroup) && scAnalyzed && scHasAnswers
+  const clReady = Boolean(clGroup) && clHasAnswers
+  const gfReady = Boolean(gfGroup) && gfHasAnswers
   const canPublish = Boolean(
     file &&
     result &&
@@ -395,8 +404,9 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     result.readingGroups.length === 4 &&
     allImportAnalyzed &&
     missingAnswerCount === 0 &&
-    scHasAnswers &&
-    clHasAnswers &&
+    scReady &&
+    clReady &&
+    gfReady &&
     answerConflicts.length === 0 &&
     publishState.status !== 'publishing',
   )
@@ -415,6 +425,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         sevenChoicesGroup: result.sevenChoicesGroup || null,
         sevenChoicesAnalysis: scAnalysisState.result?.analysis || null,
         clozeGroup: result.clozeGroup || null,
+        grammarFillGroup: result.grammarFillGroup || null,
       })
       setPublishState({ status: 'done', message: '已保存为正式试卷资产。', result: published })
     } catch (error) {
@@ -573,13 +584,17 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <CheckCircle2 size={15} aria-hidden="true" />
               答案无冲突
             </p>
-            <p className={scGroup ? (scAnalyzed && scHasAnswers ? 'is-ok' : '') : ''}>
+            <p className={scReady ? 'is-ok' : ''}>
               <CheckCircle2 size={15} aria-hidden="true" />
-              {scGroup ? '七选五就绪' : '无七选五'}
+              {scGroup ? '七选五就绪' : '缺七选五'}
             </p>
-            <p className={clGroup ? (clHasAnswers ? 'is-ok' : '') : ''}>
+            <p className={clReady ? 'is-ok' : ''}>
               <CheckCircle2 size={15} aria-hidden="true" />
-              {clGroup ? '完形就绪' : '无完形'}
+              {clGroup ? '完形就绪' : '缺完形'}
+            </p>
+            <p className={gfReady ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              {gfGroup ? '语法填空就绪' : '缺语法填空'}
             </p>
           </div>
           {missingReadingLabels.length > 0 && result ? (
@@ -606,11 +621,26 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           {scGroup && scAnalysisState.status === 'idle' ? (
             <p className="pi-ai-warning">检测到七选五，请先完成解析。</p>
           ) : null}
+          {!scGroup && result ? (
+            <p className="pi-ai-warning">缺少七选五，暂不保存。</p>
+          ) : null}
+          {!clGroup && result ? (
+            <p className="pi-ai-warning">缺少完形填空，暂不保存。</p>
+          ) : null}
           {clGroup && clMissingAnswers > 0 ? (
             <p className="pi-ai-warning">完形还有 {clMissingAnswers} 道题没有答案解析版答案。</p>
           ) : null}
           {clError ? (
             <p className="pi-ai-error">完形解析失败：{clError.reason}</p>
+          ) : null}
+          {!gfGroup && result ? (
+            <p className="pi-ai-warning">缺少语法填空，暂不保存。</p>
+          ) : null}
+          {gfGroup && gfMissingAnswers > 0 ? (
+            <p className="pi-ai-warning">语法填空还有 {gfMissingAnswers} 道题没有答案解析版答案。</p>
+          ) : null}
+          {gfError ? (
+            <p className="pi-ai-error">语法填空解析失败：{gfError.reason}</p>
           ) : null}
           <button className="primary-button pi-ai-publish-button" type="button" disabled={!canPublish} onClick={() => void handlePublish()}>
             {publishState.status === 'publishing' ? <Loader2 size={16} aria-hidden="true" /> : <Save size={16} aria-hidden="true" />}
@@ -795,6 +825,47 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
             </div>
             <p className="pi-ai-warning">
               检测到完形但无法解析：{clError.reason}
+            </p>
+          </section>
+        ) : null}
+
+        {gfGroup ? (
+          <section className="pi-ai-panel pi-ai-groups">
+            <div className="pi-ai-panel-heading">
+              <h2>语法填空 预览</h2>
+              <span>{gfGroup.questions.length} 题 · {gfGroup.paragraphs.length} 段</span>
+            </div>
+            <article className="pi-ai-group-card">
+              <header>
+                <div>
+                  <strong>{gfGroup.title}</strong>
+                  <span>{gfGroup.groupId}</span>
+                </div>
+                <em>
+                  {gfGroup.questions.length}/10 题 · {gfHasAnswers ? `10/10` : `${10 - gfMissingAnswers}/10`} 答案
+                  {gfPromptCount > 0 ? ` · ${gfPromptCount} 提示词` : ''}
+                  {gfNoPromptCount > 0 ? ` · ${gfNoPromptCount} 无提示词` : ''}
+                </em>
+              </header>
+              <p>{gfGroup.paragraphs[0]?.text || '未识别到段落文本'}</p>
+              <ol>
+                {gfGroup.questions.slice(0, 5).map((q) => (
+                  <li key={q.id}>
+                    <span>{q.stem}{q.prompt ? ` (${q.prompt})` : ''}</span>
+                    <em>答案 {q.answerKey || '待核对'}</em>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          </section>
+        ) : gfError ? (
+          <section className="pi-ai-panel">
+            <div className="pi-ai-panel-heading">
+              <h2>语法填空 检测</h2>
+              <span><AlertTriangle size={15} aria-hidden="true" /></span>
+            </div>
+            <p className="pi-ai-warning">
+              检测到语法填空但无法解析：{gfError.reason}
             </p>
           </section>
         ) : null}
