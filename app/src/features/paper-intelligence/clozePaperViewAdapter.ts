@@ -46,13 +46,14 @@ export function buildClozePaperView(input: {
     })),
   }
 
-  const questions = questionIds.map((qid) => {
+  const questions = questionIds.map((qid, order) => {
     const q = asset.content.questions[qid]
     return {
       id: qid,
-      questionNo: q?.questionNo ?? 0,
+      section: CLOZE_SECTION,
+      order,
+      questionNo: String(q?.questionNo ?? ''),
       stem: q?.stem ?? '',
-      groupId,
       options: q?.options ?? [],
     }
   })
@@ -104,13 +105,10 @@ export function buildClozePaperView(input: {
 }
 
 function buildClozeTextMap(asset: PaperAssetV1, group: PaperAssetV1['content']['groups'][string]): PaperTextMap {
-  const paragraphs: PaperTextMap['paragraphs'] = []
   const rawParagraphs = (group.passage?.paragraphs ?? [])
-  if (rawParagraphs.length > 0) {
-    const joined = rawParagraphs.map((p) => p.text).join('\n\n')
-    const segmented = segmentPaperText(joined, { sectionId: CLOZE_SECTION })
-    paragraphs.push(...segmented.paragraphs)
-  }
+  const paragraphs: PaperTextMap['paragraphs'] = rawParagraphs.length > 0
+    ? [...segmentPaperText(rawParagraphs.map((p) => p.text).join('\n\n'), { sectionId: CLOZE_SECTION }).paragraphs]
+    : []
   return {
     paperId: asset.paper.paperId,
     paragraphs,
