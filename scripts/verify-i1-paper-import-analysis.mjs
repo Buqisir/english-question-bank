@@ -151,13 +151,76 @@ function fixtureFourGroupParseResult() {
       }),
     }
   })
+  const sevenChoicesGroup = {
+    groupId: 'group-i1-step4-seven-choices',
+    groupType: 'sevenChoices',
+    title: '七选五',
+    order: 4,
+    paragraphs: [{ id: 'para-i1-step4-sc-p1', text: 'Seven choices passage about community volunteering.' }],
+    optionBank: ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((l) => ({ label: l, text: `Option ${l} text.` })),
+    questions: [36, 37, 38, 39, 40].map((n) => ({
+      id: `q-i1-step4-${String(n).padStart(3, '0')}`,
+      stem: String(n),
+      answerKey: 'A',
+      blankId: `blank-i1-step4-${String(n).padStart(3, '0')}`,
+    })),
+    blankIds: [36, 37, 38, 39, 40].map((n) => `blank-i1-step4-${String(n).padStart(3, '0')}`),
+  }
+  const sevenChoicesAnalysis = {
+    schemaVersion: 'seven-choices-analysis-v1',
+    paperId: paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [sevenChoicesGroup.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'seven-choices-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [sevenChoicesGroup.groupId]: { overview: '七选五概览。' } },
+    questions: Object.fromEntries(
+      [36, 37, 38, 39, 40].map((n) => [`q-i1-step4-${String(n).padStart(3, '0')}`, { optionFit: { correctOptionLabel: 'A' } }]),
+    ),
+  }
+  const clozeGroup = {
+    groupId: 'group-i1-step4-cloze',
+    groupType: 'cloze',
+    title: '完形填空',
+    order: 5,
+    paragraphs: [{ id: 'para-i1-step4-cloze-p1', text: 'Cloze passage about learning from mistakes.' }],
+    questions: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55].map((n) => ({
+      id: `q-i1-step4-${String(n).padStart(3, '0')}`,
+      stem: String(n),
+      answerKey: 'B',
+      blankId: `blank-i1-step4-${String(n).padStart(3, '0')}`,
+      options: { A: 'rise', B: 'fall', C: 'turn', D: 'move' },
+    })),
+    blankIds: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55].map((n) => `blank-i1-step4-${String(n).padStart(3, '0')}`),
+  }
+  const grammarFillGroup = {
+    groupId: 'group-i1-step4-grammar-fill',
+    groupType: 'grammarFill',
+    title: '语法填空',
+    order: 6,
+    paragraphs: [{ id: 'para-i1-step4-gf-p1', text: 'Grammar fill passage about  56  (evolve) over time.' }],
+    questions: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((n) => ({
+      id: `q-i1-step4-${String(n).padStart(3, '0')}`,
+      stem: String(n),
+      answerKey: 'word',
+      blankId: `blank-i1-step4-${String(n).padStart(3, '0')}`,
+      prompt: n === 56 ? 'evolve' : null,
+    })),
+    blankIds: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((n) => `blank-i1-step4-${String(n).padStart(3, '0')}`),
+  }
   return {
     sourceBuffer,
     parseResult: {
       paper,
       readingGroups,
       skipped: [],
+      sevenChoicesGroup,
+      clozeGroup,
+      grammarFillGroup,
     },
+    sevenChoicesGroup,
+    sevenChoicesAnalysis,
+    clozeGroup,
+    grammarFillGroup,
   }
 }
 
@@ -380,10 +443,14 @@ function assertStaticContracts() {
 }
 
 async function assertPublishPackageBuilder() {
-  const { parseResult, sourceBuffer } = fixtureFourGroupParseResult()
+  const { parseResult, sourceBuffer, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup } = fixtureFourGroupParseResult()
   const files = buildPaperImportAiPackageFiles({
     parseResult,
     analysesByGroupId: validFourGroupAnalyses(parseResult),
+    sevenChoicesGroup,
+    sevenChoicesAnalysis,
+    clozeGroup,
+    grammarFillGroup,
     sourceDocx: {
       fileName: parseResult.paper.sourceFilename,
       buffer: sourceBuffer,
@@ -404,6 +471,10 @@ async function assertPublishPackageBuilder() {
   assertRejects('I1 Step 4 answer conflict blocks package build', async () => buildPaperImportAiPackageFiles({
     parseResult,
     analysesByGroupId: conflictAnalyses,
+    sevenChoicesGroup,
+    sevenChoicesAnalysis,
+    clozeGroup,
+    grammarFillGroup,
     sourceDocx: {
       fileName: parseResult.paper.sourceFilename,
       buffer: sourceBuffer,
