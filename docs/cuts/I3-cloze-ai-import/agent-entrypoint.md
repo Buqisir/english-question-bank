@@ -1,22 +1,23 @@
 # Agent Entrypoint — I3-A Cloze AI Import
 
 Cut: I3-cloze-ai-import
-Stage: PM grill locked; waiting for PA
+Stage: PA complete; PM compression ready for DEV
 Owner: 阿澈 PM / plan compression; 小川 PA then DEV / CR-lite / RM
 Date: 2026-05-27
 
 ## Current Objective
 
-Route the next agent to review the I3-A plan for 完形填空 AI 导题接入. The cut is
-limited to parsing, packaging, publishing, and visual QA access for standard
-q41-q55 cloze sections in the existing `paper-import-ai` flow. It does not add
-cloze teaching analysis.
+Route the next agent to implement the I3-A plan for 完形填空 AI 导题接入. The cut is
+limited to parsing, packaging, publishing, and plain paper-view QA access for
+standard q41-q55 cloze sections in the existing `paper-import-ai` flow. It does
+not add cloze teaching analysis.
 
 ## Prerequisites (check before acting)
 
 Run these checks before reading or writing the next artifact:
 
 - `docs/cuts/I3-cloze-ai-import/plan.md` must exist and be non-empty.
+- `docs/cuts/I3-cloze-ai-import/pa.md` must exist and be non-empty.
 - Before DEV starts, `docs/cuts/I3-cloze-ai-import/plan.md` must already be
   committed to the repo.
 - Before DEV starts, search project Kratos from the repo root with 2-3 relevant
@@ -25,9 +26,8 @@ Run these checks before reading or writing the next artifact:
   `Kratos: no relevant hits`.
 - Kratos is context, not truth. Current repo files, `main`, PR diff, and cut
   artifacts remain authoritative.
-- PA must write `docs/cuts/I3-cloze-ai-import/pa.md` before DEV starts.
-- After PA, 阿澈 must compress accepted PA findings back into
-  `docs/cuts/I3-cloze-ai-import/plan.md` before DEV starts.
+- `docs/cuts/I3-cloze-ai-import/plan.md` must include closed dispositions for
+  all PA Must Fix items before DEV starts.
 
 If a required prerequisite is missing, stop and reply:
 
@@ -40,10 +40,10 @@ ESCALATION: CONTEXT INSUFFICIENT — required prerequisite missing or empty: <pa
 Keep this list cut-specific and at most 5 files.
 
 - `docs/cuts/I3-cloze-ai-import/plan.md`
-- `docs/product/paper-asset-v1.md`
+- `docs/cuts/I3-cloze-ai-import/pa.md`
 - `server/paper-import-ai/docxSplitter.mjs`
 - `server/paper-import-ai/packageBuilder.mjs`
-- `server/paper-import/publisher.mjs`
+- `app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts`
 
 ## Background
 
@@ -53,28 +53,31 @@ Skim only if unfamiliar or not already loaded in this session.
 - `docs/steering/cut-workflow-protocol.md`
 - `docs/steering/product-scope-discipline.md`
 - `docs/agents/review-levels.md`
-- `docs/agents/pa-persona.md` when the next stage is PA
+- `server/paper-import/publisher.mjs`
+- `docs/product/paper-asset-v1.md`
 - `scripts/README.md`
 
 ## Source Of Truth
 
 - Branch: `codex/i3-cloze-ai-import-plan`
 - Base commit: `f89bda1 docs(workflow): split PM and PA ownership (#145)`
-- PR: TBD
+- PR: `https://github.com/Buqisir/english-question-bank/pull/146`
 - Latest accepted artifact: `docs/cuts/I3-cloze-ai-import/plan.md`
 
 ## Goal / PR Split
 
-- Goal: complete I3-A PM artifact so 小川 can PA the cloze import plan.
-- Current PR slice: docs-only PM plan and agent entrypoint.
-- Explicitly not in this PR: runtime DEV, cloze AI analysis, grammar-cloze,
+- Goal: implement I3-A after PA Must Fix items have been compressed into
+  `plan.md`.
+- Current PR slice: docs-only PM / PA / PM-compression artifacts.
+- DEV PR slice: runtime implementation following `plan.md`.
+- Explicitly not in I3-A: cloze AI analysis, grammar-cloze,
   schema changes, PaperSurface redesign, search/list optimization.
 
 ## Allowed Scope
 
 - `docs/cuts/I3-cloze-ai-import/plan.md`
 - `docs/cuts/I3-cloze-ai-import/agent-entrypoint.md`
-- `docs/cuts/I3-cloze-ai-import/pa.md` for the PA stage
+- `docs/cuts/I3-cloze-ai-import/pa.md`
 - Runtime files listed in `plan.md` only after PA and PM compression finish
 
 ## Forbidden Scope
@@ -89,10 +92,11 @@ Skim only if unfamiliar or not already loaded in this session.
 
 ## Output Required
 
-Write the next artifact to:
+After DEV, reply with a short completion report. If DEV needs a repo-file
+handoff, write it to:
 
 ```text
-docs/cuts/I3-cloze-ai-import/pa.md
+docs/cuts/I3-cloze-ai-import/handoff.md
 ```
 
 Standard artifact paths:
@@ -105,9 +109,10 @@ Standard artifact paths:
 Worktree check for external agents:
 
 - Target repo root: `/Users/huangxuewei/Projects/english-question-bank`
-- Target branch / PR: `codex/i3-cloze-ai-import-plan`
+- Target branch / PR: start from latest `main` after PR #146 is merged, unless
+  the owner explicitly asks for a stacked DEV branch.
 - Target absolute path:
-  `/Users/huangxuewei/Projects/english-question-bank/docs/cuts/I3-cloze-ai-import/pa.md`
+  `/Users/huangxuewei/Projects/english-question-bank/docs/cuts/I3-cloze-ai-import/`
 - Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and branch.
   If they do not match the target repo root and target branch / PR, stop with
   `ESCALATION: BRANCH CONFLICT`.
@@ -133,9 +138,11 @@ Escalation signals:
 Reply with `ESCALATION: <SIGNAL> — <one sentence explanation>` before writing a
 partial artifact.
 
-Chat reply format after writing the repo file:
+Chat reply format after DEV:
 
-- report path
-- verdict / status
-- Must Fix count, if any
-- Open PO Decisions count, if any
+- branch / PR
+- changed files
+- verify summary
+- browser QA status
+- forbidden-scope status
+- known risks
