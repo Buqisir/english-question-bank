@@ -5,6 +5,7 @@ import mammoth from 'mammoth'
 const READING_LABELS = ['A', 'B', 'C', 'D']
 const SEVEN_CHOICES_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 const SEVEN_CHOICES_QUESTION_NOS = ['36', '37', '38', '39', '40']
+const CLOZE_QUESTION_NOS = Array.from({ length: 15 }, (_, i) => String(41 + i))
 const MAX_SKIPPED_RAW_LENGTH = 1600
 const IMAGE_OPTION_PLACEHOLDER = '图片选项，需查看原卷'
 
@@ -370,6 +371,197 @@ function uniqueSkipped(skipped) {
   })
 }
 
+// ---- Cloze parsing ----
+
+function isClozeOptionLine(line) {
+  const text = normalizeLine(line)
+  // Match lines like "41. A. hesitantly \tB. instantly \tC. eventually \tD. gradually"
+  return /^(\d{2})\.\s+([A-D])\.\s+\S/.test(text)
+}
+
+function parseClozeOptionLine(line) {
+  const text = normalizeLine(line)
+  const questionMatch = text.match(/^(\d{2})\.\s+/)
+  if (!questionMatch) return null
+  const questionNo = String(Number(questionMatch[1]))
+  if (!CLOZE_QUESTION_NOS.includes(questionNo)) return null
+
+  // Split by A-D markers: look for "A.", "B.", "C.", "D." preceded by whitespace.
+  const options = {}
+  const optionPattern = /(?:^|\s+)([A-D])\.\s+(\S[\s\S]*?)(?=\s+[A-D]\.\s+|$)/g
+  let match
+  while ((match = optionPattern.exec(text))) {
+    const label = match[1]
+    const value = compactOptionText(match[2])
+    if (value && !options[label]) options[label] = value
+  }
+  if (['A', 'B', 'C', 'D'].every((l) => options[l])) {
+    return { questionNo, options }
+  }
+  return null
+}
+
+function parseClozeMultiLineOptions(lines) {
+  // Fallback: multi-line format where each option is on its own line.
+  // Group lines by question number (41-55), extract A-D labels.
+  const optionsByQuestion = {}
+  let currentQuestionNo = null
+
+  for (const line of lines) {
+    const text = normalizeLine(line)
+    // Check for question number prefix.
+    const qMatch = text.match(/^(\d{2})\.\s+([A-D])\.\s+(.+)$/)
+    if (qMatch) {
+      const qNo = String(Number(qMatch[1]))
+      if (CLOZE_QUESTION_NOS.includes(qNo)) {
+        currentQuestionNo = qNo
+        if (!optionsByQuestion[qNo]) optionsByQuestion[qNo] = {}
+        optionsByQuestion[qNo][qMatch[2]] = compactOptionText(qMatch[3])
+      }
+      continue
+    }
+    // Continuation of previous option?
+    if (currentQuestionNo && /^[A-D]\.\s+\S/.test(text)) {
+      const contMatch = text.match(/^([A-D])\.\s+(.+)$/)
+      if (contMatch) {
+        if (!optionsByQuestion[currentQuestionNo]) optionsByQuestion[currentQuestionNo] = {}
+        if (!optionsByQuestion[currentQuestionNo][contMatch[1]]) {
+          optionsByQuestion[currentQuestionNo][contMatch[1]] = compactOptionText(contMatch[2])
+        }
+      }
+    }
+  }
+
+  const result = {}
+  for (const [qNo, opts] of Object.entries(optionsByQuestion)) {
+    if (['A', 'B', 'C', 'D'].every((l) => opts[l])) {
+      result[qNo] = opts
+    }
+  }
+  return result
+}
+
+function parseClozeOptions(lines) {
+  // Try tab-separated inline format first (one line per question with all 4 options).
+  const inlineOptions = {}
+  for (const line of lines) {
+    const parsed = parseClozeOptionLine(line)
+    if (parsed) inlineOptions[parsed.questionNo] = parsed.options
+  }
+  if (Object.keys(inlineOptions).length >= 10) return inlineOptions
+
+  // Fall back to multi-line format.
+  const multiLineOptions = parseClozeMultiLineOptions(lines)
+  if (Object.keys(multiLineOptions).length >= 10) return multiLineOptions
+
+  return null
+}
+
+function findClozeOptionStart(lines) {
+  return lines.findIndex((line) => {
+    const text = normalizeLine(line)
+    return /^(4[1-9]|5[0-5])\.\s+[A-D]\.\s+\S/.test(text)
+  })
+}
+
+function findClozeSection(lines) {
+  const optionStart = findClozeOptionStart(lines)
+  if (optionStart < 0) return null
+
+  // Walk backwards from optionStart to find section boundary.
+  let sectionStart = 0
+  for (let i = optionStart - 1; i >= 0; i -= 1) {
+    const text = normalizeLine(lines[i])
+    const section = classifySectionLine(text)
+    // Stop at non-cloze major section or part heading.
+    if (section && section !== 'cloze') {
+      sectionStart = i
+      break
+    }
+    // Stop at grammar section (第二节 under language use).
+    if (/^第[二三四]/.test(text) || /^(?!第一节)/.test(text) && /^第.+节/.test(text)) {
+      sectionStart = i
+      break
+    }
+  }
+
+  // Find section end (after option block, before next section).
+  let sectionEnd = lines.length
+  for (let i = optionStart; i < lines.length; i += 1) {
+    const text = normalizeLine(lines[i])
+    const section = classifySectionLine(text)
+    if (section && section !== 'cloze') {
+      sectionEnd = i
+      break
+    }
+  }
+
+  return { startIndex: sectionStart, endIndex: sectionEnd, optionStartIndex: optionStart }
+}
+
+function parseClozeGroup(lines, { answerMap, paperTail }) {
+  const section = findClozeSection(lines)
+  if (!section) return null
+
+  const optionLines = lines.slice(section.optionStartIndex, section.endIndex)
+  const optionsByQuestion = parseClozeOptions(optionLines)
+  if (!optionsByQuestion) {
+    return { group: null, error: { reason: 'cloze_missing_options', rawText: safeRawText(optionLines) } }
+  }
+
+  // Extract passage lines (everything before optionStart, after section start).
+  const passageLines = lines.slice(section.startIndex, section.optionStartIndex)
+    .filter((line) => {
+      const text = normalizeLine(line)
+      return !isStopSectionLine(text) && !/^第[一二三四]/.test(text)
+    })
+
+  const paragraphs = passageLines.map((line, index) => ({
+    id: `para-${paperTail}-cloze-${index === 0 ? 'title' : `p${index}`}`,
+    text: line,
+  }))
+
+  if (paragraphs.length === 0) {
+    return { group: null, error: { reason: 'cloze_missing_passage', rawText: safeRawText(passageLines) } }
+  }
+
+  const orderedQuestionNos = CLOZE_QUESTION_NOS.filter((no) => optionsByQuestion[no])
+  if (orderedQuestionNos.length < 15) {
+    return { group: null, error: { reason: 'cloze_incomplete_options', rawText: safeRawText(optionLines) } }
+  }
+
+  const questions = orderedQuestionNos.map((questionNo) => {
+    const padded = String(questionNo).padStart(3, '0')
+    const answerKey = answerMap.get(questionNo) || ''
+    return {
+      id: `q-${paperTail}-${padded}`,
+      stem: questionNo,
+      answerKey,
+      blankId: `blank-${paperTail}-${padded}`,
+      options: {
+        A: optionsByQuestion[questionNo].A,
+        B: optionsByQuestion[questionNo].B,
+        C: optionsByQuestion[questionNo].C,
+        D: optionsByQuestion[questionNo].D,
+      },
+    }
+  })
+
+  const groupId = `group-${paperTail}-cloze`
+  return {
+    group: {
+      groupId,
+      groupType: 'cloze',
+      title: '完形填空',
+      order: 5,
+      paragraphs,
+      questions,
+      blankIds: questions.map((q) => q.blankId),
+    },
+    error: null,
+  }
+}
+
 // ---- Seven-choices parsing ----
 
 function isSevenChoicesOptionLine(line) {
@@ -502,7 +694,6 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
   let sevenChoicesGroup = null
   let sevenChoicesError = null
   if (scSections.length > 0) {
-    // Take the first七选五 section only (one standard section per paper).
     const sc = scSections[0]
     const scLines = lines.slice(sc.startIndex, sc.endIndex)
     const parsed = parseSevenChoicesGroup(scLines, { answerMap, paperTail })
@@ -510,12 +701,19 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
     sevenChoicesError = parsed.error
   }
 
+  // Parse cloze section.
+  const clozeParsed = parseClozeGroup(lines, { answerMap, paperTail })
+  const clozeGroup = clozeParsed?.group || null
+  const clozeError = clozeParsed?.error || null
+
   const allSkipped = uniqueSkipped([...skipped, ...collectSkippedSections(lines)])
 
-  // If七选五 was detected, the structured group or error panel is the source of truth.
-  const filteredSkipped = scSections.length > 0
-    ? allSkipped.filter((item) => item.reason !== 'seven_choices_deferred_to_i2')
-    : allSkipped
+  // Remove successfully-parsed groups from skipped.
+  const filteredSkipped = allSkipped.filter((item) => {
+    if (item.reason === 'seven_choices_deferred_to_i2' && sevenChoicesGroup) return false
+    if (item.reason === 'cloze_out_of_scope_for_i1' && clozeGroup) return false
+    return true
+  })
 
   return {
     paper: {
@@ -527,6 +725,8 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
     readingGroups: readingGroups.sort((a, b) => a.order - b.order),
     sevenChoicesGroup,
     sevenChoicesError,
+    clozeGroup,
+    clozeError,
     skipped: filteredSkipped,
   }
 }

@@ -321,7 +321,18 @@ function getSevenChoicesGroups(asset) {
     }))
 }
 
-function buildQaLinks(paperId, version, readingGroups, scGroups) {
+function getClozeGroups(asset) {
+  const groups = asset?.content?.groups || {}
+  return Object.values(groups)
+    .filter((group) => group?.groupType === 'cloze')
+    .map((group) => ({
+      groupId: group.groupId,
+      title: group.title || '完形填空',
+      defaultQuestionId: group.questionIds?.[0] || null,
+    }))
+}
+
+function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups) {
   const readingLinks = readingGroups.map((group) => {
     const latestParams = new URLSearchParams()
     latestParams.set('view', 'paper-intelligence')
@@ -362,7 +373,27 @@ function buildQaLinks(paperId, version, readingGroups, scGroups) {
     }
   })
 
-  return [...readingLinks, ...scLinks]
+  const clozeLinks = (clozeGroups || []).map((group) => {
+    const latestParams = new URLSearchParams()
+    latestParams.set('view', 'paper-intelligence')
+    latestParams.set('source', 'paper-asset')
+    latestParams.set('paperId', paperId)
+    latestParams.set('surface', 'paper')
+    latestParams.set('groupId', group.groupId)
+    latestParams.set('questionId', group.defaultQuestionId)
+
+    const versionParams = new URLSearchParams(latestParams)
+    versionParams.set('version', `v${version}`)
+
+    return {
+      groupId: group.groupId,
+      title: group.title,
+      latestHref: `?${latestParams.toString()}`,
+      versionHref: `?${versionParams.toString()}`,
+    }
+  })
+
+  return [...readingLinks, ...scLinks, ...clozeLinks]
 }
 
 export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFailure = false }) {
@@ -386,12 +417,13 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
     defaultQuestionId: group.questionIds?.[0] || null,
   }))
   const scGroups = getSevenChoicesGroups(validation.packageData.paperAsset)
+  const clozeGroups = getClozeGroups(validation.packageData.paperAsset)
   const publishReport = {
     ok: true,
     paperId,
     assetVersion: version,
     versionName: `v${version}`,
-    qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups),
+    qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups),
     searchHref: '/?q=2024%20九省联考',
     generatedAt: new Date().toISOString(),
   }
