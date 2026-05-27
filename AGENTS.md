@@ -34,6 +34,9 @@ of duplicating workflow or browser rules.
 - Push back directly when a feature risks turning a focused teacher
   workbench into an AI dashboard. A useful feature may still belong in
   a different workflow, backlog, or future cut.
+- All paper authoring, PaperSurface, print/export, and import display work
+  must respect the hard exam-paper formatting rules in
+  `docs/product/exam-paper-format-standards.md`.
 - For product / engineering cuts, follow
   `docs/steering/cut-workflow-protocol.md`: pick small / medium /
   large process by risk, sync first, and avoid turning small fixes into
