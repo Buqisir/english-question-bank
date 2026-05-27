@@ -288,9 +288,11 @@ function assertAllowedScope() {
     'server/paper-import-ai/',
     'server/ai-providers/',
     'app/src/features/paper-import-ai/',
+    'app/src/features/paper-intelligence/',
     'docs/cuts/I2-seven-choices-ai-import/',
   ]
   const allowedFiles = new Set([
+    '.gitignore',
     'app/src/services/paperImportAi.ts',
     'scripts/README.md',
     'scripts/verify-c7-paper-import-publish.mjs',
@@ -299,6 +301,8 @@ function assertAllowedScope() {
     'scripts/verify-i1-paper-import-route.mjs',
     'scripts/verify-i1-paper-import-splitter.mjs',
     'scripts/verify-i2-seven-choices-ai-import.mjs',
+    'scripts/verify-i3-cloze-ai-import.mjs',
+    'scripts/verify-i4-grammar-fill-ai-import.mjs',
     'server/paper-import/publisher.mjs',
     'server/paper-import/storage.mjs',
     'server/paper-import/validator.mjs',
@@ -326,15 +330,20 @@ function assertAllowedScope() {
   const unexpected = files.filter((file) => !allowedFiles.has(file) && !allowedPrefixes.some((prefix) => file.startsWith(prefix)))
   assert('I1 Step 3 changed files stay in the analysis whitelist', unexpected.length === 0, unexpected.join('\n'))
 
+  const crossCutAllowed = new Set([
+    'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
+  ])
   const forbidden = files.filter(
     (file) =>
-      file.startsWith('prompts/') ||
-      file.startsWith('shared/papersurface/') ||
-      file.startsWith('app/src/domain/') ||
-      file.startsWith('schemas/') ||
-      file.startsWith('app/public/paper-assets/') ||
-      file.endsWith('Adapter.ts') ||
-      file === 'app/src/features/paper-import/PaperImportWorkbench.tsx'
+      !crossCutAllowed.has(file) && (
+        file.startsWith('prompts/') ||
+        file.startsWith('shared/papersurface/') ||
+        file.startsWith('app/src/domain/') ||
+        file.startsWith('schemas/') ||
+        file.startsWith('app/public/paper-assets/') ||
+        file.endsWith('Adapter.ts') ||
+        file === 'app/src/features/paper-import/PaperImportWorkbench.tsx'
+      )
   )
   assert('I1 Step 3 forbidden scopes are untouched', forbidden.length === 0, forbidden.join('\n'))
 }

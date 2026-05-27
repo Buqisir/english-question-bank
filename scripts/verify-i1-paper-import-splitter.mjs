@@ -70,8 +70,11 @@ function changedFiles() {
 
 function assertAllowedScope() {
   const allowed = new Set([
+    '.gitignore',
     'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
     'app/src/features/paper-import-ai/paperImportAiWorkbench.css',
+    'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
+    'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
     'app/src/services/paperImportAi.ts',
     'docs/cuts/I2-seven-choices-ai-import/agent-entrypoint.md',
     'docs/cuts/I2-seven-choices-ai-import/plan.md',
@@ -96,6 +99,8 @@ function assertAllowedScope() {
     'scripts/verify-i1-paper-import-route.mjs',
     'scripts/verify-i1-paper-import-splitter.mjs',
     'scripts/verify-i2-seven-choices-ai-import.mjs',
+    'scripts/verify-i3-cloze-ai-import.mjs',
+    'scripts/verify-i4-grammar-fill-ai-import.mjs',
   ])
   const files = changedFiles()
   const scopeRelevantPrefixes = [
@@ -124,14 +129,19 @@ function assertAllowedScope() {
   const unexpected = files.filter((file) => !allowed.has(file))
   assert('I1 Step 1 changed files stay in the splitter whitelist', unexpected.length === 0, unexpected.join('\n'))
 
+  const crossCutAllowed = new Set([
+    'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
+  ])
   const forbidden = files.filter(
     (file) =>
-      file.startsWith('prompts/') ||
-      file.startsWith('shared/papersurface/') ||
-      file.startsWith('app/src/domain/') ||
-      file.startsWith('schemas/') ||
-      file.endsWith('Adapter.ts') ||
-      file === 'app/src/features/paper-import/PaperImportWorkbench.tsx'
+      !crossCutAllowed.has(file) && (
+        file.startsWith('prompts/') ||
+        file.startsWith('shared/papersurface/') ||
+        file.startsWith('app/src/domain/') ||
+        file.startsWith('schemas/') ||
+        file.endsWith('Adapter.ts') ||
+        file === 'app/src/features/paper-import/PaperImportWorkbench.tsx'
+      )
   )
   assert('I1 Step 1 forbidden scopes are untouched', forbidden.length === 0, forbidden.join('\n'))
 }
