@@ -5,6 +5,28 @@ papers. They apply across Reading, 七选五, 完形填空, 语法填空, writin
 PaperSurface, print/export, and future paper-authoring workflows unless a
 specific cut explicitly records an exception.
 
+The visual reference set lives in:
+
+```text
+docs/product/exam-paper-format-reference/
+```
+
+## Import Normalization Principle
+
+Imported real papers are not formatting authority.
+
+When importing real or mock papers, preserve semantic content: original passage
+text, question meaning, option content, answer keys, and writing prompts. But
+normalize formatting toward Gaokao-style exam standards.
+
+If a source paper is visually sloppy, inconsistent, or non-standard, the app
+should not reproduce that sloppiness. It should repair spacing, punctuation,
+blank style, option alignment, quote style, dash style, and answer-box layout
+where doing so does not change meaning.
+
+If normalization may change meaning, stop and surface the ambiguity for human
+review.
+
 ## Global Typography
 
 - Use English half-width punctuation in English text.
