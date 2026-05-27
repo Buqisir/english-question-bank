@@ -1,15 +1,16 @@
 # Agent Entrypoint — I5-A Writing AI Import
 
 Cut: I5-writing-ai-import
-Stage: PM grill locked; waiting for PA
+Stage: PA complete; PM compression ready for DEV
 Owner: 阿澈 PM / plan compression; 小川 PA then DEV / CR-lite / RM
 Date: 2026-05-27
 
 ## Current Objective
 
-Route 小川 to PA the I5-A plan for writing AI import. The cut is limited to
-recognizing, packaging, publishing, and rendering plain A4 QA links for 应用文写作
-and 读后续写 in the existing `paper-import-ai` flow. It does not add writing AI
+Route 小川 to DEV the I5-A plan for writing AI import after PA Must Fix items
+were compressed back into `plan.md`. The cut is limited to recognizing,
+packaging, publishing, and rendering plain A4 QA links for 应用文写作 and
+读后续写 in the existing `paper-import-ai` flow. It does not add writing AI
 analysis,范文,评分, search/list behavior, or writing teaching workflows.
 
 ## Prerequisites (check before acting)
@@ -17,6 +18,7 @@ analysis,范文,评分, search/list behavior, or writing teaching workflows.
 Run these checks before reading or writing the next artifact:
 
 - `docs/cuts/I5-writing-ai-import/plan.md` must exist and be non-empty.
+- `docs/cuts/I5-writing-ai-import/pa.md` must exist and be non-empty.
 - Before DEV starts, `docs/cuts/I5-writing-ai-import/plan.md` must already be
   committed to the repo.
 - Before DEV starts, search project Kratos from the repo root with 2-3 relevant
@@ -25,9 +27,8 @@ Run these checks before reading or writing the next artifact:
   `Kratos: no relevant hits`.
 - Kratos is context, not truth. Current repo files, `main`, PR diff, and cut
   artifacts remain authoritative.
-- PA must write `docs/cuts/I5-writing-ai-import/pa.md` before DEV starts.
-- After PA, 阿澈 must compress accepted PA findings back into
-  `docs/cuts/I5-writing-ai-import/plan.md` before DEV starts.
+- PA Must Fix items must be closed in the `PA Follow-Up Decisions` table in
+  `plan.md` before DEV starts.
 
 If a required prerequisite is missing, stop and reply:
 
@@ -40,6 +41,7 @@ ESCALATION: CONTEXT INSUFFICIENT — required prerequisite missing or empty: <pa
 Keep this list cut-specific and at most 5 files.
 
 - `docs/cuts/I5-writing-ai-import/plan.md`
+- `docs/cuts/I5-writing-ai-import/pa.md`
 - `docs/product/exam-paper-format-standards.md`
 - `docs/product/exam-paper-format-reference/README.md`
 - `app/src/domain/paperAsset.ts`
@@ -62,13 +64,15 @@ Skim only if unfamiliar or not already loaded in this session.
 
 - Branch: `codex/i5-writing-ai-import-plan`
 - Base commit: `274c25f Merge pull request #151 from Buqisir/codex/i4-grammar-fill-ai-import`
-- PR: TBD
-- Latest accepted artifact: `docs/cuts/I5-writing-ai-import/plan.md`
+- PR: https://github.com/Buqisir/english-question-bank/pull/152
+- Latest accepted artifacts:
+  - `docs/cuts/I5-writing-ai-import/plan.md`
+  - `docs/cuts/I5-writing-ai-import/pa.md`
 
 ## Goal / PR Split
 
-- Goal: complete I5-A PM artifact so 小川 can PA the writing import plan.
-- Current PR slice: docs-only PM plan and agent entrypoint.
+- Goal: complete I5-A DEV from the PA-compressed plan.
+- Current PR slice: docs-only PM plan, PA report, and PM compression.
 - Explicitly not in this PR: runtime DEV, writing AI analysis,范文 /评分 parsing,
   search/list optimization, schema changes, and PaperSurface redesign.
 
@@ -91,10 +95,11 @@ Skim only if unfamiliar or not already loaded in this session.
 
 ## Output Required
 
-Write the next artifact to:
+After DEV, write the completion summary in the PR and add a short repo-routed
+handoff only if the cut pauses:
 
 ```text
-docs/cuts/I5-writing-ai-import/pa.md
+docs/cuts/I5-writing-ai-import/handoff.md
 ```
 
 Standard artifact paths:
@@ -107,9 +112,9 @@ Standard artifact paths:
 Worktree check for external agents:
 
 - Target repo root: `/Users/huangxuewei/Projects/english-question-bank`
-- Target branch / PR: `codex/i5-writing-ai-import-plan`
-- Target absolute path:
-  `/Users/huangxuewei/Projects/english-question-bank/docs/cuts/I5-writing-ai-import/pa.md`
+- Target branch / PR: `codex/i5-writing-ai-import-plan` / PR #152
+- Target cut path:
+  `/Users/huangxuewei/Projects/english-question-bank/docs/cuts/I5-writing-ai-import/`
 - Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and branch.
   If they do not match the target repo root and target branch / PR, stop with
   `ESCALATION: BRANCH CONFLICT`.
@@ -135,9 +140,10 @@ Escalation signals:
 Reply with `ESCALATION: <SIGNAL> — <one sentence explanation>` before writing a
 partial artifact.
 
-Chat reply format after writing the repo file:
+Chat reply format after DEV:
 
-- report path
-- verdict / status
-- Must Fix count, if any
-- Open PO Decisions count, if any
+- branch / commit
+- changed files
+- verify summary
+- browser QA status
+- known risks / PO QA checklist

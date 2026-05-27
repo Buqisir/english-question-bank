@@ -49,9 +49,10 @@ before a standard whole paper can publish. I5-A stops at 导题入库可视化.
 - Continuation writing uses the golden-sample second-section shape: material
   text, standard continuation requirements, two paragraph starters, and one
   large answer box.
-- If a source clearly deviates from the standard 15-point / 80-word application
-  and 25-point / 150-word continuation structure, surface a warning or block for
-  human review. Do not silently normalize a different task into a standard one.
+- Non-standard writing handling:
+  - Block publish when structure affects meaning or task completeness.
+  - Warn only for cosmetic / wording deviations that preserve the same task.
+  - Do not silently normalize a different task into a standard one.
 - Deterministic splitter first. AI does not decide writing task type in I5-A.
 - Non-standard but semantically clear writing structure may parse with warning.
   Structure that affects meaning blocks publish.
@@ -80,9 +81,55 @@ before a standard whole paper can publish. I5-A stops at 导题入库可视化.
   - application task scenario and content requirements
   - continuation material paragraphs
   - continuation paragraph starters
+- Application extraction rules:
+  - Start at the first application section under writing, usually `第一节`.
+  - End before continuation section, usually `第二节`.
+  - Extract only source-specific task content: task scenario, writing purpose,
+    target format when source gives one, and content requirements such as
+    numbered bullets.
+  - Ignore source score line, word-count line, answer-card instruction, and
+    answer box wording; render those from golden-sample standard strings.
+  - If `第一节` is not extractable, fallback to the region after `第四部分 写作`
+    and before the first strong continuation cue: `第二节`, `读后续写`,
+    `续写两段`, `段落开头语`, `Paragraph 1`, or `Paragraph 2`.
+  - If the fallback cannot separate application task from continuation material,
+    block with `application_writing_structure_unclear`.
+- Continuation extraction rules:
+  - Start at the continuation section, usually `第二节`.
+  - Extract English material paragraphs after the continuation instruction and
+    before the `注意` block or paragraph starters.
+  - Extract exactly two paragraph starters. Accept English labels such as
+    `Paragraph 1:` / `Paragraph 2:` and Chinese-led forms that clearly provide
+    two given opening sentences.
+  - End at document end or before answer-analysis /范文 /评分标准 content if the
+    answer-analysis text is present.
+  - Missing material blocks publish with `continuation_material_missing`.
+  - Missing either starter blocks publish with
+    `continuation_starters_missing`.
 - Generate standard golden-sample套话 for score, word count, notes, and answer
   box placement instead of copying sloppy source formatting.
+- Golden-sample standard strings for rendering:
+  - Writing part heading: `第四部分 写作（共两节，满分40分）`
+  - Application section heading: `第一节（满分15分）`
+  - Application note:
+    `注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。`
+  - Continuation section heading: `第二节（满分25分）`
+  - Continuation instruction:
+    `阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。`
+  - Continuation note:
+    `注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。`
+  - Paragraph starter labels: `Paragraph 1:` and `Paragraph 2:`
 - Do not extract answer-analysis DOCX writing范文 or scoring standards.
+- Meaning-risk examples that block:
+  - continuation has fewer or more than two paragraph starters
+  - application and continuation boundaries cannot be separated
+  - source is writing-only or lacks standard full-paper writing part markers
+  - task asks for a different writing structure that cannot fit application /
+    continuation without changing meaning
+- Cosmetic deviations that warn only:
+  - source writes `80词左右` instead of `80个左右`
+  - source uses slightly different answer-card instruction wording
+  - score / word-count line is present but formatted differently
 
 Verification standard:
 
@@ -90,6 +137,8 @@ Verification standard:
 - Missing application blocks standard publish.
 - Missing continuation blocks standard publish.
 - Missing continuation starters blocks standard publish.
+- Non-standard but semantically clear score / wording deviations produce warning
+  only; meaning-risk structure blocks publish.
 - No writing范文 /评分标准 text appears in packaged writing tasks.
 
 ### Step 2 — Build Writing Tasks Into Paper Asset
@@ -109,12 +158,27 @@ Verification standard:
   `reading_group_missing`, `seven_choices_group_missing`,
   `cloze_group_missing`, `grammar_fill_group_missing`,
   `application_writing_missing`, `continuation_writing_missing`.
+- Publisher / DB handling:
+  - Writing groups use `groupType: 'writing'` and map to DB group type
+    `writing`.
+  - Writing groups may have zero `questionIds`; no question rows are created for
+    writing tasks in I5-A.
+  - Writing tasks live in `paper-asset.json` under `content.writingTasks`; I5-A
+    does not add a separate DB writing-task table.
+  - Add `getWritingGroups(asset)` in `publisher.mjs`, analogous to
+    `getClozeGroups`.
+  - Writing QA links use `groupId` and omit `questionId` unless the harness
+    needs a harmless placeholder. Preferred URL:
+    `?view=paper-intelligence&source=paper-asset&surface=paper&groupId=<writingGroupId>`.
+  - `import-meta.json` uses tags `['应用文写作']` and `['读后续写']`, difficulty
+    `中`, and a summary from task instruction text.
 
 Verification standard:
 
 - C7 validator accepts generated package.
 - `paper-asset.json` contains two writing groups and two `writingTasks`.
 - `content.blocks` includes writing answerBox blocks for both tasks.
+- Publisher returns two writing QA links without requiring `questionId`.
 - Existing I1-I4 objective-family behavior does not regress.
 
 ### Step 3 — Plain Paper Writing QA View
@@ -230,6 +294,8 @@ Verification standard:
 | Application QA link | A4 plain paper view with golden-sample answer box, no analysis card |
 | Continuation QA link | Material + notes + two starters in box, golden-sample-like large answer box |
 | Non-standard score / word count | Warning or human-review block; no silent semantic rewrite |
+| Cosmetic score / word-count wording deviation | Warning only; publish may continue |
+| Meaning-risk writing structure deviation | Publish blocks with clear writing structure message |
 
 ## DEV Readiness
 
@@ -246,3 +312,7 @@ this table before treating the PA loop as closed.
 
 | PA item | `pa.md` required disposition | `plan.md` handling | Status |
 | --- | --- | --- | --- |
+| MF1 | Add concrete splitter extraction rules and fallbacks | Added application / continuation extraction boundaries, fallback cues, starter rules, and blocking errors | Closed |
+| MF2 | Specify golden-sample套话 strings or reference source | Added exact standard heading / note / instruction / starter strings from golden sample | Closed |
+| MF3 | Specify publisher / DB / QA-link handling for writing groups | Added zero-question writing group DB strategy, `getWritingGroups`, writing QA URL, and import-meta tags | Closed |
+| MF4 | Decide warning vs block for non-standard writing | Block meaning-risk structure; warn cosmetic deviations; examples added | Closed |
