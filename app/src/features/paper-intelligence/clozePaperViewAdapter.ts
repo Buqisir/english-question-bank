@@ -107,7 +107,8 @@ export function buildClozePaperView(input: {
 function buildClozeTextMap(asset: PaperAssetV1, group: PaperAssetV1['content']['groups'][string]): PaperTextMap {
   const rawParagraphs = (group.passage?.paragraphs ?? [])
   const paragraphs: PaperTextMap['paragraphs'] = rawParagraphs.length > 0
-    ? [...segmentPaperText(rawParagraphs.map((p) => p.text).join('\n\n'), { sectionId: CLOZE_SECTION }).paragraphs]
+    ? segmentPaperText(rawParagraphs.map((p) => p.text).join('\n\n'), { sectionId: CLOZE_SECTION }).paragraphs
+        .map((p) => ({ id: p.id, section: CLOZE_SECTION, sentences: p.sentences }))
     : []
   return {
     paperId: asset.paper.paperId,
