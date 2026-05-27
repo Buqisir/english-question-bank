@@ -49,7 +49,7 @@ Skim only if unfamiliar or not already loaded in this session.
 - `docs/steering/cut-workflow-protocol.md`
 - `docs/steering/product-scope-discipline.md`
 - `docs/agents/review-levels.md`
-- `docs/agents/pa-persona.md` only when an outside PA is explicitly used
+- `docs/agents/pa-persona.md` when the next stage is PA
 - `scripts/README.md`
 
 ## Source Of Truth
@@ -80,6 +80,14 @@ Write the next artifact to:
 ```text
 docs/cuts/<CUT>/<artifact>.md
 ```
+
+Standard artifact paths:
+
+- PM plan / PM compression: `docs/cuts/<CUT>/plan.md`
+- PA report: `docs/cuts/<CUT>/pa.md`
+- Formal CR / Big CR report: `docs/cuts/<CUT>/cr.md`
+- Large-cut closeout: `docs/cuts/<CUT>/cut-note.md`
+- Cross-session handoff: `docs/cuts/<CUT>/handoff.md`
 
 Worktree check for external agents:
 

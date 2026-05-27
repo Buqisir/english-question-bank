@@ -7,7 +7,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 ## Roles
 
 - **PO**: product owner / final acceptance.
-- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. 阿澈 owns PA by default; external high-reasoning PA is exception-only for large cuts, direction checks, or explicit owner request and must follow `docs/agents/pa-persona.md`.
+- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. 小川 owns routine PA by default so PM and PA are separated; external high-reasoning PA is exception-only for large second-review passes, direction checks, or explicit owner request and must follow `docs/agents/pa-persona.md`.
 - **DEV**: implementation agent. 小川 is the default DEV.
 - **CR**: code reviewer. 小川 performs routine CR-lite; 阿澈 owns Big CR and medium / large final sanity gates.
 - **QA**: product / browser / visual acceptance. 阿澈 does first QA for UI direction and user-visible quality unless assigned otherwise; the owner does final PO QA.
@@ -20,7 +20,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
   2. **Visibility**: Can a teacher/user see it? If yes, use QA.
   3. **Runtime risk**: Does it enter runtime code? If yes, use CR.
   4. **Evidence fit**: Prefer static verify when it proves the risk. Do not run heavy gates that cannot observe the changed surface.
-- Use **阿澈 PA / plan review before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic. External PA is not the default.
+- Use **小川 PA before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic. PA writes `docs/cuts/<CUT>/pa.md`; 阿澈 then compresses PA follow-up decisions into `plan.md` before DEV. External PA is not the default.
 - Use **CR after DEV** for any PR that will be merged.
 - Use **QA before RM** only when the change is user-visible or affects visual / interaction behavior.
 - Docs-only and type-only cuts do not need browser QA.
@@ -72,7 +72,7 @@ Use these to prevent review from expanding forever.
 - Do not downgrade tree-trunk work just because the diff looks small. Data contracts and runtime surface boundaries can be high risk even with few lines.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
-- Current named-agent assignment: 阿澈 owns PM, UI direction / polish, PA, and Big CR; 小川 owns DEV, routine CR-lite, and small-cut RM / release execution. For medium / large RM, 小川 may execute the merge only after 阿澈 runs the artifact gate and final sanity check. Either agent may cover another role when quota or availability requires, but role contracts and gates do not downgrade. The owner does PO QA, not code review.
+- Current named-agent assignment: 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and medium / large RM artifact gates; 小川 owns PA, DEV, routine CR-lite, and RM / release execution. PM and PA should not be the same person by default. If 小川 performs both PA and DEV, PA must be a separate `pa.md` stage before DEV. Either agent may cover another role when quota or availability requires, but role contracts and gates do not downgrade. The owner does PO QA, not code review.
 - Multi-agent handoff context is repo-first. PA / CR prompts and
   reports, DEV goal prompts, decisions, handoffs, QA contracts, and Cut
   Notes should be written to named repo paths. Chat messages route the

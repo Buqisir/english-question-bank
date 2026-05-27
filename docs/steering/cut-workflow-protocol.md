@@ -49,7 +49,7 @@ Default flow:
 Sync -> fix/DEV -> verify -> CR-lite -> RM
 ```
 
-Usually no mockup, no Big PA, and no browser QA unless the visible UI
+Usually no mockup, no formal PA, and no browser QA unless the visible UI
 changes.
 
 Small cuts are "tighten a screw" work.
@@ -75,7 +75,7 @@ Small-cut required checks:
 Small-cut skips by default:
 
 - Canvas / mockups
-- Big PA
+- Formal PA
 - multi-round product discussion
 - browser QA, unless the visible UI changed
 - Cut Note, unless the small cut changes a recurring rule or fixes a
@@ -96,7 +96,9 @@ single harness change with bounded blast radius.
 Default flow:
 
 ```text
-Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM
+Sync -> 阿澈 PM grill -> plan.md -> 小川 PA (pa.md)
+-> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
+-> browser QA -> PO QA -> 小川 RM
 ```
 
 Use one quick mockup only when spatial judgment is the core risk.
@@ -131,8 +133,7 @@ Medium-cut required checks:
 
 Medium-cut skips by default:
 
-- Big PA
-- roadmap PA
+- External second PA
 - multi-round Canvas exploration
 - broad Cut Note unless the medium cut changes direction or exposes a
   recurring product pitfall
@@ -158,9 +159,9 @@ where a wrong direction would create substantial rework.
 Default flow:
 
 ```text
-Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
--> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA
--> RM -> Cut Note
+Sync -> 阿澈 PM grill -> Canvas/mockups -> 小川 PA / optional external second PA
+-> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
+-> 阿澈 Big CR / browser QA -> PO QA -> 小川 RM -> Cut Note
 ```
 
 ## 2.5 Size gates and cut records
@@ -211,7 +212,7 @@ Entry points should split reading into two layers:
 
 Do not put files in Must Read merely because they might be useful.
 
-### External prompt templates
+### Review Prompt Templates
 
 Use templates instead of rewriting PA / Big CR boilerplate by hand:
 
@@ -436,10 +437,17 @@ point is to protect the owner from over-commanding during momentum.
 
 Current named-agent assignment:
 
-- 阿澈 owns PM, UI direction / polish, PA, and Big CR.
-- 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+- 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and
+  medium / large RM artifact gates.
+- 小川 owns PA, DEV, routine CR-lite, and RM / release execution.
 - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
   the RM artifact gate and final sanity check.
+- PM and PA should not be the same person by default. If one agent must
+  cover both, record the exception and self-review risk in
+  `docs/cuts/<CUT>/plan.md`.
+- When 小川 performs both PA and DEV, PA must be a separate stage:
+  write `docs/cuts/<CUT>/pa.md`, wait for 阿澈 PM compression into
+  `plan.md`, then start DEV from the updated plan.
 - Either agent may cover another role when quota or availability
   requires, but role contracts and gates do not downgrade.
 
@@ -460,15 +468,15 @@ PO:
   process changes must be made explicit in repo context before agents
   proceed past a required gate
 
-Big PA:
+PA:
 
 - handles architecture and product boundary review before DEV
 - follows `docs/agents/pa-persona.md`
 - identifies allowed / forbidden files
 - defines static verify and browser QA requirements
 - must not write implementation patches in PA mode
-- is reserved for large cuts, direction checks, and occasional big CR,
-  not routine small-cut work
+- 小川 owns routine PA by default; external high-reasoning PA is reserved
+  for large-cut second PA, direction checks, and occasional Big CR.
 
 DEV:
 
@@ -536,17 +544,19 @@ Hard brake A:
 If two rounds do not converge, stop generating images. The issue is
 not image quality; the product question is unclear.
 
-## 7. Big PA discipline
+## 7. PA Discipline
 
-Use 阿澈 PA by default. Consider outside high-reasoning PA only for large
-cuts, explicit direction checks, or owner-requested independent review,
-especially when the decision affects PaperSurface, data contracts,
-geometry, or future cut sequencing.
+Use 小川 PA by default after 阿澈 writes the PM plan. This keeps PM and
+PA separate so 阿澈 is not approving 阿澈's own plan. Consider outside
+high-reasoning PA only for large second-review passes, explicit direction
+checks, or owner-requested independent review, especially when the
+decision affects PaperSurface, data contracts, geometry, or future cut
+sequencing.
 
-External PA, when explicitly used, must read `docs/agents/pa-persona.md`
-before review.
+小川 PA and external PA must read `docs/agents/pa-persona.md` before
+review unless that file is already loaded in the current session.
 
-PA output must end with:
+Formal PA output must be written to `docs/cuts/<CUT>/pa.md` and end with:
 
 - report path
 - reviewed branch / commit baseline

@@ -2,13 +2,13 @@
 
 Cut: `<CUT_ID>` — `<CUT_NAME>`
 Review type: PA
-Output: `docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+Output: `docs/cuts/<CUT_DIR>/pa.md`
 
 ## Assignment
 
 Act as PA only. Do not implement. Do not patch files.
 
-Review whether this cut is ready for Codex DEV. Find direction,
+Review whether this cut is ready for DEV. Find direction,
 boundary, data-contract, verification, and rework risks before work
 starts.
 
@@ -17,7 +17,7 @@ starts.
 Keep this list cut-specific and at most 5 files.
 
 - `docs/cuts/<CUT_DIR>/agent-entrypoint.md`
-- `docs/cuts/<CUT_DIR>/pm-spec.md`
+- `docs/cuts/<CUT_DIR>/plan.md`
 - `docs/cuts/<CUT_DIR>/decisions.md`
 - `<CUT_SPECIFIC_FILE>`
 
@@ -63,7 +63,7 @@ Do not write a partial PA report after an escalation.
 Write the full report to:
 
 ```text
-docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md
+docs/cuts/<CUT_DIR>/pa.md
 ```
 
 Worktree check before writing:
@@ -71,7 +71,7 @@ Worktree check before writing:
 - Target repo root: `<ABSOLUTE_REPO_ROOT>`
 - Target branch / PR: `<BRANCH_OR_PR>`
 - Target absolute report path:
-  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/pa.md`
 - Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and
   branch. If they do not match the target repo root and target branch /
   PR, stop with `ESCALATION: BRANCH CONFLICT` instead of writing in a

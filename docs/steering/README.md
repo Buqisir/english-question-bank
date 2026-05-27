@@ -50,27 +50,33 @@ Hard rule:
 - Small cuts use:
   `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
 - Medium cuts use:
-  `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
+  `Sync -> 阿澈 PM grill -> plan.md -> 小川 PA (pa.md)
+  -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
+  -> browser QA -> PO QA -> 小川 RM`.
 - Large cuts use:
-  `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression
-  -> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA
-  -> RM -> Cut Note`.
+  `Sync -> 阿澈 PM grill -> Canvas/mockups -> 小川 PA / optional
+  external second PA -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
+  -> 阿澈 Big CR / browser QA -> PO QA -> 小川 RM -> Cut Note`.
 - Current named-agent assignment:
-  - 阿澈 owns PM, UI direction / polish, PA, and Big CR.
-  - 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+  - 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and
+    medium / large RM artifact gates.
+  - 小川 owns PA, DEV, routine CR-lite, and RM / release execution.
   - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
     the RM artifact gate and final sanity check.
+  - PM and PA should not be the same person by default. If one agent must
+    cover both, record the exception and self-review risk in `plan.md`.
   - Either agent may cover another role when quota or availability
     requires, but role contracts and gates do not downgrade.
 - The owner is PO and final product QA, not code reviewer.
-- External high-reasoning agents are exception tools for large-cut PA,
-  direction checks, and occasional big CR. 阿澈 owns PA by default.
+- External high-reasoning agents are exception tools for large-cut second
+  PA, direction checks, and occasional Big CR. 小川 owns routine PA by
+  default.
 - Treat GitHub `main` and PR heads as the shared truth. Outside reports
   are not truth until 阿澈 verifies remote state.
 - Use `docs/cuts/_templates/pa-prompt-template.md` and
-  `docs/cuts/_templates/big-cr-prompt-template.md` only when an outside
-  PA / Big CR is explicitly requested; do not hand-write repeated prompt
-  boilerplate.
+  `docs/cuts/_templates/big-cr-prompt-template.md` when a PA / Big CR
+  handoff needs durable repo-routed instructions; do not hand-write
+  repeated prompt boilerplate.
 - PA / Big CR agents may escalate instead of producing partial reports
   with `CONTEXT INSUFFICIENT`, `BRANCH CONFLICT`, `SPEC CONTRADICTS`,
   or `SCOPE UNCLEAR`.

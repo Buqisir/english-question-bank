@@ -47,8 +47,8 @@ of duplicating workflow or browser rules.
   rules in `docs/cuts/_templates/README.md`. Chat messages should only
   route agents to those files and state the next action. Do not depend
   on copy/pasted long chat history as the source of truth.
-- Use external-review prompt templates only when the owner or risk tier
-  explicitly calls for an outside PA / Big CR:
+- Use review prompt templates when a PA / Big CR handoff needs a durable
+  repo-routed instruction:
   `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md`.
 - Cut artifact naming is intentionally simple for new cuts:
@@ -111,23 +111,31 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - Before proposing a plan for a task, first state in one line:
   `cut size: small / medium / large / irreversible; touches schema, data contract, product boundary, or teaching interpretation: yes/no`.
 - If the cut is small and touches none of those four areas, proceed directly.
-- For medium / large / irreversible cuts, 阿澈 owns PM / PA and should
-  create or update the repo-routed `plan.md` before DEV starts. External
+- For medium / large / irreversible cuts, 阿澈 owns PM and should create
+  or update the repo-routed `plan.md` before PA / DEV starts. 小川 owns
+  routine PA by default so PM and PA are not the same person. External
   PA / Big CR is triggered by risk or explicit owner request, not by a
   default review gate.
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
 - Current named-agent assignment:
-  - 阿澈 owns PM, UI direction / polish, PA, and Big CR.
-  - 小川 owns DEV, routine CR-lite, and small-cut RM / release execution.
+  - 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and
+    medium / large RM artifact gates.
+  - 小川 owns PA, DEV, routine CR-lite, and RM / release execution.
   - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
     the RM artifact gate and final sanity check.
+  - PM and PA should not be the same person by default. If quota or
+    availability requires one agent to cover both, record the exception
+    and the self-review risk in `docs/cuts/<CUT>/plan.md`.
+  - When 小川 performs both PA and DEV, PA must be a separate stage:
+    write `docs/cuts/<CUT>/pa.md` first, wait for 阿澈 PM compression into
+    `plan.md`, then start DEV from the updated plan.
   - Either agent may cover another role when quota or availability requires,
     but role contracts and gates do not downgrade.
 - The owner is PO and does final product QA, not code review.
-- External high-reasoning agents are reserved for large-cut PA,
-  direction checks, and occasional big CR. Do not route routine small or
+- External high-reasoning agents are reserved for large-cut second PA,
+  direction checks, and occasional Big CR. Do not route routine small or
   medium implementation work through external DEV agents unless the
   owner explicitly asks for that exception.
 - When an external PA is explicitly used, it must read and follow
@@ -139,15 +147,17 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   not truth, until 阿澈 verifies the baseline, diff, and pushed commits.
 - Default flow:
   - **PM grill before DEV** whenever product behavior is still fuzzy.
-  - **阿澈 PA / plan review before DEV** for architecture, data contracts,
-    future-facing user-visible flows, migrations, export logic, or other
-    large cuts. External PA is not the default.
+  - **小川 PA before DEV** for architecture, data contracts,
+    future-facing user-visible flows, migrations, export logic, or medium /
+    large cuts with non-obvious boundaries. PA writes
+    `docs/cuts/<CUT>/pa.md`; 阿澈 then compresses PA follow-up decisions
+    into `docs/cuts/<CUT>/plan.md` before DEV starts.
   - **CR-lite after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Cut tier flows:
   - Small: `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
-  - Medium: `Sync -> quick PM grill -> DEV -> CR -> browser QA -> PO QA -> RM`.
-  - Large: `Sync -> PM grill -> Canvas/mockups -> Big PA -> PM compression -> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA -> RM -> Cut Note`.
+  - Medium: `Sync -> 阿澈 PM grill -> plan.md -> 小川 PA (pa.md) -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite -> browser QA -> PO QA -> 小川 RM`.
+  - Large: `Sync -> 阿澈 PM grill -> Canvas/mockups -> 小川 PA / optional external second PA -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA -> 小川 RM -> Cut Note`.
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
