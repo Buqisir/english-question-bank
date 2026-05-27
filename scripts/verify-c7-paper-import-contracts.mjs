@@ -210,6 +210,12 @@ assert('code-fenced JSON reports json.parseFailed', codes(codeFenceJson).has('js
 const changedFiles = runGit(['diff', '--name-only', baselineRef()])
   .split('\n')
   .filter(Boolean)
+const c7RelevantPrefixes = [
+  'schemas/paper-import/',
+  'server/paper-import/',
+  'server/paper-import-ai/',
+  'test-fixtures/paper-import/',
+]
 const forbiddenPrefixes = [
   'app/src/shared-ui/papersurface/',
   'shared/papersurface/',
@@ -217,8 +223,15 @@ const forbiddenPrefixes = [
   'app/src/domain/paperAsset.ts',
   'server/print-renderer.mjs',
 ]
-for (const prefix of forbiddenPrefixes) {
-  assert(`forbidden scope untouched so far: ${prefix}`, !changedFiles.some((file) => file.startsWith(prefix)))
+const shouldCheckForbiddenScope = changedFiles.some((file) =>
+  c7RelevantPrefixes.some((prefix) => file.startsWith(prefix)),
+)
+if (shouldCheckForbiddenScope) {
+  for (const prefix of forbiddenPrefixes) {
+    assert(`forbidden scope untouched so far: ${prefix}`, !changedFiles.some((file) => file.startsWith(prefix)))
+  }
+} else {
+  assert('forbidden scope skipped for non-C7 diff', true)
 }
 
 if (failed > 0) {

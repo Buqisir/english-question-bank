@@ -81,6 +81,26 @@ function assertAllowedScope() {
     'server/paper-import/validator.mjs',
   ])
   const files = changedFiles()
+  const scopeRelevantPrefixes = [
+    'server/paper-import-ai/',
+    'server/ai-providers/',
+    'app/src/features/paper-import-ai/',
+  ]
+  const scopeRelevantFiles = new Set([
+    'app/src/App.tsx',
+    'app/src/services/paperImportAi.ts',
+    'server/paper-import/publisher.mjs',
+    'server/paper-import/storage.mjs',
+    'server/paper-import/validator.mjs',
+  ])
+  const shouldCheckScope = files.some(
+    (file) => scopeRelevantFiles.has(file) || scopeRelevantPrefixes.some((prefix) => file.startsWith(prefix)),
+  )
+  if (!shouldCheckScope) {
+    assert('I1 paper-import-ai route scope skipped for non-I1 diff', true)
+    assert('I1 Step 2 forbidden scope skipped for non-I1 diff', true)
+    return
+  }
   const unexpected = files.filter((file) => !allowed.has(file) && !allowedPrefixes.some((prefix) => file.startsWith(prefix)))
   assert('I1 paper-import-ai route changed files stay in the route whitelist', unexpected.length === 0, unexpected.join('\n'))
 

@@ -13,6 +13,7 @@
  *   - Question line-height: 1.7 via token
  *   - Paragraph indent: 2em via token
  *   - 2-column options grid via tokens
+ *   - Seven-choices blank line: 72px via token
  *   - No border-radius inside paper sheet
  *   - No box-shadow inside paper sheet
  *   - No gradient inside paper sheet
@@ -146,7 +147,7 @@
   display: inline-flex;
   align-items: flex-end;
   justify-content: center;
-  width: 4.5em;
+  width: var(--ps-seven-choice-blank-width);
   white-space: nowrap;
   border-bottom: 1px solid currentColor;
   font-variant-numeric: tabular-nums;

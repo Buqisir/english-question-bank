@@ -52,6 +52,15 @@ export const paperSurfaceTokens = Object.freeze({
   passageIndent: '2em',
   optionsGridColumns: '1fr 1fr',
   optionsGridGapX: '2em',
+  /**
+   * 七选五 blank line width standard.
+   *
+   * Calibrated from the reviewed 2024 九省联考 sample: original blank
+   * line / body width ≈ 78px / 740px ≈ 10.5%. PaperSurface's A4
+   * body width is 794px - 56px * 2 = 682px, so the reusable target is
+   * 682px * 10.5% ≈ 72px.
+   */
+  sevenChoiceBlankWidth: '72px',
 })
 
 /**

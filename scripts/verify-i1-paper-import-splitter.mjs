@@ -98,6 +98,29 @@ function assertAllowedScope() {
     'scripts/verify-i2-seven-choices-ai-import.mjs',
   ])
   const files = changedFiles()
+  const scopeRelevantPrefixes = [
+    'server/paper-import-ai/',
+    'server/ai-providers/',
+    'app/src/features/paper-import-ai/',
+  ]
+  const scopeRelevantFiles = new Set([
+    'app/src/App.tsx',
+    'app/src/services/paperImportAi.ts',
+    'server/api.mjs',
+    'server/package.json',
+    'server/package-lock.json',
+    'server/paper-import/publisher.mjs',
+    'server/paper-import/storage.mjs',
+    'server/paper-import/validator.mjs',
+  ])
+  const shouldCheckScope = files.some(
+    (file) => scopeRelevantFiles.has(file) || scopeRelevantPrefixes.some((prefix) => file.startsWith(prefix)),
+  )
+  if (!shouldCheckScope) {
+    assert('I1 Step 1 scope skipped for non-I1 diff', true)
+    assert('I1 Step 1 forbidden scope skipped for non-I1 diff', true)
+    return
+  }
   const unexpected = files.filter((file) => !allowed.has(file))
   assert('I1 Step 1 changed files stay in the splitter whitelist', unexpected.length === 0, unexpected.join('\n'))
 

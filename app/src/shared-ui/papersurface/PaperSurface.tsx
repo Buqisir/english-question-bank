@@ -56,9 +56,10 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
+  '--ps-seven-choice-blank-width': paperSurfaceTokens.sevenChoiceBlankWidth,
 }
 
-const sevenChoicesBlankPattern = /\u00A0{3}(\d{1,3})\u00A0{3}/g
+const sevenChoicesBlankPattern = /(?:_{3,}|\u00A0{3,})\s*(\d{1,3})\s*(?:_{3,}|\u00A0{3,})/g
 
 export function PaperSurface(props: PaperSurfaceProps): ReactNode {
   const {
