@@ -373,10 +373,12 @@ function uniqueSkipped(skipped) {
 
 // ---- Cloze parsing ----
 
+// Option labels can use ".", "．", "、", or "," — or even be missing (space only after label letter).
+const CLOZE_OPTION_LABEL_SEP = '[.．、,]?'
+
 function isClozeOptionLine(line) {
   const text = normalizeLine(line)
-  // Match lines like "41. A. hesitantly \tB. instantly \tC. eventually \tD. gradually"
-  return /^(\d{2})\.\s+([A-D])\.\s+\S/.test(text)
+  return new RegExp(`^(\\d{2})\\.\\s+([A-D])${CLOZE_OPTION_LABEL_SEP}\\s+\\S`).test(text)
 }
 
 function parseClozeOptionLine(line) {
@@ -386,9 +388,9 @@ function parseClozeOptionLine(line) {
   const questionNo = String(Number(questionMatch[1]))
   if (!CLOZE_QUESTION_NOS.includes(questionNo)) return null
 
-  // Split by A-D markers: look for "A.", "B.", "C.", "D." preceded by whitespace.
+  // Split by A-D markers: handle ".", "．", "、", ",", or bare label+space.
   const options = {}
-  const optionPattern = /(?:^|\s+)([A-D])\.\s+(\S[\s\S]*?)(?=\s+[A-D]\.\s+|$)/g
+  const optionPattern = new RegExp(`(?:^|\\s+)([A-D])${CLOZE_OPTION_LABEL_SEP}\\s+(\\S[\\s\\S]*?)(?=\\s+[A-D]${CLOZE_OPTION_LABEL_SEP}\\s+|$)`, 'g')
   let match
   while ((match = optionPattern.exec(text))) {
     const label = match[1]
@@ -410,7 +412,7 @@ function parseClozeMultiLineOptions(lines) {
   for (const line of lines) {
     const text = normalizeLine(line)
     // Check for question number prefix.
-    const qMatch = text.match(/^(\d{2})\.\s+([A-D])\.\s+(.+)$/)
+    const qMatch = text.match(new RegExp(`^(\\d{2})\\.\\s+([A-D])${CLOZE_OPTION_LABEL_SEP}\\s+(.+)$`))
     if (qMatch) {
       const qNo = String(Number(qMatch[1]))
       if (CLOZE_QUESTION_NOS.includes(qNo)) {
@@ -421,8 +423,8 @@ function parseClozeMultiLineOptions(lines) {
       continue
     }
     // Continuation of previous option?
-    if (currentQuestionNo && /^[A-D]\.\s+\S/.test(text)) {
-      const contMatch = text.match(/^([A-D])\.\s+(.+)$/)
+    if (currentQuestionNo && new RegExp(`^[A-D]${CLOZE_OPTION_LABEL_SEP}\\s+\\S`).test(text)) {
+      const contMatch = text.match(new RegExp(`^([A-D])${CLOZE_OPTION_LABEL_SEP}\\s+(.+)$`))
       if (contMatch) {
         if (!optionsByQuestion[currentQuestionNo]) optionsByQuestion[currentQuestionNo] = {}
         if (!optionsByQuestion[currentQuestionNo][contMatch[1]]) {
@@ -460,7 +462,7 @@ function parseClozeOptions(lines) {
 function findClozeOptionStart(lines) {
   return lines.findIndex((line) => {
     const text = normalizeLine(line)
-    return /^(4[1-9]|5[0-5])\.\s+[A-D]\.\s+\S/.test(text)
+    return new RegExp(`^(4[1-9]|5[0-5])\\.\\s+[A-D]${CLOZE_OPTION_LABEL_SEP}\\s+\\S`).test(text)
   })
 }
 
