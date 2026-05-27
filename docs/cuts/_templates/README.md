@@ -21,9 +21,10 @@ Use the smallest file set that preserves the work:
 ```text
 docs/cuts/<cut-id>/
   plan.md       # DEV execution contract; required before medium/large DEV
+                # written / updated by 阿澈 PM before PA and after PA follow-up
                 # (historical cuts may use the legacy name `goal.md`)
   decisions.md  # accepted product / architecture decisions, when decisions exist
-  pa.md         # formal PA report; required for large PA, optional otherwise
+  pa.md         # formal PA report; written by 小川 PA by default
   cr.md         # formal CR / Big CR report; required for large/high-risk CR
   cut-note.md   # large-cut closeout record
   handoff.md    # only when work crosses agent/session/day boundaries
@@ -47,6 +48,9 @@ used as document names in new cuts.
 
 - Do not encode `lite` / `big` in filenames by default.
 - Formal PA reports use `pa.md` whether the review was light or deep.
+- For medium / large cuts where PA is used, 小川 writes `pa.md` before
+  DEV. 阿澈 then records PA disposition in `plan.md` under
+  `PA Follow-Up Decisions`.
 - Formal CR / Big CR reports use `cr.md`.
 - CR-lite findings for routine small / medium PRs may live in the PR
 description or final Codex summary instead of `cr.md`.
@@ -70,8 +74,8 @@ INSUFFICIENT`.
 Medium cuts:
 
 - `plan.md`
-- `pa.md`, or PA-lite recorded in `plan.md` / `decisions.md` when PA was
-  used
+- `pa.md` when PA was used; for explicitly tiny PA-lite, findings may be
+  recorded in `plan.md` / `decisions.md`
 - `cr.md`, or PR-description / final-summary CR record when Big CR was
   triggered
 
@@ -106,7 +110,8 @@ instead of writing files.
 7. External AI input should be folded into a prompt or goal file unless it is a
    durable standalone artifact.
 8. Outside agents discuss in chat until 阿澈 or the owner asks them to write a
-   specific repo path. 阿澈 remains the default PA.
+   specific repo path. 小川 remains the default PA; external PA is a second
+   review / direction-check exception.
 9. RM merge stops when required medium / large artifacts are missing or empty.
 10. Large cuts need `cut-note.md` before closeout.
 11. Keep the file set minimal; do not fill templates just to satisfy ceremony.
