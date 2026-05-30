@@ -46,6 +46,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-i2-seven-choices-ai-import.mjs` | I2 七选五 AI 导题接入：splitter / analysis / package / route contracts | yes |
 | `verify-i3-cloze-ai-import.mjs` | I3 完形填空 AI 导题接入：splitter / package / route contracts | yes |
 | `verify-i5-writing-ai-import.mjs` | I5 应用文写作 + 读后续写 AI 导题接入：splitter / package / publish path contracts | yes |
+| `verify-relay-json-format.mjs` | Chat-completions request body sends response_format json_object on every provider (incl. openai-compatible gpt relay); `thinking` stays native-only | yes |
 
 ## PaperSurface and Paper Intelligence
 

@@ -349,6 +349,7 @@ function assertAllowedScope() {
     'scripts/verify-i2-seven-choices-ai-import.mjs',
     'scripts/verify-i3-cloze-ai-import.mjs',
     'scripts/verify-i4-grammar-fill-ai-import.mjs',
+    'scripts/verify-relay-json-format.mjs',
     'server/paper-import/publisher.mjs',
     'server/paper-import/storage.mjs',
     'server/paper-import/validator.mjs',
