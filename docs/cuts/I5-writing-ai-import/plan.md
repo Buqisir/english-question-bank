@@ -5,7 +5,7 @@ PM: 阿澈 (Opus, this session) · PO: 黄学伟
 `cut size: large; touches schema / data-contract / product-boundary / teaching-interpretation: yes`
 Last synced: 2026-05-30 after CR-lite round 2 (APPROVE) + PM compression.
 Open review items: 0 blockers. Remaining gates: browser QA + PO QA → RM.
-Non-blocking: 1 Open PO Decision (#1) + 2 Should Watch carried to follow-up.
+Non-blocking: 0 Open PO Decisions (#1 resolved 2026-05-30 → render in-view) + 2 Should Watch carried to follow-up.
 PA verdict: APPROVE WITH MUST FIX (3 Must Fix) — DEV round 1 closed them (`fd52a78`).
   PA report: [pa.md](pa.md).
 CR-lite round 1: APPROVE WITH MUST FIX (1) — caught DEV's false `verify-ci EXIT 0`.
@@ -214,9 +214,9 @@ succeeds, no DB CHECK error, writing groups in the asset; (4) click a writing QA
 (no `questionId`) → A4 prompt view loads, right panel shows no-active-question state, no
 console error; (5) open both application + continuation links; (6) parse one **real**
 exam DOCX (PO machine) → both writing tasks parse, ≥2 English starters.
-**QA note:** the writing view shows prompt/material text only — no answer box renders
-(it is export/print data). Not a bug unless Open PO Decision #1 resolves toward in-view
-rendering.
+**QA note:** the writing view currently shows prompt/material text only — no answer box
+renders. As of the PO Decision #1 resolution (2026-05-30, render in-view), this is now a
+**known gap to be closed by a future writing-render cut**, not the intended end state.
 
 ## Should Watch (PA — non-blocking; `Follow-up Gate` where noted)
 
@@ -236,14 +236,15 @@ rendering.
 - **First-paragraph label `标题`** (`writingPaperViewAdapter.ts:46`) — cosmetic; the
   first writing line is usually the scenario, not a title.
 
-## Open PO Decisions (1 — non-blocking for this land)
+## Open PO Decisions (0 — all resolved)
 
-1. **Answer region in the teacher A4 view.** `answerBox` / headings / `pageBreakHint`
-   are written into `content.blocks` but rendered by no current surface. Is the writing
-   answer region expected to render in the teacher workbench in a future cut, or is it
-   export/print-only data? Sets the future-cut boundary and the QA expectation for
-   Browser QA #4–5. **Does not block this land**; needed before any writing-render cut
-   starts. PO may decide now or defer.
+1. **Answer region in the teacher A4 view.** ✅ **RESOLVED 2026-05-30 (PO 黄学伟): render
+   in-view.** `answerBox` / headings / `pageBreakHint` (already written into
+   `content.blocks`) are expected to render in the teacher A4 workbench, as print-faithful
+   layout blocks (writing space / lines + headings + page-break hint) for WYSIWYG parity
+   with export/print — a lightweight layout block, not a diagnostic panel. This greenlights
+   a future **writing-render cut**; Browser QA #4–5 should then expect the answer region to
+   appear in-view rather than be absent.
 
 ## Cut flow & gates (Large)
 
