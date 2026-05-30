@@ -1,5 +1,8 @@
 # CR-Lite Template
 
+Reviewer follows `docs/agents/cr-persona.md` (reviewer ≠ implementer; the DEV
+report is input, not truth — re-run verify and read the assertions).
+
 Cut:
 PR:
 Reviewer:

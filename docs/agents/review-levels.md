@@ -9,7 +9,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 - **PO**: product owner / final acceptance.
 - **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. 小川 owns routine PA by default so PM and PA are separated; external high-reasoning PA is exception-only for large second-review passes, direction checks, or explicit owner request and must follow `docs/agents/pa-persona.md`.
 - **DEV**: implementation agent. 小川 is the default DEV.
-- **CR**: code reviewer. 小川 performs routine CR-lite; 阿澈 owns Big CR and medium / large final sanity gates.
+- **CR**: code reviewer. 小川 performs routine CR-lite; 阿澈 owns Big CR and medium / large final sanity gates. Both follow `docs/agents/cr-persona.md`. CR must run in a session that did not implement the code (reviewer ≠ implementer).
 - **QA**: product / browser / visual acceptance. 阿澈 does first QA for UI direction and user-visible quality unless assigned otherwise; the owner does final PO QA.
 - **RM**: release manager. 小川 owns small-cut RM / release execution; for medium / large cuts, 阿澈 runs the RM artifact gate and final sanity check before 小川 executes the merge.
 

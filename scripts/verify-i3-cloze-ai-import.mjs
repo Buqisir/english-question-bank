@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto'
-import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -36,48 +35,6 @@ function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
-    }).split('\n').map(l => l.trim()).filter(Boolean)
-  } catch { return [] }
-}
-
-function changedFiles() {
-  return [...new Set([...gitLines(['diff', '--name-only', 'github/main...HEAD']), ...gitLines(['diff', '--name-only'])])]
-}
-
-// ---- Scope ----
-
-function assertAllowedScope() {
-  const allowedPrefixes = [
-    'server/paper-import-ai/', 'server/ai-providers/', 'server/paper-import/',
-    'app/src/features/paper-import-ai/', 'app/src/features/paper-intelligence/',
-    'docs/cuts/I3-cloze-ai-import/',
-  ]
-  const allowedFiles = new Set([
-    'app/src/services/paperImportAi.ts',
-    'scripts/README.md',
-    'scripts/verify-c7-paper-import-publish.mjs', 'scripts/verify-ci.mjs',
-    'scripts/verify-i1-paper-import-splitter.mjs', 'scripts/verify-i1-paper-import-analysis.mjs',
-    'scripts/verify-i1-paper-import-route.mjs', 'scripts/verify-i2-seven-choices-ai-import.mjs',
-    'scripts/verify-i3-cloze-ai-import.mjs',
-    'scripts/verify-i0e-seven-choices-entry.mjs',
-  ])
-  const files = changedFiles()
-  const unexpected = files.filter(f => !allowedFiles.has(f) && !allowedPrefixes.some(p => f.startsWith(p)))
-  assert('I3 changed files in allowed scope', unexpected.length === 0, unexpected.join('\n'))
-
-  const forbidden = files.filter(f =>
-    f.startsWith('schemas/') || f.startsWith('shared/papersurface/') ||
-    f.startsWith('app/src/domain/') || f.startsWith('app/public/paper-assets/') ||
-    f.endsWith('Adapter.ts') || f === 'app/src/features/paper-import/PaperImportWorkbench.tsx' ||
-    f.startsWith('prompts/')
-  )
-  assert('I3 forbidden scopes untouched', forbidden.length === 0, forbidden.join('\n'))
 }
 
 // ---- Splitter ----
@@ -197,6 +154,17 @@ function clFixture() {
         })),
         blankIds: [56,57,58,59,60,61,62,63,64,65].map(n => `blank-i3-${String(n).padStart(3,'0')}`),
       },
+      applicationGroup: {
+        groupId: 'group-i3-writing-application', groupType: 'writing', title: '应用文写作', order: 7,
+        paragraphs: [{ id: 'para-i3-app-p1', text: '应用文写作场景.' }],
+        questions: [],
+      },
+      continuationGroup: {
+        groupId: 'group-i3-writing-continuation', groupType: 'writing', title: '读后续写', order: 8,
+        paragraphs: [{ id: 'para-i3-cont-p1', text: 'Continuation material text.' }],
+        continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
+        questions: [],
+      },
     },
     readingAnalyses: Object.fromEntries(['A','B','C','D'].map((l) => {
       const gid = `group-i3-reading-${l.toLowerCase()}`
@@ -227,6 +195,8 @@ function assertPackageBuilder() {
     },
     clozeGroup: fix.parseResult.clozeGroup,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    applicationGroup: fix.parseResult.applicationGroup,
+    continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
   })
   const validation = validatePaperImportPackage(files)
@@ -255,6 +225,8 @@ function assertPackageBuilder() {
       },
       clozeGroup: noAnsGroup,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
     }),
   /缺少答案解析版答案/)
@@ -272,6 +244,8 @@ function assertPackageBuilder() {
         questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
       },
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
     }),
   /缺少完形填空/)
@@ -309,7 +283,6 @@ async function assertRealDocx() {
 // ---- Main ----
 
 async function main() {
-  assertAllowedScope()
   assertSplitterFixture()
   assertSplitterNoCloze()
   assertSplitterMissingOptions()

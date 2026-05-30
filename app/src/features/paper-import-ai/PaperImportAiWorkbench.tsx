@@ -390,6 +390,11 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const gfMissingAnswers = gfGroup ? gfGroup.questions.filter((q) => !q.answerKey).length : 0
   const gfPromptCount = gfGroup ? gfGroup.questions.filter((q) => q.prompt).length : 0
   const gfNoPromptCount = gfGroup ? gfGroup.questions.filter((q) => !q.prompt).length : 0
+  const appGroup = result?.applicationGroup || null
+  const appError = result?.applicationError || null
+  const contGroup = result?.continuationGroup || null
+  const contError = result?.continuationError || null
+  const contStartersOk = contGroup ? (contGroup.continuationStarters || []).length >= 2 : true
   const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
@@ -397,6 +402,8 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const scReady = Boolean(scGroup) && scAnalyzed && scHasAnswers
   const clReady = Boolean(clGroup) && clHasAnswers
   const gfReady = Boolean(gfGroup) && gfHasAnswers
+  const appReady = Boolean(appGroup)
+  const contReady = Boolean(contGroup) && contStartersOk
   const canPublish = Boolean(
     file &&
     result &&
@@ -407,6 +414,8 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     scReady &&
     clReady &&
     gfReady &&
+    appReady &&
+    contReady &&
     answerConflicts.length === 0 &&
     publishState.status !== 'publishing',
   )
@@ -426,6 +435,8 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         sevenChoicesAnalysis: scAnalysisState.result?.analysis || null,
         clozeGroup: result.clozeGroup || null,
         grammarFillGroup: result.grammarFillGroup || null,
+        applicationGroup: result.applicationGroup || null,
+        continuationGroup: result.continuationGroup || null,
       })
       setPublishState({ status: 'done', message: '已保存为正式试卷资产。', result: published })
     } catch (error) {
@@ -596,6 +607,14 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
               <CheckCircle2 size={15} aria-hidden="true" />
               {gfGroup ? '语法填空就绪' : '缺语法填空'}
             </p>
+            <p className={appReady ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              {appGroup ? '应用文就绪' : '缺应用文写作'}
+            </p>
+            <p className={contReady ? 'is-ok' : ''}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              {contGroup ? '读后续写就绪' : '缺读后续写'}
+            </p>
           </div>
           {missingReadingLabels.length > 0 && result ? (
             <p className="pi-ai-warning">缺少 Reading {missingReadingLabels.join(' / ')}，暂不保存。</p>
@@ -641,6 +660,21 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           ) : null}
           {gfError ? (
             <p className="pi-ai-error">语法填空解析失败：{gfError.reason}</p>
+          ) : null}
+          {!appGroup && result ? (
+            <p className="pi-ai-warning">缺少应用文写作，暂不保存。</p>
+          ) : null}
+          {appError ? (
+            <p className="pi-ai-error">应用文解析失败：{appError.reason}</p>
+          ) : null}
+          {!contGroup && result ? (
+            <p className="pi-ai-warning">缺少读后续写，暂不保存。</p>
+          ) : null}
+          {contGroup && !contStartersOk ? (
+            <p className="pi-ai-warning">读后续写缺少段落开头语，暂不保存。</p>
+          ) : null}
+          {contError ? (
+            <p className="pi-ai-error">读后续写解析失败：{contError.reason}</p>
           ) : null}
           <button className="primary-button pi-ai-publish-button" type="button" disabled={!canPublish} onClick={() => void handlePublish()}>
             {publishState.status === 'publishing' ? <Loader2 size={16} aria-hidden="true" /> : <Save size={16} aria-hidden="true" />}

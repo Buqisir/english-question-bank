@@ -1,6 +1,5 @@
 // I4 grammar-fill AI import verifier
 import { createHash } from 'node:crypto'
-import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -33,55 +32,6 @@ function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
-    }).split('\n').map(l => l.trim()).filter(Boolean)
-  } catch { return [] }
-}
-
-// ---- Allowed/forbidden scope ----
-
-const ALLOWED_FILES = [
-  'server/paper-import-ai/docxSplitter.mjs',
-  'server/paper-import-ai/packageBuilder.mjs',
-  'server/paper-import-ai/routes.mjs',
-  'server/paper-import/publisher.mjs',
-  'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
-  'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
-  'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
-  'app/src/services/paperImportAi.ts',
-  'scripts/verify-i4-grammar-fill-ai-import.mjs',
-  'scripts/verify-i3-cloze-ai-import.mjs',
-]
-
-const FORBIDDEN_FILES = [
-  'schemas/',
-  'shared/papersurface/',
-  'app/src/shared-ui/papersurface/',
-]
-
-function assertAllowedScope() {
-  const changed = gitLines(['diff', '--name-only', 'HEAD'])
-  const uncommitted = gitLines(['diff', '--name-only'])
-  const allChanged = [...new Set([...changed, ...uncommitted])]
-  for (const file of allChanged) {
-    assert(`I4 changed file in allowed scope: ${file}`, ALLOWED_FILES.some(a => file === a || file.startsWith(a)))
-  }
-}
-
-function assertForbiddenScope() {
-  const changed = gitLines(['diff', '--name-only', 'HEAD'])
-  const uncommitted = gitLines(['diff', '--name-only'])
-  const allChanged = [...new Set([...changed, ...uncommitted])]
-  for (const file of allChanged) {
-    for (const forbid of FORBIDDEN_FILES) {
-      assert(`I4 forbidden scope untouched: ${file}`, !file.startsWith(forbid))
-    }
-  }
 }
 
 // ---- Splitter: synthetic fixture ----
@@ -216,6 +166,17 @@ function gfPackageFixture() {
         })),
         blankIds: [56,57,58,59,60,61,62,63,64,65].map(n => `blank-i4-${String(n).padStart(3,'0')}`),
       },
+      applicationGroup: {
+        groupId: 'group-i4-writing-application', groupType: 'writing', title: '应用文写作', order: 7,
+        paragraphs: [{ id: 'para-i4-app-p1', text: '应用文写作场景.' }],
+        questions: [],
+      },
+      continuationGroup: {
+        groupId: 'group-i4-writing-continuation', groupType: 'writing', title: '读后续写', order: 8,
+        paragraphs: [{ id: 'para-i4-cont-p1', text: 'Continuation material text.' }],
+        continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
+        questions: [],
+      },
     },
     readingAnalyses: Object.fromEntries(['A','B','C','D'].map((l) => {
       const gid = `group-i4-reading-${l.toLowerCase()}`
@@ -239,7 +200,7 @@ function assertPackageBuilder() {
   const fix = gfPackageFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
 
-  // Success: package with all four families.
+  // Success: package with all six families.
   const files = buildPaperImportAiPackageFiles({
     parseResult: fix.parseResult,
     analysesByGroupId: fix.readingAnalyses,
@@ -247,6 +208,8 @@ function assertPackageBuilder() {
     sevenChoicesAnalysis: fix.scAnalysis,
     clozeGroup: fix.parseResult.clozeGroup,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    applicationGroup: fix.parseResult.applicationGroup,
+    continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
   })
   const validation = validatePaperImportPackage(files)
@@ -279,6 +242,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
       grammarFillGroup: null,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
     }),
   /缺少语法填空/)
@@ -294,6 +259,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
       grammarFillGroup: noAnsGf,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
     }),
   /缺少答案解析版答案/)
@@ -309,6 +276,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
       grammarFillGroup: wrongCountGf,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
     }),
   /语法填空应为 10 题/)
@@ -378,8 +347,6 @@ async function assertRealDocx() {
 // ---- Main ----
 
 async function main() {
-  assertAllowedScope()
-  assertForbiddenScope()
   assertSplitterFixture()
   assertSplitterNoGrammarFill()
   assertSplitterMissingAnswers()

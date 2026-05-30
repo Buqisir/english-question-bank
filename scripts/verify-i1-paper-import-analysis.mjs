@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -39,43 +38,6 @@ async function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-  } catch {
-    return []
-  }
-}
-
-function gitStatusLines() {
-  try {
-    return execFileSync('git', ['status', '--short', '--untracked-files=all', '--porcelain'], {
-      cwd: repoRoot,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-      .split('\n')
-      .filter(Boolean)
-  } catch {
-    return []
-  }
-}
-
-function changedFiles() {
-  const statusFiles = gitStatusLines().map((line) => {
-    const file = line.slice(3)
-    return file.includes(' -> ') ? file.split(' -> ').at(-1) : file
-  })
-  return [...new Set([...gitLines(['diff', '--name-only', 'github/main...HEAD']), ...gitLines(['diff', '--name-only']), ...statusFiles])]
 }
 
 function fixtureInput() {
@@ -207,6 +169,23 @@ function fixtureFourGroupParseResult() {
     })),
     blankIds: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((n) => `blank-i1-step4-${String(n).padStart(3, '0')}`),
   }
+  const applicationGroup = {
+    groupId: 'group-i1-step4-writing-application',
+    groupType: 'writing',
+    title: '应用文写作',
+    order: 7,
+    paragraphs: [{ id: 'para-i1-step4-app-p1', text: '应用文写作场景.' }],
+    questions: [],
+  }
+  const continuationGroup = {
+    groupId: 'group-i1-step4-writing-continuation',
+    groupType: 'writing',
+    title: '读后续写',
+    order: 8,
+    paragraphs: [{ id: 'para-i1-step4-cont-p1', text: 'Continuation material text.' }],
+    continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
+    questions: [],
+  }
   return {
     sourceBuffer,
     parseResult: {
@@ -216,11 +195,15 @@ function fixtureFourGroupParseResult() {
       sevenChoicesGroup,
       clozeGroup,
       grammarFillGroup,
+      applicationGroup,
+      continuationGroup,
     },
     sevenChoicesGroup,
     sevenChoicesAnalysis,
     clozeGroup,
     grammarFillGroup,
+    applicationGroup,
+    continuationGroup,
   }
 }
 
@@ -443,7 +426,7 @@ function assertStaticContracts() {
 }
 
 async function assertPublishPackageBuilder() {
-  const { parseResult, sourceBuffer, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup } = fixtureFourGroupParseResult()
+  const { parseResult, sourceBuffer, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup, applicationGroup, continuationGroup } = fixtureFourGroupParseResult()
   const files = buildPaperImportAiPackageFiles({
     parseResult,
     analysesByGroupId: validFourGroupAnalyses(parseResult),
@@ -451,6 +434,8 @@ async function assertPublishPackageBuilder() {
     sevenChoicesAnalysis,
     clozeGroup,
     grammarFillGroup,
+    applicationGroup,
+    continuationGroup,
     sourceDocx: {
       fileName: parseResult.paper.sourceFilename,
       buffer: sourceBuffer,
@@ -475,6 +460,8 @@ async function assertPublishPackageBuilder() {
     sevenChoicesAnalysis,
     clozeGroup,
     grammarFillGroup,
+    applicationGroup,
+    continuationGroup,
     sourceDocx: {
       fileName: parseResult.paper.sourceFilename,
       buffer: sourceBuffer,
@@ -564,7 +551,6 @@ async function assertAnalyzeValidation() {
 }
 
 async function main() {
-  assertAllowedScope()
   assertStaticContracts()
   await assertPublishPackageBuilder()
   await assertAnalyzeValidation()

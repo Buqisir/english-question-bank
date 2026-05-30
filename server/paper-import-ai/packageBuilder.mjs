@@ -181,7 +181,7 @@ function normalizeGrammarFillText(text) {
     .trim()
 }
 
-export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup, sourceDocx }) {
+export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup, applicationGroup, continuationGroup, sourceDocx }) {
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
@@ -202,6 +202,17 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   }
   if (!grammarFillGroup) {
     throw issue('grammar_fill_group_missing', '缺少语法填空，不能发布。')
+  }
+
+  // Enforce six-family completeness for standard whole-paper publish.
+  if (!applicationGroup) {
+    throw issue('application_writing_missing', '缺少应用文写作，不能发布。')
+  }
+  if (!continuationGroup) {
+    throw issue('continuation_writing_missing', '缺少读后续写，不能发布。')
+  }
+  if (continuationGroup && (!continuationGroup.continuationStarters || continuationGroup.continuationStarters.length < 2)) {
+    throw issue('continuation_starters_missing', '读后续写缺少段落开头语，不能发布。')
   }
 
   const paperId = parseResult.paper.paperId
@@ -515,6 +526,120 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   blocks.push({ type: 'instruction', text: '阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。' })
   blocks.push({ type: 'group', groupId: grammarFillGroup.groupId })
 
+  // --- Writing groups ---
+  const writingTasks = {}
+  const writingPartId = `part-${examCodeFromPaperId(paperId)}-writing`
+
+  if (applicationGroup) {
+    const appTaskId = `wt-${examCodeFromPaperId(paperId)}-application`
+    applicationGroup.writingTaskId = appTaskId
+    contentGroups[applicationGroup.groupId] = {
+      groupId: applicationGroup.groupId,
+      groupType: 'writing',
+      title: applicationGroup.title,
+      questionIds: [],
+      writingTaskId: appTaskId,
+      passage: {
+        paragraphs: (applicationGroup.paragraphs || []).map((p) => ({
+          paragraphId: p.id,
+          text: p.text,
+        })),
+      },
+    }
+
+    writingTasks[appTaskId] = {
+      writingTaskId: appTaskId,
+      groupId: applicationGroup.groupId,
+      taskType: 'application',
+      title: '应用文写作',
+      instruction: (applicationGroup.paragraphs || []).map((p) => p.text).join('\n'),
+      wordCountTarget: 80,
+    }
+
+    const appSectionId = `section-${examCodeFromPaperId(paperId)}-writing-application`
+    layoutTree.parts.push({
+      partId: writingPartId,
+      title: '第四部分 写作',
+      sections: [{
+        sectionId: appSectionId,
+        title: '第一节 应用文写作',
+        groups: [{ groupId: applicationGroup.groupId, title: applicationGroup.title }],
+      }],
+    })
+
+    blocks.push({ type: 'pageBreakHint' })
+    blocks.push({ type: 'partHeading', partId: writingPartId, text: '第四部分 写作（共两节，满分40分）' })
+    blocks.push({ type: 'sectionHeading', sectionId: appSectionId, text: '第一节（满分15分）' })
+    blocks.push({ type: 'group', groupId: applicationGroup.groupId })
+    blocks.push({ type: 'instruction', text: '注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。' })
+    blocks.push({ type: 'answerBox', writingTaskId: appTaskId, label: '应用文写作答题区' })
+  }
+
+  if (continuationGroup) {
+    const contTaskId = `wt-${examCodeFromPaperId(paperId)}-continuation`
+    continuationGroup.writingTaskId = contTaskId
+    contentGroups[continuationGroup.groupId] = {
+      groupId: continuationGroup.groupId,
+      groupType: 'writing',
+      title: continuationGroup.title,
+      questionIds: [],
+      writingTaskId: contTaskId,
+      passage: {
+        paragraphs: (continuationGroup.paragraphs || []).map((p) => ({
+          paragraphId: p.id,
+          text: p.text,
+        })),
+      },
+    }
+
+    const starters = continuationGroup.continuationStarters || []
+    const starterText = starters.length >= 2
+      ? `Paragraph 1: ${starters[0]}\n\nParagraph 2: ${starters[1]}`
+      : ''
+
+    writingTasks[contTaskId] = {
+      writingTaskId: contTaskId,
+      groupId: continuationGroup.groupId,
+      taskType: 'continuation',
+      title: '读后续写',
+      instruction: (continuationGroup.paragraphs || []).map((p) => p.text).join('\n'),
+      continuationStarters: starters,
+      materialText: (continuationGroup.paragraphs || []).map((p) => p.text).join('\n\n'),
+      wordCountTarget: 150,
+    }
+
+    const contSectionId = `section-${examCodeFromPaperId(paperId)}-writing-continuation`
+    const writingPart = layoutTree.parts.find((p) => p.partId === writingPartId)
+    if (writingPart) {
+      writingPart.sections.push({
+        sectionId: contSectionId,
+        title: '第二节 读后续写',
+        groups: [{ groupId: continuationGroup.groupId, title: continuationGroup.title }],
+      })
+    } else {
+      layoutTree.parts.push({
+        partId: writingPartId,
+        title: '第四部分 写作',
+        sections: [{
+          sectionId: contSectionId,
+          title: '第二节 读后续写',
+          groups: [{ groupId: continuationGroup.groupId, title: continuationGroup.title }],
+        }],
+      })
+      blocks.push({ type: 'pageBreakHint' })
+      blocks.push({ type: 'partHeading', partId: writingPartId, text: '第四部分 写作（共两节，满分40分）' })
+    }
+
+    blocks.push({ type: 'sectionHeading', sectionId: contSectionId, text: '第二节（满分25分）' })
+    blocks.push({ type: 'instruction', text: '阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。' })
+    blocks.push({ type: 'group', groupId: continuationGroup.groupId })
+    blocks.push({ type: 'instruction', text: '注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。' })
+    if (starterText) {
+      blocks.push({ type: 'instruction', text: starterText })
+    }
+    blocks.push({ type: 'answerBox', writingTaskId: contTaskId, label: '读后续写答题区' })
+  }
+
   const readingAnalysis = mergePaperImportAiAnalyses(parseResult, analysesByGroupId)
   const paperAsset = {
     schemaVersion: 'paper-asset-v1',
@@ -543,6 +668,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
       groups: contentGroups,
       questions,
       ...(Object.keys(blanks).length > 0 ? { blanks } : {}),
+      ...(Object.keys(writingTasks).length > 0 ? { writingTasks } : {}),
     },
     answerKey: { answers: answerEntries },
     analysis: {
@@ -595,6 +721,26 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     summary: '语法填空',
     tags: ['语法填空'],
     displayTitleOverride: grammarFillGroup.title,
+  }
+
+  if (applicationGroup) {
+    importMetaGroups[applicationGroup.groupId] = {
+      groupId: applicationGroup.groupId,
+      difficulty: '中',
+      summary: '应用文写作',
+      tags: ['应用文写作'],
+      displayTitleOverride: applicationGroup.title,
+    }
+  }
+
+  if (continuationGroup) {
+    importMetaGroups[continuationGroup.groupId] = {
+      groupId: continuationGroup.groupId,
+      difficulty: '中',
+      summary: '读后续写',
+      tags: ['读后续写'],
+      displayTitleOverride: continuationGroup.title,
+    }
   }
 
   const importMeta = {
