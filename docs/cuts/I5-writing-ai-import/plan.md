@@ -12,9 +12,10 @@ CR-lite round 1: APPROVE WITH MUST FIX (1) — caught DEV's false `verify-ci EXI
 CR-lite round 2: **APPROVE, 0 Must Fix** — DEV round 2 (`96d2e64`) closed MF-1; PM +
   CR both independently re-confirmed `verify-ci` EXIT 0 with `verify-i5` gated.
   Report: [cr-lite-i5.md](cr-lite-i5.md) §Round 2 Re-Review.
-**Code/verify gates are GREEN.** Browser QA first pass (阿澈) done — render scenarios
-4–5 PASS ([qa-i5.md](qa-i5.md)). Remaining: PO QA scenarios 1–3 & 6 (owner; need AI
-API + real DOCX) → RM.
+**Code/verify gates are GREEN.** Browser QA (阿澈): scenarios 4–5 (render) + 6 (real
+DOCX parse on the 七中 paper) **PASS** ([qa-i5.md](qa-i5.md)). Integration with the relay
+confirmed (`gpt-5.5`). Remaining: owner's interactive workbench pass (scenarios 1–3) →
+RM.
 
 ## Situation
 

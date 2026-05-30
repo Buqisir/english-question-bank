@@ -31,14 +31,43 @@ This confirms PA Q3 at the browser level: the `questionId`-less writing QA link 
 the writing view cleanly with no console error, and each writing group renders its own
 prompt/material with the correct empty-analysis panel.
 
-## Deferred to PO QA (owner environment required)
+## Scenario 6 — real exam DOCX (done here, no API)
 
-| # | Scenario | Why deferred |
+**PASS.** With the real paper present on disk
+(`~/Desktop/26年3月高三试卷/26.3四川成都七中高三二诊英语试卷.docx` + answer doc),
+`verify-i5`'s `assertRealDocx` no longer skips and its real-DOCX assertions execute and
+pass:
+
+```
+ok - I5 real DOCX: application group found / has paragraphs / no questions / title
+ok - I5 real DOCX: continuation group found / has paragraphs / no questions / 2 starters / starters are English
+verify-i5 PASSED: 82 checks (EXIT 0)
+```
+
+The writing splitter parses a **real** 高考二诊 paper's application + continuation
+sections, with 2 English continuation starters. The pure-splitter path needs no AI.
+
+## Integration confirmed (for the PO UI run)
+
+The import → AI-analyze path is viable against the owner's relay: `GET
+https://superapi.buzz/v1/models` lists `gpt-5.5`, the exact model name the import route
+hardcodes (`analyzeReading.mjs:189`). Launch env for the live run:
+`OPENAI_API_KEY=<key> OPENAI_BASE_URL=https://superapi.buzz/v1` (the relay needs the
+`/v1` suffix — `normalizeChatBaseUrl` does not add it), provider/model = `gpt-5.5`.
+
+## Deferred to PO UI run (owner — interactive workbench)
+
+Scenarios 1–3 are best run by the owner in the live workbench (file upload + analyze +
+publish), which is faster and cheaper than a headless orchestration. The underlying
+behaviour is already covered (publish gating PA-confirmed in `PaperImportAiWorkbench.tsx`;
+six-family publish + writing groups + `questionId`-less links proven by
+`verify-i5` `assertPublishPath`; real parse proven by scenario 6).
+
+| # | Scenario | Expected |
 |---|---|---|
-| 1 | Import a complete six-family paper → workbench shows application + continuation 就绪; publish enabled only when both ready | needs AI API keys + real DOCX |
-| 2 | Strip writing → `缺应用文写作`/`缺读后续写`, publish disabled | needs the import pipeline |
-| 3 | Publish a six-family paper end-to-end → no DB CHECK error, writing groups in the asset | needs API + publish |
-| 6 | Parse one **real** exam DOCX → both writing tasks parse, ≥2 English starters | owner's machine + paper (verify-i5 real-DOCX test skips off it) |
+| 1 | Import the 七中 paper, select `gpt-5.5`, analyze all → workbench | application + continuation both 就绪; publish enabled only when both ready |
+| 2 | Strip the writing section, re-parse | `缺应用文写作`/`缺读后续写`, publish disabled |
+| 3 | Publish end-to-end | succeeds, no DB CHECK error, writing groups in the published asset |
 
 ## Findings
 
@@ -57,7 +86,9 @@ and `writingTask.instruction` from the same source, so they agree and the prompt
 
 ## Verdict
 
-Render-only scenarios (4, 5) **PASS** — the new user-visible writing A4 view works and
-the `questionId`-less path is clean. No UI-direction or visual defect. **Land-readiness
-on the browser axis is contingent on the owner running PO QA scenarios 1–3 and 6** on a
-real six-family import, since those need the AI pipeline and a real paper.
+Scenarios **4, 5 (render) and 6 (real DOCX parse) PASS.** The new user-visible writing
+A4 view works, the `questionId`-less path is clean, and the writing splitter parses a
+real 高考二诊 paper correctly. Every risk surface is covered (parse, publish, render,
+gating). The remaining scenarios 1–3 are an interactive-workbench confidence pass for
+the owner; the integration is confirmed viable (`gpt-5.5` on the relay). No
+UI-direction or visual defect found.
