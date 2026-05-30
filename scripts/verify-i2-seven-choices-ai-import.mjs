@@ -452,6 +452,36 @@ function scFixtureParseResult() {
       })),
       blankIds: [36, 37, 38, 39, 40].map((no) => `blank-i2-package-${String(no).padStart(3, '0')}`),
     },
+    clozeGroup: {
+      groupId: 'group-i2-package-cloze',
+      groupType: 'cloze',
+      title: '完形填空',
+      order: 5,
+      paragraphs: [{ id: 'para-i2-cloze-p1', text: 'Cloze passage.' }],
+      questions: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55].map((no) => ({
+        id: `q-i2-package-${String(no).padStart(3, '0')}`,
+        stem: String(no),
+        answerKey: 'B',
+        blankId: `blank-i2-package-${String(no).padStart(3, '0')}`,
+        options: { A: 'a', B: 'b', C: 'c', D: 'd' },
+      })),
+      blankIds: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55].map((no) => `blank-i2-package-${String(no).padStart(3, '0')}`),
+    },
+    grammarFillGroup: {
+      groupId: 'group-i2-package-grammar-fill',
+      groupType: 'grammarFill',
+      title: '语法填空',
+      order: 6,
+      paragraphs: [{ id: 'para-i2-gf-p1', text: 'Grammar fill passage with  56  and  57  .' }],
+      questions: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((no) => ({
+        id: `q-i2-package-${String(no).padStart(3, '0')}`,
+        stem: String(no),
+        answerKey: 'word',
+        blankId: `blank-i2-package-${String(no).padStart(3, '0')}`,
+        prompt: no === 56 ? 'be' : null,
+      })),
+      blankIds: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((no) => `blank-i2-package-${String(no).padStart(3, '0')}`),
+    },
   }
 }
 
@@ -524,6 +554,8 @@ function assertPackageBuilder() {
     analysesByGroupId: scFixtureReadingAnalyses(parseResult),
     sevenChoicesGroup: parseResult.sevenChoicesGroup,
     sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
+    clozeGroup: parseResult.clozeGroup,
+    grammarFillGroup: parseResult.grammarFillGroup,
     sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
   })
   assert('I2 package includes seven-choices analysis file', files.some((f) => f.fileName === 'seven-choices-analysis-v1.json'))
@@ -547,6 +579,8 @@ function assertPackageBuilder() {
       analysesByGroupId: scFixtureReadingAnalyses(parseResult),
       sevenChoicesGroup: parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: null,
+      clozeGroup: parseResult.clozeGroup,
+      grammarFillGroup: parseResult.grammarFillGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /缺少 AI 解析/)
@@ -560,6 +594,8 @@ function assertPackageBuilder() {
       analysesByGroupId: scFixtureReadingAnalyses(parseResult),
       sevenChoicesGroup: noAnswerGroup,
       sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
+      clozeGroup: parseResult.clozeGroup,
+      grammarFillGroup: parseResult.grammarFillGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /缺少答案解析版答案/)
@@ -573,17 +609,22 @@ function assertPackageBuilder() {
       analysesByGroupId: scFixtureReadingAnalyses(parseResult),
       sevenChoicesGroup: parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: conflictAnalysis,
+      clozeGroup: parseResult.clozeGroup,
+      grammarFillGroup: parseResult.grammarFillGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /答案冲突/)
 
-  // No七选五: package builds without seven-choices file.
-  const readingOnlyFiles = buildPaperImportAiPackageFiles({
-    parseResult: { ...parseResult, sevenChoicesGroup: null },
-    analysesByGroupId: scFixtureReadingAnalyses(parseResult),
-    sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
-  })
-  assert('I2 package without七选五 does not include sc analysis', !readingOnlyFiles.some((f) => f.fileName === 'seven-choices-analysis-v1.json'))
+  // Four-family completeness: an incomplete paper (reading only, no seven-choices) is rejected.
+  assertRejects('I2 rejects publish without seven-choices (four-family completeness)', () =>
+    buildPaperImportAiPackageFiles({
+      parseResult: { ...parseResult, sevenChoicesGroup: null },
+      analysesByGroupId: scFixtureReadingAnalyses(parseResult),
+      clozeGroup: parseResult.clozeGroup,
+      grammarFillGroup: parseResult.grammarFillGroup,
+      sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
+    }),
+  /缺少七选五/)
 }
 
 // ---- Route contract ----
