@@ -70,8 +70,8 @@
   flex-direction: column;
 }
 
-/* Given lines inside the box: continuation paragraph starters, or an application
-   given salutation/opening (givenTop). Each reserves blank writing space below. */
+/* Default (continuation starters / a given title): each given line reserves
+   blank writing space below it. */
 .pi-writing-answer-given {
   margin: 0;
   min-height: 7rem;
@@ -83,5 +83,16 @@
 }
 
 .pi-writing-answer-given--tight {
+  min-height: 0;
+}
+
+/* Letter shape (has a signature): keep the salutation + opening lines TIGHT at
+   the top like a real letter, push the signature to the bottom, and let the box
+   height itself be the writing space between them. */
+.pi-writing-answer-box--letter {
+  min-height: 22rem;
+}
+
+.pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
   min-height: 0;
 }
