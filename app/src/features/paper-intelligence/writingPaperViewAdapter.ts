@@ -11,12 +11,17 @@ import type {
   PassageStructure,
 } from './paperIntelligenceTypes.ts'
 
+export type { WritingChromeBlock, WritingPageModel } from './writingPageModel'
+import { buildWritingPageModel } from './writingPageModel.mjs'
+import type { WritingPageModel } from './writingPageModel'
+
 export type WritingPaperViewModel = {
   report: PaperIntelligenceReport
   passageStructures: Record<string, PassageStructure>
   surfaceData: PaperSurfaceData
   analysisByQuestionId: Record<string, null>
   defaultQuestionId: string | null
+  pageModel: WritingPageModel
 }
 
 const ZERO_LOAD_BAR: LoadBar = { score: 0, label: '', shortReason: '', evidenceItems: [] }
@@ -37,6 +42,8 @@ export function buildWritingPaperView(input: {
   const task = writingTaskId ? asset.content.writingTasks?.[writingTaskId] : null
   const taskType = task?.taskType
   const section = taskType === 'continuation' ? '读后续写' : '应用文写作'
+
+  const pageModel = buildWritingPageModel(asset, group, task ?? null)
 
   const textMap = buildWritingTextMap(asset, group, section)
   const passageStructure: PassageStructure = {
@@ -91,6 +98,7 @@ export function buildWritingPaperView(input: {
     },
     analysisByQuestionId: {},
     defaultQuestionId: null,
+    pageModel,
   }
 }
 
