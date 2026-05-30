@@ -21,8 +21,12 @@ Yours, / Li Hua`，或某卷给定标题 `Welcome to Join…`）被混在情境�
 
 ## Locked Product Decisions (PM grill, PO 黄学伟 全过 2026-05-31)
 
-- **检测规则**：应用文内容里**末尾连续的"整行无 CJK 字符"的行 = 给定骨架**；其余（中文情境/要求）=
-  情境提示。行内英文夹注（如 `(Open Day)`）不影响，因为按"整行无 CJK"判，不是行内。
+- **检测规则（含 MF1 守卫）**：候选 = 应用文内容**末尾连续的"整行无 CJK 字符"的行**；但**只有命中下列
+  正向信号之一**才认定为给定骨架，否则 **fail-safe：不抓、整段留在情境、空框**（宁可不抓也不删错）：
+  ① 候选首行是称呼 `Dear` / `To` / `Hi` / `Hello`（行首、大小写不敏感）；**或**
+  ② 候选里含结束语词（见下方词表）；**或**
+  ③ 候选恰为**单独一行的标题型**（1 行、无句末标点 `.`/`!`/`?`）。
+  行内英文夹注（如 `(Open Day)`）不影响——按"整行无 CJK"判，夹注在中文行内不算候选。
 - **上下切分**：在给定骨架里，**结束语**行及其后 = `bottom`，之前 = `top`。结束语词表：
   `Yours` / `Sincerely` / `Best` / `Best wishes` / `Regards` / `Yours sincerely` /
   `Yours faithfully` / `Cheers`（大小写不敏感，行首匹配）。无结束语（标题型）→ 全 `top`、`bottom` 空。
@@ -43,10 +47,13 @@ Yours, / Li Hua`，或某卷给定标题 `Welcome to Join…`）被混在情境�
 ### Step 1 — splitter：切出 applicationGiven
 
 - `server/paper-import-ai/docxSplitter.mjs` `extractApplicationParagraphs`：返回 `{ paragraphs(情境),
-  applicationGiven: {top, bottom} | null, error }`。按 Locked 规则切末尾纯英文行、再按结束语分上下。
-- `applicationGroup` 带上 `applicationGiven`。
-- verify：3 形态 fixture——信件骨架（重庆型，top+bottom）、标题型（仅 top）、无给定（空框、字段不设）；
-  并断言情境段落已剔除给定行、行内英文夹注不误判。
+  applicationGiven: {top, bottom} | null, error }`。按 Locked「检测规则（含 MF1 守卫）」切候选末尾纯英文
+  行——命中正向信号才抓、否则 fail-safe 不抓——再按结束语词表分 top/bottom。
+- `applicationGroup` 带上 `applicationGiven`（无给定时为 null/不设）。
+- verify（MF2，5 形态 + 守卫）：① 信件骨架（重庆型 top+bottom）；② 标题型（仅 top）；③ 无给定（空框、
+  字段不设）；④ **负向守卫**：情境合法地以一行英文结尾（无称呼/无结束语/非标题）→ **不被吃**、留在情境；
+  ⑤ 称呼型但**无结束语**的信件（仅 `Dear …` 开头）→ 仍按守卫①命中、全 top。并断言：命中时情境段落已
+  剔除给定行、行内英文夹注（`(Open Day)`）不误判。
 
 ### Step 2 — 数据契约 + packageBuilder
 
@@ -106,9 +113,13 @@ Yours, / Li Hua`，或某卷给定标题 `Welcome to Join…`）被混在情境�
 
 ## PA Follow-Up Decisions
 
-PA 关注点：数据契约字段形状是否合理、"末尾纯英文行 + 结束语切分"启发式的失败模式（例如情境含整行
-英文、签名跨多行、缺结束语的信件）、续写模型迁移是否无回归。PA 返回 Must Fix 后补本表。
+PA verdict: **APPROVE WITH MUST FIX** (3 Must Fix)。PA 逐行对重庆卷验证启发式可切出正确 top/bottom，
+并查清数据契约安全（`paper-asset-v1.schema.json` 的 `writingTasks` 是裸 `object`、`stripUnknownFields`
+不递归，新字段不会被剥；validator 只跑上传的分析包、不跑 packageBuilder 直接产出的 asset）——**不强制
+改 schema**，plan 的"可选字段安全"措辞成立。
 
 | PA item | `pa.md` required disposition | `plan.md` handling | Status |
 | --- | --- | --- | --- |
-| — | — | — | — |
+| `MF1` 裸"末尾纯英文=给定"会误删情境合法英文行 | 加正向信号 + fail-safe 默认不抓 | 已折进 Locked「检测规则（含 MF1 守卫）」：称呼/结束语/标题型三选一，否则不抓留情境（PO 全过 2026-05-31） | RESOLVED |
+| `MF2` 3 fixture 只证 happy path | 加负向守卫 + 称呼型/无结束语信件 fixture | Step 1 verify 扩为：信件型、标题型、无给定(空框)、**负向守卫(情境合法尾英文行不被吃)**、**称呼型/无结束语信件**；并断言情境剔除 + 夹注不误判 | RESOLVED |
+| `MF3` 续写迁移会让 verify-i6 旧 `givenLines` 断言失效 | 重断言 `givenTop===starters & givenBottom===[]`、保留 starter 折叠、`.d.ts`+`.d.mts` 同步、禁续写走 applicationGiven | Step 3 + verify：续写迁移到 `givenTop`、`givenBottom=[]`、视觉不变；同步两份声明；续写**不**经 `applicationGiven` | RESOLVED |
