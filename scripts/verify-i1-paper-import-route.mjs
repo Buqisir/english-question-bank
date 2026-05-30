@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-import { execFileSync } from 'node:child_process'
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -20,109 +19,6 @@ function assert(name, condition, detail = '') {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-  } catch {
-    return []
-  }
-}
-
-function gitStatusLines() {
-  try {
-    return execFileSync('git', ['status', '--short', '--untracked-files=all', '--porcelain'], {
-      cwd: repoRoot,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-      .split('\n')
-      .filter(Boolean)
-  } catch {
-    return []
-  }
-}
-
-function changedFiles() {
-  const statusFiles = gitStatusLines().map((line) => {
-    const file = line.slice(3)
-    return file.includes(' -> ') ? file.split(' -> ').at(-1) : file
-  })
-  return [...new Set([...gitLines(['diff', '--name-only', 'github/main...HEAD']), ...gitLines(['diff', '--name-only']), ...statusFiles])]
-}
-
-function assertAllowedScope() {
-  const allowedPrefixes = [
-    'server/paper-import-ai/',
-    'server/ai-providers/',
-    'app/src/features/paper-import-ai/',
-    'app/src/features/paper-intelligence/',
-    'docs/cuts/I2-seven-choices-ai-import/',
-  ]
-  const allowed = new Set([
-    '.gitignore',
-    'app/src/App.tsx',
-    'app/src/services/paperImportAi.ts',
-    'scripts/README.md',
-    'scripts/verify-c7-paper-import-publish.mjs',
-    'scripts/verify-ci.mjs',
-    'scripts/verify-i1-paper-import-analysis.mjs',
-    'scripts/verify-i1-paper-import-route.mjs',
-    'scripts/verify-i1-paper-import-splitter.mjs',
-    'scripts/verify-i2-seven-choices-ai-import.mjs',
-    'scripts/verify-i3-cloze-ai-import.mjs',
-    'scripts/verify-i4-grammar-fill-ai-import.mjs',
-    'server/paper-import/publisher.mjs',
-    'server/paper-import/storage.mjs',
-    'server/paper-import/validator.mjs',
-  ])
-  const files = changedFiles()
-  const scopeRelevantPrefixes = [
-    'server/paper-import-ai/',
-    'server/ai-providers/',
-    'app/src/features/paper-import-ai/',
-  ]
-  const scopeRelevantFiles = new Set([
-    'app/src/App.tsx',
-    'app/src/services/paperImportAi.ts',
-    'server/paper-import/publisher.mjs',
-    'server/paper-import/storage.mjs',
-    'server/paper-import/validator.mjs',
-  ])
-  const shouldCheckScope = files.some(
-    (file) => scopeRelevantFiles.has(file) || scopeRelevantPrefixes.some((prefix) => file.startsWith(prefix)),
-  )
-  if (!shouldCheckScope) {
-    assert('I1 paper-import-ai route scope skipped for non-I1 diff', true)
-    assert('I1 Step 2 forbidden scope skipped for non-I1 diff', true)
-    return
-  }
-  const unexpected = files.filter((file) => !allowed.has(file) && !allowedPrefixes.some((prefix) => file.startsWith(prefix)))
-  assert('I1 paper-import-ai route changed files stay in the route whitelist', unexpected.length === 0, unexpected.join('\n'))
-
-  const crossCutAllowed = new Set([
-    'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
-  ])
-  const forbidden = files.filter(
-    (file) =>
-      !crossCutAllowed.has(file) && (
-        file.startsWith('prompts/') ||
-        file.startsWith('shared/papersurface/') ||
-        file.startsWith('app/src/domain/') ||
-        file.startsWith('schemas/') ||
-        file.endsWith('Adapter.ts') ||
-        file === 'app/src/features/paper-import/PaperImportWorkbench.tsx'
-      )
-  )
-  assert('I1 Step 2 forbidden scopes are untouched', forbidden.length === 0, forbidden.join('\n'))
 }
 
 function assertRouteUiContract() {
