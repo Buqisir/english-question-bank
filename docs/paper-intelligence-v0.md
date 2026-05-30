@@ -34,7 +34,7 @@ V0 做：
 - 阅读理解第一节 A-D 共 4 篇，约 15 道小题。
 - 一张已有 golden 覆盖、题型分布均衡的卷（候选：2025 新课标 I 卷或 2021 新课标 I 卷，由后续脚本调用方决定）。
 - 输出两份产物：JSON（机器可读主资产）+ Markdown（人工阅读预览）。
-- 输出目录：`reports/paper-intelligence/<paperId>/`。
+- 输出目录：`reports/paper-intelligence/<paperId>/`。注意：模型本身只返回 JSON + Markdown 内容；创建目录与写文件由调用脚本完成，不由模型尝试写入。
 - 触发方式：管理员/后台教研手动触发，单卷一次性跑通。
 
 V0 不做：
@@ -58,6 +58,8 @@ V0 不做：
 | `discourseStructureLoad` | 语篇结构负荷 | 段落与主旨的明暗关系、衔接与连贯、对比/让步/递进等论证骨架的可识别度。 |
 | `topicBackgroundLoad` | 主题背景负荷 | 话题陌生度、文化/学科常识依赖、跨文化背景所需的额外知识。 |
 | `evidenceFindingLoad` | 证据寻找负荷 | 答案证据在原文中"好不好找"——单句 / 跨句 / 跨段 / 全文，定位线索是否明显，是否依赖指代或隐性逻辑。 |
+
+每条负荷都必须能展开证据。`evidenceItems` 不可为空；即使是 1/2 档，也要给出能说明"为什么轻/较轻"的原文依据。4/5 档应至少给 2 条证据，或 1 条证据 + `shortReason` 明确指出这是主要卡点。
 
 > ⚠️ `evidenceFindingLoad` 只描述"答案证据在原文中是否好定位"，**不要**和单题的 `answerEvidence` 字段混在一起。一个负荷打的是整篇 passage 的整体寻证成本，一个 evidence 字段是单题的原文引文。
 
@@ -103,17 +105,17 @@ V0 不做：
   - `推理题`
   - `猜词题`
 - `keywords`：题干与定位关键词（数组）。
-- `locatingSentence`：定位句（原文短句，定位用，不一定是答案句）。
-- `answerSentence`：答案句（原文短句，证据载体）。
+- `locatingSentence`：定位句（原文短句，定位用，不一定是答案句）。必须是原文中连续、逐字存在的短引文或完整句，禁止 `...` / `…` / 拼接句 / 改写句 / 摘要句。写入前应能通过 `passageBody.includes(locatingSentence)` 检查。
+- `answerSentence`：答案句（原文短句，证据载体）。必须是原文中连续、逐字存在的短引文或完整句。若答案依赖跨句理解，仍选择最核心的一句，把跨句关系写入 `answerEvidence.explanationZh`。写入前应能通过 `passageBody.includes(answerSentence)` 检查。
 - `answerEvidence`：正确答案的证据，**必填**：
-  - `quote`：原文短引文（≤ 30 词，避免大段抄回）。
-  - `explanationZh`：一句中文解释为什么这是正确答案。
+  - `quote`：原文短引文（≤ 30 词，避免大段抄回）。必须是原文连续片段，禁止 `...` / `…`，并尽量自足；若含 `it / they / this / these / that / those / such / he / she` 等指代词，应优先包含指代对象，或在 explanation 中说明指代对象。不得改写大小写、标点、撇号、引号、破折号、括号、空格形态；写入前应能通过 `passageBody.includes(quote)` 检查。若原文片段含英文双引号且容易破坏 JSON，优先选择不含双引号的相邻连续片段；若必须保留双引号，必须按 JSON 规则转义。若原文含中文弯引号 `“...”`，不得改成英文双引号；负荷条证据可优先选择引号内部词组或不含引号的相邻连续片段。
+  - `explanationZh`：一句中文解释为什么这是正确答案。对猜词题、推理题、主旨题、例证/引用意图题，必须说明必要语境、逻辑方向或作者意图，不能只复述选项。
 - `distractorAnalysis`：干扰项数组，每个错误选项都要分析，可简短：
   - `optionLabel`：A/B/C/D。
   - `category`：见第 5 节干扰项分类。
   - `subtype`：可选，仅 `detail_word_misleading` 有子类，不确定时 `null`。
   - `shortReason`：一句中文，说明为什么错。
-  - `quote`：原文短引文（按引用规则决定是否必填，见第 5 节）。
+  - `quote`：原文短引文（按引用规则决定是否必填，见第 5 节）。必须是原文连续片段，禁止 `...` / `…`。写入前应能通过 `passageBody.includes(quote)` 检查。
 - `synonymSummary`：**必填**，**只总结正确答案**的同义替换路径，例如 `require → have to follow`。不分析错误选项的同义替换。
 
 ### 4.2 篇章级字段（passage-level）
@@ -135,7 +137,9 @@ V0 不做：
 
 后台字段仅供 reviewer / 教研复核使用，老师端默认不显示：
 
-> ⚠️ 当输入中**未提供** `existingLabels` 时，以下后台字段均为**模型初判**（model-inferred），不是已确认标签。Model-inferred backend labels should be treated as reviewable。对于边界类（boundaryFlags 非空）、T9/T10、以及低置信度（confidence < 0.8）的情况，`reviewNeeded` 应为 `true`。
+> ⚠️ 当输入中**未提供** `existingLabels` 时，以下后台字段均为**模型初判**（model-inferred），不是已确认标签。Model-inferred backend labels should be treated as reviewable。`reviewNeeded` 按下一段硬规则执行。
+>
+> V0 复核提醒给后台/教研工作人员使用，不进入老师第一视图。宁可多提醒，不可漏掉高阶题：当输入无 `existingLabels` 时，`teacherQuestionType` 为 `猜词题` / `推理题` / `主旨大意题`，或 `tCard` 属于 T3/T5/T6/T7/T8/T9/T10，或 `boundaryFlags` 非空，或 `confidence < 0.8`，`reviewNeeded` 应为 `true`。
 
 - `surfaceType`：与 `scripts/review/rules/reading-parse.md` 保持一致的枚举（`single_detail_normal` / `multi_detail_learn_from` / `word_meaning` / `inference_general` / `example_function` / `paragraph_function` / `writing_technique` / `paragraph_main_idea` / `passage_main_idea` / `author_purpose` / `attitude_tone` / `adjective_summary` / `abstract_phrase_summary` / `why_did` 等）。
 - `answeringMove`：`direct_locating` / `option_backtracking` / `context_guessing` / `coverage_test` / `function_to_argument` / `minimal_inference` / `rhetorical_method_identification` / `description_to_adjective` 等，遵循 reading-parse.md 已有规约。
@@ -237,13 +241,12 @@ LoadBar {
   score: 1 | 2 | 3 | 4 | 5                       // 必填
   label: "轻" | "较轻" | "适中" | "偏重" | "过重"    // 必填，与 score 一一对应
   shortReason: string                            // 必填，一句中文
-  evidenceItems: LoadEvidence[]                  // 必填，可为空数组但不省略字段
-                                                 // 硬约束：score >= 4 时 evidenceItems.length >= 1
-                                                 // （偏重/过重负荷必须有原文证据支撑）
+  evidenceItems: LoadEvidence[]                  // 必填，不可为空；每条负荷至少 1 条可展开证据
+                                                 // score >= 4 时至少 2 条，或 1 条证据 + shortReason 明确主要卡点
 }
 
 LoadEvidence {
-  quote: string                                  // 必填，原文短引文 (≤ 30 词)
+  quote: string                                  // 必填，原文连续短引文 (≤ 30 词)，必须逐字存在于 passageBody，禁止 ... / …
   note?: string                                  // 可选，一句中文
   paragraph?: number                             // 可选
 }
@@ -298,10 +301,10 @@ QuestionAnalysis {
   teacherQuestionType:
     "细节理解题" | "主旨大意题" | "推理题" | "猜词题" // 必填
   keywords: string[]                             // 必填
-  locatingSentence: string                       // 必填
-  answerSentence: string                         // 必填
+  locatingSentence: string                       // 必填，原文连续片段或完整句，必须逐字存在于 passageBody，禁止 ... / …
+  answerSentence: string                         // 必填，原文连续片段或完整句，必须逐字存在于 passageBody，禁止 ... / …
   answerEvidence: {
-    quote: string                                // 必填，原文短引文
+    quote: string                                // 必填，原文连续短引文，必须逐字存在于 passageBody，禁止 ... / …，尽量自足
     explanationZh: string                        // 必填
   }
   distractorAnalysis: DistractorItem[]           // 必填，覆盖所有错误选项
@@ -326,7 +329,7 @@ DistractorItem {
          | "half_right_half_wrong" | "misplaced_evidence"
          | null                                  // 仅 detail_word_misleading 可非 null
   shortReason: string                            // 必填
-  quote?: string                                 // detail_word_misleading 必填（含所有 subtype，尤其 opposite_direction）；其余可选
+  quote?: string                                 // detail_word_misleading 必填（含所有 subtype，尤其 opposite_direction）；其余可选；必须为原文连续短引文，必须逐字存在于 passageBody，禁止 ... / …
 }
 ```
 
