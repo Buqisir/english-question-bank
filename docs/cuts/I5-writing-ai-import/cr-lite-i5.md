@@ -176,3 +176,80 @@ The core correctness of all three PA Must Fix items is sound:
 One Must Fix blocks merge: **MF-1 — verify-ci exits 1** due to the broken four-family fixture in verify-i1-analysis. This is not a structural defect or a wrong-direction issue; it is a straightforward fixture update that matches the pattern DEV already applied to verify-i2.
 
 This merge is NOT approved until MF-1 is closed and verify-ci exits 0.
+
+---
+
+## Round 2 Re-Review
+
+DEV round-2 commit: `96d2e64`. Diff under review: `git diff fd52a78..HEAD` (scripts only).
+Reviewer: 小川 (Sonnet 4.6, fresh session). Date: 2026-05-29.
+
+### Changed Scope (scripts only)
+
+- `scripts/verify-i1-paper-import-analysis.mjs` — removed dead git helpers (`execFileSync` import, `gitLines`, `gitStatusLines`, `changedFiles`); added `applicationGroup` + `continuationGroup` to `fixtureFourGroupParseResult()` and threaded both into `assertPublishPackageBuilder()`.
+- `scripts/verify-i1-paper-import-route.mjs` — removed dead git helpers AND the entire `assertAllowedScope()` function body (complete cleanup).
+- `scripts/verify-ci.mjs` — 1 line: `'scripts/verify-i5-writing-ai-import.mjs'` added to registry.
+- `scripts/README.md` — 1 row: verify-i5 entry marked `yes` (required by verify-architecture-housekeeping).
+
+Non-script changes (docs/agents/\*, docs/cuts/I5-\*, docs/cuts/\_templates/\*) are out of scope for this review.
+
+### Findings
+
+**No Must Fix items.**
+
+**SW-1 (carried from Round 1) — `assertAllowedScope()` function body still exists in `verify-i1-paper-import-analysis.mjs`.** Round 2 removed its helpers (`changedFiles` etc.) but not the function definition itself. The function now references a removed helper and would throw a `ReferenceError` if called — but it is not called from `main()`. Dead code, no runtime impact. Not a blocker.
+
+**SW-2 (round-1 CI gap) — CLOSED.** `verify-i5-writing-ai-import.mjs` is now registered in `verify-ci`. The `assertPublishPath` writing-publish protection now runs in CI.
+
+### Confirmation Results (from diff + independent re-run)
+
+**Item 1 — verify-i1-analysis fix is a real six-family fixture, not a weakened assertion: CONFIRMED.**
+
+`fixtureFourGroupParseResult()` now returns two new writing group objects (`applicationGroup`: groupType='writing', title='应用文写作', 1 paragraph, no questions; `continuationGroup`: groupType='writing', title='读后续写', 1 paragraph, 2 continuationStarters, no questions). Both are destructured at the `assertPublishPackageBuilder()` call site and passed as explicit arguments to both `buildPaperImportAiPackageFiles` calls (happy-path and conflict-reject). No existing assertion was removed or loosened. The behavioral checks that follow — package validates, four Reading QA groups, answer conflict blocks build — remain intact and still pass.
+
+**Item 2 — dead-code removal deleted only dead scope-guard helpers, no live assertion lost: CONFIRMED.**
+
+verify-i1-analysis: removed `import { execFileSync }`, `gitLines()`, `gitStatusLines()`, `changedFiles()` — all infrastructure exclusively consumed by the non-called `assertAllowedScope()`. Every behavioral assertion function (`assertStaticContracts`, `assertPublishPackageBuilder`, `assertAnalyzeValidation`) is untouched.
+
+verify-i1-route: removed the same git helpers AND the complete `assertAllowedScope()` function body (the only scope-guard in that file). `assertRouteUiContract()` and `assertScriptIndex()` remain intact.
+
+**Item 3 — verify-ci genuinely EXIT 0, verify-i5 in registry: CONFIRMED.**
+
+```
+node scripts/verify-ci.mjs > /tmp/vci2.txt 2>&1; echo "VERIFY-CI EXIT=$?"
+VERIFY-CI EXIT=0
+
+grep -n "verify-i5" scripts/verify-ci.mjs
+38:  'scripts/verify-i5-writing-ai-import.mjs',
+```
+
+**Item 4 — no scope drift: CONFIRMED.**
+
+Script diff touches exactly: verify-i1-analysis (fixture fix + dead cleanup), verify-i1-route (dead cleanup), verify-ci.mjs (registry +1 line), README.md (+1 row). No production code, no forbidden-scope files, no unexpected files.
+
+`grep github/main...HEAD` over all verify-ci scripts: **no matches.** `git diff --check`: **clean.**
+
+### Verification Evidence (Round 2)
+
+| Script | Result | Checks |
+|---|---|---|
+| `verify-i1-analysis` | **PASS** | 35 (was failing: now EXIT 0) |
+| `verify-i1-route` | **PASS** | 19 |
+| `verify-i2` | **PASS** | 55 |
+| `verify-i3` | **PASS** | 26 |
+| `verify-i4` | **PASS** | 45 |
+| `verify-i5` | **PASS** | 82 |
+| `verify-c7-paper-import-publish` | **PASS** | 36 |
+| `verify-ci` | **PASS** | EXIT 0 |
+| `git diff --check` | **PASS** | clean |
+| `grep github/main...HEAD` | **PASS** | no matches |
+
+Browser QA: not run (later gate per plan).
+
+### Recommendation
+
+**APPROVE.**
+
+MF-1 is closed. verify-ci is genuinely green (EXIT 0, independently confirmed). The fix is a real six-family fixture update — no assertion weakened, no gate loosened. Dead code is fully removed from verify-i1-route; a non-blocking dead function stub remains in verify-i1-analysis (SW-1 carry-over, does not block). The round-1 CI-gap concern (SW-2) is resolved: verify-i5 is now in the verify-ci registry and the writing publish-path protection gates in CI.
+
+All three PA Must Fix items are closed, verify-ci is green, forbidden scope is untouched. **This diff is approved to merge after Browser QA + PO QA (per plan gate).**

@@ -3,14 +3,16 @@
 Cut: I5-writing-ai-import · Tier: **Large** · Date: 2026-05-29
 PM: 阿澈 (Opus, this session) · PO: 黄学伟
 `cut size: large; touches schema / data-contract / product-boundary / teaching-interpretation: yes`
-Last synced: 2026-05-30 after CR-lite + PM compression.
-Open review items: 1 blocker (CR MF-1, DEV round 2) + 1 non-blocking Open PO Decision.
-PA verdict: APPROVE WITH MUST FIX (3 Must Fix) — DEV round 1 closed them (commit
-`fd52a78`). PA report: [pa.md](pa.md).
-CR-lite verdict: APPROVE WITH MUST FIX (1 item) — [cr-lite-i5.md](cr-lite-i5.md).
-CR caught that DEV's report claimed `verify-ci EXIT 0` but it is **red** (PM
-independently re-confirmed: `verify-i1-paper-import-analysis` throws under
-six-family). See §DEV round 2.
+Last synced: 2026-05-30 after CR-lite round 2 (APPROVE) + PM compression.
+Open review items: 0 blockers. Remaining gates: browser QA + PO QA → RM.
+Non-blocking: 1 Open PO Decision (#1) + 2 Should Watch carried to follow-up.
+PA verdict: APPROVE WITH MUST FIX (3 Must Fix) — DEV round 1 closed them (`fd52a78`).
+  PA report: [pa.md](pa.md).
+CR-lite round 1: APPROVE WITH MUST FIX (1) — caught DEV's false `verify-ci EXIT 0`.
+CR-lite round 2: **APPROVE, 0 Must Fix** — DEV round 2 (`96d2e64`) closed MF-1; PM +
+  CR both independently re-confirmed `verify-ci` EXIT 0 with `verify-i5` gated.
+  Report: [cr-lite-i5.md](cr-lite-i5.md) §Round 2 Re-Review.
+**Code/verify gates are GREEN. Only browser QA + PO QA + RM remain.**
 
 ## Situation
 
@@ -143,6 +145,10 @@ verify-i2 red causes:
   links by *lacking* `questionId=`, asserting `=== 2`). Sound today, but a future cut
   that drops `questionId` from another family could mask a regression. Re-examine if a
   Big CR runs or when another family's link shape changes (CR Attack-Angle #3).
+- **Dead `assertAllowedScope()` stub in `verify-i1-paper-import-analysis.mjs`**
+  (CR round-2 SW-1): round-2 removed its helpers but left the function body, which would
+  `ReferenceError` if ever called. Not called, so harmless; delete on the next touch of
+  that file. Non-blocking — accepted into merge.
 
 ## PA follow-up (the three open questions, now resolved by PA cold read)
 
@@ -233,7 +239,8 @@ rendering.
 ## Cut flow & gates (Large)
 
 Sync ✅ → PM grill + plan ✅ → Opus PA ✅ (`pa.md`) → PM compression ✅ → Sonnet DEV
-round 1 ✅ (`fd52a78`, tasks 1–3) → CR-lite ✅ (`cr-lite-i5.md`, 1 Must Fix) → PM
-compression ✅ (this) → **Sonnet DEV round 2 (tasks 4–6)** → re-CR-lite (MF-1 closed +
-verify-ci EXIT 0) → browser QA + PO QA → RM → `cut-note.md`.
+round 1 ✅ (`fd52a78`) → CR-lite ✅ (1 Must Fix) → PM compression ✅ → Sonnet DEV
+round 2 ✅ (`96d2e64`, tasks 4–6) → re-CR-lite ✅ (APPROVE, verify-ci EXIT 0) → PM
+compression ✅ (this) → **browser QA (阿澈 first pass) + PO QA (owner)** → RM artifact
+gate (阿澈) → merge (小川) → `cut-note.md`.
 PA / DEV / CR were separate sessions; PM re-verified each report's load-bearing claims.
