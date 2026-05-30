@@ -17,6 +17,28 @@ function readPrompt() {
   return readFileSync(promptPath, 'utf8')
 }
 
+function readApiPrompt() {
+  return readPrompt()
+    .replace(
+      /## Output Requirement[\s\S]*?## Reasoning Rule/,
+      [
+        '## Output Requirement',
+        '',
+        'You MUST return exactly one JSON object as plain text in this API response.',
+        'The first non-whitespace character MUST be `{` and the final non-whitespace character MUST be `}`.',
+        '',
+        'Do NOT create or download a file.',
+        'Do NOT return `UNABLE_TO_CREATE_FILE`.',
+        'Do NOT wrap JSON in markdown fences.',
+        'Do NOT write a filename heading.',
+        'Do NOT write "Here is the JSON".',
+        'Do NOT explain what you are doing.',
+        '',
+        '## Reasoning Rule',
+      ].join('\n'),
+    )
+}
+
 function normalizeProviderId(providerId) {
   const raw = String(providerId || '').trim().toLowerCase()
   if (raw === 'gpt-5.5' || raw === 'openai' || raw === 'chatgpt') return 'gpt-5.5'
@@ -88,7 +110,7 @@ export function buildSevenChoicesAnalysisMessages({ paper, group }) {
   return [
     {
       role: 'system',
-      content: readPrompt(),
+      content: readApiPrompt(),
     },
     {
       role: 'user',
