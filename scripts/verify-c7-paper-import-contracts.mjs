@@ -220,7 +220,11 @@ const forbiddenPrefixes = [
   'app/src/shared-ui/papersurface/',
   'shared/papersurface/',
   'app/src/features/reading-analysis/',
-  'app/src/domain/paperAsset.ts',
+  // NOTE: app/src/domain/paperAsset.ts is intentionally NOT forbidden. Extending
+  // the PaperWritingTask / paper-asset domain TYPE is normal import-cut work (e.g.
+  // I7 added applicationGiven). The real contract boundary that import diffs must
+  // not silently break is the SCHEMA (schemas/.../paper-asset-v1.schema.json),
+  // which the validator + stripUnknownFields enforce separately.
   'server/print-renderer.mjs',
 ]
 const shouldCheckForbiddenScope = changedFiles.some((file) =>

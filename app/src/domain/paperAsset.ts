@@ -204,6 +204,10 @@ export type PaperWritingTask = {
   wordCountTarget?: number
   continuationStarters?: string[]
   materialText?: string
+  // I7: application given 上下格式/title rendered inside the answer box — `top`
+  // (salutation/opening or a given title) and `bottom` (closing/signature).
+  // Absent when the paper gives no skeleton.
+  applicationGiven?: { top: string[]; bottom: string[] }
 }
 
 // ─── Answer Key ─────────────────────────────────────────────────────────────────
