@@ -12,7 +12,9 @@ CR-lite round 1: APPROVE WITH MUST FIX (1) — caught DEV's false `verify-ci EXI
 CR-lite round 2: **APPROVE, 0 Must Fix** — DEV round 2 (`96d2e64`) closed MF-1; PM +
   CR both independently re-confirmed `verify-ci` EXIT 0 with `verify-i5` gated.
   Report: [cr-lite-i5.md](cr-lite-i5.md) §Round 2 Re-Review.
-**Code/verify gates are GREEN. Only browser QA + PO QA + RM remain.**
+**Code/verify gates are GREEN.** Browser QA first pass (阿澈) done — render scenarios
+4–5 PASS ([qa-i5.md](qa-i5.md)). Remaining: PO QA scenarios 1–3 & 6 (owner; need AI
+API + real DOCX) → RM.
 
 ## Situation
 
@@ -149,6 +151,12 @@ verify-i2 red causes:
   (CR round-2 SW-1): round-2 removed its helpers but left the function body, which would
   `ReferenceError` if ever called. Not called, so harmless; delete on the next touch of
   that file. Non-blocking — accepted into merge.
+- **`writingPaperViewAdapter` renders only from `group.passage.paragraphs`, ignoring
+  `writingTask.instruction`** (browser QA F1, [qa-i5.md](qa-i5.md)). For I5 import output
+  both fields agree (packageBuilder writes both), so the prompt renders — browser-
+  confirmed. But a writing group with `passage:null` (e.g. the pre-I5 on-disk
+  `paper-2024-jslk-english` asset) renders blank. Cheap future hardening: fall back to
+  `writingTask.instruction` when `passage.paragraphs` is empty. Non-blocking.
 
 ## PA follow-up (the three open questions, now resolved by PA cold read)
 
@@ -241,6 +249,7 @@ rendering.
 Sync ✅ → PM grill + plan ✅ → Opus PA ✅ (`pa.md`) → PM compression ✅ → Sonnet DEV
 round 1 ✅ (`fd52a78`) → CR-lite ✅ (1 Must Fix) → PM compression ✅ → Sonnet DEV
 round 2 ✅ (`96d2e64`, tasks 4–6) → re-CR-lite ✅ (APPROVE, verify-ci EXIT 0) → PM
-compression ✅ (this) → **browser QA (阿澈 first pass) + PO QA (owner)** → RM artifact
-gate (阿澈) → merge (小川) → `cut-note.md`.
+compression ✅ → browser QA 阿澈 first pass ✅ (render 4–5 PASS, `qa-i5.md`) →
+**PO QA (owner: scenarios 1–3, 6)** → RM artifact gate (阿澈) → merge (小川) →
+`cut-note.md`.
 PA / DEV / CR were separate sessions; PM re-verified each report's load-bearing claims.
