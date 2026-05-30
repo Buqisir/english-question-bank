@@ -30,10 +30,23 @@ export function WritingPaperPage({
             return <div key={index} className="pi-writing-passage">{children}</div>
           case 'answerBox':
             return (
-              <div key={index} className="pi-writing-answer-box" aria-label={block.label}>
-                {block.givenLines.map((line, lineIndex) => (
-                  <p key={lineIndex} className="pi-writing-answer-given">{line}</p>
-                ))}
+              <div
+                key={index}
+                className={block.givenBottom.length > 0 ? 'pi-writing-answer-box pi-writing-answer-box--letter' : 'pi-writing-answer-box'}
+                aria-label={block.label}
+              >
+                <div className="pi-writing-answer-top">
+                  {block.givenTop.map((line, lineIndex) => (
+                    <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
+                  ))}
+                </div>
+                {block.givenBottom.length > 0 && (
+                  <div className="pi-writing-answer-bottom">
+                    {block.givenBottom.map((line, lineIndex) => (
+                      <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
+                    ))}
+                  </div>
+                )}
               </div>
             )
           default:

@@ -32,6 +32,11 @@ export function buildWritingPageModel(asset, group, task) {
   const starterText = starters.length >= 2
     ? `Paragraph 1: ${starters[0]}\n\nParagraph 2: ${starters[1]}`
     : ''
+  // Answer-box given content: continuation → starters as givenTop; application →
+  // its captured 上下格式 (top/bottom). Continuation never routes via applicationGiven.
+  const appGiven = (task && task.applicationGiven) || null
+  const givenTop = appGiven ? (appGiven.top || []) : starters
+  const givenBottom = appGiven ? (appGiven.bottom || []) : []
 
   const blocks = []
   for (let i = startIdx; i <= endIdx; i += 1) {
@@ -45,7 +50,7 @@ export function buildWritingPageModel(asset, group, task) {
     } else if (b.type === 'group') {
       if (b.groupId === groupId) blocks.push({ kind: 'passage' })
     } else if (b.type === 'answerBox') {
-      blocks.push({ kind: 'answerBox', label: b.label || '', givenLines: starters })
+      blocks.push({ kind: 'answerBox', label: b.label || '', givenTop, givenBottom })
     }
   }
   return { blocks }

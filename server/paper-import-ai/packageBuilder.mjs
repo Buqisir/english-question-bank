@@ -554,6 +554,8 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
       title: '应用文写作',
       instruction: (applicationGroup.paragraphs || []).map((p) => p.text).join('\n'),
       wordCountTarget: 80,
+      // I7: given 上下格式/title, when the splitter captured one (else omitted).
+      ...(applicationGroup.applicationGiven ? { applicationGiven: applicationGroup.applicationGiven } : {}),
     }
 
     const appSectionId = `section-${examCodeFromPaperId(paperId)}-writing-application`

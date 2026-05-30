@@ -8,7 +8,7 @@ export type WritingChromeBlock =
   | { kind: 'sectionHeading'; text: string }
   | { kind: 'instruction'; text: string }
   | { kind: 'passage' }
-  | { kind: 'answerBox'; label: string; givenLines: string[] }
+  | { kind: 'answerBox'; label: string; givenTop: string[]; givenBottom: string[] }
 
 export type WritingPageModel = {
   blocks: WritingChromeBlock[]
