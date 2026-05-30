@@ -231,6 +231,8 @@ Rules:
   the correct option's Collocation Fit. Other types are added only when they
   genuinely apply — do not pad.
 - `signalText` MUST be an exact substring of its source.
+- `signalText` MUST NOT include a blank marker (`__41__` and the like); quote
+  the surrounding words, not the gap token.
 - `signalSide` is `context-before`, `context-after`, `stem`, or `option`.
 - Context-side / stem signals MUST appear in the cloze passage text (or the
   question stem); `option` signals MUST appear in one of that blank's A–D

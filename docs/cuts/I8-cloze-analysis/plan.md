@@ -43,6 +43,13 @@ See `decisions.md` for full rationale; the binding spec is
 - Generation happens **at import time** (mirror analyze-seven-choices). Keep one
   user action for the whole paper analysis flow. Already-imported cloze papers
   are re-imported to gain analysis.
+- **Required-when-present (PA MF-2 / owner decision):** when a cloze group is
+  detected, a valid `cloze-analysis-v1` is REQUIRED at publish — a missing or
+  invalid analysis blocks publish with a named issue, exactly like seven-choices
+  (`seven_choices_analysis_required`). This **supersedes** I3-A's interim
+  "missing cloze analysis does not block" stance. It accepts the same coupling
+  七选五 already has (an analysis-generation failure blocks the whole paper
+  publish). Papers with no cloze group are unaffected.
 - No review UI; write `reviewStatus: reviewed`. Field reserved for future.
 - Support one standard 完形 section: q41–q55, 15 blanks, A–D options.
 - `answer-key.json` stays the answer authority; AI answer conflict blocks.
@@ -74,6 +81,12 @@ Verification standard:
 - The prompt must instruct: ≥1 `collocation-partner` evidence per blank; mark a
   `signatureFacet` only when one genuinely applies; never overwrite the
   authoritative answer.
+- The prompt must instruct that `signalText` quotes surrounding words, **never a
+  blank marker** (`__41__`), and that `pos: "other"` carries no signature (PA
+  Should-Watch).
+- Resolve the prompt-philosophy seam consciously: the seven-choices prompt has a
+  no-file-download stance; reuse `readApiPrompt()`'s inline-JSON hardening and
+  keep the cloze prompt consistent with it (PA Should-Watch).
 
 Verification standard:
 
@@ -96,6 +109,7 @@ Verification standard:
   - schemaVersion / paperId / sourceAssetVersion / targetGroups checks;
   - `blanks` keys equal the 15 questionIds;
   - required fields per blank; `signatureFacet` POS-prefix match when present;
+    `pos: "other"` is allowed with NO signature (must not be rejected);
   - ≥1 evidence with ≥1 `collocation-partner`;
   - exact-substring quote validation per `signalSide` (passage/stem vs the
     blank's own options);
@@ -110,30 +124,44 @@ Verification standard:
   POS/signature mismatch, missing collocation-partner, and answer conflict each
   throw the right blocking error; answer conflict does not retry.
 
-### Step 4 — Import Wiring + Package
+### Step 4 — Import Wiring + Package + Publish Persistence
 
-- Add `POST /api/paper-import-ai/analyze-cloze` to `routes.mjs`, mirroring
-  `analyze-seven-choices`, with injectable `services.analyzeCloze`.
-- Keep ONE user action for the whole analysis flow: when the parsed paper has a
-  cloze group, the workbench's existing one-click analysis also produces the
-  cloze analysis and carries it into the publish payload (e.g.
-  `payload.clozeAnalysis`).
-- Extend `buildPaperImportAiPackageFiles(...)` to accept `clozeAnalysis` and
-  write `analyses/cloze-analysis-v1.json` when present, exactly as
-  `sevenChoicesAnalysis` is handled. Cloze analysis remains OPTIONAL for publish
-  in I8 wiring terms (its presence must not retroactively block a Reading/七选五
-  paper), but when a cloze group exists the one-click flow is expected to
-  generate it.
-- `app/src/services/paperImportAi.ts` + the workbench gain the cloze-analyze
-  call and thread `clozeAnalysis` to publish, mirroring the seven-choices path.
+The analysis-file machinery is **split across three modules** — it is NOT just
+`packageBuilder`. PA MF-1 verified the real seams; follow them exactly:
+
+- **Route + workbench (one action):** Add `POST /api/paper-import-ai/analyze-cloze`
+  to `routes.mjs`, mirroring `analyze-seven-choices`, with injectable
+  `services.analyzeCloze`. When the parsed paper has a cloze group, the
+  workbench's existing one-click analysis also produces the cloze analysis and
+  threads it into the publish payload (e.g. `payload.clozeAnalysis`), via
+  `app/src/services/paperImportAi.ts` + `PaperImportAiWorkbench.tsx`.
+- **packageBuilder (`buildPaperImportAiPackageFiles`):** thread `clozeAnalysis`
+  into the normalized package data. Enforce **required-when-present**: if a
+  cloze group is detected, a valid `cloze-analysis-v1` is required or block with
+  a named issue `cloze_analysis_required` (and paperId / targetGroups checks),
+  mirroring `seven_choices_analysis_required` (`packageBuilder.mjs:~294`).
+- **validator (`server/paper-import/validator.mjs`):** add `'cloze-analysis-v1'`
+  to `PAPER_IMPORT_SCHEMA_VERSIONS` (L17) — otherwise the first cloze publish
+  hard-fails with `json.schemaVersionUnknown`. **No `schemas/**` change needed**:
+  AJV intentionally skips validation when no schema file exists (L168), so the
+  Forbidden boundary stays intact.
+- **storage (`server/paper-import/storage.mjs`):** the `analyses/` write is
+  hardcoded per analysis type (driven by `packageData.scAnalysis`, NOT by
+  packageBuilder `outputFiles`). Add a `clozeAnalysis` pass-through and file
+  const (`cloze-analysis-v1.json`) to all three functions:
+  `makeVersionedArtifacts` (L~85-90), `writePaperImportVersion` (L~122-124), and
+  `swapPaperImportLatest` (L~157-163).
 
 Verification standard:
 
-- C7 validator still accepts the generated package; `analyses/cloze-analysis-v1.json`
-  is written when a cloze analysis is supplied and is keyed/shaped per contract.
 - Route verifier proves the new route exists, supports an injected analyze
   service, and returns a `cloze-analysis-v1` result without regressing existing
   responses.
+- C7 validator accepts a package carrying `cloze-analysis-v1`; a detected cloze
+  group with a missing/invalid analysis is a blocking publish state.
+- **The published asset on disk actually contains
+  `latest/analyses/cloze-analysis-v1.json`** (assert the file, not just that
+  packageBuilder emitted it — I9 fetches this exact path).
 - Existing I1/I2/I3 and C7 publish/contract verifiers still pass.
 
 ### Step 5 — Verifier + CI registration
@@ -158,6 +186,9 @@ Verification standard:
   reads true; distractor glosses are right; signatures are not forced; evidence
   quotes are exact and useful). Iterate prompt/contract as needed within this
   cut.
+- The deep sample MUST exercise at least one **phrase** blank, to prove the
+  option-side evidence path (`contextual-composition` + option-internal
+  highlight) end to end (PA Should-Watch).
 - Record summary evidence in the PR. Do not commit generated
   `app/public/paper-assets/**`.
 
@@ -188,6 +219,8 @@ Verification standard:
 - `server/paper-import-ai/analyzeCloze.mjs`
 - `server/paper-import-ai/routes.mjs`
 - `server/paper-import-ai/packageBuilder.mjs`
+- `server/paper-import/validator.mjs` (schema-version allow-list)
+- `server/paper-import/storage.mjs` (analyses/ write — three functions)
 - `app/src/services/paperImportAi.ts`
 - `app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx`
 - `scripts/verify-i8-cloze-analysis.mjs`
@@ -232,6 +265,14 @@ JSON (the rendered 讲评 view is I9).
 
 ## PA Follow-Up Decisions
 
+PA verdict: **APPROVE WITH MUST FIX** (`pa.md`). Both Must Fix folded; MF-2
+resolved by owner. DEV may start.
+
 | PA item | `pa.md` disposition | `plan.md` handling | Status |
 | --- | --- | --- | --- |
-| _(to be filled after PA)_ | | | |
+| `MF-1` | Publish wiring names the wrong files; analysis persistence is split across validator + storage, not just packageBuilder; first cloze publish would hard-fail on `schemaVersionUnknown`. | Step 4 rewritten to the real seams: add `cloze-analysis-v1` to `validator.mjs` `PAPER_IMPORT_SCHEMA_VERSIONS` (no `schemas/**` change — AJV skips), add `clozeAnalysis` to all three `storage.mjs` functions + file const, thread through packageBuilder. Suggested Files now lists `validator.mjs` + `storage.mjs`. Step 4 verify asserts `latest/analyses/cloze-analysis-v1.json` exists on disk. | Closed |
+| `MF-2` | Publish-gate ambiguity ("optional but expected") = fake-availability trap; recommend required-when-present (matches seven-choices) or an explicit PO decision. | Owner decision: **required-when-present**. Locked Decisions + Step 4 require a valid analysis when a cloze group is detected, blocking with `cloze_analysis_required`; supersedes I3's interim non-blocking stance. | Closed |
+| `SW-1` | `signalText` should carve out `__nn__` blank markers. | Contract Evidence rule + Step 2 prompt instruction added. | Closed |
+| `SW-2` | Validator must allow `pos:"other"` with no signature. | Step 3 validator standard updated. | Closed |
+| `SW-3` | Step 6 should exercise ≥1 phrase blank (option-side evidence). | Step 6 now requires a phrase blank in the deep sample. | Closed |
+| `SW-4` | Prompt-philosophy consistency vs the seven-choices file-download stance. | Step 2 now requires reusing `readApiPrompt()` hardening consistently. | Closed |
