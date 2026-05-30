@@ -1,0 +1,52 @@
+/* Writing section A4 page chrome — I6-writing-render.
+   Normalizes toward docs/product/exam-paper-format-reference page-11/12:
+   part/section headings, prompt/material, 注意, bordered answer box. Visual
+   tone is intentionally quiet and paper-like, not a diagnostic panel. */
+
+.pi-writing-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: 'Times New Roman', 'Songti SC', serif;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.pi-writing-part {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.pi-writing-section {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* 注意 / prompt text — preserve the source line breaks (注意：\n（1）…\n（2）…). */
+.pi-writing-instruction {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.pi-writing-passage {
+  margin: 0;
+}
+
+/* Bordered answer box. The empty writing space inside is not sized in this cut;
+   a min-height keeps it recognizable as a write-here region. */
+.pi-writing-answer-box {
+  border: 1px solid #1a1a1a;
+  min-height: 9rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Given lines inside the box (continuation paragraph starters). Each starts a
+   paragraph; the blank below it is where the student would write. */
+.pi-writing-answer-given {
+  margin: 0;
+}
