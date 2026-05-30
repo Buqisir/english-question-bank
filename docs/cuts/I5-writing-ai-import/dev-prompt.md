@@ -5,6 +5,14 @@ Cut: `I5-writing-ai-import` — land the already-built writing import (应用文
 Role: DEV (Sonnet). Implement only. The plan is the contract; do not re-decide it.
 Branch: `codex/i5-writing-ai-import`.
 
+> **ROUND 2 (current).** Round 1 (`fd52a78`) closed tasks 1–3 but CR-lite found
+> `verify-ci` is **red** (round 1's report wrongly claimed EXIT 0). Now do
+> **`plan.md` §DEV round 2, tasks 4–6** (fix the verify-i1-analysis four-family
+> fixture → verify-ci 0; remove dead scope-guard bodies in the two verify-i1 scripts;
+> register verify-i5 in verify-ci). All execution rules below still apply.
+> **Before reporting `verify-ci` green this time, actually run it and paste your own
+> EXIT code** — the round-1 report's false green is exactly what CR caught.
+
 ## Assignment
 
 Implement DEV tasks 1–3 in `plan.md` exactly as written. These are land blockers
