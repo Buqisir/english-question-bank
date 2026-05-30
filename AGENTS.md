@@ -6,6 +6,77 @@ This repo builds the local-first English question bank workbench.
 Other agent entry files, including `CLAUDE.md`, should point here instead
 of duplicating workflow or browser rules.
 
+## Current Operating Reality
+
+This section overrides any conflicting role or process text below and in
+the steering notes. It reflects how the project runs today. When any doc
+names `阿澈` or an external agent, resolve it through this section.
+
+### Roles
+
+- The team is one Claude wearing hats across two model tracks. `阿澈` has no
+  quota; no external high-reasoning agent is available.
+- Read every `阿澈` reference as "a fresh Opus session with that hat (PM,
+  UI direction, Big CR, RM gate)".
+- Independence comes from a fresh, un-anchored session plus the role
+  persona, not from a different named agent. PM and PA being the same Claude
+  is the norm, not an exception — do not write per-cut "single-person
+  exception" boilerplate.
+
+### Session map (scales with cut size)
+
+- small: 1 session, Sonnet. No separate PA / CR.
+- bounded medium: 3 sessions — ① Opus PM + inline PA-lite (in `plan.md`),
+  ② Sonnet DEV, ③ Opus CR + RM (fresh cold-read of the diff, then artifact
+  gate + merge).
+- large, or touches data contract / schema / export / migration /
+  architecture / irreversible: 4 sessions — ① Opus PM, ② fresh Opus PA,
+  ③ Sonnet DEV, ④ Opus CR + RM.
+- Spawn a fresh session only where independence pays (PA of a risky plan, CR
+  of the diff). Do not split self-to-self stages: PM-write and PM-compress
+  are one session; RM folds into CR.
+- A PA or CR session starts as a fresh conversation each cut, never a
+  long-running stale thread.
+
+### Tier / effort defaults
+
+| Role | Tier | Effort |
+| --- | --- | --- |
+| PM | Opus | high |
+| PA | Opus | high (xhigh only for large / contract / irreversible cuts) |
+| DEV | Sonnet | medium (high only when the implementation is gnarly) |
+| CR + RM | Opus | high |
+
+`high` is the default ceiling; `max` / `xhigh` is by exception, not
+standing. Do not run DEV on Opus-max, or PM / PA on Sonnet-low.
+
+### RM gate (reconciled)
+
+The medium / large RM artifact gate runs in the CR + RM session (a fresh
+Opus, PM hat), not a separate `阿澈`; it is never blocked for lack of `阿澈`.
+The gate stays real: required artifacts must exist and the relevant
+`verify-i*.mjs` must pass before merge.
+
+### Dormant
+
+External-agent, external-DEV, and external-PA transport rules are dormant
+while no external agent is in use. Skip them on read; re-activate if
+external quota returns.
+
+### kratos scope
+
+Write project memory only to the repo-root project (root = this repo). Do
+not `kratos create` / `switch` to a per-cut or per-worktree scope (e.g.
+`eqb-c7-dev`). Existing extra scopes are a separate cleanup task; do not
+blind-delete.
+
+### Session reading contract
+
+Every session reads this section plus the core rules (Product Posture,
+Project Steering hard rules, Context / Output Economy, Super Teacher
+Boundary, Persistent Working Memory). The rest of this file and the steering
+notes are reference — load a section only when the task names it.
+
 ## Persistent Working Memory
 
 - Use `kratos-memory` as the project-scoped working memory for this repo.
