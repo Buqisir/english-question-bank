@@ -1,5 +1,25 @@
 # CR-Lite Prompt — I5 Writing AI Import
 
+> **ROUND 2 RE-REVIEW (current).** Round 1 (`fd52a78`) was already CR-lite'd
+> ([cr-lite-i5.md](cr-lite-i5.md), APPROVE WITH MUST FIX, 1 item). DEV round 2
+> (`96d2e64`) closed MF-1. **Review only the round-2 delta:** `git diff fd52a78..HEAD`
+> over the **scripts** (ignore docs). Confirm four things, from the diff + your own
+> re-run, not from the DEV report (round 1 falsely claimed `verify-ci EXIT 0`):
+> 1. The `verify-i1-paper-import-analysis` fix adds writing groups to the fixture and
+>    threads them into the build — a real six-family fixture, **not** a weakened/skipped
+>    assertion or a loosened gate.
+> 2. The dead-code removal in the two verify-i1 scripts deleted **only** dead
+>    scope-guard helpers (`gitLines`/`changedFiles`/`assertAllowedScope`/unused
+>    imports) — no live behavioural/contract assertion lost.
+> 3. `verify-ci` genuinely **EXIT 0** on your own run, and `verify-i5` is in its
+>    registry (so the writing publish-path proof actually gates).
+> 4. No scope drift: the only non-script change is the `scripts/README.md` row that
+>    `verify-architecture-housekeeping` requires for the new registry entry.
+> Write a short addendum to `cr-lite-i5.md` (a `## Round 2 Re-Review` section) with
+> Findings + Recommendation. PM has already independently confirmed verify-ci EXIT 0;
+> your job is the independent reviewer-≠-implementer confirmation, not to trust that.
+> The full prompt below is the round-1 context.
+
 Cut: `I5-writing-ai-import` — review the DEV diff that closes the three PA Must
 Fix items, so the writing-import feature can land on `main`.
 Role: **CR-lite** (routine code review). Recommended session: **Sonnet, high
