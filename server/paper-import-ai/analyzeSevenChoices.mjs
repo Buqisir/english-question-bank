@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
 import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
+import { extractFirstJsonObject } from './extractJson.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -230,24 +231,6 @@ function isRetryableAnalysisError(error) {
   const message = error instanceof Error ? error.message : String(error || '')
   if (/答案解析版不一致/.test(message)) return false
   return /JSON|schemaVersion|questionIds|精确匹配原文|缺少|必须|不匹配|无效|至少需要/.test(message)
-}
-
-function extractFirstJsonObject(rawText) {
-  const text = String(rawText || '').trim()
-  if (!text) return null
-  try {
-    return JSON.parse(text)
-  } catch {
-    // Continue to substring parse.
-  }
-  const start = text.indexOf('{')
-  const end = text.lastIndexOf('}')
-  if (start < 0 || end <= start) return null
-  try {
-    return JSON.parse(text.slice(start, end + 1))
-  } catch {
-    return null
-  }
 }
 
 export async function analyzeSevenChoicesImportCandidate(input, options = {}) {

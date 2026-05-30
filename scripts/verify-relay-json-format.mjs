@@ -12,6 +12,7 @@
 
 import { callChatCompletionsJson } from '../server/ai-providers/chatCompletions.mjs'
 import { callGptRelayJson } from '../server/ai-providers/gptRelay.mjs'
+import { extractFirstJsonObject } from '../server/paper-import-ai/extractJson.mjs'
 
 let passed = 0
 
@@ -102,10 +103,30 @@ async function assertGptRelayWiring() {
   assert('gptRelay default model is gpt-5.5', captured.body.model === 'gpt-5.5')
 }
 
+function assertJsonExtraction() {
+  // Relayed gpt-5.5 intermittently appends a surplus closing brace to otherwise
+  // valid JSON ("...}}}}"), which broke the old first-{..last-} extractor and
+  // surfaced as "AI 未返回 JSON 对象". The balanced-object scan must recover it.
+  assert('clean object parses', extractFirstJsonObject('{"a":1}')?.a === 1)
+  assert('surplus trailing brace recovered', extractFirstJsonObject('{"a":1}}')?.a === 1)
+  assert('nested object with surplus brace recovered', extractFirstJsonObject('{"x":{"b":2}}}')?.x?.b === 2)
+  // A realistic shape: nested analysis-like object closed correctly, plus one stray brace.
+  const realistic = '{"schemaVersion":"v1","questions":{"q1":{"note":"段首空，选 G。"}}}}'
+  assert('realistic analysis shape with surplus brace recovered', extractFirstJsonObject(realistic)?.questions?.q1?.note === '段首空，选 G。')
+  assert('markdown-fenced JSON parses', extractFirstJsonObject('```json\n{"a":1}\n```')?.a === 1)
+  assert('trailing prose ignored', extractFirstJsonObject('{"a":1}\n\nHope this helps!')?.a === 1)
+  assert('brace inside string not early-closed', extractFirstJsonObject('{"a":"has } brace"}')?.a === 'has } brace')
+  assert('escaped quote in string handled', extractFirstJsonObject('{"a":"she said \\"hi\\""}')?.a === 'she said "hi"')
+  assert('non-json yields null', extractFirstJsonObject('not json') === null)
+  assert('empty yields null', extractFirstJsonObject('') === null)
+  assert('unterminated object yields null', extractFirstJsonObject('{"a":1') === null)
+}
+
 async function main() {
   await assertOpenAiCompatibleBody()
   await assertDeepSeekBodyUnchanged()
   await assertGptRelayWiring()
+  assertJsonExtraction()
 
   console.log(`\nrelay JSON format verify PASSED: ${passed} checks`)
 }
