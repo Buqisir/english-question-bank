@@ -35,6 +35,7 @@ const registry = {
   'scripts/verify-i1-paper-import-analysis.mjs',
   'scripts/verify-i2-seven-choices-ai-import.mjs',
   'scripts/verify-i3-cloze-ai-import.mjs',
+  'scripts/verify-i4-grammar-fill-ai-import.mjs',
   'scripts/verify-i5-writing-ai-import.mjs',
   'scripts/verify-relay-json-format.mjs',
   ],
