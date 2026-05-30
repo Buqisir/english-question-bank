@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
 import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
+import { extractFirstJsonObject } from './extractJson.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -17,24 +18,6 @@ function optionalString(value) {
 
 function readPrompt() {
   return readFileSync(promptPath, 'utf8')
-}
-
-export function extractFirstJsonObject(rawText) {
-  const text = String(rawText || '').trim()
-  if (!text) return null
-  try {
-    return JSON.parse(text)
-  } catch {
-    // Continue to a substring parse below.
-  }
-  const start = text.indexOf('{')
-  const end = text.lastIndexOf('}')
-  if (start < 0 || end <= start) return null
-  try {
-    return JSON.parse(text.slice(start, end + 1))
-  } catch {
-    return null
-  }
 }
 
 function normalizeProviderId(providerId) {
