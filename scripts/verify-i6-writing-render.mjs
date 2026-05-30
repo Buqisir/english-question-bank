@@ -69,7 +69,8 @@ assert('app sectionHeading is 第一节', app.blocks[1].text.includes('第一节
 assert('app notice is the 80-word notice', app.blocks.find((b) => b.kind === 'instruction')?.text === APP_NOTICE)
 const appBox = app.blocks.find((b) => b.kind === 'answerBox')
 assert('app answerBox label present', appBox?.label === '应用文写作答题区')
-assert('app answerBox is empty (no given lines)', Array.isArray(appBox?.givenLines) && appBox.givenLines.length === 0)
+assert('app answerBox is empty (no given top/bottom — no applicationGiven in this fixture)',
+  Array.isArray(appBox?.givenTop) && appBox.givenTop.length === 0 && Array.isArray(appBox?.givenBottom) && appBox.givenBottom.length === 0)
 assert('app model does not bleed the preceding grammar section',
   !app.blocks.some((b) => 'text' in b && b.text.includes('第三部分')))
 
@@ -87,10 +88,26 @@ assert('cont keeps the 注意 instruction', contInstr.includes(CONT_NOTICE))
 assert('cont folds the starter instruction (not standalone)', !contInstr.includes(STARTER_TEXT))
 const contBox = cont.blocks.find((b) => b.kind === 'answerBox')
 assert('cont answerBox label present', contBox?.label === '读后续写答题区')
-assert('cont answerBox carries the two starters as given lines',
-  JSON.stringify(contBox?.givenLines) === JSON.stringify(STARTERS))
+assert('cont answerBox carries the two starters as givenTop (migrated from givenLines)',
+  JSON.stringify(contBox?.givenTop) === JSON.stringify(STARTERS))
+assert('cont answerBox givenBottom is empty (continuation never routes via applicationGiven)',
+  Array.isArray(contBox?.givenBottom) && contBox.givenBottom.length === 0)
 assert('cont model does not bleed the application section',
   !cont.blocks.some((b) => 'text' in b && (b.text.includes('第一节') || b.text === APP_NOTICE)))
+
+// ── I7: application WITH given 上下格式 → answerBox carries top/bottom ──
+{
+  const appWithGiven = buildWritingPageModel(asset, asset.content.groups['g-app'], {
+    writingTaskId: 'wt-app',
+    taskType: 'application',
+    applicationGiven: { top: ['Dear Chris,', 'I’m Li Hua.'], bottom: ['Yours,', 'Li Hua'] },
+  })
+  const box = appWithGiven.blocks.find((b) => b.kind === 'answerBox')
+  assert('app-with-given: answerBox givenTop = applicationGiven.top',
+    JSON.stringify(box?.givenTop) === JSON.stringify(['Dear Chris,', 'I’m Li Hua.']))
+  assert('app-with-given: answerBox givenBottom = applicationGiven.bottom',
+    JSON.stringify(box?.givenBottom) === JSON.stringify(['Yours,', 'Li Hua']))
+}
 
 // ── Degenerate guards ──
 const missing = buildWritingPageModel(asset, { groupId: 'g-nope', writingTaskId: 'wt-nope' }, null)

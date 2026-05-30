@@ -70,9 +70,18 @@
   flex-direction: column;
 }
 
-/* Given lines inside the box (continuation paragraph starters). Each starts a
-   paragraph and reserves blank writing space below it. */
+/* Given lines inside the box: continuation paragraph starters, or an application
+   given salutation/opening (givenTop). Each reserves blank writing space below. */
 .pi-writing-answer-given {
   margin: 0;
   min-height: 7rem;
+}
+
+/* Application closing/signature (givenBottom): pinned to the box bottom, tight. */
+.pi-writing-answer-bottom {
+  margin-top: auto;
+}
+
+.pi-writing-answer-given--tight {
+  min-height: 0;
 }
