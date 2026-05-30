@@ -1,0 +1,78 @@
+/* Writing section A4 page chrome — I6-writing-render.
+   Normalizes toward docs/product/exam-paper-format-reference page-11/12:
+   part/section headings, prompt/material, 注意, bordered answer box. Visual
+   tone is intentionally quiet and paper-like, not a diagnostic panel. */
+
+/* The whole writing section is ONE white A4 sheet (matching the PaperSurface
+   .ps-page card), so headings / prompt / 注意 / answer box all sit on the page —
+   not floating on the grey harness background. */
+.pi-writing-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #fff;
+  color: #111;
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 56px;
+  box-shadow: rgba(0, 0, 0, 0.063) 0 1px 0 0, rgba(0, 0, 0, 0.08) 0 12px 32px 0;
+}
+
+/* The passage's own PaperSurface card blends into the single sheet (display-only
+   override scoped to writing; PaperSurface core is untouched). The surface's
+   fixed full-A4 min-height is dropped so the prompt/material flows straight into
+   注意 + the answer box, instead of reserving a whole blank page. */
+.pi-writing-page .ps-surface {
+  padding: 0;
+  min-height: 0;
+  /* PaperSurface paints a grey desk gradient here; the writing sheet is pure white. */
+  background: none;
+}
+
+.pi-writing-page .ps-page {
+  padding: 0;
+  min-height: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.pi-writing-part {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.pi-writing-section {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* 注意 / prompt text — preserve the source line breaks (注意：\n（1）…\n（2）…). */
+.pi-writing-instruction {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.pi-writing-passage {
+  margin: 0;
+}
+
+/* Bordered answer box, sized to mimic the gold reference (page-11/12): a
+   generous write-here region. An empty box (应用文) stays a tall blank; a box
+   with given starters (读后续写) grows so each starter has writing room below. */
+.pi-writing-answer-box {
+  border: 1px solid #1a1a1a;
+  min-height: 12rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Given lines inside the box (continuation paragraph starters). Each starts a
+   paragraph and reserves blank writing space below it. */
+.pi-writing-answer-given {
+  margin: 0;
+  min-height: 7rem;
+}

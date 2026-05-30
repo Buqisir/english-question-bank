@@ -120,6 +120,7 @@ import {
   type RefObject,
 } from 'react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
+import { WritingPaperPage } from './WritingPaperPage'
 import { buildPaperSurfaceDataFromPi } from './adapter/index.ts'
 import {
   buildPreviewView,
@@ -1069,6 +1070,19 @@ export function PaperIntelligencePaperSurfaceHarness({
     )
   }
 
+  const paperSurfaceEl = (
+    <PaperSurface
+      textMap={surfaceData.textMap}
+      annotations={[]}
+      evidence={surfaceData.evidence}
+      questions={surfaceData.questions}
+      mode="lecture"
+      lectureFocus={lectureFocus}
+      readingFocusBySection={{}}
+      onFocusIntent={handleFocusIntent}
+    />
+  )
+
   return (
     <div className="pi-ps-harness">
       <div className="pi-ps-harness-topbar">
@@ -1181,16 +1195,11 @@ export function PaperIntelligencePaperSurfaceHarness({
           </div>
         </aside>
         <div className="pi-ps-harness-left" ref={leftScrollerRef}>
-          <PaperSurface
-            textMap={surfaceData.textMap}
-            annotations={[]}
-            evidence={surfaceData.evidence}
-            questions={surfaceData.questions}
-            mode="lecture"
-            lectureFocus={lectureFocus}
-            readingFocusBySection={{}}
-            onFocusIntent={handleFocusIntent}
-          />
+          {writingModel ? (
+            <WritingPaperPage pageModel={writingModel.pageModel}>{paperSurfaceEl}</WritingPaperPage>
+          ) : (
+            paperSurfaceEl
+          )}
           {sevenChoicesModel && sevenChoiceOverlay.marks.length > 0 && (
             <div className="pi-seven-blank-overlay" aria-hidden="true">
               {sevenChoiceOverlay.marks.map((mark) => (
