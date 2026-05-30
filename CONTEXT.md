@@ -13,7 +13,7 @@ A complete English text, cloze text, writing prompt, listening script, or task m
 _Avoid_: article, text, material when the database object is meant
 
 **Question Group**:
-A set of questions that belongs to one passage and shares one task type or instruction.
+A set of questions that belongs to one passage and shares one task type or instruction. A writing Question Group is the documented exception: it contains zero Questions and carries a Writing Task instead.
 _Avoid_: section, block, exercise when referring to the stored group object
 
 **Question**:
@@ -23,6 +23,10 @@ _Avoid_: problem, item when precision matters
 **Option**:
 One selectable answer choice attached to a question.
 _Avoid_: choice when referring to the database object
+
+**Writing Task**:
+The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), the word-count target, and, for continuation, the paragraph opening sentences and continuation material. A Writing Task is the attachment point for a future writing analysis (model answer, scoring guidance, AI feedback), since a writing group has no Questions to attach analysis to.
+_Avoid_: writing question, essay question when referring to this stored object; it is not a Question
 
 **Tag**:
 A teacher-confirmed label used for search, filtering, teaching intent, topic, discourse feature, question type, or difficulty support.
@@ -71,7 +75,9 @@ _Avoid_: source file when it would confuse provenance with Source
 - A **Passage** can contain many **Question Groups**.
 - A **Question Group** belongs to exactly one **Passage**.
 - A **Question Group** contains many **Questions**.
+- A writing **Question Group** contains zero **Questions** and carries one **Writing Task**.
 - A **Question** can have zero or more **Options**.
+- A future writing analysis attaches to a **Writing Task** at group level, with no **Question** reference.
 - A **Tag** can attach to a **Passage**, **Question Group**, or **Question**.
 - An **AI Tag Suggestion** targets one **Passage**, **Question Group**, or **Question** and becomes a **Tag** only after teacher confirmation.
 - A **Draft Paper** contains many **Draft Paper Items**.
