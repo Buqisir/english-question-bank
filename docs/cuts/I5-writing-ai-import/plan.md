@@ -3,10 +3,14 @@
 Cut: I5-writing-ai-import · Tier: **Large** · Date: 2026-05-29
 PM: 阿澈 (Opus, this session) · PO: 黄学伟
 `cut size: large; touches schema / data-contract / product-boundary / teaching-interpretation: yes`
-Last synced: 2026-05-30 after PA cold-read review + PM compression.
-Open review items: 1 (Open PO Decision #1, non-blocking — see §PA follow-up).
-PA verdict: APPROVE WITH MUST FIX (3 Must Fix, no direction/contract/boundary defect).
-PA report: [pa.md](pa.md). PM independently re-verified the three load-bearing claims.
+Last synced: 2026-05-30 after CR-lite + PM compression.
+Open review items: 1 blocker (CR MF-1, DEV round 2) + 1 non-blocking Open PO Decision.
+PA verdict: APPROVE WITH MUST FIX (3 Must Fix) — DEV round 1 closed them (commit
+`fd52a78`). PA report: [pa.md](pa.md).
+CR-lite verdict: APPROVE WITH MUST FIX (1 item) — [cr-lite-i5.md](cr-lite-i5.md).
+CR caught that DEV's report claimed `verify-ci EXIT 0` but it is **red** (PM
+independently re-confirmed: `verify-i1-paper-import-analysis` throws under
+six-family). See §DEV round 2.
 
 ## Situation
 
@@ -103,6 +107,43 @@ verify-i2 red causes:
    **Done:** the writing publish path is proven by a test, not only by schema reading.
    Pairs with Browser QA #3 but is not replaced by it.
 
+## DEV round 2 — post-CR-lite (blocker + two PM-decided additions)
+
+> Round 1 (commit `fd52a78`) closed PA Must Fix 1–3 but reported `verify-ci EXIT 0`
+> when it is **red**. CR-lite caught it; PM re-confirmed. Close these before re-CR.
+
+4. **MF-1 (blocker): make `verify-ci` exit 0.** `verify-i1-paper-import-analysis.mjs`
+   → `assertPublishPackageBuilder()` (`:445-447`) builds a **four-family** package
+   (no `applicationGroup`/`continuationGroup`); under six-family enforcement it throws
+   `缺少应用文写作` (a plain `issue()` object → `[object Object]`, exit 1). Round 1's
+   verify-i1 scope-guard removal *unmasked* this pre-existing fixture bug without
+   fixing it. Add the two writing groups to the fixture and thread them into the build
+   args — same pattern as DEV task 1. **Done:** `verify-i1-paper-import-analysis` and
+   `verify-ci` exit 0.
+5. **SW-1 cleanup (fold in — DEV already edits this file):** remove the now-dead
+   `assertAllowedScope`/`changedFiles`/`gitLines` bodies still present in
+   `verify-i1-paper-import-route.mjs` (`:59`) and `verify-i1-paper-import-analysis.mjs`
+   (`:78`). Round 1 removed only the *calls*, leaving dead `github/main...HEAD` code.
+   **Done:** `grep -r "github/main\.\.\.HEAD"` over the scripts `verify-ci` runs returns
+   nothing (the plan's gate now actually passes).
+6. **Register `verify-i5` in `verify-ci` (PM decision on CR SW-2).** `assertPublishPath`
+   proves the writing publish path, but `verify-i5` is **not** in the `verify-ci`
+   registry (`verify-ci.mjs:34-37` lists only i1/i2/i3), so the protection never runs
+   in CI. Add `verify-i5` to the registry. CI-safe: its only env-dependent test
+   (`assertRealDocx`) `existsSync`-guards and **skips** when the owner's DOCX is absent
+   (`verify-i5:454-463`). **Done:** `verify-ci` runs `verify-i5` and stays green on a
+   machine without the owner's DOCX.
+
+## Follow-up Gate (recorded, NOT this cut)
+
+- **Close the full I-series CI gap:** register `verify-i4` in `verify-ci` too (and audit
+  any other unregistered stable script). This is the standing "i4/i5 not in verify-ci"
+  item; round 2 registers only i5 (it carries this cut's writing-publish proof).
+- **Writing QA-link identification is polarity-based** (`assertPublishPath` finds writing
+  links by *lacking* `questionId=`, asserting `=== 2`). Sound today, but a future cut
+  that drops `questionId` from another family could mask a regression. Re-examine if a
+  Big CR runs or when another family's link shape changes (CR Attack-Angle #3).
+
 ## PA follow-up (the three open questions, now resolved by PA cold read)
 
 1. **Adapter-layer boundary — RESOLVED: legitimate, the I2 forbid is over-broad.**
@@ -139,7 +180,8 @@ verify-i2 red causes:
 ## Verification
 
 Green required to land: `verify-i5`, `verify-i2` (six-family, no bypass), `verify-i3`,
-`verify-i4`, `verify:all` / `verify-ci`.
+`verify-i4`, and **`verify-ci` EXIT 0 with `verify-i5` registered in it** (round-2
+tasks 4 & 6). A green verify-i5 invoked by hand is not enough — the gate must run it.
 
 New assertions DEV must add:
 1. `verify-i2`: the corrected four builds + two new writing rejects throw the right
@@ -190,7 +232,8 @@ rendering.
 
 ## Cut flow & gates (Large)
 
-Sync ✅ → PM grill + plan ✅ → fresh Opus PA ✅ (`pa.md`, APPROVE WITH MUST FIX) →
-PM compression ✅ (this) → **Sonnet DEV (tasks 1–3)** → CR-lite → browser QA + PO QA →
-RM → `cut-note.md`.
-PA and PM were separate sessions (PO instruction; PA cold-read, PM re-verified claims).
+Sync ✅ → PM grill + plan ✅ → Opus PA ✅ (`pa.md`) → PM compression ✅ → Sonnet DEV
+round 1 ✅ (`fd52a78`, tasks 1–3) → CR-lite ✅ (`cr-lite-i5.md`, 1 Must Fix) → PM
+compression ✅ (this) → **Sonnet DEV round 2 (tasks 4–6)** → re-CR-lite (MF-1 closed +
+verify-ci EXIT 0) → browser QA + PO QA → RM → `cut-note.md`.
+PA / DEV / CR were separate sessions; PM re-verified each report's load-bearing claims.
