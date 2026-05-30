@@ -919,7 +919,7 @@ export function parseReadingCandidatesFromText(rawText, options = {}) {
 
   // Remove successfully-parsed groups from skipped.
   const filteredSkipped = allSkipped.filter((item) => {
-    if (item.reason === 'seven_choices_deferred_to_i2' && sevenChoicesGroup) return false
+    if (item.reason === 'seven_choices_deferred_to_i2' && (sevenChoicesGroup || sevenChoicesError)) return false
     if (item.reason === 'cloze_out_of_scope_for_i1' && clozeGroup) return false
     if (item.reason === 'grammar_or_language_out_of_scope_for_i1' && grammarFillGroup) return false
     return true
