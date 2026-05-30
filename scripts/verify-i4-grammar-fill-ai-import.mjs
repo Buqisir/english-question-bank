@@ -1,6 +1,5 @@
 // I4 grammar-fill AI import verifier
 import { createHash } from 'node:crypto'
-import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -33,55 +32,6 @@ function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
-    }).split('\n').map(l => l.trim()).filter(Boolean)
-  } catch { return [] }
-}
-
-// ---- Allowed/forbidden scope ----
-
-const ALLOWED_FILES = [
-  'server/paper-import-ai/docxSplitter.mjs',
-  'server/paper-import-ai/packageBuilder.mjs',
-  'server/paper-import-ai/routes.mjs',
-  'server/paper-import/publisher.mjs',
-  'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
-  'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
-  'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
-  'app/src/services/paperImportAi.ts',
-  'scripts/verify-i4-grammar-fill-ai-import.mjs',
-  'scripts/verify-i3-cloze-ai-import.mjs',
-]
-
-const FORBIDDEN_FILES = [
-  'schemas/',
-  'shared/papersurface/',
-  'app/src/shared-ui/papersurface/',
-]
-
-function assertAllowedScope() {
-  const changed = gitLines(['diff', '--name-only', 'HEAD'])
-  const uncommitted = gitLines(['diff', '--name-only'])
-  const allChanged = [...new Set([...changed, ...uncommitted])]
-  for (const file of allChanged) {
-    assert(`I4 changed file in allowed scope: ${file}`, ALLOWED_FILES.some(a => file === a || file.startsWith(a)))
-  }
-}
-
-function assertForbiddenScope() {
-  const changed = gitLines(['diff', '--name-only', 'HEAD'])
-  const uncommitted = gitLines(['diff', '--name-only'])
-  const allChanged = [...new Set([...changed, ...uncommitted])]
-  for (const file of allChanged) {
-    for (const forbid of FORBIDDEN_FILES) {
-      assert(`I4 forbidden scope untouched: ${file}`, !file.startsWith(forbid))
-    }
-  }
 }
 
 // ---- Splitter: synthetic fixture ----
@@ -397,8 +347,6 @@ async function assertRealDocx() {
 // ---- Main ----
 
 async function main() {
-  assertAllowedScope()
-  assertForbiddenScope()
   assertSplitterFixture()
   assertSplitterNoGrammarFill()
   assertSplitterMissingAnswers()

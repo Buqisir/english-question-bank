@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto'
-import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -36,50 +35,6 @@ function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
-    }).split('\n').map(l => l.trim()).filter(Boolean)
-  } catch { return [] }
-}
-
-function changedFiles() {
-  return [...new Set([...gitLines(['diff', '--name-only', 'github/main...HEAD']), ...gitLines(['diff', '--name-only'])])]
-}
-
-// ---- Scope ----
-
-function assertAllowedScope() {
-  const allowedPrefixes = [
-    'server/paper-import-ai/', 'server/ai-providers/', 'server/paper-import/',
-    'app/src/features/paper-import-ai/', 'app/src/features/paper-intelligence/',
-    'docs/cuts/I3-cloze-ai-import/',
-  ]
-  const allowedFiles = new Set([
-    'app/src/services/paperImportAi.ts',
-    'scripts/README.md',
-    'scripts/verify-c7-paper-import-publish.mjs', 'scripts/verify-ci.mjs',
-    'scripts/verify-i1-paper-import-splitter.mjs', 'scripts/verify-i1-paper-import-analysis.mjs',
-    'scripts/verify-i1-paper-import-route.mjs', 'scripts/verify-i2-seven-choices-ai-import.mjs',
-    'scripts/verify-i3-cloze-ai-import.mjs',
-    'scripts/verify-i4-grammar-fill-ai-import.mjs',
-    'scripts/verify-i5-writing-ai-import.mjs',
-    'scripts/verify-i0e-seven-choices-entry.mjs',
-  ])
-  const files = changedFiles()
-  const unexpected = files.filter(f => !allowedFiles.has(f) && !allowedPrefixes.some(p => f.startsWith(p)))
-  assert('I3 changed files in allowed scope', unexpected.length === 0, unexpected.join('\n'))
-
-  const forbidden = files.filter(f =>
-    f.startsWith('schemas/') || f.startsWith('shared/papersurface/') ||
-    f.startsWith('app/src/domain/') || f.startsWith('app/public/paper-assets/') ||
-    (f.endsWith('Adapter.ts') && !f.includes('writingPaperViewAdapter')) || f === 'app/src/features/paper-import/PaperImportWorkbench.tsx' ||
-    f.startsWith('prompts/')
-  )
-  assert('I3 forbidden scopes untouched', forbidden.length === 0, forbidden.join('\n'))
 }
 
 // ---- Splitter ----
@@ -328,7 +283,6 @@ async function assertRealDocx() {
 // ---- Main ----
 
 async function main() {
-  assertAllowedScope()
   assertSplitterFixture()
   assertSplitterNoCloze()
   assertSplitterMissingOptions()

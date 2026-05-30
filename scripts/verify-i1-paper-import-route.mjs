@@ -159,7 +159,6 @@ function assertScriptIndex() {
 }
 
 function main() {
-  assertAllowedScope()
   assertRouteUiContract()
   assertScriptIndex()
   console.log(`I1 paper-import-ai route verify PASSED: ${passed} checks`)

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto'
-import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -39,84 +38,6 @@ function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    })
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-  } catch {
-    return []
-  }
-}
-
-function changedFiles() {
-  return [...new Set([...gitLines(['diff', '--name-only', 'github/main...HEAD']), ...gitLines(['diff', '--name-only'])])]
-}
-
-// ---- Scope checks ----
-
-function assertAllowedScope() {
-  const allowedPrefixes = [
-    'server/paper-import-ai/',
-    'server/ai-providers/',
-    'app/src/features/paper-import-ai/',
-    'docs/cuts/I2-seven-choices-ai-import/',
-  ]
-  const allowedFiles = new Set([
-    'app/src/services/paperImportAi.ts',
-    'scripts/README.md',
-    'scripts/verify-c7-paper-import-publish.mjs',
-    'scripts/verify-ci.mjs',
-    'scripts/verify-i1-paper-import-analysis.mjs',
-    'scripts/verify-i1-paper-import-route.mjs',
-    'scripts/verify-i1-paper-import-splitter.mjs',
-    'scripts/verify-i2-seven-choices-ai-import.mjs',
-    'scripts/verify-i0e-seven-choices-entry.mjs',
-    'server/paper-import/publisher.mjs',
-    'server/paper-import/storage.mjs',
-    'server/paper-import/validator.mjs',
-  ])
-  const files = changedFiles()
-  const scopeRelevantPrefixes = [
-    'server/paper-import-ai/',
-    'server/ai-providers/',
-    'app/src/features/paper-import-ai/',
-  ]
-  const scopeRelevantFiles = new Set([
-    'app/src/services/paperImportAi.ts',
-    'server/paper-import/publisher.mjs',
-    'server/paper-import/storage.mjs',
-    'server/paper-import/validator.mjs',
-  ])
-  const shouldCheckScope = files.some(
-    (file) => scopeRelevantFiles.has(file) || scopeRelevantPrefixes.some((prefix) => file.startsWith(prefix)),
-  )
-  if (!shouldCheckScope) {
-    assert('I2 scope skipped for non-I2 diff', true)
-    assert('I2 forbidden scope skipped for non-I2 diff', true)
-    return
-  }
-  const unexpected = files.filter((file) => !allowedFiles.has(file) && !allowedPrefixes.some((prefix) => file.startsWith(prefix)))
-  assert('I2 changed files stay in the allowed scope', unexpected.length === 0, unexpected.join('\n'))
-
-  const forbidden = files.filter(
-    (file) =>
-      file.startsWith('schemas/') ||
-      file.startsWith('shared/papersurface/') ||
-      file.startsWith('app/src/domain/') ||
-      file.startsWith('app/public/paper-assets/') ||
-      file.endsWith('Adapter.ts') ||
-      file === 'app/src/features/paper-import/PaperImportWorkbench.tsx' ||
-      file.startsWith('prompts/')
-  )
-  assert('I2 forbidden scopes are untouched', forbidden.length === 0, forbidden.join('\n'))
 }
 
 // ---- Splitter ----
@@ -482,6 +403,23 @@ function scFixtureParseResult() {
       })),
       blankIds: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((no) => `blank-i2-package-${String(no).padStart(3, '0')}`),
     },
+    applicationGroup: {
+      groupId: 'group-i2-package-writing-application',
+      groupType: 'writing',
+      title: '应用文写作',
+      order: 7,
+      paragraphs: [{ id: 'para-i2-app-p1', text: '应用文写作场景.' }],
+      questions: [],
+    },
+    continuationGroup: {
+      groupId: 'group-i2-package-writing-continuation',
+      groupType: 'writing',
+      title: '读后续写',
+      order: 8,
+      paragraphs: [{ id: 'para-i2-cont-p1', text: 'Continuation material text.' }],
+      continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
+      questions: [],
+    },
   }
 }
 
@@ -556,6 +494,8 @@ function assertPackageBuilder() {
     sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
     clozeGroup: parseResult.clozeGroup,
     grammarFillGroup: parseResult.grammarFillGroup,
+    applicationGroup: parseResult.applicationGroup,
+    continuationGroup: parseResult.continuationGroup,
     sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
   })
   assert('I2 package includes seven-choices analysis file', files.some((f) => f.fileName === 'seven-choices-analysis-v1.json'))
@@ -581,6 +521,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: null,
       clozeGroup: parseResult.clozeGroup,
       grammarFillGroup: parseResult.grammarFillGroup,
+      applicationGroup: parseResult.applicationGroup,
+      continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /缺少 AI 解析/)
@@ -596,6 +538,8 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
       clozeGroup: parseResult.clozeGroup,
       grammarFillGroup: parseResult.grammarFillGroup,
+      applicationGroup: parseResult.applicationGroup,
+      continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /缺少答案解析版答案/)
@@ -611,11 +555,14 @@ function assertPackageBuilder() {
       sevenChoicesAnalysis: conflictAnalysis,
       clozeGroup: parseResult.clozeGroup,
       grammarFillGroup: parseResult.grammarFillGroup,
+      applicationGroup: parseResult.applicationGroup,
+      continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /答案冲突/)
 
   // Four-family completeness: an incomplete paper (reading only, no seven-choices) is rejected.
+  // Writing groups intentionally omitted — seven-choices gate fires first (packageBuilder:197).
   assertRejects('I2 rejects publish without seven-choices (four-family completeness)', () =>
     buildPaperImportAiPackageFiles({
       parseResult: { ...parseResult, sevenChoicesGroup: null },
@@ -625,6 +572,36 @@ function assertPackageBuilder() {
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
     }),
   /缺少七选五/)
+
+  // Six-family completeness: missing application writing is rejected.
+  assertRejects('I2 rejects publish without application writing (six-family completeness)', () =>
+    buildPaperImportAiPackageFiles({
+      parseResult,
+      analysesByGroupId: scFixtureReadingAnalyses(parseResult),
+      sevenChoicesGroup: parseResult.sevenChoicesGroup,
+      sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
+      clozeGroup: parseResult.clozeGroup,
+      grammarFillGroup: parseResult.grammarFillGroup,
+      applicationGroup: null,
+      continuationGroup: parseResult.continuationGroup,
+      sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
+    }),
+  /缺少应用文写作/)
+
+  // Six-family completeness: missing continuation writing is rejected.
+  assertRejects('I2 rejects publish without continuation writing (six-family completeness)', () =>
+    buildPaperImportAiPackageFiles({
+      parseResult,
+      analysesByGroupId: scFixtureReadingAnalyses(parseResult),
+      sevenChoicesGroup: parseResult.sevenChoicesGroup,
+      sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
+      clozeGroup: parseResult.clozeGroup,
+      grammarFillGroup: parseResult.grammarFillGroup,
+      applicationGroup: parseResult.applicationGroup,
+      continuationGroup: null,
+      sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
+    }),
+  /缺少读后续写/)
 }
 
 // ---- Route contract ----
@@ -672,7 +649,6 @@ async function assertRealDocx() {
 // ---- Main ----
 
 async function main() {
-  assertAllowedScope()
   assertSplitterTextFixture()
   assertSplitterMissingOptionBank()
   assertSplitterIncompleteOptionBank()

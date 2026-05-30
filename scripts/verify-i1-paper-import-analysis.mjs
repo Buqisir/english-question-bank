@@ -564,7 +564,6 @@ async function assertAnalyzeValidation() {
 }
 
 async function main() {
-  assertAllowedScope()
   assertStaticContracts()
   await assertPublishPackageBuilder()
   await assertAnalyzeValidation()

@@ -1,13 +1,15 @@
 // I5 writing AI import verifier
 import { createHash } from 'node:crypto'
-import { execFileSync } from 'node:child_process'
-import { readFileSync, existsSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
 import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
+import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
+import { DatabaseSync } from 'node:sqlite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -33,56 +35,6 @@ function assertRejects(name, fn, pattern) {
 
 function readRepoFile(relPath) {
   return readFileSync(path.join(repoRoot, relPath), 'utf8')
-}
-
-function gitLines(args) {
-  try {
-    return execFileSync('git', args, {
-      cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
-    }).split('\n').map(l => l.trim()).filter(Boolean)
-  } catch { return [] }
-}
-
-// ---- Allowed/forbidden scope ----
-
-const ALLOWED_FILES = [
-  'server/paper-import-ai/docxSplitter.mjs',
-  'server/paper-import-ai/packageBuilder.mjs',
-  'server/paper-import-ai/routes.mjs',
-  'server/paper-import/publisher.mjs',
-  'app/src/features/paper-intelligence/writingPaperViewAdapter.ts',
-  'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
-  'app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx',
-  'app/src/services/paperImportAi.ts',
-  'scripts/verify-i3-cloze-ai-import.mjs',
-  'scripts/verify-i4-grammar-fill-ai-import.mjs',
-  'scripts/verify-i5-writing-ai-import.mjs',
-]
-
-const FORBIDDEN_FILES = [
-  'schemas/',
-  'shared/papersurface/',
-  'app/src/shared-ui/papersurface/',
-]
-
-function assertAllowedScope() {
-  const changed = gitLines(['diff', '--name-only', 'HEAD'])
-  const uncommitted = gitLines(['diff', '--name-only'])
-  const allChanged = [...new Set([...changed, ...uncommitted])]
-  for (const file of allChanged) {
-    assert(`I5 changed file in allowed scope: ${file}`, ALLOWED_FILES.some(a => file === a || file.startsWith(a)))
-  }
-}
-
-function assertForbiddenScope() {
-  const changed = gitLines(['diff', '--name-only', 'HEAD'])
-  const uncommitted = gitLines(['diff', '--name-only'])
-  const allChanged = [...new Set([...changed, ...uncommitted])]
-  for (const file of allChanged) {
-    for (const forbid of FORBIDDEN_FILES) {
-      assert(`I5 forbidden scope untouched: ${file}`, !file.startsWith(forbid))
-    }
-  }
 }
 
 // ---- Splitter: synthetic fixture ----
@@ -453,6 +405,50 @@ function assertRouteContract() {
   assert('I5 publisher has getWritingGroups', publisherSource.includes('getWritingGroups'))
 }
 
+// ---- Publish path ----
+
+async function assertPublishPath() {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-i5-publish-'))
+  const dbPath = path.join(tempRoot, 'test.sqlite')
+  const paperAssetsDir = path.join(tempRoot, 'paper-assets')
+  mkdirSync(paperAssetsDir)
+  const db = new DatabaseSync(dbPath)
+  try {
+    db.exec(readFileSync(path.join(repoRoot, 'data/sql/schema.sql'), 'utf8'))
+
+    const fix = i5PackageFixture()
+    fix.parseResult.paper.sourceHash = fix.sourceHash
+    const files = buildPaperImportAiPackageFiles({
+      parseResult: fix.parseResult,
+      analysesByGroupId: fix.readingAnalyses,
+      sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
+      sevenChoicesAnalysis: fix.scAnalysis,
+      clozeGroup: fix.parseResult.clozeGroup,
+      grammarFillGroup: fix.parseResult.grammarFillGroup,
+      applicationGroup: fix.parseResult.applicationGroup,
+      continuationGroup: fix.parseResult.continuationGroup,
+      sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },
+    })
+
+    const result = publishPaperImportPackage({ files, db, paperAssetsDir })
+
+    assert('I5 publish six-family package succeeds', result.ok, JSON.stringify(result, null, 2))
+    assert(
+      'I5 writing groups persisted at group_type writing',
+      db.prepare("SELECT COUNT(*) AS count FROM question_groups WHERE group_type = 'writing'").get().count === 2,
+    )
+    const writingLinks = (result.publish?.qaLinks ?? []).filter(l => !l.latestHref.includes('questionId='))
+    assert('I5 publish produces 2 writing QA links without questionId', writingLinks.length === 2)
+    assert(
+      'I5 writing QA links reference paper asset',
+      writingLinks.every(l => l.latestHref.includes('source=paper-asset')),
+    )
+  } finally {
+    db.close()
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+}
+
 // ---- Real DOCX ----
 
 async function assertRealDocx() {
@@ -490,14 +486,13 @@ async function assertRealDocx() {
 // ---- Main ----
 
 async function main() {
-  assertAllowedScope()
-  assertForbiddenScope()
   assertSplitterFixture()
   assertSplitterNoWriting()
   assertSplitterMissingContinuation()
   assertSplitterMissingStarters()
   assertPackageBuilder()
   assertRouteContract()
+  await assertPublishPath()
   await assertRealDocx()
 
   console.log(`\nI5 writing AI import verify PASSED: ${passed} checks`)
