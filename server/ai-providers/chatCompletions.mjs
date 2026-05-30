@@ -42,10 +42,13 @@ export async function callChatCompletionsJson({
     stream: false,
   }
 
-  // Only add these params for providers that support them natively.
-  // OpenAI-compatible proxies may choke on unknown parameters.
+  // response_format json_object is standard OpenAI Chat Completions and is the
+  // lever that forces a bare JSON object — OpenAI-compatible relays support it,
+  // so send it for every provider. `thinking` is a non-standard extension; keep
+  // it gated to native providers since a strict OpenAI proxy may reject unknown
+  // params.
+  body.response_format = { type: 'json_object' }
   if (provider !== 'openai-compatible') {
-    body.response_format = { type: 'json_object' }
     body.thinking = { type: 'disabled' }
   }
 
