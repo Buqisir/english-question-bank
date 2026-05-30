@@ -883,7 +883,47 @@ function isWritingStandardLine(line) {
   return false
 }
 
-function extractApplicationParagraphs(lines, paperTail) {
+// I7: a line is part of the 情境 (prompt) if it contains any CJK char or
+// fullwidth/Chinese punctuation; the application "given skeleton" (salutation /
+// signature / given title) is the trailing run of pure non-CJK (English) lines.
+const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
+const APPLICATION_SALUTATION = /^(dear|to|hi|hello)\b/i
+// Closing-word list (line-start, case-insensitive). Longer forms first so
+// "Best wishes" / "Yours sincerely" win over "Best" / "Yours".
+const APPLICATION_CLOSING = /^(yours\s+sincerely|yours\s+faithfully|best\s+wishes|yours|sincerely|best|regards|cheers)\b/i
+
+function applicationLineHasCjk(text) {
+  return APPLICATION_CJK.test(text)
+}
+
+// Detect the given skeleton in the trailing non-CJK run, guarded by a positive
+// signal (MF1). Returns { top, bottom } when captured, else null (fail-safe:
+// keep everything in the prompt). Pure so it is unit-testable.
+export function detectApplicationGiven(contentLines) {
+  let cut = contentLines.length
+  while (cut > 0 && !applicationLineHasCjk(contentLines[cut - 1])) cut -= 1
+  const candidate = contentLines.slice(cut)
+  const promptLines = contentLines.slice(0, cut)
+
+  // Require a Chinese 情境 to remain, and a positive signal on the candidate.
+  if (candidate.length === 0 || promptLines.length === 0) return { given: null, promptLines: contentLines }
+
+  const firstIsSalutation = APPLICATION_SALUTATION.test(candidate[0])
+  const closingIdx = candidate.findIndex((line) => APPLICATION_CLOSING.test(line))
+  const isSingleTitle = candidate.length === 1 && !/[.!?]$/.test(candidate[0])
+  if (!firstIsSalutation && closingIdx < 0 && !isSingleTitle) {
+    // No signal → do not capture; leave the trailing English in the prompt.
+    return { given: null, promptLines: contentLines }
+  }
+
+  const splitAt = closingIdx >= 0 ? closingIdx : candidate.length
+  return {
+    given: { top: candidate.slice(0, splitAt), bottom: candidate.slice(splitAt) },
+    promptLines,
+  }
+}
+
+export function extractApplicationParagraphs(lines, paperTail) {
   const contentLines = []
   for (const line of lines) {
     const text = normalizeLine(line)
@@ -891,12 +931,17 @@ function extractApplicationParagraphs(lines, paperTail) {
     if (isWritingStandardLine(text)) continue
     contentLines.push(text)
   }
-  if (contentLines.length === 0) return { paragraphs: [], error: { reason: 'application_missing_content' } }
+  if (contentLines.length === 0) {
+    return { paragraphs: [], applicationGiven: null, error: { reason: 'application_missing_content' } }
+  }
+
+  const { given, promptLines } = detectApplicationGiven(contentLines)
   return {
-    paragraphs: contentLines.map((text, index) => ({
+    paragraphs: promptLines.map((text, index) => ({
       id: `para-${paperTail}-writing-app-${index === 0 ? 'title' : `p${index}`}`,
       text,
     })),
+    applicationGiven: given,
     error: null,
   }
 }
@@ -987,6 +1032,7 @@ function parseWritingGroups(lines, paperTail) {
       title: '应用文写作',
       order: 7,
       paragraphs: appResult.paragraphs,
+      applicationGiven: appResult.applicationGiven,
       questions: [],
     }
   }
