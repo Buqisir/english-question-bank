@@ -5,7 +5,8 @@
 Import-side change: it rewrites **stored** passage/stem/option text content (not a
 render-time regex). Cross-family (Reading / 七选五 / 完形 / 语法填空 / 写作). Couples to
 the C1 evidence-quote exact-match contract and the C2 I10 blank-marker shapes. Medium cut
-→ PA before DEV (fresh Opus `pa-reviewer`), CR before merge, browser QA load-bearing.
+→ PA before DEV (done, fresh Opus, two passes; `pa.md`), CR before merge, browser QA
+load-bearing.
 
 Authority (source of truth, read these not chat):
 `docs/product/exam-paper-format-standards.md` §"Import Normalization Principle" +
@@ -13,166 +14,190 @@ Authority (source of truth, read these not chat):
 
 ## Goal (LOCKED — slice 2a only)
 
-A shared, pure, dependency-free `normalizePassageText(text)` applied at import to all
-**English-content** text fields, doing exactly **three deterministic, meaning-safe** rules:
+A shared, pure, dependency-free `normalizePassageText(text)` applied **at parse time** to
+all **English-content** text fields, doing exactly **three deterministic, meaning-safe**
+rules:
 
 1. **Half-width punctuation in English context.** Full-width `，。？！；：（）「」` etc. →
    English half-width equivalents — **only when adjacent to English (ASCII letter/digit)
    and NOT adjacent to a CJK character.** Chinese instruction text (`第二部分 阅读`) and
    Chinese gloss interiors keep their full-width Chinese punctuation. (Owner decision D2.)
 2. **One space after English punctuation.** `[.,;:!?]` directly followed by a letter →
-   insert one space. Includes question-number dots and option-label dots (`21.Next` →
-   `21. Next`, `A.Option` → `A. Option`). Generalizes grammar-fill's existing L175 rule
-   cross-family.
-3. **生词括号留空格.** Chinese gloss in English parentheses gets spaces around the parens so
-   they don't stick to neighboring English words: `photosynthesis(光合作用)process` →
-   `photosynthesis (光合作用) process`. This composes with rule 1 (full-width gloss parens
-   `（）` first convert to half-width, then get surrounding spaces).
+   insert one space (`21.Next` → `21. Next`, `A.Option` → `A. Option`). Generalizes
+   grammar-fill's existing L175 rule cross-family. MUST NOT widen to digits (must not touch
+   `56`).
+3. **生词括号留空格.** A parenthesis pair whose **interior contains CJK** gets English
+   half-width parens + spaces around them: `photosynthesis(光合作用)process` →
+   `photosynthesis (光合作用) process` (composes with rule 1 for full-width `（）`). **Scoped
+   to CJK-interior parens only** so it never touches grammar-fill prompt parens `(wear)` or
+   blank parens `(56)` (those are owned at publish by `normalizeGrammarFillText` L177-178).
 
 **Out of scope — deferred to slice 2b (do NOT implement):** curly quotes (straight/Chinese
 → English curly, needs open/close direction detection) and em dash (`---`/`——` → English
-`–`, needs context judgment). These are where the standard's "if normalization may change
-meaning, stop and surface for human review" rule bites. 2a is deterministic only.
+`–`, needs context judgment). The standard's "if normalization may change meaning, stop and
+surface for human review" rule bites there. 2a is deterministic only.
 
 ## Critical constraints (VERIFIED this session by path — design around these)
 
-### C1 — MUST be import-side, NOT render-side.
+### C1 — Normalize UPSTREAM of evidence-quote baking, at PARSE time. (resolved — see D4)
 
-Reading analysis requires evidence quotes to **exactly match the stored passage text**:
-`server/paper-import-ai/analyzeReading.mjs:140` —
-`if (!paragraphText.includes(quote)) throw … 'quote 必须精确匹配原文。'` (verified verbatim).
-Render-time normalization would diverge displayed text from stored text and break evidence
-highlighting. So normalization happens at import, on the stored text, before/at package
-build — there is no render-side shortcut.
+Reading/七选五/cloze analysis bakes AI evidence quotes that must **exactly match the stored
+passage text**: `server/paper-import-ai/analyzeReading.mjs:140` —
+`if (!paragraphText.includes(quote)) throw … 'quote 必须精确匹配原文。'` (verified verbatim;
+seven-choices `analyzeSevenChoices.mjs:162,200,203`, cloze `analyzeCloze.mjs:198-238`).
+Render locates evidence by **plain `indexOf`** with **no fuzzy fallback** on the AI-import
+path (`paperAssetSurfaceAdapter.ts:312` `sentence.text.indexOf(quote)`,
+`adapter/piToPaperEvidence.ts:94`) — first divergent byte → `-1` → highlight silently lost.
+
+The import pipeline is **three separate route calls** (`server/paper-import-ai/routes.mjs`):
+`/parse` (L107-ish returns parseResult) → `/analyze*` (validates+bakes quotes) → `/publish`
+(L134 → `packageBuilder.mjs:184` stores passage + analysis). **The PA's MF-1 proved that
+normalizing at `/publish` is downstream of quote-baking and would diverge stored quote from
+stored passage → silent highlight loss.** Resolution (D4): hook the normalizer at **`/parse`**,
+upstream of `/analyze`, so the normalized text flows identically into analyze (quotes baked
+against normalized text) AND publish (stores the same normalized text). Stored quote ⊆ stored
+passage **by construction** — no quote-field walking, no publish re-validation needed.
+
+PA verified the load-bearing assumption by path: `/parse` result is stored immutably in
+`PaperImportAiWorkbench.tsx` state (`result`, set once ~L287, never mutated); `/analyze` reads
+`group.paragraphs[].text` from `result`, `/publish` reads the same `parseResult: result`. Both
+see identical text. There is no editable text surface in the workbench (only file pickers +
+provider select), so no teacher-edit divergence path.
 
 **Existing-asset policy (owner decision D1):** new imports normalize from now on. Of the 3
-on-disk assets (`paper-2024-jslk-english`, `paper-960d0f8d`, `paper-fe8e7a65`), **re-import
-exactly ONE for browser QA**, leave the other two as-is. No bulk migration script (a script
-that normalized stored passage text but not the stored evidence quotes would itself break
-C1; re-import regenerates both consistently). Never commit `app/public/paper-assets/**`.
+on-disk assets, **re-import exactly ONE for browser QA**, leave the other two as-is. No bulk
+migration script. Never commit `app/public/paper-assets/**`.
 
 ### C2 — MUST NOT regress I10's blank markers (byte-intact).
 
-I10's styled blanks depend on literal marker shapes surviving in stored text:
-七选五 `_____36_____` (3+ underscores), 完形 `__41__` (2 underscores), 语法填空 `  56  `
-(2 **regular** spaces, from `normalizeGrammarFillText`, `packageBuilder.mjs:165-182`).
-2a's three rules must leave all three marker shapes **byte-identical**. In particular:
+I10's styled blanks (render regex `paperBlankPattern` `PaperSurface.tsx:62`) depend on
+literal markers surviving in stored text: 七选五 `_____36_____` (3+ underscores, raw at
+parse), 完形 `__41__` (2 underscores, raw at parse), 语法填空 `  56  ` (2 **regular** spaces,
+minted by `normalizeGrammarFillText` at publish `packageBuilder.mjs:165-182,525`). 2a's three
+rules must leave all three shapes **byte-identical**:
 
-- `normalizePassageText` MUST NOT contain any "collapse multiple spaces" rule. (The existing
-  `normalizeGrammarFillText` L173 `[ ]{3,}→'  '` and `docxSplitter.normalizeLine` L17
-  `[ ]{2,}→' '` already exist and are out of this cut's scope — do not add another.) A
-  space-collapsing rule would destroy `  56  ` and `_____36_____`.
-- None of the 3 rules touch underscores; rules 1/3 act on punctuation/parens; rule 2 acts on
-  `[.,;:!?]`+letter. The markers contain none of these triggers, so they are safe — but the
-  verifier MUST lock this with byte-intact sentinel cases (see §Verifier), because a future
-  rule edit could silently re-break I10.
+- `normalizePassageText` MUST NOT contain any "collapse multiple spaces" rule.
+- Underscores are untouched by all 3 rules (rules act on punctuation / CJK-interior parens).
+- The `  56  ` marker does **not exist at parse** — `normalizePassageText` only ever sees raw
+  grammar text (`56.` / `(56)`). Rule 2 adding a space after `56.` actually *helps* L169 fire
+  (it needs `(?=\s)`); rule 3 is CJK-only so it never touches `(56)`. Compose order is
+  **parse:`normalizePassageText` → publish:`normalizeGrammarFillText`** — the shared
+  normalizer never sees the two-space marker.
+- The verifier MUST lock all of this with byte-intact sentinels + a grammar compose-order
+  idempotency case (a future rule edit could silently re-break I10).
 
 ## Implementation contract (DEV scope — `server/**` is a forbidden zone; this assigns it)
 
-This cut explicitly assigns DEV scope inside `server/paper-import-ai/**`. DEV does NOT touch
-anything else under `server/**`, `scripts/verify-*` (except the new verifier + its
-registration), `app/**`, `schemas/**`, or `app/public/paper-assets/**`.
+This cut explicitly assigns DEV scope inside `server/paper-import-ai/**` (new module +
+`docxSplitter.mjs` hook) and `scripts/` (new verifier + its registration). DEV touches
+**nothing else** — and in particular `packageBuilder.mjs` is **NOT modified** (D4 moved the
+hook to parse; its existing `normalizeGrammarFillText(p.text)` at L525 stays and runs second).
 
 ### Step 1 — new pure module `server/paper-import-ai/normalizePassageText.mjs`
 
 Export `normalizePassageText(text)`. Pure, dependency-free (no imports), idempotent
-(`normalizePassageText(normalizePassageText(x)) === normalizePassageText(x)`). Implements
-exactly the 3 rules above. No space-collapsing. No curly-quote / em-dash logic. DEV works out
-the exact regexes; PA scrutinizes the context-boundary regex (rule 1) and the rule-1/rule-3
-interaction (see PA-Lite focus list).
+(`f(f(x)) === f(x)`). Implements exactly the 3 rules above (rule 3 CJK-interior-parens-only).
+No space-collapsing. No curly-quote / em-dash logic.
 
-### Step 2 — apply at the English-content hook points in `packageBuilder.mjs`
+### Step 2 — apply at the PARSE-time assembled-paragraph build sites in `docxSplitter.mjs`
 
-Apply `normalizePassageText` to the **English-content** `text:` fields only:
-- Reading: stem, option text, passage paragraphs (option text ~L241, paragraphs ~L260).
-- 七选五: stem, option text (~L349), passage paragraphs (~L354).
-- 完形: stem, option text (~L419), passage paragraphs (~L440).
-- 语法填空: stem, and passage text **by composition** — `normalizeGrammarFillText` already
-  runs at L525. COMPOSE so the shared normalizer runs on the raw text FIRST, then grammar
-  inserts its `  56  ` markers: `normalizeGrammarFillText(normalizePassageText(p.text))`.
-  Do NOT apply the shared normalizer after the markers exist; do not double-apply or add a
-  conflicting space rule.
-- 写作: English passage paragraphs (~L620) and the English starter text (~L668).
+Apply `normalizePassageText` to the **assembled** English-content `text:` values at each
+paragraph/stem/option build site — **NOT inside `normalizeLine`**. `normalizeLine`
+(`docxSplitter.mjs:13-19`) runs on every raw line *before* the structural parsers
+(`questionStart` keys on `[.．、]`, answer-range, cloze/grammar option regexes); changing
+punctuation there would shift parse classification. Wrap the final `text:` value after all
+line parsing/filtering instead. Build sites (PA-verified landmarks — DEV maps by structure):
+- Reading paragraphs `buildParagraphs` ~L313-316; reading stem + option text at their build
+  sites.
+- Cloze paragraphs ~L542-545; cloze stem ~L413-area, option text.
+- 七选五 paragraphs ~L826-829; stem ~L329-area, optionBank text.
+- 语法填空 paragraphs ~L707-710 (stem too). `normalizeGrammarFillText` still runs at publish
+  on this already-normalized text — confirm no conflict (C2).
+- 写作 English passage paragraphs ~L940-943 / ~L990-993 / ~L1000-1003; English starter text.
 
-**Do NOT apply it to the Chinese heading / instruction blocks** (`第二部分 阅读` etc. at
-~L224/225, L367/368, L460-462, L553/554, L601-604, L660-668). These are Chinese and out of
-scope. (Rule 1's context-awareness makes the function safe on CJK text as a second layer of
-protection, but apply it only at English-content fields to keep intent explicit.)
-
-Line numbers are landmarks from this session; DEV maps by structure, not by trusting the
-exact line. Verify each hook is a passage/stem/option/starter English-content field.
+**Do NOT apply it to Chinese heading / instruction blocks** (these live in `packageBuilder.mjs`
+as literal `text:` strings, `第二部分 阅读` etc., and are not touched anyway since the hook is in
+`docxSplitter`). Rule 1's CJK-awareness is a second safety layer regardless.
 
 ### Step 3 — verifier `scripts/verify-i11-symbol-normalization.mjs`, registered in CI
 
-Importable table-driven verifier over the real exported `normalizePassageText` (owner
-decision D3 — pure-function + table cases, NOT I10-style source extraction; the function is
-directly importable). Register in `scripts/verify-ci.mjs` `registry.scripts`. Cases:
+Importable table-driven verifier over the real exported `normalizePassageText` (owner D3 —
+pure-function + table cases, NOT I10-style source extraction). Register in
+`scripts/verify-ci.mjs` `registry.scripts` (append; verified L14-46). Cases:
 
-- **Rule 1:** `Hello，world` → `Hello, world`; `它（the cell）` English-adjacent paren
-  converts; Chinese-run `他说，你好世界` → **unchanged** (CJK-adjacent comma stays full-width).
-- **Rule 2:** `21.Next` → `21. Next`; `A.Option` → `A. Option`; already-spaced `A. Option`
-  → unchanged (idempotent).
+- **Rule 1:** `Hello，world` → `Hello, world`; Chinese-run `他说，你好世界` → **unchanged**.
+- **Rule 1 mixed English/CJK seam** (SW-4): a punctuation char with English on one side and
+  CJK on the other (`word，中文`) — DEV defines which side wins; the case locks it
+  deterministically. If DEV cannot make it deterministic, escalate to PO.
+- **Rule 2:** `21.Next` → `21. Next`; `A.Option` → `A. Option`; already-spaced → unchanged.
 - **Rule 3:** `photosynthesis(光合作用)process` → `photosynthesis (光合作用) process`;
-  full-width `photosynthesis（光合作用）process` → same (rule 1 + 3 compose).
-- **C2 byte-intact sentinels (load-bearing — these are the regression tripwire):**
-  `_____36_____` → identical; `__41__` → identical; `  56  ` (two regular spaces) → identical.
+  full-width `（光合作用）` → same (rule 1 + 3 compose); prompt paren `(wear)` and `(56)` →
+  **unchanged** (CJK-only scope).
+- **Grammar compose-order idempotency** (the real (e) tripwire): a grammar paragraph string
+  through `normalizePassageText` then (conceptually) `normalizeGrammarFillText` yields the
+  expected `  56  ` markers, and the shared normalizer alone leaves raw grammar parens intact.
+- **C2 byte-intact sentinels (load-bearing tripwire):** `_____36_____` → identical;
+  `__41__` → identical; `  56  ` → identical.
 - **Idempotency:** for every "after" string, `f(after) === after`.
-- **2b NOT done:** a straight-quote / `---` input passes through unchanged (proves 2b wasn't
-  smuggled in).
+- **2b NOT done:** straight-quote / `---` input passes through unchanged.
 
-CR must **mutation-test** this verifier (I10 CR lesson, watch-ledger): deliberately disable
-one rule and confirm the verifier goes red. A verifier that can't catch a planted regression
-is a fake green.
+CR must **mutation-test** this verifier (I10 CR lesson): disable one rule → verifier must go
+red. A verifier that can't catch a planted regression is a fake green.
 
 ## Forbidden / out-of-scope
 
-- 2b (curly quotes, em dash). Render-side anything. Touching `app/**`,
+- 2b (curly quotes, em dash). Render-side anything. Hooking into `normalizeLine` (breaks parse
+  classification). Modifying `packageBuilder.mjs` (D4 keeps it unchanged). Touching `app/**`,
   `app/public/paper-assets/**` commits, `schemas/**`, other `server/**` dirs, any
   `scripts/verify-*` besides the new one + its registration. Adding a space-collapsing rule.
-  Bulk migration scripts. Re-importing more than the one QA paper.
+  Widening rule 2 to digits. Bulk migration scripts. Re-importing more than the one QA paper.
+  Committing `.claude/launch.json`.
 
 ## Verify
 
-- `node scripts/verify-i11-symbol-normalization.mjs` green (incl. C2 sentinels + idempotency).
-- `node scripts/verify-ci.mjs` green (the new script registered; I10 verifier still green —
-  proves no marker regression at the suite level too).
-- Browser QA (load-bearing): re-import ONE real paper from
-  `/Users/huangxuewei/Desktop/26年3月高三试卷/`, open Reading / 七选五 / 完形 / 语法填空
-  surfaces. Confirm: (a) English punctuation/spacing/gloss normalized; (b) all I10 styled
-  blanks still render (C2); (c) a Reading evidence highlight still matches the passage (C1 —
-  normalized text didn't break quote-exact-match). Clean up; never commit the asset.
+- `node scripts/verify-i11-symbol-normalization.mjs` green (all cases above incl. C2
+  sentinels, mixed-seam, grammar compose-order, idempotency).
+- `node scripts/verify-ci.mjs` green — the new script registered; **`verify-i10-blank-rendering.mjs`
+  still green** (suite-level proof of no marker regression).
+- **Browser QA (load-bearing)** — re-import ONE real paper from
+  `/Users/huangxuewei/Desktop/26年3月高三试卷/`, open Reading / 七选五 / 完形 / 语法填空:
+  1. English punctuation / spacing / gloss normalized on all surfaces.
+  2. All I10 styled blanks still render (C2) across 七选五 / 完形 / 语法填空.
+  3. **(MF-2)** An evidence highlight on a quote **known to contain a normalized character**
+     (full-width-comma English clause or glossed word) still resolves — in **Reading AND at
+     least one of 完形/七选五** — proving D4's parse-time consistency holds end-to-end.
+  Clean up; never commit the asset.
 
-## PA-Lite focus list (what the fresh-Opus PA must scrutinize first)
+## PA Follow-Up Decisions (PM compression of `pa.md`, 2026-05-31)
 
-1. **C2 byte-intactness** — does any of the 3 regexes, on the 3 marker shapes, alter a single
-   byte? Especially the rule-3 close-paren `') '` insertion and rule-2 punct+letter.
-2. **Rule 1 context boundary** — is "English-adjacent, not CJK-adjacent" expressible as a
-   deterministic regex with no meaning-change risk? Watch the seam where an English clause
-   ends and a Chinese clause begins in the same paragraph.
-3. **Rule 1 × Rule 3 interaction** on full-width gloss parens `（中文）` inside English.
-4. **Compose order** for grammar-fill (shared-then-grammar) — confirm markers are created
-   after the shared normalizer runs, never seen by it.
-5. **C1** — does normalizing stored passage text risk diverging from stored Reading evidence
-   quotes for newly-imported papers? (Both come from the same normalized text at import, so
-   they should stay consistent — PA confirm the analyze step reads post-normalization text.)
-6. **Idempotency** of the full pipeline.
+PA verdict: APPROVE WITH MUST FIX (2 MF), then re-validated D4=(e) as SOUND with no new MF.
 
-PA may escalate with `CONTEXT INSUFFICIENT` / `SPEC CONTRADICTS` / `SCOPE UNCLEAR` instead of
-a partial report. When PA returns Must Fix, `pa.md` must map each Must Fix → required
-`plan.md` disposition; PM compresses into a `PA Follow-Up Decisions` section here before DEV.
+- **MF-1 (quote/passage divergence) → RESOLVED by D4 = option (e), parse-time hook.** PA's (a)
+  (normalize stored quote fields at publish) is superseded: normalizing at `/parse` makes
+  stored quote ⊆ stored passage by construction, so no quote-field walking and no publish
+  re-validation are needed. `packageBuilder.mjs` reverts to unchanged. The wrong "analysis &
+  storage share normalized text" hand-wave in the old C1 / old PA-Lite item 5 is corrected
+  above: analysis now genuinely reads normalized text because the hook is upstream of it.
+- **MF-2 (fake-green risk) → folded into Step 3 + Browser QA.** Verifier gains the grammar
+  compose-order idempotency case (the real (e) tripwire); browser QA must check a highlight on
+  a known-normalized quote across Reading AND one of 完形/七选五. CR mutation-tests the verifier.
+- **SW-1..SW-5** (line drift, `compact()` overlap, C2-by-construction, rule-1 seam, rule-1×3
+  gloss) → addressed by the verified build-site landmarks (Step 2), the idempotency + mixed-seam
+  + prompt-paren verifier cases (Step 3), and the rule-3 CJK-only scope.
 
 ## Decisions (owner-confirmed 2026-05-31)
 
-- **D1** existing assets: re-import ONE for QA, leave the other two as-is; new imports
-  normalize from now on; no bulk migration script.
+- **D1** existing assets: re-import ONE for QA, leave the other two; new imports normalize
+  henceforth; no bulk migration script.
 - **D2** half-width boundary: English-adjacent only; all CJK-run punctuation preserved.
-- **D3** verifier: pure-function + table-driven before/after cases, registered in
-  `scripts/verify-ci.mjs`; CR mutation-tests it.
+- **D3** verifier: pure-function + table-driven cases, registered in `scripts/verify-ci.mjs`;
+  CR mutation-tests it.
+- **D4** normalize at **parse time** (`docxSplitter.mjs` assembled build sites), upstream of
+  evidence-quote baking — root-cause fix for MF-1. `packageBuilder.mjs` unchanged.
 
 ## Process
 
-Flow: PM plan.md (this) → fresh-Opus `pa-reviewer` writes `pa.md` → PM compresses PA
-Follow-Up Decisions → Sonnet DEV (scope assigned above) → CR-lite (fresh Opus, mutation-test
-verifier) writes `cr.md` → browser QA → PO QA → RM merge. Remote is **`github`**, base
-`main`. Stage explicitly — never `git add -A` (untracked `.claude/launch.json` must NOT be
-committed; never commit `app/public/paper-assets/**`).
+Flow: PM plan.md (this) → fresh-Opus `pa-reviewer` `pa.md` (done, 2 passes) → PM compression
+(this section) → Sonnet DEV (scope assigned above) → CR-lite (fresh Opus, mutation-test
+verifier) `cr.md` → browser QA → PO QA → RM merge. Remote is **`github`**, base `main`. Stage
+explicitly — never `git add -A`.
