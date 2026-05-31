@@ -180,6 +180,21 @@ export function validateClozeShape(analysis, { paper, group }) {
     if (!item.correctFit || typeof item.correctFit !== 'object') throw new Error(`${questionId}: 缺少 correctFit。`)
     if (!optionalString(item.correctFit.reason)) throw new Error(`${questionId}: 缺少 correctFit.reason。`)
     if (!Array.isArray(item.distractorGlosses)) throw new Error(`${questionId}: distractorGlosses 必须是数组。`)
+    // Validate that distractorGlosses covers each non-answer option exactly (set equality on labels).
+    {
+      const allOptionLabels = Object.keys(sourceQuestion?.options || {})
+      const answerLabel = sourceQuestion?.answerKey || ''
+      const expectedDistractorLabels = new Set(allOptionLabels.filter((l) => l !== answerLabel))
+      const actualLabels = item.distractorGlosses.map((g) => (g && typeof g === 'object' ? String(g.optionLabel || '') : ''))
+      const actualLabelSet = new Set(actualLabels)
+      // Duplicate check: if actualLabels has more entries than the set, there's a dupe.
+      const hasDupe = actualLabels.length !== actualLabelSet.size
+      const missing = [...expectedDistractorLabels].filter((l) => !actualLabelSet.has(l))
+      const extra = [...actualLabelSet].filter((l) => !expectedDistractorLabels.has(l))
+      if (hasDupe || missing.length > 0 || extra.length > 0) {
+        throw new Error(`${questionId}: distractorGlosses 必须覆盖每个非正确选项（缺/多/重复）。`)
+      }
+    }
     if (!Array.isArray(item.evidence)) throw new Error(`${questionId}: evidence 必须是数组。`)
     if (item.evidence.length === 0) throw new Error(`${questionId}: evidence 不能为空，至少需要 1 个 collocation-partner。`)
     if (!optionalString(item.teachingNote)) throw new Error(`${questionId}: 缺少 teachingNote。`)

@@ -336,6 +336,30 @@ async function assertAnalysisValidation() {
     })
     return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
   }, /选项中定位/)
+
+  // --- distractorGlosses missing one distractor label ---
+  await assertRejects('missing distractor gloss blocks cloze', () => {
+    const bad = validClAnalysis(input)
+    const firstKey = Object.keys(bad.blanks)[0]
+    // Remove one distractor entry (keep only 2 of the 3 expected)
+    bad.blanks[firstKey].distractorGlosses = bad.blanks[firstKey].distractorGlosses.slice(0, 2)
+    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /distractorGlosses 必须覆盖每个非正确选项/)
+
+  // --- distractorGlosses has an extra / wrong label ---
+  await assertRejects('extra distractor label blocks cloze', () => {
+    const bad = validClAnalysis(input)
+    const firstKey = Object.keys(bad.blanks)[0]
+    const answerLabel = input.group.questions[0].answerKey
+    // Replace last distractor entry with the correct answer label (an extra/wrong label)
+    const last = bad.blanks[firstKey].distractorGlosses.length - 1
+    bad.blanks[firstKey].distractorGlosses[last] = {
+      optionLabel: answerLabel,
+      optionText: input.group.questions[0].options[answerLabel],
+      meaning: '这是正确答案，不应出现在 distractorGlosses 中。',
+    }
+    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /distractorGlosses 必须覆盖每个非正确选项/)
 }
 
 function assertPromptBuilding() {

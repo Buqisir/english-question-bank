@@ -237,10 +237,13 @@ Rules:
 - Context-side / stem signals MUST appear in the cloze passage text (or the
   question stem); `option` signals MUST appear in one of that blank's A–D
   options.
-- `option`-side highlighting is reserved for **phrase** blanks, to decompose the
-  phrase (e.g. highlight `empty` and `out` separately) alongside a
-  `contextual-composition` signature. Single-word blanks highlight in the
-  passage, not the option.
+- `option`-side highlighting is **primarily** for **phrase** blanks, to
+  decompose the phrase (e.g. highlight `empty` and `out` separately) alongside a
+  `contextual-composition` signature. Other POS blanks may use an `option`
+  signal only when a compound/collocation option word genuinely needs internal
+  decomposition; default to highlighting in the passage. The validator allows
+  `option` signals for any POS (it cannot judge intent); the prompt steers the
+  phrase-first convention.
 - Prefer short `signalText` chunks (1–8 English words). Use `targetText` for the
   larger connected object.
 
