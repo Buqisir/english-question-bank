@@ -190,3 +190,48 @@ Preferred future fix (next slice):
 Follow-up trigger:
 - A real imported 语法填空 paper shows enough sentence-initial blanks that the
   inconsistent styling bothers a teacher on the A4 page.
+
+
+## I12 Symbol Normalization 2b
+
+Source: I12 PA (fresh-Opus cold-read), `docs/cuts/I12-symbol-normalization-2b/pa.md`,
+2026-05-31. Both items are non-blocking and explicitly OUT of 2b's locked 2-file scope.
+
+### Reading group title is unnormalized English content (SW-1)
+
+`normalizePassageText` runs at 21 `docxSplitter.mjs` build sites, but the Reading **group
+title** (`docxSplitter.mjs` L356, `title: marker.title || ...`) is NOT routed through it. This
+is pre-existing since 2a (I11), not a 2b regression.
+
+Why it is safe today:
+- The title is outside the evidence-quote contract — `assertExactQuote`
+  (`analyzeReading.mjs` L133-140) resolves only against `paragraphsById`, and a title is not a
+  paragraph. The title-fallback paragraph at L340 *is* normalized. Render highlight filters by
+  `paragraphId`, so a title is never a highlight target. No quote-divergence path exists.
+
+Current risk:
+- A group title containing a straight quote / dash / full-width punctuation renders
+  un-normalized while its passage body is normalized — a cosmetic inconsistency only.
+
+Follow-up trigger:
+- A real paper shows a visibly un-normalized title beside a normalized passage and it bothers a
+  teacher on the A4 page.
+
+Preferred future fix:
+- Wrap the L356 title in `normalizePassageText` (one-line, but touches `docxSplitter.mjs` which
+  was forbidden in 2b's scope). Confirm it does not shift any title-keyed parse classification.
+
+### Corner brackets 「」『』 not normalized to curly quotes (SW-2)
+
+2b deliberately does NOT special-case CJK corner brackets `「」『』` → English curly quotes.
+Empirical scan of 33 real source papers found **0** occurrences. 2a Rule 1 already maps
+ASCII-adjacent `「」『』` → straight quotes (then 2b Rule 4 direction-derives them); the residual
+`word「q」` → both-closing direction-loss edge is theoretical on real input.
+
+Follow-up trigger:
+- A real paper uses corner brackets around English text and the wrong-facing curly is visible.
+
+Preferred future fix:
+- Add a glyph-directional corner-bracket map (`「`→U+201C, `」`→U+201D, `『`→U+2018, `』`→U+2019)
+  at the TOP of `normalizePassageText` (before 2a Rule 1), and retire Rule 1's `「」『』` branches
+  as unreachable. Re-verify 2a cases stay green.

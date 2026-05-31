@@ -34,9 +34,14 @@ the owner decision below. Existing 3 rules and all 45 2a verifier assertions sta
 **4a — Straight double quote `"` (U+0022) → directional curly.**
 - OPENING `"` (U+201C) when at string start OR immediately preceded by: whitespace, `(`, `[`,
   `{`, `—` (U+2014), `–` (U+2013), or another opening quote `"`/`'`.
-- else CLOSING `"` (U+201D).
-- Double quotes are unambiguous in practice (always paired around speech/quotation); this
-  heuristic effectively never misfires. (Owner: no-debate, implement fully.)
+- else CLOSING `"` (U+201D). **This explicitly includes a `"` preceded by sentence
+  punctuation `,.;:!?` → CLOSING** (MF-1 resolution). Rationale: the dominant real pattern is
+  American-style comma-inside-quote `"Hello," she said.` — there the closing `"` follows the
+  comma and MUST be closing; this is rendered correctly. The inverse `said,"Hello"`
+  (punctuation directly before an *opening* quote, no space) is sloppy input with **0
+  occurrences across 33 real papers** and is locally indistinguishable from the dominant
+  pattern, so it yields a cosmetic wrong-facing quote — **accepted and locked**, not fixed.
+  Do NOT add punctuation to the open-set (that would break the dominant `"Hello,"` closing).
 
 **4b — Straight single quote `'` (U+0027) → conservative.**
 - If immediately preceded by an ASCII letter `[A-Za-z]` → `'` (U+2019). This single target
@@ -109,23 +114,32 @@ place** (do NOT create a new verifier file or a new CI registration; the functio
   through) with real 2b before/after assertions.
 - Add **Rule 4a (double):** `He said, "Hello."` → opening U+201C after space, closing U+201D
   after `.`; `"Start"` at string start → opening + closing; `(quote "x")` paren-preceded →
-  opening.
+  opening. **MF-1 boundary lock (full-string equality):** `"Hello," she said.` →
+  `“Hello,” she said.` (the comma-preceded closing `"` is correct on the dominant pattern); and
+  `He said,"Hello."` → `He said,”Hello.”` (the accepted cosmetic wrong-facing first quote —
+  locks the documented punctuation-preceded-`"`→closing behavior so it is intentional, not
+  drift).
 - Add **Rule 4b (single, conservative):** `don't` → `don't` (U+2019); `students' books`
   → U+2019; `o'clock` → U+2019; `Jiang'an` → U+2019. **Ambiguity LEFT-ALONE locks (load-bearing
-  — these are the conservative gate):** `'90s` → unchanged straight; `'apple'` → first `'`
-  unchanged straight + closing `'` after `e` becomes U+2019 (i.e. `'apple’`); `rock 'n' roll`
-  → `rock 'n’ roll` (documented asymmetry: space-preceded `'` straight, `n`-preceded `'` →
-  U+2019). `5'10"` → `'` after digit unchanged, `"` after digit → closing.
+  — the conservative gate), assert FULL-STRING equality:** `'90s` → `'90s` unchanged (straight
+  U+0027); `'apple'` → `'apple’` (first `'` straight U+0027, trailing `'` after `e` → U+2019 —
+  assert the **exact** two-glyph string, not just "first unchanged"); `rock 'n' roll` →
+  `rock 'n’ roll` (documented asymmetry); `5'10"` → `5'10”` (digit-preceded `'` stays straight —
+  pins the guard on the digit side; trailing `"` after `0` → closing U+201D).
 - Add **Rule 5 (em dash):** `wait---no` → `wait—no`; `yes——no` → `yes—no`; `——` → `—`. **NOT
   touched locks:** `well-known` → unchanged; `1990-2000` → unchanged; `--` → unchanged; lone `—`
   → unchanged.
 - Add **idempotency** entries for every new "after" string.
 - Existing C2 sentinels + grammar compose-order + all Rule 1/2/3 cases stay (must stay green).
 
-CR must **mutation-test** the verifier (2a/I10 lesson): disabling Rule 4 reddens the quote
-cases; disabling Rule 5 reddens the dash cases; **weakening 4b's `[A-Za-z]`-preceded guard to
-also match non-letters reddens the `'90s` case** (proves the conservative boundary is tested,
-not decorative). A verifier that can't catch these is a fake green.
+CR must **mutation-test** the verifier (2a/I10 lesson), using these **exact named mutations**
+so the test is deterministic, not improvised:
+- Disable Rule 4 (quote conversion) entirely → the Rule 4a/4b conversion cases red.
+- Disable Rule 5 → the em-dash cases red.
+- **Remove 4b's `(?<=[A-Za-z])` preceding-letter guard** (convert *every* straight `'` →
+  U+2019) → the `'90s` and `'apple'` left-alone locks red. (Note: widening the guard only to
+  digits would NOT flip `'90s`, whose `'` is space/start-preceded — the guard must be *dropped*
+  to exercise the gate.) A verifier that can't catch these is a fake green.
 
 ## Forbidden / out-of-scope
 - Modifying `docxSplitter.mjs` (already wired — no change needed) or `packageBuilder.mjs`.
@@ -155,8 +169,32 @@ not decorative). A verifier that can't catch these is a fake green.
   standalone single `'` left straight (ambiguity → human review per the standard). Double quotes
   done fully; em dash `-{3,}`/`——` → `—`, single/double hyphen untouched.
 
-## PA Follow-Up Decisions (PM compression of `pa.md`)
-_(To be filled after the fresh-Opus PA pass. Map each Must Fix → plan disposition here.)_
+## PA Follow-Up Decisions (PM compression of `pa.md`, 2026-05-31)
+
+PA verdict: **APPROVE WITH MUST FIX (2 MF), 0 unresolved PO decisions.** C1 (parse-time quote
+contract) and C2 (I10 byte-intactness) verified true by path for 2b. Decisive new evidence: an
+empirical scan of all 33 real source papers — ~3000 quotes already curly (Rule 4 won't touch),
+all 65 straight single-quotes letter-preceded (deterministic → U+2019), and **0** occurrences
+of `'90s` / `---` / `——` / corner brackets. ⇒ 2b is nearly a no-op on real input; **the
+verifier, not browser QA, is the true proof surface.** Both MF therefore target verifier
+precision.
+
+- **MF-1 (double-quote punctuation boundary unspecified) → RESOLVED, locked in Rule 4a above.**
+  A `"` preceded by sentence punctuation `,.;:!?` is CLOSING. Chosen because the dominant real
+  pattern is American comma-inside-quote `"Hello," she said.` (rendered correctly); the inverse
+  `said,"Hello"` is 0-corpus sloppy input and locally indistinguishable, accepted as a cosmetic
+  wrong-facing quote. Verifier gains full-string locks `"Hello," she said.` → `“Hello,” she
+  said.` and `He said,"Hello."` → `He said,”Hello.”`.
+- **MF-2 (mutation test + `'apple'` lock precision) → RESOLVED in Step 2.** The conservative-gate
+  mutation is named exactly: **drop 4b's `(?<=[A-Za-z])` guard** (PA's `[A-Za-z]`→`[A-Za-z0-9]`
+  suggestion was imprecise — `'90s`'s apostrophe is space/start-preceded, so widening to digits
+  would not flip it). `'apple'` and `5'10"` upgraded to full-string equality so a trailing-glyph
+  bug can't pass silently.
+- **SW-1 (Reading group title `docxSplitter.mjs` L356 unnormalized) + SW-2 (corner-bracket
+  deferral)** → recorded in `docs/paper-surface-watch-ledger.md`; both out of 2b's locked
+  2-file scope (pre-existing since 2a / 0-corpus). **SW-3/SW-4** (cosmetic `5'10"`/`rock 'n'`
+  asymmetry; QA likely finds no live elision token) → accepted; verifier is authoritative for
+  the conservative gate.
 
 ## Process
 Flow: PM plan.md (this) → fresh-Opus `pa-reviewer` `pa.md` → PM compression (above section) →
