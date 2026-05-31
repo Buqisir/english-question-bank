@@ -164,6 +164,30 @@ so the test is deterministic, not improvised:
      proof: every baked `quote`/`targetText`/`sourceQuote` `includes()`-matches its stored
      normalized passage. Clean up; never commit the asset.
 
+## Browser QA Result (2026-05-31 — parse-only data smoke, owner-chosen lightweight path)
+
+Owner chose the **lightweight parse-only smoke** (not a full AI re-import) after PA reframed 2b
+as near-no-op on real input. Discovery: the publish/render path (`buildPaperImportAiPackageFiles`)
+**requires AI analysis** (七选五/完形 analysis mandatory, six-family completeness), so a
+zero-quota PaperSurface render is not reachable without burning gpt-5.5. Delivered instead a
+**zero-AI data-level parse smoke** on a real paper (石室中学高三二诊, 220 text fields) — stronger
+than eyeballing because it checks ALL quotes/dashes, not just what's on screen. PASS:
+
+- **Idempotency on real content:** 220/220 parsed fields are no-ops under a second
+  `normalizePassageText` pass → the function is stable on real text (it already ran at parse).
+- **2b fully applied (all 0):** residual straight `"` = 0, `---` = 0, `——`-runs = 0,
+  letter-preceded straight `'` = 0.
+- **Already-curly content unharmed:** 27/28 curly `“`/`”`, 42 curly `‘`/`’`, 8 lone `—` — all
+  preserved untouched (Rule 4/5 match only straight glyphs; curly is provably untouched).
+- **Conservative gate:** standalone straight `'` = 0 on this paper (no `'90s`-type token,
+  consistent with the 33-paper corpus scan).
+- **C2 — I10 markers byte-intact at parse:** 七选五 `_____NN_____`×5, 完形 `__NN__`×15,
+  语法 raw 56-65 nums×21 (two-space marker minted at publish, not parse — correct).
+
+Render-of-text is unchanged by 2b (it is React displaying a string) and the D4 parse-time
+end-to-end highlight consistency was already discharged by 2a's full re-import (109/109).
+Residual gate: **PO QA (owner) → RM merge.**
+
 ## Decisions (owner-confirmed 2026-05-31)
 - **D-2b-1** single-quote policy = **conservative**: letter-preceded `'` → U+2019; all other
   standalone single `'` left straight (ambiguity → human review per the standard). Double quotes
