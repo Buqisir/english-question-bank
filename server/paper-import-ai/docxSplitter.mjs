@@ -353,7 +353,7 @@ function buildReadingGroup(marker, groupLines, { answerMap, paperTail }) {
   return {
     group: {
       groupId: `group-${paperTail}-reading-${marker.label.toLowerCase()}`,
-      title: marker.title || `Reading ${marker.label}`,
+      title: normalizePassageText(marker.title) || `Reading ${marker.label}`,
       order: READING_LABELS.indexOf(marker.label),
       paragraphs,
       questions,

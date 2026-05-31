@@ -197,11 +197,19 @@ Follow-up trigger:
 Source: I12 PA (fresh-Opus cold-read), `docs/cuts/I12-symbol-normalization-2b/pa.md`,
 2026-05-31. Both items are non-blocking and explicitly OUT of 2b's locked 2-file scope.
 
-### Reading group title is unnormalized English content (SW-1)
+### Reading group title is unnormalized English content (SW-1) — RESOLVED 2026-05-31
+
+**Resolved** (PR follow-up, branch `sw1-reading-title-normalize`): `docxSplitter.mjs` L356 now
+reads `title: normalizePassageText(marker.title) || \`Reading ${marker.label}\``, mirroring the
+title-fallback paragraph at L340. `normalizePassageText` preserves ASCII, so the `Reading A`
+fallback and the `Passage A` / `A篇` A-D label extraction (packageBuilder.mjs L47 regex) are
+unaffected. Locked by `assertTitleNormalization()` in `scripts/verify-i1-paper-import-splitter.mjs`
+(a titled `Passage A The Cloud Farm（云农场）guide` marker comes back
+`The Cloud Farm (云农场) guide`; label still derives from groupId). Original note below for record.
 
 `normalizePassageText` runs at 21 `docxSplitter.mjs` build sites, but the Reading **group
-title** (`docxSplitter.mjs` L356, `title: marker.title || ...`) is NOT routed through it. This
-is pre-existing since 2a (I11), not a 2b regression.
+title** (`docxSplitter.mjs` L356, `title: marker.title || ...`) was NOT routed through it. This
+was pre-existing since 2a (I11), not a 2b regression.
 
 Why it is safe today:
 - The title is outside the evidence-quote contract — `assertExactQuote`
