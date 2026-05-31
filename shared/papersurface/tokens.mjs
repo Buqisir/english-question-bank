@@ -60,7 +60,7 @@ export const paperSurfaceTokens = Object.freeze({
    * body width is 794px - 56px * 2 = 682px, so the reusable target is
    * 682px * 10.5% ≈ 72px.
    */
-  sevenChoiceBlankWidth: '72px',
+  paperBlankWidth: '72px',
 })
 
 /**

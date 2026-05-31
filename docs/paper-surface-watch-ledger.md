@@ -154,3 +154,39 @@ Follow-up trigger:
 Preferred future fix:
 - Move the rail into a stable grid track or shrink the expanded rail before changing brace z-index.
 - Keep PaperSurface unchanged; the harness should continue querying `data-paper-*` anchors.
+
+### Sentence-initial 语法填空 blank not styled (space-marker only)
+
+Source: I10-blank-rendering browser QA, 2026-05-31. PO 黄学伟 decided ship-now,
+fix-next-slice.
+
+PaperSurface styles a blank by matching `paperBlankPattern`
+(`PaperSurface.tsx`) which requires a delimiter (2+ underscores OR 2+
+regular/nbsp spaces) on BOTH sides of the number. The renderer runs per
+SENTENCE slice (`renderTextWithPaperBlanks` is called on segmented sentence
+text). Sentence segmentation splits at the space after a period, so a 语法填空
+blank that sits at the START of a sentence (e.g. `...blood.  58  (study)...`)
+loses its leading 2-space delimiter to the previous sentence and renders as a
+plain number `58`, not the styled underline.
+
+Scope: 语法填空 ONLY. 完形 (`__41__`) and 七选五 (`_____36_____`) use underscore
+markers attached to the number, which survive sentence splitting, so they style
+even sentence-initially. Confirmed in QA: cloze 15/15 styled; grammar 8/10
+(the 2 unstyled were both immediately after a period).
+
+NOT a regression: pre-I10 the renderer styled zero 语法填空 blanks. I10 is a net
+improvement (cloze fully + grammar mid-sentence); this is a known remaining gap.
+
+Do NOT fix by accepting a sentence-initial blank with only a TRAILING delimiter
+(`^\s*\d{1,3}\s{2,}`) — that re-opens the false-match surface I10 deliberately
+bounded (a sentence genuinely starting with a number + double space).
+
+Preferred future fix (next slice):
+- Keep the leading delimiter attached across the sentence boundary, or run the
+  blank match before sentence segmentation, or carry a "sentence-initial blank"
+  hint from the segmenter. Touches segmentation / cross-sentence delimiter
+  handling — out of I10's display-only scope.
+
+Follow-up trigger:
+- A real imported 语法填空 paper shows enough sentence-initial blanks that the
+  inconsistent styling bothers a teacher on the A4 page.

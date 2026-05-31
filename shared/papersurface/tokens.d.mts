@@ -15,7 +15,7 @@ export type PaperSurfaceTokens = {
   readonly passageIndent: string
   readonly optionsGridColumns: string
   readonly optionsGridGapX: string
-  readonly sevenChoiceBlankWidth: string
+  readonly paperBlankWidth: string
 }
 
 export const paperSurfaceTokens: PaperSurfaceTokens

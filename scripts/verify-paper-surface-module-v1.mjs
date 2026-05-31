@@ -461,7 +461,7 @@ const REQUIRED_CSS_VARS = [
   '--ps-passage-indent',
   '--ps-options-grid-columns',
   '--ps-options-grid-gap-x',
-  '--ps-seven-choice-blank-width',
+  '--ps-paper-blank-width',
 ]
 
 for (const v of REQUIRED_CSS_VARS) {
@@ -495,45 +495,45 @@ for (const re of FORBIDDEN_CSS_LITERALS) {
 const tokensSrc = readSrc('shared/papersurface/tokens.mjs')
 const tokensDtsSrc = readSrc('shared/papersurface/tokens.d.ts')
 const tokensDmtsSrc = readSrc('shared/papersurface/tokens.d.mts')
-const sevenBlankRule = readCssRuleBody(cssSrc, '.ps-seven-choice-blank')
+const paperBlankRule = readCssRuleBody(cssSrc, '.ps-paper-blank')
 
 assert(
-  'PaperSurface tokens define seven-choice blank width as 72px',
-  /sevenChoiceBlankWidth:\s*['"]72px['"]/.test(tokensSrc),
-  'sevenChoiceBlankWidth must stay at the 2024 JSLK calibrated 72px standard',
+  'PaperSurface tokens define paper blank width as 72px',
+  /paperBlankWidth:\s*['"]72px['"]/.test(tokensSrc),
+  'paperBlankWidth must stay at the 2024 JSLK calibrated 72px standard',
 )
 assert(
-  'PaperSurface token declarations include sevenChoiceBlankWidth',
-  /readonly\s+sevenChoiceBlankWidth:\s*string/.test(tokensDtsSrc) &&
-    /readonly\s+sevenChoiceBlankWidth:\s*string/.test(tokensDmtsSrc),
-  'sevenChoiceBlankWidth declaration missing from .d.ts or .d.mts',
+  'PaperSurface token declarations include paperBlankWidth',
+  /readonly\s+paperBlankWidth:\s*string/.test(tokensDtsSrc) &&
+    /readonly\s+paperBlankWidth:\s*string/.test(tokensDmtsSrc),
+  'paperBlankWidth declaration missing from .d.ts or .d.mts',
 )
 assert(
-  'PaperSurface injects seven-choice blank width token',
-  /--ps-seven-choice-blank-width['"]?:\s*paperSurfaceTokens\.sevenChoiceBlankWidth/.test(tsxSrc),
-  'PaperSurface.tsx does not inject --ps-seven-choice-blank-width',
+  'PaperSurface injects paper blank width token',
+  /--ps-paper-blank-width['"]?:\s*paperSurfaceTokens\.paperBlankWidth/.test(tsxSrc),
+  'PaperSurface.tsx does not inject --ps-paper-blank-width',
 )
 assert(
-  'Seven-choice blank renderer consumes imported underline wrappers',
-  /const\s+sevenChoicesBlankPattern\s*=\s*\/\(\?:_\{3,\}\|\\u00A0\{3,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{3,\}\|\\u00A0\{3,\}\)\/g/.test(tsxSrc),
-  '_____39_____ must render as one standard blank, not three visible lines',
+  'Paper blank renderer uses relaxed pattern (I10)',
+  /const\s+paperBlankPattern\s*=\s*\/\(\?:_\{2,\}\|\\[\\u0020\\u00A0\]\{2,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{2,\}\|\\[\\u0020\\u00A0\]\{2,\}\)\/g/.test(tsxSrc),
+  'paperBlankPattern must match _{2,} or [\\u0020\\u00A0]{2,} around 1-3 digit number',
 )
 assert(
-  'Seven-choice blank consumes the width token',
-  /width\s*:\s*var\(\s*--ps-seven-choice-blank-width\s*\)/.test(sevenBlankRule),
-  '.ps-seven-choice-blank must use var(--ps-seven-choice-blank-width)',
+  'Paper blank consumes the width token',
+  /width\s*:\s*var\(\s*--ps-paper-blank-width\s*\)/.test(paperBlankRule),
+  '.ps-paper-blank must use var(--ps-paper-blank-width)',
 )
 assert(
-  'Seven-choice blank keeps centered tabular number on fixed line',
-  /display\s*:\s*inline-flex/.test(sevenBlankRule) &&
-    /justify-content\s*:\s*center/.test(sevenBlankRule) &&
-    /font-variant-numeric\s*:\s*tabular-nums/.test(sevenBlankRule) &&
-    /text-indent\s*:\s*0/.test(sevenBlankRule),
-  '.ps-seven-choice-blank must center the number without paragraph indent',
+  'Paper blank keeps centered tabular number on fixed line',
+  /display\s*:\s*inline-flex/.test(paperBlankRule) &&
+    /justify-content\s*:\s*center/.test(paperBlankRule) &&
+    /font-variant-numeric\s*:\s*tabular-nums/.test(paperBlankRule) &&
+    /text-indent\s*:\s*0/.test(paperBlankRule),
+  '.ps-paper-blank must center the number without paragraph indent',
 )
 assert(
-  'Seven-choice blank does not use font-relative width',
-  !/width\s*:\s*4\.5em/.test(sevenBlankRule),
+  'Paper blank does not use font-relative width',
+  !/width\s*:\s*4\.5em/.test(paperBlankRule),
   'font-relative blank width would drift away from the 72px PaperSurface standard',
 )
 
