@@ -143,11 +143,11 @@
   /* Sentences are inline spans; no special styling in B3. */
 }
 
-.ps-seven-choice-blank {
+.ps-paper-blank {
   display: inline-flex;
   align-items: flex-end;
   justify-content: center;
-  width: var(--ps-seven-choice-blank-width);
+  width: var(--ps-paper-blank-width);
   white-space: nowrap;
   border-bottom: 1px solid currentColor;
   font-variant-numeric: tabular-nums;

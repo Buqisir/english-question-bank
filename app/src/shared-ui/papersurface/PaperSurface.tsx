@@ -56,10 +56,10 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
-  '--ps-seven-choice-blank-width': paperSurfaceTokens.sevenChoiceBlankWidth,
+  '--ps-paper-blank-width': paperSurfaceTokens.paperBlankWidth,
 }
 
-const sevenChoicesBlankPattern = /(?:_{3,}|\u00A0{3,})\s*(\d{1,3})\s*(?:_{3,}|\u00A0{3,})/g
+const paperBlankPattern = /(?:_{2,}|[\u0020\u00A0]{2,})\s*(\d{1,3})\s*(?:_{2,}|[\u0020\u00A0]{2,})/g
 
 export function PaperSurface(props: PaperSurfaceProps): ReactNode {
   const {
@@ -378,7 +378,7 @@ function PaperSurfaceSentence({
     >
       {hasInlineActive && activeEv ? (
         <>
-          {renderTextWithSevenChoicesBlanks(text.slice(0, activeStart), `${sentence.id}-pre`)}
+          {renderTextWithPaperBlanks(text.slice(0, activeStart), `${sentence.id}-pre`)}
           <mark
             className="ps-evidence-anchor ps-evidence-anchor--active"
             {...{
@@ -386,12 +386,12 @@ function PaperSurfaceSentence({
               [paperSurfaceAnchorAttrs.evidenceKind]: activeEv.kind,
             }}
           >
-            {renderTextWithSevenChoicesBlanks(text.slice(activeStart, activeEnd), `${sentence.id}-active`)}
+            {renderTextWithPaperBlanks(text.slice(activeStart, activeEnd), `${sentence.id}-active`)}
           </mark>
-          {renderTextWithSevenChoicesBlanks(text.slice(activeEnd), `${sentence.id}-post`)}
+          {renderTextWithPaperBlanks(text.slice(activeEnd), `${sentence.id}-post`)}
         </>
       ) : (
-        renderTextWithSevenChoicesBlanks(text, sentence.id)
+        renderTextWithPaperBlanks(text, sentence.id)
       )}
       {/*
         Neutral evidence anchors — invisible, zero-size span siblings.
@@ -433,19 +433,19 @@ function PaperSurfaceSentence({
   )
 }
 
-function renderTextWithSevenChoicesBlanks(text: string, keyPrefix: string): ReactNode {
-  if (!sevenChoicesBlankPattern.test(text)) return text
-  sevenChoicesBlankPattern.lastIndex = 0
+function renderTextWithPaperBlanks(text: string, keyPrefix: string): ReactNode {
+  if (!paperBlankPattern.test(text)) return text
+  paperBlankPattern.lastIndex = 0
   const nodes: ReactNode[] = []
   let cursor = 0
   let match: RegExpExecArray | null
   let index = 0
-  while ((match = sevenChoicesBlankPattern.exec(text)) !== null) {
+  while ((match = paperBlankPattern.exec(text)) !== null) {
     if (match.index > cursor) {
       nodes.push(text.slice(cursor, match.index))
     }
     nodes.push(
-      <span key={`${keyPrefix}-seven-blank-${index}`} className="ps-seven-choice-blank">
+      <span key={`${keyPrefix}-paper-blank-${index}`} className="ps-paper-blank">
         {match[1]}
       </span>,
     )

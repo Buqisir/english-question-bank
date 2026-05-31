@@ -41,6 +41,7 @@ const registry = {
   'scripts/verify-i7-application-given.mjs',
   'scripts/verify-i8-cloze-analysis.mjs',
   'scripts/verify-i9-cloze-analysis-surface.mjs',
+  'scripts/verify-i10-blank-rendering.mjs',
   'scripts/verify-relay-json-format.mjs',
   ],
 }
