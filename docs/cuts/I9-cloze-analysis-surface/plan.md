@@ -36,6 +36,22 @@ generation code.
   a single highlight kind; the evidence TYPE shows as a text label in the row
   only. Do NOT extend the `support/trap/context` kind taxonomy and do NOT change
   `shared/papersurface/**`. Colored type-differentiation is deferred polish.
+- **Uniform kind = `support` (PA MF-3.1).** The cross-column
+  `PaperIntelligenceEvidenceLine` prop `activeEvidenceKind` only accepts
+  `'support' | 'trap' | null` (`paperIntelligenceEvidenceLine.tsx:120`); using
+  `context` would mismatch the inline-paint palette vs the line palette. Lock
+  `support` for all cloze evidence.
+- **Option-side evidence = in-card `<mark>` (PA MF-3.2).** Phrase-blank
+  `signalSide:"option"` evidence highlights inside the rendered option text in
+  the card using the existing `renderOptionTextWithSignals` pattern
+  (`SevenChoicesAnalysisPanel.tsx:233-262`); it does NOT create a passage
+  `data-paper-evidence-id` anchor.
+- **Multi-occurrence = highlight all occurrences (PA MF-3.3).** Cloze evidence
+  carries no paragraphId, so a short `signalText` can match in unrelated
+  sentences. Lock: highlight ALL exact-substring occurrences (deterministic,
+  never silently points at the wrong single spot). "Nearest-to-blank on
+  signalSide" is deferred polish. A verifier fixture must cover a repeated
+  `signalText`.
 - **One cut (Fork 2):** render + entry gate together.
 - **Entry**: `完形解析` label, completeness-gated (all 15 blanks have analysis),
   mirroring the seven-choices availability config. Hide entry when incomplete
@@ -85,26 +101,47 @@ Verification standard:
 
 ### Step 3 — Harness wiring (fetch + dispatch + focus)
 
-- In `PaperIntelligencePaperSurfaceHarness.tsx`: for a cloze group, fetch
-  `/paper-assets/<paperId>/latest/analyses/cloze-analysis-v1.json`. If present +
-  valid, build the analysis model and dispatch `ClozeAnalysisPanel`; if absent,
-  fall back to the existing I3 plain cloze view (do not break it).
-- Focus-per-blank: the URL `questionId` opens that blank's card; clicking a blank
-  opens it. Reuse the existing evidence highlight + cross-column line + auto-scroll
-  (derive `activeEvidenceKind` for the uniform kind).
+**PA MF-2: the cloze branch currently SHORT-CIRCUITS before the fetch.**
+`PaperIntelligencePaperSurfaceHarness.tsx:317-329` returns the plain
+`buildClozePaperView` model immediately for any cloze group, BEFORE the
+paper-asset analysis-fetch block (~L361-413). DEV must restructure this branch to
+**fetch → fallback**, not just "upgrade the adapter". Enumerate every touch point:
+
+- Restructure the cloze branch: fetch
+  `/paper-assets/<paperId>/latest/analyses/cloze-analysis-v1.json`; if present +
+  valid → build the analysis model + dispatch `ClozeAnalysisPanel`; if
+  absent/invalid → fall back to the existing I3 plain cloze view (must not break).
+- `activeEvidenceKind` derive (~L736-748): currently returns null for a cloze
+  model and reads `analysisView.distractors` (paper-asset-shaped). Add a cloze
+  branch returning `'support'` for the active cloze evidence.
+- Seed/default-focus effect (~L757-781): handle the cloze analysis model (seed
+  the first blank's questionId).
+- Focus-intent handler (~L799-803): currently casts to
+  `PaperAssetQuestionAnalysisView`; must handle the cloze model shape.
+- Focus-per-blank: URL `questionId` opens that blank's card; clicking a blank
+  opens it. Reuse the existing evidence highlight + cross-column line + auto-scroll.
 
 Verification standard:
 
 - Harness static/unit checks: cloze group with analysis dispatches the cloze
-  analysis panel; cloze group without analysis still renders the plain view;
-  questionId focus opens the matching blank.
+  analysis panel; cloze group without analysis still renders the plain view
+  (fallback intact); questionId focus opens the matching blank; the three
+  enumerated branches handle the cloze model without casting to the paper-asset
+  view.
 
 ### Step 4 — Availability entry gate
 
 - Add a `cloze-analysis-v1` entry to the `analysisConfigs` array in
   `server/search/paperSurfaceAvailability.mjs`: schemaVersion `cloze-analysis-v1`,
-  fileName `cloze-analysis-v1.json`, label `完形解析`, completeness rule = every
-  cloze group questionId has an entry under the analysis `blanks` map.
+  fileName `cloze-analysis-v1.json`, label `完形解析`, groupType `cloze`,
+  completeness rule = every cloze group questionId has an entry under the analysis
+  `blanks` map.
+- **PA MF-1: `addAvailabilityForAnalysis` hard-codes `analysis?.questions?.[questionId]`**
+  (`paperSurfaceAvailability.mjs:56-59`). Cloze keys per-blank entries under
+  `blanks`, NOT `questions` — a plain config mirror finds nothing and silently
+  hides the entry forever. Make the completeness check **config-aware**: add a
+  per-config `entryMapKey` (`'questions'` for reading/七选五, `'blanks'` for cloze)
+  and check `analysis?.[entryMapKey]?.[questionId]`.
 - `buildPaperSurfaceHref` already produces the right URL (source=paper-asset,
   groupId, questionId=firstQuestionId). The card (`ConciergeGroupCard.tsx`)
   consumes the existing `hasPaperSurfaceAnalysis` / `paperSurfaceHref` /
@@ -112,14 +149,18 @@ Verification standard:
 
 Verification standard:
 
-- A complete cloze analysis yields a `完形解析` href targeting blank 41; an
-  incomplete/missing one hides the entry. Reading / 七选五 availability unchanged.
+- Completeness is checked on the `blanks` key: a cloze analysis with all 15
+  blanks yields a `完形解析` href targeting blank 41; one missing a blank entry
+  hides the entry. Reading / 七选五 availability (still keyed on `questions`)
+  unchanged.
 
 ### Step 5 — Verifier + CI
 
 - Add `scripts/verify-i9-cloze-analysis-surface.mjs` covering Steps 1–4 (adapter
-  mapping incl. evidence-range location + blank-marker exclusion; panel required
-  parts; harness dispatch/fallback; availability gate complete vs incomplete).
+  mapping incl. evidence-range location + blank-marker exclusion + a repeated-
+  `signalText` multi-occurrence fixture; panel required parts; harness
+  dispatch/fallback; availability gate complete vs incomplete on the `blanks`
+  key).
 - Register it in `scripts/verify-ci.mjs`. Update `scripts/README.md`.
 
 Verification standard:
@@ -189,6 +230,11 @@ Adjust after code inspection; keep edits owner-file-aware.
 
 ## PA Follow-Up Decisions
 
+PA verdict: **APPROVE WITH MUST FIX** (`pa.md`). All 3 Must Fix folded; 0 PO
+decisions. DEV may start.
+
 | PA item | `pa.md` disposition | `plan.md` handling | Status |
 | --- | --- | --- | --- |
-| _(to be filled after PA)_ | | | |
+| `MF-1` | Availability gate hard-codes `analysis.questions[questionId]`; cloze keys under `blanks` → entry silently hidden forever. | Step 4 now requires a config-aware `entryMapKey` (`'blanks'` for cloze) + `groupType: cloze`; verifier asserts complete/incomplete on the `blanks` key. | Closed |
+| `MF-2` | Harness cloze branch short-circuits to plain view before the analysis fetch; 3 paper-asset-shaped branches won't handle a cloze model. | Step 3 rewritten to fetch→fallback and enumerates the touch points: `activeEvidenceKind` (~L736-748), seed effect (~L757-781), focus-intent handler (~L799-803). | Closed |
+| `MF-3` | Lock 3 decisions, don't defer to DEV. | Locked Decisions: (1) uniform kind = `support` (EvidenceLine prop type); (2) option-side = in-card `<mark>` via `renderOptionTextWithSignals`; (3) multi-occurrence = highlight all occurrences + fixture. | Closed |
