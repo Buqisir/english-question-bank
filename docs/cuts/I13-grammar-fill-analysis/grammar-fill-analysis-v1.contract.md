@@ -134,11 +134,18 @@ Optional / conditional:
 
 ## Facet Reference
 
-`facetKey` MUST be one of the leaf keys defined in `grammar-fill-facets-v1.md`,
+`facetKey` MUST be one of the **16 leaf** keys defined in `grammar-fill-facets-v1.md`,
 namespace `grammar-fill.*`, ≤ 4 levels. The validator checks membership against
 the facet registry; it does NOT re-derive the framework. The leaf's
 `blank_type` MUST match the blank's `blankType`
 (`grammar-fill.given.*` ⇔ `given`; `grammar-fill.no-hint.*` ⇔ `no-hint`).
+
+The 16 leaves: given.verb.finite, given.verb.non-finite, given.noun, given.adjective,
+given.derivation.{noun-to-adj, verb-to-noun, verb-to-adj}, given.pronoun, given.numeral,
+no-hint.preposition, no-hint.article, no-hint.pronoun,
+no-hint.conjunction.{coordinating, relative-clause, noun-clause, adverbial-clause}.
+**Parent nodes** (`grammar-fill`, `.given`, `.given.verb`, `.given.derivation`, `.no-hint`,
+`.no-hint.conjunction`) are **NOT valid `facetKey`s** — the validator rejects a parent used as a leaf.
 
 ## `role` / `path` (non-finite only)
 
@@ -192,9 +199,16 @@ Rules:
 
 ## Answer Authority
 
-`answer` MUST equal the blank's answer key (`answer-key.json` stays authoritative). A
-mismatch is a **non-retryable blocking error** — do not silently overwrite the answer.
-(Mirrors cloze's `optionLabel` check.)
+`answer` MUST equal the blank's answer key (`answer-key.json` stays authoritative). The
+comparison is a **CLOSED, FROZEN normalization — exactly four ops**: (1) trim; (2) collapse
+internal whitespace; (3) lowercase; (4) split the answer key on `/` into branches. The AI
+`answer` matches iff its normalized form equals **any** normalized branch. Multi-word answers
+(`were worn`) are first-class.
+
+**FORBIDDEN** (wrong-accept hazard): NO punctuation-strip, NO stemming/lemmatization, NO
+edit-distance/fuzzy — those would let `worn` pass for `wore`. A genuine mismatch is a
+**non-retryable blocking error** — do not silently overwrite the answer. (Mirrors cloze's
+`optionLabel` check, but free-text instead of a letter.)
 
 ## Validation Rules (for analyzeGrammarFill.mjs)
 
@@ -203,10 +217,12 @@ mismatch is a **non-retryable blocking error** — do not silently overwrite the
 - `blanks` keys exactly equal the grammar-fill group's 10 questionIds (q56–q65).
 - Each blank has all required fields; `blankType` ∈ {given, no-hint};
   `hint` is a non-empty string iff `given`, `null` iff `no-hint`.
-- `facetKey` is a valid leaf in the facet registry; its `blank_type` matches `blankType`.
+- `facetKey` is a valid **leaf** (one of the 16) in the facet registry; a **parent node is
+  rejected**; its `blank_type` matches `blankType`.
 - `role`/`path` present (valid enum) iff `facetKey === grammar-fill.given.verb.non-finite`;
   `null` otherwise.
-- `answer` equals the blank's answer key (non-retryable mismatch error).
+- `answer` matches the answer key under the **frozen 4-op normalization** (trim / collapse-ws /
+  lowercase / split-`/`); no other normalization. Genuine mismatch = non-retryable blocking error.
 - `evidence` has ≥1 item; every `signalText` passes the exact-substring rule for its
   `signalSide` and contains no blank marker.
 - `overview` present and non-empty.
