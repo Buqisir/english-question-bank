@@ -2,6 +2,7 @@ import { parsePaperImportMultipart } from '../paper-import/multipart.mjs'
 import { publishPaperImportPackage } from '../paper-import/publisher.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { analyzeReadingImportCandidate } from './analyzeReading.mjs'
+import { analyzeClozeImportCandidate } from './analyzeCloze.mjs'
 import { analyzeSevenChoicesImportCandidate } from './analyzeSevenChoices.mjs'
 import { parseReadingDocxBuffer } from './docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from './packageBuilder.mjs'
@@ -75,6 +76,7 @@ function parsePublishPayload(files, fields) {
 export function createPaperImportAiRoutes(services = {}) {
   const analyzeReading = services.analyzeReading || analyzeReadingImportCandidate
   const analyzeSevenChoices = services.analyzeSevenChoices || analyzeSevenChoicesImportCandidate
+  const analyzeCloze = services.analyzeCloze || analyzeClozeImportCandidate
   return [
     defineRoute('POST', /^\/api\/paper-import-ai\/parse$/, async ({ request, response, context }) => {
       let files = []
@@ -120,6 +122,15 @@ export function createPaperImportAiRoutes(services = {}) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
     }),
+    defineRoute('POST', /^\/api\/paper-import-ai\/analyze-cloze$/, async ({ request, response, context }) => {
+      try {
+        const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
+        const result = await analyzeCloze(input)
+        context.sendJson(response, 200, result)
+      } catch (error) {
+        context.sendJson(response, 422, { error: routeError(error) })
+      }
+    }),
     defineRoute('POST', /^\/api\/paper-import-ai\/publish$/, async ({ request, response, context }) => {
       let files = []
       let fields = {}
@@ -139,6 +150,7 @@ export function createPaperImportAiRoutes(services = {}) {
           sevenChoicesGroup: payload.sevenChoicesGroup || null,
           sevenChoicesAnalysis: payload.sevenChoicesAnalysis || null,
           clozeGroup: payload.clozeGroup || null,
+          clozeAnalysis: payload.clozeAnalysis || null,
           grammarFillGroup: payload.grammarFillGroup || null,
           applicationGroup: payload.applicationGroup || null,
           continuationGroup: payload.continuationGroup || null,

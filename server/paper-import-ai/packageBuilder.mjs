@@ -181,7 +181,7 @@ function normalizeGrammarFillText(text) {
     .trim()
 }
 
-export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup, applicationGroup, continuationGroup, sourceDocx }) {
+export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, clozeAnalysis, grammarFillGroup, applicationGroup, continuationGroup, sourceDocx }) {
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
@@ -283,6 +283,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
 
   // --- Seven-choices group ---
   let scAnalysisOutput = null
+  let clAnalysisOutput = null
   if (sevenChoicesGroup) {
     // Validate: every question must have an answer key.
     for (const q of sevenChoicesGroup.questions) {
@@ -392,6 +393,16 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
         throw issue('cloze_answer_missing', `${q.id} 缺少答案解析版答案，不能发布。`, { questionId: q.id })
       }
     }
+    // Validate: cloze analysis is required when cloze group is detected.
+    if (!clozeAnalysis || typeof clozeAnalysis !== 'object') {
+      throw issue('cloze_analysis_required', '检测到完形填空，但缺少 AI 解析，不能发布。')
+    }
+    if (clozeAnalysis.paperId !== paperId) {
+      throw issue('cloze_analysis_paper_mismatch', '完形填空解析 paperId 与拆题结果不一致。')
+    }
+    if (!clozeAnalysis.targetGroups?.includes(clozeGroup.groupId)) {
+      throw issue('cloze_analysis_group_missing', '完形填空解析没有包含当前题组。')
+    }
 
     const clQuestionIds = []
     for (const q of clozeGroup.questions) {
@@ -450,6 +461,23 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-cloze`, text: '第一节(共15小题；每小题1分，满分15分)' })
     blocks.push({ type: 'instruction', text: '阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。' })
     blocks.push({ type: 'group', groupId: clozeGroup.groupId })
+
+    const clMeta = clozeAnalysis.meta || {}
+    clAnalysisOutput = {
+      schemaVersion: 'cloze-analysis-v1',
+      paperId,
+      sourceAssetVersion: 1,
+      targetGroups: clozeAnalysis.targetGroups || [clozeGroup.groupId],
+      meta: {
+        ...clMeta,
+        generatedBy: 'external-ai',
+        promptVersion: 'cloze-analysis-v1',
+        reviewStatus: 'reviewed',
+        importMode: 'paper-import-ai',
+      },
+      groups: clozeAnalysis.groups || {},
+      blanks: clozeAnalysis.blanks || {},
+    }
   }
 
   // --- Grammar-fill group ---
@@ -779,6 +807,13 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     outputFiles.push({
       fileName: 'seven-choices-analysis-v1.json',
       buffer: Buffer.from(`${JSON.stringify(scAnalysisOutput, null, 2)}\n`),
+    })
+  }
+
+  if (clAnalysisOutput) {
+    outputFiles.push({
+      fileName: 'cloze-analysis-v1.json',
+      buffer: Buffer.from(`${JSON.stringify(clAnalysisOutput, null, 2)}\n`),
     })
   }
 

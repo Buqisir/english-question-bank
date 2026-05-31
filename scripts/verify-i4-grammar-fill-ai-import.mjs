@@ -193,6 +193,18 @@ function gfPackageFixture() {
       groups: { 'group-i4-seven-choices': { overview: 'SC.' } },
       questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i4-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
     },
+    clozeAnalysis: {
+      schemaVersion: 'cloze-analysis-v1', paperId: 'paper-i4-pkg', sourceAssetVersion: 1,
+      targetGroups: ['group-i4-cloze'], meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'cloze-analysis-v1', reviewStatus: 'reviewed' },
+      groups: { 'group-i4-cloze': { overview: '完形填空概览。', affectiveArc: '平静。' } },
+      blanks: Object.fromEntries([41,42,43,44,45,46,47,48,49,50,51,52,53,54,55].map(n => [`q-i4-${String(n).padStart(3,'0')}`, {
+        blankId: `blank-i4-${String(n).padStart(3,'0')}`, blankNo: n, pos: 'verb',
+        correctFit: { optionLabel: 'B', reason: '搭配合理。' },
+        distractorGlosses: ['A','C','D'].map(l => ({ optionLabel: l, optionText: l === 'A' ? 'a' : l === 'C' ? 'c' : 'd', meaning: `表示"${l}"。` })),
+        evidence: [{ type: 'collocation-partner', signalText: 'Cloze passage', signalSide: 'context-before', relation: '话题词呼应。' }],
+        teachingNote: '通过施受关系判断。',
+      }])),
+    },
   }
 }
 
@@ -200,13 +212,14 @@ function assertPackageBuilder() {
   const fix = gfPackageFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
 
-  // Success: package with all six families.
+  // Success: package with all six families (I8 now requires cloze analysis).
   const files = buildPaperImportAiPackageFiles({
     parseResult: fix.parseResult,
     analysesByGroupId: fix.readingAnalyses,
     sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
     sevenChoicesAnalysis: fix.scAnalysis,
     clozeGroup: fix.parseResult.clozeGroup,
+    clozeAnalysis: fix.clozeAnalysis,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
     applicationGroup: fix.parseResult.applicationGroup,
     continuationGroup: fix.parseResult.continuationGroup,
@@ -241,6 +254,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: null,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
@@ -258,6 +272,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: noAnsGf,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
@@ -275,6 +290,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: wrongCountGf,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,

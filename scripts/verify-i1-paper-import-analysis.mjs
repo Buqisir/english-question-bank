@@ -186,6 +186,30 @@ function fixtureFourGroupParseResult() {
     continuationStarters: ['Paragraph 1 starter.', 'Paragraph 2 starter.'],
     questions: [],
   }
+  const clozeAnalysis = {
+    schemaVersion: 'cloze-analysis-v1',
+    paperId: paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [clozeGroup.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'cloze-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [clozeGroup.groupId]: { overview: '完形填空概览。', affectiveArc: '情感平稳。' } },
+    blanks: Object.fromEntries(
+      clozeGroup.questions.map((q) => [
+        q.id,
+        {
+          blankId: q.blankId,
+          blankNo: Number(q.stem),
+          pos: 'verb',
+          correctFit: { optionLabel: q.answerKey, reason: '搭配合理。' },
+          distractorGlosses: ['A', 'B', 'C', 'D'].filter((l) => l !== q.answerKey).map((l) => ({
+            optionLabel: l, optionText: q.options[l], meaning: `表示"${q.options[l]}"。`,
+          })),
+          evidence: [{ type: 'collocation-partner', signalText: 'learning', signalSide: 'context-after', relation: '话题词呼应。' }],
+          teachingNote: '通过施受关系判断。',
+        },
+      ]),
+    ),
+  }
   return {
     sourceBuffer,
     parseResult: {
@@ -201,6 +225,7 @@ function fixtureFourGroupParseResult() {
     sevenChoicesGroup,
     sevenChoicesAnalysis,
     clozeGroup,
+    clozeAnalysis,
     grammarFillGroup,
     applicationGroup,
     continuationGroup,
@@ -427,13 +452,14 @@ function assertStaticContracts() {
 }
 
 async function assertPublishPackageBuilder() {
-  const { parseResult, sourceBuffer, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, grammarFillGroup, applicationGroup, continuationGroup } = fixtureFourGroupParseResult()
+  const { parseResult, sourceBuffer, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, clozeAnalysis, grammarFillGroup, applicationGroup, continuationGroup } = fixtureFourGroupParseResult()
   const files = buildPaperImportAiPackageFiles({
     parseResult,
     analysesByGroupId: validFourGroupAnalyses(parseResult),
     sevenChoicesGroup,
     sevenChoicesAnalysis,
     clozeGroup,
+    clozeAnalysis,
     grammarFillGroup,
     applicationGroup,
     continuationGroup,
@@ -460,6 +486,7 @@ async function assertPublishPackageBuilder() {
     sevenChoicesGroup,
     sevenChoicesAnalysis,
     clozeGroup,
+    clozeAnalysis,
     grammarFillGroup,
     applicationGroup,
     continuationGroup,

@@ -1,11 +1,13 @@
 import { AlertTriangle, ArrowLeft, CheckCircle2, ExternalLink, FileText, Loader2, Save, Sparkles, UploadCloud } from 'lucide-react'
 import { useRef, useState } from 'react'
 import {
+  analyzePaperImportAiClozeGroup,
   analyzePaperImportAiReadingGroup,
   analyzePaperImportAiSevenChoicesGroup,
   parsePaperImportAiDocx,
   publishPaperImportAiAnalysis,
   type PaperImportAiAnalysisResult,
+  type PaperImportAiClozeGroup,
   type PaperImportAiParseResult,
   type PaperImportAiProviderId,
   type PaperImportAiPublishResult,
@@ -232,6 +234,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const [providerId, setProviderId] = useState<PaperImportAiProviderId>('deepseek-v4-pro')
   const [analysisByGroupId, setAnalysisByGroupId] = useState<Record<string, AnalysisState>>({})
   const [scAnalysisState, setScAnalysisState] = useState<AnalysisState>({ status: 'idle', message: '', result: null })
+  const [clAnalysisState, setClAnalysisState] = useState<AnalysisState>({ status: 'idle', message: '', result: null })
   const [publishState, setPublishState] = useState<PublishState>({ status: 'idle', message: '', result: null })
 
   function resetParsedResult() {
@@ -239,6 +242,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     setResult(null)
     setAnalysisByGroupId({})
     setScAnalysisState({ status: 'idle', message: '', result: null })
+    setClAnalysisState({ status: 'idle', message: '', result: null })
     setPublishState({ status: 'idle', message: '', result: null })
   }
 
@@ -306,7 +310,30 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     if (result.sevenChoicesGroup && scAnalysisState.status !== 'done') {
       tasks.push(handleAnalyzeSevenChoices(result.sevenChoicesGroup))
     }
+    if (result.clozeGroup && clAnalysisState.status !== 'done') {
+      tasks.push(handleAnalyzeCloze(result.clozeGroup))
+    }
     await Promise.all(tasks)
+  }
+
+  async function handleAnalyzeCloze(group: PaperImportAiClozeGroup) {
+    if (!result) return
+    setClAnalysisState({ status: 'analyzing', message: '', result: null })
+    try {
+      const analysis = await analyzePaperImportAiClozeGroup({
+        paper: result.paper,
+        group,
+        providerId,
+      })
+      setClAnalysisState({ status: 'done', message: '完形解析已生成。', result: analysis })
+      setPublishState({ status: 'idle', message: '', result: null })
+    } catch (error) {
+      setClAnalysisState({
+        status: 'error',
+        message: error instanceof Error ? error.message : String(error),
+        result: null,
+      })
+    }
   }
 
   async function handleAnalyzeSevenChoices(group: PaperImportAiSevenChoicesGroup) {
@@ -395,12 +422,13 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const contGroup = result?.continuationGroup || null
   const contError = result?.continuationError || null
   const contStartersOk = contGroup ? (contGroup.continuationStarters || []).length >= 2 : true
-  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || false
+  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || clAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
-  const allImportAnalyzed = allGroupsAnalyzed && scAnalyzed
+  const clAnalyzed = !clGroup || clAnalysisState.status === 'done'
+  const allImportAnalyzed = allGroupsAnalyzed && scAnalyzed && clAnalyzed
   const scReady = Boolean(scGroup) && scAnalyzed && scHasAnswers
-  const clReady = Boolean(clGroup) && clHasAnswers
+  const clReady = Boolean(clGroup) && clAnalyzed && clHasAnswers
   const gfReady = Boolean(gfGroup) && gfHasAnswers
   const appReady = Boolean(appGroup)
   const contReady = Boolean(contGroup) && contStartersOk
@@ -434,6 +462,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         sevenChoicesGroup: result.sevenChoicesGroup || null,
         sevenChoicesAnalysis: scAnalysisState.result?.analysis || null,
         clozeGroup: result.clozeGroup || null,
+        clozeAnalysis: clAnalysisState.result?.analysis || null,
         grammarFillGroup: result.grammarFillGroup || null,
         applicationGroup: result.applicationGroup || null,
         continuationGroup: result.continuationGroup || null,
@@ -479,7 +508,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         >
           <UploadCloud size={38} aria-hidden="true" />
           <h2>导入完整试卷</h2>
-          <p>识别阅读理解 A-D + 七选五；可同时上传答案解析版，用官方答案和 AI 判断做对照。</p>
+          <p>识别阅读理解 A-D + 七选五 + 完形填空；可同时上传答案解析版，用官方答案和 AI 判断做对照。</p>
           <button className="primary-button" type="button" onClick={() => inputRef.current?.click()}>
             选择 DOCX
           </button>
@@ -601,7 +630,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
             </p>
             <p className={clReady ? 'is-ok' : ''}>
               <CheckCircle2 size={15} aria-hidden="true" />
-              {clGroup ? '完形就绪' : '缺完形'}
+              {clGroup ? (clAnalyzed ? '完形就绪' : '完形待解析') : '缺完形'}
             </p>
             <p className={gfReady ? 'is-ok' : ''}>
               <CheckCircle2 size={15} aria-hidden="true" />
@@ -648,6 +677,12 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           ) : null}
           {clGroup && clMissingAnswers > 0 ? (
             <p className="pi-ai-warning">完形还有 {clMissingAnswers} 道题没有答案解析版答案。</p>
+          ) : null}
+          {clGroup && clAnalysisState.status === 'error' ? (
+            <p className="pi-ai-error">完形解析失败：{clAnalysisState.message}</p>
+          ) : null}
+          {clGroup && clAnalysisState.status === 'idle' ? (
+            <p className="pi-ai-warning">检测到完形，请先完成解析。</p>
           ) : null}
           {clError ? (
             <p className="pi-ai-error">完形解析失败：{clError.reason}</p>
@@ -830,7 +865,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
           <section className="pi-ai-panel pi-ai-groups">
             <div className="pi-ai-panel-heading">
               <h2>完形填空 预览</h2>
-              <span>{clGroup.questions.length} 题 · {clGroup.paragraphs.length} 段</span>
+              <span>{clAnalysisState.status === 'done' ? '已解析' : clAnalysisState.status === 'analyzing' ? '解析中' : clAnalysisState.status === 'error' ? '失败' : '待解析'}</span>
             </div>
             <article className="pi-ai-group-card">
               <header>
@@ -849,6 +884,29 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
                   </li>
                 ))}
               </ol>
+              <div className="pi-ai-analysis-actions">
+                <button
+                  className="primary-button"
+                  type="button"
+                  disabled={clAnalysisState.status === 'analyzing'}
+                  onClick={() => void handleAnalyzeCloze(clGroup)}
+                >
+                  {clAnalysisState.status === 'analyzing' ? (
+                    <Loader2 size={16} aria-hidden="true" />
+                  ) : (
+                    <Sparkles size={16} aria-hidden="true" />
+                  )}
+                  生成完形解析
+                </button>
+                {clAnalysisState.status === 'error' ? (
+                  <span className="pi-ai-error">{clAnalysisState.message}</span>
+                ) : null}
+                {clAnalysisState.result ? (
+                  <span className="pi-ai-muted">
+                    {clAnalysisState.result.provider} · {clAnalysisState.result.model} · {clAnalysisState.result.latencyMs}ms
+                  </span>
+                ) : null}
+              </div>
             </article>
           </section>
         ) : clError ? (

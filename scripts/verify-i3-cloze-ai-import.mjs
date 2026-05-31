@@ -178,22 +178,54 @@ function clFixture() {
   }
 }
 
+const I3_SC_ANALYSIS = {
+  schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
+  targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
+  groups: { 'group-i3-seven-choices': { overview: 'SC overview.' } },
+  questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
+}
+
+function i3ClozeAnalysis(fix) {
+  const cl = fix.parseResult.clozeGroup
+  return {
+    schemaVersion: 'cloze-analysis-v1',
+    paperId: 'paper-i3-pkg',
+    sourceAssetVersion: 1,
+    targetGroups: [cl.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'cloze-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [cl.groupId]: { overview: '完形填空概览。', affectiveArc: '情感平稳。' } },
+    blanks: Object.fromEntries(
+      cl.questions.map((q) => [
+        q.id,
+        {
+          blankId: q.blankId,
+          blankNo: Number(q.stem),
+          pos: 'verb',
+          correctFit: { optionLabel: q.answerKey, reason: '搭配合理。' },
+          distractorGlosses: ['A', 'B', 'C', 'D'].filter((l) => l !== q.answerKey).map((l) => ({
+            optionLabel: l, optionText: q.options[l], meaning: `表示"${q.options[l]}"。`,
+          })),
+          evidence: [{ type: 'collocation-partner', signalText: 'Passage', signalSide: 'context-before', relation: '话题词呼应。' }],
+          teachingNote: '通过施受关系判断。',
+        },
+      ]),
+    ),
+  }
+}
+
 function assertPackageBuilder() {
   const fix = clFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
+  const clozeAnalysis = i3ClozeAnalysis(fix)
 
-  // Success: package with all four families.
+  // Success: package with all four families (I8 now requires cloze analysis).
   const files = buildPaperImportAiPackageFiles({
     parseResult: fix.parseResult,
     analysesByGroupId: fix.readingAnalyses,
     sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
-    sevenChoicesAnalysis: {
-      schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
-      targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
-      groups: { 'group-i3-seven-choices': { overview: 'SC overview.' } },
-      questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
-    },
+    sevenChoicesAnalysis: I3_SC_ANALYSIS,
     clozeGroup: fix.parseResult.clozeGroup,
+    clozeAnalysis,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
     applicationGroup: fix.parseResult.applicationGroup,
     continuationGroup: fix.parseResult.continuationGroup,
@@ -207,7 +239,7 @@ function assertPackageBuilder() {
   assert('I3 paper asset includes cloze group', Boolean(clGroupInAsset))
   assert('I3 cloze group has 15 questionIds', clGroupInAsset.questionIds.length === 15)
   assert('I3 cloze group has passage paragraphs', (clGroupInAsset.passage?.paragraphs || []).length > 0)
-  assert('I3 no cloze analysis file', !files.some(f => f.fileName === 'cloze-analysis-v1.json'))
+  assert('I3 cloze analysis file present (I8 required-when-present)', files.some(f => f.fileName === 'cloze-analysis-v1.json'))
 
   // Block: missing answer key.
   const noAnsGroup = JSON.parse(JSON.stringify(fix.parseResult.clozeGroup))
@@ -217,13 +249,9 @@ function assertPackageBuilder() {
       parseResult: { ...fix.parseResult, clozeGroup: noAnsGroup },
       analysesByGroupId: fix.readingAnalyses,
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
-      sevenChoicesAnalysis: {
-        schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
-        targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
-        groups: { 'group-i3-seven-choices': { overview: 'SC overview.' } },
-        questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
-      },
+      sevenChoicesAnalysis: I3_SC_ANALYSIS,
       clozeGroup: noAnsGroup,
+      clozeAnalysis,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
