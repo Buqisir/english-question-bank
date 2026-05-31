@@ -2,7 +2,7 @@
 /**
  * verify-i11-symbol-normalization.mjs
  *
- * Table-driven verifier for I11 — Symbol Normalization (slice 2a).
+ * Table-driven verifier for normalizePassageText() — slices 2a (I11) + 2b (I12).
  * Runs directly against the exported normalizePassageText() function.
  * D3: pure-function + table-driven cases per plan.md Step 3.
  *
@@ -14,7 +14,10 @@
  *  - Grammar compose-order idempotency: normalizePassageText → normalizeGrammarFillText.
  *  - C2 byte-intact sentinels: _____36_____, __41__, and   56   .
  *  - Full idempotency: f(f(x)) === f(x) for every "after" string.
- *  - 2b NOT done: straight-quotes and --- pass through unchanged.
+ *  - Rule 5 (2b): em dash normalization --- / —— → —; single/double hyphen untouched.
+ *  - Rule 4a (2b): straight double quote → directional curly; MF-1 boundary locks.
+ *  - Rule 4b (2b): letter-preceded ' → U+2019; conservative-gate left-alone locks.
+ *  - Idempotency for all 2b "after" strings.
  *  - Passage-substring-quote consistency (D4=(e)): a substring of the normalized
  *    passage still indexOf-matches after normalization.
  */
@@ -263,6 +266,7 @@ unchanged(
 console.log('\nIdempotency: f(f(x)) === f(x)')
 
 const idempotencyCases = [
+  // 2a cases
   'Hello, world',
   '21. Next',
   'A. Option',
@@ -275,6 +279,28 @@ const idempotencyCases = [
   '  56  ',
   'text; Next',
   'word，中文',
+  // 2b Rule 5 "after" strings
+  'wait—no',
+  'yes—no',
+  '—',
+  'well-known',
+  '1990-2000',
+  '--',
+  // 2b Rule 4a "after" strings
+  'He said, “Hello.”',
+  '“Start”',
+  '(quote “x”)',
+  '“Hello,” she said.',
+  'He said,“Hello.”',
+  // 2b Rule 4b "after" strings
+  'don’t',
+  'students’ books',
+  'o’clock',
+  'Jiang’an',
+  "'90s",
+  "'apple’",
+  "rock 'n’ roll",
+  "5'10”",
 ]
 
 for (const c of idempotencyCases) {
@@ -304,23 +330,142 @@ assert(
   `normalizedPassage: ${JSON.stringify(normalizedPassage)}, quote: ${JSON.stringify(quoteSubstring)}`,
 )
 
-/* ─── 2b NOT done: straight-quotes and --- pass through unchanged ─────── */
+/* ─── Rule 5 (2b): Em dash normalization ─────────────────────────────── */
 
-console.log('\n2b NOT done: curly-quote / em-dash inputs pass through unchanged')
+console.log('\nRule 5 (2b): Em dash normalization')
 
-unchanged(
-  '2b not done: straight double-quote " passes through',
-  '"hello"',
+eq(
+  'R5: wait---no → wait—no',
+  'wait---no',
+  'wait—no',
 )
 
-unchanged(
-  '2b not done: --- passes through unchanged',
-  '---',
+eq(
+  'R5: yes——no (2× em dash) → yes—no',
+  'yes——no',
+  'yes—no',
 )
 
-unchanged(
-  '2b not done: Chinese em-dash —— passes through unchanged',
+eq(
+  'R5: —— (bare double em dash) → —',
   '——',
+  '—',
+)
+
+// NOT-touched locks
+unchanged(
+  'R5: well-known → unchanged (single hyphen)',
+  'well-known',
+)
+
+unchanged(
+  'R5: 1990-2000 → unchanged (single hyphen)',
+  '1990-2000',
+)
+
+unchanged(
+  'R5: -- → unchanged (two hyphens)',
+  '--',
+)
+
+unchanged(
+  'R5: lone — → unchanged (single em dash already correct)',
+  '—',
+)
+
+/* ─── Rule 4a (2b): Straight double quote → directional curly ────────── */
+
+console.log('\nRule 4a (2b): Straight double quote → directional curly')
+
+// Basic: space-preceded opening, period-preceded closing
+eq(
+  'R4a: He said, "Hello." → He said, “Hello.”',
+  'He said, "Hello."',
+  'He said, “Hello.”',
+)
+
+// Start of string: first " → opening, second " → closing
+eq(
+  'R4a: "Start" → “Start”',
+  '"Start"',
+  '“Start”',
+)
+
+// Paren-preceded: ( counts as opening trigger
+eq(
+  'R4a: (quote "x") → (quote “x”)',
+  '(quote "x")',
+  '(quote “x”)',
+)
+
+// MF-1 boundary lock: comma-inside-quote — closing " after comma is correct
+eq(
+  'R4a MF-1: "Hello," she said. → “Hello,” she said.',
+  '"Hello," she said.',
+  '“Hello,” she said.',
+)
+
+// MF-1 accepted cosmetic wrong-facing first quote: punctuation-no-space before opening "
+eq(
+  'R4a MF-1: He said,"Hello." → He said,”Hello.” (accepted cosmetic)',
+  'He said,"Hello."',
+  'He said,”Hello.”',
+)
+
+/* ─── Rule 4b (2b): Straight single quote → conservative ─────────────── */
+
+console.log('\nRule 4b (2b): Straight single quote — conservative')
+
+// Letter-preceded → U+2019
+eq(
+  "R4b: don't → don’t",
+  "don't",
+  'don’t',
+)
+
+eq(
+  "R4b: students' books → students’ books",
+  "students' books",
+  'students’ books',
+)
+
+eq(
+  "R4b: o'clock → o’clock",
+  "o'clock",
+  'o’clock',
+)
+
+eq(
+  "R4b: Jiang'an → Jiang’an",
+  "Jiang'an",
+  'Jiang’an',
+)
+
+// Conservative-gate left-alone locks (full-string equality — LOAD-BEARING)
+unchanged(
+  "R4b conservative gate: '90s → unchanged (space-preceded ' stays straight)",
+  "'90s",
+)
+
+// 'apple': first ' is start-of-string (straight), trailing 'e' is letter-preceded → U+2019
+eq(
+  "R4b conservative gate: 'apple' → 'apple’ (first ' straight, trailing after e → U+2019)",
+  "'apple'",
+  "'apple’",
+)
+
+// rock 'n' roll: first ' space-preceded stays straight; n-preceded ' → U+2019
+eq(
+  "R4b conservative gate: rock 'n' roll → rock 'n’ roll",
+  "rock 'n' roll",
+  "rock 'n’ roll",
+)
+
+// 5'10": digit-preceded ' stays straight (guard is [A-Za-z] only); " after 0 → closing
+eq(
+  "R4b conservative gate: 5'10\" → 5'10” (digit ' stays straight, trailing \" closes)",
+  '5\'10"',
+  "5'10”",
 )
 
 /* ─── Summary ─────────────────────────────────────────────────────────── */

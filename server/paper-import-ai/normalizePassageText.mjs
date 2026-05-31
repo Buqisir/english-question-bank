@@ -5,7 +5,7 @@
  * Applied at parse time (docxSplitter.mjs assembled paragraph/stem/option build sites),
  * upstream of AI analysis, so stored passage and AI evidence quotes share the same bytes.
  *
- * Implements exactly 3 deterministic, meaning-safe rules (slice 2a):
+ * Implements 5 deterministic, meaning-safe rules (slices 2a + 2b):
  *
  * Rule 1 — Half-width punctuation in English context.
  *   Full-width ，。？！；：（） etc. → English half-width equivalents, ONLY when the
@@ -23,7 +23,22 @@
  *   and one space after the closing paren (if not already spaced).
  *   Scoped to CJK-interior parens ONLY — never touches (wear), (56), or pure ASCII/digit content.
  *
- * Out of scope (2b, deferred): curly quotes, em dash.
+ * Rule 5 — Em dash (slice 2b, appended after Rule 2).
+ *   Three or more ASCII hyphens `-{3,}` → single em dash — (U+2014).
+ *   A run of 2+ em dashes / horizontal bars [—―]{2,} → single — (U+2014).
+ *   Single hyphen `-`, two hyphens `--`, and a lone already-correct — are never touched.
+ *
+ * Rule 4 — Curly quotes (slice 2b, appended after Rule 5 so Rule 4 sees normalized —).
+ *   4a — Straight double quote " (U+0022) → directional curly:
+ *     OPENING " (U+201C) when at string start or immediately preceded by whitespace,
+ *     `(`, `[`, `{`, — (U+2014), – (U+2013), or another opening quote " / '.
+ *     CLOSING " (U+201D) otherwise (including when preceded by sentence punctuation ,.;:!?).
+ *     MF-1: a " preceded by ,.;:!? is CLOSING (dominant pattern: "Hello," she said.).
+ *     The inverse `said,"Hello"` is 0-corpus sloppy input; accepted cosmetic wrong-facing quote.
+ *   4b — Straight single quote ' (U+0027) → conservative:
+ *     If immediately preceded by an ASCII letter [A-Za-z] → ' (U+2019).
+ *     Otherwise leave the straight ' unchanged (ambiguity — human review per standard).
+ *
  * No space-collapsing rule (C2 — must not disturb I10 blank markers).
  */
 
@@ -93,6 +108,24 @@ export function normalizePassageText(text) {
   // ---- Rule 2 ----
   // One space after English punctuation before a letter (not digit — must not touch `56`).
   s = s.replace(/([.,;:!?])([A-Za-z])/g, '$1 $2')
+
+  // ---- Rule 5 ----
+  // Three or more ASCII hyphens → single em dash (U+2014).
+  s = s.replace(/-{3,}/g, '—')
+  // A run of 2+ em dashes / horizontal bars → single em dash (U+2014).
+  s = s.replace(/[—―]{2,}/g, '—')
+
+  // ---- Rule 4 ----
+  // 4a — Straight double quote (U+0022) → directional curly.
+  // Opening positions: start-of-string OR preceded by whitespace / ( [ { — – " '.
+  // Convert opening first, then convert all remaining straight " to closing.
+  s = s.replace(/(^|[\s(\[{—–“‘])"(?=[^])/g, '$1“')
+  // All remaining straight " → closing " (U+201D).
+  s = s.replace(/"/g, '”')
+
+  // 4b — Straight single quote (U+0027) preceded by ASCII letter → ' (U+2019).
+  // Conservative gate: only letter-preceded. Standalone ' left unchanged.
+  s = s.replace(/(?<=[A-Za-z])'/g, '’')
 
   return s
 }
