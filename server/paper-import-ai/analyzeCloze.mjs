@@ -286,6 +286,22 @@ function isRetryableAnalysisError(error) {
   return /JSON|schemaVersion|questionIds|blanks|精确匹配原文|缺少|必须|不匹配|无效|collocation-partner/.test(message)
 }
 
+// The provider/date/review provenance is authoritative server-side — never
+// trust the model's self-reported meta (it hallucinates model names + dates).
+function stampMeta(analysis, { providerResult, providerId }) {
+  if (!analysis || typeof analysis !== 'object') return
+  const prior = analysis.meta && typeof analysis.meta === 'object' ? analysis.meta : {}
+  analysis.meta = {
+    ...prior,
+    generatedBy: 'external-ai',
+    model: optionalString(providerResult?.model) || normalizeProviderId(providerId),
+    promptVersion: 'cloze-analysis-v1',
+    reviewStatus: 'reviewed',
+    reviewedBy: '',
+    reviewedAt: new Date().toISOString().slice(0, 10),
+  }
+}
+
 export async function analyzeClozeImportCandidate(input, options = {}) {
   assertClozeAnalyzeInput(input)
   const requestId = options.requestId || randomUUID()
@@ -301,6 +317,7 @@ export async function analyzeClozeImportCandidate(input, options = {}) {
     }, { retries: Number.isInteger(options.providerRetries) ? options.providerRetries : 1 })
     try {
       const analysis = extractFirstJsonObject(providerResult.rawText)
+      stampMeta(analysis, { providerResult, providerId })
       validateClozeShape(analysis, input)
       return {
         analysis,

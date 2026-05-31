@@ -211,6 +211,16 @@ async function assertAnalysisValidation() {
   })
   assert('valid cloze analysis passes', result.analysis.schemaVersion === 'cloze-analysis-v1' && result.requestId === 'i8-verify')
 
+  // --- meta provenance is server-stamped, not AI-supplied ---
+  const bogusMeta = validClAnalysis(input)
+  bogusMeta.meta = { ...bogusMeta.meta, model: 'AI-GUESS', reviewedBy: 'AI', reviewedAt: '2099-01-01' }
+  const stamped = await analyzeClozeImportCandidate(input, {
+    providerCallers: { deepseek: stubProvider(bogusMeta) },
+  })
+  assert('meta.model is stamped with real provider model', stamped.analysis.meta.model === 'stub')
+  assert('meta.reviewedBy is cleared (no human reviewer)', stamped.analysis.meta.reviewedBy === '')
+  assert('meta.reviewedAt is server-stamped real date', /^\d{4}-\d{2}-\d{2}$/.test(stamped.analysis.meta.reviewedAt) && stamped.analysis.meta.reviewedAt !== '2099-01-01')
+
   // --- Wrong schemaVersion ---
   await assertRejects('wrong schemaVersion blocks cloze', () => {
     const bad = { ...validClAnalysis(input), schemaVersion: 'wrong' }

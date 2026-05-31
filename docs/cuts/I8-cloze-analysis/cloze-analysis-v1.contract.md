@@ -90,6 +90,11 @@ POS or signature.
   and `blankNo`. (In cloze a blank and its question map one to one.)
 - `reviewStatus` is retained for a future review flow; I8 writes `reviewed`
   directly and ships no review UI.
+- **`meta` provenance is server-stamped, not AI-supplied.** The analyze module
+  overwrites `meta` after generation with authoritative values: `generatedBy`,
+  `model` (the real provider model), `promptVersion`, `reviewStatus: reviewed`,
+  `reviewedBy: ""` (no human reviewer), `reviewedAt` (real date). The model must
+  NOT self-report `model` / `reviewedAt` / `reviewedBy` (it hallucinates them).
 
 ## Group Analysis
 
@@ -180,6 +185,17 @@ When marked, `signatureFacet` MUST be one of these leaf keys:
 
 The signature's POS prefix MUST match the blank's `pos` (a `verb` blank may only
 take `cloze.signature.verb.*`). `other` blanks take no signature.
+
+**Signature is the exception, not the rule** — most blanks (especially verbs)
+are Collocation-Fit-only and carry NO signature. When in doubt, omit it.
+
+**`action-sequence` is the most over-applied signature; guard it.** Use it ONLY
+when the temporal ORDER of two or more actions is itself the discriminator (one
+action must precede/follow another, or a step-chain fixes the answer). A verb
+blank solved by word meaning, collocation, or who-does-what is NOT
+action-sequence — it gets no signature. (Empirical: a paper's q44 `escaped`
+was mis-tagged action-sequence when the real discriminator was word meaning;
+this guard exists to prevent that.)
 
 ## Correct Fit
 

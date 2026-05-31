@@ -67,7 +67,9 @@ Every blank is solved on two axes, plus a highlightable evidence layer.
 
 **pos: "other"** is for blanks whose options are prepositions, pronouns, or similar; it runs Collocation Fit only and must NEVER carry a `signatureFacet`.
 
-Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when no POS Signature genuinely applies.
+Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when no POS Signature genuinely applies. When unsure, OMIT the signature.
+
+**Guard `action-sequence` hardest — it is the most over-applied signature.** Use `cloze.signature.verb.action-sequence` ONLY when the temporal ORDER of two or more actions is itself the key that selects the option (e.g. one action must come before/after another, or a chain of steps fixes the answer). A verb blank solved by word meaning, collocation, or who-does-what to whom is NOT action-sequence — leave its `signatureFacet` empty. Most verb blanks have NO signature.
 
 **Asymmetric option treatment.** The correct option gets a `correctFit.reason` explaining WHY it fits. Distractors get only `distractorGlosses[].meaning` — a short Chinese gloss of what the option means in this context. NEVER argue why a distractor is wrong.
 
@@ -83,11 +85,8 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
   "targetGroups": ["group-...cloze"],
   "meta": {
     "generatedBy": "external-ai",
-    "model": "...",
     "promptVersion": "cloze-analysis-v1",
-    "reviewStatus": "reviewed",
-    "reviewedBy": "AI",
-    "reviewedAt": "2026-05-30"
+    "reviewStatus": "reviewed"
   },
   "groups": {
     "group-...cloze": {
@@ -125,6 +124,10 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
 }
 ```
 
+Do NOT fill `meta.model`, `meta.reviewedBy`, or `meta.reviewedAt` — the server
+stamps real provenance after generation. Emit `meta` only as shown above
+(`generatedBy`, `promptVersion`, `reviewStatus`).
+
 ## Required Fields Per Blank
 
 Every `blanks[questionId]` MUST include:
@@ -158,6 +161,13 @@ Closed `type` vocabulary — use ONLY these values:
 - `affective-cue` — a word that sets the emotional tone (affective-consistency signature)
 - `logical-connector` — a transition or cause word in context
 
+**`type` and `signalSide` are two DIFFERENT axes — never mix them up.** `type`
+is WHAT KIND of signal (the five values above). `signalSide` is WHERE it sits
+(`context-before` / `context-after` / `stem` / `option`). `type` is NEVER
+`"option"`, `"context-before"`, or any side value. An option-side signal is
+written as `{ "type": "collocation-partner", "signalSide": "option", ... }`,
+NOT `{ "type": "option" }`.
+
 Each evidence item:
 
 ```json
@@ -178,7 +188,11 @@ Each evidence item:
 
 **Blank marker rule:** `signalText` MUST NOT include blank markers such as `__41__`, `__42__`, etc. Quote the surrounding words, NEVER the blank token itself.
 
-**Option-side usage:** `option`-side signals are reserved for `phrase` blanks only, to decompose the phrase (e.g. highlight `empty` and `out` separately) alongside a `contextual-composition` signature. Single-word blanks highlight in the passage, not the option.
+**Option-side usage:** `option`-side signals are reserved for `phrase` blanks only, to decompose the phrase (e.g. highlight `empty` and `out` separately) alongside a `contextual-composition` signature. Single-word blanks highlight in the passage, not the option. Correct shape for an option-side decomposition signal:
+
+```json
+{ "type": "collocation-partner", "signalText": "empty", "signalSide": "option", "targetText": "empty out", "relation": "中文：empty 表示“空”。" }
+```
 
 Use short `signalText` (1–8 words). Use `targetText` for the larger connected object.
 
