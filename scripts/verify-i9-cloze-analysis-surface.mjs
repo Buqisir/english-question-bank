@@ -229,6 +229,10 @@ assert('Step 3: initial-focus effect branches on clozeAnalysisModel',
 // clozeAnalysisModel is in the initial-focus effect dependency array.
 assert('Step 3: clozeAnalysisModel in initial-focus effect dependency array',
   /\[\s*source\s*,\s*sevenChoicesModel\s*,\s*clozeAnalysisModel/.test(harnessSrc))
+// surfaceData memo includes clozeAnalysisModel (browser-QA regression: without it
+// !surfaceData fires "报告数据为空" when the cloze analysis model is active).
+assert('Step 3: surfaceData memo reads clozeAnalysisModel.surfaceData',
+  harnessSrc.includes('clozeAnalysisModel?.surfaceData'))
 
 // ============================================================
 // Step 4 — Availability gate

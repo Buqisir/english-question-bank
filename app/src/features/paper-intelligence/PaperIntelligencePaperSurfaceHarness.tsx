@@ -738,7 +738,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {
     if (source === 'paper-asset') {
-      return sevenChoicesModel?.surfaceData ?? clozeModel?.surfaceData ?? grammarFillModel?.surfaceData ?? writingModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
+      return sevenChoicesModel?.surfaceData ?? clozeAnalysisModel?.surfaceData ?? clozeModel?.surfaceData ?? grammarFillModel?.surfaceData ?? writingModel?.surfaceData ?? paperAssetModel?.surfaceData ?? null
     }
     if (!report) return null
     // C5a: buildPaperSurfaceDataFromPi will throw if passageStructure
@@ -752,7 +752,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       console.error('[C5a] adapter build failed:', msg)
       return null
     }
-  }, [source, sevenChoicesModel, paperAssetModel, report, bodies, inputOptions, passageStructures])
+  }, [source, sevenChoicesModel, clozeAnalysisModel, clozeModel, grammarFillModel, writingModel, paperAssetModel, report, bodies, inputOptions, passageStructures])
 
   // ─── Build right-panel analysis view (reuse existing PI model) ───
   const analysisView = useMemo((): AnalysisView | null => {
