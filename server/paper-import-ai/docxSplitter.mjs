@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import path from 'node:path'
 import mammoth from 'mammoth'
+import { normalizePassageText } from './normalizePassageText.mjs'
 
 const READING_LABELS = ['A', 'B', 'C', 'D']
 const SEVEN_CHOICES_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
@@ -269,12 +270,12 @@ function parseQuestionBlock(lines, { answerMap, paperTail }) {
   const questionNo = String(Number(start.questionNo))
   return {
     id: `q-${paperTail}-${String(questionNo).padStart(3, '0')}`,
-    stem,
+    stem: normalizePassageText(stem),
     options: {
-      A: options.A,
-      B: options.B,
-      C: options.C,
-      D: options.D,
+      A: normalizePassageText(options.A),
+      B: normalizePassageText(options.B),
+      C: normalizePassageText(options.C),
+      D: normalizePassageText(options.D),
     },
     answerKey: answerLine?.answerKey || answerMap.get(questionNo) || '',
   }
@@ -312,7 +313,7 @@ function buildParagraphs(lines, { label, paperTail }) {
   const passageLines = (questionIndex >= 0 ? lines.slice(0, questionIndex) : lines).filter((line) => !isNonPassageLine(line))
   return passageLines.map((line, index) => ({
     id: `para-${paperTail}-reading-${label.toLowerCase()}-${index === 0 ? 'title' : `p${index}`}`,
-    text: line,
+    text: normalizePassageText(line),
   }))
 }
 
@@ -336,7 +337,7 @@ function buildReadingGroup(marker, groupLines, { answerMap, paperTail }) {
   if (paragraphs.length === 0 && marker.title) {
     paragraphs.push({
       id: `para-${paperTail}-reading-${marker.label.toLowerCase()}-title`,
-      text: marker.title,
+      text: normalizePassageText(marker.title),
     })
   }
   if (paragraphs.length === 0) {
@@ -541,7 +542,7 @@ function parseClozeGroup(lines, { answerMap, paperTail }) {
 
   const paragraphs = passageLines.map((line, index) => ({
     id: `para-${paperTail}-cloze-${index === 0 ? 'title' : `p${index}`}`,
-    text: line,
+    text: normalizePassageText(line),
   }))
 
   if (paragraphs.length === 0) {
@@ -562,10 +563,10 @@ function parseClozeGroup(lines, { answerMap, paperTail }) {
       answerKey,
       blankId: `blank-${paperTail}-${padded}`,
       options: {
-        A: optionsByQuestion[questionNo].A,
-        B: optionsByQuestion[questionNo].B,
-        C: optionsByQuestion[questionNo].C,
-        D: optionsByQuestion[questionNo].D,
+        A: normalizePassageText(optionsByQuestion[questionNo].A),
+        B: normalizePassageText(optionsByQuestion[questionNo].B),
+        C: normalizePassageText(optionsByQuestion[questionNo].C),
+        D: normalizePassageText(optionsByQuestion[questionNo].D),
       },
     }
   })
@@ -706,7 +707,7 @@ function parseGrammarFillGroup(lines, { answerMap, paperTail }) {
 
   const paragraphs = passageLines.map((line, index) => ({
     id: `para-${paperTail}-grammar-fill-${index === 0 ? 'title' : `p${index}`}`,
-    text: line,
+    text: normalizePassageText(line),
   }))
 
   // Verify blank count: we need exactly 10 blanks (q56-q65).
@@ -825,7 +826,7 @@ function parseSevenChoicesGroup(sectionLines, { answerMap, paperTail }) {
     .filter((line) => !isStopSectionLine(line) && !/^第[一二三]/.test(normalizeLine(line)))
     .map((line, index) => ({
       id: `para-${paperTail}-seven-${index === 0 ? 'title' : `p${index}`}`,
-      text: line,
+      text: normalizePassageText(line),
     }))
 
   if (paragraphs.length === 0) {
@@ -842,7 +843,7 @@ function parseSevenChoicesGroup(sectionLines, { answerMap, paperTail }) {
       title: '七选五',
       order: 4,
       paragraphs,
-      optionBank: parsed.optionBank,
+      optionBank: parsed.optionBank.map((item) => ({ label: item.label, text: normalizePassageText(item.text) })),
       questions,
       blankIds: questions.map((q) => q.blankId),
     },
@@ -939,7 +940,7 @@ export function extractApplicationParagraphs(lines, paperTail) {
   return {
     paragraphs: promptLines.map((text, index) => ({
       id: `para-${paperTail}-writing-app-${index === 0 ? 'title' : `p${index}`}`,
-      text,
+      text: normalizePassageText(text),
     })),
     applicationGiven: given,
     error: null,
@@ -989,9 +990,9 @@ function extractContinuationContent(lines, paperTail) {
     return {
       materialParagraphs: materialLines.map((text, index) => ({
         id: `para-${paperTail}-writing-cont-${index === 0 ? 'title' : `p${index}`}`,
-        text,
+        text: normalizePassageText(text),
       })),
-      starters: starterLines,
+      starters: starterLines.map(normalizePassageText),
       error: starterLines.length === 0 ? { reason: 'continuation_starters_missing' } : { reason: 'continuation_starters_incomplete', found: starterLines.length },
     }
   }
@@ -999,9 +1000,9 @@ function extractContinuationContent(lines, paperTail) {
   return {
     materialParagraphs: materialLines.map((text, index) => ({
       id: `para-${paperTail}-writing-cont-${index === 0 ? 'title' : `p${index}`}`,
-      text,
+      text: normalizePassageText(text),
     })),
-    starters: starterLines.slice(0, 2),
+    starters: starterLines.slice(0, 2).map(normalizePassageText),
     error: null,
   }
 }
