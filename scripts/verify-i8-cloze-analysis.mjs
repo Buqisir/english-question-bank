@@ -593,7 +593,7 @@ function clFixtureClozeAnalysis(parseResult) {
   }
 }
 
-function assertPackageBuilder() {
+async function assertPackageBuilder() {
   const parseResult = clFixtureParseResult()
   const sourceBuffer = Buffer.from('PK i8 cloze package docx')
   const sourceHash = createHash('sha256').update(sourceBuffer).digest('hex')
@@ -624,7 +624,7 @@ function assertPackageBuilder() {
   assert('I8 package passes C7 validator', validation.ok, JSON.stringify(validation.blockingIssues, null, 2))
 
   // --- Missing cloze analysis when group present must block ---
-  assertRejects('I8 blocks publish when cloze analysis missing', () =>
+  await assertRejects('I8 blocks publish when cloze analysis missing', () =>
     buildPaperImportAiPackageFiles({
       parseResult,
       analysesByGroupId: clFixtureReadingAnalyses(parseResult),
@@ -640,7 +640,7 @@ function assertPackageBuilder() {
   /缺少 AI 解析/)
 
   // --- clozeAnalysis paperId mismatch must block ---
-  assertRejects('I8 blocks when cloze analysis paperId mismatches', () => {
+  await assertRejects('I8 blocks when cloze analysis paperId mismatches', () => {
     const badAnalysis = { ...clFixtureClozeAnalysis(parseResult), paperId: 'paper-wrong' }
     return buildPaperImportAiPackageFiles({
       parseResult,
@@ -657,7 +657,7 @@ function assertPackageBuilder() {
   }, /paperId/)
 
   // --- clozeAnalysis missing targetGroups must block ---
-  assertRejects('I8 blocks when cloze analysis missing targetGroups', () => {
+  await assertRejects('I8 blocks when cloze analysis missing targetGroups', () => {
     const badAnalysis = { ...clFixtureClozeAnalysis(parseResult), targetGroups: ['group-different'] }
     return buildPaperImportAiPackageFiles({
       parseResult,
@@ -677,7 +677,7 @@ function assertPackageBuilder() {
   const noClParseResult = { ...parseResult, clozeGroup: null }
   // Note: cloze group absence will throw cloze_group_missing from packageBuilder.
   // The four-family completeness gate fires. Test it separately by omitting cloze.
-  assertRejects('I8 no-cloze-group without cloze analysis blocks (group missing)', () =>
+  await assertRejects('I8 no-cloze-group without cloze analysis blocks (group missing)', () =>
     buildPaperImportAiPackageFiles({
       parseResult: noClParseResult,
       analysesByGroupId: clFixtureReadingAnalyses(parseResult),
@@ -809,7 +809,7 @@ async function main() {
 
   // Step 4: Wiring
   assertValidatorAllowlist()
-  assertPackageBuilder()
+  await assertPackageBuilder()
   assertRouteContract()
   assertStorageDiskWrite()
 
