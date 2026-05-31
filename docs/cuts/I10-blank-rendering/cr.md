@@ -88,6 +88,23 @@ literal. Keep the `paperBlankPattern =` anchor and the loud-fail on extraction
 miss (already correct). After the fix, re-run the `\d{1,4}` mutation locally and
 confirm the verifier goes RED — that mutation test is the proof the gate works.
 
+**MF-CR-1 — RESOLVED (commit 296c794, 小川 PM applied the CR-prescribed fix; test-only change, production code untouched).**
+
+Two parts were needed:
+1. **Reconstruct from source** — `pattern` is now built from the extracted
+   `patternMatch[1]` literal via `new RegExp(body, flags)` (strip leading `/` and
+   trailing `/<flags>`), not a hardcoded copy. The loud-fail extraction anchor is kept.
+2. **Discriminating sentinels** — reconstruction ALONE was insufficient: re-running the
+   `\d{1,4}` mutation still passed, because no existing assertion distinguished
+   `\d{1,3}` from `\d{1,4}` (the `the year 2020` / `In 1998 the` cases use single
+   spaces, so they never had delimiters and match under neither). Added two MUST-NOT-match
+   regression sentinels with REAL double-space / underscore delimiters: `  2020  ` and
+   `__2020__` — a delimited 4-digit number that only `\d{1,3}` rejects.
+
+Proof (re-run this session): baseline 40/40 green, exit 0; with the `\d{1,4}` mutation the
+verifier fails the 2 sentinels and exits 1; full `node scripts/verify-ci.mjs` green. The
+gate is now a genuine behavioral regression guard.
+
 ### Should Watch
 
 **SW-CR-1 — quadratic backtracking on the blank pattern (pre-existing, not
