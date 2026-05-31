@@ -220,6 +220,24 @@ export async function analyzePaperImportAiSevenChoicesGroup(input: {
   return (await response.json()) as PaperImportAiAnalysisResult
 }
 
+export async function analyzePaperImportAiClozeGroup(input: {
+  paper: PaperImportAiParseResult['paper']
+  group: PaperImportAiClozeGroup
+  providerId: PaperImportAiProviderId
+}) {
+  const response = await fetch(apiPath('/api/paper-import-ai/analyze-cloze'), {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(input),
+  })
+  if (!response.ok) {
+    throw await parseError(response, `Failed to analyze cloze group: ${response.status}`)
+  }
+  return (await response.json()) as PaperImportAiAnalysisResult
+}
+
 export async function publishPaperImportAiAnalysis(input: {
   file: File
   parseResult: PaperImportAiParseResult
@@ -227,6 +245,7 @@ export async function publishPaperImportAiAnalysis(input: {
   sevenChoicesGroup?: PaperImportAiSevenChoicesGroup | null
   sevenChoicesAnalysis?: Record<string, unknown> | null
   clozeGroup?: PaperImportAiClozeGroup | null
+  clozeAnalysis?: Record<string, unknown> | null
   grammarFillGroup?: PaperImportAiGrammarFillGroup | null
   applicationGroup?: PaperImportAiWritingGroup | null
   continuationGroup?: PaperImportAiWritingGroup | null
@@ -242,6 +261,7 @@ export async function publishPaperImportAiAnalysis(input: {
         sevenChoicesGroup: input.sevenChoicesGroup || null,
         sevenChoicesAnalysis: input.sevenChoicesAnalysis || null,
         clozeGroup: input.clozeGroup || null,
+        clozeAnalysis: input.clozeAnalysis || null,
         grammarFillGroup: input.grammarFillGroup || null,
         applicationGroup: input.applicationGroup || null,
         continuationGroup: input.continuationGroup || null,

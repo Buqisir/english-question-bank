@@ -24,6 +24,14 @@ _Avoid_: problem, item when precision matters
 One selectable answer choice attached to a question.
 _Avoid_: choice when referring to the database object
 
+**Cloze Blank**:
+One numbered gap (q41–q55) in a 完形填空 Passage. A Cloze Blank is both a Question and the in-passage gap its answer fills; the two map one to one. Its Options are four same-part-of-speech choices (A–D) attached to that Question.
+_Avoid_: 空 alone (ambiguous), gap, gap-fill when the stored object is meant
+
+**Analysis**:
+The reviewed, teacher-facing explanation of why each correct answer fits — the 讲评 layer. It attaches per Question / Cloze Blank for objective families, or to a Writing Task for writing. It is never the answer authority and is shown only when complete for the whole group. Cloze Analysis explains each Cloze Blank using collocation reasoning, an optional part-of-speech-specific test point, and highlightable evidence from the passage.
+_Avoid_: 解析 / explanation when the stored reviewed object is meant; answer key when only the answer is meant
+
 **Writing Task**:
 The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), the word-count target, and, for continuation, the paragraph opening sentences and continuation material. A Writing Task is the attachment point for a future writing analysis (model answer, scoring guidance, AI feedback), since a writing group has no Questions to attach analysis to.
 _Avoid_: writing question, essay question when referring to this stored object; it is not a Question
@@ -77,6 +85,8 @@ _Avoid_: source file when it would confuse provenance with Source
 - A **Question Group** contains many **Questions**.
 - A writing **Question Group** contains zero **Questions** and carries one **Writing Task**.
 - A **Question** can have zero or more **Options**.
+- A cloze **Question Group** contains many **Cloze Blanks**; each **Cloze Blank** maps one to one to one **Question**.
+- An **Analysis** attaches per **Question** / **Cloze Blank**, or to a **Writing Task**; it is never the answer authority.
 - A future writing analysis attaches to a **Writing Task** at group level, with no **Question** reference.
 - A **Tag** can attach to a **Passage**, **Question Group**, or **Question**.
 - An **AI Tag Suggestion** targets one **Passage**, **Question Group**, or **Question** and becomes a **Tag** only after teacher confirmation.
@@ -103,3 +113,4 @@ _Avoid_: source file when it would confuse provenance with Source
 - "题目" can mean **Question**, **Question Group**, or even a whole **Passage** in casual Chinese. In product and code, use the precise term.
 - "材料" can mean **Passage** or **Import File**. Use **Passage** for reviewed content and **Import File** for archived originals.
 - "题集" can mean a temporary selection, a **Draft Paper**, or a **Paper Set**. Use **Draft Paper** for the C8 group-composition workbench and **Paper Set** for older broader saved collections.
+- "空" can mean a **Cloze Blank**, a 七选五 blank, or a 语法填空 blank. Use **Cloze Blank** for 完形填空; qualify the others by family.

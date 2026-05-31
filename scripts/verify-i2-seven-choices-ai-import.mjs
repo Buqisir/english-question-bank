@@ -480,6 +480,34 @@ function scFixtureAnalysis(parseResult) {
   }
 }
 
+function scFixtureClozeAnalysis(parseResult) {
+  const cl = parseResult.clozeGroup
+  return {
+    schemaVersion: 'cloze-analysis-v1',
+    paperId: parseResult.paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [cl.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'cloze-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [cl.groupId]: { overview: '完形填空概览。', affectiveArc: '情感平稳。' } },
+    blanks: Object.fromEntries(
+      cl.questions.map((q) => [
+        q.id,
+        {
+          blankId: q.blankId,
+          blankNo: Number(q.stem),
+          pos: 'verb',
+          correctFit: { optionLabel: q.answerKey, reason: '搭配合理。' },
+          distractorGlosses: ['A', 'B', 'C', 'D'].filter((l) => l !== q.answerKey).map((l) => ({
+            optionLabel: l, optionText: q.options[l], meaning: `表示"${q.options[l]}"。`,
+          })),
+          evidence: [{ type: 'collocation-partner', signalText: 'Cloze passage', signalSide: 'context-before', relation: '话题词呼应。' }],
+          teachingNote: '通过施受关系判断。',
+        },
+      ]),
+    ),
+  }
+}
+
 function assertPackageBuilder() {
   const parseResult = scFixtureParseResult()
   const sourceBuffer = Buffer.from('PK i2 package docx')
@@ -493,6 +521,7 @@ function assertPackageBuilder() {
     sevenChoicesGroup: parseResult.sevenChoicesGroup,
     sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
     clozeGroup: parseResult.clozeGroup,
+    clozeAnalysis: scFixtureClozeAnalysis(parseResult),
     grammarFillGroup: parseResult.grammarFillGroup,
     applicationGroup: parseResult.applicationGroup,
     continuationGroup: parseResult.continuationGroup,
@@ -520,6 +549,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: null,
       clozeGroup: parseResult.clozeGroup,
+      clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
@@ -537,6 +567,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: noAnswerGroup,
       sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
       clozeGroup: parseResult.clozeGroup,
+      clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
@@ -554,6 +585,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: conflictAnalysis,
       clozeGroup: parseResult.clozeGroup,
+      clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
@@ -581,6 +613,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
       clozeGroup: parseResult.clozeGroup,
+      clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
       applicationGroup: null,
       continuationGroup: parseResult.continuationGroup,
@@ -596,6 +629,7 @@ function assertPackageBuilder() {
       sevenChoicesGroup: parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: scFixtureAnalysis(parseResult),
       clozeGroup: parseResult.clozeGroup,
+      clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: null,

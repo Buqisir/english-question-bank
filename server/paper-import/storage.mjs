@@ -12,6 +12,7 @@ import { randomUUID } from 'node:crypto'
 
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
+const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 
 function readJsonMaybe(filePath) {
   if (!existsSync(filePath)) return null
@@ -87,7 +88,12 @@ function makeVersionedArtifacts(packageData, version) {
     : null
   if (scAnalysis) scAnalysis.sourceAssetVersion = version
 
-  return { paperAsset, answerKey, importMeta, readingAnalysis, scAnalysis }
+  const clozeAnalysis = packageData.clozeAnalysis
+    ? JSON.parse(JSON.stringify(packageData.clozeAnalysis))
+    : null
+  if (clozeAnalysis) clozeAnalysis.sourceAssetVersion = version
+
+  return { paperAsset, answerKey, importMeta, readingAnalysis, scAnalysis, clozeAnalysis }
 }
 
 export function writePaperImportVersion({
@@ -121,6 +127,9 @@ export function writePaperImportVersion({
     writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
     if (artifacts.scAnalysis) {
       writeJson(path.join(tempDir, 'analyses', sevenChoicesAnalysisFileName), artifacts.scAnalysis)
+    }
+    if (artifacts.clozeAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', clozeAnalysisFileName), artifacts.clozeAnalysis)
     }
     writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
     writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
@@ -159,6 +168,13 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
     writeFileSync(
       path.join(tempLatest, 'analyses', sevenChoicesAnalysisFileName),
       readFileSync(scAnalysisPath),
+    )
+  }
+  const clozeAnalysisPath = path.join(versionDir, 'analyses', clozeAnalysisFileName)
+  if (existsSync(clozeAnalysisPath)) {
+    writeFileSync(
+      path.join(tempLatest, 'analyses', clozeAnalysisFileName),
+      readFileSync(clozeAnalysisPath),
     )
   }
 
