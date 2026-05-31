@@ -170,13 +170,16 @@ if (!patternMatch) {
   process.exit(1)
 }
 
-// Reconstruct the RegExp from the extracted literal.
-// The source contains   and   as escape sequences (not literal chars).
-// We eval the literal safely by constructing it from the known structure.
-// Instead of eval, we reconstruct from the known I10 target form.
+// Reconstruct the RegExp from the ACTUAL extracted source literal (MF-CR-1).
+// Behavioral tests below MUST run against the real PaperSurface.tsx pattern, not a
+// hardcoded copy -- otherwise a source regression (e.g. \\d{1,3} -> \\d{1,4}) would
+// pass green. The literal is "/<body>/<flags>"; the \\u0020 / \\u00A0 escape text in
+// the source string is interpreted by the RegExp constructor exactly as in the .tsx.
 const extractedLiteral = patternMatch[1]
-// Build the regex from the known structure (avoids eval of arbitrary source):
-const pattern = /(?:_{2,}|[  ]{2,})\s*(\d{1,3})\s*(?:_{2,}|[  ]{2,})/g
+const lastSlash = extractedLiteral.lastIndexOf('/')
+const patternBody = extractedLiteral.slice(1, lastSlash)
+const patternFlags = extractedLiteral.slice(lastSlash + 1)
+const pattern = new RegExp(patternBody, patternFlags)
 
 // Cross-check: the extracted literal contains the key structural tokens.
 assert(
@@ -263,6 +266,17 @@ assert(
   'MUST NOT match: "In 1998 the" (4-digit, exceeds \\d{1,3})',
   !matchesFull(pattern, 'In 1998 the'),
   '"In 1998 the" must not match — 4-digit number exceeds \\d{1,3}',
+)
+assert(
+  'MUST NOT match: delimited 4-digit "  2020  " (REGRESSION SENTINEL for \\d{1,3}->\\d{1,4})',
+  !matchesFull(pattern, '\u0020\u00202020\u0020\u0020'),
+  'A 4-digit number BETWEEN double-space delimiters must NOT match under \\d{1,3}; '
+    + 'if this matches, the source digit-count floor was widened (e.g. to \\d{1,4}).',
+)
+assert(
+  'MUST NOT match: delimited 4-digit "__2020__" (REGRESSION SENTINEL for \\d{1,3}->\\d{1,4})',
+  !matchesFull(pattern, '__2020__'),
+  '4-digit between underscore delimiters must NOT match under \\d{1,3}.',
 )
 assert(
   'MUST NOT match: __word__ (no digit)',
