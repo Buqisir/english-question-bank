@@ -2,15 +2,16 @@
 
 Cut: I13 语法填空解析 · 第一刀（生成）
 Last synced: 2026-05-31 (drafting — walking 考点 with PO 黄学伟)
-进度（2026-05-31 暂告段落）:
+进度（2026-05-31）:
 - ✅ 字段 shape 已确认（7 字段）；given 分支总原则（提示词词性总闸 + 词性转换看目标词性）已锁。
-- ✅ 有提示词分支**全部对齐**：谓语动词 / 非谓语动词（快路/慢路算法 + role 字段 (A)）/ 名词 /
-  词性转换 derivation（名→形·动→名·动→形）/ 形容词 / 代词 / 数词。
-- ✅ 无提示词：总闸（位置+是否带谓语）、介词、**冠词（深度对齐：特指/泛指本质 + 拥有vs种类操作测试 +
-  诚实残余）**。
-- ⏳ **待续**：无提示词的「代词(it/that替代)」「连词：并列/定语从句/名词性从句/状语从句」。
-- ⏳ 之后：写 `grammar-fill-analysis-v1.contract.md`（AI 每空 JSON，对标 cloze）+ plan.md → PA → DEV。
-Open review items: 无提示词 代词 + 连词四类未对齐；analysis contract 未写。
+- ✅ **整棵考点树全部对齐（11 个 facet）**：
+  - 有提示词 6：谓语动词（一找二判三 + N+1）/ 非谓语（快路·慢路算法 + role 字段 A）/ 名词（数·所有格）/
+    词性转换（名→形·动→名·动→形）/ 形容词（变副词·比较级）/ 代词 · 数词。
+  - 无提示词 5：介词（本意·搭配·词频表）/ 冠词（特指·泛指本质 + 拥有vs种类操作测试 + 诚实残余）/
+    代词（it 四用法·that·those 比较结构·one·ones 泛指）/ 连词四类（位置定类型·缺成分定引导词）。
+- ⏳ **下一步**：写 `grammar-fill-analysis-v1.contract.md`（AI 每空 JSON，对标 cloze-analysis-v1）
+  → `plan.md`（DEV 契约）→ PA → DEV（analyzeGrammarFill.mjs + validator + prompt + verifier）。
+Open review items: analysis-v1 contract 未写；prompt/生成/render 未做（render 是后续刀）。
 
 ## 这是什么
 
@@ -295,6 +296,83 @@ IP，**不由 AI 生成**（零幻觉）。AI 每空只做三件事：① 定 `f
   名词首音素（a/an）、命中的固定搭配。
 - **answer_logic**: 补 `the` / `a` / `an`（语法填空空必须填，不取零冠词）。先查固定搭配 → 再 of 的
   拥有/种类测试 → 再回指/含意 / 新引入信号。
+
+---
+
+## `grammar-fill.no-hint.pronoun` 代词（无提示词）— 待 PO 对齐
+
+- **blank_type**: `no-hint`
+- **recognize**: 空在名词位置（主语 / 动词或介词的宾语），需要代词来**指代/替代**前文，或填 **it** 的
+  **特殊句式**（形式主语/形式宾语/强调句）。（**they 基本不作无提示词答案**，主考 it / that·those / one·ones。）
+- **framework — 三条岔路**:
+  1. **it** — 四种用法：
+     - ① **指代**前文那个本身（完全同一个、同一情况），**不在比较结构里**。
+     - ② **形式主语**：`It` + be + adj/n + **to do / that 从句**（真主语后置）。
+     - ③ **形式宾语**：V + `it` + 宾补 + **to do / that 从句**（find/make/think `it` hard to…）。
+     - ④ **强调句（it-cleft）**：`It` is/was + 被强调成分 + **that/who** + 其余。
+       判据：去掉 `It is/was … that` 后，剩下的仍是**完整句子**（区别于形式主语：那个去掉后不完整）。
+  2. **that / those** — **替代词，标志是"比较结构"**（PO 切法 2026-05-31）：替代"the + 名词（+ of Y）"，
+     指**同类、另一份**。比较结构两种：① **比较级比较** larger/better… **than** *that* of…；
+     ② **different 比较** different **from** *that* of…。that 替不可数/单数可数；those 替复数。
+  3. **one / ones** — **替代词**：替代"**同类中泛泛的一个**"。one 替单数；ones 替复数。
+- **本质（接回冠词那根主线 — 特指 vs 泛指）**:
+  - **it = the same（同一个本身）**、**that/those ≈ "the one(s)"（同类·特定的那个）** → 都是**特指**（the 家族）。
+  - **one/ones ≈ "a one(s)"（同类·泛泛一个）** → **泛指**（a 家族）。
+  - **操作判（PO 切法）**：① 看到**比较/对比结构**（than / different from / similar to / the same as…）
+    → **that(单·不可数)/those(复)**；② 指前文**同一个本身**，或命中 **it 特殊句式**（形式主语/形式宾语/
+    强调句）→ **it**；③ 指**泛泛同类的可数一个/些** → **one/ones**。
+- **gaokao_focus**: that/those vs one/ones（特指替代 vs 泛指替代）；**it 强调句**（It is/was…that…）；
+  it 形式主宾 vs 真指代。
+- **evidence_targets**: 被指代/替代的**先行词**（在上文）、句法位置（主/宾/介词后）、比较/对比结构里的
+  对比对象（than that of… 型）、**强调句框架 It…that** 与被强调成分、形式主宾的真主语/真宾语
+  （to do / that 从句）、先行词的可数性与单复数。
+- **answer_logic**: 补 it / that / those / one / ones（由"特指 vs 泛指 × 单复数/可数性"定）。
+
+---
+
+## `grammar-fill.no-hint.conjunction` 连词 — 子闸 + 四类（待 PO 对齐）
+
+**连词子闸**（确定是连词后，先分两支）：
+- 连接**对等的成分/分句**（无主从、不引出从句作成分）→ **并列连词**。
+- **引出一个从句**（带出新谓语、有主从）→ **三大从句**，再按两步分：
+  1. **看位置**：空前有**先行词（名/代词）**→ 定语从句；从句占**名词成分位置**（主/宾/表）→ 名词性从句；
+     **前后两句都完整**、逻辑连接 → 状语从句。
+  2. **看缺成分**：从句**缺主/宾/表** → 用"代词类"引导词；**不缺**（缺的是状语或不缺）→ 用"副词类/单纯连词"。
+
+### `…conjunction.coordinating` 并列连词
+- **recognize**: 连接对等的词/短语/分句，无主从，不引出作成分的从句。
+- **framework**: 按逻辑选——顺承并列 `and`、转折 `but`/`yet`、选择 `or`、因果 `for`/`so`。
+  关联结构：`both…and`、`either…or`、`neither…nor`、`not only…but (also)`、`not…but`、`whether…or`。
+- **gaokao_focus**: 关联词配对（neither/nor、either/or）、not only…but also、`while` 对比（弱逻辑）。
+- **evidence_targets**: 被连接的两个对等成分、逻辑关系信号。
+- **answer_logic**: 补并列连词。
+
+### `…conjunction.relative-clause` 定语从句
+- **recognize**: 空前有**先行词（名词/代词）**，从句修饰它，空作引导词。
+- **framework**: ① 判从句**缺什么成分**：缺主/宾/表 → 关系代词；不缺（缺状语）→ 关系副词。
+  ② 试代入 `whose`（前后名词有从属关系）。③ 据指代（人/物/时间/地点）选词。
+- **引导词**：关系代词（从句缺主/宾/表）`who/whom/which/that/whose/as`；关系副词（不缺·作状语）`when/where/why`。
+- **gaokao_focus**: whose 的从属关系；as（as 引导，常 the same…as / such…as）；介词+which/whom。
+- **evidence_targets**: **先行词**、从句中**缺的成分位置**。
+- **answer_logic**: 补关系词（关系代词/关系副词）。
+
+### `…conjunction.noun-clause` 名词性从句
+- **recognize**: 从句整体在主句作**成分**（主/宾/表/同位语），空前**无先行词**，空作引导词。
+- **framework**: ① 判从句**缺什么成分**：缺主/宾/表 → 连接代词；不缺但有疑问义 → 连接副词；
+  不缺且无疑问义 → 单纯连词。② 据句意选词。
+- **引导词**：连接代词（缺成分）`what/who/whom/which/whose`；连接副词（不缺）`how/why/when/where`；
+  单纯连词（不缺）`that / whether·if / as if / because`。
+- **gaokao_focus**: what（缺成分）vs that（不缺）；whether vs if 的位置限制。
+- **evidence_targets**: 从句所占的**主句成分位置**（主/宾/表）、从句中缺的成分。
+- **answer_logic**: 补引导词。
+
+### `…conjunction.adverbial-clause` 状语从句
+- **recognize**: **主、从两句都完整**（都不缺成分），从句作状语修饰主句，空作从属连词。
+- **framework**: 看主从句**逻辑关系**选从属连词——时间 `when/while/as/until·till/before/after`、
+  条件 `if/unless`、原因 `because/as/since`、让步 `although·though`、对比 `while`、目的/结果等。
+- **gaokao_focus**: `as` 多义（当/因为/随着/正如）、`while` 对比、until/till、连词 vs 介词混淆。
+- **evidence_targets**: 主、从两个**完整句**、它们之间的**逻辑关系**。
+- **answer_logic**: 补从属连词。
 
 ---
 
