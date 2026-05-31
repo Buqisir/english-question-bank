@@ -663,6 +663,25 @@ export function PaperIntelligencePaperSurfaceHarness({
         )
         return
       }
+      // Cloze analysis: resolve URL questionId against analysisByQuestionId,
+      // fall back to defaultQuestionId, seed first passage-side evidence.
+      if (clozeAnalysisModel) {
+        const candidateId =
+          initialQuestionId && clozeAnalysisModel.analysisByQuestionId[initialQuestionId]
+            ? initialQuestionId
+            : clozeAnalysisModel.defaultQuestionId
+        if (!candidateId) return
+        const blankView = clozeAnalysisModel.analysisByQuestionId[candidateId] ?? null
+        const firstPassageEvidence = blankView?.evidenceRows.find((r) => !r.isOptionSide) ?? null
+        initialQuestionAppliedRef.current = true
+        dispatchHost({
+          type: 'request-lecture-focus',
+          questionId: candidateId,
+          optionLabel: null,
+          evidenceId: firstPassageEvidence?.evidenceId ?? null,
+        })
+        return
+      }
       const activeReadingModel = paperAssetModel ?? clozeModel ?? grammarFillModel ?? writingModel
       if (!activeReadingModel) return
       const candidateId =
@@ -714,7 +733,7 @@ export function PaperIntelligencePaperSurfaceHarness({
     if (!resolvedId) return
     initialQuestionAppliedRef.current = true
     dispatchHost({ type: 'request-lecture-focus', questionId: resolvedId })
-  }, [source, sevenChoicesModel, paperAssetModel, report, initialGroupId, initialQuestionId])
+  }, [source, sevenChoicesModel, clozeAnalysisModel, paperAssetModel, report, initialGroupId, initialQuestionId])
 
   // ─── Build PaperSurface data props via adapter ───
   const surfaceData = useMemo(() => {

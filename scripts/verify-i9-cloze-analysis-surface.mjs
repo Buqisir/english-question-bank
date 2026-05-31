@@ -47,6 +47,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { createPaperSurfaceAnalysisAvailability } from '../server/search/paperSurfaceAvailability.mjs'
+import { findAllTextRanges } from '../app/src/features/paper-intelligence/clozeAnalysisSurfaceAdapter.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -91,32 +92,12 @@ assert('Step 1: adapter builds group view', adapterSrc.includes('groupView'))
 assert('Step 1: adapter builds analysisByQuestionId', adapterSrc.includes('analysisByQuestionId'))
 assert('Step 1: adapter handles signatureFacet label', adapterSrc.includes('SIGNATURE_LABELS') && adapterSrc.includes('signatureLabel'))
 
-// ─── Inline findAllTextRanges logic test (multi-occurrence + blank-marker exclusion) ───
+// ─── findAllTextRanges tests (multi-occurrence + blank-marker exclusion) ───
 //
-// Reproduce the adapter's core range-finding logic inline in JS to exercise
-// the deterministic all-occurrences behaviour (the TS module is not importable
-// directly in a Node .mjs script without a build step).
+// Use the exported findAllTextRanges from the shipped adapter (imported above)
+// so the test proves the real shipped code, not a separate inline copy.
 
-/**
- * Minimal inline implementation matching clozeAnalysisSurfaceAdapter.findAllTextRanges.
- */
-function findAllTextRangesInline(textMap, needle) {
-  const trimmed = needle.trim()
-  if (!trimmed) return []
-  const ranges = []
-  for (const paragraph of textMap.paragraphs) {
-    for (const sentence of paragraph.sentences) {
-      let start = sentence.text.indexOf(trimmed)
-      while (start !== -1) {
-        ranges.push({ sentenceId: sentence.id, start, end: start + trimmed.length })
-        start = sentence.text.indexOf(trimmed, start + trimmed.length)
-      }
-    }
-  }
-  return ranges
-}
-
-// Multi-occurrence fixture: "light" appears twice in distinct sentences.
+// Multi-occurrence fixture: "light" appears in multiple sentences across paragraphs.
 const multiOccurrenceTextMap = {
   paperId: 'paper-test',
   paragraphs: [
@@ -138,7 +119,7 @@ const multiOccurrenceTextMap = {
   ],
 }
 
-const lightRanges = findAllTextRangesInline(multiOccurrenceTextMap, 'light')
+const lightRanges = findAllTextRanges(multiOccurrenceTextMap, 'light')
 assert('Step 1: multi-occurrence — all 4 occurrences of "light" found', lightRanges.length === 4,
   `found: ${lightRanges.length}`)
 
@@ -165,7 +146,7 @@ const blankMarkerTextMap = {
 }
 
 // A correctly-formed signalText ("feeling") does NOT match the blank marker itself.
-const feelingRanges = findAllTextRangesInline(blankMarkerTextMap, 'feeling')
+const feelingRanges = findAllTextRanges(blankMarkerTextMap, 'feeling')
 assert('Step 1: blank-marker exclusion — "feeling" found before marker', feelingRanges.length === 1)
 
 // The signal "feeling __41__" (incorrectly includes marker) would find 1 range,
@@ -240,6 +221,14 @@ assert('Step 3: seed effect branches on clozeAnalysisModel', harnessSrc.includes
 // Focus-intent handler handles cloze analysis model.
 assert('Step 3: focus-intent handler branches on clozeAnalysisModel',
   harnessSrc.includes("source === 'paper-asset' && clozeAnalysisModel"))
+// Initial-focus effect handles cloze analysis model (CR MF-1 regression guard).
+assert('Step 3: initial-focus effect branches on clozeAnalysisModel',
+  harnessSrc.includes('if (clozeAnalysisModel)') &&
+  harnessSrc.includes('clozeAnalysisModel.analysisByQuestionId[initialQuestionId]') &&
+  harnessSrc.includes('clozeAnalysisModel.defaultQuestionId'))
+// clozeAnalysisModel is in the initial-focus effect dependency array.
+assert('Step 3: clozeAnalysisModel in initial-focus effect dependency array',
+  /\[\s*source\s*,\s*sevenChoicesModel\s*,\s*clozeAnalysisModel/.test(harnessSrc))
 
 // ============================================================
 // Step 4 — Availability gate
