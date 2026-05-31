@@ -305,6 +305,34 @@ A. Sleep habits B. Train tickets C. Old maps D. River banks
   assertEqual('title beginning with A is not treated as a group marker', titleResult.readingGroups.length, 0)
 }
 
+function assertTitleNormalization() {
+  // SW-1: the reading group title (docxSplitter.mjs L356) must flow through
+  // normalizePassageText, like the title-fallback paragraph already does (L340).
+  // A titled `Passage A` marker carrying a CJK gloss must come back normalized
+  // (half-width spaced parens), while the A-D label still derives from the marker.
+  const result = parseReadingCandidatesFromText(
+    `
+第二部分 阅读理解
+第一节
+阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。
+Passage A The Cloud Farm（云农场）guide
+Cloud farms can help small villages predict weather changes.
+21. What does the village use to plan the harvest?
+A. A notebook B. A weather app C. A city map D. A music lesson
+21-21 A
+`,
+    { sourceFilename: 'titled-marker.docx', paperId: 'paper-titled-marker' }
+  )
+  assert('SW-1 titled Passage A marker yields one reading group', result.readingGroups.length === 1)
+  const group = result.readingGroups[0]
+  assertEqual(
+    'SW-1 reading group title is normalized (CJK gloss → half-width spaced parens)',
+    group.title,
+    'The Cloud Farm (云农场) guide',
+  )
+  assert('SW-1 group A-D label still derives from marker (groupId)', group.groupId.endsWith('-reading-a'))
+}
+
 function collectDocxFiles() {
   const roots = ['docs/sources', 'test-fixtures', 'imports']
   const files = []
@@ -378,6 +406,7 @@ async function main() {
   assertAllowedScope()
   assertRouteContract()
   assertTextFixture()
+  assertTitleNormalization()
   assertFalsePositiveRejection()
   await assertRealDocxFixtures()
 
