@@ -168,6 +168,26 @@ red. A verifier that can't catch a planted regression is a fake green.
      least one of 完形/七选五** — proving D4's parse-time consistency holds end-to-end.
   Clean up; never commit the asset.
 
+## Browser QA Result (2026-05-31 — PASS, load-bearing gate discharged)
+
+Re-imported ONE real paper (石室中学高三二诊, real `gpt-5.5` analysis, 6 sections) to a
+throwaway asset `paper-qa-i11` (never committed; cleaned up after QA). Verified on the live
+PaperSurface across Reading / 完形 / 七选五:
+
+- **① Normalization visible:** half-width punctuation + spacing throughout; CJK gloss renders
+  spaced half-width parens — Reading `(休眠的)`, 完形 `(悲痛)`/`(份额)`, 七选五 `(双一流)`/`(数字游民)`.
+  Chinese instruction text kept full-width (`…A、B、C、D…`).
+- **② C2 — I10 blanks still styled:** 完形 `__41__`…`__54__` and 七选五 `_____36_____`…
+  render as the styled underline+number blank. No regression.
+- **③ MF-2 / D4 end-to-end — evidence highlight on a normalized-char quote resolves:**
+  Reading highlight on `"Located in the Chiriqui Highlands, the dormant (休眠的) volcano…"`
+  (spans BOTH a normalized comma AND a spaced gloss) resolves and renders. Data-level proof:
+  **109/109** real-AI-baked evidence quotes `includes()`-match the stored normalized passage
+  (51 of them contain a normalized character) — zero silent highlight loss. This is exactly
+  the failure mode the publish-time hook would have caused; the parse-time hook (D4) fixes it.
+
+Next: PO QA (owner) → RM merge.
+
 ## PA Follow-Up Decisions (PM compression of `pa.md`, 2026-05-31)
 
 PA verdict: APPROVE WITH MUST FIX (2 MF), then re-validated D4=(e) as SOUND with no new MF.
