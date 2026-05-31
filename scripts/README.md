@@ -50,6 +50,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-i6-writing-render.mjs` | I6 写作卷面版面还原：从 content.blocks 派生写作页模型（题面外壳归属 / 续写开头句折叠进答题框 / 应用文空框 / 不串味） | yes |
 | `verify-i7-application-given.mjs` | I7 应用文给定上下格式解析：末尾纯英文 + 正向信号守卫切给定骨架（信件/标题/无给定/负向守卫/称呼型），情境剔除、夹注不误判 | yes |
 | `verify-i8-cloze-analysis.mjs` | I8 完形填空 AI 解析生成：prompt 合约、validate 校验器成功与阻断用例（stub provider）、路由 + 包构建 + 存储接线、磁盘 latest/analyses/cloze-analysis-v1.json 断言 | yes |
+| `verify-i9-cloze-analysis-surface.mjs` | I9 完形填空解析 render 面：adapter 映射 + 多次出现证据 + 空白标记排除 + option-side 标记；panel 必要结构；harness fetch→fallback dispatch；availability 完整性 vs 不完整（blanks 键） | yes |
 | `verify-relay-json-format.mjs` | Chat-completions request body sends response_format json_object on every provider (incl. openai-compatible gpt relay); `thinking` stays native-only | yes |
 
 ## PaperSurface and Paper Intelligence

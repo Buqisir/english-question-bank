@@ -134,6 +134,7 @@ import { StructureBraceOverlay } from './structureBrace'
 import { LegacyAnalysisPanel } from './LegacyAnalysisPanel'
 import { PaperAssetAnalysisPanel } from './PaperAssetAnalysisPanel'
 import { SevenChoicesAnalysisPanel } from './SevenChoicesAnalysisPanel'
+import { ClozeAnalysisPanel } from './ClozeAnalysisPanel'
 import {
   buildPaperAssetSurfaceModel,
   type PaperAssetQuestionAnalysisView,
@@ -149,6 +150,11 @@ import {
   buildClozePaperView,
   type ClozePaperViewModel,
 } from './clozePaperViewAdapter.ts'
+import {
+  buildClozeAnalysisSurfaceModel,
+  type ClozeAnalysisSurfaceModel,
+  type ReviewedClozeAnalysisV1,
+} from './clozeAnalysisSurfaceAdapter.ts'
 import {
   buildGrammarFillPaperView,
   type GrammarFillPaperViewModel,
@@ -213,6 +219,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [paperAssetModel, setPaperAssetModel] = useState<PaperAssetSurfaceModel | null>(null)
   const [sevenChoicesModel, setSevenChoicesModel] = useState<SevenChoicesSurfaceModel | null>(null)
   const [clozeModel, setClozeModel] = useState<ClozePaperViewModel | null>(null)
+  const [clozeAnalysisModel, setClozeAnalysisModel] = useState<ClozeAnalysisSurfaceModel | null>(null)
   const [grammarFillModel, setGrammarFillModel] = useState<GrammarFillPaperViewModel | null>(null)
   const [writingModel, setWritingModel] = useState<WritingPaperViewModel | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
@@ -286,6 +293,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       setReport(null)
       setPaperAssetModel(null)
       setSevenChoicesModel(null)
+      setClozeAnalysisModel(null)
       setWritingModel(null)
       setOpenSevenChoiceQuestionIds([])
       setBodies({})
@@ -314,14 +322,49 @@ export function PaperIntelligencePaperSurfaceHarness({
           if (!group) {
             throw new Error(`未找到题组：${initialGroupId}`)
           }
-          // Cloze: no analysis file; render plain paper view directly.
+          // Cloze: fetch analysis → dispatch ClozeAnalysisPanel; fallback to plain view.
           if (group.groupType === 'cloze') {
+            let clozeAnalysisRes: Response | null = null
+            try {
+              clozeAnalysisRes = await fetch(
+                `${resolvedAssetBase}/analyses/cloze-analysis-v1.json`,
+              )
+              if (!clozeAnalysisRes.ok) clozeAnalysisRes = null
+            } catch {
+              clozeAnalysisRes = null
+            }
+            if (clozeAnalysisRes) {
+              try {
+                const rawAnalysis = await clozeAnalysisRes.json()
+                const analysisModel = buildClozeAnalysisSurfaceModel({
+                  asset,
+                  analysis: rawAnalysis as ReviewedClozeAnalysisV1,
+                  groupId: initialGroupId,
+                })
+                if (cancelled) return
+                setClozeAnalysisModel(analysisModel)
+                setClozeModel(null)
+                setSevenChoicesModel(null)
+                setPaperAssetModel(null)
+                setGrammarFillModel(null)
+                setWritingModel(null)
+                setReport(analysisModel.report)
+                setPassageStructures(analysisModel.passageStructures)
+                setLoading(false)
+                return
+              } catch {
+                // Analysis parse/build failed — fall through to plain view.
+              }
+            }
+            // Fallback: no analysis or parse failure → plain cloze view (I3).
             const model = buildClozePaperView({ asset, groupId: initialGroupId })
             if (cancelled) return
             setClozeModel(model)
+            setClozeAnalysisModel(null)
             setSevenChoicesModel(null)
             setPaperAssetModel(null)
             setGrammarFillModel(null)
+            setWritingModel(null)
             setReport(model.report)
             setPassageStructures(model.passageStructures)
             setLoading(false)
@@ -703,10 +746,11 @@ export function PaperIntelligencePaperSurfaceHarness({
   const paperAssetAnalysisView = useMemo((): PaperAssetQuestionAnalysisView | null => {
     if (source !== 'paper-asset') return null
     if (sevenChoicesModel) return null
+    if (clozeAnalysisModel) return null
     if (!activeQuestionId) return null
     const entry = (paperAssetModel ?? clozeModel ?? grammarFillModel ?? writingModel)?.analysisByQuestionId[activeQuestionId] ?? null
     return entry && 'questionId' in entry ? (entry as PaperAssetQuestionAnalysisView) : null
-  }, [source, sevenChoicesModel, paperAssetModel, clozeModel, grammarFillModel, writingModel, activeQuestionId])
+  }, [source, sevenChoicesModel, clozeAnalysisModel, paperAssetModel, clozeModel, grammarFillModel, writingModel, activeQuestionId])
 
   // ─── Derive activeEvidenceKind (Issue #21-C3.6) ───
   //
@@ -735,6 +779,10 @@ export function PaperIntelligencePaperSurfaceHarness({
   //                 own).
   const activeEvidenceKind = useMemo<'support' | 'trap' | null>(() => {
     if (source === 'paper-asset') {
+      // Cloze analysis: all evidence is uniform 'support' kind (PA MF-3.1).
+      if (clozeAnalysisModel) {
+        return activeEvidenceId ? 'support' : null
+      }
       if (sevenChoicesModel || clozeModel || grammarFillModel || writingModel) return null
       if (!activeEvidenceId) return null
       return paperAssetModel?.evidenceKindById[activeEvidenceId] ?? null
@@ -745,7 +793,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       return 'trap'
     }
     return null
-  }, [source, sevenChoicesModel, paperAssetModel, activeEvidenceId, analysisView])
+  }, [source, clozeAnalysisModel, sevenChoicesModel, paperAssetModel, clozeModel, grammarFillModel, writingModel, activeEvidenceId, analysisView])
 
   // ─── Reseed activeEvidenceId when activeQuestionId changes (C3) ───
   //
@@ -761,6 +809,16 @@ export function PaperIntelligencePaperSurfaceHarness({
     }
     if (source === 'paper-asset') {
       if (sevenChoicesModel) return
+      // Cloze analysis: seed the first passage-side evidence row for the active blank.
+      if (clozeAnalysisModel) {
+        const blankView = clozeAnalysisModel.analysisByQuestionId[activeQuestionId] ?? null
+        const firstPassageEvidence = blankView?.evidenceRows.find((r) => !r.isOptionSide) ?? null
+        dispatchHost({
+          type: 'seed-support-evidence',
+          evidenceId: firstPassageEvidence?.evidenceId ?? null,
+        })
+        return
+      }
       dispatchHost({
         type: 'seed-option-evidence',
         optionLabel: paperAssetAnalysisView?.answer ?? null,
@@ -774,6 +832,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   }, [
     activeQuestionId,
     source,
+    clozeAnalysisModel,
     sevenChoicesModel,
     analysisView?.supportEvidenceId,
     paperAssetAnalysisView?.answer,
@@ -796,21 +855,33 @@ export function PaperIntelligencePaperSurfaceHarness({
         // a question card. Mirrors the default PI route's behavior in
         // PaperIntelligencePreview, where `setActiveInsightSection(null)`
         // runs on every question selection.
-        const nextEntry =
-          source === 'paper-asset'
-            ? (paperAssetModel ?? clozeModel ?? grammarFillModel ?? writingModel)?.analysisByQuestionId[intent.questionId] ?? null
-            : null
-        const nextAnalysis = nextEntry && 'questionId' in nextEntry ? (nextEntry as PaperAssetQuestionAnalysisView) : null
-        dispatchHost({
-          type: 'request-lecture-focus',
-          questionId: intent.questionId,
-          optionLabel: nextAnalysis?.answer ?? null,
-          evidenceId: nextAnalysis?.supportEvidenceId ?? null,
-        })
+        // Cloze analysis: use the first passage-side evidence row for the blank.
+        if (source === 'paper-asset' && clozeAnalysisModel) {
+          const blankView = clozeAnalysisModel.analysisByQuestionId[intent.questionId] ?? null
+          const firstPassageEvidence = blankView?.evidenceRows.find((r) => !r.isOptionSide) ?? null
+          dispatchHost({
+            type: 'request-lecture-focus',
+            questionId: intent.questionId,
+            optionLabel: null,
+            evidenceId: firstPassageEvidence?.evidenceId ?? null,
+          })
+        } else {
+          const nextEntry =
+            source === 'paper-asset'
+              ? (paperAssetModel ?? clozeModel ?? grammarFillModel ?? writingModel)?.analysisByQuestionId[intent.questionId] ?? null
+              : null
+          const nextAnalysis = nextEntry && 'questionId' in nextEntry ? (nextEntry as PaperAssetQuestionAnalysisView) : null
+          dispatchHost({
+            type: 'request-lecture-focus',
+            questionId: intent.questionId,
+            optionLabel: nextAnalysis?.answer ?? null,
+            evidenceId: nextAnalysis?.supportEvidenceId ?? null,
+          })
+        }
       }
       // Other intents ignored in C1/C2/C3/C4.
     },
-    [paperAssetModel, clozeModel, grammarFillModel, writingModel, source],
+    [clozeAnalysisModel, paperAssetModel, clozeModel, grammarFillModel, writingModel, source],
   )
 
   // ─── C4 insight chip handlers ───
@@ -1250,6 +1321,14 @@ export function PaperIntelligencePaperSurfaceHarness({
                 onToggleChain={handleToggleSevenChoiceChain}
                 onShowAll={handleShowAllSevenChoiceChains}
                 onHideAll={handleHideAllSevenChoiceChains}
+              />
+            ) : clozeAnalysisModel ? (
+              <ClozeAnalysisPanel
+                analysis={activeQuestionId ? (clozeAnalysisModel.analysisByQuestionId[activeQuestionId] ?? null) : null}
+                hasActiveQuestion={!!activeQuestionId}
+                activeEvidenceId={activeEvidenceId}
+                groupView={clozeAnalysisModel.groupView}
+                onSelectEvidence={handleSelectEvidence}
               />
             ) : source === 'paper-asset' ? (
               <PaperAssetAnalysisPanel

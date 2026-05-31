@@ -8,12 +8,23 @@ const analysisConfigs = [
     fileName: 'reading-choice-analysis-v1.json',
     groupType: 'reading',
     label: '阅读解析',
+    // Default: completeness keyed under analysis.questions[questionId]
+    entryMapKey: 'questions',
   },
   {
     schemaVersion: 'seven-choices-analysis-v1',
     fileName: 'seven-choices-analysis-v1.json',
     groupType: 'sevenChoices',
     label: '七选五解析',
+    entryMapKey: 'questions',
+  },
+  {
+    schemaVersion: 'cloze-analysis-v1',
+    fileName: 'cloze-analysis-v1.json',
+    groupType: 'cloze',
+    label: '完形解析',
+    // Cloze analysis keys per-blank entries under 'blanks', not 'questions' (PA MF-1).
+    entryMapKey: 'blanks',
   },
 ]
 
@@ -53,8 +64,9 @@ export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = 
       const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
       if (!groupId || group?.groupType !== config.groupType || questionIds.length === 0) continue
       if (Array.isArray(analysis?.targetGroups) && !analysis.targetGroups.includes(groupId)) continue
+      const entryMapKey = config.entryMapKey ?? 'questions'
       const hasReviewedAnalysisForEveryQuestion = questionIds.every((questionId) =>
-        Boolean(analysis?.questions?.[questionId]),
+        Boolean(analysis?.[entryMapKey]?.[questionId]),
       )
       if (!hasReviewedAnalysisForEveryQuestion) continue
 

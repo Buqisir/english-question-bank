@@ -37,7 +37,7 @@ assert('availability module owns cache variable', /let availabilityByGroupIdCach
 assert('availability module owns getByGroupId method', /function getByGroupId\(\)/.test(availabilitySource))
 assert('availability module owns invalidate method', /function invalidate\(\)[\s\S]{0,80}availabilityByGroupIdCache = null/.test(availabilitySource))
 assert('availability module builds paper-asset PaperSurface href', availabilitySource.includes("source: 'paper-asset'") && availabilitySource.includes("params.set('view', 'paper-intelligence')"))
-assert('availability module checks reviewed analysis completeness', availabilitySource.includes('hasReviewedAnalysisForEveryQuestion') && availabilitySource.includes('analysis?.questions?.[questionId]'))
+assert('availability module checks reviewed analysis completeness', availabilitySource.includes('hasReviewedAnalysisForEveryQuestion') && (availabilitySource.includes('analysis?.questions?.[questionId]') || availabilitySource.includes('analysis?.[entryMapKey]?.[questionId]')))
 assert('availability module keeps targetGroups guard', availabilitySource.includes('analysis.targetGroups.includes(groupId)'))
 assert('availability module imports paper import read-path resolver', availabilitySource.includes("from '../paper-import/storage.mjs'"))
 

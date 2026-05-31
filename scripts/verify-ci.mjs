@@ -40,6 +40,7 @@ const registry = {
   'scripts/verify-i6-writing-render.mjs',
   'scripts/verify-i7-application-given.mjs',
   'scripts/verify-i8-cloze-analysis.mjs',
+  'scripts/verify-i9-cloze-analysis-surface.mjs',
   'scripts/verify-relay-json-format.mjs',
   ],
 }
