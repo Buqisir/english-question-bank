@@ -660,9 +660,11 @@ function extractGrammarFillPrompts(lines) {
     // Find question numbers with adjacent parenthesized prompts.
     for (const no of GRAMMAR_FILL_QUESTION_NOS) {
       // Patterns: "56. (wear)", "56 (wear)", "(wear)" near 56
+      // Allow blank-marker chars (underscores) between the number and the prompt:
+      // real papers render the blank as `57._____(greet)`, not just `57. (greet)`.
       const patterns = [
-        new RegExp(`${no}[.、．]?\\s*[(（]([^)）]+)[)）]`),
-        new RegExp(`[(（]([^)）]+)[)）]\\s*${no}`),
+        new RegExp(`${no}[.、．]?[\\s_]*[(（]([^)）]+)[)）]`),
+        new RegExp(`[(（]([^)）]+)[)）][\\s_]*${no}`),
       ]
       for (const pat of patterns) {
         const m = text.match(pat)
