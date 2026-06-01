@@ -264,3 +264,37 @@ Required fix before render ships (do NOT ship a grammar-fill highlight without t
   parse-time bytes), OR render the highlight with a normalization-tolerant match. Plain
   `indexOf` against the stored passage will silently lose the highlight (the I11 C1 failure
   mode). Add a verifier fixture whose passage actually changes under `normalizeGrammarFillText`.
+
+**RESOLVED by I14 (2026-06-01).** The render slice (`I14-grammar-fill-analysis-surface`) shipped a
+**normalization-tolerant** locate (`grammarFillAnalysisSurfaceAdapter.ts` `findAllTextRangesTolerant`,
+GATE-1) + MF-1 textMap/locate sentenceId consistency. `verify-i14-grammar-fill-analysis-surface.mjs`
+has the normalize-divergence fixture + the sentenceId-membership assertion (CR mutation-tested 3/3).
+Gate closed.
+
+
+## I14 Grammar-Fill (and all analysis surfaces) — in-passage blank = focus target (PO request)
+
+Source: PO 黄学伟 browser-QA feedback during I14, 2026-06-01. **Follow-up** (new cut; explicitly
+scoped OUT of I14, which is consume-only render mirroring I9's existing interaction).
+
+PO wants: **clicking the blank number IN the passage** (e.g. `56`) focuses that blank and shows its
+analysis, and the **bottom number rail** (`PaperSurfaceQuestionList` — the row of `56. 57. … 65.`
+focus targets) is **removed** (for grammar fill it is naked numbers: those "questions" have no stem /
+no options, so the rail is noise).
+
+Current reality (verified): the focus interaction lives in the **shared** PaperSurface
+(`PaperSurface.tsx` `PaperSurfaceQuestionList` / `PaperSurfaceQuestionItem`); ALL four analysis
+surfaces (reading / 七选五 / cloze / grammar-fill) use it. In-passage blanks render as
+**non-clickable** text (`renderTextWithPaperBlanks` → `<span class="ps-paper-blank">`, no question-id
+wiring), and the grammar-fill `NN._____` format does not even match `paperBlankPattern` (I10 limit).
+
+Follow-up trigger:
+- The next PaperSurface interaction cut is scheduled (阿澈 owns the UI direction).
+
+Scope notes (for that cut, NOT I14):
+- Touches `shared/papersurface/**` (the forbidden zone for I14) + the I10 blank renderer
+  (`paperBlankPattern` / `renderTextWithPaperBlanks`): recognize `NN._____(word)` as a clickable
+  focus target carrying the question id → emit `request-lecture-focus`.
+- Decide (阿澈 UI direction): in-passage-click **global** (all 4 surfaces) or grammar-fill-only;
+  retire the number rail fully or keep it for surfaces whose questions have real stems
+  (reading / 七选五); keyboard accessibility for the in-passage targets.
