@@ -243,3 +243,24 @@ Preferred future fix:
 - Add a glyph-directional corner-bracket map (`「`→U+201C, `」`→U+201D, `『`→U+2018, `』`→U+2019)
   at the TOP of `normalizePassageText` (before 2a Rule 1), and retire Rule 1's `「」『』` branches
   as unreachable. Re-verify 2a cases stay green.
+
+
+## I13 Grammar-Fill Analysis — render-slice Follow-up Gate (evidence highlight)
+
+Source: I13 slice-1 CR (`docs/cuts/I13-grammar-fill-analysis/cr.md`), 2026-05-31. **Follow-up
+Gate** — blocks the named future grammar-fill analysis **render slice** (not slice 1).
+
+`grammar-fill-analysis-v1` `evidence.signalText` is validated at generation against the
+**parse-time** passage (`normalizePassageText`), but the **stored/published** grammar-fill
+passage gets an extra `normalizeGrammarFillText` pass at publish (`packageBuilder.mjs:~525`).
+So a stored `signalText` may not be an exact substring of the stored passage. Inert in slice 1
+(no render / no consumer reads it).
+
+Follow-up trigger:
+- The grammar-fill analysis **render slice** starts (the I9-equivalent for grammar fill).
+
+Required fix before render ships (do NOT ship a grammar-fill highlight without this):
+- Validate `evidence.signalText` against the **stored/published** passage bytes (not the
+  parse-time bytes), OR render the highlight with a normalization-tolerant match. Plain
+  `indexOf` against the stored passage will silently lose the highlight (the I11 C1 failure
+  mode). Add a verifier fixture whose passage actually changes under `normalizeGrammarFillText`.

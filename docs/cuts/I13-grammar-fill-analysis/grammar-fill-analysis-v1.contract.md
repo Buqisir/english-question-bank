@@ -237,3 +237,14 @@ edit-distance/fuzzy — those would let `worn` pass for `wore`. A genuine mismat
 - A review UI / review workflow (`reviewStatus` reserved only).
 - Post-hoc re-analysis of already-published assets (generate at import time).
 - Any change to `paper-asset-v1` or the grammar-fill group model (docxSplitter q56–q65 shape).
+
+## ⚠️ Render-slice Follow-up Gate (CR 2026-05-31 — MUST resolve before render ships)
+
+`evidence.signalText` is validated (slice 1) against the **parse-time** passage bytes
+(`normalizePassageText`, `analyzeGrammarFill.mjs`), but the **stored** grammar-fill passage gets
+an **extra** `normalizeGrammarFillText` pass at publish (`packageBuilder.mjs:~525`). So a stored
+`signalText` may NOT be an exact substring of the stored passage. Inert now (slice 1 ships no
+render / no consumer). **The render slice MUST** either (a) validate evidence against the
+**stored/published** bytes, or (b) highlight with a normalization-tolerant match — else the
+grammar-fill evidence highlight silently fails (the I11 plain-`indexOf`, no-fuzzy-fallback failure
+mode). Add a verifier fixture whose passage actually changes under `normalizeGrammarFillText`.
