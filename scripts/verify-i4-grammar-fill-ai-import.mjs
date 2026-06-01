@@ -362,8 +362,59 @@ async function assertRealDocx() {
 
 // ---- Main ----
 
+// Real-paper prompt format: blank rendered as `57._____(greet)` — underscores between
+// the number and the parenthesized hint. The extractor must allow `[\s_]*` there, not just `\s*`.
+function underscorePromptFixtureText() {
+  // Same section structure as gfFixtureText (cloze 第一节 establishes 第三部分 routing),
+  // but the 语法填空 passage uses the REAL-paper `NN._____(word)` underscore format.
+  return `第三部分 语言运用
+第一节 完形填空
+阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。
+Passage with __41__ __42__ __43__ __44__ __45__ __46__ __47__ __48__ __49__ __50__ __51__ __52__ __53__ __54__ __55__.
+41. A. a B. b C. c D. d
+42. A. a B. b C. c D. d
+43. A. a B. b C. c D. d
+44. A. a B. b C. c D. d
+45. A. a B. b C. c D. d
+46. A. a B. b C. c D. d
+47. A. a B. b C. c D. d
+48. A. a B. b C. c D. d
+49. A. a B. b C. c D. d
+50. A. a B. b C. c D. d
+51. A. a B. b C. c D. d
+52. A. a B. b C. c D. d
+53. A. a B. b C. c D. d
+54. A. a B. b C. c D. d
+55. A. a B. b C. c D. d
+第二节 语法填空
+阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。
+He paid a visit to the campus, 56._____ became a highlight. 57._____(greet) with cheers, he 58._____(arrive) early. He responded to a joke 59._____ he was a star. He asked 60._____ or not he was shocked. He 61._____(linger) for long, his attention placed 62._____ the map. He shared feelings about 63._____ trip, hoping for a 64._____(rich) vision and the 65._____(promote) of friendship.
+第四部分 写作
+`
+}
+
+function assertUnderscorePromptFormat() {
+  const answerText = `56. which 57. Greeted 58. arrived 59. that 60. whether 61. lingering 62. on 63. the 64. richer 65. promotion`
+  const result = parseReadingCandidatesFromText(underscorePromptFixtureText(), {
+    sourceFilename: 'i4-underscore-fixture.docx',
+    answerKeyText: answerText,
+    paperId: 'paper-i4-underscore',
+  })
+  const gf = result.grammarFillGroup
+  assert('I4 underscore-format grammar-fill group parsed', gf !== null && gf.questions.length === 10)
+  const byNo = Object.fromEntries(gf.questions.map(q => [q.stem, q]))
+  // The bug fix: `57._____(greet)` must extract hint 'greet' (was 0 hints on real papers).
+  assert('I4 underscore prompt 57 → greet', byNo['57']?.prompt === 'greet')
+  assert('I4 underscore prompt 58 → arrive', byNo['58']?.prompt === 'arrive')
+  assert('I4 underscore prompt 65 → promote', byNo['65']?.prompt === 'promote')
+  // No-hint blanks stay null (no false prompts from adjacent text).
+  assert('I4 underscore blank 56 stays no-hint', !byNo['56']?.prompt)
+  assert('I4 underscore blank 62 stays no-hint', !byNo['62']?.prompt)
+}
+
 async function main() {
   assertSplitterFixture()
+  assertUnderscorePromptFormat()
   assertSplitterNoGrammarFill()
   assertSplitterMissingAnswers()
   assertPackageBuilder()
