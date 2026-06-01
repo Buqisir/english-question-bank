@@ -238,6 +238,24 @@ export async function analyzePaperImportAiClozeGroup(input: {
   return (await response.json()) as PaperImportAiAnalysisResult
 }
 
+export async function analyzePaperImportAiGrammarFillGroup(input: {
+  paper: PaperImportAiParseResult['paper']
+  group: PaperImportAiGrammarFillGroup
+  providerId: PaperImportAiProviderId
+}) {
+  const response = await fetch(apiPath('/api/paper-import-ai/analyze-grammar-fill'), {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(input),
+  })
+  if (!response.ok) {
+    throw await parseError(response, `Failed to analyze grammar-fill group: ${response.status}`)
+  }
+  return (await response.json()) as PaperImportAiAnalysisResult
+}
+
 export async function publishPaperImportAiAnalysis(input: {
   file: File
   parseResult: PaperImportAiParseResult
@@ -247,6 +265,7 @@ export async function publishPaperImportAiAnalysis(input: {
   clozeGroup?: PaperImportAiClozeGroup | null
   clozeAnalysis?: Record<string, unknown> | null
   grammarFillGroup?: PaperImportAiGrammarFillGroup | null
+  grammarFillAnalysis?: Record<string, unknown> | null
   applicationGroup?: PaperImportAiWritingGroup | null
   continuationGroup?: PaperImportAiWritingGroup | null
 }) {
@@ -263,6 +282,7 @@ export async function publishPaperImportAiAnalysis(input: {
         clozeGroup: input.clozeGroup || null,
         clozeAnalysis: input.clozeAnalysis || null,
         grammarFillGroup: input.grammarFillGroup || null,
+        grammarFillAnalysis: input.grammarFillAnalysis || null,
         applicationGroup: input.applicationGroup || null,
         continuationGroup: input.continuationGroup || null,
       }),

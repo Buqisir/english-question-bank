@@ -44,6 +44,7 @@ const registry = {
   'scripts/verify-i10-blank-rendering.mjs',
   'scripts/verify-relay-json-format.mjs',
   'scripts/verify-i11-symbol-normalization.mjs',
+  'scripts/verify-i13-grammar-fill-analysis.mjs',
   ],
 }
 

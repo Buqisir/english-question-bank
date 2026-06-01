@@ -451,8 +451,33 @@ function assertStaticContracts() {
   assert('implementation does not import OpenAI SDK', !/from ['"]openai['"]|new OpenAI/.test(`${gptSource}\n${chatSource}\n${analyzeSource}`))
 }
 
+function minimalGrammarFillAnalysis(paperId, grammarFillGroup) {
+  return {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [grammarFillGroup.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [grammarFillGroup.groupId]: { overview: '语法填空概览。' } },
+    blanks: Object.fromEntries(grammarFillGroup.questions.map((q) => [
+      q.id,
+      {
+        blankId: q.blankId, blankNo: Number(q.stem),
+        blankType: 'no-hint', hint: null,
+        facetKey: 'grammar-fill.no-hint.preposition',
+        answer: q.answerKey,
+        role: null, path: null,
+        reason: '介词填空示例。',
+        evidence: [{ type: 'governing-word', signalText: 'Grammar fill passage', signalSide: 'passage', relation: '示例证据。' }],
+        teachingNote: '通过搭配判断介词。',
+      },
+    ])),
+  }
+}
+
 async function assertPublishPackageBuilder() {
   const { parseResult, sourceBuffer, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, clozeAnalysis, grammarFillGroup, applicationGroup, continuationGroup } = fixtureFourGroupParseResult()
+  const grammarFillAnalysis = minimalGrammarFillAnalysis(parseResult.paper.paperId, grammarFillGroup)
   const files = buildPaperImportAiPackageFiles({
     parseResult,
     analysesByGroupId: validFourGroupAnalyses(parseResult),
@@ -461,6 +486,7 @@ async function assertPublishPackageBuilder() {
     clozeGroup,
     clozeAnalysis,
     grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup,
     continuationGroup,
     sourceDocx: {
@@ -488,6 +514,7 @@ async function assertPublishPackageBuilder() {
     clozeGroup,
     clozeAnalysis,
     grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup,
     continuationGroup,
     sourceDocx: {

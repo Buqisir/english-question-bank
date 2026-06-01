@@ -265,9 +265,35 @@ function i5PackageFixture() {
   }
 }
 
+function i5MinimalGrammarFillAnalysis(fix) {
+  const gf = fix.parseResult.grammarFillGroup
+  return {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId: fix.parseResult.paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [gf.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [gf.groupId]: { overview: '语法填空概览。' } },
+    blanks: Object.fromEntries(gf.questions.map((q) => [
+      q.id,
+      {
+        blankId: q.blankId, blankNo: Number(q.stem),
+        blankType: 'no-hint', hint: null,
+        facetKey: 'grammar-fill.no-hint.preposition',
+        answer: q.answerKey,
+        role: null, path: null,
+        reason: '介词填空示例。',
+        evidence: [{ type: 'governing-word', signalText: 'Grammar fill passage', signalSide: 'passage', relation: '示例证据。' }],
+        teachingNote: '通过搭配判断介词。',
+      },
+    ])),
+  }
+}
+
 function assertPackageBuilder() {
   const fix = i5PackageFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
+  const grammarFillAnalysis = i5MinimalGrammarFillAnalysis(fix)
 
   // Success: package with all six families.
   const files = buildPaperImportAiPackageFiles({
@@ -278,6 +304,7 @@ function assertPackageBuilder() {
     clozeGroup: fix.parseResult.clozeGroup,
     clozeAnalysis: fix.clozeAnalysis,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup: fix.parseResult.applicationGroup,
     continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },
@@ -346,8 +373,9 @@ function assertPackageBuilder() {
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
-    clozeAnalysis: fix.clozeAnalysis,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: null,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },
@@ -362,8 +390,9 @@ function assertPackageBuilder() {
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
-    clozeAnalysis: fix.clozeAnalysis,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: null,
       sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },
@@ -380,8 +409,9 @@ function assertPackageBuilder() {
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
-    clozeAnalysis: fix.clozeAnalysis,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: noStarters,
       sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },
@@ -434,14 +464,16 @@ async function assertPublishPath() {
 
     const fix = i5PackageFixture()
     fix.parseResult.paper.sourceHash = fix.sourceHash
+    const grammarFillAnalysis = i5MinimalGrammarFillAnalysis(fix)
     const files = buildPaperImportAiPackageFiles({
       parseResult: fix.parseResult,
       analysesByGroupId: fix.readingAnalyses,
       sevenChoicesGroup: fix.parseResult.sevenChoicesGroup,
       sevenChoicesAnalysis: fix.scAnalysis,
       clozeGroup: fix.parseResult.clozeGroup,
-    clozeAnalysis: fix.clozeAnalysis,
+      clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },

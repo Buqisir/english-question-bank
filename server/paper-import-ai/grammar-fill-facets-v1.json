@@ -1,0 +1,18 @@
+[
+  { "facet_key": "grammar-fill.given.verb.finite",                       "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.verb.non-finite",                   "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.noun",                              "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.adjective",                         "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.derivation.noun-to-adj",            "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.derivation.verb-to-noun",           "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.derivation.verb-to-adj",            "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.pronoun",                           "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.numeral",                           "blank_type": "given"   },
+  { "facet_key": "grammar-fill.no-hint.preposition",                     "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.article",                         "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.pronoun",                         "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.conjunction.coordinating",        "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.conjunction.relative-clause",     "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.conjunction.noun-clause",         "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.conjunction.adverbial-clause",    "blank_type": "no-hint" }
+]

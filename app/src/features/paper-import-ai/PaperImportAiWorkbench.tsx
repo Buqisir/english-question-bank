@@ -2,12 +2,14 @@ import { AlertTriangle, ArrowLeft, CheckCircle2, ExternalLink, FileText, Loader2
 import { useRef, useState } from 'react'
 import {
   analyzePaperImportAiClozeGroup,
+  analyzePaperImportAiGrammarFillGroup,
   analyzePaperImportAiReadingGroup,
   analyzePaperImportAiSevenChoicesGroup,
   parsePaperImportAiDocx,
   publishPaperImportAiAnalysis,
   type PaperImportAiAnalysisResult,
   type PaperImportAiClozeGroup,
+  type PaperImportAiGrammarFillGroup,
   type PaperImportAiParseResult,
   type PaperImportAiProviderId,
   type PaperImportAiPublishResult,
@@ -235,6 +237,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const [analysisByGroupId, setAnalysisByGroupId] = useState<Record<string, AnalysisState>>({})
   const [scAnalysisState, setScAnalysisState] = useState<AnalysisState>({ status: 'idle', message: '', result: null })
   const [clAnalysisState, setClAnalysisState] = useState<AnalysisState>({ status: 'idle', message: '', result: null })
+  const [gfAnalysisState, setGfAnalysisState] = useState<AnalysisState>({ status: 'idle', message: '', result: null })
   const [publishState, setPublishState] = useState<PublishState>({ status: 'idle', message: '', result: null })
 
   function resetParsedResult() {
@@ -243,6 +246,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     setAnalysisByGroupId({})
     setScAnalysisState({ status: 'idle', message: '', result: null })
     setClAnalysisState({ status: 'idle', message: '', result: null })
+    setGfAnalysisState({ status: 'idle', message: '', result: null })
     setPublishState({ status: 'idle', message: '', result: null })
   }
 
@@ -313,7 +317,30 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
     if (result.clozeGroup && clAnalysisState.status !== 'done') {
       tasks.push(handleAnalyzeCloze(result.clozeGroup))
     }
+    if (result.grammarFillGroup && gfAnalysisState.status !== 'done') {
+      tasks.push(handleAnalyzeGrammarFill(result.grammarFillGroup))
+    }
     await Promise.all(tasks)
+  }
+
+  async function handleAnalyzeGrammarFill(group: PaperImportAiGrammarFillGroup) {
+    if (!result) return
+    setGfAnalysisState({ status: 'analyzing', message: '', result: null })
+    try {
+      const analysis = await analyzePaperImportAiGrammarFillGroup({
+        paper: result.paper,
+        group,
+        providerId,
+      })
+      setGfAnalysisState({ status: 'done', message: '语法填空解析已生成。', result: analysis })
+      setPublishState({ status: 'idle', message: '', result: null })
+    } catch (error) {
+      setGfAnalysisState({
+        status: 'error',
+        message: error instanceof Error ? error.message : String(error),
+        result: null,
+      })
+    }
   }
 
   async function handleAnalyzeCloze(group: PaperImportAiClozeGroup) {
@@ -422,14 +449,15 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
   const contGroup = result?.continuationGroup || null
   const contError = result?.continuationError || null
   const contStartersOk = contGroup ? (contGroup.continuationStarters || []).length >= 2 : true
-  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || clAnalysisState.status === 'analyzing' || false
+  const isAnyAnalyzing = result?.readingGroups.some((group) => analysisByGroupId[group.groupId]?.status === 'analyzing') || scAnalysisState.status === 'analyzing' || clAnalysisState.status === 'analyzing' || gfAnalysisState.status === 'analyzing' || false
   const allGroupsAnalyzed = Boolean(result?.readingGroups.length) && analyzedCount === result?.readingGroups.length
   const scAnalyzed = !scGroup || scAnalysisState.status === 'done'
   const clAnalyzed = !clGroup || clAnalysisState.status === 'done'
-  const allImportAnalyzed = allGroupsAnalyzed && scAnalyzed && clAnalyzed
+  const gfAnalyzed = !gfGroup || gfAnalysisState.status === 'done'
+  const allImportAnalyzed = allGroupsAnalyzed && scAnalyzed && clAnalyzed && gfAnalyzed
   const scReady = Boolean(scGroup) && scAnalyzed && scHasAnswers
   const clReady = Boolean(clGroup) && clAnalyzed && clHasAnswers
-  const gfReady = Boolean(gfGroup) && gfHasAnswers
+  const gfReady = Boolean(gfGroup) && gfAnalyzed && gfHasAnswers
   const appReady = Boolean(appGroup)
   const contReady = Boolean(contGroup) && contStartersOk
   const canPublish = Boolean(
@@ -464,6 +492,7 @@ export function PaperImportAiWorkbench({ onBackToWorkbench }: PaperImportAiWorkb
         clozeGroup: result.clozeGroup || null,
         clozeAnalysis: clAnalysisState.result?.analysis || null,
         grammarFillGroup: result.grammarFillGroup || null,
+        grammarFillAnalysis: gfAnalysisState.result?.analysis || null,
         applicationGroup: result.applicationGroup || null,
         continuationGroup: result.continuationGroup || null,
       })

@@ -181,7 +181,7 @@ function normalizeGrammarFillText(text) {
     .trim()
 }
 
-export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, clozeAnalysis, grammarFillGroup, applicationGroup, continuationGroup, sourceDocx }) {
+export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, clozeAnalysis, grammarFillGroup, grammarFillAnalysis, applicationGroup, continuationGroup, sourceDocx }) {
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
@@ -554,6 +554,33 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   blocks.push({ type: 'instruction', text: '阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。' })
   blocks.push({ type: 'group', groupId: grammarFillGroup.groupId })
 
+  // --- Grammar-fill analysis (MANDATORY, decision D) ---
+  if (!grammarFillAnalysis || typeof grammarFillAnalysis !== 'object') {
+    throw issue('grammar_fill_analysis_required', '检测到语法填空，但缺少 AI 解析，不能发布。')
+  }
+  if (grammarFillAnalysis.paperId !== paperId) {
+    throw issue('grammar_fill_analysis_paper_mismatch', '语法填空解析 paperId 与拆题结果不一致。')
+  }
+  if (!grammarFillAnalysis.targetGroups?.includes(grammarFillGroup.groupId)) {
+    throw issue('grammar_fill_analysis_group_missing', '语法填空解析没有包含当前题组。')
+  }
+  const gfMeta = grammarFillAnalysis.meta || {}
+  const gfAnalysisOutput = {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId,
+    sourceAssetVersion: 1,
+    targetGroups: grammarFillAnalysis.targetGroups || [grammarFillGroup.groupId],
+    meta: {
+      ...gfMeta,
+      generatedBy: 'external-ai',
+      promptVersion: 'grammar-fill-analysis-v1',
+      reviewStatus: 'reviewed',
+      importMode: 'paper-import-ai',
+    },
+    groups: grammarFillAnalysis.groups || {},
+    blanks: grammarFillAnalysis.blanks || {},
+  }
+
   // --- Writing groups ---
   const writingTasks = {}
   const writingPartId = `part-${examCodeFromPaperId(paperId)}-writing`
@@ -816,6 +843,12 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
       buffer: Buffer.from(`${JSON.stringify(clAnalysisOutput, null, 2)}\n`),
     })
   }
+
+  // grammar-fill analysis is always present (guard above ensures it)
+  outputFiles.push({
+    fileName: 'grammar-fill-analysis-v1.json',
+    buffer: Buffer.from(`${JSON.stringify(gfAnalysisOutput, null, 2)}\n`),
+  })
 
   return outputFiles
 }
