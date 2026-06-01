@@ -45,6 +45,7 @@ const registry = {
   'scripts/verify-relay-json-format.mjs',
   'scripts/verify-i11-symbol-normalization.mjs',
   'scripts/verify-i13-grammar-fill-analysis.mjs',
+  'scripts/verify-i14-grammar-fill-analysis-surface.mjs',
   ],
 }
 
