@@ -26,6 +26,14 @@ const analysisConfigs = [
     // Cloze analysis keys per-blank entries under 'blanks', not 'questions' (PA MF-1).
     entryMapKey: 'blanks',
   },
+  {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    fileName: 'grammar-fill-analysis-v1.json',
+    groupType: 'grammarFill',
+    label: '语法解析',
+    // Grammar-fill analysis keys per-blank entries under 'blanks' (I14).
+    entryMapKey: 'blanks',
+  },
 ]
 
 function readJsonFile(filePath) {
