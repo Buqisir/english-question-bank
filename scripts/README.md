@@ -56,6 +56,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-i11-symbol-normalization.mjs` | I11 符号归一 2a：normalizePassageText 纯函数表驱动用例（规则 1 半角化 / 规则 2 标点后空格 / 规则 3 生词括号空格）；mixed seam 边界；C2 空格标记字节完整哨兵；语法填空两阶段 compose 顺序；完整幂等性 | yes |
 | `verify-i13-grammar-fill-analysis.mjs` | I13 语法填空 AI 解析生成（第一刀）：prompt + 16 叶 facet 注册表合约；validateGrammarFillShape 成功与所有阻断用例（stub provider）；C1 冻结 4-op 归一化（whether/if✓、worn-for-wore✗、were worn 多词✓）；C2 16 叶成员、父节点拒绝、blank_type 不匹配、role/path 条件约束；C3 evidence 精确子串 + SW-2 空格标记排除（  56   + (wear)）；MF-2 发布后磁盘 analyses/grammar-fill-analysis-v1.json 存在；MF-3 强制发布 guard | yes |
 | `verify-i14-grammar-fill-analysis-surface.mjs` | I14 语法填空解析 render 面 + 入口（第二刀）：Step 0 facet 框架注册表漂移守卫（16 key == 服务端 JSON）+ non-finite 形变表；Step 1 GATE-1 空白容差匹配（plain indexOf 失败但容差命中、偏移映射回存储字节、3+空格折叠）+ MF-1 每个 range.sentenceId 存在于 textMap + 多次出现 + 空白标记排除 + 10 空映射 + framework/labelZh 解析 + role/path 仅 non-finite + unknown facetKey/schemaVersion 抛错；Step 2 panel 必要结构；Step 3 harness fetch→fallback dispatch + 各 cloze 触点镜像；Step 4 availability 完整 vs 不完整（blanks 键，语法解析） | yes |
+| `verify-i15-grammar-fill-blank-focus.mjs` | I15 语法填空点正文空格聚焦 + 退数字排（第三刀）：blankFocusMode 在 types.d.ts 声明（默认 rail）；rail 两处渲染点被 !blankFocus 门控；grammarFillBlankPattern 必需点号区分（匹配 56._____ / 57._____(absorb)，排除 cloze __41__ / 七选五 _____36_____ / 数字噪声 2026·800g·3-5g·25-30g；64._____ 3-5g→["64"] 不取 3）；paperBlankPattern 字面量零改动守卫；空格渲染为带 aria-label/aria-pressed 的 <button>、未匹配→非交互 span（SW-2）；harness 仅 grammarFillAnalysisModel 时传 in-passage | yes |
 
 ## PaperSurface and Paper Intelligence
 

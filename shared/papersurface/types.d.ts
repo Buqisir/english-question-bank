@@ -515,4 +515,12 @@ export type PaperSurfaceProps = {
    *  this single callback. The host is the only writer of focus
    *  state (invariant I9). */
   readonly onFocusIntent: (intent: PaperSurfaceFocusIntent) => void
+
+  /** How a lecture-mode blank is focused (I15). Optional; defaults to
+   *  `'rail'` — the bottom question list (`56. 57. …`) is the focus
+   *  target, byte-for-byte the historical behavior (reading / 七选五 /
+   *  cloze). `'in-passage'` (grammar fill) retires the rail and makes
+   *  the in-passage blank itself a clickable focus button; it emits the
+   *  same `request-lecture-focus` intent — no new intent kind. */
+  readonly blankFocusMode?: 'rail' | 'in-passage'
 }
