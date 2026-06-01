@@ -85,9 +85,10 @@ from the taxonomy (given the hint's POS / position), 代入 the framework in `re
 output the produced `answer`. Mirror `prompts/cloze-analysis-v1.md` tone/structure.
 
 ### Step 2 — `server/paper-import-ai/grammar-fill-facets-v1.json`
-Minimal registry: array of `{ facet_key, blank_type }` for all 11 leaves (transcribe from the
-KB taxonomy table). Used by the validator for membership + blank_type match (C2). No framework
-bodies.
+Minimal registry: array of `{ facet_key, blank_type }` for all **16 leaves** (the C2 list;
+transcribe from the KB taxonomy table). Used by the validator for membership + blank_type match
+(C2). No framework bodies. (Step 1 and Step 9 describe the **same** prompt file — Step 9 is the
+authoritative fuller spec; treat them as one.)
 
 ### Step 3 — `server/paper-import-ai/analyzeGrammarFill.mjs`
 Export `analyzeGrammarFillImportCandidate({ paper, group, providerId, ... })` mirroring
