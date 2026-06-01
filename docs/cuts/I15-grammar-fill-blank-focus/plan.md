@@ -83,12 +83,25 @@ only** — reading / 七选五 / cloze rails display real questions and stay.
 
 ### Step 2 — PaperSurface: clickable in-passage grammar-fill blanks
 - Add `grammarFillBlankPattern` (isolated; `paperBlankPattern` untouched).
-- When `blankFocusMode === 'in-passage'`, `renderTextWithPaperBlanks` (or a sibling
-  renderer) emits each grammar-fill blank as a `<button>` carrying the blankNo,
-  resolving blankNo→questionId from `questions`, firing `handleQuestionClick`.
-  Active blank gets `aria-pressed` + an active class from `lectureFocus.questionId`.
-- Blanks whose number has no matching question (defensive) render as today (text/span),
-  no throw.
+- **Prop-threading chain (PA MF-1 — this is the real work, not a one-liner).**
+  `renderTextWithPaperBlanks` (`PaperSurface.tsx:436`) is a module-level
+  `(text, keyPrefix)` function; `PaperSurfaceSentence` (`:381/389/391/394`) does NOT
+  receive `questions` / `lectureFocus` / `onQuestionClick`. DEV MUST thread the focus
+  context — `blankFocusMode`, a `questionNo→questionId` lookup (built once from
+  `questions`), the active `questionId` (from `lectureFocus`), and the
+  `onQuestionClick` callback — explicitly as props through
+  `PaperSurfaceSection` → `PaperSurfaceParagraph` → `PaperSurfaceSentence` → the
+  (renamed/parameterized) blank renderer. When `blankFocusMode === 'rail'` (or
+  omitted) the renderer takes the **existing text/span path, consuming ZERO new
+  props and changing NOTHING** (the other three surfaces must be byte-for-byte
+  unchanged).
+- When `blankFocusMode === 'in-passage'`, the renderer emits each grammar-fill blank
+  as a `<button>` carrying the blankNo, resolving blankNo→questionId by
+  `PaperQuestion.questionNo` string-equality, firing `handleQuestionClick`. Active
+  blank gets `aria-pressed` + an active class from `lectureFocus.questionId` (SW-3:
+  read the SAME `lectureFocus` source the rail uses, so active semantics can't drift).
+- Blanks whose number has no matching question (defensive) render as a **styled,
+  non-interactive** element (NOT a dead `<button>` with no questionId — SW-2), no throw.
 - Verification: a grammar-fill paragraph string renders the blank as a button with
   the right `aria-label` + a resolvable questionId; cloze `__41__` / 七选五
   `_____36_____` strings are UNCHANGED (still `paperBlankPattern` spans, no buttons).
@@ -101,12 +114,16 @@ only** — reading / 七选五 / cloze rails display real questions and stay.
 
 ### Step 4 — Verifier + CI
 - Add `scripts/verify-i15-grammar-fill-blank-focus.mjs`: `blankFocusMode` default
-  is `'rail'`; `'in-passage'` suppresses the rail + renders blank buttons wired to
+  is `'rail'`; **`blankFocusMode` member is declared in `shared/papersurface/types.d.ts`
+  (PA MF-2)**; `'in-passage'` suppresses the rail + renders blank buttons wired to
   the right questionId; `grammarFillBlankPattern` matches `56._____` /
-  `57._____(absorb)` and does NOT match (nor alter) cloze `__41__` / 七选五
-  `_____36_____`; `paperBlankPattern` source is unchanged (regression guard:
-  assert the existing pattern literal is intact); harness passes `'in-passage'`
-  only for the grammar-fill analysis model.
+  `57._____(absorb)`, does NOT match cloze `__41__` / 七选五 `_____36_____`, **and
+  does NOT match a numeric-noise string (`trend of 2026 … 800g a day … 3-5g …
+  25-30g`) — zero matches (SW-1; anchor on the `_{2,}` run, capture the number
+  BEFORE the dot+underscores so `Increase intake 64._____ 3-5g` yields 64, not 3)**;
+  `paperBlankPattern` source literal is **byte-unchanged** (regression guard: assert
+  the exact pattern source string); harness passes `'in-passage'` only for the
+  grammar-fill analysis model.
 - Register in `scripts/verify-ci.mjs`; update `scripts/README.md`.
 - Verification: `node scripts/verify-i15-grammar-fill-blank-focus.mjs` green; in
   `verify-ci`; do not regress `verify-i10-blank-rendering.mjs`,
@@ -134,6 +151,8 @@ only** — reading / 七选五 / cloze rails display real questions and stay.
   七选五 `_____36_____`, I10-bounded cases). New recognition is a SEPARATE pattern,
   in-passage-mode only.
 - Do NOT add a new focus intent type — reuse `request-lecture-focus`.
+- Do NOT use module-level mutable state or a second post-render DOM pass to locate
+  blanks (PA MF-1) — thread the focus context as props only.
 - Do NOT touch generation / contract / schema / `analyzeGrammarFill.mjs` /
   `packageBuilder.mjs`, the I13/I14 analysis data shape, or the I14 adapter's
   evidence/textMap logic (this cut changes only the focus-affordance render).
@@ -143,7 +162,10 @@ only** — reading / 七选五 / cloze rails display real questions and stay.
 
 ## Suggested Files
 
-- `app/src/shared-ui/papersurface/types.ts` (add `blankFocusMode`)
+- `shared/papersurface/types.d.ts` (add `blankFocusMode` to `PaperSurfaceProps`) —
+  **PA MF-2: NOT `app/src/shared-ui/papersurface/types.ts` (does not exist)**; this is
+  a `.d.ts` types sketch imported by `PaperSurface.tsx:38`, edited as type-doc only
+  (the prop is consumed via the runtime destructure in `PaperSurface.tsx`).
 - `app/src/shared-ui/papersurface/PaperSurface.tsx` (rail suppression + in-passage
   blank buttons + `grammarFillBlankPattern`)
 - `app/src/shared-ui/papersurface/PaperSurface.css` (blank-button affordance — 阿澈)
@@ -187,4 +209,19 @@ Adjust after code inspection; keep edits owner-file-aware.
 
 ## PA Follow-Up Decisions
 
-_(PA writes `pa.md`; PM compresses Must Fix → this table before DEV.)_
+PA verdict: **APPROVE WITH MUST FIX** (`pa.md`). 2 Must Fix folded; 0 PO
+decisions. The highest-feared risk (retiring the rail breaks harness seed/focus
+or the evidence line) was **disproven** by PA — the harness reads only
+`[data-paper-section]` / `[data-paper-paragraph-id]` / `[data-paper-evidence-id]`,
+never the rail; seed effects key off the model, not DOM. DEV may start.
+
+| PA item | `pa.md` disposition | `plan.md` handling | Status |
+| --- | --- | --- | --- |
+| `MF-1` | `renderTextWithPaperBlanks` is module-level `(text, keyPrefix)`; focus context must be threaded Section→Paragraph→Sentence→renderer. Plan hid this behind "or a sibling renderer" → risk of a shortcut hack leaking into the `'rail'` path. | Step 2 rewritten: explicit prop-threading chain; `'rail'`/omitted path consumes ZERO new props + changes nothing; Forbidden adds no module-level mutable + no second DOM pass. | Closed |
+| `MF-2` | Type path wrong: `app/src/shared-ui/papersurface/types.ts` does not exist; `PaperSurfaceProps` lives in `shared/papersurface/types.d.ts`. | Suggested Files path corrected to `shared/papersurface/types.d.ts` (.d.ts sketch; runtime via destructure); Step 4 verifier asserts `blankFocusMode` declared there. | Closed |
+
+Should Watch (DEV keep in view, non-blocking): SW-1 anchor `grammarFillBlankPattern`
+on `_{2,}`, capture number before dot+underscores, verifier adds a numeric-noise
+negative (folded into Step 4); SW-2 unmatched blank → styled non-interactive, not a
+dead button (folded into Step 2); SW-3 read the same `lectureFocus` source as the
+rail (folded into Step 2); SW-4 Tab order follows 56→65 — confirm in browser QA.
