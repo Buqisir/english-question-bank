@@ -129,7 +129,22 @@ Verification standard:
   - Build passage-side evidence ranges via **whitespace-tolerant** location (the
     GATE-1 function — see below). All evidence kind = `support`. `signalSide`
     `'stem'` is rare; treat like passage (locate in passage text); never create
-    an option anchor (there are none).
+    an option anchor (there are none). A `stem`/passage `signalText` that is NOT
+    locatable yields **zero ranges gracefully** (no throw).
+  - **GATE-1 textMap consistency (PA MF-1 — load-bearing).** The cross-column
+    evidence line keys off `PaperTextRange.sentenceId`; the line only draws if that
+    sentenceId exists in the `surfaceData.textMap` the surface renders. So the new
+    analysis adapter's `surfaceData.textMap` and the GATE-1 locate function MUST use
+    **one and the same textMap construction**. Lock: build the textMap
+    **per-paragraph** with sentenceId `${paragraphId}-s{i}` (the cloze-analysis
+    adapter's construction, `clozeAnalysisSurfaceAdapter.ts:205-226`), because the
+    contract `signalText` is an exact substring of the parse-time **per-paragraph**
+    `normalizePassageText` bytes — NOT the `\n\n`-joined blob the plain view uses
+    (`grammarFillPaperViewAdapter.ts:110-120`). **Do NOT reuse the plain-view
+    join.** The locate function searches/keys against that same per-paragraph map
+    and returns offsets into it. A located range whose sentenceId is absent from
+    the textMap is the I11 silent-fail mode one layer up — the verifier forbids it
+    (Step 5).
   - Guard: throw on schemaVersion / paperId mismatch / group not grammarFill /
     unknown facetKey (registry miss).
 - **GATE-1 locate function** (new, self-contained in this adapter — do NOT change
@@ -236,9 +251,11 @@ Verification standard:
   registry drift guard (16 keys == server JSON) + non-finite table present;
   adapter mapping (10 blanks, framework/labelZh resolved, role/path non-finite
   only, evidence ranges via tolerant match, blank-marker exclusion, repeated-
-  `signalText` multi-occurrence, **GATE-1 normalize-divergence fixture**); panel
-  required parts; harness dispatch/fallback; availability complete vs incomplete
-  on the `blanks` key.
+  `signalText` multi-occurrence, **GATE-1 normalize-divergence fixture**;
+  **PA MF-1: assert every located `range.sentenceId` EXISTS in the built
+  `surfaceData.textMap`** — proves the cross-column line can draw, not merely that
+  an offset matched); panel required parts; harness dispatch/fallback; availability
+  complete vs incomplete on the `blanks` key.
 - Register in `scripts/verify-ci.mjs`. Update `scripts/README.md`.
 
 Verification standard:
@@ -314,7 +331,7 @@ Adjust after code inspection; keep edits owner-file-aware (AGENTS.md UI scope).
 | Grammar-fill group with complete analysis | `语法解析` entry shows; opens PaperSurface, blank 56 card: blankType + hint + 考点框架 + 代入 reason + evidence + teachingNote; group overview visible |
 | Non-finite blank | role（成分）+ path（快路/慢路）shown; 形变表 framework renders |
 | Click an evidence row | passage highlights the `signalText`; cross-column line draws |
-| **GATE-1 evidence adjacent to a blank** | highlight resolves on the stored (normalize-diverged) passage; does NOT silently fail |
+| **GATE-1 evidence adjacent to a blank** | highlight resolves on the stored (normalize-diverged) passage AND the cross-column line actually renders (not just a computed range — PA MF-1); does NOT silently fail |
 | Switch focused blank | card + highlights update |
 | Grammar-fill group WITHOUT analysis | plain view still renders (I10 blanks intact); no `语法解析` entry |
 | Student version | analysis hidden (Super Teacher boundary) |
@@ -334,4 +351,18 @@ Adjust after code inspection; keep edits owner-file-aware (AGENTS.md UI scope).
 
 ## PA Follow-Up Decisions
 
-_(PA writes `pa.md`; 阿澈 PM compresses Must Fix → this table before DEV.)_
+PA verdict: **APPROVE WITH MUST FIX** (`pa.md`). 1 Must Fix folded; 0 PO
+decisions. DEV may start.
+
+| PA item | `pa.md` disposition | `plan.md` handling | Status |
+| --- | --- | --- | --- |
+| `MF-1` | GATE-1 locate must return sentenceIds the rendered textMap actually contains. cloze adapter keys per-paragraph (`${paragraphId}-s{i}`); grammar-fill plain view joins with `\n\n`. If the analysis adapter's textMap and the locate offsets diverge, the highlight resolves to a nonexistent sentence → the cross-column line silently fails to draw. | Step 1: added a locked **GATE-1 textMap consistency** bullet — adapter `surfaceData.textMap` + GATE-1 locate use ONE per-paragraph construction (`${paragraphId}-s{i}`, matching parse-time per-paragraph bytes), never the plain-view `\n\n` join. Step 5: verifier asserts every located `range.sentenceId` EXISTS in the built textMap. QA matrix GATE-1 row: line must actually render. | Closed |
+
+Should Watch (DEV keep in view, non-blocking): SW-1 transcription fidelity →
+PO QA eyeballs all 16 framework bodies (esp. non-finite 形变表); SW-2
+`paperAssetAnalysisView` memo (~768) must early-return null for the new model
+before the `paperAssetModel ?? clozeModel ?? grammarFillModel` cast chain; SW-3
+add `grammarFillAnalysisModel` to **every** effect dep array that lists
+`clozeAnalysisModel` (stale-closure focus bug if missed); SW-4 unlocatable
+`stem` signalText → zero ranges, no throw; SW-5 multi-occurrence over-match is
+expected, not a bug.
