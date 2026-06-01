@@ -155,6 +155,44 @@
   text-indent: 0;
 }
 
+/* ─── I15: clickable in-passage grammar-fill blank ─────────────── *
+ * 'in-passage' focus mode only. Renders the blank's own text
+ * (`56._____`, `57._____(absorb)`) inline as a focus button —
+ * NOT the fixed-width `.ps-paper-blank` box. */
+.ps-paper-blank-button,
+.ps-paper-blank-text {
+  font: inherit;
+  color: inherit;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ps-paper-blank-button {
+  margin: 0;
+  padding: 0 0.06em;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  transition: background-color 0.12s ease;
+}
+
+.ps-paper-blank-button:hover {
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.ps-paper-blank-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+.ps-paper-blank-button--active {
+  background-color: color-mix(in srgb, currentColor 16%, transparent);
+  text-decoration-style: solid;
+  font-weight: 600;
+}
+
 /* ─── Evidence anchors (neutral, invisible in B3) ──────────────── */
 
 .ps-evidence-anchor {

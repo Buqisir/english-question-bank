@@ -24,6 +24,7 @@ import { useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
+import { grammarFillBlankPattern } from './grammarFillBlank.ts'
 import type {
   PaperSurfaceProps,
   PaperTextMap,
@@ -61,6 +62,20 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
 
 const paperBlankPattern = /(?:_{2,}|[\u0020\u00A0]{2,})\s*(\d{1,3})\s*(?:_{2,}|[\u0020\u00A0]{2,})/g
 
+/**
+ * I15 — focus context for clickable in-passage grammar-fill blanks.
+ * Non-null ONLY in 'in-passage' mode; `null` means the historical
+ * rail-driven span renderer (other surfaces are unaffected).
+ */
+type BlankFocusContext = {
+  /** PaperQuestion.questionNo (as string) → questionId. */
+  questionIdByNo: Map<string, string>
+  /** The currently focused questionId, for the active blank state. */
+  activeQuestionId: string | null
+  /** Fires `request-lecture-focus` for the clicked blank's question. */
+  onQuestionClick: (questionId: string) => void
+} | null
+
 export function PaperSurface(props: PaperSurfaceProps): ReactNode {
   const {
     textMap,
@@ -73,6 +88,7 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     readingFocusBySection: _readingFocusBySection,
     onFocusIntent,
+    blankFocusMode = 'rail',
   } = props
 
   const handleQuestionClick = useCallback(
@@ -97,6 +113,24 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
     }
     return map
   }, [questions])
+
+  // I15: in-passage blank focus context. Non-null ONLY in 'in-passage'
+  // mode (grammar fill); null in 'rail' mode so the historical path is
+  // untouched. Resolves a clicked blank number → questionId by
+  // PaperQuestion.questionNo string-equality.
+  const blankFocus = useMemo<BlankFocusContext>(() => {
+    if (blankFocusMode !== 'in-passage') return null
+    const questionIdByNo = new Map<string, string>()
+    for (const q of questions) {
+      const no = String(q.questionNo ?? '')
+      if (no && !questionIdByNo.has(no)) questionIdByNo.set(no, q.id)
+    }
+    return {
+      questionIdByNo,
+      activeQuestionId: lectureFocus?.questionId ?? null,
+      onQuestionClick: handleQuestionClick,
+    }
+  }, [blankFocusMode, questions, lectureFocus, handleQuestionClick])
 
   // Group evidence by section for neutral anchor emission.
   const evidenceBySection = useMemo(() => {
@@ -192,10 +226,12 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
             lectureFocus={lectureFocus}
             activeEvidenceId={activeEvidenceId}
             onQuestionClick={handleQuestionClick}
+            blankFocus={blankFocus}
           />
         ))}
-        {/* Render global questions (no section) */}
-        {questionsBySection.has('__global__') && (
+        {/* Render global questions (no section). I15: the rail is
+            suppressed in 'in-passage' mode (blankFocus non-null). */}
+        {questionsBySection.has('__global__') && !blankFocus && (
           <PaperSurfaceQuestionList
             questions={questionsBySection.get('__global__')!}
             lectureFocus={lectureFocus}
@@ -232,6 +268,7 @@ type PaperSurfaceSectionProps = {
   lectureFocus: LectureFocus | null
   activeEvidenceId: string | null
   onQuestionClick: (questionId: string) => void
+  blankFocus: BlankFocusContext
 }
 
 function PaperSurfaceSection({
@@ -243,6 +280,7 @@ function PaperSurfaceSection({
   lectureFocus,
   activeEvidenceId,
   onQuestionClick,
+  blankFocus,
 }: PaperSurfaceSectionProps): ReactNode {
   const paragraphs = useMemo(
     () => textMap.paragraphs.filter((p) => p.section === section),
@@ -274,10 +312,13 @@ function PaperSurfaceSection({
             evidenceBySentence={evidenceBySentence}
             annotationsBySentence={annotationsBySentence}
             activeEvidenceId={activeEvidenceId}
+            blankFocus={blankFocus}
           />
         ))}
       </div>
-      {questions.length > 0 && (
+      {/* I15: the rail is suppressed in 'in-passage' mode (blankFocus
+          non-null) — the in-passage blank buttons are the focus target. */}
+      {questions.length > 0 && !blankFocus && (
         <PaperSurfaceQuestionList
           questions={questions}
           lectureFocus={lectureFocus}
@@ -295,6 +336,7 @@ type PaperSurfaceParagraphProps = {
   evidenceBySentence: Map<string, PaperEvidence[]>
   annotationsBySentence: Map<string, PaperAnnotation[]>
   activeEvidenceId: string | null
+  blankFocus: BlankFocusContext
 }
 
 function PaperSurfaceParagraph({
@@ -302,6 +344,7 @@ function PaperSurfaceParagraph({
   evidenceBySentence,
   annotationsBySentence,
   activeEvidenceId,
+  blankFocus,
 }: PaperSurfaceParagraphProps): ReactNode {
   return (
     <p
@@ -315,6 +358,7 @@ function PaperSurfaceParagraph({
           evidenceItems={evidenceBySentence.get(sentence.id)}
           annotationItems={annotationsBySentence.get(sentence.id)}
           activeEvidenceId={activeEvidenceId}
+          blankFocus={blankFocus}
         />
       ))}
     </p>
@@ -328,6 +372,7 @@ type PaperSurfaceSentenceProps = {
   evidenceItems?: PaperEvidence[]
   annotationItems?: PaperAnnotation[]
   activeEvidenceId: string | null
+  blankFocus: BlankFocusContext
 }
 
 function PaperSurfaceSentence({
@@ -335,6 +380,7 @@ function PaperSurfaceSentence({
   evidenceItems,
   annotationItems,
   activeEvidenceId,
+  blankFocus,
 }: PaperSurfaceSentenceProps): ReactNode {
   // Resolve the active evidence (if any) that lives inside THIS
   // sentence. PaperSurface stays dumb: the active id and the
@@ -378,7 +424,7 @@ function PaperSurfaceSentence({
     >
       {hasInlineActive && activeEv ? (
         <>
-          {renderTextWithPaperBlanks(text.slice(0, activeStart), `${sentence.id}-pre`)}
+          {renderTextWithPaperBlanks(text.slice(0, activeStart), `${sentence.id}-pre`, blankFocus)}
           <mark
             className="ps-evidence-anchor ps-evidence-anchor--active"
             {...{
@@ -386,12 +432,12 @@ function PaperSurfaceSentence({
               [paperSurfaceAnchorAttrs.evidenceKind]: activeEv.kind,
             }}
           >
-            {renderTextWithPaperBlanks(text.slice(activeStart, activeEnd), `${sentence.id}-active`)}
+            {renderTextWithPaperBlanks(text.slice(activeStart, activeEnd), `${sentence.id}-active`, blankFocus)}
           </mark>
-          {renderTextWithPaperBlanks(text.slice(activeEnd), `${sentence.id}-post`)}
+          {renderTextWithPaperBlanks(text.slice(activeEnd), `${sentence.id}-post`, blankFocus)}
         </>
       ) : (
-        renderTextWithPaperBlanks(text, sentence.id)
+        renderTextWithPaperBlanks(text, sentence.id, blankFocus)
       )}
       {/*
         Neutral evidence anchors — invisible, zero-size span siblings.
@@ -433,7 +479,17 @@ function PaperSurfaceSentence({
   )
 }
 
-function renderTextWithPaperBlanks(text: string, keyPrefix: string): ReactNode {
+function renderTextWithPaperBlanks(
+  text: string,
+  keyPrefix: string,
+  blankFocus: BlankFocusContext = null,
+): ReactNode {
+  // I15: in 'in-passage' mode (blankFocus non-null) grammar-fill blanks
+  // become clickable focus buttons. The 'rail'/omitted path (blankFocus
+  // null) is the historical span renderer, byte-for-byte unchanged.
+  if (blankFocus) {
+    return renderTextWithGrammarFillBlanks(text, keyPrefix, blankFocus)
+  }
   if (!paperBlankPattern.test(text)) return text
   paperBlankPattern.lastIndex = 0
   const nodes: ReactNode[] = []
@@ -452,6 +508,70 @@ function renderTextWithPaperBlanks(text: string, keyPrefix: string): ReactNode {
     cursor = match.index + match[0].length
     index += 1
   }
+  if (cursor < text.length) {
+    nodes.push(text.slice(cursor))
+  }
+  return nodes
+}
+
+/**
+ * I15 — render grammar-fill blanks (`56._____`, `57._____(absorb)`) as
+ * clickable focus buttons. ISOLATED from `paperBlankPattern` (cloze
+ * `__41__` / 七选五 `_____36_____` are untouched). Anchored on the
+ * underscore run so numeric noise (`2026`, `800g`, `3-5g`, `25-30g`)
+ * never matches; the number BEFORE the dot+underscores is captured, so
+ * `Increase intake 64._____ 3-5g` yields blankNo 64, not 3.
+ *
+ * A blank whose number resolves to no question renders as a styled,
+ * NON-interactive span (never a dead button) — defensive, no throw.
+ */
+function renderTextWithGrammarFillBlanks(
+  text: string,
+  keyPrefix: string,
+  blankFocus: NonNullable<BlankFocusContext>,
+): ReactNode {
+  grammarFillBlankPattern.lastIndex = 0
+  const nodes: ReactNode[] = []
+  let cursor = 0
+  let match: RegExpExecArray | null
+  let index = 0
+  while ((match = grammarFillBlankPattern.exec(text)) !== null) {
+    if (match.index > cursor) {
+      nodes.push(text.slice(cursor, match.index))
+    }
+    const blankNo = match[1]
+    const label = match[0]
+    const questionId = blankFocus.questionIdByNo.get(blankNo) ?? null
+    const key = `${keyPrefix}-gf-blank-${index}`
+    if (questionId) {
+      const isActive = blankFocus.activeQuestionId === questionId
+      nodes.push(
+        <button
+          key={key}
+          type="button"
+          className={
+            isActive
+              ? 'ps-paper-blank-button ps-paper-blank-button--active'
+              : 'ps-paper-blank-button'
+          }
+          aria-pressed={isActive}
+          aria-label={`聚焦第 ${blankNo} 题`}
+          onClick={() => blankFocus.onQuestionClick(questionId)}
+        >
+          {label}
+        </button>,
+      )
+    } else {
+      nodes.push(
+        <span key={key} className="ps-paper-blank-text">
+          {label}
+        </span>,
+      )
+    }
+    cursor = match.index + match[0].length
+    index += 1
+  }
+  if (index === 0) return text
   if (cursor < text.length) {
     nodes.push(text.slice(cursor))
   }

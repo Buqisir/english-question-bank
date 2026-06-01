@@ -1258,6 +1258,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       lectureFocus={lectureFocus}
       readingFocusBySection={{}}
       onFocusIntent={handleFocusIntent}
+      blankFocusMode={grammarFillAnalysisModel ? 'in-passage' : 'rail'}
     />
   )
 
