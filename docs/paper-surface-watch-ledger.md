@@ -298,3 +298,13 @@ Scope notes (for that cut, NOT I14):
 - Decide (阿澈 UI direction): in-passage-click **global** (all 4 surfaces) or grammar-fill-only;
   retire the number rail fully or keep it for surfaces whose questions have real stems
   (reading / 七选五); keyboard accessibility for the in-passage targets.
+
+**RESOLVED by I15 (2026-06-01, PR #177).** Cut `I15-grammar-fill-blank-focus`, scoped
+**grammar-fill only** (owner-locked). New `PaperSurfaceProps.blankFocusMode` (`'rail'` default keeps
+reading/七选五/cloze byte-for-byte unchanged; `'in-passage'` for grammar fill) suppresses the rail and
+renders in-passage blanks as keyboard-accessible focus `<button>`s firing the same
+`request-lecture-focus` intent. Isolated `grammarFillBlankPattern` (`app/src/shared-ui/papersurface/
+grammarFillBlank.ts`) — the REQUIRED dot distinguishes `56._____` from cloze `__41__` / 七选五
+`_____36_____`; `paperBlankPattern` untouched. PA + CR (mutation-tested verifier) APPROVE; browser QA +
+PO QA passed. NOTE: global (all-surface) in-passage click was deliberately NOT done — reading/七选五/
+cloze rails carry real question content and stay.
