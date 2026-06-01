@@ -208,11 +208,37 @@ function gfPackageFixture() {
   }
 }
 
+function i4MinimalGrammarFillAnalysis(fix) {
+  const gf = fix.parseResult.grammarFillGroup
+  return {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId: fix.parseResult.paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [gf.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [gf.groupId]: { overview: '语法填空概览。' } },
+    blanks: Object.fromEntries(gf.questions.map((q) => [
+      q.id,
+      {
+        blankId: q.blankId, blankNo: Number(q.stem),
+        blankType: 'no-hint', hint: null,
+        facetKey: 'grammar-fill.no-hint.preposition',
+        answer: q.answerKey,
+        role: null, path: null,
+        reason: '介词填空示例。',
+        evidence: [{ type: 'governing-word', signalText: 'Grammar fill passage', signalSide: 'passage', relation: '示例证据。' }],
+        teachingNote: '通过搭配判断介词。',
+      },
+    ])),
+  }
+}
+
 function assertPackageBuilder() {
   const fix = gfPackageFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
+  const grammarFillAnalysis = i4MinimalGrammarFillAnalysis(fix)
 
-  // Success: package with all six families (I8 now requires cloze analysis).
+  // Success: package with all six families (I8 now requires cloze analysis; I13 now requires grammar-fill analysis).
   const files = buildPaperImportAiPackageFiles({
     parseResult: fix.parseResult,
     analysesByGroupId: fix.readingAnalyses,
@@ -221,6 +247,7 @@ function assertPackageBuilder() {
     clozeGroup: fix.parseResult.clozeGroup,
     clozeAnalysis: fix.clozeAnalysis,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup: fix.parseResult.applicationGroup,
     continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
@@ -235,7 +262,7 @@ function assertPackageBuilder() {
   assert('I4 grammar-fill group has passage paragraphs', (gfGroupInAsset.passage?.paragraphs || []).length > 0)
   assert('I4 grammar-fill group in layout tree', asset.layoutTree.parts.some(p => p.sections.some(s => s.groups.some(g => g.groupId === 'group-i4-grammar-fill'))))
   assert('I4 content.blanks populated', Object.keys(asset.content.blanks || {}).length >= 10)
-  assert('I4 no grammar-fill analysis file', !files.some(f => f.fileName.includes('grammar-fill-analysis')))
+  assert('I4 grammar-fill analysis file present (I13 mandatory)', files.some(f => f.fileName.includes('grammar-fill-analysis')))
 
   // Check blank with prompt.
   const blank56 = asset.content.blanks['blank-i4-056']
@@ -256,6 +283,7 @@ function assertPackageBuilder() {
       clozeGroup: fix.parseResult.clozeGroup,
       clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: null,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
@@ -274,6 +302,7 @@ function assertPackageBuilder() {
       clozeGroup: fix.parseResult.clozeGroup,
       clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: noAnsGf,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },
@@ -292,6 +321,7 @@ function assertPackageBuilder() {
       clozeGroup: fix.parseResult.clozeGroup,
       clozeAnalysis: fix.clozeAnalysis,
       grammarFillGroup: wrongCountGf,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i4.docx', buffer: fix.sourceBuffer },

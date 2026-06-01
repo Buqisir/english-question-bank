@@ -593,11 +593,37 @@ function clFixtureClozeAnalysis(parseResult) {
   }
 }
 
+function clMinimalGrammarFillAnalysis(parseResult) {
+  const gf = parseResult.grammarFillGroup
+  return {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId: parseResult.paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [gf.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [gf.groupId]: { overview: '语法填空概览。' } },
+    blanks: Object.fromEntries(gf.questions.map((q) => [
+      q.id,
+      {
+        blankId: q.blankId, blankNo: Number(q.stem),
+        blankType: 'no-hint', hint: null,
+        facetKey: 'grammar-fill.no-hint.preposition',
+        answer: q.answerKey,
+        role: null, path: null,
+        reason: '介词填空示例。',
+        evidence: [{ type: 'governing-word', signalText: 'Grammar fill passage', signalSide: 'passage', relation: '示例证据。' }],
+        teachingNote: '通过搭配判断介词。',
+      },
+    ])),
+  }
+}
+
 async function assertPackageBuilder() {
   const parseResult = clFixtureParseResult()
   const sourceBuffer = Buffer.from('PK i8 cloze package docx')
   const sourceHash = createHash('sha256').update(sourceBuffer).digest('hex')
   parseResult.paper.sourceHash = sourceHash
+  const grammarFillAnalysis = clMinimalGrammarFillAnalysis(parseResult)
 
   // --- Successful build ---
   const files = buildPaperImportAiPackageFiles({
@@ -608,6 +634,7 @@ async function assertPackageBuilder() {
     clozeGroup: parseResult.clozeGroup,
     clozeAnalysis: clFixtureClozeAnalysis(parseResult),
     grammarFillGroup: parseResult.grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup: parseResult.applicationGroup,
     continuationGroup: parseResult.continuationGroup,
     sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -633,6 +660,7 @@ async function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: null,
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -650,6 +678,7 @@ async function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: badAnalysis,
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -667,6 +696,7 @@ async function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: badAnalysis,
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -686,6 +716,7 @@ async function assertPackageBuilder() {
       clozeGroup: null,
       clozeAnalysis: null,
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -742,6 +773,7 @@ function assertStorageDiskWrite() {
   const sourceBuffer = Buffer.from('PK i8 storage test docx')
   const sourceHash = createHash('sha256').update(sourceBuffer).digest('hex')
   parseResult.paper.sourceHash = sourceHash
+  const grammarFillAnalysis = clMinimalGrammarFillAnalysis(parseResult)
 
   const files = buildPaperImportAiPackageFiles({
     parseResult,
@@ -751,6 +783,7 @@ function assertStorageDiskWrite() {
     clozeGroup: parseResult.clozeGroup,
     clozeAnalysis: clFixtureClozeAnalysis(parseResult),
     grammarFillGroup: parseResult.grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup: parseResult.applicationGroup,
     continuationGroup: parseResult.continuationGroup,
     sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },

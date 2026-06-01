@@ -13,6 +13,7 @@ import { randomUUID } from 'node:crypto'
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 const clozeAnalysisFileName = 'cloze-analysis-v1.json'
+const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
 
 function readJsonMaybe(filePath) {
   if (!existsSync(filePath)) return null
@@ -93,7 +94,12 @@ function makeVersionedArtifacts(packageData, version) {
     : null
   if (clozeAnalysis) clozeAnalysis.sourceAssetVersion = version
 
-  return { paperAsset, answerKey, importMeta, readingAnalysis, scAnalysis, clozeAnalysis }
+  const grammarFillAnalysis = packageData.grammarFillAnalysis
+    ? JSON.parse(JSON.stringify(packageData.grammarFillAnalysis))
+    : null
+  if (grammarFillAnalysis) grammarFillAnalysis.sourceAssetVersion = version
+
+  return { paperAsset, answerKey, importMeta, readingAnalysis, scAnalysis, clozeAnalysis, grammarFillAnalysis }
 }
 
 export function writePaperImportVersion({
@@ -130,6 +136,9 @@ export function writePaperImportVersion({
     }
     if (artifacts.clozeAnalysis) {
       writeJson(path.join(tempDir, 'analyses', clozeAnalysisFileName), artifacts.clozeAnalysis)
+    }
+    if (artifacts.grammarFillAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', grammarFillAnalysisFileName), artifacts.grammarFillAnalysis)
     }
     writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
     writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
@@ -175,6 +184,13 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
     writeFileSync(
       path.join(tempLatest, 'analyses', clozeAnalysisFileName),
       readFileSync(clozeAnalysisPath),
+    )
+  }
+  const grammarFillAnalysisPath = path.join(versionDir, 'analyses', grammarFillAnalysisFileName)
+  if (existsSync(grammarFillAnalysisPath)) {
+    writeFileSync(
+      path.join(tempLatest, 'analyses', grammarFillAnalysisFileName),
+      readFileSync(grammarFillAnalysisPath),
     )
   }
 

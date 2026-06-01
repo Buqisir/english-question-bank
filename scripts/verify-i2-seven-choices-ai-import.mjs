@@ -508,11 +508,37 @@ function scFixtureClozeAnalysis(parseResult) {
   }
 }
 
+function scMinimalGrammarFillAnalysis(parseResult) {
+  const gf = parseResult.grammarFillGroup
+  return {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId: parseResult.paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [gf.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [gf.groupId]: { overview: '语法填空概览。' } },
+    blanks: Object.fromEntries(gf.questions.map((q) => [
+      q.id,
+      {
+        blankId: q.blankId, blankNo: Number(q.stem),
+        blankType: 'no-hint', hint: null,
+        facetKey: 'grammar-fill.no-hint.preposition',
+        answer: q.answerKey,
+        role: null, path: null,
+        reason: '介词填空示例。',
+        evidence: [{ type: 'governing-word', signalText: 'Grammar fill passage', signalSide: 'passage', relation: '示例证据。' }],
+        teachingNote: '通过搭配判断介词。',
+      },
+    ])),
+  }
+}
+
 function assertPackageBuilder() {
   const parseResult = scFixtureParseResult()
   const sourceBuffer = Buffer.from('PK i2 package docx')
   const sourceHash = createHash('sha256').update(sourceBuffer).digest('hex')
   parseResult.paper.sourceHash = sourceHash
+  const grammarFillAnalysis = scMinimalGrammarFillAnalysis(parseResult)
 
   // Successful build with seven-choices.
   const files = buildPaperImportAiPackageFiles({
@@ -523,6 +549,7 @@ function assertPackageBuilder() {
     clozeGroup: parseResult.clozeGroup,
     clozeAnalysis: scFixtureClozeAnalysis(parseResult),
     grammarFillGroup: parseResult.grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup: parseResult.applicationGroup,
     continuationGroup: parseResult.continuationGroup,
     sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -551,6 +578,7 @@ function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -569,6 +597,7 @@ function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -587,6 +616,7 @@ function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -615,6 +645,7 @@ function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: null,
       continuationGroup: parseResult.continuationGroup,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },
@@ -631,6 +662,7 @@ function assertPackageBuilder() {
       clozeGroup: parseResult.clozeGroup,
       clozeAnalysis: scFixtureClozeAnalysis(parseResult),
       grammarFillGroup: parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: parseResult.applicationGroup,
       continuationGroup: null,
       sourceDocx: { fileName: parseResult.paper.sourceFilename, buffer: sourceBuffer },

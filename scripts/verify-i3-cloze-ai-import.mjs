@@ -178,6 +178,31 @@ function clFixture() {
   }
 }
 
+function i3MinimalGrammarFillAnalysis(fix) {
+  const gf = fix.parseResult.grammarFillGroup
+  return {
+    schemaVersion: 'grammar-fill-analysis-v1',
+    paperId: fix.parseResult.paper.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [gf.groupId],
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    groups: { [gf.groupId]: { overview: '语法填空概览。' } },
+    blanks: Object.fromEntries(gf.questions.map((q) => [
+      q.id,
+      {
+        blankId: q.blankId, blankNo: Number(q.stem),
+        blankType: 'no-hint', hint: null,
+        facetKey: 'grammar-fill.no-hint.preposition',
+        answer: q.answerKey,
+        role: null, path: null,
+        reason: '介词填空示例。',
+        evidence: [{ type: 'governing-word', signalText: 'Grammar fill passage', signalSide: 'passage', relation: '示例证据。' }],
+        teachingNote: '通过搭配判断介词。',
+      },
+    ])),
+  }
+}
+
 const I3_SC_ANALYSIS = {
   schemaVersion: 'seven-choices-analysis-v1', paperId: 'paper-i3-pkg', sourceAssetVersion: 1,
   targetGroups: ['group-i3-seven-choices'], meta: { generatedBy: 'stub' },
@@ -217,6 +242,7 @@ function assertPackageBuilder() {
   const fix = clFixture()
   fix.parseResult.paper.sourceHash = fix.sourceHash
   const clozeAnalysis = i3ClozeAnalysis(fix)
+  const grammarFillAnalysis = i3MinimalGrammarFillAnalysis(fix)
 
   // Success: package with all four families (I8 now requires cloze analysis).
   const files = buildPaperImportAiPackageFiles({
@@ -227,6 +253,7 @@ function assertPackageBuilder() {
     clozeGroup: fix.parseResult.clozeGroup,
     clozeAnalysis,
     grammarFillGroup: fix.parseResult.grammarFillGroup,
+    grammarFillAnalysis,
     applicationGroup: fix.parseResult.applicationGroup,
     continuationGroup: fix.parseResult.continuationGroup,
     sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
@@ -253,6 +280,7 @@ function assertPackageBuilder() {
       clozeGroup: noAnsGroup,
       clozeAnalysis,
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },
@@ -272,6 +300,7 @@ function assertPackageBuilder() {
         questions: Object.fromEntries([36,37,38,39,40].map(n => [`q-i3-${String(n).padStart(3,'0')}`, { optionFit: { correctOptionLabel: 'A' } }])),
       },
       grammarFillGroup: fix.parseResult.grammarFillGroup,
+      grammarFillAnalysis,
       applicationGroup: fix.parseResult.applicationGroup,
       continuationGroup: fix.parseResult.continuationGroup,
       sourceDocx: { fileName: 'i3.docx', buffer: fix.sourceBuffer },

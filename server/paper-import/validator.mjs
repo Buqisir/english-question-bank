@@ -21,6 +21,7 @@ export const PAPER_IMPORT_SCHEMA_VERSIONS = new Set([
   'reading-choice-analysis-v1',
   'seven-choices-analysis-v1',
   'cloze-analysis-v1',
+  'grammar-fill-analysis-v1',
 ])
 
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
@@ -453,6 +454,7 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
   const analysisEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'reading-choice-analysis-v1')
   const scAnalysisEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'seven-choices-analysis-v1')
   const clozeAnalysisEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'cloze-analysis-v1')
+  const grammarFillAnalysisEntries = parsedFiles.filter((entry) => entry.schemaVersion === 'grammar-fill-analysis-v1')
 
   if (paperAssetEntries.length !== 1) {
     blockingIssues.push(issue('blocking', 'package.paperAssetCount', '必须且只能上传 1 个 paper-asset-v1 JSON。', {
@@ -479,6 +481,9 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
   }
   if (clozeAnalysisEntries.length > 1) {
     blockingIssues.push(issue('blocking', 'package.tooManyClozeAnalysis', '最多上传 1 个 cloze-analysis-v1 JSON。'))
+  }
+  if (grammarFillAnalysisEntries.length > 1) {
+    blockingIssues.push(issue('blocking', 'package.tooManyGrammarFillAnalysis', '最多上传 1 个 grammar-fill-analysis-v1 JSON。'))
   }
   if (blockingIssues.length > 0 || !paperAssetEntries[0] || !answerKeyEntries[0] || !importMetaEntries[0]) {
     return null
@@ -527,6 +532,12 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     warnings.push(issue('warning', 'clozeAnalysis.paperIdMismatch', 'cloze-analysis paperId 与 paper-asset 不一致，将以 paper-asset 为准。'))
   }
 
+  // Grammar-fill analysis is optional; pass through if present.
+  const grammarFillAnalysis = grammarFillAnalysisEntries.length === 1 ? cloneJson(grammarFillAnalysisEntries[0].data) : null
+  if (grammarFillAnalysis && grammarFillAnalysis.paperId !== paperAsset.paper.paperId) {
+    warnings.push(issue('warning', 'grammarFillAnalysis.paperIdMismatch', 'grammar-fill-analysis paperId 与 paper-asset 不一致，将以 paper-asset 为准。'))
+  }
+
   validateNonReadingCompleteness({ asset: paperAsset, answerKey, warnings })
 
   return {
@@ -536,6 +547,7 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     readingAnalysis,
     scAnalysis,
     clozeAnalysis,
+    grammarFillAnalysis,
   }
 }
 
