@@ -33,6 +33,7 @@ export function createPaperImportRoutes() {
       try {
         const result = publishPaperImportPackage({ files, db, paperAssetsDir: context.paperAssetsDir })
         context.invalidatePaperSurfaceAnalysisAvailability()
+        context.invalidateTeachingFacetIndex()
         context.sendJson(response, result.ok ? 201 : 422, result)
       } finally {
         db.close()
@@ -41,6 +42,7 @@ export function createPaperImportRoutes() {
 
     defineRoute('POST', /^\/api\/paper-import\/revalidate-latest$/, ({ response, context }) => {
       context.invalidatePaperSurfaceAnalysisAvailability()
+      context.invalidateTeachingFacetIndex()
       context.sendJson(response, 200, {
         ok: true,
         analysisEntryCount: context.getPaperSurfaceAnalysisAvailabilityByGroupId().size,
