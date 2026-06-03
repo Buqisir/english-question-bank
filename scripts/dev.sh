@@ -14,7 +14,9 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-node "$ROOT_DIR/server/api.mjs" &
+# Load secrets (e.g. DEEPSEEK_API_KEY) from a gitignored .env if present —
+# keeps keys server-side only (never in the frontend bundle or git).
+node --env-file-if-exists="$ROOT_DIR/.env" "$ROOT_DIR/server/api.mjs" &
 API_PID="$!"
 
 echo "Waiting for API at ${API_URL}..."
