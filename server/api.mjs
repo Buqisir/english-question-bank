@@ -33,6 +33,7 @@ import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/m
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
+import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -88,6 +89,7 @@ const serverContext = {
   listImportBundles,
   listImportFiles,
   listQuestionGroups,
+  listUnlabeledGroupIds,
   parseClozeByQuestionGroup,
   parseGrammarByQuestionGroup,
   parseImportFile,
@@ -438,6 +440,7 @@ const serverRoutes = [
   ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),
   ...createTeachingFacetRoutes(),
+  ...createTopicLabelBackfillRoutes(),
 ]
 
 function getDraftSearchContext(db) {
@@ -10547,6 +10550,22 @@ function bindTopicLabelsToQuestionGroup(questionGroupId, input) {
       questionGroupId,
       topicLabels: getTopicLabelsForQuestionGroup(db, questionGroupId),
     }
+  } finally {
+    db.close()
+  }
+}
+
+function listUnlabeledGroupIds() {
+  const db = openDatabase({ readOnly: true })
+  try {
+    const allRows = db.prepare('SELECT id FROM question_groups ORDER BY id').all()
+    const labeledRows = db
+      .prepare('SELECT DISTINCT question_group_id FROM question_group_topic_labels')
+      .all()
+    const labeledSet = new Set(labeledRows.map((r) => r.question_group_id))
+    const unlabeled = allRows.map((r) => r.id).filter((id) => !labeledSet.has(id))
+    const skipped = allRows.length - unlabeled.length
+    return { unlabeled, skipped }
   } finally {
     db.close()
   }
