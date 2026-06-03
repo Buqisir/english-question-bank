@@ -49,6 +49,7 @@ const registry = {
   'scripts/verify-i15-grammar-fill-blank-focus.mjs',
   'scripts/verify-i16a-teaching-dimension-search.mjs',
   'scripts/verify-i16b-theme-labels-backfill.mjs',
+  'scripts/verify-search-thinking-toggle.mjs',
   ],
 }
 

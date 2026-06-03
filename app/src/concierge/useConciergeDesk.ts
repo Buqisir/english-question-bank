@@ -52,6 +52,8 @@ export type ConciergeDetailCache = Record<string, ConciergeDetailEntry>
 export type UseConciergeDeskInput = {
   questionGroups: QuestionGroupCard[]
   apiKey: string
+  /** Whether to enable thinking mode for AI steward search. */
+  thinkingMode?: boolean
   /** Test seam — replace network call. */
   searchOverride?: typeof runConciergeSearch
   /** Test seam — replace the detail fetch. */
@@ -193,6 +195,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           pendingQuery,
           questionGroups: input.questionGroups,
           apiKey: input.apiKey,
+          thinkingMode: input.thinkingMode ?? false,
         })
         if (outcome.kind === 'clarification') {
           setState({

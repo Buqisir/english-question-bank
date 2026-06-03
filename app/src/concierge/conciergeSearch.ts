@@ -26,8 +26,10 @@ export type ConciergeSearchInput = {
   questionGroups: QuestionGroupCard[]
   /** DeepSeek key. Empty string means "go straight to fallback". */
   apiKey: string
+  /** Whether to enable thinking mode for the steward DeepSeek calls. Defaults to false. */
+  thinkingMode?: boolean
   /** Optional override for tests; defaults to the real ask call. */
-  doStewardCall?: (message: string, apiKey: string) => Promise<QuestionBankStewardResult>
+  doStewardCall?: (message: string, apiKey: string, thinkingMode?: boolean) => Promise<QuestionBankStewardResult>
   /** Test hook; production keeps this short enough to avoid a stuck search UI. */
   stewardTimeoutMs?: number
 }
@@ -251,6 +253,7 @@ export async function runConciergeSearch(
   const intent = input.intent.trim()
   const sentMessage = buildSentMessage(intent, input.pendingQuery)
   const apiKey = (input.apiKey || '').trim()
+  const thinkingMode = input.thinkingMode ?? false
   const doStewardCall = input.doStewardCall || askQuestionBankSteward
   const localDirectHits = highConfidenceLocalHits(input.questionGroups, intent)
 
@@ -280,7 +283,7 @@ export async function runConciergeSearch(
 
   try {
     const result = await withTimeout(
-      doStewardCall(sentMessage, apiKey),
+      doStewardCall(sentMessage, apiKey, thinkingMode),
       input.stewardTimeoutMs ?? DEFAULT_STEWARD_TIMEOUT_MS,
       'question-bank steward',
     )

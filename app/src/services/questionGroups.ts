@@ -792,13 +792,13 @@ export async function semanticSearchQuestionGroups(query: string, apiKey: string
   return (await response.json()) as SemanticSearchResult
 }
 
-export async function askQuestionBankSteward(message: string, apiKey: string): Promise<QuestionBankStewardResult> {
+export async function askQuestionBankSteward(message: string, apiKey: string, thinkingMode = false): Promise<QuestionBankStewardResult> {
   const response = await fetch(apiPath('/api/ai/question-bank-steward'), {
     body: JSON.stringify({
       message,
       apiKey,
       model: 'deepseek-v4-flash',
-      thinkingMode: false,
+      thinkingMode: thinkingMode,
       requestId: crypto.randomUUID?.() || '',
     }),
     headers: { 'content-type': 'application/json' },

@@ -1065,6 +1065,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const conciergeDesk = useConciergeDesk({
     questionGroups,
     apiKey: aiApiKey,
+    thinkingMode: aiThinkingMode,
   })
   const aiRunIdRef = useRef(0)
   const refreshQuestionGroups = useCallback(async (ignore?: () => boolean) => {
@@ -4051,6 +4052,11 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                 basketIds={new Set(basket.map((item) => item.id))}
                 onAdd={(group) => addToBasket(group)}
                 dataStatus={dataStatus}
+                thinkingMode={aiThinkingMode}
+                onThinkingModeChange={(value) => {
+                  setAiThinkingMode(value)
+                  localStorage.setItem('ai-thinking-mode', value ? 'on' : 'off')
+                }}
               />
             ) : (
                 <div className="group-list">
