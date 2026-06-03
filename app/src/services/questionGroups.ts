@@ -867,3 +867,26 @@ export async function exportPrintPdf(input: ExportDocxInput): Promise<ExportPdfR
     fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `${input.title}-精排.pdf`,
   }
 }
+
+export type BackfillTopicLabelsResult = {
+  processed: number
+  labeled: number
+  skipped: number
+  failed: Array<{ id: string; error: string }>
+}
+
+export async function backfillTopicLabels(input: {
+  apiKey: string
+  model?: string
+}): Promise<BackfillTopicLabelsResult> {
+  const response = await fetch(apiPath('/api/topic-labels/backfill'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(input),
+  })
+  if (!response.ok) {
+    const data = (await response.json().catch(() => null)) as { error?: string } | null
+    throw new Error(data?.error || `批量打主题标签失败：${response.status}`)
+  }
+  return response.json() as Promise<BackfillTopicLabelsResult>
+}

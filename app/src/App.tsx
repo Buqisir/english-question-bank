@@ -106,6 +106,8 @@ import {
   parseSevenChoicesGroup as parseSevenChoicesGroupRequest,
   parseGrammarGroup as parseGrammarGroupRequest,
   parseImportFile as parseImportFileRequest,
+  backfillTopicLabels,
+  type BackfillTopicLabelsResult,
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
@@ -1056,6 +1058,9 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [topicLabelBindError, setTopicLabelBindError] = useState('')
   const [aiApiKey, setAiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
   const [aiModel, setAiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
+  const [backfillStatus, setBackfillStatus] = useState<'idle' | 'loading'>('idle')
+  const [backfillResult, setBackfillResult] = useState<BackfillTopicLabelsResult | null>(null)
+  const [backfillError, setBackfillError] = useState('')
   const [aiThinkingMode, setAiThinkingMode] = useState(() => localStorage.getItem('ai-thinking-mode') === 'on')
   const conciergeDesk = useConciergeDesk({
     questionGroups,
@@ -2850,6 +2855,23 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
+  async function handleBackfillTopicLabels() {
+    const key = aiApiKey.trim()
+    localStorage.setItem('ai-api-key', key)
+    setBackfillStatus('loading')
+    setBackfillResult(null)
+    setBackfillError('')
+    try {
+      const result = await backfillTopicLabels({ apiKey: key, model: aiModel })
+      setBackfillResult(result)
+      setBackfillStatus('idle')
+      await refreshQuestionGroups()
+    } catch (error) {
+      setBackfillError(error instanceof Error ? error.message : String(error))
+      setBackfillStatus('idle')
+    }
+  }
+
   async function handleGenerateTopicLabels() {
     if (!selectedDetail) {
       setTopicLabelStatus('error')
@@ -3551,7 +3573,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     <div className={`app-shell home-mode-${homeMode}`}>
       <header className="topbar">
         <div>
-          <p className="eyebrow">Local-first English Question Bank</p>
+          <p className="eyebrow">按你怎么教，找你要的题</p>
           <h1>英语题库工作台</h1>
         </div>
         <div className="topbar-actions">
@@ -3624,6 +3646,26 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             <Sparkles size={18} />
             AI 导题
           </button>
+          <button
+            className="ghost-button"
+            type="button"
+            disabled={backfillStatus === 'loading'}
+            onClick={() => void handleBackfillTopicLabels()}
+            title="用 AI 为所有无主题标签的题组批量打标（可安全重跑）"
+          >
+            <Tag size={16} />
+            {backfillStatus === 'loading' ? '打标中…' : '给题库打主题标签'}
+          </button>
+          {backfillResult !== null && (
+            <span className="backfill-summary" title="主题标签回填结果">
+              已标 {backfillResult.labeled} / 跳过 {backfillResult.skipped} / 失败 {backfillResult.failed.length}
+            </span>
+          )}
+          {backfillError && (
+            <span className="backfill-error" title={backfillError}>
+              打标失败
+            </span>
+          )}
           <button
             className="home-mode-toggle"
             type="button"

@@ -48,6 +48,7 @@ const registry = {
   'scripts/verify-i14-grammar-fill-analysis-surface.mjs',
   'scripts/verify-i15-grammar-fill-blank-focus.mjs',
   'scripts/verify-i16a-teaching-dimension-search.mjs',
+  'scripts/verify-i16b-theme-labels-backfill.mjs',
   ],
 }
 
