@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "grammar-fill-verb-axes-v1",
+  "axes": {
+    "tense": ["present", "past", "present-perfect", "past-perfect", "progressive", "other"],
+    "voice": ["active", "passive"],
+    "agreement": ["singular", "plural", "na"]
+  },
+  "labels": {
+    "tense": {
+      "present": "一般现在时",
+      "past": "一般过去时",
+      "present-perfect": "现在完成时",
+      "past-perfect": "过去完成时",
+      "progressive": "进行时态",
+      "other": "其他/罕见"
+    },
+    "voice": {
+      "active": "主动语态",
+      "passive": "被动语态"
+    },
+    "agreement": {
+      "singular": "谓语用单数",
+      "plural": "谓语用复数",
+      "na": "不涉及主谓一致"
+    }
+  },
+  "notes": {
+    "tense.other": "高考语法填空罕见的时态归此：一般将来时 / 将来完成 / 情态动词结构 / 虚拟语气 / used to 等。进行时态（现在/过去进行）合并为 progressive，不按时间拆。",
+    "agreement.na": "数与谓语形式无关时用 na：祈使句、情态动词后原形、第一/第二人称、非谓语裸形等。不要强行塞 singular/plural。"
+  }
+}
