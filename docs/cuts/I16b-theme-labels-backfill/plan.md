@@ -25,8 +25,7 @@ PM grill 定案（owner 拍）：填充方式 **A（批量回填、老师触发�
   - **回填 = 每组连着调 generate→bind**（"AI 直接落库"）。
 - **路由模式**：现有 `POST/PUT /api/question-groups/:id/topic-labels` 在 `server/question-bank/questionGroupRoutes.mjs:117/140`，经 `createQuestionGroupRoutes()` 工厂注册（`api.mjs:436` 的 `serverRoutes` 组合）。新回填路由**走同工厂或新工厂**加进组合（参照 cut A 的 MF-3 教训：**经工厂注册，不往字面量 push**）。`context` 已暴露 `generateTopicLabelsByQuestionGroup` / `bindTopicLabelsToQuestionGroup`（`api.mjs:71,80`）。
 - **填完即可搜（已验证链路）**：`getTopicLabelsForQuestionGroups`（`api.mjs:845`）已 merge 进 `selectQuestionGroupCards`（`api.mjs:1368`）→ `QuestionGroupCard.topicLabels` 带上；concierge `conciergeSearch.ts` 与经典 `useMemo` 都把 `topicLabels[].label` 纳入关键词 haystack。**所以本刀不需要新检索层**。
-- **回填目标量**：`SELECT COUNT(*) ... NOT EXISTS topic_labels` = **18**（当前全部）。
-- **覆盖**：主题分类基于题组的 passage detail；无 passage / 分类失败的组**跳过并计入报告**，不中断整批。
+- **回填目标量 + 覆盖（PA 在 live DB 核实）**：18 个无标签组横跨 **5 类**——阅读 12 / 七选五 2 / 完形 1 / 语法 1 / **写作 2**，**全部有非空 `material_text`**，分类器对它们都能产标签（**不止四客观题，写作组也含**——主题基于正文，与解析有无无关）。无正文 / 分类失败的组**跳过并计入报告**，不中断整批。
 
 ## Locked Product Decisions
 
@@ -54,7 +53,9 @@ PM grill 定案（owner 拍）：填充方式 **A（批量回填、老师触发�
 - Verification：浏览器 QA（Step 5）。
 
 ### Step 4 — Verifier + CI
-- 新建 `scripts/verify-i16b-theme-labels-backfill.mjs`：import Step 1 编排，注入 mock 跑上述断言（全标/跳过/容错/摘要）；源码断言回填路由经工厂注册、前端按钮调 `/api/topic-labels/backfill`。注册进 `scripts/verify-ci.mjs` + `scripts/README.md`。
+- 新建 `scripts/verify-i16b-theme-labels-backfill.mjs`：import Step 1 编排，注入 mock 跑上述断言（全标/跳过/容错/摘要）；源码断言回填路由经工厂注册、前端按钮调 `/api/topic-labels/backfill`。
+- **MF-2 diff 围栏断言**：断言本 cut 的改动**没碰** `prompts/reading-choice-analysis-v1.md`、**没重建** `server/shared/topicTaxonomy.mjs`、`server/paper-import-ai/analyze*.mjs` 里**没出现** `topicLabels`（防重新耦合解析 prompt）。
+- 注册进 `scripts/verify-ci.mjs` + `scripts/README.md`。
 - Verification：`node scripts/verify-i16b-theme-labels-backfill.mjs` 绿；`verify-ci.mjs` 绿；`npm run build --prefix app` 绿。
 
 ### Step 5 — 浏览器 QA（真数据，load-bearing）
@@ -65,8 +66,10 @@ PM grill 定案（owner 拍）：填充方式 **A（批量回填、老师触发�
 
 ## Forbidden
 
-- **绝不把 topicLabels 塞进任何解析 prompt / `analyzeReading.mjs` / `packageBuilder.mjs` / import/publish 流程**（`94950a1` 的教训）。分类只走独立的 generate/bind。
+- **绝不把 topicLabels 塞进任何解析 prompt / `analyzeReading.mjs` / `packageBuilder.mjs` / import/publish 流程**（`94950a1` 的教训）。分类只走独立的 generate/bind。**点名被砍的真实文件（MF-2）**：不得修改 `prompts/reading-choice-analysis-v1.md`（当初被塞了 topicLabels）、不得重建 `server/shared/topicTaxonomy.mjs`（当初被删）、不得给任何 `server/paper-import-ai/analyze*.mjs` 加 `topicLabels`。
 - **不改配色**：不动颜色 token / 任何 hex；最小 UI 复用现有样式。
+- **写作组纳入回填（PO 决策 #1）**：写作（应用文/读后续写）有正文、可按主题找，纳入；回填覆盖全部 5 类无标签组。
+- **诚实覆盖**：摘要要讲清"已标 N / 跳过 M（已有标签）/ 失败 K（无正文或 AI 无返回）"；不暗示自己没覆盖到的。
 - **不新建检索层 / 不改卡片契约**：复用现有 `topicLabels` 进卡片 + 关键词搜；结构化主题筛选留后续。
 - **不改** `question_group_topic_labels` schema / `TOPIC_LABEL_TAXONOMY` / 现有 `POST/PUT /topic-labels` 行为 / `DEEPSEEK_TOPIC_LABEL_PROMPT`（只读复用）。
 - 路由经工厂注册（非 `:436` 字面 push）。
@@ -115,8 +118,10 @@ PM grill 定案（owner 拍）：填充方式 **A（批量回填、老师触发�
 
 ## PA Follow-Up Decisions
 
-<PA 后填。>
+PA verdict: **APPROVE WITH MUST FIX**（`pa.md`，全 load-bearing 声明验真）。2 Must Fix + 1 PO 决策已折入。
 
 | PA item | `pa.md` 处置 | `plan.md` handling | Status |
 | --- | --- | --- | --- |
-|  |  |  |  |
+| MF-1 覆盖低估 | 18 组横跨 5 类（含写作 2），全有正文，分类器都能打；写诚实覆盖 | Code Reality 回填量改 5 类 + Locked「诚实覆盖」 | Closed |
+| MF-2 Forbidden 漏点名被砍文件 | 点名 `prompts/reading-choice-analysis-v1.md` + 不重建 `topicTaxonomy.mjs` + analyze* 无 topicLabels；加 diff 围栏 | Forbidden 点名 + Step 4 diff 围栏断言 | Closed |
+| PO #1 写作纳不纳 | Claude 拍：**纳入**（写作有正文、可按主题找，零成本更完整）| Locked「写作组纳入回填」 | Closed |
