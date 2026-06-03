@@ -3573,7 +3573,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     <div className={`app-shell home-mode-${homeMode}`}>
       <header className="topbar">
         <div>
-          <p className="eyebrow">按你怎么教，找你要的题</p>
+          <p className="eyebrow">Local-first English Question Bank</p>
           <h1>英语题库工作台</h1>
         </div>
         <div className="topbar-actions">
@@ -3657,12 +3657,20 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             {backfillStatus === 'loading' ? '打标中…' : '给题库打主题标签'}
           </button>
           {backfillResult !== null && (
-            <span className="backfill-summary" title="主题标签回填结果">
+            <span
+              className="backfill-summary"
+              style={{ color: 'var(--muted)', fontSize: 13, alignSelf: 'center' }}
+              title="主题标签回填结果"
+            >
               已标 {backfillResult.labeled} / 跳过 {backfillResult.skipped} / 失败 {backfillResult.failed.length}
             </span>
           )}
           {backfillError && (
-            <span className="backfill-error" title={backfillError}>
+            <span
+              className="backfill-error"
+              style={{ color: 'var(--coral-text)', fontSize: 13, alignSelf: 'center' }}
+              title={backfillError}
+            >
               打标失败
             </span>
           )}
