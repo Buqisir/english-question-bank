@@ -181,7 +181,10 @@ export function createPaperImportAiRoutes(services = {}) {
       const db = context.openDatabase({ readOnly: false })
       try {
         const result = publishPaperImportPackage({ files: packageFiles, db, paperAssetsDir: context.paperAssetsDir })
-        if (result.ok) context.invalidatePaperSurfaceAnalysisAvailability()
+        if (result.ok) {
+          context.invalidatePaperSurfaceAnalysisAvailability()
+          context.invalidateTeachingFacetIndex()
+        }
         context.sendJson(response, result.ok ? 201 : 422, result)
       } catch (error) {
         context.sendJson(response, 500, { ok: false, status: 'publish_failed', error: routeError(error) })

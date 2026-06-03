@@ -32,6 +32,7 @@ import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
+import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -44,6 +45,7 @@ const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
+const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
 const exportImplementation = createExportImplementation({
   rootDir,
   exportDir,
@@ -78,8 +80,10 @@ const serverContext = {
   generateTopicLabelsByQuestionGroup,
   getQuestionGroupDetail,
   getPaperSurfaceAnalysisAvailabilityByGroupId,
+  getTeachingFacetIndex,
   getImportFileParse,
   invalidatePaperSurfaceAnalysisAvailability,
+  invalidateTeachingFacetIndex,
   listImportBatches,
   listImportBundles,
   listImportFiles,
@@ -267,6 +271,14 @@ function invalidatePaperSurfaceAnalysisAvailability() {
   paperSurfaceAnalysisAvailability.invalidate()
 }
 
+function getTeachingFacetIndex() {
+  return teachingFacetIndex.getIndex()
+}
+
+function invalidateTeachingFacetIndex() {
+  teachingFacetIndex.invalidate()
+}
+
 const PRINT_READY_GROUP_TYPES = new Set([
   'reading',
   'cloze',
@@ -425,6 +437,7 @@ const serverRoutes = [
   ...createExportRoutes(exportImplementation),
   ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),
+  ...createTeachingFacetRoutes(),
 ]
 
 function getDraftSearchContext(db) {
