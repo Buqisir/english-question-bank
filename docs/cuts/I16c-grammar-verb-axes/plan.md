@@ -142,7 +142,7 @@ PA verdict（`pa.md`）：**APPROVE WITH MUST FIX**（方向对、切得好；5 
 | PA item | `plan.md` 处置 | Status |
 | --- | --- | --- |
 | MF-1 sidecar 写盘目标错（硬编码 `latest/`，但 live 无 `latest/`，索引读 `versions/v1/`）| Code Reality「读路径真相」+ Storage 决策 + Step 3 改：先 `resolvePaperAssetReadPaths` 解析 baseDir，写进该 baseDir 的 `analyses/` | Closed |
-| MF-2 合并缺回归契约 | Step 4 Verification 点名"合并保留现有 facetKeys/blankTypes/roles/groupType + 跨类未动 + 新增三轴"断言；Forbidden 加"合并不得伤现有 facet" | Closed |
+| MF-2 合并缺回归契约 | Step 4 Verification 点名"合并保留现有 facetKeys/blankTypes/roles/groupType + 跨类未动 + 新增三轴"断言；Forbidden 加"合并不得伤现有 facet"。**实现优于 plan 原案**：没把 verb-profile 加成并行 config（那才会触发 `index.set` clobber，也要改 `extractGroupFacets` 签名→打断 #180 verify），而是 `extractGroupFacets` 签名**原样不动**，buildIndex 里**额外加一趟 `mergeVerbProfileAxes`**，只 augment 已有 grammarFill bucket。clobber 从构造上消除，#180 零回归（verify-i16a 仍绿 + Req9 断言）| Closed |
 | MF-3 gitignore 声明假（只 `*/versions/` 被 ignore）| Code Reality「gitignore 真相」改正；Forbidden 点名 `latest/`+扁平 `analyses/` 被跟踪、sidecar 绝不 stage、提交前 `git status` 核 | Closed |
 | MF-4 主谓一致需主语上下文（光看答案 `"are"` 判不出数）| Step 1 改：确定性优先 + AI 兜底；**主语/句子上下文必达 prompt**；verifier 加 agreement-from-subject 用例 | Closed |
 | MF-5 覆盖 = 1 组/1 finite/0 被动，headline demo 会空 | PA ask #6 记录真实覆盖；PO QA 重写为覆盖诚实（真 demo = present/active/plural 命中那一组；**被动靠 fixture 验**）；Forbidden 加诚实覆盖 | Closed |

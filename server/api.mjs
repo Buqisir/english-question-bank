@@ -34,6 +34,7 @@ import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
+import { createVerbProfileBackfillRoutes } from './grammar-verb-profile/verbProfileBackfillRoutes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -441,6 +442,7 @@ const serverRoutes = [
   ...createQuestionGroupRoutes(),
   ...createTeachingFacetRoutes(),
   ...createTopicLabelBackfillRoutes(),
+  ...createVerbProfileBackfillRoutes(),
 ]
 
 function getDraftSearchContext(db) {

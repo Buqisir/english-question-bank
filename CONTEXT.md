@@ -76,6 +76,17 @@ _Avoid_: answer version when it could mean only an answer key
 A locally archived DOCX, PDF, image, or other source file brought into the workbench for later review or parsing.
 _Avoid_: source file when it would confuse provenance with Source
 
+**Verb Teaching Axis** (动词教学维度):
+Three orthogonal structured dimensions a teacher uses to find 语法填空 finite-verb
+questions: **Tense** (时态: 一般现在/一般过去/现在完成/过去完成/进行/其他),
+**Voice** (语态: 主动/被动), **Subject-Verb Agreement** (主谓一致: 单数/复数/不涉及).
+A single finite-verb blank carries one value on EACH axis at once (e.g. `was built` =
+past + passive + singular), so the axes are multi-tag, not a single choice. They deepen
+the `grammar-fill.given.verb.finite` facet, which alone only says "this is a finite-verb
+blank". Persisted in a per-paper verb-profile sidecar, never in the frozen analysis.
+_Avoid_: conflating Voice with Tense; treating 主谓一致 as a tense sub-value (it is its
+own light axis); using "考点" loosely when one of these specific axes is meant.
+
 ## Relationships
 
 - A **Source** can contain many **Passages**.
