@@ -10128,7 +10128,7 @@ function applyStewardFiltersToMatches(matches, plan) {
   }))
 }
 
-async function planQuestionBankStewardSearch(query, apiKey, requestId) {
+async function planQuestionBankStewardSearch(query, apiKey, requestId, thinkingMode = false) {
   const key = String(apiKey || DEEPSEEK_API_KEY).trim()
   if (!key) {
     throw new Error('未设置 DeepSeek API Key。请在右上角输入 DeepSeek Key 或设环境变量 DEEPSEEK_API_KEY。')
@@ -10150,7 +10150,7 @@ async function planQuestionBankStewardSearch(query, apiKey, requestId) {
     ],
     temperature: 0,
     maxTokens: 900,
-    thinkingMode: false,
+    thinkingMode: thinkingMode,
     responseFormat: 'json_object',
   })
 
@@ -10169,7 +10169,7 @@ async function planQuestionBankStewardSearch(query, apiKey, requestId) {
   }
 }
 
-async function questionBankStewardSearch(query, apiKey, requestId) {
+async function questionBankStewardSearch(query, apiKey, requestId, thinkingMode = false) {
   const normalizedQuery = optionalString(query)
   if (!normalizedQuery) {
     throw new Error('请输入想让题库管家查找的问题。')
@@ -10179,7 +10179,7 @@ async function questionBankStewardSearch(query, apiKey, requestId) {
   const startedAt = Date.now()
   const keySource = describeKeySource(apiKey)
   const key = String(apiKey || DEEPSEEK_API_KEY).trim()
-  const { plan } = await planQuestionBankStewardSearch(normalizedQuery, key, resolvedRequestId)
+  const { plan } = await planQuestionBankStewardSearch(normalizedQuery, key, resolvedRequestId, thinkingMode)
 
   if (plan.needsClarification) {
     return {
@@ -10191,7 +10191,7 @@ async function questionBankStewardSearch(query, apiKey, requestId) {
       matches: [],
       provider: 'deepseek',
       model: DEFAULT_DEEPSEEK_MODEL,
-      thinkingMode: false,
+      thinkingMode: thinkingMode,
       keySource: keySource.source,
       keyFingerprint: maskApiKey(key),
       keyMask: maskApiKey(key),
@@ -10202,7 +10202,7 @@ async function questionBankStewardSearch(query, apiKey, requestId) {
   }
 
   const semanticQuery = buildStewardSemanticQuery(normalizedQuery, plan)
-  const searchResult = await semanticSearchQuestionGroups(semanticQuery, key, `${resolvedRequestId}-search`)
+  const searchResult = await semanticSearchQuestionGroups(semanticQuery, key, `${resolvedRequestId}-search`, thinkingMode)
   const matches = applyStewardFiltersToMatches(searchResult.matches, plan).slice(0, QUESTION_BANK_STEWARD_TOP_K)
   const limitedSearchResult = {
     ...searchResult,
@@ -10220,7 +10220,7 @@ async function questionBankStewardSearch(query, apiKey, requestId) {
     matches,
     provider: 'deepseek',
     model: DEFAULT_DEEPSEEK_MODEL,
-    thinkingMode: false,
+    thinkingMode: thinkingMode,
     keySource: keySource.source,
     keyFingerprint: maskApiKey(key),
     keyMask: maskApiKey(key),
@@ -10571,7 +10571,7 @@ function listUnlabeledGroupIds() {
   }
 }
 
-async function semanticSearchQuestionGroups(query, apiKey, requestId) {
+async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMode = false) {
   const normalizedQuery = optionalString(query)
   if (!normalizedQuery) {
     throw new Error('请输入要检索的关键词或语义描述。')
@@ -10602,7 +10602,7 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId) {
       matches: [],
       provider: 'deepseek',
       model: DEFAULT_DEEPSEEK_MODEL,
-      thinkingMode: false,
+      thinkingMode: thinkingMode,
       keySource: 'missing',
       keyFingerprint: 'missing',
       keyMask: 'missing',
@@ -10642,7 +10642,7 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId) {
     ],
     temperature: 0,
     maxTokens: 1800,
-    thinkingMode: false,
+    thinkingMode: thinkingMode,
   })
   const deepSeekRankings = normalizeSemanticSearchRankings(deepSeekResult.parsed)
   const candidateById = new Map(candidatePool.map((candidate) => [candidate.group.id, candidate]))
@@ -10664,7 +10664,7 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId) {
     provider: 'deepseek',
     model: DEFAULT_DEEPSEEK_MODEL,
     pipeline: 'local-recall+deepseek-flash',
-    thinkingMode: false,
+    thinkingMode: thinkingMode,
     keySource: deepSeekKeySource.source,
     keyFingerprint: maskApiKey(deepSeekKey),
     keyMask: maskApiKey(deepSeekKey),
@@ -10972,7 +10972,7 @@ const server = createServer(async (request, response) => {
 
     if (request.method === 'POST' && url.pathname === '/api/ai/question-bank-steward') {
       const input = await readJsonBody(request)
-      const result = await questionBankStewardSearch(input.message || input.query, input.apiKey, input.requestId)
+      const result = await questionBankStewardSearch(input.message || input.query, input.apiKey, input.requestId, input.thinkingMode === true)
       sendJson(response, 200, result)
       return
     }

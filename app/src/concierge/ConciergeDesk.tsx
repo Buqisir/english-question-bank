@@ -35,15 +35,21 @@ export type ConciergeDeskProps = {
    * SQLite. We disable submit + show a calm notice until real data is in.
    */
   dataStatus?: 'loading' | 'sqlite' | 'sample'
+
+  /** Whether thinking mode is currently enabled for AI search. */
+  thinkingMode?: boolean
+  /** Called when the user toggles thinking mode. */
+  onThinkingModeChange?: (value: boolean) => void
 }
 
 const STARTER_CHIPS = ['生态主题 C 篇', '2025 浙江卷', '中等难度主旨题'] as const
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
-  const { retrieval, actions, basketIds, onAdd, dataStatus } = props
+  const { retrieval, actions, basketIds, onAdd, dataStatus, thinkingMode, onThinkingModeChange } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, triggerSimilar, togglePaper } = actions
   const inputId = useId()
+  const thinkingToggleId = useId()
   const dataLoading = dataStatus === 'loading'
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -87,6 +93,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           {state.kind === 'loading' || dataLoading ? '…' : '→'}
         </button>
       </form>
+
+      <div className="concierge-thinking-toggle">
+        <input
+          type="checkbox"
+          id={thinkingToggleId}
+          checked={thinkingMode ?? false}
+          onChange={(event) => onThinkingModeChange?.(event.target.checked)}
+        />
+        <label htmlFor={thinkingToggleId}>思考模式</label>
+      </div>
 
       {dataLoading && (
         <p className="concierge-data-loading" role="status">

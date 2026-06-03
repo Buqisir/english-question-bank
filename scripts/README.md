@@ -59,6 +59,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-i15-grammar-fill-blank-focus.mjs` | I15 语法填空点正文空格聚焦 + 退数字排（第三刀）：blankFocusMode 在 types.d.ts 声明（默认 rail）；rail 两处渲染点被 !blankFocus 门控；grammarFillBlankPattern 必需点号区分（匹配 56._____ / 57._____(absorb)，排除 cloze __41__ / 七选五 _____36_____ / 数字噪声 2026·800g·3-5g·25-30g；64._____ 3-5g→["64"] 不取 3）；paperBlankPattern 字面量零改动守卫；空格渲染为带 aria-label/aria-pressed 的 <button>、未匹配→非交互 span（SW-2）；harness 仅 grammarFillAnalysisModel 时传 in-passage | yes |
 | `verify-i16a-teaching-dimension-search.mjs` | I16·A 教学维度检索层：extractor 四类（语法/七选五/完形/阅读）真实 960d0f8d 样本断言；MF-1 完形 signatureFacet 稀疏（13/15 缺失不崩）；reading 多组 join 3+4+4+4 无孤儿；MF-2 未解析题组（jslk grammar-fill/cloze）缺席索引；查询行为（bridge/noun/skill/多维 AND）；MF-3 路由注册 + invalidate 清缓存 | yes |
 | `verify-i16b-theme-labels-backfill.mjs` | I16·B 主题标签批量回填：注入 mock 编排（全标/跳过/容错/摘要计数）；MF-2 diff 围栏（reading-choice-analysis-v1.md/topicTaxonomy.mjs/analyzeReading/packageBuilder 未耦合）；路由经工厂注册；前端 service 调 /api/topic-labels/backfill | yes |
+| `verify-search-thinking-toggle.mjs` | AI 搜索 thinking 开关：askQuestionBankSteward 第三参 thinkingMode 进请求体；questionBankStewardSearch 形参含 thinkingMode 且传给 plan + semantic；steward 路由 forwards input.thinkingMode；ConciergeDesk 渲染 thinking toggle | yes |
 
 ## PaperSurface and Paper Intelligence
 
