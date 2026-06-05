@@ -59,6 +59,11 @@ if (process.argv.includes('--list-json')) {
   process.exit(0)
 }
 
+// A verify script exits with this code to signal "skipped" (its off-repo
+// fixture is absent, e.g. on a clean CI checkout). Skipped != passed: it is
+// counted and listed separately so a missing-data gap stays visible.
+const SKIP_EXIT_CODE = 2
+
 function run(command, args, label, options = {}) {
   console.log(`\n==> ${label}`)
   const result = spawnSync(command, args, {
@@ -66,17 +71,39 @@ function run(command, args, label, options = {}) {
     stdio: 'inherit',
     shell: false,
   })
-  if (result.status !== 0) {
-    process.exit(result.status || 1)
+  return result.status ?? 1
+}
+
+// Preflight stays hard-fail: a broken build makes the script results meaningless.
+for (const step of registry.preflight) {
+  const status = run(step.command, step.args, step.label)
+  if (status !== 0) {
+    console.error(`\nPreflight failed: ${step.label} (exit ${status})`)
+    process.exit(status)
   }
 }
 
-for (const step of registry.preflight) {
-  run(step.command, step.args, step.label)
-}
-
+// Scripts run in collect mode: run every script, never exit early, so one
+// failure cannot hide the status of the scripts after it.
+const results = []
 for (const script of registry.scripts) {
-  run(process.execPath, [script], script)
+  const status = run(process.execPath, [script], script)
+  results.push({ script, status })
 }
 
-console.log('\nCI verify passed')
+const passed = results.filter((r) => r.status === 0)
+const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
+const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
+
+console.log('\n===== verify summary =====')
+console.log(`PASS ${passed.length} / SKIP ${skipped.length} / FAIL ${failed.length}`)
+if (skipped.length > 0) {
+  console.log('SKIPPED (off-repo fixture absent — not actually tested):')
+  for (const r of skipped) console.log(`  - ${r.script}`)
+}
+if (failed.length > 0) {
+  console.log('FAILED:')
+  for (const r of failed) console.log(`  - ${r.script} (exit ${r.status})`)
+}
+
+process.exit(failed.length > 0 ? 1 : 0)
