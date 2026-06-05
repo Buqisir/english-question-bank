@@ -952,7 +952,7 @@ function normalizeTopicLabelItem(item) {
   return aliasLabels.map(decorate)
 }
 
-function normalizeTopicLabelPayload(payload) {
+export function normalizeTopicLabelPayload(payload) {
   const rawLabels = Array.isArray(payload)
     ? payload
     : Array.isArray(payload?.topicLabels)
@@ -1464,7 +1464,7 @@ function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuesti
   }
 }
 
-function getQuestionGroupDetail(id) {
+export function getQuestionGroupDetail(id) {
   const db = openDatabase()
 
   try {
@@ -10466,22 +10466,26 @@ function getReadingSearchSignalsForQuestionGroups(db, questionGroupIds) {
   return signalsByGroupId
 }
 
-async function callDeepSeekTopicLabels(context) {
+export function buildTopicLabelMessages(detail) {
   const allowedLabels = TOPIC_LABEL_TAXONOMY.map((entry, index) => `${index + 1}. ${entry.label}`).join('\n')
+  return [
+    {
+      role: 'system',
+      content: `${DEEPSEEK_TOPIC_LABEL_PROMPT}\n\n可选标签清单：\n${allowedLabels}`,
+    },
+    {
+      role: 'user',
+      content: `请为以下题组/篇章推荐话题标签，并严格只从清单中选择。\n\n${formatQuestionGroupForTopicLabel(detail)}`,
+    },
+  ]
+}
+
+async function callDeepSeekTopicLabels(context) {
   const result = await callDeepSeekWithFallback({
     apiKey: context.apiKey,
     model: context.model,
     provider: context.provider,
-    messages: [
-      {
-        role: 'system',
-        content: `${DEEPSEEK_TOPIC_LABEL_PROMPT}\n\n可选标签清单：\n${allowedLabels}`,
-      },
-      {
-        role: 'user',
-        content: `请为以下题组/篇章推荐话题标签，并严格只从清单中选择。\n\n${formatQuestionGroupForTopicLabel(context.detail)}`,
-      },
-    ],
+    messages: buildTopicLabelMessages(context.detail),
     temperature: 0.1,
     maxTokens: context.thinkingMode ? 4096 : 2500,
     thinkingMode: context.provider === LOCAL_QWEN_PROVIDER ? false : context.thinkingMode,
@@ -10536,7 +10540,7 @@ async function generateTopicLabelsByQuestionGroup(questionGroupId, apiKey, model
   }
 }
 
-function bindTopicLabelsToQuestionGroup(questionGroupId, input) {
+export function bindTopicLabelsToQuestionGroup(questionGroupId, input) {
   const db = openDatabase({ readOnly: false })
   try {
     const exists = db.prepare('SELECT id FROM question_groups WHERE id = ?').get(questionGroupId)
@@ -11080,11 +11084,13 @@ const server = createServer(async (request, response) => {
   }
 })
 
-ensureDatabaseShape()
-cleanupPaperImportTempArtifacts(paperAssetsDir)
-ensureMySpaceFilesRoot(userSpaceFilesDir)
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  ensureDatabaseShape()
+  cleanupPaperImportTempArtifacts(paperAssetsDir)
+  ensureMySpaceFilesRoot(userSpaceFilesDir)
 
-server.listen(port, '127.0.0.1', () => {
-  console.log(`Question bank API listening on http://127.0.0.1:${port}`)
-  console.log(`SQLite database: ${dbPath}`)
-})
+  server.listen(port, '127.0.0.1', () => {
+    console.log(`Question bank API listening on http://127.0.0.1:${port}`)
+    console.log(`SQLite database: ${dbPath}`)
+  })
+}
