@@ -1,0 +1,1524 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-i-reading-a",
+    "group-2021-i-reading-b",
+    "group-2021-i-reading-c",
+    "group-2021-i-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2021-i-reading-a": {
+      "overview": "本文是一篇应用文（旅行指南），介绍了罗马四家青年旅社（hostel）供游客选择，先总述罗马住宿偏贵、旅社性价比高，再分条目逐一推荐各家旅社的特色。",
+      "discourseStructure": {
+        "summary": "总-分结构：首段点明罗马住宿贵、旅社便宜划算的背景，随后以四个小标题分别介绍 Yellow Hostel、Hostel Alessandro Palace、Youth Station Hostel、Hotel and Hostel Des Artistes 四家旅社各自的优势与不足。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-i-reading-a-1",
+            "summary": "罗马对游客来说花费高，所以很多人选择住旅社；旅社一晚约25，且通常位置中心、有安全和舒适保障。",
+            "function": "引言/总述：交代背景，点明选择旅社的核心原因是便宜划算。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-2",
+            "summary": "小标题：Yellow Hostel。",
+            "function": "分项标题：引出第一家旅社。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-3",
+            "summary": "Yellow Hostel 是城里评价最好的旅社之一，价格实惠、氛围有趣又不吵，且靠近主火车站。",
+            "function": "分项介绍：推荐 Yellow Hostel 的综合优势。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-4",
+            "summary": "小标题：Hostel Alessandro Palace。",
+            "function": "分项标题：引出第二家旅社。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-5",
+            "summary": "Hostel Alessandro Palace 适合喜欢社交的人，工作人员办很多酒吧活动，夏天屋顶还有与其他旅客交流的区域。",
+            "function": "分项介绍：突出该旅社的社交氛围。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-6",
+            "summary": "小标题：Youth Station Hostel。",
+            "function": "分项标题：引出第三家旅社。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-7",
+            "summary": "Youth Station 干净现代，家具床铺漂亮，不收城市税，有空调暖气，每个房间免费Wi-Fi。",
+            "function": "分项介绍：突出该旅社的整洁现代与诸多便利。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-8",
+            "summary": "小标题：Hotel and Hostel Des Artistes。",
+            "function": "分项标题：引出第四家旅社。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-a-9",
+            "summary": "Des Artistes 离中心车站步行10分钟、靠近景点，员工友好提供地图和建议，但Wi-Fi需每天付2欧元。",
+            "function": "分项介绍：介绍该旅社优点并点出其收费Wi-Fi的不足。"
+          }
+        ]
+      }
+    },
+    "group-2021-i-reading-b": {
+      "overview": "本文是一篇人物报道，介绍律师 Robert Titterton 在业余时间担任钢琴家 Maria Raspopova 的翻谱员（page turner）的故事，讲述这份工作所需的技能、练习与偶发状况。",
+      "discourseStructure": {
+        "summary": "文章按总—分结构展开：先引出人物及其特殊身份，再依次说明翻谱员的职责、所需技能、练习要求、突发状况，最后通过钢琴家夫妇的对比凸显 Robert 是优秀的翻谱员。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-i-reading-b-1",
+            "summary": "引出 Robert Titterton 白天是律师，业余时间为钢琴家 Maria 翻谱，并自述虽非专业音乐人但学会了读谱。",
+            "function": "引入人物与话题，点明翻谱员需要读谱能力。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-b-2",
+            "summary": "介绍 Titterton 担任 Omega Ensemble 翻谱员四年，职责是坐在钢琴家旁翻谱，使演奏不被打断，他上台同样紧张。",
+            "function": "说明翻谱员的具体职责与心理状态。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-b-3",
+            "summary": "Titterton 解释这份工作需要诸多技能：不能一次翻两页，要在反复段落处找到正确位置。",
+            "function": "列举工作所需技能，体现其难度。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-b-4",
+            "summary": "翻谱需要大量练习，长曲可达40分钟、翻页50次；台上无声沟通是关键，每位钢琴家有自己的点头示意方式需与翻谱员配合练习。",
+            "function": "强调练习的重要性，指出需练习识别点头示意。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-b-5",
+            "summary": "如同所有演出，也会出岔子：一次翻页时气流把备用谱吹落，幸好他及时接住放回。",
+            "function": "用具体事例说明工作中的突发状况。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-b-6",
+            "summary": "大多数翻谱员是钢琴学生或崭露头角的钢琴家，不过 Raspopova 曾让丈夫上台帮忙。",
+            "function": "过渡，引出钢琴家丈夫这一对比对象。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-b-7",
+            "summary": "Raspopova 笑称丈夫是最差的翻谱员，因他沉浸于音乐、感受每个音符而忘记翻页，并称 Robert 是她一生中最好的翻谱员。",
+            "function": "通过对比收尾，解释丈夫为何是最差翻谱员并赞美 Robert。"
+          }
+        ]
+      }
+    },
+    "group-2021-i-reading-c": {
+      "overview": "本文是一篇说明文，介绍美国联邦鸭票（Federal Duck Stamp）项目。先讲述北美水禽资源因捕猎与湿地破坏而锐减，再讲1934年《候鸟狩猎邮票法》出台、鸭票的诞生，最后说明鸭票收入如何用于购买湿地栖息地、成为最成功的保护项目之一。",
+      "discourseStructure": {
+        "summary": "全文按问题—对策—成效三段递进展开：第一段提出水禽资源遭破坏的问题，第二段介绍1934年法案与鸭票制度作为应对措施，第三段说明鸭票资金的去向与项目的巨大成效。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-i-reading-c-1",
+            "summary": "探险者与移民到来后，北美水禽与湿地资源在几十年内被大量破坏，市场猎人捕杀水禽、湿地被排干用于居住与耕种。",
+            "function": "提出问题：水禽资源锐减及其原因。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-c-2",
+            "summary": "1934年《候鸟狩猎邮票法》出台，规定16岁以上猎人须每年购买并携带联邦鸭票，首张鸭票由Ding Darling设计。",
+            "function": "提出对策：以立法和鸭票制度保护水禽与湿地。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-c-3",
+            "summary": "每一美元鸭票约98美分直接进入候鸟保护基金购买湿地与栖息地，自1934年以来已购买超过500万英亩栖息地，项目被誉为最成功的保护项目之一。",
+            "function": "总结成效：资金用途与项目的巨大成功。"
+          }
+        ]
+      }
+    },
+    "group-2021-i-reading-d": {
+      "overview": "本文是一篇议论性说明文，探讨情商（emotional intelligence）这一概念在普及过程中产生的误解，并辨析其真实含义，进而评价情商普及的整体影响，最后表达对未来情绪科学研究的期望。",
+      "discourseStructure": {
+        "summary": "全文先指出情商被普及化后产生的误解（第一段），再给出作者更准确的定义即情商是一套中性的技能（第二段），接着评价普及的整体效果利大于弊（第三段），最后表达对未来科学研究的期望（第四段）。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-i-reading-d-1",
+            "summary": "普及化改变了情商的原意，很多人把情商误解为人身上一切无法用智商测试衡量的可取品质。",
+            "function": "提出问题：指出对情商的常见误解。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-d-2",
+            "summary": "作者更愿意把情商描述为一套可用于善意或恶意目的的特定技能，举医生与骗子为例，说明情商高不等于道德高。",
+            "function": "界定概念：给出作者对情商的准确定义并举例说明。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-d-3",
+            "summary": "尽管大众观念超前于研究所能支持的范围，但普及的整体效果利大于弊，使各方重新重视情绪的功能。",
+            "function": "评价影响：肯定情商普及带来的积极作用。"
+          },
+          {
+            "paragraphId": "para-2021-i-reading-d-4",
+            "summary": "作者希望情商持续受关注能激发对情绪的科学研究兴趣，未来科学进步将提供研究人们如何管理生活的新视角。",
+            "function": "展望未来：表达对未来情绪科学研究的期望。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2021-i-021": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查推断题：根据首段对游客选择旅社原因的描述，推断游客最关心的因素。",
+      "stemTranslationZh": "选择住旅社的游客最主要的关切可能是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "舒适。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "with security and comfort",
+            "optionText": "Comfort.",
+            "matchType": "exact",
+            "relationNote": "原文 comfort 只是住旅社能附带获得的好处（and for that, you’ll often get...），并非游客选择旅社的主要顾虑，选项用原词 comfort 设置词钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-1",
+              "quote": "you’ll often get to stay in a central location (位置) with security and comfort",
+              "anchor": "security and comfort 是附带好处"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "安全。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "with security and comfort",
+            "optionText": "Security.",
+            "matchType": "exact",
+            "relationNote": "原文 security 同样属于附带获得的好处而非主要关切，选项用原词 security 设置词钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-1",
+              "quote": "you’ll often get to stay in a central location (位置) with security and comfort",
+              "anchor": "security 是附带好处"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "价格。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-a-1",
+              "quote": "Rome can be pricey for travelers, which is why many choose to stay in a hostel",
+              "anchor": "因为贵才选旅社"
+            },
+            {
+              "paragraphId": "para-2021-i-reading-a-1",
+              "quote": "The hostels in Rome offer a bed in a dorm room for around 25 a night",
+              "anchor": "旅社一晚约25，价格便宜"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "位置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a central location (位置)",
+            "optionText": "Location.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 central location 是住旅社可附带获得的好处，而非选择旅社的主要原因；选项 Location 与原文 location 同词族，构成词钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-1",
+              "quote": "you’ll often get to stay in a central location (位置) with security and comfort",
+              "anchor": "central location 是附带好处"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "major concern of travelers who choose to stay in a hostel",
+          "sourceRole": "stem",
+          "targetText": "Rome can be pricey for travelers, which is why many choose to stay in a hostel",
+          "targetParagraphId": "para-2021-i-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干问游客选择旅社的 major concern，原文用 pricey ... which is why many choose to stay in a hostel 直接给出原因，可定位到价格（Price）。"
+        },
+        {
+          "sourceText": "Price.",
+          "sourceRole": "correctOption",
+          "targetText": "Rome can be pricey for travelers",
+          "targetParagraphId": "para-2021-i-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 Price 与原文 pricey 同词族同义替换，pricey（贵）正是促使游客转而住旅社的核心价格顾虑。"
+        }
+      ]
+    },
+    "q-2021-i-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查细节题：根据各旅社介绍，匹配出最适合喜欢活跃社交生活的人的旅社。",
+      "stemTranslationZh": "哪家旅社最适合喜欢活跃社交生活的人？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Yellow Hostel。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "it’s got a fun atmosphere without being too noisy",
+            "sourceEntity": "Yellow Hostel",
+            "optionText": "Yellow Hostel.",
+            "optionEntity": "Yellow Hostel",
+            "explanation": "Yellow Hostel 强调的是氛围有趣但不太吵，并未突出社交活动；适合社交的应是另一家旅社，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-3",
+              "quote": "it’s got a fun atmosphere without being too noisy",
+              "anchor": "Yellow 是不吵的有趣氛围，非社交主打"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Hostel Alessandro Palace。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-a-5",
+              "quote": "If you love social hostels, this is the best hostel for you in Rome.",
+              "anchor": "喜欢社交首选此家"
+            },
+            {
+              "paragraphId": "para-2021-i-reading-a-5",
+              "quote": "Staff members hold plenty of bar events for guests like free shots, bar crawls and karaoke.",
+              "anchor": "大量酒吧社交活动"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Youth Station Hostel。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "If you’re looking for cleanliness and a modern hostel, look no further than Youth Station.",
+            "sourceEntity": "Youth Station",
+            "optionText": "Youth Station Hostel.",
+            "optionEntity": "Youth Station Hostel",
+            "explanation": "Youth Station 主打整洁与现代设施，针对的是想要 cleanliness and a modern hostel 的人，并非喜欢社交生活的人，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-7",
+              "quote": "If you’re looking for cleanliness and a modern hostel, look no further than Youth Station.",
+              "anchor": "Youth Station 主打整洁现代"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Hotel and Hostel Des Artistes。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The staff is friendly and helpful, providing you with a map of the city when you arrive",
+            "sourceEntity": "Hotel and Hostel Des Artistes",
+            "optionText": "Hotel and Hostel Des Artistes.",
+            "optionEntity": "Hotel and Hostel Des Artistes",
+            "explanation": "Des Artistes 主打位置便利、员工友好提供地图与建议，针对的是看重便利与服务的人，而非喜欢活跃社交生活的人，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-9",
+              "quote": "The staff is friendly and helpful, providing you with a map of the city when you arrive",
+              "anchor": "Des Artistes 主打便利与友好服务"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "people who enjoy an active social life",
+          "sourceRole": "stem",
+          "targetText": "If you love social hostels, this is the best hostel for you in Rome.",
+          "targetParagraphId": "para-2021-i-reading-a-5",
+          "relationType": "paraphrase",
+          "note": "题干 enjoy an active social life 与原文 love social hostels 同义替换，原文用 this is the best hostel for you 直接锁定 Hostel Alessandro Palace。"
+        },
+        {
+          "sourceText": "active social life",
+          "sourceRole": "stem",
+          "targetText": "Staff members hold plenty of bar events for guests like free shots, bar crawls and karaoke.",
+          "targetParagraphId": "para-2021-i-reading-a-5",
+          "relationType": "locationCue",
+          "note": "bar events、bar crawls、karaoke 等具体社交活动是 active social life 的定位线索，进一步印证答案为 Hostel Alessandro Palace。"
+        }
+      ]
+    },
+    "q-2021-i-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查细节题：定位 Hotel and Hostel Des Artistes 段落，找出其缺点。",
+      "stemTranslationZh": "Hotel and Hostel Des Artistes 的缺点是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它在晚上会变得吵闹。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It gets noisy at night.",
+            "explanation": "原文未提及 Des Artistes 晚上吵闹，noisy 一词出现在 Yellow Hostel 段落（without being too noisy），与本家无关，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的员工太爱说话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The staff is friendly and helpful, providing you with a map of the city when you arrive, and offering advice if you require some.",
+            "sourceHighlight": "friendly and helpful",
+            "optionText": "Its staff is too talkative.",
+            "optionHighlight": "too talkative",
+            "explanation": "原文称员工 friendly and helpful（友好乐于助人）是优点，选项把它歪曲成 too talkative（太爱说话）这一缺点，将褒义评价反转为贬义，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-9",
+              "quote": "The staff is friendly and helpful, providing you with a map of the city when you arrive, and offering advice if you require some.",
+              "anchor": "员工友好乐于助人是优点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它对Wi-Fi收费。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-a-9",
+              "quote": "However, you need to pay 2 euros a day for Wi-Fi.",
+              "anchor": "Wi-Fi 需付费2欧/天"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的位置不方便。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+            "sourceHighlight": "close to all of the city’s main attractions",
+            "optionText": "It's inconveniently located.",
+            "optionHighlight": "inconveniently located",
+            "explanation": "原文称该旅社距中心车站仅10分钟步行、靠近主要景点，说明位置便利；选项却称位置不便（inconveniently located），与原文优点正好相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-a-9",
+              "quote": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+              "anchor": "位置便利靠近景点"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the disadvantage of Hotel and Hostel Des Artistes",
+          "sourceRole": "stem",
+          "targetText": "However, you need to pay 2 euros a day for Wi-Fi.",
+          "targetParagraphId": "para-2021-i-reading-a-9",
+          "relationType": "locationCue",
+          "note": "题干问 disadvantage（缺点），原文用转折词 However 引出唯一不足，即 Wi-Fi 收费，是定位答案的关键线索。"
+        },
+        {
+          "sourceText": "It charges for Wi-Fi.",
+          "sourceRole": "correctOption",
+          "targetText": "you need to pay 2 euros a day for Wi-Fi",
+          "targetParagraphId": "para-2021-i-reading-a-9",
+          "relationType": "paraphrase",
+          "note": "选项 charges for Wi-Fi 与原文 pay 2 euros a day for Wi-Fi 同义替换，charge（收费）即 pay（付钱）的对应表达。"
+        }
+      ]
+    },
+    "q-2021-i-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查成为翻谱员所必须具备的能力，对应第一段中 Titterton 的自述。",
+      "stemTranslationZh": "要成为一名翻谱员，Titterton 应该会做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "读乐谱。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-b-1",
+              "quote": "I’m not a trained musician, but I’ve learnt to read music so I can help Maria in her performance.",
+              "anchor": "学会读谱才能帮 Maria"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "弹钢琴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "not as a musician but as her page turner",
+            "sourceEntity": "her page turner",
+            "optionText": "Play the piano.",
+            "optionEntity": "Play the piano",
+            "explanation": "弹钢琴的是 Maria，而 Titterton 是翻谱员而非音乐人，把钢琴家的能力错配给翻谱员。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-b-1",
+              "quote": "not as a musician but as her page turner",
+              "anchor": "不是音乐人而是翻谱员"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "唱歌。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Titterton needs to sing songs to be a page turner.",
+            "explanation": "原文未提及翻谱员需要唱歌，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "修理乐器。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Titterton needs to fix the instruments to be a page turner.",
+            "explanation": "原文未提及翻谱员需要修理乐器，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Read music.",
+          "sourceRole": "correctOption",
+          "targetText": "I’ve learnt to read music",
+          "targetParagraphId": "para-2021-i-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项 Read music 直接对应原文 I’ve learnt to read music，是同义复现。"
+        }
+      ]
+    },
+    "q-2021-i-025": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对 Titterton 台上工作特点的概括判断，需综合第三、四段对技能与练习的描述推断其工作性质。",
+      "stemTranslationZh": "下列哪一项最能描述 Titterton 在台上的工作？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "无聊的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Titterton's job on stage is boring.",
+            "explanation": "原文未提及这份工作枯燥无聊，反而强调技能多、需大量练习，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "报酬丰厚的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Titterton's job on stage is well-paid.",
+            "explanation": "原文未提及这份工作报酬丰厚，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "要求高的；费心力的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-b-3",
+              "quote": "A lot of skills are needed for the job.",
+              "anchor": "这份工作需要很多技能"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-i-reading-b-4",
+              "quote": "Being a page turner requires plenty of practice.",
+              "anchor": "需要大量练习"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "危险的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the draft wind from the turn caused the spare pages to fall off the stand",
+            "sourceHighlight": "the spare pages to fall off the stand",
+            "optionText": "Dangerous.",
+            "optionHighlight": "Dangerous",
+            "explanation": "原文仅描述备用谱被气流吹落这一小插曲，被夸大为整份工作“危险”，属程度夸大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-b-5",
+              "quote": "the draft wind from the turn caused the spare pages to fall off the stand",
+              "anchor": "气流把备用谱吹落"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Demanding.",
+          "sourceRole": "correctOption",
+          "targetText": "A lot of skills are needed for the job.",
+          "targetParagraphId": "para-2021-i-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "Demanding（要求高、费心力）对应原文 A lot of skills are needed 与 requires plenty of practice，由工作需要诸多技能与练习推断其 demanding。"
+        }
+      ]
+    },
+    "q-2021-i-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Titterton 需要练习的具体内容，对应第四段关于点头示意的描述。",
+      "stemTranslationZh": "Titterton 需要练习什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "数页数。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "require up to 50 page turns",
+            "optionText": "Counting the pages.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文 page turns 中 page 一词制造干扰，原文只说翻页次数多，并未要求练习“数页数”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-b-4",
+              "quote": "require up to 50 page turns",
+              "anchor": "多达50次翻页"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "识别“点头”示意。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-b-4",
+              "quote": "each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner",
+              "anchor": "需练习识别点头示意"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "接住下落的物体。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Luckily I was able to catch them and put them back.",
+            "sourceHighlight": "catch them",
+            "optionText": "Catching falling objects.",
+            "optionHighlight": "Catching falling objects",
+            "explanation": "原文中接住吹落的谱页只是一次偶发的幸运举动，被泛化成需要练习的常规技能，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-b-5",
+              "quote": "Luckily I was able to catch them and put them back.",
+              "anchor": "幸好及时接住"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "以自己的风格表演。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "each pianist has their own style of “nodding” to indicate a page turn",
+            "sourceEntity": "each pianist has their own style",
+            "optionText": "Performing in his own style.",
+            "optionEntity": "his own style",
+            "explanation": "拥有自己风格的是每位钢琴家（own style of nodding），而非翻谱员 Titterton，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-b-4",
+              "quote": "each pianist has their own style of “nodding” to indicate a page turn",
+              "anchor": "钢琴家有自己的点头风格"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Recognizing the “nodding”.",
+          "sourceRole": "correctOption",
+          "targetText": "each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner",
+          "targetParagraphId": "para-2021-i-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "选项 Recognizing the “nodding” 对应原文中钢琴家以 “nodding” 示意翻页且需与翻谱员一起练习，是对该练习内容的同义概括。"
+        }
+      ]
+    },
+    "q-2021-i-027": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Raspopova 丈夫被称为“最差翻谱员”的原因，对应最后一段她的解释。",
+      "stemTranslationZh": "为什么 Raspopova 的丈夫是“最差的翻谱员”？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他视力很差。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Her husband has very poor eyesight.",
+            "explanation": "原文未提及丈夫视力差，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他无视观众。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Her husband ignores the audience.",
+            "explanation": "原文未提及丈夫无视观众，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他对音乐不感兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "He’s interested in the music, feeling every note",
+            "sourceHighlight": "interested in the music",
+            "optionText": "He has no interest in music.",
+            "optionHighlight": "no interest in music",
+            "explanation": "原文说丈夫对音乐很感兴趣、沉醉于每个音符，选项却说他对音乐毫无兴趣，正好相反，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-b-7",
+              "quote": "He’s interested in the music, feeling every note",
+              "anchor": "他对音乐很感兴趣"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他忘记做自己的工作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-b-7",
+              "quote": "He’s interested in the music, feeling every note, and I have to say: ‘Turn, turn!’",
+              "anchor": "沉醉音乐而需提醒翻页"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He forgets to do his job.",
+          "sourceRole": "correctOption",
+          "targetText": "He’s interested in the music, feeling every note, and I have to say: ‘Turn, turn!’",
+          "targetParagraphId": "para-2021-i-reading-b-7",
+          "relationType": "paraphrase",
+          "note": "丈夫沉醉音乐以致妻子要催促 ‘Turn, turn!’，对应选项 forgets to do his job，即忘记翻谱这一本职工作。"
+        }
+      ]
+    },
+    "q-2021-i-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查北美水禽数量下降的原因这一细节。",
+      "stemTranslationZh": "北美水禽数量下降的原因之一是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "湿地的丧失。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-c-1",
+              "quote": "Millions of acres of wetlands were dried to feed and house the ever-increasing populations, greatly reducing waterfowl habitat.",
+              "anchor": "湿地被排干，水禽栖息地大幅减少"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "水上运动的流行。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Millions of waterfowl (水禽) were killed at the hands of market hunters and a handful of overly ambitious sportsmen.",
+            "sourceEntity": "market hunters and a handful of overly ambitious sportsmen",
+            "optionText": "Popularity of water sports.",
+            "optionEntity": "water sports",
+            "explanation": "原文导致水禽减少的是市场猎人和少数过度热衷的猎手（sportsmen），而非水上运动（water sports）的流行；选项把人物对象偷换成了运动项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-1",
+              "quote": "Millions of waterfowl (水禽) were killed at the hands of market hunters and a handful of overly ambitious sportsmen.",
+              "anchor": "猎人捕杀，与水上运动无关"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "河流的污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pollution of rivers caused the waterfowl population decline.",
+            "explanation": "原文未提及河流污染，只提到捕杀与湿地被排干，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "其他野生动物的到来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Arrival of other wild animals caused the decline.",
+            "explanation": "原文未提及其他野生动物的到来导致水禽减少，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "cause of the waterfowl population decline",
+          "sourceRole": "stem",
+          "targetText": "greatly reducing waterfowl habitat",
+          "targetParagraphId": "para-2021-i-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "题干的 cause of ... decline 对应原文湿地被排干 greatly reducing waterfowl habitat，湿地（栖息地）减少即数量下降的原因。"
+        }
+      ]
+    },
+    "q-2021-i-029": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查根据上下文推测划线词 decimate 的含义。",
+      "stemTranslationZh": "第一段中划线词 “decimate” 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "获取。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Unfortunately, it took the explorers and the settlers who followed only a few decades to decimatea large part of these resources.",
+            "sourceHighlight": "Unfortunately",
+            "optionText": "Acquire.",
+            "optionHighlight": "Acquire",
+            "explanation": "原文用 Unfortunately 表明这是破坏性的负面行为，acquire（获取）方向相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-1",
+              "quote": "Unfortunately, it took the explorers and the settlers who followed only a few decades to decimatea large part of these resources.",
+              "anchor": "Unfortunately 提示负面破坏含义"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "出口。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "decimate means to export resources",
+            "explanation": "原文未提及把资源出口，export 与上下文破坏资源之意无关，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "破坏；毁灭。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-c-1",
+              "quote": "Millions of waterfowl (水禽) were killed at the hands of market hunters",
+              "anchor": "下文 killed 印证 decimate=破坏/毁灭"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2021-i-reading-c-1",
+              "quote": "Unfortunately, it took the explorers and the settlers who followed only a few decades to decimatea large part of these resources.",
+              "anchor": "Unfortunately + 大量资源被毁"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "分配；分发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "decimate means to distribute resources",
+            "explanation": "原文未提及分配资源，distribute 与上下文资源遭破坏之意不符，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Destroy",
+          "sourceRole": "correctOption",
+          "targetText": "Millions of waterfowl (水禽) were killed at the hands of market hunters",
+          "targetParagraphId": "para-2021-i-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确项 Destroy 与下文 killed、Unfortunately 等负面信息同义照应，可推知 decimate 意为破坏/毁灭。"
+        }
+      ]
+    },
+    "q-2021-i-030": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查1934年法案带来的直接结果这一细节。",
+      "stemTranslationZh": "1934年通过的这项法案带来的直接结果是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "邮票价格已经下降。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The stamp price has gone down.",
+            "explanation": "原文未提及鸭票价格下降，只说猎人愿意付钱购买，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "候鸟已经飞走了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+            "sourceHighlight": "stop the destruction of migratory (迁徙的) waterfowl",
+            "optionText": "The migratory birds have flown away.",
+            "optionHighlight": "have flown away",
+            "explanation": "法案是为保护候鸟、阻止其遭破坏并保障其存活，结果应是候鸟得到保护，而非飞走，方向相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-2",
+              "quote": "an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+              "anchor": "法案旨在保护候鸟而非使其飞走"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "猎人们已经停止狩猎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+            "sourceHighlight": "must annually purchase and carry a Federal Duck Stamp",
+            "optionText": "The hunters have stopped hunting.",
+            "optionHighlight": "stopped hunting",
+            "explanation": "法案要求猎人购买并携带鸭票，并非让猎人停止狩猎；选项夸大为完全停止狩猎，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-2",
+              "quote": "all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+              "anchor": "要求购票而非停止狩猎"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "政府已经筹集到了资金。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-c-2",
+              "quote": "all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+              "anchor": "猎人须每年购票，政府由此筹集资金"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2021-i-reading-c-3",
+              "quote": "Since 1934, better than half a billion dollars has gone into that Fund",
+              "anchor": "自1934年起已筹得逾五亿美元"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "direct result of the Act",
+          "sourceRole": "stem",
+          "targetText": "all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp.",
+          "targetParagraphId": "para-2021-i-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "题干问法案的直接结果，对应原文规定猎人须每年购票，购票即为政府筹集了资金 collected money。"
+        },
+        {
+          "sourceText": "The government has collected money.",
+          "sourceRole": "correctOption",
+          "targetText": "Since 1934, better than half a billion dollars has gone into that Fund",
+          "targetParagraphId": "para-2021-i-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "正确项 collected money 与原文 half a billion dollars has gone into that Fund 同义照应，印证筹得资金。"
+        }
+      ]
+    },
+    "q-2021-i-031": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查为全文选择最合适的标题，需把握全文主旨。",
+      "stemTranslationZh": "下列哪一项适合作为本文的标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "联邦鸭票的故事",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-c-2",
+              "quote": "The very first Federal Duck Stamp was designed by J. N. “Ding” Darling",
+              "anchor": "全文围绕 Federal Duck Stamp 展开"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2021-i-reading-c-3",
+              "quote": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
+              "anchor": "结尾点题，鸭票项目最成功"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "国家野生动物保护区系统",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "for inclusion into the National Wildlife Refuge System",
+            "sourceHighlight": "National Wildlife Refuge System",
+            "optionText": "The National Wildlife Refuge System",
+            "optionHighlight": "The National Wildlife Refuge System",
+            "explanation": "National Wildlife Refuge System 只是第三段中鸭票资金购地的归属系统，是局部细节，不能概括全文，以偏概全。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-3",
+              "quote": "for inclusion into the National Wildlife Refuge System",
+              "anchor": "仅为第三段局部细节"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "拯救水禽的好处",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "so vital to their survival",
+            "sourceHighlight": "survival",
+            "optionText": "The Benefits of Saving Waterfowl",
+            "optionHighlight": "Benefits of Saving Waterfowl",
+            "explanation": "全文重点是鸭票项目本身及其运作与成效，而非泛泛讨论拯救水禽的种种好处；该标题偏离主线，范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-2",
+              "quote": "so vital to their survival",
+              "anchor": "保护水禽只是背景，非全文主旨"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "候鸟狩猎的历史",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Migratory Bird Hunting Stamp Act",
+            "optionText": "The History of Migratory Bird Hunting",
+            "matchType": "exact",
+            "relationNote": "选项借用原文法案名称中的 Migratory Bird Hunting 字样设钩，但全文讲的是鸭票保护项目，并非候鸟狩猎的历史。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-c-2",
+              "quote": "the Migratory Bird Hunting Stamp Act",
+              "anchor": "借法案名称设词钩，非讲狩猎历史"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The Federal Duck Stamp Story",
+          "sourceRole": "correctOption",
+          "targetText": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
+          "targetParagraphId": "para-2021-i-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "全文从问题到法案到成效都围绕 Federal Duck Stamp 展开，结尾点明其为最成功的保护项目，故标题 The Federal Duck Stamp Story 最能概括全文。"
+        }
+      ]
+    },
+    "q-2021-i-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对情商常见误解的细节理解，定位第一段对误解内容的描述。",
+      "stemTranslationZh": "关于情商，一个常见的误解是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它可以用智商测试来衡量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Many people now misunderstand emotional intelligence as almost everything desirable in a person’s makeup that cannot be measured by an IQ test",
+            "sourceHighlight": "cannot be measured by an IQ test",
+            "optionText": "It can be measured by an IQ test.",
+            "optionHighlight": "can be measured by an IQ test",
+            "explanation": "原文说人们误解的内容是那些无法（cannot）用智商测试衡量的品质，该选项却说情商可以（can）用智商测试衡量，正反颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-1",
+              "quote": "that cannot be measured by an IQ test",
+              "anchor": "无法被智商测试衡量"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它有助于锻炼一个人的头脑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It helps to exercise a person's mind.",
+            "explanation": "原文未提及情商有助于锻炼人的头脑，属于无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它包含一套情感技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "We prefer to describe emotional intelligence as a specific set of skills that can be used for either good or bad purposes.",
+            "sourceEntity": "We prefer to describe emotional intelligence as a specific set of skills",
+            "optionText": "It includes a set of emotional skills.",
+            "optionEntity": "It includes a set of emotional skills",
+            "explanation": "把情商描述为一套情感技能是作者本人的准确定义，而非题干所问的常见误解，对象张冠李戴。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-2",
+              "quote": "We prefer to describe emotional intelligence as a specific set of skills",
+              "anchor": "作者的准确定义"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它指的是一个人的积极品质。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-d-1",
+              "quote": "Many people now misunderstand emotional intelligence as almost everything desirable in a person’s makeup",
+              "anchor": "误解为一切可取的品质"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-i-reading-d-1",
+              "quote": "such as character, motivation, confidence, mental stability, optimism and “people skills.”",
+              "anchor": "列举的积极品质"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "a person's positive qualities",
+          "sourceRole": "correctOption",
+          "targetText": "almost everything desirable in a person’s makeup",
+          "targetParagraphId": "para-2021-i-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项的 positive qualities 同义替换原文的 everything desirable in a person’s makeup，desirable 即积极、可取的品质。"
+        },
+        {
+          "sourceText": "common misunderstanding",
+          "sourceRole": "stem",
+          "targetText": "Many people now misunderstand emotional intelligence",
+          "targetParagraphId": "para-2021-i-reading-d-1",
+          "relationType": "locationCue",
+          "note": "题干的 common misunderstanding 由原文 Many people now misunderstand 定位，many people 对应 common（普遍）。"
+        }
+      ]
+    },
+    "q-2021-i-033": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查对第二段举例（doctor 与 cheater）写作意图的理解，判断举例服务于说明哪个观点。",
+      "stemTranslationZh": "作者在第二段提到“医生”和“骗子”是为了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了解释一条规则。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To explain a rule.",
+            "explanation": "原文第二段是定义和举例，并未提出或解释任何规则，属于无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了阐明一个概念。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-d-2",
+              "quote": "We prefer to describe emotional intelligence as a specific set of skills that can be used for either good or bad purposes.",
+              "anchor": "提出情商可善可恶的概念"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-i-reading-d-2",
+              "quote": "The ability to accurately understand how others are feeling may be used by a doctor to find how best to help her patients, while a cheater might use it to control potential victims.",
+              "anchor": "举医生与骗子说明该概念"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了陈述一个事实。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The ability to accurately understand how others are feeling may be used by a doctor to find how best to help her patients, while a cheater might use it to control potential victims.",
+            "sourceHighlight": "may be used by a doctor",
+            "optionText": "To present a fact.",
+            "optionHighlight": "a fact",
+            "explanation": "医生与骗子是为阐明“情商可用于善或恶”这一概念而设的对比例证，并非孤立地陈述某个事实，把举例说理弱化为单纯陈述事实。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-2",
+              "quote": "while a cheater might use it to control potential victims",
+              "anchor": "举例服务于说理"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了做出一个预测。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To make a prediction.",
+            "explanation": "举医生与骗子的例子是为说明当下情商的中性用途，没有对未来做任何预测，属于无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To clarify a concept",
+          "sourceRole": "correctOption",
+          "targetText": "We prefer to describe emotional intelligence as a specific set of skills that can be used for either good or bad purposes.",
+          "targetParagraphId": "para-2021-i-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 clarify a concept 对应原文先给出 describe ... as a specific set of skills 的概念，再用 doctor/cheater 举例加以阐明。"
+        },
+        {
+          "sourceText": "doctor",
+          "sourceRole": "stem",
+          "targetText": "may be used by a doctor to find how best to help her patients",
+          "targetParagraphId": "para-2021-i-reading-d-2",
+          "relationType": "locationCue",
+          "note": "题干 doctor 直接定位到原文 a doctor to find how best to help her patients，说明情商用于善意目的。"
+        }
+      ]
+    },
+    "q-2021-i-034": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查作者对情商普及化的态度，定位第三段表明立场的评价性语句。",
+      "stemTranslationZh": "作者对情商普及化的态度是怎样的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "赞同的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-d-3",
+              "quote": "the overall effects of the publicity have been more beneficial than harmful",
+              "anchor": "普及整体利大于弊"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-i-reading-d-3",
+              "quote": "The most positive aspect of this popularization is a new and much needed emphasis (重视) on emotion",
+              "anchor": "最积极的方面"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "无法容忍的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the overall effects of the publicity have been more beneficial than harmful",
+            "sourceHighlight": "more beneficial than harmful",
+            "optionText": "Intolerant.",
+            "optionHighlight": "Intolerant",
+            "explanation": "原文认为普及利大于弊，是肯定态度，Intolerant（无法容忍）是强烈否定，态度完全相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-3",
+              "quote": "more beneficial than harmful",
+              "anchor": "利大于弊"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "怀疑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Although popular beliefs regarding emotional intelligence run far ahead of what research can reasonably support, the overall effects of the publicity have been more beneficial than harmful.",
+            "sourceHighlight": "run far ahead of what research can reasonably support",
+            "optionText": "Doubtful.",
+            "optionHighlight": "Doubtful",
+            "explanation": "作者仅在让步从句中指出大众观念超前于研究支持，但主句明确肯定整体利大于弊，把局部保留夸大为对普及整体持怀疑态度。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-3",
+              "quote": "run far ahead of what research can reasonably support",
+              "anchor": "仅为让步保留"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不明确的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the overall effects of the publicity have been more beneficial than harmful",
+            "sourceHighlight": "more beneficial than harmful",
+            "optionText": "Unclear.",
+            "optionHighlight": "Unclear",
+            "explanation": "作者用 more beneficial than harmful 与 most positive aspect 明确表达了肯定立场，态度清晰，并非不明确。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-3",
+              "quote": "the overall effects of the publicity have been more beneficial than harmful",
+              "anchor": "态度明确"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Favorable",
+          "sourceRole": "correctOption",
+          "targetText": "the overall effects of the publicity have been more beneficial than harmful",
+          "targetParagraphId": "para-2021-i-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 Favorable（赞同的）对应原文 more beneficial than harmful 以及 most positive aspect 所传达的肯定态度。"
+        },
+        {
+          "sourceText": "attitude to the popularization",
+          "sourceRole": "stem",
+          "targetText": "The most positive aspect of this popularization",
+          "targetParagraphId": "para-2021-i-reading-d-3",
+          "relationType": "locationCue",
+          "note": "题干 popularization 定位到原文 this popularization，positive aspect 体现作者态度。"
+        }
+      ]
+    },
+    "q-2021-i-035": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查末段主旨，判断最后一段围绕情商主要谈论的内容。",
+      "stemTranslationZh": "关于情商，最后一段主要谈论了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它对公众的吸引力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Although the continuing popular appeal of emotional intelligence is desirable, we hope that such attention will excite a greater interest in the scientific and scholarly study of emotion.",
+            "sourceHighlight": "Although the continuing popular appeal of emotional intelligence is desirable",
+            "optionText": "Its appeal to the public.",
+            "optionHighlight": "Its appeal to the public",
+            "explanation": "对公众的吸引力只出现在让步从句中作为铺垫，并非末段主旨，把次要信息当成主要内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-4",
+              "quote": "the continuing popular appeal of emotional intelligence is desirable",
+              "anchor": "仅为让步铺垫"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对未来研究的期望。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-i-reading-d-4",
+              "quote": "we hope that such attention will excite a greater interest in the scientific and scholarly study of emotion",
+              "anchor": "期望激发科学研究兴趣"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-i-reading-d-4",
+              "quote": "It is our hope that in coming decades, advances in science will offer new perspectives (视角) from which to study how people manage their lives.",
+              "anchor": "期望未来科学带来新视角"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的实际应用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its practical application.",
+            "explanation": "末段表达的是对未来研究的期望，并未谈论情商的实际应用，属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "拥有新视角的科学家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "advances in science will offer new perspectives (视角) from which to study how people manage their lives",
+            "sourceEntity": "advances in science will offer new perspectives",
+            "optionText": "Scientists with new perspectives.",
+            "optionEntity": "Scientists with new perspectives",
+            "explanation": "原文说的是科学进步将提供新视角，主体是 advances in science 与 new perspectives，而非“拥有新视角的科学家”，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-i-reading-d-4",
+              "quote": "advances in science will offer new perspectives",
+              "anchor": "主体是科学进步而非科学家"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Expectations for future studies",
+          "sourceRole": "correctOption",
+          "targetText": "we hope that such attention will excite a greater interest in the scientific and scholarly study of emotion",
+          "targetParagraphId": "para-2021-i-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 Expectations for future studies 同义替换原文 we hope ... study of emotion 与 It is our hope that in coming decades，hope 对应 expectations，coming decades 对应 future。"
+        },
+        {
+          "sourceText": "the last paragraph mainly talk about",
+          "sourceRole": "stem",
+          "targetText": "It is our hope that in coming decades, advances in science will offer new perspectives",
+          "targetParagraphId": "para-2021-i-reading-d-4",
+          "relationType": "locationCue",
+          "note": "题干问末段主旨，原文反复出现 we hope / It is our hope，定位到对未来研究的期望。"
+        }
+      ]
+    }
+  }
+}

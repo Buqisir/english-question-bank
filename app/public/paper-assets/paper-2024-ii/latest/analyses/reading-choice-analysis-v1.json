@@ -1,0 +1,1594 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2024-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-ii-reading-a",
+    "group-2024-ii-reading-b",
+    "group-2024-ii-reading-c",
+    "group-2024-ii-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2024-ii-reading-a": {
+      "overview": "本文是一则关于 Carlow Autumn Walking Festival 的应用文（活动广告），向初级、有经验和高级徒步者介绍四条不同的徒步路线，每条路线列出主题介绍、日期时间、出发地点和时长。",
+      "discourseStructure": {
+        "summary": "先用标题与引言总述徒步节面向各类徒步者并提供山地与林地两类体验，随后按 Walk 1–Walk 4 分块介绍每条路线，每块包含主题描述及日期、出发点、时长等参数。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-ii-reading-a-1",
+            "summary": "活动总标题，面向初级与有经验徒步者的路线选择。",
+            "function": "总标题，点明文章主题"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-2",
+            "summary": "引言介绍 Carlow Autumn Walking Festival 适合各类徒步者，可体验山地挑战或林地宁静。",
+            "function": "引言，概述活动与受众"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-3",
+            "summary": "Walk 1 的子标题：The Natural World。",
+            "function": "小标题，引出第一条路线"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-4",
+            "summary": "由环保人士 Éanna Lamhna 带队，介绍 Blackstairs 的栖息地与自然世界。",
+            "function": "细节描述，介绍 Walk 1 内容"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-5",
+            "summary": "Walk 1 的日期时间：10月1日周六9点。",
+            "function": "参数信息（日期时间）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-6",
+            "summary": "Walk 1 的出发点：Scratoes Bridge。",
+            "function": "参数信息（出发点）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-7",
+            "summary": "Walk 1 的时长：6小时。",
+            "function": "参数信息（时长）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-8",
+            "summary": "Walk 2 的子标题：Introduction to Hillwalking。",
+            "function": "小标题，引出第二条路线"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-9",
+            "summary": "由经验丰富的向导 Emmanuel Chappard 带队，介绍山地徒步所需技能。",
+            "function": "细节描述，介绍 Walk 2 内容"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-10",
+            "summary": "Walk 2 的日期时间：10月2日周日9点。",
+            "function": "参数信息（日期时间）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-11",
+            "summary": "Walk 2 的出发点：Deerpark Car Park。",
+            "function": "参数信息（出发点）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-12",
+            "summary": "Walk 2 的时长：5小时。",
+            "function": "参数信息（时长）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-13",
+            "summary": "Walk 3 的子标题：Moonlight Under the Stars。",
+            "function": "小标题，引出第三条路线"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-14",
+            "summary": "夜间徒步介绍：可欣赏低地美景，由本地俱乐部向导陪同；强调手电筒与合适衣物为必需，着装不当者将被拒绝参加。",
+            "function": "细节描述，介绍 Walk 3 内容与参加要求"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-15",
+            "summary": "Walk 3 的日期时间：10月1日周六18:30。",
+            "function": "参数信息（日期时间）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-16",
+            "summary": "Walk 3 的出发点：The Town Hall。",
+            "function": "参数信息（出发点）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-17",
+            "summary": "Walk 3 的时长：3小时。",
+            "function": "参数信息（时长）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-18",
+            "summary": "Walk 4 的子标题：Photographic Walk in Kilbrannish Forest。",
+            "function": "小标题，引出第四条路线"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-19",
+            "summary": "由 Richard Smyth 带队，介绍野外摄影基本原理，沿铺设良好的林间小路行走。",
+            "function": "细节描述，介绍 Walk 4 内容"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-20",
+            "summary": "Walk 4 的日期时间：10月2日周日11:45。",
+            "function": "参数信息（日期时间）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-21",
+            "summary": "Walk 4 的出发点：Kilbrannish Forest Recreation Area。",
+            "function": "参数信息（出发点）"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-a-22",
+            "summary": "Walk 4 的时长：1.5小时。",
+            "function": "参数信息（时长）"
+          }
+        ]
+      }
+    },
+    "group-2024-ii-reading-b": {
+      "overview": "本文是一篇新闻报道，介绍旧金山湾区捷运系统（BART）在检票口设置的故事亭（kiosk）项目：乘客可按时长选择并打印纸质短篇故事，旨在改善乘车体验、推介本地作家，并探讨短篇故事能否提振日渐下滑的公共交通客流量。",
+      "discourseStructure": {
+        "summary": "由日常场景引入（忘带读物）→ 提出解决方案（故事亭）→ 通过 BART 官员 Trost 的访谈逐层展开：项目运作方式、已有成效、面向本地作家的征稿比赛、对客流量下滑的回应与乐观判断，结尾以一句呼应开头收束。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-ii-reading-b-1",
+            "summary": "以乘客到车站才发现忘带读物的常见场景开篇，指出很多人仍喜欢阅读纸质印刷品。",
+            "function": "引入话题，制造代入感与阅读需求的背景。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-2",
+            "summary": "点明在旧金山湾区设有专门应对这一需求的故事亭。",
+            "function": "承上提出解决方案，引出下文。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-3",
+            "summary": "BART 首席传播官 Trost 介绍故事亭的运作：进站后可选择一分钟、三分钟或五分钟的故事，机器打印出收据式的短篇故事。",
+            "function": "通过权威人物之口说明项目的具体操作方式。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-4",
+            "summary": "项目自去年三月推出以来已打印近两万篇短篇故事和诗歌，既有经典也有新创作。",
+            "function": "用数据说明项目运行规模与成效。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-5",
+            "summary": "Trost 希望把本地作家介绍给本地乘客，发起面向湾区艺术家的征稿比赛，目前已收到约120份投稿，获奖作品将进入故事亭。",
+            "function": "展开项目的延伸举措——征稿比赛与扶持本地作家。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-6",
+            "summary": "指出全国公共交通客流量过去半个世纪一直下滑，提出短篇故事能否拯救公共交通的疑问。",
+            "function": "提出核心问题，承接下文 Trost 的观点。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-7",
+            "summary": "Trost 认为可以。",
+            "function": "以极简一句给出态度，制造悬念引出解释。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-8",
+            "summary": "Trost 表示所有交通机构都在尽力改善乘车体验，她坚信会因短篇故事而吸引更多乘客。",
+            "function": "阐明 Trost 对未来的乐观判断及其理由。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-b-9",
+            "summary": "以乘客再也不会无读物可读收尾。",
+            "function": "首尾呼应，点题收束。"
+          }
+        ]
+      }
+    },
+    "group-2024-ii-reading-c": {
+      "overview": "本文是一篇说明文，介绍室内园艺系统 Babylon Micro-Farm（BMF）。文章先指出普通蔬果运输距离长，引出 BMF 能缩短从田间到餐桌的距离，随后说明其适用对象、依托的新技术、环保优势，最后介绍 BMF 员工践行可持续生活方式。",
+      "discourseStructure": {
+        "summary": "全文按\"问题引入—产品介绍—技术细节—环保效益—企业文化\"展开，层层递进地说明 BMF 的优势。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-ii-reading-c-1",
+            "summary": "指出新鲜最好，但多数蔬果运输路途遥远，而 BMF 比农贸市场更能缩短这段路程。",
+            "function": "提出问题并引出 BMF，点明其缩短田间到餐桌距离的核心卖点。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-c-2",
+            "summary": "说明 BMF 是一套室内园艺系统，可供家庭使用，也可服务医院、餐厅或学校等更大群体，且省力可靠地稳定供应新鲜蔬菜。",
+            "function": "介绍 BMF 的性质与适用对象。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-c-3",
+            "summary": "详述 BMF 依托的新技术：云端远程监控、实时数据 app、自动化精准供水、收获后更换预播种容器开始新的生长周期。",
+            "function": "说明 BMF 的技术运作细节。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-c-4",
+            "summary": "说明在同一建筑内种植食用可实现零运输排放，且无需使用污染环境的农药和化学品。",
+            "function": "阐述 BMF 的环保效益。"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-c-5",
+            "summary": "介绍 BMF 员工在日常生活中践行可持续理念：步行或骑车上班、鼓励回收减废、避免一次性塑料。",
+            "function": "通过企业文化呼应全文的环保主题。"
+          }
+        ]
+      }
+    },
+    "group-2024-ii-reading-d": {
+      "overview": "本文是一篇书评，推介 Catriona Campbell 所著的 AI by Design: A Plan for Living with Artificial Intelligence。文章介绍该书的写作风格、核心观点（AI 将日益强大，人类必须保持对 AI 的控制并进行全球监管），并在结尾强烈推荐此书。",
+      "discourseStructure": {
+        "summary": "全文按\"引出书—评价写作风格—介绍书的核心论点（AI 发展趋势与风险）—Campbell 的呼吁（唤醒责任方、全球监管）—总评推荐\"的顺序展开。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-ii-reading-d-1",
+            "summary": "指出 AI 将深刻改变生活，引出 Campbell 的新书 AI by Design，称其为应对 AI 变革的实用路线图。",
+            "function": "引入主题与评介对象"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-d-2",
+            "summary": "评价该书的可读性：Campbell 凭借二十多年把高深内容转化为易懂表达的经验，以商务人士而非学者的角度写作，使本书通俗易懂、信息丰富。",
+            "function": "评价写作风格与可读性"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-d-3",
+            "summary": "介绍书中观点：AI 将从当前的\"窄 AI\"发展到通用人工智能乃至主导型人工智能；因此 Campbell 提前数十年提醒人们必须掌控 AI，否则将被边缘化甚至更糟。",
+            "function": "概述书的核心论点与风险"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-d-4",
+            "summary": "阐述 Campbell 的目的：唤醒科技公司和世界领导人，与专家达成共识；指出人类正处于历史\"临界点\"，必须立即行动，通过结构化思考与全球监管避免灾难。",
+            "function": "阐明作者呼吁与解决路径"
+          },
+          {
+            "paragraphId": "para-2024-ii-reading-d-5",
+            "summary": "总结强调 AI 将影响所有人，并强力推荐：若只读一本关于 AI 的书，就读这本。",
+            "function": "总评与推荐"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-ii-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对四条路线时长参数的比较，找出耗时最短的一条。",
+      "stemTranslationZh": "哪条徒步路线耗时最短？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "自然世界。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Walk Duration: 6 hours",
+            "sourceHighlight": "6 hours",
+            "optionText": "The Natural World.",
+            "optionHighlight": "The Natural World.",
+            "explanation": "Walk 1（The Natural World）的时长为 6 hours，是四条路线中最长的，与题干所问“最短”相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-7",
+              "quote": "Walk Duration: 6 hours",
+              "anchor": "Walk 1 时长 6 小时"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "山地徒步入门。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Walk Duration: 5 hours",
+            "sourceHighlight": "5 hours",
+            "optionText": "Introduction to Hillwalking.",
+            "optionHighlight": "Introduction to Hillwalking.",
+            "explanation": "Walk 2（Introduction to Hillwalking）的时长为 5 hours，远多于 Walk 4 的 1.5 hours，不是最短。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-12",
+              "quote": "Walk Duration: 5 hours",
+              "anchor": "Walk 2 时长 5 小时"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "星空下的月光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Walk Duration: 3 hours",
+            "sourceHighlight": "3 hours",
+            "optionText": "Moonlight Under the Stars.",
+            "optionHighlight": "Moonlight Under the Stars.",
+            "explanation": "Walk 3（Moonlight Under the Stars）的时长为 3 hours，多于 Walk 4 的 1.5 hours，不是最短。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-17",
+              "quote": "Walk Duration: 3 hours",
+              "anchor": "Walk 3 时长 3 小时"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Kilbrannish 森林摄影徒步。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-a-22",
+              "quote": "Walk Duration: 1.5 hours",
+              "anchor": "Walk 4 时长 1.5 小时"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2024-ii-reading-a-7",
+              "quote": "Walk Duration: 6 hours",
+              "anchor": "Walk 1 时长 6 小时（对比）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "takes the shortest time",
+          "sourceRole": "stem",
+          "targetText": "Walk Duration: 1.5 hours",
+          "targetParagraphId": "para-2024-ii-reading-a-22",
+          "relationType": "calculation",
+          "note": "题干 takes the shortest time（耗时最短）需逐一比较各 Walk Duration：6h、5h、3h、1.5h，1.5 hours 最短，对应 Walk 4。"
+        }
+      ]
+    },
+    "q-2024-ii-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Walk 3 段落中参加者要求这一细节的定位与同义理解。",
+      "stemTranslationZh": "参加 Walk 3 的人被要求做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "穿着合适的衣物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-a-14",
+              "quote": "A torch (手电筒) along with suitable clothing is essential for walking in the dark.",
+              "anchor": "合适衣物为必需"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2024-ii-reading-a-14",
+              "quote": "Those who are dressed inappropriately will be refused permission to participate.",
+              "anchor": "着装不当者将被拒绝参加"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "加入一个徒步俱乐部。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "welcoming guides from local walking clubs",
+            "optionText": "Join a walking club.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 walking clubs 仅指陪同的本地俱乐部向导（welcoming guides from local walking clubs），并非要求参加者加入俱乐部；选项借用 walking club 词钩制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-14",
+              "quote": "welcoming guides from local walking clubs",
+              "anchor": "本地俱乐部的向导"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "获得特别许可。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "will be refused permission to participate",
+            "optionText": "Get special permits.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 permission 指着装不当者会被“拒绝参加的许可”，并非要求参加者去“办理特别许可证”；选项用 permit 与 permission 的同词族制造误导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-14",
+              "quote": "will be refused permission to participate",
+              "anchor": "将被拒绝参加许可"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "带上一本生存指南。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Bring a survival guide.",
+            "explanation": "原文未提及需要携带生存指南（survival guide），只要求带手电筒和合适衣物，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Wear proper clothes",
+          "sourceRole": "correctOption",
+          "targetText": "A torch (手电筒) along with suitable clothing is essential for walking in the dark.",
+          "targetParagraphId": "para-2024-ii-reading-a-14",
+          "relationType": "paraphrase",
+          "note": "选项 Wear proper clothes（穿着合适衣物）对应原文 suitable clothing is essential，proper 与 suitable 同义替换。"
+        },
+        {
+          "sourceText": "required to do",
+          "sourceRole": "stem",
+          "targetText": "Those who are dressed inappropriately will be refused permission to participate.",
+          "targetParagraphId": "para-2024-ii-reading-a-14",
+          "relationType": "locationCue",
+          "note": "题干 required to do（被要求做）可由原文“着装不当者将被拒绝参加”反向定位到“着装合适”这一参加条件。"
+        }
+      ]
+    },
+    "q-2024-ii-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对四条路线日期参数的归纳，找出它们的共同点。",
+      "stemTranslationZh": "这四条徒步路线有什么共同之处？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们都涉及高难度的攀登。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They involve difficult climbing.",
+            "explanation": "原文未提及四条路线都涉及高难度攀登；Walk 4 是铺设良好的林间小路、Walk 3 是夜间欣赏低地美景，并非都需要 difficult climbing，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们都是为有经验的徒步者准备的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "The Carlow Autumn Walking Festival is a great opportunity for the beginner, experienced or advanced walker",
+            "sourceHighlight": "the beginner, experienced or advanced walker",
+            "optionText": "They are for experienced walkers.",
+            "optionHighlight": "for experienced walkers",
+            "explanation": "原文说活动面向初级、有经验或高级徒步者（beginner, experienced or advanced），选项把范围缩小为只面向 experienced walkers，以偏概全。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-2",
+              "quote": "The Carlow Autumn Walking Festival is a great opportunity for the beginner, experienced or advanced walker",
+              "anchor": "面向初级/有经验/高级徒步者"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们的出发地点相同。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Start Point: Scratoes Bridge",
+            "sourceHighlight": "Scratoes Bridge",
+            "optionText": "They share the same start point.",
+            "optionHighlight": "the same start point",
+            "explanation": "四条路线的出发点各不相同（Scratoes Bridge、Deerpark Car Park、The Town Hall、Kilbrannish Forest Recreation Area），与选项所说“出发点相同”相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-a-6",
+              "quote": "Start Point: Scratoes Bridge",
+              "anchor": "Walk 1 出发点"
+            },
+            {
+              "paragraphId": "para-2024-ii-reading-a-11",
+              "quote": "Start Point: Deerpark Car Park",
+              "anchor": "Walk 2 出发点（不同）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们都安排在周末。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-a-5",
+              "quote": "Date and Time: Saturday, 1st October, at 09:00",
+              "anchor": "Walk 1 安排在周六"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2024-ii-reading-a-10",
+              "quote": "Date and Time: Sunday, 2nd October, at 09:00",
+              "anchor": "Walk 2 安排在周日"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "scheduled for the weekend",
+          "sourceRole": "correctOption",
+          "targetText": "Date and Time: Saturday, 1st October, at 09:00",
+          "targetParagraphId": "para-2024-ii-reading-a-5",
+          "relationType": "paraphrase",
+          "note": "选项 scheduled for the weekend（安排在周末）对应原文各路线日期均为 Saturday 或 Sunday（Walk1/Walk3 为周六，Walk2/Walk4 为周日），Saturday + Sunday 即 weekend 的同义替换。"
+        },
+        {
+          "sourceText": "have in common",
+          "sourceRole": "stem",
+          "targetText": "Date and Time: Sunday, 2nd October, at 09:00",
+          "targetParagraphId": "para-2024-ii-reading-a-10",
+          "relationType": "locationCue",
+          "note": "题干 have in common（共同点）需归纳四条路线的 Date and Time，发现全部落在 10月1日周六或10月2日周日，即都在周末。"
+        }
+      ]
+    },
+    "q-2024-ii-024": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 BART 启动故事亭项目的目的，需要从全文，尤其是改善乘车体验的表述中归纳原因。",
+      "stemTranslationZh": "BART 为什么启动故事亭项目？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了推广本地文化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Trost also wants to introduce local writers to local riders.",
+            "sourceHighlight": "introduce local writers to local riders",
+            "optionText": "To promote the local culture.",
+            "optionHighlight": "promote the local culture",
+            "explanation": "原文只提到 Trost 想把本地作家介绍给本地乘客，这是项目后续的延伸举措之一，且非启动项目的初衷；选项拔高为推广本地文化，属于范围拔高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-b-5",
+              "quote": "Trost also wants to introduce local writers to local riders.",
+              "anchor": "introduce local writers"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了阻止人们使用手机。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Yes, we all have our phones, but many of us still like to go old school and read something printed.",
+            "optionText": "To discourage phone use.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 phones 一词，仅用于对比说明很多人仍偏爱纸质阅读，并未表达要劝阻使用手机；选项借 phone 一词设钩，曲解为 discourage phone use。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-b-1",
+              "quote": "Yes, we all have our phones, but many of us still like to go old school and read something printed.",
+              "anchor": "we all have our phones"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了满足乘客的需求。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-b-8",
+              "quote": "all transit agencies right now are doing everything they can to improve the rider experience",
+              "anchor": "improve the rider experience"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-b-1",
+              "quote": "many of us still like to go old school and read something printed",
+              "anchor": "like to read something printed"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了降低其运营成本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "BART started the kiosk program to reduce its running costs.",
+            "explanation": "原文未提及该项目与降低运营成本有任何关系，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To meet passengers' needs.",
+          "sourceRole": "correctOption",
+          "targetText": "all transit agencies right now are doing everything they can to improve the rider experience",
+          "targetParagraphId": "para-2024-ii-reading-b-8",
+          "relationType": "paraphrase",
+          "note": "选项 meet passengers' needs 是对原文 improve the rider experience 的同义替换，passengers 对应 rider，needs 对应 experience 改善。"
+        },
+        {
+          "sourceText": "Why did BART start the kiosk program",
+          "sourceRole": "stem",
+          "targetText": "many of us still like to go old school and read something printed",
+          "targetParagraphId": "para-2024-ii-reading-b-1",
+          "relationType": "locationCue",
+          "note": "题干问启动原因，开篇 like to read something printed 点出乘客的阅读需求，是定位项目动因的线索。"
+        }
+      ]
+    },
+    "q-2024-ii-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查故事亭中故事的分类依据，需定位 Trost 介绍故事亭操作方式的细节。",
+      "stemTranslationZh": "故事亭里的故事是按什么分类的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "按受欢迎程度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The stories are categorized by popularity.",
+            "explanation": "原文未提及按受欢迎程度分类，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "按长度。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-b-3",
+              "quote": "it tells you can get a one-minute, a three-minute, or a five-minute story",
+              "anchor": "one-minute, three-minute, or five-minute"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-b-3",
+              "quote": "You choose which length you want and it gives you a receipt-like short story.",
+              "anchor": "choose which length you want"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "按主题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The stories are categorized by theme.",
+            "explanation": "原文只按时长（长度）划分故事，并未提及按主题分类，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "按语言。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The stories are categorized by language.",
+            "explanation": "原文未提及按语言分类，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By length.",
+          "sourceRole": "correctOption",
+          "targetText": "You choose which length you want and it gives you a receipt-like short story.",
+          "targetParagraphId": "para-2024-ii-reading-b-3",
+          "relationType": "locationCue",
+          "note": "选项 By length 直接对应原文 choose which length you want，length 一词为定位关键。"
+        },
+        {
+          "sourceText": "How are the stories categorized",
+          "sourceRole": "stem",
+          "targetText": "it tells you can get a one-minute, a three-minute, or a five-minute story",
+          "targetParagraphId": "para-2024-ii-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "题干 categorized 的分类依据由原文 one-minute / three-minute / five-minute 这一按时长（即长度）划分的细节体现。"
+        }
+      ]
+    },
+    "q-2024-ii-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Trost 近期在做的事情，需定位 as of right now 等时间标志相关的细节。",
+      "stemTranslationZh": "Trost 最近一直在做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "组织一场故事比赛。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-b-5",
+              "quote": "We wanted to do something where we do a call to artists in the Bay Area to submit stories for a contest",
+              "anchor": "submit stories for a contest"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-b-5",
+              "quote": "as of right now, we’ve received about 120 submissions",
+              "anchor": "as of right now, 120 submissions"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对顾客做一项调查。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Trost has been doing a survey of customers.",
+            "explanation": "原文未提及 Trost 在做顾客调查，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "选择一家印刷出版商。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "you would be a published artist",
+            "optionText": "Choosing a print publisher.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 published 与选项 publisher 同源，但原文说的是获奖者将成为已出版的艺术家，并非 Trost 在挑选印刷出版商；选项借同词族设钩误导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-b-5",
+              "quote": "you would be a published artist",
+              "anchor": "published artist"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对艺术家进行采访。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "we do a call to artists in the Bay Area to submit stories for a contest",
+            "optionText": "Conducting interviews with artists.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 artists 一词，指向湾区艺术家投稿参赛，并非对艺术家进行采访；选项借 artists 设钩，曲解为 interviews with artists。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-b-5",
+              "quote": "we do a call to artists in the Bay Area to submit stories for a contest",
+              "anchor": "a call to artists"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Organizing a story contest.",
+          "sourceRole": "correctOption",
+          "targetText": "we do a call to artists in the Bay Area to submit stories for a contest",
+          "targetParagraphId": "para-2024-ii-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "选项 Organizing a story contest 是对原文 do a call to artists ... to submit stories for a contest 的概括同义替换，contest 一词直接对应。"
+        },
+        {
+          "sourceText": "been doing recently",
+          "sourceRole": "stem",
+          "targetText": "as of right now, we’ve received about 120 submissions",
+          "targetParagraphId": "para-2024-ii-reading-b-5",
+          "relationType": "locationCue",
+          "note": "题干 recently 对应原文 as of right now（截至目前）这一时间标志，提示比赛正在进行中，是定位线索。"
+        }
+      ]
+    },
+    "q-2024-ii-027": {
+      "skill": {
+        "primary": "attitude",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Trost 对 BART 未来的观点，需结合客流量下滑的背景与她对吸引更多乘客的判断。",
+      "stemTranslationZh": "Trost 对 BART 的未来持什么看法？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它将会倒闭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "I absolutely think we will get more riders just because of short stories",
+            "sourceHighlight": "get more riders",
+            "optionText": "It will close down.",
+            "optionHighlight": "close down",
+            "explanation": "Trost 坚信会吸引更多乘客，态度积极向好；选项说将倒闭，与原文趋势完全相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-b-8",
+              "quote": "I absolutely think we will get more riders just because of short stories",
+              "anchor": "get more riders"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的利润将会下降。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "BART's profits will decline.",
+            "explanation": "原文未提及 BART 的利润，更未提及利润会下降，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它将会扩展到全国。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Ridership on transit (交通) systems across the country has been down the past half century",
+            "sourceHighlight": "across the country",
+            "optionText": "It will expand nationwide.",
+            "optionHighlight": "expand nationwide",
+            "explanation": "原文 across the country 只是描述全国公共交通客流量下滑的背景，并非说 BART 会向全国扩张；选项借 nationwide 拔高范围，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-b-6",
+              "quote": "Ridership on transit (交通) systems across the country has been down the past half century",
+              "anchor": "across the country"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的客流量将会增加。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-b-8",
+              "quote": "I absolutely think we will get more riders just because of short stories",
+              "anchor": "we will get more riders"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Its ridership will increase.",
+          "sourceRole": "correctOption",
+          "targetText": "I absolutely think we will get more riders just because of short stories",
+          "targetParagraphId": "para-2024-ii-reading-b-8",
+          "relationType": "paraphrase",
+          "note": "选项 ridership will increase 是对原文 we will get more riders 的同义替换，ridership 对应 riders，increase 对应 get more。"
+        },
+        {
+          "sourceText": "Trost's opinion about BART's future",
+          "sourceRole": "stem",
+          "targetText": "I absolutely think",
+          "targetParagraphId": "para-2024-ii-reading-b-8",
+          "relationType": "locationCue",
+          "note": "题干问 Trost 的 opinion，原文 I absolutely think 是其主观判断的标志性表达，为定位其观点的线索。"
+        }
+      ]
+    },
+    "q-2024-ii-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查从第一段能了解到关于 BMF 的什么信息。",
+      "stemTranslationZh": "从第一段中可以了解到关于 BMF 的什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它保证食物的多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It guarantees the variety of food.",
+            "explanation": "原文第一段只谈到新鲜与缩短运输路程，未提及保证食物多样性，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它需要日常照料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The innovative design requires little effort to achieve a reliable weekly supply of fresh greens.",
+            "sourceHighlight": "requires little effort",
+            "optionText": "It requires day-to-day care.",
+            "optionHighlight": "requires day-to-day care",
+            "explanation": "原文说 requires little effort（几乎不费力），选项却说需要日常照料，与原文意思相反；且该信息出自第二段而非第一段。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-2",
+              "quote": "The innovative design requires little effort to achieve a reliable weekly supply of fresh greens.",
+              "anchor": "requires little effort"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它缩短了从田间到餐桌的距离。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-c-1",
+              "quote": "While farmer’s markets are a solid choice to reduce the journey, Babylon Micro-Farm (BMF) shortens it even more.",
+              "anchor": "shortens it even more"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-c-1",
+              "quote": "most produce at the store went through weeks of travel and covered hundreds of miles before reaching the table",
+              "anchor": "before reaching the table"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它依赖于农贸市场。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "While farmer’s markets are a solid choice to reduce the journey, Babylon Micro-Farm (BMF) shortens it even more.",
+            "optionText": "It relies on farmer's markets.",
+            "matchType": "exact",
+            "relationNote": "原文出现 farmer’s markets，但只是用作对比对象，说 BMF 比农贸市场更能缩短路程，并非依赖农贸市场；选项利用原文词钩进行干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-1",
+              "quote": "While farmer’s markets are a solid choice to reduce the journey, Babylon Micro-Farm (BMF) shortens it even more.",
+              "anchor": "farmer’s markets"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It cuts the farm-to-table distance.",
+          "sourceRole": "correctOption",
+          "targetText": "Babylon Micro-Farm (BMF) shortens it even more",
+          "targetParagraphId": "para-2024-ii-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "选项用 cuts the farm-to-table distance 同义替换原文的 shortens it（即缩短 the journey），表达缩短运输距离。"
+        }
+      ]
+    },
+    "q-2024-ii-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查那个便捷 app 提供什么信息这一细节。",
+      "stemTranslationZh": "这个便捷的 app 提供什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "实时天气变化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "there is a convenient app that provides growing data in real time",
+            "optionText": "Real-time weather changes.",
+            "matchType": "wordFamily",
+            "relationNote": "原文有 in real time，选项用 Real-time 这一同族表达制造干扰，但 app 提供的是 growing data 而非天气变化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-3",
+              "quote": "there is a convenient app that provides growing data in real time",
+              "anchor": "growing data in real time"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "植物的当前状况。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-c-3",
+              "quote": "there is a convenient app that provides growing data in real time",
+              "anchor": "provides growing data in real time"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "土壤中的化学污染物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "there’s no need for pesticides and other chemicals that pollute traditional farms and the surrounding environment",
+            "sourceEntity": "chemicals that pollute traditional farms",
+            "optionText": "Chemical pollutants in the soil.",
+            "optionEntity": "Chemical pollutants in the soil",
+            "explanation": "原文第四段提到化学品污染传统农场，但说的是 BMF 无需农药化学品，并非 app 提供土壤化学污染物信息，对象与 app 提供的内容错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-4",
+              "quote": "there’s no need for pesticides and other chemicals that pollute traditional farms and the surrounding environment",
+              "anchor": "chemicals that pollute"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "预播种容器的可获得性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "users simply replace the plants with a new pre-seeded pod (容器) to get the next growth cycle started",
+            "sourceEntity": "a new pre-seeded pod",
+            "optionText": "Availability of pre-seeded pods.",
+            "optionEntity": "Availability of pre-seeded pods",
+            "explanation": "原文提到 pre-seeded pod 是用于收获后更换以开始新生长周期，并非 app 提供其供应情况，选项把 pod 与 app 内容错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-3",
+              "quote": "users simply replace the plants with a new pre-seeded pod (容器) to get the next growth cycle started",
+              "anchor": "a new pre-seeded pod"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Current condition of the plants.",
+          "sourceRole": "correctOption",
+          "targetText": "a convenient app that provides growing data in real time",
+          "targetParagraphId": "para-2024-ii-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "选项用 Current condition of the plants 同义替换原文的 growing data in real time，即 app 实时提供植物的生长数据/当前状况。"
+        }
+      ]
+    },
+    "q-2024-ii-030": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查根据末段对 BMF 员工可以得出的推断。",
+      "stemTranslationZh": "关于 BMF 的员工可以得出什么结论？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们对运动有极大的热情。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "About half of them walk or bike to work.",
+            "optionText": "They have a great passion for sports.",
+            "matchType": "exact",
+            "relationNote": "原文提到 walk or bike to work，选项借 walk/bike 联想到 sports 进行干扰，但骑车步行上班是为环保通勤，并非热爱运动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-5",
+              "quote": "About half of them walk or bike to work.",
+              "anchor": "walk or bike to work"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们致力于社区服务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are devoted to community service.",
+            "explanation": "原文末段只谈员工的环保行为，未提及他们从事社区服务，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们喜欢分享日常经历。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are fond of sharing daily experiences.",
+            "explanation": "原文虽提到员工的 everyday lives，但并未说他们喜欢分享日常经历，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们有强烈的环保意识。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-c-5",
+              "quote": "“We are passionate about reducing waste, carbon and chemicals in our environment,” said a BMF employee.",
+              "anchor": "reducing waste, carbon and chemicals"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-c-5",
+              "quote": "they encourage recycling and waste reduction by limiting garbage cans and avoiding single-use plastic",
+              "anchor": "recycling and waste reduction"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They have a strong environmental awareness.",
+          "sourceRole": "correctOption",
+          "targetText": "“We are passionate about reducing waste, carbon and chemicals in our environment,” said a BMF employee.",
+          "targetParagraphId": "para-2024-ii-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "选项用 a strong environmental awareness 概括原文员工 passionate about reducing waste, carbon and chemicals 以及回收减废等行为，体现强烈环保意识。"
+        }
+      ]
+    },
+    "q-2024-ii-031": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查全文主旨。",
+      "stemTranslationZh": "这篇文章主要讲述什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "BMF 的主要优势。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-c-1",
+              "quote": "Babylon Micro-Farm (BMF) shortens it even more",
+              "anchor": "shortens it even more"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-c-4",
+              "quote": "having a system in the same building where it’s eaten means zero emissions (排放) from transporting plants from soil to salad",
+              "anchor": "zero emissions"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "BMF 的总体管理。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Inside the office, they encourage recycling and waste reduction by limiting garbage cans and avoiding single-use plastic.",
+            "sourceHighlight": "encourage recycling and waste reduction",
+            "optionText": "BMF's general management.",
+            "optionHighlight": "general management",
+            "explanation": "原文末段只涉及办公室内的环保做法，并未整体介绍公司的总体管理，选项把局部细节夸大为全文主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-5",
+              "quote": "Inside the office, they encourage recycling and waste reduction by limiting garbage cans and avoiding single-use plastic.",
+              "anchor": "Inside the office"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "BMF 的全球影响力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "BMF's global influence.",
+            "explanation": "全文未提及 BMF 的全球影响力，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "BMF 的技术标准。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Specifically, it’s a farm that relies on new technology.",
+            "sourceHighlight": "relies on new technology",
+            "optionText": "BMF's technical standards.",
+            "optionHighlight": "technical standards",
+            "explanation": "技术只是第三段介绍的 BMF 一个方面，并非全文主旨，选项以偏概全，把局部内容当作主题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-c-3",
+              "quote": "Specifically, it’s a farm that relies on new technology.",
+              "anchor": "relies on new technology"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "BMF's major strengths.",
+          "sourceRole": "correctOption",
+          "targetText": "Babylon Micro-Farm (BMF) shortens it even more",
+          "targetParagraphId": "para-2024-ii-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "全文围绕 BMF 缩短运输距离、省力、零排放、无农药等优势展开，选项 major strengths 概括这些贯穿全文的优点。"
+        }
+      ]
+    },
+    "q-2024-ii-032": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查对短语 “In the wrong hands” 在语境中的词义推测。",
+      "stemTranslationZh": "第二段中的短语“In the wrong hands”最可能是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "如果被受教育程度低的人阅读。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "If read by someone poorly educated.",
+            "explanation": "原文未提及读者“受教育程度低”。“wrong hands”指动机或意图不当，与读者学历无关。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "如果被心怀不轨的人评论。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In the wrong hands, such a book could prove as complicated to process as the computer code (代码) that powers AI",
+            "sourceEntity": "such a book could prove as complicated to process",
+            "optionText": "If reviewed by someone ill-intentioned.",
+            "optionEntity": "reviewed by someone ill-intentioned",
+            "explanation": "原文谈的是书在不当之人手中会变得难以“process（理解处理）”，强调的是处理/理解能力问题，而非“reviewed（评论）”或“ill-intentioned（恶意）”；对象与行为均被错配。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "如果由能力较弱的人写作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-d-2",
+              "quote": "In the wrong hands, such a book could prove as complicated to process as the computer code (代码) that powers AI but, thankfully, Campbell has more than two decades’ professional experience translating the heady into the understandable.",
+              "anchor": "wrong hands 与 Campbell 的经验形成对比"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-d-2",
+              "quote": "making for a guide which is highly accessible and informative",
+              "anchor": "Campbell 之手使书易懂"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如果由不具学术性的人翻译。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "translating the heady into the understandable",
+            "optionText": "If translated by someone unacademic.",
+            "matchType": "wordFamily",
+            "relationNote": "选项利用原文 translating 的同词族词 translated 设置干扰，但原文 translating 指 Campbell 把高深内容“转化”为易懂表达，并非真正的“翻译”，且“wrong hands”与“unacademic”无对应关系。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "In the wrong hands",
+          "sourceRole": "stem",
+          "targetText": "Campbell has more than two decades’ professional experience translating the heady into the understandable",
+          "targetParagraphId": "para-2024-ii-reading-d-2",
+          "relationType": "locationCue",
+          "note": "题干问“In the wrong hands”含义，原文紧接 but 转折，用 Campbell 的丰富经验作正面对照，故“wrong hands”指经验/能力不足之人（less competent）。"
+        }
+      ]
+    },
+    "q-2024-ii-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 AI by Design 一书写作特点这一细节的把握。",
+      "stemTranslationZh": "根据文本，AI by Design 的一个特点是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它充满了复杂的代码。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "In the wrong hands, such a book could prove as complicated to process as the computer code (代码) that powers AI but, thankfully, Campbell has more than two decades’ professional experience translating the heady into the understandable.",
+            "sourceHighlight": "such a book could prove as complicated to process as the computer code (代码) that powers AI but, thankfully",
+            "optionText": "It is packed with complex codes.",
+            "optionHighlight": "packed with complex codes",
+            "explanation": "原文用 but, thankfully 转折，说明只有“在不当之手”该书才会像代码般复杂，而 Campbell 实际把高深内容化为易懂，故书并不充满复杂代码，选项与原文意思相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-d-2",
+              "quote": "translating the heady into the understandable",
+              "anchor": "把高深转为易懂"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它采用了平实接地气的写作风格。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-d-2",
+              "quote": "She writes from the practical angle of a business person rather than as an academic, making for a guide which is highly accessible and informative",
+              "anchor": "以商务人士的实用角度写作，通俗易懂"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它提供循序渐进的操作指引。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It provides step-by-step instructions.",
+            "explanation": "原文虽称该书是 practical roadmap（实用路线图），但未提及它提供“step-by-step（循序渐进）”的具体操作步骤，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它面向 AI 专业人士。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "making for a guide which is highly accessible and informative and which, by the close, will make you feel almost as smart as AI.",
+            "sourceHighlight": "highly accessible and informative",
+            "optionText": "It is intended for AI professionals.",
+            "optionHighlight": "intended for AI professionals",
+            "explanation": "原文强调本书“highly accessible（极易理解）”，面向普通读者，会让你感觉几乎和 AI 一样聪明，并非专为 AI 专业人士所写，与选项相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-d-2",
+              "quote": "rather than as an academic",
+              "anchor": "并非以学者身份写作"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It adopts a down-to-earth writing style.",
+          "sourceRole": "correctOption",
+          "targetText": "She writes from the practical angle of a business person rather than as an academic",
+          "targetParagraphId": "para-2024-ii-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 down-to-earth writing style 是原文 from the practical angle of a business person rather than as an academic 的同义替换，都指平实、实用、接地气的写作风格。"
+        }
+      ]
+    },
+    "q-2024-ii-034": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Campbell 关于 AI 发展所呼吁人们采取的行动这一细节。",
+      "stemTranslationZh": "关于 AI 的发展，Campbell 敦促人们做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "遵守现有的相关法规。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Such structured thinking, followed by global regulation, will enable us to achieve greatness rather than our downfall.",
+            "sourceHighlight": "followed by global regulation",
+            "optionText": "Observe existing regulations on it.",
+            "optionHighlight": "existing regulations",
+            "explanation": "原文呼吁的是“即将建立的全球监管（global regulation）”，而选项偷换为“遵守现有法规（existing regulations）”，将尚需建立的未来监管说成已存在的法规。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-d-4",
+              "quote": "must act now to prevent an extinction-level event for humanity",
+              "anchor": "强调现在就要行动"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "重新考量专家对它的看法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Campbell’s point is to wake up those responsible for AI-the technology companies and world leaders—so they are on the same page as all the experts currently developing it.",
+            "sourceHighlight": "so they are on the same page as all the experts",
+            "optionText": "Reconsider expert opinions about it.",
+            "optionHighlight": "Reconsider expert opinions",
+            "explanation": "原文是要唤醒科技公司和世界领导人，使其与专家“达成共识（on the same page）”，而非“重新考量/质疑专家意见”，选项曲解了行动方向。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-d-4",
+              "quote": "wake up those responsible for AI",
+              "anchor": "唤醒 AI 责任方"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "共同努力使 AI 处于受控状态。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-d-3",
+              "quote": "She says it is essential that we keep control of artificial intelligence, or risk being sidelined and perhaps even worse.",
+              "anchor": "必须掌控 AI"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-d-4",
+              "quote": "Such structured thinking, followed by global regulation, will enable us to achieve greatness rather than our downfall.",
+              "anchor": "通过全球监管共同应对"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "借鉴以往经验来减缓它的发展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Learn from prior experience to slow it down.",
+            "explanation": "原文呼吁掌控 AI 并进行全球监管，从未提及“借鉴以往经验”或“减缓 AI 发展（slow it down）”，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Make joint efforts to keep it under control.",
+          "sourceRole": "correctOption",
+          "targetText": "it is essential that we keep control of artificial intelligence",
+          "targetParagraphId": "para-2024-ii-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 keep it under control 是原文 keep control of artificial intelligence 的同义替换；joint efforts 对应第四段唤醒各方、共同进行 global regulation 的呼吁。"
+        }
+      ]
+    },
+    "q-2024-ii-035": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者写作本文的目的。",
+      "stemTranslationZh": "作者写这篇文章的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "推荐一本关于 AI 的书。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-ii-reading-d-5",
+              "quote": "AI will affect us all, and if you only read one book on the subject, this is it.",
+              "anchor": "强力推荐此书"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-ii-reading-d-1",
+              "quote": "This absorbing new book by Catriona Campbell is a practical roadmap addressing the challenges posed by the forthcoming AI revolution (变革) .",
+              "anchor": "全文围绕评介此书展开"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "简要叙述 AI 的发展历史。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "AI is already super-smart and will become more capable, moving from the current generation of “narrow-AI” to Artificial General Intelligence.",
+            "sourceHighlight": "moving from the current generation of “narrow-AI” to Artificial General Intelligence",
+            "optionText": "To give a brief account of AI history.",
+            "optionHighlight": "a brief account of AI history",
+            "explanation": "原文提及 AI 的发展阶段只是介绍书中观点、服务于推荐此书，并非以叙述“AI 历史”为写作目的，选项把局部细节夸大为全文目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-ii-reading-d-3",
+              "quote": "From there, Campbell says, will come Artificial Dominant Intelligence.",
+              "anchor": "属书中观点而非历史综述"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "澄清 AI 的定义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To clarify the definition of AI.",
+            "explanation": "全文为书评，目的是推荐 AI by Design，并未给出或澄清 AI 的定义，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "向一位杰出的 AI 专家致敬。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Campbell has more than two decades’ professional experience translating the heady into the understandable.",
+            "sourceEntity": "Campbell has more than two decades’ professional experience",
+            "optionText": "To honor an outstanding AI expert.",
+            "optionEntity": "honor an outstanding AI expert",
+            "explanation": "原文提及 Campbell 的经验是为说明本书可读、值得推荐，写作目的是“推荐书”而非“向某位 AI 专家致敬”，把推荐对象错配成致敬人物。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To recommend a book on AI.",
+          "sourceRole": "correctOption",
+          "targetText": "if you only read one book on the subject, this is it",
+          "targetParagraphId": "para-2024-ii-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "结尾 if you only read one book on the subject, this is it 是强烈的推荐表达，与选项 recommend a book on AI 同义，点明全文写作目的。"
+        }
+      ]
+    }
+  }
+}

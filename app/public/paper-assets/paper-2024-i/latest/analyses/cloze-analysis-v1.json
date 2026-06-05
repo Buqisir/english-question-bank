@@ -1,0 +1,650 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2024-i",
+  "sourceAssetVersion": 4,
+  "targetGroups": [
+    "group-2024-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-i-cloze": {
+      "overview": "记叙文：作者讲述自己一生被他人成就激励又打击的经历——从跑步到骑行，最终领悟到目标只需是自己的。",
+      "affectiveArc": "情感先抑后扬：作者屡次因他人更强而受挫、泄气，最后释怀并接纳应为自己设定目标。"
+    }
+  },
+  "blanks": {
+    "q-2024-i-041": {
+      "blankId": "blank-2024-i-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "邻居朋友赢得了一场马拉松，这一成就才会让作者“受到激励”而开始跑步，won 与 a marathon race 搭配且呼应下文 Feeling motivated。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "knew",
+          "meaning": "认识、知道（一场比赛）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "held",
+          "meaning": "举办、举行（比赛）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "quit",
+          "meaning": "退出、放弃（比赛）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a marathon race",
+          "signalSide": "context-after",
+          "targetText": "won a marathon race",
+          "relation": "中文：won 的宾语是 a marathon race，赢得比赛的施受关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Feeling motivated",
+          "signalSide": "context-after",
+          "relation": "中文：下句 Feeling motivated 说明朋友的成就激励了作者，呼应“赢得”而非别的。"
+        }
+      ],
+      "teachingNote": "中文一句：用后文的情绪结果（受激励）反推前因，锁定能产生激励的动作。"
+    },
+    "q-2024-i-042": {
+      "blankId": "blank-2024-i-042",
+      "blankNo": 42,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "受到激励后开始“有规律地”跑步，regularly 修饰 running 表示长期坚持，与随后 my longest run 的训练积累一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "silently",
+          "meaning": "安静地、默默地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proudly",
+          "meaning": "自豪地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recently",
+          "meaning": "最近、近来"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "started running",
+          "signalSide": "context-before",
+          "targetText": "started running regularly",
+          "relation": "中文：regularly 修饰 started running，表示开始有规律地跑步。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my longest run",
+          "signalSide": "context-after",
+          "relation": "中文：后文出现 my longest run，说明跑步是持续累积的，呼应“有规律地”。"
+        }
+      ],
+      "teachingNote": "中文一句：副词要与所修饰动词的语境绑定，看下文是否暗示坚持或频率。"
+    },
+    "q-2024-i-043": {
+      "blankId": "blank-2024-i-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "女孩说自己在为一场“超级”双程马拉松做准备，train for 表示为某项赛事训练，与 a “super,” referring to a 52.4-mile double marathon 的难度相称。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "asking",
+          "meaning": "请求、要求"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "looking",
+          "meaning": "寻找、期待（look for）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waiting",
+          "meaning": "等待"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "double marathon",
+          "signalSide": "context-after",
+          "targetText": "training for a “super,”",
+          "relation": "中文：train for 的对象是这场 double marathon，为高难度赛事备战的搭配成立。"
+        }
+      ],
+      "teachingNote": "中文一句：介词 for 后接赛事时，优先考虑“为……训练/备战”的固定搭配。"
+    },
+    "q-2024-i-044": {
+      "blankId": "blank-2024-i-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "To be honest 引出真心话，配合后文 the pure boredom of jogging，作者“讨厌”这次最长跑，hated it 与厌烦情绪一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "made",
+          "meaning": "做成、完成（它）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "believed",
+          "meaning": "相信（它）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "deserved",
+          "meaning": "应得、配得上（它）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "the pure boredom of jogging",
+          "signalSide": "context-after",
+          "relation": "中文：后文 the pure boredom of jogging 定下厌烦基调，指向 hated。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "To be honest",
+          "signalSide": "context-before",
+          "targetText": "hated it",
+          "relation": "中文：To be honest 引出负面真心感受，与 hated it 搭配自然。"
+        }
+      ],
+      "teachingNote": "中文一句：To be honest 之类坦白语常引出负面情绪，结合下文情感线锁定动词。"
+    },
+    "q-2024-i-045": {
+      "blankId": "blank-2024-i-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "女孩备战双程马拉松让作者 15 英里的“成就”显得渺小，achievement 与开篇 other folks’ achievements 形成话题词呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "advantage",
+          "meaning": "优势、好处"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "contribution",
+          "meaning": "贡献"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "influence",
+          "meaning": "影响、影响力"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "seem small",
+          "signalSide": "context-after",
+          "targetText": "my achievement seem small",
+          "relation": "中文：make ... seem small 的对象是 my achievement，让成就显得渺小，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "other folks’ achievements",
+          "signalSide": "context-before",
+          "relation": "中文：开篇 other folks’ achievements 是同一话题词，呼应此处 achievement。"
+        }
+      ],
+      "teachingNote": "中文一句：名词空优先找全文复现的话题词，achievement 与开篇主题词同场。"
+    },
+    "q-2024-i-046": {
+      "blankId": "blank-2024-i-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "作者决定唯一会再跑步的“原因”是有大狗在追，the only reason I’d ever run again is if ... 是 reason ... is if 的因果句式。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "way",
+          "meaning": "方式、方法"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "risk",
+          "meaning": "风险"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "place",
+          "meaning": "地点、地方"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is if a big dog was running after me",
+          "signalSide": "context-after",
+          "targetText": "the only reason ... is if a big dog was running after me",
+          "relation": "中文：reason ... is if 句式说明给出的是“原因”，与条件从句搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I’d ever run again",
+          "signalSide": "context-after",
+          "targetText": "the only reason I’d ever run again",
+          "relation": "中文：the only reason 后接 I’d ever run again，构成“唯一原因”的修饰关系。"
+        }
+      ],
+      "teachingNote": "中文一句：the only ... is if 句式中空格名词多为 reason，表示触发条件的原因。"
+    },
+    "q-2024-i-047": {
+      "blankId": "blank-2024-i-047",
+      "blankNo": 47,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "放弃跑步后作者“转向”骑行，turn to cycling 表示改投另一项运动，与下文 I got a good bike and rode a lot 一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gave up",
+          "meaning": "放弃（骑行）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "went on",
+          "meaning": "继续（骑行）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dealt with",
+          "meaning": "处理、应对（骑行）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "cycling",
+          "signalSide": "context-after",
+          "targetText": "turned to cycling",
+          "relation": "中文：turn to 的宾语是 cycling，转向骑行的搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I got a good bike and rode a lot",
+          "signalSide": "context-after",
+          "relation": "中文：下句买车多骑印证作者“转投”骑行，而非放弃。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "turned to",
+          "signalSide": "option",
+          "targetText": "turned to cycling",
+          "relation": "中文：turn to 意为“转向、改投”，合成义指改做另一件事。"
+        }
+      ],
+      "teachingNote": "中文一句：短语空可拆解动词+介词，turn to 表示从一事转向另一事。"
+    },
+    "q-2024-i-048": {
+      "blankId": "blank-2024-i-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "作者一直“梦想”参加自行车比赛直到去圣地亚哥，dream of doing 是固定搭配，until 之后才把梦想付诸接触。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "heard",
+          "meaning": "听说（参赛的事）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "complained",
+          "meaning": "抱怨"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "approved",
+          "meaning": "赞成、批准"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of entering cycle races",
+          "signalSide": "context-after",
+          "targetText": "dreamed of entering cycle races",
+          "relation": "中文：dream of doing 固定搭配，of entering cycle races 是其宾语，搭配成立。"
+        }
+      ],
+      "teachingNote": "中文一句：见到 of + doing 时优先考虑 dream/think of 等固定搭配。"
+    },
+    "q-2024-i-049": {
+      "blankId": "blank-2024-i-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "趁姐姐上班，作者“借用”了她的自行车去骑，borrowed her bike 与 went for a ride 衔接，自然合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "painted",
+          "meaning": "给……上漆、画"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bought",
+          "meaning": "买（她的车）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "parked",
+          "meaning": "停放（她的车）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her bike and went for a ride",
+          "signalSide": "context-after",
+          "targetText": "borrowed her bike and went for a ride",
+          "relation": "中文：borrowed 的宾语是 her bike，借车去骑的施受关系成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "While she was at work one day",
+          "signalSide": "context-before",
+          "relation": "中文：姐姐上班期间作者用她的车，说明是“借用”而非购买。"
+        }
+      ],
+      "teachingNote": "中文一句：根据物主关系（her bike）与情境判断动词，趁人不在多为借用。"
+    },
+    "q-2024-i-050": {
+      "blankId": "blank-2024-i-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "冒号后说明道路要长距离上坡，这正是骑行遇到的“问题”，The problem 引出随后的困难情境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "secret",
+          "meaning": "秘密"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "principle",
+          "meaning": "原则"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "advice",
+          "meaning": "建议"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "riding uphill for miles at a time",
+          "signalSide": "context-after",
+          "relation": "中文：冒号后 riding uphill for miles 描述的是困难，指向 problem。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I’d never faced such",
+          "signalSide": "context-after",
+          "relation": "中文：后文 I’d never faced such 强调遇到的难题，呼应 problem。"
+        }
+      ],
+      "teachingNote": "中文一句：冒号后若展开的是困难，空格名词常为 problem。"
+    },
+    "q-2024-i-051": {
+      "blankId": "blank-2024-i-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "长距离上坡是作者从未面对过的“挑战”，faced such challenges 与上坡难度的语境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dangers",
+          "meaning": "危险"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "events",
+          "meaning": "事件、赛事"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "opponents",
+          "meaning": "对手"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’d never faced such",
+          "signalSide": "context-before",
+          "targetText": "faced such challenges",
+          "relation": "中文：face challenges 是常见搭配，such 指代前文上坡难度。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "riding uphill for miles at a time",
+          "signalSide": "context-before",
+          "relation": "中文：前文长距离上坡正是 such 所指的挑战内容。"
+        }
+      ],
+      "teachingNote": "中文一句：face such + 名词，such 指代前文困难，优先选 challenges。"
+    },
+    "q-2024-i-052": {
+      "blankId": "blank-2024-i-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "那天约有 100 名习惯这种路况的当地车手“超过/赶过”了作者，get passed by 表示被超越，与 used to such roads 的强对比一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "convinced",
+          "meaning": "说服、使信服"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "admired",
+          "meaning": "钦佩、欣赏"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "stopped",
+          "meaning": "拦住、使停下"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "by about 100 “local” bikers",
+          "signalSide": "context-after",
+          "targetText": "got passed by about 100 “local” bikers",
+          "relation": "中文：get passed by 的施事是 100 名当地车手，被超过的被动搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "who were used to such roads",
+          "signalSide": "context-after",
+          "relation": "中文：当地车手习惯这种路况，因而能超过不适应的作者。"
+        }
+      ],
+      "teachingNote": "中文一句：被动 got + V-ed by 强对比对象时，结合实力差判断是被超过。"
+    },
+    "q-2024-i-053": {
+      "blankId": "blank-2024-i-053",
+      "blankNo": 53,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "被当地车手碾压后，骑行回家忽然不再那么“有吸引力”，didn’t seem quite as appealing 与受挫后兴趣下降的情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reliable",
+          "meaning": "可靠的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "convenient",
+          "meaning": "方便的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "familiar",
+          "meaning": "熟悉的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "didn’t seem quite as",
+          "signalSide": "context-before",
+          "targetText": "didn’t seem quite as appealing",
+          "relation": "中文：appealing 作 seem 的表语，didn’t seem quite as appealing 修饰关系成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "When I got back home",
+          "signalSide": "context-before",
+          "relation": "中文：被超越后回到家，情绪转为受挫，呼应吸引力下降。"
+        }
+      ],
+      "teachingNote": "中文一句：形容词空要看情感线，受挫后“不再那么吸引人”最契合 appealing。"
+    },
+    "q-2024-i-054": {
+      "blankId": "blank-2024-i-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "since then 与下文 I’ve come to accept 表明作者经历后“成长成熟”了，matured a lot 与领悟道理的总结一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "traveled",
+          "meaning": "旅行"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "missed",
+          "meaning": "错过、想念"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "worried",
+          "meaning": "担心、忧虑"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’ve come to accept",
+          "signalSide": "context-after",
+          "relation": "中文：下句 I’ve come to accept 表明认知成长，呼应 matured。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "since then",
+          "signalSide": "context-after",
+          "targetText": "matured a lot since then",
+          "relation": "中文：since then 标记经历后的变化，与“成熟”这一成长结果搭配。"
+        }
+      ],
+      "teachingNote": "中文一句：结尾总结升华处，结合 come to accept 判断作者是心智成长。"
+    },
+    "q-2024-i-055": {
+      "blankId": "blank-2024-i-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "作者接受无论给自己设定什么“目标”都得是自己的，set goals 是固定搭配，呼应全文围绕他人成就设定目标的主题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "limits",
+          "meaning": "限制、限度"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dates",
+          "meaning": "日期"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tests",
+          "meaning": "测试、考验"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I set for myself",
+          "signalSide": "context-after",
+          "targetText": "goals I set for myself",
+          "relation": "中文：set goals 是固定搭配，I set for myself 的宾语正是 goals。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "they just have to be my own",
+          "signalSide": "context-after",
+          "relation": "中文：they just have to be my own 强调目标要属于自己，呼应 goals。"
+        }
+      ],
+      "teachingNote": "中文一句：set ... for myself 的宾语多为 goals，结合主题确认目标义。"
+    }
+  }
+}

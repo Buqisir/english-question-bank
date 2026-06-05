@@ -1,0 +1,404 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2020-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-ii-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-ii-seven-choices": {
+      "overview": "本文是一篇说明性建议文，主题为如何与医生有效沟通(Talking with your doctor)。文章用引言段点题，随后以多个小标题(Stay positive / Keep track of how you are feeling / Ask questions 等)分条给出建议。七选五考查引言段总起句(36)、各小标题段落内的衔接句(37、38、40)以及缺失的小标题本身(39)。",
+      "discourseStructure": {
+        "summary": "引言段先说明与医生坦诚沟通的好处并鼓励读者，36空作为引言段收尾、总起全文分条建议；其后每个小标题段围绕一条建议展开，空格分别承担段内衔接(37、38、40)与小标题(39)的作用。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Talking with your doctor",
+            "paragraphIds": [
+              "para-2020-ii-seven-title",
+              "para-2020-ii-seven-p1"
+            ],
+            "summary": "引言段说明坦诚沟通的益处并鼓励读者不要害怕，36空收束引言并引出下文的若干建议。"
+          },
+          {
+            "unitId": "unit-positive",
+            "heading": "Stay positive.",
+            "paragraphIds": [
+              "para-2020-ii-seven-p2",
+              "para-2020-ii-seven-p3"
+            ],
+            "summary": "建议带着好心态就诊，37空补充医生和护理者与你站在同一边，呼应teamwork。"
+          },
+          {
+            "unitId": "unit-track",
+            "heading": "Keep track of how you are feeling.",
+            "paragraphIds": [
+              "para-2020-ii-seven-p4",
+              "para-2020-ii-seven-p5"
+            ],
+            "summary": "建议记录身体感受，38空作段首总起，后文This指代该记录行为带来的好处。"
+          },
+          {
+            "unitId": "unit-history",
+            "heading": "39 (missing heading)",
+            "paragraphIds": [
+              "para-2020-ii-seven-p6",
+              "para-2020-ii-seven-p7"
+            ],
+            "summary": "39空是缺失的小标题，下段解释medical history的内容，故标题应是带上病史与用药清单。"
+          },
+          {
+            "unitId": "unit-ask",
+            "heading": "Ask questions.",
+            "paragraphIds": [
+              "para-2020-ii-seven-p8",
+              "para-2020-ii-seven-p9"
+            ],
+            "summary": "建议大胆提问并把问题写下带去，40空承接写清单这一动作，说明这样能更容易得到答案。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2020-ii-036": {
+      "blankId": "blank-2020-ii-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Talking with your doctor",
+        "Talking freely with your doctor",
+        "discuss something that is bothering you"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-ii-seven-p1",
+        "headingAnchor": "Talking with your doctor",
+        "beforeQuote": "Don’t be afraid or embarrassed to discuss something that is bothering you.",
+        "afterQuote": "Stay positive."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "tips for talking with your doctor",
+          "signalSide": "option",
+          "targetText": "Talking with your doctor / Stay positive",
+          "relation": "选项中 tips for talking with your doctor 与标题及下文的分条小标题构成总—分话题场，作引言收尾的总起句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Talking freely with your doctor",
+          "signalSide": "context-before",
+          "targetText": "tips for talking with your doctor",
+          "relation": "前文反复出现 talking with your doctor，与选项 tips for talking with your doctor 同属沟通就医话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "some tips",
+          "signalSide": "option",
+          "targetText": "Stay positive / Keep track of how you are feeling / Ask questions",
+          "relation": "some tips 复数预指下文以小标题列出的各条建议，是总起句的语篇标志。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "36空在引言段末尾，需要一句总起句引出下文以小标题分条罗列的建议；B项 Here are some tips for talking with your doctor 既呼应标题，又用 some tips 预指后面各条提示，承上启下。",
+        "matchedClues": [
+          {
+            "contextSide": "Stay positive / Keep track of how you are feeling / Ask questions",
+            "optionSide": "some tips",
+            "relation": "some tips 概指下文各小标题列出的若干条建议。"
+          },
+          {
+            "contextSide": "Talking with your doctor",
+            "optionSide": "tips for talking with your doctor",
+            "relation": "选项措辞直接回扣文章标题，点明全文主题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E项 your doctor and other caregivers are on your side 更适合放在 Stay positive 段(37空)收束鼓励，无法总起下文分条建议。"
+        }
+      ],
+      "teachingNote": "引言段末的空通常是总起句，看后文是否以分条小标题展开，若是则选含 tips/ways 等总括词、并回扣标题的选项。"
+    },
+    "q-2020-ii-037": {
+      "blankId": "blank-2020-ii-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Stay positive",
+        "good attitude",
+        "Think teamwork",
+        "Think positive"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-ii-seven-p3",
+        "headingAnchor": "Stay positive.",
+        "beforeQuote": "Go to your doctor’s visits with a good attitude.",
+        "afterQuote": "Think teamwork! Think positive!"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "on your side",
+          "signalSide": "option",
+          "targetText": "Think teamwork",
+          "relation": "选项 on your side 与空后 Think teamwork 同属合作/同一阵营话题场，构成因—果式呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Think teamwork",
+          "signalSide": "context-after",
+          "targetText": "on your side",
+          "relation": "空后 Think teamwork 把医生与你视为一个团队，正照应选项 doctor and other caregivers are on your side。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "good attitude",
+          "signalSide": "context-before",
+          "targetText": "Stay positive / on your side",
+          "relation": "前文 good attitude 与小标题 Stay positive 营造积极态度话题场，为 doctor are on your side 的鼓励语提供语境。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "37空在 Stay positive 段中部，前有 good attitude、后有 Think teamwork，E项 your doctor and other caregivers are on your side 解释为何要保持积极并把就诊当作团队协作，与前后语意自然衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "Think teamwork",
+            "optionSide": "your doctor and other caregivers are on your side",
+            "relation": "医生与护理者和你站在同一边，正是 teamwork 的具体含义。"
+          },
+          {
+            "contextSide": "good attitude / Stay positive",
+            "optionSide": "Remember",
+            "relation": "Remember 引出令人安心的提醒，强化保持积极态度的理由。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C项 talk to another doctor if the treatments don’t work 谈的是换医生，与本段保持积极、团队协作的语义场不符。"
+        }
+      ],
+      "teachingNote": "段中空要前后兼顾，抓住后文关键词(此处 teamwork)找出与之同属一个话题场、能解释该词的选项。"
+    },
+    "q-2020-ii-038": {
+      "blankId": "blank-2020-ii-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Keep track of how you are feeling",
+        "answer questions about your symptoms",
+        "how medicines make you feel",
+        "how you feel and how long you’ve felt"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-ii-seven-p5",
+        "headingAnchor": "Keep track of how you are feeling.",
+        "beforeQuote": "Keep track of how you are feeling.",
+        "afterQuote": "This will make it easier for you to answer questions about your symptoms"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "keep notes on how you are feeling",
+          "relation": "空后 This 指代空格句所述动作，即选项中的 keep notes on how you are feeling，构成段首句与后文的指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "keep notes on how you are feeling",
+          "signalSide": "option",
+          "targetText": "Keep track of how you are feeling",
+          "relation": "选项 keep notes on how you are feeling 与小标题 Keep track of how you are feeling 几乎同义复现，确认本段主题句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "how you are feeling",
+          "signalSide": "context-before",
+          "targetText": "keep notes on how you are feeling",
+          "relation": "小标题 how you are feeling 与选项措辞完全一致，属同一话题场的词汇复现。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "38空在段首，需要一句承接小标题 Keep track of how you are feeling 的主题句；D项 Before your doctor’s visit, keep notes on how you are feeling 与小标题同义，且空后 This 正指代这一记录动作。",
+        "matchedClues": [
+          {
+            "contextSide": "This will make it easier",
+            "optionSide": "keep notes on how you are feeling",
+            "relation": "This 回指 keep notes 这一行为，说明记录带来的好处。"
+          },
+          {
+            "contextSide": "Keep track of how you are feeling",
+            "optionSide": "keep notes on how you are feeling",
+            "relation": "选项与小标题同义改写，是本段总起句。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A项 This will make getting answers easier 也以 This 开头，但它本身以指代词起句、缺少被指代的动作，不能充当段首主题句，更适合40空。"
+        }
+      ],
+      "teachingNote": "段首空多为主题句，优先选与本段小标题同义复现的选项；同时检查后文指代词(This)需要指向空格句所述的具体动作。"
+    },
+    "q-2020-ii-039": {
+      "blankId": "blank-2020-ii-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Your medical history is a list of your illnesses",
+        "treatments",
+        "allergic (过敏) to any medicines",
+        "mention that to your doctor"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-ii-seven-p7",
+        "headingAnchor": "Your medical history is a list of your illnesses, treatments",
+        "beforeQuote": "Your medical history is a list of your illnesses, treatments",
+        "afterQuote": "if you are allergic (过敏) to any medicines, be sure to mention that to your doctor"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Bring your medical history",
+          "signalSide": "option",
+          "targetText": "Your medical history is a list of your illnesses",
+          "relation": "选项 medical history 与空后段首句 Your medical history 词汇复现，确认本空是该段缺失的小标题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Your medical history",
+          "signalSide": "context-after",
+          "targetText": "Bring your medical history",
+          "relation": "下段以 Your medical history 展开解释，正照应小标题 Bring your medical history。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "any medicines",
+          "signalSide": "context-after",
+          "targetText": "a list of your current medicines",
+          "relation": "下文提到 allergic to any medicines，与选项 a list of your current medicines 同属用药信息话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "39空是用●引出的缺失小标题，下段紧接解释 Your medical history 及用药情况；F项 Bring your medical history, including a list of your current medicines 与下文同主题、且为祈使句式，符合各小标题的体例。",
+        "matchedClues": [
+          {
+            "contextSide": "Your medical history is a list of your illnesses",
+            "optionSide": "Bring your medical history",
+            "relation": "选项与下段开头同词复现，点明本段主题。"
+          },
+          {
+            "contextSide": "allergic (过敏) to any medicines",
+            "optionSide": "a list of your current medicines",
+            "relation": "下文谈及用药过敏，呼应选项中的 current medicines。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D项也含 Before your doctor’s visit 的祈使句式，但其主题是记录感受，与本段 medical history/medicines 的话题场不符，已用于38空。"
+        }
+      ],
+      "teachingNote": "用●引出的空格是小标题，找与紧随其后段落同义复现、且为祈使句体例的选项。"
+    },
+    "q-2020-ii-040": {
+      "blankId": "blank-2020-ii-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Ask questions",
+        "ask your doctor any questions you have",
+        "write them down and bring the list",
+        "the answer to a question"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-ii-seven-p9",
+        "headingAnchor": "Ask questions.",
+        "beforeQuote": "write them down and bring the list with you to your appointment.",
+        "afterQuote": "Remember—there’s no such thing as a stupid question."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "write them down and bring the list with you to your appointment",
+          "relation": "选项以 This 开头，回指空前的动作 write them down and bring the list，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "getting answers",
+          "signalSide": "option",
+          "targetText": "ask your doctor any questions / the answer to a question",
+          "relation": "选项 getting answers 与本段 ask questions、the answer to a question 同属问答话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "write them down and bring the list",
+          "signalSide": "context-before",
+          "targetText": "This will make getting answers easier",
+          "relation": "前文写下问题并带去的动作，正是选项 This 所指、并说明这样能更容易得到答案。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "40空在 Ask questions 段中部，前句讲把问题写下并带去就诊；A项 This will make getting answers easier 用 This 回指该动作，并点出此举的好处，自然衔接前后文。",
+        "matchedClues": [
+          {
+            "contextSide": "write them down and bring the list",
+            "optionSide": "This",
+            "relation": "This 指代前文写下并带去问题清单这一行为。"
+          },
+          {
+            "contextSide": "ask your doctor any questions you have",
+            "optionSide": "getting answers easier",
+            "relation": "提问的目的是得到答案，选项 getting answers 紧扣本段问答主题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G项 Writing down what the doctor says 谈的是记录医生所说的话，方向与本句强调把自己的问题写下带去相反，容易因 writing down 而误选。"
+        }
+      ],
+      "teachingNote": "以 This/That 开头的选项要回指前句具体动作，结合后文判断该动作带来的结果，确认指代与逻辑都通顺。"
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2025-ii-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2025-ii-grammar-fill": {
+      "overview": "一篇第一人称记叙/感悟散文：美国作者在浙江乡村生活，被晒过太阳的衣物的“阳光香味”所打动，体会到适应新环境后的惊喜与生活之美。"
+    }
+  },
+  "blanks": {
+    "q-2025-ii-056": {
+      "blankId": "blank-2025-ii-056",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "where",
+      "role": null,
+      "path": null,
+      "reason": "先行词是表地点的 the countryside of Zhejiang，空格后是结构完整的句子（bamboo and tea bushes grow...），从句作定语修饰地点，缺地点状语，故用关系副词 where。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the countryside of Zhejiang",
+          "signalSide": "passage",
+          "relation": "表地点的先行词，定语从句用 where 指代该地点。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "grow wild in the mountains",
+          "signalSide": "passage",
+          "relation": "从句成分完整、不缺主宾，说明所缺为关系副词而非关系代词。"
+        }
+      ],
+      "teachingNote": "先行词表地点且从句不缺主宾成分时，用关系副词 where 引导定语从句。"
+    },
+    "q-2025-ii-057": {
+      "blankId": "blank-2025-ii-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "center",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "central",
+      "role": null,
+      "path": null,
+      "reason": "空格后是名词 heating，需要形容词作定语修饰它；提示词 center 为名词，派生为形容词 central（中央的/集中的），构成 central heating（集中供暖）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "heating doesn",
+          "signalSide": "passage",
+          "relation": "被修饰的名词 heating，前面需形容词，故 center 变 central。"
+        }
+      ],
+      "teachingNote": "名词提示词放在另一名词前作定语时，常派生为形容词（center→central）。"
+    },
+    "q-2025-ii-058": {
+      "blankId": "blank-2025-ii-058",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "path": null,
+      "reason": "固定搭配 prepare sb for sth（使某人为某事做好准备），空格后接 this one 作介词宾语，故填 for。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "prepared me",
+          "signalSide": "passage",
+          "relation": "prepare sb for sth 的固定搭配，锁定介词 for。"
+        }
+      ],
+      "teachingNote": "动词 prepare 接对象再接事物时用 prepare sb for sth。"
+    },
+    "q-2025-ii-059": {
+      "blankId": "blank-2025-ii-059",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "adapt 与 learn 是两个并列的动词、语义同向递进（适应并学习），无主从关系，用并列连词 and 连接。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "you can adapt",
+          "signalSide": "passage",
+          "relation": "adapt 与其后的 learn 为并列动词，需并列连词连接。"
+        }
+      ],
+      "teachingNote": "连接语义同向的两个并列动词用 and。"
+    },
+    "q-2025-ii-060": {
+      "blankId": "blank-2025-ii-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "I",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "myself",
+      "role": null,
+      "path": null,
+      "reason": "find oneself doing 表“发觉自己在做某事”，宾语与主语 I 同指，须用反身代词 myself。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "I’ve found",
+          "signalSide": "passage",
+          "relation": "主语是 I，find 的宾语与主语同指，故用反身代词 myself。"
+        }
+      ],
+      "teachingNote": "宾语与主语同指时用反身代词（find oneself doing）。"
+    },
+    "q-2025-ii-061": {
+      "blankId": "blank-2025-ii-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is",
+      "role": null,
+      "path": null,
+      "reason": "该句缺谓语，主语核心是单数的 The “sunshine scent”；陈述当下普遍事实用一般现在时，主语第三人称单数，故 be 变 is。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The “sunshine scent",
+          "signalSide": "passage",
+          "relation": "主语为第三人称单数，谓语用 is。"
+        }
+      ],
+      "teachingNote": "缺谓语时按主语数与时态定 be 动词形式（单数现在→is）。"
+    },
+    "q-2025-ii-062": {
+      "blankId": "blank-2025-ii-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "discover",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to discover",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "the chance 后接动词作后置定语，名词 chance 习惯接动词不定式表将要去做的事，故用 to discover。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the chance",
+          "signalSide": "passage",
+          "relation": "被修饰名词 chance 后接不定式作定语，故用 to discover。"
+        }
+      ],
+      "teachingNote": "chance/opportunity 等名词后用 to do 作定语表“做某事的机会”。"
+    },
+    "q-2025-ii-063": {
+      "blankId": "blank-2025-ii-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "absent",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "absence",
+      "role": null,
+      "path": null,
+      "reason": "空格前有定冠词 the、后有 of 短语，是“the + 名词 + of”结构，须用名词；形容词 absent 派生为名词 absence（缺少）。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "of smog",
+          "signalSide": "passage",
+          "relation": "the + 名词 + of 结构需名词，故 absent 变 absence。"
+        }
+      ],
+      "teachingNote": "the ___ of 结构中空格须填名词（absent→absence）。"
+    },
+    "q-2025-ii-064": {
+      "blankId": "blank-2025-ii-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "afternoon",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "afternoons",
+      "role": null,
+      "path": null,
+      "reason": "blue sky 后泛指一个个晴朗的下午、为可数名词的泛指复数，故 afternoon 用复数 afternoons。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "plenty of blue sky",
+          "signalSide": "passage",
+          "relation": "泛指多个下午，可数名词用复数 afternoons。"
+        }
+      ],
+      "teachingNote": "可数名词泛指多个时用复数形式。"
+    },
+    "q-2025-ii-065": {
+      "blankId": "blank-2025-ii-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "leave",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "left",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "a sheet or shirt 与 leave 是被动关系（被留置晾晒），用过去分词 left 作后置定语，相当于 which was left。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a sheet or shirt",
+          "signalSide": "passage",
+          "relation": "被修饰名词与 leave 为被动关系，用过去分词 left 作定语。"
+        }
+      ],
+      "teachingNote": "被修饰名词与动词为被动关系时，用过去分词作后置定语。"
+    }
+  }
+}

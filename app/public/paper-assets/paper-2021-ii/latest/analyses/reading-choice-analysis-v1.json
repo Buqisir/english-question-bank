@@ -1,0 +1,1427 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2021-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-ii-reading-a",
+    "group-2021-ii-reading-b",
+    "group-2021-ii-reading-c",
+    "group-2021-ii-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2021-ii-reading-a": {
+      "overview": "本文是一则应用文广告，介绍约克郡夏季可以参加的四项活动：Harrogate音乐节、Jodie健身夏季课程、毛毡画制作工作坊以及一个数学主题展览。每项活动后附有日期和票价信息。",
+      "discourseStructure": {
+        "summary": "全文采用并列式结构，由总标题引出，随后按活动逐项介绍，每项活动包含简介、日期(Dates)与票价(Tickets)三部分信息。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-ii-reading-a-1",
+            "summary": "广告总标题。",
+            "function": "点明全文主题：约克郡夏季活动清单。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-2",
+            "summary": "第一项活动名称：Harrogate音乐节。",
+            "function": "引出第一项活动。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-3",
+            "summary": "介绍音乐节历史、50周年纪念及6月1日的开场演出。",
+            "function": "描述音乐节背景与开场信息。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-4",
+            "summary": "音乐节日期：6月1日至7月31日。",
+            "function": "提供音乐节起止日期。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-5",
+            "summary": "音乐节票价区间，并接出第二项活动名称Jodie健身夏季课程。",
+            "function": "提供音乐节票价并过渡到下一活动。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-6",
+            "summary": "介绍健身课程在Middleton Lodge庄园进行，由合格私人教练Jodie McGregor带领。",
+            "function": "描述健身课程的场地与教练。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-7",
+            "summary": "5月23日提供免费体验课，名额8个，需提前预订。",
+            "function": "说明体验课信息及报名要求。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-8",
+            "summary": "健身课程日期：5月23日至7月11日。",
+            "function": "提供健身课程起止日期。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-9",
+            "summary": "健身课程票价，并接出第三项活动名称毛毡画制作。",
+            "function": "提供健身票价并过渡到下一活动。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-10",
+            "summary": "介绍毛毡画工作坊在Helmsley艺术中心进行，教授用羊毛再现图画的技巧。",
+            "function": "描述毛毡画工作坊内容。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-11",
+            "summary": "工作坊还会讨论毛毡的起源及制作工艺。",
+            "function": "补充工作坊的知识性内容。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-12",
+            "summary": "毛毡画工作坊日期：6月12日至7月12日。",
+            "function": "提供工作坊起止日期。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-13",
+            "summary": "毛毡画工作坊票价：£40，含材料费。",
+            "function": "提供工作坊票价。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-14",
+            "summary": "第四项活动名称：数学主题展览。",
+            "function": "引出第四项活动。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-15",
+            "summary": "介绍Halifax的数学展览，用日常活动解释隐藏的数学原理。",
+            "function": "描述数学展览的内容与意义。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-16",
+            "summary": "数学展览日期：5月7日至6月10日。",
+            "function": "提供展览起止日期。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-a-17",
+            "summary": "数学展览票价：免费。",
+            "function": "提供展览票价。"
+          }
+        ]
+      }
+    },
+    "group-2021-ii-reading-b": {
+      "overview": "本文是一篇记叙文，作者是国家动物园的饲养员，讲述他把两只苏门答腊虎幼崽 Spot 和 Stripe 带回家进行二十四小时照料、与家人一起陪伴它们成长、最终在幼崽四个月大时把它们送回动物园的经历与感受。",
+      "discourseStructure": {
+        "summary": "全文按时间顺序展开：先交代带幼崽回家的原因，再写家人迎接幼崽、幼崽体型很小，接着写幼崽长大后的活动与照料的辛苦，然后写四个月大时把它们送回动物园，最后表达作者对这段经历的怀念之情。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-ii-reading-b-1",
+            "summary": "作者介绍自己是动物园饲养员，Spot 和 Stripe 是园内首次出生的虎崽；因全球三分之一的苏门答腊虎崽难以存活，他决定带回家全天候照料。",
+            "function": "交代背景并点明作者把虎崽带回家的原因。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-b-2",
+            "summary": "作者一家都期待参与并陪伴虎崽成长，作者不担心安全，因为幼崽很小、约 2.5 公斤，没有风险。",
+            "function": "描写家人态度并说明幼崽体型小、无危险。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-b-3",
+            "summary": "幼崽活动能力增强后白天可自由活动，但夜里必须关在大房间，否则会捣乱，早上常发现房间被弄得乱七八糟。",
+            "function": "描述幼崽长大后的行为及看管方式。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-b-4",
+            "summary": "照料幼崽需要大量精力，事情很快变得紧张，作者非常疲惫，幸得家人帮忙，一家人像流水线一样冲奶、洗奶瓶、清洁地板。",
+            "function": "突出照料虎崽的辛苦与家庭协作。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-b-5",
+            "summary": "当 Spot 和 Stripe 四个月大、学会开门跳栏时，作者知道该把它们送走了；分别很难，起初几天 Kynan 因幼崽不在而有些失落。",
+            "function": "说明送走虎崽的时机与原因以及分别时的情感。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-b-6",
+            "summary": "作者说自己并不难过，因为每天在动物园都能亲手接触它们，并满怀深情地回忆那段时光。",
+            "function": "抒发作者对这段经历的怀念，收束全文。"
+          }
+        ]
+      }
+    },
+    "group-2021-ii-reading-c": {
+      "overview": "本文是一篇新闻报道，讲述获得“世界最佳教师”称号并赢得百万奖金的英国教师 Andria Zafirakou 用奖金启动一个项目，把各领域艺术家带进英国学校，以激励孩子并提升学校艺术教学，多位艺术界与历史学界人士对此表示支持。",
+      "discourseStructure": {
+        "summary": "先点出获奖教师将用奖金把激励性人物带进校园（导语），随后展开她发起项目的目标与缘由，再用她本人的现场观察支撑，最后引用艺术家和历史学家的话强化艺术教育的必要性。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-ii-reading-c-1",
+            "summary": "一位获“世界最佳教师”并赢得百万奖金的英国女教师将用这笔钱把激励性人物带进英国学校。",
+            "function": "导语，交代核心人物、奖金用途与全文话题。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-c-2",
+            "summary": "Zafirakou 表示要带来一场课堂变革，已启动一个推动学校艺术教学的项目。",
+            "function": "引出项目，点明项目目标。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-c-3",
+            "summary": "项目源于许多学校在把各类艺术家请进校园方面遇到的困难。",
+            "function": "说明项目产生的背景与原因。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-c-4",
+            "summary": "Zafirakou 在自己任教的学校启动项目，描述孩子被激励时的“魔法时刻”，强调学校比以往更需要艺术家。",
+            "function": "以亲历见闻支撑项目价值。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-c-5",
+            "summary": "艺术家 Michael Craig-Martin 称赞该项目，并指出把艺术视为不必要是错误的。",
+            "function": "引用艺术界支持者观点，强调艺术不应被轻视。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-c-6",
+            "summary": "历史学家 Simon Schama 也支持项目，认为艺术教育绝对必要，未来取决于创造力，而创造力取决于年轻人。",
+            "function": "引用历史学界支持者观点，升华艺术教育与创造力的意义。"
+          }
+        ]
+      }
+    },
+    "group-2021-ii-reading-d": {
+      "overview": "本文是一篇科技说明/报道类文章，围绕一位澳大利亚教授研发用于监测放牧牛群健康的机器人展开，介绍其工作原理，并呈现不同牧场主对在养牛业中使用机器人的不同看法。",
+      "discourseStructure": {
+        "summary": "首段引出机器人研发及其背景（行业长期低技术且面临劳动力短缺）；第二段详细说明机器人的功能与工作原理；第三段对比作物种植已高度机械化而牛群监测变化较少；第四段呈现反对意见（Pete Bonds 坚持用人骑马查看）；末段呈现支持意见（Michael Kelsey 认为机器人可应对偷牛问题）。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2021-ii-reading-d-1",
+            "summary": "一位澳大利亚教授正研发监测放牧牛群健康的机器人，这一行业长期依赖低技术方式且正面临劳动力短缺。",
+            "function": "引出话题与研发背景，点明行业痛点（低技术、劳动力短缺）。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-d-2",
+            "summary": "Sukkarieh 教授认为机器人很有必要，并详细介绍其太阳能与电力驱动、用摄像头与传感器监测动物、用计算机分析视频判断牛是否生病、用无线标签测温、并通过监测草的形状颜色质地来追踪草场质量。",
+            "function": "详述机器人的具体功能与工作原理。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-d-3",
+            "summary": "机器已大量接管玉米小麦等作物的种植、灌溉与收割，但牛群监测的变化较少。",
+            "function": "通过对比说明牛群监测领域机械化程度较低。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-d-4",
+            "summary": "得州牧场主 Pete Bonds 难以招到愿意看牛的工人，但他不认为机器人适合此工作，多年经验与失败的技术尝试使他相信人骑马查看才是最好的方式。",
+            "function": "呈现反方观点，说明传统人工方式仍被部分牧场主坚持。"
+          },
+          {
+            "paragraphId": "para-2021-ii-reading-d-5",
+            "summary": "其他牧场主更看好机器人；Michael Kelsey 认为鉴于偷牛问题日益严重，机器人会非常有用，因为牛常被养在偏远地方且价值上升，成为有吸引力的目标。",
+            "function": "呈现正方观点，说明机器人在防盗方面的潜在价值。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2021-ii-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查参加Jodie健身体验课需要做什么，定位到体验课报名要求。",
+      "stemTranslationZh": "如果你想参加Jodie健身课程的体验课，你应该做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "加入一家健身俱乐部。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Join a fitness club.",
+            "explanation": "原文未提及参加体验课需要加入任何健身俱乐部，属于无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "支付报名费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pay a registration fee.",
+            "explanation": "原文明确说明体验课是免费的（free taster session），并未要求支付报名费，属于无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "进行预订。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-a-7",
+              "quote": "Advance bookings are required",
+              "anchor": "需提前预订"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "雇一名私人教练。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "qualified personal trainer",
+            "optionText": "Hire a personal trainer.",
+            "matchType": "exact",
+            "relationNote": "原文提到课程由合格的私人教练Jodie带领，选项借用 personal trainer 一词诱导，但参加者无需自己雇佣教练。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-6",
+              "quote": "our qualified personal trainer, Jodie McGregor",
+              "anchor": "原文提及的私人教练"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What should you do",
+          "sourceRole": "stem",
+          "targetText": "Advance bookings are required",
+          "targetParagraphId": "para-2021-ii-reading-a-7",
+          "relationType": "locationCue",
+          "note": "题干用 What should you do 询问应做的事，原文用 Advance bookings are required（需提前预订）作答。"
+        },
+        {
+          "sourceText": "Make a booking",
+          "sourceRole": "correctOption",
+          "targetText": "Advance bookings are required",
+          "targetParagraphId": "para-2021-ii-reading-a-7",
+          "relationType": "paraphrase",
+          "note": "正确选项 Make a booking 是原文 Advance bookings 的同义替换。"
+        }
+      ]
+    },
+    "q-2021-ii-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查毛毡画制作（Felt Picture Making）的票价，定位到该活动的Tickets信息。",
+      "stemTranslationZh": "毛毡画制作的门票多少钱？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "£7.50。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Tickets: £7.50 per sessionFelt Picture Making",
+            "sourceEntity": "£7.50 per session",
+            "optionText": "£7.50.",
+            "optionEntity": "£7.50.",
+            "explanation": "£7.50是Jodie健身课程每节课的价格，而非毛毡画制作的票价，属于对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-9",
+              "quote": "Tickets: £7.50 per session",
+              "anchor": "健身课程票价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "£12。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Tickets: £12—£96Jodie’s Fitness Summer Classes",
+            "sourceEntity": "£12",
+            "optionText": "£12.",
+            "optionEntity": "£12.",
+            "explanation": "£12是Harrogate音乐节票价区间的下限，而非毛毡画制作的票价，属于对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-5",
+              "quote": "Tickets: £12—£96",
+              "anchor": "音乐节票价区间"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "£40。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-a-13",
+              "quote": "Tickets: £40 including materials",
+              "anchor": "毛毡画票价£40"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "£96。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Tickets: £12—£96Jodie’s Fitness Summer Classes",
+            "sourceEntity": "£96",
+            "optionText": "£96.",
+            "optionEntity": "£96.",
+            "explanation": "£96是Harrogate音乐节票价区间的上限，而非毛毡画制作的票价，属于对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-5",
+              "quote": "Tickets: £12—£96",
+              "anchor": "音乐节票价区间"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Felt Picture Making",
+          "sourceRole": "stem",
+          "targetText": "Tickets: £40 including materials",
+          "targetParagraphId": "para-2021-ii-reading-a-13",
+          "relationType": "locationCue",
+          "note": "题干用 Felt Picture Making 定位到该活动板块，其 Tickets 行显示 £40 including materials。"
+        }
+      ]
+    },
+    "q-2021-ii-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "比较四项活动的起始日期，找出最早开始的活动，需对各活动的Dates起始日进行比对。",
+      "stemTranslationZh": "下列哪项活动开始得最早？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Harrogate音乐节。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Dates: 1 June—31 July",
+            "sourceHighlight": "1 June",
+            "optionText": "Harrogate Music Festival.",
+            "optionHighlight": "Harrogate Music Festival.",
+            "explanation": "音乐节6月1日才开始，晚于数学展览的5月7日，并非最早。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-4",
+              "quote": "Dates: 1 June—31 July",
+              "anchor": "音乐节起始日6月1日"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Jodie健身夏季课程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Dates: 23 May—11 July",
+            "sourceHighlight": "23 May",
+            "optionText": "Jodie's Fitness Summer Classes.",
+            "optionHighlight": "Jodie's Fitness Summer Classes.",
+            "explanation": "健身课程5月23日开始，晚于数学展览的5月7日，并非最早。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-8",
+              "quote": "Dates: 23 May—11 July",
+              "anchor": "健身课程起始日5月23日"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "毛毡画制作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Dates: 12 June—12 July",
+            "sourceHighlight": "12 June",
+            "optionText": "Felt Picture Making.",
+            "optionHighlight": "Felt Picture Making.",
+            "explanation": "毛毡画工作坊6月12日才开始，是四项中最晚开始的，并非最早。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-a-12",
+              "quote": "Dates: 12 June—12 July",
+              "anchor": "毛毡画起始日6月12日"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "数学主题展览。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-a-16",
+              "quote": "Dates: 7 May—10 June",
+              "anchor": "展览起始日5月7日"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "starts earliest",
+          "sourceRole": "stem",
+          "targetText": "Dates: 7 May—10 June",
+          "targetParagraphId": "para-2021-ii-reading-a-16",
+          "relationType": "calculation",
+          "note": "题干 starts earliest 需比较各活动 Dates 起始日，数学展览的 7 May 早于 1 June、23 May、12 June，故最早。"
+        }
+      ]
+    },
+    "q-2021-ii-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者把虎崽带回家的原因，需定位第一段中的原因说明。",
+      "stemTranslationZh": "作者为什么把虎崽带回家？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了确保它们能活下来。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-b-1",
+              "quote": "a third of Sumatran cubs in zoos don’t make it to adulthood, so I decided to give them round-the-clock care at home",
+              "anchor": "三分之一幼崽活不到成年，故带回家全天候照料"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了观察它们之间的差异。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To observe their differences.",
+            "explanation": "原文未提及作者带虎崽回家是为了观察它们之间的差异，属于无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了教它们生存技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To teach them life skills.",
+            "explanation": "原文带回家的目的是 round-the-clock care（全天候照料）以保证存活，并未提及教授生存技能，属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了让它们和他的孩子们一起玩。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "all of us really looked forward to being part of their lives and watching them grow",
+            "sourceHighlight": "being part of their lives and watching them grow",
+            "optionText": "To let them play with his kids.",
+            "optionHighlight": "play with his kids",
+            "explanation": "原文说全家期待参与虎崽的生活并看着它们成长，这是家人的期待而非带回家的原因，选项把陪伴成长偷换成“让虎崽和孩子一起玩”，扩大并曲解了原意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-b-2",
+              "quote": "all of us really looked forward to being part of their lives and watching them grow",
+              "anchor": "全家期待参与并看着它们成长"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To ensure their survival.",
+          "sourceRole": "correctOption",
+          "targetText": "don’t make it to adulthood, so I decided to give them round-the-clock care at home",
+          "targetParagraphId": "para-2021-ii-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "正确项 ensure their survival 是对原文 don’t make it to adulthood, so I decided to give them round-the-clock care 的同义替换：因怕活不到成年才全天候照料以保证存活。"
+        }
+      ]
+    },
+    "q-2021-ii-025": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第三段画线短语 get up to mischief 的词义推测，需借助上下文中幼崽捣乱、房间被弄乱的语境。",
+      "stemTranslationZh": "第三段中画线词组 “get up to mischief” 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "行为不端（调皮捣蛋）。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-b-3",
+              "quote": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo",
+              "anchor": "早上发现房间被弄得乱七八糟"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "迷路。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Lose their way.",
+            "explanation": "原文画线短语后描述的是幼崽把房间弄得乱七八糟，并无迷路之意，属于无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "睡得香。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "when we were asleep we had to contain them in a large room, otherwise they’d get up to mischief",
+            "sourceHighlight": "they’d get up to mischief",
+            "optionText": "Sleep soundly.",
+            "optionHighlight": "Sleep soundly",
+            "explanation": "原文是夜里不关住它们就会捣乱，强调其活跃捣蛋的行为，与“睡得香”含义相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-b-3",
+              "quote": "when we were asleep we had to contain them in a large room, otherwise they’d get up to mischief",
+              "anchor": "夜里需关住否则会捣乱"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "想念它们的妈妈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Miss their mom.",
+            "explanation": "原文画线短语指的是幼崽捣乱的行为，并未提及想念母亲，属于无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "get up to mischief",
+          "sourceRole": "stem",
+          "targetText": "they’d turned the room upside down, and left it looking like a zoo",
+          "targetParagraphId": "para-2021-ii-reading-b-3",
+          "relationType": "locationCue",
+          "note": "下文 turned the room upside down, and left it looking like a zoo 是对 get up to mischief 的具体说明，提示其义为“调皮捣乱、行为不端”。"
+        }
+      ]
+    },
+    "q-2021-ii-026": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查作者对在家养虎崽这件事的总体感受，需定位第四段中描述照料状态的句子。",
+      "stemTranslationZh": "作者认为在家养虎崽是怎样的体验？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "无聊的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Things quickly got very intense due to the huge amount of energy required to look after them",
+            "sourceHighlight": "very intense due to the huge amount of energy required",
+            "optionText": "Boring.",
+            "optionHighlight": "Boring",
+            "explanation": "原文说照料虎崽需要大量精力、事情很快变得紧张忙碌，与“无聊”所表达的轻松乏味恰好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-b-4",
+              "quote": "Things quickly got very intense due to the huge amount of energy required to look after them",
+              "anchor": "照料耗费大量精力、变得紧张"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "累人的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-b-4",
+              "quote": "There were some tough times and I just felt extremely tired.",
+              "anchor": "有艰难时刻，作者感到极度疲惫"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-ii-reading-b-4",
+              "quote": "Things quickly got very intense due to the huge amount of energy required to look after them",
+              "anchor": "照料耗费大量精力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "费钱的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Costly.",
+            "explanation": "原文强调的是精力消耗与疲惫，并未提及金钱花费，属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "危险的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "These were cubs. They weighed about 2.5 kg and were so small that there was absolutely no risk.",
+            "sourceHighlight": "there was absolutely no risk",
+            "optionText": "Risky.",
+            "optionHighlight": "Risky",
+            "explanation": "原文明确说幼崽很小、绝对没有风险，与“危险”相反，属于黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-b-2",
+              "quote": "They weighed about 2.5 kg and were so small that there was absolutely no risk.",
+              "anchor": "幼崽很小、绝对没有风险"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Tiring.",
+          "sourceRole": "correctOption",
+          "targetText": "I just felt extremely tired",
+          "targetParagraphId": "para-2021-ii-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "正确项 Tiring 是对原文 I just felt extremely tired 的同义概括，呼应 the huge amount of energy required 的辛苦感受。"
+        }
+      ]
+    },
+    "q-2021-ii-027": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查作者把 Spot 和 Stripe 送回动物园的原因，需定位第五段中虎崽长大后的行为变化。",
+      "stemTranslationZh": "作者为什么决定把 Spot 和 Stripe 送回动物园？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们吓到了孩子们。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They frightened the children.",
+            "explanation": "原文未提及虎崽吓到孩子，第五段只说 Kynan 因虎崽离开而失落，属于无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们变得难以看管。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-b-5",
+              "quote": "they were learning how to open doors and jump fences, and we knew it really was time for them to go",
+              "anchor": "虎崽学会开门跳栏，到了该送走的时候"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们惹恼了邻居。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They annoyed the neighbours.",
+            "explanation": "原文通篇未提及邻居，更没有惹恼邻居一说，属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们开始互相打斗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They started fighting each other.",
+            "explanation": "原文只说虎崽学会开门跳栏，并未提及它们互相打斗，属于无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They became difficult to contain.",
+          "sourceRole": "correctOption",
+          "targetText": "they were learning how to open doors and jump fences, and we knew it really was time for them to go",
+          "targetParagraphId": "para-2021-ii-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "正确项 difficult to contain 是对原文 learning how to open doors and jump fences 的推断与同义替换：会开门跳栏意味着越来越难关住，故知道该送走了。"
+        }
+      ]
+    },
+    "q-2021-ii-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Zafirakou 将如何使用她的奖金这一事实细节。",
+      "stemTranslationZh": "Zafirakou 将用她的奖金做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "拍一部电影。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a major movie star",
+            "optionText": "Make a movie.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 a major movie star 只是举例说明想请进学校的艺术家类型，选项借 movie 一词制造干扰，奖金并非用来拍电影。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-c-3",
+              "quote": "whether an up-and-coming local musician or a major movie star",
+              "anchor": "movie star 只是举例"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "建造新学校。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Build new schools.",
+            "explanation": "原文未提及用奖金建造新学校，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "运作一个项目。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-c-2",
+              "quote": "I’ve started a project to promote the teaching of the arts in our schools.",
+              "anchor": "已启动一个项目"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-ii-reading-c-1",
+              "quote": "will use the cash to bring inspirational figures into UK schools",
+              "anchor": "用奖金把激励性人物带进学校"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "帮助本地音乐人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "an up-and-coming local musician",
+            "optionText": "Help local musicians.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 local musician 仅为想请进校园的艺术家举例，选项借 local musician 制造干扰，奖金并非用来帮助本地音乐人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-c-3",
+              "quote": "whether an up-and-coming local musician or a major movie star",
+              "anchor": "local musician 只是举例"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Run a project.",
+          "sourceRole": "correctOption",
+          "targetText": "I’ve started a project to promote the teaching of the arts in our schools.",
+          "targetParagraphId": "para-2021-ii-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项 Run a project 同义替换原文 I’ve started a project，对应她用奖金推进的项目。"
+        }
+      ]
+    },
+    "q-2021-ii-029": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查 Craig-Martin 对英国学校艺术教学所持的看法/态度。",
+      "stemTranslationZh": "Craig-Martin 对英国学校的艺术教学有何看法？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它特别困难。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the difficulties many schools have in getting artists of any sort",
+            "sourceEntity": "the difficulties many schools have in getting artists",
+            "optionText": "It is particularly difficult.",
+            "optionEntity": "the teaching of the arts",
+            "explanation": "原文的“困难”指的是学校请到艺术家这件事，且并非出自 Craig-Martin 之口；选项把困难错配到“艺术教学”本身，对象错配。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它增加了艺术家的收入。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It increases artists' income.",
+            "explanation": "原文未提及艺术教学增加艺术家收入，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它开阔孩子的思维。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "children are talking to someone they are inspired by—their eyes are shining and their faces light up",
+            "sourceEntity": "children are talking to someone they are inspired by",
+            "optionText": "It opens children's mind.",
+            "optionEntity": "the teaching of the arts opens children's mind",
+            "explanation": "开阔孩子心智相关的描述出自 Zafirakou 的亲历见闻，而非 Craig-Martin 对艺术教学的评价，对象错配。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它值得更多重视。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-c-5",
+              "quote": "It was a mistake to see the arts as unnecessary, he added.",
+              "anchor": "把艺术看作不必要是错误的"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-ii-reading-c-5",
+              "quote": "particularly welcome at a time when the arts are being downgraded in schools",
+              "anchor": "艺术正被贬低，项目尤其受欢迎"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It deserves greater attention.",
+          "sourceRole": "correctOption",
+          "targetText": "It was a mistake to see the arts as unnecessary, he added.",
+          "targetParagraphId": "para-2021-ii-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "Craig-Martin 说把艺术视为 unnecessary 是 a mistake，又指出艺术正 being downgraded，反向说明艺术教学 deserves greater attention（值得更多重视）。"
+        }
+      ]
+    },
+    "q-2021-ii-030": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Schama 认为学校教育中应当强调什么。",
+      "stemTranslationZh": "根据 Schama 的观点，学校教育中应当强调什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "道德原则。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Moral principles.",
+            "explanation": "原文未提及 Schama 强调道德原则，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人际交往技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Interpersonal skills.",
+            "explanation": "原文未提及人际交往技能，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "创造能力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-c-6",
+              "quote": "The future depends on creativity and creativity depends on the young.",
+              "anchor": "未来取决于创造力"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-ii-reading-c-6",
+              "quote": "it is our creative spirit, our visionary sense of freshness, that has been our strength for centuries",
+              "anchor": "创造精神是我们的力量"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "积极的世界观。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Positive worldviews.",
+            "explanation": "原文未提及积极的世界观，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Creative abilities.",
+          "sourceRole": "correctOption",
+          "targetText": "The future depends on creativity and creativity depends on the young.",
+          "targetParagraphId": "para-2021-ii-reading-c-6",
+          "relationType": "paraphrase",
+          "note": "选项 Creative abilities 同义替换原文 creativity / creative spirit，对应 Schama 强调的创造力。"
+        }
+      ]
+    },
+    "q-2021-ii-031": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查对全文主旨的概括，选出最合适的标题。",
+      "stemTranslationZh": "下列哪一项最适合作为本文的标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "把艺术家带进学校",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-c-5",
+              "quote": "Andria’s brilliant project to bring artists from all fields into direct contact with children",
+              "anchor": "把各领域艺术家带给孩子"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-ii-reading-c-3",
+              "quote": "getting artists of any sort—whether an up-and-coming local musician or a major movie star—into schools to work with and inspire children",
+              "anchor": "把各类艺术家请进学校"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "当历史学家遇见艺术家",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Historian Sir Simon Schama is also a supporter of the project.",
+            "sourceHighlight": "Historian Sir Simon Schama is also a supporter",
+            "optionText": "When Historians Meet Artists",
+            "optionHighlight": "When Historians Meet Artists",
+            "explanation": "历史学家与艺术家只是为项目背书的支持者，属次要细节；以此作标题以偏概全，缩小并偏离了全文“把艺术家带进学校”的主旨。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "英国的艺术教育",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "I’ve started a project to promote the teaching of the arts in our schools.",
+            "sourceHighlight": "the teaching of the arts in our schools",
+            "optionText": "Arts Education in Britain",
+            "optionHighlight": "Arts Education in Britain",
+            "explanation": "全文聚焦于一位教师发起的把艺术家带进校园的具体项目，而非泛论整个英国的艺术教育，标题范围过大。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "世界最佳艺术教师",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the World’s Best Teacher",
+            "optionText": "The World's Best Arts Teacher",
+            "matchType": "wordFamily",
+            "relationNote": "原文称号是 the World’s Best Teacher，选项借此并加入 Arts 拼成标题，但全文重点是项目本身而非这个称号，且原文并无 Best Arts Teacher 的说法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-c-1",
+              "quote": "after she was named the World’s Best Teacher",
+              "anchor": "世界最佳教师称号"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Bring Artists to Schools",
+          "sourceRole": "correctOption",
+          "targetText": "Andria’s brilliant project to bring artists from all fields into direct contact with children",
+          "targetParagraphId": "para-2021-ii-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "标题 Bring Artists to Schools 概括全文核心项目——bring artists from all fields into direct contact with children，与各段反复出现的“把艺术家带进学校”一致。"
+        }
+      ]
+    },
+    "q-2021-ii-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查养牛业面临的问题这一细节信息，定位首段对行业现状的描述。",
+      "stemTranslationZh": "养牛业存在什么问题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "土壤污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Soil pollution.",
+            "explanation": "原文未提及土壤污染问题，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "缺少工人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-d-1",
+              "quote": "is facing a labor shortage",
+              "anchor": "面临劳动力短缺"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2021-ii-reading-d-4",
+              "quote": "it’s increasingly difficult to find workers interested in watching cattle",
+              "anchor": "越来越难找到愿意看牛的工人"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "机器老化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "sees robots as necessary given how cattlemen are aging",
+            "sourceEntity": "cattlemen are aging",
+            "optionText": "Aging machines.",
+            "optionEntity": "Aging machines",
+            "explanation": "原文说的是牧场主在老龄化（cattlemen are aging），而非机器老化，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-d-2",
+              "quote": "sees robots as necessary given how cattlemen are aging",
+              "anchor": "牧场主在老龄化"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "盈利能力低。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Low profitability.",
+            "explanation": "原文未提及养牛业盈利能力低，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "a problem with the cattle-raising industry",
+          "sourceRole": "stem",
+          "targetText": "is facing a labor shortage",
+          "targetParagraphId": "para-2021-ii-reading-d-1",
+          "relationType": "locationCue",
+          "note": "题干问行业存在的 problem，原文首段用 is facing a labor shortage 点明劳动力短缺这一问题。"
+        },
+        {
+          "sourceText": "Lack of workers",
+          "sourceRole": "correctOption",
+          "targetText": "a labor shortage",
+          "targetParagraphId": "para-2021-ii-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项 Lack of workers 是原文 a labor shortage（劳动力短缺）的同义替换。"
+        }
+      ]
+    },
+    "q-2021-ii-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查机器人能做什么这一细节信息，定位第二段对机器人功能的列举。",
+      "stemTranslationZh": "Sukkarieh 的机器人将能够做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "监测草的质量。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-d-2",
+              "quote": "The quality of grassland will be tracked by monitoring the shape, color and texture (质地) of grass.",
+              "anchor": "通过监测草来追踪草场质量"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "治愈患病的牛。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "A computer system will analyze the video to determine whether a cow is sick.",
+            "sourceHighlight": "determine whether a cow is sick",
+            "optionText": "Cure the diseased cattle.",
+            "optionHighlight": "Cure the diseased cattle",
+            "explanation": "原文只说机器人判断牛是否生病（determine whether a cow is sick），并未说能治愈牛，选项夸大为 Cure。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-d-2",
+              "quote": "A computer system will analyze the video to determine whether a cow is sick.",
+              "anchor": "判断牛是否生病"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把牛移到另一片草地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "cattlemen will know whether they need to move their cattle to another field for nutrition purposes",
+            "sourceEntity": "cattlemen will know whether they need to move their cattle",
+            "optionText": "Move cattle to another field.",
+            "optionEntity": "Move cattle to another field",
+            "explanation": "原文是机器人帮助牧场主判断是否需要移动牛群，真正执行移动的是牧场主而非机器人，动作主体错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-d-2",
+              "quote": "cattlemen will know whether they need to move their cattle to another field for nutrition purposes",
+              "anchor": "牧场主决定是否移动牛群"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "预测天气变化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Predict weather changes.",
+            "explanation": "原文未提及机器人能预测天气变化，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Monitor the quality of grass",
+          "sourceRole": "correctOption",
+          "targetText": "The quality of grassland will be tracked by monitoring the shape, color and texture (质地) of grass.",
+          "targetParagraphId": "para-2021-ii-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 Monitor the quality of grass 对应原文 The quality of grassland will be tracked by monitoring...of grass，monitor 与 be tracked by monitoring 同义。"
+        }
+      ]
+    },
+    "q-2021-ii-034": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Pete Bonds 仍雇用牛仔看牛的原因，定位第四段对其态度与理由的说明。",
+      "stemTranslationZh": "为什么 Pete Bonds 仍然雇用牛仔来看管牛群？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他想帮助他们谋生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He wants to help them earn a living.",
+            "explanation": "原文未提及 Bonds 雇用牛仔是为了帮他们谋生，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他认为人能把这项工作做得更好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-d-4",
+              "quote": "have convinced him that the best way to check cattle is with a man on a horse",
+              "anchor": "他相信人骑马查看是最好的方式"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他在使用机器人方面缺乏经验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Years of experience in the industry—and failed attempts to use technology—have convinced him that the best way to check cattle is with a man on a horse.",
+            "sourceHighlight": "Years of experience in the industry",
+            "optionText": "He is inexperienced in using robots.",
+            "optionHighlight": "inexperienced",
+            "explanation": "原文强调 Bonds 有多年行业经验且尝试过技术（failed attempts to use technology），与选项所说他缺乏经验（inexperienced）正相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-d-4",
+              "quote": "Years of experience in the industry—and failed attempts to use technology—have convinced him that the best way to check cattle is with a man on a horse.",
+              "anchor": "多年经验且尝试过技术"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他享受这种传统的生活方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He enjoys the traditional way of life.",
+            "explanation": "原文只说他认为人骑马查看最好，未提及他享受传统生活方式，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He thinks men can do the job better",
+          "sourceRole": "correctOption",
+          "targetText": "the best way to check cattle is with a man on a horse",
+          "targetParagraphId": "para-2021-ii-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 men can do the job better 对应原文 the best way to check cattle is with a man on a horse，the best way 与 do better 同义。"
+        }
+      ]
+    },
+    "q-2021-ii-035": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Michael Kelsey 认为机器人如何帮助看管牛群，定位末段他对机器人价值的说明。",
+      "stemTranslationZh": "根据 Michael Kelsey 所说，机器人可能如何帮助看管牛群？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "提高牛的价值。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "their value has risen",
+            "optionText": "Increase the value of cattle.",
+            "matchType": "exact",
+            "relationNote": "原文 their value has risen 是说牛的价值本身已上升（成为偷盗目标的原因），并非机器人提高牛的价值，选项借用 value 一词设钩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-d-5",
+              "quote": "their value has risen",
+              "anchor": "牛的价值已上升"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "降低劳动力成本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Bring down the cost of labor.",
+            "explanation": "Kelsey 的话中未提及机器人能降低劳动力成本，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "让这项工作更有吸引力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "making them appealing targets",
+            "optionText": "Make the job more appealing.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 appealing 用于形容牛成为有吸引力的偷盗目标（appealing targets），与选项让工作更有吸引力无关，属同词族干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2021-ii-reading-d-5",
+              "quote": "making them appealing targets",
+              "anchor": "成为有吸引力的目标"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "防止牛被偷。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2021-ii-reading-d-5",
+              "quote": "a robot could be extremely useful given rising concerns about cattle theft",
+              "anchor": "机器人对应对偷牛非常有用"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Keep cattle from being stolen",
+          "sourceRole": "correctOption",
+          "targetText": "rising concerns about cattle theft",
+          "targetParagraphId": "para-2021-ii-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "选项 Keep cattle from being stolen 对应原文 cattle theft（偷牛）——机器人在 rising concerns about cattle theft 背景下 extremely useful，即帮助防盗。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2025-ii-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2025-ii-seven-choices": {
+      "overview": "本篇为说明文，主题是“以家庭为单位做志愿服务的意外好处”。文章用一个引入段加四个带小标题（bullet）的分述段，分别从“感觉时间更多”“更长寿/身体健康”“对孩子和青少年的终身影响”“与家人共度更多时光”四个角度展开，结构清晰，属于典型的“总—分”小标题式七选五。",
+      "discourseStructure": {
+        "summary": "引入段抛出问题并点明志愿服务对全家有意外好处；随后四个小标题段各自先用一句概括性主题句（多为待填空的标题句），再用研究或细节展开。空格主要落在小标题主题句或承接句上，靠话题场对齐与上下文呼应来确定。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Unexpected Benefits of Volunteering as a Family",
+            "paragraphIds": [
+              "para-2025-ii-seven-title",
+              "para-2025-ii-seven-p1"
+            ],
+            "summary": "引入段：以两个问句吸引读者，提出“家庭志愿服务可能正是你需要的”，并预告下文会讲意外好处。第36空在此段。"
+          },
+          {
+            "unitId": "unit-time",
+            "heading": "You’ll feel like you have more time.",
+            "paragraphIds": [
+              "para-2025-ii-seven-p2",
+              "para-2025-ii-seven-p3"
+            ],
+            "summary": "小标题段一：研究表明付出时间反而让人觉得时间更充裕。第37空在段末，承接“感觉时间更多”这一收益。"
+          },
+          {
+            "unitId": "unit-health",
+            "heading": "You can live longer if you volunteer regularly.",
+            "paragraphIds": [
+              "para-2025-ii-seven-p4",
+              "para-2025-ii-seven-p5"
+            ],
+            "summary": "小标题段二：用华盛顿大学对55岁以上成年人的研究说明志愿者记忆更好、更注重身体活动。第38空为该段主题句。"
+          },
+          {
+            "unitId": "unit-kids",
+            "heading": "(blank heading)",
+            "paragraphIds": [
+              "para-2025-ii-seven-p6",
+              "para-2025-ii-seven-p7"
+            ],
+            "summary": "小标题段三：青少年期做志愿与成绩提升、自信增强等长期正面效果相关。第39空为该段缺失的小标题。"
+          },
+          {
+            "unitId": "unit-family",
+            "heading": "You’ll have more time with family.",
+            "paragraphIds": [
+              "para-2025-ii-seven-p8",
+              "para-2025-ii-seven-p9"
+            ],
+            "summary": "小标题段四：全家共同志愿能朝共同目标努力、彼此以新方式联结。第40空承接“每个人都带来独特之处”，引出发现孩子才能的内容。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2025-ii-036": {
+      "blankId": "blank-2025-ii-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "bring your family together",
+        "a hobby that can be shared",
+        "the little ones and adults",
+        "helping others",
+        "the whole family"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-ii-seven-p1",
+        "beforeQuote": "Hoping to find a hobby that can be shared by both the little ones and adults?",
+        "afterQuote": "You may know the “feel-good” emotions that come with helping others"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "bring your family together",
+          "signalSide": "context-before",
+          "targetText": "Volunteering as a family",
+          "relation": "空前“把家人聚到一起、可共享的爱好”与选项 B 的“以家庭为单位做志愿”属同一话题场，正面回应两个问句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Volunteering as a family",
+          "signalSide": "option",
+          "targetText": "bring your family together / shared by both the little ones and adults",
+          "relation": "选项 B 的“family”与空前“family together、little ones and adults”形成家庭话题场对齐。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the thing you need",
+          "signalSide": "option",
+          "targetText": "a way to bring your family together",
+          "relation": "选项 B 的“the thing you need”回指空前问句中“你正在寻找的方式”，构成问—答呼应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前两个问句在问“有没有能让全家共享的活动”，选项 B“以家庭为单位做志愿也许正是你需要的”直接给出答案，并自然引出后文的志愿好处。",
+        "matchedClues": [
+          {
+            "contextSide": "bring your family together / shared by both the little ones and adults",
+            "optionSide": "Volunteering as a family",
+            "relation": "都指向适合全家共同参与的活动，话题完全一致。"
+          },
+          {
+            "contextSide": "Are you looking for a way",
+            "optionSide": "may be just the thing you need",
+            "relation": "问句问“是否在找一种方式”，选项以“正是你需要的”作答。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 也讲志愿的好处，但它强调“让你有能力感、把握每一天”，没有回应空前的“家庭共享活动”这一核心问句，不如 B 切题。"
+        }
+      ],
+      "teachingNote": "段首一问一答型空格，先抓问句问的是什么，再选能直接作答并衔接下文的句子。"
+    },
+    "q-2025-ii-037": {
+      "blankId": "blank-2025-ii-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "feel like you have more time",
+        "too busy to volunteer",
+        "giving your time to community causes",
+        "makes you feel like you have more of it"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-ii-seven-p3",
+        "beforeQuote": "giving your time to community causes actually makes you feel like you have more of it.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "makes you feel like you have more of it",
+          "signalSide": "context-before",
+          "targetText": "makes you feel capable and inspires you to make the most of each day",
+          "relation": "空前讲志愿“让你觉得拥有更多（时间）”，选项 G 的“让你感到有能力、充分利用每一天”延续这种积极的自我感受话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make the most of each day",
+          "signalSide": "option",
+          "targetText": "have more of it / more time",
+          "relation": "选项 G 的“充分利用每一天”与本段“感觉时间更多”主题呼应，是对该收益的升华总结。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "makes you feel",
+          "signalSide": "option",
+          "targetText": "makes you feel like you have more of it",
+          "relation": "选项 G 的“makes you feel”与空前“makes you feel like”句式平行衔接，承接同一“感受”主语链。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本段讲志愿让人“觉得时间更多”，段末空需要一句积极总结；选项 G“让你感到有能力并激励你充分利用每一天”正好把这种心理收益升华收束。",
+        "matchedClues": [
+          {
+            "contextSide": "makes you feel like you have more of it",
+            "optionSide": "inspires you to make the most of each day",
+            "relation": "都在描述志愿带来的正向时间/自我效能感受。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A“帮助社区降低抑郁率”虽是好处，但与本段“时间/能力感”话题不符，属心理健康另一维度。"
+        }
+      ],
+      "teachingNote": "段末总结空要顺着本段的核心收益往“升华”方向选，看哪句与本段感受词同场且语气一致。"
+    },
+    "q-2025-ii-038": {
+      "blankId": "blank-2025-ii-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "adults 55 and older",
+        "better memory and maintained overall health",
+        "look after their own health",
+        "adding physical activity into their lives"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-ii-seven-p5",
+        "beforeQuote": "",
+        "afterQuote": "Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "adults 55 and older",
+          "signalSide": "context-after",
+          "targetText": "For adults",
+          "relation": "空后聚焦“55岁及以上成年人”，与选项 E 的“For adults”指向同一人群，主题句对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "maintained overall health",
+          "signalSide": "context-after",
+          "targetText": "physical health benefits",
+          "relation": "空后“保持整体健康、增加身体活动”与选项 E 的“身体健康益处”属同一健康话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "physical health benefits",
+          "signalSide": "option",
+          "targetText": "better memory / maintained overall health / physical activity",
+          "relation": "选项 E 的“身体健康益处”概括空后记忆、整体健康、身体活动等具体表现，是该段主题句。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "本段以华盛顿大学对55岁以上成年人的研究为例，讲志愿带来的身体健康好处；空在段首作主题句，选项 E“对成年人而言，志愿能带来显著的身体健康益处”正好统领全段。",
+        "matchedClues": [
+          {
+            "contextSide": "adults 55 and older",
+            "optionSide": "For adults",
+            "relation": "都锁定成年人群体。"
+          },
+          {
+            "contextSide": "maintained overall health / adding physical activity",
+            "optionSide": "significant physical health benefits",
+            "relation": "下文细节正是身体健康益处的具体例证。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 讲“降低抑郁率”属心理健康，与本段强调记忆、身体活动等生理健康不匹配。"
+        }
+      ],
+      "teachingNote": "段首主题句空要找能被下文细节全面例证、且人群与话题都对应的概括句。"
+    },
+    "q-2025-ii-039": {
+      "blankId": "blank-2025-ii-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Volunteering during teenage years",
+        "improved grades and increased self-confidence",
+        "in the years to come",
+        "a teen’s well-being"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-ii-seven-p7",
+        "beforeQuote": "",
+        "afterQuote": "Volunteering during teenage years has been linked to some major positive effects such as improved grades and increased self-confidence."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Volunteering during teenage years",
+          "signalSide": "context-after",
+          "targetText": "kids and teenagers",
+          "relation": "空后聚焦“青少年期的志愿”，与选项 C 的“kids and teenagers”人群对应，构成该段小标题主题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in the years to come",
+          "signalSide": "context-after",
+          "targetText": "lifelong effect",
+          "relation": "空后“在未来岁月里持续影响”与选项 C 的“lifelong effect（终身影响）”同义呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "lifelong effect on kids and teenagers",
+          "signalSide": "option",
+          "targetText": "improved grades / self-confidence / in the years to come",
+          "relation": "选项 C 的“对孩子和青少年的终身影响”概括下文成绩、自信等不止短期、延续多年的效果。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "该段讲青少年期做志愿带来的成绩提升、自信增强等不止短期、延续到未来的影响；空为缺失的小标题，选项 C“志愿对孩子和青少年有终身影响”恰好概括。",
+        "matchedClues": [
+          {
+            "contextSide": "Volunteering during teenage years",
+            "optionSide": "kids and teenagers",
+            "relation": "人群对应：青少年。"
+          },
+          {
+            "contextSide": "These effects aren’t just short-term / in the years to come",
+            "optionSide": "lifelong effect",
+            "relation": "下文强调长期、延续多年，正是“终身影响”。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 讲“发现孩子的才能”虽涉及 kid，但只是单点惊喜，不能概括本段“成绩、自信、长期影响”的整体主题。"
+        }
+      ],
+      "teachingNote": "小标题空要选能覆盖全段要点（人群+影响范围）的概括句，注意“lifelong”对应“in the years to come”。"
+    },
+    "q-2025-ii-040": {
+      "blankId": "blank-2025-ii-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "working toward a common goal",
+        "Everyone brings something unique to the table",
+        "connect with each other in a new way",
+        "tasks for every age and ability",
+        "all your children can feel proud"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-ii-seven-p9",
+        "beforeQuote": "Families who volunteer together have the unique experience of working toward a common goal.",
+        "afterQuote": "Everyone brings something unique to the table and can connect with each other in a new way."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Everyone brings something unique",
+          "signalSide": "context-after",
+          "targetText": "your kid has a talent you didn’t know about",
+          "relation": "空后“每个人都带来独特之处”与选项 F 的“发现孩子有你不知道的才能”属“发现各自特长”话题场，且 F 是其中一个具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "all your children can feel proud",
+          "signalSide": "context-after",
+          "targetText": "your kid has a talent",
+          "relation": "空后“所有孩子都能为自己的工作自豪”与选项 F 聚焦孩子（kid）的话题一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your kid has a talent",
+          "signalSide": "option",
+          "targetText": "Everyone brings something unique / all your children",
+          "relation": "选项 F 把“家人各展所长”这一抽象点落到“发现孩子的才能”这一具体惊喜上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "your kid",
+          "signalSide": "option",
+          "targetText": "all your children",
+          "relation": "选项 F 的“your kid”与空后“all your children”指代同一对象——参与志愿的孩子，构成指称衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本段讲全家共做志愿能朝共同目标努力、各展所长；空前后都在说“每个人带来独特之处、孩子能感到自豪”，选项 F“你甚至会发现孩子有以前不知道的才能”正是这一点的具体延展。",
+        "matchedClues": [
+          {
+            "contextSide": "Everyone brings something unique to the table",
+            "optionSide": "your kid has a talent you didn’t know about before",
+            "relation": "都讲在共同志愿中发现各人独特之处。"
+          },
+          {
+            "contextSide": "all your children can feel proud of their work",
+            "optionSide": "your kid",
+            "relation": "焦点同为参与的孩子。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 讲“让你有能力感、把握每天”，与本段“家人共事、各展所长”话题不贴合，缺少对孩子才能这一具体延展的呼应。"
+        }
+      ],
+      "teachingNote": "段中承接空要顺着前后句的话题场（此处“各展所长/孩子”）选具体延展句，并核对指称词与上下文一致。"
+    }
+  }
+}

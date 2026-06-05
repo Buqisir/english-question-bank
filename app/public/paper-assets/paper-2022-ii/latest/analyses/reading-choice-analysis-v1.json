@@ -1,0 +1,1475 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-ii-reading-a",
+    "group-2022-ii-reading-b",
+    "group-2022-ii-reading-c",
+    "group-2022-ii-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "xiaochuan",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2022-ii-reading-a": {
+      "overview": "本文是一则儿童探索博物馆（Children's Discovery Museum）团体游玩（Group Play）的应用文信息单，按板块介绍价格、奖学金、团体人数、开放时间、报名政策和行为准则。",
+      "discourseStructure": {
+        "summary": "全文以分栏小标题形式组织：先给出团体游玩的总体信息与价格，再依次说明奖学金条件、团体人数与监护人要求、开放时间、报名流程，最后列出参观行为准则。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-ii-reading-a-1",
+            "summary": "标题：儿童探索博物馆。",
+            "function": "点明文本主体机构。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-2",
+            "summary": "关于团体游玩的总体信息标题。",
+            "function": "引出团体游玩板块。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-3",
+            "summary": "价格板块标题。",
+            "function": "引出收费信息。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-4",
+            "summary": "团体游玩每人 7 元。",
+            "function": "给出具体票价。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-5",
+            "summary": "奖学金板块标题。",
+            "function": "引出奖学金信息。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-6",
+            "summary": "为低收入学校和青年组织提供奖学金，须参与参观后的问卷调查。",
+            "function": "说明奖学金对象与必需条件。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-7",
+            "summary": "奖学金用于门票和/或交通，交通发票须在参观后 60 天内提交。",
+            "function": "说明奖学金用途与发票期限。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-8",
+            "summary": "团体人数板块标题。",
+            "function": "引出人数与监护人要求。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-9",
+            "summary": "每十名儿童须配一名监护人，缺一名成人额外收费 50。",
+            "function": "规定监护人配比与罚则。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-10",
+            "summary": "团体游玩适用 10 人及以上、上限 35 人；35 人以上需电话商议。",
+            "function": "规定团体规模范围。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-11",
+            "summary": "开放时间板块标题。",
+            "function": "引出时间信息。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-12",
+            "summary": "博物馆每日上午 9:30 至下午 4:30 开放。",
+            "function": "给出开放时间。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-13",
+            "summary": "团体游玩可在博物馆开放的任意日期或时间预约。",
+            "function": "说明预约时间灵活性。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-14",
+            "summary": "报名政策板块标题。",
+            "function": "引出报名流程。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-15",
+            "summary": "报名须至少提前两周。",
+            "function": "规定报名提前期。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-16",
+            "summary": "可在线报名或填写带多个日期与开始时间选项的团体游玩报名表。",
+            "function": "说明报名方式。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-17",
+            "summary": "报名表收到并处理后，两个工作日内发送确认邮件。",
+            "function": "说明确认流程。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-18",
+            "summary": "行为准则板块标题。",
+            "function": "引出参观须知。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-19",
+            "summary": "教师和监护人应示范良好行为并始终陪伴学生。",
+            "function": "规定成人陪同与示范责任。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-20",
+            "summary": "儿童不得在博物馆任何区域无人陪同。",
+            "function": "规定儿童不得单独活动。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-21",
+            "summary": "儿童应与彼此和展品友好相处。",
+            "function": "规定与他人及展品的相处方式。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-a-22",
+            "summary": "在博物馆请使用室内音量。",
+            "function": "规定音量要求。"
+          }
+        ]
+      }
+    },
+    "group-2022-ii-reading-b": {
+      "overview": "一位资深记者以第一人称记叙散文的方式，借给两岁孙子读纸质绘本时孙子反复戳书页的小事，引出「我们正处在多媒体讲故事的新时代」这一主题，并自嘲式地反思自己作为「老一辈」在数字时代的位置。",
+      "discourseStructure": {
+        "summary": "文章先抛出「新媒体时代」的总论点，再用孙子戳书的具体故事层层设置悬念并揭示原因，随后转入作者对自身数字能力的自我评价，最后以登上视频项目、成为「网络明星」收尾，首尾呼应。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-ii-reading-b-1",
+            "summary": "点明记者身处多媒体讲故事的新时代，而年轻一代视之为理所当然。",
+            "function": "总起/点题，提出全文核心话题。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-2",
+            "summary": "春节假期作者抱着两岁孙子，带了一本简单的图画书准备读给他听。",
+            "function": "引入具体事例，交代故事背景。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-3",
+            "summary": "作者拿书给孙子看图，孙子伸手用手指戳书页。",
+            "function": "叙事推进，呈现第一个反常细节。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-4",
+            "summary": "作者起初以为孙子只是喜欢图画，孙子戳得更用力，作者困惑这孩子是否有问题。",
+            "function": "设置悬念，强化冲突。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-5",
+            "summary": "作者恍然大悟：孙子习惯了一戳就会动的平板电脑图画，以为纸质书也是如此。",
+            "function": "揭示原因，解开悬念。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-6",
+            "summary": "作者自嘲纸质书过时，但强调自己并未与数字时代脱节：会剪视频、做音频、用移动支付、还建过网站。",
+            "function": "转入作者对自身数字能力的自我评价。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-7",
+            "summary": "作者坦言自己唯一的短板是很少出镜，但《中国日报》仍邀请他为京津冀一体化视频项目分享个人故事。",
+            "function": "补充作者经历，引出转折。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-b-8",
+            "summary": "作者成了「网络明星」，自嘲不会得意忘形，但一定要让孙子在平板上看到。",
+            "function": "收束全文，首尾呼应。"
+          }
+        ]
+      }
+    },
+    "group-2022-ii-reading-c": {
+      "overview": "本文是一篇说明文/新闻报道，围绕美国“开车发短信”这一现代驾驶陋习展开：尽管多数州已立法禁止且开展公益宣传，问题却愈演愈烈；为此立法者与公共卫生专家借鉴治理酒驾的旧思路，并提出用一种名为 Textalyzer 的新设备来检测司机事故前是否违规使用手机，以期改变人们的行为。",
+      "discourseStructure": {
+        "summary": "先摆出已有的禁令与宣传（背景），再用“Yet”转折指出问题反而恶化（问题），接着引用官员观点说明分心驾驶持续上升（原因），随后提出“像治理酒驾一样治理分心驾驶”的对策，并具体介绍 Textalyzer 设备的工作原理，最后以推动立法者的话收束，强调用法律手段改变行为。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-ii-reading-c-1",
+            "summary": "过去七年里多数州已禁止司机发短信，公益宣传也用多种方法劝人开车时放下手机。",
+            "function": "交代背景：已有的禁令与宣传努力。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-c-2",
+            "summary": "然而问题似乎在恶化：美国人仍边开车边发短信、刷社交、拍照，曾连年下降的交通事故如今急剧上升。",
+            "function": "转折提出问题：禁令与宣传未见成效，事故反升。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-c-3",
+            "summary": "部分原因是人们开车更多，但公路交通安全管理局负责人 Rosekind 称分心驾驶“不幸只增不减”。",
+            "function": "分析原因：分心驾驶持续上升。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-c-4",
+            "summary": "Rosekind 称“大改变需要大想法”，立法者与公共卫生专家因此借鉴旧办法，想把分心驾驶当作酒驾来治理。",
+            "function": "引出对策思路：像治理酒驾一样治理分心驾驶。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-c-5",
+            "summary": "纽约立法者设想给警察配备 Textalyzer：事故现场警察可索取司机手机，用其检查操作系统近期活动，判断司机是否刚发过短信、邮件等违反免手持法的行为。",
+            "function": "具体说明对策：介绍 Textalyzer 的工作原理与作用。"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-c-6",
+            "summary": "推动 2001 年禁令的 Ortiz 称需要能改变行为的法律条款，若 Textalyzer 法案立法，人们会更不敢碰手机。",
+            "function": "收束并升华：用法律手段震慑、改变驾驶行为。"
+          }
+        ]
+      }
+    },
+    "group-2022-ii-reading-d": {
+      "overview": "本文是一篇科普说明文，介绍心脏专家 Dr. Ben Levine 关于运动改善衰老心脏的研究：随年龄增长心脏处理氧气效率下降，但中年阶段开始进行高强度有氧运动可以逆转心脏老化。",
+      "discourseStructure": {
+        "summary": "文章先提出心脏随年龄衰老的现象，用橡皮筋作比喻解释心脏老化，接着介绍 Levine 的对照实验设计与结果，进一步说明开始运动的最佳时机，最后引用另一位专家对该研究的评价与建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-ii-reading-d-1",
+            "summary": "随着年龄增长，即使健康，心脏处理氧气的效率也会下降，最早的迹象通常出现在五六十岁，不运动的人会更早。",
+            "function": "提出现象，引出心脏随年龄衰老的话题"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-d-2",
+            "summary": "Levine 用橡皮筋作比喻说明心脏老化：橡皮筋久置会变干易断；但中年人现在开始锻炼仍可改善衰老的心脏。",
+            "function": "用比喻解释心脏老化机制，并引出运动有益的观点"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-d-3",
+            "summary": "介绍实验设计：选取45-64岁平时不太运动但健康的志愿者，随机分两组，第一组做无氧运动，第二组在教练指导下做高强度有氧运动；两年后第二组心脏健康显著改善。",
+            "function": "描述研究方法与对照设计及初步结果"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-d-4",
+            "summary": "Levine 称把50岁的心脏调回到30-35岁的状态，原因是心脏充盈和泵血能力增强；而进行低强度运动者的心脏没有变化。",
+            "function": "进一步阐释研究结果及其生理原因"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-d-5",
+            "summary": "Levine 指出开始运动的最佳时机是心脏仍有弹性的中年晚期；对70岁健康老人进行一年训练则毫无效果。",
+            "function": "强调开始运动的最佳时机，补充反面证据"
+          },
+          {
+            "paragraphId": "para-2022-ii-reading-d-6",
+            "summary": "Dr. Nieca Goldberg 认为该研究是良好开端，但样本小，需要用更大规模人群重复研究以确定运动方案中哪些方面作用最大。",
+            "function": "引用他人评价，提出对研究的进一步建议"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2022-ii-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查获得奖学金的团体需要履行的义务这一细节。",
+      "stemTranslationZh": "如果一个团体获得了奖学金，他们需要做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "预先支付门票费用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Prepay the admission fees.",
+            "explanation": "原文未提及获得奖学金的团体需要预先支付门票费用；奖学金本身即用于支付 Group Play admission fees。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "使用博物馆的交通工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Scholarships are for Group Play admission fees and/or transportation.",
+            "optionText": "Use the Museum's transportation.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文中的 transportation 一词制造干扰；原文只说奖学金可用于交通费用，并未说要使用博物馆提供的交通工具。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-a-7",
+              "quote": "Scholarships are for Group Play admission fees and/or transportation.",
+              "anchor": "奖学金用于交通费用，非使用博物馆交通"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "参观后参加一次问卷调查。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-a-6",
+              "quote": "Participation in a post-visit survey is required.",
+              "anchor": "须参加参观后问卷"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把参观安排在工作日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Schedule their visit on weekdays.",
+            "explanation": "原文未提及获得奖学金须把参观安排在工作日；原文只说团体游玩可在博物馆开放的任意日期或时间预约。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Take a survey after the visit.",
+          "sourceRole": "correctOption",
+          "targetText": "Participation in a post-visit survey is required.",
+          "targetParagraphId": "para-2022-ii-reading-a-6",
+          "relationType": "paraphrase",
+          "note": "正确选项 Take a survey after the visit 是原文 Participation in a post-visit survey is required 的同义替换，post-visit 对应 after the visit。"
+        }
+      ]
+    },
+    "q-2022-ii-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查依据监护人配比规则进行计算，求 30 名儿童所需监护人数。",
+      "stemTranslationZh": "30 名儿童的团体来博物馆参观需要多少名监护人？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "We require one chaperone (监护人) per ten children.",
+            "sourceHighlight": "one chaperone (监护人) per ten children",
+            "optionText": "One.",
+            "optionHighlight": "One",
+            "explanation": "按每十名儿童一名监护人计算，30 名儿童需要 3 名；选项只取 one，少算了应配数量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-a-9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "每十名儿童一名监护人"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "两名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "We require one chaperone (监护人) per ten children.",
+            "sourceHighlight": "per ten children",
+            "optionText": "Two.",
+            "optionHighlight": "Two",
+            "explanation": "30 名儿童按每十名配一名应为 3 名监护人；选项 Two 少算一名。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-a-9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "每十名儿童一名监护人"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "三名。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-a-9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "每十名儿童一名监护人，30÷10=3"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "四名。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "We require one chaperone (监护人) per ten children.",
+            "sourceHighlight": "per ten children",
+            "optionText": "Four.",
+            "optionHighlight": "Four",
+            "explanation": "30 名儿童按每十名配一名应为 3 名；选项 Four 多算一名，超出实际所需。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-a-9",
+              "quote": "We require one chaperone (监护人) per ten children.",
+              "anchor": "每十名儿童一名监护人"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How many chaperones are needed for a group of 30 children",
+          "sourceRole": "stem",
+          "targetText": "We require one chaperone (监护人) per ten children.",
+          "targetParagraphId": "para-2022-ii-reading-a-9",
+          "relationType": "calculation",
+          "note": "题干问 30 名儿童需多少监护人，依据原文 one chaperone per ten children，按 30÷10 计算得 3 名。"
+        }
+      ]
+    },
+    "q-2022-ii-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查行为准则中明确禁止儿童做的事这一细节。",
+      "stemTranslationZh": "在博物馆里，儿童被禁止做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使用电脑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Using the computer.",
+            "explanation": "原文未提及禁止儿童使用电脑。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "彼此交谈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Children should play nicely with each other and exhibits.",
+            "sourceHighlight": "play nicely with each other",
+            "optionText": "Talking with each other.",
+            "optionHighlight": "Talking with each other",
+            "explanation": "原文鼓励儿童彼此友好相处，并未禁止交谈；选项把准则正向要求歪曲为被禁止的行为，与原文态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-a-21",
+              "quote": "Children should play nicely with each other and exhibits.",
+              "anchor": "鼓励彼此友好相处，非禁止"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "触摸展品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Children should play nicely with each other and exhibits.",
+            "sourceHighlight": "play nicely with each other and exhibits",
+            "optionText": "Touching the exhibits.",
+            "optionHighlight": "Touching the exhibits",
+            "explanation": "原文借用 exhibits 一词，要求儿童与展品友好相处，并未禁止触摸展品；选项将允许的行为说成被禁止，与原文相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-a-21",
+              "quote": "Children should play nicely with each other and exhibits.",
+              "anchor": "与展品友好相处，非禁止触摸"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "独自探索这个地方。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-a-20",
+              "quote": "Children are not allowed unaccompanied in all areas of the Museum.",
+              "anchor": "儿童不得无人陪同活动"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Exploring the place alone.",
+          "sourceRole": "correctOption",
+          "targetText": "Children are not allowed unaccompanied in all areas of the Museum.",
+          "targetParagraphId": "para-2022-ii-reading-a-20",
+          "relationType": "paraphrase",
+          "note": "正确选项 Exploring the place alone 是原文 not allowed unaccompanied 的同义替换，alone 对应 unaccompanied，the place 对应 all areas of the Museum。"
+        }
+      ]
+    },
+    "q-2022-ii-024": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查根据上下文推测划线短语 hit home for me 的含义。",
+      "stemTranslationZh": "第二段中划线词组 hit home for me 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为我提供了庇护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "This hit home for me",
+            "optionText": "Provided shelter for me.",
+            "matchType": "wordFamily",
+            "relationNote": "利用 home 容易让人联想到「家、住所、庇护所」，从而误推为 shelter；但 hit home 是固定习语，意为「让人深切领悟」，与提供庇护无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-b-2",
+              "quote": "This hit home for me",
+              "anchor": "hit home 是习语"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对我而言变得非常清晰。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-b-1",
+              "quote": "We journalists live in a new age of storytelling, with many new multimedia tools.",
+              "anchor": "首段抽象论点"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-ii-reading-b-2",
+              "quote": "This hit home for me as I was sitting with my 2-year-old grandson on a sofa over the Spring Festival holiday.",
+              "anchor": "借具体经历切身体会"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为我减轻了压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Took the pressure off me.",
+            "explanation": "原文未提及任何压力或减压的内容，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在我身上起了很好的作用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Worked quite well on me.",
+            "explanation": "原文并无某事物对作者奏效、起作用之意，hit home 强调的是被深刻领悟，而非产生功效，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "hit home for me",
+          "sourceRole": "stem",
+          "targetText": "We journalists live in a new age of storytelling, with many new multimedia tools.",
+          "targetParagraphId": "para-2022-ii-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "hit home 指首段提出的抽象论点（new age of storytelling）通过第二段的亲身经历让作者切身、清晰地领悟到，即 became very clear to me。"
+        }
+      ]
+    },
+    "q-2022-ii-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对孙子戳书原因这一细节的定位与理解。",
+      "stemTranslationZh": "这个孩子为什么戳那本故事书？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他把它当成了平板电脑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-b-5",
+              "quote": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them. He thought my storybook was like that.",
+              "anchor": "误把书当平板"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他不喜欢那些彩色图画。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "He just likes the pictures, I thought.",
+            "sourceHighlight": "likes the pictures",
+            "optionText": "He disliked the colorful pictures.",
+            "optionHighlight": "disliked the colorful pictures",
+            "explanation": "原文（作者的想法）是孩子喜欢图画，选项却说不喜欢，态度黑白颠倒；且 colorful pictures 是原文词钩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-b-4",
+              "quote": "He just likes the pictures, I thought.",
+              "anchor": "likes 而非 dislike"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他在生爷爷的气。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He was angry with his grandpa.",
+            "explanation": "原文从未提及孩子对爷爷生气，戳书源于把书当平板，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他想自己读这本书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He wanted to read it by himself.",
+            "explanation": "两岁孩子戳书是因为以为书像平板会动，原文没有他想自己读书的信息，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He took it for a tablet computer.",
+          "sourceRole": "correctOption",
+          "targetText": "He thought my storybook was like that.",
+          "targetParagraphId": "para-2022-ii-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "原文 thought my storybook was like that（以为故事书像平板那样一戳就动）正是选项 took it for a tablet computer 的同义替换。"
+        }
+      ]
+    },
+    "q-2022-ii-026": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查作者对自身（数字能力）的自我评价。",
+      "stemTranslationZh": "作者如何看待自己？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "有社交野心的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Socially ambitious.",
+            "explanation": "原文未提及作者有任何社交或名利上的野心，反而说不会因走红而得意忘形，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "外表有吸引力的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I have a face made for radio",
+            "sourceHighlight": "a face made for radio",
+            "optionText": "Physically attractive.",
+            "optionHighlight": "Physically attractive",
+            "explanation": "a face made for radio 是自嘲长着一张适合做广播（不上镜）的脸，即长相一般，与外表有吸引力恰好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-b-7",
+              "quote": "since I have a face made for radio",
+              "anchor": "自嘲不上镜"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "经济独立的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Financially independent.",
+            "explanation": "文中提到 mobile payment 只是举例说明自己会用数字工具，并未涉及经济是否独立，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有数字（科技）能力的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-b-6",
+              "quote": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking. I edit video and produce audio. I use mobile payment. I’ve even built websites.",
+              "anchor": "罗列数字技能"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Digitally competent.",
+          "sourceRole": "correctOption",
+          "targetText": "I’m not hopelessly challenged, digitally speaking. I edit video and produce audio. I use mobile payment. I’ve even built websites.",
+          "targetParagraphId": "para-2022-ii-reading-b-6",
+          "relationType": "paraphrase",
+          "note": "原文 not hopelessly challenged, digitally speaking 加上一连串数字技能（edit video、produce audio、mobile payment、built websites）正是 digitally competent 的同义概括。"
+        }
+      ]
+    },
+    "q-2022-ii-027": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查从作者作为记者的自述中能推知的事实。",
+      "stemTranslationZh": "关于作为记者的作者，我们可以了解到什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他在工作中缺乏经验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "There’s one notable gap in my new-media experience, however.",
+            "sourceHighlight": "my new-media experience",
+            "optionText": "He lacks experience in his job.",
+            "optionHighlight": "lacks experience in his job",
+            "explanation": "原文只承认在新媒体经验中有一处明显空白（不上镜），整体上经验丰富（会剪视频、做音频、建网站），把局部空白夸大为工作缺乏经验与原意相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-b-7",
+              "quote": "There’s one notable gap in my new-media experience, however.",
+              "anchor": "仅一处空白"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他很少出现在电视上。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-b-7",
+              "quote": "I’ve spent little time in front of a camera, since I have a face made for radio.",
+              "anchor": "很少出镜"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他管理一个视频部门。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "I edit video and produce audio.",
+            "optionText": "He manages a video department.",
+            "matchType": "wordFamily",
+            "relationNote": "借用原文 video 一词设钩，原文只说他剪辑视频（edit video），并未说他管理一个视频部门（manages a video department）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-b-6",
+              "quote": "I edit video and produce audio.",
+              "anchor": "剪视频非管部门"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他经常采访网络明星。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "grandpa is now an Internet star",
+            "optionText": "He often interviews internet stars.",
+            "matchType": "exact",
+            "relationNote": "原文 Internet star 指的是作者自己成了网络明星，选项却偷换为他采访网络明星，用原词设钩误导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-b-8",
+              "quote": "Anyway, grandpa is now an Internet star",
+              "anchor": "作者自己成名"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He seldom appears on television.",
+          "sourceRole": "correctOption",
+          "targetText": "I’ve spent little time in front of a camera, since I have a face made for radio.",
+          "targetParagraphId": "para-2022-ii-reading-b-7",
+          "relationType": "paraphrase",
+          "note": "原文 spent little time in front of a camera（很少出镜）正是选项 seldom appears on television 的同义替换。"
+        }
+      ]
+    },
+    "q-2022-ii-028": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对美国“禁止司机发短信”这一禁令实际效果的推断：禁令实施后问题是好转还是恶化。",
+      "stemTranslationZh": "下列哪一项最能描述美国对司机发短信的禁令？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "无效的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-c-2",
+              "quote": "Yet the problem, by just about any measure, appears to be getting worse.",
+              "anchor": "问题反而在恶化"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-ii-reading-c-2",
+              "quote": "Road accidents, which had fallen for years, are now rising sharply.",
+              "anchor": "事故急剧回升"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "不必要的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "禁令是不必要的。",
+            "explanation": "原文未提及禁令“没有必要”；恰恰相反，文中强调问题严重、需要新的手段去改变行为，说明禁令是必要但效果不佳。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "前后不一致的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "禁令是前后不一致的。",
+            "explanation": "原文未提及禁令在各州之间“不一致”或自相矛盾，只说多数州已禁止发短信，并未对比禁令内容的差异。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不公平的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "禁令是不公平的。",
+            "explanation": "原文未提及禁令是否“公平”，全文聚焦于禁令是否有效及如何改进，与公平性无关。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Ineffective.",
+          "sourceRole": "correctOption",
+          "targetText": "Yet the problem, by just about any measure, appears to be getting worse.",
+          "targetParagraphId": "para-2022-ii-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项 Ineffective（无效）对应原文用 Yet 转折后说 the problem ... appears to be getting worse，即禁令未能解决问题，反映其无效。"
+        },
+        {
+          "sourceText": "Ineffective.",
+          "sourceRole": "correctOption",
+          "targetText": "Road accidents, which had fallen for years, are now rising sharply.",
+          "targetParagraphId": "para-2022-ii-reading-c-2",
+          "relationType": "locationCue",
+          "note": "原文 Road accidents ... are now rising sharply 用事故由降转升的事实印证禁令 ineffective（无效）。"
+        }
+      ]
+    },
+    "q-2022-ii-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查细节定位：Textalyzer 能帮助警察查明什么——即是否使用过手机。",
+      "stemTranslationZh": "Textalyzer 能帮助警察查明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "司机从哪里来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Textalyzer 能查明司机来自何处。",
+            "explanation": "原文未提及该设备能确定司机的出发地或行程来源，只说能检查手机操作系统的近期活动。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "司机是否使用了手机。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-c-5",
+              "quote": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+              "anchor": "判断是否刚刚使用手机"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-ii-reading-c-5",
+              "quote": "use the Textalyzer to check in the operating system for recent activity",
+              "anchor": "检查手机近期活动"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "司机当时开得多快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Textalyzer 能查明司机的车速。",
+            "explanation": "原文未提及该设备能测量车速，它检查的是手机操作系统的使用活动，与速度无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "司机何时到达现场。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "An officer arriving at the scene of a crash",
+            "optionText": "When a driver arrived at the scene.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文 arriving at the scene 的同族词 arrived at the scene 设钩；但原文中“到达现场”的是 officer（警察），且讲的是查手机活动，并非用 Textalyzer 确定司机到达时间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-c-5",
+              "quote": "An officer arriving at the scene of a crash could ask for the phones of the drivers",
+              "anchor": "到达现场的是警察"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Whether a driver used their phone.",
+          "sourceRole": "correctOption",
+          "targetText": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+          "targetParagraphId": "para-2022-ii-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "选项 used their phone 对应原文 had just texted, emailed or done anything else，均指使用手机的行为；whether a driver 与原文 whether a driver 直接对应。"
+        }
+      ]
+    },
+    "q-2022-ii-030": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查代词/指代词义推断：末段画线词 something 在上下文中所指代的内容。",
+      "stemTranslationZh": "最后一段中画线词“something”指的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "建议。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "something 指的是“建议”。",
+            "explanation": "原文 something on the books 是“写进法律条文里的东西”，指法律，而非“建议”，原文未提及以建议来改变行为。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "something 指的是“数据”。",
+            "explanation": "原文 something on the books 指法律条文，而非数据；Textalyzer 检测的活动信息并不是这里 something 的所指。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "测试/检测。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "use the Textalyzer to check in the operating system for recent activity",
+            "optionText": "Tests.",
+            "matchType": "wordFamily",
+            "relationNote": "Textalyzer 用于 check（检测）手机活动，易让人把 something 误判为“检测”；但 something on the books 指写入法律的条文，对应的是 law，而非检测行为。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-c-5",
+              "quote": "use the Textalyzer to check in the operating system for recent activity",
+              "anchor": "Textalyzer 用于检测"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "法律。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-c-6",
+              "quote": "We need something on the books that can change people’s behavior",
+              "anchor": "写进法律条文的东西"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-ii-reading-c-6",
+              "quote": "If the Textalyzer bill becomes law",
+              "anchor": "若法案成为法律"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Laws.",
+          "sourceRole": "correctOption",
+          "targetText": "We need something on the books that can change people’s behavior",
+          "targetParagraphId": "para-2022-ii-reading-c-6",
+          "relationType": "paraphrase",
+          "note": "习语 on the books 意为“写入法律、正式立法”，故 something on the books 指 laws（法律）。"
+        },
+        {
+          "sourceText": "Laws.",
+          "sourceRole": "correctOption",
+          "targetText": "If the Textalyzer bill becomes law",
+          "targetParagraphId": "para-2022-ii-reading-c-6",
+          "relationType": "locationCue",
+          "note": "下文 the Textalyzer bill becomes law（法案成为法律）进一步印证 something 指代的是 laws。"
+        }
+      ]
+    },
+    "q-2022-ii-031": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查标题归纳：需概括全文核心——边开车边发短信问题严重，应警惕用于检测的 Textalyzer 这一新对策。",
+      "stemTranslationZh": "本文合适的标题是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "开车还是不开车？动身前先想清楚",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "So to try to change a distinctly modern behavior, lawmakers and public health experts are reaching back to an old approach: They want to treat distracted driving like drunk driving.",
+            "sourceHighlight": "distracted driving",
+            "optionText": "To Drive or Not to Drive? Think Before You Start",
+            "optionHighlight": "To Drive or Not to Drive",
+            "explanation": "全文讨论的是“开车时分心/发短信”及其治理，而非“要不要开车”这一更宽泛的话题，标题范围偏离主题。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "边发短信边开车？小心 Textalyzer",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-c-5",
+              "quote": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+              "anchor": "引入 Textalyzer 对策"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-ii-reading-c-6",
+              "quote": "people are going to be more afraid to put their hands on the cell phone.",
+              "anchor": "震慑发短信行为"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "纽约禁止司机使用手持设备",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "who pushed for the state’s 2001 ban on hand-held devices by drivers",
+            "sourceHighlight": "ban on hand-held devices by drivers",
+            "optionText": "New York Banning Hand-Held Devices by Drivers",
+            "optionHighlight": "Banning Hand-Held Devices by Drivers",
+            "explanation": "2001 年禁手持设备只是文中提及的旧背景之一，全文重点是新对策 Textalyzer；以此为题以偏概全，遗漏了文章核心。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "下一代手机：Textalyzer",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+            "sourceEntity": "a new device called the Textalyzer (供警察使用的检测设备)",
+            "optionText": "The Next Generation Cell Phone: The Textalyzer",
+            "optionEntity": "The Next Generation Cell Phone (下一代手机)",
+            "explanation": "Textalyzer 是供警察检测手机活动的执法设备，并非“下一代手机”，标题把设备性质错配成手机。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Texting and Driving? Watch Out for the Textalyzer",
+          "sourceRole": "correctOption",
+          "targetText": "An idea from lawmakers in New York is to give police officers a new device called the Textalyzer.",
+          "targetParagraphId": "para-2022-ii-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "标题 Watch Out for the Textalyzer 概括了原文核心对策——引入 a new device called the Textalyzer 来检测开车发短信行为。"
+        },
+        {
+          "sourceText": "Texting and Driving?",
+          "sourceRole": "correctOption",
+          "targetText": "people are going to be more afraid to put their hands on the cell phone.",
+          "targetParagraphId": "para-2022-ii-reading-c-6",
+          "relationType": "locationCue",
+          "note": "标题 Texting and Driving 对应全文主题，结尾 more afraid to put their hands on the cell phone 表明设备意在震慑开车用手机的行为。"
+        }
+      ]
+    },
+    "q-2022-ii-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Levine 提及橡皮筋这一比喻的意图，即比喻所要说明的对象。",
+      "stemTranslationZh": "Levine 提到橡皮筋是想说明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "正确的锻炼方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The right way of exercising.",
+            "explanation": "原文用橡皮筋比喻心脏老化，并未借此说明正确的锻炼方式，原文未提及。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "心脏病发作的原因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The causes of a heart attack.",
+            "explanation": "橡皮筋的比喻是为说明心脏随年龄变化，文中并未谈及心脏病发作的原因，原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保持健康的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The difficulty of keeping fit.",
+            "explanation": "比喻意在说明心脏老化过程，而非保持健康有多难，原文未提及此意。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "心脏的老化过程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-d-2",
+              "quote": "put it in a drawer for 20 years and it will become dry and easily broken",
+              "anchor": "橡皮筋久置变干易断"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2022-ii-reading-d-2",
+              "quote": "That’s what happens to the heart.",
+              "anchor": "这就是心脏所发生的"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "That’s what happens to the heart.",
+          "sourceRole": "correctOption",
+          "targetText": "put it in a drawer for 20 years and it will become dry and easily broken",
+          "targetParagraphId": "para-2022-ii-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "橡皮筋 become dry and easily broken 的过程被作者用 That’s what happens to the heart 直接对应到心脏，说明的正是心脏的 aging process（老化过程）。"
+        }
+      ]
+    },
+    "q-2022-ii-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查两组志愿者在研究设计上的差异，即对照变量是什么。",
+      "stemTranslationZh": "就研究设计而言，两组在哪个方面不同？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "饮食计划。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Diet plan.",
+            "explanation": "原文描述两组的区别在于运动种类，从未提及饮食计划，原文未提及。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "专业背景。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Professional background.",
+            "explanation": "文中并未涉及志愿者的专业背景差异，原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "运动类型。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-d-3",
+              "quote": "The first group participated in a program of nonaerobic (无氧) exercise—balance training and weight training—three times a week. The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week.",
+              "anchor": "一组无氧运动、一组高强度有氧运动"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "先前的身体状况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+            "sourceHighlight": "did not exercise much but were otherwise healthy",
+            "optionText": "Previous physical condition.",
+            "optionHighlight": "Previous physical condition",
+            "explanation": "原文说明所有志愿者都是平时不太运动但其余方面健康的人，即两组先前身体状况相同，并非两组的差异变量，选项错把共同前提当作区别。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Exercise type.",
+          "sourceRole": "correctOption",
+          "targetText": "The first group participated in a program of nonaerobic (无氧) exercise",
+          "targetParagraphId": "para-2022-ii-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 Exercise type 是对原文 nonaerobic exercise 与 high-intensity aerobic exercise 这两种不同运动方式的概括，属同义替换。"
+        }
+      ]
+    },
+    "q-2022-ii-034": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Levine 研究的核心发现，即高强度有氧运动对中年心脏的作用。",
+      "stemTranslationZh": "Levine 的研究发现了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "中年人的心脏通过有氧运动变得更年轻。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-d-4",
+              "quote": "We took these 50-year-old hearts and turned the clock back to 30- or 35-year-old hearts",
+              "anchor": "把50岁的心脏调回30-35岁"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2022-ii-reading-d-3",
+              "quote": "The second group did high-intensity aerobic exercise under the guidance of a trainer for four or more days a week. After two years, the second group saw remarkable improvements in heart health.",
+              "anchor": "做高强度有氧运动的第二组心脏健康显著改善"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "高强度运动更适合年轻人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility",
+            "sourceHighlight": "in late middle age when the heart still has flexibility",
+            "optionText": "High-intensity exercise is more suitable for the young.",
+            "optionHighlight": "more suitable for the young",
+            "explanation": "原文强调开始运动的最佳时机是中年晚期，研究对象也是中年人；选项把适宜人群偷换为年轻人，与原文趋势相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-d-5",
+              "quote": "The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility",
+              "anchor": "最佳时机是中年晚期"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们开始锻炼永远不会太晚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "We put healthy 70-year-olds through a yearlong exercise training program, and nothing happened to them at all.",
+            "sourceHighlight": "nothing happened to them at all",
+            "optionText": "It is never too late for people to start taking exercise.",
+            "optionHighlight": "never too late",
+            "explanation": "原文指出70岁老人训练一年毫无效果，说明开始运动是有时机限制的；选项称永远不会太晚，与原文结论相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-d-5",
+              "quote": "We put healthy 70-year-olds through a yearlong exercise training program, and nothing happened to them at all.",
+              "anchor": "70岁训练毫无效果"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "我们运动越多，心脏就越强壮。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "But the hearts of those who participated in less intense exercise didn’t change, he says.",
+            "sourceHighlight": "less intense exercise didn’t change",
+            "optionText": "The more exercise we do, the stronger our hearts get.",
+            "optionHighlight": "The more exercise we do, the stronger our hearts get",
+            "explanation": "起作用的是高强度有氧运动，低强度运动者心脏没有变化；选项笼统地说运动越多越强壮，过度概括了研究结论。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-d-4",
+              "quote": "But the hearts of those who participated in less intense exercise didn’t change, he says.",
+              "anchor": "低强度运动心脏不变"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Middle-aged hearts get younger with aerobic exercise.",
+          "sourceRole": "correctOption",
+          "targetText": "We took these 50-year-old hearts and turned the clock back to 30- or 35-year-old hearts",
+          "targetParagraphId": "para-2022-ii-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 get younger 对应原文 turned the clock back to 30- or 35-year-old hearts（把时钟拨回），middle-aged 对应 50-year-old hearts，属同义替换。"
+        }
+      ]
+    },
+    "q-2022-ii-035": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Dr. Nieca Goldberg 对该研究提出的建议。",
+      "stemTranslationZh": "Dr. Nieca Goldberg 提出了什么建议？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "利用这些研究发现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Levine’s findings are a great start",
+            "optionText": "Making use of the findings.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文 findings 一词制造干扰；Goldberg 说研究发现是良好开端，但她的建议是重复研究，而非利用现有发现。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-d-6",
+              "quote": "Levine’s findings are a great start",
+              "anchor": "研究发现是良好开端"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "采访研究参与者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Interviewing the study participants.",
+            "explanation": "Goldberg 建议用更大规模人群重复研究，从未提及采访研究参与者，原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "开展进一步研究。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-ii-reading-d-6",
+              "quote": "the study was small and needs to be repeated with far larger groups of people",
+              "anchor": "研究样本小、需用更大人群重复"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "澄清研究的目的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference",
+            "sourceHighlight": "which aspects of an exercise routine make the biggest difference",
+            "optionText": "Clarifying the purpose of the study.",
+            "optionHighlight": "Clarifying the purpose of the study",
+            "explanation": "原文是要弄清运动方案中哪些方面作用最大，属于进一步研究的内容；选项偷换为澄清研究目的，与原文意思不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-ii-reading-d-6",
+              "quote": "to determine exactly which aspects of an exercise routine make the biggest difference",
+              "anchor": "弄清哪些方面作用最大"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Conducting further research.",
+          "sourceRole": "correctOption",
+          "targetText": "needs to be repeated with far larger groups of people",
+          "targetParagraphId": "para-2022-ii-reading-d-6",
+          "relationType": "paraphrase",
+          "note": "选项 Conducting further research 是对原文 needs to be repeated with far larger groups of people（需用更大规模人群重复研究）的概括同义替换。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-i-seven-choices": {
+      "overview": "本文是一篇关于“自我宽恕（Personal Forgiveness）”的说明文，主题是：犯错是人之常情，除了承担责任，更要学会原谅自己。文章给出一套书面练习——分别列出“个人优点”和“善举”，并可邀请亲友补充——来帮助读者重建自信、看待错误。五个空分别考查段首主题句、段内衔接句与段尾总结句。",
+      "discourseStructure": {
+        "summary": "全文按“提出观点—具体方法—延伸建议—总结升华”推进。首段提出要原谅自己并引出写作练习；第二、三段给出两项具体清单（个人优点、善举）；第四段建议请亲友参与补充；末段回到“从错误中成长”的主旨收束。",
+        "units": [
+          {
+            "unitId": "unit-2023-i-seven-intro",
+            "heading": "Personal Forgiveness",
+            "paragraphIds": [
+              "para-2023-i-seven-p1"
+            ],
+            "summary": "提出核心观点：承担责任之余也要原谅自己，并引出后文的写作练习。"
+          },
+          {
+            "unitId": "unit-2023-i-seven-lists",
+            "paragraphIds": [
+              "para-2023-i-seven-p2",
+              "para-2023-i-seven-p3"
+            ],
+            "summary": "给出两项具体练习：在“个人优点”页列出自身长处，在“善举”页列出为他人做过的好事。"
+          },
+          {
+            "unitId": "unit-2023-i-seven-extend",
+            "paragraphIds": [
+              "para-2023-i-seven-p4"
+            ],
+            "summary": "建议邀请亲友帮忙补充清单，彼此交流各自的闪光点，并指出这是随时提升自信的好办法。"
+          },
+          {
+            "unitId": "unit-2023-i-seven-conclude",
+            "paragraphIds": [
+              "para-2023-i-seven-p5"
+            ],
+            "summary": "回到主旨：人多从错误而非成功中学习，错误是发展与成长的积极途径。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2023-i-036": {
+      "blankId": "blank-2023-i-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "don’t beat yourself up",
+        "To err (犯错) is human",
+        "Personal Forgiveness",
+        "help you do this"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-i-seven-p1",
+        "headingAnchor": "Personal Forgiveness",
+        "beforeQuote": "To err (犯错) is human.",
+        "afterQuote": "You can use the following writing exercise to help you do this."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "show yourself some forgiveness",
+          "signalSide": "option",
+          "targetText": "Personal Forgiveness / don’t beat yourself up",
+          "relation": "选项 show yourself some forgiveness 与标题 Personal Forgiveness、前句 don’t beat yourself up 同属“自我宽恕”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "don’t beat yourself up",
+          "signalSide": "context-before",
+          "targetText": "show yourself some forgiveness",
+          "relation": "前句“别苛责自己”与选项“原谅自己”语义呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "help you do this",
+          "signalSide": "context-after",
+          "targetText": "show yourself some forgiveness",
+          "relation": "空后 do this 中的 this 指代空格句提出的“原谅自己”这件事。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "首段先说承担责任之余别苛责自己、犯错是人之常情，空格句承接说“同样重要的是给自己一些宽恕”，紧扣标题 Personal Forgiveness，且空后 do this 即指代它。",
+        "matchedClues": [
+          {
+            "contextSide": "don’t beat yourself up / To err is human",
+            "optionSide": "show yourself some forgiveness",
+            "relation": "前句铺垫犯错难免、勿苛责，选项顺势提出“自我宽恕”这一同样重要的做法。"
+          },
+          {
+            "contextSide": "help you do this",
+            "optionSide": "show yourself some forgiveness",
+            "relation": "this 回指空格句所说的“原谅自己”，构成指代衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 句 It doesn’t mean... 需要前文有可被 it 指代的对象，放此处指代关系不成立，且未点出“自我宽恕”这一与标题呼应的关键。"
+        }
+      ],
+      "teachingNote": "段首/段中空若紧扣标题关键词并被后文代词回指，优先选与主题场一致、能被 this 指代的句子。"
+    },
+    "q-2023-i-037": {
+      "blankId": "blank-2023-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Personal Strengths",
+        "Are you caring?",
+        "aspects of your personality that you’re proud of",
+        "the heading"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-i-seven-p2",
+        "beforeQuote": "put the heading “Personal Strengths.”",
+        "afterQuote": "Are you caring? Creative? Generous?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "characteristics you like about yourself",
+          "signalSide": "option",
+          "targetText": "Personal Strengths",
+          "relation": "选项 characteristics you like about yourself 正是对标题 Personal Strengths（个人优点）的展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Personal Strengths",
+          "signalSide": "context-before",
+          "targetText": "characteristics you like about yourself",
+          "relation": "前面的小标题 Personal Strengths 限定本段要列的是“你喜欢的自身特质”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "aspects of your personality that you’re proud of",
+          "signalSide": "context-after",
+          "targetText": "characteristics you like about yourself",
+          "relation": "空后“你引以为傲的性格方面”与选项中 you like about yourself 同义复现。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本段以“Personal Strengths”为标题，空格作为段内指令句承上启下，要求“现在列出你喜欢的自身特质”，正好领起后面 Are you caring? Creative? 等具体特质的追问。",
+        "matchedClues": [
+          {
+            "contextSide": "Personal Strengths / aspects of your personality that you’re proud of",
+            "optionSide": "list all the characteristics you like about yourself",
+            "relation": "标题与后文的性格特质问句都指向“列出自身优点”，与选项的 list...characteristics 完全对应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 句 Whatever it is, ...write it down 是第三段“善举”清单的收尾用语，话题与列举“个人优点”错位。"
+        }
+      ],
+      "teachingNote": "紧跟小标题的指令型空格，选与标题同义、并能领起下文具体例子的“列出/Now list...”类句子。"
+    },
+    "q-2023-i-038": {
+      "blankId": "blank-2023-i-038",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Acts of Kindness",
+        "list all the positive things you’ve done for others",
+        "helped a friend with their homework",
+        "baked cookies"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-i-seven-p3",
+        "beforeQuote": "when you baked cookies after the family had had a tiring day.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Whatever it is",
+          "signalSide": "option",
+          "targetText": "helped a friend with their homework / did the ironing / baked cookies",
+          "relation": "选项中的 it 回指前文列举的各种善举，构成对前面例子的概括指代。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "write it down",
+          "signalSide": "option",
+          "targetText": "list all the positive things you’ve done for others",
+          "relation": "选项 write it down 与本段开头 list...the positive things 同属“记录善举”话题场，构成段尾收束。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "list all the positive things you’ve done for others",
+          "signalSide": "context-before",
+          "targetText": "no matter how small it might seem, write it down",
+          "relation": "前文要求“列出为他人做过的好事”，空格句以“无论多小都写下来”作收束，话题一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本段在“Acts of Kindness”下列举了帮同学、做家务、烤饼干等小善举，段尾空格用“无论它是什么、无论看起来多小，都把它写下来”作总结，it 回指这些例子，呼应段首的 list...positive things。",
+        "matchedClues": [
+          {
+            "contextSide": "helped a friend / did the ironing / baked cookies",
+            "optionSide": "Whatever it is, no matter how small it might seem, write it down",
+            "relation": "it 概括指代前文列举的各类小善举，并要求统统记下来。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 句谈 self-forgiveness 主题，与本段“善举清单”话题不符，且无法回指前文具体例子。"
+        }
+      ],
+      "teachingNote": "段尾总结空若前文是一串具体例子，优先选含 Whatever it is / it 回指并给出统一动作（write it down）的概括句。"
+    },
+    "q-2023-i-039": {
+      "blankId": "blank-2023-i-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "ask a friend or family member to help",
+        "exchange thoughts",
+        "what makes each of you special",
+        "boost self-confidence"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-i-seven-p4",
+        "beforeQuote": "You could ask a friend or family member to help add to your list.",
+        "afterQuote": "That way, you could exchange thoughts on what makes each of you special"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They might even",
+          "signalSide": "option",
+          "targetText": "a friend or family member",
+          "relation": "选项主语 They 回指前句的 a friend or family member，形成人称指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "have a go at doing the exercise",
+          "signalSide": "option",
+          "targetText": "exchange thoughts on what makes each of you special",
+          "relation": "选项 do the exercise 与空后“彼此交流各自闪光点”同属“亲友共同参与练习”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "exchange thoughts on what makes each of you special",
+          "signalSide": "context-after",
+          "targetText": "have a go at doing the exercise",
+          "relation": "空后 each of you 暗示亲友也参与进来，正承接选项“他们也想试做这练习”。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "前句提到可请亲友帮忙补充清单，空格句顺势说“他们甚至可能也想试着做做这项练习”，They 回指 a friend or family member，并为空后“That way 彼此交流各自闪光点”作铺垫。",
+        "matchedClues": [
+          {
+            "contextSide": "ask a friend or family member / exchange thoughts on what makes each of you special",
+            "optionSide": "They might even like to have a go at doing the exercise",
+            "relation": "They 指代亲友，他们也参与做练习，才有了后文的“彼此交流”。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 句的 self-forgiveness 与本段“请亲友参与”逻辑无关，且 also goes a long way 无可指代的前项支撑。"
+        }
+      ],
+      "teachingNote": "段中衔接空若前句出现可被指代的人物，且后句用 That way 承接，优先选用 They 回指并解释“怎样做到”的句子。"
+    },
+    "q-2023-i-040": {
+      "blankId": "blank-2023-i-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "learn not from their successes but their mistakes",
+        "We’re all changing and learning all the time",
+        "mistakes are a positive way to develop and grow",
+        "it’s true"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-i-seven-p5",
+        "beforeQuote": "The thing is, it’s true.",
+        "afterQuote": "We’re all changing and learning all the time and mistakes are a positive way to develop and grow."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Whatever the mistake",
+          "signalSide": "option",
+          "targetText": "learn not from their successes but their mistakes",
+          "relation": "选项关键词 mistake 与前文 learn...from their mistakes 同属“错误”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "it isn’t a fixed aspect of your personality",
+          "signalSide": "option",
+          "targetText": "We’re all changing and learning all the time",
+          "relation": "选项“错误不是性格中固定的一面”与空后“我们一直在变化和学习”形成“可变、可成长”的语义呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "We’re all changing and learning all the time",
+          "signalSide": "context-after",
+          "targetText": "it isn’t a fixed aspect of your personality",
+          "relation": "空后“我们一直在变化与学习”正解释了为什么错误并非固定不变，承接选项。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "末段指出人多从错误而非成功中学习，空格句承接说“无论犯什么错，记住它都不是你性格中固定不变的一面”，与空后“我们一直在变化学习、错误是成长的积极途径”逻辑相扣。",
+        "matchedClues": [
+          {
+            "contextSide": "learn...from their mistakes / We’re all changing and learning all the time",
+            "optionSide": "Whatever the mistake, remember it isn’t a fixed aspect of your personality",
+            "relation": "错误话题贯穿前后，选项强调错误可变，正引出后文“变化、成长”。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 句 self-forgiveness 已在首段方向使用，置于末段无法与“错误→成长”的论证链衔接。"
+        }
+      ],
+      "teachingNote": "承上启下的段中空，抓住前后共同话题词（mistake）并选能解释后文“变化/成长”原因的句子。"
+    }
+  }
+}

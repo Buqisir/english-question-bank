@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2021-i",
+  "sourceFileName": "2021年新课标Ⅰ卷-答案版.docx",
+  "sourceFileSha256": "f0a4cef8571ca1ec5e8fb4cfc0d801506ca983c7852a2fc0bbabde05ef7ca385",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:40.538Z",
+  "paper": {
+    "year": 2021,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2021年新课标Ⅰ卷",
+    "examCode": "2021-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2021",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2021-i-reading-a": {
+      "groupId": "group-2021-i-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇应用文（旅行指南），介绍了罗马四家青年旅社（hostel）供游客选择，先总述罗马住宿偏贵、旅社性价比高，再分条目逐一推荐各家旅社的特色。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2021-i-reading-b": {
+      "groupId": "group-2021-i-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇人物报道，介绍律师 Robert Titterton 在业余时间担任钢琴家 Maria Raspopova 的翻谱员（page turner）的故事，讲述这份工作所需的技能、练习与偶发状况。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2021-i-reading-c": {
+      "groupId": "group-2021-i-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍美国联邦鸭票（Federal Duck Stamp）项目。先讲述北美水禽资源因捕猎与湿地破坏而锐减，再讲1934年《候鸟狩猎邮票法》出台、鸭票的诞生，最后说明鸭票收入如何用于购买湿地栖息地、成为最成功的保护项目之一。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2021-i-reading-d": {
+      "groupId": "group-2021-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇议论性说明文，探讨情商（emotional intelligence）这一概念在普及过程中产生的误解，并辨析其真实含义，进而评价情商普及的整体影响，最后表达对未来情绪科学研究的期望。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2021-i-seven-choices": {
+      "groupId": "group-2021-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇记叙性随笔，作者夫妇在巴黎住了一周，想体验真正巴黎人的生活。文章围绕公寓、食物、生活质量、咖啡馆文化展开，赞美法国人重视生活质量胜过效率。七选五考查段首主旨句、段中承接句与上下文衔接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2021-i-cloze": {
+      "groupId": "group-2021-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2021-i-grammar-fill": {
+      "groupId": "group-2021-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2021-i-writing-application": {
+      "groupId": "group-2021-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2021-i-writing-continuation": {
+      "groupId": "group-2021-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

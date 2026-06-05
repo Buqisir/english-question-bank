@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2020-ii",
+  "sourceFileName": "2020年新课标II卷-答案版.docx",
+  "sourceFileSha256": "727ddf1cc357abb2ab17418a3c5a6409de62ed90868f6206f864fed12ed6f8ff",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:40.273Z",
+  "paper": {
+    "year": 2020,
+    "region": "全国新课标Ⅱ",
+    "paperName": "2020年新课标Ⅱ卷",
+    "examCode": "2020-ii",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2020",
+      "新课标Ⅱ卷"
+    ]
+  },
+  "groups": {
+    "group-2020-ii-reading-a": {
+      "groupId": "group-2020-ii-reading-a",
+      "difficulty": "中",
+      "summary": "这是一篇应用文（夏令营广告），介绍 Pali Overnight Adventures 为儿童和青少年提供的暑期夏令营，并具体列举其中 4 个营地：广播营、特工营、烹饪营和街头艺术营。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2020-ii-reading-b": {
+      "groupId": "group-2020-ii-reading-b",
+      "difficulty": "中",
+      "summary": "记叙文。作者重返讲台后，发明了一个虚构的“奶奶的盒子”来管理学生带来的违禁玩具；多年后她真有了孙子，学生的态度随之转变，最后儿子把这个虚构的盒子做成了真实的木箱。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2020-ii-reading-c": {
+      "groupId": "group-2020-ii-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇书评，介绍 Dr. Henry Petroski 的著作《To Forgive Design: Understanding Failure》。文章以金门大桥50周年险情开篇，引出该书对工程失败案例的讨论，并阐述作者关于失败推动进步的核心观点。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2020-ii-reading-d": {
+      "groupId": "group-2020-ii-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇关于热带雨林的说明文，介绍了雨林作为众多物种栖息地、地球之肺、自我保护与生存机制，以及雨林自身产生大量降雨的特点，整体突出雨林对地球生命的重要意义。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2020-ii-seven-choices": {
+      "groupId": "group-2020-ii-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明性建议文，主题为如何与医生有效沟通(Talking with your doctor)。文章用引言段点题，随后以多个小标题(Stay positive / Keep track of how you are feeling / Ask questions 等)分条给出建议。七选五考查引言段总起句(36)、各小标题段落内的衔接句(37、38、40)以及缺失的小标题本身(39)。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2020-ii-cloze": {
+      "groupId": "group-2020-ii-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2020-ii-grammar-fill": {
+      "groupId": "group-2020-ii-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2020-ii-writing-application": {
+      "groupId": "group-2020-ii-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2020-ii-writing-continuation": {
+      "groupId": "group-2020-ii-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

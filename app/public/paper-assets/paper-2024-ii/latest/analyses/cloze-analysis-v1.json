@@ -1,0 +1,661 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2024-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-ii-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-ii-cloze": {
+      "overview": "记叙文。作者讲述十年前在意大利买房定居的经历：从初到时艰难地学说意大利语，到邻居热情相助，再到对意大利美食与家庭聚餐的热爱，体会到异国如何变成家。",
+      "affectiveArc": "情感主线一路温暖向上：从语言不通的窘迫与努力，到被当地人善意鼓励、被美食与亲友聚餐治愈，归属感不断加深。"
+    }
+  },
+  "blanks": {
+    "q-2024-ii-041": {
+      "blankId": "blank-2024-ii-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "下文说作者把意大利当作 permanent home，可见此处挑选的是长期居住地，settle（定居）与买房、安家的语境搭配最贴切。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "study",
+          "meaning": "学习、求学"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "rent",
+          "meaning": "租房"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "visit",
+          "meaning": "短暂游览、拜访"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "buy a house in Europe",
+          "signalSide": "context-before",
+          "targetText": "favorite spot to settle",
+          "relation": "买房这一行为指向长期居住，与 settle 定居搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "permanent home",
+          "signalSide": "context-after",
+          "relation": "后文 permanent home 与定居（settle）呼应。"
+        }
+      ],
+      "teachingNote": "抓后文 permanent home 这一同义复现，锁定挑选的是长期定居之地。"
+    },
+    "q-2024-ii-042": {
+      "blankId": "blank-2024-ii-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "首次到意大利、语言不通，问路或点餐都很费劲，struggle to do 表示费力地做某事，与初学者的困境搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "planned",
+          "meaning": "计划做某事"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "refused",
+          "meaning": "拒绝做某事"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "happened",
+          "meaning": "碰巧做某事"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to ask for directions or order in a restaurant",
+          "signalSide": "context-after",
+          "targetText": "struggled to ask",
+          "relation": "问路、点餐对语言不通的新人是难事，与 struggle to 费力搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "every time I tried to",
+          "signalSide": "context-after",
+          "relation": "下文 tried to 体现努力尝试，与 struggle 的费力一致。"
+        }
+      ],
+      "teachingNote": "由初到异国、问路点餐的困难情境，判断动词应表达费力尝试。"
+    },
+    "q-2024-ii-043": {
+      "blankId": "blank-2024-ii-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "string ... together 意为把（词语）串联成句，宾语是 a sentence of Italian，把单词拼凑成一句意大利语，施受搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hang",
+          "meaning": "悬挂"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mix",
+          "meaning": "混合"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "match",
+          "meaning": "使匹配"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a sentence of Italian together",
+          "signalSide": "context-after",
+          "targetText": "string a sentence together",
+          "relation": "string ... together 的宾语是 a sentence of Italian，把词串成句，搭配成立。"
+        }
+      ],
+      "teachingNote": "看到 together 与 a sentence，联想 string ... together 串词成句的固定搭配。"
+    },
+    "q-2024-ii-044": {
+      "blankId": "blank-2024-ii-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "当地人对我微笑并称赞我的语言能力，下文称这是 encouragement，praise（称赞）与 smiled、encouragement 的鼓励语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "improved",
+          "meaning": "提高、改善"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "assessed",
+          "meaning": "评估"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "admired",
+          "meaning": "钦佩、羡慕"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my language skills",
+          "signalSide": "context-after",
+          "targetText": "praised my language skills",
+          "relation": "称赞的对象是 my language skills，praise + 语言能力搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the locals smiled at me",
+          "signalSide": "context-before",
+          "relation": "微笑的善意语境呼应称赞这一正向动作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "That encouragement",
+          "signalSide": "context-after",
+          "relation": "下文 encouragement 鼓励，正是称赞 praise 的结果。"
+        }
+      ],
+      "teachingNote": "由 smiled 与下文 encouragement 的正向语气，判断动词是称赞。"
+    },
+    "q-2024-ii-045": {
+      "blankId": "blank-2024-ii-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "语言不通是要克服的障碍，language barrier（语言障碍）是固定搭配，与前文学说意大利语的困难语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "course",
+          "meaning": "课程"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "area",
+          "meaning": "区域、领域"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "test",
+          "meaning": "测试"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the language",
+          "signalSide": "context-before",
+          "targetText": "language barrier",
+          "relation": "language + barrier 构成 language barrier 语言障碍的固定搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "get through",
+          "signalSide": "context-before",
+          "relation": "get through 度过、克服，与需要跨越的 barrier 障碍同属一个语义场。"
+        }
+      ],
+      "teachingNote": "language 后接名词，联想 language barrier 语言障碍这一高频话题搭配。"
+    },
+    "q-2024-ii-046": {
+      "blankId": "blank-2024-ii-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文邻居送奶酪、提醒关车窗，都是热心善举，warm-hearted（热心肠的）与这些善意举动的情感基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "open-minded",
+          "meaning": "思想开明的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "strong-willed",
+          "meaning": "意志坚强的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "well-informed",
+          "meaning": "见多识广的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "how",
+          "signalSide": "context-before",
+          "targetText": "how warm-hearted Italians are",
+          "relation": "warm-hearted 作表语修饰 Italians，描述意大利人热心，主系表搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Neighbors will bring me freshly made cheese",
+          "signalSide": "context-after",
+          "relation": "邻居主动送奶酪是热心善举，奠定 warm-hearted 的情感基调。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "small",
+          "signalSide": "context-after",
+          "targetText": "kindness",
+          "relation": "下文 kindness 善意与 warm-hearted 热心同属一个情感语义场。"
+        }
+      ],
+      "teachingNote": "用后文具体善举（送奶酪、提醒关窗）反推形容词的情感色彩。"
+    },
+    "q-2024-ii-047": {
+      "blankId": "blank-2024-ii-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "雨快来时邻居上门让我关好车窗，是善意提醒，remind sb to do（提醒某人做某事）与情境搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "allow",
+          "meaning": "允许某人做某事"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "persuade",
+          "meaning": "说服某人做某事"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "order",
+          "meaning": "命令某人做某事"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to close the window in my car when rain is coming",
+          "signalSide": "context-after",
+          "targetText": "remind me to close the window",
+          "relation": "雨将至提醒关车窗，remind sb to do 善意提醒的搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "come to my door",
+          "signalSide": "context-before",
+          "relation": "邻居特意上门，体现善意提醒而非命令或说服。"
+        }
+      ],
+      "teachingNote": "由雨将至关车窗的善意情境，锁定 remind sb to do 提醒搭配。"
+    },
+    "q-2024-ii-048": {
+      "blankId": "blank-2024-ii-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "前文列举的送奶酪、提醒关窗都是善行，acts of kindness（善举）是固定搭配，small acts 概括这些小小的善意之举。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tricks",
+          "meaning": "把戏、花招"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "promises",
+          "meaning": "承诺"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "duties",
+          "meaning": "职责、义务"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of kindness",
+          "signalSide": "context-after",
+          "targetText": "acts of kindness",
+          "relation": "acts of kindness 善举是固定搭配，of kindness 限定名词为善意之举。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "make a new country feel like home",
+          "signalSide": "context-after",
+          "relation": "让异国如家的正是这些善意举动，与 acts 善举语义场一致。"
+        }
+      ],
+      "teachingNote": "of kindness 限定名词，联想 acts of kindness 善举的高频搭配。"
+    },
+    "q-2024-ii-049": {
+      "blankId": "blank-2024-ii-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "作者自称 foodie 吃货，the way to my heart is through my stomach，意大利最能激发的是食欲，appetite（食欲）与吃货、stomach 的美食语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ambition",
+          "meaning": "雄心、抱负"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "success",
+          "meaning": "成功"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "growth",
+          "meaning": "成长、增长"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "fuels my",
+          "signalSide": "context-before",
+          "targetText": "fuels my appetite",
+          "relation": "fuel 激发的对象是 appetite，激发食欲的搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "As a foodie",
+          "signalSide": "context-before",
+          "relation": "foodie 吃货与 stomach 一起构成美食语义场，指向食欲 appetite。"
+        }
+      ],
+      "teachingNote": "抓 foodie、stomach 美食语义场，锁定被激发的是食欲。"
+    },
+    "q-2024-ii-050": {
+      "blankId": "blank-2024-ii-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文谈家家相传的 recipe 食谱与大餐，traditional dish（传统菜肴）与美食、食谱的语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "costume",
+          "meaning": "服装、戏服"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "symbol",
+          "meaning": "象征、符号"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tale",
+          "meaning": "故事、传说"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "traditional",
+          "signalSide": "context-before",
+          "targetText": "traditional dish",
+          "relation": "traditional + dish 构成传统菜肴的搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a recipe passed from one generation to another",
+          "signalSide": "context-after",
+          "relation": "食谱 recipe 与菜肴 dish 同属美食语义场。"
+        }
+      ],
+      "teachingNote": "由后文 recipe 食谱的美食语义场，锁定每个城镇的传统菜肴。"
+    },
+    "q-2024-ii-051": {
+      "blankId": "blank-2024-ii-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "家人们在周日、生日等场合为大餐相聚，gather for big meals（为大餐聚在一起）与家庭聚餐的语境搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cheer",
+          "meaning": "欢呼"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "leave",
+          "meaning": "离开"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "wait",
+          "meaning": "等待"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for big meals on Sundays",
+          "signalSide": "context-after",
+          "targetText": "gather for big meals",
+          "relation": "为大餐而 gather 相聚，主语 Families 与聚集搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "sit down to a big meal with friends and family",
+          "signalSide": "context-after",
+          "relation": "后文一家人围坐大餐，呼应家人相聚 gather。"
+        }
+      ],
+      "teachingNote": "由家人为大餐相聚的情境，锁定 gather for 聚集搭配。"
+    },
+    "q-2024-ii-052": {
+      "blankId": "blank-2024-ii-052",
+      "blankNo": 52,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "聚餐的借口需要去想出、找出，come up with（想出、提出）与 excuses 借口搭配，意为想出聚餐的各种理由。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "put up with",
+          "meaning": "忍受"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "stand up for",
+          "meaning": "支持、维护"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "make up for",
+          "meaning": "弥补"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "whatever other excuses they can",
+          "signalSide": "context-before",
+          "targetText": "excuses they can come up with",
+          "relation": "come up with 的宾语是 excuses，想出借口的搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "come up with",
+          "signalSide": "option",
+          "targetText": "come up with",
+          "relation": "come up with 表示想出、提出，与 excuses 搭配。"
+        }
+      ],
+      "teachingNote": "短语题按动词义拆解：come up with 想出，正好对应想出聚餐借口。"
+    },
+    "q-2024-ii-053": {
+      "blankId": "blank-2024-ii-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "这些大餐总是伴随着欢声笑语，be accompanied by（伴随着）与 laughter and joy 搭配，表示大餐总有欢笑相伴。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "signaled",
+          "meaning": "标志、示意"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confirmed",
+          "meaning": "证实、确认"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "represented",
+          "meaning": "代表、象征"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "by laughter and joy",
+          "signalSide": "context-after",
+          "targetText": "accompanied by laughter and joy",
+          "relation": "be accompanied by + laughter and joy 伴随欢笑的搭配成立。"
+        }
+      ],
+      "teachingNote": "看到 by laughter and joy，联想 be accompanied by 伴随的被动搭配。"
+    },
+    "q-2024-ii-054": {
+      "blankId": "blank-2024-ii-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "下文说一旦与亲友聚餐 problems 就被遗忘，可见此处指生活中的不利之处，disadvantages（劣势、不利）与 problems 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "meanings",
+          "meaning": "意义"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "surprises",
+          "meaning": "惊喜"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "opportunities",
+          "meaning": "机会"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "the problems are",
+          "signalSide": "context-after",
+          "targetText": "disadvantages",
+          "relation": "后文 problems 麻烦与 disadvantages 不利之处同义复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "life in Italy might have",
+          "signalSide": "context-after",
+          "targetText": "disadvantages life might have",
+          "relation": "生活可能存在的 disadvantages，have 的宾语与不利之处搭配成立。"
+        }
+      ],
+      "teachingNote": "由后文 problems 这一同义词，反推空格名词指生活的不利之处。"
+    },
+    "q-2024-ii-055": {
+      "blankId": "blank-2024-ii-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "一旦与亲友围坐大餐，烦恼就被抛诸脑后，problems are forgotten（问题被遗忘）与温馨聚餐化解烦恼的情感走向一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "created",
+          "meaning": "被制造、产生"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "understood",
+          "meaning": "被理解"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "identified",
+          "meaning": "被识别、确认"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the problems are",
+          "signalSide": "context-before",
+          "targetText": "problems are forgotten",
+          "relation": "主语 problems 与 be forgotten 被遗忘搭配，问题被抛诸脑后。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "you sit down to a big meal with friends and family",
+          "signalSide": "context-after",
+          "relation": "与亲友共享大餐的温馨情境，使烦恼被遗忘。"
+        }
+      ],
+      "teachingNote": "由聚餐化解烦恼的温暖情感走向，锁定 problems are forgotten。"
+    }
+  }
+}

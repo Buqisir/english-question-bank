@@ -1,0 +1,377 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2024-i",
+  "sourceAssetVersion": 4,
+  "targetGroups": [
+    "group-2024-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-i-seven-choices": {
+      "overview": "本文是一篇关于作家如何使用词典与同义词词典的说明性短文，作者强调拼写正确对投稿的重要性，并分享自己偏爱纸质工具书、词典的多重用途以及阅读词典本身可以是一种乐趣。七选五考查段落内及段落间的衔接与逻辑关系。",
+      "discourseStructure": {
+        "summary": "文章先点明拼写正确对投稿至关重要，随后转入作者个人使用词典与同义词词典的习惯，再说明词典在拼写之外的释义、发音、词源等功能，最后以词典阅读本身是一种愉悦收尾。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "拼写与投稿",
+            "paragraphIds": [
+              "para-2024-i-seven-title"
+            ],
+            "summary": "引出主题：好作家未必拼写好，但投稿必须呈现完美无误的原稿，编辑不能容忍拼写错误。"
+          },
+          {
+            "unitId": "unit-tools",
+            "heading": "作者的工具书习惯",
+            "paragraphIds": [
+              "para-2024-i-seven-p1"
+            ],
+            "summary": "作者桌上常备纸质词典与同义词词典，不信任电脑拼写检查，偏爱可翻阅的纸质书。"
+          },
+          {
+            "unitId": "unit-function",
+            "heading": "词典的多重功能",
+            "paragraphIds": [
+              "para-2024-i-seven-p2"
+            ],
+            "summary": "词典不仅用于拼写，还能给出精确释义、区分近义词并标注发音。"
+          },
+          {
+            "unitId": "unit-shorter-oxford",
+            "heading": "大部头词典的取舍",
+            "paragraphIds": [
+              "para-2024-i-seven-p3"
+            ],
+            "summary": "作者另有一部两卷本《简明牛津词典》，词条庞大，平时不常用，但查词源与用例时无可替代。"
+          },
+          {
+            "unitId": "unit-pleasure",
+            "heading": "阅读词典的乐趣",
+            "paragraphIds": [
+              "para-2024-i-seven-p4"
+            ],
+            "summary": "约翰逊称编词典是乏味的工作，但作者认为词典其实可以读得津津有味，是一种收获。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-i-036": {
+      "blankId": "blank-2024-i-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a perfect, professionally presented manuscript",
+        "spell words correctly",
+        "take the trouble to spell words"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-i-seven-title",
+        "headingAnchor": "拼写与投稿",
+        "beforeQuote": "it’s vital to submit a perfect, professionally presented manuscript (原稿) .",
+        "afterQuote": "No editor is likely to tolerate a writer who does not take the trouble to spell words correctly."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That means",
+          "signalSide": "option",
+          "targetText": "a perfect, professionally presented manuscript",
+          "relation": "选项中 That 回指前句的“完美、专业呈现的原稿”，对其作出解释。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "perfect, professionally presented manuscript",
+          "signalSide": "context-before",
+          "targetText": "good grammar and no spelling mistakes",
+          "relation": "完美原稿即指 That 所概括的“好语法、无拼写错误”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "spell words correctly",
+          "signalSide": "context-after",
+          "targetText": "no spelling mistakes",
+          "relation": "空后 spell words correctly 与选项 no spelling mistakes 同属拼写话题场，前后呼应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "选项 F 用 That 回指前句“完美、专业呈现的原稿”，并将其具体化为“好语法、无拼写错误”，与空后“编辑不容忍拼写错误”自然衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "perfect, professionally presented manuscript",
+            "optionSide": "good grammar and no spelling mistakes",
+            "relation": "选项把“完美原稿”落实为语法正确、无拼写错误。"
+          },
+          {
+            "contextSide": "spell words correctly",
+            "optionSide": "no spelling mistakes",
+            "relation": "空后拼写正确呼应选项无拼写错误。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 谈“词典不只用于拼写”，但此处尚未引入词典，且与“完美原稿”无回指关系，话题不接。"
+        }
+      ],
+      "teachingNote": "看到含 That/This 的选项，先回前句找其概括或回指的对象，再验证与空后是否衔接。"
+    },
+    "q-2024-i-037": {
+      "blankId": "blank-2024-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "I don’t trust my laptop’s spellchecker",
+        "online dictionaries and thesauruses",
+        "prefer a hard cover"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-i-seven-p1",
+        "headingAnchor": "作者的工具书习惯",
+        "beforeQuote": "I don’t trust my laptop’s spellchecker.",
+        "afterQuote": "Of course, these days there are plenty of online dictionaries and thesauruses"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It takes no account",
+          "signalSide": "option",
+          "targetText": "my laptop’s spellchecker",
+          "relation": "选项主语 It 回指前句的 spellchecker，说明它不可信任的原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "I don’t trust my laptop’s spellchecker",
+          "signalSide": "context-before",
+          "targetText": "It takes no account of the context",
+          "relation": "前句说不信任拼写检查，选项 It 即指该拼写检查，给出不信任的理由。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "spellchecker",
+          "signalSide": "context-before",
+          "targetText": "It takes no account of the context",
+          "relation": "spellchecker 与“不考虑语境”属同一评价话题场，构成因果说明。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "选项 B 用 It 回指前句的 spellchecker，指出它“不考虑语境”，正好解释了作者为何不信任电脑拼写检查。",
+        "matchedClues": [
+          {
+            "contextSide": "I don’t trust my laptop’s spellchecker",
+            "optionSide": "It takes no account of the context",
+            "relation": "It 指代拼写检查，给出不信任的具体原因。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 说“我不常用这本词典”，此处谈的是拼写检查软件而非某本词典，回指对象不符。"
+        }
+      ],
+      "teachingNote": "前句出现明确指代对象时，含 It/这类代词的选项往往承接其后，给出原因或评价。"
+    },
+    "q-2024-i-038": {
+      "blankId": "blank-2024-i-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "a precise definition of each word",
+        "differentiating it from other words",
+        "show how the word is pronounced"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-i-seven-p2",
+        "headingAnchor": "词典的多重功能",
+        "beforeQuote": "",
+        "afterQuote": "It should give you a precise definition of each word"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "not only for spelling",
+          "signalSide": "option",
+          "targetText": "precise definition / how the word is pronounced",
+          "relation": "选项 not only for spelling 概括了本段“释义、发音”等拼写以外的功能。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a precise definition of each word",
+          "signalSide": "context-after",
+          "targetText": "not only for spelling",
+          "relation": "释义功能正是“不仅用于拼写”的具体体现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "show how the word is pronounced",
+          "signalSide": "context-after",
+          "targetText": "not only for spelling",
+          "relation": "标注发音同样属于拼写之外的功能，呼应主题句。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "选项 E 作为段首主题句，提出“词典不只用于拼写”，下文随即列举释义、区分近义词、标注发音等功能，构成总分关系。",
+        "matchedClues": [
+          {
+            "contextSide": "a precise definition of each word / show how the word is pronounced",
+            "optionSide": "a dictionary is not only for spelling",
+            "relation": "下文功能逐一印证主题句“不只用于拼写”。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 说“词典并非总能提供足够信息”，与下文罗列词典丰富功能的肯定语气相反，且不能统领全段。"
+        }
+      ],
+      "teachingNote": "段首空格优先填主题句，并用下文逐条列举的内容反推其概括范围。"
+    },
+    "q-2024-i-039": {
+      "blankId": "blank-2024-i-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "two-volume copy of the Shorter Oxford Dictionary",
+        "with its 2,672 pages",
+        "check the origin of a word"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-i-seven-p3",
+        "headingAnchor": "大部头词典的取舍",
+        "beforeQuote": "It contains around 163,000 words, plus word combinations and idiomatic phrases.",
+        "afterQuote": "However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "I don’t often use this dictionary",
+          "relation": "空后 However 表转折，说明空格句应是被转折的让步内容（平时不常用）。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this dictionary",
+          "signalSide": "option",
+          "targetText": "the Shorter Oxford Dictionary",
+          "relation": "选项 this dictionary 回指本段的《简明牛津词典》。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "two-volume copy of the Shorter Oxford Dictionary",
+          "signalSide": "context-before",
+          "targetText": "I don’t often use this dictionary",
+          "relation": "前文描述这部大部头词典，正是选项 this dictionary 所指对象。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "选项 A 用 this dictionary 回指本段的两卷本大词典，承认平时不常用；空后 However 随即转折，强调查词源、用例时它无可替代，让步—转折逻辑完整。",
+        "matchedClues": [
+          {
+            "contextSide": "However, if I need to check the origin of a word",
+            "optionSide": "I don’t often use this dictionary",
+            "relation": "不常用与 However 后的“查词源时最好”形成让步转折。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 含 But 与 them，指代复数对象且语义为“仍不想替换它们”，与本段单数 this dictionary 及让步语义不符。"
+        }
+      ],
+      "teachingNote": "空后出现 However 时，空格句通常是被转折的让步信息，据转折关系反推空格句的语义方向。"
+    },
+    "q-2024-i-040": {
+      "blankId": "blank-2024-i-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "To make dictionaries is dull",
+        "illustrating one definition of",
+        "a rewarding experience"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-i-seven-p4",
+        "headingAnchor": "阅读词典的乐趣",
+        "beforeQuote": "“To make dictionaries is dull (乏味) work,” wrote Johnson, illustrating one definition of “dull”.",
+        "afterQuote": "A few minutes spent casting your eye over a page or two can be a rewarding experience."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But a dictionary can be a pleasure",
+          "signalSide": "option",
+          "targetText": "dull work",
+          "relation": "选项以 But 转折前句“编词典是乏味的工作”，提出词典阅读其实是乐事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "dull",
+          "signalSide": "context-before",
+          "targetText": "a pleasure to read",
+          "relation": "前句 dull（乏味）与选项 pleasure 构成语义对立，正是 But 转折的两端。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a rewarding experience",
+          "signalSide": "context-after",
+          "targetText": "a pleasure to read",
+          "relation": "空后“收获满满的体验”与选项“阅读的乐趣”同属正面评价话题场，前后一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "选项 D 以 But 转折前句“编词典是乏味工作”，提出词典读起来其实是一种乐趣，正好引出空后“翻看几分钟是收获满满的体验”。",
+        "matchedClues": [
+          {
+            "contextSide": "dull work / a rewarding experience",
+            "optionSide": "a dictionary can be a pleasure to read",
+            "relation": "But 连接前文 dull 与后文 rewarding，选项 pleasure 居中完成转折承接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 说词典信息不足，语气消极，无法与空后“收获满满的体验”这一正面结论衔接。"
+        }
+      ],
+      "teachingNote": "前句消极、后句积极时，优先选含 But 的转折句作衔接桥梁。"
+    }
+  }
+}

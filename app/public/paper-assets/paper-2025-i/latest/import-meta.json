@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2025-i",
+  "sourceFileName": "2025年新课标I卷-答案版.docx",
+  "sourceFileSha256": "33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:42.524Z",
+  "paper": {
+    "year": 2025,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2025年新课标Ⅰ卷",
+    "examCode": "2025-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2025",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2025-i-reading-a": {
+      "groupId": "group-2025-i-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇说明性的科普图文，介绍交通运输在全球碳排放中的占比，并分模式（飞机、汽车、火车、卡车、轮船）说明各自的绿色燃料/减碳方案，最后引用专家观点强调可再生能源的需求与发展。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2025-i-reading-b": {
+      "groupId": "group-2025-i-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇记叙文，作者以九年级写作课教师的身份回顾教学经历：从学生第一篇命题作文的失败，到调整题目后学生写作热情与作品质量的飞跃，最终领悟到写作真正强大的意义在于连接人与人、让人理解彼此、懂得为人之道。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2025-i-reading-c": {
+      "groupId": "group-2025-i-reading-c",
+      "difficulty": "中",
+      "summary": "文章讨论城市街道被汽车主导后行人（尤其是儿童）移动性下降的问题，借荷兰两位作者的新书 Movement 呼吁重新思考街道的角色，并回顾历史上居民反抗道路扩张的运动，最终呼吁人们反思汽车优先的真实代价。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2025-i-reading-d": {
+      "groupId": "group-2025-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文为科普说明文，介绍中国研究人员的一项新发现：将自来水煮沸五分钟后冷却过滤可去除至少80%的微塑料。文章先点明微塑料污染无处不在，再引出研究方法与结论，接着说明方法的关键条件（碳酸钙含量/水的硬度）与局限，随后借瓶装水强调问题严峻，最后引用专家观点展望研究的实际应用前景。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2025-i-seven-choices": {
+      "groupId": "group-2025-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇人物特写，介绍College Cafe里一位名叫Catherine Murphy的咖啡师。她不仅做咖啡，更用真诚的微笑服务学生，多年如一日早起赶来上班，深受学生喜爱。七选五围绕她的工作细节、敬业态度与学生反馈展开，需要根据段落逻辑顺序、指代衔接和话题场对应来还原句子。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2025-i-cloze": {
+      "groupId": "group-2025-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2025-i-grammar-fill": {
+      "groupId": "group-2025-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2025-i-writing-application": {
+      "groupId": "group-2025-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2025-i-writing-continuation": {
+      "groupId": "group-2025-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

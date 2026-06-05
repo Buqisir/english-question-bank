@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2022-i",
+  "sourceFileName": "2022年新课标I-答案版.docx",
+  "sourceFileSha256": "efd4d8c1257a89dab74f2cad19a7a28f60c4e700ea1414dd661bd1a319fbac68",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:41.032Z",
+  "paper": {
+    "year": 2022,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2022年新课标Ⅰ卷",
+    "examCode": "2022-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2022",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2022-i-reading-a": {
+      "groupId": "group-2022-i-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一份《文学导论》课程的评分政策说明，列出评分等级、各组成部分的占比以及迟交作业的处理规则。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2022-i-reading-b": {
+      "groupId": "group-2022-i-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇关于食物浪费（food waste）的议论性随笔。作者以自己丢弃芝麻菜的小故事开篇，引出食物浪费普遍且常常是无意识发生的现象，进而指出食物浪费的环境危害，最后通过 DC Central Kitchen 的 Mike Curtin 给出回收食物、减少浪费的解决方案与建议。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2022-i-reading-c": {
+      "groupId": "group-2022-i-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇新闻报道，介绍伦敦养老院让老人照看母鸡以减少孤独感、改善身心健康的公益项目，并通过参与者和项目负责人的话展示项目效果与推广前景。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2022-i-reading-d": {
+      "groupId": "group-2022-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍了苏黎世大学 Damián Blasi 团队的一项五年研究：饮食变化导致人类咬合方式改变，进而产生了如“f”“v”这类唇齿音，这些新音如今出现在世界半数语言中。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2022-i-seven-choices": {
+      "groupId": "group-2022-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，主题是如何寻找并与健身搭档（workout partner）有效合作。文章先点明拥有健身搭档的好处，再依次讲解寻找搭档的步骤：明确需求、发布寻找启事、与搭档磨合。五个空分别考查段内/段间的衔接与照应。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2022-i-cloze": {
+      "groupId": "group-2022-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2022-i-grammar-fill": {
+      "groupId": "group-2022-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2022-i-writing-application": {
+      "groupId": "group-2022-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2022-i-writing-continuation": {
+      "groupId": "group-2022-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}
