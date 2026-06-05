@@ -9,19 +9,22 @@ of duplicating workflow or browser rules.
 ## Current Operating Reality
 
 This section overrides any conflicting role or process text below and in
-the steering notes. It reflects how the project runs today. When any doc
-names `阿澈` or an external agent, resolve it through this section.
+the steering notes. It reflects how the project runs today. Historical docs
+(cut records, ADRs) may still name `阿澈` or external agents — read each such
+reference as 小川 wearing the matching hat (PM / UI-direction / CR / RM); do
+not mass-rename history.
 
 ### Roles
 
-- The team is one Claude wearing hats across two model tracks. `阿澈` has no
-  quota; no external high-reasoning agent is available.
-- Read every `阿澈` reference as "a fresh Opus session with that hat (PM,
-  UI direction, Big CR, RM gate)".
-- Independence comes from a fresh, un-anchored session plus the role
-  persona, not from a different named agent. PM and PA being the same Claude
-  is the norm, not an exception — do not write per-cut "single-person
-  exception" boilerplate.
+- One executor: **小川** (this Claude), wearing every hat across two model
+  tracks — Opus for PM / PA / CR / RM thinking, Sonnet for DEV. There is no
+  second named agent and no external agent.
+- **Independence comes from a fresh, un-anchored session + the role persona,
+  not from a different name.** A review hat (PA of a plan, CR of a diff) runs
+  in its own fresh session so it "forgets it wrote the code" and actually
+  pushes back. Scale by cut size: small skips separate PA / CR; medium /
+  large run PA and CR as fresh sessions (see Session map).
+- UI direction / 审美 judgment stays with the **owner (PO)**; 小川 implements.
 
 ### Session map (scales with cut size)
 
@@ -50,25 +53,20 @@ names `阿澈` or an external agent, resolve it through this section.
 `high` is the default ceiling; `max` / `xhigh` is by exception, not
 standing. Do not run DEV on Opus-max, or PM / PA on Sonnet-low.
 
-### RM gate (reconciled)
+### RM gate
 
-The medium / large RM artifact gate runs in the CR + RM session (a fresh
-Opus, PM hat), not a separate `阿澈`; it is never blocked for lack of `阿澈`.
-The gate stays real: required artifacts must exist and the relevant
-`verify-i*.mjs` must pass before merge.
-
-### Dormant
-
-External-agent, external-DEV, and external-PA transport rules are dormant
-while no external agent is in use. Skip them on read; re-activate if
-external quota returns.
+Medium / large merges run the RM artifact gate in the CR + RM session:
+required artifacts exist (`node scripts/verify-cut-artifacts.mjs`) and the
+relevant `verify-i*.mjs` pass before merge.
 
 ### kratos scope
 
 Write project memory only to the repo-root project (root = this repo). Do
 not `kratos create` / `switch` to a per-cut or per-worktree scope (e.g.
-`eqb-c7-dev`). Existing extra scopes are a separate cleanup task; do not
-blind-delete.
+`eqb-c7-dev`).
+
+> TODO (one-off — delete when done): some extra scopes already exist; they
+> need a cleanup pass but must not be blind-deleted.
 
 ### Session reading contract
 
@@ -113,14 +111,11 @@ notes are reference — load a section only when the task names it.
   large process by risk, sync first, and avoid turning small fixes into
   process rituals or large cuts into rushed DEV work.
 - Medium / large cuts use repo-routed context, not chat-only context:
-  create or update `docs/cuts/<CUT>/agent-entrypoint.md`, use
-  `docs/cuts/_templates/` when starting a cut, and keep handoff / Cut
-  Note records there when the cut pauses or lands.
-- Hard rule: substantive multi-agent context must live in repo files,
-  not in chat. For new medium / large cuts, use the artifact naming
-  rules in `docs/cuts/_templates/README.md`. Chat messages should only
-  route agents to those files and state the next action. Do not depend
-  on copy/pasted long chat history as the source of truth.
+  substantive multi-agent context must live in repo files. Create / update
+  `docs/cuts/<CUT>/agent-entrypoint.md`, use `docs/cuts/_templates/` (naming
+  rules in its `README.md`) when starting a cut, and keep handoff / Cut Note
+  records there. Chat only routes agents to those files and states the next
+  action — never depend on copy-pasted chat history as the source of truth.
 - Use review prompt templates when a PA / Big CR handoff needs a durable
   repo-routed instruction:
   `docs/cuts/_templates/pa-prompt-template.md` and
@@ -137,12 +132,13 @@ notes are reference — load a section only when the task names it.
   require a committed `plan.md` before DEV. Large cuts require committed
   `plan.md`, formal PA / CR records as applicable, and `cut-note.md`
   before closeout.
-- Before RM merge for medium / large cuts, 阿澈 must run an artifact
-  gate: required cut files must exist and be non-empty, and missing
-  required artifacts stop the merge. Medium cuts require `plan.md`, plus
-  `pa.md` or PA-lite recorded in `plan.md` when PA was used, and `cr.md`
-  or PR-description / final-summary CR record when Big CR was triggered.
-  Large cuts additionally require non-empty `cut-note.md`.
+- Before RM merge for medium / large cuts, run the artifact gate:
+  `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>`. It checks the
+  DEV-contract artifact exists non-empty (`plan.md` / `pm-spec.md` /
+  `goal*.md`), large additionally needs non-empty `cut-note.md`, and it
+  flags whether PA / CR records are present; non-zero exit stops the merge.
+  The RM hat still owns the gate judgment — the script just makes the
+  existence check mechanical instead of manual.
 - Cut decision ledgers should expose freshness. New `decisions.md`
   files should include `Last synced` and
   `Open review items`, and PA / Big CR follow-up must update those fields
@@ -206,58 +202,73 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 - If the in-app browser times out, gives stale state, or cannot prove the visual claim, fall back to local Chrome/headless Playwright for smoke tests and screenshots.
 - Do not treat "static verify passed" as "browser QA passed" for user-visible PaperSurface changes.
 
+## AI 协作准则底座(Matt 外脑)
+
+下面 `## Collaboration Workflow`、`## Context / Output Economy` 等节,是 Matt
+Pocock「AI 协作准则」在本项目的特化落地(且更细)。通用底座 + 完整门道见外脑
+(**每周更新**;新门道先在那沉淀、本文件按需吸收;**与外脑冲突时,以本文件的项目
+特化为准**):
+
+`/Users/huangxuewei/Coding Brain/操作层/Matt操作手册.md`
+
+外脑里有、本文件尚未显式写、但同样适用的几条:
+
+- **讲 why 不只讲 what** — 给 AI 理由,它才提得出替代方案,而非闷头执行。
+- **别靠训练集猜(intrinsic > extrinsic)** — 读代码 / 文件 / `use your search
+  tool` 把信息拉进 context;关键结论自己核,别隐式信任 AI 的"我查过了"。
+- **守设计的几把尺** — 想接口不想实现;模块要深、守清晰 seam;文件名表意当
+  context 指针;必填别设 optional。
+- **指令预算按"条数(~500)"花,不是 token** — 本文件每加一条都在花预算;能查
+  的 / 已被流程保证的 / 易变的,别写进来。
+
+> 本节只放指针 + 骨架;每条的完整机制、边界、证据等级在外脑门道页里(渐进披露)。
+
 ## Collaboration Workflow
 
 - Before proposing a plan for a task, first state in one line:
   `cut size: small / medium / large / irreversible; touches schema, data contract, product boundary, or teaching interpretation: yes/no`.
 - If the cut is small and touches none of those four areas, proceed directly.
-- For medium / large / irreversible cuts, 阿澈 owns PM and should create
-  or update the repo-routed `plan.md` before PA / DEV starts. 小川 owns
-  routine PA by default so PM and PA are not the same person. External
-  PA / Big CR is triggered by risk or explicit owner request, not by a
-  default review gate.
+- For medium / large / irreversible cuts, the PM hat creates or updates the
+  repo-routed `plan.md` before PA / DEV starts; PA runs in a separate fresh
+  session so PM and PA are never the same session. Big CR is triggered by
+  risk or explicit owner request, not by a default review gate.
 - Use risk-based review gates from `docs/agents/review-levels.md`.
 - Review strength follows risk, not anxiety. First principles decide **why** to review; razor discipline decides **where review stops**.
 - Before assigning a cut, ask: irreversible contract? user-visible? runtime? what evidence proves the risk?
-- Current named-agent assignment:
-  - 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and
-    medium / large RM artifact gates.
-  - 小川 owns PA, DEV, routine CR-lite, and RM / release execution.
-  - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
-    the RM artifact gate and final sanity check.
-  - PM and PA should not be the same person by default. If quota or
-    availability requires one agent to cover both, record the exception
-    and the self-review risk in `docs/cuts/<CUT>/plan.md`.
-  - When 小川 performs both PA and DEV, PA must be a separate stage:
-    write `docs/cuts/<CUT>/pa.md` first, wait for 阿澈 PM compression into
-    `plan.md`, then start DEV from the updated plan.
-  - Either agent may cover another role when quota or availability requires,
-    but role contracts and gates do not downgrade.
+- Hat contracts (all worn by 小川; independence comes from fresh sessions,
+  not names):
+  - PM hat: grill, `plan.md`, plan compression, Big CR, and medium / large
+    RM artifact gate.
+  - PA hat: review the plan in its own fresh session; writes
+    `docs/cuts/<CUT>/pa.md`, which the PM hat compresses into `plan.md`
+    before DEV starts.
+  - DEV hat: implement from the committed `plan.md`.
+  - CR + RM hat: CR-lite (Big CR when triggered) on a fresh cold-read of the
+    diff, then the RM gate and release — its own session for medium / large.
+  - PA, DEV, and CR must be different sessions (independence): write `pa.md`
+    first, wait for the PM-hat compression, then DEV, then a fresh CR.
+    Hats overlap only across fresh sessions; role contracts and gates never
+    downgrade.
 - The owner is PO and does final product QA, not code review.
-- External high-reasoning agents are reserved for large-cut second PA,
-  direction checks, and occasional Big CR. Do not route routine small or
-  medium implementation work through external DEV agents unless the
-  owner explicitly asks for that exception.
-- When an external PA is explicitly used, it must read and follow
-  `docs/agents/pa-persona.md` before reviewing a plan. Its job is to find
-  direction, boundary, data-contract, and rework risks before DEV starts.
-- Remote GitHub `main` and PR heads are the shared source of truth.
-  The responsible agent must fetch and confirm local / remote state
-  before PA, CR, QA, and RM. External PA / CR reports are useful input,
-  not truth, until 阿澈 verifies the baseline, diff, and pushed commits.
+- External-agent rules are dormant (小川-only); archived in
+  `docs/agents/external-agents.md`. Re-activate from there if reintroduced.
+- Remote GitHub `main` and PR heads are the shared source of truth. Before
+  PA, CR, QA, and RM, the responsible hat must fetch and confirm local /
+  remote state — never treat a report as truth until the baseline, diff, and
+  pushed commits are verified.
 - Default flow:
   - **PM grill before DEV** whenever product behavior is still fuzzy.
   - **小川 PA before DEV** for architecture, data contracts,
     future-facing user-visible flows, migrations, export logic, or medium /
     large cuts with non-obvious boundaries. PA writes
-    `docs/cuts/<CUT>/pa.md`; 阿澈 then compresses PA follow-up decisions
-    into `docs/cuts/<CUT>/plan.md` before DEV starts.
+    `docs/cuts/<CUT>/pa.md`; the PM hat then compresses PA follow-up
+    decisions into `docs/cuts/<CUT>/plan.md` before DEV starts.
   - **CR-lite after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
 - Cut tier flows:
   - Small: `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
-  - Medium: `Sync -> 阿澈 PM grill -> plan.md -> 小川 PA (pa.md) -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite -> browser QA -> PO QA -> 小川 RM`.
-  - Large: `Sync -> 阿澈 PM grill -> Canvas/mockups -> 小川 PA / optional external second PA -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite -> 阿澈 Big CR / browser QA -> PO QA -> 小川 RM -> Cut Note`.
+  - Medium: `Sync -> PM grill -> plan.md -> PA (pa.md) -> PM compression -> DEV -> CR-lite -> browser QA -> PO QA -> RM`.
+  - Large: `Sync -> PM grill -> Canvas/mockups -> PA -> PM compression -> DEV -> CR-lite -> Big CR / browser QA -> PO QA -> RM -> Cut Note`.
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
@@ -273,11 +284,6 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   may be weak but cannot confidently judge. Big CR should inspect those
   first, then continue with normal risk-based review.
 - PaperSurface-specific non-blocking watch items live in `docs/paper-surface-watch-ledger.md`; record them there instead of letting them disappear into chat history.
-- Historical external-agent handoff rules are no longer the default
-  workflow. Only use external DEV prompts when the owner explicitly
-  asks. In that exception, put the entire prompt in a repo file or a
-  fenced chat block, and require the report shape from
-  `docs/agents/dev-completion-report-template.md` and `docs/steering/dev-completion-protocol.md`.
 - Do not accept raw terminal logs as a completion report. Require short
   verify summaries, exact changed files, browser QA status, forbidden
   scopes, known risks, and PO QA checklist link when applicable.
@@ -286,18 +292,20 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ## UI Collaboration
 
-- 阿澈 owns UI direction / polish: visual tone, layout judgment,
-  interaction detail, color systems, and whether a surface feels right
-  for the teacher workflow.
-- 小川 may implement UI code as DEV when assigned, but UI product /
-  visual direction stays with 阿澈 unless the owner changes the role
-  assignment in repo context.
-- 小川 may directly edit CSS and pure display-component code when the
-  cut assigns that DEV scope, but must not touch `server/**`,
-  `scripts/verify-*`, `app/src/domain/**`, `schemas/**`,
-  `app/public/paper-assets/**`, `*Adapter.ts`, `shared/papersurface/**`,
-  or print / PDF / export styling unless 阿澈 explicitly assigns that
-  scope in a committed `plan.md`.
+- UI direction / polish belongs to the owner (PO): visual tone, layout
+  judgment, interaction detail, color systems, and whether a surface feels
+  right for the teacher workflow.
+- 小川 implements UI code as DEV when assigned, but UI product / visual
+  direction stays with the PO unless the owner reassigns it in repo context.
+- 小川 edits CSS / pure display components only within the assigned DEV
+  scope; never contract-level files (domain · schema · `*Adapter.ts` ·
+  PaperSurface · `server/**` · verify scripts · paper-assets ·
+  print/export styling) unless the PM hat assigns that scope in a committed
+  plan. Under Claude Code the core contract subset (domain / schema /
+  Adapter / PaperSurface) is additionally hard-guarded by a `PreToolUse`
+  hook (`.claude/hooks/guard-contract-files.mjs`, wired in
+  `.claude/settings.json`) that asks for confirmation before such a write;
+  other harnesses still rely on this rule as written.
 - Grey-zone files such as `SevenChoicesAnalysisPanel.tsx`,
   `DraftPaperWorkbench.tsx`, and
   `PaperIntelligencePaperSurfaceHarness.tsx` may receive display-only UI
