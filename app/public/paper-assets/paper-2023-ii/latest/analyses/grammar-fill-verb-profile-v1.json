@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "grammar-fill-verb-profile-v1",
+  "paperId": "paper-2023-ii",
+  "blanks": {
+    "q-2023-ii-065": {
+      "tense": "past",
+      "voice": "active",
+      "agreement": "na",
+      "method": "ai"
+    }
+  }
+}
