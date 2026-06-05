@@ -33,12 +33,13 @@ owner directive:**花 Claude 额度、跳过 DeepSeek**。I16b(#181)已建好 De
   - `getQuestionGroupDetail(id)` @1467:取题组详情(已挂 serverContext)。
   - `bindTopicLabelsToQuestionGroup(id, input)` @10539-10558:`replaceQuestionGroupTopicLabels` 落库(已挂 serverContext;内部会再 normalize 一次)。
   - `listUnlabeledGroupIds()` @10560:**全库**未标列表,**未 scope 到 12 套** → 本刀 driver 不用它,自带 scoped SQL。
+  - **⚠️ 顶层副作用(PA MF-1)**:api.mjs **无 run-as-main 守卫**——`ensureDatabaseShape()` + `cleanupPaperImportTempArtifacts()` + `ensureMySpaceFilesRoot()` + `server.listen(8787)` 在 module 顶层执行(@11083-11090),今天**没人 import api.mjs**。故 `.scratch` driver 一 `import` 就会启第二个 listener(或 `EADDRINUSE`)且永不退出。**导出 seam 必要但不充分:必须先让 api.mjs import-safe。** 启动方式 = `node server/api.mjs`(`scripts/dev.sh:19`);`fileURLToPath`(@16)+ `path` 已 import。
 - **复用层(I16b,不重造)**:`server/topic-labels/backfillTopicLabels.mjs` 是注入式 orchestrator(serial 循环);`getTopicLabelsForQuestionGroups` 已 merge 进 `selectQuestionGroupCards` → `QuestionGroupCard.topicLabels` → concierge/经典关键词搜已覆盖。**所以本刀不需要新检索层 / 不改卡片契约**:标签落库即可搜。
 - **DB = `data/question-bank.sqlite`**(同导入库,非 teaching-qbank.db);表 `question_group_topic_labels`;12 套 = `sources` 中 `source_type='real_exam' AND year BETWEEN 2020 AND 2025`(region 含「全国新课标Ⅰ/Ⅱ」),经 `passages.source_id` → `question_groups.passage_id` 关联。
 
 ## Locked Decisions
 
-1. **Z-lite 加法导出**(api.mjs):①抽 `buildTopicLabelMessages(detail)` 纯函数(由 10475-10484 提取,**留在 api.mjs**),`export`;②`export` `normalizeTopicLabelPayload`;③`export` `getQuestionGroupDetail`;④`export` `bindTopicLabelsToQuestionGroup`;⑤`callDeepSeekTopicLabels` 改调 `buildTopicLabelMessages(context.detail)`(prompt 单一来源,DeepSeek 路与 Claude driver 共用)。**仅此 5 处;不删 taxonomy、不搬模块、不改任何行为。**
+1. **Z-lite 加法导出 + import-safe**(api.mjs,**6 处**):①抽 `buildTopicLabelMessages(detail)` 纯函数(由 10475-10484 提取,**留在 api.mjs**),`export`;②`export` `normalizeTopicLabelPayload`;③`export` `getQuestionGroupDetail`;④`export` `bindTopicLabelsToQuestionGroup`;⑤`callDeepSeekTopicLabels` 改调 `buildTopicLabelMessages(context.detail)`(prompt 单一来源,DeepSeek 路与 Claude driver 共用);**⑥(PA MF-1)给顶层 bootstrap 加 run-as-main 守卫**——把 @11083-11090 四行(`ensureDatabaseShape`/`cleanup`/`ensureMySpaceFilesRoot`/`server.listen`)包进 `if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) { … }`(`http.createServer` 留顶层,创建无害)。**仅此 6 处;不删 taxonomy、不搬模块、不改真实 `node server/api.mjs` 的运行行为。**
 2. **模型 Sonnet**(可否决,见 Why)。
 3. **重标全 108、覆盖旧 9**(可否决,见 Why)。
 4. **labels 只写 DB**(gitignored)——**无提交的内容文件**。本刀提交物 = api.mjs 的 5 处加法 + 可选 verify 更新。
@@ -46,9 +47,12 @@ owner directive:**花 Claude 额度、跳过 DeepSeek**。I16b(#181)已建好 De
 
 ## Must Do
 
-### Step 1 — api.mjs Z-lite 加法导出(契约级,DEV scope)
-- 按 Locked #1 的 5 处改。**behavior-preserving**:抽 `buildTopicLabelMessages` 后,`callDeepSeekTopicLabels` 产出的 messages 必须**逐字符等同**原 inline(同一 system/user 文案、同一 allowedLabels 拼法)。
-- 验证:`node scripts/verify-i16b-theme-labels-backfill.mjs` **保持绿**(证 DeepSeek 路经改后仍通);`server/api.mjs` 仅这 5 处 diff。
+### Step 1 — api.mjs Z-lite 加法导出 + import-safe(契约级,DEV scope)
+- 按 Locked #1 的 **6 处**改。**behavior-preserving**:抽 `buildTopicLabelMessages` 后,`callDeepSeekTopicLabels` 产出的 messages 必须**逐字符等同**原 inline(同一 system/user 文案、同一 allowedLabels 拼法);main-guard 后真实 `node server/api.mjs` 仍照常 listen+bootstrap。
+- 验证:
+  - `node scripts/verify-i16b-theme-labels-backfill.mjs` **保持绿**(证 DeepSeek 路经改后仍通)。
+  - **import-safe 自证**:`node -e "import('./server/api.mjs').then(()=>{console.log('import OK, no listen');process.exit(0)})"` 在 **API 已开着(8787 占用)** 时**不报 EADDRINUSE、不挂起、立即退出**——证 import 无顶层副作用。
+  - `git diff --stat server/api.mjs` 确认仅这 6 处。
 
 ### Step 2 — `.scratch/import-pilot/` topic-label driver(gitignored,不进 CR)
 - `topic-driver.mjs list|persist`:
@@ -107,4 +111,10 @@ owner directive:**花 Claude 额度、跳过 DeepSeek**。I16b(#181)已建好 De
 
 ## PA Follow-Up Decisions
 
-_(待 fresh PA 写 `pa.md` 后,PM 帽在此把 Must Fix 映射成 plan 处置。)_
+PA verdict(`pa.md`):**APPROVE WITH MUST FIX**(1 Must Fix,0 未决 PO 决策;scope SQL=精确 108 组/12 套/旧9/0 误纳、overwrite-all 健全、4 export 精确够用无 over-export、抽取可逐字等同、verify-i16b 现状 34/0 不被踩——全 intrinsic 验真)。
+
+| PA item | `pa.md` 处置 | `plan.md` handling | Status |
+| --- | --- | --- | --- |
+| **MF-1** api.mjs 非 import-safe(顶层 `server.listen`+bootstrap @11083-11090 无 main-guard;今天无人 import,本刀是首个 ESM 消费者 → driver/断言 import 会启第二 listener 或 EADDRINUSE 挂起) | 选 Option 1(加 `import.meta` main-guard,仍 Z-lite,diff 5→6) | Code Reality 加「顶层副作用」条;Locked #1 加第⑥处 main-guard;Step 1 加 import-safe 自证(API 开着时 import 不 EADDRINUSE/不挂);Verification 同步 | **Closed** |
+
+PA 的 5 条 attention asks 处置:#1(4 export 逆纹理)→ PA 判**精确够用、无 over-export**,B 再收进模块,接受;#2(等价抽取)→ 已入 Step 1 验收(逐字符等同);#3(覆盖 vs 幂等)→ PA 判 route-independent、对一次性 backfill 健全;#4(Sonnet 门)→ 维持 Sonnet + Step 4 抽检升 Opus 兜底;#5(scoped SQL)→ PA live DB 验**精确 108/12 套/0 误纳**,driver list 打印 paperName 供 QA 核对。
