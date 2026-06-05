@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2024-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-ii-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-ii-seven-choices": {
+      "overview": "本文是一篇说明性建议类文章，主题为过度旅游（overtourism）及游客如何通过明智决策减轻热门目的地压力。结构为引言段提出问题，随后以小标题形式给出若干条具体建议，最后以呼吁回馈当地社区收尾。七选五考查段首设问、小标题概括以及段内衔接句的还原。",
+      "discourseStructure": {
+        "summary": "文章先指出旅游的益处与过度旅游的矛盾，引出'是否应停止旅游'的设问并否定；随后分条给出建议：用心选择目的地、发挥创意去冷门地、错峰出行；结尾升华到回馈社区。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Overtourism Is For Real: How Can You Help?",
+            "paragraphIds": [
+              "para-2024-ii-seven-title",
+              "para-2024-ii-seven-p1"
+            ],
+            "summary": "引言段：旅游有益但过度旅游成问题，设问是否该停止旅游并否定，引出下文建议。"
+          },
+          {
+            "unitId": "unit-choose",
+            "heading": "Choose mindfully.",
+            "paragraphIds": [
+              "para-2024-ii-seven-p2"
+            ],
+            "summary": "建议一：用心选择，只在真正被吸引时前往，不要随大流。"
+          },
+          {
+            "unitId": "unit-creative",
+            "heading": "Get creative.",
+            "paragraphIds": [
+              "para-2024-ii-seven-p3"
+            ],
+            "summary": "建议二：发挥创意，过度旅游只集中在少数热点，仍有大量冷门选择。"
+          },
+          {
+            "unitId": "unit-offpeak",
+            "paragraphIds": [
+              "para-2024-ii-seven-p4"
+            ],
+            "summary": "建议三：错峰出行，避开节假日与高峰，减少冲击、节省开支并带动淡季经济。"
+          },
+          {
+            "unitId": "unit-giveback",
+            "paragraphIds": [
+              "para-2024-ii-seven-p5"
+            ],
+            "summary": "结尾：造访他人家园是荣幸，应尽力保护目的地特色并回馈社区。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-ii-036": {
+      "blankId": "blank-2024-ii-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "the rapid growth of travel has led to overtourism",
+        "Certainly not",
+        "The loss of what travel offers",
+        "stop traveling"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-ii-seven-p1",
+        "beforeQuote": "the rapid growth of travel has led to overtourism in certain regions and destinations.",
+        "afterQuote": "Certainly not. The loss of what travel offers would be unacceptable"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Certainly not",
+          "signalSide": "context-after",
+          "targetText": "So, should we stop traveling?",
+          "relation": "空后 Certainly not 是对一个一般疑问句的否定回答，B 的设问 'should we stop traveling?' 正好被否定。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "should we stop traveling",
+          "signalSide": "option",
+          "targetText": "Certainly not",
+          "relation": "B 提出是否应停止旅游的疑问，与空后 Certainly not 形成问—答衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "led to overtourism",
+          "signalSide": "context-before",
+          "targetText": "stop traveling",
+          "relation": "前句指出旅游增长导致过度旅游，自然引出'是否该停止旅游'的反问。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "前句指出旅游高速增长带来过度旅游，B 用反问 'So, should we stop traveling?' 承接，而空后 'Certainly not' 正是对该疑问的否定回答，形成设问—回答的衔接链。",
+        "matchedClues": [
+          {
+            "contextSide": "Certainly not",
+            "optionSide": "So, should we stop traveling?",
+            "relation": "一般疑问句与其否定回答 Certainly not 严格对应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 'Can overtourism be avoided then?' 也是疑问句，但 Certainly not 否定的应是'是否停止旅游'，若填 D 则后文应回答能否避免，与 Certainly not（即'当然不停'）逻辑不符。"
+        }
+      ],
+      "teachingNote": "段中出现 yes/no 类简短回答（如 Certainly not）时，应回填一个与之对应的一般疑问句。"
+    },
+    "q-2024-ii-037": {
+      "blankId": "blank-2024-ii-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Choose mindfully",
+        "feel like you’re missing out",
+        "only when the landscape, culture or food deeply draws you",
+        "online posts featuring the same places"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-ii-seven-p2",
+        "beforeQuote": "Go somewhere only when the landscape, culture or food deeply draws you.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "deeply draws you",
+          "signalSide": "context-before",
+          "targetText": "Travel for you and no one else.",
+          "relation": "前句强调只在自己被深深吸引时才去，C 'Travel for you and no one else' 正是对该自主选择立场的概括收束。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "for you and no one else",
+          "signalSide": "option",
+          "targetText": "deeply draws you / missing out",
+          "relation": "C 中 'for you' 呼应前文'被你自己吸引'，'no one else' 否定盲从他人帖子的从众心理。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "missing out",
+          "signalSide": "context-before",
+          "targetText": "no one else",
+          "relation": "前文'怕错过(missing out)'指因他人而焦虑，C 用'no one else'回应：旅行该为自己而非随他人。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本段建议'用心选择'，强调不要因他人帖子产生从众焦虑，只在真正被吸引时出行；C 'Travel for you and no one else' 恰好概括这一'为自己而非为他人'的主张，作段尾总结句。",
+        "matchedClues": [
+          {
+            "contextSide": "deeply draws you / feel like you’re missing out",
+            "optionSide": "Travel for you and no one else.",
+            "relation": "'为自己被吸引'与'不为他人'话题一致，构成总结。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 是疑问句，且话题为是否停止旅游，与本段'用心选择'的自主主张不符。"
+        }
+      ],
+      "teachingNote": "段尾空缺常需一句概括本段主张的总结句，抓住本段核心立场词（如此处'为自己而非随他人'）即可定位。"
+    },
+    "q-2024-ii-038": {
+      "blankId": "blank-2024-ii-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "tons of less-visited options",
+        "go somewhere else",
+        "regional alternative",
+        "lesser-known sights"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-ii-seven-p3",
+        "beforeQuote": "That means you have tons of less-visited options to choose from.",
+        "afterQuote": "Why not try a regional alternative or check out a popular destination’s lesser-known sights?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "less-visited options",
+          "signalSide": "context-before",
+          "targetText": "relatively undiscovered places",
+          "relation": "前句 'tons of less-visited options' 与 E 'relatively undiscovered places' 同指尚未被大量游客发现的地方，话题一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "undiscovered places",
+          "signalSide": "option",
+          "targetText": "less-visited options / lesser-known sights",
+          "relation": "E 的 'undiscovered places' 概括前后 less-visited、lesser-known 的冷门地点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "lesser-known sights",
+          "signalSide": "context-after",
+          "targetText": "undiscovered places",
+          "relation": "空后举例 regional alternative、lesser-known sights，正是 E 所说'仍能找到的未被发现之地'的具体延展。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "前句说你有大量冷门选项，空后用 'Why not...lesser-known sights' 举例；E 'You can still find relatively undiscovered places' 承上启下，与前后'冷门/鲜为人知地点'话题严丝合缝。",
+        "matchedClues": [
+          {
+            "contextSide": "less-visited options / lesser-known sights",
+            "optionSide": "relatively undiscovered places",
+            "relation": "三者同属'未被大量游客发现的地点'语义场。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 'You’ll find yourself virtually alone' 谈独处感受，更契合错峰出行段（人少），而非本段'冷门目的地选择'的话题。"
+        }
+      ],
+      "teachingNote": "段中衔接空可借前后同义复现（less-visited / lesser-known / undiscovered）锁定同一话题场的选项。"
+    },
+    "q-2024-ii-039": {
+      "blankId": "blank-2024-ii-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "skipping major holidays or rush hour",
+        "compete with fewer tourists",
+        "when tourism is traditionally slower",
+        "save money"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-ii-seven-p4",
+        "beforeQuote": "●",
+        "afterQuote": "Minimize impact and maximize experience by skipping major holidays or rush hour."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "skipping major holidays or rush hour",
+          "signalSide": "context-after",
+          "targetText": "Visit during off-peak times.",
+          "relation": "空后 'skipping major holidays or rush hour' 即避开高峰，A 'Visit during off-peak times' 正是该段小标题式的主题概括。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "off-peak times",
+          "signalSide": "option",
+          "targetText": "skipping major holidays or rush hour / tourism is traditionally slower",
+          "relation": "A 中 'off-peak times' 与下文'避开节假日高峰''淡季'同义，统领全段。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "when tourism is traditionally slower",
+          "signalSide": "context-after",
+          "targetText": "off-peak times",
+          "relation": "段末 'tourism is traditionally slower'（淡季）再次呼应 A 的 off-peak，确认主题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本空位于以●开头的段首，需要一句小标题式主题句；全段围绕避开节假日、高峰、淡季出行展开，A 'Visit during off-peak times' 恰为该段主题概括。",
+        "matchedClues": [
+          {
+            "contextSide": "skipping major holidays or rush hour / tourism is traditionally slower",
+            "optionSide": "Visit during off-peak times.",
+            "relation": "off-peak 与避开高峰、淡季出行同义，统摄全段。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 描述'几乎独自一人'是错峰的结果之一，但作为段首主题句不如 A 概括'错峰出行'这一行动主张到位。"
+        }
+      ],
+      "teachingNote": "●段首空填祈使式小标题时，抓住全段反复出现的核心动作（此处'错峰出行'）即可锁定主题句。"
+    },
+    "q-2024-ii-040": {
+      "blankId": "blank-2024-ii-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Do your part to preserve what makes a destination special",
+        "Visiting a place that others call home is a privilege",
+        "the people there",
+        "how much closer you’ll feel"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-ii-seven-p5",
+        "beforeQuote": "Do your part to preserve what makes a destination special in the first place.",
+        "afterQuote": "You may be amazed how much closer you’ll feel to the people there."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the people there",
+          "signalSide": "context-after",
+          "targetText": "the communities you’re visiting",
+          "relation": "空后 'the people there' 与 G 'the communities you’re visiting' 同指当地居民/社区，话题衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "communities you’re visiting",
+          "signalSide": "option",
+          "targetText": "the people there / others call home",
+          "relation": "G 的 'communities you’re visiting' 承接前文'造访他人家园'，并指向空后'那里的人'。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "preserve what makes a destination special",
+          "signalSide": "context-before",
+          "targetText": "giving back to the communities",
+          "relation": "前句号召'尽己之力保护目的地特色'，G 'giving back to the communities'（回馈社区）是这一保护行动的递进具体化。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "前句呼吁尽力保护目的地特色，空后说'你会惊讶于与当地人更亲近'；G 'Consider giving back to the communities you’re visiting' 承上启下，将保护落到'回馈社区'，并自然引出与当地人更亲近的结果。",
+        "matchedClues": [
+          {
+            "contextSide": "Do your part to preserve / the people there",
+            "optionSide": "Consider giving back to the communities you’re visiting.",
+            "relation": "'保护并回馈社区'与'与当地人更亲近'形成因果衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 谈独处感受，与本段'回馈社区、与当地人更亲近'的话题相反，故排除。"
+        }
+      ],
+      "teachingNote": "段中空可借空后同指词（the people there ↔ communities）确定指向当地居民的回馈类选项。"
+    }
+  }
+}

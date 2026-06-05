@@ -1,0 +1,1525 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-i-reading-a",
+    "group-2022-i-reading-b",
+    "group-2022-i-reading-c",
+    "group-2022-i-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2022-i-reading-a": {
+      "overview": "本文是一份《文学导论》课程的评分政策说明，列出评分等级、各组成部分的占比以及迟交作业的处理规则。",
+      "discourseStructure": {
+        "summary": "全文按板块组织：先给出标题与评分等级表，随后依次说明三大评分组成部分（论文、小组作业、日常工作），最后说明迟交作业的扣分规则。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-i-reading-a-1",
+            "summary": "文章总标题，点明这是《文学导论》课程的评分政策。",
+            "function": "标题，交代文本主题与所属课程。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-2",
+            "summary": "小标题：评分等级。",
+            "function": "小节标题，引出评分等级表。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-3",
+            "summary": "列出各分数段对应的等级（A 到 E）。",
+            "function": "提供具体的评分等级标准。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-4",
+            "summary": "小标题：论文占总成绩 60%。",
+            "function": "引出第一大评分组成部分及其权重。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-5",
+            "summary": "说明四篇论文分别占 10%、15%、15%、20%，合计构成课程成绩的主体。",
+            "function": "细化论文部分的内部权重分配。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-6",
+            "summary": "小标题：小组作业占 30%。",
+            "function": "引出第二大评分组成部分及其权重。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-7",
+            "summary": "说明学生分组完成四项作业，并通过 Blackboard 系统按期提交。",
+            "function": "说明小组作业的完成与提交方式。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-8",
+            "summary": "小标题：日常工作、课堂写作与测验、小组工作、家庭作业占 10%。",
+            "function": "引出第三大评分组成部分及其权重。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-9",
+            "summary": "说明课堂活动多样，学生需准备完成取材于阅读或上节课笔记的课堂写作或测验，并强调记笔记的重要性。",
+            "function": "解释日常评分部分的具体内容与要求。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-10",
+            "summary": "小标题：迟交作业。",
+            "function": "引出迟交作业的处理规则。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-a-11",
+            "summary": "说明论文每迟交一个课时降一个等级，逾期满四天得零分，日常作业未在课上完成得零分，因故请假错过的短篇写作可补交。",
+            "function": "给出迟交作业的具体扣分与处理规则。"
+          }
+        ]
+      }
+    },
+    "group-2022-i-reading-b": {
+      "overview": "本文是一篇关于食物浪费（food waste）的议论性随笔。作者以自己丢弃芝麻菜的小故事开篇，引出食物浪费普遍且常常是无意识发生的现象，进而指出食物浪费的环境危害，最后通过 DC Central Kitchen 的 Mike Curtin 给出回收食物、减少浪费的解决方案与建议。",
+      "discourseStructure": {
+        "summary": "由个人轶事切入（现象）→ 揭示食物浪费的普遍性与道德问题 → 论证其环境危害（因果）→ 用 Curtin 的实践给出解决方案 → 以 Curtin 的建议收尾，号召人人参与。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-i-reading-b-1",
+            "summary": "作者讲述自己本想用芝麻菜做沙拉，却因加班、赴约而把它放坏，并坦言当初买得太多。",
+            "function": "以个人轶事开篇，引出主题，说明食物浪费常在不经意间发生。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-b-2",
+            "summary": "引用 Elizabeth Royte 的话，指出在近 8 亿人挨饿的世界里食物浪费有违道德，且数量惊人。",
+            "function": "提升到社会与道德层面，指出食物浪费的普遍性与严重性。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-b-3",
+            "summary": "指出生产没人吃的食物浪费了水、燃料等资源，使食物浪费成为环境问题，并引用其为全球第三大温室气体排放源的说法。",
+            "function": "论证食物浪费的环境危害，构成因果论证。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-b-4",
+            "summary": "介绍 Mike Curtin 与他任 CEO 的 DC Central Kitchen，该机构回收食物并将其制成健康餐食，去年回收超 807,500 磅食物。",
+            "function": "用具体实践案例提供解决方案。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-b-5",
+            "summary": "Curtin 指出人人都能出一份力，比如每周购物不买超量、请餐厅不上自己不吃的配菜。",
+            "function": "以建议收尾，号召读者从日常行为减少浪费。"
+          }
+        ]
+      }
+    },
+    "group-2022-i-reading-c": {
+      "overview": "本文是一篇新闻报道，介绍伦敦养老院让老人照看母鸡以减少孤独感、改善身心健康的公益项目，并通过参与者和项目负责人的话展示项目效果与推广前景。",
+      "discourseStructure": {
+        "summary": "全文先点明项目核心做法，再说明项目缘起与目的，接着以老人 Ruth Xavier 的亲身感受作为例证，随后给出项目规模与推广情况，最后引用两位项目负责人的话表明各方对项目的欢迎态度。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-i-reading-c-1",
+            "summary": "伦敦养老院里的老年居民被分配照看母鸡，以缓解他们的孤独感。",
+            "function": "开篇点题，概括项目的核心做法与目的。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-2",
+            "summary": "项目由当地慈善组织发起，旨在减少孤独、改善老人福祉，还用于帮助痴呆症患者，且养老院报告用药量减少。",
+            "function": "说明项目的发起方、目的及初步成效。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-3",
+            "summary": "80岁的 Ruth Xavier 参与项目，她回忆年轻时也养过鸡，上学前要先喂鸡。",
+            "function": "引入具体参与者作为例证，建立其与养鸡的渊源。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-4",
+            "summary": "Ruth 很喜欢这个项目，早晚都坐着轮椅去放鸡、看鸡归笼。",
+            "function": "展示参与者对项目的喜爱及日常参与。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-5",
+            "summary": "Ruth 认为有了不同的关注点很好，孩子和居民都来看鸡，她享受创造性活动，觉得做了有用的事很棒。",
+            "function": "进一步表现参与者获得的成就感与积极心理体验。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-6",
+            "summary": "目前东北部20家养老院已有700位老人照看母鸡，慈善组织获得资金支持以在全国推广。",
+            "function": "说明项目规模及向全国推广的进展。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-7",
+            "summary": "项目最早参与地之一的护理经理 Wendy Wilson 表示居民欢迎该项目和创意活动，并期待项目带来的好处与乐趣。",
+            "function": "引用项目方人物的话，表明居民欢迎与积极期待。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-c-8",
+            "summary": "Notting Hill Pathways 主管 Lynn Lewis 表示乐于参与，认为项目能通过共同兴趣和创意活动把居民联系起来。",
+            "function": "引用另一位负责人的话，进一步强化各方对项目的欢迎态度。"
+          }
+        ]
+      }
+    },
+    "group-2022-i-reading-d": {
+      "overview": "本文是一篇科普说明文，介绍了苏黎世大学 Damián Blasi 团队的一项五年研究：饮食变化导致人类咬合方式改变，进而产生了如“f”“v”这类唇齿音，这些新音如今出现在世界半数语言中。",
+      "discourseStructure": {
+        "summary": "文章先提出问题（为何某些语音更常见），再引出研究发现；接着从牙齿对齐到覆咬合的解剖变化、与新石器时代农业发展的关联、语言数据库的佐证逐层展开，最后用研究者的话总结研究意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2022-i-reading-d-1",
+            "summary": "人类语音有两千多种声音，但某些声音更常见；一项五年研究表明饮食导致的咬合变化产生了新的语音。",
+            "function": "提出问题并引出研究核心发现，作为全文引子。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-d-2",
+            "summary": "回顾 Hockett 三十多年前的观察：吃软食社会的语言中唇齿音更常见；Blasi 团队进一步研究其成因。",
+            "function": "交代研究背景，承接前文并引出研究焦点。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-d-3",
+            "summary": "古人类上下门牙对齐，难以发唇齿音；后来颌部变为覆咬合结构，使发音更容易。",
+            "function": "从解剖角度解释唇齿音难易变化的机制。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-d-4",
+            "summary": "咬合变化与新石器时代农业发展相关：食物更易咀嚼，颌骨工作量减少，因而不再长得很大。",
+            "function": "解释咬合结构变化的深层原因（农业与饮食）。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-d-5",
+            "summary": "语言数据库分析也证实新石器时代后世界语言声音发生全球性变化，“f”“v”使用显著增加，而许多狩猎采集民族语言中仍没有这些音。",
+            "function": "用语言数据库分析为研究结论提供佐证。"
+          },
+          {
+            "paragraphId": "para-2022-i-reading-d-6",
+            "summary": "该研究推翻了人类所有语音在约三十万年前进化时就已存在的流行观点；研究者 Steven Moran 指出语音是生物变化与文化演化复杂相互作用的产物。",
+            "function": "总结研究意义并引用研究者观点收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2022-i-021": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查通过文本内容与体裁特征推断文本来源。",
+      "stemTranslationZh": "这段文字可能出自哪里？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本教科书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "本文出自一本教科书。",
+            "explanation": "原文未提及，全文是课程的评分规则说明，并非传授学科知识的教科书内容。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一份考试卷。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tests",
+            "optionText": "An exam paper.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 tests 仅是日常评分中提到的课堂测验形式，与 exam paper（考试卷）属同一词义场，用以误导，但本文本身并非一份试卷。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-a-9",
+              "quote": "students must be ready to complete short in-class writings or tests",
+              "anchor": "课堂测验只是评分内容之一"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一份课程计划。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-a-1",
+              "quote": "Grading Policies for Introduction to Literature",
+              "anchor": "课程评分政策标题"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-a-5",
+              "quote": "Your four major essays will combine to form the main part of the grade for this course",
+              "anchor": "面向选课学生说明本课程评分"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇学术文章。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "本文是一篇学术文章。",
+            "explanation": "原文未提及，文本是课程评分政策与作业规则的说明，不具备学术论文的研究论证性质。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A course plan.",
+          "sourceRole": "correctOption",
+          "targetText": "Grading Policies for Introduction to Literature",
+          "targetParagraphId": "para-2022-i-reading-a-1",
+          "relationType": "locationCue",
+          "note": "标题 Grading Policies for Introduction to Literature 表明这是某门课程（Introduction to Literature）的评分政策，与选项 course plan（课程计划）对应。"
+        },
+        {
+          "sourceText": "A course plan.",
+          "sourceRole": "correctOption",
+          "targetText": "the grade for this course",
+          "targetParagraphId": "para-2022-i-reading-a-5",
+          "relationType": "paraphrase",
+          "note": "原文 the grade for this course 中的 course 与选项 course plan 呼应，说明文本面向本课程学生介绍评分安排。"
+        }
+      ]
+    },
+    "q-2022-i-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对构成最终成绩的组成部分数量这一细节的把握。",
+      "stemTranslationZh": "学生的最终成绩由几个部分构成？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "两个。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Essays (60%)",
+            "sourceHighlight": "Essays (60%)",
+            "optionText": "Two.",
+            "optionHighlight": "Two.",
+            "explanation": "原文给出 Essays、Group Assignments、Daily Work 三个带百分比的组成部分，选项只数到两个，少计了部分，缩小了范围。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-a-4",
+              "quote": "Essays (60%)",
+              "anchor": "第一部分占 60%"
+            },
+            {
+              "paragraphId": "para-2022-i-reading-a-6",
+              "quote": "Group Assignments (30%)",
+              "anchor": "第二部分占 30%"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "三个。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-a-4",
+              "quote": "Essays (60%)",
+              "anchor": "论文占 60%"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-a-6",
+              "quote": "Group Assignments (30%)",
+              "anchor": "小组作业占 30%"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-a-8",
+              "quote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)",
+              "anchor": "日常工作占 10%"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "四个。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "four major essays",
+            "optionText": "Four.",
+            "matchType": "exact",
+            "relationNote": "原文 four major essays 与 four assignments 中的 four 易被误当作成绩部分的数目，实际成绩只由三大带百分比的板块构成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-a-5",
+              "quote": "Your four major essays will combine to form the main part of the grade for this course",
+              "anchor": "four 指论文篇数而非成绩部分数"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "五个。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)",
+            "sourceHighlight": "Daily Work/In-Class Writings and Tests/Group Work/Homework",
+            "optionText": "Five.",
+            "optionHighlight": "Five.",
+            "explanation": "原文把日常工作、课堂写作与测验、小组工作、家庭作业并列为同一个 10% 的部分，选项把它们拆开多算，夸大了组成部分的数量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-a-8",
+              "quote": "Daily Work/In-Class Writings and Tests/Group Work/Homework (10%)",
+              "anchor": "并列项合算为一个 10% 部分"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How many parts",
+          "sourceRole": "stem",
+          "targetText": "Essays (60%)",
+          "targetParagraphId": "para-2022-i-reading-a-4",
+          "relationType": "locationCue",
+          "note": "题干问 How many parts，需定位带百分比的板块标题：Essays (60%)、Group Assignments (30%)、Daily Work...(10%)，三者百分比合计 100%，故为三个部分。"
+        },
+        {
+          "sourceText": "How many parts",
+          "sourceRole": "stem",
+          "targetText": "Group Assignments (30%)",
+          "targetParagraphId": "para-2022-i-reading-a-6",
+          "relationType": "calculation",
+          "note": "将 60% + 30% + 10% 三个带百分比的板块相加得 100%，可推算出最终成绩由三个部分构成。"
+        }
+      ]
+    },
+    "q-2022-i-023": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查依据迟交规则推算逾期一周提交论文的后果这一细节。",
+      "stemTranslationZh": "如果你在截止日期一周后才提交论文，会发生什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "你将得零分。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-a-11",
+              "quote": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
+              "anchor": "逾期满四天得零分"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "你将被降一个等级。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+            "sourceHighlight": "lose a letter grade for each class period it is late",
+            "optionText": "You will lose a letter grade.",
+            "optionHighlight": "lose a letter grade",
+            "explanation": "原文降一个等级只针对截止日期后短期内（每个迟交课时）的情况，且逾期满四天即得零分；选项忽略了一周已超过四天这一条件，错误地套用降级规则。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-a-11",
+              "quote": "will lose a letter grade for each class period it is late",
+              "anchor": "降级只适用于逾期初期"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "你将被安排一次测验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tests",
+            "optionText": "You will be given a test.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 tests 出现在日常评分部分，与迟交论文的后果无关，借 test 一词制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-a-9",
+              "quote": "complete short in-class writings or tests",
+              "anchor": "test 属日常评分，非迟交后果"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "你将不得不重写它。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "迟交论文需要重写。",
+            "explanation": "原文未提及重写，迟交的后果是降级或得零分，并无要求重新写作。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "one week after the due date",
+          "sourceRole": "stem",
+          "targetText": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
+          "targetParagraphId": "para-2022-i-reading-a-11",
+          "relationType": "calculation",
+          "note": "题干 one week after the due date（截止日期后一周）已超过原文 the 4th day after the due date（第四天），按规则应 earn a zero（得零分）。"
+        },
+        {
+          "sourceText": "You will receive a zero.",
+          "sourceRole": "correctOption",
+          "targetText": "it will earn a zero",
+          "targetParagraphId": "para-2022-i-reading-a-11",
+          "relationType": "paraphrase",
+          "note": "选项 receive a zero 与原文 earn a zero 同义替换，均表示得零分。"
+        }
+      ]
+    },
+    "q-2022-i-024": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查作者讲述芝麻菜故事的写作意图（首段轶事的功能）。",
+      "stemTranslationZh": "作者讲述芝麻菜的故事想要说明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "我们很少关注食物浪费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Like most of us, I try to be mindful of food that goes to waste.",
+            "sourceHighlight": "try to be mindful of food that goes to waste",
+            "optionText": "We pay little attention to food waste.",
+            "optionHighlight": "pay little attention",
+            "explanation": "原文说作者像大多数人一样努力留意（mindful）食物浪费，说明是有在关注的；选项却说‘很少关注’，与原文态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-1",
+              "quote": "I try to be mindful of food that goes to waste",
+              "anchor": "作者努力留意食物浪费"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "我们有时会在不经意间浪费食物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-b-1",
+              "quote": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+              "anchor": "不经意间买太多导致浪费"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-b-1",
+              "quote": "But as days passed, the arugula went bad.",
+              "anchor": "芝麻菜放坏"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "我们浪费的蔬菜比肉类多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "We waste more vegetables than meat.",
+            "explanation": "原文未提及蔬菜与肉类浪费量的比较，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "我们浪费食物有正当理由。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+            "sourceHighlight": "Even worse",
+            "optionText": "We have good reasons for wasting food.",
+            "optionHighlight": "good reasons",
+            "explanation": "作者用 Even worse 表达自责，认为浪费是不应该的，而非有正当理由；选项把作者的态度反转。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-1",
+              "quote": "Even worse, I had unthinkingly bought way too much",
+              "anchor": "作者自责买太多"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "We waste food unintentionally at times.",
+          "sourceRole": "correctOption",
+          "targetText": "I had unthinkingly bought way too much",
+          "targetParagraphId": "para-2022-i-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项的 unintentionally 同义替换原文的 unthinkingly（不假思索地、无意识地），指向作者无意中买多导致浪费。"
+        }
+      ]
+    },
+    "q-2022-i-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查文中明确提到的食物浪费所造成的后果。",
+      "stemTranslationZh": "根据文章，食物浪费会带来什么后果？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "道德滑坡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "food waste goes against the moral grain",
+            "optionText": "Moral decline.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 moral 一词（goes against the moral grain，违背道德），选项借 moral 设钩，但原文是说浪费有违道德，并未说食物浪费导致‘道德滑坡’这一后果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-2",
+              "quote": "food waste goes against the moral grain",
+              "anchor": "浪费有违道德"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "环境危害。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-b-3",
+              "quote": "That makes food waste an environmental problem.",
+              "anchor": "食物浪费是环境问题"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-b-3",
+              "quote": "Producing food that no one eats wastes the water, fuel, and other resources used to grow it.",
+              "anchor": "浪费水、燃料等资源"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "能源短缺。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "wastes the water, fuel, and other resources",
+            "optionText": "Energy shortage.",
+            "matchType": "wordFamily",
+            "relationNote": "原文提到 fuel（燃料）被浪费，选项据此联想到 energy shortage（能源短缺），但原文只说浪费资源，并未提到能源会因此短缺。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-3",
+              "quote": "wastes the water, fuel, and other resources",
+              "anchor": "浪费水、燃料等资源"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "全球性饥荒。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "In a world where nearly 800 million people a year go hungry, “food waste goes against the moral grain,”",
+            "sourceHighlight": "nearly 800 million people a year go hungry",
+            "optionText": "Worldwide starvation.",
+            "optionHighlight": "Worldwide starvation",
+            "explanation": "原文以‘近8亿人挨饿’作为背景烘托浪费的不道德，并非说食物浪费会导致‘全球性饥荒’这一后果，选项夸大并偷换了因果关系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-2",
+              "quote": "nearly 800 million people a year go hungry",
+              "anchor": "近8亿人挨饿（背景）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Environmental harm.",
+          "sourceRole": "correctOption",
+          "targetText": "That makes food waste an environmental problem.",
+          "targetParagraphId": "para-2022-i-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项的 Environmental harm 同义替换原文 an environmental problem，定位到第三段对环境危害的明确表述。"
+        }
+      ]
+    },
+    "q-2022-i-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Curtin 所在公司 DC Central Kitchen 的具体业务。",
+      "stemTranslationZh": "Curtin 的公司是做什么的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它生产厨房设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "CEO of DC Central Kitchen",
+            "optionText": "It produces kitchen equipment.",
+            "matchType": "wordFamily",
+            "relationNote": "公司名含 Kitchen 一词，选项借 kitchen 设钩联想到‘厨房设备’，但 DC Central Kitchen 是回收食物做餐食的机构，并不生产厨房设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-4",
+              "quote": "CEO of DC Central Kitchen",
+              "anchor": "公司名含 Kitchen"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它把腐烂的芝麻菜变成清洁燃料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It turns rotten arugula into clean fuel.",
+            "explanation": "原文说该机构把回收的食物做成健康餐食，并未提及把芝麻菜变成清洁燃料，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它帮助当地农民种植水果。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields",
+            "sourceHighlight": "rotted in fields",
+            "optionText": "It helps local farmers grow fruits.",
+            "optionHighlight": "helps local farmers grow fruits",
+            "explanation": "原文提到收集本会烂在田里的有瑕疵农产品，涉及 fields，但其业务是回收食物，并非帮助农民种水果，选项偷换了机构职能。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-4",
+              "quote": "collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields",
+              "anchor": "收集本会烂在田里的农产品"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它用没人要的食物制作餐食。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-b-4",
+              "quote": "which recovers food and turns it into healthy meals",
+              "anchor": "回收食物做成健康餐食"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-b-4",
+              "quote": "it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce",
+              "anchor": "通过捐赠与回收瑕疵农产品获取食物"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It makes meals out of unwanted food.",
+          "sourceRole": "correctOption",
+          "targetText": "which recovers food and turns it into healthy meals",
+          "targetParagraphId": "para-2022-i-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "选项 makes meals out of unwanted food 同义替换原文 recovers food and turns it into healthy meals；unwanted food 对应被丢弃/捐赠和瑕疵的食材。"
+        }
+      ]
+    },
+    "q-2022-i-027": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Curtin 在文末对人们提出的具体建议。",
+      "stemTranslationZh": "Curtin 建议人们做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "只买需要的东西。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-b-5",
+              "quote": "not purchasing more food than necessary in your weekly shopping",
+              "anchor": "每周购物不买超量"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "减少食物的摄入量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "not purchasing more food than necessary in your weekly shopping",
+            "sourceHighlight": "not purchasing more food than necessary",
+            "optionText": "Reduce food consumption.",
+            "optionHighlight": "Reduce food consumption",
+            "explanation": "原文建议的是‘不要购买超过所需的食物’（减少浪费），而非‘减少食物摄入量’；选项偷换为减少进食，超出原意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-5",
+              "quote": "not purchasing more food than necessary in your weekly shopping",
+              "anchor": "不买超量食物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "每周去购物一次。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "in your weekly shopping",
+            "optionText": "Go shopping once a week.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 weekly shopping 中的 weekly 被选项改写为 once a week 设钩，但原文只是描述‘每周购物时不要买多’，并非建议‘每周购物一次’这一频次。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-5",
+              "quote": "in your weekly shopping",
+              "anchor": "每周购物时"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "少在餐厅就餐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "by asking restaurants to not include the side dish you won’t eat",
+            "sourceHighlight": "not include the side dish you won’t eat",
+            "optionText": "Eat in restaurants less often.",
+            "optionHighlight": "Eat in restaurants less often",
+            "explanation": "原文建议的是请餐厅不要上你不吃的配菜，而非建议‘少在餐厅就餐’；选项夸大并偷换了建议内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-b-5",
+              "quote": "by asking restaurants to not include the side dish you won’t eat",
+              "anchor": "请餐厅别上不吃的配菜"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Buy only what is needed.",
+          "sourceRole": "correctOption",
+          "targetText": "not purchasing more food than necessary in your weekly shopping",
+          "targetParagraphId": "para-2022-i-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "选项 Buy only what is needed 同义替换原文 not purchasing more food than necessary（只买必要的、不买超量），定位到第五段 Curtin 的建议。"
+        }
+      ]
+    },
+    "q-2022-i-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查项目设立的目的，需定位到项目缘起与目标的表述。",
+      "stemTranslationZh": "这个项目的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "确保养老院里的和睦融洽。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To ensure harmony in care homes.",
+            "explanation": "原文未提及项目目的是确保养老院内部的和睦，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为老年人提供兼职工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To provide part-time jobs for the aged.",
+            "explanation": "原文只提到让老人照看母鸡以减少孤独、改善福祉，并未提及提供兼职工作，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为医学研究筹集资金。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To raise money for medical research.",
+            "explanation": "原文提到慈善组织获得资金支持用于推广项目，并未提及项目目的是为医学研究筹款，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "促进老年人的福祉。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-c-2",
+              "quote": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
+              "anchor": "to reduce loneliness and improve elderly people's wellbeing"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To promote the elderly people's welfare.",
+          "sourceRole": "correctOption",
+          "targetText": "to reduce loneliness and improve elderly people’s wellbeing",
+          "targetParagraphId": "para-2022-i-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项用 promote the elderly people's welfare 概括，原文用 improve elderly people's wellbeing（改善福祉）表达同一目的，welfare 与 wellbeing 同义替换。"
+        }
+      ]
+    },
+    "q-2022-i-029": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查项目对 Ruth Xavier 的影响，需定位她本人对参与项目感受的表述。",
+      "stemTranslationZh": "这个项目对 Ruth Xavier 产生了怎样的影响？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她学到了新的生活技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.",
+            "sourceHighlight": "I used to keep hens when I was younger",
+            "optionText": "She has learned new life skills.",
+            "optionHighlight": "learned new life skills",
+            "explanation": "原文说她年轻时就养过鸡，养鸡对她是旧技能而非新技能，与选项 learned new life skills 相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-c-3",
+              "quote": "I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.",
+              "anchor": "I used to keep hens when I was younger"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她获得了一种成就感。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-c-5",
+              "quote": "I’m enjoying the creative activities, and it feels great to have done something useful.",
+              "anchor": "it feels great to have done something useful"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她恢复了记忆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It is also being used to help patients suffering dementia, a serious illness of the mind.",
+            "sourceEntity": "patients suffering dementia",
+            "optionText": "She has recovered her memory.",
+            "optionEntity": "She",
+            "explanation": "原文提到项目用于帮助痴呆症患者，对象是患者群体，并未说 Ruth 本人失忆或恢复了记忆，属对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-c-2",
+              "quote": "It is also being used to help patients suffering dementia, a serious illness of the mind.",
+              "anchor": "help patients suffering dementia"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她养成了坚强的性格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She has developed a strong personality.",
+            "explanation": "原文未提及 Ruth 养成了坚强的性格，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She has gained a sense of achievement.",
+          "sourceRole": "correctOption",
+          "targetText": "it feels great to have done something useful",
+          "targetParagraphId": "para-2022-i-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "选项用 gained a sense of achievement（获得成就感）概括，原文用 it feels great to have done something useful（做了有用的事感觉很棒）表达同样的成就感。"
+        }
+      ]
+    },
+    "q-2022-i-030": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第七段画线词组 embark on 的词义推测，需结合上下文语境判断其含义。",
+      "stemTranslationZh": "第七段中画线词组 \"embark on\" 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "改进。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Improve.",
+            "explanation": "embark on 意为开始从事某事，语境中指最早开始参与项目，并无改进之意，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "反对。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Residents really welcome the idea of the project and the creative sessions.",
+            "sourceHighlight": "really welcome the idea of the project",
+            "optionText": "Oppose.",
+            "optionHighlight": "Oppose",
+            "explanation": "下文显示居民欢迎该项目，态度积极，embark on 指开始参与，与 Oppose（反对）的态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-c-7",
+              "quote": "Residents really welcome the idea of the project and the creative sessions.",
+              "anchor": "Residents really welcome the idea of the project"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "开始。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-c-7",
+              "quote": "Wendy Wilson, extra care manager at 60 Penfold Street, one of the first to embark on the project",
+              "anchor": "one of the first to embark on the project"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-c-6",
+              "quote": "There are now 700 elderly people looking after hens in 20 care homes in the North East",
+              "anchor": "There are now 700 elderly people looking after hens"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "评估。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Evaluate.",
+            "explanation": "one of the first to embark on the project 指最早开始参与项目的机构之一，并无评估之意，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Begin.",
+          "sourceRole": "correctOption",
+          "targetText": "one of the first to embark on the project",
+          "targetParagraphId": "para-2022-i-reading-c-7",
+          "relationType": "paraphrase",
+          "note": "one of the first to embark on the project 意为最早开始参与项目的机构之一，由 one of the first 可推知 embark on 即 Begin（开始）。"
+        }
+      ]
+    },
+    "q-2022-i-031": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查从最后两段对项目的推断，需综合两位负责人话语中体现的各方态度。",
+      "stemTranslationZh": "从最后两段我们可以了解到关于这个项目的什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它受到广泛欢迎。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-c-7",
+              "quote": "Residents really welcome the idea of the project and the creative sessions.",
+              "anchor": "Residents really welcome the idea of the project"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-c-8",
+              "quote": "We are happy to be taking part in the project.",
+              "anchor": "We are happy to be taking part in the project"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它需要更具创意。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "creative activities",
+            "optionText": "It needs to be more creative.",
+            "matchType": "wordFamily",
+            "relationNote": "原文多次出现 creative（creative sessions/creative activities）作为项目亮点，选项借用 creative 一词的同族词制造干扰，但原文并未说项目需要更有创意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-c-8",
+              "quote": "It will really help connect our residents through a shared interest and creative activities.",
+              "anchor": "creative activities"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它利润很高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is highly profitable.",
+            "explanation": "最后两段只表达各方欢迎和期待，未提及项目盈利，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它要很久才能见到成效。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "We are looking forward to the benefits and fun the project can bring to people here.",
+            "sourceHighlight": "looking forward to the benefits and fun the project can bring",
+            "optionText": "It takes ages to see the results.",
+            "optionHighlight": "takes ages to see the results",
+            "explanation": "原文表达对项目好处与乐趣的积极期待，并未说成效要很久才能显现，与选项 takes ages to see the results 的消极判断相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-c-7",
+              "quote": "We are looking forward to the benefits and fun the project can bring to people here.",
+              "anchor": "looking forward to the benefits and fun the project can bring"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is well received.",
+          "sourceRole": "correctOption",
+          "targetText": "Residents really welcome the idea of the project and the creative sessions.",
+          "targetParagraphId": "para-2022-i-reading-c-7",
+          "relationType": "paraphrase",
+          "note": "选项 well received（广受欢迎）由原文 Residents really welcome the idea of the project 与 We are happy to be taking part 等表态推得，体现各方欢迎态度。"
+        }
+      ]
+    },
+    "q-2022-i-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Damián Blasi 的研究聚焦于人类语音的哪个方面，需定位研究内容。",
+      "stemTranslationZh": "Damián Blasi 的研究聚焦于人类语音声音的哪个方面？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它的多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+            "sourceEntity": "the huge variety of speech sounds",
+            "optionText": "Its variety.",
+            "optionEntity": "Its variety",
+            "explanation": "“variety（多样性）”出自文末 Moran 对语音总体的概括，而非 Blasi 研究所聚焦的对象；Blasi 团队研究的是新语音如何随咬合变化而发展，二者对象不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-6",
+              "quote": "the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "variety 出自文末总结"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的分布。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Blasi 的研究聚焦于语音的分布。",
+            "explanation": "原文未提及 Blasi 团队聚焦于语音的“分布（distribution）”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的数量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Human speech contains more than 2,000 different sounds",
+            "optionText": "Its quantity.",
+            "matchType": "wordFamily",
+            "relationNote": "首段“more than 2,000 different sounds”提到语音数量，易诱导选“quantity（数量）”，但那只是引子，并非 Blasi 研究的焦点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-1",
+              "quote": "Human speech contains more than 2,000 different sounds",
+              "anchor": "首段语音数量为引子"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的发展（演变）。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-d-2",
+              "quote": "has found how and why this trend arose",
+              "anchor": "研究发现新音如何产生"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-d-1",
+              "quote": "diet-related changes in human bite led to new speech sounds",
+              "anchor": "饮食导致新语音产生"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Its development.",
+          "sourceRole": "correctOption",
+          "targetText": "has found how and why this trend arose",
+          "targetParagraphId": "para-2022-i-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 development 对应原文研究“how and why this trend arose”，即语音如何随时间发展产生，二者为同义替换。"
+        }
+      ]
+    },
+    "q-2022-i-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查古人类成人难以发唇齿音的原因，需定位第三段的解剖学描述。",
+      "stemTranslationZh": "为什么古代人类成人难以发出唇齿音？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们的上门牙比下门牙少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "古人类上门牙比下门牙少。",
+            "explanation": "原文只说上下门牙“aligned（对齐）”，从未提及上下门牙数量多少之别，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们不能轻松地张开和闭合嘴唇。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "古人类不能轻松张合嘴唇。",
+            "explanation": "原文将唇齿音难发归因于牙齿对齐的咬合结构，从未提及嘴唇张合困难，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们的颌部结构不便（于发这种音）。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-d-3",
+              "quote": "the upper and lower front teeth of ancient human adults were aligned (对齐) , making it hard to produce labiodentals",
+              "anchor": "门牙对齐导致难发唇齿音"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-d-3",
+              "quote": "Later, our jaws changed to an overbite structure (结构) , making it easier to produce such sounds.",
+              "anchor": "后来颌部变为覆咬合才更易发音"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们的下门牙不够大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the lower lip to the upper teeth",
+            "optionText": "Their lower front teeth were not large enough.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现“lower lip（下唇）”“front teeth（门牙）”等词，易拼凑成“下门牙不够大”，但原文从未提及门牙大小，属用原文词钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-3",
+              "quote": "the lower lip to the upper teeth",
+              "anchor": "原文词钩 lower/teeth"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Their jaws were not conveniently structured.",
+          "sourceRole": "correctOption",
+          "targetText": "Later, our jaws changed to an overbite structure (结构) , making it easier to produce such sounds.",
+          "targetParagraphId": "para-2022-i-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 jaws not conveniently structured 对应原文：后来 jaws 变成 overbite structure 才 easier，反推古时颌部结构不便发音，二者为同义替换。"
+        }
+      ]
+    },
+    "q-2022-i-034": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查第五段的主旨，需判断该段在全文论证中的作用。",
+      "stemTranslationZh": "第五段主要讲的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "支持研究结论的证据。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-d-5",
+              "quote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age",
+              "anchor": "语言数据库分析进一步证实"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-d-5",
+              "quote": "with the use of “f” and “v” increasing remarkably during the last few thousand years",
+              "anchor": "f、v 使用显著增加为佐证"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "研究发现的潜在应用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "第五段讲研究发现的潜在应用。",
+            "explanation": "第五段是用语言数据库为结论提供佐证，从未提及研究的任何“应用（application）”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对研究方法的进一步解释。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age",
+            "sourceHighlight": "Analyses of a language database",
+            "optionText": "A further explanation of the research methods.",
+            "optionHighlight": "explanation of the research methods",
+            "explanation": "段中虽提到语言数据库分析这一手段，但落脚点是“confirmed（证实）”结论，而非解释研究方法本身，将佐证误读为方法解释，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-5",
+              "quote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age",
+              "anchor": "数据库分析用于证实而非解释方法"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对研究过程的合理质疑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age",
+            "sourceHighlight": "confirmed",
+            "optionText": "A reasonable doubt about the research process.",
+            "optionHighlight": "doubt",
+            "explanation": "原文用 confirmed 表明数据库分析是在“证实”结论，而选项说成“doubt（质疑）”，态度黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-5",
+              "quote": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age",
+              "anchor": "confirmed 是证实非质疑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Supporting evidence for the research results.",
+          "sourceRole": "correctOption",
+          "targetText": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age",
+          "targetParagraphId": "para-2022-i-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "选项 supporting evidence 对应原文 Analyses of a language database also confirmed，confirmed 即提供支持性证据，二者为同义替换。"
+        }
+      ]
+    },
+    "q-2022-i-035": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Steven Moran 对人类语音集合的观点，需定位文末引语。",
+      "stemTranslationZh": "关于人类语音的集合，Steven Moran 说了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是有效沟通的关键。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "语音集合是有效沟通的关键。",
+            "explanation": "Moran 谈的是语音随生物与文化演化而变化，从未提及它对“有效沟通（effective communication）”的作用，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它对文化多样性贡献很大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+            "sourceHighlight": "the product of a complex interplay of things like biological change and cultural evolution",
+            "optionText": "It contributes much to cultural diversity.",
+            "optionHighlight": "contributes much to cultural diversity",
+            "explanation": "原文说语音是文化演化等的“产物（the product）”，即文化演化是因、语音是果；选项却说语音贡献于文化多样性，颠倒了因果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-6",
+              "quote": "the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "语音是文化演化的产物（果），非贡献者（因）"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是一个复杂而动态的系统。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2022-i-reading-d-6",
+              "quote": "The set of speech sounds we use has not necessarily remained stable since the appearance of human beings",
+              "anchor": "语音集合并非一直稳定（动态）"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2022-i-reading-d-6",
+              "quote": "the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "复杂相互作用的产物（复杂）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它驱动着人类的进化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "the product of a complex interplay of things like biological change and cultural evolution",
+            "sourceHighlight": "the product of a complex interplay of things like biological change",
+            "optionText": "It drives the evolution of human beings.",
+            "optionHighlight": "drives the evolution of human beings",
+            "explanation": "原文说语音是生物变化等的产物（果），选项却说语音驱动人类进化（因），因果倒置。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2022-i-reading-d-6",
+              "quote": "the product of a complex interplay of things like biological change and cultural evolution",
+              "anchor": "语音是生物变化的产物，非驱动者"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is a complex and dynamic system.",
+          "sourceRole": "correctOption",
+          "targetText": "has not necessarily remained stable since the appearance of human beings",
+          "targetParagraphId": "para-2022-i-reading-d-6",
+          "relationType": "paraphrase",
+          "note": "选项 dynamic 对应原文 has not necessarily remained stable（并非一直稳定），complex 对应 a complex interplay，二者为同义替换。"
+        }
+      ]
+    }
+  }
+}

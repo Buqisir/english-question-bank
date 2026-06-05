@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-ii-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-ii-grammar-fill": {
+      "overview": "记叙文：作者讲述自己在柏林动物园教熊猫饲养员说英语的经历，借此实现儿时想当饲养员的梦想。"
+    }
+  },
+  "blanks": {
+    "q-2023-ii-056": {
+      "blankId": "blank-2023-ii-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "arrive",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "arrival",
+      "role": null,
+      "path": null,
+      "reason": "空格前有定冠词 the、后接 of 短语，说明此处需要名词作介词宾语，动词 arrive 派生为名词 arrival。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "right before the",
+          "signalSide": "passage",
+          "relation": "定冠词 the 后需名词中心词，提示动词要变名词形式。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "of the two new pandas",
+          "signalSide": "passage",
+          "relation": "of 短语作后置定语，进一步确认空格是名词。"
+        }
+      ],
+      "teachingNote": "the … of 框架里，括号动词应派生为名词。"
+    },
+    "q-2023-ii-057": {
+      "blankId": "blank-2023-ii-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "confidence",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "confident",
+      "role": null,
+      "path": null,
+      "reason": "空格与形容词 comfortable 由 and 并列，作 feel 的表语，故名词 confidence 应派生为形容词 confident。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "comfortable and",
+          "signalSide": "passage",
+          "relation": "and 连接并列成分，前项是形容词，空格也须是形容词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "to feel more comfortable",
+          "signalSide": "passage",
+          "relation": "系动词 feel 后接表语形容词，锁定形容词形式。"
+        }
+      ],
+      "teachingNote": "and 并列前后词性一致，名词提示词按需变形容词。"
+    },
+    "q-2023-ii-058": {
+      "blankId": "blank-2023-ii-058",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "with",
+      "role": null,
+      "path": null,
+      "reason": "句意为他们和谁说英语，speak English 后需介词 with 引出交谈对象。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "who do they speak English",
+          "signalSide": "passage",
+          "relation": "speak English 之后缺介词引出对象，搭配 speak with sb。"
+        }
+      ],
+      "teachingNote": "speak English 接交谈对象用介词 with。"
+    },
+    "q-2023-ii-059": {
+      "blankId": "blank-2023-ii-059",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "空格修饰名词 language，且有后置定语 used for the medical training instructions 特指，故用定冠词 the。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "language used for the medical training instructions",
+          "signalSide": "passage",
+          "relation": "language 被后置定语特指，名词前需定冠词 the。"
+        }
+      ],
+      "teachingNote": "被后置定语特指的名词前用定冠词 the。"
+    },
+    "q-2023-ii-060": {
+      "blankId": "blank-2023-ii-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "visit",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "visiting",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "空格作名词 Chinese zookeepers 的前置定语，逻辑主语主动发出 visit 动作，用现在分词 visiting。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "Chinese zookeepers who often come to check",
+          "signalSide": "passage",
+          "relation": "被修饰名词主动来访问，定语用现在分词 visiting。"
+        }
+      ],
+      "teachingNote": "作定语且逻辑主语主动时，括号动词变现在分词。"
+    },
+    "q-2023-ii-061": {
+      "blankId": "blank-2023-ii-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "interview",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "interviews",
+      "role": null,
+      "path": null,
+      "reason": "give 后接名词作宾语，interview 为可数名词且此处泛指多次采访，用复数 interviews。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "ready to give",
+          "signalSide": "passage",
+          "relation": "give 后接名词宾语，提示词作名词。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "in English with international journalists",
+          "signalSide": "passage",
+          "relation": "无冠词限定且泛指多次采访，可数名词用复数。"
+        }
+      ],
+      "teachingNote": "give 后接可数名词且泛指多次时用复数。"
+    },
+    "q-2023-ii-062": {
+      "blankId": "blank-2023-ii-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "why",
+      "role": null,
+      "path": null,
+      "reason": "This is ___ they need an English trainer 中，空格引导表语从句说明原因，从句完整且表原因，用 why。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "This is",
+          "signalSide": "passage",
+          "relation": "This is 后缺表语从句引导词。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "they need an English trainer",
+          "signalSide": "passage",
+          "relation": "从句结构完整、表达原因，用 why 引导表语从句。"
+        }
+      ],
+      "teachingNote": "This is + 完整原因从句，用 why 引导表语从句。"
+    },
+    "q-2023-ii-063": {
+      "blankId": "blank-2023-ii-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "basic",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "Basically",
+      "role": null,
+      "path": null,
+      "reason": "空格位于句首逗号前作状语修饰全句，形容词 basic 应变副词 Basically。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "how to describe a panda",
+          "signalSide": "passage",
+          "relation": "空格作句首状语修饰后面整句，形容词须变副词。"
+        }
+      ],
+      "teachingNote": "作句首状语修饰全句时形容词变副词。"
+    },
+    "q-2023-ii-064": {
+      "blankId": "blank-2023-ii-064",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "空格连接 watch the panda programme develop 与 see the pandas settle 两个并列不定式，用并列连词 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "to watch the panda programme develop",
+          "signalSide": "passage",
+          "relation": "前后两个动词短语为并列关系，用 and 连接。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "to see the pandas settle into their new home",
+          "signalSide": "passage",
+          "relation": "与前项并列且语义递进，并列连词用 and。"
+        }
+      ],
+      "teachingNote": "连接两个并列且同向的动词短语用 and。"
+    },
+    "q-2023-ii-065": {
+      "blankId": "blank-2023-ii-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "wish",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "wished",
+      "role": null,
+      "path": null,
+      "reason": "句子缺谓语，主语 I，时间状语 As a little girl 与 when I grew up 定过去时态，动词 wish 用一般过去式 wished。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "As a little girl",
+          "signalSide": "passage",
+          "relation": "回忆小时候的事，定过去时态。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "when I grew up",
+          "signalSide": "passage",
+          "relation": "grew 为过去式，呼应主句用一般过去时。"
+        }
+      ],
+      "teachingNote": "句子缺谓语且时间标志为过去时，动词用一般过去式。"
+    }
+  }
+}

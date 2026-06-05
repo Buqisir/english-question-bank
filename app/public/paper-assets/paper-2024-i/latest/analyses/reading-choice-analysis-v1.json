@@ -1,0 +1,1380 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2024-i",
+  "sourceAssetVersion": 4,
+  "targetGroups": [
+    "group-2024-i-reading-a",
+    "group-2024-i-reading-b",
+    "group-2024-i-reading-c",
+    "group-2024-i-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8-1m",
+    "reviewedBy": "claude-opus-4-8-1m",
+    "reviewedAt": "2026-06-04T00:00:00Z"
+  },
+  "groups": {
+    "group-2024-i-reading-a": {
+      "overview": "本文是一则招募 Habitat Restoration Team（栖息地修复团队）志愿者的应用文广告，介绍了活动宗旨、团体报名、年龄与技能要求、需携带物品以及近期活动安排。",
+      "discourseStructure": {
+        "summary": "广告以标题加分栏的形式组织：先点明团队名称与修复保护自然区域的宗旨，再依次说明团体报名规则、年龄与材料要求、着装与携带物品、培训与服务认证，最后用表格列出近期活动的时间与集合地点。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-i-reading-a-1",
+            "summary": "广告主标题，点明团队名称。",
+            "function": "标题，提示主题为栖息地修复团队。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-2",
+            "summary": "说明活动是帮助修复和保护 Marin 的自然区域，清除侵入植物、冬季种植与采集种子，并保护濒危物种。",
+            "function": "总述活动宗旨与志愿者作用。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-3",
+            "summary": "分栏小标题：团体。",
+            "function": "小标题，引出团体报名内容。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-4",
+            "summary": "五人及以上的团体需提前确认并填写团体项目申请表。",
+            "function": "说明团体报名规则。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-5",
+            "summary": "分栏小标题：年龄、技能、携带物品。",
+            "function": "小标题，引出报名条件与携带要求。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-6",
+            "summary": "欢迎 10 岁及以上志愿者，15 岁以下需阅读青少年政策指南。",
+            "function": "说明年龄要求。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-7",
+            "summary": "需带上填好的志愿者协议表，18 岁以下须有家长/监护人签字。",
+            "function": "说明材料与监护要求。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-8",
+            "summary": "无论晴雨都会开展活动，需穿可弄脏的衣物并按天气带衣物和雨衣。",
+            "function": "说明着装与天气应对要求。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-9",
+            "summary": "需自带水壶、防晒霜和午餐。",
+            "function": "说明个人携带物品。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-10",
+            "summary": "无需经验，提供培训和工具，可满足社区服务要求。",
+            "function": "说明技能门槛与提供的支持。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-a-11",
+            "summary": "以表格列出三场近期活动的日期、时间和集合地点。",
+            "function": "提供近期活动安排信息。"
+          }
+        ]
+      }
+    },
+    "group-2024-i-reading-b": {
+      "overview": "本文探讨纸质阅读与数字阅读（含音频、视频）在理解与学习效果上的差异，论证纸质阅读在需要深度思考的任务上更有优势，并提醒教育者不要假设所有媒介效果相同。",
+      "discourseStructure": {
+        "summary": "由提问引入主题，先给出总体结论（纸质阅读理解更好），再从物理属性和心理层面两方面解释原因，接着以音频视频为例补充论证，最后落到对教育者的建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-i-reading-b-1",
+            "summary": "提出两个问题：屏幕与纸质阅读理解是否相同，听看内容是否与阅读同样有效，并给出否定回答及原因因素。",
+            "function": "提出问题并给出总论点，列举原因因素"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-b-2",
+            "summary": "指出长文本在纸上学习通常更成功，尤其在需要心理抽象的任务上纸质优势更突出。",
+            "function": "给出研究结论，强调纸质阅读优势"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-b-3",
+            "summary": "从纸张物理属性角度解释差异：触感、页面视觉地理及与记忆位置的关联。",
+            "function": "解释原因之一：物理属性"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-b-4",
+            "summary": "从心理层面解释差异，介绍“浅化假说”：人们用社交媒体心态对待数字文本，投入更少脑力。",
+            "function": "解释原因之二：心理层面"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-b-5",
+            "summary": "音频视频比文本更吸引人，教师日益采用，但心理学研究表明阅读新闻比听看记得更多。",
+            "function": "补充论证：音视频虽吸引人但记忆效果不如阅读"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-b-6",
+            "summary": "承认数字文本、音视频有教育作用，但在需要专注与反思的学习中，提醒教育者勿假设所有媒介相同。",
+            "function": "总结并给出建议"
+          }
+        ]
+      }
+    },
+    "group-2024-i-reading-c": {
+      "overview": "本文是一篇人物/说明类记叙文，介绍兽医 Dr. William Farber 推行的“holistic” medicine（整体疗法），即把西医传统疗法与针灸、按摩疗法、草药结合。文章通过 Farber 自身经历、宠物病例和协会增长数据，说明这种疗法日益受到认可。",
+      "discourseStructure": {
+        "summary": "全文先以 Farber 的自我辩护引出 holistic medicine 及其在美国兽医中的兴起；再追溯他从常规兽医转向替代疗法的个人契机；接着用具体宠物病例佐证疗效；最后用协会会员增长预测该疗法前景并以 Farber 的话收束。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-i-reading-c-1",
+            "summary": "Farber 称自己并非疯狂而是走在时代前面，尽管同事偶尔嘲笑他；他属于日益增多的实践整体疗法的美国兽医之一。",
+            "function": "引入人物与核心概念 holistic medicine，并点出他面对的质疑。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-c-2",
+            "summary": "Farber 原是常规兽医，二十年前因背痛尝试药物无效后改用针灸，效果显著，于是把针灸用于宠物。",
+            "function": "追溯他转向替代疗法的个人原因与契机。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-c-3",
+            "summary": "举例说明疗效：狗 Charlie 的心脏病痛苦得到缓解、多活五个月，马 Nappy 经按摩调理后行动更轻松。",
+            "function": "用具体病例例证整体疗法的有效性。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-c-4",
+            "summary": "Farber 确信整体疗法会更流行，并以协会会员从30增至700余人为佐证，结尾引用其话语。",
+            "function": "用数据支撑其观点并收束全文。"
+          }
+        ]
+      }
+    },
+    "group-2024-i-reading-d": {
+      "overview": "本文是一篇科普说明文，介绍斯坦福大学一项关于生物多样性记录的研究。文章指出如今的生物多样性记录多为照片、视频等数字观察数据，虽便于收集，但研究发现这类观察数据存在偏差，并给出改进建议。",
+      "discourseStructure": {
+        "summary": "文章先提出当今生物多样性记录多以数字形式存在但并不完美（提出问题），接着引出研究者 Daru 及其研究问题——观察数据是否可用，然后说明研究方法与关注的偏差来源，再揭示研究结论（观察数据存在偏差且偏向特定区域、时段和物种），最后给出对生物多样性应用的改进建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-i-reading-d-1",
+            "summary": "如今大多数生物多样性记录以照片、视频等数字形式存在，虽有助于监测物种变化，但斯坦福研究发现这类记录并不完美。",
+            "function": "引入话题并提出问题：数字观察记录并不完美。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-d-2",
+            "summary": "研究主导者 Daru 指出借助移动应用进行物种观察变得容易，这些观察数据已超过实体标本的原始数据，他想知道这些数据是否可用。",
+            "function": "引出研究者及其核心研究问题。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-d-3",
+            "summary": "Daru 团队使用19亿条植物、昆虫、鸟类和动物记录，检验这些数据对实际全球生物多样性格局的代表程度。",
+            "function": "说明研究的数据规模与方法。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-d-4",
+            "summary": "Daru 表示团队特别关注会使数据产生偏差的采样因素，如公民科学家更可能拍摄开花植物而非旁边的草。",
+            "function": "进一步说明研究关注的偏差来源——采样方式。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-d-5",
+            "summary": "研究发现大量纯观察记录并未带来更好的全球覆盖，反而偏向特定区域、时段和物种，因为公民科学家多在附近区域记录，且偏好有吸引力的物种。",
+            "function": "揭示研究结论：观察数据存在偏差。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-d-6",
+            "summary": "以设问形式引出：面对不完美的生物多样性数据集我们能做什么。",
+            "function": "过渡设问，引出解决方案。"
+          },
+          {
+            "paragraphId": "para-2024-i-reading-d-7",
+            "summary": "Daru 给出建议：应用可利用研究结果引导用户去采样不足的地区与物种，并鼓励用户请专家确认所上传图像的识别。",
+            "function": "给出对生物多样性应用的改进建议。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-i-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Habitat Restoration Team 的活动宗旨，需定位描述团队目标的段落。",
+      "stemTranslationZh": "栖息地修复团队的宗旨是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "发现矿产资源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "restoring sensitive resources",
+            "optionText": "To discover mineral resources.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文 resources 一词制造干扰，但原文是 restoring sensitive resources（修复敏感资源），与 mineral resources（矿产资源）无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-a-2",
+              "quote": "restoring sensitive resources and protecting endangered species",
+              "anchor": "restoring sensitive resources"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "开发新的野生动物公园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Help restore and protect Marin’s natural areas from the Marin Headlands to Bolinas Ridge.",
+            "sourceHighlight": "restore and protect Marin’s natural areas",
+            "optionText": "To develop new wildlife parks.",
+            "optionHighlight": "develop new wildlife parks",
+            "explanation": "原文强调的是修复和保护已有的自然区域，选项夸大为开发新的野生动物公园，超出了原文范围。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-a-2",
+              "quote": "Help restore and protect Marin’s natural areas from the Marin Headlands to Bolinas Ridge.",
+              "anchor": "restore and protect natural areas"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保护当地的生态系统。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-a-2",
+              "quote": "restoring sensitive resources and protecting endangered species across the ridges and valleys",
+              "anchor": "protecting endangered species"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-a-2",
+              "quote": "Help restore and protect Marin’s natural areas",
+              "anchor": "restore and protect natural areas"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "开展生物学研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To conduct biological research.",
+            "explanation": "原文只提及修复自然区域、清除侵入植物和保护濒危物种，并未提及开展生物学研究，属于无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To protect the local ecosystem.",
+          "sourceRole": "correctOption",
+          "targetText": "Help restore and protect Marin’s natural areas",
+          "targetParagraphId": "para-2024-i-reading-a-2",
+          "relationType": "paraphrase",
+          "note": "选项用 protect the local ecosystem 概括原文 restore and protect Marin’s natural areas 与 protecting endangered species，属于同义概括。"
+        },
+        {
+          "sourceText": "aim",
+          "sourceRole": "stem",
+          "targetText": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "targetParagraphId": "para-2024-i-reading-a-2",
+          "relationType": "locationCue",
+          "note": "题干问 aim（宗旨），原文用 play a vital role in restoring... and protecting... 表明团队的目标，是定位线索。"
+        }
+      ]
+    },
+    "q-2024-i-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查加入团队的最低年龄限制，需定位年龄要求段落并辨别 10 岁、15 岁、18 岁等数字。",
+      "stemTranslationZh": "加入栖息地修复团队的最低年龄限制是多少？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "5 岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "5.",
+            "explanation": "原文未提及 5 岁这一年龄，属于无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "10 岁。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-a-6",
+              "quote": "Volunteers aged 10 and over are welcome.",
+              "anchor": "aged 10 and over are welcome"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "15 岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "for youth under the age of 15",
+            "optionText": "15.",
+            "matchType": "exact",
+            "relationNote": "原文 15 出现在 youth under the age of 15 处，是阅读青少年政策指南的年龄分界，并非加入团队的最低年龄，借数字 15 制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-a-6",
+              "quote": "Read our Youth Policy Guidelines for youth under the age of 15.",
+              "anchor": "under the age of 15"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "18 岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Volunteers under the age of 18",
+            "optionText": "18.",
+            "matchType": "exact",
+            "relationNote": "原文 18 出现在 Volunteers under the age of 18 must have the parent/guardian approval section signed 处，是需家长签字的年龄分界，而非最低年龄，借数字 18 制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-a-7",
+              "quote": "Volunteers under the age of 18 must have the parent/guardian approval section signed.",
+              "anchor": "under the age of 18"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "lower age limit",
+          "sourceRole": "stem",
+          "targetText": "Volunteers aged 10 and over are welcome.",
+          "targetParagraphId": "para-2024-i-reading-a-6",
+          "relationType": "locationCue",
+          "note": "题干 lower age limit（最低年龄限制）对应原文 aged 10 and over are welcome，10 岁及以上即为最低年龄。"
+        }
+      ]
+    },
+    "q-2024-i-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查志愿者被要求做什么，需在着装、携带物品、技能等说明中定位与选项匹配的细节。",
+      "stemTranslationZh": "志愿者被要求做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "自带工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Training and tools will be provided.",
+            "sourceHighlight": "tools will be provided",
+            "optionText": "Bring their own tools.",
+            "optionHighlight": "Bring their own tools",
+            "explanation": "原文说工具会由主办方提供，选项却说志愿者要自带工具，与原文意思相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-a-10",
+              "quote": "Training and tools will be provided.",
+              "anchor": "tools will be provided"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "即使在恶劣天气下也要工作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-a-8",
+              "quote": "We’ll be working rain or shine.",
+              "anchor": "working rain or shine"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "穿团队制服。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Wear a team uniform.",
+            "explanation": "原文只要求穿可弄脏的衣物并按天气增减衣物，并未提及穿团队制服，属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "至少完成三个项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Do at least three projects.",
+            "explanation": "原文虽列出三场活动并提及社区服务要求，但从未要求志愿者至少完成三个项目，属于无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Work even in bad weather.",
+          "sourceRole": "correctOption",
+          "targetText": "We’ll be working rain or shine.",
+          "targetParagraphId": "para-2024-i-reading-a-8",
+          "relationType": "paraphrase",
+          "note": "选项 Work even in bad weather 是原文 working rain or shine（风雨无阻）的同义替换。"
+        }
+      ]
+    },
+    "q-2024-i-024": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第二段画线短语 shine through 的词义推测。",
+      "stemTranslationZh": "第二段中画线短语“shine through”是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "似乎不太可能持久。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "shine through 表示纸质阅读的好处不太可能持久",
+            "explanation": "原文未提及纸质阅读好处“持久与否”，shine through 在此语境指好处明显显现，而非持续时长，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "似乎难以解释。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "shine through 表示纸质阅读的好处难以解释",
+            "explanation": "原文第三、四段恰恰对纸质优势给出了物理与心理两方面解释，并无“难以解释”之意，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "变得可以使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "shine through 表示纸质阅读的好处变得可供使用",
+            "explanation": "shine through 指优势“显现、被察觉”，而非“可供使用 ready to use”，原文无此含义，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "变得容易被注意到。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-b-2",
+              "quote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks",
+              "anchor": "print 好处在更难任务时 shine through"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-b-2",
+              "quote": "to ones that require mental abstraction — such as drawing inferences from a text.",
+              "anchor": "需心理抽象的任务中优势更明显"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "shine through",
+          "sourceRole": "stem",
+          "targetText": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks",
+          "targetParagraphId": "para-2024-i-reading-b-2",
+          "relationType": "locationCue",
+          "note": "由 benefits ... particularly shine through 可知，从简单任务转向需要 mental abstraction 的任务时纸质优势更加“显现/明显”，故 shine through 意为 become easy to notice（容易被注意到）。"
+        }
+      ]
+    },
+    "q-2024-i-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对第四段“浅化假说”内容的细节理解。",
+      "stemTranslationZh": "浅化假说假定了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "读者轻率地对待数字文本。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-b-4",
+              "quote": "people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+              "anchor": "用社交媒体心态对待数字文本，投入更少脑力"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "数字文本更易于理解。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "浅化假说假定数字文本更易于理解",
+            "explanation": "原文说的是读者投入较少脑力、心态不够认真，并未说数字文本本身“更易理解”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们随机选择数字文本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "浅化假说假定人们随机地选择数字文本",
+            "explanation": "原文讨论的是阅读数字文本时的心态与投入，从未提及“随机选择”文本，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "数字文本适合社交媒体。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "people approach digital texts with a mindset suited to social media",
+            "sourceEntity": "a mindset suited to social media",
+            "optionText": "Digital texts are suitable for social media.",
+            "optionEntity": "Digital texts",
+            "explanation": "原文说“适合社交媒体”的是读者的心态（mindset），而非数字文本本身；选项把对象错配成 digital texts 适合社交媒体。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-b-4",
+              "quote": "people approach digital texts with a mindset suited to social media",
+              "anchor": "suited to social media 修饰 mindset 而非 texts"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Readers treat digital texts lightly.",
+          "sourceRole": "correctOption",
+          "targetText": "which are often not so serious, and devote less mental effort than when they are reading print.",
+          "targetParagraphId": "para-2024-i-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "选项 treat ... lightly 同义替换原文 not so serious 且 devote less mental effort，对应读者轻率对待数字文本。"
+        }
+      ]
+    },
+    "q-2024-i-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查大学教师日益使用音频视频原因的细节理解。",
+      "stemTranslationZh": "为什么大学教师越来越多地使用音频和视频？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们能抓住学生的注意力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-b-5",
+              "quote": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies",
+              "anchor": "音视频更吸引人，故教师日益采用"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们准备起来更方便。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "教师使用音视频是因为准备起来更方便",
+            "explanation": "原文给出的原因是 more engaging（更吸引人），未提及“准备方便”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们有助于培养高级技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "教师使用音视频是因为它们有助于培养高级技能",
+            "explanation": "原文恰恰指出阅读在需心理抽象的高级任务上更好，并未说音视频培养高级技能，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们比文本提供更多信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Audio (音频) and video can feel more engaging than text",
+            "optionText": "They are more informative than text.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文 more ... than text 句式，把 more engaging（更吸引人）偷换成 more informative（信息更多），原文并未说音视频信息量更大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-b-5",
+              "quote": "Audio (音频) and video can feel more engaging than text",
+              "anchor": "more engaging 而非 more informative"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They can hold students' attention.",
+          "sourceRole": "correctOption",
+          "targetText": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies",
+          "targetParagraphId": "para-2024-i-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "选项 hold students' attention 同义替换原文 more engaging（更吸引人），and so 揭示因果，即教师采用音视频的原因。"
+        }
+      ]
+    },
+    "q-2024-i-027": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对最后一段作者言外之意的推断。",
+      "stemTranslationZh": "作者在最后一段暗示了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "学生应该运用多种学习技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "educators shouldn’t assume all media are the same",
+            "sourceEntity": "educators",
+            "optionText": "Students should apply multiple learning techniques.",
+            "optionEntity": "Students",
+            "explanation": "原文建议的对象是 educators（教育者），而非 students；且讨论的是媒介选择而非学生运用多种学习技巧，对象与内容均错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-b-6",
+              "quote": "educators shouldn’t assume all media are the same",
+              "anchor": "建议对象是 educators 而非 students"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "教师应该制作自己的教学材料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "教师应该制作自己的教学材料",
+            "explanation": "原文只建议教育者不要假设所有媒介相同，从未提及教师“自制教学材料”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "印刷文本在教育中无法被完全取代。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-b-6",
+              "quote": "for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+              "anchor": "需专注反思时不应认为各媒介相同"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-b-6",
+              "quote": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print.",
+              "anchor": "数字媒介有作用但纸质仍不可替代"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "课堂之外的教育不容忽视。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "课堂之外的教育不容忽视",
+            "explanation": "末段讨论的是不同媒介的学习效果差异，并未涉及“课堂内外”教育的问题，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Print texts cannot be entirely replaced in education.",
+          "sourceRole": "correctOption",
+          "targetText": "for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "targetParagraphId": "para-2024-i-reading-b-6",
+          "relationType": "paraphrase",
+          "note": "由 shouldn’t assume all media are the same 加上 maximizing learning where mental focus and reflection are called for，可推断在需深度学习时纸质文本不可被完全取代。"
+        }
+      ]
+    },
+    "q-2024-i-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Farber 的部分同事对他的看法，需定位第一段中描述同事反应的细节。",
+      "stemTranslationZh": "Farber 的一些同事是怎么看待他的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他很古怪。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-c-1",
+              "quote": "even some of his coworkers occasionally laugh at his unusual methods",
+              "anchor": "同事嘲笑他不寻常的方法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他很严格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He's strict.",
+            "explanation": "原文未提及 Farber 严格，文中只说同事嘲笑他不寻常的方法，无任何关于严格的信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他很勇敢。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He's brave.",
+            "explanation": "原文未提及同事认为他勇敢，文中同事的态度是嘲笑而非赞赏其勇气。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他很粗鲁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He's rude.",
+            "explanation": "原文未提及他粗鲁，文中只描述同事对其方法的嘲笑，与是否粗鲁无关。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What do some of Farber's coworkers think of him?",
+          "sourceRole": "stem",
+          "targetText": "even some of his coworkers occasionally laugh at his unusual methods",
+          "targetParagraphId": "para-2024-i-reading-c-1",
+          "relationType": "locationCue",
+          "note": "题干 some of Farber's coworkers think 对应原文 some of his coworkers occasionally laugh at his unusual methods，laugh at his unusual methods 即把他视为 odd（古怪）。"
+        }
+      ]
+    },
+    "q-2024-i-029": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Farber 决定在宠物身上尝试针灸的原因，需定位第二段他自身作为病人受益的经历。",
+      "stemTranslationZh": "Farber 为什么决定在宠物身上尝试针灸？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他在大学里接受过针灸训练。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "a graduate of Colorado State University, started out as a more conventional veterinarian",
+            "sourceHighlight": "a more conventional veterinarian",
+            "optionText": "He was trained in it at university.",
+            "optionHighlight": "trained in it at university",
+            "explanation": "原文说他是大学毕业的常规兽医，针灸是后来自学（after studying the techniques for a couple of years），并非大学所学，选项把训练来源偷换为 university。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-c-2",
+              "quote": "after studying the techniques for a couple of years, he began offering them to pets",
+              "anchor": "针灸是他后来自学的，非大学所授"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他受到另一位兽医的启发。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He was inspired by another veterinarian.",
+            "explanation": "原文未提及有另一位兽医启发他，他尝试针灸是源于自身背痛被治愈的经历。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他作为病人从针灸中受益。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-c-2",
+              "quote": "Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments",
+              "anchor": "他自己试针灸后病情好转"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-c-2",
+              "quote": "What worked on a veterinarian seemed likely to work on his patients",
+              "anchor": "对兽医自己有效便推及宠物"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他想为宠物主人省钱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He wanted to save money for pet owners.",
+            "explanation": "原文未提及省钱动机，他转用针灸的原因是自身受益后认为对宠物也有效。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "He benefited from it as a patient.",
+          "sourceRole": "correctOption",
+          "targetText": "he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments",
+          "targetParagraphId": "para-2024-i-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项 benefited from it as a patient 同义替换原文 he improved after two or three treatments，即他作为病人针灸后好转。"
+        },
+        {
+          "sourceText": "Why did Farber decide to try acupuncture on pets?",
+          "sourceRole": "stem",
+          "targetText": "What worked on a veterinarian seemed likely to work on his patients",
+          "targetParagraphId": "para-2024-i-reading-c-2",
+          "relationType": "locationCue",
+          "note": "题干问在宠物身上尝试针灸的原因，原文 What worked on a veterinarian seemed likely to work on his patients 提供因果定位线索。"
+        }
+      ]
+    },
+    "q-2024-i-030": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查第三段的段落主旨，需归纳两个宠物病例所共同说明的内容。",
+      "stemTranslationZh": "第三段主要讲了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一次按摩疗法的步骤。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "after a chiropractic adjustment",
+            "optionText": "Steps of a chiropractic treatment.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文出现的 chiropractic 一词设钩，但原文只说按摩调理后马更舒适，并未描述按摩疗法的 steps（步骤）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-c-3",
+              "quote": "“moves more easily and rides more comfortably” after a chiropractic adjustment",
+              "anchor": "只讲按摩后的效果，非步骤"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "兽医工作的复杂性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The complexity of veterinarians' work.",
+            "explanation": "原文未提及兽医工作的复杂性，第三段聚焦于两个病例的治疗效果。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "罕见动物疾病的例子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Leigh Tindale’s dog Charlie had a serious heart condition",
+            "sourceHighlight": "a serious heart condition",
+            "optionText": "Examples of rare animal diseases.",
+            "optionHighlight": "rare animal diseases",
+            "explanation": "原文只说狗患严重心脏病，并未说这些病 rare（罕见）；段落重点是疗效而非疾病本身，选项夸大并偏离主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-c-3",
+              "quote": "Leigh Tindale’s dog Charlie had a serious heart condition",
+              "anchor": "病情严重但未称罕见"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "整体疗法的有效性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-c-3",
+              "quote": "Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months",
+              "anchor": "狗的痛苦缓解、多活五个月"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-c-3",
+              "quote": "her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment",
+              "anchor": "马经调理后更舒适"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The effectiveness of holistic medicine.",
+          "sourceRole": "correctOption",
+          "targetText": "Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months",
+          "targetParagraphId": "para-2024-i-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "选项 effectiveness of holistic medicine 概括原文两例疗效，treatments eased her dog’s suffering 与 moves more easily 均体现疗法的 effectiveness。"
+        }
+      ]
+    },
+    "q-2024-i-031": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者提及美国整体兽医医学协会的写作意图，需结合第四段会员增长数据与 Farber 的观点之间的论证关系。",
+      "stemTranslationZh": "作者为什么提到美国整体兽医医学协会？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了证明 Farber 的观点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-c-4",
+              "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right",
+              "anchor": "协会数据用来印证 Farber 的预测"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-c-4",
+              "quote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+              "anchor": "会员从30增至700余的增长证据"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了强调它的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+            "sourceHighlight": "has grown from 30 to over 700",
+            "optionText": "To emphasize its importance.",
+            "optionHighlight": "emphasize its importance",
+            "explanation": "作者提协会是借其会员增长来佐证整体疗法日益流行，目的不是强调协会本身的重要性，选项偷换了写作目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-c-4",
+              "quote": "Farber is certain that the holistic approach will grow more popular with time",
+              "anchor": "数据服务于论证疗法流行，非强调协会"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了赞扬兽医。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To praise veterinarians.",
+            "explanation": "原文未提及作者意在赞扬兽医，提及协会是为印证整体疗法的发展趋势。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了倡导动物保护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To advocate animal protection.",
+            "explanation": "原文未提及动物保护，全文主题是整体兽医疗法的疗效与发展，与倡导动物保护无关。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To prove Farber's point.",
+          "sourceRole": "correctOption",
+          "targetText": "if the past is any indication, he may be right",
+          "targetParagraphId": "para-2024-i-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "选项 prove Farber's point 对应原文 if the past is any indication, he may be right，作者用协会会员增长（过去趋势）来印证 Farber 关于疗法会更流行的判断。"
+        },
+        {
+          "sourceText": "Why does the author mention the American Holistic Veterinary Medical Association?",
+          "sourceRole": "stem",
+          "targetText": "Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+          "targetParagraphId": "para-2024-i-reading-c-4",
+          "relationType": "locationCue",
+          "note": "题干定位词 American Holistic Veterinary Medical Association 直接对应第四段会员增长数据句，该数据是论证 Farber 观点的依据。"
+        }
+      ]
+    },
+    "q-2024-i-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对第一段中关于当今物种记录形式这一细节的理解。",
+      "stemTranslationZh": "关于如今收集到的物种记录，我们了解到什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们正在变得过时。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "如今的物种记录正在变得过时。",
+            "explanation": "原文未提及记录过时（outdated）的内容，文章只说这类数字记录并不完美，并未说它们正在过时，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们大多以电子形式存在。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-d-1",
+              "quote": "most records of biodiversity are often in the form of photos, videos, and other digital records",
+              "anchor": "记录多为照片、视频等数字形式"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们数量有限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "researchers and citizen scientists have collected billions of records",
+            "sourceHighlight": "billions of records",
+            "optionText": "They are limited in number.",
+            "optionHighlight": "limited in number",
+            "explanation": "原文说已收集到数十亿条记录（billions of records），数量庞大，选项却说数量有限（limited in number），与原文趋势相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-d-1",
+              "quote": "researchers and citizen scientists have collected billions of records",
+              "anchor": "已收集数十亿条记录"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们被用于公开展览。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "这些记录被用于公开展览。",
+            "explanation": "原文说这些记录用于监测某地区物种数量与种类的变化，并未提及用于公开展览（public exhibition），属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "in electronic form",
+          "sourceRole": "correctOption",
+          "targetText": "in the form of photos, videos, and other digital records",
+          "targetParagraphId": "para-2024-i-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项的 in electronic form 是原文 digital records（photos, videos, and other digital records）的同义替换，digital 与 electronic 对应。"
+        }
+      ]
+    },
+    "q-2024-i-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Daru 研究对象（聚焦于何种数据）这一细节的把握。",
+      "stemTranslationZh": "Daru 的研究聚焦于什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "受威胁的物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Daru 的研究聚焦于受威胁的物种。",
+            "explanation": "首段虽提到物种灭绝（go extinct）的背景，但研究本身聚焦的是观察数据是否可用，并未以受威胁物种为研究对象，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "实体标本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the primary data that comes from physical specimens",
+            "optionText": "Physical specimens.",
+            "matchType": "exact",
+            "relationNote": "原文出现 physical specimens 一词，但只是作为对照（观察数据已超过来自实体标本的原始数据），研究聚焦的是观察数据而非实体标本，选项借原词设钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-d-2",
+              "quote": "These observations now outnumber the primary data that comes from physical specimens",
+              "anchor": "观察数据已超过实体标本数据"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "观察数据。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-d-2",
+              "quote": "since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+              "anchor": "想知道观察数据是否可用"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-d-3",
+              "quote": "Daru and his team tested how well these data represent actual global biodiversity patterns",
+              "anchor": "检验这些数据的代表性"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "移动应用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "make observations of different species with the aid of a mobile application",
+            "optionText": "Mobile applications.",
+            "matchType": "exact",
+            "relationNote": "原文提到 mobile application 只是说明人们借助它进行观察的手段，研究聚焦的是由此产生的观察数据，而非移动应用本身，选项借原词设钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-d-2",
+              "quote": "it is easy for people to make observations of different species with the aid of a mobile application",
+              "anchor": "借助移动应用进行观察"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Observational data",
+          "sourceRole": "correctOption",
+          "targetText": "we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?",
+          "targetParagraphId": "para-2024-i-reading-d-2",
+          "relationType": "locationCue",
+          "note": "题干问研究 focus on 什么，原文以 Daru 自述 I wanted to know: Are they usable? 直接点明研究对象为 observational data，正确选项与原文用词一致。"
+        }
+      ]
+    },
+    "q-2024-i-034": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对造成数据偏差原因这一细节的理解，需结合采样方式定位。",
+      "stemTranslationZh": "根据这项研究，是什么导致了偏差？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "数据分析中的错误。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "偏差是由数据分析中的错误造成的。",
+            "explanation": "原文将偏差归因于采样（sampling）方式，并未提及数据分析中的错误，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "上传图片的质量差。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "偏差是由上传图片质量差造成的。",
+            "explanation": "末段提到请专家确认上传图像的识别是为提高数据质量，但原文从未把偏差归因于图片质量差，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "不当的采样方式。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-d-4",
+              "quote": "We were particularly interested in exploring the aspects of sampling that tend to bias (使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it",
+              "anchor": "采样方式使数据产生偏差"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不可靠的数据采集设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "偏差是由不可靠的数据采集设备造成的。",
+            "explanation": "原文提到 mobile devices 只是说明公民科学家用移动设备记录，偏差源于采样行为而非设备不可靠，原文未提及设备不可靠，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Improper way of sampling",
+          "sourceRole": "correctOption",
+          "targetText": "the aspects of sampling that tend to bias (使有偏差) data",
+          "targetParagraphId": "para-2024-i-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "题干问 led to the biases 的原因，原文 aspects of sampling that tend to bias data 指出采样的某些方面导致偏差，正确选项 Improper way of sampling 是对其的同义概括。"
+        }
+      ]
+    },
+    "q-2024-i-035": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对末段 Daru 针对生物多样性应用提出的建议这一细节的理解。",
+      "stemTranslationZh": "Daru 对生物多样性应用有什么建议？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "审查来自特定区域的数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+            "sourceHighlight": "lead them to places — and even species — that are not well-sampled",
+            "optionText": "Review data from certain areas.",
+            "optionHighlight": "Review data from certain areas",
+            "explanation": "原文建议是告知用户过度采样区域并引导其前往采样不足的地方，而非审查（review）特定区域的数据，选项偷换了建议的具体内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-d-7",
+              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+              "anchor": "引导用户前往采样不足之处"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "雇佣专家来核查记录。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image",
+            "sourceEntity": "users (encouraged to have an expert confirm)",
+            "optionText": "Hire experts to check the records.",
+            "optionEntity": "apps hiring experts",
+            "explanation": "原文是应用鼓励用户去请专家确认上传图像，动作主体与方式是用户主动求证；选项却说雇佣专家核查记录，把对象与做法错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-d-7",
+              "quote": "biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image",
+              "anchor": "鼓励用户请专家确认"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "确认用户的身份。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "encourage users to have an expert confirm the identification of their uploaded image",
+            "sourceEntity": "identification of their uploaded image",
+            "optionText": "Confirm the identity of the users.",
+            "optionEntity": "identity of the users",
+            "explanation": "原文 confirm the identification 指确认上传图像（物种）的识别，选项却理解为确认用户的身份（identity of the users），将确认对象由图像识别错配为用户身份。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-i-reading-d-7",
+              "quote": "encourage users to have an expert confirm the identification of their uploaded image",
+              "anchor": "确认上传图像的识别"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为公民科学家提供指导。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-i-reading-d-7",
+              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+              "anchor": "告知用户并引导前往采样不足之处"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-i-reading-d-5",
+              "quote": "the people who get observational biodiversity data on mobile devices are often citizen scientists",
+              "anchor": "这些用户即公民科学家"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Give guidance to citizen scientists",
+          "sourceRole": "correctOption",
+          "targetText": "inform users of oversampled areas and lead them to places — and even species — that are not well-sampled",
+          "targetParagraphId": "para-2024-i-reading-d-7",
+          "relationType": "paraphrase",
+          "note": "正确选项 Give guidance 是原文 inform users... and lead them to places 的同义替换；结合第五段 users 即 citizen scientists，可知指导对象为公民科学家。"
+        }
+      ]
+    }
+  }
+}

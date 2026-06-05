@@ -1,0 +1,334 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-i-seven-choices": {
+      "overview": "本文是一篇说明文，主题是如何寻找并与健身搭档（workout partner）有效合作。文章先点明拥有健身搭档的好处，再依次讲解寻找搭档的步骤：明确需求、发布寻找启事、与搭档磨合。五个空分别考查段内/段间的衔接与照应。",
+      "discourseStructure": {
+        "summary": "全文按\"好处—如何寻找—如何相处\"的顺序展开：开头借杂志文章引出健身搭档的益处，随后用一个设问\"how do you find a workout partner\"统领下文，分步说明明确需求、就近寻找、撰写启事，最后说明如何与有不同技能的搭档合作共赢。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Five Reasons to Thank Your Workout Partner",
+            "paragraphIds": [
+              "para-2022-i-seven-title"
+            ],
+            "summary": "引用杂志文章列举有健身搭档的理由，第36空补全其中一条理由。"
+          },
+          {
+            "unitId": "unit-how-to-find",
+            "heading": "So, how do you find a workout partner?",
+            "paragraphIds": [
+              "para-2022-i-seven-p1",
+              "para-2022-i-seven-p2",
+              "para-2022-i-seven-p3",
+              "para-2022-i-seven-p4"
+            ],
+            "summary": "以设问统领，分步讲解寻找搭档：先明确自己的需求（37），再说明搭档应就近（38），并以作者搭档发布启事为例引出启事应包含的信息（39）。"
+          },
+          {
+            "unitId": "unit-work-together",
+            "heading": "",
+            "paragraphIds": [
+              "para-2022-i-seven-p5"
+            ],
+            "summary": "说明搭档之间技能不同，应接受差异、彼此配合，从而共同受益（40）。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2022-i-036": {
+      "blankId": "blank-2022-i-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "increase your training effort",
+        "subtle (微妙) competition",
+        "With a workout partner",
+        "Five Reasons to Thank Your Workout Partner"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-i-seven-title",
+        "headingAnchor": "Five Reasons to Thank Your Workout Partner",
+        "beforeQuote": "while another read:",
+        "afterQuote": "With a workout partner, you will increase your training effort as there is a subtle (微妙) competition."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "work harder",
+          "signalSide": "option",
+          "targetText": "increase your training effort",
+          "relation": "选项 work harder 与空后 increase your training effort 属同一\"更努力训练\"话题场，互为概括与展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "increase your training effort",
+          "signalSide": "context-after",
+          "targetText": "work harder",
+          "relation": "空后 increase your training effort 正是选项 work harder 的具体说明，呼应有搭档则更卖力训练。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "if you train with someone else",
+          "signalSide": "option",
+          "targetText": "With a workout partner",
+          "relation": "选项中条件状语 if you train with someone else 与空后 With a workout partner 指向同一情境，构成\"与人同练则更努力\"的条件—结果关系。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本空补全杂志列举的又一条理由，C项\"和别人一起训练会更卖力\"正好被空后\"有搭档就会增加训练投入、存在微妙竞争\"所印证。",
+        "matchedClues": [
+          {
+            "contextSide": "increase your training effort / subtle (微妙) competition",
+            "optionSide": "work harder if you train with someone else",
+            "relation": "有竞争故更卖力，与选项\"和他人同练会更努力\"完全对应。"
+          }
+        ]
+      },
+      "teachingNote": "理由列举类空格要看后文的解释句，找与之同义概括的选项。"
+    },
+    "q-2022-i-037": {
+      "blankId": "blank-2022-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "decide what you want from that person",
+        "Or do you just want to be physically fit",
+        "the exercises you would like to do",
+        "able to move with strength and flexibility"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-i-seven-p2",
+        "headingAnchor": "",
+        "beforeQuote": "First of all, decide what you want from that person.",
+        "afterQuote": "Or do you just want to be physically fit, able to move with strength and flexibility?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Or",
+          "signalSide": "context-after",
+          "targetText": "Do you want to be a better athlete in your favorite sport?",
+          "relation": "空后以 Or 引出另一选择性疑问句，要求空内本身也是一个并列的选择性疑问句，D项正是\"想成为更好的运动员吗\"。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "better athlete in your favorite sport",
+          "signalSide": "option",
+          "targetText": "physically fit",
+          "relation": "选项\"在喜爱运动中成为更好的运动员\"与空后\"只想强身健体\"构成两个并列的目标选项。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "decide what you want from that person",
+          "signalSide": "context-before",
+          "targetText": "Do you want to be a better athlete",
+          "relation": "空前\"先决定你想从对方那里得到什么\"领起空内的设问，二者属\"明确健身目标\"话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前提出\"先决定你想要什么\"，空后用 Or 列出另一可能，故本空应是与之并列的一个设问，D项\"你想成为运动健将吗\"与\"只想强身健体\"恰成两选项。",
+        "matchedClues": [
+          {
+            "contextSide": "Or do you just want to be physically fit",
+            "optionSide": "Do you want to be a better athlete in your favorite sport?",
+            "relation": "Or 连接的两个 do you want 疑问句构成\"竞技 vs 健身\"两类目标。"
+          }
+        ]
+      },
+      "teachingNote": "看到空后 Or + 疑问句，空内多半是与其并列的同结构设问。"
+    },
+    "q-2022-i-038": {
+      "blankId": "blank-2022-i-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "posting what you are looking for on social media",
+        "won’t result in a useful response",
+        "working out in a gym",
+        "belong to the same gym"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-i-seven-p3",
+        "headingAnchor": "",
+        "beforeQuote": "but it probably won’t result in a useful response.",
+        "afterQuote": "If you plan on working out in a gym, that person must belong to the same gym."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "live close by",
+          "signalSide": "option",
+          "targetText": "belong to the same gym",
+          "relation": "选项\"通常需住得近\"与空后\"必须属于同一家健身房\"同属\"地理就近\"话题场，后者是前者的具体例证。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "belong to the same gym",
+          "signalSide": "context-after",
+          "targetText": "live close by",
+          "relation": "空后\"同一健身房\"印证了空内\"住得近\"这一就近原则。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "useful response",
+          "signalSide": "context-before",
+          "targetText": "A workout partner usually needs to live close by.",
+          "relation": "空前指出网上发帖难有 useful response，暗示真正有用的搭档需就近，与选项\"需住得近\"衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空后用\"若在健身房锻炼，对方必须属于同一家健身房\"举例说明就近的重要性，正好印证B项\"健身搭档通常需住得近\"。",
+        "matchedClues": [
+          {
+            "contextSide": "that person must belong to the same gym",
+            "optionSide": "A workout partner usually needs to live close by.",
+            "relation": "同一健身房是\"住得近\"的具体表现，构成总—分关系。"
+          }
+        ]
+      },
+      "teachingNote": "段中空若后接以 If 举的具体例子，空内常是该例子所例证的概括性原则。"
+    },
+    "q-2022-i-039": {
+      "blankId": "blank-2022-i-039",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Her notice included what kind of training",
+        "how many days a week",
+        "provided her phone number",
+        "listed her favorite sports and activities"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-i-seven-p4",
+        "headingAnchor": "",
+        "beforeQuote": "It also listed her favorite sports and activities, and provided her phone number.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "such information",
+          "signalSide": "option",
+          "targetText": "what kind of training / how many days a week / favorite sports and activities / phone number",
+          "relation": "选项中 such information 回指空前列举的训练内容、天数、爱好、电话等信息，构成总结性照应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "notice for a training partner",
+          "signalSide": "option",
+          "targetText": "Her notice included",
+          "relation": "选项 notice 与空前 Her notice 词汇复现，话题一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Her notice included",
+          "signalSide": "context-before",
+          "targetText": "Any notice ... should include such information",
+          "relation": "空前以作者搭档的 notice 为例罗列各项内容，空内由此归纳出\"任何启事都应包含此类信息\"。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本段先以作者搭档的启事为例列举其包含的种种信息，段末空用G项\"任何寻找训练搭档的启事都应包含这类信息\"进行总结，其中 such information 正回指前文所列各项。",
+        "matchedClues": [
+          {
+            "contextSide": "what kind of training / how many hours / favorite sports / phone number",
+            "optionSide": "such information",
+            "relation": "such information 概括并回指前文逐项罗列的启事内容。"
+          }
+        ]
+      },
+      "teachingNote": "段末空遇到 such / these 等回指词，先找前文被概括的具体内容来定位答案。"
+    },
+    "q-2022-i-040": {
+      "blankId": "blank-2022-i-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "different skills",
+        "both of you will benefit",
+        "help each other",
+        "lift more weights"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-i-seven-p5",
+        "headingAnchor": "",
+        "beforeQuote": "You and your partner will probably have different skills.",
+        "afterQuote": "Over time, both of you will benefit"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "your differences",
+          "signalSide": "option",
+          "targetText": "different skills",
+          "relation": "选项 your differences 回指空前 different skills，名词照应使语段衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "work with each other",
+          "signalSide": "option",
+          "targetText": "help each other",
+          "relation": "选项 work with each other 与段末 help each other 属同一\"彼此配合\"话题场，呼应共同受益。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "different skills",
+          "signalSide": "context-before",
+          "targetText": "your differences",
+          "relation": "空前\"你和搭档可能技能不同\"为空内\"接受差异、学会配合\"提供前提。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前说\"你和搭档可能技能不同\"，空后讲\"久而久之双方都会受益\"，F项\"接受彼此差异并学会与对方配合\"承上启下，your differences 正回指 different skills。",
+        "matchedClues": [
+          {
+            "contextSide": "different skills / both of you will benefit",
+            "optionSide": "accept your differences and learn to work with each other",
+            "relation": "接受差异、相互配合是\"双方共同受益\"的前提，衔接自然。"
+          }
+        ]
+      },
+      "teachingNote": "看到选项中的 differences、this 等回指词，先在空前找它所指代的名词以确认衔接。"
+    }
+  }
+}

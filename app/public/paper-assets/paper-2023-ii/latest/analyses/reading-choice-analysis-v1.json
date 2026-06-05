@@ -1,0 +1,1537 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-ii-reading-a",
+    "group-2023-ii-reading-b",
+    "group-2023-ii-reading-c",
+    "group-2023-ii-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pilot",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2023-ii-reading-a": {
+      "overview": "一篇应用文，介绍黄石国家公园今年夏季提供的四个护林员（ranger）项目，分别列出每个项目的名称、举办日期、活动内容和集合地点。",
+      "discourseStructure": {
+        "summary": "首段总述黄石公园全年提供多种护林员项目并引出本夏季项目介绍；随后按项目逐一展开，每个项目先给出标题与日期，再说明活动内容与集合地点；最后一个摄影工作坊项目还分两个日期分别列出地点。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-ii-reading-a-1",
+            "summary": "总述黄石公园全年提供多种护林员项目，并引出对今夏项目的介绍。",
+            "function": "引言/总起，点明文章主题"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-2",
+            "summary": "第一个项目标题与日期：Experiencing Wildlife in Yellowstone（5月26日至9月2日）。",
+            "function": "项目一标题与时间"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-3",
+            "summary": "介绍野生动物观赏工作坊内容：教游客在哪里寻找动物、如何安全观赏，集合地点为 Canyon Village Store。",
+            "function": "项目一内容与地点"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-4",
+            "summary": "第二个项目标题与日期：Junior Ranger Wildlife Olympics（6月5日至8月21日）。",
+            "function": "项目二标题与时间"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-5",
+            "summary": "介绍少年护林员野生动物运动会内容：孩子可测试技能并与动物能力比较，集合地点在 Visitor Education Center 前。",
+            "function": "项目二内容与地点"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-6",
+            "summary": "第三个项目标题与日期：Canyon Talks at Artist Point（6月9日至9月2日）。",
+            "function": "项目三标题与时间"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-7",
+            "summary": "介绍 Artist Point 的简短讲解：在经典观景点欣赏瀑布、河流与峡谷色彩，了解该地区自然与人文历史，集合地点在 South Rim Drive 上 Artist Point 的下层平台。",
+            "function": "项目三内容与地点"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-8",
+            "summary": "第四个项目标题与日期：Photography Workshops（6月19日与7月10日）。",
+            "function": "项目四标题与时间"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-9",
+            "summary": "介绍摄影工作坊内容：由公园摄影师带领的实践项目，提升摄影技能并启发欣赏黄石之美的新方式。",
+            "function": "项目四内容"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-10",
+            "summary": "摄影工作坊第一场（6月19日）主题与地点：Waterfalls &Wide Angles，在 Artist Point 集合。",
+            "function": "项目四场次一时间与地点"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-a-11",
+            "summary": "摄影工作坊第二场（7月10日）主题与地点：Wildflowers &White Balance，在 Chittenden 停车区的 Washburn Trailhead 集合。",
+            "function": "项目四场次二时间与地点"
+          }
+        ]
+      }
+    },
+    "group-2023-ii-reading-b": {
+      "overview": "本文介绍 Abby Jaramillo 与另一位教师创办的校园园艺项目 Urban Sprouts，该项目面向低收入学校的中学生，旨在培养科学技能、环保意识与健康生活方式，并讲述项目的开展、挑战及其超越营养层面的多重积极影响。",
+      "discourseStructure": {
+        "summary": "文章先引出项目及其创办者与目标，再说明学生的生活背景与起初的抵触，接着描述课程内容，随后用评估结果与学生反馈证明饮食改善，最后说明项目在营养之外对学生（尤其是特殊教育学生）的更广泛益处。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-ii-reading-b-1",
+            "summary": "园艺劳作起初对中学生来说很辛苦；Abby Jaramillo 与另一位教师创办了校园园艺项目 Urban Sprouts，目标是培养学生的科学技能、环保意识和健康生活方式。",
+            "function": "引入项目、创办者及项目目标"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-b-2",
+            "summary": "学生生活在缺乏新鲜食物和绿地的社区，习惯吃零食喝饮料，起初认为蔬菜、泥土、昆虫都很糟糕，但大多数人愿意尝试新事物。",
+            "function": "描述学生背景与起初的抵触心理"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-b-3",
+            "summary": "Urban Sprouts 的课程包含土壤测试、花种解剖、品尝果蔬和园艺劳动等动手实验，学生每年数次烹饪自己种的蔬菜，偶尔为全校制作沙拉。",
+            "function": "说明项目的具体课程与活动内容"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-b-4",
+            "summary": "项目评估显示孩子们因此吃更多蔬菜，有学生回家与父母交流后全家饮食方式都发生了改变。",
+            "function": "用评估结果与反馈证明项目在饮食上的成效"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-b-5",
+            "summary": "项目益处超越营养：有学生对园艺产生兴趣并在家种菜，园艺还对有情绪管理问题的特殊教育学生起到舒缓作用，让他们感到成功。",
+            "function": "阐述项目超越营养层面的更广泛影响"
+          }
+        ]
+      }
+    },
+    "group-2023-ii-reading-c": {
+      "overview": "本文是一本名为《Reading Art: Art for Book Lovers》画册的导言，介绍该书如何用近三百件艺术作品来呈现“书与阅读”这一日常主题，并探讨书籍在艺术中的象征意义以及纸质书在数字时代依然不可替代的价值。",
+      "discourseStructure": {
+        "summary": "全文先点明本书以“书”为主题、用艺术作品呈现跨越文化与时代的共通人性；接着说明所选作品如何编排以凸显代际、不同时代之间的联系；再谈书籍在绘画中的象征作用及其作为艺术原材料的演变；最后由 e-reader 引出纸质书在 21 世纪仍具交互性与私密性的论点。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-ii-reading-c-1",
+            "summary": "介绍《Reading Art》这本书以“书”这一日常物件为主题，汇集近三百件世界各地博物馆的艺术作品，呈现跨越文化与时间的共通人性。",
+            "function": "开篇点题，引入本书的主题与选材，奠定全文基调。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-c-2",
+            "summary": "说明书中作品的编排强调不同时代与文化间的联系，描绘儿童学习阅读、成人独自沉浸阅读等场景，这些画面虽古老却引发共鸣。",
+            "function": "承接主题，具体说明所选作品的内容与编排意图。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-c-3",
+            "summary": "阐述书籍在绘画中可象征人物的才智、财富或信仰；并梳理书从印刷术普及前的珍贵之物到如今廉价乃至被艺术家用作创作原材料的演变。",
+            "function": "拓展主题，论述书籍在艺术中的象征意义及其角色变化。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-c-4",
+            "summary": "指出通讯技术曾被认为会使纸质书过时，但纸质书仍像电子阅读器一样具有交互性，并且能提供一种完全私密的“离线”体验。",
+            "function": "升华主题，对比电子阅读器，论证纸质书在数字时代依然不可替代。"
+          }
+        ]
+      }
+    },
+    "group-2023-ii-reading-d": {
+      "overview": "本文是一篇科普说明文，介绍了一项关于城市自然环境对人类福祉重要性的研究。研究团队通过编码公园游客的自然体验，提炼出一套“自然语言”，帮助人们识别并参与对自己最有意义的自然活动，并强调要保护自然以便人与自然互动。",
+      "discourseStructure": {
+        "summary": "全文按“提出现象→引出研究→研究方法→研究发现→发现的应用价值→研究者总结呼吁”的顺序展开。先指出城市中难觅野生自然这一现象，再引入新研究，介绍研究方法与发现的“自然语言”，最后由作者举例说明其应用并以研究者的话点明保护自然的必要性。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-ii-reading-d-1",
+            "summary": "随着城市扩张，城市居民越来越难以接触自然，城市中相对野生的地方很罕见。",
+            "function": "提出现象，引入话题，制造问题背景。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-d-2",
+            "summary": "过往研究表明自然对人有健康益处，而一项新研究显示城市中的野生自然对人类福祉极为重要。",
+            "function": "承接背景，引出本文聚焦的新研究。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-d-3",
+            "summary": "研究团队调查城市公园游客，请其在线提交与自然的有意义互动，再将体验编码归入不同类别。",
+            "function": "介绍研究方法（调查与编码）。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-d-4",
+            "summary": "在320份提交中浮现出被研究者称为“自然语言”的类别模式，其中六类被最常提及。",
+            "function": "呈现研究发现，提出“自然语言”概念。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-d-5",
+            "summary": "为每种自然体验命名形成可用语言，帮助人们识别并参与最满意的活动，并举例说明同一互动可有不同形式。",
+            "function": "阐释发现的应用价值并举例说明。"
+          },
+          {
+            "paragraphId": "para-2023-ii-reading-d-6",
+            "summary": "研究资深作者Peter Kahn指出，要把人与自然的互动带回日常生活，就需要保护自然以便与之互动。",
+            "function": "引用专家观点，总结升华，点明保护自然的必要性。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2023-ii-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "比较四个项目的开始日期，找出最早开始的项目。",
+      "stemTranslationZh": "四个项目中哪一个开始得最早？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "摄影工作坊。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Photography Workshops (June 19 & July 10)",
+            "sourceHighlight": "June 19",
+            "optionText": "Photography Workshops.",
+            "optionHighlight": "Photography Workshops.",
+            "explanation": "摄影工作坊最早一场为 June 19，晚于其他项目，并非最早开始的项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-8",
+              "quote": "Photography Workshops (June 19 & July 10)",
+              "anchor": "摄影工作坊 June 19 开始"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "少年护林员野生动物运动会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Junior Ranger Wildlife Olympics (June 5 to August 21)",
+            "sourceHighlight": "June 5",
+            "optionText": "Junior Ranger Wildlife Olympics.",
+            "optionHighlight": "Junior Ranger Wildlife Olympics.",
+            "explanation": "该项目 June 5 开始，晚于 Experiencing Wildlife in Yellowstone 的 May 26，不是最早开始的项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-4",
+              "quote": "Junior Ranger Wildlife Olympics (June 5 to August 21)",
+              "anchor": "运动会 June 5 开始"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Artist Point 峡谷讲解。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Canyon Talks at Artist Point (June 9 to September 2)",
+            "sourceHighlight": "June 9",
+            "optionText": "Canyon Talks at Artist Point.",
+            "optionHighlight": "Canyon Talks at Artist Point.",
+            "explanation": "该项目 June 9 开始，晚于 Experiencing Wildlife in Yellowstone 的 May 26，不是最早开始的项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-6",
+              "quote": "Canyon Talks at Artist Point (June 9 to September 2)",
+              "anchor": "峡谷讲解 June 9 开始"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "黄石野生动物体验。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-a-2",
+              "quote": "Experiencing Wildlife in Yellowstone (May 26 to September 2)",
+              "anchor": "该项目 May 26 开始，是四者中最早"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "begins the earliest",
+          "sourceRole": "stem",
+          "targetText": "Experiencing Wildlife in Yellowstone (May 26 to September 2)",
+          "targetParagraphId": "para-2023-ii-reading-a-2",
+          "relationType": "locationCue",
+          "note": "题干用 begins the earliest 比较各项目开始时间，需定位每个项目括号内的起始日期；该项目起始日 May 26 早于其余项目（June 5 / June 9 / June 19），故最早。"
+        },
+        {
+          "sourceText": "Experiencing Wildlife in Yellowstone.",
+          "sourceRole": "correctOption",
+          "targetText": "Experiencing Wildlife in Yellowstone (May 26 to September 2)",
+          "targetParagraphId": "para-2023-ii-reading-a-2",
+          "relationType": "locationCue",
+          "note": "正确选项的项目名与原文标题一字对应，定位到其 May 26 的起始日期。"
+        }
+      ]
+    },
+    "q-2023-ii-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Artist Point 简短讲解（Canyon Talks）的主题内容。",
+      "stemTranslationZh": "在 Artist Point 进行的简短讲解是关于什么的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "著名艺术家的作品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Discover why artists and photographers continue to be drawn to this special place.",
+            "optionText": "Works of famous artists.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文出现的 artists 一词制造干扰；原文说的是探究为何艺术家与摄影师被此地吸引，并非讲解著名艺术家的作品（works）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-7",
+              "quote": "Discover why artists and photographers continue to be drawn to this special place.",
+              "anchor": "原文提到 artists 但非讲其作品"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "野生动物保护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Protection of wild animals.",
+            "explanation": "原文未提及野生动物保护，属无中生有；该主题属于其他项目而非 Artist Point 的讲解。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "基础摄影技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Enhance your photography skills — join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+            "sourceEntity": "Photography Workshops",
+            "optionText": "Basic photography skills.",
+            "optionEntity": "the short talk at Artist Point",
+            "explanation": "摄影技巧是 Photography Workshops 项目的内容，与本题询问的 Artist Point 简短讲解（Canyon Talks）属于不同项目，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-9",
+              "quote": "Enhance your photography skills",
+              "anchor": "摄影技巧属另一项目"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "峡谷地区的历史。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-a-7",
+              "quote": "enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history",
+              "anchor": "讲解内容包含该地区自然与人文历史"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the short talk at Artist Point",
+          "sourceRole": "stem",
+          "targetText": "Meet on the lower platform at Artist Point on the South Rim Drive for this short talk.",
+          "targetParagraphId": "para-2023-ii-reading-a-7",
+          "relationType": "locationCue",
+          "note": "题干 the short talk at Artist Point 对应原文 this short talk 与 Artist Point，定位到 Canyon Talks at Artist Point 项目段落。"
+        },
+        {
+          "sourceText": "History of the canyon area.",
+          "sourceRole": "correctOption",
+          "targetText": "learning about the area’s natural and human history",
+          "targetParagraphId": "para-2023-ii-reading-a-7",
+          "relationType": "paraphrase",
+          "note": "选项 History of the canyon area 是对原文 the area’s natural and human history（关于峡谷区域的自然与人文历史）的同义替换。"
+        }
+      ]
+    },
+    "q-2023-ii-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 7 月 10 日摄影工作坊的集合地点。",
+      "stemTranslationZh": "参加者将在哪里集合参加 7 月 10 日的摄影工作坊？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Artist Point。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "6/19 — Waterfalls &Wide Angles: meet at Artist Point.",
+            "sourceEntity": "6/19 workshop",
+            "optionText": "Artist Point.",
+            "optionEntity": "the July 10 photography workshop",
+            "explanation": "Artist Point 是 6 月 19 日（6/19）那场工作坊的集合地点，与本题询问的 7 月 10 日场次对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-10",
+              "quote": "6/19 — Waterfalls &Wide Angles: meet at Artist Point.",
+              "anchor": "Artist Point 属 6/19 场次"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Washburn Trailhead。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-a-11",
+              "quote": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+              "anchor": "7/10 场次在 Washburn Trailhead 集合"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Canyon Village Store。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Meet at the Canyon Village Store.",
+            "sourceEntity": "Experiencing Wildlife in Yellowstone",
+            "optionText": "Canyon Village Store.",
+            "optionEntity": "the July 10 photography workshop",
+            "explanation": "Canyon Village Store 是 Experiencing Wildlife in Yellowstone 项目的集合地点，与 7 月 10 日摄影工作坊对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-3",
+              "quote": "Meet at the Canyon Village Store.",
+              "anchor": "Canyon Village Store 属另一项目"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "游客教育中心（Visitor Education Center）。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Meet in front of the Visitor Education Center.",
+            "sourceEntity": "Junior Ranger Wildlife Olympics",
+            "optionText": "Visitor Education Center.",
+            "optionEntity": "the July 10 photography workshop",
+            "explanation": "Visitor Education Center 是 Junior Ranger Wildlife Olympics 项目的集合地点，与 7 月 10 日摄影工作坊对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-a-5",
+              "quote": "Meet in front of the Visitor Education Center.",
+              "anchor": "Visitor Education Center 属另一项目"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the July 10 photography workshop",
+          "sourceRole": "stem",
+          "targetText": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+          "targetParagraphId": "para-2023-ii-reading-a-11",
+          "relationType": "locationCue",
+          "note": "题干 July 10 对应原文日期写法 7/10，定位到该场摄影工作坊的集合信息。"
+        },
+        {
+          "sourceText": "Washburn Trailhead.",
+          "sourceRole": "correctOption",
+          "targetText": "meet at Washburn Trailhead in Chittenden parking area",
+          "targetParagraphId": "para-2023-ii-reading-a-11",
+          "relationType": "locationCue",
+          "note": "选项 Washburn Trailhead 直接对应原文 meet at Washburn Trailhead，即 7/10 场次的集合地点。"
+        }
+      ]
+    },
+    "q-2023-ii-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Abby Jaramillo 身份信息的细节定位。",
+      "stemTranslationZh": "关于 Abby Jaramillo，我们可以知道什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她曾经是一名卫生工作者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She used to be a health worker.",
+            "explanation": "原文未提及 Jaramillo 曾从事卫生工作；她的身份是与另一位教师一起创办园艺项目的老师。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她在一个低收入家庭长大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "who with another teacher started Urban Sprouts, a school garden program at four low-income schools",
+            "sourceEntity": "four low-income schools",
+            "optionText": "She grew up in a low-income family.",
+            "optionEntity": "a low-income family",
+            "explanation": "原文中的 low-income 修饰的是项目所在的 schools（学校），而非 Jaramillo 本人的家庭；选项把对象错配到她的成长家庭。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-1",
+              "quote": "a school garden program at four low-income schools",
+              "anchor": "low-income 修饰学校"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她拥有一家快餐店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "fast food restaurants outnumber grocery stores",
+            "optionText": "She owns a fast food restaurant.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文出现过的 fast food restaurants 这一词钩进行干扰；原文说的是该社区快餐店数量多于杂货店，并未说 Jaramillo 拥有快餐店。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-2",
+              "quote": "fast food restaurants outnumber grocery stores",
+              "anchor": "社区快餐店多"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她是 Urban Sprouts 项目的发起人之一。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-b-1",
+              "quote": "who with another teacher started Urban Sprouts, a school garden program at four low-income schools",
+              "anchor": "与另一位教师创办了 Urban Sprouts"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She is an initiator of Urban Sprouts.",
+          "sourceRole": "correctOption",
+          "targetText": "who with another teacher started Urban Sprouts",
+          "targetParagraphId": "para-2023-ii-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项 initiator of Urban Sprouts 是对原文 with another teacher started Urban Sprouts 的同义替换，started 对应 initiator（发起人）。"
+        }
+      ]
+    },
+    "q-2023-ii-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查项目起步阶段 Jaramillo 面临的问题这一细节。",
+      "stemTranslationZh": "在项目开始时，Jaramillo 面临的一个问题是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "孩子们的父母不信任她。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The kids' parents distrusted her.",
+            "explanation": "原文未提及家长不信任 Jaramillo；提到家长之处是学生回家与父母交流后改变饮食，属正面内容。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "学生几乎没有时间上她的课。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Students had little time for her classes.",
+            "explanation": "原文未提及学生没有时间上课；起步阶段的问题是部分学生害怕昆虫、嫌弃泥土。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有些孩子不喜欢园艺劳作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-b-2",
+              "quote": "Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
+              "anchor": "部分学生起初害怕昆虫、嫌弃泥土"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-ii-reading-b-1",
+              "quote": "Turning soil, pulling weeds, and harvesting cabbage sound like tough work for middle and high school kids. And at first it is",
+              "anchor": "园艺劳作起初很辛苦"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "没有地方建校园菜园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find",
+            "sourceEntity": "neighborhoods",
+            "optionText": "There was no space for school gardens.",
+            "optionEntity": "space for school gardens",
+            "explanation": "原文说的是学生所在社区缺乏绿地（green space），并非学校没有建菜园的空间；选项把缺乏的对象错配为校园菜园用地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-2",
+              "quote": "live in neighborhoods where fresh food and green space are not easy to find",
+              "anchor": "社区缺乏绿地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Some kids disliked garden work.",
+          "sourceRole": "correctOption",
+          "targetText": "some are initially scared of the insects and turned off by the dirt",
+          "targetParagraphId": "para-2023-ii-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "选项 disliked garden work 是对原文 scared of the insects and turned off by the dirt 的概括性同义替换，turned off by 对应 disliked。"
+        }
+      ]
+    },
+    "q-2023-ii-026": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对项目影响范围的整体推断，需结合多段影响信息归纳其影响是深远广泛的。",
+      "stemTranslationZh": "下列哪一项最能描述该项目的影响？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "影响深远的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-b-5",
+              "quote": "She adds that the program’s benefits go beyond nutrition.",
+              "anchor": "项目益处超越营养"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-ii-reading-b-4",
+              "quote": "We have students who say they went home and talked to their parents and now they’re eating differently",
+              "anchor": "影响延伸到家庭"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "可预料的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Predictable.",
+            "explanation": "原文未将项目影响描述为可预料的；文中强调益处超越营养、惠及家庭与特殊教育学生，重点在影响之广而非可预测性。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "短暂的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "She adds that the program’s benefits go beyond nutrition.",
+            "sourceHighlight": "go beyond nutrition",
+            "optionText": "Short-lived.",
+            "optionHighlight": "Short-lived",
+            "explanation": "原文表明项目益处持续延伸、超越营养，并影响家庭和特殊教育学生，与选项 short-lived（短暂的）含义相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-5",
+              "quote": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+              "anchor": "学生在家继续种菜，影响延续"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "难以辨识的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+            "sourceHighlight": "Program evaluations show",
+            "optionText": "Unidentifiable.",
+            "optionHighlight": "Unidentifiable",
+            "explanation": "原文有项目评估明确显示成效，影响是可辨识、可衡量的，与选项 Unidentifiable（难以辨识）相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-4",
+              "quote": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+              "anchor": "评估显示明确成效"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Far-reaching.",
+          "sourceRole": "correctOption",
+          "targetText": "the program’s benefits go beyond nutrition",
+          "targetParagraphId": "para-2023-ii-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "选项 Far-reaching（影响深远）对应原文 benefits go beyond nutrition 以及随后家庭、特殊教育学生层面的扩展影响，体现影响范围之广。"
+        }
+      ]
+    },
+    "q-2023-ii-027": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查对全文主旨的概括，选择最贴切的标题。",
+      "stemTranslationZh": "下列哪一项可以作为本文合适的标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "拯救校园菜园",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a school garden program at four low-income schools",
+            "optionText": "Rescuing School Gardens",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文 school garden 词族进行干扰；但全文重点是让学生爱上蔬菜与园艺，并非拯救濒危的校园菜园，原文无 rescue 之意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-1",
+              "quote": "a school garden program at four low-income schools",
+              "anchor": "school garden 词钩"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "体验乡村生活",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Experiencing Country Life",
+            "explanation": "原文讲的是低收入城市学校的园艺项目，并非乡村生活体验；原文未提及 country life。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "培养蔬菜爱好者",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-b-4",
+              "quote": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+              "anchor": "学生因项目更爱吃蔬菜"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-ii-reading-b-2",
+              "quote": "They come to us thinking vegetables are awful, dirt is awful, insects are awful.",
+              "anchor": "学生从厌恶蔬菜起步"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "改变当地景观",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+            "sourceHighlight": "start their own vegetable gardens",
+            "optionText": "Changing Local Landscape",
+            "optionHighlight": "Changing Local Landscape",
+            "explanation": "原文仅提到个别学生在家种菜，远未达到改变当地整体景观的程度；选项把局部行为过度泛化为改变 local landscape。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-b-5",
+              "quote": "they bring home seeds to start their own vegetable gardens",
+              "anchor": "个别学生在家种菜"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Growing Vegetable Lovers",
+          "sourceRole": "correctOption",
+          "targetText": "kids eat more vegetables as a result of the classes",
+          "targetParagraphId": "para-2023-ii-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "标题 Growing Vegetable Lovers 概括全文主旨：学生从 thinking vegetables are awful 转变为 eat more vegetables，项目培养出了蔬菜爱好者。"
+        }
+      ]
+    },
+    "q-2023-ii-028": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查文章出处推断，需根据全文的内容与语气判断这段文字最可能选自何处。",
+      "stemTranslationZh": "这段文字最可能选自哪里？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本书的导言。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-c-1",
+              "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world.",
+              "anchor": "开篇介绍《Reading Art》这本书"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-ii-reading-c-2",
+              "quote": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures.",
+              "anchor": "称本书为“book of books”并介绍其编排"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一篇关于写作艺术的文章。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An essay on the art of writing.",
+            "explanation": "原文谈的是“阅读”与书籍在艺术中的呈现，并未涉及“写作艺术（the art of writing）”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一本博物馆指南。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "artworks from museums around the world",
+            "optionText": "A guidebook to a museum.",
+            "matchType": "exact",
+            "relationNote": "原文出现 museums 一词，仅指作品的收藏来源，并非说本文是某博物馆的导览指南，利用原文词钩 museums 干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-1",
+              "quote": "almost three hundred artworks from museums around the world",
+              "anchor": "作品来自世界各地博物馆"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇对现代绘画的评论。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks — transforming covers, pages or even complete volumes into paintings and sculptures.",
+            "sourceHighlight": "transforming covers, pages or even complete volumes into paintings and sculptures",
+            "optionText": "A review of modern paintings.",
+            "optionHighlight": "A review of modern paintings",
+            "explanation": "原文只是提及艺术家把书改造成绘画与雕塑等作品，全文并非专门评论“现代绘画”，把整篇定性为现代绘画评论是范围放大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-3",
+              "quote": "transforming covers, pages or even complete volumes into paintings and sculptures",
+              "anchor": "把书改造为绘画与雕塑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "An introduction to a book.",
+          "sourceRole": "correctOption",
+          "targetText": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world.",
+          "targetParagraphId": "para-2023-ii-reading-c-1",
+          "relationType": "locationCue",
+          "note": "正确选项 An introduction to a book 对应原文开篇直接介绍《Reading Art》这本书的内容与选材，是典型的图书导言（introduction）写法。"
+        },
+        {
+          "sourceText": "An introduction to a book.",
+          "sourceRole": "correctOption",
+          "targetText": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures.",
+          "targetParagraphId": "para-2023-ii-reading-c-2",
+          "relationType": "locationCue",
+          "note": "原文以 “book of books” 自指本书，并说明 artworks are selected and arranged，正是导言（introduction）介绍一本书编选思路的典型表达。"
+        }
+      ]
+    },
+    "q-2023-ii-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对所选艺术作品主题的细节理解，需定位本书作品所呈现的核心内容。",
+      "stemTranslationZh": "所选的艺术作品是关于什么的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "财富与才智。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "demonstrate the intellect (才智) , wealth or faith of the subject",
+            "optionText": "Wealth and intellect.",
+            "matchType": "exact",
+            "relationNote": "原文 intellect、wealth 只是书籍在绘画中可象征的人物属性之一，并非全书作品的主题，利用 wealth、intellect 原词钩子干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-3",
+              "quote": "Books themselves may be used symbolically in paintings to demonstrate the intellect (才智) , wealth or faith of the subject.",
+              "anchor": "书可象征人物的才智、财富或信仰"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "家庭与学校。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "We see scenes of children learning to read at home or at school, with the book as a focus for relations between the generations.",
+            "sourceHighlight": "children learning to read at home or at school",
+            "optionText": "Home and school.",
+            "optionHighlight": "Home and school",
+            "explanation": "home、school 只是儿童学习阅读的具体场景之一，作品主题是“书与阅读”，把主题缩小成“家庭与学校”以偏概全。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-2",
+              "quote": "We see scenes of children learning to read at home or at school",
+              "anchor": "在家或在校学习阅读的场景"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "书籍与阅读。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-c-1",
+              "quote": "In artists’ representations of books and reading, we see moments of shared humanity that go beyond culture and time.",
+              "anchor": "艺术家对书与阅读的呈现"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-ii-reading-c-1",
+              "quote": "the book, represented here in almost three hundred artworks from museums around the world",
+              "anchor": "以书为主题的近三百件作品"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "工作与休闲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "lost in a moment of leisure",
+            "optionText": "Work and leisure.",
+            "matchType": "exact",
+            "relationNote": "原文 leisure 仅描述成人阅读时的一种状态，且全文未提及 work，借 leisure 原词并搭配无据的 work 进行干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-2",
+              "quote": "lost in a moment of leisure",
+              "anchor": "沉浸于闲暇时刻"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Books and reading.",
+          "sourceRole": "correctOption",
+          "targetText": "In artists’ representations of books and reading, we see moments of shared humanity that go beyond culture and time.",
+          "targetParagraphId": "para-2023-ii-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确选项 Books and reading 直接对应原文 books and reading，是全书作品所呈现的核心主题。"
+        }
+      ]
+    },
+    "q-2023-ii-030": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查对划线短语 relate to 的词义推测，需结合上下文判断其在句中的含义。",
+      "stemTranslationZh": "第二段中划线词 “relate to” 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "理解。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-c-2",
+              "quote": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to.",
+              "anchor": "我们都能理解（产生共鸣）的画面"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-ii-reading-c-2",
+              "quote": "but they record moments we can all relate to",
+              "anchor": "这些画面记录的是我们都能感同身受的瞬间"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "绘画。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "These scenes may have been painted hundreds of years ago",
+            "optionText": "Paint.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 painted 与选项 Paint 同属一个词族，但 painted 描述的是这些场景被“画”出来，并非划线短语 relate to 的含义，属词族干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-2",
+              "quote": "These scenes may have been painted hundreds of years ago",
+              "anchor": "这些场景几百年前被画出"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "抓住。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Seize.",
+            "explanation": "原文并无任何支持 “抓住（Seize）” 这一含义的线索，relate to 在句中表示“产生共鸣、理解”，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "改造。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "transforming covers, pages or even complete volumes into paintings and sculptures",
+            "optionText": "Transform.",
+            "matchType": "wordFamily",
+            "relationNote": "transforming 出现在第三段描述艺术家把书改造成作品，与选项 Transform 同词族，但与第二段划线短语 relate to 无关，属跨段词族干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-3",
+              "quote": "transforming covers, pages or even complete volumes into paintings and sculptures",
+              "anchor": "把书改造成绘画与雕塑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "relate to",
+          "sourceRole": "stem",
+          "targetText": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to.",
+          "targetParagraphId": "para-2023-ii-reading-c-2",
+          "relationType": "locationCue",
+          "note": "题干 relate to 出现在 moments we can all relate to，由前文 but 转折及“几百年前的画面如今仍能记录我们共通的瞬间”可推断 relate to 意为“理解、感同身受（Understand）”。"
+        }
+      ]
+    },
+    "q-2023-ii-031": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者写作意图，需判断作者借提及 e-reader 想要表达的观点。",
+      "stemTranslationZh": "作者提到电子阅读器（e-reader）想要说明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "纸质书并未完全过时。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-c-4",
+              "quote": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+              "anchor": "纸质书仍像电子阅读器一样具交互性"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-ii-reading-c-4",
+              "quote": "a printed book still offers the chance of a wholly private, “off-line” activity",
+              "anchor": "纸质书仍能提供完全私密的离线体验"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "技术改变了我们的阅读方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Continued developments in communication technologies were once believed to make the printed page outdated.",
+            "optionText": "Technology has changed the way we read.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 technologies 与选项 Technology 同词族，但作者意在强调纸质书未过时，而非论证技术改变了阅读方式，属词族干扰偏离重点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-4",
+              "quote": "Continued developments in communication technologies were once believed to make the printed page outdated.",
+              "anchor": "通讯技术曾被认为会使纸质书过时"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "我们 21 世纪的生活是网络化的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "in contrast to our increasingly networked lives where the information we consume is monitored and tracked",
+            "optionText": "Our lives in the 21st century are networked.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 networked lives 只是作者用来反衬纸质书私密性的背景，与提及 e-reader 的意图无关，借 networked 原词钩子干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-c-4",
+              "quote": "our increasingly networked lives where the information we consume is monitored and tracked",
+              "anchor": "日益网络化、信息被监控追踪的生活"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如今人们很少有耐心阅读。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "People now rarely have the patience to read.",
+            "explanation": "原文未提及人们缺乏阅读耐心，作者的重点是纸质书仍具交互性与私密价值，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The printed book is not totally out of date.",
+          "sourceRole": "correctOption",
+          "targetText": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "targetParagraphId": "para-2023-ii-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "正确选项 not totally out of date 对应原文 but it remains as interactive as any battery-powered e-reader，作者借 e-reader 作对比，说明纸质书仍具交互性、并未完全过时。"
+        }
+      ]
+    },
+    "q-2023-ii-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查文章开头作者描述的现象，需定位首段对城市与自然关系的概括。",
+      "stemTranslationZh": "作者在文章开头描述了什么现象？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "口袋公园如今很受欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "there might be a pocket park near where you live",
+            "optionText": "Pocket parks are now popular.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文出现的 pocket park 一词做诱饵；原文只是说“如果幸运也许附近有口袋公园”，并未说口袋公园“受欢迎/popular”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-1",
+              "quote": "If you’re lucky, there might be a pocket park near where you live",
+              "anchor": "口袋公园只是“如果幸运”才有"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在城市里很难找到野生自然。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-d-1",
+              "quote": "it’s unusual to find places in a city that are relatively wild",
+              "anchor": "城市中很难找到相对野生的地方"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-ii-reading-d-1",
+              "quote": "access to nature for people living in urban areas is becoming harder to find",
+              "anchor": "城市居民接触自然越来越难"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "许多城市人口过多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "As cities balloon with growth, access to nature for people living in urban areas is becoming harder to find.",
+            "sourceHighlight": "As cities balloon with growth",
+            "optionText": "Many cities are overpopulated.",
+            "optionHighlight": "overpopulated",
+            "explanation": "原文只说城市“随增长而膨胀（balloon with growth）”，借此说明接触自然变难；选项夸大并偷换为“人口过剩（overpopulated）”，超出原文所述范围。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-1",
+              "quote": "As cities balloon with growth",
+              "anchor": "城市膨胀≠人口过剩"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人们喜欢住在靠近自然的地方。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "access to nature for people living in urban areas is becoming harder to find",
+            "sourceHighlight": "harder to find",
+            "optionText": "People enjoy living close to nature.",
+            "optionHighlight": "enjoy living close to nature",
+            "explanation": "原文说城市居民接触自然“越来越难（harder to find）”，是缺乏与遗憾的语气；选项却说人们“喜欢住在靠近自然的地方”，与原文趋势相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-1",
+              "quote": "access to nature for people living in urban areas is becoming harder to find",
+              "anchor": "接触自然变难，而非享受亲近自然"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Wild nature is hard to find in cities.",
+          "sourceRole": "correctOption",
+          "targetText": "it’s unusual to find places in a city that are relatively wild",
+          "targetParagraphId": "para-2023-ii-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项 hard to find in cities 是原文 unusual to find places in a city 的同义替换，wild nature 对应 places ... that are relatively wild。"
+        }
+      ]
+    },
+    "q-2023-ii-033": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查研究者将提交内容编码归类的目的，需结合第3、4段对编码与“自然语言”模式的描述推断。",
+      "stemTranslationZh": "研究者为什么把参与者提交的内容编码归入不同类别？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了比较不同类型的公园游客。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "coding (编码) experiences into different categories",
+            "sourceEntity": "experiences",
+            "optionText": "To compare different types of park-goers.",
+            "optionEntity": "different types of park-goers",
+            "explanation": "原文编码的对象是“体验（experiences）”被归入不同类别，而非比较不同类型的“公园游客（park-goers）”，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-3",
+              "quote": "coding (编码) experiences into different categories",
+              "anchor": "编码对象是体验，不是游客"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了解释公园为何吸引游客。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To explain why the park attracts tourists.",
+            "explanation": "原文未提及编码是为了解释公园为何吸引游客（attract tourists），属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了分析公园的主要特征。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "a meaningful interaction they had with nature in the park",
+            "sourceEntity": "interaction they had with nature",
+            "optionText": "To analyze the main features of the park.",
+            "optionEntity": "the main features of the park",
+            "explanation": "研究分析的是人们与自然的“有意义互动（interaction with nature）”，而非公园本身的“主要特征（features of the park）”，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-3",
+              "quote": "a meaningful interaction they had with nature in the park",
+              "anchor": "分析的是人与自然的互动"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了在游客的总结中发现模式。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-d-4",
+              "quote": "a pattern of categories the researchers call a “nature language” began to emerge",
+              "anchor": "类别模式（自然语言）开始浮现"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-ii-reading-d-3",
+              "quote": "coding (编码) experiences into different categories",
+              "anchor": "编码体验以归类"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To find patterns in the visitors' summaries.",
+          "sourceRole": "correctOption",
+          "targetText": "a pattern of categories the researchers call a “nature language” began to emerge",
+          "targetParagraphId": "para-2023-ii-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 find patterns 对应原文 a pattern of categories ... began to emerge；visitors' summaries 对应游客提交的 written summary，编码归类正是为让模式浮现。"
+        },
+        {
+          "sourceText": "submit a written summary",
+          "sourceRole": "stem",
+          "targetText": "asking them to submit a written summary online of a meaningful interaction they had with nature in the park",
+          "targetParagraphId": "para-2023-ii-reading-d-3",
+          "relationType": "locationCue",
+          "note": "题干 participant submissions 定位至第3段游客提交 written summary，再经编码归类以寻找模式。"
+        }
+      ]
+    },
+    "q-2023-ii-034": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对第5段例子的理解与推断，需把握“同一自然体验可在不同情境下以不同形式呈现”这一要点。",
+      "stemTranslationZh": "我们能从第五段所举的例子中得知什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "步行是接触自然的最佳方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park",
+            "sourceHighlight": "might be satisfying",
+            "optionText": "Walking is the best way to gain access to nature.",
+            "optionHighlight": "the best way",
+            "explanation": "原文只是举例说步行体验“可能令人满意（might be satisfying）”，并未断言步行是接触自然的“最佳方式（the best way）”，选项以偏概全、过度拔高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-5",
+              "quote": "might be satisfying for a young professional on a weekend hike in the park",
+              "anchor": "只是“可能满意”，非“最佳方式”"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "年轻人太忙，无暇与自然互动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break",
+            "sourceHighlight": "can enjoy a more domestic form of this interaction",
+            "optionText": "Young people are too busy to interact with nature.",
+            "optionHighlight": "too busy to interact with nature",
+            "explanation": "原文说年轻人即使在工作日午休也“能够（can enjoy）”以更日常的形式与自然互动，恰恰说明他们能互动；选项却说他们太忙“无法互动”，与原文相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-5",
+              "quote": "they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break",
+              "anchor": "工作日仍能以日常形式互动"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "同一种自然体验会呈现出不同的形式。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-d-5",
+              "quote": "Back downtown during a workday, they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break.",
+              "anchor": "同一互动在市区午休时呈现更日常的形式"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-ii-reading-d-5",
+              "quote": "the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park",
+              "anchor": "周末沿水边步行是同一体验的另一种形式"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "自然语言能提升工作表现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The nature language enhances work performance.",
+            "explanation": "原文未提及自然语言能提升“工作表现（work performance）”，第5段只谈同一体验的不同形式，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The same nature experience takes different forms.",
+          "sourceRole": "correctOption",
+          "targetText": "they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break",
+          "targetParagraphId": "para-2023-ii-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "选项 takes different forms 对应原文 a more domestic form of this interaction；同一 walking along the edge of water 体验从周末徒步转为午休沿喷泉散步，正是同一体验的不同形式。"
+        }
+      ]
+    },
+    "q-2023-ii-035": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查Kahn观点中“在与自然互动之前应做之事”，需定位末段引语中的条件关系。",
+      "stemTranslationZh": "根据Kahn的说法，在我们能够与自然互动之前应该做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "语言研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "We’re trying to generate a language that helps bring the human-nature interactions back into our daily lives.",
+            "optionText": "Language study.",
+            "matchType": "wordFamily",
+            "relationNote": "选项用原文反复出现的 language 设钩；原文说要“生成一种语言（generate a language）”以助互动，但与自然互动“之前”需做的是保护自然，而非“语言研究（language study）”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-ii-reading-d-6",
+              "quote": "We’re trying to generate a language that helps bring the human-nature interactions back into our daily lives.",
+              "anchor": "language 是诱饵词，非互动前提"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "环境保护。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-ii-reading-d-6",
+              "quote": "we also need to protect nature so that we can interact with it",
+              "anchor": "需先保护自然才能与之互动"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "公众教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Public education.",
+            "explanation": "原文未提及与自然互动之前需要进行“公众教育（public education）”，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "跨文化交流。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Intercultural communication.",
+            "explanation": "原文未提及“跨文化交流（intercultural communication）”，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Environmental conservation.",
+          "sourceRole": "correctOption",
+          "targetText": "we also need to protect nature so that we can interact with it",
+          "targetParagraphId": "para-2023-ii-reading-d-6",
+          "relationType": "paraphrase",
+          "note": "选项 Environmental conservation 是原文 protect nature 的同义替换；so that we can interact with it 表明保护自然是与自然互动的前提。"
+        }
+      ]
+    }
+  }
+}

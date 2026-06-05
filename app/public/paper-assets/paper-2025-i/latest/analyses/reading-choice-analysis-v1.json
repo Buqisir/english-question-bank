@@ -1,0 +1,1447 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2025-i",
+  "sourceAssetVersion": 3,
+  "targetGroups": [
+    "group-2025-i-reading-a",
+    "group-2025-i-reading-b",
+    "group-2025-i-reading-c",
+    "group-2025-i-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8-1m",
+    "reviewedBy": "import-pilot",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2025-i-reading-a": {
+      "overview": "本文是一篇说明性的科普图文，介绍交通运输在全球碳排放中的占比，并分模式（飞机、汽车、火车、卡车、轮船）说明各自的绿色燃料/减碳方案，最后引用专家观点强调可再生能源的需求与发展。",
+      "discourseStructure": {
+        "summary": "标题点题→引出交通运输是碳排放大户并给出2018年各运输方式排放占比图→分模式逐一说明减碳方案及难易→以专家观点收尾，强调加快绿色能源发展。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2025-i-reading-a-1",
+            "summary": "标题：飞机、火车与汽车的绿色化。",
+            "function": "标题，点明全文主题——交通运输的绿色转型。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-a-2",
+            "summary": "指出运输是全球碳排放的重要来源，约占能源相关温室气体排放的四分之一，并引出2018年各运输方式排放占比的图表。",
+            "function": "引入背景与数据，说明问题规模并指向随后的排放占比图。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-a-3",
+            "summary": "说明运输燃料需具备绿色、便宜、强劲、轻便、安全等要求，并分飞机、汽车、火车、卡车、轮船五类逐一给出减碳方案及其难点。",
+            "function": "主体部分，分模式列举绿色燃料解决方案并比较各方案的难易与限制。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-a-4",
+            "summary": "引用机械工程师Keith Wipke的观点，指出能源变革是全球性的，2050年电力需求或翻倍，但可再生能源能胜任，呼吁加快绿色能源发展。",
+            "function": "结尾，借专家观点表态，强调加快发展可再生能源。"
+          }
+        ]
+      }
+    },
+    "group-2025-i-reading-b": {
+      "overview": "本文是一篇记叙文，作者以九年级写作课教师的身份回顾教学经历：从学生第一篇命题作文的失败，到调整题目后学生写作热情与作品质量的飞跃，最终领悟到写作真正强大的意义在于连接人与人、让人理解彼此、懂得为人之道。",
+      "discourseStructure": {
+        "summary": "全文按时间与认识递进展开：先以学生笔下生动的人物引出作者的好奇，再叙述第一篇命题作文的失败及原因，接着叙述换题后学生表现的惊人转变，最后升华到对写作意义的全新感悟。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2025-i-reading-b-1",
+            "summary": "作者回忆在九年级写作课上读到学生笔下的牛仔、严父、现代朱丽叶等人物，惊叹于学生对这些人物的熟悉程度。",
+            "function": "开篇引入：以学生创作的生动人物设置悬念，激发读者好奇，引出下文。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-b-2",
+            "summary": "学生第一篇以“写作为何重要”为题的作文写得很差，作者起初震惊，随后意识到问题出在题目本身——学生并不觉得写作本身重要。",
+            "function": "转折与归因：呈现问题（作文失败）并分析根本原因（题目让学生缺乏兴趣），为后文调整教学做铺垫。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-b-3",
+            "summary": "作者改换为学生自选的说服性、记叙性和创意写作任务，学生兴趣大增，交出长达十几二十页、人物丰满的作品，效果惊人。",
+            "function": "发展：叙述教学调整后的积极转变，用对比凸显兴趣对写作的作用。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-b-4",
+            "summary": "作者原以为写作重要在于交流，但学生让她领悟到写作更强大的意义在于连接人心、设身处地、理解何为人。",
+            "function": "升华与主旨：点明全文主题，揭示作者从教学经历中获得的更深认识。"
+          }
+        ]
+      }
+    },
+    "group-2025-i-reading-c": {
+      "overview": "文章讨论城市街道被汽车主导后行人（尤其是儿童）移动性下降的问题，借荷兰两位作者的新书 Movement 呼吁重新思考街道的角色，并回顾历史上居民反抗道路扩张的运动，最终呼吁人们反思汽车优先的真实代价。",
+      "discourseStructure": {
+        "summary": "由现象（行人移动性下降）切入，引出两位作者及其新书的核心主张，再回顾历史上居民反抗道路扩张的运动及其结果，指出西方城市仍被汽车重新设计、汽车数量激增，最后回到主张呼吁反思汽车优先的代价。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2025-i-reading-c-1",
+            "summary": "指出尽管街道安全有所改善，但行人尤其是儿童的移动性在下降，家长因路上车多而改用开车接送孩子。",
+            "function": "提出现象，引入全文议题。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-c-2",
+            "summary": "引出荷兰作者及其新书 Movement，提出应重新思考街道及其在生活中的角色。",
+            "function": "引入核心观点与权威依据。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-c-3",
+            "summary": "回顾几十年前街道生活的改变：社区被拆建路网，居民起而反抗，以加拿大记者 Jane Jacobs 反对高速公路、呼吁市长保住宜居城市为典型例子，澳大利亚也有类似运动。",
+            "function": "用历史案例支撑街道角色之争。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-c-4",
+            "summary": "尽管反抗运动广泛，西方城市仍多被围绕汽车需求重新设计，汽车数量快速增长，澳大利亚汽车拥有率居世界前列。",
+            "function": "转折，说明反抗运动总体收效有限。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-c-5",
+            "summary": "指出我们在道路上投入巨大却未计真实代价，反问儿童无法安全活动的社会成本，呼应作者主张，呼吁重新思考门前的街道。",
+            "function": "总结升华，提出反思与呼吁。"
+          }
+        ]
+      }
+    },
+    "group-2025-i-reading-d": {
+      "overview": "本文为科普说明文，介绍中国研究人员的一项新发现：将自来水煮沸五分钟后冷却过滤可去除至少80%的微塑料。文章先点明微塑料污染无处不在，再引出研究方法与结论，接着说明方法的关键条件（碳酸钙含量/水的硬度）与局限，随后借瓶装水强调问题严峻，最后引用专家观点展望研究的实际应用前景。",
+      "discourseStructure": {
+        "summary": "由现象引入到研究结论，再到生效条件与局限，进而强调问题严峻，最后落到应用前景，呈现“提出问题—给出方案—限定条件—展望应用”的说明文结构。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2025-i-reading-d-1",
+            "summary": "微塑料已成为遍布地球的常见污染源，从深海、喜马拉雅山到海鸟胃中、南极雪里，甚至出现在人体内。",
+            "function": "引入话题，用一系列实例渲染微塑料污染的普遍性。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-d-2",
+            "summary": "新研究表明，将自来水煮沸五分钟后冷却再过滤，可去除至少80%的微塑料。",
+            "function": "提出核心研究发现，给出简便廉价的解决方案。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-d-3",
+            "summary": "该方法依赖水中足够的碳酸钙来捕获塑料；硬水效果近90%，软水仅约25%，且研究只涉及三种常见塑料，存在局限。",
+            "function": "说明方法生效的关键条件与研究的局限性。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-d-4",
+            "summary": "研究指出了减少微塑料暴露的可行路径，而这一任务正变得愈发困难——连瓶装水所含微塑料都远超此前认知。",
+            "function": "借瓶装水的例子说明微塑料问题的严峻，凸显研究价值。"
+          },
+          {
+            "paragraphId": "para-2025-i-reading-d-5",
+            "summary": "科学家仍在评估微塑料的危害；专家肯定该研究并建议升级饮用水处理厂以去除微塑料。",
+            "function": "引用专家观点，展望研究成果的实际应用方向。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2025-i-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对2018年各运输方式排放占比图表中道路车辆（公路运输）占比这一具体数据的读取与定位。",
+      "stemTranslationZh": "2018年道路车辆占全球交通运输排放的百分比是多少？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "11.6%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "道路车辆在2018年占全球交通运输排放的11.6%。",
+            "explanation": "原文图表中道路车辆（公路运输）的占比为74.5%，11.6%并非道路车辆对应的数值，属于对图表数据的错配/无依据选取，原文未支持该数值对应道路车辆。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "45.1%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "道路车辆在2018年占全球交通运输排放的45.1%。",
+            "explanation": "原文图表显示道路车辆占比为74.5%，45.1%并非该项数据，原文未支持该数值对应道路车辆。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "74.5%。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-a-2",
+              "quote": "Here’s the breakdown of the emissions in 2018 for different modes of transport.",
+              "anchor": "2018年各运输方式排放占比图"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "86.1%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "道路车辆在2018年占全球交通运输排放的86.1%。",
+            "explanation": "原文图表显示道路车辆占比为74.5%，86.1%并非该项数据，原文未支持该数值对应道路车辆。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "in 2018",
+          "sourceRole": "stem",
+          "targetText": "Here’s the breakdown of the emissions in 2018 for different modes of transport.",
+          "targetParagraphId": "para-2025-i-reading-a-2",
+          "relationType": "locationCue",
+          "note": "题干 in 2018 与原文 the breakdown of the emissions in 2018 形成定位线索，指向随后的各运输方式排放占比图（road vehicles 对应 74.5%）。"
+        }
+      ]
+    },
+    "q-2025-i-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查比较各运输方式绿色化的难易程度，定位哪种方式可以相对容易地实现绿色化。",
+      "stemTranslationZh": "哪种运输方式可以相对容易地实现绿色化？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "飞机。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The hardest sector to decarbonize is aviation.",
+            "sourceHighlight": "hardest sector to decarbonize",
+            "optionText": "Planes.",
+            "optionHighlight": "Planes",
+            "explanation": "原文明确指出航空是最难脱碳的领域，与题干所问“相对容易绿色化”正好相反，属于难易程度的黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-a-3",
+              "quote": "The hardest sector to decarbonize is aviation.",
+              "anchor": "航空最难脱碳"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "卡车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Hydrogen fuel cells are a lighter choice than batteries for trucks, but making green hydrogen is expensive.",
+            "sourceHighlight": "making green hydrogen is expensive",
+            "optionText": "Trucks.",
+            "optionHighlight": "Trucks",
+            "explanation": "原文指出卡车用的绿氢制取成本高（expensive），并未表明其绿色化容易，选项低估了其难度。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-a-3",
+              "quote": "Hydrogen fuel cells are a lighter choice than batteries for trucks, but making green hydrogen is expensive.",
+              "anchor": "绿氢制取成本高"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "火车。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-a-3",
+              "quote": "others can be made electric in pretty simple ways",
+              "anchor": "火车可用相当简单的方式电气化"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2025-i-reading-a-3",
+              "quote": "Some trains are already electrified through rails or wires",
+              "anchor": "部分火车已电气化"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "轮船。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Liquid ammonia is easy to keep and transport, but it is hard to ignite (点燃) and requires an engine redesign.",
+            "sourceHighlight": "hard to ignite",
+            "optionText": "Ships.",
+            "optionHighlight": "Ships",
+            "explanation": "原文用 but 转折强调轮船用的液氨难以点燃且需重新设计发动机，说明其绿色化并不容易，与题干所问相反；选项利用 easy 一词制造误导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-a-3",
+              "quote": "Liquid ammonia is easy to keep and transport, but it is hard to ignite (点燃) and requires an engine redesign.",
+              "anchor": "液氨难点燃且需改造发动机"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "comparatively easily",
+          "sourceRole": "stem",
+          "targetText": "others can be made electric in pretty simple ways",
+          "targetParagraphId": "para-2025-i-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "题干 comparatively easily（相对容易）与原文 in pretty simple ways（用相当简单的方式）构成同义替换，指向火车（TRAINS）的电气化方案。"
+        }
+      ]
+    },
+    "q-2025-i-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对Wipke关于能源变革所表达观点/建议的准确理解，定位其呼吁内容。",
+      "stemTranslationZh": "关于能源变革，Wipke提出了什么建议？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "限制燃料消耗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Wipke建议限制燃料消耗。",
+            "explanation": "原文未提及Wipke建议限制燃料消耗，他的呼吁是加快绿色能源发展，属于无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在可再生能源上投入更多努力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-a-4",
+              "quote": "We need to speed up the development of green energy, and it will all get used",
+              "anchor": "需加快绿色能源发展"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "提高能源效率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Wipke建议提高能源效率。",
+            "explanation": "原文Wipke的话聚焦于加快绿色能源发展，并未提到提高能源效率，属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让电力更加廉价。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Wipke建议让电力更加廉价。",
+            "explanation": "原文提到2050年电力需求或翻倍，但Wipke的建议是加快绿色能源发展，并未涉及让电力更便宜，属于无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Putting more effort into renewables",
+          "sourceRole": "correctOption",
+          "targetText": "We need to speed up the development of green energy, and it will all get used",
+          "targetParagraphId": "para-2025-i-reading-a-4",
+          "relationType": "paraphrase",
+          "note": "正确选项 Putting more effort into renewables 与原文 speed up the development of green energy 构成同义替换，renewables 对应 green energy，put more effort 对应 speed up the development。"
+        }
+      ]
+    },
+    "q-2025-i-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对第一段开头所提到的“cowboy / father / Juliet”这些人物身份的理解，需结合后文 who'd created these people 判断他们是学生虚构的人物。",
+      "stemTranslationZh": "第一段开头提到的这些人是谁？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "九年级学生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "More than once, I found myself wondering just how my students, who’d created these people, knew their subjects so well.",
+            "sourceEntity": "my students",
+            "optionText": "Ninth graders.",
+            "optionEntity": "Ninth graders",
+            "explanation": "原文中的九年级学生是“创造（created）这些人物”的人，而题干所问的“these people / 这些人”是被学生创造出来的对象，二者对象错配；牛仔、严父、朱丽叶并非九年级学生本人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-1",
+              "quote": "my students, who’d created these people",
+              "anchor": "学生创造了这些人物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "学生们的父母。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a strict father who demanded his son earn straight A’s",
+            "optionText": "Students' parents.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 a strict father（严父）这一词，选项用 parents 与之构成词义关联进行干扰，但 father 是学生笔下虚构的人物，并非学生真实的父母。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-1",
+              "quote": "a strict father who demanded his son earn straight A’s",
+              "anchor": "虚构的严父形象"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "现代作家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "These people are modern writers.",
+            "explanation": "原文未提及这些人物是现代作家；原文只出现 a modern-day Juliet（现代版朱丽叶）这一人物，writer 一类身份属于无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "虚构的人物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-b-1",
+              "quote": "my students, who’d created these people",
+              "anchor": "学生创造的人物"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2025-i-reading-b-1",
+              "quote": "I met a cowboy who saved his town, a strict father who demanded his son earn straight A’s, and a modern-day Juliet who died of heartbreak",
+              "anchor": "牛仔、严父、现代朱丽叶"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Fictional characters.",
+          "sourceRole": "correctOption",
+          "targetText": "my students, who’d created these people",
+          "targetParagraphId": "para-2025-i-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "题干问段首所提到的 these people（这些人），原文用 who’d created these people 表明他们是学生 created（创造）出来的，即 fictional characters（虚构人物）。"
+        }
+      ]
+    },
+    "q-2025-i-025": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查学生第一篇作文写得差的原因，需定位第二段对原因的归因，理解“写作本身没让他们觉得重要”即对该题目缺乏兴趣。",
+      "stemTranslationZh": "学生们为什么第一篇作文写得很差？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们没有得到足够的时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The students were not given enough time.",
+            "explanation": "原文未提及时间不够这一原因，文中只解释问题出在题目本身让学生觉得写作不重要，时间因素属于无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们的词汇量非常有限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The students had a very limited vocabulary.",
+            "explanation": "原文未提及学生词汇量有限；事实上学生在其它作文中能写出十几二十页生动作品，说明并非词汇问题，此项无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们误解了题目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Then I realized that the problem was the question itself.",
+            "optionText": "They misunderstood the question.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 the problem was the question itself（问题在于题目本身），选项借用 question 一词制造干扰，但原文说的是题目本身让学生缺乏兴趣，而非学生“误解”了题目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-2",
+              "quote": "Then I realized that the problem was the question itself.",
+              "anchor": "问题出在题目本身"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们对这个题目几乎没有兴趣。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-b-2",
+              "quote": "writing, in and of itself, simply didn’t strike them as important",
+              "anchor": "写作本身没让他们觉得重要"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2025-i-reading-b-2",
+              "quote": "Then I realized that the problem was the question itself.",
+              "anchor": "问题出在题目本身"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They had little interest in the topic.",
+          "sourceRole": "correctOption",
+          "targetText": "writing, in and of itself, simply didn’t strike them as important",
+          "targetParagraphId": "para-2025-i-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "选项 had little interest in the topic（对题目没兴趣）是对原文 didn’t strike them as important（没让他们觉得重要）的同义替换，二者都指向学生对该写作题目缺乏内在驱动。"
+        },
+        {
+          "sourceText": "perform poorly in writing their first essay",
+          "sourceRole": "stem",
+          "targetText": "Most of the essays filled less than one page",
+          "targetParagraphId": "para-2025-i-reading-b-2",
+          "relationType": "locationCue",
+          "note": "题干 perform poorly（表现不佳）对应原文 filled less than one page（大多数作文不到一页）等描述，定位到第二段对第一篇作文质量的评价。"
+        }
+      ]
+    },
+    "q-2025-i-026": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查对第三段画线词 staggering 的词义推测，需借助上文学生作品的积极描述（人物丰满、拓宽视野、打动人心）推断其为褒义“惊人的、了不起的”。",
+      "stemTranslationZh": "第三段中画线词“staggering”是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "混杂的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "The students took on diverse topics",
+            "optionText": "Mixed.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 diverse topics（多样的题目）易让人联想到 Mixed（混杂的），但 staggering 修饰的是 The results（结果），形容效果惊人，而非题材混杂，属借相邻词义设钩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-3",
+              "quote": "The students took on diverse topics",
+              "anchor": "学生选取多样题目"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "惊人的，了不起的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-b-3",
+              "quote": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+              "anchor": "十几二十页、拓宽视野、打动人心"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2025-i-reading-b-3",
+              "quote": "The results were staggering.",
+              "anchor": "结果令人惊叹"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "相似的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The students took on diverse topics and turned in stories, 10 to 20 pages each",
+            "sourceHighlight": "diverse topics",
+            "optionText": "Similar.",
+            "optionHighlight": "Similar",
+            "explanation": "原文强调学生作品 diverse（多样的），而 Similar（相似的）与之意思相反，方向颠倒，且与形容结果惊人的 staggering 词义不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-3",
+              "quote": "The students took on diverse topics",
+              "anchor": "学生选取多样题目"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "令人不安的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "with characters that broadened my view and touched my heart",
+            "sourceHighlight": "touched my heart",
+            "optionText": "Disturbing.",
+            "optionHighlight": "Disturbing",
+            "explanation": "原文用 broadened my view and touched my heart 表达褒扬与感动的积极情感，staggering 在此为褒义；而 Disturbing（令人不安的）是消极情感，与原文情感极性相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-3",
+              "quote": "with characters that broadened my view and touched my heart",
+              "anchor": "拓宽视野、打动人心"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Amazing.",
+          "sourceRole": "correctOption",
+          "targetText": "with characters that broadened my view and touched my heart",
+          "targetParagraphId": "para-2025-i-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "画线词 staggering 修饰 The results，紧接其后的 broadened my view and touched my heart（拓宽视野、打动人心）为褒义语境，提示 staggering 意为 Amazing（惊人的、了不起的）。"
+        }
+      ]
+    },
+    "q-2025-i-027": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对作者经历主旨的推断：作者起初认为写作只是交流手段，最终从学生身上学到写作更深的意义，体现“教学相长”。",
+      "stemTranslationZh": "作者的经历说明了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "教学相长（教即是学）。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-b-4",
+              "quote": "However, my students demonstrated something more important to me.",
+              "anchor": "学生让作者懂得更重要的东西"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2025-i-reading-b-4",
+              "quote": "I walked into class believing that writing is important as a means of communication.",
+              "anchor": "作者原有的认识"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "静水流深（大智若愚）。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Still waters run deep.",
+            "explanation": "原文未表达“表面平静者内藏深意”这一谚语的含义；作者的经历是关于在教学中向学生学习，与此谚语无关，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "知识就是力量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "the ability to connect people, to put us in another’s skin, to teach us what it means to be human",
+            "sourceHighlight": "to teach us what it means to be human",
+            "optionText": "Knowledge is power.",
+            "optionHighlight": "Knowledge is power",
+            "explanation": "原文落点在写作能连接人、让人理解彼此与人性，而非泛泛的“知识就是力量”；该选项把主旨拔高偷换为一个与原文重点不符的笼统命题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-b-4",
+              "quote": "the ability to connect people, to put us in another’s skin, to teach us what it means to be human",
+              "anchor": "连接人、理解彼此、懂得人性"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "熟能生巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Practice makes perfect.",
+            "explanation": "原文未强调通过反复练习而变得熟练；作者经历的核心是认识到写作连接人心的意义以及自身从学生处获得的领悟，与“熟能生巧”无关。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Teaching is learning.",
+          "sourceRole": "correctOption",
+          "targetText": "my students demonstrated something more important to me",
+          "targetParagraphId": "para-2025-i-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "选项 Teaching is learning（教即是学）是对原文 my students demonstrated something more important to me（学生向作为老师的我展示了更重要的东西）的同义概括，体现作者在教学中反向学习。"
+        },
+        {
+          "sourceText": "the author's experience",
+          "sourceRole": "stem",
+          "targetText": "I walked into class believing that writing is important as a means of communication.",
+          "targetParagraphId": "para-2025-i-reading-b-4",
+          "relationType": "locationCue",
+          "note": "题干 the author's experience（作者的经历）对应原文从最初的信念到被学生改变认识的转折，I walked into class believing ... 是定位主旨的关键线索。"
+        }
+      ]
+    },
+    "q-2025-i-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查第一段作者指出的现象。",
+      "stemTranslationZh": "作者在第一段指出了什么现象？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "汽车经常在路上堵住。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "there’s too much traffic on the roads",
+            "optionText": "Cars often get stuck on the road.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 too much traffic on the roads 只说路上车流量大，选项借 traffic/roads 的词族联想偷换成「汽车堵在路上」，原文并未提及堵车。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-1",
+              "quote": "there’s too much traffic on the roads",
+              "anchor": "路上车流量大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "交通事故频繁发生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Traffic accidents occur frequently.",
+            "explanation": "原文未提及交通事故频发，只说安全有改善而行人移动性下降，「事故频繁」属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们走路变少、开车变多。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-c-1",
+              "quote": "transport studies also show declines in pedestrian (行人) mobility",
+              "anchor": "行人移动性下降"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2025-i-reading-c-1",
+              "quote": "they pack them into the car instead",
+              "anchor": "改用开车接送"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "行人不遵守规则。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "pedestrian (行人) mobility",
+            "optionText": "Pedestrians fail to follow the rules.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 pedestrian 一词，选项借 Pedestrians 设钩，但原文谈的是行人「移动性下降」，与「不守规则」无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-1",
+              "quote": "declines in pedestrian (行人) mobility",
+              "anchor": "行人移动性下降"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "People walk less and drive more.",
+          "sourceRole": "correctOption",
+          "targetText": "declines in pedestrian (行人) mobility",
+          "targetParagraphId": "para-2025-i-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "选项 walk less 对应原文 declines in pedestrian mobility（行人移动性下降）。"
+        },
+        {
+          "sourceText": "drive more",
+          "sourceRole": "correctOption",
+          "targetText": "they pack them into the car instead",
+          "targetParagraphId": "para-2025-i-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "选项 drive more 对应原文家长 pack them into the car instead（改把孩子塞进车里）。"
+        }
+      ]
+    },
+    "q-2025-i-029": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查加拿大记者及其他运动参与者的行动目的。",
+      "stemTranslationZh": "那位加拿大记者和其他运动参与者试图做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "让他们的城市保持宜居。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "Jane Jacobs called on her mayor (市长) to champion “New York as a decent place to live, and not just rush through.”",
+              "anchor": "呼吁市长守护宜居城市"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "led a campaign to stop the destruction of her local park",
+              "anchor": "发起运动阻止公园被毁"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "促进文化多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Promote cultural diversity.",
+            "explanation": "原文谈的是保护社区与公园、反对修路，未提及文化多样性，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "帮助贫困家庭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "who had moved her family to Manhattan",
+            "optionText": "Help the needy families.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 family 一词，选项借 families 设钩，但原文 family 指记者自家迁居，并无帮助贫困家庭之意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "who had moved her family to Manhattan",
+              "anchor": "带家人迁居曼哈顿"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让高速公路更易通达。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Describing her alarm at its proposed replacement with an expressway",
+            "sourceHighlight": "her alarm at its proposed replacement with an expressway",
+            "optionText": "Make expressways accessible.",
+            "optionHighlight": "Make expressways accessible",
+            "explanation": "原文记者对用高速公路取代公园感到惊恐、加以反对，选项却说要「让高速公路更易通达」，与其行动方向完全相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "Describing her alarm at its proposed replacement with an expressway",
+              "anchor": "对修高速公路感到惊恐"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Keep their cities livable.",
+          "sourceRole": "correctOption",
+          "targetText": "New York as a decent place to live, and not just rush through",
+          "targetParagraphId": "para-2025-i-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "选项 livable cities 对应原文 a decent place to live（宜居之地），not just rush through 强调城市应宜居而非只供穿行。"
+        },
+        {
+          "sourceText": "campaigners",
+          "sourceRole": "stem",
+          "targetText": "led a campaign to stop the destruction of her local park",
+          "targetParagraphId": "para-2025-i-reading-c-3",
+          "relationType": "locationCue",
+          "note": "题干 campaigners 由原文 led a campaign 定位到记者发起运动保护公园这一行动。"
+        }
+      ]
+    },
+    "q-2025-i-030": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对澳大利亚20世纪60年代末至70年代相关运动结果的推断。",
+      "stemTranslationZh": "关于澳大利亚20世纪60年代末和70年代的那些运动，可以推断出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们推动了汽车销量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the majority of the western cities were completely redesigned around the needs of the motor car",
+            "sourceHighlight": "redesigned around the needs of the motor car",
+            "optionText": "They boosted the sales of cars.",
+            "optionHighlight": "boosted the sales of cars",
+            "explanation": "这些运动是反抗围绕汽车重建城市的，目的与推动汽车销量相反，选项把运动效果说反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-4",
+              "quote": "the majority of the western cities were completely redesigned around the needs of the motor car",
+              "anchor": "城市围绕汽车需求重建"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们最终基本上没起作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-c-4",
+              "quote": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+              "anchor": "运动虽广泛但城市仍被围绕汽车重建"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2025-i-reading-c-4",
+              "quote": "The number of cars on roads has been increasing rapidly.",
+              "anchor": "汽车数量快速增长"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们赢得了政府的支持。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They won government support.",
+            "explanation": "原文只说运动广泛但现实是城市仍被围绕汽车重建，并未提及运动赢得政府支持，且结果与之相反，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们主张修建新公园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "led a campaign to stop the destruction of her local park",
+            "sourceHighlight": "stop the destruction of her local park",
+            "optionText": "They advocated building new parks.",
+            "optionHighlight": "building new parks",
+            "explanation": "原文只提到加拿大记者运动旨在阻止现有公园被毁，并非主张修建新公园，更未把「建新公园」安到澳大利亚运动头上，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "led a campaign to stop the destruction of her local park",
+              "anchor": "阻止现有公园被毁"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They turned out largely ineffective.",
+          "sourceRole": "correctOption",
+          "targetText": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+          "targetParagraphId": "para-2025-i-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "选项 largely ineffective 由原文 Although ... the reality is that ... completely redesigned around the needs of the motor car 这一让步转折推断得出：运动虽广泛但现实仍是城市被汽车主导。"
+        },
+        {
+          "sourceText": "campaigns in Australia in the late 1960s and 1970s",
+          "sourceRole": "stem",
+          "targetText": "Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "targetParagraphId": "para-2025-i-reading-c-3",
+          "relationType": "locationCue",
+          "note": "题干 campaigns in Australia in the late 1960s and 1970s 直接对应原文 Similar campaigns occurred in Australia in the late 1960s and 1970s as well 这句定位线索。"
+        }
+      ]
+    },
+    "q-2025-i-031": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查为全文选取合适标题，需把握全文主旨。",
+      "stemTranslationZh": "哪个可以作为本文合适的标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为何如此匆忙？",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-c-5",
+              "quote": "We invest a lot in roads that help us rush through, but we fail to account for the true costs.",
+              "anchor": "为求快速穿行而忽视真实代价"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "New York as a decent place to live, and not just rush through",
+              "anchor": "城市应宜居而非只供匆匆穿行"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "接下来是什么？",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "What's Next?",
+            "explanation": "全文聚焦反思「为何一味追求快速穿行」及其代价，并非展望未来步骤，「接下来如何」不能概括主旨，属无中生有式偏题。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "去哪里落脚？",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "New York as a decent place to live, and not just rush through",
+            "sourceHighlight": "a decent place to live",
+            "optionText": "Where to Stay?",
+            "optionHighlight": "Where to Stay",
+            "explanation": "原文 a decent place to live 指城市应宜居，标题「去哪里落脚/住哪里」把议题窄化、偏离街道与汽车之争的主旨，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-c-3",
+              "quote": "New York as a decent place to live, and not just rush through",
+              "anchor": "宜居之地"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "该归咎于谁？",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Who to Blame?",
+            "explanation": "全文意在呼吁反思汽车优先的代价、重新思考街道，而非追究该归咎于谁，「归咎对象」并非文章主旨，属无中生有式偏题。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Why the Rush?",
+          "sourceRole": "correctOption",
+          "targetText": "We invest a lot in roads that help us rush through, but we fail to account for the true costs.",
+          "targetParagraphId": "para-2025-i-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "标题 Why the Rush?（为何匆忙）呼应原文反复出现的 rush through（匆匆穿行）及反思其 true costs（真实代价），点出全文主旨。"
+        },
+        {
+          "sourceText": "Rush",
+          "sourceRole": "correctOption",
+          "targetText": "and not just rush through",
+          "targetParagraphId": "para-2025-i-reading-c-3",
+          "relationType": "wordFamily",
+          "note": "标题中的 Rush 与原文 rush through 同词族，城市不应只供 rush through，呼应主旨。"
+        }
+      ]
+    },
+    "q-2025-i-032": {
+      "skill": {
+        "primary": "structure"
+      },
+      "questionFocus": "考查作者在第一段采用何种方式呈现微塑料污染这一问题。",
+      "stemTranslationZh": "作者在第一段是如何呈现这一问题的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过引用一位专家的话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer of the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+            "sourceEntity": "Caroline Gauchotte-Lindsay, an environmental engineer",
+            "optionText": "By quoting an expert.",
+            "optionEntity": "an expert",
+            "explanation": "引用专家观点出现在最后一段，而非第一段；该手法被错配到了首段。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-d-5",
+              "quote": "Caroline Gauchotte-Lindsay, an environmental engineer of the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+              "anchor": "末段才引用专家"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过定义一个概念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By defining a concept.",
+            "explanation": "原文未提及。第一段直接罗列微塑料出现的各种地点，并未对“微塑料”这一概念下定义。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过列举例子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-d-1",
+              "quote": "they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow",
+              "anchor": "罗列微塑料出现的多处地点"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2025-i-reading-d-1",
+              "quote": "They are even appearing inside humans.",
+              "anchor": "再举人体一例"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过提供统计数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By providing statistics.",
+            "explanation": "原文未提及。第一段没有出现任何数字或统计数据，具体数据出现在后文，而非首段。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By giving examples.",
+          "sourceRole": "correctOption",
+          "targetText": "they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow",
+          "targetParagraphId": "para-2025-i-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项 giving examples 对应原文连续列举 deep sea、Himalayas、volcanic rocks、seabirds、Antarctic snow 等一系列实例。"
+        }
+      ]
+    },
+    "q-2025-i-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查决定水中微塑料被捕获（去除）效果的关键因素。",
+      "stemTranslationZh": "什么决定了在水中捕获微塑料的有效性？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "水的硬度。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-d-3",
+              "quote": "this process relies on the water containing enough calcium carbonate (碳酸钙) to trap the plastics",
+              "anchor": "捕获塑料依赖足够的碳酸钙"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2025-i-reading-d-3",
+              "quote": "boiling hard water containing 300 milligrams of calcium carbonate led to an almost 90 percent drop in plastics. But in samples with less than 60 milligrams of calcium carbonate, boiling reduced the level of plastics by just 25 percent.",
+              "anchor": "硬水(碳酸钙多)效果近90%，软水仅25%"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "冷却时间的长短。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The length of cooling time.",
+            "explanation": "原文未提及。文中只提到煮沸冷却后过滤，并未把冷却时间长短作为决定捕获效果的因素。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "过滤的频率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "boiling and filtering (过滤) it",
+            "optionText": "The frequency of filtering.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借原文 filtering（过滤）一词设钩，但原文从未提及过滤的“频率”决定效果，决定因素是碳酸钙含量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-d-2",
+              "quote": "boiling and filtering (过滤) it",
+              "anchor": "原文只提过滤，未提频率"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "水中塑料的类型。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the research didn’t include all types of plastics. The team focused only on three common types — polystyrene, polyethylene and polypropylene",
+            "sourceHighlight": "three common types",
+            "optionText": "The type of plastic in water.",
+            "optionHighlight": "The type of plastic in water",
+            "explanation": "原文提到塑料类型只是为说明研究的局限（仅研究三种），并非把塑料类型当作决定捕获效果的因素，选项夸大了塑料类型的作用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-d-3",
+              "quote": "the research didn’t include all types of plastics",
+              "anchor": "塑料类型属研究局限，非决定因素"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The hardness of water.",
+          "sourceRole": "correctOption",
+          "targetText": "boiling hard water containing 300 milligrams of calcium carbonate led to an almost 90 percent drop in plastics",
+          "targetParagraphId": "para-2025-i-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 hardness of water 对应原文 hard water containing 300 milligrams of calcium carbonate，碳酸钙含量高即水“硬”，决定捕获效果。"
+        },
+        {
+          "sourceText": "What determines the effectiveness of trapping",
+          "sourceRole": "stem",
+          "targetText": "this process relies on the water containing enough calcium carbonate (碳酸钙) to trap the plastics",
+          "targetParagraphId": "para-2025-i-reading-d-3",
+          "relationType": "locationCue",
+          "note": "题干 determines the effectiveness of trapping 由原文 relies on ... enough calcium carbonate to trap 定位，relies on 提示决定因素。"
+        }
+      ]
+    },
+    "q-2025-i-034": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者在第四段提及瓶装水这一例子的写作意图。",
+      "stemTranslationZh": "作者在第四段提到瓶装水想要说明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "塑料回收的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The importance of plastic recycling.",
+            "explanation": "原文未提及。文中只谈减少微塑料暴露，从未涉及塑料回收(recycling)及其重要性。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "微塑料问题的严重性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-d-4",
+              "quote": "Even bottled water, scientists found earlier this year, contains 10 to 1,000 times more microplastics than originally thought.",
+              "anchor": "连瓶装水微塑料都远超预想"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2025-i-reading-d-4",
+              "quote": "reducing microplastic exposure — a task that’s becoming increasingly difficult",
+              "anchor": "减少微塑料暴露愈发困难"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "过量使用纯净水的危险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The danger in overusing pure water.",
+            "explanation": "原文未提及。文中谈的是瓶装水含微塑料，并未涉及“纯净水”及“过量使用”的危险。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "处理受污染水的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "reducing microplastic exposure — a task that’s becoming increasingly difficult",
+            "sourceHighlight": "increasingly difficult",
+            "optionText": "The difficulty in treating polluted water.",
+            "optionHighlight": "difficulty in treating polluted water",
+            "explanation": "原文 difficult 修饰的是“减少微塑料暴露”这件事，举瓶装水是为说明微塑料问题之严重；选项偷换为“处理受污染水的难度”，扩大并改变了对象。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-d-4",
+              "quote": "the findings show a potential path forward for reducing microplastic exposure",
+              "anchor": "困难指向减少暴露，非处理污水"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The severity of the microplastic problem.",
+          "sourceRole": "correctOption",
+          "targetText": "Even bottled water, scientists found earlier this year, contains 10 to 1,000 times more microplastics than originally thought.",
+          "targetParagraphId": "para-2025-i-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 severity 对应原文用 Even bottled water ... 10 to 1,000 times more microplastics than originally thought 这一极端例子，凸显微塑料问题之严重。"
+        }
+      ]
+    },
+    "q-2025-i-035": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Gauchotte-Lindsay 所提建议的内容指向。",
+      "stemTranslationZh": "Gauchotte-Lindsay 的建议是关于什么的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "新研究方法的选择。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Choice of new research methods.",
+            "explanation": "原文未提及。专家建议的是升级水处理厂，与“研究方法的选择”无关。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "进一步研究的可能方向。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "We should be looking into upgrading drinking water treatment plants so they remove microplastics.",
+            "sourceEntity": "upgrading drinking water treatment plants",
+            "optionText": "Possible direction for further study.",
+            "optionEntity": "further study",
+            "explanation": "专家建议指向“升级饮用水处理厂”这一实际应用，而非“进一步研究的方向”，对象被错配为科研方向。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-d-5",
+              "quote": "We should be looking into upgrading drinking water treatment plants so they remove microplastics.",
+              "anchor": "建议升级水厂，非研究方向"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "需要让更多研究者参与。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "who was not involved in the research",
+            "optionText": "Need to involve more researchers.",
+            "matchType": "wordFamily",
+            "relationNote": "选项 involve 借原文 not involved in the research 一词设钩；原文只是交代该专家未参与此项研究，并未建议让更多研究者参与。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2025-i-reading-d-5",
+              "quote": "who was not involved in the research",
+              "anchor": "involved 仅指其未参与该研究"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "研究发现的潜在应用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2025-i-reading-d-5",
+              "quote": "We should be looking into upgrading drinking water treatment plants so they remove microplastics.",
+              "anchor": "建议升级水厂以去除微塑料"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2025-i-reading-d-5",
+              "quote": "The new study suggests boiling tap water could be a tool to limit intake.",
+              "anchor": "把研究结论转化为实际工具/应用"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Potential application of the findings.",
+          "sourceRole": "correctOption",
+          "targetText": "We should be looking into upgrading drinking water treatment plants so they remove microplastics.",
+          "targetParagraphId": "para-2025-i-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "选项 application of the findings 对应专家建议 upgrading drinking water treatment plants ... remove microplastics，即把研究发现用于实际供水处理。"
+        }
+      ]
+    }
+  }
+}

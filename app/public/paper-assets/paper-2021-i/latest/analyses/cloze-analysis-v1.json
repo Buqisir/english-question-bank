@@ -1,0 +1,619 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-i-cloze": {
+      "overview": "记叙文：作者回忆中学时在面包厂打工三天的经历，体会到工作的不易与劳动的价值。",
+      "affectiveArc": "由满怀期待到发现工作高压辛苦，最后经父亲点拨懂得珍惜所得、尊重劳动者，整体先抑后扬。"
+    }
+  },
+  "blanks": {
+    "q-2021-i-041": {
+      "blankId": "blank-2021-i-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "面包厂在复活节制作兔子蛋糕，made 与宾语 little bunny cakes 构成动宾搭配，符合工厂生产的语境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sold",
+          "meaning": "卖出（兔子蛋糕）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ordered",
+          "meaning": "订购、点单"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reserved",
+          "meaning": "预留、保留"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "little bunny",
+          "signalSide": "context-after",
+          "targetText": "little bunny (兔子) cakes",
+          "relation": "动词的宾语是 little bunny cakes，工厂制作蛋糕，made 与之构成动宾搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "baking factory",
+          "signalSide": "context-before",
+          "relation": "baking factory 是烘焙工厂，与“制作”蛋糕的语义场呼应。"
+        }
+      ],
+      "teachingNote": "动词填空先看宾语，工厂对蛋糕做的核心动作是“制作”。"
+    },
+    "q-2021-i-042": {
+      "blankId": "blank-2021-i-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "Hough Bakeries 是连锁面包店，蛋糕供应给遍布 Cleveland 的各家分店，stores 与 throughout Cleveland 在语义上呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "families",
+          "meaning": "家庭"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "schools",
+          "meaning": "学校"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "citizens",
+          "meaning": "市民"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "throughout Cleveland",
+          "signalSide": "context-after",
+          "targetText": "throughout Cleveland",
+          "relation": "供应对象遍布 Cleveland，对应连锁面包店的各家分店 stores。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Hough Bakeries",
+          "signalSide": "context-before",
+          "relation": "Hough Bakeries 是面包连锁企业，其遍布全城的对象自然是各家门店。"
+        }
+      ],
+      "teachingNote": "名词填空看话题词，连锁企业遍布全城的对象通常是它的门店。"
+    },
+    "q-2021-i-043": {
+      "blankId": "blank-2021-i-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "工厂只在 spring break 期间需要八个孩子帮忙，是短期用工，temporary help 与 during our spring break 的限定时段相吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "generous",
+          "meaning": "慷慨的（帮助）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "financial",
+          "meaning": "财务上的（帮助）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "technical",
+          "meaning": "技术性的（帮助）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "during our spring break",
+          "signalSide": "context-after",
+          "targetText": "help during our spring break",
+          "relation": "帮忙只限于春假这段时间，限定为短期，与 temporary 搭配一致。"
+        }
+      ],
+      "teachingNote": "形容词看限定信息，限定在某段假期内的用工即“临时的”。"
+    },
+    "q-2021-i-044": {
+      "blankId": "blank-2021-i-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "春假期间除了听唱片，作者没有别的安排，had no plans beyond listening to my favorite records 表示没有其他计划。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "problems",
+          "meaning": "问题、麻烦"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "excuses",
+          "meaning": "借口"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hobbies",
+          "meaning": "爱好"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "beyond listening to my favorite records",
+          "signalSide": "context-after",
+          "targetText": "no plans beyond listening to my favorite records",
+          "relation": "beyond 引出唯一打算，说明除听唱片外没有别的计划，have no plans 搭配成立。"
+        }
+      ],
+      "teachingNote": "have no ___ beyond doing 的固定语境，空白处填表示“安排/计划”的名词。"
+    },
+    "q-2021-i-045": {
+      "blankId": "blank-2021-i-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "去工厂打工能赚到最低工资，earn 与 minimum wage 构成“挣得工资”的固定动宾搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "offer",
+          "meaning": "提供"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "set",
+          "meaning": "设定（工资）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "suggest",
+          "meaning": "建议"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "minimum wage",
+          "signalSide": "context-after",
+          "targetText": "minimum wage",
+          "relation": "wage 是“工资”，与 earn 构成“挣工资”的动宾搭配。"
+        }
+      ],
+      "teachingNote": "earn + wage/money 是“挣得报酬”的固定搭配。"
+    },
+    "q-2021-i-046": {
+      "blankId": "blank-2021-i-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "作者想看看工厂是如何运转的，how a factory worked 表示工厂运作方式，worked 在此意为“运转”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "closed",
+          "meaning": "（工厂）倒闭、关门"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "developed",
+          "meaning": "发展"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "survived",
+          "meaning": "幸存、维持"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "see how a factory",
+          "signalSide": "context-before",
+          "targetText": "see how a factory worked",
+          "relation": "see how a factory ___ 要表达“工厂如何运转”，主语 factory 与 worked 搭配为“运作”。"
+        }
+      ],
+      "teachingNote": "see how something works 表示了解事物的运作方式。"
+    },
+    "q-2021-i-047": {
+      "blankId": "blank-2021-i-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "父母觉得这是个好主意，于是打电话给 Betsy 父亲表示同意，with their permission 表示带着他们的许可、点头同意。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ambition",
+          "meaning": "雄心、抱负"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "experience",
+          "meaning": "经验、经历"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "invitation",
+          "meaning": "邀请"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "called Betsy",
+          "signalSide": "context-before",
+          "targetText": "called Betsy’s dad with their permission",
+          "relation": "父母打电话给 Betsy 父亲，是为表达对这份打工的允许，with their permission 搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "a grand idea",
+          "signalSide": "context-before",
+          "relation": "父母认为这是好主意，因而给出许可，前因后果指向 permission。"
+        }
+      ],
+      "teachingNote": "with one's permission 表示“在某人允许下”，由父母赞成的态度反推。"
+    },
+    "q-2021-i-048": {
+      "blankId": "blank-2021-i-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "后文列出放蛋糕、装糖霜耳朵、点眼睛鼻子等具体分工，roles in the factory 指在工厂里承担的职责任务。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "joys",
+          "meaning": "乐趣"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ideas",
+          "meaning": "想法、主意"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "choices",
+          "meaning": "选择"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the factory were simple",
+          "signalSide": "context-after",
+          "targetText": "roles in the factory were simple",
+          "relation": "后接对工序的罗列，说明空白处指工厂里的职责，roles 与之搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Place cakes on a moving belt",
+          "signalSide": "context-after",
+          "relation": "随后逐条列出的具体工序正是这些 roles 的内容。"
+        }
+      ],
+      "teachingNote": "下文列出具体工序，说明空白处指工厂中承担的职责（roles）。"
+    },
+    "q-2021-i-049": {
+      "blankId": "blank-2021-i-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "前面工序把蛋糕做好，最后一步是把兔子蛋糕从传送带上取下来，Remove bunny from the belt 表示从传送带移走。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Save",
+          "meaning": "节省、留存"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Keep",
+          "meaning": "保留、留在"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Stop",
+          "meaning": "停止"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "from the belt",
+          "signalSide": "context-after",
+          "targetText": "bunny from the belt",
+          "relation": "from the belt 表示“从传送带”，与 remove ... from 构成“从……移走”的搭配。"
+        }
+      ],
+      "teachingNote": "remove sth from somewhere 表示把某物从某处移走。"
+    },
+    "q-2021-i-050": {
+      "blankId": "blank-2021-i-050",
+      "blankNo": 50,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "实际操作比听起来更难，紧接着说稍一减速蛋糕就堆积、压力很大，harder than it sounds 与下文的高压相印证。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "better",
+          "meaning": "更好"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "longer",
+          "meaning": "更长（时间）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cheaper",
+          "meaning": "更便宜"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "than it sounds",
+          "signalSide": "context-after",
+          "targetText": "harder than it sounds",
+          "relation": "than it sounds 引出比较，下文蛋糕堆积、高压说明实际比想象更难，故用 harder。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "high-pressure",
+          "signalSide": "context-after",
+          "relation": "后文 high-pressure 点明工作压力大，与“更难”一致。"
+        }
+      ],
+      "teachingNote": "比较级 than it sounds，结合下文高压细节判断实际“更难”。"
+    },
+    "q-2021-i-051": {
+      "blankId": "blank-2021-i-051",
+      "blankNo": 51,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "流水线作业稍一放慢速度，蛋糕就会堆积，Slow down a bit and the cakes pile up 的因果关系成立，slow down 表示“放慢速度”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Calm down",
+          "meaning": "冷静下来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Stay on",
+          "meaning": "留下、继续待着"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Move on",
+          "meaning": "继续前进、转换"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the cakes pile up",
+          "signalSide": "context-after",
+          "targetText": "and the cakes pile up",
+          "relation": "动作一慢蛋糕就堆积，结果 pile up 反推空白处是“放慢速度”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Slow",
+          "signalSide": "option",
+          "targetText": "Slow down",
+          "relation": "slow 表示“慢”，slow down 即“放慢速度”。"
+        }
+      ],
+      "teachingNote": "短语可由组成词猜义，slow down 即放慢速度，与蛋糕堆积的因果一致。"
+    },
+    "q-2021-i-052": {
+      "blankId": "blank-2021-i-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "实际工作比作者原先料想的更高压，more high-pressure than I’d expected 用 expected 表示“预料、预期”，与“一切超出想象”一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "indicated",
+          "meaning": "表明、暗示"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "witnessed",
+          "meaning": "目睹"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "remembered",
+          "meaning": "记得"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "more high-pressure than I",
+          "signalSide": "context-before",
+          "targetText": "more high-pressure than I’d expected",
+          "relation": "more ... than I’d ___ 是把现实与预期相比，expected 表示原先的预期。"
+        }
+      ],
+      "teachingNote": "more ... than I’d expected 表示“比我预想的更……”。"
+    },
+    "q-2021-i-053": {
+      "blankId": "blank-2021-i-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "父亲曾有童年打工经历，对女儿的抱怨报以会心一笑并借机教导，smiled 与下文他温和讲道理的态度一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cried",
+          "meaning": "哭泣、喊叫"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hesitated",
+          "meaning": "犹豫"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "refused",
+          "meaning": "拒绝"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he told me",
+          "signalSide": "context-after",
+          "targetText": "respect those who did the work, he told me",
+          "relation": "父亲随后温和地讲述自己的经历并教导女儿，态度是会心而笑，smiled 与之呼应。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the summers of his childhood",
+          "signalSide": "context-after",
+          "relation": "父亲回忆自己童年打工，带着理解与共鸣，对应微笑的反应。"
+        }
+      ],
+      "teachingNote": "由父亲随后温和讲道理的语气反推他的反应是“微笑”。"
+    },
+    "q-2021-i-054": {
+      "blankId": "blank-2021-i-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "父亲是杂货商的儿子，童年暑假都在送货，delivering food 与杂货商家庭的劳作相符，且这是让人体会赚钱不易的体力活。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tasting",
+          "meaning": "品尝（食物）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "finding",
+          "meaning": "寻找"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sharing",
+          "meaning": "分享"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The son of a grocer",
+          "signalSide": "context-before",
+          "targetText": "The son of a grocer, he’d spent the summers of his childhood",
+          "relation": "杂货商的儿子，暑假帮家里送货 delivering food 最合常理。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "the sort of work that made you",
+          "signalSide": "context-after",
+          "relation": "下文称这是让人体会劳动价值的活，送货这种体力劳动与之一致。"
+        }
+      ],
+      "teachingNote": "结合“杂货商之子”的身份，暑假从事的是 delivering food（送货）。"
+    },
+    "q-2021-i-055": {
+      "blankId": "blank-2021-i-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "这种劳作让你珍惜自己挣来的钱并尊重劳动者，appreciate the dollars you earned 与并列的 respect 情感一致，表示“珍惜”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "withdraw",
+          "meaning": "取出、撤回"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donate",
+          "meaning": "捐赠"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "receive",
+          "meaning": "收到、得到"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the dollars you earned",
+          "signalSide": "context-after",
+          "targetText": "appreciate the dollars you earned",
+          "relation": "宾语是自己挣来的钱，appreciate 表示“珍惜”这笔辛苦钱。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "respect those who did the work",
+          "signalSide": "context-after",
+          "relation": "与并列的 respect（尊重劳动者）情感一致，都是正面珍视，指向 appreciate。"
+        }
+      ],
+      "teachingNote": "appreciate 与并列的 respect 情感方向一致，表示珍惜辛苦所得。"
+    }
+  }
+}

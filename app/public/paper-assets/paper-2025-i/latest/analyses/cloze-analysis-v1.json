@@ -1,0 +1,676 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2025-i",
+  "sourceAssetVersion": 3,
+  "targetGroups": [
+    "group-2025-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2025-i-cloze": {
+      "overview": "记叙文：作者卖掉住了23年的房子搬家，把家中物件一件件在网上转送给陌生人，从中获得慰藉与意义。",
+      "affectiveArc": "情感主线由搬家清空旧物的混乱与不舍，转为通过转送物件、取悦他人而收获的温暖与平静，先低落后温馨。"
+    }
+  },
+  "blanks": {
+    "q-2025-i-041": {
+      "blankId": "blank-2025-i-041",
+      "blankNo": 41,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "卖房后要把住了23年、装满东西的家清空，empty out 表示“清空腾空”，与下文逐件处理物品的语境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "painting over",
+          "meaning": "在……上面刷漆覆盖"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "looking around",
+          "meaning": "四处张望、环顾"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pulling down",
+          "meaning": "拆除、拆掉（房屋）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the beloved home our family had spent 23 years filling up",
+          "signalSide": "context-after",
+          "targetText": "empty out",
+          "relation": "宾语是被装满了23年的家，与“清空”施受关系成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "empty",
+          "signalSide": "option",
+          "targetText": "emptying out",
+          "relation": "empty 表示“空”，构成“清空腾空”之义。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "filling up",
+          "signalSide": "context-after",
+          "targetText": "emptying out",
+          "relation": "fill up（装满）与 empty out（清空）形成反义呼应。"
+        }
+      ],
+      "teachingNote": "短语空先看宾语，再用 empty 与下文 fill up 的反义关系合成语境义。"
+    },
+    "q-2025-i-042": {
+      "blankId": "blank-2025-i-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "句中说在镇上选定要搬入的居所并为之挑选关键物品，apartment（公寓）与结尾 I sit in my apartment 呼应，是他们的新家。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hotel",
+          "meaning": "旅馆、酒店"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "office",
+          "meaning": "办公室"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cottage",
+          "meaning": "乡间小屋"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "we were moving to in town",
+          "signalSide": "context-after",
+          "targetText": "apartment",
+          "relation": "定语从句说明这是镇上要搬入的居所，与 apartment 搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I sit in my apartment today",
+          "signalSide": "context-after",
+          "targetText": "apartment",
+          "relation": "末段同词复现 apartment，回指此处的新居。"
+        }
+      ],
+      "teachingNote": "名词空可借文末同词复现锁定所指。"
+    },
+    "q-2025-i-043": {
+      "blankId": "blank-2025-i-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他们租了一处地方来存放暂时重要的物品，store（存放）与 rented a place 及 objects 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "display",
+          "meaning": "陈列、展示"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sell",
+          "meaning": "出售"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "repair",
+          "meaning": "修理"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "rented a place",
+          "signalSide": "context-before",
+          "targetText": "store",
+          "relation": "租一处地方的目的是存放物品，store 与之搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "our supposedly important objects",
+          "signalSide": "context-after",
+          "targetText": "store",
+          "relation": "宾语是重要物品，store 这些物品施受关系合理。"
+        }
+      ],
+      "teachingNote": "动词空抓住前面租地方的目的与后面宾语，判断动作。"
+    },
+    "q-2025-i-044": {
+      "blankId": "blank-2025-i-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "处理后房子里仍塞满东西，be stuffed with（塞满）与 things 搭配合理，呼应前文 filling up。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "covered",
+          "meaning": "被覆盖"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "decorated",
+          "meaning": "被装饰"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "equipped",
+          "meaning": "被配备"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a house still",
+          "signalSide": "context-before",
+          "targetText": "stuffed with things",
+          "relation": "主语是房子，be stuffed with 表示房子里塞满，搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "with things",
+          "signalSide": "context-after",
+          "targetText": "stuffed",
+          "relation": "stuff with 固定搭配，宾语为 things。"
+        }
+      ],
+      "teachingNote": "动词空认准 be stuffed with 这类固定搭配的伴随介词。"
+    },
+    "q-2025-i-045": {
+      "blankId": "blank-2025-i-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "这些东西虽不算特别值钱，却也不该被丢进垃圾填埋场，valuable（有价值的）与转折逻辑及后文不舍丢弃一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "conventional",
+          "meaning": "传统的、常规的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "complicated",
+          "meaning": "复杂的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tolerable",
+          "meaning": "可容忍的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "while not particularly",
+          "signalSide": "context-before",
+          "targetText": "valuable",
+          "relation": "while 引出让步，“虽不特别值钱”与后文“不该填埋”形成转折。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "didn’t belong in a landfill",
+          "signalSide": "context-after",
+          "targetText": "valuable",
+          "relation": "不该填埋说明仍有价值，与 valuable 语义一致。"
+        }
+      ],
+      "teachingNote": "形容词空借 while 让步与后文价值判断锁定词义。"
+    },
+    "q-2025-i-046": {
+      "blankId": "blank-2025-i-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "她拍了花瓶的照片发布在网上，有人想要更多照片来看清商品，additional photos 与拍照发布的语境呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fees",
+          "meaning": "费用"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "receipts",
+          "meaning": "收据"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "models",
+          "meaning": "型号、模型"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "one wanting additional",
+          "signalSide": "context-before",
+          "targetText": "photos",
+          "relation": "买家想要更多的东西，additional 修饰 photos 搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "I took a picture of the vase and posted it online",
+          "signalSide": "context-before",
+          "targetText": "photos",
+          "relation": "前文拍照发布，photos 与“picture/posted”话题场呼应。"
+        }
+      ],
+      "teachingNote": "名词空用前文拍照发布的话题场确定所求之物。"
+    },
+    "q-2025-i-047": {
+      "blankId": "blank-2025-i-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "随着搬家日子临近，她降价重发，our move day（搬家日）与全文卖房搬家的主线一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "pay",
+          "meaning": "支付、薪酬"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "market",
+          "meaning": "市场"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "work",
+          "meaning": "工作"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "day drew near",
+          "signalSide": "context-after",
+          "targetText": "move",
+          "relation": "move 作定语修饰 day，构成“搬家日临近”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "we were busy",
+          "signalSide": "context-before",
+          "targetText": "move",
+          "relation": "全文围绕搬家展开，move day 与主题场呼应。"
+        }
+      ],
+      "teachingNote": "名词作定语时，结合全文主题锁定修饰义。"
+    },
+    "q-2025-i-048": {
+      "blankId": "blank-2025-i-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "她重发时写的那句“我讨厌这花瓶，也许你不会”是对商品的文字描述，description（描述）与引号内的话语吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "warning",
+          "meaning": "警告"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "request",
+          "meaning": "请求"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reply",
+          "meaning": "回复"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I hate this vase. Maybe you won’t.",
+          "signalSide": "context-after",
+          "targetText": "description",
+          "relation": "冒号后引号内是对花瓶的描述文字，与 description 对应。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "reposted it",
+          "signalSide": "context-before",
+          "targetText": "description",
+          "relation": "重新发布帖子配的文字即商品描述，话题场一致。"
+        }
+      ],
+      "teachingNote": "名词空看冒号后的具体内容反推其性质。"
+    },
+    "q-2025-i-049": {
+      "blankId": "blank-2025-i-049",
+      "blankNo": 49,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "花瓶被人高兴地拿走，受此鼓舞她发布了更多物品，Encouraged（受鼓舞的）与成功转送后的积极情绪一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Confused",
+          "meaning": "困惑的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Interested",
+          "meaning": "感兴趣的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Disappointed",
+          "meaning": "失望的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "left happily with the vase",
+          "signalSide": "context-before",
+          "targetText": "Encouraged",
+          "relation": "对方高兴地拿走花瓶是正面结果，带来鼓舞之情。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I posted more",
+          "signalSide": "context-after",
+          "targetText": "Encouraged",
+          "relation": "因受鼓舞而发布更多，情感与后续行为一致。"
+        }
+      ],
+      "teachingNote": "情感形容词需与前因（成功）后果（继续行动）保持一致。"
+    },
+    "q-2025-i-050": {
+      "blankId": "blank-2025-i-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她每天发帖，随之而来的是陌生人上门取物，daily posts 与 visits（来访）搭配，构成混乱中的一缕光。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "reports",
+          "meaning": "报告"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "advice",
+          "meaning": "建议"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "money",
+          "meaning": "钱"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "My daily posts and the",
+          "signalSide": "context-before",
+          "targetText": "visits",
+          "relation": "与每日发帖并列、由作者收到的，是上门来访 visits。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a woman raced into my house",
+          "signalSide": "context-before",
+          "targetText": "visits",
+          "relation": "前文有人冲进她家取物，正是 visits 的具体体现。"
+        }
+      ],
+      "teachingNote": "名词空借前文具体事件（有人上门）回指抽象名词。"
+    },
+    "q-2025-i-051": {
+      "blankId": "blank-2025-i-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "每次转送都让物品免于进入垃圾填埋场，spare the landfill（使……免于、少占用填埋场）与“取悦他人”并列，逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "remove",
+          "meaning": "移除、搬走"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "find",
+          "meaning": "找到"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "check",
+          "meaning": "检查"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the landfill",
+          "signalSide": "context-after",
+          "targetText": "spare",
+          "relation": "宾语是填埋场，spare 表示使其少受占用，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "and to please another person",
+          "signalSide": "context-after",
+          "targetText": "spare",
+          "relation": "and 连接“减负填埋场”与“取悦他人”两件好事，语义并列。"
+        }
+      ],
+      "teachingNote": "动词空看宾语与并列结构，确定与环保善举一致的动作。"
+    },
+    "q-2025-i-052": {
+      "blankId": "blank-2025-i-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "每次交换都让她取悦一个本不会遇见的人，encounter（偶遇、结识）与 another person 搭配，呼应陌生买家上门。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "investigated",
+          "meaning": "调查"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recognized",
+          "meaning": "认出"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recommended",
+          "meaning": "推荐"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "another person I might not otherwise have",
+          "signalSide": "context-before",
+          "targetText": "encountered",
+          "relation": "宾语是“本不会遇见的另一个人”，encounter 与之搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "please another person",
+          "signalSide": "context-before",
+          "targetText": "encountered",
+          "relation": "取悦陌生人即与之相遇，话题场一致。"
+        }
+      ],
+      "teachingNote": "动词空结合“本不会……”的虚拟语气与宾语判断动作。"
+    },
+    "q-2025-i-053": {
+      "blankId": "blank-2025-i-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "如今她爱着与自己共享小空间的每一件物品，belongings（所有物、物品）与 share our small space 搭配，指留下来的东西。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "giveaways",
+          "meaning": "送出去的赠品"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "posts",
+          "meaning": "帖子"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "contributions",
+          "meaning": "贡献、捐赠"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that share our small space",
+          "signalSide": "context-after",
+          "targetText": "belongings",
+          "relation": "与作者共享小空间的是留下的物品 belongings，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "loving each of the",
+          "signalSide": "context-before",
+          "targetText": "belongings",
+          "relation": "她所珍爱的是身边的家什物品，语义场一致。"
+        }
+      ],
+      "teachingNote": "名词空用“共享空间”定语判断指代的是留存的物品。"
+    },
+    "q-2025-i-054": {
+      "blankId": "blank-2025-i-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她因知道附近有人在欣赏带不走的东西而感到快乐，take joy in（以……为乐）是固定搭配，与温馨结尾一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "part",
+          "meaning": "部分、参与"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "care",
+          "meaning": "关心、当心"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "time",
+          "meaning": "时间"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I take",
+          "signalSide": "context-before",
+          "targetText": "joy",
+          "relation": "take joy in 固定搭配，表示从某事中获得快乐。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "in knowing that",
+          "signalSide": "context-after",
+          "targetText": "joy",
+          "relation": "take joy in doing 结构，in 后接获得快乐的来源。"
+        }
+      ],
+      "teachingNote": "名词空认准 take joy in 这类固定搭配的核心名词。"
+    },
+    "q-2025-i-055": {
+      "blankId": "blank-2025-i-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "附近有人正在欣赏那件带不走的东西，appreciate（欣赏、珍视）与 something 搭配，呼应物品被新主人珍惜的温暖结局。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "anticipating",
+          "meaning": "期待、预料"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "delivering",
+          "meaning": "递送、传递"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "withdrawing",
+          "meaning": "撤回、取出"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "something that couldn’t come with us",
+          "signalSide": "context-after",
+          "targetText": "appreciating",
+          "relation": "宾语是带不走的东西，appreciate 这件物品施受关系成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I take",
+          "signalSide": "context-before",
+          "targetText": "appreciating",
+          "relation": "作者的快乐源自有人珍视旧物，appreciate 与温馨基调一致。"
+        }
+      ],
+      "teachingNote": "动词空结合宾语与全文“物得其所”的温暖立意确定词义。"
+    }
+  }
+}

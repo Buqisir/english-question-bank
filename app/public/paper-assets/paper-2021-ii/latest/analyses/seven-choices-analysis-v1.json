@@ -1,0 +1,394 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2021-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-ii-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-ii-seven-choices": {
+      "overview": "本文是一篇关于如何提高阅读速度的说明文/建议清单。开头先说明：若需大量阅读学习，快速阅读能力很有价值；随后用项目符号列出若干条具体建议（保持舒适、先翻看全书、按书的类型决定阅读量、随手记笔记等）。七选五考查清单式建议文的话题句、并列建议项与指代衔接。",
+      "discourseStructure": {
+        "summary": "首段引出主题——快速阅读的价值，并由话题句过渡到下面的建议清单；随后每个项目符号是一条独立建议，建议内部各句之间靠指代词、并列副词与话题词场衔接。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Introduction",
+            "paragraphIds": [
+              "para-2021-ii-seven-title"
+            ],
+            "summary": "引出主题：大量学习性阅读时，能更快阅读会带来好处，由此引出后文的提速建议。"
+          },
+          {
+            "unitId": "unit-comfort",
+            "heading": "Be comfortable",
+            "paragraphIds": [
+              "para-2021-ii-seven-p1"
+            ],
+            "summary": "第一条建议：开始阅读前先让自己舒适——座椅支撑后背、书与眼睛距离合适，并延伸到保持环境凉爽以免犯困。"
+          },
+          {
+            "unitId": "unit-preview",
+            "heading": "Look through first",
+            "paragraphIds": [
+              "para-2021-ii-seven-p2"
+            ],
+            "summary": "第二条建议：先花几分钟翻看全书（目录、前言、章节标题），以判断是否需要读全书或只读部分。"
+          },
+          {
+            "unitId": "unit-amount",
+            "heading": "Decide how much to read",
+            "paragraphIds": [
+              "para-2021-ii-seven-p3"
+            ],
+            "summary": "第三条建议：决定一次读多少，这取决于书的类型——故事性历史书比科学类书更易读。"
+          },
+          {
+            "unitId": "unit-notes",
+            "heading": "Take notes",
+            "paragraphIds": [
+              "para-2021-ii-seven-p4"
+            ],
+            "summary": "第四条建议：随身备纸笔，对重要页面与关键事实做标记记录，只需记页码与一两个词作提示。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2021-ii-036": {
+      "blankId": "blank-2021-ii-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "read more quickly",
+        "read a great deal for study",
+        "appreciate the benefits",
+        "the speed at which you read"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-ii-seven-title",
+        "headingAnchor": "Introduction",
+        "beforeQuote": "you will appreciate the benefits of being able to read more quickly.",
+        "afterQuote": "Before you open the book, make sure that you are comfortable."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "read more quickly",
+          "signalSide": "context-before",
+          "targetText": "improve your reading speed",
+          "relation": "空前 read more quickly 与选项 improve your reading speed 同属“提高阅读速度”话题场，是全文主题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "improve your reading speed",
+          "signalSide": "option",
+          "targetText": "read more quickly",
+          "relation": "选项 improve your reading speed 概括了首段主旨，统领下文一系列建议。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "some tips",
+          "signalSide": "option",
+          "targetText": "后文各项目符号建议",
+          "relation": "some tips 预指后文用项目符号列出的多条建议，是承上启下的话题句。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "首段说明能更快阅读会带来好处，D 句“这里有一些提高阅读速度的小技巧”正好承接此话题并引出下文的建议清单，是典型的过渡/话题句。",
+        "matchedClues": [
+          {
+            "contextSide": "read more quickly / appreciate the benefits",
+            "optionSide": "improve your reading speed",
+            "relation": "选项与空前内容话题一致，都指向“更快/提高阅读速度”。"
+          },
+          {
+            "contextSide": "后文的项目符号建议",
+            "optionSide": "some tips",
+            "relation": "tips 预告下文要给出的多条具体建议。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 提到 learn something by heart（背诵），与首段“提高阅读速度”的主题不符，无法充当统领下文的话题句。"
+        }
+      ],
+      "teachingNote": "段末/全文开头的空若后接清单式建议，多选能概括主旨并用 tips/ways 预指下文的话题句。"
+    },
+    "q-2021-ii-037": {
+      "blankId": "blank-2021-ii-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "make sure that you are comfortable",
+        "a seat which supports your back",
+        "the right distance from your eyes"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-ii-seven-p1",
+        "headingAnchor": "Be comfortable",
+        "beforeQuote": "the book should be at the right distance from your eyes.",
+        "afterQuote": "Look at the table of contents, the preface, the chapter heading, etc."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "comfortable",
+          "signalSide": "context-before",
+          "targetText": "Keep the room cool",
+          "relation": "空前讲身体上的“舒适”（座椅、眼距），与选项继续谈“保持房间凉爽以免犯困”同属舒适/环境话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Keep the room cool",
+          "signalSide": "option",
+          "targetText": "comfortable / a seat which supports your back",
+          "relation": "选项谈房间凉爽避免困倦，是对本条“保持舒适”建议的进一步补充。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a seat which supports your back",
+          "signalSide": "context-before",
+          "targetText": "Keep the room cool rather than warm",
+          "relation": "座椅、眼距、房间温度都是阅读前“让自己舒适”的并列条件。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本段主题是阅读前让自己舒适（座椅支撑后背、书与眼睛距离合适），G 句“保持房间凉爽而非温暖以免犯困”与该舒适/环境话题一致，是同一条建议下的并列补充。",
+        "matchedClues": [
+          {
+            "contextSide": "make sure that you are comfortable",
+            "optionSide": "to avoid feeling sleepy",
+            "relation": "凉爽以免犯困是“保持舒适、有利阅读”的具体做法。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A “时不时停下来休息”谈的是阅读过程中的休息，与本段“开始阅读前先让身体舒适”的环境准备话题不在同一焦点。"
+        }
+      ],
+      "teachingNote": "段末衔接空要锁定本段话题词（此处 comfortable），选与之同属一个话题场的并列补充句。"
+    },
+    "q-2021-ii-038": {
+      "blankId": "blank-2021-ii-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Look at the table of contents, the preface, the chapter heading",
+        "Ten minutes spent in this way",
+        "whether you really need to read the whole book"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-ii-seven-p2",
+        "headingAnchor": "Look through first",
+        "beforeQuote": "Look at the table of contents, the preface, the chapter heading, etc.",
+        "afterQuote": "This will help you to decide whether you really need to read the whole book"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Ten minutes spent in this way",
+          "signalSide": "context-after",
+          "targetText": "Spend a few minutes looking through the book",
+          "relation": "空后 Ten minutes spent in this way 中的 in this way 回指空格句所说的“花几分钟翻看全书”这一做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Look at the table of contents",
+          "signalSide": "context-after",
+          "targetText": "looking through the book",
+          "relation": "空后“看目录、前言、章节标题”正是“翻看全书”的具体方式，与选项话题一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "looking through the book",
+          "signalSide": "option",
+          "targetText": "Look at the table of contents, the preface, the chapter heading",
+          "relation": "选项 looking through the book 概括了空后列举的翻看动作。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "段首空后紧接“看目录、前言、章节标题”等翻看动作，且下句用 Ten minutes spent in this way 回指，B 句“花几分钟翻看全书”正是本段的话题句。",
+        "matchedClues": [
+          {
+            "contextSide": "Look at the table of contents, the preface, the chapter heading",
+            "optionSide": "looking through the book",
+            "relation": "选项是后文具体翻看动作的总括。"
+          },
+          {
+            "contextSide": "Ten minutes spent in this way",
+            "optionSide": "Spend a few minutes",
+            "relation": "Ten minutes 与 a few minutes 对应，in this way 回指本句做法。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 是全文总话题句，已用于 36 空；此处需要的是针对本段“翻看全书”的具体话题句，而非总起句。"
+        }
+      ],
+      "teachingNote": "段首话题空可借空后的 in this way / this 这类回指，反推空格应描述的具体做法。"
+    },
+    "q-2021-ii-039": {
+      "blankId": "blank-2021-ii-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "decide how much you can read at a time",
+        "A history book",
+        "scientific subjects",
+        "easier to read than one dealing with"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-ii-seven-p3",
+        "headingAnchor": "Decide how much to read",
+        "beforeQuote": "decide how much you can read at a time.",
+        "afterQuote": "A history book which may contain the facts in story form will be easier to read"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "how much you can read at a time",
+          "relation": "选项首词 This 回指空前“一次能读多少”这一问题，承上启下。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the type of book",
+          "signalSide": "option",
+          "targetText": "A history book / scientific subjects",
+          "relation": "选项 the type of book 与空后举例的历史书、科学类书形成总—分对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "A history book",
+          "signalSide": "context-after",
+          "targetText": "the type of book you are reading",
+          "relation": "空后用 history book 与 scientific subjects 举例说明“书的类型”如何影响阅读量。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前问“一次能读多少”，C 句“这取决于你读的书的类型”用 This 回指该问题，并被空后历史书与科学类书的对比所印证，是承上启下的衔接句。",
+        "matchedClues": [
+          {
+            "contextSide": "decide how much you can read at a time",
+            "optionSide": "This depends on",
+            "relation": "This 回指“一次读多少”，depends on 引出决定因素。"
+          },
+          {
+            "contextSide": "A history book ... scientific subjects",
+            "optionSide": "the type of book you are reading",
+            "relation": "空后两类书正是“书的类型”的具体例证。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A “时不时停下休息”虽与阅读相关，但既无法用代词承接空前问题，也不能被空后“书的类型”对比所印证。"
+        }
+      ],
+      "teachingNote": "段中衔接空优先找以 This/It 等代词开头、能回指空前问题并被空后举例印证的承上启下句。"
+    },
+    "q-2021-ii-040": {
+      "blankId": "blank-2021-ii-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "keep a pencil and paper beside you",
+        "Note also the facts important",
+        "the page number and one or two words as a reminder"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-ii-seven-p4",
+        "headingAnchor": "Take notes",
+        "beforeQuote": "Always keep a pencil and paper beside you.",
+        "afterQuote": "Note also the facts important for your purpose"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Note also",
+          "signalSide": "context-after",
+          "targetText": "Make a note of any page which is of special importance",
+          "relation": "空后 Note also 中的 also 表并列追加，说明空格句必须已先提出一项“做笔记/标记”的内容，E 正好提供该前项。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Make a note of any page",
+          "signalSide": "option",
+          "targetText": "keep a pencil and paper / Note also the facts",
+          "relation": "选项 Make a note 与空前“备纸笔”、空后“也记下重要事实”同属做笔记话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "keep a pencil and paper beside you",
+          "signalSide": "context-before",
+          "targetText": "Make a note of any page",
+          "relation": "空前“随身备纸笔”为空格句“给重要页面做标记”提供前提。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前让你备好纸笔，空后用 Note also（“也要记下……”）追加第二项笔记内容，E 句“给特别重要的页面做标记”正好充当 also 所并列的第一项笔记动作。",
+        "matchedClues": [
+          {
+            "contextSide": "Note also the facts important",
+            "optionSide": "Make a note of any page which is of special importance",
+            "relation": "also 表明前面已有一项 note 动作，即 E 所述的“标记重要页面”。"
+          },
+          {
+            "contextSide": "keep a pencil and paper beside you",
+            "optionSide": "Make a note",
+            "relation": "备纸笔是为了随时做笔记/标记。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 谈“翻看全书”，与本段“做笔记/标记”的话题无关，且不能与空后 Note also 的并列追加逻辑衔接。"
+        }
+      ],
+      "teachingNote": "空后出现 also/too 等并列词时，空格句应提供该并列关系的前一项，且与之同属一个话题动作。"
+    }
+  }
+}

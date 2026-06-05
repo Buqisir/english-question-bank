@@ -1,0 +1,1466 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2020-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-ii-reading-a",
+    "group-2020-ii-reading-b",
+    "group-2020-ii-reading-c",
+    "group-2020-ii-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pilot",
+    "reviewedAt": "2026-06-05T00:00:00Z"
+  },
+  "groups": {
+    "group-2020-ii-reading-a": {
+      "overview": "这是一篇应用文（夏令营广告），介绍 Pali Overnight Adventures 为儿童和青少年提供的暑期夏令营，并具体列举其中 4 个营地：广播营、特工营、烹饪营和街头艺术营。",
+      "discourseStructure": {
+        "summary": "总分结构：先总述夏令营整体情况与营地数量，再以小标题加说明的形式分别介绍四个具体营地的活动内容。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-ii-reading-a-1",
+            "summary": "总述 Pali Overnight Adventures 暑期为儿童和青少年提供丰富体验，下面 4 个只是 17 个独特营地中的一部分。",
+            "function": "引入与总起，交代营地总数与举例范围"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-2",
+            "summary": "小标题：广播营。",
+            "function": "分项标题"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-3",
+            "summary": "介绍广播营：营员运营自己的新闻台，制作并主持每晚晚餐时播出的节目，并上传网络。",
+            "function": "分项说明（广播营活动内容）"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-4",
+            "summary": "小标题：特工营。",
+            "function": "分项标题"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-5",
+            "summary": "介绍特工营：以电影《碟中谍》引入，营员在彩弹场上学习策略与军事技能，了解真实特工的生活。",
+            "function": "分项说明（特工营活动内容）"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-6",
+            "summary": "小标题：烹饪营。",
+            "function": "分项标题"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-7",
+            "summary": "介绍烹饪营：适合喜欢待在厨房的孩子，学习烤、炸、切等技能及可带回家的食谱。",
+            "function": "分项说明（烹饪营活动内容）"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-8",
+            "summary": "小标题：街头艺术营。",
+            "function": "分项标题"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-a-9",
+            "summary": "介绍街头艺术营：营员分享创意，合作用非传统技法构思、素描并绘制公开展示的壁画。",
+            "function": "分项说明（街头艺术营活动内容）"
+          }
+        ]
+      }
+    },
+    "group-2020-ii-reading-b": {
+      "overview": "记叙文。作者重返讲台后，发明了一个虚构的“奶奶的盒子”来管理学生带来的违禁玩具；多年后她真有了孙子，学生的态度随之转变，最后儿子把这个虚构的盒子做成了真实的木箱。",
+      "discourseStructure": {
+        "summary": "按时间顺序展开：先交代背景与“违禁品”问题，再以师生对话引出“奶奶的盒子”这一妙招，接着说明该方法如何奏效，随后写孙子出生后学生反应的变化，最后以儿子把盒子变成现实收束，升华情感。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-ii-reading-b-1",
+            "summary": "学年将尽，作者重返讲台已停教15年，要应对从书包里冒出来的各种“违禁品”，当下流行的是水枪。",
+            "function": "交代背景与冲突起因。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-2",
+            "summary": "作者决定想出一个处理违禁品的办法。",
+            "function": "引出下文方法。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-3",
+            "summary": "作者要学生把手枪交上来，说要放进“奶奶的盒子”。",
+            "function": "以对话展开方法，提出关键道具。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-4",
+            "summary": "学生追问那是什么。",
+            "function": "推动对话。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-5",
+            "summary": "作者答说那是一个装满给孙辈玩具的大木箱。",
+            "function": "解释道具内涵。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-6",
+            "summary": "有学生指出作者并没有孙辈。",
+            "function": "制造张力，推动对话。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-7",
+            "summary": "作者回应现在没有，但将来会有，到时盒子里会装满给他们的好东西。",
+            "function": "完善虚构设定，揭示意图。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-8",
+            "summary": "虚构的盒子像魔法一样奏效；学生让她描述盒中之物，违规者通常在放学时来取回自己的东西。",
+            "function": "说明方法成效，呼应“the offender”指代。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-9",
+            "summary": "多年后第一个孙子Gordon出生，学生态度转变，不再要回东西，而是说留给Gordon。",
+            "function": "时间推进，转折点。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-b-10",
+            "summary": "作者乐于谈起这个想象的盒子；某个圣诞，儿子Bruce送来一个木箱，把它变成现实。",
+            "function": "情感升华，收束全文。"
+          }
+        ]
+      }
+    },
+    "group-2020-ii-reading-c": {
+      "overview": "本文是一篇书评，介绍 Dr. Henry Petroski 的著作《To Forgive Design: Understanding Failure》。文章以金门大桥50周年险情开篇，引出该书对工程失败案例的讨论，并阐述作者关于失败推动进步的核心观点。",
+      "discourseStructure": {
+        "summary": "由具体案例（金门大桥）切入，过渡到对一本工程失败主题书籍的介绍，再展开书中观点（失败的多种成因、工程师对公众的责任），最后以作者关于失败促成改进的论断收束。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-ii-reading-c-1",
+            "summary": "金门大桥50周年庆典中，因人流远超预期，桥面在最重负载下变平并开始晃动，当局关闭通道，避免了一场灾难。",
+            "function": "以引人入胜的具体事件开篇，作为后文所介绍书籍的一个案例引子。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-c-2",
+            "summary": "点明金门大桥的故事出自 Dr. Henry Petroski 的著作《To Forgive Design》，该书既赞美工程也讨论其失败，书中还包括挑战者号、哥伦比亚号航天飞机失事和泰坦尼克号沉没等案例。",
+            "function": "介绍书名、作者及书的主题与所涉案例。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-c-3",
+            "summary": "Petroski 在承认工程会因设计者出错而失败的同时，进一步考察失败发生的更大背景：劣质材料的不当施工、或一个好设计被反复沿用改良后突然彻底失效。",
+            "function": "展开书中关于工程失败更广泛成因的论述。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-c-4",
+            "summary": "读者将读到熟悉与全新的故事，以及关于工程师对公众责任、如何帮助年轻工程师理解这种责任的动人讨论。",
+            "function": "概述书的内容价值与对读者的意义。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-c-5",
+            "summary": "引用作者原话：成功只是成功而已，真正带来改进的是失败。",
+            "function": "以作者核心观点收尾，点明全书主旨。"
+          }
+        ]
+      }
+    },
+    "group-2020-ii-reading-d": {
+      "overview": "本文是一篇关于热带雨林的说明文，介绍了雨林作为众多物种栖息地、地球之肺、自我保护与生存机制，以及雨林自身产生大量降雨的特点，整体突出雨林对地球生命的重要意义。",
+      "discourseStructure": {
+        "summary": "文章按主题分段递进：先讲雨林物种丰富，再讲其作为地球之肺与自我保护系统，接着讲树木互不接触的生存策略与林地状况，最后讲雨林自身产生的大量降雨及对其他地区的影响。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-ii-reading-d-1",
+            "summary": "雨林是各种药用植物、食物、鸟类和动物的家园，物种极其丰富。",
+            "function": "引入主题，强调雨林的生物多样性。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-d-2",
+            "summary": "雨林是地球之肺，储存二氧化碳、产生氧气；高大树木形成树冠层保护自身、小植物和动物。",
+            "function": "说明雨林的生态功能与自我保护系统。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-d-3",
+            "summary": "树木的枝叶彼此靠近却从不接触，以防止病害传播并阻碍食叶昆虫；林地地面其实较为干净。",
+            "function": "解释树木互不接触的生存策略与林地实况。"
+          },
+          {
+            "paragraphId": "para-2020-ii-reading-d-4",
+            "summary": "雨林能自产约75%的降雨，年降雨量极大，并通过湿气形成雨云影响其他需要降雨的国家。",
+            "function": "说明雨林自身产生大量降雨的特点及其对外影响。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2020-ii-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对营地总数这一具体数字信息的定位与提取。",
+      "stemTranslationZh": "Pali Overnight Adventures 今年夏天提供多少个夏令营？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "2 个。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pali Overnight Adventures 共提供 2 个夏令营。",
+            "explanation": "原文未提及营地总数为 2，原文只说所举例的 4 个营地是 17 个营地中的一部分。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "4 个。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "these are just 4 of the 17 highly unique camps being offered",
+            "optionText": "4.",
+            "matchType": "exact",
+            "relationNote": "原文中的数字 4 指的是本文举例介绍的营地数量，并非营地总数；选项用原文出现的数字 4 设钩，偷换为提供的营地总数。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-a-1",
+              "quote": "these are just 4 of the 17 highly unique camps being offered",
+              "anchor": "just 4 of the 17 camps"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "17 个。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-a-1",
+              "quote": "these are just 4 of the 17 highly unique camps being offered",
+              "anchor": "17 highly unique camps being offered"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "21 个。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pali Overnight Adventures 共提供 21 个夏令营。",
+            "explanation": "原文未提及 21 这一数字，21 疑似把原文的 4 与 17 相加而得，属臆造。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How many camps",
+          "sourceRole": "stem",
+          "targetText": "these are just 4 of the 17 highly unique camps being offered",
+          "targetParagraphId": "para-2020-ii-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干用 How many camps 问营地总数，原文用 the 17 ... camps being offered 给出提供的营地总数为 17。"
+        }
+      ]
+    },
+    "q-2020-ii-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对广播营营员所做活动这一细节信息的定位与同义转换。",
+      "stemTranslationZh": "在广播营，营员们将做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "创建一个网站。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Every night it goes on the web",
+            "optionText": "Create a website.",
+            "matchType": "wordFamily",
+            "relationNote": "选项中的 website 与原文 the web 同词族，但原文只说节目每晚上传网络，并非营员去创建网站，借词族关联设钩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-a-3",
+              "quote": "Every night it goes on the web",
+              "anchor": "goes on the web"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "运营一个新闻台。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-a-3",
+              "quote": "While running every aspect of our own news station",
+              "anchor": "running every aspect of our own news station"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "见一位明星记者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Become the next star reporter, news writer, director or producer.",
+            "optionText": "Meet a star reporter.",
+            "matchType": "exact",
+            "relationNote": "原文出现 star reporter，但说的是营员成为下一个明星记者，而非去见一位明星记者；选项用原文原词 star reporter 设钩并偷换动作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-a-3",
+              "quote": "Become the next star reporter, news writer, director or producer.",
+              "anchor": "Become the next star reporter"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "举办一场晚宴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "create and host a broadcast airing each night at dinner for the entire camp",
+            "optionText": "Hold a dinner party.",
+            "matchType": "wordFamily",
+            "relationNote": "原文中的 dinner 仅是节目播出的时间点（晚餐时），选项的 host / Hold a dinner party 借 host 与 dinner 设钩，偷换为举办晚宴。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-a-3",
+              "quote": "create and host a broadcast airing each night at dinner for the entire camp",
+              "anchor": "host a broadcast ... at dinner"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Run a news station.",
+          "sourceRole": "correctOption",
+          "targetText": "While running every aspect of our own news station",
+          "targetParagraphId": "para-2020-ii-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "选项 Run a news station 是原文 running every aspect of our own news station 的同义概括，run 与 running 词族对应。"
+        }
+      ]
+    },
+    "q-2020-ii-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查根据兴趣（烹饪）匹配相应营地的细节定位。",
+      "stemTranslationZh": "哪个营地会吸引对烹饪感兴趣的孩子？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "广播营。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "While running every aspect of our own news station, kids and their follow campers will create and host a broadcast airing each night at dinner for the entire camp.",
+            "sourceEntity": "Broadcasting Camp（新闻广播）",
+            "optionText": "Broadcasting Camp.",
+            "optionEntity": "对烹饪感兴趣的孩子",
+            "explanation": "广播营对应的是制作新闻广播节目，与题干所问的烹饪兴趣对象不匹配。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "特工营。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Campers who sign up for the 2-week secret agent camp can get to know about the life of real secret agents by learning strategies and military skills on the paintball field.",
+            "sourceEntity": "Secret Agent Camp（策略与军事技能）",
+            "optionText": "Secret Agent Camp.",
+            "optionEntity": "对烹饪感兴趣的孩子",
+            "explanation": "特工营学习的是策略和军事技能，与题干所问的烹饪兴趣对象不匹配。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "烹饪营。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-a-7",
+              "quote": "If your child enjoys being in the kitchen, then the culinary camp is definitely the right fit.",
+              "anchor": "enjoys being in the kitchen ... culinary camp"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2020-ii-reading-a-7",
+              "quote": "Campers learn technical skills of roasting, frying and cutting",
+              "anchor": "roasting, frying and cutting"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "街头艺术营。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Campers will share their colorful ideas and imagination with each other and work together to visualize, sketch and paint with non-traditional techniques to create the coolest mural (壁画) which will be displayed in public for all to see.",
+            "sourceEntity": "Street Art Camp（绘制壁画）",
+            "optionText": "Street Art Camp.",
+            "optionEntity": "对烹饪感兴趣的孩子",
+            "explanation": "街头艺术营做的是构思与绘制壁画，与题干所问的烹饪兴趣对象不匹配。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "interested in cooking",
+          "sourceRole": "stem",
+          "targetText": "If your child enjoys being in the kitchen, then the culinary camp is definitely the right fit.",
+          "targetParagraphId": "para-2020-ii-reading-a-7",
+          "relationType": "paraphrase",
+          "note": "题干 interested in cooking（对烹饪感兴趣）对应原文 enjoys being in the kitchen（喜欢待在厨房），由此定位到 the culinary camp。"
+        }
+      ]
+    },
+    "q-2020-ii-024": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者与学生对话的目的，需结合上文“违禁品”问题与对话语境判断。",
+      "stemTranslationZh": "作者与学生进行这番对话的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了收走那把水枪。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-b-3",
+              "quote": "“Please bring that pistol to me,”",
+              "anchor": "让学生把手枪交上来"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-b-1",
+              "quote": "Now was the spring of the water pistol",
+              "anchor": "当时流行水枪这一违禁品"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了谈论她的孙辈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "It’s a large wooden chest full of toys for my grandchildren,",
+            "optionText": "To talk about her grandchildren.",
+            "matchType": "wordFamily",
+            "relationNote": "原文确实出现 grandchildren，但那只是解释盒子用途的话术，并非对话目的；选项借“孙辈”这一原文词制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-5",
+              "quote": "It’s a large wooden chest full of toys for my grandchildren,",
+              "anchor": "提及孙辈只是解释盒子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了推荐一些玩具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To recommend some toys.",
+            "explanation": "原文未提及作者向学生推荐玩具，盒中玩具是给未来孙辈的，与推荐无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了解释她的教学方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "I decided to think up a method of dealing with forbidden fruit.",
+            "sourceHighlight": "a method of dealing with forbidden fruit",
+            "optionText": "To explain her teaching method.",
+            "optionHighlight": "explain her teaching method",
+            "explanation": "原文“method”指处理违禁品的招数，对话目的是收走水枪，而非向学生解释其教学方法，选项把目的拔高偷换了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-2",
+              "quote": "I decided to think up a method of dealing with forbidden fruit.",
+              "anchor": "method 指处理违禁品的办法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the water pistol",
+          "sourceRole": "correctOption",
+          "targetText": "“Please bring that pistol to me,”",
+          "targetParagraphId": "para-2020-ii-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项 collect the water pistol 对应原文 bring that pistol to me，即让学生把手枪交上来。"
+        }
+      ]
+    },
+    "q-2020-ii-025": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查第8段画线词 the offender 的指代，需结合上下文“违规带违禁品并被收走、放学来取回”判断。",
+      "stemTranslationZh": "第8段中画线词“the offender”指的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "学生的家长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The student's parent.",
+            "explanation": "原文未提及家长，来取回东西的是带违禁品的学生本人。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "“奶奶的盒子”的制作者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Usually the offender would appear at the end of the day, and I would return the belonging.",
+            "sourceEntity": "the offender",
+            "optionText": "The maker of the Grandma's Box.",
+            "optionEntity": "The maker of the Grandma's Box",
+            "explanation": "盒子的制作者是结尾的儿子 Bruce，与第8段来取回东西的违规学生不是同一对象。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-10",
+              "quote": "My son Bruce had made my Grandma’s Box a reality.",
+              "anchor": "盒子的制作者是儿子 Bruce"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作者的孙子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Usually the offender would appear at the end of the day, and I would return the belonging.",
+            "sourceEntity": "the offender",
+            "optionText": "The author's grandchild.",
+            "optionEntity": "The author's grandchild",
+            "explanation": "孙子 Gordon 是多年后才出生（第9段），而第8段的 the offender 是当时被收走东西的学生，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-9",
+              "quote": "my first grandchild Gordon was born",
+              "anchor": "孙子多年后才出生"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "违禁品的主人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-b-8",
+              "quote": "Usually the offender would appear at the end of the day, and I would return the belonging.",
+              "anchor": "违规者放学来取回自己的东西"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-b-1",
+              "quote": "the various kinds of “forbidden fruit” that come out of book bags",
+              "anchor": "违禁品出自学生书包"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the offender",
+          "sourceRole": "stem",
+          "targetText": "Usually the offender would appear at the end of the day, and I would return the belonging.",
+          "targetParagraphId": "para-2020-ii-reading-b-8",
+          "relationType": "locationCue",
+          "note": "由原文 the offender ... I would return the belonging 可知，来取回（被收走的违禁）物品的人就是该物品的主人，即 the owner of the forbidden fruit。"
+        }
+      ]
+    },
+    "q-2020-ii-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查得知 Gordon 出生后学生的行为，定位第9段学生态度转变的细节。",
+      "stemTranslationZh": "在得知 Gordon 出生后，学生们做了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们去和宝宝玩。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They went to play with the baby.",
+            "explanation": "原文未提及学生去和婴儿玩耍。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们要求看一看“奶奶的盒子”。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Now you can use your Grandma’s Box.",
+            "optionText": "They asked to see the Grandma's Box.",
+            "matchType": "wordFamily",
+            "relationNote": "原文出现 Grandma’s Box，但学生说的是“现在你可以用盒子了”，并未要求“看”盒子；选项借盒子一词制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-9",
+              "quote": "Now you can use your Grandma’s Box.",
+              "anchor": "学生说现在可以用盒子，而非要求看盒子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们为 Gordon 做了一份礼物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "My son Bruce had made my Grandma’s Box a reality.",
+            "sourceEntity": "My son Bruce",
+            "optionText": "They made a present for Gordon.",
+            "optionEntity": "They",
+            "explanation": "做出实物盒子作为礼物的是作者的儿子 Bruce（结尾的圣诞礼物），并非这些学生，且对象是作者而非 Gordon。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-10",
+              "quote": "I received a surprise gift—a large, beautifully made wooden chest.",
+              "anchor": "做礼物盒子的是儿子，送给作者"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们不再要回自己的玩具。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-b-9",
+              "quote": "instead of coming to ask their possessions back, the students would say, “That’s okay. Put it in your Grandma’s Box for Gordon.”",
+              "anchor": "不再要回东西，而是留给 Gordon"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They stopped asking their toys back.",
+          "sourceRole": "correctOption",
+          "targetText": "instead of coming to ask their possessions back, the students would say, “That’s okay. Put it in your Grandma’s Box for Gordon.”",
+          "targetParagraphId": "para-2020-ii-reading-b-9",
+          "relationType": "paraphrase",
+          "note": "选项 stopped asking their toys back 对应原文 instead of coming to ask their possessions back，toys 与 possessions 同义替换。"
+        }
+      ]
+    },
+    "q-2020-ii-027": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对作者形象的推断，需综合“想出妙招管理违禁品、方法奏效”的全文信息归纳人物特点。",
+      "stemTranslationZh": "关于作者，我们可以推断出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她喜欢讲笑话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She enjoys telling jokes.",
+            "explanation": "原文未提及作者爱讲笑话，虚构盒子是管理手段而非讲笑话。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她是一位既严格又聪明的老师。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-b-2",
+              "quote": "I decided to think up a method of dealing with forbidden fruit.",
+              "anchor": "严格管理违禁品，想出办法"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-b-8",
+              "quote": "My imaginary Grandma’s Box worked like magic that spring, and later.",
+              "anchor": "虚构盒子的妙招奏效，体现机智"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她热爱做木工。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "My son Bruce had made my Grandma’s Box a reality.",
+            "sourceEntity": "My son Bruce",
+            "optionText": "She loves doing woodwork.",
+            "optionEntity": "She",
+            "explanation": "做木箱的是儿子 Bruce，不是作者，作者并未做木工，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-10",
+              "quote": "My son Bruce had made my Grandma’s Box a reality.",
+              "anchor": "做木工的是儿子 Bruce"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她是一位尽责的祖母。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "“I don’t now,” I replied. “But someday I will. When I do, my box will be full of wonderful things for them.”",
+            "sourceHighlight": "But someday I will.",
+            "optionText": "She is a responsible grandmother.",
+            "optionHighlight": "responsible grandmother",
+            "explanation": "文中孙子 Gordon 出生后并无作者作为祖母尽责的描写，盒子是给假想孙辈的教学话术，把“老师”形象偷换拔高为“尽责的祖母”不成立。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-b-7",
+              "quote": "“But someday I will. When I do, my box will be full of wonderful things for them.”",
+              "anchor": "孙辈是假想，盒子是话术"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "smart teacher",
+          "sourceRole": "correctOption",
+          "targetText": "My imaginary Grandma’s Box worked like magic that spring, and later.",
+          "targetParagraphId": "para-2020-ii-reading-b-8",
+          "relationType": "paraphrase",
+          "note": "选项 smart 对应原文 worked like magic 所体现的机智；think up a method 与 forbidden fruit 的管理则对应 strict，综合推断作者是 strict and smart teacher。"
+        }
+      ]
+    },
+    "q-2020-ii-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查第一段中金门大桥50周年当天发生的具体事件细节。",
+      "stemTranslationZh": "金门大桥在其50周年纪念日那天发生了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它承载的重量超过了它所能承受的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-c-1",
+              "quote": "the roadway was flattening under what turned out to be the heaviest load it had ever been asked to carry",
+              "anchor": "桥面在史上最重负载下变平"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-c-1",
+              "quote": "as many as 800,000 crowded the roads to the bridge",
+              "anchor": "多达80万人涌上桥"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它在强风中剧烈晃动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It swayed violently in a strong wind.",
+            "explanation": "原文提到桥确实开始晃动（it was beginning to sway），但晃动的原因是超重的人流负载，并非强风（a strong wind），原文未提及任何风的因素。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的桥面被车辆损坏了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "The bridge was closed to motor traffic so people could enjoy a walk across it.",
+            "sourceHighlight": "closed to motor traffic",
+            "optionText": "Its roadway was damaged by vehicles.",
+            "optionHighlight": "damaged by vehicles",
+            "explanation": "原文明确说大桥当天对机动车关闭（closed to motor traffic）供人步行，因此根本不存在车辆；桥面变平是因为人流超重，而非被车辆（vehicles）损坏。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-1",
+              "quote": "The bridge was closed to motor traffic so people could enjoy a walk across it.",
+              "anchor": "当天对机动车关闭"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的通道被许多人堵住了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The authorities closed access to the bridge and tens of thousands of people made their way back to land.",
+            "sourceHighlight": "The authorities closed access to the bridge",
+            "optionText": "Its access was blocked by many people.",
+            "optionHighlight": "access was blocked by many people",
+            "explanation": "原文是当局主动关闭了通往大桥的通道（The authorities closed access）以疏散人群，而非通道被人群堵住（blocked by many people）；动作主体与因果关系被颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-1",
+              "quote": "The authorities closed access to the bridge and tens of thousands of people made their way back to land.",
+              "anchor": "当局关闭通道疏散人群"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It carried more weight than it could.",
+          "sourceRole": "correctOption",
+          "targetText": "the heaviest load it had ever been asked to carry",
+          "targetParagraphId": "para-2020-ii-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "选项 carried more weight than it could 是原文 the heaviest load it had ever been asked to carry（史上最重负载）的同义替换，weight 对应 load。"
+        }
+      ]
+    },
+    "q-2020-ii-029": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查第三段中 Dr. Petroski 关于工程失败成因的观点。",
+      "stemTranslationZh": "根据第三段，下列哪一项是 Dr. Petroski 的观点？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "没有一种设计在任何地方都受欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Or perhaps a design works so well it is adopted elsewhere again and again, with seemingly harmless improvements, until, suddenly, it does not work at all anymore.",
+            "sourceHighlight": "a design works so well it is adopted elsewhere again and again",
+            "optionText": "No design is well received everywhere.",
+            "optionHighlight": "No design is well received everywhere",
+            "explanation": "原文恰恰说某个设计因效果太好而被各处一再采用（works so well it is adopted elsewhere again and again），后来才失效；选项 No design is well received everywhere 用全称否定夸大并扭曲了原意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-3",
+              "quote": "a design works so well it is adopted elsewhere again and again",
+              "anchor": "好设计被各处采用"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "施工比设计更重要。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Construction is more important than design.",
+            "explanation": "原文只是说好设计可能因劣质材料被不当施工而失败（constructed with low quality materials incompetently applied），并未比较施工与设计孰更重要（more important），属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "并非所有灾难都是由工程设计造成的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-c-3",
+              "quote": "Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
+              "anchor": "好设计也会因劣质材料不当施工而失败"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-c-3",
+              "quote": "Dr. Petroski widens his view to consider the larger context in which such failures occur",
+              "anchor": "考察失败的更大背景"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对工程作品进行改进是必要的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "with seemingly harmless improvements",
+            "optionText": "Improvements on engineering works are necessary.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文 improvements 一词制造干扰；但原文说的是看似无害的改进（seemingly harmless improvements）最终导致设计失效，并未主张改进是必要的（necessary）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-3",
+              "quote": "with seemingly harmless improvements",
+              "anchor": "看似无害的改进"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Not all disasters are caused by engineering design.",
+          "sourceRole": "correctOption",
+          "targetText": "a good design is constructed with low quality materials incompetently applied",
+          "targetParagraphId": "para-2020-ii-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "选项 Not all disasters are caused by engineering design 概括了原文：好设计也会因 low quality materials incompetently applied（劣质材料不当施工）而失败，说明失败成因不限于设计本身。"
+        }
+      ]
+    },
+    "q-2020-ii-030": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对末段作者引语的推断，理解其传达的核心寓意。",
+      "stemTranslationZh": "最后一段暗示了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "失败能带来进步。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-c-5",
+              "quote": "It is failure that brings improvement.",
+              "anchor": "是失败带来改进"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-c-5",
+              "quote": "“Success is success but that is all that it is,”",
+              "anchor": "成功只是成功而已"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "成功会导致过度自信。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Success results in overconfidence.",
+            "explanation": "原文只说成功仅仅是成功（Success is success but that is all that it is），并未提及成功会导致过度自信（overconfidence），属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "应当避免失败。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "It is failure that brings improvement.",
+            "sourceHighlight": "failure that brings improvement",
+            "optionText": "Failure should be avoided.",
+            "optionHighlight": "Failure should be avoided",
+            "explanation": "原文对失败持正面态度，认为正是失败带来改进（failure that brings improvement）；选项 Failure should be avoided 把失败说成应当避免的事，态度完全相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-5",
+              "quote": "It is failure that brings improvement.",
+              "anchor": "失败带来改进"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "成功源于共同努力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Success comes from joint efforts.",
+            "explanation": "原文末段谈的是成功与失败的关系，从未提及成功来自共同努力（joint efforts），属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Failure can lead to progress.",
+          "sourceRole": "correctOption",
+          "targetText": "It is failure that brings improvement.",
+          "targetParagraphId": "para-2020-ii-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "选项 Failure can lead to progress 是原文 It is failure that brings improvement 的同义替换，progress 对应 improvement，lead to 对应 brings。"
+        }
+      ]
+    },
+    "q-2020-ii-031": {
+      "skill": {
+        "primary": "structure"
+      },
+      "questionFocus": "考查对文本体裁的整体判断。",
+      "stemTranslationZh": "这篇文章属于什么类型？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一则新闻报道。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "In May 1987 the Golden Gate Bridge had a 50th birthday party.",
+            "optionText": "A news report.",
+            "matchType": "wordFamily",
+            "relationNote": "开篇的金门大桥事件具有新闻叙事色彩，易让人误判为新闻报道；但该事件只是引出书籍的引子，全文重心是评介一本书，并非报道时事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-1",
+              "quote": "In May 1987 the Golden Gate Bridge had a 50th birthday party.",
+              "anchor": "金门大桥事件开篇"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一篇短篇小说。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A short story.",
+            "explanation": "全文是对真实著作及其案例的客观评介，并非虚构的短篇小说（short story），文中无虚构情节，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一篇书评。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-c-2",
+              "quote": "The story is one of scores in To Forgive Design: Understanding Failure, a book that is at once a love letter to engineering and a paean (赞歌) to its breakdowns.",
+              "anchor": "点明所评书籍的书名与定位"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-ii-reading-c-4",
+              "quote": "Readers will encounter not only stories they have heard before, but some new stories and a moving discussion of the responsibility of the engineer to the public",
+              "anchor": "评价该书的内容与价值"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇研究论文。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Dr. Henry Petroski",
+            "optionText": "A research article.",
+            "matchType": "wordFamily",
+            "relationNote": "文中出现 Dr. 头衔及工程失败等专业话题，易误判为研究论文；但全文是介绍并评价一本面向大众的著作，没有研究论文的方法、数据与论证结构。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-c-2",
+              "quote": "Its author, Dr. Henry Petroski, has long been writing about disasters.",
+              "anchor": "提及作者头衔"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A book review.",
+          "sourceRole": "correctOption",
+          "targetText": "a book that is at once a love letter to engineering and a paean (赞歌) to its breakdowns",
+          "targetParagraphId": "para-2020-ii-reading-c-2",
+          "relationType": "locationCue",
+          "note": "全文围绕 a book（《To Forgive Design》）展开介绍与评价，是典型的 book review（书评）定位线索。"
+        }
+      ]
+    },
+    "q-2020-ii-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对第一段内容的细节理解，即第一段告诉我们雨林的什么特点。",
+      "stemTranslationZh": "从第一段我们可以了解到关于雨林的什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们产生氧气。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Rainforests are the lungs of the planet ﹣ storing vast quantities of carbon dioxide and producing a significant amount of the world’s oxygen.",
+            "sourceEntity": "producing a significant amount of the world’s oxygen",
+            "optionText": "They produce oxygen.",
+            "optionEntity": "They produce oxygen.",
+            "explanation": "产生氧气的信息出现在第二段，而本题要求从第一段获取信息，定位段落错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "producing a significant amount of the world’s oxygen",
+              "anchor": "氧气信息在第二段"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们覆盖广阔的面积。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Rainforests cover a vast area.",
+            "explanation": "第一段只描述物种丰富，并未提及雨林覆盖面积广阔，原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们被很好地管理。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Rainforests are well managed.",
+            "explanation": "第一段没有任何关于雨林被人为管理的信息，原文未提及。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们野生动植物丰富。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-d-1",
+              "quote": "Rainforests are home to a rich variety of medicinal plants, food, birds and animals.",
+              "anchor": "a rich variety of plants and animals"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-ii-reading-d-1",
+              "quote": "a single bush (灌木丛) in the Amazon may have more species of ants than the whole of Britain",
+              "anchor": "物种之多举例"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They are rich in wildlife.",
+          "sourceRole": "correctOption",
+          "targetText": "Rainforests are home to a rich variety of medicinal plants, food, birds and animals.",
+          "targetParagraphId": "para-2020-ii-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项 rich in wildlife 与原文 a rich variety of medicinal plants, food, birds and animals 同义替换，wildlife 概括了植物、鸟类和动物。"
+        }
+      ]
+    },
+    "q-2020-ii-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对雨林生存系统的细节理解，判断哪一项对雨林生存贡献最大。",
+      "stemTranslationZh": "下列哪一项对雨林的生存贡献最大？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "大雨。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the tall trees make a canopy (树冠层) of branches and leaves which protect themselves, smaller plants, and the forest animals from heavy rain, intense dry heat from the sun and strong winds.",
+            "sourceHighlight": "protect themselves, smaller plants, and the forest animals from heavy rain",
+            "optionText": "Heavy rains.",
+            "optionHighlight": "Heavy rains",
+            "explanation": "原文中 heavy rain 是树冠层要保护雨林免受的对象，而非对生存有贡献的因素，作用关系正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "protect themselves, smaller plants, and the forest animals from heavy rain",
+              "anchor": "大雨是被防护的对象"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "大树。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "the tall trees make a canopy (树冠层) of branches and leaves which protect themselves, smaller plants, and the forest animals from heavy rain, intense dry heat from the sun and strong winds.",
+              "anchor": "tall trees 形成树冠层保护整片雨林"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "Rainforests have their own perfect system for ensuring their own survival",
+              "anchor": "雨林的生存系统"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "小植物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the tall trees make a canopy (树冠层) of branches and leaves which protect themselves, smaller plants, and the forest animals from heavy rain, intense dry heat from the sun and strong winds.",
+            "sourceHighlight": "protect themselves, smaller plants",
+            "optionText": "Small plants.",
+            "optionHighlight": "Small plants",
+            "explanation": "原文中 smaller plants 是被大树树冠层保护的对象，而非对雨林生存做出最大贡献者，角色相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "protect themselves, smaller plants",
+              "anchor": "小植物是被保护对象"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "森林动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the tall trees make a canopy (树冠层) of branches and leaves which protect themselves, smaller plants, and the forest animals from heavy rain, intense dry heat from the sun and strong winds.",
+            "sourceHighlight": "the forest animals from heavy rain",
+            "optionText": "Forest animals.",
+            "optionHighlight": "Forest animals",
+            "explanation": "原文中 forest animals 同样是被大树保护的对象，而非贡献者，作用关系与题意相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "the forest animals from heavy rain",
+              "anchor": "动物是被保护对象"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "contributes most to the survival of rainforests",
+          "sourceRole": "stem",
+          "targetText": "the tall trees make a canopy (树冠层) of branches and leaves which protect themselves, smaller plants, and the forest animals",
+          "targetParagraphId": "para-2020-ii-reading-d-2",
+          "relationType": "locationCue",
+          "note": "题干 contributes most to the survival 定位到原文 tall trees make a canopy ... protect 这一句，大树是主动保护者，故对生存贡献最大。"
+        }
+      ]
+    },
+    "q-2020-ii-034": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对第三段中树木枝叶互不接触原因的细节理解。",
+      "stemTranslationZh": "不同树木的枝叶为什么彼此避免接触？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了获得更多阳光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The leaves and branches avoid touching each other for more sunlight.",
+            "explanation": "第三段说明互不接触是为防止病害传播和阻碍食叶昆虫，并未提及为了获得更多阳光，原文未提及。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了获得更多生长空间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The leaves and branches avoid touching each other for more growing space.",
+            "explanation": "原文未提及枝叶互不接触是为了争取更多生长空间，原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了自我保护。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-d-3",
+              "quote": "Scientists think this is the plants’ way to prevent the spread of any tree diseases and make life more difficult for leaf﹣eating insects like caterpillars.",
+              "anchor": "防止病害传播并阻碍食叶昆虫"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了发现昆虫。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "make life more difficult for leaf﹣eating insects like caterpillars",
+            "sourceHighlight": "make life more difficult for leaf﹣eating insects",
+            "optionText": "For the detection of insects.",
+            "optionHighlight": "the detection of insects",
+            "explanation": "原文是让食叶昆虫的生存更困难（抵御昆虫），而非为了发现昆虫，目的方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-3",
+              "quote": "make life more difficult for leaf﹣eating insects like caterpillars",
+              "anchor": "抵御而非发现昆虫"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "For self﹣protection.",
+          "sourceRole": "correctOption",
+          "targetText": "this is the plants’ way to prevent the spread of any tree diseases and make life more difficult for leaf﹣eating insects",
+          "targetParagraphId": "para-2020-ii-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 self﹣protection 是对原文 prevent the spread of any tree diseases and make life more difficult for leaf﹣eating insects 的概括，即植物自我保护的方式。"
+        }
+      ]
+    },
+    "q-2020-ii-035": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查对全文主旨的把握，选择最合适的文章标题。",
+      "stemTranslationZh": "本文最合适的标题是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "赋予生命的雨林",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-ii-reading-d-2",
+              "quote": "Rainforests are the lungs of the planet ﹣ storing vast quantities of carbon dioxide and producing a significant amount of the world’s oxygen.",
+              "anchor": "地球之肺、产生氧气"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-ii-reading-d-1",
+              "quote": "Rainforests are home to a rich variety of medicinal plants, food, birds and animals.",
+              "anchor": "孕育丰富生命"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "丛林法则",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The text is about the law of the jungle.",
+            "explanation": "全文介绍雨林的生态价值，并未讨论丛林中弱肉强食的法则，原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "亚马逊的动物",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Rainforests are home to a rich variety of medicinal plants, food, birds and animals.",
+            "sourceHighlight": "a rich variety of medicinal plants, food, birds and animals",
+            "optionText": "Animals in the Amazon",
+            "optionHighlight": "Animals in the Amazon",
+            "explanation": "动物只是文章涉及的内容之一，且亚马逊仅为举例，以此作标题范围过窄，不能涵盖全文主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-1",
+              "quote": "a single bush (灌木丛) in the Amazon may have more species of ants than the whole of Britain",
+              "anchor": "亚马逊仅为举例"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "雨林的天气",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Rainforests can generate 75% of their own rain.",
+            "sourceHighlight": "generate 75% of their own rain",
+            "optionText": "Weather in Rainforests",
+            "optionHighlight": "Weather in Rainforests",
+            "explanation": "降雨只是最后一段的内容，以雨林天气作标题范围过窄，无法概括雨林孕育生命的整体主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-ii-reading-d-4",
+              "quote": "Rainforests can generate 75% of their own rain.",
+              "anchor": "降雨仅为末段内容"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Life﹣Giving Rainforests",
+          "sourceRole": "correctOption",
+          "targetText": "Rainforests are the lungs of the planet ﹣ storing vast quantities of carbon dioxide and producing a significant amount of the world’s oxygen.",
+          "targetParagraphId": "para-2020-ii-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "标题 Life﹣Giving 概括全文：雨林作为 lungs of the planet 产生氧气并孕育丰富生命，体现其赋予生命的核心主旨。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2020-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-i-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-i-grammar-fill": {
+      "overview": "本文是一篇介绍博物馆藏品来源与现代博物馆功能的说明文。"
+    }
+  },
+  "blanks": {
+    "q-2020-i-056": {
+      "blankId": "blank-2020-i-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "wealth",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "wealthy",
+      "role": null,
+      "path": null,
+      "reason": "空格后紧跟名词 people，需要形容词作定语修饰它，所以把名词 wealth 派生为形容词 wealthy（富有的）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "people travelled and collected plants",
+          "signalSide": "passage",
+          "relation": "空格直接修饰其后的名词 people，故需形容词形式 wealthy。"
+        }
+      ],
+      "teachingNote": "空格后是名词、空格作定语时，把提示名词派生成形容词。"
+    },
+    "q-2020-i-057": {
+      "blankId": "blank-2020-i-057",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "or",
+      "role": null,
+      "path": null,
+      "reason": "前文 too big 与后文 they died 是两种并列的情形（不是因果或从属），用并列连词 or 连接表示二选一的可能。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "until it got too big",
+          "signalSide": "passage",
+          "relation": "本句与后面 until they died 并列，用 or 连接两个 until 引导的情形。"
+        }
+      ],
+      "teachingNote": "连接两个对等成分且无从属关系时，填并列连词 or/and/but。"
+    },
+    "q-2020-i-058": {
+      "blankId": "blank-2020-i-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "form",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "formed",
+      "role": null,
+      "path": null,
+      "reason": "句子缺谓语，主语 The 80,000 objects 与 form 是主动关系，且讲述过去博物馆藏品的形成，用一般过去时 formed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The 80, 000 objects collected by Sir Hans Sloane",
+          "signalSide": "passage",
+          "relation": "本空是整句的谓语，主语为复数 objects，与构成核心藏品为主动关系，故用过去式 formed。"
+        }
+      ],
+      "teachingNote": "句中没有谓语时，提示动词要变为谓语，按主语和时间确定时态语态。"
+    },
+    "q-2020-i-059": {
+      "blankId": "blank-2020-i-059",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "path": null,
+      "reason": "先行词 the British Museum 是物，后接缺主语的定语从句 opened in 1759，用关系代词 which 引导。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the core collection of the British Museum",
+          "signalSide": "passage",
+          "relation": "先行词 the British Museum 为物，从句缺主语，故用关系代词 which。"
+        }
+      ],
+      "teachingNote": "先行词为物、从句缺主语时，用关系代词 which/that 引导定语从句。"
+    },
+    "q-2020-i-060": {
+      "blankId": "blank-2020-i-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "call",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are called",
+      "role": null,
+      "path": null,
+      "reason": "句子缺谓语，主语 The parts 与 call 是被动关系（部分被称作 galleries），用一般现在时被动 are called。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The parts of a museum open to the public",
+          "signalSide": "passage",
+          "relation": "主语 The parts 是被叫作的对象，与 call 为被动关系，故用 are called。"
+        }
+      ],
+      "teachingNote": "主语是动作承受者时谓语用被动语态，按主语数定 be 动词。"
+    },
+    "q-2020-i-061": {
+      "blankId": "blank-2020-i-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is",
+      "role": null,
+      "path": null,
+      "reason": "主语中心词 a small part 为单数，陈述普遍事实用一般现在时，故 be 动词用 is。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "only a small part of a museum’s collection",
+          "signalSide": "passage",
+          "relation": "主语中心词 a small part 为单数第三人称，谓语 be 用单数现在式 is。"
+        }
+      ],
+      "teachingNote": "of 短语作主语时看中心词的数，单数中心词谓语用 is。"
+    },
+    "q-2020-i-062": {
+      "blankId": "blank-2020-i-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "they",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "themselves",
+      "role": null,
+      "path": null,
+      "reason": "imagine 的逻辑主语 visitors 与动作宾语指同一对象，需用反身代词 themselves。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "visitors can play with computer simulations",
+          "signalSide": "passage",
+          "relation": "主语 visitors 想象的对象就是他们自己，主宾同指，故用反身代词 themselves。"
+        }
+      ],
+      "teachingNote": "动作发出者与承受者为同一人时，宾语用反身代词。"
+    },
+    "q-2020-i-063": {
+      "blankId": "blank-2020-i-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "walk",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "walking",
+      "role": "object",
+      "path": "fast",
+      "reason": "imagine 后接动名词作宾语，且与前文 living 由 or 并列，故 walk 用现在分词 walking 保持平行。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "living at a different time in history or",
+          "signalSide": "passage",
+          "relation": "本空与前面 living 由 or 并列，同作 imagine 的宾语，故用 -ing 形式 walking。"
+        }
+      ],
+      "teachingNote": "imagine 后接 -ing 作宾语，并列结构要保持形式一致。"
+    },
+    "q-2020-i-064": {
+      "blankId": "blank-2020-i-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "accurate",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "accuracy",
+      "role": null,
+      "path": null,
+      "reason": "空格与 Historical 一起作句子主语，需要名词，故把形容词 accurate 派生为名词 accuracy（准确性）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "is important but so is entertainment",
+          "signalSide": "passage",
+          "relation": "本空作主语并由 is 作谓语，需名词，故用 accuracy。"
+        }
+      ],
+      "teachingNote": "空格作主语需名词时，把提示形容词派生为对应名词。"
+    },
+    "q-2020-i-065": {
+      "blankId": "blank-2020-i-065",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "path": null,
+      "reason": "固定搭配 compete for（为争夺……而竞争），博物馆为争夺人们的闲暇与金钱而竞争，故填介词 for。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "Museums must compete",
+          "signalSide": "passage",
+          "relation": "compete for sth 表示为争夺某物而竞争，故填介词 for。"
+        }
+      ],
+      "teachingNote": "compete for sth 是固定搭配，表示为争夺某物而竞争。"
+    }
+  }
+}

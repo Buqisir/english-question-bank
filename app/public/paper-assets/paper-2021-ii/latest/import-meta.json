@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2021-ii",
+  "sourceFileName": "2021年新课标II卷-答案版.docx",
+  "sourceFileSha256": "8cf6623dcedc44af8cfde16fafca42a29b60c7b06ebf2eff5fc61545fdf05278",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:40.787Z",
+  "paper": {
+    "year": 2021,
+    "region": "全国新课标Ⅱ",
+    "paperName": "2021年新课标Ⅱ卷",
+    "examCode": "2021-ii",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2021",
+      "新课标Ⅱ卷"
+    ]
+  },
+  "groups": {
+    "group-2021-ii-reading-a": {
+      "groupId": "group-2021-ii-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则应用文广告，介绍约克郡夏季可以参加的四项活动：Harrogate音乐节、Jodie健身夏季课程、毛毡画制作工作坊以及一个数学主题展览。每项活动后附有日期和票价信息。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2021-ii-reading-b": {
+      "groupId": "group-2021-ii-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇记叙文，作者是国家动物园的饲养员，讲述他把两只苏门答腊虎幼崽 Spot 和 Stripe 带回家进行二十四小时照料、与家人一起陪伴它们成长、最终在幼崽四个月大时把它们送回动物园的经历与感受。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2021-ii-reading-c": {
+      "groupId": "group-2021-ii-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇新闻报道，讲述获得“世界最佳教师”称号并赢得百万奖金的英国教师 Andria Zafirakou 用奖金启动一个项目，把各领域艺术家带进英国学校，以激励孩子并提升学校艺术教学，多位艺术界与历史学界人士对此表示支持。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2021-ii-reading-d": {
+      "groupId": "group-2021-ii-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科技说明/报道类文章，围绕一位澳大利亚教授研发用于监测放牧牛群健康的机器人展开，介绍其工作原理，并呈现不同牧场主对在养牛业中使用机器人的不同看法。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2021-ii-seven-choices": {
+      "groupId": "group-2021-ii-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇关于如何提高阅读速度的说明文/建议清单。开头先说明：若需大量阅读学习，快速阅读能力很有价值；随后用项目符号列出若干条具体建议（保持舒适、先翻看全书、按书的类型决定阅读量、随手记笔记等）。七选五考查清单式建议文的话题句、并列建议项与指代衔接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2021-ii-cloze": {
+      "groupId": "group-2021-ii-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2021-ii-grammar-fill": {
+      "groupId": "group-2021-ii-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2021-ii-writing-application": {
+      "groupId": "group-2021-ii-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2021-ii-writing-continuation": {
+      "groupId": "group-2021-ii-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

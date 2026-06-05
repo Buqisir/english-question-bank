@@ -1,0 +1,3264 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2020-i",
+    "title": "2020年新课标I卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2020年新课标I卷-答案版.docx",
+      "sha256": "96ed0fd208ee95f4989cbf2b651a70ba57baf09d917af7a94e793191f63ef7d2",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2020-i-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2020-i-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2020-i-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2020-i-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2020-i-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2020-i-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2020-i-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2020-i-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2020-i-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2020-i-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2020-i-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2020-i-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2020-i-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2020-i-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-2020-i-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-2020-i-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2020-i-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-2020-i-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2020-i-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-i-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-i-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2020-i-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-i-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-i-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2020-i-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-i-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-2020-i-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-i-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-i-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: When Mrs.Meredith heard of John's idea, she thought it was a good one, too.\n\nParagraph 2: With everything ready, Bernard started out on his new business."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-2020-i-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-2020-i-reading-a": {
+        "groupId": "group-2020-i-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2020-i-021",
+          "q-2020-i-022",
+          "q-2020-i-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-a-1",
+              "text": "POETRY CHALLENGE"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-2",
+              "text": "Write a poem about how courage, determination, and strength have helped you face challenges in your life. \n Prizes"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-3",
+              "text": "3 Grand Prizes: Trip to Washington, D. C. for each of three winners, a parent and one other person of the winner’s choice. Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-4",
+              "text": "6 First Prizes: The book Sky Pioneer: A Photobiography of Amelia Earhart signed by author Corinne Szabo and pilot Linda Finch."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-5",
+              "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight. \n Rules"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-6",
+              "text": "Follow all rules carefully to prevent disqualification."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-7",
+              "text": "■Write a poem using 100 words or fewer. Your poem can be any format, any number of lines."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-8",
+              "text": "■Write by hand or type on a single sheet of paper. You may use both the front and back of the paper."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-9",
+              "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-10",
+              "text": "■Mail your entry to us by October 31 this year."
+            }
+          ]
+        }
+      },
+      "group-2020-i-reading-b": {
+        "groupId": "group-2020-i-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2020-i-024",
+          "q-2020-i-025",
+          "q-2020-i-026",
+          "q-2020-i-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-b-1",
+              "text": "Jennifer Mauer has needed more willpower than the typical college student to pursue her goal of earning a nursing degree. That willpower bore fruit when Jennifer graduated from University of Wisconsin﹣Eau Claire and became the first in her large family to earn a bachelor’s degree. Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children. Her dad worked at a job away from the farm, and her mother ran the farm with the kids. After high school, Jennifer attended a local technical college, working to pay her tuition (学费) , because there was no extra money set aside for a college education. After graduation, she worked to help her sisters and brothers pay for their schooling. Jennifer now is married and has three children of her own. She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing. She chose the UW﹣Eau Claire program at Ministry Saint Joseph’s Hospital in Marshfield because she was able to pursue her four﹣year degree close to home. She could drive to class and be home in the evening to help with her kids. Jennifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68﹣year﹣old mother helped take care of the children at times. Through it all, she remained in good academic standing and graduated with honors. Jennifer sacrificed (牺牲) to achieve her goal, giving up many nights with her kids and missing important events to study. “Some nights my heart was breaking to have to pick between my kids and studying for exams or papers, “ she says. However, her children have learned an important lesson witnessing their mother earn her degree. Jennifer is a first﹣generation graduate and an inspiration to her family﹣and that’s pretty powerful."
+            }
+          ]
+        }
+      },
+      "group-2020-i-reading-c": {
+        "groupId": "group-2020-i-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2020-i-028",
+          "q-2020-i-029",
+          "q-2020-i-030",
+          "q-2020-i-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-c-1",
+              "text": "In the mid-1990s, Toni Bissell taught English as a volunteer in Uzbekistan. He left after seven months, physically broken and having lost his mind. A few years later, still attracted to the country, he returned to Uzbekistan to write an article about the disappearance of the Aral Sea."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-2",
+              "text": "His visit, however, ended up involving a lot more than that. Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea. It is the story of an American travelling to a strange land, and of the people he meets on his way: Rustam, his translator, a lovely 24-year-old who picked up his colorful English in California, Oleg and Natasha, his hosts in Tashkent, and a string of foreign aid workers."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-3",
+              "text": "This is a quick look at life in Uzbekistan, made of friendliness and warmth, but also its darker side of society. In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing. In Ferghana, he attends a mountain funeral (葬礼) followed by a strange drinking party. And in Karakalpakstan, he is saddened by the dust storms, diseases and fishing boats stuck miles from the sea."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-4",
+              "text": "Mr Bissell skillfully organizes historical insights and cultural references, making his tale a well-rounded picture of Uzbekistan, seen from Western eyes. His judgment and references are decidedly American, as well as his delicate stomach. As the author explains, this is neither a travel nor a history book, or even a piece of reportage. Whatever it is, the result is a fine and vivid description of the purest of Central Asian traditions."
+            }
+          ]
+        }
+      },
+      "group-2020-i-reading-d": {
+        "groupId": "group-2020-i-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2020-i-032",
+          "q-2020-i-033",
+          "q-2020-i-034",
+          "q-2020-i-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-d-1",
+              "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake. And contrary to existing research that says you should avoid eating with heavier people who order large portions (份) , it’s the beanpoles with big appetites you really need to avoid. To test the effect of social influence on eating habits, the researchers conducted two experiments. In the first, 95 undergraduate women were individually invited into a lab to ostensibly (表面上) participate in a study about movie viewership. Before the film began, each woman was asked to help herself to a snack. An actor hired by the researchers grabbed her food first. In her natural state, the actor weighed 105 pounds. But in half the cases she wore a specially designed fat suit which increased her weight to 180 pounds."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-2",
+              "text": "Both the fat and thin versions of the actor took a large amount of food. The participants followed suit, taking more food than they normally would have. However, they took significantly more when the actor was thin."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-3",
+              "text": "For the second test, in one case the thin actor took two pieces of candy from the snack bowls. In the other case, she took 30 pieces. The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-4",
+              "text": "The tests show that the social environment is extremely influential when we’re making decisions. If this fellow participant is going to eat more, so will I. Call it the “I’ll have what she’s having” effect. However, we’ll adjust the influence. If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits. But if a thin person eats a lot, I’ll follow suit. If he can eat much and keep slim, why can’t I?"
+            }
+          ]
+        }
+      },
+      "group-2020-i-seven-choices": {
+        "groupId": "group-2020-i-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2020-i-036",
+          "q-2020-i-037",
+          "q-2020-i-038",
+          "q-2020-i-039",
+          "q-2020-i-040"
+        ],
+        "blankIds": [
+          "blank-2020-i-036",
+          "blank-2020-i-037",
+          "blank-2020-i-038",
+          "blank-2020-i-039",
+          "blank-2020-i-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Do the opposite."
+          },
+          {
+            "label": "B",
+            "text": "You want to be an effective public speaker."
+          },
+          {
+            "label": "C",
+            "text": "You don’t need to apologize for a minor slip."
+          },
+          {
+            "label": "D",
+            "text": "When it comes to public speaking, less is usually more."
+          },
+          {
+            "label": "E",
+            "text": "The objective of most speeches is to benefit the audience."
+          },
+          {
+            "label": "F",
+            "text": "Take the fear out of public speaking by focusing on your listeners."
+          },
+          {
+            "label": "G",
+            "text": "However, the majority of people are effective speakers because they train to be."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-seven-title",
+              "text": "Some individuals are born with a gift for public speaking. __36__   Do you want to be a good public speaker? Here are some principles you must master."
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p1",
+              "text": "People want to listen to someone who is interesting, relaxed and comfortable. Too often, when you stand up to give a speech, you focus on the “public” at the expense of the “speaking.” __37__   Focus on the speaking. Talk directly to your audience, be yourself and make a connection."
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p2",
+              "text": "Even the most successful public speaker will make mistakes. Yet, the only one who cares about any mistake is the one who is speaking. People’s attention wanders constantly. In fact, most people only absorb about 20 percent of a speaker’s message. So, don’t stop speaking when you make a mistake unless it’s a truly serious one. __38__"
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p3",
+              "text": "Your goal is not to be a perfect public speaker. __39__   And like everything else in life, that takes practice. Remember, even world champion athletes practice their skills on a consistent basis."
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p4",
+              "text": "__40__   It’s rare to hear someone say, “I wish that speaker had spoken longer. “ On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over. It seemed to go on forever!” So surprise your audience. Always make your presentation just a bit shorter than anticipated. It’s better to leave your listeners wishing for more than shifting restlessly in their seats waiting for your speech finally to end."
+            }
+          ]
+        }
+      },
+      "group-2020-i-cloze": {
+        "groupId": "group-2020-i-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2020-i-041",
+          "q-2020-i-042",
+          "q-2020-i-043",
+          "q-2020-i-044",
+          "q-2020-i-045",
+          "q-2020-i-046",
+          "q-2020-i-047",
+          "q-2020-i-048",
+          "q-2020-i-049",
+          "q-2020-i-050",
+          "q-2020-i-051",
+          "q-2020-i-052",
+          "q-2020-i-053",
+          "q-2020-i-054",
+          "q-2020-i-055"
+        ],
+        "blankIds": [
+          "blank-2020-i-041",
+          "blank-2020-i-042",
+          "blank-2020-i-043",
+          "blank-2020-i-044",
+          "blank-2020-i-045",
+          "blank-2020-i-046",
+          "blank-2020-i-047",
+          "blank-2020-i-048",
+          "blank-2020-i-049",
+          "blank-2020-i-050",
+          "blank-2020-i-051",
+          "blank-2020-i-052",
+          "blank-2020-i-053",
+          "blank-2020-i-054",
+          "blank-2020-i-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-cloze-title",
+              "text": "Molai grew up in a tiny village in India. The village lay near some wetlands which became his second __41__ . He learned the value and beauty of __42__ there from a very young age."
+            },
+            {
+              "paragraphId": "para-2020-i-cloze-p1",
+              "text": "When he was 16, Molai began to notice something __43__ happening around his home. A flood had hit the area earlier that year and the __44__ it caused had driven away a number of birds. __45__ , the number of snakes had declined as well. He __46__ that it was because there weren’t enough trees to protect them from the __47__ . The solution, of course, was to plant trees so the animals could seek __48__ during the daytime. He turned to the __49__ department for help but was told that nothing would grow there. However, Molai went looking on his own and __50__ a nearby island where he began to plant trees. __51__ young plants in the dry season was __52__ for a lone boy. Molai built at the __53__ of each sapling (幼树) a bamboo platform, where he placed earthen pots with small holes to __54__ rainwater. The water would then drip (滴落) on the plants below."
+            },
+            {
+              "paragraphId": "para-2020-i-cloze-p2",
+              "text": "Molai __55__ to plant trees for the next 37 years. His efforts have resulted in 1,360 acres of naturally—grown land that has become home to many plants and animals."
+            }
+          ]
+        }
+      },
+      "group-2020-i-grammar-fill": {
+        "groupId": "group-2020-i-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2020-i-056",
+          "q-2020-i-057",
+          "q-2020-i-058",
+          "q-2020-i-059",
+          "q-2020-i-060",
+          "q-2020-i-061",
+          "q-2020-i-062",
+          "q-2020-i-063",
+          "q-2020-i-064",
+          "q-2020-i-065"
+        ],
+        "blankIds": [
+          "blank-2020-i-056",
+          "blank-2020-i-057",
+          "blank-2020-i-058",
+          "blank-2020-i-059",
+          "blank-2020-i-060",
+          "blank-2020-i-061",
+          "blank-2020-i-062",
+          "blank-2020-i-063",
+          "blank-2020-i-064",
+          "blank-2020-i-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-grammar-fill-title",
+              "text": "Many people have the hobby of collecting things, e. g. stamps, postcards or antiques. In the 18th and 19th centuries, __56__ (wealth) people travelled and collected plants, historical objects and works of art. They kept their collection at home until it got too big __57__until they died, and then it was given to a museum. The 80, 000 objects collected by Sir Hans Sloane, for example, __58__ (form) the core collection of the British Museum __59__opened in 1759."
+            },
+            {
+              "paragraphId": "para-2020-i-grammar-fill-p1",
+              "text": "The parts of a museum open to the public __60__ (call) galleries or rooms. Often, only a small part of a museum’s collection __61__ (be) on display. Most of it is stored away or used for research."
+            },
+            {
+              "paragraphId": "para-2020-i-grammar-fill-p2",
+              "text": "Many museums are lively places and they attract a lot of visitors. As well as looking at exhibits, visitors can play with computer simulations (模拟) and imagine__62__ (they) living at a different time in history or __63__ (walk) through a rainforest. At the Jorvik Centre in York, the city’s Viking settlement is recreated, and people experience the sights, sounds and smells of the old town. Historical __64__ (accurate) is important but so is entertainment. Museums must compete __65__people’s spare time and money with other amusements. Most museums also welcome school groups and arrange special activities for children."
+            }
+          ]
+        }
+      },
+      "group-2020-i-writing-application": {
+        "groupId": "group-2020-i-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-2020-i-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-writing-app-title",
+              "text": "假定你是李华，上周日你校举办了5公里越野赛跑活动．请你为校英文报写一篇报道，内容包括："
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p1",
+              "text": "(1)参加人员；"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p2",
+              "text": "(2)跑步路线：从校门口到南山脚下；"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p3",
+              "text": "(3)活动反响。"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p4",
+              "text": "(1)写作词数应为80左右；"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p5",
+              "text": "(2)请按如下格式在答题卡的相应位置作答。 \n A Cross-Country Running Race"
+            }
+          ]
+        }
+      },
+      "group-2020-i-writing-continuation": {
+        "groupId": "group-2020-i-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-2020-i-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-writing-cont-title",
+              "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p1",
+              "text": "The Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges."
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p2",
+              "text": "Mrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them."
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p3",
+              "text": "One morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy—his name was Bernard—had interested her very much."
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p4",
+              "text": "“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p5",
+              "text": "After their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p6",
+              "text": "“So do I,” said Harry. “We really should do something to assist them.”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p7",
+              "text": "For some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p8",
+              "text": "The other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2020-i-021": {
+        "questionId": "q-2020-i-021",
+        "questionNo": 21,
+        "groupId": "group-2020-i-reading-a",
+        "stem": "How many people can each grand prize winner take on the free trip?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Two."
+          },
+          {
+            "label": "B",
+            "text": "Three."
+          },
+          {
+            "label": "C",
+            "text": "Four."
+          },
+          {
+            "label": "D",
+            "text": "Six."
+          }
+        ]
+      },
+      "q-2020-i-022": {
+        "questionId": "q-2020-i-022",
+        "questionNo": 22,
+        "groupId": "group-2020-i-reading-a",
+        "stem": "What will each of the honorable mention winners get?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A plane ticket."
+          },
+          {
+            "label": "B",
+            "text": "A book by Corinne Szabo."
+          },
+          {
+            "label": "C",
+            "text": "A special T-shirt."
+          },
+          {
+            "label": "D",
+            "text": "A photo of Amelia Earhart."
+          }
+        ]
+      },
+      "q-2020-i-023": {
+        "questionId": "q-2020-i-023",
+        "questionNo": 23,
+        "groupId": "group-2020-i-reading-a",
+        "stem": "Which of the following will result in disqualification? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "Typing your poem out."
+          },
+          {
+            "label": "B",
+            "text": "Writing a poem of 120 words."
+          },
+          {
+            "label": "C",
+            "text": "Using both sides of the paper."
+          },
+          {
+            "label": "D",
+            "text": "Mailing your entry on October 30."
+          }
+        ]
+      },
+      "q-2020-i-024": {
+        "questionId": "q-2020-i-024",
+        "questionNo": 24,
+        "groupId": "group-2020-i-reading-b",
+        "stem": "What did Jennifer do after high school？",
+        "options": [
+          {
+            "label": "A",
+            "text": "She helped her dad with his work．"
+          },
+          {
+            "label": "B",
+            "text": "She ran the family farm on her own．"
+          },
+          {
+            "label": "C",
+            "text": "She supported herself through college．"
+          },
+          {
+            "label": "D",
+            "text": "She taught her sisters and brothers at home．"
+          }
+        ]
+      },
+      "q-2020-i-025": {
+        "questionId": "q-2020-i-025",
+        "questionNo": 25,
+        "groupId": "group-2020-i-reading-b",
+        "stem": "Why did Jennifer choose the program at Ministry Saint Joseph's Hospital in Marshfield？",
+        "options": [
+          {
+            "label": "A",
+            "text": "To take care of her kids easily．"
+          },
+          {
+            "label": "B",
+            "text": "To learn from the best nurses．"
+          },
+          {
+            "label": "C",
+            "text": "To save money for her parents．"
+          },
+          {
+            "label": "D",
+            "text": "To find a well﹣paid job there．"
+          }
+        ]
+      },
+      "q-2020-i-026": {
+        "questionId": "q-2020-i-026",
+        "questionNo": 26,
+        "groupId": "group-2020-i-reading-b",
+        "stem": "What did Jennifer sacrifice to achieve her goal？",
+        "options": [
+          {
+            "label": "A",
+            "text": "Her health．"
+          },
+          {
+            "label": "B",
+            "text": "Her time with family．"
+          },
+          {
+            "label": "C",
+            "text": "Her reputation．"
+          },
+          {
+            "label": "D",
+            "text": "Her chance of promotion．"
+          }
+        ]
+      },
+      "q-2020-i-027": {
+        "questionId": "q-2020-i-027",
+        "questionNo": 27,
+        "groupId": "group-2020-i-reading-b",
+        "stem": "What can we learn from Jennifer's story？ C",
+        "options": [
+          {
+            "label": "A",
+            "text": "Time is money．"
+          },
+          {
+            "label": "B",
+            "text": "Love breaks down barriers．"
+          },
+          {
+            "label": "C",
+            "text": "Hard work pays off．"
+          },
+          {
+            "label": "D",
+            "text": "Education is the key to success．"
+          }
+        ]
+      },
+      "q-2020-i-028": {
+        "questionId": "q-2020-i-028",
+        "questionNo": 28,
+        "groupId": "group-2020-i-reading-c",
+        "stem": "What made Mr Bissell return to Uzbekistan？",
+        "options": [
+          {
+            "label": "A",
+            "text": "His friends' invitation．"
+          },
+          {
+            "label": "B",
+            "text": "His interest in the country．"
+          },
+          {
+            "label": "C",
+            "text": "His love for teaching．"
+          },
+          {
+            "label": "D",
+            "text": "His desire to regain health．"
+          }
+        ]
+      },
+      "q-2020-i-029": {
+        "questionId": "q-2020-i-029",
+        "questionNo": 29,
+        "groupId": "group-2020-i-reading-c",
+        "stem": "What does the underlined word \"that\" in paragraph 2 refer to？",
+        "options": [
+          {
+            "label": "A",
+            "text": "Developing a serious mental disease．"
+          },
+          {
+            "label": "B",
+            "text": "Taking a guided tour in Central Asia．"
+          },
+          {
+            "label": "C",
+            "text": "Working as a volunteer in Uzbekistan．"
+          },
+          {
+            "label": "D",
+            "text": "Writing an article about the Aral Sea．"
+          }
+        ]
+      },
+      "q-2020-i-030": {
+        "questionId": "q-2020-i-030",
+        "questionNo": 30,
+        "groupId": "group-2020-i-reading-c",
+        "stem": "Which of the following best describes Mr Bissell's road trip in Uzbekistan？",
+        "options": [
+          {
+            "label": "A",
+            "text": "Romantic．"
+          },
+          {
+            "label": "B",
+            "text": "Eventful．"
+          },
+          {
+            "label": "C",
+            "text": "Pleasant．"
+          },
+          {
+            "label": "D",
+            "text": "Dangerous．"
+          }
+        ]
+      },
+      "q-2020-i-031": {
+        "questionId": "q-2020-i-031",
+        "questionNo": 31,
+        "groupId": "group-2020-i-reading-c",
+        "stem": "What is the purpose of this text？ D",
+        "options": [
+          {
+            "label": "A",
+            "text": "To introduce a book．"
+          },
+          {
+            "label": "B",
+            "text": "To explain a cultural phenomenon．"
+          },
+          {
+            "label": "C",
+            "text": "To remember a writer．"
+          },
+          {
+            "label": "D",
+            "text": "To recommend a travel destination．"
+          }
+        ]
+      },
+      "q-2020-i-032": {
+        "questionId": "q-2020-i-032",
+        "questionNo": 32,
+        "groupId": "group-2020-i-reading-d",
+        "stem": "What is the recent study mainly about？",
+        "options": [
+          {
+            "label": "A",
+            "text": "Food safety．"
+          },
+          {
+            "label": "B",
+            "text": "Movie viewership．"
+          },
+          {
+            "label": "C",
+            "text": "Consumer demand．"
+          },
+          {
+            "label": "D",
+            "text": "Eating behavior．"
+          }
+        ]
+      },
+      "q-2020-i-033": {
+        "questionId": "q-2020-i-033",
+        "questionNo": 33,
+        "groupId": "group-2020-i-reading-d",
+        "stem": "What does the underlined word \"beanpoles\" in paragraph 1 refer to？",
+        "options": [
+          {
+            "label": "A",
+            "text": "Big eaters．"
+          },
+          {
+            "label": "B",
+            "text": "Overweight persons．"
+          },
+          {
+            "label": "C",
+            "text": "Picky eaters．"
+          },
+          {
+            "label": "D",
+            "text": "Tall thin persons．"
+          }
+        ]
+      },
+      "q-2020-i-034": {
+        "questionId": "q-2020-i-034",
+        "questionNo": 34,
+        "groupId": "group-2020-i-reading-d",
+        "stem": "Why did the researchers hire the actor？",
+        "options": [
+          {
+            "label": "A",
+            "text": "To see how she would affect the participants．"
+          },
+          {
+            "label": "B",
+            "text": "To test if the participants could recognize her．"
+          },
+          {
+            "label": "C",
+            "text": "To find out what she would do in the two tests．"
+          },
+          {
+            "label": "D",
+            "text": "To study why she could keep her weight down．"
+          }
+        ]
+      },
+      "q-2020-i-035": {
+        "questionId": "q-2020-i-035",
+        "questionNo": 35,
+        "groupId": "group-2020-i-reading-d",
+        "stem": "On what basis do we \"adjust the influence\" according to the last paragraph？",
+        "options": [
+          {
+            "label": "A",
+            "text": "How hungry we are．"
+          },
+          {
+            "label": "B",
+            "text": "How slim we want to be．"
+          },
+          {
+            "label": "C",
+            "text": "How we perceive others．"
+          },
+          {
+            "label": "D",
+            "text": "How we feel about the food．"
+          }
+        ]
+      },
+      "q-2020-i-036": {
+        "questionId": "q-2020-i-036",
+        "questionNo": 36,
+        "groupId": "group-2020-i-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2020-i-036"
+      },
+      "q-2020-i-037": {
+        "questionId": "q-2020-i-037",
+        "questionNo": 37,
+        "groupId": "group-2020-i-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2020-i-037"
+      },
+      "q-2020-i-038": {
+        "questionId": "q-2020-i-038",
+        "questionNo": 38,
+        "groupId": "group-2020-i-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2020-i-038"
+      },
+      "q-2020-i-039": {
+        "questionId": "q-2020-i-039",
+        "questionNo": 39,
+        "groupId": "group-2020-i-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2020-i-039"
+      },
+      "q-2020-i-040": {
+        "questionId": "q-2020-i-040",
+        "questionNo": 40,
+        "groupId": "group-2020-i-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2020-i-040"
+      },
+      "q-2020-i-041": {
+        "questionId": "q-2020-i-041",
+        "questionNo": 41,
+        "groupId": "group-2020-i-cloze",
+        "stem": "41",
+        "blankId": "blank-2020-i-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "dream"
+          },
+          {
+            "label": "B",
+            "text": "job"
+          },
+          {
+            "label": "C",
+            "text": "home"
+          },
+          {
+            "label": "D",
+            "text": "choice"
+          }
+        ]
+      },
+      "q-2020-i-042": {
+        "questionId": "q-2020-i-042",
+        "questionNo": 42,
+        "groupId": "group-2020-i-cloze",
+        "stem": "42",
+        "blankId": "blank-2020-i-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "nature"
+          },
+          {
+            "label": "B",
+            "text": "youth"
+          },
+          {
+            "label": "C",
+            "text": "culture"
+          },
+          {
+            "label": "D",
+            "text": "knowledge"
+          }
+        ]
+      },
+      "q-2020-i-043": {
+        "questionId": "q-2020-i-043",
+        "questionNo": 43,
+        "groupId": "group-2020-i-cloze",
+        "stem": "43",
+        "blankId": "blank-2020-i-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "precious"
+          },
+          {
+            "label": "B",
+            "text": "interesting"
+          },
+          {
+            "label": "C",
+            "text": "disturbing"
+          },
+          {
+            "label": "D",
+            "text": "awkward"
+          }
+        ]
+      },
+      "q-2020-i-044": {
+        "questionId": "q-2020-i-044",
+        "questionNo": 44,
+        "groupId": "group-2020-i-cloze",
+        "stem": "44",
+        "blankId": "blank-2020-i-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "waste"
+          },
+          {
+            "label": "B",
+            "text": "tension"
+          },
+          {
+            "label": "C",
+            "text": "pain"
+          },
+          {
+            "label": "D",
+            "text": "damage"
+          }
+        ]
+      },
+      "q-2020-i-045": {
+        "questionId": "q-2020-i-045",
+        "questionNo": 45,
+        "groupId": "group-2020-i-cloze",
+        "stem": "45",
+        "blankId": "blank-2020-i-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "Besides"
+          },
+          {
+            "label": "B",
+            "text": "However"
+          },
+          {
+            "label": "C",
+            "text": "Therefore"
+          },
+          {
+            "label": "D",
+            "text": "Otherwise"
+          }
+        ]
+      },
+      "q-2020-i-046": {
+        "questionId": "q-2020-i-046",
+        "questionNo": 46,
+        "groupId": "group-2020-i-cloze",
+        "stem": "46",
+        "blankId": "blank-2020-i-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "agreed"
+          },
+          {
+            "label": "B",
+            "text": "realized"
+          },
+          {
+            "label": "C",
+            "text": "remembered"
+          },
+          {
+            "label": "D",
+            "text": "predicted"
+          }
+        ]
+      },
+      "q-2020-i-047": {
+        "questionId": "q-2020-i-047",
+        "questionNo": 47,
+        "groupId": "group-2020-i-cloze",
+        "stem": "47",
+        "blankId": "blank-2020-i-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "noise"
+          },
+          {
+            "label": "B",
+            "text": "heat"
+          },
+          {
+            "label": "C",
+            "text": "disease"
+          },
+          {
+            "label": "D",
+            "text": "dust"
+          }
+        ]
+      },
+      "q-2020-i-048": {
+        "questionId": "q-2020-i-048",
+        "questionNo": 48,
+        "groupId": "group-2020-i-cloze",
+        "stem": "48",
+        "blankId": "blank-2020-i-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "directions"
+          },
+          {
+            "label": "B",
+            "text": "partners"
+          },
+          {
+            "label": "C",
+            "text": "help"
+          },
+          {
+            "label": "D",
+            "text": "shelter"
+          }
+        ]
+      },
+      "q-2020-i-049": {
+        "questionId": "q-2020-i-049",
+        "questionNo": 49,
+        "groupId": "group-2020-i-cloze",
+        "stem": "49",
+        "blankId": "blank-2020-i-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "labor"
+          },
+          {
+            "label": "B",
+            "text": "police"
+          },
+          {
+            "label": "C",
+            "text": "forest"
+          },
+          {
+            "label": "D",
+            "text": "finance"
+          }
+        ]
+      },
+      "q-2020-i-050": {
+        "questionId": "q-2020-i-050",
+        "questionNo": 50,
+        "groupId": "group-2020-i-cloze",
+        "stem": "50",
+        "blankId": "blank-2020-i-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "rebuilt"
+          },
+          {
+            "label": "B",
+            "text": "discovered"
+          },
+          {
+            "label": "C",
+            "text": "left"
+          },
+          {
+            "label": "D",
+            "text": "managed"
+          }
+        ]
+      },
+      "q-2020-i-051": {
+        "questionId": "q-2020-i-051",
+        "questionNo": 51,
+        "groupId": "group-2020-i-cloze",
+        "stem": "51",
+        "blankId": "blank-2020-i-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "Decorating"
+          },
+          {
+            "label": "B",
+            "text": "Observing"
+          },
+          {
+            "label": "C",
+            "text": "Watering"
+          },
+          {
+            "label": "D",
+            "text": "Guarding"
+          }
+        ]
+      },
+      "q-2020-i-052": {
+        "questionId": "q-2020-i-052",
+        "questionNo": 52,
+        "groupId": "group-2020-i-cloze",
+        "stem": "52",
+        "blankId": "blank-2020-i-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "tough"
+          },
+          {
+            "label": "B",
+            "text": "illegal"
+          },
+          {
+            "label": "C",
+            "text": "fantastic"
+          },
+          {
+            "label": "D",
+            "text": "beneficial"
+          }
+        ]
+      },
+      "q-2020-i-053": {
+        "questionId": "q-2020-i-053",
+        "questionNo": 53,
+        "groupId": "group-2020-i-cloze",
+        "stem": "53",
+        "blankId": "blank-2020-i-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "back"
+          },
+          {
+            "label": "B",
+            "text": "top"
+          },
+          {
+            "label": "C",
+            "text": "foot"
+          },
+          {
+            "label": "D",
+            "text": "side"
+          }
+        ]
+      },
+      "q-2020-i-054": {
+        "questionId": "q-2020-i-054",
+        "questionNo": 54,
+        "groupId": "group-2020-i-cloze",
+        "stem": "54",
+        "blankId": "blank-2020-i-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "cool down"
+          },
+          {
+            "label": "B",
+            "text": "keep off"
+          },
+          {
+            "label": "C",
+            "text": "purify"
+          },
+          {
+            "label": "D",
+            "text": "collect"
+          }
+        ]
+      },
+      "q-2020-i-055": {
+        "questionId": "q-2020-i-055",
+        "questionNo": 55,
+        "groupId": "group-2020-i-cloze",
+        "stem": "55",
+        "blankId": "blank-2020-i-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "returned"
+          },
+          {
+            "label": "B",
+            "text": "learned"
+          },
+          {
+            "label": "C",
+            "text": "failed"
+          },
+          {
+            "label": "D",
+            "text": "continued"
+          }
+        ]
+      },
+      "q-2020-i-056": {
+        "questionId": "q-2020-i-056",
+        "questionNo": 56,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-2020-i-056"
+      },
+      "q-2020-i-057": {
+        "questionId": "q-2020-i-057",
+        "questionNo": 57,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-2020-i-057"
+      },
+      "q-2020-i-058": {
+        "questionId": "q-2020-i-058",
+        "questionNo": 58,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-2020-i-058"
+      },
+      "q-2020-i-059": {
+        "questionId": "q-2020-i-059",
+        "questionNo": 59,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-2020-i-059"
+      },
+      "q-2020-i-060": {
+        "questionId": "q-2020-i-060",
+        "questionNo": 60,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-2020-i-060"
+      },
+      "q-2020-i-061": {
+        "questionId": "q-2020-i-061",
+        "questionNo": 61,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2020-i-061"
+      },
+      "q-2020-i-062": {
+        "questionId": "q-2020-i-062",
+        "questionNo": 62,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2020-i-062"
+      },
+      "q-2020-i-063": {
+        "questionId": "q-2020-i-063",
+        "questionNo": 63,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2020-i-063"
+      },
+      "q-2020-i-064": {
+        "questionId": "q-2020-i-064",
+        "questionNo": 64,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2020-i-064"
+      },
+      "q-2020-i-065": {
+        "questionId": "q-2020-i-065",
+        "questionNo": 65,
+        "groupId": "group-2020-i-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2020-i-065"
+      }
+    },
+    "blanks": {
+      "blank-2020-i-056": {
+        "blankId": "blank-2020-i-056",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-056",
+        "prompt": "wealth"
+      },
+      "blank-2020-i-057": {
+        "blankId": "blank-2020-i-057",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-057"
+      },
+      "blank-2020-i-058": {
+        "blankId": "blank-2020-i-058",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-058",
+        "prompt": "form"
+      },
+      "blank-2020-i-059": {
+        "blankId": "blank-2020-i-059",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-059"
+      },
+      "blank-2020-i-060": {
+        "blankId": "blank-2020-i-060",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-060",
+        "prompt": "call"
+      },
+      "blank-2020-i-061": {
+        "blankId": "blank-2020-i-061",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-061",
+        "prompt": "be"
+      },
+      "blank-2020-i-062": {
+        "blankId": "blank-2020-i-062",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-062",
+        "prompt": "they"
+      },
+      "blank-2020-i-063": {
+        "blankId": "blank-2020-i-063",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-063",
+        "prompt": "walk"
+      },
+      "blank-2020-i-064": {
+        "blankId": "blank-2020-i-064",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-064",
+        "prompt": "accurate"
+      },
+      "blank-2020-i-065": {
+        "blankId": "blank-2020-i-065",
+        "groupId": "group-2020-i-grammar-fill",
+        "questionId": "q-2020-i-065"
+      }
+    },
+    "writingTasks": {
+      "wt-2020-i-application": {
+        "writingTaskId": "wt-2020-i-application",
+        "groupId": "group-2020-i-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "假定你是李华，上周日你校举办了5公里越野赛跑活动．请你为校英文报写一篇报道，内容包括：\n(1)参加人员；\n(2)跑步路线：从校门口到南山脚下；\n(3)活动反响。\n(1)写作词数应为80左右；\n(2)请按如下格式在答题卡的相应位置作答。 \n A Cross-Country Running Race",
+        "wordCountTarget": 80
+      },
+      "wt-2020-i-continuation": {
+        "writingTaskId": "wt-2020-i-continuation",
+        "groupId": "group-2020-i-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nThe Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges.\nMrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them.\nOne morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy—his name was Bernard—had interested her very much.\n“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”\nAfter their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”\n“So do I,” said Harry. “We really should do something to assist them.”\nFor some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”\nThe other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”",
+        "continuationStarters": [
+          "When Mrs.Meredith heard of John's idea, she thought it was a good one, too.",
+          "With everything ready, Bernard started out on his new business."
+        ],
+        "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nThe Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges.\n\nMrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them.\n\nOne morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy—his name was Bernard—had interested her very much.\n\n“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”\n\nAfter their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”\n\n“So do I,” said Harry. “We really should do something to assist them.”\n\nFor some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”\n\nThe other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2020-i-021": {
+        "questionId": "q-2020-i-021",
+        "questionNo": 21,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-022": {
+        "questionId": "q-2020-i-022",
+        "questionNo": 22,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-023": {
+        "questionId": "q-2020-i-023",
+        "questionNo": 23,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-024": {
+        "questionId": "q-2020-i-024",
+        "questionNo": 24,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-025": {
+        "questionId": "q-2020-i-025",
+        "questionNo": 25,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-026": {
+        "questionId": "q-2020-i-026",
+        "questionNo": 26,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-027": {
+        "questionId": "q-2020-i-027",
+        "questionNo": 27,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-028": {
+        "questionId": "q-2020-i-028",
+        "questionNo": 28,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-029": {
+        "questionId": "q-2020-i-029",
+        "questionNo": 29,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-030": {
+        "questionId": "q-2020-i-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-031": {
+        "questionId": "q-2020-i-031",
+        "questionNo": 31,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-032": {
+        "questionId": "q-2020-i-032",
+        "questionNo": 32,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-033": {
+        "questionId": "q-2020-i-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-034": {
+        "questionId": "q-2020-i-034",
+        "questionNo": 34,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-035": {
+        "questionId": "q-2020-i-035",
+        "questionNo": 35,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-036": {
+        "questionId": "q-2020-i-036",
+        "questionNo": 36,
+        "answer": "G",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-037": {
+        "questionId": "q-2020-i-037",
+        "questionNo": 37,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-038": {
+        "questionId": "q-2020-i-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-039": {
+        "questionId": "q-2020-i-039",
+        "questionNo": 39,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-040": {
+        "questionId": "q-2020-i-040",
+        "questionNo": 40,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-041": {
+        "questionId": "q-2020-i-041",
+        "questionNo": 41,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-042": {
+        "questionId": "q-2020-i-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-043": {
+        "questionId": "q-2020-i-043",
+        "questionNo": 43,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-044": {
+        "questionId": "q-2020-i-044",
+        "questionNo": 44,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-045": {
+        "questionId": "q-2020-i-045",
+        "questionNo": 45,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-046": {
+        "questionId": "q-2020-i-046",
+        "questionNo": 46,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-047": {
+        "questionId": "q-2020-i-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-048": {
+        "questionId": "q-2020-i-048",
+        "questionNo": 48,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-049": {
+        "questionId": "q-2020-i-049",
+        "questionNo": 49,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-050": {
+        "questionId": "q-2020-i-050",
+        "questionNo": 50,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-051": {
+        "questionId": "q-2020-i-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-052": {
+        "questionId": "q-2020-i-052",
+        "questionNo": 52,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-053": {
+        "questionId": "q-2020-i-053",
+        "questionNo": 53,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-054": {
+        "questionId": "q-2020-i-054",
+        "questionNo": 54,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-055": {
+        "questionId": "q-2020-i-055",
+        "questionNo": 55,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-056": {
+        "questionId": "q-2020-i-056",
+        "questionNo": 56,
+        "answer": "wealthy",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-057": {
+        "questionId": "q-2020-i-057",
+        "questionNo": 57,
+        "answer": "or",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-058": {
+        "questionId": "q-2020-i-058",
+        "questionNo": 58,
+        "answer": "formed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-059": {
+        "questionId": "q-2020-i-059",
+        "questionNo": 59,
+        "answer": "which/that",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-060": {
+        "questionId": "q-2020-i-060",
+        "questionNo": 60,
+        "answer": "are called",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-061": {
+        "questionId": "q-2020-i-061",
+        "questionNo": 61,
+        "answer": "is",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-062": {
+        "questionId": "q-2020-i-062",
+        "questionNo": 62,
+        "answer": "themselves",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-063": {
+        "questionId": "q-2020-i-063",
+        "questionNo": 63,
+        "answer": "walking",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-064": {
+        "questionId": "q-2020-i-064",
+        "questionNo": 64,
+        "answer": "accuracy",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-i-065": {
+        "questionId": "q-2020-i-065",
+        "questionNo": 65,
+        "answer": "for",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-05T00:00:00Z"
+    },
+    "groups": {
+      "group-2020-i-reading-a": {
+        "overview": "这是一则应用文（征诗比赛广告），主题为纪念飞行员 Amelia Earhart 的 POETRY CHALLENGE 征诗活动，介绍写作主题、奖项设置与参赛规则。",
+        "discourseStructure": {
+          "summary": "全文按广告体结构展开：先点明征诗主题，再分层列出三类奖项（Grand Prizes / First Prizes / Honorable Mentions），最后给出参赛规则（字数、书写方式、个人信息、截稿日期）。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-a-1",
+              "summary": "活动标题：诗歌挑战。",
+              "function": "标题，点明活动名称。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-2",
+              "summary": "说明征诗主题：写一首关于勇气、决心和力量如何帮助你面对人生挑战的诗，并引出奖项部分。",
+              "function": "正文引入，交代写作主题与下文奖项小标题。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-3",
+              "summary": "三项大奖：华盛顿之行，每位获奖者可携一名家长和另一人同行，含往返机票、两晚住宿及博物馆与杂志社参观。",
+              "function": "奖项细则之一，介绍最高奖内容。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-4",
+              "summary": "六项一等奖：一本由作者和飞行员签名的关于 Amelia Earhart 的传记图书。",
+              "function": "奖项细则之二，介绍一等奖内容。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-5",
+              "summary": "五十项优秀奖：每位获得者将得到一件纪念 Earhart 最后一次飞行的 T 恤，并引出规则部分。",
+              "function": "奖项细则之三，介绍优秀奖内容并过渡到规则。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-6",
+              "summary": "总则：认真遵守所有规则以免被取消资格。",
+              "function": "规则总起句。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-7",
+              "summary": "规则一：诗歌不超过100词，格式与行数不限。",
+              "function": "规则细则——字数与格式。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-8",
+              "summary": "规则二：手写或打印在单张纸上，可用正反两面。",
+              "function": "规则细则——书写方式与用纸。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-9",
+              "summary": "规则三：在同一张纸上写明姓名、地址、电话与出生日期。",
+              "function": "规则细则——个人信息。"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-10",
+              "summary": "规则四：在今年10月31日前将作品寄出。",
+              "function": "规则细则——截稿日期。"
+            }
+          ]
+        }
+      },
+      "group-2020-i-reading-b": {
+        "overview": "本文是一篇人物记叙文，讲述了 Jennifer Mauer 凭借超出常人的毅力，克服家庭与经济困难，成为大家庭中第一个获得学士学位（护理专业）的人，并以此激励家人。",
+        "discourseStructure": {
+          "summary": "全文为单段叙事：先点明 Jennifer 需要超常毅力去追求护理学位并最终毕业；再回溯她的成长背景、高中后自费上学并资助弟妹；接着说明她为何重返大学及选择就近项目的原因；随后描写家人的支持以及她为学业所作的牺牲；最后点出她作为第一代毕业生对家庭的激励意义。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-b-1",
+              "summary": "记述 Jennifer Mauer 的求学历程：成长于有 10 个孩子的农场家庭，高中后自费就读技术学院并资助弟妹，婚后为发展事业重返大学，选择就近项目以便兼顾孩子，在家人支持下牺牲陪伴时间，最终以优异成绩毕业，成为家中第一代大学生。",
+              "function": "以单段叙事完整呈现人物的奋斗背景、动机、付出与结果，并在结尾升华主题——努力终有回报、激励家人。"
+            }
+          ]
+        }
+      },
+      "group-2020-i-reading-c": {
+        "overview": "本文是一篇书评，介绍 Toni Bissell 的著作《Chasing the Sea》。文章从作者重返乌兹别克斯坦的缘由谈起，叙述其旅程中遇到的人与事，展现乌兹别克斯坦社会的温暖与阴暗面，并评价该书的写作特点。",
+        "discourseStructure": {
+          "summary": "全文按\"背景缘起—成书与人物—旅途见闻—写作评价\"四段递进展开：先交代作者重返该国的原因，再引出此书及主要人物，接着列举旅途中的各类经历，最后总评该书风格与价值。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-c-1",
+              "summary": "Toni Bissell 上世纪90年代中期在乌兹别克斯坦做志愿者，七个月后身心俱疲离开；几年后因仍被该国吸引而重返，去写一篇关于咸海消失的文章。",
+              "function": "交代背景与作者重返乌兹别克斯坦的缘由"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-2",
+              "summary": "此次造访远超最初目的，由此诞生了《Chasing the Sea》一书，讲述从塔什干到卡拉卡尔帕克斯坦的公路旅行，以及沿途遇到的翻译 Rustam、东道主 Oleg 与 Natasha 等人物。",
+              "function": "引出成书缘由、旅程路线与主要人物"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-3",
+              "summary": "本书是对乌兹别克斯坦生活的速写，既有友善温暖，也有社会阴暗面：在撒马尔罕赞叹建筑奇观，在去布哈拉途中被怀疑贩毒尝到警察手段，在费尔干纳参加葬礼后又遇怪异酒局，在卡拉卡尔帕克斯坦为沙尘暴、疾病和搁浅的渔船而伤感。",
+              "function": "列举旅途中丰富多样的见闻与经历"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-4",
+              "summary": "Bissell 巧妙整合历史与文化素材，从西方视角描绘了一幅完整的乌兹别克斯坦图景；其判断与参照颇具美国色彩，全书既非游记也非史书或报道，但生动描绘了最纯粹的中亚传统。",
+              "function": "总评该书的写作风格、视角与价值"
+            }
+          ]
+        }
+      },
+      "group-2020-i-reading-d": {
+        "overview": "本文介绍《消费者研究杂志》的一项研究：用餐同伴的体型与进食量都会影响我们自己的进食量；研究通过两个实验发现，人们会模仿同伴多吃，而当同伴身材瘦却吃得多时，受试者吃得明显更多。",
+        "discourseStructure": {
+          "summary": "首段提出研究结论并引出反直觉观点（真正要避开的是食量大的瘦子），随后描述第一个实验的设计；第二、三段分别给出两个实验的结果；末段解释其背后的社会环境影响机制以及人们如何根据对他人的看法来调整这种影响。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-d-1",
+              "summary": "引用《消费者研究杂志》的研究，指出同伴的体型与进食习惯都会影响我们的进食量，并提出反直觉观点：真正要避开的是食量大的瘦子；随后介绍第一个实验：邀请95名女大学生，以看电影研究为表面理由，由研究者雇佣的演员（自然体重105磅，半数情况下穿增重至180磅的肥胖服）先取食物。",
+              "function": "提出研究主题与核心结论，并铺设第一个实验的背景与设计"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-2",
+              "summary": "第一个实验结果：胖瘦两个版本的演员都取了大量食物，受试者随之取得比平时更多的食物，但在演员偏瘦时受试者取得明显更多。",
+              "function": "呈现第一个实验的结果"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-3",
+              "summary": "第二个实验：瘦演员在一种情况下取2颗糖、另一种情况下取30颗糖，结果与第一个实验相似——受试者跟随，但在瘦演员取30颗时取得明显更多。",
+              "function": "呈现第二个实验的结果，进一步佐证结论"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-4",
+              "summary": "解释社会环境在我们做决定时影响极大（“我也要她点的那种”效应），但我们会调整这种影响：看到胖子大吃会因看到其后果而收敛，而看到瘦子大吃却仍能保持苗条则会跟随。",
+              "function": "解释实验背后的社会影响机制及调整影响的依据"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2020-i-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对大奖随行人数细节的理解：每位大奖获得者可带多少人同行。",
+        "stemTranslationZh": "每位大奖获得者可以带多少人参加这次免费旅行？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "两人。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-a-3",
+                "quote": "a parent and one other person of the winner’s choice",
+                "anchor": "a parent and one other person"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "三人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Trip to Washington, D. C. for each of three winners, a parent and one other person of the winner’s choice.",
+              "sourceHighlight": "three winners",
+              "optionText": "Three.",
+              "optionHighlight": "Three",
+              "explanation": "原文 three winners 指的是共有三名大奖获得者，而非每位获奖者可带三人同行；选项把获奖名额数误当作随行人数，属范围/数字偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-3",
+                "quote": "Trip to Washington, D. C. for each of three winners",
+                "anchor": "three winners"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "四人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Four.",
+              "explanation": "原文只提到可带 a parent and one other person（共两人），未提及四人，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "六人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "6 First Prizes",
+              "optionText": "Six.",
+              "matchType": "exact",
+              "relationNote": "选项中的 Six 借用了原文 6 First Prizes 里的数字 6 做干扰，但 6 指一等奖名额数量，与大奖随行人数无关。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-4",
+                "quote": "6 First Prizes",
+                "anchor": "6 First Prizes"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How many people can each grand prize winner take on the free trip?",
+            "sourceRole": "stem",
+            "targetText": "a parent and one other person of the winner’s choice",
+            "targetParagraphId": "para-2020-i-reading-a-3",
+            "relationType": "calculation",
+            "note": "题干问 how many people can each grand prize winner take，原文 a parent and one other person 即一名家长加另一人，合计 two，需对随行人员做累加计算。"
+          }
+        ]
+      },
+      "q-2020-i-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对优秀奖（Honorable Mentions）所获奖品细节的理解。",
+        "stemTranslationZh": "每位优秀奖获得者将得到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一张机票。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Trip includes round-trip air tickets, hotel stay for two nights",
+              "sourceEntity": "round-trip air tickets (Grand Prizes 获得者)",
+              "optionText": "A plane ticket.",
+              "optionEntity": "plane ticket (Honorable Mention 获得者)",
+              "explanation": "机票属于 Grand Prizes 的奖品，享有对象是大奖获得者，而非优秀奖获得者；选项把奖品对应的对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-3",
+                "quote": "Trip includes round-trip air tickets, hotel stay for two nights",
+                "anchor": "round-trip air tickets"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一本由 Corinne Szabo 所著的书。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "The book Sky Pioneer: A Photobiography of Amelia Earhart signed by author Corinne Szabo and pilot Linda Finch.",
+              "sourceEntity": "The book ... signed by author Corinne Szabo (First Prizes 获得者)",
+              "optionText": "A book by Corinne Szabo.",
+              "optionEntity": "book by Corinne Szabo (Honorable Mention 获得者)",
+              "explanation": "签名图书属于 6 First Prizes 的奖品，对应一等奖获得者，而非优秀奖获得者；选项把奖品归错了对象。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-4",
+                "quote": "The book Sky Pioneer: A Photobiography of Amelia Earhart signed by author Corinne Szabo and pilot Linda Finch.",
+                "anchor": "book signed by author Corinne Szabo"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一件特别的T恤。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-a-5",
+                "quote": "who will each receive a T-shirt in memory of Earhart’s final flight",
+                "anchor": "each receive a T-shirt"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一张 Amelia Earhart 的照片。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "A Photobiography of Amelia Earhart",
+              "optionText": "A photo of Amelia Earhart.",
+              "matchType": "wordFamily",
+              "relationNote": "选项的 photo 与原文 Photobiography 同词族，借词形相近做干扰；原文 Photobiography 是图传（书），并非单独一张照片，且属于一等奖内容。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-4",
+                "quote": "Sky Pioneer: A Photobiography of Amelia Earhart",
+                "anchor": "A Photobiography of Amelia Earhart"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What will each of the honorable mention winners get?",
+            "sourceRole": "stem",
+            "targetText": "who will each receive a T-shirt in memory of Earhart’s final flight",
+            "targetParagraphId": "para-2020-i-reading-a-5",
+            "relationType": "paraphrase",
+            "note": "题干 honorable mention winners get 对应原文 honorable mention winners, who will each receive a T-shirt；get 与 receive 同义替换，定位到优秀奖奖品。"
+          }
+        ]
+      },
+      "q-2020-i-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对参赛规则的细节判断：哪一种做法会违反规则导致取消资格。",
+        "stemTranslationZh": "下列哪一项会导致被取消参赛资格？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "把你的诗打印出来。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Write by hand or type on a single sheet of paper.",
+              "sourceHighlight": "type",
+              "optionText": "Typing your poem out.",
+              "optionHighlight": "Typing",
+              "explanation": "原文明确允许 type（打印），打印诗歌是被允许的做法，不会导致取消资格；选项把合规做法说成违规，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-8",
+                "quote": "Write by hand or type on a single sheet of paper.",
+                "anchor": "Write by hand or type"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "写一首120词的诗。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-a-7",
+                "quote": "Write a poem using 100 words or fewer.",
+                "anchor": "100 words or fewer"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "使用纸张的正反两面。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "You may use both the front and back of the paper.",
+              "sourceHighlight": "may use both the front and back",
+              "optionText": "Using both sides of the paper.",
+              "optionHighlight": "Using both sides",
+              "explanation": "原文用 may use both the front and back 明确允许使用正反两面，这是被允许的做法，不会取消资格；选项把合规做法当作违规，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-8",
+                "quote": "You may use both the front and back of the paper.",
+                "anchor": "may use both the front and back"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在10月30日寄出你的作品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "conditionRemoved",
+              "sourceQuote": "Mail your entry to us by October 31 this year.",
+              "sourceHighlight": "by October 31",
+              "optionText": "Mailing your entry on October 30.",
+              "optionHighlight": "on October 30",
+              "explanation": "原文要求 by October 31（不晚于10月31日），10月30日在截止日期之前，符合要求；选项忽略 by（截止前均可）这一条件，误以为会违规。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-a-10",
+                "quote": "Mail your entry to us by October 31 this year.",
+                "anchor": "by October 31"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Writing a poem of 120 words",
+            "sourceRole": "correctOption",
+            "targetText": "Write a poem using 100 words or fewer.",
+            "targetParagraphId": "para-2020-i-reading-a-7",
+            "relationType": "locationCue",
+            "note": "正确选项 a poem of 120 words 对应规则 Write a poem using 100 words or fewer；120 词超出 100 words or fewer 的上限，故违规导致取消资格。"
+          }
+        ]
+      },
+      "q-2020-i-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对原文细节的定位：Jennifer 高中毕业后做了什么。",
+        "stemTranslationZh": "高中毕业后 Jennifer 做了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她帮父亲做工作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Her dad worked at a job away from the farm, and her mother ran the farm with the kids.",
+              "sourceEntity": "Her dad worked at a job away from the farm",
+              "optionText": "She helped her dad with his work．",
+              "optionEntity": "She helped her dad with his work",
+              "explanation": "原文只说父亲在农场以外的地方工作，并未提到 Jennifer 帮父亲工作；将'父亲外出工作'错配成'她帮父亲工作'。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "Her dad worked at a job away from the farm, and her mother ran the farm with the kids.",
+                "anchor": "父亲在农场外工作"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她独自经营家里的农场。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "her mother ran the farm with the kids",
+              "sourceEntity": "her mother ran the farm with the kids",
+              "optionText": "She ran the family farm on her own．",
+              "optionEntity": "She ran the family farm on her own",
+              "explanation": "原文说是'母亲带着孩子们经营农场'，主体是母亲且并非独自；选项把经营农场的人偷换成 Jennifer 独自一人，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "her mother ran the farm with the kids",
+                "anchor": "母亲经营农场"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她自己负担学费读完大学。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "After high school, Jennifer attended a local technical college, working to pay her tuition (学费) , because there was no extra money set aside for a college education.",
+                "anchor": "高中后边打工边付学费"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她在家里教自己的弟弟妹妹。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "She taught her sisters and brothers at home．",
+              "explanation": "原文提到她毕业后打工帮弟妹支付学费，但从未提及她在家中教弟妹读书，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "She supported herself through college．",
+            "sourceRole": "correctOption",
+            "targetText": "working to pay her tuition (学费) , because there was no extra money set aside for a college education",
+            "targetParagraphId": "para-2020-i-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项 supported herself 对应原文 working to pay her tuition 与 no extra money set aside，即靠自己打工付学费供自己读书。"
+          }
+        ]
+      },
+      "q-2020-i-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Jennifer 选择 Marshfield 该护理项目的原因这一细节。",
+        "stemTranslationZh": "Jennifer 为什么选择 Marshfield 的 Ministry Saint Joseph's Hospital 的项目？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了方便照顾她的孩子。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "She chose the UW﹣Eau Claire program at Ministry Saint Joseph’s Hospital in Marshfield because she was able to pursue her four﹣year degree close to home.",
+                "anchor": "因离家近而选择"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "She could drive to class and be home in the evening to help with her kids.",
+                "anchor": "晚上能回家帮孩子"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了向最好的护士学习。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To learn from the best nurses．",
+              "explanation": "原文给出的选择理由是离家近、能兼顾孩子，从未提及该项目有'最好的护士'可供学习，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了给父母省钱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To save money for her parents．",
+              "explanation": "原文说她重返校园是为发展事业、更好地养家，选择该项目是因离家近，并未提到为父母省钱，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了在那里找到一份高薪工作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To find a well﹣paid job there．",
+              "explanation": "原文只说她想发展事业、做自己热爱的护理，选择该项目是因离家近，并未提到在那里找高薪工作，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Why did Jennifer choose the program",
+            "sourceRole": "stem",
+            "targetText": "because she was able to pursue her four﹣year degree close to home",
+            "targetParagraphId": "para-2020-i-reading-b-1",
+            "relationType": "locationCue",
+            "note": "题干用 Why...choose 问选择原因，原文用 because 引出理由 close to home（离家近），是定位线索。"
+          },
+          {
+            "sourceText": "To take care of her kids easily．",
+            "sourceRole": "correctOption",
+            "targetText": "be home in the evening to help with her kids",
+            "targetParagraphId": "para-2020-i-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项 take care of her kids easily 对应原文 close to home 后的 be home in the evening to help with her kids，即就近便于照顾孩子。"
+          }
+        ]
+      },
+      "q-2020-i-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Jennifer 为实现目标牺牲了什么这一细节。",
+        "stemTranslationZh": "为了实现目标，Jennifer 牺牲了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她的健康。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Her health．",
+              "explanation": "原文说她牺牲的是与孩子相处的夜晚、错过重要活动，从未提及牺牲健康，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她与家人相处的时间。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "Jennifer sacrificed (牺牲) to achieve her goal, giving up many nights with her kids and missing important events to study.",
+                "anchor": "放弃陪孩子的夜晚"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她的名声。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "she remained in good academic standing and graduated with honors",
+              "sourceHighlight": "good academic standing and graduated with honors",
+              "optionText": "Her reputation．",
+              "optionHighlight": "Her reputation",
+              "explanation": "原文表明她学业表现良好、以优异成绩毕业，声誉是提升而非受损；选项称牺牲名声与原文方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "she remained in good academic standing and graduated with honors",
+                "anchor": "成绩优异荣誉毕业"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她升职的机会。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Her chance of promotion．",
+              "explanation": "原文说她重返大学是为推进事业（advance her career），并未提到她为此牺牲升职机会，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What did Jennifer sacrifice",
+            "sourceRole": "stem",
+            "targetText": "Jennifer sacrificed (牺牲) to achieve her goal, giving up many nights with her kids and missing important events to study.",
+            "targetParagraphId": "para-2020-i-reading-b-1",
+            "relationType": "locationCue",
+            "note": "题干 sacrifice 直接对应原文 sacrificed，后接 giving up many nights with her kids 即牺牲的具体内容，是定位线索。"
+          },
+          {
+            "sourceText": "Her time with family．",
+            "sourceRole": "correctOption",
+            "targetText": "giving up many nights with her kids and missing important events to study",
+            "targetParagraphId": "para-2020-i-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项 time with family 对应原文 nights with her kids 与 missing important events，即放弃与家人相处的时间。"
+          }
+        ]
+      },
+      "q-2020-i-027": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对全文主旨的归纳：从 Jennifer 的故事能得到什么启示。",
+        "stemTranslationZh": "从 Jennifer 的故事中我们能学到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "时间就是金钱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Time is money．",
+              "explanation": "全文讲的是凭毅力与努力获得学位，并未涉及'时间就是金钱'这一主题，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "爱能打破障碍。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Jennifer received great support from her family as she worked to earn her degree",
+              "sourceHighlight": "great support from her family",
+              "optionText": "Love breaks down barriers．",
+              "optionHighlight": "Love breaks down barriers",
+              "explanation": "原文提到家人支持只是助力之一，文章核心是个人努力与毅力的回报；将其拔高为'爱能打破一切障碍'超出原文范围。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "Jennifer received great support from her family as she worked to earn her degree",
+                "anchor": "家人给予支持"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "辛勤努力终有回报。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "That willpower bore fruit when Jennifer graduated from University of Wisconsin﹣Eau Claire and became the first in her large family to earn a bachelor’s degree.",
+                "anchor": "毅力开花结果"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "Through it all, she remained in good academic standing and graduated with honors.",
+                "anchor": "最终荣誉毕业"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "教育是成功的关键。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+              "sourceHighlight": "go back to college to advance her career",
+              "optionText": "Education is the key to success．",
+              "optionHighlight": "Education is the key to success",
+              "explanation": "原文虽涉及她重返大学求学，但文章主旨在于努力与毅力终有回报；把启示概括为'教育是成功的关键'偏离了文章对'努力付出'的强调，范围偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-b-1",
+                "quote": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+                "anchor": "重返大学求学"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Hard work pays off．",
+            "sourceRole": "correctOption",
+            "targetText": "That willpower bore fruit when Jennifer graduated from University of Wisconsin﹣Eau Claire and became the first in her large family to earn a bachelor’s degree.",
+            "targetParagraphId": "para-2020-i-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项 Hard work pays off 对应原文 willpower bore fruit（毅力开花结果），即努力终有回报，是对全文主旨的同义概括。"
+          }
+        ]
+      },
+      "q-2020-i-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者重返乌兹别克斯坦的原因，需定位第一段相关细节。",
+        "stemTranslationZh": "是什么促使 Bissell 先生重返乌兹别克斯坦？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "朋友的邀请。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "His friends' invitation．",
+              "explanation": "原文未提及任何朋友发出邀请促使他重返，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他对这个国家的兴趣。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-c-1",
+                "quote": "A few years later, still attracted to the country, he returned to Uzbekistan",
+                "anchor": "still attracted to the country"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他对教学的热爱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "taught English as a volunteer",
+              "optionText": "His love for teaching．",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文 taught English 中 teaching 的同族词制造干扰，但原文只说他做过英语志愿者，并未说他因热爱教学而重返。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他重获健康的愿望。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "physically broken",
+              "optionText": "His desire to regain health．",
+              "matchType": "wordFamily",
+              "relationNote": "选项利用原文 physically broken（身体垮掉）联想到\"恢复健康\"，但原文将身体受损归为他先前离开的状态，而非他重返的原因。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "His interest in the country",
+            "sourceRole": "correctOption",
+            "targetText": "still attracted to the country",
+            "targetParagraphId": "para-2020-i-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "正确项 His interest in the country 是原文 still attracted to the country 的同义替换，attracted to 对应 interest in。"
+          }
+        ]
+      },
+      "q-2020-i-029": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查第二段下划线代词 that 的指代对象，需回指上一句的内容。",
+        "stemTranslationZh": "第二段中下划线词\"that\"指的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "患上严重的精神疾病。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "having lost his mind",
+              "optionText": "Developing a serious mental disease．",
+              "matchType": "wordFamily",
+              "relationNote": "选项借第一段 having lost his mind 联想为\"精神疾病\"，但 that 紧承上句指的是写文章一事，而非这段早先经历。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "在中亚进行有导游陪同的旅行。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Taking a guided tour in Central Asia．",
+              "explanation": "原文未提及任何有导游陪同的旅行，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "在乌兹别克斯坦做志愿者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "taught English as a volunteer in Uzbekistan",
+              "optionText": "Working as a volunteer in Uzbekistan．",
+              "matchType": "exact",
+              "relationNote": "选项原样照搬第一段 volunteer in Uzbekistan 的措辞，但 that 指代的是紧邻上句的写文章，而非更早的志愿者经历。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "写一篇关于咸海的文章。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-c-1",
+                "quote": "he returned to Uzbekistan to write an article about the disappearance of the Aral Sea",
+                "anchor": "write an article about the disappearance of the Aral Sea"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-i-reading-c-2",
+                "quote": "His visit, however, ended up involving a lot more than that.",
+                "anchor": "ended up involving a lot more than that"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "ended up involving a lot more than that",
+            "sourceRole": "stem",
+            "targetText": "to write an article about the disappearance of the Aral Sea",
+            "targetParagraphId": "para-2020-i-reading-c-1",
+            "relationType": "locationCue",
+            "note": "that 出现在第二段句首，回指上一段末尾 to write an article about the disappearance of the Aral Sea，即\"写关于咸海的文章\"这件事。"
+          }
+        ]
+      },
+      "q-2020-i-030": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对 Bissell 公路旅行整体特点的概括，需综合第三段列举的多种经历进行归纳。",
+        "stemTranslationZh": "下列哪项最能描述 Bissell 先生在乌兹别克斯坦的公路旅行？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "浪漫的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Romantic．",
+              "explanation": "原文列举的多为建筑赞叹、被疑贩毒、葬礼酒局、沙尘灾害等经历，未提及任何浪漫元素，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "多事的／经历丰富的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-c-3",
+                "quote": "In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing.",
+                "anchor": "建筑奇观、被疑贩毒等接连发生的事件"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-i-reading-c-3",
+                "quote": "In Ferghana, he attends a mountain funeral (葬礼) followed by a strange drinking party.",
+                "anchor": "葬礼后又遇怪异酒局"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "愉快的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "This is a quick look at life in Uzbekistan, made of friendliness and warmth, but also its darker side of society.",
+              "sourceHighlight": "but also its darker side of society",
+              "optionText": "Pleasant．",
+              "optionHighlight": "Pleasant．",
+              "explanation": "原文用 but also its darker side of society 表明旅途既有温暖也有阴暗面，仅取\"愉快\"以偏概全，缩小了整体经历的范围。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "危险的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "he gets a taste of police methods when suspected of drug dealing",
+              "sourceHighlight": "suspected of drug dealing",
+              "optionText": "Dangerous．",
+              "optionHighlight": "Dangerous．",
+              "explanation": "原文仅有被疑贩毒等个别插曲，把全程概括为\"危险的\"以个别夸大整体，言过其实。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Eventful",
+            "sourceRole": "correctOption",
+            "targetText": "In Ferghana, he attends a mountain funeral (葬礼) followed by a strange drinking party.",
+            "targetParagraphId": "para-2020-i-reading-c-3",
+            "relationType": "paraphrase",
+            "note": "第三段连续列举撒马尔罕、布哈拉、费尔干纳、卡拉卡尔帕克斯坦各地接连发生的事件，正是 Eventful（多事、经历丰富）的具体体现。"
+          }
+        ]
+      },
+      "q-2020-i-031": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查全文写作目的，需结合通篇围绕一本书展开的评述进行判断。",
+        "stemTranslationZh": "这篇文章的写作目的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "介绍一本书。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-c-2",
+                "quote": "Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia",
+                "anchor": "全文围绕 this book 展开"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-i-reading-c-4",
+                "quote": "Whatever it is, the result is a fine and vivid description of the purest of Central Asian traditions.",
+                "anchor": "对该书价值的总评"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "解释一种文化现象。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Mr Bissell skillfully organizes historical insights and cultural references, making his tale a well-rounded picture of Uzbekistan, seen from Western eyes.",
+              "sourceHighlight": "cultural references",
+              "optionText": "To explain a cultural phenomenon．",
+              "optionHighlight": "explain a cultural phenomenon",
+              "explanation": "原文提到书中含文化参照，但全文目的是介绍该书，并非解释某种文化现象，把局部内容夸大为全文目的。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "纪念一位作家。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To remember a writer．",
+              "explanation": "原文是对在世作者著作的书评，未含任何缅怀纪念之意，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "推荐一个旅游目的地。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "As the author explains, this is neither a travel nor a history book, or even a piece of reportage.",
+              "sourceHighlight": "neither a travel nor a history book",
+              "optionText": "To recommend a travel destination．",
+              "optionHighlight": "recommend a travel destination",
+              "explanation": "原文明确该书既非游记也非史书，文章意在介绍此书而非推荐旅游目的地，将书评目的过度泛化为旅游推荐。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To introduce a book",
+            "sourceRole": "correctOption",
+            "targetText": "Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia",
+            "targetParagraphId": "para-2020-i-reading-c-2",
+            "relationType": "locationCue",
+            "note": "全文由 Hence this book 引出并通篇评述该书，写作目的即 To introduce a book（介绍一本书）。"
+          }
+        ]
+      },
+      "q-2020-i-032": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对该研究主旨的把握：这项研究主要讲的是什么。",
+        "stemTranslationZh": "这项最新研究主要是关于什么的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "食品安全。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "该研究关于食品安全。",
+              "explanation": "原文未提及食品安全（food safety），研究讨论的是进食量与社会影响，与安全无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "电影观看（情况）。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "each woman was asked to help herself to a snack",
+              "sourceHighlight": "a study about movie viewership",
+              "optionText": "Movie viewership．",
+              "optionHighlight": "Movie viewership",
+              "explanation": "原文中“看电影研究（a study about movie viewership）”只是引导受试者入实验室的表面理由（ostensibly），并非研究真正的主题，以局部细节冒充主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "ostensibly (表面上) participate in a study about movie viewership",
+                "anchor": "ostensibly... movie viewership 是表面理由"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "消费者需求。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Journal of Consumer Research",
+              "optionText": "Consumer demand．",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文期刊名中的 Consumer 一词制造干扰，但原文谈的是进食量受社会影响，并未讨论“消费者需求（consumer demand）”。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "the Journal of Consumer Research",
+                "anchor": "Consumer 来自期刊名"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "进食行为。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "both the size and consumption habits of our eating companions can influence our food intake",
+                "anchor": "同伴影响我们的进食量"
+              },
+              {
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "To test the effect of social influence on eating habits",
+                "anchor": "研究社会影响对进食习惯的作用"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Eating behavior．",
+            "sourceRole": "correctOption",
+            "targetText": "the effect of social influence on eating habits",
+            "targetParagraphId": "para-2020-i-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "选项 Eating behavior 与原文 eating habits / food intake 同义，研究主题即进食行为受社会影响。"
+          }
+        ]
+      },
+      "q-2020-i-033": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查对划线词 beanpoles 的词义推测，需结合上下文判断其指代对象。",
+        "stemTranslationZh": "第一段中划线词 “beanpoles” 指的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "食量大的人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "it’s the beanpoles with big appetites you really need to avoid",
+              "sourceHighlight": "big appetites",
+              "optionText": "Big eaters．",
+              "optionHighlight": "Big eaters",
+              "explanation": "原文中 beanpoles 后接 with big appetites，“食量大”是 beanpoles 的附加修饰，而非 beanpoles 一词本身的含义；beanpoles 指的是身材，错把修饰语当作词义。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "it’s the beanpoles with big appetites you really need to avoid",
+                "anchor": "big appetites 是附加修饰，非词义本身"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "超重的人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "contrary to existing research that says you should avoid eating with heavier people who order large portions (份) , it’s the beanpoles with big appetites you really need to avoid",
+              "sourceHighlight": "contrary to existing research that says you should avoid eating with heavier people",
+              "optionText": "Overweight persons．",
+              "optionHighlight": "Overweight persons",
+              "explanation": "原文用 contrary to 将 beanpoles 与 heavier people（超重的人）对立起来，beanpoles 恰恰与超重相反，指偏瘦的人，选项把含义颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "contrary to existing research that says you should avoid eating with heavier people who order large portions",
+                "anchor": "contrary to heavier people，与超重相反"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "挑食的人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "beanpoles 指挑食的人。",
+              "explanation": "原文未提及挑食（picky eaters），beanpoles 描述的是身材瘦高，与是否挑食无关。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "又高又瘦的人。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "contrary to existing research that says you should avoid eating with heavier people who order large portions (份) , it’s the beanpoles with big appetites you really need to avoid",
+                "anchor": "与 heavier people 形成对比，故为瘦人"
+              },
+              {
+                "paragraphId": "para-2020-i-reading-d-4",
+                "quote": "But if a thin person eats a lot, I’ll follow suit. If he can eat much and keep slim, why can’t I?",
+                "anchor": "下文将其等同于 thin / slim 的人"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Tall thin persons．",
+            "sourceRole": "correctOption",
+            "targetText": "But if a thin person eats a lot, I’ll follow suit. If he can eat much and keep slim, why can’t I?",
+            "targetParagraphId": "para-2020-i-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "beanpoles 与原文 thin person / keep slim 同义，beanpole 本义为“豆架/竹竿”，引申指身材瘦高的人。"
+          },
+          {
+            "sourceText": "beanpoles",
+            "sourceRole": "stem",
+            "targetText": "contrary to existing research that says you should avoid eating with heavier people who order large portions (份) , it’s the beanpoles with big appetites you really need to avoid",
+            "targetParagraphId": "para-2020-i-reading-d-1",
+            "relationType": "locationCue",
+            "note": "通过 contrary to ... heavier people 的对比定位，可推断 beanpoles 与 heavier people 相反，即偏瘦的人。"
+          }
+        ]
+      },
+      "q-2020-i-034": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对实验设计意图的理解：研究者为何雇佣演员。",
+        "stemTranslationZh": "研究者为什么要雇佣这名演员？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了观察她会如何影响受试者。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "To test the effect of social influence on eating habits, the researchers conducted two experiments.",
+                "anchor": "为测社会影响而做实验"
+              },
+              {
+                "paragraphId": "para-2020-i-reading-d-1",
+                "quote": "An actor hired by the researchers grabbed her food first.",
+                "anchor": "演员先取食物以施加影响"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了测试受试者是否能认出她。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "雇佣演员是为了测试受试者能否认出她。",
+              "explanation": "原文未提及让受试者“认出”演员（recognize her），雇佣演员的目的是施加社会影响，而非辨认。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了弄清楚她在两个实验中会做什么。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "the participants followed suit",
+              "sourceEntity": "the participants",
+              "optionText": "To find out what she would do in the two tests．",
+              "optionEntity": "what she would do",
+              "explanation": "演员的行为是研究者预先设计安排的（取大量食物/取30颗糖），并非要“发现”演员会做什么；研究真正观察的是受试者（participants）的反应，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-d-2",
+                "quote": "The participants followed suit, taking more food than they normally would have.",
+                "anchor": "观察对象是 participants"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了研究她为什么能控制住自己的体重。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "雇佣演员是为了研究她为何能保持体重不增。",
+              "explanation": "原文未提及研究演员“为何能保持体重”，演员体重由肥胖服人为控制，目的在于影响受试者，而非研究演员本人减重。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To see how she would affect the participants．",
+            "sourceRole": "correctOption",
+            "targetText": "To test the effect of social influence on eating habits, the researchers conducted two experiments.",
+            "targetParagraphId": "para-2020-i-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "选项 how she would affect the participants 与原文 the effect of social influence on eating habits 同义，演员即社会影响的载体。"
+          },
+          {
+            "sourceText": "Why did the researchers hire the actor",
+            "sourceRole": "stem",
+            "targetText": "An actor hired by the researchers grabbed her food first.",
+            "targetParagraphId": "para-2020-i-reading-d-1",
+            "relationType": "locationCue",
+            "note": "题干 hire the actor 对应原文 An actor hired by the researchers，由其 grabbed her food first 可定位雇佣演员是为施加影响。"
+          }
+        ]
+      },
+      "q-2020-i-035": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查末段细节推断：我们依据什么来“调整这种影响”。",
+        "stemTranslationZh": "根据最后一段，我们依据什么来“调整这种影响”？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "我们有多饿。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "我们依据自己有多饿来调整影响。",
+              "explanation": "原文未提及饥饿程度（how hungry we are），调整依据是对他人的看法，而非自身饥饿。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "我们想要多苗条。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "If he can eat much and keep slim",
+              "optionText": "How slim we want to be．",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文中描述他人的 slim 一词，但原文 keep slim 指的是“那个瘦人”能保持苗条，调整依据是我们如何看待他人，而非我们自己想多苗条。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-i-reading-d-4",
+                "quote": "If he can eat much and keep slim, why can’t I?",
+                "anchor": "slim 描述的是他人"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "我们如何看待他人。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-i-reading-d-4",
+                "quote": "If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits.",
+                "anchor": "因看到胖子的后果而收敛"
+              },
+              {
+                "paragraphId": "para-2020-i-reading-d-4",
+                "quote": "But if a thin person eats a lot, I’ll follow suit. If he can eat much and keep slim, why can’t I?",
+                "anchor": "因瘦人能保持苗条而跟随"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "我们对食物的感受。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "我们依据自己对食物的感受来调整影响。",
+              "explanation": "原文未提及对食物本身的感受（how we feel about the food），调整依据是对同伴（胖/瘦及其结果）的看法。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How we perceive others．",
+            "sourceRole": "correctOption",
+            "targetText": "If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits.",
+            "targetParagraphId": "para-2020-i-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "选项 perceive others 与原文据他人胖瘦（overweight person / thin person）及其后果来决定跟随与否对应，即依据对他人的看法来调整影响。"
+          },
+          {
+            "sourceText": "adjust the influence",
+            "sourceRole": "stem",
+            "targetText": "However, we’ll adjust the influence.",
+            "targetParagraphId": "para-2020-i-reading-d-4",
+            "relationType": "locationCue",
+            "note": "题干 adjust the influence 直接对应原文 we’ll adjust the influence，其后 If ... overweight ... / But if a thin person ... 给出调整依据。"
+          }
+        ]
+      }
+    }
+  }
+}

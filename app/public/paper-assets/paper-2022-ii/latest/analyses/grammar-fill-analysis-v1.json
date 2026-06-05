@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-ii-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-ii-grammar-fill": {
+      "overview": "记叙文：Henry Tyler 接住从六楼阳台坠落的幼童 Eric，讲述这次见义勇为的救人经过。"
+    }
+  },
+  "blanks": {
+    "q-2022-ii-056": {
+      "blankId": "blank-2022-ii-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "fall",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "falling",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "句中已有谓语 held out，提示词 fall 放在被修饰名词 child 之前作定语；child 与 fall 是主动且正在进行的关系，用现在分词 falling。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "child",
+          "signalSide": "passage",
+          "relation": "被修饰的名词 child 与 fall 构成主动进行关系，定语用现在分词 falling。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "held out his arms to catch the",
+          "signalSide": "passage",
+          "relation": "本分句已有谓语 held out，空格不能再作谓语，只能作定语用非谓语形式。"
+        }
+      ],
+      "teachingNote": "名词前缺定语且分句已有谓语时，主动进行关系用现在分词 -ing。"
+    },
+    "q-2022-ii-057": {
+      "blankId": "blank-2022-ii-057",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "The",
+      "role": null,
+      "path": null,
+      "reason": "空格位于句首、专有姓氏 Brown 加 family 这一特指家庭之前，表示特指的这一家人，用定冠词 The。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "Brown family live in an apartment building",
+          "signalSide": "passage",
+          "relation": "Brown family 指上文出现的那一家人，特指，前面用定冠词 The。"
+        }
+      ],
+      "teachingNote": "以姓氏 + family 表示特指的某一家人时，前加定冠词 the。"
+    },
+    "q-2022-ii-058": {
+      "blankId": "blank-2022-ii-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "sleep",
+      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "answer": "asleep",
+      "role": null,
+      "path": null,
+      "reason": "fall 是系动词，后接表语形容词；fall asleep 是固定搭配，意为入睡，故把 sleep 变为形容词 asleep。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "They both fell",
+          "signalSide": "passage",
+          "relation": "fall 接形容词作表语，fall asleep 为固定搭配，须用形容词 asleep。"
+        }
+      ],
+      "teachingNote": "fall + 表语形容词，入睡固定搭配为 fall asleep。"
+    },
+    "q-2022-ii-059": {
+      "blankId": "blank-2022-ii-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "see",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to see",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "分句已有谓语 climbed up，see 表示爬上去的目的，用不定式 to see 作目的状语。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "climbed up",
+          "signalSide": "passage",
+          "relation": "已有谓语 climbed up，空格表目的，用不定式 to see 作目的状语。"
+        }
+      ],
+      "teachingNote": "动作后表目的、分句已有谓语时，用不定式 to do 作目的状语。"
+    },
+    "q-2022-ii-060": {
+      "blankId": "blank-2022-ii-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "accidental",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "accidentally",
+      "role": null,
+      "path": null,
+      "reason": "空格修饰其后的动词 slipped，应把形容词 accidental 变为副词 accidentally 作状语。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "slipped and fell over the edge",
+          "signalSide": "passage",
+          "relation": "被修饰的是动词 slipped，须用副词 accidentally。"
+        }
+      ],
+      "teachingNote": "修饰动词用副词，形容词 + ly 变副词。"
+    },
+    "q-2022-ii-061": {
+      "blankId": "blank-2022-ii-061",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "空格连接 hung on 与 screamed 两个并列且语义顺承的谓语动词，用并列连词 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "He hung on for a few minutes",
+          "signalSide": "passage",
+          "relation": "hung on 与后面的 screamed 是并列顺承的谓语，用并列连词 and 连接。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "screamed for his father",
+          "signalSide": "passage",
+          "relation": "screamed 与前面的 hung on 并列，须用并列连词 and。"
+        }
+      ],
+      "teachingNote": "连接两个并列顺承的谓语动词用 and。"
+    },
+    "q-2022-ii-062": {
+      "blankId": "blank-2022-ii-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "fix",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was fixing",
+      "role": null,
+      "path": null,
+      "reason": "主语 Henry 为单数；when 引导的过去时间作背景，听到尖叫时正在修车，用过去进行时 was fixing。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "when he heard the screams",
+          "signalSide": "passage",
+          "relation": "when 从句的过去动作打断正在进行的修车，主句用过去进行时 was fixing。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Henry",
+          "signalSide": "passage",
+          "relation": "主语 Henry 为第三人称单数，be 动词用 was。"
+        }
+      ],
+      "teachingNote": "过去某动作发生时另一动作正在进行，用过去进行时 was/were doing。"
+    },
+    "q-2022-ii-063": {
+      "blankId": "blank-2022-ii-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "throw",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "threw",
+      "role": null,
+      "path": null,
+      "reason": "本句是一般过去时的连续动作，与并列的 started running 时态呼应，throw 用过去式 threw。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "and started running",
+          "signalSide": "passage",
+          "relation": "并列谓语 started running 为一般过去时，throw 与之呼应用过去式 threw。"
+        }
+      ],
+      "teachingNote": "记叙文连续动作用一般过去时，与并列谓语时态保持一致。"
+    },
+    "q-2022-ii-064": {
+      "blankId": "blank-2022-ii-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "son",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "son's",
+      "role": null,
+      "path": null,
+      "reason": "空格修饰其后的名词 life，表所属关系我儿子的命，用名词所有格 son's。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "He saved my",
+          "signalSide": "passage",
+          "relation": "其后名词 life 需要所属修饰，son 用所有格 son's 表示儿子的（命）。"
+        }
+      ],
+      "teachingNote": "名词修饰其后名词表所属时，用名词所有格 's。"
+    },
+    "q-2022-ii-065": {
+      "blankId": "blank-2022-ii-065",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "how",
+      "role": null,
+      "path": null,
+      "reason": "空格引导 know 的宾语从句并接不定式，表示以何种方式感谢，用连接副词 how。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "I don’t know",
+          "signalSide": "passage",
+          "relation": "know 后接宾语从句，how + to do 表示怎样去做，用 how。"
+        }
+      ],
+      "teachingNote": "连接代词/副词 + 不定式表示如何做某事，方式用 how。"
+    }
+  }
+}

@@ -1,0 +1,662 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2025-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2025-ii-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2025-ii-cloze": {
+      "overview": "记叙文：65岁奶奶Evelyn Donohue在一次健康危机后开始健身、爱上举重，成为社交媒体上的励志人物，并分享坚持、助人、目标在于感觉良好的成功心得。",
+      "affectiveArc": "先抑后扬：从饱受饮食失调与健康问题、被嘲笑太老的低谷，到逆转人生、收获肌肉与粉丝并激励他人的高昂结局。"
+    }
+  },
+  "blanks": {
+    "q-2025-ii-041": {
+      "blankId": "blank-2025-ii-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文Ms Donohue开始work out并最终发现对weightlifting（举重）的热爱，与exercise（锻炼）构成主题呼应；started to exercise表示她七年前开始锻炼，搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "write",
+          "meaning": "写作"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "travel",
+          "meaning": "旅行"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recover",
+          "meaning": "康复、恢复"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "work out",
+          "signalSide": "context-after",
+          "targetText": "began to work out",
+          "relation": "下文began to work out（健身）与exercise同义，锁定锻炼这一主题动作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "weightlifting",
+          "signalSide": "context-after",
+          "relation": "对weightlifting的热爱进一步呼应exercise的锻炼主线。"
+        }
+      ],
+      "teachingNote": "首句空格常被全文主题词复现，往后读找work out/weightlifting这类同主题词即可定位。"
+    },
+    "q-2025-ii-042": {
+      "blankId": "blank-2025-ii-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "a wake-up call是固定搭配，意为“警醒、敲响警钟的事件”；与下文健康问题导致手术、促使她痛下决心改变的语境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "goodwill",
+          "meaning": "善意"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "timeout",
+          "meaning": "暂停、休息"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "long-distance",
+          "meaning": "长途的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "call",
+          "signalSide": "context-after",
+          "targetText": "wake-up call",
+          "relation": "call与wake-up构成固定搭配wake-up call（警钟、警醒之事）。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "health issues",
+          "signalSide": "context-after",
+          "relation": "下文health issues与getting surgery构成健康危机语义场，呼应一次“警醒之事”。"
+        }
+      ],
+      "teachingNote": "见到call先想wake-up call这一高频搭配，再用后文健康危机验证。"
+    },
+    "q-2025-ii-043": {
+      "blankId": "blank-2025-ii-043",
+      "blankNo": 43,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "ultimately（最终）修饰led to getting surgery，表示饮食失调与健康问题最终发展到需要手术，符合长期累积、终至结果的逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "normally",
+          "meaning": "通常地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suddenly",
+          "meaning": "突然地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "automatically",
+          "meaning": "自动地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "led her to getting surgery",
+          "signalSide": "context-after",
+          "relation": "ultimately修饰led her to getting surgery，强调长期困扰最终导致手术。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "struggling with eating disorders",
+          "signalSide": "context-before",
+          "relation": "前文长期struggling（挣扎）暗示一个逐渐发展、最终（ultimately）到手术的过程。"
+        }
+      ],
+      "teachingNote": "副词修饰结果动词时，看前文是长期过程还是瞬间事件，长期累积选ultimately。"
+    },
+    "q-2025-ii-044": {
+      "blankId": "blank-2025-ii-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "make a change是固定搭配，意为“做出改变”；与下文Determined to turn her life around（决心扭转人生）呼应，她意识到必须改变。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "fortune",
+          "meaning": "财富、运气"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wish",
+          "meaning": "愿望"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "deal",
+          "meaning": "交易"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "make a",
+          "signalSide": "context-before",
+          "targetText": "make a change",
+          "relation": "make a后接change构成make a change（做出改变）的固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "turn her life around",
+          "signalSide": "context-after",
+          "relation": "turn her life around（扭转人生）正是要做出的change，语义呼应。"
+        }
+      ],
+      "teachingNote": "make a + 名词的搭配空，用后文turn her life around这类同义说法回填即可。"
+    },
+    "q-2025-ii-045": {
+      "blankId": "blank-2025-ii-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "healthy lifestyle（健康的生活方式）搭配自然；她开始work out并要扭转人生，选择健康生活方式合乎逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "risky",
+          "meaning": "冒险的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "traditional",
+          "meaning": "传统的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "comfortable",
+          "meaning": "舒适的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lifestyle",
+          "signalSide": "context-after",
+          "targetText": "healthy lifestyle",
+          "relation": "lifestyle被healthy修饰，构成healthy lifestyle（健康生活方式）的常见搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "began to work out",
+          "signalSide": "context-before",
+          "relation": "前文began to work out表明她转向健康，呼应healthy lifestyle。"
+        }
+      ],
+      "teachingNote": "形容词修饰lifestyle时，结合人物正面转变方向选与之一致的褒义词。"
+    },
+    "q-2025-ii-046": {
+      "blankId": "blank-2025-ii-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "discover a passion for（发现对……的热爱）是固定搭配；后文她练出肌肉、坚持举重并收获粉丝，正是因为对weightlifting的passion。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "demand",
+          "meaning": "需求"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "secret",
+          "meaning": "秘密"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cure",
+          "meaning": "治愈、疗法"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for weightlifting",
+          "signalSide": "context-after",
+          "targetText": "passion for weightlifting",
+          "relation": "passion for weightlifting构成“对举重的热爱”，passion与for搭配自然。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "discovering a",
+          "signalSide": "context-before",
+          "targetText": "discovering a passion",
+          "relation": "discover a passion是固定搭配，意为“发现一种热爱”。"
+        }
+      ],
+      "teachingNote": "discover a ___ for结构里优先想passion，再用后文热衷举重验证。"
+    },
+    "q-2025-ii-047": {
+      "blankId": "blank-2025-ii-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the fitness lover（健身爱好者）指代前文爱上举重、坚持健身的她；fitness与work out、weightlifting构成健身语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "peace",
+          "meaning": "平静、和平"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fun",
+          "meaning": "乐趣"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "nature",
+          "meaning": "自然"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lover",
+          "signalSide": "context-after",
+          "targetText": "fitness lover",
+          "relation": "lover前的修饰名词与fitness构成fitness lover（健身爱好者），指代主人公。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "an impressive set of muscles",
+          "signalSide": "context-after",
+          "relation": "后文练出肌肉属于健身语义场，呼应fitness。"
+        }
+      ],
+      "teachingNote": "___ lover这类身份名词，用全文反复出现的主题词（健身/举重）回填。"
+    },
+    "q-2025-ii-048": {
+      "blankId": "blank-2025-ii-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "grow an impressive set of muscles意为“练出/长出一身令人印象深刻的肌肉”，grow与muscles搭配，符合通过健身增肌的逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "control",
+          "meaning": "控制"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "activate",
+          "meaning": "激活"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "relax",
+          "meaning": "放松"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "an impressive set of muscles",
+          "signalSide": "context-after",
+          "targetText": "grow an impressive set of muscles",
+          "relation": "grow的宾语是an impressive set of muscles，施受关系成立，表示练出肌肉。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "managed to",
+          "signalSide": "context-before",
+          "relation": "managed to后接动词原形grow，表示她成功练出肌肉。"
+        }
+      ],
+      "teachingNote": "动词宾语是muscles时，用grow表示增肌这一健身成果。"
+    },
+    "q-2025-ii-049": {
+      "blankId": "blank-2025-ii-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "there's no reason others can't look this good意为“没理由别人不能这么好看”，she鼓励他人健身，reason与there's no构成“没有理由”的常见表达。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "need",
+          "meaning": "需要"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "choice",
+          "meaning": "选择"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "difference",
+          "meaning": "差别"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "there’s no",
+          "signalSide": "context-before",
+          "targetText": "there’s no reason",
+          "relation": "there's no后接reason构成there's no reason（没有理由）的固定表达。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "others can’t look this good",
+          "signalSide": "context-after",
+          "relation": "后接从句others can't look this good，正是reason所引导的内容：没理由别人做不到。"
+        }
+      ],
+      "teachingNote": "there's no ___ (that) sb can't... 句式优先填reason，表“没理由不能”。"
+    },
+    "q-2025-ii-050": {
+      "blankId": "blank-2025-ii-050",
+      "blankNo": 50,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "stepping stone（垫脚石）比喻通向成功的过渡，Consider failure as a stepping stone to success意为“把失败看作通往成功的垫脚石”，与never give up的积极态度一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "green light",
+          "meaning": "绿灯、许可"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "road block",
+          "meaning": "路障、障碍"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "passing mark",
+          "meaning": "及格分"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to success",
+          "signalSide": "context-after",
+          "targetText": "stepping stone to success",
+          "relation": "to success与stepping stone搭配，表示通向成功的垫脚石。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "stepping",
+          "signalSide": "option",
+          "targetText": "stepping stone",
+          "relation": "stepping表示“踩踏的”，与stone合成stepping stone（垫脚石）。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "never give up",
+          "signalSide": "context-after",
+          "relation": "never give up（永不放弃）的积极基调要求把failure视为正面的垫脚石。"
+        }
+      ],
+      "teachingNote": "短语空可拆词义合成，再用never give up这类情感基调排除负面比喻。"
+    },
+    "q-2025-ii-051": {
+      "blankId": "blank-2025-ii-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "标题Help others与后文Lift others up（在你的旅途中扶持他人）直接呼应，Help others表示“帮助他人”，是这条心得的小标题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Consult",
+          "meaning": "咨询、请教"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Follow",
+          "meaning": "跟随"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Forgive",
+          "meaning": "原谅"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "others",
+          "signalSide": "context-after",
+          "targetText": "Help others",
+          "relation": "动词的宾语是others，Help others表示帮助他人。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Lift others up on your journey",
+          "signalSide": "context-after",
+          "relation": "Lift others up（扶持他人）解释了这一小标题，正是Help others之意。"
+        }
+      ],
+      "teachingNote": "小标题动词用紧随其后的解释句（Lift others up）回填同义动作。"
+    },
+    "q-2025-ii-052": {
+      "blankId": "blank-2025-ii-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "Success is sweeter when shared意为“分享时成功更甜美”，与上文Lift others up、Help others（助人同行）的主题一致，shared呼应与他人共享。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "accepted",
+          "meaning": "被接受"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "expected",
+          "meaning": "被期待"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "celebrated",
+          "meaning": "被庆祝"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Success is sweeter when",
+          "signalSide": "context-before",
+          "targetText": "sweeter when shared",
+          "relation": "Success is sweeter when后接shared，表示成功在分享时更甜美。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Lift others up on your journey",
+          "signalSide": "context-before",
+          "relation": "前文Lift others up（助人）呼应shared（与人分享成功）。"
+        }
+      ],
+      "teachingNote": "情感主题“助人/同行”锁定share这类与他人共享的动词。"
+    },
+    "q-2025-ii-053": {
+      "blankId": "blank-2025-ii-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "the goal is to feel good, not look good意为“目标是感觉良好而非好看”，goal与不定式to feel good搭配，点明锻炼的真正目的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "case",
+          "meaning": "情况、案例"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "duty",
+          "meaning": "义务、责任"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cost",
+          "meaning": "代价、花费"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is to feel good",
+          "signalSide": "context-after",
+          "targetText": "the goal is to feel good",
+          "relation": "to feel good作表语解释这个名词，goal is to do表示“目标是做某事”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "not look good",
+          "signalSide": "context-after",
+          "relation": "not look good与feel good对比，强调锻炼的goal（目标）所在。"
+        }
+      ],
+      "teachingNote": "the ___ is to do结构里，表“目的/目标”的名词优先选goal。"
+    },
+    "q-2025-ii-054": {
+      "blankId": "blank-2025-ii-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "她曾被嘲笑太老不能健身，却proved the doubters wrong（证明了质疑者是错的）；doubters指那些笑话她的人，与laughed at呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "instructors",
+          "meaning": "教练、指导者"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "admirers",
+          "meaning": "仰慕者"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "beginners",
+          "meaning": "初学者"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "proved the",
+          "signalSide": "context-before",
+          "targetText": "proved the doubters wrong",
+          "relation": "prove sb wrong（证明某人错了）的宾语是doubters（质疑者）。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "laughed at for being too old",
+          "signalSide": "context-before",
+          "relation": "前文被laughed at（嘲笑）的正是这些doubters（质疑者）。"
+        }
+      ],
+      "teachingNote": "prove the ___ wrong要找前文唱反调的人，被嘲笑对应doubters。"
+    },
+    "q-2025-ii-055": {
+      "blankId": "blank-2025-ii-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "become an inspiration for many social media users意为“成为众多社媒用户的激励/榜样”，与全文励志主线及收获huge following的正面结局一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "authority",
+          "meaning": "权威"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "excuse",
+          "meaning": "借口"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "option",
+          "meaning": "选项、选择"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for many social media users",
+          "signalSide": "context-after",
+          "targetText": "an inspiration for many social media users",
+          "relation": "an inspiration for sb（某人的激励/榜样）搭配自然，宾语是social media users。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "in the best possible way",
+          "signalSide": "context-before",
+          "relation": "in the best possible way的正面基调与inspiration（激励、榜样）一致。"
+        }
+      ],
+      "teachingNote": "结尾褒义身份名词配合励志主线，逆袭故事多落在inspiration（榜样）。"
+    }
+  }
+}

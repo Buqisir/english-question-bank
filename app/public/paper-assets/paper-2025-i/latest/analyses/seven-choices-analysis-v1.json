@@ -1,0 +1,375 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2025-i",
+  "sourceAssetVersion": 3,
+  "targetGroups": [
+    "group-2025-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "external-ai",
+    "reviewedAt": "2026-06-04",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2025-i-seven-choices": {
+      "overview": "本文是一篇人物特写，介绍College Cafe里一位名叫Catherine Murphy的咖啡师。她不仅做咖啡，更用真诚的微笑服务学生，多年如一日早起赶来上班，深受学生喜爱。七选五围绕她的工作细节、敬业态度与学生反馈展开，需要根据段落逻辑顺序、指代衔接和话题场对应来还原句子。",
+      "discourseStructure": {
+        "summary": "全文先总起点题——咖啡馆既卖饮品也送微笑；随后分别从Murphy的服务细节、早起敬业、对学生的感染力、以及她对工作的热爱与坚守四个角度展开，最后落到她愿意长久留下。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "An Unsung Hero",
+            "paragraphIds": [
+              "para-2025-i-seven-title",
+              "para-2025-i-seven-p1"
+            ],
+            "summary": "总起段：以提问引出College Cafe，点明它不仅供应饮品，还供应微笑，确立全文主题。"
+          },
+          {
+            "unitId": "unit-service",
+            "heading": null,
+            "paragraphIds": [
+              "para-2025-i-seven-p2"
+            ],
+            "summary": "描写Murphy制作饮品、叫名取餐并与顾客真诚交流的服务细节。"
+          },
+          {
+            "unitId": "unit-dedication",
+            "heading": null,
+            "paragraphIds": [
+              "para-2025-i-seven-p3"
+            ],
+            "summary": "讲述她每天凌晨早起、长途驾车按时到岗，源于她乐于为学生做咖啡的服务之心。"
+          },
+          {
+            "unitId": "unit-impact",
+            "heading": null,
+            "paragraphIds": [
+              "para-2025-i-seven-p4"
+            ],
+            "summary": "通过学生Joanna Wright的视角，展现Murphy富有感染力的微笑给学生带来的积极影响。"
+          },
+          {
+            "unitId": "unit-loyalty",
+            "heading": null,
+            "paragraphIds": [
+              "para-2025-i-seven-p5"
+            ],
+            "summary": "结尾点出她热爱这份工作、已坚守多年并打算继续留下。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2025-i-036": {
+      "blankId": "blank-2025-i-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "The College Cafe",
+        "has just that, and more",
+        "quick pick-me-up"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-i-seven-p1",
+        "headingAnchor": "An Unsung Hero",
+        "beforeQuote": "The College Cafe has just that, and more.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "and more",
+          "signalSide": "context-before",
+          "targetText": "drinks ... smiles",
+          "relation": "空前 and more 暗示除饮品外还有别的东西，与选项点出的 smiles 形成话题场对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "it also serves up smiles",
+          "signalSide": "option",
+          "targetText": "and more",
+          "relation": "选项用 also serves up smiles 具体化空前 and more 的内容，点明全文微笑主题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this cafe",
+          "signalSide": "option",
+          "targetText": "The College Cafe",
+          "relation": "选项 this cafe 指代空前提到的 The College Cafe，构成指代衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说咖啡馆“有那个，还有更多”，E句用 Not only...it also serves up smiles 点明这“更多”就是微笑，既呼应 and more，又确立全文“卖微笑”的主题，故选E。",
+        "matchedClues": [
+          {
+            "contextSide": "has just that, and more",
+            "optionSide": "Not only does this cafe serve up drinks, it also serves up smiles",
+            "relation": "and more 由选项的 also serves up smiles 具体落实，呼应总起点题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A说咖啡馆每天9点关门，只是营业时间信息，无法承接 and more，也与下文微笑主题脱节。"
+        }
+      ],
+      "teachingNote": "段末总起空要抓住前句的悬念词（如 and more），补出能统领全文主题的概括句。"
+    },
+    "q-2025-i-037": {
+      "blankId": "blank-2025-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "makes the drinks",
+        "the customer grabs the drink from her hand",
+        "exactly what they order"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-i-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "She goes back and forth between machines to make the drinks.",
+        "afterQuote": "As the customer grabs the drink from her hand, she smiles and says,"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the drink from her hand",
+          "signalSide": "context-after",
+          "targetText": "the name on the cup",
+          "relation": "空后 the customer grabs the drink 这一取餐动作，正是由选项 calls out the name on the cup（叫名取餐）触发，前后衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "After finishing an order",
+          "signalSide": "option",
+          "targetText": "make the drinks",
+          "relation": "选项 After finishing an order 紧承空前 make the drinks（做完饮品），构成时间先后的动作衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "calls out the name on the cup",
+          "signalSide": "option",
+          "targetText": "make the drinks / grabs the drink",
+          "relation": "叫名取餐与做饮品、顾客取餐同属点单—制作—取餐的服务话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前讲她做好饮品，空后讲顾客从她手中取走饮品，中间需要一个衔接动作；D句“做完一单后她喊出杯上的名字”正好解释了顾客为何上前取餐，逻辑连贯，故选D。",
+        "matchedClues": [
+          {
+            "contextSide": "make the drinks → grabs the drink from her hand",
+            "optionSide": "After finishing an order, she calls out the name on the cup",
+            "relation": "做饮品—叫名—取餐构成完整服务动作链。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C讲她有时早到提前服务，属于到岗时间，与本段“做饮品、叫名、取餐”的现场动作链无关。"
+        }
+      ],
+      "teachingNote": "段中衔接空要顺着动作的时间链填空，找前一动作的结果如何引出后一动作。"
+    },
+    "q-2025-i-038": {
+      "blankId": "blank-2025-i-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "gets up at a quarter to five",
+        "drives thirty minutes every day",
+        "to get to work on time",
+        "make coffee for the students"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-i-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "drives thirty minutes every day to get to work on time.",
+        "afterQuote": "“I do so because I like to make coffee for the students."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "I do so",
+          "signalSide": "context-after",
+          "targetText": "arrives early to serve the students early",
+          "relation": "空后 I do so 中的 so 回指选项所述的“提前到岗为学生服务”这一行为，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "to get to work on time",
+          "signalSide": "context-before",
+          "targetText": "arrives early",
+          "relation": "空前讲早起、长途驾车按时到岗，与选项 arrives early 同属“及早到岗”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "serve the students early",
+          "signalSide": "option",
+          "targetText": "make coffee for the students",
+          "relation": "选项 serve the students 与空后 make coffee for the students 在“为学生服务”话题场上对应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前讲她每天早起赶路按时上班，空后用 I do so 解释原因；C句“有时她还早到以便提前服务学生”正好是 I do so 所指代的行为，前后因果与指代都吻合，故选C。",
+        "matchedClues": [
+          {
+            "contextSide": "gets up at a quarter to five / I do so",
+            "optionSide": "Sometimes she arrives early to serve the students early",
+            "relation": "提前到岗的行为被空后 I do so 回指，并由 because 给出原因。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B介绍她有两个孩子，虽与下文“身为母亲和妻子”相关，但无法被空后 I do so 指代，也讲不通“我之所以这么做”的因果。"
+        }
+      ],
+      "teachingNote": "遇到空后有 do so / so 这类回指词时，要补出一个能被它指代的具体动作句。"
+    },
+    "q-2025-i-039": {
+      "blankId": "blank-2025-i-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Joanna Wright, a senior political science major",
+        "loves coffee",
+        "goes to the cafe at least six days a week",
+        "puts me in a cheerful mood"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-i-seven-p4",
+        "headingAnchor": null,
+        "beforeQuote": "loves coffee and goes to the cafe at least six days a week.",
+        "afterQuote": "“Catherine always has a huge smile on her face,"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "goes to the cafe",
+          "signalSide": "context-before",
+          "targetText": "Going to the cafe",
+          "relation": "空前 goes to the cafe 与选项 Going to the cafe 词汇复现，承接Wright光顾咖啡馆的话题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "starts her day off good",
+          "signalSide": "option",
+          "targetText": "Joanna Wright / Wright",
+          "relation": "选项中 her 指代空前的学生 Joanna Wright，以学生视角说明去咖啡馆的意义。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "gets her ready for class",
+          "signalSide": "option",
+          "targetText": "senior political science major",
+          "relation": "选项 gets her ready for class 与Wright作为在校学生（major）的身份相呼应，落在校园学习话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本段从学生Wright的视角写她几乎天天来咖啡馆，空处需说明去咖啡馆对她的意义；F句“去咖啡馆让她有个好的开始、为上课做好准备”紧承 goes to the cafe，且 her 指代Wright，话题连贯，故选F。",
+        "matchedClues": [
+          {
+            "contextSide": "loves coffee and goes to the cafe at least six days a week",
+            "optionSide": "Going to the cafe starts her day off good and gets her ready for class",
+            "relation": "频繁光顾咖啡馆与它给学生带来好开端、备好上课状态相呼应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G讲她（Murphy）在此工作17年，主语和话题是咖啡师本人，而本处需要的是从学生Wright角度说明光顾咖啡馆的意义。"
+        }
+      ],
+      "teachingNote": "人物视角段的衔接空要锁定句中代词的指代对象，确保填入句与该人物的身份、行为一致。"
+    },
+    "q-2025-i-040": {
+      "blankId": "blank-2025-i-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "I enjoy working in the cafe",
+        "every intention of staying",
+        "continuing doing what she loves"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2025-i-seven-p5",
+        "headingAnchor": null,
+        "beforeQuote": "“I enjoy working in the cafe,” Murphy said.",
+        "afterQuote": "She has every intention of staying and continuing doing what she loves."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "served here for 17 years",
+          "signalSide": "option",
+          "targetText": "every intention of staying",
+          "relation": "选项 served here for 17 years 与空后 every intention of staying 同属“长久坚守”话题场，过去坚守与未来留下相承接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "can’t imagine working anywhere else",
+          "signalSide": "option",
+          "targetText": "continuing doing what she loves",
+          "relation": "选项 can’t imagine working anywhere else 与空后 continuing doing what she loves 都表达她离不开这份工作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "I enjoy working in the cafe",
+          "signalSide": "context-before",
+          "targetText": "can’t imagine working anywhere else",
+          "relation": "空前 I enjoy working in the cafe 与选项 can’t imagine working anywhere else 在“热爱这份工作”话题场上对应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前说她喜欢在咖啡馆工作，空后说她一心想留下继续做热爱的事；G句“她已在此工作17年，无法想象在别处工作”正好承上启下，用资历与归属感连接前后，故选G。",
+        "matchedClues": [
+          {
+            "contextSide": "I enjoy working / every intention of staying",
+            "optionSide": "served here for 17 years and can't imagine working anywhere else",
+            "relation": "热爱、长期坚守与打算继续留下，构成同一“忠于岗位”话题链。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F句以 her 指代某个学生，从顾客视角写去咖啡馆的好处，与本段Murphy本人热爱并坚守岗位的语境不符。"
+        }
+      ],
+      "teachingNote": "段中承上启下空要找一句既呼应前句态度、又自然引出后句结论的过渡句。"
+    }
+  }
+}
