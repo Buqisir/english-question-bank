@@ -1,0 +1,8 @@
+# Regenerable intermediate artifacts — under papers/ only config.json is tracked.
+papers/*/groups.json
+papers/*/full.txt
+papers/*/analyze-*
+papers/*/analysis-*
+# Backfill scratch (per-group label JSON from the Workflow fan-out) + logs.
+labels-out/
+*.log
