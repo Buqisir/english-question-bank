@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "grammar-fill-verb-profile-v1",
+  "paperId": "paper-2025-ii",
+  "blanks": {
+    "q-2025-ii-061": {
+      "tense": "present",
+      "voice": "active",
+      "agreement": "singular",
+      "method": "deterministic"
+    }
+  }
+}
