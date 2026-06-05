@@ -54,6 +54,13 @@ console.log()
 
 // ─── Load real 960d0f8d data ──────────────────────────────────────────────────
 const base960 = path.join(paperAssetsDir, 'paper-960d0f8d', 'versions', 'v1')
+// This script tests against the real off-repo (gitignored) paper-960d0f8d
+// fixture under versions/. On a clean checkout (CI) it is absent — skip rather
+// than crash. Exit code 2 = "skipped" per the scripts/verify-ci.mjs convention.
+if (!existsSync(path.join(base960, 'paper-asset.json'))) {
+  console.warn('SKIP verify-i16a: off-repo fixture absent (paper-960d0f8d/versions/v1)')
+  process.exit(2)
+}
 const asset960 = readJson(path.join(base960, 'paper-asset.json'))
 
 // Build questionId → groupId from paper-asset content.groups
