@@ -240,11 +240,25 @@ export type AnalysisMeta = {
   reviewedAt?: string
 }
 
+// ─── Writing Analysis ───────────────────────────────────────────────────────────
+
+export type WritingAnalysis = {
+  taskType: 'application'
+  modelAnswer: string
+  highlightExpressions: HighlightExpression[]
+}
+
+export type HighlightExpression = {
+  text: string
+  note: string
+}
+
 // ─── Group Analysis ─────────────────────────────────────────────────────────────
 
 export type GroupAnalysis = {
   overview?: string
   discourseStructure?: DiscourseStructure
+  writing?: WritingAnalysis
 }
 
 export type DiscourseStructure = {

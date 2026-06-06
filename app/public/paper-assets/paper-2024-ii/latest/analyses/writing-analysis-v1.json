@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2024-ii",
+  "groups": {
+    "group-2024-ii-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Chris,\nI'm writing to share with you an art class I had in a park last Friday.\nGuided by our teacher, we spread out under an old maple tree and painted whatever caught our eyes. I chose the stone bridge across the lake, with golden leaves drifting onto the water. At first my colours looked flat and lifeless, so I mixed in a few bold touches of orange, and the scene suddenly came alive. When I put down my brush, I couldn't help smiling at it.\nWhat struck me most was that a timid brushstroke never works. Only after I dared to add that bright orange did the lake look like autumn. That bridge taught me painting is less about copying what I see than about how I feel. I wish you'd been here!\nYours,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "Guided by our teacher, we spread out",
+            "note": "过去分词短语作状语（Guided by…）开场交代背景/前提，简洁又比 With the guidance of our teacher 更地道。迁移：凡需说明“在某人带领/某条件下做某事”的应用文（活动报道、经历分享、志愿活动）都可换词复用，如 Equipped with masks, we…/Divided into groups, we…。"
+          },
+          {
+            "text": "with golden leaves drifting onto the water",
+            "note": "with + 名词 + 现在分词 的“with 复合结构”作伴随状语，给画面叠加动态细节，是水平二里很出彩的“够得着”结构。迁移：任何要写场景/动作伴随状态的题都能套 with + n. + doing/done，如 with music playing in the background / with the door left open。"
+          },
+          {
+            "text": "I couldn't help smiling at it",
+            "note": "couldn't help doing（情不自禁做某事）固定句式，用动作替代“I was very happy”空泛表态，更有画面、更真。迁移：写情绪反应/感想时通用，如 couldn't help cheering / couldn't help thinking of you。"
+          },
+          {
+            "text": "What struck me most was that",
+            "note": "what 引导的主语从句 + “最触动我的是……”，是从经历自然过渡到“感想/领悟”的高分框架句，避免生硬的 I think。迁移：几乎所有需要表达个人感受/收获的应用文都能用 What struck/impressed me most was that…，后接你真正的领悟。"
+          },
+          {
+            "text": "painting is less about copying what I see than about how I feel",
+            "note": "“X is less about A than about B”对比框架，把感悟说得有层次、有思辨味，且 less…than… 属水平二可掌握的较高结构。迁移：凡要表达“这件事的重点不在A而在B”的领悟句都可复用，如 success is less about talent than about effort。"
+          }
+        ]
+      }
+    }
+  }
+}

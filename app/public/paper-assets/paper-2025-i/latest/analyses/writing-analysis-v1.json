@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2025-i",
+  "groups": {
+    "group-2025-i-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Jenny,\nI really like the idea of adding a new column to our English newspaper.\nAmong the two choices, I would go for 'Guess who I am'. Here are my reasons.\nThis column asks each writer to describe a classmate's habits and personality without giving away the name, and let readers guess. To work out the answer, we have to read every clue closely, which quietly trains us to notice small details in English. What's more, since nobody wants to be described in a boring way, we will dig for fresh adjectives instead of repeating 'kind' and 'clever', so our vocabulary grows naturally. Best of all, when the right name is finally revealed, the whole class shares a laugh, and this guessing game brings us closer than any ordinary article could.\nYours,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "Among the two choices, I would go for",
+            "note": "二选一/多选一表态框架。任何要求‘做出选择’的应用文（选活动、选地点、选方案）都能用 'Among the … choices, I would go for X' 干净利落地亮明立场，比生硬的 'I choose X' 更得体。"
+          },
+          {
+            "text": "which quietly trains us to notice small details in English",
+            "note": "非限制性定语从句讲‘好处’的高级句框架：'…, which trains/helps/pushes us to do …'。把前一句的做法接上一个由 which 引导的收益从句，是论证类应用文（说明理由、提建议）拔高语言分的稳妥结构。"
+          },
+          {
+            "text": "since nobody wants to be described in a boring way, we will dig for fresh adjectives",
+            "note": "P-R-R 论证句：since 引导原因 + 主句给出由此产生的行为/结果。写理由时用 'since + 人之常情, we will/it will …' 把抽象好处落到具体因果上，避免空喊‘很有意义’。"
+          },
+          {
+            "text": "Best of all, when the right name is finally revealed",
+            "note": "递进到‘最强理由’的过渡框架。列完几条理由后用 'Best of all, when …' 推出最有分量的一条，自带升级感；后接 when 时间状语从句 + 被动 'is revealed'，结构得体可复现。"
+          },
+          {
+            "text": "brings us closer than any ordinary article could",
+            "note": "比较级 + 省略收尾框架：'… brings/does X more than any ordinary … could'（could 后省略动词）。用一句带比较的话点明所选方案‘比普通做法更好’，给理由段一个有力落点，可迁移到各类‘说明为何更优’的应用文。"
+          }
+        ]
+      }
+    }
+  }
+}

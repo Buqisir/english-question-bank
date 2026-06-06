@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2021-ii",
+  "groups": {
+    "group-2021-ii-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Youth and Me\nTime flies, and our newspaper Youth has already turned ten. As a faithful reader, I still remember the first afternoon I picked it up. Sitting by the window, I was so absorbed in a story that I forgot the bell had rung. From then on, reading Youth became part of my daily life.\nAmong all the columns, what I love most is \"Campus Voices,\" where students share their own struggles and dreams. It is here that I learned I was never alone in my worries, which quietly gave me courage.\nOn this special anniversary, I sincerely hope Youth will reach more readers and keep growing. May it stay young forever, just as its name suggests!",
+        "highlightExpressions": [
+          {
+            "text": "As a faithful reader, I still remember the first afternoon I picked it up.",
+            "note": "身份切入+回忆开场框架。用『As a + 身份, I still remember...』点明『我是谁』并自然引出一段具体经历，可迁移到任何需要先表明身份、再讲亲身经历的投稿/报道/感谢信开头。"
+          },
+          {
+            "text": "I was so absorbed in a story that I forgot the bell had rung.",
+            "note": "so...that 结果状语从句 + 过去完成时(had rung)，用一个『投入到忘了…』的小细节制造画面感。迁移：凡需把『很投入/很感动』写得具体的场景，都可套『was so + 形容词 + that 主语 + 忘了/没注意到…』。"
+          },
+          {
+            "text": "It is here that I learned I was never alone in my worries, which quietly gave me courage.",
+            "note": "强调句『It is ... that ...』+ 非限制性定语从句(which...)，把个人领悟从具体栏目里『长出来』。迁移：表达某段经历给自己的启发时，用强调句突出来源，再用 which 引出它带来的影响。"
+          },
+          {
+            "text": "On this special anniversary, I sincerely hope Youth will reach more readers and keep growing.",
+            "note": "得体结尾表期望框架。『On this special occasion/anniversary, I sincerely hope + 宾语从句』可迁移到任何庆典/纪念类投稿或致辞的收尾，先定场合再表达真诚期望。"
+          },
+          {
+            "text": "May it stay young forever, just as its name suggests!",
+            "note": "祝愿句『May + 主语 + 动词原形 ...!』(倒装祝愿) + just as 类比收尾。迁移：投稿、贺信、致辞结尾送祝福时套『May + 对象 + 美好祝愿』，比 I wish 更书面、更有感染力。"
+          }
+        ]
+      }
+    }
+  }
+}

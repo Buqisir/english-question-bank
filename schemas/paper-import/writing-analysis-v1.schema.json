@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "writing-analysis-v1.schema.json",
+  "title": "Writing Analysis V1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "paperId", "groups"],
+  "properties": {
+    "schemaVersion": { "const": "writing-analysis-v1" },
+    "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "meta": { "type": "object" },
+    "groups": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["writing"],
+        "properties": {
+          "writing": {
+            "type": "object",
+            "required": ["taskType", "modelAnswer", "highlightExpressions"],
+            "additionalProperties": true,
+            "properties": {
+              "taskType": { "const": "application" },
+              "modelAnswer": { "type": "string", "minLength": 1 },
+              "highlightExpressions": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 5,
+                "items": {
+                  "type": "object",
+                  "required": ["text", "note"],
+                  "additionalProperties": true,
+                  "properties": {
+                    "text": { "type": "string", "minLength": 1 },
+                    "note": { "type": "string", "minLength": 1 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
