@@ -1,10 +1,10 @@
 # I19 读后续写写作解析 — 进度（2026-06-06）
 
-**当前状态：PM 阶段全部完成，待 build。**
-- ✅ 三源调研 → grill 锁契约（CONTEXT.md 更）→ doctrine（续写准则.md）→ **prompt LOCKED**（continuation-prompt-v1.md）。
-- ✅ 7 个不同故事范文：压测第五档 + 融洽度核过 + **课标-clean 零未注释超纲** + owner 逐篇 QA 过（`.scratch/.../pilot/*.out.json`）。
-- ✅ **plan.md 写好**（DEV 执行合同：判别联合契约 + Continuation Design + 后端/落库/前端/全12 backfill + 词汇 gate 硬 gate + Forbidden + Verify）。
-- **下一步 = build：fresh PA（碰契约+schema+数据面）→ PM 压缩 → DEV → fresh CR → backfill 全12（缺5套ii卷逐卷独立生成）→ owner QA → RM。** 按 AGENTS.md，PA/DEV/CR 走 fresh session。
+**当前状态：build 全门完成，已 RM 合并（见 `cut-note.md`）。**
+- ✅ PM 阶段：三源调研 → grill 锁契约 → doctrine → **prompt LOCKED** → 7 个不同故事范文 owner QA 过 → plan.md。
+- ✅ **build 全门**：fresh PA（3 MF 折叠进 plan）→ DEV（Steps 1-4 代码）→ fresh CR（APPROVE，弯引号回归已修）→ import-data fix（2020-ii/2021-ii starter 损坏）→ backfill 全 12（7 pilot + 5 套 ii 卷独立生成、词汇 gate 全 CLEAN）→ owner PO QA 通过 → RM 合并。
+- ✅ 机检：tsc 绿 / AJV 12/12（含向后兼容）/ 词汇 gate 12/12 CLEAN / 完整性 12/12（application 未 clobber、0 audit 泄漏）/ print-ready 32/0 / 渲染 + 回归无错误。
+- **收口**：`pa.md` `cr.md` `cut-note.md` 齐；详见 `cut-note.md`。
 
 ---
 （以下为 vocab 加固记录，已完成）
