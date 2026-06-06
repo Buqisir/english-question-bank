@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2023-ii-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "A few weeks later, when I almost forgot the contest, there came the news. My name was on the list of winners. For a moment I just sat there, unable to believe my own eyes. Then a warm wave of joy rushed through me. Like Revere's horse, tired and full of doubts, I had kept going, and somehow I had reached the end of the road.\nI went to my teacher's office after the award presentation. The moment he saw me, he laughed out loud, just as he always did, his eyes shining with pride. I wanted to thank him, but my voice shook. So happy was I that all I could do was smile. He had taught a frightened second-language girl that her stories were worth telling. The prize would soon be forgotten, yet the joy of writing, like Revere's horse, would carry me on.",
+        "continuationDesign": {
+          "theme": "人与自我：老师的鼓励让一个对写作畏惧的第二语言女孩相信自己的故事值得被讲；像 Revere 的马一样坚持到底，写作本身的快乐与成长胜过输赢。",
+          "paragraphs": [
+            "第1段承接 starter1：把'消息来了'坐实为'我赢了'——这是原文'像马一样 kept going'伏笔的最合理回报（先稳妥再丰富）。紧跟'just sat there, unable to believe my own eyes'的怔住反应，再用心理描写（a warm wave of joy rushed through me）让喜悦袭来，避免直接喊口号。最后复用原文核心意象'Revere's horse, tired and full of doubts, kept going'把个人结果与原文母题缝在一起，收束本段。",
+            "第2段承接 starter2：用原文反复强调的'老师的笑'（no one laughed harder than he did）做重逢的第一笔，瞬间拉回原文基调与人设。让情感在'想道谢却说不出话、声音发抖'处达到顶点，用部分倒装 So happy was I that… 埋一处够得着的高分句强化情绪。收束点题：把老师真正的礼物点明——不是奖，而是让一个害怕的第二语言女孩相信自己的故事值得被讲（呼应原文'English was only my second language'与'I love your stories'）。结尾回扣原文真有的核心意象'Revere's horse'与'the joy of writing'完成升华，绝不新造象征物。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "For a moment I just sat there, unable to believe my own eyes",
+            "note": "心理+动作描写：用'怔住—不敢相信'刻画好消息袭来时的瞬间反应，比直接写'我很高兴'细腻得多。迁移：任何续写里收到惊喜/噩耗的第一反应都可套用'sat/stood there + unable to believe my own eyes/ears'。"
+          },
+          {
+            "text": "Then a warm wave of joy rushed through me",
+            "note": "情绪'袭来'的心理描写：把抽象的喜悦具象成身体里涌过的暖流。迁移：喜悦/恐惧/紧张都可换成'a wave of … rushed through me'，是续写常用的情绪可视化句式。"
+          },
+          {
+            "text": "Like Revere's horse, tired and full of doubts, I had kept going, and somehow I had reached the end of the road",
+            "note": "用原文意象作比的高分记叙句（形容词短语 tired and full of doubts 作状语）：把'我'的处境扣回原文母题，既呼应又升华。迁移：续写结尾常需把'我'与原文核心意象/人物并置作比，点出共同的精神内核。"
+          },
+          {
+            "text": "So happy was I that all I could do was smile",
+            "note": "部分倒装强调情绪（So + adj. + was sb that…）：把'高兴到说不出话、只能笑'用倒装前置情绪、增强感染力，是够得着的高分句型。迁移：表达'某情绪强到导致某结果'时，用 So + 形容词 + be/助动词 + 主语 that… 替换平铺直叙。"
+          },
+          {
+            "text": "The prize would soon be forgotten, yet the joy of writing, like Revere's horse, would carry me on",
+            "note": "对比+意象呼应的点题升华句（would soon be forgotten 与 would carry me on 形成对照）：以'奖会被忘记，而热爱会带我前行'收束，回扣原文真有的'马'与'写作的快乐'。迁移：成长类续写结尾可用'有形的X会被遗忘，而无形的Y会长留'的对照句点题。"
+          }
+        ]
+      }
     }
   }
 }

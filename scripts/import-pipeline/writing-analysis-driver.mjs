@@ -1,16 +1,17 @@
-// I18 — Writing analysis backfill driver (application writing groups only).
+// I18/I19 — Writing analysis backfill driver (application + continuation writing groups).
 // Mirrors vp-driver.mjs: two modes driven by process.argv[2].
 //
-// Phase 1:  node writing-analysis-driver.mjs list
-//   Scans 12 ALLOWED papers for un-analysed application writing groups.
+// Phase 1:  node writing-analysis-driver.mjs list [application|continuation|all]
+//   Scans 12 ALLOWED papers for un-analysed writing groups of the given type.
 //   For each group writes:
 //     .scratch/import-pilot/wa/<paperId>__<groupId>.combined.txt
 //     .scratch/import-pilot/wa/<paperId>__<groupId>.task.json
 //   Plus a manifest.json summary.
 //
-// Phase 2:  node writing-analysis-driver.mjs persist
+// Phase 2:  node writing-analysis-driver.mjs persist [application|continuation|all]
 //   Reads agent-written <key>.out.json files, validates via
 //   validateWritingAnalysisCandidate, and persists via persistWritingAnalysisGroup.
+//   For continuation groups, also runs the vocab gate (MF-2) before persisting.
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -18,14 +19,16 @@ import {
   listWritingAnalysisWork,
   validateWritingAnalysisCandidate,
   persistWritingAnalysisGroup,
+  runVocabGate,
 } from '../../server/writing-analysis/writingAnalysisBackfillService.mjs'
 import { buildWritingAnalysisMessages } from '../../server/paper-import-ai/analyzeWritingAnalysis.mjs'
+import { buildContinuationAnalysisMessages } from '../../server/paper-import-ai/analyzeContinuationAnalysis.mjs'
 
 const ROOT = process.cwd()
 const PAPER_ASSETS = path.join(ROOT, 'app/public/paper-assets')
 const WA_DIR = path.join(ROOT, '.scratch/import-pilot/wa')
 
-// Same 12 papers as vp-driver; v1 only application groups
+// Same 12 papers as vp-driver
 const ALLOWED = new Set([
   'paper-2020-i', 'paper-2020-ii',
   'paper-2021-i', 'paper-2021-ii',
@@ -36,19 +39,36 @@ const ALLOWED = new Set([
 ])
 
 const mode = process.argv[2]
+const taskTypeArg = process.argv[3] || 'all'
+
+if (!['list', 'persist'].includes(mode)) {
+  console.error('usage: writing-analysis-driver.mjs list|persist [application|continuation|all]')
+  process.exit(2)
+}
+
+if (!['application', 'continuation', 'all'].includes(taskTypeArg)) {
+  console.error('task type filter must be: application|continuation|all')
+  process.exit(2)
+}
+
 mkdirSync(WA_DIR, { recursive: true })
 
 const key = (w) => `${w.paperId}__${w.groupId}`
 
-// List all un-analysed application groups across ALL paper-assets, then filter
-const allWork = listWritingAnalysisWork({ paperAssetsDir: PAPER_ASSETS })
+// List all un-analysed groups across ALL paper-assets, then filter by ALLOWED + taskType
+const allWork = listWritingAnalysisWork({ paperAssetsDir: PAPER_ASSETS, taskTypeFilter: taskTypeArg })
 const work = allWork.filter((w) => ALLOWED.has(w.paperId))
 
 if (mode === 'list') {
   const manifest = []
 
   for (const w of work) {
-    const messages = buildWritingAnalysisMessages(w.writingTask)
+    let messages
+    if (w.writingTask.taskType === 'continuation') {
+      messages = buildContinuationAnalysisMessages(w.writingTask)
+    } else {
+      messages = buildWritingAnalysisMessages(w.writingTask)
+    }
     const combined = [
       '=== SYSTEM ===',
       messages[0].content,
@@ -74,7 +94,7 @@ if (mode === 'list') {
 
   console.log(`work groups: ${work.length} (non-allowed or already done: ${allWork.length - work.length})`)
   for (const m of manifest) {
-    console.log(`  ${m.key}  taskId=${m.writingTaskId}`)
+    console.log(`  ${m.key}  taskType=${m.taskType}  taskId=${m.writingTaskId}`)
   }
   console.log(`\nOutput dir: ${WA_DIR}`)
 } else if (mode === 'persist') {
@@ -101,6 +121,37 @@ if (mode === 'list') {
     }
 
     try {
+      // MF-2: For continuation, run vocab gate before structural validation.
+      // allowlist = tracked paper-asset.json content (materialText + starters)
+      if (candidate.taskType === 'continuation') {
+        const wt = w.writingTask
+        const allowlistText = [
+          wt.materialText || '',
+          ...(wt.continuationStarters || []),
+        ].join(' ')
+
+        // Build text to check: modelAnswer + all highlight texts
+        const highlights = Array.isArray(candidate.highlightExpressions)
+          ? candidate.highlightExpressions.map((h) => h.text || '').join(' ')
+          : ''
+        const textToCheck = [candidate.modelAnswer || '', highlights].join(' ')
+
+        const gateResult = runVocabGate({ textToCheck, allowlistText })
+        if (!gateResult.clean) {
+          throw new Error(
+            `[vocab-gate] GENUINE_OOV found — must replace with 课标词 before persisting:\n` +
+            `  Words: ${gateResult.genuineOov.join(', ')}\n` +
+            `  Raw output: ${gateResult.raw}`
+          )
+        }
+        if (gateResult.suspect.length > 0) {
+          console.warn(
+            `[vocab-gate] SUSPECT words (review manually, likely OK): ${gateResult.suspect.join(', ')}`
+          )
+        }
+        console.log(`[vocab-gate] CLEAN ✓ for ${k}`)
+      }
+
       validateWritingAnalysisCandidate(candidate)
       const { filePath } = persistWritingAnalysisGroup({ paperAssetsDir: PAPER_ASSETS }, w, candidate)
       ok++
@@ -112,7 +163,4 @@ if (mode === 'list') {
   }
 
   console.log(`\npersist: ${ok} ok, ${fail} fail`)
-} else {
-  console.error('usage: writing-analysis-driver.mjs list|persist')
-  process.exit(2)
 }

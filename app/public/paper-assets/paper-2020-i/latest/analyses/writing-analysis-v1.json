@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2020-i-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "When Mrs. Meredith heard of John's idea, she thought it was a good one, too. Delighted, she helped the children make the popcorn at once. The kitchen soon filled with a warm, buttery smell, and bag after bag was packed full. John tied each one neatly, while Clara and Harry counted them, faces bright with excitement. The next morning, they hurried to Bernard's house. Seeing the basket of popcorn, the little boy's eyes lit up. 'You can sell these and keep the money,' said Clara gently. Bernard, too moved to speak, nodded gratefully.\nWith everything ready, Bernard started out on his new business. From door to door he went, holding the basket tightly, his small voice calling out hopefully. To his surprise, the neighbours bought eagerly, for everyone longed to help him. By evening, not a single bag was left. Bernard ran home, the coins ringing in his pocket, and pressed them into his mother's shaking hands. Tears of joy rolled down her face. A few bags of popcorn had warmed the whole street, proving that kindness shared is never small.",
+        "continuationDesign": {
+          "theme": "艰难时世里，孩子的善意化作行动；分享出去的善意从不渺小。",
+          "paragraphs": [
+            "第1段承接 starter1（母亲也觉得是好主意）：用'Delighted'紧跟一句态度，把抽象的'认可'立刻落到行动上，全段照原文给定的道具链推进——舅舅的那箱玉米→爆成爆米花→装进纸袋，对应原文 John 的原话；冲突在于'光有主意还不够，得真把东西备好并送到 Bernard 手里'，于是收在'孩子们把爆米花送到 Bernard 家、Bernard 感动得说不出话'，既兑现 starter1 的承诺，又为第2段的出门叫卖埋好钩子。九成情节顺原文线索，自己只补'动手做+送上门'这一关键过渡。",
+            "第2段承接 starter2（Bernard 带着备好的东西出门做生意）：用'From door to door he went'直接接住'出门'这个已发生的动作，按 NSDD 给出方法（挨家叫卖）与结局（邻里踊跃买、傍晚售罄、挣到钱回家给母亲）。'everyone longed to help him'回扣原文'People were trying to help each other'的互助基调；结尾'A few bags of popcorn had warmed the whole street'让中心意象'爆米花/纸袋'再次出场并升华，落到点题句'kindness shared is never small'，前后呼应、意义连贯。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "Delighted, she helped the children make the popcorn at once",
+            "note": "过去分词作状语开头（Delighted, ...），用一个情绪词领起动作，是'够得着'的高分句式；可迁移到任何'某人怀着某种心情去做某事'的承接处。"
+          },
+          {
+            "text": "Seeing the basket of popcorn, the little boy's eyes lit up",
+            "note": "现在分词作状语 + 'eyes lit up'神态描写：先给镜头（看见）再给反应（眼睛一亮），把心理外化为可见细节，可迁移到人物'惊喜/期待'瞬间。"
+          },
+          {
+            "text": "From door to door he went, holding the basket tightly, his small voice calling out hopefully",
+            "note": "状语前置倒装 + 非谓语(holding) + 独立主格(his small voice calling...)动作链：一句话叠出多个并行动作，是续写里堆动作而不流水账的范式，可迁移到任何'走动+边做某事'的场景。"
+          },
+          {
+            "text": "Bernard ran home, the coins ringing in his pocket, and pressed them into his mother's shaking hands",
+            "note": "独立主格(the coins ringing...) + 动作链(ran / pressed) + 触觉细节(shaking hands)：用一个声音意象(硬币叮当作响)和一双发抖的手收束情感高潮，可迁移到'激动/感恩'的结局段。"
+          },
+          {
+            "text": "A few bags of popcorn had warmed the whole street, proving that kindness shared is never small",
+            "note": "中心意象回扣 + 现在分词(proving...)点题：把具体物品(爆米花纸袋)升华为抽象主旨，是结尾'以小见大'的点题套路，可迁移到任何'一件小事温暖一群人'的升华句。"
+          }
+        ]
+      }
     }
   }
 }

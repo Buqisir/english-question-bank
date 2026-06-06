@@ -21,7 +21,7 @@
             "required": ["taskType", "modelAnswer", "highlightExpressions"],
             "additionalProperties": true,
             "properties": {
-              "taskType": { "const": "application" },
+              "taskType": { "enum": ["application", "continuation"] },
               "modelAnswer": { "type": "string", "minLength": 1 },
               "highlightExpressions": {
                 "type": "array",
@@ -36,7 +36,28 @@
                     "note": { "type": "string", "minLength": 1 }
                   }
                 }
+              },
+              "continuationDesign": {
+                "type": "object",
+                "required": ["theme", "paragraphs"],
+                "additionalProperties": true,
+                "properties": {
+                  "theme": { "type": "string", "minLength": 1 },
+                  "paragraphs": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": { "type": "string", "minLength": 1 }
+                  }
+                }
               }
+            },
+            "if": {
+              "properties": { "taskType": { "const": "continuation" } },
+              "required": ["taskType"]
+            },
+            "then": {
+              "required": ["continuationDesign"]
             }
           }
         }

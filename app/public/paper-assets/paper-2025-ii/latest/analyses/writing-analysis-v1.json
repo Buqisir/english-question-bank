@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2025-ii-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "In a class discussion, I was invited to explain the meaning of my name. My heart pounded, the old fear of being judged slowly returning. I nearly brushed it aside, as I always had. Then I took a deep breath, determined to do it differently. \"Qiuyu means autumn rain,\" I said softly. I told them how, in my hometown, autumn rain falls gently, washing the world clean and bringing a fresh start. As I spoke, my voice grew steadier.\nMany of my classmates got interested and came up to me after class. One girl said my name sounded like a poem; another asked me to write the characters down. Surrounded by their curious smiles, I felt something warm rise in my chest. I had hidden my name to avoid trouble, yet now it was quietly building bridges. Like the autumn rain it carried, my name had washed away my fear and let a part of my culture grow abroad.",
+        "continuationDesign": {
+          "theme": "名字不是要藏起的负担，而是分享文化身份、连接彼此的桥梁。",
+          "paragraphs": [
+            "第1段承接 starter1「被邀请解释名字含义」：先把它当既成事实接住，立刻让原文的「怕被评判」心理(in care about how others think)以\"the old fear...slowly returning\"回潮，并用\"as I always had\"回扣原文她惯常的回避(smile and nod)；再用一句深呼吸的关键过渡逆转决定，制造\"回避惯性 vs 这次不同\"的内在冲突。线索上直接调用原文真实给出的名字含义 Qiuyu=秋雨，把它解码成 autumn rain 并落到家乡意象，完成从\"停止当 Chinese teacher\"到主动分享的转折，为第2段蓄势。",
+            "第2段承接 starter2「同学课后围上来」：先以两个具体细节(夸名字像诗、请写汉字)把抽象的\"产生兴趣\"坐实，呼应原文她原本怕同学\"grow tired/lose patience\"——如今恰是相反的热情回应。情绪由怕转暖(something warm rise in my chest)，并正面回收原文的未解矛盾：她曾藏名字\"to avoid trouble\"，对照原文\"losing...the opportunity to share my cultural identity\"，此刻名字反而\"building bridges\"。结尾用 autumn rain 作明喻点题——名字像它承载的秋雨般洗去恐惧、让文化在异乡生长，意象严格回扣原文真有的 Qiuyu(秋雨)。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "My heart pounded, the old fear of being judged slowly returning.",
+            "note": "心理描写+独立主格(逗号后 the old fear...slowly returning 为独立主格作伴随状语)。写\"某种情绪悄悄袭来/回潮\"的高分句式，可迁移到紧张、羞怯、希望等情绪的隐性涌现。"
+          },
+          {
+            "text": "Then I took a deep breath, determined to do it differently.",
+            "note": "动作+形容词作状语(determined 作伴随状语表决心)。写人物下定决心、由犹豫转行动的转折过渡句，可迁移到任何\"鼓起勇气做某事\"的关键节点。"
+          },
+          {
+            "text": "autumn rain falls gently, washing the world clean and bringing a fresh start",
+            "note": "环境烘托+现在分词并列作结果/伴随状语(washing...and bringing...)。把意象动态化并赋予象征义的写法，可迁移到用景物动作映衬心境或主题升华。"
+          },
+          {
+            "text": "Surrounded by their curious smiles, I felt something warm rise in my chest.",
+            "note": "过去分词作状语(Surrounded by...置于句首)+心理描写。写\"被某种氛围包围、内心涌起暖意/感动\"的句式，可迁移到被善意、掌声、温暖包围的正向情绪场景。"
+          },
+          {
+            "text": "Like the autumn rain it carried, my name had washed away my fear and let a part of my culture grow abroad.",
+            "note": "明喻点题句+过去完成时收束。借核心意象作比、回扣主旨的升华结尾，可迁移到结尾用原文中心物象作喻、呼应主题、完成情感升华。"
+          }
+        ]
+      }
     }
   }
 }

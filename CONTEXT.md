@@ -37,7 +37,7 @@ The writing-specific information carried by a writing Question Group: the task t
 _Avoid_: writing question, essay question when referring to this stored object; it is not a Question
 
 **Writing Analysis**:
-The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. Its v1 composition is a **Model Answer** plus its **Highlight Expressions**; scoring guidance and common-pitfall notes are explicitly out of v1.
+The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. Its composition depends on the Writing Task's task type: an application Writing Analysis carries a **Model Answer** plus its **Highlight Expressions**; a continuation Writing Analysis additionally carries a **Continuation Design**. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
 _Avoid_: 写作解析 / writing explanation when the stored reviewed object is meant; do not call it a Tag or a derived search dimension
 
 **Model Answer** (范文):
@@ -47,6 +47,10 @@ _Avoid_: 范文 used loosely for any sample; sample essay when the curated, atta
 **Highlight Expression** (亮点表达 / 高分句块):
 A reusable, high-scoring sentence chunk lifted from the Model Answer and surfaced on its own so a weaker student can borrow the "good" parts directly. A Writing Analysis carries a few (≈3–5) per Model Answer.
 _Avoid_: phrase, sentence when the curated, score-bearing chunk is meant
+
+**Continuation Design** (情节设计思路):
+The reviewed design rationale carried only by a continuation Writing Analysis — the theme the continuation must serve, plus, for each given paragraph opening sentence, how that paragraph picks it up and develops or resolves the story toward that theme. It teaches the *how* of continuation writing (plot direction and connection back to the source material), which a Model Answer alone cannot show. It is display 讲评, not a search dimension, and has no application counterpart.
+_Avoid_: outline, plot summary when the curated teaching rationale is meant; do not call it a Tag or a derived dimension
 
 **Tag**:
 A teacher-confirmed label used for search, filtering, teaching intent, topic, discourse feature, question type, or difficulty support.

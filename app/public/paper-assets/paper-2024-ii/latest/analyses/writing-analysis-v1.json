@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2024-ii-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "I ran back to Gunter and told him the bad news. So ashamed was I that I could hardly meet his eyes, expecting anger. Instead, he simply smiled, the same warm smile as before. \"Just go and catch your bus,\" he said, pressing a small card with his number into my hand. \"Pay me back when you can. I trust you.\" For a second I stood frozen, deeply moved by a stranger's kindness. Then, thanking him again and again, I raced to the bus and jumped on just as the door was closing.\nFour days later, when I was back in Vienna, I called Gunter as promised. The moment he heard my voice, he laughed with delight, as if greeting an old friend. We met near the station, where I returned the money along with a small gift to show my thanks. Shaking my hand warmly, he said that helping me had simply felt right. As I watched his taxi drive away, I understood that a single act of trust between strangers can warm the coldest night.",
+        "continuationDesign": {
+          "theme": "陌生人之间的善意与信任——好心人愿先付出信任，而这份信任理应用诚信回报，温暖彼此。",
+          "paragraphs": [
+            "第1段承接starter1\"跑回去报坏消息\"：先用一句羞愧的心理反应（部分倒装So...was I）把\"我\"以为会挨骂的紧张接住，制造情绪落差；再让Gunter沿用原文\"big smile/We made it\"的热心人设做出反转——不要钱、塞名片、说\"I trust you\"，把冲突（付不上钱+车要开）一举化解为\"日后再还\"的信任之约；以\"我\"被打动、飞奔上车（呼应原文一路赶车的紧张节奏）收束，留下一份待还的恩情，自然引向第2段。",
+            "第2段承接starter2\"四天后依约打电话\"：先用Gunter听到声音便大笑、像老友般的反应承接电话，呼应他始终如一的暖意；再写见面还钱+小礼物兑现承诺，让第1段的\"信任\"得到回报、形成前后呼应；结尾用环境意象点题——回扣原文开篇\"又冷又湿的夜晚\"与全篇反复出现的\"微笑/善意\"，由\"a single act of trust...can warm the coldest night\"升华主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "So ashamed was I that I could hardly meet his eyes, expecting anger",
+            "note": "高分记叙句：部分倒装（So+形容词+was sb that…）放在段首强化情绪，叠加非谓语expecting作伴随状语写心理预期。迁移：任何\"因某情绪强烈以致做出某反应\"的心理刻画都可套这个倒装框架开头，制造情绪张力。"
+          },
+          {
+            "text": "he simply smiled, the same warm smile as before",
+            "note": "动作+独立名词短语同位复指：用\"the same...as before\"把当下动作和原文已出现的意象（微笑）勾连，既呼应人设又省字。迁移：写人物一以贯之的态度时，可用\"the same X as before\"回扣前文细节。"
+          },
+          {
+            "text": "For a second I stood frozen, deeply moved by a stranger's kindness",
+            "note": "心理描写句：先用\"stood frozen\"的身体定格写震动，再用过去分词deeply moved作状语点出情绪与缘由。迁移：表现\"被善意/意外击中而怔住\"的瞬间，定格动作+分词状语是万能搭配。"
+          },
+          {
+            "text": "Then, thanking him again and again, I raced to the bus and jumped on just as the door was closing",
+            "note": "动作链+非谓语：thanking…作伴随状语，raced/jumped连动收紧节奏，just as引导的时间状语制造\"千钧一发\"画面。迁移：所有\"匆忙赶上某事物\"的紧张收尾都可借连动+just as the…was…的卡点写法。"
+          },
+          {
+            "text": "As I watched his taxi drive away, I understood that a single act of trust between strangers can warm the coldest night",
+            "note": "结尾点题句：用\"watched…drive away\"的目送画面收束，再以\"warm the coldest night\"回扣原文开篇寒夜意象完成升华。迁移：续写结尾可用\"目送+一句由具体场景上升到主旨的感悟\"来点题呼应。"
+          }
+        ]
+      }
     }
   }
 }

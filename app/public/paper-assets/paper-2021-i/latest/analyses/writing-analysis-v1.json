@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2021-i-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "As the twins looked around them in disappointment, their father appeared. Woken by the noise, he took in the messy kitchen at a glance. Instead of being angry with them, he gave them a warm, comforting hug. \"What a wonderful idea,\" he whispered. Without a word, he began to help them clean the stove and taught them to control the fire. Side by side, the three cooked together. Soon the golden toast lay on the plate and the porridge smelled delicious. Their disappointment went away, replaced by quiet pride.\nThe twins carried the breakfast upstairs and woke their mother up. Rubbing her eyes, Mother sat up, surprised by the breakfast before her. Hearing what had happened in the kitchen, she felt tears well up in her eyes. She pulled the twins into her arms, her heart filled with warmth. \"This is the best breakfast I have ever had,\" she said softly. The toast was not perfect and the porridge a little watery, yet to her they tasted sweeter than anything. After all, it was their love that mattered most.",
+        "continuationDesign": {
+          "theme": "家庭亲情与母亲节的爱：不完美的早餐因孩子的心意而最珍贵，父母的包容与鼓励让爱得以圆满。",
+          "paragraphs": [
+            "承接『爸爸出现』：先让爸爸『被吵醒、一眼扫过乱厨房』把他的登场坐实，再用『不责备反而拥抱』制造关键转折——把孩子预想的尴尬翻成被理解。随后让他卷起袖子加入，沿用原文未解决的线索（脏炉灶、不会控火、烧焦的吐司、煮溢的粥）逐一收尾，让早餐真正做成；情绪由沮丧（接 starter 的 disappointment）转为重拾信心与小小自豪，为第二段送早餐铺路。九成顺原文线索，仅补『爸爸安抚+三人合作』两三句过渡，不另起炉灶。",
+            "承接『端早餐上楼、叫醒妈妈』：先写妈妈被眼前餐盘『惊到』的即时反应坐实场景，再让她『得知厨房经过后』落泪、拥抱——把第一段的厨房风波收束进妈妈的感动里，形成前后呼应。结尾刻意回扣原文意象：直白承认吐司不完美、粥有点稀（呼应做砸的细节），却『尝起来比什么都甜』，最后用点题句收束——最珍贵的是孩子的爱，扣住母亲节与亲情主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "Woken by the noise, he took in the messy kitchen at a glance.",
+            "note": "非谓语作状语（过去分词 Woken... 表被动+原因）+ 动作链短语 took in ... at a glance（一眼扫过/尽收眼底）。迁移：人物登场时用『被某声/某事惊动』的分词开头交代起因，再接一个『一眼看清现场』的动作，简洁有画面感。"
+          },
+          {
+            "text": "Without a word, he began to help them clean the stove and taught them to control the fire.",
+            "note": "动作链：状语 Without a word（一句话没说/二话不说）领起，再串『帮忙清理+教控火』两步连贯动作。迁移：写人物默默开始行动/施救的桥段，用状语起头+并列动词，比平铺直叙更有动感。"
+          },
+          {
+            "text": "Their disappointment went away, replaced by quiet pride.",
+            "note": "心理情绪转变：went away（情绪『退去/消散』）+ 过去分词短语 replaced by... 作状语收尾，呈现情绪的此消彼长。迁移：写沮丧/恐惧被另一种情绪取代时，用『A went away, replaced by B』一句完成情绪反转。"
+          },
+          {
+            "text": "Hearing what had happened in the kitchen, she felt tears well up in her eyes.",
+            "note": "心理描写+非谓语作状语：现在分词 Hearing... 表起因，主句 tears well up in her eyes（泪水涌上眼眶）是高频感动句块。迁移：写人物听闻某事后被打动落泪，用分词交代触发+『tears well up in one's eyes』固定搭配，自然不土。"
+          },
+          {
+            "text": "She pulled the twins into her arms, her heart filled with warmth.",
+            "note": "动作链+独立主格作状语：主句 pulled ... into her arms（把人拥入怀）+ 独立主格 her heart filled with warmth（内心被暖意填满）补写同时的心理状态。迁移：拥抱/牵手等亲密动作后，用独立主格补一笔人物内心感受，动作与情感同时呈现。"
+          }
+        ]
+      }
     }
   }
 }
