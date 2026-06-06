@@ -33,8 +33,20 @@ The reviewed, teacher-facing explanation of why each correct answer fits — the
 _Avoid_: 解析 / explanation when the stored reviewed object is meant; answer key when only the answer is meant
 
 **Writing Task**:
-The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), the word-count target, and, for continuation, the paragraph opening sentences and continuation material. A Writing Task is the attachment point for a future writing analysis (model answer, scoring guidance, AI feedback), since a writing group has no Questions to attach analysis to.
+The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), the word-count target, and, for continuation, the paragraph opening sentences and continuation material. A Writing Task is the attachment point for its Writing Analysis, since a writing group has no Questions to attach analysis to.
 _Avoid_: writing question, essay question when referring to this stored object; it is not a Question
+
+**Writing Analysis**:
+The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. Its v1 composition is a **Model Answer** plus its **Highlight Expressions**; scoring guidance and common-pitfall notes are explicitly out of v1.
+_Avoid_: 写作解析 / writing explanation when the stored reviewed object is meant; do not call it a Tag or a derived search dimension
+
+**Model Answer** (范文):
+The single universal, attainable-excellent sample response carried by a Writing Analysis — written so a solid (~90-level) student could realistically reproduce it (high-frequency vocabulary, reliable structures, on the word-count target) yet still scores well. Not a native-speaker showcase, and not a set of tiered samples — one Model Answer per Writing Task.
+_Avoid_: 范文 used loosely for any sample; sample essay when the curated, attainable one is meant
+
+**Highlight Expression** (亮点表达 / 高分句块):
+A reusable, high-scoring sentence chunk lifted from the Model Answer and surfaced on its own so a weaker student can borrow the "good" parts directly. A Writing Analysis carries a few (≈3–5) per Model Answer.
+_Avoid_: phrase, sentence when the curated, score-bearing chunk is meant
 
 **Tag**:
 A teacher-confirmed label used for search, filtering, teaching intent, topic, discourse feature, question type, or difficulty support.
@@ -98,7 +110,7 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 - A **Question** can have zero or more **Options**.
 - A cloze **Question Group** contains many **Cloze Blanks**; each **Cloze Blank** maps one to one to one **Question**.
 - An **Analysis** attaches per **Question** / **Cloze Blank**, or to a **Writing Task**; it is never the answer authority.
-- A future writing analysis attaches to a **Writing Task** at group level, with no **Question** reference.
+- A **Writing Analysis** attaches to a **Writing Task** at group level, with no **Question** reference; it carries one **Model Answer** and its **Highlight Expressions**.
 - A **Tag** can attach to a **Passage**, **Question Group**, or **Question**.
 - An **AI Tag Suggestion** targets one **Passage**, **Question Group**, or **Question** and becomes a **Tag** only after teacher confirmation.
 - A **Draft Paper** contains many **Draft Paper Items**.
