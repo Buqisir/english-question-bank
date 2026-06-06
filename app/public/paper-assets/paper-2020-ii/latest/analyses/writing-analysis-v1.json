@@ -25,6 +25,41 @@
           }
         ]
       }
+    },
+    "group-2020-ii-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "When Mrs. Meredith heard of John's idea, she thought it was a good one, too. Without delay, she led the children into the kitchen, where the big box of corn was waiting. Soon the warm smell of popcorn filled the house. Clara held the paper bags open, Harry filled them one by one, and John tied each with care. Their hands moved quickly, their faces shining with joy, for they knew every bag might bring hope to Bernard's family.\nWith everything ready, Bernard started out on his new business. At first his heart beat fast and his steps were slow, but the kind smiles of the neighbours soon gave him courage. Door after door opened, and to his surprise nobody refused him. \"Such brave children!\" an old woman said warmly, dropping the coins into his hand. When the last bag was sold, Bernard ran home, holding the money tightly. His mother's tears of joy told him more than any words could.",
+        "continuationDesign": {
+          "theme": "邻里互助、靠劳动换取尊严——帮助别人本身就是最甜的快乐。",
+          "paragraphs": [
+            "承接 starter1：把妈妈“觉得这点子好”落成具体行动——她毫不迟疑带头进厨房动手，呼应原文她乐于助人的人设。冲突在这一段是“良性筹备”而非对抗：用嗅觉烘托（爆米花香气充满屋子）加分工群像（Clara 撑袋、Harry 装、John 系）把抽象的点子变成可执行的生意，沿用原文真实物品（Uncle John 的玉米箱、纸袋、爆米花），并用‘every bag might bring hope’把劳动与帮人主题挂钩，为第二段 Bernard 出门铺好‘everything ready’。",
+            "承接 starter2：先制造一个温和的内在转折——Bernard 出门时的紧张（心跳快、脚步慢），再让原文‘邻里互助’的基调来化解（邻居的微笑给他勇气、没人拒绝、老妇人夸‘brave children’并把硬币放他手里），完成 NSDD 的‘方法—结局’。结尾回扣原文真有的意象（挣到的钱、卧病家庭的母亲）并点题：用母亲喜悦的眼泪和‘helping others is the sweetest happiness’呼应 Mrs. Meredith 与全镇互助的价值取向，前后呼应、升华主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "Soon the warm smell of popcorn filled the house",
+            "note": "环境/嗅觉细节烘托（用气味写出忙碌而温馨的厨房氛围）。迁移：写场面时别只写人物动作，补一笔气味/声音/光线（‘the warm smell of … filled the …’）能让画面立刻有现场感、不流水账。"
+          },
+          {
+            "text": "Their hands moved quickly, their faces shining with joy",
+            "note": "独立主格结构（their faces shining…）做群像描写。迁移：写多人协作/同时进行的画面时，用‘主句 + 独立主格’把动作与神态叠加，一句话写出又忙碌又开心的氛围。"
+          },
+          {
+            "text": "At first his heart beat fast and his steps were slow",
+            "note": "心理+动作的反差描写（内心紧张外化为放慢的脚步）。迁移：表现人物初次尝试时的胆怯，用‘心跳快 + 脚步/手发慢’这类生理细节代替直白的‘he was nervous’，为后文获得勇气作铺垫。"
+          },
+          {
+            "text": "the kind smiles of the neighbours soon gave him courage",
+            "note": "环境/他人正衬人物心理的转折句。迁移：让外部善意（笑容、鼓励的目光）作主语去‘give sb courage’，自然推动人物从怯到勇，衔接情绪转变。"
+          },
+          {
+            "text": "His mother's tears of joy told him more than any words could",
+            "note": "以细节收束、含蓄点题的高分记叙句（让‘眼泪’作主语 + ‘more than any words could’省略比较）。迁移：结尾不直接喊主题，用一个有力的小细节‘说’出情感，含蓄而有力地呼应全文。"
+          }
+        ]
+      }
     }
   }
 }

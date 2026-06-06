@@ -25,6 +25,41 @@
           }
         ]
       }
+    },
+    "group-2022-i-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "We sat down next to each other, but David wouldn't look at me. For a while I said nothing, letting the quiet settle between us. Then I reminded him softly how he had never missed a single practice, and how he always crossed the finish line, however long it took. \"Those kids don't know you,\" I said, \"but the boy I know never quits.\" His lips shook. Slowly he raised his head, and that familiar toothy smile slowly came back to life.\nI watched as David moved up to the starting line with the other runners. The race began, and his small body started rocking from side to side along the route. Soon the others disappeared ahead, yet he pushed on, swinging his feet forward step after determined step. When he finally emerged from the evergreens, nobody was laughing. Children from all seven schools lined the path, cheering his name. David crossed the line smiling brightly, having finished what he had started.",
+        "continuationDesign": {
+          "theme": "勇气与坚持胜过身体的局限——别人的眼光定义不了你，跑完自己选择的路就是胜利。",
+          "paragraphs": [
+            "第1段承接starter1‘并肩坐下、David不肯看我’的情绪低谷：先以沉默给情绪留白（letting the quiet settle），再用原文已坐实的事实当‘弹药’——他从不缺席训练、总能跑完——把劝说建立在他自身的过往上而非空喊口号，正面回应教练种下的‘怕被笑’这一冲突；一句‘the boy I know never quits’把焦点从‘别人怎么看’扭转到‘你是谁’，完成由羞怯到回暖的转折，以招牌toothy smile的回归收束，为第2段他主动去跑埋好动机。",
+            "第2段承接starter2‘走到起跑线’：以哨响起跑推进，用原文的步态意象（rocking side to side / swinging his feet forward）写他落在最后却坚持的挣扎，制造‘会不会被笑’的悬念；转折给出回报——别校孩子非但没笑反而夹道为他欢呼，化解第1段的核心恐惧；结尾让David smiling brightly冲过终点线、having finished what he had started，回扣原文反复强调的‘总能跑完’与‘toothy smile’双意象，点明有始有终、勇气胜过局限的主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "For a while I said nothing, letting the quiet settle between us.",
+            "note": "心理/环境留白：用现在分词独立结构(letting...)作伴随状语，以‘沉默’侧写人物情绪，比直接说‘我安慰他’更克制有张力，可迁移到任何需要情绪铺垫的对话开场。"
+          },
+          {
+            "text": "His lips shook. Slowly he raised his head, and that familiar toothy smile slowly came back to life.",
+            "note": "动作链写心理转变：嘴唇发抖→缓缓抬头→笑容‘came back to life’，把抽象的‘重拾勇气’拆成可见的身体动作逐个推进，came back to life 这一拟人表达可迁移到‘希望/神采重新点亮’的转折时刻。"
+          },
+          {
+            "text": "his small body started rocking from side to side along the route",
+            "note": "用原文坐实的步态意象写动作：身体左右摇晃前行，既忠于人物设定又有画面感；写‘吃力而坚持的移动’时可套用 rocking from side to side / swinging forward 这类身体部位动作描写。"
+          },
+          {
+            "text": "yet he pushed on, swinging his feet forward step after determined step",
+            "note": "动作+情绪叠加的坚持描写：转折词yet+非谓语(swinging...)串联动作，‘step after determined step’用名词重复+形容词把‘咬牙坚持’具象化，可迁移到任何‘明知落后仍不放弃’的拼搏场景。"
+          },
+          {
+            "text": "David crossed the line smiling brightly, having finished what he had started",
+            "note": "点题收尾句：现在分词smiling brightly作伴随状语写神态，完成式分词(having finished...)作状语点出‘有始有终’主旨，回扣原文‘总能跑完’；这种‘动作+having done点题’的句式是记叙文结尾常用高分落点。"
+          }
+        ]
+      }
     }
   }
 }

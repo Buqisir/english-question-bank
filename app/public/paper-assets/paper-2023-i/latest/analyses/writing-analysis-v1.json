@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2023-i-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "A few weeks later, when I almost forgot the contest, there came the news. My teacher rushed in, waving an envelope, his eyes shining. \"First place!\" he cried. For a moment I froze, my heart pounding wildly. Then it hit me — I had won. Yet what flooded my mind was not the prize, but those long nights of rewriting, racing forward like Revere's horse whenever I longed to quit.\nI went to my teacher's office after the award presentation. He looked up, and that warm laugh I knew so well filled the room. \"I told you that you had a good shot,\" he said. I meant to thank him for the prize, but other words slipped out: \"Thank you for making me love writing.\" Like Revere's horse, I had been tired and full of doubts, yet I had kept going — and somewhere along that road, a painful chore had quietly turned into joy.",
+        "continuationDesign": {
+          "theme": "比起赢，更珍贵的是像 Revere 的马一样坚持后，写作从痛苦变成了热爱——而点燃这一切的是老师的信任。",
+          "paragraphs": [
+            "第1段承接 starter1\"消息来了\"：先用老师冲进教室、挥信、眼睛发亮报喜，把\"news=获奖\"落实，并制造由\"愣住—心跳—醒悟\"的情绪台阶。关键是顺原文逻辑做一个转折：我没有停在\"赢了\"的狂喜上，而是让脑海里浮现的是无数个重写的夜晚——这正衔接原文\"赢的念头让位于写作乐趣/如果没赢我也不在乎\"的伏笔。此处第一次引入 Revere 的马的意象(racing forward...whenever I longed to quit)，与原文\"like Revere's horse, I kept going\"形成呼应而非复述。",
+            "第2段承接 starter2\"颁奖后去办公室\"：用师生对话收束。先以老师那熟悉的笑(呼应原文反复出现的 laughed out loud)和他的原话\"good shot\"(回扣原文\"I think you have a good shot at this\")接住场景；再设计一个微转折——我本想为奖项道谢，脱口而出的却是\"谢谢你让我爱上写作\"，把主题从\"输赢\"翻到\"热爱\"。结尾收束回扣中心意象：像马一样累过、怀疑过却坚持下来，痛苦(painful，原文 difficult and painful)终于化为乐趣(joy，原文 enjoyment of writing)，完成点题升华。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "My teacher rushed in, waving an envelope, his eyes shining.",
+            "note": "动作链+独立主格：先一个主动作(rushed in)，再用现在分词(waving)串第二动作，最后用独立主格(his eyes shining)补人物神态。报喜/激动登场的万能句式，可迁移到任何\"某人带着情绪冲进来\"的场景。"
+          },
+          {
+            "text": "For a moment I froze, my heart pounding wildly.",
+            "note": "心理描写+独立主格：用\"身体定格(froze)+心跳(heart pounding)\"外化震惊情绪，独立主格让两层反应叠在一句里。震惊/紧张/意外时刻通用。"
+          },
+          {
+            "text": "Yet what flooded my mind was not the prize, but those long nights of rewriting",
+            "note": "情绪转折+not...but 强调结构：用 what 引导的主语从句聚焦内心，再用 not A but B 把读者注意力从表面(奖)拉向真正在意的东西(过程)。适合写\"顿悟/价值反转\"的高分句。"
+          },
+          {
+            "text": "racing forward like Revere's horse whenever I longed to quit",
+            "note": "非谓语作状语+原文意象比喻：用现在分词短语作伴随状语，把\"我\"的坚持比作奔马，直接回扣原文核心意象。把抽象的\"努力坚持\"具象成一个原文已有的画面，是续写呼应原文的高分手法。"
+          },
+          {
+            "text": "yet I had kept going — and somewhere along that road, a painful chore had quietly turned into joy",
+            "note": "转折收束+点题：用 yet 承前面的\"累与怀疑\"，再以\"painful→joy\"的转变点出主旨(呼应原文 difficult and painful 与 enjoyment of writing)。结尾升华句模板：先认怂困难，再用一个安静的转变收束情感。"
+          }
+        ]
+      }
     }
   }
 }

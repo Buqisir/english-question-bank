@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2022-ii-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "We sat down next to each other, but David wouldn't look at me. For a long moment I said nothing, letting the quiet sit between us. Then I reminded him softly of all those mornings he had practised, never missing a single one. \"You don't run to beat anyone,\" I said. \"You run to finish, and finishing is the bravest thing of all.\" Slowly he lifted his head. His eyes were still wet, but something steady had returned to them. Taking a deep breath, he whispered that he wanted to try.\nI watched as David moved up to the starting line with the other runners. The moment the race started, his small body began rocking from side to side, his feet swinging forward bit by bit. The others soon disappeared into the evergreen forest, yet David never stopped. Long after the rest had crossed the line, he came shaking into view, and the whole crowd rose to cheer. He finished, just as he always did, his big toothy smile shining brighter than ever.",
+        "continuationDesign": {
+          "theme": "意志与坚持远比名次重要——对David而言，跑完全程本身就是胜利，而他被当作普通孩子对待、被全场接纳，正是这份尊重让坚持有了意义。",
+          "paragraphs": [
+            "第1段承接starter1‘并肩坐下、他不肯看我’：先用沉默接住他的羞愧（紧跟一句‘letting the quiet sit between us’做评价/承接），再用原文真实线索——他‘没落过一次训练’——唤回他的自我认同；点出原文反复强调的‘跑是为了完成’这一价值，把冲突从‘怕被嘲笑’转向‘为自己而跑’，最后让David自己做出‘想试试’的决定（呼应原文是教练把选择权交给他、这次他主动选择），完成由弃赛到参赛的转折，不另起炉灶。",
+            "第2段承接starter2‘他走向起跑线’：用哨声推动比赛开始，直接沿用原文意象‘小小的身体左右摇摆、双脚一点点向前甩’写他独特的跑姿（动作链描写）；以别人迅速消失在常青树森林、他却从不停下作反衬；收束回扣原文明写的‘他总能跑完’与‘标志性露齿笑’——结尾两个意象原文都真实强调过，全场起立欢呼点题：跑完即胜利、他被接纳被尊重，完成情感升华。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "For a long moment I said nothing, letting the quiet sit between us",
+            "note": "心理/氛围描写+独立分词作伴随状语（letting...）。安静地接住对方的情绪，比直接安慰更有张力。可迁移到任何‘先沉默、再开口’的劝慰或和解场景。"
+          },
+          {
+            "text": "Taking a deep breath, he whispered that he wanted to try",
+            "note": "动作+非谓语作状语（Taking a deep breath 前置）写下定决心的瞬间。一个深呼吸+一句低语，把内心的转变外化。可迁移到角色鼓起勇气、做出关键决定的转折点。"
+          },
+          {
+            "text": "his small body began rocking from side to side, his feet swinging forward bit by bit",
+            "note": "动作链+独立主格（his feet swinging...）。把一个连贯动作拆成身体部位逐个呈现，画面感强。可迁移到任何需要慢镜头刻画人物移动/挣扎的场面。"
+          },
+          {
+            "text": "Long after the rest had crossed the line, he came shaking into view, and the whole crowd rose to cheer",
+            "note": "环境反衬+人群反应烘托高潮。用‘别人早已冲线’反衬主角的迟到与坚持，再借全场欢呼把情绪推到顶点。可迁移到比赛、表演、归来等‘众人见证主角坚持’的收束场景。"
+          },
+          {
+            "text": "He finished, just as he always did, his big toothy smile shining brighter than ever",
+            "note": "结尾点题句+独立主格（his...smile shining...）。回扣原文意象（总能跑完、露齿笑），用一个明亮的表情定格升华主旨。可迁移到一切呼应前文、以人物标志性细节收尾点题的结尾。"
+          }
+        ]
+      }
     }
   }
 }

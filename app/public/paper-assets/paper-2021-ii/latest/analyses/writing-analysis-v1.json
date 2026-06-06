@@ -29,6 +29,41 @@
           }
         ]
       }
+    },
+    "group-2021-ii-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "As the twins looked around them in disappointment, their father appeared. Seeing their fallen faces, he did not say a word of blame. Instead, he smiled gently and placed a warm hand on each child's shoulder. \"Let's finish it together,\" he said softly. Hope returned to their eyes at once. Following his calm directions, Jenna cleaned the messy stove while Jeff poured fresh rice into the pot. Working side by side, they watched the porridge cook slowly this time, and a golden slice of toast finally turned out just right.\nThe twins carried the breakfast upstairs and woke their mother up. Rubbing her eyes, Mother sat up and stared at the food, too surprised to speak. Then her face broke into the brightest smile they had ever seen. So proud and pleased was she that she could hardly say a word. Tears of joy shone in her eyes as she pulled both children close. The breakfast had not been perfect, but it carried all their love — and that, they understood, was the finest gift of all.",
+        "continuationDesign": {
+          "theme": "爱在于用心付出而非完美无缺；一家人并肩协作、不轻言放弃的温暖。",
+          "paragraphs": [
+            "承接 starter1：把'爸爸出现'当既成事实接住，先用一句心理/动作（看见孩子沮丧的脸却不责备）定下温暖基调，制造'从失望到希望'的转折——这是本段的核心冲突走向（危机→大人介入→重燃希望）。沿用原文全部线索物品（炉子、锅、米、吐司）让爸爸带着孩子把原文里搞砸的每一步逐一重做（擦炉子对应'stove a mess'、重新下米对应'porridge boiled over'、烤好吐司对应两次烤焦的面包），九成情节顺原文往下走，我只补'爸爸出场化解'这一关键过渡。结尾用环境烘托（从满屋烟味到早餐香味+笑声）把厨房一段收得有画面。",
+            "承接 starter2：把'端早餐上楼叫醒妈妈'当事实接住，紧跟妈妈被惊喜震住的反应（揉眼、坐起、说不出话）。用妈妈的'最灿烂的笑'和'喜悦的泪'解决/收束全篇情绪，直接回扣原文开头反复强调的意象——'妈妈会多么 pleased and proud'（用 So proud and pleased was she that… 倒装把这条原文意象点亮），不新造象征物。最后用'早餐并不完美，却装满了他们全部的爱'点题升华，呼应主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "Seeing their fallen faces, he did not say a word of blame",
+            "note": "非谓语作状语（现在分词 Seeing 引导）+ 神态描写。可迁移到任何'某人看见某种表情后做出反应'的续写开头，用 Seeing/Hearing/Noticing + 名词短语快速带出他人状态再接动作，比'When he saw…'更紧凑高级。"
+          },
+          {
+            "text": "Following his calm directions, Jenna cleaned the messy stove while Jeff poured fresh rice into the pot",
+            "note": "动作链描写：分词状语 Following… 起头，while 并列两个人物各自的具体动作（擦炉子/下米），把抽象的'一起做'拆成可见的分工。迁移用于多人协作、分工做事的场景，避免写成'they did A and B'的流水账。"
+          },
+          {
+            "text": "Then her face broke into the brightest smile they had ever seen",
+            "note": "神态/情绪描写：face broke into a smile 是课标词写'笑容绽开'的地道搭配，配最高级 the brightest…they had ever seen 强化情感峰值。迁移到任何人物由惊到喜的瞬间，替代超纲的 grin/beam。"
+          },
+          {
+            "text": "So proud and pleased was she that she could hardly say a word",
+            "note": "高分记叙句：So + adj. + was sb that… 部分倒装，强调情绪到了极点。此处刻意回扣原文'pleased and proud'意象。迁移到任何想强调'某人激动/感动/惊讶到说不出话'的高潮句，是续写点情绪的家常倒装利器。"
+          },
+          {
+            "text": "The breakfast had not been perfect, but it carried all their love",
+            "note": "点题升华句：用 not perfect, but… 的转折结构把具体事物（早餐）升华到抽象情感（爱），收尾点 theme。迁移到任何'结果不完美却饱含心意'的结局，是读后续写常用的主旨呼应模板。"
+          }
+        ]
+      }
     }
   }
 }
