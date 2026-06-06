@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2023-ii",
+  "groups": {
+    "group-2023-ii-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Ryan,\nI'm Li Hua from Class 3. Thank you for organising the speaking practice in pairs, which we all find truly helpful. However, I'm writing to share a small concern about how the groups are arranged.\nSince the pairs are formed at random, students at quite different levels are sometimes put together. As a result, those who struggle may feel too nervous to say much, while their partners find the topics too easy and soon lose interest.\nI wonder if it might be better to let us choose partners of a similar level. Alternatively, you could group us according to our spoken English, so everyone feels comfortable enough to join in. These are only my personal thoughts, and I would be grateful if you could consider them.\nYours sincerely,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "Thank you for organising the speaking practice in pairs, which we all find truly helpful.",
+            "note": "对师长/上级先感谢再提要求的开场框架——『Thank you for + 对方做的事, which ...』。迁移到任何向老师/组织者提建议或请求的应用文：先肯定对方付出，降低对抗感，which 定语从句顺带补一句正面评价。"
+          },
+          {
+            "text": "However, I'm writing to share a small concern",
+            "note": "委婉点明来信目的、引出问题的过渡框架。用 However 转折、share a small concern 把『提意见』软化成『分享一点小顾虑』。可迁移到投诉信、建议信中需要不指责地引出问题处。"
+          },
+          {
+            "text": "I wonder if it might be better to",
+            "note": "虚拟/委婉建议句式（含 might be better）。把直接的『你应该…』换成试探口吻，给对方余地。迁移到一切对师长/上级提建议的场合：I wonder if it might be better to + 动词原形。"
+          },
+          {
+            "text": "Alternatively, you could group us according to",
+            "note": "提供第二备选方案的过渡框架——『Alternatively, you could + 动词』。用 could 保持委婉、Alternatively 表明只是另一选择而非要求。任何给建议/出主意的应用文都能用来摆第二个办法。"
+          },
+          {
+            "text": "These are only my personal thoughts, and I would be grateful if you could consider them.",
+            "note": "得体的退让式结尾框架：先声明只是个人浅见，再用 I would be grateful if you could ... 礼貌请对方考虑。迁移到所有向师长/上级提议或请求的收尾，既谦逊又把决定权交还对方。"
+          }
+        ]
+      }
+    }
+  }
+}

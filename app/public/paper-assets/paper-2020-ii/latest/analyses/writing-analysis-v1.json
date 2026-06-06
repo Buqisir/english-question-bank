@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2020-ii",
+  "groups": {
+    "group-2020-ii-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Last Sunday, our school held a five-kilometre cross-country running race, which attracted hundreds of eager participants. Not only students but also many teachers signed up, all determined to challenge themselves and enjoy the autumn morning together.\nThe route, stretching from the school gate to the foot of Nanshan Mountain, wound through quiet streets and golden fields. Cheered on by classmates lining the road, the runners pushed forward, some sprinting and others simply jogging at their own pace.\nThe event was warmly received by everyone present. What impressed me most was the moment when several students slowed down to help a tired runner reach the finish. It reminded me that what truly matters is not winning, but moving forward together.",
+        "highlightExpressions": [
+          {
+            "text": "which attracted hundreds of eager participants",
+            "note": "非限制性定语从句承接活动名称，一句话点出规模与人气。报道类开头通用框架：'我校举办了X活动，which attracted/drew + 参加规模'，换成 visitors/volunteers/audience 即可迁移到任何讲座、义卖、运动会的开场。"
+          },
+          {
+            "text": "all determined to challenge themselves",
+            "note": "独立主格 + 形容词短语，给前面提到的人补一笔状态/动机，避免句子干巴。框架 'all + 形容词/分词(determined/eager/ready) to do'，可迁移到描写志愿者、选手、观众的精神面貌。"
+          },
+          {
+            "text": "The event was warmly received by everyone present.",
+            "note": "报道里交代'活动反响'的得体定句，被动语态显客观。框架 'The + 活动 + was warmly received/highly praised by ...'，写任何活动反响段都能直接套用，把 everyone present 换成 the audience/visitors 即可。"
+          },
+          {
+            "text": "What impressed me most was the moment when",
+            "note": "what-从句作主语的强调式表态，引出最打动人的具体瞬间，让感想从过程里长出来而非空喊口号。框架 'What impressed/struck me most was the moment when + 具体画面'，可迁移到任何需要写个人体验/小领悟的应用文。"
+          }
+        ]
+      }
+    }
+  }
+}

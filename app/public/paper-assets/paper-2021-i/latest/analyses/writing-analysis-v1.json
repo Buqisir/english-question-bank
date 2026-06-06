@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2021-i",
+  "groups": {
+    "group-2021-i-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Youth and Me\nTime flies, and our school newspaper Youth has accompanied me for three unforgettable years. I still remember the first issue I picked up, when a touching story about an ordinary volunteer suddenly brought tears to my eyes. Since then, reading Youth every week has become a habit I truly treasure. Among all the sections, the one I love most is \"Campus Voices\", where ordinary students freely share their dreams and worries. It is here that I gradually realized I was never alone on my growing journey. Now, as Youth celebrates its tenth anniversary, I sincerely hope it will inspire more young hearts. Happy birthday, Youth, and may you shine brightly for many years to come!",
+        "highlightExpressions": [
+          {
+            "text": "Time flies, and our school newspaper Youth has accompanied me for three unforgettable years.",
+            "note": "开头起兴+点出关系的框架。把骨架‘Time flies, and X has accompanied me for ... years’搬到任何叙述‘某事物陪伴我多年’的投稿/演讲/感谢信开头即可，用现在完成时(has accompanied)自然带出时间跨度。"
+          },
+          {
+            "text": "Since then, reading Youth every week has become a habit I truly treasure.",
+            "note": "承上启下的过渡框架‘Since then, doing sth has become a habit I truly treasure’，把某次经历升级为长期习惯。动名词作主语+省略关系代词的定语从句(a habit I treasure)是够得着的高级结构，可迁移到任何写‘从此养成某习惯’的应用文。"
+          },
+          {
+            "text": "It is here that I gradually realized I was never alone on my growing journey.",
+            "note": "强调句‘It is here/then/there that I realized ...’，把个人领悟从具体场景里点出来。这是从过程长出来的感想框架，可迁移到任何需要表达‘正是在此处/那一刻我才明白……’的体验类写作（选择性必修级强调句，用一处即可，自然得体）。"
+          },
+          {
+            "text": "Now, as Youth celebrates its tenth anniversary, I sincerely hope it will inspire more young hearts.",
+            "note": "由头转向期望的框架‘Now, as ... , I sincerely hope ...’：as引导时间状语从句交代场合(逢周年/活动)，再自然过渡到表达期望。可迁移到任何借某契机表态/提期望的投稿、致辞。"
+          },
+          {
+            "text": "Happy birthday, Youth, and may you shine brightly for many years to come!",
+            "note": "得体收尾的祝愿框架‘may you ... for many years to come’，用may引导的祝愿句送上祝福，比‘I wish’更书面有感染力。可迁移到一切庆生、周年、毕业等需以祝福结尾的应用文。"
+          }
+        ]
+      }
+    }
+  }
+}

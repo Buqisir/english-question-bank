@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2025-ii",
+  "groups": {
+    "group-2025-ii-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Chris,\nI hope this email finds you well. Last month you kindly agreed to write an article introducing Canadian sports for our newspaper, and I am truly grateful for your support.\nI am writing to ask how the writing is coming along. Should you need any materials or help with editing, I would be more than glad to offer a hand.\nMeanwhile, I would like to gently remind you that we plan to publish the next issue at the end of this month. It would be wonderful if the article could reach me a few days earlier, leaving us enough time to arrange the layout.\nPlease take your time, and there is no need to rush yourself.\nBest wishes,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "I hope this email finds you well.",
+            "note": "邮件开篇万能问候句，先寒暄再入正题，礼貌且降低唐突感。任何写给师长/陌生人/合作方的正式邮件都可直接照搬开头。"
+          },
+          {
+            "text": "I am writing to ask how the writing is coming along.",
+            "note": "用 'I am writing to + 动词' 点明来信目的；'how ... is coming along' 是询问进展的地道软问法。迁移到询问项目/准备/筹备进度的各类邮件，只换名词即可。"
+          },
+          {
+            "text": "Should you need any materials or help with editing, I would be more than glad to offer a hand.",
+            "note": "倒装条件句 'Should you need...' 替代 if，配 'would be more than glad to' 委婉主动提供帮助，把催稿变成支援，化解尴尬。凡是想'软化要求、顺带示好'的场景都好用。"
+          },
+          {
+            "text": "I would like to gently remind you that",
+            "note": "礼貌提醒/告知的缓冲引导句，'gently remind' 给足余地、不显催命。提醒截止日期、规则、注意事项时通用，后接 that 从句说明事项。"
+          },
+          {
+            "text": "Please take your time, and there is no need to rush yourself.",
+            "note": "共情式得体收尾，主动给对方余地、消解被催促的压力，礼貌又体贴。任何'有求于人但不愿施压'的应用文结尾都可迁移。"
+          }
+        ]
+      }
+    }
+  }
+}

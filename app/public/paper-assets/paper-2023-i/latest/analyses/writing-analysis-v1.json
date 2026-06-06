@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2023-i",
+  "groups": {
+    "group-2023-i-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Ryan,\nI'm Li Hua from Class 3. Thank you for organising our after-class speaking practice, which shows how much you care about improving our oral English. I'm writing to share a small concern about the random pairing. Since students differ greatly in speaking levels, a beginner randomly matched with a fluent partner may feel nervous and stay silent, so neither of them truly benefits from the practice.\nIf it were possible, I wonder whether students at similar levels could be grouped together. In that way, everyone would dare to open their mouths without pressure. Besides, allowing us to change partners every week would let us learn from different classmates. I believe these adjustments could make our practice more enjoyable and effective.\nYours sincerely,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "Thank you for organising our after-class speaking practice, which shows how much you care about improving our oral English.",
+            "note": "开篇先感谢+共情的得体框架：『Thank you for ... , which shows how much you care about ...』。给师长/上级写信提要求前用它先肯定对方用心，降低对抗感；迁移到投诉、请求、建议类邮件，把 organising... 换成对方做的事即可。"
+          },
+          {
+            "text": "I'm writing to share a small concern about the random pairing.",
+            "note": "点明写信目的+委婉降调：『I'm writing to share a small concern about ...』。比 I want to complain 柔和得多，a small concern 把问题说小、留余地。任何『委婉指出问题』的应用文都能用，替换 about 后面的对象。"
+          },
+          {
+            "text": "If it were possible, I wonder whether students at similar levels could be grouped together.",
+            "note": "委婉请求的虚拟语气框架：『If it were possible, I wonder whether ... could ...』。were+could 双重弱化语气，对师长/上级提建议时显得不强求、给对方决定权。迁移：把 students... grouped together 换成你想提的任何具体请求。"
+          },
+          {
+            "text": "Besides, allowing us to change partners every week would let us learn from different classmates.",
+            "note": "追加第二条建议的过渡：『Besides, allowing ... would let ...』。Besides 自然引出补充要点，动名词作主语+would 把建议说成『会带来的好处』而非命令。迁移到任何需要并列多条建议/理由的应用文。"
+          },
+          {
+            "text": "I believe these adjustments could make our practice more enjoyable and effective.",
+            "note": "得体收尾表态框架：『I believe these adjustments could make ... more ... and ...』。用 could 收住语气，把全文建议归结为正向结果，礼貌且不施压。迁移：换掉 adjustments 与后面的形容词，可作建议/请求类邮件的收尾句。"
+          }
+        ]
+      }
+    }
+  }
+}

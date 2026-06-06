@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2022-ii",
+  "groups": {
+    "group-2022-ii-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Caroline,\nI am writing to invite you to be a guest on our school radio English program, \"Talk and Talk.\"\n\"Talk and Talk\" is a weekly show where students share interesting stories and discuss campus life in English. It has won a warm welcome among us, and we would be honored to have you join us.\nFor the interview, we hope you could come to our studio next Friday afternoon, though the exact time is entirely up to you. We would love to talk about your experiences of living in China, as well as the cultural differences you have noticed.\nPlease let me know whether this time works for you. We are really looking forward to your reply.\nYours sincerely,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "I am writing to invite you to be a guest on",
+            "note": "邀请类应用文的开头万能框架：一句话点明写信目的（邀请对方做某事）。换题时把 a guest on... 替换成具体活动/场合即可，如 our English speech contest / the opening ceremony。"
+          },
+          {
+            "text": "we would be honored to have you join us",
+            "note": "对师长/上级/嘉宾的得体邀请句，用 be honored to 抬高对方、显示诚意。可迁移到任何邀请尊长出席的场景，替换 join us 为 give us a speech / attend the event 等。"
+          },
+          {
+            "text": "though the exact time is entirely up to you",
+            "note": "委婉地把决定权交给对方、在时间安排上留余地的礼貌句。凡是请求别人配合时间/地点的应用文都能用，体现尊重与灵活，如 the date is entirely up to you。"
+          },
+          {
+            "text": "We would love to talk about your experiences of living in China, as well as the cultural differences you have noticed",
+            "note": "用 would love to + as well as 把多个话题/内容并列铺开的过渡句。迁移时替换具体话题，框架可用于介绍活动安排、列举讨论点或行程内容。"
+          },
+          {
+            "text": "We are really looking forward to your reply",
+            "note": "邀请/请求类邮件的礼貌结尾，表达期待并自然引出对方回复。几乎所有需要对方回应的应用文都可收尾，如 looking forward to seeing you / your participation。"
+          }
+        ]
+      }
+    }
+  }
+}

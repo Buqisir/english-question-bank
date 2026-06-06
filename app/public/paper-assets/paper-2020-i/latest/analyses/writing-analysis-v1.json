@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-2020-i",
+  "groups": {
+    "group-2020-i-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Last Sunday, our school held a five-kilometre cross-country running race, which attracted over three hundred students and teachers eager to test themselves.\nAt nine o'clock sharp, the runners set off from the school gate, racing along country roads all the way to the foot of Nanshan Mountain. Although the route was long and tiring, no one gave up. Crowds gathered along the way, cheering loudly and handing out water to encourage every passing runner. When the first runner crossed the finish line, the whole crowd burst into cheers.\nThe event proved a great success. Not only did it strengthen our bodies, but it also brought us closer together. Everyone agreed that such an activity is well worth holding again.",
+        "highlightExpressions": [
+          {
+            "text": "which attracted over three hundred students and teachers eager to test themselves",
+            "note": "用非限制性定语从句一句话交代活动规模与参与者，报道开场点出『谁参加、有多少人』。迁移：报道任何讲座/义卖/运动会时，『..., which attracted over + 数字 + 人群 + eager to do』可快速带出参加人员与他们的热情。"
+          },
+          {
+            "text": "At nine o'clock sharp, the runners set off from",
+            "note": "时间状语 + set off from 起点，是报道叙事推进的标准开头。迁移：凡需交代『几点、从哪里出发/开始』的活动报道，都可套『At + 时间 sharp, 主语 + set off from / started at + 地点』。"
+          },
+          {
+            "text": "The event proved a great success.",
+            "note": "用 prove + 名词短语给活动定性，是报道由叙事转入总评的过渡兼表态句。迁移：几乎所有活动报道收尾都可用『The activity / show / campaign proved a great success.』一句概括总体反响。"
+          },
+          {
+            "text": "Not only did it strengthen our bodies, but it also brought us closer together.",
+            "note": "Not only 置句首引发部分倒装，并列摆出活动的两层意义，是『够得着的高级句』亮点。迁移：总结活动收获时，『Not only did it + 收获一, but it also + 收获二』可强调一举两得（既……又……）。"
+          },
+          {
+            "text": "Everyone agreed that such an activity is well worth holding again.",
+            "note": "借 Everyone agreed that 转述众人反响，再用 be well worth doing 表达肯定与期待，是得体的报道结尾。迁移：报道结尾想体现反响热烈、值得延续时，可用『Everyone agreed that such a(n) + 活动 + is well worth doing again.』"
+          }
+        ]
+      }
+    }
+  }
+}
