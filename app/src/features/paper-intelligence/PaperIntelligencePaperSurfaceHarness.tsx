@@ -136,6 +136,7 @@ import { PaperAssetAnalysisPanel } from './PaperAssetAnalysisPanel'
 import { SevenChoicesAnalysisPanel } from './SevenChoicesAnalysisPanel'
 import { ClozeAnalysisPanel } from './ClozeAnalysisPanel'
 import { GrammarFillAnalysisPanel } from './GrammarFillAnalysisPanel'
+import { WritingAnalysisPanel } from './WritingAnalysisPanel'
 import {
   buildGrammarFillAnalysisSurfaceModel,
   type GrammarFillAnalysisSurfaceModel,
@@ -182,7 +183,7 @@ import type {
   PassageStructure,
   QuestionOption,
 } from './paperIntelligenceTypes'
-import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
+import type { PaperAssetV1, WritingAnalysis } from '../../domain/paperAsset.ts'
 import type { PaperIntelligenceSource } from './paperIntelligenceRoute.ts'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import './paperIntelligencePaperSurfaceHarness.css'
@@ -229,6 +230,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [grammarFillAnalysisModel, setGrammarFillAnalysisModel] = useState<GrammarFillAnalysisSurfaceModel | null>(null)
   const [grammarFillModel, setGrammarFillModel] = useState<GrammarFillPaperViewModel | null>(null)
   const [writingModel, setWritingModel] = useState<WritingPaperViewModel | null>(null)
+  const [writingAnalysisModel, setWritingAnalysisModel] = useState<WritingAnalysis | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
@@ -303,6 +305,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       setClozeAnalysisModel(null)
       setGrammarFillAnalysisModel(null)
       setWritingModel(null)
+      setWritingAnalysisModel(null)
       setOpenSevenChoiceQuestionIds([])
       setBodies({})
       setInputOptions({})
@@ -356,6 +359,7 @@ export function PaperIntelligencePaperSurfaceHarness({
                 setPaperAssetModel(null)
                 setGrammarFillModel(null)
                 setWritingModel(null)
+                setWritingAnalysisModel(null)
                 setReport(analysisModel.report)
                 setPassageStructures(analysisModel.passageStructures)
                 setLoading(false)
@@ -373,6 +377,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             setPaperAssetModel(null)
             setGrammarFillModel(null)
             setWritingModel(null)
+            setWritingAnalysisModel(null)
             setReport(model.report)
             setPassageStructures(model.passageStructures)
             setLoading(false)
@@ -406,6 +411,7 @@ export function PaperIntelligencePaperSurfaceHarness({
                 setSevenChoicesModel(null)
                 setPaperAssetModel(null)
                 setWritingModel(null)
+                setWritingAnalysisModel(null)
                 setReport(analysisModel.report)
                 setPassageStructures(analysisModel.passageStructures)
                 setLoading(false)
@@ -424,17 +430,42 @@ export function PaperIntelligencePaperSurfaceHarness({
             setSevenChoicesModel(null)
             setPaperAssetModel(null)
             setWritingModel(null)
+            setWritingAnalysisModel(null)
             setReport(model.report)
             setPassageStructures(model.passageStructures)
             setLoading(false)
             return
           }
 
-          // Writing: no analysis file; render plain paper view directly.
+          // Writing: build paper view, then optionally fetch writing-analysis-v1.json.
+          // 404 / missing = graceful degradation (plain paper view, no panel).
           if (group.groupType === 'writing') {
             const model = buildWritingPaperView({ asset, groupId: initialGroupId })
+            // Attempt to fetch writing analysis; failure is non-fatal.
+            let resolvedWritingAnalysis: WritingAnalysis | null = null
+            try {
+              let writingAnalysisRes = await fetch(
+                `${resolvedAssetBase}/analyses/writing-analysis-v1.json`,
+              )
+              if (!writingAnalysisRes.ok && resolvedAssetBase !== `/paper-assets/${paperId}`) {
+                const legacyBase = `/paper-assets/${paperId}`
+                writingAnalysisRes = await fetch(
+                  `${legacyBase}/analyses/writing-analysis-v1.json`,
+                )
+              }
+              if (writingAnalysisRes.ok) {
+                const rawWritingAnalysis = await writingAnalysisRes.json()
+                const groupEntry = rawWritingAnalysis?.groups?.[initialGroupId]
+                if (groupEntry?.writing) {
+                  resolvedWritingAnalysis = groupEntry.writing as WritingAnalysis
+                }
+              }
+            } catch {
+              // Network or parse error — fall through with no analysis panel.
+            }
             if (cancelled) return
             setWritingModel(model)
+            setWritingAnalysisModel(resolvedWritingAnalysis)
             setGrammarFillModel(null)
             setClozeModel(null)
             setSevenChoicesModel(null)
@@ -1446,6 +1477,8 @@ export function PaperIntelligencePaperSurfaceHarness({
                 groupView={grammarFillAnalysisModel.groupView}
                 onSelectEvidence={handleSelectEvidence}
               />
+            ) : writingModel && writingAnalysisModel ? (
+              <WritingAnalysisPanel analysis={writingAnalysisModel} />
             ) : source === 'paper-asset' ? (
               <PaperAssetAnalysisPanel
                 analysis={paperAssetAnalysisView}
