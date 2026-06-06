@@ -1,0 +1,33 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "I realized it was me who was at fault. I had awaited an apology, too proud to see the truth. My brother had lost his wife, his health was failing, and Toby was the one companion keeping him going — yet I had shut that faithful dog out in the rain, and my brother out with him. Shame washed over me as cold as that evening downpour. Had a tidy backyard mattered more than my own brother? No sooner had the thought struck than I knew what to do.\nWith the biscuits my wife had made, I arrived at my brother's door. Before I could knock, Toby came bounding around the corner, his tail moving happily, and pressed his wet nose into my hand as if he had forgiven me long ago. My brother followed, and neither of us spoke. \"I should have called you that very night,\" I said, my voice shaking. His eyes softened, and he pulled me into a long, silent hug. Around us circled Toby — the ball of fire that had once divided us, now bringing us together.",
+  "continuationDesign": {
+    "theme": "放下傲慢与控制欲、体谅至亲的孤独：亲情比体面的“井井有条”更重要。",
+    "paragraphs": [
+      "第1段承接 starter1“错在自己”：先把前文“等弟弟先道歉”的傲慢一句翻转成自责（awaited an apology / too proud），再用原文真实信息制造内心冲突——弟弟丧妻、患病、Toby 是其唯一支柱（直接化用原文 the one who kept him going），让“我”看清自己拒之门外的是弟弟的孤独。沿用原文的‘雨’作环境反衬羞愧（as cold as that evening downpour），用‘井井有条的后院’回指‘我’的控制欲并自我诘问（Had a tidy backyard mattered more…），最后以 No sooner…than 倒装把醒悟转成行动决心，自然引出第2段。冲突＝内心傲慢与愧疚之争，不另造原文没有的事件。",
+      "第2段承接 starter2“带饼干到弟弟门口”：把给定句当既成事实接住，立刻进入重逢场景。让 Toby 先冲出来（动作链 + 独立主格 his tail moving happily + 湿鼻子蹭手）化解尴尬、象征谅解，再由弟弟出场、‘我’用虚拟后悔句道歉（should have called）、以无声拥抱收束情绪。结尾刻意把镜头落回 Toby——直接回扣原文核心意象‘ball of fire’，让‘曾分裂兄弟的那团火如今把两人重新拉到一起’完成首尾呼应与主题升华，意象全部出自原文，绝不新造。"
+    ]
+  },
+  "highlightExpressions": [
+    {
+      "text": "Toby was the one companion keeping him going — yet I had shut that faithful dog out in the rain, and my brother out with him",
+      "note": "心理+情节翻转句：用破折号制造转折，前半化用原文‘陪伴/支撑’的信息、后半用 shut...out 的平行结构（dog out / brother out）点出‘我’真正赶走的是弟弟。迁移到‘醒悟自己伤害了至亲’类续写，把抽象自责落到具体动作与对比上。"
+    },
+    {
+      "text": "Shame washed over me as cold as that evening downpour",
+      "note": "情绪袭来+环境反衬：用 wash over sb 写情绪汹涌，再以 as cold as + 原文的雨作比，把心理感受外化为可感的环境意象。迁移到写愧疚/恐惧/悲伤等‘情绪袭来’的瞬间，并能顺带呼应原文景物。"
+    },
+    {
+      "text": "No sooner had the thought struck than I knew what to do",
+      "note": "课标内的部分倒装亮点句（No sooner…than…）：把‘念头一闪即化为决心’压缩成一句，承上启下、节奏利落。迁移到任何‘想到/意识到后立刻采取行动’的过渡处，是段尾推动情节的高分句式。"
+    },
+    {
+      "text": "Toby came bounding around the corner, his tail moving happily, and pressed his wet nose into my hand as if he had forgiven me long ago",
+      "note": "动作链+独立主格+虚拟：came bounding…and pressed… 串起连续动作，his tail moving happily 为独立主格补充画面，as if he had forgiven 用虚拟赋予动物以情感。迁移到写动物/人物登场的生动瞬间，一句话兼顾动作、细节与情绪暗示。"
+    },
+    {
+      "text": "Around us circled Toby — the ball of fire that had once divided us, now bringing us together",
+      "note": "点题呼应句（全倒装 + 同位语对比）：Around us circled… 部分倒装聚焦镜头，破折号后用‘曾分裂—如今团聚’的对照直接回扣原文核心意象 ball of fire。迁移到结尾用原文反复出现的意象完成首尾呼应与主题升华。"
+    }
+  ]
+}

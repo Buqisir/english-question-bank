@@ -1,0 +1,33 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "I ran back to Gunter and told him the bad news. To my surprise, he simply waved his hand and laughed. \"Just catch your bus,\" he said, writing his number down on a piece of paper and pressing it into my hand. \"Pay me when you come back.\" Touched by such trust from a stranger, I promised I would return every cent. No sooner had I got into the last seat than the doors hissed shut, and through the window I watched his big smile shining in the rain.\nFour days later, when I was back in Vienna, I called Gunter as promised. He insisted on picking me up at the airport. When I pressed the fare into his hand, along with a gift from Prague, he smiled that familiar smile. \"I knew you'd come,\" he said. Driving home that night, I understood that a little trust between strangers can light up the coldest, wettest evening.",
+  "continuationDesign": {
+    "theme": "陌生人之间的善意与信任——以诚相待，信任终被善意回馈，温暖能照亮最寒冷的夜（人与社会）。",
+    "paragraphs": [
+      "承接 starter1 后先用一句'To my surprise, he simply waved his hand and laughed'把 Gunter 的反应接住，制造与读者预期相反的转折——不是催债而是大方放手，既符合他一路热心、乐观的人设，又同时拆掉'付不出钱'和'赶不上车'两个危机。让他塞纸条、说'回来再还'，把全文的善意推向'信任陌生人'这一更高点；叙述者被打动后许诺'return every cent'，正是为 starter2 的 as promised 埋下钩子。结尾用上车与车门关闭的动作链，并回收原文 big smile 意象收束本段。",
+      "承接 starter2 的'依约回电'后，让叙述者真的回来还钱、并带一份布拉格小礼物，形成善意的双向回馈——既兑现段1的承诺，又升级了人物关系。Gunter 一句'I knew you'd come'回应他先前的信任、再次绽放熟悉的笑容（呼应贯穿全文的 big smile）。最后用'light up the coldest, wettest evening'直接回扣原文开篇'a cold, wet... evening'，把具体小事提炼成'信任照亮寒夜'的主旨，完成点题与前后呼应。"
+    ]
+  },
+  "highlightExpressions": [
+    {
+      "text": "writing his number down on a piece of paper and pressing it into my hand",
+      "note": "动作链：用两个非谓语(writing... down / pressing)串联连续动作并精确到身体部位(hand)，把'给联系方式'写得有画面感。迁移：凡'递东西/做一连串动作'都可用 V-ing 串联 + 落到具体身体部位来细化。"
+    },
+    {
+      "text": "Touched by such trust from a stranger, I promised I would return every cent",
+      "note": "心理描写 + 过去分词短语作状语：用 Touched by... 把情绪前置说明动作动因，比 I was touched 更紧凑高级。迁移：写'因某情绪而做某事'时，用过去分词短语(Moved/Frightened/Encouraged by...)开头作状语。"
+    },
+    {
+      "text": "No sooner had I got into the last seat than the doors hissed shut",
+      "note": "高级记叙句（No sooner...than 倒装）+ 拟声动词 hissed：表达'刚…就…'的紧迫衔接，画面与节奏感强。迁移：叙事中两件事接连紧逼发生时套用 No sooner had + 过去分词…than…（注意助动词提前倒装）。"
+    },
+    {
+      "text": "through the window I watched his big smile shining in the rain",
+      "note": "环境烘托 + 意象回收：用 watched sb./sth. doing 的感官结构，让'笑容在雨中发亮'以正衬反差(暖笑 vs 冷雨)收束，并回收原文 big smile。迁移：分别动作可用'透过窗/门 + watch sb. doing'定格画面，并复用前文意象呼应。"
+    },
+    {
+      "text": "a little trust between strangers can light up the coldest, wettest evening",
+      "note": "点题升华句 + 前后呼应：用比喻 light up 把抽象'信任'具象成光，并以 coldest, wettest evening 回扣原文开篇的 cold, wet evening。迁移：结尾点题时把抽象主题(trust/kindness/courage)接一个'照亮/温暖/改变'类动词，再回收开头的环境词形成首尾呼应。"
+    }
+  ]
+}
