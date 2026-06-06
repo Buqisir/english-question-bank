@@ -39,8 +39,8 @@ const VOCAB_CHECKER_SCRIPT = path.join(
  */
 function normalizeForSubstring(s) {
   return String(s)
-    .replace(/[''ʼ]/g, "'") // curly single quotes / apostrophe → '
-    .replace(/[""]/g, '"') // curly double quotes → "
+    .replace(/[‘’ʼ]/g, "'") // curly single quotes / apostrophe → '
+    .replace(/[“”]/g, '"') // curly double quotes → "
     .replace(/[–—]/g, '-') // en-dash / em-dash → hyphen
     .replace(/\s+/g, ' ') // collapse whitespace
     .trim()
