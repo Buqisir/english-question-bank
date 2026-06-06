@@ -242,10 +242,24 @@ export type AnalysisMeta = {
 
 // ─── Writing Analysis ───────────────────────────────────────────────────────────
 
-export type WritingAnalysis = {
+export type WritingAnalysis = ApplicationWritingAnalysis | ContinuationWritingAnalysis
+
+export type ApplicationWritingAnalysis = {
   taskType: 'application'
   modelAnswer: string
   highlightExpressions: HighlightExpression[]
+}
+
+export type ContinuationWritingAnalysis = {
+  taskType: 'continuation'
+  modelAnswer: string
+  continuationDesign: ContinuationDesign
+  highlightExpressions: HighlightExpression[]
+}
+
+export type ContinuationDesign = {
+  theme: string
+  paragraphs: [string, string]
 }
 
 export type HighlightExpression = {
