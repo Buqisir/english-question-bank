@@ -35,6 +35,7 @@ const registry = {
   'scripts/verify-h5e-verify-question-group.mjs',
   'scripts/verify-h1f-legacy-import-routes.mjs',
   'scripts/verify-h1g-question-group-routes.mjs',
+  'scripts/verify-h10a-paper-set-routes.mjs',
   'scripts/verify-i1-paper-import-route.mjs',
   'scripts/verify-i1-paper-import-analysis.mjs',
   'scripts/verify-i2-seven-choices-ai-import.mjs',
