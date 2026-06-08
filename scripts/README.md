@@ -35,6 +35,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h5b-import-listing.mjs` | H5-B import file/bundle/batch listing + dir-scan extraction contract | yes |
 | `verify-h5e-verify-question-group.mjs` | H5-E verify-question-group service: invocation smoke + audit-JSONL shape + re-import guard | yes |
 | `verify-h5j-reading-difficulty.mjs` | H5-J reading-difficulty normalizer: golden T-card override matrix + six-dimension scoring/floor + surfaceQuestion correction + invocation smoke + file-private/seam guard (no provider) | yes |
+| `verify-h5h-semantic-search.mjs` | H5-H semantic-search recall + rerank service: invocation smoke (prefilter→score→rerank→matches envelope byte-identical for fixed inputs, stub DeepSeek + fixture DB) + reading-signals SQL fold + empty-DB short-circuit + rerank-prompt-not-over-indented + extraction seam + used-but-undefined/file-private guards | yes |
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
 | `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
 | `verify-h10a-paper-set-routes.mjs` | H10-A paper-set CRUD + paper-workflow route dispatch contract (status codes, create-vs-merge, no-shadow) | yes |
