@@ -47,6 +47,16 @@ verifier.assert(result.results.find((r) => r.questionId === 'q1').verdict === 'c
 verifier.assert(result.results.find((r) => r.questionId === 'q2').verdict === 'skipped', 'no-answer question skipped')
 verifier.assert(fallbackCalls.length === 1, 'callDeepSeekWithFallback invoked exactly once (only the answered question)')
 
+// Prompt-content integrity (CR Must Fix): the verify prompt is the frozen AI contract — a blanket
+// re-indent must NOT add leading whitespace to template-literal interior lines.
+const sysPrompt = fallbackCalls[0].messages[0].content
+const userPrompt = fallbackCalls[0].messages[1].content
+verifier.assert(sysPrompt.includes('\n题型：') && !sysPrompt.includes('\n  题型：'), 'system prompt 题型 line is NOT over-indented')
+verifier.assert(sysPrompt.includes('\n返回 JSON 格式：') && !sysPrompt.includes('\n  返回 JSON 格式：'), 'system prompt 返回JSON line is NOT over-indented')
+verifier.assert(sysPrompt.includes('\n{"verdict":') && !sysPrompt.includes('\n  {"verdict":'), 'system prompt JSON example line is NOT over-indented')
+verifier.assert(userPrompt.includes('\n试题：') && !userPrompt.includes('\n  试题：'), 'user prompt 试题 line is NOT over-indented')
+verifier.assert(userPrompt.startsWith('请验证：'), 'user prompt starts at column 0 (no leading indent)')
+
 verifier.section('Audit-JSONL shape preserved (the /api/ai/verify-trace contract)')
 const types = audits.map((a) => a.type)
 verifier.assert(types.includes('group_start'), 'emits group_start audit event')
@@ -63,7 +73,8 @@ const apiSource = readText(root, 'server/api.mjs')
 const moduleSource = readText(root, 'server/ai-verify/verifyQuestionGroupService.mjs')
 for (const name of ['verifyQuestionGroup', 'callDeepSeekVerify']) {
   verifier.assert(!new RegExp(`^(export )?async function ${name}\\(`, 'm').test(apiSource), `api.mjs no longer defines ${name}`)
-  verifier.assert(new RegExp(`^  async function ${name}\\(`, 'm').test(moduleSource), `module owns ${name}`)
+  // functions live at module top-level (indent 0, NOT nested/re-indented) so prompt template literals stay byte-identical
+  verifier.assert(new RegExp(`^async function ${name}\\(`, 'm').test(moduleSource), `module owns ${name} (indent 0)`)
 }
 verifier.assert(/^function appendVerifyAudit\(/m.test(apiSource), 'appendVerifyAudit STAYS in api.mjs (verify-trace reads its JSONL)')
 verifier.assert(apiSource.includes('/api/ai/verify-trace'), 'verify-trace route still present')
