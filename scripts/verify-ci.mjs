@@ -58,6 +58,7 @@ const registry = {
   'scripts/verify-search-thinking-toggle.mjs',
   'scripts/verify-h11b-paper-import-ai-view.mjs',
   'scripts/verify-h11a-http-client.mjs',
+  'scripts/verify-h12a-entry-modal.mjs',
   ],
 }
 

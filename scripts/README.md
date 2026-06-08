@@ -39,6 +39,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h10a-paper-set-routes.mjs` | H10-A paper-set CRUD + paper-workflow route dispatch contract (status codes, create-vs-merge, no-shadow) | yes |
 | `verify-h11b-paper-import-ai-view.mjs` | H11-B PaperImportAi untyped-analysis view helpers extraction contract (source-level) | yes |
 | `verify-h11a-http-client.mjs` | H11-A PR1 shared frontend httpClient dedup: each caller's host form preserved verbatim (apiPath ::1-inclusive vs apiPathNoIpv6 no-::1) + runtime invocation smoke of the moved helpers | yes |
+| `verify-h12a-entry-modal.mjs` | H12-A App.tsx Manual Entry form modal extraction into workbench/EntryModal.tsx; 5-prop seam + savedCard writeback contract (source-level) | yes |
 
 ## Core data and import
 
