@@ -31,6 +31,9 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h1e-export-routes.mjs` | H1-E export route dispatch contract | yes |
 | `verify-h5a-export-implementation.mjs` | H5-A export implementation extraction contract | yes |
 | `verify-h5c-json-extraction.mjs` | H5-C AI-completion JSON / verify-verdict extraction leaf contract | yes |
+| `verify-h5d-completion-runner.mjs` | H5-D AI-completion transport: provider routing + retry + thinking-mode fallback + flash-default + re-import guard (stub fetch) | yes |
+| `verify-h5b-import-listing.mjs` | H5-B import file/bundle/batch listing + dir-scan extraction contract | yes |
+| `verify-h5e-verify-question-group.mjs` | H5-E verify-question-group service: invocation smoke + audit-JSONL shape + re-import guard | yes |
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
 | `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
 
