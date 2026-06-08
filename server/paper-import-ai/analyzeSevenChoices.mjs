@@ -1,10 +1,6 @@
-import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { randomUUID } from 'node:crypto'
-import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
-import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
-import { extractFirstJsonObject } from './extractJson.mjs'
+import { createAnalyzerProviderShell, readPromptFile, rewriteApiPrompt } from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -14,36 +10,8 @@ function optionalString(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
-function readPrompt() {
-  return readFileSync(promptPath, 'utf8')
-}
-
 function readApiPrompt() {
-  return readPrompt()
-    .replace(
-      /## Output Requirement[\s\S]*?## Reasoning Rule/,
-      [
-        '## Output Requirement',
-        '',
-        'You MUST return exactly one JSON object as plain text in this API response.',
-        'The first non-whitespace character MUST be `{` and the final non-whitespace character MUST be `}`.',
-        '',
-        'Do NOT create or download a file.',
-        'Do NOT return `UNABLE_TO_CREATE_FILE`.',
-        'Do NOT wrap JSON in markdown fences.',
-        'Do NOT write a filename heading.',
-        'Do NOT write "Here is the JSON".',
-        'Do NOT explain what you are doing.',
-        '',
-        '## Reasoning Rule',
-      ].join('\n'),
-    )
-}
-
-function normalizeProviderId(providerId) {
-  const raw = String(providerId || '').trim().toLowerCase()
-  if (raw === 'gpt-5.5' || raw === 'openai' || raw === 'chatgpt') return 'gpt-5.5'
-  return 'deepseek-v4-pro'
+  return rewriteApiPrompt(readPromptFile(promptPath))
 }
 
 function assertSevenChoicesAnalyzeInput(input) {
@@ -206,60 +174,15 @@ function validateSevenChoicesShape(analysis, { paper, group }) {
   }
 }
 
-async function callProvider({ providerId, messages, providerCallers }) {
-  const provider = normalizeProviderId(providerId)
-  if (provider === 'gpt-5.5') {
-    return (providerCallers?.gptRelay || callGptRelayJson)({ messages, model: 'gpt-5.5' })
-  }
-  return (providerCallers?.deepseek || callDeepSeekJson)({ messages, model: 'deepseek-v4-pro' })
-}
-
-async function callProviderWithRetry(args, { retries = 1 } = {}) {
-  let lastError
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    try {
-      return await callProvider(args)
-    } catch (error) {
-      lastError = error
-      if (attempt >= retries) break
-    }
-  }
-  throw lastError
-}
-
-function isRetryableAnalysisError(error) {
+function isRetryableSevenChoicesError(error) {
   const message = error instanceof Error ? error.message : String(error || '')
   if (/答案解析版不一致/.test(message)) return false
   return /JSON|schemaVersion|questionIds|精确匹配原文|缺少|必须|不匹配|无效|至少需要/.test(message)
 }
 
-export async function analyzeSevenChoicesImportCandidate(input, options = {}) {
-  assertSevenChoicesAnalyzeInput(input)
-  const requestId = options.requestId || randomUUID()
-  const providerId = normalizeProviderId(input.providerId)
-  const messages = buildSevenChoicesAnalysisMessages(input)
-  const analysisRetries = Number.isInteger(options.analysisRetries) ? options.analysisRetries : 1
-  let lastError
-  for (let attempt = 0; attempt <= analysisRetries; attempt += 1) {
-    const providerResult = await callProviderWithRetry({
-      providerId,
-      messages,
-      providerCallers: options.providerCallers,
-    }, { retries: Number.isInteger(options.providerRetries) ? options.providerRetries : 1 })
-    try {
-      const analysis = extractFirstJsonObject(providerResult.rawText)
-      validateSevenChoicesShape(analysis, input)
-      return {
-        analysis,
-        provider: providerResult.provider,
-        model: providerResult.model,
-        requestId,
-        latencyMs: providerResult.latencyMs,
-      }
-    } catch (error) {
-      lastError = error
-      if (attempt >= analysisRetries || !isRetryableAnalysisError(error)) break
-    }
-  }
-  throw lastError
-}
+export const analyzeSevenChoicesImportCandidate = createAnalyzerProviderShell({
+  assertInput: assertSevenChoicesAnalyzeInput,
+  buildMessages: buildSevenChoicesAnalysisMessages,
+  validate: validateSevenChoicesShape,
+  isRetryable: isRetryableSevenChoicesError,
+})
