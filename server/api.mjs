@@ -37,6 +37,7 @@ import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfil
 import { createVerbProfileBackfillRoutes } from './grammar-verb-profile/verbProfileBackfillRoutes.mjs'
 import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
 import { createImportListingImplementation } from './imports/importListing.mjs'
+import { createCompletionRunner } from './ai-providers/completionRunner.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -5832,52 +5833,24 @@ const DEEPSEEK_MODEL_ALIASES = {
   'deepseek-v4-flash': 'deepseek-v4-flash',
 }
 
-function buildDeepSeekRequestOptions({ model, messages, temperature, maxTokens, thinkingMode, responseFormat }) {
-  const requestBody = {
-    model,
-    messages,
-    max_tokens: maxTokens,
-    thinking: { type: thinkingMode ? 'enabled' : 'disabled' },
-  }
-
-  if (responseFormat === 'json_object') {
-    requestBody.response_format = { type: 'json_object' }
-  }
-
-  if (thinkingMode) {
-    requestBody.reasoning_effort = 'high'
-  } else if (typeof temperature === 'number') {
-    requestBody.temperature = temperature
-  }
-
-  return requestBody
-}
-
-function normalizeDeepSeekModel(inputModel) {
-  const rawModel = String(inputModel || '').trim()
-  if (!rawModel) return DEFAULT_DEEPSEEK_MODEL
-  const normalizedKey = rawModel.toLowerCase().replace(/\s+/g, '').replace(/_/g, '-')
-  return DEEPSEEK_MODEL_ALIASES[normalizedKey] || DEFAULT_DEEPSEEK_MODEL
-}
-
-function isLocalQwenModel(inputModel) {
-  const normalizedKey = String(inputModel || '').trim().toLowerCase().replace(/\s+/g, '').replace(/_/g, '-')
-  return ['qwen3-8b-local', 'qwen3-8b', 'local-qwen'].includes(normalizedKey)
-}
-
-function normalizeAiChatModel(inputModel) {
-  return isLocalQwenModel(inputModel) ? LOCAL_QWEN_CHAT_MODEL : normalizeDeepSeekModel(inputModel)
-}
-
-function describeAiKeySource(apiKey, model) {
-  if (isLocalQwenModel(model)) {
-    return {
-      source: 'local',
-      provider: LOCAL_QWEN_PROVIDER,
-    }
-  }
-  return describeKeySource(apiKey)
-}
+const completionRunner = createCompletionRunner({
+  elapsedMs,
+  DEEPSEEK_API_URL,
+  DEFAULT_DEEPSEEK_MODEL,
+  DEEPSEEK_HTTP_RETRY_COUNT,
+  DEEPSEEK_HTTP_RETRY_DELAY_MS,
+  DEEPSEEK_MODEL_ALIASES,
+  LOCAL_QWEN_CHAT_API_URL,
+  LOCAL_QWEN_CHAT_MODEL,
+  LOCAL_QWEN_CHAT_TIMEOUT_MS,
+  LOCAL_QWEN_PROVIDER,
+})
+const {
+  normalizeDeepSeekModel,
+  describeKeySource,
+  callLocalQwenCompletion,
+  callDeepSeekWithFallback,
+} = completionRunner
 const DEEPSEEK_READING_PARSE_PROMPT = `你是英语阅读题教学与阅卷助理。按以下结构化流程输出，不要 markdown 代码块：
 
 定义：
@@ -6168,252 +6141,6 @@ const DEEPSEEK_PASSAGE_SUMMARY_PROMPT = `你是高中英语题库篇章简介助
 {
   "summary": "中文篇章简介"
 }`
-
-function describeKeySource(apiKey) {
-  const hasClientKey = Boolean(apiKey && String(apiKey).trim())
-  return {
-    source: hasClientKey ? 'client' : 'env',
-    provider: 'deepseek',
-  }
-}
-
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-async function callDeepSeekCompletion(context) {
-  const requestBody = buildDeepSeekRequestOptions(context)
-  const maxAttempts = Math.max(1, DEEPSEEK_HTTP_RETRY_COUNT + 1)
-
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    const requestStartAt = Date.now()
-    let response
-    let rawStatusText = ''
-
-    try {
-      response = await fetch(DEEPSEEK_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${context.apiKey}`,
-        },
-        body: JSON.stringify(requestBody),
-      })
-      rawStatusText = await response.text().catch(() => '')
-    } catch (error) {
-      if (attempt < maxAttempts) {
-        await delay(DEEPSEEK_HTTP_RETRY_DELAY_MS)
-        continue
-      }
-      throw error
-    }
-
-    const requestMs = elapsedMs(requestStartAt)
-    if (typeof context.onHttpResponse === 'function') {
-      context.onHttpResponse({
-        rawStatusText,
-        status: response.status,
-        ok: response.ok,
-        latencyMs: requestMs,
-        attempt,
-      })
-    }
-
-    const data = parseJsonFromString(rawStatusText)
-
-    if (!response.ok) {
-      const errorText = safeTruncate(rawStatusText, 240)
-      throw new Error(`DeepSeek API 返回错误 ${response.status}: ${errorText}`)
-    }
-
-    if (!data) {
-      if (attempt < maxAttempts) {
-        await delay(DEEPSEEK_HTTP_RETRY_DELAY_MS)
-        continue
-      }
-      const errorText = safeTruncate(rawStatusText, 240)
-      throw new Error(`DeepSeek API 返回非 JSON：${errorText}`)
-    }
-
-    const raw = getDeepSeekMessageText(data?.choices?.[0]?.message || data)
-
-    const firstMessageText = collectDeepSeekMessageTexts(data).at(0)
-
-    return {
-      data,
-      rawText: raw,
-      firstMessageText,
-      latencyMs: requestMs,
-      status: response.status,
-      rawStatusText,
-    }
-  }
-
-  throw new Error('DeepSeek API 请求未完成。')
-}
-
-function buildLocalQwenRequestOptions({ model, messages, temperature, maxTokens }) {
-  const normalizedMessages = Array.isArray(messages)
-    ? messages.map((message) => ({
-        role: message.role || 'user',
-        content:
-          message.role === 'user'
-            ? `/no_think\n${String(message.content || '')}`
-            : String(message.content || ''),
-      }))
-    : []
-
-  return {
-    model: model || LOCAL_QWEN_CHAT_MODEL,
-    messages: normalizedMessages,
-    temperature: typeof temperature === 'number' ? temperature : 0.2,
-    max_tokens: maxTokens,
-    stream: false,
-  }
-}
-
-async function callLocalQwenCompletion(context) {
-  const requestStartAt = Date.now()
-  const requestBody = buildLocalQwenRequestOptions(context)
-  const controller = new AbortController()
-  const timeout = setTimeout(() => {
-    controller.abort(new Error(`本地 Qwen 请求超时 ${LOCAL_QWEN_CHAT_TIMEOUT_MS}ms`))
-  }, LOCAL_QWEN_CHAT_TIMEOUT_MS)
-
-  try {
-    const response = await fetch(LOCAL_QWEN_CHAT_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-      signal: controller.signal,
-    })
-
-    const requestMs = elapsedMs(requestStartAt)
-    const rawStatusText = await response.text().catch(() => '')
-    if (typeof context.onHttpResponse === 'function') {
-      context.onHttpResponse({
-        rawStatusText,
-        status: response.status,
-        ok: response.ok,
-        latencyMs: requestMs,
-      })
-    }
-
-    const data = parseJsonFromString(rawStatusText)
-
-    if (!response.ok) {
-      const errorText = safeTruncate(rawStatusText, 240)
-      throw new Error(`本地 Qwen 服务返回错误 ${response.status}: ${errorText}`)
-    }
-
-    if (!data) {
-      const errorText = safeTruncate(rawStatusText, 240)
-      throw new Error(`本地 Qwen 服务返回非 JSON：${errorText}`)
-    }
-
-    const raw = getDeepSeekMessageText(data?.choices?.[0]?.message || data)
-    const firstMessageText = collectDeepSeekMessageTexts(data).at(0)
-
-    return {
-      data,
-      rawText: raw,
-      firstMessageText,
-      latencyMs: requestMs,
-      status: response.status,
-      rawStatusText,
-    }
-  } catch (error) {
-    const timeoutError = controller.signal.aborted
-      ? new Error(`本地 Qwen 请求超时 ${LOCAL_QWEN_CHAT_TIMEOUT_MS}ms`)
-      : error
-    throw timeoutError
-  } finally {
-    clearTimeout(timeout)
-  }
-}
-
-async function callDeepSeekWithFallback(context, onParseError) {
-  const parseResult = (result) => {
-    const rawCandidates = [result.firstMessageText, result.rawText, result.rawStatusText]
-
-    if (context?.expectedResponseSchema === 'verify') {
-      const fromData = extractVerifyResultFromPayload(result.data)
-      if (fromData) return fromData
-
-      for (const text of rawCandidates) {
-        const jsonCandidate = extractFirstJson(text)
-        if (jsonCandidate) {
-          const normalizedVerify = extractVerifyResultFromPayload(jsonCandidate)
-          if (normalizedVerify) return normalizedVerify
-        }
-
-        const looseParsed = parseLooseVerifyResult(text)
-        if (looseParsed) return looseParsed
-      }
-
-      return null
-    }
-
-    if (context?.expectedResponseSchema === 'reading_parse') {
-      const fromData = extractReadingParsePayloadFromPayload(result.data)
-      if (fromData) return fromData
-
-      for (const text of rawCandidates) {
-        const jsonCandidate = extractFirstJson(text)
-        if (!jsonCandidate) continue
-        const normalizedReadingParse = extractReadingParsePayloadFromPayload(jsonCandidate)
-        if (normalizedReadingParse) return normalizedReadingParse
-      }
-
-      return null
-    }
-
-    const jsonParsedCandidate = rawCandidates.map((candidateText) => extractFirstJson(candidateText)).find(Boolean)
-    return jsonParsedCandidate || null
-  }
-
-  const completion = context.provider === LOCAL_QWEN_PROVIDER ? callLocalQwenCompletion : callDeepSeekCompletion
-  const result = await completion(context)
-  let parsed = parseResult(result)
-  let fallbackUsed = false
-
-  if (!parsed && context.thinkingMode === true && context.provider !== LOCAL_QWEN_PROVIDER) {
-    const fallbackResult = await completion({
-      ...context,
-      thinkingMode: false,
-    })
-    parsed = parseResult(fallbackResult)
-    if (parsed) {
-      fallbackUsed = true
-      Object.assign(result, fallbackResult)
-    }
-  }
-
-  const finalParsed = parsed
-  if (!finalParsed || typeof finalParsed !== 'object') {
-    const rawLength = typeof result.rawText === 'string' ? result.rawText.length : 0
-    const providerName = context.provider === LOCAL_QWEN_PROVIDER ? '本地 Qwen' : 'DeepSeek'
-    const parseError = new Error(`${providerName} 返回结果不符合预期 JSON。原始长度 ${rawLength} 字符。`)
-    onParseError?.(parseError, {
-      thinkingMode: context.thinkingMode === true,
-      model: context.model,
-      expectedResponseSchema: context.expectedResponseSchema,
-      rawPreview: safeTruncate(`${result.rawStatusText || ''}${result.rawStatusText ? '\n' : ''}${result.rawText || ''}`, 500),
-      latencyMs: result.latencyMs,
-      status: result.status,
-    })
-    throw parseError
-  }
-
-  return {
-    ...result,
-    parsed: finalParsed,
-    thinkingModeUsed: context.thinkingMode === true,
-    fallbackUsed,
-  }
-}
 
 function normalizeSynonymMapping(item) {
   if (!item || typeof item !== 'object') return null
