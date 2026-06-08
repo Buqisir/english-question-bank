@@ -25,16 +25,10 @@ import type {
   UpdateQuestionGroupInput,
 } from '../domain/questionBank'
 
+import { apiPath, decodeHeaderValue, errorMessageFromResponse as readErrorMessage } from './httpClient.ts'
+
 type QuestionGroupsResponse = {
   questionGroups: QuestionGroupCard[]
-}
-
-const API_ORIGIN = 'http://127.0.0.1:8787'
-
-function apiPath(path: string) {
-  if (typeof window === 'undefined') return path
-  if (['127.0.0.1', 'localhost', '::1'].includes(window.location.hostname)) return path
-  return `${API_ORIGIN}${path}`
 }
 
 export async function fetchQuestionGroups() {
@@ -56,8 +50,7 @@ export async function fetchQuestionGroupDetail(id: string) {
   const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(id)}`))
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to load question group detail: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to load question group detail: ${response.status}`))
   }
 
   const data = (await response.json()) as QuestionGroupDetailResponse
@@ -169,8 +162,7 @@ export async function scanImportDirectory(input: CreateImportBatchInput) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to scan import directory: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to scan import directory: ${response.status}`))
   }
 
   const data = (await response.json()) as ImportBatchResponse
@@ -187,8 +179,7 @@ export async function runImportBatch(id: string, input: RunImportBatchInput = {}
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to run import batch: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to run import batch: ${response.status}`))
   }
 
   const data = (await response.json()) as ImportBatchResponse
@@ -201,8 +192,7 @@ async function postImportBundleDraft(id: string) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to generate import draft: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to generate import draft: ${response.status}`))
   }
 
   const data = (await response.json()) as ImportBundleDraftResponse
@@ -219,8 +209,7 @@ export async function generateImportAnswerAlignment(id: string) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to generate answer alignment: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to generate answer alignment: ${response.status}`))
   }
 
   const data = (await response.json()) as ImportAnswerAlignmentResponse
@@ -243,8 +232,7 @@ export async function applyImportAnswerAlignment(
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to apply answer alignment: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to apply answer alignment: ${response.status}`))
   }
 
   const data = (await response.json()) as ApplyAnswerAlignmentResponse
@@ -255,8 +243,7 @@ export async function fetchImportFileParse(id: string) {
   const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}/parse`))
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to load import parse: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to load import parse: ${response.status}`))
   }
 
   const data = (await response.json()) as ImportFileParseResponse
@@ -271,8 +258,7 @@ export async function fetchPaperSetDetail(id: string) {
   const response = await fetch(apiPath(`/api/paper-sets/${encodeURIComponent(id)}`))
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to load paper set: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to load paper set: ${response.status}`))
   }
 
   const data = (await response.json()) as PaperSetDetailResponse
@@ -293,8 +279,7 @@ export async function createQuestionGroup(input: CreateQuestionGroupInput) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to create question group: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to create question group: ${response.status}`))
   }
 
   const data = (await response.json()) as CreateQuestionGroupResponse
@@ -311,8 +296,7 @@ export async function updateQuestionGroup(id: string, input: UpdateQuestionGroup
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to update question group: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to update question group: ${response.status}`))
   }
 
   const data = (await response.json()) as CreateQuestionGroupResponse
@@ -325,8 +309,7 @@ export async function deleteQuestionGroup(id: string) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to delete question group: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to delete question group: ${response.status}`))
   }
 }
 
@@ -344,8 +327,7 @@ export async function uploadImportFile(input: CreateImportFileInput) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to import file: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to import file: ${response.status}`))
   }
 
   const data = (await response.json()) as CreateImportFileResponse
@@ -358,8 +340,7 @@ export async function parseImportFile(id: string) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to parse import file: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to parse import file: ${response.status}`))
   }
 
   const data = (await response.json()) as ImportFileParseResponse
@@ -372,8 +353,7 @@ export async function deleteImportFile(id: string) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to delete import file: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to delete import file: ${response.status}`))
   }
 }
 
@@ -391,8 +371,7 @@ export async function savePaperSet(input: CreatePaperSetInput) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to save paper set: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to save paper set: ${response.status}`))
   }
 
   const data = (await response.json()) as CreatePaperSetResponse
@@ -409,22 +388,11 @@ export async function updatePaperSet(id: string, input: CreatePaperSetInput) {
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to update paper set: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to update paper set: ${response.status}`))
   }
 
   const data = (await response.json()) as CreatePaperSetResponse
   return data.paperSet
-}
-
-function decodeHeaderValue(value: string | null) {
-  if (!value) return ''
-
-  try {
-    return decodeURIComponent(value)
-  } catch {
-    return value
-  }
 }
 
 export async function exportDocx(input: ExportDocxInput): Promise<ExportDocxResult> {
@@ -437,8 +405,7 @@ export async function exportDocx(input: ExportDocxInput): Promise<ExportDocxResu
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to export DOCX: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to export DOCX: ${response.status}`))
   }
 
   return {
@@ -457,8 +424,7 @@ export async function exportPdf(input: ExportPdfInput): Promise<ExportPdfResult>
   })
 
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to export PDF: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to export PDF: ${response.status}`))
   }
 
   return {
@@ -474,8 +440,7 @@ export async function verifyQuestionGroup(questionGroupId: string, apiKey: strin
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to verify: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to verify: ${response.status}`))
   }
   return (await response.json()) as import('../domain/questionBank').VerifyQuestionGroupResult
 }
@@ -487,8 +452,7 @@ export async function parseGrammarGroup(questionGroupId: string, apiKey: string,
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to parse grammar: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to parse grammar: ${response.status}`))
   }
   return (await response.json()) as import('../domain/questionBank').GrammarParseQuestionGroupResult
 }
@@ -500,8 +464,7 @@ export async function parseClozeGroup(questionGroupId: string, apiKey: string, m
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to parse cloze: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to parse cloze: ${response.status}`))
   }
   return (await response.json()) as import('../domain/questionBank').ClozeParseQuestionGroupResult
 }
@@ -513,8 +476,7 @@ export async function parseSevenChoicesGroup(questionGroupId: string, apiKey: st
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to parse seven choices: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to parse seven choices: ${response.status}`))
   }
   return (await response.json()) as import('../domain/questionBank').SevenChoicesParseQuestionGroupResult
 }
@@ -526,8 +488,7 @@ export async function saveClozeParseResultRequest(questionGroupId: string, cloze
     method: 'PUT',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to save cloze parse: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to save cloze parse: ${response.status}`))
   }
   return (await response.json()) as { clozeParseResult: import('../domain/questionBank').ClozeParseQuestionGroupResult }
 }
@@ -539,8 +500,7 @@ export async function saveSevenChoicesParseResultRequest(questionGroupId: string
     method: 'PUT',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to save seven choices parse: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to save seven choices parse: ${response.status}`))
   }
   return (await response.json()) as { sevenChoicesParseResult: import('../domain/questionBank').SevenChoicesParseQuestionGroupResult }
 }
@@ -552,8 +512,7 @@ export async function saveGrammarParseResultRequest(questionGroupId: string, gra
     method: 'PUT',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to save grammar parse: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to save grammar parse: ${response.status}`))
   }
   return (await response.json()) as { grammarParseResult: import('../domain/questionBank').GrammarParseQuestionGroupResult }
 }
@@ -574,8 +533,7 @@ export async function saveReadingParseResult(
     method: 'PUT',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to save reading parse: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to save reading parse: ${response.status}`))
   }
   return (await response.json()) as {
     readingParseResult: import('../domain/questionBank').ReadingParseQuestionGroupResult
@@ -602,8 +560,7 @@ export async function saveQuestionDifficultyRating(
     method: 'PUT',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to save difficulty rating: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to save difficulty rating: ${response.status}`))
   }
   return (await response.json()) as { question: import('../domain/questionBank').QuestionDetail }
 }
@@ -620,8 +577,7 @@ export async function parseReadingQuestionGroup(
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to parse reading: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to parse reading: ${response.status}`))
   }
   return (await response.json()) as import('../domain/questionBank').ReadingParseQuestionGroupResult
 }
@@ -636,8 +592,7 @@ export async function generateSynonymDifficulty(
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to generate synonym difficulty: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to generate synonym difficulty: ${response.status}`))
   }
   return (await response.json()) as SynonymDifficultyQuestionGroupResult
 }
@@ -671,8 +626,7 @@ export async function generateQuestionGroupSummary(
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to generate summary: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to generate summary: ${response.status}`))
   }
   return (await response.json()) as GenerateQuestionGroupSummaryResult
 }
@@ -705,8 +659,7 @@ export async function generateTopicLabels(
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to generate topic labels: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to generate topic labels: ${response.status}`))
   }
   return (await response.json()) as GenerateTopicLabelsResult
 }
@@ -721,8 +674,7 @@ export async function bindTopicLabels(
     method: 'PUT',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to bind topic labels: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to bind topic labels: ${response.status}`))
   }
   return (await response.json()) as { questionGroupId: string; topicLabels: TopicLabel[] }
 }
@@ -786,8 +738,7 @@ export async function semanticSearchQuestionGroups(query: string, apiKey: string
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to run semantic search: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to run semantic search: ${response.status}`))
   }
   return (await response.json()) as SemanticSearchResult
 }
@@ -805,8 +756,7 @@ export async function askQuestionBankSteward(message: string, apiKey: string, th
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to ask question-bank steward: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to ask question-bank steward: ${response.status}`))
   }
   return (await response.json()) as QuestionBankStewardResult
 }
@@ -818,8 +768,7 @@ export async function exportPrintHtml(input: ExportDocxInput): Promise<ExportDoc
     method: 'POST',
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `Failed to export print HTML: ${response.status}`)
+    throw new Error(await readErrorMessage(response, `Failed to export print HTML: ${response.status}`))
   }
   return {
     blob: await response.blob(),
@@ -858,8 +807,7 @@ export async function exportPrintPdf(input: ExportDocxInput): Promise<ExportPdfR
     throw new Error('题库 API 服务无法连接：请确认后端进程已启动')
   }
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    const rawMessage = data?.error || `导出精排 PDF 失败：${response.status}`
+    const rawMessage = await readErrorMessage(response, `导出精排 PDF 失败：${response.status}`)
     throw new Error(mapPrintPdfError(response.status, rawMessage))
   }
   return {
@@ -885,8 +833,7 @@ export async function backfillTopicLabels(input: {
     body: JSON.stringify(input),
   })
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(data?.error || `批量打主题标签失败：${response.status}`)
+    throw new Error(await readErrorMessage(response, `批量打主题标签失败：${response.status}`))
   }
   return response.json() as Promise<BackfillTopicLabelsResult>
 }

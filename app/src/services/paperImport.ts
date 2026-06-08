@@ -1,3 +1,5 @@
+import { apiPathNoIpv6 as apiPath, errorFromResponse as parseError } from './httpClient.ts'
+
 export type PaperImportIssue = {
   severity: 'blocking' | 'warning'
   code: string
@@ -60,27 +62,12 @@ export type PaperImportPublishResult = {
   }
 }
 
-const API_ORIGIN = 'http://127.0.0.1:8787'
-
-function apiPath(path: string) {
-  if (typeof window === 'undefined') return path
-  if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
-    return path
-  }
-  return `${API_ORIGIN}${path}`
-}
-
 function buildFormData(files: File[]) {
   const formData = new FormData()
   for (const file of files) {
     formData.append('files', file, file.name)
   }
   return formData
-}
-
-async function parseError(response: Response, fallback: string) {
-  const data = (await response.json().catch(() => null)) as { error?: string } | null
-  return new Error(data?.error || fallback)
 }
 
 export async function validatePaperImport(files: File[]) {
