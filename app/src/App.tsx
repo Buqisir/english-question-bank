@@ -122,6 +122,8 @@ import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { EntryModal } from './workbench/EntryModal'
+import { DifficultyProfileGrid } from './workbench/detail/DifficultyProfileGrid'
+import { labelOf, mainBlockerLabel } from './workbench/detail/readingProfileLabels'
 
 type StewardChatMessage = {
   id: string
@@ -325,47 +327,6 @@ const aiEnhancementTaskStatusLabel: Record<AiEnhancementTaskState['status'], str
   skipped: '已跳过',
   error: '失败',
 }
-const surfaceQuestionTypeLabel: Record<string, string> = {
-  single_detail_normal: '单细节普通题',
-  multi_detail_learn_from: '多细节 / learn from',
-  why_did: '原因题',
-  word_meaning: '猜词 / 指代',
-  paragraph_main_idea: '段落主旨',
-  passage_main_idea: '文章主旨',
-  writing_technique: '写作手法',
-  paragraph_function: '段落功能',
-  author_purpose: '写作目的',
-  attitude_tone: '态度语气',
-  inference_general: '普通推断',
-  example_function: '例子功能',
-  adjective_summary: '形容词压缩',
-  abstract_phrase_summary: '抽象短语压缩',
-}
-const answeringMoveLabel: Record<string, string> = {
-  direct_locating: '直接定位',
-  option_backtracking: '选项回文验证',
-  context_guessing: '上下文猜测',
-  coverage_test: '覆盖度检验',
-  function_to_argument: '功能服务论点',
-  rhetorical_method_identification: '识别写作手法',
-  minimal_inference: '最小推断',
-  description_to_adjective: '描述压缩成形容词',
-  multi_point_matching: '多点细节整合',
-  elimination: '逐项排除',
-}
-const surfaceScopeLabel: Record<string, string> = {
-  word_or_phrase: '词 / 短语',
-  sentence: '单句',
-  paragraph: '段落',
-  passage: '全文',
-  example: '例子 / 引用',
-}
-const difficultyProfileLevelLabel: Record<string, string> = {
-  low: '低',
-  medium: '中',
-  high: '高',
-  very_high: '极高',
-}
 const teacherDifficultyLabel: Record<number, string> = {
   1: '很低',
   2: '偏低',
@@ -382,32 +343,6 @@ const difficultyOverrideReasonLabel: Record<string, string> = {
   topic: '话题负荷',
   other: '其他',
 }
-const infoSpanLabel: Record<string, string> = {
-  single_point: '单点',
-  multi_point: '多点',
-  cross_paragraph: '跨段',
-}
-const mainBlockerLabel: Record<string, string> = {
-  vocab: '词汇',
-  syntax: '语法',
-  distractor: '干扰项',
-  abstraction: '抽象',
-  info_span: '信息跨度',
-  topic: '话题',
-}
-const blockerRoleLabel: Record<string, string> = {
-  semantic_bridge: '同义桥梁',
-  distractor_trap: '干扰陷阱',
-  answer_key: '答案核心词',
-  context_clue: '可猜线索',
-}
-const blockerPositionLabel: Record<string, string> = {
-  answer_path: '答案路径',
-  correct_option: '正确选项',
-  distractor: '干扰项',
-  question_stem: '题干',
-  passage_background: '背景信息',
-}
 const readingDistractorTypeLabel: Record<string, string> = {
   '0': '正确项',
   '1': '细节词误导',
@@ -423,11 +358,6 @@ const paperWorkflowStatusHint: Record<PaperWorkflow['status'], string> = {
   ready_to_paper: '待组卷',
   ready_to_export: '待导出',
   closed_loop: '已闭环',
-}
-
-function labelOf(labels: Record<string, string>, value?: string) {
-  if (!value) return '待判'
-  return labels[value] || value
 }
 
 function mapAiDifficultyScoreToFive(score?: number | null) {
@@ -4847,67 +4777,14 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                                 )
                               })()}
 
-                              {showAi && (surfaceQuestionItem || difficultyProfileItem) && (
-                                <div className="reading-profile-card">
-                                  {surfaceQuestionItem && (
-                                    <div className="reading-profile-head">
-                                      <span>题型画像</span>
-                                      <strong>{labelOf(surfaceQuestionTypeLabel, surfaceQuestionItem.type)}</strong>
-                                      <em>{labelOf(answeringMoveLabel, surfaceQuestionItem.answeringMove)}</em>
-                                      {surfaceQuestionItem.scope && <em>{labelOf(surfaceScopeLabel, surfaceQuestionItem.scope)}</em>}
-                                    </div>
-                                  )}
-                                  {surfaceQuestionItem?.reason && <p>{surfaceQuestionItem.reason}</p>}
-                                  {difficultyProfileItem && (
-                                    <>
-                                      <div className="difficulty-profile-grid" aria-label="六维难度画像">
-                                        <span>
-                                          <strong>词汇</strong>
-                                          {labelOf(difficultyProfileLevelLabel, difficultyProfileItem.vocabLoad?.level)}
-                                        </span>
-                                        <span>
-                                          <strong>语法</strong>
-                                          {labelOf(difficultyProfileLevelLabel, difficultyProfileItem.syntaxLoad?.level)}
-                                        </span>
-                                        <span>
-                                          <strong>跨度</strong>
-                                          {labelOf(infoSpanLabel, difficultyProfileItem.infoSpan?.level)}
-                                        </span>
-                                        <span>
-                                          <strong>抽象</strong>
-                                          {labelOf(difficultyProfileLevelLabel, difficultyProfileItem.reasoningAbstraction)}
-                                        </span>
-                                        <span>
-                                          <strong>干扰</strong>
-                                          {labelOf(difficultyProfileLevelLabel, difficultyProfileItem.distractorStrength)}
-                                        </span>
-                                        <span>
-                                          <strong>话题</strong>
-                                          {labelOf(difficultyProfileLevelLabel, difficultyProfileItem.topicAbstractness)}
-                                        </span>
-                                      </div>
-                                      <div className="difficulty-profile-score">
-                                        <strong>难度 {difficultyProfileItem.finalScore || '待判'}/10</strong>
-                                        <span>{labelOf(difficultyProfileLevelLabel, difficultyProfileItem.finalLabel)}</span>
-                                        {mainBlockers.map((blocker) => (
-                                          <em key={`${question.id}-${blocker}`}>{labelOf(mainBlockerLabel, blocker)}</em>
-                                        ))}
-                                      </div>
-                                      {difficultyProfileItem.reason && <p>{difficultyProfileItem.reason}</p>}
-                                      {vocabBlockerWords.length > 0 && (
-                                        <div className="vocab-blocker-list">
-                                          {vocabBlockerWords.map((word, index) => (
-                                            <span key={`${question.id}-${word.word}-${index}`}>
-                                              {word.word} · {labelOf(blockerRoleLabel, word.role)} ·{' '}
-                                              {labelOf(blockerPositionLabel, word.position)}
-                                            </span>
-                                          ))}
-                                        </div>
-                                      )}
-                                    </>
-                                  )}
-                                </div>
-                              )}
+                              <DifficultyProfileGrid
+                                showAi={showAi}
+                                questionId={question.id}
+                                surfaceQuestionItem={surfaceQuestionItem}
+                                difficultyProfileItem={difficultyProfileItem}
+                                mainBlockers={mainBlockers}
+                                vocabBlockerWords={vocabBlockerWords}
+                              />
 
 	                            {showAi && synonymDifficultyItem && (
 	                              <div className={`synonym-difficulty-card${synonymDifficultyItem.reviewNeeded ? ' needs-review' : ''}`}>
