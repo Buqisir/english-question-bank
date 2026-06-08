@@ -55,6 +55,7 @@ const registry = {
   'scripts/verify-i16b-theme-labels-backfill.mjs',
   'scripts/verify-i16c-grammar-verb-axes.mjs',
   'scripts/verify-search-thinking-toggle.mjs',
+  'scripts/verify-h11b-paper-import-ai-view.mjs',
   ],
 }
 

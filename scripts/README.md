@@ -36,6 +36,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h5e-verify-question-group.mjs` | H5-E verify-question-group service: invocation smoke + audit-JSONL shape + re-import guard | yes |
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
 | `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
+| `verify-h11b-paper-import-ai-view.mjs` | H11-B PaperImportAi untyped-analysis view helpers extraction contract (source-level) | yes |
 
 ## Core data and import
 
