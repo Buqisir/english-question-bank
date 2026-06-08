@@ -29,6 +29,7 @@ const registry = {
   'scripts/verify-i0e-seven-choices-entry.mjs',
   'scripts/verify-h1e-export-routes.mjs',
   'scripts/verify-h5a-export-implementation.mjs',
+  'scripts/verify-h5c-json-extraction.mjs',
   'scripts/verify-h1f-legacy-import-routes.mjs',
   'scripts/verify-h1g-question-group-routes.mjs',
   'scripts/verify-i1-paper-import-route.mjs',

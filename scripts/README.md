@@ -30,6 +30,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
 | `verify-h1e-export-routes.mjs` | H1-E export route dispatch contract | yes |
 | `verify-h5a-export-implementation.mjs` | H5-A export implementation extraction contract | yes |
+| `verify-h5c-json-extraction.mjs` | H5-C AI-completion JSON / verify-verdict extraction leaf contract | yes |
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
 | `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
 
