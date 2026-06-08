@@ -56,6 +56,7 @@ const registry = {
   'scripts/verify-i16c-grammar-verb-axes.mjs',
   'scripts/verify-search-thinking-toggle.mjs',
   'scripts/verify-h11b-paper-import-ai-view.mjs',
+  'scripts/verify-h12a-entry-modal.mjs',
   ],
 }
 

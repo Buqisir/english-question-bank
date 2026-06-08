@@ -37,6 +37,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h1f-legacy-import-routes.mjs` | H1-F legacy import route dispatch contract | yes |
 | `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
 | `verify-h11b-paper-import-ai-view.mjs` | H11-B PaperImportAi untyped-analysis view helpers extraction contract (source-level) | yes |
+| `verify-h12a-entry-modal.mjs` | H12-A App.tsx Manual Entry form modal extraction into workbench/EntryModal.tsx; 5-prop seam + savedCard writeback contract (source-level) | yes |
 
 ## Core data and import
 
