@@ -100,10 +100,13 @@ assert(
   'Expected: planQuestionBankStewardSearch(..., thinkingMode = false)',
 )
 
-// semanticSearchQuestionGroups has thinkingMode param
+// semanticSearchQuestionGroups has thinkingMode param.
+// Moved to server/search/semanticSearchService.mjs (cut H5-H); api.mjs re-imports the entry
+// point and forwards thinkingMode (asserted by b3). Read the definition from its new home.
+const semanticSearchService = readText('server/search/semanticSearchService.mjs')
 assert(
   '(b6) semanticSearchQuestionGroups has thinkingMode param',
-  /async function semanticSearchQuestionGroups\s*\([^)]*thinkingMode\s*=\s*false[^)]*\)/.test(apiMjs),
+  /async function semanticSearchQuestionGroups\s*\([^)]*thinkingMode\s*=\s*false[^)]*\)/.test(semanticSearchService),
   'Expected: semanticSearchQuestionGroups(..., thinkingMode = false)',
 )
 
