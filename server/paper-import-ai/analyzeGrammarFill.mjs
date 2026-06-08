@@ -1,10 +1,7 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { randomUUID } from 'node:crypto'
-import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
-import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
-import { extractFirstJsonObject } from './extractJson.mjs'
+import { createAnalyzerProviderShell, readPromptFile, rewriteApiPrompt } from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -70,36 +67,8 @@ function optionalString(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
-function readPrompt() {
-  return readFileSync(promptPath, 'utf8')
-}
-
 function readApiPrompt() {
-  return readPrompt()
-    .replace(
-      /## Output Requirement[\s\S]*?## Reasoning Rule/,
-      [
-        '## Output Requirement',
-        '',
-        'You MUST return exactly one JSON object as plain text in this API response.',
-        'The first non-whitespace character MUST be `{` and the final non-whitespace character MUST be `}`.',
-        '',
-        'Do NOT create or download a file.',
-        'Do NOT return `UNABLE_TO_CREATE_FILE`.',
-        'Do NOT wrap JSON in markdown fences.',
-        'Do NOT write a filename heading.',
-        'Do NOT write "Here is the JSON".',
-        'Do NOT explain what you are doing.',
-        '',
-        '## Reasoning Rule',
-      ].join('\n'),
-    )
-}
-
-function normalizeProviderId(providerId) {
-  const raw = String(providerId || '').trim().toLowerCase()
-  if (raw === 'gpt-5.5' || raw === 'openai' || raw === 'chatgpt') return 'gpt-5.5'
-  return 'deepseek-v4-pro'
+  return rewriteApiPrompt(readPromptFile(promptPath))
 }
 
 // ============================================================
@@ -339,31 +308,10 @@ export function validateGrammarFillShape(analysis, { paper, group }) {
 }
 
 // ============================================================
-// Provider caller
+// Provider caller (shell shared; per-type seams injected)
 // ============================================================
 
-async function callProvider({ providerId, messages, providerCallers }) {
-  const provider = normalizeProviderId(providerId)
-  if (provider === 'gpt-5.5') {
-    return (providerCallers?.gptRelay || callGptRelayJson)({ messages, model: 'gpt-5.5' })
-  }
-  return (providerCallers?.deepseek || callDeepSeekJson)({ messages, model: 'deepseek-v4-pro' })
-}
-
-async function callProviderWithRetry(args, { retries = 1 } = {}) {
-  let lastError
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    try {
-      return await callProvider(args)
-    } catch (error) {
-      lastError = error
-      if (attempt >= retries) break
-    }
-  }
-  throw lastError
-}
-
-function isRetryableAnalysisError(error) {
+function isRetryableGrammarFillError(error) {
   // Answer conflicts are never retryable — fundamental mismatch.
   if (error && error.isAnswerConflict) return false
   const message = error instanceof Error ? error.message : String(error || '')
@@ -375,13 +323,13 @@ function isRetryableAnalysisError(error) {
 // Meta stamping — server-side, never trust model self-report
 // ============================================================
 
-function stampMeta(analysis, { providerResult, providerId }) {
+function stampGrammarFillMeta(analysis, { providerResult, providerId }) {
   if (!analysis || typeof analysis !== 'object') return
   const prior = analysis.meta && typeof analysis.meta === 'object' ? analysis.meta : {}
   analysis.meta = {
     ...prior,
     generatedBy: 'external-ai',
-    model: optionalString(providerResult?.model) || normalizeProviderId(providerId),
+    model: optionalString(providerResult?.model) || String(providerId || ''),
     promptVersion: 'grammar-fill-analysis-v1',
     reviewStatus: 'reviewed',
     reviewedBy: '',
@@ -393,34 +341,10 @@ function stampMeta(analysis, { providerResult, providerId }) {
 // Main entry point
 // ============================================================
 
-export async function analyzeGrammarFillImportCandidate(input, options = {}) {
-  assertGrammarFillAnalyzeInput(input)
-  const requestId = options.requestId || randomUUID()
-  const providerId = normalizeProviderId(input.providerId)
-  const messages = buildGrammarFillAnalysisMessages(input)
-  const analysisRetries = Number.isInteger(options.analysisRetries) ? options.analysisRetries : 1
-  let lastError
-  for (let attempt = 0; attempt <= analysisRetries; attempt += 1) {
-    const providerResult = await callProviderWithRetry({
-      providerId,
-      messages,
-      providerCallers: options.providerCallers,
-    }, { retries: Number.isInteger(options.providerRetries) ? options.providerRetries : 1 })
-    try {
-      const analysis = extractFirstJsonObject(providerResult.rawText)
-      stampMeta(analysis, { providerResult, providerId })
-      validateGrammarFillShape(analysis, input)
-      return {
-        analysis,
-        provider: providerResult.provider,
-        model: providerResult.model,
-        requestId,
-        latencyMs: providerResult.latencyMs,
-      }
-    } catch (error) {
-      lastError = error
-      if (attempt >= analysisRetries || !isRetryableAnalysisError(error)) break
-    }
-  }
-  throw lastError
-}
+export const analyzeGrammarFillImportCandidate = createAnalyzerProviderShell({
+  assertInput: assertGrammarFillAnalyzeInput,
+  buildMessages: buildGrammarFillAnalysisMessages,
+  validate: validateGrammarFillShape,
+  isRetryable: isRetryableGrammarFillError,
+  beforeValidate: stampGrammarFillMeta,
+})
