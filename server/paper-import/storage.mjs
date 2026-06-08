@@ -15,11 +15,6 @@ const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
 
-function readJsonMaybe(filePath) {
-  if (!existsSync(filePath)) return null
-  return JSON.parse(readFileSync(filePath, 'utf8'))
-}
-
 export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = null) {
   const paperDir = path.join(paperAssetsDir, paperId)
   if (version) {
@@ -241,10 +236,4 @@ export function cleanupPaperImportTempArtifacts(paperAssetsDir) {
     }
   }
   return removed
-}
-
-export function readLatestPaperAssetVersion(paperAssetsDir, paperId) {
-  const paths = resolvePaperAssetReadPaths(paperAssetsDir, paperId)
-  const asset = readJsonMaybe(paths.assetPath)
-  return asset?.paper?.assetVersion || null
 }

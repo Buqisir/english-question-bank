@@ -2,8 +2,6 @@ import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } 
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 
-export const MY_SPACE_ARTIFACT_TYPES = new Set(['student-paper'])
-
 export function ensureMySpaceDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS my_space_folders (

@@ -22,7 +22,6 @@ const promptPath = path.join(__dirname, '..', '..', 'prompts', 'grammar-fill-ver
 export const FINITE_VERB_FACET = 'grammar-fill.given.verb.finite'
 
 const REGISTRY = JSON.parse(readFileSync(registryPath, 'utf8'))
-export const VERB_AXES = REGISTRY.axes
 const VALID_TENSE = new Set(REGISTRY.axes.tense)
 const VALID_VOICE = new Set(REGISTRY.axes.voice)
 const VALID_AGREEMENT = new Set(REGISTRY.axes.agreement)
