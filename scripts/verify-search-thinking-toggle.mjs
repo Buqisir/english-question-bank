@@ -56,33 +56,38 @@ assert(
   'Request body must use the thinkingMode param, not hardcode false',
 )
 
-// ── (b) questionBankStewardSearch in server/api.mjs ──────────────────────────
+// ── (b) questionBankStewardSearch ────────────────────────────────────────────
 const apiMjs = readText('server/api.mjs')
+// questionBankStewardSearch + planQuestionBankStewardSearch were moved to
+// server/search/questionBankStewardService.mjs (cut H5-I); api.mjs re-imports the entry point
+// and the steward ROUTE still lives in api.mjs (asserted by c1). Read the steward fn definitions
+// from their new home — same assertions, pointer-updated home.
+const stewardService = readText('server/search/questionBankStewardService.mjs')
 
 // Function signature has thinkingMode param
 assert(
   '(b1) questionBankStewardSearch has thinkingMode param',
-  /async function questionBankStewardSearch\s*\([^)]*thinkingMode\s*=\s*false[^)]*\)/.test(apiMjs),
+  /async function questionBankStewardSearch\s*\([^)]*thinkingMode\s*=\s*false[^)]*\)/.test(stewardService),
   'Expected: questionBankStewardSearch(..., thinkingMode = false)',
 )
 
 // Passes thinkingMode to planQuestionBankStewardSearch
 assert(
   '(b2) questionBankStewardSearch passes thinkingMode to planQuestionBankStewardSearch',
-  /planQuestionBankStewardSearch\s*\([^)]*thinkingMode[^)]*\)/.test(apiMjs),
+  /planQuestionBankStewardSearch\s*\([^)]*thinkingMode[^)]*\)/.test(stewardService),
   'planQuestionBankStewardSearch call must include thinkingMode argument',
 )
 
 // Passes thinkingMode to semanticSearchQuestionGroups
 assert(
   '(b3) questionBankStewardSearch passes thinkingMode to semanticSearchQuestionGroups',
-  /semanticSearchQuestionGroups\s*\([^)]*thinkingMode[^)]*\)/.test(apiMjs),
+  /semanticSearchQuestionGroups\s*\([^)]*thinkingMode[^)]*\)/.test(stewardService),
   'semanticSearchQuestionGroups call must include thinkingMode argument',
 )
 
 // Both response branches use the thinkingMode variable (not false literal) for thinkingMode metadata
 // Extract the questionBankStewardSearch function body
-const stewardSearchMatch = apiMjs.match(
+const stewardSearchMatch = stewardService.match(
   /async function questionBankStewardSearch[\s\S]*?^}/m,
 )
 assert(
@@ -96,7 +101,7 @@ assert(
 // planQuestionBankStewardSearch also has thinkingMode param
 assert(
   '(b5) planQuestionBankStewardSearch has thinkingMode param',
-  /async function planQuestionBankStewardSearch\s*\([^)]*thinkingMode\s*=\s*false[^)]*\)/.test(apiMjs),
+  /async function planQuestionBankStewardSearch\s*\([^)]*thinkingMode\s*=\s*false[^)]*\)/.test(stewardService),
   'Expected: planQuestionBankStewardSearch(..., thinkingMode = false)',
 )
 
