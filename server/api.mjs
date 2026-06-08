@@ -28,6 +28,7 @@ import { createPaperImportRoutes } from './paper-import/paperImportRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
+import { createPaperSetRoutes } from './paper-sets/routes.mjs'
 import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
@@ -97,6 +98,7 @@ const serverContext = {
   applyAnswerAlignment,
   bindTopicLabelsToQuestionGroup,
   createImportFile,
+  createPaperSet,
   createQuestionGroup,
   deleteImportFile,
   deleteQuestionGroup,
@@ -105,6 +107,7 @@ const serverContext = {
   generateImportBundleDraft,
   generateSynonymDifficultyByQuestionGroup,
   generateTopicLabelsByQuestionGroup,
+  getPaperSet,
   getQuestionGroupDetail,
   getPaperSurfaceAnalysisAvailabilityByGroupId,
   getTeachingFacetIndex,
@@ -114,6 +117,8 @@ const serverContext = {
   listImportBatches,
   listImportBundles,
   listImportFiles,
+  listPaperSets,
+  listPaperWorkflowStatuses,
   listQuestionGroups,
   listUnlabeledGroupIds,
   parseClozeByQuestionGroup,
@@ -465,6 +470,7 @@ const serverRoutes = [
   ...createExportRoutes(exportImplementation),
   ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),
+  ...createPaperSetRoutes(),
   ...createTeachingFacetRoutes(),
   ...createTopicLabelBackfillRoutes(),
   ...createVerbProfileBackfillRoutes(),
@@ -9421,42 +9427,6 @@ const server = createServer(async (request, response) => {
       const input = await readJsonBody(request)
       const result = await questionBankStewardSearch(input.message || input.query, input.apiKey, input.requestId, input.thinkingMode === true)
       sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'GET' && url.pathname === '/api/paper-sets') {
-      sendJson(response, 200, { paperSets: listPaperSets() })
-      return
-    }
-
-    if (request.method === 'GET' && url.pathname === '/api/paper-workflows') {
-      sendJson(response, 200, { paperWorkflows: listPaperWorkflowStatuses() })
-      return
-    }
-
-    const paperSetMatch = url.pathname.match(/^\/api\/paper-sets\/([^/]+)$/)
-    if (request.method === 'GET' && paperSetMatch) {
-      const paperSet = getPaperSet(decodeURIComponent(paperSetMatch[1]))
-      if (!paperSet) {
-        sendJson(response, 404, { error: 'Paper set not found' })
-        return
-      }
-      sendJson(response, 200, { paperSet })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/paper-sets') {
-      const input = await readJsonBody(request)
-      const paperSet = createPaperSet(input)
-      sendJson(response, 201, { paperSet })
-      return
-    }
-
-    if (request.method === 'PUT' && paperSetMatch) {
-      const input = await readJsonBody(request)
-      const updateInput = { ...input, id: decodeURIComponent(paperSetMatch[1]) }
-      const paperSet = createPaperSet(updateInput)
-      sendJson(response, 200, { paperSet })
       return
     }
 
