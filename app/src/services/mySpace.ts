@@ -1,17 +1,5 @@
 import type { MySpaceArtifact, MySpaceFolder } from '../domain/questionBank'
-
-const API_ORIGIN = 'http://127.0.0.1:8787'
-
-function apiPath(path: string) {
-  if (typeof window === 'undefined') return path
-  if (['127.0.0.1', 'localhost', '::1'].includes(window.location.hostname)) return path
-  return `${API_ORIGIN}${path}`
-}
-
-async function readError(response: Response, fallback: string) {
-  const data = (await response.json().catch(() => null)) as { error?: string } | null
-  return data?.error || fallback
-}
+import { apiPath, errorMessageFromResponse as readError } from './httpClient.ts'
 
 function downloadBlob(blob: Blob, fileName: string) {
   const url = URL.createObjectURL(blob)
