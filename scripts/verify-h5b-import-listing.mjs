@@ -108,4 +108,28 @@ verifier.assert(apiSource.includes('createImportListingImplementation({'), 'api.
 verifier.assert(/const \{\n\s*listImportFiles,/.test(apiSource), 'api.mjs destructures the public listing functions')
 verifier.assert(!/from ['"]\.\.\/api\.mjs['"]/.test(moduleSource), 'module does not import from api.mjs (no cycle)')
 
+verifier.section('No used-but-undefined: every moved fn still referenced in api.mjs is re-imported')
+// Guards the rowToImportFile class of bug: a moved helper whose callers stayed in api.mjs
+// must appear in the `const { ... } = importListing` destructure, else it ReferenceErrors at runtime.
+{
+  const apiLines = apiSource.split('\n')
+  const dEnd = apiLines.findIndex((l) => l.includes('} = importListing'))
+  let dStart = dEnd
+  while (dStart > 0 && !apiLines[dStart].includes('const {')) dStart -= 1
+  const reImportSet = new Set(
+    apiLines.slice(dStart, dEnd + 1).map((l) => l.trim().replace(/,$/, '')).filter((n) => /^\w+$/.test(n)),
+  )
+  for (const name of moved) {
+    let usedElsewhere = false
+    apiLines.forEach((l, i) => {
+      if (i >= dStart && i <= dEnd) return // skip the destructure declaration
+      if (l.includes("importListing.mjs")) return // skip the import line
+      if (new RegExp(`\\b${name}\\b`).test(l)) usedElsewhere = true
+    })
+    if (usedElsewhere) {
+      verifier.assert(reImportSet.has(name), `moved fn ${name} is still referenced in api.mjs => must be in the re-import destructure (else ReferenceError)`)
+    }
+  }
+}
+
 verifier.summary()

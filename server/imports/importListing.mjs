@@ -496,6 +496,7 @@ export function createImportListingImplementation(deps) {
     scanImportDirectory,
     getImportBatch,
     updateImportBatchStats,
+    rowToImportFile,
     rowToImportFileParse,
   }
 }
