@@ -369,7 +369,12 @@ verifier.assert(/export function createReadingDifficultyNormalizer\(/.test(modul
 // api.mjs wires the factory + re-imports the shared predicate
 verifier.assert(apiSource.includes("from './reading-analysis/readingDifficultyNormalizer.mjs'"), 'api.mjs imports the extracted module')
 verifier.assert(apiSource.includes('createReadingDifficultyNormalizer({'), 'api.mjs calls the factory')
-verifier.assert(/isEntityPurposeMentionStem\(/.test(apiSource), 'api.mjs still calls isEntityPurposeMentionStem (re-imported)')
+// api.mjs re-imports the shared predicate and still uses it. (Since H5-K, its sole call site —
+// hasMentionIntentSignal — moved into ai-parse/synonymDifficultyService.mjs, so api.mjs no longer
+// CALLS it directly; it imports the binding and injects it into the H5-K factory. Assert the
+// import + injection rather than a direct `(`-call.)
+verifier.assert(/import \{[^}]*\bisEntityPurposeMentionStem\b[^}]*\} from '\.\/reading-analysis\/readingDifficultyNormalizer\.mjs'/.test(apiSource), 'api.mjs re-imports isEntityPurposeMentionStem')
+verifier.assert(/createSynonymDifficultyImplementation\(\{[\s\S]*?\bisEntityPurposeMentionStem\b[\s\S]*?\}\)/.test(apiSource), 'api.mjs injects isEntityPurposeMentionStem into the H5-K synonym-difficulty factory')
 // no cycle: module never imports api.mjs
 verifier.assert(!/from ['"][^'"]*\/api\.mjs['"]/.test(moduleSource) && !/from ['"]\.\.\/api\.mjs['"]/.test(moduleSource), 'module does not import from api.mjs')
 // objectValue retained in api.mjs (shared with non-reading callers)
