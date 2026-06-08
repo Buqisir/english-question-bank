@@ -10,8 +10,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
 const promptPath = path.join(rootDir, 'prompts/reading-choice-analysis-v1.md')
 
-export const PAPER_IMPORT_AI_PROVIDERS = ['deepseek-v4-pro', 'gpt-5.5']
-
 function optionalString(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
