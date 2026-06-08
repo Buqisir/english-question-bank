@@ -32,6 +32,7 @@ const registry = {
   'scripts/verify-h5c-json-extraction.mjs',
   'scripts/verify-h5d-completion-runner.mjs',
   'scripts/verify-h5b-import-listing.mjs',
+  'scripts/verify-h5e-verify-question-group.mjs',
   'scripts/verify-h1f-legacy-import-routes.mjs',
   'scripts/verify-h1g-question-group-routes.mjs',
   'scripts/verify-i1-paper-import-route.mjs',
