@@ -156,20 +156,18 @@ async function run() {
   }
 
   // ========================================================================
-  // 2. flash-default preserved (capture from main, NOT the working tree).
+  // 2. flash-default preserved (the documented divergence vs deepseek.mjs's pro-default).
+  //    HERMETIC: assert against the known literal. A run-form verify must NOT shell to
+  //    `git show main:...` — a local `main` ref doesn't exist in PR CI (detached merge ref),
+  //    so that made this script fail on every PR while passing locally + on main-push.
   // ========================================================================
-  const { execFileSync } = await import('node:child_process')
-  const mainApi = execFileSync('git', ['show', 'main:server/api.mjs'], { cwd: repoRoot, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
-  const mainDefaultMatch = mainApi.match(/const DEFAULT_DEEPSEEK_MODEL = '([^']+)'/)
-  assert('main DEFAULT_DEEPSEEK_MODEL captured', Boolean(mainDefaultMatch))
-  const mainFlashDefault = mainDefaultMatch[1]
-  assert('flash-default constant is flash on main', mainFlashDefault === 'deepseek-v4-flash')
+  const FLASH_DEFAULT = 'deepseek-v4-flash'
   assert(
-    "normalizeDeepSeekModel('anything-unknown') === main flash-default",
-    runner.normalizeDeepSeekModel('anything-unknown') === mainFlashDefault,
+    "normalizeDeepSeekModel('anything-unknown') === flash-default",
+    runner.normalizeDeepSeekModel('anything-unknown') === FLASH_DEFAULT,
     `got ${runner.normalizeDeepSeekModel('anything-unknown')}`,
   )
-  assert("normalizeDeepSeekModel('') === flash-default", runner.normalizeDeepSeekModel('') === mainFlashDefault)
+  assert("normalizeDeepSeekModel('') === flash-default", runner.normalizeDeepSeekModel('') === FLASH_DEFAULT)
   // Alias map key is 'deepseek-v4-pro'; normalization lowercases, strips whitespace and maps _→-.
   assert("normalizeDeepSeekModel('DeepSeek-V4-Pro') aliases to pro", runner.normalizeDeepSeekModel('DeepSeek-V4-Pro') === 'deepseek-v4-pro')
   assert("normalizeDeepSeekModel('deepseek_v4_pro') aliases to pro", runner.normalizeDeepSeekModel('deepseek_v4_pro') === 'deepseek-v4-pro')
