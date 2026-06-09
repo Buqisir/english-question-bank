@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-zj-2025-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2025-jan-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2025-jan-grammar-fill": {
+      "overview": "说明文：介绍随着环保与经济意识增强，服装租赁服务在澳大利亚等地兴起的新着装方式。"
+    }
+  },
+  "blanks": {
+    "q-zj-2025-jan-056": {
+      "blankId": "blank-zj-2025-jan-056",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "path": null,
+      "reason": "空格位于可数名词 way 之前，泛指一种新的着装方式，且 new 以辅音音素开头，故填不定冠词 a。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "new way of dressing",
+          "signalSide": "passage",
+          "relation": "单数可数名词 way 前需限定词，首次泛指一种，故用不定冠词 a。"
+        }
+      ],
+      "teachingNote": "单数可数名词前若首次泛指，按后接词首音素选 a/an。"
+    },
+    "q-zj-2025-jan-057": {
+      "blankId": "blank-zj-2025-jan-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "time",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "times",
+      "role": null,
+      "path": null,
+      "reason": "fewer 修饰可数名词复数，time 在此表示\"次数\"为可数名词，故用复数 times。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "fewer",
+          "signalSide": "passage",
+          "relation": "fewer 只修饰可数名词复数，要求 time 变复数 times。"
+        }
+      ],
+      "teachingNote": "fewer 后接可数名词复数；time 表\"次数\"时可数。"
+    },
+    "q-zj-2025-jan-058": {
+      "blankId": "blank-zj-2025-jan-058",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "on",
+      "role": null,
+      "path": null,
+      "reason": "动词 focus 与介词 on 固定搭配，构成 focus on the fact，故填 on。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "focus instead",
+          "signalSide": "passage",
+          "relation": "focus 与 on 固定搭配 focus on，支配介词 on。"
+        }
+      ],
+      "teachingNote": "记动词固定介词搭配：focus on（专注于）。"
+    },
+    "q-zj-2025-jan-059": {
+      "blankId": "blank-zj-2025-jan-059",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "空格连接 have something unique to wear 与 are not overstuffing 两个并列谓语，语义为顺承叠加，故用并列连词 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "are not overstuffing their own wardrobes",
+          "signalSide": "passage",
+          "relation": "与前一谓语并列、语义顺承叠加，需并列连词 and 连接。"
+        }
+      ],
+      "teachingNote": "连接两个语义顺承的并列谓语用 and。"
+    },
+    "q-zj-2025-jan-060": {
+      "blankId": "blank-zj-2025-jan-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "rent",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to rent",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "句中已有谓语 offers，rent 非谓语；后接 rather than purchase 形成 to rent rather than purchase 的对比并列，表目的/方式，故用动词不定式 to rent。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "rather than purchase them outright",
+          "signalSide": "passage",
+          "relation": "rather than 后接原形 purchase，与之并列对比要求不定式 to rent。"
+        }
+      ],
+      "teachingNote": "rather than 连接对比并列时，前后形式对应，宜用 to do。"
+    },
+    "q-zj-2025-jan-061": {
+      "blankId": "blank-zj-2025-jan-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "solve",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "solution",
+      "role": null,
+      "path": null,
+      "reason": "空格前有冠词 a 和形容词 less expensive，需名词作宾语，故把动词 solve 派生为名词 solution。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a less expensive",
+          "signalSide": "passage",
+          "relation": "冠词 a 加形容词后需名词中心词，要求 solve 派生为名词 solution。"
+        }
+      ],
+      "teachingNote": "冠词+形容词后缺名词，把动词派生为名词。"
+    },
+    "q-zj-2025-jan-062": {
+      "blankId": "blank-zj-2025-jan-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is",
+      "role": null,
+      "path": null,
+      "reason": "主语 The concept 为第三人称单数，陈述一般性事实用一般现在时，故 be 变 is。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The concept",
+          "signalSide": "passage",
+          "relation": "主语第三人称单数，一般现在时谓语用 is。"
+        }
+      ],
+      "teachingNote": "找主语数与人称，陈述事实用一般现在时定 be 形式。"
+    },
+    "q-zj-2025-jan-063": {
+      "blankId": "blank-zj-2025-jan-063",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "path": null,
+      "reason": "先行词为 less formal clothing（物），空格引导非限制性定语从句并在从句中作 package 的宾语，故用关系代词 which。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "less formal clothing",
+          "signalSide": "passage",
+          "relation": "先行词为物，从句缺宾语，用关系代词 which。"
+        }
+      ],
+      "teachingNote": "先行词为物、从句缺宾语，用 which 引导定语从句。"
+    },
+    "q-zj-2025-jan-064": {
+      "blankId": "blank-zj-2025-jan-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "people",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "people’s",
+      "role": null,
+      "path": null,
+      "reason": "空格修饰名词 lives，表所属\"人们的生活\"，故 people 用名词所有格 people's。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "lives today",
+          "signalSide": "passage",
+          "relation": "其后名词 lives 表所属对象，需把 people 变为所有格 people's。"
+        }
+      ],
+      "teachingNote": "名词前表所属关系用名词所有格 's。"
+    },
+    "q-zj-2025-jan-065": {
+      "blankId": "blank-zj-2025-jan-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "return",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "returning",
+      "role": "object",
+      "path": "fast",
+      "reason": "动词 mean 后接动名词表\"意味着做某事\"，故 return 用动名词 returning 作宾语。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "doesn’t always mean",
+          "signalSide": "passage",
+          "relation": "mean doing 表\"意味着\"，支配动名词，故用 returning。"
+        }
+      ],
+      "teachingNote": "mean doing sth 意为\"意味着…\"，后接动名词。"
+    }
+  }
+}

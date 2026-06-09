@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2024-jan",
+  "sourceFileName": "source.docx",
+  "sourceFileSha256": "93439c92b66ab2fcede2e0fcc5f2a60f898a691fefe32b783cdc265b2cad622e",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-09T05:03:25.891Z",
+  "paper": {
+    "year": 2024,
+    "region": "浙江",
+    "paperName": "2024年1月浙江卷",
+    "examCode": "zj-2024-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2024",
+      "浙江卷",
+      "1月"
+    ]
+  },
+  "groups": {
+    "group-zj-2024-jan-reading-a": {
+      "groupId": "group-zj-2024-jan-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则关于儿童剧《汤姆·索亚：河流历险记》的应用文（演出介绍），介绍了该音乐剧的内容、创作团队、两位主演以及为教师提供的教学资源。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2024-jan-reading-b": {
+      "groupId": "group-zj-2024-jan-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇带有个人回忆色彩的记叙兼议论文。作者以“你上次用电话亭打电话是什么时候”发问，回忆2006年被锁在门外靠街对面电话亭求助配钥匙的经历，再讲述如今家附近的电话亭被改造成“迷你社区图书馆”，自己从抗拒到爱上免费淘书的转变。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2024-jan-reading-c": {
+      "groupId": "group-zj-2024-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文/议论性文本，围绕加拿大阿尔伯塔省的人工消雹（cloud seeding，云播撒）项目展开。文章介绍了项目的起因与做法，呈现农民、项目管理者、研究科学家等多方对其影响（是否偷走水分、是否制造危险风暴）的争议，并在结尾指出由于缺乏科学证据，相关公司在法律上可以继续运营。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2024-jan-reading-d": {
+      "groupId": "group-zj-2024-jan-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文/议论文，借用著名的斯坦福棉花糖实验作类比，指出成年人每天面对的不再是糖果诱惑，而是手机、电脑等设备带来的信息诱惑。作者从大脑进化机制角度解释这种诱惑的根源，并提出我们应像控制热量摄入一样，更审慎地控制信息摄入。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-zj-2024-jan-seven-choices": {
+      "groupId": "group-zj-2024-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，围绕“在线学习（online learning）是否适合你、如何上好在线课程”给出建议。首段引出在线学习的普及并设问，随后三段分别从“在线学习的优势与自律风险”“把在线课纳入每周日程”“在线课缺乏人际互动及其应对”三方面展开。七选五要求在首段（两空）和各正文段中补入最贴合上下文逻辑与话题场的句子。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2024-jan-cloze": {
+      "groupId": "group-zj-2024-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2024-jan-grammar-fill": {
+      "groupId": "group-zj-2024-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2024-jan-writing-application": {
+      "groupId": "group-zj-2024-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2024-jan-writing-continuation": {
+      "groupId": "group-zj-2024-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

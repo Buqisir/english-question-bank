@@ -1,0 +1,676 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2024-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2024-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2024-jan-cloze": {
+      "overview": "记叙文。作者在新疆塔克拉玛干沙漠边缘乘坐20小时火车时，与一位修路的中国年轻人相遇交谈，发现他自学英语、博览群书，从而打破了自己对这位修路工的先入之见，感悟到以开放心态旅行、与各行各业的人交流所能收获的东西。",
+      "affectiveArc": "情感主线为先抑后扬：从对一位修路工的低估假设，到被其博学与上进折服，最终转为钦佩与自我反思。"
+    }
+  },
+  "blanks": {
+    "q-zj-2024-jan-041": {
+      "blankId": "blank-zj-2024-jan-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "与下文“a young Chinese man approached me on the train”呼应，全文讲的是与当地人的一次偶遇，encounter（邂逅、相遇）与 with a local 搭配最合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "experiment",
+          "meaning": "实验、试验"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "competition",
+          "meaning": "竞争、比赛"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "appointment",
+          "meaning": "约会、预约"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with a local",
+          "signalSide": "context-after",
+          "targetText": "encounter with a local",
+          "relation": "encounter 与 with a local 构成“与当地人的相遇”，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "A young Chinese man",
+          "signalSide": "context-after",
+          "targetText": "encounter",
+          "relation": "下文“一名年轻的中国男子”在火车上与我相识，正是这次偶遇的具体内容，呼应 encounter。"
+        }
+      ],
+      "teachingNote": "名词空先回到主旨句，看哪个词与全文“与陌生人偶遇”的故事走向一致。"
+    },
+    "q-zj-2024-jan-042": {
+      "blankId": "blank-zj-2024-jan-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "主语 a young Chinese man、宾语 me，approached 表示“主动走近、搭话”，与下文两人长谈的情节衔接，施受关系合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "treated",
+          "meaning": "对待、招待"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "saved",
+          "meaning": "拯救、挽救"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lectured",
+          "meaning": "训诫、讲课"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "A young Chinese man",
+          "signalSide": "context-before",
+          "targetText": "approached me",
+          "relation": "approached 的主语是 a young Chinese man，宾语是 me，构成“他主动走近我”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "took the",
+          "signalSide": "context-after",
+          "targetText": "approached",
+          "relation": "下文作者借此机会练习中文，说明对方先开口搭话，呼应 approached。"
+        }
+      ],
+      "teachingNote": "动词空看主语和宾语，判断这个动作放在“陌生人主动结识”的情节里是否说得通。"
+    },
+    "q-zj-2024-jan-043": {
+      "blankId": "blank-zj-2024-jan-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "修饰 friend，对方是刚在火车上认识的人，new friend（新朋友）与“刚相遇”的语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "true",
+          "meaning": "真正的、忠实的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "so-called",
+          "meaning": "所谓的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "long-lost",
+          "meaning": "失散已久的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "friend",
+          "signalSide": "context-after",
+          "targetText": "new friend",
+          "relation": "形容词修饰 friend，new friend 即“新结识的朋友”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "me on the train",
+          "signalSide": "context-before",
+          "targetText": "new",
+          "relation": "刚在火车上相识，故是 new friend 而非旧识。"
+        }
+      ],
+      "teachingNote": "形容词空回看人物关系，刚认识就锁定“新”而非“旧/真”。"
+    },
+    "q-zj-2024-jan-044": {
+      "blankId": "blank-zj-2024-jan-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "对方几乎不会英语，作者便“欣然抓住机会”练中文，take the chance（趁机、抓住机会）搭配成立，与 happily 的语气一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "advice",
+          "meaning": "建议、劝告"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "trouble",
+          "meaning": "麻烦、困难"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "right",
+          "meaning": "权利"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "happily took the",
+          "signalSide": "context-before",
+          "targetText": "took the chance",
+          "relation": "take the chance to do 表示“抓住机会做某事”，与 happily 搭配自然。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "so I happily took",
+          "signalSide": "context-before",
+          "targetText": "chance",
+          "relation": "so 表示因果：对方不会英语，所以作者趁机练中文。"
+        }
+      ],
+      "teachingNote": "名词空先试固定搭配，take the chance to do 是高频结构。"
+    },
+    "q-zj-2024-jan-045": {
+      "blankId": "blank-zj-2024-jan-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "宾语是 a two-year professional school，attend a school 表示“上学、就读”，施受关系成立，符合“为尽快找工作而读两年职校”的语境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "visited",
+          "meaning": "参观、拜访"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "financed",
+          "meaning": "资助、为……提供资金"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "founded",
+          "meaning": "创立、创办"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a two-year professional school",
+          "signalSide": "context-after",
+          "targetText": "attended a two-year professional school",
+          "relation": "attend 的宾语是 school，attend school 表示“就读、上学”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "to quickly find a job",
+          "signalSide": "context-after",
+          "targetText": "attended",
+          "relation": "to 引出目的：读两年职校是为了尽快找工作，故为“就读”。"
+        }
+      ],
+      "teachingNote": "动词空看宾语，school 与 attend 构成最自然的就读搭配。"
+    },
+    "q-zj-2024-jan-046": {
+      "blankId": "blank-zj-2024-jan-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "宾语是 highways，下文又称其为 highway builder，building highways（修建公路）与他的职业身份相呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "sweeping",
+          "meaning": "清扫"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "checking",
+          "meaning": "检查"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "guarding",
+          "meaning": "守卫、看守"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "highways",
+          "signalSide": "context-after",
+          "targetText": "building highways",
+          "relation": "动名词的宾语是 highways，build highways 表示“修公路”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "highway builder",
+          "signalSide": "context-after",
+          "targetText": "building",
+          "relation": "后文 highway builder（修路工）直接点明其工作是修公路，呼应 building。"
+        }
+      ],
+      "teachingNote": "动词空可借后文对人物身份的重复指称（highway builder）来定位。"
+    },
+    "q-zj-2024-jan-047": {
+      "blankId": "blank-zj-2024-jan-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "下文 admirable、highly informed 等褒义评价奠定钦佩基调，remarkable（非凡的、引人注目的）与作者赞叹这位修路工每天体力劳动后仍坚持学习的情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "typical",
+          "meaning": "典型的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "obvious",
+          "meaning": "明显的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "natural",
+          "meaning": "自然的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "admirable",
+          "signalSide": "context-after",
+          "targetText": "remarkable",
+          "relation": "后文 admirable 的赞赏基调，与 remarkable 的褒义情感一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "spent hours studying every day after hard physical labor",
+          "signalSide": "context-after",
+          "targetText": "the most remarkable",
+          "relation": "“重体力劳动后每天仍学习数小时”这一事实最令人惊叹，故 the most remarkable。"
+        }
+      ],
+      "teachingNote": "情感形容词空要与全文对人物的褒贬态度保持一致。"
+    },
+    "q-zj-2024-jan-048": {
+      "blankId": "blank-zj-2024-jan-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "宾语是 a translated Emerson passage，quote（引用）一段爱默生译文最符合“张口就能引经据典”的博学形象。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "publish",
+          "meaning": "出版、发表"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "сорy",
+          "meaning": "抄写、复制"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "download",
+          "meaning": "下载"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a translated Emerson passage",
+          "signalSide": "context-after",
+          "targetText": "quote a translated Emerson passage",
+          "relation": "quote 的宾语是 passage，引用一段译文。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Without batting an eye",
+          "signalSide": "context-before",
+          "targetText": "quote",
+          "relation": "“眼睛都不眨一下”说明信手拈来地引用，呼应 quote。"
+        }
+      ],
+      "teachingNote": "动词空看宾语 passage，并结合“张口就来”的语气锁定“引用”。"
+    },
+    "q-zj-2024-jan-049": {
+      "blankId": "blank-zj-2024-jan-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "前有 Emerson passage、literary influence，后问 Russian authors，文学话题场内 American writers（美国作家）与 authors 同义呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "historians",
+          "meaning": "历史学家"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "workers",
+          "meaning": "工人"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "students",
+          "meaning": "学生"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "literary influence of American",
+          "signalSide": "context-before",
+          "targetText": "literary influence of American writers",
+          "relation": "writers 作 of 的宾语，构成“美国作家的文学影响”，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "literary influence",
+          "signalSide": "context-before",
+          "targetText": "American writers",
+          "relation": "literary（文学的）属同一语义场，问的是美国“作家”的文学影响。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Russian authors",
+          "signalSide": "context-after",
+          "targetText": "writers",
+          "relation": "下文 Russian authors 与 American writers 平行呼应，writers≈authors。"
+        }
+      ],
+      "teachingNote": "名词空抓话题场，文学语境下 writers 与 authors 互为同义呼应。"
+    },
+    "q-zj-2024-jan-050": {
+      "blankId": "blank-zj-2024-jan-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "全文为事后追述（I had... wonderful encounter），作者“回忆起”对方在某一刻发问，recall him asking 表示“记得他曾问”，与叙事时态一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "anticipate",
+          "meaning": "预料、期待"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "imagine",
+          "meaning": "想象"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "catch",
+          "meaning": "抓住、听清"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "him asking at one point",
+          "signalSide": "context-after",
+          "targetText": "recall him asking",
+          "relation": "recall sb. doing 表示“记得某人做过某事”，宾语是 him asking。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "at one point",
+          "signalSide": "context-after",
+          "targetText": "recall",
+          "relation": "at one point 表明这是对过去某一刻的追忆，呼应 recall。"
+        }
+      ],
+      "teachingNote": "动词空注意全文是事后回忆的叙述视角，优先选“回想起”。"
+    },
+    "q-zj-2024-jan-051": {
+      "blankId": "blank-zj-2024-jan-051",
+      "blankNo": 51,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "宾语是 my assumptions（先入之见），rely on my assumptions 表示“依赖、固守自己的成见”，与下文“但这个人让我无法这么做”的转折相吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "look into",
+          "meaning": "调查、研究"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "go over",
+          "meaning": "复习、检查"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "deal with",
+          "meaning": "处理、应对"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my assumptions",
+          "signalSide": "context-after",
+          "targetText": "rely on my assumptions",
+          "relation": "rely on 的宾语是 my assumptions，表示“依赖自己的假设/成见”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "But this highly informed",
+          "signalSide": "context-after",
+          "targetText": "rely on",
+          "relation": "But 转折说明本可“轻易固守成见”，却被对方打破，反推空处为 rely on。"
+        }
+      ],
+      "teachingNote": "短语空借 But 转折反推前句含义，再验证与 assumptions 的搭配。"
+    },
+    "q-zj-2024-jan-052": {
+      "blankId": "blank-zj-2024-jan-052",
+      "blankNo": 52,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "与 highly informed、admirable 并列修饰 person，前文强调他靠自己每天苦读、博览群书，self-educated（自学成才的）最贴合这一形象。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "well-behaved",
+          "meaning": "举止得体的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "multi-skilled",
+          "meaning": "多技能的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "warm-hearted",
+          "meaning": "热心的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "spent hours studying every day",
+          "signalSide": "context-before",
+          "targetText": "self-educated",
+          "relation": "前文“每天自学数小时”正是 self-educated（自学成才）的依据。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "highly informed",
+          "signalSide": "context-before",
+          "targetText": "self-educated",
+          "relation": "与 highly informed、admirable 并列修饰同一人，语义褒义且一致。"
+        }
+      ],
+      "teachingNote": "形容词空回找前文事实依据，“每天自学”直接对应 self-educated。"
+    },
+    "q-zj-2024-jan-053": {
+      "blankId": "blank-zj-2024-jan-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "双宾语结构 me + how much one can gain，show sb. how... 表示“向某人展示/让某人明白”，与全文“他让我领悟到”的收尾一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "asked",
+          "meaning": "询问"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "warned",
+          "meaning": "警告"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promised",
+          "meaning": "承诺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "me just how much one can gain",
+          "signalSide": "context-after",
+          "targetText": "showed me how much one can gain",
+          "relation": "show sb. how... 双宾结构，向我展示能收获多少。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "In the course of a couple of hours",
+          "signalSide": "context-before",
+          "targetText": "showed",
+          "relation": "几小时交谈过程中，对方用言行让作者明白，呼应 show。"
+        }
+      ],
+      "teachingNote": "动词空看其后接 me + how 从句，show sb. how 是典型“让某人明白”结构。"
+    },
+    "q-zj-2024-jan-054": {
+      "blankId": "blank-zj-2024-jan-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "全文以一次旅途中的相遇为线索，结尾点题“以开放心态旅行能收获良多”，traveling with an open mind 与开篇 all travelers long for 首尾呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "reading",
+          "meaning": "阅读"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "searching",
+          "meaning": "搜寻、查找"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teaching",
+          "meaning": "教学"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with an open mind",
+          "signalSide": "context-after",
+          "targetText": "traveling with an open mind",
+          "relation": "traveling with an open mind 表示“以开放心态去旅行”，搭配自然。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "all travelers long for",
+          "signalSide": "context-before",
+          "targetText": "traveling",
+          "relation": "开篇 travelers 与结尾 traveling 首尾呼应，点明旅行主题。"
+        }
+      ],
+      "teachingNote": "名词空回扣全文主旨与首段关键词，旅行是贯穿始终的话题。"
+    },
+    "q-zj-2024-jan-055": {
+      "blankId": "blank-zj-2024-jan-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "与 with locals 搭配，engage with（与……交流互动）表示“与各行各业的当地人交往”，呼应全文与陌生人深入交谈的收获。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cooperate",
+          "meaning": "合作"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "side",
+          "meaning": "站在……一边、支持"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "negotiate",
+          "meaning": "谈判、协商"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with locals from all walks of life",
+          "signalSide": "context-after",
+          "targetText": "engage with locals",
+          "relation": "engage with sb. 表示“与某人交流互动”，宾语为 locals。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "willingness to",
+          "signalSide": "context-before",
+          "targetText": "engage",
+          "relation": "“乐于”与各行各业的人交往，呼应主旨中的交流收获，故为 engage。"
+        }
+      ],
+      "teachingNote": "动词空看介词搭配 with locals，engage with 是“与人交往互动”的固定用法。"
+    }
+  }
+}

@@ -1,0 +1,3324 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-zj-2023-jan",
+    "title": "2023年浙江卷高考真题英语试卷（1月）-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2023年浙江卷高考真题英语试卷（1月）-答案版.docx",
+      "sha256": "7b5972933e4deaa85b3b6874faa04e6595acc9c50008966cc1eab5ef8d1dedc5",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-zj-2023-jan-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-zj-2023-jan-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-zj-2023-jan-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-zj-2023-jan-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-zj-2023-jan-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-zj-2023-jan-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2023-jan-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-zj-2023-jan-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2023-jan-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-zj-2023-jan-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2023-jan-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2023-jan-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2023-jan-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2023-jan-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-zj-2023-jan-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-zj-2023-jan-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2023-jan-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-zj-2023-jan-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2023-jan-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2023-jan-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2023-jan-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2023-jan-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2023-jan-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2023-jan-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2023-jan-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2023-jan-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2023-jan-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2023-jan-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2023-jan-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: A few weeks later, I went to the farm again.\n\nParagraph 2: I was just about to leave when the hummingbird appeared."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2023-jan-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-zj-2023-jan-reading-a": {
+        "groupId": "group-zj-2023-jan-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-zj-2023-jan-021",
+          "q-zj-2023-jan-022",
+          "q-zj-2023-jan-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-1",
+              "text": "Explorers Camp"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-2",
+              "text": "• Full day camp for kids aged 5 -- 13."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-3",
+              "text": "• Monday -- Friday, July 8 -- 26, 9 am -- 4 pm."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-4",
+              "text": "Week 1 | July 8 -- 12"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-5",
+              "text": "Week 2 | July 15 --19"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-6",
+              "text": "Week 3 | July 22 -- 26"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-7",
+              "text": "• Register for a single week or multiple weeks."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-8",
+              "text": "• Fees: $365 per week."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-9",
+              "text": "• The last day to cancel registration and receive a full refund (退款) is June 15. Camp Structure"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-10",
+              "text": "The day is divided into two thematic sessions per age group. Campers have a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (1 pm to 4 pm) . Snack periods are held throughout the day. All campers should bring their own bagged lunch and snacks. Camp Content"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-11",
+              "text": "Explorers Camp organizes engaging arts, history and science-related activities in every class, and focuses on a range of topics that emphasize active learning, exploration and, most of all, fun! All camp sessions are created with age-appropriate activities that are tailored to the multiple ways that kids learn. Camp Staff"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-12",
+              "text": "Campers enjoy a staff-to-child ratio ranging from 1:4 to 1:7 depending on the age group. Instructors are passionate educators who are experts in their fields and have undergone training and a background check."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-reading-b": {
+        "groupId": "group-zj-2023-jan-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-zj-2023-jan-024",
+          "q-zj-2023-jan-025",
+          "q-zj-2023-jan-026",
+          "q-zj-2023-jan-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-1",
+              "text": "Live with roommates? Have friends and family around you? Chances are that if you’re looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-2",
+              "text": "I experienced this when I started switching to a zero waste lifestyle five years ago, as I was living with my parents, and I continue to experience this with my husband, as he is not completely zero waste like me. I’ve learned a few things along the way though, which I hope you’ll find encouraging if you’re doing your best to figure out how you can make the change in a not-always-supportive household."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-3",
+              "text": "Zero waste was a radical lifestyle movement a few years back. I remember showing my parents a video of Bea Johnson, sharing how cool I thought it would be to buy groceries with jars, and have so little trash! A few days later, I came back with my first jars of zero waste groceries, and my dad commented on how silly it was for me to carry jars everywhere. It came off as a bit discouraging."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-4",
+              "text": "Yet as the months of reducing waste continued, I did what I could that was within my own reach. I had my own bedroom, so I worked on removing things I didn’t need. Since I had my own toiletries (洗漱用品) , I was able to start personalizing my routine to be more sustainable. I also offered to cook every so often, so I portioned out a bit of the cupboard for my own zero waste groceries. Perhaps your household won’t entirely make the switch, but you may have some control over your own personal spaces to make the changes you desire."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-5",
+              "text": "As you make your lifestyle changes, you may find yourself wanting to speak up for yourself if others comment on what you’re doing, which can turn itself into a whole household debate. If you have individuals who are not on board, your words probably won’t do much and can often leave you feeling more discouraged."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-6",
+              "text": "So here is my advice: Lead by action."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-reading-c": {
+        "groupId": "group-zj-2023-jan-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-zj-2023-jan-028",
+          "q-zj-2023-jan-029",
+          "q-zj-2023-jan-030",
+          "q-zj-2023-jan-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-1",
+              "text": "A machine can now not only beat you at chess, it can also outperform you in debate. Last week, in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel’s former national debating champion."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-2",
+              "text": "Brilliant though it is, Project Debater has some weaknesses. It takes sentences from its library of documents and prebuilt arguments and strings them together. This can lead to the kinds of errors no human would make. Such wrinkles will no doubt be ironed out, yet they also point to a fundamental problem. As Kristian Hammond, professor of electrical engineering and computer science at Northwestern University, put it: “There’s never a stage at which the system knows what it’s talking about.”"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-3",
+              "text": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines. A computer works with symbols. Its program specifies a set of rules to transform one string of symbols into another. But it does not specify what those symbols mean. Indeed, to a computer, meaning is irrelevant. Humans, in thinking, talking, reading and writing, also work with symbols. But for humans, meaning is everything. When we communicate, we communicate meaning. What matters is not just the outside of a string of symbols, but the inside too, not just how they are arranged but what they mean."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-4",
+              "text": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads. The rules that assign meaning lie not just inside our heads, but also outside, in society, in social memory, social conventions and social relations. It is this that distinguishes humans from machines. And that’s why, however astonishing Project Debater may seem, the tradition that began with Socrates and Confucius will not end with artificial intelligence."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-reading-d": {
+        "groupId": "group-zj-2023-jan-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-zj-2023-jan-032",
+          "q-zj-2023-jan-033",
+          "q-zj-2023-jan-034",
+          "q-zj-2023-jan-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-1",
+              "text": "According to the Solar Energy Industry Association, the number of solar panels installed (安装) has grown rapidly in the past decade, and it has to grow even faster to meet climate goals. But all of that growth will take up a lot of space, and though more and more people accept the concept of solar energy, few like large solar panels to be installed near them."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-2",
+              "text": "Solar developers want to put up panels as quickly and cheaply as possible, so they haven’t given much thought to what they put under them. Often, they’ll end up filling the area with small stones and using chemicals to control weeds. The result is that many communities, especially in farming regions, see solar farms as destroyers of the soil."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-3",
+              "text": "“Solar projects need to be good neighbors,” says Jordan Macknick, the head of the Innovative Site Preparation and Impact Reductions on the Environment (InSPIRE) project. “They need to be protectors of the land and contribute to the agricultural economy.” InSPIRE is investigating practical approaches to “low-impact” solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land. One of the easiest low-impact solar strategies is providing habitat for pollinators (传粉昆虫) ."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-4",
+              "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U. S. agricultural economy. Over 28 states have passed laws related to pollinator habitat protection and pesticide use. Conservation organizations put out pollinator-friendliness guidelines for home gardens, businesses, schools, cities—and now there are guidelines for solar farms."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-5",
+              "text": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction. “These pollinator-friendly solar farms can have a valuable impact on everything that’s going on in the landscape,” says Macknick."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-seven-choices": {
+        "groupId": "group-zj-2023-jan-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-zj-2023-jan-036",
+          "q-zj-2023-jan-037",
+          "q-zj-2023-jan-038",
+          "q-zj-2023-jan-039",
+          "q-zj-2023-jan-040"
+        ],
+        "blankIds": [
+          "blank-zj-2023-jan-036",
+          "blank-zj-2023-jan-037",
+          "blank-zj-2023-jan-038",
+          "blank-zj-2023-jan-039",
+          "blank-zj-2023-jan-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Train trips aren’t for impatient types."
+          },
+          {
+            "label": "B",
+            "text": "You’ll have views from both sides of the train."
+          },
+          {
+            "label": "C",
+            "text": "The temperature on rail cars is often hard to control."
+          },
+          {
+            "label": "D",
+            "text": "That’s particularly true during busy summer months."
+          },
+          {
+            "label": "E",
+            "text": "You might have to wait longer than 24 hours to catch the next one."
+          },
+          {
+            "label": "F",
+            "text": "Chances are the cost will be a lot less than the cost of one bedroom."
+          },
+          {
+            "label": "G",
+            "text": "He may also book you in a sleeping car that’s right next to the diner."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-seven-title",
+              "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train? Compared to other alternatives, it’s comfortable and relaxing. Here is some advice on how to make a trip by rail as pleasant as possible."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-seven-p1",
+              "text": "Plan ahead. Most long-distance trains, especially the sleeping car accommodations, sell out very quickly. __36__ 1   But no matter when you travel, it’s a good idea to make your reservations at least 90 days in advance."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-seven-p2",
+              "text": "Use a travel agent. Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations. A good one can sometimes find you discounted tickets. __37__ 2   Then you won’t have to walk through several cars on a moving train three times a day for your meals."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-seven-p3",
+              "text": "Bring a blanket. When you’re riding on trains, you won’t be provided with a blanket for free, even if your trip is an overnight one. __38__ 3   In the summer in particular, the air conditioning can make them quite cold."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-seven-p4",
+              "text": "Arrive early. Most trains operate just once a day and some run only three times a week, so missing yours can be a disaster. __39__ 4   Note: The times listed on the schedules are departure times, not arrival times."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-seven-p5",
+              "text": "Have fun. __40__ 5   Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window. To calculate your speed as you do, divide 3,600 (the number of seconds in an hour) by the number of seconds it takes you to travel one mile (the distance between two mileposts). If it takes the train 53 seconds to travel one mile, you’re going 67.92 mph."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-cloze": {
+        "groupId": "group-zj-2023-jan-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-zj-2023-jan-041",
+          "q-zj-2023-jan-042",
+          "q-zj-2023-jan-043",
+          "q-zj-2023-jan-044",
+          "q-zj-2023-jan-045",
+          "q-zj-2023-jan-046",
+          "q-zj-2023-jan-047",
+          "q-zj-2023-jan-048",
+          "q-zj-2023-jan-049",
+          "q-zj-2023-jan-050",
+          "q-zj-2023-jan-051",
+          "q-zj-2023-jan-052",
+          "q-zj-2023-jan-053",
+          "q-zj-2023-jan-054",
+          "q-zj-2023-jan-055"
+        ],
+        "blankIds": [
+          "blank-zj-2023-jan-041",
+          "blank-zj-2023-jan-042",
+          "blank-zj-2023-jan-043",
+          "blank-zj-2023-jan-044",
+          "blank-zj-2023-jan-045",
+          "blank-zj-2023-jan-046",
+          "blank-zj-2023-jan-047",
+          "blank-zj-2023-jan-048",
+          "blank-zj-2023-jan-049",
+          "blank-zj-2023-jan-050",
+          "blank-zj-2023-jan-051",
+          "blank-zj-2023-jan-052",
+          "blank-zj-2023-jan-053",
+          "blank-zj-2023-jan-054",
+          "blank-zj-2023-jan-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-cloze-title",
+              "text": "The sun was beginning to sink as I set off into the Harenna Forest. I was on my way to __41__ a unique honey harvest. Here, in south-east Ethiopia, hand-carved beehives (蜂箱) are placed in the __42__ . Reaching them to get the honey is difficult—and often __43__ ."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-cloze-p1",
+              "text": "I __44__ beekeeper Ziyad over a wide stretch of grassland before entering a thick jungle. Ziyad began preparations. He __45__ handfuls of damp tree leaves, wrapped them with string, and __46__ the bunch to create a torch (火把) . Then, with one end of a rope tied to his waist and the other end around the trunk of a tree, Ziyad began __47__ . He stopped every few minutes to move the __48__ higher up the tree trunk. __49__ , Ziyad got close to the hive which was around 20 metres above the ground. Sitting on a branch, he __50__ towards it and blew smoke from his torch into a tiny hole in the hive. Suddenly, Ziyad let out a sharp cry. Within seconds, he’d __51__ the trunk and was back on the ground."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-cloze-p2",
+              "text": "It was too __52__ to collect the honey. A cool summer had delayed __53__ . Baby bees were still in the honeycombs (蜂巢) . The adult bees were __54__ and kept attacking as Ziyad escaped from the tree. He had to wait for the right __55__ to go back up."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-grammar-fill": {
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-zj-2023-jan-056",
+          "q-zj-2023-jan-057",
+          "q-zj-2023-jan-058",
+          "q-zj-2023-jan-059",
+          "q-zj-2023-jan-060",
+          "q-zj-2023-jan-061",
+          "q-zj-2023-jan-062",
+          "q-zj-2023-jan-063",
+          "q-zj-2023-jan-064",
+          "q-zj-2023-jan-065"
+        ],
+        "blankIds": [
+          "blank-zj-2023-jan-056",
+          "blank-zj-2023-jan-057",
+          "blank-zj-2023-jan-058",
+          "blank-zj-2023-jan-059",
+          "blank-zj-2023-jan-060",
+          "blank-zj-2023-jan-061",
+          "blank-zj-2023-jan-062",
+          "blank-zj-2023-jan-063",
+          "blank-zj-2023-jan-064",
+          "blank-zj-2023-jan-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-grammar-fill-title",
+              "text": "During China’s dynastic period, emperors planned the city of Beijing __56__arranged the residential areas according to social classes. The term “hutong”, __57__ (original) meaning “water well” in Mongolian, appeared first during the Yuan Dynasty."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-grammar-fill-p1",
+              "text": "In the Ming Dynasty, the center was the Forbidden City, __58__ (surround) in concentric (同心的) circles by the Inner City and Outer City. Citizens of higher social classes __59__ (permit) to live closer to the center of the circles. The large siheyuan of these high-ranking officials and wealthy businessmen often __60__ (feature) beautifully carved and painted roof beams and pillars (柱子) . The hutongs they formed were orderly, lined by __61__ (space) homes and walled gardens. Farther from the center lived the commoners and laborers. Their siheyuan were far smaller in scale and __62__ (simple) in design and decoration, and the hutongs were narrower."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-grammar-fill-p2",
+              "text": "Hutongs represent an important cultural element of the city of Beijing. Thanks to Beijing’s long history __63__capital of China, almost every hutong has its stories, and some are even associated with historic __64__ (event) . In contrast to the court life and upper-class culture represented by the Forbidden City, the Summer Palace, and the Temple of Heaven, the hutongs reflect __65__culture of grassroots Beijingers."
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-writing-application": {
+        "groupId": "group-zj-2023-jan-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2023-jan-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-writing-app-title",
+              "text": "上周末你参加了校学生会组织的“认识我们身边的植物”活动。请为校英文报写篇报道，内容包括："
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-app-p1",
+              "text": "（1）活动的过程；"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-app-p2",
+              "text": "（2）收获与感想。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-app-p3",
+              "text": "（1）写作词数应为80左右；"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-app-p4",
+              "text": "（2）可以适当增加细节，以使行文连贯。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-app-p5",
+              "text": "Getting to Know the Plants Around Us"
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-writing-continuation": {
+        "groupId": "group-zj-2023-jan-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2023-jan-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-writing-cont-title",
+              "text": "I was invited to a cookout on an old friend’s farm in western Washington. I parked my car outside the farm and walked past a milking house which had apparently not been used in many years. A noise at a window caught my attention, so I entered it. It was a hummingbird (蜂鸟) , desperately trying to escape. She was covered in spider-webs (蛛网) and was barely able to move her wings. She ceased her struggle the instant I picked her up."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-cont-p1",
+              "text": "With the bird in my cupped hand, I looked around to see how she had gotten in. The broken window glass was the likely answer. I stuffed a piece of cloth into the hole and took her outside, closing the door securely behind me."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-cont-p2",
+              "text": "When I opened my hand, the bird did not fly away; she sat looking at me with her bright eyes. I removed the sticky spider-webs that covered her head and wings. Still, she made no attempt to fly. Perhaps she had been struggling against the window too long and was too tired? Or too thirsty?"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-cont-p3",
+              "text": "As I carried her up the blackberry-lined path toward my car where I kept a water bottle, she began to move. I stopped, and she soon took wing but did not immediately fly away."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-cont-p4",
+              "text": "Hovering (悬停) , she approached within six inches of my face. For a very long moment, this tiny creature looked into my eyes, turning her head from side to side. Then she flew quickly out of sight."
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-writing-cont-p5",
+              "text": "During the cookout, I told my hosts about the hummingbird incident. They promised to fix the window. As I was departing, my friends walked me to my car. I was standing by the car when a hummingbird flew to the center of our group and began hovering. She turned from person to person until she came to me. She again looked directly into my eyes, then let out a squeaking call and was gone. For a moment, all were speechless. Then someone said, “She must have come to say good-bye.”"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2023-jan-021": {
+        "questionId": "q-zj-2023-jan-021",
+        "questionNo": 21,
+        "groupId": "group-zj-2023-jan-reading-a",
+        "stem": "On which of the following dates can you cancel your registration with a full refund?",
+        "options": [
+          {
+            "label": "A",
+            "text": "June 12."
+          },
+          {
+            "label": "B",
+            "text": "June 22."
+          },
+          {
+            "label": "C",
+            "text": "July 19."
+          },
+          {
+            "label": "D",
+            "text": "July 26."
+          }
+        ]
+      },
+      "q-zj-2023-jan-022": {
+        "questionId": "q-zj-2023-jan-022",
+        "questionNo": 22,
+        "groupId": "group-zj-2023-jan-reading-a",
+        "stem": "How are campers divided into different groups?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By gender."
+          },
+          {
+            "label": "B",
+            "text": "By nationality."
+          },
+          {
+            "label": "C",
+            "text": "By interest."
+          },
+          {
+            "label": "D",
+            "text": "By age."
+          }
+        ]
+      },
+      "q-zj-2023-jan-023": {
+        "questionId": "q-zj-2023-jan-023",
+        "questionNo": 23,
+        "groupId": "group-zj-2023-jan-reading-a",
+        "stem": "How many hours of class will you have altogether if you register for a single week? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "15."
+          },
+          {
+            "label": "B",
+            "text": "21."
+          },
+          {
+            "label": "C",
+            "text": "30."
+          },
+          {
+            "label": "D",
+            "text": "42."
+          }
+        ]
+      },
+      "q-zj-2023-jan-024": {
+        "questionId": "q-zj-2023-jan-024",
+        "questionNo": 24,
+        "groupId": "group-zj-2023-jan-reading-b",
+        "stem": "What do the underlined words \"jump on that bandwagon\" mean in the first paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Share an apartment with you."
+          },
+          {
+            "label": "B",
+            "text": "Join you in what you're doing."
+          },
+          {
+            "label": "C",
+            "text": "Transform your way of living."
+          },
+          {
+            "label": "D",
+            "text": "Help you to make the decision."
+          }
+        ]
+      },
+      "q-zj-2023-jan-025": {
+        "questionId": "q-zj-2023-jan-025",
+        "questionNo": 25,
+        "groupId": "group-zj-2023-jan-reading-b",
+        "stem": "What was the attitude of the author's father toward buying groceries with jars?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He disapproved of it."
+          },
+          {
+            "label": "B",
+            "text": "He was favorable to it."
+          },
+          {
+            "label": "C",
+            "text": "He was tolerant of it."
+          },
+          {
+            "label": "D",
+            "text": "He didn't care about it."
+          }
+        ]
+      },
+      "q-zj-2023-jan-026": {
+        "questionId": "q-zj-2023-jan-026",
+        "questionNo": 26,
+        "groupId": "group-zj-2023-jan-reading-b",
+        "stem": "What can we infer about the author?",
+        "options": [
+          {
+            "label": "A",
+            "text": "She is quite good at cooking."
+          },
+          {
+            "label": "B",
+            "text": "She respects others' privacy."
+          },
+          {
+            "label": "C",
+            "text": "She enjoys being a housewife."
+          },
+          {
+            "label": "D",
+            "text": "She is a determined person."
+          }
+        ]
+      },
+      "q-zj-2023-jan-027": {
+        "questionId": "q-zj-2023-jan-027",
+        "questionNo": 27,
+        "groupId": "group-zj-2023-jan-reading-b",
+        "stem": "What is the text mainly about? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "How to get on well with other family members."
+          },
+          {
+            "label": "B",
+            "text": "How to have one's own personal space at home."
+          },
+          {
+            "label": "C",
+            "text": "How to live a zero waste lifestyle in a household."
+          },
+          {
+            "label": "D",
+            "text": "How to control the budget when buying groceries."
+          }
+        ]
+      },
+      "q-zj-2023-jan-028": {
+        "questionId": "q-zj-2023-jan-028",
+        "questionNo": 28,
+        "groupId": "group-zj-2023-jan-reading-c",
+        "stem": "Why does the author mention Noa Ovadia in the first paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To explain the use of a software program."
+          },
+          {
+            "label": "B",
+            "text": "To show the cleverness of Project Debater."
+          },
+          {
+            "label": "C",
+            "text": "To introduce the designer of Project Debater."
+          },
+          {
+            "label": "D",
+            "text": "To emphasize the fairness of the competition."
+          }
+        ]
+      },
+      "q-zj-2023-jan-029": {
+        "questionId": "q-zj-2023-jan-029",
+        "questionNo": 29,
+        "groupId": "group-zj-2023-jan-reading-c",
+        "stem": "What does the underlined word \"wrinkles\" in Paragraph 2 refer to?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Arguments."
+          },
+          {
+            "label": "B",
+            "text": "Doubts."
+          },
+          {
+            "label": "C",
+            "text": "Errors."
+          },
+          {
+            "label": "D",
+            "text": "Differences."
+          }
+        ]
+      },
+      "q-zj-2023-jan-030": {
+        "questionId": "q-zj-2023-jan-030",
+        "questionNo": 30,
+        "groupId": "group-zj-2023-jan-reading-c",
+        "stem": "What is Project Debater unable to do according to Hammond?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Create rules."
+          },
+          {
+            "label": "B",
+            "text": "Comprehend meaning."
+          },
+          {
+            "label": "C",
+            "text": "Talk fluently."
+          },
+          {
+            "label": "D",
+            "text": "Identify difficult words."
+          }
+        ]
+      },
+      "q-zj-2023-jan-031": {
+        "questionId": "q-zj-2023-jan-031",
+        "questionNo": 31,
+        "groupId": "group-zj-2023-jan-reading-c",
+        "stem": "What can we learn from the last paragraph? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "Social interaction is key to understanding symbols."
+          },
+          {
+            "label": "B",
+            "text": "The human brain has potential yet to be developed."
+          },
+          {
+            "label": "C",
+            "text": "Ancient philosophers set good examples for debaters."
+          },
+          {
+            "label": "D",
+            "text": "Artificial intelligence ensures humans a bright future."
+          }
+        ]
+      },
+      "q-zj-2023-jan-032": {
+        "questionId": "q-zj-2023-jan-032",
+        "questionNo": 32,
+        "groupId": "group-zj-2023-jan-reading-d",
+        "stem": "What do solar developers often ignore?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The decline in the demand for solar energy."
+          },
+          {
+            "label": "B",
+            "text": "The negative impact of installing solar panels."
+          },
+          {
+            "label": "C",
+            "text": "The rising labor cost of building solar farms."
+          },
+          {
+            "label": "D",
+            "text": "The most recent advances in solar technology."
+          }
+        ]
+      },
+      "q-zj-2023-jan-033": {
+        "questionId": "q-zj-2023-jan-033",
+        "questionNo": 33,
+        "groupId": "group-zj-2023-jan-reading-d",
+        "stem": "What does InSPIRE aim to do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Improve the productivity of local farms."
+          },
+          {
+            "label": "B",
+            "text": "Invent new methods for controlling weeds."
+          },
+          {
+            "label": "C",
+            "text": "Make solar projects environmentally friendly."
+          },
+          {
+            "label": "D",
+            "text": "Promote the use of solar energy in rural areas."
+          }
+        ]
+      },
+      "q-zj-2023-jan-034": {
+        "questionId": "q-zj-2023-jan-034",
+        "questionNo": 34,
+        "groupId": "group-zj-2023-jan-reading-d",
+        "stem": "What is the purpose of the laws mentioned in Paragraph 4?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To conserve pollinators."
+          },
+          {
+            "label": "B",
+            "text": "To restrict solar development."
+          },
+          {
+            "label": "C",
+            "text": "To diversify the economy."
+          },
+          {
+            "label": "D",
+            "text": "To ensure the supply of energy."
+          }
+        ]
+      },
+      "q-zj-2023-jan-035": {
+        "questionId": "q-zj-2023-jan-035",
+        "questionNo": 35,
+        "groupId": "group-zj-2023-jan-reading-d",
+        "stem": "Which of the following is the best title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Pollinators: To Leave or to Stay"
+          },
+          {
+            "label": "B",
+            "text": "Solar Energy: Hope for the Future"
+          },
+          {
+            "label": "C",
+            "text": "InSPIRE: A Leader in Agriculture"
+          },
+          {
+            "label": "D",
+            "text": "Solar Farms: A New Development"
+          }
+        ]
+      },
+      "q-zj-2023-jan-036": {
+        "questionId": "q-zj-2023-jan-036",
+        "questionNo": 36,
+        "groupId": "group-zj-2023-jan-seven-choices",
+        "stem": "36",
+        "blankId": "blank-zj-2023-jan-036"
+      },
+      "q-zj-2023-jan-037": {
+        "questionId": "q-zj-2023-jan-037",
+        "questionNo": 37,
+        "groupId": "group-zj-2023-jan-seven-choices",
+        "stem": "37",
+        "blankId": "blank-zj-2023-jan-037"
+      },
+      "q-zj-2023-jan-038": {
+        "questionId": "q-zj-2023-jan-038",
+        "questionNo": 38,
+        "groupId": "group-zj-2023-jan-seven-choices",
+        "stem": "38",
+        "blankId": "blank-zj-2023-jan-038"
+      },
+      "q-zj-2023-jan-039": {
+        "questionId": "q-zj-2023-jan-039",
+        "questionNo": 39,
+        "groupId": "group-zj-2023-jan-seven-choices",
+        "stem": "39",
+        "blankId": "blank-zj-2023-jan-039"
+      },
+      "q-zj-2023-jan-040": {
+        "questionId": "q-zj-2023-jan-040",
+        "questionNo": 40,
+        "groupId": "group-zj-2023-jan-seven-choices",
+        "stem": "40",
+        "blankId": "blank-zj-2023-jan-040"
+      },
+      "q-zj-2023-jan-041": {
+        "questionId": "q-zj-2023-jan-041",
+        "questionNo": 41,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "41",
+        "blankId": "blank-zj-2023-jan-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "share"
+          },
+          {
+            "label": "B",
+            "text": "collect"
+          },
+          {
+            "label": "C",
+            "text": "celebrate"
+          },
+          {
+            "label": "D",
+            "text": "witness"
+          }
+        ]
+      },
+      "q-zj-2023-jan-042": {
+        "questionId": "q-zj-2023-jan-042",
+        "questionNo": 42,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "42",
+        "blankId": "blank-zj-2023-jan-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "courtyards"
+          },
+          {
+            "label": "B",
+            "text": "fields"
+          },
+          {
+            "label": "C",
+            "text": "treetops"
+          },
+          {
+            "label": "D",
+            "text": "caves"
+          }
+        ]
+      },
+      "q-zj-2023-jan-043": {
+        "questionId": "q-zj-2023-jan-043",
+        "questionNo": 43,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "43",
+        "blankId": "blank-zj-2023-jan-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "urgent"
+          },
+          {
+            "label": "B",
+            "text": "dangerous"
+          },
+          {
+            "label": "C",
+            "text": "expensive"
+          },
+          {
+            "label": "D",
+            "text": "pointless"
+          }
+        ]
+      },
+      "q-zj-2023-jan-044": {
+        "questionId": "q-zj-2023-jan-044",
+        "questionNo": 44,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "44",
+        "blankId": "blank-zj-2023-jan-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "searched"
+          },
+          {
+            "label": "B",
+            "text": "recognised"
+          },
+          {
+            "label": "C",
+            "text": "followed"
+          },
+          {
+            "label": "D",
+            "text": "invited"
+          }
+        ]
+      },
+      "q-zj-2023-jan-045": {
+        "questionId": "q-zj-2023-jan-045",
+        "questionNo": 45,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "45",
+        "blankId": "blank-zj-2023-jan-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "gathered"
+          },
+          {
+            "label": "B",
+            "text": "cleaned"
+          },
+          {
+            "label": "C",
+            "text": "dropped"
+          },
+          {
+            "label": "D",
+            "text": "checked"
+          }
+        ]
+      },
+      "q-zj-2023-jan-046": {
+        "questionId": "q-zj-2023-jan-046",
+        "questionNo": 46,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "46",
+        "blankId": "blank-zj-2023-jan-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "shook"
+          },
+          {
+            "label": "B",
+            "text": "lit"
+          },
+          {
+            "label": "C",
+            "text": "measured"
+          },
+          {
+            "label": "D",
+            "text": "decorated"
+          }
+        ]
+      },
+      "q-zj-2023-jan-047": {
+        "questionId": "q-zj-2023-jan-047",
+        "questionNo": 47,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "47",
+        "blankId": "blank-zj-2023-jan-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "jumping"
+          },
+          {
+            "label": "B",
+            "text": "talking"
+          },
+          {
+            "label": "C",
+            "text": "testing"
+          },
+          {
+            "label": "D",
+            "text": "climbing"
+          }
+        ]
+      },
+      "q-zj-2023-jan-048": {
+        "questionId": "q-zj-2023-jan-048",
+        "questionNo": 48,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "48",
+        "blankId": "blank-zj-2023-jan-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "hives"
+          },
+          {
+            "label": "B",
+            "text": "leaves"
+          },
+          {
+            "label": "C",
+            "text": "rope"
+          },
+          {
+            "label": "D",
+            "text": "honey"
+          }
+        ]
+      },
+      "q-zj-2023-jan-049": {
+        "questionId": "q-zj-2023-jan-049",
+        "questionNo": 49,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "49",
+        "blankId": "blank-zj-2023-jan-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "Finally"
+          },
+          {
+            "label": "B",
+            "text": "Surprisingly"
+          },
+          {
+            "label": "C",
+            "text": "Naturally"
+          },
+          {
+            "label": "D",
+            "text": "Immediately"
+          }
+        ]
+      },
+      "q-zj-2023-jan-050": {
+        "questionId": "q-zj-2023-jan-050",
+        "questionNo": 50,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "50",
+        "blankId": "blank-zj-2023-jan-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "backed"
+          },
+          {
+            "label": "B",
+            "text": "dived"
+          },
+          {
+            "label": "C",
+            "text": "shouted"
+          },
+          {
+            "label": "D",
+            "text": "inched"
+          }
+        ]
+      },
+      "q-zj-2023-jan-051": {
+        "questionId": "q-zj-2023-jan-051",
+        "questionNo": 51,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "51",
+        "blankId": "blank-zj-2023-jan-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "cut off"
+          },
+          {
+            "label": "B",
+            "text": "gone up"
+          },
+          {
+            "label": "C",
+            "text": "slid down"
+          },
+          {
+            "label": "D",
+            "text": "held onto"
+          }
+        ]
+      },
+      "q-zj-2023-jan-052": {
+        "questionId": "q-zj-2023-jan-052",
+        "questionNo": 52,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "52",
+        "blankId": "blank-zj-2023-jan-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "high"
+          },
+          {
+            "label": "B",
+            "text": "early"
+          },
+          {
+            "label": "C",
+            "text": "fast"
+          },
+          {
+            "label": "D",
+            "text": "close"
+          }
+        ]
+      },
+      "q-zj-2023-jan-053": {
+        "questionId": "q-zj-2023-jan-053",
+        "questionNo": 53,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "53",
+        "blankId": "blank-zj-2023-jan-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "hatching"
+          },
+          {
+            "label": "B",
+            "text": "training"
+          },
+          {
+            "label": "C",
+            "text": "sowing"
+          },
+          {
+            "label": "D",
+            "text": "trading"
+          }
+        ]
+      },
+      "q-zj-2023-jan-054": {
+        "questionId": "q-zj-2023-jan-054",
+        "questionNo": 54,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "54",
+        "blankId": "blank-zj-2023-jan-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "curious"
+          },
+          {
+            "label": "B",
+            "text": "hungry"
+          },
+          {
+            "label": "C",
+            "text": "bored"
+          },
+          {
+            "label": "D",
+            "text": "angry"
+          }
+        ]
+      },
+      "q-zj-2023-jan-055": {
+        "questionId": "q-zj-2023-jan-055",
+        "questionNo": 55,
+        "groupId": "group-zj-2023-jan-cloze",
+        "stem": "55",
+        "blankId": "blank-zj-2023-jan-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "moment"
+          },
+          {
+            "label": "B",
+            "text": "equipment"
+          },
+          {
+            "label": "C",
+            "text": "person"
+          },
+          {
+            "label": "D",
+            "text": "order"
+          }
+        ]
+      },
+      "q-zj-2023-jan-056": {
+        "questionId": "q-zj-2023-jan-056",
+        "questionNo": 56,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-zj-2023-jan-056"
+      },
+      "q-zj-2023-jan-057": {
+        "questionId": "q-zj-2023-jan-057",
+        "questionNo": 57,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-zj-2023-jan-057"
+      },
+      "q-zj-2023-jan-058": {
+        "questionId": "q-zj-2023-jan-058",
+        "questionNo": 58,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-zj-2023-jan-058"
+      },
+      "q-zj-2023-jan-059": {
+        "questionId": "q-zj-2023-jan-059",
+        "questionNo": 59,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-zj-2023-jan-059"
+      },
+      "q-zj-2023-jan-060": {
+        "questionId": "q-zj-2023-jan-060",
+        "questionNo": 60,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-zj-2023-jan-060"
+      },
+      "q-zj-2023-jan-061": {
+        "questionId": "q-zj-2023-jan-061",
+        "questionNo": 61,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-zj-2023-jan-061"
+      },
+      "q-zj-2023-jan-062": {
+        "questionId": "q-zj-2023-jan-062",
+        "questionNo": 62,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-zj-2023-jan-062"
+      },
+      "q-zj-2023-jan-063": {
+        "questionId": "q-zj-2023-jan-063",
+        "questionNo": 63,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-zj-2023-jan-063"
+      },
+      "q-zj-2023-jan-064": {
+        "questionId": "q-zj-2023-jan-064",
+        "questionNo": 64,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-zj-2023-jan-064"
+      },
+      "q-zj-2023-jan-065": {
+        "questionId": "q-zj-2023-jan-065",
+        "questionNo": 65,
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-zj-2023-jan-065"
+      }
+    },
+    "blanks": {
+      "blank-zj-2023-jan-056": {
+        "blankId": "blank-zj-2023-jan-056",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-056"
+      },
+      "blank-zj-2023-jan-057": {
+        "blankId": "blank-zj-2023-jan-057",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-057",
+        "prompt": "original"
+      },
+      "blank-zj-2023-jan-058": {
+        "blankId": "blank-zj-2023-jan-058",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-058",
+        "prompt": "surround"
+      },
+      "blank-zj-2023-jan-059": {
+        "blankId": "blank-zj-2023-jan-059",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-059",
+        "prompt": "permit"
+      },
+      "blank-zj-2023-jan-060": {
+        "blankId": "blank-zj-2023-jan-060",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-060",
+        "prompt": "feature"
+      },
+      "blank-zj-2023-jan-061": {
+        "blankId": "blank-zj-2023-jan-061",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-061",
+        "prompt": "space"
+      },
+      "blank-zj-2023-jan-062": {
+        "blankId": "blank-zj-2023-jan-062",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-062",
+        "prompt": "simple"
+      },
+      "blank-zj-2023-jan-063": {
+        "blankId": "blank-zj-2023-jan-063",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-063"
+      },
+      "blank-zj-2023-jan-064": {
+        "blankId": "blank-zj-2023-jan-064",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-064",
+        "prompt": "event"
+      },
+      "blank-zj-2023-jan-065": {
+        "blankId": "blank-zj-2023-jan-065",
+        "groupId": "group-zj-2023-jan-grammar-fill",
+        "questionId": "q-zj-2023-jan-065"
+      }
+    },
+    "writingTasks": {
+      "wt-zj-2023-jan-application": {
+        "writingTaskId": "wt-zj-2023-jan-application",
+        "groupId": "group-zj-2023-jan-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "上周末你参加了校学生会组织的“认识我们身边的植物”活动。请为校英文报写篇报道，内容包括：\n（1）活动的过程；\n（2）收获与感想。\n（1）写作词数应为80左右；\n（2）可以适当增加细节，以使行文连贯。\nGetting to Know the Plants Around Us",
+        "wordCountTarget": 80
+      },
+      "wt-zj-2023-jan-continuation": {
+        "writingTaskId": "wt-zj-2023-jan-continuation",
+        "groupId": "group-zj-2023-jan-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "I was invited to a cookout on an old friend’s farm in western Washington. I parked my car outside the farm and walked past a milking house which had apparently not been used in many years. A noise at a window caught my attention, so I entered it. It was a hummingbird (蜂鸟) , desperately trying to escape. She was covered in spider-webs (蛛网) and was barely able to move her wings. She ceased her struggle the instant I picked her up.\nWith the bird in my cupped hand, I looked around to see how she had gotten in. The broken window glass was the likely answer. I stuffed a piece of cloth into the hole and took her outside, closing the door securely behind me.\nWhen I opened my hand, the bird did not fly away; she sat looking at me with her bright eyes. I removed the sticky spider-webs that covered her head and wings. Still, she made no attempt to fly. Perhaps she had been struggling against the window too long and was too tired? Or too thirsty?\nAs I carried her up the blackberry-lined path toward my car where I kept a water bottle, she began to move. I stopped, and she soon took wing but did not immediately fly away.\nHovering (悬停) , she approached within six inches of my face. For a very long moment, this tiny creature looked into my eyes, turning her head from side to side. Then she flew quickly out of sight.\nDuring the cookout, I told my hosts about the hummingbird incident. They promised to fix the window. As I was departing, my friends walked me to my car. I was standing by the car when a hummingbird flew to the center of our group and began hovering. She turned from person to person until she came to me. She again looked directly into my eyes, then let out a squeaking call and was gone. For a moment, all were speechless. Then someone said, “She must have come to say good-bye.”",
+        "continuationStarters": [
+          "A few weeks later, I went to the farm again.",
+          "I was just about to leave when the hummingbird appeared."
+        ],
+        "materialText": "I was invited to a cookout on an old friend’s farm in western Washington. I parked my car outside the farm and walked past a milking house which had apparently not been used in many years. A noise at a window caught my attention, so I entered it. It was a hummingbird (蜂鸟) , desperately trying to escape. She was covered in spider-webs (蛛网) and was barely able to move her wings. She ceased her struggle the instant I picked her up.\n\nWith the bird in my cupped hand, I looked around to see how she had gotten in. The broken window glass was the likely answer. I stuffed a piece of cloth into the hole and took her outside, closing the door securely behind me.\n\nWhen I opened my hand, the bird did not fly away; she sat looking at me with her bright eyes. I removed the sticky spider-webs that covered her head and wings. Still, she made no attempt to fly. Perhaps she had been struggling against the window too long and was too tired? Or too thirsty?\n\nAs I carried her up the blackberry-lined path toward my car where I kept a water bottle, she began to move. I stopped, and she soon took wing but did not immediately fly away.\n\nHovering (悬停) , she approached within six inches of my face. For a very long moment, this tiny creature looked into my eyes, turning her head from side to side. Then she flew quickly out of sight.\n\nDuring the cookout, I told my hosts about the hummingbird incident. They promised to fix the window. As I was departing, my friends walked me to my car. I was standing by the car when a hummingbird flew to the center of our group and began hovering. She turned from person to person until she came to me. She again looked directly into my eyes, then let out a squeaking call and was gone. For a moment, all were speechless. Then someone said, “She must have come to say good-bye.”",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-zj-2023-jan-021": {
+        "questionId": "q-zj-2023-jan-021",
+        "questionNo": 21,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-022": {
+        "questionId": "q-zj-2023-jan-022",
+        "questionNo": 22,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-023": {
+        "questionId": "q-zj-2023-jan-023",
+        "questionNo": 23,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-024": {
+        "questionId": "q-zj-2023-jan-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-025": {
+        "questionId": "q-zj-2023-jan-025",
+        "questionNo": 25,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-026": {
+        "questionId": "q-zj-2023-jan-026",
+        "questionNo": 26,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-027": {
+        "questionId": "q-zj-2023-jan-027",
+        "questionNo": 27,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-028": {
+        "questionId": "q-zj-2023-jan-028",
+        "questionNo": 28,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-029": {
+        "questionId": "q-zj-2023-jan-029",
+        "questionNo": 29,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-030": {
+        "questionId": "q-zj-2023-jan-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-031": {
+        "questionId": "q-zj-2023-jan-031",
+        "questionNo": 31,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-032": {
+        "questionId": "q-zj-2023-jan-032",
+        "questionNo": 32,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-033": {
+        "questionId": "q-zj-2023-jan-033",
+        "questionNo": 33,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-034": {
+        "questionId": "q-zj-2023-jan-034",
+        "questionNo": 34,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-035": {
+        "questionId": "q-zj-2023-jan-035",
+        "questionNo": 35,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-036": {
+        "questionId": "q-zj-2023-jan-036",
+        "questionNo": 36,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-037": {
+        "questionId": "q-zj-2023-jan-037",
+        "questionNo": 37,
+        "answer": "G",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-038": {
+        "questionId": "q-zj-2023-jan-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-039": {
+        "questionId": "q-zj-2023-jan-039",
+        "questionNo": 39,
+        "answer": "E",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-040": {
+        "questionId": "q-zj-2023-jan-040",
+        "questionNo": 40,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-041": {
+        "questionId": "q-zj-2023-jan-041",
+        "questionNo": 41,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-042": {
+        "questionId": "q-zj-2023-jan-042",
+        "questionNo": 42,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-043": {
+        "questionId": "q-zj-2023-jan-043",
+        "questionNo": 43,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-044": {
+        "questionId": "q-zj-2023-jan-044",
+        "questionNo": 44,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-045": {
+        "questionId": "q-zj-2023-jan-045",
+        "questionNo": 45,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-046": {
+        "questionId": "q-zj-2023-jan-046",
+        "questionNo": 46,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-047": {
+        "questionId": "q-zj-2023-jan-047",
+        "questionNo": 47,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-048": {
+        "questionId": "q-zj-2023-jan-048",
+        "questionNo": 48,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-049": {
+        "questionId": "q-zj-2023-jan-049",
+        "questionNo": 49,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-050": {
+        "questionId": "q-zj-2023-jan-050",
+        "questionNo": 50,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-051": {
+        "questionId": "q-zj-2023-jan-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-052": {
+        "questionId": "q-zj-2023-jan-052",
+        "questionNo": 52,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-053": {
+        "questionId": "q-zj-2023-jan-053",
+        "questionNo": 53,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-054": {
+        "questionId": "q-zj-2023-jan-054",
+        "questionNo": 54,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-055": {
+        "questionId": "q-zj-2023-jan-055",
+        "questionNo": 55,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-056": {
+        "questionId": "q-zj-2023-jan-056",
+        "questionNo": 56,
+        "answer": "and",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-057": {
+        "questionId": "q-zj-2023-jan-057",
+        "questionNo": 57,
+        "answer": "originally",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-058": {
+        "questionId": "q-zj-2023-jan-058",
+        "questionNo": 58,
+        "answer": "surrounded",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-059": {
+        "questionId": "q-zj-2023-jan-059",
+        "questionNo": 59,
+        "answer": "were permitted",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-060": {
+        "questionId": "q-zj-2023-jan-060",
+        "questionNo": 60,
+        "answer": "featured",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-061": {
+        "questionId": "q-zj-2023-jan-061",
+        "questionNo": 61,
+        "answer": "spacious",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-062": {
+        "questionId": "q-zj-2023-jan-062",
+        "questionNo": 62,
+        "answer": "simpler/more simple",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-063": {
+        "questionId": "q-zj-2023-jan-063",
+        "questionNo": 63,
+        "answer": "as",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-064": {
+        "questionId": "q-zj-2023-jan-064",
+        "questionNo": 64,
+        "answer": "events",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2023-jan-065": {
+        "questionId": "q-zj-2023-jan-065",
+        "questionNo": 65,
+        "answer": "the",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "import-pipeline",
+      "reviewedAt": "2026-06-08T00:00:00Z"
+    },
+    "groups": {
+      "group-zj-2023-jan-reading-a": {
+        "overview": "本篇是一则名为 Explorers Camp 的暑期儿童营地招生广告，介绍了适龄人群、活动时间、费用与退款政策，以及营地的每日安排、课程内容和师资配置。",
+        "discourseStructure": {
+          "summary": "广告先以列表形式给出营地的基本报名信息（年龄、日期、时段、费用、退款），随后分 Camp Structure、Camp Content、Camp Staff 三个板块依次说明每日结构、课程内容和工作人员情况。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-1",
+              "summary": "营地名称：Explorers Camp。",
+              "function": "标题，点明广告主题。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-2",
+              "summary": "面向 5—13 岁儿童的全日制营地。",
+              "function": "说明适用年龄。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-3",
+              "summary": "时间为 7 月 8—26 日的周一至周五，每天 9 点至 16 点。",
+              "function": "说明总体开放时间。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-4",
+              "summary": "第 1 周：7 月 8—12 日。",
+              "function": "列出可报名的第一周。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-5",
+              "summary": "第 2 周：7 月 15—19 日。",
+              "function": "列出可报名的第二周。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-6",
+              "summary": "第 3 周：7 月 22—26 日。",
+              "function": "列出可报名的第三周。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-7",
+              "summary": "可报名单周或多周。",
+              "function": "说明报名方式。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-8",
+              "summary": "费用为每周 365 美元。",
+              "function": "说明收费标准。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-9",
+              "summary": "取消报名并获得全额退款的最后期限是 6 月 15 日。",
+              "function": "说明退款政策，并引出 Camp Structure 板块。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-10",
+              "summary": "每天按年龄组分为两个主题时段：上午三小时课、一小时午餐、下午三小时课，全天有零食时间，营员需自带午餐和零食。",
+              "function": "说明每日结构（Camp Structure）。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-11",
+              "summary": "营地在每节课组织艺术、历史和科学相关活动，强调主动学习、探索和乐趣，并按适龄方式设计活动。",
+              "function": "说明课程内容（Camp Content）。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-a-12",
+              "summary": "师生比依年龄组从 1:4 到 1:7 不等，教师为经过培训和背景调查的专业教育者。",
+              "function": "说明师资配置（Camp Staff）。"
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-reading-b": {
+        "overview": "本文是一篇记叙兼议论的个人经历类文章。作者讲述自己在不完全支持的家庭环境中坚持零废弃（zero waste）生活方式的经历，从最初遭遇家人质疑，到学会在自己可控的个人空间内做出改变，最后总结出“以行动示范”的建议。",
+        "discourseStructure": {
+          "summary": "文章先以提问引入主题：在家庭环境中践行可持续生活并非人人支持；接着作者结合自身五年来的零废弃经历，叙述父亲的质疑、自己在个人空间内逐步改变的做法，并指出言语争辩往往无效；最后给出核心建议——用行动来引领。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-1",
+              "summary": "用一连串问题引入：如果你想过更可持续的生活，身边的人未必愿意一同参与。",
+              "function": "提出话题，引出全文核心情境（在家庭中独自追求可持续生活）。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-2",
+              "summary": "作者交代自身经历：五年前与父母同住时开始转向零废弃，如今与并非完全零废弃的丈夫生活仍有此体会，并表示愿分享心得。",
+              "function": "建立作者的亲历者身份，过渡到后文经验分享。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-3",
+              "summary": "回忆早期：作者向父母展示Bea Johnson的视频并热衷用罐子买杂货，但父亲嘲笑她到处带罐子很傻，让她感到泄气。",
+              "function": "举例说明家人并不支持，制造冲突。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-4",
+              "summary": "作者转而做自己力所能及的事：在自己的卧室清理多余物品、用自备洗漱用品、做饭时划出橱柜放零废弃食材，强调可在个人空间内做出想要的改变。",
+              "function": "提供解决策略一：在个人可控范围内行动。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-5",
+              "summary": "指出当别人评论你的做法时，你可能想为自己辩护，但若对方不认同，言语往往无济于事，反而更让人泄气。",
+              "function": "提供反面经验：争辩无效。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-b-6",
+              "summary": "给出最终建议：以行动来引领。",
+              "function": "总结全文，点明核心主张。"
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-reading-c": {
+        "overview": "本文是一篇议论文，围绕人工智能辩论程序 Project Debater 展开，讨论机器虽能在辩论中击败人类，却始终无法理解“意义”，从而论证意义是区分人类与机器的根本所在。",
+        "discourseStructure": {
+          "summary": "文章先以 Project Debater 击败人类辩论冠军引出话题，接着指出该程序的缺陷并借专家之口点出根本问题，随后展开论证机器只处理符号而人类追求意义，最后总结意义源于社会互动，人类传统不会被人工智能终结。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-1",
+              "summary": "Project Debater 在公开辩论中击败了包括以色列前全国辩论冠军 Noa Ovadia 在内的人类对手。",
+              "function": "引入话题，用具体事例展示人工智能在辩论上的强大表现。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-2",
+              "summary": "尽管出色，Project Debater 仍有缺陷：它只是拼接预存的句子和论点，会犯人类不会犯的错误，并借 Hammond 之口指出系统从不真正知道自己在说什么这一根本问题。",
+              "function": "转折，指出程序的弱点并提出核心问题——系统不理解其内容。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-3",
+              "summary": "Hammond 所指的是意义问题；计算机只按规则转换符号而不关心符号含义，而对人类来说意义才是一切。",
+              "function": "展开论证，对比机器处理符号与人类追求意义的本质差异。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-c-4",
+              "summary": "意义源于社会互动而非计算，赋予意义的规则既在人脑内也在社会之中，这正是人与机器的区别，因此苏格拉底与孔子开创的传统不会终结于人工智能。",
+              "function": "总结升华，点明意义来自社会互动，重申人类传统不会被 AI 取代。"
+            }
+          ]
+        }
+      },
+      "group-zj-2023-jan-reading-d": {
+        "overview": "本文是一篇说明文，介绍太阳能发展带来的土地与生态问题，以及以 InSPIRE 项目为代表的“低影响”太阳能开发理念——尤其是把太阳能板下的空间改造成传粉昆虫的栖息地，从而兼顾清洁能源与农业生态。",
+        "discourseStructure": {
+          "summary": "文章先提出太阳能快速扩张占用大量土地、且民众不愿其建在身边的矛盾；再指出开发商忽视板下土地、被农业社区视为土壤破坏者；接着引入 InSPIRE 项目倡导“低影响”开发并以传粉昆虫栖息地为切入点；随后说明传粉昆虫锐减对农业经济的危害及相关立法与指南；最后说明许多开发商已把板下空间改造成传粉昆虫的庇护所，实现土壤改良与碳减排。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-1",
+              "summary": "太阳能板装机量近十年快速增长且需更快增长以达成气候目标，但扩张占用大量空间，且人们虽接受太阳能理念却不愿大型太阳能板装在自己附近。",
+              "function": "提出背景与矛盾：太阳能扩张与土地占用、邻避心理之间的张力。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-2",
+              "summary": "开发商追求快速廉价安装，很少考虑板下土地，常用碎石铺地并用化学品除草，导致许多农业社区视太阳能农场为土壤破坏者。",
+              "function": "指出问题根源：开发商忽视板下土地造成生态与社区冲突。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-3",
+              "summary": "InSPIRE 项目负责人 Macknick 提出太阳能项目应成为土地的保护者并贡献农业经济，该项目研究“低影响”太阳能开发，其中最简单的策略之一是为传粉昆虫提供栖息地。",
+              "function": "引入解决方案：InSPIRE 倡导“低影响”开发并提出传粉昆虫栖息地策略。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-4",
+              "summary": "栖息地丧失、农药使用和气候变化导致传粉昆虫数量锐减，损害美国农业经济；已有28个以上的州通过相关法律，保护组织也为太阳能农场等出台传粉友好指南。",
+              "function": "提供论据与支持：说明传粉昆虫危机及立法与指南背景。"
+            },
+            {
+              "paragraphId": "para-zj-2023-jan-reading-d-5",
+              "summary": "近年许多太阳能开发商已把板下空间改造成各类传粉昆虫的庇护所，带来土壤改良与碳减排；Macknick 认为这种传粉友好型太阳能农场能对整个景观产生宝贵影响。",
+              "function": "总结与升华：呈现传粉友好型太阳能农场的成效与价值。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2023-jan-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查在哪个日期取消报名仍可获得全额退款，需对照退款截止日期判断。",
+        "stemTranslationZh": "下列哪个日期取消报名可以获得全额退款？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "6 月 12 日。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-a-9",
+                "quote": "The last day to cancel registration and receive a full refund (退款) is June 15.",
+                "anchor": "全额退款最后期限 June 15"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "6 月 22 日。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "conditionRemoved",
+              "sourceQuote": "The last day to cancel registration and receive a full refund (退款) is June 15.",
+              "sourceHighlight": "The last day to cancel registration and receive a full refund (退款) is June 15",
+              "optionText": "June 22.",
+              "optionHighlight": "June 22",
+              "explanation": "全额退款须在 6 月 15 日（含）之前办理；6 月 22 日已晚于该截止日期，不符合退款条件。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-9",
+                "quote": "The last day to cancel registration and receive a full refund (退款) is June 15.",
+                "anchor": "退款截止 June 15"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "7 月 19 日。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "July 15 --19",
+              "optionText": "July 19.",
+              "matchType": "exact",
+              "relationNote": "July 19 借用原文第 2 周的营期日期 July 15--19 来干扰，但那是上课周次，并非退款截止日，且已远晚于 June 15。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-5",
+                "quote": "Week 2 | July 15 --19",
+                "anchor": "第 2 周营期 July 15--19"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "7 月 26 日。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Week 3 | July 22 -- 26",
+              "optionText": "July 26.",
+              "matchType": "exact",
+              "relationNote": "July 26 借用原文第 3 周营期 July 22--26 的结束日来干扰，但那是营期结束日，并非退款截止日，已远晚于 June 15。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-6",
+                "quote": "Week 3 | July 22 -- 26",
+                "anchor": "第 3 周营期 July 22--26"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "cancel your registration with a full refund",
+            "sourceRole": "stem",
+            "targetText": "The last day to cancel registration and receive a full refund (退款) is June 15.",
+            "targetParagraphId": "para-zj-2023-jan-reading-a-9",
+            "relationType": "locationCue",
+            "note": "题干 cancel your registration with a full refund 对应原文 cancel registration and receive a full refund，定位到退款截止日 June 15，只有早于该日期的 June 12 符合。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查营员是按照什么标准被分组的。",
+        "stemTranslationZh": "营员是如何被分成不同小组的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "按性别。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "营员按性别分组。",
+              "explanation": "原文未提及按性别分组，属于无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "按国籍。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "营员按国籍分组。",
+              "explanation": "原文未提及按国籍分组，属于无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "按兴趣。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "营员按兴趣分组。",
+              "explanation": "原文虽提到丰富的主题活动，但未提及按兴趣分组，属于无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "按年龄。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-a-10",
+                "quote": "The day is divided into two thematic sessions per age group.",
+                "anchor": "按 age group 分组"
+              },
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-12",
+                "quote": "Campers enjoy a staff-to-child ratio ranging from 1:4 to 1:7 depending on the age group.",
+                "anchor": "师生比依 age group 而定"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "By age",
+            "sourceRole": "correctOption",
+            "targetText": "two thematic sessions per age group",
+            "targetParagraphId": "para-zj-2023-jan-reading-a-10",
+            "relationType": "paraphrase",
+            "note": "选项 By age 对应原文 per age group / depending on the age group，说明分组依据是年龄。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查报名单周后总共有多少小时的课程，需结合每天课时数与上课天数进行推算。",
+        "stemTranslationZh": "如果你报名单周，总共会有多少小时的课程？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "15。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Campers have a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (1 pm to 4 pm) .",
+              "sourceHighlight": "three-hour morning class",
+              "optionText": "15.",
+              "optionHighlight": "15",
+              "explanation": "15 仅按每天 3 小时（只算上午或只算一节课）乘 5 天得出，漏算了下午的三小时课，少算了总课时。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-10",
+                "quote": "Campers have a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (1 pm to 4 pm) .",
+                "anchor": "上午 3 小时 + 下午 3 小时"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "21。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Campers have a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (1 pm to 4 pm) .",
+              "sourceHighlight": "a one-hour lunch break",
+              "optionText": "21.",
+              "optionHighlight": "21",
+              "explanation": "21 错把每天的一小时午餐也算进上课时间（7 小时×5 天=35 不符，实为误算为 3+1+3=7 中扣减不当），将非上课时间计入课时，导致结果偏离正确的 30 小时。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-10",
+                "quote": "Campers have a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (1 pm to 4 pm) .",
+                "anchor": "午餐 1 小时不算课时"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "30。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-a-10",
+                "quote": "Campers have a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (1 pm to 4 pm) .",
+                "anchor": "每天 3+3=6 小时课"
+              },
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-3",
+                "quote": "• Monday -- Friday, July 8 -- 26, 9 am -- 4 pm.",
+                "anchor": "每周一至周五共 5 天"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "42。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "• Monday -- Friday, July 8 -- 26, 9 am -- 4 pm.",
+              "sourceHighlight": "9 am -- 4 pm",
+              "optionText": "42.",
+              "optionHighlight": "42",
+              "explanation": "42 错把每天从 9 点到 16 点的全部 7 小时都当作上课时间（含 1 小时午餐）再乘 6 天，既多算了午餐又夸大了天数，远超实际每周 30 课时。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-a-3",
+                "quote": "• Monday -- Friday, July 8 -- 26, 9 am -- 4 pm.",
+                "anchor": "9 am 至 4 pm 含午餐"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How many hours of class",
+            "sourceRole": "stem",
+            "targetText": "a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class",
+            "targetParagraphId": "para-zj-2023-jan-reading-a-10",
+            "relationType": "calculation",
+            "note": "题干问 hours of class，须排除 one-hour lunch break：每天 3+3=6 小时课，Monday--Friday 共 5 天，6×5=30 小时。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-024": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查对划线短语\"jump on that bandwagon\"在语境中的词义推测。",
+        "stemTranslationZh": "第一段中划线词\"jump on that bandwagon\"是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "与你合租一套公寓。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Live with roommates?",
+              "optionText": "Share an apartment with you.",
+              "matchType": "wordFamily",
+              "relationNote": "选项用 share an apartment 呼应原文开头 Live with roommates? 的同住情境，但那只是引入背景，并非划线短语的含义；属于借原文情境词制造的干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-1",
+                "quote": "Live with roommates?",
+                "anchor": "Live with roommates"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "在你正在做的事情上加入你。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-b-1",
+                "quote": "if you’re looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon",
+                "anchor": "not everyone will jump on that bandwagon"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "改变你的生活方式。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "if you’re looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon",
+              "sourceEntity": "not everyone around you (身边的人)",
+              "optionText": "Transform your way of living.",
+              "optionEntity": "your way of living (你自己的生活方式)",
+              "explanation": "划线短语的主语是\"身边的人\"是否愿意一同加入，而非改变\"你自己\"的生活方式；对象发生错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "帮助你做出决定。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "身边的人帮助你做出决定。",
+              "explanation": "原文未提及他人\"帮助你做决定\"，作者已自己决定追求可持续生活，划线短语指的是别人是否愿意加入，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Join you in what you're doing.",
+            "sourceRole": "correctOption",
+            "targetText": "not everyone around you will be ready to jump on that bandwagon",
+            "targetParagraphId": "para-zj-2023-jan-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "习语 jump on that bandwagon 意为\"追随潮流、加入大家正在做的事\"，正确选项用 Join you in what you're doing 做同义替换。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-025": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查作者父亲对\"用罐子买杂货\"这一做法的态度。",
+        "stemTranslationZh": "作者的父亲对用罐子买杂货持什么态度？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他不赞成这种做法。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-b-3",
+                "quote": "my dad commented on how silly it was for me to carry jars everywhere",
+                "anchor": "dad: how silly to carry jars"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2023-jan-reading-b-3",
+                "quote": "It came off as a bit discouraging.",
+                "anchor": "came off as discouraging"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他对此持赞成态度。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "my dad commented on how silly it was for me to carry jars everywhere",
+              "sourceHighlight": "how silly",
+              "optionText": "He was favorable to it.",
+              "optionHighlight": "favorable",
+              "explanation": "父亲说这样做\"很傻\"且令人泄气，是否定态度，选项却说他赞成，态度黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-3",
+                "quote": "my dad commented on how silly it was for me to carry jars everywhere",
+                "anchor": "how silly"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他对此能够容忍。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "my dad commented on how silly it was for me to carry jars everywhere",
+              "sourceHighlight": "how silly",
+              "optionText": "He was tolerant of it.",
+              "optionHighlight": "tolerant",
+              "explanation": "\"容忍\"意味着不反对、勉强接受，而原文父亲明确嘲笑其\"很傻\"并令人泄气，态度比\"容忍\"更负面，程度被弱化。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-3",
+                "quote": "It came off as a bit discouraging.",
+                "anchor": "discouraging"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他对此并不在意。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "my dad commented on how silly it was for me to carry jars everywhere",
+              "sourceHighlight": "commented on how silly",
+              "optionText": "He didn't care about it.",
+              "optionHighlight": "didn't care",
+              "explanation": "父亲主动评论并嘲笑此事，说明他在意且持负面看法，选项说他\"不在意\"与原文相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-3",
+                "quote": "my dad commented on how silly it was for me to carry jars everywhere",
+                "anchor": "dad commented"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He disapproved of it.",
+            "sourceRole": "correctOption",
+            "targetText": "my dad commented on how silly it was for me to carry jars everywhere",
+            "targetParagraphId": "para-zj-2023-jan-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "原文用 how silly ... discouraging 表达父亲的否定态度，正确选项用 disapproved of it 做同义概括。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-026": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对作者性格特征的推断。",
+        "stemTranslationZh": "关于作者，我们可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她很擅长做饭。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "I also offered to cook every so often",
+              "optionText": "She is quite good at cooking.",
+              "matchType": "wordFamily",
+              "relationNote": "原文提到作者偶尔主动做饭（cook），选项借 cooking 一词，但原文只说她提出做饭，并未说明她\"擅长\"，属借原文词制造的干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-4",
+                "quote": "I also offered to cook every so often",
+                "anchor": "offered to cook"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她尊重他人的隐私。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "I had my own bedroom, so I worked on removing things I didn’t",
+              "sourceHighlight": "my own bedroom",
+              "optionText": "She respects others' privacy.",
+              "optionHighlight": "others' privacy",
+              "explanation": "原文说作者在\"自己的\"卧室、个人空间内做改变，谈的是自己的私人空间，被过度引申为\"尊重他人隐私\"，对象与范围被偷换扩大。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-4",
+                "quote": "I had my own bedroom, so I worked on removing things I didn’t",
+                "anchor": "my own bedroom"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她喜欢当家庭主妇。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作者喜欢当家庭主妇。",
+              "explanation": "原文未提及作者喜欢做家庭主妇，仅描述她为践行零废弃所做的家务努力，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她是一个意志坚定的人。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-b-4",
+                "quote": "Yet as the months of reducing waste continued, I did what I could that was within my own reach.",
+                "anchor": "kept reducing waste, did what she could"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2023-jan-reading-b-2",
+                "quote": "I experienced this when I started switching to a zero waste lifestyle five years ago",
+                "anchor": "five years of zero waste"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "She is a determined person.",
+            "sourceRole": "correctOption",
+            "targetText": "Yet as the months of reducing waste continued, I did what I could that was within my own reach.",
+            "targetParagraphId": "para-zj-2023-jan-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "尽管家人不支持，作者仍坚持数月、五年如一日地践行零废弃（kept reducing waste, did what she could），可推断出她 determined（意志坚定）。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-027": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对文章主旨大意的概括。",
+        "stemTranslationZh": "这篇文章主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "如何与其他家庭成员融洽相处。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "how you can make the change in a not-always-supportive household",
+              "sourceHighlight": "not-always-supportive household",
+              "optionText": "How to get on well with other family members.",
+              "optionHighlight": "get on well with other family members",
+              "explanation": "文章涉及家庭成员只是为了说明如何在不支持的家庭中坚持零废弃，主题并非\"如何与家人融洽相处\"，把次要背景偷换成主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-2",
+                "quote": "how you can make the change in a not-always-supportive household",
+                "anchor": "not-always-supportive household"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "如何在家中拥有自己的私人空间。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "you may have some control over your own personal spaces to make the changes you desire",
+              "sourceHighlight": "your own personal spaces",
+              "optionText": "How to have one's own personal space at home.",
+              "optionHighlight": "one's own personal space",
+              "explanation": "\"个人空间\"只是作者践行零废弃的一种策略（第四段），仅为局部细节，被错误放大为全文主旨，范围被缩小到单一手段。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-4",
+                "quote": "you may have some control over your own personal spaces to make the changes you desire",
+                "anchor": "control over personal spaces"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "如何在家庭中践行零废弃的生活方式。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-b-2",
+                "quote": "how you can make the change in a not-always-supportive household",
+                "anchor": "make the change in a not-always-supportive household"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2023-jan-reading-b-1",
+                "quote": "if you’re looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon",
+                "anchor": "sustainable lifestyle in a household"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "如何在购买杂货时控制预算。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "buy groceries with jars",
+              "optionText": "How to control the budget when buying groceries.",
+              "matchType": "wordFamily",
+              "relationNote": "原文多次出现 groceries（买杂货），选项借此词，但全文从未谈论\"控制预算\"，仅借原文词钩制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-b-3",
+                "quote": "buy groceries with jars",
+                "anchor": "buy groceries with jars"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How to live a zero waste lifestyle in a household.",
+            "sourceRole": "correctOption",
+            "targetText": "how you can make the change in a not-always-supportive household",
+            "targetParagraphId": "para-zj-2023-jan-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "正确选项 live a zero waste lifestyle in a household 概括全文主旨，与原文 make the change in a not-always-supportive household 及全文的 zero waste 主题相对应。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-028": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查作者在首段提及 Noa Ovadia 这一具体人物的写作意图。",
+        "stemTranslationZh": "作者为什么在第一段提到 Noa Ovadia？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了解释一个软件程序的用途。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "提及 Noa Ovadia 是为了解释软件程序的用途。",
+              "explanation": "原文未提及任何关于软件“用途”的解释，作者提到该人物是为了凸显 Project Debater 的厉害，而非说明程序用途。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了表明 Project Debater 的聪明（厉害）。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-c-1",
+                "quote": "a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel’s former national debating champion",
+                "anchor": "击败包括前全国冠军在内的人类对手"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了介绍 Project Debater 的设计者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "beat its human opponents, including Noa Ovadia, Israel’s former national debating champion",
+              "sourceEntity": "Noa Ovadia（被击败的人类对手/辩论冠军）",
+              "optionText": "To introduce the designer of Project Debater.",
+              "optionEntity": "the designer of Project Debater（程序设计者）",
+              "explanation": "Noa Ovadia 是被程序击败的对手，并非 Project Debater 的设计者，选项把人物身份错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了强调比赛的公平性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "提及该人物是为了强调比赛的公平性。",
+              "explanation": "原文未提及比赛是否公平，作者意图是展示程序的强大而非强调公平。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To show the cleverness of Project Debater.",
+            "sourceRole": "correctOption",
+            "targetText": "beat its human opponents, including Noa Ovadia, Israel’s former national debating champion",
+            "targetParagraphId": "para-zj-2023-jan-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "原文用“beat ... former national debating champion”这一事实来体现 Project Debater 的强大，对应正确选项中的 cleverness。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-029": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查第二段画线词 wrinkles 在语境中的指代含义。",
+        "stemTranslationZh": "第二段中画线词 “wrinkles” 指的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "论点。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "prebuilt arguments",
+              "optionText": "Arguments.",
+              "matchType": "exact",
+              "relationNote": "原文中 arguments 指程序拼接所用的预存论点，与画线词 wrinkles 所指的“错误”无关，选项用原文出现过的词制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-c-2",
+                "quote": "It takes sentences from its library of documents and prebuilt arguments and strings them together.",
+                "anchor": "原文 arguments 指预存论点"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "疑问；怀疑。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "wrinkles 指的是疑问/怀疑。",
+              "explanation": "原文上下文谈的是程序会犯的错误，并未涉及“怀疑”，该义项在文中无依据。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "错误。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-c-2",
+                "quote": "This can lead to the kinds of errors no human would make. Such wrinkles will no doubt be ironed out",
+                "anchor": "Such wrinkles 紧接 errors，构成指代"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "差异；不同。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "wrinkles 指的是差异。",
+              "explanation": "原文画线词指代前句的 errors，文中并未把 wrinkles 解释为“差异”，该义项无语境支撑。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Such wrinkles",
+            "sourceRole": "stem",
+            "targetText": "This can lead to the kinds of errors no human would make.",
+            "targetParagraphId": "para-zj-2023-jan-reading-c-2",
+            "relationType": "locationCue",
+            "note": "画线词前的指示词 Such 把 wrinkles 与前句 the kinds of errors 直接挂钩，据此可推断 wrinkles=errors。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-030": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查根据 Hammond 的观点判断 Project Debater 做不到的事情。",
+        "stemTranslationZh": "根据 Hammond 的说法，Project Debater 不能做到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "创建规则。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Its program specifies a set of rules",
+              "optionText": "Create rules.",
+              "matchType": "exact",
+              "relationNote": "原文 rules 指程序内已设定的规则，并非说程序不能创建规则；选项借用原文出现的 rules 一词制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-c-3",
+                "quote": "Its program specifies a set of rules to transform one string of symbols into another.",
+                "anchor": "原文谈程序已有的规则"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "理解意义。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-c-2",
+                "quote": "There’s never a stage at which the system knows what it’s talking about.",
+                "anchor": "Hammond：系统从不知道自己在说什么"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2023-jan-reading-c-3",
+                "quote": "What Hammond is referring to is the question of meaning",
+                "anchor": "Hammond 所指即“意义”问题"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "流利地说话。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Project Debater 不能流利地说话。",
+              "explanation": "原文并未说程序无法流利表达，事实上它能在辩论中击败人类；Hammond 指出的缺陷是不理解意义而非表达不流利。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "识别难词。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Project Debater 不能识别难词。",
+              "explanation": "原文从未提及识别难词的问题，这是无中生有的说法。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Comprehend meaning.",
+            "sourceRole": "correctOption",
+            "targetText": "What Hammond is referring to is the question of meaning",
+            "targetParagraphId": "para-zj-2023-jan-reading-c-3",
+            "relationType": "paraphrase",
+            "note": "Hammond 说系统不知道自己在说什么，作者随即点明这指向 the question of meaning，与正确选项 Comprehend meaning 对应。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-031": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对末段主旨的推断——意义如何产生以及它对理解符号的作用。",
+        "stemTranslationZh": "从最后一段我们可以得知什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "社会互动是理解符号的关键。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-c-4",
+                "quote": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+                "anchor": "意义经由社会互动产生并塑造符号内容"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "人脑尚有有待开发的潜能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "人脑有尚待开发的潜能。",
+              "explanation": "末段讨论意义源于社会互动，未提及人脑潜能开发的问题，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "古代哲学家为辩手树立了好榜样。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the tradition that began with Socrates and Confucius",
+              "optionText": "Ancient philosophers set good examples for debaters.",
+              "matchType": "exact",
+              "relationNote": "原文提到 Socrates 和 Confucius 是为说明人类思想传统不会终结，并非说他们为辩手树立榜样；选项借原文出现的哲学家制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-c-4",
+                "quote": "the tradition that began with Socrates and Confucius will not end with artificial intelligence",
+                "anchor": "提及哲学家是论证传统不会终结"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "人工智能确保人类拥有光明的未来。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "however astonishing Project Debater may seem, the tradition that began with Socrates and Confucius will not end with artificial intelligence",
+              "sourceHighlight": "will not end with artificial intelligence",
+              "optionText": "Artificial intelligence ensures humans a bright future.",
+              "optionHighlight": "ensures humans a bright future",
+              "explanation": "原文强调人工智能取代不了人类的意义传统，对 AI 持保留态度，选项却把它说成保障人类光明未来，态度与原文相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-c-4",
+                "quote": "however astonishing Project Debater may seem, the tradition that began with Socrates and Confucius will not end with artificial intelligence",
+                "anchor": "原文强调 AI 终结不了人类传统"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Social interaction is key to understanding symbols.",
+            "sourceRole": "correctOption",
+            "targetText": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+            "targetParagraphId": "para-zj-2023-jan-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "原文说意义经由 social interaction 产生并塑造 symbols 的内容，与正确选项 social interaction is key to understanding symbols 同义对应。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-032": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第二段太阳能开发商行为细节的理解，即他们常常忽视什么。",
+        "stemTranslationZh": "太阳能开发商常常忽视什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "对太阳能需求的下降。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "太阳能需求出现下降",
+              "explanation": "原文未提及太阳能需求下降；第一段反而说装机量快速增长且需更快增长，与“需求下降”相反。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "安装太阳能板的负面影响。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-d-2",
+                "quote": "given much thought to what they put under them",
+                "anchor": "很少考虑板下土地"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2023-jan-reading-d-2",
+                "quote": "The result is that many communities, especially in farming regions, see solar farms as destroyers of the soil.",
+                "anchor": "被视为土壤破坏者"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "建造太阳能农场不断上升的人工成本。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "建造太阳能农场的人工成本上升",
+              "explanation": "原文未提及人工成本上升；第二段只说开发商想尽量快速且廉价地安装，并未谈劳动力成本变化。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "太阳能技术的最新进展。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "开发商忽视了太阳能技术的最新进展",
+              "explanation": "原文未提及太阳能技术进展，开发商忽视的是板下土地处理，而非技术进步。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "ignore",
+            "sourceRole": "stem",
+            "targetText": "given much thought to what they put under them",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "题干 ignore（忽视）对应原文 haven’t given much thought to（没怎么考虑），指开发商忽视板下土地的处理。"
+          },
+          {
+            "sourceText": "The negative impact of installing solar panels",
+            "sourceRole": "correctOption",
+            "targetText": "see solar farms as destroyers of the soil",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "正确选项 negative impact（负面影响）对应原文 destroyers of the soil（土壤破坏者）所体现的安装太阳能板带来的负面后果。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第三段 InSPIRE 项目目标的理解。",
+        "stemTranslationZh": "InSPIRE 项目的目标是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "提高当地农场的生产力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "They need to be protectors of the land and contribute to the agricultural economy.",
+              "sourceHighlight": "contribute to the agricultural economy",
+              "optionText": "Improve the productivity of local farms.",
+              "optionHighlight": "Improve the productivity of local farms",
+              "explanation": "原文只说要保护土地并“贡献于农业经济”，并未说提高当地农场的生产力；选项把宽泛的“贡献农业经济”窄化夸大为具体的“提高农场产量”。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "发明控制杂草的新方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "using chemicals to control weeds",
+              "optionText": "Invent new methods for controlling weeds.",
+              "matchType": "exact",
+              "relationNote": "选项借用第二段出现过的 control weeds 制造干扰；那是开发商现有的做法，并非 InSPIRE 的目标。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2023-jan-reading-d-2",
+                "quote": "using chemicals to control weeds",
+                "anchor": "用化学品除草是现有做法"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "使太阳能项目对环境友好。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-d-3",
+                "quote": "InSPIRE is investigating practical approaches to “low-impact” solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+                "anchor": "研究对土地更友好的低影响开发"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在农村地区推广太阳能的使用。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "InSPIRE 旨在农村地区推广太阳能的使用",
+              "explanation": "原文未提及 InSPIRE 以推广太阳能使用为目标；其目标是让太阳能开发对土地更友好，而非扩大使用范围。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "aim to do",
+            "sourceRole": "stem",
+            "targetText": "InSPIRE is investigating practical approaches to “low-impact” solar development",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-3",
+            "relationType": "locationCue",
+            "note": "题干问 aim to do（目标是做什么），原文用 is investigating practical approaches to 表明 InSPIRE 的努力方向，定位答案句。"
+          },
+          {
+            "sourceText": "Make solar projects environmentally friendly",
+            "sourceRole": "correctOption",
+            "targetText": "in a way that is kinder to the land",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "正确选项 environmentally friendly（对环境友好）对应原文 kinder to the land（对土地更友好）与 low-impact（低影响）。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-034": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对第四段所提法律目的的理解，需结合该段语境推断立法意图。",
+        "stemTranslationZh": "第四段提到的法律的目的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "保护传粉昆虫。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-d-4",
+                "quote": "Over 28 states have passed laws related to pollinator habitat protection and pesticide use.",
+                "anchor": "立法关乎传粉昆虫栖息地保护"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2023-jan-reading-d-4",
+                "quote": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades",
+                "anchor": "传粉昆虫数量锐减促成立法"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "限制太阳能开发。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "这些法律旨在限制太阳能开发",
+              "explanation": "原文未提及法律限制太阳能开发；这些法律是关于传粉昆虫栖息地保护和农药使用的。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "使经济多样化。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "这些法律旨在使经济多样化",
+              "explanation": "原文未提及经济多样化；第四段只说传粉昆虫锐减损害了农业经济，并未谈及经济多样化目标。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "确保能源供应。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "这些法律旨在确保能源供应",
+              "explanation": "原文未提及确保能源供应；第四段法律针对的是传粉昆虫栖息地与农药使用，与能源供应无关。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "the laws",
+            "sourceRole": "stem",
+            "targetText": "Over 28 states have passed laws related to pollinator habitat protection and pesticide use.",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-4",
+            "relationType": "locationCue",
+            "note": "题干 the laws 定位到原文 have passed laws related to pollinator habitat protection（通过与传粉昆虫栖息地保护相关的法律）一句。"
+          },
+          {
+            "sourceText": "To conserve pollinators",
+            "sourceRole": "correctOption",
+            "targetText": "pollinator habitat protection",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "正确选项 conserve pollinators（保护传粉昆虫）对应原文 pollinator habitat protection（传粉昆虫栖息地保护）。"
+          }
+        ]
+      },
+      "q-zj-2023-jan-035": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的概括，选择最能涵盖太阳能农场新发展方向的标题。",
+        "stemTranslationZh": "下列哪一项是本文最佳标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "传粉昆虫：离开还是留下",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators",
+              "sourceHighlight": "various kinds of pollinators",
+              "optionText": "Pollinators: To Leave or to Stay",
+              "optionHighlight": "Pollinators",
+              "explanation": "传粉昆虫只是文章中的一个切入点，并非全文主题；该标题以偏概全，且“离开还是留下”也未对应文章内容。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "太阳能：未来的希望",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "InSPIRE is investigating practical approaches to “low-impact” solar development",
+              "sourceHighlight": "“low-impact” solar development",
+              "optionText": "Solar Energy: Hope for the Future",
+              "optionHighlight": "Solar Energy: Hope for the Future",
+              "explanation": "文章聚焦太阳能农场如何兼顾土地生态的具体新发展，而非泛泛而谈太阳能是未来希望；该标题过于宽泛。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "InSPIRE：农业的领军者",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "the head of the Innovative Site Preparation and Impact Reductions on the Environment (InSPIRE)",
+              "sourceHighlight": "InSPIRE",
+              "optionText": "InSPIRE: A Leader in Agriculture",
+              "optionHighlight": "A Leader in Agriculture",
+              "explanation": "InSPIRE 只是文中举的一个项目例子，并未被称为农业领军者；该标题夸大了 InSPIRE 的地位且偏离了太阳能农场这一主题。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "太阳能农场：一种新发展",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2023-jan-reading-d-5",
+                "quote": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
+                "anchor": "太阳能农场的新发展方向"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2023-jan-reading-d-3",
+                "quote": "InSPIRE is investigating practical approaches to “low-impact” solar development",
+                "anchor": "低影响太阳能开发的新探索"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Solar Farms: A New Development",
+            "sourceRole": "correctOption",
+            "targetText": "many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-5",
+            "relationType": "paraphrase",
+            "note": "标题 Solar Farms: A New Development（太阳能农场：一种新发展）概括全文，对应原文太阳能农场把板下空间改造为传粉昆虫庇护所、实现 soil improvement and carbon reduction 的新做法。"
+          },
+          {
+            "sourceText": "A New Development",
+            "sourceRole": "correctOption",
+            "targetText": "“low-impact” solar development",
+            "targetParagraphId": "para-zj-2023-jan-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "标题中的 New Development 对应原文 “low-impact” solar development（低影响太阳能开发）这一新兴发展思路。"
+          }
+        ]
+      }
+    }
+  }
+}

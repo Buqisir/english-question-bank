@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2025-jan",
+  "groups": {
+    "group-zj-2025-jan-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "When Mr. and Mrs. Green got home, Kevin went to talk to them. Word by word, he told them everything, his face burning with worry. To his surprise, the couple were not angry but thankful. Together they hurried inside and lifted the loose floorboard the man had touched. There, covered in dust, lay an old watch. So the man had told the truth after all. Holding the watch with shaking hands, Kevin realized he might have stopped an honest person.\nKevin and Mr. Green took the watch they had found to the police station. There they explained the whole story and asked the officers to be fair to the man. The man looked up in shock. \"Thank you, kid,\" he said softly, his eyes wet. No sooner had he received the watch than a warm smile spread across his face. Watching him, Kevin understood at last: being brave was good, but being kind and fair mattered even more.",
+        "continuationDesign": {
+          "theme": "勇敢之外更要公正与善良——做对的事不止是当场拦下可疑者，更是事后愿意查清真相、还人公道。",
+          "paragraphs": [
+            "第1段承接 starter1：把 Kevin 找 Green 夫妇『谈』这件已发生的事接住，先补一句他坦白时的心理状态（face burning with worry，呼应原文他心里没底的内疚），用 To his surprise 制造小转折——夫妇不怒反谢，自然推动三人一起去查证。沿用原文真有的线索『被撬的地板 floorboard』，让他们掀开地板真找到手表，把 Kevin 的『男子说的是真的吗』疑问变成确凿发现，制造情感冲突：他可能拦错了一个老实人。结尾用动作链+心理（Holding…with shaking hands, realized）收住，为第2段去警察局还公道埋伏笔。",
+            "第2段承接 starter2：把 Kevin 和 Mr. Green『把手表送去警察局』当事实接住，紧跟一句他们的目的——讲清原委、请求公正对待男子，把第1段的内疚转化为行动（解决/收束）。让男子收到手表时由防备到动容，用 No sooner…than 倒装放大这一情绪转折。结尾回扣原文真正强调过的意象——Kevin 当初的『勇敢/做对的事』之惑——点题升华：brave 之外，kind and fair 才更重要，前后呼应他全程的内心挣扎。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "his face burning with worry",
+            "note": "心理+独立主格（with + 名词 + 现在分词作伴随状语）。用一个具体的身体反应（脸发烫）外化抽象情绪（worry），比直接写 he was worried 生动。迁移：任何续写里写紧张/害羞/愤怒，都可套 with one's face/hands + doing 这个结构外化情绪。"
+          },
+          {
+            "text": "Holding the watch with shaking hands, Kevin realized he might have stopped an honest person.",
+            "note": "非谓语作状语（现在分词 Holding 开头）+ 动作细节（with shaking hands）串起心理顿悟。把『拿着』的动作和『意识到』的心理放进同一句，画面与情绪同步推进。迁移：人物在做某动作时突然明白/下决心，都可用『Doing…, sb realized/decided…』。"
+          },
+          {
+            "text": "his eyes wet",
+            "note": "独立主格短结构外化情绪（眼睛湿了=感动/委屈），课标词也能写出克制的细腻。迁移：写人物落泪、惊讶、疲惫，可用 his eyes wet / his eyes wide / his face pale 这类『名词+形容词』独立主格补在主句后。"
+          },
+          {
+            "text": "No sooner had he received the watch than a warm smile spread across his face.",
+            "note": "高分记叙句：No sooner…than 倒装，强调两个动作几乎同时发生，放大情绪转折（拿到表→立刻露出笑）。spread across his face 是『笑容漫开』的课标词写法（不用 beaming）。迁移：续写里凡是『刚一……就……』的关键转折瞬间（开门就看见、话音刚落就……）都可用此句型提速、制造张力。"
+          },
+          {
+            "text": "being brave was good, but being kind and fair mattered even more",
+            "note": "点题升华句：用动名词作主语的对比结构（being…, but being… mattered even more）把主旨说透。迁移：读后续写结尾点题，常需要一句对比/递进的总结句拔高价值取向，可套『doing A was good, but doing B mattered even more』。"
+          }
+        ]
+      }
+    },
+    "group-zj-2025-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "My Views on Filming Short Videos on Campus\nGood morning, everyone. Today I'd like to share my views on filming short videos on campus, which has become quite common among us.\nPersonally, I see both sides of it. On the one hand, recording the fun moments we share can be a creative way to keep our memories alive. On the other hand, some classmates get so absorbed in shooting that they disturb others, and a few even film people without asking.\nTherefore, I'd like to make a few suggestions. First of all, let's always ask for permission before pointing a camera at anyone. What's more, we should avoid filming during class or in quiet areas. In a word, if we film with care, this hobby can bring us joy rather than trouble.\nThank you for listening.",
+        "highlightExpressions": [
+          {
+            "text": "Today I'd like to share my views on filming short videos on campus, which has become quite common among us.",
+            "note": "演讲开场点目的句：用 I'd like to share my views on... 礼貌地亮出演讲主题，which 定语从句顺带交代背景。迁移到任何\"陈述看法\"类演讲/发言，把 filming short videos 换成你的话题即可。"
+          },
+          {
+            "text": "Personally, I see both sides of it.",
+            "note": "辩证表态的引子：先用 Personally 标明这是个人观点，see both sides 表明要客观地一分为二。适用于任何需要\"既看到好处又指出问题\"的看法题，避免一边倒显得片面。"
+          },
+          {
+            "text": "On the one hand, recording the fun moments we share can be a creative way to keep our memories alive. On the other hand, some classmates get so absorbed in shooting that they disturb others, and a few even film people without asking.",
+            "note": "on the one hand... on the other hand 平衡结构，配 so...that 结果状语从句作亮点。是\"利弊两面\"展开的万能框架，换掉具体内容就能用到环保、手机、网课等任何辩证话题。"
+          },
+          {
+            "text": "Therefore, I'd like to make a few suggestions. First of all, let's always ask for permission before pointing a camera at anyone.",
+            "note": "由看法过渡到建议的引出句 + 衔接词：Therefore 承上启下，I'd like to make a few suggestions 礼貌引出建议，First of all 引出第一条建议（后文还可用 What's more 续接分点）。任何\"提出建议\"题都能直接套用，把具体建议换成你的内容即可。"
+          },
+          {
+            "text": "In a word, if we film with care, this hobby can bring us joy rather than trouble.",
+            "note": "得体收束句：In a word 总结 + if 条件句给出\"做到X就能Y\"的正向结论，bring sb joy rather than trouble 升华但不空泛。迁移时把 film with care / this hobby 换成你的行为与对象即可。"
+          }
+        ]
+      }
+    }
+  }
+}

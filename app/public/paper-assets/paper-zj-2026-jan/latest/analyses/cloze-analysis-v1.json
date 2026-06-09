@@ -1,0 +1,663 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2026-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2026-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2026-jan-cloze": {
+      "overview": "记叙文：Ursula 在家乡 Beaverton 找工作受挫后，把家庭农场的一片地改造成向日葵农场（Sunflower Farm），打造出省内热门的农业旅游目的地的创业故事。",
+      "affectiveArc": "先抑后扬：从找工作受挫、家人犹豫、自己信心不足，到农场成名、游客重拾对农业与乡土的珍视，由低走高、充满希望。"
+    }
+  },
+  "blanks": {
+    "q-zj-2026-jan-041": {
+      "blankId": "blank-zj-2026-jan-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "childhood __41__ of exploring the world 指童年时“探索世界的梦想”，dream of doing 表示“做某事的梦想”搭配成立，且与后文 with a desire to pursue 的渴望一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "stories",
+          "meaning": "故事，与“探索世界”不构成内在愿望"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "needs",
+          "meaning": "需求、需要"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "habits",
+          "meaning": "习惯"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of exploring the world",
+          "signalSide": "context-after",
+          "targetText": "childhood dreams of exploring the world",
+          "relation": "dream of doing 固定搭配，of exploring the world 正是该梦想的内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "with a desire to pursue",
+          "signalSide": "context-after",
+          "targetText": "desire",
+          "relation": "desire（渴望）与 dream（梦想）情感同向，呼应童年的愿望。"
+        }
+      ],
+      "teachingNote": "名词空先找其后的 of 短语，确定哪个词能与“做某事”构成固定搭配。"
+    },
+    "q-zj-2026-jan-042": {
+      "blankId": "blank-zj-2026-jan-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "pursue a career in Toronto 指“在多伦多追求事业/职业生涯”，与前文 studied international business（学国际商务）的就业目标一致，且与后句 finding a job（找工作）直接呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "degree",
+          "meaning": "学位（已在学习，而非要去多伦多追求的对象）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hobby",
+          "meaning": "爱好"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "project",
+          "meaning": "项目"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a desire to pursue",
+          "signalSide": "context-before",
+          "targetText": "pursue a career",
+          "relation": "pursue a career 是常见搭配，宾语为 career。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "finding a job",
+          "signalSide": "context-after",
+          "targetText": "career",
+          "relation": "下句 finding a job 与 career 同属“就业/职业”语义场，确认此处谈职业。"
+        }
+      ],
+      "teachingNote": "动词 pursue 的宾语要在职业语义场内选，结合下文“找工作”锁定 career。"
+    },
+    "q-zj-2026-jan-043": {
+      "blankId": "blank-zj-2026-jan-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "finding a job proved more difficult than she'd expected 表示找工作比预期“更难”，与全段“受挫才转而自己创业”的转折逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "practical",
+          "meaning": "实际的、可行的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "important",
+          "meaning": "重要的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dangerous",
+          "meaning": "危险的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "than she",
+          "signalSide": "context-after",
+          "targetText": "more difficult than she'd expected",
+          "relation": "more ... than she'd expected 表示超出预期，only “更难”才与下文受挫情节一致。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "create a job for myself",
+          "signalSide": "context-after",
+          "targetText": "difficult",
+          "relation": "因找工作难，才决定自己造工作，确认是负面的“难”。"
+        }
+      ],
+      "teachingNote": "情感类形容词要与故事走向一致：受挫情节对应“难”，而非“重要/危险”。"
+    },
+    "q-zj-2026-jan-044": {
+      "blankId": "blank-zj-2026-jan-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "if nobody was going to hire me, I would just create a job for myself，hire me（雇用我）与 create a job（自己造工作）形成对照：没人雇我，就自己造岗位。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "invite",
+          "meaning": "邀请"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "notice",
+          "meaning": "注意到"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cover",
+          "meaning": "覆盖、报道"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "create a job for myself",
+          "signalSide": "context-after",
+          "targetText": "hire me",
+          "relation": "hire（雇用）与 create a job（造工作）构成“没人雇—自己造”的对照，宾语 me 受雇关系成立。"
+        }
+      ],
+      "teachingNote": "找“没人……，我就自己……”的对照结构，前后动词意义要对应（雇用 vs 自造岗位）。"
+    },
+    "q-zj-2026-jan-045": {
+      "blankId": "blank-zj-2026-jan-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the idea of an agriculture tourism business 指“做农业旅游生意的想法”，idea of (doing) sth 搭配成立，且下句 began to take root 说的正是“想法生根”，主语只能是 idea。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "issue",
+          "meaning": "问题、议题"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "truth",
+          "meaning": "真相"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "founder",
+          "meaning": "创始人"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of an agriculture tourism business",
+          "signalSide": "context-after",
+          "targetText": "the idea of an agriculture tourism business",
+          "relation": "idea of an ... business 表示“做某生意的想法”，of 短语是想法的内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "came naturally to her",
+          "signalSide": "context-after",
+          "targetText": "idea",
+          "relation": "came naturally to her（自然而然想到）的主语是抽象的“想法”，确认选 idea。"
+        }
+      ],
+      "teachingNote": "看后续谓语（came naturally / take root）能修饰什么主语，反推空格名词。"
+    },
+    "q-zj-2026-jan-046": {
+      "blankId": "blank-zj-2026-jan-046",
+      "blankNo": 46,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the idea ... began to take root 意为“想法开始扎根/萌生发展”，take root 与前文 idea 及农场（农业）语境双重契合，承接“想法自然产生”后开始落地。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gain ground",
+          "meaning": "取得进展、流行起来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "work wonders",
+          "meaning": "创造奇迹、产生奇效"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "raise concerns",
+          "meaning": "引发担忧"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "began to",
+          "signalSide": "context-before",
+          "targetText": "the idea ... began to take root",
+          "relation": "began to take root 表示“开始扎根”，主语是 idea，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "agriculture tourism business",
+          "signalSide": "context-before",
+          "targetText": "take root",
+          "relation": "root（根）与农业/农场语义场呼应，使“想法扎根”一语双关地贴合主题。"
+        }
+      ],
+      "teachingNote": "短语空可拆词义猜：root=根，take root=扎根萌生，主语 idea 决定该选生根类短语。"
+    },
+    "q-zj-2026-jan-047": {
+      "blankId": "blank-zj-2026-jan-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "I proposed the plan to my family 指“把计划提交/提议给家人”，propose sth to sb 搭配成立，并与后文 asked if they could rent me（请求租地）这一提议行为一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "adapted",
+          "meaning": "使适应、改编"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "preferred",
+          "meaning": "更喜欢"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "proved",
+          "meaning": "证明"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the plan to my family",
+          "signalSide": "context-after",
+          "targetText": "proposed the plan to my family",
+          "relation": "propose the plan to sb 表示向某人提出计划，宾语 the plan、对象 my family 搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "and asked if they could rent me",
+          "signalSide": "context-after",
+          "targetText": "proposed",
+          "relation": "and 并列出“请求租地”的提议动作，与“提出计划”同向。"
+        }
+      ],
+      "teachingNote": "动词后接 sth to sb 结构时，优先验证“提出/提交”类搭配 propose sth to sb。"
+    },
+    "q-zj-2026-jan-048": {
+      "blankId": "blank-zj-2026-jan-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "They refused at first, unwilling to take a risk 指家人“起初拒绝”，refused 与 unwilling to take a risk（不愿冒险）因果一致，并与后文 but I finally ... get the green light（最终才获许可）的转折相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "apologized",
+          "meaning": "道歉"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "panicked",
+          "meaning": "惊慌"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "regretted",
+          "meaning": "后悔"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "unwilling to take a risk",
+          "signalSide": "context-after",
+          "targetText": "refused at first",
+          "relation": "unwilling to take a risk（不愿冒险）说明家人态度否定，对应“拒绝”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but I finally",
+          "signalSide": "context-after",
+          "targetText": "get the green light",
+          "relation": "but 转折表明先前是反对，最终才放行，确认前面是 refused。"
+        }
+      ],
+      "teachingNote": "由 but ... finally get the green light 的转折反推：之前态度必为“拒绝”。"
+    },
+    "q-zj-2026-jan-049": {
+      "blankId": "blank-zj-2026-jan-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "I finally managed to get the green light 指“最终设法获得许可”，manage to do（设法做成）搭配成立，且 finally 与历经反对后“努力做成”的语气一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "pretended",
+          "meaning": "假装"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "returned",
+          "meaning": "返回、归还"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "promised",
+          "meaning": "承诺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to get the green light",
+          "signalSide": "context-after",
+          "targetText": "managed to get the green light",
+          "relation": "manage to get 搭配成立，表示“设法得到”绿灯许可。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "I finally",
+          "signalSide": "context-before",
+          "targetText": "managed",
+          "relation": "finally 表示历经周折后成功，与 manage（设法做成）语气一致。"
+        }
+      ],
+      "teachingNote": "finally + to do 结构常配 manage（设法做成），强调克服困难后的成功。"
+    },
+    "q-zj-2026-jan-050": {
+      "blankId": "blank-zj-2026-jan-050",
+      "blankNo": 50,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "Admittedly, I had little confidence in the beginning，but the Sunflower Farm rose to fame：Admittedly（诚然）先让步承认起初信心不足，再用 but 转折，让步—转折逻辑成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Supposedly",
+          "meaning": "据称、想必"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Similarly",
+          "meaning": "同样地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Consequently",
+          "meaning": "因此、结果"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I had little confidence in the beginning",
+          "signalSide": "context-after",
+          "targetText": "Admittedly, I had little confidence in the beginning",
+          "relation": "句首副词 Admittedly 修饰整句“起初信心不足”，作让步状语，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but the Sunflower Farm rose to fame",
+          "signalSide": "context-after",
+          "targetText": "Admittedly, I had little confidence",
+          "relation": "but 表明前句是让步，Admittedly（诚然承认）与 but 构成“让步—转折”链。"
+        }
+      ],
+      "teachingNote": "句首副词看与后文 but 的关系：先承认不足再转折，用 Admittedly。"
+    },
+    "q-zj-2026-jan-051": {
+      "blankId": "blank-zj-2026-jan-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "one of the most sought-after destinations in the province 指“省内最受追捧的旅游目的地之一”，与农业旅游、众多游客 visitors 的语境一致，且 sought-after 修饰“目的地”搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "occupations",
+          "meaning": "职业、占领"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "solutions",
+          "meaning": "解决方案"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "institutions",
+          "meaning": "机构、制度"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "most sought-after",
+          "signalSide": "context-before",
+          "targetText": "most sought-after destinations",
+          "relation": "sought-after（抢手的）修饰旅游目的地最自然，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "many visitors",
+          "signalSide": "context-after",
+          "targetText": "destinations",
+          "relation": "visitors（游客）与 destination（目的地）同属旅游语义场，呼应农业旅游主题。"
+        }
+      ],
+      "teachingNote": "名词在旅游语义场内选：有 visitors、tourism 等线索，应配 destinations。"
+    },
+    "q-zj-2026-jan-052": {
+      "blankId": "blank-zj-2026-jan-052",
+      "blankNo": 52,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "many visitors have never been to a farm at all, let alone a sunflower farm：连普通农场都没去过，“更别提”向日葵农场，let alone 表递进否定，与 never ... at all 的强否定一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "except for",
+          "meaning": "除了……之外"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "such as",
+          "meaning": "例如"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "regardless of",
+          "meaning": "不顾、无论"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a sunflower farm",
+          "signalSide": "context-after",
+          "targetText": "let alone a sunflower farm",
+          "relation": "let alone 后接名词短语 a sunflower farm，作递进否定的更高一级对象，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "have never been to a farm at all",
+          "signalSide": "context-before",
+          "targetText": "let alone a sunflower farm",
+          "relation": "never ... at all 的强否定后接 let alone，表示“更别提”，递进否定成立。"
+        }
+      ],
+      "teachingNote": "前句为强否定（never ... at all）时，后接递进否定短语 let alone（更不用说）。"
+    },
+    "q-zj-2026-jan-053": {
+      "blankId": "blank-zj-2026-jan-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the unique setting allows them to leave the city for a while 指“暂时离开城市”，leave the city for a while 搭配成立，并与后文 breathe in the fresh air（呼吸新鲜空气）这一“到乡间”的体验连贯。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "miss",
+          "meaning": "想念、错过"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "seize",
+          "meaning": "抓住"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tour",
+          "meaning": "游览"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the city for a while",
+          "signalSide": "context-after",
+          "targetText": "leave the city for a while",
+          "relation": "leave the city for a while（暂离城市）搭配成立，宾语 the city。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "breathe in the fresh air",
+          "signalSide": "context-after",
+          "targetText": "leave the city",
+          "relation": "离开城市才能到乡间呼吸新鲜空气，前后动作连贯。"
+        }
+      ],
+      "teachingNote": "看并列后文（呼吸新鲜空气、亲近乡土）判断动词方向：是“离开城市”而非游览。"
+    },
+    "q-zj-2026-jan-054": {
+      "blankId": "blank-zj-2026-jan-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "gain a newfound appreciation for agriculture 指“对农业产生新的欣赏/珍视”，appreciation for sth 搭配成立，与全文让游客重新珍惜乡土与农业的主旨一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "demand",
+          "meaning": "需求、要求"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "support",
+          "meaning": "支持"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "excuse",
+          "meaning": "借口"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for agriculture",
+          "signalSide": "context-after",
+          "targetText": "appreciation for agriculture",
+          "relation": "appreciation for sth（对……的欣赏/珍视）搭配成立，宾语为 agriculture。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "taken for granted",
+          "signalSide": "context-after",
+          "targetText": "appreciation",
+          "relation": "结尾点出人们曾视农业为理所当然，对应此处要“重新珍视”，确认 appreciation。"
+        }
+      ],
+      "teachingNote": "noun + for + 对象 时，结合情感主旨（重新珍惜乡土）锁定 appreciation。"
+    },
+    "q-zj-2026-jan-055": {
+      "blankId": "blank-zj-2026-jan-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "reconnect with their farming roots 指“重新与乡土之根建立联系”，reconnect with 搭配成立，re- 前缀呼应“重拾被长期忽视的乡土”，与下文 taken for granted for too long 一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "deal",
+          "meaning": "处理、应付"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "part",
+          "meaning": "分别、分开"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "compete",
+          "meaning": "竞争"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with their farming roots",
+          "signalSide": "context-after",
+          "targetText": "reconnect with their farming roots",
+          "relation": "reconnect with sth（与……重新联系）搭配成立，宾语为 farming roots。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "taken for granted for too long",
+          "signalSide": "context-after",
+          "targetText": "reconnect",
+          "relation": "曾长期被忽视，如今“重新联结”乡土，re- 的“重新”义贴合语境。"
+        }
+      ],
+      "teachingNote": "with sth 结构 + “重拾被忽视之物”的情感，提示带 re-（重新）的 reconnect。"
+    }
+  }
+}

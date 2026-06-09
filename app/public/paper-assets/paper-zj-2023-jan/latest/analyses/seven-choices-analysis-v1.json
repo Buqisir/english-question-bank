@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2023-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2023-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "import-pipeline-agent",
+    "reviewedAt": "2026-06-08",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2023-jan-seven-choices": {
+      "overview": "本文是一篇说明文，围绕“如何让坐火车旅行尽可能愉快”给出建议。每个段落以一个祈使短语小标题（Plan ahead / Use a travel agent / Bring a blanket / Arrive early / Have fun）开头，再展开具体做法。七选五要求在五个段落中各补一个最贴合上下文逻辑与话题场的句子。",
+      "discourseStructure": {
+        "summary": "首段以油价上涨、安检排长队引出“坐火车度假”的话题，并预告全文是若干条旅行建议。随后五段各围绕一个小标题展开一条建议：提前订票、用旅行社、自带毛毯、早到车站、享受旅程。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "导入",
+            "paragraphIds": [
+              "para-zj-2023-jan-seven-title"
+            ],
+            "summary": "用油价上涨与安检排队作对比，引出坐火车出行的舒适与放松，并预告下文给出建议。"
+          },
+          {
+            "unitId": "unit-plan-ahead",
+            "heading": "Plan ahead",
+            "paragraphIds": [
+              "para-zj-2023-jan-seven-p1"
+            ],
+            "summary": "长途列车尤其卧铺很快售罄，建议至少提前 90 天预订。"
+          },
+          {
+            "unitId": "unit-travel-agent",
+            "heading": "Use a travel agent",
+            "paragraphIds": [
+              "para-zj-2023-jan-seven-p2"
+            ],
+            "summary": "把行程交给旅行社代办，能找到折扣票，还可能安排靠近餐车的卧铺。"
+          },
+          {
+            "unitId": "unit-blanket",
+            "heading": "Bring a blanket",
+            "paragraphIds": [
+              "para-zj-2023-jan-seven-p3"
+            ],
+            "summary": "火车不免费提供毛毯，车厢温度难控，夏天空调尤其冷，故应自带。"
+          },
+          {
+            "unitId": "unit-arrive-early",
+            "heading": "Arrive early",
+            "paragraphIds": [
+              "para-zj-2023-jan-seven-p4"
+            ],
+            "summary": "列车班次很少，错过后果严重，需早到，并注意时刻表上是发车时间。"
+          },
+          {
+            "unitId": "unit-have-fun",
+            "heading": "Have fun",
+            "paragraphIds": [
+              "para-zj-2023-jan-seven-p5"
+            ],
+            "summary": "火车旅行不适合没耐心的人，可读书、织毛线、做填字游戏或看窗外风景，享受慢节奏。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2023-jan-036": {
+      "blankId": "blank-zj-2023-jan-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "sell out very quickly",
+        "no matter when you travel",
+        "make your reservations at least 90 days in advance"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2023-jan-seven-p1",
+        "headingAnchor": "Plan ahead",
+        "beforeQuote": "especially the sleeping car accommodations, sell out very quickly.",
+        "afterQuote": "But no matter when you travel,"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That’s particularly true",
+          "signalSide": "option",
+          "targetText": "sell out very quickly",
+          "relation": "That 回指前句“车票很快售罄”这一事实，承接上文。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "sell out very quickly",
+          "signalSide": "context-before",
+          "targetText": "busy summer months",
+          "relation": "前句的“很快售罄”与选项 busy summer months（旺季）同属订票紧张话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "context-after",
+          "targetText": "particularly true during busy summer months",
+          "relation": "空后 But 表转折：从“尤其在繁忙夏季更紧张”转到“但无论何时都应提前订票”。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "前句说卧铺车票很快售罄，D 句用 That 回指这一事实并补充“在繁忙夏季尤其如此”，再由空后 But 转折到“无论何时都要提前订”，逻辑顺畅。",
+        "matchedClues": [
+          {
+            "contextSide": "sell out very quickly",
+            "optionSide": "That’s particularly true during busy summer months",
+            "relation": "D 用 That 指代“售罄”这一情况，并指出夏季旺季尤甚。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 提到“等下一班超过 24 小时”，属于错过车的话题，与本段订票售罄主题不符，应归于 Arrive early 段。"
+        }
+      ],
+      "teachingNote": "看空前的事实陈述与空后的 But 转折，选用 That 回指前文且能被转折承接的句子。"
+    },
+    "q-zj-2023-jan-037": {
+      "blankId": "blank-zj-2023-jan-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "travel agent",
+        "make suggestions",
+        "handle the actual reservations",
+        "walk through several cars on a moving train three times a day for your meals"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2023-jan-seven-p2",
+        "headingAnchor": "Use a travel agent",
+        "beforeQuote": "A good one can sometimes find you discounted tickets.",
+        "afterQuote": "walk through several cars on a moving train three times a day for your meals."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "He may also book you",
+          "signalSide": "option",
+          "targetText": "travel agent / A good one",
+          "relation": "He 回指本段的 travel agent（前句 A good one），保持人称一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "next to the diner",
+          "signalSide": "option",
+          "targetText": "three times a day for your meals",
+          "relation": "选项的 diner（餐车）与空后 meals 同属用餐话题场，构成因果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "context-after",
+          "targetText": "book you in a sleeping car that’s right next to the diner",
+          "relation": "空后 Then 表结果：因为安排了靠近餐车的卧铺，所以就不必为吃饭穿过几节车厢。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本段主语是 travel agent，G 句用 He 回指并补充“还可能把你安排在紧挨餐车的卧铺”，恰好解释空后 Then 句“就不用为吃饭来回穿车厢”，因果衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "three times a day for your meals",
+            "optionSide": "a sleeping car that’s right next to the diner",
+            "relation": "靠近餐车（diner）正是空后“不必为三餐穿车厢”的原因。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 谈“费用比一间卧铺便宜得多”，虽含 sleeping/cost 话题，但无法承接空后 Then 句的吃饭情境，逻辑不符。"
+        }
+      ],
+      "teachingNote": "抓住人称 He 回指 travel agent，再用空后 Then 的结果反推出“靠近餐车”这一原因句。"
+    },
+    "q-zj-2023-jan-038": {
+      "blankId": "blank-zj-2023-jan-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "won’t be provided with a blanket",
+        "overnight one",
+        "the air conditioning can make them quite cold"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2023-jan-seven-p3",
+        "headingAnchor": "Bring a blanket",
+        "beforeQuote": "even if your trip is an overnight one.",
+        "afterQuote": "In the summer in particular, the air conditioning can make them quite cold."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "temperature on rail cars",
+          "signalSide": "option",
+          "targetText": "the air conditioning can make them quite cold",
+          "relation": "选项的 temperature 与空后 air conditioning、cold 同属车厢温度话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "air conditioning can make them quite cold",
+          "signalSide": "context-after",
+          "targetText": "temperature on rail cars is often hard to control",
+          "relation": "空后“空调让车厢很冷”正是选项“车厢温度难以控制”的具体例证。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "make them quite cold",
+          "signalSide": "context-after",
+          "targetText": "rail cars",
+          "relation": "空后 them 指代选项中的 rail cars，构成代词回指。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本段讲火车不免费提供毛毯，C 句指出“车厢温度往往难以控制”，正好被空后“夏天空调让车厢很冷”举例说明，同时空后的 them 回指 C 中的 rail cars。",
+        "matchedClues": [
+          {
+            "contextSide": "the air conditioning can make them quite cold",
+            "optionSide": "The temperature on rail cars is often hard to control",
+            "relation": "温度难控是总述，空调让车厢很冷是具体表现。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 含“夏季尤其如此”，看似呼应 In the summer，但 D 需回指一个前置事实，本空前无可被 That 指代的对象，故不合适。"
+        }
+      ],
+      "teachingNote": "用空后代词 them 与温度/空调词场锁定“车厢温度难控”这一被举例的总述句。"
+    },
+    "q-zj-2023-jan-039": {
+      "blankId": "blank-zj-2023-jan-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "operate just once a day",
+        "run only three times a week",
+        "missing yours can be a disaster"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2023-jan-seven-p4",
+        "headingAnchor": "Arrive early",
+        "beforeQuote": "so missing yours can be a disaster.",
+        "afterQuote": "Note: The times listed on the schedules are departure times"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "wait longer than 24 hours to catch the next one",
+          "signalSide": "option",
+          "targetText": "missing yours can be a disaster",
+          "relation": "选项“要等超过 24 小时才能赶上下一班”正是空前“错过会是灾难”的原因，同属错车后果话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "missing yours can be a disaster",
+          "signalSide": "context-before",
+          "targetText": "wait longer than 24 hours to catch the next one",
+          "relation": "空前“错过即灾难”与选项的“等超过 24 小时”因果对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "catch the next one",
+          "signalSide": "option",
+          "targetText": "trains operate just once a day",
+          "relation": "next one 中的 one 回指前文的 train，承接班次稀少的信息。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说列车班次极少、错过即灾难，E 句具体说明“可能要等超过 24 小时才能赶上下一班”，正是“早到”这一建议的理由，因果衔接自然。",
+        "matchedClues": [
+          {
+            "contextSide": "operate just once a day / missing yours can be a disaster",
+            "optionSide": "wait longer than 24 hours to catch the next one",
+            "relation": "班次少导致错过后要等很久，解释了为何 disaster。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A “火车旅行不适合没耐心的人”是 Have fun 段的总起句，与本段“早到、错车后果”的具体说理不符。"
+        }
+      ],
+      "teachingNote": "顺着空前“错过即灾难”的因果链，选出说明错车后要等很久的具体后果句。"
+    },
+    "q-zj-2023-jan-040": {
+      "blankId": "blank-zj-2023-jan-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Have fun",
+        "Read a book, knit, do a crossword puzzle",
+        "watch the world unfold outside the window",
+        "calculate your speed"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2023-jan-seven-p5",
+        "headingAnchor": "Have fun",
+        "beforeQuote": "Have fun.",
+        "afterQuote": "Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Train trips aren’t for impatient types",
+          "signalSide": "option",
+          "targetText": "Read a book, knit, do a crossword puzzle",
+          "relation": "选项点明“火车旅行不适合没耐心的人”，与空后建议消磨时间的慢节奏活动同属一个话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "watch the world unfold outside the window",
+          "signalSide": "context-after",
+          "targetText": "aren’t for impatient types",
+          "relation": "空后“看窗外世界缓缓展开”等慢节奏活动印证“需要耐心”这一主题句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "impatient types",
+          "signalSide": "option",
+          "targetText": "knit, do a crossword puzzle",
+          "relation": "impatient（没耐心）与空后织毛线、做填字等需耐心打发时间的活动相对照。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本段以 Have fun 为题，A 作主题句指出“火车旅行不适合没耐心的人”，下文列举读书、织毛线、看风景等慢节奏活动，正是给“有耐心者”享受旅程的建议，话题一致。",
+        "matchedClues": [
+          {
+            "contextSide": "Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window",
+            "optionSide": "Train trips aren’t for impatient types",
+            "relation": "这些消遣活动正是“需要耐心”才能享受的旅行方式。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B “两侧都能看到风景”虽与 watch the window 有关，但只是细节，不能统领整段“享受慢旅程”的主题。"
+        }
+      ],
+      "teachingNote": "段首空多为主题句，结合下文罗列的慢节奏消遣活动，选能统领全段的“需要耐心”总起句。"
+    }
+  }
+}

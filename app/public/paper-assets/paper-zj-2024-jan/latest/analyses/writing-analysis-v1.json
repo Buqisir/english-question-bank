@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2024-jan",
+  "groups": {
+    "group-zj-2024-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Stand Up and Exercise, Everybody!\nHave you ever felt sleepy and stiff after sitting through several lessons? Here is a simple exercise I'd love to recommend — stretching by the desk during the break.\nIt couldn't be easier to do. When the bell rings, just stand up, raise your arms high, turn your waist slowly from side to side, and take a few deep breaths. The whole thing takes only three minutes and needs no equipment at all.\nWhat makes it perfect for the break is that it costs nothing yet rewards a lot. It wakes up your tired body, clears your foggy mind, and gets you ready for the next class. The day I tried it, I felt the sleepiness fade away in seconds.\nSo why not stand up and stretch? Your body and your grades will both thank you!",
+        "highlightExpressions": [
+          {
+            "text": "Have you ever felt sleepy and stiff after sitting through several lessons?",
+            "note": "开篇用一个贴近读者经验的设问把人“拉进来”，制造共鸣后再引出推荐对象。任何面向公众/读者的报道、投稿、倡议都可迁移：把括号里的具体困扰换成你的话题（如 Have you ever struggled to.../felt bored when...）。"
+          },
+          {
+            "text": "Here is a simple exercise I'd love to recommend —",
+            "note": "亮明推荐/介绍意图的“破题句”，破折号后自然引出主角。迁移到任何推荐类应用文（推荐书、活动、地点、习惯）：Here is a... I'd love to recommend — + 名称。"
+          },
+          {
+            "text": "What makes it perfect for the break is that it costs nothing yet rewards a lot.",
+            "note": "用 What makes... is that... 主语从句强调“它好在哪”，是给出推荐理由的高分框架句，yet 形成轻对比增色。迁移：What makes it ideal/special/worth trying is that... 引出任何事物的核心优点。"
+          },
+          {
+            "text": "The day I tried it, I felt the sleepiness fade away in seconds.",
+            "note": "用一句亲身体验（feel sth do 感官动词补语）把空泛好处落到具体画面，让感想从过程里长出来。迁移到任何需要个人体验佐证的投稿/分享：The day/time I tried/did it, I felt/found..."
+          },
+          {
+            "text": "So why not stand up and stretch?",
+            "note": "结尾用 why not 反问发出号召，得体收束、富感染力，呼应面向公众的语域。迁移到任何倡议/推荐类结尾：So why not + 动词原形（join us / give it a try / start today）?"
+          }
+        ]
+      }
+    },
+    "group-zj-2024-jan-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. For a moment she just stood there, breathing hard, hardly believing what she had done. Had she really finished the whole mile? The word that had frightened her so much now felt smaller, broken into shadows and curves she had reached one by one. So great was her joy that she could not stop smiling. No sooner had she caught her breath than a new thought lit up in her mind: if a mile could be beaten step by step, what else could?\nEva decided to use the same trick to deal with the school building. Instead of picturing the whole huge six-story building at once, she chose one small point ahead and walked to it, then chose the next. First the stairs, then the corner, then the right door. Step by step, the endless hallways stopped frightening her. Days later, she found the library, the cafeteria and the gym without getting lost. The building was no longer a place to fear, but simply many small steps waiting to be taken.",
+        "continuationDesign": {
+          "theme": "面对令人望而生畏的庞大难题，把它拆成一个个够得着的近处小目标、一步步去够；窍门可迁移，自信随之建立（人与自我·成长突破）。",
+          "paragraphs": [
+            "第1段承接 starter1：把'Coach 夸她、Eva 意外'当成已发生事实接住，紧跟一句心理定格（站着喘气、不敢相信）做承接评价，再让她回头确认自己真的跑完了整英里——把原文反复强调的吓人词'a mile'与她的拆分窍门（橡树影子 shadow、拐弯 curve、一圈圈 laps）直接回扣，写出'整体被拆成够得着的小段后就被征服了'的恍然大悟；以情绪递进（惊讶→喜悦→领悟）收束，并用一句反问把'窍门可迁移'的悬念抛向第2段，自然过渡。沿用原文人设（爱动脑、易紧张）与意象，不另起炉灶。",
+            "第2段承接 starter2：把'她决定对大楼用同一个窍门'接住后，立刻把窍门具体化——不再盯着六层大楼这个吓人整体，而是一次只选一个近处小目标（楼梯→拐角→带号码的门），与第1段跑道上的'盯着近处小目标'结构呼应；用时间过渡（Days later）让窍门见效，让她找到了原文里她曾假装'不存在'的 library/cafeteria/gym，前后照应并制造成长闭环；结尾点题——大楼不再可怕，只是许多等待被一步步走完的小步，回扣全文'拆整为零、步步够得着'的中心意象，完成主旨升华。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "For a moment she just stood there, breathing hard, hardly believing what she had done.",
+            "note": "心理+动作链描写：用'定格一刻+现在分词 breathing hard 作伴随状语+ hardly believing 串联'刻画人物呆住、不敢相信的瞬间。迁移：任何续写里人物达成意外结果后的'怔住'瞬间，都可套'For a moment sb just stood/sat there, doing..., hardly believing...'。"
+          },
+          {
+            "text": "So great was her joy that she could not stop smiling.",
+            "note": "高级记叙句·部分倒装强调情绪（So + adj. + was sb that...）：把强烈情绪前置倒装，比 She was very happy 生动得多，且全用课标词。迁移：表达喜悦/惊讶/害怕等强情绪高潮时套用 So + 形容词 + was/were + 主语 + that...。"
+          },
+          {
+            "text": "No sooner had she caught her breath than a new thought lit up in her mind",
+            "note": "高级记叙句·No sooner...than 倒装：表'刚一…就…'，把两个相继动作紧凑连接，制造转折/顿悟节奏。迁移：人物从一个状态突然转入新念头/新行动时使用，注意主句用过去完成时、从句用一般过去时。"
+          },
+          {
+            "text": "Instead of picturing the whole huge six-story building at once, she chose one small point ahead and walked to it, then chose the next.",
+            "note": "动作链+对比结构描写：用 Instead of doing... 否定错误做法、再用'chose...walked to it...then chose the next'拆解逐步动作，把抽象的'拆整为零'方法落到具体动作上。迁移：写人物改用新策略、化整为零地解决难题时，套'Instead of doing the whole thing, sb did one small part, then the next'。"
+          },
+          {
+            "text": "Step by step, the endless hallways stopped frightening her.",
+            "note": "环境烘托+状语点题描写：用 Step by step 置首做节奏状语，让令人生畏的环境（endless hallways）随主人公心态转变而'不再可怕'，以环境反衬人物成长。迁移：表现人物逐步克服恐惧、环境压迫感消退时，用'Step by step, the + 令人生畏的事物 + stopped + doing'。"
+          }
+        ]
+      }
+    }
+  }
+}

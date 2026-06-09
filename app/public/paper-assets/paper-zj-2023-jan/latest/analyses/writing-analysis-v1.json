@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2023-jan",
+  "groups": {
+    "group-zj-2023-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Getting to Know the Plants Around Us\nLast weekend, I joined an activity called \"Getting to Know the Plants Around Us\", organized by our Student Union. Guided by a biology teacher, we walked around the campus, observing different plants closely. To our surprise, we learned that the ordinary tree outside our classroom was over fifty years old. We also recorded the names and features of various plants in our notebooks. What impressed me most was discovering how much life hides in places we pass by every day. Through this activity, I not only gained valuable knowledge but also realized that nature deserves our attention and care.",
+        "highlightExpressions": [
+          {
+            "text": "Last weekend, I joined an activity called \"Getting to Know the Plants Around Us\", organized by our Student Union.",
+            "note": "报道/记叙类开头框架：时间 + 我参加了一个名为……的活动 + 过去分词 organized by 交代主办方。迁移到任何“报道一次活动”的题，把活动名和主办方替换即可，一句话点明时间、事件、组织者。"
+          },
+          {
+            "text": "Guided by a biology teacher, we walked around the campus, observing different plants closely.",
+            "note": "过程描写框架：过去分词作状语(Guided by…)交代背景 + 主句动作 + 现在分词(observing…)伴随状语补充细节。适用于一切“描述活动过程”的应用文，能在一句里塞进多个动作、显得连贯不流水账。"
+          },
+          {
+            "text": "What impressed me most was discovering how much life hides in places we pass by every day.",
+            "note": "表态/升华框架：What impressed me most was… 主语从句强调“最打动我的是”，后接一个从具体过程长出来的感受。迁移到任何写收获感想的题，替换后半句即可自然地点出个人领悟，比“很有意义”有画面感。"
+          },
+          {
+            "text": "Through this activity, I not only gained valuable knowledge but also realized that nature deserves our attention and care.",
+            "note": "得体结尾框架：Through this activity + not only…but also… 同时收束“知识层面的收获”和“情感/认识层面的感悟”。几乎所有“活动+收获”类应用文都能套，把两个 but also 的内容换成本题主题即可。"
+          }
+        ]
+      }
+    },
+    "group-zj-2023-jan-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "A few weeks later, I went to the farm again. My friends had kept their promise: the broken window of the milking house was fixed, the hole no longer there to trap small creatures. Walking past it, I could not help thinking of the tiny bird. Had she survived? Did she still remember the hand that held her? My eyes kept turning toward the path where the blackberry bushes grew, hoping for a flash of wings that never came.\nI was just about to leave when the hummingbird appeared. Out of the evening light she came, hovering before my face, turning her head from side to side as if making sure it was truly me. My heart beating fast, I held my breath and stood perfectly still. For a long moment we looked at each other, the years and the words we could not share seeming to flow into that single quiet look. Then she let out a squeaking call and rose into the golden sky. Smiling through tears, I finally understood: a small kindness, once given, is never forgotten.",
+        "continuationDesign": {
+          "theme": "一次微小的善举能在人与自然间架起跨越言语的情感桥梁；善良会被记住，也会被回报。",
+          "paragraphs": [
+            "承接 starter1'数周后重返农场'：先用'朋友兑现了承诺、破窗已修好'这一原文真实线索落地（窗、挤奶房、洞），既交代我重来的情境，又借'洞不再困住小生命'暗暗回扣救鸟主题；随即把焦点转向内心——'它还活着吗？还记得那只手吗？'制造悬念与期待；最后用'目光一次次望向那条黑莓小路、盼着翅膀的影子却始终不来'设置反衬式落空，为第2段的重逢蓄势。本段冲突是'惦念与不确定'，行动是'寻找与等待'。",
+            "承接 starter2'我正要离开时蜂鸟出现'：用'我正要走、它偏在此刻现身'强化戏剧性重逢；动作沿用原文真有的核心意象——悬停在脸前、左右转头打量、明亮对视、那声熟悉的鸣叫——确保点题意象都是原文强调过的（绝不新造象征物）；以心理与环境烘托（屏息站定、夕照金光）推向高潮；结尾用'含泪微笑'收束情绪，并以一句点题升华——善举一旦付出，永不被遗忘——呼应全文'人与鸟跨越言语的联结'主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "I could not help thinking of the tiny bird",
+            "note": "心理描写句块。'could not help doing'（情不自禁做某事）是课标内的高分固定搭配，用来写'忍不住惦念/回想'。可迁移到任何续写中表达人物对旧人旧事的牵挂，如 I could not help looking back / thinking of…。"
+          },
+          {
+            "text": "My heart beating fast, I held my breath and stood perfectly still",
+            "note": "独立主格 + 动作链。前半 'My heart beating fast' 是独立主格作状语写生理反应（紧张/激动），后半把'屏住呼吸、纹丝站定'两个动作串成链。可迁移到任何重逢、紧张、屏息等待的高潮场景。"
+          },
+          {
+            "text": "turning her head from side to side as if making sure it was truly me",
+            "note": "非谓语作状语 + as if 虚拟。现在分词 turning… 伴随主句动作，as if 引出'仿佛在确认'的想象。可迁移到刻画人或动物的细腻神态，把外在动作翻译成内心意图。"
+          },
+          {
+            "text": "the years and the words we could not share seeming to flow into that single quiet look",
+            "note": "独立主格作环境/情感烘托。用'……流进那一道安静的目光'把抽象情感画面化，定从 we could not share 修饰 words。可迁移到任何'无言胜有言'的对视、告别、和解场景。"
+          },
+          {
+            "text": "Smiling through tears, I finally understood",
+            "note": "非谓语作状语 + 情绪点题。现在分词短语 'Smiling through tears' 前置作伴随状语，一句话同时传达'又哭又笑'的复杂情绪并引出顿悟。可迁移到结尾升华，让人物在动作中完成情感与主旨的收束。"
+          }
+        ]
+      }
+    }
+  }
+}

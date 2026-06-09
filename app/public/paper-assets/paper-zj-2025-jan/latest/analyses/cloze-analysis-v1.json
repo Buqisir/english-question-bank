@@ -1,0 +1,631 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2025-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2025-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2025-jan-cloze": {
+      "overview": "记叙文。讲述教师 Manuela Ribeiro 把自己对烹饪的爱好通过 Bookalokal 平台变成在家办晚宴、招待陌生人的经历，并谈到其中的自由与挑战。",
+      "affectiveArc": "整体积极向上：从把爱好变成乐事，到坦言筹备一场晚宴的辛苦挑战，但始终热情满满，乐在其中。"
+    }
+  },
+  "blanks": {
+    "q-zj-2025-jan-041": {
+      "blankId": "blank-zj-2025-jan-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文反复出现 dinner parties、recipes、dishes、food，可知她痴迷的是烹饪，cooking 与全文话题场呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reading",
+          "meaning": "阅读"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "traveling",
+          "meaning": "旅行"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teaching",
+          "meaning": "教书"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "dinner parties",
+          "signalSide": "context-after",
+          "targetText": "holding dinner parties",
+          "relation": "下文办晚宴、做菜，指向她的瘾是 cooking 烹饪。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "new recipes",
+          "signalSide": "context-after",
+          "relation": "recipes 属于烹饪语义场，呼应 cooking。"
+        }
+      ],
+      "teachingNote": "首句名词空可往下文话题词找答案，烹饪相关词扎堆即锁定 cooking。"
+    },
+    "q-zj-2025-jan-042": {
+      "blankId": "blank-zj-2025-jan-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "前文说她有一种 healthy addiction（即对烹饪的爱好），此处 put her hobby to good use 指把这一爱好善加利用，hobby 与 addiction 同指。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "energy",
+          "meaning": "精力"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "education",
+          "meaning": "教育"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "money",
+          "meaning": "金钱"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "put her",
+          "signalSide": "stem",
+          "targetText": "put her hobby to good use",
+          "relation": "put ... to good use 的宾语，承接前文的 addiction，即她的 hobby。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a healthy addiction",
+          "signalSide": "context-before",
+          "relation": "addiction 即她的爱好，与 hobby 同指。"
+        }
+      ],
+      "teachingNote": "回指题看前文同义词，addiction 与 hobby 同指即可定 A。"
+    },
+    "q-zj-2025-jan-043": {
+      "blankId": "blank-zj-2025-jan-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "她在网站上注册后欢迎来客到家办晚宴，下文也提到 share my passion 与 new people，可知这些是素不相识的陌生人 strangers。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "coworkers",
+          "meaning": "同事"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "students",
+          "meaning": "学生"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "relatives",
+          "meaning": "亲戚"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "welcomes",
+          "signalSide": "context-before",
+          "targetText": "welcomes strangers into her Brussels flat",
+          "relation": "welcomes 的宾语是她欢迎进家门的人，结合下文应是陌生人。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "new people",
+          "signalSide": "context-after",
+          "relation": "下文 new people 与 strangers 同指，互为印证。"
+        }
+      ],
+      "teachingNote": "陌生人办家宴的商业模式，结合下文 new people 即可锁定 strangers。"
+    },
+    "q-zj-2025-jan-044": {
+      "blankId": "blank-zj-2025-jan-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "charge 表示收费，charge €35 per person 指她每人收 35 欧元，与商业平台办晚宴的语境契合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "pays",
+          "meaning": "支付"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "owes",
+          "meaning": "欠（钱）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "raises",
+          "meaning": "筹集；提高"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "€35 per person",
+          "signalSide": "context-after",
+          "targetText": "charges €35 per person",
+          "relation": "charge sb. money，每人 35 欧是她收取的费用，施受关系成立。"
+        }
+      ],
+      "teachingNote": "她是提供服务方，收钱用 charge，与表示付钱的 pay 区分。"
+    },
+    "q-zj-2025-jan-045": {
+      "blankId": "blank-zj-2025-jan-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "pursue one's hobby 指追求/从事爱好，平台成为她从事买食材、试新菜、办晚宴这一爱好的完美载体。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "choosing",
+          "meaning": "选择"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "discussing",
+          "meaning": "讨论"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "changing",
+          "meaning": "改变"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her hobby of buying food",
+          "signalSide": "context-after",
+          "targetText": "pursuing her hobby",
+          "relation": "pursue 的宾语是 her hobby，追求/从事爱好搭配成立。"
+        }
+      ],
+      "teachingNote": "platform for doing 后接动名词，pursue one's hobby 是固定搭配。"
+    },
+    "q-zj-2025-jan-046": {
+      "blankId": "blank-zj-2025-jan-046",
+      "blankNo": 46,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "try out 表示尝试、试验，try out new recipes 指试做新食谱，与买食材、办晚宴并列，构成烹饪爱好的内容。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "passing on",
+          "meaning": "传递；转交"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "going over",
+          "meaning": "复习；仔细检查"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "taking down",
+          "meaning": "记下；拆除"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "new recipes",
+          "signalSide": "context-after",
+          "targetText": "trying out new recipes",
+          "relation": "try out 的宾语是 new recipes，试做新菜谱搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "trying out",
+          "relation": "out 在此强调试验出结果，try out 表示试做。"
+        }
+      ],
+      "teachingNote": "短语题拆开各词意，try out 表示试做，与 recipes 搭配。"
+    },
+    "q-zj-2025-jan-047": {
+      "blankId": "blank-zj-2025-jan-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "meet new people 表示结识新朋友，与前文 share my passion 并列，体现办晚宴的社交价值。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hire",
+          "meaning": "雇用"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "help",
+          "meaning": "帮助"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "train",
+          "meaning": "培训"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "new people",
+          "signalSide": "context-after",
+          "targetText": "meet new people",
+          "relation": "meet 的宾语是 new people，结识新人搭配成立。"
+        }
+      ],
+      "teachingNote": "meet new people 是高频搭配，呼应前文 share my passion 的社交主题。"
+    },
+    "q-zj-2025-jan-048": {
+      "blankId": "blank-zj-2025-jan-048",
+      "blankNo": 48,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "in honor of 表示为纪念/致敬，她做传统巴西菜以致敬自己的故乡 native home，语义契合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "in addition to",
+          "meaning": "除……之外"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "in return for",
+          "meaning": "作为对……的回报"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in line with",
+          "meaning": "与……一致"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her native home",
+          "signalSide": "context-after",
+          "targetText": "in honor of her native home",
+          "relation": "in honor of 的宾语是 her native home，做家乡菜以致敬故乡。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "traditional Brazilian dishes",
+          "signalSide": "context-before",
+          "relation": "传统巴西菜与故乡呼应，体现致敬之意。"
+        }
+      ],
+      "teachingNote": "短语题结合语境，做传统家乡菜表致敬，选 in honor of。"
+    },
+    "q-zj-2025-jan-049": {
+      "blankId": "blank-zj-2025-jan-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "pair A with B 表示把 A 与 B 搭配，她有时把晚宴菜品与自己喜爱的啤酒搭配，with 提示 pair 的固定搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "replaces",
+          "meaning": "替换"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tastes",
+          "meaning": "品尝"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "orders",
+          "meaning": "点（餐）；订购"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with her favorite beers",
+          "signalSide": "context-after",
+          "targetText": "pairs dinner courses with her favorite beers",
+          "relation": "pair ... with ... 把菜品与啤酒搭配，with 提示固定结构。"
+        }
+      ],
+      "teachingNote": "看到 ... with ... 结构，pair A with B 表示搭配。"
+    },
+    "q-zj-2025-jan-050": {
+      "blankId": "blank-zj-2025-jan-050",
+      "blankNo": 50,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "as opposed to 表示与……相对/相反，平台给她极大自由，与之相对的是餐厅各种受限的情形，构成对比。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "related",
+          "meaning": "相关的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "subject",
+          "meaning": "易受……影响的；从属的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "vital",
+          "meaning": "至关重要的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "a great deal of freedom",
+          "signalSide": "context-before",
+          "targetText": "as opposed to a restaurant",
+          "relation": "平台的自由与餐厅的受限相对，as opposed to 引出对比。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to a restaurant",
+          "signalSide": "context-after",
+          "targetText": "opposed to a restaurant",
+          "relation": "as opposed to 后接 a restaurant，固定搭配成立。"
+        }
+      ],
+      "teachingNote": "前后构成对比时，as opposed to 表示与……相反。"
+    },
+    "q-zj-2025-jan-051": {
+      "blankId": "blank-zj-2025-jan-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "与给她自由的平台相对，餐厅的服务是 impersonal 冷淡不带个人色彩的，菜单提前固定、餐食一成不变，三点并列凸显餐厅的刻板。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "invaluable",
+          "meaning": "无价的；极宝贵的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unsuitable",
+          "meaning": "不合适的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unprofessional",
+          "meaning": "不专业的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the service is",
+          "signalSide": "context-before",
+          "targetText": "the service is impersonal",
+          "relation": "the service 与 impersonal 主系表，餐厅服务冷淡缺乏人情味。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the menu is known in advance",
+          "signalSide": "context-after",
+          "relation": "菜单提前固定，与服务冷淡并列，凸显餐厅的刻板无个性。"
+        }
+      ],
+      "teachingNote": "与平台自由作对比，餐厅服务用贬义 impersonal 表冷淡无个性。"
+    },
+    "q-zj-2025-jan-052": {
+      "blankId": "blank-zj-2025-jan-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "餐厅菜单提前已知，故 the meal is expected to be no surprise 指那一餐毫无惊喜，与平台带来的新鲜体验形成对比。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "end",
+          "meaning": "结束"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "need",
+          "meaning": "需要"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "problem",
+          "meaning": "问题"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the menu is known in advance",
+          "signalSide": "context-before",
+          "targetText": "the meal is expected to be no surprise",
+          "relation": "菜单提前已知，故餐食毫无惊喜，no surprise 与之逻辑呼应。"
+        }
+      ],
+      "teachingNote": "菜单提前已知 → 餐食毫无惊喜，no surprise 与前文因果呼应。"
+    },
+    "q-zj-2025-jan-053": {
+      "blankId": "blank-zj-2025-jan-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "but 转折后说筹备一场晚宴有时要花上好几天，可见这也是个不小的 challenge 挑战。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lesson",
+          "meaning": "教训；课"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "pleasure",
+          "meaning": "乐趣"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "success",
+          "meaning": "成功"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "But",
+          "signalSide": "stem",
+          "targetText": "But it’s also a great challenge",
+          "relation": "But 转折，引出前文乐事之外的难处，即挑战。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "it can sometimes take days",
+          "signalSide": "context-after",
+          "relation": "筹备一场晚宴要花数天，印证这是 challenge。"
+        }
+      ],
+      "teachingNote": "But 转折 + 耗时数天，定 challenge 表挑战。"
+    },
+    "q-zj-2025-jan-054": {
+      "blankId": "blank-zj-2025-jan-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "organise a single event 表示筹办一场活动，承接前文办晚宴的辛苦，筹办一场晚宴有时要花数天。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "celebrate",
+          "meaning": "庆祝"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "record",
+          "meaning": "记录"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "attend",
+          "meaning": "出席"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a single event",
+          "signalSide": "context-after",
+          "targetText": "organise a single event",
+          "relation": "organise 的宾语是 a single event，筹办一场活动搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "take days",
+          "signalSide": "context-before",
+          "relation": "筹办耗时数天，呼应 organise 的费时。"
+        }
+      ],
+      "teachingNote": "她是主办方，办活动用 organise，与出席的 attend 区分。"
+    },
+    "q-zj-2025-jan-055": {
+      "blankId": "blank-zj-2025-jan-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "not only ... but also 并列结构，平台不只是 reserved for professional cooks（专为专业厨师保留），也面向想发现新体验的人，be reserved for 表示专供某人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "selected",
+          "meaning": "被选中的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "evaluated",
+          "meaning": "被评估的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "requested",
+          "meaning": "被请求的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for professional cooks",
+          "signalSide": "context-after",
+          "targetText": "reserved for professional cooks",
+          "relation": "be reserved for sb. 专供某人，宾语是 professional cooks，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "not only",
+          "signalSide": "context-before",
+          "targetText": "not only reserved for professional cooks, but also",
+          "relation": "not only ... but also 并列，平台并非专供专业厨师。"
+        }
+      ],
+      "teachingNote": "be reserved for 表示专供，呼应 not only ... but also 的包容性。"
+    }
+  }
+}
