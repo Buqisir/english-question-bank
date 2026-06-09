@@ -57,11 +57,10 @@ assert(
 )
 
 // ── (b) questionBankStewardSearch ────────────────────────────────────────────
-const apiMjs = readText('server/api.mjs')
 // questionBankStewardSearch + planQuestionBankStewardSearch were moved to
-// server/search/questionBankStewardService.mjs (cut H5-I); api.mjs re-imports the entry point
-// and the steward ROUTE still lives in api.mjs (asserted by c1). Read the steward fn definitions
-// from their new home — same assertions, pointer-updated home.
+// server/search/questionBankStewardService.mjs (cut H5-I); api.mjs re-imports the entry point.
+// The steward ROUTE moved to server/ai-proxy/routes.mjs (cut H10-B PR2; asserted by c1). Read the
+// steward fn definitions from their new home — same assertions, pointer-updated home.
 const stewardService = readText('server/search/questionBankStewardService.mjs')
 
 // Function signature has thinkingMode param
@@ -116,9 +115,13 @@ assert(
 )
 
 // ── (c) Steward route forwards input.thinkingMode ────────────────────────────
+// The steward ROUTE moved from the inline api.mjs handler to server/ai-proxy/routes.mjs
+// (cut H10-B PR2). Same intent — the route forwards input.thinkingMode to questionBankStewardSearch —
+// pointer-updated to its new home (now via context.questionBankStewardSearch).
+const aiProxyRoutes = readText('server/ai-proxy/routes.mjs')
 assert(
   '(c1) Steward route forwards input.thinkingMode to questionBankStewardSearch',
-  /questionBankStewardSearch\s*\([^)]*input\.thinkingMode[^)]*\)/.test(apiMjs),
+  /questionBankStewardSearch\s*\([^)]*input\.thinkingMode[^)]*\)/.test(aiProxyRoutes),
   'Route must pass input.thinkingMode === true (or equivalent) to questionBankStewardSearch',
 )
 

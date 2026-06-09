@@ -29,6 +29,7 @@ import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
 import { createPaperSetRoutes } from './paper-sets/routes.mjs'
+import { createAiProxyRoutes } from './ai-proxy/routes.mjs'
 import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
@@ -477,6 +478,7 @@ const serverRoutes = [
   ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),
   ...createPaperSetRoutes(),
+  ...createAiProxyRoutes(),
   ...createTeachingFacetRoutes(),
   ...createTopicLabelBackfillRoutes(),
   ...createVerbProfileBackfillRoutes(),
@@ -2913,6 +2915,13 @@ const questionBankStewardImplementation = createQuestionBankStewardImplementatio
   QUESTION_BANK_STEWARD_TOP_K,
 })
 const { questionBankStewardSearch } = questionBankStewardImplementation
+// Expose the AI-proxy route owners on serverContext (consumed by createAiProxyRoutes / H10-B PR2).
+// Post-hoc assignment (cf. serverContext.draftPaperStore) because these are destructured after the
+// serverContext literal. DEFAULT_DEEPSEEK_MODEL is forwarded for the verify-question-group log line.
+serverContext.semanticSearchQuestionGroups = semanticSearchQuestionGroups
+serverContext.questionBankStewardSearch = questionBankStewardSearch
+serverContext.verifyQuestionGroup = verifyQuestionGroup
+serverContext.DEFAULT_DEEPSEEK_MODEL = DEFAULT_DEEPSEEK_MODEL
 const synonymDifficultyImplementation = createSynonymDifficultyImplementation({
   optionalString,
   clamp01,
@@ -4078,49 +4087,6 @@ const server = createServer(async (request, response) => {
         }
       }
       sendJson(response, 200, { traceId, events })
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/ai/semantic-search') {
-      const input = await readJsonBody(request)
-      const result = await semanticSearchQuestionGroups(input.query, input.apiKey, input.requestId)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/ai/question-bank-steward') {
-      const input = await readJsonBody(request)
-      const result = await questionBankStewardSearch(input.message || input.query, input.apiKey, input.requestId, input.thinkingMode === true)
-      sendJson(response, 200, result)
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/ai/verify-question-group') {
-      const verifyRequestId = randomUUID()
-      try {
-        const input = await readJsonBody(request)
-        const thinkingMode = input?.thinkingMode === true
-        console.log(
-          `AI verify: trace=${verifyRequestId} group=${input.questionGroupId} model=${input.model || DEFAULT_DEEPSEEK_MODEL} thinking=${thinkingMode ? 'on' : 'off'}`,
-        )
-        const result = await verifyQuestionGroup(
-          input.questionGroupId,
-          input.apiKey,
-          input.model,
-          verifyRequestId,
-          thinkingMode,
-        )
-        if (result.requestId) {
-          response.setHeader('x-verify-request-id', result.requestId)
-        }
-        sendJson(response, 200, result)
-      } catch (error) {
-        response.setHeader('x-verify-request-id', verifyRequestId)
-        sendJson(response, 500, {
-          error: error instanceof Error ? error.message : String(error),
-          requestId: verifyRequestId,
-        })
-      }
       return
     }
 
