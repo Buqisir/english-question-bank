@@ -3634,10 +3634,9 @@ const {
   parseSevenChoicesByQuestionGroup: parseSevenChoicesByQuestionGroupImpl,
 } = questionGroupParseImplementation
 // Hoisted forwarding wrappers: the serverContext object literal (defined at module top, before this
-// factory call) references these 4 owners via property shorthand, and the inline /api/ai/parse-reading
-// route handler calls parseReadingByQuestionGroup directly. Keeping each a hoisted `async function`
+// factory call) references these 4 owners via property shorthand. Keeping each a hoisted `async function`
 // declaration (delegating to the H5-L factory impl, with the exact original signature + default)
-// preserves both call sites and avoids a TDZ on the serverContext literal.
+// preserves the serverContext call site and avoids a TDZ on the serverContext literal.
 async function parseReadingByQuestionGroup(questionGroupId, apiKey, model, parseRequestId, thinkingMode = false) {
   return parseReadingByQuestionGroupImpl(questionGroupId, apiKey, model, parseRequestId, thinkingMode)
 }
@@ -4120,35 +4119,6 @@ const server = createServer(async (request, response) => {
         sendJson(response, 500, {
           error: error instanceof Error ? error.message : String(error),
           requestId: verifyRequestId,
-        })
-      }
-      return
-    }
-
-    if (request.method === 'POST' && url.pathname === '/api/ai/parse-reading') {
-      const parseRequestId = randomUUID()
-      try {
-        const input = await readJsonBody(request)
-        const thinkingMode = input?.thinkingMode === true
-        console.log(
-          `AI parse reading: trace=${parseRequestId} group=${input.questionGroupId} model=${input.model || DEFAULT_DEEPSEEK_MODEL} thinking=${thinkingMode ? 'on' : 'off'}`,
-        )
-        const result = await parseReadingByQuestionGroup(
-          input.questionGroupId,
-          input.apiKey,
-          input.model,
-          parseRequestId,
-          thinkingMode,
-        )
-        if (result.requestId) {
-          response.setHeader('x-parse-request-id', result.requestId)
-        }
-        sendJson(response, 200, result)
-      } catch (error) {
-        response.setHeader('x-parse-request-id', parseRequestId)
-        sendJson(response, 500, {
-          error: error instanceof Error ? error.message : String(error),
-          requestId: parseRequestId,
         })
       }
       return
