@@ -99,10 +99,15 @@ for (const name of moved) {
   verifier.assert(!new RegExp(`^function ${name}\\(`, 'm').test(apiSource), `api.mjs no longer defines ${name}`)
   verifier.assert(new RegExp(`^  function ${name}\\(`, 'm').test(moduleSource), `module owns ${name}`)
 }
-const stayBehind = ['normalizeTags', 'normalizeExamTitle', 'extractDeclaredExamTitleFromText', 'buildDraftSourceQualityWarnings']
+const stayBehind = ['normalizeTags', 'normalizeExamTitle', 'extractDeclaredExamTitleFromText']
 for (const name of stayBehind) {
   verifier.assert(new RegExp(`^function ${name}\\(`, 'm').test(apiSource), `api.mjs keeps ${name} (not in scope / shared with import-draft)`)
 }
+// buildDraftSourceQualityWarnings is an import-DRAFT pipeline fn — the original H5-B guard's INTENT was
+// "the importListing module does not own it". H5-F (refactor-roadmap-2026-06) later moved it out of
+// api.mjs into server/imports/legacyImportImplementation.mjs. The intent still holds: assert the listing
+// module does NOT own it (rather than the now-stale proxy "it lives in api.mjs").
+verifier.assert(!/buildDraftSourceQualityWarnings/.test(moduleSource), 'importListing module does not own buildDraftSourceQualityWarnings (import-draft concern, now in legacyImportImplementation.mjs)')
 verifier.assert(apiSource.includes("from './imports/importListing.mjs'"), 'api.mjs imports the listing module')
 verifier.assert(apiSource.includes('createImportListingImplementation({'), 'api.mjs instantiates the factory')
 verifier.assert(/const \{\n\s*listImportFiles,/.test(apiSource), 'api.mjs destructures the public listing functions')
