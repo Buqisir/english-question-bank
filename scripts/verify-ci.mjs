@@ -39,6 +39,7 @@ const registry = {
   'scripts/verify-h5k-synonym-difficulty.mjs',
   'scripts/verify-h5l-question-group-parse.mjs',
   'scripts/verify-h5f-legacy-import-impl.mjs',
+  'scripts/verify-h5g-docx-renderer.mjs',
   'scripts/verify-h1f-legacy-import-routes.mjs',
   'scripts/verify-h1g-question-group-routes.mjs',
   'scripts/verify-h10a-paper-set-routes.mjs',
