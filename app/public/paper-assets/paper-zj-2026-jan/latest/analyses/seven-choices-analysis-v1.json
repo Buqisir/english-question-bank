@@ -1,0 +1,394 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2026-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2026-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-08",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2026-jan-seven-choices": {
+      "overview": "本文讨论阅读中的“回读”(regression)现象：区分因走神而回读（浪费时间）与因真正没读懂而回读（合理的修复策略），并给出保持专注、克服回读坏习惯的方法。",
+      "discourseStructure": {
+        "summary": "文章先提出回读现象并指出其常见原因是注意力不集中(走神/打盹)，随后分别给出保持专注的方法和打破回读坏习惯的步骤，最后辩证地指出回读本身在监控理解时是合理的，但因走神而回读才是浪费时间。",
+        "units": [
+          {
+            "unitId": "unit-zj-2026-jan-seven-intro",
+            "heading": "",
+            "paragraphIds": [
+              "para-zj-2026-jan-seven-title"
+            ],
+            "summary": "提出回读现象，指出其原因往往不是看不懂而是没在认真读(走神/打盹)，并把这种回读定义为 regression。"
+          },
+          {
+            "unitId": "unit-zj-2026-jan-seven-focus",
+            "heading": "",
+            "paragraphIds": [
+              "para-zj-2026-jan-seven-p1"
+            ],
+            "summary": "走神是缺乏投入造成的习惯，应严格要求自己全神贯注，让大脑真正参与文本。"
+          },
+          {
+            "unitId": "unit-zj-2026-jan-seven-breakhabit",
+            "heading": "",
+            "paragraphIds": [
+              "para-zj-2026-jan-seven-p2"
+            ],
+            "summary": "回读是为弥补浪费时间的拐杖；要先意识到何时为何回读，再剥夺自己回读的权利以打破习惯。"
+          },
+          {
+            "unitId": "unit-zj-2026-jan-seven-conclusion",
+            "heading": "",
+            "paragraphIds": [
+              "para-zj-2026-jan-seven-p3"
+            ],
+            "summary": "辩证总结：因没读懂而回读是合理的修复策略并被好读者使用，但因走神而回读则是浪费时间。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2026-jan-036": {
+      "blankId": "blank-zj-2026-jan-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "too difficult to comprehend on the first reading",
+        "because you are asleep",
+        "You are napping",
+        "daydreaming"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2026-jan-seven-title",
+        "headingAnchor": "",
+        "beforeQuote": "Is it because the material is too difficult to comprehend on the first reading or because you are asleep?",
+        "afterQuote": "You are napping (打盹) or daydreaming."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the latter",
+          "signalSide": "option",
+          "targetText": "because you are asleep",
+          "relation": "the latter 指代空前选择疑问句中后一个原因 because you are asleep，与空后 napping/daydreaming 呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "because you are asleep",
+          "signalSide": "context-before",
+          "targetText": "the latter",
+          "relation": "空前 “too difficult... or because you are asleep” 二选一，the latter 正指其中后者。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "You are napping",
+          "signalSide": "context-after",
+          "targetText": "the latter is true",
+          "relation": "空后用 napping/daydreaming 进一步坐实 the latter(asleep) 为真。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前是选择疑问句“是因太难还是因犯困”，B 用 the latter 指代后者(asleep)，并被空后 You are napping 印证，承上启下。",
+        "matchedClues": [
+          {
+            "contextSide": "or because you are asleep",
+            "optionSide": "the latter is true",
+            "relation": "the latter 精确指代选择疑问句的后一项 asleep。"
+          },
+          {
+            "contextSide": "You are napping (打盹) or daydreaming",
+            "optionSide": "Probably the latter is true",
+            "relation": "空后对“犯困”的展开证实了 B 的判断。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A “Both are to blame” 会把两个原因都算上，但空后只展开了 napping/daydreaming 一项，并未支持“太难”，故不成立。"
+        }
+      ],
+      "teachingNote": "遇到选择疑问句作空前时，留意 the former/the latter 等指代词与后文展开方向的对应，确定到底指哪一项。"
+    },
+    "q-zj-2026-jan-037": {
+      "blankId": "blank-zj-2026-jan-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "no idea what you have read",
+        "go back and reread",
+        "not because you did not understand",
+        "you were not paying attention"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2026-jan-seven-title",
+        "headingAnchor": "",
+        "beforeQuote": "Halfway down the page you realize that you have no idea what you have read.",
+        "afterQuote": "Thus, you go back and reread, not because you did not understand, but because you were not paying attention."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your mind was not",
+          "signalSide": "option",
+          "targetText": "not paying attention",
+          "relation": "E 中 “mind was not(engaged)” 与空后 not paying attention 同义，解释为何读完毫无印象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no idea what you have read",
+          "signalSide": "context-before",
+          "targetText": "Your eyes were engaged, but your mind was not",
+          "relation": "空前“毫无印象”正因眼到而心未到，E 给出原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "did not understand",
+          "signalSide": "context-after",
+          "targetText": "your mind was not",
+          "relation": "空后 “not because you did not understand, but because you were not paying attention” 与 E 的“眼到心未到”一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说读完“毫无印象”，E 用“眼睛在读但大脑没投入”给出原因，并与空后“不是没读懂而是没专注”精确呼应。",
+        "matchedClues": [
+          {
+            "contextSide": "no idea what you have read",
+            "optionSide": "Your eyes were engaged, but your mind was not",
+            "relation": "眼到心未到导致毫无印象。"
+          },
+          {
+            "contextSide": "because you were not paying attention",
+            "optionSide": "your mind was not",
+            "relation": "mind was not engaged 即 not paying attention。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 强调“因没读懂而回读是合理策略”，但空后明确说 not because you did not understand，方向相反，故排除。"
+        }
+      ],
+      "teachingNote": "抓住空后 “not... but...” 的对比，反向锁定空处应解释“没专注/心未到”这一原因。"
+    },
+    "q-zj-2026-jan-038": {
+      "blankId": "blank-zj-2026-jan-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Engage your mind",
+        "Visualize the incoming ideas",
+        "relate the new material",
+        "your mind is truly occupied with the text"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2026-jan-seven-p1",
+        "headingAnchor": "",
+        "beforeQuote": "Visualize the incoming ideas, and relate the new material to what you already know.",
+        "afterQuote": "If your mind is truly occupied with the text, you will not be able to think about Friday night"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "think the ideas",
+          "signalSide": "option",
+          "targetText": "Visualize the incoming ideas",
+          "relation": "C 中 think the ideas 与空前 Visualize the incoming ideas、Engage your mind 同属“让大脑参与思考”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Engage your mind",
+          "signalSide": "context-before",
+          "targetText": "Don’t just read the words; think the ideas",
+          "relation": "空前 Engage your mind 与 C 的“别只读字面、要思考内容”一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "mind is truly occupied with the text",
+          "signalSide": "context-after",
+          "targetText": "think the ideas",
+          "relation": "空后“大脑被文本占据”延续 C 的“思考内容”而非只读字词。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本段都在讲“让大脑投入”，C “别只读字面，要思考内容” 与上文 Engage your mind、Visualize ideas 及下文 mind occupied 构成同一祈使句式的方法链。",
+        "matchedClues": [
+          {
+            "contextSide": "Engage your mind / Visualize the incoming ideas",
+            "optionSide": "Don’t just read the words; think the ideas",
+            "relation": "都强调主动思考而非被动看字。"
+          },
+          {
+            "contextSide": "your mind is truly occupied with the text",
+            "optionSide": "think the ideas",
+            "relation": "思考内容才能使大脑真正被文本占据。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D “大声朗读几分钟” 虽与阅读相关，但本段主旨是“让大脑思考投入”，且与前后祈使句的“思考”链条不衔接，故排除。"
+        }
+      ],
+      "teachingNote": "段内多句祈使句并列时，所填句应在形式与话题上延续这一方法链，选与上下文同义同向的祈使建议。"
+    },
+    "q-zj-2026-jan-039": {
+      "blankId": "blank-zj-2026-jan-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "become aware of when and why you are regressing",
+        "break the habit",
+        "keep on going",
+        "start paying close attention"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2026-jan-seven-p2",
+        "headingAnchor": "",
+        "beforeQuote": "First of all, become aware of when and why you are regressing.",
+        "afterQuote": "Say, “OK. I missed that paragraph because I was thinking of something else, but I’m going to keep on going"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "option",
+          "targetText": "First of all, become aware",
+          "relation": "F 以 Then 承接空前 First of all，构成“第一步…接着第二步”的步骤顺序。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "First of all",
+          "signalSide": "context-before",
+          "targetText": "Then, start denying yourself the right",
+          "relation": "空前 First of all 是第一步，需要 Then 引出的第二步与之衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "keep on going",
+          "signalSide": "context-after",
+          "targetText": "denying yourself the right",
+          "relation": "空后“继续往下读、不回读”正是 F 中“剥夺自己回读权利以打破习惯”的具体做法。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前 First of all 是克服回读的第一步，F 用 Then 引出第二步“剥夺自己回读的权利以打破习惯”，并被空后“继续往下读不回头”所例证。",
+        "matchedClues": [
+          {
+            "contextSide": "First of all, become aware",
+            "optionSide": "Then, start denying yourself the right",
+            "relation": "First of all 与 Then 构成步骤先后关系。"
+          },
+          {
+            "contextSide": "I’m going to keep on going",
+            "optionSide": "in order to break the habit",
+            "relation": "继续往下读、不回读即打破回读坏习惯的执行。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 也是祈使建议，但本段话题是“打破回读习惯”的步骤，且缺少 Then 这类承接 First of all 的顺序信号，故 F 更优。"
+        }
+      ],
+      "teachingNote": "看到空前出现 First of all 等序数/起始信号，优先选含 Then/Next 等承接词、延续步骤链的选项。"
+    },
+    "q-zj-2026-jan-040": {
+      "blankId": "blank-zj-2026-jan-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Good readers who monitor their own comprehension",
+        "use it in the reading process",
+        "regressing because your mind was asleep is a waste of time",
+        "However"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2026-jan-seven-p3",
+        "headingAnchor": "",
+        "beforeQuote": "",
+        "afterQuote": "Good readers who monitor their own comprehension use it in the reading process. However, regressing because your mind was asleep is a waste of time."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Rereading",
+          "signalSide": "option",
+          "targetText": "use it in the reading process",
+          "relation": "G 主语 Rereading 即空后代词 it 的指代对象，作为段首主题句被下文 use it 接续。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "use it",
+          "signalSide": "context-after",
+          "targetText": "Rereading because you did not understand",
+          "relation": "空后 it 指代 G 中提出的 Rereading(合理的修复策略)，故段首须出现该名词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "regressing because your mind was asleep is a waste of time",
+          "relation": "However 把 G 的“因没读懂而回读是合理的”与“因走神而回读是浪费时间”对比，故段首应是正面评价回读的句子。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "段首总起句：G 指出“因没读懂而回读是合理的修复策略”，被空后 use it 指代、并由 However 与“因走神回读是浪费时间”形成对比，统领全段。",
+        "matchedClues": [
+          {
+            "contextSide": "Good readers... use it in the reading process",
+            "optionSide": "Rereading because you did not understand is a reasonable fix-up strategy",
+            "relation": "好读者使用 it(回读)印证其为合理策略。"
+          },
+          {
+            "contextSide": "However, regressing because your mind was asleep is a waste of time",
+            "optionSide": "a reasonable fix-up strategy",
+            "relation": "However 形成“合理 vs 浪费”的对比，需正面句作前项。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 描述“眼到心未到”，无法作为被 it 指代、并与 However 对比的正面主题句，且话题与本段“回读是否合理”不符。"
+        }
+      ],
+      "teachingNote": "段首空处常为主题句，结合空后代词 it 的指代对象与 However 引出的对比项，反推应填的正面总起句。"
+    }
+  }
+}

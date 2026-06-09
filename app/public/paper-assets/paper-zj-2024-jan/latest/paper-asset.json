@@ -1,0 +1,3283 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-zj-2024-jan",
+    "title": "source",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "source.docx",
+      "sha256": "93439c92b66ab2fcede2e0fcc5f2a60f898a691fefe32b783cdc265b2cad622e",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-zj-2024-jan-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-zj-2024-jan-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-zj-2024-jan-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-zj-2024-jan-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-zj-2024-jan-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-zj-2024-jan-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2024-jan-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-zj-2024-jan-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2024-jan-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-zj-2024-jan-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2024-jan-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2024-jan-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2024-jan-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2024-jan-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-zj-2024-jan-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-zj-2024-jan-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2024-jan-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-zj-2024-jan-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2024-jan-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2024-jan-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2024-jan-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2024-jan-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2024-jan-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2024-jan-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2024-jan-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2024-jan-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2024-jan-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2024-jan-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2024-jan-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised.\n\nParagraph 2: Eva decided to use the same trick to deal with the school building."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2024-jan-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-zj-2024-jan-reading-a": {
+        "groupId": "group-zj-2024-jan-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-zj-2024-jan-021",
+          "q-zj-2024-jan-022",
+          "q-zj-2024-jan-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-1",
+              "text": "Tom Sawyer Play Is an Adventure"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-2",
+              "text": "A 35-minute hand-clapping, foot-stomping musical version of a Mark Twain favorite returns with this Tall Stacks festival."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-3",
+              "text": "“Tom Sawyer: A River Adventure” has all the good stuff, including the fence painting, the graveyard, the island and the cave. It is adapted by Joe McDonough, with music by David Kisor. That’s the local stage writing team that creates many of the Children’s Theatre of Cincinnati’s original musicals, along with the holiday family musicals at Ensemble Theatre."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-4",
+              "text": "This year Nathan Tumer of Burlington is Tom Sawyer, and Robbie McMath of Fort Mitchell is Huck Finn."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-5",
+              "text": "Turner, a 10th-grader at School for Creative and Performing Arts, is a familiar presence on Cincinnati’s stages. He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime”."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-6",
+              "text": "McMath is a junior at Beechwood High School. He was in the cast of “Tom Sawyer” when it was first performed and is a Children’s Theatre regular, with five shows to his credit. This summer he attended Kentucky’s Governor’s School for the Arts in Musical Theatre."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-7",
+              "text": "Note to teachers: Children’s Theatre has a study guide demonstrating how math and science can be taught through “Tom Sawyer.” For downloadable lessons, visit the official website of Children’s Theatre."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-reading-b": {
+        "groupId": "group-zj-2024-jan-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-zj-2024-jan-024",
+          "q-zj-2024-jan-025",
+          "q-zj-2024-jan-026",
+          "q-zj-2024-jan-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-1",
+              "text": "When was the last time you used a telephone box? I mean to make an actual phone call — not to shelter from the rain. Ages ago, right? The last time I used a phone box for its intended purpose was…2006. I was conducting auditions (试演) for my play in my tiny old shared house in London. Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more ”young professional”."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-2",
+              "text": "As I rushed outdoors to empty the wastepaper baskets, the door swung shut behind me. Suddenly I was locked outside. My mobile phone was inside, but luckily there was a telephone box across the street. So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-3",
+              "text": "As it has been many years since I last used one, I should hardly be surprised that then are no longer any public telephones near my house. The last one standing has just been turn into a “mini community library”: any passer-by can “borrow” a book from its shelves return it later, or replace it with another title from their own collection."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-4",
+              "text": "For a few months after the “library” opened, I didn’t bother taking a look, as I had assumed that it would be stuffed full of cheesy love stories. Then I noticed folk conducting spring cleans dropping boxes of voluminous books on various subjects there. And these books were free. This unbeatable price-point encouraged me to experiment with dozens of titles that I would never normally consider buying. And I’ve discovered some great books!"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-5",
+              "text": "If I ever get trapped outside my house again, my local telephone box will, sadly no longer be able to connect me with my keys. But it can certainly keep me entertained while I wait for my wife to rescue me."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-reading-c": {
+        "groupId": "group-zj-2024-jan-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-zj-2024-jan-028",
+          "q-zj-2024-jan-029",
+          "q-zj-2024-jan-030",
+          "q-zj-2024-jan-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-1",
+              "text": "On September 7, 1991, the costliest hailstorm (雹暴) in Canadian history hit Calgary’s southern suburbs. As a result, since 1996 a group of insurance companies have spent about 2 million per year on the Alberta Hail Suppression Project. Airplanes seed threatening storm cells with a chemical to make small ice crystals (冰晶) fall as rain before they can grow into dangerous hailstones. But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-2",
+              "text": "Norman Stienwand, who farms in that area has been addressing public meetings on this issue for years. “Basically, the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail,” Mr Stienwand says, “but they’re increasing drought risk as far east as Saskatchewan.”"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-3",
+              "text": "The Alberta hail project is managed by Terry Krauss, a cloud physicist who works for Weather Modification Inc. of Fargo, North Dakota. “We affect only a very small percentage of the total moisture in the air, so we cannot be causing drought,” Dr. Krauss says. “In fact, we may be helping increase the moisture downwind by creating wetter ground.”"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-4",
+              "text": "One doubter about the safety of cloud seeding is Chuck Doswell, a research scientist who just retired from the University of Oklahoma. “In 1999, I personally saw significant tornadoes (龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says. “Does cloud seeding create killer storms or reduce moisture downwind? No one really knows, of course, but the seeding goes on.”"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-5",
+              "text": "Given the degree of doubt, Mr. Stienwand suggests, “It would be wise to stop cloud seeding.” In practice, doubt has had the opposite effect. Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit (官司) against cloud-seeding companies. Therefore, private climate engineering can continue in relative legal safety."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-reading-d": {
+        "groupId": "group-zj-2024-jan-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-zj-2024-jan-032",
+          "q-zj-2024-jan-033",
+          "q-zj-2024-jan-034",
+          "q-zj-2024-jan-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-1",
+              "text": "The Stanford marshmallow (棉花糖) test was originally conducted by psychologist Walter Mischel in the late 1960s. Children aged four to six at a nursery school were placed in a room. A single sugary treat, selected by the child, was placed on a table. Each child was told if they waited for 15 minutes before eating the treat, they would be given a second treat. Then they were left alone in the room. Follow-up studies with the children later in life showed a connection between an ability to wait long enough to obtain a second treat and various forms of success."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-2",
+              "text": "As adults we face a version of the marshmallow test every day. We’re not tempted (诱惑) by sugary treats, but by our computers, phones, and tablets — all the devices that connect us to the global delivery system for various types of information that do to us what marshmallows do to preschoolers."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-3",
+              "text": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value — a feeling of reward and satisfaction. But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-4",
+              "text": "A similar process is at work in our response to information. Our formative environment as a species was information-poor, so our brains developed a mechanism that prized new information. But global connectivity has greatly changed our information environment. We are now ceaselessly bombarded (轰炸) with new information. Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-seven-choices": {
+        "groupId": "group-zj-2024-jan-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-zj-2024-jan-036",
+          "q-zj-2024-jan-037",
+          "q-zj-2024-jan-038",
+          "q-zj-2024-jan-039",
+          "q-zj-2024-jan-040"
+        ],
+        "blankIds": [
+          "blank-zj-2024-jan-036",
+          "blank-zj-2024-jan-037",
+          "blank-zj-2024-jan-038",
+          "blank-zj-2024-jan-039",
+          "blank-zj-2024-jan-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "But that doesn’t mean there aren’t deadlines."
+          },
+          {
+            "label": "B",
+            "text": "Your motivation should be your main concern."
+          },
+          {
+            "label": "C",
+            "text": "Do you know that online courses are also part of your education?"
+          },
+          {
+            "label": "D",
+            "text": "Professor Alex Davidson teaches the same course in person and online."
+          },
+          {
+            "label": "E",
+            "text": "The chief complaint about online courses is that they lack human interaction."
+          },
+          {
+            "label": "F",
+            "text": "If you take an online course, what can you do to ensure the best possible grade?"
+          },
+          {
+            "label": "G",
+            "text": "A survey found that 29 percent of college students registered for online courses."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-seven-title",
+              "text": "In the past few years, online learning has become a significant part of the university and college experience.  __36__  1   But are all online courses created equal? How can you be sure that digital learning is right for you?  __37__  2   We interviewed students and professors to get their advice about online courses."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-seven-p1",
+              "text": "The most obvious advantage of online learning is that you can study anywhere and anytime.  __38__  3   “I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman. Before choosing to study online, consider whether you’re a self-motivated learner and if the material seems interesting enough to keep you going."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-seven-p2",
+              "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.  __39__  4   He noted that his online students usually end up with lower grades. It is so easy to let an online course slide, but your grades will suffer as a result. Be sure to schedule set times to watch your lectures, read materials and contribute to online discussion boards."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-seven-p3",
+              "text": "__40__  5   A social connection is often a big part of learning. There are things you can do to ease this problem. Jessica Pink, an undergraduate student, suggests taking online courses with a friend, so you can motivate each other to stay on track. You can also find students on the class discussion board to organize a study group, or schedule in-person meeting s with your professor to discuss course concepts."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-cloze": {
+        "groupId": "group-zj-2024-jan-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-zj-2024-jan-041",
+          "q-zj-2024-jan-042",
+          "q-zj-2024-jan-043",
+          "q-zj-2024-jan-044",
+          "q-zj-2024-jan-045",
+          "q-zj-2024-jan-046",
+          "q-zj-2024-jan-047",
+          "q-zj-2024-jan-048",
+          "q-zj-2024-jan-049",
+          "q-zj-2024-jan-050",
+          "q-zj-2024-jan-051",
+          "q-zj-2024-jan-052",
+          "q-zj-2024-jan-053",
+          "q-zj-2024-jan-054",
+          "q-zj-2024-jan-055"
+        ],
+        "blankIds": [
+          "blank-zj-2024-jan-041",
+          "blank-zj-2024-jan-042",
+          "blank-zj-2024-jan-043",
+          "blank-zj-2024-jan-044",
+          "blank-zj-2024-jan-045",
+          "blank-zj-2024-jan-046",
+          "blank-zj-2024-jan-047",
+          "blank-zj-2024-jan-048",
+          "blank-zj-2024-jan-049",
+          "blank-zj-2024-jan-050",
+          "blank-zj-2024-jan-051",
+          "blank-zj-2024-jan-052",
+          "blank-zj-2024-jan-053",
+          "blank-zj-2024-jan-054",
+          "blank-zj-2024-jan-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-cloze-title",
+              "text": "While taking a 20-hour train ride along the edge of the Taklimakan Desert in northwestern China, I had the kind of humbling, educational, and above all else, wonderful __41__ with a local that all travelers long for. A young Chinese man __42__ me on the train. My __43__ friend spoke virtually no English, so I happily took the __44__ to practice my Chinese."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-cloze-p1",
+              "text": "Over several hours, he would tell me about how he had __45__ a two-year professional school to quickly find a job __46__ highways in order to help support his family. Perhaps the most __47__ , however, was the fact that this man spent hours studying every day after hard physical labor. Without batting an eye, he would __48__ a translated Emerson passage before asking about the literary influence of American __49__ as a whole. ”And what do you all learn about Russian authors?” I __50__ him asking at one point."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-cloze-p2",
+              "text": "It would have been easy to __51__ my assumptions about this highway builder who had never been more than a few hundred miles from home. But this highly informed, __52__ , and admirable person prevented me doing so. In the course of a couple of hours, he __53__ me just how much one can gain from __54__ with an open mind, and a willingness to __55__ with locals from all walks of life."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-grammar-fill": {
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-zj-2024-jan-056",
+          "q-zj-2024-jan-057",
+          "q-zj-2024-jan-058",
+          "q-zj-2024-jan-059",
+          "q-zj-2024-jan-060",
+          "q-zj-2024-jan-061",
+          "q-zj-2024-jan-062",
+          "q-zj-2024-jan-063",
+          "q-zj-2024-jan-064",
+          "q-zj-2024-jan-065"
+        ],
+        "blankIds": [
+          "blank-zj-2024-jan-056",
+          "blank-zj-2024-jan-057",
+          "blank-zj-2024-jan-058",
+          "blank-zj-2024-jan-059",
+          "blank-zj-2024-jan-060",
+          "blank-zj-2024-jan-061",
+          "blank-zj-2024-jan-062",
+          "blank-zj-2024-jan-063",
+          "blank-zj-2024-jan-064",
+          "blank-zj-2024-jan-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-grammar-fill-title",
+              "text": "The shelves in most supermarkets are full of family-size this and multi-buy that. However, if you’re shopping for one, buying extra  __56__ (benefit) from price reductions doesn’t make sense. Either your shopping is then too heavy to carry home  __57__you can’t use what you’ve bought while it’s still fresh."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-grammar-fill-p1",
+              "text": "Of course, shops are not charities — they price goods in the way  __58__will make them the most money. If most of their customers are happy to buy larger quantities, that’s  __59__they’ll promote. But that leaves the solo (单独) customers out of pocket and disappointed."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-grammar-fill-p2",
+              "text": "Many supermarkets are no longer doing “buy one get one free” promotions because of the  __60__ (criticize) that they lead to waste. Consumers prefer money off individual items. However, though it’s nice to get a few cents off a pack of sausages, it would help even more if they could sometimes  __61__ (offer) in smaller packs. Even the biggest sausage fan doesn’t want to eat them every day."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-grammar-fill-p3",
+              "text": "If your supermarket sells loose produce, then buying smaller quantities is easier. Over the last two years, some supermarkets  __62__ (start) selling chicken or salad in packs  __63__ (design) with two halves containing separate portions (份) . Then, when you use one section,  __64__other stays fresh."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-grammar-fill-p4",
+              "text": "Who knows, perhaps some of the more forward-looking  __65__ (one) may yet come out with a whole range of “just for you” pack sizes with special offers as well."
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-writing-application": {
+        "groupId": "group-zj-2024-jan-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2024-jan-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-writing-app-title",
+              "text": "请你写一篇短文向校英文报“Sports and Health”栏目投稿，向同学们推荐一项适合课间开展的运动，内容包括："
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-app-p1",
+              "text": "1. 介绍这项运动；"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-app-p2",
+              "text": "2. 说明推荐理由。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-app-p3",
+              "text": "1. 写作词数应为80个左右；"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-app-p4",
+              "text": "2. 请按如下格式在答题卡的相应位置作答："
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-app-p5",
+              "text": "Stand Up and Exercise, Everybody!"
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-writing-continuation": {
+        "groupId": "group-zj-2024-jan-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2024-jan-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-writing-cont-title",
+              "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-cont-p1",
+              "text": "Eva spent the first week of high school trying to keep her head above water. One of the major headaches for her was finding her way in the huge school building. It was a six-story building. On each floor, hallways stretched in four directions, learning to classrooms, laboratories and teachers’ offices. Somewhere in the building, there was also a library, a cafeteria and a gym."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-cont-p2",
+              "text": "Having a poor sense of direction, Eva found it impossible to get around in such a huge building. All the different hallways and rooms were too much to think about, let alone commit to memory. She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist."
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-cont-p3",
+              "text": "In her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside. She searched the faces of her classmates for signs of panic. There was nothing she feared more than having to run a whole mile. To Eva, “a mile” was used to describe long distances. It was ten miles from her home to her grandfather’s, and that always seemed like a long way, even in a car!"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-cont-p4",
+              "text": "When Coach Pitt blew his whistle (哨子) , Eva figured she would be left in the dust. However, while some of her classmates edged ahead, others actually fell behind. “It’s just the beginning,” she thought. “I’ll come in last for sure.”"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-writing-cont-p5",
+              "text": "Soon Eva began to breathe hard, with her heart pounding and legs shaking. Feeling desperate, Eva started using a mind trick on herself. She stopped thinking about the word “mile”. Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead. Then she concentrated on jogging to the spot where the trace curved (拐弯) . After that, she tried to see if she could complete her first lap. One lap turned into two, then three, then four."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2024-jan-021": {
+        "questionId": "q-zj-2024-jan-021",
+        "questionNo": 21,
+        "groupId": "group-zj-2024-jan-reading-a",
+        "stem": "Who wrote the music for “Tom Sawyer: A River Adventure”?",
+        "options": [
+          {
+            "label": "A",
+            "text": "David Kisor."
+          },
+          {
+            "label": "B",
+            "text": "Joe McDonough."
+          },
+          {
+            "label": "C",
+            "text": "Nathan Turner."
+          },
+          {
+            "label": "D",
+            "text": "Robbie McMath."
+          }
+        ]
+      },
+      "q-zj-2024-jan-022": {
+        "questionId": "q-zj-2024-jan-022",
+        "questionNo": 22,
+        "groupId": "group-zj-2024-jan-reading-a",
+        "stem": "What can we learn about the two actors?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They study in the same school."
+          },
+          {
+            "label": "B",
+            "text": "They worked together in ”Ragtime“."
+          },
+          {
+            "label": "C",
+            "text": "They are experienced on stage."
+          },
+          {
+            "label": "D",
+            "text": "They became friends ten years ago."
+          }
+        ]
+      },
+      "q-zj-2024-jan-023": {
+        "questionId": "q-zj-2024-jan-023",
+        "questionNo": 23,
+        "groupId": "group-zj-2024-jan-reading-a",
+        "stem": "What does Children's Theatre provide for teachers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Research funding."
+          },
+          {
+            "label": "B",
+            "text": "Training opportunities."
+          },
+          {
+            "label": "C",
+            "text": "Technical support."
+          },
+          {
+            "label": "D",
+            "text": "Educational resources."
+          }
+        ]
+      },
+      "q-zj-2024-jan-024": {
+        "questionId": "q-zj-2024-jan-024",
+        "questionNo": 24,
+        "groupId": "group-zj-2024-jan-reading-b",
+        "stem": "What does the underlined word “it” in the first paragraph refer to?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The play."
+          },
+          {
+            "label": "B",
+            "text": "The shared house."
+          },
+          {
+            "label": "C",
+            "text": "The sofa."
+          },
+          {
+            "label": "D",
+            "text": "The telephone box."
+          }
+        ]
+      },
+      "q-zj-2024-jan-025": {
+        "questionId": "q-zj-2024-jan-025",
+        "questionNo": 25,
+        "groupId": "group-zj-2024-jan-reading-b",
+        "stem": "Why did the author use the telephone box in 2006?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To place an urgent call."
+          },
+          {
+            "label": "B",
+            "text": "To put up a notice."
+          },
+          {
+            "label": "C",
+            "text": "To shelter from the rain."
+          },
+          {
+            "label": "D",
+            "text": "To hold an audition."
+          }
+        ]
+      },
+      "q-zj-2024-jan-026": {
+        "questionId": "q-zj-2024-jan-026",
+        "questionNo": 26,
+        "groupId": "group-zj-2024-jan-reading-b",
+        "stem": "What do we know about the “mini community library”?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It provides phone service for free."
+          },
+          {
+            "label": "B",
+            "text": "Anyone can contribute to its collection."
+          },
+          {
+            "label": "C",
+            "text": "It is popular among young readers."
+          },
+          {
+            "label": "D",
+            "text": "Books must be returned within a month."
+          }
+        ]
+      },
+      "q-zj-2024-jan-027": {
+        "questionId": "q-zj-2024-jan-027",
+        "questionNo": 27,
+        "groupId": "group-zj-2024-jan-reading-b",
+        "stem": "Why did the author start to use the “library”?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He wanted to borrow some love stories."
+          },
+          {
+            "label": "B",
+            "text": "He was encouraged by a close neighbour."
+          },
+          {
+            "label": "C",
+            "text": "He found there were excellent free books."
+          },
+          {
+            "label": "D",
+            "text": "He thought it was an ideal place for reading."
+          }
+        ]
+      },
+      "q-zj-2024-jan-028": {
+        "questionId": "q-zj-2024-jan-028",
+        "questionNo": 28,
+        "groupId": "group-zj-2024-jan-reading-c",
+        "stem": "What does the project aim to do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Conserve moisture in the soil."
+          },
+          {
+            "label": "B",
+            "text": "Prevent the formation of hailstones."
+          },
+          {
+            "label": "C",
+            "text": "Forecast disastrous hailstorms."
+          },
+          {
+            "label": "D",
+            "text": "Investigate chemical use in farming."
+          }
+        ]
+      },
+      "q-zj-2024-jan-029": {
+        "questionId": "q-zj-2024-jan-029",
+        "questionNo": 29,
+        "groupId": "group-zj-2024-jan-reading-c",
+        "stem": "Who are opposed to the project?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Farmers in east-central Alberta."
+          },
+          {
+            "label": "B",
+            "text": "Managers of insurance companies."
+          },
+          {
+            "label": "C",
+            "text": "Provincial government officials."
+          },
+          {
+            "label": "D",
+            "text": "Residents of Calgary and Edmonton."
+          }
+        ]
+      },
+      "q-zj-2024-jan-030": {
+        "questionId": "q-zj-2024-jan-030",
+        "questionNo": 30,
+        "groupId": "group-zj-2024-jan-reading-c",
+        "stem": "Why does Dr. Doswell mention the tornadoes he saw in 1999?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To compare different kinds of seeding methods."
+          },
+          {
+            "label": "B",
+            "text": "To illustrate the development of big hailstorms."
+          },
+          {
+            "label": "C",
+            "text": "To indicate a possible danger of cloud seeding."
+          },
+          {
+            "label": "D",
+            "text": "To show the link between storms and moisture."
+          }
+        ]
+      },
+      "q-zj-2024-jan-031": {
+        "questionId": "q-zj-2024-jan-031",
+        "questionNo": 31,
+        "groupId": "group-zj-2024-jan-reading-c",
+        "stem": "What can we infer from the last paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Scientific studies have proved Stienwand right."
+          },
+          {
+            "label": "B",
+            "text": "Private climate engineering is illegal in Canada."
+          },
+          {
+            "label": "C",
+            "text": "The doubt about cloud seeding has disappeared."
+          },
+          {
+            "label": "D",
+            "text": "Cloud-seeding companies will continue to exist."
+          }
+        ]
+      },
+      "q-zj-2024-jan-032": {
+        "questionId": "q-zj-2024-jan-032",
+        "questionNo": 32,
+        "groupId": "group-zj-2024-jan-reading-d",
+        "stem": "What did the children need to do to get a second treat in Mischel's test?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Take an examination alone."
+          },
+          {
+            "label": "B",
+            "text": "Show respect for the researchers."
+          },
+          {
+            "label": "C",
+            "text": "Share their treats with others."
+          },
+          {
+            "label": "D",
+            "text": "Delay eating for fifteen minutes."
+          }
+        ]
+      },
+      "q-zj-2024-jan-033": {
+        "questionId": "q-zj-2024-jan-033",
+        "questionNo": 33,
+        "groupId": "group-zj-2024-jan-reading-d",
+        "stem": "According to paragraph 3, there is a mismatch between                  .",
+        "options": [
+          {
+            "label": "A",
+            "text": "the calorie-poor world and our good appetites"
+          },
+          {
+            "label": "B",
+            "text": "the shortage of sugar and our nutritional needs"
+          },
+          {
+            "label": "C",
+            "text": "the rich food supply and our unchanged brains"
+          },
+          {
+            "label": "D",
+            "text": "the tempting foods and our efforts to keep fit"
+          }
+        ]
+      },
+      "q-zj-2024-jan-034": {
+        "questionId": "q-zj-2024-jan-034",
+        "questionNo": 34,
+        "groupId": "group-zj-2024-jan-reading-d",
+        "stem": "What does the author suggest readers do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Absorb new information readily."
+          },
+          {
+            "label": "B",
+            "text": "Be selective information consumers."
+          },
+          {
+            "label": "C",
+            "text": "Use diverse information sources."
+          },
+          {
+            "label": "D",
+            "text": "Protect the information environment."
+          }
+        ]
+      },
+      "q-zj-2024-jan-035": {
+        "questionId": "q-zj-2024-jan-035",
+        "questionNo": 35,
+        "groupId": "group-zj-2024-jan-reading-d",
+        "stem": "Which of the following is the best title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Eat Less, Read More"
+          },
+          {
+            "label": "B",
+            "text": "The Bitter Truth about Early Humans"
+          },
+          {
+            "label": "C",
+            "text": "The Later, the Better"
+          },
+          {
+            "label": "D",
+            "text": "The Marshmallow Test for Grownups"
+          }
+        ]
+      },
+      "q-zj-2024-jan-036": {
+        "questionId": "q-zj-2024-jan-036",
+        "questionNo": 36,
+        "groupId": "group-zj-2024-jan-seven-choices",
+        "stem": "36",
+        "blankId": "blank-zj-2024-jan-036"
+      },
+      "q-zj-2024-jan-037": {
+        "questionId": "q-zj-2024-jan-037",
+        "questionNo": 37,
+        "groupId": "group-zj-2024-jan-seven-choices",
+        "stem": "37",
+        "blankId": "blank-zj-2024-jan-037"
+      },
+      "q-zj-2024-jan-038": {
+        "questionId": "q-zj-2024-jan-038",
+        "questionNo": 38,
+        "groupId": "group-zj-2024-jan-seven-choices",
+        "stem": "38",
+        "blankId": "blank-zj-2024-jan-038"
+      },
+      "q-zj-2024-jan-039": {
+        "questionId": "q-zj-2024-jan-039",
+        "questionNo": 39,
+        "groupId": "group-zj-2024-jan-seven-choices",
+        "stem": "39",
+        "blankId": "blank-zj-2024-jan-039"
+      },
+      "q-zj-2024-jan-040": {
+        "questionId": "q-zj-2024-jan-040",
+        "questionNo": 40,
+        "groupId": "group-zj-2024-jan-seven-choices",
+        "stem": "40",
+        "blankId": "blank-zj-2024-jan-040"
+      },
+      "q-zj-2024-jan-041": {
+        "questionId": "q-zj-2024-jan-041",
+        "questionNo": 41,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "41",
+        "blankId": "blank-zj-2024-jan-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "experiment"
+          },
+          {
+            "label": "B",
+            "text": "encounter"
+          },
+          {
+            "label": "C",
+            "text": "competition"
+          },
+          {
+            "label": "D",
+            "text": "appointment"
+          }
+        ]
+      },
+      "q-zj-2024-jan-042": {
+        "questionId": "q-zj-2024-jan-042",
+        "questionNo": 42,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "42",
+        "blankId": "blank-zj-2024-jan-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "treated"
+          },
+          {
+            "label": "B",
+            "text": "saved"
+          },
+          {
+            "label": "C",
+            "text": "lectured"
+          },
+          {
+            "label": "D",
+            "text": "approached"
+          }
+        ]
+      },
+      "q-zj-2024-jan-043": {
+        "questionId": "q-zj-2024-jan-043",
+        "questionNo": 43,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "43",
+        "blankId": "blank-zj-2024-jan-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "true"
+          },
+          {
+            "label": "B",
+            "text": "so-called"
+          },
+          {
+            "label": "C",
+            "text": "new"
+          },
+          {
+            "label": "D",
+            "text": "long-lost"
+          }
+        ]
+      },
+      "q-zj-2024-jan-044": {
+        "questionId": "q-zj-2024-jan-044",
+        "questionNo": 44,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "44",
+        "blankId": "blank-zj-2024-jan-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "chance"
+          },
+          {
+            "label": "B",
+            "text": "advice"
+          },
+          {
+            "label": "C",
+            "text": "trouble"
+          },
+          {
+            "label": "D",
+            "text": "right"
+          }
+        ]
+      },
+      "q-zj-2024-jan-045": {
+        "questionId": "q-zj-2024-jan-045",
+        "questionNo": 45,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "45",
+        "blankId": "blank-zj-2024-jan-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "visited"
+          },
+          {
+            "label": "B",
+            "text": "financed"
+          },
+          {
+            "label": "C",
+            "text": "attended"
+          },
+          {
+            "label": "D",
+            "text": "founded"
+          }
+        ]
+      },
+      "q-zj-2024-jan-046": {
+        "questionId": "q-zj-2024-jan-046",
+        "questionNo": 46,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "46",
+        "blankId": "blank-zj-2024-jan-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "building"
+          },
+          {
+            "label": "B",
+            "text": "sweeping"
+          },
+          {
+            "label": "C",
+            "text": "checking"
+          },
+          {
+            "label": "D",
+            "text": "guarding"
+          }
+        ]
+      },
+      "q-zj-2024-jan-047": {
+        "questionId": "q-zj-2024-jan-047",
+        "questionNo": 47,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "47",
+        "blankId": "blank-zj-2024-jan-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "typical"
+          },
+          {
+            "label": "B",
+            "text": "obvious"
+          },
+          {
+            "label": "C",
+            "text": "natural"
+          },
+          {
+            "label": "D",
+            "text": "remarkable"
+          }
+        ]
+      },
+      "q-zj-2024-jan-048": {
+        "questionId": "q-zj-2024-jan-048",
+        "questionNo": 48,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "48",
+        "blankId": "blank-zj-2024-jan-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "publish"
+          },
+          {
+            "label": "B",
+            "text": "quote"
+          },
+          {
+            "label": "C",
+            "text": "сорy"
+          },
+          {
+            "label": "D",
+            "text": "download"
+          }
+        ]
+      },
+      "q-zj-2024-jan-049": {
+        "questionId": "q-zj-2024-jan-049",
+        "questionNo": 49,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "49",
+        "blankId": "blank-zj-2024-jan-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "writers"
+          },
+          {
+            "label": "B",
+            "text": "historians"
+          },
+          {
+            "label": "C",
+            "text": "workers"
+          },
+          {
+            "label": "D",
+            "text": "students"
+          }
+        ]
+      },
+      "q-zj-2024-jan-050": {
+        "questionId": "q-zj-2024-jan-050",
+        "questionNo": 50,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "50",
+        "blankId": "blank-zj-2024-jan-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "anticipate"
+          },
+          {
+            "label": "B",
+            "text": "imagine"
+          },
+          {
+            "label": "C",
+            "text": "recall"
+          },
+          {
+            "label": "D",
+            "text": "catch"
+          }
+        ]
+      },
+      "q-zj-2024-jan-051": {
+        "questionId": "q-zj-2024-jan-051",
+        "questionNo": 51,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "51",
+        "blankId": "blank-zj-2024-jan-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "look into"
+          },
+          {
+            "label": "B",
+            "text": "rely on"
+          },
+          {
+            "label": "C",
+            "text": "go over"
+          },
+          {
+            "label": "D",
+            "text": "deal with"
+          }
+        ]
+      },
+      "q-zj-2024-jan-052": {
+        "questionId": "q-zj-2024-jan-052",
+        "questionNo": 52,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "52",
+        "blankId": "blank-zj-2024-jan-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "well-behaved"
+          },
+          {
+            "label": "B",
+            "text": "multi-skilled"
+          },
+          {
+            "label": "C",
+            "text": "warm-hearted"
+          },
+          {
+            "label": "D",
+            "text": "self-educated"
+          }
+        ]
+      },
+      "q-zj-2024-jan-053": {
+        "questionId": "q-zj-2024-jan-053",
+        "questionNo": 53,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "53",
+        "blankId": "blank-zj-2024-jan-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "asked"
+          },
+          {
+            "label": "B",
+            "text": "warned"
+          },
+          {
+            "label": "C",
+            "text": "showed"
+          },
+          {
+            "label": "D",
+            "text": "promised"
+          }
+        ]
+      },
+      "q-zj-2024-jan-054": {
+        "questionId": "q-zj-2024-jan-054",
+        "questionNo": 54,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "54",
+        "blankId": "blank-zj-2024-jan-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "traveling"
+          },
+          {
+            "label": "B",
+            "text": "reading"
+          },
+          {
+            "label": "C",
+            "text": "searching"
+          },
+          {
+            "label": "D",
+            "text": "teaching"
+          }
+        ]
+      },
+      "q-zj-2024-jan-055": {
+        "questionId": "q-zj-2024-jan-055",
+        "questionNo": 55,
+        "groupId": "group-zj-2024-jan-cloze",
+        "stem": "55",
+        "blankId": "blank-zj-2024-jan-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "cooperate"
+          },
+          {
+            "label": "B",
+            "text": "side"
+          },
+          {
+            "label": "C",
+            "text": "negotiate"
+          },
+          {
+            "label": "D",
+            "text": "engage"
+          }
+        ]
+      },
+      "q-zj-2024-jan-056": {
+        "questionId": "q-zj-2024-jan-056",
+        "questionNo": 56,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-zj-2024-jan-056"
+      },
+      "q-zj-2024-jan-057": {
+        "questionId": "q-zj-2024-jan-057",
+        "questionNo": 57,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-zj-2024-jan-057"
+      },
+      "q-zj-2024-jan-058": {
+        "questionId": "q-zj-2024-jan-058",
+        "questionNo": 58,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-zj-2024-jan-058"
+      },
+      "q-zj-2024-jan-059": {
+        "questionId": "q-zj-2024-jan-059",
+        "questionNo": 59,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-zj-2024-jan-059"
+      },
+      "q-zj-2024-jan-060": {
+        "questionId": "q-zj-2024-jan-060",
+        "questionNo": 60,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-zj-2024-jan-060"
+      },
+      "q-zj-2024-jan-061": {
+        "questionId": "q-zj-2024-jan-061",
+        "questionNo": 61,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-zj-2024-jan-061"
+      },
+      "q-zj-2024-jan-062": {
+        "questionId": "q-zj-2024-jan-062",
+        "questionNo": 62,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-zj-2024-jan-062"
+      },
+      "q-zj-2024-jan-063": {
+        "questionId": "q-zj-2024-jan-063",
+        "questionNo": 63,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-zj-2024-jan-063"
+      },
+      "q-zj-2024-jan-064": {
+        "questionId": "q-zj-2024-jan-064",
+        "questionNo": 64,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-zj-2024-jan-064"
+      },
+      "q-zj-2024-jan-065": {
+        "questionId": "q-zj-2024-jan-065",
+        "questionNo": 65,
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-zj-2024-jan-065"
+      }
+    },
+    "blanks": {
+      "blank-zj-2024-jan-056": {
+        "blankId": "blank-zj-2024-jan-056",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-056",
+        "prompt": "benefit"
+      },
+      "blank-zj-2024-jan-057": {
+        "blankId": "blank-zj-2024-jan-057",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-057"
+      },
+      "blank-zj-2024-jan-058": {
+        "blankId": "blank-zj-2024-jan-058",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-058"
+      },
+      "blank-zj-2024-jan-059": {
+        "blankId": "blank-zj-2024-jan-059",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-059"
+      },
+      "blank-zj-2024-jan-060": {
+        "blankId": "blank-zj-2024-jan-060",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-060",
+        "prompt": "criticize"
+      },
+      "blank-zj-2024-jan-061": {
+        "blankId": "blank-zj-2024-jan-061",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-061",
+        "prompt": "offer"
+      },
+      "blank-zj-2024-jan-062": {
+        "blankId": "blank-zj-2024-jan-062",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-062",
+        "prompt": "start"
+      },
+      "blank-zj-2024-jan-063": {
+        "blankId": "blank-zj-2024-jan-063",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-063",
+        "prompt": "design"
+      },
+      "blank-zj-2024-jan-064": {
+        "blankId": "blank-zj-2024-jan-064",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-064"
+      },
+      "blank-zj-2024-jan-065": {
+        "blankId": "blank-zj-2024-jan-065",
+        "groupId": "group-zj-2024-jan-grammar-fill",
+        "questionId": "q-zj-2024-jan-065",
+        "prompt": "one"
+      }
+    },
+    "writingTasks": {
+      "wt-zj-2024-jan-application": {
+        "writingTaskId": "wt-zj-2024-jan-application",
+        "groupId": "group-zj-2024-jan-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "请你写一篇短文向校英文报“Sports and Health”栏目投稿，向同学们推荐一项适合课间开展的运动，内容包括：\n1. 介绍这项运动；\n2. 说明推荐理由。\n1. 写作词数应为80个左右；\n2. 请按如下格式在答题卡的相应位置作答：\nStand Up and Exercise, Everybody!",
+        "wordCountTarget": 80
+      },
+      "wt-zj-2024-jan-continuation": {
+        "writingTaskId": "wt-zj-2024-jan-continuation",
+        "groupId": "group-zj-2024-jan-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nEva spent the first week of high school trying to keep her head above water. One of the major headaches for her was finding her way in the huge school building. It was a six-story building. On each floor, hallways stretched in four directions, learning to classrooms, laboratories and teachers’ offices. Somewhere in the building, there was also a library, a cafeteria and a gym.\nHaving a poor sense of direction, Eva found it impossible to get around in such a huge building. All the different hallways and rooms were too much to think about, let alone commit to memory. She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist.\nIn her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside. She searched the faces of her classmates for signs of panic. There was nothing she feared more than having to run a whole mile. To Eva, “a mile” was used to describe long distances. It was ten miles from her home to her grandfather’s, and that always seemed like a long way, even in a car!\nWhen Coach Pitt blew his whistle (哨子) , Eva figured she would be left in the dust. However, while some of her classmates edged ahead, others actually fell behind. “It’s just the beginning,” she thought. “I’ll come in last for sure.”\nSoon Eva began to breathe hard, with her heart pounding and legs shaking. Feeling desperate, Eva started using a mind trick on herself. She stopped thinking about the word “mile”. Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead. Then she concentrated on jogging to the spot where the trace curved (拐弯) . After that, she tried to see if she could complete her first lap. One lap turned into two, then three, then four.",
+        "continuationStarters": [
+          "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised.",
+          "Eva decided to use the same trick to deal with the school building."
+        ],
+        "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nEva spent the first week of high school trying to keep her head above water. One of the major headaches for her was finding her way in the huge school building. It was a six-story building. On each floor, hallways stretched in four directions, learning to classrooms, laboratories and teachers’ offices. Somewhere in the building, there was also a library, a cafeteria and a gym.\n\nHaving a poor sense of direction, Eva found it impossible to get around in such a huge building. All the different hallways and rooms were too much to think about, let alone commit to memory. She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist.\n\nIn her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside. She searched the faces of her classmates for signs of panic. There was nothing she feared more than having to run a whole mile. To Eva, “a mile” was used to describe long distances. It was ten miles from her home to her grandfather’s, and that always seemed like a long way, even in a car!\n\nWhen Coach Pitt blew his whistle (哨子) , Eva figured she would be left in the dust. However, while some of her classmates edged ahead, others actually fell behind. “It’s just the beginning,” she thought. “I’ll come in last for sure.”\n\nSoon Eva began to breathe hard, with her heart pounding and legs shaking. Feeling desperate, Eva started using a mind trick on herself. She stopped thinking about the word “mile”. Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead. Then she concentrated on jogging to the spot where the trace curved (拐弯) . After that, she tried to see if she could complete her first lap. One lap turned into two, then three, then four.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-zj-2024-jan-021": {
+        "questionId": "q-zj-2024-jan-021",
+        "questionNo": 21,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-022": {
+        "questionId": "q-zj-2024-jan-022",
+        "questionNo": 22,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-023": {
+        "questionId": "q-zj-2024-jan-023",
+        "questionNo": 23,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-024": {
+        "questionId": "q-zj-2024-jan-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-025": {
+        "questionId": "q-zj-2024-jan-025",
+        "questionNo": 25,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-026": {
+        "questionId": "q-zj-2024-jan-026",
+        "questionNo": 26,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-027": {
+        "questionId": "q-zj-2024-jan-027",
+        "questionNo": 27,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-028": {
+        "questionId": "q-zj-2024-jan-028",
+        "questionNo": 28,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-029": {
+        "questionId": "q-zj-2024-jan-029",
+        "questionNo": 29,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-030": {
+        "questionId": "q-zj-2024-jan-030",
+        "questionNo": 30,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-031": {
+        "questionId": "q-zj-2024-jan-031",
+        "questionNo": 31,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-032": {
+        "questionId": "q-zj-2024-jan-032",
+        "questionNo": 32,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-033": {
+        "questionId": "q-zj-2024-jan-033",
+        "questionNo": 33,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-034": {
+        "questionId": "q-zj-2024-jan-034",
+        "questionNo": 34,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-035": {
+        "questionId": "q-zj-2024-jan-035",
+        "questionNo": 35,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-036": {
+        "questionId": "q-zj-2024-jan-036",
+        "questionNo": 36,
+        "answer": "G",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-037": {
+        "questionId": "q-zj-2024-jan-037",
+        "questionNo": 37,
+        "answer": "F",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-038": {
+        "questionId": "q-zj-2024-jan-038",
+        "questionNo": 38,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-039": {
+        "questionId": "q-zj-2024-jan-039",
+        "questionNo": 39,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-040": {
+        "questionId": "q-zj-2024-jan-040",
+        "questionNo": 40,
+        "answer": "E",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-041": {
+        "questionId": "q-zj-2024-jan-041",
+        "questionNo": 41,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-042": {
+        "questionId": "q-zj-2024-jan-042",
+        "questionNo": 42,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-043": {
+        "questionId": "q-zj-2024-jan-043",
+        "questionNo": 43,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-044": {
+        "questionId": "q-zj-2024-jan-044",
+        "questionNo": 44,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-045": {
+        "questionId": "q-zj-2024-jan-045",
+        "questionNo": 45,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-046": {
+        "questionId": "q-zj-2024-jan-046",
+        "questionNo": 46,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-047": {
+        "questionId": "q-zj-2024-jan-047",
+        "questionNo": 47,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-048": {
+        "questionId": "q-zj-2024-jan-048",
+        "questionNo": 48,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-049": {
+        "questionId": "q-zj-2024-jan-049",
+        "questionNo": 49,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-050": {
+        "questionId": "q-zj-2024-jan-050",
+        "questionNo": 50,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-051": {
+        "questionId": "q-zj-2024-jan-051",
+        "questionNo": 51,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-052": {
+        "questionId": "q-zj-2024-jan-052",
+        "questionNo": 52,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-053": {
+        "questionId": "q-zj-2024-jan-053",
+        "questionNo": 53,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-054": {
+        "questionId": "q-zj-2024-jan-054",
+        "questionNo": 54,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-055": {
+        "questionId": "q-zj-2024-jan-055",
+        "questionNo": 55,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-056": {
+        "questionId": "q-zj-2024-jan-056",
+        "questionNo": 56,
+        "answer": "to benefit",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-057": {
+        "questionId": "q-zj-2024-jan-057",
+        "questionNo": 57,
+        "answer": "or",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-058": {
+        "questionId": "q-zj-2024-jan-058",
+        "questionNo": 58,
+        "answer": "that/which",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-059": {
+        "questionId": "q-zj-2024-jan-059",
+        "questionNo": 59,
+        "answer": "what",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-060": {
+        "questionId": "q-zj-2024-jan-060",
+        "questionNo": 60,
+        "answer": "criticism",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-061": {
+        "questionId": "q-zj-2024-jan-061",
+        "questionNo": 61,
+        "answer": "be offered",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-062": {
+        "questionId": "q-zj-2024-jan-062",
+        "questionNo": 62,
+        "answer": "have started",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-063": {
+        "questionId": "q-zj-2024-jan-063",
+        "questionNo": 63,
+        "answer": "designed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-064": {
+        "questionId": "q-zj-2024-jan-064",
+        "questionNo": 64,
+        "answer": "the",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2024-jan-065": {
+        "questionId": "q-zj-2024-jan-065",
+        "questionNo": 65,
+        "answer": "ones",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-08T22:00:00Z"
+    },
+    "groups": {
+      "group-zj-2024-jan-reading-a": {
+        "overview": "本文是一则关于儿童剧《汤姆·索亚：河流历险记》的应用文（演出介绍），介绍了该音乐剧的内容、创作团队、两位主演以及为教师提供的教学资源。",
+        "discourseStructure": {
+          "summary": "文章先以标题点明主题，随后介绍剧目内容与创作团队，再分别介绍两位主演的演出经历，最后给出面向教师的教学资源说明。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-1",
+              "summary": "标题，点明汤姆·索亚的戏剧是一场历险。",
+              "function": "标题，提示全文主题。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-2",
+              "summary": "介绍这部35分钟、改编自马克·吐温名作的音乐剧随 Tall Stacks 艺术节回归。",
+              "function": "引入剧目，交代演出背景。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-3",
+              "summary": "说明剧目包含的经典情节，并介绍改编者 Joe McDonough 和作曲 David Kisor 这一本地创作团队。",
+              "function": "介绍剧情看点与创作团队。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-4",
+              "summary": "点出今年两位主演：Nathan Turner 饰 Tom Sawyer，Robbie McMath 饰 Huck Finn。",
+              "function": "引出两位主演。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-5",
+              "summary": "介绍 Turner 的演出经历，是儿童剧院的明星演员，曾主演多部剧目。",
+              "function": "介绍主演 Turner 的舞台经验。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-6",
+              "summary": "介绍 McMath 的经历，是儿童剧院常客，已出演五部剧目，并参加过音乐剧暑期项目。",
+              "function": "介绍主演 McMath 的舞台经验。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-a-7",
+              "summary": "面向教师的提示：儿童剧院提供学习指南，展示如何借助该剧教授数学和科学，并可下载课程。",
+              "function": "提供面向教师的教学资源信息。"
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-reading-b": {
+        "overview": "本文是一篇带有个人回忆色彩的记叙兼议论文。作者以“你上次用电话亭打电话是什么时候”发问，回忆2006年被锁在门外靠街对面电话亭求助配钥匙的经历，再讲述如今家附近的电话亭被改造成“迷你社区图书馆”，自己从抗拒到爱上免费淘书的转变。",
+        "discourseStructure": {
+          "summary": "由设问引入电话亭话题，先以2006年被锁门外的亲身经历说明电话亭曾经的实用功能，再转入电话亭如今被改造成社区图书馆的现状，记叙作者对图书馆态度的转变与收获，最后以幽默的呼应收束。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-1",
+              "summary": "以设问引出电话亭话题，引出2006年作者在伦敦合租屋里为自己的戏剧试演演员、布置房间的背景。",
+              "function": "设问开篇，引入话题并交代2006年经历的背景"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-2",
+              "summary": "作者外出倒纸篓时被反锁门外，手机落在屋内，幸好街对面有电话亭，靠它联系到房东代理并及时拿到备用钥匙。",
+              "function": "叙述2006年用电话亭打紧急电话求助的具体事件"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-3",
+              "summary": "多年未用电话亭，如今家附近的公共电话都没了，最后一个被改造成“迷你社区图书馆”，路人可借书、还书或用自己的书替换。",
+              "function": "转折过渡，引出电话亭如今变身社区图书馆的现状"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-4",
+              "summary": "起初作者以为里面尽是俗套言情小说而不屑一顾，后来发现人们捐来各类大部头好书且全部免费，这促使他尝试平时绝不会买的书并发现了好书。",
+              "function": "记叙作者对图书馆态度的转变及其原因——免费好书"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-b-5",
+              "summary": "作者笑称若再被锁在门外，电话亭已无法帮他联系钥匙，但能在他等妻子来救时给他消遣。",
+              "function": "首尾呼应，以幽默口吻收束全文"
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-reading-c": {
+        "overview": "本文是一篇说明文/议论性文本，围绕加拿大阿尔伯塔省的人工消雹（cloud seeding，云播撒）项目展开。文章介绍了项目的起因与做法，呈现农民、项目管理者、研究科学家等多方对其影响（是否偷走水分、是否制造危险风暴）的争议，并在结尾指出由于缺乏科学证据，相关公司在法律上可以继续运营。",
+        "discourseStructure": {
+          "summary": "全文按\"起因与做法→反方质疑→正方辩护→第三方存疑→现实结局\"的逻辑展开，呈现多方观点的争论结构。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-1",
+              "summary": "1991年卡尔加里遭遇严重雹暴，保险公司自1996年起出资开展消雹项目，用飞机向风暴云播撒化学物质使冰晶提前以雨落下；但下风处农民担心宝贵水分被偷走。",
+              "function": "引入背景、介绍项目做法并抛出争议焦点。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-2",
+              "summary": "当地农民Stienwand多年公开发声，指出政府让保险公司保护城市免受冰雹，却增加了向东远至萨斯喀彻温的干旱风险。",
+              "function": "呈现反对方（农民）的观点。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-3",
+              "summary": "项目管理者、云物理学家Krauss辩称只影响极小比例的空气水分，不可能造成干旱，甚至可能增加下风处的水分。",
+              "function": "呈现项目方（支持/辩护方）的反驳观点。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-4",
+              "summary": "退休研究科学家Doswell表示曾在1999年亲眼看到被播撒的风暴云形成龙卷风，并坦言无人真正知道云播撒是否制造杀手风暴或减少水分。",
+              "function": "呈现第三方存疑者的观点，提出安全隐患。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-c-5",
+              "summary": "Stienwand建议停止云播撒，但现实中由于缺乏科学证据，没人能在针对云播撒公司的官司中胜诉，因此私人气候工程可在相对法律安全下继续。",
+              "function": "总结现实结局，点明因缺乏证据反对未能奏效。"
+            }
+          ]
+        }
+      },
+      "group-zj-2024-jan-reading-d": {
+        "overview": "本文是一篇说明文/议论文，借用著名的斯坦福棉花糖实验作类比，指出成年人每天面对的不再是糖果诱惑，而是手机、电脑等设备带来的信息诱惑。作者从大脑进化机制角度解释这种诱惑的根源，并提出我们应像控制热量摄入一样，更审慎地控制信息摄入。",
+        "discourseStructure": {
+          "summary": "文章先介绍棉花糖实验及其与人生成功的关联，再把实验类比到成年人面对的信息诱惑，接着用大脑进化机制解释为何难以抵御糖果诱惑，最后将同样的机制平行迁移到信息领域并给出建议。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-1",
+              "summary": "介绍斯坦福棉花糖实验的背景、过程，以及后续研究发现等待能力与各种成功之间的关联。",
+              "function": "引入话题，提供后文类比所依据的核心实验事实。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-2",
+              "summary": "指出成年人每天也面对一种棉花糖实验，只不过诱惑来自连接全球信息系统的电脑、手机、平板等设备。",
+              "function": "把棉花糖实验类比迁移到成年人的信息诱惑，搭建全文核心类比。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-3",
+              "summary": "解释人类祖先生活在热量匮乏的世界，大脑形成了对糖果的奖赏机制；如今食物易得，但大脑未变，这种错配导致人们难以抵抗诱人食物。",
+              "function": "用进化机制解释糖果诱惑的根源，提出大脑与环境之间的'错配'概念。"
+            },
+            {
+              "paragraphId": "para-zj-2024-jan-reading-d-4",
+              "summary": "将相同机制迁移到信息领域：早期信息匮乏使大脑珍视新信息，而全球互联让信息泛滥，因此我们需像审慎对待热量一样审慎对待信息消费。",
+              "function": "平行论证信息领域的同类问题并给出全文结论与建议。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2024-jan-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查谁为《汤姆·索亚：河流历险记》创作了音乐。",
+        "stemTranslationZh": "谁为《汤姆·索亚：河流历险记》创作了音乐？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "David Kisor。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-a-3",
+                "quote": "with music by David Kisor",
+                "anchor": "music by David Kisor"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "Joe McDonough。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "It is adapted by Joe McDonough, with music by David Kisor.",
+              "sourceEntity": "Joe McDonough",
+              "optionText": "Joe McDonough.",
+              "optionEntity": "Joe McDonough",
+              "explanation": "Joe McDonough 是改编者（adapted by），而非作曲者，作曲是 David Kisor，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-a-3",
+                "quote": "It is adapted by Joe McDonough, with music by David Kisor.",
+                "anchor": "adapted by Joe McDonough"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "Nathan Turner。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "This year Nathan Tumer of Burlington is Tom Sawyer, and Robbie McMath of Fort Mitchell is Huck Finn.",
+              "sourceEntity": "Nathan Tumer",
+              "optionText": "Nathan Turner.",
+              "optionEntity": "Nathan Turner",
+              "explanation": "Nathan Turner 是饰演 Tom Sawyer 的演员，而非作曲者，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-a-4",
+                "quote": "This year Nathan Tumer of Burlington is Tom Sawyer",
+                "anchor": "Nathan Turner 是演员"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "Robbie McMath。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "This year Nathan Tumer of Burlington is Tom Sawyer, and Robbie McMath of Fort Mitchell is Huck Finn.",
+              "sourceEntity": "Robbie McMath",
+              "optionText": "Robbie McMath.",
+              "optionEntity": "Robbie McMath",
+              "explanation": "Robbie McMath 是饰演 Huck Finn 的演员，而非作曲者，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-a-4",
+                "quote": "Robbie McMath of Fort Mitchell is Huck Finn",
+                "anchor": "Robbie McMath 是演员"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "wrote the music",
+            "sourceRole": "stem",
+            "targetText": "with music by David Kisor",
+            "targetParagraphId": "para-zj-2024-jan-reading-a-3",
+            "relationType": "paraphrase",
+            "note": "题干用 wrote the music 提问作曲者，原文用 music by + 人名（David Kisor）表达同一信息。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-022": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查根据两位主演的演出经历可推断出什么。",
+        "stemTranslationZh": "关于这两位演员，我们可以了解到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他们在同一所学校上学。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Turner, a 10th-grader at School for Creative and Performing Arts",
+              "sourceHighlight": "School for Creative and Performing Arts",
+              "optionText": "They study in the same school.",
+              "optionHighlight": "the same school",
+              "explanation": "原文显示 Turner 就读于 School for Creative and Performing Arts，McMath 就读于 Beechwood High School，二人并非同校，选项以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-a-6",
+                "quote": "McMath is a junior at Beechwood High School.",
+                "anchor": "McMath 就读不同学校"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他们曾在《Ragtime》中合作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "is fresh from Jersey Production “Ragtime”",
+              "optionText": "They worked together in ”Ragtime“.",
+              "matchType": "exact",
+              "relationNote": "原文仅提到 Turner 刚结束《Ragtime》的演出，并未提及 McMath，更未说二人在该剧中合作；选项借用原文出现的 Ragtime 一词进行干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-a-5",
+                "quote": "is fresh from Jersey Production “Ragtime”",
+                "anchor": "仅 Turner 参演 Ragtime"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他们在舞台上经验丰富。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-a-5",
+                "quote": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,”",
+                "anchor": "Turner 经验丰富"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2024-jan-reading-a-6",
+                "quote": "is a Children’s Theatre regular, with five shows to his credit",
+                "anchor": "McMath 经验丰富"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他们十年前成为朋友。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "They became friends ten years ago.",
+              "explanation": "原文未提及二人何时成为朋友，更无十年前结识的信息，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "are experienced on stage",
+            "sourceRole": "correctOption",
+            "targetText": "having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,”",
+            "targetParagraphId": "para-zj-2024-jan-reading-a-5",
+            "relationType": "paraphrase",
+            "note": "正确选项 experienced on stage 由原文对 Turner（star actor / leading roles）与 McMath（regular / five shows）的描述综合推断得出。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查儿童剧院为教师提供了什么。",
+        "stemTranslationZh": "儿童剧院为教师提供了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "研究经费。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Research funding.",
+              "explanation": "原文未提及为教师提供研究经费，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "培训机会。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Training opportunities.",
+              "explanation": "原文未提及为教师提供培训机会，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "技术支持。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Technical support.",
+              "explanation": "原文未提及为教师提供技术支持，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "教育资源。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-a-7",
+                "quote": "Children’s Theatre has a study guide demonstrating how math and science can be taught through “Tom Sawyer.”",
+                "anchor": "study guide 教学资源"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2024-jan-reading-a-7",
+                "quote": "For downloadable lessons, visit the official website of Children’s Theatre.",
+                "anchor": "可下载课程"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Educational resources",
+            "sourceRole": "correctOption",
+            "targetText": "Children’s Theatre has a study guide demonstrating how math and science can be taught through “Tom Sawyer.”",
+            "targetParagraphId": "para-zj-2024-jan-reading-a-7",
+            "relationType": "paraphrase",
+            "note": "正确选项 Educational resources 是对原文 study guide 与 downloadable lessons（学习指南、可下载课程）的概括同义替换。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查第一段画线代词“it”的指代对象，需结合上下文判断 it 所指的名词。",
+        "stemTranslationZh": "第一段中画线词“it”指代的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "那部戏剧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "for my play",
+              "optionText": "The play.",
+              "matchType": "exact",
+              "relationNote": "选项借用原文中出现的 play 一词设陷，但 play 是试演的对象，而画线 it 指代的是作者布置、要让它显得更专业的“房子”，并非戏剧本身。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-1",
+                "quote": "I was conducting auditions (试演) for my play",
+                "anchor": "for my play"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "那间合租屋。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-b-1",
+                "quote": "I spread some throws over the sofas and lit candles to make it seem a bit more ”young professional”",
+                "anchor": "make it seem more young professional"
+              },
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-1",
+                "quote": "in my tiny old shared house in London",
+                "anchor": "shared house"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "那张沙发。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "I spread some throws over the sofas",
+              "optionText": "The sofa.",
+              "matchType": "wordFamily",
+              "relationNote": "选项利用原文的 sofas 设陷，但沙发只是作者用披毯装点的对象之一，他装点整间屋子是为了让“它（房子）”显得更专业，it 指代的是房子而非沙发。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-1",
+                "quote": "I spread some throws over the sofas",
+                "anchor": "throws over the sofas"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "那个电话亭。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "to make it seem a bit more ”young professional”",
+              "sourceEntity": "the shared house being decorated",
+              "optionText": "The telephone box.",
+              "optionEntity": "the telephone box",
+              "explanation": "电话亭是全文话题，但在第一段画线 it 所在的语境里，作者布置、要让其显得更专业的是合租屋，第一段并未提及电话亭，对象错配。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The shared house",
+            "sourceRole": "correctOption",
+            "targetText": "in my tiny old shared house in London",
+            "targetParagraphId": "para-zj-2024-jan-reading-b-1",
+            "relationType": "locationCue",
+            "note": "画线 it 出现在作者描述布置房间（spread throws、lit candles）让其显得更 young professional 的语境，紧承前文的 shared house，故 it 指代这间合租屋。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查2006年作者使用电话亭的原因这一细节，需定位被锁门外后打电话求助的具体情节。",
+        "stemTranslationZh": "作者在2006年为什么使用那个电话亭？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了打一个紧急电话。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-b-2",
+                "quote": "Suddenly I was locked outside. My mobile phone was inside, but luckily there was a telephone box across the street.",
+                "anchor": "locked outside, phone box across the street"
+              },
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-2",
+                "quote": "So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me",
+                "anchor": "called Directory Assistance for a spare key"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了张贴一则通知。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作者使用电话亭是为了张贴通知。",
+              "explanation": "原文未提及作者在电话亭张贴任何通知，他使用电话亭是为了打电话求助配钥匙，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了躲雨。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "not to shelter from the rain",
+              "optionText": "To shelter from the rain.",
+              "matchType": "exact",
+              "relationNote": "选项照搬原文第一段 shelter from the rain 这一表达设陷，但原文是作者强调“不是为了躲雨”而是真正打电话，2006年用电话亭也是为了打紧急电话，并非躲雨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-1",
+                "quote": "not to shelter from the rain",
+                "anchor": "not to shelter from the rain"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了举行一场试演。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "I was conducting auditions (试演) for my play",
+              "sourceEntity": "the auditions held in the house",
+              "optionText": "To hold an audition.",
+              "optionEntity": "the use of the telephone box",
+              "explanation": "试演确有其事，但试演是在合租屋里进行，与电话亭无关；作者使用电话亭的原因是被锁门外后打电话求助，对象错配。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To place an urgent call",
+            "sourceRole": "correctOption",
+            "targetText": "I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me",
+            "targetParagraphId": "para-zj-2024-jan-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 place an urgent call（打紧急电话）是对原文 called Directory Assistance 求助配钥匙这一情节的同义概括，因作者被反锁、手机在屋内、需赶在演员到来前拿到钥匙，故属紧急来电。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查关于“迷你社区图书馆”运作方式的细节，需定位第三段对借书、还书与替换书目的描述。",
+        "stemTranslationZh": "关于“迷你社区图书馆”，我们可以了解到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它免费提供电话服务。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "The last one standing has just been turn into a “mini community library”",
+              "sourceHighlight": "turn into a “mini community library”",
+              "optionText": "It provides phone service for free.",
+              "optionHighlight": "provides phone service",
+              "explanation": "原文明确电话亭已被改造成图书馆，电话功能已不复存在（第五段也说它已无法帮作者联系钥匙），选项却称其提供电话服务，与原文相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-3",
+                "quote": "The last one standing has just been turn into a “mini community library”",
+                "anchor": "turned into a library"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "任何人都可以为它的藏书添砖加瓦。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-b-3",
+                "quote": "any passer-by can “borrow” a book from its shelves return it later, or replace it with another title from their own collection",
+                "anchor": "replace it with a title from their own collection"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它在年轻读者中很受欢迎。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "迷你社区图书馆在年轻读者中很受欢迎。",
+              "explanation": "原文只说任何路人都可借书还书或替换书目，并未提及它在年轻读者中是否受欢迎，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "书必须在一个月内归还。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "书必须在一个月内归还。",
+              "explanation": "原文只说路人可以稍后归还所借之书（return it later），并未规定一个月的归还期限，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Anyone can contribute to its collection",
+            "sourceRole": "correctOption",
+            "targetText": "replace it with another title from their own collection",
+            "targetParagraphId": "para-zj-2024-jan-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "选项 contribute to its collection（为藏书做贡献）是对原文 replace it with another title from their own collection（用自己藏书中的书替换）的同义替换，说明任何人都可向图书馆添书。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-027": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者开始使用这个“图书馆”的原因，需定位第四段促使其态度转变的关键信息。",
+        "stemTranslationZh": "作者为什么开始使用这个“图书馆”？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他想借一些言情小说。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "I had assumed that it would be stuffed full of cheesy love stories",
+              "sourceHighlight": "cheesy love stories",
+              "optionText": "He wanted to borrow some love stories.",
+              "optionHighlight": "borrow some love stories",
+              "explanation": "原文中作者本以为里面满是俗套言情小说而不屑去看，言情小说正是他起初回避的原因；选项却说他想借言情小说，与作者态度相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-4",
+                "quote": "I had assumed that it would be stuffed full of cheesy love stories",
+                "anchor": "assumed full of cheesy love stories"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他受到一位亲近邻居的鼓励。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "This unbeatable price-point encouraged me to experiment with dozens of titles",
+              "optionText": "He was encouraged by a close neighbour.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文 encouraged 一词设陷，但原文中“鼓励”作者尝试的是无与伦比的免费价格（unbeatable price-point），而非某位亲近的邻居，施动者被偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-4",
+                "quote": "This unbeatable price-point encouraged me to experiment with dozens of titles",
+                "anchor": "price-point encouraged me"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他发现那里有很棒的免费书。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-b-4",
+                "quote": "And these books were free. This unbeatable price-point encouraged me to experiment with dozens of titles",
+                "anchor": "books were free, price encouraged me"
+              },
+              {
+                "paragraphId": "para-zj-2024-jan-reading-b-4",
+                "quote": "And I’ve discovered some great books!",
+                "anchor": "discovered great books"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他认为那是个理想的阅读场所。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作者认为图书馆是个理想的阅读场所。",
+              "explanation": "原文只说免费的好书吸引作者去尝试各类书目，并未提及他把电话亭图书馆当作理想的阅读场所，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He found there were excellent free books",
+            "sourceRole": "correctOption",
+            "targetText": "And these books were free. This unbeatable price-point encouraged me to experiment with dozens of titles",
+            "targetParagraphId": "para-zj-2024-jan-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "选项 excellent free books 对应原文 these books were free 以及 I’ve discovered some great books，正是无与伦比的免费价格促使作者开始尝试并使用这个图书馆。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对项目目的的细节理解：阿尔伯塔消雹项目想要做什么。",
+        "stemTranslationZh": "该项目旨在做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "保存土壤中的水分。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
+              "sourceEntity": "farmers worry that precious moisture is being stolen",
+              "optionText": "Conserve moisture in the soil.",
+              "optionEntity": "Conserve moisture in the soil",
+              "explanation": "保存土壤水分是下风处农民所担忧、希望保住的东西，而非该项目的目的；原文该项目目的是消雹而非保水，选项把农民的关切错配成项目目标。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-1",
+                "quote": "worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding",
+                "anchor": "保水是农民关切，非项目目的"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "阻止冰雹的形成。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-c-1",
+                "quote": "Airplanes seed threatening storm cells with a chemical to make small ice crystals (冰晶) fall as rain before they can grow into dangerous hailstones.",
+                "anchor": "让冰晶在长成冰雹前以雨落下"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "预报灾难性的雹暴。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Forecast disastrous hailstorms.",
+              "explanation": "原文未提及该项目用于\"预报\"雹暴；项目做的是主动干预（播撒化学物质使冰晶变雨），而非天气预报。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "调查农业中化学品的使用。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Airplanes seed threatening storm cells with a chemical",
+              "optionText": "Investigate chemical use in farming.",
+              "matchType": "exact",
+              "relationNote": "选项借用原文出现的 chemical 一词制造干扰；原文是用化学物质播撒云层以消雹，并非\"调查农业中化学品的使用\"。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-1",
+                "quote": "Airplanes seed threatening storm cells with a chemical",
+                "anchor": "chemical 用于播云，非调查农用化学品"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Prevent the formation of hailstones.",
+            "sourceRole": "correctOption",
+            "targetText": "make small ice crystals (冰晶) fall as rain before they can grow into dangerous hailstones",
+            "targetParagraphId": "para-zj-2024-jan-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "正确选项 Prevent the formation of hailstones 对应原文 make ... fall as rain before they can grow into dangerous hailstones，即在冰晶长成冰雹前使其化雨落下，从而阻止冰雹形成。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-029": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节定位：谁反对该消雹项目。",
+        "stemTranslationZh": "谁反对该项目？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "阿尔伯塔中东部的农民。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-c-1",
+                "quote": "But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
+                "anchor": "中东部农民担心水分被偷走"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2024-jan-reading-c-2",
+                "quote": "but they’re increasing drought risk as far east as Saskatchewan.",
+                "anchor": "农民代表指责增加干旱风险"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "保险公司的管理者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "since 1996 a group of insurance companies have spent about 2 million per year on the Alberta Hail Suppression Project",
+              "sourceHighlight": "insurance companies have spent about 2 million per year on the Alberta Hail Suppression Project",
+              "optionText": "Managers of insurance companies.",
+              "optionHighlight": "Managers of insurance companies",
+              "explanation": "保险公司每年出资支持该项目，是项目的资助/支持方而非反对方，态度与题干相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-1",
+                "quote": "a group of insurance companies have spent about 2 million per year on the Alberta Hail Suppression Project",
+                "anchor": "保险公司出资支持项目"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "省政府官员。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Basically, the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+              "sourceHighlight": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+              "optionText": "Provincial government officials.",
+              "optionHighlight": "Provincial government officials",
+              "explanation": "原文指省政府\"放任\"保险公司开展保护工作，即默许/支持该项目，立场与反对者相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-2",
+                "quote": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+                "anchor": "省政府放任、默许项目"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "卡尔加里和埃德蒙顿的居民。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "the provincial government is letting the insurance companies protect the Calgary-Edmonton urban area from hail",
+              "sourceHighlight": "protect the Calgary-Edmonton urban area from hail",
+              "optionText": "Residents of Calgary and Edmonton.",
+              "optionHighlight": "Residents of Calgary and Edmonton",
+              "explanation": "卡尔加里—埃德蒙顿城区正是项目要保护、使其免受冰雹的对象，是受益方而非反对方，立场相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-2",
+                "quote": "protect the Calgary-Edmonton urban area from hail",
+                "anchor": "卡-埃城区是受保护的受益方"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Who are opposed to the project?",
+            "sourceRole": "stem",
+            "targetText": "worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding",
+            "targetParagraphId": "para-zj-2024-jan-reading-c-1",
+            "relationType": "locationCue",
+            "note": "题干 opposed to the project 由原文 farmers ... worry that precious moisture is being stolen 定位，worry/担忧 即反对态度的线索。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-030": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查写作意图：Doswell提到1999年所见龙卷风这一例证的目的。",
+        "stemTranslationZh": "Doswell博士为什么提到他在1999年看到的龙卷风？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了比较不同种类的播撒方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To compare different kinds of seeding methods.",
+              "explanation": "原文未提及任何不同播撒方法之间的比较，Doswell只举了一例风暴云形成龙卷风。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了说明大型雹暴的形成过程。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "I personally saw significant tornadoes (龙卷风) form from a seeded storm cell in Kansas",
+              "sourceEntity": "tornadoes form from a seeded storm cell",
+              "optionText": "To illustrate the development of big hailstorms.",
+              "optionEntity": "the development of big hailstorms",
+              "explanation": "Doswell看到的是龙卷风（tornadoes）的形成，而非\"大型雹暴（hailstorms）\"的发展；选项把对象由龙卷风错配为雹暴。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-4",
+                "quote": "I personally saw significant tornadoes (龙卷风) form from a seeded storm cell in Kansas",
+                "anchor": "看到的是龙卷风而非雹暴"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了指出云播撒可能存在的危险。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-c-4",
+                "quote": "One doubter about the safety of cloud seeding is Chuck Doswell, a research scientist who just retired from the University of Oklahoma.",
+                "anchor": "Doswell是对云播撒安全性的存疑者"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2024-jan-reading-c-4",
+                "quote": "Does cloud seeding create killer storms or reduce moisture downwind?",
+                "anchor": "举龙卷风例暗示播云可能制造杀手风暴"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了表明风暴与水分之间的联系。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Does cloud seeding create killer storms or reduce moisture downwind?",
+              "optionText": "To show the link between storms and moisture.",
+              "matchType": "exact",
+              "relationNote": "选项拼接原文末句中出现的 storms 与 moisture 两词制造干扰；但该句是并列两个未知问题（是否制造风暴、是否减少水分），并非要表明\"风暴与水分之间的联系\"，举龙卷风例旨在说明危险。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-4",
+                "quote": "Does cloud seeding create killer storms or reduce moisture downwind?",
+                "anchor": "storms 与 moisture 是并列两问，非互相联系"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To indicate a possible danger of cloud seeding.",
+            "sourceRole": "correctOption",
+            "targetText": "One doubter about the safety of cloud seeding is Chuck Doswell",
+            "targetParagraphId": "para-zj-2024-jan-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "正确选项 a possible danger of cloud seeding 对应原文 doubter about the safety of cloud seeding，由其举龙卷风之例（create killer storms）来indicate播云的潜在危险。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-031": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对末段的推断：根据最后一段可以推出什么。",
+        "stemTranslationZh": "从最后一段我们可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "科学研究已证明Stienwand是对的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "negationReversal",
+              "sourceQuote": "Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit (官司) against cloud-seeding companies.",
+              "sourceHighlight": "the lack of scientific proof concerning their impacts",
+              "optionText": "Scientific studies have proved Stienwand right.",
+              "optionHighlight": "Scientific studies have proved Stienwand right",
+              "explanation": "原文明确指出缺乏科学证据（lack of scientific proof），与选项\"科学研究已证明Stienwand正确\"恰好相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-5",
+                "quote": "Due to the lack of scientific proof concerning their impacts",
+                "anchor": "原文是缺乏科学证据，非已证明"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "私人气候工程在加拿大是非法的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Therefore, private climate engineering can continue in relative legal safety.",
+              "sourceHighlight": "continue in relative legal safety",
+              "optionText": "Private climate engineering is illegal in Canada.",
+              "optionHighlight": "illegal in Canada",
+              "explanation": "原文说私人气候工程可在相对法律安全下继续（legal safety），与选项\"非法\"（illegal）正好相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-5",
+                "quote": "private climate engineering can continue in relative legal safety",
+                "anchor": "可合法继续，非非法"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "关于云播撒的质疑已经消失。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "Given the degree of doubt, Mr. Stienwand suggests, “It would be wise to stop cloud seeding.” In practice, doubt has had the opposite effect.",
+              "sourceHighlight": "Given the degree of doubt",
+              "optionText": "The doubt about cloud seeding has disappeared.",
+              "optionHighlight": "The doubt about cloud seeding has disappeared",
+              "explanation": "末段以 Given the degree of doubt 强调质疑依然存在且程度不低，并未消失；选项与原文相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-c-5",
+                "quote": "Given the degree of doubt",
+                "anchor": "质疑仍在，未消失"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "云播撒公司将继续存在。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-c-5",
+                "quote": "Therefore, private climate engineering can continue in relative legal safety.",
+                "anchor": "私人气候工程可继续，公司将存续"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2024-jan-reading-c-5",
+                "quote": "no one has succeeded in winning a lawsuit (官司) against cloud-seeding companies",
+                "anchor": "无人胜诉，公司无法律阻碍"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Cloud-seeding companies will continue to exist.",
+            "sourceRole": "correctOption",
+            "targetText": "private climate engineering can continue in relative legal safety",
+            "targetParagraphId": "para-zj-2024-jan-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "正确选项 companies will continue to exist 由原文 private climate engineering can continue in relative legal safety 推出，结合无人胜诉、缺乏证据，可推断云播撒公司将继续存续。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-032": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对实验过程细节的理解：孩子需要做什么才能得到第二份糖果。",
+        "stemTranslationZh": "在 Mischel 的实验中，孩子们需要做什么才能得到第二份糖果？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "独自参加一场考试。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "孩子需要独自参加一场考试。",
+              "explanation": "原文未提及任何'考试'，孩子只是被单独留在房间里等待，'考试'属于无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "对研究人员表示尊重。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "孩子需要对研究人员表示尊重。",
+              "explanation": "原文未提及孩子需要'尊重研究人员'，得到第二份糖果的条件只与等待时间有关，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "把他们的糖果分给别人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "孩子需要把糖果分给别人。",
+              "explanation": "原文未提及'分享糖果'，条件是忍住不吃、等待 15 分钟，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "推迟十五分钟再吃。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-d-1",
+                "quote": "if they waited for 15 minutes before eating the treat, they would be given a second treat",
+                "anchor": "等待15分钟后再吃即可获得第二份"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Delay eating for fifteen minutes.",
+            "sourceRole": "correctOption",
+            "targetText": "if they waited for 15 minutes before eating the treat, they would be given a second treat",
+            "targetParagraphId": "para-zj-2024-jan-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "选项用 Delay eating for fifteen minutes 概括，原文用 waited for 15 minutes before eating the treat 描述，二者为同义替换。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第三段中'错配（mismatch）'具体所指两方的理解。",
+        "stemTranslationZh": "根据第三段，存在一种错配，错配的两方是________。",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "热量匮乏的世界与我们良好的胃口。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "our ancestors lived in a calorie-poor world",
+              "sourceHighlight": "calorie-poor world",
+              "optionText": "the calorie-poor world and our good appetites",
+              "optionHighlight": "the calorie-poor world",
+              "explanation": "原文中 calorie-poor world 是祖先所处的过去环境，错配指'如今食物丰富'与'未变的大脑'之间；把它说成与'良好胃口'的错配偷换了错配双方。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-d-3",
+                "quote": "our ancestors lived in a calorie-poor world",
+                "anchor": "calorie-poor 指祖先的过去环境"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "糖的短缺与我们的营养需求。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "错配存在于糖的短缺与我们的营养需求之间。",
+              "explanation": "原文并未提及'营养需求'，也未把'糖的短缺'作为错配的一方，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "丰富的食物供应与我们未曾改变的大脑。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-d-3",
+                "quote": "dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch",
+                "anchor": "食物易得 vs 大脑未变 = mismatch"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "诱人的食物与我们保持身材的努力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "错配存在于诱人的食物与我们保持身材的努力之间。",
+              "explanation": "原文虽提到难以抵抗诱人食物，但'保持身材的努力'未被提及，更未被列为错配的一方，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "the rich food supply and our unchanged brains",
+            "sourceRole": "correctOption",
+            "targetText": "dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch",
+            "targetParagraphId": "para-zj-2024-jan-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "选项 rich food supply 对应原文 reducing the cost and effort involved in obtaining calories（食物变得易得），unchanged brains 对应 the same brains we had thousands of years ago，二者即 this mismatch 的两方。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-034": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对作者建议（主旨性推断）的把握：作者建议读者如何对待信息。",
+        "stemTranslationZh": "作者建议读者做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "欣然吸收新信息。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food”",
+              "sourceHighlight": "resisting the temptation",
+              "optionText": "Absorb new information readily.",
+              "optionHighlight": "Absorb new information readily",
+              "explanation": "作者主张抵制信息诱惑、审慎对待信息消费，'欣然吸收新信息'与之方向相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-d-4",
+                "quote": "resisting the temptation of the mental “junk food”",
+                "anchor": "原文要抵制，而非欣然吸收"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "做有选择性的信息消费者。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-d-4",
+                "quote": "we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food”",
+                "anchor": "更审慎地消费信息，抵制'垃圾食品'"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "使用多样化的信息来源。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作者建议使用多样化的信息来源。",
+              "explanation": "原文强调的是减少、筛选信息摄入，未提及'来源多样化'，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "保护信息环境。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "global connectivity has greatly changed our information environment",
+              "sourceHighlight": "information environment",
+              "optionText": "Protect the information environment.",
+              "optionHighlight": "Protect the information environment",
+              "explanation": "原文用 information environment 描述信息环境已改变，作者建议的是个人如何'审慎消费信息'，而非'保护信息环境'，借原文词钩偷换了建议的范围对象。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-d-4",
+                "quote": "global connectivity has greatly changed our information environment",
+                "anchor": "information environment 是被改变的对象，非保护对象"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Be selective information consumers.",
+            "sourceRole": "correctOption",
+            "targetText": "we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food”",
+            "targetParagraphId": "para-zj-2024-jan-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "选项 Be selective ... consumers 对应原文 be more thoughtful about our information consumption 与 resisting the temptation，即有选择地消费信息。"
+          }
+        ]
+      },
+      "q-zj-2024-jan-035": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的概括，选择最佳标题。",
+        "stemTranslationZh": "下列哪一项是本文最佳标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "少吃，多读。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption",
+              "sourceHighlight": "more thoughtful about our information consumption",
+              "optionText": "Eat Less, Read More",
+              "optionHighlight": "Read More",
+              "explanation": "作者主张对信息（阅读）也要审慎、节制，'多读'与抵制信息诱惑的主旨方向相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-d-4",
+                "quote": "we also need to be more thoughtful about our information consumption",
+                "anchor": "信息也要节制，而非多读"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "关于早期人类的残酷真相。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "our ancestors lived in a calorie-poor world",
+              "sourceHighlight": "our ancestors",
+              "optionText": "The Bitter Truth about Early Humans",
+              "optionHighlight": "Early Humans",
+              "explanation": "祖先/早期人类只是文中用来解释大脑机制的背景细节，并非全文主题，以偏概全地把局部内容当作标题。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2024-jan-reading-d-3",
+                "quote": "our ancestors lived in a calorie-poor world",
+                "anchor": "early humans 只是解释机制的背景"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "越晚越好。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "本文主旨是'越晚越好'。",
+              "explanation": "文章主旨是审慎管理糖果与信息的消费，并非泛泛宣扬'越晚越好'，属无中生有/曲解主旨。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "成年人的棉花糖实验。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2024-jan-reading-d-2",
+                "quote": "As adults we face a version of the marshmallow test every day.",
+                "anchor": "成年人每天面对棉花糖式的考验"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2024-jan-reading-d-4",
+                "quote": "just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption",
+                "anchor": "把实验类比延伸到信息消费"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The Marshmallow Test for Grownups",
+            "sourceRole": "correctOption",
+            "targetText": "As adults we face a version of the marshmallow test every day.",
+            "targetParagraphId": "para-zj-2024-jan-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "标题 The Marshmallow Test for Grownups 对应原文 As adults we face a version of the marshmallow test，Grownups 即 adults，点明全文将棉花糖实验类比到成年人。"
+          }
+        ]
+      }
+    }
+  }
+}

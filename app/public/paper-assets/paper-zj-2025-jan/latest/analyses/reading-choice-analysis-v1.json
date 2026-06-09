@@ -1,0 +1,1391 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-zj-2025-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2025-jan-reading-a",
+    "group-zj-2025-jan-reading-b",
+    "group-zj-2025-jan-reading-c",
+    "group-zj-2025-jan-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pipeline",
+    "reviewedAt": "2026-06-08T00:00:00Z"
+  },
+  "groups": {
+    "group-zj-2025-jan-reading-a": {
+      "overview": "本文是一则图书馆馆际互借（Interlibrary Loan, ILL）服务的应用文/通知，按小标题分块介绍服务内容、借阅资格、所需时间、借期规则、通知取件方式以及收费标准。",
+      "discourseStructure": {
+        "summary": "全文以问答式小标题组织，逐项说明 ILL 服务：先总述服务范围，再分别交代谁可借、需多久、借期规则、通知与取件方式，最后用费用表给出不同类型图书馆的收费。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-1",
+            "summary": "总述 ILL 为师生及职工提供本馆未藏或已借出图书，以及馆藏文章和书章的数字化副本。",
+            "function": "开篇总起，界定服务内容与对象"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-2",
+            "summary": "小标题：谁可以借？",
+            "function": "分块标题，引出借阅资格"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-3",
+            "summary": "在校学生、教师（含退休）和职工可借；往届学生、访客借阅者、付费卡持有者不可借。",
+            "function": "说明借阅资格，正反两面列举"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-4",
+            "summary": "小标题：需要多久？",
+            "function": "分块标题，引出到件时间"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-5",
+            "summary": "文章通常 1-2 天、图书 5-10 天到件；稀有、新出版或需求大的项目更久；信息填写准确可加快流程。",
+            "function": "说明所需时间及加快办法"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-6",
+            "summary": "小标题：借期。",
+            "function": "分块标题，引出借期规则"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-7",
+            "summary": "借期由出借馆设定，到期日和限制标于标签上；借出项目可被出借馆召回；通过 ILL 借的实体物品不可续借。",
+            "function": "说明借期规则与召回、续借限制"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-8",
+            "summary": "小标题：通知/取件方式。",
+            "function": "分块标题，引出通知与取件"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-9",
+            "summary": "实体物品到馆后邮件通知，在所选图书馆取件；文章或书章可用时邮件通知，点击链接登录账户查看电子文章。",
+            "function": "说明实体与电子项目的通知和获取方式"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-a-10",
+            "summary": "费用表：非营利馆借阅 15、文章/书章 10；营利馆 20、12；国际馆 25、15。",
+            "function": "以表格列出不同类型图书馆的收费标准"
+          }
+        ]
+      }
+    },
+    "group-zj-2025-jan-reading-b": {
+      "overview": "文章是一位母亲的现身说法，探讨父母该如何与孩子谈论食物。作者因童年被反复告诫不要吃胖而与食物关系受损，于是反思自己给女儿的饮食建议是否带来负面影响，并引用心理学教授 Markey 的观点，提出在食物问题上“少说为妙”、采用“责任分工”原则，让孩子自己决定吃什么、吃多少，最后作者实践后发现这些策略确实有效。",
+      "discourseStructure": {
+        "summary": "由作者个人童年经历与困惑引入话题，随后引用专家 Markey 的核心观点（少说为妙、责任分工、让孩子承担自然后果），最后回到作者自身的实践效果，形成“个人经历—专家建议—实践验证”的结构。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2025-jan-reading-b-1",
+            "summary": "作者回忆童年被反复告诫不要吃胖，导致与食物关系受损，因而担心自己给女儿的饮食建议是否产生了无意的负面影响。",
+            "function": "引入话题，呈现作者的个人经历与困惑"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-b-2",
+            "summary": "心理学教授 Markey 指出，在食物这一话题上，父母“少说为妙”，过多谈论会给孩子带来不必要的担忧与不安全感。",
+            "function": "引出专家核心观点：食物话题少说为妙"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-b-3",
+            "summary": "Markey 推荐“责任分工”原则：父母在固定时间提供多样且大多健康的食物，孩子自己决定吃什么、吃多少。",
+            "function": "阐述专家提出的具体方法——责任分工"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-b-4",
+            "summary": "让孩子自己选择也使他们体验决定带来的自然后果，从而获得掌控感。",
+            "function": "补充责任分工的好处——让孩子承担自然后果"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-b-5",
+            "summary": "作者尝试这些策略后发现，自己越少限制，孩子反而做出更好的选择；Markey 强调喂养是场持久战。",
+            "function": "回到作者自身，呈现实践效果并总结"
+          }
+        ]
+      }
+    },
+    "group-zj-2025-jan-reading-c": {
+      "overview": "本文是一篇说明文，介绍了一种名为“矩阵种植”(matrix planting)的新型园艺设计理念：模仿自然进行园艺，减少人工干预与化肥、电动工具的使用，让自然承担更多“重活”。文章依次说明其理念、起源、代表性设计师的美学发展、看似自然实则精心规划的本质，以及对园丁和地球的多重益处。",
+      "discourseStructure": {
+        "summary": "全文按“引出理念—追溯起源—美学发展—揭示本质—列举益处”的逻辑展开，先界定矩阵种植的核心原则，再交代其历史来源与设计实践，随后澄清其“自然”表象背后的精心设计，最后总结其生态与环境效益。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2025-jan-reading-c-1",
+            "summary": "引出“矩阵种植”这一新兴园艺设计理念，指出其核心原则是“像自然一样进行园艺”，摒弃化肥与电动工具。",
+            "function": "引入主题并界定核心原则"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-c-2",
+            "summary": "追溯该理念的起源：二战后德国城市规划者为低维护、可复制地绿化大片公园用地而创造模块化种植组合，并说明矩阵花园中相似需求的植物如何协同形成节水抑草的生态系统。",
+            "function": "交代历史起源与运作机理"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-c-3",
+            "summary": "介绍荷兰植物专家兼设计师 Piet Oudolf 如何为这种风格增添艺术气息，在色彩、形态、四季观赏与服务野生动物等方面加以发挥，使花园全年皆美。",
+            "function": "说明代表人物的美学发展"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-c-4",
+            "summary": "揭示矩阵花园看似野趣实则经过精心规划，以“合适的植物，合适的位置”为指导，按植物对土壤、阳光、气候的需求及生长规律进行搭配安排。",
+            "function": "澄清自然表象下的精心设计"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-c-5",
+            "summary": "总结矩阵花园对园丁和地球的实质益处：大幅减少人工投入后生态可良性发展，无需常规养护，并显著提升碳吸收、减少雨水径流、增进生境与生物多样性。",
+            "function": "总结生态与环境效益"
+          }
+        ]
+      }
+    },
+    "group-zj-2025-jan-reading-d": {
+      "overview": "本文是一篇说明文/议论文，围绕新技术（如语音助手、自动驾驶汽车）的性别化问题展开。介绍了斯坦福学者 Ashley Martin 的研究：去性别化看似能减少刻板印象，但性别其实是人们与拟人化产品建立情感连接的重要方式，而且彻底去性别化很难实现。文章最后提出拟人化也可成为改变刻板印象的机会。",
+      "discourseStructure": {
+        "summary": "文章先提出去性别化的动机与悖论，再用 Martin 的研究数据说明性别如何增强用户依恋，接着指出性别化产品可能强化有害刻板印象，随后说明去性别化之难，最后给出积极展望——用拟人化打破刻板印象。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2025-jan-reading-d-1",
+            "summary": "新技术日益拟人化，出现去性别化的呼声，目的是修正人们对性别化物品的刻板印象；但 Martin 发现性别是人们与拟人化物品建立连接的基本方式之一。",
+            "function": "引出话题，提出去性别化的目的与潜在悖论"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-d-2",
+            "summary": "Martin 的研究让参与者评价对男性、女性及无性别版本的语音助手和自动驾驶汽车 Miuu 的依恋程度，发现性别增强了用户的依恋与购买意愿。",
+            "function": "用研究方法与数据支撑性别增强依恋的观点"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-d-3",
+            "summary": "产品性别化虽利于营销，却可能强化关于权力与身份的过时或有害观念，与男性相关的特质比与女性相关的更受重视，并被映射到性别化产品上。",
+            "function": "指出性别化产品的负面影响"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-d-4",
+            "summary": "研究还发现创造无性别物品很难，即便名字（如 Miuu）听起来无性别，参与者仍会为其指派性别。",
+            "function": "说明去性别化的困难及原因"
+          },
+          {
+            "paragraphId": "para-zj-2025-jan-reading-d-5",
+            "summary": "Martin 看到一线希望：拟人化提供了改变刻板印象的机会，可让拟人化产品承担与刻板印象不符的角色，如做护理的男性机器人或做计算的女性机器人。",
+            "function": "给出积极展望，提出拟人化的正面价值"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2025-jan-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查谁有资格使用 ILL 服务，需在原文借阅资格的正反两面列举中定位可借人群。",
+      "stemTranslationZh": "谁可以使用 ILL 服务？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "往届学生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+            "sourceHighlight": "not available to former students",
+            "optionText": "Former students.",
+            "optionHighlight": "Former students.",
+            "explanation": "原文明确指出 ILL 对 former students 不可用，选项却把不可借的人列为可借，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-3",
+              "quote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+              "anchor": "not available to former students"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "访客借阅者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+            "sourceHighlight": "not available to former students, guest borrowers",
+            "optionText": "Guest borrowers.",
+            "optionHighlight": "Guest borrowers.",
+            "explanation": "原文将 guest borrowers 列在不可借名单中，选项却当作可借人群，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-3",
+              "quote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+              "anchor": "guest borrowers 在不可借名单"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "退休教师。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-a-3",
+              "quote": "Current students, teachers (including retired) and staff can request items through ILL.",
+              "anchor": "teachers (including retired) can request"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "付费卡持有者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+            "sourceHighlight": "guest borrowers or fee-card holders",
+            "optionText": "Fee-card holders.",
+            "optionHighlight": "Fee-card holders.",
+            "explanation": "原文把 fee-card holders 列为不可借人群，选项却称其可借，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-3",
+              "quote": "Interlibrary loan is not available to former students, guest borrowers or fee-card holders.",
+              "anchor": "fee-card holders 在不可借名单"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Retired teachers.",
+          "sourceRole": "correctOption",
+          "targetText": "teachers (including retired) and staff can request items through ILL",
+          "targetParagraphId": "para-zj-2025-jan-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "选项 Retired teachers 对应原文 teachers (including retired)，括号补充说明退休教师同样在可借范围内。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查通过 ILL 借纸质书的一条规则，需在借期段落中定位关于召回、续借等具体规定。",
+      "stemTranslationZh": "通过 ILL 借一本纸质书有什么规则？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为递送额外付费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pay an extra fee for delivery.",
+            "explanation": "原文费用表只列出借阅费与文章/书章费，并未提及任何额外的递送费，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在到期日前续借它。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "No renewals (续借) are allowed for physical items borrowed through ILL.",
+            "sourceHighlight": "No renewals (续借) are allowed",
+            "optionText": "Renew it before the due date.",
+            "optionHighlight": "Renew it",
+            "explanation": "原文明确规定通过 ILL 借的实体物品不允许续借，选项却让读者去续借，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-7",
+              "quote": "No renewals (续借) are allowed for physical items borrowed through ILL.",
+              "anchor": "No renewals are allowed"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在出借图书馆取书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Items are picked up at one of our libraries—the one you selected in the ILL Request Form.",
+            "sourceEntity": "one of our libraries",
+            "optionText": "Pick it up at the lending library.",
+            "optionEntity": "the lending library",
+            "explanation": "原文说在本馆（你在表单中所选的我馆之一）取件，选项却换成 the lending library（出借馆），取件地点的对象被错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-9",
+              "quote": "Items are picked up at one of our libraries—the one you selected in the ILL Request Form.",
+              "anchor": "picked up at one of our libraries"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在书被召回时归还它。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-a-7",
+              "quote": "Borrowed items are subject to recall by the lending library.",
+              "anchor": "subject to recall by the lending library"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Return it when it is recalled.",
+          "sourceRole": "correctOption",
+          "targetText": "Borrowed items are subject to recall by the lending library.",
+          "targetParagraphId": "para-zj-2025-jan-reading-a-7",
+          "relationType": "paraphrase",
+          "note": "选项 Return it when it is recalled 对应原文 are subject to recall by the lending library，subject to recall 即出借馆可随时召回、借阅者须归还。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-023": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查从国际图书馆获取两篇文章的费用，需在费用表中定位 International Libraries 的 Article/Chapter Cost 并乘以 2 计算。",
+      "stemTranslationZh": "从一家国际图书馆获取两篇文章你需要支付多少？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "15。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "International Libraries 25 15",
+            "sourceHighlight": "15",
+            "optionText": "15.",
+            "optionHighlight": "15",
+            "explanation": "15 只是国际馆单篇文章的费用，题目问的是两篇，应为 30，选项只算了一篇，数量范围被缩小。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-10",
+              "quote": "International Libraries 25 15",
+              "anchor": "国际馆单篇文章 15"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "20。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "For-Profit Libraries 20 12",
+            "optionText": "20.",
+            "matchType": "exact",
+            "relationNote": "20 是营利图书馆的借阅费数字，与国际馆文章费无关，用表中出现过的数字干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-10",
+              "quote": "For-Profit Libraries 20 12",
+              "anchor": "营利馆借阅费 20"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "24。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "For-Profit Libraries 20 12",
+            "optionText": "24.",
+            "matchType": "wordFamily",
+            "relationNote": "24 = 12×2，是把营利馆的文章费 12 乘以两篇得来，张冠李戴用了错误图书馆类型的费用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-a-10",
+              "quote": "For-Profit Libraries 20 12",
+              "anchor": "营利馆文章费 12"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "30。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-a-10",
+              "quote": "International Libraries 25 15",
+              "anchor": "国际馆单篇文章 15"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "two articles obtained from an international library",
+          "sourceRole": "stem",
+          "targetText": "International Libraries 25 15",
+          "targetParagraphId": "para-zj-2025-jan-reading-a-10",
+          "relationType": "locationCue",
+          "note": "题干 international library 定位到费用表中的 International Libraries 行，该行第二个数字 15 为单篇文章费。"
+        },
+        {
+          "sourceText": "two articles",
+          "sourceRole": "stem",
+          "targetText": "International Libraries 25 15",
+          "targetParagraphId": "para-zj-2025-jan-reading-a-10",
+          "relationType": "calculation",
+          "note": "国际馆单篇文章费为 15，two articles 需 15×2＝30，故答案为 30。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-024": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查根据第一段对作者的合理推断，重点理解作者对自己童年被喂养方式的态度。",
+      "stemTranslationZh": "从第一段可以推断出关于作者的什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她为孩子们的体重感到苦恼。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "I’m careful not to connect what my kids weigh with their worth as people.",
+            "sourceHighlight": "careful not to connect what my kids weigh with their worth",
+            "optionText": "She is upset by her kids' weight.",
+            "optionHighlight": "upset by her kids' weight",
+            "explanation": "原文说作者刻意不把孩子的体重与其作为人的价值联系起来，并未表示她为孩子的体重而苦恼，选项夸大了作者的情绪。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-b-1",
+              "quote": "I’m careful not to connect what my kids weigh with their worth as people.",
+              "anchor": "不把体重与价值挂钩"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她对自己被喂养的方式持批评态度。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-b-1",
+              "quote": "It really messed up my relationship with food — something that took me years to overcome.",
+              "anchor": "童年喂养方式损害了她与食物的关系"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-zj-2025-jan-reading-b-1",
+              "quote": "“You don’t want to get fat” was on constant repeat throughout my childhood.",
+              "anchor": "童年被反复告诫不要吃胖"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她对做饭/制作食物感兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She is interested in making food.",
+            "explanation": "原文第一段只谈作者童年的喂养经历及对女儿饮食建议的反思，原文未提及作者对做食物感兴趣。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她对自己吃什么很讲究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I encourage my daughter to make healthy snack choices and often dissuade (劝阻) her from a second dessert.",
+            "sourceEntity": "my daughter",
+            "optionText": "She is particular about what she eats.",
+            "optionEntity": "She (the author)",
+            "explanation": "原文中讲究饮食选择、被劝阻吃第二份甜点的对象是女儿，而非作者本人；选项把对象错配到作者身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-b-1",
+              "quote": "I encourage my daughter to make healthy snack choices and often dissuade (劝阻) her from a second dessert.",
+              "anchor": "讲究饮食的是女儿"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She is critical of the way she was fed.",
+          "sourceRole": "correctOption",
+          "targetText": "It really messed up my relationship with food — something that took me years to overcome.",
+          "targetParagraphId": "para-zj-2025-jan-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项 critical of the way she was fed 对应原文 messed up my relationship with food，作者把童年喂养方式说成是对她造成伤害、花数年才克服，体现批评态度。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-025": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对 Markey 观点的细节理解与反向推断：判断哪种做法是 Markey 不赞成的。",
+      "stemTranslationZh": "下列哪一项是 Markey 会不赞成的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "允许孩子偶尔吃饼干。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the kids themselves decide what and how much they want to consume — even if that means occasionally eating more cookies than carrots.",
+            "sourceHighlight": "occasionally eating more cookies than carrots",
+            "optionText": "Allowing kids to eat cookies occasionally.",
+            "optionHighlight": "Allowing kids to eat cookies occasionally",
+            "explanation": "原文表明 Markey 接受孩子偶尔多吃饼干，这是她赞成而非不赞成的做法，与题干要求相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-b-3",
+              "quote": "even if that means occasionally eating more cookies than carrots.",
+              "anchor": "偶尔多吃饼干是被接受的"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在固定时间给孩子提供多样的食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "parents provide a variety of mostly healthy foods to their kids at fixed times",
+            "sourceHighlight": "provide a variety of mostly healthy foods to their kids at fixed times",
+            "optionText": "Offering various foods to kids at fixed times.",
+            "optionHighlight": "Offering various foods to kids at fixed times",
+            "explanation": "在固定时间提供多样食物正是 Markey 推荐的“责任分工”做法，是她赞成的，与题干所问的“不赞成”相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-b-3",
+              "quote": "parents provide a variety of mostly healthy foods to their kids at fixed times",
+              "anchor": "固定时间提供多样食物是推荐做法"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "向孩子解释吃零食的风险。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-b-2",
+              "quote": "food is one of the rare subjects where, as parents, saying less is more.",
+              "anchor": "在食物话题上少说为妙"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-zj-2025-jan-reading-b-2",
+              "quote": "It just creates some worries and insecurities in kids that aren’t necessarily healthy.",
+              "anchor": "多说会给孩子带来担忧与不安"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在用餐时间和孩子谈论学校的事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Talking with kids about school at mealtimes.",
+            "explanation": "Markey 强调的是在“食物”这一话题上少说，原文未提及在用餐时谈论学校的事，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Explaining to kids the risks of taking snacks.",
+          "sourceRole": "correctOption",
+          "targetText": "food is one of the rare subjects where, as parents, saying less is more.",
+          "targetParagraphId": "para-zj-2025-jan-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "向孩子解释吃零食的风险正是在食物话题上“多说”，与 Markey 主张的 saying less is more 相反，故为她所不赞成。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对“责任分工（Division of Responsibility）”中孩子职责的细节定位与同义替换理解。",
+      "stemTranslationZh": "根据“责任分工”原则，孩子应该做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "自己做出饮食决定。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-b-3",
+              "quote": "the kids themselves decide what and how much they want to consume",
+              "anchor": "孩子自己决定吃什么、吃多少"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "和其他孩子分享他们的食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Share their food with other kids.",
+            "explanation": "原文阐述责任分工时只说孩子自己决定吃什么、吃多少，原文未提及与其他孩子分享食物。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把为他们提供的食物吃光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the kids themselves decide what and how much they want to consume — even if that means occasionally eating more cookies than carrots.",
+            "sourceHighlight": "decide what and how much they want to consume",
+            "optionText": "Eat up what is provided for them.",
+            "optionHighlight": "Eat up what is provided for them",
+            "explanation": "原文强调孩子自己决定吃什么、吃多少，而非把提供的食物全部吃光，选项与原文主张的“自主决定”相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-b-3",
+              "quote": "the kids themselves decide what and how much they want to consume",
+              "anchor": "孩子自主决定，而非吃光"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "帮父母洗碗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Help their parents do the dishes.",
+            "explanation": "原文谈的是孩子在饮食选择上的职责，原文未提及帮父母洗碗，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Make diet decisions on their own.",
+          "sourceRole": "correctOption",
+          "targetText": "the kids themselves decide what and how much they want to consume",
+          "targetParagraphId": "para-zj-2025-jan-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项 Make diet decisions on their own 对应原文 the kids themselves decide what and how much they want to consume，on their own 与 themselves 同义。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-027": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查作者对自己一直采用的这些策略的看法（态度评价）。",
+      "stemTranslationZh": "作者如何看待她一直采用的这些策略？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "昂贵的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Costly.",
+            "explanation": "原文只说作者尝试这些策略后孩子做出更好的决定，原文未提及这些策略的花费问题，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "复杂的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Complex.",
+            "explanation": "原文未提及这些策略复杂难行，反而显示作者只要减少限制就能见效，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "可行的/有效的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-b-5",
+              "quote": "I’ve been trying out these strategies and I’ve found that when I’m less restrictive, they do make better decisions.",
+              "anchor": "作者发现减少限制后孩子做出更好的决定"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "自相矛盾的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Contradictory.",
+            "explanation": "原文显示这些策略效果一致、行之有效，并无相互矛盾之处，原文未提及矛盾，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Workable.",
+          "sourceRole": "correctOption",
+          "targetText": "when I’m less restrictive, they do make better decisions",
+          "targetParagraphId": "para-zj-2025-jan-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "作者亲身实践后发现减少限制就能让孩子做出更好决定（they do make better decisions），说明策略行之有效，对应 Workable。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-028": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查对第一段划线词 Eschewing 的词义推测，需结合“像自然一样园艺、减少人工干预”的语境理解其“避开、不使用”之义。",
+      "stemTranslationZh": "第一段中划线词“Eschewing”是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "用尽、耗尽。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Eschewing 表示“用尽、耗尽”化肥与电动工具",
+            "explanation": "原文未提及化肥与电动工具被“耗尽”，而是强调该理念主动“不使用”它们，故“用尽”与语境不符。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "避开、远离。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-c-1",
+              "quote": "Eschewing fertilizers (化肥) and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+              "anchor": "摒弃化肥与电动工具，像自然一样园艺"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "忍受、容忍。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Eschewing fertilizers (化肥) and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+            "sourceHighlight": "Eschewing fertilizers (化肥) and power tools",
+            "optionText": "Putting up with.",
+            "optionHighlight": "Putting up with",
+            "explanation": "“忍受、容忍”意味着接纳并继续使用化肥与电动工具，与原文“摒弃、不使用”的动作方向相反。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "利用、借助。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Eschewing fertilizers (化肥) and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+            "sourceHighlight": "Eschewing fertilizers (化肥) and power tools",
+            "optionText": "Taking advantage of.",
+            "optionHighlight": "Taking advantage of",
+            "explanation": "“利用、借助”意味着积极使用化肥与电动工具，与原文“摒弃”的本义完全相反。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Keeping away from",
+          "sourceRole": "correctOption",
+          "targetText": "Eschewing fertilizers (化肥) and power tools",
+          "targetParagraphId": "para-zj-2025-jan-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确项 Keeping away from（避开、远离）是对划线词 Eschewing 的同义替换，结合下文 to garden more like nature does 的语境可确认其“不使用化肥与电动工具”之义。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查矩阵种植理念被提出的原因，需定位第二段交代其起源的句子，理解德国城市规划者的初衷。",
+      "stemTranslationZh": "为什么会提出矩阵种植这一理念？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了控制大型花园中的杂草。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "discourages weeds",
+            "optionText": "To control weeds in large gardens.",
+            "matchType": "exact",
+            "relationNote": "原文 discourages weeds（抑制杂草）是矩阵花园协同生态系统带来的结果之一，并非该理念被“提出”的初衷；选项借用原文 weeds 一词制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-c-2",
+              "quote": "forming a cooperative ecosystem that conserves water and discourages weeds",
+              "anchor": "协同生态系统抑制杂草（为结果而非初衷）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了引进外来植物物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "提出矩阵种植是为了引进外来植物物种",
+            "explanation": "原文未提及引进外来物种，提出该理念是为了低维护、可复制地绿化公园用地，故属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了保护土壤和水资源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "conserves water",
+            "optionText": "To conserve soil and water resources.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 conserves water（节约用水）是矩阵花园生态系统形成后的功能之一，而非提出该理念的初衷；选项借 conserve/water 同族词制造干扰，且额外添加了原文未与“提出原因”挂钩的 soil。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-c-2",
+              "quote": "forming a cooperative ecosystem that conserves water and discourages weeds",
+              "anchor": "生态系统节约用水（为功能而非初衷）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了开发低维护的公园用地。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-c-2",
+              "quote": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance.",
+              "anchor": "为低维护地绿化大片公园用地而生"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Why was the idea of matrix planting introduced",
+          "sourceRole": "stem",
+          "targetText": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance.",
+          "targetParagraphId": "para-zj-2025-jan-reading-c-2",
+          "relationType": "locationCue",
+          "note": "题干 was the idea ... introduced 对应原文 The concept was born，由此定位提出该理念的初衷。"
+        },
+        {
+          "sourceText": "To develop low-maintenance parkland",
+          "sourceRole": "correctOption",
+          "targetText": "plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance",
+          "targetParagraphId": "para-zj-2025-jan-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "正确项 low-maintenance 是原文 need minimal maintenance 的同义替换，parkland 与原文 parkland 直接对应。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-030": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对 Piet Oudolf 花园特点的概括，需根据第三段“增添艺术气息、讲究色彩与形态”等描述推断其“有品位、雅致”的特征。",
+      "stemTranslationZh": "下列哪一项最能描述 Piet Oudolf 的花园？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "传统的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Dutch plantsman and designer Piet Oudolf’s gardens popularized this style, adding artistic flavors to the planting mixes while playing with color and form, including four-season interest and serving the needs of wildlife.",
+            "sourceHighlight": "adding artistic flavors to the planting mixes",
+            "optionText": "Traditional.",
+            "optionHighlight": "Traditional",
+            "explanation": "原文强调 Oudolf 花园富有艺术气息、创新地讲究色彩与形态，属新颖雅致的风格，与“传统的”评价方向相反。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "样子古怪的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "odd-looking seed heads",
+            "optionText": "Odd-looking.",
+            "matchType": "exact",
+            "relationNote": "原文 odd-looking 仅修饰花园中可欣赏的“种子头”这一细节，并非对整座花园的整体评价；选项原词照搬，将局部细节偷换为对花园的总体描述。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-c-3",
+              "quote": "the sculpture of odd-looking seed heads",
+              "anchor": "odd-looking 仅修饰种子头细节"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "雅致的、有品位的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-c-3",
+              "quote": "adding artistic flavors to the planting mixes while playing with color and form, including four-season interest and serving the needs of wildlife",
+              "anchor": "增添艺术气息、讲究色彩与形态"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2025-jan-reading-c-3",
+              "quote": "Beautiful year-round, they invite you to enjoy the smallest detail",
+              "anchor": "全年皆美，可品味最细微之处"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "受到良好保护的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Piet Oudolf 的花园是“受到良好保护的”",
+            "explanation": "原文只在最后一段提到矩阵花园整体上能提升生境与生物多样性，并未说 Oudolf 的花园“受到良好保护”，就 Oudolf 花园而言属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Tasteful",
+          "sourceRole": "correctOption",
+          "targetText": "adding artistic flavors to the planting mixes while playing with color and form",
+          "targetParagraphId": "para-zj-2025-jan-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "正确项 Tasteful（雅致、有品位）是对原文 adding artistic flavors ... playing with color and form 所体现的艺术审美的概括性同义替换。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-031": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查全文标题选择，需把握文章主旨——一种顺应自然、低维护、利于生态的新型园艺方式（matrix planting / 让自然主导，WILD），从而判断哪一标题最契合全文。",
+      "stemTranslationZh": "下列哪一项最适合作为本文的标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "园艺的未来在于狂野（顺应自然）。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-c-1",
+              "quote": "A novel design approach to gardening has been gaining in popularity worldwide.",
+              "anchor": "一种新兴园艺设计理念正风靡全球"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2025-jan-reading-c-4",
+              "quote": "While matrix gardens appear wild, they are carefully planned",
+              "anchor": "矩阵花园外表野趣，呼应 WILD 主题"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "老式花园地块创造奇迹。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Compared to traditional garden plots, they increase carbon absorption, reduce stormwater runoff and boost habitat and biodiversity significantly.",
+            "sourceHighlight": "Compared to traditional garden plots",
+            "optionText": "Old garden plots work WONDERS.",
+            "optionHighlight": "Old garden plots work WONDERS",
+            "explanation": "原文是把矩阵花园与传统老式花园地块对比，凸显前者优势，创造奇迹的是矩阵花园而非“老式花园地块”，标题方向颠倒。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "自然平等地对待一切生命。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "自然平等地对待一切生命",
+            "explanation": "全文围绕矩阵种植这一园艺方式展开，并未提出“自然平等对待一切生命”这一抽象主张，与主旨不符，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "矩阵花园需要更多养护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
+            "sourceHighlight": "should not need the life support we give most gardens",
+            "optionText": "Matrix gardens need more CARE.",
+            "optionHighlight": "need more CARE",
+            "explanation": "原文明确指出成熟的矩阵花园无需常规养护（化肥、分株、定期浇水），与标题“需要更多养护”完全相反。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The future of gardening is WILD",
+          "sourceRole": "correctOption",
+          "targetText": "A novel design approach to gardening has been gaining in popularity worldwide.",
+          "targetParagraphId": "para-zj-2025-jan-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "标题 The future of gardening 对应原文 a novel design approach to gardening ... gaining in popularity（代表园艺新趋势），WILD 则呼应第四段 matrix gardens appear wild 的自然野趣特征。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查使新技术去性别化的目的，需定位首段中去性别化背后的动机。",
+      "stemTranslationZh": "让新技术去性别化的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了减少刻板印象。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-d-1",
+              "quote": "Removing gender from the picture altogether seems like a simple way to fix this.",
+              "anchor": "去性别化是修正问题的简单办法"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2025-jan-reading-d-1",
+              "quote": "“People are stereotyping (形成刻板印象) their gendered objects in very traditional ways,”",
+              "anchor": "要修正的正是刻板印象"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了满足公众需求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "去性别化是为了满足公众需求",
+            "explanation": "原文未提及去性别化是为了迎合公众的需求或要求，只提到有一股推动去性别化的力量是为修正刻板印象。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了削减生产成本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "去性别化是为了削减生产成本",
+            "explanation": "原文未提及生产成本，去性别化的目的与省钱无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了鼓励竞争。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "competitiveness and dominance",
+            "optionText": "To encourage competition.",
+            "matchType": "wordFamily",
+            "relationNote": "原文第三段提到与男性相关的 competitiveness（竞争性），选项用同词族的 competition 制造干扰，但这是性别化产品强化的特质，并非去性别化的目的。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To reduce stereotypes.",
+          "sourceRole": "correctOption",
+          "targetText": "Removing gender from the picture altogether seems like a simple way to fix this.",
+          "targetParagraphId": "para-zj-2025-jan-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项 reduce stereotypes 对应原文 a simple way to fix this，其中 this 指代前文的 stereotyping，即去性别化旨在修正/减少刻板印象。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-033": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对研究方法的推断，需根据 Martin 让参与者评分这一行为推断他们做了什么。",
+      "stemTranslationZh": "在研究中参与者很可能被要求做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "设计一款产品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "参与者被要求设计一款产品",
+            "explanation": "原文只说参与者对已有的不同版本产品进行评分，未提及让他们设计产品。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "回答一份调查问卷。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-d-2",
+              "quote": "Martin asked participants to rate their attachment to male, female, and genderless versions of a digital voice assistant and a self-driving car known as “Miuu.”",
+              "anchor": "让参与者对依恋程度评分"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2025-jan-reading-d-2",
+              "quote": "participants said they would be less likely to buy a genderless voice assistant than versions with male or female voices.",
+              "anchor": "参与者表达购买意愿，属问卷式作答"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "充当助手。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a digital voice assistant",
+            "optionText": "Work as assistants.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 voice assistant（语音助手）是被评价的产品，选项用同词族 assistants 制造干扰，参与者并非去当助手。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "参加一次语言测试。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "参与者参加了语言测试",
+            "explanation": "原文未提及任何语言测试，研究是对产品依恋与购买意愿的评分。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Respond to a survey.",
+          "sourceRole": "correctOption",
+          "targetText": "Martin asked participants to rate their attachment to male, female, and genderless versions of a digital voice assistant",
+          "targetParagraphId": "para-zj-2025-jan-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 Respond to a survey 对应原文 rate their attachment（对依恋程度打分）与表达购买意愿，rate/say 这类作答行为可推断为回答问卷调查。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-034": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查难以创造无性别物品的原因，需定位第四段对 Miuu 的描述。",
+      "stemTranslationZh": "为什么很难创造出无性别的物品？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们无法批量生产。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "无性别物品无法批量生产",
+            "explanation": "原文未提及量产问题，去性别化难的原因在于人们仍会赋予其性别。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "给它们命名是一项有挑战性的任务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it",
+            "sourceHighlight": "participants would still assign a gender to it",
+            "optionText": "Naming them is a challenging task.",
+            "optionHighlight": "Naming them is a challenging task",
+            "explanation": "原文是说即便名字听起来无性别，人们仍会赋予其性别，难点在于人的认知而非命名本身困难；选项把困难夸大/偷换为命名任务有挑战。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-d-4",
+              "quote": "if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it",
+              "anchor": "名字无性别仍被赋性别"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们认为它们不可靠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "人们认为无性别物品不可靠",
+            "explanation": "原文未提及可靠性问题，与去性别化之难无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "性别已根植于人们的心中。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-d-4",
+              "quote": "if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it — they would assume Miuu was a “he” or “she.”",
+              "anchor": "人们仍主动赋予性别"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Gender is rooted in people's mind.",
+          "sourceRole": "correctOption",
+          "targetText": "participants would still assign a gender to it — they would assume Miuu was a “he” or “she.”",
+          "targetParagraphId": "para-zj-2025-jan-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 rooted in people's mind 对应原文 participants would still assign a gender、assume Miuu was a “he” or “she”，说明性别观念深植人心，故人们总会赋予物品性别。"
+        }
+      ]
+    },
+    "q-zj-2025-jan-035": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查末段主旨，需概括 Martin 看到的积极面。",
+      "stemTranslationZh": "最后一段主要讲了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "无性别产品的质量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "末段讨论无性别产品的质量",
+            "explanation": "末段谈的是拟人化带来的改变刻板印象的机会，未涉及产品质量。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "将产品性别化的好处。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2025-jan-reading-d-5",
+              "quote": "She believes that anthropomorphism (拟人化) “provides an opportunity to change stereotypes.”",
+              "anchor": "性别化/拟人化可改变刻板印象的机会"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2025-jan-reading-d-5",
+              "quote": "anthropomorphized products could be created to take on stereotype-inconsistent roles — a male robot that assists with nursing or a female robot that helps do calculations, for instance.",
+              "anchor": "性别化产品承担反刻板印象角色的益处"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "拟人化的含义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "anthropomorphism (拟人化)",
+            "optionText": "The meaning of anthropomorphism.",
+            "matchType": "exact",
+            "relationNote": "末段确实出现 anthropomorphism 一词，选项直接照搬该词制造干扰，但末段讲的是拟人化带来的好处/机会，而非解释这个词的含义。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-d-5",
+              "quote": "She believes that anthropomorphism (拟人化) “provides an opportunity to change stereotypes.”",
+              "anchor": "讲机会而非词义"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "男性与女性的刻板印象。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Similarly, anthropomorphized products could be created to take on stereotype-inconsistent roles — a male robot that assists with nursing or a female robot that helps do calculations, for instance.",
+            "sourceHighlight": "stereotype-inconsistent roles",
+            "optionText": "The stereotypes of men and women.",
+            "optionHighlight": "The stereotypes of men and women",
+            "explanation": "末段的核心是用性别化/拟人化产品打破刻板印象这一好处，选项只停留在刻板印象本身，未点出末段“改变刻板印象的机会”这一主旨，缩小了段落要点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2025-jan-reading-d-5",
+              "quote": "anthropomorphized products could be created to take on stereotype-inconsistent roles",
+              "anchor": "重点是打破而非罗列刻板印象"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The upside of gendering a product.",
+          "sourceRole": "correctOption",
+          "targetText": "She believes that anthropomorphism (拟人化) “provides an opportunity to change stereotypes.”",
+          "targetParagraphId": "para-zj-2025-jan-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "选项 upside（好处）对应原文 a silver lining 与 provides an opportunity to change stereotypes，末段聚焦性别化/拟人化产品的正面价值。"
+        }
+      ]
+    }
+  }
+}

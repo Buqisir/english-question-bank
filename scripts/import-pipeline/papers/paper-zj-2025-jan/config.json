@@ -1,0 +1,11 @@
+{
+  "docxPath": "/Users/huangxuewei/Projects/english-question-bank/scripts/import-pipeline/papers/paper-zj-2025-jan/source.docx",
+  "paperId": "paper-zj-2025-jan",
+  "provenance": {
+    "sourceType": "真题",
+    "region": "浙江",
+    "paperName": "2025年1月浙江卷",
+    "year": 2025,
+    "defaultTags": ["真题", "2025", "浙江卷", "1月"]
+  }
+}

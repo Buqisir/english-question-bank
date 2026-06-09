@@ -1,0 +1,655 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2023-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2023-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2023-jan-cloze": {
+      "overview": "记叙文：作者跟随埃塞俄比亚养蜂人 Ziyad 进入 Harenna 森林，亲眼见证一次危险而独特的高空取蜜过程。",
+      "affectiveArc": "情感主线由期待转向紧张：取蜜过程困难重重、蜂群凶猛，最终因季节原因无功而返，需另择时机。"
+    }
+  },
+  "blanks": {
+    "q-zj-2023-jan-041": {
+      "blankId": "blank-zj-2023-jan-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "作者是去亲眼观看（witness）一次独特的取蜜，与全文“我跟随、我观察”的旁观者视角一致，witness a harvest 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "share",
+          "meaning": "分享（取蜜的成果）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "collect",
+          "meaning": "亲自采集（蜂蜜）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "celebrate",
+          "meaning": "庆祝（丰收）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a unique honey harvest",
+          "signalSide": "context-after",
+          "targetText": "witness a unique honey harvest",
+          "relation": "witness 的宾语是 a unique honey harvest，作者作为旁观者“见证”取蜜，施受关系成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "on my way to",
+          "signalSide": "context-before",
+          "relation": "“在前往途中”表明作者是奔赴去观看，而非自己采蜜。"
+        }
+      ],
+      "teachingNote": "看清“我”在文中的角色（旁观者还是执行者），据此选动词。"
+    },
+    "q-zj-2023-jan-042": {
+      "blankId": "blank-zj-2023-jan-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文蜂箱位于离地约 20 米的高处、要爬树才能够到，故蜂箱被放置在 treetops（树梢）；placed in the treetops 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "courtyards",
+          "meaning": "庭院"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fields",
+          "meaning": "田野"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "caves",
+          "meaning": "洞穴"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "are placed in the",
+          "signalSide": "context-before",
+          "targetText": "are placed in the treetops",
+          "relation": "be placed in 的地点宾语是 treetops，蜂箱放在树梢，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "20 metres above the ground",
+          "signalSide": "context-after",
+          "relation": "蜂箱在离地约20米高处，呼应“树梢”这一高空语义场。"
+        }
+      ],
+      "teachingNote": "用后文“爬树、离地20米”的高度信息反推蜂箱所在的位置词。"
+    },
+    "q-zj-2023-jan-043": {
+      "blankId": "blank-zj-2023-jan-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "取蜜要爬到20米高的树上、还遭蜂群攻击，故既困难又危险（dangerous），与 difficult 并列、与下文险情一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "urgent",
+          "meaning": "紧急的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "expensive",
+          "meaning": "昂贵的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pointless",
+          "meaning": "无意义的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "difficult—and often",
+          "signalSide": "context-before",
+          "targetText": "difficult—and often dangerous",
+          "relation": "and often 把空格与 difficult 并列，需填与“困难”同向且更进一步的负面形容词 dangerous。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "kept attacking",
+          "signalSide": "context-after",
+          "relation": "蜂群不断攻击，印证取蜜“危险”的情感基调。"
+        }
+      ],
+      "teachingNote": "and often 表并列递进，空格情感色彩须与前面的形容词同向。"
+    },
+    "q-zj-2023-jan-044": {
+      "blankId": "blank-zj-2023-jan-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "作者跟着养蜂人 Ziyad 穿过草地进入丛林，followed beekeeper Ziyad over a wide stretch of grassland 施受关系合理，符合旁观者视角。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "searched",
+          "meaning": "搜寻（养蜂人）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recognised",
+          "meaning": "认出（养蜂人）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "invited",
+          "meaning": "邀请（养蜂人）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "beekeeper Ziyad over a wide stretch",
+          "signalSide": "context-after",
+          "targetText": "followed beekeeper Ziyad over a wide stretch of grassland",
+          "relation": "动词宾语是 beekeeper Ziyad，作者“跟随”养蜂人穿过草地，施受成立。"
+        }
+      ],
+      "teachingNote": "结合“我去见证”的身份，确定我对向导是“跟随”关系。"
+    },
+    "q-zj-2023-jan-045": {
+      "blankId": "blank-zj-2023-jan-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "制作火把的第一步是先收集（gathered）一把把潮湿树叶，再捆扎、再点燃，gathered handfuls of leaves 搭配合理且符合动作先后顺序。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cleaned",
+          "meaning": "清洗（树叶）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dropped",
+          "meaning": "丢下（树叶）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "checked",
+          "meaning": "检查（树叶）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "handfuls of damp tree leaves",
+          "signalSide": "context-after",
+          "targetText": "gathered handfuls of damp tree leaves",
+          "relation": "gather 的宾语是 handfuls of damp tree leaves，“收集树叶”搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "wrapped them with string",
+          "signalSide": "context-after",
+          "relation": "随后“把它们捆起来”，说明此前须先把树叶聚拢到手，动作顺序锁定 gathered。"
+        }
+      ],
+      "teachingNote": "按“收集→捆扎→点燃”的制作链条排动作先后，定第一步动词。"
+    },
+    "q-zj-2023-jan-046": {
+      "blankId": "blank-zj-2023-jan-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "捆好叶束后点燃（lit）它来做成火把，lit the bunch to create a torch 搭配合理，火把须点燃才成立，符合动作顺序。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "shook",
+          "meaning": "摇晃（叶束）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "measured",
+          "meaning": "测量（叶束）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "decorated",
+          "meaning": "装饰（叶束）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to create a torch",
+          "signalSide": "context-after",
+          "targetText": "lit the bunch to create a torch",
+          "relation": "目的是 create a torch（火把），把叶束“点燃”才能成火把，搭配与动作顺序均成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "blew smoke from his torch",
+          "signalSide": "context-after",
+          "relation": "后文火把能冒烟，回证此处叶束被“点燃”。"
+        }
+      ],
+      "teachingNote": "由目的状语 create a torch 反推使其成为火把的关键动作。"
+    },
+    "q-zj-2023-jan-047": {
+      "blankId": "blank-zj-2023-jan-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "把绳子一端系在腰上、另一端绕在树干上，随后开始 climbing（爬树），下文“离地20米、坐在树枝上”均印证爬树这一动作。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "jumping",
+          "meaning": "跳跃"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "talking",
+          "meaning": "交谈"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "testing",
+          "meaning": "测试"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "around the trunk of a tree",
+          "signalSide": "context-before",
+          "targetText": "began climbing",
+          "relation": "绳子绕在树干上作攀爬保护，begin climbing 与“树干、绳索”这一情境搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "higher up the tree trunk",
+          "signalSide": "context-after",
+          "relation": "“沿树干越升越高”回证此处动作是爬树。"
+        }
+      ],
+      "teachingNote": "用前后“系绳、沿树干升高、坐在树枝”的情境锁定攀爬动词。"
+    },
+    "q-zj-2023-jan-048": {
+      "blankId": "blank-zj-2023-jan-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "每隔几分钟把系腰的绳子（rope）沿树干往上挪以保护攀爬，move the rope higher up the tree trunk 与前文“绳子一端绕树干”呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hives",
+          "meaning": "蜂箱"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "leaves",
+          "meaning": "树叶"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "honey",
+          "meaning": "蜂蜜"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "one end of a rope tied to his waist",
+          "signalSide": "context-before",
+          "relation": "前文已出现 rope 绕树干，此处“往上挪”的正是这条绳子，同词复现锁定答案。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "higher up the tree trunk",
+          "signalSide": "context-after",
+          "targetText": "move the rope higher up the tree trunk",
+          "relation": "move 的宾语沿树干上移，与“绳索”这一攀爬保护语义场吻合。"
+        }
+      ],
+      "teachingNote": "回看前文已提到的攀爬装备，往上挪的对象就是那条绳子。"
+    },
+    "q-zj-2023-jan-049": {
+      "blankId": "blank-zj-2023-jan-049",
+      "blankNo": 49,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "在多次停顿、逐步上移之后，Ziyad 终于（Finally）接近蜂箱，与前文“每隔几分钟挪一次”的渐进过程构成结果，逻辑顺承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Surprisingly",
+          "meaning": "出乎意料地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Naturally",
+          "meaning": "自然地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Immediately",
+          "meaning": "立刻地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "every few minutes",
+          "signalSide": "context-before",
+          "relation": "前文是“每隔几分钟挪一次”的漫长渐进，空格副词须表“历经过程后终于”，故选 Finally。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "got close to the hive",
+          "signalSide": "context-after",
+          "relation": "Finally 修饰 got close to the hive，标记攀爬过程的最终结果。"
+        }
+      ],
+      "teachingNote": "看前文是否为多步渐进，若是则用 Finally 收束到结果。"
+    },
+    "q-zj-2023-jan-050": {
+      "blankId": "blank-zj-2023-jan-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "坐在树枝上、要接近20米高处的蜂箱，他一点点挪动（inched）靠近再吹烟，inched towards it 表小幅缓慢移动，符合高空作业的谨慎。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "backed",
+          "meaning": "后退"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dived",
+          "meaning": "猛冲、跳入"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "shouted",
+          "meaning": "喊叫"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "towards it and blew smoke",
+          "signalSide": "context-after",
+          "targetText": "inched towards it",
+          "relation": "inch towards it 的方向宾语是 it（蜂箱），表“朝它一点点挪近”，搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Sitting on a branch",
+          "signalSide": "context-before",
+          "relation": "高坐树枝上须缓慢谨慎移动，呼应 inch 的小幅靠近。"
+        }
+      ],
+      "teachingNote": "高空狭窄处接近目标，动词应表“缓慢小幅移动”。"
+    },
+    "q-zj-2023-jan-051": {
+      "blankId": "blank-zj-2023-jan-051",
+      "blankNo": 51,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "他大叫一声后几秒内就回到地面，说明是顺着树干迅速滑下（slid down the trunk），slid down 与“几秒内回到地面”的快速下降合成义吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cut off",
+          "meaning": "切断（树干）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "gone up",
+          "meaning": "向上爬"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "held onto",
+          "meaning": "紧抓住（树干）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the trunk and was back on the ground",
+          "signalSide": "context-after",
+          "targetText": "slid down the trunk",
+          "relation": "宾语是 the trunk 且结果是回到地面，slide down the trunk 表“沿树干滑下”，搭配与方向均成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Within seconds",
+          "signalSide": "context-before",
+          "relation": "“几秒内”强调极快下降，合成出“迅速滑下”之义。"
+        }
+      ],
+      "teachingNote": "短语空看结果（回到地面）+方向（向下），合成出下行动作。"
+    },
+    "q-zj-2023-jan-052": {
+      "blankId": "blank-zj-2023-jan-052",
+      "blankNo": 52,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "凉夏推迟了孵化、幼蜂尚在蜂巢，说明现在取蜜“为时过早”（too early），too early to collect the honey 搭配合理，与下文原因一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "high",
+          "meaning": "高的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fast",
+          "meaning": "快的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "close",
+          "meaning": "近的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to collect the honey",
+          "signalSide": "context-after",
+          "targetText": "too early to collect the honey",
+          "relation": "too early to collect 表“太早还不能取蜜”，与不定式搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "A cool summer had delayed",
+          "signalSide": "context-after",
+          "relation": "凉夏推迟了进程、幼蜂未出，正是“取蜜过早”的原因。"
+        }
+      ],
+      "teachingNote": "用后句“凉夏推迟、幼蜂未成”反推时间上“太早”。"
+    },
+    "q-zj-2023-jan-053": {
+      "blankId": "blank-zj-2023-jan-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "凉夏推迟了孵化（hatching），故幼蜂仍在蜂巢里，delayed hatching 与下句“Baby bees still in the honeycombs”同属蜜蜂繁育语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "training",
+          "meaning": "训练"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sowing",
+          "meaning": "播种"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "trading",
+          "meaning": "交易"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "Baby bees were still in the honeycombs",
+          "signalSide": "context-after",
+          "relation": "幼蜂仍在蜂巢，正说明孵化被推迟，hatching 与蜜蜂繁育语义场呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "had delayed",
+          "signalSide": "context-before",
+          "targetText": "had delayed hatching",
+          "relation": "delay 的宾语是 hatching，“凉夏推迟孵化”搭配成立。"
+        }
+      ],
+      "teachingNote": "由下句“幼蜂还在蜂巢”锁定被推迟的繁育环节是孵化。"
+    },
+    "q-zj-2023-jan-054": {
+      "blankId": "blank-zj-2023-jan-054",
+      "blankNo": 54,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "成年蜂不断攻击逃离的 Ziyad，说明它们很愤怒（angry），angry and kept attacking 情感色彩与“攻击”行为一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "curious",
+          "meaning": "好奇的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hungry",
+          "meaning": "饥饿的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bored",
+          "meaning": "无聊的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "kept attacking",
+          "signalSide": "context-after",
+          "targetText": "angry and kept attacking",
+          "relation": "“不断攻击”是愤怒的直接表现，affective 与 angry 一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "The adult bees were",
+          "signalSide": "context-before",
+          "targetText": "The adult bees were angry",
+          "relation": "系动词后接表语形容词修饰 adult bees，angry 与攻击行为搭配成立。"
+        }
+      ],
+      "teachingNote": "用紧随其后的行为（不断攻击）确定形容词的情感色彩。"
+    },
+    "q-zj-2023-jan-055": {
+      "blankId": "blank-zj-2023-jan-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "因时机过早、蜂群凶猛，他必须等待合适的时机（the right moment）再上树，wait for the right moment to go back up 搭配合理，与“too early”时间主线呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "equipment",
+          "meaning": "设备、装备"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "person",
+          "meaning": "人选"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "order",
+          "meaning": "命令、顺序"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wait for the right",
+          "signalSide": "context-before",
+          "targetText": "wait for the right moment",
+          "relation": "wait for the right moment 表“等待合适时机”，固定搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "to go back up",
+          "signalSide": "context-after",
+          "relation": "“再上树”所等待的是时间上的“时机”，与时间语义场呼应而非装备或人选。"
+        }
+      ],
+      "teachingNote": "全文以“太早”为时间线，结尾要等的自然是合适的“时机”。"
+    }
+  }
+}
