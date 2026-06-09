@@ -4,7 +4,36 @@ Pick-up doc for a fresh session continuing the systematic refactor. Read this + 
 (`docs/architecture/refactor-roadmap-2026-06.md`) + the memory file
 (`memory/refactor-decomposition-2026-06.md`). Then continue from "Remaining cuts" below.
 
-## TL;DR — do this next
+## STATUS: sequential api.mjs lane COMPLETE (2026-06-08 session 2)
+
+The entire H5 server-implementation lane + H10-B are **DONE and merged to main**. Nothing left to do
+except the two deferred-by-design items below (and only if the owner wants them).
+
+**Session 2 landed (all DEV-via-fresh-Opus-agent → CR-by-小川 → CI-green → squash-merge):**
+H5-I steward (#209) · H5-K synonym-difficulty (#210) · H5-L 4 parse owners (#211) · H5-F legacy DOCX
+import ~2100 lines (#212) · H5-G DOCX renderer (#213) · H10-B PR1 delete dead /api/ai/parse-reading
+(#214) · H10-B PR2 extract 3 live ai-proxy routes (#215).
+
+**`server/api.mjs`: 11,096 → 4,109 lines (−63%)** (main @ `397d4c9`). 56 verify scripts, all green.
+
+### Remaining (deferred-by-design — do only if owner asks)
+- **H12-B PR2** (DifficultyReviewPanel) — controls interleaved with calibration mutators; do NOT force.
+- **H11-A PR2** (::1 host unification — behavior change, needs owner sign-off) + **PR3** (cssAttr dedup).
+- **`/api/ai/verify-trace`** was KEPT (not deleted): it's the live read-side of the verify-audit JSONL
+  (the contract H5-E froze) + 2 verifies assert it. No frontend caller, but deleting it makes the audit
+  write-only. Trivial to delete later if the owner confirms it's unwanted.
+
+### Owner spot-QA list (contract-sensitive / user-visible cuts merged on CR+CI alone)
+- H5-K: a local-Qwen synonym-difficulty classification (needs `QUESTION_BANK_ENABLE_LOCAL_QWEN=1`).
+- H5-L: a live reading / cloze / grammar / seven-choices DeepSeek parse (saved payload drives display+search).
+- H5-F: a legacy DOCX import → draft → answer-alignment apply (writes `questions.answer`).
+- H5-G: a real .docx export (student + teacher) + a PDF conversion (output bytes).
+- H10-B PR2: a semantic-search / steward / verify-question-group call (the `x-verify-request-id` header
+  + `{error,requestId}` envelope are a frontend data contract).
+
+---
+
+## (historical) earlier TL;DR — superseded by the STATUS block above
 
 1. **First: land H5-I (it's done but UNMERGED).** Branch `h5-i-steward-service` @ `bad35fb` is committed
    locally, CR-passed (by 小川), `verify:all` 51/0/0, byte-identical — but NOT pushed/merged (owner
