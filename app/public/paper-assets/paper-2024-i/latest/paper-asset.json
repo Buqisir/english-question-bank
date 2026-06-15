@@ -5,7 +5,7 @@
     "title": "2024年新课标Ⅰ卷-答案版",
     "subject": "English",
     "source": "AI 导题",
-    "assetVersion": 4,
+    "assetVersion": 5,
     "status": "published"
   },
   "sources": {
@@ -312,27 +312,19 @@
           "paragraphs": [
             {
               "paragraphId": "para-2024-i-reading-b-1",
-              "text": "Is comprehension the same whether a person reads a text onscreen or on paper? And are listening to and viewing content as effective as reading the written word when covering the same material? The answers to both questions are often “no”. The reasons relate to a variety of factors, including reduced concentration, an entertainment mindset (心态) and a tendency to multitask while consuming digital content."
+              "text": "“I am not crazy,” says Dr. William Farber, shortly after performing acupuncture (针灸) on a rabbit. “I am ahead of my time.” If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods. But Farber is certain he’ll have the last laugh. He’s one of a small but growing number of American veterinarians (兽医) now practicing “holistic” medicine-combining traditional Western treatments with acupuncture, chiropractic (按摩疗法) and herbal medicine."
             },
             {
               "paragraphId": "para-2024-i-reading-b-2",
-              "text": "When reading texts of several hundred words or more, learning is generally more successful when it’s on paper than onscreen. A large amount of research confirms this finding. The benefits of print reading particularly shine through when experimenters move from posing simple tasks — like identifying the main idea in a reading passage — to ones that require mental abstraction — such as drawing inferences from a text."
+              "text": "Farber, a graduate of Colorado State University, started out as a more conventional veterinarian. He became interested in alternative treatments 20 years ago when he suffered from terrible back pain. He tried muscle-relaxing drugs but found little relief. Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments. What worked on a veterinarian seemed likely to work on his patients. So, after studying the techniques for a couple of years, he began offering them to pets."
             },
             {
               "paragraphId": "para-2024-i-reading-b-3",
-              "text": "The differences between print and digital reading results are partly related to paper’s physical properties. With paper, there is a literal laying on of hands, along with the visual geography of distinct pages. People often link their memory of what they’ve read to how far into the book it was or where it was on the page."
+              "text": "Leigh Tindale’s dog Charlie had a serious heart condition. After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months. And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment."
             },
             {
               "paragraphId": "para-2024-i-reading-b-4",
-              "text": "But equally important is the mental aspect. Reading researchers have proposed a theory called “shallowing hypothesis (假说) ”. According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print."
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-5",
-              "text": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies — say, assigning an online talk instead of an article by the same person. However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces."
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-6",
-              "text": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print. However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words."
+              "text": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700. “Sometimes it surprises me that it works so well,” he says. “I will do anything to help an animal. That’s my job.”"
             }
           ]
         }
@@ -351,19 +343,27 @@
           "paragraphs": [
             {
               "paragraphId": "para-2024-i-reading-c-1",
-              "text": "“I am not crazy,” says Dr. William Farber, shortly after performing acupuncture (针灸) on a rabbit. “I am ahead of my time.” If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods. But Farber is certain he’ll have the last laugh. He’s one of a small but growing number of American veterinarians (兽医) now practicing “holistic” medicine-combining traditional Western treatments with acupuncture, chiropractic (按摩疗法) and herbal medicine."
+              "text": "Is comprehension the same whether a person reads a text onscreen or on paper? And are listening to and viewing content as effective as reading the written word when covering the same material? The answers to both questions are often “no”. The reasons relate to a variety of factors, including reduced concentration, an entertainment mindset (心态) and a tendency to multitask while consuming digital content."
             },
             {
               "paragraphId": "para-2024-i-reading-c-2",
-              "text": "Farber, a graduate of Colorado State University, started out as a more conventional veterinarian. He became interested in alternative treatments 20 years ago when he suffered from terrible back pain. He tried muscle-relaxing drugs but found little relief. Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments. What worked on a veterinarian seemed likely to work on his patients. So, after studying the techniques for a couple of years, he began offering them to pets."
+              "text": "When reading texts of several hundred words or more, learning is generally more successful when it’s on paper than onscreen. A large amount of research confirms this finding. The benefits of print reading particularly shine through when experimenters move from posing simple tasks — like identifying the main idea in a reading passage — to ones that require mental abstraction — such as drawing inferences from a text."
             },
             {
               "paragraphId": "para-2024-i-reading-c-3",
-              "text": "Leigh Tindale’s dog Charlie had a serious heart condition. After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months. And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment."
+              "text": "The differences between print and digital reading results are partly related to paper’s physical properties. With paper, there is a literal laying on of hands, along with the visual geography of distinct pages. People often link their memory of what they’ve read to how far into the book it was or where it was on the page."
             },
             {
               "paragraphId": "para-2024-i-reading-c-4",
-              "text": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700. “Sometimes it surprises me that it works so well,” he says. “I will do anything to help an animal. That’s my job.”"
+              "text": "But equally important is the mental aspect. Reading researchers have proposed a theory called “shallowing hypothesis (假说) ”. According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print."
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-5",
+              "text": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies — say, assigning an online talk instead of an article by the same person. However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces."
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-6",
+              "text": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print. However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words."
             }
           ]
         }
@@ -752,102 +752,6 @@
         "questionId": "q-2024-i-024",
         "questionNo": 24,
         "groupId": "group-2024-i-reading-b",
-        "stem": "What does the underlined phrase “shine through” in paragraph 2 mean?",
-        "options": [
-          {
-            "label": "A",
-            "text": "Seem unlikely to last."
-          },
-          {
-            "label": "B",
-            "text": "Seem hard to explain."
-          },
-          {
-            "label": "C",
-            "text": "Become ready to use."
-          },
-          {
-            "label": "D",
-            "text": "Become easy to notice."
-          }
-        ]
-      },
-      "q-2024-i-025": {
-        "questionId": "q-2024-i-025",
-        "questionNo": 25,
-        "groupId": "group-2024-i-reading-b",
-        "stem": "What does the shallowing hypothesis assume?",
-        "options": [
-          {
-            "label": "A",
-            "text": "Readers treat digital texts lightly."
-          },
-          {
-            "label": "B",
-            "text": "Digital texts are simpler to understand."
-          },
-          {
-            "label": "C",
-            "text": "People select digital texts randomly."
-          },
-          {
-            "label": "D",
-            "text": "Digital texts are suitable for social media."
-          }
-        ]
-      },
-      "q-2024-i-026": {
-        "questionId": "q-2024-i-026",
-        "questionNo": 26,
-        "groupId": "group-2024-i-reading-b",
-        "stem": "Why are audio and video increasingly used by university teachers?",
-        "options": [
-          {
-            "label": "A",
-            "text": "They can hold students' attention."
-          },
-          {
-            "label": "B",
-            "text": "They are more convenient to prepare."
-          },
-          {
-            "label": "C",
-            "text": "They help develop advanced skills."
-          },
-          {
-            "label": "D",
-            "text": "They are more informative than text."
-          }
-        ]
-      },
-      "q-2024-i-027": {
-        "questionId": "q-2024-i-027",
-        "questionNo": 27,
-        "groupId": "group-2024-i-reading-b",
-        "stem": "What does the author imply in the last paragraph?",
-        "options": [
-          {
-            "label": "A",
-            "text": "Students should apply multiple learning techniques."
-          },
-          {
-            "label": "B",
-            "text": "Teachers should produce their own teaching material."
-          },
-          {
-            "label": "C",
-            "text": "Print texts cannot be entirely replaced in education."
-          },
-          {
-            "label": "D",
-            "text": "Education outside the classroom cannot be ignored."
-          }
-        ]
-      },
-      "q-2024-i-028": {
-        "questionId": "q-2024-i-028",
-        "questionNo": 28,
-        "groupId": "group-2024-i-reading-c",
         "stem": "What do some of Farber's coworkers think of him?",
         "options": [
           {
@@ -868,10 +772,10 @@
           }
         ]
       },
-      "q-2024-i-029": {
-        "questionId": "q-2024-i-029",
-        "questionNo": 29,
-        "groupId": "group-2024-i-reading-c",
+      "q-2024-i-025": {
+        "questionId": "q-2024-i-025",
+        "questionNo": 25,
+        "groupId": "group-2024-i-reading-b",
         "stem": "Why did Farber decide to try acupuncture on pets?",
         "options": [
           {
@@ -892,10 +796,10 @@
           }
         ]
       },
-      "q-2024-i-030": {
-        "questionId": "q-2024-i-030",
-        "questionNo": 30,
-        "groupId": "group-2024-i-reading-c",
+      "q-2024-i-026": {
+        "questionId": "q-2024-i-026",
+        "questionNo": 26,
+        "groupId": "group-2024-i-reading-b",
         "stem": "What does paragraph 3 mainly talk about?",
         "options": [
           {
@@ -916,10 +820,10 @@
           }
         ]
       },
-      "q-2024-i-031": {
-        "questionId": "q-2024-i-031",
-        "questionNo": 31,
-        "groupId": "group-2024-i-reading-c",
+      "q-2024-i-027": {
+        "questionId": "q-2024-i-027",
+        "questionNo": 27,
+        "groupId": "group-2024-i-reading-b",
         "stem": "Why does the author mention the American Holistic Veterinary Medical Association?",
         "options": [
           {
@@ -937,6 +841,102 @@
           {
             "label": "D",
             "text": "To advocate animal protection."
+          }
+        ]
+      },
+      "q-2024-i-028": {
+        "questionId": "q-2024-i-028",
+        "questionNo": 28,
+        "groupId": "group-2024-i-reading-c",
+        "stem": "What does the underlined phrase “shine through” in paragraph 2 mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Seem unlikely to last."
+          },
+          {
+            "label": "B",
+            "text": "Seem hard to explain."
+          },
+          {
+            "label": "C",
+            "text": "Become ready to use."
+          },
+          {
+            "label": "D",
+            "text": "Become easy to notice."
+          }
+        ]
+      },
+      "q-2024-i-029": {
+        "questionId": "q-2024-i-029",
+        "questionNo": 29,
+        "groupId": "group-2024-i-reading-c",
+        "stem": "What does the shallowing hypothesis assume?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Readers treat digital texts lightly."
+          },
+          {
+            "label": "B",
+            "text": "Digital texts are simpler to understand."
+          },
+          {
+            "label": "C",
+            "text": "People select digital texts randomly."
+          },
+          {
+            "label": "D",
+            "text": "Digital texts are suitable for social media."
+          }
+        ]
+      },
+      "q-2024-i-030": {
+        "questionId": "q-2024-i-030",
+        "questionNo": 30,
+        "groupId": "group-2024-i-reading-c",
+        "stem": "Why are audio and video increasingly used by university teachers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They can hold students' attention."
+          },
+          {
+            "label": "B",
+            "text": "They are more convenient to prepare."
+          },
+          {
+            "label": "C",
+            "text": "They help develop advanced skills."
+          },
+          {
+            "label": "D",
+            "text": "They are more informative than text."
+          }
+        ]
+      },
+      "q-2024-i-031": {
+        "questionId": "q-2024-i-031",
+        "questionNo": 31,
+        "groupId": "group-2024-i-reading-c",
+        "stem": "What does the author imply in the last paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Students should apply multiple learning techniques."
+          },
+          {
+            "label": "B",
+            "text": "Teachers should produce their own teaching material."
+          },
+          {
+            "label": "C",
+            "text": "Print texts cannot be entirely replaced in education."
+          },
+          {
+            "label": "D",
+            "text": "Education outside the classroom cannot be ignored."
           }
         ]
       },
@@ -1626,56 +1626,56 @@
       "q-2024-i-024": {
         "questionId": "q-2024-i-024",
         "questionNo": 24,
-        "answer": "D",
+        "answer": "A",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-025": {
         "questionId": "q-2024-i-025",
         "questionNo": 25,
-        "answer": "A",
+        "answer": "C",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-026": {
         "questionId": "q-2024-i-026",
         "questionNo": 26,
-        "answer": "A",
+        "answer": "D",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-027": {
         "questionId": "q-2024-i-027",
         "questionNo": 27,
-        "answer": "C",
+        "answer": "A",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-028": {
         "questionId": "q-2024-i-028",
         "questionNo": 28,
-        "answer": "A",
+        "answer": "D",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-029": {
         "questionId": "q-2024-i-029",
         "questionNo": 29,
-        "answer": "C",
+        "answer": "A",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-030": {
         "questionId": "q-2024-i-030",
         "questionNo": 30,
-        "answer": "D",
+        "answer": "A",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
       "q-2024-i-031": {
         "questionId": "q-2024-i-031",
         "questionNo": 31,
-        "answer": "A",
+        "answer": "C",
         "score": 2.5,
         "note": "AI 导题：答案解析版抽取"
       },
@@ -1994,67 +1994,67 @@
         }
       },
       "group-2024-i-reading-b": {
-        "overview": "本文探讨纸质阅读与数字阅读（含音频、视频）在理解与学习效果上的差异，论证纸质阅读在需要深度思考的任务上更有优势，并提醒教育者不要假设所有媒介效果相同。",
-        "discourseStructure": {
-          "summary": "由提问引入主题，先给出总体结论（纸质阅读理解更好），再从物理属性和心理层面两方面解释原因，接着以音频视频为例补充论证，最后落到对教育者的建议。",
-          "paragraphs": [
-            {
-              "paragraphId": "para-2024-i-reading-b-1",
-              "summary": "提出两个问题：屏幕与纸质阅读理解是否相同，听看内容是否与阅读同样有效，并给出否定回答及原因因素。",
-              "function": "提出问题并给出总论点，列举原因因素"
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-2",
-              "summary": "指出长文本在纸上学习通常更成功，尤其在需要心理抽象的任务上纸质优势更突出。",
-              "function": "给出研究结论，强调纸质阅读优势"
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-3",
-              "summary": "从纸张物理属性角度解释差异：触感、页面视觉地理及与记忆位置的关联。",
-              "function": "解释原因之一：物理属性"
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-4",
-              "summary": "从心理层面解释差异，介绍“浅化假说”：人们用社交媒体心态对待数字文本，投入更少脑力。",
-              "function": "解释原因之二：心理层面"
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-5",
-              "summary": "音频视频比文本更吸引人，教师日益采用，但心理学研究表明阅读新闻比听看记得更多。",
-              "function": "补充论证：音视频虽吸引人但记忆效果不如阅读"
-            },
-            {
-              "paragraphId": "para-2024-i-reading-b-6",
-              "summary": "承认数字文本、音视频有教育作用，但在需要专注与反思的学习中，提醒教育者勿假设所有媒介相同。",
-              "function": "总结并给出建议"
-            }
-          ]
-        }
-      },
-      "group-2024-i-reading-c": {
         "overview": "本文是一篇人物/说明类记叙文，介绍兽医 Dr. William Farber 推行的“holistic” medicine（整体疗法），即把西医传统疗法与针灸、按摩疗法、草药结合。文章通过 Farber 自身经历、宠物病例和协会增长数据，说明这种疗法日益受到认可。",
         "discourseStructure": {
           "summary": "全文先以 Farber 的自我辩护引出 holistic medicine 及其在美国兽医中的兴起；再追溯他从常规兽医转向替代疗法的个人契机；接着用具体宠物病例佐证疗效；最后用协会会员增长预测该疗法前景并以 Farber 的话收束。",
           "paragraphs": [
             {
-              "paragraphId": "para-2024-i-reading-c-1",
+              "paragraphId": "para-2024-i-reading-b-1",
               "summary": "Farber 称自己并非疯狂而是走在时代前面，尽管同事偶尔嘲笑他；他属于日益增多的实践整体疗法的美国兽医之一。",
               "function": "引入人物与核心概念 holistic medicine，并点出他面对的质疑。"
             },
             {
-              "paragraphId": "para-2024-i-reading-c-2",
+              "paragraphId": "para-2024-i-reading-b-2",
               "summary": "Farber 原是常规兽医，二十年前因背痛尝试药物无效后改用针灸，效果显著，于是把针灸用于宠物。",
               "function": "追溯他转向替代疗法的个人原因与契机。"
             },
             {
-              "paragraphId": "para-2024-i-reading-c-3",
+              "paragraphId": "para-2024-i-reading-b-3",
               "summary": "举例说明疗效：狗 Charlie 的心脏病痛苦得到缓解、多活五个月，马 Nappy 经按摩调理后行动更轻松。",
               "function": "用具体病例例证整体疗法的有效性。"
             },
             {
-              "paragraphId": "para-2024-i-reading-c-4",
+              "paragraphId": "para-2024-i-reading-b-4",
               "summary": "Farber 确信整体疗法会更流行，并以协会会员从30增至700余人为佐证，结尾引用其话语。",
               "function": "用数据支撑其观点并收束全文。"
+            }
+          ]
+        }
+      },
+      "group-2024-i-reading-c": {
+        "overview": "本文探讨纸质阅读与数字阅读（含音频、视频）在理解与学习效果上的差异，论证纸质阅读在需要深度思考的任务上更有优势，并提醒教育者不要假设所有媒介效果相同。",
+        "discourseStructure": {
+          "summary": "由提问引入主题，先给出总体结论（纸质阅读理解更好），再从物理属性和心理层面两方面解释原因，接着以音频视频为例补充论证，最后落到对教育者的建议。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-i-reading-c-1",
+              "summary": "提出两个问题：屏幕与纸质阅读理解是否相同，听看内容是否与阅读同样有效，并给出否定回答及原因因素。",
+              "function": "提出问题并给出总论点，列举原因因素"
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-2",
+              "summary": "指出长文本在纸上学习通常更成功，尤其在需要心理抽象的任务上纸质优势更突出。",
+              "function": "给出研究结论，强调纸质阅读优势"
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-3",
+              "summary": "从纸张物理属性角度解释差异：触感、页面视觉地理及与记忆位置的关联。",
+              "function": "解释原因之一：物理属性"
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-4",
+              "summary": "从心理层面解释差异，介绍“浅化假说”：人们用社交媒体心态对待数字文本，投入更少脑力。",
+              "function": "解释原因之二：心理层面"
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-5",
+              "summary": "音频视频比文本更吸引人，教师日益采用，但心理学研究表明阅读新闻比听看记得更多。",
+              "function": "补充论证：音视频虽吸引人但记忆效果不如阅读"
+            },
+            {
+              "paragraphId": "para-2024-i-reading-c-6",
+              "summary": "承认数字文本、音视频有教育作用，但在需要专注与反思的学习中，提醒教育者勿假设所有媒介相同。",
+              "function": "总结并给出建议"
             }
           ]
         }
@@ -2355,6 +2355,331 @@
       },
       "q-2024-i-024": {
         "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Farber 的部分同事对他的看法，需定位第一段中描述同事反应的细节。",
+        "stemTranslationZh": "Farber 的一些同事是怎么看待他的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他很古怪。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2024-i-reading-b-1",
+                "quote": "even some of his coworkers occasionally laugh at his unusual methods",
+                "anchor": "同事嘲笑他不寻常的方法"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他很严格。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He's strict.",
+              "explanation": "原文未提及 Farber 严格，文中只说同事嘲笑他不寻常的方法，无任何关于严格的信息。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他很勇敢。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He's brave.",
+              "explanation": "原文未提及同事认为他勇敢，文中同事的态度是嘲笑而非赞赏其勇气。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他很粗鲁。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He's rude.",
+              "explanation": "原文未提及他粗鲁，文中只描述同事对其方法的嘲笑，与是否粗鲁无关。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What do some of Farber's coworkers think of him?",
+            "sourceRole": "stem",
+            "targetText": "even some of his coworkers occasionally laugh at his unusual methods",
+            "targetParagraphId": "para-2024-i-reading-b-1",
+            "relationType": "locationCue",
+            "note": "题干 some of Farber's coworkers think 对应原文 some of his coworkers occasionally laugh at his unusual methods，laugh at his unusual methods 即把他视为 odd（古怪）。"
+          }
+        ]
+      },
+      "q-2024-i-025": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查 Farber 决定在宠物身上尝试针灸的原因，需定位第二段他自身作为病人受益的经历。",
+        "stemTranslationZh": "Farber 为什么决定在宠物身上尝试针灸？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他在大学里接受过针灸训练。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "conditionRemoved",
+              "sourceQuote": "a graduate of Colorado State University, started out as a more conventional veterinarian",
+              "sourceHighlight": "a more conventional veterinarian",
+              "optionText": "He was trained in it at university.",
+              "optionHighlight": "trained in it at university",
+              "explanation": "原文说他是大学毕业的常规兽医，针灸是后来自学（after studying the techniques for a couple of years），并非大学所学，选项把训练来源偷换为 university。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2024-i-reading-b-2",
+                "quote": "after studying the techniques for a couple of years, he began offering them to pets",
+                "anchor": "针灸是他后来自学的，非大学所授"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他受到另一位兽医的启发。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He was inspired by another veterinarian.",
+              "explanation": "原文未提及有另一位兽医启发他，他尝试针灸是源于自身背痛被治愈的经历。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他作为病人从针灸中受益。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2024-i-reading-b-2",
+                "quote": "Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments",
+                "anchor": "他自己试针灸后病情好转"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2024-i-reading-b-2",
+                "quote": "What worked on a veterinarian seemed likely to work on his patients",
+                "anchor": "对兽医自己有效便推及宠物"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他想为宠物主人省钱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He wanted to save money for pet owners.",
+              "explanation": "原文未提及省钱动机，他转用针灸的原因是自身受益后认为对宠物也有效。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He benefited from it as a patient.",
+            "sourceRole": "correctOption",
+            "targetText": "he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments",
+            "targetParagraphId": "para-2024-i-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 benefited from it as a patient 同义替换原文 he improved after two or three treatments，即他作为病人针灸后好转。"
+          },
+          {
+            "sourceText": "Why did Farber decide to try acupuncture on pets?",
+            "sourceRole": "stem",
+            "targetText": "What worked on a veterinarian seemed likely to work on his patients",
+            "targetParagraphId": "para-2024-i-reading-b-2",
+            "relationType": "locationCue",
+            "note": "题干问在宠物身上尝试针灸的原因，原文 What worked on a veterinarian seemed likely to work on his patients 提供因果定位线索。"
+          }
+        ]
+      },
+      "q-2024-i-026": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查第三段的段落主旨，需归纳两个宠物病例所共同说明的内容。",
+        "stemTranslationZh": "第三段主要讲了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一次按摩疗法的步骤。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "after a chiropractic adjustment",
+              "optionText": "Steps of a chiropractic treatment.",
+              "matchType": "exact",
+              "relationNote": "选项借用原文出现的 chiropractic 一词设钩，但原文只说按摩调理后马更舒适，并未描述按摩疗法的 steps（步骤）。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2024-i-reading-b-3",
+                "quote": "“moves more easily and rides more comfortably” after a chiropractic adjustment",
+                "anchor": "只讲按摩后的效果，非步骤"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "兽医工作的复杂性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The complexity of veterinarians' work.",
+              "explanation": "原文未提及兽医工作的复杂性，第三段聚焦于两个病例的治疗效果。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "罕见动物疾病的例子。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Leigh Tindale’s dog Charlie had a serious heart condition",
+              "sourceHighlight": "a serious heart condition",
+              "optionText": "Examples of rare animal diseases.",
+              "optionHighlight": "rare animal diseases",
+              "explanation": "原文只说狗患严重心脏病，并未说这些病 rare（罕见）；段落重点是疗效而非疾病本身，选项夸大并偏离主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2024-i-reading-b-3",
+                "quote": "Leigh Tindale’s dog Charlie had a serious heart condition",
+                "anchor": "病情严重但未称罕见"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "整体疗法的有效性。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2024-i-reading-b-3",
+                "quote": "Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months",
+                "anchor": "狗的痛苦缓解、多活五个月"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2024-i-reading-b-3",
+                "quote": "her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment",
+                "anchor": "马经调理后更舒适"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The effectiveness of holistic medicine.",
+            "sourceRole": "correctOption",
+            "targetText": "Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months",
+            "targetParagraphId": "para-2024-i-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "选项 effectiveness of holistic medicine 概括原文两例疗效，treatments eased her dog’s suffering 与 moves more easily 均体现疗法的 effectiveness。"
+          }
+        ]
+      },
+      "q-2024-i-027": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查作者提及美国整体兽医医学协会的写作意图，需结合第四段会员增长数据与 Farber 的观点之间的论证关系。",
+        "stemTranslationZh": "作者为什么提到美国整体兽医医学协会？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了证明 Farber 的观点。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2024-i-reading-b-4",
+                "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right",
+                "anchor": "协会数据用来印证 Farber 的预测"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2024-i-reading-b-4",
+                "quote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+                "anchor": "会员从30增至700余的增长证据"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了强调它的重要性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+              "sourceHighlight": "has grown from 30 to over 700",
+              "optionText": "To emphasize its importance.",
+              "optionHighlight": "emphasize its importance",
+              "explanation": "作者提协会是借其会员增长来佐证整体疗法日益流行，目的不是强调协会本身的重要性，选项偷换了写作目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2024-i-reading-b-4",
+                "quote": "Farber is certain that the holistic approach will grow more popular with time",
+                "anchor": "数据服务于论证疗法流行，非强调协会"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了赞扬兽医。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To praise veterinarians.",
+              "explanation": "原文未提及作者意在赞扬兽医，提及协会是为印证整体疗法的发展趋势。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了倡导动物保护。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To advocate animal protection.",
+              "explanation": "原文未提及动物保护，全文主题是整体兽医疗法的疗效与发展，与倡导动物保护无关。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To prove Farber's point.",
+            "sourceRole": "correctOption",
+            "targetText": "if the past is any indication, he may be right",
+            "targetParagraphId": "para-2024-i-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "选项 prove Farber's point 对应原文 if the past is any indication, he may be right，作者用协会会员增长（过去趋势）来印证 Farber 关于疗法会更流行的判断。"
+          },
+          {
+            "sourceText": "Why does the author mention the American Holistic Veterinary Medical Association?",
+            "sourceRole": "stem",
+            "targetText": "Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+            "targetParagraphId": "para-2024-i-reading-b-4",
+            "relationType": "locationCue",
+            "note": "题干定位词 American Holistic Veterinary Medical Association 直接对应第四段会员增长数据句，该数据是论证 Farber 观点的依据。"
+          }
+        ]
+      },
+      "q-2024-i-028": {
+        "skill": {
           "primary": "wordMeaning"
         },
         "questionFocus": "考查第二段画线短语 shine through 的词义推测。",
@@ -2397,13 +2722,13 @@
             "evidence": [
               {
                 "role": "primary",
-                "paragraphId": "para-2024-i-reading-b-2",
+                "paragraphId": "para-2024-i-reading-c-2",
                 "quote": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks",
                 "anchor": "print 好处在更难任务时 shine through"
               },
               {
                 "role": "secondary",
-                "paragraphId": "para-2024-i-reading-b-2",
+                "paragraphId": "para-2024-i-reading-c-2",
                 "quote": "to ones that require mental abstraction — such as drawing inferences from a text.",
                 "anchor": "需心理抽象的任务中优势更明显"
               }
@@ -2415,13 +2740,13 @@
             "sourceText": "shine through",
             "sourceRole": "stem",
             "targetText": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks",
-            "targetParagraphId": "para-2024-i-reading-b-2",
+            "targetParagraphId": "para-2024-i-reading-c-2",
             "relationType": "locationCue",
             "note": "由 benefits ... particularly shine through 可知，从简单任务转向需要 mental abstraction 的任务时纸质优势更加“显现/明显”，故 shine through 意为 become easy to notice（容易被注意到）。"
           }
         ]
       },
-      "q-2024-i-025": {
+      "q-2024-i-029": {
         "skill": {
           "primary": "detail"
         },
@@ -2435,7 +2760,7 @@
             "evidence": [
               {
                 "role": "primary",
-                "paragraphId": "para-2024-i-reading-b-4",
+                "paragraphId": "para-2024-i-reading-c-4",
                 "quote": "people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
                 "anchor": "用社交媒体心态对待数字文本，投入更少脑力"
               }
@@ -2475,7 +2800,7 @@
             },
             "trapEvidence": [
               {
-                "paragraphId": "para-2024-i-reading-b-4",
+                "paragraphId": "para-2024-i-reading-c-4",
                 "quote": "people approach digital texts with a mindset suited to social media",
                 "anchor": "suited to social media 修饰 mindset 而非 texts"
               }
@@ -2487,13 +2812,13 @@
             "sourceText": "Readers treat digital texts lightly.",
             "sourceRole": "correctOption",
             "targetText": "which are often not so serious, and devote less mental effort than when they are reading print.",
-            "targetParagraphId": "para-2024-i-reading-b-4",
+            "targetParagraphId": "para-2024-i-reading-c-4",
             "relationType": "paraphrase",
             "note": "选项 treat ... lightly 同义替换原文 not so serious 且 devote less mental effort，对应读者轻率对待数字文本。"
           }
         ]
       },
-      "q-2024-i-026": {
+      "q-2024-i-030": {
         "skill": {
           "primary": "detail"
         },
@@ -2507,7 +2832,7 @@
             "evidence": [
               {
                 "role": "primary",
-                "paragraphId": "para-2024-i-reading-b-5",
+                "paragraphId": "para-2024-i-reading-c-5",
                 "quote": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies",
                 "anchor": "音视频更吸引人，故教师日益采用"
               }
@@ -2546,7 +2871,7 @@
             },
             "trapEvidence": [
               {
-                "paragraphId": "para-2024-i-reading-b-5",
+                "paragraphId": "para-2024-i-reading-c-5",
                 "quote": "Audio (音频) and video can feel more engaging than text",
                 "anchor": "more engaging 而非 more informative"
               }
@@ -2558,13 +2883,13 @@
             "sourceText": "They can hold students' attention.",
             "sourceRole": "correctOption",
             "targetText": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies",
-            "targetParagraphId": "para-2024-i-reading-b-5",
+            "targetParagraphId": "para-2024-i-reading-c-5",
             "relationType": "paraphrase",
             "note": "选项 hold students' attention 同义替换原文 more engaging（更吸引人），and so 揭示因果，即教师采用音视频的原因。"
           }
         ]
       },
-      "q-2024-i-027": {
+      "q-2024-i-031": {
         "skill": {
           "primary": "inference"
         },
@@ -2585,7 +2910,7 @@
             },
             "trapEvidence": [
               {
-                "paragraphId": "para-2024-i-reading-b-6",
+                "paragraphId": "para-2024-i-reading-c-6",
                 "quote": "educators shouldn’t assume all media are the same",
                 "anchor": "建议对象是 educators 而非 students"
               }
@@ -2608,13 +2933,13 @@
             "evidence": [
               {
                 "role": "primary",
-                "paragraphId": "para-2024-i-reading-b-6",
+                "paragraphId": "para-2024-i-reading-c-6",
                 "quote": "for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
                 "anchor": "需专注反思时不应认为各媒介相同"
               },
               {
                 "role": "secondary",
-                "paragraphId": "para-2024-i-reading-b-6",
+                "paragraphId": "para-2024-i-reading-c-6",
                 "quote": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print.",
                 "anchor": "数字媒介有作用但纸质仍不可替代"
               }
@@ -2636,334 +2961,9 @@
             "sourceText": "Print texts cannot be entirely replaced in education.",
             "sourceRole": "correctOption",
             "targetText": "for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
-            "targetParagraphId": "para-2024-i-reading-b-6",
+            "targetParagraphId": "para-2024-i-reading-c-6",
             "relationType": "paraphrase",
             "note": "由 shouldn’t assume all media are the same 加上 maximizing learning where mental focus and reflection are called for，可推断在需深度学习时纸质文本不可被完全取代。"
-          }
-        ]
-      },
-      "q-2024-i-028": {
-        "skill": {
-          "primary": "detail"
-        },
-        "questionFocus": "考查 Farber 的部分同事对他的看法，需定位第一段中描述同事反应的细节。",
-        "stemTranslationZh": "Farber 的一些同事是怎么看待他的？",
-        "optionAnalysis": [
-          {
-            "label": "A",
-            "optionTranslationZh": "他很古怪。",
-            "status": "correct",
-            "evidence": [
-              {
-                "role": "primary",
-                "paragraphId": "para-2024-i-reading-c-1",
-                "quote": "even some of his coworkers occasionally laugh at his unusual methods",
-                "anchor": "同事嘲笑他不寻常的方法"
-              }
-            ]
-          },
-          {
-            "label": "B",
-            "optionTranslationZh": "他很严格。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "He's strict.",
-              "explanation": "原文未提及 Farber 严格，文中只说同事嘲笑他不寻常的方法，无任何关于严格的信息。"
-            }
-          },
-          {
-            "label": "C",
-            "optionTranslationZh": "他很勇敢。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "He's brave.",
-              "explanation": "原文未提及同事认为他勇敢，文中同事的态度是嘲笑而非赞赏其勇气。"
-            }
-          },
-          {
-            "label": "D",
-            "optionTranslationZh": "他很粗鲁。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "He's rude.",
-              "explanation": "原文未提及他粗鲁，文中只描述同事对其方法的嘲笑，与是否粗鲁无关。"
-            }
-          }
-        ],
-        "locationParaphrases": [
-          {
-            "sourceText": "What do some of Farber's coworkers think of him?",
-            "sourceRole": "stem",
-            "targetText": "even some of his coworkers occasionally laugh at his unusual methods",
-            "targetParagraphId": "para-2024-i-reading-c-1",
-            "relationType": "locationCue",
-            "note": "题干 some of Farber's coworkers think 对应原文 some of his coworkers occasionally laugh at his unusual methods，laugh at his unusual methods 即把他视为 odd（古怪）。"
-          }
-        ]
-      },
-      "q-2024-i-029": {
-        "skill": {
-          "primary": "detail",
-          "secondary": "inference"
-        },
-        "questionFocus": "考查 Farber 决定在宠物身上尝试针灸的原因，需定位第二段他自身作为病人受益的经历。",
-        "stemTranslationZh": "Farber 为什么决定在宠物身上尝试针灸？",
-        "optionAnalysis": [
-          {
-            "label": "A",
-            "optionTranslationZh": "他在大学里接受过针灸训练。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "scopeShift",
-              "subtype": "conditionRemoved",
-              "sourceQuote": "a graduate of Colorado State University, started out as a more conventional veterinarian",
-              "sourceHighlight": "a more conventional veterinarian",
-              "optionText": "He was trained in it at university.",
-              "optionHighlight": "trained in it at university",
-              "explanation": "原文说他是大学毕业的常规兽医，针灸是后来自学（after studying the techniques for a couple of years），并非大学所学，选项把训练来源偷换为 university。"
-            },
-            "trapEvidence": [
-              {
-                "paragraphId": "para-2024-i-reading-c-2",
-                "quote": "after studying the techniques for a couple of years, he began offering them to pets",
-                "anchor": "针灸是他后来自学的，非大学所授"
-              }
-            ]
-          },
-          {
-            "label": "B",
-            "optionTranslationZh": "他受到另一位兽医的启发。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "He was inspired by another veterinarian.",
-              "explanation": "原文未提及有另一位兽医启发他，他尝试针灸是源于自身背痛被治愈的经历。"
-            }
-          },
-          {
-            "label": "C",
-            "optionTranslationZh": "他作为病人从针灸中受益。",
-            "status": "correct",
-            "evidence": [
-              {
-                "role": "primary",
-                "paragraphId": "para-2024-i-reading-c-2",
-                "quote": "Then he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments",
-                "anchor": "他自己试针灸后病情好转"
-              },
-              {
-                "role": "secondary",
-                "paragraphId": "para-2024-i-reading-c-2",
-                "quote": "What worked on a veterinarian seemed likely to work on his patients",
-                "anchor": "对兽医自己有效便推及宠物"
-              }
-            ]
-          },
-          {
-            "label": "D",
-            "optionTranslationZh": "他想为宠物主人省钱。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "He wanted to save money for pet owners.",
-              "explanation": "原文未提及省钱动机，他转用针灸的原因是自身受益后认为对宠物也有效。"
-            }
-          }
-        ],
-        "locationParaphrases": [
-          {
-            "sourceText": "He benefited from it as a patient.",
-            "sourceRole": "correctOption",
-            "targetText": "he tried acupuncture, an ancient Chinese practice, and was amazed that he improved after two or three treatments",
-            "targetParagraphId": "para-2024-i-reading-c-2",
-            "relationType": "paraphrase",
-            "note": "选项 benefited from it as a patient 同义替换原文 he improved after two or three treatments，即他作为病人针灸后好转。"
-          },
-          {
-            "sourceText": "Why did Farber decide to try acupuncture on pets?",
-            "sourceRole": "stem",
-            "targetText": "What worked on a veterinarian seemed likely to work on his patients",
-            "targetParagraphId": "para-2024-i-reading-c-2",
-            "relationType": "locationCue",
-            "note": "题干问在宠物身上尝试针灸的原因，原文 What worked on a veterinarian seemed likely to work on his patients 提供因果定位线索。"
-          }
-        ]
-      },
-      "q-2024-i-030": {
-        "skill": {
-          "primary": "mainIdea"
-        },
-        "questionFocus": "考查第三段的段落主旨，需归纳两个宠物病例所共同说明的内容。",
-        "stemTranslationZh": "第三段主要讲了什么？",
-        "optionAnalysis": [
-          {
-            "label": "A",
-            "optionTranslationZh": "一次按摩疗法的步骤。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "sourceLexicalTrap",
-              "sourceText": "after a chiropractic adjustment",
-              "optionText": "Steps of a chiropractic treatment.",
-              "matchType": "exact",
-              "relationNote": "选项借用原文出现的 chiropractic 一词设钩，但原文只说按摩调理后马更舒适，并未描述按摩疗法的 steps（步骤）。"
-            },
-            "trapEvidence": [
-              {
-                "paragraphId": "para-2024-i-reading-c-3",
-                "quote": "“moves more easily and rides more comfortably” after a chiropractic adjustment",
-                "anchor": "只讲按摩后的效果，非步骤"
-              }
-            ]
-          },
-          {
-            "label": "B",
-            "optionTranslationZh": "兽医工作的复杂性。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "The complexity of veterinarians' work.",
-              "explanation": "原文未提及兽医工作的复杂性，第三段聚焦于两个病例的治疗效果。"
-            }
-          },
-          {
-            "label": "C",
-            "optionTranslationZh": "罕见动物疾病的例子。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "scopeShift",
-              "subtype": "overstatement",
-              "sourceQuote": "Leigh Tindale’s dog Charlie had a serious heart condition",
-              "sourceHighlight": "a serious heart condition",
-              "optionText": "Examples of rare animal diseases.",
-              "optionHighlight": "rare animal diseases",
-              "explanation": "原文只说狗患严重心脏病，并未说这些病 rare（罕见）；段落重点是疗效而非疾病本身，选项夸大并偏离主旨。"
-            },
-            "trapEvidence": [
-              {
-                "paragraphId": "para-2024-i-reading-c-3",
-                "quote": "Leigh Tindale’s dog Charlie had a serious heart condition",
-                "anchor": "病情严重但未称罕见"
-              }
-            ]
-          },
-          {
-            "label": "D",
-            "optionTranslationZh": "整体疗法的有效性。",
-            "status": "correct",
-            "evidence": [
-              {
-                "role": "primary",
-                "paragraphId": "para-2024-i-reading-c-3",
-                "quote": "Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months",
-                "anchor": "狗的痛苦缓解、多活五个月"
-              },
-              {
-                "role": "secondary",
-                "paragraphId": "para-2024-i-reading-c-3",
-                "quote": "her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment",
-                "anchor": "马经调理后更舒适"
-              }
-            ]
-          }
-        ],
-        "locationParaphrases": [
-          {
-            "sourceText": "The effectiveness of holistic medicine.",
-            "sourceRole": "correctOption",
-            "targetText": "Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months",
-            "targetParagraphId": "para-2024-i-reading-c-3",
-            "relationType": "paraphrase",
-            "note": "选项 effectiveness of holistic medicine 概括原文两例疗效，treatments eased her dog’s suffering 与 moves more easily 均体现疗法的 effectiveness。"
-          }
-        ]
-      },
-      "q-2024-i-031": {
-        "skill": {
-          "primary": "authorPurpose"
-        },
-        "questionFocus": "考查作者提及美国整体兽医医学协会的写作意图，需结合第四段会员增长数据与 Farber 的观点之间的论证关系。",
-        "stemTranslationZh": "作者为什么提到美国整体兽医医学协会？",
-        "optionAnalysis": [
-          {
-            "label": "A",
-            "optionTranslationZh": "为了证明 Farber 的观点。",
-            "status": "correct",
-            "evidence": [
-              {
-                "role": "primary",
-                "paragraphId": "para-2024-i-reading-c-4",
-                "quote": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right",
-                "anchor": "协会数据用来印证 Farber 的预测"
-              },
-              {
-                "role": "secondary",
-                "paragraphId": "para-2024-i-reading-c-4",
-                "quote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
-                "anchor": "会员从30增至700余的增长证据"
-              }
-            ]
-          },
-          {
-            "label": "B",
-            "optionTranslationZh": "为了强调它的重要性。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "scopeShift",
-              "subtype": "overstatement",
-              "sourceQuote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
-              "sourceHighlight": "has grown from 30 to over 700",
-              "optionText": "To emphasize its importance.",
-              "optionHighlight": "emphasize its importance",
-              "explanation": "作者提协会是借其会员增长来佐证整体疗法日益流行，目的不是强调协会本身的重要性，选项偷换了写作目的。"
-            },
-            "trapEvidence": [
-              {
-                "paragraphId": "para-2024-i-reading-c-4",
-                "quote": "Farber is certain that the holistic approach will grow more popular with time",
-                "anchor": "数据服务于论证疗法流行，非强调协会"
-              }
-            ]
-          },
-          {
-            "label": "C",
-            "optionTranslationZh": "为了赞扬兽医。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "To praise veterinarians.",
-              "explanation": "原文未提及作者意在赞扬兽医，提及协会是为印证整体疗法的发展趋势。"
-            }
-          },
-          {
-            "label": "D",
-            "optionTranslationZh": "为了倡导动物保护。",
-            "status": "wrong",
-            "trap": {
-              "primaryType": "unsupportedClaim",
-              "claim": "To advocate animal protection.",
-              "explanation": "原文未提及动物保护，全文主题是整体兽医疗法的疗效与发展，与倡导动物保护无关。"
-            }
-          }
-        ],
-        "locationParaphrases": [
-          {
-            "sourceText": "To prove Farber's point.",
-            "sourceRole": "correctOption",
-            "targetText": "if the past is any indication, he may be right",
-            "targetParagraphId": "para-2024-i-reading-c-4",
-            "relationType": "paraphrase",
-            "note": "选项 prove Farber's point 对应原文 if the past is any indication, he may be right，作者用协会会员增长（过去趋势）来印证 Farber 关于疗法会更流行的判断。"
-          },
-          {
-            "sourceText": "Why does the author mention the American Holistic Veterinary Medical Association?",
-            "sourceRole": "stem",
-            "targetText": "Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
-            "targetParagraphId": "para-2024-i-reading-c-4",
-            "relationType": "locationCue",
-            "note": "题干定位词 American Holistic Veterinary Medical Association 直接对应第四段会员增长数据句，该数据是论证 Farber 观点的依据。"
           }
         ]
       },
