@@ -1,7 +1,7 @@
 {
   "schemaVersion": "answer-key-v1",
   "paperId": "paper-2024-i",
-  "sourceAssetVersion": 4,
+  "sourceAssetVersion": 5,
   "answers": {
     "q-2024-i-021": {
       "questionId": "q-2024-i-021",
@@ -27,56 +27,56 @@
     "q-2024-i-024": {
       "questionId": "q-2024-i-024",
       "questionNo": 24,
-      "answer": "D",
+      "answer": "A",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-025": {
       "questionId": "q-2024-i-025",
       "questionNo": 25,
-      "answer": "A",
+      "answer": "C",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-026": {
       "questionId": "q-2024-i-026",
       "questionNo": 26,
-      "answer": "A",
+      "answer": "D",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-027": {
       "questionId": "q-2024-i-027",
       "questionNo": 27,
-      "answer": "C",
+      "answer": "A",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-028": {
       "questionId": "q-2024-i-028",
       "questionNo": 28,
-      "answer": "A",
+      "answer": "D",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-029": {
       "questionId": "q-2024-i-029",
       "questionNo": 29,
-      "answer": "C",
+      "answer": "A",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-030": {
       "questionId": "q-2024-i-030",
       "questionNo": 30,
-      "answer": "D",
+      "answer": "A",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },
     "q-2024-i-031": {
       "questionId": "q-2024-i-031",
       "questionNo": 31,
-      "answer": "A",
+      "answer": "C",
       "score": 2.5,
       "note": "AI 导题：答案解析版抽取"
     },

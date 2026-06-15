@@ -1,7 +1,7 @@
 {
   "schemaVersion": "grammar-fill-analysis-v1",
   "paperId": "paper-2024-i",
-  "sourceAssetVersion": 4,
+  "sourceAssetVersion": 5,
   "targetGroups": [
     "group-2024-i-grammar-fill"
   ],
