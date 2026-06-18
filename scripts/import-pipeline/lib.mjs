@@ -364,7 +364,7 @@ function isScoreOnlyFragment(t) {
  * Build the seven-choices group from a block of lines.
  * Blank markers (1)-(5) -> __36__-__40__.
  */
-function buildSevenGroup({ blockLines, tail }) {
+function buildSevenGroup({ blockLines, tail, stdStart = 36 }) {
   const joined = blockLines.join('\n')
 
   // Find option bank: A．...G．...
@@ -385,8 +385,8 @@ function buildSevenGroup({ blockLines, tail }) {
   // Also strip leading section header lines (Format B 第二节... line may appear at top)
   passage = passage.replace(/^第[一二三四五六七八九十]+节[^\n]*\n?/m, '')
 
-  // Replace (1)-(5) blank markers with __36__-__40__
-  passage = passage.replace(/\((\d)\)/g, (_, n) => `__${Number(n) + 35}__`)
+  // Replace (1)-(5) blank markers with __<stdStart>__..__<stdStart+4>__
+  passage = passage.replace(/\((\d)\)/g, (_, n) => `__${Number(n) + (stdStart - 1)}__`)
 
   const paragraphs = splitParas(passage)
     .filter((t) => t.length > 1 && !isScoreOnlyFragment(t))
@@ -400,12 +400,15 @@ function buildSevenGroup({ blockLines, tail }) {
     text: normalizePassageText(m[2].trim()),
   }))
 
-  const questions = [36, 37, 38, 39, 40].map((no, i) => ({
-    id: `q-${tail}-${pad(no)}`,
-    stem: String(no),
-    answerKey: answers[i],
-    blankId: `blank-${tail}-${pad(no)}`,
-  }))
+  const questions = Array.from({ length: 5 }, (_, i) => {
+    const no = stdStart + i
+    return {
+      id: `q-${tail}-${pad(no)}`,
+      stem: String(no),
+      answerKey: answers[i],
+      blankId: `blank-${tail}-${pad(no)}`,
+    }
+  })
 
   return {
     groupId: `group-${tail}-seven-choices`,
@@ -426,7 +429,8 @@ function buildSevenGroup({ blockLines, tail }) {
  * The pattern \s{2,}(\d{1,2})\s{2,} where \s includes \xa0.
  * Real numbers like 52.4 or 100 are NOT bare (they follow digits without space).
  */
-function buildCloze({ sectionText: txt, tail }) {
+function buildCloze({ sectionText: txt, tail, stdStart = 41 }) {
+  const offset = stdStart - 1
   // Strip Format A/B section headers and big-question prefix
   let body = txt
     // Format A: strip 三、完形填空 header
@@ -446,28 +450,14 @@ function buildCloze({ sectionText: txt, tail }) {
   let passage = firstOptIdx !== -1 ? body.slice(0, firstOptIdx) : body
   const optBlock = firstOptIdx !== -1 ? body.slice(firstOptIdx) : ''
 
-  // Replace wide-spaced bare numbers (blanks) -> __41__-__55__
-  // \xa0 is U+00A0, treat as whitespace for blank detection
-  passage = passage.replace(/([\s\xa0]{2,})(\d{1,2})([\s\xa0]{2,})/g, (m, before, n, after) => {
-    const num = Number(n)
-    if (num >= 1 && num <= 15) return ` __${num + 40}__ `
-    return m // not a cloze blank
-  })
-
-  const paragraphs = splitParas(passage)
-    .filter((t) => t.length > 1 && !isScoreOnlyFragment(t))
-    .map((t, i) => ({
-      id: `para-${tail}-cloze-${i === 0 ? 'title' : `p${i}`}`,
-      text: normalizePassageText(t),
-    }))
-
-  const questions = []
+  // Parse questions FIRST so we learn the real blank count (新课标 15 / 浙江老卷 20).
   // Match: (N) optional_score A. text B. text C. text D. text 【答案】X
+  const questions = []
   const re = /\((\d{1,2})\)\s*(?:\(\d+(?:\.\d+)?分\))?\s*A[．.]\s*(.*?)\s*B[．.]\s*(.*?)\s*C[．.]\s*(.*?)\s*D[．.]\s*(.*?)\s*【答案】\s*([A-D])/gs
   let m
   while ((m = re.exec(optBlock))) {
     const local = Number(m[1])
-    const no = local + 40
+    const no = local + offset
     questions.push({
       id: `q-${tail}-${pad(no)}`,
       stem: String(no),
@@ -481,6 +471,22 @@ function buildCloze({ sectionText: txt, tail }) {
       },
     })
   }
+  const blankCount = questions.length
+
+  // Replace wide-spaced bare numbers (blanks) -> __<stdStart>__.. using the real count.
+  // \xa0 is U+00A0, treat as whitespace for blank detection
+  passage = passage.replace(/([\s\xa0]{2,})(\d{1,2})([\s\xa0]{2,})/g, (m, before, n, after) => {
+    const num = Number(n)
+    if (num >= 1 && num <= blankCount) return ` __${num + offset}__ `
+    return m // not a cloze blank
+  })
+
+  const paragraphs = splitParas(passage)
+    .filter((t) => t.length > 1 && !isScoreOnlyFragment(t))
+    .map((t, i) => ({
+      id: `para-${tail}-cloze-${i === 0 ? 'title' : `p${i}`}`,
+      text: normalizePassageText(t),
+    }))
 
   return {
     groupId: `group-${tail}-cloze`,
@@ -780,7 +786,7 @@ export function buildGroups(fullText, paperId) {
       const blockLines = readingLines.slice(lineIdx, nextLineIdx)
 
       if (hasSevenOptionBank(blockLines)) {
-        const seven = buildSevenGroup({ blockLines, tail })
+        const seven = buildSevenGroup({ blockLines, tail, stdStart: readingStdNo })
         sevenGroup_raw.push(seven)
       } else if (hasReadingQuestions(blockLines)) {
         const letter = readingLetters[readingIdx]
@@ -814,10 +820,10 @@ export function buildGroups(fullText, paperId) {
       if (sevenBigQs.length > 0) {
         const { lineIdx: sLineIdx } = sevenBigQs[0]
         const sevenBlockLines = sevenLines.slice(sLineIdx)
-        sevenGroup_raw.push(buildSevenGroup({ blockLines: sevenBlockLines, tail }))
+        sevenGroup_raw.push(buildSevenGroup({ blockLines: sevenBlockLines, tail, stdStart: readingStdNo }))
       } else {
         // No explicit big-question number — use whole sevenLines block
-        sevenGroup_raw.push(buildSevenGroup({ blockLines: sevenLines, tail }))
+        sevenGroup_raw.push(buildSevenGroup({ blockLines: sevenLines, tail, stdStart: readingStdNo }))
       }
     }
   }
@@ -825,9 +831,9 @@ export function buildGroups(fullText, paperId) {
   if (sevenGroup_raw.length !== 1) throw new Error(`七选五: 期望找到1组, 实际找到${sevenGroup_raw.length}组`)
   const seven = sevenGroup_raw[0]
 
-  // ---- Cloze ----
+  // ---- Cloze ---- (题号接力: 阅读末题+1 跳过七选五5题)
   const clozeSec = sectionText(lines, clozeStart, grammarStart)
-  const cloze = buildCloze({ sectionText: clozeSec, tail })
+  const cloze = buildCloze({ sectionText: clozeSec, tail, stdStart: readingStdNo + 5 })
 
   // ---- Grammar ----
   const grammarSec = sectionText(lines, grammarStart, appStart)

@@ -51,7 +51,8 @@ function assertClozeAnalyzeInput(input) {
   if (!optionalString(paper.paperId)) throw new Error('paper.paperId 不能为空。')
   if (!optionalString(group.groupId)) throw new Error('group.groupId 不能为空。')
   if (!Array.isArray(group.paragraphs) || group.paragraphs.length === 0) throw new Error('group.paragraphs 不能为空。')
-  if (!Array.isArray(group.questions) || group.questions.length !== 15) throw new Error('完形填空 group 必须有 15 道题。')
+  // 新课标完形 15 空 (q41–q55)；浙江 6 月卷完形 20 空 (q36–q55)。两种官方格式都接受。
+  if (!Array.isArray(group.questions) || (group.questions.length !== 15 && group.questions.length !== 20)) throw new Error('完形填空 group 必须有 15 道题（新课标）或 20 道题（浙江 6 月卷）。')
   for (const question of group.questions) {
     if (!optionalString(question?.id)) throw new Error('题目缺少 id。')
     if (!optionalString(question?.blankId)) throw new Error(`题目 ${question?.id || ''} 缺少 blankId。`)

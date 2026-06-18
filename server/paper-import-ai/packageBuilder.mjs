@@ -3,6 +3,48 @@ import path from 'node:path'
 const READING_LABELS = ['A', 'B', 'C', 'D']
 const DEFAULT_SCORE = 2.5
 
+// 试卷格式 profile：按完形(cloze)题数选 —— 15=新课标, 20=浙江老卷(2020–2022 1月/6月/7月)。
+// newStandard 分支的 heading 必须逐字复现历史字面量(byte 兼容；勿改标点/全半角括号/空格)。
+const FORMAT_PROFILES = {
+  newStandard: {
+    readingLabels: READING_LABELS,
+    sevenScore: 2.5,
+    clozeScore: 1,
+    requireContinuationStarters: true,
+    headings: {
+      readingPart: '第二部分 阅读',
+      readingSection1: '第一节 阅读理解',
+      seven: '第二节 (共5小题；每小题2.5分，满分12.5分)',
+      langPart: '第三部分 语言运用(共两节，满分30分)',
+      cloze: '第一节(共15小题；每小题1分，满分15分)',
+    },
+  },
+  zjLegacy: {
+    readingLabels: READING_LABELS.slice(0, 3),
+    sevenScore: 2,
+    clozeScore: 1.5,
+    // 浙江早期"情节续写"(如 2020年7月卷)无段落开头语,合法格式 —— 开头语可选。
+    requireContinuationStarters: false,
+    headings: {
+      readingPart: '第二部分 阅读理解（共两节，满分35分）',
+      readingSection1: '第一节（共10小题；每小题2.5分，满分25分）',
+      seven: '第二节（共5小题；每小题2分，满分10分）',
+      langPart: '第三部分 语言运用（共两节，满分45分）',
+      cloze: '第一节（共20小题；每小题1.5分，满分30分）',
+    },
+  },
+}
+
+// 格式键 = 完形题数(PA MF-3)：15→新课标 / 20→浙江；缺完形→新课标(由 cloze_group_missing 接管)；
+// 其它题数→抛错,不静默回退。禁用 region/paperId 作格式键(provenance 在 builder 之后注入,
+// 且 region=浙江 也匹配新格式 paper-zj-2026-jan)。
+function resolveFormatProfile(clozeGroup) {
+  const n = Array.isArray(clozeGroup?.questions) ? clozeGroup.questions.length : null
+  if (n === 20) return FORMAT_PROFILES.zjLegacy
+  if (n === null || n === 15) return FORMAT_PROFILES.newStandard
+  throw issue('unknown_paper_format', `完形题数 ${n} 无法识别试卷格式(仅支持新课标 15 或浙江 20)，不能发布。`, { clozeQuestionCount: n })
+}
+
 function cloneJson(value) {
   return JSON.parse(JSON.stringify(value))
 }
@@ -185,9 +227,10 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
+  const profile = resolveFormatProfile(clozeGroup)
   const groups = [...(parseResult.readingGroups || [])].sort((a, b) => a.order - b.order)
   const letters = new Set(groups.map(groupLetter))
-  for (const label of READING_LABELS) {
+  for (const label of profile.readingLabels) {
     if (!letters.has(label)) {
       throw issue('reading_group_missing', `缺少 Reading ${label}，不能发布。`, { groupLabel: label })
     }
@@ -211,7 +254,8 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   if (!continuationGroup) {
     throw issue('continuation_writing_missing', '缺少读后续写，不能发布。')
   }
-  if (continuationGroup && (!continuationGroup.continuationStarters || continuationGroup.continuationStarters.length < 2)) {
+  // 新课标续写须给 2 段开头语;浙江早期"情节续写"(2020年7月卷)无开头语,合法,放行(profile 控制)。
+  if (profile.requireContinuationStarters && (!continuationGroup.continuationStarters || continuationGroup.continuationStarters.length < 2)) {
     throw issue('continuation_starters_missing', '读后续写缺少段落开头语，不能发布。')
   }
 
@@ -221,8 +265,8 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   const answerEntries = {}
   const contentGroups = {}
   const blocks = [
-    { type: 'partHeading', partId: `part-${examCodeFromPaperId(paperId)}-reading`, text: '第二部分 阅读' },
-    { type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-reading-choice`, text: '第一节 阅读理解' },
+    { type: 'partHeading', partId: `part-${examCodeFromPaperId(paperId)}-reading`, text: profile.headings.readingPart },
+    { type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-reading-choice`, text: profile.headings.readingSection1 },
   ]
 
   for (const group of groups) {
@@ -333,7 +377,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
         questionId: q.id,
         questionNo,
         answer: q.answerKey,
-        score: DEFAULT_SCORE,
+        score: profile.sevenScore,
         note: 'AI 导题：答案解析版抽取',
       }
     }
@@ -364,7 +408,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     })
 
     // Add seven-choices blocks.
-    blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-reading-seven`, text: '第二节 (共5小题；每小题2.5分，满分12.5分)' })
+    blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-reading-seven`, text: profile.headings.seven })
     blocks.push({ type: 'instruction', text: '阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。' })
     blocks.push({ type: 'group', groupId: sevenChoicesGroup.groupId })
 
@@ -423,7 +467,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
         questionId: q.id,
         questionNo,
         answer: q.answerKey,
-        score: 1,
+        score: profile.clozeScore,
         note: 'AI 导题：答案解析版抽取',
       }
     }
@@ -457,8 +501,8 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
 
     // Add cloze blocks.
     blocks.push({ type: 'pageBreakHint' })
-    blocks.push({ type: 'partHeading', partId: langPart.partId, text: '第三部分 语言运用(共两节，满分30分)' })
-    blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-cloze`, text: '第一节(共15小题；每小题1分，满分15分)' })
+    blocks.push({ type: 'partHeading', partId: langPart.partId, text: profile.headings.langPart })
+    blocks.push({ type: 'sectionHeading', sectionId: `section-${examCodeFromPaperId(paperId)}-cloze`, text: profile.headings.cloze })
     blocks.push({ type: 'instruction', text: '阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。' })
     blocks.push({ type: 'group', groupId: clozeGroup.groupId })
 
