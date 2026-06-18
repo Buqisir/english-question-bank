@@ -1,0 +1,384 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2020-jul-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2020-jul-seven-choices": {
+      "overview": "本文是一篇个人成长记叙文。作者回忆童年时因邻里没有同龄玩伴、哥哥又不愿陪自己而倍感孤独，但通过阅读、动手制作和户外活动这三件事找到了乐趣，并最终结交了朋友、收获了珍贵记忆。七选五共五空，依次落在哥哥不陪玩、爱看插图、阅读带来新世界、动手制作的兴趣、户外习惯等节点，考查语篇衔接与段落主题句的判断。",
+      "discourseStructure": {
+        "summary": "全文先点出童年孤独的处境（无同龄玩伴、哥哥不陪），再分三块叙述化解孤独的三件事：阅读、动手制作、户外活动，最后以珍贵回忆收束。各段多为先总后分或主题句领起结构。",
+        "units": [
+          {
+            "unitId": "unit-zj-2020-jul-seven-loneliness",
+            "heading": "童年的孤独",
+            "paragraphIds": [
+              "para-zj-2020-jul-seven-title"
+            ],
+            "summary": "开篇点明童年孤独：哥哥不愿陪玩、兴趣不同，邻里又无同龄孩子，只能独自打发时间。"
+          },
+          {
+            "unitId": "unit-zj-2020-jul-seven-reading",
+            "heading": "阅读的乐趣",
+            "paragraphIds": [
+              "para-zj-2020-jul-seven-p1"
+            ],
+            "summary": "母亲每晚读书引导作者爱上阅读，作者从带插图的童书读到长篇章节书，阅读为他打开了新世界。"
+          },
+          {
+            "unitId": "unit-zj-2020-jul-seven-making",
+            "heading": "动手制作",
+            "paragraphIds": [
+              "para-zj-2020-jul-seven-p2"
+            ],
+            "summary": "母亲鼓励作者动手做东西，作者由此开始终生的制作兴趣，学会变废为新，并因此结交了愿意一起做东西的朋友。"
+          },
+          {
+            "unitId": "unit-zj-2020-jul-seven-outdoors",
+            "heading": "户外的习惯",
+            "paragraphIds": [
+              "para-zj-2020-jul-seven-p3"
+            ],
+            "summary": "父母坚持让孩子无论天气季节都到户外活动，作者在四季户外玩耍中收获了珍藏至今的回忆。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2020-jul-031": {
+      "blankId": "blank-zj-2020-jul-031",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "years of loneliness",
+        "His friends teased him",
+        "babysitting his sister",
+        "his interests were far different from mine",
+        "no other kids of my age"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jul-seven-title",
+        "beforeQuote": "I experienced years of loneliness as a child.",
+        "afterQuote": "His friends teased him about babysitting his sister and his interests were far different from mine."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "His",
+          "signalSide": "context-after",
+          "targetText": "My older brother",
+          "relation": "空后 His friends、his interests 中的 His/his 需要一个男性单数先行词，正确选项 My older brother 正是这个指代对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "My older brother",
+          "signalSide": "option",
+          "targetText": "His friends / his interests",
+          "relation": "选项引入 My older brother 作为新人物，后文用 His/his 回指，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "couldn’t be bothered to play with me",
+          "signalSide": "option",
+          "targetText": "years of loneliness",
+          "relation": "哥哥不愿陪玩与前句 years of loneliness 形成因果话题呼应，解释孤独的来源。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空后用 His friends、his interests 回指一个男性，且整段在解释作者为何孤独，G 项引入哥哥不愿陪玩，既提供了 His/his 的先行词，又承接了开篇的孤独。",
+        "matchedClues": [
+          {
+            "contextSide": "His friends / his interests",
+            "optionSide": "My older brother",
+            "relation": "G 项的 brother 为空后所有 His/his 提供了唯一合理的男性单数先行词。"
+          },
+          {
+            "contextSide": "years of loneliness",
+            "optionSide": "couldn’t be bothered to play with me",
+            "relation": "哥哥不肯陪玩正是作者孤独的具体原因，话题前后一致。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 项 I was invited to play with another kid 是被邀请玩耍，与本段渲染的孤独、以及空后 His/his 的男性指代都不匹配。"
+        }
+      ],
+      "teachingNote": "先看空后出现的人称代词 His/his，再到选项中找能充当其先行词的人物名词。"
+    },
+    "q-zj-2020-jul-032": {
+      "blankId": "blank-zj-2020-jul-032",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "My love of the written word began early",
+        "my mother read to me every evening",
+        "reading books on my own before age 5",
+        "typical children’s books",
+        "ones with fewer pictures"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jul-seven-p1",
+        "beforeQuote": "My love of the written word began early as my mother read to me every evening.",
+        "afterQuote": "I started reading books on my own before age 5 and my mother took me to the public library once a week to borrow several books."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "fewer pictures",
+          "signalSide": "context-after",
+          "targetText": "colorful photographs in the books",
+          "relation": "下文 graduated ... to ones with fewer pictures 中的 pictures 与选项 colorful photographs 同属插图话题场，构成由多图到少图的对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "colorful photographs in the books",
+          "signalSide": "option",
+          "targetText": "fewer pictures",
+          "relation": "选项强调喜爱书里彩色插图，正好与后文减少插图的过渡相衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "typical children’s books",
+          "signalSide": "context-after",
+          "targetText": "colorful photographs",
+          "relation": "典型童书多配彩色插图，与选项内容属同一阅读启蒙话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空处描述作者幼年阅读的特点，下文说他后来才升级到插图更少的书，D 项谈喜爱书中彩色插图，与 fewer pictures 形成由多图到少图的自然过渡。",
+        "matchedClues": [
+          {
+            "contextSide": "ones with fewer pictures",
+            "optionSide": "colorful photographs in the books",
+            "relation": "photographs 与 pictures 同指插图，先爱看插图再过渡到少插图的书，逻辑顺承。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 项 I enjoyed reading stories aloud 谈朗读，与下文 reading books on my own、fewer pictures 等关于独立阅读和插图的线索都对不上。"
+        }
+      ],
+      "teachingNote": "抓住空后 fewer pictures 这一插图线索，回填同话题的 colorful photographs。"
+    },
+    "q-zj-2020-jul-033": {
+      "blankId": "blank-zj-2020-jul-033",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Reading opened new worlds to me",
+        "A bright spot for me turned out to be reading",
+        "years of loneliness",
+        "spend hours by myself"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jul-seven-p1",
+        "beforeQuote": "Reading opened new worlds to me.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Reading opened new worlds to me",
+          "signalSide": "context-before",
+          "targetText": "wasn’t alone any longer",
+          "relation": "阅读打开新世界正面回应了开篇的孤独，选项 wasn’t alone any longer 是这一效果的归纳。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "wasn’t alone any longer",
+          "signalSide": "option",
+          "targetText": "loneliness / spend hours by myself",
+          "relation": "选项 not alone 与全文反复出现的 loneliness、by myself 构成正反呼应，收束本段。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "A bright spot",
+          "signalSide": "context-before",
+          "targetText": "wasn’t alone any longer",
+          "relation": "段首称阅读是 a bright spot，段尾以 not alone 收尾，正向情绪话题首尾一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本段先说阅读是一抹亮色、为作者打开了新世界，作为段末总结，A 项 I wasn’t alone any longer 正好回应开篇的孤独，点明阅读化解了寂寞。",
+        "matchedClues": [
+          {
+            "contextSide": "Reading opened new worlds to me",
+            "optionSide": "wasn’t alone any longer",
+            "relation": "新世界让作者不再孤独，结果归纳与前句因果相承。"
+          },
+          {
+            "contextSide": "years of loneliness / spend hours by myself",
+            "optionSide": "wasn’t alone any longer",
+            "relation": "与开篇孤独形成正反对照，A 项收束本段主旨。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "此处 A 为正确项，最易与之混淆的是把它误放到第 31 空；需注意 31 空因 His/his 指代锁定 G，A 项应落在阅读化解孤独的段末。"
+        }
+      ],
+      "teachingNote": "段末空作总结句，应回扣本段与全文主线（阅读对抗孤独）。"
+    },
+    "q-zj-2020-jul-034": {
+      "blankId": "blank-zj-2020-jul-034",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "make what I wanted",
+        "making toy cars with cardboard boxes",
+        "constructing buildings",
+        "how creative my designs were",
+        "transform them into something new and useful"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jul-seven-p2",
+        "beforeQuote": "When my mother saw my creations, she told me how creative my designs were.",
+        "afterQuote": "I learned a lot about how to extend the life of objects and transform them into something new and useful."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Thus",
+          "signalSide": "option",
+          "targetText": "she told me how creative my designs were",
+          "relation": "Thus 表结果，承接前文母亲夸赞作者有创意，引出作者由此开启制作兴趣。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "making things",
+          "signalSide": "option",
+          "targetText": "making toy cars / constructing buildings",
+          "relation": "选项 making things 概括前文 making toy cars、constructing buildings 等动手制作活动。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "extend the life of objects",
+          "signalSide": "context-after",
+          "targetText": "lifelong interest in making things",
+          "relation": "下文学会变废为新，正是 making things 这一终生兴趣的具体展开，话题顺承。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "前文母亲称赞作者的设计富有创意，F 项以 Thus 表结果承接，点明作者由此开始终生的制作兴趣，再由下文变废为新加以展开。",
+        "matchedClues": [
+          {
+            "contextSide": "how creative my designs were",
+            "optionSide": "Thus, I began my lifelong interest in making things",
+            "relation": "母亲的肯定是因，开启制作兴趣是果，Thus 标示因果关系。"
+          },
+          {
+            "contextSide": "making toy cars / constructing buildings",
+            "optionSide": "interest in making things",
+            "relation": "making things 概括前文具体的制作活动，承上启下。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 项 I wasn’t alone any longer 谈不再孤独，与本段制作话题无关，且本段结尾另有 had friends 表达交友结果，A 放此处会与逻辑结果 Thus 争位。"
+        }
+      ],
+      "teachingNote": "见承接结果的过渡空，先认准 Thus 这类结果连接词，再核对前因后果。"
+    },
+    "q-zj-2020-jul-035": {
+      "blankId": "blank-zj-2020-jul-035",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "spend time outside",
+        "no matter the weather or season",
+        "making leaf houses in autumn",
+        "ice skating in winter",
+        "memories I treasure today"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jul-seven-p3",
+        "beforeQuote": "",
+        "afterQuote": "My parents made it a point for their two kids to spend time outside, no matter the weather or season."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "outdoors",
+          "signalSide": "option",
+          "targetText": "spend time outside",
+          "relation": "选项主题词 outdoors 与下文 spend time outside 同义，统领本段户外话题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "spend time outside",
+          "signalSide": "context-after",
+          "targetText": "being outdoors",
+          "relation": "段首句之后立即出现 spend time outside，与 outdoors 呼应，印证主题句判断。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Another habit",
+          "signalSide": "option",
+          "targetText": "reading / making things",
+          "relation": "Another habit 表明这是继阅读、制作之后作者养成的又一习惯，与前两段并列承接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "本段通篇围绕户外活动展开（spend time outside、四季玩耍），段首空需作主题句，E 项 Another habit I formed early was being outdoors 既点出户外主题，又以 Another 承接前两段的习惯。",
+        "matchedClues": [
+          {
+            "contextSide": "spend time outside / making leaf houses / ice skating",
+            "optionSide": "being outdoors",
+            "relation": "outdoors 总括下文一切户外活动，是本段主题词。"
+          },
+          {
+            "contextSide": "reading / making things 两段",
+            "optionSide": "Another habit I formed early",
+            "relation": "Another 表明户外是又一项早年养成的习惯，使三段并列衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 项 Thus, I began my lifelong interest in making things 谈制作，已用于第 34 空，且与本段户外主题不符，不能作本段主题句。"
+        }
+      ],
+      "teachingNote": "段首主题空要抓住全段反复出现的关键词（outside），选出能统领全段的主题句。"
+    }
+  }
+}

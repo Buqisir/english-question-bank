@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-zj-2022-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jun-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2022-jun-grammar-fill": {
+      "overview": "说明文：介绍把油画转化为可触知的3D模型，让盲人也能通过触摸欣赏艺术。"
+    }
+  },
+  "blanks": {
+    "q-zj-2022-jun-056": {
+      "blankId": "blank-zj-2022-jun-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "appreciate",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "be appreciated",
+      "role": null,
+      "path": null,
+      "reason": "句中无其它谓语，本空是谓语动词。情态动词 can 后接动词原形；主语 a painting 是 appreciate 的承受者，故用被动 be appreciated。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "how can a painting",
+          "signalSide": "passage",
+          "relation": "主语 a painting 是被欣赏的对象，且 can 后须接原形，决定用被动 be + 过去分词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "by someone who’s blind",
+          "signalSide": "passage",
+          "relation": "by 引出动作发出者，进一步印证谓语为被动语态。"
+        }
+      ],
+      "teachingNote": "情态动词后若主语是动作承受者，用 can be + 过去分词。"
+    },
+    "q-zj-2022-jun-057": {
+      "blankId": "blank-zj-2022-jun-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "do",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to do",
+      "role": "object",
+      "path": "fast",
+      "reason": "tell sb (not) to do sth 为固定搭配，宾语补足语用动词不定式；否定词 not 置于 to 前，故填 to do。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "gallery signs tell you not",
+          "signalSide": "passage",
+          "relation": "tell sb (not) to do 固定句型，锁定不定式作宾语补足语。"
+        }
+      ],
+      "teachingNote": "tell/ask/want sb to do 后接不定式；否定时 not 紧贴 to 之前。"
+    },
+    "q-zj-2022-jun-058": {
+      "blankId": "blank-zj-2022-jun-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "photograph",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "photographer",
+      "role": null,
+      "path": null,
+      "reason": "a former ___ 后接名词且指人；冠词 a 与 former 提示需要单数可数的“职业人”名词，故由 photograph 派生为 photographer。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "a former",
+          "signalSide": "passage",
+          "relation": "a former + 单数名词，且与 his team 呼应指人，决定用表人的 photographer。"
+        }
+      ],
+      "teachingNote": "冠词+形容词后缺名词；若语境指人，用 -er/-or 等表人名词。"
+    },
+    "q-zj-2022-jun-059": {
+      "blankId": "blank-zj-2022-jun-059",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "the + 形容词表示一类人，the blind 指“盲人这一群体”，与上文 someone who’s blind 呼应，故填 the。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "show art to",
+          "signalSide": "passage",
+          "relation": "to 后需名词性成分，the + blind 构成“盲人群体”作介词宾语。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "someone who’s blind",
+          "signalSide": "passage",
+          "relation": "上文已点明 blind，此处 the blind 回指并泛指盲人这一类人。"
+        }
+      ],
+      "teachingNote": "the + 形容词表示一类人（the rich/the blind），作复数概念。"
+    },
+    "q-zj-2022-jun-060": {
+      "blankId": "blank-zj-2022-jun-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "exist",
+      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "answer": "existing",
+      "role": null,
+      "path": null,
+      "reason": "their ___ senses 中空格修饰名词 senses，需形容词；动词 exist 变 -ing 形容词 existing，表“现有的、既有的”。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "their",
+          "signalSide": "passage",
+          "relation": "形容词性物主代词 their 后接修饰语 + 名词 senses，空格作定语须用形容词。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "senses",
+          "signalSide": "passage",
+          "relation": "被修饰名词 senses 决定空格填形容词 existing。"
+        }
+      ],
+      "teachingNote": "动词在“代词/限定词 + ___ + 名词”间作定语，常用 -ing 形容词。"
+    },
+    "q-zj-2022-jun-061": {
+      "blankId": "blank-zj-2022-jun-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "sight",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "sighted",
+      "role": null,
+      "path": null,
+      "reason": "___ people 中空格修饰名词 people，需形容词；与上文 blind 形成对照，名词 sight 加 -ed 派生形容词 sighted，意为“有视力的”。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "people, says Ella",
+          "signalSide": "passage",
+          "relation": "被修饰名词 people 决定空格须填形容词，故 sight 变 sighted。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "in a way similar to that of",
+          "signalSide": "passage",
+          "relation": "similar to 把盲人与“有视力的人”对比，呼应 sighted（与 blind 相对）。"
+        }
+      ],
+      "teachingNote": "名词加 -ed 可派生形容词（sighted/talented），置于名词前作定语。"
+    },
+    "q-zj-2022-jun-062": {
+      "blankId": "blank-zj-2022-jun-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "at",
+      "role": null,
+      "path": null,
+      "reason": "表示“在几岁时”用 at age + 数字；went blind suddenly ___ age seven 缺介词，故填 at。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "age seven",
+          "signalSide": "passage",
+          "relation": "at age + 数字为固定搭配，表示“在某个年龄”。"
+        }
+      ],
+      "teachingNote": "表年龄用 at age seven / at the age of seven，介词用 at。"
+    },
+    "q-zj-2022-jun-063": {
+      "blankId": "blank-zj-2022-jun-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "notice",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "noticed",
+      "role": null,
+      "path": null,
+      "reason": "主句缺谓语，本空为谓语动词；与上文 felt、went blind 同属过去叙事，时态用一般过去时 noticed。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "When he felt a 3D version",
+          "signalSide": "passage",
+          "relation": "时间状语从句用过去时 felt，主句呼应用一般过去时 noticed。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "he said",
+          "signalSide": "passage",
+          "relation": "全文叙述为过去时（said），印证主句谓语用 noticed。"
+        }
+      ],
+      "teachingNote": "叙述过去发生的事，主句谓语随上下文用一般过去时。"
+    },
+    "q-zj-2022-jun-064": {
+      "blankId": "blank-zj-2022-jun-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "independent",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "independence",
+      "role": null,
+      "path": null,
+      "reason": "this means ___ 中 means 后需名词作宾语；形容词 independent 派生为名词 independence，意为“独立”。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "this means",
+          "signalSide": "passage",
+          "relation": "及物动词 mean 后接名词作宾语，故形容词须变名词 independence。"
+        }
+      ],
+      "teachingNote": "动词后缺宾语时填名词；形容词去 -t 加 -ce 变抽象名词（independent→independence）。"
+    },
+    "q-zj-2022-jun-065": {
+      "blankId": "blank-zj-2022-jun-065",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "being able to see it ___ to form my opinion 中，see it 与 (to) form my opinion 为并列动作，用并列连词 and 连接。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "being able to see it",
+          "signalSide": "passage",
+          "relation": "see it 与其后 form my opinion 是并列的两个动作，需并列连词 and。"
+        }
+      ],
+      "teachingNote": "连接两个对等的动作/成分用并列连词 and。"
+    }
+  }
+}

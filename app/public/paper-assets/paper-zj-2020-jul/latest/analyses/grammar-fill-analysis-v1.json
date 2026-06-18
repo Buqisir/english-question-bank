@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2020-jul-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2020-jul-grammar-fill": {
+      "overview": "说明文：讲述自公元前一万年起农业的兴起如何让人类逐步掌控世界，并随科学发展不断变革耕作方式。"
+    }
+  },
+  "blanks": {
+    "q-zj-2020-jul-056": {
+      "blankId": "blank-zj-2020-jul-056",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "in",
+      "role": null,
+      "path": null,
+      "reason": "the world (that) they lived ___ 是省略关系词的定语从句，从句谓语 live 与表地点的先行词 world 需借助介词 in 搭配（live in a place），介词被留在句末。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "the world they lived",
+          "signalSide": "passage",
+          "relation": "live + in 表示『生活在某地』，定语从句把介词 in 的宾语 world 提前，介词留在空处。"
+        }
+      ],
+      "teachingNote": "定语从句句末缺介词时，回到从句谓语动词与先行词的固定搭配（live in）补出该介词。"
+    },
+    "q-zj-2020-jul-057": {
+      "blankId": "blank-zj-2020-jul-057",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "what",
+      "role": null,
+      "path": null,
+      "reason": "depend on 后接宾语从句，从句 ___ could be hunted 缺主语且无先行词，需用 what 既引导名词性从句又充当从句主语（=the things that）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "depend less on",
+          "signalSide": "passage",
+          "relation": "介词 on 后需要一个名词性从句作宾语，从句内缺主语，无先行词，故用 what。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "could be hunted or gathered",
+          "signalSide": "passage",
+          "relation": "从句谓语前缺主语，what 兼作连接词与主语。"
+        }
+      ],
+      "teachingNote": "介词后从句缺成分又无先行词，用 what 引导名词性从句并补足所缺成分。"
+    },
+    "q-zj-2020-jul-058": {
+      "blankId": "blank-zj-2020-jul-058",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "than",
+      "role": null,
+      "path": null,
+      "reason": "前面 more food per person 出现比较级 more，需用 than 引出比较对象 hunting and gathering，构成 more...than 比较结构。",
+      "evidence": [
+        {
+          "type": "comparison",
+          "signalText": "more food per person",
+          "signalSide": "passage",
+          "relation": "比较级 more 要求后接 than 引出被比较的对象。"
+        }
+      ],
+      "teachingNote": "见到比较级 more/-er 而后面缺连接词时，补 than 引出比较对象。"
+    },
+    "q-zj-2020-jul-059": {
+      "blankId": "blank-zj-2020-jul-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "need",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was needed",
+      "role": null,
+      "path": null,
+      "reason": "本分句缺谓语，主语 more food 与 need 是被动关系（食物被需要），全文叙述用一般过去时，故用被动一般过去时 was needed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "more food",
+          "signalSide": "passage",
+          "relation": "主语 food 是 need 的受动者，决定用被动语态且为单数。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "as more children were born",
+          "signalSide": "passage",
+          "relation": "并列分句 were born 为一般过去时，呼应本空也用过去时。"
+        }
+      ],
+      "teachingNote": "谓语空先认主语与动词的主被动关系，再由全文时态锁定时态（此处过去被动）。"
+    },
+    "q-zj-2020-jul-060": {
+      "blankId": "blank-zj-2020-jul-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "change",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to change",
+      "role": "attributive",
+      "path": "fast",
+      "reason": "句子已有谓语 gave，change 处非谓语；the power 后接动词不定式作后置定语表『改变…的力量』，固定搭配 the power to do sth 直接锁定 to-inf。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the power of technology",
+          "signalSide": "passage",
+          "relation": "被修饰名词 power 接不定式作定语（the power to do sth），故用 to change。"
+        }
+      ],
+      "teachingNote": "名词 power/ability/chance 等后接不定式作定语，直接走快路填 to do。"
+    },
+    "q-zj-2020-jul-061": {
+      "blankId": "blank-zj-2020-jul-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "discover",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "had discovered",
+      "role": null,
+      "path": null,
+      "reason": "本分句缺谓语，主语 people 与 discover 是主动关系；时间状语 By about 6000 B.C. 表示『到过去某时间点为止已完成』，故用过去完成时 had discovered。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "By about 6000 B. C.",
+          "signalSide": "passage",
+          "relation": "By + 过去时间点表示截止该时已完成，锁定过去完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "people",
+          "signalSide": "passage",
+          "relation": "主语 people 主动发出 discover 的动作，用主动语态。"
+        }
+      ],
+      "teachingNote": "『by + 过去时间点』+『到那时已…』的语境，谓语用过去完成时 had done。"
+    },
+    "q-zj-2020-jul-062": {
+      "blankId": "blank-zj-2020-jul-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "season",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "seasons",
+      "role": null,
+      "path": null,
+      "reason": "work with the ___ 中提示词为可数名词 season，泛指四季应用复数 seasons，与后文『在合适的时间播种』顺应季节变化的语义一致。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "work with the",
+          "signalSide": "passage",
+          "relation": "可数名词 season 在此泛指各个季节，需用复数 seasons。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "planting at the right time",
+          "signalSide": "passage",
+          "relation": "顺应多个季节/时节播种，语义支持复数 seasons。"
+        }
+      ],
+      "teachingNote": "提示词是可数名词且泛指整体时用复数。"
+    },
+    "q-zj-2020-jul-063": {
+      "blankId": "blank-zj-2020-jul-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "make",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "making",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "主句谓语为 learned，make 处非谓语；该结构与前面 planting 并列作伴随状语，逻辑主语 they 主动 make use of，无目的/将来含义，故排除 to-inf 用现在分词 making。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "planting at the right time",
+          "signalSide": "passage",
+          "relation": "前面用现在分词 planting 作状语，并列处也用现在分词 making。"
+        },
+        {
+          "type": "subject",
+          "signalText": "they learned",
+          "signalSide": "passage",
+          "relation": "逻辑主语 they 主动发出 make 的动作，用现在分词表主动伴随。"
+        }
+      ],
+      "teachingNote": "状语非谓语先测有无目的/将来含义（无则排除 to do），主动伴随用 doing，并可与上文并列结构呼应。"
+    },
+    "q-zj-2020-jul-064": {
+      "blankId": "blank-zj-2020-jul-064",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "with ___ rise of science 中，rise 后接 of 短语特指『科学的兴起』，为独一无二/特指的名词，需用定冠词 the。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "rise of science",
+          "signalSide": "passage",
+          "relation": "of science 把 rise 限定为特指『科学的兴起』，用定冠词 the。"
+        }
+      ],
+      "teachingNote": "名词后带 of 短语形成特指（the rise of…）时，用定冠词 the。"
+    },
+    "q-zj-2020-jul-065": {
+      "blankId": "blank-zj-2020-jul-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "mean",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "meant",
+      "role": null,
+      "path": null,
+      "reason": "本句缺谓语，主语 New methods 与 mean 是主动关系；全文叙述历史变化用一般过去时，故用 meant。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "New methods",
+          "signalSide": "passage",
+          "relation": "主语 methods 主动发出 mean 的动作，决定用主动语态。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "fewer people worked in farming",
+          "signalSide": "passage",
+          "relation": "宾语从句谓语 worked 为一般过去时，呼应主句也用过去时 meant。"
+        }
+      ],
+      "teachingNote": "谓语空确认主被动后，依全文叙事时态（过去）定时态。"
+    }
+  }
+}

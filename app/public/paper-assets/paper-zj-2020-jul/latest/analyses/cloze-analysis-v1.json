@@ -1,0 +1,918 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2020-jul-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2020-jul-cloze": {
+      "overview": "记叙文。一位放牧54年的牧羊人某天去救一只走失的羊羔，下车时拖拉机意外滑动并冲过高速公路，狗 Don 还坐在车上；最终人车皆安然无恙，作者特意奖励了 Don。",
+      "affectiveArc": "情感主线由平静转向惊恐紧张（拖拉机失控冲向高速），高潮处提心吊胆，结局虚惊一场、转危为安，最后归于温情与庆幸。"
+    }
+  },
+  "blanks": {
+    "q-zj-2020-jul-036": {
+      "blankId": "blank-zj-2020-jul-036",
+      "blankNo": 36,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "主语 I 在田里偶然“看见/发现”一只走失的羊羔，spot a lost lamb 搭配成立，与后文 had become separated 描述的走失状态呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dropped",
+          "meaning": "掉落、丢下"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "carried",
+          "meaning": "搬运、抱着"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "returned",
+          "meaning": "归还、返回"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a lost lamb",
+          "signalSide": "context-after",
+          "targetText": "spotted a lost lamb",
+          "relation": "动作的宾语是 a lost lamb，spot（发现）走失的羊羔施受关系成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "had become separated",
+          "signalSide": "context-after",
+          "targetText": "spotted",
+          "relation": "下文说羊羔已与母羊走散，印证作者是先“发现”了这只迷途羊羔。"
+        }
+      ],
+      "teachingNote": "动词填空先看宾语，确定与“走失羊羔”搭配最自然的“发现”义。"
+    },
+    "q-zj-2020-jul-037": {
+      "blankId": "blank-zj-2020-jul-037",
+      "blankNo": 37,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "羊羔与它的 mother（母羊）走散，separated from its mother 搭配合理；下一段标题词 Lamb and mother reunited 直接复现“母羊”这一话题词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "kids",
+          "meaning": "孩子们、小山羊"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "friends",
+          "meaning": "朋友们"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "owner",
+          "meaning": "主人（作者本人即主人，逻辑不通）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "Lamb and mother",
+          "signalSide": "context-after",
+          "targetText": "its mother",
+          "relation": "后文 Lamb and mother reunited 复现“母羊”，锁定走散对象是 mother。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "separated from its",
+          "signalSide": "context-before",
+          "targetText": "its mother",
+          "relation": "separated from its mother 表示羊羔与母羊走散，搭配成立。"
+        }
+      ],
+      "teachingNote": "名词填空回看下文同义复现词（mother）锁定语义场。"
+    },
+    "q-zj-2020-jul-038": {
+      "blankId": "blank-zj-2020-jul-038",
+      "blankNo": 38,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "作者跳下拖拉机是为了“照料/照看”这只走失的羊羔，tend to it 表示照料它，与救助走失羊羔的语境合成义吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ask about",
+          "meaning": "询问、打听"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "play with",
+          "meaning": "和……玩耍"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "run into",
+          "meaning": "偶然碰见、撞上"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "jumped out of the tractor",
+          "signalSide": "context-before",
+          "targetText": "tend to it",
+          "relation": "作者特意跳下车，目的是照料走失羊羔，tend to 表照看。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "tend",
+          "signalSide": "option",
+          "targetText": "tend to",
+          "relation": "tend to 意为照料、照看，对象是 it（羊羔）。"
+        }
+      ],
+      "teachingNote": "短语填空用语境合成义判断，下车救羊的目的即“照料”。"
+    },
+    "q-zj-2020-jul-039": {
+      "blankId": "blank-zj-2020-jul-039",
+      "blankNo": 39,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "承接上文羊羔与母羊走散，此处 Lamb and mother reunited 表示母子重新团聚，reunite 与 separated 形成反义呼应，逻辑顺承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "freed",
+          "meaning": "被释放、解救"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "switched",
+          "meaning": "被调换、转换"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "examined",
+          "meaning": "被检查"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "separated from its",
+          "signalSide": "context-before",
+          "targetText": "Lamb and mother reunited",
+          "relation": "前文 separated（走散）与 reunited（重聚）构成反义呼应，团聚后作者才转身回车。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Lamb and mother",
+          "signalSide": "stem",
+          "targetText": "reunited",
+          "relation": "主语是 Lamb and mother，二者“重聚”施受关系成立。"
+        }
+      ],
+      "teachingNote": "看前文 separated，反义复现锁定“重聚”reunited。"
+    },
+    "q-zj-2020-jul-040": {
+      "blankId": "blank-zj-2020-jul-040",
+      "blankNo": 40,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "拖拉机突然滑走令作者意外，因为他跳车时已拉了手刹；后句 because I had put the handbrake on 给出“本不该动”的反差，unexpected（出乎意料）与情境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "dangerous",
+          "meaning": "危险的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "embarrassing",
+          "meaning": "尴尬的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "difficult",
+          "meaning": "困难的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "This was so",
+          "signalSide": "context-before",
+          "targetText": "so unexpected",
+          "relation": "表语形容词修饰主语 This（指拖拉机滑走一事），so unexpected 描述该事“如此出乎意料”，修饰关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "because I had put the handbrake on",
+          "signalSide": "context-after",
+          "targetText": "unexpected",
+          "relation": "because 引出原因：已拉手刹却仍滑走，构成反差，故“出乎意料”。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "move suddenly away",
+          "signalSide": "context-before",
+          "targetText": "unexpected",
+          "relation": "拖拉机 suddenly 突然滑走，呼应“出乎意料”的情感基调。"
+        }
+      ],
+      "teachingNote": "形容词看 because 给出的反差因果，定“意外”这一情感色彩。"
+    },
+    "q-zj-2020-jul-041": {
+      "blankId": "blank-zj-2020-jul-041",
+      "blankNo": 41,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "句首副词修饰整句，作者由“已拉手刹车却动了”推断出是 Don 弄动了车，Obviously（显然）表示基于线索的合理推断，与上文反差顺承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Fortunately",
+          "meaning": "幸运地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Generally",
+          "meaning": "通常、一般地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Immediately",
+          "meaning": "立即、马上"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "Don had somehow made the",
+          "signalSide": "context-after",
+          "targetText": "Obviously",
+          "relation": "由前文已拉手刹的反差推出“显然是 Don 弄动了车”，Obviously 标示推断。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "somehow",
+          "signalSide": "context-after",
+          "targetText": "Obviously",
+          "relation": "somehow（不知怎么地）与 Obviously（显然）共同表达作者的推测口吻。"
+        }
+      ],
+      "teachingNote": "句首副词看全句逻辑，由线索作推断时选 Obviously。"
+    },
+    "q-zj-2020-jul-042": {
+      "blankId": "blank-zj-2020-jul-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "made the vehicle move 指 Don 弄得这辆车动了起来，vehicle（交通工具）正是上文反复出现的 tractor 的上义同指词，语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lamb",
+          "meaning": "羊羔"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "seat",
+          "meaning": "座位"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fence",
+          "meaning": "篱笆、围栏"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "tractor",
+          "signalSide": "context-before",
+          "targetText": "the vehicle move",
+          "relation": "上文反复出现 tractor，vehicle 为其上义同指词，指同一辆车。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "made the",
+          "signalSide": "context-before",
+          "targetText": "vehicle move",
+          "relation": "made the vehicle move 表示弄得车动，搭配成立。"
+        }
+      ],
+      "teachingNote": "名词回指上文 tractor，选其同指上义词 vehicle。"
+    },
+    "q-zj-2020-jul-043": {
+      "blankId": "blank-zj-2020-jul-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "心都凉了之际作者“眼睁睁看着”拖拉机驶向高速，saw the tractor heading towards 构成 see sth doing 结构，主语 I 目睹该过程，施受合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "stopped",
+          "meaning": "停下、阻止"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remembered",
+          "meaning": "记得、想起"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "drove",
+          "meaning": "驾驶"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the tractor heading towards",
+          "signalSide": "context-after",
+          "targetText": "saw the tractor heading",
+          "relation": "see sth doing 结构：作者看着拖拉机正驶向高速，宾语补足语为 heading。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "My heart froze in my chest",
+          "signalSide": "context-before",
+          "targetText": "saw",
+          "relation": "心凉之时眼睁睁“看着”险情发生，与目睹情感一致。"
+        }
+      ],
+      "teachingNote": "see sth doing 结构：心凉时只能眼看险情，选 saw。"
+    },
+    "q-zj-2020-jul-044": {
+      "blankId": "blank-zj-2020-jul-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "拖拉机正驶向 motorway（高速公路），与开篇 near where a motorway cuts through my land 设定的地点呼应，且下文穿过 fast-flowing traffic 的车道，语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "crowd",
+          "meaning": "人群"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "field",
+          "meaning": "田地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hill",
+          "meaning": "小山、山坡"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "heading towards the",
+          "signalSide": "context-before",
+          "targetText": "heading towards the motorway",
+          "relation": "head towards the motorway 表示驶向高速公路，介词 towards 的宾语为 motorway，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a motorway cuts through my land",
+          "signalSide": "context-before",
+          "targetText": "heading towards the motorway",
+          "relation": "开篇点明地块旁就是高速公路，故失控车正驶向 motorway。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "fast—flowing traffic",
+          "signalSide": "context-after",
+          "targetText": "the motorway",
+          "relation": "下文 fast-flowing traffic 描述高速车流，复现 motorway 这一场景。"
+        }
+      ],
+      "teachingNote": "名词回扣开篇地点设定 motorway，下文车流再印证。"
+    },
+    "q-zj-2020-jul-045": {
+      "blankId": "blank-zj-2020-jul-045",
+      "blankNo": 45,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "作者拼命追赶却没能 catch up（赶上）失控的拖拉机，ran desperately but failed to catch up 与“追车追不上”的语境合成义吻合，下句车随即撞穿篱笆。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "take off",
+          "meaning": "起飞、脱下、突然离开"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hold back",
+          "meaning": "阻止、抑制、退缩"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "get out",
+          "meaning": "出去、出来"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "ran desperately but failed to",
+          "signalSide": "context-before",
+          "targetText": "catch up",
+          "relation": "拼命奔跑却没能赶上，run 与 catch up 构成追赶语义链。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "It crashed through a wooden fence",
+          "signalSide": "context-after",
+          "targetText": "failed to catch up",
+          "relation": "下句车撞穿篱笆，证明作者没追上、没能阻止。"
+        }
+      ],
+      "teachingNote": "短语看“拼命跑但失败”的合成义，追车追不上即 catch up。"
+    },
+    "q-zj-2020-jul-046": {
+      "blankId": "blank-zj-2020-jul-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "拖拉机冲过篱笆消失后，作者“最后”看到的是 Don 的脸，the last thing I saw 表示视线中最后所见，与 disappeared 的时序顺承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "real",
+          "meaning": "真实的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "best",
+          "meaning": "最好的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "basic",
+          "meaning": "基本的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "thing I saw was Don",
+          "signalSide": "context-after",
+          "targetText": "The last thing I saw",
+          "relation": "the last thing sb saw（某人最后看到的东西）为固定表达，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "disappeared",
+          "signalSide": "context-before",
+          "targetText": "The last thing I saw",
+          "relation": "车 disappeared（消失）前，作者最后瞥见的是 Don 的脸，时序为“最后”。"
+        }
+      ],
+      "teachingNote": "形容词扣固定表达 the last thing sb saw，承接“车消失前”。"
+    },
+    "q-zj-2020-jul-047": {
+      "blankId": "blank-zj-2020-jul-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "提心吊胆中作者“跑到/赶到”篱笆边并探头张望，reached the fence and looked over 构成动作链，reach the fence 表示到达篱笆处，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fixed",
+          "meaning": "修理、固定"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "noticed",
+          "meaning": "注意到"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "closed",
+          "meaning": "关闭"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the fence and looked over",
+          "signalSide": "context-after",
+          "targetText": "reached the fence",
+          "relation": "到达篱笆后才能探头 looked over，reach the fence 与后续动作衔接。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Heart in mouth",
+          "signalSide": "context-before",
+          "targetText": "reached",
+          "relation": "提心吊胆地赶到篱笆边张望，与急切赶到的动作一致。"
+        }
+      ],
+      "teachingNote": "动词看后续动作 looked over，先“到达”篱笆才能探看。"
+    },
+    "q-zj-2020-jul-048": {
+      "blankId": "blank-zj-2020-jul-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "拖拉机奇迹般穿过高速后“停靠/抵”在中央隔离带的防撞栏上，resting against the crash barrier 表示倚靠静止，against 与“抵着栏”的状态搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "running",
+          "meaning": "运转、行驶"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "parking",
+          "meaning": "停车（指人主动泊车）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "turning",
+          "meaning": "转弯、转动"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "against the crash barrier",
+          "signalSide": "context-after",
+          "targetText": "resting against",
+          "relation": "rest against the barrier 表示倚靠在防撞栏上静止，介词 against 锁定“抵靠”状态。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "having miraculously",
+          "signalSide": "context-after",
+          "targetText": "resting",
+          "relation": "奇迹般穿过高速后，车已停下倚在栏上，故为静止的 resting。"
+        }
+      ],
+      "teachingNote": "动词看介词 against，车抵在防撞栏上静止即 resting。"
+    },
+    "q-zj-2020-jul-049": {
+      "blankId": "blank-zj-2020-jul-049",
+      "blankNo": 49,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "拖拉机穿过的是车流飞驰的“繁忙”公路，crossed the busy road 由紧随其后的 with fast-flowing traffic 直接释义，busy road 与高速车流搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "steep",
+          "meaning": "陡峭的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "long",
+          "meaning": "长的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "rough",
+          "meaning": "崎岖的、粗糙的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with fast—flowing traffic",
+          "signalSide": "context-after",
+          "targetText": "the busy road",
+          "relation": "with fast-flowing traffic 直接说明这是车流繁忙的路，busy 与之对应。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "motorway",
+          "signalSide": "context-before",
+          "targetText": "the busy road",
+          "relation": "前文 motorway 与 fast-flowing traffic 印证这是繁忙的高速公路。"
+        }
+      ],
+      "teachingNote": "形容词由后置 with fast-flowing traffic 释义，定 busy。"
+    },
+    "q-zj-2020-jul-050": {
+      "blankId": "blank-zj-2020-jul-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "作者“走近/靠近”拖拉机时，Don 才跳到路上奔向他，as I approached the tractor 表示靠近车的过程，approach the tractor 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "abandoned",
+          "meaning": "抛弃、放弃"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "recognized",
+          "meaning": "认出"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "repaired",
+          "meaning": "修理"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the tractor he jumped out",
+          "signalSide": "context-after",
+          "targetText": "approached the tractor",
+          "relation": "作者走近车时 Don 跳出，approach the tractor 与“走近”动作搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "dashed back to me",
+          "signalSide": "context-after",
+          "targetText": "approached",
+          "relation": "Don 随后冲回作者身边，印证作者正朝车“靠近”。"
+        }
+      ],
+      "teachingNote": "动词看 as 引导的同步动作，作者“靠近”车时狗才跳出。"
+    },
+    "q-zj-2020-jul-051": {
+      "blankId": "blank-zj-2020-jul-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "Don 跳到路上又冲回作者身边，显然“安然无恙”，apparently unhurt 表示看上去没受伤，与随后能 dashed back 的行动一致，呼应转危为安的基调。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unclean",
+          "meaning": "不干净的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "uncertain",
+          "meaning": "不确定的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unhappy",
+          "meaning": "不高兴的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "apparently",
+          "signalSide": "context-before",
+          "targetText": "apparently unhurt",
+          "relation": "副词 apparently 修饰表语形容词，apparently unhurt 表示“看上去毫发无伤”，修饰关系成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "dashed back to me",
+          "signalSide": "context-after",
+          "targetText": "unhurt",
+          "relation": "Don 能飞奔回来，说明它毫发无伤，apparently unhurt 与行动一致。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "no one got badly hurt",
+          "signalSide": "context-after",
+          "targetText": "unhurt",
+          "relation": "下文 no one got badly hurt 复现“无人受伤”，与 unhurt 呼应。"
+        }
+      ],
+      "teachingNote": "形容词看 Don 还能飞奔回来，情感一致选“没受伤”unhurt。"
+    },
+    "q-zj-2020-jul-052": {
+      "blankId": "blank-zj-2020-jul-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "警察“赶到/到场”后高速公路恢复正常通行，The police arrived 表示警方到达处理现场，与 the motorway ran normally again 的善后结果顺承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "replied",
+          "meaning": "回复、答复"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "survived",
+          "meaning": "幸存、活下来"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "waited",
+          "meaning": "等待"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The police",
+          "signalSide": "stem",
+          "targetText": "The police arrived",
+          "relation": "主语 The police 与 arrived 搭配，表示警方赶到现场。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "the motorway ran normally again",
+          "signalSide": "context-after",
+          "targetText": "arrived",
+          "relation": "警察到场处理后高速恢复正常，and 连接“到达—恢复通行”的因果时序。"
+        }
+      ],
+      "teachingNote": "动词看主语 police 与善后结果，警方“赶到”高速才复通。"
+    },
+    "q-zj-2020-jul-053": {
+      "blankId": "blank-zj-2020-jul-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "结果无人重伤，作者“简直不敢相信自己的运气”，believe my luck 为固定表达，与 no one got badly hurt 的庆幸结局以及 miraculously 的奇迹色彩一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ability",
+          "meaning": "能力"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dream",
+          "meaning": "梦想"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "idea",
+          "meaning": "主意、想法"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "couldn’t quite believe my",
+          "signalSide": "context-before",
+          "targetText": "believe my luck",
+          "relation": "couldn't believe one's luck（不敢相信自己的运气）为固定搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "no one got badly hurt",
+          "signalSide": "context-after",
+          "targetText": "my luck",
+          "relation": "无人重伤的庆幸结局印证“运气好得难以置信”。"
+        }
+      ],
+      "teachingNote": "名词扣固定表达 can't believe one's luck，呼应虚惊一场。"
+    },
+    "q-zj-2020-jul-054": {
+      "blankId": "blank-zj-2020-jul-054",
+      "blankNo": 54,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "but 转折点出本可能酿成的反面后果，the outcome could have been awful 表示结局本可能“糟糕透顶”，与“实际无人重伤”形成对比，情感色彩为负面。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "common",
+          "meaning": "常见的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confusing",
+          "meaning": "令人困惑的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "desirable",
+          "meaning": "令人满意的、可取的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the outcome could have been",
+          "signalSide": "context-before",
+          "targetText": "the outcome could have been awful",
+          "relation": "表语形容词修饰主语 the outcome，the outcome could have been awful 表示“结局本可能很糟”，主系表搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but the outcome could have been",
+          "signalSide": "context-before",
+          "targetText": "awful",
+          "relation": "but 与 could have been 引出与“无人重伤”相反的假设，结局本可能很糟。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "no one got badly hurt",
+          "signalSide": "context-before",
+          "targetText": "awful",
+          "relation": "前句庆幸无人重伤，转折后用 awful 表本可能的负面后果，情感对立。"
+        }
+      ],
+      "teachingNote": "形容词看 but + could have been 的反向假设，定负面义 awful。"
+    },
+    "q-zj-2020-jul-055": {
+      "blankId": "blank-zj-2020-jul-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "破折号后解释作者不想让 Don 以为自己在生它的气，故当晚给它一顿特别的“大餐”，a special meal 作为安抚奖励与解释句逻辑吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "test",
+          "meaning": "测试、考验"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "job",
+          "meaning": "工作、任务"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lesson",
+          "meaning": "教训、课程"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "I didn’t want him thinking I was angry",
+          "signalSide": "context-after",
+          "targetText": "a special meal",
+          "relation": "破折号后解释：不想让狗以为自己生气，故以一顿特别大餐安抚，逻辑顺承。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Don was given a special",
+          "signalSide": "context-before",
+          "targetText": "a special meal",
+          "relation": "give the dog a special meal 表示给狗一顿特别的饭，搭配成立。"
+        }
+      ],
+      "teachingNote": "名词看破折号后的安抚解释，给狗的奖励是一顿 meal。"
+    }
+  }
+}

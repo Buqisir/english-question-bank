@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2021-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2021-jun-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2021-jun-seven-choices": {
+      "overview": "本文是一篇人物兼说明类记叙文，介绍葡萄牙工程师 Paulo Magalhaes 因热爱明信片而创办明信片交换网站 postcrossing.com 的经过，以及该网站的规模、运作和语言障碍问题。五个空分布在段尾总结、话题展开、数据补充和逻辑衔接等位置，重点考查总结句、指代衔接、逻辑连接词（In short / And / Similarly / That）以及话题场对齐。",
+      "discourseStructure": {
+        "summary": "全文按'人物爱好—寻找同好—网站发展—语言障碍—中国用户与英语'的线索推进：先立人物对明信片的热爱，再讲他上网寻找同好并创办网站，接着介绍网站规模，最后聚焦跨语言交流需要统一语言（英语）及其对中国用户的影响。",
+        "units": [
+          {
+            "unitId": "unit-zj-2021-jun-seven-hobby",
+            "heading": "You’ve got mail…and it’s a postcard",
+            "paragraphIds": [
+              "para-zj-2021-jun-seven-p1"
+            ],
+            "summary": "引入人物 Paulo，列举他收到的各国名胜明信片，引出他对明信片的热爱（含空31，段尾总结）。"
+          },
+          {
+            "unitId": "unit-zj-2021-jun-seven-seeking",
+            "paragraphIds": [
+              "para-zj-2021-jun-seven-p2"
+            ],
+            "summary": "Paulo 自述常寄明信片却收得少、并非人人喜爱，于是转向网络寻找同好，直觉得到回报（含空32，承接'并非人人喜爱'）。"
+          },
+          {
+            "unitId": "unit-zj-2021-jun-seven-website",
+            "paragraphIds": [
+              "para-zj-2021-jun-seven-p3"
+            ],
+            "summary": "爱好发展成 postcrossing.com 网站，注册用户遍及214个国家和地区，并补充交换明信片的数据（含空33，数据补充）。"
+          },
+          {
+            "unitId": "unit-zj-2021-jun-seven-language",
+            "paragraphIds": [
+              "para-zj-2021-jun-seven-p4"
+            ],
+            "summary": "讨论语言障碍：看不懂的明信片失去意义，因此需要一门通用语言，最终确定为英语（含空34，类比补充）。"
+          },
+          {
+            "unitId": "unit-zj-2021-jun-seven-china",
+            "paragraphIds": [
+              "para-zj-2021-jun-seven-p5"
+            ],
+            "summary": "聚焦中国用户：许多人接触英语有限，但不少会员借助 postcrossing 实际提高了英语水平（含空35，因果衔接）。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2021-jun-031": {
+      "blankId": "blank-zj-2021-jun-031",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "loves to open his mailbox",
+        "brightly colored picture",
+        "Rome’s Colosseum",
+        "Victoria Falls",
+        "China’s Great Wall"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jun-seven-p1",
+        "beforeQuote": "Or China’s Great Wall.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "In short",
+          "signalSide": "option",
+          "targetText": "Rome’s Colosseum / Victoria Falls / China’s Great Wall",
+          "relation": "In short 收束前文逐一列举的世界各地名胜明信片，是段尾总结句的标志。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "he loves postcards",
+          "signalSide": "option",
+          "targetText": "loves to open his mailbox and find a brightly colored picture",
+          "relation": "选项 he loves postcards 概括前文'喜欢打开邮箱看到各地明信片'的内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "loves to open his mailbox",
+          "signalSide": "context-before",
+          "targetText": "he loves postcards",
+          "relation": "前文 loves to open his mailbox find a picture 与选项 loves postcards 同属热爱明信片的话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "G 项'总之，他热爱明信片，热爱收到远方手写卡片的兴奋感'用 In short 收束前文列举的多国名胜明信片，概括出 Paulo 对明信片的热爱，正好充当首段段尾的总结句。",
+        "matchedClues": [
+          {
+            "contextSide": "loves to open his mailbox / brightly colored picture of Colosseum / Victoria Falls / Great Wall",
+            "optionSide": "In short, he loves postcards, and the excitement of getting a hand-written note from someone far away",
+            "relation": "前文逐一列举各地明信片，选项用 In short 收束并概括为'热爱明信片'，构成列举—总结关系。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 项'他喜欢把寄明信片当作适合全家的爱好'也含 postcards，但 family-friendly hobby 在前文无依据，且缺少 In short 这类对'逐一列举'的收束作用，无法总结首段。"
+        }
+      ],
+      "teachingNote": "段尾若前文是连续列举，优先找含 In short / In a word 等概括标志、且能统摄全部例子的总结句。"
+    },
+    "q-zj-2021-jun-032": {
+      "blankId": "blank-zj-2021-jun-032",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "not everyone is into it",
+        "never receive as many as you send",
+        "Seeking other like-minded souls",
+        "started looking",
+        "online"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jun-seven-p2",
+        "beforeQuote": "you realize that not everyone is into it.",
+        "afterQuote": "Seeking other like-minded souls, however, Paulo started looking in a somewhat unlikely place: online."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "that",
+          "signalSide": "option",
+          "targetText": "not everyone is into it",
+          "relation": "选项中的 that 回指前文'并非人人都喜欢明信片'这一事实。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "And",
+          "signalSide": "option",
+          "targetText": "not everyone is into it",
+          "relation": "And 顺承前句，对'并非人人喜爱'这一情况表态，态度自然过渡。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "not everyone is into it",
+          "signalSide": "context-before",
+          "targetText": "totally fine",
+          "relation": "前文'并非人人喜爱'是被接受的情况，与选项 totally fine 的释然态度呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Seeking other like-minded souls",
+          "signalSide": "context-after",
+          "targetText": "totally fine",
+          "relation": "空后'去别处寻找同好'承接对现状释然后的行动，逻辑顺畅。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "A 项'而这完全没关系'中的 that 回指前文'并非人人喜欢明信片'，表达对这一现实的坦然接受，随后他便转而上网寻找同好，承上启下。",
+        "matchedClues": [
+          {
+            "contextSide": "not everyone is into it",
+            "optionSide": "And that’s totally fine",
+            "relation": "that 指代'并非人人喜爱'，And 顺承表态，构成对现实的接纳。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 项'许多人喜欢与世界另一端的人建立联系'虽与明信片话题相关，但无法回指紧邻的'not everyone is into it'，也接不上下句'寻找同好'的释然语气。"
+        }
+      ],
+      "teachingNote": "句中含 that / it 等指代词的选项，要先锁定它在空前句中的指代对象，指代成立才填。"
+    },
+    "q-zj-2021-jun-033": {
+      "blankId": "blank-zj-2021-jun-033",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "575,217 registered users",
+        "214 countries and regions",
+        "social network",
+        "10 years ago",
+        "full-time job"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jun-seven-p3",
+        "beforeQuote": "575,217 registered users in 214 countries and regions since he started it 10 years ago.",
+        "afterQuote": "Running the website has almost turned into a full-time job."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "number of postcards",
+          "signalSide": "option",
+          "targetText": "575,217 registered users in 214 countries and regions",
+          "relation": "选项的 number of postcards 与前文 575,217 registered users 同属网站规模的数字数据场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "topped 31 million",
+          "signalSide": "option",
+          "targetText": "575,217 registered users / 214 countries",
+          "relation": "topped 31 million 延续前文的庞大数字，进一步用具体数据展示网站交换明信片的规模。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "575,217 registered users",
+          "signalSide": "context-before",
+          "targetText": "number of postcards exchanged",
+          "relation": "前文用注册用户数说明规模，选项用交换明信片数继续以数据佐证，话题场一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "full-time job",
+          "signalSide": "context-after",
+          "targetText": "topped 31 million",
+          "relation": "空后'运营网站几乎成了全职工作'与上千万的交换量相呼应，规模之大解释了工作量之重。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "E 项'8月5日，会员交换的明信片数量突破3100万张'用具体数字延续前文关于注册用户、覆盖国家的规模介绍，并为下句'运营几乎成了全职工作'提供铺垫。",
+        "matchedClues": [
+          {
+            "contextSide": "575,217 registered users in 214 countries and regions",
+            "optionSide": "the number of postcards exchanged by members topped 31 million",
+            "relation": "前后均为展示网站规模的具体数字，构成同一数据话题场的并列补充。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 项'许多人喜欢与世界另一端的人建立联系'虽点出社交属性，却没有承接前文的数字数据，也无法引出下句'几乎成了全职工作'的工作量，话题场不及 E 项贴合。"
+        }
+      ],
+      "teachingNote": "当空前是具体数据、空后又暗示规模庞大时，优先选同属数字/规模话题场、能继续用数据佐证的选项。"
+    },
+    "q-zj-2021-jun-034": {
+      "blankId": "blank-zj-2021-jun-034",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "written in Chinese",
+        "doesn’t work if one doesn’t understand it",
+        "a common language is required",
+        "Language is certainly a barrier",
+        "understand each other"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jun-seven-p4",
+        "beforeQuote": "the concept doesn’t work if one doesn’t understand it.",
+        "afterQuote": "So a common language is required and in postcrossing that’s English"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Similarly",
+          "signalSide": "option",
+          "targetText": "receive a postcard written in Chinese, the concept doesn’t work",
+          "relation": "Similarly 表类比，把前文'收到中文明信片看不懂'的情形与'只懂中文却收到瑞典语卡片'平行并列。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "if you speak only Chinese",
+          "signalSide": "option",
+          "targetText": "if one doesn’t understand it",
+          "relation": "选项用同样的 if 条件句呼应前文的 if 假设，构成同类条件下的类比。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "written in Chinese",
+          "signalSide": "context-before",
+          "targetText": "receiving a card in Swedish",
+          "relation": "前文'中文写的明信片'与选项'瑞典语的卡片'同属'看不懂的外语卡片'话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a common language is required",
+          "signalSide": "context-after",
+          "targetText": "takes part of the fun away",
+          "relation": "选项指出语言不通会减损乐趣，正是下句 So 得出'需要通用语言'结论的依据。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "F 项'同样，如果你只会中文，收到瑞典语的卡片也会少了几分乐趣'用 Similarly 把前文'看不懂中文卡片'的例子换角度再举一例，共同论证语言不通会减损乐趣，从而引出下句 So 的结论。",
+        "matchedClues": [
+          {
+            "contextSide": "As cool as it may be to receive a postcard written in Chinese, the concept doesn’t work if one doesn’t understand it",
+            "optionSide": "Similarly, if you speak only Chinese, receiving a card in Swedish takes part of the fun away",
+            "relation": "Similarly 引出与前文平行的类比例证，二者共同支撑'需要通用语言'的结论。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 项'那让学习和练习它变得格外困难'是因果表态，无法与前文构成类比，也接不上下句 So 引出的'需要通用语言'结论，更适合第五段谈中国用户处。"
+        }
+      ],
+      "teachingNote": "看到选项以 Similarly 开头且与前文句式相似时，判断它是否在换例平行论证同一观点，是则填入。"
+    },
+    "q-zj-2021-jun-035": {
+      "blankId": "blank-zj-2021-jun-035",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "limited exposure to English",
+        "Many people in China",
+        "improved their English skills",
+        "use of postcrossing",
+        "That said"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jun-seven-p5",
+        "beforeQuote": "Many people in China have limited exposure to English.",
+        "afterQuote": "That said, we know of many postcrossing members, including Chinese, who have actually improved their English skills"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That",
+          "signalSide": "option",
+          "targetText": "limited exposure to English",
+          "relation": "选项句首的 That 回指前文'许多中国人接触英语有限'这一情况。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "option",
+          "targetText": "English",
+          "relation": "选项中的 it 指代前文的 English，即'学习和练习英语'。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "limited exposure to English",
+          "signalSide": "context-before",
+          "targetText": "hard to learn and practice it",
+          "relation": "前文'接触英语有限'是因，选项'难以学习和练习英语'是果，话题场一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "That said",
+          "signalSide": "context-after",
+          "targetText": "extra hard to learn and practice it",
+          "relation": "空后 That said（话虽如此）表转折，正好与空处'学英语格外困难'形成让步—转折，引出会员实际提高英语的事实。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "B 项'那使得学习和练习它（英语）变得格外困难'中的 That 回指前文'接触英语有限'、it 指代 English，承接前句说明困难，又被下句 That said 转折，逻辑链完整。",
+        "matchedClues": [
+          {
+            "contextSide": "Many people in China have limited exposure to English",
+            "optionSide": "That makes it extra hard to learn and practice it",
+            "relation": "That 指代'接触英语有限'，并由此推出'学练英语格外困难'的结果。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 项虽含 Chinese、language 等词，但它是第四段语言障碍的类比例证，句首 Similarly 在此处无可类比对象，且无法与下句 That said 的转折衔接。"
+        }
+      ],
+      "teachingNote": "空后出现 That said / however 等转折标志时，空处应填与之相反的让步内容，并核对句首指代词的回指对象。"
+    }
+  }
+}

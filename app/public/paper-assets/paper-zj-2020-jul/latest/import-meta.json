@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceFileName": "2020年浙江卷高考真题英语试卷（7月）-答案版.docx",
+  "sourceFileSha256": "1a447b5dc7bdba349347d61080304eab55815e41db055b5c2ff9b43545b79cdc",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-18T14:47:44.721Z",
+  "paper": {
+    "year": 2020,
+    "region": "浙江",
+    "paperName": "2020年7月浙江卷",
+    "examCode": "zj-2020-jul",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2020",
+      "浙江卷",
+      "7月"
+    ]
+  },
+  "groups": {
+    "group-zj-2020-jul-reading-a": {
+      "groupId": "group-zj-2020-jul-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一本短剧选集（戏剧合集）的编者序言。作者作为一名热爱戏剧的看戏人和读剧人，说明了自己编辑此书的初衷、选材标准、所收录剧作的类型与作者，并在结尾邀请读者带着想象去阅读这些剧本。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2020-jul-reading-b": {
+      "groupId": "group-zj-2020-jul-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇说明性的科普报道，介绍美国华盛顿州贝尔维尤市采用的“自适应信号灯”（adaptive signals）系统。文章先以 Factoria Boulevard 上随车流实时变化的红绿灯时长引入现象，再点明这是有意设计的自适应系统并说明其益处，随后引用两位专家观点（一位肯定其作用、一位指出其局限），最后落脚到贝尔维尤的经验启示——城市治堵应让街道“更聪明”而非一味“更宽”。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2020-jul-reading-c": {
+      "groupId": "group-zj-2020-jul-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍德国莱比锡大学的一项研究：退休前从事需要分析思维、规划等管理技能的高难度工作，有助于大脑随年龄增长保持敏锐、减缓认知功能衰退。文章先抛出结论，再依次说明研究方法、研究结果、研究者用类比的解释，并指出不只是公司白领工作、连服务员和操持家务也同样有益，最后给出客观提醒。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2020-jul-seven-choices": {
+      "groupId": "group-zj-2020-jul-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇个人成长记叙文。作者回忆童年时因邻里没有同龄玩伴、哥哥又不愿陪自己而倍感孤独，但通过阅读、动手制作和户外活动这三件事找到了乐趣，并最终结交了朋友、收获了珍贵记忆。七选五共五空，依次落在哥哥不陪玩、爱看插图、阅读带来新世界、动手制作的兴趣、户外习惯等节点，考查语篇衔接与段落主题句的判断。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2020-jul-cloze": {
+      "groupId": "group-zj-2020-jul-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2020-jul-grammar-fill": {
+      "groupId": "group-zj-2020-jul-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2020-jul-writing-application": {
+      "groupId": "group-zj-2020-jul-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2020-jul-writing-continuation": {
+      "groupId": "group-zj-2020-jul-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

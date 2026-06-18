@@ -1,0 +1,379 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2022-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2022-jan-seven-choices": {
+      "overview": "本文是一篇讲时间管理的说明文。作者以「同样的24小时」开篇，提出自己通过若干具体选择把每一天用到极致，同时保持快乐与放松，随后用若干带小标题的段落逐条给出建议：分清主次、围绕意义做选择、停止在各项之间硬性平衡时间而改为合并活动、做主动学习者、放轻松。七选五的五个空分别落在文章引出句、两个段落小标题位、一个段落中段衔接位和结尾段，考查总起句、小标题概括以及指代/逻辑衔接。",
+      "discourseStructure": {
+        "summary": "文章先用引入段抛出「同样的24小时却能高效又快乐」的话题并引出后文一系列贴士（31空为引出句）；接着进入分条建议主体：每条建议多以一个祈使句小标题领起、其下展开解释（32、34为小标题位）；在「合并活动」一条中段用一句话承上启下，把「为平衡时间发愁」转向「合并去做」（33空）；结尾段以放轻松收束，强调庆祝进展、积少成多（35空）。",
+        "units": [
+          {
+            "unitId": "unit-zj-2022-jan-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jan-seven-title"
+            ],
+            "summary": "引入段：作者点明自己与读者一样只有24小时，但靠特定选择把每天用到极致并保持快乐放松，由此引出下文的时间管理贴士。"
+          },
+          {
+            "unitId": "unit-zj-2022-jan-seven-priority",
+            "heading": "Pick the most important.",
+            "paragraphIds": [
+              "para-zj-2022-jan-seven-p1",
+              "para-zj-2022-jan-seven-p2"
+            ],
+            "summary": "第一条建议：分清最重要的事。要把时间花在对自己既有趣又高效的事上，作者据此选择了顾问而非大公司CEO的生活，强调依据想要的生活方式来做选择。"
+          },
+          {
+            "unitId": "unit-zj-2022-jan-seven-combine",
+            "heading": "Combine your activities.",
+            "paragraphIds": [
+              "para-zj-2022-jan-seven-p3",
+              "para-zj-2022-jan-seven-p4"
+            ],
+            "summary": "第二条建议：合并你的各项活动。很多人为如何分配朋友、家庭、工作、娱乐的时间而抓狂，作者主张不要硬性平衡，而是把它们合并起来享受，围绕工作圈子的人来构建社交与职业生活。"
+          },
+          {
+            "unitId": "unit-zj-2022-jan-seven-learn",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jan-seven-p5",
+              "para-zj-2022-jan-seven-p6"
+            ],
+            "summary": "第三条建议：做主动学习者。表面看学习更费时间，实则总有做事的新方法能在日常任务上替你省时，从而为最重要的事腾出时间，应不断寻找省回时间的新办法。"
+          },
+          {
+            "unitId": "unit-zj-2022-jan-seven-lighten",
+            "heading": "Lighten up.",
+            "paragraphIds": [
+              "para-zj-2022-jan-seven-p7",
+              "para-zj-2022-jan-seven-p8"
+            ],
+            "summary": "第四条建议：放轻松。多数情况下少做几件事天不会塌，应庆祝进展、持续改进，把任务逐项完成；每一次完成都是会积少成多的小胜利。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2022-jan-031": {
+      "blankId": "blank-zj-2022-jan-031",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "make the most of every day",
+        "feel happy and relaxed",
+        "specific choices",
+        "24 hours in a day"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jan-seven-title",
+        "headingAnchor": null,
+        "beforeQuote": "allow me to make the most of every day, and still feel happy and relaxed.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make the most of every day",
+          "signalSide": "context-before",
+          "targetText": "make the most of your time",
+          "relation": "空前的 make the most of every day 与选项 make the most of your time 几乎同义复现，构成话题场对齐。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make the most of your time",
+          "signalSide": "option",
+          "targetText": "make the most of every day",
+          "relation": "选项 make the most of your time 收束引入段「用好时间」的主题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these tips",
+          "signalSide": "option",
+          "targetText": "下文各分条建议（Pick the most important / Combine your activities …）",
+          "relation": "these tips 前指自身、后启全文的分条贴士，是承上启下的引出语。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "引入段在「同样的24小时却能用到极致并保持快乐放松」之后，需要一句承上启下、引出下文贴士的句子；F 用 make the most of your time 复现上文主题，并以 these tips 预告后文的逐条建议。",
+        "matchedClues": [
+          {
+            "contextSide": "make the most of every day / specific choices",
+            "optionSide": "make the most of your time / these tips",
+            "relation": "选项重复「用好时间」主题并以 these tips 引出后文，正好充当全文总起的桥梁句。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D（Make choices about what is meaningful in your life）也涉及 choices，但它是单独一条建议的小标题，放在引入段无法用 these tips 预告全文，且与紧随其后的 Pick the most important 主题重复。"
+        }
+      ],
+      "teachingNote": "引入段末若需总起句，优先找含 these tips/these ideas 之类后指词且复现首句主题的选项。"
+    },
+    "q-zj-2022-jan-032": {
+      "blankId": "blank-zj-2022-jan-032",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "My choices are based on the lifestyle I want",
+        "I chose the life of an adviser",
+        "fun and productive",
+        "the life of a big company CEO"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jan-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "Focus on spending time that for you is fun and productive. I chose the life of an adviser because I like to work with companies"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "My choices are based on the lifestyle I want",
+          "signalSide": "context-after",
+          "targetText": "Make choices about what is meaningful in your life",
+          "relation": "段末 My choices are based on the lifestyle I want 与选项中的 Make choices 同词复现，锁定本段主题为「做选择」。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Make choices about what is meaningful",
+          "signalSide": "option",
+          "targetText": "I chose the life of an adviser / lifestyle I want",
+          "relation": "选项 Make choices about what is meaningful 概括本段所举「选顾问而非CEO、依想要的生活方式而选」的例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "fun and productive",
+          "signalSide": "context-after",
+          "targetText": "meaningful in your life",
+          "relation": "fun and productive、lifestyle I want 等与 meaningful 同属「什么对你有意义」的话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "本空是段落小标题位，下文用「选顾问而非CEO、选择基于想要的生活方式」通篇围绕「做选择」展开，D（Make choices about what is meaningful in your life）以 Make choices 概括全段，正是该段主题句。",
+        "matchedClues": [
+          {
+            "contextSide": "My choices are based on the lifestyle I want / I chose the life of an adviser",
+            "optionSide": "Make choices about what is meaningful in your life",
+            "relation": "选项与段内反复出现的 choices/chose 同词复现，并把例子升华为「选有意义的事」，恰为小标题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E（The things you do well usually give you greater joy）涉及 joy，与 fun 有点搭，但本段核心是基于生活方式做选择，E 强调擅长的事带来快乐，概括不到 choices 这一主线。"
+        }
+      ],
+      "teachingNote": "小标题位优先选与本段反复出现的关键词（此处 choices/chose）同词复现、能统摄全段例子的概括句。"
+    },
+    "q-zj-2022-jan-033": {
+      "blankId": "blank-zj-2022-jan-033",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "spend time with friends, family, work, play",
+        "go crazy trying to figure out",
+        "Find ways to enjoy them in a combined manner",
+        "Combine your activities"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jan-seven-p4",
+        "headingAnchor": "Combine your activities.",
+        "beforeQuote": "how to spend time with friends, family, work, play, etc.",
+        "afterQuote": "Find ways to enjoy them in a combined manner."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them all",
+          "signalSide": "option",
+          "targetText": "friends, family, work, play",
+          "relation": "选项中的 them all 指代空前列举的 friends, family, work, play 等各项活动。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "context-after",
+          "targetText": "friends, family, work, play",
+          "relation": "空后 Find ways to enjoy them 的 them 与选项 them all 指代同一组活动，前后指代链一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "balance time between them all",
+          "signalSide": "option",
+          "targetText": "Combine your activities / in a combined manner",
+          "relation": "选项 Stop trying to balance time 与小标题 Combine your activities、空后 in a combined manner 形成「别硬平衡→改为合并」的语义衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空前说人们为如何在朋友、家庭、工作、娱乐间分配时间而抓狂，空后说用合并的方式去享受它们；C（Stop trying to balance time between them all）用 them all 回指各项活动，并给出停止硬平衡的转折，自然过渡到合并。",
+        "matchedClues": [
+          {
+            "contextSide": "go crazy figuring out how to spend time with friends, family, work, play",
+            "optionSide": "Stop trying to balance time between them all",
+            "relation": "选项以停止在它们之间平衡时间承接上文的烦恼，并为下文 in a combined manner 的解决方案铺垫。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A（Speed up）虽是祈使句、形式上像衔接句，但与合并活动、别硬平衡时间主题无关，且无法回指前文 them all，放在此处逻辑断裂。"
+        }
+      ],
+      "teachingNote": "段中衔接位若空后出现 them/it 等代词，优先选能与之同指、又承接上文烦恼并引出解决办法的句子。"
+    },
+    "q-zj-2022-jan-034": {
+      "blankId": "blank-zj-2022-jan-034",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "learning takes more time",
+        "new ways of doing things",
+        "save you time on daily tasks",
+        "looking for a new way"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jan-seven-p6",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "You would think learning takes more time from you, but actually there are always new ways of doing things"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "new ways of doing things",
+          "signalSide": "context-after",
+          "targetText": "Be an active learner",
+          "relation": "空后 new ways of doing things 与选项 active learner 同属「学习、求新」话题场，锁定本段主题为主动学习。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Be an active learner",
+          "signalSide": "option",
+          "targetText": "new ways of doing things / looking for a new way",
+          "relation": "选项「做主动学习者」概括本段「主动寻找省时新方法」的内容，active 对应 always be looking for a new way 的主动姿态。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "looking for a new way",
+          "signalSide": "context-after",
+          "targetText": "active learner",
+          "relation": "段末 always be looking for a new way 体现主动学新方法，与 active learner 的主动语义对齐。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本空是段落小标题位，下段以 learning 开篇、讲不断寻找做事的新方法来省时，B（Be an active learner）以 learner 与段内 learning 同根复现，并用 active 概括主动找新方法的姿态，正是该段主题句。",
+        "matchedClues": [
+          {
+            "contextSide": "learning takes more time / always be looking for a new way",
+            "optionSide": "Be an active learner",
+            "relation": "选项与下段 learning/new ways 同属学习、求新话题场，且 active 呼应主动寻找，统摄全段。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A（Speed up）与本段省时间沾边，易误选；但下段核心是通过学习、找新方法省时，主题词是 learning 而非单纯加速，A 概括不到学习这条主线。"
+        }
+      ],
+      "teachingNote": "小标题位看紧随其后段落的反复出现词（此处 learning/learner），选与之同根复现的概括句。"
+    },
+    "q-zj-2022-jan-035": {
+      "blankId": "blank-zj-2022-jan-035",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Celebrate progress",
+        "keep refining toward a happy productive existence",
+        "Every completion is a small victory",
+        "adds up in a big way"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jan-seven-p8",
+        "headingAnchor": "Lighten up.",
+        "beforeQuote": "Celebrate progress and keep refining (改进) toward a happy productive existence.",
+        "afterQuote": "Every completion is a small victory that adds up in a big way."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "Celebrate progress / Every completion is a small victory",
+          "relation": "选项首词 This 回指空前庆祝进展、持续改进以及每次完成都是小胜利的做法，承上启下。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "making lists",
+          "signalSide": "option",
+          "targetText": "Every completion / Celebrate progress",
+          "relation": "making lists（列清单逐项打勾）正对应庆祝每一次完成、积累小胜利，属同一高效记录、积少成多话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "productivity handbook",
+          "signalSide": "option",
+          "targetText": "happy productive existence",
+          "relation": "选项 productivity handbook 与空前 happy productive existence 共享 productiv- 词族，紧扣全文高效主题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前讲庆祝进展、持续改进，空后讲每次完成都是会积少成多的小胜利；G（This is why making lists is important in any productivity handbook）以 This 回指前句做法，并用列清单解释为何能积累小胜利，前后衔接顺畅。",
+        "matchedClues": [
+          {
+            "contextSide": "Celebrate progress / Every completion is a small victory that adds up",
+            "optionSide": "This is why making lists is important",
+            "relation": "This 回指庆祝进展、逐项完成，making lists 正是把每次完成可视化、积少成多的手段，逻辑自洽。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E（The things you do well usually give you greater joy）含 joy，与 happy 沾边，但它讲擅长的事带来快乐，无法用代词回指前句、也接不上空后每次完成是小胜利的列清单逻辑。"
+        }
+      ],
+      "teachingNote": "段中衔接位若选项以 This/That 开头，先确认其能回指空前具体做法，再验证它是否自然引出空后内容。"
+    }
+  }
+}

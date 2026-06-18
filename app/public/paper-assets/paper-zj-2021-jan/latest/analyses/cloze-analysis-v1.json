@@ -1,0 +1,886 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2021-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2021-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2021-jan-cloze": {
+      "overview": "记叙文。作者讲述自己去美国亚利桑那州参加为期三个月的志愿者项目，在科罗纳多国家森林修筑石阶的经历：从最初对陌生环境的担忧，到与志同道合者相处的安心，再到艰苦劳动和雷暴夜的考验，最终因坚持下来而收获成就感与成长。",
+      "affectiveArc": "情感先抑后扬：起初担忧、害怕陌生环境，很快被友好的同伴融化而安心；中途历经酷热、艰险、雷暴之苦；结尾以幸存、成就感与自我成长收束，整体由焦虑走向自豪。"
+    }
+  },
+  "blanks": {
+    "q-zj-2021-jan-036": {
+      "blankId": "blank-zj-2021-jan-036",
+      "blankNo": 36,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "decided to do some volunteer work 后要找做志愿者的信息，research on the Internet 表示“在网上查找资料、做调查”，并与下文 discovered Volunteer USA（发现了某机构）形成“查找—发现”的合理因果，搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "calculate",
+          "meaning": "计算（数目）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "negotiate",
+          "meaning": "谈判、协商"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "advertise",
+          "meaning": "做广告、宣传"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "on the Internet",
+          "signalSide": "context-after",
+          "targetText": "research on the Internet",
+          "relation": "research on the Internet 表示在网上查找信息，动作与“互联网”搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "discovered Volunteer USA",
+          "signalSide": "context-after",
+          "targetText": "research ... discovered",
+          "relation": "下文“发现了 Volunteer USA”是查找的结果，印证此处为“查找、调研”。"
+        }
+      ],
+      "teachingNote": "动作要与后文结果对接：先 research（查）才能 discover（找到）。"
+    },
+    "q-zj-2021-jan-037": {
+      "blankId": "blank-zj-2021-jan-037",
+      "blankNo": 37,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "find oneself doing/somewhere 是固定表达，表示“(不知不觉)发现自己处于某种状态/某地”；found myself on a plane to Phoenix 自然表达“三个月后我已身处飞往凤凰城的飞机上”，与宾语 myself + 地点状语搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "imagined",
+          "meaning": "想象自己"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "introduced",
+          "meaning": "介绍自己"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "enjoyed",
+          "meaning": "享受自己（独处等）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "myself on a plane",
+          "signalSide": "context-after",
+          "targetText": "found myself on a plane",
+          "relation": "find oneself + 地点（on a plane）是固定搭配，表示发现自己已身处某地。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Three months later",
+          "signalSide": "context-before",
+          "targetText": "Three months later I found",
+          "relation": "“三个月后”表明已成事实，与 found（已置身飞机）的既成状态一致。"
+        }
+      ],
+      "teachingNote": "记住 find oneself doing/somewhere=“(不知不觉)发现自己……”，常表既成事实。"
+    },
+    "q-zj-2021-jan-038": {
+      "blankId": "blank-zj-2021-jan-038",
+      "blankNo": 38,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "be scared at the thought of doing 表示“一想到……就害怕”，与下句 my worries had gone（我的担忧消失了）中的 worries 前后呼应，情感一致：先害怕、后释然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "annoyed",
+          "meaning": "恼火、烦恼"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "surprised",
+          "meaning": "惊讶"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "excited",
+          "meaning": "兴奋、激动"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at the thought of",
+          "signalSide": "context-after",
+          "targetText": "scared at the thought of living",
+          "relation": "be scared at the thought of doing 是固定搭配，表示一想到某事就害怕。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "my worries had gone",
+          "signalSide": "context-after",
+          "targetText": "scared ... worries",
+          "relation": "下句“担忧消失了”中的 worries 回指此处的负面情绪，锁定 scared。"
+        }
+      ],
+      "teachingNote": "形容词情感要与上下文情绪词（如 worries）对齐。"
+    },
+    "q-zj-2021-jan-039": {
+      "blankId": "blank-zj-2021-jan-039",
+      "blankNo": 39,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "within fifteen minutes of arriving 表示“到达后不到十五分钟”，与上文刚下飞机、初到当地的情境衔接，arriving 与时间状语 within fifteen minutes 搭配，逻辑上正是“一到达担忧就消失”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "sleeping",
+          "meaning": "睡觉"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "thinking",
+          "meaning": "思考"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "walking",
+          "meaning": "走路、步行"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "within fifteen minutes of",
+          "signalSide": "context-before",
+          "targetText": "within fifteen minutes of arriving",
+          "relation": "within ... minutes of arriving 表示到达后极短时间内，时间状语与“到达”搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "my worries had gone",
+          "signalSide": "context-after",
+          "targetText": "arriving ... worries had gone",
+          "relation": "“担忧消失”紧接“到达”发生，印证此空为初到当地。"
+        }
+      ],
+      "teachingNote": "结合时间状语与剧情节点判断动作：刚下飞机即“到达”。"
+    },
+    "q-zj-2021-jan-040": {
+      "blankId": "blank-zj-2021-jan-040",
+      "blankNo": 40,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "形容词修饰 Everyone（同行的人）；friendly 与并列的 like-minded（志同道合）共同说明大家友好又投缘，正因如此“我”才很容易有归属感，与下文 feel at home 因果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confident",
+          "meaning": "自信的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "energetic",
+          "meaning": "精力充沛的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curious",
+          "meaning": "好奇的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "and like-minded",
+          "signalSide": "context-after",
+          "targetText": "friendly and like-minded",
+          "relation": "与 like-minded 并列，friendly 同属对“人”正面、亲和的描述。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "feel at home",
+          "signalSide": "context-after",
+          "targetText": "friendly ... feel at home",
+          "relation": "大家友好导致“我”有家的感觉，friendly 与“归属感”因果相符。"
+        }
+      ],
+      "teachingNote": "并列形容词常同向：用 like-minded 反推空格也是褒义、亲和。"
+    },
+    "q-zj-2021-jan-041": {
+      "blankId": "blank-zj-2021-jan-041",
+      "blankNo": 41,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "it was very ___ to feel at home 是 it is adj. to do 句型；因大家友好投缘，所以“很容易有家的感觉”，easy 与 to feel at home 搭配，承接上文 friendly and like-minded 的结果。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "funny",
+          "meaning": "有趣的、好笑的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "good",
+          "meaning": "好的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lucky",
+          "meaning": "幸运的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to feel at home",
+          "signalSide": "context-after",
+          "targetText": "easy to feel at home",
+          "relation": "it is easy to do（容易做某事）句型，easy 与不定式 to feel at home 搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "and like-minded that",
+          "signalSide": "context-before",
+          "targetText": "so ... that it was very easy",
+          "relation": "so...that 结构表明“友好投缘”导致“很容易”有归属感。"
+        }
+      ],
+      "teachingNote": "so...that 因果链：友好→容易（easy）有家的感觉。"
+    },
+    "q-zj-2021-jan-042": {
+      "blankId": "blank-zj-2021-jan-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "my first 8-day ___ 指作者参加的这段志愿者任务；全文核心是 volunteer work / the project，project（项目、工程任务）与“被派往森林干活”的语境最契合，并与末段 the project 形成话题词复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tour",
+          "meaning": "旅游、观光"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "campaign",
+          "meaning": "（政治/社会）运动"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "course",
+          "meaning": "课程"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "the project",
+          "signalSide": "context-after",
+          "targetText": "taken part in the project",
+          "relation": "末段用 the project 指代这段经历，与此处 project 复现呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I was sent to the Coronado National Forest",
+          "signalSide": "context-before",
+          "targetText": "8-day project",
+          "relation": "“被派往森林（去干活）”说明这是一项任务/项目，而非旅游或课程。"
+        }
+      ],
+      "teachingNote": "名词题先抓全文话题词（volunteer/project）做语义场呼应。"
+    },
+    "q-zj-2021-jan-043": {
+      "blankId": "blank-zj-2021-jan-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "宾语是 everything we needed，并与 walk three miles 并列；carry everything 表示“随身携带所需的一切（步行三英里）”，下文 with a heavy pack（背着重包）正是“携带”的结果，施受关系成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "drop",
+          "meaning": "丢下、扔掉（所需物品）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "make",
+          "meaning": "制作（所需物品）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "buy",
+          "meaning": "购买（所需物品）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "everything we needed",
+          "signalSide": "context-after",
+          "targetText": "carry everything we needed",
+          "relation": "carry 的宾语是 everything we needed，“携带所需之物”施受成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "with a heavy pack",
+          "signalSide": "context-after",
+          "targetText": "carry ... with a heavy pack",
+          "relation": "“背着沉重的包”印证此处是把东西“随身携带”着走。"
+        }
+      ],
+      "teachingNote": "用后文细节（heavy pack）回证动词：背着重包=carry 所需物品。"
+    },
+    "q-zj-2021-jan-044": {
+      "blankId": "blank-zj-2021-jan-044",
+      "blankNo": 44,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "It may not seem like a ___ way 让步铺垫，紧接 but...my legs were on fire；前文已点明 walk three miles（步行三英里），long way（很长的一段路）与“三英里 + 腿像着火”构成“看似不长、实则累”的转折，搭配贴切。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "nice",
+          "meaning": "美好的（路途）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "safe",
+          "meaning": "安全的（路途）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "quick",
+          "meaning": "快捷的（路途）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "walk three miles",
+          "signalSide": "context-before",
+          "targetText": "a long way",
+          "relation": "前文“步行三英里”是对距离 long way 的直接呼应，谈论的是路程长短。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but in 35℃ heat",
+          "signalSide": "context-after",
+          "targetText": "not seem like a long way but ... on fire",
+          "relation": "but 转折：看似不算长的路，却因酷热重负而难熬，锁定 long。"
+        }
+      ],
+      "teachingNote": "抓 may not...but 让步转折：用“不算长”反衬实际艰苦，选 long。"
+    },
+    "q-zj-2021-jan-045": {
+      "blankId": "blank-zj-2021-jan-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "宾语是 a stairway out of rock（用岩石造的石阶）；build a stairway out of rock 表示“用岩石建造一段石阶”，与下文 a beautiful stairway came into being（一段石阶建成了）形成“建造—建成”的对应，施受成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "test",
+          "meaning": "测试（石阶）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "clean",
+          "meaning": "清洁（石阶）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "guard",
+          "meaning": "守卫（石阶）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a stairway out of rock",
+          "signalSide": "context-after",
+          "targetText": "build a stairway out of rock",
+          "relation": "build ... out of rock 表示“用岩石建造……”，与宾语 stairway 搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a beautiful stairway came into being",
+          "signalSide": "context-after",
+          "targetText": "build a stairway ... came into being",
+          "relation": "后文“石阶建成了”回证此处工作是“建造”石阶。"
+        }
+      ],
+      "teachingNote": "用结果句（came into being）回推动作动词：建成→build。"
+    },
+    "q-zj-2021-jan-046": {
+      "blankId": "blank-zj-2021-jan-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "This ___ climbing up and down...，主语 This 指上句“造石阶”的工作；mean doing 表示“意味着（必然要做）某事”，This meant climbing... 说明这项工作意味着在山坡上爬上爬下，主谓宾搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "helped",
+          "meaning": "有助于（攀爬）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ended",
+          "meaning": "结束（攀爬）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "allowed",
+          "meaning": "允许（攀爬）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "climbing up and down",
+          "signalSide": "context-after",
+          "targetText": "meant climbing up and down",
+          "relation": "mean doing 表示“意味着做某事”，宾语为动名词 climbing，搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "This",
+          "signalSide": "context-before",
+          "targetText": "This meant climbing",
+          "relation": "主语 This 指代上句的修阶工作，“这项工作意味着爬上爬下”逻辑自洽。"
+        }
+      ],
+      "teachingNote": "记住 sth means doing sth=“某事意味着必然要做某事”。"
+    },
+    "q-zj-2021-jan-047": {
+      "blankId": "blank-zj-2021-jan-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "they 指 mountain lions；only heard, never ___ 是“只闻其声、未见其形”的对照，与前面 heard（听到）反义并列，seen（看见）使“能听到却从未看到”逻辑成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hunted",
+          "meaning": "被猎捕"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "trained",
+          "meaning": "被驯养、训练"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fed",
+          "meaning": "被喂食"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "only heard",
+          "signalSide": "context-before",
+          "targetText": "heard, never seen",
+          "relation": "heard 与 seen 构成“听到—看到”的感官对照，never seen 即“从未被看见”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "inhabited (栖息) by mountain lions",
+          "signalSide": "context-before",
+          "targetText": "mountain lions ... never seen",
+          "relation": "山中有美洲狮出没，故“只能听到、从未看到”，seen 与情境吻合。"
+        }
+      ],
+      "teachingNote": "抓 heard / never ___ 的感官对照，互补处填 seen。"
+    },
+    "q-zj-2021-jan-048": {
+      "blankId": "blank-zj-2021-jan-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "The ___ of knowing that my work will be on that mountainside ... is massive；得知自己的劳动成果将长留山间，带来的是巨大的“满足感”，satisfaction 与“成就/成果长存”及形容词 massive 搭配自然，呼应全文先苦后甜的成就主题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "ambition",
+          "meaning": "雄心、野心"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "expectation",
+          "meaning": "期望、期待"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "intention",
+          "meaning": "意图、打算"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is massive",
+          "signalSide": "context-after",
+          "targetText": "The satisfaction ... is massive",
+          "relation": "satisfaction is massive（满足感巨大）搭配自然，描述完工后的正面感受。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "a beautiful stairway came into being",
+          "signalSide": "context-before",
+          "targetText": "stairway came into being ... satisfaction",
+          "relation": "石阶建成的成果是满足感的来源，锁定 satisfaction。"
+        }
+      ],
+      "teachingNote": "成果达成后的正向感受多用 satisfaction（满足感）。"
+    },
+    "q-zj-2021-jan-049": {
+      "blankId": "blank-zj-2021-jan-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "my ___ will be on that mountainside for years to come；留在山坡上多年的，是作者亲手所建的劳动成果，即 my work（我做的活/作品），与上文 build a stairway 直接对应，主语搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "memory",
+          "meaning": "记忆、回忆"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "record",
+          "meaning": "记录、纪录"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "story",
+          "meaning": "故事"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "on that mountainside for years to come",
+          "signalSide": "context-after",
+          "targetText": "my work will be on that mountainside",
+          "relation": "能实实在在留在山坡上多年的，是建好的石阶——作者的 work（劳动成果）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a stairway out of rock",
+          "signalSide": "context-before",
+          "targetText": "build ... my work",
+          "relation": "上文亲手建石阶，my work 即指这一成果，前后呼应。"
+        }
+      ],
+      "teachingNote": "“留在山坡上的”是实体成果，故选 work 而非抽象的 memory/story。"
+    },
+    "q-zj-2021-jan-050": {
+      "blankId": "blank-zj-2021-jan-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "we were ___ in a thunderstorm；be caught in a thunderstorm/rain 是固定搭配，表示“遭遇/被困在雷暴中”，与下文 a swimming pool in my tent（帐篷里积满水）的恶劣处境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "left",
+          "meaning": "被留下"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "attacked",
+          "meaning": "被袭击"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "separated",
+          "meaning": "被分开"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in a thunderstorm",
+          "signalSide": "context-after",
+          "targetText": "caught in a thunderstorm",
+          "relation": "be caught in a thunderstorm 是固定搭配，表示遭遇雷暴。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "a swimming pool in my tent",
+          "signalSide": "context-after",
+          "targetText": "caught in a thunderstorm ... swimming pool in my tent",
+          "relation": "帐篷里积水成“游泳池”正是被雷暴困住、淋雨的结果。"
+        }
+      ],
+      "teachingNote": "固定搭配 be caught in + 恶劣天气=“遭遇/被困于……”。"
+    },
+    "q-zj-2021-jan-051": {
+      "blankId": "blank-zj-2021-jan-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "The temperature was close to ___；雷暴夜帐篷进水、下文“整夜发抖（trembling）”表明极冷，close to freezing（接近冰点）与寒冷情境一致，与温度名词搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "boiling",
+          "meaning": "沸点（极热）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "average",
+          "meaning": "平均（温度）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "normal",
+          "meaning": "正常（温度）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The temperature was close to",
+          "signalSide": "context-before",
+          "targetText": "close to freezing",
+          "relation": "temperature ... close to freezing（接近冰点）是描述低温的常见搭配。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "trembling",
+          "signalSide": "context-after",
+          "targetText": "freezing ... trembling",
+          "relation": "下文“整夜发抖”是天气极冷的反应，锁定 freezing。"
+        }
+      ],
+      "teachingNote": "用后文身体反应（trembling 发抖）判温度方向：极冷选 freezing。"
+    },
+    "q-zj-2021-jan-052": {
+      "blankId": "blank-zj-2021-jan-052",
+      "blankNo": 52,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the only ___ part of my tent；帐篷里已成“游泳池”，作者只能躲在唯一没被淋湿的地方，dry（干燥的）与 swimming pool in my tent 形成湿/干对照，修饰 part 合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tidy",
+          "meaning": "整洁的（地方）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "new",
+          "meaning": "新的（地方）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "soft",
+          "meaning": "柔软的（地方）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "a swimming pool in my tent",
+          "signalSide": "context-before",
+          "targetText": "swimming pool ... the only dry part",
+          "relation": "帐篷内积水如游泳池，与 dry（唯一干燥处）构成湿—干对照。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "part of my tent",
+          "signalSide": "context-after",
+          "targetText": "the only dry part of my tent",
+          "relation": "dry part of my tent（帐篷里干的那块）修饰关系成立。"
+        }
+      ],
+      "teachingNote": "抓湿/干对照：帐篷成“泳池”，唯一能待的是 dry 的地方。"
+    },
+    "q-zj-2021-jan-053": {
+      "blankId": "blank-zj-2021-jan-053",
+      "blankNo": 53,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "前文已尽述雷暴、进水、严寒之苦，本句 I suffered a lot 是顺理成章的小结；Needless to say（不用说、自不待言）正引出这一显而易见的结论，与上下文的承接关系吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "By the way",
+          "meaning": "顺便说一句（转入题外话）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Regardless of that",
+          "meaning": "不管那一点"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "In either case",
+          "meaning": "无论哪种情况"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "I suffered a lot",
+          "signalSide": "context-after",
+          "targetText": "Needless to say, I suffered a lot",
+          "relation": "“我吃了很多苦”是前文苦难的必然结论，Needless to say 引出不言自明之事。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "say",
+          "signalSide": "option",
+          "targetText": "Needless to say",
+          "relation": "Needless to say 意为“不用说”，与后文显而易见的结论搭配。"
+        }
+      ],
+      "teachingNote": "短语题看与下句逻辑关系：引出显然结论用 Needless to say。"
+    },
+    "q-zj-2021-jan-054": {
+      "blankId": "blank-zj-2021-jan-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "but I know whatever I have to face...I was there and I ___；与 I was there（我曾身处其中、挺过来了）并列收束苦难，survived（幸存、挺过来）表示历经磨难仍坚持下来，与全文先苦后甜、自我成长的主线一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "resisted",
+          "meaning": "抵抗、抗拒"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "escaped",
+          "meaning": "逃脱、逃避"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recovered",
+          "meaning": "（病后）恢复、康复"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I was there",
+          "signalSide": "context-before",
+          "targetText": "I was there and I survived",
+          "relation": "and 连接 I was there 与本空，“我在场并且挺了过来”，survived 表挺过磨难。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "whatever I have to face in my life",
+          "signalSide": "context-before",
+          "targetText": "whatever I have to face ... survived",
+          "relation": "“无论将来面对什么”由这次“挺过来”给出底气，呼应 survived。"
+        }
+      ],
+      "teachingNote": "历经磨难仍坚持下来，用 survive（挺过来），呼应成长主旨。"
+    },
+    "q-zj-2021-jan-055": {
+      "blankId": "blank-zj-2021-jan-055",
+      "blankNo": 55,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "I am much ___ for having taken part in the project（比较级表参加项目后的变化）；历经艰苦考验且挺了过来，作者变得更“坚强”，stronger 与上文 survived 的磨砺主线一致，收束于成长主题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "smarter",
+          "meaning": "更聪明"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "happier",
+          "meaning": "更快乐"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "busier",
+          "meaning": "更忙碌"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "whatever I have to face in my life",
+          "signalSide": "context-before",
+          "targetText": "whatever I have to face in my life ... much stronger",
+          "relation": "“无论将来面对什么”都有底气，指向意志被磨砺得更坚强，与“变得更坚强”情感一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "for having taken part in the project",
+          "signalSide": "context-after",
+          "targetText": "stronger for having taken part",
+          "relation": "因参加项目而变得更 stronger，比较级与原因状语搭配成立。"
+        }
+      ],
+      "teachingNote": "结尾点题：历经苦难而 survive，故人更 stronger（更坚强）。"
+    }
+  }
+}

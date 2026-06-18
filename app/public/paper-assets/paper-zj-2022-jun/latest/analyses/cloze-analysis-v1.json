@@ -1,0 +1,894 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2022-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jun-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2022-jun-cloze": {
+      "overview": "夹叙夹议文。作者由抛接幼子 Jacky、孩子对自己的完全信任写起，引出对“信任”的思考，进而从亲子关系延伸到职场管理，说明信任是任何牢固关系的核心，好的管理与好的养育一样是长期的付出。",
+      "affectiveArc": "情感主线温暖正向：从孩子被抛接时的兴奋与全然信任，到作者既享受被信任的温情、又生出沉甸甸的责任感，最后升华为对信任价值的肯定。全程基调是珍视与责任，无明显抑扬转折。"
+    }
+  },
+  "blanks": {
+    "q-zj-2022-jun-036": {
+      "blankId": "blank-zj-2022-jun-036",
+      "blankNo": 36,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "句意为“小孩子很容易被抛到空中再接住——而且他们很喜欢这样”。love it 表示“喜爱这件事”，与下文 Jacky 兴奋地喊“Again, Daddy, again!”（再来一次）完全一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "deserve",
+          "meaning": "应得、值得（得到某物）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "miss",
+          "meaning": "想念、错过"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "know",
+          "meaning": "知道、了解"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "they",
+          "signalSide": "context-before",
+          "targetText": "they love it",
+          "relation": "主语 they 指小孩子，与所填动词构成“孩子喜爱这件事”的施受关系。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Again, Daddy, again!",
+          "signalSide": "context-after",
+          "targetText": "love it",
+          "relation": "孩子喊“再来一次”，正是“喜爱”被抛接的直接呼应。"
+        }
+      ],
+      "teachingNote": "用紧随其后的人物语言或反应来确认情感类动词的方向。"
+    },
+    "q-zj-2022-jun-037": {
+      "blankId": "blank-zj-2022-jun-037",
+      "blankNo": 37,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "as if 引导方式状语从句，意为“仿佛、好像”。句意为“他把胳膊和腿伸出去，仿佛在飞翔一样”，且从句用虚拟语气 he were flying，正与 as if + 过去式的搭配吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "in case",
+          "meaning": "以防、万一"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "even though",
+          "meaning": "即使、尽管"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "so that",
+          "meaning": "以便、为了"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he were flying",
+          "signalSide": "context-after",
+          "targetText": "as if he were flying",
+          "relation": "从句谓语用 were 的虚拟语气，是 as if（仿佛）的典型搭配标志。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "throws his arms and legs out",
+          "signalSide": "context-before",
+          "targetText": "as if",
+          "relation": "“伸开四肢”这一动作后接“仿佛在飞”，构成形象比拟，语义合成为 as if。"
+        }
+      ],
+      "teachingNote": "see 到 were 这类与现在事实不符的过去式，优先考虑 as if 引导的虚拟比拟。"
+    },
+    "q-zj-2022-jun-038": {
+      "blankId": "blank-zj-2022-jun-038",
+      "blankNo": 38,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "his eyes wide with excitement 意为“他双眼因兴奋而睁得大大的”。excitement 与前文孩子喊“再来一次”、伸展四肢“仿佛飞翔”的欢快场景同属一个积极情绪语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fear",
+          "meaning": "害怕、恐惧"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "doubt",
+          "meaning": "怀疑、疑虑"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "astonishment",
+          "meaning": "惊讶、震惊"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his eyes wide",
+          "signalSide": "context-before",
+          "targetText": "wide with excitement",
+          "relation": "“双眼睁大”由 with + 情绪名词说明原因，与表积极兴奋的 excitement 搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Again, Daddy, again!",
+          "signalSide": "context-before",
+          "targetText": "excitement",
+          "relation": "孩子兴奋呼喊属于同一欢快情绪语义场，呼应 excitement。"
+        }
+      ],
+      "teachingNote": "情绪名词靠整段基调取词，欢快场景里 wide eyes 表兴奋而非恐惧。"
+    },
+    "q-zj-2022-jun-039": {
+      "blankId": "blank-zj-2022-jun-039",
+      "blankNo": 39,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "His trust in me is absolute 意为“他对我的信任是绝对的”。absolute（绝对的、毫无保留的）正对应下文 always trust me fully（完全信任），强调信任之彻底。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reasonable",
+          "meaning": "合理的、理智的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "limited",
+          "meaning": "有限的、受限的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "important",
+          "meaning": "重要的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "His trust in me",
+          "signalSide": "context-before",
+          "targetText": "trust is absolute",
+          "relation": "主语 trust 与表语形容词构成“信任是绝对的”的修饰关系。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "trust me fully",
+          "signalSide": "context-after",
+          "targetText": "absolute",
+          "relation": "下文 trust me fully（完全信任）与 absolute（绝对的）同义复现。"
+        }
+      ],
+      "teachingNote": "形容词留意下文同义复现，fully 对应 absolute。"
+    },
+    "q-zj-2022-jun-040": {
+      "blankId": "blank-zj-2022-jun-040",
+      "blankNo": 40,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "a huge sense of responsibility 意为“巨大的责任感”。前半句说被信任“是种美好的感觉”，but at the same time 转折，引出被全然信任带来的沉重责任，responsibility 与下文“需要更多努力和正确判断”一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relief",
+          "meaning": "宽慰、轻松"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "satisfaction",
+          "meaning": "满足、满意"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "achievement",
+          "meaning": "成就（感）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a huge sense of",
+          "signalSide": "context-before",
+          "targetText": "sense of responsibility",
+          "relation": "a sense of + 名词，与 responsibility 构成“责任感”的固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but at the same time",
+          "signalSide": "context-before",
+          "targetText": "responsibility",
+          "relation": "but 转折，将“美好感觉”与一种负担感对立，引出 responsibility。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "more effort and sound judgment",
+          "signalSide": "context-after",
+          "targetText": "responsibility",
+          "relation": "下文“需要更多努力与正确判断”正是责任感的具体体现。"
+        }
+      ],
+      "teachingNote": "but 后接的情绪名词常与前句对立，被信任的反面是责任。"
+    },
+    "q-zj-2022-jun-041": {
+      "blankId": "blank-zj-2022-jun-041",
+      "blankNo": 41,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "as he gets older 意为“随着他长大”。前文以孩子被抛接、需要照看立论，谈的是孩子成长过程；older 与时间推移、维系信任“需要更多努力”的语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "busier",
+          "meaning": "更忙碌的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "quieter",
+          "meaning": "更安静的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "healthier",
+          "meaning": "更健康的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as he gets",
+          "signalSide": "context-before",
+          "targetText": "gets older",
+          "relation": "as he gets + 形容词比较级表“随着他变得……”，与 older 搭配表成长。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Small children",
+          "signalSide": "context-before",
+          "targetText": "older",
+          "relation": "开篇 Small children 与 gets older 构成由小到大的成长照应。"
+        }
+      ],
+      "teachingNote": "孩子的话题里 as he gets ___ 多指年龄增长，锁定 older。"
+    },
+    "q-zj-2022-jun-042": {
+      "blankId": "blank-zj-2022-jun-042",
+      "blankNo": 42,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "on my part 意为“在我这方面、就我而言”。句意为“随着孩子长大，维系信任就我这一方而言需要付出更多努力和正确判断”，强调努力的责任落在“我”身上。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "on my behalf",
+          "meaning": "代表我、为了我"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "in my honor",
+          "meaning": "为纪念我、向我致敬"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in my name",
+          "meaning": "以我的名义"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "more effort and sound judgment",
+          "signalSide": "context-before",
+          "targetText": "effort on my part",
+          "relation": "effort/judgment on one's part 表“某人方面的努力/判断”，与 on my part 搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "part",
+          "signalSide": "option",
+          "targetText": "on my part",
+          "relation": "part 在此表“一方、方面”，构成 on my part（就我这方面）。"
+        }
+      ],
+      "teachingNote": "辨析 part/behalf/name 短语：谈“某人应尽的努力”用 on one's part。"
+    },
+    "q-zj-2022-jun-043": {
+      "blankId": "blank-zj-2022-jun-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "a parent-child relationship 意为“亲子关系”。此段紧扣作者与儿子 Jacky 的关系展开，parent-child 与全段父子互动、孩子信任父亲的语境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "long-distance",
+          "meaning": "远距离的（关系）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "high-risk",
+          "meaning": "高风险的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teacher-student",
+          "meaning": "师生（关系）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "relationship",
+          "signalSide": "context-after",
+          "targetText": "parent-child relationship",
+          "relation": "relationship 由复合形容词修饰，parent-child 指明关系类型。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "trust me",
+          "signalSide": "context-after",
+          "targetText": "parent-child",
+          "relation": "下文 he trusts me（孩子信任我）锁定父子语义场，呼应 parent-child。"
+        }
+      ],
+      "teachingNote": "复合形容词修饰关系类名词，要回看本段的人物身份定话题。"
+    },
+    "q-zj-2022-jun-044": {
+      "blankId": "blank-zj-2022-jun-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "can't afford to lose 意为“承受不起失去（信任）”。afford to do 表“(有能力)承担得起做某事”，常用否定 can't afford to。句意为信任太重要，是“输不起、丢不得”的东西。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "choose",
+          "meaning": "选择（去失去）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wait",
+          "meaning": "等待"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "expect",
+          "meaning": "期望、预料"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to lose",
+          "signalSide": "context-after",
+          "targetText": "afford to lose",
+          "relation": "can't + 动词 + to lose，afford to do 构成“承担得起做某事”的固定搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "such an important part",
+          "signalSide": "context-before",
+          "targetText": "can't afford to lose",
+          "relation": "前文强调信任“如此重要”，逻辑上引出“丢不起、承受不起失去”。"
+        }
+      ],
+      "teachingNote": "can't ___ to lose 优先考虑 afford（承受不起）这一固定搭配。"
+    },
+    "q-zj-2022-jun-045": {
+      "blankId": "blank-zj-2022-jun-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "introduce sb to sth 意为“让某人接触/初次了解某事物”。句意为“每次我让 Jacky 接触新事物，他都只因信任我、相信不会受伤才去做”，introduce…to…与 something new 搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "attach",
+          "meaning": "把……附上、依附"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "compare",
+          "meaning": "把……与……比较"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "adjust",
+          "meaning": "调整、使适应"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to something new",
+          "signalSide": "context-after",
+          "targetText": "introduce Jacky to something new",
+          "relation": "introduce sb to sth 的介词搭配为 to，与 to something new 吻合。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "teaching Jacky to swim",
+          "signalSide": "context-after",
+          "targetText": "introduce Jacky to something new",
+          "relation": "下文“教 Jacky 游泳”正是“让他接触新事物”的例证，呼应 introduce。"
+        }
+      ],
+      "teachingNote": "see 到 ___ sb to sth 的结构，优先匹配 introduce sb to sth。"
+    },
+    "q-zj-2022-jun-046": {
+      "blankId": "blank-zj-2022-jun-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "feels safe 意为“感到安全”。后接 in the knowledge that he won't get hurt（深知自己不会受伤），与“安全感”直接对应，故填 safe。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "happy",
+          "meaning": "高兴的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proud",
+          "meaning": "自豪的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "grateful",
+          "meaning": "感激的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he won’t get hurt",
+          "signalSide": "context-after",
+          "targetText": "feels safe",
+          "relation": "“不会受伤”这一认知与表语 safe（安全的）直接对应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "feels",
+          "signalSide": "context-before",
+          "targetText": "feels safe",
+          "relation": "系动词 feels 后接形容词，与表状态的 safe 构成“感到安全”。"
+        }
+      ],
+      "teachingNote": "情感形容词紧扣后文解释，won't get hurt 直接指向 safe。"
+    },
+    "q-zj-2022-jun-047": {
+      "blankId": "blank-zj-2022-jun-047",
+      "blankNo": 47,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "For example 表“例如”。前句概括“他因信任我、相信不会受伤才尝试新事物”，本句用“教 Jacky 游泳”作具体例证，属举例关系。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Above all",
+          "meaning": "最重要的是"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "In addition",
+          "meaning": "此外、另外"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "At first",
+          "meaning": "起初、最初"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "teaching Jacky to swim",
+          "signalSide": "context-after",
+          "targetText": "For example",
+          "relation": "“教游泳”是前句“尝试新事物”的具体一例，构成举例关系，对应 For example。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "something new",
+          "signalSide": "context-before",
+          "targetText": "teaching Jacky to swim",
+          "relation": "前句的 something new 是上位泛指，本句“教游泳”是其下位实例，泛指—实例的对应正是举例标志，锁定 For example。"
+        }
+      ],
+      "teachingNote": "由泛指到具体事例的衔接处，优先选 For example。"
+    },
+    "q-zj-2022-jun-048": {
+      "blankId": "blank-zj-2022-jun-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "he has to believe that… 意为“他必须相信……”。句意为孩子学游泳，必须相信“万一狗刨撑不住，我会去救他”，believe 与全文 trust（信任）主题一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admit",
+          "meaning": "承认"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suggest",
+          "meaning": "建议、暗示"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "imagine",
+          "meaning": "想象"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’ll come to his rescue",
+          "signalSide": "context-after",
+          "targetText": "believe that I'll come to his rescue",
+          "relation": "宾语从句内容是“我会去救他”，孩子对此的态度是“相信”，与 believe 搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he trusts me",
+          "signalSide": "context-before",
+          "targetText": "believe",
+          "relation": "前文 he trusts me（信任我）与 believe（相信）同义复现，锁定语义。"
+        }
+      ],
+      "teachingNote": "信任主题文里 ___ that 从句多取 believe，与 trust 互文。"
+    },
+    "q-zj-2022-jun-049": {
+      "blankId": "blank-zj-2022-jun-049",
+      "blankNo": 49,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "Similarly 表“同样地、类似地”。前文谈亲子间的信任，本句把话题平移到“职场中信任对强有力的领导同样重要”，两者是平行类比关系，故用 Similarly。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "However",
+          "meaning": "然而（转折）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Therefore",
+          "meaning": "因此（因果）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Fortunately",
+          "meaning": "幸运的是"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "in the workplace, trust is important",
+          "signalSide": "context-after",
+          "targetText": "Similarly",
+          "relation": "本句把“信任重要”从亲子场景平移到职场，是平行类比，对应 Similarly。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Trust is such an important part",
+          "signalSide": "context-before",
+          "targetText": "in the workplace, trust is important",
+          "relation": "前文“信任很重要”与本句职场“trust is important”观点同点重申，前后并列同向，正是 Similarly 的类比标志。"
+        }
+      ],
+      "teachingNote": "话题由 A 场景平移到 B 场景且观点相同时，用 Similarly。"
+    },
+    "q-zj-2022-jun-050": {
+      "blankId": "blank-zj-2022-jun-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "strong leadership 意为“强有力的领导（力）”。本句进入职场话题，下文紧接“每位管理者 manager 都应努力培养团队信任”，leadership 与 manager、team 同属管理语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "affection",
+          "meaning": "喜爱、深情"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "determination",
+          "meaning": "决心"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "friendship",
+          "meaning": "友谊"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "every manager",
+          "signalSide": "context-after",
+          "targetText": "leadership",
+          "relation": "下文 manager（管理者）与 leadership（领导力）同属管理语义场。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "trust is important for strong",
+          "signalSide": "context-before",
+          "targetText": "strong leadership",
+          "relation": "strong 修饰所填名词，与 leadership 构成“强有力的领导力”。"
+        }
+      ],
+      "teachingNote": "职场段里看 manager/team 等同场词，strong ___ 锁定 leadership。"
+    },
+    "q-zj-2022-jun-051": {
+      "blankId": "blank-zj-2022-jun-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "develop trust among their team 意为“在团队中培养/建立信任”。develop 与 trust 搭配表“逐步建立信任”，与上文“管理者应努力”的语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "assess",
+          "meaning": "评估、评定"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "organize",
+          "meaning": "组织、安排"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understand",
+          "meaning": "理解"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "among their team",
+          "signalSide": "context-after",
+          "targetText": "develop trust among their team",
+          "relation": "在团队中“培养”信任，develop 与 trust/among their team 搭配自然。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "work hard to",
+          "signalSide": "context-before",
+          "targetText": "work hard to develop",
+          "relation": "“努力去做”后接动词原形，与表“建立、培养”的 develop 一致。"
+        }
+      ],
+      "teachingNote": "trust 作宾语谈“建立”时常配 develop/build，而非 assess。"
+    },
+    "q-zj-2022-jun-052": {
+      "blankId": "blank-zj-2022-jun-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "follow your directions 意为“听从你的指示”。句意为“如果人们不信任你，就不太可能遵从你的指示并心甘情愿成为忠诚的团队成员”，follow 与 directions 构成“遵从指令”的搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "repeat",
+          "meaning": "重复"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "change",
+          "meaning": "改变"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "forget",
+          "meaning": "忘记"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "your directions",
+          "signalSide": "context-after",
+          "targetText": "follow your directions",
+          "relation": "directions（指示）作宾语，follow directions 表“听从指示”的固定搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "willingly become a loyal",
+          "signalSide": "context-after",
+          "targetText": "follow your directions and willingly become a loyal team member",
+          "relation": "与“甘愿成为忠诚成员”并列，逻辑上指“遵从指示”，与 follow 一致。"
+        }
+      ],
+      "teachingNote": "directions/orders 作宾语谈“服从”时取 follow。"
+    },
+    "q-zj-2022-jun-053": {
+      "blankId": "blank-zj-2022-jun-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "A lack of trust 意为“信任的缺失”。本句说“信任缺失会让人们与你作对而非为你效力”，与前文“不信任就不会服从”形成同向延伸，lack of trust 正合句意。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gesture",
+          "meaning": "姿态、手势"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "measure",
+          "meaning": "措施、办法"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bond",
+          "meaning": "纽带、联结"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "A",
+          "signalSide": "context-before",
+          "targetText": "A lack of trust",
+          "relation": "A ___ of trust，lack of 表“缺乏”，与 trust 构成“信任的缺失”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "work against you rather than for you",
+          "signalSide": "context-after",
+          "targetText": "A lack of trust",
+          "relation": "“与你作对而非效力”是负面结果，由“信任缺失”导致，锁定 lack。"
+        }
+      ],
+      "teachingNote": "A ___ of trust 接负面后果时，取表缺失的 lack。"
+    },
+    "q-zj-2022-jun-054": {
+      "blankId": "blank-zj-2022-jun-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "giving you their best 意为“拿出他们最好的表现给你”。give sb sth 双宾结构，搭配 you 和 their best，句意为“至少意味着人们不会为你全力以赴”，与上文信任缺失的负面后果衔接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "telling",
+          "meaning": "告诉"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "selling",
+          "meaning": "出售、卖"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sending",
+          "meaning": "寄送、发送"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "you their best",
+          "signalSide": "context-after",
+          "targetText": "giving you their best",
+          "relation": "give sb sth 双宾结构，与 you、their best 搭配表“为你拿出最好的”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "work against you rather than for you",
+          "signalSide": "context-before",
+          "targetText": "giving you their best",
+          "relation": "前句“与你作对而非效力”延伸出“不会全力以赴”，呼应 give their best。"
+        }
+      ],
+      "teachingNote": "___ sb their best 的双宾搭配里，取 give（拿出最佳表现）。"
+    },
+    "q-zj-2022-jun-055": {
+      "blankId": "blank-zj-2022-jun-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "Good management, like good parenting 意为“好的管理，正如好的养育”。本句收束职场话题，management 与上文 manager、team、leadership 同属管理语义场，并与 parenting 平行对举。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "personality",
+          "meaning": "性格、个性"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "communication",
+          "meaning": "沟通、交流"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "education",
+          "meaning": "教育"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "like good parenting",
+          "signalSide": "context-after",
+          "targetText": "Good management, like good parenting",
+          "relation": "与 good parenting 平行对举，职场对应词为 management（管理）。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "every manager",
+          "signalSide": "context-before",
+          "targetText": "Good management",
+          "relation": "上文 manager 与 management 同属管理语义场，呼应结尾的总结。"
+        }
+      ],
+      "teachingNote": "结尾总结句与 parenting 对举，职场侧取同场词 management。"
+    }
+  }
+}

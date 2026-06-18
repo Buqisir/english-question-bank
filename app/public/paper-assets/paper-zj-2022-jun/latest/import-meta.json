@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2022-jun",
+  "sourceFileName": "2022年浙江卷高考真题英语试卷（6月）-答案版.docx",
+  "sourceFileSha256": "a122274be75589b0ba1863d66939f44a699b4ecb23f129f58de54e742164f61a",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-18T14:47:45.202Z",
+  "paper": {
+    "year": 2022,
+    "region": "浙江",
+    "paperName": "2022年6月浙江卷",
+    "examCode": "zj-2022-jun",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2022",
+      "浙江卷",
+      "6月"
+    ]
+  },
+  "groups": {
+    "group-zj-2022-jun-reading-a": {
+      "groupId": "group-zj-2022-jun-reading-a",
+      "difficulty": "中",
+      "summary": "记叙文。作者是一名来自意大利的移民女孩，回忆自己初到布鲁克林上幼儿园时因语言和文化差异而手足无措，长大后在纽约政府机构做暑期工担任意大利语翻译，帮助新移民，从而体会到掌握双语的幸运并学会欣赏这座多元文化城市的多样性。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2022-jun-reading-b": {
+      "groupId": "group-zj-2022-jun-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍了在世界各地兴起的“微型森林”（Tiny Forest）运动：它的现状与意义、起源与传播、运作方式与目标，以及微型森林中树木的种植特点和生态价值。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2022-jun-reading-c": {
+      "groupId": "group-zj-2022-jun-reading-c",
+      "difficulty": "中",
+      "summary": "本文为说明/议论性文章，主旨是：在职场上，凡事做到极致并非成功的唯一秘诀，适度（moderation）同样能带来好结果。文章先提出适度观点，再用哈佛研究证明适度练习效果最好，接着讨论午餐、社交互动对工作的积极影响，最后引用专家观点说明脱离任务的活动和积极情绪能提升工作效率与创造力。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2022-jun-seven-choices": {
+      "groupId": "group-zj-2022-jun-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇议论性说明文，作者以孩子们给圣诞老人写信为引子，论述写作的核心在于“目的性”：真实的读者与真实的目的能让孩子学会根据对象调整语言。文章进而指出当代年轻人借助科技其实写得比以往更多，但长期只用非正式语言会带来问题，最优秀的沟通者懂得让语言匹配受众。五个空分别落在段尾收束、段中转折、并列举例、段首引题和段中转折处。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2022-jun-cloze": {
+      "groupId": "group-zj-2022-jun-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2022-jun-grammar-fill": {
+      "groupId": "group-zj-2022-jun-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2022-jun-writing-application": {
+      "groupId": "group-zj-2022-jun-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2022-jun-writing-continuation": {
+      "groupId": "group-zj-2022-jun-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

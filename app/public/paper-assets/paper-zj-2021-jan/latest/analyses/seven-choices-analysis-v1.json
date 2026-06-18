@@ -1,0 +1,428 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2021-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2021-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2021-jan-seven-choices": {
+      "overview": "本文是一篇说明文，探讨超市结账时\"为什么你排的队总是最慢\"这一日常现象。作者先抛出生活共鸣的场景，再用数学概率（多条队列中你的队最快的概率仅为三分之一）解释这并非错觉，随后介绍研究者提出的\"蛇形队列\"（serpentine line）解决方案，最后说明为什么大多数商店没有采用——成本与空间限制。",
+      "discourseStructure": {
+        "summary": "全文按\"现象—原因—对策—对策的局限\"展开：先以购物排队的挫败场景引入并设问，接着用概率论说明另一条队确实更可能更快，然后介绍蛇形队列如何更公平高效，最后转折解释这一方案因成本与空间未被普遍采用。",
+        "units": [
+          {
+            "unitId": "unit-zj-2021-jan-seven-hook",
+            "heading": "现象与设问",
+            "paragraphIds": [
+              "para-zj-2021-jan-seven-title",
+              "para-zj-2021-jan-seven-p1",
+              "para-zj-2021-jan-seven-p2"
+            ],
+            "summary": "用\"选错队、被后来者反超\"的场景引发共鸣并设问，随后点明真相：这其实是数学在与你作对，另一条队真的更快。"
+          },
+          {
+            "unitId": "unit-zj-2021-jan-seven-why",
+            "heading": "原因：概率",
+            "paragraphIds": [
+              "para-zj-2021-jan-seven-p3",
+              "para-zj-2021-jan-seven-p4"
+            ],
+            "summary": "解释超市本想配足收银员以减少延误，但繁忙时任何小中断都会拖慢整条队；从概率看，三条队中你这条最快的概率只有三分之一，所以\"另一条更快\"并非错觉。"
+          },
+          {
+            "unitId": "unit-zj-2021-jan-seven-solution",
+            "heading": "对策：蛇形队列",
+            "paragraphIds": [
+              "para-zj-2021-jan-seven-p5"
+            ],
+            "summary": "介绍研究者的解决办法——所有顾客排成一条蛇形长队，由下一个空闲收银台依次服务，这正是银行和快餐店的做法，能避免单台延误不公平地惩罚某条队，整体加快结账。"
+          },
+          {
+            "unitId": "unit-zj-2021-jan-seven-limit",
+            "heading": "局限：成本",
+            "paragraphIds": [
+              "para-zj-2021-jan-seven-p6"
+            ],
+            "summary": "转而设问并解释：蛇形队列需要很多收银台才能保持一条队快速移动，部分商店负担不起空间或人力，因此未被普遍采用。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2021-jan-031": {
+      "blankId": "blank-zj-2021-jan-031",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "You chose wrong",
+        "got in other lines long after you",
+        "already checked out",
+        "off to the parking lot"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jan-seven-p1",
+        "beforeQuote": "People who you swear got in other lines long after you are already checked out and off to the parking lot.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "this always seem to happen to you",
+          "signalSide": "option",
+          "targetText": "You chose wrong / got in other lines long after you ... already checked out",
+          "relation": "选项中的 this ... happen to you 概括前文\"你选错队、被后来者反超\"的反复经历，承接段首挫败场景。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this",
+          "signalSide": "option",
+          "targetText": "People who ... got in other lines long after you are already checked out",
+          "relation": "this 回指前句描述的\"被后来者反超\"这一整件事，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "got in other lines long after you",
+          "signalSide": "context-before",
+          "targetText": "always seem to happen",
+          "relation": "前文\"别人后排队却先结完账\"与选项\"总是发生在你身上\"同属\"排队总选错\"话题场，且 always 呼应这种反复性。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Why",
+          "signalSide": "option",
+          "targetText": "It turns out, it’s just math working against you",
+          "relation": "Why 提出的设问由下一段 It turns out ... math working against you 作答，问—答结构贯通上下文。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本空位于段末，需要一句对前文\"总是选错队\"现象的收束与设问。A 用反问\"为什么这种事总发生在你身上\"既概括前句的反复挫败，又自然引出下一段\"原来是数学在作怪\"的解答。",
+        "matchedClues": [
+          {
+            "contextSide": "got in other lines long after you ... already checked out",
+            "optionSide": "this always seem to happen to you",
+            "relation": "选项的 this 指代并概括前句\"被后来者反超\"的经历，always 强调其反复性。"
+          },
+          {
+            "contextSide": "It turns out, it’s just math working against you",
+            "optionSide": "Why does this always seem to happen",
+            "relation": "A 的设问 Why 由下一段\"原来是数学在与你作对\"正面回答，形成问—答衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C\"他们中有些人可能排了近一小时\"与前文\"别人比你结账更快\"语义矛盾——前文说的是别人更快而非排得更久，且 Some of them 缺乏可指代的群体，故不合。"
+        }
+      ],
+      "teachingNote": "段末空若能用反问\"总结现象\"并被下一段正面解答，优先选问—答衔接的设问句。"
+    },
+    "q-zj-2021-jan-032": {
+      "blankId": "blank-zj-2021-jan-032",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "enough employees at checkout",
+        "minimum delay",
+        "small interruption",
+        "holding up an entire line"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jan-seven-p3",
+        "beforeQuote": "Grocery stores try to have enough employees at checkout to get all their customers through with minimum delay.",
+        "afterQuote": "Any small interruption—a price check, a chatty customer—can have downstream effects, holding up an entire line."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "minimum delay → the system gets particularly busy",
+          "relation": "But 引出转折，与前句\"力求最小延误\"形成对照——理想状态被\"系统特别繁忙\"打破。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the system gets particularly busy",
+          "signalSide": "option",
+          "targetText": "Any small interruption ... holding up an entire line",
+          "relation": "选项\"系统特别繁忙\"正是空后\"任何小中断都拖慢整条队\"的前提条件，繁忙时中断的影响才被放大。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "minimum delay",
+          "signalSide": "context-before",
+          "targetText": "particularly busy",
+          "relation": "前句\"最小延误\"的理想与选项\"特别繁忙\"形成话题场内的理想—现实反差。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Any small interruption",
+          "signalSide": "context-after",
+          "targetText": "the system gets particularly busy",
+          "relation": "空后\"任何小中断\"承接选项\"系统繁忙\"，繁忙是中断产生连锁拖累的背景。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本空夹在\"商店力求最小延误\"与\"任何小中断都会拖垮整条队\"之间，需要一个转折过渡。G 用 But 转折引出\"有时系统会特别繁忙\"，既反转前句的理想状态，又为后句中断的连锁影响铺设背景。",
+        "matchedClues": [
+          {
+            "contextSide": "minimum delay",
+            "optionSide": "But ... the system gets particularly busy",
+            "relation": "But 把前句\"最小延误\"的理想转向\"特别繁忙\"的现实。"
+          },
+          {
+            "contextSide": "Any small interruption ... holding up an entire line",
+            "optionSide": "the system gets particularly busy",
+            "relation": "唯有在系统繁忙时，小中断才会产生拖垮整条队的下游效应，G 提供了这一前提。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C\"有些人可能排了近一小时\"虽与\"排队\"话题相关，但缺少转折逻辑，且无法承接空后\"小中断拖慢整条队\"的因果背景，不如 But 引出的繁忙前提贴合。"
+        }
+      ],
+      "teachingNote": "前句说理想、空后说出问题时，优先选含 But 等转折词、并能充当\"出问题的前提\"的过渡句。"
+    },
+    "q-zj-2021-jan-033": {
+      "blankId": "blank-zj-2021-jan-033",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "three lines in the store",
+        "delays will happen randomly",
+        "Think about the probability",
+        "Another line probably is moving faster"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jan-seven-p4",
+        "beforeQuote": "Think about the probability:",
+        "afterQuote": "So it’s not just in your mind: Another line probably is moving faster."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "one in three",
+          "signalSide": "option",
+          "targetText": "three lines in the store",
+          "relation": "选项中的 one in three 精确对应前句\"店里有三条队\"，三条队中你这条最快的概率正是三分之一。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your line being the fastest",
+          "signalSide": "option",
+          "targetText": "Think about the probability / Another line probably is moving faster",
+          "relation": "选项\"你这条队最快的概率\"紧扣空前\"想想概率\"，并推出空后\"另一条更可能更快\"。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "three lines in the store",
+          "signalSide": "context-before",
+          "targetText": "one in three",
+          "relation": "空前\"三条队\"为选项\"三分之一\"提供数字依据，二者同属概率话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "So",
+          "signalSide": "context-after",
+          "targetText": "The chances ... are only one in three",
+          "relation": "空后用 So 引出结论\"并非错觉\"，正是由选项给出的\"只有三分之一概率\"推得，形成因—果衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "本空紧接\"想想概率\"这一冒号提示，需给出具体概率数据。D\"你这条队最快的概率只有三分之一\"既对应前文\"三条队\"的数字，又支撑空后\"So 所以另一条更可能更快\"的结论。",
+        "matchedClues": [
+          {
+            "contextSide": "three lines in the store",
+            "optionSide": "only one in three",
+            "relation": "三条队对应三分之一的概率，数字精确吻合。"
+          },
+          {
+            "contextSide": "So ... Another line probably is moving faster",
+            "optionSide": "your line being the fastest are only one in three",
+            "relation": "你最快的概率仅三分之一，故\"另一条更可能更快\"，So 引出的结论由此而来。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E\"你在最快队列的概率有多高\"虽同属概率话题，但它是设问句而非答案；空前\"Think about the probability:\"冒号后需要的是具体数据（陈述句），且空后\"So\"要求由该数据推出结论，故应选给出\"三分之一\"的 D 而非再设一问的 E。"
+        }
+      ],
+      "teachingNote": "冒号后引出具体内容、空后又用 So 作结时，优先选与上文数字精确对应、能直接推出结论的陈述句。"
+    },
+    "q-zj-2021-jan-034": {
+      "blankId": "blank-zj-2021-jan-034",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "serpentine line",
+        "serve each person at the front",
+        "next available register",
+        "speed up checkout overall"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jan-seven-p5",
+        "beforeQuote": "Make all customers stand in one long, snaking line—called a serpentine line—and serve each person at the front with the next available register.",
+        "afterQuote": "This is what they do at most banks and fast-food restaurants."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this method",
+          "signalSide": "option",
+          "targetText": "Make all customers stand in one long, snaking line—called a serpentine line",
+          "relation": "this method 回指空前介绍的\"蛇形队列\"做法，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "much faster than the traditional approach",
+          "signalSide": "option",
+          "targetText": "speed up checkout overall",
+          "relation": "选项\"比传统方式快得多\"与本段后文\"整体加快结账\"同属\"提速\"话题场，评价蛇形队列的优势。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "serpentine line",
+          "signalSide": "context-before",
+          "targetText": "this method",
+          "relation": "空前刚定义\"serpentine line\"，选项即以 this method 指代并评价它。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "this method",
+          "relation": "空后\"This is what they do at most banks\"中的 This 与选项 this method 指向同一做法，前后指代链一致，证明空处仍在讲蛇形队列本身。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本空紧接对\"蛇形队列\"做法的定义，需要一句对该做法的评价。F 用 this method 回指蛇形队列，并指出\"用三个收银台时比传统方式快得多\"，承上启下，与本段\"整体加快结账\"的论断一致。",
+        "matchedClues": [
+          {
+            "contextSide": "serpentine line ... serve each person at the front with the next available register",
+            "optionSide": "this method",
+            "relation": "this method 指代前句描述的蛇形队列服务方式。"
+          },
+          {
+            "contextSide": "speed up checkout overall",
+            "optionSide": "much faster than the traditional approach",
+            "relation": "选项\"比传统方式快得多\"与段尾\"整体加快结账\"相互印证，统一评价该方法更高效。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B\"那为什么多数地方不鼓励蛇形队列\"虽含 serpentine 关键词，但它转向\"为何不采用\"的设问，与本段一直在正面介绍优点的语气相反；该转折设问应放在末段第35空，而非此处。"
+        }
+      ],
+      "teachingNote": "空前刚定义某做法、空后用 This 继续讲它时，选含 this method 等回指词、并对该做法作正面评价的句子。"
+    },
+    "q-zj-2021-jan-035": {
+      "blankId": "blank-zj-2021-jan-035",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "It takes many registers",
+        "can’t afford the space or manpower",
+        "keep one line moving quickly"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2021-jan-seven-p6",
+        "beforeQuote": "",
+        "afterQuote": "It takes many registers to keep one line moving quickly, and some stores can’t afford the space or manpower."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "So why",
+          "signalSide": "option",
+          "targetText": "It takes many registers ... can’t afford the space or manpower",
+          "relation": "So why 提出\"为何多数地方不鼓励蛇形队列\"的设问，由空后\"需要很多收银台、商店负担不起\"作答，构成问—答衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "serpentine lines",
+          "signalSide": "option",
+          "targetText": "It takes many registers to keep one line moving quickly",
+          "relation": "选项中的 serpentine lines 承接上段介绍的蛇形队列，空后解释维持它所需的成本，话题一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "can’t afford",
+          "signalSide": "context-after",
+          "targetText": "why don’t most places encourage serpentine lines",
+          "relation": "空后\"商店负担不起空间或人力\"正是对选项设问\"为何多数地方不鼓励\"的直接回答。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "many registers",
+          "signalSide": "context-after",
+          "targetText": "most places encourage serpentine lines",
+          "relation": "空后\"需要很多收银台\"与选项\"多数地方是否采用\"同属\"为何不普及\"话题场，揭示原因。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本空位于末段段首，需引出最后一个话题。B 设问\"那为什么多数地方不鼓励蛇形队列\"，恰好由空后\"需要很多收银台、有些商店负担不起空间或人力\"给出原因解答，问—答衔接收束全文。",
+        "matchedClues": [
+          {
+            "contextSide": "It takes many registers ... can’t afford the space or manpower",
+            "optionSide": "why don’t most places encourage serpentine lines",
+            "relation": "空后用成本与人力解释\"为何多数地方不采用\"，正面回答 B 的设问。"
+          },
+          {
+            "contextSide": "keep one line moving quickly",
+            "optionSide": "serpentine lines",
+            "relation": "选项 serpentine lines 与空后\"维持一条队快速移动\"指向同一对象，话题连贯。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E\"你在最快队列的概率有多高\"属第四段概率话题，与末段\"蛇形队列为何不普及\"的成本话题无关，且无法被空后\"负担不起空间人力\"作答，故不合。"
+        }
+      ],
+      "teachingNote": "段首空若提出设问、空后紧跟原因解释，选问—答衔接且关键词与下文一致的设问句。"
+    }
+  }
+}

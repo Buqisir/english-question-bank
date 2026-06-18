@@ -1,0 +1,1051 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-zj-2020-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2020-jan-reading-a",
+    "group-zj-2020-jan-reading-b",
+    "group-zj-2020-jan-reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18T00:00:00Z"
+  },
+  "groups": {
+    "group-zj-2020-jan-reading-a": {
+      "overview": "本文是作家 Eudora Welty 的童年回忆散文，回忆她九岁时在 Jackson 的 Carnegie 图书馆借书读书的经历，刻画了严厉的图书管理员 Mrs. Calloway、支持她阅读的母亲，以及作者本人对阅读痴迷的“极度幸福”。",
+      "discourseStructure": {
+        "summary": "全文按人物与情境展开：先写令人畏惧的图书管理员及其严苛规矩，再写母亲带“我”办借书证、母亲不畏惧她，接着写在严苛借书规则下“我”如饥似渴地读书的幸福，最后写母亲同样热爱阅读、随时随地手不释卷。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2020-jan-reading-a-1",
+            "summary": "介绍图书管理员 Mrs. Calloway：她独自管理图书馆，到处挂着“SILENCE”的牌子，衣着不得体就被赶回家换衣服；而“我”为了读书甘愿照做。",
+            "function": "引入核心人物并通过具体细节奠定其严厉形象，同时点出“我”对阅读的强烈渴望。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-a-2",
+            "summary": "母亲不怕 Mrs. Calloway，带“我”去办自己的借书证，并当面声明允许九岁的 Eudora 借阅任何书籍（儿童或成人）。",
+            "function": "通过母亲的态度与对比，凸显母亲对“我”阅读自由的支持。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-a-3",
+            "summary": "Mrs. Calloway 自定借书规矩：当天借的书当天不能还、每次只能借两本；“我”于是每次两本、飞快地骑车把书带回家，一到家就开始读，深感这是极度的幸福。",
+            "function": "进一步刻画规则之严，并直接抒发“我”读书时“极度幸福”的核心情感。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-a-4",
+            "summary": "母亲与“我”共有这份对阅读的热爱：她常一边做别的事一边读书，连陪孙女玩“小红帽”扮大灰狼时也手不释卷，只在该接话时抬头应一句又回到杂志里。",
+            "function": "呼应并升华“我”的阅读之爱，说明这种对阅读的痴迷是母女共有的，收束全文。"
+          }
+        ]
+      }
+    },
+    "group-zj-2020-jan-reading-b": {
+      "overview": "本文是一篇说明文，介绍美国威斯康星州密尔沃基市用奶酪盐水（cheese brine）替代部分岩盐（rock salt）来给冬季道路除冰的新办法。文章从该做法的提出讲起，依次说明其工作原理（含盐降低水的冰点）、双重经济效益（既帮奶酪厂处理废料又帮城市省钱）、环保优势（减少岩盐对环境的污染），并以这一做法的小缺点（气味）收尾。",
+      "discourseStructure": {
+        "summary": "全文按\"引入新做法→背景与废料问题→工作原理→经济与环保益处→污染机理与减量效果→缺点\"的顺序展开，先说明现象再分析利弊，结构清晰，由果及因再到评价。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-1",
+            "summary": "密尔沃基市正在试验用奶酪盐水（制作软奶酪时产生的咸味液体）撒在路面上来防止冬季道路结冰。",
+            "function": "开篇引入文章主题——用奶酪盐水给道路除冰这一新做法。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-2",
+            "summary": "威斯康星州盛产奶酪，去年产了80亿磅，因而剩下大量奶酪盐水，而处置这些废料代价高昂，引出奶酪厂该如何处理废料的问题。",
+            "function": "交代背景，说明大量奶酪盐水废料及其处置难题，为新做法的提出铺垫。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-3",
+            "summary": "通常城镇用岩盐除冰，盐降低水的冰点使冰融化；奶酪盐水中也含盐，同样能降低冰点，因此既能让奶酪厂和城市省钱又能保证道路安全。",
+            "function": "说明除冰的工作原理，并指出奶酪盐水与岩盐一样含盐、可降冰点，是新做法的科学依据。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-4",
+            "summary": "除了省钱，奶酪盐水还可能是更环保的选择，因为很多人怀疑每年冬天大量使用的岩盐正在危害环境。",
+            "function": "承上启下，从省钱转向环保益处，提出岩盐危害环境的疑虑。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-5",
+            "summary": "岩盐的成分是氯化钠，与食盐相同，看似无害，但路政部门每年在美国道路上撒约2000万吨盐，用量极大。",
+            "function": "通过对比食盐用量与道路用盐量，说明岩盐用量巨大，暗示其潜在危害。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-6",
+            "summary": "这些化学物质冲入地下，会污染饮用水、危害植物、侵蚀土壤；而先撒奶酪盐水再撒岩盐，密尔沃基有望减少30%的岩盐用量。",
+            "function": "具体说明岩盐对环境的危害机理，并给出新做法可减少岩盐用量的量化效果。"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-b-7",
+            "summary": "奶酪盐水也有缺点——气味像变质牛奶；但提出该想法的Emil Norby并不介意，还打趣说路面闻起来\"有威斯康星味\"。",
+            "function": "指出新做法的缺点并以当事人的乐观态度收尾，使说明全面客观。"
+          }
+        ]
+      }
+    },
+    "group-zj-2020-jan-reading-c": {
+      "overview": "本文是一篇说明文，介绍杨百翰大学（BYU）研究者的一项研究发现：父亲在帮助青少年子女培养毅力（persistence）方面具有独特作用，而毅力又与更好的学业成就相关。文章进一步解释了有助于培养毅力的“权威型”（authoritative）教养方式的特征，并指出未来研究可关注单亲家庭。",
+      "discourseStructure": {
+        "summary": "全文先提出核心发现（父亲对培养子女毅力有独特作用），再交代研究规模与结果，引用研究者原话强调父亲角色的独特性，接着解释“权威型”教养方式的具体特征及其与毅力的关系，最后指出研究对象局限并提出未来研究方向。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2020-jan-reading-c-1",
+            "summary": "指出毅力是年轻人成功的关键技能，而毅力深受父亲影响；BYU 研究者发现父亲在帮助青少年子女培养毅力上处于独特位置。",
+            "function": "引出话题并提出研究的核心发现"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-c-2",
+            "summary": "介绍两位 BYU 教授在追踪 325 个美国家庭数年后得出结论：通过父亲获得的毅力会带来更高的学业成就。",
+            "function": "交代研究方法、样本与主要结果"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-c-3",
+            "summary": "引用 Padilla-Walker 的话，强调专门研究父亲独特作用的研究很少，并指出毅力等可被教导的特质是孩子人生成功的关键。",
+            "function": "用研究者原话强调研究的独特价值"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-c-4",
+            "summary": "说明父亲需要采用“权威型”教养方式：它不同于专制（authoritarian）的严苛、苛求与控制，而是让孩子感到温暖与爱、强调责任与规则背后的原因、给予孩子适度自主权。",
+            "function": "界定并解释“权威型”教养方式的特征"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-c-5",
+            "summary": "研究中约 52% 的父亲表现出高于平均水平的权威型教养；由权威型父亲抚养的孩子随时间推移更可能培养出毅力，从而在学校取得更好结果。",
+            "function": "用数据佐证权威型教养与毅力、学业结果的关系"
+          },
+          {
+            "paragraphId": "para-zj-2020-jan-reading-c-6",
+            "summary": "指出本研究只考察生活在双亲家庭的 11 至 14 岁孩子，但研究者认为单亲家长仍可能在传授毅力方面发挥作用，这是未来研究的方向。",
+            "function": "说明研究局限并提出未来研究方向"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2020-jan-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Mrs. Calloway 人物形象的概括，需根据第一、三段对其行为与规矩的细节归纳其性格特征。",
+      "stemTranslationZh": "下列哪一项最能描述 Mrs. Calloway？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "安静的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "SILENCE in big black letters was on signs hung everywhere.",
+            "optionText": "Quiet.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 SILENCE（安静）说的是她在图书馆里到处张贴“肃静”的牌子、要求读者保持安静，描述的是她的规定与场所氛围，并非说她本人性格安静；选项用 Quiet 与 SILENCE 同义钩连误导考生。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-1",
+              "quote": "SILENCE in big black letters was on signs hung everywhere.",
+              "anchor": "到处挂“肃静”牌子"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "严厉的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-a-1",
+              "quote": "If she thought you were dressed improperly, she sent you straight back home to change your clothes.",
+              "anchor": "衣着不当即被赶回家换衣服"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2020-jan-reading-a-3",
+              "quote": "You could not take back a book to the library on the same day you’d taken it out",
+              "anchor": "当天借书当天不许还"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "幽默的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Mrs. Calloway is humorous.",
+            "explanation": "原文未提及 Mrs. Calloway 有任何幽默之处；文中的幽默情节（扮大灰狼说“The better to eat you with”）属于第四段的“母亲”，与图书管理员无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "体贴的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "it made no difference to her that you’d read every word in it and needed another to start",
+            "sourceHighlight": "it made no difference to her",
+            "optionText": "Considerate.",
+            "optionHighlight": "Considerate",
+            "explanation": "原文说哪怕你已读完整本书、急需下一本，她也毫不通融（it made no difference to her），表现的是不近人情、不为读者着想，与“体贴/considerate”正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-3",
+              "quote": "it made no difference to her that you’d read every word in it and needed another to start",
+              "anchor": "读完急需也毫不通融"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Strict.",
+          "sourceRole": "correctOption",
+          "targetText": "If she thought you were dressed improperly, she sent you straight back home to change your clothes.",
+          "targetParagraphId": "para-zj-2020-jan-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 Strict（严厉）由第一段“衣着不得体就被赶回家换衣服（sent you straight back home to change your clothes）”这一具体行为归纳而来。"
+        },
+        {
+          "sourceText": "Strict.",
+          "sourceRole": "correctOption",
+          "targetText": "Mrs. Calloway made her own rules about books.",
+          "targetParagraphId": "para-zj-2020-jan-reading-a-3",
+          "relationType": "locationCue",
+          "note": "第三段“她自定借书规矩（made her own rules）”及随后的苛刻规定，同样支持 Strict 这一概括。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-022": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对指代词 this feeling 的回指理解，需结合末段及前文判断“这种情感”具体指什么。",
+      "stemTranslationZh": "最后一段中划线词 “this feeling” 指的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对阅读的渴望。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-a-4",
+              "quote": "My mother shared this feeling of mine.",
+              "anchor": "母亲与“我”共有这份情感"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2020-jan-reading-a-3",
+              "quote": "I knew this was extreme happiness, knew it at the time.",
+              "anchor": "读书时的极度幸福"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对 Mrs. Calloway 的喜爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I never knew anyone who’d grown up in Jackson without being afraid of Mrs. Calloway, our librarian.",
+            "sourceHighlight": "without being afraid of Mrs. Calloway",
+            "optionText": "Love for Mrs. Calloway.",
+            "optionHighlight": "Love for Mrs. Calloway",
+            "explanation": "原文对 Mrs. Calloway 的基调是“畏惧（afraid of）”而非喜爱，this feeling 指代的是母女共有的阅读热情，把它说成“对 Mrs. Calloway 的喜爱”既属指代错配又与原文情感倾向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-1",
+              "quote": "I never knew anyone who’d grown up in Jackson without being afraid of Mrs. Calloway, our librarian.",
+              "anchor": "人人都畏惧她"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对游戏的兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "while taking the part of the Wolf in a game of “Little Red Riding Hood”",
+            "optionText": "Interest in games.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 game（小红帽游戏）只是用来烘托母亲连玩游戏时都在读书，重点仍是“读书”；选项用 games 与原文 game 同词钩连，把指代对象偷换成“对游戏的兴趣”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-4",
+              "quote": "while taking the part of the Wolf in a game of “Little Red Riding Hood”",
+              "anchor": "玩“小红帽”游戏时仍在读书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对图书馆规则的畏惧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "My mother shared this feeling of mine.",
+            "sourceEntity": "this feeling（母女共有的对阅读的热爱）",
+            "optionText": "Fear of the library rules.",
+            "optionEntity": "Fear of the library rules（对借书规则的畏惧）",
+            "explanation": "this feeling 是母亲“共有（shared）”的一份正面情感——对阅读的热爱；而“对图书馆规则的畏惧”是负面情感，且母亲恰恰“不怕（was not afraid）”，二者指代对象与情感性质都不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-2",
+              "quote": "My mother was not afraid of Mrs. Calloway.",
+              "anchor": "母亲并不畏惧"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "this feeling",
+          "sourceRole": "stem",
+          "targetText": "I knew this was extreme happiness, knew it at the time.",
+          "targetParagraphId": "para-zj-2020-jan-reading-a-3",
+          "relationType": "locationCue",
+          "note": "末段 this feeling 回指上文“我”读书时的 extreme happiness，即对阅读的痴迷与渴望（Desire to read）。"
+        },
+        {
+          "sourceText": "Desire to read.",
+          "sourceRole": "correctOption",
+          "targetText": "I would do anything to read.",
+          "targetParagraphId": "para-zj-2020-jan-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 Desire to read 与第一段“我愿为读书做任何事（I would do anything to read）”同义对应，印证这份共有情感正是“对阅读的渴望”。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-023": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查文章出处/体裁判断，需根据全文的第一人称叙述、真实人名与回忆口吻推断文本来源。",
+      "stemTranslationZh": "这篇文章可能出自哪里？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本旅游指南。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The text is from a guidebook.",
+            "explanation": "原文未提及任何景点介绍、出行建议或实用指引，通篇是个人童年回忆，不具备旅游指南的功能与文体特征。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一部自传。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-a-2",
+              "quote": "“Eudora is nine years old and has my permission to read any book she wants from the shelves, children or adults,” Mother said.",
+              "anchor": "母亲点出叙述者名叫 Eudora"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2020-jan-reading-a-1",
+              "quote": "I never knew anyone who’d grown up in Jackson without being afraid of Mrs. Calloway, our librarian.",
+              "anchor": "第一人称回忆自己的成长"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一篇新闻报道。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "From the minute I reached our house, I started to read.",
+            "sourceHighlight": "I started to read",
+            "optionText": "A news report.",
+            "optionHighlight": "A news report",
+            "explanation": "新闻报道讲求客观、时效与公共事件，而本文是充满主观情感的第一人称私人回忆（如“I started to read”），不符合新闻文体，属把私人叙事误判为公共报道的体裁错位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-3",
+              "quote": "From the minute I reached our house, I started to read.",
+              "anchor": "私人化的第一人称叙述"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇书评。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "So two by two, I read library books as fast as I could go",
+            "optionText": "A book review.",
+            "matchType": "wordFamily",
+            "relationNote": "文中反复出现 book/books 只是叙述“我”借书读书的经历，并未对某本书的内容或优劣作出评价；选项用 book review 与原文 books 同词族钩连，诱导误选书评。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-a-3",
+              "quote": "So two by two, I read library books as fast as I could go",
+              "anchor": "只写借书读书，未评书"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "An autobiography.",
+          "sourceRole": "correctOption",
+          "targetText": "“Eudora is nine years old and has my permission to read any book she wants from the shelves, children or adults,” Mother said.",
+          "targetParagraphId": "para-zj-2020-jan-reading-a-2",
+          "relationType": "locationCue",
+          "note": "文中第一人称叙述者被母亲称作 Eudora（作家 Eudora Welty），叙述自己真实的童年经历，正是自传（autobiography）的典型特征。"
+        },
+        {
+          "sourceText": "An autobiography.",
+          "sourceRole": "correctOption",
+          "targetText": "I never knew anyone who’d grown up in Jackson without being afraid of Mrs. Calloway, our librarian.",
+          "targetParagraphId": "para-zj-2020-jan-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "开篇即以 I … grown up in Jackson 的第一人称回顾个人成长往事，与 autobiography（自传）回忆自身经历的体裁吻合。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查奶酪盐水能帮助道路防冰的原因，需要定位文章对其工作原理的说明。",
+      "stemTranslationZh": "为什么奶酪盐水能帮助保持冬季道路不结冰？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它很软。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the salty liquid used to make soft cheeses, like mozzarella",
+            "optionText": "It is soft.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文 soft cheeses 中的 soft 一词设钩。原文 soft 修饰的是\"软奶酪\"，与奶酪盐水能否防冰毫无关系，奶酪盐水本身是 salty liquid，并非\"软\"。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-b-1",
+              "quote": "the salty liquid used to make soft cheeses, like mozzarella",
+              "anchor": "soft 修饰的是奶酪"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它含有盐。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-b-3",
+              "quote": "Cheese brine has salt in it, which, like the rock salt, helps lower water’s freezing point.",
+              "anchor": "含盐→降低冰点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是温热的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "奶酪盐水之所以能防冰是因为它是温热的。",
+            "explanation": "原文未提及奶酪盐水\"温热\"。文章解释的防冰机理是盐降低水的冰点，而非依靠温度，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它里面有牛奶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a smell similar to that of bad milk",
+            "optionText": "It has milk in it.",
+            "matchType": "exact",
+            "relationNote": "选项借用原文末段 bad milk 中的 milk 一词设钩。原文只是说奶酪盐水气味像变质牛奶，并非说它含牛奶，更与防冰原因无关；防冰靠的是盐。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-b-7",
+              "quote": "a smell similar to that of bad milk",
+              "anchor": "milk 只是用于形容气味"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It contains salt.",
+          "sourceRole": "correctOption",
+          "targetText": "Cheese brine has salt in it, which, like the rock salt, helps lower water’s freezing point.",
+          "targetParagraphId": "para-zj-2020-jan-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项 contains salt 是原文 has salt in it 的同义替换；原文进一步说明含盐能 lower water's freezing point，正是防冰的原因。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查在道路上使用奶酪盐水的一项益处，需要在文章对环保/省钱益处的论述中定位并匹配选项。",
+      "stemTranslationZh": "在道路上使用奶酪盐水有什么益处？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "改善空气质量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "使用奶酪盐水能改善空气质量。",
+            "explanation": "原文未提及空气质量。文中讲的环境危害是污染饮用水、危害植物、侵蚀土壤，均与空气无关，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "增加岩盐的销量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Milwaukee may be able to cut its rock salt use by 30 percent",
+            "sourceHighlight": "cut its rock salt use by 30 percent",
+            "optionText": "Increasing sales of rock salt.",
+            "optionHighlight": "Increasing sales of rock salt",
+            "explanation": "原文说该做法可减少（cut...by 30 percent）岩盐用量，选项却说增加（Increasing）岩盐销量，趋势恰好相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-b-6",
+              "quote": "Milwaukee may be able to cut its rock salt use by 30 percent",
+              "anchor": "减少岩盐用量，而非增加"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "减少水污染。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-b-6",
+              "quote": "There it can pollute drinking water, harm plants, and eat away soil.",
+              "anchor": "岩盐会污染饮用水"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2020-jan-reading-b-6",
+              "quote": "Milwaukee may be able to cut its rock salt use by 30 percent",
+              "anchor": "减少30%岩盐→减少污染"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "拯救奶酪产业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+            "sourceHighlight": "help both cheese producers and cities save money",
+            "optionText": "Saving the cheese industry.",
+            "optionHighlight": "Saving the cheese industry",
+            "explanation": "原文只说该做法能帮奶酪厂\"省钱\"（save money）、消化废料盐水，选项却夸大为\"拯救整个奶酪产业\"（Saving the cheese industry），程度被过度拔高，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-b-3",
+              "quote": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+              "anchor": "帮奶酪厂省钱≠拯救产业"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reducing water pollution.",
+          "sourceRole": "correctOption",
+          "targetText": "There it can pollute drinking water, harm plants, and eat away soil.",
+          "targetParagraphId": "para-zj-2020-jan-reading-b-6",
+          "relationType": "paraphrase",
+          "note": "原文指出岩盐化学物质会 pollute drinking water；既然新做法能 cut its rock salt use by 30 percent，即减少了对水的污染，对应选项 Reducing water pollution。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-026": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对全文主旨的归纳与习语的理解，需要判断密尔沃基这一除冰新办法所体现的特点，并匹配最贴切的英语习语。",
+      "stemTranslationZh": "密尔沃基除冰的新办法可以作为下列哪一句的例子？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "找错了方向（在错误的地方下功夫）。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+            "sourceHighlight": "could help both cheese producers and cities save money",
+            "optionText": "barking up the wrong tree",
+            "optionHighlight": "wrong",
+            "explanation": "barking up the wrong tree 意为\"用错方法、找错方向\"，是否定评价。但全文表明该做法切实可行、好处多多，作者态度是肯定的，与习语的负面含义相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-b-3",
+              "quote": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+              "anchor": "做法有效，并非\"找错方向\""
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "本末倒置（把车套在马前面）。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "密尔沃基的新做法是本末倒置、顺序颠倒的。",
+            "explanation": "原文没有任何\"次序颠倒、主次不分\"的信息。文章只展示该做法的多重益处，putting the cart before the horse 与文意不符，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "拆东墙补西墙（借彼得的钱还保罗）。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "该做法是顾此失彼、拆东墙补西墙。",
+            "explanation": "robbing Peter to pay Paul 指牺牲一方去补另一方、得不偿失。而原文显示该做法对奶酪厂、城市、环境多方共赢，并非以损一方为代价，与文意不符，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一举两得（一石二鸟）。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-b-3",
+              "quote": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+              "anchor": "一个做法同时带来多重好处"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2020-jan-reading-b-4",
+              "quote": "In addition to saving money, cheese brine could also be a more eco-friendly option.",
+              "anchor": "既省钱又环保"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "killing two birds with one stone",
+          "sourceRole": "correctOption",
+          "targetText": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+          "targetParagraphId": "para-zj-2020-jan-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "习语 killing two birds with one stone（一举两得）对应原文一个做法同时 help both cheese producers and cities save money 又 keeping roads safe，再加上 para-4 的 eco-friendly，体现\"一举多得\"。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-027": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 BYU 教授研究的“独特之处”，需定位文中强调该研究与众不同的语句。",
+      "stemTranslationZh": "BYU 教授的这项研究有什么特别之处？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它聚焦于父亲在教养中的作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-c-3",
+              "quote": "There are relatively few studies that stress the unique role of fathers",
+              "anchor": "专门研究父亲独特作用的研究很少"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2020-jan-reading-c-1",
+              "quote": "fathers are in a unique position to help their adolescent children learn persistence",
+              "anchor": "父亲处于独特位置帮助子女培养毅力"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它基于若干个大家庭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "after following 325 American families over several years",
+            "sourceHighlight": "325 American families",
+            "optionText": "It was based on a number of large families.",
+            "optionHighlight": "large families",
+            "explanation": "原文只说追踪了 325 个美国家庭（a number of families），并未说这些是“大家庭（large families）”，选项凭空给家庭加上了“大”的属性，属于范围/信息夸大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-2",
+              "quote": "after following 325 American families over several years",
+              "anchor": "追踪 325 个美国家庭"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它分析了不同种类的教养方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "an authoritative parenting style",
+            "optionText": "It analyzed different kinds of parenting styles.",
+            "matchType": "exact",
+            "relationNote": "原文确实出现 parenting style 一词，但文章是说研究者认定父亲应采用“权威型”这一种教养方式，并把它与“专制型”作对比说明，而非把“分析多种教养方式”作为本研究的独特之处；选项借原文词钩 parenting style 误导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-4",
+              "quote": "dads need to practice an “authoritative” parenting style",
+              "anchor": "父亲需采用权威型教养方式"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它旨在提高孩子的学业成就。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the persistence gained through fathers led to higher achievement in school",
+            "sourceHighlight": "higher achievement in school",
+            "optionText": "It aimed to improve kids' achievement in school.",
+            "optionHighlight": "aimed to improve",
+            "explanation": "原文把“更高的学业成就”表述为研究观察到的结果（led to higher achievement），而选项把它说成研究的目的（aimed to improve），混淆了“研究发现的结果”与“研究的目标”，且题目问的是研究的“独特之处”，提高学业成就并非其独特性所在。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-2",
+              "quote": "the persistence gained through fathers led to higher achievement in school",
+              "anchor": "通过父亲获得的毅力带来更高学业成就"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What is special about",
+          "sourceRole": "stem",
+          "targetText": "There are relatively few studies that stress the unique role of fathers",
+          "targetParagraphId": "para-zj-2020-jan-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "题干 special about（特别之处）对应原文 the unique role of fathers 以及 relatively few studies 所体现的“独特/罕见”，即研究的独特之处在于聚焦父亲的作用。"
+        },
+        {
+          "sourceText": "fathers' role in parenting",
+          "sourceRole": "correctOption",
+          "targetText": "the unique role of fathers",
+          "targetParagraphId": "para-zj-2020-jan-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "正确项 fathers' role in parenting 是原文 the unique role of fathers 的同义改写。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查“权威型”父亲在教养子女时的具体做法，需定位第四段对 authoritative parenting 特征的列举。",
+      "stemTranslationZh": "一位权威型父亲在抚养子女时会怎么做？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "无视他们的要求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An authoritative father would ignore their demands.",
+            "explanation": "原文未提及权威型父亲会“无视孩子的要求（ignore their demands）”。文中 demanding 一词是用来描述被否定的“专制型（authoritarian）”父亲，与“无视要求”意思无关，故该说法原文未提及。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "替他们做决定。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "children are given an appropriate level of autonomy (自主权)",
+            "sourceHighlight": "given an appropriate level of autonomy",
+            "optionText": "Make decisions for them.",
+            "optionHighlight": "Make decisions for them",
+            "explanation": "原文说权威型父亲给予孩子“适度的自主权”，即让孩子自己做决定；选项“替他们做决定”与之方向相反，属于黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-4",
+              "quote": "children are given an appropriate level of autonomy (自主权)",
+              "anchor": "给予孩子适度自主权"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "控制他们的行为。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Authoritative parenting is not authoritarian: rigid, demanding or controlling.",
+            "sourceHighlight": "Authoritative parenting is not authoritarian",
+            "optionText": "Control their behaviors.",
+            "optionHighlight": "Control their behaviors",
+            "explanation": "原文明确指出权威型教养“不是”专制型——不严苛、不苛求、不控制（controlling）；选项却说权威型父亲会“控制他们的行为”，恰好与原文相反，且借用了原文 controlling 一词，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-4",
+              "quote": "Authoritative parenting is not authoritarian: rigid, demanding or controlling.",
+              "anchor": "权威型不等于专制（控制）型"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "向他们解释规则。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-c-4",
+              "quote": "responsibility and the reasons behind rules are stressed",
+              "anchor": "强调规则背后的原因"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Explain the rules to them",
+          "sourceRole": "correctOption",
+          "targetText": "the reasons behind rules are stressed",
+          "targetParagraphId": "para-zj-2020-jan-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "正确项 Explain the rules（解释规则）对应原文 the reasons behind rules are stressed（强调规则背后的原因），讲清规则缘由即是向孩子解释规则。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查研究者指出的未来研究可关注的群体，需定位末段关于 future research 的表述。",
+      "stemTranslationZh": "根据研究者的说法，哪一群体可以成为未来研究的关注点？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "单亲家长。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-c-6",
+              "quote": "single parents still may play a role in teaching the benefits of persistence, which is an avenue of future research",
+              "anchor": "单亲家长是未来研究方向"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "11 至 14 岁的孩子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "This particular study examined 11 to 14—year—olds living in two—parent homes.",
+            "optionText": "Children aged from 11 to 14.",
+            "matchType": "exact",
+            "relationNote": "原文 11 to 14—year—olds 指的是“本次研究已经考察”的对象，而非“未来研究”的对象；选项借这一年龄段的原文词钩误导，把已研究群体当成未来研究群体。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-6",
+              "quote": "This particular study examined 11 to 14—year—olds living in two—parent homes.",
+              "anchor": "本研究已考察 11–14 岁孩子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "专制型父亲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Authoritarian fathers can be a focus of future studies.",
+            "explanation": "文中 authoritarian（专制型）只是用来与 authoritative（权威型）作对比说明，原文从未提及把“专制型父亲”作为未来研究的关注对象，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "双亲家庭中的母亲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Mothers in two-parent homes can be a focus of future studies.",
+            "explanation": "原文虽提到 two—parent homes，但只是说明本研究对象生活在双亲家庭，并未提出把“双亲家庭中的母亲”作为未来研究方向；该群体在未来研究语境中原文未提及。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "future studies",
+          "sourceRole": "stem",
+          "targetText": "which is an avenue of future research",
+          "targetParagraphId": "para-zj-2020-jan-reading-c-6",
+          "relationType": "locationCue",
+          "note": "题干 future studies 与原文 an avenue of future research 对应，是定位答案句的关键线索。"
+        },
+        {
+          "sourceText": "Single parents",
+          "sourceRole": "correctOption",
+          "targetText": "single parents still may play a role in teaching the benefits of persistence",
+          "targetParagraphId": "para-zj-2020-jan-reading-c-6",
+          "relationType": "paraphrase",
+          "note": "正确项 Single parents 直接对应原文 single parents，并被研究者点名为未来研究（future research）的方向。"
+        }
+      ]
+    },
+    "q-zj-2020-jan-030": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查全文最佳标题，需概括文章核心主旨——父亲（尤其是权威型父亲）有助于孩子培养毅力。",
+      "stemTranslationZh": "下列哪一项是本文最佳标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "权威型父亲的三个特征",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "an authoritative parenting style includes some of the following characteristics: children feel warmth and love from their father; responsibility and the reasons behind rules are stressed; children are given an appropriate level of autonomy (自主权)",
+            "sourceHighlight": "an authoritative parenting style includes some of the following characteristics",
+            "optionText": "Three Characteristics of Authoritative Fathers",
+            "optionHighlight": "Three Characteristics of Authoritative Fathers",
+            "explanation": "权威型父亲的特征仅是第四段的局部内容，不能概括全文主旨；以此作标题以偏概全、范围过窄，遗漏了文章关于父亲帮助孩子培养毅力这一核心。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-4",
+              "quote": "an authoritative parenting style includes some of the following characteristics",
+              "anchor": "权威型教养的特征只是局部内容"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "年轻人未来成功的关键技能",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "A key skill set for success is persistence (毅力)",
+            "sourceHighlight": "A key skill set for success",
+            "optionText": "Key Skills for Young Adults to Succeed in Future",
+            "optionHighlight": "Key Skills",
+            "explanation": "文章只聚焦“毅力”这一种关键技能，且重点在于父亲如何帮助孩子培养毅力；选项用复数 Key Skills 泛指多种技能，范围过宽，且偏离了“父亲作用”这一核心。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-1",
+              "quote": "A key skill set for success is persistence (毅力)",
+              "anchor": "关键技能特指毅力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "孩子往往从父亲那里学会坚毅",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2020-jan-reading-c-1",
+              "quote": "fathers are in a unique position to help their adolescent children learn persistence",
+              "anchor": "父亲帮助孩子培养毅力（核心主旨）"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2020-jan-reading-c-1",
+              "quote": "a characteristic that researchers say is heavily influenced by fathers",
+              "anchor": "毅力深受父亲影响"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "家庭关系影响学业表现",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "the persistence gained through fathers led to higher achievement in school",
+            "sourceHighlight": "the persistence gained through fathers",
+            "optionText": "Family Relationship Influences School Performance",
+            "optionHighlight": "Family Relationship",
+            "explanation": "文章讲的是“父亲帮助培养毅力、进而带来更好学业表现”，主语是父亲与毅力；选项用宽泛的 Family Relationship（家庭关系）取代“父亲/毅力”，范围过大且偏离主旨，同时忽略了核心环节“毅力”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2020-jan-reading-c-5",
+              "quote": "children raised by an authoritative father were significantly more likely to develop persistence, which leads to better outcomes in school",
+              "anchor": "经由父亲培养毅力才带来学业改善"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Children Tend to Learn Determination from Father",
+          "sourceRole": "correctOption",
+          "targetText": "fathers are in a unique position to help their adolescent children learn persistence",
+          "targetParagraphId": "para-zj-2020-jan-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确标题中 learn Determination from Father 对应原文 help their adolescent children learn persistence，其中 Determination 与 persistence（毅力/坚毅）同义，准确概括全文主旨。"
+        }
+      ]
+    }
+  }
+}
