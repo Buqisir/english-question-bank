@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2022-jun",
+  "groups": {
+    "group-zj-2022-jun-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Michael,\n\nGreat news! Our school library has just opened a group study room, and I'm writing to invite you to check it out with me.\n\nThe room is on the second floor, next to the reading area, and it stays open from 8 a.m. to 9 p.m. every day. What makes it so handy is that it is fully equipped for teamwork. There are several round tables where we can sit face to face, and each one comes with a small whiteboard for jotting down ideas. The free Wi-Fi and computers also make group projects much easier.\n\nWould you like to come and try it out this Saturday? I'm sure we'll enjoy studying there together. Looking forward to your reply.\n\nYours,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "I'm writing to invite you to check it out with me.",
+            "note": "开头点明写信目的的框架句（I'm writing to + 动词，表明此封邮件的交际行为）。可迁移到几乎所有应用文开头：把 invite you to check it out 换成 ask for your advice / apply for the position / thank you for your help 即可点明目的。"
+          },
+          {
+            "text": "What makes it so handy is that it is fully equipped for teamwork.",
+            "note": "What 引导主语从句的强调式表态句（What makes it... is that...），把'它好在哪'自然引出，比平铺直叙更有亮点。可迁移到介绍设施/活动/产品的优点：What makes it special / popular / worthwhile is that..."
+          },
+          {
+            "text": "There are several round tables where we can sit face to face, and each one comes with a small whiteboard for jotting down ideas.",
+            "note": "用 there be + where 限制性定语从句 + each one comes with 列举设施细节，画面感强。可迁移到任何'描述场所配备/物品功能'的要点：换成具体名词即可成段，是写'设施与功能'类要点的万能句式。"
+          },
+          {
+            "text": "Would you like to come and try it out this Saturday?",
+            "note": "委婉、得体地发出邀约的礼貌问句（Would you like to...）。可迁移到一切邀请/建议类应用文：Would you like to join us / attend the lecture / share your story...，比 You must come 更得体。"
+          },
+          {
+            "text": "Looking forward to your reply.",
+            "note": "应用文（尤其书信/邮件）的高频得体结尾句，表达期待回复。可原样迁移到几乎所有需要对方回应的邮件/信件结尾。"
+          }
+        ]
+      }
+    }
+  }
+}

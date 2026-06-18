@@ -28,7 +28,7 @@ const ROOT = process.cwd()
 const PAPER_ASSETS = path.join(ROOT, 'app/public/paper-assets')
 const WA_DIR = path.join(ROOT, '.scratch/import-pilot/wa')
 
-// 12 新课标 papers + 浙江卷 1月 (zj real-exam import, 2026-06)
+// 12 新课标 + 浙江1月(2026-06) + 浙江老卷 2020–2022 1月/6月/7月(#219/#220)
 const ALLOWED = new Set([
   'paper-2020-i', 'paper-2020-ii',
   'paper-2021-i', 'paper-2021-ii',
@@ -38,6 +38,9 @@ const ALLOWED = new Set([
   'paper-2025-i', 'paper-2025-ii',
   'paper-zj-2023-jan', 'paper-zj-2024-jan',
   'paper-zj-2025-jan', 'paper-zj-2026-jan',
+  'paper-zj-2020-jan', 'paper-zj-2020-jul',
+  'paper-zj-2021-jan', 'paper-zj-2021-jun',
+  'paper-zj-2022-jan', 'paper-zj-2022-jun',
 ])
 
 const mode = process.argv[2]
