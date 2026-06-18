@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2022-jan",
+  "groups": {
+    "group-zj-2022-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Chris,\n\nHow have you been since you returned home? I'm writing to share how much that China-Ireland Culture Festival still means to me.\n\nDo you remember the afternoon when we taught each other to write our names — yours in Chinese characters and mine in your lovely Irish? My brush kept slipping, and we couldn't stop laughing at the mess we made. That small moment has stayed with me ever since.\n\nWorking side by side with you, I came to realize that real friendship grows the moment two cultures truly listen to each other.\n\nI'd really love to keep in touch. Shall we share photos and stories online from time to time?\n\nYours,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "I'm writing to share how much that China-Ireland Culture Festival still means to me.",
+            "note": "开头点明写信目的的框架句。“I'm writing to + 动词”是应用文万能开头，可换成 I'm writing to thank you for… / to invite you to… 迁移到感谢信、邀请函等任何邮件开头。"
+          },
+          {
+            "text": "Do you remember the afternoon when we taught each other to write our names",
+            "note": "用 Do you remember the … when … 把读者拉回一个具体共同回忆的过渡句。回忆类、叙旧类应用文都能用，后面接定语从句锁定一个有画面感的场景。"
+          },
+          {
+            "text": "That small moment has stayed with me ever since.",
+            "note": "由具体细节自然过渡到个人感受的表态句。先写一个小画面，再用“That … has stayed with me”收束情感，避免空泛抒情，可迁移到任何需要“从细节长出领悟”的写作。"
+          },
+          {
+            "text": "I came to realize that real friendship grows the moment two cultures truly listen to each other.",
+            "note": "分享个人收获/领悟的高级句。“I came to realize that …”比 I think 更显成长感，宾语从句承载领悟，可迁移到任何“分享收获/感悟”的要点。"
+          },
+          {
+            "text": "Shall we share photos and stories online from time to time?",
+            "note": "用 Shall we …? 委婉提议、表达保持联系愿望的得体句。朋友语域里既亲切又礼貌，可迁移到任何“提出共同行动/约定”的结尾，如 Shall we meet up next summer?"
+          }
+        ]
+      }
+    }
+  }
+}

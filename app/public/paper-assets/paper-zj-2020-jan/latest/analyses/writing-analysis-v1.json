@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2020-jan",
+  "groups": {
+    "group-zj-2020-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear George,\n\nHow is everything going? I'm writing to invite you to a Chinese speech contest for foreign students, which our school will hold next Saturday afternoon. As a friend who loves Chinese, you really shouldn't miss it!\n\nHere are a few details you may want to know. The contest starts at two o'clock in the school hall. As for the topic, every speaker is expected to talk about \"My Story with China\", so you can just share what you've experienced here. To sign up, all you need to do is send me your name and phone number before this Friday, and I'll handle the rest.\n\nI'm sure you'll shine on the stage. Looking forward to seeing you there!\n\nYours,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "I'm writing to invite you to a Chinese speech contest for foreign students, which our school will hold next Saturday afternoon.",
+            "note": "邀请类邮件的开门见山句：用 \"I'm writing to invite you to + 活动\" 一句话点明目的，后接非限制性定语从句 which... 补充活动背景。迁移到任何邀请信/邮件，把活动名称和主办方换掉即可。"
+          },
+          {
+            "text": "Here are a few details you may want to know.",
+            "note": "由总到分的过渡句，自然引出下文的具体安排（时间/地点/方式等）。任何需要罗列细节的应用文（通知、邀请、活动介绍）都能用它把开头和主体衔接起来。"
+          },
+          {
+            "text": "To sign up, all you need to do is send me your name and phone number before this Friday, and I'll handle the rest.",
+            "note": "说明报名/操作方式的句型：\"To do X, all you need to do is + 动词原形\" 把步骤说得简单友好，再加 \"I'll handle the rest\" 体现热心。迁移到讲报名、领取、办理等流程的题目，替换动作和截止时间即可。"
+          },
+          {
+            "text": "Looking forward to seeing you there!",
+            "note": "朋友语域的得体结尾，表达期待与盼复。凡是邀请、约见、求助类的非正式邮件结尾都可直接套用；正式场合可升级为 \"I'm looking forward to your reply.\""
+          }
+        ]
+      }
+    }
+  }
+}

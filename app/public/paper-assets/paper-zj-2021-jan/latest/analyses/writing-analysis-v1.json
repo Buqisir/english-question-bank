@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2021-jan",
+  "groups": {
+    "group-zj-2021-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Good morning, everyone!\n\nOn behalf of all the students, it gives me great pleasure to welcome our friends from New Zealand to our school. We have looked forward to this day, and we are so glad you are here.\n\nLet me walk you through what we have prepared for you. First, you will sit in on our classes and see how Chinese students study. After that, we will pair you up with local students, so that you can practise the Chinese you have learnt. What's more, a calligraphy workshop is waiting for you in the afternoon, where you can try writing your own names with a brush.\n\nMay your stay here be both fun and unforgettable. Thank you!",
+        "highlightExpressions": [
+          {
+            "text": "On behalf of all the students, it gives me great pleasure to welcome our friends from New Zealand to our school.",
+            "note": "发言稿/欢迎辞的标准开场：'On behalf of + 群体' 表明代表身份，'it gives me great pleasure to do' 是得体的正式表欢迎句型。迁移到任何代表发言、致辞、接待场合，把 friends from New Zealand 换成具体对象即可。"
+          },
+          {
+            "text": "Let me walk you through what we have prepared for you.",
+            "note": "引出'介绍安排/流程'的过渡句，把后面的要点自然带出。'walk sb through sth' 意为带某人逐项了解。可迁移到任何需要介绍日程、流程、计划的应用文（活动通知、行程介绍、参观安排）。"
+          },
+          {
+            "text": "First, you will sit in on our classes and see how Chinese students study. After that, we will pair you up with local students, so that you can practise the Chinese you have learnt.",
+            "note": "用 First / After that 给安排排序，每项'动作+目的（so that 从句）'写出画面感而非空泛罗列。迁移到任何介绍多项安排/步骤的题：换动作和目的，序列词照搬。"
+          },
+          {
+            "text": "What's more, a calligraphy workshop is waiting for you in the afternoon, where you can try writing your own names with a brush.",
+            "note": "'What's more' 递进衔接补充一项亮点安排；'where' 引导的非限制性定语从句给出一个可上手的小细节，让安排具体可感。迁移：递进介绍新增项目时，用 where 从句补一个具体可做的动作。"
+          },
+          {
+            "text": "May your stay here be both fun and unforgettable.",
+            "note": "'May + 主语 + 动词原形' 是表达祝愿的得体句型，正式而真诚。是发言稿/欢迎辞/送别辞的标准收尾祝愿句。迁移到任何需要表达祝福的结尾：把 your stay here 换成对应的对象或事件即可。"
+          }
+        ]
+      }
+    }
+  }
+}

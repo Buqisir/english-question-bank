@@ -27,4 +27,5 @@
 
 ## 待办
 - **owner QA**(发布后,可重发布修): 2020-jan A4 分节满分文本破版? 2020-jul 续写 starters=[] 前端渲染?
-- **deferred**: 写作解析 backfill(6套;writing-analysis-driver ALLOWED 已含浙江1月,需扩 6月/7月)。
+- **写作解析-应用文**: 6套应用文范文已入库(paper-assets/<id>/latest/analyses/writing-analysis-v1.json;driver ALLOWED 已扩6套老卷;Workflow Opus 扇出 + persist 6/0)。
+- **写作解析-续写**: **deferred**(owner 2026-06-18 选"先交应用文,续写另议")。原因: lib 对浙江老卷续写区 starter 提取失败(6套的 continuationStarters 抓到 注意事项/答案范文/标签,如 2022-jan 抓"(1)词数(2)关键词"、2020-jan 抓整段范文、2021-jun 第二个是"Paragraph 2:"标签;2020-jul 本就无段落开头语)。续写解析需准确的 2 段开头语作输入,现不可靠。**题目续写材料 passage 本身干净不受影响**(已验证)。续写解析需先修 lib buildContinuation 对老卷续写切分(提准 starter)+ 重发布 writing-tasks,或人工提取 starter — 作为独立 cut。

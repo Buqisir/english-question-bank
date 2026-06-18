@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2020-jul",
+  "groups": {
+    "group-zj-2020-jul-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Peter,\n\nHaving learned that you went back to Ireland because of your illness, all of us in Class One have been worried about you. How are you feeling these days? We do hope you are recovering well and getting plenty of rest.\n\nMeanwhile, I would like to share some news from our class. Last week we won first prize in the school English drama competition, and everyone agreed that it was your patient guidance that made it possible. The classroom is decorated with our certificate now, which always reminds us of you.\n\nWe are all looking forward to your return. Take good care of yourself, and may you get well soon!\n\nYours,\nLi Hua",
+        "highlightExpressions": [
+          {
+            "text": "Having learned that you went back to Ireland because of your illness, all of us in Class One have been worried about you.",
+            "note": "开头共情句：用 -ing 完成式分词（Having learned that...）交代背景并自然引出关切，比平铺的 I heard that... 更连贯高级。可迁移到任何'得知某事后表达关心/祝贺/慰问'的应用文开头，把 went back...because of illness 换成对方的具体情况即可。"
+          },
+          {
+            "text": "We do hope you are recovering well and getting plenty of rest.",
+            "note": "强调式祝愿句：用 do 加强语气表达真诚的希望。适用于一切对师长/长辈/朋友表达良好祝愿或关切的语境，把 recovering well 换成对应内容（如 you enjoy your trip / everything goes well）即可迁移。"
+          },
+          {
+            "text": "Meanwhile, I would like to share some news from our class.",
+            "note": "过渡兼引出要点句：用 Meanwhile 衔接段落、I would like to 礼貌地引出下一个内容要点。适用于书信/邮件中从一个话题转入'分享消息/汇报情况/提出请求'的过渡，换掉 share some news 即可服务别的交际目的。"
+          },
+          {
+            "text": "everyone agreed that it was your patient guidance that made it possible",
+            "note": "强调句归功型表达（it was...that...）：得体地把成绩归功于对方，既报喜又表达感激。可迁移到向老师/帮助者致谢的语境，把 your patient guidance / made it possible 替换为对方的付出与相应结果。"
+          },
+          {
+            "text": "Take good care of yourself, and may you get well soon!",
+            "note": "得体结尾祝愿句：祈使句叮嘱加 may 引导的祝愿，温暖而不失分寸。适用于一切书信/邮件的收尾祝福，把 get well soon 换成 have a nice trip / good luck with your exam 等即可迁移到不同场合。"
+          }
+        ]
+      }
+    }
+  }
+}
