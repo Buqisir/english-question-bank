@@ -1,0 +1,1046 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-zj-2021-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2021-jan-reading-a",
+    "group-zj-2021-jan-reading-b",
+    "group-zj-2021-jan-reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pipeline",
+    "reviewedAt": "2026-06-18T00:00:00Z"
+  },
+  "groups": {
+    "group-zj-2021-jan-reading-a": {
+      "overview": "本文是一篇人物记叙文，讲述印度男孩 Saroo Brierley 四岁时与家人意外失散、被澳大利亚家庭收养，二十多年后借助数字地图卫星图像找到家乡、最终与母亲重逢的真实故事。",
+      "discourseStructure": {
+        "summary": "按时间顺序展开：先交代失散起因，再写被收养与远赴塔斯马尼亚，接着写他寻找家乡的困难与最终借助数字地图程序定位成功，最后落到与母亲重逢的情感高潮。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-1",
+            "summary": "二十多年前，住在印度农村的四岁男孩 Saroo 在铁路边玩耍睡着，醒来发现独自一人，以为哥哥在眼前的火车上便上了车。",
+            "function": "交代故事背景与失散的起因。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-2",
+            "summary": "火车把他带到千里之外一座陌生城市，他流落街头后进入孤儿院，在那里被一个澳大利亚家庭收养并飞往塔斯马尼亚。",
+            "function": "叙述失散后的经历与被收养的转折。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-3",
+            "summary": "他在新书《A Long Way Home》中写到自己始终牵挂印度的家乡，虽记得一些地标，但因不知家乡名字，在广袤国土上寻找一个小社区几乎不可能。",
+            "function": "引出他寻根的愿望与面临的巨大困难。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-4",
+            "summary": "他找到一款数字地图程序，多年在卫星图中搜索，2011 年发现熟悉的中央商务区鸟瞰图，并按记忆验证出三站台火车站和大喷泉。",
+            "function": "叙述借助数字地图找到家乡的关键过程。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-5",
+            "summary": "一切开始逐一对上号。",
+            "function": "承上启下，强调记忆与画面完全吻合，推动情节走向重逢。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-6",
+            "summary": "当他站在儿时长大的房子前，看到门口站着一位女士，过了几秒终于回忆起她当年的样子。",
+            "function": "铺垫与母亲相认的瞬间。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-a-7",
+            "summary": "在采访中他描述与母亲重逢的强烈情感：母亲走上前，他走上前，泪水与脑中化学反应如同核聚变，他从未想过见到母亲会成真。",
+            "function": "以采访中的自述呈现与母亲重逢的情感高潮。"
+          }
+        ]
+      }
+    },
+    "group-zj-2021-jan-reading-b": {
+      "overview": "本文是一篇议论性说明文，探讨现代儿童步行量（尤其是步行上学）减少的现象、原因及其代价，并由作者以母亲身份现身说法，指出与孩子一起步行的额外价值，最后倡导参加“步行校车”路线。",
+      "discourseStructure": {
+        "summary": "文章从一个百年前的预言切入引出话题，先用数据说明步行减少的现状，再分析原因（家庭时间紧张而非懒惰），接着论述步行减少在健康与亲子交流上的双重损失，作者用自身经历佐证步行带来的亲子沟通机会，结尾发出参加步行上学路线的倡议。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2021-jan-reading-b-1",
+            "summary": "20世纪初工程师Watkins对今日生活做出多项预言，多数命中，唯独“人人每天步行10英里”落空。",
+            "function": "以历史预言作引子，引出当今步行量减少这一话题。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-b-2",
+            "summary": "用澳大利亚的数据说明儿童运动量不足，步行上学比例从1970年代初的40%降到2010年的15%。",
+            "function": "用具体数据呈现儿童步行减少的现状，提出问题。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-b-3",
+            "summary": "指出步行减少并非因为人们变懒，而是家庭时间紧张、父母双职工、居住在依赖汽车、公共交通有限的社区。",
+            "function": "分析步行减少的真正原因，排除“懒惰”这一误解。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-b-4",
+            "summary": "步行减少的另一面同样是损失：损害健康，孩子失去认识周边环境的机会，父母失去与孩子边走边聊的机会。",
+            "function": "论述步行减少在健康与亲子交流上的双重代价。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-b-5",
+            "summary": "作者以母亲身份现身说法：平时问孩子只换来“good”和“我饿了”，但在每天的步行途中却能听到更多，了解孩子如何理解友谊及其界限，这是难得的亲子沟通机会。",
+            "function": "用作者自身经历佐证步行带来的、了解孩子内心的宝贵机会。"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-b-6",
+            "summary": "许多小学支持有家长陪同的“步行校车”路线，每周做几次胜过完全不做；起步虽难、需要规划，但值得尝试。",
+            "function": "提出可行倡议，呼吁参加步行上学路线，收束全文。"
+          }
+        ]
+      }
+    },
+    "group-zj-2021-jan-reading-c": {
+      "overview": "本文是一篇科普说明文，报道研究者破译野生黑猩猩用手势进行交流的研究成果，并引入正反两方面专家观点：主导研究的 Hobaiter 博士强调黑猩猩与人类一样能有意图地传递信息，进化生物学家 Shultz 博士则认为研究虽有价值但结果有限，人猿之间的鸿沟依然存在。",
+      "discourseStructure": {
+        "summary": "全文先抛出研究发现（手势词汇与含义），再由主导研究者阐释其与人类语言的相似之处与意义，最后引入另一位专家的批评，形成正反对照的讨论结构。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-1",
+            "summary": "研究者称已破译野生黑猩猩用手势交流的含义：用 66 种手势传递 19 条特定信息，基于在乌干达拍摄的 5000 多次交流实例。",
+            "function": "引出研究主题与核心发现"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-2",
+            "summary": "主导研究的 Hobaiter 博士指出这是动物界唯一被记录到的有意图交流，只有人类和黑猩猩会刻意向同伴发送信息。",
+            "function": "提出研究的核心论点：有意图的交流"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-3",
+            "summary": "Hobaiter 引述黑猩猩手势之惊人，称其是唯一在此方面类似人类语言的东西。",
+            "function": "强化论点，突出与人类语言的相似性"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-4",
+            "summary": "尽管以往研究显示猿猴能理解同类叫声中的复杂信息，但它们并非有意图地用声音传递信息，这是叫声与手势的重要区别。",
+            "function": "对比叫声与手势，凸显手势的有意图性"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-5",
+            "summary": "黑猩猩会先确认对方注意力，如母猩猩伸脚示意幼崽爬上背；Hobaiter 总结人类并非唯一会进行有意义交流的物种。",
+            "function": "举例佐证并总结研究意义"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-6",
+            "summary": "进化生物学家 Shultz 博士认为该研究在丰富人类语言进化知识方面值得称赞，但结果有点令人失望。",
+            "function": "引入第二位专家的正反评价，转折"
+          },
+          {
+            "paragraphId": "para-zj-2021-jan-reading-c-7",
+            "summary": "Shultz 指出手势含义模糊，或说明黑猩猩没什么可交流，或说明我们仍漏掉大量信息；其含义未超出其他动物的非语言交流，人猿鸿沟依旧。",
+            "function": "展开批评，给出全文的保留性结论"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2021-jan-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Brierley 与家人失散的直接原因这一细节。",
+      "stemTranslationZh": "大约 25 年前，Brierley 为什么与家人失散了？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他误上了一列火车。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-a-1",
+              "quote": "the 4-year-old decided his brother might be on the train he saw in front of him - so he got on",
+              "anchor": "以为哥哥在车上便上了车"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-a-2",
+              "quote": "That train took him a thousand miles across the country to a totally strange city.",
+              "anchor": "火车把他带去千里之外"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他在街上玩耍时走丢了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "he played with his brother along the rail line and fell asleep",
+            "sourceEntity": "along the rail line（铁路边）",
+            "optionText": "He got lost while playing in the street.",
+            "optionEntity": "in the street（街上）",
+            "explanation": "原文中他是在铁路边玩耍并睡着，失散的直接动作是上了火车，而非在街上走丢；地点与原因均被错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-1",
+              "quote": "he played with his brother along the rail line and fell asleep",
+              "anchor": "在铁路边玩耍睡着"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他被一个外国人带走了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He was taken away by a foreigner.",
+            "explanation": "原文未提及他被任何外国人带走；他是自己上了火车导致失散，被收养发生在失散很久之后。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他被一个澳大利亚家庭收养了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "he was adopted by an Australian family and flown to Tasmania",
+            "sourceHighlight": "adopted by an Australian family",
+            "optionText": "He was adopted by an Australian family.",
+            "optionHighlight": "adopted by an Australian family",
+            "explanation": "被澳大利亚家庭收养是失散之后发生的结果，而非导致失散的原因；选项把后续结果当成失散原因，颠倒了时间先后。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-2",
+              "quote": "he was adopted by an Australian family and flown to Tasmania",
+              "anchor": "失散后才被收养"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Why was Brierley separated from his family",
+          "sourceRole": "stem",
+          "targetText": "the 4-year-old decided his brother might be on the train he saw in front of him - so he got on",
+          "targetParagraphId": "para-zj-2021-jan-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干问 separated from his family 的原因，原文用 so he got on（误上火车）这一动作交代失散起因，定位到第一段结尾。"
+        },
+        {
+          "sourceText": "He got on a train by mistake.",
+          "sourceRole": "correctOption",
+          "targetText": "decided his brother might be on the train he saw in front of him - so he got on",
+          "targetParagraphId": "para-zj-2021-jan-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 by mistake 是对原文“误以为哥哥在车上(decided his brother might be on the train)”而上车这一情节的同义概括。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Brierley 找到家乡所采用的方法这一细节。",
+      "stemTranslationZh": "Brierley 是如何找到他的家乡的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过分析旧照片。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "He spent years searching for his hometown in the program’s satellite pictures.",
+            "optionText": "By analyzing old pictures.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借原文 satellite pictures 中的 pictures 设钩，但原文是数字地图程序里的卫星图像，并非 old pictures（旧照片），属性与来源都不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-4",
+              "quote": "He spent years searching for his hometown in the program’s satellite pictures.",
+              "anchor": "卫星图像而非旧照片"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过游遍整个印度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By travelling all around India.",
+            "explanation": "原文未提及他游遍印度寻找家乡；恰恰相反，他是在数字地图程序中搜索定位的。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过研究数字地图。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-a-4",
+              "quote": "Then he found a digital mapping program. He spent years searching for his hometown in the program’s satellite pictures.",
+              "anchor": "用数字地图程序的卫星图搜索"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过用他的书传播自己的故事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "As he writes in his new book, A Long Way Home",
+            "optionText": "By spreading his story via his book.",
+            "matchType": "exact",
+            "relationNote": "选项借原文 his new book 设钩，但书只是他事后记述经历的载体，并非找到家乡的方法；找家乡靠的是数字地图程序。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-3",
+              "quote": "As he writes in his new book, A Long Way Home",
+              "anchor": "书是事后记述并非找家乡的手段"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How did Brierley find his hometown",
+          "sourceRole": "stem",
+          "targetText": "Then he found a digital mapping program. He spent years searching for his hometown in the program’s satellite pictures.",
+          "targetParagraphId": "para-zj-2021-jan-reading-a-4",
+          "relationType": "locationCue",
+          "note": "题干 How... find his hometown 定位到第四段，原文用 found a digital mapping program 与 searching... in the program’s satellite pictures 交代寻找手段。"
+        },
+        {
+          "sourceText": "By studying digital maps.",
+          "sourceRole": "correctOption",
+          "targetText": "a digital mapping program",
+          "targetParagraphId": "para-zj-2021-jan-reading-a-4",
+          "relationType": "paraphrase",
+          "note": "选项 studying digital maps 是对原文 a digital mapping program（数字地图程序）及在其 satellite pictures 中 searching 的同义替换。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-023": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查采访片段（末段）的主旨，即 Brierley 在采访中主要谈论的内容。",
+      "stemTranslationZh": "Brierley 在采访中主要谈论的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他对母亲的爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "my feelings and tears and the chemical in my brain, you know, it was like a nuclear fusion",
+            "sourceHighlight": "it was like a nuclear fusion",
+            "optionText": "His love for his mother.",
+            "optionHighlight": "love for his mother",
+            "explanation": "对母亲的爱只是重逢情感的一部分，原文采访整体聚焦于“与母亲重逢的那一刻”的经历与感受；以“爱”概括偏离并窄化了采访的主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-7",
+              "quote": "my feelings and tears and the chemical in my brain, you know, it was like a nuclear fusion",
+              "anchor": "重逢一刻的强烈情感"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他与母亲的重逢。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-a-7",
+              "quote": "she came forth and walked forward, and I walked forward",
+              "anchor": "母子相向走近重逢"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-a-7",
+              "quote": "I never thought seeing my mother would ever come true. And here I am, standing in front of her.",
+              "anchor": "终于站在母亲面前"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他漫长的回家之路。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "I just didn’t know what to say, because I never thought seeing my mother would ever come true. And here I am, standing in front of her.",
+            "sourceHighlight": "seeing my mother would ever come true",
+            "optionText": "His long way back home.",
+            "optionHighlight": "long way back home",
+            "explanation": "漫长回家之路是全文叙事，而题干限定在“采访中”；采访片段只聚焦与母亲重逢的瞬间，用全文主线概括采访属于范围扩大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-7",
+              "quote": "I just didn’t know what to say, because I never thought seeing my mother would ever come true. And here I am, standing in front of her.",
+              "anchor": "采访聚焦重逢瞬间"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他对家乡的记忆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I never thought seeing my mother would ever come true",
+            "sourceEntity": "seeing my mother（见到母亲）",
+            "optionText": "His memory of his hometown.",
+            "optionEntity": "memory of his hometown（对家乡的记忆）",
+            "explanation": "对家乡的记忆是前文（第三、四段）的内容，采访片段谈的对象是母亲与重逢，而非家乡记忆，谈论对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-a-7",
+              "quote": "I never thought seeing my mother would ever come true",
+              "anchor": "采访谈的是母亲不是家乡"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "What does Brierley mainly talk about in the interview",
+          "sourceRole": "stem",
+          "targetText": "she came forth and walked forward, and I walked forward",
+          "targetParagraphId": "para-zj-2021-jan-reading-a-7",
+          "relationType": "locationCue",
+          "note": "题干 in the interview 定位到末段采访自述，内容围绕母子相向走近、终于站在母亲面前展开。"
+        },
+        {
+          "sourceText": "His reunion with his mother.",
+          "sourceRole": "correctOption",
+          "targetText": "I never thought seeing my mother would ever come true. And here I am, standing in front of her.",
+          "targetParagraphId": "para-zj-2021-jan-reading-a-7",
+          "relationType": "paraphrase",
+          "note": "选项 reunion with his mother 是对原文 seeing my mother... come true 与 standing in front of her（与母亲重逢）的同义概括。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-024": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者在首段提及Watkins预言的写作意图，即段落功能题。",
+      "stemTranslationZh": "作者为什么在第一段提到Watkins的预言？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了进行比较。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者提及Watkins的预言是为了作比较。",
+            "explanation": "原文未提及作者借Watkins预言进行任何对比；首段仅以该预言引出步行减少的话题，并无比较的写作目的。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了引出话题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-b-1",
+              "quote": "But he was wrong in one prediction: that everybody would walk 10 miles a day.",
+              "anchor": "唯独“人人每天步行10英里”的预言落空"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-b-2",
+              "quote": "In the early 1970s, 40 per cent of children walked to school, while in 2010, it was as low as 15 per cent.",
+              "anchor": "下文随即转入步行减少这一主题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了支撑她的论点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "But he was wrong in one prediction: that everybody would walk 10 miles a day.",
+            "sourceHighlight": "he was wrong in one prediction",
+            "optionText": "To support her argument.",
+            "optionHighlight": "support her argument",
+            "explanation": "首段中该预言是“被证伪”的引子，用以引出话题，而非作为论据支撑作者论点；把“引出话题”拔高为“支撑论点”属于功能上的夸大偷换。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了提供例子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者提及Watkins的预言是为了提供例子。",
+            "explanation": "Watkins的预言是文章的引入，而非用来例证某一观点的例子；原文不存在“以该预言作为示例”的功能定位。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mention Watkins' predictions in the first paragraph",
+          "sourceRole": "stem",
+          "targetText": "made predictions about life today",
+          "targetParagraphId": "para-zj-2021-jan-reading-b-1",
+          "relationType": "locationCue",
+          "note": "题干问首段提及 Watkins' predictions 的目的，定位到首段 made predictions about life today，结合段末“该预言落空”及下段转入步行减少，可知功能是 introduce the topic（引出话题）。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查澳大利亚儿童运动量下降的原因这一细节信息。",
+      "stemTranslationZh": "是什么导致了澳大利亚儿童运动量的下降？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "纯粹的懒惰。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "The decline is not because we have all become lazy.",
+            "sourceHighlight": "not because we have all become lazy",
+            "optionText": "Plain laziness.",
+            "optionHighlight": "Plain laziness",
+            "explanation": "原文明确否定“懒惰”是原因（is not because...lazy），该选项却把被否定的“懒惰”当作原因，与原文极性相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-b-3",
+              "quote": "The decline is not because we have all become lazy.",
+              "anchor": "原文明确否定“懒惰”是原因"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "健康问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The other side of the coin is equally a deprivation: for health and well-being, as well as lost opportunities (机会) for children to get to know their local surroundings.",
+            "sourceEntity": "health and well-being（步行减少导致的结果）",
+            "optionText": "Health problems.",
+            "optionEntity": "Health problems（被当作原因）",
+            "explanation": "原文中“健康”是步行减少所造成的损失（结果），并非导致运动量下降的原因；该选项把“结果”错配为“原因”。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "缺乏时间。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-b-3",
+              "quote": "Families are pressed for time, many with both parents working to pay for their house",
+              "anchor": "家庭时间紧张、父母双双工作"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "安全方面的顾虑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "运动量下降是出于安全顾虑。",
+            "explanation": "原文在分析原因时只提到时间紧张、父母工作、依赖汽车的社区与公共交通有限，并未提及任何安全顾虑，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Lack of time.",
+          "sourceRole": "correctOption",
+          "targetText": "Families are pressed for time",
+          "targetParagraphId": "para-zj-2021-jan-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "正确项 Lack of time 是原文 Families are pressed for time（家庭时间紧张）的同义替换，pressed for time 即“时间不够、缺时间”。"
+        },
+        {
+          "sourceText": "What has caused the decrease",
+          "sourceRole": "stem",
+          "targetText": "The decline is not because we have all become lazy.",
+          "targetParagraphId": "para-zj-2021-jan-reading-b-3",
+          "relationType": "locationCue",
+          "note": "题干问 caused the decrease（下降的原因），定位到第三段先排除 lazy、再给出真正原因 pressed for time。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-026": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查作者认为与儿子一起步行有价值的原因，需结合第五段作者的现身说法理解其指向。",
+      "stemTranslationZh": "作者为什么觉得和儿子一起步行是值得的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她下班后可以放松。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者觉得步行值得是因为下班后能放松。",
+            "explanation": "第五段强调的是步行途中能更多了解孩子，从未提及作者借此放松，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她可以保持身体健康。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "But somewhere over the daily walk more about my son’s day comes out.",
+            "sourceHighlight": "more about my son’s day comes out",
+            "optionText": "She can keep physically fit.",
+            "optionHighlight": "keep physically fit",
+            "explanation": "保持健康是全文谈步行的总体好处，但本题问作者本人觉得“值得”的具体理由，第五段聚焦的是借步行更了解孩子；用泛泛的“健康”替换作者此处的具体理由，属范围偷换。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她可以帮助儿子的学业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "to walk and talk with their young scholar about their day",
+            "optionText": "She can help with her son's study.",
+            "matchType": "wordFamily",
+            "relationNote": "原文用 young scholar 指代“上学的孩子”，与 study/学业 同属校园词族，借此诱导考生误选“帮助学业”；但原文谈的是借步行聊天更了解孩子，并未提及辅导学习。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-b-4",
+              "quote": "And for parents there are lost opportunities to walk and talk with their young scholar about their day.",
+              "anchor": "原文 young scholar 易诱导联想到“学业”"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她可以更了解自己的儿子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-b-5",
+              "quote": "But somewhere over the daily walk more about my son’s day comes out.",
+              "anchor": "步行途中能了解到更多孩子的事"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-b-5",
+              "quote": "This is the unexpected and rare parental opportunity to hear more.",
+              "anchor": "难得的多了解孩子的亲子机会"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She can know her son better.",
+          "sourceRole": "correctOption",
+          "targetText": "more about my son’s day comes out",
+          "targetParagraphId": "para-zj-2021-jan-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "正确项 know her son better 是原文 more about my son’s day comes out 与 a rare parental opportunity to hear more 的概括同义替换，即“更了解儿子”。"
+        },
+        {
+          "sourceText": "worthwhile",
+          "sourceRole": "stem",
+          "targetText": "This is the unexpected and rare parental opportunity to hear more.",
+          "targetParagraphId": "para-zj-2021-jan-reading-b-5",
+          "relationType": "locationCue",
+          "note": "题干 worthwhile（值得）对应第五段作者把步行称为 rare parental opportunity to hear more（难得的多了解孩子的机会），由此定位作者觉得值得的真正原因。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-027": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Hobaiter 博士眼中黑猩猩与人类的共同点，需定位第二段她对人猩交流相似性的表述。",
+      "stemTranslationZh": "根据 Hobaiter 博士的说法，黑猩猩和人类有什么共同点？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "记忆特定的词语。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "They say wild chimps communicate 19 specific messages to one another with a “vocabulary” of 66 gestures.",
+            "sourceHighlight": "specific messages",
+            "optionText": "Memorizing specific words.",
+            "optionHighlight": "specific words",
+            "explanation": "原文说黑猩猩用手势传递 specific messages（特定信息），并把手势集合比喻为 vocabulary，但从未提到黑猩猩“记忆特定词语”，选项把传递信息夸大并偷换成记忆词汇。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-1",
+              "quote": "communicate 19 specific messages to one another with a “vocabulary” of 66 gestures",
+              "anchor": "specific messages / vocabulary"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "理解复杂的信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Although previous research has shown that apes and monkeys can understand complex information from another animal’s call, the animals do not appear to use their voices intentionally to communicate messages.",
+            "sourceEntity": "apes and monkeys (理解叫声中复杂信息的主体)",
+            "optionText": "Understanding complex information.",
+            "optionEntity": "chimps and humans 的共同点",
+            "explanation": "“理解复杂信息”出自第四段，说的是 apes and monkeys 能理解同类叫声，属于以往研究的对比内容，并非 Hobaiter 所指的人猩共同点，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-4",
+              "quote": "apes and monkeys can understand complex information from another animal’s call",
+              "anchor": "猿猴理解叫声中的复杂信息"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "用声音进行交流。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the animals do not appear to use their voices intentionally to communicate messages",
+            "sourceHighlight": "do not appear to use their voices intentionally to communicate messages",
+            "optionText": "Using voices to communicate.",
+            "optionHighlight": "Using voices to communicate",
+            "explanation": "原文明确指出动物并未有意图地用声音传递信息，正是声音（叫声）与手势的区别所在；选项却说用声音交流是共同点，与原文相反，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-4",
+              "quote": "the animals do not appear to use their voices intentionally to communicate messages",
+              "anchor": "并非有意图地用声音交流"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有目的地传递信息。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-c-2",
+              "quote": "Only humans and chimps, she said, had a system of communication where they deliberately sent a message to another group member.",
+              "anchor": "只有人类和黑猩猩会刻意发送信息"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-c-2",
+              "quote": "this was the only form of intentional communication to be recorded in the animal kingdom",
+              "anchor": "唯一被记录的有意图交流"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Communicating messages on purpose.",
+          "sourceRole": "correctOption",
+          "targetText": "Only humans and chimps, she said, had a system of communication where they deliberately sent a message to another group member.",
+          "targetParagraphId": "para-zj-2021-jan-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项 on purpose 与原文 deliberately（以及上句 intentional communication）同义替换，均指“有意图、刻意地”发送信息。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-028": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Shultz 博士对该研究的总体评价，需综合第六段“值得称赞但有点失望”与第七段对结果局限的具体说明。",
+      "stemTranslationZh": "Shultz 博士如何看待这项研究？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "设计良好但实施糟糕。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It was well designed but poorly conducted.",
+            "explanation": "原文未提及研究“设计好”或“实施差”，Shultz 的失望针对的是结果（手势含义模糊、未超出其他动物），而非研究的设计或执行环节，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "是一次良好的尝试，但发现有限。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-c-6",
+              "quote": "the study was praiseworthy in seeking to enrich our knowledge of the evolution of human language. But, she added, the results were “a little disappointing”.",
+              "anchor": "研究值得称赞但结果令人失望"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-c-7",
+              "quote": "the meanings seem to not go beyond what other animals convey with non-verbal communication",
+              "anchor": "含义未超出其他动物，发现有限"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "颇具启发性，但证据不可靠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "the evidence was unreliable",
+            "explanation": "Shultz 称赞研究是 praiseworthy，可对应“有启发”，但她从未质疑证据“不可靠”；她的保留意见在于手势含义模糊、发现有限，而非证据可信度，故“证据不可靠”无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "是一次失败，但方法值得称赞。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the study was praiseworthy in seeking to enrich our knowledge of the evolution of human language. But, she added, the results were “a little disappointing”.",
+            "sourceHighlight": "praiseworthy",
+            "optionText": "It was a failure but the methods deserved praise.",
+            "optionHighlight": "It was a failure",
+            "explanation": "原文称研究本身 praiseworthy、结果只是 a little disappointing（有点失望），程度温和；选项却把整项研究定性为 failure（失败），并把称赞错位到方法上，态度颠倒且与原文不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-6",
+              "quote": "the study was praiseworthy",
+              "anchor": "研究值得称赞，而非失败"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It was a good try but the findings were limited.",
+          "sourceRole": "correctOption",
+          "targetText": "the study was praiseworthy in seeking to enrich our knowledge of the evolution of human language. But, she added, the results were “a little disappointing”.",
+          "targetParagraphId": "para-zj-2021-jan-reading-c-6",
+          "relationType": "paraphrase",
+          "note": "选项 a good try 对应 praiseworthy in seeking to...（值得称赞的尝试），the findings were limited 对应 results were a little disappointing 以及第七段含义未超出其他动物的说明。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-029": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查末段 gulf 的词义，需借助上下文（人猩交流的差异讨论）推断其指人与动物之间的差距。",
+      "stemTranslationZh": "末段中划线词 “gulf” 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "差异；差距。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-c-7",
+              "quote": "the meanings seem to not go beyond what other animals convey with non-verbal communication. So, it seems the gulf remains.",
+              "anchor": "含义未超出其他动物，故差距依旧"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-c-2",
+              "quote": "this was the only form of intentional communication to be recorded in the animal kingdom",
+              "anchor": "人猩交流与其他动物的差距背景"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "冲突。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Conflict.",
+            "explanation": "末段讨论的是人类语言与动物非语言交流之间的“差距”，并无任何对立或争斗之意，“冲突”与语境不符，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "平衡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "the meanings seem to not go beyond what other animals convey with non-verbal communication. So, it seems the gulf remains.",
+            "sourceHighlight": "not go beyond",
+            "optionText": "Balance.",
+            "optionHighlight": "Balance",
+            "explanation": "上文 not go beyond 与 the gulf remains 表明人猩交流与其他动物间仍存在落差、并未拉平；“平衡”意味着两者相当，与原文强调的差距方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-7",
+              "quote": "the gulf remains",
+              "anchor": "差距依然存在"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "联系；关联。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "the meanings seem to not go beyond what other animals convey with non-verbal communication. So, it seems the gulf remains.",
+            "sourceHighlight": "the gulf remains",
+            "optionText": "Connection.",
+            "optionHighlight": "Connection",
+            "explanation": "gulf 表示鸿沟、差距，remains 表示其依然存在，强调人与动物交流之间的“隔阂”；“联系/关联”意思相反，方向颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-7",
+              "quote": "the gulf remains",
+              "anchor": "鸿沟仍在，而非联系"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "gulf",
+          "sourceRole": "stem",
+          "targetText": "the meanings seem to not go beyond what other animals convey with non-verbal communication",
+          "targetParagraphId": "para-zj-2021-jan-reading-c-7",
+          "relationType": "locationCue",
+          "note": "由 not go beyond what other animals convey（未超出其他动物的交流）这一上文线索可推知 gulf 指人与动物交流间的 difference（差距）。"
+        }
+      ]
+    },
+    "q-zj-2021-jan-030": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查全文最佳标题，需把握主旨：研究破译了黑猩猩用于交流的手势含义，同时保留人猩仍有差距的结论。",
+      "stemTranslationZh": "下列哪项是本文最佳标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "黑猩猩行为研究取得突破。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the results were “a little disappointing”.",
+            "sourceHighlight": "a little disappointing",
+            "optionText": "Chimpanzee behaviour study achieved a breakthrough",
+            "optionHighlight": "achieved a breakthrough",
+            "explanation": "全文主题是“手势交流”的破译，而非泛泛的“行为研究”，且第六、七段明确指出结果令人失望、鸿沟仍在，谈不上 breakthrough（突破），选项范围与程度均拔高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-6",
+              "quote": "the results were “a little disappointing”",
+              "anchor": "结果令人失望，并非突破"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "黑猩猩发展出特定的交流技能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Researchers say they have translated the meaning of gestures that wild chimpanzees (黑猩猩) use to communicate.",
+            "sourceHighlight": "translated the meaning of gestures",
+            "optionText": "Chimpanzees developed specific communication skills",
+            "optionHighlight": "developed specific communication skills",
+            "explanation": "文章重点是研究者“破译/翻译”了黑猩猩既有手势的含义，而非黑猩猩“发展出”交流技能；developed 把研究发现偷换成黑猩猩自身能力的演化，偏离主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2021-jan-reading-c-1",
+              "quote": "they have translated the meaning of gestures that wild chimpanzees",
+              "anchor": "研究破译手势含义，非黑猩猩发展技能"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "黑猩猩：动物界最聪明的物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Chimpanzees: the smartest species in the animal kingdom",
+            "explanation": "全文聚焦黑猩猩手势交流与人类语言的对比，从未将黑猩猩与其他动物比较并断言其“最聪明”，the smartest species 在文中没有依据，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "黑猩猩语言：交流手势被破译。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2021-jan-reading-c-1",
+              "quote": "Researchers say they have translated the meaning of gestures that wild chimpanzees (黑猩猩) use to communicate.",
+              "anchor": "研究者破译黑猩猩用于交流的手势含义"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2021-jan-reading-c-3",
+              "quote": "They’re the only thing that looks like human language in that respect.",
+              "anchor": "手势在此方面类似人类语言"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Chimpanzee language: communication gestures translated",
+          "sourceRole": "correctOption",
+          "targetText": "they have translated the meaning of gestures that wild chimpanzees (黑猩猩) use to communicate",
+          "targetParagraphId": "para-zj-2021-jan-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "标题 communication gestures translated 直接对应首段 translated the meaning of gestures ... use to communicate，language 则呼应第三段 looks like human language，准确概括全文主旨。"
+        }
+      ]
+    }
+  }
+}

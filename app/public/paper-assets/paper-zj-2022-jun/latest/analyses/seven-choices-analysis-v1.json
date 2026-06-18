@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2022-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jun-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2022-jun-seven-choices": {
+      "overview": "本文是一篇议论性说明文，作者以孩子们给圣诞老人写信为引子，论述写作的核心在于“目的性”：真实的读者与真实的目的能让孩子学会根据对象调整语言。文章进而指出当代年轻人借助科技其实写得比以往更多，但长期只用非正式语言会带来问题，最优秀的沟通者懂得让语言匹配受众。五个空分别落在段尾收束、段中转折、并列举例、段首引题和段中转折处。",
+      "discourseStructure": {
+        "summary": "全文按“引子—论点—展开—转折—结论”推进：先用圣诞信引出写作，提出写作有目的这一核心论点，再以真实读者为例说明应按对象择词，接着转向科技时代年轻人写得更多却偏非正式，最后指出只用非正式语言的弊端并归结到“调整语言匹配受众”。",
+        "units": [
+          {
+            "unitId": "unit-zj-2022-jun-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jun-seven-title"
+            ],
+            "summary": "以满抽屉的圣诞信引入，孩子逐年写愿望清单，长大后还会给圣诞老人提示去哪买礼物。"
+          },
+          {
+            "unitId": "unit-zj-2022-jun-seven-thesis",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jun-seven-p1"
+            ],
+            "summary": "点明写作有目的这一核心论点；当写作看不到目的或得不到有意义回应时，就难以保持热情。"
+          },
+          {
+            "unitId": "unit-zj-2022-jun-seven-audience",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jun-seven-p2"
+            ],
+            "summary": "圣诞节是孩子借写作与人沟通的好时机；面对真实读者与真实目的，孩子学会按对象择词，对不熟的人用尊称。"
+          },
+          {
+            "unitId": "unit-zj-2022-jun-seven-tech",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jun-seven-p3"
+            ],
+            "summary": "科技时代年轻人通过发短信、在线聊天等不断产出文字，但因多写给亲友，多数时候用的是非正式语言。"
+          },
+          {
+            "unitId": "unit-zj-2022-jun-seven-conclusion",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2022-jun-seven-p4"
+            ],
+            "summary": "这种非正式写作本身没错且适配场合，但若是唯一会的写作方式则会出问题；最优秀的沟通者懂得调整语言匹配受众。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2022-jun-031": {
+      "blankId": "blank-zj-2022-jun-031",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "write up their Christmas wish lists",
+        "polite requests for the latest game or toy",
+        "give Santa some hints on where to buy their presents"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jun-seven-title",
+        "headingAnchor": null,
+        "beforeQuote": "they would give Santa some hints (提示)",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "As a result",
+          "signalSide": "option",
+          "targetText": "give Santa some hints on where to buy their presents",
+          "relation": "As a result 引出结果，与空前“给圣诞老人提示去哪买礼物”构成因果关系：因为给了提示，所以如愿收到礼物。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "they received something they wanted",
+          "signalSide": "option",
+          "targetText": "my children",
+          "relation": "选项中的 they 回指前文写信、给提示的 my children，主语保持一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "something they wanted",
+          "signalSide": "option",
+          "targetText": "the latest game or toy / presents",
+          "relation": "something they wanted 概括前文 the latest game or toy、presents，同属“想要的礼物”话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "本段讲孩子写信并给圣诞老人提示去哪买礼物，选项以 As a result 顺承得出“每年他们都收到想要的东西”的结果，逻辑与指代都吻合，收束本段。",
+        "matchedClues": [
+          {
+            "contextSide": "give Santa some hints on where to buy their presents",
+            "optionSide": "each year they received something they wanted",
+            "relation": "给提示是因，如愿收到礼物是果，As a result 把二者衔接为因果。"
+          },
+          {
+            "contextSide": "my children",
+            "optionSide": "they",
+            "relation": "选项主语 they 指代前文反复出现的 my children。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 谈“纸笔写信的时代或已过去”，与本段“孩子年年写信并收到礼物”的正面叙述基调相反，且“时代过去”的话题要到后文科技段才出现，置于段尾突兀。"
+        }
+      ],
+      "teachingNote": "段尾空遇到 As a result 这类结果连接词时，先回看上一句能否充当“原因”，再用代词回指核对主语，确认因果链成立。"
+    },
+    "q-zj-2022-jun-032": {
+      "blankId": "blank-zj-2022-jun-032",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "It has a purpose",
+        "our purpose is to achieve something",
+        "to entertain, inform, or persuade",
+        "doesn’t seem to have any purpose"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jun-seven-p1",
+        "headingAnchor": null,
+        "beforeQuote": "may be to entertain, inform, or persuade.",
+        "afterQuote": "And when writing doesn’t seem to have any purpose or get any kind of meaningful response, then it can be hard to get excited about doing it."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "Sometimes our purpose ... other times may be to entertain, inform, or persuade",
+          "relation": "But 在罗列各种具体目的之后作转折收束，把零散用途归到“总是有目的”这一总判断上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "purposeful",
+          "signalSide": "option",
+          "targetText": "a purpose / our purpose",
+          "relation": "选项 purposeful 与前文反复出现的 purpose 同根同场，紧扣“目的”主线。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "have any purpose",
+          "signalSide": "context-after",
+          "targetText": "purposeful",
+          "relation": "空后 doesn’t seem to have any purpose 正是对选项 purposeful 的反面假设，话题词 purpose 前后贯通。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "前句罗列写作可能有的多种目的，选项用 But ... always purposeful—or at least it should be 收束为“写作总是有目的”，下句再从反面谈“写作看不到目的时”，purpose 一词前后呼应。",
+        "matchedClues": [
+          {
+            "contextSide": "to entertain, inform, or persuade",
+            "optionSide": "it is always purposeful",
+            "relation": "把前面列举的具体目的归纳为“总是有目的”，是对上文的总括转折。"
+          },
+          {
+            "contextSide": "writing doesn’t seem to have any purpose",
+            "optionSide": "or at least it should be",
+            "relation": "选项的让步“至少应当如此”为下句“看不到目的”的反面情形埋下伏笔。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 含 But 也表转折，但其内容是“若这是年轻人唯一的写作方式就会出问题”，谈的是非正式写作的弊端，与本段“写作的目的”话题不符，应留待末段。"
+        }
+      ],
+      "teachingNote": "段中空认准转折词 But，再用前后复现的关键词（此处 purpose/purposeful）锁定话题，确保转折落在同一论题上。"
+    },
+    "q-zj-2022-jun-033": {
+      "blankId": "blank-zj-2022-jun-033",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "choose their words accordingly",
+        "real audiences and real purposes",
+        "You write “Dear Santa”",
+        "you want to show him respect"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jun-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "they can learn to choose their words accordingly.",
+        "afterQuote": "You write “Dear Santa” because you don’t know him personally and you want to show him respect."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "You write “Hi Nanna and Pop”",
+          "signalSide": "option",
+          "targetText": "You write “Dear Santa”",
+          "relation": "选项以 You write “...” 的并列句式举例，与空后 You write “Dear Santa” 句式完全平行，构成两个对照的称呼例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "because you are close to them",
+          "signalSide": "option",
+          "targetText": "you don’t know him personally / show him respect",
+          "relation": "选项“因为亲近”与空后“不熟、需尊称”形成正反对照，共同例证 choose their words accordingly。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "their words accordingly",
+          "signalSide": "context-before",
+          "targetText": "Hi Nanna and Pop / Dear Santa",
+          "relation": "空前 choose their words accordingly 是总说，选项与空后两个称呼正是“按对象择词”的具体落点。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说“按对象择词”，空后用“Dear Santa（不熟用尊称）”举例；选项 E 用同样的 You write “Hi Nanna and Pop” because you are close to them 句式补上“亲近就随意”的对照例，两例并列印证论点。",
+        "matchedClues": [
+          {
+            "contextSide": "choose their words accordingly",
+            "optionSide": "Hi Nanna and Pop ... close to them",
+            "relation": "对亲近的祖父母用随意称呼，正是“按对象择词”的具体示例。"
+          },
+          {
+            "contextSide": "Dear Santa ... show him respect",
+            "optionSide": "Hi Nanna and Pop ... close to them",
+            "relation": "一“尊称陌生人”一“随意称亲人”，两句构成对照，凸显语言随读者而变。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 说“并不是这些年轻人不会写”，主语是 young people 且属于后文科技段的论述，与本段第二人称 You write “...” 的并列举例语境不接，句式也不平行。"
+        }
+      ],
+      "teachingNote": "看到空后是 You write “…” because… 的范例句，优先找句式完全平行、构成正反对照的选项来补另一例。"
+    },
+    "q-zj-2022-jun-034": {
+      "blankId": "blank-zj-2022-jun-034",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Texting, online messaging, live chats",
+        "playing video games",
+        "constantly producing written messages",
+        "writing to family and friends"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jun-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "Texting, online messaging, live chats while playing video games all mean that they are constantly producing written messages."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "As technology develops",
+          "signalSide": "option",
+          "targetText": "Texting, online messaging, live chats while playing video games",
+          "relation": "选项的 technology 总领空后罗列的发短信、在线聊天、游戏直播聊天等具体科技写作形式。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "writing more than they ever have",
+          "signalSide": "option",
+          "targetText": "constantly producing written messages",
+          "relation": "选项“写得比以往更多”与空后 constantly producing written messages 同义呼应，量上对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "they are constantly producing",
+          "signalSide": "context-after",
+          "targetText": "young people",
+          "relation": "空后 they 需有先行词，选项主语 young people 恰好充当其指代来源。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本段为新段段首，需要总起句；选项 F 提出“随着科技发展，年轻人写得比以往更多”，正好统领空后列举的短信、在线聊天等写作形式，并为下文 they 提供主语。",
+        "matchedClues": [
+          {
+            "contextSide": "Texting, online messaging, live chats",
+            "optionSide": "As technology develops",
+            "relation": "这些都是科技带来的写作形式，被选项 technology 概括统领。"
+          },
+          {
+            "contextSide": "constantly producing written messages",
+            "optionSide": "young people are writing more than they ever have",
+            "relation": "不停产出文字＝写得比以往更多，量上前后印证。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C“纸笔写信的时代或已过去”虽也含科技变迁意味，但语气偏消极怀旧，无法统领下文“年轻人写得更多”的积极列举，且不能为空后 they 提供 young people 这一先行词。"
+        }
+      ],
+      "teachingNote": "段首空要找总起句：用空后罗列的具体事物（短信、聊天等）反推上位词（technology / young people），并核对它能否为后文代词提供先行词。"
+    },
+    "q-zj-2022-jun-035": {
+      "blankId": "blank-zj-2022-jun-035",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "nothing wrong with this kind of writing",
+        "suits the audience and the purpose",
+        "won’t be rewarded by the school examiner",
+        "a future employer or a potential client"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2022-jun-seven-p4",
+        "headingAnchor": null,
+        "beforeQuote": "It suits the audience and the purpose and gets the job done.",
+        "afterQuote": "This type of writing won’t be rewarded by the school examiner, nor by a future employer or a potential client."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "There is nothing wrong with this kind of writing",
+          "relation": "But 由空前“这种写作没什么错”的肯定转向弊端，构成“肯定—但是”的让步转折。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "it will cause problems",
+          "signalSide": "option",
+          "targetText": "won’t be rewarded by the school examiner ... employer or ... client",
+          "relation": "选项的结论 it will cause problems 由空后“得不到考官、雇主或客户认可”作具体说明，先总后分。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this is the only kind of writing",
+          "signalSide": "option",
+          "targetText": "this kind of writing / informal language",
+          "relation": "选项中的 this 回指前文那种适配亲友的非正式写作，限定为“唯一会的方式”才出问题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前肯定非正式写作没错、适配场合，选项 G 用 But if this is the only kind of writing... it will cause problems 转折设限，下句即列举“得不到考官、雇主、客户认可”作为问题的具体表现。",
+        "matchedClues": [
+          {
+            "contextSide": "nothing wrong with this kind of writing",
+            "optionSide": "But if this is the only kind of writing",
+            "relation": "由“没错”转到“若是唯一方式则……”，But 完成让步转折并把 this 锁定到前文那种写作。"
+          },
+          {
+            "contextSide": "won’t be rewarded by the school examiner ... employer ... client",
+            "optionSide": "it will cause problems",
+            "relation": "空后种种不被认可的后果，正是选项所说 problems 的具体内容。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A“并不是这些年轻人不会写”是为科技段的非正式写作作辩护，语气偏肯定，无法承接空前“没错”后所需的转折，也接不上空后列举的种种弊端。"
+        }
+      ],
+      "teachingNote": "段中遇“肯定句＋空＋负面后果”结构时，优先选含 But 且代词（this）能回指前文话题的转折句，让空成为“先扬后抑”的枢纽。"
+    }
+  }
+}

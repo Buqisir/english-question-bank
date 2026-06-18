@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-zj-2022-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jan-reading-a",
+    "group-zj-2022-jan-reading-b",
+    "group-zj-2022-jan-reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pipeline",
+    "reviewedAt": "2026-06-18T00:00:00Z"
+  },
+  "groups": {
+    "group-zj-2022-jan-reading-a": {
+      "overview": "记叙文。讲述 Merebeth 由地产公司办公室经理转行成为自雇宠物运输专员的经历，以及她对四处漫游（wanderlust）的热爱、这份热爱的来源（父亲）和她独立自主的工作状态。",
+      "discourseStructure": {
+        "summary": "全文按‘起因—现状—溯源—回报与心境’的逻辑展开：先讲转行契机，再写宠物运输如何满足其漫游欲，接着追溯漫游欲来自父亲，最后说明收入、淡季安排及她独来独往的内心世界。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2022-jan-reading-a-1",
+            "summary": "金融危机使 Merebeth 所在的地产公司倒闭、她被迫另谋出路；一次偶遇救助流浪狗并亲自驱车 1600 英里送往丹佛，成为她新职业的开端。",
+            "function": "交代主人公转行的起因和宠物运输职业的缘起。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-a-2",
+            "summary": "宠物运输工作满足了她的漫游欲，足迹几乎遍及全美各州；她不惧各种恶劣天气，穿越大风、洪水风暴和暴雪。",
+            "function": "说明这份工作如何满足她四处游历的渴望，并以 wanderlust 一词承上启下。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-a-3",
+            "summary": "她的漫游欲遗传自父亲：父亲在她一岁时举家从加拿大迁往加州以探索新地方；高中毕业后她便离家独居 Catalina 岛，过着航海与越野骑行的生活。",
+            "function": "追溯 wanderlust 的来源，刻画其独立天性的成长背景。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-a-4",
+            "summary": "宠物运输税前年收入约 3 万；夏天因车内对动物太热而不工作；入秋后她又会因漫游欲而坐不住；这是一份她必须独自面对的召唤，她始终独来独往、独立自主。",
+            "function": "交代收入、淡季安排，并揭示她独立、独行的内心世界，收束全文。"
+          }
+        ]
+      }
+    },
+    "group-zj-2022-jan-reading-b": {
+      "overview": "本文是一篇书评，评介历史学家 Maury Klein 的著作 The Power Makers: Steam, Electricity, and the Men Who Invented Modern America。文章先指出电力是美国崛起的命脉，再说明电力时代实为蒸汽时代的第二阶段，随后按时间梳理书中讲述的蒸汽机与电力革命的发展，最后点评作者用虚构人物 Ned 串联叙事的写作手法。",
+      "discourseStructure": {
+        "summary": "全文先立论（电力支撑美国崛起、电力时代是蒸汽时代的延续），再引入并介绍 Klein 及其著作，接着按时间顺序复述书中蒸汽机与电力革命的关键人物与事件，最后评价作者塑造虚构见证者 Ned 的叙事技巧。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2022-jan-reading-b-1",
+            "summary": "美国凭技术崛起，电力是技术的命脉并创造了现代世界；但准确地说，电力时代只是早一个世纪开始的蒸汽时代的第二阶段。",
+            "function": "提出全文核心观点，确立蒸汽时代与电力时代之间的承接关系，为评介的著作主题做铺垫。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-b-2",
+            "summary": "引用 Klein 在书中的话——尚无人把蒸汽与电力两场革命合写成史；并介绍 Klein 是知名技术史学家，其叙述生动得有时读来像小说。",
+            "function": "引入被评介的著作及其作者，点明该书填补的空白与生动的叙述风格。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-b-3",
+            "summary": "故事始于18世纪末苏格兰，Watt 完善了“改变世界的机器”；美国虽未发明蒸汽机，却把它用到了比谁都多的用途上。",
+            "function": "复述书中蒸汽革命的开端，承接蒸汽时代主题。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-b-4",
+            "summary": "19世纪间电力从新奇之物变为必需品：Morse 发明电报码，Bell 让电报有了“声音”，Edison 完善白炽灯泡把电光带进美国家庭。",
+            "function": "复述书中电力革命的关键人物与发明，展现电力地位的演进。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-b-5",
+            "summary": "最重要的是 Edison 意识到成功取决于大规模电气化，并在纽约市加以展示；借助 Tesla，Westinghouse 公司开发出交流电系统，很快成为主要供电方式。",
+            "function": "续述电力革命的高潮，突出大规模电气化与交流电的意义。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-b-6",
+            "summary": "为搭建叙事框架，Klein 虚构了人物 Ned，让他作为一个人一生中见证美国蒸汽与电力革命进步的见证者；这一手法把冗长的叙述变得有趣。",
+            "function": "评点作者的叙事技巧，呼应第二段“读来像小说”的评价，收束全文。"
+          }
+        ]
+      }
+    },
+    "group-zj-2022-jan-reading-c": {
+      "overview": "本文是一篇科普说明文，报道一项瑞典研究的发现：中年时心血管体能良好的女性日后患失智症的风险显著更低，即使患病也会推迟约十年。文章按照「引出新发现—专家评价—研究方法与分组—结果数据—研究局限」的顺序展开。",
+      "discourseStructure": {
+        "summary": "全文先用「锻炼益处清单又添一项」引出新研究结论，再借首席研究员之口评价其意义，随后说明研究的实验方法和体能分组，列出各组失智发病率数据，最后由研究员指出研究只显示相关性而非因果，并坦承样本局限。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2022-jan-reading-c-1",
+            "summary": "引出新研究：中年体能好的女性患失智症的概率可低近九成，即使患病也推迟约十年。",
+            "function": "引入话题并点明核心发现"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-c-2",
+            "summary": "首席研究员 Hörder 评价该发现令人振奋，认为提升中年心血管体能或可延缓甚至预防失智。",
+            "function": "借专家之口阐释发现的意义"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-c-3",
+            "summary": "介绍研究方法：191 名平均年龄 50 岁的女性骑车测试至力竭，以测量最大心血管能力，平均峰值负荷 103 瓦。",
+            "function": "说明研究对象与测量方法"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-c-4",
+            "summary": "按峰值负荷把女性分为高（120 瓦及以上，40 人）、中（92 人）、低（80 瓦及以下或因健康问题中止，59 人）三个体能等级。",
+            "function": "说明体能分组标准与人数"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-c-5",
+            "summary": "随后四十年间六次检测失智，44 人发病；高体能组发病率 5%，中体能组 25%，低体能组 32%。",
+            "function": "呈现随访结果与各组发病率数据"
+          },
+          {
+            "paragraphId": "para-zj-2022-jan-reading-c-6",
+            "summary": "研究员指出该研究只显示相关性而非因果，需更多研究，并坦承样本量小且仅来自瑞典，结论未必适用于其他人群。",
+            "function": "指出研究的局限性与谨慎结论"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2022-jan-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Merebeth 转行的原因，需定位第一段关于原雇主境况的细节。",
+      "stemTranslationZh": "Merebeth 为什么换了工作？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她想在离家近的地方工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "while driving near her home",
+            "optionText": "She wanted to work near her home.",
+            "matchType": "exact",
+            "relationNote": "原文 near her home 只是描述她开车经过住所附近时偶遇流浪狗，与‘想在离家近处工作’无关；选项借用 near her home 这一字面表达制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-a-1",
+              "quote": "while driving near her home, she saw a dog wandering on the road",
+              "anchor": "near her home 指偶遇地点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她厌倦了在办公室工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She was tired of working in the office.",
+            "explanation": "原文只说她曾做了十年办公室经理，公司倒闭后被迫另谋出路，并未提及她厌倦办公室工作，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她姐姐让她搬到丹佛去。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "her sister in Denver agreed to take it",
+            "sourceEntity": "her sister in Denver agreed to take it (狗)",
+            "optionText": "Her sister asked her to move to Denver.",
+            "optionEntity": "asked her to move to Denver (Merebeth 本人)",
+            "explanation": "原文是姐姐同意收养那只狗（take it），且狗在 1600 英里外的丹佛；选项偷换为姐姐让 Merebeth 本人搬去丹佛，对象与事件均不符。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她原来的雇主倒闭了。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-a-1",
+              "quote": "The firm went broke and left her looking for a new job.",
+              "anchor": "公司倒闭使她另谋出路"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2022-jan-reading-a-1",
+              "quote": "The downturn hit the real estate (房地产) firm where she had worked for ten years as an office manager.",
+              "anchor": "经济下行冲击其原雇主"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Her former employer was out of business.",
+          "sourceRole": "correctOption",
+          "targetText": "The firm went broke and left her looking for a new job.",
+          "targetParagraphId": "para-zj-2022-jan-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 former employer was out of business 是对原文 The firm went broke（公司倒闭）的同义替换，went broke = out of business。"
+        },
+        {
+          "sourceText": "changed her job",
+          "sourceRole": "stem",
+          "targetText": "left her looking for a new job",
+          "targetParagraphId": "para-zj-2022-jan-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干 changed her job 对应原文 looking for a new job，定位到换工作的原因句。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-022": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第二段 wanderlust 一词的词义推测，需结合该段对其旅行行为的具体描述及上下文复现。",
+      "stemTranslationZh": "第二段中的 wanderlust 一词意为一种……的渴望。",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "赚钱",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "make money",
+            "explanation": "收入信息出现在第四段（税前年约 3 万），与第二段 wanderlust 的语境无关；该段通篇讲她到处旅行，未涉及赚钱欲望，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "尝试各种各样的工作",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "try various jobs",
+            "explanation": "全文 Merebeth 只从事过办公室经理和宠物运输两份工作，且第二段并未表达她想尝试不同工作的意愿，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "亲近大自然",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "It has taken her to every state in the US except Montana, Washington and Oregon",
+            "sourceHighlight": "every state in the US",
+            "optionText": "be close to nature",
+            "optionHighlight": "be close to nature",
+            "explanation": "原文强调走遍全美各州、奔赴‘新地方’，核心是‘到处去不同地方’；选项 be close to nature 把范围窄化为‘亲近自然’，不符合该词强调地理流动的语境。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "去往不同的地方旅行",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-a-2",
+              "quote": "It has taken her to every state in the US except Montana, Washington and Oregon",
+              "anchor": "足迹遍及全美各州"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2022-jan-reading-a-2",
+              "quote": "If she wants to visit a new place, she will simply find a pet with transport needs there.",
+              "anchor": "想去新地方就接相应运输单"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "travel to different places",
+          "sourceRole": "correctOption",
+          "targetText": "If she wants to visit a new place, she will simply find a pet with transport needs there.",
+          "targetParagraphId": "para-zj-2022-jan-reading-a-2",
+          "relationType": "paraphrase",
+          "note": "选项 travel to different places 是对原文 visit a new place 及走遍 every state 的同义概括，体现 wanderlust = 想去不同地方游历的渴望。"
+        },
+        {
+          "sourceText": "wanderlust",
+          "sourceRole": "stem",
+          "targetText": "This wanderlust is inherited from her father",
+          "targetParagraphId": "para-zj-2022-jan-reading-a-3",
+          "relationType": "locationCue",
+          "note": "第三段 This wanderlust is inherited from her father 复现该词，并以父亲‘想探索新地方（explore a new place）’佐证其‘游历不同地方’之义。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-023": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查关于她新工作的细节判断，需综合第四段对其独自工作、淡季不工作、税前收入等信息的理解。",
+      "stemTranslationZh": "关于 Merebeth 的新工作，我们可以得知什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她有机会看到稀有动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She has chances to see rare animals.",
+            "explanation": "原文只提及她运输宠物、帮助动物，从未提到见到‘稀有动物（rare animals）’，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她全年都辛勤工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "She doesn’t work in summer, as it would be unpleasantly hot for the animals in the car, even with air conditioning.",
+            "sourceHighlight": "She doesn’t work in summer",
+            "optionText": "She works hard throughout the year.",
+            "optionHighlight": "throughout the year",
+            "explanation": "原文明确说她夏天不工作；选项 throughout the year（全年）与原文‘夏季停工’相矛盾，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-a-4",
+              "quote": "She doesn’t work in summer",
+              "anchor": "夏天不工作"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她始终都依靠自己。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-a-4",
+              "quote": "It’s a call she must handle alone, though.",
+              "anchor": "必须独自面对的召唤"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2022-jan-reading-a-4",
+              "quote": "I’ve always been independent-spirited and I just feel strongly that I mush help animals.",
+              "anchor": "独来独往、独立自主"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她挣的是免税的基本工资。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "It turns out that pet transporting pays quite well at about 30,000 per year before tax.",
+            "sourceHighlight": "before tax",
+            "optionText": "She earns a basic and tax-free salary.",
+            "optionHighlight": "tax-free",
+            "explanation": "原文 before tax（税前）说明收入仍需纳税，且 pays quite well（收入不错）也与‘基本工资 basic salary’相悖；选项 tax-free（免税）与 before tax 含义相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-a-4",
+              "quote": "about 30,000 per year before tax",
+              "anchor": "税前约 3 万"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She relies on herself the whole time.",
+          "sourceRole": "correctOption",
+          "targetText": "It’s a call she must handle alone, though.",
+          "targetParagraphId": "para-zj-2022-jan-reading-a-4",
+          "relationType": "paraphrase",
+          "note": "选项 relies on herself / the whole time 是对原文 handle alone 与 in my own world、independent-spirited 的同义概括，体现她始终独自应对。"
+        },
+        {
+          "sourceText": "relies on herself",
+          "sourceRole": "correctOption",
+          "targetText": "I’ve always been independent-spirited",
+          "targetParagraphId": "para-zj-2022-jan-reading-a-4",
+          "relationType": "paraphrase",
+          "note": "原文 independent-spirited（独立自主的性格）与选项 relies on herself 构成同义替换，always 也对应 the whole time。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Klein 关于“电力时代”这一观点的理解，需定位作者转述 Klein 视角处的细节。",
+      "stemTranslationZh": "Klein 对电力时代的理解是怎样的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它与蒸汽时代紧密相连。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-b-1",
+              "quote": "the age of electricity is merely the second stage in the age of steam",
+              "anchor": "电力时代只是蒸汽时代的第二阶段"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2022-jan-reading-b-2",
+              "quote": "no one has put together a history of both the steam and electric revolutions",
+              "anchor": "Klein 主张把蒸汽与电力两场革命合写"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它比人们以为的开始得更早。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the second stage in the age of steam, which began a century earlier",
+            "sourceEntity": "the age of steam (began a century earlier)",
+            "optionText": "It began earlier than people thought.",
+            "optionEntity": "the age of electricity (began earlier)",
+            "explanation": "原文说“早一个世纪开始”的是 the age of steam（蒸汽时代），并非电力时代；选项把“更早开始”错配到电力时代，对象张冠李戴。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-1",
+              "quote": "the age of steam, which began a century earlier",
+              "anchor": "早一个世纪开始的是蒸汽时代"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是一段鲜有人研究的历史时期。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "It is curious that no one has put together a history of both the steam and electric revolutions",
+            "sourceHighlight": "no one has put together a history of both the steam and electric revolutions",
+            "optionText": "It is a little-studied period of history.",
+            "optionHighlight": "a little-studied period of history",
+            "explanation": "原文只是说尚无人把蒸汽与电力“两场革命合在一起”写成史，针对的是“合写”这一缺口，并非说电力时代本身鲜有人研究；选项把局部空白夸大为整个时期“少有人研究”，范围被放大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-2",
+              "quote": "no one has put together a history of both the steam and electric revolutions",
+              "anchor": "缺的是把两场革命合写的史书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它迟早会走向终结。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It will come to an end sooner or later.",
+            "explanation": "原文未提及电力时代会终结；Klein 的观点是电力时代是蒸汽时代的延续阶段，与“终结”无关，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is closely linked to the steam age.",
+          "sourceRole": "correctOption",
+          "targetText": "the age of electricity is merely the second stage in the age of steam",
+          "targetParagraphId": "para-zj-2022-jan-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项 closely linked to the steam age 是对原文 the second stage in the age of steam（电力时代是蒸汽时代第二阶段）的同义替换，体现两时代的承接关联。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-025": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对虚构人物 Ned 的推断，需结合末段对 Ned 角色设定的描述进行合理推理。",
+      "stemTranslationZh": "关于 Ned 可以推断出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他出生在纽约市。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "which he showed in New York City",
+            "optionText": "He was born in New York City.",
+            "matchType": "exact",
+            "relationNote": "原文 New York City 是指 Edison 在纽约市展示大规模电气化，与 Ned 的出生地无关；选项借原文出现过的 New York City 设钩，诱导误以为是 Ned 的出生地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-5",
+              "quote": "which he showed in New York City",
+              "anchor": "纽约市是 Edison 展示电气化之地"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他写了许多有趣的故事。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Klein creates the character of Ned",
+            "sourceEntity": "Klein (the author who writes)",
+            "optionText": "He wrote many interesting stories.",
+            "optionEntity": "Ned (he wrote stories)",
+            "explanation": "原文中“写”这一动作的主语是 Klein——是 Klein 创造了 Ned 这个人物；Ned 只是书中被塑造的见证者，并非写故事的人。选项把作者的行为错配到 Ned 身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-6",
+              "quote": "Klein creates the character of Ned, a fictional witness",
+              "anchor": "Ned 是 Klein 创造的虚构见证者"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他创办了一家电力公司。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Westinghouse’s firm developed a system using alternating current",
+            "sourceEntity": "Westinghouse’s firm (a company)",
+            "optionText": "He created an electricity company.",
+            "optionEntity": "Ned (created a company)",
+            "explanation": "原文涉及公司的是 Westinghouse 的公司开发交流电系统，与 Ned 毫无关系；Ned 只是虚构见证者，并未创办任何电力公司。选项把公司之事错配到 Ned 头上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-5",
+              "quote": "Westinghouse’s firm developed a system using alternating current",
+              "anchor": "电力公司指 Westinghouse 的公司"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他主要生活在19世纪。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-b-6",
+              "quote": "a fictional witness to the progress brought about by the steams and electric revolutions in America during one man’s lifetime",
+              "anchor": "Ned 一生见证蒸汽与电力革命的进步"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2022-jan-reading-b-4",
+              "quote": "over the course of 19th century, electricity went from mere curiosity to a basic necessity",
+              "anchor": "电力革命主要发生在19世纪"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "during one man’s lifetime",
+          "sourceRole": "correctOption",
+          "targetText": "over the course of 19th century, electricity went from mere curiosity to a basic necessity",
+          "targetParagraphId": "para-zj-2022-jan-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "末段说 Ned 在“一个人一生中（during one man’s lifetime）”见证了蒸汽与电力革命，而文中这些革命的演进集中在 19th century，由此可推断 Ned 主要生活在19世纪。"
+        },
+        {
+          "sourceText": "He lived mainly in the 19th century.",
+          "sourceRole": "correctOption",
+          "targetText": "a fictional witness to the progress brought about by the steams and electric revolutions in America during one man’s lifetime",
+          "targetParagraphId": "para-zj-2022-jan-reading-b-6",
+          "relationType": "locationCue",
+          "note": "定位末段对 Ned 的角色描述：他是“一个人一生中”见证革命进步的虚构 witness，结合革命发生的世纪即可推出其生活年代。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-026": {
+      "skill": {
+        "primary": "structure"
+      },
+      "questionFocus": "考查文章体裁/文本类型的判断，需综合全文“评介一本著作”的写作目的与内容来判定。",
+      "stemTranslationZh": "这篇文章属于什么类型？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一篇人物传记。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Steam, Electricity, and the Men Who Invented Modern America",
+            "sourceHighlight": "the Men Who Invented Modern America",
+            "optionText": "A biography.",
+            "optionHighlight": "A biography",
+            "explanation": "文中确实提到 Watt、Morse、Bell、Edison 等人物，但文章是围绕评介 Klein 的著作展开，并非系统记述某个人的生平；把对书中人物的零星提及当作“人物传记”，扩大了文本性质。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-2",
+              "quote": "writes Maury Klein in his book The Power Makers",
+              "anchor": "全文围绕评介 Klein 的著作"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一篇书评。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-b-2",
+              "quote": "Klein, a noted historian of technology, spins a narrative (叙述) so lively that at times it reads like a novel.",
+              "anchor": "对著作叙述风格的评价"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2022-jan-reading-b-6",
+              "quote": "It’s a technique that helps turn a long narrative into an interesting one.",
+              "anchor": "评点作者的写作手法"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一篇短篇小说。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "it reads like a novel",
+            "optionText": "A short story.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 reads like a novel 是用来形容 Klein 叙述生动得“读来像小说”，是评价书的风格的比喻，并非说本文就是小说；选项借 novel 与 short story 的同类词族设钩，混淆评价对象与文本本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-b-2",
+              "quote": "it reads like a novel",
+              "anchor": "“读来像小说”是对书的评价"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一篇科学报告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A science report.",
+            "explanation": "原文未提及任何科学实验、数据或研究报告内容；文章是对一本技术史著作的评介，并非呈现科研成果的科学报告，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A book review.",
+          "sourceRole": "correctOption",
+          "targetText": "Klein, a noted historian of technology, spins a narrative (叙述) so lively that at times it reads like a novel.",
+          "targetParagraphId": "para-zj-2022-jan-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "全文围绕 Klein 的著作 The Power Makers 展开，并对其叙述风格（reads like a novel）与写作手法（technique）作出评价，这正是 book review（书评）的典型特征。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-027": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对首段「不断增长的清单」所指内容的细节理解，需要从指代语境中确定清单的实质内容。",
+      "stemTranslationZh": "第一段提到的「不断增长的清单」上有什么内容？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "锻炼带来的积极作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-c-1",
+              "quote": "The benefits of regular exercise are well documented but there’s a new bonus to add to the ever-growing list.",
+              "anchor": "the benefits ... to add to the ever-growing list"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "适合中年人做的锻炼。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "The benefits of regular exercise are well documented but there’s a new bonus to add to the ever-growing list.",
+            "sourceHighlight": "The benefits of regular exercise",
+            "optionText": "Exercises suitable for the middle-aged.",
+            "optionHighlight": "Exercises suitable for the middle-aged",
+            "explanation": "清单内容是「锻炼的益处（benefits）」，并非「适合某类人群的锻炼项目」。该项把「益处的清单」偷换成「锻炼方式的清单」，且原文并未把清单限定到中年人，属于范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-1",
+              "quote": "The benefits of regular exercise are well documented",
+              "anchor": "benefits, not types of exercise"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "关于失智症的实验研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "there’s a new bonus to add to the ever-growing list",
+            "sourceEntity": "a new bonus (of regular exercise)",
+            "optionText": "Experimental studies on dementia.",
+            "optionEntity": "Experimental studies on dementia",
+            "explanation": "清单上累加的是「锻炼带来的好处」这一项，而不是「关于失智症的实验研究」。失智研究是下文用来佐证这一好处的内容，并非清单本身的条目，属对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-1",
+              "quote": "there’s a new bonus to add to the ever-growing list",
+              "anchor": "list item = a bonus, not a study"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "运动型女性相比男性的优势。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Advantages of sporty women over men.",
+            "explanation": "原文未提及男性，也未做任何「女性优于男性」的比较，全文只在女性内部比较不同体能水平，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Positive effects of doing exercises",
+          "sourceRole": "correctOption",
+          "targetText": "The benefits of regular exercise are well documented",
+          "targetParagraphId": "para-zj-2022-jan-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确项 Positive effects of doing exercises 与原文 The benefits of regular exercise 同义替换，benefits 即 positive effects，清单即「锻炼益处」之列表。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对研究方法的细节理解，需定位研究者让受试者骑车的目的。",
+      "stemTranslationZh": "研究人员为什么要求这些女性做自行车运动？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了预测她们的最大心率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "to measure their peak (最大值的) cardiovascular capacity",
+            "sourceEntity": "peak cardiovascular capacity",
+            "optionText": "To predict their maximum heart rate.",
+            "optionEntity": "maximum heart rate",
+            "explanation": "原文测量的是「峰值心血管能力（peak cardiovascular capacity）」，并非「最大心率（maximum heart rate）」。该项利用 peak/maximum 的相近，把测量对象错配成心率，属对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-3",
+              "quote": "to measure their peak (最大值的) cardiovascular capacity",
+              "anchor": "capacity, not heart rate"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了评估她们的心血管能力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-c-3",
+              "quote": "took a bicycle exercise test until they were tired out to measure their peak (最大值的) cardiovascular capacity",
+              "anchor": "bicycle test ... to measure ... cardiovascular capacity"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了改变她们的锻炼习惯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To change their habit of working out.",
+            "explanation": "原文骑车测试只为测量心血管能力，从未提及要改变受试者的锻炼习惯，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了查出她们潜在的健康问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "having their tests stopped because of health problems",
+            "optionText": "To detect their potential health problems.",
+            "matchType": "exact",
+            "relationNote": "原文 health problems 出现在第四段，是指部分人因健康问题而中止测试、被归入低体能组，并非骑车测试的「目的」。该项借用原词 health problems 制造干扰，把分组时的一个附带情形偷换成实验目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-4",
+              "quote": "having their tests stopped because of health problems",
+              "anchor": "health problems = reason tests stopped, not the purpose"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To assess their cardiovascular capacity",
+          "sourceRole": "correctOption",
+          "targetText": "to measure their peak (最大值的) cardiovascular capacity",
+          "targetParagraphId": "para-zj-2022-jan-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "正确项 assess 与原文 measure 同义替换，cardiovascular capacity 原词对应，目的状语 to measure... 即骑车测试的目的。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-029": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对 Hörder 研究的整体细节判断，需结合随访时长、研究目的与研究局限逐项核对。",
+      "stemTranslationZh": "关于 Hörder 博士的研究，我们可以得知什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它旨在找到治疗失智症的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It aimed to find a cure for dementia.",
+            "explanation": "原文称该研究只显示体能与失智之间的「相关性」，目的是观察关联，并未以「寻找治疗失智的方法（a cure）」为目标，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "数据收集是一个漫长的过程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-c-5",
+              "quote": "These women were then tested for dementia six times over the following four decades.",
+              "anchor": "tested six times over four decades"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一些参与者中途退出了研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "having their tests stopped because of health problems",
+            "optionText": "Some participants withdrew from it.",
+            "matchType": "wordFamily",
+            "relationNote": "原文说部分人因健康问题被「中止测试（tests stopped）」，指的是体能测试当场停止并据此归入低体能组，与「参与者退出整项研究（withdrew）」不是一回事。该项借「停止/退出」的近义联想制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-4",
+              "quote": "having their tests stopped because of health problems",
+              "anchor": "tests stopped ≠ withdrew from study"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "研究结果远不能令人满意。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "These findings are exciting because it’s possible that improving people’s cardiovascular (心血管的) fitness in middle age could delay or even prevent them from developing dementia.",
+            "sourceHighlight": "These findings are exciting",
+            "optionText": "The results were far from satisfactory.",
+            "optionHighlight": "far from satisfactory",
+            "explanation": "研究员评价结果「令人振奋（exciting）」，态度积极；该项却说结果「远不能令人满意」，与原文情感倾向相反，属黑白颠倒。文末提到的样本局限是研究的客观限制，而非对结果质量的负面评价。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-2",
+              "quote": "These findings are exciting",
+              "anchor": "exciting, not unsatisfactory"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Data collection was a lengthy process",
+          "sourceRole": "correctOption",
+          "targetText": "These women were then tested for dementia six times over the following four decades.",
+          "targetParagraphId": "para-zj-2022-jan-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "正确项 a lengthy process 由原文 six times over the following four decades（四十年间检测六次）推断而来，长达数十年的反复检测即「数据收集过程漫长」。"
+        }
+      ]
+    },
+    "q-zj-2022-jan-030": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查标题概括能力，需选出最能覆盖全文核心结论且范围恰当的标题。",
+      "stemTranslationZh": "下列哪一项是本文最佳标题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "越来越多女性通过锻炼来预防失智症。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "More Women Are Exercising to Prevent Dementia",
+            "explanation": "全文报道的是一项关于「体能与失智关联」的研究发现，并未说「越来越多女性正在为预防失智而锻炼」这一社会趋势，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "中年女性需要做更多锻炼。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "However, this study does not show cause and effect between cardiovascular fitness and dementia, it only shows an association",
+            "sourceHighlight": "it only shows an association",
+            "optionText": "Middle-Aged Women Need to Do More Exercise",
+            "optionHighlight": "Need to Do More Exercise",
+            "explanation": "原文强调研究只显示相关性、并不构成因果，故无法据此直接得出「中年女性需要多锻炼」这一带建议性、强断言的结论。该标题把谨慎的相关发现夸大为行动主张，属范围偷换（夸大）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-6",
+              "quote": "this study does not show cause and effect between cardiovascular fitness and dementia, it only shows an association",
+              "anchor": "only an association, not a directive"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "体能好的女性患失智症的可能性更小。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jan-reading-c-1",
+              "quote": "New research found that middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia (失智症) in later life",
+              "anchor": "physically fit women ... less likely to develop dementia"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2022-jan-reading-c-5",
+              "quote": "Five percent of the highly fit women developed dementia, compared to 25 percent of the women with medium fitness and 32 percent of the women with low fitness.",
+              "anchor": "5% fit vs 25%/32% less fit"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "骑车能改善女性的心血管体能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "took a bicycle exercise test until they were tired out to measure their peak (最大值的) cardiovascular capacity",
+            "sourceEntity": "a bicycle exercise test (to measure capacity)",
+            "optionText": "Biking Improves Women's Cardiovascular Fitness",
+            "optionEntity": "Biking Improves ... Cardiovascular Fitness",
+            "explanation": "文中骑车只是用来「测量」心血管能力的测试手段，并非用来「改善（improves）」体能。该标题把测量工具错配为提升体能的方法，且只涉及局部细节，无法概括全文，属对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jan-reading-c-3",
+              "quote": "took a bicycle exercise test until they were tired out to measure their peak (最大值的) cardiovascular capacity",
+              "anchor": "bicycle = measuring tool, not the booster"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Fit Women Are Less Likely to Develop Dementia",
+          "sourceRole": "correctOption",
+          "targetText": "middle-aged women who were physically fit could be nearly 90 percent less likely to develop dementia",
+          "targetParagraphId": "para-zj-2022-jan-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确标题 Fit Women Are Less Likely to Develop Dementia 直接概括首段核心句 physically fit ... less likely to develop dementia，并由第五段各体能组发病率数据（5% vs 25%/32%）佐证，覆盖全文主旨。"
+        }
+      ]
+    }
+  }
+}

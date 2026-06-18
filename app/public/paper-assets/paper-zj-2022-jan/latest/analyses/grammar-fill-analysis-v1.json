@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-zj-2022-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jan-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2022-jan-grammar-fill": {
+      "overview": "说明文：讲述以气候科学家 Kim Cobb 为代表的越来越多学者出于气候变化考虑而减少乘飞机出行、推动会议远程参与的做法。"
+    }
+  },
+  "blanks": {
+    "q-zj-2022-jan-056": {
+      "blankId": "blank-zj-2022-jan-056",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "who",
+      "role": null,
+      "path": null,
+      "reason": "空格前有先行词 academics（指人），后面 are cutting back 缺主语，是修饰 academics 的定语从句，关系代词在从句中作主语，指人用 who 或 that。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "minority of academics",
+          "signalSide": "passage",
+          "relation": "先行词 academics 指人，决定关系代词用 who/that。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "are cutting back on their air travel",
+          "signalSide": "passage",
+          "relation": "从句谓语 are cutting back 前缺主语，需关系代词作主语引导定语从句。"
+        }
+      ],
+      "teachingNote": "先找空前的名词先行词，再看从句是否缺主语：缺主语且指人，就填 who/that。"
+    },
+    "q-zj-2022-jan-057": {
+      "blankId": "blank-zj-2022-jan-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "view",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is viewed",
+      "role": null,
+      "path": null,
+      "reason": "本句主语是动名词短语 Travelling to conferences...，整句缺谓语，故 view 作谓语；view sth as 的逻辑宾语就是主语本身，应用被动；陈述普遍看法，用一般现在时 is viewed（或强调持续至今 has been viewed）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Travelling to conferences, lectures, workshops",
+          "signalSide": "passage",
+          "relation": "主语为动名词短语，视作单数，谓语用单数被动 is viewed。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "as important for scientists",
+          "signalSide": "passage",
+          "relation": "view sth as 结构里被看待的对象即主语，故用被动语态。"
+        }
+      ],
+      "teachingNote": "整句无谓语就让提示动词作谓语；view sb/sth as 中被看待者作主语时用被动。"
+    },
+    "q-zj-2022-jan-058": {
+      "blankId": "blank-zj-2022-jan-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are",
+      "role": null,
+      "path": null,
+      "reason": "主语 Cobb and others 为复数，后接 now questioning 构成现在进行时，be 动词作助动词需与复数主语一致并用现在时，故填 are。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Cobb and others",
+          "signalSide": "passage",
+          "relation": "并列主语为复数，be 动词用复数形式 are。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "now questioning that idea",
+          "signalSide": "passage",
+          "relation": "now + V-ing 表示现在进行，需现在时 be 助动词。"
+        }
+      ],
+      "teachingNote": "be 后接 V-ing 构成进行时，be 的形式由主语数和时间状语共同决定。"
+    },
+    "q-zj-2022-jan-059": {
+      "blankId": "blank-zj-2022-jan-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "change",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "changing",
+      "role": "adverbial",
+      "path": "fast",
+      "reason": "空格与前面的 pushing conferences to provide... 并列（由 and 连接），共同作伴随状语说明 questioning 的具体表现，逻辑主语 Cobb and others 主动发出动作，故用现在分词 changing 保持并列一致。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "pushing conferences to provide more chances",
+          "signalSide": "passage",
+          "relation": "and 前为 pushing（V-ing 作状语），空格须与之并列同形，用 changing。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "their personal behavior",
+          "signalSide": "passage",
+          "relation": "逻辑主语主动改变自己的行为，用主动的现在分词 changing。"
+        }
+      ],
+      "teachingNote": "and 连接的并列非谓语要前后同形：前面是 V-ing，后面也用 V-ing。"
+    },
+    "q-zj-2022-jan-060": {
+      "blankId": "blank-zj-2022-jan-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "rough",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "roughly",
+      "role": null,
+      "path": null,
+      "reason": "空格修饰数词 200，表示\"大约\"，应把形容词 rough 变为副词 roughly 来修饰数量。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "200 academics",
+          "signalSide": "passage",
+          "relation": "修饰数词 200，需用副词 roughly 表\"大约\"。"
+        }
+      ],
+      "teachingNote": "形容词修饰数词/动词/形容词时一律变副词，rough → roughly。"
+    },
+    "q-zj-2022-jan-061": {
+      "blankId": "blank-zj-2022-jan-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "promise",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "have promised",
+      "role": null,
+      "path": null,
+      "reason": "主语 200 academics 为复数，句末 since the effort started two years ago 是现在完成时的标志，故谓语用现在完成时 have promised。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "200 academics",
+          "signalSide": "passage",
+          "relation": "主语复数，助动词用 have。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "since the effort started two years ago",
+          "signalSide": "passage",
+          "relation": "since + 过去时间点，主句须用现在完成时 have promised。"
+        }
+      ],
+      "teachingNote": "看到 since 引导的时间状语，主句锁定现在完成时；主语复数用 have。"
+    },
+    "q-zj-2022-jan-062": {
+      "blankId": "blank-zj-2022-jan-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "whether",
+      "role": null,
+      "path": null,
+      "reason": "空格引导 ask 的宾语从句，从句 she could do so remotely 结构完整、表\"是否\"，不充当成分，故用 whether/if。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "started to ask conference organizers",
+          "signalSide": "passage",
+          "relation": "ask 后接宾语从句，引导词表\"是否\"。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "she could do so remotely",
+          "signalSide": "passage",
+          "relation": "从句成分完整不缺，表\"是否\"，用 whether/if 引导。"
+        }
+      ],
+      "teachingNote": "动词后宾语从句若意为\"是否\"且不缺成分，用 whether/if。"
+    },
+    "q-zj-2022-jan-063": {
+      "blankId": "blank-zj-2022-jan-063",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "three-quarters of the time 是固定表达\"四分之三的时候/情况\"，time 此处特指前文所说的提问情形，需用定冠词 the。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "three-quarters of",
+          "signalSide": "passage",
+          "relation": "分数 + of + the + 名词结构，of 后名词特指，用 the。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "time, they agreed",
+          "signalSide": "passage",
+          "relation": "time 特指前文那种提问情形，需定冠词 the 限定。"
+        }
+      ],
+      "teachingNote": "\"分数/most + of + the + 名词\"中，of 后的名词特指要加 the。"
+    },
+    "q-zj-2022-jan-064": {
+      "blankId": "blank-zj-2022-jan-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "invite",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "invitation",
+      "role": null,
+      "path": null,
+      "reason": "空格前有定冠词 the、作 declined 的宾语，需要名词；动词 invite 在此应派生为名词 invitation（邀请）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "declined the",
+          "signalSide": "passage",
+          "relation": "the 后接名词，故 invite 变名词 invitation。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "declined",
+          "signalSide": "passage",
+          "relation": "declined 需要宾语名词，invite 派生为 invitation。"
+        }
+      ],
+      "teachingNote": "the + 空 + 作宾语时填名词，动词 invite 派生为 invitation。"
+    },
+    "q-zj-2022-jan-065": {
+      "blankId": "blank-zj-2022-jan-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "continue",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to continue",
+      "role": "object",
+      "path": "fast",
+      "reason": "plan 后接动词作宾语时固定用不定式 plan to do sth，故 continue 用不定式 to continue 作 plans 的宾语。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "she plans",
+          "signalSide": "passage",
+          "relation": "plan to do 固定搭配，后接动词用不定式。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "plans",
+          "signalSide": "passage",
+          "relation": "plan 只接不定式作宾语，锁定 to continue。"
+        }
+      ],
+      "teachingNote": "plan/decide/hope 等只接不定式作宾语：plan to do sth。"
+    }
+  }
+}
