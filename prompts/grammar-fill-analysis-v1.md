@@ -55,7 +55,7 @@ The hint word's POS = entry into which `given` sub-facet:
 
 | Hint POS | Default facet | Exception |
 | --- | --- | --- |
-| verb (原形) | `given.verb` → then N+1 判谓/非谓 | if blank needs a **different POS** → `given.derivation.*` |
+| verb (原形) | `given.verb` → then N+1 判谓/非谓（分词 `-ed`/`-ing` 作表/定/状/宾补 → `non-finite` + `role`） | blank needs noun → `verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `verb-to-adj` |
 | noun | `given.noun` | if blank needs a different POS → `given.derivation.*` |
 | adjective | `given.adjective` | if blank needs a different POS → `given.derivation.*` |
 | pronoun | `given.pronoun` | — |
@@ -64,8 +64,10 @@ The hint word's POS = entry into which `given` sub-facet:
 **Derivation exception (PO-confirmed):** when the blank needs a POS different from the hint's POS, use `grammar-fill.given.derivation.*`:
 - `noun-to-adj`: hint is noun, blank needs adjective
 - `verb-to-noun`: hint is verb, blank needs noun
-- `verb-to-adj`: hint is verb, blank needs adjective (`-ing` = 令人… / `-ed` = 感到…)
+- `verb-to-adj`: hint is verb, blank needs a **non-participle** adjective derived by a true adjective suffix (`-able`/`-ous`/`-ful`/`-ive`) or the `a-` prefix (remark→remarkable / harm→harmful / sleep→asleep). 分词 `-ed`/`-ing` 不入此叶 — see 判定口令 below.
 - `adjective-to-noun`: hint is adjective, blank needs noun (介词后 / 缺主宾 / 限定词后 → 名词；常见后缀 `-ity` curious→curiosity / `-ness` happy→happiness / `-ce` confident→confidence / `-ment`)
+
+**判定口令（given 动词 + 答案是 `-ed`/`-ing` → 句法功能优先）:** 先判该空的句法 **role**（表语 predicative / 定语 attributive / 状语 adverbial / 宾补 object-complement / 主补 subject-complement）→ 归 `grammar-fill.given.verb.non-finite` + `role`。**只有**答案是非分词形容词后缀（`-able`/`-ous`/`-ful`/`-ive`）或 `a-` 前缀派生时，才用 `grammar-fill.given.derivation.verb-to-adj`。即情感/状态分词 `excited`（was excited）/ `educated`（become educated）/ `closed`（stays closed）作表语、`aching`/`existing`/`recognized` 作定语、`astonished`（leaving us ~）作宾补，一律是 `non-finite` + `role`，**不是** `verb-to-adj`。
 
 **Adjective → adverb:** this is the `grammar-fill.given.adjective` facet's primary action (变副词), NOT `derivation`.
 
