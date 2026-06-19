@@ -1,0 +1,873 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2022-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-jia-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-jia-cloze": {
+      "overview": "记叙文：作者养着两只狗排遣孤独，与同样爱动物的 Steve 约会，两人带着各自的宠物磨合相处，最终因为这些把他们牵到一起的狗而走到一起、收获婚约。主题是人与动物、人与人之间的陪伴与情感。",
+      "affectiveArc": "情感主线由“孤独+顾虑”起步，经由共同遛狗、给狗喂水等细节逐步升温为爱意与信任，最后落到温暖圆满的求婚结局，整体先抑后扬、由谨慎到笃定。"
+    }
+  },
+  "blanks": {
+    "q-2022-jia-041": {
+      "blankId": "blank-2022-jia-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "空格指狗给“我”带来的东西，能“keep my loneliness at bay”（驱散孤独）的正是狗的陪伴，companionship（陪伴）与上文 loneliness 构成语义呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ownership",
+          "meaning": "所有权、归属"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "membership",
+          "meaning": "成员身份、会员资格"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "leadership",
+          "meaning": "领导力、领导地位"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "keep my loneliness at bay",
+          "signalSide": "context-after",
+          "targetText": "companionship",
+          "relation": "能驱散孤独的正是狗的“陪伴”，companionship 与该短语搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "loneliness",
+          "signalSide": "context-after",
+          "targetText": "companionship",
+          "relation": "loneliness（孤独）与 companionship（陪伴）是反义呼应，锁定语义场。"
+        }
+      ],
+      "teachingNote": "名词空先看它要回应上下文的哪个话题词，loneliness 直接指向 companionship。"
+    },
+    "q-2022-jia-042": {
+      "blankId": "blank-2022-jia-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "“with __42__”后紧接转折点出“我”担心狗太多、自家狗可能袭击猫，说明开始约会时是“有保留、有顾虑”的，reservations（保留意见、顾虑）与下文的担忧搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "expectations",
+          "meaning": "期待、期望"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "confidence",
+          "meaning": "信心、自信"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "prejudice",
+          "meaning": "偏见、成见"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "too many",
+          "signalSide": "context-after",
+          "targetText": "reservations",
+          "relation": "下文“三只狗也许太多”正是这份顾虑的内容，与 reservations 搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but with",
+          "signalSide": "context-before",
+          "targetText": "reservations",
+          "relation": "but 表转折，提示约会一事带着负面的保留态度。"
+        }
+      ],
+      "teachingNote": "but 后接的名词常承担转折语气，下文的担忧反向印证它表“顾虑”。"
+    },
+    "q-2022-jia-043": {
+      "blankId": "blank-2022-jia-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "“When I first dated Steve”初次约会时“我”才得知他养了狗和猫，learned（得知、了解到）与“第一次约会”这一信息获取情境搭配，宾语从句陈述新知。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "feared",
+          "meaning": "害怕、担心"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "doubted",
+          "meaning": "怀疑、不相信"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hoped",
+          "meaning": "希望"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "When I first dated Steve",
+          "signalSide": "context-before",
+          "targetText": "learned he had a dog",
+          "relation": "初次约会是获取对方信息的场景，learned 表“得知”与之搭配。"
+        }
+      ],
+      "teachingNote": "“第一次见面/约会”后常用 learn/find 表初次得知某事实。"
+    },
+    "q-2022-jia-044": {
+      "blankId": "blank-2022-jia-044",
+      "blankNo": 44,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "“he was an animal lover”对爱狗的“我”是个好消息，thrilled（非常激动、欣喜）与“他也爱动物”这一正面发现情感一致；while 引出与下文顾虑的对比。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unsatisfied",
+          "meaning": "不满意的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "amused",
+          "meaning": "觉得好笑的、被逗乐的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "terrified",
+          "meaning": "极度害怕的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that he was an animal lover",
+          "signalSide": "context-after",
+          "targetText": "thrilled",
+          "relation": "thrilled that 引导原因从句，“他爱动物”正是让“我”欣喜的内容，施受搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "an animal lover",
+          "signalSide": "context-after",
+          "targetText": "thrilled",
+          "relation": "对方是爱动物之人，对爱狗的“我”是喜讯，情感正向，锁定 thrilled。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "While",
+          "signalSide": "context-before",
+          "targetText": "thrilled",
+          "relation": "While 引出让步对比，前句是正面情绪，与后句的顾虑形成反差。"
+        }
+      ],
+      "teachingNote": "形容词空判情感正负，正面信息“爱动物”要配正向词 thrilled。"
+    },
+    "q-2022-jia-045": {
+      "blankId": "blank-2022-jia-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "宾语从句讲“三只狗也许太多、我的狗可能袭击猫”，这是一种担忧的内容，worried（担心）与从句中表猜测、隐患的内容搭配，呼应上文的 reservations。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "predicted",
+          "meaning": "预测、预言"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "regretted",
+          "meaning": "后悔、遗憾"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "insisted",
+          "meaning": "坚持、坚称"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my dogs might attack",
+          "signalSide": "context-after",
+          "targetText": "worried",
+          "relation": "“可能袭击猫”是令人担心的隐患，worried 与该隐忧搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "too many",
+          "signalSide": "context-before",
+          "targetText": "worried",
+          "relation": "上文“三只狗也许太多”是顾虑内容，与 worried（担心）同向呼应。"
+        }
+      ],
+      "teachingNote": "动词后接“可能出事”的从句时，多选表担忧的 worry。"
+    },
+    "q-2022-jia-046": {
+      "blankId": "blank-2022-jia-046",
+      "blankNo": 46,
+      "pos": "other",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "空后用同位语 the cat 明确所指，全文中的猫名为 Flora（a cat, Flora），故“我的狗可能袭击的”正是这只猫 Flora。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Chance",
+          "meaning": "“我”的狗之一"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Molly",
+          "meaning": "Steve 的狗"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Tilly",
+          "meaning": "“我”的狗之一"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the cat",
+          "signalSide": "context-after",
+          "targetText": "Flora",
+          "relation": "同位语 the cat 限定所指为猫，全文唯一的猫是 Flora。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a cat, Flora",
+          "signalSide": "context-before",
+          "targetText": "Flora",
+          "relation": "上文已点明 Flora 是猫，与同位语 the cat 对应。"
+        }
+      ],
+      "teachingNote": "专有名词空靠同位语 the cat 回指，找前文同名同类的对象。"
+    },
+    "q-2022-jia-047": {
+      "blankId": "blank-2022-jia-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文“paused to catch our breath”（停下喘气）说明此前在户外运动，把狗一起“walked”（遛、带出去散步）与喘气、出汗、喝水等细节搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tied",
+          "meaning": "拴住、系住"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bathed",
+          "meaning": "给……洗澡"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fed",
+          "meaning": "喂食"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "paused to catch our",
+          "signalSide": "context-after",
+          "targetText": "walked our dogs together",
+          "relation": "停下来喘气说明在遛狗途中，walk our dogs 与户外活动搭配。"
+        }
+      ],
+      "teachingNote": "动词空要往后看后续动作，喘气出汗反推出此前是“遛狗”。"
+    },
+    "q-2022-jia-048": {
+      "blankId": "blank-2022-jia-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "固定搭配 catch one's breath 意为“喘口气、缓口气”，“It was a hot day”加遛狗后停下来正需要喘气，breath 与 catch 构成习惯搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "balance",
+          "meaning": "平衡"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "attention",
+          "meaning": "注意力"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "imagination",
+          "meaning": "想象力"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "When we paused to catch our",
+          "signalSide": "context-before",
+          "targetText": "breath",
+          "relation": "catch one's breath 是固定搭配，意为喘口气，与 catch 锁定。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a hot day",
+          "signalSide": "context-before",
+          "targetText": "breath",
+          "relation": "炎热天气下运动后需要喘气，呼应 breath。"
+        }
+      ],
+      "teachingNote": "看到 catch one's ___ 优先想固定搭配 catch one's breath。"
+    },
+    "q-2022-jia-049": {
+      "blankId": "blank-2022-jia-049",
+      "blankNo": 49,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "“我”误以为对方在求婚，心想“我也喜欢他，但这么__？”，承接刚约会不久就跪地的情境，so soon（这么快、这么早）表对时间过早的诧异，与上下文时间线搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "calm",
+          "meaning": "平静地（此处不通顺）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "sure",
+          "meaning": "确定地（此处不通顺）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "real",
+          "meaning": "真实地（此处不通顺）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "but so",
+          "signalSide": "context-before",
+          "targetText": "soon",
+          "relation": "so soon 表“这么快”，对应误以为刚约会就求婚的过早。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The next week",
+          "signalSide": "context-before",
+          "targetText": "soon",
+          "relation": "约会才到第二周，时间很短，呼应 soon 的“快”。"
+        }
+      ],
+      "teachingNote": "so + 副词常承接时间线，刚开始就求婚自然惊呼 so soon。"
+    },
+    "q-2022-jia-050": {
+      "blankId": "blank-2022-jia-050",
+      "blankNo": 50,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "前句是他给“我”的狗倒水喝这一具体瞬间，In that moment（就在那一刻）承接该动作并引出“我开始爱上他”，时间状语合成义与上下文动作—情感的衔接吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "By the way",
+          "meaning": "顺便说一句"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "In that case",
+          "meaning": "既然那样、如果是那样"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "By all means",
+          "meaning": "一定、务必"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I began to fall for him",
+          "signalSide": "context-after",
+          "targetText": "In that moment",
+          "relation": "“就在那一刻我开始爱上他”，时间状语 In that moment 与情感动作衔接。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "moment",
+          "signalSide": "option",
+          "targetText": "In that moment",
+          "relation": "moment 指那个具体瞬间，扣住前句倒水的当下。"
+        }
+      ],
+      "teachingNote": "短语空先拆核心词，moment 表“瞬间”才能接住前句的具体动作。"
+    },
+    "q-2022-jia-051": {
+      "blankId": "blank-2022-jia-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "“__ to date, though neither of us brought up the future”说明两人一直在交往，continued to date（继续约会）与下文“一直没谈未来却没分开”的延续状态搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "decided",
+          "meaning": "决定（去约会）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "intended",
+          "meaning": "打算、意图"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pretended",
+          "meaning": "假装"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to date",
+          "signalSide": "context-after",
+          "targetText": "continued",
+          "relation": "continued to date 表持续交往，与下文关系延续搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "though neither of us brought up the future",
+          "signalSide": "context-after",
+          "targetText": "continued",
+          "relation": "though 让步显示虽未谈未来仍在继续，呼应 continued。"
+        }
+      ],
+      "teachingNote": "though 让步句暗示关系维持，动词取“继续”continue。"
+    },
+    "q-2022-jia-052": {
+      "blankId": "blank-2022-jia-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "下文“climbing the stairs could reopen the wound”指爬楼会让伤口裂开，能因上下楼受影响的部位是腿，Tilly 在 leg（腿）上做了手术与爬楼伤口的因果搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "eye",
+          "meaning": "眼睛"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tail",
+          "meaning": "尾巴"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ear",
+          "meaning": "耳朵"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "climbing the stairs could reopen the wound",
+          "signalSide": "context-after",
+          "targetText": "leg",
+          "relation": "爬楼梯会牵动并撕裂伤口，受影响的手术部位是腿。"
+        }
+      ],
+      "teachingNote": "身体部位空靠后文症状反推，爬楼影响伤口指向 leg。"
+    },
+    "q-2022-jia-053": {
+      "blankId": "blank-2022-jia-053",
+      "blankNo": 53,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "“我”一天带狗出门四次，担心 Tilly 反复地爬楼会让伤口重新裂开，constantly（不停地、频繁地）修饰 climbing，与每天多次出门的频繁性搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secretly",
+          "meaning": "偷偷地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "eventually",
+          "meaning": "最终"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unwillingly",
+          "meaning": "不情愿地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "climbing the stairs",
+          "signalSide": "context-after",
+          "targetText": "constantly",
+          "relation": "constantly 修饰 climbing，表反复频繁地爬楼。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "took the dogs out four times a day",
+          "signalSide": "context-before",
+          "targetText": "constantly",
+          "relation": "一天四次出门意味着频繁上下楼，呼应 constantly。"
+        }
+      ],
+      "teachingNote": "副词修饰动作要看频次线索，一天四次提示 constantly。"
+    },
+    "q-2022-jia-054": {
+      "blankId": "blank-2022-jia-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "为解决 Tilly 爬楼的难题，Steve 提议用他的房子（一层更方便），suggested his house（建议去他家）与下文“三只狗组队、两人组队照顾 Tilly、成了好室友”的解决方案搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "left",
+          "meaning": "离开、留下"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "sold",
+          "meaning": "卖掉"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "searched",
+          "meaning": "搜寻、寻找"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "We made good housemates",
+          "signalSide": "context-after",
+          "targetText": "suggested his house",
+          "relation": "最终成了好室友，说明他提议同住其家，suggested his house 搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Then",
+          "signalSide": "context-before",
+          "targetText": "suggested",
+          "relation": "Then 承接上文难题，引出 Steve 给出的解决提议。"
+        }
+      ],
+      "teachingNote": "动词后接“房子”，结合下文同住结局，选“提议(用其房)”suggest。"
+    },
+    "q-2022-jia-055": {
+      "blankId": "blank-2022-jia-055",
+      "blankNo": 55,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "“All worked __”总起下文一切顺利的局面（狗群组队、两人配合、成了好室友），work out fine（一切进展顺利）情感正向，与紧随的成功细节一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "late",
+          "meaning": "迟、晚"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hard",
+          "meaning": "艰难地、努力地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "free",
+          "meaning": "自由地、免费地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "formed a good team",
+          "signalSide": "context-after",
+          "targetText": "worked fine",
+          "relation": "下文“组成好团队”等正面结果说明一切顺利，呼应 fine。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "All worked",
+          "signalSide": "context-before",
+          "targetText": "fine",
+          "relation": "work out fine 表事情进展顺利，与 All worked 搭配。"
+        }
+      ],
+      "teachingNote": "总结句的情感由后续细节决定，全是好结果就配 fine。"
+    },
+    "q-2022-jia-056": {
+      "blankId": "blank-2022-jia-056",
+      "blankNo": 56,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "“The three dogs formed a pack that, with coaching, __ Flora's space”——经训练后三只狗懂得不去侵占猫的地盘，respected Flora's space（尊重/不侵犯猫的空间）与“成功磨合相处”的正面结果搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "emptied",
+          "meaning": "清空、腾空"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "occupied",
+          "meaning": "占据、占用"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "discovered",
+          "meaning": "发现"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Flora’s space",
+          "signalSide": "context-after",
+          "targetText": "respected",
+          "relation": "respect one's space 表尊重、不侵犯对方地盘，与 Flora's space 搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "with coaching",
+          "signalSide": "context-before",
+          "targetText": "respected",
+          "relation": "经过训练才学会的行为是尊重猫的领地，呼应 respected。"
+        }
+      ],
+      "teachingNote": "搭配 respect one's space 表“不越界”，磨合好的结果就是相互尊重。"
+    },
+    "q-2022-jia-057": {
+      "blankId": "blank-2022-jia-057",
+      "blankNo": 57,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "固定搭配 care for 意为“照顾、照料”，两人组成好团队“__ for Tilly”是为照顾受伤的 Tilly，caring for（照顾）与受伤的狗及前文‘worried about the wound’搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "looking",
+          "meaning": "看（look for 意为寻找，不合此处照料义）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waiting",
+          "meaning": "等待"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "calling",
+          "meaning": "呼叫、打电话"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for Tilly",
+          "signalSide": "context-after",
+          "targetText": "caring",
+          "relation": "care for 表照料，宾语是受伤的 Tilly，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Tilly had an operation",
+          "signalSide": "context-before",
+          "targetText": "caring",
+          "relation": "Tilly 做了手术，需要被照顾，呼应 care for。"
+        }
+      ],
+      "teachingNote": "看到 ___ for + 病弱对象，优先想 care for 表“照顾”。"
+    },
+    "q-2022-jia-058": {
+      "blankId": "blank-2022-jia-058",
+      "blankNo": 58,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "“much to my __”后接他拿出戒指向“我”求婚这一惊喜结局，固定结构 much to one's delight（令“我”非常高兴的是）情感正向，与圆满结局搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "credit",
+          "meaning": "功劳、赞扬"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "interest",
+          "meaning": "兴趣"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disadvantage",
+          "meaning": "不利、劣势"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "produced a little box with a ring and proposed to me",
+          "signalSide": "context-after",
+          "targetText": "delight",
+          "relation": "求婚是大喜事，much to my delight 与此正面惊喜情感一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "much to my",
+          "signalSide": "context-before",
+          "targetText": "delight",
+          "relation": "much to one's delight 是固定结构，表“令某人高兴的是”。"
+        }
+      ],
+      "teachingNote": "much to one's ___ 接喜讯时配 delight，由后文情感正负锁定。"
+    },
+    "q-2022-jia-059": {
+      "blankId": "blank-2022-jia-059",
+      "blankNo": 59,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "“He did not kneel down, nor did I __ him to”——他没下跪，“我”也不需要他这么做，need him to (kneel)（需要他下跪）与下文“下跪只留给狗”的态度搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "beg",
+          "meaning": "乞求、恳求"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "trust",
+          "meaning": "信任"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "aid",
+          "meaning": "帮助、援助"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "nor did I",
+          "signalSide": "context-before",
+          "targetText": "need him to",
+          "relation": "他没下跪，“我”也不 need 他下跪，need sb to do 搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "That’s only for giving",
+          "signalSide": "context-after",
+          "targetText": "need him to",
+          "relation": "下跪只为对狗表达，故“我”不需要他向自己下跪，呼应 need。"
+        }
+      ],
+      "teachingNote": "nor did I ___ him to 承接前句否定，选“需要”need 接续不要求他下跪。"
+    },
+    "q-2022-jia-060": {
+      "blankId": "blank-2022-jia-060",
+      "blankNo": 60,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "“giving __ to the dogs”回扣前文 Steve 单膝跪地给“我”的狗倒水喝（poured water and offered it to my dogs）这一感人细节，下跪只为给狗“water（水）”，前后呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "toys",
+          "meaning": "玩具"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "awards",
+          "meaning": "奖品、奖项"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "food",
+          "meaning": "食物"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "poured water from a bottle into his hand and offered it to my dogs",
+          "signalSide": "context-before",
+          "targetText": "water",
+          "relation": "前文他跪地给狗倒水喝，结尾“下跪给狗 water”正是回扣此细节。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the dogs that brought us together",
+          "signalSide": "context-after",
+          "targetText": "water",
+          "relation": "下跪只为给把两人牵到一起的狗倒水，锁定 water。"
+        }
+      ],
+      "teachingNote": "结尾回指型名词空找前文复现的细节，倒水情节直接锁定 water。"
+    }
+  }
+}
