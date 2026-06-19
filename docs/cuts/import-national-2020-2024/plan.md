@@ -90,7 +90,23 @@ PO 决策(2026-06-19): 全导入全国甲乙丙，**只导 reading A-D / 七选�
 
 **Slice 2（下一 cut）**：剩 9 套走已验证管线，~63 个 Opus 解析 agent，分批发布。
 
-## PA 待审点（写给 PA）
+## PA Follow-Up Decisions（PA 已审 2026-06-19 → APPROVE WITH MUST FIX，pa.md）
+
+- **MF-1（全真值表 + throw 不静默回退）**：`resolveFormatProfile(clozeGroup, readingGroups)` 完整真值表已实现且锁定——cloze=15/缺→newStandard（**永不查阅读篇数**，cloze 主键优先）；cloze=20∧4篇→nationalLegacy；cloze=20∧3篇→zjLegacy；cloze=20∧其它篇数→**throw `unknown_paper_format`**；cloze∉{15,20}→throw。另加**反向断言**：落到 `requireWritingFamilies:false` 的格式却带着写作组→throw `unexpected_writing_groups`（兜住"完形被误判成20的半解析新课标"）。verify 覆盖：`verify-national-format.mjs` §1/§2。
+- **MF-2（禁用 continuation 作格式键）**：cloze20 双格式分流键 = **阅读篇数 only**；continuation/application 是否存在**严禁作格式键**（对全国=合法 null、对续写解析失败的新课标=故障 null，分不开）。已写进 `packageBuilder.mjs` resolveFormatProfile 注释 + 下方 Forbidden。
+- **MF-3（两门同口径 + 对称 verify）**：validator 阅读门改为按 **distinct A-D 字母数**判期望（cloze20∧含D→A-D 报缺D / cloze20∧无D→A-C），与 packageBuilder `countReadingLetters` 同口径。对称 verify：`verify-publish-gate.mjs paper-2022-jia` 同时跑两门→`ok:true` 即两侧一致；`verify-national-format.mjs` §3 另断言期望篇数一致。
+- **SW-1（buildGrammar 两处偏移都要动）**：题号数组 `lib.mjs:573` + blank 偏移 `:561` 均已改为 `stdStart`。byte-diff 回归（新课标/浙江 stdStart 仍=56）已全绿守住。
+- **SW-3（ADR-0007 决策2 的 scoped supersession）**：六题型门松绑仅对 nationalLegacy，是 ADR-0007 决策2"永远导完整卷"的**范围化让位**（四题型硬门不变 + MF-1 反断言兜底）。已在 `packageBuilder.mjs` 写作门处注释记录；本 cut 不导写作=该格式本就无写作可导，非削弱 parse-correctness。
+- **SW-4（全国分值需从源设，非抄浙江）**：全国甲卷实测 阅读2/七选五2/完形1.5/语法1.5。nationalLegacy 已设 `readingScore:2, sevenScore:2, clozeScore:1.5`（浙江老卷 readingScore 2.5，故 reading 分值从 `DEFAULT_SCORE` 提为 `profile.readingScore`，新课标/浙江=2.5 byte 兼容）。语法 heading/分值硬编码 1.5×10=15 全国正好同。**owner QA 须核 2022 甲卷 A4 总分 vs 官方**。
+
+## 已验证（DEV + 静态门，2026-06-19）
+
+- byte-diff 回归：22 套已有卷 `groups.json` 全 byte-identical（含浙江老卷 cloze20 语法仍 56-65）。
+- 2022 甲卷 split：阅读 21-35(4篇) / 七选 36-40 / 完形 41-60(20) / 语法 61-70 / 写作 null。
+- `verify-national-format.mjs`：真值表 + throw 守卫 + MF-3 对称，13 项全过。
+- `verify-publish-gate.mjs paper-zj-2020-jan`（浙江老卷回归）→ `ok:true`，六题型门松绑未误放。
+
+## PA 待审点（原始，写给 PA）
 
 - `resolveFormatProfile` 用"阅读篇数"区分 cloze20 双格式：结构信号是否够稳？是否该改用"无 continuation group"作信号、或两者结合？边界：新课标若误把 cloze 解析成 20 题会被误判 nationalLegacy 吗（现状已信任 cloze 计数）？
 - `requireWritingFamilies: false` 是否削弱了"永远导完整卷"(ADR-0007 决策2)的 parse-correctness 保证？对全国老卷，四题型完整 + 写作明确不导，是否等价的完整性 guard？

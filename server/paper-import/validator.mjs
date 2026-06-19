@@ -309,13 +309,18 @@ function validateReadingAnalysisBundle({ asset, answerKey, analyses, blockingIss
   }
 
   const readingGroups = getReadingChoiceGroups(asset)
-  // 阅读篇数随试卷格式: 新课标完形15题→阅读4篇(A–D); 浙江老卷完形20题→3篇(A–C)。
-  // 与 packageBuilder FORMAT_PROFILE 同一信号(完形题数),避免把浙江3篇误判成"缺 Reading D"。
-  // 新课标仍严格要 4 篇(漏 D 照报),不削弱。
+  // 阅读篇数随试卷格式: 新课标完形15题→阅读4篇(A–D); 老卷完形20题→浙江3篇(A–C)/全国4篇(A–D)。
+  // 与 packageBuilder resolveFormatProfile 同一信号(完形题数为主键,cloze=20 再按阅读篇数分流;MF-3),
+  // 避免把浙江3篇误判成"缺 Reading D",同时全国4篇仍严格要 A–D(漏 D 照报)。新课标(cloze≠20)恒要 4 篇。
   const clozeGroupForFmt = Object.values(asset.content?.groups || {}).find((group) => group?.groupType === 'cloze')
   const clozeCountForFmt = Array.isArray(clozeGroupForFmt?.questionIds) ? clozeGroupForFmt.questionIds.length : 0
-  const expectedLetters = clozeCountForFmt === 20 ? new Set(['A', 'B', 'C']) : new Set(['A', 'B', 'C', 'D'])
   const actualLetters = new Set(readingGroups.map((group) => getGroupLetter(group.groupId)))
+  const expectedLetters =
+    clozeCountForFmt === 20
+      ? actualLetters.has('D') // 全国老卷(4篇含D) → A–D; 浙江老卷(3篇) → A–C
+        ? new Set(['A', 'B', 'C', 'D'])
+        : new Set(['A', 'B', 'C'])
+      : new Set(['A', 'B', 'C', 'D'])
   for (const letter of expectedLetters) {
     if (!actualLetters.has(letter)) {
       blockingIssues.push(issue('blocking', 'paperAsset.readingGroupMissing', `缺少 Reading ${letter} 题组。`, {

@@ -163,13 +163,17 @@ for (const q of grammar.questions) {
 }
 console.log(`   blank markers: ${grammarMarkers.join(' ')}`)
 
-console.log(`\n-- APPLICATION --`)
-console.log(`   paras=${application.paragraphs.length}`)
+if (application || continuation) {
+  console.log(`\n-- APPLICATION --`)
+  console.log(`   paras=${application.paragraphs.length}`)
 
-console.log(`\n-- CONTINUATION --`)
-console.log(`   paras=${continuation.paragraphs.length} starters=${continuation.continuationStarters.length}`)
-for (const s of continuation.continuationStarters) {
-  console.log(`   starter: "${s.slice(0, 70)}"`)
+  console.log(`\n-- CONTINUATION --`)
+  console.log(`   paras=${continuation.paragraphs.length} starters=${continuation.continuationStarters.length}`)
+  for (const s of continuation.continuationStarters) {
+    console.log(`   starter: "${s.slice(0, 70)}"`)
+  }
+} else {
+  console.log(`\n-- WRITING -- (全国老卷: 短文改错+普通书面表达,不导)`)
 }
 
 console.log(`\n[DONE] All shape gates passed. groups.json + combined prompts written to ${outDir}`)
