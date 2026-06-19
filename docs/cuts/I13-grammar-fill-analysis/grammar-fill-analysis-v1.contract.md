@@ -134,14 +134,14 @@ Optional / conditional:
 
 ## Facet Reference
 
-`facetKey` MUST be one of the **16 leaf** keys defined in `grammar-fill-facets-v1.md`,
+`facetKey` MUST be one of the **17 leaf** keys defined in `grammar-fill-facets-v1.md`,
 namespace `grammar-fill.*`, ≤ 4 levels. The validator checks membership against
 the facet registry; it does NOT re-derive the framework. The leaf's
 `blank_type` MUST match the blank's `blankType`
 (`grammar-fill.given.*` ⇔ `given`; `grammar-fill.no-hint.*` ⇔ `no-hint`).
 
-The 16 leaves: given.verb.finite, given.verb.non-finite, given.noun, given.adjective,
-given.derivation.{noun-to-adj, verb-to-noun, verb-to-adj}, given.pronoun, given.numeral,
+The 17 leaves: given.verb.finite, given.verb.non-finite, given.noun, given.adjective,
+given.derivation.{noun-to-adj, verb-to-noun, verb-to-adj, adjective-to-noun}, given.pronoun, given.numeral,
 no-hint.preposition, no-hint.article, no-hint.pronoun,
 no-hint.conjunction.{coordinating, relative-clause, noun-clause, adverbial-clause}.
 **Parent nodes** (`grammar-fill`, `.given`, `.given.verb`, `.given.derivation`, `.no-hint`,
@@ -217,7 +217,7 @@ edit-distance/fuzzy — those would let `worn` pass for `wore`. A genuine mismat
 - `blanks` keys exactly equal the grammar-fill group's 10 questionIds (q56–q65).
 - Each blank has all required fields; `blankType` ∈ {given, no-hint};
   `hint` is a non-empty string iff `given`, `null` iff `no-hint`.
-- `facetKey` is a valid **leaf** (one of the 16) in the facet registry; a **parent node is
+- `facetKey` is a valid **leaf** (one of the 17) in the facet registry; a **parent node is
   rejected**; its `blank_type` matches `blankType`.
 - `role`/`path` present (valid enum) iff `facetKey === grammar-fill.given.verb.non-finite`;
   `null` otherwise.

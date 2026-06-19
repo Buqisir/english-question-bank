@@ -6,6 +6,7 @@
   { "facet_key": "grammar-fill.given.derivation.noun-to-adj",            "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.derivation.verb-to-noun",           "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.derivation.verb-to-adj",            "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.derivation.adjective-to-noun",      "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.pronoun",                           "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.numeral",                           "blank_type": "given"   },
   { "facet_key": "grammar-fill.no-hint.preposition",                     "blank_type": "no-hint" },

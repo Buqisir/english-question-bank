@@ -6,7 +6,7 @@
  *
  * PO teaching IP — fidelity is load-bearing. Do NOT paraphrase.
  *
- * Drift guard: the 16 keys here MUST exactly equal the server-side
+ * Drift guard: the 17 keys here MUST exactly equal the server-side
  *   server/paper-import-ai/grammar-fill-facets-v1.json keys.
  *   The verifier (verify-i14-grammar-fill-analysis-surface.mjs) asserts this.
  *
@@ -139,6 +139,20 @@ export const FACET_FRAMEWORKS: Record<string, FacetFrameworkEntry> = {
       notes: [
         '高考考向：动→形的 -ing（令人…）vs -ed（感到…）之分；情感动词是高频考点。',
         '识别信号：空需要的词性 ≠ 提示词词性（动词），且目标词性为形容词。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.derivation.adjective-to-noun': {
+    labelZh: '词性转换（形容词→名词）',
+    framework: {
+      steps: [
+        '第一步｜由空的句法位置/搭配判定目标词性：介词后 / 缺主宾 / 限定词后 → 名词。',
+        '第二步｜把提示词（形容词）派生为名词的正确形式（常见后缀 -ity：curious→curiosity；-ness：happy→happiness；-ce：confident→confidence；-ment）。',
+      ],
+      notes: [
+        '高考考向：介词 + 抽象名词搭配（with curiosity / in surprise / with pride / in silence）；形容词名化后缀。',
+        '识别信号：空需要的词性 ≠ 提示词词性（形容词），且目标词性为名词。',
       ],
     },
   },

@@ -4,12 +4,12 @@ Cut: I13 语法填空解析 · 第一刀（生成）
 Last synced: 2026-05-31 (drafting — walking 考点 with PO 黄学伟)
 进度（2026-05-31）:
 - ✅ 字段 shape 已确认（7 字段）；given 分支总原则（提示词词性总闸 + 词性转换看目标词性）已锁。
-- ✅ **整棵考点树全部对齐（11 个考点类目 → 16 个可分配叶子 facet_key）**。
-  注：`derivation` 拆 3 子（名→形/动→名/动→形）、`conjunction` 拆 4 子（并列/定从/名从/状从），
+- ✅ **整棵考点树全部对齐（11 个考点类目 → 17 个可分配叶子 facet_key）**。
+  注：`derivation` 拆 4 子（名→形/动→名/动→形/形→名）、`conjunction` 拆 4 子（并列/定从/名从/状从），
   **父节点（grammar-fill / .given / .given.verb / .given.derivation / .no-hint / .no-hint.conjunction）
-  不是合法 facet_key**，AI 只能用 16 个叶子之一。明细：
+  不是合法 facet_key**，AI 只能用 17 个叶子之一。明细：
   - 有提示词 6：谓语动词（一找二判三 + N+1）/ 非谓语（快路·慢路算法 + role 字段 A）/ 名词（数·所有格）/
-    词性转换（名→形·动→名·动→形）/ 形容词（变副词·比较级）/ 代词 · 数词。
+    词性转换（名→形·动→名·动→形·形→名）/ 形容词（变副词·比较级）/ 代词 · 数词。
   - 无提示词 5：介词（本意·搭配·词频表）/ 冠词（特指·泛指本质 + 拥有vs种类操作测试 + 诚实残余）/
     代词（it 四用法·that·those 比较结构·one·ones 泛指）/ 连词四类（位置定类型·缺成分定引导词）。
 - ⏳ **下一步**：写 `grammar-fill-analysis-v1.contract.md`（AI 每空 JSON，对标 cloze-analysis-v1）
@@ -62,6 +62,7 @@ IP，**不由 AI 生成**（零幻觉）。AI 每空只做三件事：① 定 `f
 | `grammar-fill.given.derivation.noun-to-adj` | 名词→形容词 | `grammar-fill.given.derivation` | 常考 |
 | `grammar-fill.given.derivation.verb-to-noun` | 动词→名词 | `grammar-fill.given.derivation` | 常考 |
 | `grammar-fill.given.derivation.verb-to-adj` | 动词→形容词 | `grammar-fill.given.derivation` | 常考 |
+| `grammar-fill.given.derivation.adjective-to-noun` | 形容词→名词 | `grammar-fill.given.derivation` | 常考（2026-06-19 补叶）|
 | `grammar-fill.given.pronoun` | 代词 | `grammar-fill.given` | 待对齐 |
 | `grammar-fill.given.numeral` | 数词 | `grammar-fill.given` | 待对齐 |
 | `grammar-fill.no-hint` | 无提示词（判 n+1） | `grammar-fill` | |
@@ -187,6 +188,7 @@ IP，**不由 AI 生成**（零幻觉）。AI 每空只做三件事：① 定 `f
   - `noun-to-adj` 名词→形容词（如 health→healthy）
   - `verb-to-noun` 动词→名词（如 decide→decision）
   - `verb-to-adj` 动词→形容词（如 surprise→surprising/surprised）
+  - `adjective-to-noun` 形容词→名词（如 curious→curiosity；2026-06-19 PO 补叶）
 - **framework**: ① 由空的句法位置/搭配判定**目标词性**（缺定语/表语→形容词；缺主宾→名词）；
   ② 把提示词派生为该词性的正确形式（注意 v→adj 的 -ing/-ed 之分＝主被动/情感）。
 - **gaokao_focus**: 动→形的 -ing（令人…）vs -ed（感到…）之分；名↔形常见词族。
@@ -194,7 +196,20 @@ IP，**不由 AI 生成**（零幻觉）。AI 每空只做三件事：① 定 `f
 - **answer_logic**: 提示词 → 目标词性的派生形（v→adj 还要判 -ing/-ed）。
 
 - **形→副归属（PO 确认 (1) 2026-05-31）**: 「形容词→副词（变副词）」**不**进 derivation；它是
-  `adjective` facet 的首要默认动作。derivation 只含跨类三方向 名→形 / 动→名 / 动→形。
+  `adjective` facet 的首要默认动作。derivation 含跨类四方向 名→形 / 动→名 / 动→形 / 形→名（形→名 2026-06-19 补）。
+  注意：形→副 仍不进 derivation（它是变同级修饰词，非跨大类名/动/形转换）。
+
+### 子叶详写：`grammar-fill.given.derivation.adjective-to-noun` 形容词→名词（PO 2026-06-19 补叶）
+
+- **label_zh / label_en**: 形容词→名词 / adjective to noun
+- **blank_type**: `given`
+- **recognize**: 提示词是形容词，但空需要名词（介词后 / 动词宾语位 / 需名词作主语·宾语 / 限定词后）。
+- **framework**: ① 由句法位置判目标词性 = 名词（介词后、缺主/宾、限定词后）；② 把形容词派生为名词
+  （常见后缀 -ity curious→curiosity、-ness happy→happiness、-ce confident→confidence、-ment）。
+- **gaokao_focus**: 介词 + 抽象名词搭配（with curiosity / in surprise / with pride / in silence）；形容词名化后缀。
+- **evidence_targets**: 决定名词词性的句法信号——前置介词、限定词、缺主/宾位置。
+- **answer_logic**: 形容词 → 名词派生形。
+- **实证**: 2020 全国丙卷 q64 `Filled with __ (curious)` → **curiosity**。
 
 ---
 

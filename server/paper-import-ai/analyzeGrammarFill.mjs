@@ -9,7 +9,7 @@ const promptPath = path.join(rootDir, 'prompts/grammar-fill-analysis-v1.md')
 const facetsPath = path.join(__dirname, 'grammar-fill-facets-v1.json')
 
 // ============================================================
-// Registry: 16 leaf facets
+// Registry: 17 leaf facets
 // ============================================================
 
 const FACET_REGISTRY = JSON.parse(readFileSync(facetsPath, 'utf8'))
@@ -231,7 +231,7 @@ export function validateGrammarFillShape(analysis, { paper, group }) {
       throw new Error(`${questionId}: facetKey "${facetKey}" 是父节点，不是合法叶节点。`)
     }
     if (!LEAF_FACET_KEYS.has(facetKey)) {
-      throw new Error(`${questionId}: facetKey "${facetKey}" 不在 16 个合法叶节点中。`)
+      throw new Error(`${questionId}: facetKey "${facetKey}" 不在 17 个合法叶节点中。`)
     }
 
     // C2: leaf blank_type must match blank's blankType
