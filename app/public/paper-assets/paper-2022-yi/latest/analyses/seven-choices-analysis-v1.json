@@ -1,0 +1,387 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2022-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-yi-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-yi-seven-choices": {
+      "overview": "本文是一篇说明文，介绍维持远距离友谊的五种方法。文章以小标题（bullet）领起每个段落，正文紧接展开。七选五的五个空分别落在不同位置：有的是段尾收束句、有的是段首主题句、有的是小标题本身。解题需结合小标题、段内关键词和逻辑/指代衔接综合判断。",
+      "discourseStructure": {
+        "summary": "文章总—分结构：开篇点明远距离友谊需要用心经营，随后用五个带小标题的要点逐条说明，每个要点之间相互独立，靠小标题与段内具体做法形成话题对齐。",
+        "units": [
+          {
+            "unitId": "unit-2022-yi-seven-intro",
+            "heading": "导语",
+            "paragraphIds": [
+              "para-2022-yi-seven-title"
+            ],
+            "summary": "总起：友谊需要照料，下面给出维持远距离友谊的五种方法。"
+          },
+          {
+            "unitId": "unit-2022-yi-seven-date",
+            "heading": "Set a regular date",
+            "paragraphIds": [
+              "para-2022-yi-seven-p1",
+              "para-2022-yi-seven-p2"
+            ],
+            "summary": "要点一：定期联系。双方应平等付出，挤出通话时间，约定固定时间并坚持。"
+          },
+          {
+            "unitId": "unit-2022-yi-seven-more",
+            "heading": "More isn’t always merrier",
+            "paragraphIds": [
+              "para-2022-yi-seven-p3",
+              "para-2022-yi-seven-p4"
+            ],
+            "summary": "要点二：联系不在多而在合适。先沟通彼此偏好的联系频率与方式，并有多种替代沟通手段。"
+          },
+          {
+            "unitId": "unit-2022-yi-seven-empathy",
+            "heading": "Practise empathy",
+            "paragraphIds": [
+              "para-2022-yi-seven-p5",
+              "para-2022-yi-seven-p6"
+            ],
+            "summary": "要点三：共情。无论是离开的一方还是留下的一方，都要体谅对方的处境与感受。"
+          },
+          {
+            "unitId": "unit-2022-yi-seven-dates",
+            "heading": "Remember important dates",
+            "paragraphIds": [
+              "para-2022-yi-seven-p7",
+              "para-2022-yi-seven-p8"
+            ],
+            "summary": "要点四：记住重要日子。纪念日与生日在远距离友谊中尤为重要，记日记追踪日期可避免遗漏。"
+          },
+          {
+            "unitId": "unit-2022-yi-seven-tech",
+            "heading": "Don’t rely on technology alone",
+            "paragraphIds": [
+              "para-2022-yi-seven-p9",
+              "para-2022-yi-seven-p10"
+            ],
+            "summary": "要点五：不要只依赖科技。社交媒体易带来连接感，但远距离友谊需要更主动的努力，尽量面对面相处。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2022-yi-036": {
+      "blankId": "blank-2022-yi-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Set a regular date",
+        "squeezing in phone calls",
+        "busy schedules",
+        "regularly contact"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-yi-seven-p2",
+        "headingAnchor": "Set a regular date",
+        "beforeQuote": "With busy schedules, squeezing in phone calls can be a challenge.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Set a regular date",
+          "signalSide": "context-before",
+          "targetText": "find a time ... and stick to it",
+          "relation": "小标题 Set a regular date 与选项 find a time that works for both of you and stick to it 同属“约定固定时间”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "find a time that works for both of you",
+          "signalSide": "option",
+          "targetText": "Set a regular date",
+          "relation": "选项 find a time 呼应小标题 set a regular date，构成“定时联系”的具体做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "squeezing in phone calls",
+          "signalSide": "context-before",
+          "targetText": "find a time that works for both of you",
+          "relation": "空前讲挤时间打电话很难，空处给出对策——找到双方都合适的时间并坚持。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "小标题 Set a regular date 点明本段主题是“定期联系”，空前说挤时间打电话很难，空处需收束并给出做法，选项 D“找到双方都合适的时间并坚持”正好对应。",
+        "matchedClues": [
+          {
+            "contextSide": "Set a regular date / squeezing in phone calls",
+            "optionSide": "find a time that works for both of you and stick to it",
+            "relation": "选项把“定时联系”落到具体做法，承接小标题与空前的时间难题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 谈论沟通方式偏好，与本段“定时间”主题不符，属下一要点 More isn’t always merrier 的内容。"
+        }
+      ],
+      "teachingNote": "段尾空先回看小标题锁定话题，再用选项给出该话题下的具体做法收束全段。"
+    },
+    "q-2022-yi-037": {
+      "blankId": "blank-2022-yi-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "how frequently each of you wants to be contacted",
+        "what method works best for you both",
+        "constant written communication",
+        "leaving voice messages",
+        "group chat"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-yi-seven-p4",
+        "headingAnchor": "More isn’t always merrier",
+        "beforeQuote": "Make sure you have communicated with your friend about how frequently each of you wants to be contacted and what method works best for you both.",
+        "afterQuote": "There are alternatives to constant written communication, such as leaving voice messages or having a group chat."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "what method works best for you both",
+          "signalSide": "context-before",
+          "targetText": "preferred methods of communication",
+          "relation": "空前 what method works best 与选项 preferred methods of communication 同指“偏好的沟通方式”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "preferred methods of communication",
+          "signalSide": "option",
+          "targetText": "how frequently ... what method works best",
+          "relation": "选项概括空前的“频率/方式”讨论，是 talk about 偏好沟通方式的主题句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "alternatives to constant written communication",
+          "signalSide": "context-after",
+          "targetText": "methods of communication",
+          "relation": "空后列举语音留言、群聊等替代方式，正是 methods of communication 的具体展开。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前讲要沟通联系频率与最佳方式，空后列举多种替代沟通方式，选项 E“朋友需要谈谈各自偏好的沟通方式”承上启下，正好衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "what method works best for you both / alternatives to constant written communication",
+            "optionSide": "talk about their preferred methods of communication",
+            "relation": "选项的 methods of communication 既呼应空前 method，又总起空后的多种沟通方式。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B“通过写信补偿”只涉及单一方式，无法统领空后多种替代沟通方式的列举。"
+        }
+      ],
+      "teachingNote": "段中空要同时照应前后文，选能把空前话题概括、又能领起空后举例的承接句。"
+    },
+    "q-2022-yi-038": {
+      "blankId": "blank-2022-yi-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Practise empathy",
+        "The friend who is remaining",
+        "the friend who has moved",
+        "The one in the new environment",
+        "feel abandoned"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-yi-seven-p6",
+        "headingAnchor": "Practise empathy",
+        "beforeQuote": "",
+        "afterQuote": "The friend who is remaining needs to be sensitive to all the additional time demands placed on the friend who has moved."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the friend who left or the one who was left behind",
+          "signalSide": "option",
+          "targetText": "the friend who has moved / The friend who is remaining",
+          "relation": "选项的“离开者 / 被留下者”与空后 the friend who has moved、The friend who is remaining 一一对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "The friend who is remaining",
+          "signalSide": "context-after",
+          "targetText": "the one who was left behind",
+          "relation": "空后 The friend who is remaining 即选项里“被留下的一方”，与主题句呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the friend who has moved",
+          "signalSide": "context-after",
+          "targetText": "the friend who left",
+          "relation": "空后 the friend who has moved 即选项里“离开的一方”，与主题句呼应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本段是段首主题空，小标题为 Practise empathy；空后分述“留下的朋友”和“身处新环境的朋友”两种处境，选项 G“你可能是离开的一方，也可能是被留下的一方”正好统领两类对象。",
+        "matchedClues": [
+          {
+            "contextSide": "The friend who is remaining / the friend who has moved / The one in the new environment",
+            "optionSide": "the friend who left or the one who was left behind",
+            "relation": "选项把空后两种朋友身份提前概括，是典型的段首总起句。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C“做一个友谊维护者也很有帮助”过于笼统，无法对应空后“离开/留下”两类具体处境。"
+        }
+      ],
+      "teachingNote": "段首空找能统领后文分述对象的总起句，看空后反复出现的并列名词组。"
+    },
+    "q-2022-yi-039": {
+      "blankId": "blank-2022-yi-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Anniversaries and birthdays",
+        "carry even more weight",
+        "friends′ birthdays and other important dates",
+        "keeping track of",
+        "nothing slips by you"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-yi-seven-p8",
+        "headingAnchor": "",
+        "beforeQuote": "",
+        "afterQuote": "Anniversaries and birthdays carry even more weight in long-distance friendships."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Remember important dates",
+          "signalSide": "option",
+          "targetText": "Anniversaries and birthdays / important dates",
+          "relation": "选项 Remember important dates 概括空后 Anniversaries、birthdays、important dates，属同一“重要日期”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Anniversaries and birthdays",
+          "signalSide": "context-after",
+          "targetText": "important dates",
+          "relation": "空后纪念日与生日正是选项 important dates 的具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "other important dates",
+          "signalSide": "context-after",
+          "targetText": "important dates",
+          "relation": "空后 other important dates 与选项 important dates 用词直接复现，锁定小标题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本空是小标题（bullet）位置，需用一个短语概括整段主题；整段讲纪念日、生日等重要日期及如何用日记追踪，选项 A“记住重要日子”正是该段小标题。",
+        "matchedClues": [
+          {
+            "contextSide": "Anniversaries and birthdays / important dates / keeping track of",
+            "optionSide": "Remember important dates",
+            "relation": "选项是命令式短语，符合小标题体例，并被段内反复出现的“日期”词汇支持。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 是完整陈述句而非短语，不符合小标题（bullet）体例，且内容与“重要日期”话题无关。"
+        }
+      ],
+      "teachingNote": "小标题位置的空要选命令式/名词短语，并由整段反复出现的话题词锁定。"
+    },
+    "q-2022-yi-040": {
+      "blankId": "blank-2022-yi-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Don′t rely on technology alone",
+        "long-distance friendships",
+        "more conscious effort to sustain",
+        "face-to-face time together"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-yi-seven-p10",
+        "headingAnchor": "Don’t rely on technology alone",
+        "beforeQuote": "",
+        "afterQuote": ", but long-distance friendships—even close ones—may require more conscious effort to sustain."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "but",
+          "signalSide": "context-after",
+          "targetText": "It is easy to have a sense of connectedness through social media",
+          "relation": "空后以 but 转折，要求空处陈述一个“容易/正面”的事实与之对立，选项 F 提供这一前件。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "social media",
+          "signalSide": "option",
+          "targetText": "Don’t rely on technology alone",
+          "relation": "选项 social media 呼应小标题 technology，点明本要点“不要只依赖科技”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "more conscious effort to sustain",
+          "signalSide": "context-after",
+          "targetText": "easy to have a sense of connectedness",
+          "relation": "空后“需要更主动的努力”与选项“容易获得连接感”形成易↔难对比，正契合 but 的转折。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空后用 but 转折，说远距离友谊需要更主动的努力；空处应给出被转折的一面，选项 F“通过社交媒体很容易获得连接感”既呼应小标题 technology，又与 but 后内容构成“易—难”对比。",
+        "matchedClues": [
+          {
+            "contextSide": "but ... may require more conscious effort to sustain",
+            "optionSide": "It is easy to have a sense of connectedness through social media",
+            "relation": "选项 easy 与空后 require more conscious effort 形成对比，由 but 连接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B“通过写信补偿”不涉及科技/社交媒体，无法与 but 后“依赖科技仍不够”的转折逻辑及小标题 technology 对接。"
+        }
+      ],
+      "teachingNote": "段首空遇空后 but 转折时，选一个与转折内容相反的“前件”句，并让其呼应本段小标题。"
+    }
+  }
+}

@@ -1,0 +1,908 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2023-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-jia-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-jia-cloze": {
+      "overview": "记叙文兼夹叙夹议：作者回忆在意大利 Garfagnana 买房后，邻居 Mario 送来其貌不扬却味道地道的西红柿和浊酒，由此领悟不能只凭外表评判食物。",
+      "affectiveArc": "情感先抑后扬：初见丑西红柿和浊酒时失望、嫌弃，品尝后惊喜认可，最终被这份淳朴的本地风味打动。"
+    }
+  },
+  "blanks": {
+    "q-2023-jia-041": {
+      "blankId": "blank-2023-jia-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "stay there 表示“住在那里”，与全文“买了房子、每年夏天都去”的居住语境一致，主谓搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "waited",
+          "meaning": "等待"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "met",
+          "meaning": "相遇、见面"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "camped",
+          "meaning": "露营、扎营"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I bought a house",
+          "signalSide": "context-before",
+          "targetText": "stayed there",
+          "relation": "买了房子，故在那里“居住”，stay 与居住语境搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "we still go every summer",
+          "signalSide": "context-before",
+          "targetText": "stayed there",
+          "relation": "每年夏天都去，呼应“住在那里”的居住主线。"
+        }
+      ],
+      "teachingNote": "先抓全文“买房居住”的总语境，再选与之吻合的动词。"
+    },
+    "q-2023-jia-042": {
+      "blankId": "blank-2023-jia-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "make its way 是固定搭配，表示“缓慢前行、一路开过来”，与摩托车 chug-chug 沿山坡下行的画面吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "searching",
+          "meaning": "搜寻"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "squeezing",
+          "meaning": "挤压"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "feeling",
+          "meaning": "感觉、触摸"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "its way down the hill",
+          "signalSide": "context-after",
+          "targetText": "making its way",
+          "relation": "make one's way 为固定搭配，宾语 its way 锁定动词。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the chug-chug-chug of a motorbike",
+          "signalSide": "context-before",
+          "targetText": "making its way down the hill",
+          "relation": "摩托车突突地一路开下山坡，与 make its way 的“前行”义吻合。"
+        }
+      ],
+      "teachingNote": "看到 way 优先想 make one's way 这一高频固定搭配。"
+    },
+    "q-2023-jia-043": {
+      "blankId": "blank-2023-jia-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文 Mario 主动上门送来自家西红柿和酒，是典型的邻里往来，neighbor（邻居）与这一善意举动的语义场最贴合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "customer",
+          "meaning": "顾客"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "relative",
+          "meaning": "亲戚"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "passenger",
+          "meaning": "乘客"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "his kindness",
+          "signalSide": "context-after",
+          "targetText": "neighbor",
+          "relation": "Mario 的善意正是新搬来时邻居的待客之道，指向 neighbor。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "coming to",
+          "signalSide": "context-after",
+          "targetText": "neighbor called Mario",
+          "relation": "一个叫 Mario 的人前来送东西，结合送自家土产判断身份为邻居。"
+        }
+      ],
+      "teachingNote": "用人物的行为（送自家食物示好）反推其社会身份。"
+    },
+    "q-2023-jia-044": {
+      "blankId": "blank-2023-jia-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "Mario 从山下骑车“带来”一箱西红柿和一瓶酒，bring sb. sth. 表示把东西带到说话人这里，与他上门的方向一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lend",
+          "meaning": "借出"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "send",
+          "meaning": "寄送、派送"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "show",
+          "meaning": "出示、展示"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a box containing some tomatoes",
+          "signalSide": "context-after",
+          "targetText": "bring us a box",
+          "relation": "bring 的双宾语为 us 和 a box，施受关系成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "coming to",
+          "signalSide": "context-before",
+          "targetText": "bring us",
+          "relation": "他亲自骑车前来，是“带来”而非“寄送”，方向指向说话人。"
+        }
+      ],
+      "teachingNote": "区分 bring（带到此处）与 send（送往他处），看动作方向。"
+    },
+    "q-2023-jia-045": {
+      "blankId": "blank-2023-jia-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "make a gesture 表示“做出一个（善意的）举动、表示”，主动送土产正是这样一个友好的姿态，与下文 kindness 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "choice",
+          "meaning": "选择"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "comment",
+          "meaning": "评论"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "promise",
+          "meaning": "承诺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for him to make",
+          "signalSide": "context-after",
+          "targetText": "gesture",
+          "relation": "make a gesture 为固定搭配，make 锁定 gesture。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "his kindness",
+          "signalSide": "context-after",
+          "targetText": "a very nice gesture",
+          "relation": "kindness 回指这份友好的“举动”，印证 gesture。"
+        }
+      ],
+      "teachingNote": "make a gesture 表“做出（善意）表示”，是描述待人举动的固定说法。"
+    },
+    "q-2023-jia-046": {
+      "blankId": "blank-2023-jia-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "西红柿奇形怪状、不像超市那种漂亮的，让作者担忧其品质，worried 与 because 引出的负面观感情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "moved",
+          "meaning": "被感动的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "thrilled",
+          "meaning": "激动兴奋的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "bored",
+          "meaning": "厌烦的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "we were",
+          "signalSide": "context-before",
+          "targetText": "we were worried",
+          "relation": "系表结构 we were + worried，主系表搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "they were so misshapen",
+          "signalSide": "context-after",
+          "targetText": "worried",
+          "relation": "西红柿奇形怪状是负面线索，定下担忧的情感基调。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "because",
+          "signalSide": "context-after",
+          "targetText": "worried",
+          "relation": "because 引出担忧的原因，因果一致。"
+        }
+      ],
+      "teachingNote": "形容词情感空要与紧随的原因状语（because…）保持褒贬一致。"
+    },
+    "q-2023-jia-047": {
+      "blankId": "blank-2023-jia-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "与丑西红柿对照的是超市里 nice、round、shiny 的，shiny（光亮的）描述超市西红柿外表光鲜，与 round 并列修饰得当。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "simple",
+          "meaning": "简单的、朴素的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "real",
+          "meaning": "真实的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fun",
+          "meaning": "有趣的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the nice, round,",
+          "signalSide": "context-before",
+          "targetText": "shiny things",
+          "relation": "与 nice、round 并列修饰超市西红柿，shiny 续写外表光鲜的语义。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "so misshapen",
+          "signalSide": "context-before",
+          "targetText": "shiny",
+          "relation": "丑西红柿对照超市的光鲜西红柿，shiny 形成外观反差。"
+        }
+      ],
+      "teachingNote": "并列形容词要与同列成员描述同一外表维度（此处“外观光鲜”）。"
+    },
+    "q-2023-jia-048": {
+      "blankId": "blank-2023-jia-048",
+      "blankNo": 48,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "These can't be any good 意为“这些不可能是什么好东西”，是作者对丑西红柿浊酒的怀疑，good 表“好的/优质的”，与前文负面观感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "more",
+          "meaning": "更多的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "new",
+          "meaning": "新的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "easy",
+          "meaning": "容易的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "These can’t be any",
+          "signalSide": "context-before",
+          "targetText": "good",
+          "relation": "any good 为固定搭配，表“有什么好”，承接对食物质量的怀疑。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the wine was cloudy",
+          "signalSide": "context-before",
+          "targetText": "any good",
+          "relation": "浊酒丑番茄让作者怀疑其品质，故疑“不会是好东西”。"
+        }
+      ],
+      "teachingNote": "any good 是惯用搭配，表“算得上好东西”，多用于否定/疑问。"
+    },
+    "q-2023-jia-049": {
+      "blankId": "blank-2023-jia-049",
+      "blankNo": 49,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "尽管怀疑食物质量，但作者感激 Mario 的好意，thankful for his kindness（感激他的善意）与转折 But 后“仍接受”的逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sympathetic to",
+          "meaning": "同情"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cautious about",
+          "meaning": "对…谨慎"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "interested in",
+          "meaning": "对…感兴趣"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his kindness",
+          "signalSide": "context-after",
+          "targetText": "thankful for his kindness",
+          "relation": "be thankful for sth. 固定搭配，宾语 kindness 锁定短语。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "But",
+          "signalSide": "context-before",
+          "targetText": "thankful for his kindness",
+          "relation": "But 转折：虽疑质量，但因感激好意而接受，情感转正。"
+        }
+      ],
+      "teachingNote": "be thankful for 与宾语 kindness 直接搭配，借介词 for 锁定短语。"
+    },
+    "q-2023-jia-050": {
+      "blankId": "blank-2023-jia-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "出于感激而接受，作者最终“尝了尝”这些食物，tried them 与下段 What we discovered（尝后才发现）的因果衔接一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "sold",
+          "meaning": "卖掉"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "returned",
+          "meaning": "退回"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "mixed",
+          "meaning": "混合"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "so we",
+          "signalSide": "context-before",
+          "targetText": "tried them",
+          "relation": "so 顺承上文感激，故“尝了”这些食物，them 指代番茄和酒。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "judge what you eat",
+          "signalSide": "context-after",
+          "targetText": "tried them",
+          "relation": "下文谈“吃/品尝后的发现”，回指此处的“尝”这一动作。"
+        }
+      ],
+      "teachingNote": "由后文“品尝后才发现”逆推，此处动作必为“尝/吃”。"
+    },
+    "q-2023-jia-051": {
+      "blankId": "blank-2023-jia-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "全文主旨是“只凭外表评判食物不明智”，unwise（不明智的）概括了这一道理，与下文外表骗人的实例一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unnecessary",
+          "meaning": "不必要的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "uncertain",
+          "meaning": "不确定的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unusual",
+          "meaning": "不寻常的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to judge what you eat only by its",
+          "signalSide": "context-after",
+          "targetText": "unwise",
+          "relation": "“仅凭外表评判食物”这一做法被评价为 unwise（不明智）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "taste of water",
+          "signalSide": "context-after",
+          "targetText": "unwise to judge by appearance",
+          "relation": "好看却没味的超市番茄印证只看外表不明智。"
+        }
+      ],
+      "teachingNote": "主旨句的形容词要选能概括全文道理的词。"
+    },
+    "q-2023-jia-052": {
+      "blankId": "blank-2023-jia-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "前文反复强调番茄好不好看、酒清不清，本句“只凭其___评判”归结为 appearance（外表），与丑番茄好味道的对照一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "quality",
+          "meaning": "质量"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "origin",
+          "meaning": "产地、来源"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "price",
+          "meaning": "价格"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "judge what you eat only by its",
+          "signalSide": "context-before",
+          "targetText": "by its appearance",
+          "relation": "judge sth. by its appearance 固定搭配，by its 后接评判依据 appearance。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "so misshapen",
+          "signalSide": "context-before",
+          "targetText": "appearance",
+          "relation": "前文聚焦番茄形状外观，本句以 appearance 收束这一外表语义场。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "perfect but taste of water",
+          "signalSide": "context-after",
+          "targetText": "appearance",
+          "relation": "“看着完美却没味”正是只看外表的体现，回指 appearance。"
+        }
+      ],
+      "teachingNote": "围绕番茄“好看/难看”的语义场收束，外表对应 appearance。"
+    },
+    "q-2023-jia-053": {
+      "blankId": "blank-2023-jia-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "这些丑番茄让作者想起儿时叔叔种的番茄，唤起回忆的是其“味道”，taste 与下文“好看却没味”的对照及全文味觉主线一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "size",
+          "meaning": "大小"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "shape",
+          "meaning": "形状"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "color",
+          "meaning": "颜色"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "taste of water",
+          "signalSide": "context-after",
+          "targetText": "a taste",
+          "relation": "下文 taste of water 与此处 taste 同词呼应，锁定“味道”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "reminded me of the ones my uncle used to grow",
+          "signalSide": "context-after",
+          "targetText": "a taste",
+          "relation": "唤起儿时记忆的是番茄的味道，taste 与“勾起回忆”相配。"
+        }
+      ],
+      "teachingNote": "抓住全文味觉主线（taste 多处复现）选“味道”。"
+    },
+    "q-2023-jia-054": {
+      "blankId": "blank-2023-jia-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "supermarket tomatoes look perfect but taste of water，look（看上去）与 but 后的 taste 构成“外表对味道”的对照，主谓搭配得当。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "smell",
+          "meaning": "闻起来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "become",
+          "meaning": "变得"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "work",
+          "meaning": "起作用、运转"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "perfect but taste of water",
+          "signalSide": "context-after",
+          "targetText": "look perfect",
+          "relation": "look + 形容词（perfect）系表结构，且与 but taste 形成外表对味道的对照。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "judge what you eat only by its",
+          "signalSide": "context-before",
+          "targetText": "look perfect",
+          "relation": "“只看外表”主旨在此具体化为 look perfect（看着完美）。"
+        }
+      ],
+      "teachingNote": "but 前后形成对照时，前半应为“外表（look）”，后半为“味道（taste）”。"
+    },
+    "q-2023-jia-055": {
+      "blankId": "blank-2023-jia-055",
+      "blankNo": 55,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "没味的超市番茄不会让人留下美好回忆，happy memory（愉快的回忆）与“没人会记得它们”的语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "vivid",
+          "meaning": "生动鲜明的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "short",
+          "meaning": "短暂的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "vague",
+          "meaning": "模糊的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Nobody’s going to have a",
+          "signalSide": "context-before",
+          "targetText": "happy memory",
+          "relation": "没人会拥有的是对没味番茄的美好（happy）回忆。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "taste of water",
+          "signalSide": "context-before",
+          "targetText": "happy memory",
+          "relation": "寡淡无味故不值得回味，反衬只有好味道才留下 happy memory。"
+        }
+      ],
+      "teachingNote": "由“无味、不值得记”反推被否定的正是“美好(happy)回忆”。"
+    },
+    "q-2023-jia-056": {
+      "blankId": "blank-2023-jia-056",
+      "blankNo": 56,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "把番茄种成方的是为了便于“打包/装箱”，pack them easily（容易打包）与方形便于堆叠运输的常识一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "clean",
+          "meaning": "清洗"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "check",
+          "meaning": "检查"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "count",
+          "meaning": "清点"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "grow square ones",
+          "signalSide": "context-before",
+          "targetText": "pack them easily",
+          "relation": "方形番茄便于整齐码放，与“打包(pack)”的目的相配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "easily",
+          "signalSide": "context-after",
+          "targetText": "pack them easily",
+          "relation": "easily 修饰 pack，方形利于轻松打包运输。"
+        }
+      ],
+      "teachingNote": "由“方形便于码放”的常识联想，目的是便于“打包(pack)”。"
+    },
+    "q-2023-jia-057": {
+      "blankId": "blank-2023-jia-057",
+      "blankNo": 57,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "Mario 的酒虽浑浊、瓶子旧，but 转折后给予正面评价，perfect（完美、好极了）与全文“外表差但实质好”的主线一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "useful",
+          "meaning": "有用的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "convenient",
+          "meaning": "方便的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "familiar",
+          "meaning": "熟悉的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "but it was",
+          "signalSide": "context-before",
+          "targetText": "it was perfect",
+          "relation": "系表结构 it was + perfect，主系表搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "may have been cloudy",
+          "signalSide": "context-before",
+          "targetText": "perfect",
+          "relation": "may have been cloudy…but 让步转折，酒虽浊但味道极好。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "out of an old bottle",
+          "signalSide": "context-before",
+          "targetText": "perfect",
+          "relation": "旧瓶浊酒的外表负面描述，反衬转折后 perfect 的正面评价。"
+        }
+      ],
+      "teachingNote": "让步转折(虽…但…)后，空格应填与前半负面描述相反的正面评价词。"
+    },
+    "q-2023-jia-058": {
+      "blankId": "blank-2023-jia-058",
+      "blankNo": 58,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "在正确的时间吃东西指吃“应季”的，in season（应季、当令）与 at the correct time 同义呼应，强调时令新鲜。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "on view",
+          "meaning": "在展出"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "on sale",
+          "meaning": "在出售/打折"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in need",
+          "meaning": "在需要中、困难中"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at the correct time",
+          "signalSide": "context-before",
+          "targetText": "in season",
+          "relation": "“在正确的时间吃”即吃应季食物，in season 与之同义。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "season",
+          "signalSide": "option",
+          "targetText": "in season",
+          "relation": "season 表“时令、季节”，in season 即“当令、应季”。"
+        }
+      ],
+      "teachingNote": "in season=应季当令，与“在对的时间吃”形成同义复现。"
+    },
+    "q-2023-jia-059": {
+      "blankId": "blank-2023-jia-059",
+      "blankNo": 59,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "尽量在食物“被种出”的地方附近吃，grown（种植）承接前文番茄、葡萄等农产品由 grow 而来的语义，强调产地新鲜。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "finished",
+          "meaning": "完成、用完"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "stored",
+          "meaning": "储藏"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "found",
+          "meaning": "找到"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as close as possible to where they were",
+          "signalSide": "context-before",
+          "targetText": "grown",
+          "relation": "“离它们被种出的地方越近越好”，grown 表农产品的种植产地。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my uncle used to grow",
+          "signalSide": "context-before",
+          "targetText": "grown",
+          "relation": "前文 grow 多次出现，回指此处番茄被“种(grown)”的地方。"
+        }
+      ],
+      "teachingNote": "食材主题下，where they were ___ 指其“被种出(grown)”的产地。"
+    },
+    "q-2023-jia-060": {
+      "blankId": "blank-2023-jia-060",
+      "blankNo": 60,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "Mario 送来食物，实际是“给”了作者 Garfagnana 的味道，given us 与开篇他送番茄送酒（bring/赠予）的善意举动呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cooked",
+          "meaning": "烹饪"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bought",
+          "meaning": "购买"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "told",
+          "meaning": "告诉"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "us was the taste of the Garfagnana",
+          "signalSide": "context-after",
+          "targetText": "given us the taste",
+          "relation": "give sb. sth. 双宾结构，Mario 给作者的是当地的味道。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "his kindness",
+          "signalSide": "context-before",
+          "targetText": "given us",
+          "relation": "全文 Mario 馈赠土产的善意，归结为“给予(give)”了本地风味。"
+        }
+      ],
+      "teachingNote": "收尾句用 give 总括全文“馈赠（番茄、酒、风味）”的善意主线。"
+    }
+  }
+}

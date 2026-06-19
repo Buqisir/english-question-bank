@@ -1,0 +1,3216 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2023-yi",
+    "title": "2023年全国乙卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2023年全国乙卷-答案版.docx",
+      "sha256": "a725c864ca048d0cf886e1fd1217a044a688af318d8a911b1e709dd1e58cac4f",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2023-yi-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2023-yi-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2023-yi-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2023-yi-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2023-yi-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2023-yi-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-yi-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2023-yi-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2023-yi-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2023-yi-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2023-yi-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-yi-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2023-yi-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2023-yi-reading",
+        "text": "第二部分 阅读理解（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-yi-reading-choice",
+        "text": "第一节（共15小题；每小题2分，满分30分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-yi-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2023-yi-language",
+        "text": "第三部分 语言知识运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-yi-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-yi-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-yi-grammar-fill"
+      }
+    ],
+    "groups": {
+      "group-2023-yi-reading-a": {
+        "groupId": "group-2023-yi-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2023-yi-021",
+          "q-2023-yi-022",
+          "q-2023-yi-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "text": "PRACTITIONERS\nJacqueline Felice de Almania (c.1322) highlights the suspicion that women practicing medicine faced. Born to a Jewish family in Florence, she moved to Paris where she worked as a physician and performed surgery. In 1322 she was tried for practicing unlawfully. In spite of the court hearing testimonials (证明) of her ability as a doctor, she was banned from medicine.\nJames Barry (c.1789—1865) was born Margaret Bulkley in Ireland but, dressed as a man, she was accepted by Edinburgh University to study medicine. She qualified as a surgeon in 1813, then joined the British Army, serving overseas. Barry retired in 1859, having practiced her entire medical profession living and working as a man.\nTan Yunxian (1461—1554) was a Chinese physician who learned her skills from her grandparents. Chinese women at the time could not serve apprenticeships (学徒期) with doctors. However, Tan passed the official exam. Tan treated women from all walks of life. In 1511, Tan wrote a book, Sayings of a Female Doctor, describing her life as a physician.\nRebecca Lee Crumpler (1831—1895) worked as a nurse for eight years before studying in medical college in Boston in 1860. Four years later, she was the first African American woman to receive a medical degree. She moved to Virginia in 1865, where she provided medical care to freed slaves."
+            }
+          ]
+        }
+      },
+      "group-2023-yi-reading-b": {
+        "groupId": "group-2023-yi-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2023-yi-024",
+          "q-2023-yi-025",
+          "q-2023-yi-026",
+          "q-2023-yi-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-1",
+              "text": "Living in Iowa and trying to become a photographer specializing in landscape (风景) can be quite a challenge, mainly because the corn state lacks geographical variation."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-b-2",
+              "text": "Although landscapes in the Midwest tend to be quite similar, either farm fields or highways, sometimes I find distinctive character in the hills or lakes. To make some of my landscape shots, I have traveled up to four hours away to shoot within a 10-minute time frame. I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-b-3",
+              "text": "Being at the right place at the right time is decisive in any style of photography. I often leave early to seek the right destinations so I can set up early to avoid missing the moment I am attempting to photograph. I have missed plenty of beautiful sunsets/sunrises due to being on the spot only five minutes before the best moment."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-b-4",
+              "text": "One time my friends and I drove three hours to Devil’s Lake, Wisconsin, to climb the purple quartz (石英) rock around the lake. After we found a crazy-looking road that hung over a bunch of rocks, we decided to photograph the scene at sunset. The position enabled us to look over the lake with the sunset in the background. We managed to leave this spot to climb higher because of the spare time until sunset. However, we did not mark the route (路线) so we ended up almost missing the sunset entirely. Once we found the place, it was stressful getting lights and cameras set up in the limited time. Still, looking back on the photos, they are some of my best shots though they could have been so much better if I would have been prepared and managed my time wisely."
+            }
+          ]
+        }
+      },
+      "group-2023-yi-reading-c": {
+        "groupId": "group-2023-yi-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2023-yi-028",
+          "q-2023-yi-029",
+          "q-2023-yi-030",
+          "q-2023-yi-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-c-1",
+              "text": "What comes into your mind when you think of British food? Probably fish and chips, or a Sunday dinner of meat and two vegetables. But is British food really so uninteresting? Even though Britain has a reputation for less-than-impressive cuisine, it is producing more top class chefs who appear frequently on our television screens and whose recipe books frequently top the best seller lists."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-c-2",
+              "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits. It is recently reported that the number of those sticking to a traditional diet is slowly declining and around half of Britain’s consumers would like to change or improve their cooking in some way. There has been a rise in the number of students applying for food courses at UK universities and colleges. It seems that TV programmes have helped change what people think about cooking."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "text": "According to a new study from market analysts, 1 in 5 Britons say that watching cookery programmes on TV has encouraged them to try different food. Almost one third say they now use a wider variety of ingredients (配料) than they used to, and just under 1 in 4 say they now buy better quality ingredients than before. One in four adults say that TV chefs have made them much more confident about expanding their cookery knowledge and skills, and young people are also getting more interested in cooking. The UK’s obsession (痴迷) with food is reflected through television scheduling. Cookery shows and documentaries about food are broadcast more often than before. With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking."
+            }
+          ]
+        }
+      },
+      "group-2023-yi-reading-d": {
+        "groupId": "group-2023-yi-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2023-yi-032",
+          "q-2023-yi-033",
+          "q-2023-yi-034",
+          "q-2023-yi-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "text": "If you want to tell the history of the whole world, a history that does not privilege one part of humanity, you cannot do it through texts alone, because only some of the world has ever had texts, while most of the world, for most of the time, has not. Writing is one of humanity’s later achievements, and until fairly recently even many literate (有文字的) societies recorded their concerns not only in writing but in things."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-d-2",
+              "text": "Ideally a history would bring together texts and objects, and some chapters of this book are able to do just that, but in many cases we simply can’t. The clearest example of this between literate and non-literate history is perhaps the first conflict, at Botany Bay, between Captain Cook’s voyage and the Australian Aboriginals. From the English side, we have scientific reports and the captain’s record of that terrible day. From the Australian side, we have only a wooden shield (盾) dropped by a man in flight after his first experience of gunshot. If we want to reconstruct what was actually going on that day, the shield must be questioned and interpreted as deeply and strictly as the written reports."
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "text": "In addition to the problem of miscomprehension from both sides, there are victories accidentally or deliberately twisted, especially when only the victors know how to write. Those who are on the losing side often have only their things to tell their stories. The Caribbean Taino, the Australian Aboriginals, the African people of Benin and the Incas, all of whom appear in this book, can speak to us now of their past achievements most powerfully through the objects they made: a history told through things gives them back a voice. When we consider contact (联系) between literate and non-literate societies such as these, all our first-hand accounts are necessarily twisted, only one half of a dialogue. If we are to find the other half of that conversation, we have to read not just the texts, but the objects."
+            }
+          ]
+        }
+      },
+      "group-2023-yi-seven-choices": {
+        "groupId": "group-2023-yi-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2023-yi-036",
+          "q-2023-yi-037",
+          "q-2023-yi-038",
+          "q-2023-yi-039",
+          "q-2023-yi-040"
+        ],
+        "blankIds": [
+          "blank-2023-yi-036",
+          "blank-2023-yi-037",
+          "blank-2023-yi-038",
+          "blank-2023-yi-039",
+          "blank-2023-yi-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "All plants are different"
+          },
+          {
+            "label": "B",
+            "text": "Not only do they look beautiful"
+          },
+          {
+            "label": "C",
+            "text": "There are many benefits to growing plants indoors"
+          },
+          {
+            "label": "D",
+            "text": "Instead, they grow better inside, where it is warmer"
+          },
+          {
+            "label": "E",
+            "text": "Plants like peace lilies and devil’s ivy are among the best"
+          },
+          {
+            "label": "F",
+            "text": "Changing the pot of your plant from time to time will also help"
+          },
+          {
+            "label": "G",
+            "text": "Learning about the requirements of each plant can be very rewarding"
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-seven-title",
+              "text": "Indoor plants might look as if they just sit around not doing much, but in many ways they are the unsung heroes of the home. __36__ 1  , but studies have shown that they can promote people’s wellbeing by improving their mood (心情) , reducing stress and helping their memory. What’s more, indoor plants are easy to look after and are not very expensive."
+            },
+            {
+              "paragraphId": "para-2023-yi-seven-p1",
+              "text": "What are indoor plants?"
+            },
+            {
+              "paragraphId": "para-2023-yi-seven-p2",
+              "text": "Indoor plants, also known as houseplants or pot plants, are plants that like to grow indoors. Many of these species (物种) are not ideally suited to growing outside in the UK, especially in the winter. __37__ 2  ."
+            },
+            {
+              "paragraphId": "para-2023-yi-seven-p3",
+              "text": "Why are indoor plants good for you?"
+            },
+            {
+              "paragraphId": "para-2023-yi-seven-p4",
+              "text": "Will Spoelstra, who works at the Royal Botanic Gardens, says, “__38__ 3  . I find during the winter months, plants around the house can really lift your mood.” Several studies have backed this up and found that indoor plants can improve creativity, focus and memory. There is also research showing that pot plants can clean the air around them by removing harmful gases, such as carbon dioxide. They also remove some harmful chemicals from paints or cooking. __39__ 4  ."
+            },
+            {
+              "paragraphId": "para-2023-yi-seven-p5",
+              "text": "Which plants can you grow?"
+            },
+            {
+              "paragraphId": "para-2023-yi-seven-p6",
+              "text": "Aloe vera, peace lilies and spider plants are some of the species that are easy to grow indoors. You can buy plants from supermarkets, garden centres or online. Younger plants are often cheaper than fully grown ones, and you get to care for them as they mature—which is part of the joy of owning plants. “__40__ 5  ,” Spoelstra says. “It can bring a new interest and focus into people’s lives and help to make the link between home and nature.”"
+            }
+          ]
+        }
+      },
+      "group-2023-yi-cloze": {
+        "groupId": "group-2023-yi-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2023-yi-041",
+          "q-2023-yi-042",
+          "q-2023-yi-043",
+          "q-2023-yi-044",
+          "q-2023-yi-045",
+          "q-2023-yi-046",
+          "q-2023-yi-047",
+          "q-2023-yi-048",
+          "q-2023-yi-049",
+          "q-2023-yi-050",
+          "q-2023-yi-051",
+          "q-2023-yi-052",
+          "q-2023-yi-053",
+          "q-2023-yi-054",
+          "q-2023-yi-055",
+          "q-2023-yi-056",
+          "q-2023-yi-057",
+          "q-2023-yi-058",
+          "q-2023-yi-059",
+          "q-2023-yi-060"
+        ],
+        "blankIds": [
+          "blank-2023-yi-041",
+          "blank-2023-yi-042",
+          "blank-2023-yi-043",
+          "blank-2023-yi-044",
+          "blank-2023-yi-045",
+          "blank-2023-yi-046",
+          "blank-2023-yi-047",
+          "blank-2023-yi-048",
+          "blank-2023-yi-049",
+          "blank-2023-yi-050",
+          "blank-2023-yi-051",
+          "blank-2023-yi-052",
+          "blank-2023-yi-053",
+          "blank-2023-yi-054",
+          "blank-2023-yi-055",
+          "blank-2023-yi-056",
+          "blank-2023-yi-057",
+          "blank-2023-yi-058",
+          "blank-2023-yi-059",
+          "blank-2023-yi-060"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-cloze-title",
+              "text": "To become the Olympic champion in the individual (个人) all-around event, Gabby Douglas had to leave everything she __41__ best. She had to __42__ her bedroom in Virginia. She had to say __43__ to her two dogs and to the beach, where she loved to __44__ waves on her board. But it was __45__ to take the leap (飞跃) , however __46__ it would be. Even at 14, Douglas knew that. So she __47__ about 1,200 miles away from home, to __48__ with a coach from China. She lived with a family she had never __49__ and everything was new to her."
+            },
+            {
+              "paragraphId": "para-2023-yi-cloze-p1",
+              "text": "As it turned out, Douglas did __50__ what she needed to do to become Olympic champion when she __51__ two Russians. The Chinese coach __52__ Douglas into one of the best gymnasts in the __53__ , helping her skyrocket from an __54__ member of the national team to the top of the sport. By __55__ the Olympic all-around title, she became the first black woman to do so. She __56__ the competition from beginning to end. She said she had felt __57__ all along that she would win."
+            },
+            {
+              "paragraphId": "para-2023-yi-cloze-p2",
+              "text": "Not so long ago, Martha Karolyi, the coordinator (联络人) of the women’s national team, did not think Douglas had what it __58__ to be an Olympian. As time went by, she thought __59__ that she could make the London Games—and win."
+            },
+            {
+              "paragraphId": "para-2023-yi-cloze-p3",
+              "text": "“I’m going to inspire so many people,” she said. “I’m ready to __60__ .” And shine she did."
+            }
+          ]
+        }
+      },
+      "group-2023-yi-grammar-fill": {
+        "groupId": "group-2023-yi-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2023-yi-061",
+          "q-2023-yi-062",
+          "q-2023-yi-063",
+          "q-2023-yi-064",
+          "q-2023-yi-065",
+          "q-2023-yi-066",
+          "q-2023-yi-067",
+          "q-2023-yi-068",
+          "q-2023-yi-069",
+          "q-2023-yi-070"
+        ],
+        "blankIds": [
+          "blank-2023-yi-061",
+          "blank-2023-yi-062",
+          "blank-2023-yi-063",
+          "blank-2023-yi-064",
+          "blank-2023-yi-065",
+          "blank-2023-yi-066",
+          "blank-2023-yi-067",
+          "blank-2023-yi-068",
+          "blank-2023-yi-069",
+          "blank-2023-yi-070"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-grammar-fill-title",
+              "text": "Beijing is a city bridging the ancient and the modern. From Buddhist temples to museums, narrow hutong __61__royal palaces, it is home to more than 3,000 years of glorious history even down to its layout, with the city keeping its carefully __62__ (build) system of ring roads."
+            },
+            {
+              "paragraphId": "para-2023-yi-grammar-fill-p1",
+              "text": "But for all its ancient buildings, Beijing is also a place __63__welcomes the fast-paced development of modern life, with 21st-century architectural __64__ (wonder) standing side by side with historical buildings of the past."
+            },
+            {
+              "paragraphId": "para-2023-yi-grammar-fill-p2",
+              "text": "It is a distinct visual contrast (反差) that shouldn’t work, __65__somehow these two very different worlds make a good combination. __66__ (visit) several times over the last 10 years, I __67__ (amaze) by the co-existence of old and new, and how a city was able to keep such a rich heritage (遗产) while constantly growing. As a photographer, I have spent the last two years __68__ (record) everything I discovered."
+            },
+            {
+              "paragraphId": "para-2023-yi-grammar-fill-p3",
+              "text": "The __69__ (remark) development of this city, which is consciously designed to protect the past while stepping into the modern world, __70__ (mean) there is always something new to discover here, and I could be photographing Beijing for the next 50 years."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2023-yi-021": {
+        "questionId": "q-2023-yi-021",
+        "questionNo": 21,
+        "groupId": "group-2023-yi-reading-a",
+        "stem": "What did Jacqueline and James have in common?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Doing teaching jobs."
+          },
+          {
+            "label": "B",
+            "text": "Being hired as physicians."
+          },
+          {
+            "label": "C",
+            "text": "Performing surgery."
+          },
+          {
+            "label": "D",
+            "text": "Being banned from medicine."
+          }
+        ]
+      },
+      "q-2023-yi-022": {
+        "questionId": "q-2023-yi-022",
+        "questionNo": 22,
+        "groupId": "group-2023-yi-reading-a",
+        "stem": "How was Tan Yunxian different from the other practitioners?",
+        "options": [
+          {
+            "label": "A",
+            "text": "She wrote a book."
+          },
+          {
+            "label": "B",
+            "text": "She went through trials."
+          },
+          {
+            "label": "C",
+            "text": "She worked as a dentist."
+          },
+          {
+            "label": "D",
+            "text": "She had formal education."
+          }
+        ]
+      },
+      "q-2023-yi-023": {
+        "questionId": "q-2023-yi-023",
+        "questionNo": 23,
+        "groupId": "group-2023-yi-reading-a",
+        "stem": "Who was the first African American with a medical degree? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "Jacqueline Felice de Almania."
+          },
+          {
+            "label": "B",
+            "text": "Tan Yunxian."
+          },
+          {
+            "label": "C",
+            "text": "James Barry."
+          },
+          {
+            "label": "D",
+            "text": "Rebecca Lee Crumpler."
+          }
+        ]
+      },
+      "q-2023-yi-024": {
+        "questionId": "q-2023-yi-024",
+        "questionNo": 24,
+        "groupId": "group-2023-yi-reading-b",
+        "stem": "How does the author deal with the challenge as a landscape photographer in the Midwest?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By teaming up with other photographers."
+          },
+          {
+            "label": "B",
+            "text": "By shooting in the countryside or state parks."
+          },
+          {
+            "label": "C",
+            "text": "By studying the geographical conditions."
+          },
+          {
+            "label": "D",
+            "text": "By creating settings in the corn fields."
+          }
+        ]
+      },
+      "q-2023-yi-025": {
+        "questionId": "q-2023-yi-025",
+        "questionNo": 25,
+        "groupId": "group-2023-yi-reading-b",
+        "stem": "What is the key to successful landscape photography according to the author?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Proper time management."
+          },
+          {
+            "label": "B",
+            "text": "Good shooting techniques."
+          },
+          {
+            "label": "C",
+            "text": "Adventurous spirit."
+          },
+          {
+            "label": "D",
+            "text": "Distinctive styles."
+          }
+        ]
+      },
+      "q-2023-yi-026": {
+        "questionId": "q-2023-yi-026",
+        "questionNo": 26,
+        "groupId": "group-2023-yi-reading-b",
+        "stem": "What can we infer from the author's trip with friends to Devil's Lake?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They went crazy with the purple quartz rock."
+          },
+          {
+            "label": "B",
+            "text": "They felt stressed while waiting for the suset."
+          },
+          {
+            "label": "C",
+            "text": "They reached the shooting spot later than expected."
+          },
+          {
+            "label": "D",
+            "text": "They had problems with their equipment."
+          }
+        ]
+      },
+      "q-2023-yi-027": {
+        "questionId": "q-2023-yi-027",
+        "questionNo": 27,
+        "groupId": "group-2023-yi-reading-b",
+        "stem": "How does the author find his photos taken at Devil's Lake? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "Amusing."
+          },
+          {
+            "label": "B",
+            "text": "Satisfying."
+          },
+          {
+            "label": "C",
+            "text": "Encouraging."
+          },
+          {
+            "label": "D",
+            "text": "Comforting."
+          }
+        ]
+      },
+      "q-2023-yi-028": {
+        "questionId": "q-2023-yi-028",
+        "questionNo": 28,
+        "groupId": "group-2023-yi-reading-c",
+        "stem": "What do people usually think of British food?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is simple and plain."
+          },
+          {
+            "label": "B",
+            "text": "It is rich in nutrition."
+          },
+          {
+            "label": "C",
+            "text": "It lacks authentic tastes."
+          },
+          {
+            "label": "D",
+            "text": "It deserves a high reputation."
+          }
+        ]
+      },
+      "q-2023-yi-029": {
+        "questionId": "q-2023-yi-029",
+        "questionNo": 29,
+        "groupId": "group-2023-yi-reading-c",
+        "stem": "Which best describes cookery programmes on British TV?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Authoritative."
+          },
+          {
+            "label": "B",
+            "text": "Creative."
+          },
+          {
+            "label": "C",
+            "text": "Profitable."
+          },
+          {
+            "label": "D",
+            "text": "Influential."
+          }
+        ]
+      },
+      "q-2023-yi-030": {
+        "questionId": "q-2023-yi-030",
+        "questionNo": 30,
+        "groupId": "group-2023-yi-reading-c",
+        "stem": "Which is the percentage of the people using more diverse ingredients now?",
+        "options": [
+          {
+            "label": "A",
+            "text": "20%."
+          },
+          {
+            "label": "B",
+            "text": "24%."
+          },
+          {
+            "label": "C",
+            "text": "25%."
+          },
+          {
+            "label": "D",
+            "text": "33%."
+          }
+        ]
+      },
+      "q-2023-yi-031": {
+        "questionId": "q-2023-yi-031",
+        "questionNo": 31,
+        "groupId": "group-2023-yi-reading-c",
+        "stem": "What might the author continue talking about? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "The art of cooking in other countries."
+          },
+          {
+            "label": "B",
+            "text": "Male chefs on TV programmes."
+          },
+          {
+            "label": "C",
+            "text": "Table manners in the UK."
+          },
+          {
+            "label": "D",
+            "text": "Studies of big eaters."
+          }
+        ]
+      },
+      "q-2023-yi-032": {
+        "questionId": "q-2023-yi-032",
+        "questionNo": 32,
+        "groupId": "group-2023-yi-reading-d",
+        "stem": "What is the first paragraph mainly about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "How past events should be presented."
+          },
+          {
+            "label": "B",
+            "text": "What humanity is concerned about."
+          },
+          {
+            "label": "C",
+            "text": "Whether facts speak louder than words."
+          },
+          {
+            "label": "D",
+            "text": "Why written language is reliable."
+          }
+        ]
+      },
+      "q-2023-yi-033": {
+        "questionId": "q-2023-yi-033",
+        "questionNo": 33,
+        "groupId": "group-2023-yi-reading-d",
+        "stem": "What does the author indicate by mentioning Captain Cook in Paragraph 2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "His report was scientific."
+          },
+          {
+            "label": "B",
+            "text": "He represented the local people."
+          },
+          {
+            "label": "C",
+            "text": "He ruled over Botany Bay."
+          },
+          {
+            "label": "D",
+            "text": "His record was one-sided."
+          }
+        ]
+      },
+      "q-2023-yi-034": {
+        "questionId": "q-2023-yi-034",
+        "questionNo": 34,
+        "groupId": "group-2023-yi-reading-d",
+        "stem": "What does the underlined word \"conversation\" in Paragraph 3 refer to?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Problem."
+          },
+          {
+            "label": "B",
+            "text": "History."
+          },
+          {
+            "label": "C",
+            "text": "Voice."
+          },
+          {
+            "label": "D",
+            "text": "Society."
+          }
+        ]
+      },
+      "q-2023-yi-035": {
+        "questionId": "q-2023-yi-035",
+        "questionNo": 35,
+        "groupId": "group-2023-yi-reading-d",
+        "stem": "Which of the following books is the text most likely selected from?",
+        "options": [
+          {
+            "label": "A",
+            "text": "How Maps Tell Stories of the World."
+          },
+          {
+            "label": "B",
+            "text": "A Short History of Australia."
+          },
+          {
+            "label": "C",
+            "text": "A History of the World in 100 Objects."
+          },
+          {
+            "label": "D",
+            "text": "How Art Works Tell Stories."
+          }
+        ]
+      },
+      "q-2023-yi-036": {
+        "questionId": "q-2023-yi-036",
+        "questionNo": 36,
+        "groupId": "group-2023-yi-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2023-yi-036"
+      },
+      "q-2023-yi-037": {
+        "questionId": "q-2023-yi-037",
+        "questionNo": 37,
+        "groupId": "group-2023-yi-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2023-yi-037"
+      },
+      "q-2023-yi-038": {
+        "questionId": "q-2023-yi-038",
+        "questionNo": 38,
+        "groupId": "group-2023-yi-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2023-yi-038"
+      },
+      "q-2023-yi-039": {
+        "questionId": "q-2023-yi-039",
+        "questionNo": 39,
+        "groupId": "group-2023-yi-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2023-yi-039"
+      },
+      "q-2023-yi-040": {
+        "questionId": "q-2023-yi-040",
+        "questionNo": 40,
+        "groupId": "group-2023-yi-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2023-yi-040"
+      },
+      "q-2023-yi-041": {
+        "questionId": "q-2023-yi-041",
+        "questionNo": 41,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "41",
+        "blankId": "blank-2023-yi-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "tried"
+          },
+          {
+            "label": "B",
+            "text": "thought"
+          },
+          {
+            "label": "C",
+            "text": "judged"
+          },
+          {
+            "label": "D",
+            "text": "knew"
+          }
+        ]
+      },
+      "q-2023-yi-042": {
+        "questionId": "q-2023-yi-042",
+        "questionNo": 42,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "42",
+        "blankId": "blank-2023-yi-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "take up"
+          },
+          {
+            "label": "B",
+            "text": "pack up"
+          },
+          {
+            "label": "C",
+            "text": "clean up"
+          },
+          {
+            "label": "D",
+            "text": "do up"
+          }
+        ]
+      },
+      "q-2023-yi-043": {
+        "questionId": "q-2023-yi-043",
+        "questionNo": 43,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "43",
+        "blankId": "blank-2023-yi-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "goodbye"
+          },
+          {
+            "label": "B",
+            "text": "hello"
+          },
+          {
+            "label": "C",
+            "text": "thanks"
+          },
+          {
+            "label": "D",
+            "text": "no"
+          }
+        ]
+      },
+      "q-2023-yi-044": {
+        "questionId": "q-2023-yi-044",
+        "questionNo": 44,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "44",
+        "blankId": "blank-2023-yi-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "cause"
+          },
+          {
+            "label": "B",
+            "text": "observe"
+          },
+          {
+            "label": "C",
+            "text": "ride"
+          },
+          {
+            "label": "D",
+            "text": "strike"
+          }
+        ]
+      },
+      "q-2023-yi-045": {
+        "questionId": "q-2023-yi-045",
+        "questionNo": 45,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "45",
+        "blankId": "blank-2023-yi-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "common"
+          },
+          {
+            "label": "B",
+            "text": "time"
+          },
+          {
+            "label": "C",
+            "text": "fun"
+          },
+          {
+            "label": "D",
+            "text": "tough"
+          }
+        ]
+      },
+      "q-2023-yi-046": {
+        "questionId": "q-2023-yi-046",
+        "questionNo": 46,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "46",
+        "blankId": "blank-2023-yi-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "breathtaking"
+          },
+          {
+            "label": "B",
+            "text": "heartbreaking"
+          },
+          {
+            "label": "C",
+            "text": "eye-catching"
+          },
+          {
+            "label": "D",
+            "text": "head-spinning"
+          }
+        ]
+      },
+      "q-2023-yi-047": {
+        "questionId": "q-2023-yi-047",
+        "questionNo": 47,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "47",
+        "blankId": "blank-2023-yi-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "dropped out"
+          },
+          {
+            "label": "B",
+            "text": "moved on"
+          },
+          {
+            "label": "C",
+            "text": "pulled over"
+          },
+          {
+            "label": "D",
+            "text": "went off"
+          }
+        ]
+      },
+      "q-2023-yi-048": {
+        "questionId": "q-2023-yi-048",
+        "questionNo": 48,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "48",
+        "blankId": "blank-2023-yi-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "reason"
+          },
+          {
+            "label": "B",
+            "text": "talk"
+          },
+          {
+            "label": "C",
+            "text": "compete"
+          },
+          {
+            "label": "D",
+            "text": "train"
+          }
+        ]
+      },
+      "q-2023-yi-049": {
+        "questionId": "q-2023-yi-049",
+        "questionNo": 49,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "49",
+        "blankId": "blank-2023-yi-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "met"
+          },
+          {
+            "label": "B",
+            "text": "helped"
+          },
+          {
+            "label": "C",
+            "text": "understood"
+          },
+          {
+            "label": "D",
+            "text": "needed"
+          }
+        ]
+      },
+      "q-2023-yi-050": {
+        "questionId": "q-2023-yi-050",
+        "questionNo": 50,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "50",
+        "blankId": "blank-2023-yi-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "approximately"
+          },
+          {
+            "label": "B",
+            "text": "gradually"
+          },
+          {
+            "label": "C",
+            "text": "exactly"
+          },
+          {
+            "label": "D",
+            "text": "possibly"
+          }
+        ]
+      },
+      "q-2023-yi-051": {
+        "questionId": "q-2023-yi-051",
+        "questionNo": 51,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "51",
+        "blankId": "blank-2023-yi-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "defeated"
+          },
+          {
+            "label": "B",
+            "text": "pleased"
+          },
+          {
+            "label": "C",
+            "text": "respected"
+          },
+          {
+            "label": "D",
+            "text": "assisted"
+          }
+        ]
+      },
+      "q-2023-yi-052": {
+        "questionId": "q-2023-yi-052",
+        "questionNo": 52,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "52",
+        "blankId": "blank-2023-yi-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "forced"
+          },
+          {
+            "label": "B",
+            "text": "transformed"
+          },
+          {
+            "label": "C",
+            "text": "persuaded"
+          },
+          {
+            "label": "D",
+            "text": "put"
+          }
+        ]
+      },
+      "q-2023-yi-053": {
+        "questionId": "q-2023-yi-053",
+        "questionNo": 53,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "53",
+        "blankId": "blank-2023-yi-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "world"
+          },
+          {
+            "label": "B",
+            "text": "city"
+          },
+          {
+            "label": "C",
+            "text": "team"
+          },
+          {
+            "label": "D",
+            "text": "state"
+          }
+        ]
+      },
+      "q-2023-yi-054": {
+        "questionId": "q-2023-yi-054",
+        "questionNo": 54,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "54",
+        "blankId": "blank-2023-yi-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "amateur"
+          },
+          {
+            "label": "B",
+            "text": "elected"
+          },
+          {
+            "label": "C",
+            "text": "average"
+          },
+          {
+            "label": "D",
+            "text": "enthusiastic"
+          }
+        ]
+      },
+      "q-2023-yi-055": {
+        "questionId": "q-2023-yi-055",
+        "questionNo": 55,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "55",
+        "blankId": "blank-2023-yi-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "clarifying"
+          },
+          {
+            "label": "B",
+            "text": "defending"
+          },
+          {
+            "label": "C",
+            "text": "winning"
+          },
+          {
+            "label": "D",
+            "text": "demanding"
+          }
+        ]
+      },
+      "q-2023-yi-056": {
+        "questionId": "q-2023-yi-056",
+        "questionNo": 56,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "56",
+        "blankId": "blank-2023-yi-056",
+        "options": [
+          {
+            "label": "A",
+            "text": "followed"
+          },
+          {
+            "label": "B",
+            "text": "organized"
+          },
+          {
+            "label": "C",
+            "text": "watched"
+          },
+          {
+            "label": "D",
+            "text": "led"
+          }
+        ]
+      },
+      "q-2023-yi-057": {
+        "questionId": "q-2023-yi-057",
+        "questionNo": 57,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "57",
+        "blankId": "blank-2023-yi-057",
+        "options": [
+          {
+            "label": "A",
+            "text": "confident"
+          },
+          {
+            "label": "B",
+            "text": "nervous"
+          },
+          {
+            "label": "C",
+            "text": "excited"
+          },
+          {
+            "label": "D",
+            "text": "uneasy"
+          }
+        ]
+      },
+      "q-2023-yi-058": {
+        "questionId": "q-2023-yi-058",
+        "questionNo": 58,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "58",
+        "blankId": "blank-2023-yi-058",
+        "options": [
+          {
+            "label": "A",
+            "text": "viewed"
+          },
+          {
+            "label": "B",
+            "text": "appeared"
+          },
+          {
+            "label": "C",
+            "text": "mattered"
+          },
+          {
+            "label": "D",
+            "text": "took"
+          }
+        ]
+      },
+      "q-2023-yi-059": {
+        "questionId": "q-2023-yi-059",
+        "questionNo": 59,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "59",
+        "blankId": "blank-2023-yi-059",
+        "options": [
+          {
+            "label": "A",
+            "text": "now and then"
+          },
+          {
+            "label": "B",
+            "text": "more and more"
+          },
+          {
+            "label": "C",
+            "text": "far and wide"
+          },
+          {
+            "label": "D",
+            "text": "on and on"
+          }
+        ]
+      },
+      "q-2023-yi-060": {
+        "questionId": "q-2023-yi-060",
+        "questionNo": 60,
+        "groupId": "group-2023-yi-cloze",
+        "stem": "60",
+        "blankId": "blank-2023-yi-060",
+        "options": [
+          {
+            "label": "A",
+            "text": "shine"
+          },
+          {
+            "label": "B",
+            "text": "fly"
+          },
+          {
+            "label": "C",
+            "text": "dance"
+          },
+          {
+            "label": "D",
+            "text": "score"
+          }
+        ]
+      },
+      "q-2023-yi-061": {
+        "questionId": "q-2023-yi-061",
+        "questionNo": 61,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2023-yi-061"
+      },
+      "q-2023-yi-062": {
+        "questionId": "q-2023-yi-062",
+        "questionNo": 62,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2023-yi-062"
+      },
+      "q-2023-yi-063": {
+        "questionId": "q-2023-yi-063",
+        "questionNo": 63,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2023-yi-063"
+      },
+      "q-2023-yi-064": {
+        "questionId": "q-2023-yi-064",
+        "questionNo": 64,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2023-yi-064"
+      },
+      "q-2023-yi-065": {
+        "questionId": "q-2023-yi-065",
+        "questionNo": 65,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2023-yi-065"
+      },
+      "q-2023-yi-066": {
+        "questionId": "q-2023-yi-066",
+        "questionNo": 66,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "66",
+        "blankId": "blank-2023-yi-066"
+      },
+      "q-2023-yi-067": {
+        "questionId": "q-2023-yi-067",
+        "questionNo": 67,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "67",
+        "blankId": "blank-2023-yi-067"
+      },
+      "q-2023-yi-068": {
+        "questionId": "q-2023-yi-068",
+        "questionNo": 68,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "68",
+        "blankId": "blank-2023-yi-068"
+      },
+      "q-2023-yi-069": {
+        "questionId": "q-2023-yi-069",
+        "questionNo": 69,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "69",
+        "blankId": "blank-2023-yi-069"
+      },
+      "q-2023-yi-070": {
+        "questionId": "q-2023-yi-070",
+        "questionNo": 70,
+        "groupId": "group-2023-yi-grammar-fill",
+        "stem": "70",
+        "blankId": "blank-2023-yi-070"
+      }
+    },
+    "blanks": {
+      "blank-2023-yi-061": {
+        "blankId": "blank-2023-yi-061",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-061"
+      },
+      "blank-2023-yi-062": {
+        "blankId": "blank-2023-yi-062",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-062",
+        "prompt": "build"
+      },
+      "blank-2023-yi-063": {
+        "blankId": "blank-2023-yi-063",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-063"
+      },
+      "blank-2023-yi-064": {
+        "blankId": "blank-2023-yi-064",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-064",
+        "prompt": "wonder"
+      },
+      "blank-2023-yi-065": {
+        "blankId": "blank-2023-yi-065",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-065"
+      },
+      "blank-2023-yi-066": {
+        "blankId": "blank-2023-yi-066",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-066",
+        "prompt": "visit"
+      },
+      "blank-2023-yi-067": {
+        "blankId": "blank-2023-yi-067",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-067",
+        "prompt": "amaze"
+      },
+      "blank-2023-yi-068": {
+        "blankId": "blank-2023-yi-068",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-068",
+        "prompt": "record"
+      },
+      "blank-2023-yi-069": {
+        "blankId": "blank-2023-yi-069",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-069",
+        "prompt": "remark"
+      },
+      "blank-2023-yi-070": {
+        "blankId": "blank-2023-yi-070",
+        "groupId": "group-2023-yi-grammar-fill",
+        "questionId": "q-2023-yi-070",
+        "prompt": "mean"
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2023-yi-021": {
+        "questionId": "q-2023-yi-021",
+        "questionNo": 21,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-022": {
+        "questionId": "q-2023-yi-022",
+        "questionNo": 22,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-023": {
+        "questionId": "q-2023-yi-023",
+        "questionNo": 23,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-024": {
+        "questionId": "q-2023-yi-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-025": {
+        "questionId": "q-2023-yi-025",
+        "questionNo": 25,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-026": {
+        "questionId": "q-2023-yi-026",
+        "questionNo": 26,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-027": {
+        "questionId": "q-2023-yi-027",
+        "questionNo": 27,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-028": {
+        "questionId": "q-2023-yi-028",
+        "questionNo": 28,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-029": {
+        "questionId": "q-2023-yi-029",
+        "questionNo": 29,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-030": {
+        "questionId": "q-2023-yi-030",
+        "questionNo": 30,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-031": {
+        "questionId": "q-2023-yi-031",
+        "questionNo": 31,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-032": {
+        "questionId": "q-2023-yi-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-033": {
+        "questionId": "q-2023-yi-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-034": {
+        "questionId": "q-2023-yi-034",
+        "questionNo": 34,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-035": {
+        "questionId": "q-2023-yi-035",
+        "questionNo": 35,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-036": {
+        "questionId": "q-2023-yi-036",
+        "questionNo": 36,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-037": {
+        "questionId": "q-2023-yi-037",
+        "questionNo": 37,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-038": {
+        "questionId": "q-2023-yi-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-039": {
+        "questionId": "q-2023-yi-039",
+        "questionNo": 39,
+        "answer": "E",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-040": {
+        "questionId": "q-2023-yi-040",
+        "questionNo": 40,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-041": {
+        "questionId": "q-2023-yi-041",
+        "questionNo": 41,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-042": {
+        "questionId": "q-2023-yi-042",
+        "questionNo": 42,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-043": {
+        "questionId": "q-2023-yi-043",
+        "questionNo": 43,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-044": {
+        "questionId": "q-2023-yi-044",
+        "questionNo": 44,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-045": {
+        "questionId": "q-2023-yi-045",
+        "questionNo": 45,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-046": {
+        "questionId": "q-2023-yi-046",
+        "questionNo": 46,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-047": {
+        "questionId": "q-2023-yi-047",
+        "questionNo": 47,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-048": {
+        "questionId": "q-2023-yi-048",
+        "questionNo": 48,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-049": {
+        "questionId": "q-2023-yi-049",
+        "questionNo": 49,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-050": {
+        "questionId": "q-2023-yi-050",
+        "questionNo": 50,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-051": {
+        "questionId": "q-2023-yi-051",
+        "questionNo": 51,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-052": {
+        "questionId": "q-2023-yi-052",
+        "questionNo": 52,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-053": {
+        "questionId": "q-2023-yi-053",
+        "questionNo": 53,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-054": {
+        "questionId": "q-2023-yi-054",
+        "questionNo": 54,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-055": {
+        "questionId": "q-2023-yi-055",
+        "questionNo": 55,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-056": {
+        "questionId": "q-2023-yi-056",
+        "questionNo": 56,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-057": {
+        "questionId": "q-2023-yi-057",
+        "questionNo": 57,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-058": {
+        "questionId": "q-2023-yi-058",
+        "questionNo": 58,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-059": {
+        "questionId": "q-2023-yi-059",
+        "questionNo": 59,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-060": {
+        "questionId": "q-2023-yi-060",
+        "questionNo": 60,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-061": {
+        "questionId": "q-2023-yi-061",
+        "questionNo": 61,
+        "answer": "to",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-062": {
+        "questionId": "q-2023-yi-062",
+        "questionNo": 62,
+        "answer": "built",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-063": {
+        "questionId": "q-2023-yi-063",
+        "questionNo": 63,
+        "answer": "which/that",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-064": {
+        "questionId": "q-2023-yi-064",
+        "questionNo": 64,
+        "answer": "wonders",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-065": {
+        "questionId": "q-2023-yi-065",
+        "questionNo": 65,
+        "answer": "but/yet",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-066": {
+        "questionId": "q-2023-yi-066",
+        "questionNo": 66,
+        "answer": "Having visited",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-067": {
+        "questionId": "q-2023-yi-067",
+        "questionNo": 67,
+        "answer": "was amazed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-068": {
+        "questionId": "q-2023-yi-068",
+        "questionNo": 68,
+        "answer": "recording",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-069": {
+        "questionId": "q-2023-yi-069",
+        "questionNo": 69,
+        "answer": "remarkable",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-yi-070": {
+        "questionId": "q-2023-yi-070",
+        "questionNo": 70,
+        "answer": "means",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-19T00:00:00Z"
+    },
+    "groups": {
+      "group-2023-yi-reading-a": {
+        "overview": "本文以 PRACTITIONERS（行医者）为题，介绍了历史上四位女性医生的事迹，按时间顺序逐位呈现：意大利的 Jacqueline、爱尔兰的 James Barry、中国的 Tan Yunxian、以及非裔美国人 Rebecca Lee Crumpler，突出女性从医所面对的阻碍与各自的成就。",
+        "discourseStructure": {
+          "summary": "全文为一段式人物介绍，内部按四位女性医生依次铺陈，每位介绍其出身、行医经历与代表性成就，呈并列结构。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "summary": "依次介绍四位历史上的女性行医者：Jacqueline 在巴黎行医并做外科手术，1322 年因非法行医受审被禁；James Barry 女扮男装入爱丁堡大学学医，成为外科医生并服役军中；Tan Yunxian 自祖辈习医，通过官方考试行医并著书；Rebecca Lee Crumpler 成为首位获得医学学位的非裔美国女性。",
+              "function": "并列列举四位女性医生的生平与成就，构成全文主体。"
+            }
+          ]
+        }
+      },
+      "group-2023-yi-reading-b": {
+        "overview": "本文是一篇第一人称记叙文，作者讲述自己在地形单调的爱荷华州从事风景摄影的经历与心得，重点强调时间管理对风景摄影的决定性作用，并以一次去 Devil's Lake 拍摄日落的经历作为例证。",
+        "discourseStructure": {
+          "summary": "全文先点明在中西部拍风景的挑战，再讲应对方式与拍摄心得，最后用一次具体的湖边拍摄经历印证'把握时机、管理时间'的重要性。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-1",
+              "summary": "指出在爱荷华州做风景摄影师颇具挑战，因为该州地形缺乏变化。",
+              "function": "开篇点题，提出作者作为中西部风景摄影师面临的核心挑战。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-b-2",
+              "summary": "尽管中西部风景大同小异，作者仍能在山丘湖泊中找到特色，并常与朋友长途奔赴州立公园或乡村拍照。",
+              "function": "说明作者应对地形单调挑战的做法。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-b-3",
+              "summary": "强调在对的时间出现在对的地点至关重要，作者常提早出发以免错过拍摄时机。",
+              "function": "提出风景摄影成功的关键——把握时机、提前到位（时间管理）。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-b-4",
+              "summary": "记叙一次去 Devil's Lake 拍日落的经历：因未标记路线差点错过日落，匆忙架设设备，但照片仍是佳作，只是若管理好时间会更好。",
+              "function": "用具体事例印证时间管理的重要性，并表达对成果的态度。"
+            }
+          ]
+        }
+      },
+      "group-2023-yi-reading-c": {
+        "overview": "本文探讨英国美食形象的转变：尽管英国饮食长期被认为乏善可陈，但电视烹饪节目和明星厨师正在改变英国人的烹饪习惯与观念，并用调研数据加以佐证。",
+        "discourseStructure": {
+          "summary": "由提出英国食物的刻板印象切入，转向电视厨师带来的改变，最后用市场调研数据量化这种影响，并以男性厨师上电视收尾。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-c-1",
+              "summary": "提出人们对英国食物乏味、不起眼的刻板印象，并反问其是否真的如此，指出英国正涌现更多上电视的顶级厨师。",
+              "function": "提出话题与刻板印象，设置转折，引出下文。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-c-2",
+              "summary": "说明正是这些电视厨师而非广告，让英国人远离传统饮食、变得更敢于尝试，传统饮食人数下降，报读烹饪课程人数上升。",
+              "function": "阐释电视厨师对烹饪观念与行为的影响。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "summary": "引用市场调研数据：五分之一尝试新食物、近三分之一使用更多样配料、近四分之一买更好配料、四分之一更自信；并指出男性厨师增多使男孩爱烹饪不再被视为\"不酷\"。",
+              "function": "用具体数据量化电视节目的影响，并以男性厨师收束。"
+            }
+          ]
+        }
+      },
+      "group-2023-yi-reading-d": {
+        "overview": "本文为一部以实物讲述世界历史的著作的导言。作者论述：仅凭文字无法书写不偏袒任何一方的全球史，因为世界上多数地区、多数时间并无文字记录；要听到失语者（非文字社会、失败一方）的声音，必须既读文本、也读实物。",
+        "discourseStructure": {
+          "summary": "全文由“提出问题—举例论证—升华主张”三段构成：第一段指出仅靠文字无法书写完整的世界史；第二段以库克船长航行与澳大利亚原住民的冲突为例，说明文本只代表一方；第三段进一步指出胜利者的记录被扭曲、失败者只能借助实物发声，故须兼读文本与实物。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "summary": "要书写不偏袒任何一方的世界史，不能只靠文字，因为世界大部分地区在大部分时间里都没有文字；文字是人类较晚的成就，许多有文字的社会也用实物记录其关切。",
+              "function": "提出全文核心论题：仅凭文字不足以呈现完整的过去。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-d-2",
+              "summary": "理想的历史应文本与实物并重，但常做不到。以植物学湾库克船长航行与澳洲原住民的首次冲突为例：英方留有科学报告与船长记录，澳方仅留下一面逃亡者丢下的木盾；要还原真相，对盾的审视须与文字记录一样严格。",
+              "function": "举具体史例，论证单方文本记录的局限，须借助实物。"
+            },
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "summary": "除双方误解外，胜利者还会扭曲事实，因为往往只有胜者会书写；失败一方只能靠实物讲述自己的故事。塔伊诺人、原住民、贝宁人、印加人都借所造之物重获声音。第一手记录只是对话的一半，要找到另一半，须既读文本又读实物。",
+              "function": "升华主张：实物为失语者发声，须兼读文本与实物方得完整。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2023-yi-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对 Jacqueline 与 James 两位人物信息的比对，找出二者的共同点。",
+        "stemTranslationZh": "Jacqueline 和 James 有什么共同之处？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "做教学工作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "两人都从事教学工作。",
+              "explanation": "原文未提及 Jacqueline 或 James 从事任何教学工作，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "都被聘为内科医生。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "sourceQuote": "She qualified as a surgeon in 1813, then joined the British Army",
+              "sourceEntity": "James Barry（外科医生 surgeon）",
+              "optionText": "Being hired as physicians.",
+              "optionEntity": "physicians（内科医生）",
+              "explanation": "仅 Jacqueline 以 physician 身份行医，James Barry 取得的是 surgeon 资格，二者并非都是 physician，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "She qualified as a surgeon in 1813, then joined the British Army",
+                "anchor": "James 是 surgeon"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "做外科手术。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "she worked as a physician and performed surgery",
+                "anchor": "Jacqueline 做手术"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "She qualified as a surgeon in 1813, then joined the British Army",
+                "anchor": "James 是 surgeon"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "被禁止行医。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "she was banned from medicine",
+              "sourceHighlight": "she was banned from medicine",
+              "optionText": "Being banned from medicine.",
+              "optionHighlight": "banned from medicine",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "explanation": "被禁止行医的只有 Jacqueline 一人，原文并未提及 James 被禁；将单人情形扩大为二人共同点，属范围偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "she was banned from medicine",
+                "anchor": "仅 Jacqueline 被禁"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Performing surgery.",
+            "sourceRole": "correctOption",
+            "targetText": "she worked as a physician and performed surgery",
+            "targetParagraphId": "para-2023-yi-reading-a-1",
+            "relationType": "paraphrase",
+            "note": "选项 Performing surgery 对应 Jacqueline 段 performed surgery；James 段 qualified as a surgeon 亦指做外科手术，两人共同点即此。"
+          }
+        ]
+      },
+      "q-2023-yi-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对 Tan Yunxian 与其他三位行医者的对比，找出 Tan 区别于他人的独有之处。",
+        "stemTranslationZh": "Tan Yunxian 与其他几位行医者有何不同？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她写了一本书。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "In 1511, Tan wrote a book, Sayings of a Female Doctor",
+                "anchor": "Tan 著书"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她经历了审判。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "sourceQuote": "In 1322 she was tried for practicing unlawfully",
+              "sourceEntity": "Jacqueline（受审者）",
+              "optionText": "She went through trials.",
+              "optionEntity": "She（指 Tan Yunxian）",
+              "explanation": "经历审判的是 Jacqueline，而非 Tan Yunxian，将他人经历错配到 Tan 身上。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "In 1322 she was tried for practicing unlawfully",
+                "anchor": "受审的是 Jacqueline"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她做牙医工作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Tan Yunxian 做牙医工作。",
+              "explanation": "原文称 Tan 为 physician 并 treated women from all walks of life，未提及其从事牙医工作，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她受过正规教育。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "sourceQuote": "was a Chinese physician who learned her skills from her grandparents",
+              "sourceEntity": "Tan Yunxian（从祖辈习医）",
+              "optionText": "She had formal education.",
+              "optionEntity": "formal education（正规教育）",
+              "explanation": "Tan 的医术习自祖辈而非正规院校；正规教育（如 Edinburgh University、Boston 医学院）属于 James、Rebecca 等人，故该选项并非 Tan 区别于他人的特征，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "was a Chinese physician who learned her skills from her grandparents",
+                "anchor": "Tan 自祖辈习医"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "She wrote a book.",
+            "sourceRole": "correctOption",
+            "targetText": "In 1511, Tan wrote a book, Sayings of a Female Doctor",
+            "targetParagraphId": "para-2023-yi-reading-a-1",
+            "relationType": "locationCue",
+            "note": "选项 She wrote a book 直接对应原文 Tan wrote a book, Sayings of a Female Doctor，这是其他三位行医者均未提及的独有之处。"
+          }
+        ]
+      },
+      "q-2023-yi-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查定位首位获得医学学位的非裔美国人对应的具体人物。",
+        "stemTranslationZh": "谁是首位获得医学学位的非裔美国人？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "Jacqueline Felice de Almania。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "sourceQuote": "she was the first African American woman to receive a medical degree",
+              "sourceEntity": "Rebecca Lee Crumpler",
+              "optionText": "Jacqueline Felice de Almania.",
+              "optionEntity": "Jacqueline Felice de Almania",
+              "explanation": "首位获得医学学位的非裔美国女性是 Rebecca Lee Crumpler，而非 Jacqueline，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "she was the first African American woman to receive a medical degree",
+                "anchor": "对应 Rebecca"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "Tan Yunxian。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "sourceQuote": "she was the first African American woman to receive a medical degree",
+              "sourceEntity": "Rebecca Lee Crumpler",
+              "optionText": "Tan Yunxian.",
+              "optionEntity": "Tan Yunxian",
+              "explanation": "首位获得医学学位的非裔美国女性是 Rebecca Lee Crumpler，Tan Yunxian 是中国医生，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "she was the first African American woman to receive a medical degree",
+                "anchor": "对应 Rebecca"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "James Barry。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "sourceQuote": "she was the first African American woman to receive a medical degree",
+              "sourceEntity": "Rebecca Lee Crumpler",
+              "optionText": "James Barry.",
+              "optionEntity": "James Barry",
+              "explanation": "首位获得医学学位的非裔美国女性是 Rebecca Lee Crumpler，James Barry 在爱丁堡大学学医，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "she was the first African American woman to receive a medical degree",
+                "anchor": "对应 Rebecca"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "Rebecca Lee Crumpler。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "she was the first African American woman to receive a medical degree",
+                "anchor": "Rebecca 首获医学学位"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2023-yi-reading-a-1",
+                "quote": "Four years later, she was the first African American woman to receive a medical degree",
+                "anchor": "首位非裔美国女性"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "the first African American with a medical degree",
+            "sourceRole": "stem",
+            "targetText": "she was the first African American woman to receive a medical degree",
+            "targetParagraphId": "para-2023-yi-reading-a-1",
+            "relationType": "locationCue",
+            "note": "题干 first African American with a medical degree 与 Rebecca 段 the first African American woman to receive a medical degree 直接对应，主语 she 指 Rebecca Lee Crumpler。"
+          }
+        ]
+      },
+      "q-2023-yi-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者作为中西部风景摄影师如何应对地形单调这一挑战的具体做法。",
+        "stemTranslationZh": "作为中西部的风景摄影师，作者是如何应对这一挑战的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "通过与其他摄影师组队合作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+              "sourceEntity": "a few of my friends",
+              "optionText": "By teaming up with other photographers.",
+              "optionEntity": "other photographers",
+              "explanation": "原文说作者常和'朋友'(a few of my friends)一起出行，并未说这些人是'其他摄影师'，对象被偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-b-2",
+                "quote": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+                "anchor": "with a few of my friends"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "通过在乡村或州立公园拍摄。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-b-2",
+                "quote": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+                "anchor": "to state parks or to the countryside ... take photos"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "通过研究地理条件。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the corn state lacks geographical variation",
+              "optionText": "By studying the geographical conditions.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 geographical variation 只是用来说明地形单调的'挑战'本身，选项借 geographical 一词制造干扰，文中并未说作者通过'研究地理条件'来应对。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-b-1",
+                "quote": "the corn state lacks geographical variation",
+                "anchor": "geographical variation"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "通过在玉米地里布置场景。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "By creating settings in the corn fields.",
+              "explanation": "原文仅提到爱荷华是'corn state'，并未提及作者在玉米地里'布置场景'拍摄，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "By shooting in the countryside or state parks.",
+            "sourceRole": "correctOption",
+            "targetText": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+            "targetParagraphId": "para-2023-yi-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 shooting in the countryside or state parks 是原文 travel ... to state parks or to the countryside ... take photos 的同义替换。"
+          }
+        ]
+      },
+      "q-2023-yi-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者认为风景摄影成功的关键是什么。",
+        "stemTranslationZh": "根据作者所述，成功的风景摄影的关键是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "合理的时间管理。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-b-3",
+                "quote": "Being at the right place at the right time is decisive in any style of photography.",
+                "anchor": "right place at the right time is decisive"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2023-yi-reading-b-3",
+                "quote": "I often leave early to seek the right destinations so I can set up early to avoid missing the moment I am attempting to photograph.",
+                "anchor": "leave early ... set up early"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "良好的拍摄技巧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Good shooting techniques.",
+              "explanation": "原文强调的是'在对的时间到对的地点'即时间与时机的把握，并未把'拍摄技巧'列为成功关键，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "冒险精神。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "to go on adventures",
+              "optionText": "Adventurous spirit.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 go on adventures 只是描述作者外出拍照的方式，选项借 adventure 的同根词 adventurous 制造干扰，文中并未将'冒险精神'作为成功关键。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-b-2",
+                "quote": "to go on adventures",
+                "anchor": "go on adventures"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "独特的风格。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "decisive in any style of photography",
+              "optionText": "Distinctive styles.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 any style of photography 与第二段 distinctive character 的词语在此被拼接误导，选项 Distinctive styles 并非作者所说的成功关键。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-b-3",
+                "quote": "decisive in any style of photography",
+                "anchor": "any style of photography"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Proper time management.",
+            "sourceRole": "correctOption",
+            "targetText": "Being at the right place at the right time is decisive in any style of photography.",
+            "targetParagraphId": "para-2023-yi-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "选项 Proper time management 是原文 at the right time ... is decisive 以及 leave early / set up early 所体现的'时间管理'的概括性同义替换。"
+          }
+        ]
+      },
+      "q-2023-yi-026": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查根据作者与朋友去 Devil's Lake 的经历能推断出什么。",
+        "stemTranslationZh": "从作者与朋友去 Devil's Lake 的那次出行中，我们可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他们对紫色石英岩石着了迷。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "After we found a crazy-looking road that hung over a bunch of rocks",
+              "optionText": "They went crazy with the purple quartz rock.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 crazy-looking 形容的是那条'看起来很疯狂'的路，选项借 crazy 一词曲解为他们对石英岩石'着迷/疯狂'，属词钩干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-b-4",
+                "quote": "After we found a crazy-looking road that hung over a bunch of rocks",
+                "anchor": "a crazy-looking road"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他们在等待日落时感到紧张。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "conditionRemoved",
+              "sourceQuote": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+              "sourceHighlight": "stressful getting lights and cameras set up in the limited time",
+              "optionText": "They felt stressed while waiting for the suset.",
+              "optionHighlight": "while waiting for the suset",
+              "explanation": "原文的'紧张(stressful)'发生在'找到地点后、在有限时间内架设灯光相机'时，而非'等待日落时'，选项改换了产生紧张的具体情境。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-b-4",
+                "quote": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+                "anchor": "stressful ... in the limited time"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他们比预期更晚到达拍摄地点。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-b-4",
+                "quote": "However, we did not mark the route (路线) so we ended up almost missing the sunset entirely.",
+                "anchor": "did not mark the route ... almost missing the sunset"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他们的设备出了问题。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "They had problems with their equipment.",
+              "explanation": "原文只说在有限时间内架设灯光和相机很紧张，并未提及设备本身出现故障或问题，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "They reached the shooting spot later than expected.",
+            "sourceRole": "correctOption",
+            "targetText": "However, we did not mark the route (路线) so we ended up almost missing the sunset entirely.",
+            "targetParagraphId": "para-2023-yi-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "选项 reached the shooting spot later than expected 是对原文 did not mark the route ... almost missing the sunset entirely（因未标路线导致差点错过日落、即到位过晚）的推断性同义替换。"
+          }
+        ]
+      },
+      "q-2023-yi-027": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查作者对自己在 Devil's Lake 拍摄的照片持何种态度。",
+        "stemTranslationZh": "作者如何看待自己在 Devil's Lake 拍摄的照片？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "好笑的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Amusing.",
+              "explanation": "原文称这些照片是他最好的作品之一，未表达任何'好笑/有趣'的意味，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "令人满意的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-b-4",
+                "quote": "Still, looking back on the photos, they are some of my best shots",
+                "anchor": "some of my best shots"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "令人鼓舞的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Encouraging.",
+              "explanation": "原文表达的是对照片成果的满意，而非'受到鼓舞/激励'，文中没有这层含义，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "令人安慰的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Comforting.",
+              "explanation": "原文体现的是对成片质量的认可与满意，并无'安慰'之意，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Satisfying.",
+            "sourceRole": "correctOption",
+            "targetText": "they are some of my best shots",
+            "targetParagraphId": "para-2023-yi-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "作者用 some of my best shots（我最好的作品之一）表达对照片的满意，与选项 Satisfying 态度一致。"
+          }
+        ]
+      },
+      "q-2023-yi-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查人们对英国食物的通常印象，定位首段对刻板印象的描述。",
+        "stemTranslationZh": "人们通常如何看待英国食物？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它简单而朴素。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-c-1",
+                "quote": "Probably fish and chips",
+                "anchor": "炸鱼薯条"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-yi-reading-c-1",
+                "quote": "a Sunday dinner of meat and two vegetables.",
+                "anchor": "肉配两样蔬菜"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它营养丰富。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "British food is rich in nutrition.",
+              "explanation": "原文未提及英国食物营养是否丰富，只描述其简单、被认为乏味，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它缺乏地道的味道。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "British food lacks authentic tastes.",
+              "explanation": "原文说英国食物被认为\"乏味/不起眼\"(uninteresting/less-than-impressive)，但从未谈到\"地道(authentic)\"的问题，缺乏与\"地道味道\"对应的依据，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它配得上很高的声誉。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "paragraphId": "para-2023-yi-reading-c-1",
+              "sourceQuote": "Britain has a reputation for less-than-impressive cuisine",
+              "sourceHighlight": "less-than-impressive",
+              "optionText": "It deserves a high reputation.",
+              "optionHighlight": "a high reputation",
+              "explanation": "原文说英国以\"不太出色的(less-than-impressive)菜肴\"闻名，与\"配得上很高声誉\"评价相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-c-1",
+                "quote": "Britain has a reputation for less-than-impressive cuisine",
+                "anchor": "不太出色的声誉"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It is simple and plain.",
+            "sourceRole": "correctOption",
+            "targetText": "a Sunday dinner of meat and two vegetables.",
+            "targetParagraphId": "para-2023-yi-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "正确项 simple and plain 对应原文举例的 fish and chips 与 a Sunday dinner of meat and two vegetables，即用朴素常见的食物体现\"简单朴素\"。"
+          }
+        ]
+      },
+      "q-2023-yi-029": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对英国电视烹饪节目作用的概括，需归纳全文反复强调其\"改变观念与行为\"的影响力。",
+        "stemTranslationZh": "哪一项最能描述英国电视上的烹饪节目？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "权威的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Cookery programmes are authoritative.",
+              "explanation": "原文强调节目改变了人们的观念，但未说它们\"权威\"，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "有创意的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Cookery programmes are creative.",
+              "explanation": "原文未评价节目本身是否有创意，仅说它让英国人变得更敢于尝试，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "有利可图的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Cookery programmes are profitable.",
+              "explanation": "原文谈到厨师菜谱登上畅销榜，但并未说烹饪节目\"盈利/有利可图\"，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "有影响力的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-c-2",
+                "quote": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
+                "anchor": "电视厨师改变饮食习惯"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-yi-reading-c-2",
+                "quote": "It seems that TV programmes have helped change what people think about cooking.",
+                "anchor": "改变人们对烹饪的看法"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Influential.",
+            "sourceRole": "correctOption",
+            "targetText": "It seems that TV programmes have helped change what people think about cooking.",
+            "targetParagraphId": "para-2023-yi-reading-c-2",
+            "relationType": "paraphrase",
+            "note": "Influential(有影响力)对应原文 TV programmes have helped change what people think about cooking，即节目改变了人们的烹饪观念，体现其影响力。"
+          }
+        ]
+      },
+      "q-2023-yi-030": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查数据细节定位：现在使用更多样配料的人所占比例，需将文字百分比与选项数字对应。",
+        "stemTranslationZh": "现在使用更多样配料的人所占的比例是多少？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "20%。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "sourceQuote": "1 in 5 Britons say that watching cookery programmes on TV has encouraged them to try different food",
+              "sourceEntity": "try different food",
+              "optionText": "20%.",
+              "optionEntity": "using more diverse ingredients",
+              "explanation": "20%(1 in 5)对应的是\"被鼓励尝试不同食物\"，而非\"使用更多样配料\"，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-c-3",
+                "quote": "1 in 5 Britons say that watching cookery programmes on TV has encouraged them to try different food",
+                "anchor": "五分之一尝试新食物"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "24%。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "sourceQuote": "just under 1 in 4 say they now buy better quality ingredients than before",
+              "sourceEntity": "buy better quality ingredients",
+              "optionText": "24%.",
+              "optionEntity": "using more diverse ingredients",
+              "explanation": "24%(just under 1 in 4)对应的是\"购买更优质配料\"，而非\"使用更多样配料\"，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-c-3",
+                "quote": "just under 1 in 4 say they now buy better quality ingredients than before",
+                "anchor": "近四分之一买更优质配料"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "25%。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "sourceQuote": "One in four adults say that TV chefs have made them much more confident about expanding their cookery knowledge and skills",
+              "sourceEntity": "more confident about expanding their cookery knowledge and skills",
+              "optionText": "25%.",
+              "optionEntity": "using more diverse ingredients",
+              "explanation": "25%(One in four)对应的是\"对扩展烹饪知识技能更自信\"，而非\"使用更多样配料\"，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-c-3",
+                "quote": "One in four adults say that TV chefs have made them much more confident about expanding their cookery knowledge and skills",
+                "anchor": "四分之一更自信"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "33%。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-c-3",
+                "quote": "Almost one third say they now use a wider variety of ingredients (配料)",
+                "anchor": "近三分之一用更多样配料"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "using more diverse ingredients",
+            "sourceRole": "stem",
+            "targetText": "Almost one third say they now use a wider variety of ingredients (配料)",
+            "targetParagraphId": "para-2023-yi-reading-c-3",
+            "relationType": "paraphrase",
+            "note": "题干 using more diverse ingredients 对应原文 use a wider variety of ingredients；Almost one third 即约 33%。"
+          }
+        ]
+      },
+      "q-2023-yi-031": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查段落延展推断：依据末段结尾句的话题走向，推断作者接下来最可能继续谈论的内容。",
+        "stemTranslationZh": "作者接下来可能会继续谈论什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "其他国家的烹饪艺术。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The art of cooking in other countries.",
+              "explanation": "全文聚焦英国(British/UK)，从未涉及其他国家的烹饪，与结尾话题无衔接，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "电视节目中的男性厨师。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-c-3",
+                "quote": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
+                "anchor": "电视上男性厨师增多"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "英国的餐桌礼仪。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Table manners in the UK.",
+              "explanation": "原文讨论烹饪习惯与节目影响，从未涉及餐桌礼仪，与末段话题无关，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "关于大胃王的研究。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Studies of big eaters.",
+              "explanation": "原文谈的是烹饪兴趣与配料选择，并非饭量大小，\"大胃王研究\"无任何文本依据，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Male chefs on TV programmes.",
+            "sourceRole": "correctOption",
+            "targetText": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
+            "targetParagraphId": "para-2023-yi-reading-c-3",
+            "relationType": "locationCue",
+            "note": "末段以 an increasing number of male chefs on TV 收尾，正是承接此话题，作者最可能继续谈 Male chefs on TV programmes。"
+          }
+        ]
+      },
+      "q-2023-yi-032": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查第一段的主旨大意，需概括作者在首段提出的核心论点。",
+        "stemTranslationZh": "第一段主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "过去的事件应当如何被呈现。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-d-1",
+                "quote": "you cannot do it through texts alone, because only some of the world has ever had texts",
+                "anchor": "不能只靠文字呈现历史"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2023-yi-reading-d-1",
+                "quote": "recorded their concerns not only in writing but in things",
+                "anchor": "既用文字也用实物记录"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "人类所关切的事物是什么。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "recorded their concerns not only in writing but in things",
+              "sourceHighlight": "their concerns",
+              "optionText": "What humanity is concerned about.",
+              "optionHighlight": "What humanity is concerned about",
+              "explanation": "原文中“concerns”只是说明各社会“用文字和实物记录其关切”这一现象，用以支撑“如何呈现历史”的论点；选项把一个支撑细节当成段落主旨，偷换了讨论范围。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-1",
+                "quote": "recorded their concerns not only in writing but in things",
+                "anchor": "记录其关切（仅为细节）"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "事实是否比言辞更有说服力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Whether facts speak louder than words.",
+              "explanation": "原文比较的是“文字”与“实物”两种记录方式，并未讨论“事实是否比言辞更有力”这一命题，属原文未提及的无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "书面语言为何可靠。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "you cannot do it through texts alone",
+              "sourceHighlight": "cannot do it through texts alone",
+              "optionText": "Why written language is reliable.",
+              "optionHighlight": "written language is reliable",
+              "explanation": "第一段旨在指出仅靠文字不足以书写完整历史，强调文字的局限；选项却称“书面语言为何可靠”，与原文态度相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-1",
+                "quote": "you cannot do it through texts alone",
+                "anchor": "不能仅靠文字"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How past events should be presented.",
+            "sourceRole": "correctOption",
+            "targetText": "you cannot do it through texts alone, because only some of the world has ever had texts",
+            "targetParagraphId": "para-2023-yi-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "正确选项的 how past events should be presented 概括了原文 tell the history、do it through texts 这一“如何呈现历史”的论题。"
+          }
+        ]
+      },
+      "q-2023-yi-033": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查作者举库克船长之例的言外之意，需推断该例子证明了什么观点。",
+        "stemTranslationZh": "作者在第二段提及库克船长意在表明什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他的报告很有科学性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "scientific reports",
+              "optionText": "His report was scientific.",
+              "matchType": "exact",
+              "relationNote": "原文 scientific reports 是英方记录的客观描述，作者借此例说明记录“只代表一方”；选项原词照搬 scientific，把背景细节当作作者意图，构成原文词钩干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-2",
+                "quote": "we have scientific reports and the captain’s record of that terrible day",
+                "anchor": "英方的科学报告与船长记录"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他代表了当地人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "the first conflict, at Botany Bay, between Captain Cook’s voyage and the Australian Aboriginals",
+              "sourceHighlight": "between Captain Cook’s voyage and the Australian Aboriginals",
+              "optionText": "He represented the local people.",
+              "optionHighlight": "represented the local people",
+              "explanation": "原文中库克船长一方与澳洲原住民（当地人）是冲突的对立双方，库克代表的是英方而非当地人；选项把对立关系颠倒成“代表当地人”。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-2",
+                "quote": "between Captain Cook’s voyage and the Australian Aboriginals",
+                "anchor": "库克航行 vs 澳洲原住民（对立双方）"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他统治着植物学湾。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He ruled over Botany Bay.",
+              "explanation": "原文只说植物学湾发生了库克航行与原住民的首次冲突，从未提及库克“统治”该地，属原文未提及的无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他的记录是片面的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-d-2",
+                "quote": "From the English side, we have scientific reports and the captain’s record of that terrible day. From the Australian side, we have only a wooden shield",
+                "anchor": "只有英方记录，澳方仅余木盾"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2023-yi-reading-d-2",
+                "quote": "the shield must be questioned and interpreted as deeply and strictly as the written reports",
+                "anchor": "须像审视文字记录一样审视木盾"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "His record was one-sided.",
+            "sourceRole": "correctOption",
+            "targetText": "From the English side, we have scientific reports and the captain’s record of that terrible day. From the Australian side, we have only a wooden shield",
+            "targetParagraphId": "para-2023-yi-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "正确选项 one-sided 对应原文 From the English side… From the Australian side 的对照：库克的 record 只来自英方一侧，故是片面的。"
+          }
+        ]
+      },
+      "q-2023-yi-034": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查第三段画线词 conversation 的指代/词义，需结合前句的同义复现确定其所指。",
+        "stemTranslationZh": "第三段中画线词 “conversation” 指的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "问题。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the problem of miscomprehension from both sides",
+              "optionText": "Problem.",
+              "matchType": "exact",
+              "relationNote": "原文 problem 出现在段首“误解的问题”，与画线 conversation 无指代关系；选项原词照搬 problem 制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "the problem of miscomprehension from both sides",
+                "anchor": "双方误解的问题（无关指代）"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "历史。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "all our first-hand accounts are necessarily twisted, only one half of a dialogue",
+                "anchor": "第一手记录只是对话的一半"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "If we are to find the other half of that conversation, we have to read not just the texts, but the objects",
+                "anchor": "找另一半须兼读文本与实物"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "声音。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "gives them back a voice",
+              "optionText": "Voice.",
+              "matchType": "exact",
+              "relationNote": "原文 voice 指实物让失语者“重获声音”，与画线 conversation 的指代不同；选项借原词 voice 设钩。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "a history told through things gives them back a voice",
+                "anchor": "实物让他们重获声音（非指代项）"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "社会。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "between literate and non-literate societies",
+              "optionText": "Society.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 societies 指有文字与无文字的社会，是讨论对象而非 conversation 的指代；选项用同词族 society 制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "between literate and non-literate societies such as these",
+                "anchor": "有文字与无文字的社会（讨论对象）"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "conversation",
+            "sourceRole": "stem",
+            "targetText": "all our first-hand accounts are necessarily twisted, only one half of a dialogue",
+            "targetParagraphId": "para-2023-yi-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "画线 conversation 与前句 dialogue 同义复现，two halves of a dialogue 即对历史的完整记述，故指代“历史”。"
+          }
+        ]
+      },
+      "q-2023-yi-035": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查文章出处推断，需依据全文“以实物讲述世界历史”的主旨匹配最可能的书名。",
+        "stemTranslationZh": "本文最有可能选自下列哪本书？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "《地图如何讲述世界的故事》。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "If we are to find the other half of that conversation, we have to read not just the texts, but the objects",
+              "sourceEntity": "objects（实物）",
+              "optionText": "How Maps Tell Stories of the World.",
+              "optionEntity": "Maps（地图）",
+              "explanation": "全文主张通过 objects 讲述历史，并未以“地图”为载体；选项把核心载体错配成 maps。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "we have to read not just the texts, but the objects",
+                "anchor": "须读实物 objects（非地图）"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "《澳大利亚简史》。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "If you want to tell the history of the whole world",
+              "sourceHighlight": "the history of the whole world",
+              "optionText": "A Short History of Australia.",
+              "optionHighlight": "A Short History of Australia",
+              "explanation": "原文讲的是“整个世界的历史”，澳大利亚只是其中一个举例；选项把全球范围缩小为澳大利亚一国之史。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-1",
+                "quote": "If you want to tell the history of the whole world",
+                "anchor": "讲述整个世界的历史"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "《用100件物品讲述世界历史》。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "a history told through things gives them back a voice",
+                "anchor": "以实物讲述的历史"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2023-yi-reading-d-1",
+                "quote": "If you want to tell the history of the whole world",
+                "anchor": "讲述整个世界的历史"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "《艺术作品如何讲述故事》。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "the objects they made: a history told through things gives them back a voice",
+              "sourceEntity": "things / objects（实物）",
+              "optionText": "How Art Works Tell Stories.",
+              "optionEntity": "Art Works（艺术作品）",
+              "explanation": "原文载体是泛指的 things/objects（盾牌、所造之物等），并非专指“艺术作品”；选项将实物错配为 art works，范围与对象均不符。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-yi-reading-d-3",
+                "quote": "a history told through things gives them back a voice",
+                "anchor": "以 things 讲述（非 art works）"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "A History of the World in 100 Objects.",
+            "sourceRole": "correctOption",
+            "targetText": "a history told through things gives them back a voice",
+            "targetParagraphId": "para-2023-yi-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "书名 A History of the World in Objects 与原文 the history of the whole world、a history told through things 高度吻合：以 objects/things 讲述世界历史。"
+          }
+        ]
+      }
+    }
+  }
+}

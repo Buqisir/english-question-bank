@@ -1,0 +1,1376 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2023-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-yi-reading-a",
+    "group-2023-yi-reading-b",
+    "group-2023-yi-reading-c",
+    "group-2023-yi-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19T00:00:00Z"
+  },
+  "groups": {
+    "group-2023-yi-reading-a": {
+      "overview": "本文以 PRACTITIONERS（行医者）为题，介绍了历史上四位女性医生的事迹，按时间顺序逐位呈现：意大利的 Jacqueline、爱尔兰的 James Barry、中国的 Tan Yunxian、以及非裔美国人 Rebecca Lee Crumpler，突出女性从医所面对的阻碍与各自的成就。",
+      "discourseStructure": {
+        "summary": "全文为一段式人物介绍，内部按四位女性医生依次铺陈，每位介绍其出身、行医经历与代表性成就，呈并列结构。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "summary": "依次介绍四位历史上的女性行医者：Jacqueline 在巴黎行医并做外科手术，1322 年因非法行医受审被禁；James Barry 女扮男装入爱丁堡大学学医，成为外科医生并服役军中；Tan Yunxian 自祖辈习医，通过官方考试行医并著书；Rebecca Lee Crumpler 成为首位获得医学学位的非裔美国女性。",
+            "function": "并列列举四位女性医生的生平与成就，构成全文主体。"
+          }
+        ]
+      }
+    },
+    "group-2023-yi-reading-b": {
+      "overview": "本文是一篇第一人称记叙文，作者讲述自己在地形单调的爱荷华州从事风景摄影的经历与心得，重点强调时间管理对风景摄影的决定性作用，并以一次去 Devil's Lake 拍摄日落的经历作为例证。",
+      "discourseStructure": {
+        "summary": "全文先点明在中西部拍风景的挑战，再讲应对方式与拍摄心得，最后用一次具体的湖边拍摄经历印证'把握时机、管理时间'的重要性。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-yi-reading-b-1",
+            "summary": "指出在爱荷华州做风景摄影师颇具挑战，因为该州地形缺乏变化。",
+            "function": "开篇点题，提出作者作为中西部风景摄影师面临的核心挑战。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-b-2",
+            "summary": "尽管中西部风景大同小异，作者仍能在山丘湖泊中找到特色，并常与朋友长途奔赴州立公园或乡村拍照。",
+            "function": "说明作者应对地形单调挑战的做法。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-b-3",
+            "summary": "强调在对的时间出现在对的地点至关重要，作者常提早出发以免错过拍摄时机。",
+            "function": "提出风景摄影成功的关键——把握时机、提前到位（时间管理）。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-b-4",
+            "summary": "记叙一次去 Devil's Lake 拍日落的经历：因未标记路线差点错过日落，匆忙架设设备，但照片仍是佳作，只是若管理好时间会更好。",
+            "function": "用具体事例印证时间管理的重要性，并表达对成果的态度。"
+          }
+        ]
+      }
+    },
+    "group-2023-yi-reading-c": {
+      "overview": "本文探讨英国美食形象的转变：尽管英国饮食长期被认为乏善可陈，但电视烹饪节目和明星厨师正在改变英国人的烹饪习惯与观念，并用调研数据加以佐证。",
+      "discourseStructure": {
+        "summary": "由提出英国食物的刻板印象切入，转向电视厨师带来的改变，最后用市场调研数据量化这种影响，并以男性厨师上电视收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-yi-reading-c-1",
+            "summary": "提出人们对英国食物乏味、不起眼的刻板印象，并反问其是否真的如此，指出英国正涌现更多上电视的顶级厨师。",
+            "function": "提出话题与刻板印象，设置转折，引出下文。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-c-2",
+            "summary": "说明正是这些电视厨师而非广告，让英国人远离传统饮食、变得更敢于尝试，传统饮食人数下降，报读烹饪课程人数上升。",
+            "function": "阐释电视厨师对烹饪观念与行为的影响。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-c-3",
+            "summary": "引用市场调研数据：五分之一尝试新食物、近三分之一使用更多样配料、近四分之一买更好配料、四分之一更自信；并指出男性厨师增多使男孩爱烹饪不再被视为\"不酷\"。",
+            "function": "用具体数据量化电视节目的影响，并以男性厨师收束。"
+          }
+        ]
+      }
+    },
+    "group-2023-yi-reading-d": {
+      "overview": "本文为一部以实物讲述世界历史的著作的导言。作者论述：仅凭文字无法书写不偏袒任何一方的全球史，因为世界上多数地区、多数时间并无文字记录；要听到失语者（非文字社会、失败一方）的声音，必须既读文本、也读实物。",
+      "discourseStructure": {
+        "summary": "全文由“提出问题—举例论证—升华主张”三段构成：第一段指出仅靠文字无法书写完整的世界史；第二段以库克船长航行与澳大利亚原住民的冲突为例，说明文本只代表一方；第三段进一步指出胜利者的记录被扭曲、失败者只能借助实物发声，故须兼读文本与实物。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2023-yi-reading-d-1",
+            "summary": "要书写不偏袒任何一方的世界史，不能只靠文字，因为世界大部分地区在大部分时间里都没有文字；文字是人类较晚的成就，许多有文字的社会也用实物记录其关切。",
+            "function": "提出全文核心论题：仅凭文字不足以呈现完整的过去。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-d-2",
+            "summary": "理想的历史应文本与实物并重，但常做不到。以植物学湾库克船长航行与澳洲原住民的首次冲突为例：英方留有科学报告与船长记录，澳方仅留下一面逃亡者丢下的木盾；要还原真相，对盾的审视须与文字记录一样严格。",
+            "function": "举具体史例，论证单方文本记录的局限，须借助实物。"
+          },
+          {
+            "paragraphId": "para-2023-yi-reading-d-3",
+            "summary": "除双方误解外，胜利者还会扭曲事实，因为往往只有胜者会书写；失败一方只能靠实物讲述自己的故事。塔伊诺人、原住民、贝宁人、印加人都借所造之物重获声音。第一手记录只是对话的一半，要找到另一半，须既读文本又读实物。",
+            "function": "升华主张：实物为失语者发声，须兼读文本与实物方得完整。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2023-yi-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Jacqueline 与 James 两位人物信息的比对，找出二者的共同点。",
+      "stemTranslationZh": "Jacqueline 和 James 有什么共同之处？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "做教学工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "两人都从事教学工作。",
+            "explanation": "原文未提及 Jacqueline 或 James 从事任何教学工作，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "都被聘为内科医生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "sourceQuote": "She qualified as a surgeon in 1813, then joined the British Army",
+            "sourceEntity": "James Barry（外科医生 surgeon）",
+            "optionText": "Being hired as physicians.",
+            "optionEntity": "physicians（内科医生）",
+            "explanation": "仅 Jacqueline 以 physician 身份行医，James Barry 取得的是 surgeon 资格，二者并非都是 physician，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "She qualified as a surgeon in 1813, then joined the British Army",
+              "anchor": "James 是 surgeon"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "做外科手术。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "she worked as a physician and performed surgery",
+              "anchor": "Jacqueline 做手术"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "She qualified as a surgeon in 1813, then joined the British Army",
+              "anchor": "James 是 surgeon"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "被禁止行医。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "she was banned from medicine",
+            "sourceHighlight": "she was banned from medicine",
+            "optionText": "Being banned from medicine.",
+            "optionHighlight": "banned from medicine",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "explanation": "被禁止行医的只有 Jacqueline 一人，原文并未提及 James 被禁；将单人情形扩大为二人共同点，属范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "she was banned from medicine",
+              "anchor": "仅 Jacqueline 被禁"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Performing surgery.",
+          "sourceRole": "correctOption",
+          "targetText": "she worked as a physician and performed surgery",
+          "targetParagraphId": "para-2023-yi-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 Performing surgery 对应 Jacqueline 段 performed surgery；James 段 qualified as a surgeon 亦指做外科手术，两人共同点即此。"
+        }
+      ]
+    },
+    "q-2023-yi-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Tan Yunxian 与其他三位行医者的对比，找出 Tan 区别于他人的独有之处。",
+      "stemTranslationZh": "Tan Yunxian 与其他几位行医者有何不同？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她写了一本书。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "In 1511, Tan wrote a book, Sayings of a Female Doctor",
+              "anchor": "Tan 著书"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她经历了审判。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "sourceQuote": "In 1322 she was tried for practicing unlawfully",
+            "sourceEntity": "Jacqueline（受审者）",
+            "optionText": "She went through trials.",
+            "optionEntity": "She（指 Tan Yunxian）",
+            "explanation": "经历审判的是 Jacqueline，而非 Tan Yunxian，将他人经历错配到 Tan 身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "In 1322 she was tried for practicing unlawfully",
+              "anchor": "受审的是 Jacqueline"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她做牙医工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Tan Yunxian 做牙医工作。",
+            "explanation": "原文称 Tan 为 physician 并 treated women from all walks of life，未提及其从事牙医工作，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她受过正规教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "sourceQuote": "was a Chinese physician who learned her skills from her grandparents",
+            "sourceEntity": "Tan Yunxian（从祖辈习医）",
+            "optionText": "She had formal education.",
+            "optionEntity": "formal education（正规教育）",
+            "explanation": "Tan 的医术习自祖辈而非正规院校；正规教育（如 Edinburgh University、Boston 医学院）属于 James、Rebecca 等人，故该选项并非 Tan 区别于他人的特征，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "was a Chinese physician who learned her skills from her grandparents",
+              "anchor": "Tan 自祖辈习医"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "She wrote a book.",
+          "sourceRole": "correctOption",
+          "targetText": "In 1511, Tan wrote a book, Sayings of a Female Doctor",
+          "targetParagraphId": "para-2023-yi-reading-a-1",
+          "relationType": "locationCue",
+          "note": "选项 She wrote a book 直接对应原文 Tan wrote a book, Sayings of a Female Doctor，这是其他三位行医者均未提及的独有之处。"
+        }
+      ]
+    },
+    "q-2023-yi-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查定位首位获得医学学位的非裔美国人对应的具体人物。",
+      "stemTranslationZh": "谁是首位获得医学学位的非裔美国人？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Jacqueline Felice de Almania。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "sourceQuote": "she was the first African American woman to receive a medical degree",
+            "sourceEntity": "Rebecca Lee Crumpler",
+            "optionText": "Jacqueline Felice de Almania.",
+            "optionEntity": "Jacqueline Felice de Almania",
+            "explanation": "首位获得医学学位的非裔美国女性是 Rebecca Lee Crumpler，而非 Jacqueline，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "she was the first African American woman to receive a medical degree",
+              "anchor": "对应 Rebecca"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Tan Yunxian。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "sourceQuote": "she was the first African American woman to receive a medical degree",
+            "sourceEntity": "Rebecca Lee Crumpler",
+            "optionText": "Tan Yunxian.",
+            "optionEntity": "Tan Yunxian",
+            "explanation": "首位获得医学学位的非裔美国女性是 Rebecca Lee Crumpler，Tan Yunxian 是中国医生，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "she was the first African American woman to receive a medical degree",
+              "anchor": "对应 Rebecca"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "James Barry。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-a-1",
+            "sourceQuote": "she was the first African American woman to receive a medical degree",
+            "sourceEntity": "Rebecca Lee Crumpler",
+            "optionText": "James Barry.",
+            "optionEntity": "James Barry",
+            "explanation": "首位获得医学学位的非裔美国女性是 Rebecca Lee Crumpler，James Barry 在爱丁堡大学学医，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "she was the first African American woman to receive a medical degree",
+              "anchor": "对应 Rebecca"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Rebecca Lee Crumpler。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "she was the first African American woman to receive a medical degree",
+              "anchor": "Rebecca 首获医学学位"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2023-yi-reading-a-1",
+              "quote": "Four years later, she was the first African American woman to receive a medical degree",
+              "anchor": "首位非裔美国女性"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the first African American with a medical degree",
+          "sourceRole": "stem",
+          "targetText": "she was the first African American woman to receive a medical degree",
+          "targetParagraphId": "para-2023-yi-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干 first African American with a medical degree 与 Rebecca 段 the first African American woman to receive a medical degree 直接对应，主语 she 指 Rebecca Lee Crumpler。"
+        }
+      ]
+    },
+    "q-2023-yi-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者作为中西部风景摄影师如何应对地形单调这一挑战的具体做法。",
+      "stemTranslationZh": "作为中西部的风景摄影师，作者是如何应对这一挑战的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过与其他摄影师组队合作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+            "sourceEntity": "a few of my friends",
+            "optionText": "By teaming up with other photographers.",
+            "optionEntity": "other photographers",
+            "explanation": "原文说作者常和'朋友'(a few of my friends)一起出行，并未说这些人是'其他摄影师'，对象被偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-2",
+              "quote": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+              "anchor": "with a few of my friends"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过在乡村或州立公园拍摄。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-b-2",
+              "quote": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+              "anchor": "to state parks or to the countryside ... take photos"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过研究地理条件。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the corn state lacks geographical variation",
+            "optionText": "By studying the geographical conditions.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 geographical variation 只是用来说明地形单调的'挑战'本身，选项借 geographical 一词制造干扰，文中并未说作者通过'研究地理条件'来应对。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-1",
+              "quote": "the corn state lacks geographical variation",
+              "anchor": "geographical variation"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过在玉米地里布置场景。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By creating settings in the corn fields.",
+            "explanation": "原文仅提到爱荷华是'corn state'，并未提及作者在玉米地里'布置场景'拍摄，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By shooting in the countryside or state parks.",
+          "sourceRole": "correctOption",
+          "targetText": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+          "targetParagraphId": "para-2023-yi-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "选项 shooting in the countryside or state parks 是原文 travel ... to state parks or to the countryside ... take photos 的同义替换。"
+        }
+      ]
+    },
+    "q-2023-yi-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者认为风景摄影成功的关键是什么。",
+      "stemTranslationZh": "根据作者所述，成功的风景摄影的关键是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "合理的时间管理。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-b-3",
+              "quote": "Being at the right place at the right time is decisive in any style of photography.",
+              "anchor": "right place at the right time is decisive"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-yi-reading-b-3",
+              "quote": "I often leave early to seek the right destinations so I can set up early to avoid missing the moment I am attempting to photograph.",
+              "anchor": "leave early ... set up early"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "良好的拍摄技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Good shooting techniques.",
+            "explanation": "原文强调的是'在对的时间到对的地点'即时间与时机的把握，并未把'拍摄技巧'列为成功关键，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "冒险精神。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "to go on adventures",
+            "optionText": "Adventurous spirit.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 go on adventures 只是描述作者外出拍照的方式，选项借 adventure 的同根词 adventurous 制造干扰，文中并未将'冒险精神'作为成功关键。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-2",
+              "quote": "to go on adventures",
+              "anchor": "go on adventures"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "独特的风格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "decisive in any style of photography",
+            "optionText": "Distinctive styles.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 any style of photography 与第二段 distinctive character 的词语在此被拼接误导，选项 Distinctive styles 并非作者所说的成功关键。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-3",
+              "quote": "decisive in any style of photography",
+              "anchor": "any style of photography"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Proper time management.",
+          "sourceRole": "correctOption",
+          "targetText": "Being at the right place at the right time is decisive in any style of photography.",
+          "targetParagraphId": "para-2023-yi-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项 Proper time management 是原文 at the right time ... is decisive 以及 leave early / set up early 所体现的'时间管理'的概括性同义替换。"
+        }
+      ]
+    },
+    "q-2023-yi-026": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查根据作者与朋友去 Devil's Lake 的经历能推断出什么。",
+      "stemTranslationZh": "从作者与朋友去 Devil's Lake 的那次出行中，我们可以推断出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们对紫色石英岩石着了迷。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "After we found a crazy-looking road that hung over a bunch of rocks",
+            "optionText": "They went crazy with the purple quartz rock.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 crazy-looking 形容的是那条'看起来很疯狂'的路，选项借 crazy 一词曲解为他们对石英岩石'着迷/疯狂'，属词钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-4",
+              "quote": "After we found a crazy-looking road that hung over a bunch of rocks",
+              "anchor": "a crazy-looking road"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们在等待日落时感到紧张。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+            "sourceHighlight": "stressful getting lights and cameras set up in the limited time",
+            "optionText": "They felt stressed while waiting for the suset.",
+            "optionHighlight": "while waiting for the suset",
+            "explanation": "原文的'紧张(stressful)'发生在'找到地点后、在有限时间内架设灯光相机'时，而非'等待日落时'，选项改换了产生紧张的具体情境。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-b-4",
+              "quote": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+              "anchor": "stressful ... in the limited time"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们比预期更晚到达拍摄地点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-b-4",
+              "quote": "However, we did not mark the route (路线) so we ended up almost missing the sunset entirely.",
+              "anchor": "did not mark the route ... almost missing the sunset"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们的设备出了问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They had problems with their equipment.",
+            "explanation": "原文只说在有限时间内架设灯光和相机很紧张，并未提及设备本身出现故障或问题，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They reached the shooting spot later than expected.",
+          "sourceRole": "correctOption",
+          "targetText": "However, we did not mark the route (路线) so we ended up almost missing the sunset entirely.",
+          "targetParagraphId": "para-2023-yi-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "选项 reached the shooting spot later than expected 是对原文 did not mark the route ... almost missing the sunset entirely（因未标路线导致差点错过日落、即到位过晚）的推断性同义替换。"
+        }
+      ]
+    },
+    "q-2023-yi-027": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查作者对自己在 Devil's Lake 拍摄的照片持何种态度。",
+      "stemTranslationZh": "作者如何看待自己在 Devil's Lake 拍摄的照片？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "好笑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Amusing.",
+            "explanation": "原文称这些照片是他最好的作品之一，未表达任何'好笑/有趣'的意味，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "令人满意的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-b-4",
+              "quote": "Still, looking back on the photos, they are some of my best shots",
+              "anchor": "some of my best shots"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "令人鼓舞的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Encouraging.",
+            "explanation": "原文表达的是对照片成果的满意，而非'受到鼓舞/激励'，文中没有这层含义，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "令人安慰的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Comforting.",
+            "explanation": "原文体现的是对成片质量的认可与满意，并无'安慰'之意，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Satisfying.",
+          "sourceRole": "correctOption",
+          "targetText": "they are some of my best shots",
+          "targetParagraphId": "para-2023-yi-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "作者用 some of my best shots（我最好的作品之一）表达对照片的满意，与选项 Satisfying 态度一致。"
+        }
+      ]
+    },
+    "q-2023-yi-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查人们对英国食物的通常印象，定位首段对刻板印象的描述。",
+      "stemTranslationZh": "人们通常如何看待英国食物？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它简单而朴素。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-c-1",
+              "quote": "Probably fish and chips",
+              "anchor": "炸鱼薯条"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-yi-reading-c-1",
+              "quote": "a Sunday dinner of meat and two vegetables.",
+              "anchor": "肉配两样蔬菜"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它营养丰富。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "British food is rich in nutrition.",
+            "explanation": "原文未提及英国食物营养是否丰富，只描述其简单、被认为乏味，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它缺乏地道的味道。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "British food lacks authentic tastes.",
+            "explanation": "原文说英国食物被认为\"乏味/不起眼\"(uninteresting/less-than-impressive)，但从未谈到\"地道(authentic)\"的问题，缺乏与\"地道味道\"对应的依据，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它配得上很高的声誉。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "paragraphId": "para-2023-yi-reading-c-1",
+            "sourceQuote": "Britain has a reputation for less-than-impressive cuisine",
+            "sourceHighlight": "less-than-impressive",
+            "optionText": "It deserves a high reputation.",
+            "optionHighlight": "a high reputation",
+            "explanation": "原文说英国以\"不太出色的(less-than-impressive)菜肴\"闻名，与\"配得上很高声誉\"评价相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-c-1",
+              "quote": "Britain has a reputation for less-than-impressive cuisine",
+              "anchor": "不太出色的声誉"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is simple and plain.",
+          "sourceRole": "correctOption",
+          "targetText": "a Sunday dinner of meat and two vegetables.",
+          "targetParagraphId": "para-2023-yi-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "正确项 simple and plain 对应原文举例的 fish and chips 与 a Sunday dinner of meat and two vegetables，即用朴素常见的食物体现\"简单朴素\"。"
+        }
+      ]
+    },
+    "q-2023-yi-029": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对英国电视烹饪节目作用的概括，需归纳全文反复强调其\"改变观念与行为\"的影响力。",
+      "stemTranslationZh": "哪一项最能描述英国电视上的烹饪节目？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "权威的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cookery programmes are authoritative.",
+            "explanation": "原文强调节目改变了人们的观念，但未说它们\"权威\"，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有创意的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cookery programmes are creative.",
+            "explanation": "原文未评价节目本身是否有创意，仅说它让英国人变得更敢于尝试，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有利可图的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cookery programmes are profitable.",
+            "explanation": "原文谈到厨师菜谱登上畅销榜，但并未说烹饪节目\"盈利/有利可图\"，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有影响力的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-c-2",
+              "quote": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
+              "anchor": "电视厨师改变饮食习惯"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2023-yi-reading-c-2",
+              "quote": "It seems that TV programmes have helped change what people think about cooking.",
+              "anchor": "改变人们对烹饪的看法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Influential.",
+          "sourceRole": "correctOption",
+          "targetText": "It seems that TV programmes have helped change what people think about cooking.",
+          "targetParagraphId": "para-2023-yi-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "Influential(有影响力)对应原文 TV programmes have helped change what people think about cooking，即节目改变了人们的烹饪观念，体现其影响力。"
+        }
+      ]
+    },
+    "q-2023-yi-030": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查数据细节定位：现在使用更多样配料的人所占比例，需将文字百分比与选项数字对应。",
+      "stemTranslationZh": "现在使用更多样配料的人所占的比例是多少？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "20%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-c-3",
+            "sourceQuote": "1 in 5 Britons say that watching cookery programmes on TV has encouraged them to try different food",
+            "sourceEntity": "try different food",
+            "optionText": "20%.",
+            "optionEntity": "using more diverse ingredients",
+            "explanation": "20%(1 in 5)对应的是\"被鼓励尝试不同食物\"，而非\"使用更多样配料\"，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "quote": "1 in 5 Britons say that watching cookery programmes on TV has encouraged them to try different food",
+              "anchor": "五分之一尝试新食物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "24%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-c-3",
+            "sourceQuote": "just under 1 in 4 say they now buy better quality ingredients than before",
+            "sourceEntity": "buy better quality ingredients",
+            "optionText": "24%.",
+            "optionEntity": "using more diverse ingredients",
+            "explanation": "24%(just under 1 in 4)对应的是\"购买更优质配料\"，而非\"使用更多样配料\"，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "quote": "just under 1 in 4 say they now buy better quality ingredients than before",
+              "anchor": "近四分之一买更优质配料"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "25%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "paragraphId": "para-2023-yi-reading-c-3",
+            "sourceQuote": "One in four adults say that TV chefs have made them much more confident about expanding their cookery knowledge and skills",
+            "sourceEntity": "more confident about expanding their cookery knowledge and skills",
+            "optionText": "25%.",
+            "optionEntity": "using more diverse ingredients",
+            "explanation": "25%(One in four)对应的是\"对扩展烹饪知识技能更自信\"，而非\"使用更多样配料\"，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "quote": "One in four adults say that TV chefs have made them much more confident about expanding their cookery knowledge and skills",
+              "anchor": "四分之一更自信"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "33%。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "quote": "Almost one third say they now use a wider variety of ingredients (配料)",
+              "anchor": "近三分之一用更多样配料"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "using more diverse ingredients",
+          "sourceRole": "stem",
+          "targetText": "Almost one third say they now use a wider variety of ingredients (配料)",
+          "targetParagraphId": "para-2023-yi-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "题干 using more diverse ingredients 对应原文 use a wider variety of ingredients；Almost one third 即约 33%。"
+        }
+      ]
+    },
+    "q-2023-yi-031": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查段落延展推断：依据末段结尾句的话题走向，推断作者接下来最可能继续谈论的内容。",
+      "stemTranslationZh": "作者接下来可能会继续谈论什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "其他国家的烹饪艺术。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The art of cooking in other countries.",
+            "explanation": "全文聚焦英国(British/UK)，从未涉及其他国家的烹饪，与结尾话题无衔接，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "电视节目中的男性厨师。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-c-3",
+              "quote": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
+              "anchor": "电视上男性厨师增多"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "英国的餐桌礼仪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Table manners in the UK.",
+            "explanation": "原文讨论烹饪习惯与节目影响，从未涉及餐桌礼仪，与末段话题无关，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "关于大胃王的研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Studies of big eaters.",
+            "explanation": "原文谈的是烹饪兴趣与配料选择，并非饭量大小，\"大胃王研究\"无任何文本依据，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Male chefs on TV programmes.",
+          "sourceRole": "correctOption",
+          "targetText": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
+          "targetParagraphId": "para-2023-yi-reading-c-3",
+          "relationType": "locationCue",
+          "note": "末段以 an increasing number of male chefs on TV 收尾，正是承接此话题，作者最可能继续谈 Male chefs on TV programmes。"
+        }
+      ]
+    },
+    "q-2023-yi-032": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查第一段的主旨大意，需概括作者在首段提出的核心论点。",
+      "stemTranslationZh": "第一段主要讲的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "过去的事件应当如何被呈现。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "quote": "you cannot do it through texts alone, because only some of the world has ever had texts",
+              "anchor": "不能只靠文字呈现历史"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "quote": "recorded their concerns not only in writing but in things",
+              "anchor": "既用文字也用实物记录"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人类所关切的事物是什么。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "recorded their concerns not only in writing but in things",
+            "sourceHighlight": "their concerns",
+            "optionText": "What humanity is concerned about.",
+            "optionHighlight": "What humanity is concerned about",
+            "explanation": "原文中“concerns”只是说明各社会“用文字和实物记录其关切”这一现象，用以支撑“如何呈现历史”的论点；选项把一个支撑细节当成段落主旨，偷换了讨论范围。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "quote": "recorded their concerns not only in writing but in things",
+              "anchor": "记录其关切（仅为细节）"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "事实是否比言辞更有说服力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Whether facts speak louder than words.",
+            "explanation": "原文比较的是“文字”与“实物”两种记录方式，并未讨论“事实是否比言辞更有力”这一命题，属原文未提及的无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "书面语言为何可靠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "you cannot do it through texts alone",
+            "sourceHighlight": "cannot do it through texts alone",
+            "optionText": "Why written language is reliable.",
+            "optionHighlight": "written language is reliable",
+            "explanation": "第一段旨在指出仅靠文字不足以书写完整历史，强调文字的局限；选项却称“书面语言为何可靠”，与原文态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "quote": "you cannot do it through texts alone",
+              "anchor": "不能仅靠文字"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How past events should be presented.",
+          "sourceRole": "correctOption",
+          "targetText": "you cannot do it through texts alone, because only some of the world has ever had texts",
+          "targetParagraphId": "para-2023-yi-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "正确选项的 how past events should be presented 概括了原文 tell the history、do it through texts 这一“如何呈现历史”的论题。"
+        }
+      ]
+    },
+    "q-2023-yi-033": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查作者举库克船长之例的言外之意，需推断该例子证明了什么观点。",
+      "stemTranslationZh": "作者在第二段提及库克船长意在表明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他的报告很有科学性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "scientific reports",
+            "optionText": "His report was scientific.",
+            "matchType": "exact",
+            "relationNote": "原文 scientific reports 是英方记录的客观描述，作者借此例说明记录“只代表一方”；选项原词照搬 scientific，把背景细节当作作者意图，构成原文词钩干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-2",
+              "quote": "we have scientific reports and the captain’s record of that terrible day",
+              "anchor": "英方的科学报告与船长记录"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他代表了当地人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the first conflict, at Botany Bay, between Captain Cook’s voyage and the Australian Aboriginals",
+            "sourceHighlight": "between Captain Cook’s voyage and the Australian Aboriginals",
+            "optionText": "He represented the local people.",
+            "optionHighlight": "represented the local people",
+            "explanation": "原文中库克船长一方与澳洲原住民（当地人）是冲突的对立双方，库克代表的是英方而非当地人；选项把对立关系颠倒成“代表当地人”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-2",
+              "quote": "between Captain Cook’s voyage and the Australian Aboriginals",
+              "anchor": "库克航行 vs 澳洲原住民（对立双方）"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他统治着植物学湾。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He ruled over Botany Bay.",
+            "explanation": "原文只说植物学湾发生了库克航行与原住民的首次冲突，从未提及库克“统治”该地，属原文未提及的无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他的记录是片面的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-d-2",
+              "quote": "From the English side, we have scientific reports and the captain’s record of that terrible day. From the Australian side, we have only a wooden shield",
+              "anchor": "只有英方记录，澳方仅余木盾"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-yi-reading-d-2",
+              "quote": "the shield must be questioned and interpreted as deeply and strictly as the written reports",
+              "anchor": "须像审视文字记录一样审视木盾"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "His record was one-sided.",
+          "sourceRole": "correctOption",
+          "targetText": "From the English side, we have scientific reports and the captain’s record of that terrible day. From the Australian side, we have only a wooden shield",
+          "targetParagraphId": "para-2023-yi-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "正确选项 one-sided 对应原文 From the English side… From the Australian side 的对照：库克的 record 只来自英方一侧，故是片面的。"
+        }
+      ]
+    },
+    "q-2023-yi-034": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第三段画线词 conversation 的指代/词义，需结合前句的同义复现确定其所指。",
+      "stemTranslationZh": "第三段中画线词 “conversation” 指的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the problem of miscomprehension from both sides",
+            "optionText": "Problem.",
+            "matchType": "exact",
+            "relationNote": "原文 problem 出现在段首“误解的问题”，与画线 conversation 无指代关系；选项原词照搬 problem 制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "the problem of miscomprehension from both sides",
+              "anchor": "双方误解的问题（无关指代）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "历史。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "all our first-hand accounts are necessarily twisted, only one half of a dialogue",
+              "anchor": "第一手记录只是对话的一半"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "If we are to find the other half of that conversation, we have to read not just the texts, but the objects",
+              "anchor": "找另一半须兼读文本与实物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "声音。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "gives them back a voice",
+            "optionText": "Voice.",
+            "matchType": "exact",
+            "relationNote": "原文 voice 指实物让失语者“重获声音”，与画线 conversation 的指代不同；选项借原词 voice 设钩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "a history told through things gives them back a voice",
+              "anchor": "实物让他们重获声音（非指代项）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "社会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "between literate and non-literate societies",
+            "optionText": "Society.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 societies 指有文字与无文字的社会，是讨论对象而非 conversation 的指代；选项用同词族 society 制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "between literate and non-literate societies such as these",
+              "anchor": "有文字与无文字的社会（讨论对象）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "conversation",
+          "sourceRole": "stem",
+          "targetText": "all our first-hand accounts are necessarily twisted, only one half of a dialogue",
+          "targetParagraphId": "para-2023-yi-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "画线 conversation 与前句 dialogue 同义复现，two halves of a dialogue 即对历史的完整记述，故指代“历史”。"
+        }
+      ]
+    },
+    "q-2023-yi-035": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查文章出处推断，需依据全文“以实物讲述世界历史”的主旨匹配最可能的书名。",
+      "stemTranslationZh": "本文最有可能选自下列哪本书？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "《地图如何讲述世界的故事》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "If we are to find the other half of that conversation, we have to read not just the texts, but the objects",
+            "sourceEntity": "objects（实物）",
+            "optionText": "How Maps Tell Stories of the World.",
+            "optionEntity": "Maps（地图）",
+            "explanation": "全文主张通过 objects 讲述历史，并未以“地图”为载体；选项把核心载体错配成 maps。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "we have to read not just the texts, but the objects",
+              "anchor": "须读实物 objects（非地图）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "《澳大利亚简史》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "If you want to tell the history of the whole world",
+            "sourceHighlight": "the history of the whole world",
+            "optionText": "A Short History of Australia.",
+            "optionHighlight": "A Short History of Australia",
+            "explanation": "原文讲的是“整个世界的历史”，澳大利亚只是其中一个举例；选项把全球范围缩小为澳大利亚一国之史。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "quote": "If you want to tell the history of the whole world",
+              "anchor": "讲述整个世界的历史"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "《用100件物品讲述世界历史》。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "a history told through things gives them back a voice",
+              "anchor": "以实物讲述的历史"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-2023-yi-reading-d-1",
+              "quote": "If you want to tell the history of the whole world",
+              "anchor": "讲述整个世界的历史"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "《艺术作品如何讲述故事》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the objects they made: a history told through things gives them back a voice",
+            "sourceEntity": "things / objects（实物）",
+            "optionText": "How Art Works Tell Stories.",
+            "optionEntity": "Art Works（艺术作品）",
+            "explanation": "原文载体是泛指的 things/objects（盾牌、所造之物等），并非专指“艺术作品”；选项将实物错配为 art works，范围与对象均不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2023-yi-reading-d-3",
+              "quote": "a history told through things gives them back a voice",
+              "anchor": "以 things 讲述（非 art works）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A History of the World in 100 Objects.",
+          "sourceRole": "correctOption",
+          "targetText": "a history told through things gives them back a voice",
+          "targetParagraphId": "para-2023-yi-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "书名 A History of the World in Objects 与原文 the history of the whole world、a history told through things 高度吻合：以 objects/things 讲述世界历史。"
+        }
+      ]
+    }
+  }
+}

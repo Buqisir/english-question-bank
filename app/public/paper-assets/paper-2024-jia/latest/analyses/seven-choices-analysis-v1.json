@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2024-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-jia-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-jia-seven-choices": {
+      "overview": "本文是一篇说明文，主题为“适度饮食”（moderation），即只吃身体所需的量、吃到满足而不过饱。全文先界定 moderation 的含义，再分点给出实现适度饮食的若干建议：放慢进食速度、与他人共餐并远离不健康零食、控制情绪化进食、全天合理分配饮食。七选五的五个空分布在首段定义处和各建议段的段首/段中，主要考查段首主题句的概括能力以及与上下文的话题场对齐和逻辑衔接。",
+      "discourseStructure": {
+        "summary": "首段定义 moderation 并以转折引出“不必告别所爱食物”；随后四段各提出一条适度饮食的具体策略，每段多以一个主题句或建议句领起，后续句子展开说明，构成“总—分”式的劝导性说明结构。",
+        "units": [
+          {
+            "unitId": "unit-2024-jia-seven-def",
+            "heading": "What is moderation",
+            "paragraphIds": [
+              "para-2024-jia-seven-title"
+            ],
+            "summary": "界定 moderation：只吃身体所需，吃到满足而不过饱；并转折说明这并不意味着要告别喜爱的食物。"
+          },
+          {
+            "unitId": "unit-2024-jia-seven-slow",
+            "heading": "Take your time",
+            "paragraphIds": [
+              "para-2024-jia-seven-p1"
+            ],
+            "summary": "建议放慢进食速度，把食物当作营养来源而非匆忙果腹；因为大脑需要几分钟才能告诉身体已吃饱，所以要慢吃并在感到饱之前停止。"
+          },
+          {
+            "unitId": "unit-2024-jia-seven-others",
+            "heading": "Eat with others",
+            "paragraphIds": [
+              "para-2024-jia-seven-p2"
+            ],
+            "summary": "建议尽量与他人共餐，独自在电视或电脑前进食易导致无意识暴食；并提醒注意手边食物，身边备有不健康零食会让适度饮食更难。"
+          },
+          {
+            "unitId": "unit-2024-jia-seven-emotion",
+            "heading": "Control emotional eating",
+            "paragraphIds": [
+              "para-2024-jia-seven-p3"
+            ],
+            "summary": "建议控制情绪化进食：我们常借食物排解悲伤、孤独、无聊等负面情绪，但学会更健康的情绪管理方式即可重获对饮食和情绪的掌控。"
+          },
+          {
+            "unitId": "unit-2024-jia-seven-allday",
+            "heading": "Eat throughout the day",
+            "paragraphIds": [
+              "para-2024-jia-seven-p4"
+            ],
+            "summary": "建议全天合理进食：健康早餐启动新陈代谢，少量多餐维持能量，避免深夜进食并保持每日较长的消化间歇，有助于调节体重。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-jia-036": {
+      "blankId": "blank-2024-jia-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "eating only as much food as your body needs",
+        "satisfied at the end of a meal",
+        "not too full"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jia-seven-title",
+        "headingAnchor": "What is moderation",
+        "beforeQuote": "You should feel satisfied at the end of a meal, but not too full.",
+        "afterQuote": "But it doesn’t mean saying goodbye to the foods you love."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "eating less than we do now",
+          "signalSide": "option",
+          "targetText": "eating only as much food as your body needs / not too full",
+          "relation": "选项 eating less than we do now 与首段“只吃身体所需、不过饱”的定义同属“减少进食量”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "not too full",
+          "signalSide": "context-before",
+          "targetText": "eating less than we do now",
+          "relation": "空前 not too full 与选项 eating less 一致，都指吃得比现在少。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "context-after",
+          "targetText": "moderation means eating less than we do now",
+          "relation": "空后 But it doesn’t mean… 与所填“适度即少吃”形成转折：少吃但不必放弃所爱食物。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "选项 F 承接首段对 moderation 的定义，点明“对多数人而言，适度意味着比现在吃得更少”，与空前“吃到满足而不过饱”一致，又被空后 But 转折补充“但不必告别所爱食物”。",
+        "matchedClues": [
+          {
+            "contextSide": "satisfied at the end of a meal / not too full",
+            "optionSide": "moderation means eating less than we do now",
+            "relation": "空前定义“不过饱”正对应选项“吃得比现在少”，构成对 moderation 的进一步解释。"
+          },
+          {
+            "contextSide": "But it doesn’t mean saying goodbye to the foods you love",
+            "optionSide": "eating less than we do now",
+            "relation": "空后 But 转折针对的正是“少吃”这一点，说明少吃不等于放弃爱吃的食物。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D（多数人需要把进食量翻倍）与首段“只吃所需、不过饱、少吃”的定义方向完全相反，故排除。"
+        }
+      ],
+      "teachingNote": "段首定义句后的空，优先找与本段定义同向、并能被下句转折词所针对的选项。"
+    },
+    "q-2024-jia-037": {
+      "blankId": "blank-2024-jia-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Take your time",
+        "slow down",
+        "something to eat in between meetings",
+        "eat slowly"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jia-seven-p1",
+        "headingAnchor": "Take your time",
+        "beforeQuote": "think about food as something nutritious rather than just something to eat in between meetings.",
+        "afterQuote": "It actually takes a few minutes for your brain to tell your body that it has had enough food, so eat slowly"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "swallow a meal on the way to work",
+          "signalSide": "option",
+          "targetText": "slow down / eat slowly / in between meetings",
+          "relation": "选项 swallow a meal on the way to work 与本段 slow down、eat slowly 同属“匆忙进食 vs 放慢进食”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in between meetings",
+          "signalSide": "context-before",
+          "targetText": "on the way to work",
+          "relation": "空前“开会间隙随便吃”与选项“上班途中囫囵吞下一餐”同指匆忙果腹的情形。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "eat slowly",
+          "signalSide": "context-after",
+          "targetText": "Don’t swallow a meal",
+          "relation": "空后 eat slowly 与选项的祈使否定 Don’t swallow a meal 正反呼应，都强调放慢进食。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本段主题是 Take your time、slow down，选项 C 以“别在上班途中囫囵吞下一餐”这一否定建议具体化“放慢进食”，与上文“别只在开会间隙随便吃”及下文 eat slowly 一脉相承。",
+        "matchedClues": [
+          {
+            "contextSide": "slow down / something to eat in between meetings",
+            "optionSide": "Don’t swallow a meal on the way to work",
+            "relation": "选项把“放慢、别匆忙吃”的主张落到“别在上班路上囫囵吞餐”这一具体场景。"
+          },
+          {
+            "contextSide": "eat slowly and stop eating before you feel full",
+            "optionSide": "Don’t swallow a meal",
+            "relation": "swallow（囫囵吞）与 eat slowly 形成对照，呼应整段慢吃的主旨。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "建议段中的空，抓本段核心动作（此处为 slow down / 慢吃），选与之同场或正反呼应的具体建议句。"
+    },
+    "q-2024-jia-038": {
+      "blankId": "blank-2024-jia-038",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "the foods you keep at hand",
+        "unhealthy snacks at the ready",
+        "like cookies"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jia-seven-p2",
+        "headingAnchor": "Eat with others",
+        "beforeQuote": "It’s more challenging to eat in moderation if you have unhealthy snacks at the ready, like cookies.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Instead",
+          "signalSide": "option",
+          "targetText": "unhealthy snacks at the ready, like cookies",
+          "relation": "选项以 Instead 转折，针对空前“身边备有不健康零食”给出相反做法，构成“否定—代之以”的逻辑关系。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "healthy choices",
+          "signalSide": "option",
+          "targetText": "unhealthy snacks / cookies",
+          "relation": "选项 healthy choices 与空前 unhealthy snacks、cookies 在“食物健康与否”话题场上形成对立。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "unhealthy snacks at the ready",
+          "signalSide": "context-before",
+          "targetText": "surround yourself with healthy choices",
+          "relation": "空前“手边备有不健康零食”正是选项“让自己被健康选择包围”所要替换的对象。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "选项 E 以 Instead 承接段末“别让不健康零食随手可得”，给出相反建议“让自己周围都是健康的选择”，转折逻辑与话题对立都吻合，作段末收束句。",
+        "matchedClues": [
+          {
+            "contextSide": "unhealthy snacks at the ready, like cookies",
+            "optionSide": "Instead, surround yourself with healthy choices",
+            "relation": "Instead 把“别备不健康零食”转为“代之以健康选择”，形成对比建议。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段末空遇到选项中的 Instead，先回看空前的负面做法，所填应是与之相反的正面建议。"
+    },
+    "q-2024-jia-039": {
+      "blankId": "blank-2024-jia-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Control emotional (情绪的) eating",
+        "turn to food to deal with unpleasant emotions",
+        "sadness, loneliness, or boredom"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jia-seven-p3",
+        "headingAnchor": "Control emotional eating",
+        "beforeQuote": "Control emotional (情绪的) eating.",
+        "afterQuote": "Many of us also turn to food to deal with unpleasant emotions such as sadness, loneliness, or boredom."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "always eat just to satisfy hunger",
+          "signalSide": "option",
+          "targetText": "turn to food to deal with unpleasant emotions",
+          "relation": "选项“并非总是为充饥而吃”正与空后“借食物排解负面情绪”构成“非充饥进食”的同一话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "also turn to food",
+          "signalSide": "context-after",
+          "targetText": "We don’t always eat just to satisfy hunger",
+          "relation": "空后副词 also 暗示前面已说过一种“非充饥进食”，与选项“不总为充饥而吃”衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Control emotional (情绪的) eating",
+          "signalSide": "context-before",
+          "targetText": "We don’t always eat just to satisfy hunger",
+          "relation": "段首标志句“控制情绪化进食”引出主题，所填句正点明情绪化进食即“非为充饥而吃”。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本段主题是控制情绪化进食，选项 B“我们并非总是为充饥而吃”作主题展开句，正好与空后“也常借食物排解悲伤、孤独、无聊”呼应，副词 also 表明二者同属非充饥进食。",
+        "matchedClues": [
+          {
+            "contextSide": "Many of us also turn to food to deal with unpleasant emotions",
+            "optionSide": "We don’t always eat just to satisfy hunger",
+            "relation": "选项点出“不只为充饥”，空后 also 续举“借食物排解情绪”这一具体的非充饥进食。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段首空抓本段标志词（emotional eating）和空后副词 also，所填主题句要与后文同属一类、被 also 续接。"
+    },
+    "q-2024-jia-040": {
+      "blankId": "blank-2024-jia-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "A healthy breakfast",
+        "keeps your energy up all day",
+        "eating small, healthy meals",
+        "Avoid eating late at night"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2024-jia-seven-p4",
+        "headingAnchor": "Eat throughout the day",
+        "beforeQuote": "",
+        "afterQuote": "A healthy breakfast can start your metabolism (新陈代谢) , while eating small, healthy meals keeps your energy up all day."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "throughout the day",
+          "signalSide": "option",
+          "targetText": "keeps your energy up all day",
+          "relation": "选项 throughout the day 与空后 all day 同义对应，统领本段“全天合理进食”的内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Eat properly",
+          "signalSide": "option",
+          "targetText": "healthy breakfast / small, healthy meals",
+          "relation": "选项 Eat properly 概括空后 healthy breakfast、small healthy meals 等具体的合理进食方式。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "keeps your energy up all day",
+          "signalSide": "context-after",
+          "targetText": "Eat properly throughout the day",
+          "relation": "空后 all day 与选项 throughout the day 时间范围一致，证明本段主题是“全天进食”。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本空为段首主题句，选项 A“全天合理进食”统领后文关于健康早餐、少量多餐维持全天能量、避免深夜进食等内容，throughout the day 与 all day 形成时间话题场对齐。",
+        "matchedClues": [
+          {
+            "contextSide": "keeps your energy up all day / A healthy breakfast",
+            "optionSide": "Eat properly throughout the day",
+            "relation": "选项中的 properly、throughout the day 正好概括后文“健康早餐、少量多餐、全天有能量”的合理全天进食。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段首主题句空，选能用一句概括全段（此处为“全天合理进食”）且时间/范围词与下文一致的选项。"
+    }
+  }
+}

@@ -1,0 +1,854 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2022-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-yi-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-yi-cloze": {
+      "overview": "夹叙夹议的科普说明文：通过 USC 实验室对 2—4 岁幼儿的躲猫猫实验，论证幼儿“无效躲藏”并非出于自我中心，而是源于他们对“相互看见/相互承认”的认知信念。",
+      "affectiveArc": "由对幼儿“笨拙躲藏”的常见质疑切入，经实验逐步推翻旧解释，走向对幼儿认知的重新肯定，整体由质疑转向理解与肯定。"
+    }
+  },
+  "blanks": {
+    "q-2022-yi-041": {
+      "blankId": "blank-2022-yi-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "与后半句 making oneself unable to be seen 平行，玩躲猫猫令人兴奋之处在于“躲开”别人的目光，escape someone's glance 搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "following",
+          "meaning": "跟随、追随别人的目光"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "taking",
+          "meaning": "拿走、获取"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "directing",
+          "meaning": "引导、指挥目光的方向"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "someone else′s glance",
+          "signalSide": "context-after",
+          "targetText": "escaping someone else′s glance",
+          "relation": "动词的宾语是 someone else′s glance，escape 与“目光”搭配表示“躲开他人的注视”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "making oneself unable to be seen",
+          "signalSide": "context-after",
+          "relation": "与“让自己无法被看见”同义呼应，印证此处是“逃开目光”。"
+        }
+      ],
+      "teachingNote": "动词空先看其宾语与下文的同义呼应，确定动作方向。"
+    },
+    "q-2022-yi-042": {
+      "blankId": "blank-2022-yi-042",
+      "blankNo": 42,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "be bad at doing 表示“不擅长”，与下文“只用手遮眼、身体却露在外”这一拙劣躲藏的事实一致，be bad at hiding 搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "clever",
+          "meaning": "聪明的、躲得很机灵"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "scared",
+          "meaning": "害怕的、惊恐的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "quick",
+          "meaning": "动作迅速的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at hiding",
+          "signalSide": "context-after",
+          "targetText": "bad at hiding",
+          "relation": "be + adj + at doing 结构，形容词修饰 hiding 这一能力，bad at 表示“不擅长”。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "leaving the rest of their bodies",
+          "signalSide": "context-after",
+          "relation": "下文“身体其余部分露在外”证明躲得很糟，呼应 bad。"
+        }
+      ],
+      "teachingNote": "形容词态度要与紧随其后的事实细节保持一致。"
+    },
+    "q-2022-yi-043": {
+      "blankId": "blank-2022-yi-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "孩子只遮住眼睛，身体其余部分仍“暴露在外”，exposed 与上文 cover only their eyes 形成对照，描述未被遮盖的状态。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "examined",
+          "meaning": "被检查的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "untouched",
+          "meaning": "未被触碰的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "imbalanced",
+          "meaning": "不平衡的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the rest of their bodies",
+          "signalSide": "context-before",
+          "targetText": "the rest of their bodies exposed",
+          "relation": "leaving + 宾语 + 形容词，描述身体其余部分的状态为 exposed（暴露在外）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "cover only their eyes",
+          "signalSide": "context-before",
+          "relation": "只遮眼睛与身体其余部分暴露形成对照，锁定 exposed。"
+        }
+      ],
+      "teachingNote": "用前句的对照信息推断空格处描述的状态。"
+    },
+    "q-2022-yi-044": {
+      "blankId": "blank-2022-yi-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "interpret ... as ... 表示“把……解读为……”，此处把无效躲藏“解读为”孩子自我中心的证据，与 as evidence 固定搭配吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "supported",
+          "meaning": "被支持、被证实"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "guaranteed",
+          "meaning": "被保证、被担保"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "imagined",
+          "meaning": "被想象出来"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as evidence",
+          "signalSide": "context-after",
+          "targetText": "interpreted as evidence",
+          "relation": "interpret A as B 固定搭配，as evidence 提示动词为 interpret（解读为）。"
+        }
+      ],
+      "teachingNote": "看到 as + 名词结构，优先考虑能与之搭配的“看作/解读为”类动词。"
+    },
+    "q-2022-yi-045": {
+      "blankId": "blank-2022-yi-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文 Surprisingly 表明实验结果出人意料，surprising research results 与“推翻旧观念”的转折一致，形容研究结果令人惊讶。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "disappointing",
+          "meaning": "令人失望的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mixed",
+          "meaning": "结果好坏参半的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "desired",
+          "meaning": "所期望的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "research results",
+          "signalSide": "context-after",
+          "targetText": "surprising research results",
+          "relation": "形容词修饰 research results，surprising 表示研究结果令人惊讶。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Surprisingly",
+          "signalSide": "context-after",
+          "relation": "下文 Surprisingly 直接复现“惊讶”这一含义，锁定 surprising。"
+        }
+      ],
+      "teachingNote": "形容词答案常被后文同根词或同义副词直接呼应。"
+    },
+    "q-2022-yi-046": {
+      "blankId": "blank-2022-yi-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "But 引出转折，新研究结果与旧的“自我中心”观念相反，contradict that idea 表示“反驳/否定那种看法”，与转折逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "explained",
+          "meaning": "解释了那种看法"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confirmed",
+          "meaning": "证实了那种看法"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tested",
+          "meaning": "检验了那种看法"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that idea",
+          "signalSide": "context-after",
+          "targetText": "contradicted that idea",
+          "relation": "动词宾语是 that idea（旧观念），contradict 表示与之相反、加以否定。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "But",
+          "signalSide": "context-before",
+          "relation": "But 表示转折，提示新研究是在反驳前面的旧观念。"
+        }
+      ],
+      "teachingNote": "转折词 But 后的动词常与前句观点构成对立关系。"
+    },
+    "q-2022-yi-047": {
+      "blankId": "blank-2022-yi-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "上文是把 2—4 岁幼儿带入实验室，故每个“孩子”与一名成人坐下；下文 asked the child 复现 child，确定主语是 child。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "parent",
+          "meaning": "家长"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "researcher",
+          "meaning": "研究者"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "doctor",
+          "meaning": "医生"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "sat down with an adult",
+          "signalSide": "context-after",
+          "targetText": "Each child sat down with an adult",
+          "relation": "空格名词作 sat down 的主语，能与成人一起坐下接受测试的是 child。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "asked the child",
+          "signalSide": "context-after",
+          "relation": "下文 the child 直接复现，确认每个受试者就是 child。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "young children aged 2—4",
+          "signalSide": "context-before",
+          "relation": "上文受试对象是 2—4 岁幼儿，话题词呼应 child。"
+        }
+      ],
+      "teachingNote": "名词空可由上下文重复出现的同一指称词直接锁定。"
+    },
+    "q-2022-yi-048": {
+      "blankId": "blank-2022-yi-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "下文问孩子能否 see or hear，对应成人遮住 eyes 或 ears；遮眼对应 see，遮耳对应 hear，故 covered her own eyes or ears。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "feet",
+          "meaning": "脚"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "nose",
+          "meaning": "鼻子"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hands",
+          "meaning": "手"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "or hear the adult",
+          "signalSide": "context-after",
+          "targetText": "covered her own eyes or ears",
+          "relation": "下文 hear（听）对应遮住 ears（耳朵），看对应 eyes，锁定 ears。"
+        }
+      ],
+      "teachingNote": "遮挡的器官要与下文测试的感官（看/听）一一对应。"
+    },
+    "q-2022-yi-049": {
+      "blankId": "blank-2022-yi-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "成人遮住眼睛后，问孩子能否“看见”或听见对方，see the adult 与遮眼这一动作直接对应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "help",
+          "meaning": "帮助那位成人"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reach",
+          "meaning": "够到、联系到"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fool",
+          "meaning": "欺骗"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "or hear the adult",
+          "signalSide": "context-after",
+          "targetText": "see or hear the adult",
+          "relation": "与并列的 hear 同属感官动词，see 对应上文遮眼，构成 see or hear。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "covered her own eyes",
+          "signalSide": "context-before",
+          "relation": "上文遮住眼睛，提示此处测试的是能否“看见”。"
+        }
+      ],
+      "teachingNote": "并列结构里空格动词应与相邻动词同类，并呼应前文动作。"
+    },
+    "q-2022-yi-050": {
+      "blankId": "blank-2022-yi-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the same thing happened 表示“同样的情况发生”，泛指前面实验的重演，thing 在此作宽泛指代最自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "event",
+          "meaning": "（较正式的）事件"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "action",
+          "meaning": "行动、动作"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "accident",
+          "meaning": "意外事故"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "happened when the adult covered her own mouth",
+          "signalSide": "context-after",
+          "targetText": "The same thing happened",
+          "relation": "the same thing happened 固定表达，泛指同类情形再次发生。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The same",
+          "signalSide": "context-before",
+          "relation": "The same 提示是前面实验情形的重复，用泛指名词 thing。"
+        }
+      ],
+      "teachingNote": "the same ___ happened 这类泛指场景多用 thing。"
+    },
+    "q-2022-yi-051": {
+      "blankId": "blank-2022-yi-051",
+      "blankNo": 51,
+      "pos": "other",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "由遮眼测试转入遮嘴测试，Now 表示“这一次/此时”引出新一轮情形，children said they couldn't ... 自然承接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Yet",
+          "meaning": "然而（转折）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Soon",
+          "meaning": "不久、很快"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Once",
+          "meaning": "一旦、曾经"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "children said that they couldn’t",
+          "signalSide": "context-after",
+          "targetText": "Now children said",
+          "relation": "Now 引出遮嘴情形下孩子此时的反应，时间副词承接新一轮实验。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "covered her own mouth",
+          "signalSide": "context-before",
+          "relation": "转到遮嘴这一新情形，用 Now 标示“这一次”。"
+        }
+      ],
+      "teachingNote": "区分连接词需看前后是承接同类情形还是真正转折。"
+    },
+    "q-2022-yi-052": {
+      "blankId": "blank-2022-yi-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "成人遮住嘴后，孩子说不能“对她说话”，speak to her 与遮嘴这一动作对应，搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "listen",
+          "meaning": "听"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "turn",
+          "meaning": "转向"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "wave",
+          "meaning": "挥手"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to her",
+          "signalSide": "context-after",
+          "targetText": "speak to her",
+          "relation": "speak to her 固定搭配，与遮嘴对应表示“对她说话”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "covered her own mouth",
+          "signalSide": "context-before",
+          "relation": "遮住嘴对应“说话”，提示动词为 speak。"
+        }
+      ],
+      "teachingNote": "遮挡部位决定相应的交流动作，遮嘴对应 speak。"
+    },
+    "q-2022-yi-053": {
+      "blankId": "blank-2022-yi-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "全文围绕实验室测试展开，A number of experiments 表示“一系列实验”排除了孩子误解问题的可能，与研究语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "instructions",
+          "meaning": "指令、说明"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "descriptions",
+          "meaning": "描述"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "assumptions",
+          "meaning": "假设"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "ruled out that the children misunderstood",
+          "signalSide": "context-after",
+          "targetText": "A number of experiments ruled out",
+          "relation": "能“排除误解可能”的主语应是 experiments（实验），施动关系成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Minds in Development Lab",
+          "signalSide": "context-before",
+          "relation": "全文是实验室研究，话题场支持 experiments。"
+        }
+      ],
+      "teachingNote": "名词答案要落在与全文话题场一致的概念上。"
+    },
+    "q-2022-yi-054": {
+      "blankId": "blank-2022-yi-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "与并列的 knew ... what was asked 一致，孩子“听懂了”问题，comprehended the questions 表示理解题意。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "predicted",
+          "meaning": "预测了问题"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "explored",
+          "meaning": "探究了问题"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "ignored",
+          "meaning": "忽视了问题"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the questions",
+          "signalSide": "context-after",
+          "targetText": "comprehended the questions",
+          "relation": "动词宾语是 the questions，comprehend 表示“理解问题”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "knew",
+          "signalSide": "context-after",
+          "relation": "并列的 knew what was asked 表明孩子明白题意，与 comprehended 同义呼应。"
+        }
+      ],
+      "teachingNote": "并列谓语之间常语义同向，可互相印证。"
+    },
+    "q-2022-yi-055": {
+      "blankId": "blank-2022-yi-055",
+      "blankNo": 55,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "承接上文“理解了问题”，孩子“确切地”知道被问什么，knew exactly 表示完全清楚，与 comprehended 语气一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "partly",
+          "meaning": "部分地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "honestly",
+          "meaning": "诚实地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "vaguely",
+          "meaning": "模糊地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "knew",
+          "signalSide": "context-before",
+          "targetText": "knew exactly",
+          "relation": "副词修饰 knew，exactly 表示“确切地知道”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "knew",
+          "signalSide": "context-before",
+          "targetText": "knew exactly what was asked",
+          "relation": "上文表明孩子明白题意，支持此处“确切知道”，语气一致。"
+        }
+      ],
+      "teachingNote": "副词强度要与前文确定性语气保持一致。"
+    },
+    "q-2022-yi-056": {
+      "blankId": "blank-2022-yi-056",
+      "blankNo": 56,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "their ___ to the questions 指孩子对问题给出的“回答”，responses to the questions 搭配成立，且呼应上文 children replied / said。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "approaches",
+          "meaning": "方法、途径"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "contribution",
+          "meaning": "贡献"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sensitivity",
+          "meaning": "敏感性"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to the questions",
+          "signalSide": "context-after",
+          "targetText": "responses to the questions",
+          "relation": "responses to the questions 固定搭配，指对问题的回答。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "children replied",
+          "signalSide": "context-before",
+          "relation": "上文孩子作答（replied/said），呼应名词 responses。"
+        }
+      ],
+      "teachingNote": "名词与其后介词搭配可锁定词义，response to 即“对……的回答”。"
+    },
+    "q-2022-yi-057": {
+      "blankId": "blank-2022-yi-057",
+      "blankNo": 57,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "后接 that 引导的同位语从句，内容是孩子持有的看法“只有你能看见我我才能看见你”，true belief 表示真实的信念。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ability",
+          "meaning": "能力"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "identity",
+          "meaning": "身份"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "purpose",
+          "meaning": "目的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that “I can see you only if you can see me, too.”",
+          "signalSide": "context-after",
+          "targetText": "true belief that",
+          "relation": "that 引导同位语从句解释名词内容，是一种观点/信念，故为 belief。"
+        }
+      ],
+      "teachingNote": "后接 that 同位语从句、内容为观点时，多填 belief/idea 类抽象名词。"
+    },
+    "q-2022-yi-058": {
+      "blankId": "blank-2022-yi-058",
+      "blankNo": 58,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "承接上句孩子坚持“相互看见”的信念，They simply insisted on mutual recognition and regard 表示他们就是“坚持”相互承认与尊重，insist on 与该信念语境契合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hold back",
+          "meaning": "抑制、阻止"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "relate to",
+          "meaning": "与……有关、产生共鸣"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "make up",
+          "meaning": "编造、弥补"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "mutual (相互的) recognition and regard",
+          "signalSide": "context-after",
+          "targetText": "insisted on mutual recognition and regard",
+          "relation": "insist on + 名词宾语，表示坚持要求“相互承认与尊重”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I can see you only if you can see me, too",
+          "signalSide": "context-before",
+          "relation": "上文这一相互对等的信念，与“坚持相互承认”一致，支持 insist on。"
+        }
+      ],
+      "teachingNote": "短语空靠语境合成义，结合宾语和上文信念判断动作性质。"
+    },
+    "q-2022-yi-059": {
+      "blankId": "blank-2022-yi-059",
+      "blankNo": 59,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "Our ___ suggest 指“我们的研究发现表明”，findings 与全文实验研究语境吻合，作为结论的来源最自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "limitations",
+          "meaning": "局限性"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "requirements",
+          "meaning": "要求、必要条件"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "theories",
+          "meaning": "理论"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "suggest when a child “hides”",
+          "signalSide": "context-after",
+          "targetText": "Our findings suggest",
+          "relation": "findings suggest 固定搭配，研究发现“表明”后面的结论。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "research results",
+          "signalSide": "context-before",
+          "relation": "全文是实验研究，findings 与研究结果话题场一致。"
+        }
+      ],
+      "teachingNote": "实验研究语境里给出结论的主语常是 findings/results。"
+    },
+    "q-2022-yi-060": {
+      "blankId": "blank-2022-yi-060",
+      "blankNo": 60,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "与全文主旨呼应：孩子认为别人用盖毯子的方法时这种躲藏是“有效的”，consider this method effective 与“相互看见才算被看见”的逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tentative",
+          "meaning": "试探性的、不确定的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "impressive",
+          "meaning": "令人印象深刻的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "creative",
+          "meaning": "有创意的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "consider this method",
+          "signalSide": "context-before",
+          "targetText": "consider this method effective",
+          "relation": "consider + 宾语 + 形容词，描述孩子对该躲藏方法的评价为 effective（有效）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "it is not a result of egocentrism",
+          "signalSide": "context-before",
+          "relation": "上文说明该方法源于相互看见的认知，故在他人使用时被视为“有效”。"
+        }
+      ],
+      "teachingNote": "结尾形容词评价要回扣全文主旨与核心逻辑。"
+    }
+  }
+}

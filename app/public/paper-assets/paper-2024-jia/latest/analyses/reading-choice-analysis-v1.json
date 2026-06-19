@@ -1,0 +1,1448 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2024-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-jia-reading-a",
+    "group-2024-jia-reading-b",
+    "group-2024-jia-reading-c",
+    "group-2024-jia-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19T00:00:00Z"
+  },
+  "groups": {
+    "group-2024-jia-reading-a": {
+      "overview": "本文是一则哈佛 ARTS FIRST 艺术节的活动宣传单，先总述艺术节性质，再分条介绍水彩、无脊椎动物手工、陶轮拉坯、编织等多个面向公众的艺术体验项目。",
+      "discourseStructure": {
+        "summary": "总—分结构：首段概述 ARTS FIRST 艺术节面向所有年龄的公众，通过演出、展览和动手活动展示哈佛社区的艺术创造力；其后各小标题加说明段，逐一介绍具体的动手体验项目。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jia-reading-a-1",
+            "summary": "介绍 ARTS FIRST 是哈佛社区一年一度的艺术庆典，通过演出、艺术展览和艺术创作活动展示创造力，面向哈佛及社区所有年龄的成员开放。",
+            "function": "总起段，交代艺术节性质、内容形式与受众。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-2",
+            "summary": "项目小标题：水彩之光。",
+            "function": "小标题，引出水彩体验项目。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-3",
+            "summary": "介绍水彩项目：在哈佛艺术博物馆材料实验室专家指导下了解水彩颜料的材料与特性，并尝试展览艺术家所用的绘画技巧。",
+            "function": "说明段，描述水彩项目内容。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-4",
+            "summary": "项目小标题：无脊椎艺术家——无脊椎动物的创造力。",
+            "function": "小标题，引出无脊椎动物主题手工项目。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-5",
+            "summary": "介绍该项目：跟随哈佛自然历史博物馆的 Javier Marin 了解昆虫等无脊椎动物如何起舞、启发时尚与创造艺术，并用手工艺材料制作自己的无脊椎动物作品。",
+            "function": "说明段，描述无脊椎动物手工项目内容及主讲人。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-6",
+            "summary": "项目小标题：陶轮拉坯。",
+            "function": "小标题，引出陶艺项目。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-7",
+            "summary": "介绍陶艺项目：与陶艺课程导师及优秀陶工一起观看陶轮演示，并制作自己的作品。",
+            "function": "说明段，描述陶轮拉坯项目内容。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-8",
+            "summary": "项目小标题：编织与绒球制作。",
+            "function": "小标题，引出编织项目。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-a-9",
+            "summary": "介绍编织项目：加入哈佛本科生编织社，用线制作绒球和流苏，或拿起针学习编织。",
+            "function": "说明段，描述编织与绒球制作项目内容。"
+          }
+        ]
+      }
+    },
+    "group-2024-jia-reading-b": {
+      "overview": "本文是一篇说明文，介绍猫表达需求与认知环境的几种独特方式：用喵叫与人交流、用嗅觉判断环境和辨识主人、以及把户外的小物件叼回送给主人。全文以猫的行为为线索，逐段展开。",
+      "discourseStructure": {
+        "summary": "全文由三段构成。首段从动物普遍用声音表达需求引入，聚焦猫的喵叫及其不同含义；第二段讲猫敏锐的嗅觉如何用来评估环境与辨认主人；第三段讲猫把户外物件当礼物叼给主人这一源于天性的行为，并以轻松口吻收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jia-reading-b-1",
+            "summary": "动物普遍用声音表达需求；猫尤其擅长用喵叫与人沟通，饥饿时持续喵叫求食，求关爱时发出绵长柔和的喵，且喵叫从幼猫出生起就用于引起母猫注意以获取喂食。",
+            "function": "引入话题并说明猫喵叫的功能与含义"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-b-2",
+            "summary": "猫嗅觉敏锐，用鼻子评估环境、察觉危险信号，并通过熟悉气味辨别情境；猫会记住主人脸部气味以便日后辨认，也能凭气味察觉主人是否接触过别的猫。",
+            "function": "说明猫如何用嗅觉评估环境并辨认主人"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-b-3",
+            "summary": "相比狗的叼物习惯，猫更进一步，会把户外随机的小物件叼回送给主人；这是源自捕食动物天性的古老习惯，是猫表达爱的方式，作者建议主人欣然接受。",
+            "function": "说明猫送礼行为及其天性根源并收束全文"
+          }
+        ]
+      }
+    },
+    "group-2024-jia-reading-c": {
+      "overview": "本文是一篇说明性新闻报道，介绍俄罗斯政府资助的医疗列车 Saint Lukas。这趟列车不载普通乘客，只为中部和东部偏远乡村地区的居民提供基础医疗服务，借此缓解俄罗斯农村地区医疗资源匮乏的问题。",
+      "discourseStructure": {
+        "summary": "文章先点明 Saint Lukas 是一趟只为病人服务的医疗列车，介绍其运作方式；接着引述德国摄影师 Ducke 的见闻，并说明俄罗斯公共医疗体系亟需现代化、农村缺医的背景；随后描述列车的年度运行节奏；最后通过 Ducke 的评价突出列车对乡村居民的重要意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jia-reading-c-1",
+            "summary": "Saint Lukas 是俄罗斯五列政府资助医疗列车之一，只接收病人，每站停留约两天，为乡村居民提供基础医疗、X 光检查和开药。",
+            "function": "引入主题，点明列车的特殊性与基本功能"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-c-2",
+            "summary": "随车采访的德国摄影师 Emile Ducke 描述人们一大早就开始排队预约就诊。",
+            "function": "通过人物引语呈现居民对医疗服务的迫切需求"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-c-3",
+            "summary": "俄罗斯公共医疗体系亟需现代化，政府在伏尔加河以东较贫穷的农村地区尝试视频问诊、扩大财政补助等措施以吸引医生。",
+            "function": "交代背景，说明农村地区医疗资源匮乏及政府应对"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-c-4",
+            "summary": "Saint Lukas 每年运行十个月，每两周停靠约八个站，之后返回地区首府补给，多数站点约一年才能等到一次到访。",
+            "function": "说明列车的运行周期与补给节奏"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-c-5",
+            "summary": "医生每天接诊多达 150 人，Ducke 对医护人员在狭小空间内仍专注尽责印象深刻，认为这是许多乡村居民获得治疗的最佳机会。",
+            "function": "用人物评价收束全文，凸显列车服务的价值"
+          }
+        ]
+      }
+    },
+    "group-2024-jia-reading-d": {
+      "overview": "本文是一篇议论性记叙文，作者从大学时与教授讨论小说结局的经历出发，引出对“结局”的思考，进而引出本期《Writer's Digest》以“如何写好结局”为主题，向读者推荐相关内容。",
+      "discourseStructure": {
+        "summary": "由个人经历切入（与教授讨论结局）→获得顿悟（不同类型文学有不同结局）→论述写好结局之难→引出本期杂志主题与具体栏目→收尾点明杂志的作用。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2024-jia-reading-d-1",
+            "summary": "作者大学时因不喜欢《弗洛斯河上的磨坊》的结局去找教授，教授引导她思考“想要的结局”与“适合人物的结局”之间的区别。",
+            "function": "以个人经历开篇，引出对“结局”这一话题的探讨。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-d-2",
+            "summary": "这次经历让作者顿悟，从此明白不同类型的文学有各自的结局特点，选书也因此变得容易。",
+            "function": "承接上文，点明顿悟的内容——不同类型文学有其独特结局。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-d-3",
+            "summary": "作者指出写结局很难，因为结局分量重，既要出人意料又不能突兀，还要适合人物。",
+            "function": "转折过渡，论述写好结局之难，为引出杂志主题铺垫。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-d-4",
+            "summary": "因此本期《Writer's Digest》旨在帮助读者写好结局，并介绍了Peter Mountford和Elizabeth Sims的具体栏目内容。",
+            "function": "引出本期杂志的主题，并以两位作者的栏目为例说明杂志内容。"
+          },
+          {
+            "paragraphId": "para-2024-jia-reading-d-5",
+            "summary": "本期杂志不会替你决定结局，但能提供你所需以达成目标。",
+            "function": "收尾，点明杂志的定位与作用。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2024-jia-021": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查对 ARTS FIRST 艺术节整体性质的把握，需从首段概述及各项目内容判断其是面向公众的动手体验类活动。",
+      "stemTranslationZh": "关于 ARTS FIRST，我们可以了解到什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是一场油画展览。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities",
+            "sourceEntity": "art exhibitions（艺术展览，泛指）",
+            "optionText": "It is an exhibition of oil paintings.",
+            "optionEntity": "exhibition of oil paintings（油画展览）",
+            "explanation": "原文只提到泛指的艺术展览，所列项目为水彩、手工、陶艺、编织，并无油画展览；选项把对象偷换为“油画展览”，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-1",
+              "quote": "performances, art exhibitions and art-making activities",
+              "anchor": "art exhibitions（非油画展）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它为所有年龄段的人提供艺术课程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The festival is a public event for Harvard and community members of all ages.",
+            "sourceHighlight": "a public event for Harvard and community members of all ages",
+            "optionText": "It offers art courses for all ages.",
+            "optionHighlight": "offers art courses for all ages",
+            "explanation": "原文说艺术节是面向所有年龄的公众活动（public event），并非提供正式的“艺术课程（art courses）”；选项把面向各年龄的公众活动夸大为“开设艺术课程”，范围与性质均被拔高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-1",
+              "quote": "a public event for Harvard and community members of all ages",
+              "anchor": "public event（非 art courses）"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它呈现娱乐休闲活动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-a-1",
+              "quote": "we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities",
+              "anchor": "performances 与 art-making activities"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-a-7",
+              "quote": "Then create your own masterpiece!",
+              "anchor": "动手创作的休闲项目"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它是一个主要的旅游景点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is a major tourist attraction.",
+            "explanation": "原文将 ARTS FIRST 定性为哈佛社区的艺术庆典与面向公众的活动，全文未提及其为旅游景点或吸引游客，原文未提及。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It presents recreational activities.",
+          "sourceRole": "correctOption",
+          "targetText": "performances, art exhibitions and art-making activities",
+          "targetParagraphId": "para-2024-jia-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "正确选项的 recreational activities 概括了原文的 performances 与 art-making activities 等动手娱乐项目，属同义概括替换。"
+        }
+      ]
+    },
+    "q-2024-jia-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查信息匹配，需根据“想画画（drawing pictures）”这一兴趣定位到与绘画相关的项目。",
+      "stemTranslationZh": "如果你对画画感兴趣，你会加入哪个项目？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "水彩之光。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-a-3",
+              "quote": "Try your hand at some of the painting tricks used by artists",
+              "anchor": "painting tricks（绘画技巧）"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-a-3",
+              "quote": "Learn about the materials and qualities of watercolor paint",
+              "anchor": "watercolor paint（水彩颜料）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "无脊椎艺术家：无脊椎动物的创造力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "making your own spineless artists out of craft (手工艺) materials",
+            "sourceEntity": "making spineless artists out of craft materials（用手工艺材料做手工）",
+            "optionText": "Spineless Artists: Invertebrate Creativity.",
+            "optionEntity": "Invertebrate Creativity（无脊椎动物手工项目）",
+            "explanation": "该项目是用手工艺材料制作无脊椎动物作品，属手工而非画画，与“drawing pictures”的兴趣不匹配，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-5",
+              "quote": "making your own spineless artists out of craft (手工艺) materials",
+              "anchor": "craft materials（手工，非画画）"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "陶轮拉坯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "demonstrations using the potter’s wheel",
+            "sourceEntity": "using the potter’s wheel（陶轮拉坯）",
+            "optionText": "Wheel Throwing.",
+            "optionEntity": "Wheel Throwing（陶艺）",
+            "explanation": "该项目是用陶轮制作陶器，属陶艺而非画画，与“drawing pictures”不匹配，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-7",
+              "quote": "demonstrations using the potter’s wheel",
+              "anchor": "potter’s wheel（陶艺，非画画）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "编织与绒球制作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "pick up a pair of needles and learn to knit (编织)",
+            "sourceEntity": "learn to knit（编织）",
+            "optionText": "Knitting and Pom-Pom Making.",
+            "optionEntity": "Knitting and Pom-Pom Making（编织与绒球）",
+            "explanation": "该项目是编织和制作绒球，属手工编织而非画画，与“drawing pictures”不匹配，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-9",
+              "quote": "learn to knit (编织)",
+              "anchor": "knit（编织，非画画）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "drawing pictures",
+          "sourceRole": "stem",
+          "targetText": "Try your hand at some of the painting tricks used by artists",
+          "targetParagraphId": "para-2024-jia-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "题干的 drawing pictures（画画）对应水彩项目中的 painting tricks 与 watercolor paint，画水彩即绘画，属同义匹配。"
+        }
+      ]
+    },
+    "q-2024-jia-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查细节定位，需找到 Javier Marin 所主持项目中你可以一起进行的具体活动。",
+      "stemTranslationZh": "你可以和 Javier Marin 一起做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "练习一种传统舞蹈。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "to learn how insects and other invertebrates dance, inspire fashion and create art",
+            "sourceHighlight": "learn how insects and other invertebrates dance",
+            "optionText": "Practice a traditional dance.",
+            "optionHighlight": "Practice a traditional dance",
+            "explanation": "原文是了解昆虫等无脊椎动物如何“起舞”，并非你去练习传统舞蹈；选项把“了解动物如何起舞”偷换并拔高为“练习传统舞蹈”，范围与对象均不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-5",
+              "quote": "learn how insects and other invertebrates dance",
+              "anchor": "invertebrates dance（了解动物起舞，非自己跳舞）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "制作手工艺品。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-a-5",
+              "quote": "making your own spineless artists out of craft (手工艺) materials",
+              "anchor": "out of craft materials（用手工艺材料制作）"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-a-5",
+              "quote": "Join Javier Marin from the Harvard Museum of Natural History",
+              "anchor": "与 Javier Marin 一同进行"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "参观一座当地博物馆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Join Javier Marin from the Harvard Museum of Natural History",
+            "optionText": "Visit a local museum.",
+            "matchType": "exact",
+            "relationNote": "原文出现 Museum 只是说明 Javier Marin 来自哈佛自然历史博物馆，并非邀请你去参观博物馆；选项借原文的 Museum 一词设钩，实际并无参观博物馆的活动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-a-5",
+              "quote": "Javier Marin from the Harvard Museum of Natural History",
+              "anchor": "Museum 仅指主讲人来历"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "喂养无脊椎动物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Feed invertebrates.",
+            "explanation": "原文只提到了解无脊椎动物并用手工艺材料制作无脊椎动物作品，全文未提及喂养无脊椎动物，原文未提及。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Make handcrafts.",
+          "sourceRole": "correctOption",
+          "targetText": "making your own spineless artists out of craft (手工艺) materials",
+          "targetParagraphId": "para-2024-jia-reading-a-5",
+          "relationType": "paraphrase",
+          "note": "正确选项的 Make handcrafts 对应原文 making ... out of craft materials，用手工艺材料制作即制作手工艺品，属同义替换。"
+        },
+        {
+          "sourceText": "together with Javier Marin",
+          "sourceRole": "stem",
+          "targetText": "Join Javier Marin from the Harvard Museum of Natural History",
+          "targetParagraphId": "para-2024-jia-reading-a-5",
+          "relationType": "locationCue",
+          "note": "题干 together with Javier Marin 用人名 Javier Marin 定位到第五段的无脊椎动物手工项目。"
+        }
+      ]
+    },
+    "q-2024-jia-024": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查从第一段对猫喵叫相关信息的归纳与推断，理解喵叫在猫生存中的作用。",
+      "stemTranslationZh": "从第一段可以了解到关于猫喵叫的什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是一种生存技能。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-b-1",
+              "quote": "Meowing starts as soon as a baby cat is brought to life and uses it to get the mother’s attention and be fed.",
+              "anchor": "幼猫出生即用喵叫引起母猫注意以获得喂食"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-b-1",
+              "quote": "If a pet cat is hungry, it will keep meowing to attract attention and find food.",
+              "anchor": "饥饿时靠喵叫吸引注意、获取食物"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是由母猫教会的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It's taught by mother cats.",
+            "explanation": "原文未提及喵叫是母猫教会的；只说幼猫出生即用喵叫引起母猫注意，未涉及母猫传授这一动作。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它很难解读。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "They are able to have entire conversations with humans using meows and you’re able to interpret it.",
+            "sourceHighlight": "you’re able to interpret it",
+            "optionText": "It's hard to interpret.",
+            "optionHighlight": "hard to interpret",
+            "explanation": "原文说人能够解读猫的喵叫（able to interpret），选项却说很难解读，与原文意思相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-b-1",
+              "quote": "They are able to have entire conversations with humans using meows and you’re able to interpret it.",
+              "anchor": "人能够解读猫的喵叫"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它会随年龄增长越来越响。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It's getting louder with age.",
+            "explanation": "原文只说喵叫从幼猫出生就开始，并区分了不同情境下喵叫的软硬长短，未提及喵叫会随年龄变得越来越响。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It's a survival skill.",
+          "sourceRole": "correctOption",
+          "targetText": "Meowing starts as soon as a baby cat is brought to life and uses it to get the mother’s attention and be fed.",
+          "targetParagraphId": "para-2024-jia-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "正确项用 survival skill 概括原文：幼猫出生即用喵叫 get the mother’s attention and be fed（获取喂食），饥饿时也靠喵叫 find food，喵叫关乎生存。"
+        }
+      ]
+    },
+    "q-2024-jia-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查第二段中宠物猫评估不同情境所依靠的具体手段这一细节。",
+      "stemTranslationZh": "宠物猫如何评估不同的情境？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过聆听声音。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By listening for sounds.",
+            "explanation": "第二段讲的是猫用嗅觉评估情境，并未提及靠聆听声音来评估不同情境；声音是第一段喵叫的话题，与本题无关。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过触碰熟悉的物体。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "another way the cats are able to distinguish between situations is by looking for familiar smells",
+            "sourceEntity": "familiar smells",
+            "optionText": "By touching familiar objects.",
+            "optionEntity": "touching familiar objects",
+            "explanation": "原文说猫靠寻找熟悉的气味（familiar smells）来分辨情境，选项偷换为触碰熟悉的物体（familiar objects），对象与方式均不符。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-b-2",
+              "quote": "another way the cats are able to distinguish between situations is by looking for familiar smells",
+              "anchor": "猫靠熟悉的气味分辨情境"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过检查气味。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-b-2",
+              "quote": "They use their noses to assess their environment and look out for any signs of danger.",
+              "anchor": "猫用鼻子评估环境、察觉危险信号"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-b-2",
+              "quote": "another way the cats are able to distinguish between situations is by looking for familiar smells",
+              "anchor": "靠寻找熟悉气味分辨情境"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过与其他猫交流。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By communicating with other cats.",
+            "explanation": "原文提到猫能察觉主人是否接触过别的猫，但并未说猫通过与其他猫交流来评估情境；此项原文未支持。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How does a pet cat assess different situations?",
+          "sourceRole": "stem",
+          "targetText": "They use their noses to assess their environment and look out for any signs of danger.",
+          "targetParagraphId": "para-2024-jia-reading-b-2",
+          "relationType": "locationCue",
+          "note": "题干 assess different situations 对应原文 assess their environment / distinguish between situations，定位到猫用鼻子（noses）即嗅觉来评估。"
+        },
+        {
+          "sourceText": "By checking on smells.",
+          "sourceRole": "correctOption",
+          "targetText": "by looking for familiar smells",
+          "targetParagraphId": "para-2024-jia-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "正确项 checking on smells 与原文 looking for familiar smells、use their noses 同义替换，均指靠气味判断。"
+        }
+      ]
+    },
+    "q-2024-jia-026": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第三段短语 take... up a notch 的词义推测，依据上下文猫比狗的叼物行为更进一步。",
+      "stemTranslationZh": "下列哪一项最能解释第三段中短语 “take... up a notch” 的含义？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "表现得体。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Perform appropriately.",
+            "explanation": "原文语境是猫把狗的叼物习惯做得更出色、更进一步，并非强调“表现得体”，该义与上下文不符。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "移动得更快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Move faster.",
+            "explanation": "短语强调把行为提升到更高水平，而非速度更快；原文未涉及移动快慢。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "举止古怪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Act strangely.",
+            "explanation": "原文将猫叼物视为源于天性的可爱行为而非古怪举止，且短语本义是更上一层楼，与“古怪”无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "做得更好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-b-3",
+              "quote": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+              "anchor": "狗以叼物著称，但猫把这一行为更上一层楼"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-b-3",
+              "quote": "Many cats will find random objects outside and bring them to their owners.",
+              "anchor": "猫会把户外随机物件叼回送给主人，做得更进一步"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "take. . . up a notch",
+          "sourceRole": "stem",
+          "targetText": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+          "targetParagraphId": "para-2024-jia-reading-b-3",
+          "relationType": "locationCue",
+          "note": "转折词 but 暗示猫在狗的 fetching habit 基础上更进一步，take... up a notch 即“提升一个档次/做得更好”，对应正确项 Do better。"
+        }
+      ]
+    },
+    "q-2024-jia-027": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查对全文主旨的概括，选出最贴切的标题。",
+      "stemTranslationZh": "本文合适的标题是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "找到一只聪明猫的窍门。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "But cats are special creatures who possess amazing vocalization skills.",
+            "sourceHighlight": "special creatures",
+            "optionText": "Tips on Finding a Smart Cat",
+            "optionHighlight": "Finding a Smart Cat",
+            "explanation": "全文是解读猫的各种行为，并非教人如何挑选一只聪明的猫；标题偏离主题、范围错位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-b-1",
+              "quote": "But cats are special creatures who possess amazing vocalization skills.",
+              "anchor": "文章讲猫的特性而非找聪明猫的方法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "读懂你家猫的行为。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-b-1",
+              "quote": "They are able to have entire conversations with humans using meows and you’re able to interpret it.",
+              "anchor": "解读猫的喵叫行为"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-b-3",
+              "quote": "Cats bring gifts for their owners to show they love you.",
+              "anchor": "理解猫叼物送礼这一行为的含义"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "和你的猫一起玩乐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "So just go along with it!",
+            "optionText": "Have Fun with Your Cat",
+            "matchType": "wordFamily",
+            "relationNote": "末句轻松口吻“So just go along with it!”易让人联想到玩乐，但全文主体在解读猫的行为，而非介绍如何与猫玩耍，以局部语气干扰对主旨的判断。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-b-3",
+              "quote": "So just go along with it!",
+              "anchor": "结尾轻松语气，非全文主旨"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如何让你的猫保持健康。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "How to Keep Your Cat Healthy",
+            "explanation": "全文围绕猫的喵叫、嗅觉与送礼等行为展开，完全未涉及如何让猫保持健康的话题。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Understanding Your Cat's Behavior",
+          "sourceRole": "correctOption",
+          "targetText": "But cats are special creatures who possess amazing vocalization skills.",
+          "targetParagraphId": "para-2024-jia-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "全文三段分别讲喵叫、嗅觉、送礼三类行为（behavior），正确标题 Understanding Your Cat's Behavior 概括了文章对猫各种行为的解读，与原文 interpret / distinguish / bring gifts 等呼应。"
+        }
+      ]
+    },
+    "q-2024-jia-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Saint Lukas 列车与普通列车的区别，需在首段定位其特殊功能。",
+      "stemTranslationZh": "Saint Lukas 与其他列车有何不同？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它跨国行驶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The Saint Lukas is one of five government-sponsored medical trains that travel to remote towns in central and eastern Russia.",
+            "sourceHighlight": "central and eastern Russia",
+            "optionText": "It runs across countries.",
+            "optionHighlight": "across countries",
+            "explanation": "原文说列车在俄罗斯中部和东部境内行驶，并未跨越国境，选项把范围夸大为「跨国」。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-1",
+              "quote": "travel to remote towns in central and eastern Russia",
+              "anchor": "central and eastern Russia"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它为老年人预留座位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It reserves seats for the seniors.",
+            "explanation": "原文未提及为老年人预留座位，文中只说列车不载普通乘客、只接收病人，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它发挥着医院的功能。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-c-1",
+              "quote": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick.",
+              "anchor": "accepts only the sick"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2024-jia-reading-c-1",
+              "quote": "the doctors and nurses on board provide rural (乡村) populations with basic medical care, X-ray scans and prescriptions",
+              "anchor": "提供基础医疗、X光与开药"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它沿着一条河行驶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "east of the Volga River",
+            "optionText": "It travels along a river.",
+            "matchType": "exact",
+            "relationNote": "原文出现 the Volga River 只是用来界定贫穷农村地区的位置，并非说列车沿河行驶，选项借「river」一词设钩误导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-3",
+              "quote": "the poorer, rural areas east of the Volga River",
+              "anchor": "east of the Volga River"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It functions as a hospital.",
+          "sourceRole": "correctOption",
+          "targetText": "the doctors and nurses on board provide rural (乡村) populations with basic medical care, X-ray scans and prescriptions",
+          "targetParagraphId": "para-2024-jia-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "选项用 functions as a hospital 概括原文 doctors and nurses on board 提供 basic medical care, X-ray scans and prescriptions 的医疗职能。"
+        },
+        {
+          "sourceText": "different from other trains",
+          "sourceRole": "stem",
+          "targetText": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick.",
+          "targetParagraphId": "para-2024-jia-reading-c-1",
+          "relationType": "locationCue",
+          "note": "题干问与普通列车的不同，原文用 doesn’t accept passengers — it accepts only the sick 点明其不载乘客、只接病人的独特之处。"
+        }
+      ]
+    },
+    "q-2024-jia-029": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查根据第三段对 Krasnoyarsk 的推断，需理解政府为何在该地区采取吸引医生等措施。",
+      "stemTranslationZh": "关于 Krasnoyarsk，我们能从第三段推断出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它人口密集。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is heavily populated.",
+            "explanation": "第三段只把 Krasnoyarsk 描述为偏远农村地区，未提及人口稠密，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它为医生提供培训。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk",
+            "optionText": "It offers training for doctors.",
+            "matchType": "exact",
+            "relationNote": "原文出现 doctors 是说政府用财政补助吸引医生前往该地行医，而非该地为医生提供培训，选项借 doctors 一词设钩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-3",
+              "quote": "expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk",
+              "anchor": "motivate doctors to practice medicine"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它是一座现代化城市。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk",
+            "sourceHighlight": "the poorer, rural areas",
+            "optionText": "It is a modern city.",
+            "optionHighlight": "a modern city",
+            "explanation": "原文把 Krasnoyarsk 归入伏尔加河以东较贫穷的农村偏远地区，与「现代化城市」恰好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-3",
+              "quote": "the poorer, rural areas east of the Volga River",
+              "anchor": "poorer, rural areas"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它需要医疗援助。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-c-3",
+              "quote": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River",
+              "anchor": "poorer, rural areas need measures"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2024-jia-reading-c-3",
+              "quote": "expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk",
+              "anchor": "吸引医生前往 Krasnoyarsk"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It needs medical aid.",
+          "sourceRole": "correctOption",
+          "targetText": "expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk",
+          "targetParagraphId": "para-2024-jia-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "由原文政府需扩大 financial aid programs、吸引医生到 Krasnoyarsk 行医，可推断该地缺医、needs medical aid。"
+        }
+      ]
+    },
+    "q-2024-jia-030": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Saint Lukas 一次补给后能工作多久，需在第四段定位运行与补给的时间信息。",
+      "stemTranslationZh": "Saint Lukas 一次补给后能工作多长时间？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "约一年。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Most stations wait about a year between visits.",
+            "sourceEntity": "stations wait about a year between visits",
+            "optionText": "About a year.",
+            "optionEntity": "the train works for a year on one supply",
+            "explanation": "原文 about a year 指的是多数站点两次到访之间的间隔时间，并非列车一次补给后的工作时长，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-4",
+              "quote": "Most stations wait about a year between visits.",
+              "anchor": "stations wait about a year"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "约十个月。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "For 10 months every year, the train stops at about eight stations over two weeks, before returning to the regional capital to refuel and restock (补给) .",
+            "sourceEntity": "For 10 months every year the train operates",
+            "optionText": "About ten months.",
+            "optionEntity": "the train works ten months on one supply",
+            "explanation": "原文 10 months 指列车每年总的运行月数，而非一次补给后的连续工作时长，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-4",
+              "quote": "For 10 months every year, the train stops at about eight stations over two weeks",
+              "anchor": "For 10 months every year"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "约两个月。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "About two months.",
+            "explanation": "原文中并无两个月这一时长，文中只说每月开始新一轮，并未说一次补给可工作两个月，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "约两周。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-c-4",
+              "quote": "the train stops at about eight stations over two weeks, before returning to the regional capital to refuel and restock (补给) .",
+              "anchor": "two weeks before refuel and restock"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "How long can the Saint Lukas work with one supply",
+          "sourceRole": "stem",
+          "targetText": "the train stops at about eight stations over two weeks, before returning to the regional capital to refuel and restock (补给) .",
+          "targetParagraphId": "para-2024-jia-reading-c-4",
+          "relationType": "locationCue",
+          "note": "题干 work with one supply 对应原文列车 over two weeks 后才 returning to the regional capital to refuel and restock，即两次补给之间工作约两周。"
+        }
+      ]
+    },
+    "q-2024-jia-031": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查 Ducke 对 Saint Lukas 服务的态度，需根据末段他的评价判断情感倾向。",
+      "stemTranslationZh": "Ducke 对 Saint Lukas 的服务持何种态度？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "赞赏的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-c-5",
+              "quote": "I was very impressed by the doctors and their assistants working and living in such little space but still staying focused and very concerned",
+              "anchor": "very impressed"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2024-jia-reading-c-5",
+              "quote": "They were the best chance for many rural people to get the treatment they want.",
+              "anchor": "the best chance"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "怀疑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I was very impressed by the doctors and their assistants working and living in such little space but still staying focused and very concerned",
+            "sourceHighlight": "very impressed",
+            "optionText": "Doubtful",
+            "optionHighlight": "Doubtful",
+            "explanation": "原文 Ducke 表示 very impressed 并称这是乡村居民获治的最佳机会，态度积极，与「怀疑」正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-5",
+              "quote": "I was very impressed by the doctors and their assistants",
+              "anchor": "very impressed"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "模棱两可的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "They were the best chance for many rural people to get the treatment they want.",
+            "sourceHighlight": "the best chance",
+            "optionText": "Ambiguous.",
+            "optionHighlight": "Ambiguous",
+            "explanation": "Ducke 明确称列车是乡村居民获治的 best chance，态度鲜明而肯定，并非含糊不清。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-5",
+              "quote": "They were the best chance for many rural people to get the treatment they want.",
+              "anchor": "the best chance"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "谨慎的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I was very impressed by the doctors and their assistants working and living in such little space but still staying focused and very concerned",
+            "sourceHighlight": "very impressed",
+            "optionText": "Cautious.",
+            "optionHighlight": "Cautious",
+            "explanation": "原文 Ducke 用 very impressed 等表达直接而热情地赞扬列车服务，并无谨慎保留之意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-c-5",
+              "quote": "I was very impressed by the doctors and their assistants",
+              "anchor": "very impressed"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Appreciative.",
+          "sourceRole": "correctOption",
+          "targetText": "I was very impressed by the doctors and their assistants working and living in such little space but still staying focused and very concerned",
+          "targetParagraphId": "para-2024-jia-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "选项 Appreciative 对应原文 very impressed 及 the best chance 等正面评价，体现赞赏态度。"
+        }
+      ]
+    },
+    "q-2024-jia-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者去找Gracie教授的原因，需定位到首段作者与教授交流的具体情境。",
+      "stemTranslationZh": "作者为什么去找Gracie教授？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了讨论一部小说。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-d-1",
+              "quote": "“I didn’t like the ending,” I said to my favorite college professor.",
+              "anchor": "向教授谈起结局"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-d-1",
+              "quote": "I had just finished reading The Mill on the Floss by George Eliot, and I was heartbroken with the ending.",
+              "anchor": "刚读完一部小说"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了提交一篇读书报告。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者去找教授是为了提交读书报告。",
+            "explanation": "原文未提及作者要提交任何读书报告，作者只是去与教授谈论自己读到的结局。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了替某位作家辩护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者去找教授是为了替一位作家辩护。",
+            "explanation": "原文未提及作者要为任何作家辩护，作者是表达对结局的不满而非维护作者。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了索取一份阅读书单。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者去找教授是为了要一份阅读书单。",
+            "explanation": "原文未提及作者向教授索要书单，后文虽提到选书变容易，但那是顿悟后的结果，并非去找教授的目的。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To discuss a novel.",
+          "sourceRole": "correctOption",
+          "targetText": "“I didn’t like the ending,” I said to my favorite college professor.",
+          "targetParagraphId": "para-2024-jia-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "选项 discuss a novel 对应原文作者就刚读完的小说 The Mill on the Floss 的结局向教授发表看法（said to my professor about the ending）。"
+        }
+      ]
+    },
+    "q-2024-jia-033": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查作者见过教授后意识到了什么，需定位第二段顿悟内容及其后的举例归纳。",
+      "stemTranslationZh": "见过Gracie教授后，作者意识到了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "写作是个人偏好的问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "He suggested I think about the difference between endings that I wanted for the characters and endings that were right for the characters",
+            "sourceHighlight": "endings that were right for the characters",
+            "optionText": "Writing is a matter of personal preferences.",
+            "optionHighlight": "a matter of personal preferences",
+            "explanation": "教授恰恰是引导作者超越个人喜好（beyond whether I liked it），去思考“适合人物的结局”，与“写作是个人偏好问题”相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-d-1",
+              "quote": "asked me to think about it beyond whether I liked it or not",
+              "anchor": "超越个人喜好"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "读者常常被人物所打动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者意识到读者常常被人物冲昏头脑。",
+            "explanation": "原文未提及“读者常被人物带跑”这一普遍结论；作者的顿悟是关于不同类型文学各有其结局，而非读者被人物左右。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "每种类型的文学都有其独特的结局。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-d-2",
+              "quote": "if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance. If I wanted an ending I couldn’t guess, I’d pick up a mystery (悬疑小说) . One where I kind of knew what was going to happen, historical fiction.",
+              "anchor": "不同类型对应不同结局"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-d-2",
+              "quote": "This was an aha moment for me, and I never thought about endings the same way again.",
+              "anchor": "顿悟时刻"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "开头好的故事就会结尾好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "开头好的故事必然会有好结局。",
+            "explanation": "原文未提及故事开头与结局之间的因果关系，此说法无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Each type of literature has its unique ending.",
+          "sourceRole": "correctOption",
+          "targetText": "if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance. If I wanted an ending I couldn’t guess, I’d pick up a mystery (悬疑小说) . One where I kind of knew what was going to happen, historical fiction.",
+          "targetParagraphId": "para-2024-jia-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 each type of literature has its unique ending 是对原文按结局类型（happy / couldn’t guess / kind of knew）对应不同文学类型（love romance / mystery / historical fiction）这一举例的归纳。"
+        }
+      ]
+    },
+    "q-2024-jia-034": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查“好的结局”应具备什么，需定位第三段对好结局的要求。",
+      "stemTranslationZh": "好的结局被期望具备什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它满足读者的口味。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "endings that I wanted for the characters and endings that were right for the characters, endings that satisfied the story even if they didn’t have a traditionally positive outcome",
+            "sourceHighlight": "endings that satisfied the story",
+            "optionText": "It satisfies readers' taste.",
+            "optionHighlight": "satisfies readers' taste",
+            "explanation": "原文强调结局要“满足故事”（satisfied the story）、适合人物，而非迎合读者的口味；将“满足故事”偷换为“满足读者口味”属偏离。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-d-1",
+              "quote": "endings that satisfied the story even if they didn’t have a traditionally positive outcome",
+              "anchor": "满足故事而非读者"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它与故事的发展相契合。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-d-3",
+              "quote": "You have to balance creating an ending that’s unpredictable, but doesn’t seem to come from nowhere, one that fits what’s right for the characters.",
+              "anchor": "结局要契合人物与故事"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它通常是积极的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "endings that satisfied the story even if they didn’t have a traditionally positive outcome",
+            "sourceHighlight": "even if they didn’t have a traditionally positive outcome",
+            "optionText": "It is usually positive.",
+            "optionHighlight": "usually positive",
+            "explanation": "原文明确指出好结局即使没有传统意义上的正面结果也行，与“通常是积极的”相悖。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-d-1",
+              "quote": "even if they didn’t have a traditionally positive outcome",
+              "anchor": "未必正面"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它留给人想象的空间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "好的结局会给人留下想象空间。",
+            "explanation": "原文未提及好结局要“开放、留给读者想象”，反而强调结局不能“凭空而来”（doesn’t seem to come from nowhere），此说法无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It fits with the story development.",
+          "sourceRole": "correctOption",
+          "targetText": "one that fits what’s right for the characters",
+          "targetParagraphId": "para-2024-jia-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 fits with the story development 对应原文 fits what’s right for the characters，即结局要契合人物与故事本身的发展。"
+        }
+      ]
+    },
+    "q-2024-jia-035": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查作者提及Peter Mountford和Elizabeth Sims的目的，需结合第四段二者在杂志中所起的作用判断。",
+      "stemTranslationZh": "作者为什么提到Peter Mountford和Elizabeth Sims？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了举出伟大小说家的例子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Elizabeth Sims analyzes the final chapters of five great novels to see what key points they include",
+            "sourceEntity": "five great novels",
+            "optionText": "To give examples of great novelists.",
+            "optionEntity": "great novelists",
+            "explanation": "原文中“great”修饰的是被分析的“五部伟大小说”，而非Peter Mountford和Elizabeth Sims本人；二人是为杂志撰文者，并非作者举例的“伟大小说家”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2024-jia-reading-d-4",
+              "quote": "Elizabeth Sims analyzes the final chapters of five great novels",
+              "anchor": "great指小说不指作者"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了强调本期杂志的主题。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2024-jia-reading-d-4",
+              "quote": "That’s why this issue (期) of Writer’s Digest aims to help you figure out how to write the best ending for whatever kind of writing you’re doing.",
+              "anchor": "本期主题：写好结局"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2024-jia-reading-d-4",
+              "quote": "Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
+              "anchor": "栏目服务于主题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了鼓励为该杂志撰稿。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者提及二人是为了鼓励读者为杂志投稿。",
+            "explanation": "原文未提及鼓励读者为杂志撰稿，提及二人是为说明本期杂志如何帮助读者写好结局。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了推荐他们的新书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者提及二人是为了推荐他们的新书。",
+            "explanation": "原文未提及二人的新书，二人是在本期杂志中撰写栏目内容，并非推销其新书。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To stress the theme of this issue.",
+          "sourceRole": "correctOption",
+          "targetText": "That’s why this issue (期) of Writer’s Digest aims to help you figure out how to write the best ending for whatever kind of writing you’re doing.",
+          "targetParagraphId": "para-2024-jia-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 stress the theme of this issue 对应原文本期杂志旨在帮助读者写好结局这一主题，Peter Mountford 与 Elizabeth Sims 的栏目正是围绕该主题展开的例证。"
+        }
+      ]
+    }
+  }
+}

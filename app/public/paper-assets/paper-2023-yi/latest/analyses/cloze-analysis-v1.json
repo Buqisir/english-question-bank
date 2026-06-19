@@ -1,0 +1,846 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2023-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-yi-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-yi-cloze": {
+      "overview": "记叙文。讲述体操运动员 Gabby Douglas 为夺取奥运会个人全能冠军，14 岁时离开熟悉的家乡、远赴外地跟随中国教练训练，最终战胜对手、成为首位夺冠的黑人女性的励志故事。",
+      "affectiveArc": "情感主线为先苦后甜、由舍到得：先写她忍痛割舍熟悉的一切，再写她坚定信念、刻苦训练，最终绽放夺冠，全程基调积极向上。"
+    }
+  },
+  "blanks": {
+    "q-2023-yi-041": {
+      "blankId": "blank-2023-yi-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "everything she knew best 意为“她最熟悉的一切”，knew 与 best 搭配，表示对家乡生活的熟悉，与下文“离开家乡、一切都是新的”形成对照。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tried",
+          "meaning": "尝试（做得最好的）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "thought",
+          "meaning": "认为、思考"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "judged",
+          "meaning": "评判、判断"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "best",
+          "signalSide": "context-after",
+          "targetText": "knew best",
+          "relation": "know ... best 构成“最熟悉”的固定搭配，锁定 knew。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "everything was new to her",
+          "signalSide": "context-after",
+          "relation": "段末“一切对她都是新的”与“她最熟悉的一切”形成对照，印证此处指熟悉。"
+        }
+      ],
+      "teachingNote": "看后接词 best 与全篇“离开熟悉、迎接陌生”的对照逻辑，确定动词词义。"
+    },
+    "q-2023-yi-042": {
+      "blankId": "blank-2023-yi-042",
+      "blankNo": 42,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "pack up 意为“收拾打包”，her bedroom 指她要离家，需把卧室里的东西收拾打包搬走，与“离开家乡远行”的语境合成义一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "take up",
+          "meaning": "占用、开始从事"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "clean up",
+          "meaning": "打扫干净"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "do up",
+          "meaning": "装饰、修缮"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her bedroom in Virginia",
+          "signalSide": "context-after",
+          "targetText": "pack up her bedroom",
+          "relation": "宾语是要离开的卧室，pack up 表示收拾打包搬离，施受关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "had to leave everything",
+          "signalSide": "context-before",
+          "relation": "上文“不得不离开一切”说明她要搬走，故卧室需打包。"
+        }
+      ],
+      "teachingNote": "短语题用语境合成义：离家搬迁对应“收拾打包”。"
+    },
+    "q-2023-yi-043": {
+      "blankId": "blank-2023-yi-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "say goodbye to 是“向……告别”的固定搭配，她要离开家乡，自然要向两只狗和海滩告别。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hello",
+          "meaning": "（打招呼）你好"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "thanks",
+          "meaning": "感谢"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "no",
+          "meaning": "拒绝、说不"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to her two dogs and to the beach",
+          "signalSide": "context-after",
+          "targetText": "say goodbye to",
+          "relation": "say goodbye to 接告别对象，宾语是要离开的狗和海滩，搭配成立。"
+        }
+      ],
+      "teachingNote": "离别语境中 say ___ to 固定接 goodbye。"
+    },
+    "q-2023-yi-044": {
+      "blankId": "blank-2023-yi-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "ride waves 意为“冲浪、驾驭海浪”，on her board（在冲浪板上）说明是冲浪动作，she loved to 表明这是她喜爱的活动。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cause",
+          "meaning": "引起、导致（浪）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "observe",
+          "meaning": "观察（浪）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "strike",
+          "meaning": "击打（浪）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "waves on her board",
+          "signalSide": "context-after",
+          "targetText": "ride waves on her board",
+          "relation": "宾语 waves 加 on her board，ride waves 表示在冲浪板上冲浪，施受关系成立。"
+        }
+      ],
+      "teachingNote": "由 board 和 waves 锁定“冲浪”动作 ride。"
+    },
+    "q-2023-yi-045": {
+      "blankId": "blank-2023-yi-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "it was time to take the leap 意为“是时候纵身一跃了”，time to do 固定搭配表示“到了做某事的时候”，强调下决心迈出这一步。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "common",
+          "meaning": "常见的、普通的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fun",
+          "meaning": "乐趣、有趣"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tough",
+          "meaning": "艰难的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to take the leap",
+          "signalSide": "context-after",
+          "targetText": "time to take the leap",
+          "relation": "it was time to do sth. 固定句式，后接动词不定式 to take the leap，锁定 time。"
+        }
+      ],
+      "teachingNote": "it was ___ to do 句式优先考虑 time 的固定搭配。"
+    },
+    "q-2023-yi-046": {
+      "blankId": "blank-2023-yi-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "however heartbreaking it would be 意为“无论这有多令人心碎”，呼应离开熟悉的一切所带来的痛苦，与上文不舍的情感基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "breathtaking",
+          "meaning": "惊险刺激的、令人惊叹的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "eye-catching",
+          "meaning": "引人注目的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "head-spinning",
+          "meaning": "令人眩晕的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "had to leave everything",
+          "signalSide": "context-before",
+          "relation": "上文一连串“不得不离开、舍弃”渲染不舍痛苦的情感，对应 heartbreaking 令人心碎。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "however",
+          "signalSide": "context-before",
+          "targetText": "however heartbreaking it would be",
+          "relation": "however + 形容词让步状语，修饰迈出这一步的痛苦程度。"
+        }
+      ],
+      "teachingNote": "形容词题看情感一致：离别之痛对应 heartbreaking。"
+    },
+    "q-2023-yi-047": {
+      "blankId": "blank-2023-yi-047",
+      "blankNo": 47,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "went off 意为“离开、动身前往”，与后文 about 1,200 miles away from home（离家约 1200 英里）搭配，表示她远赴他乡。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dropped out",
+          "meaning": "退出、辍学"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "moved on",
+          "meaning": "继续前进、向前看"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pulled over",
+          "meaning": "（车辆）靠边停下"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "about 1,200 miles away from home",
+          "signalSide": "context-after",
+          "targetText": "went off about 1,200 miles away from home",
+          "relation": "后接表距离的 away from home，went off 表示动身远行到离家很远处，语境合成义成立。"
+        }
+      ],
+      "teachingNote": "短语题结合“离家 1200 英里”的距离语境，确定“动身离开”went off。"
+    },
+    "q-2023-yi-048": {
+      "blankId": "blank-2023-yi-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "train with a coach 意为“跟教练一起训练”，她是体操运动员，远行的目的是跟中国教练训练，与 coach 搭配最合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reason",
+          "meaning": "推理、说理"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "talk",
+          "meaning": "交谈"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "compete",
+          "meaning": "竞争、比赛"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with a coach from China",
+          "signalSide": "context-after",
+          "targetText": "train with a coach",
+          "relation": "with a coach 说明对象是教练，运动员跟教练做的是训练，train 搭配成立。"
+        }
+      ],
+      "teachingNote": "运动员与 coach 的常见搭配动作是 train。"
+    },
+    "q-2023-yi-049": {
+      "blankId": "blank-2023-yi-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "a family she had never met 意为“一个她从未见过面的家庭”，她寄住在陌生人家，met 与“everything was new to her 一切都是新的”相呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "helped",
+          "meaning": "帮助过"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "understood",
+          "meaning": "理解"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "needed",
+          "meaning": "需要"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "everything was new to her",
+          "signalSide": "context-after",
+          "relation": "“一切都是新的”说明这家人她素未谋面，对应 never met。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a family",
+          "signalSide": "context-before",
+          "targetText": "a family she had never met",
+          "relation": "宾语 a family 与 met 搭配，表示从未见过这家人。"
+        }
+      ],
+      "teachingNote": "由“一切都是新的”推断与寄宿家庭素不相识 never met。"
+    },
+    "q-2023-yi-050": {
+      "blankId": "blank-2023-yi-050",
+      "blankNo": 50,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "did exactly what she needed to do 意为“正是做到了她该做的事”，exactly 强调与所需完全吻合，呼应她最终夺冠的结果。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "approximately",
+          "meaning": "大约、大概"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "gradually",
+          "meaning": "逐渐地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "possibly",
+          "meaning": "可能地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "what she needed to do",
+          "signalSide": "context-after",
+          "targetText": "exactly what she needed to do",
+          "relation": "exactly 修饰 what she needed to do，强调“正好做到所需”，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "As it turned out",
+          "signalSide": "context-before",
+          "relation": "“结果证明”引出确切结果，与 exactly 的精确语气一致。"
+        }
+      ],
+      "teachingNote": "exactly what 强调“正是、恰好”，与确定的成功结果搭配。"
+    },
+    "q-2023-yi-051": {
+      "blankId": "blank-2023-yi-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "defeated two Russians 意为“击败了两名俄罗斯选手”，下文“成为奥运冠军、首位夺冠黑人女性”说明她赢了对手，defeated 符合夺冠语境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "pleased",
+          "meaning": "使……高兴"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "respected",
+          "meaning": "尊敬"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "assisted",
+          "meaning": "协助、帮助"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "two Russians",
+          "signalSide": "context-after",
+          "targetText": "defeated two Russians",
+          "relation": "宾语 two Russians 是竞争对手，夺冠须击败对手，defeated 施受关系成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "become Olympic champion",
+          "signalSide": "context-before",
+          "relation": "“成为奥运冠军”印证她战胜了对手。"
+        }
+      ],
+      "teachingNote": "夺冠语境中对“对手”的动作是 defeat 击败。"
+    },
+    "q-2023-yi-052": {
+      "blankId": "blank-2023-yi-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "transform A into B 意为“把 A 变成 B”，此处教练把她培养成顶尖体操选手，与介词 into 搭配，符合“蜕变成长”的语境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "forced",
+          "meaning": "强迫"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "persuaded",
+          "meaning": "说服"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "put",
+          "meaning": "放置"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into one of the best gymnasts",
+          "signalSide": "context-after",
+          "targetText": "transformed Douglas into one of the best gymnasts",
+          "relation": "transform ... into ... 固定搭配，into 后接结果“最优秀的体操选手之一”，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "helping her skyrocket",
+          "signalSide": "context-after",
+          "relation": "“帮助她一飞冲天”印证教练促成的巨大转变，呼应 transform。"
+        }
+      ],
+      "teachingNote": "见介词 into 接结果，优先 transform ... into 的“转变成”搭配。"
+    },
+    "q-2023-yi-053": {
+      "blankId": "blank-2023-yi-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "the best gymnasts in the world 意为“世界上最优秀的体操选手之一”，奥运冠军是世界级水平，in the world 与“奥运、顶尖”话题场呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "city",
+          "meaning": "城市"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "team",
+          "meaning": "团队、队伍"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "state",
+          "meaning": "州"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "best gymnasts in the",
+          "signalSide": "context-before",
+          "targetText": "best gymnasts in the world",
+          "relation": "in the ___ 修饰范围，best gymnasts in the world 表“世界最佳体操选手”，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "one of the best gymnasts",
+          "signalSide": "context-before",
+          "targetText": "best gymnasts in the world",
+          "relation": "“最优秀的体操选手之一”属奥运世界级话题场，与 in the world 呼应。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Olympic champion",
+          "signalSide": "context-before",
+          "relation": "奥运冠军是世界顶尖，印证 world 而非 city/state。"
+        }
+      ],
+      "teachingNote": "名词题看话题场：奥运顶尖水平对应 in the world。"
+    },
+    "q-2023-yi-054": {
+      "blankId": "blank-2023-yi-054",
+      "blankNo": 54,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "an average member 意为“一名普通成员”，与 to the top of the sport（登上该项运动的巅峰）形成由平凡到顶尖的对比，凸显其飞跃。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "amateur",
+          "meaning": "业余的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "elected",
+          "meaning": "当选的、被选出的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "enthusiastic",
+          "meaning": "热情的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "member of the national team",
+          "signalSide": "context-after",
+          "targetText": "average member of the national team",
+          "relation": "修饰 member，average member 指“普通一员”，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "to the top of the sport",
+          "signalSide": "context-after",
+          "relation": "“登上该项运动巅峰”与“普通成员”形成由低到高的对照，锁定 average。"
+        }
+      ],
+      "teachingNote": "from ___ to the top 的“低—高”对比锁定“普通的”average。"
+    },
+    "q-2023-yi-055": {
+      "blankId": "blank-2023-yi-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "winning the Olympic all-around title 意为“赢得奥运全能冠军头衔”，下文“成为首位夺冠黑人女性”说明她是夺得而非卫冕，winning 与 title 搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "clarifying",
+          "meaning": "澄清"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "defending",
+          "meaning": "卫冕、捍卫"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "demanding",
+          "meaning": "要求、强烈需求"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the Olympic all-around title",
+          "signalSide": "context-after",
+          "targetText": "winning the Olympic all-around title",
+          "relation": "win the title 固定搭配，宾语是全能冠军头衔，winning 搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the first black woman to do so",
+          "signalSide": "context-after",
+          "relation": "“首位做到此事的黑人女性”说明是首次夺得，对应 winning 而非卫冕。"
+        }
+      ],
+      "teachingNote": "win the title 搭配 + “首位”信息排除“卫冕”，锁定 winning。"
+    },
+    "q-2023-yi-056": {
+      "blankId": "blank-2023-yi-056",
+      "blankNo": 56,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "led the competition from beginning to end 意为“从头到尾领跑比赛”，她是冠军，led 与 from beginning to end 搭配，表示全程领先。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "followed",
+          "meaning": "跟随、追随"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "organized",
+          "meaning": "组织"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "watched",
+          "meaning": "观看"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "from beginning to end",
+          "signalSide": "context-after",
+          "targetText": "led the competition from beginning to end",
+          "relation": "led + from beginning to end 表示“全程领跑”，作为冠军施动者，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "she would win",
+          "signalSide": "context-after",
+          "relation": "“她会赢”印证她在比赛中处于领先地位，对应 led。"
+        }
+      ],
+      "teachingNote": "冠军“全程领先”用 lead the competition from beginning to end。"
+    },
+    "q-2023-yi-057": {
+      "blankId": "blank-2023-yi-057",
+      "blankNo": 57,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "felt confident ... that she would win 意为“一直坚信自己会赢”，confident that 引导信念，与“全程领跑、坚信夺冠”的自信基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "nervous",
+          "meaning": "紧张的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "excited",
+          "meaning": "兴奋的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "uneasy",
+          "meaning": "不安的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that she would win",
+          "signalSide": "context-after",
+          "targetText": "confident all along that she would win",
+          "relation": "confident that 引导宾语从句，表“坚信会赢”，搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "all along",
+          "signalSide": "context-after",
+          "relation": "“自始至终”强化坚定信念的语气，对应自信 confident。"
+        }
+      ],
+      "teachingNote": "形容词题看情感一致：坚信会赢对应 confident 自信。"
+    },
+    "q-2023-yi-058": {
+      "blankId": "blank-2023-yi-058",
+      "blankNo": 58,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "have what it takes 意为“具备所需的素质（条件）”，是固定习语，此处指 Karolyi 起初认为 Douglas 不具备当奥运选手的素质，takes 与 what it 搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "viewed",
+          "meaning": "看待、视为"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "appeared",
+          "meaning": "出现、显得"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mattered",
+          "meaning": "要紧、有关系"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "what it",
+          "signalSide": "context-before",
+          "targetText": "what it takes to be an Olympian",
+          "relation": "have what it takes to do 固定习语，what it 后接 takes，搭配成立。"
+        }
+      ],
+      "teachingNote": "习语 have what it takes to do “具备做某事的素质”锁定 takes。"
+    },
+    "q-2023-yi-059": {
+      "blankId": "blank-2023-yi-059",
+      "blankNo": 59,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "more and more 意为“越来越（这么认为）”，与 As time went by（随着时间推移）搭配，表示 Karolyi 逐渐越来越相信她能行，体现态度转变。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "now and then",
+          "meaning": "偶尔、时不时"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "far and wide",
+          "meaning": "到处、四面八方"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "on and on",
+          "meaning": "持续不断地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she thought",
+          "signalSide": "context-before",
+          "targetText": "she thought more and more",
+          "relation": "more and more 作状语修饰 thought，表“越来越这么认为”，修饰关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "As time went by",
+          "signalSide": "context-before",
+          "relation": "“随着时间推移”引出渐进变化，与 more and more 表“越来越”的递增义合成一致。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "did not think Douglas had what it",
+          "signalSide": "context-before",
+          "relation": "上文“起初不认为她行”与此处态度逐渐转变形成对比，对应越来越相信。"
+        }
+      ],
+      "teachingNote": "短语题结合“随时间推移”的渐进语境，确定递增义 more and more。"
+    },
+    "q-2023-yi-060": {
+      "blankId": "blank-2023-yi-060",
+      "blankNo": 60,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "ready to shine 意为“准备好大放异彩”，下文 And shine she did（她确实闪耀了）用 shine 复现，原词回指锁定答案。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "fly",
+          "meaning": "飞翔"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dance",
+          "meaning": "跳舞"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "score",
+          "meaning": "得分"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’m ready to",
+          "signalSide": "context-before",
+          "targetText": "ready to shine",
+          "relation": "ready to do 后接动词原形，ready to shine 表“准备好大放异彩”，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "And shine she did",
+          "signalSide": "context-after",
+          "targetText": "ready to shine",
+          "relation": "紧接着的 And shine she did 原词复现 shine，回指此空，锁定答案。"
+        }
+      ],
+      "teachingNote": "看下句原词复现 shine，直接回指锁定动词。"
+    }
+  }
+}

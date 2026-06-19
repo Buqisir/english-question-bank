@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2022-yi",
+  "sourceFileName": "2022年全国乙卷-答案版.docx",
+  "sourceFileSha256": "3fb93b2cd30bc2f5bac83e53a3eba0425fb3eb86709fb19394960f3bfd5ed0e6",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T09:01:43.939Z",
+  "paper": {
+    "year": 2022,
+    "region": "全国乙卷",
+    "paperName": "2022年全国乙卷",
+    "examCode": "2022-yi",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2022",
+      "全国乙卷"
+    ]
+  },
+  "groups": {
+    "group-2022-yi-reading-a": {
+      "groupId": "group-2022-yi-reading-a",
+      "difficulty": "中",
+      "summary": "本篇为一则苏格兰国家肖像画廊举办的亨利·雷伯恩（Henry Raeburn）画展的实用信息广告，介绍展览概况、配套讲座系列、开放时间、门票价格以及面向学校与学院团体的优惠。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2022-yi-reading-b": {
+      "groupId": "group-2022-yi-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇书评，评介 Dorothy Wickenden 的著作《Nothing Daunted》。该书讲述 1916 年两位出身富裕家庭的女孩 Dorothy Woodruff 和 Rosamond Underwood 离开舒适生活，前往科罗拉多州 Elkhead 的一间单室校舍支教的真实经历，并由此延展到西部历史与女权主义。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2022-yi-reading-c": {
+      "groupId": "group-2022-yi-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇科技说明文，介绍用无人机（drones）巡检铁路的设想及其前景。文章从设问开头，先说明该技术为何可行（已用于高压电线巡检），再讲它带来的安全、可靠与节省维护成本的好处，最后展望未来「铁路无人机」在轨道上先于列车行进、像副驾一样提前预警的新概念。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2022-yi-reading-d": {
+      "groupId": "group-2022-yi-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇说明性新闻报道，介绍英国政府针对含糖软饮料征收的“糖税”（sugar tax）：政策的初衷、实际税收远低于预期、制造商通过降糖避税以及政策被视为成功的整体评价。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2022-yi-seven-choices": {
+      "groupId": "group-2022-yi-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍维持远距离友谊的五种方法。文章以小标题（bullet）领起每个段落，正文紧接展开。七选五的五个空分别落在不同位置：有的是段尾收束句、有的是段首主题句、有的是小标题本身。解题需结合小标题、段内关键词和逻辑/指代衔接综合判断。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2022-yi-cloze": {
+      "groupId": "group-2022-yi-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2022-yi-grammar-fill": {
+      "groupId": "group-2022-yi-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}
