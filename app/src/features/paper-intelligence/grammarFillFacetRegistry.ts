@@ -134,11 +134,11 @@ export const FACET_FRAMEWORKS: Record<string, FacetFrameworkEntry> = {
     framework: {
       steps: [
         '第一步｜由空的句法位置/搭配判定目标词性：缺定语/表语 → 形容词。',
-        '第二步｜判 -ing（令人…主动/事物本身特性）vs -ed（感到…被动/人的感受），由主语与该动作的施受关系决定。',
+        '第二步｜把提示词（动词）派生为非分词形容词的正确形式（真形容词后缀 -able/-ous/-ful/-ive 或 a- 前缀：remark→remarkable / harm→harmful / sleep→asleep）。',
       ],
       notes: [
-        '高考考向：动→形的 -ing（令人…）vs -ed（感到…）之分；情感动词是高频考点。',
-        '识别信号：空需要的词性 ≠ 提示词词性（动词），且目标词性为形容词。',
+        '收窄（PO 2026-06-19，句法功能优先）：仅取非分词形容词派生；情感/状态分词（excited/educated/closed/astonished）作表语/定语/宾补一律归 grammar-fill.given.verb.non-finite + role，不入此叶。',
+        '识别信号：空需要的词性 ≠ 提示词词性（动词），且目标词性为非分词形容词（-able/-ous/-ful/-ive、a-）。',
       ],
     },
   },

@@ -141,6 +141,7 @@ IP，**不由 AI 生成**（零幻觉）。AI 每空只做三件事：① 定 `f
 - **7 种成分（位置判定 → 定成分）**:
   - **作主语**：非谓语整体动作（事情）在谓语动词/系动词**之前**。（回忆 to do 与 doing 作主语的区别）
   - **作表语**：在系动词之后 / 形容词做表语。（不定式 vs 动名词作表语；done 与 v-ing 作表语＝形容词的区别）
+    例：**情感/状态分词作表语**——become **educated** / was **excited** / stays **closed**（role=predicative，归此而非 `derivation.verb-to-adj`）。
   - **作宾语**：在谓语动词或介词之后。（介词后接动名词；记常见接动名词的谓语动词，及含介词 to）
   - **作定语（有修饰性）**：单词作前置定语紧贴被修饰名词**之前**〔#高考考向：现在分词/过去分词作前置定语〕；
     短语作后置定语紧跟被修饰名词**之后**。
@@ -187,13 +188,20 @@ IP，**不由 AI 生成**（零幻觉）。AI 每空只做三件事：① 定 `f
 - **recognize（PO 确认 2026-05-31）**: 空需要的词性 ≠ 提示词词性 → 词性转换。按「从→到」分：
   - `noun-to-adj` 名词→形容词（如 health→healthy）
   - `verb-to-noun` 动词→名词（如 decide→decision）
-  - `verb-to-adj` 动词→形容词（如 surprise→surprising/surprised）
+  - `verb-to-adj` 动词→**非分词**形容词（真形容词后缀 -able/-ous/-ful/-ive 或 a- 前缀：remark→remarkable / harm→harmful / sleep→asleep）
   - `adjective-to-noun` 形容词→名词（如 curious→curiosity；2026-06-19 PO 补叶）
 - **framework**: ① 由空的句法位置/搭配判定**目标词性**（缺定语/表语→形容词；缺主宾→名词）；
-  ② 把提示词派生为该词性的正确形式（注意 v→adj 的 -ing/-ed 之分＝主被动/情感）。
-- **gaokao_focus**: 动→形的 -ing（令人…）vs -ed（感到…）之分；名↔形常见词族。
+  ② 把提示词派生为该词性的正确形式（v→adj **仅取非分词后缀派生** -able/-ous/-ful/-ive、a-；-ed/-ing 分词作表语/定语/状语/宾补归 `verb.non-finite` + role，不在此处理）。
+- **gaokao_focus**: 名↔形常见词族；动→形仅取**非分词**派生（-able/-ous/-ful/-ive、a-）。情感/状态分词（excited/educated/closed/astonished）作表语/定语/宾补走 `verb.non-finite` + role（句法功能优先），不入此叶。
 - **evidence_targets**: 决定目标词性的句法信号（被修饰的名词、系动词、冠词/限定词、主宾位置）。
-- **answer_logic**: 提示词 → 目标词性的派生形（v→adj 还要判 -ing/-ed）。
+- **answer_logic**: 提示词 → 目标词性的派生形（v→adj 取非分词形容词后缀；分词 -ed/-ing 归 non-finite）。
+
+- **verb-to-adj 收窄（PO 2026-06-19，句法功能优先）**: 给定动词变来的分词（-ed/-ing）一律归
+  `grammar-fill.given.verb.non-finite` + role；`verb-to-adj` **仅留非分词的真形容词派生**（后缀
+  -able/-ous/-ful/-ive、前缀 a-：remarkable / harmful / asleep）。判定口令：给定动词、答案是 -ed/-ing
+  → **先判句法 role（表语/定语/状语/宾补/主补）走 non-finite**；只有答案是非分词形容词后缀或 a- 前缀派生时
+  才 `verb-to-adj`。（背景：全量标注 31 套发现 analyzer 把"分词作表语/定语/宾补"系统性误塞进
+  verb-to-adj，致"非谓语作表语"几乎消失。17 叶不变，仅调 verb-to-adj 收录边界。）
 
 - **形→副归属（PO 确认 (1) 2026-05-31）**: 「形容词→副词（变副词）」**不**进 derivation；它是
   `adjective` facet 的首要默认动作。derivation 含跨类四方向 名→形 / 动→名 / 动→形 / 形→名（形→名 2026-06-19 补）。
