@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2023-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-yi-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-yi-seven-choices": {
+      "overview": "本文是一篇介绍室内植物（indoor plants）的说明文，采用标题—问答式结构，依次回答 What are indoor plants? / Why are indoor plants good for you? / Which plants can you grow? 三个小标题问题。七选五的五个空分布在引言段和三个主体板块，考查段首主题句、段尾衔接句以及引语内的概括与指代衔接。",
+      "discourseStructure": {
+        "summary": "引言段点明室内植物是家庭中被低估的'幕后英雄'并总述其益处；随后用三个设问小标题依次界定室内植物、说明其益处、推荐易养品种，形成总—分的清晰脉络。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Indoor plants overview",
+            "paragraphIds": [
+              "para-2023-yi-seven-title"
+            ],
+            "summary": "引言段总述室内植物虽看似无用，实则能改善心情、减压、助记忆，且易养价廉。"
+          },
+          {
+            "unitId": "unit-what",
+            "heading": "What are indoor plants?",
+            "paragraphIds": [
+              "para-2023-yi-seven-p1",
+              "para-2023-yi-seven-p2"
+            ],
+            "summary": "界定室内植物，指出许多品种不宜在英国户外尤其冬季生长，更适合室内。"
+          },
+          {
+            "unitId": "unit-why",
+            "heading": "Why are indoor plants good for you?",
+            "paragraphIds": [
+              "para-2023-yi-seven-p3",
+              "para-2023-yi-seven-p4"
+            ],
+            "summary": "借专家与研究说明室内植物能提升心情、创造力、专注力和记忆，并净化空气。"
+          },
+          {
+            "unitId": "unit-which",
+            "heading": "Which plants can you grow?",
+            "paragraphIds": [
+              "para-2023-yi-seven-p5",
+              "para-2023-yi-seven-p6"
+            ],
+            "summary": "推荐芦荟、和平百合、吊兰等易养品种，并指出养护与了解习性本身即是乐趣。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2023-yi-036": {
+      "blankId": "blank-2023-yi-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "unsung heroes of the home",
+        "improving their mood",
+        "promote people",
+        "wellbeing"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-yi-seven-title",
+        "beforeQuote": "they are the unsung heroes of the home.",
+        "afterQuote": "but studies have shown that they can promote"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Not only do they look beautiful",
+          "signalSide": "option",
+          "targetText": "but studies have shown that they can promote",
+          "relation": "选项 Not only... 与空后 but 构成 not only...but 递进关联：不仅好看，而且有益身心。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "but studies have shown that they can promote",
+          "signalSide": "context-after",
+          "targetText": "Not only do they look beautiful",
+          "relation": "空后 but 是 not only...but 结构的后半，要求空内填入以 Not only 开头的分句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "look beautiful",
+          "signalSide": "option",
+          "targetText": "unsung heroes of the home",
+          "relation": "选项的 look beautiful 与前句 unsung heroes 同属对植物外在/价值的描述话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空后以 but 引出'有益健康'的转折，需与之搭配 Not only do they look beautiful，构成'不仅好看，而且有益'的 not only...but 递进逻辑。",
+        "matchedClues": [
+          {
+            "contextSide": "but studies have shown that they can promote people's wellbeing",
+            "optionSide": "Not only do they look beautiful",
+            "relation": "Not only 与 but 配对，前半讲外观，后半讲健康益处。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 也讲益处，但无法与空后的 but 构成 not only...but 的固定关联，逻辑标记不匹配。"
+        }
+      ],
+      "teachingNote": "看到空后的 but，优先在选项里找能与之搭配的 not only，靠关联词配对定位答案。"
+    },
+    "q-2023-yi-037": {
+      "blankId": "blank-2023-yi-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "grow indoors",
+        "are not ideally suited to growing outside in the UK",
+        "Many of these species",
+        "especially"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-yi-seven-p2",
+        "beforeQuote": "are not ideally suited to growing outside in the UK",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Instead",
+          "signalSide": "option",
+          "targetText": "are not ideally suited to growing outside in the UK",
+          "relation": "Instead 引出与前句'不宜户外生长'相对的替代情况：而在室内更好。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "are not ideally suited to growing outside in the UK",
+          "signalSide": "context-before",
+          "targetText": "Instead, they grow better inside",
+          "relation": "前句的否定'不宜户外'为 Instead 提供了被替换的对立项。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "where it is warmer",
+          "signalSide": "option",
+          "targetText": "especially in the winter",
+          "relation": "选项 where it is warmer 与前文 especially in the winter 同属'冬季/温度'话题场，解释室内更宜。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "前句说许多品种不宜在英国户外尤其冬季生长，空处用 Instead 转折引出'反而在更暖的室内长得更好'，并呼应 indoors 主题。",
+        "matchedClues": [
+          {
+            "contextSide": "not ideally suited to growing outside in the UK, especially in the winter",
+            "optionSide": "Instead, they grow better inside, where it is warmer",
+            "relation": "outside 对 inside、winter 对 warmer，Instead 完成对立替换。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 'All plants are different' 泛泛而谈差异，无法承接前句'户外不宜'的具体对比，缺少 inside/warmer 的话题呼应。"
+        }
+      ],
+      "teachingNote": "前句出现 not...outside 的否定时，段尾常用 Instead 引出 inside 的对立替代，抓对比词与反义词定位。"
+    },
+    "q-2023-yi-038": {
+      "blankId": "blank-2023-yi-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "plants around the house can really lift your mood",
+        "improve creativity, focus and memory",
+        "clean the air around them by removing harmful gases",
+        "good for you"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-yi-seven-p4",
+        "beforeQuote": "Will Spoelstra, who works at the Royal Botanic Gardens",
+        "afterQuote": "plants around the house can really lift your mood"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "many benefits",
+          "signalSide": "option",
+          "targetText": "lift your mood / improve creativity, focus and memory",
+          "relation": "选项的 many benefits 概括了下文 lift your mood、improve creativity 等多项好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "plants around the house can really lift your mood",
+          "signalSide": "context-after",
+          "targetText": "many benefits to growing plants indoors",
+          "relation": "空后'提升心情'是 benefits 的具体例证，与选项的 benefits 总述对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "improve creativity, focus and memory",
+          "signalSide": "context-after",
+          "targetText": "benefits to growing plants indoors",
+          "relation": "空后罗列 creativity、focus、memory 等多重益处，印证 benefits 的概括统领。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空位于专家引语开头，作主题句；下文以 lift your mood、improve creativity 等列举具体好处，正好被 There are many benefits to growing plants indoors 统领。",
+        "matchedClues": [
+          {
+            "contextSide": "lift your mood / improve creativity, focus and memory",
+            "optionSide": "There are many benefits to growing plants indoors",
+            "relation": "benefits 总述与后文多项具体益处构成总分关系。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 'Not only do they look beautiful' 需后接 but 配对，此处下文并无 but 转折，且 36 题已占用。"
+        }
+      ],
+      "teachingNote": "段首/引语开头的空多为主题句，找下文反复列举的同类要点，用能统领它们的概括句填空。"
+    },
+    "q-2023-yi-039": {
+      "blankId": "blank-2023-yi-039",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "clean the air around them by removing harmful gases",
+        "remove some harmful chemicals from paints or cooking",
+        "pot plants",
+        "good for you"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-yi-seven-p4",
+        "beforeQuote": "remove some harmful chemicals from paints or cooking.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "are among the best",
+          "signalSide": "option",
+          "targetText": "remove some harmful chemicals from paints or cooking",
+          "relation": "选项 are among the best 承接前文净化空气、去除有害物的功效，指出哪些植物在这方面表现最佳。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "remove some harmful chemicals from paints or cooking",
+          "signalSide": "context-before",
+          "targetText": "Plants like peace lilies and devil's ivy are among the best",
+          "relation": "前文讲植物净化、去除有害化学物的能力，空处顺势点出在此方面表现最佳的具体品种。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "peace lilies and devil’s ivy",
+          "signalSide": "option",
+          "targetText": "pot plants can clean the air",
+          "relation": "选项列举的具体盆栽品种与前文 pot plants 净化空气的话题场一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "前文反复说盆栽能净化空气、去除有害气体与化学物，段尾空处用 Plants like peace lilies and devil's ivy are among the best 指出在这方面表现最佳的具体品种。",
+        "matchedClues": [
+          {
+            "contextSide": "clean the air around them by removing harmful gases / remove some harmful chemicals",
+            "optionSide": "Plants like peace lilies and devil's ivy are among the best",
+            "relation": "the best 紧扣前文净化空气这一功效，落到最擅长此事的品种。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 'All plants are different' 强调差异，与前文'净化空气'的功效叙述脱节，无法收束该段。"
+        }
+      ],
+      "teachingNote": "段尾衔接空要顺着前文的功效话题场延伸，用同场词（best 承接净化功效）锁定具体补充句。"
+    },
+    "q-2023-yi-040": {
+      "blankId": "blank-2023-yi-040",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "you get to care for them as they mature",
+        "part of the joy of owning plants",
+        "a new interest and focus into people",
+        "make the link between home and nature"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-yi-seven-p6",
+        "beforeQuote": "you get to care for them as they mature",
+        "afterQuote": "It can bring a new interest and focus"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It can bring a new interest and focus",
+          "signalSide": "context-after",
+          "targetText": "Learning about the requirements of each plant",
+          "relation": "空后 It 指代空内填入的 Learning about the requirements of each plant 这件事，要求空填可作 It 先行词的名词性主语。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Learning about the requirements of each plant",
+          "signalSide": "option",
+          "targetText": "It can bring a new interest and focus",
+          "relation": "选项以动名词短语 Learning... 作主语，正好被空后的 It 回指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "rewarding",
+          "signalSide": "option",
+          "targetText": "part of the joy of owning plants",
+          "relation": "选项 rewarding 与前文 the joy of owning plants 同属'养植之乐/回报'话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空后用 It can bring a new interest and focus 回指空内内容，需填一个可作 It 先行词的名词性主语；G 的 Learning about the requirements... can be very rewarding 既被 It 回指，又呼应前文 the joy of owning plants。",
+        "matchedClues": [
+          {
+            "contextSide": "It can bring a new interest and focus / the joy of owning plants",
+            "optionSide": "Learning about the requirements of each plant can be very rewarding",
+            "relation": "It 回指 Learning...，rewarding 呼应 joy，构成指代加话题双重衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 'Changing the pot... will also help' 谈换盆养护，无法被空后的 It（带来兴趣与专注）自然回指，指代链断裂。"
+        }
+      ],
+      "teachingNote": "空后出现 It/This 等代词时，空内须填可被其回指的名词性主语，按代词先行词反推选项。"
+    }
+  }
+}

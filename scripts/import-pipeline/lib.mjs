@@ -189,7 +189,7 @@ function findFormatASections(lines) {
   if (appStart === -1) throw new Error('Format A: 未找到 五、(写作) 节')
   if (contStart === -1) throw new Error('Format A: 未找到 六、(书面表达) 节')
 
-  return { readingStart, sevenSubStart: -1, clozeStart, grammarStart, appStart, contStart }
+  return { readingStart, sevenSubStart: -1, clozeStart, grammarStart, appStart, contStart, skipWriting: false }
 }
 
 // ---- Format B section detection --------------------------------------------
@@ -218,10 +218,10 @@ function findFormatBSections(lines) {
     lines,
     /^第[一二三四五六七八九十]+部分[\s　]*阅/
   )
-  // 语言运用 part
+  // 语言运用 part（新课标"语言运用" / 全国老卷"语言知识运用"）
   const langParIdx = findSectionLine(
     lines,
-    /^第[一二三四五六七八九十]+部分[\s　]*语言运用/
+    /^第[一二三四五六七八九十]+部分[\s　]*语言(?:知识)?运用/
   )
   // 写作 part
   const writingParIdx = findSectionLine(
@@ -247,10 +247,25 @@ function findFormatBSections(lines) {
   if (grammarStart === -1) throw new Error('Format B: 语言运用部分未找到第二节(语法填空)')
 
   // -- Within 写作 part: find 第一节 (application) and 第二节 (continuation) --
-  const appStart = findNthMatch(lines, writingParIdx + 1, total, subSecPat, 1)
-  const contStart = findNthMatch(lines, writingParIdx + 1, total, subSecPat, 2)
-  if (appStart === -1) throw new Error('Format B: 写作部分未找到第一节(应用文)')
-  if (contStart === -1) throw new Error('Format B: 写作部分未找到第二节(续写)')
+  // 全国老卷(甲/乙/丙)写作部分是 短文改错 + 普通书面表达,非 应用文+续写,按 PO 决策不导:
+  // 写作部分命中"短文改错" → skipWriting,语法节边界改用写作部分起点(排除短文改错文本),
+  // application/continuation 在 buildGroups 置 null。
+  const hasErrorCorrection = lines
+    .slice(writingParIdx + 1, total)
+    .some((line) => /短文改错/.test(line))
+  let appStart
+  let contStart
+  let skipWriting = false
+  if (hasErrorCorrection) {
+    skipWriting = true
+    appStart = writingParIdx
+    contStart = -1
+  } else {
+    appStart = findNthMatch(lines, writingParIdx + 1, total, subSecPat, 1)
+    contStart = findNthMatch(lines, writingParIdx + 1, total, subSecPat, 2)
+    if (appStart === -1) throw new Error('Format B: 写作部分未找到第一节(应用文)')
+    if (contStart === -1) throw new Error('Format B: 写作部分未找到第二节(续写)')
+  }
 
   // readingStart: use the first 第一节 within the reading part (before sevenSubStart)
   const readingStart = findNthMatch(lines, readingParIdx + 1, sevenSubStart, subSecPat, 1)
@@ -262,6 +277,7 @@ function findFormatBSections(lines) {
     grammarStart,
     appStart,
     contStart,
+    skipWriting,
   }
 }
 
@@ -501,7 +517,7 @@ function buildCloze({ sectionText: txt, tail, stdStart = 41 }) {
 
 // ---- Grammar Fill -----------------------------------------------------------
 
-function buildGrammar({ sectionText: txt, tail }) {
+function buildGrammar({ sectionText: txt, tail, stdStart = 56 }) {
   let body = txt
     // Format A: strip 四、语法填空 header
     .replace(/四、语法填空\s*/m, '')
@@ -558,7 +574,7 @@ function buildGrammar({ sectionText: txt, tail }) {
   const hints = {}
   // Capture (N) optionally followed by a parenthesized hint word (ASCII letters only)
   passage = passage.replace(/\((\d{1,2})\)\s*(?:\(([A-Za-z][^)]*)\))?/g, (_, n, hint) => {
-    const no = Number(n) + 55
+    const no = Number(n) + (stdStart - 1)
     if (hint) hints[no] = hint.trim()
     return `__${no}__${hint ? ` (${hint.trim()})` : ''}`
   })
@@ -570,7 +586,7 @@ function buildGrammar({ sectionText: txt, tail }) {
       text: normalizePassageText(t),
     }))
 
-  const questions = [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((no, i) => ({
+  const questions = Array.from({ length: 10 }, (_, i) => stdStart + i).map((no, i) => ({
     id: `q-${tail}-${pad(no)}`,
     stem: String(no),
     answerKey: answers[i] || '',
@@ -741,7 +757,7 @@ export function buildGroups(fullText, paperId) {
   const sections =
     fmt === 'A' ? findFormatASections(lines) : findFormatBSections(lines)
 
-  const { readingStart, sevenSubStart, clozeStart, grammarStart, appStart, contStart } = sections
+  const { readingStart, sevenSubStart, clozeStart, grammarStart, appStart, contStart, skipWriting } = sections
 
   // ---- Reading section analysis ----
   // For Format A: reading lines go from readingStart+1 to clozeStart
@@ -836,16 +852,22 @@ export function buildGroups(fullText, paperId) {
   const cloze = buildCloze({ sectionText: clozeSec, tail, stdStart: readingStdNo + 5 })
 
   // ---- Grammar ----
+  // 语法题号动态接力(完形结束处+1)：新课标 36+5+15=56 / 浙江老卷 31+5+20=56 / 全国老卷 36+5+20=61。
   const grammarSec = sectionText(lines, grammarStart, appStart)
-  const grammar = buildGrammar({ sectionText: grammarSec, tail })
+  const grammar = buildGrammar({
+    sectionText: grammarSec,
+    tail,
+    stdStart: readingStdNo + 5 + cloze.questions.length,
+  })
 
-  // ---- Application ----
-  const appSec = sectionText(lines, appStart, contStart)
-  const application = buildApplication({ sectionText: appSec, tail })
-
-  // ---- Continuation ----
-  const contSec = sectionText(lines, contStart, -1)
-  const continuation = buildContinuation({ sectionText: contSec, tail })
+  // ---- Application + Continuation ----
+  // 全国老卷(甲/乙/丙)写作部分是短文改错+普通书面表达,按 PO 决策不导:skipWriting → null。
+  let application = null
+  let continuation = null
+  if (!skipWriting) {
+    application = buildApplication({ sectionText: sectionText(lines, appStart, contStart), tail })
+    continuation = buildContinuation({ sectionText: sectionText(lines, contStart, -1), tail })
+  }
 
   return { paper, readingGroups, seven, cloze, grammar, application, continuation }
 }

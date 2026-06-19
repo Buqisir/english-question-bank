@@ -1,0 +1,370 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2020-bing",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-bing-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-bing-seven-choices": {
+      "overview": "本文是一篇说明文，介绍乔迁派对（housewarming party）：定义、由谁举办、送礼习俗、派对上的食物与活动安排，以及这一名称的历史由来。七选五考查对各段主题句、过渡句与衔接句的把握。",
+      "discourseStructure": {
+        "summary": "首段定义乔迁派对并点明其意义；第二段讲送礼习俗（礼品登记单与装饰类礼物）；第三段讲带食物分享及派对上的活动安排（参观新居、帮忙拆箱）；末段追溯名称由来——旧时送柴取暖，如今多用中央供暖。",
+        "units": [
+          {
+            "unitId": "unit-2020-bing-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-2020-bing-seven-title"
+            ],
+            "summary": "定义乔迁派对并说明其作为亲友祝贺、共享喜悦场合的意义。"
+          },
+          {
+            "unitId": "unit-2020-bing-seven-gift",
+            "heading": null,
+            "paragraphIds": [
+              "para-2020-bing-seven-p1"
+            ],
+            "summary": "介绍带礼物的习俗：礼品登记单上常见的厨具、窗帘，以及艺术品、植物等装饰类礼物。"
+          },
+          {
+            "unitId": "unit-2020-bing-seven-foodactivity",
+            "heading": null,
+            "paragraphIds": [
+              "para-2020-bing-seven-p2"
+            ],
+            "summary": "可带食物饮料分享，因派对供食不多；通常无固定游戏活动，但主人会带客人参观新居，有时请客人帮忙拆箱。"
+          },
+          {
+            "unitId": "unit-2020-bing-seven-origin",
+            "heading": null,
+            "paragraphIds": [
+              "para-2020-bing-seven-p3"
+            ],
+            "summary": "追溯名称由来：旧时人们带柴薪做礼物以供过冬取暖，如今多用中央供暖。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2020-bing-036": {
+      "blankId": "blank-2020-bing-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "congratulate the person on the new home",
+        "a chance for friends and family",
+        "fill the new space with love"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-bing-seven-title",
+        "headingAnchor": null,
+        "beforeQuote": "The party is a chance for friends and family to congratulate the person on the new home.",
+        "afterQuote": "And it is a good time to fill the new space with love and hopefully presents."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "see what the new home looks like",
+          "signalSide": "option",
+          "targetText": "the new home",
+          "relation": "选项 E 中 the new home 与空前 the new home 同指，承接派对意义这一话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "a chance for friends and family / a chance to see the new home",
+          "relation": "also 表并列追加，把空前\"祝贺新居\"的功能与\"看新家\"这一新功能并列起来。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "And",
+          "signalSide": "context-after",
+          "targetText": "it is a good time to fill the new space",
+          "relation": "空后 And it is a good time... 继续以 also/And 罗列派对的多重意义，要求所填句同为派对意义之一。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "首段在罗列乔迁派对的意义，空前说\"祝贺新居\"，E 用 It also gives people a chance to see what the new home looks like 追加\"让人参观新家\"这一意义，并与空后 And it is a good time... 形成并列罗列。",
+        "matchedClues": [
+          {
+            "contextSide": "a chance for friends and family to congratulate",
+            "optionSide": "It also gives people a chance to see",
+            "relation": "option 中 also 与 a chance 呼应空前的 a chance，把新意义并列追加。"
+          },
+          {
+            "contextSide": "the new home",
+            "optionSide": "what the new home looks like",
+            "relation": "the new home 重复衔接，紧扣首段话题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F（鼓励老友相聚）也谈派对功能，但缺少 also/the new home 的并列与重复衔接，且\"old friends get together\"在首段无对应线索。"
+        }
+      ],
+      "teachingNote": "段末罗列功能的空，优先找含 also/and 等并列词且重复上文关键名词（the new home）的选项。"
+    },
+    "q-2020-bing-037": {
+      "blankId": "blank-2020-bing-037",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "things they want or need for their new home",
+        "gift registry",
+        "a good housewarming gift",
+        "decorate the new house"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-bing-seven-p1",
+        "headingAnchor": null,
+        "beforeQuote": "Some people register a list of things they want or need for their new home at a local store or stores.",
+        "afterQuote": "Even if there isn’t a registry, a good housewarming gift is something to decorate the new house with"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "bring a gift to a housewarming party",
+          "signalSide": "option",
+          "targetText": "a good housewarming gift / gift registry",
+          "relation": "选项 B 的 gift 与本段反复出现的 gift registry、housewarming gift 同属\"送礼\"话题场，是段落主题句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "gift registry",
+          "signalSide": "context-after",
+          "targetText": "bring a gift",
+          "relation": "空后 gift registry、housewarming gift 围绕\"礼物\"展开，正是 B 中 gift 这一主题词的具体化。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "It is traditional",
+          "signalSide": "option",
+          "targetText": "register a list of things / a good housewarming gift",
+          "relation": "B 以 It is traditional 概括\"带礼物\"的习俗，统领下文登记单与装饰礼物两类做法。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本段通篇围绕\"送礼\"，先讲礼品登记单，再讲装饰类礼物。B（带礼物到乔迁派对是传统）正是统领全段的主题句。",
+        "matchedClues": [
+          {
+            "contextSide": "register a list of things / a good housewarming gift",
+            "optionSide": "It is traditional to bring a gift",
+            "relation": "下文两种送礼做法都是 B 所述\"带礼物\"传统的展开。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D（收到礼物要妥善保管）也含 gift，但视角在\"收礼者保管礼物\"，与本段\"送礼者带什么礼\"的展开方向不符，无法统领下文。"
+        }
+      ],
+      "teachingNote": "段首主题句的空，找能被本段所有细节共同支撑、概括整段话题（送礼）的选项。"
+    },
+    "q-2020-bing-038": {
+      "blankId": "blank-2020-bing-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "there isn’t a lot of food served",
+        "appreciated",
+        "no planned activities"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-bing-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "This is often appreciated since at a housewarming there isn’t a lot of food served.",
+        "afterQuote": "There are usually no planned activities like games at a housewarming party."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "bring food or drinks to share",
+          "relation": "空后 This is often appreciated 的 This 指代所填句\"带食物饮料分享\"这一行为，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "food or drinks to share",
+          "signalSide": "option",
+          "targetText": "there isn’t a lot of food served",
+          "relation": "选项 C 的 food or drinks 与空后 food served 同属\"食物\"话题场，解释了为何带食物会被 appreciated。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "there isn’t a lot of food served",
+          "signalSide": "context-after",
+          "targetText": "bring food or drinks",
+          "relation": "因派对供食不多，故带食物分享受欢迎，与 C 形成因果支撑。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空后用 This is often appreciated since... isn’t a lot of food served 解释原因，This 必须指代\"带食物\"这一行为，故选 C（也可带食物饮料与其他客人分享）。",
+        "matchedClues": [
+          {
+            "contextSide": "This is often appreciated / isn’t a lot of food served",
+            "optionSide": "bring food or drinks to share with the other guests",
+            "relation": "C 提供了 This 的指代对象，并与\"供食不多\"形成因果。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 也是带某物到派对，但带的是\"礼物\"而非\"食物\"，无法解释空后 isn’t a lot of food served 的\"食物\"语境。"
+        }
+      ],
+      "teachingNote": "段首空若空后出现 This/It 等指代词，所填句须是该指代词能指回的具体行为（这里是带食物）。"
+    },
+    "q-2020-bing-039": {
+      "blankId": "blank-2020-bing-039",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "asked to help unpack boxes",
+        "no planned activities",
+        "usually"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-bing-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "people may be asked to help unpack boxes.",
+        "afterQuote": null
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "people may be asked to help unpack boxes",
+          "relation": "选项 A 的 This 指代空前\"客人被请来帮忙拆箱\"这件事，构成段末指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "though",
+          "signalSide": "option",
+          "targetText": "no planned activities / may be asked to help unpack boxes",
+          "relation": "A 中 though 表转折让步，指出\"帮忙拆箱\"并非常态，与上文\"通常无固定活动\"语气一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "isn’t usual",
+          "signalSide": "option",
+          "targetText": "may be asked to help unpack boxes",
+          "relation": "isn’t usual 评注空前\"有时被请帮忙拆箱\"这一非常规情形，收束本段。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前讲\"有时客人会被请来帮忙拆箱\"，A（This isn’t usual though）用 This 回指这件事，并以 isn’t usual...though 评注其非常态，恰好收尾本段。",
+        "matchedClues": [
+          {
+            "contextSide": "people may be asked to help unpack boxes",
+            "optionSide": "This isn’t usual though",
+            "relation": "This 指代帮忙拆箱一事，isn’t usual 说明这并不常见。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 谈带食物，话题已在前文 q38 用过，且与空前\"帮忙拆箱\"无指代或逻辑联系，无法收尾。"
+        }
+      ],
+      "teachingNote": "段末空看选项里的 This/It 能否回指紧邻上句的具体事件，能回指且语气连贯者即为答案。"
+    },
+    "q-2020-bing-040": {
+      "blankId": "blank-2020-bing-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "bring firewood to a new home as a gift",
+        "central heating",
+        "use fires to keep warm"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-bing-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "people would actually bring firewood to a new home as a gift.",
+        "afterQuote": "Now most homes have central heating and don’t use fires to keep warm."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "bring firewood to a new home as a gift",
+          "relation": "选项 G 的 This 指代空前\"带柴薪做乔迁礼物\"这一旧俗，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "keep their home warm for the winter",
+          "signalSide": "option",
+          "targetText": "use fires to keep warm / central heating",
+          "relation": "G 中 keep their home warm 与空前 firewood、空后 keep warm/central heating 同属\"取暖\"话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "use fires to keep warm",
+          "signalSide": "context-after",
+          "targetText": "keep their home warm for the winter",
+          "relation": "空后 keep warm 与 G 的 keep their home warm 形成 then-now 对照，承上启下。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前说旧时带柴薪做礼物，G（This was so that the person could keep their home warm for the winter）用 This 回指送柴薪一事并说明目的——供冬天取暖，自然引出空后\"如今用中央供暖\"的对照。",
+        "matchedClues": [
+          {
+            "contextSide": "bring firewood to a new home as a gift",
+            "optionSide": "This was so that the person could keep their home warm",
+            "relation": "This 指代送柴薪，并解释其取暖目的，与空后 central heating 形成古今对比。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 也以条件句谈收到礼物，但话题在\"保管礼物\"，与本段\"取暖由来\"的 firewood/keep warm 话题场不符。"
+        }
+      ],
+      "teachingNote": "段中承接句的空，找用 This 回指上句旧俗、并能顺势引出空后古今对照的选项。"
+    }
+  }
+}

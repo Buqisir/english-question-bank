@@ -1,0 +1,3266 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2023-jia",
+    "title": "2023年全国甲卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2023年全国甲卷-答案版.docx",
+      "sha256": "a9c98aed8c9073e6cb843178ef38e47da184e5e1d20dfa810c0357848e62f8f1",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2023-jia-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2023-jia-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2023-jia-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2023-jia-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2023-jia-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2023-jia-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-jia-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2023-jia-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2023-jia-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2023-jia-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2023-jia-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-jia-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2023-jia-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2023-jia-reading",
+        "text": "第二部分 阅读理解（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-jia-reading-choice",
+        "text": "第一节（共15小题；每小题2分，满分30分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-jia-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2023-jia-language",
+        "text": "第三部分 语言知识运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-jia-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-jia-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-jia-grammar-fill"
+      }
+    ],
+    "groups": {
+      "group-2023-jia-reading-a": {
+        "groupId": "group-2023-jia-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2023-jia-021",
+          "q-2023-jia-022",
+          "q-2023-jia-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-a-1",
+              "text": "Where to Eat in Bangkok"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-2",
+              "text": "Bangkok is a highly desirable destination for food lovers. It has a seemingly bottomless well of dining options. Here are some suggestions on where to start your Bangkok eating adventure. Nahm"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-3",
+              "text": "Offering Thai fine dining, Nahm provides the best of Bangkok culinary (烹饪的) experiences. It’s the only Thai restaurant that ranks among the top 10 of the world’s 50 best restaurants list. Head Chef David Thompson, who received a Michelin star for his London-based Thai restaurant of the same name, opened this branch in the Metropolitan Hotel in 2010. Issaya Siamese Club"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-4",
+              "text": "Issaya Siamese Club is internationally known Thai chef Ian Kittichai’s first flagship Bangkok restaurant. The menu in this beautiful colonial house includes traditional Thai cuisine combined with modern cooking methods. Bo. lan"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-5",
+              "text": "Bo. lan has been making waves in Bangkok’s culinary scene since it opened in 2009. Serving hard-to-find Thai dishes in an elegant atmosphere, the restaurant is true to Thai cuisine’s roots, yet still manages to add a special twist. This place is good for a candlelit dinner or a work meeting with colleagues who appreciate fine food. For those extremely hungry, there’s a large set menu. Gaggan"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-6",
+              "text": "Earning first place on the latest “Asia’s 50 best restaurants” list, progressive Indian restaurant Gaggan is one of the most exciting venues (场所) to arrive in Bangkok in recent years. The best table in this two-story colonial Thai home offers a window right into the kitchen, where you can see chef Gaggan and his staff in action. Culinary theater at its best."
+            }
+          ]
+        }
+      },
+      "group-2023-jia-reading-b": {
+        "groupId": "group-2023-jia-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2023-jia-024",
+          "q-2023-jia-025",
+          "q-2023-jia-026",
+          "q-2023-jia-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-b-1",
+              "text": "Terri Bolton is a dab hand when it comes to DIY (do-it-yourself). Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-b-2",
+              "text": "She credits these skills to her late grandfather and builder Derek Lloyd. From the age of six, Terri, now 26, accompanied Derek to work during her school holidays. A day’s work was rewarded with £5 in pocket money. She says: “I’m sure I wasn’t much of a help to start with. But when Derek built our house about eight years ago, I was heavily involved (参与) , painting the rooms and putting down the flooring throughout the house. It took weeks and it was backbreaking work, but I know he was proud of my skills.”"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-b-3",
+              "text": "Terri, who now rents a house with friends in Wandsworth, South West London, says DIY also saves her from losing any deposit when a tenancy (租期) comes to an end. She adds, “I’ve moved house many times and I always like to personalize my room and put up pictures. So, it’s been useful to know how to cover up holes and repaint a room to avoid any charges when I’ve moved out.”"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-b-4",
+              "text": "With millions of people likely to take on DIY projects over the coming weeks, new research shows that more than half of people are planning to make the most of the long, warm summer days to get jobs done. The average spend per project will be around £823. Two thirds of people aim to improve their comfort while at home. A fifth wish to increase the value of their house. Though DIY has traditionally been seen as a male hobby, the research shows it is women now leading the charge."
+            }
+          ]
+        }
+      },
+      "group-2023-jia-reading-c": {
+        "groupId": "group-2023-jia-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2023-jia-028",
+          "q-2023-jia-029",
+          "q-2023-jia-030",
+          "q-2023-jia-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-c-1",
+              "text": "I was about 13 when an uncle gave me a copy of Jostein Gaarder’s Sophie’s World. It was full of ideas that were new to me, so I spent the summer with my head in and out of that book. It spoke to me and brought me into a world of philosophy (哲学) ."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-2",
+              "text": "That love for philosophy lasted until I got to college. Nothing kills the love for philosophy faster than people who think they understand Foucault, Baudrillard, or Confucius better than you—and then try to explain them."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-3",
+              "text": "Eric Weiner’s The Socrates Express: In Search of Life Lessons from Dead Philosophers reawakened my love for philosophy. It is not an explanation, but an invitation to think and experience philosophy."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-4",
+              "text": "Weiner starts each chapter with a scene on a train ride between cities and then frames each philosopher’s work in the context (背景) of one thing they can help us do better. The end result is a read in which we learn to wonder like Socrates, see like Thoreau, listen like Schopenhauer, and have no regrets like Nietzsche. This, more than a book about understanding philosophy, is a book about learning to use philosophy to improve a life."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-5",
+              "text": "He makes philosophical thought an appealing exercise that improves the quality of our experiences, and he does so with plenty of humor. Weiner enters into conversation with some of the most important philosophers in history, and he becomes part of that crowd in the process by decoding (解读) their messages and adding his own interpretation."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-6",
+              "text": "The Socrates Express is a fun, sharp book that draws readers in with its apparent simplicity and gradually pulls them in deeper thoughts on desire, loneliness, and aging. The invitation is clear: Weiner wants you to pick up a coffee or tea and sit down with this book. I encourage you to take his offer. It’s worth your time, even if time is something we don’t have a lot of."
+            }
+          ]
+        }
+      },
+      "group-2023-jia-reading-d": {
+        "groupId": "group-2023-jia-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2023-jia-032",
+          "q-2023-jia-033",
+          "q-2023-jia-034",
+          "q-2023-jia-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-d-1",
+              "text": "Grizzly bears, which may grow to about 2.5 m long and weigh over 400 kg, occupy a conflicted corner of the American psyche—we revere (敬畏) them even as they give us frightening dreams. Ask the tourists from around the world that flood into Yellowstone National Park what they most hope to see, and their answer is often the same: a grizzly bear."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-2",
+              "text": "“Grizzly bears are reoccupying large areas of their former range,” says bear biologist Chris Servheen. As grizzly bears expand their range into places where they haven’t been seen in a century or more, they’re increasingly being sighted by humans."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-3",
+              "text": "The western half of the U. S. was full of grizzlies when Europeans came, with a rough number of 50,000 or more living alongside Native Americans. By the early 1970s, after centuries of cruel and continuous hunting by settlers, 600 to 800 grizzlies remained on a mere 2 percent of their former range in the Northern Rockies. In 1975, grizzlies were listed under the Endangered Species Act."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-4",
+              "text": "Today, there are about 2,000 or more grizzly bears in the U. S. Their recovery has been so successful that the U. S. Fish and Wildlife Service has twice attempted to delist grizzlies, which would loosen legal protections and allow them to be hunted. Both efforts were overturned due to lawsuits from conservation groups. For now, grizzlies remain listed."
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-5",
+              "text": "Obviously, if precautions (预防) aren’t taken, grizzlies can become troublesome, sometimes killing farm animals or walking through yards in search of food. If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble. Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away. “Our hope is to have a clean, attractant-free place where bears can pass through without learning bad habits,” says James Jonkel, longtime biologist who manages bears in and around Missoula."
+            }
+          ]
+        }
+      },
+      "group-2023-jia-seven-choices": {
+        "groupId": "group-2023-jia-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2023-jia-036",
+          "q-2023-jia-037",
+          "q-2023-jia-038",
+          "q-2023-jia-039",
+          "q-2023-jia-040"
+        ],
+        "blankIds": [
+          "blank-2023-jia-036",
+          "blank-2023-jia-037",
+          "blank-2023-jia-038",
+          "blank-2023-jia-039",
+          "blank-2023-jia-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Find your causes"
+          },
+          {
+            "label": "B",
+            "text": "Start with small tasks"
+          },
+          {
+            "label": "C",
+            "text": "Accept the uncomfortable"
+          },
+          {
+            "label": "D",
+            "text": "All this adds up to a state of hurry"
+          },
+          {
+            "label": "E",
+            "text": "It can also help us practice more patience"
+          },
+          {
+            "label": "F",
+            "text": "This is merely uncomfortable, not intolerable"
+          },
+          {
+            "label": "G",
+            "text": "They’re all situations where we could use a little extra patience"
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-seven-title",
+              "text": "Tricks To Becoming A More Patient Person"
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p1",
+              "text": "Here’s a riddle: What do traffic jams, long lines and waiting for a vacation to start all have in common? There’s one answer: __36__ 1  ."
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p2",
+              "text": "In the Digital Age, we’re used to having what we need immediately and right at our fingertips. However, research suggests that if we practiced patience, we’d be a whole lot better off. Here are several tricks."
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p3",
+              "text": "● Practice gratitude (感激) "
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p4",
+              "text": "Thankfulness has a lot of benefits: Research shows it makes us happier, less stressed and even more optimistic. __37__ 2  . “Showing thankfulness can foster self-control,” said Ye Li, researcher at the University of California."
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p5",
+              "text": "● Make yourself wait"
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p6",
+              "text": "Instant gratification (满足) may seem like the most “feel good” option at the time, but psychology research suggests waiting for things actually makes us happier in the long run. And the only way for us to get into the habit of waiting is to practice. __38__ 3  . Put off watching your favorite show until the weekend or wait 10 extra minutes before going for that cake. You’ll soon find that the more patience you practice, the more you start to apply it to other, more annoying situations."
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p7",
+              "text": "● __39__ 4"
+            },
+            {
+              "paragraphId": "para-2023-jia-seven-p8",
+              "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances. You should learn to say to yourself, “__40__ 5  .” You’ll then gradually become more patient."
+            }
+          ]
+        }
+      },
+      "group-2023-jia-cloze": {
+        "groupId": "group-2023-jia-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2023-jia-041",
+          "q-2023-jia-042",
+          "q-2023-jia-043",
+          "q-2023-jia-044",
+          "q-2023-jia-045",
+          "q-2023-jia-046",
+          "q-2023-jia-047",
+          "q-2023-jia-048",
+          "q-2023-jia-049",
+          "q-2023-jia-050",
+          "q-2023-jia-051",
+          "q-2023-jia-052",
+          "q-2023-jia-053",
+          "q-2023-jia-054",
+          "q-2023-jia-055",
+          "q-2023-jia-056",
+          "q-2023-jia-057",
+          "q-2023-jia-058",
+          "q-2023-jia-059",
+          "q-2023-jia-060"
+        ],
+        "blankIds": [
+          "blank-2023-jia-041",
+          "blank-2023-jia-042",
+          "blank-2023-jia-043",
+          "blank-2023-jia-044",
+          "blank-2023-jia-045",
+          "blank-2023-jia-046",
+          "blank-2023-jia-047",
+          "blank-2023-jia-048",
+          "blank-2023-jia-049",
+          "blank-2023-jia-050",
+          "blank-2023-jia-051",
+          "blank-2023-jia-052",
+          "blank-2023-jia-053",
+          "blank-2023-jia-054",
+          "blank-2023-jia-055",
+          "blank-2023-jia-056",
+          "blank-2023-jia-057",
+          "blank-2023-jia-058",
+          "blank-2023-jia-059",
+          "blank-2023-jia-060"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-cloze-title",
+              "text": "Many years ago, I bought a house in the Garfagnana, where we still go every summer. The first time we __41__ there, we heard the chug-chug-chug of a motorbike __42__ its way down the hill toward us. It was a __43__ called Mario, coming to __44__ us a box containing some tomatoes and a bottle of wine. It was a very nice __45__ for him to make. But when we looked at the tomatoes, we were __46__ because they were so misshapen: not at all like the nice, round, __47__ things you get in a supermarket. And the wine was cloudy, in a funny old bottle with no label (标签) on it. These can’t be any __48__ , we thought. But we were __49__ his kindness, so we __50__ them."
+            },
+            {
+              "paragraphId": "para-2023-jia-cloze-p1",
+              "text": "What we discovered is that it’s __51__ to judge what you eat only by its __52__ . Those tomatoes had a __53__ that reminded me of the ones my uncle used to grow when I was a child. Nowadays supermarket tomatoes __54__ perfect but taste of water. Nobody’s going to have a __55__ memory of those. It’s a surprise they haven’t managed to grow square ones so that they can __56__ them easily. Mario’s wine may have been cloudy and come out of an old bottle, but it was __57__ ."
+            },
+            {
+              "paragraphId": "para-2023-jia-cloze-p2",
+              "text": "It’s good to eat things at the correct time, when they’re __58__ , and as close as possible to where they were __59__ . What Mario had __60__ us was the taste of the Garfagnana."
+            }
+          ]
+        }
+      },
+      "group-2023-jia-grammar-fill": {
+        "groupId": "group-2023-jia-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2023-jia-061",
+          "q-2023-jia-062",
+          "q-2023-jia-063",
+          "q-2023-jia-064",
+          "q-2023-jia-065",
+          "q-2023-jia-066",
+          "q-2023-jia-067",
+          "q-2023-jia-068",
+          "q-2023-jia-069",
+          "q-2023-jia-070"
+        ],
+        "blankIds": [
+          "blank-2023-jia-061",
+          "blank-2023-jia-062",
+          "blank-2023-jia-063",
+          "blank-2023-jia-064",
+          "blank-2023-jia-065",
+          "blank-2023-jia-066",
+          "blank-2023-jia-067",
+          "blank-2023-jia-068",
+          "blank-2023-jia-069",
+          "blank-2023-jia-070"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-grammar-fill-title",
+              "text": "For thousands of years, people have told fables (寓言) __61__ (teach) a lesson or to pass on wisdom. Fables were part of the oral tradition of many early cultures, and the well-known Aesop’s fables date to the __62__ (six) century BC. Yet, the form of the fable still has values today, __63__Rachel Carson says in A Fable for Tomorrow."
+            },
+            {
+              "paragraphId": "para-2023-jia-grammar-fill-p1",
+              "text": "Carson uses a simple, direct style common to fable. In fact, her style and tone (口吻) are seemingly directed at children. “There was once a town in the heart of America __64__all life seemed to enjoy peaceful co-existence with its surroundings,” her fable begins, __65__ (borrow) some familiar words from many age-old fables. Behind the simple style, however, is a serious message __66__ (intend) for everyone."
+            },
+            {
+              "paragraphId": "para-2023-jia-grammar-fill-p2",
+              "text": "__67__ (difference) from traditional fables, Carson’s story ends with an accusation instead of a moral. She warns of the environmental dangers facing society, and she teaches that people must take responsibility __68__saving their environment."
+            },
+            {
+              "paragraphId": "para-2023-jia-grammar-fill-p3",
+              "text": "The themes of traditional fables often deal with simple truths about everyday life. However, Carson’s theme is a more weighty __69__ (warn) about environmental destruction. Carson proves that a simple literary form that has been passed down through the ages can still __70__ (employ) today to draw attention to important truths."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2023-jia-021": {
+        "questionId": "q-2023-jia-021",
+        "questionNo": 21,
+        "groupId": "group-2023-jia-reading-a",
+        "stem": "What do Nahm and Issaya Siamese Club have in common?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They adopt modern cooking methods."
+          },
+          {
+            "label": "B",
+            "text": "They have branches in London."
+          },
+          {
+            "label": "C",
+            "text": "They have top-class chefs."
+          },
+          {
+            "label": "D",
+            "text": "They are based in hotels."
+          }
+        ]
+      },
+      "q-2023-jia-022": {
+        "questionId": "q-2023-jia-022",
+        "questionNo": 22,
+        "groupId": "group-2023-jia-reading-a",
+        "stem": "Which restaurant offers a large set menu?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Gaggan."
+          },
+          {
+            "label": "B",
+            "text": "Bo. lan."
+          },
+          {
+            "label": "C",
+            "text": "Issaya Siamese Club."
+          },
+          {
+            "label": "D",
+            "text": "Nahm."
+          }
+        ]
+      },
+      "q-2023-jia-023": {
+        "questionId": "q-2023-jia-023",
+        "questionNo": 23,
+        "groupId": "group-2023-jia-reading-a",
+        "stem": "What is special about Gaggan? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "It hires staff from India."
+          },
+          {
+            "label": "B",
+            "text": "It puts on a play every day."
+          },
+          {
+            "label": "C",
+            "text": "It serves hard-to-find local dishes."
+          },
+          {
+            "label": "D",
+            "text": "It shows the cooking process to guests."
+          }
+        ]
+      },
+      "q-2023-jia-024": {
+        "questionId": "q-2023-jia-024",
+        "questionNo": 24,
+        "groupId": "group-2023-jia-reading-b",
+        "stem": "Which is closest in meaning to \"a dab hand\" in paragraph 1?",
+        "options": [
+          {
+            "label": "A",
+            "text": "An artist."
+          },
+          {
+            "label": "B",
+            "text": "A winner."
+          },
+          {
+            "label": "C",
+            "text": "A specialist."
+          },
+          {
+            "label": "D",
+            "text": "A pioneer."
+          }
+        ]
+      },
+      "q-2023-jia-025": {
+        "questionId": "q-2023-jia-025",
+        "questionNo": 25,
+        "groupId": "group-2023-jia-reading-b",
+        "stem": "Why did Terri's grandfather give her £5 a day?",
+        "options": [
+          {
+            "label": "A",
+            "text": "For a birthday gift."
+          },
+          {
+            "label": "B",
+            "text": "As a treat for her work."
+          },
+          {
+            "label": "C",
+            "text": "To support her DIY projects."
+          },
+          {
+            "label": "D",
+            "text": "To encourage her to take up a hobby."
+          }
+        ]
+      },
+      "q-2023-jia-026": {
+        "questionId": "q-2023-jia-026",
+        "questionNo": 26,
+        "groupId": "group-2023-jia-reading-b",
+        "stem": "How did Terri avoid losing the deposit on the house she rented?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By making it look like before."
+          },
+          {
+            "label": "B",
+            "text": "By furnishing it herself."
+          },
+          {
+            "label": "C",
+            "text": "By splitting the rent with a roommate."
+          },
+          {
+            "label": "D",
+            "text": "By cancelling the rental agreement."
+          }
+        ]
+      },
+      "q-2023-jia-027": {
+        "questionId": "q-2023-jia-027",
+        "questionNo": 27,
+        "groupId": "group-2023-jia-reading-b",
+        "stem": "What trend in DIY does the research show? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is becoming more costly."
+          },
+          {
+            "label": "B",
+            "text": "It is getting more time-consuming."
+          },
+          {
+            "label": "C",
+            "text": "It is turning into a seasonal industry."
+          },
+          {
+            "label": "D",
+            "text": "It is gaining popularity among females."
+          }
+        ]
+      },
+      "q-2023-jia-028": {
+        "questionId": "q-2023-jia-028",
+        "questionNo": 28,
+        "groupId": "group-2023-jia-reading-c",
+        "stem": "Who opened the door to philosophy for the author?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Foucault."
+          },
+          {
+            "label": "B",
+            "text": "Eric Weiner."
+          },
+          {
+            "label": "C",
+            "text": "Jostein Gaarder."
+          },
+          {
+            "label": "D",
+            "text": "A college teacher."
+          }
+        ]
+      },
+      "q-2023-jia-029": {
+        "questionId": "q-2023-jia-029",
+        "questionNo": 29,
+        "groupId": "group-2023-jia-reading-c",
+        "stem": "Why does the author list great philosophers in paragraph 4?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To compare Weiner with them."
+          },
+          {
+            "label": "B",
+            "text": "To give examples of great works."
+          },
+          {
+            "label": "C",
+            "text": "To praise their writing skills."
+          },
+          {
+            "label": "D",
+            "text": "To help readers understand Weiner's book."
+          }
+        ]
+      },
+      "q-2023-jia-030": {
+        "questionId": "q-2023-jia-030",
+        "questionNo": 30,
+        "groupId": "group-2023-jia-reading-c",
+        "stem": "What does the author like about The Socrates Express?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Its views on history are well-presented."
+          },
+          {
+            "label": "B",
+            "text": "Its ideas can be applied to daily life."
+          },
+          {
+            "label": "C",
+            "text": "It includes comments from readers."
+          },
+          {
+            "label": "D",
+            "text": "It leaves an open ending."
+          }
+        ]
+      },
+      "q-2023-jia-031": {
+        "questionId": "q-2023-jia-031",
+        "questionNo": 31,
+        "groupId": "group-2023-jia-reading-c",
+        "stem": "What does the author think of Weiner's book? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "Objective and plain."
+          },
+          {
+            "label": "B",
+            "text": "Daring and ambitious."
+          },
+          {
+            "label": "C",
+            "text": "Serious and hard to follow."
+          },
+          {
+            "label": "D",
+            "text": "Humorous and straightforward."
+          }
+        ]
+      },
+      "q-2023-jia-032": {
+        "questionId": "q-2023-jia-032",
+        "questionNo": 32,
+        "groupId": "group-2023-jia-reading-d",
+        "stem": "How do Americans look at grizzlies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They cause mixed feelings in people."
+          },
+          {
+            "label": "B",
+            "text": "They should be kept in national parks."
+          },
+          {
+            "label": "C",
+            "text": "They are of high scientific value."
+          },
+          {
+            "label": "D",
+            "text": "They are a symbol of American culture."
+          }
+        ]
+      },
+      "q-2023-jia-033": {
+        "questionId": "q-2023-jia-033",
+        "questionNo": 33,
+        "groupId": "group-2023-jia-reading-d",
+        "stem": "What has helped the increase of the grizzly population?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The European settlers' behavior."
+          },
+          {
+            "label": "B",
+            "text": "The expansion of bears' range."
+          },
+          {
+            "label": "C",
+            "text": "The protection by law since 1975."
+          },
+          {
+            "label": "D",
+            "text": "The support of Native Americans."
+          }
+        ]
+      },
+      "q-2023-jia-034": {
+        "questionId": "q-2023-jia-034",
+        "questionNo": 34,
+        "groupId": "group-2023-jia-reading-d",
+        "stem": "What has stopped the U.S. Fish and Wildlife Service from delisting grizzlies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The opposition of conservation groups."
+          },
+          {
+            "label": "B",
+            "text": "The successful comeback of grizzlies."
+          },
+          {
+            "label": "C",
+            "text": "The voice of the biologists."
+          },
+          {
+            "label": "D",
+            "text": "The local farmers' advocates."
+          }
+        ]
+      },
+      "q-2023-jia-035": {
+        "questionId": "q-2023-jia-035",
+        "questionNo": 35,
+        "groupId": "group-2023-jia-reading-d",
+        "stem": "What can be inferred from the last paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Food should be provided for grizzlies."
+          },
+          {
+            "label": "B",
+            "text": "People can live in harmony with grizzlies."
+          },
+          {
+            "label": "C",
+            "text": "A special path should be built for grizzlies."
+          },
+          {
+            "label": "D",
+            "text": "Technology can be introduced to protect grizzlies."
+          }
+        ]
+      },
+      "q-2023-jia-036": {
+        "questionId": "q-2023-jia-036",
+        "questionNo": 36,
+        "groupId": "group-2023-jia-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2023-jia-036"
+      },
+      "q-2023-jia-037": {
+        "questionId": "q-2023-jia-037",
+        "questionNo": 37,
+        "groupId": "group-2023-jia-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2023-jia-037"
+      },
+      "q-2023-jia-038": {
+        "questionId": "q-2023-jia-038",
+        "questionNo": 38,
+        "groupId": "group-2023-jia-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2023-jia-038"
+      },
+      "q-2023-jia-039": {
+        "questionId": "q-2023-jia-039",
+        "questionNo": 39,
+        "groupId": "group-2023-jia-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2023-jia-039"
+      },
+      "q-2023-jia-040": {
+        "questionId": "q-2023-jia-040",
+        "questionNo": 40,
+        "groupId": "group-2023-jia-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2023-jia-040"
+      },
+      "q-2023-jia-041": {
+        "questionId": "q-2023-jia-041",
+        "questionNo": 41,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "41",
+        "blankId": "blank-2023-jia-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "waited"
+          },
+          {
+            "label": "B",
+            "text": "met"
+          },
+          {
+            "label": "C",
+            "text": "camped"
+          },
+          {
+            "label": "D",
+            "text": "stayed"
+          }
+        ]
+      },
+      "q-2023-jia-042": {
+        "questionId": "q-2023-jia-042",
+        "questionNo": 42,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "42",
+        "blankId": "blank-2023-jia-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "making"
+          },
+          {
+            "label": "B",
+            "text": "searching"
+          },
+          {
+            "label": "C",
+            "text": "squeezing"
+          },
+          {
+            "label": "D",
+            "text": "feeling"
+          }
+        ]
+      },
+      "q-2023-jia-043": {
+        "questionId": "q-2023-jia-043",
+        "questionNo": 43,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "43",
+        "blankId": "blank-2023-jia-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "customer"
+          },
+          {
+            "label": "B",
+            "text": "neighbor"
+          },
+          {
+            "label": "C",
+            "text": "relative"
+          },
+          {
+            "label": "D",
+            "text": "passenger"
+          }
+        ]
+      },
+      "q-2023-jia-044": {
+        "questionId": "q-2023-jia-044",
+        "questionNo": 44,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "44",
+        "blankId": "blank-2023-jia-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "lend"
+          },
+          {
+            "label": "B",
+            "text": "send"
+          },
+          {
+            "label": "C",
+            "text": "bring"
+          },
+          {
+            "label": "D",
+            "text": "show"
+          }
+        ]
+      },
+      "q-2023-jia-045": {
+        "questionId": "q-2023-jia-045",
+        "questionNo": 45,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "45",
+        "blankId": "blank-2023-jia-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "choice"
+          },
+          {
+            "label": "B",
+            "text": "comment"
+          },
+          {
+            "label": "C",
+            "text": "promise"
+          },
+          {
+            "label": "D",
+            "text": "gesture"
+          }
+        ]
+      },
+      "q-2023-jia-046": {
+        "questionId": "q-2023-jia-046",
+        "questionNo": 46,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "46",
+        "blankId": "blank-2023-jia-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "worried"
+          },
+          {
+            "label": "B",
+            "text": "moved"
+          },
+          {
+            "label": "C",
+            "text": "thrilled"
+          },
+          {
+            "label": "D",
+            "text": "bored"
+          }
+        ]
+      },
+      "q-2023-jia-047": {
+        "questionId": "q-2023-jia-047",
+        "questionNo": 47,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "47",
+        "blankId": "blank-2023-jia-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "simple"
+          },
+          {
+            "label": "B",
+            "text": "real"
+          },
+          {
+            "label": "C",
+            "text": "shiny"
+          },
+          {
+            "label": "D",
+            "text": "fun"
+          }
+        ]
+      },
+      "q-2023-jia-048": {
+        "questionId": "q-2023-jia-048",
+        "questionNo": 48,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "48",
+        "blankId": "blank-2023-jia-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "more"
+          },
+          {
+            "label": "B",
+            "text": "good"
+          },
+          {
+            "label": "C",
+            "text": "new"
+          },
+          {
+            "label": "D",
+            "text": "easy"
+          }
+        ]
+      },
+      "q-2023-jia-049": {
+        "questionId": "q-2023-jia-049",
+        "questionNo": 49,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "49",
+        "blankId": "blank-2023-jia-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "sympathetic to"
+          },
+          {
+            "label": "B",
+            "text": "thankful for"
+          },
+          {
+            "label": "C",
+            "text": "cautious about"
+          },
+          {
+            "label": "D",
+            "text": "interested in"
+          }
+        ]
+      },
+      "q-2023-jia-050": {
+        "questionId": "q-2023-jia-050",
+        "questionNo": 50,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "50",
+        "blankId": "blank-2023-jia-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "tried"
+          },
+          {
+            "label": "B",
+            "text": "sold"
+          },
+          {
+            "label": "C",
+            "text": "returned"
+          },
+          {
+            "label": "D",
+            "text": "mixed"
+          }
+        ]
+      },
+      "q-2023-jia-051": {
+        "questionId": "q-2023-jia-051",
+        "questionNo": 51,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "51",
+        "blankId": "blank-2023-jia-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "unnecessary"
+          },
+          {
+            "label": "B",
+            "text": "uncertain"
+          },
+          {
+            "label": "C",
+            "text": "unwise"
+          },
+          {
+            "label": "D",
+            "text": "unusual"
+          }
+        ]
+      },
+      "q-2023-jia-052": {
+        "questionId": "q-2023-jia-052",
+        "questionNo": 52,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "52",
+        "blankId": "blank-2023-jia-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "appearance"
+          },
+          {
+            "label": "B",
+            "text": "quality"
+          },
+          {
+            "label": "C",
+            "text": "origin"
+          },
+          {
+            "label": "D",
+            "text": "price"
+          }
+        ]
+      },
+      "q-2023-jia-053": {
+        "questionId": "q-2023-jia-053",
+        "questionNo": 53,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "53",
+        "blankId": "blank-2023-jia-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "size"
+          },
+          {
+            "label": "B",
+            "text": "shape"
+          },
+          {
+            "label": "C",
+            "text": "color"
+          },
+          {
+            "label": "D",
+            "text": "taste"
+          }
+        ]
+      },
+      "q-2023-jia-054": {
+        "questionId": "q-2023-jia-054",
+        "questionNo": 54,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "54",
+        "blankId": "blank-2023-jia-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "smell"
+          },
+          {
+            "label": "B",
+            "text": "look"
+          },
+          {
+            "label": "C",
+            "text": "become"
+          },
+          {
+            "label": "D",
+            "text": "work"
+          }
+        ]
+      },
+      "q-2023-jia-055": {
+        "questionId": "q-2023-jia-055",
+        "questionNo": 55,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "55",
+        "blankId": "blank-2023-jia-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "happy"
+          },
+          {
+            "label": "B",
+            "text": "vivid"
+          },
+          {
+            "label": "C",
+            "text": "short"
+          },
+          {
+            "label": "D",
+            "text": "vague"
+          }
+        ]
+      },
+      "q-2023-jia-056": {
+        "questionId": "q-2023-jia-056",
+        "questionNo": 56,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "56",
+        "blankId": "blank-2023-jia-056",
+        "options": [
+          {
+            "label": "A",
+            "text": "clean"
+          },
+          {
+            "label": "B",
+            "text": "check"
+          },
+          {
+            "label": "C",
+            "text": "count"
+          },
+          {
+            "label": "D",
+            "text": "pack"
+          }
+        ]
+      },
+      "q-2023-jia-057": {
+        "questionId": "q-2023-jia-057",
+        "questionNo": 57,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "57",
+        "blankId": "blank-2023-jia-057",
+        "options": [
+          {
+            "label": "A",
+            "text": "perfect"
+          },
+          {
+            "label": "B",
+            "text": "useful"
+          },
+          {
+            "label": "C",
+            "text": "convenient"
+          },
+          {
+            "label": "D",
+            "text": "familiar"
+          }
+        ]
+      },
+      "q-2023-jia-058": {
+        "questionId": "q-2023-jia-058",
+        "questionNo": 58,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "58",
+        "blankId": "blank-2023-jia-058",
+        "options": [
+          {
+            "label": "A",
+            "text": "on view"
+          },
+          {
+            "label": "B",
+            "text": "on sale"
+          },
+          {
+            "label": "C",
+            "text": "in season"
+          },
+          {
+            "label": "D",
+            "text": "in need"
+          }
+        ]
+      },
+      "q-2023-jia-059": {
+        "questionId": "q-2023-jia-059",
+        "questionNo": 59,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "59",
+        "blankId": "blank-2023-jia-059",
+        "options": [
+          {
+            "label": "A",
+            "text": "finished"
+          },
+          {
+            "label": "B",
+            "text": "stored"
+          },
+          {
+            "label": "C",
+            "text": "found"
+          },
+          {
+            "label": "D",
+            "text": "grown"
+          }
+        ]
+      },
+      "q-2023-jia-060": {
+        "questionId": "q-2023-jia-060",
+        "questionNo": 60,
+        "groupId": "group-2023-jia-cloze",
+        "stem": "60",
+        "blankId": "blank-2023-jia-060",
+        "options": [
+          {
+            "label": "A",
+            "text": "cooked"
+          },
+          {
+            "label": "B",
+            "text": "given"
+          },
+          {
+            "label": "C",
+            "text": "bought"
+          },
+          {
+            "label": "D",
+            "text": "told"
+          }
+        ]
+      },
+      "q-2023-jia-061": {
+        "questionId": "q-2023-jia-061",
+        "questionNo": 61,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2023-jia-061"
+      },
+      "q-2023-jia-062": {
+        "questionId": "q-2023-jia-062",
+        "questionNo": 62,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2023-jia-062"
+      },
+      "q-2023-jia-063": {
+        "questionId": "q-2023-jia-063",
+        "questionNo": 63,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2023-jia-063"
+      },
+      "q-2023-jia-064": {
+        "questionId": "q-2023-jia-064",
+        "questionNo": 64,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2023-jia-064"
+      },
+      "q-2023-jia-065": {
+        "questionId": "q-2023-jia-065",
+        "questionNo": 65,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2023-jia-065"
+      },
+      "q-2023-jia-066": {
+        "questionId": "q-2023-jia-066",
+        "questionNo": 66,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "66",
+        "blankId": "blank-2023-jia-066"
+      },
+      "q-2023-jia-067": {
+        "questionId": "q-2023-jia-067",
+        "questionNo": 67,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "67",
+        "blankId": "blank-2023-jia-067"
+      },
+      "q-2023-jia-068": {
+        "questionId": "q-2023-jia-068",
+        "questionNo": 68,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "68",
+        "blankId": "blank-2023-jia-068"
+      },
+      "q-2023-jia-069": {
+        "questionId": "q-2023-jia-069",
+        "questionNo": 69,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "69",
+        "blankId": "blank-2023-jia-069"
+      },
+      "q-2023-jia-070": {
+        "questionId": "q-2023-jia-070",
+        "questionNo": 70,
+        "groupId": "group-2023-jia-grammar-fill",
+        "stem": "70",
+        "blankId": "blank-2023-jia-070"
+      }
+    },
+    "blanks": {
+      "blank-2023-jia-061": {
+        "blankId": "blank-2023-jia-061",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-061",
+        "prompt": "teach"
+      },
+      "blank-2023-jia-062": {
+        "blankId": "blank-2023-jia-062",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-062",
+        "prompt": "six"
+      },
+      "blank-2023-jia-063": {
+        "blankId": "blank-2023-jia-063",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-063"
+      },
+      "blank-2023-jia-064": {
+        "blankId": "blank-2023-jia-064",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-064"
+      },
+      "blank-2023-jia-065": {
+        "blankId": "blank-2023-jia-065",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-065",
+        "prompt": "borrow"
+      },
+      "blank-2023-jia-066": {
+        "blankId": "blank-2023-jia-066",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-066",
+        "prompt": "intend"
+      },
+      "blank-2023-jia-067": {
+        "blankId": "blank-2023-jia-067",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-067",
+        "prompt": "difference"
+      },
+      "blank-2023-jia-068": {
+        "blankId": "blank-2023-jia-068",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-068"
+      },
+      "blank-2023-jia-069": {
+        "blankId": "blank-2023-jia-069",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-069",
+        "prompt": "warn"
+      },
+      "blank-2023-jia-070": {
+        "blankId": "blank-2023-jia-070",
+        "groupId": "group-2023-jia-grammar-fill",
+        "questionId": "q-2023-jia-070",
+        "prompt": "employ"
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2023-jia-021": {
+        "questionId": "q-2023-jia-021",
+        "questionNo": 21,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-022": {
+        "questionId": "q-2023-jia-022",
+        "questionNo": 22,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-023": {
+        "questionId": "q-2023-jia-023",
+        "questionNo": 23,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-024": {
+        "questionId": "q-2023-jia-024",
+        "questionNo": 24,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-025": {
+        "questionId": "q-2023-jia-025",
+        "questionNo": 25,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-026": {
+        "questionId": "q-2023-jia-026",
+        "questionNo": 26,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-027": {
+        "questionId": "q-2023-jia-027",
+        "questionNo": 27,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-028": {
+        "questionId": "q-2023-jia-028",
+        "questionNo": 28,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-029": {
+        "questionId": "q-2023-jia-029",
+        "questionNo": 29,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-030": {
+        "questionId": "q-2023-jia-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-031": {
+        "questionId": "q-2023-jia-031",
+        "questionNo": 31,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-032": {
+        "questionId": "q-2023-jia-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-033": {
+        "questionId": "q-2023-jia-033",
+        "questionNo": 33,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-034": {
+        "questionId": "q-2023-jia-034",
+        "questionNo": 34,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-035": {
+        "questionId": "q-2023-jia-035",
+        "questionNo": 35,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-036": {
+        "questionId": "q-2023-jia-036",
+        "questionNo": 36,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-037": {
+        "questionId": "q-2023-jia-037",
+        "questionNo": 37,
+        "answer": "E",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-038": {
+        "questionId": "q-2023-jia-038",
+        "questionNo": 38,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-039": {
+        "questionId": "q-2023-jia-039",
+        "questionNo": 39,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-040": {
+        "questionId": "q-2023-jia-040",
+        "questionNo": 40,
+        "answer": "F",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-041": {
+        "questionId": "q-2023-jia-041",
+        "questionNo": 41,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-042": {
+        "questionId": "q-2023-jia-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-043": {
+        "questionId": "q-2023-jia-043",
+        "questionNo": 43,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-044": {
+        "questionId": "q-2023-jia-044",
+        "questionNo": 44,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-045": {
+        "questionId": "q-2023-jia-045",
+        "questionNo": 45,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-046": {
+        "questionId": "q-2023-jia-046",
+        "questionNo": 46,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-047": {
+        "questionId": "q-2023-jia-047",
+        "questionNo": 47,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-048": {
+        "questionId": "q-2023-jia-048",
+        "questionNo": 48,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-049": {
+        "questionId": "q-2023-jia-049",
+        "questionNo": 49,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-050": {
+        "questionId": "q-2023-jia-050",
+        "questionNo": 50,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-051": {
+        "questionId": "q-2023-jia-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-052": {
+        "questionId": "q-2023-jia-052",
+        "questionNo": 52,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-053": {
+        "questionId": "q-2023-jia-053",
+        "questionNo": 53,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-054": {
+        "questionId": "q-2023-jia-054",
+        "questionNo": 54,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-055": {
+        "questionId": "q-2023-jia-055",
+        "questionNo": 55,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-056": {
+        "questionId": "q-2023-jia-056",
+        "questionNo": 56,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-057": {
+        "questionId": "q-2023-jia-057",
+        "questionNo": 57,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-058": {
+        "questionId": "q-2023-jia-058",
+        "questionNo": 58,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-059": {
+        "questionId": "q-2023-jia-059",
+        "questionNo": 59,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-060": {
+        "questionId": "q-2023-jia-060",
+        "questionNo": 60,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-061": {
+        "questionId": "q-2023-jia-061",
+        "questionNo": 61,
+        "answer": "to teach",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-062": {
+        "questionId": "q-2023-jia-062",
+        "questionNo": 62,
+        "answer": "sixth",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-063": {
+        "questionId": "q-2023-jia-063",
+        "questionNo": 63,
+        "answer": "as",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-064": {
+        "questionId": "q-2023-jia-064",
+        "questionNo": 64,
+        "answer": "where",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-065": {
+        "questionId": "q-2023-jia-065",
+        "questionNo": 65,
+        "answer": "borrowing",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-066": {
+        "questionId": "q-2023-jia-066",
+        "questionNo": 66,
+        "answer": "intended",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-067": {
+        "questionId": "q-2023-jia-067",
+        "questionNo": 67,
+        "answer": "Different",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-068": {
+        "questionId": "q-2023-jia-068",
+        "questionNo": 68,
+        "answer": "for",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-069": {
+        "questionId": "q-2023-jia-069",
+        "questionNo": 69,
+        "answer": "warning",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-jia-070": {
+        "questionId": "q-2023-jia-070",
+        "questionNo": 70,
+        "answer": "be employed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "import-pipeline",
+      "reviewedAt": "2026-06-19T00:00:00Z"
+    },
+    "groups": {
+      "group-2023-jia-reading-a": {
+        "overview": "一篇曼谷美食指南类应用文，逐一介绍曼谷五家值得一去的餐厅（Nahm、Issaya Siamese Club、Bo. lan、Gaggan），每家给出主厨、菜式风格、地位排名与就餐氛围等信息，属于典型的高考阅读 A 篇广告/指南文体。",
+        "discourseStructure": {
+          "summary": "总—分结构：先用引言点出曼谷是美食爱好者的天堂、餐饮选择丰富，再按小标题分段逐家介绍各餐厅的特色。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-a-1",
+              "summary": "全文大标题：在曼谷哪里吃。",
+              "function": "标题，点明文章主题为曼谷餐厅推荐。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-2",
+              "summary": "引言：曼谷是美食爱好者向往之地，餐饮选择多到看似无穷，并引出下面的推荐；段末给出第一家餐厅小标题 Nahm。",
+              "function": "总起段，交代写作背景与全文框架。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-3",
+              "summary": "介绍 Nahm：泰式精致料理，是唯一跻身全球 50 佳餐厅前十的泰餐厅；主厨 David Thompson 曾凭同名伦敦泰餐厅获米其林星，2010 年在大都会酒店开设此分店；段末引出 Issaya Siamese Club。",
+              "function": "分述段，介绍 Nahm 餐厅及其主厨。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-4",
+              "summary": "介绍 Issaya Siamese Club：国际知名泰国主厨 Ian Kittichai 的首家旗舰店，菜单将传统泰餐与现代烹饪手法结合；段末引出 Bo. lan。",
+              "function": "分述段，介绍 Issaya Siamese Club 餐厅。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-5",
+              "summary": "介绍 Bo. lan：2009 年开业后名声渐起，提供难寻的泰式菜肴，忠于泰餐本源又有独特创新，适合烛光晚餐或工作会餐，并为特别饥饿者提供大份套餐；段末引出 Gaggan。",
+              "function": "分述段，介绍 Bo. lan 餐厅及其套餐与氛围。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-a-6",
+              "summary": "介绍 Gaggan：在亚洲 50 佳餐厅榜单上位列第一的前卫印度餐厅，最佳座位正对厨房，可见主厨 Gaggan 及员工现场烹饪，堪称最佳的烹饪剧场。",
+              "function": "分述段，介绍 Gaggan 餐厅及其开放式厨房特色。"
+            }
+          ]
+        }
+      },
+      "group-2023-jia-reading-b": {
+        "overview": "本文是一篇人物报道，讲述26岁的Terri Bolton热爱并擅长DIY（自己动手），其技能源自已故的祖父、建筑工人Derek Lloyd；文章还引出一项新研究，说明DIY正日益流行且由女性引领潮流。",
+        "discourseStructure": {
+          "summary": "由人物切入（擅长DIY）→ 追溯技能来源（祖父教导）→ 说明DIY在租房生活中的实际用处 → 引用研究数据展望DIY趋势，点出女性引领潮流。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-b-1",
+              "summary": "介绍Terri Bolton擅长DIY，能自己搭架子、组装家具，从不花钱请人做自己能做的活。",
+              "function": "开篇点题，树立人物形象，引出DIY主题。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-b-2",
+              "summary": "Terri将DIY技能归功于已故祖父、建筑工Derek Lloyd；她六岁起便在假期跟随祖父干活，每天得到5英镑零花钱，并曾深度参与祖父建房。",
+              "function": "追溯人物技能来源，说明成长经历与情感纽带。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-b-3",
+              "summary": "如今Terri在伦敦西南租房，她说DIY帮她在租期结束时避免被扣押金——她会补好墙洞、重新粉刷房间以免被收费。",
+              "function": "说明DIY技能在日常租房生活中的实际益处。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-b-4",
+              "summary": "引用新研究：数百万人计划在夏季动手做DIY项目，人均花费约823英镑，多数人为提升居家舒适度，部分人为增值房产；研究显示如今是女性在引领这股潮流。",
+              "function": "由个人转向群体，用研究数据展望DIY趋势，呼应并升华主题。"
+            }
+          ]
+        }
+      },
+      "group-2023-jia-reading-c": {
+        "overview": "本文是一篇书评，作者讲述自己少年时因一本哲学入门书爱上哲学，大学时期热情被浇灭，后来 Eric Weiner 的《The Socrates Express》重新唤起了他对哲学的热爱，并向读者推荐这本书。",
+        "discourseStructure": {
+          "summary": "全文按时间与逻辑推进：先回忆少年时与哲学的结缘，再写大学时热情的熄灭，转而引出重燃热爱的关键书籍，随后用两段具体评析该书的写法与价值，最后总评并发出阅读邀请。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-c-1",
+              "summary": "作者约13岁时叔叔送他一本《苏菲的世界》，整个夏天沉浸其中，被带入哲学世界。",
+              "function": "引入：交代作者初识哲学的契机。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-2",
+              "summary": "这份热爱持续到上大学，自以为比作者更懂哲学家并急于讲解的人浇灭了他的热情。",
+              "function": "转折：说明对哲学的热爱如何被消磨。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-3",
+              "summary": "Eric Weiner 的《The Socrates Express》重新唤起作者对哲学的热爱，它是一份体验哲学的邀请而非讲解。",
+              "function": "引出全文评析的核心书籍。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-4",
+              "summary": "Weiner 以列车旅途场景开篇，把每位哲学家的思想放在能帮我们做得更好的某件事的背景中，让读者学会运用哲学改善生活。",
+              "function": "评析该书的结构与主旨：教人用哲学改善生活。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-5",
+              "summary": "Weiner 用幽默让哲学思考变得有趣，并通过解读哲学家的思想、加入自己的诠释而融入其中。",
+              "function": "进一步评析该书的写作风格与作者的参与方式。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-c-6",
+              "summary": "该书表面简单却引人深入思考欲望、孤独与衰老，作者发出明确邀请并鼓励读者抽时间一读。",
+              "function": "总评并发出阅读邀请，收束全文。"
+            }
+          ]
+        }
+      },
+      "group-2023-jia-reading-d": {
+        "overview": "本文是一篇说明文，介绍灰熊（grizzly bears）在美国的处境与种群恢复历程：人们对它既敬畏又恐惧；它一度因猎杀濒临灭绝，1975 年被列入《濒危物种法》后受到法律保护，种群逐步恢复；如今数量回升又引发是否撤销保护的争议；最后说明只要人们采取预防措施，便能与灰熊和平共处。",
+        "discourseStructure": {
+          "summary": "文章先写美国人对灰熊既敬畏又恐惧的矛盾心理，并点出它是黄石公园游客最想见到的动物；接着指出灰熊正重新占据其历史栖息地、越来越多被人类目击；随后回顾灰熊从数量众多到因猎杀濒危、并于 1975 年被列入《濒危物种法》的历史；再讲述其恢复成功后两次试图被“摘牌”却因保护组织诉讼而被推翻；最后说明只要清除食物与诱物、采取电围栏等预防措施，人们就能与灰熊和平共处。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-jia-reading-d-1",
+              "summary": "灰熊体型庞大，在美国人心中占据矛盾的位置——既被敬畏又令人恐惧；它也是涌入黄石公园的世界各地游客最想见到的动物。",
+              "function": "引入话题：呈现美国人对灰熊既敬畏又恐惧的矛盾心理。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-2",
+              "summary": "熊类生物学家 Chris Servheen 指出灰熊正重新占据其昔日活动范围，随着它们扩展到一个多世纪未见其踪迹的地区，越来越多地被人类目击。",
+              "function": "承接发展：说明灰熊种群正在扩张、与人类接触增多。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-3",
+              "summary": "欧洲人到来时美国西部灰熊众多，约五万头以上；经过定居者数百年残酷而持续的猎杀，到 20 世纪 70 年代初仅剩 600 至 800 头，栖息地仅存 2%，1975 年灰熊被列入《濒危物种法》。",
+              "function": "回顾历史：交代灰熊从繁盛到濒危并被立法保护的过程。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-4",
+              "summary": "如今美国约有 2000 多头灰熊，恢复非常成功，鱼类与野生动物管理局两度试图将其“摘牌”以放松保护、允许狩猎，但都因保护组织提起诉讼而被推翻，灰熊仍受保护。",
+              "function": "呈现争议：说明灰熊恢复后是否撤销保护的拉锯。"
+            },
+            {
+              "paragraphId": "para-2023-jia-reading-d-5",
+              "summary": "若不采取预防措施，灰熊会袭击家畜、闯入庭院觅食；但只要人们清除院落营地的食物与诱物、给禽舍等加装电围栏，灰熊通常会无事经过，从而实现人熊共存。",
+              "function": "总结升华：指出采取预防措施即可与灰熊和平相处。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2023-jia-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Nahm 与 Issaya Siamese Club 两家餐厅的共同点，需要跨两段比对各自信息。",
+        "stemTranslationZh": "Nahm 和 Issaya Siamese Club 有什么共同点？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们都采用现代烹饪方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "The menu in this beautiful colonial house includes traditional Thai cuisine combined with modern cooking methods.",
+              "paragraphId": "para-2023-jia-reading-a-4",
+              "sourceHighlight": "combined with modern cooking methods",
+              "optionText": "They adopt modern cooking methods.",
+              "optionHighlight": "modern cooking methods",
+              "explanation": "原文只有 Issaya Siamese Club 一段提到结合 modern cooking methods，Nahm 段并未提及，选项把仅适用于一家的信息扩大到两家，属范围偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-a-4",
+                "quote": "combined with modern cooking methods",
+                "anchor": "只有 Issaya 提到现代烹饪手法"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们在伦敦都设有分店。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Head Chef David Thompson, who received a Michelin star for his London-based Thai restaurant of the same name",
+              "paragraphId": "para-2023-jia-reading-a-3",
+              "sourceEntity": "David Thompson 在伦敦的同名泰餐厅（Nahm 主厨个人的餐厅）",
+              "optionText": "They have branches in London.",
+              "optionEntity": "Nahm 与 Issaya 两家在伦敦的分店",
+              "explanation": "原文只说 Nahm 的主厨 David Thompson 有一家伦敦同名餐厅，那是主厨个人的餐厅，并非 Nahm 的分店，更与 Issaya 无关；选项把主厨的伦敦餐厅错配成两家餐厅的伦敦分店，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-a-3",
+                "quote": "London-based Thai restaurant of the same name",
+                "anchor": "伦敦餐厅是主厨个人的，非分店"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们都拥有顶级主厨。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-a-3",
+                "quote": "Head Chef David Thompson, who received a Michelin star for his London-based Thai restaurant of the same name",
+                "anchor": "Nahm 主厨曾获米其林星"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-jia-reading-a-4",
+                "quote": "internationally known Thai chef Ian Kittichai’s first flagship Bangkok restaurant",
+                "anchor": "Issaya 主厨为国际知名"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们都开设在酒店里。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "opened this branch in the Metropolitan Hotel in 2010",
+              "paragraphId": "para-2023-jia-reading-a-3",
+              "sourceHighlight": "in the Metropolitan Hotel",
+              "optionText": "They are based in hotels.",
+              "optionHighlight": "based in hotels",
+              "explanation": "原文只有 Nahm 一段提到开在大都会酒店内，Issaya 段说其在一座殖民风格的别墅里，并未提酒店；选项把仅适用于 Nahm 的信息扩大到两家，属范围偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-a-3",
+                "quote": "opened this branch in the Metropolitan Hotel in 2010",
+                "anchor": "只有 Nahm 开在酒店内"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "have top-class chefs",
+            "sourceRole": "correctOption",
+            "targetText": "Head Chef David Thompson, who received a Michelin star for his London-based Thai restaurant of the same name",
+            "targetParagraphId": "para-2023-jia-reading-a-3",
+            "relationType": "paraphrase",
+            "note": "Nahm 段用 received a Michelin star 体现主厨水平高，对应 top-class chefs 中的“顶级主厨”。"
+          },
+          {
+            "sourceText": "have top-class chefs",
+            "sourceRole": "correctOption",
+            "targetText": "internationally known Thai chef Ian Kittichai’s first flagship Bangkok restaurant",
+            "targetParagraphId": "para-2023-jia-reading-a-4",
+            "relationType": "paraphrase",
+            "note": "Issaya 段用 internationally known chef 对应 top-class chefs，两段合起来才能确认“共同点”。"
+          }
+        ]
+      },
+      "q-2023-jia-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查哪家餐厅提供大份套餐，属定位类细节题，需根据 large set menu 定位到对应餐厅。",
+        "stemTranslationZh": "哪家餐厅提供大份套餐？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "Gaggan。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Gaggan 提供大份套餐",
+              "explanation": "原文 Gaggan 段只介绍其排名、开放式厨房等，未提及 large set menu，原文未提及。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "Bo. lan。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-a-5",
+                "quote": "For those extremely hungry, there’s a large set menu",
+                "anchor": "Bo. lan 段明确提到大份套餐"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "Issaya Siamese Club。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Issaya Siamese Club 提供大份套餐",
+              "explanation": "原文 Issaya 段只说其菜单将传统泰餐与现代烹饪手法结合，未提及 large set menu，原文未提及。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "Nahm。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Nahm 提供大份套餐",
+              "explanation": "原文 Nahm 段只介绍其排名与主厨，未提及 large set menu，原文未提及。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "offers a large set menu",
+            "sourceRole": "stem",
+            "targetText": "For those extremely hungry, there’s a large set menu",
+            "targetParagraphId": "para-2023-jia-reading-a-5",
+            "relationType": "locationCue",
+            "note": "题干 large set menu 与 Bo. lan 段原句 a large set menu 完全对应，可直接定位到 Bo. lan。"
+          }
+        ]
+      },
+      "q-2023-jia-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Gaggan 这家餐厅的独特之处，需在 Gaggan 段内定位其区别于他家的特色。",
+        "stemTranslationZh": "Gaggan 有什么特别之处？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它从印度招聘员工。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Gaggan 从印度招聘员工",
+              "explanation": "原文只说 Gaggan 是 Indian restaurant、能看到主厨及其员工现场操作，但从未提及员工来自印度或从印度招聘，原文未提及。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它每天上演一出戏剧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Culinary theater at its best.",
+              "optionText": "It puts on a play every day.",
+              "matchType": "wordFamily",
+              "relationNote": "原文用 Culinary theater（烹饪剧场）是比喻，形容开放式厨房像看表演一样精彩；选项借 theater/play 的词族关联，曲解为真的“每天上演戏剧”，属原文词钩干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-a-6",
+                "quote": "Culinary theater at its best",
+                "anchor": "theater 为比喻，非真戏剧"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它供应难寻的当地菜肴。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Serving hard-to-find Thai dishes in an elegant atmosphere",
+              "paragraphId": "para-2023-jia-reading-a-5",
+              "sourceEntity": "Bo. lan（供应难寻泰式菜肴的餐厅）",
+              "optionText": "It serves hard-to-find local dishes.",
+              "optionEntity": "Gaggan",
+              "explanation": "供应 hard-to-find 菜肴的是 Bo. lan 段，而题目问的是 Gaggan；选项把 Bo. lan 的特色错配到 Gaggan 头上，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-a-5",
+                "quote": "Serving hard-to-find Thai dishes",
+                "anchor": "hard-to-find 菜肴属于 Bo. lan"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它向客人展示烹饪过程。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-a-6",
+                "quote": "offers a window right into the kitchen, where you can see chef Gaggan and his staff in action",
+                "anchor": "最佳座位正对厨房可见烹饪"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "shows the cooking process to guests",
+            "sourceRole": "correctOption",
+            "targetText": "offers a window right into the kitchen, where you can see chef Gaggan and his staff in action",
+            "targetParagraphId": "para-2023-jia-reading-a-6",
+            "relationType": "paraphrase",
+            "note": "原文 a window right into the kitchen 和 see chef ... in action 对应选项 shows the cooking process，开放式厨房让客人看到烹饪过程。"
+          }
+        ]
+      },
+      "q-2023-jia-024": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查对第一段中习语 a dab hand 的词义推测，需结合下文对其DIY能力的描述判断含义。",
+        "stemTranslationZh": "第一段中与 \"a dab hand\" 意思最接近的是哪一项？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一位艺术家。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "a dab hand 意为艺术家。",
+              "explanation": "原文未提及Terri从事艺术创作；a dab hand 指在某方面熟练的人，与“艺术家”无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一位获胜者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "a dab hand 意为获胜者。",
+              "explanation": "原文未提及任何比赛或获胜，a dab hand 强调技能娴熟而非取胜。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一位行家／专家。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-b-1",
+                "quote": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+                "anchor": "Skilled at ... she can do herself"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一位先驱／开拓者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "a dab hand 意为先驱／开拓者。",
+              "explanation": "原文未提及Terri开创了什么新领域，a dab hand 指熟练的人，而非开拓者。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "a dab hand",
+            "sourceRole": "stem",
+            "targetText": "Skilled at putting up shelves and piecing together furniture",
+            "targetParagraphId": "para-2023-jia-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "题干问 a dab hand 的含义，下一句用 Skilled at ... 具体说明她技艺娴熟，故 a dab hand = a specialist（行家）。"
+          }
+        ]
+      },
+      "q-2023-jia-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节理解：祖父每天给Terri 5英镑的原因。",
+        "stemTranslationZh": "Terri的祖父为什么每天给她5英镑？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "作为生日礼物。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "这5英镑是生日礼物。",
+              "explanation": "原文未提及生日，这笔钱是每天干活的报酬，并非生日礼物。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "作为对她劳动的酬劳。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-b-2",
+                "quote": "A day’s work was rewarded with £5 in pocket money.",
+                "anchor": "A day’s work was rewarded with £5"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了资助她的DIY项目。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "给钱是为了资助她的DIY项目。",
+              "explanation": "原文说这是一天劳动的报酬，并未说是为资助她个人的DIY项目；属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了鼓励她培养一项爱好。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "给钱是为了鼓励她培养爱好。",
+              "explanation": "原文只说这是劳动报酬，未提及以此鼓励她发展爱好；属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "As a treat for her work",
+            "sourceRole": "correctOption",
+            "targetText": "A day’s work was rewarded with £5 in pocket money.",
+            "targetParagraphId": "para-2023-jia-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 As a treat for her work（对她劳动的酬劳）对应原文 A day’s work was rewarded with £5（一天的劳动以5英镑回报），reward 与 treat for her work 同义替换。"
+          }
+        ]
+      },
+      "q-2023-jia-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节理解：Terri如何避免租房押金被扣。",
+        "stemTranslationZh": "Terri是如何避免她所租房子的押金被扣的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "通过把房间恢复成原来的样子。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-b-3",
+                "quote": "cover up holes and repaint a room to avoid any charges when I’ve moved out.",
+                "anchor": "cover up holes and repaint a room to avoid any charges"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "通过自己置办家具。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "她靠自己置办家具来避免被扣押金。",
+              "explanation": "原文说的是补墙洞、重新粉刷以恢复原貌，并未提及自己购置家具（furnishing）；属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "通过和室友分摊房租。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Terri, who now rents a house with friends in Wandsworth",
+              "optionText": "By splitting the rent with a roommate.",
+              "matchType": "wordFamily",
+              "relationNote": "原文提到她 rents a house with friends（与朋友合租），选项借 rent/roommate 等词制造干扰，但合租与“避免被扣押金”的方法无关。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "通过取消租房协议。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "她通过取消租房协议来避免被扣押金。",
+              "explanation": "原文是租期正常结束（a tenancy comes to an end），并非取消协议；属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "By making it look like before",
+            "sourceRole": "correctOption",
+            "targetText": "cover up holes and repaint a room to avoid any charges",
+            "targetParagraphId": "para-2023-jia-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "选项 making it look like before（让房间恢复原样）对应原文 cover up holes and repaint a room（补好墙洞、重新粉刷），即恢复原貌以避免 charges。"
+          }
+        ]
+      },
+      "q-2023-jia-027": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对研究所揭示的DIY趋势这一细节的理解。",
+        "stemTranslationZh": "研究显示了DIY方面怎样的趋势？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它正变得越来越昂贵。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "The average spend per project will be around £823.",
+              "optionText": "It is becoming more costly.",
+              "matchType": "wordFamily",
+              "relationNote": "原文给出人均花费约823英镑（spend/£823）只是单次项目的平均花费，并未说成本在上升（becoming more costly），借花费数字制造干扰。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它正变得越来越耗时。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "DIY正变得越来越耗时。",
+              "explanation": "原文只提到人们利用夏日长日完成项目，并未说DIY整体趋势是越来越耗时；属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它正变成一个季节性行业。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "more than half of people are planning to make the most of the long, warm summer days to get jobs done",
+              "sourceHighlight": "make the most of the long, warm summer days",
+              "optionText": "It is turning into a seasonal industry.",
+              "optionHighlight": "turning into a seasonal industry",
+              "explanation": "原文只是说很多人趁夏日动手，属个人爱好行为；选项夸大为“正在变成一个季节性行业（industry）”，范围与程度被拔高。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它正在女性中越来越流行。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-b-4",
+                "quote": "Though DIY has traditionally been seen as a male hobby, the research shows it is women now leading the charge.",
+                "anchor": "it is women now leading the charge"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It is gaining popularity among females.",
+            "sourceRole": "correctOption",
+            "targetText": "it is women now leading the charge",
+            "targetParagraphId": "para-2023-jia-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "选项 gaining popularity among females（在女性中越来越流行）对应原文 women now leading the charge（女性如今引领潮流），females ≈ women。"
+          }
+        ]
+      },
+      "q-2023-jia-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查谁为作者打开了哲学之门，即作者最初接触哲学的引路人。",
+        "stemTranslationZh": "是谁为作者打开了哲学之门？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "福柯。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Nothing kills the love for philosophy faster than people who think they understand Foucault, Baudrillard, or Confucius better than you—and then try to explain them.",
+              "sourceEntity": "Foucault",
+              "optionText": "Foucault.",
+              "optionEntity": "Foucault",
+              "explanation": "Foucault 只是原文中被提到的哲学家之一，与「为作者打开哲学之门」无关，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-c-2",
+                "quote": "people who think they understand Foucault, Baudrillard, or Confucius better than you",
+                "anchor": "Foucault 仅是被提及的哲学家"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "埃里克·韦纳。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Eric Weiner’s The Socrates Express: In Search of Life Lessons from Dead Philosophers reawakened my love for philosophy.",
+              "sourceEntity": "Eric Weiner",
+              "optionText": "Eric Weiner.",
+              "optionEntity": "Eric Weiner",
+              "explanation": "Eric Weiner 是「重新唤起」作者哲学热爱的人，而非最初「打开哲学之门」的人，对象与时间节点错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-c-3",
+                "quote": "reawakened my love for philosophy",
+                "anchor": "Weiner 是重燃而非启蒙者"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "乔斯坦·贾德。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-c-1",
+                "quote": "an uncle gave me a copy of Jostein Gaarder’s Sophie’s World",
+                "anchor": "贾德的《苏菲的世界》"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-jia-reading-c-1",
+                "quote": "It spoke to me and brought me into a world of philosophy (哲学) .",
+                "anchor": "把作者带入哲学世界"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一位大学老师。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "A college teacher opened the door to philosophy for the author.",
+              "explanation": "原文未提及任何大学老师为作者引入哲学；大学时期反而是热爱被浇灭的阶段。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "opened the door to philosophy",
+            "sourceRole": "stem",
+            "targetText": "It spoke to me and brought me into a world of philosophy (哲学) .",
+            "targetParagraphId": "para-2023-jia-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "题干 opened the door to philosophy（打开哲学之门）对应原文 brought me into a world of philosophy（把我带入哲学世界），而带来此书的正是 Jostein Gaarder 的《Sophie’s World》。"
+          }
+        ]
+      },
+      "q-2023-jia-029": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查第四段列举苏格拉底、梭罗等伟大哲学家的写作意图。",
+        "stemTranslationZh": "作者在第四段列举伟大的哲学家是为了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了把韦纳与他们作比较。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The author lists the philosophers to compare Weiner with them.",
+              "explanation": "第四段列举哲学家是为说明 Weiner 书中教读者学到的内容，并未将 Weiner 与这些哲学家作高下比较，原文未提及。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了举出伟大著作的例子。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "we learn to wonder like Socrates, see like Thoreau, listen like Schopenhauer, and have no regrets like Nietzsche",
+              "sourceHighlight": "wonder like Socrates, see like Thoreau",
+              "optionText": "To give examples of great works.",
+              "optionHighlight": "examples of great works",
+              "explanation": "原文列举的是哲学家及其各自的长处（思考、观察、聆听、无悔），并非列举「伟大著作」，把人物例证偷换为著作例证，范围错位。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-c-4",
+                "quote": "we learn to wonder like Socrates, see like Thoreau, listen like Schopenhauer, and have no regrets like Nietzsche",
+                "anchor": "列举的是哲学家而非著作"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了称赞他们的写作技巧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The author lists the philosophers to praise their writing skills.",
+              "explanation": "原文是借这些哲学家说明读者能学到的本领，没有评价或称赞他们的写作技巧，无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了帮助读者理解韦纳的书。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-c-4",
+                "quote": "The end result is a read in which we learn to wonder like Socrates, see like Thoreau, listen like Schopenhauer, and have no regrets like Nietzsche.",
+                "anchor": "用哲学家举例说明读这本书的收获"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-jia-reading-c-4",
+                "quote": "This, more than a book about understanding philosophy, is a book about learning to use philosophy to improve a life.",
+                "anchor": "帮助读者理解这本书的性质"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To help readers understand Weiner's book.",
+            "sourceRole": "correctOption",
+            "targetText": "The end result is a read in which we learn to wonder like Socrates, see like Thoreau, listen like Schopenhauer, and have no regrets like Nietzsche.",
+            "targetParagraphId": "para-2023-jia-reading-c-4",
+            "relationType": "locationCue",
+            "note": "第四段以 the end result is a read（读这本书最终的收获）引出列举的哲学家，目的是具体说明 Weiner 书带给读者的体验，从而帮助读者理解这本书。"
+          }
+        ]
+      },
+      "q-2023-jia-030": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者欣赏《The Socrates Express》一书的哪一点。",
+        "stemTranslationZh": "作者喜欢《苏格拉底快车》这本书的哪一点？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它对历史的观点呈现得很好。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Its views on history are well-presented.",
+              "explanation": "原文谈的是用哲学改善生活，从未涉及该书对历史的观点呈现，无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它的理念可以应用于日常生活。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-c-4",
+                "quote": "is a book about learning to use philosophy to improve a life",
+                "anchor": "学会用哲学改善生活"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-jia-reading-c-5",
+                "quote": "He makes philosophical thought an appealing exercise that improves the quality of our experiences",
+                "anchor": "提升日常体验质量"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它收录了读者的评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It includes comments from readers.",
+              "explanation": "原文只提到 Weiner 加入自己的诠释，并没有说书中收录读者评论，无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它留下了开放式结尾。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "The invitation is clear: Weiner wants you to pick up a coffee or tea and sit down with this book.",
+              "optionText": "It leaves an open ending.",
+              "matchType": "wordFamily",
+              "relationNote": "原文末段的 invitation / offer 指作者向读者发出阅读邀请，与「开放式结尾 open ending」无关，选项借「结尾段落」的话题制造词面联想误导。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-c-6",
+                "quote": "The invitation is clear: Weiner wants you to pick up a coffee or tea and sit down with this book.",
+                "anchor": "末段是阅读邀请而非开放结尾"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Its ideas can be applied to daily life.",
+            "sourceRole": "correctOption",
+            "targetText": "is a book about learning to use philosophy to improve a life",
+            "targetParagraphId": "para-2023-jia-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "选项 ideas can be applied to daily life（理念可用于日常生活）是原文 use philosophy to improve a life（运用哲学改善生活）的同义替换。"
+          }
+        ]
+      },
+      "q-2023-jia-031": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查作者对 Weiner 这本书的总体看法/风格评价。",
+        "stemTranslationZh": "作者认为韦纳的书怎么样？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "客观而平实。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Weiner enters into conversation with some of the most important philosophers in history, and he becomes part of that crowd in the process by decoding (解读) their messages and adding his own interpretation.",
+              "sourceHighlight": "adding his own interpretation",
+              "optionText": "Objective and plain.",
+              "optionHighlight": "Objective",
+              "explanation": "原文说 Weiner 加入自己的诠释（adding his own interpretation），带有主观色彩，与「客观 objective」相反，态度颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-c-5",
+                "quote": "adding his own interpretation",
+                "anchor": "加入主观诠释，并不客观"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "大胆而有雄心。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The book is daring and ambitious.",
+              "explanation": "原文用 fun、sharp、humor、simplicity 等词形容该书，并未将其评价为大胆或有雄心，无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "严肃而难以理解。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "The Socrates Express is a fun, sharp book that draws readers in with its apparent simplicity and gradually pulls them in deeper thoughts on desire, loneliness, and aging.",
+              "sourceHighlight": "a fun, sharp book that draws readers in with its apparent simplicity",
+              "optionText": "Serious and hard to follow.",
+              "optionHighlight": "Serious and hard to follow",
+              "explanation": "原文称该书 fun（有趣）且 apparent simplicity（看似简单、易读），与「严肃而难以理解 serious and hard to follow」完全相反，黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-c-6",
+                "quote": "a fun, sharp book that draws readers in with its apparent simplicity",
+                "anchor": "有趣易读，并非严肃难懂"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "幽默而直白。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-c-5",
+                "quote": "he does so with plenty of humor",
+                "anchor": "充满幽默"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-jia-reading-c-6",
+                "quote": "The Socrates Express is a fun, sharp book that draws readers in with its apparent simplicity",
+                "anchor": "看似简单、直白易读"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Humorous and straightforward.",
+            "sourceRole": "correctOption",
+            "targetText": "he does so with plenty of humor",
+            "targetParagraphId": "para-2023-jia-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "选项 Humorous（幽默）对应原文 with plenty of humor；straightforward（直白）对应第六段 apparent simplicity（看似简单、直白易读）。"
+          }
+        ]
+      },
+      "q-2023-jia-032": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查对第一段美国人对灰熊态度的理解，即这种态度的特点。",
+        "stemTranslationZh": "美国人如何看待灰熊？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们在人们心中引发复杂的情感。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-d-1",
+                "quote": "occupy a conflicted corner of the American psyche—we revere (敬畏) them even as they give us frightening dreams",
+                "anchor": "既敬畏又恐惧的矛盾心理"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们应该被圈养在国家公园里。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "flood into Yellowstone National Park",
+              "optionText": "They should be kept in national parks.",
+              "matchType": "exact",
+              "relationNote": "选项借用第一段出现过的 national park 制造干扰；原文只说游客涌入黄石公园希望见到灰熊，并未说灰熊应被圈养在国家公园里。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-1",
+                "quote": "flood into Yellowstone National Park",
+                "anchor": "游客涌入国家公园"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们具有很高的科学价值。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "灰熊具有很高的科学价值",
+              "explanation": "原文未提及灰熊的科学价值；第一段只描述美国人对灰熊既敬畏又恐惧的情感态度。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们是美国文化的象征。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "occupy a conflicted corner of the American psyche",
+              "sourceHighlight": "a conflicted corner of the American psyche",
+              "optionText": "They are a symbol of American culture.",
+              "optionHighlight": "a symbol of American culture",
+              "explanation": "原文只说灰熊在美国人心理中占据矛盾的一角，并未把它拔高为“美国文化的象征”；选项夸大了原文表述。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How do Americans look at grizzlies",
+            "sourceRole": "stem",
+            "targetText": "occupy a conflicted corner of the American psyche—we revere (敬畏) them even as they give us frightening dreams",
+            "targetParagraphId": "para-2023-jia-reading-d-1",
+            "relationType": "locationCue",
+            "note": "题干问 how Americans look at grizzlies（美国人如何看待灰熊），原文用 occupy a conflicted corner of the American psyche 及 revere…even as…frightening dreams 描述这种态度，定位答案句。"
+          },
+          {
+            "sourceText": "cause mixed feelings",
+            "sourceRole": "correctOption",
+            "targetText": "we revere (敬畏) them even as they give us frightening dreams",
+            "targetParagraphId": "para-2023-jia-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "正确选项 mixed feelings（复杂情感）对应原文 revere（敬畏）与 frightening dreams（令人害怕）并存的 conflicted（矛盾的）心理。"
+          }
+        ]
+      },
+      "q-2023-jia-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第三、四段灰熊种群增长原因的理解，即什么帮助了其数量回升。",
+        "stemTranslationZh": "是什么帮助了灰熊数量的增长？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "欧洲定居者的行为。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "after centuries of cruel and continuous hunting by settlers, 600 to 800 grizzlies remained on a mere 2 percent of their former range in the Northern Rockies",
+              "sourceHighlight": "cruel and continuous hunting by settlers",
+              "optionText": "The European settlers' behavior.",
+              "optionHighlight": "The European settlers' behavior",
+              "explanation": "原文说定居者数百年残酷而持续的猎杀使灰熊数量锐减，定居者的行为是导致灰熊濒危的原因，而非帮助其数量增长，二者作用相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-3",
+                "quote": "after centuries of cruel and continuous hunting by settlers, 600 to 800 grizzlies remained on a mere 2 percent of their former range in the Northern Rockies",
+                "anchor": "定居者猎杀致使数量锐减"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "熊类活动范围的扩张。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "grizzly bears expand their range",
+              "optionText": "The expansion of bears' range.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用第二段 expand their range 的同族表达 expansion of bears' range 制造干扰；范围扩张是种群恢复后的结果，而非促成数量增长的原因。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-2",
+                "quote": "As grizzly bears expand their range into places where they haven’t been seen in a century or more",
+                "anchor": "范围扩张是结果而非原因"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "自 1975 年起的法律保护。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-d-3",
+                "quote": "In 1975, grizzlies were listed under the Endangered Species Act.",
+                "anchor": "1975 年被列入濒危物种法"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2023-jia-reading-d-4",
+                "quote": "Today, there are about 2,000 or more grizzly bears in the U. S. Their recovery has been so successful",
+                "anchor": "如今数量恢复至两千多头"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "美洲原住民的支持。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "living alongside Native Americans",
+              "optionText": "The support of Native Americans.",
+              "matchType": "exact",
+              "relationNote": "选项借用第三段出现过的 Native Americans 制造干扰；原文只说欧洲人到来时灰熊与原住民共同生活，并未说原住民的支持帮助了灰熊数量增长。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-3",
+                "quote": "living alongside Native Americans",
+                "anchor": "与原住民共同生活"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What has helped the increase of the grizzly population",
+            "sourceRole": "stem",
+            "targetText": "In 1975, grizzlies were listed under the Endangered Species Act.",
+            "targetParagraphId": "para-2023-jia-reading-d-3",
+            "relationType": "locationCue",
+            "note": "题干问什么帮助了灰熊数量的 increase（增长），原文转折点在 1975 年灰熊被 listed under the Endangered Species Act（列入濒危物种法），此后种群得以恢复，据此定位答案。"
+          },
+          {
+            "sourceText": "The protection by law since 1975",
+            "sourceRole": "correctOption",
+            "targetText": "In 1975, grizzlies were listed under the Endangered Species Act.",
+            "targetParagraphId": "para-2023-jia-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "正确选项 protection by law since 1975（自 1975 年起的法律保护）对应原文 In 1975, grizzlies were listed under the Endangered Species Act（1975 年灰熊被列入濒危物种法）所提供的法律保护。"
+          }
+        ]
+      },
+      "q-2023-jia-034": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第四段细节的理解，即是什么阻止了鱼类与野生动物管理局给灰熊“摘牌”。",
+        "stemTranslationZh": "是什么阻止了美国鱼类与野生动物管理局将灰熊“摘牌”（撤销保护名录）？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "保护组织的反对。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-d-4",
+                "quote": "Both efforts were overturned due to lawsuits from conservation groups.",
+                "anchor": "保护组织的诉讼使两次努力被推翻"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "灰熊的成功回归。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "causeEffectReversal",
+              "sourceQuote": "Their recovery has been so successful that the U. S. Fish and Wildlife Service has twice attempted to delist grizzlies",
+              "sourceHighlight": "recovery has been so successful that…attempted to delist",
+              "optionText": "The successful comeback of grizzlies.",
+              "optionHighlight": "The successful comeback of grizzlies",
+              "explanation": "原文说灰熊恢复成功反而促使管理局试图“摘牌”，成功回归是“摘牌”尝试的原因，而非阻止“摘牌”的因素；选项把因果关系弄反了。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-4",
+                "quote": "Their recovery has been so successful that the U. S. Fish and Wildlife Service has twice attempted to delist grizzlies",
+                "anchor": "恢复成功导致试图摘牌"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "生物学家的呼声。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "是生物学家的呼声阻止了摘牌",
+              "explanation": "原文未提及生物学家就摘牌发声；第四段明确说阻止摘牌的是保护组织提起的诉讼。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "当地农民的支持主张。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "是当地农民的主张阻止了摘牌",
+              "explanation": "原文未提及农民就摘牌发声；阻止摘牌的是 conservation groups（保护组织）的诉讼，与农民无关。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "stopped the U.S. Fish and Wildlife Service from delisting grizzlies",
+            "sourceRole": "stem",
+            "targetText": "Both efforts were overturned due to lawsuits from conservation groups.",
+            "targetParagraphId": "para-2023-jia-reading-d-4",
+            "relationType": "locationCue",
+            "note": "题干问什么 stopped…from delisting（阻止摘牌），原文用 Both efforts were overturned due to lawsuits（两次努力都因诉讼被推翻）给出答案，定位到该句。"
+          },
+          {
+            "sourceText": "The opposition of conservation groups",
+            "sourceRole": "correctOption",
+            "targetText": "lawsuits from conservation groups",
+            "targetParagraphId": "para-2023-jia-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "正确选项 opposition of conservation groups（保护组织的反对）对应原文 lawsuits from conservation groups（保护组织提起的诉讼）这一具体反对行动。"
+          }
+        ]
+      },
+      "q-2023-jia-035": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对最后一段的推断，即在采取预防措施的前提下人与灰熊关系如何。",
+        "stemTranslationZh": "从最后一段可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "应该为灰熊提供食物。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble.",
+              "sourceHighlight": "remove food and attractants",
+              "optionText": "Food should be provided for grizzlies.",
+              "optionHighlight": "Food should be provided for grizzlies",
+              "explanation": "原文主张清除食物与诱物以免引来灰熊，与选项“为灰熊提供食物”正好相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-5",
+                "quote": "If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble.",
+                "anchor": "应清除而非提供食物"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "人们能够与灰熊和谐共处。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-jia-reading-d-5",
+                "quote": "If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble.",
+                "anchor": "清除诱物后灰熊会无事经过"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2023-jia-reading-d-5",
+                "quote": "Our hope is to have a clean, attractant-free place where bears can pass through without learning bad habits",
+                "anchor": "营造无诱物环境实现人熊共存"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "应该为灰熊修建一条专门的通道。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "where bears can pass through",
+              "optionText": "A special path should be built for grizzlies.",
+              "matchType": "wordFamily",
+              "relationNote": "选项把原文 bears can pass through（熊可以经过）曲解为修建 path（专门通道）；原文只是说在清洁无诱物的环境里熊会经过，并未主张修路。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-5",
+                "quote": "where bears can pass through without learning bad habits",
+                "anchor": "熊可经过而非修建通道"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "可以引入技术来保护灰熊。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away.",
+              "sourceHighlight": "electric fencing",
+              "optionText": "Technology can be introduced to protect grizzlies.",
+              "optionHighlight": "Technology can be introduced to protect grizzlies",
+              "explanation": "原文提到电围栏只是用来把灰熊赶走、保护家畜，而非用技术“保护灰熊”；选项把一处具体做法过度泛化为引入技术保护灰熊，且对象与目的均被偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-jia-reading-d-5",
+                "quote": "Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away.",
+                "anchor": "电围栏是为赶走灰熊护畜"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What can be inferred from the last paragraph",
+            "sourceRole": "stem",
+            "targetText": "If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble.",
+            "targetParagraphId": "para-2023-jia-reading-d-5",
+            "relationType": "locationCue",
+            "note": "题干要求 inferred from the last paragraph（从末段推断），原文用 If people remove…grizzlies will typically pass by without trouble 这一条件句给出推断依据。"
+          },
+          {
+            "sourceText": "People can live in harmony with grizzlies",
+            "sourceRole": "correctOption",
+            "targetText": "grizzlies will typically pass by without trouble",
+            "targetParagraphId": "para-2023-jia-reading-d-5",
+            "relationType": "paraphrase",
+            "note": "正确选项 live in harmony with grizzlies（与灰熊和谐共处）对应原文 grizzlies will typically pass by without trouble（灰熊通常会无事经过）所体现的人熊共存状态。"
+          }
+        ]
+      }
+    }
+  }
+}

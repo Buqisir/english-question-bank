@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2022-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-yi-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-yi-grammar-fill": {
+      "overview": "说明文：介绍首个国际茶日的设立与北京举办的庆祝活动及茶产业国际合作倡议。"
+    }
+  },
+  "blanks": {
+    "q-2022-yi-061": {
+      "blankId": "blank-2022-yi-061",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "by",
+      "role": null,
+      "path": null,
+      "reason": "被动语态 was named 后引出动作发出者 the United Nations，表示\"由……命名\"，固定用介词 by。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "was named officially",
+          "signalSide": "passage",
+          "relation": "被动语态 was named 后接施动者，须用介词 by 引出。"
+        }
+      ],
+      "teachingNote": "被动语态后接动作发出者，用 by 引出。"
+    },
+    "q-2022-yi-062": {
+      "blankId": "blank-2022-yi-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "festival 指代上文已提到的 International Tea Day 这一特定节日，是回指限定，名词前用定冠词 the。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the first International Tea Day",
+          "signalSide": "passage",
+          "relation": "上文已提到该特定节日，下文 festival 回指它，故用定冠词 the。"
+        }
+      ],
+      "teachingNote": "名词回指上文已知特定事物时，前加定冠词 the。"
+    },
+    "q-2022-yi-063": {
+      "blankId": "blank-2022-yi-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "address",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "addressed",
+      "role": null,
+      "path": null,
+      "reason": "本句只有 The chairman 一个主语却无谓语，address 须作谓语动词；全文叙述过去发生的开幕式活动，用一般过去时 addressed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The chairman of the China Culture Promotion Society",
+          "signalSide": "passage",
+          "relation": "主语后缺谓语，address 须变谓语动词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "took place at the Chinese Businessman Museum",
+          "signalSide": "passage",
+          "relation": "全文叙述过去的活动，谓语用一般过去时，与 took 时态呼应。"
+        }
+      ],
+      "teachingNote": "句中无谓语且为过去事件叙述时，提示动词变一般过去时作谓语。"
+    },
+    "q-2022-yi-064": {
+      "blankId": "blank-2022-yi-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "large",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "largest",
+      "role": null,
+      "path": null,
+      "reason": "空前有定冠词 the，修饰唯一性的\"最大产茶国\"，形容词 large 须用最高级 largest。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "the",
+          "signalSide": "passage",
+          "relation": "the + 形容词最高级，锁定 large 变 largest。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "tea-producing country",
+          "signalSide": "passage",
+          "relation": "修饰\"产茶国\"表唯一最大，用最高级。"
+        }
+      ],
+      "teachingNote": "the + 名词且表唯一之最时，形容词用最高级。"
+    },
+    "q-2022-yi-065": {
+      "blankId": "blank-2022-yi-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "responsible",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "responsibility",
+      "role": null,
+      "path": null,
+      "reason": "空前为 has a，须接名词作宾语，形容词 responsible 变名词 responsibility，意为\"有责任\"。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "China has a",
+          "signalSide": "passage",
+          "relation": "has a 后须接单数名词作宾语，形容词变名词 responsibility。"
+        }
+      ],
+      "teachingNote": "动词 + 冠词 a 后须填名词，形容词须变名词形式。"
+    },
+    "q-2022-yi-066": {
+      "blankId": "blank-2022-yi-066",
+      "blankNo": 66,
+      "blankType": "given",
+      "hint": "share",
+      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "answer": "shared",
+      "role": null,
+      "path": null,
+      "reason": "空在 a 与名词 future 之间作定语，future 被\"共享\"，动词 share 用过去分词 shared 表被动\"共同拥有的\"。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "future for mankind",
+          "signalSide": "passage",
+          "relation": "修饰 future 且为被动\"被共享的\"，动词变过去分词 shared 作定语。"
+        }
+      ],
+      "teachingNote": "冠词与名词间作定语、含被动义时，动词用过去分词。"
+    },
+    "q-2022-yi-067": {
+      "blankId": "blank-2022-yi-067",
+      "blankNo": 67,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "空连接 international cooperation 与 cultural exchanges 两个并列名词短语，二者意义并列递进，用并列连词 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "international cooperation",
+          "signalSide": "passage",
+          "relation": "与后面 cultural exchanges 并列，用并列连词 and 连接。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "cultural exchanges",
+          "signalSide": "passage",
+          "relation": "与前面 international cooperation 构成并列名词短语，须用 and。"
+        }
+      ],
+      "teachingNote": "连接两个意义并列的同类成分，用并列连词 and。"
+    },
+    "q-2022-yi-068": {
+      "blankId": "blank-2022-yi-068",
+      "blankNo": 68,
+      "blankType": "given",
+      "hint": "strengthen",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "To strengthen",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "主句 the event included... 已有谓语，句首动词须作非谓语；strengthen 表\"为了加强\"的目的，用不定式 To strengthen 作目的状语。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the event included a number of public promotional activities",
+          "signalSide": "passage",
+          "relation": "主句已有谓语 included，句首动词须用非谓语，表目的用不定式。"
+        }
+      ],
+      "teachingNote": "句首动词表目的、主句已有谓语时，用不定式作目的状语。"
+    },
+    "q-2022-yi-069": {
+      "blankId": "blank-2022-yi-069",
+      "blankNo": 69,
+      "blankType": "given",
+      "hint": "invite",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "inviting",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "主句已有谓语 included，invite 与逻辑主语 the event 是主动关系，作伴随/结果状语，用现在分词 inviting。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the event included a number of public promotional activities on social media",
+          "signalSide": "passage",
+          "relation": "逻辑主语 the event 与 invite 为主动关系，作伴随状语用现在分词 inviting。"
+        }
+      ],
+      "teachingNote": "逻辑主语主动发出动作、作伴随状语时，用现在分词 -ing。"
+    },
+    "q-2022-yi-070": {
+      "blankId": "blank-2022-yi-070",
+      "blankNo": 70,
+      "blankType": "given",
+      "hint": "it",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "its",
+      "role": null,
+      "path": null,
+      "reason": "空在名词 first exhibition 前作定语，须用形容词性物主代词，指代 The Chinese Ancient Tea Museum，it 变 its。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "first exhibition",
+          "signalSide": "passage",
+          "relation": "名词前作定语表所属，人称代词 it 须变物主代词 its。"
+        }
+      ],
+      "teachingNote": "名词前表所属关系时，人称代词须变形容词性物主代词。"
+    }
+  }
+}

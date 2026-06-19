@@ -1,0 +1,3291 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2021-yi",
+    "title": "2021年全国乙卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2021年全国乙卷-答案版.docx",
+      "sha256": "156d7bed853b88b2fa1f19e34c1d6ceedb1400810bb73586a4f29c31dafd121e",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2021-yi-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2021-yi-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2021-yi-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2021-yi-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2021-yi-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2021-yi-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2021-yi-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2021-yi-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2021-yi-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2021-yi-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2021-yi-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2021-yi-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2021-yi-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2021-yi-reading",
+        "text": "第二部分 阅读理解（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-yi-reading-choice",
+        "text": "第一节（共15小题；每小题2分，满分30分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-yi-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2021-yi-language",
+        "text": "第三部分 语言知识运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-yi-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-yi-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-yi-grammar-fill"
+      }
+    ],
+    "groups": {
+      "group-2021-yi-reading-a": {
+        "groupId": "group-2021-yi-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2021-yi-021",
+          "q-2021-yi-022",
+          "q-2021-yi-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-a-1",
+              "text": "The Biggest Stadiums in the World"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-2",
+              "text": "People have been pouring into stadiums since the days of ancient Greece. In around 80 A. D., the Romans built the Colosseum, which remains the world’s best known stadium and continues to inform contemporary design. Rome’s Colosseum was 157 feet tall and had 80 entrances, seating 50,000 people. However, that was small fry compared with the city’s Circus Maximus, which accommodated around 250,000 people."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-3",
+              "text": "These days, safety regulations—not to mention the modern sports fan’s desire for a good view and a comfortable seat—tend to keep stadium capacities (容量) slightly lower. Even soccer fans tend to have a seat each; gone are the days of thousands standing to watch the match."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-4",
+              "text": "For the biggest stadiums in the world, we have used data supplied by the World Atlas list so far, which ranks them by their stated permanent capacity, as well as updated information from official stadium websites."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-5",
+              "text": "All these stadiums are still functional, still open and still hosting the biggest events in world sport.• Rungrado 1st of May Stadium, Pyongyang, D. P. R. Korea. Capacity: 150,000. Opened: May 1, 1989.• Michigan Stadium, Ann Arbor, Michigan, U. S. Capacity: 107,601. Opened: October 1, 1927.• Beaver Stadium, State College, Pennsylvania, U. S. Capacity: 106,572. Opened: September 17, 1960.• Ohio Stadium, Columbus, Ohio, U. S. Capacity: 104,944. Opened: October 7, 1922.• Kyle Field, College Station, Texas, U. S. Capacity: 102,512. Opened: September 24, 1927."
+            }
+          ]
+        }
+      },
+      "group-2021-yi-reading-b": {
+        "groupId": "group-2021-yi-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2021-yi-024",
+          "q-2021-yi-025",
+          "q-2021-yi-026",
+          "q-2021-yi-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-b-1",
+              "text": "When almost everyone has a mobile phone, why are more than half of Australian homes still paying for a landline (座机) ?"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-2",
+              "text": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone. In fact plenty of younger kids have one in their pocket. Practically everyone can make and receive calls anywhere, anytime."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-3",
+              "text": "Still, 55 percent of Australians have a landline phone at home and only just over a quarter (29%) rely only on their smartphones, according to a survey (调查) . Of those Australians who still have a landline, a third concede that it’s not really necessary and they’re keeping it as a security blanket—19 percent say they never use it while a further 13 percent keep it in case of emergencies. I think my home falls into that category."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-4",
+              "text": "More than half of Australian homes are still choosing to stick with their home phone. Age is naturally a factor (因素) —only 58 percent of Generation Ys still use landlines now and then, compared to 84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years. Age isn’t the only factor; I’d say it’s also to do with the makeup of your household."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-5",
+              "text": "Generation Xers with young families, like my wife and I, can still find it convenient to have a home phone rather than providing a mobile phone for every family member. That said, to be honest the only people who ever ring our home phone are our Baby Boomers parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it)."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-6",
+              "text": "How attached are you to your landline? How long until they go the way of gas street lamps and morning milk deliveries?"
+            }
+          ]
+        }
+      },
+      "group-2021-yi-reading-c": {
+        "groupId": "group-2021-yi-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2021-yi-028",
+          "q-2021-yi-029",
+          "q-2021-yi-030",
+          "q-2021-yi-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-c-1",
+              "text": "You’ve heard that plastic is polluting the oceans—between 4.8 and 12.7 million tonnes enter ocean ecosystems every year. But does one plastic straw or cup really make a difference? Artist Benjamin Von Wong wants you to know that it does. He builds massive sculptures out of plastic garbage, forcing viewers to re-examine their relationship to single-use plastic products."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-2",
+              "text": "At the beginning of the year, the artist built a piece called “Strawpocalypse,” a pair of 10-foot-tall plastic waves, frozen mid-crash. Made of 168,000 plastic straws collected from several volunteer beach cleanups, the sculpture made its first appearance at the Estella Place shopping center in Ho Chi Minh City, Vietnam."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-3",
+              "text": "Just 9% of global plastic waste is recycled. Plastic straws are by no means the biggest source (来源) of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled. Every straw that’s part of Von Wong’s artwork likely came from a drink that someone used for only a few minutes. Once the drink is gone, the straw will take centuries to disappear."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-4",
+              "text": "In a piece from 2018, Von Wong wanted to illustrate (说明) a specific statistic: Every 60 seconds, a truckload’s worth of plastic enters the ocean. For this work, titled “Truckload of Plastic,” Von Wong and a group of volunteers collected more than 10,000 pieces of plastic, which were then tied together to look like they’d been dumped (倾倒) from a truck all at once."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-5",
+              "text": "Von Wong hopes that his work will also help pressure big companies to reduce their plastic footprint."
+            }
+          ]
+        }
+      },
+      "group-2021-yi-reading-d": {
+        "groupId": "group-2021-yi-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2021-yi-032",
+          "q-2021-yi-033",
+          "q-2021-yi-034",
+          "q-2021-yi-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-d-1",
+              "text": "During an interview for one of my books, my interviewer said something I still think about often. Annoyed by the level of distraction (干扰) in his open office, he said, “That’s why I have a membership at the coworking space across the street—so I can focus.” His comment struck me as strange. After all, coworking spaces also typically use an open office layout (布局) . But I recently came across a study that shows why his approach works."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-d-2",
+              "text": "The researchers examined various levels of noise on participants as they completed tests of creative thinking. They were randomly divided into four groups and exposed to various noise levels in the background, from total silence to 50 decibels (分贝) , 70 decibels, and 85 decibels. The differences between most of the groups were statistically insignificant; however, the participants in the 70 decibels group—those exposed to a level of noise similar to background chatter in a coffee shop—significantly outperformed the other groups. Since the effects were small, this may suggest that our creative thinking does not differ that much in response to total silence and 85 decibels of background noise."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-d-3",
+              "text": "But since the results at 70 decibels were significant, the study also suggests that the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability. The right level of background noise may interrupt our normal patterns of thinking just enough to allow our imaginations to wander, without making it impossible to focus. This kind of “distracted focus” appears to be the best state for working on creative tasks."
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-d-4",
+              "text": "So why do so many of us hate our open offices? The problem may be that, in our offices, we can’t stop ourselves from getting drawn into others’ conversations while we’re trying to focus. Indeed, the researchers found that face-to-face interactions and conversations affect the creative process, and yet a coworking space or a coffee shop provides a certain level of noise while also providing freedom from interruptions."
+            }
+          ]
+        }
+      },
+      "group-2021-yi-seven-choices": {
+        "groupId": "group-2021-yi-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2021-yi-036",
+          "q-2021-yi-037",
+          "q-2021-yi-038",
+          "q-2021-yi-039",
+          "q-2021-yi-040"
+        ],
+        "blankIds": [
+          "blank-2021-yi-036",
+          "blank-2021-yi-037",
+          "blank-2021-yi-038",
+          "blank-2021-yi-039",
+          "blank-2021-yi-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "How do you know the host"
+          },
+          {
+            "label": "B",
+            "text": "The first step is to go exploring"
+          },
+          {
+            "label": "C",
+            "text": "If you ask the question “How did you get here?”"
+          },
+          {
+            "label": "D",
+            "text": "Be prepared to have awkward conversations with strangers"
+          },
+          {
+            "label": "E",
+            "text": "Or turn the conversation into a topic where they have little to say"
+          },
+          {
+            "label": "F",
+            "text": "What about that person who has had too much to drink or won’t stop talking"
+          },
+          {
+            "label": "G",
+            "text": "He or she is the person who is feeling the weight of that awkwardness the most"
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-seven-title",
+              "text": "According to Jessica Hagy, author of How to Be Interesting, it’s not difficult to make yourself interesting at a dinner party."
+            },
+            {
+              "paragraphId": "para-2021-yi-seven-p1",
+              "text": "__36__ 1  , if you’re out of your comfort zone or if you’re wandering into somebody’s house for the first time. So the main thing is just to show up and be adventurous, trying different foods and talking to strangers."
+            },
+            {
+              "paragraphId": "para-2021-yi-seven-p2",
+              "text": "People love to talk about themselves. If you can start the conversation with a question other than “What do you do for a living?” , you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to. __37__ 2  , it can bring in “I have this old, broken-down vehicle” or “I rode the bus with these crazy people who were laughing at silly jokes in the back.” It just opens up conversation."
+            },
+            {
+              "paragraphId": "para-2021-yi-seven-p3",
+              "text": "__38__ 3  ? If you can’t take their wine away, you should certainly try to take away their soapbox (讲台) . If you’re the host, you can ask them to help you in the kitchen with something and just remove them from the situation. __39__ 4  ."
+            },
+            {
+              "paragraphId": "para-2021-yi-seven-p4",
+              "text": "And what about that other dinner-party killer: awkward silence? If you’re faced with an awkward silence at a dinner party, the only thing that always gets everyone talking again is to give the host a compliment (赞扬) . __40__ 5  . Just quickly turn around and say, “This cake is extremely delicious and you have to tell me all about it.”"
+            },
+            {
+              "paragraphId": "para-2021-yi-seven-p5",
+              "text": "So being interesting at a dinner party isn’t that hard."
+            }
+          ]
+        }
+      },
+      "group-2021-yi-cloze": {
+        "groupId": "group-2021-yi-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2021-yi-041",
+          "q-2021-yi-042",
+          "q-2021-yi-043",
+          "q-2021-yi-044",
+          "q-2021-yi-045",
+          "q-2021-yi-046",
+          "q-2021-yi-047",
+          "q-2021-yi-048",
+          "q-2021-yi-049",
+          "q-2021-yi-050",
+          "q-2021-yi-051",
+          "q-2021-yi-052",
+          "q-2021-yi-053",
+          "q-2021-yi-054",
+          "q-2021-yi-055",
+          "q-2021-yi-056",
+          "q-2021-yi-057",
+          "q-2021-yi-058",
+          "q-2021-yi-059",
+          "q-2021-yi-060"
+        ],
+        "blankIds": [
+          "blank-2021-yi-041",
+          "blank-2021-yi-042",
+          "blank-2021-yi-043",
+          "blank-2021-yi-044",
+          "blank-2021-yi-045",
+          "blank-2021-yi-046",
+          "blank-2021-yi-047",
+          "blank-2021-yi-048",
+          "blank-2021-yi-049",
+          "blank-2021-yi-050",
+          "blank-2021-yi-051",
+          "blank-2021-yi-052",
+          "blank-2021-yi-053",
+          "blank-2021-yi-054",
+          "blank-2021-yi-055",
+          "blank-2021-yi-056",
+          "blank-2021-yi-057",
+          "blank-2021-yi-058",
+          "blank-2021-yi-059",
+          "blank-2021-yi-060"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-cloze-title",
+              "text": "Simply saying thank you doesn’t seem enough in certain situations. I was considering this while working as a __41__ just a few weeks ago. And it came to me then how much easier it would be if we had a range of words that express different __42__ of gratitude (感谢) ."
+            },
+            {
+              "paragraphId": "para-2021-yi-cloze-p1",
+              "text": "My thoughts were soon __43__ . We had a woman patient who was __44__ from a knee replacement operation. One afternoon, while __45__ to get into bed she collapsed (倒下) from what was __46__ discovered to be a heart attack. The collapse was disastrous, __47__ the emergency medical team and good teamwork. But she recovered, though __48__ , and was ready for discharge (出院) after four weeks."
+            },
+            {
+              "paragraphId": "para-2021-yi-cloze-p2",
+              "text": "She was __49__ for everything that the medical and nursing team had done for her. On her day of discharge, we shared in her __50__ at her recovery. As she was __51__ she was eager to say __52__ to each of us in the nursing team. When she __53__ one nurse, she tried to press a five-pound note into her hand. My colleague __54__ to accept it, saying that we were all just __55__ our job. The patient looked puzzled, and then __56__ : “Oh this isn’t for the __57__ I had. I take that as a __58__ . No, this is for setting my hair yesterday.”"
+            },
+            {
+              "paragraphId": "para-2021-yi-cloze-p3",
+              "text": "And there you have it. To many people, __59__ lives is part of the job but styling hair is an __60__ and should be rewarded."
+            }
+          ]
+        }
+      },
+      "group-2021-yi-grammar-fill": {
+        "groupId": "group-2021-yi-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2021-yi-061",
+          "q-2021-yi-062",
+          "q-2021-yi-063",
+          "q-2021-yi-064",
+          "q-2021-yi-065",
+          "q-2021-yi-066",
+          "q-2021-yi-067",
+          "q-2021-yi-068",
+          "q-2021-yi-069",
+          "q-2021-yi-070"
+        ],
+        "blankIds": [
+          "blank-2021-yi-061",
+          "blank-2021-yi-062",
+          "blank-2021-yi-063",
+          "blank-2021-yi-064",
+          "blank-2021-yi-065",
+          "blank-2021-yi-066",
+          "blank-2021-yi-067",
+          "blank-2021-yi-068",
+          "blank-2021-yi-069",
+          "blank-2021-yi-070"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-title",
+              "text": "Ecotourism is commonly regarded as low impact (影响) travel to undisturbed places. It is different from traditional tourism because it allows the traveler to become __61__ (educate) about the areas—both in terms of geographical conditions and cultural characteristics, and often provides money for conservation and benefits the __62__ (develop) of the local areas."
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p1",
+              "text": "Ecotourism has __63__ (it) origin with the environmental movement of the 1970s. It was not widely accepted as a travel concept __64__the late 1980s. During that time, increasing environmental awareness made it desirable."
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p2",
+              "text": "Due to __65__growing popularity of environmentally-related and adventure travel, various types __66__trips are now being classified as ecotourism. Actually, a true eco-friendly trip must meet the following principles:"
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p3",
+              "text": "• Minimize the impact of __67__ (visit) the place."
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p4",
+              "text": "• Build respect for and awareness of the environment and cultural practices."
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p5",
+              "text": "• Provide __68__ (finance) aid and other benefits for local peoples."
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p6",
+              "text": "• Make sure that the tourism provides positive experiences for both the visitors and the hosts."
+            },
+            {
+              "paragraphId": "para-2021-yi-grammar-fill-p7",
+              "text": "Komodo National Park, officially recognized in 1980, is popular for ecotourism because of its unique biodiversity. __69__ (activity) there range from whale watching to hiking (远足) and accommodations aim __70__ (have) a low impact on the natural environment."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2021-yi-021": {
+        "questionId": "q-2021-yi-021",
+        "questionNo": 21,
+        "groupId": "group-2021-yi-reading-a",
+        "stem": "How many people could the Circus Maximus hold?",
+        "options": [
+          {
+            "label": "A",
+            "text": "104,944."
+          },
+          {
+            "label": "B",
+            "text": "107,601."
+          },
+          {
+            "label": "C",
+            "text": "About 150,000."
+          },
+          {
+            "label": "D",
+            "text": "About 250,000."
+          }
+        ]
+      },
+      "q-2021-yi-022": {
+        "questionId": "q-2021-yi-022",
+        "questionNo": 22,
+        "groupId": "group-2021-yi-reading-a",
+        "stem": "Of the following stadiums, which is the oldest?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Michigan Stadium."
+          },
+          {
+            "label": "B",
+            "text": "Beaver Stadium."
+          },
+          {
+            "label": "C",
+            "text": "Ohio Stadium."
+          },
+          {
+            "label": "D",
+            "text": "Kyle Field."
+          }
+        ]
+      },
+      "q-2021-yi-023": {
+        "questionId": "q-2021-yi-023",
+        "questionNo": 23,
+        "groupId": "group-2021-yi-reading-a",
+        "stem": "What do the listed stadiums have in common? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "They host big games."
+          },
+          {
+            "label": "B",
+            "text": "They have become tourist attractions."
+          },
+          {
+            "label": "C",
+            "text": "They were built by Americans."
+          },
+          {
+            "label": "D",
+            "text": "They are favored by architects."
+          }
+        ]
+      },
+      "q-2021-yi-024": {
+        "questionId": "q-2021-yi-024",
+        "questionNo": 24,
+        "groupId": "group-2021-yi-reading-b",
+        "stem": "What does Paragraph 2 mainly tell us about mobile phones?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Their target users."
+          },
+          {
+            "label": "B",
+            "text": "Their wide popularity."
+          },
+          {
+            "label": "C",
+            "text": "Their major functions."
+          },
+          {
+            "label": "D",
+            "text": "Their complex design."
+          }
+        ]
+      },
+      "q-2021-yi-025": {
+        "questionId": "q-2021-yi-025",
+        "questionNo": 25,
+        "groupId": "group-2021-yi-reading-b",
+        "stem": "What does the underlined word \"concede\" in Paragraph 3 mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Admit."
+          },
+          {
+            "label": "B",
+            "text": "Argue."
+          },
+          {
+            "label": "C",
+            "text": "Remember."
+          },
+          {
+            "label": "D",
+            "text": "Remark."
+          }
+        ]
+      },
+      "q-2021-yi-026": {
+        "questionId": "q-2021-yi-026",
+        "questionNo": 26,
+        "groupId": "group-2021-yi-reading-b",
+        "stem": "What can we say about Baby Boomers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They like smartphone games."
+          },
+          {
+            "label": "B",
+            "text": "They enjoy guessing callers' identity."
+          },
+          {
+            "label": "C",
+            "text": "They keep using landline phones."
+          },
+          {
+            "label": "D",
+            "text": "They are attached to their family."
+          }
+        ]
+      },
+      "q-2021-yi-027": {
+        "questionId": "q-2021-yi-027",
+        "questionNo": 27,
+        "groupId": "group-2021-yi-reading-b",
+        "stem": "What can be inferred about the landline from the last paragraph? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "It remains a family necessity."
+          },
+          {
+            "label": "B",
+            "text": "It will fall out of use some day."
+          },
+          {
+            "label": "C",
+            "text": "It may increase daily expenses."
+          },
+          {
+            "label": "D",
+            "text": "It is as important as the gas light."
+          }
+        ]
+      },
+      "q-2021-yi-028": {
+        "questionId": "q-2021-yi-028",
+        "questionNo": 28,
+        "groupId": "group-2021-yi-reading-c",
+        "stem": "What are Von Wong's artworks intended for?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Beautifying the city he lives in."
+          },
+          {
+            "label": "B",
+            "text": "Introducing eco-friendly products."
+          },
+          {
+            "label": "C",
+            "text": "Drawing public attention to plastic waste."
+          },
+          {
+            "label": "D",
+            "text": "Reducing garbage on the beach."
+          }
+        ]
+      },
+      "q-2021-yi-029": {
+        "questionId": "q-2021-yi-029",
+        "questionNo": 29,
+        "groupId": "group-2021-yi-reading-c",
+        "stem": "Why does the author discuss plastic straws in Paragraph 3?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To show the difficulty of their recycling."
+          },
+          {
+            "label": "B",
+            "text": "To explain why they are useful."
+          },
+          {
+            "label": "C",
+            "text": "To voice his views on modern art."
+          },
+          {
+            "label": "D",
+            "text": "To find a substitute for them."
+          }
+        ]
+      },
+      "q-2021-yi-030": {
+        "questionId": "q-2021-yi-030",
+        "questionNo": 30,
+        "groupId": "group-2021-yi-reading-c",
+        "stem": "What effect would \"Truckload of Plastic\" have on viewers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Calming."
+          },
+          {
+            "label": "B",
+            "text": "Disturbing"
+          },
+          {
+            "label": "C",
+            "text": "Refreshing"
+          },
+          {
+            "label": "D",
+            "text": "Challenging."
+          }
+        ]
+      },
+      "q-2021-yi-031": {
+        "questionId": "q-2021-yi-031",
+        "questionNo": 31,
+        "groupId": "group-2021-yi-reading-c",
+        "stem": "Which of the following can be the best title for the text? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "Artists' Opinions on Plastic Safety"
+          },
+          {
+            "label": "B",
+            "text": "Media Interest in Contemporary Art"
+          },
+          {
+            "label": "C",
+            "text": "Responsibility Demanded of Big Companies"
+          },
+          {
+            "label": "D",
+            "text": "Ocean Plastics Transformed into Sculptures"
+          }
+        ]
+      },
+      "q-2021-yi-032": {
+        "questionId": "q-2021-yi-032",
+        "questionNo": 32,
+        "groupId": "group-2021-yi-reading-d",
+        "stem": "Why does the interviewer prefer a coworking space?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It helps him concentrate."
+          },
+          {
+            "label": "B",
+            "text": "It blocks out background noise."
+          },
+          {
+            "label": "C",
+            "text": "It has a pleasant atmosphere."
+          },
+          {
+            "label": "D",
+            "text": "It encourages face-to-face interactions."
+          }
+        ]
+      },
+      "q-2021-yi-033": {
+        "questionId": "q-2021-yi-033",
+        "questionNo": 33,
+        "groupId": "group-2021-yi-reading-d",
+        "stem": "Which level of background noise may promote creative thinking ability?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Total silence."
+          },
+          {
+            "label": "B",
+            "text": "50 decibels."
+          },
+          {
+            "label": "C",
+            "text": "70 decibels."
+          },
+          {
+            "label": "D",
+            "text": "85 decibels."
+          }
+        ]
+      },
+      "q-2021-yi-034": {
+        "questionId": "q-2021-yi-034",
+        "questionNo": 34,
+        "groupId": "group-2021-yi-reading-d",
+        "stem": "What makes an open office unwelcome to many people?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Personal privacy unprotected."
+          },
+          {
+            "label": "B",
+            "text": "Limited working space."
+          },
+          {
+            "label": "C",
+            "text": "Restrictions on group discussion."
+          },
+          {
+            "label": "D",
+            "text": "Constant interruptions."
+          }
+        ]
+      },
+      "q-2021-yi-035": {
+        "questionId": "q-2021-yi-035",
+        "questionNo": 35,
+        "groupId": "group-2021-yi-reading-d",
+        "stem": "What can we infer about the author from the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He's a news reporter."
+          },
+          {
+            "label": "B",
+            "text": "He's an office manager."
+          },
+          {
+            "label": "C",
+            "text": "He's a professional designer."
+          },
+          {
+            "label": "D",
+            "text": "He's a published writer."
+          }
+        ]
+      },
+      "q-2021-yi-036": {
+        "questionId": "q-2021-yi-036",
+        "questionNo": 36,
+        "groupId": "group-2021-yi-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2021-yi-036"
+      },
+      "q-2021-yi-037": {
+        "questionId": "q-2021-yi-037",
+        "questionNo": 37,
+        "groupId": "group-2021-yi-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2021-yi-037"
+      },
+      "q-2021-yi-038": {
+        "questionId": "q-2021-yi-038",
+        "questionNo": 38,
+        "groupId": "group-2021-yi-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2021-yi-038"
+      },
+      "q-2021-yi-039": {
+        "questionId": "q-2021-yi-039",
+        "questionNo": 39,
+        "groupId": "group-2021-yi-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2021-yi-039"
+      },
+      "q-2021-yi-040": {
+        "questionId": "q-2021-yi-040",
+        "questionNo": 40,
+        "groupId": "group-2021-yi-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2021-yi-040"
+      },
+      "q-2021-yi-041": {
+        "questionId": "q-2021-yi-041",
+        "questionNo": 41,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "41",
+        "blankId": "blank-2021-yi-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "cleaner"
+          },
+          {
+            "label": "B",
+            "text": "chemist"
+          },
+          {
+            "label": "C",
+            "text": "nurse"
+          },
+          {
+            "label": "D",
+            "text": "doctor"
+          }
+        ]
+      },
+      "q-2021-yi-042": {
+        "questionId": "q-2021-yi-042",
+        "questionNo": 42,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "42",
+        "blankId": "blank-2021-yi-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "grades"
+          },
+          {
+            "label": "B",
+            "text": "meanings"
+          },
+          {
+            "label": "C",
+            "text": "needs"
+          },
+          {
+            "label": "D",
+            "text": "expectations"
+          }
+        ]
+      },
+      "q-2021-yi-043": {
+        "questionId": "q-2021-yi-043",
+        "questionNo": 43,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "43",
+        "blankId": "blank-2021-yi-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "brushed aside"
+          },
+          {
+            "label": "B",
+            "text": "put to the test"
+          },
+          {
+            "label": "C",
+            "text": "brought under discussion"
+          },
+          {
+            "label": "D",
+            "text": "taken into account"
+          }
+        ]
+      },
+      "q-2021-yi-044": {
+        "questionId": "q-2021-yi-044",
+        "questionNo": 44,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "44",
+        "blankId": "blank-2021-yi-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "departing"
+          },
+          {
+            "label": "B",
+            "text": "escaping"
+          },
+          {
+            "label": "C",
+            "text": "retiring"
+          },
+          {
+            "label": "D",
+            "text": "recovering"
+          }
+        ]
+      },
+      "q-2021-yi-045": {
+        "questionId": "q-2021-yi-045",
+        "questionNo": 45,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "45",
+        "blankId": "blank-2021-yi-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "attempting"
+          },
+          {
+            "label": "B",
+            "text": "choosing"
+          },
+          {
+            "label": "C",
+            "text": "pausing"
+          },
+          {
+            "label": "D",
+            "text": "promising"
+          }
+        ]
+      },
+      "q-2021-yi-046": {
+        "questionId": "q-2021-yi-046",
+        "questionNo": 46,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "46",
+        "blankId": "blank-2021-yi-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "eventually"
+          },
+          {
+            "label": "B",
+            "text": "fortunately"
+          },
+          {
+            "label": "C",
+            "text": "casually"
+          },
+          {
+            "label": "D",
+            "text": "secretly"
+          }
+        ]
+      },
+      "q-2021-yi-047": {
+        "questionId": "q-2021-yi-047",
+        "questionNo": 47,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "47",
+        "blankId": "blank-2021-yi-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "assessing"
+          },
+          {
+            "label": "B",
+            "text": "requiring"
+          },
+          {
+            "label": "C",
+            "text": "forming"
+          },
+          {
+            "label": "D",
+            "text": "proving"
+          }
+        ]
+      },
+      "q-2021-yi-048": {
+        "questionId": "q-2021-yi-048",
+        "questionNo": 48,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "48",
+        "blankId": "blank-2021-yi-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "slightly"
+          },
+          {
+            "label": "B",
+            "text": "accidentally"
+          },
+          {
+            "label": "C",
+            "text": "slowly"
+          },
+          {
+            "label": "D",
+            "text": "happily"
+          }
+        ]
+      },
+      "q-2021-yi-049": {
+        "questionId": "q-2021-yi-049",
+        "questionNo": 49,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "49",
+        "blankId": "blank-2021-yi-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "grateful"
+          },
+          {
+            "label": "B",
+            "text": "thoughtful"
+          },
+          {
+            "label": "C",
+            "text": "sorrowful"
+          },
+          {
+            "label": "D",
+            "text": "fearful"
+          }
+        ]
+      },
+      "q-2021-yi-050": {
+        "questionId": "q-2021-yi-050",
+        "questionNo": 50,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "50",
+        "blankId": "blank-2021-yi-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "surprise"
+          },
+          {
+            "label": "B",
+            "text": "delight"
+          },
+          {
+            "label": "C",
+            "text": "curiosity"
+          },
+          {
+            "label": "D",
+            "text": "disappointment"
+          }
+        ]
+      },
+      "q-2021-yi-051": {
+        "questionId": "q-2021-yi-051",
+        "questionNo": 51,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "51",
+        "blankId": "blank-2021-yi-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "operating"
+          },
+          {
+            "label": "B",
+            "text": "thinking"
+          },
+          {
+            "label": "C",
+            "text": "hesitating"
+          },
+          {
+            "label": "D",
+            "text": "leaving"
+          }
+        ]
+      },
+      "q-2021-yi-052": {
+        "questionId": "q-2021-yi-052",
+        "questionNo": 52,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "52",
+        "blankId": "blank-2021-yi-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "sorry"
+          },
+          {
+            "label": "B",
+            "text": "hello"
+          },
+          {
+            "label": "C",
+            "text": "goodbye"
+          },
+          {
+            "label": "D",
+            "text": "yes"
+          }
+        ]
+      },
+      "q-2021-yi-053": {
+        "questionId": "q-2021-yi-053",
+        "questionNo": 53,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "53",
+        "blankId": "blank-2021-yi-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "reached"
+          },
+          {
+            "label": "B",
+            "text": "consulted"
+          },
+          {
+            "label": "C",
+            "text": "introduced"
+          },
+          {
+            "label": "D",
+            "text": "persuaded"
+          }
+        ]
+      },
+      "q-2021-yi-054": {
+        "questionId": "q-2021-yi-054",
+        "questionNo": 54,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "54",
+        "blankId": "blank-2021-yi-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "wished"
+          },
+          {
+            "label": "B",
+            "text": "pretended"
+          },
+          {
+            "label": "C",
+            "text": "failed"
+          },
+          {
+            "label": "D",
+            "text": "refused"
+          }
+        ]
+      },
+      "q-2021-yi-055": {
+        "questionId": "q-2021-yi-055",
+        "questionNo": 55,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "55",
+        "blankId": "blank-2021-yi-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "enjoying"
+          },
+          {
+            "label": "B",
+            "text": "doing"
+          },
+          {
+            "label": "C",
+            "text": "securing"
+          },
+          {
+            "label": "D",
+            "text": "starting"
+          }
+        ]
+      },
+      "q-2021-yi-056": {
+        "questionId": "q-2021-yi-056",
+        "questionNo": 56,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "56",
+        "blankId": "blank-2021-yi-056",
+        "options": [
+          {
+            "label": "A",
+            "text": "repeated"
+          },
+          {
+            "label": "B",
+            "text": "recited"
+          },
+          {
+            "label": "C",
+            "text": "replied"
+          },
+          {
+            "label": "D",
+            "text": "reported"
+          }
+        ]
+      },
+      "q-2021-yi-057": {
+        "questionId": "q-2021-yi-057",
+        "questionNo": 57,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "57",
+        "blankId": "blank-2021-yi-057",
+        "options": [
+          {
+            "label": "A",
+            "text": "courage"
+          },
+          {
+            "label": "B",
+            "text": "patience"
+          },
+          {
+            "label": "C",
+            "text": "duty"
+          },
+          {
+            "label": "D",
+            "text": "care"
+          }
+        ]
+      },
+      "q-2021-yi-058": {
+        "questionId": "q-2021-yi-058",
+        "questionNo": 58,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "58",
+        "blankId": "blank-2021-yi-058",
+        "options": [
+          {
+            "label": "A",
+            "text": "goal"
+          },
+          {
+            "label": "B",
+            "text": "given"
+          },
+          {
+            "label": "C",
+            "text": "push"
+          },
+          {
+            "label": "D",
+            "text": "greeting"
+          }
+        ]
+      },
+      "q-2021-yi-059": {
+        "questionId": "q-2021-yi-059",
+        "questionNo": 59,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "59",
+        "blankId": "blank-2021-yi-059",
+        "options": [
+          {
+            "label": "A",
+            "text": "risking"
+          },
+          {
+            "label": "B",
+            "text": "changing"
+          },
+          {
+            "label": "C",
+            "text": "saving"
+          },
+          {
+            "label": "D",
+            "text": "building"
+          }
+        ]
+      },
+      "q-2021-yi-060": {
+        "questionId": "q-2021-yi-060",
+        "questionNo": 60,
+        "groupId": "group-2021-yi-cloze",
+        "stem": "60",
+        "blankId": "blank-2021-yi-060",
+        "options": [
+          {
+            "label": "A",
+            "text": "honour"
+          },
+          {
+            "label": "B",
+            "text": "ability"
+          },
+          {
+            "label": "C",
+            "text": "opening"
+          },
+          {
+            "label": "D",
+            "text": "extra"
+          }
+        ]
+      },
+      "q-2021-yi-061": {
+        "questionId": "q-2021-yi-061",
+        "questionNo": 61,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2021-yi-061"
+      },
+      "q-2021-yi-062": {
+        "questionId": "q-2021-yi-062",
+        "questionNo": 62,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2021-yi-062"
+      },
+      "q-2021-yi-063": {
+        "questionId": "q-2021-yi-063",
+        "questionNo": 63,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2021-yi-063"
+      },
+      "q-2021-yi-064": {
+        "questionId": "q-2021-yi-064",
+        "questionNo": 64,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2021-yi-064"
+      },
+      "q-2021-yi-065": {
+        "questionId": "q-2021-yi-065",
+        "questionNo": 65,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2021-yi-065"
+      },
+      "q-2021-yi-066": {
+        "questionId": "q-2021-yi-066",
+        "questionNo": 66,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "66",
+        "blankId": "blank-2021-yi-066"
+      },
+      "q-2021-yi-067": {
+        "questionId": "q-2021-yi-067",
+        "questionNo": 67,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "67",
+        "blankId": "blank-2021-yi-067"
+      },
+      "q-2021-yi-068": {
+        "questionId": "q-2021-yi-068",
+        "questionNo": 68,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "68",
+        "blankId": "blank-2021-yi-068"
+      },
+      "q-2021-yi-069": {
+        "questionId": "q-2021-yi-069",
+        "questionNo": 69,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "69",
+        "blankId": "blank-2021-yi-069"
+      },
+      "q-2021-yi-070": {
+        "questionId": "q-2021-yi-070",
+        "questionNo": 70,
+        "groupId": "group-2021-yi-grammar-fill",
+        "stem": "70",
+        "blankId": "blank-2021-yi-070"
+      }
+    },
+    "blanks": {
+      "blank-2021-yi-061": {
+        "blankId": "blank-2021-yi-061",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-061",
+        "prompt": "educate"
+      },
+      "blank-2021-yi-062": {
+        "blankId": "blank-2021-yi-062",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-062",
+        "prompt": "develop"
+      },
+      "blank-2021-yi-063": {
+        "blankId": "blank-2021-yi-063",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-063",
+        "prompt": "it"
+      },
+      "blank-2021-yi-064": {
+        "blankId": "blank-2021-yi-064",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-064"
+      },
+      "blank-2021-yi-065": {
+        "blankId": "blank-2021-yi-065",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-065"
+      },
+      "blank-2021-yi-066": {
+        "blankId": "blank-2021-yi-066",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-066"
+      },
+      "blank-2021-yi-067": {
+        "blankId": "blank-2021-yi-067",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-067",
+        "prompt": "visit"
+      },
+      "blank-2021-yi-068": {
+        "blankId": "blank-2021-yi-068",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-068",
+        "prompt": "finance"
+      },
+      "blank-2021-yi-069": {
+        "blankId": "blank-2021-yi-069",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-069",
+        "prompt": "activity"
+      },
+      "blank-2021-yi-070": {
+        "blankId": "blank-2021-yi-070",
+        "groupId": "group-2021-yi-grammar-fill",
+        "questionId": "q-2021-yi-070",
+        "prompt": "have"
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2021-yi-021": {
+        "questionId": "q-2021-yi-021",
+        "questionNo": 21,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-022": {
+        "questionId": "q-2021-yi-022",
+        "questionNo": 22,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-023": {
+        "questionId": "q-2021-yi-023",
+        "questionNo": 23,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-024": {
+        "questionId": "q-2021-yi-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-025": {
+        "questionId": "q-2021-yi-025",
+        "questionNo": 25,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-026": {
+        "questionId": "q-2021-yi-026",
+        "questionNo": 26,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-027": {
+        "questionId": "q-2021-yi-027",
+        "questionNo": 27,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-028": {
+        "questionId": "q-2021-yi-028",
+        "questionNo": 28,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-029": {
+        "questionId": "q-2021-yi-029",
+        "questionNo": 29,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-030": {
+        "questionId": "q-2021-yi-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-031": {
+        "questionId": "q-2021-yi-031",
+        "questionNo": 31,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-032": {
+        "questionId": "q-2021-yi-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-033": {
+        "questionId": "q-2021-yi-033",
+        "questionNo": 33,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-034": {
+        "questionId": "q-2021-yi-034",
+        "questionNo": 34,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-035": {
+        "questionId": "q-2021-yi-035",
+        "questionNo": 35,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-036": {
+        "questionId": "q-2021-yi-036",
+        "questionNo": 36,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-037": {
+        "questionId": "q-2021-yi-037",
+        "questionNo": 37,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-038": {
+        "questionId": "q-2021-yi-038",
+        "questionNo": 38,
+        "answer": "F",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-039": {
+        "questionId": "q-2021-yi-039",
+        "questionNo": 39,
+        "answer": "E",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-040": {
+        "questionId": "q-2021-yi-040",
+        "questionNo": 40,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-041": {
+        "questionId": "q-2021-yi-041",
+        "questionNo": 41,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-042": {
+        "questionId": "q-2021-yi-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-043": {
+        "questionId": "q-2021-yi-043",
+        "questionNo": 43,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-044": {
+        "questionId": "q-2021-yi-044",
+        "questionNo": 44,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-045": {
+        "questionId": "q-2021-yi-045",
+        "questionNo": 45,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-046": {
+        "questionId": "q-2021-yi-046",
+        "questionNo": 46,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-047": {
+        "questionId": "q-2021-yi-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-048": {
+        "questionId": "q-2021-yi-048",
+        "questionNo": 48,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-049": {
+        "questionId": "q-2021-yi-049",
+        "questionNo": 49,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-050": {
+        "questionId": "q-2021-yi-050",
+        "questionNo": 50,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-051": {
+        "questionId": "q-2021-yi-051",
+        "questionNo": 51,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-052": {
+        "questionId": "q-2021-yi-052",
+        "questionNo": 52,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-053": {
+        "questionId": "q-2021-yi-053",
+        "questionNo": 53,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-054": {
+        "questionId": "q-2021-yi-054",
+        "questionNo": 54,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-055": {
+        "questionId": "q-2021-yi-055",
+        "questionNo": 55,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-056": {
+        "questionId": "q-2021-yi-056",
+        "questionNo": 56,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-057": {
+        "questionId": "q-2021-yi-057",
+        "questionNo": 57,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-058": {
+        "questionId": "q-2021-yi-058",
+        "questionNo": 58,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-059": {
+        "questionId": "q-2021-yi-059",
+        "questionNo": 59,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-060": {
+        "questionId": "q-2021-yi-060",
+        "questionNo": 60,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-061": {
+        "questionId": "q-2021-yi-061",
+        "questionNo": 61,
+        "answer": "educated",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-062": {
+        "questionId": "q-2021-yi-062",
+        "questionNo": 62,
+        "answer": "development",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-063": {
+        "questionId": "q-2021-yi-063",
+        "questionNo": 63,
+        "answer": "its",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-064": {
+        "questionId": "q-2021-yi-064",
+        "questionNo": 64,
+        "answer": "until",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-065": {
+        "questionId": "q-2021-yi-065",
+        "questionNo": 65,
+        "answer": "the",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-066": {
+        "questionId": "q-2021-yi-066",
+        "questionNo": 66,
+        "answer": "of",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-067": {
+        "questionId": "q-2021-yi-067",
+        "questionNo": 67,
+        "answer": "visiting",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-068": {
+        "questionId": "q-2021-yi-068",
+        "questionNo": 68,
+        "answer": "financial",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-069": {
+        "questionId": "q-2021-yi-069",
+        "questionNo": 69,
+        "answer": "Activities",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-yi-070": {
+        "questionId": "q-2021-yi-070",
+        "questionNo": 70,
+        "answer": "to have",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-19T00:00:00Z"
+    },
+    "groups": {
+      "group-2021-yi-reading-a": {
+        "overview": "本文是一篇介绍性应用文，主题为“世界上最大的体育场”。文章先回顾古希腊罗马时期的体育场历史（罗马斗兽场与马克西穆斯竞技场），再说明现代安全规定使容量略低，接着交代数据来源，最后以项目符号列表方式列出当今世界容量最大的几座体育场及其容量与启用日期。",
+        "discourseStructure": {
+          "summary": "全文按“历史—现状—数据来源—榜单列表”的顺序展开：从古代体育场的宏大容量切入，过渡到现代体育场因安全与观赛舒适而容量略降，再说明排名数据来源，最后用列表呈现当今最大的几座体育场。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-a-1",
+              "summary": "文章标题。",
+              "function": "点明主题：世界上最大的体育场。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-2",
+              "summary": "回顾古代体育场历史：罗马斗兽场可容纳5万人，而马克西穆斯竞技场可容纳约25万人。",
+              "function": "引入历史背景，用古代体育场的巨大容量铺垫主题。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-3",
+              "summary": "说明如今出于安全规定及球迷对良好视野与舒适座位的需求，体育场容量略低，球迷大多有座位。",
+              "function": "对比古今，解释现代体育场容量为何相对更低。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-4",
+              "summary": "交代榜单数据来源：World Atlas 列表（按常设容量排名）及各官方体育场网站的最新信息。",
+              "function": "说明数据出处，增强榜单可信度。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-a-5",
+              "summary": "以项目符号列出当今仍在运营、仍在举办世界顶级体育赛事的最大体育场，并给出各自容量与启用日期。",
+              "function": "呈现核心榜单信息，列出体育场名称、容量与开放时间。"
+            }
+          ]
+        }
+      },
+      "group-2021-yi-reading-b": {
+        "overview": "本文是一篇议论性随笔，探讨了在人人都有手机的时代，为何仍有超过一半的澳大利亚家庭保留座机。作者结合调查数据与自身家庭情况，分析了年龄、家庭构成等影响因素，并以反问收尾，暗示座机终将退出历史舞台。",
+        "discourseStructure": {
+          "summary": "全文由现象设问引入，先说明手机的普及，再用调查数据展现座机的保有情况，进而分析年龄与家庭构成两大因素，最后以反问作结、引发对座机命运的思考。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-b-1",
+              "summary": "以反问开篇：手机普及之下，为何过半澳大利亚家庭仍在为座机付费。",
+              "function": "提出全文核心问题，引出话题。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-2",
+              "summary": "说明在澳大利亚几乎人人都有手机，连小孩也有，随时随地都能通话。",
+              "function": "用事实说明手机的高度普及，为下文对比座机作铺垫。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-3",
+              "summary": "引用调查数据：55%的人家中有座机，仅约29%只靠手机；保留座机者中三分之一承认并非必需，只是当作安全感的依靠或应急之用。",
+              "function": "用数据呈现座机保有现状，并揭示部分人保留座机的心理动机。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-4",
+              "summary": "分析年龄因素：仅58%的Y世代偶尔用座机，而84%的婴儿潮一代仍在用；同时指出年龄并非唯一因素，还与家庭构成有关。",
+              "function": "引入并分析影响座机使用的第一个因素——年龄，并过渡到家庭构成。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-5",
+              "summary": "以作者自身为例：有年幼孩子的X世代觉得座机方便；而打来家里座机的几乎只有婴儿潮一代的父母，作者一家还以猜来电者为乐。",
+              "function": "用作者的家庭经历佐证家庭构成这一因素，并增添生活情趣。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-b-6",
+              "summary": "以两个反问收尾：你对座机有多依恋？它还要多久才会像煤气路灯和清晨送奶一样消失。",
+              "function": "以反问作结，暗示座机将被时代淘汰，引发读者思考。"
+            }
+          ]
+        }
+      },
+      "group-2021-yi-reading-c": {
+        "overview": "本文介绍艺术家 Benjamin Von Wong 用塑料垃圾制作大型雕塑，借此让公众重新审视一次性塑料制品、关注塑料污染问题，并向大企业施压减少塑料足迹。",
+        "discourseStructure": {
+          "summary": "文章先以海洋塑料污染数据引出艺术家及其创作意图，再分述两件代表作品（吸管雕塑与卡车塑料），并穿插塑料吸管的污染特点，最后点出作者更高层面的诉求——推动大企业减少塑料使用。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-c-1",
+              "summary": "以每年进入海洋的塑料数据开篇，引出艺术家 Von Wong 用塑料垃圾制作大型雕塑、促使观众重新审视一次性塑料的创作目的。",
+              "function": "引入话题并点明艺术家的核心意图"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-2",
+              "summary": "介绍其作品“Strawpocalypse”——用16.8万根海滩清理收集的塑料吸管做成的两道定格巨浪，首展于越南胡志明市。",
+              "function": "举例说明代表作之一及其用料与展出"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-3",
+              "summary": "指出全球仅9%塑料被回收，塑料吸管虽非污染最大来源，但因多数人不需要且体小质轻难以回收而受批评，用后却需数百年才能消失。",
+              "function": "补充塑料吸管的污染特性，解释其难以回收的问题"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-4",
+              "summary": "介绍2018年作品“Truckload of Plastic”，用一万多件塑料捆扎成仿佛被卡车一次性倾倒的样子，说明每60秒就有一卡车塑料入海。",
+              "function": "举例说明代表作之二并呈现其震撼的统计意图"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-c-5",
+              "summary": "指出 Von Wong 希望其作品还能推动大企业减少塑料足迹。",
+              "function": "升华主旨，点出更高层面的诉求"
+            }
+          ]
+        }
+      },
+      "group-2021-yi-reading-d": {
+        "overview": "本文是一篇说明文，探讨背景噪音水平与创造性思维之间的关系。作者从采访者偏爱共享办公空间的现象切入，引出一项关于噪音水平的研究，说明适度的背景噪音（约70分贝）最有利于创造性思考，并解释开放式办公室让人讨厌的原因在于无法摆脱他人对话的干扰。",
+        "discourseStructure": {
+          "summary": "全文采用'现象—研究—解释—回扣现象'的结构：先由采访者的反常做法设疑，再引入实验研究给出数据，接着解读研究结论提出'分心式专注'概念，最后回到开放式办公室的问题给出原因。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-yi-reading-d-1",
+              "summary": "采访者抱怨开放式办公室的干扰，去街对面同样是开放式布局的共享办公空间以求专注，作者感到费解，直到看到一项研究才明白其中道理。",
+              "function": "引入话题，用反常现象设置悬念，引出下文的研究。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-d-2",
+              "summary": "研究者让受试者在从完全安静到85分贝的不同噪音水平下完成创造性思维测试，结果发现70分贝（类似咖啡馆背景交谈声）组的表现明显优于其他组。",
+              "function": "介绍实验设计与核心数据发现。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-d-3",
+              "summary": "研究表明适度的背景噪音——既不太吵也非完全安静——可提升创造力，它能恰好打断常规思维让想象漫游，又不至于无法专注，这种'分心式专注'是创造性工作的最佳状态。",
+              "function": "解读研究结论，提出'分心式专注'概念。"
+            },
+            {
+              "paragraphId": "para-2021-yi-reading-d-4",
+              "summary": "回到开放式办公室为何令人讨厌的问题：问题在于人们无法不被卷入他人的对话；而共享办公空间或咖啡馆既提供一定噪音又让人免受打扰。",
+              "function": "回扣开篇现象，给出开放式办公室令人厌烦的原因。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2021-yi-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对原文具体数据的定位与理解：马克西穆斯竞技场能容纳多少人。",
+        "stemTranslationZh": "马克西穆斯竞技场能容纳多少人？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "104,944人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "• Ohio Stadium, Columbus, Ohio, U. S. Capacity: 104,944. Opened: October 7, 1922.",
+              "sourceEntity": "Ohio Stadium",
+              "optionText": "104,944.",
+              "optionEntity": "Circus Maximus",
+              "explanation": "104,944 是榜单中俄亥俄体育场（Ohio Stadium）的容量，并非题干所问的马克西穆斯竞技场，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Ohio Stadium, Columbus, Ohio, U. S. Capacity: 104,944.",
+                "anchor": "Ohio Stadium 容量 104,944"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "107,601人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "• Michigan Stadium, Ann Arbor, Michigan, U. S. Capacity: 107,601. Opened: October 1, 1927.",
+              "sourceEntity": "Michigan Stadium",
+              "optionText": "107,601.",
+              "optionEntity": "Circus Maximus",
+              "explanation": "107,601 是密歇根体育场（Michigan Stadium）的容量，并非马克西穆斯竞技场，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Michigan Stadium, Ann Arbor, Michigan, U. S. Capacity: 107,601.",
+                "anchor": "Michigan Stadium 容量 107,601"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "约150,000人。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "• Rungrado 1st of May Stadium, Pyongyang, D. P. R. Korea. Capacity: 150,000. Opened: May 1, 1989.",
+              "sourceEntity": "Rungrado 1st of May Stadium",
+              "optionText": "About 150,000.",
+              "optionEntity": "Circus Maximus",
+              "explanation": "150,000 是当今榜单首位绫罗岛五一体育场（Rungrado 1st of May Stadium）的容量，并非古代的马克西穆斯竞技场，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Rungrado 1st of May Stadium, Pyongyang, D. P. R. Korea. Capacity: 150,000.",
+                "anchor": "Rungrado 容量 150,000"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "约250,000人。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-a-2",
+                "quote": "the city’s Circus Maximus, which accommodated around 250,000 people",
+                "anchor": "Circus Maximus 容纳约 250,000 人"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How many people could the Circus Maximus hold",
+            "sourceRole": "stem",
+            "targetText": "the city’s Circus Maximus, which accommodated around 250,000 people",
+            "targetParagraphId": "para-2021-yi-reading-a-2",
+            "relationType": "locationCue",
+            "note": "题干用专有名词 Circus Maximus 定位到第二段，hold（容纳）对应原文 accommodated，around 250,000 即答案。"
+          }
+        ]
+      },
+      "q-2021-yi-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对榜单中各体育场启用日期（Opened）的比较，找出最早启用（最古老）的一座。",
+        "stemTranslationZh": "下列体育场中，哪一座最古老？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "密歇根体育场。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Michigan Stadium, Ann Arbor, Michigan, U. S. Capacity: 107,601. Opened: October 1, 1927.",
+              "sourceHighlight": "Opened: October 1, 1927",
+              "optionText": "Michigan Stadium.",
+              "optionHighlight": "Michigan Stadium",
+              "explanation": "密歇根体育场启用于 1927 年，晚于俄亥俄体育场的 1922 年，并非最古老。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Michigan Stadium, Ann Arbor, Michigan, U. S. Capacity: 107,601. Opened: October 1, 1927.",
+                "anchor": "Michigan Stadium 启用 1927"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "比弗体育场。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Beaver Stadium, State College, Pennsylvania, U. S. Capacity: 106,572. Opened: September 17, 1960.",
+              "sourceHighlight": "Opened: September 17, 1960",
+              "optionText": "Beaver Stadium.",
+              "optionHighlight": "Beaver Stadium",
+              "explanation": "比弗体育场启用于 1960 年，是榜单中最晚启用之一，远晚于俄亥俄体育场的 1922 年，并非最古老。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Beaver Stadium, State College, Pennsylvania, U. S. Capacity: 106,572. Opened: September 17, 1960.",
+                "anchor": "Beaver Stadium 启用 1960"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "俄亥俄体育场。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Ohio Stadium, Columbus, Ohio, U. S. Capacity: 104,944. Opened: October 7, 1922.",
+                "anchor": "Ohio Stadium 启用 1922，最早"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "凯尔球场。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Kyle Field, College Station, Texas, U. S. Capacity: 102,512. Opened: September 24, 1927.",
+              "sourceHighlight": "Opened: September 24, 1927",
+              "optionText": "Kyle Field.",
+              "optionHighlight": "Kyle Field",
+              "explanation": "凯尔球场启用于 1927 年，晚于俄亥俄体育场的 1922 年，并非最古老。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Kyle Field, College Station, Texas, U. S. Capacity: 102,512. Opened: September 24, 1927.",
+                "anchor": "Kyle Field 启用 1927"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "which is the oldest",
+            "sourceRole": "stem",
+            "targetText": "Ohio Stadium, Columbus, Ohio, U. S. Capacity: 104,944. Opened: October 7, 1922.",
+            "targetParagraphId": "para-2021-yi-reading-a-5",
+            "relationType": "locationCue",
+            "note": "题干 the oldest（最古老）需比较各条目的 Opened 日期，最早的年份 1922（Ohio Stadium）即为答案。"
+          }
+        ]
+      },
+      "q-2021-yi-023": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对所列体育场共同点的概括：通过末段对这些体育场共同特征的描述进行判断。",
+        "stemTranslationZh": "所列出的这些体育场有什么共同点？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们都举办大型赛事。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "All these stadiums are still functional, still open and still hosting the biggest events in world sport.",
+                "anchor": "仍在举办世界顶级体育赛事"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们已成为旅游景点。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "These stadiums have become tourist attractions.",
+              "explanation": "原文未提及这些体育场已成为旅游景点，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们都是由美国人建造的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "• Rungrado 1st of May Stadium, Pyongyang, D. P. R. Korea. Capacity: 150,000. Opened: May 1, 1989.",
+              "sourceHighlight": "Pyongyang, D. P. R. Korea",
+              "optionText": "They were built by Americans.",
+              "optionHighlight": "built by Americans",
+              "explanation": "榜单首位绫罗岛五一体育场位于朝鲜（D. P. R. Korea），并非美国，说所有体育场都由美国人建造以偏概全，且原文也未提及建造者。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-a-5",
+                "quote": "Rungrado 1st of May Stadium, Pyongyang, D. P. R. Korea. Capacity: 150,000.",
+                "anchor": "Rungrado 位于朝鲜，非美国"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们受到建筑师的青睐。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "These stadiums are favored by architects.",
+              "explanation": "原文未提及这些体育场受到建筑师青睐，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "They host big games.",
+            "sourceRole": "correctOption",
+            "targetText": "All these stadiums are still functional, still open and still hosting the biggest events in world sport.",
+            "targetParagraphId": "para-2021-yi-reading-a-5",
+            "relationType": "paraphrase",
+            "note": "选项 host big games 是原文 still hosting the biggest events in world sport 的同义替换，big games 对应 the biggest events in world sport。"
+          }
+        ]
+      },
+      "q-2021-yi-024": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对第二段段落主旨的概括——该段主要讲手机的什么。",
+        "stemTranslationZh": "第二段主要告诉我们关于手机的什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们的目标用户。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone. In fact plenty of younger kids have one in their pocket.",
+              "sourceHighlight": "anyone in Australia over the age of 15",
+              "optionText": "Their target users.",
+              "optionHighlight": "target users",
+              "explanation": "段落强调几乎人人（含青少年）都有手机，意在说明普及面广，而非聚焦某一特定目标用户群体，选项把全民普及窄化为“目标用户”。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-2",
+                "quote": "Practically everyone can make and receive calls anywhere, anytime.",
+                "anchor": "几乎人人都能通话"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们的广泛普及。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-b-2",
+                "quote": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone.",
+                "anchor": "很难找到15岁以上没手机的人"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-yi-reading-b-2",
+                "quote": "Practically everyone can make and receive calls anywhere, anytime.",
+                "anchor": "几乎人人随时随地能通话"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们的主要功能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Practically everyone can make and receive calls anywhere, anytime.",
+              "optionText": "Their major functions.",
+              "matchType": "wordFamily",
+              "relationNote": "原文出现“make and receive calls（打/接电话）”这一功能性表述，诱使考生误选“主要功能”，但该句意在说明人人都能用，落点仍是普及而非介绍功能。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-2",
+                "quote": "Practically everyone can make and receive calls anywhere, anytime.",
+                "anchor": "随时随地打接电话"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们复杂的设计。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Their complex design.",
+              "explanation": "原文未提及手机的设计是否复杂，第二段只谈普及程度，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Their wide popularity",
+            "sourceRole": "correctOption",
+            "targetText": "you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone",
+            "targetParagraphId": "para-2021-yi-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "正确选项 wide popularity（广泛普及）是对原文“hard pressed to find anyone … who doesn’t own a mobile phone”（很难找到不拥有手机的人）的同义概括。"
+          }
+        ]
+      },
+      "q-2021-yi-025": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查对第三段画线词 concede 的词义推测，需结合后文“并非真的必需”这一让步语境判断。",
+        "stemTranslationZh": "第三段中画线词“concede”是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "承认。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-b-3",
+                "quote": "a third concede that it’s not really necessary and they’re keeping it as a security blanket",
+                "anchor": "三分之一承认并非真正必需"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "争辩。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "a third concede that it’s not really necessary and they’re keeping it as a security blanket",
+              "sourceHighlight": "concede that it’s not really necessary",
+              "optionText": "Argue.",
+              "optionHighlight": "Argue",
+              "explanation": "concede 是让步性的“承认（不利于己的事实）”，与“争辩、反驳”态度相反；这些人是承认座机非必需，而非为之争辩。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-3",
+                "quote": "a third concede that it’s not really necessary",
+                "anchor": "承认并非真正必需"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "记得。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Remember.",
+              "explanation": "原文语境是“承认某事”，与“记得”无关，原文未涉及回忆，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Remark.",
+              "explanation": "concede 含让步、承认之意，而 remark 仅是“评论、谈及”，不含承认事实的语义，原文无据，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "concede",
+            "sourceRole": "stem",
+            "targetText": "concede that it’s not really necessary",
+            "targetParagraphId": "para-2021-yi-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "由后文“it’s not really necessary（并非真正必需）”这一对自己不利的事实可推知 concede 意为 admit（承认），即让步性地承认。"
+          }
+        ]
+      },
+      "q-2021-yi-026": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对婴儿潮一代（Baby Boomers）相关细节的把握，需在第四、五段中定位关于该群体的信息。",
+        "stemTranslationZh": "关于婴儿潮一代（Baby Boomers），我们可以得知什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他们喜欢智能手机游戏。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "we play a game and guess who is calling before we pick up the phone",
+              "optionText": "They like smartphone games.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 play a game 指作者一家“玩猜来电者的游戏”，与智能手机游戏无关；选项借 game 一词的词钩制造干扰，且玩游戏的是作者而非婴儿潮一代。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-5",
+                "quote": "we play a game and guess who is calling before we pick up the phone",
+                "anchor": "我们玩猜来电游戏"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他们喜欢猜来电者的身份。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "the only people who ever ring our home phone are our Baby Boomers parents, to the point where we play a game and guess who is calling before we pick up the phone",
+              "sourceEntity": "we (作者一家)",
+              "optionText": "They enjoy guessing callers' identity.",
+              "optionEntity": "They (Baby Boomers)",
+              "explanation": "猜来电者身份的是作者一家（we），而婴儿潮一代是打电话来的人；选项把动作主语错配给了 Baby Boomers。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-5",
+                "quote": "we play a game and guess who is calling before we pick up the phone",
+                "anchor": "猜来电者的是“我们”"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他们一直在使用座机。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-b-4",
+                "quote": "84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years",
+                "anchor": "84%的婴儿潮一代仍用座机"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-yi-reading-b-5",
+                "quote": "the only people who ever ring our home phone are our Baby Boomers parents",
+                "anchor": "只有婴儿潮父母打座机"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他们眷恋自己的家庭。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "They are attached to their family.",
+              "explanation": "原文只说婴儿潮一代依恋/坚持使用座机，并未说他们眷恋家庭，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "They keep using landline phones",
+            "sourceRole": "correctOption",
+            "targetText": "84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years",
+            "targetParagraphId": "para-2021-yi-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "正确选项 keep using landline phones（一直用座机）是对原文“84% of Baby Boomers … had the same home number for 50 years”（用同一座机号码达50年）的同义概括。"
+          }
+        ]
+      },
+      "q-2021-yi-027": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对末段两个反问的推断，需理解作者借“煤气路灯、清晨送奶”等已消失事物暗示座机的命运。",
+        "stemTranslationZh": "从最后一段可以推断出关于座机的什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它仍是家庭的必需品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "How long until they go the way of gas street lamps and morning milk deliveries?",
+              "sourceHighlight": "go the way of gas street lamps and morning milk deliveries",
+              "optionText": "It remains a family necessity.",
+              "optionHighlight": "remains a family necessity",
+              "explanation": "末段反问暗示座机终将像煤气路灯一样消失，趋势是被淘汰；选项却说它仍是必需品，与原文走向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-6",
+                "quote": "How long until they go the way of gas street lamps and morning milk deliveries?",
+                "anchor": "还要多久就会消失"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它有朝一日将不再被使用。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-b-6",
+                "quote": "How long until they go the way of gas street lamps and morning milk deliveries?",
+                "anchor": "终将像路灯送奶一样消失"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它可能增加日常开支。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It may increase daily expenses.",
+              "explanation": "末段只问座机还能存在多久，未涉及费用或开支问题，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它和煤气灯一样重要。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "How long until they go the way of gas street lamps and morning milk deliveries?",
+              "sourceHighlight": "go the way of gas street lamps",
+              "optionText": "It is as important as the gas light.",
+              "optionHighlight": "as important as the gas light",
+              "explanation": "原文把座机与煤气路灯并提，是说二者同样会被时代淘汰，而非二者“同等重要”；选项曲解了类比的落点。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-b-6",
+                "quote": "How long until they go the way of gas street lamps and morning milk deliveries?",
+                "anchor": "类比的是消失，非重要性"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It will fall out of use some day",
+            "sourceRole": "correctOption",
+            "targetText": "How long until they go the way of gas street lamps and morning milk deliveries?",
+            "targetParagraphId": "para-2021-yi-reading-b-6",
+            "relationType": "paraphrase",
+            "note": "正确选项 fall out of use（不再被使用）是对原文 go the way of gas street lamps and morning milk deliveries（步煤气路灯、清晨送奶之后尘，即消失）的同义推断。"
+          }
+        ]
+      },
+      "q-2021-yi-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Von Wong 创作艺术作品的目的，需定位首段对其创作意图的说明。",
+        "stemTranslationZh": "Von Wong 的艺术作品意在做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "美化他所居住的城市。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作品目的是美化他所居住的城市。",
+              "explanation": "原文未提及作品意在美化城市，雕塑虽在购物中心展出，但目的是引发对塑料污染的反思而非美化城市。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "推介环保产品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作品目的是推介环保产品。",
+              "explanation": "原文未提及推介任何环保产品，作品是由塑料垃圾制成的雕塑，并非介绍产品。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "引起公众对塑料垃圾的关注。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-c-1",
+                "quote": "He builds massive sculptures out of plastic garbage, forcing viewers to re-examine their relationship to single-use plastic products.",
+                "anchor": "用塑料垃圾做雕塑迫使观众重新审视一次性塑料"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "减少海滩上的垃圾。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Made of 168,000 plastic straws collected from several volunteer beach cleanups, the sculpture made its first appearance at the Estella Place shopping center in Ho Chi Minh City, Vietnam.",
+              "sourceHighlight": "collected from several volunteer beach cleanups",
+              "optionText": "Reducing garbage on the beach.",
+              "optionHighlight": "Reducing garbage on the beach",
+              "explanation": "原文只是说制作用料来自海滩清理活动收集的吸管，海滩清理是收集材料的手段，并非作品意图；把创作目的窄化为“减少海滩垃圾”是以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-c-2",
+                "quote": "collected from several volunteer beach cleanups",
+                "anchor": "材料来自海滩清理活动"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Drawing public attention to plastic waste",
+            "sourceRole": "correctOption",
+            "targetText": "forcing viewers to re-examine their relationship to single-use plastic products",
+            "targetParagraphId": "para-2021-yi-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "选项 Drawing public attention to plastic waste 是原文 forcing viewers to re-examine their relationship to single-use plastic products 的同义替换，viewers→public，re-examine relationship to plastic→draw attention to plastic waste。"
+          }
+        ]
+      },
+      "q-2021-yi-029": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查作者在第三段讨论塑料吸管的写作意图，需把握该段对吸管难以回收特性的论述。",
+        "stemTranslationZh": "作者在第三段为什么要讨论塑料吸管？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了说明它们回收的困难。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-c-3",
+                "quote": "because of their small size and weight, they cannot be recycled",
+                "anchor": "因体小质轻而无法回收"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2021-yi-reading-c-3",
+                "quote": "Once the drink is gone, the straw will take centuries to disappear.",
+                "anchor": "饮料喝完后吸管要数百年才消失"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了解释它们为什么有用。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Plastic straws are by no means the biggest source (来源) of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with",
+              "sourceHighlight": "most people don’t need them to drink with",
+              "optionText": "To explain why they are useful.",
+              "optionHighlight": "why they are useful",
+              "explanation": "原文强调多数人喝东西并不需要吸管、且吸管近来受到批评，是在否定其必要性；选项却说要解释吸管“为何有用”，与原文态度相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-c-3",
+                "quote": "most people don’t need them to drink with",
+                "anchor": "多数人喝东西并不需要吸管"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了表达他对现代艺术的看法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "第三段意在表达作者对现代艺术的看法。",
+              "explanation": "原文第三段讨论的是塑料吸管的污染与回收问题，未提及对现代艺术的任何看法。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了给它们找一种替代品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "第三段意在为塑料吸管寻找替代品。",
+              "explanation": "原文未提及任何替代品，只论述吸管难以回收、长期不能降解的问题。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To show the difficulty of their recycling",
+            "sourceRole": "correctOption",
+            "targetText": "because of their small size and weight, they cannot be recycled",
+            "targetParagraphId": "para-2021-yi-reading-c-3",
+            "relationType": "paraphrase",
+            "note": "选项 difficulty of their recycling 对应原文 they cannot be recycled（因 small size and weight），cannot be recycled→difficulty of recycling 为同义概括。"
+          }
+        ]
+      },
+      "q-2021-yi-030": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查“Truckload of Plastic”这件作品给观众带来的情感效果，需结合第四段对作品意图与呈现方式的推断。",
+        "stemTranslationZh": "“Truckload of Plastic”会给观众带来什么样的效果？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "令人平静的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Every 60 seconds, a truckload’s worth of plastic enters the ocean.",
+              "sourceHighlight": "a truckload’s worth of plastic enters the ocean",
+              "optionText": "Calming.",
+              "optionHighlight": "Calming",
+              "explanation": "作品意在呈现每60秒就有一卡车塑料入海这一触目惊心的事实，效果应是令人不安的，与“令人平静”相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-c-4",
+                "quote": "Every 60 seconds, a truckload’s worth of plastic enters the ocean.",
+                "anchor": "每60秒一卡车塑料入海"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "令人不安的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-c-4",
+                "quote": "Every 60 seconds, a truckload’s worth of plastic enters the ocean.",
+                "anchor": "每60秒一卡车塑料入海，触目惊心"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2021-yi-reading-c-4",
+                "quote": "which were then tied together to look like they’d been dumped (倾倒) from a truck all at once",
+                "anchor": "捆成仿佛被卡车一次性倾倒的样子"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "令人耳目一新的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "which were then tied together to look like they’d been dumped (倾倒) from a truck all at once",
+              "sourceHighlight": "dumped (倾倒) from a truck all at once",
+              "optionText": "Refreshing",
+              "optionHighlight": "Refreshing",
+              "explanation": "作品呈现大量塑料被一次性倾倒的景象，旨在警示而非带来清新愉悦之感，“令人耳目一新”与作品的警示效果相悖。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-c-4",
+                "quote": "dumped (倾倒) from a truck all at once",
+                "anchor": "塑料被一次性倾倒"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "具有挑战性的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "该作品会让观众感到“具有挑战性”。",
+              "explanation": "原文未提及作品给观众带来“挑战”之感；作品意在以震撼的数字与景象警醒观众，而非提供挑战。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Disturbing",
+            "sourceRole": "correctOption",
+            "targetText": "Every 60 seconds, a truckload’s worth of plastic enters the ocean.",
+            "targetParagraphId": "para-2021-yi-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "作品旨在 illustrate 每60秒一卡车塑料入海的惊人统计，并做成 dumped from a truck all at once 的震撼景象，由此推断观众会感到 Disturbing（不安），属基于文本意图的合理推断。"
+          }
+        ]
+      },
+      "q-2021-yi-031": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查全文最佳标题，需把握贯穿全文的核心——用海洋塑料垃圾制成雕塑。",
+        "stemTranslationZh": "下列哪一项最适合作为本文标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "艺术家对塑料安全的看法",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "全文主题是艺术家对塑料安全的看法。",
+              "explanation": "原文谈的是塑料污染与回收，并未讨论“塑料安全（plastic safety）”这一话题，且全文聚焦一位艺术家而非泛指 artists。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "媒体对当代艺术的兴趣",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "全文主题是媒体对当代艺术的兴趣。",
+              "explanation": "原文未提及媒体（media）对当代艺术的兴趣，重心是艺术家用塑料垃圾创作以唤起环保关注。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "对大企业提出的责任要求",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Von Wong hopes that his work will also help pressure big companies to reduce their plastic footprint.",
+              "sourceHighlight": "also help pressure big companies",
+              "optionText": "Responsibility Demanded of Big Companies",
+              "optionHighlight": "Responsibility Demanded of Big Companies",
+              "explanation": "对大企业施压只是末段提及的“also（还）”这一附带诉求，仅占全文一句，不足以概括全篇主旨，以局部充当标题。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-c-5",
+                "quote": "Von Wong hopes that his work will also help pressure big companies to reduce their plastic footprint.",
+                "anchor": "末段附带提及向大企业施压"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "海洋塑料被改造成雕塑",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-c-1",
+                "quote": "He builds massive sculptures out of plastic garbage, forcing viewers to re-examine their relationship to single-use plastic products.",
+                "anchor": "用塑料垃圾制作大型雕塑"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2021-yi-reading-c-2",
+                "quote": "Made of 168,000 plastic straws collected from several volunteer beach cleanups",
+                "anchor": "用16.8万根塑料吸管制成"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Ocean Plastics Transformed into Sculptures",
+            "sourceRole": "correctOption",
+            "targetText": "He builds massive sculptures out of plastic garbage",
+            "targetParagraphId": "para-2021-yi-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "标题 Ocean Plastics Transformed into Sculptures 概括全文主线，对应原文 builds massive sculptures out of plastic garbage，plastic garbage（海洋塑料污染语境）→Ocean Plastics，builds...out of→Transformed into Sculptures。"
+          }
+        ]
+      },
+      "q-2021-yi-032": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查采访者偏爱共享办公空间的原因这一细节。",
+        "stemTranslationZh": "采访者为什么偏爱共享办公空间？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它帮助他集中注意力。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-d-1",
+                "quote": "That’s why I have a membership at the coworking space across the street—so I can focus.",
+                "anchor": "so I can focus"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它能隔绝背景噪音。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "a coworking space or a coffee shop provides a certain level of noise while also providing freedom from interruptions",
+              "sourceHighlight": "provides a certain level of noise",
+              "optionText": "It blocks out background noise.",
+              "optionHighlight": "blocks out background noise",
+              "explanation": "原文说共享办公空间提供一定水平的噪音（provides a certain level of noise），而非隔绝噪音（blocks out），方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-4",
+                "quote": "a coworking space or a coffee shop provides a certain level of noise while also providing freedom from interruptions",
+                "anchor": "provides a certain level of noise"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它有令人愉悦的氛围。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It has a pleasant atmosphere.",
+              "explanation": "原文未提及共享办公空间氛围令人愉悦，采访者的理由是为了专注，'愉悦氛围'属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它鼓励面对面的互动。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "the researchers found that face-to-face interactions and conversations affect the creative process, and yet a coworking space or a coffee shop provides a certain level of noise while also providing freedom from interruptions",
+              "sourceHighlight": "providing freedom from interruptions",
+              "optionText": "It encourages face-to-face interactions.",
+              "optionHighlight": "encourages face-to-face interactions",
+              "explanation": "原文指出面对面互动会影响（干扰）创造过程，而共享办公空间提供的是免受打扰的自由，并非鼓励面对面互动，与选项方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-4",
+                "quote": "the researchers found that face-to-face interactions and conversations affect the creative process",
+                "anchor": "face-to-face interactions ... affect the creative process"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It helps him concentrate.",
+            "sourceRole": "correctOption",
+            "targetText": "so I can focus",
+            "targetParagraphId": "para-2021-yi-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "选项的 concentrate 与原文的 focus 同义替换，采访者明说去共享办公空间是 so I can focus（这样我能专注）。"
+          }
+        ]
+      },
+      "q-2021-yi-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查哪一噪音水平可能促进创造性思维能力这一细节。",
+        "stemTranslationZh": "哪一种背景噪音水平可能促进创造性思维能力？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "完全安静。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability",
+              "sourceHighlight": "not total silence",
+              "optionText": "Total silence.",
+              "optionHighlight": "Total silence",
+              "explanation": "原文明确说提升创造力的是'既不太吵也非完全安静'的水平，完全安静恰恰被排除在外。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-3",
+                "quote": "the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability",
+                "anchor": "not total silence"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "50分贝。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "from total silence to 50 decibels (分贝) , 70 decibels, and 85 decibels",
+              "optionText": "50 decibels.",
+              "matchType": "exact",
+              "relationNote": "50分贝是原文列出的实验噪音水平之一，利用原文出现过的数字设钩；但原文说大多数组差异不显著，只有70分贝组明显胜出，50分贝并非答案。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-2",
+                "quote": "The differences between most of the groups were statistically insignificant",
+                "anchor": "most of the groups ... insignificant"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "70分贝。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-d-2",
+                "quote": "the participants in the 70 decibels group—those exposed to a level of noise similar to background chatter in a coffee shop—significantly outperformed the other groups",
+                "anchor": "70 decibels group ... significantly outperformed"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-yi-reading-d-3",
+                "quote": "since the results at 70 decibels were significant, the study also suggests that the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability",
+                "anchor": "results at 70 decibels were significant"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "85分贝。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "our creative thinking does not differ that much in response to total silence and 85 decibels of background noise",
+              "optionText": "85 decibels.",
+              "matchType": "exact",
+              "relationNote": "85分贝是原文实验中的最高噪音水平，借原文数字设钩；但原文说在完全安静与85分贝之间创造性思维差别不大，85分贝并不促进创造力。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-2",
+                "quote": "our creative thinking does not differ that much in response to total silence and 85 decibels of background noise",
+                "anchor": "does not differ that much ... 85 decibels"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Which level of background noise may promote creative thinking ability?",
+            "sourceRole": "stem",
+            "targetText": "the participants in the 70 decibels group—those exposed to a level of noise similar to background chatter in a coffee shop—significantly outperformed the other groups",
+            "targetParagraphId": "para-2021-yi-reading-d-2",
+            "relationType": "locationCue",
+            "note": "题干的 promote creative thinking ability 对应原文 70 分贝组 significantly outperformed the other groups（明显胜过其他组），据此定位答案为70分贝。"
+          },
+          {
+            "sourceText": "may promote creative thinking ability",
+            "sourceRole": "stem",
+            "targetText": "may actually improve one’s creative thinking ability",
+            "targetParagraphId": "para-2021-yi-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "题干 promote creative thinking ability 与原文 improve one’s creative thinking ability 同义替换，而原文将此归于70分贝的显著结果。"
+          }
+        ]
+      },
+      "q-2021-yi-034": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查开放式办公室令许多人讨厌的原因这一细节。",
+        "stemTranslationZh": "是什么让开放式办公室不受许多人欢迎？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "个人隐私得不到保护。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Personal privacy unprotected.",
+              "explanation": "原文未提及隐私不受保护的问题，开放式办公室令人讨厌的原因是无法摆脱他人对话的干扰，'隐私'属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "工作空间有限。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Limited working space.",
+              "explanation": "原文未提及工作空间狭小，问题出在被卷入他人对话的干扰，'空间有限'属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "对小组讨论的限制。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Restrictions on group discussion.",
+              "explanation": "原文未提及开放式办公室限制小组讨论，恰恰相反是无法避免被卷入他人对话，'限制讨论'属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "不断的打扰。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-d-4",
+                "quote": "in our offices, we can’t stop ourselves from getting drawn into others’ conversations while we’re trying to focus",
+                "anchor": "can’t stop ourselves from getting drawn into others’ conversations"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Constant interruptions.",
+            "sourceRole": "correctOption",
+            "targetText": "we can’t stop ourselves from getting drawn into others’ conversations while we’re trying to focus",
+            "targetParagraphId": "para-2021-yi-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "选项 Constant interruptions（不断的打扰）是对原文 can’t stop ourselves from getting drawn into others’ conversations（无法不被卷入他人对话）的概括同义替换。"
+          }
+        ]
+      },
+      "q-2021-yi-035": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查根据文本对作者身份进行的推断。",
+        "stemTranslationZh": "我们能从文中推断出关于作者的什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他是一名新闻记者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "During an interview for one of my books, my interviewer said something I still think about often.",
+              "sourceEntity": "my interviewer",
+              "optionText": "He's a news reporter.",
+              "optionEntity": "He (the author)",
+              "explanation": "原文中进行采访（reporter 角色）的是 my interviewer，而作者是被采访者（接受关于自己书籍的采访），把采访者身份错配到作者身上。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-1",
+                "quote": "During an interview for one of my books, my interviewer said something I still think about often.",
+                "anchor": "my interviewer"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他是一名办公室经理。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He's an office manager.",
+              "explanation": "原文虽多次提到办公室，但从未表明作者是办公室经理，'办公室经理'身份属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他是一名专业设计师。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "coworking spaces also typically use an open office layout (布局)",
+              "optionText": "He's a professional designer.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 layout（布局）一词易让人联想到设计，从而误推作者是 designer；但 layout 指办公室布局，与作者职业无关，属词族联想干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-yi-reading-d-1",
+                "quote": "coworking spaces also typically use an open office layout (布局)",
+                "anchor": "open office layout"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他是一名已出版作品的作家。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-yi-reading-d-1",
+                "quote": "During an interview for one of my books, my interviewer said something I still think about often.",
+                "anchor": "an interview for one of my books"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He's a published writer.",
+            "sourceRole": "correctOption",
+            "targetText": "During an interview for one of my books",
+            "targetParagraphId": "para-2021-yi-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "由原文 an interview for one of my books（为我的一本书做采访）可推断作者写过并出版了书籍，故为 published writer（已出版作品的作家）。"
+          }
+        ]
+      }
+    }
+  }
+}

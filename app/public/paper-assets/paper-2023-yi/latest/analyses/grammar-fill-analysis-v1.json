@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2023-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-yi-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-yi-grammar-fill": {
+      "overview": "记叙·说明性短文：一位摄影师讲述北京如何在保留三千年古老历史的同时拥抱现代化发展，新旧并存。"
+    }
+  },
+  "blanks": {
+    "q-2023-yi-061": {
+      "blankId": "blank-2023-yi-061",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "path": null,
+      "reason": "前文 \"From Buddhist temples to museums\" 已经用 from...to... 列举，本空延续 \"narrow hutong __ royal palaces\"，是 from X to Y 句式的第二个 to，连接并列的起点与终点。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "From Buddhist temples to museums",
+          "signalSide": "passage",
+          "relation": "前面 from...to... 的固定列举结构，本空补 to 与 from 呼应，表示从一类到另一类"
+        }
+      ],
+      "teachingNote": "见到句首 from 引导的列举，后续并列项之间多用 to 衔接，构成 from...to... 框架。"
+    },
+    "q-2023-yi-062": {
+      "blankId": "blank-2023-yi-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "build",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "built",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "本空在 keeping its carefully __ system 中，system 是逻辑主语，与 build 构成被动关系（系统是被建造的），且不强调进行/将来，故用过去分词 built 作定语修饰 system。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "system of ring roads",
+          "signalSide": "passage",
+          "relation": "被修饰名词 system 与 build 是被动关系，用过去分词作前置定语"
+        }
+      ],
+      "teachingNote": "提示词为动词、空格作名词定语且与该名词为被动关系时，用过去分词。"
+    },
+    "q-2023-yi-063": {
+      "blankId": "blank-2023-yi-063",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "path": null,
+      "reason": "先行词为 a place，后接 \"__ welcomes the fast-paced development\" 是缺主语的定语从句，先行词指物，故填关系代词 which 引导限制性定语从句。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a place",
+          "signalSide": "passage",
+          "relation": "先行词 a place 指物，从句缺主语，用关系代词 which 指代它"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "welcomes the fast-paced development",
+          "signalSide": "passage",
+          "relation": "从句谓语 welcomes 前缺主语，需关系代词充当主语"
+        }
+      ],
+      "teachingNote": "名词先行词后从句缺主语、先行词指物，用 which/that 引导定语从句。"
+    },
+    "q-2023-yi-064": {
+      "blankId": "blank-2023-yi-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "wonder",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "wonders",
+      "role": null,
+      "path": null,
+      "reason": "architectural 是形容词修饰名词，本空需名词，且与后文 standing side by side、historical buildings 复数语境一致，奇观为可数名词，故用复数 wonders。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "21st-century architectural",
+          "signalSide": "passage",
+          "relation": "形容词 architectural 后需名词中心词，wonder 作名词"
+        },
+        {
+          "type": "determiner",
+          "signalText": "standing side by side with historical buildings",
+          "signalSide": "passage",
+          "relation": "与复数 buildings 并立呼应，奇观为可数，用复数 wonders"
+        }
+      ],
+      "teachingNote": "形容词后填名词中心词，结合语境判断单复数（与并列复数名词呼应取复数）。"
+    },
+    "q-2023-yi-065": {
+      "blankId": "blank-2023-yi-065",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "but",
+      "role": null,
+      "path": null,
+      "reason": "前句说这种视觉反差 \"shouldn't work\"，后句 \"somehow these two very different worlds make a good combination\" 与之转折对立，两个完整分句间用并列连词 but 连接表转折。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "shouldn’t work",
+          "signalSide": "passage",
+          "relation": "前句的否定预期与后句的肯定结果形成转折，用并列连词 but 连接两个对立分句"
+        }
+      ],
+      "teachingNote": "两个意思相反的完整分句之间，用并列连词 but 表转折。"
+    },
+    "q-2023-yi-066": {
+      "blankId": "blank-2023-yi-066",
+      "blankNo": 66,
+      "blankType": "given",
+      "hint": "visit",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Having visited",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "句子已有谓语 \"I __ amazed\"，本空在句首作状语，逻辑主语 I 与 visit 主动，且 visit（多次到访）发生在主句感到震撼之前，故用现在分词完成式 Having visited 表先发生的主动动作。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "several times over the last 10 years",
+          "signalSide": "passage",
+          "relation": "逻辑主语 I 主动多次到访，且先于主句动作，用 Having done 完成式分词作状语"
+        }
+      ],
+      "teachingNote": "句首作状语、逻辑主语主动且动作先于主句时，用 Having done 现在分词完成式。"
+    },
+    "q-2023-yi-067": {
+      "blankId": "blank-2023-yi-067",
+      "blankNo": 67,
+      "blankType": "given",
+      "hint": "amaze",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was amazed",
+      "role": null,
+      "path": null,
+      "reason": "主语 I 是该谓语，amaze 意为\"使惊叹\"，人作主语 \"被震撼\"用被动 be amazed；结合全文回忆过去经历的过去时语境，用一般过去时 was amazed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "I",
+          "signalSide": "passage",
+          "relation": "主语 I 是人，amaze 为\"使震撼\"，人被震撼用被动语态"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "over the last 10 years",
+          "signalSide": "passage",
+          "relation": "回顾过去十年的经历，谓语用一般过去时，与被动合成 was amazed"
+        }
+      ],
+      "teachingNote": "amaze/surprise 等\"使\"类动词，人作主语表感受时用 be done 被动；时态由语境时间标志锁定。"
+    },
+    "q-2023-yi-068": {
+      "blankId": "blank-2023-yi-068",
+      "blankNo": 68,
+      "blankType": "given",
+      "hint": "record",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "recording",
+      "role": "adverbial",
+      "path": "fast",
+      "reason": "\"spend time doing sth\" 为固定搭配，本空在 \"have spent the last two years __ everything\" 中由 spend...doing 锁定，故用动名词 recording。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "have spent the last two years",
+          "signalSide": "passage",
+          "relation": "spend time (in) doing sth 固定搭配，空格用 doing 形式"
+        }
+      ],
+      "teachingNote": "spend time/money (in) doing sth 固定搭配，后接动词用 -ing 形式。"
+    },
+    "q-2023-yi-069": {
+      "blankId": "blank-2023-yi-069",
+      "blankNo": 69,
+      "blankType": "given",
+      "hint": "remark",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "remarkable",
+      "role": null,
+      "path": null,
+      "reason": "本空在 \"The __ development\" 中处于冠词 The 与名词 development 之间，需形容词修饰 development，故由名词/动词 remark 派生为形容词 remarkable（非凡的）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "The",
+          "signalSide": "passage",
+          "relation": "冠词 The 与名词 development 之间需形容词作定语"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "development of this city",
+          "signalSide": "passage",
+          "relation": "被修饰名词 development 前需形容词，remark 派生为 remarkable"
+        }
+      ],
+      "teachingNote": "\"冠词 + ___ + 名词\"结构中空格填形容词，由提示词派生加 -able 等后缀。"
+    },
+    "q-2023-yi-070": {
+      "blankId": "blank-2023-yi-070",
+      "blankNo": 70,
+      "blankType": "given",
+      "hint": "mean",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "means",
+      "role": null,
+      "path": null,
+      "reason": "主句主语为单数 \"The remarkable development\"（which 引导的定从为插入修饰），本空为主句谓语，陈述客观事实用一般现在时，主谓一致用三单 means。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The",
+          "signalSide": "passage",
+          "relation": "主句主语 development 为单数第三人称，谓语用三单 -s"
+        },
+        {
+          "type": "subject",
+          "signalText": "development of this city",
+          "signalSide": "passage",
+          "relation": "单数主语 development，一般现在时陈述事实，谓语用 means"
+        }
+      ],
+      "teachingNote": "找准被插入定语从句隔开的真正主语，按其单复数与时态确定谓语形式。"
+    }
+  }
+}

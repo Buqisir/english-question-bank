@@ -1,16 +1,17 @@
 import path from 'node:path'
 
 const READING_LABELS = ['A', 'B', 'C', 'D']
-const DEFAULT_SCORE = 2.5
 
-// 试卷格式 profile：按完形(cloze)题数选 —— 15=新课标, 20=浙江老卷(2020–2022 1月/6月/7月)。
-// newStandard 分支的 heading 必须逐字复现历史字面量(byte 兼容；勿改标点/全半角括号/空格)。
+// 试卷格式 profile：完形(cloze)题数为主键 —— 15=新课标；20=老卷(浙江/全国),再按阅读篇数分流。
+// newStandard / zjLegacy 分支的 heading + 分值必须逐字复现历史字面量(byte 兼容；勿改标点/全半角括号/空格)。
 const FORMAT_PROFILES = {
   newStandard: {
     readingLabels: READING_LABELS,
+    readingScore: 2.5,
     sevenScore: 2.5,
     clozeScore: 1,
     requireContinuationStarters: true,
+    requireWritingFamilies: true,
     headings: {
       readingPart: '第二部分 阅读',
       readingSection1: '第一节 阅读理解',
@@ -21,10 +22,12 @@ const FORMAT_PROFILES = {
   },
   zjLegacy: {
     readingLabels: READING_LABELS.slice(0, 3),
+    readingScore: 2.5,
     sevenScore: 2,
     clozeScore: 1.5,
     // 浙江早期"情节续写"(如 2020年7月卷)无段落开头语,合法格式 —— 开头语可选。
     requireContinuationStarters: false,
+    requireWritingFamilies: true,
     headings: {
       readingPart: '第二部分 阅读理解（共两节，满分35分）',
       readingSection1: '第一节（共10小题；每小题2.5分，满分25分）',
@@ -33,16 +36,51 @@ const FORMAT_PROFILES = {
       cloze: '第一节（共20小题；每小题1.5分，满分30分）',
     },
   },
+  // 全国甲/乙/丙(老全国卷,2020–2024)：阅读 A-D 15题/七选五/完形20/语法,写作是短文改错+普通作文(不导)。
+  // 与浙江老卷同为 cloze=20,但阅读 4 篇(浙江老卷 3 篇)且分值不同(阅读/七选五各 2 分)。
+  nationalLegacy: {
+    readingLabels: READING_LABELS,
+    readingScore: 2,
+    sevenScore: 2,
+    clozeScore: 1.5,
+    requireContinuationStarters: false,
+    requireWritingFamilies: false,
+    headings: {
+      readingPart: '第二部分 阅读理解（共两节，满分40分）',
+      readingSection1: '第一节（共15小题；每小题2分，满分30分）',
+      seven: '第二节（共5小题；每小题2分，满分10分）',
+      langPart: '第三部分 语言知识运用（共两节，满分45分）',
+      cloze: '第一节（共20小题；每小题1.5分，满分30分）',
+    },
+  },
 }
 
-// 格式键 = 完形题数(PA MF-3)：15→新课标 / 20→浙江；缺完形→新课标(由 cloze_group_missing 接管)；
-// 其它题数→抛错,不静默回退。禁用 region/paperId 作格式键(provenance 在 builder 之后注入,
-// 且 region=浙江 也匹配新格式 paper-zj-2026-jan)。
-function resolveFormatProfile(clozeGroup) {
+// 计 distinct reading 字母(A-D)数；与 validator 同一结构定义(MF-3:两侧同口径,否则一放一拦)。
+function countReadingLetters(readingGroups) {
+  const letters = new Set()
+  for (const g of readingGroups || []) {
+    const l = groupLetter(g)
+    if (l) letters.add(l)
+  }
+  return letters.size
+}
+
+// 格式解析(MF-1 全真值表)：cloze 题数为主键,cloze=20 时再按阅读篇数分流,未知格一律 throw 不静默回退。
+//   cloze=15/缺      → 新课标(永不查阅读篇数;半解析新课标若 cloze 被误数成 20 由下方 throw / 写作组反断言兜底)
+//   cloze=20 ∧ 4篇   → 全国老卷  | cloze=20 ∧ 3篇 → 浙江老卷  | cloze=20 ∧ 其它篇数 → throw
+//   cloze ∉ {15,20}  → throw
+// 禁用 region/paperId 作键(provenance 在 builder 之后注入)；阅读篇数是结构信号。
+// MF-2:严禁用 continuation/application 是否存在作分流键——它对全国(合法无写作)与续写解析失败的新课标都为 null,分不开。
+export function resolveFormatProfile(clozeGroup, readingGroups) {
   const n = Array.isArray(clozeGroup?.questions) ? clozeGroup.questions.length : null
-  if (n === 20) return FORMAT_PROFILES.zjLegacy
   if (n === null || n === 15) return FORMAT_PROFILES.newStandard
-  throw issue('unknown_paper_format', `完形题数 ${n} 无法识别试卷格式(仅支持新课标 15 或浙江 20)，不能发布。`, { clozeQuestionCount: n })
+  if (n === 20) {
+    const passages = countReadingLetters(readingGroups)
+    if (passages === 4) return FORMAT_PROFILES.nationalLegacy
+    if (passages === 3) return FORMAT_PROFILES.zjLegacy
+    throw issue('unknown_paper_format', `完形20题但阅读篇数=${passages}(仅支持全国老卷4篇/浙江老卷3篇)，不能发布。`, { clozeQuestionCount: n, readingPassages: passages })
+  }
+  throw issue('unknown_paper_format', `完形题数 ${n} 无法识别试卷格式(仅支持新课标 15 或老卷 20)，不能发布。`, { clozeQuestionCount: n })
 }
 
 function cloneJson(value) {
@@ -227,7 +265,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   if (!parseResult?.paper?.paperId) {
     throw issue('parse_result_missing', '缺少拆题结果，不能发布。')
   }
-  const profile = resolveFormatProfile(clozeGroup)
+  const profile = resolveFormatProfile(clozeGroup, parseResult.readingGroups)
   const groups = [...(parseResult.readingGroups || [])].sort((a, b) => a.order - b.order)
   const letters = new Set(groups.map(groupLetter))
   for (const label of profile.readingLabels) {
@@ -247,16 +285,24 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     throw issue('grammar_fill_group_missing', '缺少语法填空，不能发布。')
   }
 
-  // Enforce six-family completeness for standard whole-paper publish.
-  if (!applicationGroup) {
-    throw issue('application_writing_missing', '缺少应用文写作，不能发布。')
-  }
-  if (!continuationGroup) {
-    throw issue('continuation_writing_missing', '缺少读后续写，不能发布。')
-  }
-  // 新课标续写须给 2 段开头语;浙江早期"情节续写"(2020年7月卷)无开头语,合法,放行(profile 控制)。
-  if (profile.requireContinuationStarters && (!continuationGroup.continuationStarters || continuationGroup.continuationStarters.length < 2)) {
-    throw issue('continuation_starters_missing', '读后续写缺少段落开头语，不能发布。')
+  // Enforce six-family completeness for writing-importing formats (新课标/浙江)。
+  // ADR-0007 决策2"永远导一整张完整卷"对 nationalLegacy 作 scoped supersession:
+  // 全国老卷写作是短文改错+普通作文(PO 决策不导),故不要求 application/continuation;
+  // 四题型硬门(reading A-D/七选五/完形/语法,见上)不变,仍是 parse-correctness guard。
+  if (profile.requireWritingFamilies) {
+    if (!applicationGroup) {
+      throw issue('application_writing_missing', '缺少应用文写作，不能发布。')
+    }
+    if (!continuationGroup) {
+      throw issue('continuation_writing_missing', '缺少读后续写，不能发布。')
+    }
+    // 新课标续写须给 2 段开头语;浙江早期"情节续写"(2020年7月卷)无开头语,合法,放行(profile 控制)。
+    if (profile.requireContinuationStarters && (!continuationGroup.continuationStarters || continuationGroup.continuationStarters.length < 2)) {
+      throw issue('continuation_starters_missing', '读后续写缺少段落开头语，不能发布。')
+    }
+  } else if (applicationGroup || continuationGroup) {
+    // MF-1 反向断言:落到不导写作的格式却带着写作组 → 很可能是完形被误判成20的半解析新课标,不能静默放行。
+    throw issue('unexpected_writing_groups', '该试卷格式不导写作，却检出写作题组(疑似完形题数误判)，不能发布。')
   }
 
   const paperId = parseResult.paper.paperId
@@ -289,7 +335,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
         questionId: question.id,
         questionNo,
         answer: question.answerKey,
-        score: DEFAULT_SCORE,
+        score: profile.readingScore,
         note: 'AI 导题：答案解析版抽取',
       }
     }
