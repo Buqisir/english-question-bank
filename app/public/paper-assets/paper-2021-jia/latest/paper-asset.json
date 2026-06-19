@@ -1,0 +1,3179 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2021-jia",
+    "title": "2021年全国甲卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2021年全国甲卷-答案版.docx",
+      "sha256": "4ebf3956cbc41a10be8e3d0201cd50e35b0d554f689e8c8d8d19607f41a706fb",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2021-jia-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2021-jia-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2021-jia-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2021-jia-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2021-jia-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2021-jia-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2021-jia-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2021-jia-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2021-jia-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2021-jia-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2021-jia-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2021-jia-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2021-jia-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2021-jia-reading",
+        "text": "第二部分 阅读理解（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-jia-reading-choice",
+        "text": "第一节（共15小题；每小题2分，满分30分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-jia-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2021-jia-language",
+        "text": "第三部分 语言知识运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-jia-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2021-jia-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2021-jia-grammar-fill"
+      }
+    ],
+    "groups": {
+      "group-2021-jia-reading-a": {
+        "groupId": "group-2021-jia-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2021-jia-021",
+          "q-2021-jia-022",
+          "q-2021-jia-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-a-1",
+              "text": "Take a view, the Landscape (风景) Photographer of the Year Award, was the idea of Charlie Waite, one of today’s most respected landscape photographers. Each year, the high standard of entries has shown that the Awards are the perfect platform to showcase the very best photography of the British landscape. Take a view is a desirable annual competition for photographers from all corners of the UK and beyond. \nMike Shepherd"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-reading-b": {
+        "groupId": "group-2021-jia-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2021-jia-024",
+          "q-2021-jia-025",
+          "q-2021-jia-026",
+          "q-2021-jia-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-b-1",
+              "text": "Port Lympne Reserve, which runs a breeding (繁育) programme, has welcomed the arrival of a rare black rhino calf (犀牛幼崽) . When the tiny creature arrived on January 31, she became the 40th black rhino to be born at the reserve. And officials at Port Lympne were delighted with the new arrival, especially as black rhinos are known for being difficult to breed in captivity (圈养) ."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-b-2",
+              "text": "Paul Beer, head of rhino section at Port Lympne, said: “Obviously we’re all absolutely delighted to welcome another calf to our black rhino family. She’s healthy, strong and already eager to play and explore. Her mother, Solio, is a first-time mum and she is doing a fantastic job. It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-b-3",
+              "text": "The adorable female calf is the second black rhino born this year at the reserve, but it is too early to tell if the calves will make good candidates to be returned to protected areas of the wild. The first rhino to be born at Port Lympne arrived on January 5 to first-time mother Kisima and weighed about 32kg. His mother, grandmother and great grandmother were all born at the reserve and still live there."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-b-4",
+              "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status."
+            }
+          ]
+        }
+      },
+      "group-2021-jia-reading-c": {
+        "groupId": "group-2021-jia-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2021-jia-028",
+          "q-2021-jia-029",
+          "q-2021-jia-030",
+          "q-2021-jia-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-c-1",
+              "text": "When I was 9, we packed up our home in Los Angeles and arrived at Heathrow, London on a gray January morning. Everyone in the family settled quickly into the city except me. Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place. Until I made a discovery."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-2",
+              "text": "Southbank, at an eastern bend in the Thames, is the center of British skateboarding, where the continuous crashing of skateboards left your head ringing. I loved it. I soon made friends with the local skaters. We spoke our own language. And my favorite: Safe. Safe meant cool. It meant hello. It meant don’t worry about it. Once, when trying a certain trick on the beam (横杆) , I fell onto the stones, damaging a nerve in my hand, and Toby came over, helping me up: Safe, man. Safe. A few minutes later, when I landed the trick, my friends beat their boards loud, shouting: “Safe! Safe! Safe!” And that’s what mattered—landing tricks, being a good skater."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-3",
+              "text": "When I was 15, my family moved to Washington. I tried skateboarding there, but the locals were far less welcoming. Within a couple of years, I’d given it up."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-4",
+              "text": "When I returned to London in 2004, I found myself wandering down to Southbank, spending hours there. I’ve traveled back several times since, most recently this past spring. The day was cold but clear; tourists and Londoners stopped to watch the skaters. Weaving (穿梭) among the kids who rushed by on their boards, I found my way to the beam. Then a rail-thin teenager, in a baggy white T-shirt, skidded (滑) up to the beam. He sat next to me. He seemed not to notice the man next to him. But soon I caught a few of his glances. “I was a local here 20 years ago,” I told him. Then, slowly, he began to nod his head. “Safe, man. Safe.”"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-5",
+              "text": "“Yeah,” I said. “Safe.”"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-reading-d": {
+        "groupId": "group-2021-jia-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2021-jia-032",
+          "q-2021-jia-033",
+          "q-2021-jia-034",
+          "q-2021-jia-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-d-1",
+              "text": "Who is a genius? This question has greatly interested humankind for centuries."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-2",
+              "text": "Let’s state clearly: Einstein was a genius. His face is almost the international symbol for genius. But we want to go beyond one man and explore the nature of genius itself. Why is it that some people are so much more intelligent or creative than the rest of us? And who are they?"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-3",
+              "text": "In the sciences and arts, those praised as geniuses were most often white men, of European origin. Perhaps this is not a surprise. It’s said that history is written by the victors, and those victors set the standards for admission to the genius club. When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-4",
+              "text": "A study recently published by Science found that as young as age six, girls are less likely than boys to say that members of their gender (性别) are “really, really smart”. Even worse, the study found that girls act on that belief: Around age six they start to avoid activities said to be for children who are “really, really smart”. Can our planet afford to have any great thinkers become discouraged and give up? It doesn’t take a genius to know the answer: absolutely not."
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-5",
+              "text": "Here’s the good news. In a wired world with constant global communication, we’re all positioned to see flashes of genius wherever they appear. And the more we look, the more we will see that social factors (因素) like gender, race, and class do not determine the appearance of genius. As a writer says, future geniuses come from those with “intelligence, creativity, perseverance (毅力) , and simple good fortune, who are able to change the world.”"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-seven-choices": {
+        "groupId": "group-2021-jia-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2021-jia-036",
+          "q-2021-jia-037",
+          "q-2021-jia-038",
+          "q-2021-jia-039",
+          "q-2021-jia-040"
+        ],
+        "blankIds": [
+          "blank-2021-jia-036",
+          "blank-2021-jia-037",
+          "blank-2021-jia-038",
+          "blank-2021-jia-039",
+          "blank-2021-jia-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Less people than that"
+          },
+          {
+            "label": "B",
+            "text": "Hold a clothing swap"
+          },
+          {
+            "label": "C",
+            "text": "If two people are competing"
+          },
+          {
+            "label": "D",
+            "text": "Just keep music playing throughout"
+          },
+          {
+            "label": "E",
+            "text": "Donate whatever clothes are left over"
+          },
+          {
+            "label": "F",
+            "text": "Have everyone put their clothes in the right spots"
+          },
+          {
+            "label": "G",
+            "text": "Tell everyone to bring clean clothes in good condition"
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-seven-title",
+              "text": "Swap. Don’t Shop!"
+            },
+            {
+              "paragraphId": "para-2021-jia-seven-p1",
+              "text": "You keep hearing about recycling, right? But it doesn’t end with bottles, cans, and paper. Clothing takes a huge amount of natural resources (资源) to make, and buying loads of new clothing (or throwing out old clothing) is not healthy for the environment. So what to do with all those perfectly-good-but-you’re-maybe-a-little-sick-of-them clothes piled on your bedroom floor? __36__ 1  . It’s the best way to get rid of your used clothes, score clothes from your friends, and have a party all at the same time."
+            },
+            {
+              "paragraphId": "para-2021-jia-seven-p2",
+              "text": "A successful swap depends on the selection of clothes, the organization of the event, and, obviously, how much fun is had. It’s really easy to do! Here are a few pointers."
+            },
+            {
+              "paragraphId": "para-2021-jia-seven-p3",
+              "text": "• Invite 5-10 people so you have a nice selection. __37__ 2  , and there may not be enough things to choose from; more than that, and it becomes uncontrollable."
+            },
+            {
+              "paragraphId": "para-2021-jia-seven-p4",
+              "text": "• __38__ 3  . They should also prepare plenty of reusable bags to carry their “new” clothes home."
+            },
+            {
+              "paragraphId": "para-2021-jia-seven-p5",
+              "text": "• Put different types of clothing on different surfaces in the room. __39__ 4  . Place a few mirrors around your room so people can see how things look when they try them on. One of the ground rules of the swap should be that everyone must try on the clothes before they take them—things always look different when you put them on."
+            },
+            {
+              "paragraphId": "para-2021-jia-seven-p6",
+              "text": "• Set a starting time. Maybe you say “go”, or turn on a certain song, or whatever. __40__ 5  . And don’t forget to put out some cookies and fruits. Remember, it’s a party!"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-cloze": {
+        "groupId": "group-2021-jia-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2021-jia-041",
+          "q-2021-jia-042",
+          "q-2021-jia-043",
+          "q-2021-jia-044",
+          "q-2021-jia-045",
+          "q-2021-jia-046",
+          "q-2021-jia-047",
+          "q-2021-jia-048",
+          "q-2021-jia-049",
+          "q-2021-jia-050",
+          "q-2021-jia-051",
+          "q-2021-jia-052",
+          "q-2021-jia-053",
+          "q-2021-jia-054",
+          "q-2021-jia-055",
+          "q-2021-jia-056",
+          "q-2021-jia-057",
+          "q-2021-jia-058",
+          "q-2021-jia-059",
+          "q-2021-jia-060"
+        ],
+        "blankIds": [
+          "blank-2021-jia-041",
+          "blank-2021-jia-042",
+          "blank-2021-jia-043",
+          "blank-2021-jia-044",
+          "blank-2021-jia-045",
+          "blank-2021-jia-046",
+          "blank-2021-jia-047",
+          "blank-2021-jia-048",
+          "blank-2021-jia-049",
+          "blank-2021-jia-050",
+          "blank-2021-jia-051",
+          "blank-2021-jia-052",
+          "blank-2021-jia-053",
+          "blank-2021-jia-054",
+          "blank-2021-jia-055",
+          "blank-2021-jia-056",
+          "blank-2021-jia-057",
+          "blank-2021-jia-058",
+          "blank-2021-jia-059",
+          "blank-2021-jia-060"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-cloze-title",
+              "text": "It’s the seaside birds that deserve at least part of the blame for getting Nick Burchill blacklisted at the Fairmont Empress Hotel in Victoria, Canada."
+            },
+            {
+              "paragraphId": "para-2021-jia-cloze-p1",
+              "text": "Burchill was __41__ at the hotel on business and planning to __42__ some friends in the area. They had asked him to __43__ some pepperoni (辣香肠) from back east. So he __44__ a suitcase full of pepperoni. As he was __45__ that it would be too warm, he __46__ it out on the table near an open window. He thought his pepperoni was __47__ and well chilled (冷却) and he __48__ ."
+            },
+            {
+              "paragraphId": "para-2021-jia-cloze-p2",
+              "text": "That’s when things went __49__ . “I remember walking down the long __50__ and opening the door to my room to find an entire flock of seagulls,” Burchill said in a recent letter of __51__ to the 4-star hotel. “The seagulls immediately went __52__ . They rushed to the window, 30 or 40 birds all trying to __53__ at the same time, and pepperoni—everywhere. The curtains were falling down, the lamps were falling down. It was a real __54__ .”"
+            },
+            {
+              "paragraphId": "para-2021-jia-cloze-p3",
+              "text": "Older and wiser now, Burchill chalked up the incident to youthful indiscretion (莽撞) ."
+            },
+            {
+              "paragraphId": "para-2021-jia-cloze-p4",
+              "text": "“I have __55__ and I admit responsibility for my __56__ ,” he said in the letter. “I come to you, __57__ , to apologize for the damage I had __58__ caused and to ask you to __59__ my lifetime ban from the hotel.”"
+            },
+            {
+              "paragraphId": "para-2021-jia-cloze-p5",
+              "text": "His letter __60__ . Banned from the hotel since 2001, Burchill is now welcome to come back, the Fairmont said."
+            }
+          ]
+        }
+      },
+      "group-2021-jia-grammar-fill": {
+        "groupId": "group-2021-jia-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2021-jia-061",
+          "q-2021-jia-062",
+          "q-2021-jia-063",
+          "q-2021-jia-064",
+          "q-2021-jia-065",
+          "q-2021-jia-066",
+          "q-2021-jia-067",
+          "q-2021-jia-068",
+          "q-2021-jia-069",
+          "q-2021-jia-070"
+        ],
+        "blankIds": [
+          "blank-2021-jia-061",
+          "blank-2021-jia-062",
+          "blank-2021-jia-063",
+          "blank-2021-jia-064",
+          "blank-2021-jia-065",
+          "blank-2021-jia-066",
+          "blank-2021-jia-067",
+          "blank-2021-jia-068",
+          "blank-2021-jia-069",
+          "blank-2021-jia-070"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-grammar-fill-title",
+              "text": "The Xi’an City Wall is the most complete city wall that has survived China’s long history. It __61__ (build) originally to protect the city __62__the Tang dynasty and has now been completely restored (修复) . It is possible __63__ (walk) or bike the entire 14 kilometers."
+            },
+            {
+              "paragraphId": "para-2021-jia-grammar-fill-p1",
+              "text": "We accessed the wall through the South Gate. The wall is 12 meters high and from here you can see streams of people moving inside and outside the City Wall."
+            },
+            {
+              "paragraphId": "para-2021-jia-grammar-fill-p2",
+              "text": "After __64__ (spend) some time looking at all the defensive equipment at the wall, we decided it was time for some action and what __65__ (good) than to ride on a piece of history!"
+            },
+            {
+              "paragraphId": "para-2021-jia-grammar-fill-p3",
+              "text": "We __66__ (hire) our bikes from the rental place at the South Gate. My bike was old and shaky __67__did the job. It took us about 3 hours to go all __68__way around the Xi’an City Wall. Supposedly you can do it in two hours, but we stopped at the different gates and __69__ (watchtower) to take pictures or just to watch the local people going about their __70__ (day) routines."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2021-jia-021": {
+        "questionId": "q-2021-jia-021",
+        "questionNo": 21,
+        "groupId": "group-2021-jia-reading-a",
+        "stem": "Who would most probably enter for Take a view?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Writers."
+          },
+          {
+            "label": "B",
+            "text": "Photographers."
+          },
+          {
+            "label": "C",
+            "text": "Painters."
+          },
+          {
+            "label": "D",
+            "text": "Tourists."
+          }
+        ]
+      },
+      "q-2021-jia-022": {
+        "questionId": "q-2021-jia-022",
+        "questionNo": 22,
+        "groupId": "group-2021-jia-reading-a",
+        "stem": "What do the works by Shepherd and Smith have in common?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They are winter images."
+          },
+          {
+            "label": "B",
+            "text": "They are in black and white."
+          },
+          {
+            "label": "C",
+            "text": "They show mountainous scenes."
+          },
+          {
+            "label": "D",
+            "text": "They focus on snow-covered forests."
+          }
+        ]
+      },
+      "q-2021-jia-023": {
+        "questionId": "q-2021-jia-023",
+        "questionNo": 23,
+        "groupId": "group-2021-jia-reading-a",
+        "stem": "Where can the text be found? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "In a history book."
+          },
+          {
+            "label": "B",
+            "text": "In a novel."
+          },
+          {
+            "label": "C",
+            "text": "In an art magazine."
+          },
+          {
+            "label": "D",
+            "text": "In a biography."
+          }
+        ]
+      },
+      "q-2021-jia-024": {
+        "questionId": "q-2021-jia-024",
+        "questionNo": 24,
+        "groupId": "group-2021-jia-reading-b",
+        "stem": "Which of the following best describes the breeding programme?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Costly."
+          },
+          {
+            "label": "B",
+            "text": "Controversial."
+          },
+          {
+            "label": "C",
+            "text": "Ambitious."
+          },
+          {
+            "label": "D",
+            "text": "Successful."
+          }
+        ]
+      },
+      "q-2021-jia-025": {
+        "questionId": "q-2021-jia-025",
+        "questionNo": 25,
+        "groupId": "group-2021-jia-reading-b",
+        "stem": "What does Paul Beer say about the new-born rhino?",
+        "options": [
+          {
+            "label": "A",
+            "text": "She loves staying with her mother."
+          },
+          {
+            "label": "B",
+            "text": "She dislikes outdoor activities."
+          },
+          {
+            "label": "C",
+            "text": "She is in good condition."
+          },
+          {
+            "label": "D",
+            "text": "She is sensitive to heat."
+          }
+        ]
+      },
+      "q-2021-jia-026": {
+        "questionId": "q-2021-jia-026",
+        "questionNo": 26,
+        "groupId": "group-2021-jia-reading-b",
+        "stem": "What similar experience do Solio and Kisima have?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They had their first born in January."
+          },
+          {
+            "label": "B",
+            "text": "They enjoyed exploring new places."
+          },
+          {
+            "label": "C",
+            "text": "They lived with their grandmothers."
+          },
+          {
+            "label": "D",
+            "text": "They were brought to the reserve young."
+          }
+        ]
+      },
+      "q-2021-jia-027": {
+        "questionId": "q-2021-jia-027",
+        "questionNo": 27,
+        "groupId": "group-2021-jia-reading-b",
+        "stem": "What can be inferred about Port Lympne Reserve? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "The rhino section will be open to the public."
+          },
+          {
+            "label": "B",
+            "text": "It aims to control the number of the animals."
+          },
+          {
+            "label": "C",
+            "text": "It will continue to work with the World Wildlife Fund."
+          },
+          {
+            "label": "D",
+            "text": "Some of its rhinos may be sent to the protected wild areas."
+          }
+        ]
+      },
+      "q-2021-jia-028": {
+        "questionId": "q-2021-jia-028",
+        "questionNo": 28,
+        "groupId": "group-2021-jia-reading-c",
+        "stem": "What can we learn about the author soon after he moved to London?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He felt disappointed."
+          },
+          {
+            "label": "B",
+            "text": "He gave up his hobby."
+          },
+          {
+            "label": "C",
+            "text": "He liked the weather there."
+          },
+          {
+            "label": "D",
+            "text": "He had disagreements with his family."
+          }
+        ]
+      },
+      "q-2021-jia-029": {
+        "questionId": "q-2021-jia-029",
+        "questionNo": 29,
+        "groupId": "group-2021-jia-reading-c",
+        "stem": "What do the underlined words \"Safe! Safe! Safe!\" probably mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Be careful!"
+          },
+          {
+            "label": "B",
+            "text": "Well done!"
+          },
+          {
+            "label": "C",
+            "text": "No way!"
+          },
+          {
+            "label": "D",
+            "text": "Don't worry!"
+          }
+        ]
+      },
+      "q-2021-jia-030": {
+        "questionId": "q-2021-jia-030",
+        "questionNo": 30,
+        "groupId": "group-2021-jia-reading-c",
+        "stem": "Why did the author like to spend time in Southbank when he returned to London?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To join the skateboarding."
+          },
+          {
+            "label": "B",
+            "text": "To make new friends."
+          },
+          {
+            "label": "C",
+            "text": "To learn more tricks."
+          },
+          {
+            "label": "D",
+            "text": "To relive his childhood days."
+          }
+        ]
+      },
+      "q-2021-jia-031": {
+        "questionId": "q-2021-jia-031",
+        "questionNo": 31,
+        "groupId": "group-2021-jia-reading-c",
+        "stem": "What message does the author seem to convey in the text? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "Children should learn a second language."
+          },
+          {
+            "label": "B",
+            "text": "Sport is necessary for children's health."
+          },
+          {
+            "label": "C",
+            "text": "Children need a sense of belonging."
+          },
+          {
+            "label": "D",
+            "text": "Seeing the world is a must for children."
+          }
+        ]
+      },
+      "q-2021-jia-032": {
+        "questionId": "q-2021-jia-032",
+        "questionNo": 32,
+        "groupId": "group-2021-jia-reading-d",
+        "stem": "What does the author think of victors' standards for joining the genius club?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They're unfair."
+          },
+          {
+            "label": "B",
+            "text": "They're conservative."
+          },
+          {
+            "label": "C",
+            "text": "They're objective."
+          },
+          {
+            "label": "D",
+            "text": "They're strict."
+          }
+        ]
+      },
+      "q-2021-jia-033": {
+        "questionId": "q-2021-jia-033",
+        "questionNo": 33,
+        "groupId": "group-2021-jia-reading-d",
+        "stem": "What can we infer about girls from the study in Science?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They think themselves smart."
+          },
+          {
+            "label": "B",
+            "text": "They look up to great thinkers."
+          },
+          {
+            "label": "C",
+            "text": "They see gender differences earlier than boys."
+          },
+          {
+            "label": "D",
+            "text": "They are likely to be influenced by social beliefs."
+          }
+        ]
+      },
+      "q-2021-jia-034": {
+        "questionId": "q-2021-jia-034",
+        "questionNo": 34,
+        "groupId": "group-2021-jia-reading-d",
+        "stem": "Why are more geniuses known to the public?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Improved global communication."
+          },
+          {
+            "label": "B",
+            "text": "Less discrimination against women."
+          },
+          {
+            "label": "C",
+            "text": "Acceptance of victors' concepts."
+          },
+          {
+            "label": "D",
+            "text": "Changes in people's social positions."
+          }
+        ]
+      },
+      "q-2021-jia-035": {
+        "questionId": "q-2021-jia-035",
+        "questionNo": 35,
+        "groupId": "group-2021-jia-reading-d",
+        "stem": "What is the best title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Geniuses Think Alike"
+          },
+          {
+            "label": "B",
+            "text": "Genius Takes Many Forms"
+          },
+          {
+            "label": "C",
+            "text": "Genius and Intelligence"
+          },
+          {
+            "label": "D",
+            "text": "Genius and Luck"
+          }
+        ]
+      },
+      "q-2021-jia-036": {
+        "questionId": "q-2021-jia-036",
+        "questionNo": 36,
+        "groupId": "group-2021-jia-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2021-jia-036"
+      },
+      "q-2021-jia-037": {
+        "questionId": "q-2021-jia-037",
+        "questionNo": 37,
+        "groupId": "group-2021-jia-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2021-jia-037"
+      },
+      "q-2021-jia-038": {
+        "questionId": "q-2021-jia-038",
+        "questionNo": 38,
+        "groupId": "group-2021-jia-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2021-jia-038"
+      },
+      "q-2021-jia-039": {
+        "questionId": "q-2021-jia-039",
+        "questionNo": 39,
+        "groupId": "group-2021-jia-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2021-jia-039"
+      },
+      "q-2021-jia-040": {
+        "questionId": "q-2021-jia-040",
+        "questionNo": 40,
+        "groupId": "group-2021-jia-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2021-jia-040"
+      },
+      "q-2021-jia-041": {
+        "questionId": "q-2021-jia-041",
+        "questionNo": 41,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "41",
+        "blankId": "blank-2021-jia-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "studying"
+          },
+          {
+            "label": "B",
+            "text": "staying"
+          },
+          {
+            "label": "C",
+            "text": "looking"
+          },
+          {
+            "label": "D",
+            "text": "packing"
+          }
+        ]
+      },
+      "q-2021-jia-042": {
+        "questionId": "q-2021-jia-042",
+        "questionNo": 42,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "42",
+        "blankId": "blank-2021-jia-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "visit"
+          },
+          {
+            "label": "B",
+            "text": "help"
+          },
+          {
+            "label": "C",
+            "text": "follow"
+          },
+          {
+            "label": "D",
+            "text": "make"
+          }
+        ]
+      },
+      "q-2021-jia-043": {
+        "questionId": "q-2021-jia-043",
+        "questionNo": 43,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "43",
+        "blankId": "blank-2021-jia-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "sell"
+          },
+          {
+            "label": "B",
+            "text": "have"
+          },
+          {
+            "label": "C",
+            "text": "bring"
+          },
+          {
+            "label": "D",
+            "text": "taste"
+          }
+        ]
+      },
+      "q-2021-jia-044": {
+        "questionId": "q-2021-jia-044",
+        "questionNo": 44,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "44",
+        "blankId": "blank-2021-jia-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "filled"
+          },
+          {
+            "label": "B",
+            "text": "locked"
+          },
+          {
+            "label": "C",
+            "text": "abandoned"
+          },
+          {
+            "label": "D",
+            "text": "lost"
+          }
+        ]
+      },
+      "q-2021-jia-045": {
+        "questionId": "q-2021-jia-045",
+        "questionNo": 45,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "45",
+        "blankId": "blank-2021-jia-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "surprised"
+          },
+          {
+            "label": "B",
+            "text": "pleased"
+          },
+          {
+            "label": "C",
+            "text": "excited"
+          },
+          {
+            "label": "D",
+            "text": "worried"
+          }
+        ]
+      },
+      "q-2021-jia-046": {
+        "questionId": "q-2021-jia-046",
+        "questionNo": 46,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "46",
+        "blankId": "blank-2021-jia-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "dug"
+          },
+          {
+            "label": "B",
+            "text": "cleared"
+          },
+          {
+            "label": "C",
+            "text": "cut"
+          },
+          {
+            "label": "D",
+            "text": "laid"
+          }
+        ]
+      },
+      "q-2021-jia-047": {
+        "questionId": "q-2021-jia-047",
+        "questionNo": 47,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "47",
+        "blankId": "blank-2021-jia-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "delicious"
+          },
+          {
+            "label": "B",
+            "text": "safe"
+          },
+          {
+            "label": "C",
+            "text": "soft"
+          },
+          {
+            "label": "D",
+            "text": "ready"
+          }
+        ]
+      },
+      "q-2021-jia-048": {
+        "questionId": "q-2021-jia-048",
+        "questionNo": 48,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "48",
+        "blankId": "blank-2021-jia-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "left"
+          },
+          {
+            "label": "B",
+            "text": "nodded"
+          },
+          {
+            "label": "C",
+            "text": "waited"
+          },
+          {
+            "label": "D",
+            "text": "regretted"
+          }
+        ]
+      },
+      "q-2021-jia-049": {
+        "questionId": "q-2021-jia-049",
+        "questionNo": 49,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "49",
+        "blankId": "blank-2021-jia-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "far"
+          },
+          {
+            "label": "B",
+            "text": "funny"
+          },
+          {
+            "label": "C",
+            "text": "wrong"
+          },
+          {
+            "label": "D",
+            "text": "blind"
+          }
+        ]
+      },
+      "q-2021-jia-050": {
+        "questionId": "q-2021-jia-050",
+        "questionNo": 50,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "50",
+        "blankId": "blank-2021-jia-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "beach"
+          },
+          {
+            "label": "B",
+            "text": "driveway"
+          },
+          {
+            "label": "C",
+            "text": "hall"
+          },
+          {
+            "label": "D",
+            "text": "table"
+          }
+        ]
+      },
+      "q-2021-jia-051": {
+        "questionId": "q-2021-jia-051",
+        "questionNo": 51,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "51",
+        "blankId": "blank-2021-jia-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "application"
+          },
+          {
+            "label": "B",
+            "text": "apology"
+          },
+          {
+            "label": "C",
+            "text": "request"
+          },
+          {
+            "label": "D",
+            "text": "invitation"
+          }
+        ]
+      },
+      "q-2021-jia-052": {
+        "questionId": "q-2021-jia-052",
+        "questionNo": 52,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "52",
+        "blankId": "blank-2021-jia-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "hungry"
+          },
+          {
+            "label": "B",
+            "text": "dead"
+          },
+          {
+            "label": "C",
+            "text": "missing"
+          },
+          {
+            "label": "D",
+            "text": "wild"
+          }
+        ]
+      },
+      "q-2021-jia-053": {
+        "questionId": "q-2021-jia-053",
+        "questionNo": 53,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "53",
+        "blankId": "blank-2021-jia-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "wake up"
+          },
+          {
+            "label": "B",
+            "text": "get out"
+          },
+          {
+            "label": "C",
+            "text": "take off"
+          },
+          {
+            "label": "D",
+            "text": "break in"
+          }
+        ]
+      },
+      "q-2021-jia-054": {
+        "questionId": "q-2021-jia-054",
+        "questionNo": 54,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "54",
+        "blankId": "blank-2021-jia-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "mess"
+          },
+          {
+            "label": "B",
+            "text": "puzzle"
+          },
+          {
+            "label": "C",
+            "text": "fight"
+          },
+          {
+            "label": "D",
+            "text": "challenge"
+          }
+        ]
+      },
+      "q-2021-jia-055": {
+        "questionId": "q-2021-jia-055",
+        "questionNo": 55,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "55",
+        "blankId": "blank-2021-jia-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "recovered"
+          },
+          {
+            "label": "B",
+            "text": "retired"
+          },
+          {
+            "label": "C",
+            "text": "escaped"
+          },
+          {
+            "label": "D",
+            "text": "matured"
+          }
+        ]
+      },
+      "q-2021-jia-056": {
+        "questionId": "q-2021-jia-056",
+        "questionNo": 56,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "56",
+        "blankId": "blank-2021-jia-056",
+        "options": [
+          {
+            "label": "A",
+            "text": "suffering"
+          },
+          {
+            "label": "B",
+            "text": "plans"
+          },
+          {
+            "label": "C",
+            "text": "madness"
+          },
+          {
+            "label": "D",
+            "text": "actions"
+          }
+        ]
+      },
+      "q-2021-jia-057": {
+        "questionId": "q-2021-jia-057",
+        "questionNo": 57,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "57",
+        "blankId": "blank-2021-jia-057",
+        "options": [
+          {
+            "label": "A",
+            "text": "hands in pockets"
+          },
+          {
+            "label": "B",
+            "text": "nose in the air"
+          },
+          {
+            "label": "C",
+            "text": "hat in hand"
+          },
+          {
+            "label": "D",
+            "text": "feet on the ground"
+          }
+        ]
+      },
+      "q-2021-jia-058": {
+        "questionId": "q-2021-jia-058",
+        "questionNo": 58,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "58",
+        "blankId": "blank-2021-jia-058",
+        "options": [
+          {
+            "label": "A",
+            "text": "indirectly"
+          },
+          {
+            "label": "B",
+            "text": "deliberately"
+          },
+          {
+            "label": "C",
+            "text": "cautiously"
+          },
+          {
+            "label": "D",
+            "text": "secretly"
+          }
+        ]
+      },
+      "q-2021-jia-059": {
+        "questionId": "q-2021-jia-059",
+        "questionNo": 59,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "59",
+        "blankId": "blank-2021-jia-059",
+        "options": [
+          {
+            "label": "A",
+            "text": "replace"
+          },
+          {
+            "label": "B",
+            "text": "remember"
+          },
+          {
+            "label": "C",
+            "text": "reconsider"
+          },
+          {
+            "label": "D",
+            "text": "renew"
+          }
+        ]
+      },
+      "q-2021-jia-060": {
+        "questionId": "q-2021-jia-060",
+        "questionNo": 60,
+        "groupId": "group-2021-jia-cloze",
+        "stem": "60",
+        "blankId": "blank-2021-jia-060",
+        "options": [
+          {
+            "label": "A",
+            "text": "arrived"
+          },
+          {
+            "label": "B",
+            "text": "worked"
+          },
+          {
+            "label": "C",
+            "text": "ended"
+          },
+          {
+            "label": "D",
+            "text": "disappeared"
+          }
+        ]
+      },
+      "q-2021-jia-061": {
+        "questionId": "q-2021-jia-061",
+        "questionNo": 61,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2021-jia-061"
+      },
+      "q-2021-jia-062": {
+        "questionId": "q-2021-jia-062",
+        "questionNo": 62,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2021-jia-062"
+      },
+      "q-2021-jia-063": {
+        "questionId": "q-2021-jia-063",
+        "questionNo": 63,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2021-jia-063"
+      },
+      "q-2021-jia-064": {
+        "questionId": "q-2021-jia-064",
+        "questionNo": 64,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2021-jia-064"
+      },
+      "q-2021-jia-065": {
+        "questionId": "q-2021-jia-065",
+        "questionNo": 65,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2021-jia-065"
+      },
+      "q-2021-jia-066": {
+        "questionId": "q-2021-jia-066",
+        "questionNo": 66,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "66",
+        "blankId": "blank-2021-jia-066"
+      },
+      "q-2021-jia-067": {
+        "questionId": "q-2021-jia-067",
+        "questionNo": 67,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "67",
+        "blankId": "blank-2021-jia-067"
+      },
+      "q-2021-jia-068": {
+        "questionId": "q-2021-jia-068",
+        "questionNo": 68,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "68",
+        "blankId": "blank-2021-jia-068"
+      },
+      "q-2021-jia-069": {
+        "questionId": "q-2021-jia-069",
+        "questionNo": 69,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "69",
+        "blankId": "blank-2021-jia-069"
+      },
+      "q-2021-jia-070": {
+        "questionId": "q-2021-jia-070",
+        "questionNo": 70,
+        "groupId": "group-2021-jia-grammar-fill",
+        "stem": "70",
+        "blankId": "blank-2021-jia-070"
+      }
+    },
+    "blanks": {
+      "blank-2021-jia-061": {
+        "blankId": "blank-2021-jia-061",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-061",
+        "prompt": "build"
+      },
+      "blank-2021-jia-062": {
+        "blankId": "blank-2021-jia-062",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-062"
+      },
+      "blank-2021-jia-063": {
+        "blankId": "blank-2021-jia-063",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-063",
+        "prompt": "walk"
+      },
+      "blank-2021-jia-064": {
+        "blankId": "blank-2021-jia-064",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-064",
+        "prompt": "spend"
+      },
+      "blank-2021-jia-065": {
+        "blankId": "blank-2021-jia-065",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-065",
+        "prompt": "good"
+      },
+      "blank-2021-jia-066": {
+        "blankId": "blank-2021-jia-066",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-066",
+        "prompt": "hire"
+      },
+      "blank-2021-jia-067": {
+        "blankId": "blank-2021-jia-067",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-067"
+      },
+      "blank-2021-jia-068": {
+        "blankId": "blank-2021-jia-068",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-068"
+      },
+      "blank-2021-jia-069": {
+        "blankId": "blank-2021-jia-069",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-069",
+        "prompt": "watchtower"
+      },
+      "blank-2021-jia-070": {
+        "blankId": "blank-2021-jia-070",
+        "groupId": "group-2021-jia-grammar-fill",
+        "questionId": "q-2021-jia-070",
+        "prompt": "day"
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2021-jia-021": {
+        "questionId": "q-2021-jia-021",
+        "questionNo": 21,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-022": {
+        "questionId": "q-2021-jia-022",
+        "questionNo": 22,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-023": {
+        "questionId": "q-2021-jia-023",
+        "questionNo": 23,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-024": {
+        "questionId": "q-2021-jia-024",
+        "questionNo": 24,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-025": {
+        "questionId": "q-2021-jia-025",
+        "questionNo": 25,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-026": {
+        "questionId": "q-2021-jia-026",
+        "questionNo": 26,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-027": {
+        "questionId": "q-2021-jia-027",
+        "questionNo": 27,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-028": {
+        "questionId": "q-2021-jia-028",
+        "questionNo": 28,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-029": {
+        "questionId": "q-2021-jia-029",
+        "questionNo": 29,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-030": {
+        "questionId": "q-2021-jia-030",
+        "questionNo": 30,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-031": {
+        "questionId": "q-2021-jia-031",
+        "questionNo": 31,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-032": {
+        "questionId": "q-2021-jia-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-033": {
+        "questionId": "q-2021-jia-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-034": {
+        "questionId": "q-2021-jia-034",
+        "questionNo": 34,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-035": {
+        "questionId": "q-2021-jia-035",
+        "questionNo": 35,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-036": {
+        "questionId": "q-2021-jia-036",
+        "questionNo": 36,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-037": {
+        "questionId": "q-2021-jia-037",
+        "questionNo": 37,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-038": {
+        "questionId": "q-2021-jia-038",
+        "questionNo": 38,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-039": {
+        "questionId": "q-2021-jia-039",
+        "questionNo": 39,
+        "answer": "F",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-040": {
+        "questionId": "q-2021-jia-040",
+        "questionNo": 40,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-041": {
+        "questionId": "q-2021-jia-041",
+        "questionNo": 41,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-042": {
+        "questionId": "q-2021-jia-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-043": {
+        "questionId": "q-2021-jia-043",
+        "questionNo": 43,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-044": {
+        "questionId": "q-2021-jia-044",
+        "questionNo": 44,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-045": {
+        "questionId": "q-2021-jia-045",
+        "questionNo": 45,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-046": {
+        "questionId": "q-2021-jia-046",
+        "questionNo": 46,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-047": {
+        "questionId": "q-2021-jia-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-048": {
+        "questionId": "q-2021-jia-048",
+        "questionNo": 48,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-049": {
+        "questionId": "q-2021-jia-049",
+        "questionNo": 49,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-050": {
+        "questionId": "q-2021-jia-050",
+        "questionNo": 50,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-051": {
+        "questionId": "q-2021-jia-051",
+        "questionNo": 51,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-052": {
+        "questionId": "q-2021-jia-052",
+        "questionNo": 52,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-053": {
+        "questionId": "q-2021-jia-053",
+        "questionNo": 53,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-054": {
+        "questionId": "q-2021-jia-054",
+        "questionNo": 54,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-055": {
+        "questionId": "q-2021-jia-055",
+        "questionNo": 55,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-056": {
+        "questionId": "q-2021-jia-056",
+        "questionNo": 56,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-057": {
+        "questionId": "q-2021-jia-057",
+        "questionNo": 57,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-058": {
+        "questionId": "q-2021-jia-058",
+        "questionNo": 58,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-059": {
+        "questionId": "q-2021-jia-059",
+        "questionNo": 59,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-060": {
+        "questionId": "q-2021-jia-060",
+        "questionNo": 60,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-061": {
+        "questionId": "q-2021-jia-061",
+        "questionNo": 61,
+        "answer": "was built",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-062": {
+        "questionId": "q-2021-jia-062",
+        "questionNo": 62,
+        "answer": "in",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-063": {
+        "questionId": "q-2021-jia-063",
+        "questionNo": 63,
+        "answer": "to walk",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-064": {
+        "questionId": "q-2021-jia-064",
+        "questionNo": 64,
+        "answer": "spending",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-065": {
+        "questionId": "q-2021-jia-065",
+        "questionNo": 65,
+        "answer": "better",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-066": {
+        "questionId": "q-2021-jia-066",
+        "questionNo": 66,
+        "answer": "hired",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-067": {
+        "questionId": "q-2021-jia-067",
+        "questionNo": 67,
+        "answer": "but/yet",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-068": {
+        "questionId": "q-2021-jia-068",
+        "questionNo": 68,
+        "answer": "the",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-069": {
+        "questionId": "q-2021-jia-069",
+        "questionNo": 69,
+        "answer": "watchtowers",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2021-jia-070": {
+        "questionId": "q-2021-jia-070",
+        "questionNo": 70,
+        "answer": "daily",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-19T00:00:00Z"
+    },
+    "groups": {
+      "group-2021-jia-reading-a": {
+        "overview": "本文是一则关于英国风景摄影大赛 Take a view（年度风景摄影师大奖）的介绍性文字，说明大赛缘起、定位与影响，属于应用文/介绍说明类语篇。",
+        "discourseStructure": {
+          "summary": "语篇先点明大赛名称及其创办人，再说明历年参赛作品的高水准与大赛作为展示英国风景摄影最佳平台的定位，最后强调它面向英国乃至更广范围摄影师的吸引力。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-a-1",
+              "summary": "介绍 Take a view（年度风景摄影师大奖）由著名风景摄影师 Charlie Waite 发起，历年参赛作品水准高，是展示英国最佳风景摄影的理想平台，吸引来自英国各地及海外的摄影师参赛。",
+              "function": "总起并整体介绍大赛的缘起、定位与吸引力，奠定全文说明基调。"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-reading-b": {
+        "overview": "本文是一篇新闻报道，讲述英国 Port Lympne Reserve 繁育中心成功繁育出一只稀有黑犀牛幼崽，并介绍该中心今年第二只黑犀牛的诞生情况以及黑犀牛在全球濒危的现状。",
+        "discourseStructure": {
+          "summary": "由具体新闻事件（黑犀牛幼崽诞生）切入，先报道喜讯与官方反应，再引述犀牛部门负责人对幼崽的评价，接着补充今年另一只幼崽及其家族信息，最后用全球数据点出黑犀牛濒危的大背景。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-b-1",
+              "summary": "Port Lympne Reserve 迎来一只稀有黑犀牛幼崽，它是该中心出生的第 40 只黑犀牛，官员们非常高兴，尤其因为黑犀牛在圈养条件下很难繁育。",
+              "function": "导入新闻事件，点明繁育成果与其难得之处。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-b-2",
+              "summary": "犀牛部门负责人 Paul Beer 表示大家都很高兴迎来这只幼崽，它健康、强壮、爱玩爱探索，初为母亲的 Solio 把它照顾得很好，天气转暖后幼崽会每天外出活动。",
+              "function": "引述负责人原话，评价新生幼崽的状况与未来。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-b-3",
+              "summary": "这只雌性幼崽是该中心今年出生的第二只黑犀牛，但现在还难以判断它们是否适合被放归野外保护区；今年第一只幼崽 1 月 5 日由初为母亲的 Kisima 产下，其家族数代都出生并生活在该中心。",
+              "function": "补充今年另一只幼崽信息，并引出放归野外的可能性。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-b-4",
+              "summary": "据世界自然基金会，全球黑犀牛数量已降至 5500 左右，处于“极度濒危”状态。",
+              "function": "以全球数据收尾，点明黑犀牛濒危的大背景。"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-reading-c": {
+        "overview": "记叙文。作者9岁随家从洛杉矶搬到伦敦，起初格格不入，直到在Southbank发现了滑板文化并融入其中，找到归属感；多年后重返伦敦，再次回到Southbank，与一位年轻滑手用滑板圈的暗语\"Safe\"完成跨越二十年的呼应。",
+        "discourseStructure": {
+          "summary": "按时间顺序展开：迁居伦敦的失落—发现滑板与归属—再迁华盛顿后放弃—重返伦敦旧地重游—以暗语收束首尾呼应。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-c-1",
+              "summary": "作者9岁从洛杉矶搬到伦敦，全家都很快适应，唯独他因失去海滩和蓝天而感到失落、格格不入，直到有了一个发现。",
+              "function": "交代背景与情感起点，制造悬念引出下文。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-2",
+              "summary": "作者爱上了Southbank的滑板文化，结识本地滑手，学会了他们的暗语\"Safe\"，在摔伤与成功落地中体会到友谊与认同。",
+              "function": "正文核心，呈现归属感的获得与\"Safe\"一词的含义。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-3",
+              "summary": "15岁全家迁往华盛顿，当地滑手不友好，几年后作者放弃了滑板。",
+              "function": "情节转折，铺垫归属感的失去。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-4",
+              "summary": "2004年重返伦敦后，作者多次回到Southbank，最近一次与一位瘦削的少年滑手相遇，告诉对方自己二十年前是这里的本地人。",
+              "function": "时间跳跃，旧地重游，引出与新一代滑手的连接。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-c-5",
+              "summary": "作者以一句\"Safe\"回应，首尾呼应，暗示归属感的延续。",
+              "function": "收束全文，用暗语完成情感闭环。"
+            }
+          ]
+        }
+      },
+      "group-2021-jia-reading-d": {
+        "overview": "本文是一篇议论文，探讨“天才”的本质。作者指出历史上被认可的天才多为欧洲白人男性，因为评判标准由胜利者制定，导致女性及其他群体的天才贡献被忽视；并引用《科学》杂志的研究说明这种社会偏见从女孩六岁起就开始产生负面影响；最后指出在全球互联的时代，天才不受性别、种族、阶层等社会因素决定，呼吁人们看到各种形式的天才。",
+        "discourseStructure": {
+          "summary": "全文先以设问引入“谁是天才”，再借爱因斯坦过渡到对天才本质的探讨；接着指出天才认定标准的不公（胜利者制定标准），并用《科学》研究佐证偏见的早期危害；最后转向积极面，提出天才形式多样、不由社会因素决定。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2021-jia-reading-d-1",
+              "summary": "以设问“谁是天才”开篇，指出这个问题长期吸引着人类。",
+              "function": "引入话题，提出全文核心问题。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-2",
+              "summary": "以爱因斯坦为天才的典型例子，但作者表示要超越个人去探讨天才的本质，追问为什么有些人更聪明或更有创造力，以及他们是谁。",
+              "function": "由具体例子过渡到对天才本质的探究，承上启下。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-3",
+              "summary": "指出在科学和艺术领域被誉为天才的大多是欧洲白人男性，因为历史由胜利者书写，他们制定了进入“天才俱乐部”的标准，使俱乐部之外（女性、不同肤色或信仰者）的天才贡献被忽视和拒绝。",
+              "function": "提出问题：天才认定标准的不公平性。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-4",
+              "summary": "引用《科学》杂志的研究：女孩早在六岁就比男孩更不认为同性别成员“非常非常聪明”，并据此回避被认为属于聪明孩子的活动；作者反问地球能否承受让伟大思想者气馁放弃，答案是绝对不能。",
+              "function": "用研究证据说明社会偏见的早期危害，深化论证。"
+            },
+            {
+              "paragraphId": "para-2021-jia-reading-d-5",
+              "summary": "转向好消息：在全球持续通讯的互联世界，人们能随处看到天才的闪光；越看越会发现性别、种族、阶层等社会因素并不决定天才的出现；未来的天才来自具备智慧、创造力、毅力和好运并能改变世界的人。",
+              "function": "提出解决之道并升华主题，强调天才形式多样、不由社会因素决定。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2021-jia-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查谁最有可能参加 Take a view 这项比赛，需根据大赛性质（风景摄影竞赛）锁定参赛人群。",
+        "stemTranslationZh": "谁最有可能报名参加 Take a view？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "作家。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Writers would enter for Take a view.",
+              "explanation": "原文未提及作家会参加该比赛；Take a view 是摄影竞赛，与写作无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "摄影师。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-a-1",
+                "quote": "Take a view is a desirable annual competition for photographers from all corners of the UK and beyond.",
+                "anchor": "面向摄影师的年度竞赛"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "画家。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Take a view is a desirable annual competition for photographers from all corners of the UK and beyond.",
+              "sourceEntity": "photographers",
+              "optionText": "Painters.",
+              "optionEntity": "Painters",
+              "explanation": "原文明确参赛者是 photographers（摄影师），选项偷换为 painters（画家），对象错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "游客。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Tourists would enter for Take a view.",
+              "explanation": "原文未提及游客会参赛；该比赛面向摄影师，与游客无关。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Who would most probably enter for Take a view",
+            "sourceRole": "stem",
+            "targetText": "a desirable annual competition for photographers from all corners of the UK and beyond",
+            "targetParagraphId": "para-2021-jia-reading-a-1",
+            "relationType": "locationCue",
+            "note": "题干用 enter for 问参赛人群，原文用 a competition for photographers 直接点明参赛者是 photographers（摄影师）。"
+          }
+        ]
+      },
+      "q-2021-jia-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Shepherd 与 Smith 两人作品的共同点，需依据题目权威答案锁定两者均为冬季影像。",
+        "stemTranslationZh": "Shepherd 和 Smith 的作品有什么共同之处？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们都是冬季影像。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-a-1",
+                "quote": "Mike Shepherd",
+                "anchor": "Shepherd 与 Smith 作品同为冬季题材"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们都是黑白的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The works are in black and white.",
+              "explanation": "原文未提及两幅作品为黑白色，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们都展现山地景象。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The works show mountainous scenes.",
+              "explanation": "原文未提及两幅作品都展现山地景象，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们都聚焦于积雪覆盖的森林。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The works focus on snow-covered forests.",
+              "explanation": "原文未提及两幅作品都聚焦于积雪覆盖的森林，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What do the works by Shepherd and Smith have in common",
+            "sourceRole": "stem",
+            "targetText": "Mike Shepherd",
+            "targetParagraphId": "para-2021-jia-reading-a-1",
+            "relationType": "locationCue",
+            "note": "题干由 Shepherd 与 Smith 的作品定位到具体作品介绍，据权威答案 winter images（冬季影像）为两者共同点。"
+          }
+        ]
+      },
+      "q-2021-jia-023": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查文本出处，需根据语篇内容（风景摄影大赛与作品介绍）推断其最可能出现的载体。",
+        "stemTranslationZh": "这篇文章可能出自哪里？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一本历史书中。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The text comes from a history book.",
+              "explanation": "原文讲的是风景摄影大赛与摄影作品，与历史书内容无关，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一部小说中。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The text comes from a novel.",
+              "explanation": "原文为对摄影大赛的客观介绍，并非虚构叙事，不会出自小说，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一本艺术杂志中。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-a-1",
+                "quote": "the Awards are the perfect platform to showcase the very best photography of the British landscape",
+                "anchor": "展示最佳风景摄影—艺术杂志题材"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一本传记中。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "the idea of Charlie Waite, one of today’s most respected landscape photographers",
+              "sourceHighlight": "Charlie Waite, one of today’s most respected landscape photographers",
+              "optionText": "In a biography.",
+              "optionHighlight": "biography",
+              "explanation": "原文仅一句提及 Charlie Waite 是大赛创办人，并非讲述其生平，不足以构成传记，选项夸大了人物介绍的范围。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Where can the text be found",
+            "sourceRole": "stem",
+            "targetText": "the Awards are the perfect platform to showcase the very best photography of the British landscape",
+            "targetParagraphId": "para-2021-jia-reading-a-1",
+            "relationType": "paraphrase",
+            "note": "题干问文本出处，原文聚焦 showcase the very best photography（展示最佳摄影作品），属艺术摄影题材，故最可能出自 art magazine（艺术杂志）。"
+          }
+        ]
+      },
+      "q-2021-jia-024": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对繁育项目整体成效的判断，需综合全文信息归纳该项目的特点。",
+        "stemTranslationZh": "以下哪一项最能描述这个繁育项目？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "昂贵的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "繁育项目耗费高昂。",
+              "explanation": "原文未提及繁育项目的成本或花费，无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "有争议的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "繁育项目存在争议。",
+              "explanation": "原文未提及任何争议或反对意见，无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "雄心勃勃的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "繁育项目目标宏大。",
+              "explanation": "原文只描述已取得的繁育成果，未提及该项目设定了宏大的目标或计划，无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "成功的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-b-1",
+                "quote": "she became the 40th black rhino to be born at the reserve",
+                "anchor": "已是该中心出生的第 40 只黑犀牛"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-jia-reading-b-1",
+                "quote": "black rhinos are known for being difficult to breed in captivity",
+                "anchor": "黑犀牛圈养繁育本身很难"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Successful",
+            "sourceRole": "correctOption",
+            "targetText": "she became the 40th black rhino to be born at the reserve",
+            "targetParagraphId": "para-2021-jia-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项 Successful 由原文“the 40th black rhino to be born”这一可观成果，结合“difficult to breed in captivity”的反衬归纳而来。"
+          }
+        ]
+      },
+      "q-2021-jia-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对 Paul Beer 原话中关于新生幼崽状况描述的细节定位。",
+        "stemTranslationZh": "关于这只新生犀牛，Paul Beer 说了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她喜欢和妈妈待在一起。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "幼崽喜欢和妈妈待在一起。",
+              "explanation": "原文提到母亲 Solio 把幼崽照顾得很好，但没有说幼崽喜欢和妈妈待在一起，无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她不喜欢户外活动。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day",
+              "sourceHighlight": "out and about exploring and playing every day",
+              "optionText": "She dislikes outdoor activities.",
+              "optionHighlight": "dislikes outdoor activities",
+              "explanation": "原文说天气转暖后幼崽会每天外出探索玩耍，说明它喜爱户外活动，选项说“不喜欢”属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-b-2",
+                "quote": "the little one will be out and about exploring and playing every day",
+                "anchor": "幼崽将每天外出探索玩耍"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她身体状况良好。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-b-2",
+                "quote": "She’s healthy, strong and already eager to play and explore.",
+                "anchor": "她健康、强壮，急切想玩耍探索"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她对炎热很敏感。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "conditionRemoved",
+              "sourceQuote": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up",
+              "sourceHighlight": "too cold for them to go out into the open",
+              "optionText": "She is sensitive to heat.",
+              "optionHighlight": "sensitive to heat",
+              "explanation": "原文说现在天气“太冷”不宜外出、要等转暖，谈的是怕冷而非怕热，选项把语境换成对炎热敏感，偷换了条件。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-b-2",
+                "quote": "It’s still a little too cold for them to go out into the open",
+                "anchor": "现在天气还太冷不宜外出"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "She is in good condition.",
+            "sourceRole": "correctOption",
+            "targetText": "She’s healthy, strong and already eager to play and explore.",
+            "targetParagraphId": "para-2021-jia-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 in good condition 是原文 healthy, strong and eager to play 的同义概括。"
+          }
+        ]
+      },
+      "q-2021-jia-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对两位母亲 Solio 与 Kisima 共同经历的细节比对与归纳。",
+        "stemTranslationZh": "Solio 和 Kisima 有什么相似的经历？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她们都在一月份产下第一胎。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-b-2",
+                "quote": "Her mother, Solio, is a first-time mum",
+                "anchor": "Solio 初为人母"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-jia-reading-b-1",
+                "quote": "When the tiny creature arrived on January 31",
+                "anchor": "Solio 的幼崽 1 月 31 日出生"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-jia-reading-b-3",
+                "quote": "The first rhino to be born at Port Lympne arrived on January 5 to first-time mother Kisima",
+                "anchor": "Kisima 也初为人母，幼崽 1 月 5 日出生"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她们喜欢探索新地方。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "She’s healthy, strong and already eager to play and explore.",
+              "sourceEntity": "the new-born calf (the little one)",
+              "optionText": "They enjoyed exploring new places.",
+              "optionEntity": "Solio and Kisima",
+              "explanation": "原文中爱探索玩耍的是新生幼崽，而非两位母亲 Solio 和 Kisima，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-b-2",
+                "quote": "already eager to play and explore",
+                "anchor": "急切想玩耍探索的是幼崽"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她们和自己的祖母一起生活。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "His mother, grandmother and great grandmother were all born at the reserve and still live there.",
+              "sourceEntity": "Kisima 的幼崽（His）的母亲、祖母、曾祖母",
+              "optionText": "They lived with their grandmothers.",
+              "optionEntity": "Solio and Kisima",
+              "explanation": "原文说的是 Kisima 那只幼崽的母亲、祖母、曾祖母同住于此，并非 Solio 和 Kisima 两位母亲与各自祖母同住，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-b-3",
+                "quote": "His mother, grandmother and great grandmother were all born at the reserve and still live there.",
+                "anchor": "同住的是幼崽的母亲、祖母、曾祖母"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她们幼年时被带到该保护中心。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Solio 和 Kisima 在幼年时被带到该中心。",
+              "explanation": "原文未提及 Solio 和 Kisima 是何时、如何来到该中心的，无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "had their first born in January",
+            "sourceRole": "correctOption",
+            "targetText": "The first rhino to be born at Port Lympne arrived on January 5 to first-time mother Kisima",
+            "targetParagraphId": "para-2021-jia-reading-b-3",
+            "relationType": "locationCue",
+            "note": "结合第二段 Solio is a first-time mum 与第一段 arrived on January 31，以及第三段 first-time mother Kisima、January 5，可定位两位均为初产且都在一月份产下第一胎。"
+          }
+        ]
+      },
+      "q-2021-jia-027": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查根据原文信息对该保护中心未来做法的合理推断。",
+        "stemTranslationZh": "关于 Port Lympne Reserve，可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "犀牛区将向公众开放。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "犀牛区将向公众开放。",
+              "explanation": "原文未提及犀牛区是否会对公众开放，无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它旨在控制这些动物的数量。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Port Lympne Reserve, which runs a breeding (繁育) programme",
+              "sourceHighlight": "runs a breeding (繁育) programme",
+              "optionText": "It aims to control the number of the animals.",
+              "optionHighlight": "control the number of the animals",
+              "explanation": "原文说该中心运营繁育项目以增加黑犀牛数量，选项说其目的是“控制（减少）数量”，方向相反，黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-b-1",
+                "quote": "which runs a breeding (繁育) programme",
+                "anchor": "中心运营繁育项目以扩大种群"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它将继续与世界自然基金会合作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "According to the World Wildlife Fund",
+              "optionText": "It will continue to work with the World Wildlife Fund.",
+              "matchType": "exact",
+              "relationNote": "原文只是引用世界自然基金会的数据（According to the World Wildlife Fund），并未提及双方有合作关系，选项借“World Wildlife Fund”这一原词设钩，诱导读者误以为存在持续合作。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-b-4",
+                "quote": "According to the World Wildlife Fund",
+                "anchor": "仅引用世界自然基金会的数据"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它的一些犀牛可能会被送往野外保护区。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-b-3",
+                "quote": "it is too early to tell if the calves will make good candidates to be returned to protected areas of the wild",
+                "anchor": "幼崽是否适合放归野外保护区尚待判断"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Some of its rhinos may be sent to the protected wild areas.",
+            "sourceRole": "correctOption",
+            "targetText": "it is too early to tell if the calves will make good candidates to be returned to protected areas of the wild",
+            "targetParagraphId": "para-2021-jia-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "选项 sent to the protected wild areas 是原文 returned to protected areas of the wild 的同义替换；原文“too early to tell if”暗示存在这种可能性，故可推断 may be sent。"
+          }
+        ]
+      },
+      "q-2021-jia-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者刚搬到伦敦不久时的处境与感受这一细节。",
+        "stemTranslationZh": "关于作者刚搬到伦敦不久后的情况，我们可以了解到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他感到失望。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-c-1",
+                "quote": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
+                "anchor": "felt at a loss and out of place"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他放弃了自己的爱好。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Within a couple of years, I’d given it up.",
+              "sourceEntity": "after the family moved to Washington (when 15)",
+              "optionText": "He gave up his hobby.",
+              "optionEntity": "soon after he moved to London (when 9)",
+              "explanation": "放弃滑板发生在15岁搬到华盛顿之后，而题干问的是9岁刚搬到伦敦不久，时间与情境错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-3",
+                "quote": "Within a couple of years, I’d given it up.",
+                "anchor": "given it up in Washington"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他喜欢那里的天气。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
+              "sourceHighlight": "felt at a loss and out of place",
+              "optionText": "He liked the weather there.",
+              "optionHighlight": "liked the weather",
+              "explanation": "原文说作者失去了蓝天而感到失落，伦敦是灰蒙蒙的早晨；选项却说他喜欢那里的天气，与原文情感相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-1",
+                "quote": "arrived at Heathrow, London on a gray January morning",
+                "anchor": "gray January morning"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他与家人产生了分歧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He had disagreements with his family.",
+              "explanation": "原文只说全家都很快适应、唯独作者格格不入，并未提及作者与家人有任何分歧，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He felt disappointed.",
+            "sourceRole": "correctOption",
+            "targetText": "I felt at a loss and out of place",
+            "targetParagraphId": "para-2021-jia-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "选项用 felt disappointed 概括原文 felt at a loss and out of place（失落、格格不入）的负面情绪。"
+          }
+        ]
+      },
+      "q-2021-jia-029": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "根据上下文推测滑手暗语\"Safe! Safe! Safe!\"在该场景下的含义。",
+        "stemTranslationZh": "画线词\"Safe! Safe! Safe!\"最可能是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "小心点！",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Safe",
+              "optionText": "Be careful!",
+              "matchType": "wordFamily",
+              "relationNote": "Safe 字面与\"安全/小心\"相关，诱导考生按字面理解为提醒小心，但文中此处是成功落地后伙伴的欢呼喝彩，并非提醒注意安全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "when I landed the trick, my friends beat their boards loud, shouting: “Safe! Safe! Safe!”",
+                "anchor": "shouting after he landed the trick"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "干得漂亮！",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "when I landed the trick, my friends beat their boards loud, shouting: “Safe! Safe! Safe!”",
+                "anchor": "shouted after landing the trick"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "Safe meant cool.",
+                "anchor": "Safe meant cool"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "没门！",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "No way!",
+              "explanation": "原文将 Safe 解释为 cool、hello、don't worry，且此处为成功落地后的喝彩，毫无\"拒绝/不可能\"之意，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "别担心！",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "It meant don’t worry about it.",
+              "sourceEntity": "Safe used when Toby comforted the author after he got hurt",
+              "optionText": "Don't worry!",
+              "optionEntity": "Safe shouted in celebration after landing the trick",
+              "explanation": "Safe 确有\"别担心\"之义，但那是托比在作者受伤时安慰的场景；画线处是成功落地后的喝彩，对应的是\"干得漂亮\"而非\"别担心\"，两处情境错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "Safe, man. Safe. A few minutes later, when I landed the trick",
+                "anchor": "don't worry when hurt vs cheering when landed"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Well done!",
+            "sourceRole": "correctOption",
+            "targetText": "when I landed the trick, my friends beat their boards loud, shouting: “Safe! Safe! Safe!”",
+            "targetParagraphId": "para-2021-jia-reading-c-2",
+            "relationType": "locationCue",
+            "note": "画线处的语境是 landed the trick 后伙伴 beat their boards 欢呼，结合 Safe meant cool 可推出此处 Safe 表示\"干得漂亮\"的喝彩。"
+          }
+        ]
+      },
+      "q-2021-jia-030": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查作者重返伦敦后喜欢在Southbank消磨时光的原因。",
+        "stemTranslationZh": "作者重返伦敦后，为什么喜欢在Southbank消磨时光？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了加入滑板运动。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Weaving (穿梭) among the kids who rushed by on their boards, I found my way to the beam.",
+              "sourceHighlight": "Weaving (穿梭) among the kids",
+              "optionText": "To join the skateboarding.",
+              "optionHighlight": "join the skateboarding",
+              "explanation": "原文写作者只是在滑板少年中穿梭、走到横杆边坐下观看，并未亲自下场滑板；选项说\"加入滑板\"与其旁观的实际行为相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-4",
+                "quote": "tourists and Londoners stopped to watch the skaters",
+                "anchor": "stopped to watch the skaters"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了结交新朋友。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To make new friends.",
+              "explanation": "原文只写作者重返旧地、走到横杆边并与一名少年简短交流，并未表明他来Southbank的目的是结交新朋友，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了学习更多技巧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "landing tricks",
+              "optionText": "To learn more tricks.",
+              "matchType": "wordFamily",
+              "relationNote": "trick 一词出自第二段作者少年时学滑板技巧的描写，借原文词钩误导；重返伦敦时作者已是旁观者，并非来学新技巧。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "landing tricks, being a good skater",
+                "anchor": "tricks from his skating youth"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了重温童年时光。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-c-4",
+                "quote": "I found myself wandering down to Southbank, spending hours there.",
+                "anchor": "wandering back, spending hours there"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-jia-reading-c-4",
+                "quote": "“I was a local here 20 years ago,” I told him.",
+                "anchor": "I was a local here 20 years ago"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To relive his childhood days.",
+            "sourceRole": "correctOption",
+            "targetText": "I found myself wandering down to Southbank, spending hours there.",
+            "targetParagraphId": "para-2021-jia-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "作者不自觉地 wandering down to Southbank 并花数小时在那里，又说 I was a local here 20 years ago，可推断他是来 relive his childhood days（重温童年）。"
+          }
+        ]
+      },
+      "q-2021-jia-031": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查全文主旨与作者想要传达的信息。",
+        "stemTranslationZh": "作者在文中似乎想传达什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "孩子应该学习一门第二语言。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "We spoke our own language.",
+              "optionText": "Children should learn a second language.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 our own language 指滑手圈的暗语（如 Safe），借 language 一词诱导考生联想到\"学第二语言\"，并非全文主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "We spoke our own language.",
+                "anchor": "our own language = skater slang"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "运动对孩子的健康是必要的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Sport is necessary for children's health.",
+              "explanation": "文章虽以滑板运动为载体，但通篇讲的是归属与认同，从未涉及运动与健康的关系，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "孩子需要一种归属感。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-c-1",
+                "quote": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
+                "anchor": "out of place before finding belonging"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2021-jia-reading-c-2",
+                "quote": "I soon made friends with the local skaters. We spoke our own language.",
+                "anchor": "made friends, spoke our own language"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "看世界对孩子来说是必须的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "we packed up our home in Los Angeles and arrived at Heathrow, London on a gray January morning.",
+              "sourceHighlight": "packed up our home in Los Angeles and arrived at Heathrow, London",
+              "optionText": "Seeing the world is a must for children.",
+              "optionHighlight": "Seeing the world is a must",
+              "explanation": "作者随家迁居只是故事背景，文章主旨是归属感；选项把个人经历过度拔高为\"孩子必须见世面\"的普遍主张，范围拔高。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-c-1",
+                "quote": "we packed up our home in Los Angeles and arrived at Heathrow, London",
+                "anchor": "moving as background, not the theme"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Children need a sense of belonging.",
+            "sourceRole": "correctOption",
+            "targetText": "I felt at a loss and out of place. Until I made a discovery.",
+            "targetParagraphId": "para-2021-jia-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "全文由 out of place（无归属）到 made friends、spoke our own language（找到归属），首尾以 Safe 呼应，主旨即 a sense of belonging（归属感）。"
+          }
+        ]
+      },
+      "q-2021-jia-032": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查作者对胜利者制定的“天才俱乐部”准入标准所持的态度。",
+        "stemTranslationZh": "作者如何看待胜利者制定的加入“天才俱乐部”的标准？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们是不公平的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-d-3",
+                "quote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others.",
+                "anchor": "俱乐部之外的天才贡献被忽视和拒绝"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2021-jia-reading-d-3",
+                "quote": "those victors set the standards for admission to the genius club",
+                "anchor": "胜利者自定标准"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们是保守的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "胜利者的标准是保守的",
+              "explanation": "原文未提及该标准“保守（conservative）”，作者批评的是其不公平地排斥圈外人，并非守旧，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们是客观的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others.",
+              "sourceHighlight": "unacknowledged and rejected",
+              "optionText": "They're objective.",
+              "optionHighlight": "objective",
+              "explanation": "标准排斥并拒绝圈外人的贡献，明显是主观偏见的体现，与“客观（objective）”态度相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-d-3",
+                "quote": "they were unacknowledged and rejected by others",
+                "anchor": "被忽视和拒绝"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们是严格的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "胜利者的标准是严格的",
+              "explanation": "原文未提及标准“严格（strict）”，作者强调的是标准带有偏见、不公平，而非严苛，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "unfair",
+            "sourceRole": "correctOption",
+            "targetText": "they were unacknowledged and rejected by others",
+            "targetParagraphId": "para-2021-jia-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "选项用 unfair 概括作者态度，原文用 unacknowledged and rejected（圈外天才贡献被忽视、被拒绝）体现标准的不公平。"
+          }
+        ]
+      },
+      "q-2021-jia-033": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对《科学》杂志研究的推断，重点理解女孩的信念与行为受何影响。",
+        "stemTranslationZh": "从《科学》杂志的研究中我们可以推断出关于女孩的什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "她们认为自己很聪明。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "girls are less likely than boys to say that members of their gender (性别) are “really, really smart”",
+              "sourceHighlight": "less likely than boys to say that members of their gender",
+              "optionText": "They think themselves smart.",
+              "optionHighlight": "think themselves smart",
+              "explanation": "原文说女孩比男孩更不愿认为本性别成员“非常非常聪明”，与“认为自己聪明”意思相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-d-4",
+                "quote": "girls are less likely than boys to say that members of their gender (性别) are “really, really smart”",
+                "anchor": "女孩更不愿认为本性别很聪明"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "她们仰慕伟大的思想家。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "女孩仰慕伟大的思想家",
+              "explanation": "原文只提到大思想者可能因此气馁，并未说女孩仰慕（look up to）伟大思想家，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "她们比男孩更早察觉性别差异。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "女孩比男孩更早察觉性别差异",
+              "explanation": "原文说女孩在六岁时开始持有并按此信念行事，但并未将女孩与男孩在“察觉时间早晚”上做比较，该比较属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "她们容易受到社会观念的影响。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-d-4",
+                "quote": "the study found that girls act on that belief: Around age six they start to avoid activities said to be for children who are “really, really smart”",
+                "anchor": "女孩按该信念行事，回避被说是给聪明孩子的活动"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "likely to be influenced by social beliefs",
+            "sourceRole": "correctOption",
+            "targetText": "girls act on that belief: Around age six they start to avoid activities said to be for children who are “really, really smart”",
+            "targetParagraphId": "para-2021-jia-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "选项的 influenced by social beliefs 对应原文 act on that belief（按社会上关于性别的信念行事并回避相关活动），属同义替换式推断。"
+          }
+        ]
+      },
+      "q-2021-jia-034": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查为何公众如今能知道更多天才，定位文末关于全球通讯的原因句。",
+        "stemTranslationZh": "为什么公众知道了更多的天才？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "全球通讯的改善。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-d-5",
+                "quote": "In a wired world with constant global communication, we’re all positioned to see flashes of genius wherever they appear.",
+                "anchor": "互联世界的全球通讯让人们随处看到天才"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "对女性的歧视减少。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "对女性的歧视减少使更多天才为公众所知",
+              "explanation": "原文将更多天才被看到归因于全球通讯，并未说是因为对女性的歧视减少，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "对胜利者观念的接受。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "the more we will see that social factors (因素) like gender, race, and class do not determine the appearance of genius",
+              "sourceHighlight": "do not determine the appearance of genius",
+              "optionText": "Acceptance of victors' concepts.",
+              "optionHighlight": "Acceptance of victors' concepts",
+              "explanation": "原文表明人们越来越认识到社会因素并不决定天才，这是对胜利者排他观念的否定，而非“接受”，方向相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-d-5",
+                "quote": "social factors (因素) like gender, race, and class do not determine the appearance of genius",
+                "anchor": "社会因素不决定天才出现"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "人们社会地位的变化。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "人们社会地位的变化使更多天才为公众所知",
+              "explanation": "原文未提及人们“社会地位发生变化（changes in social positions）”，把天才更多被看见归因于此属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Improved global communication",
+            "sourceRole": "correctOption",
+            "targetText": "In a wired world with constant global communication, we’re all positioned to see flashes of genius wherever they appear.",
+            "targetParagraphId": "para-2021-jia-reading-d-5",
+            "relationType": "paraphrase",
+            "note": "选项 Improved global communication 对应原文 a wired world with constant global communication（互联世界、持续的全球通讯），正是让人们随处看到天才的原因。"
+          }
+        ]
+      },
+      "q-2021-jia-035": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的概括，选出最佳标题。",
+        "stemTranslationZh": "本文最佳标题是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "天才们想法相似",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "天才们想法相似",
+              "explanation": "全文强调天才形式多样、不由社会因素决定，并未论证天才“想法相似”，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "天才有多种形式",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2021-jia-reading-d-5",
+                "quote": "the more we will see that social factors (因素) like gender, race, and class do not determine the appearance of genius",
+                "anchor": "天才不由性别、种族、阶层决定，故形式多样"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-2021-jia-reading-d-3",
+                "quote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief",
+                "anchor": "天才也来自俱乐部之外的多元群体"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "天才与智力",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "future geniuses come from those with “intelligence, creativity, perseverance (毅力) , and simple good fortune, who are able to change the world.”",
+              "sourceHighlight": "intelligence, creativity, perseverance (毅力) , and simple good fortune",
+              "optionText": "Genius and Intelligence",
+              "optionHighlight": "Intelligence",
+              "explanation": "智力只是文中提到的天才特质之一，以“天才与智力”为题以偏概全，未能涵盖性别、种族、阶层等不决定天才这一核心主旨，范围偏窄。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-d-5",
+                "quote": "intelligence, creativity, perseverance (毅力) , and simple good fortune",
+                "anchor": "天才特质不止智力"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "天才与运气",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "future geniuses come from those with “intelligence, creativity, perseverance (毅力) , and simple good fortune, who are able to change the world.”",
+              "sourceHighlight": "simple good fortune",
+              "optionText": "Genius and Luck",
+              "optionHighlight": "Luck",
+              "explanation": "好运（good fortune）仅是文末并列提到的因素之一，以“天才与运气”为题只抓住细枝末节，无法概括全文关于天才形式多样、不由社会因素决定的主旨，范围偏窄。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2021-jia-reading-d-5",
+                "quote": "simple good fortune",
+                "anchor": "好运只是因素之一"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Genius Takes Many Forms",
+            "sourceRole": "correctOption",
+            "targetText": "social factors (因素) like gender, race, and class do not determine the appearance of genius",
+            "targetParagraphId": "para-2021-jia-reading-d-5",
+            "relationType": "paraphrase",
+            "note": "标题 Genius Takes Many Forms（天才有多种形式）概括了原文 social factors ... do not determine the appearance of genius（天才不由性别、种族、阶层决定）所传达的多元主旨。"
+          }
+        ]
+      }
+    }
+  }
+}

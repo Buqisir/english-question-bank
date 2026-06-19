@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2020-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-jia-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-jia-seven-choices": {
+      "overview": "本文是一篇说明文，围绕一次性塑料（single-use plastic）对环境与人体健康的危害展开。开头以厨房和办公室随处可见的塑料制品引入话题，随后用统计数据说明塑料产量失控增长，再分别论述塑料对海洋生物、对儿童健康的危害，最后聚焦塑料中的化学物质 BPA 并给出建议。七选五的五个空分别承担引出话题、补充数据、分论点起始等衔接功能。",
+      "discourseStructure": {
+        "summary": "全文遵循“引入话题—摆出数据—分层论述危害（海洋—健康—化学物质）”的说明文结构。每个分论点段落多以一个总起句开头，正文随后用 For example、A recent report 等展开，因此空格主要出现在段首作主题句或紧跟数据句作补充。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Single-use plastic everywhere",
+            "paragraphIds": [
+              "para-2020-jia-seven-title",
+              "para-2020-jia-seven-p1"
+            ],
+            "summary": "由身边随处可见的塑料制品列举切入，点明这些都是一次性塑料这一热点话题，并提出减少一次性塑料使用的呼吁。"
+          },
+          {
+            "unitId": "unit-statistics",
+            "heading": "Plastic production out of control",
+            "paragraphIds": [
+              "para-2020-jia-seven-p2",
+              "para-2020-jia-seven-p3"
+            ],
+            "summary": "用统计数据说明塑料自20世纪50年代以来产量失控增长，并指出海洋环境正因人类的日常塑料丢弃而受到重创。"
+          },
+          {
+            "unitId": "unit-ocean",
+            "heading": "Harm to marine life",
+            "paragraphIds": [
+              "para-2020-jia-seven-p4"
+            ],
+            "summary": "论述塑料消费直接影响海洋生物，幼鱼误食塑料碎屑会破坏食物链。"
+          },
+          {
+            "unitId": "unit-health",
+            "heading": "Harm to human health",
+            "paragraphIds": [
+              "para-2020-jia-seven-p5",
+              "para-2020-jia-seven-p6"
+            ],
+            "summary": "转向塑料对人体尤其是儿童健康的危害，指出加热时食品添加剂会损害激素与发育，并锁定塑料中的化学物质 BPA，给出避免微波加热等建议。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2020-jia-036": {
+      "blankId": "blank-2020-jia-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "water bottles",
+        "to-go coffee cups",
+        "straws",
+        "plastic grocery bags",
+        "single-serve coffee pods"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-jia-seven-title",
+        "beforeQuote": "single-serve coffee pods and produce bags.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "These",
+          "signalSide": "option",
+          "targetText": "water bottles, to-go coffee cups, straws, plastic grocery bags",
+          "relation": "These 复指前文罗列的一长串塑料制品，构成回指衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "single-serve coffee pods and produce bags",
+          "signalSide": "context-before",
+          "targetText": "These are all examples",
+          "relation": "空前以多个名词并列收尾，正是 These / examples 所指代的对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "single-use plastic products",
+          "signalSide": "option",
+          "targetText": "plastic- water bottles ... produce bags",
+          "relation": "选项以 single-use plastic products 概括前文所列的一次性塑料制品，词汇场吻合。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "段尾罗列了大量塑料制品，G 用 These 回指这些制品并将其概括为 single-use plastic products，同时点明这是当下热点话题，自然收束本段。",
+        "matchedClues": [
+          {
+            "contextSide": "water bottles, to-go coffee cups, straws, plastic grocery bags",
+            "optionSide": "These are all examples of single-use plastic products",
+            "relation": "These / examples 回指前文并列的塑料制品清单。"
+          },
+          {
+            "contextSide": "下一段 examine some statistics ... single-use plastic footprint",
+            "optionSide": "single-use plastic products, which is a hot topic nowadays",
+            "relation": "G 点出 single-use plastic 这一话题，为下文展开统计与危害论述铺垫。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 提出“停止使用塑料”是一句呼吁，但段尾需要的是回指前文清单的总结句，且下段明说‘移除所有塑料并不现实’，与 D 的口号相悖。"
+        }
+      ],
+      "teachingNote": "段尾出现名词并列清单时，优先选含 These/examples 等回指词、能概括前文清单的概括句。"
+    },
+    "q-2020-jia-037": {
+      "blankId": "blank-2020-jia-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "popularity of plastic",
+        "growing out of control",
+        "no sign of slowing down",
+        "overusing plastic"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-jia-seven-p2",
+        "beforeQuote": "the popularity of plastic, which began rising in the 1950s, is growing out of control.",
+        "afterQuote": "And there’s no sign of slowing down"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "growing out of control",
+          "signalSide": "context-before",
+          "targetText": "overusing plastic",
+          "relation": "空前 growing out of control 与选项 overusing plastic 同指塑料用量失控这一话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "overusing plastic containers",
+          "signalSide": "option",
+          "targetText": "popularity of plastic ... out of control",
+          "relation": "选项的 overusing 呼应前句塑料流行度失控，承接上文。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no sign of slowing down",
+          "signalSide": "context-after",
+          "targetText": "concerned about the results",
+          "relation": "空后强调毫无放缓迹象，正是人们 concerned about the results 的缘由，话题场一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "前句指出塑料流行度失控、后句强调毫无放缓迹象，C 用 People are concerned about the results of overusing plastic 承上启下，表达人们对塑料滥用后果的担忧。",
+        "matchedClues": [
+          {
+            "contextSide": "growing out of control / no sign of slowing down",
+            "optionSide": "concerned about the results of overusing plastic containers",
+            "relation": "失控与无放缓正是引发担忧的原因，话题场吻合。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 给出 8.2 trillion kilograms 的具体数字，看似与后文 another 12 trillion kilograms 形成数量对照而很诱人，但本空更需承接‘失控’并引出担忧的概括句。"
+        }
+      ],
+      "teachingNote": "空处夹在两句同义的‘失控/无放缓’之间时，选能承接该语义场、表达态度或概括的句子。"
+    },
+    "q-2020-jia-038": {
+      "blankId": "blank-2020-jia-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "produced worldwide",
+        "320 million tons of plastic annually",
+        "daily disposal of plastic",
+        "another 12 trillion kilograms"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-jia-seven-p4",
+        "beforeQuote": "",
+        "afterQuote": "For example, newborn fish are mistaking tiny bits of plastic waste for food."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "8.2 trillion kilograms of plastic",
+          "signalSide": "option",
+          "targetText": "320 million tons of plastic annually",
+          "relation": "选项给出塑料产量数字，与前段 320 million tons / another 12 trillion kilograms 同属塑料产量数据场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "produced around the world",
+          "signalSide": "option",
+          "targetText": "produced worldwide by 2050",
+          "relation": "produced around the world 与前文 produced worldwide 用词高度一致，承接塑料产量主线。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "tiny bits of plastic waste",
+          "signalSide": "context-after",
+          "targetText": "8.2 trillion kilograms of plastic",
+          "relation": "空后以幼鱼误食塑料碎屑举例，呼应空处所述海量塑料的去向，话题场连续。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本段以 For example 引出幼鱼误食塑料的例子，B 用 8.2 trillion kilograms of plastic have been produced 作段首，承接上文产量数据并为下文塑料流入环境的举例提供铺垫。",
+        "matchedClues": [
+          {
+            "contextSide": "320 million tons of plastic annually / produced worldwide",
+            "optionSide": "8.2 trillion kilograms of plastic have been produced around the world",
+            "relation": "同为塑料产量数字，用词 produced ... world 紧密呼应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 直接点出塑料消费影响海洋生命，与下文 newborn fish 例子语义最贴，但 F 已用于第40空，本空按官方答案承接产量数据线。"
+        }
+      ],
+      "teachingNote": "段首空若紧跟 For example 的例证，需选能被该例子佐证、并承接上文数据线索的概括句。"
+    },
+    "q-2020-jia-039": {
+      "blankId": "blank-2020-jia-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "when heated",
+        "food additives",
+        "growth and development",
+        "children of being fat"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-jia-seven-p5",
+        "beforeQuote": "",
+        "afterQuote": "A recent report suggests that when heated, certain food additives (添加剂) can damage hormones, growth and development, as well as increase chances for children of being fat."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "children’s health",
+          "signalSide": "option",
+          "targetText": "children of being fat",
+          "relation": "选项 children’s health 与空后 children ... fat 同指儿童健康话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in microwaves",
+          "signalSide": "option",
+          "targetText": "when heated",
+          "relation": "选项 in microwaves（微波加热）与空后 when heated 同属加热致害的语义场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "when heated",
+          "signalSide": "context-after",
+          "targetText": "Using plastic containers in microwaves",
+          "relation": "空后 when heated 与微波加热塑料容器对应，佐证选项所述危害。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本段转向塑料对儿童健康的危害，A 用 Using plastic containers in microwaves is also harmful to children’s health 作主题句，下文用 when heated、food additives、children of being fat 加以具体说明。",
+        "matchedClues": [
+          {
+            "contextSide": "when heated / children of being fat",
+            "optionSide": "Using plastic containers in microwaves is also harful to children’s health",
+            "relation": "微波加热与儿童健康正是下文报告的具体内容，话题场一致。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 提到化学物质 BPA，也与塑料健康危害相关而具迷惑性，但 E 引出的是下一段对 BPA 的具体说明，本段焦点是微波加热对儿童的危害。"
+        }
+      ],
+      "teachingNote": "段首主题句要与本段具体例证（here: 加热、儿童肥胖）在话题场上对齐，用 also 衔接上一危害点。"
+    },
+    "q-2020-jia-040": {
+      "blankId": "blank-2020-jia-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "plastic containers and metal cans",
+        "warm food and drinks",
+        "placing plastics in the dishwasher",
+        "marine environment"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-jia-seven-p6",
+        "beforeQuote": "",
+        "afterQuote": "It is found in plastic containers and metal cans."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "context-after",
+          "targetText": "Our plastic consumption",
+          "relation": "空后以 It 作主语指代空处提出的不可数主题（塑料相关物质/消费），需空句先给出 It 的所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "plastic consumption",
+          "signalSide": "option",
+          "targetText": "plastic containers and metal cans",
+          "relation": "选项 plastic consumption 与空后 plastic containers 同属塑料使用话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "plastic containers and metal cans",
+          "signalSide": "context-after",
+          "targetText": "Our plastic consumption is directly affecting the life",
+          "relation": "空后列举塑料容器等具体载体，呼应选项对塑料消费影响的概括。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "F 用 Our plastic consumption is directly affecting the life in the ocean 作段首概括句，引出下文对塑料容器、微波加热等具体使用场景的告诫，并为空后 It 提供所指。",
+        "matchedClues": [
+          {
+            "contextSide": "plastic containers and metal cans / warm food and drinks",
+            "optionSide": "Our plastic consumption is directly affecting the life",
+            "relation": "段内对塑料容器使用的具体描述佐证选项所言塑料消费的影响，话题场吻合。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 提到 BPA 是塑料生产中的化学物质，与空后 It is found in plastic containers and metal cans 似乎能用 It 回指 BPA 而很诱人，但本空按官方答案选 F 作段首概括句。"
+        }
+      ],
+      "teachingNote": "段首空若空后用 It 等代词起句，需先选能为该代词提供单数所指、并概括全段的主题句。"
+    }
+  }
+}

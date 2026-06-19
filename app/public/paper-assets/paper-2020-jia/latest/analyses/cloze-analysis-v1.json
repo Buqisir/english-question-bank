@@ -1,0 +1,882 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2020-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-jia-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-jia-cloze": {
+      "overview": "记叙文：爱狗人士 Scott Poore 为了帮助一只迟迟无人领养的狗 Queen，搬进犬舍与它同住以引起公众关注，最终 Queen 被成功领养。",
+      "affectiveArc": "情感走向先抑后扬：先写 Queen 日渐失去希望、令人揪心，再写 Poore 不离不弃地行动并引发关注，结局狗狗终获温暖的家，由忧转喜。"
+    }
+  },
+  "blanks": {
+    "q-2020-jia-041": {
+      "blankId": "blank-2020-jia-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "with the aim of doing 是固定搭配，表示“怀着……的目的”，与后文“帮助无人要的小狗被领养”这一目的语义契合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "assistance",
+          "meaning": "援助、帮助（指外来的协助）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "exception",
+          "meaning": "例外"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "name",
+          "meaning": "名义、名字"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with the",
+          "signalSide": "context-before",
+          "targetText": "with the aim of helping",
+          "relation": "with the aim of 为固定搭配，aim 是其中的核心名词，搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "of helping unwanted young dogs get adopted",
+          "signalSide": "context-after",
+          "targetText": "the aim of helping",
+          "relation": "of helping... 说明这个“目的”就是帮助小狗被领养，与 aim 语义呼应。"
+        }
+      ],
+      "teachingNote": "看到 with the ___ of doing，先想固定搭配 with the aim of。"
+    },
+    "q-2020-jia-042": {
+      "blankId": "blank-2020-jia-042",
+      "blankNo": 42,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "Poore 搬进犬舍专心陪伴 Queen，是最专注投入的室友，devoted（忠诚专注的）与全文“每天陪伴、不离不弃”的形象一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "expected",
+          "meaning": "预期的、意料之中的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "experienced",
+          "meaning": "有经验的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "talented",
+          "meaning": "有才华的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "roommate",
+          "signalSide": "context-after",
+          "targetText": "the most devoted roommate",
+          "relation": "修饰 roommate 的形容词，devoted roommate 指最尽心陪伴的室友，修饰关系合理。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "moved into the dog’s kennel",
+          "signalSide": "context-after",
+          "targetText": "devoted",
+          "relation": "下文 Poore 搬进犬舍同住，印证他是最专注投入(devoted)的室友。"
+        }
+      ],
+      "teachingNote": "判定情感/品质形容词要回到全文人物行为里找一致证据。"
+    },
+    "q-2020-jia-043": {
+      "blankId": "blank-2020-jia-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文说他“熟悉所有动物”，只有常来的人才会如此熟悉，regular visitor（常客）与“familiar with all”形成因果照应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "patient",
+          "meaning": "有耐心的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "curious",
+          "meaning": "好奇的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cautious",
+          "meaning": "谨慎的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "visitor at the shelter",
+          "signalSide": "context-after",
+          "targetText": "a regular visitor",
+          "relation": "修饰 visitor，regular visitor 即常客，修饰关系合理。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "he is familiar with all of the",
+          "signalSide": "context-after",
+          "targetText": "regular visitor",
+          "relation": "因为是常客(regular)，所以熟悉收容所所有动物，前后构成因果照应。"
+        }
+      ],
+      "teachingNote": "形容词空格常靠下一句的结果反推前因。"
+    },
+    "q-2020-jia-044": {
+      "blankId": "blank-2020-jia-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "故事发生在动物收容所，他熟悉的是“所有的动物”，下句紧接 little Queen（一只狗）正是其中之一，animals 与话题场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "keepers",
+          "meaning": "饲养员、看管人"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "investors",
+          "meaning": "投资者"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "colleagues",
+          "meaning": "同事"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "familiar with all of the",
+          "signalSide": "context-before",
+          "targetText": "familiar with all of the animals",
+          "relation": "be familiar with 的宾语是 all of the animals，他熟悉收容所所有动物，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "the shelter",
+          "signalSide": "context-before",
+          "targetText": "all of the animals",
+          "relation": "收容所(shelter)的语义场指向动物，animals 与之呼应。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "little Queen in particular",
+          "signalSide": "context-after",
+          "targetText": "all of the animals",
+          "relation": "下句 little Queen（狗）是“所有动物”中的一个，echo 印证 animals。"
+        }
+      ],
+      "teachingNote": "名词空格优先回到话题场，看下句举例对象属于哪一类。"
+    },
+    "q-2020-jia-045": {
+      "blankId": "blank-2020-jia-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "stolen one’s heart 是固定表达，表示“偷走某人的心、深得喜爱”，与“little Queen 特别让他牵挂”的语境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "broken",
+          "meaning": "（使）心碎"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "understood",
+          "meaning": "理解（他的心）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lost",
+          "meaning": "失去（他的心）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his heart",
+          "signalSide": "context-after",
+          "targetText": "stolen his heart",
+          "relation": "动词宾语是 his heart，steal one’s heart 为固定搭配，施受关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "in particular",
+          "signalSide": "context-before",
+          "targetText": "stolen his heart",
+          "relation": "in particular 强调 Queen 格外讨他喜欢，正合 steal one's heart 的褒义。"
+        }
+      ],
+      "teachingNote": "宾语是 heart 时优先调动 steal/win one’s heart 等固定搭配。"
+    },
+    "q-2020-jia-046": {
+      "blankId": "blank-2020-jia-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他天天来访，亲眼观察到 Queen“似乎在失去希望”，notice（注意到、察觉到）与基于直接观察得出的结论搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "check",
+          "meaning": "核查、检查"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suspect",
+          "meaning": "怀疑、猜想"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "imagine",
+          "meaning": "想象"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that Queen seemed to be",
+          "signalSide": "context-after",
+          "targetText": "notice that Queen seemed",
+          "relation": "notice 接 that 从句，宾语为“Queen 似乎在失去希望”，搭配合理。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "every single day",
+          "signalSide": "context-after",
+          "targetText": "began to notice",
+          "relation": "后文每天陪伴，长期观察才会 notice 到这种变化。"
+        }
+      ],
+      "teachingNote": "由“亲眼长期观察”得出的发现用 notice，而非猜测类动词。"
+    },
+    "q-2020-jia-047": {
+      "blankId": "blank-2020-jia-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "“losing hope in finding forever home”指对找到永久的家失去希望，下文 giving up（放弃）正是失去希望的表现，hope 与之呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "happiness",
+          "meaning": "幸福、快乐"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "freedom",
+          "meaning": "自由"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "energy",
+          "meaning": "精力、活力"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in finding forever home",
+          "signalSide": "context-after",
+          "targetText": "losing hope in finding",
+          "relation": "losing hope in doing 指对做某事失去希望，hope 与 in finding forever home 搭配合理。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "giving up",
+          "signalSide": "context-after",
+          "targetText": "losing hope",
+          "relation": "下文 giving up 是“失去希望”的同义印证。"
+        }
+      ],
+      "teachingNote": "名词空格可由下文同义/反义回声锁定，giving up 指向 hope。"
+    },
+    "q-2020-jia-048": {
+      "blankId": "blank-2020-jia-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他作为常客“每天去看望”Queen，与前文 regular visitor、every single day 一致，visiting（看望、探访）搭配 Queen 合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "walking",
+          "meaning": "遛（狗）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "instructing",
+          "meaning": "指导、教导"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "training",
+          "meaning": "训练"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "every single day for over a year",
+          "signalSide": "context-after",
+          "targetText": "visiting Queen every single day",
+          "relation": "动作宾语是 Queen，visit Queen 每天探访，施受关系成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a __43__ visitor",
+          "signalSide": "context-before",
+          "targetText": "visiting Queen",
+          "relation": "前文 visitor 与 visiting 同根呼应，他是来探访的常客。"
+        }
+      ],
+      "teachingNote": "动词空格回到人物身份(visitor)寻找同根线索。"
+    },
+    "q-2020-jia-049": {
+      "blankId": "blank-2020-jia-049",
+      "blankNo": 49,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "他天天陪伴、亲眼可见 Queen 在放弃，obviously（明显地）修饰 see，强调这种放弃显而易见。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "naturally",
+          "meaning": "自然地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "anxiously",
+          "meaning": "焦虑地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "still",
+          "meaning": "仍然"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "see her giving up",
+          "signalSide": "context-after",
+          "targetText": "can obviously see her giving up",
+          "relation": "obviously 修饰 see，表明亲眼可见 Queen 在放弃，修饰关系合理。"
+        }
+      ],
+      "teachingNote": "副词修饰 see 时，先看“看到的事实是否明显可辨”。"
+    },
+    "q-2020-jia-050": {
+      "blankId": "blank-2020-jia-050",
+      "blankNo": 50,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "由 used to（过去常常）与下文“now she just lies in her bed”的今昔对比可知，过去他来时 Queen 会非常兴奋，excited 与现在的消沉形成反差。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "concerned",
+          "meaning": "担忧的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "amazed",
+          "meaning": "惊讶的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disappointec",
+          "meaning": "失望的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "used to get so",
+          "signalSide": "context-before",
+          "targetText": "get so excited",
+          "relation": "get so excited 指变得非常兴奋，excited 作 get 的表语，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "when I would arrive",
+          "signalSide": "context-after",
+          "targetText": "used to get so excited when I would arrive",
+          "relation": "used to ... when 引出过去他来时的常态，与下文 now 形成今昔对比。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "now she just lies in her bed",
+          "signalSide": "context-after",
+          "targetText": "excited",
+          "relation": "now 句的消沉状态反衬过去 excited 的兴奋，形成反差。"
+        }
+      ],
+      "teachingNote": "出现 used to ... now ... 时，按今昔反差定情感形容词。"
+    },
+    "q-2020-jia-051": {
+      "blankId": "blank-2020-jia-051",
+      "blankNo": 51,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "Queen 躺在床上，只能仰头望着站着的主人，stares up at me（抬头盯着我看）与“lies in her bed”的低位姿态以及后文 look out of her window 的消沉神态一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "stands up",
+          "meaning": "站起来"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "looks down",
+          "meaning": "向下看"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "jumps down",
+          "meaning": "跳下来"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at me",
+          "signalSide": "context-after",
+          "targetText": "stares up at me",
+          "relation": "stare up at me 指抬头盯着我看，搭配 at me 成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "lies in her bed",
+          "signalSide": "context-before",
+          "targetText": "stares up",
+          "relation": "Queen 躺着，位置低，故只能向上(up)看主人。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "up",
+          "signalSide": "option",
+          "targetText": "stares up",
+          "relation": "up 表示由低处向上，与躺卧的低位姿态吻合。"
+        }
+      ],
+      "teachingNote": "短语动词选方向词时，按人物所处的高低位置定 up/down。"
+    },
+    "q-2020-jia-052": {
+      "blankId": "blank-2020-jia-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "a means of doing 是固定搭配，表示“做某事的手段/方式”，搬进犬舍正是“提高 Queen 处境关注度”的手段。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reward",
+          "meaning": "奖励、回报"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "consequence",
+          "meaning": "后果"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "symbol",
+          "meaning": "象征、标志"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of raising awareness",
+          "signalSide": "context-after",
+          "targetText": "a means of raising awareness",
+          "relation": "a means of doing 为固定搭配，of raising awareness 是其逻辑宾语，搭配成立。"
+        }
+      ],
+      "teachingNote": "as a ___ of doing 优先想 a means of doing（手段）。"
+    },
+    "q-2020-jia-053": {
+      "blankId": "blank-2020-jia-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他要搬进犬舍住，先“收拾、打包”行李箱再搬进去，pack a suitcase（收拾行李箱）为常用搭配，与 moved into 的搬家动作顺序一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "brought",
+          "meaning": "带来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "purchased",
+          "meaning": "购买"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "delivered",
+          "meaning": "递送、运送"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a suitcase",
+          "signalSide": "context-after",
+          "targetText": "packed a suitcase",
+          "relation": "动词宾语是 suitcase，pack a suitcase 收拾行李箱，施受关系成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "moved into the dog’s kennel",
+          "signalSide": "context-after",
+          "targetText": "packed a suitcase and moved into",
+          "relation": "先打包行李再搬进犬舍，pack 与 move into 的搬家动作顺序连贯。"
+        }
+      ],
+      "teachingNote": "宾语是 suitcase 且后接搬家动作时优先 pack。"
+    },
+    "q-2020-jia-054": {
+      "blankId": "blank-2020-jia-054",
+      "blankNo": 54,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "由转折 but 可知住在犬舍同时兼顾工作并不轻松，tough（艰难的）与“managing his work while also living at the shelter”的为难处境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "meaningful",
+          "meaning": "有意义的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "vital",
+          "meaning": "至关重要的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unusual",
+          "meaning": "不寻常的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "managing his work while also living at the shelter",
+          "signalSide": "context-after",
+          "targetText": "tough managing his work",
+          "relation": "tough 描述边工作边住收容所之难，修饰这一处境合理。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but he is",
+          "signalSide": "context-after",
+          "targetText": "tough",
+          "relation": "but 表转折，前半承认 tough（难），后半才说仍下定决心留下。"
+        }
+      ],
+      "teachingNote": "句中 but 转折常把前半锁成“困难/负面”形容词。"
+    },
+    "q-2020-jia-055": {
+      "blankId": "blank-2020-jia-055",
+      "blankNo": 55,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "be determined to do 是固定搭配，表示“下定决心做某事”，与 but 后“尽管艰难仍要留在犬舍直到 Queen 被领养”的坚定语气一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "satisfied",
+          "meaning": "满意的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "inspired",
+          "meaning": "受到鼓舞的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honoured",
+          "meaning": "感到荣幸的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to stay in the kennel until someone adopts Queen",
+          "signalSide": "context-after",
+          "targetText": "determined to stay",
+          "relation": "be determined to do 固定搭配，接 to stay...，搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but he is",
+          "signalSide": "context-before",
+          "targetText": "determined",
+          "relation": "but 转折后强调尽管艰难仍坚定(determined)留下。"
+        }
+      ],
+      "teachingNote": "be ___ to do 处后接坚持性动作时优先 determined。"
+    },
+    "q-2020-jia-056": {
+      "blankId": "blank-2020-jia-056",
+      "blankNo": 56,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "settle into the kennel 表示“住进、安顿到犬舍里”，与上文 moved into the dog’s kennel 的搬入动作一脉相承，earlier this week 表明刚安顿下来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cleared up",
+          "meaning": "清理干净、（天气）放晴"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cared for",
+          "meaning": "照顾、照料"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "met with",
+          "meaning": "遭遇、会见"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the kennel",
+          "signalSide": "context-after",
+          "targetText": "settled into the kennel",
+          "relation": "settle into the kennel 安顿进犬舍，宾语 the kennel 搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "moved into the dog’s kennel",
+          "signalSide": "context-before",
+          "targetText": "settled into the kennel",
+          "relation": "上文 moved into 与 settle into 同义呼应，指他住进犬舍。"
+        }
+      ],
+      "teachingNote": "短语动词回看上文同义动作(moved into)锁定 settle into。"
+    },
+    "q-2020-jia-057": {
+      "blankId": "blank-2020-jia-057",
+      "blankNo": 57,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "hit the headlines 是固定搭配，意为“成为头条新闻”，与“dozens of national news outlets”的媒体话题场吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "discussing",
+          "meaning": "讨论"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hearing",
+          "meaning": "听到"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "encouraging",
+          "meaning": "鼓励"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the headlines of dozens of national news outlets",
+          "signalSide": "context-after",
+          "targetText": "hitting the headlines",
+          "relation": "hit the headlines 为固定搭配，宾语 the headlines 搭配成立。"
+        }
+      ],
+      "teachingNote": "宾语是 headlines 时调动 hit the headlines（上头条）。"
+    },
+    "q-2020-jia-058": {
+      "blankId": "blank-2020-jia-058",
+      "blankNo": 58,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "全文围绕 get adopted（被领养）展开，此处“尚无 potential ___ 站出来”指还没有潜在的领养者，adopters 与 adopt 话题场呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "customers",
+          "meaning": "顾客"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donators",
+          "meaning": "捐赠者"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "employers",
+          "meaning": "雇主"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "someone adopts Queen",
+          "signalSide": "context-before",
+          "targetText": "potential adopters",
+          "relation": "上文 adopts 与 adopters 同根，领养话题场指向 adopters。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "have stepped forward",
+          "signalSide": "context-after",
+          "targetText": "potential adopters have stepped forward",
+          "relation": "potential adopters 作 stepped forward 的主语，指潜在领养者站出来，搭配合理。"
+        }
+      ],
+      "teachingNote": "名词空格回到核心动作(adopt)的同根词锁定身份名词。"
+    },
+    "q-2020-jia-059": {
+      "blankId": "blank-2020-jia-059",
+      "blankNo": 59,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "结尾狗狗终于获得温暖的家，是皆大欢喜的结局，delightfully（令人欣喜地）作句首状语，与前文 although no... 的转折后好转走向一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Increasingly",
+          "meaning": "越来越多地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Pitifully",
+          "meaning": "可怜地、令人同情地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Deliberately",
+          "meaning": "故意地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "this dog has finally been given a lowing home",
+          "signalSide": "context-after",
+          "targetText": "Delightfully this dog has finally been given a lowing home",
+          "relation": "delightfully 作句首状语修饰整句“狗终获温暖的家”，修饰关系合理。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "given a lowing home",
+          "signalSide": "context-after",
+          "targetText": "Delightfully this dog has finally been given",
+          "relation": "终获温暖的家是喜事，delightfully 与这一积极结局情感一致。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "finally",
+          "signalSide": "context-after",
+          "targetText": "Delightfully",
+          "relation": "finally 标志苦尽甘来，正合 delightfully 的欣喜口吻。"
+        }
+      ],
+      "teachingNote": "句首情感副词由整句的结局是喜是悲来定调。"
+    },
+    "q-2020-jia-060": {
+      "blankId": "blank-2020-jia-060",
+      "blankNo": 60,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "“his path crossed with that of a woman”是固定表达 one’s path crosses with，指狗的人生轨迹与那位女士的轨迹相交，从而被领养，path 与 crossed 搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "view",
+          "meaning": "观点、视野"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mind",
+          "meaning": "头脑、心思"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "story",
+          "meaning": "故事"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "crossed with that of a woman",
+          "signalSide": "context-after",
+          "targetText": "his path crossed with",
+          "relation": "path 作 crossed 的主语，one’s path crosses with 表轨迹相交，搭配成立。"
+        }
+      ],
+      "teachingNote": "与 cross 搭配表“(人生)轨迹相交”的名词是 path。"
+    }
+  }
+}
