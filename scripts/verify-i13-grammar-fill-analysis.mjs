@@ -9,7 +9,7 @@
  *
  * Critical cases:
  *  - C1: whether/if✓, Whether/whether✓, were worn✓, worn-for-wore✗, wrong-answer✗
- *  - C2: 16-leaf membership, parent-as-leaf✗, blank_type mismatch✗, role/path conditionality
+ *  - C2: 17-leaf membership, parent-as-leaf✗, blank_type mismatch✗, role/path conditionality
  *  - C3: evidence exact-substring, no blank marker in signalText (SW-2)
  *  - MF-2: post-publish ON-DISK analyses/grammar-fill-analysis-v1.json present
  */
@@ -66,7 +66,7 @@ function assertPromptContract() {
   assert('prompt names schemaVersion grammar-fill-analysis-v1', prompt.includes('grammar-fill-analysis-v1'))
   // promptVersion
   assert('prompt names promptVersion grammar-fill-analysis-v1', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v1'))
-  // All 16 leaf facet keys must be named
+  // All 17 leaf facet keys must be named
   for (const leaf of [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
@@ -75,6 +75,7 @@ function assertPromptContract() {
     'grammar-fill.given.derivation.noun-to-adj',
     'grammar-fill.given.derivation.verb-to-noun',
     'grammar-fill.given.derivation.verb-to-adj',
+    'grammar-fill.given.derivation.adjective-to-noun',
     'grammar-fill.given.pronoun',
     'grammar-fill.given.numeral',
     'grammar-fill.no-hint.preposition',
@@ -113,7 +114,7 @@ function assertRegistryContract() {
   const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v1.json')
   const registry = JSON.parse(raw)
   assert('registry is an array', Array.isArray(registry))
-  assert('registry has exactly 16 leaves', registry.length === 16)
+  assert('registry has exactly 17 leaves', registry.length === 17)
 
   const EXPECTED_LEAVES = [
     'grammar-fill.given.verb.finite',
@@ -123,6 +124,7 @@ function assertRegistryContract() {
     'grammar-fill.given.derivation.noun-to-adj',
     'grammar-fill.given.derivation.verb-to-noun',
     'grammar-fill.given.derivation.verb-to-adj',
+    'grammar-fill.given.derivation.adjective-to-noun',
     'grammar-fill.given.pronoun',
     'grammar-fill.given.numeral',
     'grammar-fill.no-hint.preposition',
@@ -419,7 +421,7 @@ async function assertAnalysisValidation() {
   assert('C1: answer conflict does not retry (called exactly once)', answerConflictTrials === 1, `called ${answerConflictTrials} times`)
 
   // ============================================================
-  // C2 — facetKey validation (16 leaves, parent rejection, blank_type match)
+  // C2 — facetKey validation (17 leaves, parent rejection, blank_type match)
   // ============================================================
 
   // C2: bad facetKey (not in registry)
@@ -428,7 +430,7 @@ async function assertAnalysisValidation() {
     const firstKey = Object.keys(bad.blanks)[0]
     bad.blanks[firstKey].facetKey = 'grammar-fill.given.verb.imperative'
     return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
-  }, /16 个合法叶节点|facetKey/)
+  }, /17 个合法叶节点|facetKey/)
 
   // C2: parent node used as facetKey
   await assertRejects('C2: parent-as-leaf blocks', () => {

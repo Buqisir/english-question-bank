@@ -65,6 +65,7 @@ The hint word's POS = entry into which `given` sub-facet:
 - `noun-to-adj`: hint is noun, blank needs adjective
 - `verb-to-noun`: hint is verb, blank needs noun
 - `verb-to-adj`: hint is verb, blank needs adjective (`-ing` = 令人… / `-ed` = 感到…)
+- `adjective-to-noun`: hint is adjective, blank needs noun (介词后 / 缺主宾 / 限定词后 → 名词；常见后缀 `-ity` curious→curiosity / `-ness` happy→happiness / `-ce` confident→confidence / `-ment`)
 
 **Adjective → adverb:** this is the `grammar-fill.given.adjective` facet's primary action (变副词), NOT `derivation`.
 
@@ -137,7 +138,7 @@ Every `blanks[questionId]` MUST include:
 - `blankNo` — integer blank number (56–65)
 - `blankType` — exactly `given` or `no-hint` (from input)
 - `hint` — the given base word (string) for `given` blanks; `null` for `no-hint` blanks (from input)
-- `facetKey` — exactly one of the **16 leaf** keys listed below
+- `facetKey` — exactly one of the **17 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `path` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
@@ -145,7 +146,7 @@ Every `blanks[questionId]` MUST include:
 - `evidence` — array with ≥1 item
 - `teachingNote` — 中文一句：可迁移的解题动作
 
-## The 16 Valid `facetKey` Leaves
+## The 17 Valid `facetKey` Leaves
 
 Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.derivation`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys.
 
@@ -157,6 +158,7 @@ grammar-fill.given.adjective
 grammar-fill.given.derivation.noun-to-adj
 grammar-fill.given.derivation.verb-to-noun
 grammar-fill.given.derivation.verb-to-adj
+grammar-fill.given.derivation.adjective-to-noun
 grammar-fill.given.pronoun
 grammar-fill.given.numeral
 grammar-fill.no-hint.preposition

@@ -6,7 +6,7 @@
  *
  *  Step 0 — Facet framework registry (GATE-2):
  *    - grammarFillFacetRegistry.ts exists, exports FACET_FRAMEWORKS
- *    - drift guard: its 16 keys EXACTLY equal server grammar-fill-facets-v1.json keys
+ *    - drift guard: its 17 keys EXACTLY equal server grammar-fill-facets-v1.json keys
  *    - non-finite has a framework.table; every framework.steps is non-empty
  *
  *  Step 1 — Adapter (GATE-1 + MF-1):
@@ -89,7 +89,7 @@ const serverFacets = JSON.parse(
 const serverKeys = serverFacets.map((f) => f.facet_key).sort()
 const registryKeys = Object.keys(FACET_FRAMEWORKS).sort()
 
-assert('Step 0: registry has exactly 16 facets', registryKeys.length === 16,
+assert('Step 0: registry has exactly 17 facets', registryKeys.length === 17,
   `found: ${registryKeys.length}`)
 assert('Step 0: drift guard — registry keys EXACTLY equal server JSON keys',
   JSON.stringify(registryKeys) === JSON.stringify(serverKeys),

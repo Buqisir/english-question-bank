@@ -359,7 +359,7 @@ console.log('=== Req 13: frozen-contract diff fence ===')
 {
   // frozen analysis prompt + validator + facet registry must be untouched by this cut.
   const facetsRegistry = readFileSync(path.join(rootDir, 'server/paper-import-ai/grammar-fill-facets-v1.json'), 'utf8')
-  assert('Req13: 16-leaf facet registry intact (no verb axes leaked in)', !facetsRegistry.includes('tense') && !facetsRegistry.includes('voice') && !facetsRegistry.includes('agreement'))
+  assert('Req13: 17-leaf facet registry intact (no verb axes leaked in)', !facetsRegistry.includes('tense') && !facetsRegistry.includes('voice') && !facetsRegistry.includes('agreement'))
 
   const analyzeSrc = readFileSync(path.join(rootDir, 'server/paper-import-ai/analyzeGrammarFill.mjs'), 'utf8')
   assert('Req13: analyzeGrammarFill validator not extended with verb axes', !analyzeSrc.includes('grammar-fill-verb-profile') && !/\btense\b/.test(analyzeSrc) && !/\bvoice\b/.test(analyzeSrc))
