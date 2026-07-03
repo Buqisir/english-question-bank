@@ -73,6 +73,7 @@ const registry = {
   'scripts/verify-home-default-feed.mjs',
   'scripts/verify-error-copy-mainline.mjs',
   'scripts/verify-ai-server-key-fallback.mjs',
+  'scripts/verify-auth-gate.mjs',
   ],
 }
 
