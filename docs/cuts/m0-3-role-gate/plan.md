@@ -24,10 +24,18 @@
 
 - `defineRoute(method, pattern, handle, options = {})`：冻结对象加
   `ownerOnly: Boolean(options.ownerOnly)`。
-- `runRoutes(routes, ctx)`：匹配成功后、调用 `handle` 前检查：
+- `runRoutes(routes, ctx, { beforeHandle } = {})`：匹配成功后、调用
+  `handle` 前先跑可选的 `beforeHandle(route, ctx)`，返回 truthy 视为
+  已处理（return true 短路）。**403 策略不写在 router 模块里**：
+  api.mjs 的 runRoutes 调用点传入 owner-gate 回调——
   `route.ownerOnly && ctx.context.authMode === 'enforced' &&
-  ctx.context.session?.role !== 'owner'` → 403 JSON
-  `{ error: 'forbidden' }`，return true（视为已处理）。
+  ctx.context.session?.role !== 'owner'` → 写 403 JSON
+  `{ error: 'forbidden' }` 并返回 true。
+  （PM 修订 2026-07-03：H1 验收闸 verify-h1-router-skeleton.mjs 断言
+  router/index.mjs 永不含 `auth` 字样——router=纯分发骨架。机制/策略
+  拆分后 H1 闸原样保留；集中执行不变（唯一调用点）；PA MF-3 实质
+  ——authMode 四象限下发 + `=== 'enforced'` 正判——不变，只是正判
+  代码住在 api.mjs 回调里。）
 - **不要**用「session 为空 = 开放模式」推断：主 handler 必须把
   `authMode: 'open' | 'enforced'` 显式放进 context（改
   `applyAuthGate` 返回值 server/api.mjs:4139-4180 与 context 组装
