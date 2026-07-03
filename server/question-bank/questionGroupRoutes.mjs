@@ -23,7 +23,8 @@ function parseRequestArgs(input) {
 export function createQuestionGroupRoutes() {
   return [
     defineRoute('GET', /^\/api\/question-groups$/, ({ response, context }) => {
-      context.sendJson(response, 200, { questionGroups: context.listQuestionGroups() })
+      const userId = context.resolveDataUserId(context)
+      context.sendJson(response, 200, { questionGroups: context.listQuestionGroups(userId) })
     }),
 
     defineRoute(

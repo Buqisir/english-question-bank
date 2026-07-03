@@ -394,10 +394,17 @@ async function planQuestionBankStewardSearch(query, apiKey, requestId, thinkingM
   }
 }
 
-async function questionBankStewardSearch(query, apiKey, requestId, thinkingMode = false) {
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7 / PA MF-1): userId appended as the
+// 5th positional parameter (same reasoning as semanticSearchQuestionGroups — keeps the
+// existing 4-arg stub call sites in scripts/verify-h5i-steward-service.mjs unshifted) and
+// forwarded verbatim to the nested semanticSearchQuestionGroups call below.
+async function questionBankStewardSearch(query, apiKey, requestId, thinkingMode = false, userId) {
   const normalizedQuery = optionalString(query)
   if (!normalizedQuery) {
     throw new Error('请输入想让题库管家查找的问题。')
+  }
+  if (typeof userId !== 'string' || !userId) {
+    throw new Error('questionBankStewardSearch: userId is required')
   }
 
   const resolvedRequestId = requestId || randomUUID()
@@ -427,7 +434,7 @@ async function questionBankStewardSearch(query, apiKey, requestId, thinkingMode 
   }
 
   const semanticQuery = buildStewardSemanticQuery(normalizedQuery, plan)
-  const searchResult = await semanticSearchQuestionGroups(semanticQuery, key, `${resolvedRequestId}-search`, thinkingMode)
+  const searchResult = await semanticSearchQuestionGroups(semanticQuery, key, `${resolvedRequestId}-search`, thinkingMode, userId)
   const matches = applyStewardFiltersToMatches(searchResult.matches, plan).slice(0, QUESTION_BANK_STEWARD_TOP_K)
   const limitedSearchResult = {
     ...searchResult,

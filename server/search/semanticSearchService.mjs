@@ -360,10 +360,20 @@ function getReadingSearchSignalsForQuestionGroups(db, questionGroupIds) {
   return signalsByGroupId
 }
 
-async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMode = false) {
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7 / PA MF-1): userId appended as the
+// 5th positional parameter (not inserted earlier) so existing stub call sites in
+// scripts/verify-h5h-semantic-search.mjs / scripts/verify-h5i-steward-service.mjs that
+// pass exactly 4 args keep working with an explicit userId argument added, rather than
+// silently shifting every other positional arg. Required — this is the search-results
+// button-state seam that PA flagged as the AI-mode analogue of the M0-1 cross-user
+// button-state bug this plan cites.
+async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMode = false, userId) {
   const normalizedQuery = optionalString(query)
   if (!normalizedQuery) {
     throw new Error('请输入要检索的关键词或语义描述。')
+  }
+  if (typeof userId !== 'string' || !userId) {
+    throw new Error('semanticSearchQuestionGroups: userId is required')
   }
 
   const resolvedRequestId = requestId || randomUUID()
@@ -371,7 +381,7 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMo
   const db = openDatabase()
   let groups
   try {
-    const cards = selectQuestionGroupCards(db, '', [], getDraftSearchContext())
+    const cards = selectQuestionGroupCards(db, '', [], getDraftSearchContext(userId))
     const readingSignalsByGroupId = getReadingSearchSignalsForQuestionGroups(
       db,
       cards.map((group) => group.id),
