@@ -33,6 +33,15 @@ export type ConciergeSearchInput = {
    * which preserves the pre-cut behavior (local fallback whenever apiKey is empty).
    */
   serverKeyAvailable?: boolean
+  /**
+   * True when today's server-key AI daily quota is exhausted (cut m0-5-ai-daily-limit,
+   * GET /api/ai/status dailyLimit.exceeded). When true AND no client key is present,
+   * the search goes straight to the local keyword fallback — same as serverKeyAvailable
+   * being false, but with distinct fallback-reason / assistant-message text so a
+   * teacher can tell "no key configured" apart from "today's quota ran out". Defaults
+   * to false, which preserves pre-cut behavior.
+   */
+  dailyLimitExceeded?: boolean
   /** Whether to enable thinking mode for the steward DeepSeek calls. Defaults to false. */
   thinkingMode?: boolean
   /** Optional override for tests; defaults to the real ask call. */
@@ -1098,6 +1107,7 @@ export async function runConciergeSearch(
   const sentMessage = buildSentMessage(intent, input.pendingQuery)
   const apiKey = (input.apiKey || '').trim()
   const serverKeyAvailable = input.serverKeyAvailable ?? false
+  const dailyLimitExceeded = input.dailyLimitExceeded ?? false
   const thinkingMode = input.thinkingMode ?? false
   const doStewardCall = input.doStewardCall || askQuestionBankSteward
   const localDirectHits = highConfidenceLocalHits(input.questionGroups, intent)
@@ -1127,6 +1137,24 @@ export async function runConciergeSearch(
       sentMessage,
       source: 'fallback',
       fallbackReason: 'missing-api-key',
+      allWeak: hits.length > 0 && hits.every((hit) => hit.weak),
+    }
+  }
+
+  // cut m0-5-ai-daily-limit (C5): server key exists but today's quota is exhausted
+  // AND the teacher has not pasted their own key -> same local fallback path as
+  // missing-api-key, but with a distinct reason/message (teacher can tell "no key
+  // configured" apart from "AI ran out for today, back tomorrow").
+  if (!apiKey && dailyLimitExceeded) {
+    const hits = rankByKeywords(input.questionGroups, intent)
+    return {
+      kind: 'results',
+      hits,
+      assistantMessage: '今天的 AI 额度用完了，先用本地题库帮你找，明天自动恢复。',
+      query: intent,
+      sentMessage,
+      source: 'fallback',
+      fallbackReason: 'daily-limit-exceeded',
       allWeak: hits.length > 0 && hits.every((hit) => hit.weak),
     }
   }

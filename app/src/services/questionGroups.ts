@@ -433,6 +433,22 @@ export async function exportPdf(input: ExportPdfInput): Promise<ExportPdfResult>
   }
 }
 
+// cut m0-5-ai-daily-limit (C6): verify-question-group has no local fallback, so the
+// UI needs to distinguish "AI daily quota exhausted" from any other failure. The
+// server returns 429 + { error, code: 'ai-daily-limit-exceeded' } (server/ai-proxy/
+// routes.mjs). Kept local to this function rather than folded into the shared
+// errorMessageFromResponse/readErrorMessage helper (httpClient.ts), which many other
+// services reuse and whose signature stays untouched by this cut.
+export const AI_DAILY_LIMIT_EXCEEDED_CODE = 'ai-daily-limit-exceeded'
+
+export class AiDailyLimitExceededError extends Error {
+  code = AI_DAILY_LIMIT_EXCEEDED_CODE
+  constructor(message: string) {
+    super(message)
+    this.name = 'AiDailyLimitExceededError'
+  }
+}
+
 export async function verifyQuestionGroup(questionGroupId: string, apiKey: string, model: string, thinkingMode = false): Promise<import('../domain/questionBank').VerifyQuestionGroupResult> {
   const response = await fetch(apiPath('/api/ai/verify-question-group'), {
     body: JSON.stringify({ questionGroupId, apiKey, model, thinkingMode }),
@@ -440,7 +456,14 @@ export async function verifyQuestionGroup(questionGroupId: string, apiKey: strin
     method: 'POST',
   })
   if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to verify: ${response.status}`))
+    const fallbackMessage = `Failed to verify: ${response.status}`
+    if (response.status === 429) {
+      const data = (await response.clone().json().catch(() => null)) as { error?: string; code?: string } | null
+      if (data?.code === AI_DAILY_LIMIT_EXCEEDED_CODE) {
+        throw new AiDailyLimitExceededError(data.error || fallbackMessage)
+      }
+    }
+    throw new Error(await readErrorMessage(response, fallbackMessage))
   }
   return (await response.json()) as import('../domain/questionBank').VerifyQuestionGroupResult
 }

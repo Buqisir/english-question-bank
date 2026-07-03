@@ -98,15 +98,20 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   // holds its own DeepSeek key. Defaults false — pre-fetch-resolution searches behave
   // exactly like before this cut (honest degradation, no loading gate; plan.md §3).
   const [serverKeyAvailable, setServerKeyAvailable] = useState(false)
+  // cut m0-5-ai-daily-limit (C5): same mount-time probe now also reports whether
+  // today's server-key AI quota is exhausted. Defaults false (pre-fetch-resolution
+  // searches behave exactly like before this cut).
+  const [dailyLimitExceeded, setDailyLimitExceeded] = useState(false)
 
   const fetchDetail = input.detailFetchOverride || fetchQuestionGroupDetail
   const fetchStatus = input.aiStatusFetchOverride || fetchAiStatus
 
   useEffect(() => {
     let cancelled = false
-    fetchStatus().then((available) => {
+    fetchStatus().then((status) => {
       if (!cancelled) {
-        setServerKeyAvailable(available)
+        setServerKeyAvailable(status.serverKeyAvailable)
+        setDailyLimitExceeded(status.dailyLimitExceeded)
       }
     })
     return () => {
@@ -216,6 +221,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           questionGroups: input.questionGroups,
           apiKey: input.apiKey,
           serverKeyAvailable,
+          dailyLimitExceeded,
           thinkingMode: input.thinkingMode ?? false,
         })
         if (outcome.kind === 'clarification') {
@@ -249,6 +255,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
       input.searchOverride,
       input.thinkingMode,
       serverKeyAvailable,
+      dailyLimitExceeded,
     ],
   )
 
