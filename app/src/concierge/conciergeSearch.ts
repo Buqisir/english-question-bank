@@ -190,8 +190,15 @@ function escapeRegex(value: string): string {
 
 function extractReadingSectionLabel(group: QuestionGroupCard): string | null {
   const text = [group.section, group.source, group.title].join(' ')
-  const match = text.match(/阅读(?:理解)?\s*([A-D])/i)
-  return match ? match[1].toLowerCase() : null
+  // Real imported data stores the passage letter in `title` as bare English
+  // "Reading C" / "Passage C" — `group.section` is a generic paper-outline
+  // string ("第二部分 阅读 / 第一节 阅读理解") with no letter at all. Try the
+  // Chinese "阅读(理解)?C" form first (sample/legacy data), then the English
+  // "Reading/Passage C" form (real imported data).
+  const cnMatch = text.match(/阅读(?:理解)?\s*([A-D])/i)
+  if (cnMatch) return cnMatch[1].toLowerCase()
+  const enMatch = text.match(/\b(?:reading|passage)\s*([A-D])\b/i)
+  return enMatch ? enMatch[1].toLowerCase() : null
 }
 
 /**
@@ -333,7 +340,16 @@ function applyIntentHardFilters(
  *   general — everything else (title, summary, tags, hit sentence, ...).
  */
 type HaystackTiers = {
-  topic: string
+  /**
+   * Topic segments stay an ARRAY, not a joined string. Topic matching uses
+   * a stricter prefix/equal rule (see `topicSegmentMatchesToken`) that must
+   * run per-segment — joining segments into one string and substring-testing
+   * the whole blob would let a token match across a segment boundary (e.g.
+   * landing inside "人生态度" just because some other segment nearby
+   * contains "生"), which is exactly the false-positive this tier exists to
+   * avoid.
+   */
+  topic: string[]
   section: string
   place: string
   general: string
@@ -380,7 +396,7 @@ function buildWeightedHaystacks(group: QuestionGroupCard): HaystackTiers {
   ])
 
   return {
-    topic: topicSegments.filter(Boolean).map(normalize).join(' '),
+    topic: topicSegments.filter(Boolean).map(normalize),
     section: [group.section, ...letteredSectionAliases].filter(Boolean).map(normalize).join(' '),
     place: [group.region, group.paperName, String(group.year || '')]
       .filter(Boolean)
@@ -406,6 +422,24 @@ function tokenMatchesHaystack(haystack: string, token: string): boolean {
   return haystack.includes(token)
 }
 
+/**
+ * Topic-tier matching is intentionally STRICTER than the generic substring
+ * check every other tier uses. Plain substring matching let a query bigram
+ * like "生态" land inside an unrelated label such as "正确的人生态度" ("生态"
+ * IS a substring of "人生态度" — chars 2-3 — even though the label has
+ * nothing to do with ecology). A topic segment earns a match only when the
+ * token is the WHOLE segment or the segment's leading text — i.e. the token
+ * reads like the start of that specific topic word, not a coincidental
+ * embedded pair of characters:
+ *   "生态"  -> "生态环境" segment: match (prefix)
+ *   "生态"  -> "人生态度" segment: no match (embedded, not a prefix)
+ *   "生态环境" -> "生态环境" segment: match (equal)
+ */
+function topicSegmentMatchesToken(segment: string, token: string): boolean {
+  if (!segment || !token) return false
+  return segment === token || segment.startsWith(token)
+}
+
 /** Pick the topic label whose leaf/path text a matched token actually landed on. */
 function findMatchedTopicLabel(group: QuestionGroupCard, matchedTokens: string[]): TopicLabel | null {
   for (const label of group.topicLabels || []) {
@@ -413,7 +447,7 @@ function findMatchedTopicLabel(group: QuestionGroupCard, matchedTokens: string[]
       .filter(Boolean)
       .map(normalize)
     for (const token of matchedTokens) {
-      if (segments.some((segment) => tokenMatchesHaystack(segment, token))) {
+      if (segments.some((segment) => topicSegmentMatchesToken(segment, token))) {
         return label
       }
     }
@@ -436,6 +470,13 @@ function tokenLengthFactor(token: string): number {
   return 1
 }
 
+function matchesTier(tiers: HaystackTiers, tierKey: keyof HaystackTiers, token: string): boolean {
+  if (tierKey === 'topic') {
+    return tiers.topic.some((segment) => topicSegmentMatchesToken(segment, token))
+  }
+  return tokenMatchesHaystack(tiers[tierKey], token)
+}
+
 function scoreGroupAgainstTokens(
   group: QuestionGroupCard,
   tokens: string[],
@@ -447,7 +488,7 @@ function scoreGroupAgainstTokens(
   const matchedTokens: string[] = []
   for (const token of tokens) {
     const tierKey = (['topic', 'section', 'place', 'general'] as const).find((key) =>
-      tokenMatchesHaystack(tiers[key], token),
+      matchesTier(tiers, key, token),
     )
     if (!tierKey) continue
     hits += 1
@@ -459,11 +500,7 @@ function scoreGroupAgainstTokens(
   return { score, nonGeneralScore, hits, matchedTokens }
 }
 
-function rankKeywordCandidates(
-  groups: QuestionGroupCard[],
-  query: string,
-  options?: { requireIntentMatch?: boolean },
-): KeywordCandidate[] {
+function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): KeywordCandidate[] {
   const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
   if (tokens.length === 0) {
     return groups.map((group) => ({
@@ -476,7 +513,17 @@ function rankKeywordCandidates(
     }))
   }
   const intent = parseLocalIntent(query)
-  const pool = options?.requireIntentMatch ? applyIntentHardFilters(groups, intent) : groups
+  // Explicit dimensions (section letter / group type / region) hard-filter
+  // by default — a teacher who says "C 篇" or "全国甲卷" named a real
+  // constraint, and every caller (both the high-confidence local-direct
+  // path AND the last-resort no-API-key/steward-error fallback that
+  // teachers actually hit most often when no AI key is configured) should
+  // respect it. Only fall back to the unfiltered pool when the filter would
+  // eliminate every group — an unrelated query should never go empty just
+  // because the intent parser mis-fired.
+  const intentFilteredPool = applyIntentHardFilters(groups, intent)
+  const hasExplicitIntent = intent.sectionLetters.length > 0 || !!intent.groupType || !!intent.region
+  const pool = hasExplicitIntent && intentFilteredPool.length > 0 ? intentFilteredPool : groups
   const scored = pool.map((group) => {
     const { score, nonGeneralScore, hits, matchedTokens } = scoreGroupAgainstTokens(group, tokens)
     const yearBoost = intent.year && group.year === intent.year ? WEIGHT_BY_TIER.place : 0
@@ -498,12 +545,34 @@ function rankKeywordCandidates(
 }
 
 /**
+ * True for a tag that names a dimension (year / month / region / paper /
+ * source-type / group-type) rather than passage content. These are exactly
+ * the provenance tags real imports attach ("2025", "1月", "浙江卷", "真题",
+ * "完形填空", ...) — they duplicate what `sectionText`/`placeText` already
+ * render, so using one as the "讲X的" topic phrase produces nonsense like
+ * "讲2025的 完形填空" or "讲七选五的 七选五".
+ */
+function isDimensionShapedTag(tag: string): boolean {
+  const value = tag.trim()
+  if (!value) return true
+  if (/^\d{4}$/.test(value)) return true // bare year: "2025"
+  if (/^\d{1,2}月$/.test(value)) return true // bare month: "1月" / "6月"
+  if (/^(真题|模拟题|自建|其他|AI导题)$/.test(value)) return true // source-type provenance
+  if (Object.values(groupTypeLabel).includes(value)) return true // "完形填空" / "阅读理解" / ...
+  if (/卷$/.test(value)) return true // paper/region provenance: "浙江卷" / "全国甲卷" / "新课标Ⅰ卷"
+  if (/^(九省联考|新高考全国卷[一二三]?)$/.test(value)) return true // other bare provenance labels
+  return false
+}
+
+/**
  * When no topic label matched, fall back to a matched `tags` entry as the
- * "what this is about" phrase — a curated tag ("社区共享") reads like a
- * teacher wrote it; a raw bigram token ("态主") does not.
+ * "what this is about" phrase — a curated content tag ("社区共享") reads
+ * like a teacher wrote it; a dimension tag ("2025", "完形填空") does not —
+ * it just repeats what the section/place parts of the reason already say.
  */
 function findMatchedTag(group: QuestionGroupCard, matchedTokens: string[]): string | null {
   for (const tag of group.tags || []) {
+    if (isDimensionShapedTag(tag)) continue
     const normalizedTag = normalize(tag)
     if (!normalizedTag) continue
     if (matchedTokens.some((token) => tokenMatchesHaystack(normalizedTag, token))) {
@@ -520,6 +589,10 @@ function buildLocalReason(candidate: KeywordCandidate): string {
   // "讲生态环境的 C 篇" style — a space before the bare section letter reads
   // as a label ("C 篇"), not "C篇" glued to the preceding Chinese clause.
   const sectionText = section ? `${section.toUpperCase()} 篇` : (groupTypeLabel[group.groupType] || '')
+  // Only real content (a topic-label subtopic or a curated content tag)
+  // earns the "讲X的" phrasing. A pure dimension hit (year / 题型 / 篇位 /
+  // 地区, with nothing else recognized) has no content word to report —
+  // it renders as a plain "地区 年份 · 题型/篇位" line instead, below.
   const topicText =
     matchedTopicLabel?.subtopic ||
     matchedTopicLabel?.label.split('-').pop() ||
@@ -532,6 +605,12 @@ function buildLocalReason(candidate: KeywordCandidate): string {
     parts.push(`讲${topicText}的 ${sectionText}`)
   } else if (topicText) {
     parts.push(`讲${topicText}`)
+  } else if (placeText && sectionText) {
+    // Pure-dimension match (e.g. "2025 浙江卷", "全国甲卷 完形"): state the
+    // dimensions plainly, place first — no invented topic clause.
+    parts.push(placeText)
+    parts.push(sectionText)
+    return parts.join(' · ')
   } else if (sectionText) {
     parts.push(sectionText)
   }
@@ -587,16 +666,10 @@ function highConfidenceLocalHits(
   query: string,
   limit = 12,
 ): ConciergeSearchHit[] {
-  // Section / group-type / region are hard filters when the query names them
-  // explicitly ("2025 浙江卷", "七选五", "全国甲卷 完形") — a teacher who
-  // names a dimension explicitly wants that dimension respected, not
-  // "softly preferred". If the filter would eliminate every group (e.g. the
-  // intent parse mis-fires on an unrelated query), fall through to the
-  // unfiltered candidate set instead of returning zero results.
-  const filteredCandidates = rankKeywordCandidates(groups, query, { requireIntentMatch: true })
-  const candidates = filteredCandidates.length > 0
-    ? filteredCandidates
-    : rankKeywordCandidates(groups, query)
+  // rankKeywordCandidates already hard-filters by any explicit intent
+  // dimension (section letter / group type / region) when that filter
+  // yields at least one candidate — see its doc comment.
+  const candidates = rankKeywordCandidates(groups, query)
   const topScore = candidates[0]?.score ?? 0
   const topNonGeneralScore = candidates[0]?.nonGeneralScore ?? 0
 
