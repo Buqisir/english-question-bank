@@ -259,6 +259,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   <li key={paper.key}>
                     <ConciergePaperRow
                       paper={paper}
+                      variant="feed"
                       expanded={expandedPaperKey === paper.key}
                       basketIds={basketIds}
                       onTogglePaper={togglePaper}

@@ -200,6 +200,19 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
     /onSimilar=\{\(group\)\s*=>\s*\{\s*void triggerSimilar\(group\)\s*\}\}/.test(feedBlockMatch),
     '',
   )
+  // 浏览态不是搜索结果——feed 行禁用「命中」措辞（QA 抓出的搜索腔）。
+  assert('feed rows pass variant="feed"', /variant="feed"/.test(feedBlockMatch), '')
+  const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
+  assert(
+    'ConciergePaperRow renders a hit-free badge for the feed variant',
+    /variant === 'feed'\s*\?\s*`\$\{paper\.hitCount\} 个篇章`/.test(paperRow),
+    '',
+  )
+  assert(
+    'search variant keeps 命中 badge wording (default unchanged)',
+    /badgePrefix\(paper\.hitContext\.scope\)/.test(paperRow),
+    '',
+  )
 }
 
 // ------------------------------------------------------------------ Test 10
