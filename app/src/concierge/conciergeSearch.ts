@@ -38,6 +38,14 @@ export type ConciergeSearchHit = {
   group: QuestionGroupCard
   /** Steward-supplied reason or local keyword reason. Never displayed as a score. */
   reason: string
+  /**
+   * True when this hit has no real dimension/topic signal (no topicLabel /
+   * 篇位 / 题型 / 地区 match) and only cleared the noise floor on scattered
+   * general-field substring hits. Steward-sourced hits are never weak — this
+   * only applies to the local keyword fallback. Absent/false means "normal
+   * confidence"; UI treats `undefined` the same as `false`.
+   */
+  weak?: boolean
 }
 
 export type ConciergeSearchOutcome =
@@ -59,6 +67,15 @@ export type ConciergeSearchOutcome =
       sentMessage: string
       source: 'fallback'
       fallbackReason: string
+      /**
+       * True when every hit in `hits` is `weak` (only fires when `hits` is
+       * non-empty — an empty result never reaches here, it takes the
+       * `kind: 'results', hits: []` shape instead so the desk can render the
+       * true vacuum state + starter chips). Lets the notice bar distinguish
+       * "no exact match, here is what's topically close" from an ordinary
+       * confident fallback match.
+       */
+      allWeak: boolean
     }
   | {
       kind: 'clarification'
@@ -173,6 +190,52 @@ export function tokenize(query: string): string[] {
   return Array.from(new Set(tokens))
 }
 
+/**
+ * Restart cut ⑤ helper: the subset of `tokenize(query)`'s output that are
+ * "whole run" tokens — a user-typed, delimiter-bounded unit (a whitespace/
+ * punctuation-separated CJK run in full, or a non-CJK segment) — as opposed
+ * to a `cjkBigrams` fragment CARVED OUT of a longer connected run.
+ *
+ * This distinction only matters for the noise-floor check below
+ * (`isAboveNoiseFloor`): a real 2-character Chinese word the teacher
+ * actually typed as its own unit ("写作" in "写作 教学") is genuine content
+ * signal, even though it is only 2 characters long. A 2-character bigram
+ * carved out of a longer garbled run ("存在" out of "不存在的题目") is a loose
+ * net with real collision risk and carries no such guarantee — that is
+ * exactly why `cjkBigrams` exists (to let a query land on a *substring* of a
+ * longer haystack phrase) and exactly why it must not, on its own, promote a
+ * candidate out of "noise". Does not change `tokenize()`'s public contract
+ * or output shape — cut ①'s tokenize assertions are unaffected.
+ */
+function wholeRunTokensOf(query: string): Set<string> {
+  const raw = query
+    .replace(/[，。、；：！？,.!?;:()（）【】"'《》<>\\/|]/g, ' ')
+    .split(/\s+/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+
+  const wholeTokens = new Set<string>()
+  for (const segment of raw) {
+    let cjkRun = ''
+    const flushCjkRun = () => {
+      if (!cjkRun) return
+      if (!CJK_STOPWORDS.has(cjkRun)) wholeTokens.add(cjkRun)
+      cjkRun = ''
+    }
+    for (const ch of segment) {
+      if (isCjkChar(ch)) {
+        cjkRun += ch
+      } else {
+        flushCjkRun()
+      }
+    }
+    flushCjkRun()
+    const nonCjkOnly = /^[^一-鿿]+$/.test(segment)
+    if (nonCjkOnly) wholeTokens.add(segment)
+  }
+  return wholeTokens
+}
+
 type KeywordCandidate = {
   group: QuestionGroupCard
   hits: number
@@ -182,6 +245,14 @@ type KeywordCandidate = {
   matchedTokens: string[]
   /** Best-matching topic-label leaf, used to build a human reason line. */
   matchedTopicLabel: TopicLabel | null
+  /**
+   * True when at least one of `matchedTokens` is a whole-run token the
+   * teacher actually typed as its own delimiter-bounded unit (see
+   * `wholeRunTokensOf`), as opposed to only a `cjkBigrams` fragment carved
+   * out of a longer connected run. Restart cut ⑤ noise-floor input — see
+   * `isAboveNoiseFloor`.
+   */
+  hasWholeRunMatch: boolean
 }
 
 function escapeRegex(value: string): string {
@@ -510,8 +581,10 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
       nonGeneralScore: 0,
       matchedTokens: [],
       matchedTopicLabel: null,
+      hasWholeRunMatch: false,
     }))
   }
+  const wholeRunTokens = new Set(Array.from(wholeRunTokensOf(query)).map(normalize))
   const intent = parseLocalIntent(query)
   // Explicit dimensions (section letter / group type / region) hard-filter
   // by default — a teacher who says "C 篇" or "全国甲卷" named a real
@@ -534,6 +607,7 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
       nonGeneralScore: nonGeneralScore + yearBoost,
       matchedTokens,
       matchedTopicLabel: findMatchedTopicLabel(group, matchedTokens),
+      hasWholeRunMatch: matchedTokens.some((token) => wholeRunTokens.has(token)),
     }
   })
   return scored
@@ -582,8 +656,14 @@ function findMatchedTag(group: QuestionGroupCard, matchedTokens: string[]): stri
   return null
 }
 
-/** Build a teacher-facing reason line from what actually matched — no raw token dump. */
-function buildLocalReason(candidate: KeywordCandidate): string {
+/**
+ * Build a teacher-facing reason line from what actually matched — no raw
+ * token dump. `weak` (restart cut ⑤) softens the wording for a hit that
+ * cleared the noise floor but not the confidence floor: the reason must not
+ * claim a "命中" (hit) the search isn't actually confident about, so it uses
+ * "可能相关" phrasing instead of asserting a topic/keyword match.
+ */
+function buildLocalReason(candidate: KeywordCandidate, weak = false): string {
   const { group, matchedTopicLabel, matchedTokens } = candidate
   const section = extractReadingSectionLabel(group)
   // "讲生态环境的 C 篇" style — a space before the bare section letter reads
@@ -602,45 +682,38 @@ function buildLocalReason(candidate: KeywordCandidate): string {
 
   const parts: string[] = []
   if (topicText && sectionText) {
-    parts.push(`讲${topicText}的 ${sectionText}`)
+    parts.push(weak ? `可能与${topicText}相关的 ${sectionText}` : `讲${topicText}的 ${sectionText}`)
   } else if (topicText) {
-    parts.push(`讲${topicText}`)
-  } else if (placeText && sectionText) {
+    parts.push(weak ? `可能与${topicText}相关` : `讲${topicText}`)
+  } else if (placeText && sectionText && !weak) {
     // Pure-dimension match (e.g. "2025 浙江卷", "全国甲卷 完形"): state the
-    // dimensions plainly, place first — no invented topic clause.
+    // dimensions plainly, place first — no invented topic clause. Gated on
+    // `!weak` — a weak candidate did not actually earn a dimension match
+    // (place/section text here is read straight off the group's own
+    // fields, not off what the query tokens matched), so claiming it here
+    // would contradict the "可能相关" honesty this wording exists for.
     parts.push(placeText)
     parts.push(sectionText)
     return parts.join(' · ')
-  } else if (sectionText) {
+  } else if (sectionText && !weak) {
     parts.push(sectionText)
   }
-  if (placeText) parts.push(placeText)
+  if (placeText && !weak) parts.push(placeText)
 
   if (parts.length > 0) return parts.join(' · ')
-  if (matchedTokens.length > 0) return `匹配关键词：${matchedTokens.join('、')}`
-  return '关键词匹配'
+  if (matchedTokens.length > 0) {
+    return weak ? `可能相关：${matchedTokens.join('、')}` : `匹配关键词：${matchedTokens.join('、')}`
+  }
+  return weak ? '可能相关' : '关键词匹配'
 }
 
 function toSearchHit(candidate: KeywordCandidate): ConciergeSearchHit {
+  const weak = !isConfidentCandidate(candidate)
   return {
     group: candidate.group,
-    reason: buildLocalReason(candidate),
+    reason: buildLocalReason(candidate, weak),
+    weak,
   }
-}
-
-/** Keyword fallback ranking: count hits across known card fields + tags + topicLabels. */
-export function rankByKeywords(
-  groups: QuestionGroupCard[],
-  query: string,
-  limit = 12,
-): ConciergeSearchHit[] {
-  const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
-  if (tokens.length === 0) {
-    return groups.slice(0, limit).map((group) => ({ group, reason: '近期题组' }))
-  }
-  return rankKeywordCandidates(groups, query)
-    .slice(0, limit)
-    .map(toSearchHit)
 }
 
 /**
@@ -660,6 +733,92 @@ const HIGH_CONFIDENCE_SCORE_FLOOR = 5
  * is strong enough evidence on its own.
  */
 const GENERAL_ONLY_PHRASE_SCORE_FLOOR = 8
+
+/**
+ * A candidate is noise — not even "weak" — only when its ENTIRE signal is
+ * general-tier (title/summary/tags/... — no topicLabel / 篇位 / 题型 / 地区
+ * signal at all, i.e. `nonGeneralScore === 0`) AND none of its matched
+ * tokens is a whole-run token (`hasWholeRunMatch` — see `wholeRunTokensOf`).
+ * This is exactly the shape a garbled/gibberish query produces against a
+ * large real bank: one or more isolated 2-character CJK bigrams (weight 1
+ * general-tier x length factor 1 = 1 each), CARVED OUT of a longer garbled
+ * run, coincidentally substring-match some field of some group. Two
+ * overlapping bigrams cut from the SAME short garbled span (e.g. "存在的"
+ * yields both "存在" and "在的") can sum to a nonzero score even though they
+ * carry exactly one coincidence's worth of honest signal — a raw score
+ * floor alone cannot tell that apart from two independent hits, and a bare
+ * length check cannot tell a carved 2-char bigram apart from a real,
+ * teacher-typed 2-char word ("写作" in "写作 教学"). `hasWholeRunMatch` is
+ * the qualitative check that gets this right: it only credits a token the
+ * teacher actually typed as its own delimiter-bounded unit, never a bigram
+ * fragment invented by the CJK segmentation workaround.
+ *
+ * Any candidate with `nonGeneralScore > 0` — even a single section-letter
+ * hit ("C" alone, section-tier weight 3) that stays well below the
+ * confidence floor — already carries a real, if partial, dimension signal
+ * and must never be reclassified as noise; it is weak at worst (mirrors the
+ * `highConfidenceLocalHits` doc comment: "a bare section letter... still
+ * deserves the steward's fuzzier semantic read", now also "still deserves
+ * an honest weak card" for the local fallback).
+ *
+ * "随便 试试看" landing partly on a group's summary is NOT the noise case
+ * either: "试试看" is itself a whole 3-char query segment, so it passes
+ * `hasWholeRunMatch` on its own and reads as an actual, if generic, keyword
+ * match — honestly labelled weak, not dropped as noise.
+ */
+
+/**
+ * True when a candidate has a real dimension/topic signal (clears the
+ * existing high-confidence floors) OR at least clears the noise floor above.
+ * `isConfidentCandidate` decides "not weak"; a candidate that is neither
+ * confident nor above the noise floor is dropped entirely by the callers
+ * below (never becomes a `weak: true` hit).
+ *
+ * Two-floor model, shared by `highConfidenceLocalHits` (the strict "resolve
+ * locally without asking the steward" gate) and the fallback ranking (the
+ * looser "still show it, but say so honestly" gate):
+ *   - confident: non-general score clears HIGH_CONFIDENCE_SCORE_FLOOR, or
+ *     total score clears GENERAL_ONLY_PHRASE_SCORE_FLOOR (dense/long phrase
+ *     match — same rule `highConfidenceLocalHits` always used).
+ *   - weak (not confident, but has ANY non-general signal, or
+ *     `hasWholeRunMatch` on its general-tier signal): shown, but flagged so
+ *     the UI can say "可能相关" instead of implying a real hit.
+ *   - noise (purely general-tier AND no whole-run token matched): dropped
+ *     before it ever reaches the UI.
+ */
+function isConfidentCandidate(candidate: KeywordCandidate): boolean {
+  return (
+    candidate.nonGeneralScore >= HIGH_CONFIDENCE_SCORE_FLOOR ||
+    candidate.score >= GENERAL_ONLY_PHRASE_SCORE_FLOOR
+  )
+}
+
+function isAboveNoiseFloor(candidate: KeywordCandidate): boolean {
+  if (isConfidentCandidate(candidate)) return true
+  if (candidate.nonGeneralScore > 0) return true
+  return candidate.hasWholeRunMatch
+}
+
+/**
+ * Keyword fallback ranking: count hits across known card fields + tags +
+ * topicLabels, drop pure noise (see `WEAK_NOISE_FLOOR`), and mark surviving
+ * non-confident hits as `weak` so the caller can render an honest notice
+ * instead of implying every returned card is a real match.
+ */
+export function rankByKeywords(
+  groups: QuestionGroupCard[],
+  query: string,
+  limit = 12,
+): ConciergeSearchHit[] {
+  const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
+  if (tokens.length === 0) {
+    return groups.slice(0, limit).map((group) => ({ group, reason: '近期题组' }))
+  }
+  return rankKeywordCandidates(groups, query)
+    .filter(isAboveNoiseFloor)
+    .slice(0, limit)
+    .map(toSearchHit)
+}
 
 function highConfidenceLocalHits(
   groups: QuestionGroupCard[],
@@ -756,18 +915,23 @@ export async function runConciergeSearch(
       sentMessage,
       source: 'fallback',
       fallbackReason: 'local-direct-match',
+      // highConfidenceLocalHits only ever returns candidates that already
+      // cleared the confidence floor, so this branch is never weak.
+      allWeak: false,
     }
   }
 
   if (!apiKey) {
+    const hits = rankByKeywords(input.questionGroups, intent)
     return {
       kind: 'results',
-      hits: rankByKeywords(input.questionGroups, intent),
+      hits,
       assistantMessage: '没填 AI 密钥，先用本地题库帮你找。',
       query: intent,
       sentMessage,
       source: 'fallback',
       fallbackReason: 'missing-api-key',
+      allWeak: hits.length > 0 && hits.every((hit) => hit.weak),
     }
   }
 
@@ -801,14 +965,16 @@ export async function runConciergeSearch(
     if (typeof console !== 'undefined' && console.warn) {
       console.warn('[concierge] steward call failed; using keyword fallback:', message)
     }
+    const fallbackHits = rankByKeywords(input.questionGroups, intent)
     return {
       kind: 'results',
-      hits: rankByKeywords(input.questionGroups, intent),
+      hits: fallbackHits,
       assistantMessage: '管家暂时没连上，我先用本地题库帮你找。',
       query: intent,
       sentMessage,
       source: 'fallback',
       fallbackReason: 'api-error',
+      allWeak: fallbackHits.length > 0 && fallbackHits.every((hit) => hit.weak),
     }
   }
 }

@@ -76,6 +76,7 @@ const {
   rankByKeywords,
   runConciergeSearch,
 } = await import(path.join(root, 'app/src/concierge/conciergeSearch.ts'))
+const { pickResultsNoticeLine } = await import(path.join(root, 'app/src/concierge/clarificationCopy.ts'))
 const { questionGroups: sampleQuestionGroups } = await import(
   path.join(root, 'app/src/data/sampleQuestionGroups.ts')
 )
@@ -499,6 +500,209 @@ const groupCardSource = read('app/src/concierge/ConciergeGroupCard.tsx')
 assert('ConciergeGroupCard derives a topic leaf label (not the raw full path)', groupCardSource.includes('topicLeafLabel'))
 const paperRowSource = read('app/src/concierge/ConciergePaperRow.tsx')
 assert('ConciergePaperRow builds topic chips from matched groups', paperRowSource.includes('buildTopicChips'))
+
+// ------------------------------------------------------------------------
+console.log('\n-- 11. Restart cut ⑤ — honest degrade: weak/noise floor, three-state notice --')
+
+// A real bank is large enough that a garbled query's isolated 2-char CJK
+// bigrams will coincidentally substring-match SOME field of SOME group —
+// this pool mirrors that shape (real-DB browser QA found 3 false "hits" for
+// "zzxqwqxyz 不存在的题目 12345" before this cut). Each noise group matches
+// on exactly one incidental bigram, nothing else — the shape that must be
+// dropped as noise, not surfaced as "可能相关".
+function noiseGroup(id, summary, overrides = {}) {
+  return {
+    ...sampleQuestionGroups[0],
+    id,
+    tags: [],
+    topicLabels: [],
+    title: 'Reading A',
+    summary,
+    groupType: 'reading',
+    ...overrides,
+  }
+}
+const gibberishNoisePool = [
+  noiseGroup('restart5-noise-1', '文章讨论了某项技术是否真实存在的问题。'),
+  noiseGroup('restart5-noise-2', '介绍了一道有趣的数学题目和解法。'),
+  noiseGroup('restart5-noise-3', '短文围绕作者童年一件小事展开，与其余关键词均无关。'),
+]
+
+{
+  const gibberishHits = rankByKeywords(gibberishNoisePool, 'zzxqwqxyz 不存在的题目 12345')
+  assertEqual(
+    'gibberish query against realistic noise pool drops isolated-bigram coincidences (rankByKeywords)',
+    gibberishHits.length,
+    0,
+  )
+
+  const gibberishOutcome = await runConciergeSearch({
+    intent: 'zzxqwqxyz 不存在的题目 12345',
+    apiKey: '',
+    questionGroups: gibberishNoisePool,
+  })
+  assertEqual('gibberish query outcome kind (empty results, not error)', gibberishOutcome.kind, 'results')
+  assertEqual(
+    'gibberish query reaches the true vacuum state (zero hits) so starter chips render',
+    gibberishOutcome.kind === 'results' ? gibberishOutcome.hits.length : -1,
+    0,
+  )
+}
+
+{
+  // A vague-but-real Chinese query ("随便 试试看") is NOT gibberish — one of
+  // its segments ("试试看", a real 3-character run) lands verbatim on a
+  // group's summary (a real, if generic, phrase match), so the hit must
+  // still surface — but honestly labelled weak (no topic/section/place
+  // signal backs it, only a scattered general-field phrase) rather than
+  // silently treated as a confident match. This is the acceptance-bullet
+  // "「随便找找看」类泛词→弱语气标识" case: distinct from the pure-gibberish
+  // case above because the query contains a real, if generic, Chinese word
+  // that genuinely appears in the passage text — not just isolated 2-char
+  // bigram coincidences.
+  const vagueGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-vague',
+    tags: [],
+    topicLabels: [],
+    title: 'Reading B',
+    summary: '学生可以试试看这类题目，用于课后自主练习。',
+    groupType: 'reading',
+  }
+  const vagueHits = rankByKeywords([vagueGroup], '随便 试试看')
+  assert('vague generic query still surfaces its phrase-match hit', vagueHits.length === 1)
+  assert(
+    'vague generic query hit is flagged weak (no topic/section/place signal)',
+    vagueHits[0]?.weak === true,
+    JSON.stringify(vagueHits[0]),
+  )
+  assert(
+    'weak hit reason uses "可能相关" phrasing, never "命中"/"匹配关键词"',
+    /可能相关/.test(vagueHits[0]?.reason || '') && !/匹配关键词|命中/.test(vagueHits[0]?.reason || ''),
+    vagueHits[0]?.reason,
+  )
+
+  const vagueOutcome = await runConciergeSearch({
+    intent: '随便 试试看',
+    apiKey: '',
+    questionGroups: [vagueGroup],
+  })
+  assertEqual('vague query outcome kind', vagueOutcome.kind, 'results')
+  assert(
+    'vague query outcome is marked allWeak',
+    vagueOutcome.kind === 'results' && vagueOutcome.source === 'fallback' && vagueOutcome.allWeak === true,
+  )
+  assertEqual(
+    'pickResultsNoticeLine renders the honest "主题相近" notice for an allWeak outcome',
+    vagueOutcome.kind === 'results' && vagueOutcome.source === 'fallback'
+      ? pickResultsNoticeLine(vagueOutcome.allWeak, vagueOutcome.assistantMessage)
+      : '',
+    '没有精确匹配，以下是主题相近的题组。',
+  )
+}
+
+{
+  // pickResultsNoticeLine non-regression: a confident (non-weak) fallback
+  // result must keep showing its ordinary assistantMessage, not the weak
+  // notice.
+  assertEqual(
+    'pickResultsNoticeLine passes through the ordinary message when allWeak is false',
+    pickResultsNoticeLine(false, '已按本地题库精确信息匹配。'),
+    '已按本地题库精确信息匹配。',
+  )
+}
+
+// ------------------------------------------------------------------------
+console.log('\n-- 12. Restart cut ⑤ redline: cut ① acceptance queries must stay non-weak --')
+
+{
+  // Every query cut ① locked down as a confident local match must still
+  // resolve non-weak after the noise-floor/weak-tagging change — these all
+  // carry real topic-label / 篇位 / 地区+年份 signal, not incidental
+  // general-tier noise.
+  const ecoGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-eco',
+    tags: [],
+    title: '2026 浙江卷 阅读 C 生态修复',
+    section: '阅读理解 C',
+    year: 2026,
+    region: '浙江',
+    groupType: 'reading',
+    topicLabels: [
+      { label: '人与自然-自然生态-生态环境', theme: '人与自然', themeGroup: '自然生态', subtopic: '生态环境' },
+    ],
+  }
+  const ecoHits = rankByKeywords([ecoGroup], '生态主题 C 篇')
+  assert('redline "生态主题 C 篇" (topic-label hit) is not weak', ecoHits[0]?.weak !== true, JSON.stringify(ecoHits[0]))
+
+  // Topic label leaf is "环境保护" (a real gaokao topic label, and a PREFIX
+  // match for the query's "环境保护" token — unlike "生态环境", which is a
+  // suffix match and correctly does not clear the topic-tier prefix rule;
+  // see cut ①'s topicSegmentMatchesToken doc comment).
+  const envGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-env',
+    tags: [],
+    title: 'Reading D',
+    section: '第二部分 阅读 / 第一节 阅读理解',
+    groupType: 'reading',
+    topicLabels: [
+      { label: '人与自然-环境问题-环境保护', theme: '人与自然', themeGroup: '环境问题', subtopic: '环境保护' },
+    ],
+  }
+  const envOutcome = await runConciergeSearch({
+    intent: '找一篇讲环境保护的阅读，中等难度，最好是近三年的',
+    apiKey: '',
+    questionGroups: [envGroup],
+  })
+  assert(
+    'redline natural-language 环保阅读 query resolves non-weak',
+    envOutcome.kind === 'results' &&
+      envOutcome.hits.length > 0 &&
+      envOutcome.hits.every((h) => h.weak !== true),
+    JSON.stringify(envOutcome),
+  )
+
+  const zjGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-zj',
+    tags: [],
+    groupType: 'cloze',
+    region: '浙江',
+    year: 2025,
+    section: '完形填空',
+  }
+  const zjOutcome = await runConciergeSearch({ intent: '2025 浙江卷', apiKey: '', questionGroups: [zjGroup] })
+  assert(
+    'redline "2025 浙江卷" (region+year dimension hit) resolves non-weak',
+    zjOutcome.kind === 'results' && zjOutcome.hits.every((h) => h.weak !== true),
+    JSON.stringify(zjOutcome),
+  )
+
+  const scGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-sc',
+    tags: [],
+    groupType: 'seven_choices',
+    region: '浙江',
+    year: 2025,
+    section: '七选五',
+  }
+  const scOutcome = await runConciergeSearch({ intent: '七选五', apiKey: '', questionGroups: [scGroup] })
+  assert(
+    'redline "七选五" (groupType dimension hit) resolves non-weak',
+    scOutcome.kind === 'results' && scOutcome.hits.every((h) => h.weak !== true),
+    JSON.stringify(scOutcome),
+  )
+
+  const readingCHits = rankByKeywords(sampleQuestionGroups, 'reading C')
+  assert(
+    'redline plain "reading C" (section-letter hit) resolves non-weak',
+    readingCHits.length > 0 && readingCHits.every((h) => h.weak !== true),
+    JSON.stringify(readingCHits.map((h) => h.weak)),
+  )
+}
 
 console.log(`\nRestart cut ① local-search-intent verify: ${passed} passed, ${failed} failed`)
 if (failed > 0) process.exit(1)
