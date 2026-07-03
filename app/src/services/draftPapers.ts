@@ -30,8 +30,10 @@ export async function fetchCurrentDraftPaper(create = true): Promise<DraftPaper>
   return data.draftPaper
 }
 
-export async function fetchDraftPaper(id: string): Promise<DraftPaper> {
-  const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(id)}`))
+export async function fetchDraftPaper(id: string, versionType: 'student' | 'teacher' = 'student'): Promise<DraftPaper> {
+  const response = await fetch(
+    apiPath(`/api/draft-papers/${encodeURIComponent(id)}?versionType=${versionType}`),
+  )
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to load draft paper: ${response.status}`))
   }
@@ -146,14 +148,20 @@ export async function restoreDraftPaperItem(
   return data.draftPaper
 }
 
-export async function downloadDraftPaperPdf(draftPaperId: string): Promise<void> {
+export async function downloadDraftPaperPdf(
+  draftPaperId: string,
+  versionType: 'student' | 'teacher' = 'student',
+): Promise<void> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`), {
+    body: JSON.stringify({ versionType }),
+    headers: { 'content-type': 'application/json' },
     method: 'POST',
   })
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to export draft paper PDF: ${response.status}`))
   }
   const blob = await response.blob()
-  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '英语草稿卷-学生卷.pdf'
+  const defaultFileName = versionType === 'teacher' ? '英语草稿卷-教师卷.pdf' : '英语草稿卷-学生卷.pdf'
+  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
   downloadBlob(blob, fileName)
 }

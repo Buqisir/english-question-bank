@@ -97,12 +97,12 @@ export function createDraftPaperStore({
     return blocks
   }
 
-  function buildDraftPaperExportInput(draftPaper) {
+  function buildDraftPaperExportInput(draftPaper, { versionType = 'student', printStyle = 'exam', questionNumberStart = 1 } = {}) {
     return {
       title: draftPaper.title || '未命名英语练习卷',
-      versionType: 'student',
-      printStyle: 'exam',
-      questionNumberStart: 1,
+      versionType: versionType === 'teacher' ? 'teacher' : 'student',
+      printStyle: printStyle === 'handout' ? 'handout' : 'exam',
+      questionNumberStart: Number.isInteger(Number(questionNumberStart)) && Number(questionNumberStart) >= 1 ? Number(questionNumberStart) : 1,
       items: draftPaper.items.map((item) => ({
         questionGroupId: item.groupId,
         score: Number(item.questionGroup?.defaultScore || 0),
@@ -127,9 +127,9 @@ export function createDraftPaperStore({
     return html.replace('</style>', `${footerCss}\n</style>`)
   }
 
-  function buildDraftPrintHtml(draftPaper) {
+  function buildDraftPrintHtml(draftPaper, exportOptions = {}) {
     if (!draftPaper.items.length) return ''
-    const input = buildDraftPaperExportInput(draftPaper)
+    const input = buildDraftPaperExportInput(draftPaper, exportOptions)
     const exportItems = input.items.map((item) => {
       const detail = getQuestionGroupDetail(item.questionGroupId)
       if (!detail) throw new Error(`questionGroupId not found: ${item.questionGroupId}`)
@@ -168,10 +168,11 @@ export function createDraftPaperStore({
     }
   }
 
-  function draftPaperPrintSignature(draftPaper) {
+  function draftPaperPrintSignature(draftPaper, versionType) {
     return JSON.stringify({
       id: draftPaper.id,
       title: draftPaper.title,
+      versionType,
       items: draftPaper.items.map((item) => ({
         id: item.id,
         groupId: item.groupId,
@@ -257,7 +258,7 @@ export function createDraftPaperStore({
     })
   }
 
-  function getDraftPaper(db, draftPaperId, { includePrintHtml = true } = {}) {
+  function getDraftPaper(db, draftPaperId, { includePrintHtml = true, versionType = 'student' } = {}) {
     const row = db
       .prepare(
         `
@@ -276,7 +277,7 @@ export function createDraftPaperStore({
     }
     return {
       ...draftPaper,
-      printHtml: includePrintHtml && items.length > 0 ? buildDraftPrintHtml(draftPaper) : '',
+      printHtml: includePrintHtml && items.length > 0 ? buildDraftPrintHtml(draftPaper, { versionType }) : '',
     }
   }
 
@@ -554,13 +555,14 @@ export function createDraftPaperStore({
     }
   }
 
-  function exportDraftPaperPdf(draftPaperId, { preferRecent = false } = {}) {
+  function exportDraftPaperPdf(draftPaperId, { preferRecent = false, versionType = 'student' } = {}) {
+    const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
     const db = openDatabase({ readOnly: false })
     try {
-      const draftPaper = getDraftPaper(db, draftPaperId)
+      const draftPaper = getDraftPaper(db, draftPaperId, { includePrintHtml: false })
       if (!draftPaper) throw new Error('Draft paper not found')
       if (!draftPaper.items.length) throw new Error('请先添加题组')
-      const signature = draftPaperPrintSignature(draftPaper)
+      const signature = draftPaperPrintSignature(draftPaper, normalizedVersionType)
       const recent = recentDraftPdfExports.get(draftPaperId)
       if (
         preferRecent &&
@@ -572,7 +574,7 @@ export function createDraftPaperStore({
         db.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
         return { body: readFileSync(recent.outputPath), fileName: recent.fileName, outputPath: recent.outputPath, draftPaper, reusedRecent: true }
       }
-      const html = buildDraftPrintHtml(draftPaper)
+      const html = buildDraftPrintHtml(draftPaper, { versionType: normalizedVersionType })
       const vivliostylePaths = [
         path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
         path.join(rootDir, 'server', 'node_modules', '.bin', 'vivliostyle'),
@@ -594,7 +596,8 @@ export function createDraftPaperStore({
         writeFileSync(htmlPath, html)
         execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
         const safeTitle = String(draftPaper.title || '英语草稿卷').replace(/[\\/:*?"<>|]/g, '-')
-        const fileName = `${safeTitle}-学生卷.pdf`
+        const versionLabel = normalizedVersionType === 'teacher' ? '教师卷' : '学生卷'
+        const fileName = `${safeTitle}-${versionLabel}.pdf`
         const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
         copyFileSync(pdfPath, outputPath)
         db.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)

@@ -5092,6 +5092,11 @@ button:disabled {
   border-color: #1A1A1A;
 }
 
+.basket-chip:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .basket-drawer-backdrop {
   position: fixed;
   inset: 0;

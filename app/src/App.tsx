@@ -811,7 +811,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [homeMode, setHomeMode] = useState<'ai' | 'classic'>(() =>
     localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai',
   )
-  const [aiBasketDrawerOpen, setAiBasketDrawerOpen] = useState(false)
   // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
   // hook can be created BEFORE paperExports / saveStatus / previewStatus
   // setters exist in this scope. The ref is wired up below as soon as the
@@ -5164,21 +5163,11 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           )}
         </section>
 
+        {homeMode === 'classic' && (
         <aside
-          className={`basket-panel${homeMode === 'ai' ? ' basket-panel-drawer' : ''}${homeMode === 'ai' && aiBasketDrawerOpen ? ' open' : ''}`}
+          className="basket-panel"
           aria-label="草稿卷"
-          aria-hidden={homeMode === 'ai' && !aiBasketDrawerOpen ? true : undefined}
         >
-          {homeMode === 'ai' && (
-            <button
-              type="button"
-              className="basket-drawer-close"
-              onClick={() => setAiBasketDrawerOpen(false)}
-              aria-label="收起草稿卷"
-            >
-              ×
-            </button>
-          )}
           {homeMode === 'classic' && (
           <section className="steward-chat-panel" aria-label="题库管家">
             <div className="panel-heading steward-heading">
@@ -5644,26 +5633,20 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             {paperExports.statuses.printHtml === 'error' && <p className="save-state error">{paperExports.statuses.printHtmlError}</p>}
           </details>
         </aside>
+        )}
       </main>
 
-      {homeMode === 'ai' && !aiBasketDrawerOpen && (
+      {homeMode === 'ai' && (
         <button
           type="button"
           className="basket-chip"
-          onClick={() => setAiBasketDrawerOpen(true)}
-          aria-label={`展开草稿卷，已选 ${basket.length} 个题组`}
+          onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
+          aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
+          disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
         >
           <ClipboardList size={15} />
-          <span>已选 {basket.length} 题组</span>
+          <span>草稿卷 · {currentDraftGroupCount} 题组</span>
         </button>
-      )}
-      {homeMode === 'ai' && aiBasketDrawerOpen && (
-        <button
-          type="button"
-          className="basket-drawer-backdrop"
-          onClick={() => setAiBasketDrawerOpen(false)}
-          aria-label="收起草稿卷"
-        />
       )}
 
       {isEntryOpen && (

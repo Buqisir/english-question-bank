@@ -4,6 +4,20 @@ function routeError(error) {
   return error instanceof Error ? error.message : String(error)
 }
 
+function requiredEnum(value, allowed, label) {
+  if (typeof value !== 'string' || !allowed.includes(value)) {
+    throw new Error(`${label} is invalid`)
+  }
+
+  return value
+}
+
+function versionTypeFromQuery(url) {
+  const raw = url.searchParams.get('versionType')
+  if (raw === null) return 'student'
+  return requiredEnum(raw, ['student', 'teacher'], 'versionType')
+}
+
 export function createDraftPaperRoutes() {
   return [
     defineRoute('GET', /^\/api\/draft-papers$/, ({ response, context }) => {
@@ -40,11 +54,18 @@ export function createDraftPaperRoutes() {
       }
     }),
 
-    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)$/, ({ response, match, context }) => {
+    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)$/, ({ response, url, match, context }) => {
       const db = context.openDatabase({ readOnly: true })
       try {
         const id = decodeURIComponent(match[1])
-        const draftPaper = context.draftPaperStore.getDraftPaper(db, id)
+        let versionType
+        try {
+          versionType = versionTypeFromQuery(url)
+        } catch (error) {
+          context.sendJson(response, 400, { error: routeError(error) })
+          return
+        }
+        const draftPaper = context.draftPaperStore.getDraftPaper(db, id, { versionType })
         if (!draftPaper) {
           context.sendJson(response, 404, { error: 'Draft paper not found' })
           return
@@ -124,11 +145,18 @@ export function createDraftPaperRoutes() {
       }
     }),
 
-    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, match, context }) => {
+    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, url, match, context }) => {
       const db = context.openDatabase({ readOnly: false })
       try {
         const draftPaperId = decodeURIComponent(match[1])
-        const draftPaper = context.draftPaperStore.getDraftPaper(db, draftPaperId)
+        let versionType
+        try {
+          versionType = versionTypeFromQuery(url)
+        } catch (error) {
+          context.sendJson(response, 400, { error: routeError(error) })
+          return
+        }
+        const draftPaper = context.draftPaperStore.getDraftPaper(db, draftPaperId, { includePrintHtml: false })
         if (!draftPaper) {
           context.sendJson(response, 404, { error: 'Draft paper not found' })
           return
@@ -137,11 +165,12 @@ export function createDraftPaperRoutes() {
           context.sendJson(response, 400, { error: '请先添加题组' })
           return
         }
-        const html = context.draftPaperStore.buildDraftPrintHtml(draftPaper)
+        const versionLabel = versionType === 'teacher' ? '教师卷' : '学生卷'
+        const html = context.draftPaperStore.buildDraftPrintHtml(draftPaper, { versionType })
         response.writeHead(200, {
           'access-control-allow-origin': 'http://127.0.0.1:5173',
           'content-type': 'text/html; charset=utf-8',
-          'x-file-name': encodeURIComponent(`${draftPaper.title}-学生卷.html`),
+          'x-file-name': encodeURIComponent(`${draftPaper.title}-${versionLabel}.html`),
         })
         response.end(html)
       } finally {
@@ -149,9 +178,13 @@ export function createDraftPaperRoutes() {
       }
     }),
 
-    defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/print-pdf$/, ({ response, match, context }) => {
+    defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/print-pdf$/, async ({ request, response, match, context }) => {
       try {
-        const result = context.draftPaperStore.exportDraftPaperPdf(decodeURIComponent(match[1]))
+        const input = await context.readJsonBody(request)
+        const versionType = input.versionType === undefined
+          ? 'student'
+          : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
+        const result = context.draftPaperStore.exportDraftPaperPdf(decodeURIComponent(match[1]), { versionType })
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
         const message = routeError(error)
