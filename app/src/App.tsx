@@ -122,7 +122,7 @@ import { PaperImportAiWorkbench } from './features/paper-import-ai/PaperImportAi
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
-import { useCurrentUser } from './auth/AuthGate.tsx'
+import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { DifficultyProfileGrid } from './workbench/detail/DifficultyProfileGrid'
@@ -767,12 +767,18 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // Workbench fetch effects depend on `currentPiRoute.kind` so they fire
   // exactly once when the user returns from PI.
   const currentUser = useCurrentUser()
+  // M0-3 (docs/cuts/m0-3-role-gate/plan.md 2b): AuthGate is the only place that
+  // translates open-mode/owner/member into this boolean — consume it directly,
+  // never re-derive from `currentUser`.
+  const isOwnerView = useIsOwnerView()
   const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
   const [paperImportRouteActive, setPaperImportRouteActive] = useState(() => {
+    if (!isOwnerView) return false
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'paper-import'
   })
   const [paperImportAiRouteActive, setPaperImportAiRouteActive] = useState(() => {
+    if (!isOwnerView) return false
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'paper-import-ai'
   })
@@ -812,9 +818,13 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [sourceType, setSourceType] = useState<'all' | SourceType>('all')
   const [groupType, setGroupType] = useState<'all' | GroupType>('all')
   const [selectedTag, setSelectedTag] = useState('全部')
-  const [homeMode, setHomeMode] = useState<'ai' | 'classic'>(() =>
-    localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai',
-  )
+  const [homeMode, setHomeMode] = useState<'ai' | 'classic'>(() => {
+    // M0-3 (plan.md 2b): member homeMode is locked to 'ai' — ignore any stale
+    // localStorage 'classic' residue from an earlier owner/open-mode session on
+    // the same browser.
+    if (!isOwnerView) return 'ai'
+    return localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai'
+  })
   // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
   // hook can be created BEFORE paperExports / saveStatus / previewStatus
   // setters exist in this scope. The ref is wired up below as soon as the
@@ -3360,29 +3370,37 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               闭环面板
             </button>
           )}
-          <button className="ghost-button" type="button" onClick={openImportPanel}>
-            <FileText size={18} />
-            导入资料
-          </button>
-          <button className="ghost-button" type="button" onClick={openPaperImportWorkbench}>
-            <FileText size={18} />
-            整卷导入
-          </button>
-          <button className="ghost-button" type="button" onClick={openPaperImportAiWorkbench}>
-            <Sparkles size={18} />
-            AI 导题
-          </button>
-          <button
-            className="ghost-button"
-            type="button"
-            disabled={backfillStatus === 'loading'}
-            onClick={() => void handleBackfillTopicLabels()}
-            title="用 AI 为所有无主题标签的题组批量打标（可安全重跑）"
-          >
-            <Tag size={16} />
-            {backfillStatus === 'loading' ? '打标中…' : '给题库打主题标签'}
-          </button>
-          {backfillResult !== null && (
+          {isOwnerView && (
+            <button className="ghost-button" type="button" onClick={openImportPanel}>
+              <FileText size={18} />
+              导入资料
+            </button>
+          )}
+          {isOwnerView && (
+            <button className="ghost-button" type="button" onClick={openPaperImportWorkbench}>
+              <FileText size={18} />
+              整卷导入
+            </button>
+          )}
+          {isOwnerView && (
+            <button className="ghost-button" type="button" onClick={openPaperImportAiWorkbench}>
+              <Sparkles size={18} />
+              AI 导题
+            </button>
+          )}
+          {isOwnerView && (
+            <button
+              className="ghost-button"
+              type="button"
+              disabled={backfillStatus === 'loading'}
+              onClick={() => void handleBackfillTopicLabels()}
+              title="用 AI 为所有无主题标签的题组批量打标（可安全重跑）"
+            >
+              <Tag size={16} />
+              {backfillStatus === 'loading' ? '打标中…' : '给题库打主题标签'}
+            </button>
+          )}
+          {isOwnerView && backfillResult !== null && (
             <span
               className="backfill-summary"
               style={{ color: 'var(--muted)', fontSize: 13, alignSelf: 'center' }}
@@ -3391,7 +3409,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               已标 {backfillResult.labeled} / 跳过 {backfillResult.skipped} / 失败 {backfillResult.failed.length}
             </span>
           )}
-          {backfillError && (
+          {isOwnerView && backfillError && (
             <span
               className="backfill-error"
               style={{ color: 'var(--coral-text)', fontSize: 13, alignSelf: 'center' }}
@@ -3400,20 +3418,22 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               打标失败
             </span>
           )}
-          <button
-            className="home-mode-toggle"
-            type="button"
-            onClick={() => {
-              const next = homeMode === 'ai' ? 'classic' : 'ai'
-              setHomeMode(next)
-              localStorage.setItem('home-mode', next)
-              setViewMode('list')
-            }}
-            aria-label={homeMode === 'ai' ? '切换到经典模式' : '切换到 AI 模式'}
-            title={homeMode === 'ai' ? '切到经典模式（关键词 + 筛选）' : '切到 AI 模式（自然语言取题台）'}
-          >
-            {homeMode === 'ai' ? '经典模式' : 'AI 模式'}
-          </button>
+          {isOwnerView && (
+            <button
+              className="home-mode-toggle"
+              type="button"
+              onClick={() => {
+                const next = homeMode === 'ai' ? 'classic' : 'ai'
+                setHomeMode(next)
+                localStorage.setItem('home-mode', next)
+                setViewMode('list')
+              }}
+              aria-label={homeMode === 'ai' ? '切换到经典模式' : '切换到 AI 模式'}
+              title={homeMode === 'ai' ? '切到经典模式（关键词 + 筛选）' : '切到 AI 模式（自然语言取题台）'}
+            >
+              {homeMode === 'ai' ? '经典模式' : 'AI 模式'}
+            </button>
+          )}
           {currentUser && (
             <span className="topbar-user-group">
               <span className="topbar-username">{currentUser.username}</span>
