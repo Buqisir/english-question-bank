@@ -769,6 +769,34 @@ console.log('\nTest 16: 找类似 round-trips through paper aggregation')
   )
 }
 
+// ------------------------------------------------------------------ Test 18
+console.log('\nTest 18: cut ai-key-server-fallback — runSearch dep array + serverKeyAvailable plumbing (MF-2/MF-4)')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const hook = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'useConciergeDesk.ts'), 'utf8')
+
+  // MF-4: input.thinkingMode was missing from the runSearch useCallback dependency array,
+  // producing a stale closure — a thinkingMode toggle between renders would not reach the
+  // next runSearch call. Assert it is now present in that exact array.
+  const depArrayMatch = hook.match(/\[\s*clearExpansion,[\s\S]*?\]\s*,?\s*\)/)
+  assert('runSearch dependency array found', Boolean(depArrayMatch), 'could not locate the runSearch useCallback deps array')
+  if (depArrayMatch) {
+    assert('runSearch deps include input.thinkingMode (MF-4 stale-closure fix)', /input\.thinkingMode/.test(depArrayMatch[0]), depArrayMatch[0])
+    assert('runSearch deps include serverKeyAvailable (MF-2 seam c)', /\bserverKeyAvailable\b/.test(depArrayMatch[0]), depArrayMatch[0])
+  }
+
+  // MF-2 seam a: mount-time fetch of AI status lives in the desk (not App-owned).
+  assert('hook imports fetchAiStatus', /import\s*\{\s*fetchAiStatus\s*\}\s*from\s*['"]\.\.\/services\/aiStatus\.ts['"]/.test(hook), '')
+  assert('hook holds serverKeyAvailable state', /const \[serverKeyAvailable, setServerKeyAvailable\] = useState\(false\)/.test(hook), '')
+  assert('hook fetches AI status inside a useEffect on mount', /useEffect\(\(\)\s*=>\s*\{[\s\S]{0,300}fetchStatus\(\)/.test(hook), '')
+
+  // MF-2 seam b: serverKeyAvailable is forwarded into the runConciergeSearch call.
+  const searchCallMatch = hook.match(/const outcome: ConciergeSearchOutcome = await search\(\{[\s\S]*?\}\)/)
+  assert('runConciergeSearch call site found', Boolean(searchCallMatch), '')
+  if (searchCallMatch) {
+    assert('runConciergeSearch call forwards serverKeyAvailable', /serverKeyAvailable,/.test(searchCallMatch[0]), searchCallMatch[0])
+  }
+}
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)

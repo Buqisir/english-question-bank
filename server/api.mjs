@@ -2923,6 +2923,11 @@ serverContext.semanticSearchQuestionGroups = semanticSearchQuestionGroups
 serverContext.questionBankStewardSearch = questionBankStewardSearch
 serverContext.verifyQuestionGroup = verifyQuestionGroup
 serverContext.DEFAULT_DEEPSEEK_MODEL = DEFAULT_DEEPSEEK_MODEL
+// cut ai-key-server-fallback (MF-1): boolean only, never the key itself or any substring of it.
+// Post-hoc (same pattern as above) because DEEPSEEK_API_KEY is declared at :2833, after the
+// serverContext literal at :93 and the createAiProxyRoutes() call at :482 — assigning in the
+// literal would TDZ-crash module load. Route handler reads context.serverKeyAvailable at request time.
+serverContext.serverKeyAvailable = Boolean(DEEPSEEK_API_KEY)
 const synonymDifficultyImplementation = createSynonymDifficultyImplementation({
   optionalString,
   clamp01,

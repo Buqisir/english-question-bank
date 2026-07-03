@@ -127,6 +127,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model | yes |
 | `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |
 | `verify-error-copy-mainline.mjs` | Cut ⑧ error-copy-mainline: `describeError` human-copy helper contract, MySpacePage + DraftPaperWorkbench zero raw `error.message`/`String(error)` residue, my-space failure-state retry button + single-render de-dup, draft-paper workbench errors don't clear in-progress work | yes |
+| `verify-ai-server-key-fallback.mjs` | Cut ai-key-server-fallback: `runConciergeSearch` gate matrix (no key+no server→local `missing-api-key`; no key+server available→steward call with `apiKey===''`; key present→steward, no regression; steward throws→`api-error` fallback), timeout selection (default 20000ms / thinking 60000ms / explicit `stewardTimeoutMs` wins), `GET /api/ai/status` route shape + MF-3 key-leak negative test (sentinel absent from response body AND all console output), `api.mjs` MF-1 TDZ guard (`serverContext.serverKeyAvailable` assigned post-hoc, not in the `:93` literal) | yes |
 | `verify-paper-blocks-numbering.mjs` | Paper block numbering | no |
 | `verify-paper-layout-roundtrip.mjs` | Layout model roundtrip | no |
 | `verify-paper-export-flow.mjs` | Export flow | no |
