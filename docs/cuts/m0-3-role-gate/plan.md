@@ -32,7 +32,16 @@
   `authMode: 'open' | 'enforced'` 显式放进 context（改
   `applyAuthGate` 返回值 server/api.mjs:4139-4180 与 context 组装
   server/api.mjs:4211）。理由：白名单路由也可能 session 为空，语义
-  不能混。
+  不能混（api.mjs:4152 与 :4165 两处 `{ session: null }` 现状不可
+  区分，正是要显式下发的根因）。
+- **authMode 必须无条件出现在 context 全部四种情形**（开放模式 /
+  enforced+有 session / enforced+白名单无 session / 静态资源走不到
+  routes 不算）：api.mjs:4211 现有三元在无 session 时落回裸
+  serverContext，改造后不论哪个分支 context 都要带 authMode。
+- runRoutes 的闸用**正判** `authMode === 'enforced'`，禁止
+  `!== 'open'` 反判——任何未来新增的 authMode 取值或 undefined
+  漏传，反判会把开放模式误 403（PA MF-3）。verify 脚本断言 5
+  （开放模式非 403）就是这条的回归防线。
 
 ### 1b. 挂闸清单（整模块）
 
@@ -41,7 +50,9 @@ member 无对应 UI）：
 
 - `server/imports/legacyImportRoutes.mjs`（12 条，其中 6 条写 bank）
 - `server/paper-import/paperImportRoutes.mjs`（3 条）
-- `server/paper-import-ai/routes.mjs`（7 条）
+- `server/paper-import-ai/routes.mjs`（6 条：parse / analyze /
+  analyze-seven-choices / analyze-cloze / analyze-grammar-fill /
+  publish，PA MF-2 订正计数；verify 枚举以真实路由定义为准）
 - `server/topic-labels/topicLabelBackfillRoutes.mjs`（1 条）
 - `server/grammar-verb-profile/verbProfileBackfillRoutes.mjs`（1 条，写 sidecar，D4）
 
@@ -58,7 +69,9 @@ member 无对应 UI）：
 - PUT `/api/questions/:id/difficulty-rating`（:146）
 - POST 生成类（reading-parse :61 / cloze-parse :67 /
   seven-choices-parse :79 / grammar-parse :99 / summary :111 /
-  topic-labels :117）——不写库但是经典详情页专属 AI 动作 + 花
+  topic-labels :117 / **synonym-difficulty :123**——PA MF-1 补列：
+  它并非无条件 410，`localQwenEnabled` 时会真跑 AI 生成，符合 D6
+  判据）——不写库但是经典详情页专属 AI 动作 + 花
   server key，一并挂闸。**前置核对**：DEV 先 grep 前端调用方，确认
   这 6 条只被经典模式/详情页/策展工作台调用；若发现任何 member 可见
   面（Concierge/DraftPaper/MySpace/exports）调用其中一条，停下来在
@@ -158,4 +171,12 @@ member 账号：首屏=AI 模式、无切换按钮、无 4 策展按钮、localS
 
 ## PA Follow-Up Decisions
 
-（PA 审后由 PM 回填）
+PA 结论 APPROVE WITH 3 MF（`pa.md`），全部采纳并回填：
+
+| MF | 处置 |
+|----|------|
+| MF-1 synonym-difficulty 漏列 | 已补进 1c 生成类挂闸清单（PM 亲验 :123-138：`localQwenEnabled` 时真跑 AI 生成，非无条件 410），verify 枚举同步含它 |
+| MF-2 paper-import-ai 幽灵计数 7→6 | 已订正 1b；verify 枚举以真实 defineRoute 为准 |
+| MF-3 authMode 四象限 + 正判 | 已钉进 1a：context 无条件带 authMode；runRoutes 用 `authMode === 'enforced'` 正判，禁反判 |
+
+Open PO decisions：0 阻塞（D2/D3 为 owner 追认项，非阻塞）。
