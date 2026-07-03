@@ -171,3 +171,71 @@ SSRF/exfil 面判断：**不构成新攻击面**。该 URL 仅在模块加载时
 **APPROVE**（0 Must Fix）。建议合并前由 PO/QA 在真库点一遍 C5 通知条与 C6 verify
 按钮文案的真实渲染（本刀 user-visible，按 review-levels L3 宜有一次 QA），但代码
 契约层无阻塞项。
+
+---
+
+## Incremental review（APPROVE 之后的增量 commit）
+
+复审对象：a451ce8（我自己的 CR 文档，非代码）+ 0a173c8（已在我原 baseline 内，
+阅读组 verify 补 C6 文案，原报告已计）+ **cea09a6（唯一新代码 commit）**。冷读
+`git show cea09a6` 全文。
+
+**增量结论：APPROVE — 0 Must Fix。**
+
+### cea09a6 修的两个浏览器 QA 真缺口
+
+**缺口 a（我原审漏掉的一条传播路径）**：`verifyQuestionGroupService.mjs` 的逐题
+`catch`（:109）把所有 per-question AI 错误折成 `verdict:'uncertain'`，限额类型化
+错误被一并吞掉 → 触顶时该端点返回 **HTTP 200 全 uncertain**，429 翻译在此端点是
+死路径。我原报告核对了 semantic/steward 两条传播干净，但**未打开 verify 服务的
+逐题 catch 循环** —— 这是我原审的真实盲区，记入下方 Self-Review 更新。
+
+修复正确（`verifyQuestionGroupService.mjs:116-118`）：`if (error?.code ===
+AI_DAILY_LIMIT_EXCEEDED_CODE) throw error` 是 catch 的**第一分支**，排在通用
+uncertain swallow（:119-127）之前；类型化错误穿出逐题循环、越过 `appendVerifyAudit`、
+直达路由 429 翻译层。`callDeepSeekVerify`（:88）是被 gate 的逐题出站，触顶即抛。
+
+**复核「重抛中止整组、丢弃已验结果」的判断——我复核后同意可接受**：`isExceeded()`
+触顶后无 decrement，本组剩余每道题的 `callDeepSeekVerify` 必然抛同一限额错误；返回
+"部分真 verdict + 剩余 uncertain" 的半份结果会伪装成"已完成验证"，反而误导老师。
+中止 → 429 是诚实结局，半份结果无价值。判断成立。
+
+**缺口 b（C5 在全弱匹配路径失效）**：`pickResultsNoticeLine` 的 allWeak 诚实降级
+文案会整条替换限额说明。修复走 `fallbackReason` 穿进 desk state
+（`useConciergeDesk.ts:242` 加可选字段）→ `ConciergeDesk.tsx:205` 传参 →
+`clarificationCopy.ts:56-58` 限额场景两条文案合成。
+
+**独立复核 246 断言口径未破**：`pickResultsNoticeLine` 新增第三参 `fallbackReason?`
+为**可选**；`fallbackReason === undefined` 时（所有既有调用方）新 guard（:56）整段
+跳过，走到原 `if (allWeak)/return assistantMessage` 原逻辑，**对旧调用方字节等价**。
+第二消费方 `verify-restart1-local-search-intent.mjs`（:621/:718）仍用旧 2-arg 签名，
+不受影响。desk state 的 `fallbackReason?` 亦为可选字段，不改既有分支形状。
+
+### 增量验证证据（CR 重跑，非采信本地数字）
+
+- `verify-ai-daily-limit.mjs`：**23/23**（新增 2b：触顶 verify-question-group →
+  429 + code + `mock.callCount === 3`〈无新出站〉。若 swallow 未修则返 200 → 2b 失败，
+  为真回归护栏）。
+- `verify-concierge-desk.mjs`：**246/246**（口径未破，与原审一致）。
+- `verify-restart1-local-search-intent.mjs`：**93/93**（旧 2-arg `pickResultsNoticeLine`
+  调用方未回归）。
+- `pnpm -C app run verify:all`：**65 PASS / 0 FAIL**。
+
+### 增量 Forbidden / 门核对
+
+- cea09a6 文件：无 schema/迁移/user_version/chatCompletions/deepseek.mjs。
+- 生产文件无新增用户表 SQL；verify 脚本新增的 `questions`/`options` fixture INSERT
+  是 bank 表、非用户表，无 user_id gate 关切。M0-4 Follow-up Gate 仍满足。
+
+### Self-Review 更新（原报告盲区收敛）
+
+我原报告 Self-Review 声明"只验证服务端行为 + 前端类型/分支逻辑，视觉需 QA"，浏览器
+QA 恰好抓出两条我静态核对未覆盖的真缺口 —— **验证了 CR 的传播路径核对不能只看
+semantic/steward 两条主链，逐题聚合类端点（verify 把 N 道题的 per-item 错误聚合）
+是第三类需单独打开的 catch 形态**。这是本刀给 CR 的教训，已由 cea09a6 + 断言 2b 闭环。
+残留视觉正确性（合成文案 b 的真实渲染）仍属 PO/QA 范畴，不阻塞代码合并。
+
+### 增量 Recommendation
+
+**APPROVE**（增量 0 Must Fix）。两条缺口均已修复且各有真行为断言护栏；既有 246/93
+口径未破；Forbidden/门未触碰。整刀维持 APPROVE。
