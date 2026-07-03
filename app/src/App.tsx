@@ -2479,7 +2479,14 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     } catch (error) {
       if (aiRunIdRef.current !== runId) return
       setVerifyStatus('error')
-      setVerifyError(error instanceof Error ? error.message : String(error))
+      // cut m0-5-ai-daily-limit (C6): the reading-group flow shares the same
+      // verify request + verifyError UI as handleVerifyQuestionGroup, so it gets
+      // the same dedicated quota message instead of the generic failure text.
+      if (error instanceof AiDailyLimitExceededError) {
+        setVerifyError('今天的 AI 额度用完了。可以在设置里填自己的 API Key 继续使用 AI 解析。')
+      } else {
+        setVerifyError(error instanceof Error ? error.message : String(error))
+      }
     }
   }
 
