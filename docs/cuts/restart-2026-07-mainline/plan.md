@@ -182,14 +182,34 @@ Forbidden: `:root` 的 token **值**不改（重绑作用域可以）；经典�
   不弱化行为断言）；verify:all 绿。
 - 主 agent 浏览器 QA + 截图终审（UI 决定权收口）。
 
-## 刀⑤ 诚实降级（P0-2，刀④合并后串行）
+## 刀⑤ 诚实降级（P0-2，基线=main@51542ed 含刀①④）
 
 Branch: `restart-5-honest-fallback`
-Scope: `app/src/concierge/conciergeSearch.ts`（匹配分阈值）、
-`clarificationCopy.ts`/理由文案、ConciergeDesk 通知条。
-低于阈值 → 真空态+起始 chip 可达；fallback 结果显式「没有精确匹配，
-以下是相近的」弱语气标识；乱码 query 不再返回自信"命中"。
-断言进 verify-restart1 脚本。契约细节待刀④合并后按届时代码定稿。
+Scope: `app/src/concierge/conciergeSearch.ts`、`clarificationCopy.ts`、
+`ConciergeDesk.tsx`（通知条文案与状态）、`reason.ts`（弱匹配理由措辞）。
+Forbidden: server/**、思考模式 LLM 链路本体、刀①的加权/硬过滤行为
+（54 断言必须原样绿）、刀④的视觉样式。
+
+### 改动
+
+1. **弱匹配阈值**：本地排序分低于阈值（无 topicLabel/篇位/题型/地区任一
+   实质命中，仅泛字段弱命中）→ 该结果标记 weak；全部 weak 或零命中 →
+   返回空集，让真空态+起始 chip 呈现。乱码 query（"zzxqwqxyz 12345"）
+   必须走到真空态。
+2. **诚实文案分级**：通知条三态——精确匹配（现文案）/「没有精确匹配，
+   以下是主题相近的题组」（结果全 weak 但仍展示时）/ 真空态（现有
+   "没找到匹配"+chip）。weak 结果的推荐理由禁用「命中」措辞，改
+   「可能相关」。
+3. **阈值校准红线**：刀①验收的全部 query（生态环境/生态主题 C 篇/
+   环保自然语言句/2025浙江卷/七选五/reading C）不得受影响——它们都有
+   实质维度或 topic 命中，必须保持非 weak。
+4. 新增断言（乱码→空集、weak 分级、红线 query 非 weak）进
+   `verify-restart1-local-search-intent.mjs` 或新 §，注册保持不变。
+
+### 验收
+
+乱码查询→真空态可达；「随便找找看」类泛词→弱语气标识；刀① 54 断言
++新断言全绿；浏览器实测三态文案各出现一次。
 
 ## 流程
 
