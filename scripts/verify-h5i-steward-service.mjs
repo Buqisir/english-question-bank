@@ -68,7 +68,9 @@ verifier.section('Case A — bare "找相似题" forces clarification (no semant
 {
   const captured = { deepSeek: [], semantic: [], parsed: { intent: 'search', filters: {} }, matches: [] }
   const impl = makeImpl(captured)
-  const out = await impl.questionBankStewardSearch('找相似题', 'sk-test1234', 'rid-A', false)
+  // M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7): userId is now a required 5th
+  // positional arg (appended, not inserted) forwarded to the stubbed semanticSearchQuestionGroups.
+  const out = await impl.questionBankStewardSearch('找相似题', 'sk-test1234', 'rid-A', false, 'local')
   const EXPECTED_A =
     '{"query":"找相似题","assistantMessage":"你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。","needsClarification":true,"clarificationQuestion":"你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。","intent":{"intent":"clarify","needsClarification":true,"clarificationQuestion":"你更想找“学生做题思路像”的，还是“文章讲的内容像”的？也可以直接补一句，比如“找同样要抽象概括的”。","similarityDimension":"null","rewrittenQuery":"找相似题","filters":{"groupType":"","sourceType":"","years":[],"regions":[],"tCardIds":[],"surfaceQuestionTypes":[],"difficultyLevels":[]},"answer":""},"matches":[],"provider":"deepseek","model":"deepseek-v4-flash","thinkingMode":false,"keySource":"request","keyFingerprint":"sk-t***","keyMask":"sk-t***","requestId":"rid-A","totalLatencyMs":0,"pipeline":"deepseek-flash-steward"}'
   verifier.assert(JSON.stringify(out) === EXPECTED_A, 'Case A envelope byte-identical to pre-cut')
@@ -94,13 +96,26 @@ verifier.section('Case B — skill-dimension inference + filter matrix (thinking
     ],
   }
   const impl = makeImpl(captured)
-  const out = await impl.questionBankStewardSearch('找同样要抽象概括的 T6 推断', '', 'rid-B', true)
+  const out = await impl.questionBankStewardSearch('找同样要抽象概括的 T6 推断', '', 'rid-B', true, 'local')
   const EXPECTED_B =
     '{"query":"找同样要抽象概括的 T6 推断","assistantMessage":"我帮你找思路像的 目前没有找到稳定匹配，可以换一个主题、T卡或年份再试。","needsClarification":false,"clarificationQuestion":"","intent":{"intent":"find_similar","needsClarification":false,"clarificationQuestion":"","similarityDimension":"skill","rewrittenQuery":"抽象概括题","filters":{"groupType":"","sourceType":"","years":[],"regions":[],"tCardIds":["T6"],"surfaceQuestionTypes":["abstract_phrase_summary","inference_general"],"difficultyLevels":[]},"answer":"我帮你找思路像的"},"search":{"matches":[],"pipeline":"semantic-search-stub","query":"抽象概括题；相似维度:skill；T卡:T6；题面:abstract_phrase_summary inference_general"},"matches":[],"provider":"deepseek","model":"deepseek-v4-flash","thinkingMode":true,"keySource":"env","keyFingerprint":"envk***","keyMask":"envk***","requestId":"rid-B","totalLatencyMs":0,"pipeline":"deepseek-flash-steward+semantic-search-stub"}'
   verifier.assert(JSON.stringify(out) === EXPECTED_B, 'Case B envelope byte-identical to pre-cut (inferred dimension + surface types + filter)')
   verifier.assert(captured.semantic.length === 1, 'Case B: semantic search invoked once')
   verifier.assert(captured.semantic[0].q === '抽象概括题；相似维度:skill；T卡:T6；题面:abstract_phrase_summary inference_general', 'Case B: buildStewardSemanticQuery produces the exact composed query')
   verifier.assert(captured.semantic[0].tm === true, 'Case B: thinkingMode forwarded to semantic search')
+}
+
+verifier.section('M0-4 user data isolation — userId is required, not silently defaulted')
+{
+  const captured = { deepSeek: [], semantic: [], parsed: { intent: 'search', filters: {} }, matches: [] }
+  const impl = makeImpl(captured)
+  let threw = false
+  try {
+    await impl.questionBankStewardSearch('找相似题', 'sk-test1234', 'rid-D', false)
+  } catch {
+    threw = true
+  }
+  verifier.assert(threw, 'missing userId throws instead of silently falling back')
 }
 
 verifier.section('Case C — planQuestionBankStewardSearch source-dimension plan envelope')
@@ -122,7 +137,7 @@ verifier.section('Steward prompt — system message NOT over-indented (frozen AI
 {
   const captured = { deepSeek: [], semantic: [], parsed: { intent: 'search', filters: {} }, matches: [] }
   const impl = makeImpl(captured)
-  await impl.questionBankStewardSearch('随便问问', 'k', 'rid-P', false)
+  await impl.questionBankStewardSearch('随便问问', 'k', 'rid-P', false, 'local')
   const sysPrompt = captured.deepSeek[0].messages[0].content
   verifier.assert(sysPrompt.startsWith('你是高中英语题库搜索管家，只负责把老师的自然语言转成检索意图。'), 'steward prompt starts at column 0 (no leading indent)')
   verifier.assert(sysPrompt.includes('\n可用相似维度：') && !sysPrompt.includes('\n  可用相似维度：'), 'steward prompt 可用相似维度 line is NOT over-indented')

@@ -46,6 +46,13 @@ function makeContext(overrides = {}) {
   return {
     calls,
     localQwenEnabled: false,
+    // M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7): GET /api/question-groups
+    // now calls context.resolveDataUserId(context) before listQuestionGroups(userId).
+    authMode: 'open',
+    resolveDataUserId(context) {
+      if (context?.authMode === 'enforced') return context?.session?.userId
+      return 'local'
+    },
     async readJsonBody(request, options) {
       calls.push(`readJsonBody:${options?.maxBytes || 'default'}`)
       return request.body || {}
@@ -55,7 +62,7 @@ function makeContext(overrides = {}) {
       response.writeHead(statusCode, { 'content-type': 'application/json' })
       response.end(JSON.stringify(body))
     },
-    listQuestionGroups: () => [{ id: 'group-1' }],
+    listQuestionGroups: (userId) => [{ id: 'group-1', userId }],
     createQuestionGroup: (input) => ({ id: 'group-created', input }),
     getQuestionGroupDetail: (id) => ({ id }),
     updateQuestionGroup: (id, input) => ({ id, input }),

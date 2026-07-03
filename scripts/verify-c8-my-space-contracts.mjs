@@ -63,6 +63,35 @@ assert('artifact stores source draft id', /source_draft_paper_id TEXT NOT NULL/.
 assert('folder index exists', /idx_my_space_artifacts_folder/.test(mySpaceModuleSourceForShape))
 assert('draft index exists', /idx_my_space_artifacts_draft/.test(mySpaceModuleSourceForShape))
 
+// M0-4 user data isolation (docs/cuts/m0-4-user-scope/plan.md decisions 4-6): folders
+// are now per-user unique (not globally unique) and both tables carry user_id.
+const mySpaceFoldersTableBody = mySpaceModuleSourceForShape.match(/CREATE TABLE IF NOT EXISTS my_space_folders[\s\S]*?\);/)?.[0]
+assert('my_space_folders table body located', Boolean(mySpaceFoldersTableBody))
+assert('folder name is per-user unique, not globally unique', Boolean(mySpaceFoldersTableBody) && /UNIQUE\(user_id,\s*name\)/.test(mySpaceFoldersTableBody) && !/name TEXT NOT NULL UNIQUE/.test(mySpaceFoldersTableBody))
+assert('folders table carries user_id', Boolean(mySpaceFoldersTableBody) && /user_id TEXT NOT NULL DEFAULT 'local'/.test(mySpaceFoldersTableBody))
+assert('artifacts table carries user_id', Boolean(mySpaceArtifactsTableBody) && /user_id TEXT NOT NULL DEFAULT 'local'/.test(mySpaceArtifactsTableBody))
+
+// The v2->v3 migration (rebuild + dedup-UPDATE + column ADDs) lives in server/api.mjs's
+// ensureUserDatabaseShape, not here — mySpace.mjs only ever defines the new-form shape.
+const apiSourceForMigration = read('server/api.mjs')
+const ensureUserDbStartForMySpace = apiSourceForMigration.indexOf('function ensureUserDatabaseShape')
+const ensureUserDbEndForMySpace = apiSourceForMigration.indexOf('function warnIfSharedDatabaseStillHasUserTables', ensureUserDbStartForMySpace)
+const ensureUserDbSourceForMySpace = ensureUserDbStartForMySpace >= 0 && ensureUserDbEndForMySpace > ensureUserDbStartForMySpace
+  ? apiSourceForMigration.slice(ensureUserDbStartForMySpace, ensureUserDbEndForMySpace)
+  : ''
+assert('ensureUserDatabaseShape source located (for my_space_folders rebuild assertions)', Boolean(ensureUserDbSourceForMySpace))
+assert('my_space_folders rebuild guarded by user_version < 3 (never === 3)', /userVersion < 3/.test(ensureUserDbSourceForMySpace) && !/userVersion === 3/.test(ensureUserDbSourceForMySpace))
+assert('my_space_folders rebuild wraps CREATE/INSERT/DROP/RENAME in a single BEGIN...COMMIT', /PRAGMA foreign_keys = OFF[\s\S]{0,100}BEGIN[\s\S]{0,900}COMMIT/.test(ensureUserDbSourceForMySpace))
+assert('PRAGMA foreign_keys OFF/ON run outside the transaction (not between BEGIN/COMMIT)', (() => {
+  const beginIndex = ensureUserDbSourceForMySpace.indexOf("db.exec('BEGIN')")
+  const commitIndex = ensureUserDbSourceForMySpace.indexOf("db.exec('COMMIT')")
+  const offIndex = ensureUserDbSourceForMySpace.indexOf("PRAGMA foreign_keys = OFF")
+  const onIndex = ensureUserDbSourceForMySpace.indexOf("PRAGMA foreign_keys = ON")
+  return beginIndex > 0 && commitIndex > beginIndex && offIndex >= 0 && offIndex < beginIndex && onIndex > commitIndex
+})())
+assert('rebuild verifies foreign_key_check after my_space_folders swap', /PRAGMA foreign_key_check/.test(ensureUserDbSourceForMySpace))
+assert('post-migration index block creates per-user my_space_artifacts index', /idx_my_space_artifacts_user/.test(ensureUserDbSourceForMySpace) && /ON my_space_artifacts\(user_id, generated_at\)/.test(ensureUserDbSourceForMySpace))
+
 const server = read('server/api.mjs')
 const mySpaceRoutes = read('server/my-space/mySpaceRoutes.mjs')
 assert('server imports My Space module', server.includes("from './my-space/mySpace.mjs'"))
@@ -140,28 +169,33 @@ const mySpace = await import(modulePath)
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-my-space-'))
 const filesRoot = path.join(tempRoot, 'files')
 const db = new DatabaseSync(path.join(tempRoot, 'test.sqlite'))
+const USER_ID = 'local'
 
 try {
+  // M0-4 (docs/cuts/m0-4-user-scope/plan.md): draft_papers now carries user_id too
+  // (fixture built by hand here, not via ensureUserDatabaseShape, since this file
+  // only exercises server/my-space/mySpace.mjs in isolation).
   db.exec(`
     PRAGMA foreign_keys = ON;
     CREATE TABLE draft_papers (
       id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL DEFAULT 'local',
       title TEXT NOT NULL,
       status TEXT NOT NULL DEFAULT 'active'
     );
-    INSERT INTO draft_papers (id, title, status) VALUES ('draft-1', '0523 英语草稿卷', 'active');
+    INSERT INTO draft_papers (id, user_id, title, status) VALUES ('draft-1', 'local', '0523 英语草稿卷', 'active');
   `)
   mySpace.ensureMySpaceDatabaseShape(db)
   mySpace.ensureMySpaceFilesRoot(filesRoot)
   assert('ensureMySpaceFilesRoot creates files root', existsSync(filesRoot))
 
-  const folder = mySpace.createMySpaceFolder(db, { name: '高三一轮' })
+  const folder = mySpace.createMySpaceFolder(db, USER_ID, { name: '高三一轮' })
   assert('createMySpaceFolder returns folder id', /^my-folder-/.test(folder.id))
-  const renamed = mySpace.renameMySpaceFolder(db, folder.id, { name: '高三二轮' })
+  const renamed = mySpace.renameMySpaceFolder(db, USER_ID, folder.id, { name: '高三二轮' })
   assert('renameMySpaceFolder updates name', renamed.name === '高三二轮')
 
   const body = Buffer.from('%PDF-1.4\n1 0 obj\n<< /Type /Page >>\nendobj\n2 0 obj\n<< /Type /Page >>\nendobj\n%%EOF')
-  const artifact = mySpace.saveMySpaceArtifact(db, {
+  const artifact = mySpace.saveMySpaceArtifact(db, USER_ID, {
     filesRoot,
     draftPaper: { id: 'draft-1', title: '0523 英语草稿卷' },
     folderId: folder.id,
@@ -173,11 +207,14 @@ try {
   assert('saveMySpaceArtifact counts PDF pages', artifact.pageCount === 2)
   const row = db.prepare('SELECT * FROM my_space_artifacts WHERE id = ?').get(artifact.id)
   assert('artifact row stores file path on disk', typeof row.file_path === 'string' && row.file_path.endsWith(`${artifact.id}.pdf`))
+  assert('artifact row stores user_id', row.user_id === USER_ID)
   assert('artifact file exists on disk', existsSync(row.file_path))
   assert('artifact row does not store PDF body column', !Object.keys(row).some((key) => /blob|body/i.test(key)))
 
-  const download = mySpace.resolveMySpaceArtifactForDownload(db, filesRoot, artifact.id)
+  const download = mySpace.resolveMySpaceArtifactForDownload(db, USER_ID, filesRoot, artifact.id)
   assert('resolveMySpaceArtifactForDownload returns body', Buffer.isBuffer(download?.body) && download.body.length === body.length)
+  const downloadWrongUser = mySpace.resolveMySpaceArtifactForDownload(db, 'someone-else', filesRoot, artifact.id)
+  assert('resolveMySpaceArtifactForDownload scopes by userId (cross-user = null)', downloadWrongUser === null)
 
   let traversalBlocked = false
   try {
@@ -189,7 +226,7 @@ try {
 
   const blockedFolderDelete = (() => {
     try {
-      mySpace.deleteMySpaceFolder(db, folder.id)
+      mySpace.deleteMySpaceFolder(db, USER_ID, folder.id)
       return false
     } catch {
       return true
@@ -198,15 +235,15 @@ try {
   assert('deleteMySpaceFolder blocks non-empty folders', blockedFolderDelete)
 
   db.prepare("UPDATE draft_papers SET status = 'deleted' WHERE id = 'draft-1'").run()
-  const afterSourceGone = mySpace.listMySpace(db, { folderId: folder.id }).artifacts[0]
+  const afterSourceGone = mySpace.listMySpace(db, USER_ID, { folderId: folder.id }).artifacts[0]
   assert('artifact survives source draft deletion', afterSourceGone.sourceDraftExists === false && existsSync(row.file_path))
 
-  mySpace.deleteMySpaceArtifact(db, filesRoot, artifact.id)
+  mySpace.deleteMySpaceArtifact(db, USER_ID, filesRoot, artifact.id)
   assert('deleteMySpaceArtifact removes row', !db.prepare('SELECT id FROM my_space_artifacts WHERE id = ?').get(artifact.id))
   assert('deleteMySpaceArtifact removes PDF file', !existsSync(row.file_path))
   assert('deleteMySpaceArtifact does not delete source draft row', !!db.prepare("SELECT id FROM draft_papers WHERE id = 'draft-1'").get())
 
-  mySpace.deleteMySpaceFolder(db, folder.id)
+  mySpace.deleteMySpaceFolder(db, USER_ID, folder.id)
   assert('deleteMySpaceFolder removes empty folder', !db.prepare('SELECT id FROM my_space_folders WHERE id = ?').get(folder.id))
 } finally {
   db.close()

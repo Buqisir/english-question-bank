@@ -122,7 +122,9 @@ const impl = createSemanticSearchImplementation({
 })
 verifier.assert(typeof impl.semanticSearchQuestionGroups === 'function', 'factory returns semanticSearchQuestionGroups')
 
-const result = await impl.semanticSearchQuestionGroups('climate science inference', 'caller-key', 'trace-1', false)
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7): userId is now a required 5th
+// positional arg (appended, not inserted, so this call site only grows by one arg).
+const result = await impl.semanticSearchQuestionGroups('climate science inference', 'caller-key', 'trace-1', false, 'local')
 verifier.assert(fallbackCalls.length === 1, 'callDeepSeekWithFallback invoked exactly once (rerank step)')
 
 verifier.section('matches envelope — byte-identical pipeline output for fixed inputs')
@@ -175,11 +177,22 @@ const emptyImpl = createSemanticSearchImplementation({
   DEFAULT_DEEPSEEK_MODEL: 'deepseek-v4-flash',
   DEEPSEEK_API_KEY: 'env-key',
 })
-const emptyResult = await emptyImpl.semanticSearchQuestionGroups('anything', 'k', 'trace-2', true)
+const emptyResult = await emptyImpl.semanticSearchQuestionGroups('anything', 'k', 'trace-2', true, 'local')
 verifier.assert(Array.isArray(emptyResult.matches) && emptyResult.matches.length === 0, 'empty DB => no matches')
 verifier.assert(emptyResult.pipeline === 'deepseek-flash', 'empty-DB pipeline = deepseek-flash')
 verifier.assert(emptyResult.keySource === 'missing' && emptyResult.keyFingerprint === 'missing', 'empty-DB key fields = missing')
 verifier.assert(emptyResult.thinkingMode === true, 'empty-DB thinkingMode forwarded')
+
+verifier.section('M0-4 user data isolation — userId is required, not silently defaulted')
+{
+  let threw = false
+  try {
+    await impl.semanticSearchQuestionGroups('climate science inference', 'caller-key', 'trace-3', false)
+  } catch {
+    threw = true
+  }
+  verifier.assert(threw, 'missing userId throws instead of silently falling back')
+}
 
 verifier.section('Prompt-content integrity — rerank prompt NOT over-indented (frozen AI contract)')
 const sysPrompt = fallbackCalls[0].messages[0].content
