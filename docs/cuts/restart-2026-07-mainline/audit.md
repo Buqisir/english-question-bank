@@ -307,3 +307,22 @@ Posture。新挂账（L 级，启动前先 PM grill 出路线图，不碎片化�
 - 遗留不动（在案）：`.concierge-row*` 死遗留 CSS（App.css ~4897-5032）
   另刀清理；`.intake-row-primary`/`.concierge-starter-chip` 为实心反色
   焦点指示、无弱环可归一（CR 裁定 DEV 不动正确）。
+
+## 第七轮结案（2026-07-03 深夜，owner 在场：回填 + 追认 + 上线路线图）
+
+- **topic 回填全库点亮**（owner 口头批准执行）：147 组未标注题组
+  （浙江+全国+自建）经 Workflow 一组一 Sonnet agent 打标 →
+  `persist-dir` 落库 **262 个标签 / 147 组，taxonomy 校验零丢弃、
+  零失败，`list-unlabeled` 归零**。第一轮被上游 API 限流打掉 97 组，
+  兜底重跑轮全部捞回。用量诚实记录：workflow 总吞吐 ≈790万 tokens
+  （244 个 agent，绝大头是 input——每个 agent 装载 ~8K 题组 prompt
+  与工具 schema；output 量级与预估 10–15万 相符）。
+- **刀⑨ SW-1 owner 追认**：server 有 key 时 AI 搜索默认花 .env 的
+  DeepSeek 余额——**保留**，不回退。
+- **上线路线图 grill 完成**：八个主干决策 owner 逐条拍板，权威版本
+  在 `docs/cuts/launch-roadmap/roadmap.md`。要点：熟人小圈个位数 /
+  共享馆 / 港区轻量单机不换库 / 邀请制 / 统一 key+日限额 / member
+  只见 AI 模式（**key UI 迁移工单消亡**，topbar 并入权限裁剪）/
+  两库分离 / M0→M1（独用两周）→M2（邀同事），半公开门封存。
+  挂账「上线路线图（L 级）」与「AI 模式 topbar 按钮墙」（并入
+  M0-3）由 roadmap 接管。下一刀：M0-1 两库分离，先侦察后 plan。
