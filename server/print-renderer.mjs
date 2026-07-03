@@ -28,6 +28,14 @@ function isShortOptions(options) {
   return options.every((o) => String(o.content || '').length <= 20)
 }
 
+// paper-import publisher.mjs writes a metadata stub into questions.note
+// (`paperId=...; assetVersion=...`) for every imported question — it is not
+// a real explanation. Restart cut ③: hide it so print never shows raw
+// tracking metadata as if it were teacher analysis.
+function isMetaStub(text) {
+  return /^paperId=.*assetVersion=/.test(String(text || ''))
+}
+
 export function buildPrintHtml({ title, versionType, printStyle, items, blocks, questionNumberStart }) {
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
@@ -76,7 +84,8 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
           groupHtml += renderOptions(question.options, detail.groupType)
           if (isTeacher) {
             groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(question.answer || '待补')}</p>`
-            const explanation = question.explanation || question.note || ''
+            const rawExplanation = question.explanation || question.note || ''
+            const explanation = isMetaStub(rawExplanation) ? '' : rawExplanation
             if (explanation) {
               groupHtml += `<p class="explanation"><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
             }
