@@ -12,6 +12,7 @@ import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { tmpdir } from 'node:os'
 import { buildPrintHtml } from '../print-renderer.mjs'
+import { loadGroupAnalysisTexts } from './analysisText.mjs'
 
 export function createDraftPaperStore({
   exportDir,
@@ -19,6 +20,7 @@ export function createDraftPaperStore({
   groupTypeLabels,
   isGroupPrintReady,
   openDatabase,
+  paperAssetsDir,
   rootDir,
   selectQuestionGroupCards,
 }) {
@@ -140,6 +142,18 @@ export function createDraftPaperStore({
         sectionTitle: '',
       }
     })
+    if (input.versionType === 'teacher' && paperAssetsDir) {
+      // Restart cut ③ — join teacher-version explanations from paper-assets
+      // analysis files. Display-layer only: never writes questions.explanation.
+      const analysisTextByQuestionId = loadGroupAnalysisTexts(exportItems, { paperAssetsDir })
+      for (const item of exportItems) {
+        for (const question of item.detail.questions) {
+          if (question.explanation) continue
+          const analysisText = analysisTextByQuestionId.get(question.id)
+          if (analysisText) question.explanation = analysisText
+        }
+      }
+    }
     return addDraftFooterCss(
       buildPrintHtml({
         title: input.title,

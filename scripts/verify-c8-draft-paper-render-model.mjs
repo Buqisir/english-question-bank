@@ -179,7 +179,38 @@ const printRendererDiff = execFileSync('git', ['diff', baselineRef(), '--', 'ser
   stdio: ['ignore', 'pipe', 'pipe'],
 })
 
-assert('print-renderer body untouched', printRendererDiff.trim() === '')
+// H9/C8 originally forbade touching print-renderer.mjs rendering logic.
+// Restart cut ③ (docs/cuts/restart-2026-07-mainline/plan.md) explicitly
+// scopes in server/print-renderer.mjs to add isMetaStub() stub-hiding —
+// an authorized, narrow supersession of that boundary. Rather than drop
+// the guard, allow-list exactly that change: the diff may only add the
+// isMetaStub() helper and swap the one explanation-assignment line to
+// route through it; no other rendering logic may move.
+const printRendererDiffLines = printRendererDiff.split('\n')
+const addedLines = printRendererDiffLines.filter((line) => line.startsWith('+') && !line.startsWith('+++'))
+const removedLines = printRendererDiffLines.filter((line) => line.startsWith('-') && !line.startsWith('---'))
+const allowedAddedLinePatterns = [
+  /^\+\/\/ paper-import publisher\.mjs writes a metadata stub/,
+  /^\+\/\/ \(`paperId=\.\.\.; assetVersion=\.\.\.`\) for every imported question — it is not/,
+  /^\+\/\/ a real explanation\. Restart cut ③: hide it so print never shows raw/,
+  /^\+\/\/ tracking metadata as if it were teacher analysis\.$/,
+  /^\+function isMetaStub\(text\) \{$/,
+  /^\+ {2}return \/\^paperId=\.\*assetVersion=\/\.test\(String\(text \|\| ''\)\)$/,
+  /^\+\}$/,
+  /^\+$/,
+  /^\+ {12}const rawExplanation = question\.explanation \|\| question\.note \|\| ''$/,
+  /^\+ {12}const explanation = isMetaStub\(rawExplanation\) \? '' : rawExplanation$/,
+]
+const allowedRemovedLinePatterns = [
+  /^- {12}const explanation = question\.explanation \|\| question\.note \|\| ''$/,
+]
+const unexpectedAdds = addedLines.filter((line) => !allowedAddedLinePatterns.some((pattern) => pattern.test(line)))
+const unexpectedRemoves = removedLines.filter((line) => !allowedRemovedLinePatterns.some((pattern) => pattern.test(line)))
+assert(
+  'print-renderer diff is empty OR exactly the restart-cut-③ isMetaStub allow-list',
+  printRendererDiff.trim() === '' || (unexpectedAdds.length === 0 && unexpectedRemoves.length === 0),
+  `unexpected additions: ${JSON.stringify(unexpectedAdds)}\n  unexpected removals: ${JSON.stringify(unexpectedRemoves)}`,
+)
 const draftRenderFixture = createDraftPaperRenderFixture()
 const draftHtml = draftRenderFixture.store.buildDraftPrintHtml(draftRenderFixture.draftPaper)
 const draftBody = draftHtml.slice(draftHtml.indexOf('<body'))

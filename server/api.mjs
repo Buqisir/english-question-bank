@@ -350,7 +350,7 @@ function findPaperAssetGroup(groupId) {
     try {
       const asset = readJsonFile(assetPath)
       const group = asset?.content?.groups?.[groupId]
-      if (group) return { asset, group }
+      if (group) return { asset, group, paperId: entry.name }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
     }
@@ -463,6 +463,7 @@ const draftPaperStore = createDraftPaperStore({
   groupTypeLabels,
   isGroupPrintReady,
   openDatabase,
+  paperAssetsDir,
   rootDir,
   selectQuestionGroupCards,
 })

@@ -50,6 +50,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h12a-entry-modal.mjs` | H12-A App.tsx Manual Entry form modal extraction into workbench/EntryModal.tsx; 5-prop seam + savedCard writeback contract (source-level) | yes |
 | `verify-h12b-difficulty-profile-grid.mjs` | H12-B PR1 read-only six-dimension reading difficulty profile grid extraction into workbench/detail/DifficultyProfileGrid.tsx + shared readingProfileLabels.ts; presentational props seam, no-cycle (source-level) | yes |
 | `verify-restart1-local-search-intent.mjs` | Restart cut ① local search: tokenize() CJK bigram production, parseLocalIntent() year/section/groupType/region extraction, weighted ranking (topic label > section/place > generic fields, year DESC tiebreak), hard-filter dimensions, non-regression on plain-English/empty queries | yes |
+| `verify-restart3-teacher-analysis.mjs` | Restart cut ③ teacher-version real analysis (paper-assets join): print-renderer isMetaStub() hides the publisher.mjs metadata stub note (source + behavioral); analysisText.mjs four-family degrader (reading/cloze/grammar-fill/seven-choices) against real tracked paper-zj-2026-jan fixtures, writing excluded; graceful no-throw on missing-analysis paper (paper-2024-jia) and unmatched groupId; findPaperAssetGroup additive paperId field + existing call-site regression; draftPaperStore teacher-only wiring + never-overwrite-existing-explanation + no-DB-write guard | yes |
 
 ## Core data and import
 
