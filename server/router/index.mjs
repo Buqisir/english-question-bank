@@ -12,24 +12,16 @@ export function defineRoute(method, pattern, handle, options = {}) {
   return Object.freeze({ method, pattern, handle, ownerOnly: Boolean(options.ownerOnly) })
 }
 
-// M0-3 owner/member role gate (docs/cuts/m0-3-role-gate/plan.md 1a). Checked after a
-// route match and before `handle` runs (and before the request body is read), so a
-// 403 never pays body-parse cost and never gives member requests a chance to trigger
-// side effects.
-//
-// Uses a POSITIVE check (`authMode === 'enforced'`) rather than `!== 'open'` on
-// purpose (PA MF-3): any future authMode value, or a context that forgot to set
-// authMode at all, must fail OPEN here (no gate) rather than accidentally 403-ing
-// bootstrap-open mode. The authMode contract (api.mjs applyAuthGate / context
-// assembly) is responsible for making sure authMode is always one of the two known
-// strings in every reachable branch — this function only trusts what it's given.
-function isOwnerGateBlocked(route, context) {
-  if (!route.ownerOnly) return false
-  if (context?.authMode !== 'enforced') return false
-  return context?.session?.role !== 'owner'
-}
-
-export async function runRoutes(routes, { request, response, url, context }) {
+// Generic pre-handle hook (docs/cuts/m0-3-role-gate/plan.md 1a, PM revision
+// 2026-07-03): router/index.mjs stays a pure dispatch skeleton with no baked-in
+// policy — `beforeHandle` is an optional caller-supplied callback, run after a
+// route match and before `handle` (and before the request body is read, so a
+// short-circuit never pays body-parse cost or lets the request trigger side
+// effects). If it returns truthy, the request is considered already handled and
+// `runRoutes` returns true without calling `handle`. The one caller (api.mjs)
+// uses this hook for the owner/member route gate; router/index.mjs itself has no
+// opinion on what `beforeHandle` checks.
+export async function runRoutes(routes, { request, response, url, context }, { beforeHandle } = {}) {
   for (const route of routes) {
     if (request.method !== route.method) {
       continue
@@ -40,8 +32,7 @@ export async function runRoutes(routes, { request, response, url, context }) {
       continue
     }
 
-    if (isOwnerGateBlocked(route, context)) {
-      context.sendJson(response, 403, { error: 'forbidden' })
+    if (beforeHandle && (await beforeHandle(route, { request, response, url, match, context }))) {
       return true
     }
 

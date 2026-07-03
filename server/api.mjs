@@ -4189,6 +4189,25 @@ function applyAuthGate(request, response, pathname) {
   }
 }
 
+// M0-3 owner/member route gate (docs/cuts/m0-3-role-gate/plan.md 1a, PM revision
+// 2026-07-03): the runRoutes `beforeHandle` hook — this is where the 403 policy
+// actually lives (router/index.mjs stays a pure dispatch skeleton with no auth
+// vocabulary; see verify-h1-router-skeleton.mjs's forbidden-term guard).
+//
+// Uses a POSITIVE check (`authMode === 'enforced'`) rather than `!== 'open'` on
+// purpose (PA MF-3): any future authMode value, or a context that forgot to set
+// authMode at all, must fail OPEN here (no gate) rather than accidentally 403-ing
+// bootstrap-open mode. `applyAuthGate` above is responsible for making sure
+// authMode is always one of the two known strings in every reachable branch —
+// this function only trusts what it's given.
+function ownerGateBeforeHandle(route, { response, context }) {
+  if (!route.ownerOnly) return false
+  if (context?.authMode !== 'enforced') return false
+  if (context?.session?.role === 'owner') return false
+  sendJson(response, 403, { error: 'forbidden' })
+  return true
+}
+
 const server = createServer(async (request, response) => {
   if (!request.url) {
     sendJson(response, 400, { error: 'Missing URL' })
@@ -4221,7 +4240,7 @@ const server = createServer(async (request, response) => {
         context: authResult.session
           ? { ...serverContext, session: authResult.session, authMode: authResult.authMode }
           : { ...serverContext, authMode: authResult.authMode },
-      })
+      }, { beforeHandle: ownerGateBeforeHandle })
     ) {
       return
     }
