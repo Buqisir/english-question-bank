@@ -87,18 +87,45 @@ cut size: large; touches schema, data contract: yes（上线路线图 M0 第 4 �
    - **子表规则**：`draft_paper_items` 的 SQL 不动，但任何以
      draftPaperId 为入口的操作，必须先经父表按
      `(id, user_id)` 命中（未命中按现有「草稿不存在」路径回 404），
-     不许直接信任路由参数里的 draft_paper_id。逐方法核对
-     `draftPaperStore.mjs` 全部 15 个方法与 `mySpace.mjs` 全部 8 个
-     函数，一个不漏（侦察报告第 1 节的点位表为清单基准）。
+     不许直接信任路由参数里的 draft_paper_id。核对基准以「触及三张
+     顶层表的每一条 SQL」为准（不是导出方法数，PA SW-1）——
+     `draftPaperStore.mjs` 的 9 个自开连接方法（listDraftPapers /
+     getOrCreateCurrentDraftPaper / addGroupToCurrentDraftPaper /
+     updateDraftPaper / patchDraftPaperItem / deleteDraftPaperItem /
+     restoreDraftPaperItem / migrateAssemblyBasketToDraftPaper /
+     exportDraftPaperPdf）签名都要带 userId 并传给内部的
+     getCurrentDraftPaperRow / createDraftPaper / markCurrentDraftPaper。
+   - **协作路径点名（PA MF-3，最易漏的两处）**：
+     ①`saveMySpaceArtifact` 的 folderId 存在性校验（`mySpace.mjs:176`）
+     必须带 `AND user_id = ?`；artifact INSERT 的 user_id 取调用方
+     传入的 userId，**不得**从 draftPaper 或 folder 反推。
+     ②`POST /api/my-space/artifacts` 路由内的 `exportDraftPaperPdf`
+     调用必须传 `resolveDataUserId(context)`——B 拿 A 的 draftId
+     借导出旁路越权读，必须在 getDraftPaper 圈人处回 404。
+   - **getDraftSearchContext 内联子表查询不加 user_id**（PA SW-2）：
+     `api.mjs:507` 的 items 查询已经父表圈过，误加属违约。
+   - **listMySpace 的 LEFT JOIN 两侧都圈**（PA SW-3）：
+     `mySpace.mjs:112` 的 `LEFT JOIN draft_papers dp` 加
+     `AND dp.user_id = a.user_id`（显式皮带，防 source_draft_exists
+     跨用户误判）。
 4. **「当前草稿」按人**：唯一索引改
    `ON draft_papers(user_id, current_marker) WHERE current_marker = 1`。
    同名索引换形要先 DROP 再 CREATE（放迁移分支，见决策 6）。
 5. **文件夹名按人唯一**：`my_space_folders` 重建表，
    `name TEXT NOT NULL` + `UNIQUE(user_id, name)`。重建走 SQLite 官方
-   12 步套路的最小版（迁移分支内）：`PRAGMA foreign_keys = OFF`（仅
-   该连接、该分支内）→ CREATE 新形临时表 → INSERT SELECT（user_id
-   取 DEFAULT 'local'）→ DROP 旧表 → RENAME → `PRAGMA foreign_keys
-   = ON` → `PRAGMA foreign_key_check` 断言零行。
+   12 步套路的最小版（迁移分支内），**时序硬约束（PA MF-2，DEV 不得
+   偏离）**：
+   - `PRAGMA foreign_keys = OFF` 与 `= ON` 必须在事务**外**执行——
+     SQLite 在活动事务内改这个 PRAGMA 是静默 no-op（不报错不生效），
+     照抄本仓 store 方法「整段包 BEGIN」的惯例会中招；
+   - 重建主体（CREATE 新形临时表 → INSERT SELECT（user_id 取
+     DEFAULT 'local'）→ DROP 旧表 → RENAME）必须包在**一个**
+     `BEGIN…COMMIT` 里——半迁移态（旧表已 DROP、新表未 RENAME）
+     不可能落盘，否则下次启动 `CREATE TABLE IF NOT EXISTS` 会以新形
+     补建空表，旧数据丢失；
+   - 完整顺序：`foreign_keys=OFF`（事务外）→ `BEGIN` → 重建四步 →
+     `COMMIT` → `foreign_keys=ON`（事务外）→ `PRAGMA
+     foreign_key_check` 断言零行。
    `my_space_artifacts.folder_id` 的 FK（ON DELETE SET NULL）在
    DROP+RENAME 后指向新表；重建后必须跑 foreign_key_check 验证。
    捕获 UNIQUE 报错转「文件夹名称已存在」的现有逻辑（
@@ -129,12 +156,23 @@ cut size: large; touches schema, data contract: yes（上线路线图 M0 第 4 �
      强制模式多用户的 v2 库（服务器 M1 才部署；owner 本地恒开放
      模式），故无数据错并风险。**记 ADR，列 owner 追认**。
 7. **getDraftSearchContext(userId)**：签名加必填 userId，
-   `getCurrentDraftPaperRow(userDb, userId)` 按人取。两个调用点
-   （`listQuestionGroups`、semanticSearch 工厂注入处）从请求
-   context 经 `resolveDataUserId` 取值后**一路显式传参**下去；
-   `listQuestionGroups` 与语义搜索入口的签名相应加 userId。
-   「找题页 in_current_draft 按钮态」进 Browser QA 必测（两用户
-   各自的按钮态互不串——M0-1 教训，静态 verify 抓不到）。
+   `getCurrentDraftPaperRow(userDb, userId)` 按人取。消费链共
+   **三个 member 可达入口**，全部从请求 context 经
+   `resolveDataUserId` 取值后一路显式传参（PA MF-1 订正——AI 链路
+   是穿透两层的，漏改会重演 M0-1 按钮态串号 bug）：
+   - `GET /api/question-groups` → `listQuestionGroups(userId, ...)`
+     （`questionGroupRoutes.mjs` handler 取值下传）；
+   - `POST /api/ai/semantic-search` →
+     `semanticSearchQuestionGroups(userId, ...)` 签名加必填 userId，
+     内部 `getDraftSearchContext(userId)`；
+   - `POST /api/ai/question-bank-steward` →
+     `questionBankStewardSearch(userId, ...)` 签名加必填 userId，
+     并把 userId **转发**给它内部嵌套的
+     `semanticSearchQuestionGroups` 调用
+     （`questionBankStewardService.mjs:430`）。
+   Browser QA 必测两格：「找题页 in_current_draft 按钮态按人正确」
+   +「两 member 的 AI 语义搜索与 AI 管家结果卡片按钮态互不串」
+   （静态 verify 抓不到，M0-1 教训）。
 8. **下载路由补归属**：`GET /user-space/files/:id.pdf` 取 artifact 行
    后校验 `user_id === resolveDataUserId(context)`，不命中回 404
    （与 id 不存在同响应，不泄露存在性）。
@@ -160,8 +198,18 @@ cut size: large; touches schema, data contract: yes（上线路线图 M0 第 4 �
   SQL 圈范围。
 - `server/my-space/mySpaceRoutes.mjs`：9 条路由下传 userId；下载路由
   归属校验。
-- `server/search/semanticSearchService.mjs`：`getDraftSearchContext`
-  调用点传 userId（签名沿注入链打通）。
+- `server/search/semanticSearchService.mjs`：
+  `semanticSearchQuestionGroups` 签名加必填 userId，
+  `getDraftSearchContext(userId)` 沿注入链打通。
+- `server/search/questionBankStewardService.mjs`（PA MF-1）：
+  `questionBankStewardSearch` 签名加必填 userId 并转发给内部的
+  semanticSearch 调用。
+- `server/ai-proxy/routes.mjs`（PA MF-1）：semantic-search 与
+  question-bank-steward 两条路由 handler 取
+  `resolveDataUserId(context)` 下传。
+- `server/question-bank/questionGroupRoutes.mjs`：
+  `GET /api/question-groups` handler 取 userId 传
+  `listQuestionGroups`。
 - `scripts/verify-user-scope.mjs`（新增，进 verify-ci +
   scripts/README.md）：见验收 1–3。
 - `scripts/verify-c8-draft-paper-contracts.mjs` /
@@ -203,19 +251,52 @@ cut size: large; touches schema, data contract: yes（上线路线图 M0 第 4 �
      「名称已存在」；
    - B 用 A 的 artifact id 打 `GET /user-space/files/:id.pdf` 与
      `DELETE /api/my-space/artifacts/:id` → 404；A 自己下载成功；
+   - **B 用 A 的 draftPaperId 打 `POST /api/my-space/artifacts` →
+     404（PA MF-3，借导出旁路越权读）**；B 把 artifact 归档进 A 的
+     folderId → 404/校验拒绝；
    - owner 无特权：A（owner）用 B 的 draft id → 同样 404。
 3. **迁移**：脚本手工构造 v2 形库（无 user_id 列 + user_version=2 +
    预置行，含一行 current_marker=1）→ 触发 ensure → 断言：列齐、
    行回填 'local'、复合索引在（`PRAGMA index_info`）、旧行仍可经
    开放模式 API 读到、user_version=3 → 再触发一次 ensure 幂等无错。
+   **另构造半迁移态库（已 ADD COLUMN、user_version 仍 =2）触发
+   ensure → 断言收敛到 v3 且 my_space_folders 数据不丢（PA MF-2
+   崩溃重入路径）**。
 4. `pnpm -C app run verify:all` 全绿（或 PR CI 绿）；
    verify-user-scope 已挂 verify-ci（housekeeping 闸）。
 5. **浏览器 QA**（PM 亲跑，两浏览器 profile 两账号）：A、B 各自
    找题→加组→当前草稿互不串→个人空间互不见；**找题页
-   in_current_draft 按钮态按人正确**；退回开放模式（清 users）后
-   owner 日常流零变化。QA 前 `lsof -nP -iTCP:8787 -sTCP:LISTEN` +
-   `ps -o lstart` 核对进程新鲜度（孤儿进程教训）；QA 账号用完清掉。
+   in_current_draft 按钮态按人正确**；**AI 语义搜索 + AI 管家结果
+   卡片按钮态两 member 互不串（PA MF-1）**；退回开放模式（清
+   users）后 owner 日常流零变化。QA 前
+   `lsof -nP -iTCP:8787 -sTCP:LISTEN` + `ps -o lstart` 核对进程
+   新鲜度（孤儿进程教训）；QA 账号用完清掉。
 
 ## PA Follow-Up Decisions
 
-（PA 评审后由 PM 压缩回填。）
+PA 判定 APPROVE WITH MUST FIX（pa.md，2026-07-03），3 条 Must Fix
+全部采纳并压缩入本文件：
+
+- MF-1（AI 搜索链路 userId 未穿透）→ 决策 7 扩写为三入口
+  （question-groups / semantic-search / steward），steward 转发
+  userId；改动清单补 `ai-proxy/routes.mjs` /
+  `questionBankStewardService.mjs` / `questionGroupRoutes.mjs`；
+  验收 5 加 AI 搜索按钮态互不串一格。
+- MF-2（表重建事务/PRAGMA 时序）→ 决策 5 补硬约束：PRAGMA 开关必在
+  事务外（事务内静默 no-op）、重建主体包单个 BEGIN…COMMIT；验收 3
+  加半迁移态重入收敛断言。
+- MF-3（saveMySpaceArtifact 协作路径）→ 决策 3 补点名：folderId
+  校验带 user_id、artifact 归属取调用方 userId 不反推、
+  `POST /api/my-space/artifacts` 内 exportDraftPaperPdf 传 userId；
+  验收 2 加借导出旁路 404 一格。
+
+Should Watch 采纳情况：SW-1（以 SQL 为清单基准 + 9 个自开方法签名）
+进决策 3；SW-2（内联子表查询勿误加）进决策 3；SW-3（LEFT JOIN 两侧
+圈）进决策 3；SW-4/5（'local' 不自动认领、basket 残留不做）已在
+ADR-0014 + owner 追认清单；SW-6（c8 窗口正则重量窗 + 切片边界确认）
+已在改动清单 verify 条目，DEV 改完实跑确认。
+
+Open PO Decisions 处置：①'local' 存量行不自动认领 → owner 追认
+（非阻塞，累计清单）；②owner 无私有数据特权 → roadmap 决策 2
+「按用户私有」的直接推论，PM 视为已拍板，不阻塞（owner 若想要运营
+视角另开刀）。
