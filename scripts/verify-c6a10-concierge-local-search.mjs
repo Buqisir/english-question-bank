@@ -172,13 +172,17 @@ assert('Reading C/D aliases are explicit', source.includes('`reading ${readingSe
 console.log('\n-- 6. Runtime API data is merged with repo samples --')
 const appSource = read('app/src/App.tsx')
 assert('App defines sample/API merge helper', appSource.includes('function mergeQuestionGroupsWithSamples'))
+// 大重构后初始加载与所有刷新路径收敛进单一的 refreshQuestionGroups——
+// 不再数文本 call-site（旧断言在 main 上长红），改钉真不变量：
+// 合并调用必须住在 refreshQuestionGroups 内，且该函数被 ≥2 处调用
+// （挂载 effect + 各刷新点），保证初始与刷新都走 sample 合并。
 assert(
-  'initial API load preserves missing sample groups',
-  appSource.includes('setQuestionGroups(mergeQuestionGroupsWithSamples(groups))'),
+  'API loads merge samples inside the single refreshQuestionGroups choke point',
+  /const refreshQuestionGroups = useCallback[\s\S]{0,400}setQuestionGroups\(mergeQuestionGroupsWithSamples\(groups\)\)/.test(appSource),
 )
 assert(
-  'refresh API load preserves missing sample groups',
-  (appSource.match(/setQuestionGroups\(mergeQuestionGroupsWithSamples\(groups\)\)/g) || []).length >= 2,
+  'initial mount and refresh paths both route through refreshQuestionGroups',
+  (appSource.match(/refreshQuestionGroups\(/g) || []).length >= 3, // 定义 1 处 + 调用 ≥2 处
 )
 
 console.log('\n-- 7. Same paper stays one row when C/D both match --')
