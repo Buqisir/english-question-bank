@@ -99,6 +99,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const titleSaveTimerRef = useRef<number | null>(null)
   const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
+  const a4SheetRef = useRef<HTMLDivElement | null>(null)
+  const [previewScale, setPreviewScale] = useState(1)
 
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
@@ -182,6 +184,24 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     [draftPaper],
   )
   const previewHtml = useMemo(() => buildA4PreviewHtml(draftPaper?.printHtml || ''), [draftPaper?.printHtml])
+
+  // A4 page renders at a fixed native width (210mm ≈ 794px). On narrow
+  // viewports the sheet no longer fits its container; scale it down to fit
+  // instead of letting it clip. Never scale up past 1 on wide screens.
+  useEffect(() => {
+    const node = a4SheetRef.current
+    if (!node || typeof ResizeObserver === 'undefined') return
+    const NATIVE_WIDTH_PX = 794
+    const updateScale = () => {
+      const containerWidth = node.clientWidth
+      if (!containerWidth) return
+      setPreviewScale(Math.min(1, containerWidth / NATIVE_WIDTH_PX))
+    }
+    updateScale()
+    const observer = new ResizeObserver(updateScale)
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [previewHtml])
 
   async function persistItems(nextItems: DraftPaperItem[]) {
     if (!draftPaper) return
@@ -398,27 +418,29 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         <span className={`draft-save-status ${saveStatus}`}>
           {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
         </span>
-        <select
-          className="draft-recent-select"
-          value={draftPaper.id}
-          onChange={(event) => {
-            const id = event.target.value
-            const url = new URL(window.location.href)
-            url.searchParams.set('view', 'draft-paper')
-            url.searchParams.set('draftPaperId', id)
-            window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
-            setVersionType('student')
-            void fetchDraftPaper(id).then((next) => {
-              setDraftPaper(next)
-              setTitleDraft(next.title)
-            })
-          }}
-          aria-label="最近草稿卷"
-        >
-          {recentDrafts.map((draft) => (
-            <option key={draft.id} value={draft.id}>{draft.title}</option>
-          ))}
-        </select>
+        <label className="draft-recent-select-field">
+          <span>最近草稿卷</span>
+          <select
+            className="draft-recent-select"
+            value={draftPaper.id}
+            onChange={(event) => {
+              const id = event.target.value
+              const url = new URL(window.location.href)
+              url.searchParams.set('view', 'draft-paper')
+              url.searchParams.set('draftPaperId', id)
+              window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
+              setVersionType('student')
+              void fetchDraftPaper(id).then((next) => {
+                setDraftPaper(next)
+                setTitleDraft(next.title)
+              })
+            }}
+          >
+            {recentDrafts.map((draft) => (
+              <option key={draft.id} value={draft.id}>{draft.title}</option>
+            ))}
+          </select>
+        </label>
         <div className="draft-version-toggle" role="group" aria-label="导出版本">
           <button
             type="button"
@@ -470,9 +492,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             <span>{totalQuestions} 小题</span>
             <span>{versionType === 'teacher' ? '教师卷' : '学生卷'}</span>
           </div>
-          <div className="draft-a4-sheet">
+          <div
+            className="draft-a4-sheet"
+            ref={a4SheetRef}
+            style={previewScale < 1 ? { height: `${1188 * previewScale}px` } : undefined}
+          >
             {previewHtml ? (
-              <iframe title="草稿卷 A4 预览" srcDoc={previewHtml} />
+              <iframe
+                title="草稿卷 A4 预览"
+                srcDoc={previewHtml}
+                style={previewScale < 1 ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' } : undefined}
+              />
             ) : (
               <div className="draft-a4-empty">请先添加题组</div>
             )}

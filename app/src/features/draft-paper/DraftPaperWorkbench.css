@@ -67,6 +67,16 @@
   padding: 6px 9px;
 }
 
+.draft-recent-select-field {
+  display: grid;
+  gap: 4px;
+}
+
+.draft-recent-select-field > span {
+  color: #746b60;
+  font-size: 12px;
+}
+
 .draft-save-status {
   color: #746b60;
   font-size: 13px;
@@ -383,7 +393,12 @@
     width: 100%;
   }
 
+  /* When JS computes a scale < 1 (native A4 width no longer fits), the
+     iframe is transform-scaled from its fixed native size instead of being
+     stretched to 100% — stretching alone would clip the page's right edge
+     because the rendered content inside keeps a fixed 210mm layout. */
   .draft-a4-sheet iframe {
-    height: 66vh;
+    height: 1188px;
+    width: 794px;
   }
 }

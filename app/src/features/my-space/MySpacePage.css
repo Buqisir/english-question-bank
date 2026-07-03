@@ -60,6 +60,31 @@
   margin: 14px 0 0;
 }
 
+.my-space-empty-state {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.my-space-empty-cta {
+  align-items: center;
+  background: #1A1A1A;
+  border: 1px solid #1A1A1A;
+  border-radius: 6px;
+  color: #FFFDF8;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 7px 14px;
+  transition: background 0.15s ease;
+}
+
+.my-space-empty-cta:hover {
+  background: #000000;
+}
+
 .my-space-error {
   color: #9a3327;
 }

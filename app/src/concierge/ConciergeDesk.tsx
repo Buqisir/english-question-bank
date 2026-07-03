@@ -85,12 +85,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         />
         <button
           type="submit"
-          className="concierge-intent-submit"
+          className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
           disabled={submitDisabled}
           aria-label="开始取题"
           title="开始取题"
         >
-          {state.kind === 'loading' || dataLoading ? '…' : '→'}
+          {state.kind === 'loading' || dataLoading ? '取题中…' : '→'}
         </button>
       </form>
 
@@ -102,6 +102,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           onChange={(event) => onThinkingModeChange?.(event.target.checked)}
         />
         <label htmlFor={thinkingToggleId}>思考模式</label>
+        <span className="concierge-thinking-hint">用 AI 理解你的描述，更准但稍慢</span>
       </div>
 
       {dataLoading && (
