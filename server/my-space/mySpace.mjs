@@ -2,16 +2,27 @@ import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } 
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 
+// M0-4 user data isolation (docs/cuts/m0-4-user-scope/plan.md decisions 4-6):
+// new-form shape only. my_space_folders.name is per-user unique (UNIQUE(user_id,
+// name)) rather than the old global-unique inline constraint — SQLite cannot
+// ALTER an inline UNIQUE, so upgrading a real pre-M0-4 table happens via the
+// rebuild-table migration branch in server/api.mjs's ensureUserDatabaseShape,
+// not here. This CREATE TABLE IF NOT EXISTS only ever fires for a brand-new
+// database (fresh install) — an existing old-form table is left untouched by
+// this statement (IF NOT EXISTS) and is migrated by the caller instead.
 export function ensureMySpaceDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS my_space_folders (
       id TEXT PRIMARY KEY,
-      name TEXT NOT NULL UNIQUE,
+      user_id TEXT NOT NULL DEFAULT 'local',
+      name TEXT NOT NULL,
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
-      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE(user_id, name)
     );
     CREATE TABLE IF NOT EXISTS my_space_artifacts (
       id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL DEFAULT 'local',
       folder_id TEXT REFERENCES my_space_folders(id) ON DELETE SET NULL,
       title TEXT NOT NULL,
       file_name TEXT NOT NULL,
@@ -34,6 +45,17 @@ export function ensureMySpaceFilesRoot(filesRoot) {
 
 function nowIso() {
   return new Date().toISOString()
+}
+
+// M0-4 user data isolation (docs/cuts/m0-4-user-scope/plan.md decision 3): every
+// function below that touches my_space_folders / my_space_artifacts now takes a
+// required userId — no default, so a caller that forgets to pass it throws instead
+// of silently falling back to LOCAL_USER_ID.
+function requireUserId(userId) {
+  if (typeof userId !== 'string' || !userId) {
+    throw new Error('mySpace: userId is required')
+  }
+  return userId
 }
 
 function cleanName(value, fallback) {
@@ -80,27 +102,35 @@ function rowToArtifact(row) {
   }
 }
 
-export function listMySpace(db, { folderId = null } = {}) {
+export function listMySpace(db, userId, { folderId = null } = {}) {
+  requireUserId(userId)
   const folders = db
     .prepare(
       `
       SELECT f.*, COUNT(a.id) AS artifact_count
       FROM my_space_folders f
-      LEFT JOIN my_space_artifacts a ON a.folder_id = f.id
+      LEFT JOIN my_space_artifacts a ON a.folder_id = f.id AND a.user_id = f.user_id
+      WHERE f.user_id = ?
       GROUP BY f.id
       ORDER BY f.updated_at DESC, f.created_at DESC
       `,
     )
-    .all()
+    .all(userId)
     .map((row) => rowToFolder(row, Number(row.artifact_count || 0)))
 
-  const params = []
-  let where = ''
+  const params = [userId]
+  let where = 'WHERE a.user_id = ?'
   if (folderId) {
-    where = 'WHERE a.folder_id = ?'
+    where += ' AND a.folder_id = ?'
     params.push(folderId)
   }
 
+  // PA SW-3 (plan.md decision 3): both sides of the LEFT JOIN are scoped
+  // (a.user_id = ? via the WHERE above, dp.user_id = a.user_id here) as an
+  // explicit belt-and-suspenders — normal-path artifacts only ever point at a
+  // same-user draft, but without this, a cross-user artifact whose
+  // source_draft_paper_id happens to collide with another user's draft id could
+  // make source_draft_exists misreport true.
   const artifacts = db
     .prepare(
       `
@@ -109,7 +139,7 @@ export function listMySpace(db, { folderId = null } = {}) {
         dp.title AS source_draft_title,
         CASE WHEN dp.id IS NULL THEN 0 ELSE 1 END AS source_draft_exists
       FROM my_space_artifacts a
-      LEFT JOIN draft_papers dp ON dp.id = a.source_draft_paper_id AND dp.status = 'active'
+      LEFT JOIN draft_papers dp ON dp.id = a.source_draft_paper_id AND dp.status = 'active' AND dp.user_id = a.user_id
       ${where}
       ORDER BY a.generated_at DESC, a.created_at DESC
       `,
@@ -120,47 +150,59 @@ export function listMySpace(db, { folderId = null } = {}) {
   return { folders, artifacts }
 }
 
-export function createMySpaceFolder(db, input) {
+export function createMySpaceFolder(db, userId, input) {
+  requireUserId(userId)
   const name = cleanName(input?.name, '')
   if (!name) throw new Error('文件夹名称不能为空')
   const id = `my-folder-${randomUUID()}`
   try {
-    db.prepare('INSERT INTO my_space_folders (id, name) VALUES (?, ?)').run(id, name)
+    db.prepare('INSERT INTO my_space_folders (id, user_id, name) VALUES (?, ?, ?)').run(id, userId, name)
   } catch (error) {
     if (String(error?.message || error).includes('UNIQUE')) throw new Error('文件夹名称已存在')
     throw error
   }
-  return rowToFolder(db.prepare('SELECT * FROM my_space_folders WHERE id = ?').get(id), 0)
+  return rowToFolder(db.prepare('SELECT * FROM my_space_folders WHERE id = ? AND user_id = ?').get(id, userId), 0)
 }
 
-export function renameMySpaceFolder(db, folderId, input) {
+export function renameMySpaceFolder(db, userId, folderId, input) {
+  requireUserId(userId)
   const name = cleanName(input?.name, '')
   if (!name) throw new Error('文件夹名称不能为空')
-  const current = db.prepare('SELECT * FROM my_space_folders WHERE id = ?').get(folderId)
+  const current = db.prepare('SELECT * FROM my_space_folders WHERE id = ? AND user_id = ?').get(folderId, userId)
   if (!current) throw new Error('文件夹不存在')
-  const count = db.prepare('SELECT COUNT(*) AS count FROM my_space_artifacts WHERE folder_id = ?').get(folderId)?.count || 0
+  const count = db.prepare('SELECT COUNT(*) AS count FROM my_space_artifacts WHERE folder_id = ? AND user_id = ?').get(folderId, userId)?.count || 0
   if (current.name === name) return rowToFolder(current, Number(count))
 
   let result
   try {
-    result = db.prepare('UPDATE my_space_folders SET name = ?, updated_at = datetime(\'now\') WHERE id = ?').run(name, folderId)
+    result = db.prepare('UPDATE my_space_folders SET name = ?, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(name, folderId, userId)
   } catch (error) {
     if (String(error?.message || error).includes('UNIQUE')) throw new Error('文件夹名称已存在')
     throw error
   }
   if (result.changes === 0) throw new Error('文件夹不存在')
-  return rowToFolder(db.prepare('SELECT * FROM my_space_folders WHERE id = ?').get(folderId), Number(count))
+  return rowToFolder(db.prepare('SELECT * FROM my_space_folders WHERE id = ? AND user_id = ?').get(folderId, userId), Number(count))
 }
 
-export function deleteMySpaceFolder(db, folderId) {
-  const count = db.prepare('SELECT COUNT(*) AS count FROM my_space_artifacts WHERE folder_id = ?').get(folderId)?.count || 0
+export function deleteMySpaceFolder(db, userId, folderId) {
+  requireUserId(userId)
+  const count = db.prepare('SELECT COUNT(*) AS count FROM my_space_artifacts WHERE folder_id = ? AND user_id = ?').get(folderId, userId)?.count || 0
   if (Number(count) > 0) throw new Error('文件夹中还有文件，不能删除')
-  const result = db.prepare('DELETE FROM my_space_folders WHERE id = ?').run(folderId)
+  const result = db.prepare('DELETE FROM my_space_folders WHERE id = ? AND user_id = ?').run(folderId, userId)
   if (result.changes === 0) throw new Error('文件夹不存在')
   return { ok: true }
 }
 
-export function saveMySpaceArtifact(db, {
+// PA MF-3 (plan.md decision 3, "协作路径点名"): folderId existence check is scoped
+// AND user_id = ? (a bare `WHERE id = ?` would let B file an artifact into A's
+// folder just by knowing A's folderId). The artifact row's user_id is ALWAYS the
+// userId argument the caller passed in — never derived/reversed from draftPaper or
+// folderId — so this function cannot be tricked into writing a row for the wrong
+// user even if draftPaper or folderId belong to someone else (the caller,
+// server/my-space/mySpaceRoutes.mjs's POST /api/my-space/artifacts handler, is
+// responsible for having already 404'd on a cross-user draftPaperId via
+// exportDraftPaperPdf before this function is ever called).
+export function saveMySpaceArtifact(db, userId, {
   filesRoot,
   draftPaper,
   pdfBody,
@@ -168,12 +210,13 @@ export function saveMySpaceArtifact(db, {
   fileName,
   sourcePdfPath = '',
 }) {
+  requireUserId(userId)
   if (!draftPaper?.id) throw new Error('草稿卷不存在')
   ensureMySpaceFilesRoot(filesRoot)
 
   const selectedFolderId = String(folderId || '').trim() || null
   if (selectedFolderId) {
-    const folder = db.prepare('SELECT id FROM my_space_folders WHERE id = ?').get(selectedFolderId)
+    const folder = db.prepare('SELECT id FROM my_space_folders WHERE id = ? AND user_id = ?').get(selectedFolderId, userId)
     if (!folder) throw new Error('文件夹不存在')
   }
 
@@ -189,12 +232,12 @@ export function saveMySpaceArtifact(db, {
     db.prepare(
       `
       INSERT INTO my_space_artifacts (
-        id, folder_id, title, file_name, file_path, artifact_type,
+        id, user_id, folder_id, title, file_name, file_path, artifact_type,
         source_draft_paper_id, page_count, generated_at
       )
-      VALUES (?, ?, ?, ?, ?, 'student-paper', ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, 'student-paper', ?, ?, ?)
       `,
-    ).run(id, selectedFolderId, finalFileName.replace(/\.pdf$/i, ''), finalFileName, filePath, draftPaper.id, pageCount, generatedAt)
+    ).run(id, userId, selectedFolderId, finalFileName.replace(/\.pdf$/i, ''), finalFileName, filePath, draftPaper.id, pageCount, generatedAt)
   } catch (error) {
     rmSync(filePath, { force: true })
     throw error
@@ -209,25 +252,27 @@ export function saveMySpaceArtifact(db, {
           dp.title AS source_draft_title,
           CASE WHEN dp.id IS NULL THEN 0 ELSE 1 END AS source_draft_exists
         FROM my_space_artifacts a
-        LEFT JOIN draft_papers dp ON dp.id = a.source_draft_paper_id AND dp.status = 'active'
-        WHERE a.id = ?
+        LEFT JOIN draft_papers dp ON dp.id = a.source_draft_paper_id AND dp.status = 'active' AND dp.user_id = a.user_id
+        WHERE a.id = ? AND a.user_id = ?
         `,
       )
-      .get(id),
+      .get(id, userId),
   )
 }
 
-export function deleteMySpaceArtifact(db, filesRoot, artifactId) {
-  const row = db.prepare('SELECT * FROM my_space_artifacts WHERE id = ?').get(artifactId)
+export function deleteMySpaceArtifact(db, userId, filesRoot, artifactId) {
+  requireUserId(userId)
+  const row = db.prepare('SELECT * FROM my_space_artifacts WHERE id = ? AND user_id = ?').get(artifactId, userId)
   if (!row) throw new Error('文件不存在')
   const file = resolveMySpaceArtifactPath(filesRoot, row.file_path)
-  db.prepare('DELETE FROM my_space_artifacts WHERE id = ?').run(artifactId)
+  db.prepare('DELETE FROM my_space_artifacts WHERE id = ? AND user_id = ?').run(artifactId, userId)
   rmSync(file, { force: true })
   return { ok: true }
 }
 
-export function resolveMySpaceArtifactForDownload(db, filesRoot, artifactId) {
-  const row = db.prepare('SELECT * FROM my_space_artifacts WHERE id = ?').get(artifactId)
+export function resolveMySpaceArtifactForDownload(db, userId, filesRoot, artifactId) {
+  requireUserId(userId)
+  const row = db.prepare('SELECT * FROM my_space_artifacts WHERE id = ? AND user_id = ?').get(artifactId, userId)
   if (!row) return null
   const filePath = resolveMySpaceArtifactPath(filesRoot, row.file_path)
   if (!existsSync(filePath) || statSync(filePath).isDirectory()) return null
