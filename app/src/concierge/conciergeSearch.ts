@@ -661,6 +661,51 @@ function scoreGroupAgainstTokens(
 }
 
 /**
+ * Query-side chrome characters (audit挂账 #3' — weak-reason token leak fix).
+ *
+ * A matched token is worth ECHOING BACK to the teacher only when it reads
+ * like a content word. `cjkBigrams` deliberately carves loose fragments out
+ * of a connected run ("我想要一篇讲动物的题" → "我想"/"要一"/"的题"/...) so
+ * matching can be forgiving — but those fragments are tokenizer debris, and
+ * real-bank QA saw them leak into the visible reason ("可能相关：要一").
+ * Any token containing one of these grammar / politeness / counter / paper-
+ * meta characters is suppressed from DISPLAY (scoring is untouched — which
+ * hits surface, and how they rank, does not change).
+ *
+ * Bias is deliberately toward suppression: a falsely-killed real word
+ * ("有趣" via 有, "演讲" via 讲) just degrades that reason to the bare,
+ * honest "可能相关" line that already exists — while a falsely-kept fragment
+ * is gibberish in the teacher's face. The set is the character inventory of
+ * `CJK_STOPWORDS` plus common function characters, minus characters that
+ * commonly build real topic words (关→关系, 话→神话, 好→好奇 are excluded).
+ */
+const REASON_CHROME_CJK_CHARS = new Set(
+  '的了篇题找一两道请帮我你他她它个最是在和与些这那有于讲给要想需能就都也还很么吗呢吧啊呀之其或及不没把被对从到让别',
+)
+
+/**
+ * Real words the chrome-character rule cannot catch, but that describe the
+ * QUERY or the QUESTION-BANK APPARATUS rather than passage content —
+ * "可能相关：相关" / "可能相关：文章" tells the teacher nothing.
+ */
+const REASON_META_WORDS = new Set(['文章', '内容', '相关', '资料', '材料', '素材', '东西'])
+
+/**
+ * True when a matched token reads like a content word a teacher would
+ * recognize as "why this group surfaced": at least 2 characters (a bare
+ * section letter "c" or a lone CJK character is never self-explanatory),
+ * no query-chrome characters, not a meta word.
+ */
+function isDisplayWorthyToken(token: string): boolean {
+  if (token.length < 2) return false
+  if (REASON_META_WORDS.has(token)) return false
+  for (const ch of token) {
+    if (REASON_CHROME_CJK_CHARS.has(ch)) return false
+  }
+  return true
+}
+
+/**
  * CR-5 SW-2 fix — collapse `matchedTokens` down to one representative token
  * per query run (see `tokenRunIdsOf`), keeping the LONGEST token from each
  * run. A run that produced a real word ("科技") keeps that word; a run that
@@ -668,11 +713,20 @@ function scoreGroupAgainstTokens(
  * longest — never a laundry list of every bigram carved from the same short
  * span. Order follows first-appearance in `matchedTokens` for stable,
  * predictable reason text.
+ *
+ * Display-worthiness (audit挂账 #3') filters BEFORE the longest-per-run
+ * pick, so chrome fragments never occupy a run's display slot: for
+ * "…讲动物的题", the carve order puts "要一" ahead of "动物" and both are
+ * length 2 — without the filter the fragment wins the first-appearance
+ * tiebreak; with it, the content word does. A run whose matches are all
+ * chrome contributes nothing, and a fully-empty result degrades the weak
+ * reason to the bare "可能相关" line in `buildLocalReason`.
  */
 function pickDisplayTokens(matchedTokens: string[], tokenRunIds: Map<string, number>): string[] {
   const bestByRun = new Map<number, string>()
   const runOrder: number[] = []
   for (const token of matchedTokens) {
+    if (!isDisplayWorthyToken(token)) continue
     const runId = tokenRunIds.get(token) ?? -1
     const current = bestByRun.get(runId)
     if (current === undefined) {
@@ -838,9 +892,12 @@ function buildLocalReason(candidate: KeywordCandidate, weak = false): string {
 
   if (parts.length > 0) return parts.join(' · ')
   // CR-5 SW-2: the weak fallback line joins `displayTokens` (one longest
-  // token per matched query run), never raw `matchedTokens` — a carved
-  // 2-char bigram sibling like "的完"/"集作" must never reach this
-  // teacher-facing string even when it technically contributed to the score.
+  // DISPLAY-WORTHY token per matched query run — see `isDisplayWorthyToken`),
+  // never raw `matchedTokens` — a carved 2-char bigram sibling like
+  // "的完"/"集作", a chrome fragment like "要一", a bare section letter "c",
+  // or a meta word like "相关" must never reach this teacher-facing string
+  // even when it technically contributed to the score. When nothing
+  // display-worthy matched, the bare "可能相关" line is the honest floor.
   if (weak) {
     return displayTokens.length > 0 ? `可能相关：${displayTokens.join('、')}` : '可能相关'
   }
