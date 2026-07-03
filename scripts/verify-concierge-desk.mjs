@@ -798,5 +798,34 @@ console.log('\nTest 18: cut ai-key-server-fallback — runSearch dep array + ser
   }
 }
 
+// ------------------------------------------------------------------ Test 19
+console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility + global reduced-motion reset')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
+  const paperRow = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
+
+  // Anti-regression: no :focus-visible rule in App.css may still carry the
+  // near-invisible 0.08 ring alpha (scan every :focus-visible rule body).
+  const focusVisibleRules = css.match(/[^\n{}]*:focus-visible[^{]*\{[^}]*\}/g) || []
+  assert('found :focus-visible rules to scan', focusVisibleRules.length > 0, '')
+  const stillInvisible = focusVisibleRules.filter((rule) => /rgba\(26,\s*26,\s*26,\s*0\.08\)/.test(rule))
+  assert('no :focus-visible rule still uses rgba(26, 26, 26, 0.08)', stillInvisible.length === 0, `offending rules: ${JSON.stringify(stillInvisible)}`)
+
+  // Global prefers-reduced-motion reset replaces the old 5-selector block.
+  const reducedMotionBlock = css.match(/@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\n\}/)?.[0] || ''
+  assert('prefers-reduced-motion block exists', reducedMotionBlock.length > 0, '')
+  assert('reduced-motion block is the global *, *::before, *::after reset', /\*,\s*\*::before,\s*\*::after/.test(reducedMotionBlock), reducedMotionBlock)
+  assert('reduced-motion block sets animation-duration: 0.01ms', /animation-duration:\s*0\.01ms\s*!important/.test(reducedMotionBlock), reducedMotionBlock)
+  assert('old 5-selector reduced-motion block is gone', !/\.concierge-skeleton-line\s*\{\s*animation:\s*none/.test(css), '')
+
+  // Keyboard-equivalent path contract: the expand button must keep aria-expanded.
+  const expandButtonMatch = paperRow.match(/className=\{`concierge-row-expand[\s\S]*?<\/button>/)
+  assert('concierge-row-expand button found in ConciergePaperRow.tsx', Boolean(expandButtonMatch), '')
+  if (expandButtonMatch) {
+    assert('concierge-row-expand button retains aria-expanded', /aria-expanded=\{expanded\}/.test(expandButtonMatch[0]), expandButtonMatch[0])
+  }
+}
+
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)

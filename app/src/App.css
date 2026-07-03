@@ -4731,7 +4731,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:focus-visible {
-  outline: 2px solid rgba(26, 26, 26, 0.2);
+  outline: 2px solid rgba(26, 26, 26, 0.6);
   outline-offset: 2px;
 }
 
@@ -4756,7 +4756,7 @@ button:disabled {
 }
 
 .concierge-thinking-toggle input[type='checkbox']:focus-visible {
-  outline: 2px solid rgba(26, 26, 26, 0.35);
+  outline: 2px solid rgba(26, 26, 26, 0.6);
   outline-offset: 2px;
 }
 
@@ -4915,7 +4915,7 @@ button:disabled {
 }
 
 .concierge-row:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.6);
 }
 
 .concierge-row-anchor {
@@ -5027,7 +5027,7 @@ button:disabled {
 .concierge-action:focus-visible {
   outline: none;
   border-color: #1A1A1A;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.08);
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
 }
 
 .concierge-action:disabled {
@@ -5052,7 +5052,7 @@ button:disabled {
 
 .concierge-action-add:focus-visible {
   border-color: #1A1A1A;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.2);
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
 }
 
 /* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
@@ -5892,7 +5892,7 @@ button:disabled {
 
 .intake-batch-panel > summary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.08);
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
   border-radius: 6px;
 }
 
@@ -5958,7 +5958,7 @@ button:disabled {
 .intake-secondary-button:focus-visible {
   outline: none;
   border-color: #1A1A1A;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.08);
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
 }
 
 .intake-secondary-button:disabled {
@@ -6022,7 +6022,7 @@ button:disabled {
 .concierge-row-expand:focus-visible {
   outline: none;
   background: #EFEDE6;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.08);
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
 }
 
 .concierge-row-expand.open {
@@ -6077,15 +6077,11 @@ button:disabled {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .concierge-skeleton-line {
-    animation: none;
-  }
-
-  .app-shell.home-mode-ai .ghost-button,
-  .concierge-action,
-  .concierge-action-add,
-  .concierge-intent-submit {
-    transition: none;
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -6256,7 +6252,7 @@ button:disabled {
 }
 
 .concierge-paper-row:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.6);
 }
 
 .concierge-paper-row.is-expanded {
