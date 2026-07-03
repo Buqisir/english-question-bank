@@ -153,6 +153,43 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
   （round-1 抓出噪声地板误杀无空格真实查询的 Must Fix→DEV 用全 haystack
   DF+跨 run 多信号返工→round-2 变异测试后 APPROVE）。断言 85+230。
 - 复评待办：下轮开工时重跑 /impeccable critique 看 27/40 涨幅。
+  **→ 已做（2026-07-03，见下"第三轮"）。**
+
+## 第三轮结案（2026-07-03，critique 复评 + 刀⑥）
+
+- **impeccable critique 复评**（.impeccable/critique/2026-07-03T08-20-51Z__*.md，
+  三路：opus 冷读 + sonnet 检测 + 主 agent 真库走查）：**27/40 持平，P0 2→0**。
+  刀④⑤ 行为真库实测全部确认（诚实三态/真空态可达/暖化/教师版真解析/
+  空态出口）。分数没涨是因为冷眼挖出基线没抓到的新问题（见新挂账）。
+- **刀⑥ #230 首页默认 feed**（`feat(concierge)` @ ae48624）：空态/真空态
+  渲染按卷分组浏览 feed（44 套 · 287 篇章，year DESC，8 套帽+显示全部）+
+  chip 直搜 + 提交保留 query + eyebrow 去 slate + feed 行去「命中」搜索腔
+  （variant=feed）。CR 冷读 APPROVE（六变异全抓红，断言改动逐条裁定合法，
+  docs/cuts/home-default-feed/cr.md）；真库 QA 全过；37+230+85 断言绿。
+  critique 的「识别优于回忆/美学极简/迭代搜索断裂」三项 backlog 一刀带走。
+
+### 第三轮新挂账（按优先级）
+
+1. **P1 三面色板漂移**：DraftPaperWorkbench.css / MySpacePage.css 整套
+   裸 hex 平行色系（#24201b≠#1A1A1A 两种黑、#746b60≠#6B645C、#f2f0eb、
+   #2f2a23）。跨面"差一点点"读作拼凑。修法=纯映射到 DESIGN.md token，
+   不动结构。独立小刀。
+2. **P1 生错误直渲染实锤**：个人空间 502 双条英文生渲染（真库实拍）；
+   与首轮挂账 P1-4（50+ 处 error.message）同病，建议统一错误边界刀。
+3. **P2 推荐理由视觉降级**：#9A9180 斜体承载正文（DESIGN.md 明令禁止）；
+   weak 理由「可能相关：主题、c」泄漏分词 token。
+4. **P2 AI 模式 topbar 按钮墙**：6+ ghost 按钮与找题无关，移动端占首屏
+   370px 且按钮断字。收「更多」菜单是经典模式器官移植刀的一部分。
+5. **P2 无障碍三缺口**：焦点环 rgba(26,26,26,0.08) 几乎不可见；结果行
+   article onClick 键盘不可达；reduced-motion 只盖 5 个选择器
+   （13 animation + 37 transition 未盖）。
+6. **small verify-c6a10 陈旧断言**：`refresh API load preserves missing
+   sample groups` 在 main 基线即红（App.tsx call-site drift），非功能病。
+7. CR SW：feed 的 useState 断言名 "only" 强于正则（可加固）；chip 直搜无
+   in-flight 锁（键盘捷径刀时一并补）。
+8. dev 环境脚注：8787 被残留进程占用时 dev.sh 的 API 会 EADDRINUSE 静默
+   死、vite 靠旧进程过健康检查——旧进程一死全站 502。dev.sh 可考虑
+   fail-hard。
 
 ### 第二轮新挂账
 
