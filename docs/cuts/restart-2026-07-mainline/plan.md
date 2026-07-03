@@ -103,6 +103,45 @@ Paper Set 库、domain/schema、PaperSurface、print-renderer/docxRenderer
 
 ---
 
+## 刀③ 教师版真解析（paper-assets join，第二轮追加 2026-07-03）
+
+Branch: `restart-3-teacher-analysis`
+Scope: `server/draft-paper/draftPaperStore.mjs`（注入点）、新增
+`server/draft-paper/analysisText.mjs`（降级器）、`server/api.mjs`
+`findPaperAssetGroup` 扩展（只加字段不改旧字段）、`server/print-renderer.mjs`
+（存根隐藏 + 解析段样式微调）。
+Forbidden: **不写 DB**（不回填 questions.explanation——解析是 display 层，
+文件层为家，ADR-0008）；不动 publisher/导入管线；不动前端；writing 题型
+明确排除（不进 print 逐题流）。
+
+### 改动（勘探报告 docs 化，agent 输出已含 file:line）
+
+1. **止血**：`print-renderer.mjs:79` 加 `isMetaStub()`（`/^paperId=.*assetVersion=/`），
+   命中则整个【解析】块不渲染，【答案】保留。
+2. **正解**：`analysisText.mjs` 提供 `loadGroupAnalysisTexts(items)`——
+   每次导出先按 paperId 缓存 asset（避免每 item 全目录扫），按
+   `group.groupType` 选 family 分析文件，逐题降级成纯中文文本：
+   - reading: questionFocus + 正答 evidence quote + 错项 trap.explanation
+   - cloze: correctFit.reason + distractorGlosses + teachingNote
+   - grammar-fill: answer + reason + teachingNote
+   - seven-choices: mechanismSignals relation + topicClues
+   单题上限 ~600 字符截断（防单题占页）。
+3. `buildDraftPrintHtml` 组装时 explanation 为空 → 用 asset 解析文本覆盖；
+   asset 缺失/自造题 → 回落 DB → 存根被 1 兜底隐藏。
+
+### 验收（勘探报告 §4 六条全过）
+
+paper-zj-2026-jan 教师版四题型真解析零存根；无 asset 题组不露存根只留答案；
+单题 ≤2/3 页；存根正则单测；findPaperAssetGroup 现有调用点回归绿；
+缺 writing-analysis 的国家卷（paper-2024-jia）导出不报错。
+新 verify 断言接入 verify-ci（hermetic）。
+
+## 刀④ 主线审美打磨（critique 综合后补契约）
+
+评估 A/B 双路已跑，综合报告与打磨清单见 critique 快照
+（.impeccable/critique/）。UI 决定权=小川（owner 2026-07-02/03 两次确认，
+含审美 skill 全权）。铁律：Color-Lock 配色零改 / No-Blue / Red-Pen ≤10%。
+
 ## 流程
 
 每刀：Sonnet DEV subagent（worktree、按本契约）→ 主 agent 收 diff
