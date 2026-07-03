@@ -317,8 +317,11 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
       !new RegExp(removed).test(deskSource), '')
   }
 
-  // 9.3 Desk does not call useState locally.
-  assert('Desk does NOT use useState locally', !/^import\s+[^\n]*\buseState\b/m.test(deskSource), '')
+  // 9.3 Cut ⑥: Desk now owns one piece of local UI state — whether the
+  // default browse feed is expanded past its 8-paper preview. That's
+  // presentation-only pagination state, not retrieval state, so it stays
+  // local to the component instead of moving into useConciergeDesk.
+  assert('Desk uses useState for feed-expand UI state only', /\buseState\b/.test(deskSource), '')
 
   // 9.4 Desk renders paper rows, not the old group rows.
   assert('Desk maps paperResults', /paperResults\.map\(\(paper\)/.test(deskSource), '')
@@ -334,8 +337,11 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     /void submit\(\)/.test(deskSource), '')
   assert('Desk input onChange wires to actions.setIntent',
     /onChange=\{\(event\)\s*=>\s*setIntent\(event\.target\.value\)\}/.test(deskSource), '')
+  // Cut ⑥: chip click now fills the input AND submits immediately (direct
+  // search), replacing the old fill-only behavior. See Test 12 below for the
+  // full assertion of this new contract.
   assert('Desk starter chip click wires to actions.setIntent',
-    /onClick=\{\(\)\s*=>\s*setIntent\(chip\)\}/.test(deskSource), '')
+    /className="concierge-starter-chip"[\s\S]{0,500}setIntent\(chip\)/.test(deskSource), '')
 
   // 9.5 Hook exposes the new deeper surface only, no flat fields leaked.
   assert('hook exports ConciergeRetrievalView',
@@ -634,10 +640,13 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips 
   assert('STARTER_CHIPS contains 生态主题 C 篇', /生态主题\s*C\s*篇/.test(desk), '')
   assert('STARTER_CHIPS contains 2025 浙江卷', /2025\s*浙江卷/.test(desk), '')
   assert('STARTER_CHIPS contains 中等难度主旨题', /中等难度主旨题/.test(desk), '')
-  const chipBtnMatch = desk.match(/className="concierge-starter-chip"[\s\S]{0,200}onClick=\{[^}]+\}/)?.[0] || ''
+  const chipBtnMatch = desk.match(/className="concierge-starter-chip"[\s\S]{0,400}?onClick=\{[\s\S]{0,400}?\n\s*\}\}/)?.[0] || ''
   assert('chip onClick wired', chipBtnMatch.length > 0, '')
   assert('chip click calls setIntent (actions.setIntent)', /setIntent\(chip\)/.test(chipBtnMatch), '')
-  assert('chip click does NOT call submit', !/submit\(/.test(chipBtnMatch), '')
+  // Cut ⑥ P1 fix: a chip click must search immediately, not just fill the
+  // input for the teacher to press submit again. "点了没反应/旧结果配新
+  // 输入" was the exact two-step error the plan names.
+  assert('chip click DOES call submit(chip) directly', /submit\(chip\)/.test(chipBtnMatch), '')
   // CR-5 SW-1: chips must also render for the TRUE vacuum state — a search
   // that actually ran and found zero honest hits (state.kind === 'results',
   // hits: []) — not just the pre-search 'empty' state. Plan cut ⑤ explicitly
@@ -750,7 +759,7 @@ console.log('\nTest 16: 找类似 round-trips through paper aggregation')
   const here = path.dirname(new URL(import.meta.url).pathname)
   const hook = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'useConciergeDesk.ts'), 'utf8')
   // triggerSimilar must call runSearch (not skip aggregation).
-  assert('triggerSimilar uses runSearch', /triggerSimilar[\s\S]{0,400}await runSearch\(similarIntent, null\)/.test(hook), '')
+  assert('triggerSimilar uses runSearch', /const triggerSimilar = useCallback[\s\S]{0,600}await runSearch\(similarIntent, null\)/.test(hook), '')
   // paperResults memo derives from state.hits and then swaps in live group
   // card data so C8 draft-button state can update without a new search.
   assert(
