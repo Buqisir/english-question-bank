@@ -242,7 +242,9 @@ assert('preview HTML generation lives outside workbench', workbench.includes("fr
 assert('preview injects screen-only A4 dimensions', previewHtml.includes('buildA4PreviewHtml') && previewHtml.includes('width: 210mm') && previewHtml.includes('padding: 20mm 18mm'))
 assert('preview builds paginated long-scroll A4 pages', previewHtml.includes('paginateA4Preview') && previewHtml.includes('preview-page') && previewHtml.includes("'第 ' + pageNumber + ' 页'"))
 assert('preview iframe does not add a second mat color', previewHtml.includes('html {\n    background: transparent') && previewHtml.includes('body {\n    background: transparent') && workbenchCss.includes('.draft-a4-sheet iframe {\n  background: transparent'))
-assert('preview outer desk keeps subtle paper mat', workbenchCss.includes('linear-gradient(180deg, #fbfaf6 0%, #f3efe7 100%)'))
+// 刀⑦ #231 两面中性色统一到 DESIGN.md token 值：mat 渐变从 #fbfaf6/#f3efe7
+// 映射为 surface(#FAFAF7)/surface-warm(#F4F2EC)，断言同步。
+assert('preview outer desk keeps subtle paper mat', workbenchCss.includes('linear-gradient(180deg, #FAFAF7 0%, #F4F2EC 100%)'))
 assert('preview iframe is tall enough to show a full A4 page', workbenchCss.includes('height: 1188px'))
 assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))

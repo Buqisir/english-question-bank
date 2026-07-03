@@ -70,6 +70,8 @@ const registry = {
   'scripts/verify-h12b-difficulty-profile-grid.mjs',
   'scripts/verify-restart1-local-search-intent.mjs',
   'scripts/verify-restart3-teacher-analysis.mjs',
+  'scripts/verify-home-default-feed.mjs',
+  'scripts/verify-error-copy-mainline.mjs',
   ],
 }
 
