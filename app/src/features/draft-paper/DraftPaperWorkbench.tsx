@@ -21,6 +21,7 @@ import {
   ASSEMBLY_BASKET_STORAGE_KEY,
   parseAssemblyBasket,
 } from '../../paperAssembly/basketPersistence'
+import { describeError } from '../shared/errorCopy'
 import { DraftPaperOutline } from './DraftPaperOutline'
 import { buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
@@ -138,7 +139,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       loadRecentDrafts()
     } catch (error) {
       setLoadStatus('error')
-      setLoadError(error instanceof Error ? error.message : String(error))
+      setLoadError(describeError('打开草稿卷', error))
     }
   }, [draftPaperId, loadRecentDrafts])
 
@@ -217,7 +218,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       onDraftChanged?.()
     } catch (error) {
       setSaveStatus('error')
-      setSaveError(error instanceof Error ? error.message : String(error))
+      setSaveError(describeError('保存草稿卷', error))
     }
   }
 
@@ -234,7 +235,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         onDraftChanged?.()
       } catch (error) {
         setSaveStatus('error')
-        setSaveError(error instanceof Error ? error.message : String(error))
+        setSaveError(describeError('保存标题', error))
       }
     }, 450)
   }
@@ -267,7 +268,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       onDraftChanged?.()
     } catch (error) {
       setSaveStatus('error')
-      setSaveError(error instanceof Error ? error.message : String(error))
+      setSaveError(describeError('更新分页设置', error))
     }
   }
 
@@ -289,7 +290,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       onDraftChanged?.()
     } catch (error) {
       setSaveStatus('error')
-      setSaveError(error instanceof Error ? error.message : String(error))
+      setSaveError(describeError('删除题组', error))
     }
   }
 
@@ -305,7 +306,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       onDraftChanged?.()
     } catch (error) {
       setSaveStatus('error')
-      setSaveError(error instanceof Error ? error.message : String(error))
+      setSaveError(describeError('撤销删除', error))
     }
   }
 
@@ -318,7 +319,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setExportStatus('exported')
     } catch (error) {
       setExportStatus('error')
-      setExportError(error instanceof Error ? error.message : String(error))
+      setExportError(describeError('导出 PDF', error))
     }
   }
 
@@ -335,7 +336,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('idle')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(error instanceof Error ? error.message : String(error))
+      setSpaceMessage(describeError('读取个人空间文件夹', error))
     }
   }
 
@@ -352,7 +353,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('idle')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(error instanceof Error ? error.message : String(error))
+      setSpaceMessage(describeError('新建文件夹', error))
     }
   }
 
@@ -370,7 +371,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceMessage('已保存到个人空间。')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(error instanceof Error ? error.message : String(error))
+      setSpaceMessage(describeError('保存到个人空间', error))
     }
   }
 

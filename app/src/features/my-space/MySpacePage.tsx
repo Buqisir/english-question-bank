@@ -9,6 +9,7 @@ import {
   fetchMySpace,
   renameMySpaceFolder,
 } from '../../services/mySpace'
+import { describeError } from '../shared/errorCopy'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -55,7 +56,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
       setLoadState('loaded')
     } catch (error) {
       setLoadState('error')
-      setMessage(error instanceof Error ? error.message : String(error))
+      setMessage(describeError('加载个人空间', error))
     }
   }, [selectedFolderId])
 
@@ -80,7 +81,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
       await load(folder.id)
       setMessage('文件夹已创建。')
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : String(error))
+      setMessage(describeError('新建文件夹', error))
     } finally {
       setBusyId(null)
     }
@@ -98,7 +99,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
       await load(selectedFolderId)
       setMessage('文件夹已重命名。')
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : String(error))
+      setMessage(describeError('重命名文件夹', error))
     } finally {
       setBusyId(null)
     }
@@ -114,7 +115,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
       await load(nextFolderId)
       setMessage('文件夹已删除。')
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : String(error))
+      setMessage(describeError('删除文件夹', error))
     } finally {
       setBusyId(null)
     }
@@ -126,7 +127,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
     try {
       await downloadMySpaceArtifact(artifact)
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : String(error))
+      setMessage(describeError('下载 PDF', error))
     } finally {
       setBusyId(null)
     }
@@ -149,7 +150,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
       await load(selectedFolderId)
       setMessage('文件已删除。')
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : String(error))
+      setMessage(describeError('删除文件', error))
     } finally {
       setBusyId(null)
     }
@@ -167,7 +168,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
         </div>
       </header>
 
-      {message && <p className="my-space-message" role="status">{message}</p>}
+      {message && loadState !== 'error' && <p className="my-space-message" role="status">{message}</p>}
 
       <main className="my-space-layout">
         <aside className="my-space-folders" aria-label="文件夹">
@@ -235,7 +236,14 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
           </div>
 
           {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间...</p>}
-          {loadState === 'error' && <p className="my-space-error">{message || '个人空间读取失败。'}</p>}
+          {loadState === 'error' && (
+            <div className="my-space-empty-state">
+              <p className="my-space-error">{message || '个人空间读取失败。'}</p>
+              <button type="button" className="my-space-empty-cta" onClick={() => void load()}>
+                重新加载
+              </button>
+            </div>
+          )}
           {loadState === 'loaded' && artifacts.length === 0 && (
             <div className="my-space-empty-state">
               <p className="my-space-empty">还没有保存的草稿卷 PDF。组一份卷子，导出后可以保存在这里。</p>
