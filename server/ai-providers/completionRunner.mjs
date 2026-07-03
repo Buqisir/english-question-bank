@@ -19,6 +19,7 @@ import {
   extractFirstJson,
   safeTruncate,
 } from './jsonExtraction.mjs'
+import { AiDailyLimitExceededError } from './dailyLimitCounter.mjs'
 
 export function createCompletionRunner(deps) {
   const {
@@ -33,6 +34,15 @@ export function createCompletionRunner(deps) {
     LOCAL_QWEN_CHAT_MODEL,
     LOCAL_QWEN_CHAT_TIMEOUT_MS,
     LOCAL_QWEN_PROVIDER,
+    // cut m0-5-ai-daily-limit (C1/C2): both optional — when dailyLimitCounter is
+    // absent, no gating happens at all (keeps the H5-D verify's minimal CONFIG
+    // working unchanged). Only the DeepSeek branch is ever gated; local Qwen
+    // never sees this. DEEPSEEK_API_KEY is the raw env-key string used to tell
+    // "this call is using the server key" apart from "a teacher pasted their
+    // own key" — see the comment at the gate below for why string identity
+    // (not describeKeySource) is the correct signal at this layer.
+    dailyLimitCounter,
+    DEEPSEEK_API_KEY,
   } = deps
 
   function buildDeepSeekRequestOptions({ model, messages, temperature, maxTokens, thinkingMode, responseFormat }) {
@@ -287,7 +297,33 @@ export function createCompletionRunner(deps) {
       return jsonParsedCandidate || null
     }
 
-    const completion = context.provider === LOCAL_QWEN_PROVIDER ? callLocalQwenCompletion : callDeepSeekCompletion
+    const isDeepSeekCall = context.provider !== LOCAL_QWEN_PROVIDER
+    // cut m0-5-ai-daily-limit (C1/C2/C3): single choke point for the whole DeepSeek
+    // out-station surface (5 services all funnel through this one runner instance).
+    // Local Qwen is never gated (C1).
+    //
+    // C2 signal note: every caller already merges `apiKey || DEEPSEEK_API_KEY`
+    // BEFORE invoking this function (see e.g. verifyQuestionGroupService.mjs
+    // `key = String(apiKey || DEEPSEEK_API_KEY).trim()`), so by the time
+    // context.apiKey reaches this runner it is always a non-empty string —
+    // describeKeySource(context.apiKey) would see it as 'client' unconditionally
+    // and never gate anything. The only signal still available post-merge is
+    // whether context.apiKey is IDENTICAL to the server's own env key, which is
+    // exactly "no client key was supplied" (a teacher's own key would differ from
+    // the server's, vanishingly rare false negative if they happen to paste the
+    // same value — acceptable, since worst case is an under-count, not an
+    // incorrect block of a real teacher key).
+    if (isDeepSeekCall && dailyLimitCounter) {
+      const usingServerKey = Boolean(DEEPSEEK_API_KEY) && context.apiKey === DEEPSEEK_API_KEY
+      if (usingServerKey) {
+        if (dailyLimitCounter.isExceeded()) {
+          throw new AiDailyLimitExceededError('今天的 AI 额度用完了，明天自动恢复。')
+        }
+        dailyLimitCounter.increment()
+      }
+    }
+
+    const completion = isDeepSeekCall ? callDeepSeekCompletion : callLocalQwenCompletion
     const result = await completion(context)
     let parsed = parseResult(result)
     let fallbackUsed = false

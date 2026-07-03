@@ -42,6 +42,7 @@ import { createVerbProfileBackfillRoutes } from './grammar-verb-profile/verbProf
 import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
 import { createImportListingImplementation } from './imports/importListing.mjs'
 import { createCompletionRunner } from './ai-providers/completionRunner.mjs'
+import { createDailyLimitCounter, resolveDailyLimit } from './ai-providers/dailyLimitCounter.mjs'
 import { createVerifyImplementation } from './ai-verify/verifyQuestionGroupService.mjs'
 import { createReadingDifficultyNormalizer, isEntityPurposeMentionStem } from './reading-analysis/readingDifficultyNormalizer.mjs'
 import { createSemanticSearchImplementation } from './search/semanticSearchService.mjs'
@@ -3003,7 +3004,11 @@ function timestampPrefix() {
 }
 
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || ''
-const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions'
+// cut m0-5-ai-daily-limit: override hook so verify scripts can spawn the real server
+// and point its DeepSeek out-station at a local mock HTTP server instead of the real
+// DeepSeek endpoint (mirrors the existing LOCAL_QWEN_CHAT_API_URL env-override
+// convention below). Production always uses the real URL — no env var is set outside tests.
+const DEEPSEEK_API_URL = process.env.DEEPSEEK_API_URL || 'https://api.deepseek.com/chat/completions'
 const DEFAULT_DEEPSEEK_MODEL = 'deepseek-v4-flash'
 const DEEPSEEK_HTTP_RETRY_COUNT = Number(process.env.DEEPSEEK_HTTP_RETRY_COUNT || 1)
 const DEEPSEEK_HTTP_RETRY_DELAY_MS = Number(process.env.DEEPSEEK_HTTP_RETRY_DELAY_MS || 800)
@@ -3026,6 +3031,16 @@ const DEEPSEEK_MODEL_ALIASES = {
   'deepseek-v4-flash': 'deepseek-v4-flash',
 }
 
+// cut m0-5-ai-daily-limit (C9): snapshot path is env-overridable so verify scripts can
+// point it at a throwaway temp file (same hermeticity convention as QUESTION_BANK_DB /
+// USER_DATA_DB above). Production always uses server/logs/ai-daily-usage.json.
+const aiDailyUsageSnapshotPath =
+  process.env.AI_DAILY_USAGE_SNAPSHOT_PATH || path.join(rootDir, 'server', 'logs', 'ai-daily-usage.json')
+const aiDailyLimitCounter = createDailyLimitCounter({
+  limit: resolveDailyLimit(process.env.AI_DAILY_REQUEST_LIMIT),
+  snapshotPath: aiDailyUsageSnapshotPath,
+})
+
 const completionRunner = createCompletionRunner({
   elapsedMs,
   DEEPSEEK_API_URL,
@@ -3037,6 +3052,8 @@ const completionRunner = createCompletionRunner({
   LOCAL_QWEN_CHAT_MODEL,
   LOCAL_QWEN_CHAT_TIMEOUT_MS,
   LOCAL_QWEN_PROVIDER,
+  DEEPSEEK_API_KEY,
+  dailyLimitCounter: aiDailyLimitCounter,
 })
 const {
   normalizeDeepSeekModel,
@@ -3101,6 +3118,9 @@ serverContext.DEFAULT_DEEPSEEK_MODEL = DEFAULT_DEEPSEEK_MODEL
 // serverContext literal at :93 and the createAiProxyRoutes() call at :482 — assigning in the
 // literal would TDZ-crash module load. Route handler reads context.serverKeyAvailable at request time.
 serverContext.serverKeyAvailable = Boolean(DEEPSEEK_API_KEY)
+// cut m0-5-ai-daily-limit (C4): status route reads this to report { limit, used, exceeded }.
+// Same post-hoc-assignment reasoning as serverKeyAvailable above (TDZ-safe, no key leak).
+serverContext.getAiDailyLimitStatus = () => aiDailyLimitCounter.getStatus()
 const synonymDifficultyImplementation = createSynonymDifficultyImplementation({
   optionalString,
   clamp01,

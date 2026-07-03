@@ -76,6 +76,7 @@ const registry = {
   'scripts/verify-auth-gate.mjs',
   'scripts/verify-owner-gate.mjs',
   'scripts/verify-user-scope.mjs',
+  'scripts/verify-ai-daily-limit.mjs',
   ],
 }
 

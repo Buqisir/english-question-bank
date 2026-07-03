@@ -108,6 +108,7 @@ import {
   parseImportFile as parseImportFileRequest,
   backfillTopicLabels,
   type BackfillTopicLabelsResult,
+  AiDailyLimitExceededError,
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
@@ -2418,7 +2419,14 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     } catch (error) {
       if (aiRunIdRef.current !== runId) return
       setVerifyStatus('error')
-      setVerifyError(error instanceof Error ? error.message : String(error))
+      // cut m0-5-ai-daily-limit (C6): verify has no local fallback, so a dedicated
+      // message (quota exhausted, can paste own key) replaces the generic "验证失败"
+      // wording — distinguishable from any other verify error.
+      if (error instanceof AiDailyLimitExceededError) {
+        setVerifyError('今天的 AI 额度用完了。可以在设置里填自己的 API Key 继续使用 AI 解析。')
+      } else {
+        setVerifyError(error instanceof Error ? error.message : String(error))
+      }
     }
   }
 
@@ -2471,7 +2479,14 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     } catch (error) {
       if (aiRunIdRef.current !== runId) return
       setVerifyStatus('error')
-      setVerifyError(error instanceof Error ? error.message : String(error))
+      // cut m0-5-ai-daily-limit (C6): the reading-group flow shares the same
+      // verify request + verifyError UI as handleVerifyQuestionGroup, so it gets
+      // the same dedicated quota message instead of the generic failure text.
+      if (error instanceof AiDailyLimitExceededError) {
+        setVerifyError('今天的 AI 额度用完了。可以在设置里填自己的 API Key 继续使用 AI 解析。')
+      } else {
+        setVerifyError(error instanceof Error ? error.message : String(error))
+      }
     }
   }
 

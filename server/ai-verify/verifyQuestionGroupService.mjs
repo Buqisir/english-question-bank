@@ -6,6 +6,7 @@
 // /api/ai/verify-trace route reads its JSONL). Module never imports api.mjs (no cycle).
 
 import { randomUUID } from 'node:crypto'
+import { AI_DAILY_LIMIT_EXCEEDED_CODE } from '../ai-providers/dailyLimitCounter.mjs'
 import { safeTruncate } from '../ai-providers/jsonExtraction.mjs'
 
 let getQuestionGroupDetail
@@ -106,6 +107,15 @@ async function verifyQuestionGroup(questionGroupId, apiKey, model, verifyRequest
         apiLatencyMs: elapsedMs(startedAt),
       })
     } catch (error) {
+      // cut m0-5-ai-daily-limit (C3/C6): the daily-limit error must reach the route's
+      // 429 translation instead of being folded into a per-question "uncertain"
+      // verdict — otherwise an exhausted quota returns HTTP 200 with an all-uncertain
+      // result that looks like a completed verification. Once the quota trips, every
+      // remaining question would fail the same way, so aborting the whole group loses
+      // nothing; the teacher re-runs with their own key.
+      if (error?.code === AI_DAILY_LIMIT_EXCEEDED_CODE) {
+        throw error
+      }
       const reason = error instanceof Error ? `AI 调用失败：${error.message}` : 'AI 调用失败。'
       results.push({
         questionId: question.id,

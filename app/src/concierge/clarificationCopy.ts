@@ -44,7 +44,18 @@ export function pickClarificationLine(
  * not actually have. A fully empty result set is handled separately by the
  * desk's existing vacuum-state branch (not this function).
  */
-export function pickResultsNoticeLine(allWeak: boolean, assistantMessage: string): string {
+export function pickResultsNoticeLine(
+  allWeak: boolean,
+  assistantMessage: string,
+  fallbackReason?: string,
+): string {
+  // cut m0-5-ai-daily-limit (C5): when the fallback happened because the AI daily
+  // quota ran out, the teacher must still learn that — the all-weak honest-degrade
+  // line composes with the quota explanation instead of replacing it (both facts
+  // are true and both change what the teacher does next).
+  if (fallbackReason === 'daily-limit-exceeded') {
+    return allWeak ? `${assistantMessage}没有精确匹配，以下是主题相近的题组。` : assistantMessage
+  }
   if (allWeak) {
     return '没有精确匹配，以下是主题相近的题组。'
   }
