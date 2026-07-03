@@ -75,6 +75,7 @@ const registry = {
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',
   'scripts/verify-owner-gate.mjs',
+  'scripts/verify-user-scope.mjs',
   ],
 }
 
