@@ -15,6 +15,7 @@ const { chromium } = require(playwrightPath)
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-c8-smoke-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
+const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
 const apiPort = 9898
 const vitePort = 5188
 const children = []
@@ -139,6 +140,7 @@ async function main() {
     env: {
       ...process.env,
       QUESTION_BANK_DB: dbPath,
+      USER_DATA_DB: userDataDbPath,
       QUESTION_BANK_API_PORT: String(apiPort),
     },
   })
@@ -260,6 +262,51 @@ async function main() {
     await page.getByRole('button', { name: /撤销/ }).click()
     await assertOkResponse('Restore mutation should succeed', await restoreSaved)
     pass('Delete/undo controls work')
+
+    // Orphan tolerance (ADR-0011 / plan.md decision 4): drop a question group that is
+    // still referenced by a draft item directly from the bank DB (simulating a bank-file
+    // replacement), then confirm the workbench keeps working — list/detail don't crash,
+    // the item shows as invalid, and print/export skip it without erroring. Runs before
+    // the PDF/print-popup checks below so it does not depend on the vivliostyle binary.
+    const orphanedGroupId = 'g-c8-smoke-reading'
+    const bankDb = new DatabaseSync(dbPath)
+    bankDb.prepare('DELETE FROM question_groups WHERE id = ?').run(orphanedGroupId)
+    bankDb.close()
+
+    await page.reload({ waitUntil: 'networkidle' })
+    await page.locator('.draft-a4-sheet iframe').waitFor({ timeout: 15_000 })
+    const orphanedItem = page.locator(`.draft-outline-item[data-draft-group-id="${orphanedGroupId}"]`)
+    await orphanedItem.waitFor({ timeout: 10_000 })
+    await orphanedItem.getByText('题组不存在').waitFor({ timeout: 10_000 })
+    pass('Orphaned draft item (bank group deleted) renders as invalid without crashing')
+
+    const orphanDraftInfo = await page.evaluate(async () => {
+      const response = await fetch('/api/draft-papers/current')
+      return { ok: response.ok, body: await response.json() }
+    })
+    if (!orphanDraftInfo.ok) fail('Draft fetch should not crash with an orphaned item')
+    const orphanedApiItem = orphanDraftInfo.body.draftPaper.items.find((item) => item.groupId === orphanedGroupId)
+    if (!orphanedApiItem || orphanedApiItem.groupMissing !== true) {
+      fail('Orphaned item should be flagged groupMissing: true in the API response', JSON.stringify(orphanedApiItem))
+    }
+    pass('Draft API flags the orphaned item with groupMissing: true')
+
+    const printHtmlAfterOrphan = await page.evaluate(async (draftPaperId) => {
+      const response = await fetch(`/api/draft-papers/${draftPaperId}/print-html`)
+      return { ok: response.ok, status: response.status, body: await response.text() }
+    }, secondGroupDraft.draftPaper.id)
+    if (!printHtmlAfterOrphan.ok) fail('print-html should not crash with an orphaned item present', printHtmlAfterOrphan.body)
+    if (printHtmlAfterOrphan.body.includes(orphanedGroupId)) {
+      fail('print-html must skip the orphaned item rather than include it', printHtmlAfterOrphan.body)
+    }
+    pass('print-html skips the orphaned item and does not crash')
+
+    const orphanDeleteResult = await page.evaluate(async ({ draftPaperId, itemId }) => {
+      const response = await fetch(`/api/draft-papers/${draftPaperId}/items/${itemId}`, { method: 'DELETE' })
+      return { ok: response.ok, body: await response.text() }
+    }, { draftPaperId: secondGroupDraft.draftPaper.id, itemId: orphanedApiItem.id })
+    if (!orphanDeleteResult.ok) fail('Orphaned item should still be deletable', orphanDeleteResult.body)
+    pass('Orphaned draft item can still be deleted')
 
     const downloadPromise = page.waitForEvent('download', { timeout: 30_000 })
     await page.locator('.draft-export-menu summary').click()

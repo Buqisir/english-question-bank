@@ -55,7 +55,8 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/draft-papers\/([^/]+)$/, ({ response, url, match, context }) => {
-      const db = context.openDatabase({ readOnly: true })
+      const userDb = context.openUserDatabase({ readOnly: true })
+      const bankDb = context.openDatabase({ readOnly: true })
       try {
         const id = decodeURIComponent(match[1])
         let versionType
@@ -65,14 +66,15 @@ export function createDraftPaperRoutes() {
           context.sendJson(response, 400, { error: routeError(error) })
           return
         }
-        const draftPaper = context.draftPaperStore.getDraftPaper(db, id, { versionType })
+        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, id, { versionType })
         if (!draftPaper) {
           context.sendJson(response, 404, { error: 'Draft paper not found' })
           return
         }
         context.sendJson(response, 200, { draftPaper })
       } finally {
-        db.close()
+        userDb.close()
+        bankDb.close()
       }
     }),
 
@@ -88,24 +90,26 @@ export function createDraftPaperRoutes() {
 
     defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/items$/, async ({ request, response, match, context }) => {
       const input = await context.readJsonBody(request)
-      const db = context.openDatabase({ readOnly: false })
+      const userDb = context.openUserDatabase({ readOnly: false })
+      const bankDb = context.openDatabase({ readOnly: true })
       try {
         const draftPaperId = decodeURIComponent(match[1])
-        db.exec('BEGIN')
+        userDb.exec('BEGIN')
         try {
-          context.draftPaperStore.addGroupToDraftPaper(db, draftPaperId, String(input.groupId || ''), {
+          context.draftPaperStore.addGroupToDraftPaper({ userDb, bankDb }, draftPaperId, String(input.groupId || ''), {
             insertIndex: input.insertIndex,
             pageBreakBefore: input.pageBreakBefore === true,
           })
-          context.draftPaperStore.markCurrentDraftPaper(db, draftPaperId)
-          db.exec('COMMIT')
-          context.sendJson(response, 201, { draftPaper: context.draftPaperStore.getDraftPaper(db, draftPaperId) })
+          context.draftPaperStore.markCurrentDraftPaper(userDb, draftPaperId)
+          userDb.exec('COMMIT')
+          context.sendJson(response, 201, { draftPaper: context.draftPaperStore.getDraftPaper({ userDb, bankDb }, draftPaperId) })
         } catch (error) {
-          db.exec('ROLLBACK')
+          userDb.exec('ROLLBACK')
           context.sendJson(response, 400, { error: routeError(error) })
         }
       } finally {
-        db.close()
+        userDb.close()
+        bankDb.close()
       }
     }),
 
@@ -146,7 +150,8 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, url, match, context }) => {
-      const db = context.openDatabase({ readOnly: false })
+      const userDb = context.openUserDatabase({ readOnly: true })
+      const bankDb = context.openDatabase({ readOnly: true })
       try {
         const draftPaperId = decodeURIComponent(match[1])
         let versionType
@@ -156,7 +161,7 @@ export function createDraftPaperRoutes() {
           context.sendJson(response, 400, { error: routeError(error) })
           return
         }
-        const draftPaper = context.draftPaperStore.getDraftPaper(db, draftPaperId, { includePrintHtml: false })
+        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, draftPaperId, { includePrintHtml: false })
         if (!draftPaper) {
           context.sendJson(response, 404, { error: 'Draft paper not found' })
           return
@@ -167,6 +172,10 @@ export function createDraftPaperRoutes() {
         }
         const versionLabel = versionType === 'teacher' ? '教师卷' : '学生卷'
         const html = context.draftPaperStore.buildDraftPrintHtml(draftPaper, { versionType })
+        if (!html) {
+          context.sendJson(response, 400, { error: '请先添加题组' })
+          return
+        }
         response.writeHead(200, {
           'access-control-allow-origin': 'http://127.0.0.1:5173',
           'content-type': 'text/html; charset=utf-8',
@@ -174,7 +183,8 @@ export function createDraftPaperRoutes() {
         })
         response.end(html)
       } finally {
-        db.close()
+        userDb.close()
+        bankDb.close()
       }
     }),
 

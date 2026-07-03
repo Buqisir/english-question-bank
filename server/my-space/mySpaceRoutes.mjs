@@ -30,7 +30,7 @@ function sendMySpaceArtifactStatic(response, urlPath, context) {
     context.sendJson(response, 400, { error: 'Invalid artifact id' })
     return
   }
-  const db = context.openDatabase()
+  const db = context.openUserDatabase({ readOnly: true })
   try {
     const artifact = resolveMySpaceArtifactForDownload(db, context.userSpaceFilesDir, artifactId)
     if (!artifact) {
@@ -56,7 +56,7 @@ export function createMySpaceRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/my-space$/, ({ response, url, context }) => {
-      const db = context.openDatabase()
+      const db = context.openUserDatabase({ readOnly: true })
       try {
         context.sendJson(response, 200, listMySpace(db, { folderId: url.searchParams.get('folderId') }))
       } finally {
@@ -65,7 +65,7 @@ export function createMySpaceRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/my-space\/folders$/, ({ response, context }) => {
-      const db = context.openDatabase()
+      const db = context.openUserDatabase({ readOnly: true })
       try {
         const snapshot = listMySpace(db)
         context.sendJson(response, 200, { folders: snapshot.folders })
@@ -75,7 +75,7 @@ export function createMySpaceRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/my-space\/artifacts$/, ({ response, url, context }) => {
-      const db = context.openDatabase()
+      const db = context.openUserDatabase({ readOnly: true })
       try {
         const snapshot = listMySpace(db, { folderId: url.searchParams.get('folderId') })
         context.sendJson(response, 200, { artifacts: snapshot.artifacts })
@@ -86,7 +86,7 @@ export function createMySpaceRoutes() {
 
     defineRoute('POST', /^\/api\/my-space\/folders$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request, { maxBytes: 100_000 })
-      const db = context.openDatabase({ readOnly: false })
+      const db = context.openUserDatabase({ readOnly: false })
       try {
         const folder = createMySpaceFolder(db, input)
         context.sendJson(response, 201, { folder })
@@ -99,7 +99,7 @@ export function createMySpaceRoutes() {
 
     defineRoute('PATCH', /^\/api\/my-space\/folders\/([^/]+)$/, async ({ request, response, match, context }) => {
       const input = await context.readJsonBody(request, { maxBytes: 100_000 })
-      const db = context.openDatabase({ readOnly: false })
+      const db = context.openUserDatabase({ readOnly: false })
       try {
         const folder = renameMySpaceFolder(db, decodeURIComponent(match[1]), input)
         context.sendJson(response, 200, { folder })
@@ -111,7 +111,7 @@ export function createMySpaceRoutes() {
     }),
 
     defineRoute('DELETE', /^\/api\/my-space\/folders\/([^/]+)$/, ({ response, match, context }) => {
-      const db = context.openDatabase({ readOnly: false })
+      const db = context.openUserDatabase({ readOnly: false })
       try {
         context.sendJson(response, 200, deleteMySpaceFolder(db, decodeURIComponent(match[1])))
       } catch (error) {
@@ -127,7 +127,7 @@ export function createMySpaceRoutes() {
       let result = null
       try {
         result = context.draftPaperStore.exportDraftPaperPdf(draftPaperId, { preferRecent: true })
-        const db = context.openDatabase({ readOnly: false })
+        const db = context.openUserDatabase({ readOnly: false })
         try {
           const artifact = saveMySpaceArtifact(db, {
             filesRoot: context.userSpaceFilesDir,
@@ -154,7 +154,7 @@ export function createMySpaceRoutes() {
     }),
 
     defineRoute('DELETE', /^\/api\/my-space\/artifacts\/([^/]+)$/, ({ response, match, context }) => {
-      const db = context.openDatabase({ readOnly: false })
+      const db = context.openUserDatabase({ readOnly: false })
       try {
         context.sendJson(response, 200, deleteMySpaceArtifact(db, context.userSpaceFilesDir, decodeURIComponent(match[1])))
       } catch (error) {

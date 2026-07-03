@@ -151,6 +151,10 @@ export type DraftPaperItem = {
   printReady: boolean
   printUnavailableReason: string | null
   questionGroup: QuestionGroupCard | null
+  // True when the referenced question group no longer exists in the shared bank
+  // database (e.g. dropped by a bank-file replacement). The item is still listed and
+  // deletable, but is excluded from print/export — see ADR-0011 orphan tolerance.
+  groupMissing: boolean
   createdAt: string
   updatedAt: string
 }

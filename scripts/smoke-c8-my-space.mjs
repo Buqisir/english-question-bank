@@ -15,6 +15,7 @@ const { chromium } = require(playwrightPath)
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-c8-my-space-smoke-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
+const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
 const userSpaceRoot = path.join(tempRoot, 'user-space-files')
 const apiPort = 9899
 const vitePort = 5189
@@ -104,6 +105,7 @@ async function main() {
     env: {
       ...process.env,
       QUESTION_BANK_DB: dbPath,
+      USER_DATA_DB: userDataDbPath,
       QUESTION_BANK_API_PORT: String(apiPort),
       QUESTION_BANK_USER_SPACE_ROOT: userSpaceRoot,
     },
@@ -181,9 +183,10 @@ async function main() {
     if (!downloadResponse.ok()) fail('Artifact PDF download should succeed', await downloadResponse.text())
     pass('Artifact PDF downloads from static route')
 
-    const db = new DatabaseSync(dbPath)
-    db.prepare("UPDATE draft_papers SET status = 'deleted' WHERE id = ?").run(draft.id)
-    db.close()
+    // draft_papers lives in the user database after the M0-1 split, not the bank DB.
+    const userDb = new DatabaseSync(userDataDbPath)
+    userDb.prepare("UPDATE draft_papers SET status = 'deleted' WHERE id = ?").run(draft.id)
+    userDb.close()
     await page.reload({ waitUntil: 'networkidle' })
     await page.getByRole('button', { name: '打开原草稿' }).first().click()
     await page.getByText('原草稿卷已删除，PDF 仍可下载').waitFor({ timeout: 10_000 })

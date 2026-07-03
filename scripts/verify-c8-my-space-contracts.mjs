@@ -45,14 +45,23 @@ function baselineRef() {
 
 console.log('C8 verify: My Space artifact contracts')
 
+// M0-1 user-data split: my_space_folders / my_space_artifacts schema now lives solely in
+// server/my-space/mySpace.mjs's ensureMySpaceDatabaseShape (single source of truth per
+// ADR-0011 / plan.md decision 2) — data/sql/schema.sql must NOT contain these tables.
 const schema = read('data/sql/schema.sql')
-assert('my_space_folders table exists', /CREATE TABLE IF NOT EXISTS my_space_folders/.test(schema))
-assert('my_space_artifacts table exists', /CREATE TABLE IF NOT EXISTS my_space_artifacts/.test(schema))
-assert('artifact stores file path', /file_path TEXT NOT NULL/.test(schema))
-assert('artifact does not store PDF blob', !/pdf_blob|file_blob|BLOB/i.test(schema.match(/CREATE TABLE IF NOT EXISTS my_space_artifacts[\s\S]*?\);/)?.[0] || ''))
-assert('artifact stores source draft id', /source_draft_paper_id TEXT NOT NULL/.test(schema))
-assert('folder index exists', /idx_my_space_artifacts_folder/.test(schema))
-assert('draft index exists', /idx_my_space_artifacts_draft/.test(schema))
+assert('schema.sql no longer defines my_space_folders (moved to user database)', !/CREATE TABLE IF NOT EXISTS my_space_folders/.test(schema))
+assert('schema.sql no longer defines my_space_artifacts (moved to user database)', !/CREATE TABLE IF NOT EXISTS my_space_artifacts/.test(schema))
+
+const mySpaceModuleSourceForShape = read('server/my-space/mySpace.mjs')
+assert('ensureMySpaceDatabaseShape creates my_space_folders table', /CREATE TABLE IF NOT EXISTS my_space_folders/.test(mySpaceModuleSourceForShape))
+assert('ensureMySpaceDatabaseShape creates my_space_artifacts table', /CREATE TABLE IF NOT EXISTS my_space_artifacts/.test(mySpaceModuleSourceForShape))
+assert('artifact stores file path', /file_path TEXT NOT NULL/.test(mySpaceModuleSourceForShape))
+const mySpaceArtifactsTableBody = mySpaceModuleSourceForShape.match(/CREATE TABLE IF NOT EXISTS my_space_artifacts[\s\S]*?\);/)?.[0]
+assert('my_space_artifacts table body located (BLOB check is not vacuous)', Boolean(mySpaceArtifactsTableBody))
+assert('artifact does not store PDF blob', Boolean(mySpaceArtifactsTableBody) && !/pdf_blob|file_blob|BLOB/i.test(mySpaceArtifactsTableBody))
+assert('artifact stores source draft id', /source_draft_paper_id TEXT NOT NULL/.test(mySpaceModuleSourceForShape))
+assert('folder index exists', /idx_my_space_artifacts_folder/.test(mySpaceModuleSourceForShape))
+assert('draft index exists', /idx_my_space_artifacts_draft/.test(mySpaceModuleSourceForShape))
 
 const server = read('server/api.mjs')
 const mySpaceRoutes = read('server/my-space/mySpaceRoutes.mjs')
