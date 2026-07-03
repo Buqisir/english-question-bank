@@ -183,9 +183,9 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
    分词 token 部分 **第五轮已销（#235 @ c447ea2）**，见第五轮结案。
 4. **P2 AI 模式 topbar 按钮墙**：6+ ghost 按钮与找题无关，移动端占首屏
    370px 且按钮断字。收「更多」菜单是经典模式器官移植刀的一部分。
-5. **P2 无障碍三缺口**：焦点环 rgba(26,26,26,0.08) 几乎不可见；结果行
-   article onClick 键盘不可达；reduced-motion 只盖 5 个选择器
-   （13 animation + 37 transition 未盖）。
+5. ~~**P2 无障碍三缺口**~~ **已销（刀十一 #236 @ 9efd16c）**：焦点环
+   不可见与 reduced-motion 覆盖不足两项修复；「article onClick 键盘
+   不可达」核实为误判（真按钮等价路径已成立），见第六轮结案。
 6. **small verify-c6a10 陈旧断言**：`refresh API load preserves missing
    sample groups` 在 main 基线即红（App.tsx call-site drift），非功能病。
 7. CR SW：feed 的 useState 断言名 "only" 强于正则（可加固）；chip 直搜无
@@ -275,3 +275,35 @@ Posture。新挂账（L 级，启动前先 PM grill 出路线图，不碎片化�
 6. 难度维度残废（全库 medium）：接 reading signals 是 L 级独立刀。
 7. 找题结果卡片信息密度（P1-2 部分已被刀①的 topic chip 缓解，
    截断标题等仍在）。
+
+## 第六轮结案（2026-07-03 深夜，挂账 #5 无障碍缺口）
+
+- **刀十一 #236 a11y 焦点环可见化 + reduced-motion 全局兜底**
+  （`fix(a11y)` @ 42be929，merge @ 9efd16c，cut docs：
+  docs/cuts/a11y-concierge-three-gaps/，**只认 plan v2**——v1 坐标系
+  是侦察幻觉，事故经过在 plan 头部入档）。纯 CSS 刀，零 TSX 改动：
+  - 焦点环 6 处 rgba(26,26,26,0.08)（≈不可见）+ 3 处偏弱（0.2/0.2/
+    0.35）全部 → alpha 0.6（#FAFAF7 上对比 ≥3:1，过 WCAG 非文本
+    对比），行形不变只改值；
+  - reduced-motion 旧 5 选择器块原位替换为标准全局重置
+    （`*, *::before, *::after` 四条 !important）；其它 CSS 文件的局部
+    块保留（冗余无害），paper-surface/print/export 一字未碰。
+- **挂账 #5 认知修正入档**：「结果行 article onClick 键盘不可达」是对
+  重构前 DOM 写的——现行 `.concierge-row-expand` 真按钮 aria-* 齐全，
+  等价键盘路径成立（WCAG 2.1.1 满足）；给 article 加 tab stop 是双
+  tab stop 反模式，**不做**。
+- 流程全绿：verify §Test19 新增 8 断言（desk 246/246）、verify:all
+  61/61、PR CI + main CI 绿；Opus CR 冷读零拦停（备注在案：0.08 反
+  回潮扫描对跨行分组选择器头部理论盲区，当下无漏网；:722 transition
+  断言钉源文本，不被全局 reset 绊）；浏览器 QA 4 例全过（Tab 到 ▸
+  计算值 rgba(26,26,26,0.6) 0 0 0 2px + 放大截图肉眼可见、Enter 展开
+  is-expanded、Tab 进 detail 区（action-add 环同 0.6 实测）、鼠标回归
+  照常且鼠标不触发环）；RM 闸 medium PASS。PA 跳过在案（cut 定级
+  四个 no，plan 头部）。
+- **过程教训（浏览器 QA 新坑）**：Chrome MCP `computer` 点击坐标用
+  **截图像素空间**（本次 1438px 宽），`getBoundingClientRect` 是 CSS
+  视口空间（1249px），差一个窗口缩放比——直接拿 rect 坐标点击会静默
+  落空。点击前必乘 `screenshot_width / innerWidth` 换算。
+- 遗留不动（在案）：`.concierge-row*` 死遗留 CSS（App.css ~4897-5032）
+  另刀清理；`.intake-row-primary`/`.concierge-starter-chip` 为实心反色
+  焦点指示、无弱环可归一（CR 裁定 DEV 不动正确）。
