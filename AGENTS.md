@@ -63,6 +63,15 @@ Medium / large merges run the RM artifact gate in the CR + RM session:
 required artifacts exist (`node scripts/verify-cut-artifacts.mjs`) and the
 relevant `verify-i*.mjs` pass before merge.
 
+Before any merge to `main`, the full suite must be proven green — either
+`pnpm -C app run verify:all` locally or the PR's CI run — not just the
+cut's neighboring scripts. New verify scripts marked `yes` in
+`scripts/README.md` must be added to `scripts/verify-ci.mjs` in the same
+cut (the housekeeping guard enforces this). After merging, confirm the
+`main` CI run is green before reporting the cut closed.
+(2026-07-03 incident: 11 consecutive red CI runs from a narrow verify
+list + unwatched Actions.)
+
 ### kratos scope
 
 Write project memory only to the repo-root project (root = this repo). Do

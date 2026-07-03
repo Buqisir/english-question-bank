@@ -195,6 +195,16 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
    死、vite 靠旧进程过健康检查——旧进程一死全站 502。dev.sh 可考虑
    fail-hard。
 
+### CI 事故记录（2026-07-03，已修复 @ 2b2e16a）
+
+刀⑥ #230 起 CI 连红 11 个 run（owner 邮箱报警才发现），两个根因：
+① 新 verify 脚本进了 scripts/README.md（yes 行）但没挂进 verify-ci.mjs，
+被 housekeeping 守卫抓住；② 刀⑦ 换 token 值后 c8 render-model 守卫钉的
+旧渐变 hex 没同步。**过程教训：每刀的 verify 清单只钉了相邻脚本，漏了
+全量 `pnpm -C app run verify:all`；且合并后没看 Actions，本地窄绿 ≠ CI
+绿。** 修复：两脚本入 CI + c8 断言跟上；AGENTS.md RM 闸补一行「合并前
+全量 verify:all 或等 PR CI 绿」。
+
 ### 第二轮新挂账
 
 - SW-3：aggregatePaperResults 不读 hit.weak，混合卷行头措辞可与通知条
