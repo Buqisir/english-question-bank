@@ -133,6 +133,9 @@ export function createDraftPaperStore({
     if (!draftPaper.items.length) return ''
     const input = buildDraftPaperExportInput(draftPaper, exportOptions)
     const exportItems = input.items.map((item) => {
+      // 依赖 getQuestionGroupDetail 每次返回全新对象：下方教师版分支会就地
+      // 写入 detail.questions[].explanation。若它将来加缓存（LRU 等），教师版
+      // 解析会泄漏进后续学生版导出——加缓存前必须先改这里为深拷贝。
       const detail = getQuestionGroupDetail(item.questionGroupId)
       if (!detail) throw new Error(`questionGroupId not found: ${item.questionGroupId}`)
       return {
