@@ -90,10 +90,15 @@ export type ConciergePaperRowProps = {
   onTogglePaper: (key: string) => void
   onAdd: (group: QuestionGroupCard) => void
   onSimilar: (group: QuestionGroupCard) => void
+  /**
+   * 'search' rows describe a query outcome（命中）；'feed' rows are plain
+   * browsing — nothing was searched, so the badge must not claim a hit.
+   */
+  variant?: 'search' | 'feed'
 }
 
 export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
-  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar } = props
+  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar, variant = 'search' } = props
 
   const headline = buildHeadline(paper)
   const sourceTypeLabel = buildSourceTypeLabel(paper)
@@ -169,7 +174,9 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
             className="concierge-paper-hitcount"
             data-ra-hit-scope={paper.hitContext.scope}
           >
-            {badgePrefix(paper.hitContext.scope)}{paper.hitCount}{badgeSuffix(paper.hitContext.scope)}
+            {variant === 'feed'
+              ? `${paper.hitCount} 个篇章`
+              : `${badgePrefix(paper.hitContext.scope)}${paper.hitCount}${badgeSuffix(paper.hitContext.scope)}`}
           </span>
           {groupTypeStrip && (
             <span className="concierge-paper-grouptypes" title={groupTypeStrip}>
@@ -212,7 +219,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           id={`concierge-paper-detail-${paper.key}`}
           aria-live="polite"
         >
-          <ul className="concierge-group-card-list" aria-label="该卷命中的题组">
+          <ul className="concierge-group-card-list" aria-label={variant === 'feed' ? '该卷的题组' : '该卷命中的题组'}>
             {paper.groups.map(({ group, reason }) => {
               const isHit = hitIds.has(group.id)
               const isPrimaryHit =

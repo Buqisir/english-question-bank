@@ -3772,6 +3772,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                 actions={conciergeDesk.actions}
                 basketIds={new Set(basket.map((item) => item.id))}
                 onAdd={(group) => addToBasket(group)}
+                questionGroups={questionGroups}
                 dataStatus={dataStatus}
                 thinkingMode={aiThinkingMode}
                 onThinkingModeChange={(value) => {

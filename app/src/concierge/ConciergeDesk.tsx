@@ -13,10 +13,11 @@
  * the Assembly Basket layer, not Retrieval.
  */
 
-import { useId, useMemo, type FormEvent, type ReactNode } from 'react'
+import { useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
+import { buildDefaultFeed } from './defaultFeed.ts'
 import type {
   ConciergeRetrievalActions,
   ConciergeRetrievalView,
@@ -27,6 +28,14 @@ export type ConciergeDeskProps = {
   actions: ConciergeRetrievalActions
   basketIds: Set<string>
   onAdd: (group: QuestionGroupCard) => void
+
+  /**
+   * Full corpus (all question groups currently loaded), used to build the
+   * default browse feed shown before the teacher searches (cut ⑥). Not used
+   * for anything else here — search itself still flows entirely through
+   * `retrieval` / `actions`.
+   */
+  questionGroups: QuestionGroupCard[]
 
   /**
    * App-level data connection status. While 'loading', the local question bank
@@ -43,6 +52,9 @@ export type ConciergeDeskProps = {
 }
 
 const STARTER_CHIPS = ['生态主题 C 篇', '2025 浙江卷', '中等难度主旨题'] as const
+
+/** Default feed shows this many papers before the "显示全部" expander. */
+const DEFAULT_FEED_PAGE_SIZE = 8
 
 /**
  * Restart cut ⑤ — a non-empty result set is "all weak" when every hit only
@@ -70,18 +82,36 @@ function isVacuumResultsState(state: ConciergeRetrievalView['state']): boolean {
 }
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
-  const { retrieval, actions, basketIds, onAdd, dataStatus, thinkingMode, onThinkingModeChange } = props
+  const { retrieval, actions, basketIds, onAdd, questionGroups, dataStatus, thinkingMode, onThinkingModeChange } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, triggerSimilar, togglePaper } = actions
   const inputId = useId()
   const thinkingToggleId = useId()
   const dataLoading = dataStatus === 'loading'
+  const [feedExpanded, setFeedExpanded] = useState(false)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (dataLoading) return
     void submit()
   }
+
+  // Default feed — the browse-the-bank content shown when there is no
+  // active search. Only computed when it can actually be shown (empty state
+  // or the honest-vacuum "results but zero hits" state); loading / results /
+  // clarification / error never render it.
+  const showFeed =
+    !dataLoading && (state.kind === 'empty' || isVacuumResultsState(state))
+  const defaultFeed = useMemo(
+    () => (showFeed ? buildDefaultFeed(questionGroups) : []),
+    [showFeed, questionGroups],
+  )
+  const visibleFeed = feedExpanded ? defaultFeed : defaultFeed.slice(0, DEFAULT_FEED_PAGE_SIZE)
+  const feedPaperCount = defaultFeed.length
+  const feedGroupCount = useMemo(
+    () => defaultFeed.reduce((sum, paper) => sum + paper.groups.length, 0),
+    [defaultFeed],
+  )
 
   const placeholder = useMemo(() => {
     if (dataLoading) return '正在连接本地题库…'
@@ -143,7 +173,14 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               <button
                 type="button"
                 className="concierge-starter-chip"
-                onClick={() => setIntent(chip)}
+                onClick={() => {
+                  // Cut ⑥: chips search immediately instead of only filling
+                  // the input — a click is a decision, not a suggestion to
+                  // review. Fill the box too so the teacher can see/edit the
+                  // query that just ran.
+                  setIntent(chip)
+                  void submit(chip)
+                }}
               >
                 {chip}
               </button>
@@ -205,6 +242,48 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           </ul>
         )}
       </div>
+
+      {showFeed && (
+        <div className="concierge-default-feed" aria-label="题库浏览">
+          {questionGroups.length === 0 ? (
+            <p className="concierge-feed-empty-corpus">
+              题库还没有题目。先导入一套卷，题库会在这里展开浏览。
+            </p>
+          ) : (
+            <>
+              <p className="concierge-feed-intro">
+                题库里现有 {feedPaperCount} 套卷 · {feedGroupCount} 个篇章。可以直接翻，或用一句话描述你要的题。
+              </p>
+              <ul className="concierge-paper-list">
+                {visibleFeed.map((paper) => (
+                  <li key={paper.key}>
+                    <ConciergePaperRow
+                      paper={paper}
+                      variant="feed"
+                      expanded={expandedPaperKey === paper.key}
+                      basketIds={basketIds}
+                      onTogglePaper={togglePaper}
+                      onAdd={onAdd}
+                      onSimilar={(group) => {
+                        void triggerSimilar(group)
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+              {!feedExpanded && feedPaperCount > DEFAULT_FEED_PAGE_SIZE && (
+                <button
+                  type="button"
+                  className="concierge-feed-expand"
+                  onClick={() => setFeedExpanded(true)}
+                >
+                  显示全部 {feedPaperCount} 套卷
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      )}
     </section>
   )
 }
