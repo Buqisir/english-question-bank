@@ -199,7 +199,7 @@ assert('draft render reopens a new section when group type returns later', third
 assert('draft render keeps footer title and page counter', draftHtml.includes('H9 Draft · ') && draftHtml.includes('counter(page)'))
 assert('footer is injected outside print renderer body', draftStore.includes('addDraftFooterCss'))
 assert('footer contains title and page counter', /counter\(page\)/.test(draftStore))
-assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
+assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper, \{ versionType: normalizedVersionType \}\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
 assert('empty export uses Chinese reason', draftStore.includes('请先添加题组') || draftRoutes.includes('请先添加题组'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')

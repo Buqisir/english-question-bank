@@ -25,6 +25,8 @@ import { DraftPaperOutline } from './DraftPaperOutline'
 import { buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
 
+type DraftVersionType = 'student' | 'teacher'
+
 export type DraftPaperWorkbenchProps = {
   draftPaperId?: string | null
   focusGroupId?: string | null
@@ -91,6 +93,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [spaceStatus, setSpaceStatus] = useState<'idle' | 'loading' | 'saving' | 'saved' | 'error'>('idle')
   const [spaceMessage, setSpaceMessage] = useState('')
   const [migrationNotice, setMigrationNotice] = useState('')
+  const [versionType, setVersionType] = useState<DraftVersionType>('student')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
   const titleSaveTimerRef = useRef<number | null>(null)
@@ -128,6 +131,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       }
       setDraftPaper(next)
       setTitleDraft(next.title)
+      setVersionType('student')
       setLoadStatus('loaded')
       loadRecentDrafts()
     } catch (error) {
@@ -143,6 +147,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
     }
   }, [loadDraft])
+
+  useEffect(() => {
+    if (!draftPaper || loadStatus !== 'loaded') return
+    let cancelled = false
+    void fetchDraftPaper(draftPaper.id, versionType).then((next) => {
+      if (cancelled) return
+      setDraftPaper((current) => (current && current.id === next.id ? { ...current, printHtml: next.printHtml } : current))
+    })
+    return () => {
+      cancelled = true
+    }
+    // Only re-fetch print HTML when the version toggle changes; item/title edits
+    // already refresh printHtml via their own draftPaper responses (student version).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [versionType])
 
   useEffect(() => {
     focusedOnceRef.current = false
@@ -275,7 +294,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setExportStatus('exporting')
     setExportError('')
     try {
-      await downloadDraftPaperPdf(draftPaper.id)
+      await downloadDraftPaperPdf(draftPaper.id, versionType)
       setExportStatus('exported')
     } catch (error) {
       setExportStatus('error')
@@ -388,6 +407,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             url.searchParams.set('view', 'draft-paper')
             url.searchParams.set('draftPaperId', id)
             window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
+            setVersionType('student')
             void fetchDraftPaper(id).then((next) => {
               setDraftPaper(next)
               setTitleDraft(next.title)
@@ -399,10 +419,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             <option key={draft.id} value={draft.id}>{draft.title}</option>
           ))}
         </select>
+        <div className="draft-version-toggle" role="group" aria-label="导出版本">
+          <button
+            type="button"
+            className={versionType === 'student' ? 'active' : ''}
+            aria-pressed={versionType === 'student'}
+            onClick={() => setVersionType('student')}
+          >
+            学生版
+          </button>
+          <button
+            type="button"
+            className={versionType === 'teacher' ? 'active' : ''}
+            aria-pressed={versionType === 'teacher'}
+            onClick={() => setVersionType('teacher')}
+          >
+            教师版
+          </button>
+        </div>
         <details className="draft-export-menu">
           <summary>导出</summary>
           <button type="button" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={exportPdf}>
-            <FileDown size={15} /> 下载 PDF
+            <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
           </button>
           <button type="button" disabled={draftPaper.items.length === 0} onClick={browserPrint}>
             <Printer size={15} /> 浏览器打印
@@ -430,7 +468,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <div className="draft-preview-meta">
             <span>{draftPaper.items.length} 题组</span>
             <span>{totalQuestions} 小题</span>
-            <span>学生卷</span>
+            <span>{versionType === 'teacher' ? '教师卷' : '学生卷'}</span>
           </div>
           <div className="draft-a4-sheet">
             {previewHtml ? (

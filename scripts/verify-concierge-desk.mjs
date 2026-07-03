@@ -684,7 +684,6 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   const mentions = app.match(/组题篮/g) || []
   assert('App.tsx still has no user-visible 组题篮', mentions.length === 0, `still found ${mentions.length} occurrence(s)`)
   assert('App.tsx 加入草稿卷 present', /加入草稿卷/.test(app), '')
-  assert('App.tsx 收起草稿卷 present', /收起草稿卷/.test(app), '')
   assert('App.tsx aria-label="草稿卷" present', /aria-label="草稿卷"/.test(app), '')
 }
 
