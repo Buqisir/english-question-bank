@@ -4,7 +4,8 @@ cut size: medium; touches schema, data contract, product boundary, or teaching
 interpretation: server API surface +1 只读端点（无 schema/DB 变更）；product
 boundary = AI 检索从「手填 key 才可用」变为「服务端有 key 即默认可用」。
 
-Status: plan committed, awaiting PA → PM compression → DEV.
+Status: PA done (APPROVE WITH MUST-FIX ×4, 全部已压缩进本 plan)，DEV ready。
+PA 详情见同目录 pa.md（Allowed/Forbidden files、QA 矩阵第 5 例以其为准）。
 
 ## 背景（audit P0-1 残留 + P1-3）
 
@@ -105,6 +106,29 @@ parse 都有，见下「链路事实」）。真正断点在前端：
   回退。若 QA 中体感差，CR/QA 可议下调。
 - status 端点竞态（mount fetch 未返回就搜）：降级为现行为，无害。
 
-## PA Follow-Up Decisions
+## PA Follow-Up Decisions（4 MF 全采纳，DEV 必守）
 
-（PA 后由 PM 压缩回填）
+- **MF-1 注入点钉死（TDZ）**：`serverContext.serverKeyAvailable =
+  Boolean(DEEPSEEK_API_KEY)` 写在 `api.mjs` **:2925 附近的 post-hoc 赋值块**
+  （semanticSearch/stewardSearch 同款先例），**禁止**进 `:93` 的
+  serverContext 字面量——`DEEPSEEK_API_KEY` 在 `:2833` 才声明，进字面量
+  = 模块加载 TDZ 崩启动。路由 handler 在请求时读
+  `context.serverKeyAvailable`。
+- **MF-2 三处 seam 全打通（防静默 no-op）**：`serverKeyAvailable` 必须走完
+  ① `useConciergeDesk` 内 mount fetch 的新 state（status fetch **住在
+  desk 里**，App 只见 retrieval/actions，不进 `UseConciergeDeskInput`）；
+  ② `useConciergeDesk.ts:193-199` 调 `runConciergeSearch` 的入参；
+  ③ `:224` 的 useCallback 依赖数组（与 MF-4 同一个数组）。漏任何一处
+  = 永远 false 的静默 no-op，verify 单测 runConciergeSearch 抓不到。
+- **MF-3 key 泄漏负测做实**：verify 用**独特 sentinel key** 注入 fake
+  context；断言 sentinel 不出现在 status 响应体序列化结果里、也不出现在
+  该路由发出的任何日志行。Forbidden：status 路由不得 console.log key 或
+  其任何子串。
+- **MF-4 顺手修要锁验证**：`useConciergeDesk.ts:224` 依赖数组补
+  `input.thinkingMode` 为准确编辑点；并在 verify（新脚本或
+  `verify-concierge-desk.mjs`）加断言：两次 render 间 thinkingMode 变化
+  要反映到下一次 runSearch 的入参。
+
+SW 采纳：SW-1（默认花 owner DeepSeek 余额）为结案战报必报项，非 DEV 闸；
+SW-5（c6a10 不在 verify-ci 是存量缺口）只记录，本刀不扩。浏览器 QA 增加
+PA 的第 5 例（无手填 key 下 thinking on→off→on 逐次生效）。
