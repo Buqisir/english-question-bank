@@ -853,5 +853,87 @@ console.log('\n-- 13. CR-5 SW-2: weak reasons never expose meaningless carve fra
   assert('weak reason still reads as honest "可能相关" phrasing', reason.startsWith('可能相关'), reason)
 }
 
+// ------------------------------------------------------------------------
+console.log('\n-- 13b. audit挂账 #3\': weak reasons never echo query-chrome fragments / bare letters / meta words --')
+
+{
+  // Real-bank QA repro (2026-07-03, audit.md third round): the natural
+  // teacher query "我想要一篇讲动物的题" is ONE connected CJK run, so
+  // tokenize() carves chrome fragments ("我想"/"要一"/"的题") alongside the
+  // real content word ("动物"). "要一" coincidentally substring-matches any
+  // summary containing "需要一…", and in carve order it appears BEFORE
+  // "动物" — under the old longest-per-run pick (both length 2, first
+  // appearance wins ties) the fragment took the display slot and the
+  // teacher saw "可能相关：要一". Every group here mentions 动物 so the
+  // weak hits clear the noise floor via DF, not multiplicity — same as the
+  // real bank.
+  function zooPoolGroup(id, summary) {
+    return { ...sampleQuestionGroups[0], id, tags: [], topicLabels: [], title: 'Reading', summary, groupType: 'reading' }
+  }
+  const zooPool = [
+    zooPoolGroup('restart5-3p-target', '介绍动物保护公益项目，大家需要一起参与行动。'),
+    zooPoolGroup('restart5-3p-df-1', '一篇关于动物园管理改革的说明文。'),
+    zooPoolGroup('restart5-3p-df-2', '记叙作者救助流浪动物的经历。'),
+  ]
+  const zooHits = rankByKeywords(zooPool, '我想要一篇讲动物的题')
+  const zooTarget = zooHits.find((h) => h.group.id === 'restart5-3p-target')
+  assert('#3\' fixture surfaces the 动物+要一 double-match target', !!zooTarget, JSON.stringify(zooHits.map((h) => h.group.id)))
+  assert('#3\' target hit is weak (general-tier only)', zooTarget?.weak === true, JSON.stringify(zooTarget))
+  assert(
+    'weak reason never echoes the chrome fragment "要一" (QA-observed leak shape)',
+    !(zooTarget?.reason || '').includes('要一'),
+    zooTarget?.reason,
+  )
+  assert(
+    'content-word sibling from the same run wins the display slot ("可能相关：动物")',
+    (zooTarget?.reason || '').includes('动物'),
+    zooTarget?.reason,
+  )
+
+  // All-chrome match: a group whose ONLY match is a chrome fragment must
+  // degrade to the bare honest line — no token echo at all. Both non-target
+  // groups match only 动物; this one matches only 要一 (DF of 要一 = 2 <
+  // threshold on its own, so pair it with the pool above where 需要一 also
+  // appears... instead give it its own pool where 要一 is DF-common).
+  const chromeOnlyPool = [
+    zooPoolGroup('restart5-3p-chrome-target', '这项社区服务需要一些耐心和时间。'),
+    zooPoolGroup('restart5-3p-chrome-df-1', '完成实验需要一个学期的准备。'),
+    zooPoolGroup('restart5-3p-chrome-df-2', '申请签证需要一周左右时间。'),
+  ]
+  const chromeHits = rankByKeywords(chromeOnlyPool, '我想要一篇讲动物的题')
+  const chromeTarget = chromeHits[0]
+  assert(
+    '#3\' chrome-only fixture still surfaces (DF-common 要一 clears the noise floor — visibility unchanged)',
+    chromeHits.length > 0 && chromeTarget?.weak === true,
+    JSON.stringify(chromeHits.map((h) => [h.group.id, h.weak])),
+  )
+  assertEqual(
+    'all-chrome weak match degrades to the bare honest "可能相关" (no token echo)',
+    chromeTarget?.reason,
+    '可能相关',
+  )
+
+  // Meta-word + bare-letter shape (audit third round: "可能相关：主题、c").
+  // "主题"/"相关" are real words but describe the query apparatus, not
+  // passage content — they must not be echoed either.
+  const metaPool = [
+    zooPoolGroup('restart5-3p-meta-target', '本组题目主题相关性较弱，供参考。'),
+    zooPoolGroup('restart5-3p-meta-df-1', '该主题相关材料较多，注意甄别。'),
+    zooPoolGroup('restart5-3p-meta-df-2', '与考试主题相关的常见词汇整理。'),
+  ]
+  const metaHits = rankByKeywords(metaPool, '找主题相关的题')
+  const metaTarget = metaHits[0]
+  assert(
+    '#3\' meta-word fixture surfaces weak hits (visibility unchanged)',
+    metaHits.length > 0 && metaTarget?.weak === true,
+    JSON.stringify(metaHits.map((h) => [h.group.id, h.weak])),
+  )
+  assertEqual(
+    'meta-word-only weak match degrades to the bare honest "可能相关" (never "可能相关：主题/相关")',
+    metaTarget?.reason,
+    '可能相关',
+  )
+}
+
 console.log(`\nRestart cut ① local-search-intent verify: ${passed} passed, ${failed} failed`)
 if (failed > 0) process.exit(1)
