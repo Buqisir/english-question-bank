@@ -20,7 +20,7 @@
 //   6. the 403 body is always exactly { error: 'forbidden' } (no route-existence
 //      leakage via a different shape).
 import { spawn } from 'node:child_process'
-import { mkdtempSync, rmSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -201,12 +201,18 @@ async function seedBootstrapOpenModeFixture() {
   const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-verify-owner-gate-open-'))
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+  // Hermeticity: without this override the owner pass through
+  // /api/grammar-fill/verb-profiles/backfill scans and writes sidecar files
+  // into the real app/public/paper-assets tree.
+  const paperAssetsDir = path.join(tempRoot, 'paper-assets')
+  mkdirSync(paperAssetsDir, { recursive: true })
   const apiPort = 9893
   seedMinimalBankDatabase(dbPath)
   const env = {
     ...process.env,
     QUESTION_BANK_DB: dbPath,
     USER_DATA_DB: userDataDbPath,
+    QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetsDir,
     QUESTION_BANK_API_PORT: String(apiPort),
   }
   return { tempRoot, apiPort, env }
@@ -217,12 +223,17 @@ async function main() {
   const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-verify-owner-gate-'))
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+  // Hermeticity: see seedBootstrapOpenModeFixture — keep sidecar writes
+  // out of the real paper-assets tree.
+  const paperAssetsDir = path.join(tempRoot, 'paper-assets')
+  mkdirSync(paperAssetsDir, { recursive: true })
   const apiPort = 9892
   seedMinimalBankDatabase(dbPath)
   const env = {
     ...process.env,
     QUESTION_BANK_DB: dbPath,
     USER_DATA_DB: userDataDbPath,
+    QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetsDir,
     QUESTION_BANK_API_PORT: String(apiPort),
   }
   const req = makeReq(apiPort)
