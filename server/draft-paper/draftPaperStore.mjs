@@ -20,6 +20,21 @@ import { loadGroupAnalysisTexts } from './analysisText.mjs'
 // (route layer for db-param methods; self-opened for the self-open methods below) — see
 // docs/cuts/m0-1-user-db-split/plan.md "store 连接改造清单" for the per-method contract.
 // No SQL statement may cross sides; cross-side assembly always happens in application code.
+//
+// M0-4 user data isolation (docs/cuts/m0-4-user-scope/plan.md decision 3): every method
+// that touches draft_papers (directly, or draft_paper_items via the parent draft) now takes
+// a required `userId` parameter — no default value, so a caller that forgets to pass it
+// throws instead of silently falling back to LOCAL_USER_ID. draft_paper_items itself is NOT
+// given a user_id column (ADR-0014 decision 3): any operation entering through a
+// draftPaperId must first hit draft_papers on `(id, user_id)` — an unmatched row is treated
+// exactly like "draft not found" (404 upstream), never a separate 403.
+function requireUserId(userId) {
+  if (typeof userId !== 'string' || !userId) {
+    throw new Error('draftPaperStore: userId is required')
+  }
+  return userId
+}
+
 export function createDraftPaperStore({
   exportDir,
   getQuestionGroupDetail,
@@ -33,18 +48,19 @@ export function createDraftPaperStore({
 }) {
   const recentDraftPdfExports = new Map()
 
-  function getCurrentDraftPaperRow(userDb) {
+  function getCurrentDraftPaperRow(userDb, userId) {
+    requireUserId(userId)
     return userDb
       .prepare(
         `
-        SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
+        SELECT id, user_id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
         FROM draft_papers
-        WHERE status = 'active' AND current_marker = 1
+        WHERE status = 'active' AND current_marker = 1 AND user_id = ?
         ORDER BY updated_at DESC
         LIMIT 1
         `,
       )
-      .get() || null
+      .get(userId) || null
   }
 
   function makeDraftPaperTitle() {
@@ -54,25 +70,28 @@ export function createDraftPaperStore({
     return `${month}${day} 英语草稿卷`
   }
 
-  function createDraftPaper({ userDb, bankDb }, title = makeDraftPaperTitle()) {
+  function createDraftPaper({ userDb, bankDb }, userId, title = makeDraftPaperTitle()) {
+    requireUserId(userId)
     const id = `draft-paper-${randomUUID()}`
-    userDb.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1').run()
+    userDb.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1 AND user_id = ?').run(userId)
     userDb.prepare(
       `
-      INSERT INTO draft_papers (id, title, subject, status, current_marker)
-      VALUES (?, ?, 'english', 'active', 1)
+      INSERT INTO draft_papers (id, user_id, title, subject, status, current_marker)
+      VALUES (?, ?, ?, 'english', 'active', 1)
       `,
-    ).run(id, String(title || '').trim() || makeDraftPaperTitle())
-    return getDraftPaper({ userDb, bankDb }, id)
+    ).run(id, userId, String(title || '').trim() || makeDraftPaperTitle())
+    return getDraftPaper({ userDb, bankDb }, userId, id)
   }
 
-  function touchDraftPaper(userDb, draftPaperId) {
-    userDb.prepare('UPDATE draft_papers SET updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+  function touchDraftPaper(userDb, userId, draftPaperId) {
+    requireUserId(userId)
+    userDb.prepare('UPDATE draft_papers SET updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
   }
 
-  function markCurrentDraftPaper(userDb, draftPaperId) {
-    userDb.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1 AND id <> ?').run(draftPaperId)
-    userDb.prepare('UPDATE draft_papers SET current_marker = 1, updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+  function markCurrentDraftPaper(userDb, userId, draftPaperId) {
+    requireUserId(userId)
+    userDb.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1 AND user_id = ? AND id <> ?').run(userId, draftPaperId)
+    userDb.prepare('UPDATE draft_papers SET current_marker = 1, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
   }
 
   function cnSectionNumber(index) {
@@ -298,17 +317,22 @@ export function createDraftPaperStore({
     })
   }
 
-  function getDraftPaper({ userDb, bankDb }, draftPaperId, { includePrintHtml = true, versionType = 'student' } = {}) {
+  function getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml = true, versionType = 'student' } = {}) {
+    requireUserId(userId)
     const row = userDb
       .prepare(
         `
         SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
         FROM draft_papers
-        WHERE id = ? AND status = 'active'
+        WHERE id = ? AND user_id = ? AND status = 'active'
         `,
       )
-      .get(draftPaperId)
+      .get(draftPaperId, userId)
     if (!row) return null
+    // draft_paper_items has no user_id column (ADR-0014 decision 3): the SELECT above
+    // already proved this draftPaperId belongs to userId, so the child-table query
+    // below is safe to run unscoped (PA SW-2 — do not add user_id here, there is no
+    // such column and it would be a no-op-shaped bug).
     const items = getDraftPaperItems({ userDb, bankDb }, draftPaperId)
     const draftPaper = {
       ...rowToDraftPaperSummary(row, items),
@@ -321,7 +345,8 @@ export function createDraftPaperStore({
     }
   }
 
-  function listDraftPapers() {
+  function listDraftPapers(userId) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: true })
     const bankDb = openDatabase()
     try {
@@ -330,12 +355,12 @@ export function createDraftPaperStore({
           `
           SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
           FROM draft_papers
-          WHERE status = 'active'
+          WHERE status = 'active' AND user_id = ?
           ORDER BY updated_at DESC, created_at DESC
           LIMIT 12
           `,
         )
-        .all()
+        .all(userId)
       return rows.map((row) => rowToDraftPaperSummary(row, getDraftPaperItems({ userDb, bankDb }, row.id)))
     } finally {
       userDb.close()
@@ -343,15 +368,16 @@ export function createDraftPaperStore({
     }
   }
 
-  function getOrCreateCurrentDraftPaper({ createIfMissing = true } = {}) {
+  function getOrCreateCurrentDraftPaper(userId, { createIfMissing = true } = {}) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
-      let current = getCurrentDraftPaperRow(userDb)
+      let current = getCurrentDraftPaperRow(userDb, userId)
       if (!current && createIfMissing) {
         userDb.exec('BEGIN')
         try {
-          const draft = createDraftPaper({ userDb, bankDb })
+          const draft = createDraftPaper({ userDb, bankDb }, userId)
           userDb.exec('COMMIT')
           return draft
         } catch (error) {
@@ -359,7 +385,7 @@ export function createDraftPaperStore({
           throw error
         }
       }
-      return current ? getDraftPaper({ userDb, bankDb }, current.id) : null
+      return current ? getDraftPaper({ userDb, bankDb }, userId, current.id) : null
     } finally {
       userDb.close()
       bankDb.close()
@@ -381,7 +407,17 @@ export function createDraftPaperStore({
   // Write-side guard preserved (plan.md decision 8): adding a group that no longer
   // exists in the bank still throws. Orphan tolerance only applies to the read side
   // (a group already in a draft that later disappears from the bank).
-  function addGroupToDraftPaper({ userDb, bankDb }, draftPaperId, groupId, { insertIndex = null, pageBreakBefore = false } = {}) {
+  //
+  // M0-4 (plan.md decision 3, "子表规则"): draft_paper_items has no user_id column, so
+  // this is the entry point that must hit draft_papers on (id, user_id) BEFORE touching
+  // draft_paper_items — previously this function trusted draftPaperId with no ownership
+  // check at all. An unmatched (id, user_id) is treated the same as "draft not found".
+  function addGroupToDraftPaper({ userDb, bankDb }, userId, draftPaperId, groupId, { insertIndex = null, pageBreakBefore = false } = {}) {
+    requireUserId(userId)
+    const ownedDraft = userDb
+      .prepare("SELECT id FROM draft_papers WHERE id = ? AND user_id = ? AND status = 'active'")
+      .get(draftPaperId, userId)
+    if (!ownedDraft) throw new Error('Draft paper not found')
     const [card] = selectQuestionGroupCards(bankDb, 'WHERE id = ?', [groupId])
     if (!card) throw new Error(`questionGroupId not found: ${groupId}`)
     const ready = isGroupPrintReady(bankDb, groupId)
@@ -410,26 +446,27 @@ export function createDraftPaperStore({
       VALUES (?, ?, ?, ?, ?, ?)
       `,
     ).run(itemId, draftPaperId, groupId, sourcePaperIdFromCard(card), targetIndex + 1, pageBreakBefore ? 1 : 0)
-    touchDraftPaper(userDb, draftPaperId)
+    touchDraftPaper(userDb, userId, draftPaperId)
     normalizeDraftItemOrder(userDb, draftPaperId)
     return itemId
   }
 
-  function addGroupToCurrentDraftPaper(groupId) {
+  function addGroupToCurrentDraftPaper(userId, groupId) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
       userDb.exec('BEGIN')
       try {
-        let current = getCurrentDraftPaperRow(userDb)
+        let current = getCurrentDraftPaperRow(userDb, userId)
         if (!current) {
-          createDraftPaper({ userDb, bankDb })
-          current = getCurrentDraftPaperRow(userDb)
+          createDraftPaper({ userDb, bankDb }, userId)
+          current = getCurrentDraftPaperRow(userDb, userId)
         }
-        addGroupToDraftPaper({ userDb, bankDb }, current.id, groupId)
-        markCurrentDraftPaper(userDb, current.id)
+        addGroupToDraftPaper({ userDb, bankDb }, userId, current.id, groupId)
+        markCurrentDraftPaper(userDb, userId, current.id)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, current.id)
+        return getDraftPaper({ userDb, bankDb }, userId, current.id)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
@@ -440,17 +477,18 @@ export function createDraftPaperStore({
     }
   }
 
-  function updateDraftPaper(draftPaperId, input) {
+  function updateDraftPaper(userId, draftPaperId, input) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
       userDb.exec('BEGIN')
       try {
-        const existing = getDraftPaper({ userDb, bankDb }, draftPaperId, { includePrintHtml: false })
+        const existing = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
         if (!existing) throw new Error('Draft paper not found')
         if (Object.prototype.hasOwnProperty.call(input, 'title')) {
           const title = String(input.title || '').trim() || makeDraftPaperTitle()
-          userDb.prepare('UPDATE draft_papers SET title = ?, updated_at = datetime(\'now\') WHERE id = ?').run(title, draftPaperId)
+          userDb.prepare('UPDATE draft_papers SET title = ?, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(title, draftPaperId, userId)
         }
         if (Array.isArray(input.items)) {
           const knownItems = new Set(
@@ -468,11 +506,11 @@ export function createDraftPaperStore({
             updateItem.run(index + 1, item.pageBreakBefore ? 1 : 0, item.id, draftPaperId)
           })
           normalizeDraftItemOrder(userDb, draftPaperId)
-          touchDraftPaper(userDb, draftPaperId)
+          touchDraftPaper(userDb, userId, draftPaperId)
         }
-        markCurrentDraftPaper(userDb, draftPaperId)
+        markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, draftPaperId)
+        return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
@@ -483,12 +521,20 @@ export function createDraftPaperStore({
     }
   }
 
-  function patchDraftPaperItem(draftPaperId, itemId, input) {
+  // M0-4 (plan.md decision 3, "子表规则"): draft_paper_items has no user_id column, so
+  // the parent draft_papers row must be hit on (id, user_id) BEFORE the item lookup —
+  // previously this trusted draftPaperId with no ownership check at all.
+  function patchDraftPaperItem(userId, draftPaperId, itemId, input) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
       userDb.exec('BEGIN')
       try {
+        const ownedDraft = userDb
+          .prepare("SELECT id FROM draft_papers WHERE id = ? AND user_id = ? AND status = 'active'")
+          .get(draftPaperId, userId)
+        if (!ownedDraft) throw new Error('Draft paper not found')
         const existing = userDb
           .prepare('SELECT id FROM draft_paper_items WHERE id = ? AND draft_paper_id = ?')
           .get(itemId, draftPaperId)
@@ -498,10 +544,10 @@ export function createDraftPaperStore({
             'UPDATE draft_paper_items SET page_break_before = ?, updated_at = datetime(\'now\') WHERE id = ? AND draft_paper_id = ?',
           ).run(input.pageBreakBefore ? 1 : 0, itemId, draftPaperId)
         }
-        touchDraftPaper(userDb, draftPaperId)
-        markCurrentDraftPaper(userDb, draftPaperId)
+        touchDraftPaper(userDb, userId, draftPaperId)
+        markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, draftPaperId)
+        return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
@@ -516,12 +562,21 @@ export function createDraftPaperStore({
   // against question_groups was only an existence check on the item itself, and whether
   // the referenced group still exists in the bank is irrelevant to delete semantics
   // (orphaned items must remain deletable). userDb-only — no bank touch here at all.
-  function deleteDraftPaperItem(draftPaperId, itemId) {
+  //
+  // M0-4 (plan.md decision 3, "子表规则"): parent ownership must be checked on
+  // (id, user_id) before the item lookup — previously this trusted draftPaperId with
+  // no ownership check at all.
+  function deleteDraftPaperItem(userId, draftPaperId, itemId) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
       userDb.exec('BEGIN')
       try {
+        const ownedDraft = userDb
+          .prepare("SELECT id FROM draft_papers WHERE id = ? AND user_id = ? AND status = 'active'")
+          .get(draftPaperId, userId)
+        if (!ownedDraft) throw new Error('Draft paper not found')
         const row = userDb
           .prepare(
             `
@@ -534,11 +589,11 @@ export function createDraftPaperStore({
         if (!row) throw new Error('Draft item not found')
         userDb.prepare('DELETE FROM draft_paper_items WHERE id = ? AND draft_paper_id = ?').run(itemId, draftPaperId)
         normalizeDraftItemOrder(userDb, draftPaperId)
-        touchDraftPaper(userDb, draftPaperId)
-        markCurrentDraftPaper(userDb, draftPaperId)
+        touchDraftPaper(userDb, userId, draftPaperId)
+        markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
         return {
-          draftPaper: getDraftPaper({ userDb, bankDb }, draftPaperId),
+          draftPaper: getDraftPaper({ userDb, bankDb }, userId, draftPaperId),
           removed: {
             itemId: row.id,
             groupId: row.group_id,
@@ -556,7 +611,8 @@ export function createDraftPaperStore({
     }
   }
 
-  function restoreDraftPaperItem(draftPaperId, input) {
+  function restoreDraftPaperItem(userId, draftPaperId, input) {
+    requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
@@ -565,13 +621,13 @@ export function createDraftPaperStore({
         const groupId = String(input.groupId || '').trim()
         if (!groupId) throw new Error('groupId is required')
         const insertIndex = Number.isInteger(Number(input.orderIndex)) ? Number(input.orderIndex) - 1 : null
-        addGroupToDraftPaper({ userDb, bankDb }, draftPaperId, groupId, {
+        addGroupToDraftPaper({ userDb, bankDb }, userId, draftPaperId, groupId, {
           insertIndex,
           pageBreakBefore: input.pageBreakBefore === true,
         })
-        markCurrentDraftPaper(userDb, draftPaperId)
+        markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, draftPaperId)
+        return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
@@ -582,31 +638,32 @@ export function createDraftPaperStore({
     }
   }
 
-  function migrateAssemblyBasketToDraftPaper(input) {
+  function migrateAssemblyBasketToDraftPaper(userId, input) {
+    requireUserId(userId)
     const groupIds = Array.isArray(input?.groupIds) ? input.groupIds.map((id) => String(id || '').trim()).filter(Boolean) : []
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
       userDb.exec('BEGIN')
       try {
-        let current = getCurrentDraftPaperRow(userDb)
+        let current = getCurrentDraftPaperRow(userDb, userId)
         if (current) {
           userDb.exec('COMMIT')
-          return { draftPaper: getDraftPaper({ userDb, bankDb }, current.id), migratedCount: 0, skippedCount: groupIds.length }
+          return { draftPaper: getDraftPaper({ userDb, bankDb }, userId, current.id), migratedCount: 0, skippedCount: groupIds.length }
         }
-        const draft = createDraftPaper({ userDb, bankDb })
+        const draft = createDraftPaper({ userDb, bankDb }, userId)
         let migratedCount = 0
         let skippedCount = 0
         for (const groupId of groupIds) {
           try {
-            addGroupToDraftPaper({ userDb, bankDb }, draft.id, groupId)
+            addGroupToDraftPaper({ userDb, bankDb }, userId, draft.id, groupId)
             migratedCount += 1
           } catch {
             skippedCount += 1
           }
         }
         userDb.exec('COMMIT')
-        return { draftPaper: getDraftPaper({ userDb, bankDb }, draft.id), migratedCount, skippedCount }
+        return { draftPaper: getDraftPaper({ userDb, bankDb }, userId, draft.id), migratedCount, skippedCount }
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
@@ -617,12 +674,20 @@ export function createDraftPaperStore({
     }
   }
 
-  function exportDraftPaperPdf(draftPaperId, { preferRecent = false, versionType = 'student' } = {}) {
+  // M0-4 (plan.md decision 3 + PA MF-3): getDraftPaper below already gates on
+  // (id, user_id) and returns null for an unowned draft — this is the entry point
+  // that keeps "B borrows A's draftId through the export route" from being an
+  // exfiltration vector (server/my-space/mySpaceRoutes.mjs POST /api/my-space/artifacts
+  // calls this before saveMySpaceArtifact). recentDraftPdfExports cache keys stay
+  // unscoped (plan.md decision 9 — upstream ownership check already runs before any
+  // cache read/write here, so there is no leak path through the cache).
+  function exportDraftPaperPdf(userId, draftPaperId, { preferRecent = false, versionType = 'student' } = {}) {
+    requireUserId(userId)
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
-      const draftPaper = getDraftPaper({ userDb, bankDb }, draftPaperId, { includePrintHtml: false })
+      const draftPaper = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
       if (!draftPaper) throw new Error('Draft paper not found')
       if (!draftPaper.items.length) throw new Error('请先添加题组')
       const signature = draftPaperPrintSignature(draftPaper, normalizedVersionType)
@@ -634,7 +699,7 @@ export function createDraftPaperStore({
         Date.now() - recent.createdAt <= 30_000 &&
         existsSync(recent.outputPath)
       ) {
-        userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+        userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
         return { body: readFileSync(recent.outputPath), fileName: recent.fileName, outputPath: recent.outputPath, draftPaper, reusedRecent: true }
       }
       const html = buildDraftPrintHtml(draftPaper, { versionType: normalizedVersionType })
@@ -664,7 +729,7 @@ export function createDraftPaperStore({
         const fileName = `${safeTitle}-${versionLabel}.pdf`
         const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
         copyFileSync(pdfPath, outputPath)
-        userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ?').run(draftPaperId)
+        userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
         recentDraftPdfExports.set(draftPaperId, { signature, fileName, outputPath, createdAt: Date.now() })
         return { body: readFileSync(outputPath), fileName, outputPath, draftPaper, reusedRecent: false }
       } finally {

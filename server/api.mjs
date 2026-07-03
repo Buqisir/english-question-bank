@@ -33,7 +33,7 @@ import { createAiProxyRoutes } from './ai-proxy/routes.mjs'
 import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
-import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromRequest, renewSession, sessionNeedsRenewal } from './auth/auth.mjs'
+import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromRequest, renewSession, resolveDataUserId, sessionNeedsRenewal } from './auth/auth.mjs'
 import { createAuthRoutes } from './auth/authRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
@@ -473,6 +473,11 @@ const draftPaperStore = createDraftPaperStore({
   selectQuestionGroupCards,
 })
 serverContext.draftPaperStore = draftPaperStore
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 2): the single userId translation
+// point, exposed on context so route handlers can call context.resolveDataUserId(context)
+// without importing auth.mjs directly (same post-hoc pattern as draftPaperStore above,
+// since resolveDataUserId is destructured/used before serverContext's later fields exist).
+serverContext.resolveDataUserId = resolveDataUserId
 
 const serverRoutes = [
   ...h1Routes,
@@ -495,13 +500,22 @@ const EMPTY_DRAFT_CONTEXT = { currentDraftPaperId: null, groupIds: new Set() }
 
 // Real draftContext requires a userDb connection (draft_papers / draft_paper_items live
 // there after the M0-1 user-data split). Only the find-questions card-list entry points
-// (listQuestionGroups, semanticSearchQuestionGroups) call this; every other
-// selectQuestionGroupCards caller uses the EMPTY_DRAFT_CONTEXT default — see plan.md
-// "store 连接改造清单" / decision 5.
-function getDraftSearchContext() {
+// (listQuestionGroups, semanticSearchQuestionGroups, questionBankStewardSearch) call this;
+// every other selectQuestionGroupCards caller uses the EMPTY_DRAFT_CONTEXT default — see
+// plan.md "store 连接改造清单" / decision 5.
+//
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7 / PA MF-1): required userId — this is
+// the button-state seam that leaked across users in the M0-1-era bug this plan cites; the
+// inner draft_paper_items query below is intentionally NOT re-scoped by user_id (PA SW-2 —
+// getCurrentDraftPaperRow already gated `current` on userId, so current.id is already
+// owned by this user; draft_paper_items has no user_id column to add one to).
+function getDraftSearchContext(userId) {
+  if (typeof userId !== 'string' || !userId) {
+    throw new Error('getDraftSearchContext: userId is required')
+  }
   const userDb = openUserDatabase({ readOnly: true })
   try {
-    const current = draftPaperStore.getCurrentDraftPaperRow(userDb)
+    const current = draftPaperStore.getCurrentDraftPaperRow(userDb, userId)
     if (!current) return EMPTY_DRAFT_CONTEXT
     const rows = userDb
       .prepare('SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ?')
@@ -657,10 +671,25 @@ export function openUserDatabase({ readOnly = false } = {}) {
 
 // Exported so scripts/migrate-user-data-split.mjs can build/ensure the user database
 // shape without duplicating the schema (single source of truth — plan.md decision 2).
+//
+// M0-4 user data isolation (docs/cuts/m0-4-user-scope/plan.md decisions 4-6 /
+// ADR-0014 decision 5): three-phase shape.
+//   1. Main CREATE TABLE IF NOT EXISTS block — always new-form (user_id columns +
+//      UNIQUE(user_id, name) on folders). The old global "keep only the latest
+//      current marker" dedup UPDATE is NOT here anymore — it is destructive across
+//      users and must run at most once, inside the migration branch below.
+//   2. Migration branch (`user_version < 3`, never `=== 3` — ADR-0012 §5): column
+//      existence guards via PRAGMA table_info because a FRESH database also has
+//      user_version 0 before this function ever runs (the version pragma is only
+//      written at the end), so version alone can't tell "old db, needs migrating"
+//      from "brand new db, already new-form".
+//   3. Unconditional post-migration block — (re)creates the per-user current-draft
+//      index and the two new secondary indexes, then bumps user_version to 3.
 export function ensureUserDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS draft_papers (
       id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL DEFAULT 'local',
       title TEXT NOT NULL,
       subject TEXT NOT NULL DEFAULT 'english',
       status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'deleted')),
@@ -680,31 +709,113 @@ export function ensureUserDatabaseShape(db) {
       updated_at TEXT NOT NULL DEFAULT (datetime('now')),
       UNIQUE(draft_paper_id, group_id)
     );
-    UPDATE draft_papers
-    SET current_marker = 0
-    WHERE current_marker = 1
-      AND id NOT IN (
-        SELECT id
-        FROM draft_papers
-        WHERE current_marker = 1
-        ORDER BY updated_at DESC, created_at DESC
-        LIMIT 1
-      );
-    CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
-    ON draft_papers(current_marker)
-    WHERE current_marker = 1;
-    CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
     CREATE INDEX IF NOT EXISTS idx_draft_paper_items_draft ON draft_paper_items(draft_paper_id, order_index);
     CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
   `)
   ensureMySpaceDatabaseShape(db)
   ensureAuthDatabaseShape(db)
-  // Schema-version anchor for the user database (plan.md decision 5 / ADR-0012
-  // decision 5). 0 = pre-M0-2 (every real database today, since this repo never
-  // wrote user_version before); 2 = M0-2 (adds users/sessions). "1" was never
-  // shipped and stays permanently unused — real databases jump 0 -> 2 directly.
-  // Future conditional migrations MUST compare with `< N`, never `=== N`.
-  db.exec('PRAGMA user_version = 2')
+
+  const userVersionRow = db.prepare('PRAGMA user_version').get()
+  const userVersion = Number(userVersionRow?.user_version || 0)
+
+  if (userVersion < 3) {
+    const hasColumn = (table, column) =>
+      db.prepare(`PRAGMA table_info(${table})`).all().some((row) => row.name === column)
+
+    // my_space_folders is handled separately below (full table rebuild, because its
+    // UNIQUE constraint also needs to change from global to per-user) — captured
+    // BEFORE any ALTER TABLE runs against it, and excluded from this simple
+    // add-column loop so the rebuild-vs-already-new-form check stays accurate.
+    const foldersHadUserIdBeforeRebuild = hasColumn('my_space_folders', 'user_id')
+
+    for (const table of ['draft_papers', 'my_space_artifacts']) {
+      if (!hasColumn(table, 'user_id')) {
+        db.exec(`ALTER TABLE ${table} ADD COLUMN user_id TEXT NOT NULL DEFAULT 'local'`)
+      }
+    }
+
+    // One-time global dedup: at this point in a real upgrade every row is still
+    // 'local' (single-user history), so "keep only the latest current draft
+    // globally" and "keep only the latest current draft per user" are the same
+    // operation. This must never run again after the version bump below — doing
+    // so on every boot (the pre-M0-4 behavior) would wipe other users' current
+    // markers in a multi-user world.
+    db.exec(`
+      UPDATE draft_papers
+      SET current_marker = 0
+      WHERE current_marker = 1
+        AND id NOT IN (
+          SELECT id
+          FROM draft_papers
+          WHERE current_marker = 1
+          ORDER BY updated_at DESC, created_at DESC
+          LIMIT 1
+        );
+    `)
+
+    db.exec('DROP INDEX IF EXISTS idx_draft_papers_current_one')
+
+    // my_space_folders.name was an inline UNIQUE (global) column; SQLite cannot
+    // ALTER an inline constraint, so a real pre-M0-4 table (no user_id column yet
+    // at the top of this branch) must be rebuilt. PA MF-2 hard constraint (plan.md
+    // decision 5): PRAGMA foreign_keys OFF/ON must run OUTSIDE any transaction —
+    // node:sqlite silently no-ops that PRAGMA inside an active transaction, which
+    // would leave the FK check disabled-in-appearance-only during the rebuild.
+    // The rebuild body itself (create temp table -> copy -> drop -> rename) is
+    // wrapped in exactly one BEGIN...COMMIT so a crash mid-rebuild can never leave
+    // a half-migrated (old table dropped, new table not yet renamed) database on
+    // disk — SQLite's CREATE TABLE IF NOT EXISTS on next boot would otherwise
+    // silently recreate an empty new-form table and the old folder rows would be
+    // gone for good.
+    if (!foldersHadUserIdBeforeRebuild) {
+      db.exec('PRAGMA foreign_keys = OFF')
+      db.exec('BEGIN')
+      try {
+        db.exec(`
+          CREATE TABLE my_space_folders__m04_new (
+            id TEXT PRIMARY KEY,
+            user_id TEXT NOT NULL DEFAULT 'local',
+            name TEXT NOT NULL,
+            created_at TEXT NOT NULL DEFAULT (datetime('now')),
+            updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+            UNIQUE(user_id, name)
+          );
+        `)
+        db.exec(`
+          INSERT INTO my_space_folders__m04_new (id, user_id, name, created_at, updated_at)
+          SELECT id, 'local', name, created_at, updated_at FROM my_space_folders;
+        `)
+        db.exec('DROP TABLE my_space_folders')
+        db.exec('ALTER TABLE my_space_folders__m04_new RENAME TO my_space_folders')
+        db.exec('COMMIT')
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      } finally {
+        db.exec('PRAGMA foreign_keys = ON')
+      }
+      const fkViolations = db.prepare('PRAGMA foreign_key_check').all()
+      if (fkViolations.length > 0) {
+        throw new Error(`ensureUserDatabaseShape: foreign_key_check found ${fkViolations.length} violation(s) after my_space_folders rebuild`)
+      }
+    }
+  }
+
+  // Unconditional (idempotent): the per-user current-draft index and the two
+  // user-scoped secondary indexes must exist regardless of whether the migration
+  // branch above ran this boot.
+  db.exec(`
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
+    ON draft_papers(user_id, current_marker)
+    WHERE current_marker = 1;
+    CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
+    CREATE INDEX IF NOT EXISTS idx_draft_papers_user_status ON draft_papers(user_id, status, updated_at);
+    CREATE INDEX IF NOT EXISTS idx_my_space_artifacts_user ON my_space_artifacts(user_id, generated_at);
+  `)
+
+  if (userVersion < 3) {
+    db.exec('PRAGMA user_version = 3')
+  }
 }
 
 function warnIfSharedDatabaseStillHasUserTables() {
@@ -1495,11 +1606,11 @@ function selectQuestionGroupCards(db, whereClause = '', params = [], draftContex
   return cards
 }
 
-function listQuestionGroups() {
+function listQuestionGroups(userId) {
   const db = openDatabase()
 
   try {
-    return selectQuestionGroupCards(db, '', [], getDraftSearchContext())
+    return selectQuestionGroupCards(db, '', [], getDraftSearchContext(userId))
   } finally {
     db.close()
   }

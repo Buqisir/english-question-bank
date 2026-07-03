@@ -35,9 +35,18 @@ function createResponse() {
   }
 }
 
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7 / PA MF-1): both AI-search
+// routes now call context.resolveDataUserId(context) — the stub context needs the
+// real function (open-mode semantics: authMode 'open' -> 'local') so the route
+// handlers under test don't throw before reaching the stubbed search fns.
 function makeContext(overrides = {}) {
   return {
     DEFAULT_DEEPSEEK_MODEL: 'deepseek-v4-flash',
+    authMode: 'open',
+    resolveDataUserId(context) {
+      if (context?.authMode === 'enforced') return context?.session?.userId
+      return 'local'
+    },
     async readJsonBody(request) {
       return request.body || {}
     },
@@ -66,11 +75,13 @@ assert('GET semantic-search NOT matched (POST only)', !routeBy(routes, 'GET', '/
 assert('verify-trace NOT owned here (stays inline in api.mjs)', !routeBy(routes, 'GET', '/api/ai/verify-trace'))
 
 // --- semantic-search ---
+// M0-4 (PA MF-1): a 5th userId arg is now always forwarded, resolved via
+// context.resolveDataUserId(context) (open mode here -> 'local').
 {
   let args = null
   const ctx = makeContext({
-    async semanticSearchQuestionGroups(query, apiKey, requestId) {
-      args = { query, apiKey, requestId }
+    async semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMode, userId) {
+      args = { query, apiKey, requestId, thinkingMode, userId }
       return { matches: ['m1'], provider: 'stub' }
     },
   })
@@ -79,16 +90,18 @@ assert('verify-trace NOT owned here (stays inline in api.mjs)', !routeBy(routes,
   await route.handle({ request: { body: { query: 'q', apiKey: 'k', requestId: 'r' } }, response, context: ctx })
   assert('semantic-search forwards (query, apiKey, requestId) exactly',
     args && args.query === 'q' && args.apiKey === 'k' && args.requestId === 'r', JSON.stringify(args))
+  assert('semantic-search forwards resolved userId as the 5th arg (M0-4 PA MF-1)', args.userId === 'local', JSON.stringify(args))
   assert('semantic-search returns 200 with the raw result',
     response.statusCode === 200 && response.body.matches[0] === 'm1' && response.body.provider === 'stub')
 }
 
 // --- question-bank-steward: message||query fallback + thinkingMode coercion ---
+// M0-4 (PA MF-1): a 5th userId arg is now always forwarded.
 {
   let args = null
   const ctx = makeContext({
-    async questionBankStewardSearch(message, apiKey, requestId, thinkingMode) {
-      args = { message, apiKey, requestId, thinkingMode }
+    async questionBankStewardSearch(message, apiKey, requestId, thinkingMode, userId) {
+      args = { message, apiKey, requestId, thinkingMode, userId }
       return { plan: 'p' }
     },
   })
@@ -98,6 +111,7 @@ assert('verify-trace NOT owned here (stays inline in api.mjs)', !routeBy(routes,
   await route.handle({ request: { body: { message: 'msg', query: 'qq', apiKey: 'k', requestId: 'r', thinkingMode: true } }, response, context: ctx })
   assert('steward uses message when present (not query)', args.message === 'msg')
   assert('steward forwards apiKey/requestId + thinkingMode===true', args.apiKey === 'k' && args.requestId === 'r' && args.thinkingMode === true)
+  assert('steward forwards resolved userId as the 5th arg (M0-4 PA MF-1)', args.userId === 'local', JSON.stringify(args))
   assert('steward returns 200 with raw result', response.statusCode === 200 && response.body.plan === 'p')
   // message absent -> falls back to query; thinkingMode non-true coerces to false
   response = createResponse()

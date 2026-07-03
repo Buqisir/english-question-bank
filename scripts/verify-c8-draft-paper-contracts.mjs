@@ -45,11 +45,23 @@ assert('ensureUserDatabaseShape source located', Boolean(ensureUserDbSource))
 assert('ensureUserDatabaseShape creates draft_papers table', ensureUserDbSource.includes('CREATE TABLE IF NOT EXISTS draft_papers'))
 assert('ensureUserDatabaseShape creates draft_paper_items table', ensureUserDbSource.includes('CREATE TABLE IF NOT EXISTS draft_paper_items'))
 assert('draft paper has current_marker', /current_marker INTEGER NOT NULL DEFAULT 0/.test(ensureUserDbSource))
-assert('draft paper enforces one current marker', /CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one[\s\S]{0,160}WHERE current_marker = 1/.test(ensureUserDbSource))
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 4 / PA SW-6): the current-draft
+// unique index is now composite (user_id, current_marker) and lives in the
+// unconditional post-migration block, not immediately after CREATE TABLE — window
+// re-measured against the current source (was 160 for the old single-column form).
+assert('draft papers table carries user_id', /user_id TEXT NOT NULL DEFAULT 'local'/.test(ensureUserDbSource))
+assert('draft paper enforces one current marker PER USER (composite index)', /CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one[\s\S]{0,160}ON draft_papers\(user_id, current_marker\)[\s\S]{0,60}WHERE current_marker = 1/.test(ensureUserDbSource))
 assert('draft item stores group id (no cross-database FK)', /group_id TEXT NOT NULL,/.test(ensureUserDbSource) && !/group_id TEXT NOT NULL REFERENCES question_groups/.test(ensureUserDbSource))
 assert('draft item stores page_break_before', /page_break_before INTEGER NOT NULL DEFAULT 0/.test(ensureUserDbSource))
 assert('draft item prevents duplicate group in one draft', /UNIQUE\(draft_paper_id,\s*group_id\)/.test(ensureUserDbSource))
-assert('server normalizes duplicate current markers before unique index', /UPDATE draft_papers[\s\S]{0,260}id NOT IN/.test(ensureUserDbSource))
+// M0-4 (PA MF-2 / ADR-0012 §5): the global dedup UPDATE moved from the unconditional
+// main exec into the one-time `userVersion < 3` migration branch (running it on every
+// boot would wipe other users' current markers in a multi-user world) — window
+// re-measured (was 260, gap is now ~92 chars after removing the old duplicate index).
+assert('migration branch is guarded by user_version < 3 (never === 3, ADR-0012 §5)', /userVersion < 3/.test(ensureUserDbSource) && !/userVersion === 3/.test(ensureUserDbSource))
+assert('dedup UPDATE lives inside the migration branch (one-time, not every boot)', /if \(userVersion < 3\)[\s\S]{0,1300}UPDATE draft_papers[\s\S]{0,260}id NOT IN/.test(ensureUserDbSource))
+assert('migration branch drops the old single-column current-draft index before recreating it composite', /DROP INDEX IF EXISTS idx_draft_papers_current_one/.test(ensureUserDbSource))
+assert('column-existence guard uses PRAGMA table_info (fresh-db-vs-old-db double guard)', /PRAGMA table_info/.test(ensureUserDbSource))
 assert('server exposes current draft route', draftRoutes.includes('/api\\/draft-papers\\/current'))
 assert('server exposes draft migration route', draftRoutes.includes('/api\\/draft-papers\\/migrate-assembly-basket'))
 assert('server exposes draft PDF route', draftRoutes.includes('/print-pdf'))

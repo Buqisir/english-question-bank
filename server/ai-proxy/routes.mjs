@@ -20,14 +20,21 @@ export function createAiProxyRoutes() {
     }),
 
     defineRoute('POST', /^\/api\/ai\/semantic-search$/, async ({ request, response, context }) => {
+      // M0-4 (docs/cuts/m0-4-user-scope/plan.md decision 7 / PA MF-1): this route is
+      // member-reachable (not ownerOnly) and its results carry per-user
+      // in_current_draft button state via getDraftSearchContext — userId must be
+      // resolved here and threaded through, or two members' searches leak each
+      // other's current-draft button state (the AI-mode analogue of the M0-1 bug).
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request)
-      const result = await context.semanticSearchQuestionGroups(input.query, input.apiKey, input.requestId)
+      const result = await context.semanticSearchQuestionGroups(input.query, input.apiKey, input.requestId, undefined, userId)
       context.sendJson(response, 200, result)
     }),
 
     defineRoute('POST', /^\/api\/ai\/question-bank-steward$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request)
-      const result = await context.questionBankStewardSearch(input.message || input.query, input.apiKey, input.requestId, input.thinkingMode === true)
+      const result = await context.questionBankStewardSearch(input.message || input.query, input.apiKey, input.requestId, input.thinkingMode === true, userId)
       context.sendJson(response, 200, result)
     }),
 

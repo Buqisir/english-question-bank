@@ -4,6 +4,23 @@ function routeError(error) {
   return error instanceof Error ? error.message : String(error)
 }
 
+// M0-4 (docs/cuts/m0-4-user-scope/plan.md verification 2): "B uses A's draftId/itemId"
+// must 404, not 400 — the store now throws the same "not found" message for both
+// "genuinely does not exist" and "exists but belongs to someone else" (never leaking
+// which case it is). Routes that touch an existing draft/item via mutation
+// (PATCH/DELETE/restore) previously funneled every store error into a flat 400;
+// this helper carves out the not-found messages into 404 while everything else
+// (validation errors like "groupId is required") still maps to 400.
+const NOT_FOUND_MESSAGES = new Set(['Draft paper not found', 'Draft item not found'])
+function sendDraftMutationError(response, context, error) {
+  const message = routeError(error)
+  if (NOT_FOUND_MESSAGES.has(message)) {
+    context.sendJson(response, 404, { error: message })
+    return
+  }
+  context.sendJson(response, 400, { error: message })
+}
+
 function requiredEnum(value, allowed, label) {
   if (typeof value !== 'string' || !allowed.includes(value)) {
     throw new Error(`${label} is invalid`)
@@ -21,12 +38,14 @@ function versionTypeFromQuery(url) {
 export function createDraftPaperRoutes() {
   return [
     defineRoute('GET', /^\/api\/draft-papers$/, ({ response, context }) => {
-      context.sendJson(response, 200, { draftPapers: context.draftPaperStore.listDraftPapers() })
+      const userId = context.resolveDataUserId(context)
+      context.sendJson(response, 200, { draftPapers: context.draftPaperStore.listDraftPapers(userId) })
     }),
 
     defineRoute('GET', /^\/api\/draft-papers\/current$/, ({ response, url, context }) => {
+      const userId = context.resolveDataUserId(context)
       const createIfMissing = url.searchParams.get('create') === '1'
-      const draftPaper = context.draftPaperStore.getOrCreateCurrentDraftPaper({ createIfMissing })
+      const draftPaper = context.draftPaperStore.getOrCreateCurrentDraftPaper(userId, { createIfMissing })
       if (!draftPaper) {
         context.sendJson(response, 404, { error: 'Current draft paper not found' })
         return
@@ -35,9 +54,10 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('POST', /^\/api\/draft-papers\/current\/items$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request)
       try {
-        const draftPaper = context.draftPaperStore.addGroupToCurrentDraftPaper(String(input.groupId || ''))
+        const draftPaper = context.draftPaperStore.addGroupToCurrentDraftPaper(userId, String(input.groupId || ''))
         context.sendJson(response, 201, { draftPaper })
       } catch (error) {
         context.sendJson(response, 400, { error: routeError(error) })
@@ -45,9 +65,10 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('POST', /^\/api\/draft-papers\/migrate-assembly-basket$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request, { maxBytes: 1_000_000 })
       try {
-        const result = context.draftPaperStore.migrateAssemblyBasketToDraftPaper(input)
+        const result = context.draftPaperStore.migrateAssemblyBasketToDraftPaper(userId, input)
         context.sendJson(response, 201, result)
       } catch (error) {
         context.sendJson(response, 400, { error: routeError(error) })
@@ -55,6 +76,7 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/draft-papers\/([^/]+)$/, ({ response, url, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       const userDb = context.openUserDatabase({ readOnly: true })
       const bankDb = context.openDatabase({ readOnly: true })
       try {
@@ -66,7 +88,7 @@ export function createDraftPaperRoutes() {
           context.sendJson(response, 400, { error: routeError(error) })
           return
         }
-        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, id, { versionType })
+        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, userId, id, { versionType })
         if (!draftPaper) {
           context.sendJson(response, 404, { error: 'Draft paper not found' })
           return
@@ -79,16 +101,18 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('PATCH', /^\/api\/draft-papers\/([^/]+)$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request, { maxBytes: 1_000_000 })
       try {
-        const draftPaper = context.draftPaperStore.updateDraftPaper(decodeURIComponent(match[1]), input)
+        const draftPaper = context.draftPaperStore.updateDraftPaper(userId, decodeURIComponent(match[1]), input)
         context.sendJson(response, 200, { draftPaper })
       } catch (error) {
-        context.sendJson(response, 400, { error: routeError(error) })
+        sendDraftMutationError(response, context, error)
       }
     }),
 
     defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/items$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request)
       const userDb = context.openUserDatabase({ readOnly: false })
       const bankDb = context.openDatabase({ readOnly: true })
@@ -96,16 +120,16 @@ export function createDraftPaperRoutes() {
         const draftPaperId = decodeURIComponent(match[1])
         userDb.exec('BEGIN')
         try {
-          context.draftPaperStore.addGroupToDraftPaper({ userDb, bankDb }, draftPaperId, String(input.groupId || ''), {
+          context.draftPaperStore.addGroupToDraftPaper({ userDb, bankDb }, userId, draftPaperId, String(input.groupId || ''), {
             insertIndex: input.insertIndex,
             pageBreakBefore: input.pageBreakBefore === true,
           })
-          context.draftPaperStore.markCurrentDraftPaper(userDb, draftPaperId)
+          context.draftPaperStore.markCurrentDraftPaper(userDb, userId, draftPaperId)
           userDb.exec('COMMIT')
-          context.sendJson(response, 201, { draftPaper: context.draftPaperStore.getDraftPaper({ userDb, bankDb }, draftPaperId) })
+          context.sendJson(response, 201, { draftPaper: context.draftPaperStore.getDraftPaper({ userDb, bankDb }, userId, draftPaperId) })
         } catch (error) {
           userDb.exec('ROLLBACK')
-          context.sendJson(response, 400, { error: routeError(error) })
+          sendDraftMutationError(response, context, error)
         }
       } finally {
         userDb.close()
@@ -114,42 +138,48 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/items\/restore$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request)
       try {
-        const draftPaper = context.draftPaperStore.restoreDraftPaperItem(decodeURIComponent(match[1]), input)
+        const draftPaper = context.draftPaperStore.restoreDraftPaperItem(userId, decodeURIComponent(match[1]), input)
         context.sendJson(response, 200, { draftPaper })
       } catch (error) {
-        context.sendJson(response, 400, { error: routeError(error) })
+        sendDraftMutationError(response, context, error)
       }
     }),
 
     defineRoute('PATCH', /^\/api\/draft-papers\/([^/]+)\/items\/([^/]+)$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request)
       try {
         const draftPaper = context.draftPaperStore.patchDraftPaperItem(
+          userId,
           decodeURIComponent(match[1]),
           decodeURIComponent(match[2]),
           input,
         )
         context.sendJson(response, 200, { draftPaper })
       } catch (error) {
-        context.sendJson(response, 400, { error: routeError(error) })
+        sendDraftMutationError(response, context, error)
       }
     }),
 
     defineRoute('DELETE', /^\/api\/draft-papers\/([^/]+)\/items\/([^/]+)$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       try {
         const result = context.draftPaperStore.deleteDraftPaperItem(
+          userId,
           decodeURIComponent(match[1]),
           decodeURIComponent(match[2]),
         )
         context.sendJson(response, 200, result)
       } catch (error) {
-        context.sendJson(response, 400, { error: routeError(error) })
+        sendDraftMutationError(response, context, error)
       }
     }),
 
     defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, url, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       const userDb = context.openUserDatabase({ readOnly: true })
       const bankDb = context.openDatabase({ readOnly: true })
       try {
@@ -161,7 +191,7 @@ export function createDraftPaperRoutes() {
           context.sendJson(response, 400, { error: routeError(error) })
           return
         }
-        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, draftPaperId, { includePrintHtml: false })
+        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
         if (!draftPaper) {
           context.sendJson(response, 404, { error: 'Draft paper not found' })
           return
@@ -189,16 +219,24 @@ export function createDraftPaperRoutes() {
     }),
 
     defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/print-pdf$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
       try {
         const input = await context.readJsonBody(request)
         const versionType = input.versionType === undefined
           ? 'student'
           : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-        const result = context.draftPaperStore.exportDraftPaperPdf(decodeURIComponent(match[1]), { versionType })
+        const result = context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
         const message = routeError(error)
-        if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
+        // M0-4: check the draft-not-found/not-owned message BEFORE the generic
+        // 'not found' substring match below — otherwise a cross-user draftId would
+        // incorrectly report 503 "精排 PDF 不可用" (vivliostyle CLI missing) instead
+        // of 404, and would leak that the id exists-but-is-inaccessible differently
+        // from a genuinely unknown id.
+        if (NOT_FOUND_MESSAGES.has(message)) {
+          context.sendJson(response, 404, { error: message })
+        } else if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
           context.sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
         } else {
           context.sendJson(response, 400, { error: message })
