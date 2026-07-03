@@ -178,10 +178,9 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
    describeError helper + 16 点位人话化 + 个人空间重试按钮/去重 +
    不丢工作断言。**App.tsx 的 30+ 处（经典/导入流）仍挂**，随经典
    模式器官移植处置。
-3. **P2 推荐理由视觉降级**：~~#9A9180 承载正文~~ 对比度部分已销
-   （@ ac7b94f：理由/来源类型升 #6B645C + 删死规则 .concierge-reason）；
-   **weak 理由「可能相关：主题、c」泄漏分词 token 仍挂**（涉 reason
-   行为层，独立小刀）。
+3. ~~**P2 推荐理由视觉降级**~~ **已销**：对比度部分 @ ac7b94f（理由/
+   来源类型升 #6B645C + 删死规则 .concierge-reason）；weak 理由泄漏
+   分词 token 部分 **第五轮已销（#235 @ c447ea2）**，见第五轮结案。
 4. **P2 AI 模式 topbar 按钮墙**：6+ ghost 按钮与找题无关，移动端占首屏
    370px 且按钮断字。收「更多」菜单是经典模式器官移植刀的一部分。
 5. **P2 无障碍三缺口**：焦点环 rgba(26,26,26,0.08) 几乎不可见；结果行
@@ -229,6 +228,25 @@ Posture。新挂账（L 级，启动前先 PM grill 出路线图，不碎片化�
 全量 `pnpm -C app run verify:all`；且合并后没看 Actions，本地窄绿 ≠ CI
 绿。** 修复：两脚本入 CI + c8 断言跟上；AGENTS.md RM 闸补一行「合并前
 全量 verify:all 或等 PR CI 绿」。
+
+## 第五轮结案（2026-07-03 深夜，挂账 #3' weak 理由泄漏）
+
+- **#235 weak 理由分词碎 token 泄漏修复**（`fix(concierge)` @ c447ea2，
+  small 刀无 ceremony）：真库 QA 实锤的「可能相关：要一」「可能相关：
+  主题、c」根因是 tokenize 碎出的功能词 bigram 撞 summary 子串后，
+  pickDisplayTokens 等长 tie 先出现者赢。修在 display 层：
+  `isDisplayWorthyToken`（长度≥2 + 查询侧语法/客套/计数字符黑名单 +
+  meta 词黑名单）放在 longest-per-run 选取之前——碎片不占坑后同 run
+  真词（「动物」）赢得展示位，全被杀退到既有裸「可能相关」诚实兜底。
+  **打分/命中集合/排序零变化**（CR-5 噪声地板不动）。verify §13b 新增
+  8 断言（93/93），c6a10 59 + desk 238 全绿，PR CI + main CI 绿。
+- 设计偏置在案：字符黑名单**偏杀**（「有趣」「演讲」这类含黑名单字的
+  真词被误杀时只是退化为裸「可能相关」，诚实无害；反向放过碎片才是
+  病）。黑名单排除了常构成真话题词的字（关→关系、话→神话、好→好奇）。
+- 浏览器 QA 略过（在案说明）：weak 本地兜底路径在刀⑨ server key 兜底
+  上线后需要 steward 失败才能触发，环境改造成本 > 增量证据；渲染路径
+  已静态核实（reason 字符串直渲染，cleanReason 对该文案是 no-op），
+  字符串形态由 8 条行为断言钉死。
 
 ### 第二轮新挂账
 
