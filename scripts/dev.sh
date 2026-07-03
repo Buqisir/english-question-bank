@@ -3,7 +3,9 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 API_PORT="${QUESTION_BANK_API_PORT:-8787}"
-API_URL="http://127.0.0.1:${API_PORT}/api/paper-sets"
+# Probe an auth-whitelisted route: /api/paper-sets returns 401 once login
+# is enforced (users exist), which would make this health wait time out.
+API_URL="http://127.0.0.1:${API_PORT}/api/health"
 
 sh "$ROOT_DIR/scripts/init-db.sh"
 
