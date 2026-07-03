@@ -30,4 +30,4 @@ until curl -fsS "$API_URL" >/dev/null 2>&1; do
 done
 
 cd "$ROOT_DIR/app"
-pnpm dev:vite --host 127.0.0.1
+pnpm dev:vite --host 127.0.0.1 --port "${PORT:-5173}" --strictPort

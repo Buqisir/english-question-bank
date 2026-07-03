@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "question-bank",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["scripts/dev.sh"],
+      "port": 5173,
+      "autoPort": true
+    }
+  ]
+}

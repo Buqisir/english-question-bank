@@ -14,44 +14,48 @@ the steering notes. It reflects how the project runs today. Historical docs
 reference as 小川 wearing the matching hat (PM / UI-direction / CR / RM); do
 not mass-rename history.
 
-### Roles
+### Roles (rewritten 2026-07-02, owner-authorized)
 
-- One executor: **小川** (this Claude), wearing every hat across two model
-  tracks — Opus for PM / PA / CR / RM thinking, Sonnet for DEV. There is no
-  second named agent and no external agent.
-- **Independence comes from a fresh, un-anchored session + the role persona,
-  not from a different name.** A review hat (PA of a plan, CR of a diff) runs
-  in its own fresh session so it "forgets it wrote the code" and actually
-  pushes back. Scale by cut size: small skips separate PA / CR; medium /
-  large run PA and CR as fresh sessions (see Session map).
-- UI direction / 审美 judgment stays with the **owner (PO)**; 小川 implements.
+- Orchestrator: **小川** as the main agent (Fable tier), first responsible
+  person with full change authority over the project (owner grant,
+  2026-07-02). The main agent does direction, decomposition, dispatch, and
+  final acceptance — not bulk implementation.
+- Execution runs in subagents / workflow agents. **Every spawned agent pins
+  its model explicitly; never inherit the main-agent tier** (quota
+  discipline). Mechanical work = Sonnet; judgment-heavy review = Opus.
+- **Independence comes from a fresh, un-anchored context + the role persona.**
+  A subagent with a fresh context is equivalent to the old "fresh session".
+  PA, DEV, and CR stay separate contexts; review gates never downgrade.
+- UI direction / 审美 is **delegated to 小川** (owner decision, 2026-07-02):
+  小川 sets visual direction per `PRODUCT.md` brand personality and ships UI
+  decisions directly. The owner (PO) keeps product QA and can veto / redo
+  any shipped visual decision after the fact.
 
-### Session map (scales with cut size)
+### Dispatch map (scales with cut size)
 
-- small: 1 session, Sonnet. No separate PA / CR.
-- bounded medium: 3 sessions — ① Opus PM + inline PA-lite (in `plan.md`),
-  ② Sonnet DEV, ③ Opus CR + RM (fresh cold-read of the diff, then artifact
-  gate + merge).
+- small: main agent fixes directly, or one Sonnet DEV subagent. CR-lite by
+  the main agent; no ceremony files.
+- medium: main agent writes a lean DEV contract (`plan.md`, short is fine)
+  → Sonnet DEV subagent → fresh Opus CR subagent (cold-read of the diff)
+  → main agent verify + acceptance + merge.
 - large, or touches data contract / schema / export / migration /
-  architecture / irreversible: 4 sessions — ① Opus PM, ② fresh Opus PA,
-  ③ Sonnet DEV, ④ Opus CR + RM.
-- Spawn a fresh session only where independence pays (PA of a risky plan, CR
-  of the diff). Do not split self-to-self stages: PM-write and PM-compress
-  are one session; RM folds into CR.
-- A PA or CR session starts as a fresh conversation each cut, never a
-  long-running stale thread.
+  architecture / irreversible: add a fresh Opus PA subagent before DEV;
+  committed `plan.md`; `cut-note.md` at closeout.
+- Workflows (deterministic multi-agent fan-out) are allowed for parallel
+  work; each `agent()` call sets `model` explicitly per the tier table.
 
 ### Tier / effort defaults
 
 | Role | Tier | Effort |
 | --- | --- | --- |
-| PM | Opus | high |
+| Orchestrator (PM + acceptance) | main agent | — (dispatch & verify only) |
 | PA | Opus | high (xhigh only for large / contract / irreversible cuts) |
 | DEV | Sonnet | medium (high only when the implementation is gnarly) |
 | CR + RM | Opus | high |
 
 `high` is the default ceiling; `max` / `xhigh` is by exception, not
-standing. Do not run DEV on Opus-max, or PM / PA on Sonnet-low.
+standing. Do not run DEV on Opus-max, or PA / CR on Sonnet-low, and never
+let a subagent default to the main-agent model.
 
 ### RM gate
 
@@ -292,11 +296,11 @@ Pocock「AI 协作准则」在本项目的特化落地(且更细)。通用底座
 
 ## UI Collaboration
 
-- UI direction / polish belongs to the owner (PO): visual tone, layout
-  judgment, interaction detail, color systems, and whether a surface feels
-  right for the teacher workflow.
-- 小川 implements UI code as DEV when assigned, but UI product / visual
-  direction stays with the PO unless the owner reassigns it in repo context.
+- UI direction / polish is delegated to 小川 as of 2026-07-02 (owner
+  reassignment, recorded here per the "reassigns it in repo context" rule):
+  visual tone, layout judgment, interaction detail, and color systems follow
+  `PRODUCT.md` brand personality under 小川's judgment. The PO keeps final
+  product QA and may veto or overturn any shipped visual decision.
 - 小川 edits CSS / pure display components only within the assigned DEV
   scope; never contract-level files (domain · schema · `*Adapter.ts` ·
   PaperSurface · `server/**` · verify scripts · paper-assets ·
