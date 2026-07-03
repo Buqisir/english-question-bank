@@ -86,6 +86,7 @@ const fallbackCalls = []
 const impl = createSemanticSearchImplementation({
   openDatabase: () => makeFixtureDb(),
   selectQuestionGroupCards: () => CARDS,
+  getDraftSearchContext: () => ({ currentDraftPaperId: null, groupIds: new Set() }),
   callDeepSeekWithFallback: async (reqObj) => {
     fallbackCalls.push(reqObj)
     // Deterministic rerank: alpha first (0.9), beta second (0.4).
@@ -157,6 +158,7 @@ verifier.section('Empty-DB short-circuit envelope (no DeepSeek call)')
 const emptyImpl = createSemanticSearchImplementation({
   openDatabase: () => makeFixtureDb(),
   selectQuestionGroupCards: () => [],
+  getDraftSearchContext: () => ({ currentDraftPaperId: null, groupIds: new Set() }),
   callDeepSeekWithFallback: async () => {
     throw new Error('must not call DeepSeek when there are no groups')
   },

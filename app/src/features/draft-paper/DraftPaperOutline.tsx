@@ -14,6 +14,7 @@ export type DraftPaperOutlineProps = {
 
 function compactSource(item: DraftPaperItem) {
   const group = item.questionGroup
+  if (item.groupMissing) return '题组已从题库中移除'
   if (!group) return '来源未载入'
   return [group.year, group.region, group.paperName, group.section].filter(Boolean).join(' · ')
 }
@@ -56,7 +57,7 @@ export function DraftPaperOutline(props: DraftPaperOutlineProps): ReactNode {
           const canPageBreakBefore = index > 0
           return (
             <article
-              className={`draft-outline-item${canPageBreakBefore && item.pageBreakBefore ? ' has-break' : ''}`}
+              className={`draft-outline-item${canPageBreakBefore && item.pageBreakBefore ? ' has-break' : ''}${item.groupMissing ? ' is-group-missing' : ''}`}
               data-draft-group-id={item.groupId}
               draggable
               key={item.id}

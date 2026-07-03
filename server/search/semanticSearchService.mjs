@@ -14,6 +14,7 @@ import { safeTruncate } from '../ai-providers/jsonExtraction.mjs'
 
 let openDatabase
 let selectQuestionGroupCards
+let getDraftSearchContext
 let callDeepSeekWithFallback
 let describeKeySource
 let optionalString
@@ -32,6 +33,7 @@ export function createSemanticSearchImplementation(deps) {
   ;({
     openDatabase,
     selectQuestionGroupCards,
+    getDraftSearchContext,
     callDeepSeekWithFallback,
     describeKeySource,
     optionalString,
@@ -369,7 +371,7 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMo
   const db = openDatabase()
   let groups
   try {
-    const cards = selectQuestionGroupCards(db)
+    const cards = selectQuestionGroupCards(db, '', [], getDraftSearchContext())
     const readingSignalsByGroupId = getReadingSearchSignalsForQuestionGroups(
       db,
       cards.map((group) => group.id),

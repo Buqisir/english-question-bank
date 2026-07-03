@@ -26,35 +26,48 @@ function assert(name, condition, details = '') {
 
 console.log('C8 verify: draft paper contracts')
 
+// M0-1 user-data split: draft_papers / draft_paper_items schema now lives solely in
+// server/api.mjs's ensureUserDatabaseShape (single source of truth per ADR-0011 /
+// plan.md decision 2) — data/sql/schema.sql must NOT contain these tables anymore.
 const schema = read('data/sql/schema.sql')
-assert('draft_papers table exists', /CREATE TABLE IF NOT EXISTS draft_papers/.test(schema))
-assert('draft_paper_items table exists', /CREATE TABLE IF NOT EXISTS draft_paper_items/.test(schema))
-assert('draft paper has current_marker', /current_marker INTEGER NOT NULL DEFAULT 0/.test(schema))
-assert('draft paper enforces one current marker', /CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one[\s\S]{0,160}WHERE current_marker = 1/.test(schema))
-assert('draft item stores group id', /group_id TEXT NOT NULL REFERENCES question_groups\(id\)/.test(schema))
-assert('draft item stores page_break_before', /page_break_before INTEGER NOT NULL DEFAULT 0/.test(schema))
-assert('draft item prevents duplicate group in one draft', /UNIQUE\(draft_paper_id,\s*group_id\)/.test(schema))
+assert('schema.sql no longer defines draft_papers (moved to user database)', !/CREATE TABLE IF NOT EXISTS draft_papers/.test(schema))
+assert('schema.sql no longer defines draft_paper_items (moved to user database)', !/CREATE TABLE IF NOT EXISTS draft_paper_items/.test(schema))
 
 const server = read('server/api.mjs')
 const draftRoutes = read('server/draft-paper/draftPaperRoutes.mjs')
 const draftStore = read('server/draft-paper/draftPaperStore.mjs')
-assert('server creates draft_papers table', server.includes('CREATE TABLE IF NOT EXISTS draft_papers'))
-assert('server creates draft_paper_items table', server.includes('CREATE TABLE IF NOT EXISTS draft_paper_items'))
-assert('server normalizes duplicate current markers before unique index', /UPDATE draft_papers[\s\S]{0,260}id NOT IN/.test(server))
-assert('server creates one-current-draft unique index', /CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one[\s\S]{0,160}WHERE current_marker = 1/.test(server))
+const ensureUserDbStart = server.indexOf('function ensureUserDatabaseShape')
+const ensureUserDbEnd = server.indexOf('function warnIfSharedDatabaseStillHasUserTables', ensureUserDbStart)
+const ensureUserDbSource = ensureUserDbStart >= 0 && ensureUserDbEnd > ensureUserDbStart
+  ? server.slice(ensureUserDbStart, ensureUserDbEnd)
+  : ''
+assert('ensureUserDatabaseShape source located', Boolean(ensureUserDbSource))
+assert('ensureUserDatabaseShape creates draft_papers table', ensureUserDbSource.includes('CREATE TABLE IF NOT EXISTS draft_papers'))
+assert('ensureUserDatabaseShape creates draft_paper_items table', ensureUserDbSource.includes('CREATE TABLE IF NOT EXISTS draft_paper_items'))
+assert('draft paper has current_marker', /current_marker INTEGER NOT NULL DEFAULT 0/.test(ensureUserDbSource))
+assert('draft paper enforces one current marker', /CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one[\s\S]{0,160}WHERE current_marker = 1/.test(ensureUserDbSource))
+assert('draft item stores group id (no cross-database FK)', /group_id TEXT NOT NULL,/.test(ensureUserDbSource) && !/group_id TEXT NOT NULL REFERENCES question_groups/.test(ensureUserDbSource))
+assert('draft item stores page_break_before', /page_break_before INTEGER NOT NULL DEFAULT 0/.test(ensureUserDbSource))
+assert('draft item prevents duplicate group in one draft', /UNIQUE\(draft_paper_id,\s*group_id\)/.test(ensureUserDbSource))
+assert('server normalizes duplicate current markers before unique index', /UPDATE draft_papers[\s\S]{0,260}id NOT IN/.test(ensureUserDbSource))
 assert('server exposes current draft route', draftRoutes.includes('/api\\/draft-papers\\/current'))
 assert('server exposes draft migration route', draftRoutes.includes('/api\\/draft-papers\\/migrate-assembly-basket'))
 assert('server exposes draft PDF route', draftRoutes.includes('/print-pdf'))
 assert('server updates draft title', /UPDATE draft_papers SET title = \?/.test(draftStore))
 assert('server updates item order_index', /UPDATE draft_paper_items\s+SET order_index = \?/.test(draftStore))
 assert('server updates page_break_before', /page_break_before = \?/.test(draftStore))
+assert('orphaned draft items are tolerated on read (groupMissing)', draftStore.includes('groupMissing'))
+assert('export input construction filters out groupMissing items', draftStore.includes('.filter((item) => !item.groupMissing)'))
 const getDraftByIdStart = draftRoutes.indexOf("defineRoute('GET', /^\\/api\\/draft-papers\\/([^/]+)$/")
 const getDraftByIdEnd = draftRoutes.indexOf("defineRoute('PATCH', /^\\/api\\/draft-papers\\/([^/]+)$/", getDraftByIdStart)
 const getDraftByIdRoute = getDraftByIdStart >= 0 && getDraftByIdEnd > getDraftByIdStart
   ? draftRoutes.slice(getDraftByIdStart, getDraftByIdEnd)
   : ''
 assert('server draft-by-id GET route exists', Boolean(getDraftByIdRoute))
-assert('server draft-by-id GET opens read-only DB', getDraftByIdRoute.includes('openDatabase({ readOnly: true })'))
+assert(
+  'server draft-by-id GET opens read-only user + bank DB connections',
+  getDraftByIdRoute.includes('openUserDatabase({ readOnly: true })') && getDraftByIdRoute.includes('openDatabase({ readOnly: true })'),
+)
 assert('server draft-by-id GET does not change current draft marker', !getDraftByIdRoute.includes('markCurrentDraftPaper'))
 
 const domain = read('app/src/domain/questionBank.ts')

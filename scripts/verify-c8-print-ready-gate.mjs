@@ -47,7 +47,9 @@ assert('search derives print-ready field canAddToDraftPaper', server.includes('c
 assert('search derives draftPaperButtonState', server.includes('draftPaperButtonState'))
 assert('search derives currentDraftPaperId', server.includes('currentDraftPaperId: draftContext.currentDraftPaperId'))
 assert('search derives printUnavailableReason', server.includes('printUnavailableReason: printReady.ok ? null : printReady.reason'))
-assert('add group reuses print-ready gate before insert', /const ready = isGroupPrintReady\(db,\s*groupId\)/.test(draftStore))
+// M0-1 user-data split: addGroupToDraftPaper now receives { userDb, bankDb } — the
+// print-ready check still runs against the shared bank connection, just renamed.
+assert('add group reuses print-ready gate before insert', /const ready = isGroupPrintReady\(bankDb,\s*groupId\)/.test(draftStore))
 assert('disabled state comes from print-ready failure', /if \(!printReady\.ok\) return 'disabled'/.test(server))
 assert('paper-asset detail feeds draft preview', server.includes('applyPaperAssetToQuestionGroupDetail'))
 assert('paper-asset detail maps options into print detail', server.includes('buildQuestionDetailsFromPaperAsset') && server.includes('option?.text'))

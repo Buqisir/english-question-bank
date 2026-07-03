@@ -51,6 +51,7 @@ import { createLegacyImportImplementation } from './imports/legacyImportImplemen
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question-bank.sqlite')
+const userDataDbPath = process.env.USER_DATA_DB || path.join(rootDir, 'data/user-data.sqlite')
 const exportDir = path.join(rootDir, 'exports')
 const importDir = path.join(rootDir, 'imports')
 const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
@@ -99,6 +100,7 @@ const serverContext = {
   userSpaceFilesDir,
   localQwenEnabled: process.env.QUESTION_BANK_ENABLE_LOCAL_QWEN === '1',
   openDatabase,
+  openUserDatabase,
   readJsonBody,
   sendPdf: exportImplementation.sendPdf,
   sendJson,
@@ -463,6 +465,7 @@ const draftPaperStore = createDraftPaperStore({
   groupTypeLabels,
   isGroupPrintReady,
   openDatabase,
+  openUserDatabase,
   paperAssetsDir,
   rootDir,
   selectQuestionGroupCards,
@@ -485,17 +488,27 @@ const serverRoutes = [
   ...createVerbProfileBackfillRoutes(),
 ]
 
-function getDraftSearchContext(db) {
-  const current = draftPaperStore.getCurrentDraftPaperRow(db)
-  if (!current) {
-    return { currentDraftPaperId: null, groupIds: new Set() }
-  }
-  const rows = db
-    .prepare('SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ?')
-    .all(current.id)
-  return {
-    currentDraftPaperId: current.id,
-    groupIds: new Set(rows.map((row) => row.group_id)),
+const EMPTY_DRAFT_CONTEXT = { currentDraftPaperId: null, groupIds: new Set() }
+
+// Real draftContext requires a userDb connection (draft_papers / draft_paper_items live
+// there after the M0-1 user-data split). Only the find-questions card-list entry points
+// (listQuestionGroups, semanticSearchQuestionGroups) call this; every other
+// selectQuestionGroupCards caller uses the EMPTY_DRAFT_CONTEXT default — see plan.md
+// "store 连接改造清单" / decision 5.
+function getDraftSearchContext() {
+  const userDb = openUserDatabase({ readOnly: true })
+  try {
+    const current = draftPaperStore.getCurrentDraftPaperRow(userDb)
+    if (!current) return EMPTY_DRAFT_CONTEXT
+    const rows = userDb
+      .prepare('SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ?')
+      .all(current.id)
+    return {
+      currentDraftPaperId: current.id,
+      groupIds: new Set(rows.map((row) => row.group_id)),
+    }
+  } finally {
+    userDb.close()
   }
 }
 
@@ -624,6 +637,80 @@ function openDatabase({ readOnly = true } = {}) {
   return db
 }
 
+// User-data database (draft papers + My Space). Unlike the shared bank database,
+// this one is self-healing: deploys never ship this file, so the shape must be
+// created on demand rather than requiring scripts/init-db.sh to run first.
+function openUserDatabase({ readOnly = false } = {}) {
+  mkdirSync(path.dirname(userDataDbPath), { recursive: true })
+  const db = new DatabaseSync(userDataDbPath, { readOnly })
+  db.exec('PRAGMA foreign_keys = ON')
+  if (!readOnly) ensureUserDatabaseShape(db)
+  return db
+}
+
+// Exported so scripts/migrate-user-data-split.mjs can build/ensure the user database
+// shape without duplicating the schema (single source of truth — plan.md decision 2).
+export function ensureUserDatabaseShape(db) {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS draft_papers (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      subject TEXT NOT NULL DEFAULT 'english',
+      status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'deleted')),
+      current_marker INTEGER NOT NULL DEFAULT 0 CHECK (current_marker IN (0, 1)),
+      last_printed_at TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+    CREATE TABLE IF NOT EXISTS draft_paper_items (
+      id TEXT PRIMARY KEY,
+      draft_paper_id TEXT NOT NULL REFERENCES draft_papers(id) ON DELETE CASCADE,
+      group_id TEXT NOT NULL,
+      source_paper_id TEXT NOT NULL DEFAULT '',
+      order_index INTEGER NOT NULL DEFAULT 0,
+      page_break_before INTEGER NOT NULL DEFAULT 0 CHECK (page_break_before IN (0, 1)),
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE(draft_paper_id, group_id)
+    );
+    UPDATE draft_papers
+    SET current_marker = 0
+    WHERE current_marker = 1
+      AND id NOT IN (
+        SELECT id
+        FROM draft_papers
+        WHERE current_marker = 1
+        ORDER BY updated_at DESC, created_at DESC
+        LIMIT 1
+      );
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
+    ON draft_papers(current_marker)
+    WHERE current_marker = 1;
+    CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
+    CREATE INDEX IF NOT EXISTS idx_draft_paper_items_draft ON draft_paper_items(draft_paper_id, order_index);
+    CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
+  `)
+  ensureMySpaceDatabaseShape(db)
+}
+
+function warnIfSharedDatabaseStillHasUserTables() {
+  if (!existsSync(dbPath)) return
+  const db = new DatabaseSync(dbPath, { readOnly: true })
+  try {
+    const row = db
+      .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'draft_papers'")
+      .get()
+    if (row) {
+      console.warn(
+        '[warn] question-bank.sqlite 仍带有用户数据表（draft_papers 等）。' +
+          '请运行一次性迁移: node scripts/migrate-user-data-split.mjs',
+      )
+    }
+  } finally {
+    db.close()
+  }
+}
+
 function ensureDatabaseShape() {
   if (!existsSync(dbPath)) return
 
@@ -706,50 +793,11 @@ function ensureDatabaseShape() {
     if (paperSetColumns.length > 0 && !paperSetColumns.includes('layout_json')) {
       db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS draft_papers (
-        id TEXT PRIMARY KEY,
-        title TEXT NOT NULL,
-        subject TEXT NOT NULL DEFAULT 'english',
-        status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'deleted')),
-        current_marker INTEGER NOT NULL DEFAULT 0 CHECK (current_marker IN (0, 1)),
-        last_printed_at TEXT,
-        created_at TEXT NOT NULL DEFAULT (datetime('now')),
-        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
-      );
-      CREATE TABLE IF NOT EXISTS draft_paper_items (
-        id TEXT PRIMARY KEY,
-        draft_paper_id TEXT NOT NULL REFERENCES draft_papers(id) ON DELETE CASCADE,
-        group_id TEXT NOT NULL REFERENCES question_groups(id) ON DELETE RESTRICT,
-        source_paper_id TEXT NOT NULL DEFAULT '',
-        order_index INTEGER NOT NULL DEFAULT 0,
-        page_break_before INTEGER NOT NULL DEFAULT 0 CHECK (page_break_before IN (0, 1)),
-        created_at TEXT NOT NULL DEFAULT (datetime('now')),
-        updated_at TEXT NOT NULL DEFAULT (datetime('now')),
-        UNIQUE(draft_paper_id, group_id)
-      );
-      UPDATE draft_papers
-      SET current_marker = 0
-      WHERE current_marker = 1
-        AND id NOT IN (
-          SELECT id
-          FROM draft_papers
-          WHERE current_marker = 1
-          ORDER BY updated_at DESC, created_at DESC
-          LIMIT 1
-        );
-      CREATE UNIQUE INDEX IF NOT EXISTS idx_draft_papers_current_one
-      ON draft_papers(current_marker)
-      WHERE current_marker = 1;
-      CREATE INDEX IF NOT EXISTS idx_draft_papers_current ON draft_papers(current_marker, updated_at);
-      CREATE INDEX IF NOT EXISTS idx_draft_paper_items_draft ON draft_paper_items(draft_paper_id, order_index);
-      CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
-    `)
     ensurePaperImportDatabaseShape(db)
-    ensureMySpaceDatabaseShape(db)
   } finally {
     db.close()
   }
+  warnIfSharedDatabaseStillHasUserTables()
 }
 
 function parseSavedJson(rawText) {
@@ -1230,7 +1278,7 @@ function saveSevenChoicesParseResult(questionGroupId, input) {
 function rowToQuestionGroupCard(
   row,
   paperSurfaceAnalysisAvailabilityByGroupId = new Map(),
-  draftContext = { currentDraftPaperId: null, groupIds: new Set() },
+  draftContext = EMPTY_DRAFT_CONTEXT,
   printReadyOverride = null,
 ) {
   const paperSurfaceAnalysis = paperSurfaceAnalysisAvailabilityByGroupId.get(row.id)
@@ -1382,7 +1430,7 @@ function listPaperAssetAnalysisGroupCards(paperSurfaceAnalysisAvailabilityByGrou
   return cards
 }
 
-function selectQuestionGroupCards(db, whereClause = '', params = []) {
+function selectQuestionGroupCards(db, whereClause = '', params = [], draftContext = EMPTY_DRAFT_CONTEXT) {
   const rows = db
     .prepare(
       `
@@ -1415,7 +1463,6 @@ function selectQuestionGroupCards(db, whereClause = '', params = []) {
     rows.map((row) => row.id),
   )
   const paperSurfaceAnalysisAvailabilityByGroupId = getPaperSurfaceAnalysisAvailabilityByGroupId()
-  const draftContext = getDraftSearchContext(db)
 
   const cards = rows.map((row) => {
     const printReady = isGroupPrintReady(db, row.id)
@@ -1438,7 +1485,7 @@ function listQuestionGroups() {
   const db = openDatabase()
 
   try {
-    return selectQuestionGroupCards(db)
+    return selectQuestionGroupCards(db, '', [], getDraftSearchContext())
   } finally {
     db.close()
   }
@@ -2887,6 +2934,7 @@ const { verifyQuestionGroup } = verifyImplementation
 const semanticSearchImplementation = createSemanticSearchImplementation({
   openDatabase,
   selectQuestionGroupCards,
+  getDraftSearchContext,
   callDeepSeekWithFallback,
   describeKeySource,
   optionalString,
@@ -4105,11 +4153,13 @@ const server = createServer(async (request, response) => {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   ensureDatabaseShape()
+  openUserDatabase({ readOnly: false }).close()
   cleanupPaperImportTempArtifacts(paperAssetsDir)
   ensureMySpaceFilesRoot(userSpaceFilesDir)
 
   server.listen(port, '127.0.0.1', () => {
     console.log(`Question bank API listening on http://127.0.0.1:${port}`)
     console.log(`SQLite database: ${dbPath}`)
+    console.log(`User-data database: ${userDataDbPath}`)
   })
 }

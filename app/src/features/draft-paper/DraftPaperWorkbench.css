@@ -259,6 +259,11 @@
   border-color: #a37b45;
 }
 
+.draft-outline-item.is-group-missing {
+  background: #FBF3EA;
+  border-color: #8a5b22;
+}
+
 .draft-break-marker {
   background: #e5d5bf;
   border-radius: 999px;
