@@ -136,11 +136,60 @@ paper-zj-2026-jan 教师版四题型真解析零存根；无 asset 题组不露�
 缺 writing-analysis 的国家卷（paper-2024-jia）导出不报错。
 新 verify 断言接入 verify-ci（hermetic）。
 
-## 刀④ 主线审美打磨（critique 综合后补契约）
+## 刀④ 主线审美打磨（critique 27/40 → 修 P0-1/P1×2/P2/P3×2）
 
-评估 A/B 双路已跑，综合报告与打磨清单见 critique 快照
-（.impeccable/critique/）。UI 决定权=小川（owner 2026-07-02/03 两次确认，
-含审美 skill 全权）。铁律：Color-Lock 配色零改 / No-Blue / Red-Pen ≤10%。
+Branch: `restart-4-mainline-polish`
+Critique 快照: `.impeccable/critique/2026-07-03T06-01-35Z__app-src-concierge-conciergedesk-tsx.md`
+UI 决定权=小川（owner 2026-07-02/03 两次确认）。铁律：**Color-Lock 配色
+token 值零改**（只允许作用域内重绑/换绑既有暖值）/ No-Blue / Red-Pen ≤10%。
+Scope: `app/src/App.css`（AI 模式作用域段）、`app/src/concierge/*`（Desk/
+GroupCard/PaperRow 的 TSX+样式）、`app/src/features/my-space/MySpacePage.*`、
+`app/src/features/draft-paper/DraftPaperWorkbench.*`（仅预览缩放+label 文案）。
+Forbidden: `:root` 的 token **值**不改（重绑作用域可以）；经典模式视觉零变化；
+`shared/papersurface/**`、print/export 样式不碰；conciergeSearch.ts 行为不碰
+（那是刀⑤）。
+
+### 改动清单
+
+1. **[P0-1] AI 模式头部去 slate**：`.app-shell.home-mode-ai` 作用域内
+   `.ghost-button`（及同链 slate 消费者）重绑暖 token：默认底 `#FAFAF7`、
+   边 `#E5E3DC`、字 `#1A1A1A`、hover 底 `#F4F2EC`、active/选中沿用现有
+   暖沙+赭石语义。`:root` 不动，经典模式像素级不变。顺带清主线卡片两处
+   硬编码 side-stripe（App.css:4740/4774 —— 换成全边框或背景 tint，
+   保留原 hex 色相）。
+2. **[P1] CTA 层级**：结果卡「加入草稿卷」→ 墨色填充主按钮（`#1A1A1A`
+   底/`#FFFDF8` 字/6px 圆角，即 DESIGN.md button-primary）；「已在草稿
+   卷中」→ 弱化完成态（✓+muted）；「找类似」保持 ghost；「阅读解析」
+   从下划线 a 统一成 ghost button 形态。同排三控件一种语言。
+3. **[P1] 占位符对比**：`.concierge-intent-input::placeholder` →
+   `#6B645C`（5.73:1）。检查同页其他 placeholder 一并达标。
+4. **[P2] 思考模式开关质感**：checkbox `accent-color: #B8323C` + 尺寸
+   16px + `:focus-visible` 焦点环 + label 右侧一句浅说明
+   「用 AI 理解你的描述，更准但稍慢」。不做全自绘（护 a11y）。
+5. **Loading 态**：提交按钮「…」→「取题中…」+ disabled（吸收速赢#5）。
+6. **[P3] 个人空间空态引导**：加一句人话 + 「去组一份卷子」动作
+   （openDraftPaperWorkbench 已有现成 handler 可调）。
+7. **[P3] 移动端 A4 预览 scale-to-fit**：DraftPaperWorkbench 预览容器
+   窄屏按宽缩放，不再横向裁切。只动 workbench 显示层 CSS。
+8. **文案**：「自动保存」label → 「最近草稿卷」（消歧义）。
+
+### 验收
+
+- AI 模式首屏零 slate（computed style 抽查 6 个头部按钮）；经典模式
+  截图对比零变化；desktop+mobile 两档截图走查。
+- 结果卡主 CTA 一眼可辨；对比度全部 ≥4.5:1（preview_inspect 实测）。
+- verify-concierge-desk.mjs 等既有断言绿（文案变更同步断言，只改字面
+  不弱化行为断言）；verify:all 绿。
+- 主 agent 浏览器 QA + 截图终审（UI 决定权收口）。
+
+## 刀⑤ 诚实降级（P0-2，刀④合并后串行）
+
+Branch: `restart-5-honest-fallback`
+Scope: `app/src/concierge/conciergeSearch.ts`（匹配分阈值）、
+`clarificationCopy.ts`/理由文案、ConciergeDesk 通知条。
+低于阈值 → 真空态+起始 chip 可达；fallback 结果显式「没有精确匹配，
+以下是相近的」弱语气标识；乱码 query 不再返回自信"命中"。
+断言进 verify-restart1 脚本。契约细节待刀④合并后按届时代码定稿。
 
 ## 流程
 
