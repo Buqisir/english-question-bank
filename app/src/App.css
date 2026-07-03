@@ -4826,6 +4826,48 @@ button:disabled {
   margin-top: 4px;
 }
 
+/* Cut ⑥ — default browse feed (no active search). Reuses .concierge-paper-list
+   for the rows themselves; this block only styles the intro line, empty-corpus
+   guidance, and the "show all" expander. */
+.concierge-default-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.concierge-feed-intro {
+  margin: 0;
+  font-size: 13px;
+  color: #6B645C;
+  padding: 0 4px;
+}
+
+.concierge-feed-empty-corpus {
+  margin: 0;
+  font-size: 13px;
+  color: #6B645C;
+  padding: 6px 4px;
+}
+
+.concierge-feed-expand {
+  align-self: flex-start;
+  margin: 2px 4px 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #1A1A1A;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.concierge-feed-expand:hover {
+  color: #000;
+}
+
 .concierge-result-list {
   list-style: none;
   margin: 0;
@@ -5107,6 +5149,14 @@ button:disabled {
 .app-shell.home-mode-ai .ghost-button:hover {
   background: #F4F2EC;
   border-color: #DED9CF;
+}
+
+/* Cut ⑥ P3 — `.eyebrow` reads `--muted` (slate #64748b) at :root. Re-scope
+   it to the same warm ink-muted value already used throughout this AI-mode
+   block (#6B645C — see .concierge-paper-meta etc.). :root itself untouched;
+   classic mode keeps its slate eyebrow unchanged. */
+.app-shell.home-mode-ai .eyebrow {
+  color: #6B645C;
 }
 
 .app-shell.home-mode-ai .workbench {

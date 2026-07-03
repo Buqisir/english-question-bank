@@ -228,8 +228,12 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     async (intentOverride?: string) => {
       const value = intentOverride !== undefined ? intentOverride : intent
       const pendingQuery = state.kind === 'clarification' ? state.pendingQuery : null
+      // Cut ⑥: keep the query in the input after submit. Natural-language
+      // retrieval is iterative — the teacher edits the same sentence to
+      // narrow/refine, so clearing it on every submit threw away the exact
+      // text they need to tweak.
+      setIntent(value)
       await runSearch(value, pendingQuery)
-      setIntent('')
     },
     [intent, runSearch, state],
   )
@@ -237,7 +241,10 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   const triggerSimilar = useCallback(
     async (group: QuestionGroupCard) => {
       const similarIntent = buildSimilarIntent(group)
-      setIntent('')
+      // Cut ⑥: fill the input with the generated similar-intent query
+      // instead of clearing it, so 找类似 leaves a visible, editable query
+      // like any other submit.
+      setIntent(similarIntent)
       // Same pipeline as ordinary submit — results land back into runSearch,
       // which feeds aggregatePaperResults via state.hits. So 找类似 always
       // surfaces back as paper rows, never as a flat group list.
