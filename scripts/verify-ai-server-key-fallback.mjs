@@ -278,12 +278,14 @@ async function captureConsole(fn) {
   assert('3: GET /api/ai/status route exists', Boolean(statusRoute))
 
   // 3a. server key present (sentinel) -> serverKeyAvailable: true, sentinel never leaks.
+  // CR MF: the sentinel itself must ride the context (not just its Boolean) — a handler
+  // that serializes context key material into the body must turn this red.
   {
     const response = createResponse()
     await statusRoute.handle({
       request: {},
       response,
-      context: makeContext({ serverKeyAvailable: Boolean(SENTINEL_KEY) }),
+      context: makeContext({ serverKeyAvailable: Boolean(SENTINEL_KEY), DEEPSEEK_API_KEY: SENTINEL_KEY }),
     })
     assert('3a: 200 status', response.statusCode === 200)
     assert('3a: body shape { serverKeyAvailable: boolean }', typeof response.body.serverKeyAvailable === 'boolean', JSON.stringify(response.body))
