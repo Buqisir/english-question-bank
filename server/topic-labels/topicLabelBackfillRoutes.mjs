@@ -5,20 +5,27 @@ function parseRequestArgs(input) {
   return [input.apiKey, input.model]
 }
 
+// M0-3 (docs/cuts/m0-3-role-gate/plan.md 1b): owner-only — curatorial batch AI
+// backfill, no member-visible UI.
 export function createTopicLabelBackfillRoutes() {
   return [
-    defineRoute('POST', /^\/api\/topic-labels\/backfill$/, async ({ request, response, context }) => {
-      const input = await context.readJsonBody(request)
-      const [apiKey, model] = parseRequestArgs(input)
-      const summary = await backfillTopicLabels({
-        listUnlabeledGroupIds: context.listUnlabeledGroupIds,
-        classify: context.generateTopicLabelsByQuestionGroup,
-        bind: context.bindTopicLabelsToQuestionGroup,
-        apiKey,
-        model,
-        limit: input.limit,
-      })
-      context.sendJson(response, 200, summary)
-    }),
+    defineRoute(
+      'POST',
+      /^\/api\/topic-labels\/backfill$/,
+      async ({ request, response, context }) => {
+        const input = await context.readJsonBody(request)
+        const [apiKey, model] = parseRequestArgs(input)
+        const summary = await backfillTopicLabels({
+          listUnlabeledGroupIds: context.listUnlabeledGroupIds,
+          classify: context.generateTopicLabelsByQuestionGroup,
+          bind: context.bindTopicLabelsToQuestionGroup,
+          apiKey,
+          model,
+          limit: input.limit,
+        })
+        context.sendJson(response, 200, summary)
+      },
+      { ownerOnly: true },
+    ),
   ]
 }

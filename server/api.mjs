@@ -4133,9 +4133,16 @@ function isAuthPublicRoute(method, pathname) {
 // so the whitelist only suppresses the "write 401 and stop" behavior below, it
 // does not skip session resolution.
 //
-// Returns `{ session }` (session is null when unauthenticated/open-mode) when the
-// request should proceed, or `null` when this function has already written the
-// response and the caller must return without doing anything else.
+// Returns `{ session, authMode }` (session is null when unauthenticated/open-mode)
+// when the request should proceed, or `null` when this function has already
+// written the response and the caller must return without doing anything else.
+//
+// `authMode` ('open' | 'enforced') is the M0-3 role-gate's positive signal
+// (docs/cuts/m0-3-role-gate/plan.md 1a / ADR-0013): it is returned explicitly in
+// every branch below (including the whitelist-route-with-no-session branch) so the
+// owner-only route gate in server/router/index.mjs never has to infer "open mode"
+// from an absent session — a whitelisted auth route with no cookie also has a null
+// session, and that must NOT read as bootstrap-open.
 function applyAuthGate(request, response, pathname) {
   const isPublic = isAuthPublicRoute(request.method, pathname)
 
@@ -4149,7 +4156,7 @@ function applyAuthGate(request, response, pathname) {
 
   if (!usersExist) {
     // Bootstrap-open mode: behave exactly like the pre-M0-2 server.
-    return { session: null }
+    return { session: null, authMode: 'open' }
   }
 
   const token = readSessionTokenFromRequest(request)
@@ -4162,7 +4169,7 @@ function applyAuthGate(request, response, pathname) {
   }
 
   if (!session) {
-    if (isPublic) return { session: null }
+    if (isPublic) return { session: null, authMode: 'enforced' }
     sendJson(response, 401, { error: 'not_authenticated' })
     return null
   }
@@ -4176,7 +4183,10 @@ function applyAuthGate(request, response, pathname) {
     }
   }
 
-  return { session: { userId: session.userId, username: session.username, role: session.role } }
+  return {
+    session: { userId: session.userId, username: session.username, role: session.role },
+    authMode: 'enforced',
+  }
 }
 
 const server = createServer(async (request, response) => {
@@ -4208,7 +4218,9 @@ const server = createServer(async (request, response) => {
         request,
         response,
         url,
-        context: authResult.session ? { ...serverContext, session: authResult.session } : serverContext,
+        context: authResult.session
+          ? { ...serverContext, session: authResult.session, authMode: authResult.authMode }
+          : { ...serverContext, authMode: authResult.authMode },
       })
     ) {
       return

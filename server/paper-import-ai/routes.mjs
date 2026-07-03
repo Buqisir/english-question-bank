@@ -74,6 +74,9 @@ function parsePublishPayload(files, fields) {
   return { payload, paperFile }
 }
 
+// M0-3 (docs/cuts/m0-3-role-gate/plan.md 1b): the whole paper-import-ai module is
+// owner-only — it is the AI-assisted curatorial import back office, with no
+// member-visible UI.
 export function createPaperImportAiRoutes(services = {}) {
   const analyzeReading = services.analyzeReading || analyzeReadingImportCandidate
   const analyzeSevenChoices = services.analyzeSevenChoices || analyzeSevenChoicesImportCandidate
@@ -105,7 +108,7 @@ export function createPaperImportAiRoutes(services = {}) {
       } catch (error) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
-    }),
+    }, { ownerOnly: true }),
     defineRoute('POST', /^\/api\/paper-import-ai\/analyze$/, async ({ request, response, context }) => {
       try {
         const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
@@ -114,7 +117,7 @@ export function createPaperImportAiRoutes(services = {}) {
       } catch (error) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
-    }),
+    }, { ownerOnly: true }),
     defineRoute('POST', /^\/api\/paper-import-ai\/analyze-seven-choices$/, async ({ request, response, context }) => {
       try {
         const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
@@ -123,7 +126,7 @@ export function createPaperImportAiRoutes(services = {}) {
       } catch (error) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
-    }),
+    }, { ownerOnly: true }),
     defineRoute('POST', /^\/api\/paper-import-ai\/analyze-cloze$/, async ({ request, response, context }) => {
       try {
         const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
@@ -132,7 +135,7 @@ export function createPaperImportAiRoutes(services = {}) {
       } catch (error) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
-    }),
+    }, { ownerOnly: true }),
     defineRoute('POST', /^\/api\/paper-import-ai\/analyze-grammar-fill$/, async ({ request, response, context }) => {
       try {
         const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
@@ -141,7 +144,7 @@ export function createPaperImportAiRoutes(services = {}) {
       } catch (error) {
         context.sendJson(response, 422, { error: routeError(error) })
       }
-    }),
+    }, { ownerOnly: true }),
     defineRoute('POST', /^\/api\/paper-import-ai\/publish$/, async ({ request, response, context }) => {
       let files = []
       let fields = {}
@@ -191,6 +194,6 @@ export function createPaperImportAiRoutes(services = {}) {
       } finally {
         db.close()
       }
-    }),
+    }, { ownerOnly: true }),
   ]
 }
