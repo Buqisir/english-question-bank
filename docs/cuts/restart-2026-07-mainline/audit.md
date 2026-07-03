@@ -138,7 +138,32 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
   模式双面计数同步、浮动按钮直达工作台、教师版预览/PDF 含答案、学生版
   零泄漏、classic 旧抽屉无回归。CR 冷读 APPROVE（cr-2.md）。
 
-### 挂账清单（本轮明确不做，按优先级）
+## 第二轮结案（2026-07-03，刀③④⑤）
+
+- **刀③ #227 教师版真解析**：导出时 paper-assets 内存 join 四题型（31 套
+  全覆盖），零 DB 写（ADR-0008），学生版 byte 级不变（CR 独立 harness）。
+  活体验证：教师版【解析】已是真讲评。挂账 #1 销账。
+- **刀④ #228 主线审美打磨**：critique 27/40 的 P0-1/P1×2/P2/P3 修复——
+  AI 头部去 slate（:root 零改、经典模式 computed-style 实测不变）、主 CTA
+  墨色化、占位符 3.07→5.73:1、思考模式说明句、空态引导、移动端预览缩放
+  + 窄屏 paper-row 竖排修复（主 agent 终审追加）。GitHub API 故障走本地
+  squash（PR 已补关）。
+- **刀⑤ #229 诚实降级**：乱码假命中治理（原返回 3 条自信"命中"→真空态
+  +起始 chip）；三态诚实文案；weak 理由「可能相关」+碎片过滤。CR 两轮
+  （round-1 抓出噪声地板误杀无空格真实查询的 Must Fix→DEV 用全 haystack
+  DF+跨 run 多信号返工→round-2 变异测试后 APPROVE）。断言 85+230。
+- 复评待办：下轮开工时重跑 /impeccable critique 看 27/40 涨幅。
+
+### 第二轮新挂账
+
+- SW-3：aggregatePaperResults 不读 hit.weak，混合卷行头措辞可与通知条
+  不一致（cr-5）。
+- DF 粗地板残差：~270 组语料下，孤词（DF 1-2 且无伴随信号）会被当噪声
+  （DEV 自报，随库增长自然缓解）。
+- C8 render-model 守卫的 allow-list 需在下次动 print-renderer 时同步维护
+  （cr-3 SW-1）；教师版切换后编辑预览静默回退（cr-2 SW-1）仍在。
+
+### 挂账清单（首轮记录，按优先级）
 
 1. **导入真题的教师版【解析】是元数据存根**（QA 新发现）：教师版 PDF
    里逐题解析渲染为 `paperId=...; assetVersion=...`——导入卷的真解析在
