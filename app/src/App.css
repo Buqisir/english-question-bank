@@ -4698,7 +4698,7 @@ button:disabled {
 }
 
 .concierge-intent-input::placeholder {
-  color: #9A9180;
+  color: #6B645C;
 }
 
 .concierge-intent-submit {
@@ -4707,6 +4707,7 @@ button:disabled {
   align-self: center;
   border: none;
   border-radius: 8px;
+  padding: 0 14px;
   background: #1A1A1A;
   color: #FFFDF8;
   font-size: 18px;
@@ -4718,6 +4719,11 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.concierge-intent-submit.is-loading {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
@@ -4735,12 +4741,42 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.concierge-thinking-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -6px;
+}
+
+.concierge-thinking-toggle input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: #B8323C;
+  cursor: pointer;
+}
+
+.concierge-thinking-toggle input[type='checkbox']:focus-visible {
+  outline: 2px solid rgba(26, 26, 26, 0.35);
+  outline-offset: 2px;
+}
+
+.concierge-thinking-toggle label {
+  font-size: 13px;
+  color: #1A1A1A;
+  cursor: pointer;
+}
+
+.concierge-thinking-hint {
+  font-size: 12px;
+  color: #9A9180;
+}
+
 /* Clarification + notices */
 .concierge-clarification {
-  border-left: 2px solid #B8323C;
+  border: 1px solid rgba(184, 50, 60, 0.28);
   background: rgba(184, 50, 60, 0.08);
   padding: 12px 14px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -4771,9 +4807,10 @@ button:disabled {
 }
 
 .concierge-notice {
-  border-left: 2px solid #C6A044;
-  padding-left: 10px;
-  background: transparent;
+  border: 1px solid rgba(198, 160, 68, 0.35);
+  background: rgba(198, 160, 68, 0.08);
+  border-radius: 4px;
+  padding: 6px 10px;
   color: #1A1A1A;
 }
 
@@ -4937,30 +4974,74 @@ button:disabled {
 }
 
 .concierge-action {
+  display: inline-flex;
+  align-items: center;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid #E5E3DC;
   color: #1A1A1A;
   font-family: inherit;
+  text-decoration: none;
   font-size: 12.5px;
   padding: 4px 10px;
-  border-radius: 3px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .concierge-action:hover:not(:disabled) {
   background: #EFEDE6;
-  border-color: #E5E3DC;
+  border-color: #DED9CF;
 }
 
 .concierge-action:focus-visible {
   outline: none;
   border-color: #1A1A1A;
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.08);
 }
 
 .concierge-action:disabled {
   color: #B8B3AA;
   cursor: not-allowed;
+}
+
+/* Primary CTA: 加入草稿卷 — ink-filled, matches DraftPaperWorkbench's
+   export button so the same action reads the same everywhere. */
+.concierge-action-add {
+  background: #1A1A1A;
+  border-color: #1A1A1A;
+  color: #FFFDF8;
+  font-weight: 600;
+}
+
+.concierge-action-add:hover:not(:disabled) {
+  background: #000000;
+  border-color: #000000;
+  color: #FFFDF8;
+}
+
+.concierge-action-add:focus-visible {
+  border-color: #1A1A1A;
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.2);
+}
+
+/* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
+.concierge-action-add[aria-pressed="true"] {
+  background: transparent;
+  border-color: #E5E3DC;
+  color: #6B645C;
+  font-weight: 500;
+}
+
+.concierge-action-add[aria-pressed="true"]:hover:not(:disabled) {
+  background: #F4F2EC;
+  border-color: #DED9CF;
+  color: #6B645C;
+}
+
+.concierge-action-add:disabled {
+  background: transparent;
+  border-color: #E5E3DC;
+  color: #B8B3AA;
 }
 
 /* Mode-toggle button in topbar */
@@ -5001,12 +5082,31 @@ button:disabled {
 
 .app-shell.home-mode-ai {
   background: #FAFAF7;
+  /* Re-scope the slate tokens `.ghost-button` (and its `--surface-strong` /
+     `--line` / `--line-strong` chain) reads from :root, to the same warm
+     values ConciergeDesk/DraftPaperWorkbench already use. :root itself is
+     untouched — classic mode keeps its slate look pixel-for-pixel. */
+  --surface-strong: #FAFAF7;
+  --line: #E5E3DC;
+  --line-strong: #DED9CF;
+  --ink: #1A1A1A;
 }
 
 .app-shell.home-mode-ai .topbar {
   background: #FAFAF7;
   border-bottom-color: #E5E3DC;
   box-shadow: none;
+}
+
+.app-shell.home-mode-ai .ghost-button {
+  background: #FAFAF7;
+  border-color: #E5E3DC;
+  color: #1A1A1A;
+}
+
+.app-shell.home-mode-ai .ghost-button:hover {
+  background: #F4F2EC;
+  border-color: #DED9CF;
 }
 
 .app-shell.home-mode-ai .workbench {
@@ -5941,6 +6041,13 @@ button:disabled {
   .concierge-skeleton-line {
     animation: none;
   }
+
+  .app-shell.home-mode-ai .ghost-button,
+  .concierge-action,
+  .concierge-action-add,
+  .concierge-intent-submit {
+    transition: none;
+  }
 }
 
 /* Error inside expand */
@@ -6115,6 +6222,20 @@ button:disabled {
 
 .concierge-paper-row.is-expanded {
   background: #FFFDF8;
+}
+
+/* 窄屏：三列 grid 会把中列挤成 0 宽（文字竖排溢出），改为标题+操作一行、
+   命中信息整行铺下方 */
+@media (max-width: 640px) {
+  .concierge-paper-row {
+    grid-template-columns: 1fr auto;
+    gap: 8px 12px;
+  }
+  .concierge-paper-row .concierge-paper-body {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-width: 0;
+  }
 }
 
 .concierge-paper-anchor {

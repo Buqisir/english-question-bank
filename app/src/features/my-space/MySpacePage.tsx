@@ -237,7 +237,12 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
           {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间...</p>}
           {loadState === 'error' && <p className="my-space-error">{message || '个人空间读取失败。'}</p>}
           {loadState === 'loaded' && artifacts.length === 0 && (
-            <p className="my-space-empty">还没有保存的草稿卷 PDF。</p>
+            <div className="my-space-empty-state">
+              <p className="my-space-empty">还没有保存的草稿卷 PDF。组一份卷子，导出后可以保存在这里。</p>
+              <button type="button" className="my-space-empty-cta" onClick={() => onOpenDraft('')}>
+                去组一份卷子
+              </button>
+            </div>
           )}
           {loadState === 'loaded' && artifacts.length > 0 && (
             <div className="my-space-artifact-list">
