@@ -4,12 +4,29 @@ import { fetchMe, type SessionUser } from './session.ts'
 
 const CurrentUserContext = createContext<SessionUser | null>(null)
 
+// M0-3 (docs/cuts/m0-3-role-gate/plan.md 2a): the ONLY place that translates
+// "open mode" into product semantics. Bootstrap-open mode (empty users table) and
+// an authenticated owner both render the full curatorial surface; a member does
+// not. Consumers must use this boolean rather than re-deriving it from
+// `currentUser === null` (that would misread open mode as "no permissions").
+// Defaults to `true` (matches CurrentUserContext's default / pre-M0-2 behavior)
+// so any future consumer added before this context reaches its provider fails
+// open to the pre-M0-2 single-user shape, not closed to a phantom member view.
+const IsOwnerViewContext = createContext<boolean>(true)
+
 // Open-mode consumers (e.g. App.tsx topbar) call this to decide whether to
 // render any auth UI at all — it returns null both while loading and in
 // bootstrap-open mode, so the default (no context provider reached yet, or
 // authRequired: false) safely renders zero auth UI.
 export function useCurrentUser(): SessionUser | null {
   return useContext(CurrentUserContext)
+}
+
+// M0-3 (plan.md 2a): true for bootstrap-open mode and for an authenticated owner;
+// false only for an authenticated member. Use this instead of inspecting
+// `useCurrentUser()` for role decisions.
+export function useIsOwnerView(): boolean {
+  return useContext(IsOwnerViewContext)
 }
 
 type GateState =
@@ -59,5 +76,12 @@ export function AuthGate({ children }: { children: ReactNode }) {
   }
 
   const currentUser = state.status === 'authenticated' ? state.user : null
-  return <CurrentUserContext.Provider value={currentUser}>{children}</CurrentUserContext.Provider>
+  // plan.md 2a: open mode (`state.status === 'open'`) and an owner both render the
+  // full surface; only an authenticated member does not.
+  const isOwnerView = state.status !== 'authenticated' || state.user.role === 'owner'
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <IsOwnerViewContext.Provider value={isOwnerView}>{children}</IsOwnerViewContext.Provider>
+    </CurrentUserContext.Provider>
+  )
 }

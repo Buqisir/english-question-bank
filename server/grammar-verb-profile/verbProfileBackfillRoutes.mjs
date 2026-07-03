@@ -13,6 +13,11 @@ import {
  * Profiles unprofiled finite-verb blanks (tense/voice/agreement) across all
  * grammar-fill groups, writes sidecars, and invalidates the teaching-facet cache
  * so the new axes become queryable immediately.
+ *
+ * M0-3 (docs/cuts/m0-3-role-gate/plan.md 1b / ADR-0013 decision 4): owner-only.
+ * The sidecar JSON it writes under paper-assets is a derived asset of the shared
+ * question bank (ships alongside the sqlite on deploy), so writing it is treated
+ * the same as writing question-bank.sqlite directly.
  */
 export function createVerbProfileBackfillRoutes() {
   return [
@@ -32,6 +37,7 @@ export function createVerbProfileBackfillRoutes() {
         context.invalidateTeachingFacetIndex()
         context.sendJson(response, 200, summary)
       },
+      { ownerOnly: true },
     ),
   ]
 }

@@ -23,17 +23,30 @@ export function createPaperSetRoutes() {
       context.sendJson(response, 200, { paperSet })
     }),
 
-    defineRoute('POST', /^\/api\/paper-sets$/, async ({ request, response, context }) => {
-      const input = await context.readJsonBody(request)
-      const paperSet = context.createPaperSet(input)
-      context.sendJson(response, 201, { paperSet })
-    }),
+    // M0-3 (docs/cuts/m0-3-role-gate/plan.md 1c): only the two writes are
+    // owner-only. All three GETs stay open — AI mode may need to read the
+    // paper-set list.
+    defineRoute(
+      'POST',
+      /^\/api\/paper-sets$/,
+      async ({ request, response, context }) => {
+        const input = await context.readJsonBody(request)
+        const paperSet = context.createPaperSet(input)
+        context.sendJson(response, 201, { paperSet })
+      },
+      { ownerOnly: true },
+    ),
 
-    defineRoute('PUT', /^\/api\/paper-sets\/([^/]+)$/, async ({ request, response, match, context }) => {
-      const input = await context.readJsonBody(request)
-      const updateInput = { ...input, id: decodeRouteId(match) }
-      const paperSet = context.createPaperSet(updateInput)
-      context.sendJson(response, 200, { paperSet })
-    }),
+    defineRoute(
+      'PUT',
+      /^\/api\/paper-sets\/([^/]+)$/,
+      async ({ request, response, match, context }) => {
+        const input = await context.readJsonBody(request)
+        const updateInput = { ...input, id: decodeRouteId(match) }
+        const paperSet = context.createPaperSet(updateInput)
+        context.sendJson(response, 200, { paperSet })
+      },
+      { ownerOnly: true },
+    ),
   ]
 }
