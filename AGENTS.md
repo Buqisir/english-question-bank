@@ -102,7 +102,14 @@ notes are reference — load a section only when the task names it.
 - Keep `Local Vaults` out of the application code path. The vault may provide ideas later, but V0 data and code live in this repo.
 - Preserve the core model: `Source -> Passage -> Question Group -> Question -> Paper Set -> Export`.
 - Prefer teacher-operable workflows over abstract completeness.
-- V0 is local-first, single-user, no login, no cloud sync.
+- Direction (owner, 2026-07-03): the product is heading to **public
+  launch** — build toward it, not local-first. The current runtime is
+  still local single-user (no login / no cloud sync yet), but new work
+  must not deepen local-only assumptions (e.g. localStorage as the only
+  persistence for user-facing state, absolute local paths in product
+  code). Launch-track architecture (hosting, auth, multi-user, data
+  ownership) is a separate roadmap cut that starts with a PM grill —
+  do not bolt it on piecemeal.
 - Open Design is for visual prototyping only. Production code belongs under `app/`.
 
 ## Project Steering

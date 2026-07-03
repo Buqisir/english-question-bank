@@ -195,6 +195,13 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
    死、vite 靠旧进程过健康检查——旧进程一死全站 502。dev.sh 可考虑
    fail-hard。
 
+### 定向变更（owner 2026-07-03）
+
+**往公开上线做，不再"本地优先"**——已落 PRODUCT.md + AGENTS.md Product
+Posture。新挂账（L 级，启动前先 PM grill 出路线图，不碎片化提前上云）：
+**上线路线图**——hosting/auth/多用户/数据归属/key 管理的架构盘点；与
+「经典模式器官移植」「key 接线」两条挂账有交集，宜一起规划。
+
 ### CI 事故记录（2026-07-03，已修复 @ 2b2e16a）
 
 刀⑥ #230 起 CI 连红 11 个 run（owner 邮箱报警才发现），两个根因：
