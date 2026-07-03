@@ -39,7 +39,7 @@ import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults
 export type ConciergeDeskState =
   | { kind: 'empty' }
   | { kind: 'loading'; query: string }
-  | { kind: 'results'; hits: ConciergeSearchHit[]; assistantMessage: string; query: string; usedFallback: boolean }
+  | { kind: 'results'; hits: ConciergeSearchHit[]; assistantMessage: string; query: string; usedFallback: boolean; fallbackReason?: string }
   | { kind: 'clarification'; question: string; assistantMessage: string; pendingQuery: string }
   | { kind: 'error'; message: string; query: string }
 
@@ -239,6 +239,10 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           assistantMessage: outcome.assistantMessage,
           query: outcome.query,
           usedFallback: outcome.source === 'fallback',
+          // cut m0-5-ai-daily-limit (C5): the notice bar needs the reason to keep
+          // the daily-limit explanation visible even when the all-weak honest-degrade
+          // line would otherwise replace it (see pickResultsNoticeLine).
+          fallbackReason: outcome.source === 'fallback' ? outcome.fallbackReason : undefined,
         })
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error)

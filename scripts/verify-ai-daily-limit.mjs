@@ -106,6 +106,10 @@ function seedBankDatabaseWithOneGroup(dbPath) {
     );
     INSERT INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
     VALUES ('g-daily-limit-verify', 'passage-daily-limit-verify', 'reading', 'Daily limit verify group', 'Read and answer.', 1, 1, 'medium', 'verify fixture');
+    INSERT INTO questions (id, group_id, question_no, question_type, stem, answer, difficulty, score, display_order)
+    VALUES ('q-daily-limit-verify', 'g-daily-limit-verify', '1', 'single_choice', 'Why does this question exist?', 'A', 'medium', 1, 1);
+    INSERT INTO options (id, question_id, label, content, display_order)
+    VALUES ('opt-daily-limit-verify-a', 'q-daily-limit-verify', 'A', 'To make verify-question-group perform a gated out-station call.', 1);
   `)
   db.close()
 }
@@ -232,6 +236,19 @@ try {
   const r4 = await req('/api/ai/semantic-search', { method: 'POST', body: { query: 'q4', apiKey: 'sk-teacher-own-key' } })
   assert('2: call with client key succeeds even after limit exceeded', r4.status === 200, `got ${r4.status} ${JSON.stringify(r4.json)}`)
   assert('2: mock DeepSeek reached a 3rd time for the client-key call', mock.callCount === 3, `got ${mock.callCount}`)
+
+  console.log('\n=== Assertion 2b: verify-question-group over limit -> 429, not 200-with-uncertain ===')
+  // Regression guard: verifyQuestionGroupService folds per-question AI errors into
+  // "uncertain" verdicts; the daily-limit error must be rethrown there so the route
+  // can 429 (found in browser QA of this cut — a swallowed limit error returned
+  // HTTP 200 with an all-uncertain result that looked like a completed verification).
+  const r5 = await req('/api/ai/verify-question-group', {
+    method: 'POST',
+    body: { questionGroupId: 'g-daily-limit-verify' },
+  })
+  assert('2b: verify over limit -> 429', r5.status === 429, `got ${r5.status} ${JSON.stringify(r5.json)}`)
+  assert('2b: 429 body carries code', r5.json?.code === 'ai-daily-limit-exceeded', JSON.stringify(r5.json))
+  assert('2b: no out-station call was made', mock.callCount === 3, `got ${mock.callCount}`)
 
   console.log('\n=== Assertion 3: GET /api/ai/status dailyLimit fields + exceeded flip ===')
   const status = await req('/api/ai/status')

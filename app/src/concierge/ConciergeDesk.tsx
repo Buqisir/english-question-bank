@@ -202,7 +202,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       {state.kind === 'results' && state.usedFallback && (
         <p className="concierge-notice">
-          {pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage)}
+          {pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage, state.fallbackReason)}
         </p>
       )}
 
