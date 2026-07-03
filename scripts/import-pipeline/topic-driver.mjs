@@ -7,6 +7,11 @@
  *     Scoped SQL: source_type='real_exam' AND year BETWEEN 2020 AND 2025.
  *     Read-only DB.
  *
+ *   node topic-driver.mjs list-unlabeled
+ *     Print each group WITHOUT any topic label (id, paperName, groupType).
+ *     Backfill scope for papers imported after the original 108-group run.
+ *     Read-only DB.
+ *
  *   node topic-driver.mjs build <groupId>
  *     Print JSON.stringify(buildTopicLabelMessages(detail), null, 2).
  *     This is the prompt the operator feeds to Claude.
@@ -46,6 +51,16 @@ const SCOPED_SQL = `
   ORDER BY s.year, s.paper_name, qg.id
 `
 
+const UNLABELED_SQL = `
+  SELECT qg.id, s.paper_name, qg.group_type
+  FROM question_groups qg
+  JOIN passages p ON qg.passage_id = p.id
+  JOIN sources s ON p.source_id = s.id
+  LEFT JOIN question_group_topic_labels l ON l.question_group_id = qg.id
+  WHERE l.question_group_id IS NULL
+  ORDER BY s.year, s.paper_name, qg.id
+`
+
 if (mode === 'list') {
   const db = new DatabaseSync(DB_PATH, { readOnly: true })
   try {
@@ -56,6 +71,17 @@ if (mode === 'list') {
     if (rows.length !== 108) {
       console.error(`WARNING: expected 108 rows, got ${rows.length}`)
     }
+  } finally {
+    db.close()
+  }
+} else if (mode === 'list-unlabeled') {
+  const db = new DatabaseSync(DB_PATH, { readOnly: true })
+  try {
+    const rows = db.prepare(UNLABELED_SQL).all()
+    for (const row of rows) {
+      console.log(`${row.id}\t${row.paper_name}\t${row.group_type}`)
+    }
+    console.error(`${rows.length} unlabeled groups`)
   } finally {
     db.close()
   }

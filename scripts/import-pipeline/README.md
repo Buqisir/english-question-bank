@@ -22,7 +22,7 @@ Claude-driven、确定性切卷 + AI 解析 + 原子发布的离线工具。**�
 
 ## 派生维度 backfill(导入后,走 Claude)
 
-- **`topic-driver.mjs list|build <id>|persist <id> <labelsJson>`** — 主题标签(#190)。`build` 打印 `buildTopicLabelMessages` 的 messages(喂 Claude);`persist` normalize + `bindTopicLabelsToQuestionGroup` 落库。扇出同样用 ad-hoc Workflow(一组一 Sonnet agent 自写结果文件)。
+- **`topic-driver.mjs list|list-unlabeled|build <id>|persist <id> <labelsJson>`** — 主题标签(#190)。`list-unlabeled` 圈出所有无标签题组(后续导入卷的回填范围;`list` 仍是当年 108 组的老口径);`build` 打印 `buildTopicLabelMessages` 的 messages(喂 Claude);`persist` normalize + `bindTopicLabelsToQuestionGroup` 落库。扇出同样用 ad-hoc Workflow(一组一 Sonnet agent 自写结果文件)。
 - **`persist-dir.mjs <dir>`** — 批量把 `labels-out/<groupId>.json` 落库。
 - **`vp-driver.mjs list|persist`** — 动词维度(时态/语态/主谓一致,#189)。
 
