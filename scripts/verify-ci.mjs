@@ -74,6 +74,7 @@ const registry = {
   'scripts/verify-error-copy-mainline.mjs',
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',
+  'scripts/verify-owner-gate.mjs',
   ],
 }
 
