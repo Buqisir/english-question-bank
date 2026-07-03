@@ -8,6 +8,7 @@ import {
   ClipboardList,
   FileDown,
   FileText,
+  LogOut,
   Pencil,
   Plus,
   RefreshCw,
@@ -121,6 +122,8 @@ import { PaperImportAiWorkbench } from './features/paper-import-ai/PaperImportAi
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
+import { useCurrentUser } from './auth/AuthGate.tsx'
+import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { DifficultyProfileGrid } from './workbench/detail/DifficultyProfileGrid'
 import { labelOf, mainBlockerLabel } from './workbench/detail/readingProfileLabels'
@@ -763,6 +766,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // no `window.location.href` assignment, no `window.location.reload`.
   // Workbench fetch effects depend on `currentPiRoute.kind` so they fire
   // exactly once when the user returns from PI.
+  const currentUser = useCurrentUser()
   const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
   const [paperImportRouteActive, setPaperImportRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
@@ -3410,6 +3414,21 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           >
             {homeMode === 'ai' ? '经典模式' : 'AI 模式'}
           </button>
+          {currentUser && (
+            <span className="topbar-user-group">
+              <span className="topbar-username">{currentUser.username}</span>
+              <button
+                className="ghost-button"
+                type="button"
+                onClick={() => {
+                  void logout().finally(() => window.location.reload())
+                }}
+              >
+                <LogOut size={16} />
+                退出
+              </button>
+            </span>
+          )}
         </div>
       </header>
 
