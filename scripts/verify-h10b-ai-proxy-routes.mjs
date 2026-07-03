@@ -56,10 +56,12 @@ function routeBy(routes, method, pathname) {
 const routes = createAiProxyRoutes()
 
 // --- Route surface ---
-assert('exactly 3 routes', routes.length === 3, `got ${routes.length}`)
+// cut ai-key-server-fallback: GET /api/ai/status joined the 3 pre-existing POST routes.
+assert('exactly 4 routes', routes.length === 4, `got ${routes.length}`)
 for (const p of ['/api/ai/semantic-search', '/api/ai/question-bank-steward', '/api/ai/verify-question-group']) {
   assert(`POST ${p} defined`, Boolean(routeBy(routes, 'POST', p)))
 }
+assert('GET /api/ai/status defined', Boolean(routeBy(routes, 'GET', '/api/ai/status')))
 assert('GET semantic-search NOT matched (POST only)', !routeBy(routes, 'GET', '/api/ai/semantic-search'))
 assert('verify-trace NOT owned here (stays inline in api.mjs)', !routeBy(routes, 'GET', '/api/ai/verify-trace'))
 

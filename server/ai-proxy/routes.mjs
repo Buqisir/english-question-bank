@@ -12,6 +12,13 @@ import { defineRoute } from '../router/index.mjs'
 // reader stays inline in api.mjs (it reads the verify-audit JSONL from disk).
 export function createAiProxyRoutes() {
   return [
+    // cut ai-key-server-fallback: read-only status probe so the frontend can default to the
+    // server-held DeepSeek key without the teacher pasting one. Returns a boolean only — never
+    // the key or any fragment of it, and never logs it (see plan.md MF-3).
+    defineRoute('GET', /^\/api\/ai\/status$/, async ({ response, context }) => {
+      context.sendJson(response, 200, { serverKeyAvailable: Boolean(context.serverKeyAvailable) })
+    }),
+
     defineRoute('POST', /^\/api\/ai\/semantic-search$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request)
       const result = await context.semanticSearchQuestionGroups(input.query, input.apiKey, input.requestId)

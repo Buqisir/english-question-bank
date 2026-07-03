@@ -24,8 +24,15 @@ export type ConciergeSearchInput = {
   pendingQuery?: string | null
   /** All known question groups; required for keyword fallback rendering. */
   questionGroups: QuestionGroupCard[]
-  /** DeepSeek key. Empty string means "go straight to fallback". */
+  /** DeepSeek key. Empty string means "go straight to fallback" unless serverKeyAvailable. */
   apiKey: string
+  /**
+   * True when the server holds its own DeepSeek key (cut ai-key-server-fallback:
+   * GET /api/ai/status). Lets the steward call proceed with an empty apiKey — the
+   * server's own `apiKey || DEEPSEEK_API_KEY` fallback picks it up. Defaults to false,
+   * which preserves the pre-cut behavior (local fallback whenever apiKey is empty).
+   */
+  serverKeyAvailable?: boolean
   /** Whether to enable thinking mode for the steward DeepSeek calls. Defaults to false. */
   thinkingMode?: boolean
   /** Optional override for tests; defaults to the real ask call. */
@@ -1006,7 +1013,8 @@ function buildSentMessage(intent: string, pendingQuery: string | null | undefine
   return trimmed
 }
 
-const DEFAULT_STEWARD_TIMEOUT_MS = 6000
+const DEFAULT_STEWARD_TIMEOUT_MS = 20000
+const THINKING_STEWARD_TIMEOUT_MS = 60000
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -1032,6 +1040,7 @@ export async function runConciergeSearch(
   const intent = input.intent.trim()
   const sentMessage = buildSentMessage(intent, input.pendingQuery)
   const apiKey = (input.apiKey || '').trim()
+  const serverKeyAvailable = input.serverKeyAvailable ?? false
   const thinkingMode = input.thinkingMode ?? false
   const doStewardCall = input.doStewardCall || askQuestionBankSteward
   const localDirectHits = highConfidenceLocalHits(input.questionGroups, intent)
@@ -1051,7 +1060,7 @@ export async function runConciergeSearch(
     }
   }
 
-  if (!apiKey) {
+  if (!apiKey && !serverKeyAvailable) {
     const hits = rankByKeywords(input.questionGroups, intent)
     return {
       kind: 'results',
@@ -1066,9 +1075,10 @@ export async function runConciergeSearch(
   }
 
   try {
+    const defaultTimeoutMs = thinkingMode ? THINKING_STEWARD_TIMEOUT_MS : DEFAULT_STEWARD_TIMEOUT_MS
     const result = await withTimeout(
       doStewardCall(sentMessage, apiKey, thinkingMode),
-      input.stewardTimeoutMs ?? DEFAULT_STEWARD_TIMEOUT_MS,
+      input.stewardTimeoutMs ?? defaultTimeoutMs,
       'question-bank steward',
     )
     if (result.needsClarification) {

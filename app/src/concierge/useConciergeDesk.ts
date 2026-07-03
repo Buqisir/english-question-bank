@@ -27,6 +27,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { QuestionGroupCard, QuestionGroupDetail } from '../domain/questionBank.ts'
 import { fetchQuestionGroupDetail } from '../services/questionGroups.ts'
+import { fetchAiStatus } from '../services/aiStatus.ts'
 import {
   buildSimilarIntent,
   runConciergeSearch,
@@ -58,6 +59,8 @@ export type UseConciergeDeskInput = {
   searchOverride?: typeof runConciergeSearch
   /** Test seam — replace the detail fetch. */
   detailFetchOverride?: typeof fetchQuestionGroupDetail
+  /** Test seam — replace the AI-status fetch (cut ai-key-server-fallback). */
+  aiStatusFetchOverride?: typeof fetchAiStatus
 }
 
 /** View slice of the 取题流: read-only render input for ConciergeDesk. */
@@ -91,8 +94,25 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   const [state, setState] = useState<ConciergeDeskState>({ kind: 'empty' })
   const [expandedPaperKey, setExpandedPaperKey] = useState<string | null>(null)
   const [detailCache, setDetailCache] = useState<ConciergeDetailCache>({})
+  // cut ai-key-server-fallback (MF-2 seam a): mount-time probe for whether the server
+  // holds its own DeepSeek key. Defaults false — pre-fetch-resolution searches behave
+  // exactly like before this cut (honest degradation, no loading gate; plan.md §3).
+  const [serverKeyAvailable, setServerKeyAvailable] = useState(false)
 
   const fetchDetail = input.detailFetchOverride || fetchQuestionGroupDetail
+  const fetchStatus = input.aiStatusFetchOverride || fetchAiStatus
+
+  useEffect(() => {
+    let cancelled = false
+    fetchStatus().then((available) => {
+      if (!cancelled) {
+        setServerKeyAvailable(available)
+      }
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [fetchStatus])
 
   const loadDetail = useCallback(
     (groupId: string) => {
@@ -195,6 +215,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           pendingQuery,
           questionGroups: input.questionGroups,
           apiKey: input.apiKey,
+          serverKeyAvailable,
           thinkingMode: input.thinkingMode ?? false,
         })
         if (outcome.kind === 'clarification') {
@@ -221,7 +242,14 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
         setState({ kind: 'error', message, query: trimmed })
       }
     },
-    [clearExpansion, input.apiKey, input.questionGroups, input.searchOverride],
+    [
+      clearExpansion,
+      input.apiKey,
+      input.questionGroups,
+      input.searchOverride,
+      input.thinkingMode,
+      serverKeyAvailable,
+    ],
   )
 
   const submit = useCallback(
