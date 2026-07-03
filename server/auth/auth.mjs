@@ -64,13 +64,14 @@ export async function verifyPassword(passwordHash, password) {
 }
 
 // users table row -> public user shape (never leaks password_hash).
+// Response contract is { id, username, role } per plan.md decision 6 —
+// status stays server-side (disabled users are rejected before this point).
 export function rowToUser(row) {
   if (!row) return null
   return {
     id: row.id,
     username: row.username,
     role: row.role,
-    status: row.status,
   }
 }
 

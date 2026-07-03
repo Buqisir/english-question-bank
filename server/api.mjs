@@ -4255,6 +4255,19 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   cleanupPaperImportTempArtifacts(paperAssetsDir)
   ensureMySpaceFilesRoot(userSpaceFilesDir)
 
+  {
+    const db = openUserDatabase({ readOnly: true })
+    try {
+      if (countUsers(db) === 0) {
+        console.warn(
+          '[auth] users 表为空，登录未启用 — 运行 node scripts/create-user.mjs 创建账号（上线部署前必须先建号，见 ADR-0012 决策 1）',
+        )
+      }
+    } finally {
+      db.close()
+    }
+  }
+
   server.listen(port, '127.0.0.1', () => {
     console.log(`Question bank API listening on http://127.0.0.1:${port}`)
     console.log(`SQLite database: ${dbPath}`)
