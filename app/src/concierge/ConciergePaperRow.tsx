@@ -42,6 +42,24 @@ function buildHeadline(paper: PaperResult): string {
 }
 
 /**
+ * Distinct topic-label leaves ("生态环境", not the full
+ * "人与自然-自然生态-生态环境" path) across every matched group inside this
+ * paper row, in first-seen order. Capped small — this is a scan aid on the
+ * collapsed row, not a full topic index.
+ */
+function buildTopicChips(paper: PaperResult, max = 3): string[] {
+  const seen = new Set<string>()
+  for (const { group } of paper.groups) {
+    const first = group.topicLabels?.[0]
+    if (!first) continue
+    const leaf = (first.subtopic || first.label.split('-').pop() || '').trim()
+    if (leaf) seen.add(leaf)
+    if (seen.size >= max) break
+  }
+  return Array.from(seen)
+}
+
+/**
  * Cut 6 — badge wording switches by hit scope. The badge text uses
  * `paper.hitCount` as the dynamic count so existing verify regexes
  * (`/命中\s*\{paper\.hitCount\}\s*[组个]\s*[篇组]/`) keep matching.
@@ -82,6 +100,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
   const groupTypeStrip = paper.groupTypes
     .map((g) => groupTypeLabel[g as keyof typeof groupTypeLabel] || g)
     .join(' · ')
+  const topicChips = buildTopicChips(paper)
 
   const handleRowClick = (event: MouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement
@@ -155,6 +174,13 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           {groupTypeStrip && (
             <span className="concierge-paper-grouptypes" title={groupTypeStrip}>
               {groupTypeStrip}
+            </span>
+          )}
+          {topicChips.length > 0 && (
+            <span className="concierge-paper-topics" aria-label="题组主题">
+              {topicChips.map((topic) => (
+                <span className="concierge-paper-topic-chip" key={topic}>{topic}</span>
+              ))}
             </span>
           )}
         </p>

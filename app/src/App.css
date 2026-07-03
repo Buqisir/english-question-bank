@@ -6176,6 +6176,21 @@ button:disabled {
   max-width: 320px;
 }
 
+.concierge-paper-topics {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.concierge-paper-topic-chip {
+  font-size: 11px;
+  color: #6B645C;
+  background: #F4F2EC;
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
 .concierge-paper-reason {
   margin: 0;
   font-size: 11.5px;

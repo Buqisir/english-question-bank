@@ -50,6 +50,18 @@ function compactSummary(group: QuestionGroupCard): string {
   return (group.summary || '').trim()
 }
 
+/**
+ * Topic labels are stored as a full `theme-themeGroup-subtopic` path (e.g.
+ * "人与自然-自然生态-生态环境"). A card pill shows only the leaf subtopic —
+ * the specific, teacher-recognizable phrase — not the whole path.
+ */
+function topicLeafLabel(group: QuestionGroupCard): string | null {
+  const first = group.topicLabels?.[0]
+  if (!first) return null
+  const leaf = (first.subtopic || first.label.split('-').pop() || '').trim()
+  return leaf || null
+}
+
 function buildTagPills(group: QuestionGroupCard): string[] {
   const pills: string[] = []
   pills.push(difficultyLabel[group.difficulty])
@@ -58,7 +70,7 @@ function buildTagPills(group: QuestionGroupCard): string[] {
   if (Number.isFinite(group.questionCount) && group.questionCount > 0) {
     pills.push(`${group.questionCount} 题`)
   }
-  const topic = group.topicLabels?.[0]?.label
+  const topic = topicLeafLabel(group)
   if (topic && isDisplayTag(topic)) {
     pills.push(topic)
   } else {
