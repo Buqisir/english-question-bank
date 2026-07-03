@@ -195,6 +195,24 @@ Baseline: main @ bf44f01, verify-ci 全绿, 浏览器 console 零报错
    死、vite 靠旧进程过健康检查——旧进程一死全站 502。dev.sh 可考虑
    fail-hard。
 
+## 第四轮结案（2026-07-03 深夜，刀⑨ + topic 回填备料）
+
+- **刀⑨ #234 AI 取题服务端 key 兜底**（`feat(concierge)` @ b703cd9，cut
+  docs：docs/cuts/ai-key-server-fallback/）：挂账 #3「key 接线」主线部分
+  销账。server 兜底本就存在（audit 认知修正：断点只在前端 `!apiKey` 闸
+  + 6s 超时），本刀接通：`GET /api/ai/status` + 闸门改判 + 超时 20s/60s
+  + thinkingMode 陈旧闭包顺手修。完整 medium 流程（PA MF×4 / CR MF×1
+  test-only 变异复证 / 浏览器 QA 5 例 / RM 闸 / main CI 绿）。
+  **产品默认变化待 owner 追认（SW-1）**：server 有 key 时 AI 搜索默认
+  花 .env 的 DeepSeek 余额（v4-flash×2/次，单人量级极小；维度明确查询
+  仍走本地短路零成本）。**Key 配置 UI 移出经典未做**——上线后 server 持
+  key 是主形态，搬 UI 大概率白做，留给器官移植/上线路线图。
+- **topic 回填备料**：`topic-driver list-unlabeled` 入 main（#233）；
+  147 组（浙江 84 + 全国 63）回填已挂 owner 一键 chip（预估 Sonnet
+  output 10–15万 tokens，一组一 agent 兜底重跑），点击即批准执行。
+- QA 顺手实锤：weak 理由 token 泄漏（「可能相关：要一」）真库可见，
+  维持挂账 #3'（reason 行为层小刀）优先级。
+
 ### 定向变更（owner 2026-07-03）
 
 **往公开上线做，不再"本地优先"**——已落 PRODUCT.md + AGENTS.md Product
@@ -228,8 +246,10 @@ Posture。新挂账（L 级，启动前先 PM grill 出路线图，不碎片化�
    文件型 paper-assets（ADR-0010），DB 字段只有出处存根。教师版要好用，
    需要导出链路接 paper-assets 解析或至少隐藏存根。**建议下一刀做。**
 2. topic label 覆盖 126/273 (~46%)：回填走 I17 管线（scripts/import-pipeline）。
-3. 思考模式 key 接线：服务端 .env 有 key 但链路由前端 key 决定；Key
-   配置入口只在经典模式（P1-3）。
+3. ~~思考模式 key 接线~~ **主线部分已销（刀⑨ #234，见第四轮）**：无手填
+   key 走服务端兜底，思考模式可用。残余：Key 配置 UI 仍只在经典模式
+   （随器官移植/上线路线图处置）；AI 导题固定 server-key 的不一致记录在
+   案未动。
 4. 速赢清单 10 项（已挂 spawn_task chip）。
 5. CR Should Watch：教师版切换后编辑题目预览静默回退学生版（cr-2 SW-1，
    PDF 不受影响）；「保存到个人空间」固定学生版（cr-2 SW-2）；topic
