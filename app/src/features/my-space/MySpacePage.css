@@ -1,14 +1,14 @@
 .my-space-shell {
-  background: #f2f0eb;
-  color: #24201b;
+  background: #F4F2EC;
+  color: #1A1A1A;
   min-height: 100vh;
   padding: 18px 22px 32px;
 }
 
 .my-space-toolbar {
   align-items: center;
-  background: #fbfaf7;
-  border: 1px solid #d9d2c7;
+  background: #FAFAF7;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   display: flex;
   gap: 14px;
@@ -17,7 +17,7 @@
 
 .my-space-toolbar p,
 .my-space-section-head p {
-  color: #746b60;
+  color: #6B645C;
   font-size: 12px;
   margin: 0 0 3px;
 }
@@ -35,9 +35,9 @@
 .my-space-artifact-actions button {
   align-items: center;
   background: #fffdf8;
-  border: 1px solid #cfc6b8;
+  border: 1px solid #DED9CF;
   border-radius: 6px;
-  color: #2e2922;
+  color: #1A1A1A;
   cursor: pointer;
   display: inline-flex;
   font: inherit;
@@ -50,13 +50,13 @@
 .my-space-new-folder button:disabled,
 .my-space-folder-row button:disabled,
 .my-space-artifact-actions button:disabled {
-  color: #9b9388;
+  color: #9A9180;
   cursor: not-allowed;
 }
 
 .my-space-message,
 .my-space-empty {
-  color: #746b60;
+  color: #6B645C;
   margin: 14px 0 0;
 }
 
@@ -98,8 +98,8 @@
 
 .my-space-folders,
 .my-space-artifacts {
-  background: #fbfaf7;
-  border: 1px solid #d9d2c7;
+  background: #FAFAF7;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   padding: 12px;
 }
@@ -133,9 +133,9 @@
 .my-space-folder-row input,
 .my-space-new-folder input {
   background: #fffdf8;
-  border: 1px solid #cfc6b8;
+  border: 1px solid #DED9CF;
   border-radius: 6px;
-  color: #24201b;
+  color: #1A1A1A;
   font: inherit;
   min-height: 34px;
   min-width: 0;
@@ -143,7 +143,7 @@
 }
 
 .my-space-new-folder {
-  border-top: 1px solid #e1dacd;
+  border-top: 1px solid #DED9CF;
   display: grid;
   gap: 8px;
   margin-top: 8px;
@@ -165,7 +165,7 @@
 .my-space-artifact-row {
   align-items: center;
   background: #fffdf8;
-  border: 1px solid #ded6c9;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   display: grid;
   gap: 10px;
@@ -193,7 +193,7 @@
 }
 
 .my-space-artifact-main span {
-  color: #746b60;
+  color: #6B645C;
   font-size: 12px;
   margin-top: 4px;
 }

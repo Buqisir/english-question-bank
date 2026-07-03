@@ -1,14 +1,14 @@
 .draft-workbench-shell {
   min-height: 100vh;
-  background: #f2f0eb;
-  color: #24201b;
+  background: #F4F2EC;
+  color: #1A1A1A;
   padding: 18px 22px 28px;
 }
 
 .draft-toolbar {
   align-items: center;
-  background: #fbfaf7;
-  border: 1px solid #d9d2c7;
+  background: #FAFAF7;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   display: grid;
   gap: 12px;
@@ -30,9 +30,9 @@
 .draft-dialog-head button {
   align-items: center;
   background: #fffdf8;
-  border: 1px solid #cfc6b8;
+  border: 1px solid #DED9CF;
   border-radius: 6px;
-  color: #2e2922;
+  color: #1A1A1A;
   cursor: pointer;
   display: inline-flex;
   font: inherit;
@@ -42,7 +42,7 @@
 }
 
 .draft-export-menu button:disabled {
-  color: #9b9388;
+  color: #9A9180;
   cursor: not-allowed;
 }
 
@@ -52,16 +52,16 @@
 }
 
 .draft-title-field span {
-  color: #746b60;
+  color: #6B645C;
   font-size: 12px;
 }
 
 .draft-title-field input,
 .draft-recent-select {
   background: #fffdf8;
-  border: 1px solid #cfc6b8;
+  border: 1px solid #DED9CF;
   border-radius: 6px;
-  color: #24201b;
+  color: #1A1A1A;
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;
@@ -73,12 +73,12 @@
 }
 
 .draft-recent-select-field > span {
-  color: #746b60;
+  color: #6B645C;
   font-size: 12px;
 }
 
 .draft-save-status {
-  color: #746b60;
+  color: #6B645C;
   font-size: 13px;
   white-space: nowrap;
 }
@@ -98,7 +98,7 @@
 
 .draft-version-toggle {
   background: #fffdf8;
-  border: 1px solid #cfc6b8;
+  border: 1px solid #DED9CF;
   border-radius: 6px;
   display: inline-flex;
   overflow: hidden;
@@ -107,7 +107,7 @@
 .draft-version-toggle button {
   background: transparent;
   border: none;
-  color: #746b60;
+  color: #6B645C;
   cursor: pointer;
   font: inherit;
   min-height: 34px;
@@ -115,8 +115,8 @@
 }
 
 .draft-version-toggle button.active {
-  background: #2f2a23;
-  color: #fffaf0;
+  background: #1A1A1A;
+  color: #FFFDF8;
 }
 
 .draft-export-menu {
@@ -124,9 +124,9 @@
 }
 
 .draft-export-menu summary {
-  background: #2f2a23;
+  background: #1A1A1A;
   border-radius: 6px;
-  color: #fffaf0;
+  color: #FFFDF8;
   cursor: pointer;
   list-style: none;
   min-height: 36px;
@@ -147,7 +147,7 @@
 .draft-empty-export,
 .draft-success,
 .draft-warning {
-  color: #746b60;
+  color: #6B645C;
   margin: 14px 0 0;
 }
 
@@ -164,8 +164,8 @@
 
 .draft-preview-desk {
   background:
-    linear-gradient(180deg, #fbfaf6 0%, #f3efe7 100%);
-  border: 1px solid #d3cbbd;
+    linear-gradient(180deg, #FAFAF7 0%, #F4F2EC 100%);
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   min-width: 0;
   overflow: auto;
@@ -173,7 +173,7 @@
 }
 
 .draft-preview-meta {
-  color: #6d6458;
+  color: #6B645C;
   display: flex;
   gap: 14px;
   margin: 0 auto 12px;
@@ -200,7 +200,7 @@
 
 .draft-a4-empty {
   align-items: center;
-  color: #8f867b;
+  color: #6B645C;
   display: flex;
   min-height: 420px;
   justify-content: center;
@@ -208,8 +208,8 @@
 
 .draft-outline-panel {
   align-self: start;
-  background: #fbfaf7;
-  border: 1px solid #d9d2c7;
+  background: #FAFAF7;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   padding: 12px;
   position: sticky;
@@ -226,7 +226,7 @@
 .draft-outline-item span,
 .draft-outline-item em,
 .draft-outline-item small {
-  color: #746b60;
+  color: #6B645C;
   display: block;
   font-style: normal;
   font-size: 12px;
@@ -234,7 +234,7 @@
 }
 
 .draft-suggestions {
-  background: #f4eee3;
+  background: #F0EBE0;
   border-radius: 6px;
   display: grid;
   gap: 6px;
@@ -250,7 +250,7 @@
 
 .draft-outline-item {
   background: #fffdf8;
-  border: 1px solid #ded6c9;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
   padding: 10px;
 }
@@ -284,15 +284,15 @@
 }
 
 .draft-outline-empty {
-  color: #746b60;
+  color: #6B645C;
 }
 
 .draft-undo-toast {
   align-items: center;
-  background: #2f2a23;
+  background: #1A1A1A;
   border-radius: 8px;
   bottom: 22px;
-  color: #fffaf0;
+  color: #FFFDF8;
   display: flex;
   gap: 12px;
   left: 50%;
@@ -304,7 +304,7 @@
 
 .draft-modal-backdrop {
   align-items: center;
-  background: rgba(36, 32, 27, 0.28);
+  background: rgba(26, 26, 26, 0.28);
   display: flex;
   inset: 0;
   justify-content: center;
@@ -314,10 +314,10 @@
 }
 
 .draft-save-space-dialog {
-  background: #fbfaf7;
-  border: 1px solid #d9d2c7;
+  background: #FAFAF7;
+  border: 1px solid #DED9CF;
   border-radius: 8px;
-  box-shadow: 0 18px 46px rgba(36, 32, 27, 0.22);
+  box-shadow: 0 18px 46px rgba(26, 26, 26, 0.22);
   display: grid;
   gap: 12px;
   max-width: 440px;
@@ -339,16 +339,16 @@
 
 .draft-save-space-dialog label span,
 .draft-dialog-note {
-  color: #746b60;
+  color: #6B645C;
   font-size: 12px;
 }
 
 .draft-save-space-dialog input,
 .draft-save-space-dialog select {
   background: #fffdf8;
-  border: 1px solid #cfc6b8;
+  border: 1px solid #DED9CF;
   border-radius: 6px;
-  color: #24201b;
+  color: #1A1A1A;
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;
