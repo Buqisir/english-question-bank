@@ -6224,6 +6224,20 @@ button:disabled {
   background: #FFFDF8;
 }
 
+/* 窄屏：三列 grid 会把中列挤成 0 宽（文字竖排溢出），改为标题+操作一行、
+   命中信息整行铺下方 */
+@media (max-width: 640px) {
+  .concierge-paper-row {
+    grid-template-columns: 1fr auto;
+    gap: 8px 12px;
+  }
+  .concierge-paper-row .concierge-paper-body {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-width: 0;
+  }
+}
+
 .concierge-paper-anchor {
   display: flex;
   align-items: flex-start;
