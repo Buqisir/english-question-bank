@@ -94,6 +94,21 @@ const sampleGroups = [
   },
 ]
 
+// Restart cut ⑤ CR-5 MF-1 fix: the local keyword fallback's noise floor now
+// uses document frequency (see conciergeSearch.ts DF_NOISE_THRESHOLD) to
+// separate a real, if generic, content word from an isolated bigram
+// coincidence — DF is only meaningful against a realistically-sized pool.
+// These filler groups exist ONLY to give '写作' (Test 5) and '汽车' (Test 6)
+// enough corpus frequency to read as real content words, matching how the
+// live ~270-group bank behaves; they carry no topic labels / tags of their
+// own interest and no other test in this file asserts against their ids.
+const dfFillerGroups = [
+  { id: 'g-filler-writing-1', title: '写作技巧专题', source: '模拟卷', sourceType: 'self_made', year: 2023, region: '浙江', paperName: '写作专题', section: '写作', passageTitle: '写作训练', summary: '一篇关于写作方法的说明文。', groupType: 'writing', questionCount: 1, difficulty: 'medium', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 1 },
+  { id: 'g-filler-writing-2', title: '写作评价标准', source: '模拟卷', sourceType: 'self_made', year: 2023, region: '浙江', paperName: '写作专题', section: '写作', passageTitle: '写作评价', summary: '讨论写作评分标准的应用文。', groupType: 'writing', questionCount: 1, difficulty: 'medium', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 1 },
+  { id: 'g-filler-car-1', title: '汽车工业发展史', source: '模拟卷', sourceType: 'self_made', year: 2023, region: '浙江', paperName: '科技专题', section: '阅读理解', passageTitle: '汽车工业', summary: '介绍汽车工业发展历程的说明文。', groupType: 'reading', questionCount: 1, difficulty: 'medium', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 1 },
+  { id: 'g-filler-car-2', title: '电动汽车趋势', source: '模拟卷', sourceType: 'self_made', year: 2023, region: '浙江', paperName: '科技专题', section: '阅读理解', passageTitle: '电动汽车', summary: '一篇关于电动汽车未来趋势的报道。', groupType: 'reading', questionCount: 1, difficulty: 'medium', tags: [], topicLabels: [], hit: '', answerPreview: '', defaultScore: 1 },
+]
+
 console.log('=== Concierge Desk Verification ===\n')
 
 // ------------------------------------------------------------------ Test 1
@@ -203,7 +218,7 @@ console.log('\nTest 5: Missing API key → keyword fallback (no steward call)')
   const out = await runConciergeSearch({
     intent: '写作 教学',
     pendingQuery: null,
-    questionGroups: sampleGroups,
+    questionGroups: [...sampleGroups, ...dfFillerGroups],
     apiKey: '',
     doStewardCall: stub,
   })
@@ -221,7 +236,7 @@ console.log('\nTest 6: Steward error → fallback runs, page does not blow up')
   const out = await runConciergeSearch({
     intent: '汽车',
     pendingQuery: null,
-    questionGroups: sampleGroups,
+    questionGroups: [...sampleGroups, ...dfFillerGroups],
     apiKey: 'sk-test',
     doStewardCall: stub,
   })
@@ -623,7 +638,27 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips 
   assert('chip onClick wired', chipBtnMatch.length > 0, '')
   assert('chip click calls setIntent (actions.setIntent)', /setIntent\(chip\)/.test(chipBtnMatch), '')
   assert('chip click does NOT call submit', !/submit\(/.test(chipBtnMatch), '')
-  assert('chips gated on !dataLoading + (empty || error)', /\{!dataLoading && \(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]error['"]\)/.test(desk), '')
+  // CR-5 SW-1: chips must also render for the TRUE vacuum state — a search
+  // that actually ran and found zero honest hits (state.kind === 'results',
+  // hits: []) — not just the pre-search 'empty' state. Plan cut ⑤ explicitly
+  // names "真空态+起始 chip 呈现" / "乱码 query 必须走到真空态" as one
+  // acceptance line; a chip gate that only fires on 'empty' silently drops
+  // the second half of that line for every real search that resolves to
+  // zero hits.
+  assert(
+    'chips gated on !dataLoading + (empty || error || true vacuum state)',
+    /\{!dataLoading && \(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]error['"] \|\| isVacuumResultsState\(state\)\)/.test(
+      desk,
+    ),
+    '',
+  )
+  assert(
+    'isVacuumResultsState is defined as results-with-zero-hits (not merely referenced)',
+    /function isVacuumResultsState[\s\S]{0,200}state\.kind === ['"]results['"][\s\S]{0,80}state\.hits\.length === 0/.test(
+      desk,
+    ),
+    '',
+  )
 
   // Chip styling.
   const chipRule = css.match(/\.concierge-starter-chip\s*\{[^}]*\}/)?.[0] || ''

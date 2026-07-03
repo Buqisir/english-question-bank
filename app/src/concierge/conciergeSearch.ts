@@ -191,35 +191,37 @@ export function tokenize(query: string): string[] {
 }
 
 /**
- * Restart cut ⑤ helper: the subset of `tokenize(query)`'s output that are
- * "whole run" tokens — a user-typed, delimiter-bounded unit (a whitespace/
- * punctuation-separated CJK run in full, or a non-CJK segment) — as opposed
- * to a `cjkBigrams` fragment CARVED OUT of a longer connected run.
+ * Restart cut ⑤ helper: which "run" each `tokenize()` output token was
+ * produced from — a whitespace/punctuation-delimited segment's CJK run (the
+ * whole run itself, plus every bigram `cjkBigrams` carved out of IT, all
+ * share that run's id), or a standalone non-CJK segment (its own id).
  *
- * This distinction only matters for the noise-floor check below
- * (`isAboveNoiseFloor`): a real 2-character Chinese word the teacher
- * actually typed as its own unit ("写作" in "写作 教学") is genuine content
- * signal, even though it is only 2 characters long. A 2-character bigram
- * carved out of a longer garbled run ("存在" out of "不存在的题目") is a loose
- * net with real collision risk and carries no such guarantee — that is
- * exactly why `cjkBigrams` exists (to let a query land on a *substring* of a
- * longer haystack phrase) and exactly why it must not, on its own, promote a
- * candidate out of "noise". Does not change `tokenize()`'s public contract
- * or output shape — cut ①'s tokenize assertions are unaffected.
+ * Feeds the multiplicity signal in `rankKeywordCandidates`: two bigrams
+ * carved from the SAME connected run ("存在" and "在的", both sliced out of
+ * "不存在的题目") are not independent evidence — they are two views of one
+ * coincidence, exactly the "存在的" 3-char span overlap CR-5 flagged. Two
+ * tokens from DIFFERENT runs ("随便" and "征集" in "随便 征集作品", or a
+ * mixed CJK+non-CJK query) genuinely are two separate coincidences, which is
+ * much less likely to both be accidental.
  */
-function wholeRunTokensOf(query: string): Set<string> {
+function tokenRunIdsOf(query: string): Map<string, number> {
   const raw = query
     .replace(/[，。、；：！？,.!?;:()（）【】"'《》<>\\/|]/g, ' ')
     .split(/\s+/)
     .map((t) => t.trim())
     .filter(Boolean)
 
-  const wholeTokens = new Set<string>()
+  const runIds = new Map<string, number>()
+  let nextRunId = 0
   for (const segment of raw) {
     let cjkRun = ''
     const flushCjkRun = () => {
       if (!cjkRun) return
-      if (!CJK_STOPWORDS.has(cjkRun)) wholeTokens.add(cjkRun)
+      const runId = nextRunId++
+      if (!CJK_STOPWORDS.has(cjkRun)) runIds.set(cjkRun, runId)
+      for (const gram of cjkBigrams(cjkRun)) {
+        if (!CJK_STOPWORDS.has(gram)) runIds.set(gram, runId)
+      }
       cjkRun = ''
     }
     for (const ch of segment) {
@@ -231,9 +233,80 @@ function wholeRunTokensOf(query: string): Set<string> {
     }
     flushCjkRun()
     const nonCjkOnly = /^[^一-鿿]+$/.test(segment)
-    if (nonCjkOnly) wholeTokens.add(segment)
+    if (nonCjkOnly) runIds.set(segment, nextRunId++)
   }
-  return wholeTokens
+  return runIds
+}
+
+/**
+ * Restart cut ⑤ MF-1 fix — document-frequency (DF) noise signal.
+ *
+ * V1 of this cut used a "whole-run token" check (was the matched token a
+ * user-typed, delimiter-bounded unit, vs a `cjkBigrams` fragment carved out
+ * of a longer connected run). CR-5 measured that this misfires on the MOST
+ * common real teacher input shape — unspaced Chinese ("找篇科技文",
+ * "科技文章") — because a real 2-char content word carved out of an unbroken
+ * run is structurally IDENTICAL to a coincidental bigram carved out of
+ * gibberish; neither is ever a "whole run" token. That check silently
+ * dropped genuine hits.
+ *
+ * DF replaces it: build one combined haystack per group — every tier
+ * (topic label segments, section/place, tags, general fields) joined — and
+ * count, across the WHOLE candidate pool, how many groups' haystacks contain
+ * a given token as a substring. A token that is genuinely part of this
+ * bank's vocabulary ("科技" DF≈19, "生态" DF≈29, "写作" DF≈54 in the live
+ * 278-group bank) clears a small absolute floor easily; an isolated
+ * collision bigram carved from a garbled query ("存在"/"题目" from
+ * "不存在的题目") measured DF 1-2 — NOT reliably separable from DF alone at
+ * this floor, because a corpus this size also contains genuinely rare real
+ * words at DF 1-2 (e.g. "征集" DF=1 for one real 应用文 group).
+ *
+ * The DF floor is therefore combined with a second, complementary signal:
+ * matched-token COUNT. A query that only ever lands ONE isolated token on a
+ * given candidate (every gibberish-polluted candidate measured this way —
+ * "存在" alone, "题目" alone, never two) is much weaker evidence than a
+ * candidate matched by two OR MORE independent tokens (a coincidence has to
+ * happen twice on the same candidate, which is far less likely than once).
+ * A candidate clears the general-tier noise floor when EITHER signal fires:
+ * DF_THRESHOLD alone (a single but clearly-common token), or 2+ distinct
+ * matched tokens (multiple weaker/rarer tokens corroborating each other).
+ * This also keeps small hermetic test pools (1-12 groups, where an absolute
+ * DF of 3 may be structurally unreachable) working via the multiplicity path.
+ */
+const DF_NOISE_THRESHOLD = 3
+
+/**
+ * All haystack tiers joined into one substring-search string per group —
+ * topic label segments, section/place, tags, and general fields. Reuses
+ * `buildWeightedHaystacks` (already computed per group elsewhere) so this
+ * stays in lockstep with what the ranked score itself considers matchable;
+ * a token DF should reflect the SAME text the scorer searches, not a
+ * narrower/wider slice of it.
+ */
+function buildCombinedHaystack(group: QuestionGroupCard): string {
+  const tiers = buildWeightedHaystacks(group)
+  return [tiers.topic.join(' '), tiers.section, tiers.place, tiers.general].join(' ')
+}
+
+/**
+ * Lazy per-pool DF cache: `rankKeywordCandidates` is called once per search
+ * round with a fixed candidate pool, so build the pool's combined haystacks
+ * once and memoize each token's document frequency the first time it is
+ * asked for. Cheap at real-bank scale (273 groups) — CR-5's own sizing note.
+ */
+function makeDocumentFrequencyLookup(pool: QuestionGroupCard[]): (token: string) => number {
+  const haystacks = pool.map(buildCombinedHaystack)
+  const cache = new Map<string, number>()
+  return (token: string): number => {
+    const cached = cache.get(token)
+    if (cached !== undefined) return cached
+    let df = 0
+    for (const haystack of haystacks) {
+      if (haystack.includes(token)) df += 1
+    }
+    cache.set(token, df)
+    return df
+  }
 }
 
 type KeywordCandidate = {
@@ -246,13 +319,22 @@ type KeywordCandidate = {
   /** Best-matching topic-label leaf, used to build a human reason line. */
   matchedTopicLabel: TopicLabel | null
   /**
-   * True when at least one of `matchedTokens` is a whole-run token the
-   * teacher actually typed as its own delimiter-bounded unit (see
-   * `wholeRunTokensOf`), as opposed to only a `cjkBigrams` fragment carved
-   * out of a longer connected run. Restart cut ⑤ noise-floor input — see
-   * `isAboveNoiseFloor`.
+   * True when this candidate's matched tokens carry enough corpus-level
+   * signal to clear the general-tier noise floor — see `DF_NOISE_THRESHOLD`
+   * doc comment. Computed once per `rankKeywordCandidates` call using the
+   * pool-scoped DF lookup; restart cut ⑤ MF-1 fix.
    */
-  hasWholeRunMatch: boolean
+  hasCorpusSignal: boolean
+  /**
+   * CR-5 SW-2 fix — one representative token per matched query run (see
+   * `tokenRunIdsOf`), keeping only the LONGEST token from each run. A carved
+   * 2-char bigram never appears here unless it is itself the longest thing
+   * its run produced (i.e. the run IS just 2 characters, a real short word).
+   * This is what `buildLocalReason`'s weak fallback line joins — never the
+   * raw `matchedTokens`, which can contain meaningless carve fragments like
+   * "的完"/"集作" a teacher should never have to read.
+   */
+  displayTokens: string[]
 }
 
 function escapeRegex(value: string): string {
@@ -571,6 +653,31 @@ function scoreGroupAgainstTokens(
   return { score, nonGeneralScore, hits, matchedTokens }
 }
 
+/**
+ * CR-5 SW-2 fix — collapse `matchedTokens` down to one representative token
+ * per query run (see `tokenRunIdsOf`), keeping the LONGEST token from each
+ * run. A run that produced a real word ("科技") keeps that word; a run that
+ * only produced overlapping carve fragments keeps whichever fragment is
+ * longest — never a laundry list of every bigram carved from the same short
+ * span. Order follows first-appearance in `matchedTokens` for stable,
+ * predictable reason text.
+ */
+function pickDisplayTokens(matchedTokens: string[], tokenRunIds: Map<string, number>): string[] {
+  const bestByRun = new Map<number, string>()
+  const runOrder: number[] = []
+  for (const token of matchedTokens) {
+    const runId = tokenRunIds.get(token) ?? -1
+    const current = bestByRun.get(runId)
+    if (current === undefined) {
+      runOrder.push(runId)
+      bestByRun.set(runId, token)
+    } else if (token.length > current.length) {
+      bestByRun.set(runId, token)
+    }
+  }
+  return runOrder.map((runId) => bestByRun.get(runId) as string)
+}
+
 function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): KeywordCandidate[] {
   const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
   if (tokens.length === 0) {
@@ -581,10 +688,16 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
       nonGeneralScore: 0,
       matchedTokens: [],
       matchedTopicLabel: null,
-      hasWholeRunMatch: false,
+      hasCorpusSignal: false,
+      displayTokens: [],
     }))
   }
-  const wholeRunTokens = new Set(Array.from(wholeRunTokensOf(query)).map(normalize))
+  // DF is measured against the FULL, unfiltered bank (not the possibly
+  // intent-narrowed `pool` below) — a token's corpus-vocabulary status
+  // should not shift depending on which dimension filter happened to fire
+  // for this particular query.
+  const documentFrequencyOf = makeDocumentFrequencyLookup(groups)
+  const tokenRunIds = tokenRunIdsOf(query)
   const intent = parseLocalIntent(query)
   // Explicit dimensions (section letter / group type / region) hard-filter
   // by default — a teacher who says "C 篇" or "全国甲卷" named a real
@@ -600,6 +713,21 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
   const scored = pool.map((group) => {
     const { score, nonGeneralScore, hits, matchedTokens } = scoreGroupAgainstTokens(group, tokens)
     const yearBoost = intent.year && group.year === intent.year ? WEIGHT_BY_TIER.place : 0
+    // Two independent ways a general-tier match earns corpus signal:
+    //   1. At least one matched token is common enough in the bank's own
+    //      vocabulary (DF >= DF_NOISE_THRESHOLD) to read as a real content
+    //      word, not a coincidental carve.
+    //   2. Two or more matched tokens come from DIFFERENT query runs (see
+    //      `tokenRunIdsOf`) — a coincidence landing on this candidate twice,
+    //      from two UNRELATED parts of the query, is far less likely than
+    //      once. Two overlapping bigrams carved from the SAME connected run
+    //      ("存在"+"在的" both sliced out of "不存在的题目") do NOT count as
+    //      two here — they collapse to one run and carry exactly one
+    //      coincidence's worth of evidence, matching the CR-5 measured
+    //      real-bank false-positive shape.
+    const matchedRunIds = new Set(matchedTokens.map((token) => tokenRunIds.get(token) ?? -1))
+    const hasCorpusSignal =
+      matchedTokens.some((token) => documentFrequencyOf(token) >= DF_NOISE_THRESHOLD) || matchedRunIds.size >= 2
     return {
       group,
       hits,
@@ -607,7 +735,8 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
       nonGeneralScore: nonGeneralScore + yearBoost,
       matchedTokens,
       matchedTopicLabel: findMatchedTopicLabel(group, matchedTokens),
-      hasWholeRunMatch: matchedTokens.some((token) => wholeRunTokens.has(token)),
+      hasCorpusSignal,
+      displayTokens: pickDisplayTokens(matchedTokens, tokenRunIds),
     }
   })
   return scored
@@ -664,7 +793,7 @@ function findMatchedTag(group: QuestionGroupCard, matchedTokens: string[]): stri
  * "可能相关" phrasing instead of asserting a topic/keyword match.
  */
 function buildLocalReason(candidate: KeywordCandidate, weak = false): string {
-  const { group, matchedTopicLabel, matchedTokens } = candidate
+  const { group, matchedTopicLabel, matchedTokens, displayTokens } = candidate
   const section = extractReadingSectionLabel(group)
   // "讲生态环境的 C 篇" style — a space before the bare section letter reads
   // as a label ("C 篇"), not "C篇" glued to the preceding Chinese clause.
@@ -701,10 +830,15 @@ function buildLocalReason(candidate: KeywordCandidate, weak = false): string {
   if (placeText && !weak) parts.push(placeText)
 
   if (parts.length > 0) return parts.join(' · ')
-  if (matchedTokens.length > 0) {
-    return weak ? `可能相关：${matchedTokens.join('、')}` : `匹配关键词：${matchedTokens.join('、')}`
+  // CR-5 SW-2: the weak fallback line joins `displayTokens` (one longest
+  // token per matched query run), never raw `matchedTokens` — a carved
+  // 2-char bigram sibling like "的完"/"集作" must never reach this
+  // teacher-facing string even when it technically contributed to the score.
+  if (weak) {
+    return displayTokens.length > 0 ? `可能相关：${displayTokens.join('、')}` : '可能相关'
   }
-  return weak ? '可能相关' : '关键词匹配'
+  if (matchedTokens.length > 0) return `匹配关键词：${matchedTokens.join('、')}`
+  return '关键词匹配'
 }
 
 function toSearchHit(candidate: KeywordCandidate): ConciergeSearchHit {
@@ -737,21 +871,15 @@ const GENERAL_ONLY_PHRASE_SCORE_FLOOR = 8
 /**
  * A candidate is noise — not even "weak" — only when its ENTIRE signal is
  * general-tier (title/summary/tags/... — no topicLabel / 篇位 / 题型 / 地区
- * signal at all, i.e. `nonGeneralScore === 0`) AND none of its matched
- * tokens is a whole-run token (`hasWholeRunMatch` — see `wholeRunTokensOf`).
- * This is exactly the shape a garbled/gibberish query produces against a
- * large real bank: one or more isolated 2-character CJK bigrams (weight 1
- * general-tier x length factor 1 = 1 each), CARVED OUT of a longer garbled
- * run, coincidentally substring-match some field of some group. Two
- * overlapping bigrams cut from the SAME short garbled span (e.g. "存在的"
- * yields both "存在" and "在的") can sum to a nonzero score even though they
- * carry exactly one coincidence's worth of honest signal — a raw score
- * floor alone cannot tell that apart from two independent hits, and a bare
- * length check cannot tell a carved 2-char bigram apart from a real,
- * teacher-typed 2-char word ("写作" in "写作 教学"). `hasWholeRunMatch` is
- * the qualitative check that gets this right: it only credits a token the
- * teacher actually typed as its own delimiter-bounded unit, never a bigram
- * fragment invented by the CJK segmentation workaround.
+ * signal at all, i.e. `nonGeneralScore === 0`) AND it has no `hasCorpusSignal`
+ * (see `DF_NOISE_THRESHOLD` doc comment — CR-5 MF-1 fix). This is exactly
+ * the shape a garbled/gibberish query produces against a large real bank:
+ * one or more isolated 2-character CJK bigrams (weight 1 general-tier x
+ * length factor 1 = 1 each), CARVED OUT of a longer garbled run,
+ * coincidentally substring-match some field of some group, each in
+ * isolation (measured: every gibberish-polluted real-bank candidate matched
+ * exactly one such token, never two) AND that token is corpus-rare (DF 1-2,
+ * below the DF_NOISE_THRESHOLD floor).
  *
  * Any candidate with `nonGeneralScore > 0` — even a single section-letter
  * hit ("C" alone, section-tier weight 3) that stays well below the
@@ -761,10 +889,12 @@ const GENERAL_ONLY_PHRASE_SCORE_FLOOR = 8
  * deserves the steward's fuzzier semantic read", now also "still deserves
  * an honest weak card" for the local fallback).
  *
- * "随便 试试看" landing partly on a group's summary is NOT the noise case
- * either: "试试看" is itself a whole 3-char query segment, so it passes
- * `hasWholeRunMatch` on its own and reads as an actual, if generic, keyword
- * match — honestly labelled weak, not dropped as noise.
+ * "找篇科技文" / "科技文章" (unspaced, the real teacher-input shape) are NOT
+ * the noise case: "科技" is corpus-common (DF>=DF_NOISE_THRESHOLD in the
+ * live bank), so `hasCorpusSignal` fires via the DF path even though "科技"
+ * is, mechanically, just as much a carved bigram as any gibberish fragment —
+ * the difference DF actually measures is real-bank vocabulary membership,
+ * not the query-side carving mechanism.
  */
 
 /**
@@ -781,10 +911,10 @@ const GENERAL_ONLY_PHRASE_SCORE_FLOOR = 8
  *     total score clears GENERAL_ONLY_PHRASE_SCORE_FLOOR (dense/long phrase
  *     match — same rule `highConfidenceLocalHits` always used).
  *   - weak (not confident, but has ANY non-general signal, or
- *     `hasWholeRunMatch` on its general-tier signal): shown, but flagged so
+ *     `hasCorpusSignal` on its general-tier signal): shown, but flagged so
  *     the UI can say "可能相关" instead of implying a real hit.
- *   - noise (purely general-tier AND no whole-run token matched): dropped
- *     before it ever reaches the UI.
+ *   - noise (purely general-tier AND no corpus signal): dropped before it
+ *     ever reaches the UI.
  */
 function isConfidentCandidate(candidate: KeywordCandidate): boolean {
   return (
@@ -796,7 +926,7 @@ function isConfidentCandidate(candidate: KeywordCandidate): boolean {
 function isAboveNoiseFloor(candidate: KeywordCandidate): boolean {
   if (isConfidentCandidate(candidate)) return true
   if (candidate.nonGeneralScore > 0) return true
-  return candidate.hasWholeRunMatch
+  return candidate.hasCorpusSignal
 }
 
 /**

@@ -56,6 +56,19 @@ function isAllWeakResultsState(
   return state.kind === 'results' && state.hits.length > 0 && state.hits.every((hit) => hit.weak === true)
 }
 
+/**
+ * CR-5 SW-1 fix — the true vacuum state is `state.kind === 'results'` with
+ * zero hits (a search actually ran and found nothing honest to show), not
+ * `state.kind === 'empty'` (no search has run yet). The plan's cut ⑤
+ * acceptance line "真空态+起始 chip 呈现" and "乱码 query 必须走到真空态"
+ * both name this exact state — a teacher who typed a gibberish query and hit
+ * the true "没找到匹配" message must still see the starter chips as the next
+ * action, not a dead end.
+ */
+function isVacuumResultsState(state: ConciergeRetrievalView['state']): boolean {
+  return state.kind === 'results' && state.hits.length === 0
+}
+
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { retrieval, actions, basketIds, onAdd, dataStatus, thinkingMode, onThinkingModeChange } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
@@ -123,7 +136,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         </p>
       )}
 
-      {!dataLoading && (state.kind === 'empty' || state.kind === 'error') && (
+      {!dataLoading && (state.kind === 'empty' || state.kind === 'error' || isVacuumResultsState(state)) && (
         <ul className="concierge-starter-chips" aria-label="示例搜索">
           {STARTER_CHIPS.map((chip) => (
             <li key={chip}>
