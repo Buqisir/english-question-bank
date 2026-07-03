@@ -69,7 +69,13 @@ SESSION_SECRET 的生成、注入、轮换——多一个 env 变量、多一类
 
 用户库演进机制维持「幂等 ensure（CREATE IF NOT EXISTS，未来需要时
 ALTER 补列）」，但 `ensureUserDatabaseShape` 末尾写
-`PRAGMA user_version = 2`（0 = 分库前；1 = M0-1 shape；2 = 本刀）。
+`PRAGMA user_version = 2`。
+
+版本口径（PA MF-1 修正）：**0 = M0-2 之前**（全仓从未写过
+user_version，M0-1 及更早的真实库恒为 0）；**2 = M0-2 起**（含 auth
+表）。「1」未曾发行、永久留空——真实库从 0 直接跳 2。未来所有条件
+迁移**必须用 `version < N` 比较，禁止 `version === N`**（幂等 ensure
+模型下，相等比较对跳代库是死分支）。本刀不引任何条件迁移分支。
 
 理由：auth 数据进库后，"删库重建"不再是可接受的兜底，未来 schema
 变更（M0-4 加 user_id 列）需要一个机器可读的"库处于哪一代"锚点做

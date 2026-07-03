@@ -64,8 +64,11 @@ cut size: large; touches schema, data contract, product boundary: yes
   「先建号再暴露公网」（记入 ADR-0012 风险节）。
 - 公开路径白名单（强制模式下仍放行）：`OPTIONS` 预检、
   `POST /api/auth/login`、`GET /api/auth/me`（未登录时它自己回 401，
-  但不算"拦"——前端靠它探测登录态）。**其余一切请求都拦**，包括
-  `/paper-assets/*`、`/user-space/*` 静态与硬编码 verify-trace 路由。
+  但不算"拦"——前端靠它探测登录态）、`GET /api/health`（正则精确
+  `^\/api\/health$`，M1 uptime 探活必须免鉴权，PA MF-2）。
+  **其余一切请求都拦**，包括 `/paper-assets/*` 静态特判、
+  `/user-space/*.pdf` 路由（在 mySpaceRoutes 内，闸在 runRoutes 前
+  天然覆盖）与硬编码 verify-trace 路由。
 
 ### 决策 2：闸的位置 = 主 handler 单点，不进各路由工厂
 
@@ -130,10 +133,15 @@ CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
 
 ### 决策 5：SW-4 落地 = `PRAGMA user_version`，不引 migration 框架
 
-- `ensureUserDatabaseShape` 末尾执行 `PRAGMA user_version = 2`
-  （追溯口径：0 = 分库前，1 = M0-1 shape，2 = 本刀含 auth 表）。
-- 机制仍是幂等 ensure；version 是给未来刀（M0-4 加列）做条件迁移的
-  锚点，不是框架。ADR-0012 决策 5 记录裁决理由，SW-4 挂账就此结清。
+- `ensureUserDatabaseShape` 末尾执行 `PRAGMA user_version = 2`。
+- 版本口径（PA MF-1 修正）：**0 = M0-2 之前（含 M0-1 及更早，全仓
+  从未写过 user_version，真实库恒为 0）；2 = M0-2 起（含 auth 表）。
+  「1」未曾发行，永久留空**——真实库会从 0 直接跳 2。
+- **未来所有条件迁移必须用 `version < N` 比较，禁止 `version === N`**
+  （幂等 ensure 模型下相等比较是死分支陷阱）。
+- **本刀不引任何条件迁移分支**：CREATE IF NOT EXISTS 已幂等，version
+  仅作未来刀（M0-4 加列）的锚点。DEV 不得加"先判版本再建表"逻辑。
+- ADR-0012 决策 5 记录裁决理由，SW-4 挂账就此结清。
 
 ### 决策 6：服务端路由 = `server/auth/authRoutes.mjs` 工厂
 
@@ -161,7 +169,13 @@ CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
 - 新 `app/src/auth/AuthGate.tsx`：挂载时 `fetchMe()`；
   loading → 极简占位；`authRequired && !user` → 渲染 LoginPage；
   否则渲染 children 并通过 context/prop 提供当前 user。
-  `main.tsx:40-44` 处用 `<AuthGate>` 包住 `<RootComponent />`。
+- 挂载点事实纠正（PA MF-3）：`main.tsx` 的 `RootComponent`
+  （`main.tsx:33-38`）只有**两个**分支——`reading-analysis` →
+  `ReadingAnalysisDemoRoute`，否则 `App`（paper-intelligence 不是
+  独立顶层组件，它在 App 外壳内由 piRoute prop 驱动）。AuthGate
+  包裹点锁定为 `createRoot().render` 处包住 `<RootComponent />`
+  一处，两个分支自动全在门后。**`?view=reading-analysis` 在强制
+  模式下未登录必须看到登录页而非内容**——这是安全边界，验收显式测。
 - 新 `app/src/auth/LoginPage.tsx`：居中卡片，「英语题库工作台」标题 +
   用户名/密码/登录按钮 + 错误提示（"用户名或密码不正确"）。视觉跟
   现有 app 气质走（读现有 CSS 变量/字体，不引新依赖）。登录成功后
@@ -199,7 +213,10 @@ CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
   `scripts/verify-auth-gate.mjs`、`docs/adr/0012-*.md`。
 - 改：`server/api.mjs`（ensure 挂入 + 闸 + serverRoutes 汇总 +
   sendJson credentials 头 + user_version）、`server/package.json`
-  （argon2）、`app/src/main.tsx`（AuthGate 包裹）、`app/src/App.tsx`
+  **+ `server/package-lock.json` 同刀更新**（PA MF-4：server 用
+  npm 非 pnpm，CI 跑 `npm ci` 严格校验 lockfile，漏更新则 CI 装
+  依赖直接红；用 `npm install argon2` 在 server/ 下生成锁）、
+  `app/src/main.tsx`（AuthGate 包裹）、`app/src/App.tsx`
   （topbar 用户名/退出，display-only）、`scripts/verify-ci.mjs` +
   `scripts/README.md`（注册新 verify，housekeeping 闸要求同刀内完成）、
   必要的 CSS（登录页样式，新文件或既有全局表，跟现状惯例走）。
@@ -222,19 +239,38 @@ CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
    200 且 `/api/auth/me` 回 `authRequired:false`；(b) 用 CLI 真跑
    `create-user`（child process，验证脚本本体）；(c) 强制模式：无
    cookie 401、错密码 401、登录成功拿 cookie 后同 API 200、
-   `/paper-assets/` 无 cookie 401；(d) logout 后旧 cookie 401；
-   (e) `--disable` 后该用户即时 401。**断言用状态码 + 响应体字段，
-   不用正则匹配空串可通过的写法**（M0-1 MF-4 假绿教训）。
+   `/paper-assets/` 无 cookie 401、**`GET /api/health` 无 cookie 仍
+   200（PA MF-2）**；(d) logout 后旧 cookie 401；(e) `--disable` 后
+   该用户即时 401。**断言用状态码 + 响应体字段，不用正则匹配空串
+   可通过的写法**（M0-1 MF-4 假绿教训）。
 2. 存量套件：`pnpm -C app run verify:all` 全绿（重点证明 bootstrap
    开放模式没有破坏任何现有 smoke/verify——它们必须零改动通过；若
    有任何一个需要改脚本才能过，停下来回报 PM，不许静默改脚本）。
+   argon2 装完后 `npm ci`（server/ 下）必须绿（lockfile 已同步，
+   PA MF-4）。
 3. 浏览器 QA（PM 做）：dev 起服 → 开放模式一切照旧 → create-user →
    刷新被踢到登录页 → 登录进入工作台 → topbar 显示用户名 → 退出回
    登录页 → 错密码有人话错误提示 → 第二个浏览器 profile 未登录直接
-   看到登录页。
+   看到登录页 → **未登录直访 `?view=reading-analysis` 看到登录页
+   而非内容（PA MF-3 安全边界）**。
 4. `node scripts/verify-cut-artifacts.mjs docs/cuts/m0-2-invite-login large`
    过（plan/pa/cr/cut-note 齐）。
 
 ## PA Follow-Up Decisions
 
-（PA 审后由 PM 压缩回填）
+PA 审阅（pa.md，APPROVE WITH MUST FIX，0 未决 PO 决策）→ PM 全部
+采纳压缩回本 plan：
+
+- **MF-1 采纳**：决策 5 版本口径改 0/2 两代（「1」永久留空）、明文
+  `< N` 禁 `=== N`、本刀不引条件迁移分支。ADR-0012 决策 5 同步订正。
+- **MF-2 采纳**：决策 1 白名单加 `GET /api/health`（精确正则）；
+  验收 1(c) 加 health 无 cookie 200 断言。
+- **MF-3 采纳**：决策 7 改述为两顶层分支、AuthGate 锁定
+  `createRoot().render` 处包 `RootComponent`；验收 3 加
+  reading-analysis 门后 QA。
+- **MF-4 采纳**：改动清单补 `server/package-lock.json` 同刀更新
+  （server=npm）；验收 2 加 `npm ci` 绿。
+- SW-1~SW-6 记录在案不阻塞；SW-5 措辞已在决策 1 顺带订正
+  （`/user-space/*.pdf` 是路由非静态特判）。
+- HMAC 偏差经 PA 判定为**实现细化非决策变更**（pa.md「SPEC 一致性
+  判断」节），报 owner 追认即可，非前置放行门。
