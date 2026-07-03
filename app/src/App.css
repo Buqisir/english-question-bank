@@ -133,6 +133,18 @@
   background: var(--mint-soft);
 }
 
+.topbar-user-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-username {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .data-status.sample {
   color: var(--amber-text);
   background: var(--amber-soft);

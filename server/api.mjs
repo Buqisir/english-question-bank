@@ -33,6 +33,8 @@ import { createAiProxyRoutes } from './ai-proxy/routes.mjs'
 import { defineRoute, readJsonRouteBody, runRoutes } from './router/index.mjs'
 import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/mySpace.mjs'
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
+import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromRequest, renewSession, sessionNeedsRenewal } from './auth/auth.mjs'
+import { createAuthRoutes } from './auth/authRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
@@ -474,6 +476,7 @@ serverContext.draftPaperStore = draftPaperStore
 
 const serverRoutes = [
   ...h1Routes,
+  ...createAuthRoutes(),
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createPaperImportAiRoutes(),
@@ -581,6 +584,7 @@ function sendJson(response, status, body) {
     'access-control-allow-origin': 'http://127.0.0.1:5173',
     'access-control-allow-methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
     'access-control-allow-headers': 'content-type',
+    'access-control-allow-credentials': 'true',
     'access-control-expose-headers': 'x-verify-request-id, x-parse-request-id',
     'content-type': 'application/json; charset=utf-8',
   })
@@ -640,7 +644,10 @@ function openDatabase({ readOnly = true } = {}) {
 // User-data database (draft papers + My Space). Unlike the shared bank database,
 // this one is self-healing: deploys never ship this file, so the shape must be
 // created on demand rather than requiring scripts/init-db.sh to run first.
-function openUserDatabase({ readOnly = false } = {}) {
+// Exported so scripts/create-user.mjs can open the same user database the
+// server uses at runtime (plan.md decision 8 — reuse, do not duplicate the
+// connection/ensure logic).
+export function openUserDatabase({ readOnly = false } = {}) {
   mkdirSync(path.dirname(userDataDbPath), { recursive: true })
   const db = new DatabaseSync(userDataDbPath, { readOnly })
   db.exec('PRAGMA foreign_keys = ON')
@@ -691,6 +698,13 @@ export function ensureUserDatabaseShape(db) {
     CREATE INDEX IF NOT EXISTS idx_draft_paper_items_group ON draft_paper_items(group_id);
   `)
   ensureMySpaceDatabaseShape(db)
+  ensureAuthDatabaseShape(db)
+  // Schema-version anchor for the user database (plan.md decision 5 / ADR-0012
+  // decision 5). 0 = pre-M0-2 (every real database today, since this repo never
+  // wrote user_version before); 2 = M0-2 (adds users/sessions). "1" was never
+  // shipped and stays permanently unused — real databases jump 0 -> 2 directly.
+  // Future conditional migrations MUST compare with `< N`, never `=== N`.
+  db.exec('PRAGMA user_version = 2')
 }
 
 function warnIfSharedDatabaseStillHasUserTables() {
@@ -4093,6 +4107,78 @@ function listUnlabeledGroupIds() {
   }
 }
 
+// Public paths that stay reachable even in forced-auth mode (plan.md decision 1 /
+// ADR-0012 decision 2). Everything else — including /paper-assets/ static files
+// and the /user-space/*.pdf route inside mySpaceRoutes — is gated because this
+// check runs before both the static special-case and runRoutes.
+const AUTH_PUBLIC_ROUTES = [
+  { method: 'POST', pattern: /^\/api\/auth\/login$/ },
+  { method: 'GET', pattern: /^\/api\/auth\/me$/ },
+  { method: 'GET', pattern: /^\/api\/health$/ },
+]
+
+function isAuthPublicRoute(method, pathname) {
+  return AUTH_PUBLIC_ROUTES.some((route) => route.method === method && route.pattern.test(pathname))
+}
+
+// Single-point auth gate (plan.md decision 2 / ADR-0012 decision 2). Bootstrap-open
+// mode (empty users table) never blocks anything — this keeps every existing
+// smoke/verify script (each spawning its own temp empty database) green with zero
+// changes. Once the first user exists, every non-whitelisted request needs a valid,
+// non-expired session for an active user; a session close to expiry is renewed
+// (sliding TTL) on a short-lived write connection.
+//
+// GET /api/auth/me is whitelisted (never 401s here) but still needs the resolved
+// session attached to context so its own handler can report authRequired/user —
+// so the whitelist only suppresses the "write 401 and stop" behavior below, it
+// does not skip session resolution.
+//
+// Returns `{ session }` (session is null when unauthenticated/open-mode) when the
+// request should proceed, or `null` when this function has already written the
+// response and the caller must return without doing anything else.
+function applyAuthGate(request, response, pathname) {
+  const isPublic = isAuthPublicRoute(request.method, pathname)
+
+  const readDb = openUserDatabase({ readOnly: true })
+  let usersExist
+  try {
+    usersExist = countUsers(readDb) > 0
+  } finally {
+    readDb.close()
+  }
+
+  if (!usersExist) {
+    // Bootstrap-open mode: behave exactly like the pre-M0-2 server.
+    return { session: null }
+  }
+
+  const token = readSessionTokenFromRequest(request)
+  const readDbForSession = openUserDatabase({ readOnly: true })
+  let session
+  try {
+    session = readSession(readDbForSession, token)
+  } finally {
+    readDbForSession.close()
+  }
+
+  if (!session) {
+    if (isPublic) return { session: null }
+    sendJson(response, 401, { error: 'not_authenticated' })
+    return null
+  }
+
+  if (sessionNeedsRenewal(session)) {
+    const writeDb = openUserDatabase({ readOnly: false })
+    try {
+      renewSession(writeDb, session.tokenHash)
+    } finally {
+      writeDb.close()
+    }
+  }
+
+  return { session: { userId: session.userId, username: session.username, role: session.role } }
+}
+
 const server = createServer(async (request, response) => {
   if (!request.url) {
     sendJson(response, 400, { error: 'Missing URL' })
@@ -4107,12 +4193,24 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || '127.0.0.1'}`)
 
   try {
+    const authResult = applyAuthGate(request, response, url.pathname)
+    if (!authResult) {
+      return
+    }
+
     if (request.method === 'GET' && url.pathname.startsWith('/paper-assets/')) {
       sendPaperAssetStatic(response, url.pathname)
       return
     }
 
-    if (await runRoutes(serverRoutes, { request, response, url, context: serverContext })) {
+    if (
+      await runRoutes(serverRoutes, {
+        request,
+        response,
+        url,
+        context: authResult.session ? { ...serverContext, session: authResult.session } : serverContext,
+      })
+    ) {
       return
     }
 
@@ -4156,6 +4254,19 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   openUserDatabase({ readOnly: false }).close()
   cleanupPaperImportTempArtifacts(paperAssetsDir)
   ensureMySpaceFilesRoot(userSpaceFilesDir)
+
+  {
+    const db = openUserDatabase({ readOnly: true })
+    try {
+      if (countUsers(db) === 0) {
+        console.warn(
+          '[auth] users 表为空，登录未启用 — 运行 node scripts/create-user.mjs 创建账号（上线部署前必须先建号，见 ADR-0012 决策 1）',
+        )
+      }
+    } finally {
+      db.close()
+    }
+  }
 
   server.listen(port, '127.0.0.1', () => {
     console.log(`Question bank API listening on http://127.0.0.1:${port}`)
