@@ -68,6 +68,7 @@ const registry = {
   'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-h12a-entry-modal.mjs',
   'scripts/verify-h12b-difficulty-profile-grid.mjs',
+  'scripts/verify-restart1-local-search-intent.mjs',
   ],
 }
 

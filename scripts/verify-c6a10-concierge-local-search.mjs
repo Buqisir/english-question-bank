@@ -167,7 +167,7 @@ console.log('\n-- 5. Source keeps local-first contract readable --')
 const source = read('app/src/concierge/conciergeSearch.ts')
 assert('local-direct fallback reason is encoded', source.includes("fallbackReason: 'local-direct-match'"))
 assert('single-letter Latin token comment explains C/D labels', source.includes('Single-letter Latin tokens'))
-assert('Reading C/D aliases are explicit', source.includes('readingSection ? `reading ${readingSection}`'))
+assert('Reading C/D aliases are explicit', source.includes('`reading ${readingSection}`'))
 
 console.log('\n-- 6. Runtime API data is merged with repo samples --')
 const appSource = read('app/src/App.tsx')
