@@ -126,6 +126,7 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-c8-my-space-contracts.mjs` | C8 PR B My Space storage/API/UI contract; cut-specific | no |
 | `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model | yes |
 | `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |
+| `verify-error-copy-mainline.mjs` | Cut ⑧ error-copy-mainline: `describeError` human-copy helper contract, MySpacePage + DraftPaperWorkbench zero raw `error.message`/`String(error)` residue, my-space failure-state retry button + single-render de-dup, draft-paper workbench errors don't clear in-progress work | no |
 | `verify-paper-blocks-numbering.mjs` | Paper block numbering | no |
 | `verify-paper-layout-roundtrip.mjs` | Layout model roundtrip | no |
 | `verify-paper-export-flow.mjs` | Export flow | no |
