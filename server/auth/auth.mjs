@@ -16,6 +16,30 @@ const SESSION_TTL_DAYS = 30
 const SESSION_RENEW_THRESHOLD_DAYS = 15
 const MS_PER_DAY = 24 * 60 * 60 * 1000
 
+// M0-4 user data isolation (docs/cuts/m0-4-user-scope/plan.md decision 1 /
+// ADR-0014 decision 1): sentinel user_id for bootstrap-open mode (no users
+// table rows). NOT null — SQLite unique indexes treat NULL as distinct from
+// itself, which would silently break UNIQUE(user_id, name) and the per-user
+// current-draft partial unique index. `users.id` is always `user-<uuid>`
+// (see createUser below) so this string can never collide with a real user.
+export const LOCAL_USER_ID = 'local'
+
+// Single translation point (plan.md decision 2 / ADR-0014 decision 2): only
+// route handlers / api.mjs top-level code may call this. Stores and deeper
+// services must receive an explicit required userId parameter and must never
+// read context/session themselves (mirrors the isOwnerView single-translation
+// convention from ADR-0013). Enforced mode with no session is a bug (these
+// routes are never on the auth whitelist), so it throws instead of silently
+// falling back to LOCAL_USER_ID.
+export function resolveDataUserId(context) {
+  if (context?.authMode === 'enforced') {
+    const userId = context?.session?.userId
+    if (!userId) throw new Error('resolveDataUserId: enforced mode session missing userId')
+    return userId
+  }
+  return LOCAL_USER_ID
+}
+
 export function ensureAuthDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS users (
@@ -90,6 +114,10 @@ export function findUserById(db, userId) {
 export function createUser(db, { username, passwordHash, role = 'member' }) {
   const trimmedUsername = String(username || '').trim()
   if (!trimmedUsername) throw new Error('用户名不能为空')
+  // Belt-and-suspenders (plan.md decision 1): `users.id` is always `user-<uuid>`
+  // so it can never collide with LOCAL_USER_ID, but reject a username of
+  // 'local' too, in case some future caller keys lookups off username instead.
+  if (trimmedUsername === LOCAL_USER_ID) throw new Error("用户名不能为 'local'")
   const id = `user-${randomUUID()}`
   const timestamp = nowIso()
   try {
