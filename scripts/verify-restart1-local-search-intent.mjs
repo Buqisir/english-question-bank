@@ -76,6 +76,7 @@ const {
   rankByKeywords,
   runConciergeSearch,
 } = await import(path.join(root, 'app/src/concierge/conciergeSearch.ts'))
+const { pickResultsNoticeLine } = await import(path.join(root, 'app/src/concierge/clarificationCopy.ts'))
 const { questionGroups: sampleQuestionGroups } = await import(
   path.join(root, 'app/src/data/sampleQuestionGroups.ts')
 )
@@ -499,6 +500,358 @@ const groupCardSource = read('app/src/concierge/ConciergeGroupCard.tsx')
 assert('ConciergeGroupCard derives a topic leaf label (not the raw full path)', groupCardSource.includes('topicLeafLabel'))
 const paperRowSource = read('app/src/concierge/ConciergePaperRow.tsx')
 assert('ConciergePaperRow builds topic chips from matched groups', paperRowSource.includes('buildTopicChips'))
+
+// ------------------------------------------------------------------------
+console.log('\n-- 11. Restart cut ⑤ — honest degrade: weak/noise floor, three-state notice --')
+
+// A real bank is large enough that a garbled query's isolated 2-char CJK
+// bigrams will coincidentally substring-match SOME field of SOME group —
+// this pool mirrors that shape (real-DB browser QA found 3 false "hits" for
+// "zzxqwqxyz 不存在的题目 12345" before this cut). Each noise group matches
+// on exactly one incidental bigram, nothing else — the shape that must be
+// dropped as noise, not surfaced as "可能相关".
+function noiseGroup(id, summary, overrides = {}) {
+  return {
+    ...sampleQuestionGroups[0],
+    id,
+    tags: [],
+    topicLabels: [],
+    title: 'Reading A',
+    summary,
+    groupType: 'reading',
+    ...overrides,
+  }
+}
+const gibberishNoisePool = [
+  noiseGroup('restart5-noise-1', '文章讨论了某项技术是否真实存在的问题。'),
+  noiseGroup('restart5-noise-2', '介绍了一道有趣的数学题目和解法。'),
+  noiseGroup('restart5-noise-3', '短文围绕作者童年一件小事展开，与其余关键词均无关。'),
+]
+
+{
+  const gibberishHits = rankByKeywords(gibberishNoisePool, 'zzxqwqxyz 不存在的题目 12345')
+  assertEqual(
+    'gibberish query against realistic noise pool drops isolated-bigram coincidences (rankByKeywords)',
+    gibberishHits.length,
+    0,
+  )
+
+  const gibberishOutcome = await runConciergeSearch({
+    intent: 'zzxqwqxyz 不存在的题目 12345',
+    apiKey: '',
+    questionGroups: gibberishNoisePool,
+  })
+  assertEqual('gibberish query outcome kind (empty results, not error)', gibberishOutcome.kind, 'results')
+  // This is the exact shape ConciergeDesk.tsx's isVacuumResultsState checks
+  // (kind === 'results' && hits.length === 0) to decide whether to render
+  // starter chips (CR-5 SW-1: verify-concierge-desk.mjs Test 12 pins that
+  // predicate's source text directly) — asserting it here ties the search
+  // layer's contract to what the UI actually keys off, so this assertion
+  // cannot silently drift back to fake-green if the desk's gate changes.
+  assertEqual(
+    'gibberish query reaches the true vacuum state (kind=results, hits=[]) — the exact shape isVacuumResultsState renders chips for',
+    gibberishOutcome.kind === 'results' ? gibberishOutcome.hits.length : -1,
+    0,
+  )
+}
+
+{
+  // A vague-but-real Chinese query ("随便 教学反思") is NOT gibberish — one
+  // of its runs ("教学", a real 2-character word) is common enough in this
+  // pool (DF >= DF_NOISE_THRESHOLD, see the pool below) to read as a real
+  // content word, so the hit must still surface — but honestly labelled
+  // weak (no topic/section/place signal backs it, only a general-field
+  // word match) rather than silently treated as a confident match. This is
+  // the acceptance-bullet "「随便找找看」类泛词→弱语气标识" case: distinct
+  // from the pure-gibberish case above because "教学" is corpus-common, not
+  // an isolated single-occurrence bigram coincidence.
+  function dfPoolGroup(id, summary) {
+    return {
+      ...sampleQuestionGroups[0],
+      id,
+      tags: [],
+      topicLabels: [],
+      title: 'Reading',
+      summary,
+      groupType: 'reading',
+    }
+  }
+  const dfRealisticPool = [
+    dfPoolGroup('restart5-df-target', '本文围绕一位教师调整教学方式后学生反馈变化展开，随笔记录了教学反思。'),
+    dfPoolGroup('restart5-df-1', '一篇关于课堂教学评价改革的说明文。'),
+    dfPoolGroup('restart5-df-2', '介绍某校教学楼改造项目的应用文通知。'),
+    dfPoolGroup('restart5-df-3', '记叙一名支教老师的教学经历与感悟。'),
+  ]
+  const vagueHits = rankByKeywords(dfRealisticPool, '随便 教学反思')
+  // "教学" is DF-common across this whole pool (every group mentions
+  // teaching), so a real teacher's vague query surfaces every group that
+  // shares the word — the specific target (which also matches 反思/学反)
+  // ranks first, but a broad common word legitimately fanning out to
+  // several weak cards is the intended honest-degrade behavior, not a bug.
+  assert(
+    'vague generic query still surfaces its phrase-match hit, ranked first',
+    vagueHits.length >= 1 && vagueHits[0]?.group.id === 'restart5-df-target',
+    JSON.stringify(vagueHits.map((h) => h.group.id)),
+  )
+  assert(
+    'every surfaced hit for the vague generic query is flagged weak (no topic/section/place signal anywhere in this pool)',
+    vagueHits.every((h) => h.weak === true),
+    JSON.stringify(vagueHits.map((h) => [h.group.id, h.weak])),
+  )
+  assert(
+    'weak hit reason uses "可能相关" phrasing, never "命中"/"匹配关键词"',
+    /可能相关/.test(vagueHits[0]?.reason || '') && !/匹配关键词|命中/.test(vagueHits[0]?.reason || ''),
+    vagueHits[0]?.reason,
+  )
+
+  const vagueOutcome = await runConciergeSearch({
+    intent: '随便 教学反思',
+    apiKey: '',
+    questionGroups: dfRealisticPool,
+  })
+  assertEqual('vague query outcome kind', vagueOutcome.kind, 'results')
+  assert(
+    'vague query outcome is marked allWeak',
+    vagueOutcome.kind === 'results' && vagueOutcome.source === 'fallback' && vagueOutcome.allWeak === true,
+    JSON.stringify(vagueOutcome),
+  )
+  assertEqual(
+    'pickResultsNoticeLine renders the honest "主题相近" notice for an allWeak outcome',
+    vagueOutcome.kind === 'results' && vagueOutcome.source === 'fallback'
+      ? pickResultsNoticeLine(vagueOutcome.allWeak, vagueOutcome.assistantMessage)
+      : '',
+    '没有精确匹配，以下是主题相近的题组。',
+  )
+}
+
+// ------------------------------------------------------------------------
+console.log('\n-- 11b. Restart cut ⑤ CR-5 MF-1 fix: unspaced Chinese content-word queries are NOT noise --')
+
+{
+  // CR-5 measured real bug: "找篇科技文" / "讲科技的文章" / "科技文章"
+  // (unspaced — the most natural real teacher input shape) all dropped to
+  // ZERO hits under the V1 "whole-run token" noise floor, because "科技"
+  // carved out of an unbroken run is structurally identical to a
+  // coincidental bigram carved out of gibberish — neither is ever a
+  // "whole-run" token. DF (measured against a pool where "科技" is
+  // corpus-common) fixes this: unlike the earlier "随便 教学反思" test
+  // (single matched word, DF-driven), this pool exercises the exact
+  // CR-5-cited real-world query shapes end to end, including the
+  // `runConciergeSearch` no-API-key path.
+  function techPoolGroup(id, overrides = {}) {
+    return {
+      ...sampleQuestionGroups[0],
+      id,
+      tags: [],
+      topicLabels: [],
+      groupType: 'reading',
+      ...overrides,
+    }
+  }
+  const techPool = [
+    techPoolGroup('restart5-tech-target', {
+      title: '2024 · B 篇',
+      summary: '本文是一篇科技说明文，介绍人工智能在教育领域的最新科技应用与文章讨论的伦理争议。',
+    }),
+    techPoolGroup('restart5-tech-2', { title: 'Reading', summary: '一家科技公司发布新的智能设备，科技媒体广泛报道。' }),
+    techPoolGroup('restart5-tech-3', { title: 'Reading', summary: '科技发展如何改变了人们的日常科技生活方式。' }),
+    techPoolGroup('restart5-tech-noise', { title: 'Reading', summary: '本文围绕一次家庭旅行展开，与科技话题完全无关，但意外存在一个巧合词。' }),
+  ]
+  for (const q of ['找篇科技文', '讲科技的文章', '科技文章']) {
+    const out = await runConciergeSearch({ intent: q, apiKey: '', questionGroups: techPool })
+    assertEqual(`"${q}" outcome kind`, out.kind, 'results')
+    assert(
+      `"${q}" (unspaced Chinese content word) resolves to >= 1 hit, not a false vacuum state`,
+      out.kind === 'results' && out.hits.length >= 1,
+      out.kind === 'results' ? JSON.stringify(out.hits.map((h) => h.group.id)) : '',
+    )
+    assert(
+      `"${q}" surfaces the real 科技 target group specifically`,
+      out.kind === 'results' && out.hits.some((h) => h.group.id === 'restart5-tech-target'),
+      out.kind === 'results' ? JSON.stringify(out.hits.map((h) => h.group.id)) : '',
+    )
+  }
+}
+
+{
+  // Gate ②: the exact CR-5 gibberish redline query must STILL resolve to
+  // the true vacuum state against a DF-realistic pool that also contains a
+  // legitimate low-DF real word ("科技") elsewhere — proving the fix did not
+  // just raise DF's absolute bar so high that gibberish sneaks through a
+  // multiplicity loophole. "不存在的题目" only ever contributes ONE run's
+  // worth of matched tokens to any single candidate (see run-id grouping in
+  // `rankKeywordCandidates`), so it cannot manufacture multiplicity either.
+  function techPoolGroup(id, overrides = {}) {
+    return {
+      ...sampleQuestionGroups[0],
+      id,
+      tags: [],
+      topicLabels: [],
+      groupType: 'reading',
+      ...overrides,
+    }
+  }
+  const techPool = [
+    techPoolGroup('restart5-tech-target', { title: '2024 · B 篇', summary: '本文是一篇科技说明文，介绍人工智能在教育领域的科技应用。' }),
+    techPoolGroup('restart5-gibberish-noise-1', { title: 'Reading', summary: '文章讨论了某项技术是否真实存在的问题。' }),
+    techPoolGroup('restart5-gibberish-noise-2', { title: 'Reading', summary: '介绍了一道有趣的数学题目和解法。' }),
+  ]
+  const out = await runConciergeSearch({
+    intent: 'zzxqwqxyz 不存在的题目 12345',
+    apiKey: '',
+    questionGroups: techPool,
+  })
+  assertEqual('CR-5 gibberish redline outcome kind', out.kind, 'results')
+  assertEqual(
+    'CR-5 gibberish redline still resolves to the true vacuum state even alongside a DF-legitimate 科技 group',
+    out.kind === 'results' ? out.hits.length : -1,
+    0,
+  )
+}
+
+{
+  // pickResultsNoticeLine non-regression: a confident (non-weak) fallback
+  // result must keep showing its ordinary assistantMessage, not the weak
+  // notice.
+  assertEqual(
+    'pickResultsNoticeLine passes through the ordinary message when allWeak is false',
+    pickResultsNoticeLine(false, '已按本地题库精确信息匹配。'),
+    '已按本地题库精确信息匹配。',
+  )
+}
+
+// ------------------------------------------------------------------------
+console.log('\n-- 12. Restart cut ⑤ redline: cut ① acceptance queries must stay non-weak --')
+
+{
+  // Every query cut ① locked down as a confident local match must still
+  // resolve non-weak after the noise-floor/weak-tagging change — these all
+  // carry real topic-label / 篇位 / 地区+年份 signal, not incidental
+  // general-tier noise.
+  const ecoGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-eco',
+    tags: [],
+    title: '2026 浙江卷 阅读 C 生态修复',
+    section: '阅读理解 C',
+    year: 2026,
+    region: '浙江',
+    groupType: 'reading',
+    topicLabels: [
+      { label: '人与自然-自然生态-生态环境', theme: '人与自然', themeGroup: '自然生态', subtopic: '生态环境' },
+    ],
+  }
+  const ecoHits = rankByKeywords([ecoGroup], '生态主题 C 篇')
+  assert('redline "生态主题 C 篇" (topic-label hit) is not weak', ecoHits[0]?.weak !== true, JSON.stringify(ecoHits[0]))
+
+  // Topic label leaf is "环境保护" (a real gaokao topic label, and a PREFIX
+  // match for the query's "环境保护" token — unlike "生态环境", which is a
+  // suffix match and correctly does not clear the topic-tier prefix rule;
+  // see cut ①'s topicSegmentMatchesToken doc comment).
+  const envGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-env',
+    tags: [],
+    title: 'Reading D',
+    section: '第二部分 阅读 / 第一节 阅读理解',
+    groupType: 'reading',
+    topicLabels: [
+      { label: '人与自然-环境问题-环境保护', theme: '人与自然', themeGroup: '环境问题', subtopic: '环境保护' },
+    ],
+  }
+  const envOutcome = await runConciergeSearch({
+    intent: '找一篇讲环境保护的阅读，中等难度，最好是近三年的',
+    apiKey: '',
+    questionGroups: [envGroup],
+  })
+  assert(
+    'redline natural-language 环保阅读 query resolves non-weak',
+    envOutcome.kind === 'results' &&
+      envOutcome.hits.length > 0 &&
+      envOutcome.hits.every((h) => h.weak !== true),
+    JSON.stringify(envOutcome),
+  )
+
+  const zjGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-zj',
+    tags: [],
+    groupType: 'cloze',
+    region: '浙江',
+    year: 2025,
+    section: '完形填空',
+  }
+  const zjOutcome = await runConciergeSearch({ intent: '2025 浙江卷', apiKey: '', questionGroups: [zjGroup] })
+  assert(
+    'redline "2025 浙江卷" (region+year dimension hit) resolves non-weak',
+    zjOutcome.kind === 'results' && zjOutcome.hits.every((h) => h.weak !== true),
+    JSON.stringify(zjOutcome),
+  )
+
+  const scGroup = {
+    ...sampleQuestionGroups[0],
+    id: 'restart5-redline-sc',
+    tags: [],
+    groupType: 'seven_choices',
+    region: '浙江',
+    year: 2025,
+    section: '七选五',
+  }
+  const scOutcome = await runConciergeSearch({ intent: '七选五', apiKey: '', questionGroups: [scGroup] })
+  assert(
+    'redline "七选五" (groupType dimension hit) resolves non-weak',
+    scOutcome.kind === 'results' && scOutcome.hits.every((h) => h.weak !== true),
+    JSON.stringify(scOutcome),
+  )
+
+  const readingCHits = rankByKeywords(sampleQuestionGroups, 'reading C')
+  assert(
+    'redline plain "reading C" (section-letter hit) resolves non-weak',
+    readingCHits.length > 0 && readingCHits.every((h) => h.weak !== true),
+    JSON.stringify(readingCHits.map((h) => h.weak)),
+  )
+}
+
+// ------------------------------------------------------------------------
+console.log('\n-- 13. CR-5 SW-2: weak reasons never expose meaningless carve fragments --')
+
+{
+  // "议论文" is made DF-common across this small pool (3 groups all mention
+  // it — a real, generic essay-type word) so the target candidate clears
+  // the noise floor via DF, not via multiplicity. Its summary ALSO contains
+  // "存在的问题", which the query's second run ("不存在的问题") carves into
+  // overlapping bigram fragments ("存在"/"在的"/"的问"/"问题") that
+  // independently match — but the run-grouping in `pickDisplayTokens`
+  // collapses those to their run's single longest token, so a fragment like
+  // "在的"/"的问" must never leak into the visible reason (CR-5's repro:
+  // "可能相关：的完、完形" / "可能相关：议论、论文、阅读"). The overall
+  // score must stay below the confidence floor so this exercises the WEAK
+  // path specifically, not the confident path.
+  function essayPoolGroup(id, summary) {
+    return { ...sampleQuestionGroups[0], id, tags: [], topicLabels: [], title: 'Reading', summary, groupType: 'reading' }
+  }
+  const essayPool = [
+    essayPoolGroup('restart5-sw2-target', '这是一篇议论文，某处提到政策存在的疑虑，未展开更多细节。'),
+    essayPoolGroup('restart5-sw2-df-1', '一篇关于教育改革的议论文写作范例。'),
+    essayPoolGroup('restart5-sw2-df-2', '这篇议论文分析了城市化进程的利弊。'),
+  ]
+  const hits = rankByKeywords(essayPool, '议论文 不存在的问题')
+  const target = hits.find((h) => h.group.id === 'restart5-sw2-target')
+  assert('SW-2 fragment-pollution fixture surfaces the target hit', !!target, JSON.stringify(hits.map((h) => h.group.id)))
+  assert('SW-2 target hit is weak (below confidence floor)', target?.weak === true, JSON.stringify(target))
+  const reason = target?.reason || ''
+  assert(
+    'weak reason does not contain the meaningless overlapping-bigram fragment "在的"',
+    !reason.includes('在的'),
+    reason,
+  )
+  assert(
+    'weak reason does not contain the meaningless overlapping-bigram fragment "的问"',
+    !reason.includes('的问'),
+    reason,
+  )
+  assert('weak reason still reads as honest "可能相关" phrasing', reason.startsWith('可能相关'), reason)
+}
 
 console.log(`\nRestart cut ① local-search-intent verify: ${passed} passed, ${failed} failed`)
 if (failed > 0) process.exit(1)

@@ -38,6 +38,14 @@ export type ConciergeSearchHit = {
   group: QuestionGroupCard
   /** Steward-supplied reason or local keyword reason. Never displayed as a score. */
   reason: string
+  /**
+   * True when this hit has no real dimension/topic signal (no topicLabel /
+   * 篇位 / 题型 / 地区 match) and only cleared the noise floor on scattered
+   * general-field substring hits. Steward-sourced hits are never weak — this
+   * only applies to the local keyword fallback. Absent/false means "normal
+   * confidence"; UI treats `undefined` the same as `false`.
+   */
+  weak?: boolean
 }
 
 export type ConciergeSearchOutcome =
@@ -59,6 +67,15 @@ export type ConciergeSearchOutcome =
       sentMessage: string
       source: 'fallback'
       fallbackReason: string
+      /**
+       * True when every hit in `hits` is `weak` (only fires when `hits` is
+       * non-empty — an empty result never reaches here, it takes the
+       * `kind: 'results', hits: []` shape instead so the desk can render the
+       * true vacuum state + starter chips). Lets the notice bar distinguish
+       * "no exact match, here is what's topically close" from an ordinary
+       * confident fallback match.
+       */
+      allWeak: boolean
     }
   | {
       kind: 'clarification'
@@ -173,6 +190,125 @@ export function tokenize(query: string): string[] {
   return Array.from(new Set(tokens))
 }
 
+/**
+ * Restart cut ⑤ helper: which "run" each `tokenize()` output token was
+ * produced from — a whitespace/punctuation-delimited segment's CJK run (the
+ * whole run itself, plus every bigram `cjkBigrams` carved out of IT, all
+ * share that run's id), or a standalone non-CJK segment (its own id).
+ *
+ * Feeds the multiplicity signal in `rankKeywordCandidates`: two bigrams
+ * carved from the SAME connected run ("存在" and "在的", both sliced out of
+ * "不存在的题目") are not independent evidence — they are two views of one
+ * coincidence, exactly the "存在的" 3-char span overlap CR-5 flagged. Two
+ * tokens from DIFFERENT runs ("随便" and "征集" in "随便 征集作品", or a
+ * mixed CJK+non-CJK query) genuinely are two separate coincidences, which is
+ * much less likely to both be accidental.
+ */
+function tokenRunIdsOf(query: string): Map<string, number> {
+  const raw = query
+    .replace(/[，。、；：！？,.!?;:()（）【】"'《》<>\\/|]/g, ' ')
+    .split(/\s+/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+
+  const runIds = new Map<string, number>()
+  let nextRunId = 0
+  for (const segment of raw) {
+    let cjkRun = ''
+    const flushCjkRun = () => {
+      if (!cjkRun) return
+      const runId = nextRunId++
+      if (!CJK_STOPWORDS.has(cjkRun)) runIds.set(cjkRun, runId)
+      for (const gram of cjkBigrams(cjkRun)) {
+        if (!CJK_STOPWORDS.has(gram)) runIds.set(gram, runId)
+      }
+      cjkRun = ''
+    }
+    for (const ch of segment) {
+      if (isCjkChar(ch)) {
+        cjkRun += ch
+      } else {
+        flushCjkRun()
+      }
+    }
+    flushCjkRun()
+    const nonCjkOnly = /^[^一-鿿]+$/.test(segment)
+    if (nonCjkOnly) runIds.set(segment, nextRunId++)
+  }
+  return runIds
+}
+
+/**
+ * Restart cut ⑤ MF-1 fix — document-frequency (DF) noise signal.
+ *
+ * V1 of this cut used a "whole-run token" check (was the matched token a
+ * user-typed, delimiter-bounded unit, vs a `cjkBigrams` fragment carved out
+ * of a longer connected run). CR-5 measured that this misfires on the MOST
+ * common real teacher input shape — unspaced Chinese ("找篇科技文",
+ * "科技文章") — because a real 2-char content word carved out of an unbroken
+ * run is structurally IDENTICAL to a coincidental bigram carved out of
+ * gibberish; neither is ever a "whole run" token. That check silently
+ * dropped genuine hits.
+ *
+ * DF replaces it: build one combined haystack per group — every tier
+ * (topic label segments, section/place, tags, general fields) joined — and
+ * count, across the WHOLE candidate pool, how many groups' haystacks contain
+ * a given token as a substring. A token that is genuinely part of this
+ * bank's vocabulary ("科技" DF≈19, "生态" DF≈29, "写作" DF≈54 in the live
+ * 278-group bank) clears a small absolute floor easily; an isolated
+ * collision bigram carved from a garbled query ("存在"/"题目" from
+ * "不存在的题目") measured DF 1-2 — NOT reliably separable from DF alone at
+ * this floor, because a corpus this size also contains genuinely rare real
+ * words at DF 1-2 (e.g. "征集" DF=1 for one real 应用文 group).
+ *
+ * The DF floor is therefore combined with a second, complementary signal:
+ * matched-token COUNT. A query that only ever lands ONE isolated token on a
+ * given candidate (every gibberish-polluted candidate measured this way —
+ * "存在" alone, "题目" alone, never two) is much weaker evidence than a
+ * candidate matched by two OR MORE independent tokens (a coincidence has to
+ * happen twice on the same candidate, which is far less likely than once).
+ * A candidate clears the general-tier noise floor when EITHER signal fires:
+ * DF_THRESHOLD alone (a single but clearly-common token), or 2+ distinct
+ * matched tokens (multiple weaker/rarer tokens corroborating each other).
+ * This also keeps small hermetic test pools (1-12 groups, where an absolute
+ * DF of 3 may be structurally unreachable) working via the multiplicity path.
+ */
+const DF_NOISE_THRESHOLD = 3
+
+/**
+ * All haystack tiers joined into one substring-search string per group —
+ * topic label segments, section/place, tags, and general fields. Reuses
+ * `buildWeightedHaystacks` (already computed per group elsewhere) so this
+ * stays in lockstep with what the ranked score itself considers matchable;
+ * a token DF should reflect the SAME text the scorer searches, not a
+ * narrower/wider slice of it.
+ */
+function buildCombinedHaystack(group: QuestionGroupCard): string {
+  const tiers = buildWeightedHaystacks(group)
+  return [tiers.topic.join(' '), tiers.section, tiers.place, tiers.general].join(' ')
+}
+
+/**
+ * Lazy per-pool DF cache: `rankKeywordCandidates` is called once per search
+ * round with a fixed candidate pool, so build the pool's combined haystacks
+ * once and memoize each token's document frequency the first time it is
+ * asked for. Cheap at real-bank scale (273 groups) — CR-5's own sizing note.
+ */
+function makeDocumentFrequencyLookup(pool: QuestionGroupCard[]): (token: string) => number {
+  const haystacks = pool.map(buildCombinedHaystack)
+  const cache = new Map<string, number>()
+  return (token: string): number => {
+    const cached = cache.get(token)
+    if (cached !== undefined) return cached
+    let df = 0
+    for (const haystack of haystacks) {
+      if (haystack.includes(token)) df += 1
+    }
+    cache.set(token, df)
+    return df
+  }
+}
+
 type KeywordCandidate = {
   group: QuestionGroupCard
   hits: number
@@ -182,6 +318,23 @@ type KeywordCandidate = {
   matchedTokens: string[]
   /** Best-matching topic-label leaf, used to build a human reason line. */
   matchedTopicLabel: TopicLabel | null
+  /**
+   * True when this candidate's matched tokens carry enough corpus-level
+   * signal to clear the general-tier noise floor — see `DF_NOISE_THRESHOLD`
+   * doc comment. Computed once per `rankKeywordCandidates` call using the
+   * pool-scoped DF lookup; restart cut ⑤ MF-1 fix.
+   */
+  hasCorpusSignal: boolean
+  /**
+   * CR-5 SW-2 fix — one representative token per matched query run (see
+   * `tokenRunIdsOf`), keeping only the LONGEST token from each run. A carved
+   * 2-char bigram never appears here unless it is itself the longest thing
+   * its run produced (i.e. the run IS just 2 characters, a real short word).
+   * This is what `buildLocalReason`'s weak fallback line joins — never the
+   * raw `matchedTokens`, which can contain meaningless carve fragments like
+   * "的完"/"集作" a teacher should never have to read.
+   */
+  displayTokens: string[]
 }
 
 function escapeRegex(value: string): string {
@@ -500,6 +653,31 @@ function scoreGroupAgainstTokens(
   return { score, nonGeneralScore, hits, matchedTokens }
 }
 
+/**
+ * CR-5 SW-2 fix — collapse `matchedTokens` down to one representative token
+ * per query run (see `tokenRunIdsOf`), keeping the LONGEST token from each
+ * run. A run that produced a real word ("科技") keeps that word; a run that
+ * only produced overlapping carve fragments keeps whichever fragment is
+ * longest — never a laundry list of every bigram carved from the same short
+ * span. Order follows first-appearance in `matchedTokens` for stable,
+ * predictable reason text.
+ */
+function pickDisplayTokens(matchedTokens: string[], tokenRunIds: Map<string, number>): string[] {
+  const bestByRun = new Map<number, string>()
+  const runOrder: number[] = []
+  for (const token of matchedTokens) {
+    const runId = tokenRunIds.get(token) ?? -1
+    const current = bestByRun.get(runId)
+    if (current === undefined) {
+      runOrder.push(runId)
+      bestByRun.set(runId, token)
+    } else if (token.length > current.length) {
+      bestByRun.set(runId, token)
+    }
+  }
+  return runOrder.map((runId) => bestByRun.get(runId) as string)
+}
+
 function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): KeywordCandidate[] {
   const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
   if (tokens.length === 0) {
@@ -510,8 +688,16 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
       nonGeneralScore: 0,
       matchedTokens: [],
       matchedTopicLabel: null,
+      hasCorpusSignal: false,
+      displayTokens: [],
     }))
   }
+  // DF is measured against the FULL, unfiltered bank (not the possibly
+  // intent-narrowed `pool` below) — a token's corpus-vocabulary status
+  // should not shift depending on which dimension filter happened to fire
+  // for this particular query.
+  const documentFrequencyOf = makeDocumentFrequencyLookup(groups)
+  const tokenRunIds = tokenRunIdsOf(query)
   const intent = parseLocalIntent(query)
   // Explicit dimensions (section letter / group type / region) hard-filter
   // by default — a teacher who says "C 篇" or "全国甲卷" named a real
@@ -527,6 +713,21 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
   const scored = pool.map((group) => {
     const { score, nonGeneralScore, hits, matchedTokens } = scoreGroupAgainstTokens(group, tokens)
     const yearBoost = intent.year && group.year === intent.year ? WEIGHT_BY_TIER.place : 0
+    // Two independent ways a general-tier match earns corpus signal:
+    //   1. At least one matched token is common enough in the bank's own
+    //      vocabulary (DF >= DF_NOISE_THRESHOLD) to read as a real content
+    //      word, not a coincidental carve.
+    //   2. Two or more matched tokens come from DIFFERENT query runs (see
+    //      `tokenRunIdsOf`) — a coincidence landing on this candidate twice,
+    //      from two UNRELATED parts of the query, is far less likely than
+    //      once. Two overlapping bigrams carved from the SAME connected run
+    //      ("存在"+"在的" both sliced out of "不存在的题目") do NOT count as
+    //      two here — they collapse to one run and carry exactly one
+    //      coincidence's worth of evidence, matching the CR-5 measured
+    //      real-bank false-positive shape.
+    const matchedRunIds = new Set(matchedTokens.map((token) => tokenRunIds.get(token) ?? -1))
+    const hasCorpusSignal =
+      matchedTokens.some((token) => documentFrequencyOf(token) >= DF_NOISE_THRESHOLD) || matchedRunIds.size >= 2
     return {
       group,
       hits,
@@ -534,6 +735,8 @@ function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): Keyw
       nonGeneralScore: nonGeneralScore + yearBoost,
       matchedTokens,
       matchedTopicLabel: findMatchedTopicLabel(group, matchedTokens),
+      hasCorpusSignal,
+      displayTokens: pickDisplayTokens(matchedTokens, tokenRunIds),
     }
   })
   return scored
@@ -582,9 +785,15 @@ function findMatchedTag(group: QuestionGroupCard, matchedTokens: string[]): stri
   return null
 }
 
-/** Build a teacher-facing reason line from what actually matched — no raw token dump. */
-function buildLocalReason(candidate: KeywordCandidate): string {
-  const { group, matchedTopicLabel, matchedTokens } = candidate
+/**
+ * Build a teacher-facing reason line from what actually matched — no raw
+ * token dump. `weak` (restart cut ⑤) softens the wording for a hit that
+ * cleared the noise floor but not the confidence floor: the reason must not
+ * claim a "命中" (hit) the search isn't actually confident about, so it uses
+ * "可能相关" phrasing instead of asserting a topic/keyword match.
+ */
+function buildLocalReason(candidate: KeywordCandidate, weak = false): string {
+  const { group, matchedTopicLabel, matchedTokens, displayTokens } = candidate
   const section = extractReadingSectionLabel(group)
   // "讲生态环境的 C 篇" style — a space before the bare section letter reads
   // as a label ("C 篇"), not "C篇" glued to the preceding Chinese clause.
@@ -602,45 +811,43 @@ function buildLocalReason(candidate: KeywordCandidate): string {
 
   const parts: string[] = []
   if (topicText && sectionText) {
-    parts.push(`讲${topicText}的 ${sectionText}`)
+    parts.push(weak ? `可能与${topicText}相关的 ${sectionText}` : `讲${topicText}的 ${sectionText}`)
   } else if (topicText) {
-    parts.push(`讲${topicText}`)
-  } else if (placeText && sectionText) {
+    parts.push(weak ? `可能与${topicText}相关` : `讲${topicText}`)
+  } else if (placeText && sectionText && !weak) {
     // Pure-dimension match (e.g. "2025 浙江卷", "全国甲卷 完形"): state the
-    // dimensions plainly, place first — no invented topic clause.
+    // dimensions plainly, place first — no invented topic clause. Gated on
+    // `!weak` — a weak candidate did not actually earn a dimension match
+    // (place/section text here is read straight off the group's own
+    // fields, not off what the query tokens matched), so claiming it here
+    // would contradict the "可能相关" honesty this wording exists for.
     parts.push(placeText)
     parts.push(sectionText)
     return parts.join(' · ')
-  } else if (sectionText) {
+  } else if (sectionText && !weak) {
     parts.push(sectionText)
   }
-  if (placeText) parts.push(placeText)
+  if (placeText && !weak) parts.push(placeText)
 
   if (parts.length > 0) return parts.join(' · ')
+  // CR-5 SW-2: the weak fallback line joins `displayTokens` (one longest
+  // token per matched query run), never raw `matchedTokens` — a carved
+  // 2-char bigram sibling like "的完"/"集作" must never reach this
+  // teacher-facing string even when it technically contributed to the score.
+  if (weak) {
+    return displayTokens.length > 0 ? `可能相关：${displayTokens.join('、')}` : '可能相关'
+  }
   if (matchedTokens.length > 0) return `匹配关键词：${matchedTokens.join('、')}`
   return '关键词匹配'
 }
 
 function toSearchHit(candidate: KeywordCandidate): ConciergeSearchHit {
+  const weak = !isConfidentCandidate(candidate)
   return {
     group: candidate.group,
-    reason: buildLocalReason(candidate),
+    reason: buildLocalReason(candidate, weak),
+    weak,
   }
-}
-
-/** Keyword fallback ranking: count hits across known card fields + tags + topicLabels. */
-export function rankByKeywords(
-  groups: QuestionGroupCard[],
-  query: string,
-  limit = 12,
-): ConciergeSearchHit[] {
-  const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
-  if (tokens.length === 0) {
-    return groups.slice(0, limit).map((group) => ({ group, reason: '近期题组' }))
-  }
-  return rankKeywordCandidates(groups, query)
-    .slice(0, limit)
-    .map(toSearchHit)
 }
 
 /**
@@ -660,6 +867,88 @@ const HIGH_CONFIDENCE_SCORE_FLOOR = 5
  * is strong enough evidence on its own.
  */
 const GENERAL_ONLY_PHRASE_SCORE_FLOOR = 8
+
+/**
+ * A candidate is noise — not even "weak" — only when its ENTIRE signal is
+ * general-tier (title/summary/tags/... — no topicLabel / 篇位 / 题型 / 地区
+ * signal at all, i.e. `nonGeneralScore === 0`) AND it has no `hasCorpusSignal`
+ * (see `DF_NOISE_THRESHOLD` doc comment — CR-5 MF-1 fix). This is exactly
+ * the shape a garbled/gibberish query produces against a large real bank:
+ * one or more isolated 2-character CJK bigrams (weight 1 general-tier x
+ * length factor 1 = 1 each), CARVED OUT of a longer garbled run,
+ * coincidentally substring-match some field of some group, each in
+ * isolation (measured: every gibberish-polluted real-bank candidate matched
+ * exactly one such token, never two) AND that token is corpus-rare (DF 1-2,
+ * below the DF_NOISE_THRESHOLD floor).
+ *
+ * Any candidate with `nonGeneralScore > 0` — even a single section-letter
+ * hit ("C" alone, section-tier weight 3) that stays well below the
+ * confidence floor — already carries a real, if partial, dimension signal
+ * and must never be reclassified as noise; it is weak at worst (mirrors the
+ * `highConfidenceLocalHits` doc comment: "a bare section letter... still
+ * deserves the steward's fuzzier semantic read", now also "still deserves
+ * an honest weak card" for the local fallback).
+ *
+ * "找篇科技文" / "科技文章" (unspaced, the real teacher-input shape) are NOT
+ * the noise case: "科技" is corpus-common (DF>=DF_NOISE_THRESHOLD in the
+ * live bank), so `hasCorpusSignal` fires via the DF path even though "科技"
+ * is, mechanically, just as much a carved bigram as any gibberish fragment —
+ * the difference DF actually measures is real-bank vocabulary membership,
+ * not the query-side carving mechanism.
+ */
+
+/**
+ * True when a candidate has a real dimension/topic signal (clears the
+ * existing high-confidence floors) OR at least clears the noise floor above.
+ * `isConfidentCandidate` decides "not weak"; a candidate that is neither
+ * confident nor above the noise floor is dropped entirely by the callers
+ * below (never becomes a `weak: true` hit).
+ *
+ * Two-floor model, shared by `highConfidenceLocalHits` (the strict "resolve
+ * locally without asking the steward" gate) and the fallback ranking (the
+ * looser "still show it, but say so honestly" gate):
+ *   - confident: non-general score clears HIGH_CONFIDENCE_SCORE_FLOOR, or
+ *     total score clears GENERAL_ONLY_PHRASE_SCORE_FLOOR (dense/long phrase
+ *     match — same rule `highConfidenceLocalHits` always used).
+ *   - weak (not confident, but has ANY non-general signal, or
+ *     `hasCorpusSignal` on its general-tier signal): shown, but flagged so
+ *     the UI can say "可能相关" instead of implying a real hit.
+ *   - noise (purely general-tier AND no corpus signal): dropped before it
+ *     ever reaches the UI.
+ */
+function isConfidentCandidate(candidate: KeywordCandidate): boolean {
+  return (
+    candidate.nonGeneralScore >= HIGH_CONFIDENCE_SCORE_FLOOR ||
+    candidate.score >= GENERAL_ONLY_PHRASE_SCORE_FLOOR
+  )
+}
+
+function isAboveNoiseFloor(candidate: KeywordCandidate): boolean {
+  if (isConfidentCandidate(candidate)) return true
+  if (candidate.nonGeneralScore > 0) return true
+  return candidate.hasCorpusSignal
+}
+
+/**
+ * Keyword fallback ranking: count hits across known card fields + tags +
+ * topicLabels, drop pure noise (see `WEAK_NOISE_FLOOR`), and mark surviving
+ * non-confident hits as `weak` so the caller can render an honest notice
+ * instead of implying every returned card is a real match.
+ */
+export function rankByKeywords(
+  groups: QuestionGroupCard[],
+  query: string,
+  limit = 12,
+): ConciergeSearchHit[] {
+  const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
+  if (tokens.length === 0) {
+    return groups.slice(0, limit).map((group) => ({ group, reason: '近期题组' }))
+  }
+  return rankKeywordCandidates(groups, query)
+    .filter(isAboveNoiseFloor)
+    .slice(0, limit)
+    .map(toSearchHit)
+}
 
 function highConfidenceLocalHits(
   groups: QuestionGroupCard[],
@@ -756,18 +1045,23 @@ export async function runConciergeSearch(
       sentMessage,
       source: 'fallback',
       fallbackReason: 'local-direct-match',
+      // highConfidenceLocalHits only ever returns candidates that already
+      // cleared the confidence floor, so this branch is never weak.
+      allWeak: false,
     }
   }
 
   if (!apiKey) {
+    const hits = rankByKeywords(input.questionGroups, intent)
     return {
       kind: 'results',
-      hits: rankByKeywords(input.questionGroups, intent),
+      hits,
       assistantMessage: '没填 AI 密钥，先用本地题库帮你找。',
       query: intent,
       sentMessage,
       source: 'fallback',
       fallbackReason: 'missing-api-key',
+      allWeak: hits.length > 0 && hits.every((hit) => hit.weak),
     }
   }
 
@@ -801,14 +1095,16 @@ export async function runConciergeSearch(
     if (typeof console !== 'undefined' && console.warn) {
       console.warn('[concierge] steward call failed; using keyword fallback:', message)
     }
+    const fallbackHits = rankByKeywords(input.questionGroups, intent)
     return {
       kind: 'results',
-      hits: rankByKeywords(input.questionGroups, intent),
+      hits: fallbackHits,
       assistantMessage: '管家暂时没连上，我先用本地题库帮你找。',
       query: intent,
       sentMessage,
       source: 'fallback',
       fallbackReason: 'api-error',
+      allWeak: fallbackHits.length > 0 && fallbackHits.every((hit) => hit.weak),
     }
   }
 }

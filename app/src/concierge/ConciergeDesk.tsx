@@ -16,7 +16,7 @@
 import { useId, useMemo, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
-import { pickClarificationLine } from './clarificationCopy.ts'
+import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
 import type {
   ConciergeRetrievalActions,
   ConciergeRetrievalView,
@@ -43,6 +43,31 @@ export type ConciergeDeskProps = {
 }
 
 const STARTER_CHIPS = ['生态主题 C 篇', '2025 浙江卷', '中等难度主旨题'] as const
+
+/**
+ * Restart cut ⑤ — a non-empty result set is "all weak" when every hit only
+ * cleared the noise floor, not the confidence floor (see `conciergeSearch.ts`
+ * `isConfidentCandidate` / `WEAK_NOISE_FLOOR`). Feeds `pickResultsNoticeLine`
+ * so the notice can say so plainly instead of implying a confident match.
+ */
+function isAllWeakResultsState(
+  state: ConciergeRetrievalView['state'],
+): state is Extract<ConciergeRetrievalView['state'], { kind: 'results' }> {
+  return state.kind === 'results' && state.hits.length > 0 && state.hits.every((hit) => hit.weak === true)
+}
+
+/**
+ * CR-5 SW-1 fix — the true vacuum state is `state.kind === 'results'` with
+ * zero hits (a search actually ran and found nothing honest to show), not
+ * `state.kind === 'empty'` (no search has run yet). The plan's cut ⑤
+ * acceptance line "真空态+起始 chip 呈现" and "乱码 query 必须走到真空态"
+ * both name this exact state — a teacher who typed a gibberish query and hit
+ * the true "没找到匹配" message must still see the starter chips as the next
+ * action, not a dead end.
+ */
+function isVacuumResultsState(state: ConciergeRetrievalView['state']): boolean {
+  return state.kind === 'results' && state.hits.length === 0
+}
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { retrieval, actions, basketIds, onAdd, dataStatus, thinkingMode, onThinkingModeChange } = props
@@ -111,7 +136,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         </p>
       )}
 
-      {!dataLoading && (state.kind === 'empty' || state.kind === 'error') && (
+      {!dataLoading && (state.kind === 'empty' || state.kind === 'error' || isVacuumResultsState(state)) && (
         <ul className="concierge-starter-chips" aria-label="示例搜索">
           {STARTER_CHIPS.map((chip) => (
             <li key={chip}>
@@ -139,7 +164,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       )}
 
       {state.kind === 'results' && state.usedFallback && (
-        <p className="concierge-notice">{state.assistantMessage}</p>
+        <p className="concierge-notice">
+          {pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage)}
+        </p>
       )}
 
       {state.kind === 'results' && !state.usedFallback && state.assistantMessage && (
