@@ -137,4 +137,30 @@ verifyResult，无需按钮即有内容）、已绑定话题标签展示、已�
 
 ## PA Follow-Up Decisions
 
-（PA 评审后由 PM 补写）
+PA 裁决 GO-with-Must-Fix（pa.md @4dad339）。PM 处置如下，DEV 按此为准：
+
+- **MF-1（member trace 暴露）已采纳**：5 处 AI 运维 trace 段
+  （App.tsx:3867-3883、3971-3982、4096-4107、4833-4842、4908-4917，
+  含 keyFingerprint/requestId/keySource/latency/provider）全部纳入
+  isOwnerView 门控（member 隐藏）；解析正文对 member 可见不变。
+  PM 依 owner 全权授权代拍（安全向默认），战报提请 owner 追认。
+- **MF-2（props 清单缺口）已采纳**：分支实读的 5 个
+  `*ParseByQuestionNo`/`verifyByQuestionNo` useMemo（App.tsx:1261-1293）
+  与 `getParseSavedAt`（App.tsx:747）**不新增为 props**——组件内部用已
+  传入的 parse/verify result 重算（useMemo 搬进组件）；`getParseSavedAt`
+  若为纯函数则搬进 detailHelpers.ts，App.tsx 若还用则反向 import。
+- **MF-3（member 隐藏零验证）已采纳**：步骤 4 的 verify 删去与
+  verify-owner-gate.mjs 重复的 API 行为断言；改为（a）源断言：组件内
+  门控块确实包在 isOwnerView 条件下、trace 段在门控内；（b）**强制
+  浏览器 QA 必含 forced-auth member 账号实点详情页**（qa-temp 套路，
+  member 看不到任何写操作按钮与 trace 段）——因 local open 模式
+  isOwnerView 恒 true，纯本地跑不到隐藏分支。
+- **SW-2 已采纳进边界规则主句**：member/owner 边界判定以「该按钮触发
+  的路由是否 ownerOnly」为准绳（问 questionGroupRoutes.mjs），
+  "展示已存数据 vs 触发写操作"只是助记。
+- **SW-4 已采纳**：onOpenDetail 需 App→ConciergeDesk→ConciergePaperRow→
+  ConciergeGroupCard 全程穿透，且 **三个渲染点全接**
+  （ConciergeDesk.tsx:333、375 + ConciergePaperRow.tsx:239），漏一处
+  部分列表入口失效；CR 逐点核。
+- SW-1/3/5/6 记录在案无需改plan（props 对象分组已在步骤 1；addToBasket
+  副作用对 member 合法；openDetail 留 App.tsx；difficultyDrafts 无污染）。
