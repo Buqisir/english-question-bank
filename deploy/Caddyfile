@@ -1,0 +1,45 @@
+# Caddy config for the english-question-bank production site.
+#
+# Install: copy to /etc/caddy/Caddyfile, then `sudo systemctl reload caddy`.
+# Requires DNS A records for `eqbank.cc` and `www.eqbank.cc` pointing at the
+# server IP BEFORE Caddy can issue certs (FG-3) — Caddy auto-provisions
+# HTTPS via ACME on first request once DNS resolves.
+#
+# Local topology smoke (no real domain / DNS available): copy this file and
+# change the site address to an http:// LAN address so Caddy serves plain
+# HTTP, e.g.
+#   http://192.168.x.x:8099 {
+#     ...same handle blocks (root -> your local app/dist)...
+#   }
+# The `http://` scheme prefix is REQUIRED to force plain HTTP: a bare IP or
+# port site address (`192.168.x.x:8099` / `:8099`) makes Caddy provision an
+# internal-CA HTTPS cert and speak TLS, so a plain-HTTP client gets HTTP 400
+# ("sent an HTTP request to an HTTPS server"). Verified locally on caddy
+# v2.11.2, launch-deploy Slice 2 QA.
+#
+# SW-3: the three reverse_proxy handle blocks MUST come before the SPA
+# fallback handle block below — Caddy's `handle` directive short-circuits at
+# the first match, so if the fallback (matches everything) were declared
+# first, `/api/*` etc. would never reach the reverse_proxy.
+
+eqbank.cc, www.eqbank.cc {
+	encode zstd gzip
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:8787
+	}
+
+	handle /paper-assets/* {
+		reverse_proxy 127.0.0.1:8787
+	}
+
+	handle /user-space/* {
+		reverse_proxy 127.0.0.1:8787
+	}
+
+	handle {
+		root * /opt/eqb/english-question-bank/app/dist
+		try_files {path} /index.html
+		file_server
+	}
+}

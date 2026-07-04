@@ -4,31 +4,30 @@
 // API_ORIGIN constant, apiPath host-resolution, decodeHeaderValue, and the
 // repeated fetch error-body extraction blocks into one module.
 //
-// IMPORTANT — host-form preservation: the services historically diverged on
-// whether `::1` (IPv6 loopback) counts as "local". questionGroups / draftPapers
-// / mySpace included `::1`; paperImport / paperImportAi did NOT. This PR keeps
-// BOTH forms verbatim (apiPath = ::1-inclusive, apiPathNoIpv6 = the 2-element
-// form) so no caller's behavior changes. Unifying on the ::1-inclusive form is
-// a SEPARATE, owner-acknowledged behavior change (not part of this PR).
+// launch-deploy Slice 1 (H11-A PR1 deferred "两形态合并", owner-acknowledged):
+// in every real topology (dev via Vite proxy, prod via Caddy reverse_proxy)
+// the API is same-origin with the frontend, so the previous absolute-origin
+// fallback (`http://127.0.0.1:8787`) was always wrong off localhost — it sent
+// every request to the visiting browser's own machine and tripped
+// mixed-content on HTTPS. Both functions now always return the relative
+// `path` in the browser. The `::1` vs 2-element host-form distinction that
+// used to gate the fallback is now moot (there is no fallback branch left),
+// so apiPath and apiPathNoIpv6 are behavior-identical; both names are kept as
+// thin wrappers so existing imports (paperImport.ts / paperImportAi.ts use
+// apiPathNoIpv6; the rest use apiPath) keep resolving unchanged.
 
-export const API_ORIGIN = 'http://127.0.0.1:8787'
-
-// ::1-inclusive host resolution. Used by questionGroups / draftPapers / mySpace.
+// Always relative in the browser — same-origin addressing (see note above).
+// SSR guard: no `window` means we can't resolve a hostname, so just hand back
+// the path unchanged.
 export function apiPath(path: string) {
   if (typeof window === 'undefined') return path
-  if (['127.0.0.1', 'localhost', '::1'].includes(window.location.hostname)) return path
-  return `${API_ORIGIN}${path}`
+  return path
 }
 
-// 2-element host resolution WITHOUT `::1`. Used by paperImport / paperImportAi.
-// Behavior-identical to those callers' previous local apiPath. Do NOT fold into
-// apiPath() — adding `::1` here is a separate owner-acknowledged behavior change.
+// Behavior-identical to apiPath (see note above). Kept as a separate export
+// only so paperImport.ts / paperImportAi.ts imports keep resolving.
 export function apiPathNoIpv6(path: string) {
-  if (typeof window === 'undefined') return path
-  if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
-    return path
-  }
-  return `${API_ORIGIN}${path}`
+  return apiPath(path)
 }
 
 export function decodeHeaderValue(value: string | null) {

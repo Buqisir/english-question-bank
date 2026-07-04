@@ -1,0 +1,31 @@
+# systemd unit for the english-question-bank API (server/api.mjs).
+#
+# Install: copy to /etc/systemd/system/eqb.service, then
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now eqb
+#
+# Node binds 127.0.0.1:8787 only (server/api.mjs) — this unit does not open
+# any port to the public internet; Caddy (deploy/Caddyfile) reverse-proxies
+# to it. Do not add a public bind here.
+#
+# FG-1 (Follow-up Gate, verify on target Node 24 at provision time): if the
+# provisioned Node 24 build still requires `--experimental-sqlite` for
+# `node:sqlite` (server/api.mjs imports DatabaseSync from it), add the flag
+# to ExecStart, e.g.:
+#   ExecStart=/usr/bin/node --experimental-sqlite --env-file-if-exists=/opt/eqb/english-question-bank/.env server/api.mjs
+
+[Unit]
+Description=english-question-bank API server
+After=network.target
+
+[Service]
+Type=simple
+User=eqb
+WorkingDirectory=/opt/eqb/english-question-bank
+ExecStart=/usr/bin/node --env-file-if-exists=/opt/eqb/english-question-bank/.env server/api.mjs
+Restart=always
+RestartSec=2
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
