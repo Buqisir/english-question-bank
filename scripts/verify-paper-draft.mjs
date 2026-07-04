@@ -387,26 +387,46 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
     /addGroupToCurrentDraftPaperRequest\(group\.id\)/.test(app) && /refreshQuestionGroups\(\)/.test(app),
     '',
   )
-  assert('removeFromBasket delegates to paperDraft.removeGroup', /paperDraft\.removeGroup\(id\)/.test(app), '')
-  assert('clearBasket delegates to paperDraft.clear', /paperDraft\.clear\(\)/.test(app), '')
-  assert('moveBasketItem delegates to paperDraft.moveGroup', /paperDraft\.moveGroup\(id, direction\)/.test(app), '')
-  assert('updateScore delegates to paperDraft.updateGroupScore', /paperDraft\.updateGroupScore\(id, score\)/.test(app), '')
-  assert('updateBasketItem delegates to paperDraft.updateGroupMeta', /paperDraft\.updateGroupMeta\(id,/.test(app), '')
+
+  // classic-retire-3-cleanup: removeFromBasket / clearBasket / moveBasketItem /
+  // updateScore / updateBasketItem / handleDeleteQuestionGroup were thin
+  // App.tsx wrappers whose only callers lived in the classic basket-panel
+  // JSX (basket-list item controls, basket-toolbar, block-settings-panel).
+  // That JSX — and the wrappers themselves — were deleted along with the
+  // rest of the classic sidebar; DraftPaperWorkbench.tsx is the sole
+  // surviving UI for editing basket items (out of scope for this cut). As a
+  // result paperDraft.removeGroup / .clear / .moveGroup / .updateGroupScore /
+  // .updateGroupMeta / .externalRemoveByGroupId now have zero call sites in
+  // App.tsx — confirm that directly instead of asserting dead wrappers.
+  for (const method of [
+    'removeGroup',
+    'clear',
+    'moveGroup',
+    'updateGroupScore',
+    'updateGroupMeta',
+    'externalRemoveByGroupId',
+  ]) {
+    assert(
+      `App.tsx no longer calls paperDraft.${method} (classic-only wrapper retired in classic-retire-3)`,
+      !new RegExp(`paperDraft\\.${method}\\(`).test(app),
+      '',
+    )
+  }
 
   const replaceCount = (app.match(/paperDraft\.replaceDraft\(/g) || []).length
-  assert('App uses paperDraft.replaceDraft in ≥ 3 sites (load + workflow + objective)',
-    replaceCount >= 3, `got ${replaceCount}`)
-  assert('handleDeleteQuestionGroup uses externalRemoveByGroupId',
-    /paperDraft\.externalRemoveByGroupId\(id\)/.test(app), '')
+  assert('App uses paperDraft.replaceDraft in ≥ 2 sites (workflow + objective; load site retired in classic-retire-3)',
+    replaceCount >= 2, `got ${replaceCount}`)
   assert('saved-group sync uses patchBasketItemFromSavedGroup',
     /paperDraft\.patchBasketItemFromSavedGroup\(saved\)/.test(app), '')
 
   assert('App routes onDraftEdited via a ref-bound effect',
-    /draftEditedHandlerRef\.current = \(reason\) =>/.test(app), '')
+    /draftEditedHandlerRef\.current = \(\) =>/.test(app), '')
   assert('Router resets export statuses on every edit',
-    /draftEditedHandlerRef\.current = \(reason\) => \{[\s\S]*?paperExports\.resetExportStatuses\(\)/.test(app), '')
-  assert('Router gates previewStatus reset to add/remove/clear',
-    /reason === 'add' \|\| reason === 'remove' \|\| reason === 'clear'/.test(app), '')
+    /draftEditedHandlerRef\.current = \(\) => \{[\s\S]*?paperExports\.resetExportStatuses\(\)/.test(app), '')
+  // classic-retire-3-cleanup: saveStatus/previewStatus display state was
+  // classic-basket-panel-only and was deleted along with that JSX, so the
+  // router no longer branches on `reason` to gate a previewStatus reset —
+  // it always just resets the export cache now.
 }
 
 // ─── Test 4: usePaperBlocks.removeBlock removes block before notifying ────
@@ -601,45 +621,30 @@ console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps le
   assert('App destructures questionNumberStart from paperDraft',
     /const \{[\s\S]*?\bquestionNumberStart\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
 
-  // 6.6 App wrapper handlers preserve the legacy side effects exactly.
-  // ── title: set + saveStatus idle + reset exports
-  const titleH = app.match(/function handlePaperTitleChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
-  assert('handlePaperTitleChange exists', titleH.length > 0, '')
-  assert('handlePaperTitleChange calls paperDraft.setPaperTitle', /paperDraft\.setPaperTitle\(/.test(titleH), '')
-  assert('handlePaperTitleChange resets saveStatus to idle', /setSaveStatus\(['"]idle['"]\)/.test(titleH), '')
-  assert('handlePaperTitleChange resets exports', /paperExports\.resetExportStatuses\(\)/.test(titleH), '')
+  // 6.6 classic-retire-3-cleanup (2026-07-04): the four App-level wrapper
+  // handlers (handlePaperTitleChange / handleVersionTypeChange /
+  // handlePaperExportStyleChange / handleQuestionNumberStartChange) and the
+  // classic sidebar UI that called them (paper-title input, version-toggle
+  // buttons, export-style buttons, start-num input) were deleted along with
+  // the rest of the classic basket-panel. Nothing in App.tsx read or wrote
+  // those wrappers once the classic sidebar was gone (grep-confirmed zero
+  // callers), so they were orphans. paperTitle / versionType /
+  // paperExportStyle / questionNumberStart are now driven exclusively by
+  // paperDraft.setX(...) calls from handleBuildWorkflowPaperSet /
+  // handleBuildObjectivePaperSet / DraftPaperWorkbench — there is currently
+  // no interactive UI to retitle or reconfigure a draft paper outside those
+  // programmatic flows. This is a real, cut-driven behavior change (not a
+  // stale-test artifact): assert the wrappers are gone, not that they exist.
+  for (const gone of [
+    'function handlePaperTitleChange(',
+    'function handleVersionTypeChange(',
+    'function handlePaperExportStyleChange(',
+    'function handleQuestionNumberStartChange(',
+  ]) {
+    assert(`App.tsx no longer defines ${gone.replace('function ', '').replace('(', '')} (classic-retire-3)`, !app.includes(gone), '')
+  }
 
-  // ── version: set + reset exports (no saveStatus)
-  const verH = app.match(/function handleVersionTypeChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
-  assert('handleVersionTypeChange exists', verH.length > 0, '')
-  assert('handleVersionTypeChange calls paperDraft.setVersionType', /paperDraft\.setVersionType\(/.test(verH), '')
-  assert('handleVersionTypeChange resets exports', /paperExports\.resetExportStatuses\(\)/.test(verH), '')
-  assert('handleVersionTypeChange does NOT touch saveStatus', !/setSaveStatus\(/.test(verH), '')
-
-  // ── style: set only (no reset)
-  const styleH = app.match(/function handlePaperExportStyleChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
-  assert('handlePaperExportStyleChange exists', styleH.length > 0, '')
-  assert('handlePaperExportStyleChange calls paperDraft.setPaperExportStyle', /paperDraft\.setPaperExportStyle\(/.test(styleH), '')
-  assert('handlePaperExportStyleChange does NOT reset exports', !/paperExports\.resetExportStatuses\(/.test(styleH), '')
-  assert('handlePaperExportStyleChange does NOT touch saveStatus', !/setSaveStatus\(/.test(styleH), '')
-
-  // ── start: set only (no reset)
-  const startH = app.match(/function handleQuestionNumberStartChange\([^)]*\)\s*\{[\s\S]*?\n  \}/)?.[0] || ''
-  assert('handleQuestionNumberStartChange exists', startH.length > 0, '')
-  assert('handleQuestionNumberStartChange calls paperDraft.setQuestionNumberStart', /paperDraft\.setQuestionNumberStart\(/.test(startH), '')
-  assert('handleQuestionNumberStartChange does NOT reset exports', !/paperExports\.resetExportStatuses\(/.test(startH), '')
-  assert('handleQuestionNumberStartChange does NOT touch saveStatus', !/setSaveStatus\(/.test(startH), '')
-  assert('handleQuestionNumberStartChange clamps to ≥ 1', /Math\.max\(1,\s*Number\.isFinite\(next\)\s*\?\s*next\s*:\s*1\)/.test(startH), '')
-
-  // 6.7 UI bindings go through the wrappers (not raw setters).
-  assert('paper-title input uses handlePaperTitleChange', /<input[\s\S]{0,120}value=\{paperTitle\}[\s\S]{0,200}handlePaperTitleChange/.test(app), '')
-  assert('version-toggle 学生版 uses handleVersionTypeChange', /handleVersionTypeChange\(['"]student['"]\)/.test(app), '')
-  assert('version-toggle 教师版 uses handleVersionTypeChange', /handleVersionTypeChange\(['"]teacher['"]\)/.test(app), '')
-  assert('export-style 试卷版 uses handlePaperExportStyleChange', /handlePaperExportStyleChange\(['"]exam['"]\)/.test(app), '')
-  assert('export-style 讲义版 uses handlePaperExportStyleChange', /handlePaperExportStyleChange\(['"]handout['"]\)/.test(app), '')
-  assert('start-num input uses handleQuestionNumberStartChange', /handleQuestionNumberStartChange\(/.test(app), '')
-
-  // 6.8 replaceDraft does NOT auto-mutate config (load/workflow/objective
+  // 6.7 replaceDraft does NOT auto-mutate config (load/workflow/objective
   // still call paperDraft.setX explicitly from App).
   const replaceBody = hook.match(/const replaceDraft\s*=\s*useCallback\(\s*\n([\s\S]*?)\n\s\s\)/)?.[1] || ''
   assert('replaceDraft body extracted', replaceBody.length > 0, '')
@@ -647,18 +652,32 @@ console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps le
   assert('replaceDraft body does NOT call setVersionType', !/setVersionType\s*\(/.test(replaceBody), '')
   assert('replaceDraft body does NOT call setQuestionNumberStart', !/setQuestionNumberStart\s*\(/.test(replaceBody), '')
   assert('replaceDraft body does NOT call setPaperExportStyle', !/setPaperExportStyle\s*\(/.test(replaceBody), '')
-  // Load saved paper / workflow build / objective build still drive config explicitly.
-  assert('App still drives paperDraft.setPaperTitle in load/workflow/objective sites',
-    (app.match(/paperDraft\.setPaperTitle\(/g) || []).length >= 3, '')
-  assert('App still drives paperDraft.setVersionType in load/workflow/objective sites',
-    (app.match(/paperDraft\.setVersionType\(/g) || []).length >= 2, '')
+  // Workflow build / objective build still drive config explicitly
+  // (classic-retire-3: handleSavePaperSet / handleLoadPaperSet — the other
+  // two call sites this used to count — were themselves deleted as classic
+  // sidebar orphans, so the threshold drops from >=3/>=2 to >=1 each).
+  assert('App still drives paperDraft.setPaperTitle from workflow/objective build sites',
+    (app.match(/paperDraft\.setPaperTitle\(/g) || []).length >= 1, '')
+  assert('App still drives paperDraft.setVersionType from workflow/objective build sites',
+    (app.match(/paperDraft\.setVersionType\(/g) || []).length >= 1, '')
 
-  // 6.9 buildSavePayload + usePaperExports still receive the same field set
-  // (just sourced from paperDraft destructure now).
-  assert('usePaperExports still receives paperTitle / versionType / paperExportStyle / questionNumberStart',
-    /usePaperExports\(\{[\s\S]*?paperTitle[\s\S]*?versionType[\s\S]*?paperExportStyle[\s\S]*?questionNumberStart[\s\S]*?\}\)/.test(app), '')
-  assert('buildSavePayload call still passes the 4 config fields',
-    /buildSavePayload\(\{\s*basket,\s*paperBlocks,\s*questionNumberStart,\s*paperExportStyle,\s*paperTitle,\s*versionType\s*\}\)/.test(app), '')
+  // 6.8 usePaperExports still receives the same 4 config fields sourced from
+  // the paperDraft destructure (order in source is unrelated to correctness;
+  // match presence, not a fixed field order).
+  const paperExportsCallMatch = app.match(/const paperExports = usePaperExports\(\{[\s\S]*?\n {2}\}\)/)
+  assert('usePaperExports call site found', Boolean(paperExportsCallMatch), '')
+  if (paperExportsCallMatch) {
+    const callBody = paperExportsCallMatch[0]
+    for (const field of ['paperTitle', 'versionType', 'paperExportStyle', 'questionNumberStart']) {
+      assert(`usePaperExports call still passes ${field}`, new RegExp(`\\b${field}\\b`).test(callBody), '')
+    }
+  }
+  // classic-retire-3: buildSavePayload's only call site (handleSavePaperSet,
+  // the classic "保存题集" button handler) was deleted as a classic sidebar
+  // orphan along with its caller. The function itself still lives in
+  // paperAssembly/paperExportPayload.ts (untouched, out of this cut's
+  // scope) for potential future re-use, but App.tsx no longer calls it.
+  assert('App.tsx no longer imports buildSavePayload (its only call site is gone)', !/buildSavePayload/.test(app), '')
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)

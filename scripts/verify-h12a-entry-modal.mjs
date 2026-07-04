@@ -178,7 +178,9 @@ if (savedHandler) {
   assert(/context\.mode === 'edit'/.test(body), 'handleEntrySaved branches on context.mode')
   assert(/setQuestionGroups\(/.test(body), 'handleEntrySaved updates question-group list')
   assert(/patchBasketItemFromSavedGroup\(saved\)/.test(body), 'handleEntrySaved patches basket from saved group')
-  assert(/setPreviewDetails\(/.test(body), 'handleEntrySaved clears the preview-detail cache for saved.id')
+  // classic-retire-3: previewDetails (the classic print-preview cache) was
+  // deleted along with the rest of the classic viewMode==='preview' branch —
+  // there is no cache left for handleEntrySaved to invalidate.
   assert(/fetchQuestionGroupDetail\(saved\.id\)/.test(body), 'handleEntrySaved refetches detail in edit mode')
   assert(/setDataStatus\('sqlite'\)/.test(body), "handleEntrySaved sets dataStatus to 'sqlite'")
   assert(/refreshPaperWorkflows\(\)/.test(body), 'handleEntrySaved refreshes paper workflows')
