@@ -139,6 +139,45 @@ export function buildFilterOptions(groups: QuestionGroupCard[]): ConciergeFilter
 }
 
 /**
+ * UI 门面刀 F2 — faceted chip counts (上刀 CR SW-2).
+ *
+ * The chip *option set* must stay the full-corpus set (chips never appear/
+ * disappear/reorder as filters change — that's `buildFilterOptions(groups)`,
+ * unchanged). Only each dimension's per-option *count* should narrow, and it
+ * narrows using every *other* active dimension's filter (never the
+ * dimension's own selection) — standard faceted-search semantics, so a
+ * teacher can still compare counts within the dimension they just picked.
+ *
+ * Implementation is intentionally the dumb version: for each of the 4 fixed
+ * dimensions, filter groups by the other 3 active filters via the existing
+ * `applyConciergeFilters`, then recompute counts with `buildFilterOptions`
+ * and splice just that dimension's counts onto the full-corpus option list
+ * (preserving the full-corpus order/labels/value set).
+ */
+export function buildFacetedFilterOptions(
+  groups: QuestionGroupCard[],
+  filters: ConciergeFilters,
+): ConciergeFilterOptions {
+  const fullOptions = buildFilterOptions(groups)
+  const dimensions = ['groupType', 'year', 'region', 'sourceType'] as const
+
+  const result = { ...fullOptions }
+  for (const dimension of dimensions) {
+    const otherFilters: ConciergeFilters = { ...filters }
+    delete otherFilters[dimension]
+    const facetGroups = applyConciergeFilters(groups, otherFilters)
+    const facetCounts = new Map(
+      buildFilterOptions(facetGroups)[dimension].map((option) => [option.value, option.count]),
+    )
+    result[dimension] = fullOptions[dimension].map((option) => ({
+      ...option,
+      count: facetCounts.get(option.value) ?? 0,
+    }))
+  }
+  return result
+}
+
+/**
  * Apply the four (optional) chip filters as an AND over `groups`. A filter
  * dimension left unset does not narrow the result at all. An empty
  * `ConciergeFilters` returns `groups` unchanged (same reference-shape, new

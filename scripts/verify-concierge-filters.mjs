@@ -17,7 +17,11 @@
  *      unchanged (year DESC + paperName tiebreak, per defaultFeed.ts).
  */
 
-import { buildFilterOptions, applyConciergeFilters } from '../app/src/concierge/filters.ts'
+import {
+  buildFilterOptions,
+  applyConciergeFilters,
+  buildFacetedFilterOptions,
+} from '../app/src/concierge/filters.ts'
 import { buildDefaultFeed } from '../app/src/concierge/defaultFeed.ts'
 
 let passed = 0
@@ -186,6 +190,77 @@ console.log('\nTest 4: composition with buildDefaultFeed — filtered feed only 
     'filtering to zero groups produces an empty feed (not an error, not the full feed)',
     Array.isArray(emptyFeed) && emptyFeed.length === 0,
     JSON.stringify(emptyFeed),
+  )
+}
+
+// ------------------------------------------------------------------ Test 5
+console.log('\nTest 5: buildFacetedFilterOptions — counts narrow by OTHER dimensions, option universe stays full-corpus')
+{
+  const full = buildFilterOptions(fixture)
+  const faceted = buildFacetedFilterOptions(fixture, { groupType: 'reading' })
+
+  // Option universe never shrinks or reorders under an active filter.
+  for (const dim of ['groupType', 'year', 'region', 'sourceType']) {
+    assert(
+      `${dim} option universe identical to full corpus (values + order)`,
+      faceted[dim].map((o) => o.value).join(',') === full[dim].map((o) => o.value).join(','),
+      faceted[dim].map((o) => o.value).join(','),
+    )
+  }
+
+  // year counts narrow to the reading-only distribution (g1,g2,g7,g8,g9).
+  const yearCounts = Object.fromEntries(faceted.year.map((o) => [o.value, o.count]))
+  assert(
+    'year counts narrow under groupType=reading (2026:1, 2025:1, 2021:1, 2020:2)',
+    yearCounts['2026'] === 1 && yearCounts['2025'] === 1 && yearCounts['2021'] === 1 && yearCounts['2020'] === 2,
+    JSON.stringify(yearCounts),
+  )
+  assert(
+    'years with no reading groups stay listed with count 0 (2024, 2023, 2022)',
+    yearCounts['2024'] === 0 && yearCounts['2023'] === 0 && yearCounts['2022'] === 0,
+    JSON.stringify(yearCounts),
+  )
+
+  // A dimension is never narrowed by its OWN selection: groupType counts
+  // stay full-corpus (no other filter is active), so reading=5 AND the
+  // unselected writing=1 remain comparable.
+  const gtCounts = Object.fromEntries(faceted.groupType.map((o) => [o.value, o.count]))
+  assert(
+    'own dimension keeps full counts under only its own filter (reading:5, writing:1)',
+    gtCounts['reading'] === 5 && gtCounts['writing'] === 1,
+    JSON.stringify(gtCounts),
+  )
+
+  // sourceType narrows: all 5 reading groups are real_exam; mock_exam drops
+  // to 0 but is still present.
+  const stCounts = Object.fromEntries(faceted.sourceType.map((o) => [o.value, o.count]))
+  assert(
+    'sourceType narrows to real_exam:5, mock_exam kept at 0',
+    stCounts['real_exam'] === 5 && stCounts['mock_exam'] === 0,
+    JSON.stringify(stCounts),
+  )
+
+  // Two active dimensions: each dimension uses the OTHER active filters.
+  const twoDim = buildFacetedFilterOptions(fixture, { groupType: 'reading', region: '浙江' })
+  const twoDimYear = Object.fromEntries(twoDim.year.map((o) => [o.value, o.count]))
+  assert(
+    'year counts under reading∧浙江 (g1,g2,g9 → 2026:1, 2025:1, 2020:1)',
+    twoDimYear['2026'] === 1 && twoDimYear['2025'] === 1 && twoDimYear['2020'] === 1 && twoDimYear['2024'] === 0,
+    JSON.stringify(twoDimYear),
+  )
+  const twoDimGt = Object.fromEntries(twoDim.groupType.map((o) => [o.value, o.count]))
+  assert(
+    'groupType counts under reading∧浙江 use only region (浙江 has 3 reading, 0 others)',
+    twoDimGt['reading'] === 3 && twoDimGt['writing'] === 0,
+    JSON.stringify(twoDimGt),
+  )
+
+  // No active filters → identical counts to buildFilterOptions.
+  const noFilters = buildFacetedFilterOptions(fixture, {})
+  assert(
+    'empty filters produce identical options to buildFilterOptions',
+    JSON.stringify(noFilters) === JSON.stringify(full),
+    '',
   )
 }
 

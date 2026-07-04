@@ -3324,7 +3324,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     <div className={`app-shell home-mode-${homeMode}`}>
       <header className="topbar">
         <div>
-          <p className="eyebrow">Local-first English Question Bank</p>
+          <p className="eyebrow">English Question Bank</p>
           <h1>英语题库工作台</h1>
         </div>
         <div className="topbar-actions">
