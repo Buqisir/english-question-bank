@@ -86,10 +86,12 @@ export type ConciergeGroupCardProps = {
   alreadyInBasket: boolean
   onAdd: (group: QuestionGroupCard) => void
   onSimilar: (group: QuestionGroupCard) => void
+  /** classic-retire-2-detail-view — opens the read-only detail view for this group. */
+  onOpenDetail?: (group: QuestionGroupCard) => void
 }
 
 export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
-  const { group, reason, alreadyInBasket, onAdd, onSimilar } = props
+  const { group, reason, alreadyInBasket, onAdd, onSimilar, onOpenDetail } = props
   const section = compactSection(group)
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
@@ -166,6 +168,15 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         >
           找类似
         </button>
+        {onOpenDetail && (
+          <button
+            type="button"
+            className="concierge-action"
+            onClick={() => onOpenDetail(group)}
+          >
+            详情
+          </button>
+        )}
         {paperSurfaceAnalysisHref && (
           // Lightweight link, NOT a button — opens the analysis route in
           // the same tab. Reuses `.concierge-action` styling so it visually

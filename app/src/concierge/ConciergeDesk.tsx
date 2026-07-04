@@ -34,6 +34,8 @@ export type ConciergeDeskProps = {
   actions: ConciergeRetrievalActions
   basketIds: Set<string>
   onAdd: (group: QuestionGroupCard) => void
+  /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
+  onOpenDetail?: (group: QuestionGroupCard) => void
 
   /**
    * Full corpus (all question groups currently loaded), used to build the
@@ -94,7 +96,7 @@ function isVacuumResultsState(state: ConciergeRetrievalView['state']): boolean {
 }
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
-  const { retrieval, actions, basketIds, onAdd, questionGroups, dataStatus, thinkingMode, onThinkingModeChange } = props
+  const { retrieval, actions, basketIds, onAdd, onOpenDetail, questionGroups, dataStatus, thinkingMode, onThinkingModeChange } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, triggerSimilar, togglePaper } = actions
   const inputId = useId()
@@ -334,6 +336,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   onSimilar={(group) => {
                     void triggerSimilar(group)
                   }}
+                  onOpenDetail={onOpenDetail}
                 />
               </li>
             ))}
@@ -376,6 +379,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                       onSimilar={(group) => {
                         void triggerSimilar(group)
                       }}
+                      onOpenDetail={onOpenDetail}
                     />
                   </li>
                 ))}

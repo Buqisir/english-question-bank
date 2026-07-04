@@ -90,6 +90,8 @@ export type ConciergePaperRowProps = {
   onTogglePaper: (key: string) => void
   onAdd: (group: QuestionGroupCard) => void
   onSimilar: (group: QuestionGroupCard) => void
+  /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
+  onOpenDetail?: (group: QuestionGroupCard) => void
   /**
    * 'search' rows describe a query outcome（命中）；'feed' rows are plain
    * browsing — nothing was searched, so the badge must not claim a hit.
@@ -98,7 +100,7 @@ export type ConciergePaperRowProps = {
 }
 
 export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
-  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar, variant = 'search' } = props
+  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar, onOpenDetail, variant = 'search' } = props
 
   const headline = buildHeadline(paper)
   const sourceTypeLabel = buildSourceTypeLabel(paper)
@@ -242,6 +244,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
                     alreadyInBasket={basketIds.has(group.id)}
                     onAdd={onAdd}
                     onSimilar={onSimilar}
+                    onOpenDetail={onOpenDetail}
                   />
                 </li>
               )
