@@ -50,29 +50,21 @@ Hard rule:
 - Small cuts use:
   `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
 - Medium cuts use:
-  `Sync -> 阿澈 PM grill -> plan.md -> 小川 PA (pa.md)
-  -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
-  -> browser QA -> PO QA -> 小川 RM`.
+  `Sync -> PM grill -> plan.md -> DEV -> CR-lite
+  -> browser QA -> PO QA -> RM`.
+  Formal PA is added by the irreversibility trigger (protocol §7), not
+  by tier; a PA-lite downgrade is recorded in the plan header and CR
+  reviews the reason.
 - Large cuts use:
-  `Sync -> 阿澈 PM grill -> Canvas/mockups -> 小川 PA / optional
-  external second PA -> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
-  -> 阿澈 Big CR / browser QA -> PO QA -> 小川 RM -> Cut Note`.
-- Current named-agent assignment:
-  - 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and
-    medium / large RM artifact gates.
-  - 小川 owns PA, DEV, routine CR-lite, and RM / release execution.
-  - For medium / large RM, 小川 may execute the merge only after 阿澈 runs
-    the RM artifact gate and final sanity check.
-  - PM and PA should not be the same person by default. If one agent must
-    cover both, record the exception and self-review risk in `plan.md`.
-  - Either agent may cover another role when quota or availability
-    requires, but role contracts and gates do not downgrade.
+  `Sync -> PM grill -> mockups (when spatial risk) -> PA (pa.md)
+  -> PM compression -> DEV -> CR-lite -> Big CR / browser QA
+  -> PO QA -> RM -> Cut Note`.
+- All hats are worn by the orchestrator; independence comes from fresh
+  subagent contexts (see `AGENTS.md` roles + tier table). Role
+  contracts and gates do not downgrade based on who wears the hat.
 - The owner is PO and final product QA, not code reviewer.
-- External high-reasoning agents are exception tools for large-cut second
-  PA, direction checks, and occasional Big CR. 小川 owns routine PA by
-  default.
-- Treat GitHub `main` and PR heads as the shared truth. Outside reports
-  are not truth until 阿澈 verifies remote state.
+- Treat GitHub `main` and PR heads as the shared truth. Subagent reports
+  are not truth until the main agent verifies remote state.
 - Use `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md` when a PA / Big CR
   handoff needs durable repo-routed instructions; do not hand-write
@@ -91,7 +83,7 @@ Hard rule:
 
 File: `docs/agents/pa-persona.md`
 
-Use only when asking an external high-reasoning agent to act as PA.
+Use when spawning a PA subagent.
 
 Hard rule:
 
@@ -136,8 +128,7 @@ Hard rule:
 
 File: `dev-completion-protocol.md`
 
-Use for 小川 DEV and, only by explicit owner request, external DEV
-handoffs that change files.
+Use for DEV subagent completion reports on file-changing work.
 
 Hard rule:
 
@@ -179,14 +170,10 @@ cutting the feature.
 
 ## Browser QA posture
 
-The Codex in-app browser may be used for PO-facing QA, live visual
-checks, and browser verification the user explicitly wants to watch.
+Real-click browser QA runs on local Chrome / headless Playwright and
+captures evidence (screenshots / snapshots / assertions).
 
-If the in-app browser times out, shows stale state, or cannot prove the
-claim, fall back to local Chrome/headless Playwright and capture the
-evidence there.
-
-Static verify is not browser QA for user-visible PaperSurface changes.
+Static verify is not browser QA for user-visible changes.
 
 ---
 

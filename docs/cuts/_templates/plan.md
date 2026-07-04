@@ -18,19 +18,21 @@ Touches schema, data contract, product boundary, or teaching interpretation: <ye
 - <decision 1>
 - <decision 2>
 
-## Must Do
+## 硬契约（不得偏离；偏离 = CR 打回）
 
-<分步，每步独立可验证。步骤之间有依赖就写清楚>
+<锁意图 + 边界 + 验收。每条独立可验证。这一档写「必须成立的事实」，
+WHAT/WHY，不是实现步骤>
 
-### Step 1 — <名称>
+- C1 <contract 1>
+- C2 <contract 2>
 
-- <step 1 task 1>
-- <step 1 task 2>
+## 参考实现（可偏离，偏离须在完成报告里说明）
 
-### Step 2 — <名称>
+<给 DEV 的建议做法、候选落点、文案建议。DEV 档位越强这段越薄：
+Sonnet DEV 可以给到清单级；Opus/Fable 档 DEV 只留意图与边界，
+自选决策进完成报告供 CR 复核>
 
-- <step 2 task 1>
-- <step 2 task 2>
+- <suggestion 1>
 
 ## Forbidden
 
@@ -47,12 +49,11 @@ Touches schema, data contract, product boundary, or teaching interpretation: <ye
 
 ## Verification
 
-<每步的验证方式：脚本、命令、手动检查>
+<每条硬契约的验证方式：脚本、命令、手动检查。新契约优先行为断言
+（起服打 API / import 真模块），不是源码正则断言>
 
-- Step 1:
-  - <verification command / check>
-- Step 2:
-  - <verification command / check>
+- C1: <verification command / check>
+- C2: <verification command / check>
 
 ## Browser QA Matrix
 

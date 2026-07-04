@@ -14,6 +14,12 @@ make agents write code faster; the goal is to protect teacher value,
 PaperSurface readability, repo state truth, and rework cost without
 turning small fixes into rituals.
 
+Roles: one orchestrator (the main agent) wearing hats — PM, PA, DEV,
+CR, QA, RM — with independence coming from fresh subagent contexts,
+not separate people. See `AGENTS.md` "Current Operating Reality" for
+the authoritative role and tier table. Historical cut records naming
+`阿澈` / external agents are read as the matching hat.
+
 ---
 
 ## 1. First principles
@@ -23,16 +29,14 @@ Optimize for:
 - the teacher task being served
 - the A4 paper remaining primary
 - fewer wrong-direction implementation loops
-- the current named-agent assignment being explicit and auditable
-- external high-reasoning review only where it actually changes risk
+- review effort placed only where it actually changes risk
 
 Do not optimize for:
 
 - starting DEV as quickly as possible
 - showing every available AI-generated datum
 - making a UI impressive before it is useful
-- using more agents or platforms as a substitute for making a product
-  decision
+- using more agents as a substitute for making a product decision
 
 ## 2. Risk tiers
 
@@ -48,9 +52,6 @@ Default flow:
 ```text
 Sync -> fix/DEV -> verify -> CR-lite -> RM
 ```
-
-Usually no mockup, no formal PA, and no browser QA unless the visible UI
-changes.
 
 Small cuts are "tighten a screw" work.
 
@@ -72,14 +73,8 @@ Small-cut required checks:
 - if a PR is opened, confirm the PR head after push
 - after merge, fetch `main` and confirm the merge commit
 
-Small-cut skips by default:
-
-- Canvas / mockups
-- Formal PA
-- multi-round product discussion
-- browser QA, unless the visible UI changed
-- Cut Note, unless the small cut changes a recurring rule or fixes a
-  bug pattern worth remembering
+Small cuts skip mockups, formal PA, browser QA (unless visible UI
+changed), and Cut Notes (unless the fix changes a recurring rule).
 
 Upgrade a small cut to medium if:
 
@@ -96,12 +91,13 @@ single harness change with bounded blast radius.
 Default flow:
 
 ```text
-Sync -> 阿澈 PM grill -> plan.md -> 小川 PA (pa.md)
--> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
--> browser QA -> PO QA -> 小川 RM
+Sync -> PM grill -> plan.md -> DEV -> CR-lite -> browser QA -> PO QA -> RM
 ```
 
-Use one quick mockup only when spatial judgment is the core risk.
+Formal PA is added by the irreversibility trigger (§7), not by tier.
+When PA is skipped on a medium cut that touches a product boundary, the
+plan header must record the PA-lite downgrade reason, and CR must
+review that reason.
 
 Medium cuts are "adjust one local mechanism" work.
 
@@ -131,13 +127,6 @@ Medium-cut required checks:
 - keep CR focused on whether the implementation matches the known
   direction
 
-Medium-cut skips by default:
-
-- External second PA
-- multi-round Canvas exploration
-- broad Cut Note unless the medium cut changes direction or exposes a
-  recurring product pitfall
-
 Upgrade a medium cut to large if any appear:
 
 - PaperSurface core renderer or shared/papersurface protocol must change
@@ -159,9 +148,9 @@ where a wrong direction would create substantial rework.
 Default flow:
 
 ```text
-Sync -> 阿澈 PM grill -> Canvas/mockups -> 小川 PA / optional external second PA
--> 阿澈 PM compression -> 小川 DEV -> 小川 CR-lite
--> 阿澈 Big CR / browser QA -> PO QA -> 小川 RM -> Cut Note
+Sync -> PM grill -> mockups (when spatial risk) -> PA (pa.md)
+-> PM compression -> DEV -> CR-lite -> Big CR / browser QA
+-> PO QA -> RM -> Cut Note
 ```
 
 ## 2.5 Size gates and cut records
@@ -191,8 +180,10 @@ ordered PRs.
 
 ### Cut entrypoint and handoff
 
-Medium and large cuts must have a stable routing file before external
-PA / CR or long-running DEV begins:
+Medium and large cuts must have a stable routing file before review
+subagents or long-running DEV begins — for most cuts `plan.md` itself
+is enough; add `agent-entrypoint.md` only when a cut has enough moving
+parts that routing needs its own file:
 
 ```text
 docs/cuts/<CUT>/agent-entrypoint.md
@@ -222,9 +213,7 @@ docs/cuts/_templates/big-cr-prompt-template.md
 ```
 
 Prompt files should fill only the cut id, branch / PR, output path,
-cut-specific reading, review focus, and extra counts. Shared role
-boundaries, escalation signals, output path expectations, and chat
-reply format live in the templates.
+cut-specific reading, review focus, and extra counts.
 
 ### Repo-file handoff rule
 
@@ -232,62 +221,15 @@ For multi-agent work, repo files are the transport layer. The following
 artifacts must be written to a named repo path before they are used by
 another agent:
 
-- PM specs and decision ledgers
-- PA prompts and PA reports
-- Big CR prompts and Big CR reports
-- DEV goal prompts for long-running goals
+- PM specs and plans
+- PA reports, Big CR reports
 - browser QA checklists / PO QA contracts
 - handoffs, Cut Notes, and watch ledgers
 
 Chat should only contain routing text such as "read this file, write the
-next report to that file." Do not ask the owner to copy/paste long PA,
-CR, or DEV prompts through chat when a repo file can carry the same
-context. If an external agent cannot write directly to the repo, reserve
-a target path in the prompt and have the owner or Codex place the
-artifact there before it becomes authoritative.
-
-External agents must write to the intended repo/worktree, not merely to
-the same relative path in a side worktree. Prompts that ask an external
-agent to write a repo artifact must include the target repo root, target
-branch / PR, and target absolute path. Before writing, the agent must
-confirm `pwd`, `git rev-parse --show-toplevel`, and branch. If the
-current worktree is not the requested repo root / branch / PR, the
-agent must stop with `ESCALATION: BRANCH CONFLICT` instead of writing
-under `.claude/worktrees/` or another side checkout. After writing, the
-agent must confirm the absolute report path and `git status --short`
-entry for the file.
-
-If a material decision was made in chat during a grill, it must be
-copied into the cut's `decisions.md`, `pm-spec.md`, `agent-entrypoint.md`,
-or `handoff.md` before DEV or review continues.
-
-### Decisions sync status
-
-Cut decision ledgers should say how fresh they are. New or updated
-`decisions.md` files should include:
-
-```text
-Last synced: <date> after <event>.
-Open review items: <N>
-```
-
-After PA or Big CR writes a report, Codex must update the decision
-status in the same PR before another agent treats `decisions.md` as
-authoritative.
-
-If review opens decisions:
-
-```text
-Last synced: <date> after <PA / Big CR>.
-Open review items: <N> (see <report path> §<section>)
-```
-
-After PM / PO compression resolves them:
-
-```text
-Last synced: <date> after <PA / Big CR> + PM compression.
-Open review items: 0
-```
+next report to that file." If a material decision was made in chat
+during a grill, it must be copied into the cut's `plan.md`,
+`agent-entrypoint.md`, or `handoff.md` before DEV or review continues.
 
 When a cut pauses, changes owner, or crosses a context boundary, write:
 
@@ -297,18 +239,6 @@ docs/cuts/<CUT>/handoff.md
 
 The handoff records current truth, remaining gates, known risks, and the
 next concrete action.
-
-After a large cut, record both:
-
-```text
-docs/cuts/<CUT>/cut-note.md
-docs/cuts/<CUT>/handoff.md
-```
-
-The Cut Note records what shipped, moved, and was learned. The handoff
-records what the next cut must know to avoid repeating mistakes.
-
-Use the templates in `docs/cuts/_templates/`.
 
 ### Cut Note gate
 
@@ -331,95 +261,59 @@ chat history.
 
 ### RM artifact gate
 
-Before RM merge for medium / large cuts, 阿澈 must check the required
-cut artifacts. Missing or empty required artifacts stop the merge; do
-not paper over the gap in chat.
+Before RM merge for medium / large cuts, the RM hat must check the
+required cut artifacts. Missing or empty required artifacts stop the
+merge; do not paper over the gap in chat.
 
 Medium cut checklist:
 
 - `docs/cuts/<CUT>/plan.md` exists and is non-empty.
-- If PA was used, either `docs/cuts/<CUT>/pa.md` exists and is non-empty
-  or PA-lite findings are recorded in `plan.md` / `decisions.md`.
+- If PA was used, `docs/cuts/<CUT>/pa.md` exists and is non-empty; if
+  PA was downgraded, the plan header records the reason.
 - If Big CR was triggered, either `docs/cuts/<CUT>/cr.md` exists and is
-  non-empty or the PR description / final agent summary contains the
-  Big CR record.
+  non-empty or the PR description contains the Big CR record.
 
 Large cut extra checklist:
 
-- `docs/cuts/<CUT>/cut-note.md` exists and is non-empty before closeout
-  / RM merge.
+- `docs/cuts/<CUT>/cut-note.md` exists and is non-empty before closeout.
 
-Default gate reply format should stay compact:
+Gate reply stays compact (`Gate / Blocker / Scope / Verify / Next`);
+link to PR comments, CI jobs, or repo artifacts instead of pasting long
+logs into chat.
 
-```text
-Gate: PASS / FAIL
-Blocker:
-Scope:
-Verify:
-Next:
-```
-
-Use links to PR comments, CI jobs, or repo artifacts instead of pasting
-long logs into chat.
-
-If the artifact gate fails, RM must stop with:
+If the artifact gate fails, RM stops:
 
 ```text
-ESCALATION: CONTEXT INSUFFICIENT — required RM artifact missing or empty: <path or record>
+ESCALATION: CONTEXT INSUFFICIENT — required RM artifact missing or empty: <path>
 ```
 
-When a cut has more than three watch items, create or update:
+When a cut has more than three watch items, create or update
+`docs/cuts/<CUT>/watch-ledger.md`.
 
-```text
-docs/cuts/<CUT>/watch-ledger.md
-```
-
-Use the templates in `docs/cuts/_templates/` for entrypoints, handoffs,
-Cut Notes, decisions, PA prompts, Big CR prompts, CR-lite reports,
-external review reports, and watch ledgers.
-
-## 3. Multi-platform source of truth
+## 3. Source of truth and sync
 
 The remote GitHub `main` branch and the PR head are the shared truth.
 Agent reports are not truth until verified.
 
-The responsible agent is responsible for local state control:
+Before PA / CR / QA / RM, the responsible hat must:
 
-- fetch latest `main` and PR branches before PA / CR / QA / RM
+- fetch latest `main` and PR branches
 - confirm merged PRs are actually present in `main`
-- confirm any externally reported commits are actually pushed to GitHub
+- confirm reported commits are actually pushed
 - confirm local checkout matches the branch being reviewed
 - confirm working tree cleanliness before merge-sensitive work
 
-External high-reasoning PA tools such as Antigravity / Opus may help
-with high-level thinking, large-cut direction, and occasional big CR.
-They must be told to sync and verify the baseline before review.
+Review subagents may escalate instead of writing partial reports:
 
-External agents may escalate instead of writing partial reports. The
-standard signals are:
-
-- `CONTEXT INSUFFICIENT`: required reading file is missing, empty, or
-  unreadable.
-- `BRANCH CONFLICT`: target branch or PR cannot be inspected because of
-  local worktree / checkout state.
-- `SPEC CONTRADICTS`: PM spec, decisions, ADR, or entrypoint disagree
-  on a key point.
+- `CONTEXT INSUFFICIENT`: required reading file is missing or empty.
+- `BRANCH CONFLICT`: target branch / PR cannot be inspected from the
+  current worktree state.
+- `SPEC CONTRADICTS`: plan, ADR, or entrypoint disagree on a key point.
 - `SCOPE UNCLEAR`: review focus asks a question the spec does not
   answer.
 
-Format:
-
-```text
-ESCALATION: <SIGNAL> — <one sentence explanation>
-```
-
-阿澈 or the owner resolves the escalation before the agent proceeds.
-
-External DEV is no longer part of the default daily workflow. Use it
-only when the owner explicitly asks for that exception. In that case,
-the external DEV must start from latest `main`, push its branch, open or
-update a PR, and report PR URL + commit hash. Its completion report is a
-lead, not a source of truth.
+Format: `ESCALATION: <SIGNAL> — <one sentence>`. The PM hat or the
+owner resolves the escalation before the agent proceeds.
 
 ### Owner process brake
 
@@ -446,82 +340,28 @@ After a process brake, continue only when one of these is true:
 Do not soften this into "noted" or silently execute the shortcut. The
 point is to protect the owner from over-commanding during momentum.
 
-## 4. Role split
+## 4. Hats
 
-Current named-agent assignment:
+All hats are worn by the orchestrator; independence comes from fresh
+subagent contexts (see `AGENTS.md` tier table for models):
 
-- 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and
-  medium / large RM artifact gates.
-- 小川 owns PA, DEV, routine CR-lite, and RM / release execution.
-- For medium / large RM, 小川 may execute the merge only after 阿澈 runs
-  the RM artifact gate and final sanity check.
-- PM and PA should not be the same person by default. If one agent must
-  cover both, record the exception and self-review risk in
-  `docs/cuts/<CUT>/plan.md`.
-- When 小川 performs both PA and DEV, PA must be a separate stage:
-  write `docs/cuts/<CUT>/pa.md`, wait for 阿澈 PM compression into
-  `plan.md`, then start DEV from the updated plan.
-- Either agent may cover another role when quota or availability
-  requires, but role contracts and gates do not downgrade.
+- **PM hat**: grill, `plan.md`, PA compression, dispatch, acceptance.
+- **PA hat** (fresh Opus subagent): plan review before DEV when the
+  irreversibility trigger fires; never writes implementation patches.
+- **DEV hat** (fresh Sonnet subagent): implements from the committed
+  `plan.md`; must not redesign product direction silently; stops and
+  reports if the work requires forbidden files or a changed product
+  decision.
+- **CR hat** (fresh Opus subagent): cold-read of the diff; finds bugs,
+  scope leaks, regressions; must not quietly redesign the feature — if
+  product direction is wrong, route back to PM.
+- **QA**: the main agent runs browser QA for user-visible changes;
+  static verify never substitutes for it. The owner (PO) runs final
+  product QA and says "走" before RM merge; the PO does not read code.
+- **RM hat**: artifact gate, merge, post-merge `main` CI confirmation.
 
-PM / product pacing:
-
-- grill the user's idea before DEV
-- distinguish current cut from future cut
-- compress PA output into 2-3 PO decisions
-- push back when the product starts drifting into an AI dashboard
-
-PO:
-
-- decides whether the product direction and visual feel are right
-- runs final PO QA after 阿澈 browser QA
-- does not need to read code or perform code review
-- says "走" before RM merge
-- may change process deliberately, but not by accidental one-off bypass;
-  process changes must be made explicit in repo context before agents
-  proceed past a required gate
-
-PA:
-
-- handles architecture and product boundary review before DEV
-- follows `docs/agents/pa-persona.md`
-- identifies allowed / forbidden files
-- defines static verify and browser QA requirements
-- must not write implementation patches in PA mode
-- 小川 owns routine PA by default; external high-reasoning PA is reserved
-  for large-cut second PA, direction checks, and occasional Big CR.
-
-DEV:
-
-- 小川 implements the approved cut by default
-- must not redesign the product direction silently
-- stops and reports if implementation requires forbidden files or a
-  changed product decision
-
-CR:
-
-- 小川 owns routine CR-lite. 阿澈 owns Big CR and any final sanity gate
-  needed before medium / large RM.
-- finds bugs, scope leaks, missing tests, and behavioral regressions
-- must not quietly redesign the feature during review; if product
-  direction is wrong, stop and route back to PM / PA
-
-QA:
-
-- 阿澈 does first local / in-app browser QA for UI direction and
-  user-visible quality unless the cut explicitly assigns QA elsewhere.
-- PO then does final user-visible QA
-- static verify does not replace browser QA for user-visible surfaces
-
-RM:
-
-- confirms PR head, mergeability, and clean state
-- runs the medium / large artifact gate before merge
-- merges with the agreed strategy
-- fetches `main` after merge and confirms the merge commit is present
-- 小川 owns small-cut RM / release execution. For medium / large cuts,
-  阿澈 runs the artifact gate and final sanity check before 小川 executes
-  the merge.
+PA, DEV, and CR must be different (fresh) contexts. Review gates never
+downgrade because of who wears the hat.
 
 ## 5. Grill before visual work
 
@@ -537,18 +377,10 @@ Before important UI work, PM should ask:
 If the user cannot state the teacher task in one sentence, do not
 start DEV. Return to problem definition.
 
-## 6. Mockup / Canvas discipline
+## 6. Mockup discipline
 
-Use Gemini Canvas, image mockups, or proportional diagrams when visual
-space, interaction feel, or layout trust is the risk.
-
-Mockups are for direction, not production truth.
-
-Default set:
-
-- conservative option
-- recommended option
-- aggressive option or explicit anti-pattern
+Use mockups / prototypes when visual space, interaction feel, or layout
+trust is the risk. Mockups are for direction, not production truth.
 
 Hard brake A:
 
@@ -557,57 +389,40 @@ Hard brake A:
 If two rounds do not converge, stop generating images. The issue is
 not image quality; the product question is unclear.
 
-## 7. PA Discipline
+## 7. PA discipline
 
-Use 小川 PA by default after 阿澈 writes the PM plan. This keeps PM and
-PA separate so 阿澈 is not approving 阿澈's own plan. Consider outside
-high-reasoning PA only for large second-review passes, explicit direction
-checks, or owner-requested independent review, especially when the
-decision affects PaperSurface, data contracts, geometry, or future cut
-sequencing.
+PA triggers on **irreversibility, not tier**: run formal PA (fresh Opus
+subagent) when a cut touches an irreversible surface or changes the
+semantics of a data contract — schema, migrations, export formats,
+anchor protocols, cross-cut architecture. Purely additive schema
+touches and reversible product-surface work may downgrade to PA-lite;
+the downgrade reason goes in the plan header and CR must review it.
 
-小川 PA and external PA must read `docs/agents/pa-persona.md` before
-review unless that file is already loaded in the current session.
+Formal PA output goes to `docs/cuts/<CUT>/pa.md` and ends with:
 
-Formal PA output must be written to `docs/cuts/<CUT>/pa.md` and end with:
-
-- report path
-- reviewed branch / commit baseline
-- verdict
-- product principle
-- exact UX / architecture model
-- Must Fix Before DEV
-- Must Fix -> `plan.md` disposition checklist, when Must Fix exists
+- reviewed branch / commit baseline, verdict
+- Must Fix Before DEV (+ mapping each Must Fix to its `plan.md`
+  disposition; PM compression records the handling under
+  `PA Follow-Up Decisions` before DEV starts)
 - Should Watch
-- allowed / forbidden files
-- static verify requirements
-- browser QA matrix
-- whether the DEV prompt is ready
+- allowed / forbidden files, static verify requirements, browser QA
+  matrix
 - at most 3 unresolved PO decisions
-- token usage / estimated cost when available; if unavailable, say so
 
 Hard brake B:
 
-- if PA leaves more than 3 PO decisions, do not start DEV
-
-More than 3 open decisions means the PA did not converge. Compress or
-rerun PA instead of handing ambiguity to DEV.
-
-When PA returns Must Fix items, the PA report must include a checklist
-that maps each Must Fix to the expected `plan.md` disposition. PM
-compression then records the matching handling under `PA Follow-Up
-Decisions` in `plan.md`. Big CR must verify that every PA Must Fix has
-a corresponding plan disposition before treating the PA loop as closed.
+- if PA leaves more than 3 PO decisions, do not start DEV. Compress or
+  rerun PA instead of handing ambiguity to DEV.
 
 ## 8. DEV prompt requirements
 
 Large-cut DEV prompts must include:
 
-- sync requirement and required baseline commit / merge commit
+- sync requirement and required baseline commit
 - exact goal and out-of-scope list
 - allowed and forbidden files
-- locked product decisions
-- implementation boundaries
+- locked product decisions (hard contract) vs reference implementation
+  (may deviate with a stated reason) — two explicitly separated tiers
 - verify scripts to run
 - browser QA requirements
 - completion report format
@@ -615,14 +430,11 @@ Large-cut DEV prompts must include:
 Do not tell DEV to "make it like the image." The image aligns intent;
 the prompt defines the implementation.
 
-External DEV prompts are exception-only. Do not generate them by
-default for routine cuts.
-
 ## 9. CR and QA discipline
 
 CR should not become a second design session. If the implementation
-exposes a product flaw, stop and route back to PM / PA instead of
-quietly changing the design in review.
+exposes a product flaw, stop and route back to PM instead of quietly
+changing the design in review.
 
 Every mergeable PR needs a CR-lite record, even when the change is
 docs-only. For small cuts this can be a short PR-body section. For
@@ -645,25 +457,21 @@ paths, and misleading green checks before RM.
 
 Self-Review Blind Spots are not extra tasks. They are the places the
 author suspects may hide a problem but cannot confidently judge. If a
-later Big CR runs, it should inspect those first, then continue with
-normal risk-based review.
+later Big CR runs, it should inspect those first.
 
 Big CR should not repeat a full manual forbidden-scope audit when a
-passing verify script already covers it. In that case, the report should
-say:
-
-```text
-Covered by verify; spot-checked <N> files.
-```
-
-Then review the higher-value risks: behavior, data contracts, state
-flow, stale fallbacks, and verification gaps.
+passing verify script already covers it. In that case, the report says
+`Covered by verify; spot-checked <N> files.` Then review the
+higher-value risks:
+behavior, data contracts, state flow, stale fallbacks, verification
+gaps. When a typed error must propagate to the HTTP layer, CR must
+check every intermediate catch (per-item / aggregate catches are the
+top swallow point — M0-5 incident).
 
 Browser QA must include the failure modes that previously hurt the
 product:
 
-- browser zoom 100%
-- browser zoom 90%
+- browser zoom 100% / 90%
 - tight desktop widths
 - stacked / narrow mode when relevant
 - long or last-item targets
@@ -671,7 +479,7 @@ product:
 - coexistence with evidence lines / existing overlays
 - no stale or unsynced code
 
-## 10. Cut Note And Handoff
+## 10. Cut Note and handoff
 
 After a large cut, record a Cut Note and a handoff. Include in the Cut
 Note:
