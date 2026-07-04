@@ -11,8 +11,9 @@
  *      and the true vacuum ('results' with zero hits); loading / results /
  *      clarification / error never render it. 8-paper default cap + "显示
  *      全部 N 套卷" expander. Empty-corpus guidance text.
- *   3. Starter chip click fills intent AND calls submit(chip) directly
- *      (P1 same-face fix — chip no longer requires a second submit).
+ *   3. STARTER_CHIPS retired (cut ai-mode-filter-chips, C7) — the structured
+ *      filter row replaces the three hardcoded example chips; submit()'s
+ *      intentOverride parameter stays available in the code path.
  *   4. submit() / triggerSimilar() no longer clear intent after firing
  *      (P1 same-face fix — the query stays editable after a search).
  *
@@ -216,12 +217,24 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
 }
 
 // ------------------------------------------------------------------ Test 10
-console.log('\nTest 10: chip click fills intent AND submits directly (P1 same-face fix)')
+console.log('\nTest 10: STARTER_CHIPS retired (cut ai-mode-filter-chips, C7) — submit(intentOverride) path preserved for future callers')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
-  const chipMatch = desk.match(/className="concierge-starter-chip"[\s\S]{0,500}/)?.[0] || ''
-  assert('chip onClick still fills intent', /setIntent\(chip\)/.test(chipMatch), '')
-  assert('chip onClick also calls submit(chip) directly', /void submit\(chip\)/.test(chipMatch), '')
+  // Cut ai-mode-filter-chips C7: the three hardcoded example STARTER_CHIPS
+  // (and their "fill + submit immediately" click handler) are removed — the
+  // structured filter row (see verify-concierge-filters.mjs /
+  // verify-concierge-desk.mjs Test 12) replaces them. `submit`'s
+  // intentOverride parameter itself must still exist in the code path
+  // (plan C7: "不许顺手拆 submit 的 intentOverride 参数") even though the
+  // filter row does not call it.
+  assert('STARTER_CHIPS constant declaration removed', !/const STARTER_CHIPS/.test(desk), '')
+  assert('no concierge-starter-chip button wired to void submit(chip)', !/void submit\(chip\)/.test(desk), '')
+  const hook = readSrc('app/src/concierge/useConciergeDesk.ts')
+  assert(
+    'submit(intentOverride?: string) signature preserved on the hook',
+    /submit:\s*\(intentOverride\?:\s*string\)\s*=>\s*Promise<void>/.test(hook),
+    '',
+  )
 }
 
 // ------------------------------------------------------------------ Test 11
