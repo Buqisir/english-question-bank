@@ -71,6 +71,7 @@ const registry = {
   'scripts/verify-restart1-local-search-intent.mjs',
   'scripts/verify-restart3-teacher-analysis.mjs',
   'scripts/verify-home-default-feed.mjs',
+  'scripts/verify-concierge-filters.mjs',
   'scripts/verify-error-copy-mainline.mjs',
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',

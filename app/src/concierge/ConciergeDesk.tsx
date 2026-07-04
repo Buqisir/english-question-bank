@@ -15,9 +15,11 @@
 
 import { useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
+import { aggregatePaperResults } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
 import { buildDefaultFeed } from './defaultFeed.ts'
+import { applyConciergeFilters, buildFilterOptions, type ConciergeFilters } from './filters.ts'
 import type {
   ConciergeRetrievalActions,
   ConciergeRetrievalView,
@@ -50,8 +52,6 @@ export type ConciergeDeskProps = {
   /** Called when the user toggles thinking mode. */
   onThinkingModeChange?: (value: boolean) => void
 }
-
-const STARTER_CHIPS = ['生态主题 C 篇', '2025 浙江卷', '中等难度主旨题'] as const
 
 /** Default feed shows this many papers before the "显示全部" expander. */
 const DEFAULT_FEED_PAGE_SIZE = 8
@@ -90,6 +90,31 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const dataLoading = dataStatus === 'loading'
   const [feedExpanded, setFeedExpanded] = useState(false)
 
+  // Cut ai-mode-filter-chips (C1/C2): structured chip filters — a pure
+  // client-side AND layer on top of whatever the search/feed already
+  // produced. Lives at this component's local state, same layer as
+  // `feedExpanded` (participants agreed a hook migration isn't needed —
+  // see plan.md 参考实现).
+  const [filters, setFilters] = useState<ConciergeFilters>({})
+  const filterOptions = useMemo(() => buildFilterOptions(questionGroups), [questionGroups])
+  const hasActiveFilters =
+    filters.groupType !== undefined ||
+    filters.year !== undefined ||
+    filters.region !== undefined ||
+    filters.sourceType !== undefined
+  const clearFilters = () => setFilters({})
+  function toggleFilter<K extends keyof ConciergeFilters>(key: K, value: ConciergeFilters[K]) {
+    setFilters((prev) => {
+      const next = { ...prev }
+      if (prev[key] === value) {
+        delete next[key]
+      } else {
+        next[key] = value
+      }
+      return next
+    })
+  }
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (dataLoading) return
@@ -102,9 +127,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // clarification / error never render it.
   const showFeed =
     !dataLoading && (state.kind === 'empty' || isVacuumResultsState(state))
+  // C2: filters narrow the corpus BEFORE it goes into buildDefaultFeed, so
+  // paper-bucketing/sorting rules stay exactly as buildDefaultFeed already
+  // defines them — this cut only narrows the input set.
+  const filteredQuestionGroups = useMemo(
+    () => applyConciergeFilters(questionGroups, filters),
+    [questionGroups, filters],
+  )
   const defaultFeed = useMemo(
-    () => (showFeed ? buildDefaultFeed(questionGroups) : []),
-    [showFeed, questionGroups],
+    () => (showFeed ? buildDefaultFeed(filteredQuestionGroups) : []),
+    [showFeed, filteredQuestionGroups],
   )
   const visibleFeed = feedExpanded ? defaultFeed : defaultFeed.slice(0, DEFAULT_FEED_PAGE_SIZE)
   const feedPaperCount = defaultFeed.length
@@ -112,6 +144,23 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     () => defaultFeed.reduce((sum, paper) => sum + paper.groups.length, 0),
     [defaultFeed],
   )
+
+  // C2: search-result rows narrow the same way, but by construction from
+  // `state.hits` rather than by editing the already-aggregated
+  // `paperResults` — filter each hit's `group` down with
+  // applyConciergeFilters, drop hits that no longer pass, then re-run the
+  // exact same `aggregatePaperResults` bucketing the search path already
+  // uses. `state.hits` itself is never mutated (this is a derived useMemo),
+  // so clearing filters restores the full result set without re-running
+  // the search.
+  const filteredPaperResults = useMemo(() => {
+    if (!hasActiveFilters) return paperResults
+    if (state.kind !== 'results') return paperResults
+    const filteredHits = state.hits.filter(
+      (hit) => applyConciergeFilters([hit.group], filters).length > 0,
+    )
+    return aggregatePaperResults(filteredHits)
+  }, [paperResults, filters, hasActiveFilters, state])
 
   const placeholder = useMemo(() => {
     if (dataLoading) return '正在连接本地题库…'
@@ -166,27 +215,42 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         </p>
       )}
 
-      {!dataLoading && (state.kind === 'empty' || state.kind === 'error' || isVacuumResultsState(state)) && (
-        <ul className="concierge-starter-chips" aria-label="示例搜索">
-          {STARTER_CHIPS.map((chip) => (
-            <li key={chip}>
-              <button
-                type="button"
-                className="concierge-starter-chip"
-                onClick={() => {
-                  // Cut ⑥: chips search immediately instead of only filling
-                  // the input — a click is a decision, not a suggestion to
-                  // review. Fill the box too so the teacher can see/edit the
-                  // query that just ran.
-                  setIntent(chip)
-                  void submit(chip)
-                }}
-              >
-                {chip}
-              </button>
-            </li>
+      {/* Cut ai-mode-filter-chips (C5): structured filter row replaces the
+          retired STARTER_CHIPS. Shown for 'empty', 'results', and the true
+          vacuum ('results' + zero hits); NOT during 'loading' or
+          'clarification' (existing region left untouched per plan C5). */}
+      {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && (
+        <div className="concierge-filter-row" aria-label="结构化筛选">
+          {(['groupType', 'year', 'region', 'sourceType'] as const).map((dimension) => (
+            <ul key={dimension} className="concierge-starter-chips" aria-label={dimension}>
+              {filterOptions[dimension].map((option) => {
+                const selected = String(filters[dimension] ?? '') === option.value
+                return (
+                  <li key={option.value}>
+                    <button
+                      type="button"
+                      className={`concierge-starter-chip${selected ? ' is-selected' : ''}`}
+                      aria-pressed={selected}
+                      onClick={() =>
+                        toggleFilter(
+                          dimension,
+                          (dimension === 'year' ? Number(option.value) : option.value) as never,
+                        )
+                      }
+                    >
+                      {option.label} {option.count}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
           ))}
-        </ul>
+          {hasActiveFilters && (
+            <button type="button" className="concierge-filter-clear" onClick={clearFilters}>
+              清除筛选
+            </button>
+          )}
+        </div>
       )}
 
       {state.kind === 'clarification' && (
@@ -223,9 +287,24 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           <p className="concierge-empty">没找到匹配。可以换个说法，或在经典模式里精筛。</p>
         )}
 
-        {state.kind === 'results' && paperResults.length > 0 && (
+        {/* C4: honest empty handling — when the search itself found hits but
+            the active chip filters narrowed them to zero, say so plainly
+            (筛选筛空的, not "没搜到") and offer a one-click reset, instead of
+            silently rendering a blank list. */}
+        {state.kind === 'results' &&
+          paperResults.length > 0 &&
+          filteredPaperResults.length === 0 && (
+            <p className="concierge-empty">
+              筛选条件太严格，没有匹配的结果。
+              <button type="button" className="concierge-filter-clear-inline" onClick={clearFilters}>
+                清除筛选
+              </button>
+            </p>
+          )}
+
+        {state.kind === 'results' && filteredPaperResults.length > 0 && (
           <ul className="concierge-paper-list">
-            {paperResults.map((paper) => (
+            {filteredPaperResults.map((paper) => (
               <li key={paper.key}>
                 <ConciergePaperRow
                   paper={paper}
@@ -249,10 +328,21 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             <p className="concierge-feed-empty-corpus">
               题库还没有题目。先导入一套卷，题库会在这里展开浏览。
             </p>
+          ) : hasActiveFilters && feedPaperCount === 0 ? (
+            // C4: filters narrowed the browse feed to nothing — say so
+            // plainly (this is the chips, not an empty corpus) with a
+            // one-click reset, instead of silently showing a blank feed.
+            <p className="concierge-empty">
+              筛选条件太严格，题库里没有匹配的卷。
+              <button type="button" className="concierge-filter-clear-inline" onClick={clearFilters}>
+                清除筛选
+              </button>
+            </p>
           ) : (
             <>
               <p className="concierge-feed-intro">
                 题库里现有 {feedPaperCount} 套卷 · {feedGroupCount} 个篇章。可以直接翻，或用一句话描述你要的题。
+                {hasActiveFilters && <span className="concierge-feed-filtered-tag">（已筛选）</span>}
               </p>
               <ul className="concierge-paper-list">
                 {visibleFeed.map((paper) => (

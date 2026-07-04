@@ -324,7 +324,11 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Desk uses useState for feed-expand UI state only', /\buseState\b/.test(deskSource), '')
 
   // 9.4 Desk renders paper rows, not the old group rows.
-  assert('Desk maps paperResults', /paperResults\.map\(\(paper\)/.test(deskSource), '')
+  // Cut ai-mode-filter-chips: the search-results list now maps
+  // `filteredPaperResults` (paperResults narrowed by the chip filter layer,
+  // see filters.ts) instead of `paperResults` directly — same underlying
+  // PaperResult[] shape, filtered client-side before render.
+  assert('Desk maps (filtered)paperResults', /[Pp]aperResults\.map\(\(paper\)/.test(deskSource), '')
   assert('Desk does NOT map state.hits directly', !/state\.hits\.map\(/.test(deskSource), '')
   assert('Desk uses ConciergePaperRow', /<ConciergePaperRow\b/.test(deskSource), '')
   assert('Desk passes basketIds to row', /basketIds=\{basketIds\}/.test(deskSource), '')
@@ -337,11 +341,12 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     /void submit\(\)/.test(deskSource), '')
   assert('Desk input onChange wires to actions.setIntent',
     /onChange=\{\(event\)\s*=>\s*setIntent\(event\.target\.value\)\}/.test(deskSource), '')
-  // Cut ⑥: chip click now fills the input AND submits immediately (direct
-  // search), replacing the old fill-only behavior. See Test 12 below for the
-  // full assertion of this new contract.
-  assert('Desk starter chip click wires to actions.setIntent',
-    /className="concierge-starter-chip"[\s\S]{0,500}setIntent\(chip\)/.test(deskSource), '')
+  // Cut ai-mode-filter-chips (C7): STARTER_CHIPS' "fill input + submit
+  // immediately" click handler is retired along with the constant — the
+  // filter row toggles local filter state instead of touching intent/submit
+  // at all (see Test 12 below for the full new contract).
+  assert('Desk filter chip click toggles local filter state via toggleFilter',
+    /className=\{`concierge-starter-chip[\s\S]{0,300}onClick=\{\(\)\s*=>\s*[\s\S]{0,100}toggleFilter\(/.test(deskSource), '')
 
   // 9.5 Hook exposes the new deeper surface only, no flat fields leaked.
   assert('hook exports ConciergeRetrievalView',
@@ -625,7 +630,7 @@ console.log('\nTest 17: Auto-expand once + collapsible by user')
 }
 
 // ------------------------------------------------------------------ Test 12
-console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips remain')
+console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS retired for structured filter chips (cut ai-mode-filter-chips, C7)')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const desk = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
@@ -636,29 +641,25 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips 
   assert('legacy subhead "自然语言或关键词皆可" removed', !/自然语言或关键词皆可/.test(desk), '')
   assert('no concierge-headline / concierge-subhead element rendered', !/<header className="concierge-headline">/.test(desk) && !/<p className="concierge-subhead">/.test(desk), '')
 
-  // Starter chips remain.
-  assert('STARTER_CHIPS contains 生态主题 C 篇', /生态主题\s*C\s*篇/.test(desk), '')
-  assert('STARTER_CHIPS contains 2025 浙江卷', /2025\s*浙江卷/.test(desk), '')
-  assert('STARTER_CHIPS contains 中等难度主旨题', /中等难度主旨题/.test(desk), '')
-  const chipBtnMatch = desk.match(/className="concierge-starter-chip"[\s\S]{0,400}?onClick=\{[\s\S]{0,400}?\n\s*\}\}/)?.[0] || ''
-  assert('chip onClick wired', chipBtnMatch.length > 0, '')
-  assert('chip click calls setIntent (actions.setIntent)', /setIntent\(chip\)/.test(chipBtnMatch), '')
-  // Cut ⑥ P1 fix: a chip click must search immediately, not just fill the
-  // input for the teacher to press submit again. "点了没反应/旧结果配新
-  // 输入" was the exact two-step error the plan names.
-  assert('chip click DOES call submit(chip) directly', /submit\(chip\)/.test(chipBtnMatch), '')
-  // CR-5 SW-1: chips must also render for the TRUE vacuum state — a search
-  // that actually ran and found zero honest hits (state.kind === 'results',
-  // hits: []) — not just the pre-search 'empty' state. Plan cut ⑤ explicitly
-  // names "真空态+起始 chip 呈现" / "乱码 query 必须走到真空态" as one
-  // acceptance line; a chip gate that only fires on 'empty' silently drops
-  // the second half of that line for every real search that resolves to
-  // zero hits.
+  // Cut ai-mode-filter-chips (C7): the three hardcoded example STARTER_CHIPS
+  // are retired in favor of the structured filter row (filters.ts +
+  // buildFilterOptions). `submit(chip)`'s direct-search capability itself is
+  // preserved in the code path (plan C7) — just no longer invoked by a
+  // literal example chip.
+  assert('STARTER_CHIPS constant declaration removed', !/const STARTER_CHIPS/.test(desk), '')
+  assert('hardcoded example chip text 生态主题 C 篇 is gone', !/生态主题\s*C\s*篇/.test(desk), '')
+  assert('hardcoded example chip text 2025 浙江卷 is gone', !/2025\s*浙江卷/.test(desk), '')
+  assert('hardcoded example chip text 中等难度主旨题 is gone', !/中等难度主旨题/.test(desk), '')
+
+  // The structured filter row replaces it: built from buildFilterOptions,
+  // toggled via applyConciergeFilters-backed local state, shown for
+  // 'empty' and 'results' (which covers the true vacuum — 'results' with
+  // zero hits — per plan C5).
+  assert('imports buildFilterOptions/applyConciergeFilters from filters.ts', /from '\.\/filters\.ts'/.test(desk), '')
+  assert('concierge-filter-row rendered', /concierge-filter-row/.test(desk), '')
   assert(
-    'chips gated on !dataLoading + (empty || error || true vacuum state)',
-    /\{!dataLoading && \(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]error['"] \|\| isVacuumResultsState\(state\)\)/.test(
-      desk,
-    ),
+    'filter row gated on !dataLoading + (empty || results)',
+    /\{!dataLoading && \(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]results['"]\)/.test(desk),
     '',
   )
   assert(
@@ -669,7 +670,9 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone, starter chips 
     '',
   )
 
-  // Chip styling.
+  // Chip styling — the filter row reuses .concierge-starter-chip's exact
+  // rule (C6: zero new/changed color tokens), so these hex literals must
+  // still be exactly as before.
   const chipRule = css.match(/\.concierge-starter-chip\s*\{[^}]*\}/)?.[0] || ''
   assert('chip background transparent', /background:\s*transparent/.test(chipRule), '')
   assert('chip border light #E5E3DC', /border:\s*1px solid #E5E3DC/i.test(chipRule), '')

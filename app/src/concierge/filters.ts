@@ -1,0 +1,170 @@
+/**
+ * filters.ts — structured (chip) filtering for the AI 取题台.
+ *
+ * Cut ai-mode-filter-chips (C1): pure functions, no React, no IO. This module
+ * is the client-side "hard condition" layer that sits alongside natural-
+ * language search (`conciergeSearch.ts`) — that module handles "what the
+ * query said"; this module handles "what the teacher clicked". Both apply to
+ * the same `QuestionGroupCard[]`, so they compose as a plain AND with zero
+ * coupling: this file never imports conciergeSearch, and conciergeSearch
+ * never imports this file.
+ *
+ * Four dimensions (PM 拍板 #2 — 一体化 chips 精简版):
+ *   - groupType (题型): fixed business order (reading/seven_choices/cloze/
+ *     grammar_cloze/writing — the five types the plan names), other types
+ *     that happen to exist in data are appended afterward so nothing silently
+ *     disappears from the option list.
+ *   - year (年份): descending.
+ *   - region (地区): by count descending (ties broken by name for stability).
+ *   - sourceType (来源): fixed order (real_exam then mock_exam), other values
+ *     appended afterward for the same reason as groupType.
+ *
+ * Difficulty and topic are explicitly out of scope (see plan.md Forbidden).
+ */
+
+import {
+  groupTypeLabel,
+  sourceTypeLabel,
+  type GroupType,
+  type QuestionGroupCard,
+  type SourceType,
+} from '../domain/questionBank.ts'
+
+export type FilterOption<TValue extends string = string> = {
+  value: TValue
+  label: string
+  count: number
+}
+
+export type ConciergeFilterOptions = {
+  groupType: FilterOption[]
+  year: FilterOption[]
+  region: FilterOption[]
+  sourceType: FilterOption[]
+}
+
+/** All four dimensions optional; a missing field means "do not filter on this". */
+export type ConciergeFilters = {
+  groupType?: string
+  year?: number
+  region?: string
+  sourceType?: string
+}
+
+/** Business-fixed display order for 题型 (plan.md C1). Anything else sorts after. */
+const GROUP_TYPE_ORDER: GroupType[] = [
+  'reading',
+  'seven_choices',
+  'cloze',
+  'grammar_cloze',
+  'writing',
+]
+
+/** Business-fixed display order for 来源 (plan.md C1: 真题/模拟题). */
+const SOURCE_TYPE_ORDER: SourceType[] = ['real_exam', 'mock_exam']
+
+function countBy<T extends string>(
+  groups: QuestionGroupCard[],
+  pick: (group: QuestionGroupCard) => T | null | undefined,
+): Map<T, number> {
+  const counts = new Map<T, number>()
+  for (const group of groups) {
+    const value = pick(group)
+    if (value === null || value === undefined) continue
+    counts.set(value, (counts.get(value) ?? 0) + 1)
+  }
+  return counts
+}
+
+function orderedOptions<T extends string>(
+  counts: Map<T, number>,
+  fixedOrder: readonly T[],
+  labelFor: (value: T) => string,
+): FilterOption[] {
+  const options: FilterOption[] = []
+  const seen = new Set<T>()
+  for (const value of fixedOrder) {
+    const count = counts.get(value)
+    if (count === undefined) continue
+    options.push({ value, label: labelFor(value), count })
+    seen.add(value)
+  }
+  // Anything present in the data but not in the fixed order sorts after,
+  // by count descending — so an unexpected value is visible, not hidden.
+  const rest = Array.from(counts.entries())
+    .filter(([value]) => !seen.has(value))
+    .sort((a, b) => b[1] - a[1])
+  for (const [value, count] of rest) {
+    options.push({ value, label: labelFor(value), count })
+  }
+  return options
+}
+
+/**
+ * Build the four filter dimensions from the live corpus — distinct values +
+ * counts, no hardcoding. Options recompute whenever `groups` changes, so a
+ * newly-imported paper's region/year/groupType shows up automatically.
+ */
+export function buildFilterOptions(groups: QuestionGroupCard[]): ConciergeFilterOptions {
+  const groupTypeCounts = countBy(groups, (g) => g.groupType)
+  const groupType = orderedOptions(
+    groupTypeCounts,
+    GROUP_TYPE_ORDER,
+    (value) => groupTypeLabel[value] || value,
+  )
+
+  const yearCounts = countBy(groups, (g) =>
+    Number.isFinite(g.year) && g.year > 0 ? String(g.year) : null,
+  )
+  const year: FilterOption[] = Array.from(yearCounts.entries())
+    .sort((a, b) => Number(b[0]) - Number(a[0]))
+    .map(([value, count]) => ({ value, label: value, count }))
+
+  const regionCounts = countBy(groups, (g) => {
+    const region = String(g.region ?? '').trim()
+    return region && region !== '未标地区' && region !== '未标' ? region : null
+  })
+  const region: FilterOption[] = Array.from(regionCounts.entries())
+    .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0], 'zh-Hans-CN'))
+    .map(([value, count]) => ({ value, label: value, count }))
+
+  const sourceTypeCounts = countBy(groups, (g) => g.sourceType)
+  const sourceType = orderedOptions(
+    sourceTypeCounts,
+    SOURCE_TYPE_ORDER,
+    (value) => sourceTypeLabel[value] || value,
+  )
+
+  return { groupType, year, region, sourceType }
+}
+
+/**
+ * Apply the four (optional) chip filters as an AND over `groups`. A filter
+ * dimension left unset does not narrow the result at all. An empty
+ * `ConciergeFilters` returns `groups` unchanged (same reference-shape, new
+ * array). Filtering to zero legitimately returns `[]` — chips are a hard
+ * condition, not a search fallback, so there is no "fall back to full corpus"
+ * behavior here (that's conciergeSearch's job for query intent, not this
+ * module's).
+ */
+export function applyConciergeFilters(
+  groups: QuestionGroupCard[],
+  filters: ConciergeFilters,
+): QuestionGroupCard[] {
+  const { groupType, year, region, sourceType } = filters
+  if (
+    groupType === undefined &&
+    year === undefined &&
+    region === undefined &&
+    sourceType === undefined
+  ) {
+    return groups.slice()
+  }
+  return groups.filter((group) => {
+    if (groupType !== undefined && group.groupType !== groupType) return false
+    if (year !== undefined && group.year !== year) return false
+    if (region !== undefined && String(group.region ?? '').trim() !== region) return false
+    if (sourceType !== undefined && group.sourceType !== sourceType) return false
+    return true
+  })
+}
