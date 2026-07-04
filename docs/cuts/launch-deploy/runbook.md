@@ -168,13 +168,78 @@ After first provision, use `scripts/deploy.sh` (pull → install → build →
 restart → health smoke) for every subsequent code update. It's idempotent
 and safe to re-run.
 
-## Backup + import (Slices 3 / 4 — not yet landed in this cut)
+## Backup + import (Slice 3 landed; Slice 4 — not yet landed in this cut)
 
-- Daily backup to R2 lands as `scripts/backup-to-r2.sh` (Slice 3) — a cron
-  entry (e.g. `30 3 * * *` in server local time, aligned to Beijing time)
-  will be documented here once that script lands.
-- Importing new real exam papers into the live database (pull the server's
-  `question-bank.sqlite`, run the local import pipeline, push the updated
-  library back with the stop→temp+mv→start swap recipe) lands as
-  `scripts/pull-run-push.mjs` (Slice 4). Until then, do not manually scp a
-  database onto the running server's live path.
+### Daily backup to R2 (Slice 3)
+
+`scripts/backup-to-r2.sh` takes an online `.backup` snapshot of both
+sqlite dbs (`question-bank.sqlite` + `user-data.sqlite` — a backup is a
+read-only off-site copy, so user data IS in scope here, unlike
+pull-run-push), gates each snapshot on `PRAGMA integrity_check == ok`, and
+pushes the snapshots + `app/public/paper-assets/` + `data/user-space/files/`
+to R2 with `rclone copy` (never `sync` — copy only adds, so a local
+mis-delete can never propagate to the off-site copy). It then prunes old
+dated prefixes as a separate, retention-guarded step.
+
+**1. Install rclone** on the server:
+
+```
+sudo apt install rclone   # or: curl https://rclone.org/install.sh | sudo bash
+```
+
+**2. Create the R2 remote.** Either run `rclone config` interactively and
+follow the prompts (`n` new remote → type `s3` → provider `Cloudflare` →
+paste the R2 access key / secret / endpoint from the Cloudflare dashboard),
+or hand-write `~/.config/rclone/rclone.conf` (or
+`/opt/eqb/english-question-bank/rclone.conf`, gitignored — see
+`.gitignore`) with this stanza shape (placeholders only, never commit real
+values):
+
+```ini
+[r2]
+type = s3
+provider = Cloudflare
+access_key_id = PLACEHOLDER_ACCESS_KEY_ID
+secret_access_key = PLACEHOLDER_SECRET_ACCESS_KEY
+endpoint = https://PLACEHOLDER_ACCOUNT_ID.r2.cloudflarestorage.com
+```
+
+The bucket is addressed as `r2:eqb-backup` (remote name `r2`, matching
+`EQB_R2_REMOTE`'s default `r2:eqb-backup` — override via env if the bucket
+is named differently).
+
+**3. Confirm server timezone**, since the cron schedule below assumes the
+server clock and Beijing time may differ:
+
+```
+timedatectl
+```
+
+If `Time zone` is `UTC` (typical for a fresh cloud VM), Beijing time
+(UTC+8) 03:30 is **19:30 UTC the previous day**. Write the crontab in the
+server's actual timezone accordingly — do not assume UTC without checking.
+
+**4. Install the cron job** (as the `eqb` user, `crontab -e`). Example for
+a UTC server targeting 03:30 Beijing time (= 19:30 UTC previous day):
+
+```
+30 19 * * * cd /opt/eqb/english-question-bank && ./scripts/backup-to-r2.sh >> server/logs/backup-to-r2.log 2>&1
+```
+
+If the server's local timezone is already set to Asia/Shanghai, use
+`30 3 * * *` directly instead.
+
+**5. Manual test** (safe — read-only, no push, works even before rclone is
+configured):
+
+```
+scripts/backup-to-r2.sh --dry-run
+```
+
+### Import (Slice 4 — not yet landed)
+
+Importing new real exam papers into the live database (pull the server's
+`question-bank.sqlite`, run the local import pipeline, push the updated
+library back with the stop→temp+mv→start swap recipe) lands as
+`scripts/pull-run-push.mjs` (Slice 4). Until then, do not manually scp a
+database onto the running server's live path.

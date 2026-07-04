@@ -16,6 +16,8 @@
 *.pem
 *api-key*
 *API_KEY*
+rclone.conf
+rclone*.conf
 
 # Dependencies / builds
 node_modules/
