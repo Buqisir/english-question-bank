@@ -1,33 +1,30 @@
 /**
  * verify-c5b-structure-brace.mjs
  *
- * C5b verify script — Structure Brace / 结构钩.
+ * Structure Brace / 结构钩 component-contract verify (originally C5b).
  *
- * Asserts:
- *   1. No PaperSurface / shared / papersurface changes.
- *   2. No report.json / input.json / adapter changes.
- *   3. No AI diagnostic strings (load bars, vocabulary, grammar).
- *   4. Brace code lives only in harness layer.
- *   5. Brace overlay has `pointer-events: none`.
- *   6. Brace z-index is below evidence line (< 5).
- *   7. Scroll code targets `data-paper-paragraph-id`.
- *   8. No connector-line implementation from rail button to brace.
- *   9. Paragraph controls render P labels from passageStructure.
- *  10. Structure target cleared on resize.
+ * Per-cut process assertions (diff-scope / forbidden-file checks) were
+ * retired in the process-tuning follow-up; what remains protects the
+ * live component contract:
+ *   1. No AI diagnostic strings in the brace overlay.
+ *   2. Brace overlay has `pointer-events: none`.
+ *   3. Brace z-index is below evidence line (< 5).
+ *   4. Scroll code targets `data-paper-paragraph-id`.
+ *   5. No connector-line implementation from rail button to brace.
+ *   6. Structure rows render P labels from passageStructure.
+ *   7. Structure target cleared on resize / insight toggle / Esc.
+ *   8. Passage mode measures `.ps-passage-body`; geometry includes scrollTop.
+ *   9. Brace visual spec (pencil tone, no gradient/shadow, no semantic colors).
  */
 
 import {
-  changedFiles as getChangedFiles,
   createVerifier,
   readText,
   repoRootFrom,
-  touchesAny,
 } from './lib/verifyScope.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('C5b verify')
-
-const changedFiles = getChangedFiles(ROOT)
 
 // ─── Load source files ───
 
@@ -38,43 +35,6 @@ const hostInteractionTs = readText(
   ROOT,
   'app/src/features/paper-intelligence/paperSurfaceHostInteraction.ts',
 )
-
-section('C5b: forbidden changes (no PaperSurface/shared/data/model)')
-
-// 1. No PaperSurface / shared / papersurface changes
-const forbiddenPatterns = [
-  'app/src/shared-ui/papersurface/PaperSurface.tsx',
-  'app/src/shared-ui/papersurface/PaperSurface.css',
-  'shared/papersurface/',
-]
-
-for (const pat of forbiddenPatterns) {
-  assert(!touchesAny(changedFiles, [pat]), `${pat} not modified`)
-}
-
-// 2. No report.json / input.json / adapter changes
-const dataForbidden = [
-  'app/public/reports/paper-intelligence/paper-2024-xkb1-reading/report.json',
-  'app/public/reports/paper-intelligence/paper-2024-xkb1-reading/input.json',
-  'app/src/features/paper-intelligence/adapter/',
-]
-
-for (const pat of dataForbidden) {
-  assert(!touchesAny(changedFiles, [pat]), `${pat} not modified`)
-}
-
-// No route/server/package/lockfile changes
-const infraForbidden = [
-  'server/',
-  'package.json',
-  'pnpm-lock.yaml',
-  'app/package.json',
-  'app/pnpm-lock.yaml',
-]
-
-for (const pat of infraForbidden) {
-  assert(!touchesAny(changedFiles, [pat]), `${pat} not modified`)
-}
 
 section('C5b: no AI diagnostic strings')
 
@@ -95,18 +55,7 @@ for (const pat of aiDiagPatterns) {
   assert(!pat.test(braceTsx), `structureBrace.tsx does not contain AI diagnostic: ${pat.source}`)
 }
 
-section('C5b: brace code lives only in harness layer')
-
-// 4. Brace code lives only in harness layer
-assert(
-  changedFiles.every(
-    (f) =>
-      f.startsWith('app/src/features/paper-intelligence/') ||
-      f.startsWith('scripts/') ||
-      f.startsWith('docs/')
-  ),
-  'all changed files are in harness layer, scripts, or docs'
-)
+section('C5b: brace component exists in harness layer')
 
 // structureBrace.tsx is in the right directory and can be loaded.
 assert(
@@ -391,19 +340,6 @@ assert(
   braceTsx.includes('elRect.top - scrollerRect.top + scroller.scrollTop'),
   'brace top = elRect.top - scrollerRect.top + scroller.scrollTop (content-relative)'
 )
-
-section('C5b: no steering / AGENTS diff after rebasing latest main')
-
-// Verify no steering or AGENTS changes in diff
-{
-  const steeringFiles = changedFiles.filter(
-    (f) => f.startsWith('docs/steering/') || f === 'AGENTS.md' || f === 'CLAUDE.md'
-  )
-  assert(
-    steeringFiles.length === 0,
-    'no steering / AGENTS / CLAUDE diff exists after rebasing latest main'
-  )
-}
 
 section('C5b: CSS contains no purple fallback')
 

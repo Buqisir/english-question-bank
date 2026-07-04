@@ -155,7 +155,7 @@ See `docs/ci/verify-workflow-install.md`.
 
 | Script | Scope |
 | --- | --- |
-| `verify-dev-completion-report-contract.mjs` | External DEV completion report contract |
+| `verify-dev-completion-report-contract.mjs` | DEV completion report contract (steering ↔ template consistency) |
 | `verify-calibration-preview.mjs` | Calibration preview |
 | `verify-paper-intelligence-cut-d1.mjs` | Older Paper Intelligence D1 contract |
 | `verify-paper-intelligence-preview.mjs` | Paper Intelligence preview |

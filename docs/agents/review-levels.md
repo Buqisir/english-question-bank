@@ -7,11 +7,11 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 ## Roles
 
 - **PO**: product owner / final acceptance.
-- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. 小川 owns routine PA by default so PM and PA are separated; external high-reasoning PA is exception-only for large second-review passes, direction checks, or explicit owner request and must follow `docs/agents/pa-persona.md`.
-- **DEV**: implementation agent. 小川 is the default DEV.
-- **CR**: code reviewer. 小川 performs routine CR-lite; 阿澈 owns Big CR and medium / large final sanity gates. Both follow `docs/agents/cr-persona.md`. CR must run in a session that did not implement the code (reviewer ≠ implementer).
-- **QA**: product / browser / visual acceptance. 阿澈 does first QA for UI direction and user-visible quality unless assigned otherwise; the owner does final PO QA.
-- **RM**: release manager. 小川 owns small-cut RM / release execution; for medium / large cuts, 阿澈 runs the RM artifact gate and final sanity check before 小川 executes the merge.
+- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Runs as a fresh subagent context so PM and PA are separated; follows `docs/agents/pa-persona.md`.
+- **DEV**: implementation agent. Runs as a pinned DEV subagent (Sonnet, per the AGENTS.md tier table) by default.
+- **CR**: code reviewer. Routine CR-lite and Big CR both run as fresh subagent contexts following `docs/agents/cr-persona.md`. CR must run in a context that did not implement the code (reviewer ≠ implementer).
+- **QA**: product / browser / visual acceptance. The orchestrator does first QA for UI direction and user-visible quality; the owner does final PO QA.
+- **RM**: release manager. The orchestrator owns RM / release execution; medium / large cuts run the RM artifact gate and final sanity check in the CR + RM session before the merge executes.
 
 ## Default Rule
 
@@ -20,7 +20,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
   2. **Visibility**: Can a teacher/user see it? If yes, use QA.
   3. **Runtime risk**: Does it enter runtime code? If yes, use CR.
   4. **Evidence fit**: Prefer static verify when it proves the risk. Do not run heavy gates that cannot observe the changed surface.
-- Use **小川 PA before DEV** for architecture, runtime modules, user-visible flows, data models, migrations, and export logic. PA writes `docs/cuts/<CUT>/pa.md`; 阿澈 then compresses PA follow-up decisions into `plan.md` before DEV. External PA is not the default.
+- Use **PA before DEV** per the AGENTS.md Current Operating Reality trigger: large cuts, or touches to an irreversible surface / data-contract semantics; purely additive, reversible work may downgrade to PA-lite with the reason recorded in the plan header (CR reviews the downgrade). PA writes `docs/cuts/<CUT>/pa.md`; the orchestrator then compresses PA follow-up decisions into `plan.md` before DEV.
 - Use **CR after DEV** for any PR that will be merged.
 - Use **QA before RM** only when the change is user-visible or affects visual / interaction behavior.
 - Docs-only and type-only cuts do not need browser QA.
@@ -72,7 +72,7 @@ Use these to prevent review from expanding forever.
 - Do not downgrade tree-trunk work just because the diff looks small. Data contracts and runtime surface boundaries can be high risk even with few lines.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
-- Current named-agent assignment: 阿澈 owns PM, plan compression, UI direction / polish, Big CR, and medium / large RM artifact gates; 小川 owns PA, DEV, routine CR-lite, and RM / release execution. PM and PA should not be the same person by default. If 小川 performs both PA and DEV, PA must be a separate `pa.md` stage before DEV. Either agent may cover another role when quota or availability requires, but role contracts and gates do not downgrade. The owner does PO QA, not code review.
+- Current operating reality (authority: `AGENTS.md` "Current Operating Reality"): one orchestrator (the main agent) wears the PM / UI-direction / RM hats; PA, DEV, and CR run in fresh subagent contexts so reviewer ≠ implementer and PM ≠ PA. When one context must cover multiple hats, record the exception — role contracts and gates do not downgrade. The owner does PO QA, not code review.
 - Multi-agent handoff context is repo-first. PA / CR prompts and
   reports, DEV goal prompts, decisions, handoffs, QA contracts, and Cut
   Notes should be written to named repo paths. Chat messages route the
@@ -84,4 +84,4 @@ Use these to prevent review from expanding forever.
   - L2 uses PA + CR.
   - L3 adds QA.
   - L4 may add second CR / release checklist.
-- External DEV prompts are exception-only. Use them only when the owner explicitly asks. In that exception, put prompt text in fenced code blocks and require the external agent to report PR URL, commit, exact changed files, verify, browser QA status, and forbidden scopes.
+- External-agent orchestration is dormant. If an external agent is ever reintroduced, follow the archived rules in `docs/agents/external-agents.md`.

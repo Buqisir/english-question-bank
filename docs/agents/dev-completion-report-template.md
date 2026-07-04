@@ -1,9 +1,10 @@
 # DEV Completion Report Template
 
-Use this template for Codex DEV and any explicit external-agent
-implementation report.
+Use this template for every DEV completion report, whoever implemented
+(main agent or DEV subagent; an external agent, if ever reintroduced,
+follows it too).
 
-Goal: make reports short enough for the PO to read and precise enough for Codex to CR without digging through chat logs.
+Goal: make reports short enough for the PO to read and precise enough for CR to review without digging through chat logs.
 
 Do not paste raw verify output. Summarize script names and pass/fail counts.
 
