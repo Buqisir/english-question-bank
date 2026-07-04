@@ -168,13 +168,141 @@ After first provision, use `scripts/deploy.sh` (pull → install → build →
 restart → health smoke) for every subsequent code update. It's idempotent
 and safe to re-run.
 
-## Backup + import (Slices 3 / 4 — not yet landed in this cut)
+## Backup + import (Slice 3 landed; Slice 4 — not yet landed in this cut)
 
-- Daily backup to R2 lands as `scripts/backup-to-r2.sh` (Slice 3) — a cron
-  entry (e.g. `30 3 * * *` in server local time, aligned to Beijing time)
-  will be documented here once that script lands.
-- Importing new real exam papers into the live database (pull the server's
-  `question-bank.sqlite`, run the local import pipeline, push the updated
-  library back with the stop→temp+mv→start swap recipe) lands as
-  `scripts/pull-run-push.mjs` (Slice 4). Until then, do not manually scp a
-  database onto the running server's live path.
+### Daily backup to R2 (Slice 3)
+
+`scripts/backup-to-r2.sh` takes an online `.backup` snapshot of both
+sqlite dbs (`question-bank.sqlite` + `user-data.sqlite` — a backup is a
+read-only off-site copy, so user data IS in scope here, unlike
+pull-run-push), gates each snapshot on `PRAGMA integrity_check == ok`, and
+pushes the snapshots + `app/public/paper-assets/` + `data/user-space/files/`
+to R2 with `rclone copy` (never `sync` — copy only adds, so a local
+mis-delete can never propagate to the off-site copy). It then prunes old
+dated prefixes as a separate, retention-guarded step.
+
+**1. Install rclone** on the server:
+
+```
+sudo apt install rclone   # or: curl https://rclone.org/install.sh | sudo bash
+```
+
+**2. Create the R2 remote.** Either run `rclone config` interactively and
+follow the prompts (`n` new remote → type `s3` → provider `Cloudflare` →
+paste the R2 access key / secret / endpoint from the Cloudflare dashboard),
+or hand-write `~/.config/rclone/rclone.conf` (or
+`/opt/eqb/english-question-bank/rclone.conf`, gitignored — see
+`.gitignore`) with this stanza shape (placeholders only, never commit real
+values):
+
+```ini
+[r2]
+type = s3
+provider = Cloudflare
+access_key_id = PLACEHOLDER_ACCESS_KEY_ID
+secret_access_key = PLACEHOLDER_SECRET_ACCESS_KEY
+endpoint = https://PLACEHOLDER_ACCOUNT_ID.r2.cloudflarestorage.com
+```
+
+The bucket is addressed as `r2:eqb-backup` (remote name `r2`, matching
+`EQB_R2_REMOTE`'s default `r2:eqb-backup` — override via env if the bucket
+is named differently).
+
+**3. Confirm server timezone**, since the cron schedule below assumes the
+server clock and Beijing time may differ:
+
+```
+timedatectl
+```
+
+If `Time zone` is `UTC` (typical for a fresh cloud VM), Beijing time
+(UTC+8) 03:30 is **19:30 UTC the previous day**. Write the crontab in the
+server's actual timezone accordingly — do not assume UTC without checking.
+
+**4. Install the cron job** (as the `eqb` user, `crontab -e`). Example for
+a UTC server targeting 03:30 Beijing time (= 19:30 UTC previous day):
+
+```
+30 19 * * * cd /opt/eqb/english-question-bank && ./scripts/backup-to-r2.sh >> server/logs/backup-to-r2.log 2>&1
+```
+
+If the server's local timezone is already set to Asia/Shanghai, use
+`30 3 * * *` directly instead.
+
+**5. Manual test** (safe — read-only, no push, works even before rclone is
+configured):
+
+```
+scripts/backup-to-r2.sh --dry-run
+```
+
+### Import (Slice 4 — pull-run-push.mjs)
+
+`scripts/pull-run-push.mjs` is the local-only transport for "import new real
+exam papers": pull the server's `question-bank.sqlite` down, run the local
+import pipeline against it (`scripts/import-pipeline/`), push the updated
+library back up. It is NOT part of the running product — it's an ops tool
+the owner runs by hand, once per import session, around the import
+pipeline. Never manually scp a database onto the running server's live path
+— always go through this script.
+
+**Required env:**
+
+```
+EQB_REMOTE=eqb@<host>              # or ssh://eqb@<host>; real-server mode
+EQB_REMOTE_REPO=/opt/eqb/english-question-bank   # default, override only if different
+```
+
+(`EQB_REMOTE=local:<abs-dir>` is a TEST-only mode — `<abs-dir>` becomes the
+fake "remote" repo root on the local filesystem, no ssh involved. This is
+the seam `scripts/verify-launch-deploy.mjs` VA5 uses; never point it at a
+real server path.)
+
+**Two subcommands:**
+
+```
+node scripts/pull-run-push.mjs pull
+node scripts/pull-run-push.mjs push
+node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
+```
+
+- **`pull`** — takes a remote ONLINE `.backup` snapshot of
+  `question-bank.sqlite` (never a live `cp`), transfers that snapshot +
+  `app/public/paper-assets/` down to the local repo, backs up the local old
+  db (timestamped) before moving the snapshot into place. Never pulls the
+  remote `data/` directory wholesale — only the two explicitly-named
+  targets.
+- **`push`** — the locked swap recipe (PA MF-1, do not reorder): manifest
+  assertion → verify local db passes `PRAGMA integrity_check` → **stop** the
+  remote `eqb` service (`sudo systemctl stop eqb`, requires the deploy user
+  to have that sudo rule) → back up the remote OLD db to a timestamped path
+  → transfer the local db to a remote TEMP path in the same directory as the
+  final path → atomic same-filesystem `mv` temp → final → rsync new
+  paper-assets in additively → **start** the remote `eqb` service. The
+  stop/start exists to flush the server's startup-time in-memory indexes and
+  route cache (same reason the import pipeline's own direct-SQLite writes
+  require a stop/restart — see `scripts/import-pipeline/README.md:29-31`),
+  NOT to release a long-held db handle (`journal_mode=delete`, handles are
+  opened/closed per request — there is no WAL/-shm/-wal sidecar to manage).
+  The active `question-bank.sqlite` path is never written to in place; every
+  swap goes through a same-disk temp file + atomic rename.
+- **`check-manifest`** — runs only the manifest guard (MF-2) over an
+  explicit comma-separated path list: exits non-zero if any path's basename
+  matches `/user-data/i` (catches `user-data.sqlite`,
+  `user-data.sqlite-journal`, and future renames), exits 0 otherwise. Useful
+  as an ops dry-check before trusting a manually-constructed path list.
+
+**Both `pull` and `push` never read, write, or delete `user-data.sqlite` (or
+any `*.sqlite-*` sidecar), locally or remotely, anywhere outside the
+manifest-abort guard itself** — the transfer set is always exactly
+`data/question-bank.sqlite` + `app/public/paper-assets/`, never a `data/`
+glob.
+
+**FG-4 warning — before the very first `push` to a freshly-provisioned
+server**, confirm the remote `user-data.sqlite` is the one the server itself
+created via `ensureUserDatabaseShape()` on first boot (step 6 above), never a
+copy pushed up from a local machine. `pull-run-push.mjs` refuses to touch
+`user-data.sqlite` by design, but this warning covers the adjacent mistake of
+someone else manually `scp`-ing a local `user-data.sqlite` onto the server
+before the first import — that would clobber real server-native user/session
+state with unrelated local state.
