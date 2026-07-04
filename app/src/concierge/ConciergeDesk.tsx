@@ -19,7 +19,11 @@ import { aggregatePaperResults } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
 import { buildDefaultFeed } from './defaultFeed.ts'
-import { applyConciergeFilters, buildFilterOptions, type ConciergeFilters } from './filters.ts'
+import {
+  applyConciergeFilters,
+  buildFacetedFilterOptions,
+  type ConciergeFilters,
+} from './filters.ts'
 import type {
   ConciergeRetrievalActions,
   ConciergeRetrievalView,
@@ -55,6 +59,14 @@ export type ConciergeDeskProps = {
 
 /** Default feed shows this many papers before the "显示全部" expander. */
 const DEFAULT_FEED_PAGE_SIZE = 8
+
+/** UI 门面刀 F2 — muted dimension labels in front of each chip row. */
+const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'region' | 'sourceType', string> = {
+  groupType: '题型',
+  year: '年份',
+  region: '地区',
+  sourceType: '来源',
+}
 
 /**
  * Restart cut ⑤ — a non-empty result set is "all weak" when every hit only
@@ -96,7 +108,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // `feedExpanded` (participants agreed a hook migration isn't needed —
   // see plan.md 参考实现).
   const [filters, setFilters] = useState<ConciergeFilters>({})
-  const filterOptions = useMemo(() => buildFilterOptions(questionGroups), [questionGroups])
+  const filterOptions = useMemo(
+    () => buildFacetedFilterOptions(questionGroups, filters),
+    [questionGroups, filters],
+  )
   const hasActiveFilters =
     filters.groupType !== undefined ||
     filters.year !== undefined ||
@@ -222,28 +237,32 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && (
         <div className="concierge-filter-row" aria-label="结构化筛选">
           {(['groupType', 'year', 'region', 'sourceType'] as const).map((dimension) => (
-            <ul key={dimension} className="concierge-starter-chips" aria-label={dimension}>
-              {filterOptions[dimension].map((option) => {
-                const selected = String(filters[dimension] ?? '') === option.value
-                return (
-                  <li key={option.value}>
-                    <button
-                      type="button"
-                      className={`concierge-starter-chip${selected ? ' is-selected' : ''}`}
-                      aria-pressed={selected}
-                      onClick={() =>
-                        toggleFilter(
-                          dimension,
-                          (dimension === 'year' ? Number(option.value) : option.value) as never,
-                        )
-                      }
-                    >
-                      {option.label} {option.count}
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
+            <div key={dimension} className="concierge-filter-dim-row">
+              <span className="concierge-filter-dim-label">{FILTER_DIM_LABEL[dimension]}</span>
+              <ul className="concierge-starter-chips" aria-label={dimension}>
+                {filterOptions[dimension].map((option) => {
+                  const selected = String(filters[dimension] ?? '') === option.value
+                  const isZero = option.count === 0
+                  return (
+                    <li key={option.value}>
+                      <button
+                        type="button"
+                        className={`concierge-starter-chip${selected ? ' is-selected' : ''}${isZero ? ' is-zero' : ''}`}
+                        aria-pressed={selected}
+                        onClick={() =>
+                          toggleFilter(
+                            dimension,
+                            (dimension === 'year' ? Number(option.value) : option.value) as never,
+                          )
+                        }
+                      >
+                        {option.label} {option.count}
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           ))}
           {hasActiveFilters && (
             <button type="button" className="concierge-filter-clear" onClick={clearFilters}>

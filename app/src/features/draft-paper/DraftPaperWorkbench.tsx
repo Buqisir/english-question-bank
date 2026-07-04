@@ -409,74 +409,80 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   return (
     <div className="draft-workbench-shell">
       <header className="draft-toolbar">
-        <button className="draft-back-button" type="button" onClick={onBackToWorkbench}>
-          <ArrowLeft size={16} /> 返回取题台
-        </button>
-        <label className="draft-title-field">
-          <span>草稿卷标题</span>
-          <input value={titleDraft} onChange={(event) => updateTitle(event.target.value)} />
-        </label>
-        <span className={`draft-save-status ${saveStatus}`}>
-          {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
-        </span>
-        <label className="draft-recent-select-field">
-          <span>最近草稿卷</span>
-          <select
-            className="draft-recent-select"
-            value={draftPaper.id}
-            onChange={(event) => {
-              const id = event.target.value
-              const url = new URL(window.location.href)
-              url.searchParams.set('view', 'draft-paper')
-              url.searchParams.set('draftPaperId', id)
-              window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
-              setVersionType('student')
-              void fetchDraftPaper(id).then((next) => {
-                setDraftPaper(next)
-                setTitleDraft(next.title)
-              })
-            }}
-          >
-            {recentDrafts.map((draft) => (
-              <option key={draft.id} value={draft.id}>{draft.title}</option>
-            ))}
-          </select>
-        </label>
-        <div className="draft-version-toggle" role="group" aria-label="导出版本">
-          <button
-            type="button"
-            className={versionType === 'student' ? 'active' : ''}
-            aria-pressed={versionType === 'student'}
-            onClick={() => setVersionType('student')}
-          >
-            学生版
-          </button>
-          <button
-            type="button"
-            className={versionType === 'teacher' ? 'active' : ''}
-            aria-pressed={versionType === 'teacher'}
-            onClick={() => setVersionType('teacher')}
-          >
-            教师版
+        <div className="draft-toolbar-group draft-toolbar-group-nav">
+          <button className="draft-back-button" type="button" onClick={onBackToWorkbench}>
+            <ArrowLeft size={16} /> 返回取题台
           </button>
         </div>
-        <details className="draft-export-menu">
-          <summary>导出</summary>
-          <button type="button" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={exportPdf}>
-            <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
-          </button>
-          <button type="button" disabled={draftPaper.items.length === 0} onClick={browserPrint}>
-            <Printer size={15} /> 浏览器打印
-          </button>
-          <button type="button" disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'} onClick={openSpaceDialog}>
-            <Archive size={15} /> 保存到个人空间
-          </button>
-        </details>
-        {onOpenMySpace && (
-          <button className="draft-my-space-link" type="button" onClick={onOpenMySpace}>
-            个人空间
-          </button>
-        )}
+        <div className="draft-toolbar-group draft-toolbar-group-doc">
+          <label className="draft-title-field">
+            <span>草稿卷标题</span>
+            <input value={titleDraft} onChange={(event) => updateTitle(event.target.value)} />
+          </label>
+          <span className={`draft-save-status ${saveStatus}`}>
+            {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
+          </span>
+          <label className="draft-recent-select-field">
+            <span>最近草稿卷</span>
+            <select
+              className="draft-recent-select"
+              value={draftPaper.id}
+              onChange={(event) => {
+                const id = event.target.value
+                const url = new URL(window.location.href)
+                url.searchParams.set('view', 'draft-paper')
+                url.searchParams.set('draftPaperId', id)
+                window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
+                setVersionType('student')
+                void fetchDraftPaper(id).then((next) => {
+                  setDraftPaper(next)
+                  setTitleDraft(next.title)
+                })
+              }}
+            >
+              {recentDrafts.map((draft) => (
+                <option key={draft.id} value={draft.id}>{draft.title}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="draft-toolbar-group draft-toolbar-group-output">
+          <div className="draft-version-toggle" role="group" aria-label="导出版本">
+            <button
+              type="button"
+              className={versionType === 'student' ? 'active' : ''}
+              aria-pressed={versionType === 'student'}
+              onClick={() => setVersionType('student')}
+            >
+              学生版
+            </button>
+            <button
+              type="button"
+              className={versionType === 'teacher' ? 'active' : ''}
+              aria-pressed={versionType === 'teacher'}
+              onClick={() => setVersionType('teacher')}
+            >
+              教师版
+            </button>
+          </div>
+          <details className="draft-export-menu">
+            <summary>导出</summary>
+            <button type="button" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={exportPdf}>
+              <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+            </button>
+            <button type="button" disabled={draftPaper.items.length === 0} onClick={browserPrint}>
+              <Printer size={15} /> 浏览器打印
+            </button>
+            <button type="button" disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'} onClick={openSpaceDialog}>
+              <Archive size={15} /> 保存到个人空间
+            </button>
+          </details>
+          {onOpenMySpace && (
+            <button className="draft-my-space-link" type="button" onClick={onOpenMySpace}>
+              个人空间
+            </button>
+          )}
+        </div>
       </header>
 
       {draftPaper.items.length === 0 && (

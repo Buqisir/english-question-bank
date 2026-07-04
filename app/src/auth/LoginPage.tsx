@@ -30,6 +30,7 @@ export function LoginPage() {
       <div className="login-card">
         <p className="eyebrow">English Question Bank</p>
         <h1>英语题库工作台</h1>
+        <p className="login-subtitle">输入账号，接着备课。</p>
         {error && <p className="login-error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="login-field">
@@ -56,10 +57,11 @@ export function LoginPage() {
               required
             />
           </div>
-          <button className="primary-button login-submit" type="submit" disabled={submitting}>
+          <button className="login-submit" type="submit" disabled={submitting}>
             {submitting ? '登录中…' : '登录'}
           </button>
         </form>
+        <p className="login-footer-hint">账号由馆主邀请开通。</p>
       </div>
     </div>
   )

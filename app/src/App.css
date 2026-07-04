@@ -5203,7 +5203,8 @@ button:disabled {
 .app-shell.home-mode-ai .concierge-notice,
 .app-shell.home-mode-ai .concierge-assistant,
 .app-shell.home-mode-ai .concierge-error,
-.app-shell.home-mode-ai .concierge-results {
+.app-shell.home-mode-ai .concierge-results,
+.app-shell.home-mode-ai .concierge-filter-row {
   max-width: 820px;
   width: 100%;
   margin-left: auto;
@@ -5881,15 +5882,38 @@ button:disabled {
    state instead of introducing any variable. */
 .concierge-filter-row {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   margin: 16px 0 0;
+}
+
+.concierge-filter-dim-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+}
+
+.concierge-filter-dim-label {
+  flex: 0 0 auto;
+  min-width: 34px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #9A9180;
 }
 
 .concierge-filter-row .concierge-starter-chips {
   margin: 0;
   justify-content: flex-start;
+}
+
+.concierge-filter-clear {
+  align-self: flex-start;
+}
+
+.concierge-starter-chip.is-zero {
+  opacity: 0.45;
 }
 
 .concierge-starter-chip.is-selected {
