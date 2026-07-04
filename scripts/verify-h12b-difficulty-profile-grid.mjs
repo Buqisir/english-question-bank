@@ -13,12 +13,20 @@
  *      mainBlockers, vocabBlockerWords, questionId}) as props — no state,
  *      no fetch, no reducer, no service import.
  *   2. The moved label maps + labelOf live in readingProfileLabels.ts and are
- *      re-imported by both the grid component and App.tsx (single definition,
- *      no drift).
- *   3. App.tsx no longer defines the moved label maps inline, imports the grid
- *      + the shared label helpers, and renders <DifficultyProfileGrid> with the
- *      six-input interface (the inline reading-profile-card JSX is gone).
+ *      re-imported by both the grid component and its render call site
+ *      (single definition, no drift).
+ *   3. The render call site no longer defines the moved label maps inline,
+ *      imports the grid + the shared label helpers, and renders
+ *      <DifficultyProfileGrid> with the six-input interface (the inline
+ *      reading-profile-card JSX is gone from App.tsx).
  *   4. No import cycle: the grid + labels module never import from App.tsx.
+ *
+ * classic-retire-2-detail-view (2026-07): the `viewMode === 'detail'` JSX
+ * branch — including the <DifficultyProfileGrid> render call — moved out of
+ * App.tsx into app/src/features/question-detail/QuestionGroupDetailView.tsx.
+ * The render-call-site assertions (section 4) now check that file instead of
+ * App.tsx; the "App.tsx no longer defines the moved maps inline" checks stay
+ * on App.tsx since that invariant is still about App.tsx specifically.
  *
  * Hermetic: readFileSync over the working-tree sources only, no git/main
  * dependency. Node can't import .tsx, so byte-identical RENDERING is proven by
@@ -36,6 +44,7 @@ const rootDir = path.resolve(__dirname, '..')
 const GRID = path.join(rootDir, 'app/src/workbench/detail/DifficultyProfileGrid.tsx')
 const LABELS = path.join(rootDir, 'app/src/workbench/detail/readingProfileLabels.ts')
 const APP = path.join(rootDir, 'app/src/App.tsx')
+const DETAIL_VIEW = path.join(rootDir, 'app/src/features/question-detail/QuestionGroupDetailView.tsx')
 
 let pass = 0
 let fail = 0
@@ -62,6 +71,13 @@ function read(file) {
 const gridSrc = read(GRID)
 const labelsSrc = read(LABELS)
 const appSrc = read(APP)
+const detailViewSrc = read(DETAIL_VIEW)
+// The render call site: classic-retire-2-detail-view moved the detail branch
+// (and its <DifficultyProfileGrid> render) out of App.tsx into
+// QuestionGroupDetailView.tsx. Check whichever file actually renders it so
+// this script keeps working if the render call site ever moves back.
+const renderSiteSrc = /<DifficultyProfileGrid\b/.test(detailViewSrc) ? detailViewSrc : appSrc
+const renderSiteLabel = renderSiteSrc === detailViewSrc ? 'QuestionGroupDetailView.tsx' : 'App.tsx'
 
 console.log('\n==> H12-B PR1: DifficultyProfileGrid extraction contract\n')
 
@@ -119,31 +135,33 @@ assert(/export\s+function\s+labelOf\b/.test(labelsSrc), 'readingProfileLabels ex
 // Grid imports the labels it needs from the shared module.
 assert(/from\s*['"]\.\/readingProfileLabels['"]/.test(gridSrc), 'grid imports from ./readingProfileLabels')
 
-// --- 4. App.tsx no longer defines the moved maps/labelOf; imports + renders the grid ---
-console.log('\n4. App.tsx drops the inline maps, imports the shared module, renders <DifficultyProfileGrid>:')
+// --- 4. App.tsx no longer defines the moved maps/labelOf; the render call
+// site (App.tsx, or QuestionGroupDetailView.tsx post classic-retire-2)
+// imports the shared module + renders the grid ---
+console.log(`\n4. App.tsx drops the inline maps; ${renderSiteLabel} imports the shared module, renders <DifficultyProfileGrid>:`)
 for (const map of MOVED_MAPS) {
   assert(!new RegExp(`const\\s+${map}\\s*:`).test(appSrc), `App.tsx no longer defines "const ${map}"`)
 }
 assert(!/function\s+labelOf\b/.test(appSrc), 'App.tsx no longer defines function labelOf')
 assert(!/className="reading-profile-card"/.test(appSrc), 'App.tsx no longer renders the inline reading-profile-card JSX')
 assert(
-  /import\s*\{\s*DifficultyProfileGrid\s*\}\s*from\s*['"]\.\/workbench\/detail\/DifficultyProfileGrid['"]/.test(appSrc),
-  'App.tsx imports DifficultyProfileGrid',
+  /import\s*\{\s*DifficultyProfileGrid\s*\}\s*from\s*['"][./]+(?:workbench\/detail\/)?DifficultyProfileGrid['"]/.test(renderSiteSrc),
+  `${renderSiteLabel} imports DifficultyProfileGrid`,
 )
 assert(
-  /import\s*\{[^}]*\blabelOf\b[^}]*\}\s*from\s*['"]\.\/workbench\/detail\/readingProfileLabels['"]/.test(appSrc),
-  'App.tsx imports labelOf from the shared label module',
+  /import\s*\{[^}]*\blabelOf\b[^}]*\}\s*from\s*['"][./]+(?:workbench\/detail\/)?readingProfileLabels['"]/.test(renderSiteSrc),
+  `${renderSiteLabel} imports labelOf from the shared label module`,
 )
 assert(
-  /import\s*\{[^}]*\bmainBlockerLabel\b[^}]*\}\s*from\s*['"]\.\/workbench\/detail\/readingProfileLabels['"]/.test(appSrc),
-  'App.tsx imports mainBlockerLabel from the shared label module',
+  /import\s*\{[^}]*\bmainBlockerLabel\b[^}]*\}\s*from\s*['"][./]+(?:workbench\/detail\/)?readingProfileLabels['"]/.test(renderSiteSrc),
+  `${renderSiteLabel} imports mainBlockerLabel from the shared label module`,
 )
-const renderMatch = appSrc.match(/<DifficultyProfileGrid\b([\s\S]*?)\/>/)
-assert(renderMatch !== null, 'App.tsx renders <DifficultyProfileGrid ... />')
+const renderMatch = renderSiteSrc.match(/<DifficultyProfileGrid\b([\s\S]*?)\/>/)
+assert(renderMatch !== null, `${renderSiteLabel} renders <DifficultyProfileGrid ... />`)
 if (renderMatch) {
   const renderBlock = renderMatch[1]
   for (const prop of PROPS) {
-    assert(new RegExp(`\\b${prop}=`).test(renderBlock), `App.tsx passes prop "${prop}" to DifficultyProfileGrid`)
+    assert(new RegExp(`\\b${prop}=`).test(renderBlock), `${renderSiteLabel} passes prop "${prop}" to DifficultyProfileGrid`)
   }
 }
 
