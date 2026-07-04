@@ -65,8 +65,7 @@
 //   node scripts/pull-run-push.mjs pull
 //   node scripts/pull-run-push.mjs push
 import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, mkdtempSync, mkdirSync, rmSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { existsSync, mkdirSync, rmSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -303,31 +302,43 @@ function pull() {
   console.log(`[pull-run-push] taking remote online .backup snapshot -> ${remoteSnapshotAbs}`)
   runRemote(remote, `sqlite3 ${shellQuote(remoteFinal)} ${shellQuote(`.backup '${remoteSnapshotAbs}'`)}`)
 
-  // 3a. Transfer the single named snapshot file down to a local temp path
-  //     first (never straight onto the live local path).
-  const localTmpDir = mkdtempSync(join(tmpdir(), 'eqb-pull-'))
+  // 3. Land the snapshot on a LOCAL temp path IN THE SAME DIRECTORY as the
+  //    live db, so the final swap is a same-filesystem atomic `mv` (rename)
+  //    rather than a cross-fs copy — symmetric with push's remote swap, and
+  //    it removes the reliance on "the local API happens to be stopped".
+  mkdirSync(dirname(localDb), { recursive: true })
+  const localIncoming = `${localDb}.incoming.${stamp}`
   try {
-    const localIncoming = join(localTmpDir, 'question-bank.sqlite.incoming')
-    console.log('[pull-run-push] transferring remote snapshot -> local temp')
+    console.log('[pull-run-push] transferring remote snapshot -> local temp (same dir as db)')
     transferFromRemote(remote, remoteSnapshotRel, localIncoming)
 
-    // Back up the LOCAL old db (timestamped) before moving the snapshot
-    // into place, then move (never overwrite the live path directly with
-    // an in-flight transfer — the transfer already landed in temp above).
+    // Integrity-gate the pulled snapshot BEFORE it can replace the live local
+    // db — refuse to swap in a corrupt/truncated transfer (symmetric with
+    // push's pre-transfer integrity_check). On failure remove the temp
+    // ourselves — process.exit() does not run the finally block below.
+    const integrity = spawnSync('sqlite3', [localIncoming, 'PRAGMA integrity_check'], { encoding: 'utf8' })
+    if (integrity.stdout.trim() !== 'ok') {
+      if (existsSync(localIncoming)) rmSync(localIncoming, { force: true })
+      fail(`pulled snapshot failed PRAGMA integrity_check (got: ${integrity.stdout.trim() || integrity.stderr.trim()}) — refusing to replace the local db`)
+      process.exit(1)
+    }
+    console.log('[pull-run-push] pulled snapshot passes integrity_check')
+
+    // Back up the LOCAL old db (timestamped) before the swap.
     if (existsSync(localDb)) {
       const localBackup = `${localDb}.bak.${stamp}`
       console.log(`[pull-run-push] backing up local old db -> ${localBackup}`)
       execFileSync('cp', [localDb, localBackup], { encoding: 'utf8' })
     }
-    mkdirSync(dirname(localDb), { recursive: true })
-    console.log('[pull-run-push] moving snapshot into local place')
+    console.log('[pull-run-push] atomic mv snapshot -> local db')
     execFileSync('mv', [localIncoming, localDb], { encoding: 'utf8' })
 
-    // 3b. paper-assets/ (additive, not part of the atomic-swap concern).
+    // paper-assets/ (additive, not part of the atomic-swap concern).
     console.log('[pull-run-push] transferring paper-assets (additive)')
     transferFromRemote(remote, PAPER_ASSETS_REL, localAssets, { isDir: true })
   } finally {
-    rmSync(localTmpDir, { recursive: true, force: true })
+    // If we threw before the mv consumed it, don't leave a temp in data/.
+    if (existsSync(localIncoming)) rmSync(localIncoming, { force: true })
   }
 
   // Clean up the remote snapshot temp file (it was a throwaway transfer

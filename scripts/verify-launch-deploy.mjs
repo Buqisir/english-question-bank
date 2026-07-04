@@ -310,4 +310,85 @@ try {
   rmSync(va5Dir, { recursive: true, force: true })
 }
 
+// ── Slice 4: pull round-trip (MF-A — the push test alone left pull unproven) ──
+// The plan's Slice-4 验收 called for a pull→push round-trip; the initial VA5
+// drove only push, leaving pull's own swap surface (remote .backup, local
+// temp→data/ mv, snapshot cleanup, user-data avoidance) with zero assertion.
+// Fake-remote pull proving: (1) remote user-data untouched, (2) remote
+// question-bank content lands locally, (3) old local db backed up before the
+// swap, (4) atomic same-dir rename (inode changes, no leftover *.incoming.*),
+// (5) the remote .backup snapshot temp is cleaned up.
+const va5PullDir = mkdtempSync(join(tmpdir(), 'eqb-pull-verify-'))
+try {
+  const remoteDir = join(va5PullDir, 'fake-remote')
+  const localDir = join(va5PullDir, 'fake-local')
+  const remoteDataDir = join(remoteDir, 'data')
+  const remoteAssetsDir = join(remoteDir, 'app', 'public', 'paper-assets', 'bundle-remote', 'latest')
+  const localDataDir = join(localDir, 'data')
+  const localAssetsDir = join(localDir, 'app', 'public', 'paper-assets', 'bundle-local', 'latest')
+  for (const dir of [remoteDataDir, remoteAssetsDir, localDataDir, localAssetsDir]) {
+    execFileSync('mkdir', ['-p', dir], { encoding: 'utf8' })
+  }
+
+  const remoteDb = join(remoteDataDir, 'question-bank.sqlite')
+  const remoteUserData = join(remoteDataDir, 'user-data.sqlite')
+  const localDb = join(localDataDir, 'question-bank.sqlite')
+
+  // Seed: fake-remote question-bank = content R, fake-remote user-data =
+  // distinct, fake-local question-bank = OLD content L (replaced + backed up).
+  const seedRemoteDb = spawnSync('sqlite3', [remoteDb, "CREATE TABLE t(x); INSERT INTO t VALUES('CONTENT-R');"], { encoding: 'utf8' })
+  const seedRemoteUserData = spawnSync('sqlite3', [remoteUserData, "CREATE TABLE u(x); INSERT INTO u VALUES('remote-user-data-must-not-move');"], { encoding: 'utf8' })
+  const seedLocalDb = spawnSync('sqlite3', [localDb, "CREATE TABLE t(x); INSERT INTO t VALUES('CONTENT-L');"], { encoding: 'utf8' })
+  execFileSync('sh', ['-c', `echo remote-asset > ${JSON.stringify(join(remoteAssetsDir, 'remote.json'))}`], { encoding: 'utf8' })
+  assert(
+    seedRemoteDb.status === 0 && seedRemoteUserData.status === 0 && seedLocalDb.status === 0,
+    'VA5-pull fixture: fake-remote db + fake-remote user-data + fake-local db seeded',
+  )
+
+  const sha256OfPull = (p) => createHash('sha256').update(readFileSync(p)).digest('hex')
+  const recordedRemoteUserData = { size: statSync(remoteUserData).size, mtimeMs: statSync(remoteUserData).mtimeMs, sha256: sha256OfPull(remoteUserData) }
+  const contentLSha = sha256OfPull(localDb)
+  const localDbInoBefore = statSync(localDb).ino
+
+  const pullRun = spawnSync(
+    'node',
+    [pullRunPushPath, 'pull'],
+    { encoding: 'utf8', env: { ...process.env, EQB_REMOTE: `local:${remoteDir}`, EQB_LOCAL_REPO: localDir } },
+  )
+  assert(pullRun.status === 0, `pull exits 0 against the fake-remote fixture${pullRun.status !== 0 ? ' — stderr: ' + (pullRun.stderr || '').trim() + ' / stdout: ' + (pullRun.stdout || '').trim() : ''}`)
+
+  // (1) remote user-data untouched (size + mtime + sha256).
+  const afterRemoteUserData = statSync(remoteUserData)
+  assert(
+    afterRemoteUserData.size === recordedRemoteUserData.size &&
+      afterRemoteUserData.mtimeMs === recordedRemoteUserData.mtimeMs &&
+      sha256OfPull(remoteUserData) === recordedRemoteUserData.sha256,
+    'VA5-pull.1: remote user-data.sqlite byte-for-byte + mtime unchanged (pull never touches user-data)',
+  )
+
+  // (2) local db now carries remote content R (pull landed). Compare the
+  // LOGICAL content, not raw bytes: pull lands a sqlite `.backup` snapshot,
+  // which is data-identical but not necessarily byte-identical to the source
+  // (freelist/page layout can differ) — a raw sha compare would false-fail.
+  const localVal = spawnSync('sqlite3', [localDb, 'SELECT x FROM t'], { encoding: 'utf8' }).stdout.trim()
+  assert(localVal === 'CONTENT-R', `VA5-pull.2: local question-bank.sqlite now carries remote content R (pull landed; got "${localVal}")`)
+
+  // (3) the old local db (content L) was backed up before the swap.
+  const localBaks = readdirSync(localDataDir).filter((f) => /^question-bank\.sqlite\.bak\./.test(f))
+  const bakHasContentL = localBaks.some((f) => sha256OfPull(join(localDataDir, f)) === contentLSha)
+  assert(bakHasContentL, `VA5-pull.3: old local db backed up before swap (a *.bak.* with content L's sha; found: ${localBaks.join(', ') || 'none'})`)
+
+  // (4) atomic same-dir rename (inode changed) + no leftover *.incoming.* temp.
+  const localDbInoAfter = statSync(localDb).ino
+  assert(localDbInoAfter !== localDbInoBefore, `VA5-pull.4a: local db inode changed (before ${localDbInoBefore}, after ${localDbInoAfter}) — same-dir rename swap`)
+  const leftoverPullIncoming = readdirSync(localDataDir).filter((f) => f.includes('.incoming.'))
+  assert(leftoverPullIncoming.length === 0, `VA5-pull.4b: no leftover *.incoming.* in local data/ (found: ${leftoverPullIncoming.join(', ') || 'none'})`)
+
+  // (5) remote .backup snapshot temp cleaned up.
+  const leftoverSnapshots = readdirSync(remoteDataDir).filter((f) => f.includes('.snapshot.'))
+  assert(leftoverSnapshots.length === 0, `VA5-pull.5: remote .backup snapshot temp cleaned up (found: ${leftoverSnapshots.join(', ') || 'none'})`)
+} finally {
+  rmSync(va5PullDir, { recursive: true, force: true })
+}
+
 summary()

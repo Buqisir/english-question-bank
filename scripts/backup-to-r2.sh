@@ -165,7 +165,11 @@ rclone lsf "$REMOTE_PREFIX" || true
 # ── Prune (independent retention step, never sync) ───────────────────────
 echo ""
 echo "==> Pruning: keeping last $RETENTION_COUNT dated prefixes under $R2_REMOTE"
-mapfile -t DATED_PREFIXES < <(rclone lsf "$R2_REMOTE" --dirs-only | sort)
+# Only ever consider our own timestamped backup prefixes (date -u
+# %Y%m%dT%H%M%SZ) as prune candidates, so `rclone purge` can never touch an
+# unrelated dir that happens to share the bucket root. Lexical sort ==
+# chronological for this fixed-width stamp format.
+mapfile -t DATED_PREFIXES < <(rclone lsf "$R2_REMOTE" --dirs-only | grep -E '^[0-9]{8}T[0-9]{6}Z/$' | sort)
 TOTAL_PREFIXES="${#DATED_PREFIXES[@]}"
 if (( TOTAL_PREFIXES > RETENTION_COUNT )); then
   TO_DELETE_COUNT=$(( TOTAL_PREFIXES - RETENTION_COUNT ))
