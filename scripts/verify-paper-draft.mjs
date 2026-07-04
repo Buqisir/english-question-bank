@@ -396,15 +396,17 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
   // rest of the classic sidebar; DraftPaperWorkbench.tsx is the sole
   // surviving UI for editing basket items (out of scope for this cut). As a
   // result paperDraft.removeGroup / .clear / .moveGroup / .updateGroupScore /
-  // .updateGroupMeta / .externalRemoveByGroupId now have zero call sites in
-  // App.tsx — confirm that directly instead of asserting dead wrappers.
+  // .updateGroupMeta now have zero call sites in App.tsx — confirm that
+  // directly instead of asserting dead wrappers.
+  // externalRemoveByGroupId came back with exactly one call site when the
+  // owner-only delete entry was re-homed to the detail view (post-#248
+  // follow-up), so it is asserted separately below.
   for (const method of [
     'removeGroup',
     'clear',
     'moveGroup',
     'updateGroupScore',
     'updateGroupMeta',
-    'externalRemoveByGroupId',
   ]) {
     assert(
       `App.tsx no longer calls paperDraft.${method} (classic-only wrapper retired in classic-retire-3)`,
@@ -412,6 +414,18 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
       '',
     )
   }
+
+  const externalRemoveCount = (app.match(/paperDraft\.externalRemoveByGroupId\(/g) || []).length
+  assert(
+    'App.tsx calls paperDraft.externalRemoveByGroupId exactly once (detail-view delete entry)',
+    externalRemoveCount === 1,
+    `got ${externalRemoveCount}`,
+  )
+  assert(
+    'delete handler removes the group from the draft after the API delete',
+    /async function handleDeleteQuestionGroup[\s\S]*?paperDraft\.externalRemoveByGroupId\(detail\.id\)/.test(app),
+    '',
+  )
 
   const replaceCount = (app.match(/paperDraft\.replaceDraft\(/g) || []).length
   assert('App uses paperDraft.replaceDraft in ≥ 2 sites (workflow + objective; load site retired in classic-retire-3)',
