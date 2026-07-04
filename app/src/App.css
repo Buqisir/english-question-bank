@@ -5876,6 +5876,65 @@ button:disabled {
   margin-right: auto;
 }
 
+/* Cut ai-mode-filter-chips (C6: zero new/changed color tokens) — the filter
+   row reuses .concierge-starter-chip's exact hex literals for the selected
+   state instead of introducing any variable. */
+.concierge-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin: 16px 0 0;
+}
+
+.concierge-filter-row .concierge-starter-chips {
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.concierge-starter-chip.is-selected {
+  background: #1A1A1A;
+  border-color: #1A1A1A;
+  color: #FFFDF8;
+}
+
+.concierge-starter-chip.is-selected:hover {
+  background: #1A1A1A;
+  border-color: #1A1A1A;
+  color: #FFFDF8;
+}
+
+.concierge-filter-clear {
+  background: transparent;
+  border: none;
+  color: #9A9180;
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 4px 2px;
+  text-decoration: underline;
+}
+
+.concierge-filter-clear:hover {
+  color: #1A1A1A;
+}
+
+.concierge-filter-clear-inline {
+  background: transparent;
+  border: none;
+  color: #1A1A1A;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0 0 0 6px;
+  text-decoration: underline;
+}
+
+.concierge-feed-filtered-tag {
+  color: #9A9180;
+  margin-left: 4px;
+}
+
 
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
 .intake-batch-panel {
