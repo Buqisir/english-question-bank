@@ -79,6 +79,7 @@ const registry = {
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-classic-retire-2.mjs',
+  'scripts/verify-classic-retire-3.mjs',
   ],
 }
 

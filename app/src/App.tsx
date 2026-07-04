@@ -1,18 +1,12 @@
 import {
-  ArrowDown,
-  ArrowLeft,
-  ArrowUp,
   Archive,
   BookOpen,
   CheckCircle2,
   ClipboardList,
-  FileDown,
   FileText,
   LogOut,
-  Plus,
   RefreshCw,
   Save,
-  Search,
   Sparkles,
   Tag,
   Trash2,
@@ -24,12 +18,8 @@ import './App.css'
 import { questionGroups as sampleQuestionGroups } from './data/sampleQuestionGroups'
 import {
   type ApplyAnswerAlignmentResult,
-  difficultyLabel,
   groupTypeLabel,
-  sourceTypeLabel,
-  type BasketItem,
   type CreateQuestionGroupInput,
-  type Difficulty,
   type GroupType,
   type ImportAnswerAlignmentDraft,
   type ImportBatch,
@@ -43,9 +33,7 @@ import {
   type PaperWorkflow,
   type QuestionGroupCard,
   type QuestionGroupDetail,
-  type SourceType,
   type TopicLabel,
-  type VersionType,
   type VerifyQuestionGroupResult,
   type ReadingParseQuestionGroupResult,
   type ClozeParseQuestionGroupResult,
@@ -53,14 +41,9 @@ import {
   type GrammarParseQuestionGroupResult,
   type VerifyResult,
 } from './domain/questionBank'
-import {
-  computeQuestionNumbers,
-} from './domain/paperLayout'
-import { buildSavePayload } from './paperAssembly/paperExportPayload'
 import { usePaperDraft } from './paperAssembly/usePaperDraft'
 import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
 import { createBasketItem } from './paperAssembly/paperDraftModel'
-import { PaperBlockCanvas } from './paperAssembly/PaperBlockCanvas'
 import { ConciergeDesk } from './concierge/ConciergeDesk'
 import { useConciergeDesk } from './concierge/useConciergeDesk'
 import { usePaperExports } from './paperAssembly/usePaperExports'
@@ -68,12 +51,10 @@ import {
   applyImportAnswerAlignment,
   createQuestionGroup,
   deleteImportFile as deleteImportFileRequest,
-  deleteQuestionGroup as deleteQuestionGroupRequest,
   fetchImportBatches,
   fetchImportBundles,
   fetchImportFiles,
   fetchImportFileParse,
-  fetchPaperSetDetail,
   fetchPaperSets,
   fetchPaperWorkflows,
   fetchQuestionGroupDetail,
@@ -83,10 +64,7 @@ import {
   generateQuestionGroupSummary as generateQuestionGroupSummaryRequest,
   generateTopicLabels as generateTopicLabelsRequest,
   type GenerateTopicLabelsResult,
-  askQuestionBankSteward as askQuestionBankStewardRequest,
-  type QuestionBankStewardResult,
   bindTopicLabels as bindTopicLabelsRequest,
-  type SemanticSearchResult,
   runImportBatch,
   savePaperSet,
   saveClozeParseResultRequest,
@@ -125,13 +103,7 @@ import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { QuestionGroupDetailView } from './features/question-detail/QuestionGroupDetailView'
-import { compactGroupMeta, compactPreview, getDifficultyDraftForQuestion, type DifficultyRatingDraft } from './features/question-detail/detailHelpers'
-
-type StewardChatMessage = {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-}
+import { compactPreview, getDifficultyDraftForQuestion, type DifficultyRatingDraft } from './features/question-detail/detailHelpers'
 
 type AiEnhancementTask = 'summary' | 'topicLabels' | 'answerParse'
 
@@ -712,32 +684,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>(sampleQuestionGroups)
   const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
-  const [query, setQuery] = useState('')
-  const [semanticSearchEnabled, setSemanticSearchEnabled] = useState(false)
-  const [semanticSearchResult, setSemanticSearchResult] = useState<SemanticSearchResult | null>(null)
-  const [questionBankStewardStatus, setQuestionBankStewardStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [questionBankStewardError, setQuestionBankStewardError] = useState('')
-  const [questionBankStewardResult, setQuestionBankStewardResult] = useState<QuestionBankStewardResult | null>(null)
-  const [questionBankStewardPendingQuery, setQuestionBankStewardPendingQuery] = useState('')
-  const [stewardChatInput, setStewardChatInput] = useState('')
-  const [stewardChatMessages, setStewardChatMessages] = useState<StewardChatMessage[]>([
-    {
-      id: 'steward-welcome',
-      role: 'assistant',
-      content: '你可以直接说：找和城市交通那题做法像的，或者找同样要抽象概括的题。',
-    },
-  ])
-  const [difficulty, setDifficulty] = useState<'all' | Difficulty>('all')
-  const [sourceType, setSourceType] = useState<'all' | SourceType>('all')
-  const [groupType, setGroupType] = useState<'all' | GroupType>('all')
-  const [selectedTag, setSelectedTag] = useState('全部')
-  const [homeMode, setHomeMode] = useState<'ai' | 'classic'>(() => {
-    // M0-3 (plan.md 2b): member homeMode is locked to 'ai' — ignore any stale
-    // localStorage 'classic' residue from an earlier owner/open-mode session on
-    // the same browser.
-    if (!isOwnerView) return 'ai'
-    return localStorage.getItem('home-mode') === 'classic' ? 'classic' : 'ai'
-  })
   // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
   // hook can be created BEFORE paperExports / saveStatus / previewStatus
   // setters exist in this scope. The ref is wired up below as soon as the
@@ -749,7 +695,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const {
     basket,
     paperBlocks,
-    selectedPaperBlockId,
     openInsertionIndex,
     paperTitle,
     questionNumberStart,
@@ -758,9 +703,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   } = paperDraft
   const [isEntryOpen, setEntryOpen] = useState(false)
   const [isImportOpen, setImportOpen] = useState(false)
-  const [entryMode, setEntryMode] = useState<'create' | 'edit'>('create')
   const [entryInitialDetail, setEntryInitialDetail] = useState<QuestionGroupDetail | null>(null)
-  const [viewMode, setViewMode] = useState<'list' | 'detail' | 'preview'>('list')
+  const [viewMode, setViewMode] = useState<'list' | 'detail'>('list')
   const [selectedDetail, setSelectedDetail] = useState<QuestionGroupDetail | null>(null)
   const [detailStatus, setDetailStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [detailError, setDetailError] = useState('')
@@ -797,8 +741,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [selectedTopicLabelValues, setSelectedTopicLabelValues] = useState<string[]>([])
   const [topicLabelBindStatus, setTopicLabelBindStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [topicLabelBindError, setTopicLabelBindError] = useState('')
-  const [aiApiKey, setAiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
-  const [aiModel, setAiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
+  const [aiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
+  const [aiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
   const [backfillStatus, setBackfillStatus] = useState<'idle' | 'loading'>('idle')
   const [backfillResult, setBackfillResult] = useState<BackfillTopicLabelsResult | null>(null)
   const [backfillError, setBackfillError] = useState('')
@@ -820,20 +764,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
     }
   }, [])
-  const [previewDetails, setPreviewDetails] = useState<Record<string, QuestionGroupDetail>>({})
-  const [previewStatus, setPreviewStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [previewError, setPreviewError] = useState('')
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const [saveError, setSaveError] = useState('')
-  const [lastSavedPaper, setLastSavedPaper] = useState<PaperSetSummary | null>(null)
   const [savedPapers, setSavedPapers] = useState<PaperSetSummary[]>([])
-  const [savedPapersStatus, setSavedPapersStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
-  const [savedPapersError, setSavedPapersError] = useState('')
   const [paperWorkflows, setPaperWorkflows] = useState<PaperWorkflow[]>([])
   const [paperWorkflowsStatus, setPaperWorkflowsStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
   const [paperWorkflowsError, setPaperWorkflowsError] = useState('')
-  const [loadPaperStatus, setLoadPaperStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [loadPaperError, setLoadPaperError] = useState('')
   const [importBundles, setImportBundles] = useState<ImportBundle[]>([])
   const [importBundlesStatus, setImportBundlesStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
   const [importBundlesError, setImportBundlesError] = useState('')
@@ -925,17 +859,12 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   // Wire the Paper Set Draft edit-event router. usePaperDraft is created above
   // before paperExports exists; this effect binds the actual handler in once
-  // the dependent setters are reachable. Behavior preserved per legacy:
-  //   add / remove / clear : saveStatus idle + previewStatus idle + reset exports
-  //   reorder / score      : saveStatus idle + reset exports
-  //   meta                 : saveStatus idle + reset exports (legacy did the same)
+  // the dependent setters are reachable. saveStatus/previewStatus tracking
+  // was classic-basket-panel-only display state, retired in classic-retire-3;
+  // the draft-edit hook only needs to keep the export cache fresh now.
   useEffect(() => {
-    draftEditedHandlerRef.current = (reason) => {
-      setSaveStatus('idle')
+    draftEditedHandlerRef.current = () => {
       paperExports.resetExportStatuses()
-      if (reason === 'add' || reason === 'remove' || reason === 'clear') {
-        setPreviewStatus('idle')
-      }
     }
   }, [paperExports])
 
@@ -1020,12 +949,12 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       .then((paperSets) => {
         if (ignore) return
         setSavedPapers(paperSets)
-        setSavedPapersStatus('loaded')
       })
-      .catch((error) => {
-        if (ignore) return
-        setSavedPapersStatus('error')
-        setSavedPapersError(error instanceof Error ? error.message : String(error))
+      .catch(() => {
+        // savedPapersStatus/Error display died with the classic basket panel
+        // (classic-retire-3); savedPapers itself still feeds
+        // handleBuildObjectivePaperSet, so keep this fetch but drop the
+        // now-orphaned status/error tracking.
       })
 
     return () => {
@@ -1105,142 +1034,11 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setDifficultySaveErrors({})
   }, [selectedDetail?.id])
 
-  const allTags = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          questionGroups.flatMap((group) => [
-            ...group.tags,
-            ...(group.topicLabels || []).map((topicLabel) => topicLabel.label),
-          ]),
-        ),
-      ).sort((a, b) => a.localeCompare(b, 'zh-CN')),
-    [questionGroups],
-  )
-
-  const filteredGroups = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase()
-    const semanticGroups =
-      semanticSearchEnabled && semanticSearchResult
-        ? semanticSearchResult.matches
-            .map((match) => questionGroups.find((group) => group.id === match.questionGroupId) || match.questionGroup)
-            .filter((group): group is QuestionGroupCard => Boolean(group))
-        : questionGroups
-    const useSemanticResult = semanticSearchEnabled && Boolean(semanticSearchResult)
-
-    return semanticGroups.filter((group) => {
-      const searchable = [
-        group.title,
-        group.source,
-        group.region,
-        group.paperName,
-        group.section,
-        group.passageTitle,
-        group.summary,
-        group.hit,
-        group.answerPreview,
-        ...group.tags,
-        ...(group.topicLabels || []).map((topicLabel) => topicLabel.label),
-      ]
-        .join(' ')
-        .toLowerCase()
-
-      return (
-        (useSemanticResult || !normalizedQuery || searchable.includes(normalizedQuery)) &&
-        (difficulty === 'all' || group.difficulty === difficulty) &&
-        (sourceType === 'all' || group.sourceType === sourceType) &&
-        (groupType === 'all' || group.groupType === groupType) &&
-        (selectedTag === '全部' ||
-          group.tags.includes(selectedTag) ||
-          (group.topicLabels || []).some((topicLabel) => topicLabel.label === selectedTag))
-      )
-    })
-  }, [difficulty, groupType, query, questionGroups, selectedTag, semanticSearchEnabled, semanticSearchResult, sourceType])
-  const semanticMatchByGroupId = useMemo(() => {
-    const map = new Map<string, SemanticSearchResult['matches'][number]>()
-    semanticSearchResult?.matches.forEach((match) => {
-      map.set(match.questionGroupId, match)
-    })
-    return map
-  }, [semanticSearchResult])
   const questionGroupById = useMemo(() => new Map(questionGroups.map((group) => [group.id, group])), [questionGroups])
   // readingParseByQuestionNo / clozeParseByQuestionNo / sevenChoicesParseByQuestionNo /
   // grammarParseByQuestionNo / verifyByQuestionNo / answerCompareStats moved into
   // QuestionGroupDetailView (classic-retire-2-detail-view, PA MF-2) — recomputed
   // there from the same parse/verify results instead of being passed as props.
-
-  const totalQuestions = basket.reduce((sum, item) => sum + item.questionCount, 0)
-  const totalScore = basket.reduce((sum, item) => sum + item.score * item.questionCount, 0)
-
-  function handleQueryChange(value: string) {
-    setQuery(value)
-    setSemanticSearchEnabled(false)
-    setSemanticSearchResult(null)
-  }
-
-  async function handleQuestionBankSteward(event?: FormEvent<HTMLFormElement>) {
-    event?.preventDefault()
-    const normalizedMessage = stewardChatInput.trim()
-    if (!normalizedMessage) {
-      setQuestionBankStewardStatus('error')
-      setQuestionBankStewardError('先输入你想找什么题。')
-      return
-    }
-    const stewardMessage =
-      questionBankStewardPendingQuery && normalizedMessage !== questionBankStewardPendingQuery
-        ? `${questionBankStewardPendingQuery}；补充说明：${normalizedMessage}`
-        : normalizedMessage
-    const userMessage: StewardChatMessage = {
-      id: `steward-user-${Date.now()}`,
-      role: 'user',
-      content: normalizedMessage,
-    }
-
-    localStorage.setItem('ai-api-key', aiApiKey.trim())
-    localStorage.setItem('ai-model', aiModel)
-    setQuestionBankStewardStatus('loading')
-    setQuestionBankStewardError('')
-    setQuestionBankStewardResult(null)
-    setSemanticSearchEnabled(false)
-    setSemanticSearchResult(null)
-    setStewardChatInput('')
-    setStewardChatMessages((messages) => [...messages, userMessage])
-
-    try {
-      const result = await askQuestionBankStewardRequest(stewardMessage, aiApiKey.trim())
-      setQuestionBankStewardResult(result)
-      setQuestionBankStewardStatus('loaded')
-      setStewardChatMessages((messages) => [
-        ...messages,
-        {
-          id: `steward-assistant-${Date.now()}`,
-          role: 'assistant',
-          content: result.assistantMessage,
-        },
-      ])
-      if (!result.needsClarification && result.search) {
-        setQuestionBankStewardPendingQuery('')
-        setSemanticSearchEnabled(true)
-        setSemanticSearchResult(result.search)
-      } else {
-        setQuestionBankStewardPendingQuery(questionBankStewardPendingQuery || normalizedMessage)
-        setSemanticSearchEnabled(false)
-        setSemanticSearchResult(null)
-      }
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error)
-      setQuestionBankStewardStatus('error')
-      setQuestionBankStewardError(errorMessage)
-      setStewardChatMessages((messages) => [
-        ...messages,
-        {
-          id: `steward-error-${Date.now()}`,
-          role: 'assistant',
-          content: `出错了：${errorMessage}`,
-        },
-      ])
-    }
-  }
 
   async function addGroupsToBasket(groups: QuestionGroupCard[]) {
     const addableGroups = groups.filter((group) => group.draftPaperButtonState === 'add' && group.canAddToDraftPaper)
@@ -1274,10 +1072,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     void addGroupsToBasket([group])
   }
 
-  function addFilteredGroupsToBasket() {
-    void addGroupsToBasket(filteredGroups)
-  }
-
   function addWorkflowGroupsToBasket(workflow: PaperWorkflow) {
     const groups = sortedWorkflowBankGroups(workflow)
       .map((group) => questionGroupById.get(group.id))
@@ -1297,7 +1091,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
     setPaperBuildStatus('saving')
     setPaperBuildError('')
-    setSaveError('')
     paperExports.resetExportStatuses()
 
     try {
@@ -1320,10 +1113,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       paperDraft.replaceDraft({ basket: nextBasket })
       paperDraft.setPaperTitle(title)
       paperDraft.setVersionType('student')
-      setLastSavedPaper(paperSet)
       setSavedPapers((paperSets) => [paperSet, ...paperSets.filter((item) => item.id !== paperSet.id)])
-      setSavedPapersStatus('loaded')
-      setSaveStatus('saved')
       setPaperBuildResult(paperSet)
       setPaperBuildStatus('saved')
       await refreshPaperWorkflows()
@@ -1412,39 +1202,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  async function loadPreviewForBasketItems(items: BasketItem[]) {
-    setPreviewError('')
-
-    if (items.length === 0) {
-      setPreviewStatus('idle')
-      return
-    }
-
-    const missingItems = items.filter((item) => !previewDetails[item.id])
-
-    if (missingItems.length === 0) {
-      setPreviewStatus('loaded')
-      return
-    }
-
-    setPreviewStatus('loading')
-
-    try {
-      const details = await Promise.all(missingItems.map((item) => fetchQuestionGroupDetail(item.id)))
-      setPreviewDetails((current) => {
-        const next = { ...current }
-        details.forEach((detail) => {
-          next[detail.id] = detail
-        })
-        return next
-      })
-      setPreviewStatus('loaded')
-    } catch (error) {
-      setPreviewStatus('error')
-      setPreviewError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
   function updateDifficultyDraft(questionId: string, patch: Partial<DifficultyRatingDraft>) {
     setDifficultyDrafts((drafts) => {
       const previous =
@@ -1500,85 +1257,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  async function openPreview() {
-    setViewMode('preview')
-    await loadPreviewForBasketItems(basket)
-  }
-
   function backToList() {
     setViewMode('list')
-  }
-
-  function removeFromBasket(id: string) {
-    paperDraft.removeGroup(id)
-  }
-
-  function clearBasket() {
-    setLastSavedPaper(null)
-    paperDraft.clear()
-  }
-
-  // ── Paper-level config wrappers (Step 3) ──
-  // Hooks own the four config fields, but the legacy side effects (saveStatus
-  // idle, exports reset) stay here in App so we don't accidentally over- or
-  // under-reset on a config tweak. Behavior must match the pre-Step-3 source:
-  //   - title:   set + saveStatus idle + reset exports
-  //   - version: set + reset exports (no saveStatus change)
-  //   - style:   set only (no saveStatus / no reset)
-  //   - start:   set only (no saveStatus / no reset)
-  function handlePaperTitleChange(next: string) {
-    paperDraft.setPaperTitle(next)
-    setSaveStatus('idle')
-    paperExports.resetExportStatuses()
-  }
-
-  function handleVersionTypeChange(next: VersionType) {
-    paperDraft.setVersionType(next)
-    paperExports.resetExportStatuses()
-  }
-
-  function handlePaperExportStyleChange(next: 'exam' | 'handout') {
-    paperDraft.setPaperExportStyle(next)
-  }
-
-  function handleQuestionNumberStartChange(next: number) {
-    paperDraft.setQuestionNumberStart(Math.max(1, Number.isFinite(next) ? next : 1))
-  }
-
-  function removePaperBlock(blockId: string) {
-    paperDraft.removeBlock(blockId)
-  }
-
-  function movePaperBlock(blockId: string, direction: -1 | 1) {
-    paperDraft.moveBlock(blockId, direction)
-  }
-
-  function updatePaperBlockTitle(blockId: string, title: string) {
-    paperDraft.updateSectionHeaderTitle(blockId, title)
-  }
-
-  function insertSectionHeaderBefore(blockId: string) {
-    paperDraft.insertSectionHeaderBefore(blockId)
-  }
-
-  function insertPageBreakAfter(blockId: string) {
-    paperDraft.insertPageBreakAfter(blockId)
-  }
-
-  function insertBlockAt(index: number, type: 'section_header' | 'page_break') {
-    paperDraft.insertBlockAt(index, type)
-  }
-
-  function moveBasketItem(id: string, direction: -1 | 1) {
-    paperDraft.moveGroup(id, direction)
-  }
-
-  function updateScore(id: string, score: number) {
-    paperDraft.updateGroupScore(id, score)
-  }
-
-  function updateBasketItem<K extends 'sectionTitle' | 'note'>(id: string, field: K, value: BasketItem[K]) {
-    paperDraft.updateGroupMeta(id, { [field]: value })
   }
 
   function openImportPanel() {
@@ -1588,7 +1268,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   }
 
   function openEditEntry(detail: QuestionGroupDetail) {
-    setEntryMode('edit')
     setEntryInitialDetail(detail)
     setEntryOpen(true)
   }
@@ -1600,11 +1279,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         : [saved, ...groups.filter((group) => group.id !== saved.id)],
     )
     paperDraft.patchBasketItemFromSavedGroup(saved)
-    setPreviewDetails((current) => {
-      const next = { ...current }
-      delete next[saved.id]
-      return next
-    })
     if (context.mode === 'edit') {
       const detail = await fetchQuestionGroupDetail(saved.id)
       setSelectedDetail(detail)
@@ -1612,7 +1286,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
     setDataStatus('sqlite')
     setEntryOpen(false)
-    setEntryMode('create')
     setEntryInitialDetail(null)
     await refreshPaperWorkflows()
   }
@@ -2168,17 +1841,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  async function handleDeleteQuestionGroup(id: string) {
-    try {
-      await deleteQuestionGroupRequest(id)
-      setQuestionGroups((groups) => groups.filter((g) => g.id !== id))
-      paperDraft.externalRemoveByGroupId(id)
-      await refreshPaperWorkflows()
-    } catch {
-      // silently ignore
-    }
-  }
-
   async function handleVerifyQuestionGroup() {
     const runId = ++aiRunIdRef.current
     const key = aiApiKey.trim()
@@ -2705,7 +2367,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setPaperBuildStatus('saving')
     setPaperBuildError('')
     setPaperBuildResult(null)
-    setSaveError('')
     paperExports.resetExportStatuses()
 
     if (nextBasket.length === 0) {
@@ -2734,80 +2395,14 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       paperDraft.replaceDraft({ basket: nextBasket })
       paperDraft.setPaperTitle(title)
       paperDraft.setVersionType('student')
-      setLastSavedPaper(paperSet)
       setSavedPapers((paperSets) => [paperSet, ...paperSets.filter((item) => item.id !== paperSet.id)])
-      setSavedPapersStatus('loaded')
-      setSaveStatus('saved')
       setPaperBuildResult(paperSet)
       setPaperBuildStatus('saved')
       setImportOpen(false)
-      setViewMode('preview')
-      await loadPreviewForBasketItems(nextBasket)
       await refreshPaperWorkflows()
     } catch (error) {
       setPaperBuildStatus('error')
       setPaperBuildError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function handleSavePaperSet() {
-    if (basket.length === 0) return
-
-    setSaveStatus('saving')
-    setSaveError('')
-
-    try {
-      const paperSetInput = buildSavePayload({ basket, paperBlocks, questionNumberStart, paperExportStyle, paperTitle, versionType })
-
-      const paperSet = lastSavedPaper
-        ? await updatePaperSetRequest(lastSavedPaper.id, paperSetInput)
-        : await savePaperSet(paperSetInput)
-
-      setLastSavedPaper(paperSet)
-      setSavedPapers((paperSets) => [paperSet, ...paperSets.filter((item) => item.id !== paperSet.id)])
-      setSavedPapersStatus('loaded')
-      setSaveStatus('saved')
-      await refreshPaperWorkflows()
-    } catch (error) {
-      setSaveStatus('error')
-      setSaveError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function handleLoadPaperSet(id: string) {
-    setLoadPaperStatus('loading')
-    setLoadPaperError('')
-
-    try {
-      const paperSet = await fetchPaperSetDetail(id)
-      const loadedBasket = paperSet.items
-        .filter((item) => item.questionGroup)
-        .map((item) =>
-          createBasketItem(item.questionGroup!, {
-            score: item.score,
-            sectionTitle: item.sectionTitle || groupTypeLabel[item.questionGroup!.groupType],
-            note: item.note,
-          }),
-        )
-
-      paperDraft.replaceDraft({ basket: loadedBasket, layout: paperSet.layout })
-      if (paperSet.layout) {
-        paperDraft.setQuestionNumberStart(paperSet.layout.questionNumberStart || 1)
-        paperDraft.setPaperExportStyle(paperSet.layout.printStyle || 'exam')
-      }
-      if (paperSet.layoutWarnings && paperSet.layoutWarnings.length > 0) {
-        setLoadPaperError(`布局提示：${paperSet.layoutWarnings.join('；')}`)
-      }
-      paperDraft.setPaperTitle(paperSet.title)
-      setLastSavedPaper(paperSet)
-      setSaveStatus('saved')
-      paperExports.resetExportStatuses()
-      setPreviewStatus('idle')
-      setViewMode('list')
-      setLoadPaperStatus('loaded')
-    } catch (error) {
-      setLoadPaperStatus('error')
-      setLoadPaperError(error instanceof Error ? error.message : String(error))
     }
   }
 
@@ -3201,18 +2796,13 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   }
 
   return (
-    <div className={`app-shell home-mode-${homeMode}`}>
+    <div className="app-shell home-mode-ai">
       <header className="topbar">
         <div>
           <p className="eyebrow">English Question Bank</p>
           <h1>英语题库工作台</h1>
         </div>
         <div className="topbar-actions">
-          {homeMode === 'classic' && (
-            <span className={`data-status ${dataStatus}`}>
-              {dataStatus === 'loading' ? '连接本地库' : dataStatus === 'sqlite' ? 'SQLite 已连接' : '样例数据'}
-            </span>
-          )}
           {currentDraftPaperId && (
             <button
               className="ghost-button"
@@ -3227,38 +2817,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             <Archive size={16} />
             个人空间
           </button>
-          {homeMode === 'classic' && (
-            <span className="topbar-ai-group">
-              <Sparkles size={16} />
-              <input
-                className="ai-key-input"
-                type="password"
-                value={aiApiKey}
-                placeholder="DeepSeek Key"
-                onChange={(event) => setAiApiKey(event.target.value)}
-              />
-              <select
-                className="ai-model-select"
-                value={aiModel}
-                onChange={(event) => setAiModel(normalizeAiModel(event.target.value))}
-              >
-                {!DEEPSEEK_MODELS.some((option) => option.value === aiModel) && <option value={aiModel}>{aiModel}</option>}
-                {DEEPSEEK_MODELS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <label className="topbar-thinking-toggle">
-                <input
-                  type="checkbox"
-                  checked={aiThinkingMode}
-                  onChange={(event) => setAiThinkingMode(event.target.checked)}
-                />
-                <span>推理模式</span>
-              </label>
-            </span>
-          )}
           {isOwnerView && (
             <button
               className="ghost-button"
@@ -3268,22 +2826,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             >
               <Tag size={16} />
               {adminRouteActive ? '退出管理' : '管理'}
-            </button>
-          )}
-          {isOwnerView && (
-            <button
-              className="home-mode-toggle"
-              type="button"
-              onClick={() => {
-                const next = homeMode === 'ai' ? 'classic' : 'ai'
-                setHomeMode(next)
-                localStorage.setItem('home-mode', next)
-                setViewMode('list')
-              }}
-              aria-label={homeMode === 'ai' ? '切换到经典模式' : '切换到 AI 模式'}
-              title={homeMode === 'ai' ? '切到经典模式（关键词 + 筛选）' : '切到 AI 模式（自然语言取题台）'}
-            >
-              {homeMode === 'ai' ? '经典模式' : 'AI 模式'}
             </button>
           )}
           {currentUser && (
@@ -3335,68 +2877,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         />
       )}
 
-      {!adminRouteActive && homeMode === 'classic' && (
-      <section className="filter-bar" aria-label="筛选">
-        <div className="filter-bar-row">
-          <label className="filter-bar-field">
-            <span>关键词</span>
-            <div className="search-field">
-              <Search size={17} />
-              <input
-                value={query}
-                onChange={(event) => handleQueryChange(event.target.value)}
-                placeholder="搜篇章、题干、标签"
-              />
-            </div>
-          </label>
-
-          <label className="filter-bar-field">
-            <span>来源</span>
-            <select value={sourceType} onChange={(event) => setSourceType(event.target.value as 'all' | SourceType)}>
-              <option value="all">全部来源</option>
-              <option value="real_exam">真题</option>
-              <option value="mock_exam">模拟题</option>
-              <option value="self_made">自建</option>
-            </select>
-          </label>
-
-          <label className="filter-bar-field">
-            <span>题型</span>
-            <select value={groupType} onChange={(event) => setGroupType(event.target.value as 'all' | GroupType)}>
-              <option value="all">全部题型</option>
-              <option value="reading">阅读理解</option>
-              <option value="cloze">完形填空</option>
-              <option value="seven_choices">七选五</option>
-              <option value="grammar_cloze">语法填空</option>
-            </select>
-          </label>
-
-          <label className="filter-bar-field">
-            <span>难度</span>
-            <select value={difficulty} onChange={(event) => setDifficulty(event.target.value as 'all' | Difficulty)}>
-              <option value="all">全部难度</option>
-              <option value="low">低</option>
-              <option value="medium">中</option>
-              <option value="high">高</option>
-            </select>
-          </label>
-
-          <label className="filter-bar-field">
-            <span>标签</span>
-            <select value={selectedTag} onChange={(event) => setSelectedTag(event.target.value)}>
-              <option value="全部">全部标签</option>
-              {allTags.map((tag) => (
-                <option key={tag} value={tag}>
-                  {tag}
-                </option>
-              ))}
-            </select>
-          </label>
-
-        </div>
-      </section>
-      )}
-
       {!adminRouteActive && (
       <main className="workbench" aria-label="英语题库工作台">
         <section className="library-panel" aria-label="题库">
@@ -3404,49 +2884,19 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             <div>
               <p className="eyebrow">Question Groups</p>
               <h2>
-                {viewMode === 'detail'
-                  ? '题组详情'
-                  : viewMode === 'preview'
-                    ? '排版预览'
-                    : '题组列表'}
+                {viewMode === 'detail' ? '题组详情' : '题组列表'}
               </h2>
             </div>
             <div className="library-header-actions">
               <div className="filter-bar-summary">
                 <BookOpen size={17} />
-                <strong>{filteredGroups.length}</strong>
+                <strong>{questionGroups.length}</strong>
                 <span>个题组</span>
-              </div>
-              <div className="view-tabs" aria-label="结果视图">
-                <button
-                  className={viewMode === 'list' ? 'active' : ''}
-                  type="button"
-                  onClick={() => setViewMode('list')}
-                >
-                  题组
-                </button>
-                <button
-                  className={viewMode === 'detail' ? 'active' : ''}
-                  disabled={!selectedDetail && detailStatus !== 'loading'}
-                  type="button"
-                  onClick={() => setViewMode('detail')}
-                >
-                  详情
-                </button>
-                <button
-                  className={viewMode === 'preview' ? 'active' : ''}
-                  disabled={basket.length === 0}
-                  type="button"
-                  onClick={openPreview}
-                >
-                  预览
-                </button>
               </div>
             </div>
           </div>
 
           {viewMode === 'list' ? (
-            homeMode === 'ai' ? (
               <ConciergeDesk
                 retrieval={conciergeDesk.retrieval}
                 actions={conciergeDesk.actions}
@@ -3461,81 +2911,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                   localStorage.setItem('ai-thinking-mode', value ? 'on' : 'off')
                 }}
               />
-            ) : (
-                <div className="group-list">
-                  {filteredGroups.map((group) => (
-                    <article className="group-card" key={group.id}>
-                      <div className="card-main">
-                        <div className="source-line">
-                          <span>{compactGroupMeta(group.groupType, group.questionCount)}</span>
-                        </div>
-                        <h3>{group.title}</h3>
-                        <p className="summary">{group.summary}</p>
-                    <p className="hit">
-                      <strong>命中：</strong>
-                      {group.hit}
-                    </p>
-                    {semanticSearchEnabled && semanticMatchByGroupId.has(group.id) ? (
-                      <p className="semantic-match-reason">
-                        <strong>题库管家：</strong>
-                        {semanticMatchByGroupId.get(group.id)?.reason || '匹配当前检索意图。'}
-                        {semanticMatchByGroupId.get(group.id)?.score
-                          ? ` · ${Math.round((semanticMatchByGroupId.get(group.id)?.score || 0) * 100)}%`
-                          : ''}
-                      </p>
-                    ) : null}
-                    <div className="tag-row">
-                      {group.tags.map((tag) => (
-                        <span className="tag" key={tag}>
-                          <Tag size={13} />
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    {group.topicLabels?.length ? (
-                      <div className="topic-tag-row" aria-label="已绑定话题标签">
-                        <span className="topic-tag-row-title">话题标签</span>
-                        {group.topicLabels.map((topicLabel) => (
-                          <span className="topic-tag" key={topicLabel.label}>
-                            {topicLabel.label}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="card-side">
-                    <span className={`difficulty ${group.difficulty}`}>难度 {difficultyLabel[group.difficulty]}</span>
-                    <span className="source-type">{sourceTypeLabel[group.sourceType]}</span>
-                    <button className="detail-button" type="button" onClick={() => openDetail(group.id)}>
-                      详情
-                    </button>
-                    <button
-                      className="add-button"
-                      type="button"
-                      onClick={() => addToBasket(group)}
-                      disabled={group.draftPaperButtonState === 'disabled'}
-                      title={group.draftPaperButtonState === 'disabled' ? group.printUnavailableReason || '暂不可组卷' : undefined}
-                    >
-                      <Plus size={16} />
-                      {group.draftPaperButtonState === 'in_current_draft'
-                        ? '已在草稿卷中'
-                        : group.draftPaperButtonState === 'disabled'
-                          ? '暂不可组卷'
-                          : '加入草稿卷'}
-                    </button>
-                    <button
-                      className="icon-button"
-                      type="button"
-                      onClick={() => handleDeleteQuestionGroup(group.id)}
-                      aria-label="删除题组"
-                    >
-                      <Trash2 size={15} />
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-            )
           ) : viewMode === 'detail' ? (
             <QuestionGroupDetailView
               isOwnerView={isOwnerView}
@@ -3599,549 +2974,26 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               onSaveQuestionDifficulty={handleSaveQuestionDifficulty}
               onUpdateDifficultyDraft={updateDifficultyDraft}
             />
-          ) : (
-            <div className="paper-preview">
-              <div className="paper-preview-toolbar">
-                <button className="back-button" type="button" onClick={backToList}>
-                  <ArrowLeft size={16} />
-                  返回题组
-                </button>
-                <span>{versionType === 'student' ? '学生版' : '教师版'}</span>
-              </div>
-
-              {previewStatus === 'idle' && basket.length > 0 && (
-                <p className="detail-message">点击“预览”读取题组完整内容，生成当前题集版式。</p>
-              )}
-              {previewStatus === 'loading' && <p className="detail-message">正在生成排版预览...</p>}
-              {previewStatus === 'error' && <p className="detail-message error">{previewError}</p>}
-              {basket.length === 0 && <p className="empty-state">先把题组加入右侧草稿卷，再生成排版预览。</p>}
-
-              {basket.length > 0 && previewStatus === 'loaded' && (
-                <article className="paper-page" aria-label="试卷排版预览">
-                  <header className="paper-page-header">
-                    <p>English Question Set</p>
-                    <h3>{paperTitle.trim() || '未命名题集'}</h3>
-                    <div className="paper-meta">
-                      <span>{versionType === 'student' ? '学生版' : '教师版'}</span>
-                      <span>{basket.length} 题组</span>
-                      <span>{totalQuestions} 小题</span>
-                      <span>{totalScore.toFixed(1)} 分</span>
-                    </div>
-                  </header>
-
-                  <PaperBlockCanvas
-                    paperBlocks={paperBlocks}
-                    basket={basket}
-                    previewDetails={previewDetails}
-                    versionType={versionType}
-                    questionNumberStart={questionNumberStart}
-                    selectedPaperBlockId={selectedPaperBlockId}
-                    openInsertionIndex={openInsertionIndex}
-                    onSelectBlock={paperDraft.setSelectedPaperBlockId}
-                    onToggleInsertionSeam={paperDraft.setOpenInsertionIndex}
-                    onMoveBlock={movePaperBlock}
-                    onRemoveBlock={removePaperBlock}
-                    onInsertBlockAt={insertBlockAt}
-                    onInsertSectionHeaderBefore={insertSectionHeaderBefore}
-                    onInsertPageBreakAfter={insertPageBreakAfter}
-                  />
-                </article>
-              )}
-            </div>
-          )}
+          ) : null}
         </section>
-
-        {homeMode === 'classic' && (
-        <aside
-          className="basket-panel"
-          aria-label="草稿卷"
-        >
-          {homeMode === 'classic' && (
-          <section className="steward-chat-panel" aria-label="题库管家">
-            <div className="panel-heading steward-heading">
-              <Sparkles size={18} />
-              <div>
-                <h2>题库管家</h2>
-                <span>DeepSeek Flash 非思考</span>
-              </div>
-            </div>
-
-            <div className="steward-chat-messages" aria-live="polite">
-              {stewardChatMessages.slice(-6).map((message) => (
-                <div className={`steward-message ${message.role}`} key={message.id}>
-                  {message.content}
-                </div>
-              ))}
-              {questionBankStewardStatus === 'loading' && (
-                <div className="steward-message assistant">正在找题...</div>
-              )}
-            </div>
-
-            {questionBankStewardResult && !questionBankStewardResult.needsClarification && (
-              <div className="steward-result-summary">
-                <span>已同步左侧列表</span>
-                <strong>{questionBankStewardResult.matches.length}</strong>
-                <em>个候选</em>
-              </div>
-            )}
-            {questionBankStewardStatus === 'error' && <p className="save-state error">{questionBankStewardError}</p>}
-
-            <form className="steward-chat-form" onSubmit={handleQuestionBankSteward}>
-              <input
-                value={stewardChatInput}
-                onChange={(event) => setStewardChatInput(event.target.value)}
-                placeholder="比如：找同样要抽象概括的题"
-              />
-              <button
-                className="steward-submit-button"
-                type="submit"
-                disabled={questionBankStewardStatus === 'loading' || !stewardChatInput.trim()}
-              >
-                <Sparkles size={13} />
-                发送
-              </button>
-            </form>
-          </section>
-          )}
-
-          <div className="panel-heading">
-            <ClipboardList size={18} />
-            <h2>草稿卷</h2>
-          </div>
-
-          <div className="basket-toolbar" aria-label="草稿卷快捷操作">
-            <button
-              className="detail-button"
-              disabled={filteredGroups.length === 0 || filteredGroups.every((group) => basket.some((item) => item.id === group.id))}
-              type="button"
-              onClick={addFilteredGroupsToBasket}
-            >
-              <Plus size={15} />
-              加入当前筛选
-            </button>
-            <button className="detail-button" disabled={basket.length === 0} type="button" onClick={clearBasket}>
-              <Trash2 size={15} />
-              清空
-            </button>
-          </div>
-
-          <label className="paper-title">
-            <span>题集标题</span>
-            <input
-              value={paperTitle}
-              onChange={(event) => {
-                handlePaperTitleChange(event.target.value)
-              }}
-            />
-          </label>
-
-          <div className="version-toggle" aria-label="版本切换">
-            <button
-              className={versionType === 'student' ? 'active' : ''}
-              type="button"
-              onClick={() => {
-                handleVersionTypeChange('student')
-              }}
-            >
-              学生版
-            </button>
-            <button
-              className={versionType === 'teacher' ? 'active' : ''}
-              type="button"
-              onClick={() => {
-                handleVersionTypeChange('teacher')
-              }}
-            >
-              教师版
-            </button>
-          </div>
-
-          <div className="version-toggle" aria-label="导出样式">
-            <button
-              className={paperExportStyle === 'exam' ? 'active' : ''}
-              type="button"
-              onClick={() => handlePaperExportStyleChange('exam')}
-            >
-              试卷版
-            </button>
-            <button
-              className={paperExportStyle === 'handout' ? 'active' : ''}
-              type="button"
-              onClick={() => handlePaperExportStyleChange('handout')}
-            >
-              讲义版
-            </button>
-          </div>
-
-          <div className="basket-stats">
-            <div>
-              <strong>{basket.length}</strong>
-              <span>题组</span>
-            </div>
-            <div>
-              <strong>{totalQuestions}</strong>
-              <span>小题</span>
-            </div>
-            <div>
-              <strong>{totalScore.toFixed(1)}</strong>
-              <span>分</span>
-            </div>
-          </div>
-
-          <div className="basket-list">
-            {basket.length === 0 ? (
-              <p className="empty-state">从左侧题组列表加入内容，右侧会生成试卷结构。</p>
-            ) : (
-              basket.map((item, index) => (
-                <div className="basket-item" key={item.id}>
-                  <div className="basket-index">{index + 1}</div>
-                  <div className="basket-content">
-                    <strong>{item.title}</strong>
-                    <span>{compactGroupMeta(item.groupType, item.questionCount)}</span>
-                    <div className="basket-fields">
-                      <label>
-                        板块
-                        <input
-                          value={item.sectionTitle}
-                          onChange={(event) => updateBasketItem(item.id, 'sectionTitle', event.target.value)}
-                        />
-                      </label>
-                      <label>
-                        分值
-                        <input
-                          min="0.5"
-                          step="0.5"
-                          type="number"
-                          value={item.score}
-                          onChange={(event) => updateScore(item.id, Number(event.target.value))}
-                        />
-                      </label>
-                    </div>
-                    <label className="basket-note">
-                      讲评备注
-                      <input
-                        value={item.note}
-                        placeholder="可选"
-                        onChange={(event) => updateBasketItem(item.id, 'note', event.target.value)}
-                      />
-                    </label>
-                  </div>
-                  <div className="basket-actions">
-                    <button type="button" onClick={() => moveBasketItem(item.id, -1)} aria-label="上移">
-                      <ArrowUp size={15} />
-                    </button>
-                    <button type="button" onClick={() => moveBasketItem(item.id, 1)} aria-label="下移">
-                      <ArrowDown size={15} />
-                    </button>
-                    <button type="button" onClick={() => removeFromBasket(item.id)} aria-label="删除">
-                      <Trash2 size={15} />
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-
-          {/* Paper Blocks Outline */}
-          <details className="paper-blocks-outline" open={paperBlocks.length > 0}>
-            <summary>题集大纲 ({paperBlocks.length} 块)</summary>
-            <div className="paper-blocks-toolbar">
-              <label className="paper-blocks-start-num">
-                起始题号
-                <input type="number" min="1" value={questionNumberStart} onChange={(e) => handleQuestionNumberStartChange(Number(e.target.value) || 1)} />
-              </label>
-              <button className="ghost-button" type="button" onClick={() => insertBlockAt(paperBlocks.length, 'section_header')}>+ 大题标题</button>
-              <button className="ghost-button" type="button" onClick={() => insertBlockAt(paperBlocks.length, 'page_break')}>+ 分页</button>
-            </div>
-            <div className="paper-blocks-list">
-              {(() => {
-                const numberRanges = computeQuestionNumbers(paperBlocks, questionNumberStart, (gid) => {
-                  const detail = previewDetails[gid]
-                  const item = basket.find((i) => i.id === gid)
-                  return detail?.questions.length ?? item?.questionCount ?? 0
-                })
-                return paperBlocks.map((block, blockIdx) => {
-                  const range = numberRanges[blockIdx]
-                  if (block.type === 'section_header') {
-                    return (
-                      <div className={`paper-block-item section_header`} key={block.id}>
-                        <input
-                          className="paper-block-title-input"
-                          value={block.title}
-                          onChange={(e) => updatePaperBlockTitle(block.id, e.target.value)}
-                          placeholder="大题标题"
-                        />
-                        <div className="paper-block-actions">
-                          <button type="button" onClick={() => movePaperBlock(block.id, -1)} aria-label="上移"><ArrowUp size={13} /></button>
-                          <button type="button" onClick={() => movePaperBlock(block.id, 1)} aria-label="下移"><ArrowDown size={13} /></button>
-                          <button type="button" onClick={() => removePaperBlock(block.id)} aria-label="删除"><Trash2 size={13} /></button>
-                        </div>
-                      </div>
-                    )
-                  }
-                  if (block.type === 'page_break') {
-                    return (
-                      <div className={`paper-block-item page_break`} key={block.id}>
-                        <span className="paper-block-label">分页</span>
-                        <div className="paper-block-actions">
-                          <button type="button" onClick={() => movePaperBlock(block.id, -1)} aria-label="上移"><ArrowUp size={13} /></button>
-                          <button type="button" onClick={() => movePaperBlock(block.id, 1)} aria-label="下移"><ArrowDown size={13} /></button>
-                          <button type="button" onClick={() => removePaperBlock(block.id)} aria-label="删除"><Trash2 size={13} /></button>
-                        </div>
-                      </div>
-                    )
-                  }
-                  // question_group
-                  const item = basket.find((i) => i.id === block.questionGroupId)
-                  const numLabel = range.startNum != null && range.endNum != null
-                    ? (range.startNum === range.endNum ? `${range.startNum}` : `${range.startNum}–${range.endNum}`)
-                    : '?'
-                  return (
-                    <div className={`paper-block-item question_group`} key={block.id}>
-                      {item ? (
-                        <div className="paper-block-group-info">
-                          <strong><span className="paper-block-num">{numLabel}</span> {item.sectionTitle || item.title}</strong>
-                          <span>{compactGroupMeta(item.groupType, item.questionCount)} · {block.score} 分/题</span>
-                        </div>
-                      ) : <span className="paper-block-label">题组未找到</span>}
-                      <div className="paper-block-actions">
-                        <button type="button" onClick={() => movePaperBlock(block.id, -1)} aria-label="上移"><ArrowUp size={13} /></button>
-                        <button type="button" onClick={() => movePaperBlock(block.id, 1)} aria-label="下移"><ArrowDown size={13} /></button>
-                        <button type="button" onClick={() => removePaperBlock(block.id)} aria-label="删除"><Trash2 size={13} /></button>
-                      </div>
-                    </div>
-                  )
-                })
-              })()}
-              {paperBlocks.length === 0 && <p className="empty-state">加入题组后自动生成大纲块。</p>}
-            </div>
-          </details>
-
-          {/* Block Settings Panel */}
-          {selectedPaperBlockId && (() => {
-            const selBlock = paperBlocks.find((b) => b.id === selectedPaperBlockId)
-            if (!selBlock) return null
-            if (selBlock.type === 'section_header') {
-              return (
-                <div className="block-settings-panel">
-                  <span className="block-settings-label">大题标题设置</span>
-                  <input
-                    className="block-settings-input"
-                    value={selBlock.title}
-                    onChange={(e) => updatePaperBlockTitle(selBlock.id, e.target.value)}
-                    placeholder="标题"
-                  />
-                  <div className="block-settings-actions">
-                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, -1)}>上移</button>
-                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, 1)}>下移</button>
-                    <button className="ghost-button" type="button" onClick={() => removePaperBlock(selBlock.id)}>删除</button>
-                  </div>
-                </div>
-              )
-            }
-            if (selBlock.type === 'page_break') {
-              return (
-                <div className="block-settings-panel">
-                  <span className="block-settings-label">分页设置</span>
-                  <div className="block-settings-actions">
-                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, -1)}>上移</button>
-                    <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, 1)}>下移</button>
-                    <button className="ghost-button" type="button" onClick={() => removePaperBlock(selBlock.id)}>删除</button>
-                  </div>
-                </div>
-              )
-            }
-            // question_group
-            const bItem = basket.find((i) => i.id === selBlock.questionGroupId)
-            const bDetail = previewDetails[selBlock.questionGroupId]
-            const qCount = bDetail?.questions.length ?? bItem?.questionCount ?? 0
-            const selectedRanges = computeQuestionNumbers(paperBlocks, questionNumberStart, (gid) => {
-              const detail = previewDetails[gid]
-              const item = basket.find((i) => i.id === gid)
-              return detail?.questions.length ?? item?.questionCount ?? 0
-            })
-            const selectedRange = selectedRanges.find((range) => range.blockId === selBlock.id)
-            const rangeStart = selectedRange?.startNum ?? questionNumberStart
-            const rangeEnd = selectedRange?.endNum ?? rangeStart + qCount - 1
-            return (
-              <div className="block-settings-panel">
-                <span className="block-settings-label">题组设置</span>
-                <div className="block-settings-meta">
-                  <strong>{bItem?.sectionTitle || bItem?.title || '题组'}</strong>
-                  <span>题号 {rangeStart}–{rangeEnd} · {qCount} 题</span>
-                </div>
-                <label className="block-settings-score">
-                  每题分值
-                  <input
-                    type="number"
-                    min="0.5"
-                    step="0.5"
-                    value={selBlock.score}
-                    onChange={(e) => updateScore(selBlock.questionGroupId, Number(e.target.value))}
-                  />
-                </label>
-                <div className="block-settings-actions">
-                  <button className="ghost-button" type="button" onClick={() => insertSectionHeaderBefore(selBlock.id)}>+标题↑</button>
-                  <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, -1)}>上移</button>
-                  <button className="ghost-button" type="button" onClick={() => movePaperBlock(selBlock.id, 1)}>下移</button>
-                  <button className="ghost-button" type="button" onClick={() => insertPageBreakAfter(selBlock.id)}>+分页↓</button>
-                  <button className="ghost-button" type="button" onClick={() => removePaperBlock(selBlock.id)}>删除</button>
-                </div>
-              </div>
-            )
-          })()}
-
-          <button className="save-button" type="button" disabled={basket.length === 0 || saveStatus === 'saving'} onClick={handleSavePaperSet}>
-            <Save size={17} />
-            {saveStatus === 'saving' ? '保存中' : lastSavedPaper ? '覆盖保存' : '保存题集'}
-          </button>
-
-          {lastSavedPaper && (
-            <button
-              className="detail-button"
-              disabled={basket.length === 0 || saveStatus === 'saving'}
-              style={{ marginBottom: 8, width: '100%' }}
-              type="button"
-              onClick={() => {
-                setLastSavedPaper(null)
-                setSaveStatus('idle')
-              }}
-            >
-              另存为新题集
-            </button>
-          )}
-
-          {saveStatus === 'saved' && lastSavedPaper && (
-            <p className="save-state success">
-              已保存：{lastSavedPaper.title} · {lastSavedPaper.itemCount} 题组 · {lastSavedPaper.totalQuestions} 小题
-            </p>
-          )}
-
-          {saveStatus === 'error' && <p className="save-state error">{saveError}</p>}
-
-          <section className="saved-paper-panel" aria-label="已保存题集">
-            <div className="saved-paper-heading">
-              <span>已保存题集</span>
-              <strong>{savedPapers.length}</strong>
-            </div>
-
-            {savedPapersStatus === 'loading' && <p className="saved-paper-note">读取中...</p>}
-            {savedPapersStatus === 'error' && <p className="save-state error">{savedPapersError}</p>}
-            {loadPaperStatus === 'error' && <p className="save-state error">{loadPaperError}</p>}
-            {loadPaperStatus === 'loaded' && <p className="save-state success">已载入题集到草稿卷。</p>}
-
-            {savedPapersStatus === 'loaded' && savedPapers.length === 0 && (
-              <p className="saved-paper-note">保存后的题集会显示在这里。</p>
-            )}
-
-            {savedPapers.length > 0 && (
-              <div className="saved-paper-list">
-                {savedPapers.slice(0, 4).map((paper) => (
-                  <button
-                    className="saved-paper-item"
-                    disabled={loadPaperStatus === 'loading'}
-                    key={paper.id}
-                    type="button"
-                    onClick={() => handleLoadPaperSet(paper.id)}
-                  >
-                    <strong>{paper.title}</strong>
-                    <span>
-                      {paper.itemCount} 题组 · {paper.totalQuestions} 小题 · {Number(paper.totalScore).toFixed(1)} 分
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </section>
-
-          <div className="preview-box">
-            <span>预览模式</span>
-            <p>
-              {versionType === 'student'
-                ? '导出时隐藏答案与解析，保留材料、题干、选项和答题区域。'
-                : '导出时显示答案与解析，适合课堂讲评和教师备课。'}
-            </p>
-          </div>
-
-          <button className="preview-button" type="button" disabled={basket.length === 0} onClick={openPreview}>
-            排版预览
-          </button>
-
-          <button
-            className="export-button"
-            type="button"
-            disabled={basket.length === 0 || paperExports.statuses.docx === 'exporting'}
-            onClick={paperExports.exportDocx}
-          >
-            <FileDown size={18} />
-            {paperExports.statuses.docx === 'exporting' ? '导出中' : '导出 DOCX'}
-          </button>
-
-          {paperExports.statuses.docx === 'exported' && <p className="save-state success">DOCX 已生成并下载。</p>}
-          {paperExports.statuses.docx === 'error' && <p className="save-state error">{paperExports.statuses.docxError}</p>}
-
-          <button
-            className="export-button"
-            type="button"
-            disabled={basket.length === 0 || paperExports.statuses.printPdf === 'exporting'}
-            onClick={paperExports.exportPrintPdf}
-          >
-            <FileDown size={18} />
-            {paperExports.statuses.printPdf === 'exporting'
-              ? '生成中…'
-              : `导出精排 PDF（${versionType === 'student' ? '学生版' : '教师版'}）`}
-          </button>
-          {paperExports.statuses.printPdf === 'exported' && <p className="save-state success">精排 PDF 已生成并下载。</p>}
-          {paperExports.statuses.printPdf === 'error' && <p className="save-state error">{paperExports.statuses.printPdfError}</p>}
-
-          <details className="export-secondary">
-            <summary>更多导出格式</summary>
-            <button
-              className="export-button pdf"
-              type="button"
-              disabled={basket.length === 0 || paperExports.statuses.pdf === 'exporting'}
-              onClick={paperExports.exportPdf}
-            >
-              <FileDown size={18} />
-              {paperExports.statuses.pdf === 'exporting' ? '导出中' : '导出 PDF（LibreOffice 转换）'}
-            </button>
-            {paperExports.statuses.pdf === 'exported' && <p className="save-state success">PDF 已生成并下载。</p>}
-            {paperExports.statuses.pdf === 'error' && <p className="save-state error">{paperExports.statuses.pdfError}</p>}
-
-            <button
-              className="export-button"
-              type="button"
-              disabled={basket.length === 0 || paperExports.statuses.printHtml === 'exporting'}
-              onClick={paperExports.exportPrintHtml}
-            >
-              <FileDown size={18} />
-              {paperExports.statuses.printHtml === 'exporting' ? '生成中' : '精排 HTML（用于浏览器打印预览）'}
-            </button>
-            {paperExports.statuses.printHtml === 'exported' && <p className="save-state success">精排 HTML 已下载。</p>}
-            {paperExports.statuses.printHtml === 'error' && <p className="save-state error">{paperExports.statuses.printHtmlError}</p>}
-          </details>
-        </aside>
-        )}
       </main>
       )}
 
-      {homeMode === 'ai' && (
-        <button
-          type="button"
-          className="basket-chip"
-          onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
-          aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
-          disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
-        >
-          <ClipboardList size={15} />
-          <span>草稿卷 · {currentDraftGroupCount} 题组</span>
-        </button>
-      )}
+      <button
+        type="button"
+        className="basket-chip"
+        onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
+        aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
+        disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
+      >
+        <ClipboardList size={15} />
+        <span>草稿卷 · {currentDraftGroupCount} 题组</span>
+      </button>
 
       {isEntryOpen && (
         <EntryModal
           open={isEntryOpen}
-          mode={entryMode}
+          mode="edit"
           initialDetail={entryInitialDetail}
           onClose={() => setEntryOpen(false)}
           onSaved={handleEntrySaved}

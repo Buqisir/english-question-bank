@@ -119,8 +119,16 @@ assert(
   /from '\.\/features\/question-detail\/detailHelpers'/.test(appTsx),
 )
 assert(
-  'classic list detail button (App.tsx) is untouched and still calls openDetail',
-  /<button className="detail-button" type="button" onClick=\{\(\) => openDetail\(group\.id\)\}>\s*\n\s*详情/.test(appTsx),
+  // classic-retire-3: the classic group-list card (with its own inline
+  // 详情 button calling openDetail(group.id) directly) was deleted along
+  // with the rest of the classic list branch. ConciergeDesk is now the only
+  // list renderer and reaches openDetail via its onOpenDetail prop instead.
+  'classic list detail button (App.tsx) no longer exists (classic-retire-3)',
+  !/<button className="detail-button" type="button" onClick=\{\(\) => openDetail\(group\.id\)\}>\s*\n\s*详情/.test(appTsx),
+)
+assert(
+  'ConciergeDesk still wires onOpenDetail to openDetail(group.id) (classic-retire-3 kept this path)',
+  /<ConciergeDesk[\s\S]{0,400}onOpenDetail=\{\(group\) => openDetail\(group\.id\)\}/.test(appTsx),
 )
 
 // ------------------------------------------------------------------ 3. onOpenDetail threading (SW-4 — all three render points)

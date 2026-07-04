@@ -112,21 +112,13 @@ const dfFillerGroups = [
 console.log('=== Concierge Desk Verification ===\n')
 
 // ------------------------------------------------------------------ Test 1
-console.log('Test 1: Default home mode reads from localStorage')
-{
-  // Simulate: no localStorage value → default 'ai'.
-  // Simulate: 'classic' stored → returns 'classic'.
-  // Simulate: 'ai' stored → returns 'ai'.
-  // Mirrors the App.tsx initializer logic; we re-implement it here for unit-level coverage.
-  function pickHomeMode(stored) {
-    return stored === 'classic' ? 'classic' : 'ai'
-  }
-  assert('null → ai (default)', pickHomeMode(null) === 'ai', '')
-  assert('undefined → ai (default)', pickHomeMode(undefined) === 'ai', '')
-  assert('"classic" → classic', pickHomeMode('classic') === 'classic', '')
-  assert('"ai" → ai', pickHomeMode('ai') === 'ai', '')
-  assert('garbage → ai', pickHomeMode('foo') === 'ai', '')
-}
+// Retired in classic-retire-3-cleanup: homeMode ('ai' | 'classic') and its
+// localStorage-backed initializer were deleted from App.tsx — ConciergeDesk
+// is now the only home view, unconditionally. This test mirrored the old
+// pickHomeMode initializer purely at the unit level; with the source it
+// mirrored gone, it verified nothing real and became a zombie assertion.
+// See scripts/verify-classic-retire-3.mjs for the replacement coverage
+// (asserts App.tsx contains no `homeMode` at all).
 
 // ------------------------------------------------------------------ Test 2
 console.log('\nTest 2: AI search success → results from steward')
@@ -731,7 +723,12 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   const mentions = app.match(/组题篮/g) || []
   assert('App.tsx still has no user-visible 组题篮', mentions.length === 0, `still found ${mentions.length} occurrence(s)`)
   assert('App.tsx 加入草稿卷 present', /加入草稿卷/.test(app), '')
-  assert('App.tsx aria-label="草稿卷" present', /aria-label="草稿卷"/.test(app), '')
+  // classic-retire-3: the literal aria-label="草稿卷" lived on the classic
+  // <aside className="basket-panel"> that was deleted along with the rest
+  // of the classic sidebar. The floating basket-chip button (AI mode's
+  // surviving draft-paper entry point) carries the same "草稿卷" wording in
+  // a template-literal aria-label instead of a static one.
+  assert('App.tsx basket-chip aria-label still carries 草稿卷 wording', /aria-label=\{`打开草稿卷/.test(app), '')
 }
 
 // ------------------------------------------------------------------ Test 15
