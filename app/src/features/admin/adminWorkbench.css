@@ -1,0 +1,34 @@
+.admin-workbench {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+}
+
+.admin-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.admin-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.workflow-build-feedback {
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.workflow-build-feedback.success {
+  color: var(--muted);
+}
+
+.workflow-build-feedback.error {
+  color: var(--coral-text);
+}

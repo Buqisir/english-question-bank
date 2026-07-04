@@ -122,6 +122,7 @@ import { PaperImportWorkbench } from './features/paper-import/PaperImportWorkben
 import { PaperImportAiWorkbench } from './features/paper-import-ai/PaperImportAiWorkbench'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
+import { AdminWorkbench } from './features/admin/AdminWorkbench'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
@@ -783,6 +784,11 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'paper-import-ai'
   })
+  const [adminRouteActive, setAdminRouteActive] = useState(() => {
+    if (!isOwnerView) return false
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'admin'
+  })
   const [mySpaceRouteActive, setMySpaceRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'my-space'
@@ -848,7 +854,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [isImportOpen, setImportOpen] = useState(false)
   const [entryMode, setEntryMode] = useState<'create' | 'edit'>('create')
   const [entryInitialDetail, setEntryInitialDetail] = useState<QuestionGroupDetail | null>(null)
-  const [viewMode, setViewMode] = useState<'list' | 'detail' | 'preview' | 'workflow'>('list')
+  const [viewMode, setViewMode] = useState<'list' | 'detail' | 'preview'>('list')
   const [selectedDetail, setSelectedDetail] = useState<QuestionGroupDetail | null>(null)
   const [detailStatus, setDetailStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [detailError, setDetailError] = useState('')
@@ -1461,9 +1467,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       setPaperBuildResult(paperSet)
       setPaperBuildStatus('saved')
       await refreshPaperWorkflows()
-
-      setViewMode('preview')
-      await loadPreviewForBasketItems(nextBasket)
     } catch (error) {
       setPaperBuildStatus('error')
       setPaperBuildError(error instanceof Error ? error.message : String(error))
@@ -2948,15 +2951,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  function showWorkflowQuestionGroups(workflow: PaperWorkflow) {
-    setQuery(workflow.title)
-    setDifficulty('all')
-    setSourceType('all')
-    setGroupType('all')
-    setSelectedTag('全部')
-    setViewMode('list')
-  }
-
   async function openWorkflowDraft(workflow: PaperWorkflow) {
     if (!workflow.bundleId) return
 
@@ -3258,6 +3252,32 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setCurrentPiRoute({ kind: 'none' })
   }, [])
 
+  const toggleAdminRoute = useCallback(() => {
+    setAdminRouteActive((current) => {
+      const next = !current
+      if (typeof window !== 'undefined' && window.history) {
+        try {
+          const url = new URL(window.location.href)
+          if (next) {
+            url.searchParams.set('view', 'admin')
+          } else {
+            url.searchParams.delete('view')
+          }
+          const nextSearch = url.searchParams.toString()
+          const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+          if (next && typeof window.history.pushState === 'function') {
+            window.history.pushState(window.history.state, '', nextUrl)
+          } else if (!next && typeof window.history.replaceState === 'function') {
+            window.history.replaceState(window.history.state, '', nextUrl)
+          }
+        } catch {
+          // State flip below is the authoritative UI change.
+        }
+      }
+      return next
+    })
+  }, [])
+
   // ─── Paper Intelligence route rendering ───
   if (draftPaperRoute.active) {
     return (
@@ -3379,59 +3399,16 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               </label>
             </span>
           )}
-          {homeMode === 'classic' && (
-            <button className="ghost-button" type="button" onClick={() => setViewMode('workflow')}>
-              <ClipboardList size={18} />
-              闭环面板
-            </button>
-          )}
-          {isOwnerView && (
-            <button className="ghost-button" type="button" onClick={openImportPanel}>
-              <FileText size={18} />
-              导入资料
-            </button>
-          )}
-          {isOwnerView && (
-            <button className="ghost-button" type="button" onClick={openPaperImportWorkbench}>
-              <FileText size={18} />
-              整卷导入
-            </button>
-          )}
-          {isOwnerView && (
-            <button className="ghost-button" type="button" onClick={openPaperImportAiWorkbench}>
-              <Sparkles size={18} />
-              AI 导题
-            </button>
-          )}
           {isOwnerView && (
             <button
               className="ghost-button"
               type="button"
-              disabled={backfillStatus === 'loading'}
-              onClick={() => void handleBackfillTopicLabels()}
-              title="用 AI 为所有无主题标签的题组批量打标（可安全重跑）"
+              onClick={toggleAdminRoute}
+              aria-pressed={adminRouteActive}
             >
               <Tag size={16} />
-              {backfillStatus === 'loading' ? '打标中…' : '给题库打主题标签'}
+              {adminRouteActive ? '退出管理' : '管理'}
             </button>
-          )}
-          {isOwnerView && backfillResult !== null && (
-            <span
-              className="backfill-summary"
-              style={{ color: 'var(--muted)', fontSize: 13, alignSelf: 'center' }}
-              title="主题标签回填结果"
-            >
-              已标 {backfillResult.labeled} / 跳过 {backfillResult.skipped} / 失败 {backfillResult.failed.length}
-            </span>
-          )}
-          {isOwnerView && backfillError && (
-            <span
-              className="backfill-error"
-              style={{ color: 'var(--coral-text)', fontSize: 13, alignSelf: 'center' }}
-              title={backfillError}
-            >
-              打标失败
-            </span>
           )}
           {isOwnerView && (
             <button
@@ -3467,7 +3444,38 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         </div>
       </header>
 
-      {homeMode === 'classic' && (
+      {adminRouteActive && (
+        <AdminWorkbench
+          onOpenImportPanel={openImportPanel}
+          onOpenPaperImportWorkbench={openPaperImportWorkbench}
+          onOpenPaperImportAiWorkbench={openPaperImportAiWorkbench}
+          backfillStatus={backfillStatus}
+          backfillResult={backfillResult}
+          backfillError={backfillError}
+          onBackfillTopicLabels={() => void handleBackfillTopicLabels()}
+          paperWorkflows={paperWorkflows}
+          paperWorkflowsStatus={paperWorkflowsStatus}
+          paperWorkflowsError={paperWorkflowsError}
+          paperWorkflowStatusHint={paperWorkflowStatusHint}
+          workflowSummary={workflowSummary}
+          workflowProgress={workflowProgress}
+          sortedWorkflowBankGroups={sortedWorkflowBankGroups}
+          workflowSectionLabel={workflowSectionLabel}
+          formatWorkflowExport={formatWorkflowExport}
+          onRefreshPaperWorkflows={() => void refreshPaperWorkflows()}
+          basket={basket}
+          questionGroupById={questionGroupById}
+          onAddWorkflowGroupsToBasket={addWorkflowGroupsToBasket}
+          onAddToBasket={addToBasket}
+          paperBuildStatus={paperBuildStatus}
+          paperBuildResult={paperBuildResult}
+          onBuildWorkflowPaperSet={(workflow) => void handleBuildWorkflowPaperSet(workflow)}
+          draftStatusByBundleId={draftStatusByBundleId}
+          onOpenWorkflowDraft={(workflow) => void openWorkflowDraft(workflow)}
+        />
+      )}
+
+      {!adminRouteActive && homeMode === 'classic' && (
       <section className="filter-bar" aria-label="筛选">
         <div className="filter-bar-row">
           <label className="filter-bar-field">
@@ -3529,6 +3537,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       </section>
       )}
 
+      {!adminRouteActive && (
       <main className="workbench" aria-label="英语题库工作台">
         <section className="library-panel" aria-label="题库">
           <div className="library-header">
@@ -3539,9 +3548,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                   ? '题组详情'
                   : viewMode === 'preview'
                     ? '排版预览'
-                    : viewMode === 'workflow'
-                      ? '闭环面板'
-                      : '题组列表'}
+                    : '题组列表'}
               </h2>
             </div>
             <div className="library-header-actions">
@@ -3551,13 +3558,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                 <span>个题组</span>
               </div>
               <div className="view-tabs" aria-label="结果视图">
-                <button
-                  className={viewMode === 'workflow' ? 'active' : ''}
-                  type="button"
-                  onClick={() => setViewMode('workflow')}
-                >
-                  试卷
-                </button>
                 <button
                   className={viewMode === 'list' ? 'active' : ''}
                   type="button"
@@ -3585,241 +3585,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
             </div>
           </div>
 
-          {viewMode === 'workflow' ? (
-            <div className="workflow-view">
-              <section className="workflow-overview" aria-label="试卷闭环总览">
-                <div>
-                  <p className="eyebrow">Paper Pipeline</p>
-                  <h3>多卷闭环状态</h3>
-                </div>
-                <div className="workflow-summary-grid">
-                  <div>
-                    <strong>{workflowSummary.total}</strong>
-                    <span>试卷</span>
-                  </div>
-                  <div>
-                    <strong>{workflowSummary.ready}</strong>
-                    <span>可推进</span>
-                  </div>
-                  <div>
-                    <strong>{workflowSummary.review}</strong>
-                    <span>需核对</span>
-                  </div>
-                  <div>
-                    <strong>{workflowSummary.closed}</strong>
-                    <span>已闭环</span>
-                  </div>
-                </div>
-                <button
-                  className="detail-button"
-                  disabled={paperWorkflowsStatus === 'loading'}
-                  type="button"
-                  onClick={refreshPaperWorkflows}
-                >
-                  <RefreshCw size={16} />
-                  {paperWorkflowsStatus === 'loading' ? '刷新中' : '刷新状态'}
-                </button>
-              </section>
-
-              {paperWorkflowsStatus === 'loading' && <p className="detail-message">正在读取试卷闭环状态...</p>}
-              {paperWorkflowsStatus === 'error' && <p className="detail-message error">{paperWorkflowsError}</p>}
-              {paperWorkflowsStatus === 'loaded' && paperWorkflows.length === 0 && (
-                <p className="empty-state">导入试卷后，这里会按资料组和题集自动汇总闭环状态。</p>
-              )}
-
-              {paperWorkflows.length > 0 && (
-                <div className="workflow-list">
-                  {paperWorkflows.map((workflow) => {
-                    const progress = workflowProgress(workflow)
-                    const canGenerateDraft = Boolean(workflow.bundleId && workflow.importFiles.parsedCount > 0)
-                    const canViewBankGroups = workflow.bank.objectiveGroupCount > 0
-                    const canLoadPaper = Boolean(workflow.paperSet)
-
-                    return (
-                      <article className={`workflow-card ${workflow.status}`} key={workflow.id}>
-                        <div className="workflow-card-head">
-                          <div>
-                            <div className="source-line">
-                              <span>{workflow.importFiles.fileCount} 文件</span>
-                              <span>{workflow.bank.objectiveGroupCount}/{workflow.bank.expectedObjectiveGroupCount} 客观题组</span>
-                              <span>{workflow.bank.objectiveQuestionCount} 小题</span>
-                            </div>
-                            <h3>{workflow.title}</h3>
-                          </div>
-                          <span className={`workflow-status ${workflow.status}`}>
-                            {paperWorkflowStatusHint[workflow.status] || workflow.statusLabel}
-                          </span>
-                        </div>
-
-                        <div className="workflow-progress" aria-label="闭环进度">
-                          {['导入', '入库', '题集', '导出'].map((label, index) => (
-                            <span className={index < progress ? 'done' : ''} key={label}>
-                              {label}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="workflow-stage-grid">
-                          <div>
-                            <span>资料</span>
-                            <strong>
-                              {workflow.importFiles.parsedCount}/{workflow.importFiles.fileCount}
-                            </strong>
-                            <p>
-                              题目 {workflow.importFiles.roleCounts.question} · 解析{' '}
-                              {workflow.importFiles.roleCounts.answerAnalysis} · 同文件{' '}
-                              {workflow.importFiles.roleCounts.questionWithAnalysis}
-                            </p>
-                          </div>
-                          <div>
-                            <span>入库</span>
-                            <strong>
-                              {workflow.bank.objectiveGroupCount}/{workflow.bank.expectedObjectiveGroupCount}
-                            </strong>
-                            <p>
-                              缺答案 {workflow.bank.missingAnswerCount} · 缺选项组{' '}
-                              {workflow.bank.missingOptionGroupCount}
-                            </p>
-                          </div>
-                          <div>
-                            <span>题集</span>
-                            <strong>{workflow.paperSet ? workflow.paperSet.itemCount : 0}</strong>
-                            <p>
-                              {workflow.paperSet
-                                ? `${workflow.paperSet.totalQuestions} 题 · ${Number(workflow.paperSet.totalScore).toFixed(1)} 分`
-                                : '尚未保存整卷题集'}
-                            </p>
-                          </div>
-                          <div>
-                            <span>成品</span>
-                            <strong>
-                              {[workflow.exports.studentDocx.exists, workflow.exports.teacherDocx.exists].filter(Boolean).length}/2
-                            </strong>
-                            <p>
-                              学生 {formatWorkflowExport(workflow.exports.studentDocx)} · 教师{' '}
-                              {formatWorkflowExport(workflow.exports.teacherDocx)}
-                            </p>
-                          </div>
-                        </div>
-
-                        {workflow.bank.missingSections.length > 0 && (
-                          <div className="workflow-missing">
-                            <strong>缺板块</strong>
-                            {workflow.bank.missingSections.map((section) => (
-                              <span key={section}>{section}</span>
-                            ))}
-                          </div>
-                        )}
-
-                        {workflow.bank.groups.length > 0 && (
-                          <section className="workflow-question-panel" aria-label={`${workflow.title} 篇章题`}>
-                            <div className="workflow-question-head">
-                              <div>
-                                <strong>篇章题</strong>
-                                <span>{workflow.bank.groups.length} 题，可逐题加入草稿卷</span>
-                              </div>
-                              <button
-                                className="detail-button"
-                                disabled={sortedWorkflowBankGroups(workflow).every((group) => basket.some((item) => item.id === group.id))}
-                                type="button"
-                                onClick={() => addWorkflowGroupsToBasket(workflow)}
-                              >
-                                <Plus size={15} />
-                                全部加入
-                              </button>
-                              <button
-                                className="add-button"
-                                disabled={workflow.bank.objectiveGroupCount === 0 || paperBuildStatus === 'saving'}
-                                style={{ marginLeft: 8 }}
-                                type="button"
-                                onClick={() => handleBuildWorkflowPaperSet(workflow)}
-                              >
-                                {paperBuildStatus === 'saving'
-                                  ? '更新中'
-                                  : workflow.paperSet
-                                    ? '更新整卷题集'
-                                    : '生成整卷题集'}
-                              </button>
-                            </div>
-                            <div className="workflow-question-list">
-                              {sortedWorkflowBankGroups(workflow).map((group) => {
-                                const card = questionGroupById.get(group.id)
-                                const inBasket = basket.some((item) => item.id === group.id)
-                                const missingCount = group.missingAnswerCount + group.missingOptionQuestionCount
-
-                                return (
-                                  <article className="workflow-question-item" key={group.id}>
-                                    <div>
-                                      <strong>{workflowSectionLabel(group.title, workflow.title)}</strong>
-                                      <span>
-                                        {groupTypeLabel[group.groupType]} · {group.questionCount} 小题 · 每题{' '}
-                                        {group.defaultScore} 分
-                                      </span>
-                                      {missingCount > 0 && (
-                                        <p>
-                                          缺答案 {group.missingAnswerCount} · 缺选项小题{' '}
-                                          {group.missingOptionQuestionCount}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <button
-                                      className="add-button"
-                                      disabled={!card || inBasket}
-                                      type="button"
-                                      onClick={() => card && addToBasket(card)}
-                                    >
-                                      {inBasket ? '已加入' : '加入'}
-                                    </button>
-                                  </article>
-                                )
-                              })}
-                            </div>
-                          </section>
-                        )}
-
-                        {workflow.importFiles.qualityWarnings.length > 0 && (
-                          <div className="bundle-quality-warnings">
-                            {workflow.importFiles.qualityWarnings.map((warning) => (
-                              <span key={warning}>{warning}</span>
-                            ))}
-                          </div>
-                        )}
-
-                        <p className="workflow-next">{workflow.nextAction}</p>
-
-                        <div className="workflow-actions">
-                          <button
-                            className="detail-button"
-                            disabled={!canViewBankGroups && !canGenerateDraft}
-                            type="button"
-                            onClick={() => (canViewBankGroups ? showWorkflowQuestionGroups(workflow) : openWorkflowDraft(workflow))}
-                          >
-                            {canViewBankGroups ? '查看正式题组' : '查看草稿题组'}
-                          </button>
-                          <button
-                            className="detail-button"
-                            disabled={!canGenerateDraft || draftStatusByBundleId[workflow.bundleId] === 'generating'}
-                            type="button"
-                            onClick={() => openWorkflowDraft(workflow)}
-                          >
-                            {draftStatusByBundleId[workflow.bundleId] === 'generating' ? '生成中' : '生成草稿'}
-                          </button>
-                          <button
-                            className="add-button"
-                            disabled={!canLoadPaper || loadPaperStatus === 'loading'}
-                            type="button"
-                            onClick={() => workflow.paperSet && handleLoadPaperSet(workflow.paperSet.id)}
-                          >
-                            载入题集
-                          </button>
-                        </div>
-                      </article>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
-          ) : viewMode === 'list' ? (
+          {viewMode === 'list' ? (
             homeMode === 'ai' ? (
               <ConciergeDesk
                 retrieval={conciergeDesk.retrieval}
@@ -5690,6 +5456,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         </aside>
         )}
       </main>
+      )}
 
       {homeMode === 'ai' && (
         <button
