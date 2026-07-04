@@ -57,6 +57,7 @@ import {
   fetchImportFileParse,
   fetchPaperSets,
   fetchPaperWorkflows,
+  deleteQuestionGroup as deleteQuestionGroupRequest,
   fetchQuestionGroupDetail,
   fetchQuestionGroups,
   generateImportAnswerAlignment,
@@ -1259,6 +1260,20 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   function backToList() {
     setViewMode('list')
+  }
+
+  async function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
+    if (!window.confirm(`删除「${detail.title}」？题组会从题库和草稿卷里移除，不可恢复。`)) return
+    try {
+      await deleteQuestionGroupRequest(detail.id)
+      setQuestionGroups((groups) => groups.filter((group) => group.id !== detail.id))
+      paperDraft.externalRemoveByGroupId(detail.id)
+      setSelectedDetail(null)
+      backToList()
+      await refreshPaperWorkflows()
+    } catch (error) {
+      window.alert(`删除失败：${error instanceof Error ? error.message : String(error)}`)
+    }
   }
 
   function openImportPanel() {
@@ -2961,6 +2976,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               }}
               onBack={backToList}
               onEdit={openEditEntry}
+              onDelete={handleDeleteQuestionGroup}
               onAddToBasket={addToBasket}
               onVerify={handleVerifyQuestionGroup}
               onAnalyzeReading={handleAnalyzeReadingQuestionGroup}

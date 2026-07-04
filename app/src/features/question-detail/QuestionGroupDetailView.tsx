@@ -21,6 +21,7 @@ import {
   Save,
   Sparkles,
   Tag,
+  Trash2,
 } from 'lucide-react'
 import type {
   ClozeParseQuestionGroupResult,
@@ -135,6 +136,7 @@ export type QuestionGroupDetailViewProps = {
 
   onBack: () => void
   onEdit: (detail: QuestionGroupDetail) => void
+  onDelete: (detail: QuestionGroupDetail) => void
   onAddToBasket: (detail: QuestionGroupDetail) => void
   onVerify: () => void
   onAnalyzeReading: () => void
@@ -195,6 +197,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     difficulty: { drafts: difficultyDrafts, saveStatus: difficultySaveStatus, saveErrors: difficultySaveErrors },
     onBack,
     onEdit,
+    onDelete,
     onAddToBasket,
     onVerify,
     onAnalyzeReading,
@@ -288,6 +291,17 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 <button className="detail-button" type="button" onClick={() => onEdit(selectedDetail)}>
                   <Pencil size={16} />
                   编辑
+                </button>
+              )}
+              {isOwnerView && (
+                <button
+                  className="detail-button danger"
+                  type="button"
+                  onClick={() => onDelete(selectedDetail)}
+                  aria-label="删除题组"
+                >
+                  <Trash2 size={16} />
+                  删除
                 </button>
               )}
               <button
