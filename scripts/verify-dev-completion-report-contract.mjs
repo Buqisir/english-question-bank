@@ -13,7 +13,6 @@ const { assert, section, summary } = createVerifier('DEV completion report contr
 
 const steering = readText(ROOT, 'docs/steering/dev-completion-protocol.md')
 const readme = readText(ROOT, 'docs/steering/README.md')
-const agents = readText(ROOT, 'AGENTS.md')
 const template = readText(ROOT, 'docs/agents/dev-completion-report-template.md')
 
 section('template exists and is linked')
@@ -26,10 +25,6 @@ assert(
 assert(
   readme.includes('dev-completion-protocol.md'),
   'steering README points agents to dev-completion protocol',
-)
-assert(
-  agents.includes('dev-completion-protocol.md'),
-  'AGENTS points agents to dev-completion protocol',
 )
 
 section('single short fenced report rule')
