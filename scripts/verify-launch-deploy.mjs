@@ -10,22 +10,27 @@
  * Slice 3 (R2 backup) has landed: VA6 below covers scripts/backup-to-r2.sh
  * (bash -n, rclone copy-not-sync, and a behavioral integrity_check run with
  * --dry-run against a temp fixture — no rclone binary required).
- * Slice 4 (pull-run-push) adds VA5 here when it lands — see
- * docs/cuts/launch-deploy/plan.md Verification.
+ * Slice 4 (pull-run-push) has landed: VA5 below covers
+ * scripts/pull-run-push.mjs (node --check, a real abort-triggering
+ * check-manifest run, and a full fake-remote push round-trip that proves
+ * user-data.sqlite is byte-for-byte untouched, the question-bank swap is an
+ * atomic rename (inode change, no leftover temp file), and the service stop
+ * genuinely happens before the swap).
  *
  * Behavioral browser QA (LAN-host Caddy topology, relative addressing, SPA
  * deep-link fallback) was run manually at Slice 1/2 acceptance; this script is
  * the durable static/structural regression net around that result.
  */
 
-import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
-import { spawnSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import { resolve, join } from 'node:path'
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
-const { assert, section, summary } = createVerifier('launch-deploy verify (Slice 1+2+3)')
+const { assert, section, summary } = createVerifier('launch-deploy verify (Slice 1+2+3+4)')
 
 const ABSOLUTE_ORIGIN = 'http://127.0.0.1:8787'
 
@@ -177,6 +182,132 @@ try {
   }
 } finally {
   rmSync(fixtureDir, { recursive: true, force: true })
+}
+
+// ── Slice 4: pull-run-push.mjs (import transport) ────────────────────────────
+section('Slice 4 — pull-run-push.mjs')
+
+const pullRunPushPath = resolve(ROOT, 'scripts/pull-run-push.mjs')
+
+const pullRunPushCheck = spawnSync('node', ['--check', pullRunPushPath], { encoding: 'utf8' })
+assert(pullRunPushCheck.status === 0, `pull-run-push.mjs passes node --check${pullRunPushCheck.status !== 0 ? ' — ' + pullRunPushCheck.stderr.trim() : ''}`)
+
+// Abort真触发: feeding a user-data-shaped path must exit non-zero BEFORE any
+// transfer; a clean path list must exit 0. This is the MF-2 manifest guard.
+const abortRun = spawnSync(
+  'node',
+  [pullRunPushPath, 'check-manifest', 'data/question-bank.sqlite,data/user-data.sqlite'],
+  { encoding: 'utf8' },
+)
+assert(abortRun.status !== 0, `check-manifest exits non-zero when a user-data-shaped path is present (got status ${abortRun.status})`)
+
+const cleanRun = spawnSync(
+  'node',
+  [pullRunPushPath, 'check-manifest', 'data/question-bank.sqlite'],
+  { encoding: 'utf8' },
+)
+assert(cleanRun.status === 0, `check-manifest exits 0 for a clean path list (got status ${cleanRun.status}${cleanRun.status !== 0 ? ' — ' + cleanRun.stderr.trim() : ''})`)
+
+// Fake-remote push round-trip: proves (1) user-data.sqlite is never touched,
+// (2) the question-bank swap lands via atomic rename (inode changes, no
+// leftover *.incoming.* temp file), and (3) EQB_SERVICE_STOP genuinely runs
+// BEFORE the swap (it captures the OLD content's sha while it runs) while
+// EQB_SERVICE_START runs after.
+const va5Dir = mkdtempSync(join(tmpdir(), 'eqb-pull-run-push-verify-'))
+try {
+  const remoteDir = join(va5Dir, 'fake-remote')
+  const localDir = join(va5Dir, 'fake-local')
+  const stopLog = join(va5Dir, 'stop-start.log')
+
+  const remoteDataDir = join(remoteDir, 'data')
+  const remoteAssetsDir = join(remoteDir, 'app', 'public', 'paper-assets', 'bundle-remote', 'latest')
+  const localDataDir = join(localDir, 'data')
+  const localAssetsDir = join(localDir, 'app', 'public', 'paper-assets', 'bundle-local', 'latest')
+  for (const dir of [remoteDataDir, remoteAssetsDir, localDataDir, localAssetsDir]) {
+    execFileSync('mkdir', ['-p', dir], { encoding: 'utf8' })
+  }
+
+  const remoteDb = join(remoteDataDir, 'question-bank.sqlite')
+  const remoteUserData = join(remoteDataDir, 'user-data.sqlite')
+  const localDb = join(localDataDir, 'question-bank.sqlite')
+
+  // Seed: fake-remote question-bank = content A, fake-remote user-data =
+  // distinct content, fake-local question-bank = DISTINCT content B.
+  const seedRemoteDb = spawnSync('sqlite3', [remoteDb, "CREATE TABLE t(x); INSERT INTO t VALUES('CONTENT-A');"], { encoding: 'utf8' })
+  const seedRemoteUserData = spawnSync('sqlite3', [remoteUserData, "CREATE TABLE u(x); INSERT INTO u VALUES('remote-user-data-must-not-move');"], { encoding: 'utf8' })
+  const seedLocalDb = spawnSync('sqlite3', [localDb, "CREATE TABLE t(x); INSERT INTO t VALUES('CONTENT-B');"], { encoding: 'utf8' })
+  execFileSync('sh', ['-c', `echo remote-asset > ${JSON.stringify(join(remoteAssetsDir, 'remote.json'))}`], { encoding: 'utf8' })
+  execFileSync('sh', ['-c', `echo local-asset > ${JSON.stringify(join(localAssetsDir, 'local.json'))}`], { encoding: 'utf8' })
+  assert(
+    seedRemoteDb.status === 0 && seedRemoteUserData.status === 0 && seedLocalDb.status === 0,
+    'VA5 fixture: fake-remote db + fake-remote user-data + fake-local db seeded',
+  )
+
+  function sha256Of(path) {
+    return createHash('sha256').update(readFileSync(path)).digest('hex')
+  }
+
+  const recordedUserDataSnapshot = { size: statSync(remoteUserData).size, mtimeMs: statSync(remoteUserData).mtimeMs, sha256: sha256Of(remoteUserData) }
+  const recordedQuestionBank = { ino: statSync(remoteDb).ino, sha256A: sha256Of(remoteDb) }
+  const contentBSha = sha256Of(localDb)
+
+  // EQB_SERVICE_STOP captures the CURRENT sha of the remote db at the moment
+  // it runs (proves stop happens while the db is still OLD content, i.e.
+  // BEFORE the swap) and appends a STOP marker; EQB_SERVICE_START appends a
+  // START marker.
+  const stopCmd = `sh -c "shasum -a 256 ${JSON.stringify(remoteDb)} >> ${JSON.stringify(stopLog)}; echo STOP >> ${JSON.stringify(stopLog)}"`
+  const startCmd = `sh -c "echo START >> ${JSON.stringify(stopLog)}"`
+
+  const pushRun = spawnSync(
+    'node',
+    [pullRunPushPath, 'push'],
+    {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        EQB_REMOTE: `local:${remoteDir}`,
+        EQB_LOCAL_REPO: localDir,
+        EQB_SERVICE_STOP: stopCmd,
+        EQB_SERVICE_START: startCmd,
+      },
+    },
+  )
+  assert(pushRun.status === 0, `push exits 0 against the fake-remote fixture${pushRun.status !== 0 ? ' — stderr: ' + (pushRun.stderr || '').trim() + ' / stdout: ' + (pushRun.stdout || '').trim() : ''}`)
+
+  // (1) fake-remote user-data.sqlite identical (size + mtime + sha256).
+  const afterUserDataStat = statSync(remoteUserData)
+  const afterUserDataSha = sha256Of(remoteUserData)
+  assert(
+    afterUserDataStat.size === recordedUserDataSnapshot.size &&
+      afterUserDataStat.mtimeMs === recordedUserDataSnapshot.mtimeMs &&
+      afterUserDataSha === recordedUserDataSnapshot.sha256,
+    'VA5.1: fake-remote user-data.sqlite is byte-for-byte + mtime unchanged (Slice 4 never touches user-data)',
+  )
+
+  // (2) fake-remote question-bank.sqlite now has content B's sha (swap landed).
+  const afterQuestionBankSha = sha256Of(remoteDb)
+  assert(afterQuestionBankSha === contentBSha, 'VA5.2: fake-remote question-bank.sqlite now matches local content B (swap landed)')
+
+  // (3) inode changed (proves rename-replace, not an in-place write).
+  const afterQuestionBankIno = statSync(remoteDb).ino
+  assert(afterQuestionBankIno !== recordedQuestionBank.ino, `VA5.3: fake-remote question-bank.sqlite inode changed (before ${recordedQuestionBank.ino}, after ${afterQuestionBankIno}) — proves atomic rename, not in-place write`)
+
+  // (4) no leftover *.incoming.* temp file in <rem>/data/.
+  const leftoverIncoming = readdirSync(remoteDataDir).filter((f) => f.includes('.incoming.'))
+  assert(leftoverIncoming.length === 0, `VA5.4: no leftover *.incoming.* temp file in fake-remote data/ (found: ${leftoverIncoming.join(', ') || 'none'})`)
+
+  // (5) STOP log recorded content A's sha (stop ran before the swap) and a
+  // START marker is present.
+  const logContents = existsSync(stopLog) ? readFileSync(stopLog, 'utf8') : ''
+  const stopSawContentA = logContents.includes(recordedQuestionBank.sha256A)
+  const hasStopMarker = /^STOP$/m.test(logContents)
+  const hasStartMarker = /^START$/m.test(logContents)
+  assert(
+    stopSawContentA && hasStopMarker && hasStartMarker,
+    `VA5.5: STOP marker ran while remote db still had content A's sha (${recordedQuestionBank.sha256A.slice(0, 12)}…), and a START marker followed (log: ${JSON.stringify(logContents.trim())})`,
+  )
+} finally {
+  rmSync(va5Dir, { recursive: true, force: true })
 }
 
 summary()
