@@ -1,6 +1,7 @@
 # Agent Instructions
 
-This repo builds the local-first English question bank workbench.
+This repo builds the English question bank workbench (heading to
+public launch; current runtime is still local single-user).
 
 `AGENTS.md` is the single source of truth for agent rules in this repo.
 Other agent entry files, including `CLAUDE.md`, should point here instead
@@ -38,9 +39,12 @@ not mass-rename history.
 - medium: main agent writes a lean DEV contract (`plan.md`, short is fine)
   → Sonnet DEV subagent → fresh Opus CR subagent (cold-read of the diff)
   → main agent verify + acceptance + merge.
-- large, or touches data contract / schema / export / migration /
-  architecture / irreversible: add a fresh Opus PA subagent before DEV;
-  committed `plan.md`; `cut-note.md` at closeout.
+- large, or touches an irreversible surface / changes data-contract
+  semantics (schema, migration, export, anchor protocol, cross-cut
+  architecture): add a fresh Opus PA subagent before DEV; committed
+  `plan.md`; `cut-note.md` at closeout. Purely additive schema touches
+  and reversible product-surface work may downgrade to PA-lite — the
+  downgrade reason goes in the plan header and CR must review it.
 - Workflows (deterministic multi-agent fan-out) are allowed for parallel
   work; each `agent()` call sets `model` explicitly per the tier table.
 
@@ -72,29 +76,26 @@ cut (the housekeeping guard enforces this). After merging, confirm the
 (2026-07-03 incident: 11 consecutive red CI runs from a narrow verify
 list + unwatched Actions.)
 
-### kratos scope
-
-Write project memory only to the repo-root project (root = this repo). Do
-not `kratos create` / `switch` to a per-cut or per-worktree scope (e.g.
-`eqb-c7-dev`).
-
-> TODO (one-off — delete when done): some extra scopes already exist; they
-> need a cleanup pass but must not be blind-deleted.
+Verify convention: new contracts prefer behavioral assertions (start
+the server / call the real API or import the real module) over
+source-regex assertions. Once a behavioral assertion covers a risk, the
+matching source-regex assertion may be retired in the same cut. No bulk
+cleanup of existing regex asserts — natural turnover only.
 
 ### Session reading contract
 
 Every session reads this section plus the core rules (Product Posture,
 Project Steering hard rules, Context / Output Economy, Super Teacher
-Boundary, Persistent Working Memory). The rest of this file and the steering
-notes are reference — load a section only when the task names it.
+Boundary). The rest of this file and the steering notes are reference —
+load a section only when the task names it.
 
-## Persistent Working Memory
+## Working memory
 
-- Use `kratos-memory` as the project-scoped working memory for this repo.
-- At the start of non-trivial question-bank tasks, search relevant Kratos memory from this repo root, for example `kratos-memory search "reading difficulty reviewer"`.
-- Save durable workflow decisions, recurring pitfalls, reviewer invocation preferences, and stable product rules to Kratos at the end of a task.
-- Do not save API keys, secrets, full copyrighted passages, private student/person data, or large raw model outputs to Kratos.
-- Keep Kratos project scope anchored to `/Users/huangxuewei/Projects/english-question-bank`; do not mix it with `Local Vaults` memory.
+The harness auto-memory is the working memory. `kratos-memory` is a
+read-only historical archive (downgraded 2026-07-03, owner-approved);
+do not write to it or treat search there as a required step. Never save
+API keys, secrets, full copyrighted passages, or private student data
+to any memory system.
 
 ## Product Posture
 
@@ -159,10 +160,6 @@ notes are reference — load a section only when the task names it.
   flags whether PA / CR records are present; non-zero exit stops the merge.
   The RM hat still owns the gate judgment — the script just makes the
   existence check mechanical instead of manual.
-- Cut decision ledgers should expose freshness. New `decisions.md`
-  files should include `Last synced` and
-  `Open review items`, and PA / Big CR follow-up must update those fields
-  before another agent depends on the file.
 - When PA returns Must Fix items, `pa.md` must include a checklist that
   maps each Must Fix to the required `plan.md` disposition, and
   `plan.md` must record the matching PM / PO handling under
@@ -218,9 +215,12 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
 
 ## Browser Verification
 
-- The Codex in-app browser is allowed for PO-facing QA, visual spot checks, and any browser verification the user explicitly asks to watch or discuss live.
-- If the in-app browser times out, gives stale state, or cannot prove the visual claim, fall back to local Chrome/headless Playwright for smoke tests and screenshots.
-- Do not treat "static verify passed" as "browser QA passed" for user-visible PaperSurface changes.
+- Real-click browser QA (local Chrome / headless Playwright — the app's
+  `node_modules` has Playwright) is required for user-visible changes;
+  it has caught defects that CR and verify scripts both missed, three
+  separate times.
+- Do not treat "static verify passed" as "browser QA passed" for
+  user-visible changes.
 
 ## AI 协作准则底座(Matt 外脑)
 
@@ -336,8 +336,8 @@ Pocock「AI 协作准则」在本项目的特化落地(且更细)。通用底座
   no new class / data attribute / selector structure, no TS / TSX change,
   no layout or scroll behavior change, visual-parameter-only change, small
   diff, and no `shared/papersurface/**` or print / PDF / export styling.
-  This path still requires a lightweight Codex sanity check, not zero
-  review.
+  This path still requires a lightweight main-agent sanity check, not
+  zero review.
 - Any TSX change, new interaction, new selector structure, layout /
   scroll / positioning change, A4 / PaperSurface / print-preview impact,
   responsive behavior impact, or owner feedback such as "weird",

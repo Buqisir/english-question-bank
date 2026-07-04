@@ -5,11 +5,8 @@ inclusion: auto
 # DEV completion protocol
 
 Scope: applies to implementation work in the
-`Buqisir/english-question-bank` repository. 小川 is the default DEV
-under the current named-agent assignment; 阿澈 may cover DEV when quota
-or availability requires, but the DEV completion contract does not
-downgrade. External DEV handoffs are exception-only and should use this
-protocol only when the owner explicitly asks for external implementation.
+`Buqisir/english-question-bank` repository, whoever performs it (main
+agent or DEV subagent) — the completion contract does not downgrade.
 Authoritative — agents must follow this protocol unless the user
 overrides it inline for a specific task.
 
@@ -30,10 +27,8 @@ in this exact order, before considering the task complete:
    - confirm required merge commits or PR baselines are present
    - STOP and report if the baseline cannot be verified
 1. `git commit` with a clear, scoped message
-2. Push the branch to GitHub
-   - Codex may use local `git` / `gh`
-   - external agents should use their approved GitHub connector when
-     available
+2. Push the branch to GitHub (local `git` / `gh`; remote name is
+   `github`)
 3. Open a PR against `main`
    - never push directly to `main` / `master`
 4. Provide the PR URL in the completion report
