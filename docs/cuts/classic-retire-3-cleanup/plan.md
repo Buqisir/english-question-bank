@@ -86,6 +86,14 @@ handleEntrySaved ~1615），'create' 不可达。删 state，给 EntryModal 传
 字面量 `mode="edit"`；`handleEntrySaved` 里的重置调用删除。
 **EntryModal.tsx 内部 create 分支本刀不动**（挂账，单独小刀）。
 
+### 挂账（CR MF-1 落档，PM 依全权授权代拍，待 owner 追认）
+删除经典列表卡片连带删掉 `handleDeleteQuestionGroup`——它是
+`deleteQuestionGroup` service 与 `externalRemoveByGroupId` 的**唯一**
+UI 挂载点。本刀之后全应用没有删题组的 UI 入口（server DELETE 路由与
+service/hook 均保留原样）。PM 裁定：接受该能力暂缺，保持本刀纯删除；
+后续单独小刀把删除入口安家到 QuestionGroupDetailView（owner-only，
+带确认），恢复成本低。owner 若不同意可要求提前补。
+
 ### D7 App.css 死 CSS
 铁律：**每删一个 class，先 grep app/src 全量确认零存活使用者**
 （正反两查——不光看侦察列了什么，还要防它漏了什么）。
