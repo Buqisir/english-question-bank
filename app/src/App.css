@@ -5903,7 +5903,12 @@ button:disabled {
   color: #9A9180;
 }
 
-.concierge-filter-row .concierge-starter-chips {
+/* Must out-rank `.app-shell.home-mode-ai .concierge-starter-chips` above
+   (3-class specificity, margin auto = centered), which still governs the
+   plain starter-chip rows outside the filter grid. */
+.concierge-filter-row .concierge-starter-chips,
+.app-shell.home-mode-ai .concierge-filter-row .concierge-starter-chips {
+  flex: 1 1 auto;
   margin: 0;
   justify-content: flex-start;
 }
