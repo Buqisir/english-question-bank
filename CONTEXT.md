@@ -92,6 +92,18 @@ _Avoid_: answer version when it could mean only an answer key
 A locally archived DOCX, PDF, image, or other source file brought into the workbench for later review or parsing.
 _Avoid_: source file when it would confuse provenance with Source
 
+**Teaching Axis** (教学轴):
+A structured, enumerable search dimension bound to ONE question type — capturing what
+that type teaches or how it is solved. Each type carries its own set: 语法填空 has 语法点
+facets plus the Verb Teaching Axis (时态/语态/主谓一致); 七选五 has 承上启下 机制/角色/位置;
+完形 has 词性 + 语义特征; 阅读 has 设问技能. A blank or question may carry several axis
+values at once (multi-tag). Teaching Axes are derived teaching dimensions (ADR-0008,
+backfillable) headed for the ADR-0009 generic attribute store; Verb Teaching Axis is the
+first fully-built instance.
+_Avoid_: using 考点 as a single catch-all dimension (each type's axes differ in kind);
+calling a cross-type topic label a Teaching Axis (topic is universal, not type-bound);
+conflating it with a free-form Tag.
+
 **Verb Teaching Axis** (动词教学维度):
 Three orthogonal structured dimensions a teacher uses to find 语法填空 finite-verb
 questions: **Tense** (时态: 一般现在/一般过去/现在完成/过去完成/进行/其他),

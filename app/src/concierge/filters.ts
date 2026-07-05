@@ -41,14 +41,22 @@ export type ConciergeFilterOptions = {
   year: FilterOption[]
   region: FilterOption[]
   sourceType: FilterOption[]
+  topicGroup: FilterOption[]
 }
 
-/** All four dimensions optional; a missing field means "do not filter on this". */
+/** All five dimensions optional; a missing field means "do not filter on this". */
 export type ConciergeFilters = {
   groupType?: string
   year?: number
   region?: string
   sourceType?: string
+  /**
+   * Single selected `theme_group` (I16d) — the cross-type topic mid-tier
+   * (9 categories), sourced from `QuestionGroupCard.topicLabels[].themeGroup`.
+   * A group can carry multiple topic labels (avg 1.87), so this is OR
+   * semantics against that group's set, not an exact single-value match.
+   */
+  topicGroup?: string
 }
 
 /** Business-fixed display order for 题型 (plan.md C1). Anything else sorts after. */
@@ -135,7 +143,26 @@ export function buildFilterOptions(groups: QuestionGroupCard[]): ConciergeFilter
     (value) => sourceTypeLabel[value] || value,
   )
 
-  return { groupType, year, region, sourceType }
+  // topicGroup (I16d): a group can carry multiple topicLabels, so this is a
+  // distinct-per-group count, not a plain countBy over a single picked value
+  // (countBy's signature assumes one value per group and stays untouched).
+  // Each group contributes at most one count per distinct themeGroup, even
+  // if two of its labels share that themeGroup.
+  const topicGroupCounts = new Map<string, number>()
+  for (const group of groups) {
+    const seenThemeGroups = new Set<string>()
+    for (const label of group.topicLabels ?? []) {
+      const themeGroup = label.themeGroup
+      if (!themeGroup || seenThemeGroups.has(themeGroup)) continue
+      seenThemeGroups.add(themeGroup)
+      topicGroupCounts.set(themeGroup, (topicGroupCounts.get(themeGroup) ?? 0) + 1)
+    }
+  }
+  const topicGroup: FilterOption[] = Array.from(topicGroupCounts.entries())
+    .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0], 'zh-Hans-CN'))
+    .map(([value, count]) => ({ value, label: value, count }))
+
+  return { groupType, year, region, sourceType, topicGroup }
 }
 
 /**
@@ -159,7 +186,7 @@ export function buildFacetedFilterOptions(
   filters: ConciergeFilters,
 ): ConciergeFilterOptions {
   const fullOptions = buildFilterOptions(groups)
-  const dimensions = ['groupType', 'year', 'region', 'sourceType'] as const
+  const dimensions = ['groupType', 'year', 'region', 'sourceType', 'topicGroup'] as const
 
   const result = { ...fullOptions }
   for (const dimension of dimensions) {
@@ -190,12 +217,13 @@ export function applyConciergeFilters(
   groups: QuestionGroupCard[],
   filters: ConciergeFilters,
 ): QuestionGroupCard[] {
-  const { groupType, year, region, sourceType } = filters
+  const { groupType, year, region, sourceType, topicGroup } = filters
   if (
     groupType === undefined &&
     year === undefined &&
     region === undefined &&
-    sourceType === undefined
+    sourceType === undefined &&
+    topicGroup === undefined
   ) {
     return groups.slice()
   }
@@ -204,6 +232,9 @@ export function applyConciergeFilters(
     if (year !== undefined && group.year !== year) return false
     if (region !== undefined && String(group.region ?? '').trim() !== region) return false
     if (sourceType !== undefined && group.sourceType !== sourceType) return false
+    if (topicGroup !== undefined && !group.topicLabels?.some((l) => l.themeGroup === topicGroup)) {
+      return false
+    }
     return true
   })
 }

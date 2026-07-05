@@ -23,6 +23,11 @@ import { cleanReason } from '../app/src/concierge/reason.ts'
 import { pickClarificationLine } from '../app/src/concierge/clarificationCopy.ts'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
+import {
+  buildFilterOptions,
+  applyConciergeFilters,
+  buildFacetedFilterOptions,
+} from '../app/src/concierge/filters.ts'
 
 let passed = 0, failed = 0
 function assert(name, condition, detail) {
@@ -826,6 +831,45 @@ console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility 
   if (expandButtonMatch) {
     assert('concierge-row-expand button retains aria-expanded', /aria-expanded=\{expanded\}/.test(expandButtonMatch[0]), expandButtonMatch[0])
   }
+}
+
+// ---------------------------------------------------------- filters (I16d topicGroup)
+console.log('\nTest 20: filters.ts topicGroup — 多值 distinct 计数 + OR 匹配 (I16d, CR SW-1)')
+{
+  const mk = (id, themeGroups) => ({
+    id,
+    groupType: 'reading',
+    year: 2024,
+    region: '全国 I',
+    sourceType: 'real_exam',
+    topicLabels: themeGroups.map((tg) => ({
+      label: `x-${tg}`, theme: '人与自我', themeGroup: tg, subtopic: 's',
+    })),
+  })
+  // 组 A 两个 label 落同一 themeGroup（应 distinct 计一次）；B/C 各一个
+  const groups = [
+    mk('A', ['科学技术', '科学技术']),
+    mk('B', ['科学技术']),
+    mk('C', ['环境保护']),
+  ]
+  const opts = buildFilterOptions(groups)
+  const sci = opts.topicGroup.find((o) => o.value === '科学技术')
+  const env = opts.topicGroup.find((o) => o.value === '环境保护')
+  assert('distinct 计数：科学技术=2（组 A 内重复 label 不叠加）', Boolean(sci) && sci.count === 2, `got ${sci && sci.count}`)
+  assert('distinct 计数：环境保护=1', Boolean(env) && env.count === 1, `got ${env && env.count}`)
+
+  const filtered = applyConciergeFilters(groups, { topicGroup: '科学技术' })
+  assert(
+    'OR 匹配：选科学技术只留 A/B',
+    filtered.length === 2 && filtered.every((g) => g.id === 'A' || g.id === 'B'),
+    `got ${filtered.map((g) => g.id).join(',')}`,
+  )
+
+  assert('空 filters 返回全集', applyConciergeFilters(groups, {}).length === groups.length, '')
+
+  const faceted = buildFacetedFilterOptions(groups, { groupType: 'reading' })
+  const fSci = faceted.topicGroup.find((o) => o.value === '科学技术')
+  assert('faceted 多值不重复计：科学技术仍=2', Boolean(fSci) && fSci.count === 2, `got ${fSci && fSci.count}`)
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
