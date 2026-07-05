@@ -42,9 +42,23 @@ detail-consume-only 删详情 handler 同款切法）。A（独立 AI 导题页�
 - **C4 后端 + 普通导题 + 全局配置零改动**：`server/**`、`services/*` 定义文件、
   `PaperImportWorkbench`（非 AI 导题）、`aiApiKey` / `aiModel` / `aiThinkingMode`
   全局 AI 配置 —— 一律不碰。
-- **C5 verify 全绿**：B 无专属 verify（grep 确认 `aiEnhancement` 在 `scripts/`
-  零命中）。删 B 后 `verify:all` 保持全绿，`verify-ci` 注册表不需增删（无 B
-  相关脚本）。DEV 跑 `verify:all` 确认无脚本因删 B 而 fail。
+- **C5 verify 随动 + 全绿**：⚠️ **PA 纠正（MF-2）** —— B 有**一处遗产 verify
+  断言必须删**：`scripts/verify-classic-retire-2.mjs:201-204` 断言
+  `runAiEnhancementAnswerParse` **still defined**（detail-consume-only 刀为「保留
+  AI Enhancement 命脉」而钉，phrased「kept」）。本刀删该函数 → 此断言 fail →
+  `verify:all` 红（该脚本在 verify-ci 注册表 `verify-ci.mjs:80`）。处置：
+  - **删** L201-204 那条 `runAiEnhancementAnswerParse ... kept` 断言（是**删除**，
+    非反转 —— 该函数确应消失）。
+  - **修** L192-193 注释「populated by openDetail's 回填 **+ the AI Enhancement
+    sync branch**」→ 去掉「+ the AI Enhancement sync branch」（sync 分支随 B 删；
+    5-state 现只由 `openDetail` 回填驱动）。
+  - **保留** L195-199 的 5-state「still defines READ-only state」断言（5-state
+    声明存活，仍绿）。
+  - **保留** L205-208 `handleBackfillTopicLabels` 断言（该函数 B 外、存活）。
+  - `verify-classic-retire-2.mjs` **留在 verify-ci 注册表 + README**（文件不删，
+    只改内部断言）—— 注册表 / README 无需动。
+  其余 B 符号（`ai-enhancement-panel` / `showAiEnhancementPanel` /
+  `handleRunAiEnhancement`）scripts/ 零命中（PA 已核）。删 B 后 `verify:all` 全绿。
 
 ## 参考实现（DEV 照此逐条 grep 核对；行号会漂，符号 + 文件定位）
 
@@ -78,6 +92,10 @@ detail-consume-only 删详情 handler 同款切法）。A（独立 AI 导题页�
   `setSelectedDetail(...topicLabels)` 是 B 的 WRITE，随函数删；member 看已绑定
   标签走 `openDetail` 回填的 `selectedDetail.topicLabels`（detail-consume-only
   C2 保留），不受影响。
+- ⚠️ **MF-1（PA 补，漏删致 build 崩）**：`toggleAiEnhancementTask`(~1471) +
+  `toggleAiEnhancementTopicLabelSelection`(~1477)。B-only（唯一 caller 在渲染块
+  3119 / 3167），删渲染块后成 orphan → `noUnusedLocals` + `tsc -b` build 硬失败。
+  必须一并删。
 
 **渲染块（~3091-3202）：** `{aiEnhancementTargets.length > 0 && (<div className="ai-enhancement-panel" …>…</div>)}` 整块删。（嵌在导题草稿视图 batchCommit
 面板与 objectiveDraft 面板之间，删后视图自洽。）
@@ -123,6 +141,9 @@ detail-consume-only 删详情 handler 同款切法）。A（独立 AI 导题页�
   调用）。
 - **service 定义文件**：`services/questionGroups.ts`（及其余 service）不删（后端
   保留原则；即便某函数变 call-less，module export 不触发 `noUnusedLocals`）。
+- ⚠️ **`handleBackfillTopicLabels`(~1747) 保留**（PA 钉）—— 名字含 TopicLabels
+  易与 B 混，但它是 **B 外**：caller ~2377 = AdminWorkbench 批量回填，用
+  `backfillTopicLabels` service（非 B 的 `bindTopicLabelsRequest`）。**不删**。
 
 ## Forbidden
 
@@ -139,9 +160,12 @@ detail-consume-only 删详情 handler 同款切法）。A（独立 AI 导题页�
 
 ## Suggested Files
 
-- `app/src/App.tsx`（删 B：类型 / 常量 / 工厂 / state / useEffect / handler /
-  渲染块 + 两处 caller 去调用 + import 清理）
-- `app/src/App.css`（删 `.ai-enhancement-panel` 及子类）
+- `app/src/App.tsx`（删 B：类型 / 常量 / 工厂 / state / useEffect / handler
+  【含 MF-1 两个 toggle】/ 渲染块 + 两处 caller 去调用 + import 清理【含 `Save` icon】）
+- `app/src/App.css`（删 `.ai-enhancement*`：⚠️ **两处** —— 主块 ~2554-2680 +
+  响应式 `@media` 内 ~3019-3021 三条选择器，SW-2 别漏后者）
+- `scripts/verify-classic-retire-2.mjs`（MF-2：删 L201-204「runAiEnhancementAnswerParse
+  kept」断言 + 修 L192-193 注释；保留 5-state / backfill 断言；文件留注册表）
 
 ## Verification
 
@@ -152,8 +176,10 @@ detail-consume-only 删详情 handler 同款切法）。A（独立 AI 导题页�
 - C3：Browser QA —— 导题草稿仍能提交入库、列表刷新。
 - C4：`git diff --stat` 确认 `server/**`、`data/sql/**`、`services/*` 定义、
   `paper-import-ai`、普通导题 workbench 零改动。
-- C5：`pnpm -C app run verify:all` 全绿；`pnpm -C app build`（`tsc -b` + vite）
-  通过（删 B 后无 orphan import / unused local）。
+- C5：删 `verify-classic-retire-2.mjs` L201-204「runAiEnhancementAnswerParse
+  kept」断言 + 修 L192-193 注释后（保留 5-state / backfill 断言），
+  `pnpm -C app run verify:all` 全绿；`pnpm -C app build`（`tsc -b` + vite）通过
+  （删 B 后无 orphan import / unused local，含 MF-1 两个 toggle handler）。
 
 ## Browser QA Matrix
 
@@ -180,4 +206,20 @@ detail-consume-only 删详情 handler 同款切法）。A（独立 AI 导题页�
 
 ## PA Follow-Up Decisions
 
-（待 PA。PA verdict + Must Fix 映射由 PM 压进本节后再 DEV。）
+PA verdict: **APPROVE WITH MUST FIX**（`docs/cuts/ai-enhancement-retire/pa.md`）。
+三条核心命脉验证全 SOUND（删 B 5-state WRITE 不伤 member READ 命脉、导题入库
+删 `showAiEnhancementPanel` 后自洽、Forbidden 守得住、12 service import 判据准）。
+2 Must Fix 均技术精化（0 Open PO Decision），PM 全接受、已压进 plan。
+
+| PA item | pa.md 要求处置 | plan.md 落点 | Status |
+| --- | --- | --- | --- |
+| MF-1 | 删除清单追加 `toggleAiEnhancementTask`(1471)/`toggleAiEnhancementTopicLabelSelection`(1477)（B-only，caller 在渲染块 3119/3167，漏删 build 崩） | 参考实现·删除·handler | Resolved |
+| MF-2 | C5「B 无专属 verify」错误 → 改为：删 `verify-classic-retire-2.mjs` L201-204「runAiEnhancementAnswerParse kept」断言 + 修 L192-193 注释；保留 5-state / backfill 断言；脚本留注册表 | 硬契约 C5 + Verification C5 + Suggested Files | Resolved |
+
+Should Watch（DEV 留意，非阻塞）：
+- SW-1：删 B 后逐个 grep 每个 service import 的其余 caller 再删（PA 已预核 12 个
+  全 unused，DEV 复核即可）。
+- SW-2：`App.css` `.ai-enhancement*` 分两处（主块 ~2554-2680 + 响应式 `@media`
+  内 ~3019-3021 三条选择器），别只删主块漏了后者。
+- SW-3：删 `Save` lucide import(App.tsx:9) 时确认别处不用（grep 仅 3185 B 内一处）。
+- SW-4：增量 `tsc` —— 先删渲染块再删 handler，避免删 state 后一次性大面积 TS 崩。
