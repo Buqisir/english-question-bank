@@ -676,6 +676,13 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   assert('chip border visible #D3CBBD', /border:\s*1px solid #D3CBBD/i.test(chipRule), '')
   assert('chip text uses #6B645C', /color:\s*#6B645C/i.test(chipRule), '')
 
+  // chip 选中态暖化（DESIGN.md Chips: 选中态用赭红/暖金，不用墨黑）— regression guard.
+  const chipSelectedRule = css.match(/\.concierge-starter-chip\.is-selected\s*\{[^}]*\}/)?.[0] || ''
+  assert('selected chip border is oxblood #B8323C (warm accent, not ink)', /border-color:\s*#B8323C/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip text is oxblood #B8323C', /color:\s*#B8323C/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip is NOT ink-filled #1A1A1A (DESIGN.md 选中态用赭红/暖金)', !/#1A1A1A/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip fill is a faint oxblood wash, not opaque', /background:\s*rgba\(184,\s*50,\s*60,/i.test(chipSelectedRule), chipSelectedRule)
+
   // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
   assert('intent-bar rest border #DED9CF', /border:\s*1px solid #DED9CF/i.test(barRule), '')

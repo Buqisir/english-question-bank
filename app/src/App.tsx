@@ -2818,16 +2818,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           <h1>英语题库工作台</h1>
         </div>
         <div className="topbar-actions">
-          {currentDraftPaperId && (
-            <button
-              className="ghost-button"
-              type="button"
-              onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
-            >
-              <FileText size={16} />
-              当前草稿卷{currentDraftGroupCount > 0 ? ` · ${currentDraftGroupCount} 组` : ''}
-            </button>
-          )}
           <button className="ghost-button" type="button" onClick={openMySpace}>
             <Archive size={16} />
             个人空间

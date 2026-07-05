@@ -496,7 +496,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             <section className="detail-section" aria-label="AI 阅读解析与对比">
               <div className="detail-section-title">
                 <span>Reading AI</span>
-                <h3>AI 阅读解析与答案对比</h3>
+                <h3>AI 解析与答案对比</h3>
               </div>
               {(readingParseStatus === 'loading' || verifyStatus === 'loading') && (
                 <p className="detail-message">AI解析中...</p>
@@ -592,7 +592,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             <section className="detail-section" aria-label="AI 完形填空解析">
               <div className="detail-section-title">
                 <span>Cloze AI</span>
-                <h3>AI 完形填空解析</h3>
+                <h3>AI 解析</h3>
               </div>
               {clozeParseStatus === 'loading' && (
                 <p className="detail-message">AI解析中...</p>
@@ -654,7 +654,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             <section className="detail-section" aria-label="AI 七选五解析">
               <div className="detail-section-title">
                 <span>Seven AI</span>
-                <h3>AI 七选五解析</h3>
+                <h3>AI 解析</h3>
               </div>
               {sevenChoicesParseStatus === 'loading' && (
                 <p className="detail-message">AI解析中...</p>
@@ -1485,7 +1485,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             <section className="detail-section" aria-label="AI 语法填空解析">
               <div className="detail-section-title">
                 <span>Grammar AI</span>
-                <h3>AI 语法填空解析</h3>
+                <h3>AI 解析</h3>
               </div>
               {grammarParseStatus === 'loading' && (
                 <p className="detail-message">AI 语法填空解析中...</p>
