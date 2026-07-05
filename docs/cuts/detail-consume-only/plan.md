@@ -64,6 +64,15 @@ DEV 读完 ADR-0015 + decisions.md + 本 plan 即可执行；侦察已把「最�
 - **C7 verify 随动 + 全绿**：因删除而失效的 UI 断言更新/退役，`verify:all` 全绿，
   `verify-ci` 注册表与实际脚本一致。后端难度计算 verify（h5j/h5k/h5h/h5i/h1g/
   owner-gate）**不得因本刀失败**（数据层没动，它们应保持绿）。
+  - **MF-1（断言反转，不是"update"）**：`verify-classic-retire-2.mjs` 现在断言
+    「**存在**」本刀要删的东西（非-reading「AI解析」钮 / `onGenerateTopicLabels`
+    钮 / 话题候选+绑定块 / `teacher-difficulty-card` / 5 段 AI ops-trace）→ 必须
+    **反转成断言「不存在」**；同时保留「编辑钮 / passage / 加入草稿卷 /
+    onOpenDetail 穿透」的断言。只写"update" 会让 DEV 表面改改就 ship 红。
+  - **MF-3（formatSavedAt 断言冲突）**：`verify-classic-retire-2` 断言
+    `formatSavedAt` 已定义，但其 call site 全在已删的 save 块里。处置=**保留
+    `formatSavedAt` 在 `detailHelpers.ts` 的 export（哪怕 call-less）+ 保留该
+    断言**（它是模块 export，不触发 `noUnusedLocals`）。别删函数、别删断言。
 
 ## 参考实现（DEV 照此清单逐条核对；行号会漂，以符号 + 文件定位，执行时 grep 确认）
 
@@ -137,10 +146,11 @@ DEV 读完 ADR-0015 + decisions.md + 本 plan 即可执行；侦察已把「最�
 
 ### 编辑弹窗 `app/src/workbench/EntryModal.tsx`
 
-- ⚠️ 删：难度 `<select>`（label 难度，绑 `Difficulty` enum）及其 state/handler。
-  提交时 `difficulty` 字段仍 `NOT NULL`——保留一个默认值写入（如沿用 'medium'
-  或 create 输入的既有默认），**不暴露 UI**。DEV 确认提交 payload 仍带合法
-  difficulty，避免后端 CHECK 失败。
+- ⚠️ **MF-5：只删可见的难度 `<select>`（约 line 362-372）+ 其 onChange。KEEP
+  这三个 difficulty 字段种子**（删了会触发后端 `NOT NULL`）：`EntryFormState.difficulty`
+  （type，line 28）、`initialForm.difficulty: 'medium'`（line 68）、
+  `deriveFormFromDetail` 的 `difficulty: detail.difficulty`（line 109）。即：**删控件、
+  留字段**，提交 payload 继续带合法 difficulty。
 
 ### 校正模块 / 文案 / 服务
 
@@ -157,10 +167,29 @@ DEV 读完 ADR-0015 + decisions.md + 本 plan 即可执行；侦察已把「最�
   `app/src/concierge/clarificationCopy.ts`（「主题、题型、难度，或考法」）——把
   难度示例换成非难度示例（如「主题、题型、考法」/「说明文 / 主旨概括」）。
 - `app/src/workbench/detail/DifficultyProfileGrid.tsx`：删文件（唯一 caller 是详情）。
-- `app/src/features/question-detail/detailHelpers.ts`：难度相关 helper
-  （`mapAiDifficultyScoreToFive`/`getDifficultyDraftForQuestion`/`requiresDifficultyReason`/
-  `getDisplayDifficulty` 等）删；**但** `compactPreview`/`formatSavedAt`/
-  `compactGroupMeta` 等仍被保留的展示代码用——**逐函数核**，别整文件删。
+- ⚠️ **MF-4：`noUnusedLocals`+`noUnusedParameters` on + `build = tsc -b && vite`
+  → 每个 orphan import/local 是 build 硬失败，不是 lint。「逐函数核」是 build
+  承重项，DEV 照下面精确清单删/留：**
+  - `detailHelpers.ts` **文件保留**（共享 helper）；删的是 DetailView/App 里对
+    难度 helper 的 import + 用法。
+  - **DetailView imports 删**：`compactPreview`（唯一用处在已删复核队列）、
+    `formatSavedAt`（用处全在已删 save 块——但 detailHelpers 里的**定义保留**，见
+    MF-3）、`mainBlockerLabel`、难度 helper（`getDisplayDifficulty`/
+    `mapAiDifficultyScoreToFive`/`requiresDifficultyReason`/`getDifficultyDraftForQuestion`/
+    `DifficultyRatingDraft`）。
+  - **DetailView imports 保留**：`compactGroupMeta`（hero 用）、`getParseSavedAt`
+    （驱动 member 答案对比框，SW-2，别当 parse plumbing 扫掉）、`labelOf`（保留的
+    干扰项块用）。
+  - **App.tsx import（~line 107）**：删 `getDifficultyDraftForQuestion`/
+    `DifficultyRatingDraft`，**保留 `compactPreview`**（App.tsx 别处 ~line 3554 还用）。
+  - **`difficultyLabel`（domain 导出）**：**先删两个 call site**（DetailView hero
+    徽标 + ConciergeGroupCard）**再删 export**，否则 tsc 红。`Difficulty` **type
+    保留**（EntryModal/ConciergeGroupCard/domain 用）。
+  - **不要删** `app/src/workbench/detail/readingProfileLabels.ts`（还 export
+    `labelOf` 给保留的干扰项块，SW-4）。
+  - `applyReadingAiDifficultyScores`（App.tsx）：唯一 caller 是已删的
+    `handleSaveReadingParseResult`，AI Enhancement reading 分支不调它——**随
+    handler 删、无 READ 依赖**（PA 已核）。
 
 ## Forbidden
 
@@ -188,10 +217,17 @@ DEV 读完 ADR-0015 + decisions.md + 本 plan 即可执行；侦察已把「最�
 - `app/src/workbench/EntryModal.tsx`、`app/src/workbench/detail/DifficultyProfileGrid.tsx`（删）
 - `app/src/services/difficultyCalibration.ts`（删）、`app/src/services/questionGroups.ts`
 - `app/src/domain/questionBank.ts`、`app/src/features/question-detail/detailHelpers.ts`
-- verify：`scripts/verify-classic-retire-2.mjs`（更新）、
-  `scripts/verify-h12b-difficulty-profile-grid.mjs`（删）、
-  `scripts/verify-calibration-preview.mjs`（删）、`scripts/verify-ci.mjs`（注册表同步）、
-  可能 `scripts/verify-concierge-desk.mjs`（若断言难度 pill 则更新）
+- verify（**MF-1/MF-2/MF-3**，精确）：
+  - `scripts/verify-classic-retire-2.mjs`：**断言反转**（MF-1）+ 保留 `formatSavedAt`
+    断言（MF-3）。
+  - `scripts/verify-h12b-difficulty-profile-grid.mjs`：删文件 **+ 从
+    `scripts/verify-ci.mjs` 注册表移除**（它在注册表；不移除 verify-ci 会 spawn
+    缺失文件而 fail）**+ 从 `scripts/README.md` 删行**。
+  - `scripts/verify-calibration-preview.mjs`：删文件 **+ 从 `scripts/README.md`
+    删行**。**它不在 verify-ci 注册表**（只在 README），故对它做「注册表同步」是
+    no-op——别浪费动作找它的注册表行。
+  - `scripts/verify-concierge-desk.mjs` / `verify-h12a-entry-modal.mjs`：PA 核实
+    **无难度 pill 断言**，保持绿、不改。
 
 ## Verification
 
@@ -231,8 +267,20 @@ DEV 读完 ADR-0015 + decisions.md + 本 plan 即可执行；侦察已把「最�
 
 ## PA Follow-Up Decisions
 
-<待 PA 后由 PM 填>
+PA verdict: **APPROVE WITH MUST FIX**（`docs/cuts/detail-consume-only/pa.md`）。
+3 个核心验证全 SOUND（READ/WRITE 可干净切、5-state 与 AI Enhancement 耦合确认、
+数据层 Forbidden 守得住、编辑/删除保留自洽）。5 Must Fix 全为技术精化（0 Open PO
+Decisions），PM 全部接受、已压进 plan 对应章节。
 
-| PA item | `pa.md` required disposition | `plan.md` handling | Status |
+| PA item | pa.md 要求处置 | plan.md 落点 | Status |
 | --- | --- | --- | --- |
-| | | | |
+| MF-1 | `verify-classic-retire-2` 断言**反转**（断言删掉的现场生产/难度/trace「不存在」，保留 编辑钮/passage/加入草稿卷/onOpenDetail 断言） | 硬契约 C7·MF-1 + Suggested Files verify | Resolved |
+| MF-2 | verify-ci 注册表 vs README 精确：`verify-h12b` 从 **verify-ci 注册表**移除；`verify-calibration-preview` **只在 README**（对它做注册表同步是 no-op） | Suggested Files verify·MF-2 | Resolved |
+| MF-3 | `formatSavedAt` 断言冲突：**保留** detailHelpers 的 export（call-less）+ 保留断言 | 硬契约 C7·MF-3 + 参考实现 MF-4 | Resolved |
+| MF-4 | 枚举 `noUnusedLocals`+`tsc -b` build 硬失败 orphan：DetailView/App import 删留清单 + `difficultyLabel` 两 call-site 先删再删 export + **不删** `readingProfileLabels.ts` | 参考实现·MF-4 清单 + DEV Readiness tsc 注 | Resolved |
+| MF-5 | 点名 EntryModal difficulty 字段种子 **KEEP**（`EntryFormState.difficulty`/`initialForm`/`deriveFormFromDetail`），只删 `<select>` | 参考实现 EntryModal·MF-5 | Resolved |
+
+Should Watch（DEV 留意，非阻塞）：SW-1 `openDetail` 的 `setTopicLabelStatus('loaded')`
+随 topic scratch state 删；SW-2 `getParseSavedAt` 是 READ 展示，保留（别当 parse
+plumbing 扫掉）；SW-3 `difficultyCalibration.ts` 安全整文件删；SW-4
+`readingProfileLabels.ts` **不删**（`labelOf` 存活）。
