@@ -4225,7 +4225,7 @@ button:disabled {
 
 .concierge-thinking-hint {
   font-size: 12px;
-  color: #9A9180;
+  color: #6B645C;
 }
 
 /* Clarification + notices */
@@ -5301,7 +5301,7 @@ button:disabled {
 .concierge-subhead-hint {
   margin: 8px 0 0;
   font-size: 12px;
-  color: #9A9180;
+  color: #6B645C;
   text-align: center;
 }
 
@@ -5371,7 +5371,7 @@ button:disabled {
   min-width: 34px;
   font-size: 11px;
   font-weight: 500;
-  color: #9A9180;
+  color: #6B645C;
 }
 
 /* Must out-rank `.app-shell.home-mode-ai .concierge-starter-chips` above
@@ -5407,7 +5407,7 @@ button:disabled {
 .concierge-filter-clear {
   background: transparent;
   border: none;
-  color: #9A9180;
+  color: #6B645C;
   font-family: inherit;
   font-size: 12.5px;
   cursor: pointer;
@@ -5431,7 +5431,7 @@ button:disabled {
 }
 
 .concierge-feed-filtered-tag {
-  color: #9A9180;
+  color: #6B645C;
   margin-left: 4px;
 }
 
@@ -5669,7 +5669,7 @@ button:disabled {
 .concierge-row-detail-empty {
   margin: 0;
   font-size: 13px;
-  color: #9A9180;
+  color: #6B645C;
 }
 
 /* Question card list — read-only, horizontally scrollable */
@@ -5713,7 +5713,7 @@ button:disabled {
 
 .concierge-detail-q-type {
   font-size: 11px;
-  color: #9A9180;
+  color: #6B645C;
 }
 
 .concierge-detail-q-stem {
@@ -5764,7 +5764,7 @@ button:disabled {
 .concierge-data-loading {
   margin: 8px 0 0;
   font-size: 12.5px;
-  color: #9A9180;
+  color: #6B645C;
   text-align: center;
 }
 
