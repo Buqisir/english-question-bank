@@ -360,17 +360,6 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
               </select>
             </label>
             <label className="field">
-              <span>难度</span>
-              <select
-                value={entryForm.difficulty}
-                onChange={(event) => updateEntryField('difficulty', event.target.value as Difficulty)}
-              >
-                <option value="low">低</option>
-                <option value="medium">中</option>
-                <option value="high">高</option>
-              </select>
-            </label>
-            <label className="field">
               <span>小题数量</span>
               <input
                 readOnly

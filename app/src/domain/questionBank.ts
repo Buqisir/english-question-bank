@@ -609,12 +609,6 @@ export type PaperWorkflow = {
   }
 }
 
-export const difficultyLabel: Record<Difficulty, string> = {
-  low: '低',
-  medium: '中',
-  high: '高',
-}
-
 export const sourceTypeLabel: Record<SourceType, string> = {
   real_exam: '真题',
   mock_exam: '模拟题',

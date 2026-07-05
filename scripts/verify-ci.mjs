@@ -67,7 +67,6 @@ const registry = {
   'scripts/verify-h11b-paper-import-ai-view.mjs',
   'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-h12a-entry-modal.mjs',
-  'scripts/verify-h12b-difficulty-profile-grid.mjs',
   'scripts/verify-restart1-local-search-intent.mjs',
   'scripts/verify-restart3-teacher-analysis.mjs',
   'scripts/verify-home-default-feed.mjs',
