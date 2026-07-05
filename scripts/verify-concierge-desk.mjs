@@ -662,12 +662,13 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
     '',
   )
 
-  // Chip styling — the filter row reuses .concierge-starter-chip's exact
-  // rule (C6: zero new/changed color tokens), so these hex literals must
-  // still be exactly as before.
+  // Chip styling — the filter row reuses .concierge-starter-chip's rule.
+  // Background/text stay as before; the resting border was intentionally
+  // raised from the near-invisible #E5E3DC to the more legible on-system
+  // #D3CBBD (chip-wall cut: "补 chip 边框可见度", DESIGN.md 按层级选强弱).
   const chipRule = css.match(/\.concierge-starter-chip\s*\{[^}]*\}/)?.[0] || ''
   assert('chip background transparent', /background:\s*transparent/.test(chipRule), '')
-  assert('chip border light #E5E3DC', /border:\s*1px solid #E5E3DC/i.test(chipRule), '')
+  assert('chip border visible #D3CBBD', /border:\s*1px solid #D3CBBD/i.test(chipRule), '')
   assert('chip text uses #6B645C', /color:\s*#6B645C/i.test(chipRule), '')
 
   // Intent bar resting + focus.

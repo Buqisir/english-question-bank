@@ -5318,7 +5318,7 @@ button:disabled {
 
 .concierge-starter-chip {
   background: transparent;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D3CBBD;
   color: #6B645C;
   font-family: inherit;
   font-size: 12.5px;
@@ -5330,7 +5330,7 @@ button:disabled {
 
 .concierge-starter-chip:hover {
   background: #F4F2EC;
-  border-color: #DED9CF;
+  border-color: #B8B0A0;
   color: #1A1A1A;
 }
 
@@ -5433,6 +5433,45 @@ button:disabled {
 .concierge-feed-filtered-tag {
   color: #6B645C;
   margin-left: 4px;
+}
+
+/* Progressive-disclosure toggle + clear, on one quiet trailing row. */
+.concierge-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 2px;
+}
+
+.concierge-filter-more {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #6B645C;
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 4px 2px;
+}
+
+.concierge-filter-more:hover {
+  color: #1A1A1A;
+}
+
+/* Chevron: down when collapsed, up when expanded (instant, no motion). */
+.concierge-filter-more::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.concierge-filter-more[aria-expanded='true']::after {
+  transform: translateY(1px) rotate(-135deg);
 }
 
 
