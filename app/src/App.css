@@ -4643,6 +4643,50 @@ button:disabled {
   max-width: 920px;
   margin: 0 auto;
   padding: 24px;
+
+  /* Cut ui-detail-warm — finish the AI-mode warm migration for the detail
+     view. The `.app-shell.home-mode-ai` block above (~L4553) already
+     re-scopes --ink / --line / --surface-strong to warm, but the detail
+     view's body text (--muted), headings (--ink-strong), primary buttons +
+     focus rings (--accent / --accent-glow) and semantic chips
+     (--blue / --mint / --amber / --coral) still read the retired slate/blue
+     palette from :root — that is why the detail view rendered cold blue.
+     Re-scope the remaining classic tokens to the same warm values
+     ConciergeDesk already uses, on the .detail-view subtree only. :root and
+     classic mode stay pixel-identical (this is the No-Blue migration, not a
+     locked-token edit). Semantic text is darkened past the raw DESIGN.md
+     hues so 12px chip labels clear WCAG AA on their soft tint. */
+  --ink: #1A1A1A;
+  --ink-strong: #1A1A1A;
+  --muted: #6B645C;
+  --surface: #FAFAF7;
+  --surface-strong: #F4F2EC;
+  --panel: #FFFDF8;
+  --line: #E5E3DC;
+  --line-strong: #DED9CF;
+  /* Primary action + focus rings: blue → ink (DESIGN.md primary button is
+     ink bg + paper text; white on #1A1A1A ≈ 17:1). */
+  --accent: #1A1A1A;
+  --accent-glow: rgba(26, 26, 26, 0.12);
+  /* Fact / info chips: slate-blue → warm-neutral (surface-warm + ink-muted). */
+  --blue-soft: #F4F2EC;
+  --blue-text: #6B645C;
+  /* Difficulty + semantic chips → warm equivalents of the DESIGN.md palette. */
+  --mint-soft: rgba(74, 157, 127, 0.12);
+  --mint-text: #3F8168;
+  --amber-soft: rgba(184, 115, 46, 0.14);
+  --amber-text: #834717;
+  --coral-soft: rgba(196, 84, 62, 0.12);
+  --coral-text: #B4462F;
+}
+
+/* In the compact answer-compare layout the state badge sits inside a box
+   that already carries the same `.pending` / `.correct` / `.wrong` tint, so
+   the badge stacking its own tint doubled the wash and crushed the label
+   (e.g. 待对比) below AA. Drop the inner tint — the box already conveys the
+   state — so the label reads on a single tint. */
+.app-shell.home-mode-ai .detail-view .answer-compare-compact .verify-badge {
+  background: transparent;
 }
 
 /* ── Basket: lightweight floating chip + slide-in drawer in AI mode ────── */
