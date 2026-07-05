@@ -5391,16 +5391,21 @@ button:disabled {
   opacity: 0.45;
 }
 
+/* Selected chip = the system's red pen. DESIGN.md Chips: 选中态用赭红或暖金，
+   未选中保持暖中性。Oxblood #B8323C carries 「当前选中」semantics; the fill
+   stays a faint 10% wash so multiple selected chips never bank past the
+   ≤10% accent budget (Red-Pen Rule). Oxblood-on-wash tests ~5.3:1 (AA). */
 .concierge-starter-chip.is-selected {
-  background: #1A1A1A;
-  border-color: #1A1A1A;
-  color: #FFFDF8;
+  background: rgba(184, 50, 60, 0.10);
+  border-color: #B8323C;
+  color: #B8323C;
+  font-weight: 500;
 }
 
 .concierge-starter-chip.is-selected:hover {
-  background: #1A1A1A;
-  border-color: #1A1A1A;
-  color: #FFFDF8;
+  background: rgba(184, 50, 60, 0.16);
+  border-color: #B8323C;
+  color: #B8323C;
 }
 
 .concierge-filter-clear {
@@ -6117,6 +6122,7 @@ button:disabled {
 
 .concierge-group-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   margin-top: auto;
 }
