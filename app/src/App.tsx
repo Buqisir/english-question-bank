@@ -64,14 +64,12 @@ import {
   generateImportBundleDraft,
   generateQuestionGroupSummary as generateQuestionGroupSummaryRequest,
   generateTopicLabels as generateTopicLabelsRequest,
-  type GenerateTopicLabelsResult,
   bindTopicLabels as bindTopicLabelsRequest,
   runImportBatch,
   savePaperSet,
   saveClozeParseResultRequest,
   saveSevenChoicesParseResultRequest,
   saveGrammarParseResultRequest,
-  saveQuestionDifficultyRating as saveQuestionDifficultyRatingRequest,
   saveReadingParseResult as saveReadingParseResultRequest,
   updatePaperSet as updatePaperSetRequest,
   scanImportDirectory,
@@ -84,7 +82,6 @@ import {
   parseImportFile as parseImportFileRequest,
   backfillTopicLabels,
   type BackfillTopicLabelsResult,
-  AiDailyLimitExceededError,
 } from './services/questionGroups'
 import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
 import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
@@ -104,7 +101,7 @@ import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { QuestionGroupDetailView } from './features/question-detail/QuestionGroupDetailView'
-import { compactPreview, getDifficultyDraftForQuestion, type DifficultyRatingDraft } from './features/question-detail/detailHelpers'
+import { compactPreview } from './features/question-detail/detailHelpers'
 
 type AiEnhancementTask = 'summary' | 'topicLabels' | 'answerParse'
 
@@ -305,23 +302,6 @@ const paperWorkflowStatusHint: Record<PaperWorkflow['status'], string> = {
   ready_to_paper: '待组卷',
   ready_to_export: '待导出',
   closed_loop: '已闭环',
-}
-
-function applyReadingAiDifficultyScores(
-  questions: QuestionGroupDetail['questions'],
-  parseResult: ReadingParseQuestionGroupResult,
-) {
-  const parseByNo = new Map(
-    (parseResult.questions || []).map((item) => [String(item.questionNo || '').trim(), item]),
-  )
-
-  return questions.map((question, index) => {
-    const parseItem = parseByNo.get(String(question.questionNo).trim()) || parseResult.questions?.[index]
-    const score = Number(parseItem?.difficultyProfile?.finalScore || 0)
-    return Number.isInteger(score) && score >= 1 && score <= 10
-      ? { ...question, aiDifficultyScore: score }
-      : question
-  })
 }
 
 function formatFileSize(bytes: number) {
@@ -709,9 +689,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [selectedDetail, setSelectedDetail] = useState<QuestionGroupDetail | null>(null)
   const [detailStatus, setDetailStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [detailError, setDetailError] = useState('')
-  const [difficultyDrafts, setDifficultyDrafts] = useState<Record<string, DifficultyRatingDraft>>({})
-  const [difficultySaveStatus, setDifficultySaveStatus] = useState<Record<string, 'idle' | 'saving' | 'saved' | 'error'>>({})
-  const [difficultySaveErrors, setDifficultySaveErrors] = useState<Record<string, string>>({})
   const [verifyResult, setVerifyResult] = useState<VerifyQuestionGroupResult | null>(null)
   const [verifyStatus, setVerifyStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [verifyError, setVerifyError] = useState('')
@@ -735,13 +712,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [readingParseError, setReadingParseError] = useState('')
   const [readingParseSaveStatus, setReadingParseSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [readingParseSaveError, setReadingParseSaveError] = useState('')
-  const [topicLabelStatus, setTopicLabelStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [topicLabelError, setTopicLabelError] = useState('')
-  const [topicLabelTrace, setTopicLabelTrace] = useState<GenerateTopicLabelsResult | null>(null)
-  const [topicLabelRecommendations, setTopicLabelRecommendations] = useState<TopicLabel[]>([])
-  const [selectedTopicLabelValues, setSelectedTopicLabelValues] = useState<string[]>([])
-  const [topicLabelBindStatus, setTopicLabelBindStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const [topicLabelBindError, setTopicLabelBindError] = useState('')
   const [aiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
   const [aiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
   const [backfillStatus, setBackfillStatus] = useState<'idle' | 'loading'>('idle')
@@ -1018,23 +988,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     })
   }, [aiEnhancementTargets])
 
-  useEffect(() => {
-    if (!selectedDetail) {
-      setDifficultyDrafts({})
-      setDifficultySaveStatus({})
-      setDifficultySaveErrors({})
-      return
-    }
-
-    setDifficultyDrafts(
-      Object.fromEntries(
-        selectedDetail.questions.map((question) => [question.id, getDifficultyDraftForQuestion(question)]),
-      ),
-    )
-    setDifficultySaveStatus({})
-    setDifficultySaveErrors({})
-  }, [selectedDetail?.id])
-
   const questionGroupById = useMemo(() => new Map(questionGroups.map((group) => [group.id, group])), [questionGroups])
   // readingParseByQuestionNo / clozeParseByQuestionNo / sevenChoicesParseByQuestionNo /
   // grammarParseByQuestionNo / verifyByQuestionNo / answerCompareStats moved into
@@ -1152,20 +1105,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setGrammarParseError('')
     setGrammarParseSaveStatus('idle')
     setGrammarParseSaveError('')
-    setTopicLabelStatus('idle')
-    setTopicLabelError('')
-    setTopicLabelTrace(null)
-    setTopicLabelRecommendations([])
-    setSelectedTopicLabelValues([])
-    setTopicLabelBindStatus('idle')
-    setTopicLabelBindError('')
 
     try {
       const detail = await fetchQuestionGroupDetail(id)
       setSelectedDetail(detail)
-      if (detail.topicLabels?.length) {
-        setTopicLabelStatus('loaded')
-      }
       if (detail.readingParseResult) {
         setReadingParseResult(detail.readingParseResult)
         setReadingParseStatus('loaded')
@@ -1200,61 +1143,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     } catch (error) {
       setDetailStatus('error')
       setDetailError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  function updateDifficultyDraft(questionId: string, patch: Partial<DifficultyRatingDraft>) {
-    setDifficultyDrafts((drafts) => {
-      const previous =
-        drafts[questionId] ||
-        ({
-        teacherDifficulty: '',
-        reason: '',
-        note: '',
-        } satisfies DifficultyRatingDraft)
-      return {
-        ...drafts,
-        [questionId]: {
-          ...previous,
-          ...patch,
-        },
-      }
-    })
-    setDifficultySaveStatus((status) => ({ ...status, [questionId]: 'idle' }))
-    setDifficultySaveErrors((errors) => ({ ...errors, [questionId]: '' }))
-  }
-
-  async function handleSaveQuestionDifficulty(
-    question: QuestionGroupDetail['questions'][number],
-    aiDifficultyScore = question.aiDifficultyScore,
-  ) {
-    const draft = difficultyDrafts[question.id] || getDifficultyDraftForQuestion(question)
-    const teacherDifficulty = draft.teacherDifficulty ? Number(draft.teacherDifficulty) : null
-    setDifficultySaveStatus((status) => ({ ...status, [question.id]: 'saving' }))
-    setDifficultySaveErrors((errors) => ({ ...errors, [question.id]: '' }))
-
-    try {
-      const result = await saveQuestionDifficultyRatingRequest(question.id, {
-        teacherDifficulty,
-        aiDifficultyScore,
-        difficultyOverrideReason: draft.reason,
-        difficultyOverrideNote: draft.note,
-      })
-      setSelectedDetail((detail) =>
-        detail
-          ? {
-              ...detail,
-              questions: detail.questions.map((item) => (item.id === question.id ? result.question : item)),
-            }
-          : detail,
-      )
-      setDifficultySaveStatus((status) => ({ ...status, [question.id]: 'saved' }))
-    } catch (error) {
-      setDifficultySaveStatus((status) => ({ ...status, [question.id]: 'error' }))
-      setDifficultySaveErrors((errors) => ({
-        ...errors,
-        [question.id]: error instanceof Error ? error.message : String(error),
-      }))
     }
   }
 
@@ -1856,296 +1744,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  async function handleVerifyQuestionGroup() {
-    const runId = ++aiRunIdRef.current
-    const key = aiApiKey.trim()
-    if (!selectedDetail) {
-      setVerifyStatus('error')
-      setVerifyError('请先打开一个题组，再点击 AI 解析。')
-      setVerifyResult(null)
-      return
-    }
-    localStorage.setItem('ai-api-key', aiApiKey.trim())
-    localStorage.setItem('ai-model', aiModel)
-    localStorage.setItem('ai-thinking-mode', aiThinkingMode ? 'on' : 'off')
-
-    if (selectedDetail.groupType === 'cloze') {
-      setClozeParseStatus('loading')
-      setClozeParseError('')
-      setClozeParseResult(null)
-      setClozeParseSaveStatus('idle')
-      setClozeParseSaveError('')
-      setVerifyStatus('loading')
-      setVerifyError('')
-      setVerifyResult(null)
-      try {
-        const result = await parseClozeGroupRequest(selectedDetail.id, key, aiModel, aiThinkingMode)
-        if (aiRunIdRef.current !== runId) return
-        setClozeParseResult(result)
-        setClozeParseStatus('loaded')
-        setVerifyResult(buildClozeVerifyResult(selectedDetail, result))
-        setVerifyStatus('loaded')
-      } catch (error) {
-        if (aiRunIdRef.current !== runId) return
-        setClozeParseStatus('error')
-        setClozeParseError(error instanceof Error ? error.message : String(error))
-        setVerifyStatus('error')
-        setVerifyError(error instanceof Error ? error.message : String(error))
-      }
-      return
-    }
-
-    if (selectedDetail.groupType === 'seven_choices') {
-      setSevenChoicesParseStatus('loading')
-      setSevenChoicesParseError('')
-      setSevenChoicesParseResult(null)
-      setSevenChoicesParseSaveStatus('idle')
-      setSevenChoicesParseSaveError('')
-      setVerifyStatus('loading')
-      setVerifyError('')
-      setVerifyResult(null)
-      try {
-        const result = await parseSevenChoicesGroupRequest(selectedDetail.id, key, aiModel, aiThinkingMode)
-        if (aiRunIdRef.current !== runId) return
-        setSevenChoicesParseResult(result)
-        setSevenChoicesParseStatus('loaded')
-        setVerifyResult(buildSevenChoicesVerifyResult(selectedDetail, result))
-        setVerifyStatus('loaded')
-      } catch (error) {
-        if (aiRunIdRef.current !== runId) return
-        setSevenChoicesParseStatus('error')
-        setSevenChoicesParseError(error instanceof Error ? error.message : String(error))
-        setVerifyStatus('error')
-        setVerifyError(error instanceof Error ? error.message : String(error))
-      }
-      return
-    }
-
-    if (selectedDetail.groupType === 'grammar_cloze') {
-      setGrammarParseStatus('loading')
-      setGrammarParseError('')
-      setGrammarParseResult(null)
-      setGrammarParseSaveStatus('idle')
-      setGrammarParseSaveError('')
-      setVerifyStatus('loading')
-      setVerifyError('')
-      setVerifyResult(null)
-      try {
-        const result = await parseGrammarGroupRequest(selectedDetail.id, key, aiModel, aiThinkingMode)
-        if (aiRunIdRef.current !== runId) return
-        setGrammarParseResult(result)
-        setGrammarParseStatus('loaded')
-        setVerifyResult(buildGrammarVerifyResult(selectedDetail, result))
-        setVerifyStatus('loaded')
-      } catch (error) {
-        if (aiRunIdRef.current !== runId) return
-        setGrammarParseStatus('error')
-        setGrammarParseError(error instanceof Error ? error.message : String(error))
-        setVerifyStatus('error')
-        setVerifyError(error instanceof Error ? error.message : String(error))
-      }
-      return
-    }
-
-    setVerifyStatus('loading')
-    setVerifyError('')
-    setVerifyResult(null)
-
-    try {
-      const result = await verifyQuestionGroupRequest(selectedDetail.id, key, aiModel, aiThinkingMode)
-      if (aiRunIdRef.current !== runId) return
-      setVerifyResult(result)
-      setVerifyStatus('loaded')
-    } catch (error) {
-      if (aiRunIdRef.current !== runId) return
-      setVerifyStatus('error')
-      // cut m0-5-ai-daily-limit (C6): verify has no local fallback, so a dedicated
-      // message (quota exhausted, can paste own key) replaces the generic "验证失败"
-      // wording — distinguishable from any other verify error.
-      if (error instanceof AiDailyLimitExceededError) {
-        setVerifyError('今天的 AI 额度用完了。可以在设置里填自己的 API Key 继续使用 AI 解析。')
-      } else {
-        setVerifyError(error instanceof Error ? error.message : String(error))
-      }
-    }
-  }
-
-  async function handleAnalyzeReadingQuestionGroup() {
-    const runId = ++aiRunIdRef.current
-    const key = aiApiKey.trim()
-    if (!selectedDetail) {
-      setReadingParseStatus('error')
-      setReadingParseError('请先打开一个阅读题组，再点击 AI解析。')
-      setVerifyStatus('error')
-      setVerifyError('请先打开一个阅读题组，再点击 AI解析。')
-      setReadingParseResult(null)
-      setVerifyResult(null)
-      setReadingParseSaveStatus('idle')
-      setReadingParseSaveError('')
-      return
-    }
-    localStorage.setItem('ai-api-key', aiApiKey.trim())
-    localStorage.setItem('ai-model', aiModel)
-    localStorage.setItem('ai-thinking-mode', aiThinkingMode ? 'on' : 'off')
-    setReadingParseStatus('loading')
-    setReadingParseError('')
-    setReadingParseResult(null)
-    setReadingParseSaveStatus('idle')
-    setReadingParseSaveError('')
-    setVerifyStatus('loading')
-    setVerifyError('')
-    setVerifyResult(null)
-
-    try {
-      const parseResult = await parseReadingQuestionGroupRequest(selectedDetail.id, key, aiModel, aiThinkingMode)
-      if (aiRunIdRef.current !== runId) return
-      setReadingParseResult(parseResult)
-      setReadingParseStatus('loaded')
-    } catch (error) {
-      if (aiRunIdRef.current !== runId) return
-      const message = error instanceof Error ? error.message : String(error)
-      setReadingParseStatus('error')
-      setReadingParseError(message)
-      setVerifyStatus('idle')
-      setVerifyError('')
-      return
-    }
-
-    try {
-      const verifyResult = await verifyQuestionGroupRequest(selectedDetail.id, key, aiModel, aiThinkingMode)
-      if (aiRunIdRef.current !== runId) return
-      setVerifyResult(verifyResult)
-      setVerifyStatus('loaded')
-    } catch (error) {
-      if (aiRunIdRef.current !== runId) return
-      setVerifyStatus('error')
-      // cut m0-5-ai-daily-limit (C6): the reading-group flow shares the same
-      // verify request + verifyError UI as handleVerifyQuestionGroup, so it gets
-      // the same dedicated quota message instead of the generic failure text.
-      if (error instanceof AiDailyLimitExceededError) {
-        setVerifyError('今天的 AI 额度用完了。可以在设置里填自己的 API Key 继续使用 AI 解析。')
-      } else {
-        setVerifyError(error instanceof Error ? error.message : String(error))
-      }
-    }
-  }
-
-  async function handleSaveReadingParseResult() {
-    if (!selectedDetail || !readingParseResult) return
-
-    setReadingParseSaveStatus('saving')
-    setReadingParseSaveError('')
-
-    try {
-      const saved = await saveReadingParseResultRequest(selectedDetail.id, readingParseResult, verifyResult)
-      setReadingParseResult(saved.readingParseResult)
-      if (saved.questionGroup) {
-        updateAiEnhancedQuestionGroup(saved.questionGroup)
-      }
-      if (saved.verifyResult) {
-        setVerifyResult(saved.verifyResult)
-        setVerifyStatus('loaded')
-      }
-      setSelectedDetail((detail) =>
-        detail && detail.id === selectedDetail.id
-          ? {
-              ...detail,
-              ...(saved.questionGroup ?? {}),
-              readingParseResult: saved.readingParseResult,
-              readingVerifyResult: saved.verifyResult,
-              questions: applyReadingAiDifficultyScores(detail.questions, saved.readingParseResult),
-              passage: {
-                ...detail.passage,
-                summary: saved.questionGroup?.summary ?? detail.passage.summary,
-              },
-            }
-          : detail,
-      )
-      setReadingParseSaveStatus('saved')
-    } catch (error) {
-      setReadingParseSaveStatus('error')
-      setReadingParseSaveError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function handleSaveClozeParseResult() {
-    if (!selectedDetail || !clozeParseResult) return
-
-    setClozeParseSaveStatus('saving')
-    setClozeParseSaveError('')
-
-    try {
-      const saved = await saveClozeParseResultRequest(selectedDetail.id, clozeParseResult)
-      setClozeParseResult(saved.clozeParseResult)
-      setVerifyResult(buildClozeVerifyResult(selectedDetail, saved.clozeParseResult))
-      setVerifyStatus('loaded')
-      setSelectedDetail((detail) =>
-        detail && detail.id === selectedDetail.id
-          ? {
-              ...detail,
-              clozeParseResult: saved.clozeParseResult,
-            }
-          : detail,
-      )
-      setClozeParseSaveStatus('saved')
-    } catch (error) {
-      setClozeParseSaveStatus('error')
-      setClozeParseSaveError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function handleSaveSevenChoicesParseResult() {
-    if (!selectedDetail || !sevenChoicesParseResult) return
-
-    setSevenChoicesParseSaveStatus('saving')
-    setSevenChoicesParseSaveError('')
-
-    try {
-      const saved = await saveSevenChoicesParseResultRequest(selectedDetail.id, sevenChoicesParseResult)
-      setSevenChoicesParseResult(saved.sevenChoicesParseResult)
-      setVerifyResult(buildSevenChoicesVerifyResult(selectedDetail, saved.sevenChoicesParseResult))
-      setVerifyStatus('loaded')
-      setSelectedDetail((detail) =>
-        detail && detail.id === selectedDetail.id
-          ? {
-              ...detail,
-              sevenChoicesParseResult: saved.sevenChoicesParseResult,
-            }
-          : detail,
-      )
-      setSevenChoicesParseSaveStatus('saved')
-    } catch (error) {
-      setSevenChoicesParseSaveStatus('error')
-      setSevenChoicesParseSaveError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function handleSaveGrammarParseResult() {
-    if (!selectedDetail || !grammarParseResult) return
-
-    setGrammarParseSaveStatus('saving')
-    setGrammarParseSaveError('')
-
-    try {
-      const saved = await saveGrammarParseResultRequest(selectedDetail.id, grammarParseResult)
-      setGrammarParseResult(saved.grammarParseResult)
-      setSelectedDetail((detail) =>
-        detail && detail.id === selectedDetail.id
-          ? {
-              ...detail,
-              grammarParseResult: saved.grammarParseResult,
-            }
-          : detail,
-      )
-      setVerifyResult(buildGrammarVerifyResult(selectedDetail, saved.grammarParseResult))
-      setVerifyStatus('loaded')
-      setGrammarParseSaveStatus('saved')
-    } catch (error) {
-      setGrammarParseSaveStatus('error')
-      setGrammarParseSaveError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
   async function handleBackfillTopicLabels() {
     const key = aiApiKey.trim()
     localStorage.setItem('ai-api-key', key)
@@ -2160,89 +1758,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     } catch (error) {
       setBackfillError(error instanceof Error ? error.message : String(error))
       setBackfillStatus('idle')
-    }
-  }
-
-  async function handleGenerateTopicLabels() {
-    if (!selectedDetail) {
-      setTopicLabelStatus('error')
-      setTopicLabelError('请先打开一个题组，再做主题划分。')
-      setTopicLabelTrace(null)
-      return
-    }
-
-    const key = aiApiKey.trim()
-    localStorage.setItem('ai-api-key', key)
-    localStorage.setItem('ai-model', aiModel)
-    localStorage.setItem('ai-thinking-mode', aiThinkingMode ? 'on' : 'off')
-    setTopicLabelStatus('loading')
-    setTopicLabelError('')
-    setTopicLabelTrace(null)
-    setTopicLabelRecommendations([])
-    setSelectedTopicLabelValues([])
-    setTopicLabelBindStatus('idle')
-    setTopicLabelBindError('')
-
-    try {
-      const result = await generateTopicLabelsRequest(selectedDetail.id, key, DEFAULT_AI_MODEL, false)
-      setTopicLabelTrace(result)
-      setTopicLabelRecommendations(result.topicLabels)
-      setSelectedTopicLabelValues(result.topicLabels.map((topicLabel) => topicLabel.label))
-      setTopicLabelStatus('loaded')
-    } catch (error) {
-      setTopicLabelStatus('error')
-      setTopicLabelError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  function toggleTopicLabelSelection(label: string) {
-    setTopicLabelBindStatus('idle')
-    setTopicLabelBindError('')
-    setSelectedTopicLabelValues((values) =>
-      values.includes(label) ? values.filter((value) => value !== label) : [...values, label],
-    )
-  }
-
-  async function handleBindTopicLabels() {
-    if (!selectedDetail) return
-    const selectedLabels = topicLabelRecommendations.filter((topicLabel) =>
-      selectedTopicLabelValues.includes(topicLabel.label),
-    )
-    if (selectedLabels.length === 0) {
-      setTopicLabelBindStatus('error')
-      setTopicLabelBindError('请先选择至少一个话题标签。')
-      return
-    }
-
-    setTopicLabelBindStatus('saving')
-    setTopicLabelBindError('')
-
-    try {
-      const result = await bindTopicLabelsRequest(selectedDetail.id, selectedLabels)
-      setSelectedDetail((detail) =>
-        detail && detail.id === selectedDetail.id
-          ? {
-              ...detail,
-              topicLabels: result.topicLabels,
-            }
-          : detail,
-      )
-      setQuestionGroups((groups) =>
-        groups.map((group) =>
-          group.id === selectedDetail.id
-            ? {
-                ...group,
-                topicLabels: result.topicLabels,
-              }
-            : group,
-        ),
-      )
-      setTopicLabelRecommendations([])
-      setSelectedTopicLabelValues([])
-      setTopicLabelBindStatus('saved')
-    } catch (error) {
-      setTopicLabelBindStatus('error')
-      setTopicLabelBindError(error instanceof Error ? error.message : String(error))
     }
   }
 
@@ -2950,35 +2465,10 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                 saveStatus: readingParseSaveStatus,
                 saveError: readingParseSaveError,
               }}
-              topicLabel={{
-                status: topicLabelStatus,
-                error: topicLabelError,
-                trace: topicLabelTrace,
-                recommendations: topicLabelRecommendations,
-                selectedValues: selectedTopicLabelValues,
-                bindStatus: topicLabelBindStatus,
-                bindError: topicLabelBindError,
-              }}
-              difficulty={{
-                drafts: difficultyDrafts,
-                saveStatus: difficultySaveStatus,
-                saveErrors: difficultySaveErrors,
-              }}
               onBack={backToList}
               onEdit={openEditEntry}
               onDelete={handleDeleteQuestionGroup}
               onAddToBasket={addToBasket}
-              onVerify={handleVerifyQuestionGroup}
-              onAnalyzeReading={handleAnalyzeReadingQuestionGroup}
-              onSaveReadingParse={handleSaveReadingParseResult}
-              onSaveClozeParse={handleSaveClozeParseResult}
-              onSaveSevenChoicesParse={handleSaveSevenChoicesParseResult}
-              onSaveGrammarParse={handleSaveGrammarParseResult}
-              onGenerateTopicLabels={handleGenerateTopicLabels}
-              onToggleTopicLabel={toggleTopicLabelSelection}
-              onBindTopicLabels={handleBindTopicLabels}
-              onSaveQuestionDifficulty={handleSaveQuestionDifficulty}
-              onUpdateDifficultyDraft={updateDifficultyDraft}
             />
           ) : null}
         </section>

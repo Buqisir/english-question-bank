@@ -202,8 +202,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
   const placeholder = useMemo(() => {
     if (dataLoading) return '正在连接本地题库…'
-    if (state.kind === 'clarification') return '换个说法，比如：偏说明文 / 中等难度'
-    return '比如：找一道讲生态恢复的阅读 C，中等难度'
+    if (state.kind === 'clarification') return '换个说法，比如：偏说明文 / 主旨概括'
+    return '比如：找一道讲生态恢复的阅读 C，主旨概括'
   }, [dataLoading, state])
 
   const submitDisabled = dataLoading || state.kind === 'loading' || intent.trim().length === 0
@@ -315,7 +315,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             {pickClarificationLine(state.pendingQuery, state.question)}
           </p>
           <p className="concierge-clarification-examples">
-            比如：科技话题 / 中等难度 / 主旨概括 / 抽象推断。
+            比如：科技话题 / 说明文 / 主旨概括 / 抽象推断。
           </p>
         </div>
       )}

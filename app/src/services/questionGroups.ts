@@ -20,7 +20,6 @@ import type {
   QuestionGroupCard,
   QuestionGroupDetail,
   RunImportBatchInput,
-  SynonymDifficultyQuestionGroupResult,
   TopicLabel,
   UpdateQuestionGroupInput,
 } from '../domain/questionBank'
@@ -566,28 +565,6 @@ export async function saveReadingParseResult(
   }
 }
 
-export type SaveQuestionDifficultyRatingInput = {
-  teacherDifficulty: number | null
-  aiDifficultyScore?: number | null
-  difficultyOverrideReason?: string
-  difficultyOverrideNote?: string
-}
-
-export async function saveQuestionDifficultyRating(
-  questionId: string,
-  input: SaveQuestionDifficultyRatingInput,
-): Promise<{ question: import('../domain/questionBank').QuestionDetail }> {
-  const response = await fetch(apiPath(`/api/questions/${encodeURIComponent(questionId)}/difficulty-rating`), {
-    body: JSON.stringify(input),
-    headers: { 'content-type': 'application/json' },
-    method: 'PUT',
-  })
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to save difficulty rating: ${response.status}`))
-  }
-  return (await response.json()) as { question: import('../domain/questionBank').QuestionDetail }
-}
-
 export async function parseReadingQuestionGroup(
   questionGroupId: string,
   apiKey: string,
@@ -603,21 +580,6 @@ export async function parseReadingQuestionGroup(
     throw new Error(await readErrorMessage(response, `Failed to parse reading: ${response.status}`))
   }
   return (await response.json()) as import('../domain/questionBank').ReadingParseQuestionGroupResult
-}
-
-export async function generateSynonymDifficulty(
-  questionGroupId: string,
-  readingParseResult?: import('../domain/questionBank').ReadingParseQuestionGroupResult | null,
-): Promise<SynonymDifficultyQuestionGroupResult> {
-  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/synonym-difficulty`), {
-    body: JSON.stringify({ readingParseResult, requestId: crypto.randomUUID?.() || '' }),
-    headers: { 'content-type': 'application/json' },
-    method: 'POST',
-  })
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to generate synonym difficulty: ${response.status}`))
-  }
-  return (await response.json()) as SynonymDifficultyQuestionGroupResult
 }
 
 export type GenerateQuestionGroupSummaryResult = {

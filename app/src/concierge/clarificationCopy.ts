@@ -6,7 +6,7 @@
  *     prefer it (we don't want to lose the model's intent-aware nudge).
  *   - If the backend's question contains mechanical / form-validator phrases,
  *     fall back to a calm front-end template that just asks for one more
- *     direction (主题、题型、难度，或考法).
+ *     direction (主题、题型，或考法).
  *
  * Pure function, exported for unit verification.
  */
@@ -28,7 +28,7 @@ export function pickClarificationLine(
   if (!isMechanical) {
     return q
   }
-  return `我理解你想找「${pendingQuery}」。再补一个方向就行：主题、题型、难度，或考法。`
+  return `我理解你想找「${pendingQuery}」。再补一个方向就行：主题、题型，或考法。`
 }
 
 /**

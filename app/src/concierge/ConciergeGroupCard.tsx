@@ -9,17 +9,9 @@
 
 import { type ReactNode } from 'react'
 import {
-  difficultyLabel,
   groupTypeLabel,
-  type Difficulty,
   type QuestionGroupCard,
 } from '../domain/questionBank.ts'
-
-const DIFFICULTY_CLASS: Record<Difficulty, string> = {
-  low: 'concierge-difficulty-low',
-  medium: 'concierge-difficulty-medium',
-  high: 'concierge-difficulty-high',
-}
 
 function isDisplayTag(tag: string | undefined): tag is string {
   const value = (tag || '').trim()
@@ -64,7 +56,6 @@ function topicLeafLabel(group: QuestionGroupCard): string | null {
 
 function buildTagPills(group: QuestionGroupCard): string[] {
   const pills: string[] = []
-  pills.push(difficultyLabel[group.difficulty])
   const type = groupTypeLabel[group.groupType]
   if (type) pills.push(type)
   if (Number.isFinite(group.questionCount) && group.questionCount > 0) {
@@ -125,10 +116,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           {section && <span className="concierge-group-section">{section}</span>}
           <strong className="concierge-group-title" title={passageTitle}>{passageTitle}</strong>
         </div>
-        <span
-          className={`concierge-difficulty-dot ${DIFFICULTY_CLASS[group.difficulty]}`}
-          aria-hidden="true"
-        />
       </header>
 
       {summary && (
