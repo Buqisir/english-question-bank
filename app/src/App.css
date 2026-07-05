@@ -5394,7 +5394,8 @@ button:disabled {
 /* Selected chip = the system's red pen. DESIGN.md Chips: 选中态用赭红或暖金，
    未选中保持暖中性。Oxblood #B8323C carries 「当前选中」semantics; the fill
    stays a faint 10% wash so multiple selected chips never bank past the
-   ≤10% accent budget (Red-Pen Rule). Oxblood-on-wash tests ~5.3:1 (AA). */
+   ≤10% accent budget (Red-Pen Rule). Oxblood-on-wash tests ~4.98:1 at rest /
+   ~4.53:1 on hover — both clear WCAG AA (4.5:1). */
 .concierge-starter-chip.is-selected {
   background: rgba(184, 50, 60, 0.10);
   border-color: #B8323C;

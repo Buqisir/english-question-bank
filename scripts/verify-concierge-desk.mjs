@@ -681,6 +681,7 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   assert('selected chip border is oxblood #B8323C (warm accent, not ink)', /border-color:\s*#B8323C/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip text is oxblood #B8323C', /color:\s*#B8323C/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip is NOT ink-filled #1A1A1A (DESIGN.md 选中态用赭红/暖金)', !/#1A1A1A/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip fill is a faint oxblood wash, not opaque', /background:\s*rgba\(184,\s*50,\s*60,/i.test(chipSelectedRule), chipSelectedRule)
 
   // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
