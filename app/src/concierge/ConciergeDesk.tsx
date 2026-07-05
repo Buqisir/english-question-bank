@@ -63,22 +63,23 @@ export type ConciergeDeskProps = {
 const DEFAULT_FEED_PAGE_SIZE = 8
 
 /** UI 门面刀 F2 — muted dimension labels in front of each chip row. */
-const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'region' | 'sourceType', string> = {
+const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'region' | 'sourceType' | 'topicGroup', string> = {
   groupType: '题型',
   year: '年份',
   region: '地区',
   sourceType: '来源',
+  topicGroup: '主题',
 }
 
 /**
- * Chip-wall progressive disclosure — 题型/年份 (the two universal axes) stay
- * visible; 地区 (the 12-option wall) and 来源 collapse behind "更多筛选" so the
- * filter row reads as a quiet refinement, not a form wall (PRODUCT.md: content
- * is the star, don't 堆筛选控件). An active region/source filter pins the full
- * set open so a selection is never hidden.
+ * Chip-wall progressive disclosure — 题型/年份/主题 (I16d PO 拍板: 主题默认露)
+ * stay visible; 地区 (the 12-option wall) and 来源 collapse behind "更多筛选" so
+ * the filter row reads as a quiet refinement, not a form wall (PRODUCT.md:
+ * content is the star, don't 堆筛选控件). An active region/source filter pins
+ * the full set open so a selection is never hidden.
  */
-const DEFAULT_FILTER_DIMS = ['groupType', 'year'] as const
-const ALL_FILTER_DIMS = ['groupType', 'year', 'region', 'sourceType'] as const
+const DEFAULT_FILTER_DIMS = ['groupType', 'year', 'topicGroup'] as const
+const ALL_FILTER_DIMS = ['groupType', 'year', 'topicGroup', 'region', 'sourceType'] as const
 
 /**
  * Restart cut ⑤ — a non-empty result set is "all weak" when every hit only
@@ -128,7 +129,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     filters.groupType !== undefined ||
     filters.year !== undefined ||
     filters.region !== undefined ||
-    filters.sourceType !== undefined
+    filters.sourceType !== undefined ||
+    filters.topicGroup !== undefined
   // Progressive disclosure: collapse 地区/来源 by default. A hidden-dim filter
   // being active pins the full set open (never hide a live selection); the
   // toggle is suppressed in that case since 清除筛选 is the way back.
