@@ -6,8 +6,6 @@ import {
   FileText,
   LogOut,
   RefreshCw,
-  Save,
-  Sparkles,
   Tag,
   Trash2,
   X,
@@ -33,7 +31,6 @@ import {
   type PaperWorkflow,
   type QuestionGroupCard,
   type QuestionGroupDetail,
-  type TopicLabel,
   type VerifyQuestionGroupResult,
   type ReadingParseQuestionGroupResult,
   type ClozeParseQuestionGroupResult,
@@ -62,23 +59,11 @@ import {
   fetchQuestionGroups,
   generateImportAnswerAlignment,
   generateImportBundleDraft,
-  generateQuestionGroupSummary as generateQuestionGroupSummaryRequest,
-  generateTopicLabels as generateTopicLabelsRequest,
-  bindTopicLabels as bindTopicLabelsRequest,
   runImportBatch,
   savePaperSet,
-  saveClozeParseResultRequest,
-  saveSevenChoicesParseResultRequest,
-  saveGrammarParseResultRequest,
-  saveReadingParseResult as saveReadingParseResultRequest,
   updatePaperSet as updatePaperSetRequest,
   scanImportDirectory,
   uploadImportFile,
-  parseReadingQuestionGroup as parseReadingQuestionGroupRequest,
-  verifyQuestionGroup as verifyQuestionGroupRequest,
-  parseClozeGroup as parseClozeGroupRequest,
-  parseSevenChoicesGroup as parseSevenChoicesGroupRequest,
-  parseGrammarGroup as parseGrammarGroupRequest,
   parseImportFile as parseImportFileRequest,
   backfillTopicLabels,
   type BackfillTopicLabelsResult,
@@ -102,13 +87,6 @@ import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { QuestionGroupDetailView } from './features/question-detail/QuestionGroupDetailView'
 import { compactPreview } from './features/question-detail/detailHelpers'
-
-type AiEnhancementTask = 'summary' | 'topicLabels' | 'answerParse'
-
-type AiEnhancementTaskState = {
-  status: 'idle' | 'running' | 'done' | 'skipped' | 'error'
-  message: string
-}
 
 function readFileAsBase64(file: File) {
   return new Promise<string>((resolve, reject) => {
@@ -276,23 +254,6 @@ const importBatchItemStatusLabel: Record<ImportBatch['items'][number]['status'],
 }
 
 const objectiveImportGroupTypes = new Set<GroupType>(['reading', 'seven_choices', 'cloze', 'grammar_cloze'])
-const aiEnhancementTasks: Array<{ key: AiEnhancementTask; label: string; description: string }> = [
-  { key: 'summary', label: '简介生成', description: '用 DeepSeek Flash 非思考生成并写回题组摘要' },
-  { key: 'topicLabels', label: '主题划分', description: '用 DeepSeek Flash 非思考推荐话题标签' },
-  { key: 'answerParse', label: 'AI答案解析', description: '生成解析并保存到本地题库' },
-]
-const aiEnhancementTaskLabel: Record<AiEnhancementTask, string> = {
-  summary: '简介生成',
-  topicLabels: '主题划分',
-  answerParse: 'AI答案解析',
-}
-const aiEnhancementTaskStatusLabel: Record<AiEnhancementTaskState['status'], string> = {
-  idle: '待处理',
-  running: '处理中',
-  done: '已完成',
-  skipped: '已跳过',
-  error: '失败',
-}
 const objectivePaperOrder = ['阅读理解 A', '阅读理解 B', '阅读理解 C', '阅读理解 D', '七选五', '完形填空', '语法填空']
 const paperWorkflowStatusHint: Record<PaperWorkflow['status'], string> = {
   not_started: '未开始',
@@ -325,35 +286,6 @@ function getObjectivePaperGroups(groups: QuestionGroupCard[], paperTitle: string
   return objectivePaperOrder
     .map((sectionTitle) => groupsByTitle.get(`${paperTitle} ${sectionTitle}`))
     .filter((group): group is QuestionGroupCard => Boolean(group))
-}
-
-function createEmptyAiEnhancementTaskState(): AiEnhancementTaskState {
-  return {
-    status: 'idle',
-    message: '',
-  }
-}
-
-function createAiEnhancementStatus(groups: QuestionGroupCard[]) {
-  return Object.fromEntries(
-    groups.map((group) => [
-      group.id,
-      Object.fromEntries(aiEnhancementTasks.map((task) => [task.key, createEmptyAiEnhancementTaskState()])),
-    ]),
-  ) as Record<string, Record<AiEnhancementTask, AiEnhancementTaskState>>
-}
-
-function mergeQuestionGroupCardsById(groups: QuestionGroupCard[]) {
-  const seen = new Set<string>()
-  const merged: QuestionGroupCard[] = []
-
-  groups.forEach((group) => {
-    if (seen.has(group.id)) return
-    seen.add(group.id)
-    merged.push(group)
-  })
-
-  return merged
 }
 
 function formatWorkflowExport(file: PaperWorkflow['exports']['studentDocx']) {
@@ -783,23 +715,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [paperBuildStatus, setPaperBuildStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [paperBuildError, setPaperBuildError] = useState('')
   const [paperBuildResult, setPaperBuildResult] = useState<PaperSetSummary | null>(null)
-  const [aiEnhancementTargets, setAiEnhancementTargets] = useState<QuestionGroupCard[]>([])
-  const [aiEnhancementSelection, setAiEnhancementSelection] = useState<Record<AiEnhancementTask, boolean>>({
-    summary: true,
-    topicLabels: true,
-    answerParse: true,
-  })
-  const [aiEnhancementStatus, setAiEnhancementStatus] = useState<
-    Record<string, Record<AiEnhancementTask, AiEnhancementTaskState>>
-  >({})
-  const [aiEnhancementRunStatus, setAiEnhancementRunStatus] = useState<'idle' | 'running' | 'done' | 'error'>('idle')
-  const [aiEnhancementError, setAiEnhancementError] = useState('')
-  const [aiEnhancementTopicCandidates, setAiEnhancementTopicCandidates] = useState<Record<string, TopicLabel[]>>({})
-  const [aiEnhancementSelectedTopicValues, setAiEnhancementSelectedTopicValues] = useState<Record<string, string[]>>({})
-  const [aiEnhancementTopicBindStatus, setAiEnhancementTopicBindStatus] = useState<
-    Record<string, 'idle' | 'saving' | 'saved' | 'error'>
-  >({})
-  const [aiEnhancementTopicBindError, setAiEnhancementTopicBindError] = useState<Record<string, string>>({})
   const existingQuestionGroupTitles = useMemo(() => new Set(questionGroups.map((group) => group.title)), [questionGroups])
   const isDraftGroupAlreadyInQuestionBank = (group: ImportDraftGroup) =>
     existingQuestionGroupTitles.has(group.title) ||
@@ -974,19 +889,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [openInsertionIndex, closeInsertionMenu])
-
-  useEffect(() => {
-    setAiEnhancementStatus((currentStatus) => {
-      if (aiEnhancementTargets.length === 0) return {}
-      const nextStatus = createAiEnhancementStatus(aiEnhancementTargets)
-      aiEnhancementTargets.forEach((target) => {
-        if (currentStatus[target.id]) {
-          nextStatus[target.id] = currentStatus[target.id]
-        }
-      })
-      return nextStatus
-    })
-  }, [aiEnhancementTargets])
 
   const questionGroupById = useMemo(() => new Map(questionGroups.map((group) => [group.id, group])), [questionGroups])
   // readingParseByQuestionNo / clozeParseByQuestionNo / sevenChoicesParseByQuestionNo /
@@ -1410,340 +1312,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  function showAiEnhancementPanel(groups: QuestionGroupCard[], mode: 'replace' | 'append' = 'replace') {
-    const targets = groups.filter((group) => objectiveImportGroupTypes.has(group.groupType))
-    if (targets.length === 0) return
-
-    setAiEnhancementTargets((currentTargets) => {
-      return mergeQuestionGroupCardsById(mode === 'append' ? [...targets, ...currentTargets] : targets)
-    })
-    setAiEnhancementRunStatus('idle')
-    setAiEnhancementError('')
-    if (mode === 'replace') {
-      setAiEnhancementTopicCandidates({})
-      setAiEnhancementSelectedTopicValues({})
-      setAiEnhancementTopicBindStatus({})
-      setAiEnhancementTopicBindError({})
-    }
-  }
-
-  function updateAiEnhancementTaskStatus(
-    questionGroupId: string,
-    task: AiEnhancementTask,
-    nextState: Partial<AiEnhancementTaskState>,
-  ) {
-    setAiEnhancementStatus((currentStatus) => {
-      const emptyGroupStatus = Object.fromEntries(
-        aiEnhancementTasks.map((item) => [item.key, createEmptyAiEnhancementTaskState()]),
-      ) as Record<AiEnhancementTask, AiEnhancementTaskState>
-      const currentGroupStatus = currentStatus[questionGroupId] || emptyGroupStatus
-      return {
-        ...currentStatus,
-        [questionGroupId]: {
-          ...currentGroupStatus,
-          [task]: {
-            ...createEmptyAiEnhancementTaskState(),
-            ...currentGroupStatus[task],
-            ...nextState,
-          },
-        },
-      }
-    })
-  }
-
-  function updateAiEnhancedQuestionGroup(card: QuestionGroupCard) {
-    setQuestionGroups((groups) => groups.map((group) => (group.id === card.id ? { ...group, ...card } : group)))
-    setAiEnhancementTargets((targets) => targets.map((target) => (target.id === card.id ? { ...target, ...card } : target)))
-    setSelectedDetail((detail) =>
-      detail && detail.id === card.id
-        ? {
-            ...detail,
-            ...card,
-            passage: {
-              ...detail.passage,
-              summary: card.summary,
-            },
-          }
-        : detail,
-    )
-  }
-
-  function toggleAiEnhancementTask(task: AiEnhancementTask) {
-    setAiEnhancementSelection((selection) => ({ ...selection, [task]: !selection[task] }))
-    setAiEnhancementRunStatus('idle')
-    setAiEnhancementError('')
-  }
-
-  function toggleAiEnhancementTopicLabelSelection(questionGroupId: string, label: string) {
-    setAiEnhancementTopicBindStatus((status) => ({ ...status, [questionGroupId]: 'idle' }))
-    setAiEnhancementTopicBindError((errors) => ({ ...errors, [questionGroupId]: '' }))
-    setAiEnhancementSelectedTopicValues((currentValues) => {
-      const values = currentValues[questionGroupId] || []
-      return {
-        ...currentValues,
-        [questionGroupId]: values.includes(label) ? values.filter((value) => value !== label) : [...values, label],
-      }
-    })
-  }
-
-  async function runAiEnhancementAnswerParse(detail: QuestionGroupDetail, key: string) {
-    if (detail.groupType === 'reading') {
-      const parseResult = await parseReadingQuestionGroupRequest(detail.id, key, aiModel, aiThinkingMode)
-      const nextVerifyResult = await verifyQuestionGroupRequest(detail.id, key, aiModel, aiThinkingMode)
-      const saved = await saveReadingParseResultRequest(detail.id, parseResult, nextVerifyResult)
-      if (saved.questionGroup) {
-        updateAiEnhancedQuestionGroup(saved.questionGroup)
-      }
-      if (selectedDetail?.id === detail.id) {
-        setReadingParseResult(saved.readingParseResult)
-        setReadingParseStatus('loaded')
-        setReadingParseSaveStatus('saved')
-        if (saved.verifyResult) {
-          setVerifyResult(saved.verifyResult)
-          setVerifyStatus('loaded')
-        }
-        setSelectedDetail((currentDetail) =>
-          currentDetail && currentDetail.id === detail.id
-            ? {
-                ...currentDetail,
-                ...(saved.questionGroup ?? {}),
-                readingParseResult: saved.readingParseResult,
-                readingVerifyResult: saved.verifyResult,
-                passage: {
-                  ...currentDetail.passage,
-                  summary: saved.questionGroup?.summary ?? currentDetail.passage.summary,
-                },
-              }
-            : currentDetail,
-        )
-      }
-      return `${saved.readingParseResult.parsedCount} / ${saved.readingParseResult.questionCount} 题已保存`
-    }
-
-    if (detail.groupType === 'cloze') {
-      const parseResult = await parseClozeGroupRequest(detail.id, key, aiModel, aiThinkingMode)
-      const saved = await saveClozeParseResultRequest(detail.id, parseResult)
-      if (selectedDetail?.id === detail.id) {
-        setClozeParseResult(saved.clozeParseResult)
-        setClozeParseStatus('loaded')
-        setClozeParseSaveStatus('saved')
-        setVerifyResult(buildClozeVerifyResult(detail, saved.clozeParseResult))
-        setVerifyStatus('loaded')
-        setSelectedDetail((currentDetail) =>
-          currentDetail && currentDetail.id === detail.id
-            ? {
-                ...currentDetail,
-                clozeParseResult: saved.clozeParseResult,
-              }
-            : currentDetail,
-        )
-      }
-      return `${saved.clozeParseResult.parsedCount} / ${saved.clozeParseResult.questionCount} 题已保存`
-    }
-
-    if (detail.groupType === 'seven_choices') {
-      const parseResult = await parseSevenChoicesGroupRequest(detail.id, key, aiModel, aiThinkingMode)
-      const saved = await saveSevenChoicesParseResultRequest(detail.id, parseResult)
-      if (selectedDetail?.id === detail.id) {
-        setSevenChoicesParseResult(saved.sevenChoicesParseResult)
-        setSevenChoicesParseStatus('loaded')
-        setSevenChoicesParseSaveStatus('saved')
-        setVerifyResult(buildSevenChoicesVerifyResult(detail, saved.sevenChoicesParseResult))
-        setVerifyStatus('loaded')
-        setSelectedDetail((currentDetail) =>
-          currentDetail && currentDetail.id === detail.id
-            ? {
-                ...currentDetail,
-                sevenChoicesParseResult: saved.sevenChoicesParseResult,
-              }
-            : currentDetail,
-        )
-      }
-      return `${saved.sevenChoicesParseResult.parsedCount} / ${saved.sevenChoicesParseResult.questionCount} 题已保存`
-    }
-
-    if (detail.groupType === 'grammar_cloze') {
-      const parseResult = await parseGrammarGroupRequest(detail.id, key, aiModel, aiThinkingMode)
-      const saved = await saveGrammarParseResultRequest(detail.id, parseResult)
-      if (selectedDetail?.id === detail.id) {
-        setGrammarParseResult(saved.grammarParseResult)
-        setGrammarParseStatus('loaded')
-        setGrammarParseSaveStatus('saved')
-        setVerifyResult(buildGrammarVerifyResult(detail, saved.grammarParseResult))
-        setVerifyStatus('loaded')
-        setSelectedDetail((currentDetail) =>
-          currentDetail && currentDetail.id === detail.id
-            ? {
-                ...currentDetail,
-                grammarParseResult: saved.grammarParseResult,
-              }
-            : currentDetail,
-        )
-      }
-      return `${saved.grammarParseResult.parsedCount} / ${saved.grammarParseResult.questionCount} 空已保存`
-    }
-
-    return ''
-  }
-
-  async function handleRunAiEnhancement() {
-    const selectedTasks = aiEnhancementTasks.filter((task) => aiEnhancementSelection[task.key]).map((task) => task.key)
-    if (aiEnhancementTargets.length === 0) {
-      setAiEnhancementRunStatus('error')
-      setAiEnhancementError('请先把题组入库，再进行 AI增强。')
-      return
-    }
-    if (selectedTasks.length === 0) {
-      setAiEnhancementRunStatus('error')
-      setAiEnhancementError('请至少选择一个 AI增强项目。')
-      return
-    }
-
-    const key = aiApiKey.trim()
-    localStorage.setItem('ai-api-key', key)
-    localStorage.setItem('ai-model', aiModel)
-    localStorage.setItem('ai-thinking-mode', aiThinkingMode ? 'on' : 'off')
-    setAiEnhancementRunStatus('running')
-    setAiEnhancementError('')
-
-    for (const target of aiEnhancementTargets) {
-      let detail: QuestionGroupDetail
-      try {
-        detail = await fetchQuestionGroupDetail(target.id)
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error)
-        selectedTasks.forEach((task) =>
-          updateAiEnhancementTaskStatus(target.id, task, {
-            status: 'error',
-            message,
-          }),
-        )
-        continue
-      }
-
-      if (selectedTasks.includes('summary')) {
-        updateAiEnhancementTaskStatus(target.id, 'summary', { status: 'running', message: '正在生成简介' })
-        try {
-          const result = await generateQuestionGroupSummaryRequest(detail.id, key, DEFAULT_AI_MODEL, false)
-          updateAiEnhancedQuestionGroup(result.questionGroup)
-          updateAiEnhancementTaskStatus(target.id, 'summary', {
-            status: 'done',
-            message: result.summary,
-          })
-        } catch (error) {
-          updateAiEnhancementTaskStatus(target.id, 'summary', {
-            status: 'error',
-            message: error instanceof Error ? error.message : String(error),
-          })
-        }
-      }
-
-      if (selectedTasks.includes('topicLabels')) {
-        updateAiEnhancementTaskStatus(target.id, 'topicLabels', { status: 'running', message: '正在划分主题' })
-        try {
-          const result = await generateTopicLabelsRequest(detail.id, key, DEFAULT_AI_MODEL, false)
-          setAiEnhancementTopicCandidates((candidates) => ({
-            ...candidates,
-            [target.id]: result.topicLabels,
-          }))
-          setAiEnhancementSelectedTopicValues((values) => ({
-            ...values,
-            [target.id]: result.topicLabels.map((topicLabel) => topicLabel.label),
-          }))
-          setAiEnhancementTopicBindStatus((status) => ({ ...status, [target.id]: 'idle' }))
-          setAiEnhancementTopicBindError((errors) => ({ ...errors, [target.id]: '' }))
-          updateAiEnhancementTaskStatus(target.id, 'topicLabels', {
-            status: 'done',
-            message: `${result.topicLabels.length} 个候选，待选择绑定`,
-          })
-        } catch (error) {
-          updateAiEnhancementTaskStatus(target.id, 'topicLabels', {
-            status: 'error',
-            message: error instanceof Error ? error.message : String(error),
-          })
-        }
-      }
-
-      if (selectedTasks.includes('answerParse')) {
-        updateAiEnhancementTaskStatus(target.id, 'answerParse', { status: 'running', message: '正在生成并保存解析' })
-        try {
-          const message = await runAiEnhancementAnswerParse(detail, key)
-          updateAiEnhancementTaskStatus(target.id, 'answerParse', {
-            status: message ? 'done' : 'skipped',
-            message: message || '该题型暂不支持 AI答案解析',
-          })
-        } catch (error) {
-          updateAiEnhancementTaskStatus(target.id, 'answerParse', {
-            status: 'error',
-            message: error instanceof Error ? error.message : String(error),
-          })
-        }
-      }
-    }
-
-    await refreshQuestionGroups()
-    await refreshPaperWorkflows()
-    setAiEnhancementRunStatus('done')
-  }
-
-  async function handleBindAiEnhancementTopicLabels(questionGroupId: string) {
-    const candidates = aiEnhancementTopicCandidates[questionGroupId] || []
-    const selectedValues = aiEnhancementSelectedTopicValues[questionGroupId] || []
-    const selectedLabels = candidates.filter((topicLabel) => selectedValues.includes(topicLabel.label))
-
-    if (selectedLabels.length === 0) {
-      setAiEnhancementTopicBindStatus((status) => ({ ...status, [questionGroupId]: 'error' }))
-      setAiEnhancementTopicBindError((errors) => ({ ...errors, [questionGroupId]: '请先选择至少一个话题标签。' }))
-      return
-    }
-
-    setAiEnhancementTopicBindStatus((status) => ({ ...status, [questionGroupId]: 'saving' }))
-    setAiEnhancementTopicBindError((errors) => ({ ...errors, [questionGroupId]: '' }))
-
-    try {
-      const result = await bindTopicLabelsRequest(questionGroupId, selectedLabels)
-      setQuestionGroups((groups) =>
-        groups.map((group) =>
-          group.id === questionGroupId
-            ? {
-                ...group,
-                topicLabels: result.topicLabels,
-              }
-            : group,
-        ),
-      )
-      setAiEnhancementTargets((targets) =>
-        targets.map((target) =>
-          target.id === questionGroupId
-            ? {
-                ...target,
-                topicLabels: result.topicLabels,
-              }
-            : target,
-        ),
-      )
-      setSelectedDetail((detail) =>
-        detail && detail.id === questionGroupId
-          ? {
-              ...detail,
-              topicLabels: result.topicLabels,
-            }
-          : detail,
-      )
-      setAiEnhancementTopicBindStatus((status) => ({ ...status, [questionGroupId]: 'saved' }))
-      updateAiEnhancementTaskStatus(questionGroupId, 'topicLabels', {
-        status: 'done',
-        message: `已绑定 ${result.topicLabels.length} 个标签，可用于检索`,
-      })
-    } catch (error) {
-      setAiEnhancementTopicBindStatus((status) => ({ ...status, [questionGroupId]: 'error' }))
-      setAiEnhancementTopicBindError((errors) => ({
-        ...errors,
-        [questionGroupId]: error instanceof Error ? error.message : String(error),
-      }))
-    }
-  }
-
   async function handleBackfillTopicLabels() {
     const key = aiApiKey.trim()
     localStorage.setItem('ai-api-key', key)
@@ -1814,7 +1382,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       setQuestionGroups((groups) => [saved, ...groups.filter((item) => item.id !== saved.id)])
       setDataStatus('sqlite')
       setCommitStatusByDraftGroupId((status) => ({ ...status, [group.id]: 'saved' }))
-      showAiEnhancementPanel([saved], 'append')
       await refreshPaperWorkflows()
     } catch (error) {
       setCommitStatusByDraftGroupId((status) => ({ ...status, [group.id]: 'error' }))
@@ -1880,7 +1447,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       await refreshPaperWorkflows()
       setBatchCommitResult({ saved: savedGroups.length, skipped })
       setBatchCommitStatus('saved')
-      showAiEnhancementPanel(savedGroups, 'replace')
     } catch (error) {
       setBatchCommitStatus('error')
       setBatchCommitError(error instanceof Error ? error.message : String(error))
@@ -3085,118 +2651,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                         </span>
                       )}
                       {batchCommitStatus === 'error' && <span className="form-error compact">{batchCommitError}</span>}
-                    </div>
-                  )}
-
-                  {aiEnhancementTargets.length > 0 && (
-                    <div className="ai-enhancement-panel" aria-label="AI 增强面板">
-                      <div className="ai-enhancement-head">
-                        <div>
-                          <strong>AI增强</strong>
-                          <span>
-                            已入库 {aiEnhancementTargets.length} 组 · 模型 {aiModel} · 推理
-                            {aiThinkingMode ? '开启' : '关闭'}
-                          </span>
-                        </div>
-                        <button
-                          className="add-button"
-                          type="button"
-                          disabled={aiEnhancementRunStatus === 'running'}
-                          onClick={handleRunAiEnhancement}
-                        >
-                          <Sparkles size={16} />
-                          {aiEnhancementRunStatus === 'running' ? 'AI增强中' : '开始 AI增强'}
-                        </button>
-                      </div>
-
-                      <div className="ai-enhancement-options" aria-label="AI 增强项目">
-                        {aiEnhancementTasks.map((task) => (
-                          <label className="checkbox-field compact" key={task.key}>
-                            <input
-                              checked={aiEnhancementSelection[task.key]}
-                              disabled={aiEnhancementRunStatus === 'running'}
-                              type="checkbox"
-                              onChange={() => toggleAiEnhancementTask(task.key)}
-                            />
-                            <span>{task.label}</span>
-                            <em>{task.description}</em>
-                          </label>
-                        ))}
-                      </div>
-
-                      {aiEnhancementRunStatus === 'done' && (
-                        <span className="writeback-result">AI增强已处理完成。</span>
-                      )}
-                      {aiEnhancementRunStatus === 'error' && <span className="form-error compact">{aiEnhancementError}</span>}
-
-                      <div className="ai-enhancement-target-list">
-                        {aiEnhancementTargets.map((target) => (
-                          <article className="ai-enhancement-target" key={target.id}>
-                            <div className="ai-enhancement-target-head">
-                              <div>
-                                <strong>{target.title}</strong>
-                                <span>
-                                  {groupTypeLabel[target.groupType]} · {target.questionCount} 小题
-                                </span>
-                              </div>
-                              <button className="detail-button" type="button" onClick={() => openDetail(target.id)}>
-                                查看
-                              </button>
-                            </div>
-                            <div className="ai-enhancement-task-list">
-                              {aiEnhancementTasks.map((task) => {
-                                const taskState =
-                                  aiEnhancementStatus[target.id]?.[task.key] || createEmptyAiEnhancementTaskState()
-                                return (
-                                  <div className={`ai-enhancement-task ${taskState.status}`} key={task.key}>
-                                    <span>{aiEnhancementTaskLabel[task.key]}</span>
-                                    <strong>{aiEnhancementTaskStatusLabel[taskState.status]}</strong>
-                                    {taskState.message ? <small>{taskState.message}</small> : null}
-                                  </div>
-                                )
-                              })}
-                            </div>
-
-                            {(aiEnhancementTopicCandidates[target.id] || []).length > 0 && (
-                              <div className="topic-label-candidates ai-enhancement-topic-candidates">
-                                {(aiEnhancementTopicCandidates[target.id] || []).map((topicLabel) => (
-                                  <label className="topic-label-option" key={topicLabel.label}>
-                                    <input
-                                      type="checkbox"
-                                      checked={(aiEnhancementSelectedTopicValues[target.id] || []).includes(topicLabel.label)}
-                                      onChange={() => toggleAiEnhancementTopicLabelSelection(target.id, topicLabel.label)}
-                                    />
-                                    <span>{topicLabel.label}</span>
-                                    {topicLabel.confidence !== undefined && topicLabel.confidence > 0 ? (
-                                      <em>{Math.round(topicLabel.confidence * 100)}%</em>
-                                    ) : null}
-                                    {topicLabel.reason ? <small>{topicLabel.reason}</small> : null}
-                                  </label>
-                                ))}
-                                <button
-                                  className="save-button"
-                                  type="button"
-                                  disabled={
-                                    aiEnhancementTopicBindStatus[target.id] === 'saving' ||
-                                    (aiEnhancementSelectedTopicValues[target.id] || []).length === 0
-                                  }
-                                  onClick={() => handleBindAiEnhancementTopicLabels(target.id)}
-                                >
-                                  <Save size={16} />
-                                  {aiEnhancementTopicBindStatus[target.id] === 'saving'
-                                    ? '绑定中'
-                                    : aiEnhancementTopicBindStatus[target.id] === 'saved'
-                                      ? '已绑定'
-                                      : '绑定选中标签'}
-                                </button>
-                                {aiEnhancementTopicBindStatus[target.id] === 'error' && (
-                                  <span className="form-error compact">{aiEnhancementTopicBindError[target.id]}</span>
-                                )}
-                              </div>
-                            )}
-                          </article>
-                        ))}
-                      </div>
                     </div>
                   )}
 

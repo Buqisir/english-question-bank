@@ -190,18 +190,14 @@ for (const fn of retiredHandlers) {
   )
 }
 
-// READ-only state populated by openDetail's回填 + the AI Enhancement sync
-// branch must still be defined — these are NOT part of the retired surface.
+// READ-only state populated by openDetail's回填 must still be defined —
+// these are NOT part of the retired surface.
 for (const state of ['readingParseResult', 'clozeParseResult', 'sevenChoicesParseResult', 'grammarParseResult', 'verifyResult']) {
   assert(
     `App.tsx still defines READ-only state ${state}`,
     new RegExp(`\\[${state}, set${state[0].toUpperCase()}${state.slice(1)}\\]`).test(appTsx),
   )
 }
-assert(
-  'App.tsx still defines runAiEnhancementAnswerParse (AI Enhancement panel, kept)',
-  /async function runAiEnhancementAnswerParse\(/.test(appTsx),
-)
 assert(
   'App.tsx still defines handleBackfillTopicLabels (AI Enhancement batch backfill, distinct from retired handleGenerateTopicLabels)',
   /async function handleBackfillTopicLabels\(/.test(appTsx),
