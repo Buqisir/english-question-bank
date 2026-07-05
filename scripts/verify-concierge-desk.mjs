@@ -750,7 +750,7 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
 
   const noticeRule = css.match(/\.concierge-data-loading\s*\{[^}]*\}/)?.[0] || ''
   assert('.concierge-data-loading rule exists', noticeRule.length > 0, '')
-  assert('notice uses muted ink #9A9180', /color:\s*#9A9180/i.test(noticeRule), '')
+  assert('notice uses muted ink #6B645C (AA-compliant status text)', /color:\s*#6B645C/i.test(noticeRule), '')
 }
 
 // ------------------------------------------------------------------ Test 16
