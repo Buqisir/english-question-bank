@@ -32,7 +32,10 @@
 .ps-surface {
   --ps-page-width: 794px;
   --ps-page-padding: 56px;
-  --ps-active-rail: #d4ad60;
+  /* Active-question rail + focus outline. Teal signature #2C6E56 echoes
+     the shell (Green-Pen active marker); a 2px line stays quiet by area.
+     Screen-only, NOT a shared token — see the header note above. */
+  --ps-active-rail: #2C6E56;
 
   font-family: var(--ps-font-stack);
   color: var(--ps-ink);
