@@ -102,20 +102,18 @@ assert(
 )
 
 // ------------------------------------------------------------------ 5. admin objective-paper-set build no longer jumps to print preview
+//
+// handleBuildObjectivePaperSet itself was retired by legacy-import-retire
+// (ADR-0016 cut 3, ~2026-07-06): it was part of the legacy "导入资料" modal's
+// single-intake flow, which was deleted wholesale along with the modal. Its
+// prior obligation here (never resurrect setViewMode('preview') /
+// loadPreviewForBasketImports) is now moot because the handler no longer
+// exists at all — asserting its absence supersedes the old behavioral check.
 
-const buildHandlerMatch = appTsx.match(/async function handleBuildObjectivePaperSet\(([\s\S]*?)\n {2}\}/)
-assert('App.tsx defines handleBuildObjectivePaperSet', buildHandlerMatch !== null)
-if (buildHandlerMatch) {
-  const body = buildHandlerMatch[0]
-  assert(
-    "handleBuildObjectivePaperSet no longer contains setViewMode('preview')",
-    !/setViewMode\('preview'\)/.test(body),
-  )
-  assert(
-    'handleBuildObjectivePaperSet no longer calls loadPreviewForBasketItems (deleted with the preview branch)',
-    !/loadPreviewForBasketItems/.test(body),
-  )
-}
+assert(
+  'App.tsx no longer defines handleBuildObjectivePaperSet (retired with the legacy import modal, ADR-0016 cut 3)',
+  !/async function handleBuildObjectivePaperSet\(/.test(appTsx),
+)
 
 console.log(`\nclassic-retire-3 verify: ${passed} passed, ${failed} failed`)
 if (failed > 0) {

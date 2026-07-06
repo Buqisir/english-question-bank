@@ -53,7 +53,6 @@ function makeContext(overrides = {}) {
       response.end(JSON.stringify(body))
     },
     listPaperSets: () => [{ id: 'set-1', title: 'Set 1' }],
-    listPaperWorkflowStatuses: () => [{ id: 'wf-1', status: 'ready' }],
     getPaperSet: (id) => ({ id, title: 'Found' }),
     createPaperSet: (input) => ({ id: input.id || 'set-created', input }),
     ...overrides,
@@ -84,18 +83,29 @@ assert('paper-set routes preserve 404 error text', routeSource.includes('Paper s
 
 for (const routeText of [
   '/api\\/paper-sets$',
-  '/api\\/paper-workflows$',
   '/api\\/paper-sets\\/([^/]+)$',
 ]) {
   assert(`paper-set route registered ${routeText}`, routeSource.includes(routeText))
 }
 
+// legacy-import-retire (ADR-0016 cut 3, ~2026-07-06, decisions.md D1) retired
+// the "多卷闭环状态" dashboard wholesale: GET /api/paper-workflows and its
+// backing context.listPaperWorkflowStatuses() are gone, not just moved.
+assert(
+  'paper-set routes no longer register /api/paper-workflows (retired, ADR-0016 cut 3)',
+  !routeSource.includes('/api\\/paper-workflows$'),
+)
+
 assert('api imports paper-set routes module', api.includes("from './paper-sets/routes.mjs'"))
 assert('api registers paper-set routes in serverRoutes', api.includes('...createPaperSetRoutes(),'))
 
-for (const contextName of ['createPaperSet', 'getPaperSet', 'listPaperSets', 'listPaperWorkflowStatuses']) {
+for (const contextName of ['createPaperSet', 'getPaperSet', 'listPaperSets']) {
   assert(`api exposes ${contextName} through context`, new RegExp(`\\b${contextName},`).test(api))
 }
+assert(
+  'api no longer exposes listPaperWorkflowStatuses through context (retired, ADR-0016 cut 3)',
+  !new RegExp('\\blistPaperWorkflowStatuses,').test(api),
+)
 
 assert(
   'api no longer owns inline paper-set route matcher variables',
@@ -106,7 +116,7 @@ assert(
 
 // --- Route count + structure ---------------------------------------------
 const routes = createPaperSetRoutes()
-assert('createPaperSetRoutes returns five routes', routes.length === 5, `got ${routes.length}`)
+assert('createPaperSetRoutes returns four routes', routes.length === 4, `got ${routes.length}`)
 
 // --- No-shadow guard ------------------------------------------------------
 // Within the paper-set routes, no later route may swallow an earlier one for
@@ -116,7 +126,6 @@ assert('createPaperSetRoutes returns five routes', routes.length === 5, `got ${r
 function findShadow(routeList) {
   const probes = [
     ['GET', '/api/paper-sets'],
-    ['GET', '/api/paper-workflows'],
     ['GET', '/api/paper-sets/set-1'],
     ['POST', '/api/paper-sets'],
     ['PUT', '/api/paper-sets/set-1'],
@@ -150,14 +159,11 @@ assert(
   listSets.response.body,
 )
 
-// GET /api/paper-workflows -> 200 { paperWorkflows }
+// GET /api/paper-workflows -> route retired (ADR-0016 cut 3); no longer dispatched
 const listWorkflows = await dispatch(routes, 'GET', '/api/paper-workflows', makeContext())
 assert(
-  'GET /api/paper-workflows returns 200 { paperWorkflows }',
-  listWorkflows.handled &&
-    listWorkflows.response.statusCode === 200 &&
-    listWorkflows.response.body === JSON.stringify({ paperWorkflows: [{ id: 'wf-1', status: 'ready' }] }),
-  listWorkflows.response.body,
+  'GET /api/paper-workflows is no longer handled (retired, ADR-0016 cut 3)',
+  !listWorkflows.handled,
 )
 
 // GET /api/paper-sets/:id present -> 200 { paperSet }

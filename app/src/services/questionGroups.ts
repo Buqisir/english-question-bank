@@ -1,25 +1,14 @@
 import type {
-  ApplyAnswerAlignmentResult,
-  CreateImportBatchInput,
-  CreateImportFileInput,
   CreatePaperSetInput,
   CreateQuestionGroupInput,
   ExportDocxInput,
   ExportDocxResult,
   ExportPdfInput,
   ExportPdfResult,
-  ImportAnswerAlignmentDraft,
-  ImportBatch,
-  ImportBundle,
-  ImportBundleDraft,
-  ImportFileParseResult,
-  ImportFileRecord,
-  PaperWorkflow,
   PaperSetDetail,
   PaperSetSummary,
   QuestionGroupCard,
   QuestionGroupDetail,
-  RunImportBatchInput,
   TopicLabel,
   UpdateQuestionGroupInput,
 } from '../domain/questionBank'
@@ -54,199 +43,6 @@ export async function fetchQuestionGroupDetail(id: string) {
 
   const data = (await response.json()) as QuestionGroupDetailResponse
   return data.questionGroup
-}
-
-type PaperSetsResponse = {
-  paperSets: PaperSetSummary[]
-}
-
-type PaperWorkflowsResponse = {
-  paperWorkflows: PaperWorkflow[]
-}
-
-type ImportFilesResponse = {
-  importFiles: ImportFileRecord[]
-}
-
-type ImportBundlesResponse = {
-  importBundles: ImportBundle[]
-}
-
-type ImportBatchesResponse = {
-  importBatches: ImportBatch[]
-}
-
-type ImportBatchResponse = {
-  importBatch: ImportBatch
-}
-
-type ImportBundleDraftResponse = {
-  draft: ImportBundleDraft
-}
-
-type ImportAnswerAlignmentResponse = {
-  alignment: ImportAnswerAlignmentDraft
-}
-
-type ApplyAnswerAlignmentResponse = {
-  result: ApplyAnswerAlignmentResult
-}
-
-type ImportFileParseResponse = {
-  parse: ImportFileParseResult
-}
-
-export async function fetchPaperSets() {
-  const response = await fetch(apiPath('/api/paper-sets'))
-
-  if (!response.ok) {
-    throw new Error(`Failed to load paper sets: ${response.status}`)
-  }
-
-  const data = (await response.json()) as PaperSetsResponse
-  return data.paperSets
-}
-
-export async function fetchPaperWorkflows() {
-  const response = await fetch(apiPath('/api/paper-workflows'))
-
-  if (!response.ok) {
-    throw new Error(`Failed to load paper workflows: ${response.status}`)
-  }
-
-  const data = (await response.json()) as PaperWorkflowsResponse
-  return data.paperWorkflows
-}
-
-export async function fetchImportFiles() {
-  const response = await fetch(apiPath('/api/import-files'))
-
-  if (!response.ok) {
-    throw new Error(`Failed to load import files: ${response.status}`)
-  }
-
-  const data = (await response.json()) as ImportFilesResponse
-  return data.importFiles
-}
-
-export async function fetchImportBundles() {
-  const response = await fetch(apiPath('/api/import-bundles'))
-
-  if (!response.ok) {
-    throw new Error(`Failed to load import bundles: ${response.status}`)
-  }
-
-  const data = (await response.json()) as ImportBundlesResponse
-  return data.importBundles
-}
-
-export async function fetchImportBatches() {
-  const response = await fetch(apiPath('/api/import-batches'))
-
-  if (!response.ok) {
-    throw new Error(`Failed to load import batches: ${response.status}`)
-  }
-
-  const data = (await response.json()) as ImportBatchesResponse
-  return data.importBatches
-}
-
-export async function scanImportDirectory(input: CreateImportBatchInput) {
-  const response = await fetch(apiPath('/api/import-batches/scan'), {
-    body: JSON.stringify(input),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to scan import directory: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ImportBatchResponse
-  return data.importBatch
-}
-
-export async function runImportBatch(id: string, input: RunImportBatchInput = {}) {
-  const response = await fetch(apiPath(`/api/import-batches/${encodeURIComponent(id)}/import`), {
-    body: JSON.stringify(input),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to run import batch: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ImportBatchResponse
-  return data.importBatch
-}
-
-async function postImportBundleDraft(id: string) {
-  const response = await fetch(apiPath(`/api/import-bundles/${encodeURIComponent(id)}/draft`), {
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to generate import draft: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ImportBundleDraftResponse
-  return data.draft
-}
-
-export async function generateImportBundleDraft(id: string) {
-  return postImportBundleDraft(id)
-}
-
-export async function generateImportAnswerAlignment(id: string) {
-  const response = await fetch(apiPath(`/api/import-bundles/${encodeURIComponent(id)}/answer-alignment`), {
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to generate answer alignment: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ImportAnswerAlignmentResponse
-  return data.alignment
-}
-
-export async function applyImportAnswerAlignment(
-  id: string,
-  input: {
-    questionGroupId: string
-    overwrite?: boolean
-  },
-) {
-  const response = await fetch(apiPath(`/api/import-bundles/${encodeURIComponent(id)}/answer-alignment/apply`), {
-    body: JSON.stringify(input),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to apply answer alignment: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ApplyAnswerAlignmentResponse
-  return data.result
-}
-
-export async function fetchImportFileParse(id: string) {
-  const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}/parse`))
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to load import parse: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ImportFileParseResponse
-  return data.parse
 }
 
 type PaperSetDetailResponse = {
@@ -309,50 +105,6 @@ export async function deleteQuestionGroup(id: string) {
 
   if (!response.ok) {
     throw new Error(await readErrorMessage(response, `Failed to delete question group: ${response.status}`))
-  }
-}
-
-type CreateImportFileResponse = {
-  importFile: ImportFileRecord
-}
-
-export async function uploadImportFile(input: CreateImportFileInput) {
-  const response = await fetch(apiPath('/api/import-files'), {
-    body: JSON.stringify(input),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to import file: ${response.status}`))
-  }
-
-  const data = (await response.json()) as CreateImportFileResponse
-  return data.importFile
-}
-
-export async function parseImportFile(id: string) {
-  const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}/parse`), {
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to parse import file: ${response.status}`))
-  }
-
-  const data = (await response.json()) as ImportFileParseResponse
-  return data.parse
-}
-
-export async function deleteImportFile(id: string) {
-  const response = await fetch(apiPath(`/api/import-files/${encodeURIComponent(id)}`), {
-    method: 'DELETE',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to delete import file: ${response.status}`))
   }
 }
 
