@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// KEEP: tests the paper-import ENGINE (publisher/validator) contracts, not the
+// retired C7 UI/routes. See ADR-0016. Do not delete when retiring import UI.
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'

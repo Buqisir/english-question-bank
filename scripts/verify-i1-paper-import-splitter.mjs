@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url'
 
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
-import { createPaperImportRoutes } from '../server/paper-import/paperImportRoutes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -139,8 +138,7 @@ function assertAllowedScope() {
         file.startsWith('shared/papersurface/') ||
         file.startsWith('app/src/domain/') ||
         file.startsWith('schemas/') ||
-        file.endsWith('Adapter.ts') ||
-        file === 'app/src/features/paper-import/PaperImportWorkbench.tsx'
+        file.endsWith('Adapter.ts')
       )
   )
   assert('I1 Step 1 forbidden scopes are untouched', forbidden.length === 0, forbidden.join('\n'))
@@ -153,7 +151,6 @@ function assertRouteContract() {
   const packageJson = JSON.parse(readRepoFile('server/package.json'))
   const routes = createPaperImportAiRoutes()
   const parseRoute = routes.find((route) => route.method === 'POST' && route.pattern.test('/api/paper-import-ai/parse'))
-  const c7Routes = createPaperImportRoutes()
 
   assert('server route registry includes Paper Import AI routes', apiSource.includes('createPaperImportAiRoutes'))
   assert('POST /api/paper-import-ai/parse is registered', Boolean(parseRoute))
@@ -161,9 +158,6 @@ function assertRouteContract() {
   assert('Paper Import AI route requires docx input', routeSource.includes('isDocxFile'))
   assert('DOCX splitter uses mammoth raw-text extraction', splitterSource.includes('mammoth.extractRawText'))
   assert('server dependency declares mammoth', Boolean(packageJson.dependencies?.mammoth))
-  assert('existing C7 validate route remains present', c7Routes.some((route) => route.pattern.test('/api/paper-import/validate')))
-  assert('existing C7 publish route remains present', c7Routes.some((route) => route.pattern.test('/api/paper-import/publish')))
-  assert('existing C7 revalidate-latest route remains present', c7Routes.some((route) => route.pattern.test('/api/paper-import/revalidate-latest')))
 }
 
 function fixtureText() {

@@ -24,7 +24,6 @@ const registry = {
   'scripts/verify-c8-print-ready-gate.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
   'scripts/verify-h1-router-skeleton.mjs',
-  'scripts/verify-h1c-paper-import-routes.mjs',
   'scripts/verify-h1d-analysis-availability.mjs',
   'scripts/verify-i0e-seven-choices-entry.mjs',
   'scripts/verify-h1e-export-routes.mjs',

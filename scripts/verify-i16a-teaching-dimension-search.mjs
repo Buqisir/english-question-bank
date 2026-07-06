@@ -502,7 +502,6 @@ assert(
 // and require teaching-invalidation count >= surface-invalidation count per file.
 const invalidationRouteFiles = [
   'server/paper-import-ai/routes.mjs',
-  'server/paper-import/paperImportRoutes.mjs',
 ]
 for (const rel of invalidationRouteFiles) {
   const src = readFileSync(path.join(rootDir, rel), 'utf8')

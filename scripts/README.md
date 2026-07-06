@@ -25,7 +25,6 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-ci.mjs` | Stable app build/typecheck plus core contracts used by GitHub Actions | yes |
 | `verify-architecture-housekeeping.mjs` | Housekeeping guardrails: CI, code style, tokens, verify index | yes |
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
-| `verify-h1c-paper-import-routes.mjs` | H1-C Paper Import route extraction contract | yes |
 | `verify-h1d-analysis-availability.mjs` | H1-D PaperSurface analysis availability owner contract | yes |
 | `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
 | `verify-h1e-export-routes.mjs` | H1-E export route dispatch contract | yes |

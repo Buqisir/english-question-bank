@@ -98,7 +98,6 @@ const ipv6Callers = [
   'app/src/services/mySpace.ts',
 ]
 const noIpv6Callers = [
-  'app/src/services/paperImport.ts',
   'app/src/services/paperImportAi.ts',
 ]
 

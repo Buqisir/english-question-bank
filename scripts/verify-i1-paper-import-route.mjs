@@ -31,7 +31,6 @@ function assertRouteUiContract() {
   assert('App recognizes ?view=paper-import-ai', appSource.includes("get('view') === 'paper-import-ai'"))
   assert('App can open paper-import-ai route', appSource.includes("url.searchParams.set('view', 'paper-import-ai')"))
   assert('App renders PaperImportAiWorkbench route', appSource.includes('<PaperImportAiWorkbench onBackToWorkbench={paperImportAiOnBackToWorkbench} />'))
-  assert('App keeps C7 paper-import route distinct', appSource.includes("get('view') === 'paper-import'"))
 
   assert('service calls Step 1 parse endpoint', serviceSource.includes('/api/paper-import-ai/parse'))
   assert('service does not call save endpoint', !serviceSource.includes('/api/paper-import-ai/save'))
