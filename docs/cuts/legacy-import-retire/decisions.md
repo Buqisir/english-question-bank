@@ -60,10 +60,17 @@ useState 默认值）——服务器上此路径不存在，**线上早死**。�
 - **后端引擎**（ADR-0016 §要害）：`server/paper-import-ai/*` 分析器、
   `server/paper-import/{publisher,validator,storage,multipart}.mjs`、import-pipeline、
   verbProfileBackfill。legacy 用的是 `server/imports/*`，**不碰 `server/paper-import/`**。
-- **`selectPaperSetSummaries`**（api.mjs:2541）+ 所有注入进 legacy 工厂的 helper
-  （`cleanDraftText`/`normalizeDraftText`/`normalizeAnswerValue`/`timestampPrefix`/
-  `groupTypeLabels`/`sanitizeFileName`/`inferImportFileType`/`normalizeExamTitle`/
-  `extractDeclaredExamTitleFromText`）——已 grep 实证均有库外消费者。
+- **`selectPaperSetSummaries`**（api.mjs:2541）+ 注入进 legacy 工厂的 helper 中**真有库外
+  消费者的 5 个**：`cleanDraftText`/`normalizeDraftText`/`normalizeAnswerValue`/
+  `timestampPrefix`/`groupTypeLabels`（→ readingDifficultyNormalizer/synonymDifficulty/
+  exports/print-renderer）。
+  - **⚠️ 更正（PA MF-3）**：另 4 个注入 helper `sanitizeFileName`/`inferImportFileType`/
+    `normalizeExamTitle`/`extractDeclaredExamTitleFromText` **不是 KEEP**——其唯一库外
+    消费者是本刀整删的 `importListing.mjs`，删后零 survivor，**本刀一并删**（连 api.mjs
+    L3889-3891 那条过时「STAY in api.mjs」注释）。§KEEP 自检对这 4 个豁免。
+- **`savedPapers`（App.tsx）不是 KEEP**（PA MF-2）：其全部 reader 在本刀删除的
+  import 模态/看板宿主里，删后全孤儿 → 本刀一并删（含 `fetchPaperSets` effect）。member
+  组卷用 `paperDraft`，不用 savedPapers。
 - **parse 回填**（detail-consume-only KEEP，命名撞车高危）：`clozeParseResult` /
   `sevenChoicesParseResult` / `grammarParseResult` / `readingParseResult` 系列 state +
   `parseClozeGroup`/`parseSevenChoicesGroup`/`parseGrammarGroup`/`parseReadingQuestionGroup`/
