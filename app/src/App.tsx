@@ -76,7 +76,6 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 // branch for the legacy `surface=print` value — it falls back to
 // default like any other unknown surface.
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
-import { PaperImportWorkbench } from './features/paper-import/PaperImportWorkbench'
 import { PaperImportAiWorkbench } from './features/paper-import-ai/PaperImportAiWorkbench'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
@@ -565,11 +564,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // never re-derive from `currentUser`.
   const isOwnerView = useIsOwnerView()
   const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
-  const [paperImportRouteActive, setPaperImportRouteActive] = useState(() => {
-    if (!isOwnerView) return false
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'paper-import'
-  })
   const [paperImportAiRouteActive, setPaperImportAiRouteActive] = useState(() => {
     if (!isOwnerView) return false
     if (typeof window === 'undefined') return false
@@ -1687,7 +1681,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       }
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
-    setPaperImportRouteActive(false)
     setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
@@ -1725,7 +1718,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperImportRouteActive(false)
     setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(true)
     setCurrentPiRoute({ kind: 'none' })
@@ -1747,22 +1739,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
 
-  const paperImportOnBackToWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.delete('view')
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setPaperImportRouteActive(false)
-    setMySpaceRouteActive(false)
-  }, [])
-
   const paperImportAiOnBackToWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
@@ -1776,18 +1752,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       }
     }
     setPaperImportAiRouteActive(false)
-    setPaperImportRouteActive(false)
-    setMySpaceRouteActive(false)
-  }, [])
-
-  const openPaperImportWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'paper-import')
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setPaperImportRouteActive(true)
-    setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(false)
   }, [])
 
@@ -1798,7 +1762,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setPaperImportAiRouteActive(true)
-    setPaperImportRouteActive(false)
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
   }, [])
@@ -1849,10 +1812,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         onOpenDraft={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
       />
     )
-  }
-
-  if (paperImportRouteActive) {
-    return <PaperImportWorkbench onBackToWorkbench={paperImportOnBackToWorkbench} />
   }
 
   if (paperImportAiRouteActive) {
@@ -1935,7 +1894,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       {adminRouteActive && (
         <AdminWorkbench
           onOpenImportPanel={openImportPanel}
-          onOpenPaperImportWorkbench={openPaperImportWorkbench}
           onOpenPaperImportAiWorkbench={openPaperImportAiWorkbench}
           backfillStatus={backfillStatus}
           backfillResult={backfillResult}

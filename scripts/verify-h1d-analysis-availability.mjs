@@ -28,7 +28,6 @@ console.log('H1-D verify: PaperSurface analysis availability owner')
 
 const api = read('server/api.mjs')
 const availabilitySource = read('server/search/paperSurfaceAvailability.mjs')
-const paperImportRoutes = read('server/paper-import/paperImportRoutes.mjs')
 const verifyCi = read('scripts/verify-ci.mjs')
 const scriptsReadme = read('scripts/README.md')
 
@@ -47,8 +46,6 @@ assert('api no longer owns availability cache variable', !api.includes('let pape
 assert('api no longer owns PaperSurface href builder', !api.includes('function buildPaperSurfaceHref'))
 assert('api getter delegates to availability owner', /function getPaperSurfaceAnalysisAvailabilityByGroupId\(\)[\s\S]{0,80}paperSurfaceAnalysisAvailability\.getByGroupId\(\)/.test(api))
 assert('api invalidator delegates to availability owner', /function invalidatePaperSurfaceAnalysisAvailability\(\)[\s\S]{0,80}paperSurfaceAnalysisAvailability\.invalidate\(\)/.test(api))
-assert('Paper Import routes still invalidate through context', paperImportRoutes.includes('context.invalidatePaperSurfaceAnalysisAvailability()'))
-assert('Paper Import revalidate still reads through context', paperImportRoutes.includes('context.getPaperSurfaceAnalysisAvailabilityByGroupId().size'))
 
 const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
 const availability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn: () => {} })

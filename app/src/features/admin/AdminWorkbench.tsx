@@ -11,7 +11,6 @@ import './adminWorkbench.css'
 
 type AdminWorkbenchProps = {
   onOpenImportPanel: () => void
-  onOpenPaperImportWorkbench: () => void
   onOpenPaperImportAiWorkbench: () => void
   backfillStatus: 'idle' | 'loading'
   backfillResult: BackfillTopicLabelsResult | null
@@ -40,7 +39,6 @@ type AdminWorkbenchProps = {
 
 export function AdminWorkbench({
   onOpenImportPanel,
-  onOpenPaperImportWorkbench,
   onOpenPaperImportAiWorkbench,
   backfillStatus,
   backfillResult,
@@ -79,10 +77,6 @@ export function AdminWorkbench({
           <button className="ghost-button" type="button" onClick={onOpenImportPanel}>
             <FileText size={18} />
             导入资料
-          </button>
-          <button className="ghost-button" type="button" onClick={onOpenPaperImportWorkbench}>
-            <FileText size={18} />
-            整卷导入
           </button>
           <button className="ghost-button" type="button" onClick={onOpenPaperImportAiWorkbench}>
             <Sparkles size={18} />

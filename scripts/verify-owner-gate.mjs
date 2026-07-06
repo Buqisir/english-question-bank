@@ -144,11 +144,6 @@ const GATED_ROUTES = [
   { method: 'POST', path: `/api/import-files/${FAKE_ID}/parse` },
   { method: 'DELETE', path: `/api/import-files/${FAKE_ID}` },
 
-  // server/paper-import/paperImportRoutes.mjs (3; whole module)
-  { method: 'POST', path: '/api/paper-import/validate' },
-  { method: 'POST', path: '/api/paper-import/publish' },
-  { method: 'POST', path: '/api/paper-import/revalidate-latest' },
-
   // server/paper-import-ai/routes.mjs (6; whole module; PA MF-2 corrected count)
   { method: 'POST', path: '/api/paper-import-ai/parse' },
   { method: 'POST', path: '/api/paper-import-ai/analyze', body: {} },
