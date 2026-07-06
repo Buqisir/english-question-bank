@@ -23,7 +23,6 @@ import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createDocxRenderer } from './exports/docxRenderer.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createLegacyImportRoutes } from './imports/legacyImportRoutes.mjs'
-import { createPaperImportAiRoutes } from './paper-import-ai/routes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
@@ -484,7 +483,6 @@ const serverRoutes = [
   ...createAuthRoutes(),
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
-  ...createPaperImportAiRoutes(),
   ...createExportRoutes(exportImplementation),
   ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),

@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url'
 
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -308,24 +307,6 @@ function assertPackageBuilder() {
   /缺少完形填空/)
 }
 
-// ---- Route ----
-
-function assertRouteContract() {
-  const routes = createPaperImportAiRoutes()
-  assert('I3 publish route registered', routes.some(r => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/publish')))
-
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
-  assert('I3 route passes clozeGroup to package builder', routeSource.includes('clozeGroup'))
-
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  assert('I3 service has cloze group type', serviceSource.includes('PaperImportAiClozeGroup'))
-  assert('I3 service passes clozeGroup to publish', serviceSource.includes('clozeGroup: input.clozeGroup'))
-
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
-  assert('I3 page shows cloze panel', pageSource.includes('完形填空 预览'))
-  assert('I3 page checks cloze answers', pageSource.includes('clHasAnswers'))
-}
-
 // ---- Real DOCX ----
 
 async function assertRealDocx() {
@@ -345,7 +326,6 @@ async function main() {
   assertSplitterMissingOptions()
   assertSplitterIncompleteOptions()
   assertPackageBuilder()
-  assertRouteContract()
   await assertRealDocx()
 
   console.log(`\nI3 cloze AI import verify PASSED: ${passed} checks`)

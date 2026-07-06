@@ -97,9 +97,7 @@ const ipv6Callers = [
   'app/src/services/draftPapers.ts',
   'app/src/services/mySpace.ts',
 ]
-const noIpv6Callers = [
-  'app/src/services/paperImportAi.ts',
-]
+const noIpv6Callers = []
 
 for (const rel of [...ipv6Callers, ...noIpv6Callers]) {
   const src = read(rel)

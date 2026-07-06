@@ -44,7 +44,6 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-h1g-question-group-routes.mjs` | H1-G question-group route dispatch contract | yes |
 | `verify-h10a-paper-set-routes.mjs` | H10-A paper-set CRUD + paper-workflow route dispatch contract (status codes, create-vs-merge, no-shadow) | yes |
 | `verify-h10b-ai-proxy-routes.mjs` | H10-B PR2 AI-proxy route owners (semantic-search/steward/verify-question-group): defineRoute surface + exact context.fn call args + 200 envelope pass-through + verify-question-group x-verify-request-id contract (result.requestId on success / minted id on 500) + {error,requestId} + serverContext-exposure/no-cycle guards | yes |
-| `verify-h11b-paper-import-ai-view.mjs` | H11-B PaperImportAi untyped-analysis view helpers extraction contract (source-level) | yes |
 | `verify-h11a-http-client.mjs` | H11-A PR1 shared frontend httpClient dedup: each caller's host form preserved verbatim (apiPath ::1-inclusive vs apiPathNoIpv6 no-::1) + runtime invocation smoke of the moved helpers | yes |
 | `verify-h12a-entry-modal.mjs` | H12-A App.tsx Manual Entry form modal extraction into workbench/EntryModal.tsx; 5-prop seam + savedCard writeback contract (source-level) | yes |
 | `verify-restart1-local-search-intent.mjs` | Restart cut ① local search: tokenize() CJK bigram production, parseLocalIntent() year/section/groupType/region extraction, weighted ranking (topic label > section/place > generic fields, year DESC tiebreak), hard-filter dimensions, non-regression on plain-English/empty queries | yes |
@@ -60,7 +59,6 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-c7-paper-import-contracts.mjs` | C7 schema / offline validator contracts | yes |
 | `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol | yes |
 | `verify-i1-paper-import-splitter.mjs` | I1 DOCX reading splitter endpoint and parser contract | no |
-| `verify-i1-paper-import-route.mjs` | I1 owner-only `?view=paper-import-ai` parse / publish route | yes |
 | `verify-i1-paper-import-analysis.mjs` | I1 owner-only analysis / publish endpoints, provider seam, JSON preview, and C7 package bridge contract | yes |
 | `verify-i2-seven-choices-ai-import.mjs` | I2 七选五 AI 导题接入：splitter / analysis / package / route contracts | yes |
 | `verify-i3-cloze-ai-import.mjs` | I3 完形填空 AI 导题接入：splitter / package / route contracts | yes |

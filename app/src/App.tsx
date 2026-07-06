@@ -76,7 +76,6 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 // branch for the legacy `surface=print` value — it falls back to
 // default like any other unknown surface.
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
-import { PaperImportAiWorkbench } from './features/paper-import-ai/PaperImportAiWorkbench'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
@@ -564,11 +563,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // never re-derive from `currentUser`.
   const isOwnerView = useIsOwnerView()
   const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
-  const [paperImportAiRouteActive, setPaperImportAiRouteActive] = useState(() => {
-    if (!isOwnerView) return false
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'paper-import-ai'
-  })
   const [adminRouteActive, setAdminRouteActive] = useState(() => {
     if (!isOwnerView) return false
     if (typeof window === 'undefined') return false
@@ -1681,7 +1675,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       }
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
-    setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
     setDraftPaperRoute({
@@ -1718,7 +1711,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperImportAiRouteActive(false)
     setMySpaceRouteActive(true)
     setCurrentPiRoute({ kind: 'none' })
   }, [])
@@ -1738,33 +1730,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setMySpaceRouteActive(false)
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
-
-  const paperImportAiOnBackToWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.delete('view')
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setPaperImportAiRouteActive(false)
-    setMySpaceRouteActive(false)
-  }, [])
-
-  const openPaperImportAiWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'paper-import-ai')
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setPaperImportAiRouteActive(true)
-    setMySpaceRouteActive(false)
-    setCurrentPiRoute({ kind: 'none' })
-  }, [])
 
   const toggleAdminRoute = useCallback(() => {
     setAdminRouteActive((current) => {
@@ -1812,10 +1777,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         onOpenDraft={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
       />
     )
-  }
-
-  if (paperImportAiRouteActive) {
-    return <PaperImportAiWorkbench onBackToWorkbench={paperImportAiOnBackToWorkbench} />
   }
 
   if (currentPiRoute.kind === 'paper-intelligence') {
@@ -1894,7 +1855,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       {adminRouteActive && (
         <AdminWorkbench
           onOpenImportPanel={openImportPanel}
-          onOpenPaperImportAiWorkbench={openPaperImportAiWorkbench}
           backfillStatus={backfillStatus}
           backfillResult={backfillResult}
           backfillError={backfillError}

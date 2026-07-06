@@ -1,4 +1,4 @@
-import { FileText, Plus, RefreshCw, Sparkles, Tag } from 'lucide-react'
+import { FileText, Plus, RefreshCw, Tag } from 'lucide-react'
 import type {
   BasketItem,
   PaperSetSummary,
@@ -11,7 +11,6 @@ import './adminWorkbench.css'
 
 type AdminWorkbenchProps = {
   onOpenImportPanel: () => void
-  onOpenPaperImportAiWorkbench: () => void
   backfillStatus: 'idle' | 'loading'
   backfillResult: BackfillTopicLabelsResult | null
   backfillError: string
@@ -39,7 +38,6 @@ type AdminWorkbenchProps = {
 
 export function AdminWorkbench({
   onOpenImportPanel,
-  onOpenPaperImportAiWorkbench,
   backfillStatus,
   backfillResult,
   backfillError,
@@ -77,10 +75,6 @@ export function AdminWorkbench({
           <button className="ghost-button" type="button" onClick={onOpenImportPanel}>
             <FileText size={18} />
             导入资料
-          </button>
-          <button className="ghost-button" type="button" onClick={onOpenPaperImportAiWorkbench}>
-            <Sparkles size={18} />
-            AI 导题
           </button>
         </div>
       </section>

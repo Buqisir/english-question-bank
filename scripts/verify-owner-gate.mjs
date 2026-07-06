@@ -144,14 +144,6 @@ const GATED_ROUTES = [
   { method: 'POST', path: `/api/import-files/${FAKE_ID}/parse` },
   { method: 'DELETE', path: `/api/import-files/${FAKE_ID}` },
 
-  // server/paper-import-ai/routes.mjs (6; whole module; PA MF-2 corrected count)
-  { method: 'POST', path: '/api/paper-import-ai/parse' },
-  { method: 'POST', path: '/api/paper-import-ai/analyze', body: {} },
-  { method: 'POST', path: '/api/paper-import-ai/analyze-seven-choices', body: {} },
-  { method: 'POST', path: '/api/paper-import-ai/analyze-cloze', body: {} },
-  { method: 'POST', path: '/api/paper-import-ai/analyze-grammar-fill', body: {} },
-  { method: 'POST', path: '/api/paper-import-ai/publish' },
-
   // server/topic-labels/topicLabelBackfillRoutes.mjs (1; whole module)
   { method: 'POST', path: '/api/topic-labels/backfill', body: {} },
 
@@ -332,10 +324,17 @@ async function main() {
   try {
     await waitForHttp(`http://127.0.0.1:${openFixture.apiPort}/api/health`)
 
-    // 5. open mode: gated routes are not 401/403 (sample, not the full 33 — the
-    // route-enumeration coverage is already proven by fixture A; this fixture only
-    // needs to prove the authMode branch, not re-enumerate).
-    const openModeSample = [GATED_ROUTES[0], GATED_ROUTES[12], GATED_ROUTES[18], GATED_ROUTES[27], GATED_ROUTES[31]]
+    // 5. open mode: gated routes are not 401/403 (sample, not the full
+    // enumeration — the route-enumeration coverage is already proven by
+    // fixture A; this fixture only needs to prove the authMode branch, not
+    // re-enumerate).
+    // representative spread (first/middle/last); length-relative so future
+    // route retirements never silently re-point the sample.
+    const openModeSample = [
+      GATED_ROUTES[0],
+      GATED_ROUTES[Math.floor(GATED_ROUTES.length / 2)],
+      GATED_ROUTES[GATED_ROUTES.length - 1],
+    ]
     let openModeNeverBlocked = true
     let openModeDetail = ''
     for (const route of openModeSample) {

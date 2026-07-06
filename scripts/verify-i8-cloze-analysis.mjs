@@ -16,7 +16,6 @@ import { fileURLToPath } from 'node:url'
 
 import { analyzeClozeImportCandidate, buildClozeAnalysisMessages, validateClozeShape } from '../server/paper-import-ai/analyzeCloze.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 import { validatePaperImportPackage, PAPER_IMPORT_SCHEMA_VERSIONS } from '../server/paper-import/validator.mjs'
 import { writePaperImportVersion, swapPaperImportLatest } from '../server/paper-import/storage.mjs'
 
@@ -725,38 +724,6 @@ async function assertPackageBuilder() {
 }
 
 // ============================================================
-// Route contract
-// ============================================================
-
-function assertRouteContract() {
-  const routes = createPaperImportAiRoutes()
-  assert('I8 analyze-cloze route registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/analyze-cloze')))
-
-  // Existing routes must still be present.
-  assert('I8 analyze-seven-choices route still registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/analyze-seven-choices')))
-
-  // Injectable service.
-  let called = false
-  const stubService = async () => { called = true; return { analysis: {}, provider: 'stub', model: 'stub', requestId: 'r1', latencyMs: 1 } }
-  const routesWithStub = createPaperImportAiRoutes({ analyzeCloze: stubService })
-  assert('I8 analyze-cloze route supports injected service', routesWithStub.some((r) => r.pattern.test('/api/paper-import-ai/analyze-cloze')))
-
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
-  assert('I8 route imports analyzeCloze', routeSource.includes('analyzeCloze'))
-  assert('I8 route passes clozeAnalysis to publish', routeSource.includes('clozeAnalysis'))
-
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  assert('I8 service exports analyzePaperImportAiClozeGroup', serviceSource.includes('analyzePaperImportAiClozeGroup'))
-  assert('I8 service includes clozeAnalysis in publishPaperImportAiAnalysis', serviceSource.includes('clozeAnalysis'))
-
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
-  assert('I8 workbench imports analyzePaperImportAiClozeGroup', pageSource.includes('analyzePaperImportAiClozeGroup'))
-  assert('I8 workbench calls handleAnalyzeCloze', pageSource.includes('handleAnalyzeCloze'))
-  assert('I8 workbench threads clozeAnalysis into publish', pageSource.includes("clAnalysisState.result?.analysis"))
-  assert('I8 workbench one-click analyze includes cloze', pageSource.includes('clAnalysisState.status !== \'done\''))
-}
-
-// ============================================================
 // Validator allowlist
 // ============================================================
 
@@ -843,7 +810,6 @@ async function main() {
   // Step 4: Wiring
   assertValidatorAllowlist()
   await assertPackageBuilder()
-  assertRouteContract()
   assertStorageDiskWrite()
 
   console.log(`\nI8 cloze analysis verify PASSED: ${passed} checks`)

@@ -8,7 +8,6 @@ import { fileURLToPath } from 'node:url'
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { analyzeSevenChoicesImportCandidate, buildSevenChoicesAnalysisMessages } from '../server/paper-import-ai/analyzeSevenChoices.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -670,30 +669,6 @@ function assertPackageBuilder() {
   /缺少读后续写/)
 }
 
-// ---- Route contract ----
-
-function assertRouteContract() {
-  const routes = createPaperImportAiRoutes()
-  assert('I2 analyze-seven-choices route registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/analyze-seven-choices')))
-  assert('I2 publish route registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/publish')))
-
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
-  assert('I2 route imports analyzeSevenChoices', routeSource.includes('analyzeSevenChoices'))
-  assert('I2 route passes sevenChoicesGroup to package builder', routeSource.includes('sevenChoicesGroup'))
-  assert('I2 route passes sevenChoicesAnalysis to package builder', routeSource.includes('sevenChoicesAnalysis'))
-
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  assert('I2 service exports seven-choices API function', serviceSource.includes('analyzePaperImportAiSevenChoicesGroup'))
-  assert('I2 service exports seven-choices types', serviceSource.includes('PaperImportAiSevenChoicesGroup'))
-
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
-  assert('I2 page shows seven-choices panel', pageSource.includes('七选五 预览'))
-  assert('I2 page imports seven-choices API', pageSource.includes('analyzePaperImportAiSevenChoicesGroup'))
-  assert('I2 page copy includes seven-choices splitter scope', pageSource.includes('阅读理解 A-D 和七选五'))
-  assert('I2 one-click analyze completion includes seven-choices', pageSource.includes('allImportAnalyzed') && pageSource.includes('disabled={isAnyAnalyzing || allImportAnalyzed}'))
-  assert('I2 publish requires seven-choices answers when present', pageSource.includes('scHasAnswers'))
-}
-
 // ---- Real DOCX ----
 
 async function assertRealDocx() {
@@ -722,7 +697,6 @@ async function main() {
   assertPromptBuilding()
   await assertAnalysisValidation()
   assertPackageBuilder()
-  assertRouteContract()
   await assertRealDocx()
 
   console.log(`\nI2 seven-choices AI import verify PASSED: ${passed} checks`)

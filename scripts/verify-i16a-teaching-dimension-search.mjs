@@ -496,24 +496,6 @@ assert(
   !indexAfterInvalidate.has('group-2024-jslk-grammar-fill'),
 )
 
-// MF-3 / CR MF-A: EVERY route that invalidates paper-surface availability must
-// ALSO invalidate the teaching facet index — both the AI and non-AI publish paths
-// rewrite the same on-disk analyses/*.json. Read the actual route files (not api.mjs),
-// and require teaching-invalidation count >= surface-invalidation count per file.
-const invalidationRouteFiles = [
-  'server/paper-import-ai/routes.mjs',
-]
-for (const rel of invalidationRouteFiles) {
-  const src = readFileSync(path.join(rootDir, rel), 'utf8')
-  const surfaceCalls = (src.match(/invalidatePaperSurfaceAnalysisAvailability\(/g) || []).length
-  const teachingCalls = (src.match(/invalidateTeachingFacetIndex\(/g) || []).length
-  assert(
-    `${rel}: every paper-surface invalidation also invalidates teaching facet index`,
-    surfaceCalls > 0 && teachingCalls >= surfaceCalls,
-    `surface=${surfaceCalls} teaching=${teachingCalls} (teaching must be >= surface > 0)`,
-  )
-}
-
 console.log()
 
 // ─── Requirement 7: Registration in CI and README ────────────────────────────
