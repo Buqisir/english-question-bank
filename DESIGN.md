@@ -18,9 +18,9 @@ colors:
   border-subtle: "#E8E8E4"
   border: "#D8D8D2"
   border-strong: "#C6C6C0"
-  success: "#4A9D7F"
-  warning: "#D97706"
-  danger: "#C4543E"
+  success: "#059669"
+  warning: "#d97706"
+  danger: "#dc2626"
 typography:
   ui:
     fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
@@ -124,9 +124,11 @@ components:
 - **Borders 边线** (#E8E8E4 subtle / #D8D8D2 / #C6C6C0 strong): 中性灰分隔与边框，按层级选强弱。
 
 ### Semantic（状态语义，独立于强调色相，不参与"墨绿签名"预算）
-- **Success 成功** (#4A9D7F): 低难度指示 / 成功态。比品牌墨绿更亮，与之可区分。
-- **Warning 提醒** (#D97706): 琥珀，提示态。
-- **Danger 危险** (#C4543E): 暖红，错误 / 删除。
+- **Success 成功** (#059669): 低难度指示 / 成功态。emerald，比品牌墨绿更亮，与之可区分。
+- **Warning 提醒** (#d97706): 琥珀，提示态。
+- **Danger 危险** (#dc2626): 红，错误 / 删除。
+
+语义色取成熟的中性专业工具惯用值（与"专业工具台"方向自洽），非旧暖纸方向的暖化值。它们作 chip 底 / 边 / 图标 / 大字（≥3:1）合格；**作小正文文字对浅底仅约 3–4.5:1，是跨文件语义色统一 + AA 达标的既有债**，留待独立刀，不在配色刀内落地。
 
 ### Named Rules
 

@@ -39,7 +39,11 @@ CI 断言行号、detail 已退役为看题页）。tokens.css / index.css / DES
 - 色值体系全部定死（下方"色值体系"表），OKLCH 明度均匀 + 逐档 AA 已算验证。
 - 主按钮 = 墨绿底 + 白字（6.05:1）。旧"墨黑底按钮"退役。
 - 强调只有墨绿一个色相。蓝、紫、赭红红笔、暖金全部收编或清除。
-- 语义色 success/warning/danger **值不改**（跨文件不统一是既有债，不在本刀）。
+- **语义色 = :root 现值 `#dc2626`/`#d97706`/`#059669`，本刀不改（MF-2 定案）**：
+  DESIGN.md 已对齐这三个实际值（契约=代码，无悬置），成熟中性专业语义色、与新方向
+  自洽。作 chip 底/图标/大字（≥3）合格；作小正文文字对浅底约 3–4.5:1 是**既有债**
+  （新底 #F6F6F4 比暖底略深，danger 文字 4.62→4.46 微降，非本刀主因），跨文件语义色
+  统一 + AA 达标另立独立刀。
 - 卷面渲染 + 证据色 + 打印导出不动（圈 2）。
 
 ---
@@ -71,7 +75,7 @@ CI 断言行号、detail 已退役为看题页）。tokens.css / index.css / DES
 | 900 | `#123020` | 最深/强调标题 | 底 13.21 ✅ |
 
 ### 语义色（不改值，独立于墨绿签名）
-success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有变体，本刀保留）。
+success `#4A9D7F` · warning `#D97706` · danger `#dc2626`（及各文件既有变体，本刀保留）。
 
 ---
 
@@ -128,7 +132,7 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
   - `rgba(15,118,110,*)`（App.css synonym card 青蓝 L1378/1380）→ 墨绿 `rgba(44,110,86,*)`
 
 - **C6 红笔/暖金 → 墨绿或语义（按语境）**：
-  - `#B8323C` 赭红：作**强调/选中/链接** → `#2C6E56`；作**错误/危险** → `#C4543E`（danger）。DEV 按每处语境判断。
+  - `#B8323C` 赭红：作**强调/选中/链接** → `#2C6E56`；作**错误/危险** → `#dc2626`（danger）。DEV 按每处语境判断。
   - 暖金 `#C49B2A`/`#C6A044`/`rgb(214,154,71)`、赭石 `#B8732E`/`rgb(199,109,42)`、珊瑚 `#C97B5A`、MySpace 金棕 `#b88950`/`#f2eadf`：作**活动/hover/选中强调** → 墨绿（`#2C6E56` 或 teal-400 `#5C9C83`；active 底 → teal-50 `#EAF1ED`）；若确为**难度/警示语义** → 归 warning/保留。
   - **点名：concierge 选中态 chip（#257 刚上线的赭红 wash）→ 墨绿。** App.css
     `.concierge-starter-chip.is-selected`（约 L5265：`background rgba(184,50,60,0.10)`
@@ -160,8 +164,12 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
   重新核对行号（这些是易变行，不可信任本表行号，只信语义）。
 
 - **C8 AA 全绿**：所有正文/占位符文字对底 ≥4.5:1，大字/UI ≥3:1。改底色后
-  重点抽验"自动继承"面（paperIntelligence 报告、login）与语义色在新中性底上的
-  对比度。浏览器 QA 实测 0 AA fail。
+  重点抽验：①login + paperIntelligence 报告（**经 index.css 语义层继承**，AA 复核
+  盯 index.css 的 `--mint/--amber/--coral/--blue-*` 映射在新中性底的 text 用法）；
+  ②SW-1 语义色作文字场景——paperIntelligence 有大量 `color:var(--mint/amber/coral-text)`
+  证据/状态文字（约 L44/99/104/109/407/415/475/481/538/564/588/802/1402…），QA 必须
+  具体走到这些场景，别只测外壳。浏览器 QA 实测 0 **新增** AA fail（语义色作文字的
+  既有债不阻断，但要如实记录）。
 
 - **C9 零蓝零紫零暖纸残留**：改造完，圈 1 所有面浏览器实测：无 slate/blue
   (#3b82f6/#2563eb/slate 系)、无靛紫、无暖纸红笔遗留色（#FFFDF8/#B8323C 作强调）。
@@ -184,7 +192,7 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
 | #6B645C（暖弱墨 54处）| `#6A6A64` | — |
 | #9A9180（极弱墨）| `#9A9A93` | — |
 | #B8B3AA / #8A8275 / #9A9590（暖灰）| 就近 `#9A9A93` 或 `#6A6A64` | 按明度 |
-| #B8323C（赭红红笔）| `#2C6E56`（强调/选中）| 错误/危险 → `#C4543E` |
+| #B8323C（赭红红笔）| `#2C6E56`（强调/选中）| 错误/危险 → `#dc2626` |
 | 暖金/赭石/珊瑚/金棕 | `#2C6E56` 或 `#5C9C83`（强调）；`#EAF1ED`（active 底）| 难度/警示语义 → 保留 |
 | #64748B / #2563eb / 靛紫 / slate rgba | 墨绿或中性（见 C5）| — |
 | success/warning/danger 值 | 不动 | — |
@@ -210,8 +218,8 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
   （生成打印 HTML 模板，属 print/export 禁区）。
 - **契约文件**：`server/**`、domain / schema / `*Adapter.ts`、paper-assets、
   reducer / 状态契约 / 数据获取 / URL state / 跨组件同步。**只改 CSS + DESIGN.md
-  + 指定 9 处 CI 断言**，不改任何 TS 逻辑（tsx 内联颜色若有，仅 display-only 改色）。
-- **verify 脚本**：除 C7 列的 9 处颜色断言外，**不碰任何 verify 脚本**（尤其
+  + C7 列出的颜色断言**，不改任何 TS 逻辑（tsx 内联颜色若有，仅 display-only 改色）。
+- **verify 脚本**：除 C7 列出的颜色断言外，**不碰任何 verify 脚本**（尤其
   paper-surface 系列的证据色/防蓝防紫断言，那是圈 2 护栏，与本刀方向一致，保留）。
 - **语义色值**：不改 success/warning/danger 的具体 hex（跨文件不统一是既有债）。
 - **不改名 token 变量**（`bg-warm`/`desk` 保名改值）。
@@ -224,7 +232,9 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
   `app/src/features/paper-import/paperImportWorkbench.css`、
   `app/src/features/draft-paper/DraftPaperWorkbench.css`、
   `app/src/features/my-space/MySpacePage.css`、`app/src/auth/LoginPage.css`
-- 自动继承（改 :root 后目视复核，不主动改）：
+- 经 **index.css 语义层**继承（MF-1：二者零 `--eqb-color-*`，吃 index.css 的
+  `--muted/--accent/--line/--ink/--blue-*/--mint/--amber/--coral` 等；改 :root 经
+  C2 传导，不主动改这两文件，但改 index.css 后目视复核）：
   `app/src/features/paper-intelligence/paperIntelligence.css`（181 var）、
   `app/src/features/admin/adminWorkbench.css`（4 var）
 - CI：C7 的 3 个脚本
@@ -239,8 +249,8 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
   不只邻近脚本）。
 - **C7**：3 个脚本的新 hex 与 CSS 实写值逐字一致。
 - **C8**：浏览器 QA 抽验 AA（下方 Matrix）。
-- **C3 收编**：grep `app/src/App.css` 确认 L4553/L4658 块内已无颜色变量重映射
-  残留；detail 视图浏览器实测继承新中性墨绿。
+- **C3 收编**：grep `app/src/App.css` 确认 `.home-mode-ai` 两块（原 L4419/L4507）
+  内已无颜色变量重映射残留；detail 视图浏览器实测继承新中性墨绿。
 
 ## Browser QA Matrix（主 agent 做，真界面实测）
 
@@ -266,8 +276,12 @@ success `#4A9D7F` · warning `#D97706` · danger `#C4543E`（及各文件既有�
 
 ## PA Follow-Up Decisions
 
-（PA 后填）
+PA verdict = **APPROVE WITH MUST FIX**（见 `pa.md`）。落地方案独立核实扎实
+（边界成立/爆炸半径可控/C7 无漏网/坐标无幻觉/AA 实算全过）。2 MF 已压进 plan：
 
 | PA item | pa.md required disposition | plan.md handling | Status |
 | --- | --- | --- | --- |
-| | | | |
+| MF-1 | 修正"自动继承"面描述，AA 复核指向 index.css 语义层 | Suggested Files 改「经 index.css 语义层继承」+ C8 已改指 index.css `--mint/amber/coral/blue-*` 映射 | ✅ Resolved |
+| MF-2 | 显式定性 DESIGN 语义色 vs :root 矛盾 | PM 定案 A1：语义色 = :root 现值 `#dc2626`/`#d97706`/`#059669`，DESIGN.md 已对齐（契约=代码）；作文字 AA 既有债另立刀。见 Locked Decisions。owner 作 PO QA 后可 veto | ✅ Resolved（owner 可事后 veto）|
+
+**Should Watch**（非阻断，DEV/QA 执行）：SW-1 语义色作文字 AA（C8 已纳入具体抽验坐标）/ SW-2 `--surface` 语义错配（不改名，记债）/ SW-3 C3 继承塌陷抽验（C3 verify 已要求 grep+实测）/ SW-4 C6 三处 `#B8323C` `color:`（L4141/4856/5050）语境判定（完成报告逐处列供 CR）。
