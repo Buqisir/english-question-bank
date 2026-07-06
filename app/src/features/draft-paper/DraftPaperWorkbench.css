@@ -1,14 +1,14 @@
 .draft-workbench-shell {
   min-height: 100vh;
-  background: #F4F2EC;
-  color: #1A1A1A;
+  background: #EDEDEA;
+  color: #1E1E1C;
   padding: 18px 22px 28px;
 }
 
 .draft-toolbar {
   align-items: center;
-  background: #FAFAF7;
-  border: 1px solid #DED9CF;
+  background: #F6F6F4;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   display: flex;
   flex-wrap: wrap;
@@ -32,12 +32,12 @@
   flex: 1 1 auto;
   min-width: 260px;
   padding-left: 20px;
-  border-left: 1px solid #E5E3DC;
+  border-left: 1px solid #D8D8D2;
 }
 
 .draft-toolbar-group-output {
   padding-left: 20px;
-  border-left: 1px solid #E5E3DC;
+  border-left: 1px solid #D8D8D2;
 }
 
 .draft-back-button,
@@ -50,10 +50,10 @@
 .draft-new-folder-row button,
 .draft-dialog-head button {
   align-items: center;
-  background: #fffdf8;
-  border: 1px solid #DED9CF;
+  background: #ffffff;
+  border: 1px solid #D8D8D2;
   border-radius: 6px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   cursor: pointer;
   display: inline-flex;
   font: inherit;
@@ -63,7 +63,7 @@
 }
 
 .draft-export-menu button:disabled {
-  color: #9A9180;
+  color: #9A9A93;
   cursor: not-allowed;
 }
 
@@ -73,16 +73,16 @@
 }
 
 .draft-title-field span {
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12px;
 }
 
 .draft-title-field input,
 .draft-recent-select {
-  background: #fffdf8;
-  border: 1px solid #DED9CF;
+  background: #ffffff;
+  border: 1px solid #D8D8D2;
   border-radius: 6px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;
@@ -94,32 +94,32 @@
 }
 
 .draft-recent-select-field > span {
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12px;
 }
 
 .draft-save-status {
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 13px;
   white-space: nowrap;
 }
 
 .draft-save-status.saving {
-  color: #8a5b22;
+  color: #d97706;
 }
 
 .draft-save-status.saved {
-  color: #476239;
+  color: #059669;
 }
 
 .draft-save-status.error,
 .draft-error {
-  color: #9a3327;
+  color: #dc2626;
 }
 
 .draft-version-toggle {
-  background: #fffdf8;
-  border: 1px solid #DED9CF;
+  background: #ffffff;
+  border: 1px solid #D8D8D2;
   border-radius: 6px;
   display: inline-flex;
   overflow: hidden;
@@ -128,7 +128,7 @@
 .draft-version-toggle button {
   background: transparent;
   border: none;
-  color: #6B645C;
+  color: #6A6A64;
   cursor: pointer;
   font: inherit;
   min-height: 34px;
@@ -136,8 +136,8 @@
 }
 
 .draft-version-toggle button.active {
-  background: #1A1A1A;
-  color: #FFFDF8;
+  background: #2C6E56;
+  color: #FFFFFF;
 }
 
 .draft-export-menu {
@@ -145,9 +145,9 @@
 }
 
 .draft-export-menu summary {
-  background: #1A1A1A;
+  background: #2C6E56;
   border-radius: 6px;
-  color: #FFFDF8;
+  color: #FFFFFF;
   cursor: pointer;
   list-style: none;
   min-height: 36px;
@@ -168,12 +168,12 @@
 .draft-empty-export,
 .draft-success,
 .draft-warning {
-  color: #6B645C;
+  color: #6A6A64;
   margin: 14px 0 0;
 }
 
 .draft-warning {
-  color: #8a5b22;
+  color: #d97706;
 }
 
 .draft-workbench-layout {
@@ -185,8 +185,8 @@
 
 .draft-preview-desk {
   background:
-    linear-gradient(180deg, #FAFAF7 0%, #F4F2EC 100%);
-  border: 1px solid #DED9CF;
+    linear-gradient(180deg, #F6F6F4 0%, #EDEDEA 100%);
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   min-width: 0;
   overflow: auto;
@@ -194,7 +194,7 @@
 }
 
 .draft-preview-meta {
-  color: #6B645C;
+  color: #6A6A64;
   display: flex;
   gap: 14px;
   margin: 0 auto 12px;
@@ -221,7 +221,7 @@
 
 .draft-a4-empty {
   align-items: center;
-  color: #6B645C;
+  color: #6A6A64;
   display: flex;
   min-height: 420px;
   justify-content: center;
@@ -229,8 +229,8 @@
 
 .draft-outline-panel {
   align-self: start;
-  background: #FAFAF7;
-  border: 1px solid #DED9CF;
+  background: #F6F6F4;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   padding: 12px;
   position: sticky;
@@ -247,7 +247,7 @@
 .draft-outline-item span,
 .draft-outline-item em,
 .draft-outline-item small {
-  color: #6B645C;
+  color: #6A6A64;
   display: block;
   font-style: normal;
   font-size: 12px;
@@ -255,7 +255,7 @@
 }
 
 .draft-suggestions {
-  background: #F0EBE0;
+  background: #EDEDEA;
   border-radius: 6px;
   display: grid;
   gap: 6px;
@@ -270,25 +270,25 @@
 }
 
 .draft-outline-item {
-  background: #fffdf8;
-  border: 1px solid #DED9CF;
+  background: #ffffff;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   padding: 10px;
 }
 
 .draft-outline-item.has-break {
-  border-color: #a37b45;
+  border-color: #d97706;
 }
 
 .draft-outline-item.is-group-missing {
-  background: #FBF3EA;
-  border-color: #8a5b22;
+  background: rgba(217, 119, 6, 0.08);
+  border-color: #d97706;
 }
 
 .draft-break-marker {
-  background: #e5d5bf;
+  background: rgba(217, 119, 6, 0.16);
   border-radius: 999px;
-  color: #6a4b25;
+  color: #92400e;
   display: inline-flex;
   font-size: 12px;
   margin-bottom: 8px;
@@ -310,15 +310,15 @@
 }
 
 .draft-outline-empty {
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .draft-undo-toast {
   align-items: center;
-  background: #1A1A1A;
+  background: #1E1E1C;
   border-radius: 8px;
   bottom: 22px;
-  color: #FFFDF8;
+  color: #FFFFFF;
   display: flex;
   gap: 12px;
   left: 50%;
@@ -330,7 +330,7 @@
 
 .draft-modal-backdrop {
   align-items: center;
-  background: rgba(26, 26, 26, 0.28);
+  background: rgba(30, 30, 28, 0.28);
   display: flex;
   inset: 0;
   justify-content: center;
@@ -340,10 +340,10 @@
 }
 
 .draft-save-space-dialog {
-  background: #FAFAF7;
-  border: 1px solid #DED9CF;
+  background: #F6F6F4;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
-  box-shadow: 0 18px 46px rgba(26, 26, 26, 0.22);
+  box-shadow: 0 18px 46px rgba(30, 30, 28, 0.22);
   display: grid;
   gap: 12px;
   max-width: 440px;
@@ -365,16 +365,16 @@
 
 .draft-save-space-dialog label span,
 .draft-dialog-note {
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12px;
 }
 
 .draft-save-space-dialog input,
 .draft-save-space-dialog select {
-  background: #fffdf8;
-  border: 1px solid #DED9CF;
+  background: #ffffff;
+  border: 1px solid #D8D8D2;
   border-radius: 6px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;

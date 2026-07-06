@@ -668,26 +668,27 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   )
 
   // Chip styling — the filter row reuses .concierge-starter-chip's rule.
-  // Background/text stay as before; the resting border was intentionally
-  // raised from the near-invisible #E5E3DC to the more legible on-system
-  // #D3CBBD (chip-wall cut: "补 chip 边框可见度", DESIGN.md 按层级选强弱).
+  // teal-repaint: neutral resting chip border/text on the new #D8D8D2 /
+  // #6A6A64 neutral palette (was #D3CBBD / #6B645C warm neutrals).
   const chipRule = css.match(/\.concierge-starter-chip\s*\{[^}]*\}/)?.[0] || ''
   assert('chip background transparent', /background:\s*transparent/.test(chipRule), '')
-  assert('chip border visible #D3CBBD', /border:\s*1px solid #D3CBBD/i.test(chipRule), '')
-  assert('chip text uses #6B645C', /color:\s*#6B645C/i.test(chipRule), '')
+  assert('chip border visible #D8D8D2', /border:\s*1px solid #D8D8D2/i.test(chipRule), '')
+  assert('chip text uses #6A6A64', /color:\s*#6A6A64/i.test(chipRule), '')
 
-  // chip 选中态暖化（DESIGN.md Chips: 选中态用赭红/暖金，不用墨黑）— regression guard.
+  // chip 选中态墨绿化（teal-repaint C6: DESIGN.md Single-Hue Rule — retired the
+  // oxblood #B8323C red-pen selected state in favor of the one teal accent）
+  // — regression guard.
   const chipSelectedRule = css.match(/\.concierge-starter-chip\.is-selected\s*\{[^}]*\}/)?.[0] || ''
-  assert('selected chip border is oxblood #B8323C (warm accent, not ink)', /border-color:\s*#B8323C/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip text is oxblood #B8323C', /color:\s*#B8323C/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip is NOT ink-filled #1A1A1A (DESIGN.md 选中态用赭红/暖金)', !/#1A1A1A/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip fill is a faint oxblood wash, not opaque', /background:\s*rgba\(184,\s*50,\s*60,/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip border is teal #2C6E56 (single-hue accent, not oxblood)', /border-color:\s*#2C6E56/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip text is teal-800 #1E4A3A', /color:\s*#1E4A3A/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip is NOT ink-filled #1A1A1A / oxblood #B8323C (teal-repaint Single-Hue Rule)', !/#1A1A1A|#B8323C/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip fill is a faint teal wash, not opaque', /background:\s*rgba\(44,\s*110,\s*86,/i.test(chipSelectedRule), chipSelectedRule)
 
   // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('intent-bar rest border #DED9CF', /border:\s*1px solid #DED9CF/i.test(barRule), '')
+  assert('intent-bar rest border #D8D8D2', /border:\s*1px solid #D8D8D2/i.test(barRule), '')
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('focus border #1A1A1A', /border-color:\s*#1A1A1A/i.test(focusRule), '')
+  assert('focus border teal #2C6E56', /border-color:\s*#2C6E56/i.test(focusRule), '')
 }
 
 // ------------------------------------------------------------------ Test 13
@@ -730,7 +731,7 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   assert('paper-row uses cursor: pointer', /cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
   assert('paper-row has soft transition (no transform)', /transition:\s*background\s*120ms\s*ease,\s*box-shadow\s*120ms\s*ease/.test(paperRowRule), `got: ${paperRowRule}`)
   const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]*?\.concierge-paper-row:focus-visible\s*\{[^}]*\}/)?.[0] || ''
-  assert('paper-row hover uses warm #F4F2EC', /background:\s*#F4F2EC/i.test(hoverRule), '')
+  assert('paper-row hover uses neutral #EDEDEA', /background:\s*#EDEDEA/i.test(hoverRule), '')
 
   // 草稿卷 visible copy in App is intact.
   const mentions = app.match(/组题篮/g) || []
@@ -763,7 +764,7 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
 
   const noticeRule = css.match(/\.concierge-data-loading\s*\{[^}]*\}/)?.[0] || ''
   assert('.concierge-data-loading rule exists', noticeRule.length > 0, '')
-  assert('notice uses muted ink #6B645C (AA-compliant status text)', /color:\s*#6B645C/i.test(noticeRule), '')
+  assert('notice uses muted ink #6A6A64 (AA-compliant status text)', /color:\s*#6A6A64/i.test(noticeRule), '')
 }
 
 // ------------------------------------------------------------------ Test 16

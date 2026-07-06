@@ -400,7 +400,7 @@ button:disabled {
 .workflow-card.ready_to_commit,
 .workflow-card.ready_to_paper,
 .workflow-card.ready_to_export {
-  border-left-color: #2563eb;
+  border-left-color: #2C6E56;
 }
 
 .workflow-card.needs_review,
@@ -1216,7 +1216,7 @@ button:disabled {
   display: grid;
   gap: 9px;
   padding: 12px;
-  border: 1px solid rgba(55, 80, 120, 0.22);
+  border: 1px solid rgba(106, 106, 100, 0.22);
   border-radius: 8px;
   background: var(--surface);
 }
@@ -1303,9 +1303,9 @@ button:disabled {
   display: grid;
   gap: 9px;
   padding: 12px;
-  border: 1px solid rgba(55, 80, 120, 0.22);
+  border: 1px solid rgba(106, 106, 100, 0.22);
   border-radius: 8px;
-  background: rgba(234, 239, 245, 0.74);
+  background: rgba(106, 106, 100, 0.08);
 }
 
 .reading-profile-head,
@@ -1375,9 +1375,9 @@ button:disabled {
   display: grid;
   gap: 9px;
   padding: 12px;
-  border: 1px solid rgba(15, 118, 110, 0.25);
+  border: 1px solid rgba(44, 110, 86, 0.25);
   border-radius: 8px;
-  background: rgba(15, 118, 110, 0.08);
+  background: rgba(44, 110, 86, 0.08);
 }
 
 .synonym-difficulty-card.needs-review {
@@ -1467,8 +1467,8 @@ button:disabled {
 }
 
 .question-ai-parse {
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(44, 110, 86, 0.2);
+  background: rgba(44, 110, 86, 0.08);
 }
 
 .question-ai-verify {
@@ -2988,10 +2988,10 @@ button:disabled {
 
 .parse-mapping-highlight {
   padding: 12px;
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  border: 1px solid rgba(44, 110, 86, 0.25);
   border-left: 4px solid var(--accent);
   border-radius: 8px;
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(44, 110, 86, 0.08);
 }
 
 .parse-mapping strong {
@@ -3080,9 +3080,9 @@ button:disabled {
   display: grid;
   gap: 7px;
   padding: 10px 12px;
-  border: 1px dashed rgba(99, 102, 241, 0.35);
+  border: 1px dashed rgba(44, 110, 86, 0.35);
   border-radius: 8px;
-  background: rgba(99, 102, 241, 0.06);
+  background: rgba(44, 110, 86, 0.06);
 }
 
 .calibration-preview-card.low-confidence {
@@ -3769,7 +3769,7 @@ button:disabled {
   margin-bottom: 12px;
   border: 1px solid var(--accent);
   border-radius: 8px;
-  background: rgba(99, 102, 241, 0.04);
+  background: rgba(44, 110, 86, 0.04);
 }
 
 .block-settings-label {
@@ -3959,8 +3959,8 @@ button:disabled {
    ======================================================================== */
 
 .concierge-desk {
-  background: #FFFDF8;
-  color: #1A1A1A;
+  background: #FFFFFF;
+  color: #1E1E1C;
   padding: 48px clamp(24px, 6vw, 96px) 32px;
   display: flex;
   flex-direction: column;
@@ -3979,14 +3979,14 @@ button:disabled {
   font-size: clamp(22px, 2.4vw, 28px);
   font-weight: 600;
   margin: 0;
-  color: #1A1A1A;
+  color: #1E1E1C;
   letter-spacing: 0.02em;
 }
 
 .concierge-subhead {
   margin: 0;
   font-size: 13px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 /* Intent bar */
@@ -3994,8 +3994,8 @@ button:disabled {
   display: flex;
   gap: 8px;
   align-items: stretch;
-  background: #FFFDF8;
-  border: 1px solid #DED9CF;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 12px;
   padding: 8px 8px 8px 18px;
   min-height: 56px;
@@ -4003,8 +4003,8 @@ button:disabled {
 }
 
 .concierge-intent-bar:focus-within {
-  border-color: #1A1A1A;
-  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.08);
+  border-color: #2C6E56;
+  box-shadow: 0 2px 8px rgba(44, 110, 86, 0.2);
   outline: none;
 }
 
@@ -4015,13 +4015,13 @@ button:disabled {
   background: transparent;
   font-size: 15px;
   line-height: 24px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-family: inherit;
   padding: 0;
 }
 
 .concierge-intent-input::placeholder {
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-intent-submit {
@@ -4031,8 +4031,8 @@ button:disabled {
   border: none;
   border-radius: 8px;
   padding: 0 14px;
-  background: #1A1A1A;
-  color: #FFFDF8;
+  background: #2C6E56;
+  color: #FFFFFF;
   font-size: 18px;
   line-height: 1;
   font-family: inherit;
@@ -4050,17 +4050,17 @@ button:disabled {
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
-  background: #000;
+  background: #1E4A3A;
 }
 
 .concierge-intent-submit:focus-visible {
-  outline: 2px solid rgba(26, 26, 26, 0.6);
+  outline: 2px solid rgba(44, 110, 86, 0.6);
   outline-offset: 2px;
 }
 
 .concierge-intent-submit:disabled {
-  background: #F0EBE0;
-  color: #B8B0A0;
+  background: #EDEDEA;
+  color: #9A9A93;
   cursor: not-allowed;
 }
 
@@ -4074,30 +4074,30 @@ button:disabled {
 .concierge-thinking-toggle input[type='checkbox'] {
   width: 16px;
   height: 16px;
-  accent-color: #B8323C;
+  accent-color: #2C6E56;
   cursor: pointer;
 }
 
 .concierge-thinking-toggle input[type='checkbox']:focus-visible {
-  outline: 2px solid rgba(26, 26, 26, 0.6);
+  outline: 2px solid rgba(44, 110, 86, 0.6);
   outline-offset: 2px;
 }
 
 .concierge-thinking-toggle label {
   font-size: 13px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   cursor: pointer;
 }
 
 .concierge-thinking-hint {
   font-size: 12px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 /* Clarification + notices */
 .concierge-clarification {
-  border: 1px solid rgba(184, 50, 60, 0.28);
-  background: rgba(184, 50, 60, 0.08);
+  border: 1px solid rgba(44, 110, 86, 0.28);
+  background: rgba(44, 110, 86, 0.08);
   padding: 12px 14px;
   border-radius: 4px;
   display: flex;
@@ -4108,14 +4108,14 @@ button:disabled {
 .concierge-clarification-line {
   margin: 0;
   font-size: 13.5px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   line-height: 1.5;
 }
 
 .concierge-clarification-examples {
   margin: 0;
   font-size: 12px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-notice,
@@ -4125,20 +4125,20 @@ button:disabled {
 .concierge-loading {
   margin: 0;
   font-size: 13px;
-  color: #6B645C;
+  color: #6A6A64;
   padding: 6px 4px;
 }
 
 .concierge-notice {
-  border: 1px solid rgba(198, 160, 68, 0.35);
-  background: rgba(198, 160, 68, 0.08);
+  border: 1px solid rgba(90, 156, 131, 0.35);
+  background: rgba(90, 156, 131, 0.08);
   border-radius: 4px;
   padding: 6px 10px;
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .concierge-error {
-  color: #B8323C;
+  color: #dc2626;
 }
 
 /* Result list */
@@ -4162,14 +4162,14 @@ button:disabled {
 .concierge-feed-intro {
   margin: 0;
   font-size: 13px;
-  color: #6B645C;
+  color: #6A6A64;
   padding: 0 4px;
 }
 
 .concierge-feed-empty-corpus {
   margin: 0;
   font-size: 13px;
-  color: #6B645C;
+  color: #6A6A64;
   padding: 6px 4px;
 }
 
@@ -4179,7 +4179,7 @@ button:disabled {
   padding: 0;
   border: none;
   background: none;
-  color: #1A1A1A;
+  color: #2C6E56;
   font-size: 13px;
   font-weight: 500;
   text-decoration: underline;
@@ -4188,7 +4188,7 @@ button:disabled {
 }
 
 .concierge-feed-expand:hover {
-  color: #000;
+  color: #1E4A3A;
 }
 
 .concierge-result-list {
@@ -4198,14 +4198,14 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 16px;
-  background: #FFFDF8;
+  background: #FFFFFF;
   overflow: visible;
 }
 
 .concierge-result-list > li {
-  border-bottom: 1px solid rgba(26, 26, 26, 0.06);
+  border-bottom: 1px solid rgba(30, 30, 28, 0.06);
 }
 
 .concierge-result-list > li:last-child {
@@ -4223,7 +4223,7 @@ button:disabled {
   align-items: center;
   gap: 16px;
   padding: 16px 14px;
-  background: #FFFDF8;
+  background: #FFFFFF;
   outline: none;
   border-radius: 6px;
   transition: background 120ms ease, box-shadow 120ms ease;
@@ -4233,12 +4233,12 @@ button:disabled {
 .concierge-row:hover,
 .concierge-row:focus-visible,
 .concierge-row:focus-within {
-  background: #F4F2EC;
-  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.03);
+  background: #EDEDEA;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.03);
 }
 
 .concierge-row:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.6);
+  box-shadow: inset 0 0 0 2px rgba(44, 110, 86, 0.6);
 }
 
 .concierge-row-anchor {
@@ -4251,7 +4251,7 @@ button:disabled {
 .concierge-source {
   font-size: 13px;
   font-weight: 600;
-  color: #1A1A1A;
+  color: #1E1E1C;
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -4260,7 +4260,7 @@ button:disabled {
 
 .concierge-section {
   font-size: 11px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-row-body {
@@ -4273,7 +4273,7 @@ button:disabled {
 .concierge-primary {
   margin: 0;
   font-size: 14px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   line-height: 1.45;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -4289,7 +4289,7 @@ button:disabled {
   align-items: center;
   gap: 8px;
   font-size: 11.5px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-difficulty-dot {
@@ -4300,9 +4300,9 @@ button:disabled {
   flex-shrink: 0;
 }
 
-.concierge-difficulty-low { background: #4A9D7F; }
-.concierge-difficulty-medium { background: #C6A044; }
-.concierge-difficulty-high { background: #C97B5A; }
+.concierge-difficulty-low { background: #059669; }
+.concierge-difficulty-medium { background: #d97706; }
+.concierge-difficulty-high { background: #dc2626; }
 
 .concierge-meta-tag {
   white-space: nowrap;
@@ -4311,7 +4311,7 @@ button:disabled {
 .concierge-meta-tag + .concierge-meta-tag::before {
   content: '·';
   margin-right: 8px;
-  color: #B8B3AA;
+  color: #9A9A93;
 }
 
 /* Actions: faded by default, clear on row hover/focus. */
@@ -4331,8 +4331,8 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   background: transparent;
-  border: 1px solid #E5E3DC;
-  color: #1A1A1A;
+  border: 1px solid #D8D8D2;
+  color: #1E1E1C;
   font-family: inherit;
   text-decoration: none;
   font-size: 12.5px;
@@ -4343,59 +4343,59 @@ button:disabled {
 }
 
 .concierge-action:hover:not(:disabled) {
-  background: #EFEDE6;
-  border-color: #DED9CF;
+  background: #EDEDEA;
+  border-color: #C6C6C0;
 }
 
 .concierge-action:focus-visible {
   outline: none;
-  border-color: #1A1A1A;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
+  border-color: #2C6E56;
+  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
 }
 
 .concierge-action:disabled {
-  color: #B8B3AA;
+  color: #9A9A93;
   cursor: not-allowed;
 }
 
-/* Primary CTA: 加入草稿卷 — ink-filled, matches DraftPaperWorkbench's
+/* Primary CTA: 加入草稿卷 — teal-filled, matches DraftPaperWorkbench's
    export button so the same action reads the same everywhere. */
 .concierge-action-add {
-  background: #1A1A1A;
-  border-color: #1A1A1A;
-  color: #FFFDF8;
+  background: #2C6E56;
+  border-color: #2C6E56;
+  color: #FFFFFF;
   font-weight: 600;
 }
 
 .concierge-action-add:hover:not(:disabled) {
-  background: #000000;
-  border-color: #000000;
-  color: #FFFDF8;
+  background: #1E4A3A;
+  border-color: #1E4A3A;
+  color: #FFFFFF;
 }
 
 .concierge-action-add:focus-visible {
-  border-color: #1A1A1A;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
+  border-color: #2C6E56;
+  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
 }
 
 /* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
 .concierge-action-add[aria-pressed="true"] {
   background: transparent;
-  border-color: #E5E3DC;
-  color: #6B645C;
+  border-color: #D8D8D2;
+  color: #6A6A64;
   font-weight: 500;
 }
 
 .concierge-action-add[aria-pressed="true"]:hover:not(:disabled) {
-  background: #F4F2EC;
-  border-color: #DED9CF;
-  color: #6B645C;
+  background: #EDEDEA;
+  border-color: #C6C6C0;
+  color: #6A6A64;
 }
 
 .concierge-action-add:disabled {
   background: transparent;
-  border-color: #E5E3DC;
-  color: #B8B3AA;
+  border-color: #D8D8D2;
+  color: #9A9A93;
 }
 
 /* Visually hidden helper for labels paired with inputs */
@@ -4417,50 +4417,47 @@ button:disabled {
    ======================================================================== */
 
 .app-shell.home-mode-ai {
-  background: #FAFAF7;
-  /* Re-scope the slate tokens `.ghost-button` (and its `--surface-strong` /
-     `--line` / `--line-strong` chain) reads from :root, to the same warm
-     values ConciergeDesk/DraftPaperWorkbench already use. :root itself is
-     untouched — classic mode keeps its slate look pixel-for-pixel. */
-  --surface-strong: #FAFAF7;
-  --line: #E5E3DC;
-  --line-strong: #DED9CF;
-  --ink: #1A1A1A;
+  /* teal-repaint C3: this block used to re-scope --surface-strong / --line /
+     --line-strong / --ink to warm values so classic mode (still slate) and
+     AI mode (warm) could coexist. :root/index.css are now the single new
+     neutral+teal source of truth, so the color remaps are gone; this rule
+     now only carries the AI-mode background + non-color layout below. */
+  background: #F6F6F4;
 }
 
 .app-shell.home-mode-ai .topbar {
-  background: #FAFAF7;
-  border-bottom-color: #E5E3DC;
+  background: #F6F6F4;
+  border-bottom-color: #D8D8D2;
   box-shadow: none;
 }
 
 .app-shell.home-mode-ai .ghost-button {
-  background: #FAFAF7;
-  border-color: #E5E3DC;
-  color: #1A1A1A;
+  background: #F6F6F4;
+  border-color: #D8D8D2;
+  color: #1E1E1C;
 }
 
 .app-shell.home-mode-ai .ghost-button:hover {
-  background: #F4F2EC;
-  border-color: #DED9CF;
+  background: #EDEDEA;
+  border-color: #C6C6C0;
 }
 
-/* Cut ⑥ P3 — `.eyebrow` reads `--muted` (slate #64748b) at :root. Re-scope
-   it to the same warm ink-muted value already used throughout this AI-mode
-   block (#6B645C — see .concierge-paper-meta etc.). :root itself untouched;
-   classic mode keeps its slate eyebrow unchanged. */
+/* Cut ⑥ P3 — `.eyebrow` reads `--muted` (slate #64748b) at :root; C1 has
+   fixed :root --eqb-color-text-muted to the same neutral #6A6A64 this rule
+   already used, so this override is now redundant but harmless to keep
+   explicit for the AI-mode block. */
 .app-shell.home-mode-ai .eyebrow {
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .app-shell.home-mode-ai .workbench {
   display: block;
-  background: #FAFAF7;
+  background: #F6F6F4;
   padding: 0;
 }
 
 .app-shell.home-mode-ai .library-panel {
-  background: #FAFAF7;
+  background: #F6F6F4;
   border: none;
   box-shadow: none;
   max-width: 1160px;
@@ -4509,40 +4506,14 @@ button:disabled {
   margin: 0 auto;
   padding: 24px;
 
-  /* Cut ui-detail-warm — finish the AI-mode warm migration for the detail
-     view. The `.app-shell.home-mode-ai` block above (~L4553) already
-     re-scopes --ink / --line / --surface-strong to warm, but the detail
-     view's body text (--muted), headings (--ink-strong), primary buttons +
-     focus rings (--accent / --accent-glow) and semantic chips
-     (--blue / --mint / --amber / --coral) still read the retired slate/blue
-     palette from :root — that is why the detail view rendered cold blue.
-     Re-scope the remaining classic tokens to the same warm values
-     ConciergeDesk already uses, on the .detail-view subtree only. :root and
-     classic mode stay pixel-identical (this is the No-Blue migration, not a
-     locked-token edit). Semantic text is darkened past the raw DESIGN.md
-     hues so 12px chip labels clear WCAG AA on their soft tint. */
-  --ink: #1A1A1A;
-  --ink-strong: #1A1A1A;
-  --muted: #6B645C;
-  --surface: #FAFAF7;
-  --surface-strong: #F4F2EC;
-  --panel: #FFFDF8;
-  --line: #E5E3DC;
-  --line-strong: #DED9CF;
-  /* Primary action + focus rings: blue → ink (DESIGN.md primary button is
-     ink bg + paper text; white on #1A1A1A ≈ 17:1). */
-  --accent: #1A1A1A;
-  --accent-glow: rgba(26, 26, 26, 0.12);
-  /* Fact / info chips: slate-blue → warm-neutral (surface-warm + ink-muted). */
-  --blue-soft: #F4F2EC;
-  --blue-text: #6B645C;
-  /* Difficulty + semantic chips → warm equivalents of the DESIGN.md palette. */
-  --mint-soft: rgba(74, 157, 127, 0.12);
-  --mint-text: #3F8168;
-  --amber-soft: rgba(184, 115, 46, 0.14);
-  --amber-text: #834717;
-  --coral-soft: rgba(196, 84, 62, 0.12);
-  --coral-text: #B4462F;
+  /* teal-repaint C3: this block used to re-scope --ink / --ink-strong /
+     --muted / --surface / --surface-strong / --panel / --line /
+     --line-strong / --accent / --accent-glow / --blue-* / --mint-* /
+     --amber-* / --coral-* to warm values so the detail view (still reading
+     the retired slate/blue :root at the time) would render warm instead of
+     cold blue. C1 (tokens.css) + C2 (index.css) now make :root/index.css
+     themselves neutral + teal, so the detail view inherits the new palette
+     directly — these per-subtree color remaps are gone. */
 }
 
 /* In the compact answer-compare layout the state badge sits inside a box
@@ -4563,21 +4534,21 @@ button:disabled {
   align-items: center;
   gap: 8px;
   padding: 8px 14px;
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 999px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-family: inherit;
   font-size: 13px;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.06);
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   z-index: 22;
   transition: background 0.12s, border-color 0.12s;
 }
 
 .basket-chip:hover {
-  background: #EFEDE6;
-  border-color: #1A1A1A;
+  background: #EDEDEA;
+  border-color: #2C6E56;
 }
 
 .basket-chip:disabled {
@@ -4588,7 +4559,7 @@ button:disabled {
 .basket-drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(26, 26, 26, 0.18);
+  background: rgba(30, 30, 28, 0.18);
   border: none;
   padding: 0;
   cursor: pointer;
@@ -4601,9 +4572,9 @@ button:disabled {
   right: 0;
   bottom: 0;
   width: min(420px, 100vw);
-  background: #FFFDF8;
-  border-left: 1px solid #E5E3DC;
-  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.06);
+  background: #FFFFFF;
+  border-left: 1px solid #D8D8D2;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   z-index: 26;
   transform: translateX(100%);
   transition: transform 0.18s ease;
@@ -4624,7 +4595,7 @@ button:disabled {
   border: 1px solid transparent;
   border-radius: 4px;
   background: transparent;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-size: 18px;
   cursor: pointer;
   z-index: 1;
@@ -4634,8 +4605,8 @@ button:disabled {
 }
 
 .basket-drawer-close:hover {
-  background: #EFEDE6;
-  border-color: #E5E3DC;
+  background: #EDEDEA;
+  border-color: #D8D8D2;
 }
 
 
@@ -4644,7 +4615,7 @@ button:disabled {
   margin: 4px 0 0;
   font-size: 11.5px;
   line-height: 1.45;
-  color: #9A9590;
+  color: #9A9A93;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -4652,36 +4623,36 @@ button:disabled {
 }
 
 .concierge-reason-line .concierge-reason-label {
-  color: #6B645C;
+  color: #6A6A64;
   margin-right: 4px;
 }
 
 .concierge-reason-line .concierge-reason-text {
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 
 /* ========================================================================
    Import Intake — quiet workbench, slim status rows.
-   Reuses the concierge palette: warm white paper, ink, cinnabar.
+   Reuses the concierge palette: neutral paper, ink, teal.
    ======================================================================== */
 
 .intake-panel {
   width: min(820px, 100vw);
-  background: #FAFAF7;
+  background: #F6F6F4;
 }
 
 .intake-header {
-  background: #FAFAF7;
-  border-bottom-color: #E5E3DC;
+  background: #F6F6F4;
+  border-bottom-color: #D8D8D2;
 }
 
 .intake-header h2 {
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .intake-header .entry-header-hint {
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .intake-header .entry-header-actions {
@@ -4691,20 +4662,20 @@ button:disabled {
 .intake-header .ghost-button {
   border: 1px solid transparent;
   background: transparent;
-  color: #6B645C;
+  color: #6A6A64;
   padding: 6px;
   border-radius: 6px;
   min-height: 32px;
 }
 
 .intake-header .ghost-button:hover {
-  background: #F4F2EC;
-  color: #1A1A1A;
+  background: #EDEDEA;
+  color: #1E1E1C;
 }
 
 /* Form surface */
 .intake-form {
-  background: #FAFAF7;
+  background: #F6F6F4;
   padding: 20px 24px 32px;
 }
 
@@ -4719,21 +4690,21 @@ button:disabled {
   align-items: center;
   gap: 16px;
   padding: 24px 20px;
-  background: #FFFDF8;
-  border: 1px dashed #DED9CF;
+  background: #FFFFFF;
+  border: 1px dashed #D8D8D2;
   border-radius: 12px;
   cursor: pointer;
   transition: border-color 0.12s, background 0.12s;
 }
 
 .intake-dropzone:hover {
-  border-color: #1A1A1A;
-  background: #FFFDF8;
+  border-color: #2C6E56;
+  background: #FFFFFF;
 }
 
 .intake-dropzone:focus-within {
-  border-color: #1A1A1A;
-  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.08);
+  border-color: #2C6E56;
+  box-shadow: 0 2px 8px rgba(44, 110, 86, 0.2);
   border-style: solid;
 }
 
@@ -4741,8 +4712,8 @@ button:disabled {
   width: 44px;
   height: 44px;
   border-radius: 8px;
-  background: #F4F2EC;
-  color: #6B645C;
+  background: #EDEDEA;
+  color: #6A6A64;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4755,13 +4726,13 @@ button:disabled {
 }
 
 .intake-dropzone-copy strong {
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-size: 14.5px;
   font-weight: 600;
 }
 
 .intake-dropzone-copy span {
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12.5px;
 }
 
@@ -4780,14 +4751,14 @@ button:disabled {
 .intake-file-preview {
   margin-top: 12px;
   padding: 10px 14px;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
-  background: #FFFDF8;
+  background: #FFFFFF;
 }
 
 .intake-file-preview-count {
   font-size: 12.5px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .intake-file-preview ul {
@@ -4803,11 +4774,11 @@ button:disabled {
   display: flex;
   justify-content: space-between;
   font-size: 12.5px;
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .intake-muted {
-  color: #9A9180;
+  color: #9A9A93;
 }
 
 /* Action row */
@@ -4820,8 +4791,8 @@ button:disabled {
 }
 
 .intake-primary-button {
-  background: #1A1A1A;
-  color: #FFFDF8;
+  background: #2C6E56;
+  color: #FFFFFF;
   border: none;
   border-radius: 8px;
   padding: 8px 18px;
@@ -4834,39 +4805,39 @@ button:disabled {
 }
 
 .intake-primary-button:hover:not(:disabled) {
-  background: #000;
+  background: #1E4A3A;
 }
 
 .intake-primary-button:disabled {
-  background: #F0EBE0;
-  color: #B8B0A0;
+  background: #EDEDEA;
+  color: #9A9A93;
   cursor: not-allowed;
 }
 
 .intake-action-note {
   font-size: 12.5px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .intake-action-note.success {
-  color: #4A9D7F;
+  color: #059669;
 }
 
 .intake-action-note.error {
-  color: #B8323C;
+  color: #dc2626;
 }
 
 /* Advanced settings (demoted role / bundle-name fields) */
 .intake-advanced {
   margin-top: 20px;
-  border-top: 1px solid #E5E3DC;
+  border-top: 1px solid #D8D8D2;
   padding-top: 12px;
 }
 
 .intake-advanced > summary {
   cursor: pointer;
   font-size: 12.5px;
-  color: #6B645C;
+  color: #6A6A64;
   list-style: none;
   padding: 4px 0;
   user-select: none;
@@ -4893,16 +4864,16 @@ button:disabled {
   flex-direction: column;
   gap: 4px;
   font-size: 12.5px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .intake-field input,
 .intake-field select {
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   padding: 8px 10px;
-  background: #FFFDF8;
-  color: #1A1A1A;
+  background: #FFFFFF;
+  color: #1E1E1C;
   font-family: inherit;
   font-size: 13.5px;
   min-height: 36px;
@@ -4911,7 +4882,7 @@ button:disabled {
 .intake-field input:focus,
 .intake-field select:focus {
   outline: none;
-  border-color: #1A1A1A;
+  border-color: #2C6E56;
 }
 
 /* ── Bundle status list ─────────────────────────────────────────────── */
@@ -4927,19 +4898,19 @@ button:disabled {
   align-items: baseline;
   gap: 8px;
   margin-bottom: 12px;
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12.5px;
 }
 
 .intake-bundles-heading strong {
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-size: 14px;
 }
 
 .intake-stage-group {
   margin-top: 16px;
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -4957,28 +4928,28 @@ button:disabled {
   padding: 10px 16px;
   font-size: 12.5px;
   font-weight: 600;
-  color: #1A1A1A;
+  color: #1E1E1C;
   letter-spacing: 0.02em;
-  border-bottom: 1px solid #E5E3DC;
-  background: #FAFAF7;
+  border-bottom: 1px solid #D8D8D2;
+  background: #F6F6F4;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .intake-stage-title span {
-  color: #9A9180;
+  color: #9A9A93;
   font-weight: 500;
   font-size: 12px;
 }
 
 .intake-stage-done > summary > .intake-stage-title {
   border-bottom: none;
-  background: #FAFAF7;
+  background: #F6F6F4;
 }
 
 .intake-stage-done[open] > summary > .intake-stage-title {
-  border-bottom: 1px solid #E5E3DC;
+  border-bottom: 1px solid #D8D8D2;
 }
 
 .intake-row-list {
@@ -4993,8 +4964,8 @@ button:disabled {
   gap: 16px;
   padding: 12px 16px;
   align-items: center;
-  border-bottom: 1px solid #E5E3DC;
-  background: #FFFDF8;
+  border-bottom: 1px solid #D8D8D2;
+  background: #FFFFFF;
   transition: background 0.12s;
 }
 
@@ -5003,7 +4974,7 @@ button:disabled {
 }
 
 .intake-row:hover {
-  background: #F4F2EC;
+  background: #EDEDEA;
 }
 
 .intake-row-anchor {
@@ -5014,7 +4985,7 @@ button:disabled {
 }
 
 .intake-row-anchor strong {
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-size: 13.5px;
   font-weight: 600;
   white-space: nowrap;
@@ -5032,13 +5003,13 @@ button:disabled {
 .intake-row-status {
   margin: 0;
   font-size: 13px;
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .intake-row-metrics {
   margin: 0;
   font-size: 11.5px;
-  color: #6B645C;
+  color: #6A6A64;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -5047,7 +5018,7 @@ button:disabled {
 .intake-row-error {
   margin: 0;
   font-size: 11.5px;
-  color: #B8323C;
+  color: #dc2626;
 }
 
 .intake-row-actions {
@@ -5059,10 +5030,10 @@ button:disabled {
 .intake-row-primary {
   width: 32px;
   height: 32px;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
-  background: #FFFDF8;
-  color: #1A1A1A;
+  background: #FFFFFF;
+  color: #1E1E1C;
   cursor: pointer;
   font-size: 16px;
   line-height: 1;
@@ -5073,22 +5044,22 @@ button:disabled {
 }
 
 .intake-row:hover .intake-row-primary {
-  background: #1A1A1A;
-  color: #FFFDF8;
-  border-color: #1A1A1A;
+  background: #2C6E56;
+  color: #FFFFFF;
+  border-color: #2C6E56;
 }
 
 .intake-row-primary:focus-visible {
-  background: #1A1A1A;
-  color: #FFFDF8;
-  border-color: #1A1A1A;
+  background: #2C6E56;
+  color: #FFFFFF;
+  border-color: #2C6E56;
   outline: none;
 }
 
 .intake-row-primary:disabled {
-  background: #F0EBE0;
-  color: #B8B0A0;
-  border-color: #E5E3DC;
+  background: #EDEDEA;
+  color: #9A9A93;
+  border-color: #D8D8D2;
   cursor: not-allowed;
 }
 
@@ -5112,7 +5083,7 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 14px;
   user-select: none;
 }
@@ -5120,8 +5091,8 @@ button:disabled {
 .intake-row-more > summary::-webkit-details-marker { display: none; }
 
 .intake-row-more > summary:hover {
-  background: #EFEDE6;
-  color: #1A1A1A;
+  background: #EDEDEA;
+  color: #1E1E1C;
 }
 
 .intake-row-more-menu {
@@ -5129,21 +5100,21 @@ button:disabled {
   right: 0;
   top: calc(100% + 4px);
   z-index: 4;
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   padding: 4px;
   display: flex;
   flex-direction: column;
   gap: 2px;
   min-width: 160px;
-  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.06);
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
 }
 
 .intake-row-more-menu button {
   background: transparent;
   border: none;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-family: inherit;
   font-size: 13px;
   text-align: left;
@@ -5153,11 +5124,11 @@ button:disabled {
 }
 
 .intake-row-more-menu button:hover:not(:disabled) {
-  background: #F4F2EC;
+  background: #EDEDEA;
 }
 
 .intake-row-more-menu button:disabled {
-  color: #B8B0A0;
+  color: #9A9A93;
   cursor: not-allowed;
 }
 
@@ -5166,7 +5137,7 @@ button:disabled {
 .concierge-subhead-hint {
   margin: 8px 0 0;
   font-size: 12px;
-  color: #6B645C;
+  color: #6A6A64;
   text-align: center;
 }
 
@@ -5183,8 +5154,8 @@ button:disabled {
 
 .concierge-starter-chip {
   background: transparent;
-  border: 1px solid #D3CBBD;
-  color: #6B645C;
+  border: 1px solid #D8D8D2;
+  color: #6A6A64;
   font-family: inherit;
   font-size: 12.5px;
   padding: 4px 10px;
@@ -5194,15 +5165,15 @@ button:disabled {
 }
 
 .concierge-starter-chip:hover {
-  background: #F4F2EC;
-  border-color: #B8B0A0;
-  color: #1A1A1A;
+  background: #EDEDEA;
+  border-color: #C6C6C0;
+  color: #1E1E1C;
 }
 
 .concierge-starter-chip:focus-visible {
   outline: none;
-  border-color: #1A1A1A;
-  color: #1A1A1A;
+  border-color: #2C6E56;
+  color: #1E1E1C;
 }
 
 /* In AI mode, keep the hint and chips centered with the intent bar. */
@@ -5236,7 +5207,7 @@ button:disabled {
   min-width: 34px;
   font-size: 11px;
   font-weight: 500;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 /* Must out-rank `.app-shell.home-mode-ai .concierge-starter-chips` above
@@ -5257,28 +5228,29 @@ button:disabled {
   opacity: 0.45;
 }
 
-/* Selected chip = the system's red pen. DESIGN.md Chips: 选中态用赭红或暖金，
-   未选中保持暖中性。Oxblood #B8323C carries 「当前选中」semantics; the fill
-   stays a faint 10% wash so multiple selected chips never bank past the
-   ≤10% accent budget (Red-Pen Rule). Oxblood-on-wash tests ~4.98:1 at rest /
-   ~4.53:1 on hover — both clear WCAG AA (4.5:1). */
+/* Selected chip = the system's signature. teal-repaint C6: retired the
+   oxblood red-pen (#B8323C) selected state — the current-selection role now
+   reads as the single teal accent, consistent with the Single-Hue Rule.
+   The fill stays a faint wash so multiple selected chips never bank past
+   the ≤10% accent budget (Green-Pen Rule). teal-800 on teal-50 wash clears
+   WCAG AA (9.26:1). */
 .concierge-starter-chip.is-selected {
-  background: rgba(184, 50, 60, 0.10);
-  border-color: #B8323C;
-  color: #B8323C;
+  background: rgba(44, 110, 86, 0.10);
+  border-color: #2C6E56;
+  color: #1E4A3A;
   font-weight: 500;
 }
 
 .concierge-starter-chip.is-selected:hover {
-  background: rgba(184, 50, 60, 0.16);
-  border-color: #B8323C;
-  color: #B8323C;
+  background: rgba(44, 110, 86, 0.16);
+  border-color: #2C6E56;
+  color: #1E4A3A;
 }
 
 .concierge-filter-clear {
   background: transparent;
   border: none;
-  color: #6B645C;
+  color: #6A6A64;
   font-family: inherit;
   font-size: 12.5px;
   cursor: pointer;
@@ -5287,13 +5259,13 @@ button:disabled {
 }
 
 .concierge-filter-clear:hover {
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .concierge-filter-clear-inline {
   background: transparent;
   border: none;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
@@ -5302,7 +5274,7 @@ button:disabled {
 }
 
 .concierge-feed-filtered-tag {
-  color: #6B645C;
+  color: #6A6A64;
   margin-left: 4px;
 }
 
@@ -5319,7 +5291,7 @@ button:disabled {
   align-items: center;
   background: transparent;
   border: none;
-  color: #6B645C;
+  color: #6A6A64;
   font-family: inherit;
   font-size: 12.5px;
   cursor: pointer;
@@ -5327,7 +5299,7 @@ button:disabled {
 }
 
 .concierge-filter-more:hover {
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 /* Chevron: down when collapsed, up when expanded (instant, no motion). */
@@ -5349,8 +5321,8 @@ button:disabled {
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
 .intake-batch-panel {
   margin-top: 28px;
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 12px;
   padding: 12px 16px;
 }
@@ -5363,7 +5335,7 @@ button:disabled {
   justify-content: space-between;
   gap: 8px;
   padding: 4px 2px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-size: 13px;
   font-weight: 600;
   user-select: none;
@@ -5373,16 +5345,16 @@ button:disabled {
 
 .intake-batch-panel > summary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
+  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
   border-radius: 6px;
 }
 
 .intake-batch-pill {
   font-size: 11.5px;
   font-weight: 500;
-  color: #6B645C;
-  background: #FAFAF7;
-  border: 1px solid #E5E3DC;
+  color: #6A6A64;
+  background: #F6F6F4;
+  border: 1px solid #D8D8D2;
   padding: 2px 8px;
   border-radius: 999px;
 }
@@ -5403,11 +5375,11 @@ button:disabled {
   align-items: center;
   gap: 8px;
   font-size: 12.5px;
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .intake-checkbox-field input[type='checkbox'] {
-  accent-color: #1A1A1A;
+  accent-color: #2C6E56;
 }
 
 .intake-batch-actions {
@@ -5419,9 +5391,9 @@ button:disabled {
 }
 
 .intake-secondary-button {
-  background: #FFFDF8;
-  color: #1A1A1A;
-  border: 1px solid #DED9CF;
+  background: #FFFFFF;
+  color: #1E1E1C;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   padding: 6px 14px;
   min-height: 34px;
@@ -5432,27 +5404,27 @@ button:disabled {
 }
 
 .intake-secondary-button:hover:not(:disabled) {
-  background: #F4F2EC;
-  border-color: #1A1A1A;
+  background: #EDEDEA;
+  border-color: #2C6E56;
 }
 
 .intake-secondary-button:focus-visible {
   outline: none;
-  border-color: #1A1A1A;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
+  border-color: #2C6E56;
+  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
 }
 
 .intake-secondary-button:disabled {
-  background: #FAFAF7;
-  color: #B8B0A0;
-  border-color: #E5E3DC;
+  background: #F6F6F4;
+  color: #9A9A93;
+  border-color: #D8D8D2;
   cursor: not-allowed;
 }
 
 .intake-batch-note {
   margin: 8px 0 0;
   font-size: 12px;
-  color: #9A9180;
+  color: #9A9A93;
 }
 
 /* Group overflow line: "+N 更多" */
@@ -5460,7 +5432,7 @@ button:disabled {
   margin: 0;
   padding: 8px 16px 12px;
   font-size: 12px;
-  color: #9A9180;
+  color: #9A9A93;
   text-align: right;
 }
 
@@ -5483,7 +5455,7 @@ button:disabled {
   height: 22px;
   border: none;
   background: transparent;
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 13px;
   line-height: 1;
   border-radius: 4px;
@@ -5496,18 +5468,18 @@ button:disabled {
 }
 
 .concierge-row-expand:hover {
-  background: #EFEDE6;
-  color: #1A1A1A;
+  background: #EDEDEA;
+  color: #1E1E1C;
 }
 
 .concierge-row-expand:focus-visible {
   outline: none;
-  background: #EFEDE6;
-  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.6);
+  background: #EDEDEA;
+  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
 }
 
 .concierge-row-expand.open {
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .concierge-row-anchor-text {
@@ -5520,7 +5492,7 @@ button:disabled {
 /* When a row is expanded, anchor it visually so the detail panel feels
    pulled out of it — but no shadow, no stamp, no decoration. */
 .concierge-row.is-expanded {
-  background: #FFFDF8;
+  background: #FFFFFF;
 }
 
 /* Inline detail panel */
@@ -5528,7 +5500,7 @@ button:disabled {
   grid-column: 1 / -1;
   margin-top: 12px;
   padding: 14px 14px 4px;
-  border-top: 1px solid rgba(26, 26, 26, 0.06);
+  border-top: 1px solid rgba(30, 30, 28, 0.06);
   cursor: default;
 }
 
@@ -5543,7 +5515,7 @@ button:disabled {
 .concierge-skeleton-line {
   height: 12px;
   border-radius: 6px;
-  background: linear-gradient(90deg, #F4F2EC 0%, #EFEDE6 50%, #F4F2EC 100%);
+  background: linear-gradient(90deg, #F6F6F4 0%, #EDEDEA 50%, #F6F6F4 100%);
   background-size: 200% 100%;
   animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite;
 }
@@ -5573,13 +5545,13 @@ button:disabled {
   gap: 12px;
   padding: 8px 0;
   font-size: 13px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-row-detail-empty {
   margin: 0;
   font-size: 13px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 /* Question card list — read-only, horizontally scrollable */
@@ -5598,8 +5570,8 @@ button:disabled {
 .concierge-detail-question {
   flex: 0 0 220px;
   scroll-snap-align: start;
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 10px;
   padding: 10px 12px;
   display: flex;
@@ -5617,20 +5589,20 @@ button:disabled {
 .concierge-detail-q-no {
   font-size: 12.5px;
   font-weight: 600;
-  color: #1A1A1A;
+  color: #1E1E1C;
   letter-spacing: 0.02em;
 }
 
 .concierge-detail-q-type {
   font-size: 11px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-detail-q-stem {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.5;
-  color: #1A1A1A;
+  color: #1E1E1C;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -5647,7 +5619,7 @@ button:disabled {
   gap: 3px;
   font-size: 11.5px;
   line-height: 1.35;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-detail-q-options li {
@@ -5666,7 +5638,7 @@ button:disabled {
 .concierge-detail-q-answer {
   margin-top: auto;
   font-size: 11.5px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 
@@ -5674,20 +5646,20 @@ button:disabled {
 .concierge-data-loading {
   margin: 8px 0 0;
   font-size: 12.5px;
-  color: #6B645C;
+  color: #6A6A64;
   text-align: center;
 }
 
 .concierge-intent-input:disabled {
   background: transparent;
-  color: #9A9180;
+  color: #9A9A93;
   cursor: progress;
 }
 
 
 /* ========================================================================
    Concierge V1.1 — paper-bucket rows + inline group cards.
-   Reuses warm white paper / ink palette from the V1 stream.
+   Reuses neutral paper / ink palette from the V1 stream.
    ======================================================================== */
 
 .concierge-paper-list {
@@ -5697,14 +5669,14 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 16px;
-  background: #FFFDF8;
+  background: #FFFFFF;
   overflow: visible;
 }
 
 .concierge-paper-list > li {
-  border-bottom: 1px solid rgba(26, 26, 26, 0.06);
+  border-bottom: 1px solid rgba(30, 30, 28, 0.06);
 }
 
 .concierge-paper-list > li:last-child {
@@ -5718,7 +5690,7 @@ button:disabled {
   align-items: center;
   gap: 16px;
   padding: 16px 14px;
-  background: #FFFDF8;
+  background: #FFFFFF;
   outline: none;
   border-radius: 6px;
   transition: background 120ms ease, box-shadow 120ms ease;
@@ -5728,16 +5700,16 @@ button:disabled {
 .concierge-paper-row:hover,
 .concierge-paper-row:focus-within,
 .concierge-paper-row:focus-visible {
-  background: #F4F2EC;
-  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.03);
+  background: #EDEDEA;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.03);
 }
 
 .concierge-paper-row:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.6);
+  box-shadow: inset 0 0 0 2px rgba(44, 110, 86, 0.6);
 }
 
 .concierge-paper-row.is-expanded {
-  background: #FFFDF8;
+  background: #FFFFFF;
 }
 
 /* 窄屏：三列 grid 会把中列挤成 0 宽（文字竖排溢出），改为标题+操作一行、
@@ -5771,7 +5743,7 @@ button:disabled {
 .concierge-paper-headline {
   font-size: 13.5px;
   font-weight: 600;
-  color: #1A1A1A;
+  color: #1E1E1C;
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -5780,7 +5752,7 @@ button:disabled {
 
 .concierge-paper-sourcetype {
   font-size: 11px;
-  color: #6B645C; /* 真题/模拟题是选题判断信息，非装饰标注 */
+  color: #6A6A64; /* 真题/模拟题是选题判断信息，非装饰标注 */
 }
 
 .concierge-paper-body {
@@ -5793,7 +5765,7 @@ button:disabled {
 .concierge-paper-meta {
   margin: 0;
   font-size: 12px;
-  color: #6B645C;
+  color: #6A6A64;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -5802,11 +5774,11 @@ button:disabled {
 
 .concierge-paper-hitcount {
   font-weight: 600;
-  color: #1A1A1A;
+  color: #1E1E1C;
 }
 
 .concierge-paper-grouptypes {
-  color: #6B645C;
+  color: #6A6A64;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5821,8 +5793,8 @@ button:disabled {
 
 .concierge-paper-topic-chip {
   font-size: 11px;
-  color: #6B645C;
-  background: #F4F2EC;
+  color: #6A6A64;
+  background: #EDEDEA;
   border-radius: 999px;
   padding: 2px 8px;
   white-space: nowrap;
@@ -5832,7 +5804,7 @@ button:disabled {
   margin: 0;
   font-size: 11.5px;
   line-height: 1.45;
-  color: #6B645C; /* 推荐理由是老师判断依据，正文级对比度（≥4.5:1），不用极弱墨 */
+  color: #6A6A64; /* 推荐理由是老师判断依据，正文级对比度（≥4.5:1），不用极弱墨 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5848,7 +5820,7 @@ button:disabled {
   grid-column: 1 / -1;
   margin-top: 12px;
   padding: 14px 14px 4px;
-  border-top: 1px solid rgba(26, 26, 26, 0.06);
+  border-top: 1px solid rgba(30, 30, 28, 0.06);
 }
 
 /* Group cards inside the expanded paper area */
@@ -5880,8 +5852,8 @@ button:disabled {
  */
 .concierge-group-card-li.is-hit > .concierge-group-card {
   position: relative;
-  background: linear-gradient(0deg, rgba(214, 154, 71, 0.06), rgba(214, 154, 71, 0.06)), #FFFDF8;
-  border-color: rgba(214, 154, 71, 0.35);
+  background: linear-gradient(0deg, rgba(44, 110, 86, 0.06), rgba(44, 110, 86, 0.06)), #FFFFFF;
+  border-color: rgba(44, 110, 86, 0.35);
 }
 /*
  * The 2px warm-amber rule below is positioned via `::before { position:
@@ -5902,12 +5874,12 @@ button:disabled {
   bottom: 8px;
   width: 2px;
   border-radius: 2px;
-  background: #B8732E;
+  background: #2C6E56;
 }
 
 .concierge-group-card {
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 12px;
   padding: 12px 14px;
   display: flex;
@@ -5932,12 +5904,12 @@ button:disabled {
 
 .concierge-group-section {
   font-size: 11.5px;
-  color: #6B645C;
+  color: #6A6A64;
 }
 
 .concierge-group-title {
   font-size: 13.5px;
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -5948,7 +5920,7 @@ button:disabled {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.5;
-  color: #1A1A1A;
+  color: #1E1E1C;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -5964,8 +5936,8 @@ button:disabled {
 
 .concierge-group-pill {
   font-size: 11px;
-  color: #6B645C;
-  background: #F4F2EC;
+  color: #6A6A64;
+  background: #EDEDEA;
   border-radius: 999px;
   padding: 2px 8px;
 }
@@ -5973,7 +5945,7 @@ button:disabled {
 .concierge-group-reason {
   margin: 0;
   font-size: 11.5px;
-  color: #6B645C;
+  color: #6A6A64;
   line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -5983,7 +5955,7 @@ button:disabled {
 }
 
 .concierge-group-reason-label {
-  color: #6B645C;
+  color: #6A6A64;
   margin-right: 4px;
 }
 
@@ -5995,7 +5967,7 @@ button:disabled {
 }
 
 /* ─────────────────────────── Recent imports — quiet workbench overrides ───
- * Aligns the 「最近导入」 section with the Import Intake palette (paper bg,
+ * Aligns the 「最近导入」 section with the Import Intake palette (neutral bg,
  * hairline borders, low-contrast count pill, ghost action buttons). Defined
  * here so the original tokenized rules above are not disturbed; source order
  * is enough to win specificity ties.
@@ -6003,20 +5975,20 @@ button:disabled {
 .import-history {
   margin: 18px 0;
   padding: 14px 16px;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 10px;
-  background: #FAFAF7;
+  background: #F6F6F4;
   gap: 10px;
 }
 
 .import-history .saved-paper-heading span {
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
 }
 
-/* The count pill: paper-soft, low contrast, no black dot. */
+/* The count pill: neutral-soft, low contrast, no black dot. */
 .import-history .saved-paper-heading strong {
   display: inline-flex;
   align-items: center;
@@ -6024,17 +5996,17 @@ button:disabled {
   min-width: 28px;
   height: 24px;
   padding: 0 8px;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 999px;
-  background: #FFFDF8;
-  color: #6B645C;
+  background: #FFFFFF;
+  color: #6A6A64;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 
 .import-history .saved-paper-note {
-  color: #8A8275;
+  color: #9A9A93;
   font-size: 12px;
   font-weight: 500;
 }
@@ -6043,22 +6015,22 @@ button:disabled {
   gap: 6px;
 }
 
-/* The list rows: quiet, paper bg, hairline border, lighter hover. */
+/* The list rows: quiet, neutral bg, hairline border, lighter hover. */
 .import-history .import-file-item {
   padding: 10px 12px;
-  background: #FFFDF8;
-  border: 1px solid #E5E3DC;
+  background: #FFFFFF;
+  border: 1px solid #D8D8D2;
   border-radius: 8px;
   transition: background 120ms ease, border-color 120ms ease;
 }
 
 .import-history .import-file-item:hover {
-  background: #F4F2EC;
-  border-color: #DED9CF;
+  background: #EDEDEA;
+  border-color: #C6C6C0;
 }
 
 .import-history .import-file-item strong {
-  color: #1A1A1A;
+  color: #1E1E1C;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
@@ -6066,7 +6038,7 @@ button:disabled {
 
 .import-history .import-file-item span {
   margin-top: 4px;
-  color: #6B645C;
+  color: #6A6A64;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
@@ -6074,7 +6046,7 @@ button:disabled {
 
 .import-history .import-file-item p {
   margin-top: 6px;
-  color: #8A8275;
+  color: #9A9A93;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
@@ -6089,10 +6061,10 @@ button:disabled {
   height: 30px;
   min-height: 30px;
   padding: 0 12px;
-  border: 1px solid #E5E3DC;
+  border: 1px solid #D8D8D2;
   border-radius: 6px;
-  background: #FFFDF8;
-  color: #1A1A1A;
+  background: #FFFFFF;
+  color: #1E1E1C;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -6101,14 +6073,14 @@ button:disabled {
 }
 
 .import-history .import-file-actions .detail-button:hover:not(:disabled) {
-  background: #F4F2EC;
-  border-color: #DED9CF;
+  background: #EDEDEA;
+  border-color: #C6C6C0;
 }
 
 .import-history .import-file-actions .detail-button:disabled {
-  background: #FAFAF7;
-  color: #B8B0A0;
-  border-color: #E5E3DC;
+  background: #F6F6F4;
+  color: #9A9A93;
+  border-color: #D8D8D2;
 }
 
 /* Quiet icon button — only shows danger color on hover. */
@@ -6118,11 +6090,11 @@ button:disabled {
   border: 1px solid transparent;
   border-radius: 6px;
   background: transparent;
-  color: #B8B0A0;
+  color: #9A9A93;
 }
 
 .import-history .import-file-actions .icon-button:hover {
-  background: rgba(199, 109, 42, 0.06);
-  border-color: rgba(199, 109, 42, 0.32);
-  color: #B8732E;
+  background: rgba(220, 38, 38, 0.06);
+  border-color: rgba(220, 38, 38, 0.32);
+  color: #dc2626;
 }

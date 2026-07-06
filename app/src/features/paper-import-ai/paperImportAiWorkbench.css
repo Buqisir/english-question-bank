@@ -1,7 +1,7 @@
 .pi-ai-shell {
   min-height: 100vh;
-  background: #fafaf7;
-  color: #1a1a1a;
+  background: #f6f6f4;
+  color: #1e1e1c;
 }
 
 .pi-ai-topbar {
@@ -10,8 +10,8 @@
   justify-content: space-between;
   gap: 18px;
   padding: 14px 24px;
-  border-bottom: 1px solid #e5e3dc;
-  background: #fafaf7;
+  border-bottom: 1px solid #d8d8d2;
+  background: #f6f6f4;
 }
 
 .pi-ai-topbar h1 {
@@ -19,7 +19,7 @@
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: 0;
-  color: #1a1a1a;
+  color: #1e1e1c;
   font-weight: 700;
 }
 
@@ -33,26 +33,26 @@
 }
 
 .pi-ai-shell .primary-button {
-  color: #fffdf8;
-  background: #1a1a1a;
+  color: #ffffff;
+  background: #2c6e56;
   box-shadow: none;
 }
 
 .pi-ai-shell .primary-button:hover:not(:disabled) {
-  background: #000;
+  background: #1e4a3a;
   box-shadow: none;
 }
 
 .pi-ai-status {
   min-width: 92px;
   padding: 6px 10px;
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 999px;
-  color: #6b645c;
+  color: #6a6a64;
   font-size: 12px;
   font-weight: 600;
   text-align: center;
-  background: #f4f2ec;
+  background: #ededea;
 }
 
 .pi-ai-layout {
@@ -66,9 +66,9 @@
 
 .pi-ai-dropzone,
 .pi-ai-panel {
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 12px;
-  background: #fffdf8;
+  background: #ffffff;
 }
 
 .pi-ai-dropzone {
@@ -83,14 +83,14 @@
 .pi-ai-dropzone h2,
 .pi-ai-panel h2 {
   margin: 0;
-  color: #1a1a1a;
+  color: #1e1e1c;
   letter-spacing: 0;
   font-weight: 600;
 }
 
 .pi-ai-dropzone p,
 .pi-ai-muted {
-  color: #6b645c;
+  color: #6a6a64;
   line-height: 1.6;
 }
 
@@ -122,7 +122,7 @@
 
 .pi-ai-panel-heading span {
   overflow: hidden;
-  color: #9a9180;
+  color: #9a9a93;
   font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -135,9 +135,9 @@
   gap: 9px;
   min-height: 40px;
   padding: 8px 10px;
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 6px;
-  background: #f4f2ec;
+  background: #ededea;
 }
 
 .pi-ai-file-card span {
@@ -159,7 +159,7 @@
 .pi-ai-answer-file-row span,
 .pi-ai-answer-source {
   overflow: hidden;
-  color: #6b645c;
+  color: #6a6a64;
   font-size: 13px;
   line-height: 1.5;
   text-overflow: ellipsis;
@@ -173,17 +173,17 @@
 .pi-ai-provider-field {
   display: grid;
   gap: 6px;
-  color: #6b645c;
+  color: #6a6a64;
 }
 
 .pi-ai-provider-field select {
   min-width: 0;
   height: 38px;
-  border: 1px solid #ded9cf;
+  border: 1px solid #d8d8d2;
   border-radius: 6px;
   padding: 0 10px;
-  color: #1a1a1a;
-  background: #fffdf8;
+  color: #1e1e1c;
+  background: #ffffff;
 }
 
 .pi-ai-parse-button {
@@ -191,7 +191,7 @@
 }
 
 .pi-ai-error {
-  color: #b8323c;
+  color: #dc2626;
 }
 
 .pi-ai-summary-grid {
@@ -203,11 +203,11 @@
 
 .pi-ai-summary-grid strong {
   font-size: 22px;
-  color: #1a1a1a;
+  color: #1e1e1c;
 }
 
 .pi-ai-summary-grid span {
-  color: #6b645c;
+  color: #6a6a64;
 }
 
 .pi-ai-publish {
@@ -226,17 +226,17 @@
   align-items: center;
   gap: 6px;
   margin: 0;
-  color: #9a9180;
+  color: #9a9a93;
   font-size: 13px;
 }
 
 .pi-ai-publish-checks p.is-ok {
-  color: #276749;
+  color: #059669;
 }
 
 .pi-ai-warning {
   margin: 0;
-  color: #805b1f;
+  color: #d97706;
   line-height: 1.5;
 }
 
@@ -244,14 +244,14 @@
   display: grid;
   gap: 6px;
   padding: 10px;
-  border: 1px solid rgba(184, 50, 60, 0.18);
+  border: 1px solid rgba(220, 38, 38, 0.18);
   border-radius: 8px;
-  background: rgba(184, 50, 60, 0.06);
+  background: rgba(220, 38, 38, 0.06);
 }
 
 .pi-ai-conflict-list p {
   margin: 0;
-  color: #b8323c;
+  color: #dc2626;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -272,12 +272,12 @@
   gap: 5px;
   min-height: 30px;
   padding: 5px 9px;
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 6px;
-  color: #1a1a1a;
+  color: #1e1e1c;
   font-size: 13px;
   text-decoration: none;
-  background: #f4f2ec;
+  background: #ededea;
 }
 
 .pi-ai-groups,
@@ -298,9 +298,9 @@
 
 .pi-ai-group-card,
 .pi-ai-skipped-list article {
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 12px;
-  background: #fffdf8;
+  background: #ffffff;
 }
 
 .pi-ai-group-card {
@@ -326,13 +326,13 @@
 
 .pi-ai-group-card header span,
 .pi-ai-group-card em {
-  color: #6b645c;
+  color: #6a6a64;
   font-style: normal;
 }
 
 .pi-ai-group-card p {
   margin: 12px 0;
-  color: #1a1a1a;
+  color: #1e1e1c;
   line-height: 1.6;
 }
 
@@ -344,7 +344,7 @@
 }
 
 .pi-ai-group-card li {
-  color: #1a1a1a;
+  color: #1e1e1c;
 }
 
 .pi-ai-group-card li span {
@@ -365,11 +365,11 @@
   overflow: auto;
   margin: 12px 0 0;
   padding: 12px;
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 6px;
-  color: #1a1a1a;
+  color: #1e1e1c;
   white-space: pre-wrap;
-  background: #f4f2ec;
+  background: #ededea;
 }
 
 .pi-ai-readable-preview {
@@ -377,7 +377,7 @@
   gap: 14px;
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px solid #e5e3dc;
+  border-top: 1px solid #d8d8d2;
 }
 
 .pi-ai-readable-head {
@@ -389,7 +389,7 @@
 
 .pi-ai-readable-head h3 {
   margin: 0 0 6px;
-  color: #1a1a1a;
+  color: #1e1e1c;
   font-size: 16px;
 }
 
@@ -403,18 +403,18 @@
 
 .pi-ai-readable-head p,
 .pi-ai-question-focus {
-  color: #1a1a1a;
+  color: #1e1e1c;
 }
 
 .pi-ai-readable-head > span {
-  color: #9a9180;
+  color: #9a9a93;
   font-size: 12px;
   white-space: nowrap;
 }
 
 .pi-ai-structure-summary,
 .pi-ai-stem-translation {
-  color: #6b645c;
+  color: #6a6a64;
 }
 
 .pi-ai-question-preview-list {
@@ -426,9 +426,9 @@
   display: grid;
   gap: 10px;
   padding: 14px;
-  border: 1px solid #e5e3dc;
+  border: 1px solid #d8d8d2;
   border-radius: 12px;
-  background: #fffdf8;
+  background: #ffffff;
 }
 
 .pi-ai-question-preview header {
@@ -445,7 +445,7 @@
 }
 
 .pi-ai-question-preview header span {
-  color: #6b645c;
+  color: #6a6a64;
   font-size: 12px;
 }
 
@@ -458,19 +458,19 @@
 }
 
 .pi-ai-answer-state--ok {
-  color: #276749;
-  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  background: rgba(5, 150, 105, 0.1);
 }
 
 .pi-ai-answer-state--pending {
-  color: #805b1f;
-  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.12);
 }
 
 .pi-ai-answer-state--warning,
 .pi-ai-answer-state--danger {
-  color: #b8323c;
-  background: rgba(184, 50, 60, 0.1);
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.1);
 }
 
 .pi-ai-option-list {
@@ -485,14 +485,14 @@
   display: grid;
   gap: 5px;
   padding: 10px;
-  border: 1px solid #e8e2d7;
+  border: 1px solid #e8e8e4;
   border-radius: 8px;
-  background: #faf8f2;
+  background: #f6f6f4;
 }
 
 .pi-ai-option-list li.is-correct {
-  border-color: rgba(39, 103, 73, 0.3);
-  background: rgba(16, 185, 129, 0.07);
+  border-color: rgba(5, 150, 105, 0.3);
+  background: rgba(5, 150, 105, 0.07);
 }
 
 .pi-ai-option-list li > div {
@@ -503,12 +503,12 @@
 }
 
 .pi-ai-option-list li > div strong {
-  color: #1a1a1a;
+  color: #1e1e1c;
 }
 
 .pi-ai-option-list li > div span,
 .pi-ai-option-list li > div em {
-  color: #6b645c;
+  color: #6a6a64;
   font-size: 12px;
   font-style: normal;
 }
@@ -520,20 +520,20 @@
 }
 
 .pi-ai-option-list small {
-  color: #6b645c;
+  color: #6a6a64;
 }
 
 .pi-ai-location-list {
   display: grid;
   gap: 6px;
   padding: 10px;
-  border-left: 2px solid #b8732e;
-  background: rgba(184, 115, 46, 0.06);
+  border-left: 2px solid #d97706;
+  background: rgba(217, 119, 6, 0.06);
 }
 
 .pi-ai-location-list h4 {
   margin: 0;
-  color: #1a1a1a;
+  color: #1e1e1c;
   font-size: 13px;
 }
 
@@ -541,22 +541,22 @@
   display: grid;
   gap: 2px;
   margin: 0;
-  color: #1a1a1a;
+  color: #1e1e1c;
   line-height: 1.5;
 }
 
 .pi-ai-location-list strong {
-  color: #805b1f;
+  color: #d97706;
   font-size: 12px;
 }
 
 .pi-ai-location-list em {
-  color: #6b645c;
+  color: #6a6a64;
   font-style: normal;
 }
 
 .pi-ai-raw-json summary {
-  color: #6b645c;
+  color: #6a6a64;
   cursor: pointer;
   font-size: 13px;
 }
@@ -569,7 +569,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #805b1f;
+  color: #d97706;
 }
 
 .pi-ai-skipped-list pre {
@@ -578,9 +578,9 @@
   margin: 10px 0 0;
   padding: 10px;
   border-radius: 6px;
-  color: #3f3529;
+  color: #1e1e1c;
   white-space: pre-wrap;
-  background: #fff8e8;
+  background: rgba(217, 119, 6, 0.08);
 }
 
 @media (max-width: 920px) {
