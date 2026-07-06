@@ -184,9 +184,27 @@ Cut 3 独立刀，本刀完全不碰。
   的 httpClient 否定断言（regex 里 `paperImportAi` 是禁止列表项，留着无害）。
 - `scripts/verify-owner-gate.mjs`：删注释 `// server/paper-import-ai/routes.mjs (6;
   ...)`（~L147）+ 其下 6 条 endpoint（~L148-153，`/api/paper-import-ai/*`）。**owner-gate
-  用 `GATED_ROUTES.length` 动态计数，无需改数字**；但**必须删**（否则 member 打
+  的 `GATED_ROUTES.length` 动态计数无需改数字**；但**必须删**（否则 member 打
   已删路由拿不到 403 → `memberBlockedCount` 假红）。**owner-gate 在 verify-ci =
   CI gate，硬要求**。保留 legacy-import 12 条 + 其余全部。
+  - **⚠️ MF-1（PA 抓，本刀必修）**：同文件 `openModeSample`（~L338）用**硬编码
+    绝对索引** `[GATED_ROUTES[0], [12], [18], [27], [31]]` + L335 注释「not the
+    full 33」。删索引 12-17（面 A 6 端点）后 ≥18 的索引下移 6、`[12]` 静默改指
+    （原本特意选 paper-import-ai 路由证 open-mode passthrough），且注释计数本就
+    陈旧（当前实为 38，删后 32）。这是「改计数=回归护栏」纪律点。**修法（deletion-
+    robust，同时给 Cut 3 legacy 删索引 0-11 免雷）**：L335 注释去写死数字（「the
+    full 33」→「the full enumeration」），`openModeSample` 换成长度相对的稳健取样：
+    ```js
+    // representative spread (first/middle/last); length-relative so future
+    // route retirements never silently re-point the sample.
+    const openModeSample = [
+      GATED_ROUTES[0],
+      GATED_ROUTES[Math.floor(GATED_ROUTES.length / 2)],
+      GATED_ROUTES[GATED_ROUTES.length - 1],
+    ]
+    ```
+    改后 `node scripts/verify-owner-gate.mjs` 须 PASS（在 CI）。断言消息用
+    `${openModeSample.length}` 自更新，无需改。
 - `scripts/verify-i16a-teaching-dimension-search.mjs`：删 `invalidationRouteFiles`
   段（注释 ~L499-502 + 数组 `[ 'server/paper-import-ai/routes.mjs' ]` ~L503-505 +
   其后 `for` 循环 ~L506-515）。routes.mjs 是**唯一**数组项，删后循环失去对象，
@@ -286,6 +304,23 @@ owner-gate 描述行（~L131）含「paper-import-ai whole modules」属历史�
 
 ## PA Follow-Up Decisions
 
-（待 PA 回填 —— fresh Opus high。重点压：D4 multipart 连带删是否稳妥 / 8 瘦身
-verify 引擎断言是否真能干净剥离死断言 / i16a 段删除是否漏了活的 invalidation 责任 /
-App.tsx 12 refs 是否恰为清单所列无 orphan。）
+PA verdict: **APPROVE with 1 Must-Fix**（`docs/cuts/paper-import-ai-retire/pa.md`，
+fresh Opus high）。5 个核实点全 PASS：
+- multipart 真 orphan（全库唯一消费者=routes.mjs，C7 引擎测试不碰）→ D4 连带删安全。
+- App.tsx 14 grep 行→10 逻辑点与清单一一对应、无隐藏 orphan；2 处 cross-reset
+  确为函数保留只删行。
+- i1-splitter L149/L151/L155 确是钉旧态断言、不在 CI（假红非 gate）、`mammoth.
+  extractRawText` 引擎断言正确保留。
+- i16a 删段守的是 web-route 源契约，invalidator 是内存缓存函数、离线管线从不用 →
+  **无活的 invalidation 责任被 orphan**；且 L60 existsSync 缺→exit(2) 早 skip，
+  L507 readFileSync 在 skip 后不执行（CI 环境）。
+- h11a `noIpv6Callers`→[] 正确（留则 ENOENT 硬失败）；owner-gate 删 6 端点必要。
+
+**MF-1 → plan 处置（已压入上方「轻改·owner-gate」）**：`openModeSample` 硬编码
+索引 + L335 陈旧计数注释，删 6 端点致索引漂移（[12] 静默改指）+ 计数陈旧（38→32）。
+修法=换长度相对稳健取样（first/middle/last）+ 注释去写死数字。**CR 须确认此项落实**
+（`verify-owner-gate` 在 CI = 真 gate）。
+
+Should-Watch（DEV 留意，非阻塞，见 pa.md）：i1-splitter scope-guard 对本刀跨文件
+删除假红属预期（非 CI，不 widen）；httpClient.ts 注释历史提 paperImportAi 属 inert
+（不改，独立清洁刀）。
