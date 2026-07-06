@@ -1,26 +1,26 @@
 ---
 name: 英语题库工作台
-description: 老师备课用的英语题库与组卷工作台 — 暖色卷面、近黑墨、赭红与暖金的编辑感工具
+description: 老师备课用的英语题库与组卷工作台 — 中性纸底、近黑墨字、墨绿签名强调的专业工具台
 colors:
-  accent-oxblood: "#B8323C"
-  accent-terracotta: "#B8732E"
-  accent-coral: "#C97B5A"
-  gold: "#C49B2A"
-  gold-soft: "#C6A044"
-  paper: "#FFFDF8"
-  surface: "#FAFAF7"
-  surface-warm: "#F4F2EC"
-  surface-sand: "#EFEDE6"
-  surface-deep: "#F0EBE0"
-  ink: "#1A1A1A"
-  ink-muted: "#6B645C"
-  ink-faint: "#9A9180"
-  border: "#E5E3DC"
-  border-warm: "#DED9CF"
-  border-strong: "#B8B0A0"
-  success: "#4A9D7F"
-  warning: "#D97706"
-  danger: "#C4543E"
+  brand-teal: "#2C6E56"
+  teal-50: "#EAF1ED"
+  teal-100: "#CFE4DA"
+  teal-200: "#A5CDBD"
+  teal-400: "#5C9C83"
+  teal-800: "#1E4A3A"
+  teal-900: "#123020"
+  bg: "#F6F6F4"
+  surface: "#FFFFFF"
+  surface-2: "#EDEDEA"
+  ink: "#1E1E1C"
+  ink-muted: "#6A6A64"
+  ink-faint: "#9A9A93"
+  border-subtle: "#E8E8E4"
+  border: "#D8D8D2"
+  border-strong: "#C6C6C0"
+  success: "#059669"
+  warning: "#d97706"
+  danger: "#dc2626"
 typography:
   ui:
     fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
@@ -57,22 +57,22 @@ spacing:
   5: "24px"
 components:
   button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
+    backgroundColor: "{colors.brand-teal}"
+    textColor: "{colors.surface}"
     rounded: "{rounded.md}"
     padding: "8px 16px"
   card:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
     rounded: "{rounded.lg}"
     padding: "16px"
   chip:
-    backgroundColor: "{colors.surface-warm}"
+    backgroundColor: "{colors.bg}"
     textColor: "{colors.ink}"
     rounded: "{rounded.pill}"
     padding: "4px 12px"
   input:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
     rounded: "{rounded.md}"
     padding: "8px 12px"
@@ -82,52 +82,61 @@ components:
 
 ## 1. Overview
 
-**Creative North Star: "The Teacher's Desk"（老师批注过的卷子）**
+**Creative North Star: "The Professional Instrument"（专业工具台）**
 
-整个界面是一张铺在书桌上、被老师批注过的卷子。它的底是暖米白的纸（#FFFDF8），字是近黑的墨（#1A1A1A），线是暖沙色的（#E5E3DC），强调是红笔的赭红（#B8323C）和暖金（#C49B2A）。这不是隐喻拼贴 — 它就是 AI 模式（找题主面）现在真实的样子，也是产品要留下来的外壳。温度不靠卡通或糖果色，靠的是纸感、衬线、暖中性和红笔般克制的强调。
+整个界面是一台安静、可信赖的专业工具。它的底是真中性的浅纸色（#F6F6F4，不偏冷 slate、不偏暖米），字是近黑的中性墨（#1E1E1C），线是中性灰（#D8D8D2），签名强调是一抹沉稳的墨绿（#2C6E56）。它追求的是 Linear / Figma 那种"消失在任务里"的工具质感——克制、精确、可信，但用墨绿这一笔带出知识感的签名，刻意远离通用 SaaS 的那种蓝。
 
-配色策略是**克制（Restrained）**：暖中性承载几乎整个表面，赭红与暖金只作小面积强调（主操作、当前选中、状态指示），从不铺满、从不装饰。近黑墨 + 暖纸 + 红笔，是一套编辑感、纸感、有人味的语言，刻意远离 SaaS 那种通用蓝。
+配色策略是**克制（Restrained）**：中性色承载几乎整个表面，墨绿只作小面积签名强调（主操作、当前选中、链接、焦点），从不铺满、从不装饰。中性纸底 + 近黑墨 + 墨绿点睛，是一套精确、专业、有分寸的语言。
 
-系统明确拒绝五种长相：**通用 AI 蓝**（经典模式那套 slate 蓝正在被淘汰，不要再引入蓝色强调）、AI 生成的千篇一律感（紫色渐变、玻璃拟态）、花哨的营销 SaaS 风（大渐变 banner、堆动效）、塞满的后台管理系统（信息过载的表格墙）、幼稚的教育 App（卡通、超大圆角、糖果配色）。
+系统明确拒绝五种长相：**通用 SaaS 蓝**（#3b82f6 / #2563eb 那类冷 slate 蓝，是被淘汰的老经典模式，绝不再引入）、AI 生成的千篇一律感（紫色渐变、玻璃拟态、科技紫强调）、花哨的营销 SaaS 风（大渐变 banner、堆动效）、塞满的后台管理系统（信息过载的表格墙）、幼稚的教育 App（卡通、超大圆角、糖果配色）。
 
 **Key Characteristics:**
-- 暖米白纸 + 近黑墨 + 暖沙线，整体编辑/纸感
-- 赭红（#B8323C）为主强调，暖金（#C49B2A）为次，小面积、红笔般克制
-- 克制配色：暖中性占绝大多数表面，强调色 ≤10%
-- 扁平为主，阴影克制；深度靠暖色调分层与细线
+- 中性浅纸底 + 近黑中性墨 + 中性灰线，整体安静、专业、精确
+- 墨绿（#2C6E56）为唯一强调色相，小面积、签名般克制
+- 克制配色：中性色占绝大多数表面，强调色 ≤10%
+- 扁平为主，阴影克制；深度靠中性分层与细线，不靠投影
 - 精细、克制的组件手感（薄边、低阴影、小圆角）
-- 无蓝：slate 蓝是待淘汰的经典模式遗留
+- 单一强调色相：只有墨绿，无蓝、无紫、无赭红红笔遗留
 
 ## 2. Colors
 
-暖中性纸调铺底，赭红与暖金作红笔般的小面积强调，近黑墨保证可读。
+中性纸调铺底，墨绿作签名般的小面积强调，近黑墨保证可读。所有墨绿取自同一条明度均匀的色阶梯子（OKLCH 色相锁定 H≈166）。
 
-### Primary
-- **Oxblood 赭红** (#B8323C): 主强调 — 强调文字、当前选中、关键指示。系统的"红笔"，小面积使用，绝不铺满或装饰。
+### Brand（唯一强调色相）
+- **Teal 墨绿 600** (#2C6E56): 主强调 — 主操作按钮、当前选中、链接、焦点环。系统的"签名"，小面积使用，绝不铺满或装饰。对白 6.05:1、对中性底 5.59:1，均过 AA。
 
-### Secondary
-- **Terracotta 赭石** (#B8732E) / **Coral 暖珊瑚** (#C97B5A): 次级暖强调，用于区分性的标记与高难度指示。
-- **Gold 暖金** (#C49B2A) / **Soft Gold 软金** (#C6A044): 选中态边框、中等难度指示、点到为止的活动标记。
+### Teal Ramp（墨绿色阶，明度均匀、逐档 AA 验证）
+- **50** (#EAF1ED): 选中浅态 / soft tint 浅底。
+- **100** (#CFE4DA): tag 底 / 浅 hover。
+- **200** (#A5CDBD): 选中态边 / 分隔强调。
+- **400** (#5C9C83): 图标 / 次级强调。
+- **600** (#2C6E56): 品牌主色（见上）。
+- **800** (#1E4A3A): 深强调字（对中性底 9.26:1）。
+- **900** (#123020): 最深 / 强调标题（对中性底 13.21:1）。
 
-### Neutral（暖纸调，承载绝大多数表面）
-- **Paper 卷面** (#FFFDF8): 主背景，整个 AI 模式的纸面。
-- **Surface 层** (#FAFAF7 / #F4F2EC / #EFEDE6 / #F0EBE0): 由浅到深的暖中性分层，用于面板、卡片、嵌套区分。
-- **Ink 正文墨** (#1A1A1A): 正文与标题，近黑暖调，保证对比度。
-- **Muted Ink 弱墨** (#6B645C): 次要说明文字 — 已是暖中灰，对暖纸达到 4.5:1 才用于正文。
-- **Faint Ink 极弱墨** (#9A9180): 仅限非正文标注（占位、禁用、极次要标签），不可作正文。
-- **Borders 边线** (#E5E3DC / #DED9CF warm / #B8B0A0 strong): 暖沙色分隔与边框，按层级选强弱。
+### Neutral（中性纸调，承载绝大多数表面）
+- **Bg 底** (#F6F6F4): 主背景，真中性（chroma≈0），避开冷 slate 与暖米两个坑。
+- **Surface 面** (#FFFFFF): 卡片、面板、输入框主面。
+- **Surface-2 次层** (#EDEDEA): 嵌套区分、hover 中性态、次级面板。
+- **Ink 正文墨** (#1E1E1C): 正文与标题，近黑中性，对底 15.4:1。
+- **Muted Ink 弱墨** (#6A6A64): 次要说明文字 — 中性灰，对底 5.03:1，达 AA 才用于正文。
+- **Faint Ink 极弱墨** (#9A9A93): 仅限非正文标注（占位、禁用、极次要标签），不可作正文。
+- **Borders 边线** (#E8E8E4 subtle / #D8D8D2 / #C6C6C0 strong): 中性灰分隔与边框，按层级选强弱。
 
-### Semantic
-- **Success 成功** (#4A9D7F): 暖绿，低难度指示 / 成功态。
-- **Warning 提醒** (#D97706): 琥珀，提示态。
-- **Danger 危险** (#C4543E): 暖红，错误/删除；与赭红同系但更偏砖红，避免与主强调混淆。
+### Semantic（状态语义，独立于强调色相，不参与"墨绿签名"预算）
+- **Success 成功** (#059669): 低难度指示 / 成功态。emerald，比品牌墨绿更亮，与之可区分。
+- **Warning 提醒** (#d97706): 琥珀，提示态。
+- **Danger 危险** (#dc2626): 红，错误 / 删除。
+
+语义色取成熟的中性专业工具惯用值（与"专业工具台"方向自洽），非旧暖纸方向的暖化值。它们作 chip 底 / 边 / 图标 / 大字（≥3:1）合格；**作小正文文字对浅底仅约 3–4.5:1，是跨文件语义色统一 + AA 达标的既有债**，留待独立刀，不在配色刀内落地。
 
 ### Named Rules
-**The Color-Lock Rule（配色锁定铁律）.** 当前 AI 模式配色是 owner 反复确认的资产，**禁止改动任何颜色 token 或 concierge 写死的 hex**。任何重设计只动结构、层级、间距、行为，配色零改。这条优先于一切视觉偏好。
 
-**The No-Blue Rule（无蓝铁律）.** slate 蓝（#3b82f6 / #2563eb）属于**正在被淘汰的经典模式**。AI 模式与一切新界面的强调色是赭红 + 暖金，**不要引入任何蓝色强调**。看到蓝，就是滑回经典模式。
+**The Green-Pen Rule（绿笔原则）.** 墨绿是签名，不是壁纸。强调色（墨绿任一档）合计占任一屏 ≤10%；它的稀有正是其分量所在。要铺面，铺中性，不铺墨绿。所有绿只取自上面这条色阶梯子（色相锁定 H≈166），**不掺任何别的色相的绿**（不掺青、不掺草绿、不掺 emerald 亮绿）。
 
-**The Red-Pen Rule（红笔克制）.** 赭红与暖金是红笔，不是底色。强调色合计占任一屏 ≤10%；它们的稀有正是其分量所在。要铺面，铺暖中性，不铺强调。
+**The True-Neutral Rule（中性底原则）.** 底与面是真中性（chroma≈0，#F6F6F4 / #FFFFFF / #EDEDEA），既不偏冷 slate 蓝，也不偏暖米黄。"温度"由墨绿签名、排版、留白和文案口吻承载，不由背景染色承载。（历史上的"配色锁定/禁改 token"铁律已随墨绿方向作废：token 现在是一套可维护的设计系统，改色是正当的设计决策，但**必须同步更新钉死颜色的 CI 断言**，否则回归护栏会误报。）
+
+**The Single-Hue Rule（单色相强调）.** 全站强调只有墨绿一个色相（OKLCH H≈166）。**禁止**引入：SaaS 蓝（#3b82f6 / #2563eb 及一切 slate/blue，H≈250，是被淘汰的老经典模式）、科技紫（#6366f1 靛紫及一切 purple/violet）、赭红暖金红笔（旧"批注卷子"方向的遗留强调）。墨绿不是蓝——蓝在 H≈250，墨绿在 H≈166，色相边界清晰。语义色（success 绿 / warning 琥珀 / danger 红）是独立的状态语义，各守其位，不算强调色、不受墨绿预算约束。
 
 ## 3. Typography
 
@@ -148,12 +157,12 @@ components:
 
 ## 4. Elevation
 
-扁平为主，暖色调分层为辅，阴影克制。深度主要靠暖中性的层叠（paper → surface → sand）和暖沙细线分隔表达，而不是投影。阴影只在两种时刻出现：静止态的极轻贴地阴影，和浮层（弹层/悬浮卡）的环境阴影。
+扁平为主，中性分层为辅，阴影克制。深度主要靠中性色的层叠（bg → surface → surface-2）和中性细线分隔表达，而不是投影。阴影只在两种时刻出现：静止态的极轻贴地阴影，和浮层（弹层/悬浮卡）的环境阴影。
 
 ### Shadow Vocabulary
-- **Resting 贴地** (`box-shadow: 0 1px 2px rgba(26,26,26,0.06)`): 卡片/面板静止态的最轻交代，几乎不可见。
+- **Resting 贴地** (`box-shadow: 0 1px 2px rgba(30,30,28,0.06)`): 卡片/面板静止态的最轻交代，几乎不可见。
 - **Floating 浮层** (`box-shadow: 0 8px 24px rgba(0,0,0,0.12)`): 弹层、悬浮卡、下拉。
-- **Focus Ring 焦点环** (`box-shadow: 0 0 0 2px rgba(0,0,0,0.08)`): 键盘焦点与选中态。焦点环用中性墨色而非蓝色辉光（无蓝铁律）。
+- **Focus Ring 焦点环** (`box-shadow: 0 0 0 3px rgba(44,110,86,0.20)`): 键盘焦点与选中态，用墨绿签名，而非中性灰或蓝色辉光（单色相原则）。
 
 ### Named Rules
 **The Flat-By-Default Rule（默认扁平）.** 表面静止时是平的；阴影只作为状态（悬浮、浮层、焦点）的回应出现，不作常驻装饰。
@@ -162,53 +171,57 @@ components:
 
 ### Buttons
 - **Shape:** 小圆角（6px / `{rounded.md}`）。
-- **Primary:** 近黑墨底（#1A1A1A）+ 暖纸字（#FFFDF8），padding 8px 16px。主按钮用墨色而非强调色，把赭红留给"红笔"语义。
-- **Hover / Focus:** 悬浮微调底色明度；焦点用中性焦点环（`0 0 0 2px rgba(0,0,0,0.08)`），不用蓝。
-- **Secondary / Ghost:** 透明或 surface-warm 底 + 暖细边 + ink 文字；用于次要操作。
+- **Primary:** 墨绿底（#2C6E56）+ 白字（#FFFFFF，6.05:1），padding 8px 16px。主按钮用墨绿签名，宣告"当前主操作"。
+- **Hover / Focus:** 悬浮压深一档（如 #1E4A3A / teal-800）；焦点用墨绿焦点环（`0 0 0 3px rgba(44,110,86,0.20)`）。
+- **Secondary / Ghost:** 透明或 surface-2 底 + 中性细边 + ink 文字；用于次要操作。
 
 ### Chips（筛选/标签，找题主面的关键组件）
-- **Style:** 胶囊形（999px）+ surface-warm 底 + ink 文字 + 可选暖细边。
-- **State:** 选中态用赭红或暖金边/底，未选中保持暖中性。承接经典模式的结构化筛选能力，将来升级到深教学维度（考点/承上启下/题型/词性/主题），而不是浅的题型/年份/地区装饰 chip。
+- **Style:** 胶囊形（999px）+ 中性底 + ink 文字 + 中性细边（#D8D8D2）。
+- **State:** 选中态用墨绿边/底（teal-200 边 或 teal-50 底 + teal-800 字），未选中保持中性。承接结构化筛选能力，升级到深教学维度（考点/承上启下/题型/词性/主题），而不是浅的题型/年份/地区装饰 chip。
 
 ### Cards / Containers
 - **Corner Style:** 8px（`{rounded.lg}`）。
-- **Background:** Paper（#FFFDF8）或更深一层暖中性，按嵌套区分。
+- **Background:** Surface（#FFFFFF）或 surface-2（#EDEDEA）更深一层，按嵌套区分。
 - **Shadow Strategy:** 默认贴地阴影（Resting），见 Elevation。
-- **Border:** 暖沙细线（#E5E3DC），按层级可换 warm/strong。
+- **Border:** 中性细线（#D8D8D2），按层级可换 subtle/strong。
 - **Internal Padding:** 16px（`{spacing.4}`）。
 
 ### Inputs / Fields
-- **Style:** Paper 底 + 暖细边（#E5E3DC）+ 6px 圆角，padding 8px 12px。
-- **Focus:** 中性焦点环，不挪动布局。
-- **占位符:** 用 muted-ink #6B645C 级别并验证达到 4.5:1，不用极弱墨 #9A9180"显优雅"。
+- **Style:** Surface 底 + 中性细边（#D8D8D2）+ 6px 圆角，padding 8px 12px。
+- **Focus:** 墨绿边 + 墨绿焦点环，不挪动布局。
+- **占位符:** 用 muted-ink #6A6A64 级别并验证达到 4.5:1，不用极弱墨 #9A9A93"显优雅"。
 
 ### Navigation
-- **Style:** 暖纸工具外壳；当前项用赭红或暖金强调（文字或下划），其余保持暖中性。手搓 `?view=` 路由，非 react-router。
-- 注意现实：导航逻辑现塞在 ~11000 行的 `App.tsx`，是重构痛点，但不属于配色范畴。
+- **Style:** 中性工具外壳；当前项用墨绿强调（文字或下划），其余保持中性。手搓 `?view=` 路由，非 react-router。
+- 注意现实：导航逻辑现塞在很大的 `App.tsx`，是重构痛点，但不属于配色范畴。
 
 ### Signature Component: ConciergeDesk AI 找题主面
-产品的门面与灵魂面。owner 珍惜它"干净、简洁、AI 感"的暖色外壳 — 那是资产，不能丢。问题是"空"不是"简洁"：要用**内容**（默认按来源卷分组的题库 feed）填空，用 **AI 口吻的筛选 chip** 收窄，chip 维度升级到深教学维度。配色与外壳气质保持不变。
+产品的门面与灵魂面。owner 珍惜它"干净、简洁、AI 感"的外壳 — 那是资产，不能丢。问题是"空"不是"简洁"：要用**内容**（默认按来源卷分组的题库 feed）填空，用 **AI 口吻的筛选 chip** 收窄，chip 维度升级到深教学维度。中性 + 墨绿签名的外壳气质保持不变。
 
 ### Signature Component: PaperSurface 卷面
-渲染真题/解析的纸面：暖卷面、中英混排衬线、暖金活动轨（#C6A044，点到为止）、暖墨与暖细线。是 North Star 里那张被批注的卷子。
+渲染真题/解析的纸面：卷面纸感、中英混排衬线、证据高亮（支持=绿 / 陷阱=琥珀，answer-evidence 语义色，锁定契约）。卷面是渲染考试内容的独立层，有自己的证据色系统，**不参与工具外壳的配色改造**（它由 `shared/papersurface/**` 契约护栏管辖）。
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** 让暖中性（paper / surface / sand）承载绝大多数表面，赭红与暖金只作 ≤10% 的小面积强调（The Red-Pen Rule）。
-- **Do** 主按钮用近黑墨底 + 暖纸字，把赭红留给"红笔"语义（强调/选中/状态）。
-- **Do** 默认扁平，用暖色调分层 + 暖沙细线交代层次；阴影只回应状态。
-- **Do** 让正文与占位符对比度 ≥ 4.5:1（WCAG AA 上线标准）；极弱墨 #9A9180 只用于非正文。
+- **Do** 让中性色（bg / surface / surface-2）承载绝大多数表面，墨绿只作 ≤10% 的小面积签名强调（The Green-Pen Rule）。
+- **Do** 主按钮用墨绿底 + 白字（6.05:1），当前选中/链接/焦点用墨绿签名。
+- **Do** 默认扁平，用中性分层 + 中性细线交代层次；阴影只回应状态。
+- **Do** 让正文与占位符对比度 ≥ 4.5:1（WCAG AA 上线标准）；极弱墨 #9A9A93 只用于非正文。
+- **Do** 所有绿取自同一条墨绿色阶梯子（H≈166），跨界面一致。
 - **Do** 把筛选 chip 升级为真结构化的深教学维度（考点/承上启下/题型/词性/主题），让"内容是主角"。
 - **Do** 给每个动效配 `prefers-reduced-motion` 退化；交互态 150–250ms。
+- **Do** 改颜色 token 时同步更新钉死该颜色的 CI 断言（否则回归护栏误报）。
 
 ### Don't:
-- **Don't** 改动任何颜色 token 或 concierge 写死的 hex（The Color-Lock Rule）。重设计只动结构/层级/行为。
-- **Don't** 引入任何蓝色强调（#3b82f6 / #2563eb）— 那是待淘汰的经典模式（The No-Blue Rule）。
+- **Don't** 引入任何蓝色强调（#3b82f6 / #2563eb 及一切 slate/blue）— 那是被淘汰的老经典模式（The Single-Hue Rule）。
+- **Don't** 引入科技紫（#6366f1 靛紫及一切 purple/violet）作强调。
+- **Don't** 让底或面偏冷 slate 或偏暖米 — 底是真中性（The True-Neutral Rule）。
+- **Don't** 掺入别的色相的绿（青、草绿、emerald 亮绿）— 只用墨绿梯子里的绿。
 - **Don't** 做成 **AI 生成的千篇一律感**：紫色渐变、玻璃拟态、一眼假的随手生成质感。
 - **Don't** 做成 **花哨的营销 SaaS 风**：大渐变 banner、弹窗、堆动效、营销词。
 - **Don't** 做成 **塞满的后台管理系统**：把筛选控件做成视觉主角的表单墙、信息过载的表格。
 - **Don't** 做成 **幼稚的教育 App**：卡通、超大圆角、糖果配色。
-- **Don't** 用 `border-left/right` 粗于 1px 的色条做卡片/列表/提示的强调（现 concierge 有此用法，宜逐步改为整边/底色/前置图标）。
+- **Don't** 用 `border-left/right` 粗于 1px 的色条做卡片/列表/提示的强调（宜用整边/底色/前置图标）。
 - **Don't** 在工具界面乱用衬线，或在卷面正文用无衬线（The Two-Font-Lanes Rule）。
 - **Don't** 把"不空"做成"堆筛选控件" — 用内容（题库本身）填空，用 AI 口吻 chip 收窄（已验证的方向教训）。

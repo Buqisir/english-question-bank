@@ -259,7 +259,7 @@ console.log('\nTest 12: eyebrow re-scoped off slate inside AI mode only (P3 same
   const css = readSrc('app/src/App.css')
   assert(
     '.app-shell.home-mode-ai .eyebrow rule exists',
-    /\.app-shell\.home-mode-ai \.eyebrow\s*\{[^}]*color:\s*#6B645C/.test(css),
+    /\.app-shell\.home-mode-ai \.eyebrow\s*\{[^}]*color:\s*#6A6A64/.test(css),
     '',
   )
   // :root itself must stay untouched — the base .eyebrow rule still reads

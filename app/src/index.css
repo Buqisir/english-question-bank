@@ -5,15 +5,15 @@
   --ink-strong: var(--eqb-color-text-strong);
   --muted: var(--eqb-color-text-muted);
   --surface: var(--eqb-color-bg);
-  --surface-strong: #f1f5f9;
+  --surface-strong: #ededea;
   --panel: var(--eqb-color-paper);
   --line: var(--eqb-color-border-subtle);
   --line-strong: var(--eqb-color-border-strong);
   --accent: var(--eqb-color-primary);
-  --accent-glow: rgba(59, 130, 246, 0.18);
+  --accent-glow: rgba(44, 110, 86, 0.2);
 
-  --blue-soft: rgba(59, 130, 246, 0.08);
-  --blue-text: var(--eqb-color-primary-text);
+  --blue-soft: #ededea;
+  --blue-text: #6a6a64;
   --mint-soft: var(--eqb-color-success-soft);
   --mint-text: var(--eqb-color-success);
   --amber-soft: var(--eqb-color-warning-soft);
