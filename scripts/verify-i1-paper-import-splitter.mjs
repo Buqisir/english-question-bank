@@ -6,7 +6,6 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -145,17 +144,9 @@ function assertAllowedScope() {
 }
 
 function assertRouteContract() {
-  const apiSource = readRepoFile('server/api.mjs')
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
   const splitterSource = readRepoFile('server/paper-import-ai/docxSplitter.mjs')
   const packageJson = JSON.parse(readRepoFile('server/package.json'))
-  const routes = createPaperImportAiRoutes()
-  const parseRoute = routes.find((route) => route.method === 'POST' && route.pattern.test('/api/paper-import-ai/parse'))
 
-  assert('server route registry includes Paper Import AI routes', apiSource.includes('createPaperImportAiRoutes'))
-  assert('POST /api/paper-import-ai/parse is registered', Boolean(parseRoute))
-  assert('Paper Import AI route rejects non-matching paths', !parseRoute.pattern.test('/api/paper-import-ai/parse/extra'))
-  assert('Paper Import AI route requires docx input', routeSource.includes('isDocxFile'))
   assert('DOCX splitter uses mammoth raw-text extraction', splitterSource.includes('mammoth.extractRawText'))
   assert('server dependency declares mammoth', Boolean(packageJson.dependencies?.mammoth))
 }

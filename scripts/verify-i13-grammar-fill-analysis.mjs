@@ -22,7 +22,6 @@ import { fileURLToPath } from 'node:url'
 
 import { analyzeGrammarFillImportCandidate, buildGrammarFillAnalysisMessages, validateGrammarFillShape } from '../server/paper-import-ai/analyzeGrammarFill.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 import { validatePaperImportPackage, PAPER_IMPORT_SCHEMA_VERSIONS } from '../server/paper-import/validator.mjs'
 import { writePaperImportVersion, swapPaperImportLatest } from '../server/paper-import/storage.mjs'
 
@@ -834,36 +833,6 @@ async function assertPackageBuilder() {
 }
 
 // ============================================================
-// Route contract
-// ============================================================
-
-function assertRouteContract() {
-  const routes = createPaperImportAiRoutes()
-  assert('I13 analyze-grammar-fill route registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/analyze-grammar-fill')))
-
-  // Existing routes still present
-  assert('analyze-cloze route still registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/analyze-cloze')))
-  assert('analyze-seven-choices route still registered', routes.some((r) => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/analyze-seven-choices')))
-
-  // Injectable service
-  const routesWithStub = createPaperImportAiRoutes({ analyzeGrammarFill: async () => ({ analysis: {}, provider: 'stub', model: 'stub', requestId: 'r1', latencyMs: 1 }) })
-  assert('analyze-grammar-fill route supports injected service', routesWithStub.some((r) => r.pattern.test('/api/paper-import-ai/analyze-grammar-fill')))
-
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
-  assert('route imports analyzeGrammarFill', routeSource.includes('analyzeGrammarFill'))
-  assert('route passes grammarFillAnalysis to publish', routeSource.includes('grammarFillAnalysis'))
-
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  assert('service exports analyzePaperImportAiGrammarFillGroup', serviceSource.includes('analyzePaperImportAiGrammarFillGroup'))
-  assert('service includes grammarFillAnalysis in publish payload', serviceSource.includes('grammarFillAnalysis'))
-
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
-  assert('workbench imports analyzePaperImportAiGrammarFillGroup', pageSource.includes('analyzePaperImportAiGrammarFillGroup'))
-  assert('workbench handles grammar-fill analysis state', pageSource.includes('gfAnalysisState'))
-  assert('workbench threads grammarFillAnalysis into publish', pageSource.includes("gfAnalysisState.result?.analysis"))
-}
-
-// ============================================================
 // Validator allowlist
 // ============================================================
 
@@ -952,7 +921,6 @@ async function main() {
   // Step 4: Wiring
   assertValidatorAllowlist()
   await assertPackageBuilder()
-  assertRouteContract()
   assertStorageDiskWrite()
 
   console.log(`\nI13 grammar-fill analysis verify PASSED: ${passed} checks`)

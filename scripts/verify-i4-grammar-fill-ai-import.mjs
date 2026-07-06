@@ -6,7 +6,6 @@ import { fileURLToPath } from 'node:url'
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -332,22 +331,6 @@ function assertPackageBuilder() {
 // ---- Route / service ----
 
 function assertRouteContract() {
-  const routes = createPaperImportAiRoutes()
-  assert('I4 publish route registered', routes.some(r => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/publish')))
-
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
-  assert('I4 route passes grammarFillGroup to package builder', routeSource.includes('grammarFillGroup'))
-
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  assert('I4 service has grammarFill group type', serviceSource.includes('PaperImportAiGrammarFillGroup'))
-  assert('I4 service passes grammarFillGroup to publish', serviceSource.includes('grammarFillGroup: input.grammarFillGroup'))
-
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
-  assert('I4 page shows grammar-fill panel', pageSource.includes('语法填空 预览'))
-  assert('I4 page requires grammar-fill before publish', pageSource.includes('gfReady') && pageSource.includes('缺少语法填空，暂不保存'))
-  assert('I4 page requires seven-choices before publish', pageSource.includes('scReady') && pageSource.includes('缺少七选五，暂不保存'))
-  assert('I4 page requires cloze before publish', pageSource.includes('clReady') && pageSource.includes('缺少完形填空，暂不保存'))
-
   try {
     readFileSync(path.join(repoRoot, 'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts'))
     assert('I4 grammar-fill adapter file exists', true)

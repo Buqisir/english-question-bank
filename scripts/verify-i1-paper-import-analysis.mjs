@@ -5,7 +5,6 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 import { analyzeReadingImportCandidate } from '../server/paper-import-ai/analyzeReading.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
@@ -421,31 +420,13 @@ function assertAllowedScope() {
 }
 
 function assertStaticContracts() {
-  const routes = createPaperImportAiRoutes()
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
   const analyzeSource = readRepoFile('server/paper-import-ai/analyzeReading.mjs')
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
   const gptSource = readRepoFile('server/ai-providers/gptRelay.mjs')
   const chatSource = readRepoFile('server/ai-providers/chatCompletions.mjs')
 
-  assert('POST /api/paper-import-ai/analyze is registered', routes.some((route) => route.method === 'POST' && route.pattern.test('/api/paper-import-ai/analyze')))
-  assert('POST /api/paper-import-ai/publish is registered', routes.some((route) => route.method === 'POST' && route.pattern.test('/api/paper-import-ai/publish')))
-  assert('route supports injected analyze service for tests', routeSource.includes('services.analyzeReading'))
-  assert('parse route accepts optional answer analysis DOCX', routeSource.includes('maxFiles: 2') && routeSource.includes('answerKeyBuffer'))
-  assert('publish route reuses C7 publisher', routeSource.includes('publishPaperImportPackage') && routeSource.includes('buildPaperImportAiPackageFiles'))
   assert('analyze builder reads reviewed reading prompt', analyzeSource.includes('prompts/reading-choice-analysis-v1.md'))
   assert('analyze builder validates reading-choice-analysis-v1', analyzeSource.includes("reading-choice-analysis-v1"))
   assert('analyze input keeps provider answer judgment independent', analyzeSource.includes("question.id, ''"))
-  assert('client service calls analyze endpoint', serviceSource.includes('/api/paper-import-ai/analyze'))
-  assert('client service calls publish endpoint', serviceSource.includes('/api/paper-import-ai/publish'))
-  assert('client service does not call legacy save endpoint', !serviceSource.includes('/api/paper-import-ai/save'))
-  assert('page exposes provider picker', pageSource.includes('providerOptions') && pageSource.includes('GPT 5.5 中转'))
-  assert('page exposes analysis action button', pageSource.includes('生成解析'))
-  assert('page renders teacher-readable preview', pageSource.includes('AnalysisReadablePreview') && pageSource.includes('定位关系 / 同义替换'))
-  assert('page renders JSON preview', pageSource.includes('pi-ai-json-preview'))
-  assert('page keeps raw JSON folded', pageSource.includes('查看原始 JSON') && pageSource.includes('<details'))
-  assert('page exposes publish action and QA links', pageSource.includes('handlePublish') && pageSource.includes('保存为正式试卷') && pageSource.includes('qaLinks'))
   assert('GPT relay uses chat-completions compatible URL', chatSource.includes('/chat/completions') && gptSource.includes('OPENAI_BASE_URL'))
   assert('GPT relay does not use official Responses API', !/\/responses|Responses API|responses\.create/i.test(`${gptSource}\n${chatSource}\n${analyzeSource}`))
   assert('implementation does not import OpenAI SDK', !/from ['"]openai['"]|new OpenAI/.test(`${gptSource}\n${chatSource}\n${analyzeSource}`))

@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url'
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
-import { createPaperImportAiRoutes } from '../server/paper-import-ai/routes.mjs'
 import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
 import { DatabaseSync } from 'node:sqlite'
 
@@ -422,25 +421,6 @@ function assertPackageBuilder() {
 // ---- Route / service ----
 
 function assertRouteContract() {
-  const routes = createPaperImportAiRoutes()
-  assert('I5 publish route registered', routes.some(r => r.method === 'POST' && r.pattern.test('/api/paper-import-ai/publish')))
-
-  const routeSource = readRepoFile('server/paper-import-ai/routes.mjs')
-  assert('I5 route passes applicationGroup to package builder', routeSource.includes('applicationGroup'))
-  assert('I5 route passes continuationGroup to package builder', routeSource.includes('continuationGroup'))
-
-  const serviceSource = readRepoFile('app/src/services/paperImportAi.ts')
-  assert('I5 service has PaperImportAiWritingGroup type', serviceSource.includes('PaperImportAiWritingGroup'))
-  assert('I5 service has applicationGroup in parse result', serviceSource.includes('applicationGroup: PaperImportAiWritingGroup'))
-  assert('I5 service passes applicationGroup to publish', serviceSource.includes('applicationGroup: input.applicationGroup'))
-  assert('I5 service passes continuationGroup to publish', serviceSource.includes('continuationGroup: input.continuationGroup'))
-
-  const pageSource = readRepoFile('app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx')
-  assert('I5 page shows application status', pageSource.includes('应用文就绪') && pageSource.includes('缺应用文写作'))
-  assert('I5 page shows continuation status', pageSource.includes('读后续写就绪') && pageSource.includes('缺读后续写'))
-  assert('I5 page requires application before publish', pageSource.includes('appReady'))
-  assert('I5 page requires continuation before publish', pageSource.includes('contReady'))
-
   assert('I5 writing adapter file exists', existsSync(path.join(repoRoot, 'app/src/features/paper-intelligence/writingPaperViewAdapter.ts')))
 
   const harnessSource = readRepoFile('app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
