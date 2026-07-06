@@ -235,4 +235,14 @@ verify 随动跨 3 类脚本（纯删 / 外科手术 / 保留引擎）+ 触及�
 
 ## PA Follow-Up Decisions
 
-（PA 评审后回填。）
+PA verdict: **APPROVE（0 Must-Fix）**（`docs/cuts/c7-paper-import-retire/pa.md`，fresh
+Opus high）。每条 load-bearing claim 独立核实：App.tsx 12 refs 恰为 plan 所列（含
+4 cross-reset，无 orphan）；verify 三类分类全对（`verify:all`=注册表非 glob、
+i1-analysis 无需改、i1-splitter 非注册表 landmine）；multipart KEEP / api.mjs
+边界 / 全库 sole-importer 全确认。
+
+Should-Watch（DEV 留意，非阻塞）：
+- **SW-1**：`verify-i1-paper-import-splitter.mjs` 清理是纯 hygiene（不在 CI 注册
+  表）—— 可做但**不得因它拖红 `verify:all`**（它本就不被 verify:all 跑）。
+- **SW-2**：`server/draft-paper/analysisText.mjs:49` 有一处 prose 注释提到
+  `paperImportRoutes` —— **纯注释、inert，不改**；此处标注只为 CR 别误判为漏删。
