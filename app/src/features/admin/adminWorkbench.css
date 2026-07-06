@@ -19,16 +19,3 @@
   gap: 10px;
   margin-bottom: 14px;
 }
-
-.workflow-build-feedback {
-  margin-left: 10px;
-  font-size: 13px;
-}
-
-.workflow-build-feedback.success {
-  color: var(--muted);
-}
-
-.workflow-build-feedback.error {
-  color: var(--coral-text);
-}

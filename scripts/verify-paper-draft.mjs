@@ -376,7 +376,12 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
 
   assert('App imports usePaperDraft', /import\s*\{\s*usePaperDraft\s*\}\s*from\s*['"]\.\/paperAssembly\/usePaperDraft['"]/.test(app), '')
   assert('App does NOT import usePaperBlocks directly anymore', !/from\s*['"]\.\/paperAssembly\/usePaperBlocks['"]/.test(app), '')
-  assert('App imports createBasketItem from the module', /import\s*\{\s*createBasketItem\s*\}\s*from\s*['"]\.\/paperAssembly\/paperDraftModel['"]/.test(app), '')
+  // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted
+  // handleBuildWorkflowPaperSet / handleBuildObjectivePaperSet, the only two
+  // createBasketItem call sites in App.tsx — the import is gone with them
+  // (tsc noUnusedLocals confirms zero remaining consumers).
+  assert('App no longer imports createBasketItem (its only call sites were retired, ADR-0016 cut 3)',
+    !/import\s*\{\s*createBasketItem\s*\}\s*from\s*['"]\.\/paperAssembly\/paperDraftModel['"]/.test(app), '')
 
   assert('App body has no useState<BasketItem[]> for basket', !/useState<BasketItem\[\]>\(\[\]\)/.test(app), '')
   assert('App body has no `paperBlocksHook =`', !/const\s+paperBlocksHook\s*=/.test(app), '')
@@ -427,9 +432,13 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
     '',
   )
 
+  // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted the workflow +
+  // objective build handlers that used to be this check's ≥2 sites; the load
+  // site was already retired in classic-retire-3. replaceDraft itself (the
+  // hook API) is untouched — it just has zero callers left in App.tsx.
   const replaceCount = (app.match(/paperDraft\.replaceDraft\(/g) || []).length
-  assert('App uses paperDraft.replaceDraft in ≥ 2 sites (workflow + objective; load site retired in classic-retire-3)',
-    replaceCount >= 2, `got ${replaceCount}`)
+  assert('App no longer calls paperDraft.replaceDraft (workflow/objective build sites retired, ADR-0016 cut 3)',
+    replaceCount === 0, `got ${replaceCount}`)
   assert('saved-group sync uses patchBasketItemFromSavedGroup',
     /paperDraft\.patchBasketItemFromSavedGroup\(saved\)/.test(app), '')
 
@@ -666,14 +675,19 @@ console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps le
   assert('replaceDraft body does NOT call setVersionType', !/setVersionType\s*\(/.test(replaceBody), '')
   assert('replaceDraft body does NOT call setQuestionNumberStart', !/setQuestionNumberStart\s*\(/.test(replaceBody), '')
   assert('replaceDraft body does NOT call setPaperExportStyle', !/setPaperExportStyle\s*\(/.test(replaceBody), '')
-  // Workflow build / objective build still drive config explicitly
-  // (classic-retire-3: handleSavePaperSet / handleLoadPaperSet — the other
-  // two call sites this used to count — were themselves deleted as classic
-  // sidebar orphans, so the threshold drops from >=3/>=2 to >=1 each).
-  assert('App still drives paperDraft.setPaperTitle from workflow/objective build sites',
-    (app.match(/paperDraft\.setPaperTitle\(/g) || []).length >= 1, '')
-  assert('App still drives paperDraft.setVersionType from workflow/objective build sites',
-    (app.match(/paperDraft\.setVersionType\(/g) || []).length >= 1, '')
+  // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted
+  // handleBuildWorkflowPaperSet and handleBuildObjectivePaperSet — the two
+  // "workflow/objective build" call sites this check used to require — along
+  // with the rest of the legacy import modal + "多卷闭环状态" dashboard
+  // (decisions.md D1). paperDraft.setPaperTitle/setVersionType now have zero
+  // call sites in App.tsx; paperTitle/versionType stay at their usePaperDraft
+  // defaults for the remaining member/owner flows. This is a known, tracked
+  // gap (no UI currently re-drives these), not a regression this cut is
+  // scoped to fix — see cut completion report "Known Risks".
+  assert('paperDraft.setPaperTitle has no remaining call sites in App.tsx (workflow/objective build handlers retired, ADR-0016 cut 3)',
+    (app.match(/paperDraft\.setPaperTitle\(/g) || []).length === 0, '')
+  assert('paperDraft.setVersionType has no remaining call sites in App.tsx (workflow/objective build handlers retired, ADR-0016 cut 3)',
+    (app.match(/paperDraft\.setVersionType\(/g) || []).length === 0, '')
 
   // 6.8 usePaperExports still receives the same 4 config fields sourced from
   // the paperDraft destructure (order in source is unrelated to correctness;

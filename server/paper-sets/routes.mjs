@@ -10,10 +10,6 @@ export function createPaperSetRoutes() {
       context.sendJson(response, 200, { paperSets: context.listPaperSets() })
     }),
 
-    defineRoute('GET', /^\/api\/paper-workflows$/, ({ response, context }) => {
-      context.sendJson(response, 200, { paperWorkflows: context.listPaperWorkflowStatuses() })
-    }),
-
     defineRoute('GET', /^\/api\/paper-sets\/([^/]+)$/, ({ response, match, context }) => {
       const paperSet = context.getPaperSet(decodeRouteId(match))
       if (!paperSet) {

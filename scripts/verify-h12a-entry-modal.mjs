@@ -183,7 +183,12 @@ if (savedHandler) {
   // there is no cache left for handleEntrySaved to invalidate.
   assert(/fetchQuestionGroupDetail\(saved\.id\)/.test(body), 'handleEntrySaved refetches detail in edit mode')
   assert(/setDataStatus\('sqlite'\)/.test(body), "handleEntrySaved sets dataStatus to 'sqlite'")
-  assert(/refreshPaperWorkflows\(\)/.test(body), 'handleEntrySaved refreshes paper workflows')
+  // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06, plan.md MF-1): the
+  // "多卷闭环状态" dashboard + refreshPaperWorkflows() were retired wholesale.
+  // handleEntrySaved is a KEEP handler (member/owner entry save) — only its
+  // refreshPaperWorkflows() call line was removed; the function body itself
+  // stays intact (asserted above/below).
+  assert(!/refreshPaperWorkflows\(\)/.test(body), 'handleEntrySaved no longer refreshes paper workflows (retired, ADR-0016 cut 3)')
 }
 
 // --- 5. EntryModal does not import from App.tsx (no cycle) ---

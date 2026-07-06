@@ -130,20 +130,6 @@ function cookieHeaderFrom(setCookieValue) {
 // any handler/lookup, so a nonexistent id must still 403 for a blocked caller.
 const FAKE_ID = 'verify-fake-id'
 const GATED_ROUTES = [
-  // server/imports/legacyImportRoutes.mjs (12; whole module)
-  { method: 'GET', path: '/api/import-files' },
-  { method: 'POST', path: '/api/import-files', body: {} },
-  { method: 'GET', path: '/api/import-bundles' },
-  { method: 'POST', path: `/api/import-bundles/${FAKE_ID}/draft`, body: {} },
-  { method: 'POST', path: `/api/import-bundles/${FAKE_ID}/answer-alignment` },
-  { method: 'POST', path: `/api/import-bundles/${FAKE_ID}/answer-alignment/apply`, body: {} },
-  { method: 'GET', path: '/api/import-batches' },
-  { method: 'POST', path: '/api/import-batches/scan', body: {} },
-  { method: 'POST', path: `/api/import-batches/${FAKE_ID}/import`, body: {} },
-  { method: 'GET', path: `/api/import-files/${FAKE_ID}/parse` },
-  { method: 'POST', path: `/api/import-files/${FAKE_ID}/parse` },
-  { method: 'DELETE', path: `/api/import-files/${FAKE_ID}` },
-
   // server/topic-labels/topicLabelBackfillRoutes.mjs (1; whole module)
   { method: 'POST', path: '/api/topic-labels/backfill', body: {} },
 

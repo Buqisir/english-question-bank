@@ -151,9 +151,16 @@ assert(
   'App.tsx does not duplicate getParseSavedAt/compactGroupMeta definitions',
   !/^function getParseSavedAt\(/m.test(appTsx) && !/^function compactGroupMeta\(/m.test(appTsx),
 )
+// legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted the legacy import
+// modal's draft-preview JSX, which was compactPreview's only remaining call
+// site in App.tsx — so App.tsx no longer imports anything from
+// detailHelpers.ts at all. The "no duplicated copies" intent of this check
+// still holds via the assertion above (getParseSavedAt/compactGroupMeta are
+// not redefined inline); this just stops requiring an import that has no
+// remaining consumer.
 assert(
-  'App.tsx re-imports the shared helpers from detailHelpers.ts (no duplicated copies)',
-  /from '\.\/features\/question-detail\/detailHelpers'/.test(appTsx),
+  'App.tsx does not duplicate compactPreview either (no dangling inline copy)',
+  !/^function compactPreview\(/m.test(appTsx),
 )
 assert(
   // classic-retire-3: the classic group-list card (with its own inline

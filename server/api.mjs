@@ -22,7 +22,6 @@ import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createDocxRenderer } from './exports/docxRenderer.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
-import { createLegacyImportRoutes } from './imports/legacyImportRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
@@ -38,7 +37,6 @@ import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/te
 import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
 import { createVerbProfileBackfillRoutes } from './grammar-verb-profile/verbProfileBackfillRoutes.mjs'
 import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
-import { createImportListingImplementation } from './imports/importListing.mjs'
 import { createCompletionRunner } from './ai-providers/completionRunner.mjs'
 import { createDailyLimitCounter, resolveDailyLimit } from './ai-providers/dailyLimitCounter.mjs'
 import { createVerifyImplementation } from './ai-verify/verifyQuestionGroupService.mjs'
@@ -47,14 +45,12 @@ import { createSemanticSearchImplementation } from './search/semanticSearchServi
 import { createQuestionBankStewardImplementation } from './search/questionBankStewardService.mjs'
 import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, normalizeSynonymCardId, normalizeSynonymConfidence, normalizeSynonymBoolean, uniqueSynonymFlags, formatSynonymDifficultyKnowledgeForReadingPrompt } from './ai-parse/synonymDifficultyService.mjs'
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
-import { createLegacyImportImplementation } from './imports/legacyImportImplementation.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question-bank.sqlite')
 const userDataDbPath = process.env.USER_DATA_DB || path.join(rootDir, 'data/user-data.sqlite')
 const exportDir = path.join(rootDir, 'exports')
-const importDir = path.join(rootDir, 'imports')
 const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
 const userSpaceFilesDir = process.env.QUESTION_BANK_USER_SPACE_ROOT || path.join(rootDir, 'data/user-space/files')
 const promptsDir = path.join(__dirname, 'prompts')
@@ -71,32 +67,10 @@ const exportImplementation = createExportImplementation({
   buildPrintHtml,
   convertDocxToPdf,
 })
-const importListing = createImportListingImplementation({
-  openDatabase,
-  requiredString,
-  optionalString,
-  requiredEnum,
-  randomUUID,
-  sanitizeFileName,
-  inferImportFileType,
-  normalizeExamTitle,
-  extractDeclaredExamTitleFromText,
-})
-const {
-  listImportFiles,
-  listImportBundles,
-  listImportBatches,
-  scanImportDirectory,
-  getImportBatch,
-  updateImportBatchStats,
-  rowToImportFile,
-  rowToImportFileParse,
-} = importListing
 const serverContext = {
   rootDir,
   dbPath,
   exportDir,
-  importDir,
   paperAssetsDir,
   userSpaceFilesDir,
   localQwenEnabled: process.env.QUESTION_BANK_ENABLE_LOCAL_QWEN === '1',
@@ -105,44 +79,31 @@ const serverContext = {
   readJsonBody,
   sendPdf: exportImplementation.sendPdf,
   sendJson,
-  applyAnswerAlignment,
   bindTopicLabelsToQuestionGroup,
-  createImportFile,
   createPaperSet,
   createQuestionGroup,
-  deleteImportFile,
   deleteQuestionGroup,
   generateQuestionGroupSummary,
-  generateAnswerAlignmentDraft,
-  generateImportBundleDraft,
   generateSynonymDifficultyByQuestionGroup,
   generateTopicLabelsByQuestionGroup,
   getPaperSet,
   getQuestionGroupDetail,
   getPaperSurfaceAnalysisAvailabilityByGroupId,
   getTeachingFacetIndex,
-  getImportFileParse,
   invalidatePaperSurfaceAnalysisAvailability,
   invalidateTeachingFacetIndex,
-  listImportBatches,
-  listImportBundles,
-  listImportFiles,
   listPaperSets,
-  listPaperWorkflowStatuses,
   listQuestionGroups,
   listUnlabeledGroupIds,
   parseClozeByQuestionGroup,
   parseGrammarByQuestionGroup,
-  parseImportFile,
   parseReadingByQuestionGroup,
   parseSevenChoicesByQuestionGroup,
-  runImportBatch,
   saveClozeParseResult,
   saveGrammarParseResult,
   saveQuestionDifficultyRating,
   saveReadingParseResult,
   saveSevenChoicesParseResult,
-  scanImportDirectory,
   updateQuestionGroup,
 }
 const h1Routes = [
@@ -160,15 +121,6 @@ const groupTypeLabels = {
   listening: '听力',
   other: '其他',
 }
-const objectivePaperSections = [
-  { title: '阅读理解 A', groupType: 'reading' },
-  { title: '阅读理解 B', groupType: 'reading' },
-  { title: '阅读理解 C', groupType: 'reading' },
-  { title: '阅读理解 D', groupType: 'reading' },
-  { title: '七选五', groupType: 'seven_choices' },
-  { title: '完形填空', groupType: 'cloze' },
-  { title: '语法填空', groupType: 'grammar_cloze' },
-]
 function makeTopicLabels(theme, themeGroup, subtopics) {
   return subtopics.map((subtopic) => ({
     theme,
@@ -484,7 +436,6 @@ const serverRoutes = [
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createExportRoutes(exportImplementation),
-  ...createLegacyImportRoutes(),
   ...createQuestionGroupRoutes(),
   ...createPaperSetRoutes(),
   ...createAiProxyRoutes(),
@@ -1997,23 +1948,6 @@ function normalizeTags(value) {
   return Array.from(new Set(rawTags.map((tag) => String(tag).trim()).filter(Boolean))).slice(0, 12)
 }
 
-function normalizeExamTitle(value) {
-  return String(value || '')
-    .replace(/高考真题/g, '')
-    .replace(/英语试卷/g, '')
-    .replace(/英语/g, '')
-    .replace(/试卷/g, '')
-    .replace(/[第（）()\s/_-]/g, '')
-    .replace(/卷$/g, '')
-    .trim()
-}
-
-function extractDeclaredExamTitleFromText(value) {
-  const preview = String(value || '')
-  const match = preview.match(/20\d{2}年[^/。；;，,]{0,28}?(?:高考真题英语试卷|英语试卷|试卷)/)
-  return match?.[0]?.replace(/\s+/g, ' ').trim() || ''
-}
-
 function normalizeDraftText(text) {
   return String(text || '')
     .replace(/\\n/g, '\n')
@@ -2035,21 +1969,6 @@ function normalizeAnswerValue(value) {
     .replace(/^[：:，,。．.\s]+/, '')
     .replace(/[。．.\s]+$/, '')
     .trim()
-}
-
-function inferImportFileType(fileName, mimeType = '') {
-  const lowerName = String(fileName || '').toLowerCase()
-  const lowerMime = String(mimeType || '').toLowerCase()
-
-  if (lowerName.endsWith('.docx') || lowerMime.includes('wordprocessingml')) return 'docx'
-  if (lowerName.endsWith('.pdf') || lowerMime.includes('pdf')) return 'pdf'
-  return 'other'
-}
-
-function sanitizeFileName(fileName) {
-  const baseName = path.basename(String(fileName || 'import-file')).replace(/[\\/:*?"<>|\x00-\x1F]/g, ' ')
-  const cleanName = baseName.replace(/\s+/g, ' ').trim().slice(0, 120)
-  return cleanName || 'import-file'
 }
 
 function normalizeOptions(value) {
@@ -2573,292 +2492,6 @@ function listPaperSets() {
 
   try {
     return selectPaperSetSummaries(db)
-  } finally {
-    db.close()
-  }
-}
-
-function findExportFile(title, versionType, extension = 'docx') {
-  const fileName = `${title}-${versionType === 'student' ? '学生版' : '教师版'}.${extension}`
-  const verifiedPath = path.join(exportDir, 'verified', fileName)
-
-  if (existsSync(verifiedPath)) {
-    return {
-      exists: true,
-      fileName,
-      outputPath: verifiedPath,
-      verified: true,
-    }
-  }
-
-  if (!existsSync(exportDir)) {
-    return {
-      exists: false,
-      fileName,
-      outputPath: '',
-      verified: false,
-    }
-  }
-
-  const candidates = readdirSync(exportDir)
-    .filter((entry) => entry.endsWith(fileName))
-    .map((entry) => {
-      const outputPath = path.join(exportDir, entry)
-      return {
-        entry,
-        outputPath,
-        mtimeMs: statSync(outputPath).mtimeMs,
-      }
-    })
-    .sort((a, b) => b.mtimeMs - a.mtimeMs)
-
-  const latest = candidates[0]
-
-  return {
-    exists: Boolean(latest),
-    fileName,
-    outputPath: latest?.outputPath || '',
-    verified: false,
-  }
-}
-
-function inferPaperTitleFromQuestionGroupTitle(title) {
-  const section = objectivePaperSections.find((item) => String(title || '').endsWith(` ${item.title}`))
-  if (!section) return ''
-  return String(title).slice(0, -section.title.length).trim()
-}
-
-function listObjectiveBankRows(db, paperTitle) {
-  const expectedTitles = objectivePaperSections.map((section) => `${paperTitle} ${section.title}`)
-  const placeholders = expectedTitles.map(() => '?').join(', ')
-
-  if (!placeholders) return []
-
-  return db
-    .prepare(
-      `
-      SELECT
-        qg.id,
-        qg.title,
-        qg.group_type,
-        qg.default_score,
-        q.id AS question_id,
-        q.answer,
-        COUNT(o.id) AS option_count
-      FROM question_groups qg
-      LEFT JOIN questions q ON q.group_id = qg.id
-      LEFT JOIN options o ON o.question_id = q.id
-      WHERE qg.title IN (${placeholders})
-      GROUP BY qg.id, qg.title, qg.group_type, qg.default_score, q.id, q.answer
-      ORDER BY qg.display_order, q.display_order
-      `,
-    )
-    .all(...expectedTitles)
-}
-
-function buildObjectiveBankStatus(db, paperTitle) {
-  const rows = listObjectiveBankRows(db, paperTitle)
-  const groups = new Map()
-
-  rows.forEach((row) => {
-    if (!row.id) return
-    if (!groups.has(row.id)) {
-      groups.set(row.id, {
-        id: row.id,
-        title: row.title,
-        groupType: row.group_type,
-        defaultScore: row.default_score,
-        questionCount: 0,
-        missingAnswerCount: 0,
-        missingOptionQuestionCount: 0,
-      })
-    }
-
-    const group = groups.get(row.id)
-    if (!row.question_id) return
-
-    group.questionCount += 1
-    if (!String(row.answer || '').trim()) group.missingAnswerCount += 1
-    if (row.group_type !== 'grammar_cloze' && Number(row.option_count || 0) === 0) {
-      group.missingOptionQuestionCount += 1
-    }
-  })
-
-  const groupList = Array.from(groups.values())
-  const completedSections = objectivePaperSections
-    .filter((section) => groupsBySectionTitle(groupList).has(`${paperTitle} ${section.title}`))
-    .map((section) => section.title)
-  const missingSections = objectivePaperSections
-    .filter((section) => !completedSections.includes(section.title))
-    .map((section) => section.title)
-
-  return {
-    objectiveGroupCount: groupList.length,
-    expectedObjectiveGroupCount: objectivePaperSections.length,
-    objectiveQuestionCount: groupList.reduce((sum, group) => sum + group.questionCount, 0),
-    missingAnswerCount: groupList.reduce((sum, group) => sum + group.missingAnswerCount, 0),
-    missingOptionGroupCount: groupList.filter((group) => group.missingOptionQuestionCount > 0).length,
-    completedSections,
-    missingSections,
-    groups: groupList,
-  }
-}
-
-function groupsBySectionTitle(groups) {
-  return new Set(groups.map((group) => group.title))
-}
-
-function workflowStatusFor({ importBundle, bank, paperSet, exports }) {
-  const hasImport = Boolean(importBundle?.fileCount)
-  const allImportsParsed = hasImport && importBundle.parsedCount >= importBundle.fileCount
-  const bankComplete =
-    bank.objectiveGroupCount >= bank.expectedObjectiveGroupCount &&
-    bank.missingAnswerCount === 0 &&
-    bank.missingOptionGroupCount === 0
-  const exported = exports.studentDocx.exists && exports.teacherDocx.exists
-
-  if (paperSet && exported) {
-    return {
-      status: 'closed_loop',
-      label: '已闭环',
-      nextAction: '可直接用于组题、讲评或继续渲染抽检。',
-    }
-  }
-
-  if (paperSet) {
-    return {
-      status: 'ready_to_export',
-      label: '待导出',
-      nextAction: '已保存整卷题集，下一步导出学生版和教师版。',
-    }
-  }
-
-  if (bankComplete) {
-    return {
-      status: 'ready_to_paper',
-      label: '待组卷',
-      nextAction: '客观题已完整入库，下一步生成整卷题集。',
-    }
-  }
-
-  if (bank.objectiveGroupCount > 0) {
-    return {
-      status: 'needs_review',
-      label: '入库未齐',
-      nextAction: '已有部分题组入库，需补齐缺失板块或核对答案选项。',
-    }
-  }
-
-  if (allImportsParsed) {
-    return {
-      status: 'ready_to_commit',
-      label: '可拆题',
-      nextAction: '资料已解析，下一步生成拆题草稿并做教师质检。',
-    }
-  }
-
-  if (hasImport) {
-    return {
-      status: 'needs_parse',
-      label: '待解析',
-      nextAction: '已有原件，下一步解析 DOCX/PDF 后生成拆题草稿。',
-    }
-  }
-
-  return {
-    status: 'not_started',
-    label: '未开始',
-    nextAction: '先导入试卷原件。',
-  }
-}
-
-function listPaperWorkflowStatuses() {
-  const db = openDatabase()
-
-  try {
-    const importBundles = listImportBundles()
-    const titles = new Set(importBundles.map((bundle) => bundle.title).filter(Boolean))
-
-    db.prepare('SELECT title FROM question_groups')
-      .all()
-      .forEach((row) => {
-        const paperTitle = inferPaperTitleFromQuestionGroupTitle(row.title)
-        if (paperTitle) titles.add(paperTitle)
-      })
-
-    db.prepare('SELECT title FROM paper_sets')
-      .all()
-      .forEach((row) => {
-        if (!String(row.title || '').match(/\s*客观题$/)) return
-        const paperTitle = String(row.title || '').replace(/\s*客观题$/, '').trim()
-        if (paperTitle) titles.add(paperTitle)
-      })
-
-    const paperSets = selectPaperSetSummaries(db)
-    const importBundleByTitle = new Map(importBundles.map((bundle) => [bundle.title, bundle]))
-    const paperSetByTitle = new Map(paperSets.map((paperSet) => [paperSet.title, paperSet]))
-
-    return Array.from(titles)
-      .sort((a, b) => a.localeCompare(b, 'zh-CN'))
-      .map((title) => {
-        const importBundle = importBundleByTitle.get(title) || null
-        const bank = buildObjectiveBankStatus(db, title)
-        const objectivePaperTitle = `${title} 客观题`
-        const paperSet = paperSetByTitle.get(objectivePaperTitle) || null
-        const exports = {
-          studentDocx: findExportFile(objectivePaperTitle, 'student', 'docx'),
-          teacherDocx: findExportFile(objectivePaperTitle, 'teacher', 'docx'),
-        }
-        const workflow = workflowStatusFor({ importBundle, bank, paperSet, exports })
-
-        return {
-          id: importBundle?.id || paperSet?.id || `paper-workflow-${title}`,
-          title,
-          objectivePaperTitle,
-          bundleId: importBundle?.id || '',
-          updatedAt: importBundle?.latestCreatedAt || paperSet?.updatedAt || paperSet?.createdAt || '',
-          status: workflow.status,
-          statusLabel: workflow.label,
-          nextAction: workflow.nextAction,
-          importFiles: importBundle
-            ? {
-                fileCount: importBundle.fileCount,
-                parsedCount: importBundle.parsedCount,
-                failedParseCount: importBundle.failedParseCount,
-                readiness: importBundle.readiness,
-                roleCounts: importBundle.roleCounts,
-                qualityWarnings: importBundle.qualityWarnings,
-              }
-            : {
-                fileCount: 0,
-                parsedCount: 0,
-                failedParseCount: 0,
-                readiness: 'reference_only',
-                roleCounts: {
-                  question: 0,
-                  answerAnalysis: 0,
-                  questionWithAnalysis: 0,
-                  other: 0,
-                },
-                qualityWarnings: [],
-              },
-          bank,
-          paperSet,
-          exports,
-        }
-      })
-      .sort((a, b) => {
-        const rank = {
-          needs_review: 0,
-          ready_to_commit: 1,
-          ready_to_paper: 2,
-          ready_to_export: 3,
-          needs_parse: 4,
-          not_started: 5,
-          closed_loop: 6,
-        }
-        return (rank[a.status] ?? 9) - (rank[b.status] ?? 9) || String(b.updatedAt).localeCompare(String(a.updatedAt))
-      })
   } finally {
     db.close()
   }
@@ -3879,75 +3512,6 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
 }
 function convertDocxToPdf(docxPath, outputPath) {
   return convertDocxToPdfImpl(docxPath, outputPath)
-}
-
-// The deterministic legacy DOCX import-draft / answer-alignment pipeline (~78 fns, zero AI calls) now
-// lives in ./imports/legacyImportImplementation.mjs (cut H5-F). Every free identifier it uses is INJECTED
-// here under the SAME name, so the moved bodies are byte-identical to before the extraction. The factory
-// runs LATE — after groupTypeLabels (a non-hoisted const) and after the importListing returns
-// (getImportBatch / updateImportBatchStats / rowToImportFile / rowToImportFileParse) it injects are in
-// scope. cleanDraftText / normalizeDraftText / normalizeAnswerValue / normalizeExamTitle /
-// extractDeclaredExamTitleFromText / inferImportFileType / sanitizeFileName STAY in api.mjs (consumed by
-// other modules) and are injected back into this factory.
-const legacyImportImplementation = createLegacyImportImplementation({
-  openDatabase,
-  rootDir,
-  importDir,
-  timestampPrefix,
-  requiredString,
-  optionalString,
-  requiredEnum,
-  cleanDraftText,
-  normalizeAnswerValue,
-  normalizeExamTitle,
-  extractDeclaredExamTitleFromText,
-  normalizeDraftText,
-  groupTypeLabels,
-  inferImportFileType,
-  sanitizeFileName,
-  getImportBatch,
-  updateImportBatchStats,
-  rowToImportFile,
-  rowToImportFileParse,
-})
-const {
-  generateImportBundleDraft: generateImportBundleDraftImpl,
-  generateAnswerAlignmentDraft: generateAnswerAlignmentDraftImpl,
-  applyAnswerAlignment: applyAnswerAlignmentImpl,
-  createImportFile: createImportFileImpl,
-  runImportBatch: runImportBatchImpl,
-  getImportFileParse: getImportFileParseImpl,
-  parseImportFile: parseImportFileImpl,
-  deleteImportFile: deleteImportFileImpl,
-} = legacyImportImplementation
-// Hoisted forwarding wrappers: the serverContext object literal (defined at module top, before this
-// factory call) references these 8 seam fns via property shorthand. Keeping each a hoisted `function`
-// declaration (delegating to the H5-F factory impl, with the exact original signature + default + sync/
-// async-ness) preserves the serverContext shorthand and the legacyImportRoutes.mjs call sites and avoids
-// a TDZ on the serverContext literal. generateImportBundleDraft is async; the other 7 are sync.
-async function generateImportBundleDraft(bundleId) {
-  return generateImportBundleDraftImpl(bundleId)
-}
-function generateAnswerAlignmentDraft(bundleId) {
-  return generateAnswerAlignmentDraftImpl(bundleId)
-}
-function applyAnswerAlignment(bundleId, input = {}) {
-  return applyAnswerAlignmentImpl(bundleId, input)
-}
-function createImportFile(input) {
-  return createImportFileImpl(input)
-}
-function runImportBatch(batchId, input = {}) {
-  return runImportBatchImpl(batchId, input)
-}
-function getImportFileParse(id) {
-  return getImportFileParseImpl(id)
-}
-function parseImportFile(id) {
-  return parseImportFileImpl(id)
-}
-function deleteImportFile(id) {
-  return deleteImportFileImpl(id)
 }
 
 function formatQuestionGroupForTopicLabel(detail) {
