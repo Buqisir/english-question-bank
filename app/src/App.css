@@ -5856,7 +5856,7 @@ button:disabled {
   border-color: rgba(44, 110, 86, 0.35);
 }
 /*
- * The 2px warm-amber rule below is positioned via `::before { position:
+ * The 2px teal accent rule below is positioned via `::before { position:
  * absolute }`, which requires a non-static positioning context. That
  * context comes from the `position: relative` on the rule above, NOT
  * from `.concierge-group-card-li` (the <li> stays as a default grid
