@@ -122,7 +122,7 @@ log.
 Hard rule:
 
 - Record a short Cut Note immediately instead of relying on long chat
-  memory or the 22:30 daily summary.
+  memory; large cuts commit `cut-note.md` before closeout (RM gate).
 
 ### DEV completion protocol
 

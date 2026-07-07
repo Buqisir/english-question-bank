@@ -1,6 +1,6 @@
 # English Question Bank Workbench
 
-This context defines the domain language for the local-first English question bank workbench. The product helps a teacher store passage-centered English tasks, search them, assemble paper sets, and export student or teacher versions.
+This context defines the domain language for the English question bank workbench (live at eqbank.cc; content production happens in the backend agent, the website only consumes — ADR-0015/0016). The product helps a teacher store passage-centered English tasks, search them, assemble paper sets, and export student or teacher versions.
 
 ## Language
 

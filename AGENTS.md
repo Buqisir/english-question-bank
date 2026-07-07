@@ -1,7 +1,8 @@
 # Agent Instructions
 
-This repo builds the English question bank workbench (heading to
-public launch; current runtime is still local single-user).
+This repo builds the English question bank workbench, live at
+eqbank.cc (invite-only login; owner curates, members consume; see
+Product Posture for the production / consumption boundary).
 
 `AGENTS.md` is the single source of truth for agent rules in this repo.
 Other agent entry files, including `CLAUDE.md`, should point here instead
@@ -72,7 +73,9 @@ Before any merge to `main`, the full suite must be proven green — either
 cut's neighboring scripts. New verify scripts marked `yes` in
 `scripts/README.md` must be added to `scripts/verify-ci.mjs` in the same
 cut (the housekeeping guard enforces this). After merging, confirm the
-`main` CI run is green before reporting the cut closed.
+`main` CI run is green before reporting the cut closed, and refresh
+`docs/STATUS.md` at medium / large cut closeout (a few lines, not a
+report).
 (2026-07-03 incident: 11 consecutive red CI runs from a narrow verify
 list + unwatched Actions.)
 
@@ -85,17 +88,20 @@ cleanup of existing regex asserts — natural turnover only.
 ### Session reading contract
 
 Every session reads this section plus the core rules (Product Posture,
-Project Steering hard rules, Context / Output Economy, Super Teacher
-Boundary). The rest of this file and the steering notes are reference —
+Project Steering, Context / Output Economy, Super Teacher Boundary),
+and checks `docs/STATUS.md` for where the project currently stands. The rest of this file and the steering notes are reference —
 load a section only when the task names it.
 
 ## Working memory
 
-The harness auto-memory is the working memory. `kratos-memory` is a
-read-only historical archive (downgraded 2026-07-03, owner-approved);
-do not write to it or treat search there as a required step. Never save
-API keys, secrets, full copyrighted passages, or private student data
-to any memory system.
+The harness auto-memory is the working memory. It is session-scoped
+and does not transfer across agents (2026-07-07 takeover arrived with
+an empty memory): any decision that must survive a handoff lives in
+repo files, never only in memory or chat. `kratos-memory` is a
+read-only historical archive outside this repo (downgraded 2026-07-03,
+owner-approved); do not write to it or treat search there as a
+required step. Never save API keys, secrets, full copyrighted
+passages, or private student data to any memory system.
 
 ## Product Posture
 
@@ -103,14 +109,23 @@ to any memory system.
 - Keep `Local Vaults` out of the application code path. The vault may provide ideas later, but V0 data and code live in this repo.
 - Preserve the core model: `Source -> Passage -> Question Group -> Question -> Paper Set -> Export`.
 - Prefer teacher-operable workflows over abstract completeness.
-- Direction (owner, 2026-07-03): the product is heading to **public
-  launch** — build toward it, not local-first. The current runtime is
-  still local single-user (no login / no cloud sync yet), but new work
-  must not deepen local-only assumptions (e.g. localStorage as the only
+- Direction (owner, 2026-07-03; live since 2026-07): the product is
+  **launched** at eqbank.cc — invite-only login (ADR-0012), owner /
+  member roles (ADR-0013), per-user data isolation (ADR-0014), global
+  AI daily limit (M0-5), single HK host + R2 backup (launch-deploy;
+  server facts in `docs/cuts/launch-deploy/go-live-record.md` — until
+  that record is filled in, do not run `scripts/pull-run-push.mjs`
+  against the server or change production config). Do not
+  reintroduce local-only assumptions (e.g. localStorage as the only
   persistence for user-facing state, absolute local paths in product
-  code). Launch-track architecture (hosting, auth, multi-user, data
-  ownership) is a separate roadmap cut that starts with a PM grill —
-  do not bolt it on piecemeal.
+  code).
+- Production / consumption boundary (owner, 2026-07-05; ADR-0015 /
+  ADR-0016): **content production happens in the backend agent**
+  (import pipeline, authoring skills, backfill scripts); **the website
+  only consumes** (find → read → assemble → export). All website
+  import UI is retired; the backend analyzers stay alive as library
+  functions. Do not add production entry points back to the web
+  surface.
 - Open Design is for visual prototyping only. Production code belongs under `app/`.
 
 ## Project Steering
@@ -278,17 +293,17 @@ Pocock「AI 协作准则」在本项目的特化落地(且更细)。通用底座
   pushed commits are verified.
 - Default flow:
   - **PM grill before DEV** whenever product behavior is still fuzzy.
-  - **小川 PA before DEV** for architecture, data contracts,
-    future-facing user-visible flows, migrations, export logic, or medium /
-    large cuts with non-obvious boundaries. PA writes
-    `docs/cuts/<CUT>/pa.md`; the PM hat then compresses PA follow-up
-    decisions into `docs/cuts/<CUT>/plan.md` before DEV starts.
+  - **PA before DEV** per the irreversibility trigger (see the
+    Dispatch map above and protocol §7): large cuts, or any cut
+    touching an irreversible surface / data-contract semantics. PA
+    writes `docs/cuts/<CUT>/pa.md`; the PM hat then compresses PA
+    follow-up decisions into `docs/cuts/<CUT>/plan.md` before DEV
+    starts.
   - **CR-lite after DEV** for any PR that will be merged.
   - **QA before RM** only for user-visible or visual / interaction changes.
-- Cut tier flows:
-  - Small: `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
-  - Medium: `Sync -> PM grill -> plan.md -> PA (pa.md) -> PM compression -> DEV -> CR-lite -> browser QA -> PO QA -> RM`.
-  - Large: `Sync -> PM grill -> Canvas/mockups -> PA -> PM compression -> DEV -> CR-lite -> Big CR / browser QA -> PO QA -> RM -> Cut Note`.
+- Cut tier flows: the authoritative flow text lives in
+  `docs/steering/cut-workflow-protocol.md` §2 — do not restate it here.
+  Formal PA is added by the irreversibility trigger, not by tier.
 - Hard brakes:
   - If 2 mockup rounds do not converge, stop drawing and return to problem definition.
   - If PA leaves more than 3 unresolved PO decisions, do not start DEV.
