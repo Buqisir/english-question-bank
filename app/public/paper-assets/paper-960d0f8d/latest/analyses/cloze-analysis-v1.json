@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-960d0f8d",
+  "sourceAssetVersion": 1,
+  "targetGroups": ["group-960d0f8d-cloze"],
+  "meta": {
+    "generatedBy": "claude-subagent",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "",
+    "reviewedAt": "2026-06-01",
+    "model": "opus"
+  },
+  "groups": {
+    "group-960d0f8d-cloze": {
+      "overview": "本文是一篇人物访谈式记叙文，介绍英国摄影师 Beckie Burr 如何拍摄古代遗址：她的灵感来源、踩点习惯、对运气与耐心的认识，以及她想通过照片传达每块石头的故事与能量。",
+      "affectiveArc": "全篇基调专注而充满敬意，从最初被遗址神秘感吸引，到耐心反复尝试、再到希望用照片捕捉石头的灵魂，情感由好奇逐步升华为热爱与投入。"
+    }
+  },
+  "blanks": {
+    "q-960d0f8d-041": {
+      "blankId": "blank-960d0f8d-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前文说站在石阵中想象它们几千年前的样子，这种由遥远未知激起的感受正是“神秘感(mystery)”；That sense of __ 回指这种想象带来的不可知之感，mystery 与上文语义场呼应，故选 B。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "direction", "meaning": "方向感" },
+        { "optionLabel": "C", "optionText": "belonging", "meaning": "归属感" },
+        { "optionLabel": "D", "optionText": "achievement", "meaning": "成就感" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "That sense of", "signalSide": "context-before", "targetText": "That sense of mystery", "relation": "sense of 后接抽象名词，mystery 与之搭配构成“神秘感”。" },
+        { "type": "semantic-field", "signalText": "imagining how they looked thousands of years ago", "signalSide": "context-before", "relation": "想象几千年前的样子营造出对远古未知的神秘联想，指向 mystery。" }
+      ],
+      "teachingNote": "抓住 sense of 后的回指：先看上文唤起的是哪种感受，再选与之同义的抽象名词。"
+    },
+    "q-960d0f8d-042": {
+      "blankId": "blank-960d0f8d-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她把拍摄古迹形容为“something of a __”，下文 q53 又说 “Go to a place that calls to you”，呼应 calling（感召、使命）；拍古迹对她像一种内心的召唤，故选 A。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "B", "optionText": "challenge", "meaning": "挑战" },
+        { "optionLabel": "C", "optionText": "competition", "meaning": "竞争" },
+        { "optionLabel": "D", "optionText": "trend", "meaning": "潮流、趋势" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "something of a", "signalSide": "context-before", "targetText": "something of a calling", "relation": "something of a + 名词表示“算得上是一种……”，calling 与之搭配自然。" },
+        { "type": "repetition-echo", "signalText": "a place that calls to you", "signalSide": "context-after", "relation": "后文 calls to you 与 calling 同根呼应，印证“感召”之义。" }
+      ],
+      "teachingNote": "遇到 something of a 后的名词，结合全文反复出现的同根词锁定语义。"
+    },
+    "q-960d0f8d-043": {
+      "blankId": "blank-960d0f8d-043",
+      "blankNo": 43,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "本句说她总会先实地探访每个地点，下句 “On a pre-shoot visit” 明确这是“拍摄前”的踩点，beforehand（事先）与 pre-shoot 完全对应，故选 D。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "secretly", "meaning": "秘密地" },
+        { "optionLabel": "B", "optionText": "soon", "meaning": "很快、不久" },
+        { "optionLabel": "C", "optionText": "hurriedly", "meaning": "匆忙地" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "always visits each location", "signalSide": "context-before", "targetText": "visits each location beforehand", "relation": "beforehand 修饰 visits，表示她总是事先到访。" },
+        { "type": "repetition-echo", "signalText": "On a pre-shoot visit", "signalSide": "context-after", "relation": "pre-shoot（拍摄前）与 beforehand 同义呼应，确认时间在拍摄之前。" }
+      ],
+      "teachingNote": "副词空看下文有无同义时间标志词，pre-shoot 直接对应 beforehand。"
+    },
+    "q-960d0f8d-044": {
+      "blankId": "blank-960d0f8d-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "“looking at the site from all __” 后接引语“石头从一侧看到另一侧会很不同”，说明她从各个“角度(angles)”观察；from all angles 是固定搭配，故选 C。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "parties", "meaning": "各方、当事方" },
+        { "optionLabel": "B", "optionText": "sources", "meaning": "来源" },
+        { "optionLabel": "D", "optionText": "accounts", "meaning": "描述、记述" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "from all", "signalSide": "context-before", "targetText": "from all angles", "relation": "from all angles 是固定搭配，意为“从各个角度”。" },
+        { "type": "repetition-echo", "signalText": "from one side to the other", "signalSide": "context-after", "relation": "“从一侧到另一侧”正是不同观察角度的具体说明，印证 angles。" }
+      ],
+      "teachingNote": "记牢 from all angles 这一固定搭配，并用下文具体细节验证。"
+    },
+    "q-960d0f8d-045": {
+      "blankId": "blank-960d0f8d-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "踩点时还要弄清楚 __，原因是“许多遗址在私人土地上”，需要解决能否进入的问题，access（进入/通行权）与 private land 直接对应，故选 B。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "weather", "meaning": "天气" },
+        { "optionLabel": "C", "optionText": "equipment", "meaning": "设备" },
+        { "optionLabel": "D", "optionText": "lighting", "meaning": "光线" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "many sites are on private land", "signalSide": "context-after", "targetText": "work out access", "relation": "私人土地意味着需要解决能否进入，access 与 private land 形成因果搭配。" },
+        { "type": "logical-connector", "signalText": "not least because", "signalSide": "context-after", "relation": "because 引出原因，把空格答案与“私人土地”绑定，指向 access。" }
+      ],
+      "teachingNote": "用 because 引出的原因句反推空格名词，私人土地最关心的是“进入权”。"
+    },
+    "q-960d0f8d-046": {
+      "blankId": "blank-960d0f8d-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "前句讲运气和耐心起作用，本句说“有时条件不会是 __”，再加下文需反复多次重拍，说明并非每次条件都“有利(favorable)”；conditions are favorable 是常见搭配，故选 C。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "bad", "meaning": "糟糕的" },
+        { "optionLabel": "B", "optionText": "dangerous", "meaning": "危险的" },
+        { "optionLabel": "D", "optionText": "crucial", "meaning": "至关重要的" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "conditions will not be", "signalSide": "context-before", "targetText": "conditions will not be favorable", "relation": "conditions 与 favorable 搭配，表示“条件有利”。" },
+        { "type": "logical-connector", "signalText": "luck and patience play a part", "signalSide": "context-before", "relation": "需要运气和耐心，暗示条件常常不“有利”，与 favorable 形成语境照应。" }
+      ],
+      "teachingNote": "形容词空联系前因后果：需要运气耐心说明条件并非总“有利”。"
+    },
+    "q-960d0f8d-047": {
+      "blankId": "blank-960d0f8d-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "“my photographs are the __ of going back multiple times” 表示照片是反复多次前往的“结果(result)”；the result of doing 是固定搭配，故选 A。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "B", "optionText": "drawback", "meaning": "缺点、弊端" },
+        { "optionLabel": "C", "optionText": "reflection", "meaning": "反映、映照" },
+        { "optionLabel": "D", "optionText": "sacrifice", "meaning": "牺牲" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "of going back multiple times", "signalSide": "context-after", "targetText": "the result of going back multiple times", "relation": "the result of + 动名词，表示某行为带来的结果。" },
+        { "type": "logical-connector", "signalText": "until I can get the shot", "signalSide": "context-after", "relation": "until 表明反复前往直至拍到，照片自然是这一过程的结果。" }
+      ],
+      "teachingNote": "看 the ___ of doing 结构，反复努力得来的成片就是“结果”。"
+    },
+    "q-960d0f8d-048": {
+      "blankId": "blank-960d0f8d-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "“the shot I __ in the beginning” 指她一开始在脑中“构想/想象(visualised)”的画面，与下文力求成片贴近“how she sees the scene”一致；visualise the shot 搭配自然，故选 D。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "earned", "meaning": "赢得、挣得" },
+        { "optionLabel": "B", "optionText": "took", "meaning": "拍摄、拿取" },
+        { "optionLabel": "C", "optionText": "removed", "meaning": "移除、去掉" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "the shot I", "signalSide": "context-before", "targetText": "the shot I visualised", "relation": "visualise 以 the shot 为宾语，表示在脑中预想画面。" },
+        { "type": "repetition-echo", "signalText": "as close to how she sees the scene", "signalSide": "context-after", "relation": "“贴近她所见的画面”与一开始在脑中 visualise 的画面呼应。" }
+      ],
+      "teachingNote": "动词空看宾语与下文：拍前在脑中预想的画面用 visualise。"
+    },
+    "q-960d0f8d-049": {
+      "blankId": "blank-960d0f8d-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "句首非谓语 “__ to keep post-processing to a minimum” 表示她“选择(Choosing)”尽量少做后期，与后半句她努力保持画面原貌的主动取向一致，Choosing to do 表主动决定，故选 D。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "Failing", "meaning": "未能、没做到" },
+        { "optionLabel": "B", "optionText": "Refusing", "meaning": "拒绝" },
+        { "optionLabel": "C", "optionText": "Remembering", "meaning": "记得" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "to keep post-processing to a minimum", "signalSide": "context-after", "targetText": "Choosing to keep post-processing to a minimum", "relation": "Choosing to do 与不定式搭配，表示主动选择尽量少后期。" },
+        { "type": "logical-connector", "signalText": "tries to make each image as close to how she sees the scene", "signalSide": "context-after", "relation": "她主动追求画面真实，说明少做后期是她的主动“选择”。" }
+      ],
+      "teachingNote": "句首非谓语空看主句态度：主动追求原貌即“选择”少后期。"
+    },
+    "q-960d0f8d-050": {
+      "blankId": "blank-960d0f8d-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她寻找能把观者 __ 进画面的元素，紧接的引语“make you feel part of the site”说明是把人“吸引/带入(draw into)”场景；draw sb into 是固定搭配，故选 A。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "B", "optionText": "trick", "meaning": "欺骗、哄骗" },
+        { "optionLabel": "C", "optionText": "release", "meaning": "释放" },
+        { "optionLabel": "D", "optionText": "transform", "meaning": "改变、转变" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "the viewer into the scene", "signalSide": "context-after", "targetText": "draw the viewer into the scene", "relation": "draw sb into sth 固定搭配，把观者带入场景。" },
+        { "type": "repetition-echo", "signalText": "make you feel part of the site", "signalSide": "context-after", "relation": "“让你觉得身处其中”正是 draw into 的效果，印证答案。" }
+      ],
+      "teachingNote": "动词加 into 的搭配看后文效果，让人融入画面即 draw into。"
+    },
+    "q-960d0f8d-051": {
+      "blankId": "blank-960d0f8d-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "上文谈到 leading lines、shapes、viewpoints 等构图元素，故每一幅“构图(composition)”都要讲故事；composition 与前述摄影构图语义场一致，故选 B。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "exhibition", "meaning": "展览" },
+        { "optionLabel": "C", "optionText": "viewer", "meaning": "观看者" },
+        { "optionLabel": "D", "optionText": "step", "meaning": "步骤" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "must tell a story", "signalSide": "context-after", "targetText": "every composition must tell a story", "relation": "能“讲故事”的主语是画面构图，composition 与之搭配。" },
+        { "type": "semantic-field", "signalText": "leading lines, shapes, or viewpoints", "signalSide": "context-before", "relation": "引导线、形状、视点都属于构图要素，构成 composition 的语义场。" }
+      ],
+      "teachingNote": "名词空落到摄影术语语义场：构图要素聚合为 composition。"
+    },
+    "q-960d0f8d-052": {
+      "blankId": "blank-960d0f8d-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "她说“不只是简单地 __ 一个遗址”，与上文强调照片要讲故事相对照，simply documenting（单纯记录）正是她不满足于的浅层做法；document a site 搭配自然，故选 C。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "building", "meaning": "建造" },
+        { "optionLabel": "B", "optionText": "visiting", "meaning": "参观、到访" },
+        { "optionLabel": "D", "optionText": "identifying", "meaning": "辨认、确认" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "simply", "signalSide": "context-before", "targetText": "simply documenting a site", "relation": "simply 修饰 documenting，表示“仅仅记录”这一浅层行为。" },
+        { "type": "repetition-echo", "signalText": "every", "signalSide": "context-before", "targetText": "every composition must tell a story", "relation": "上句强调每幅作品要讲故事，与“不只是单纯记录”形成对照，锁定 documenting。" }
+      ],
+      "teachingNote": "看 simply 后的动词与上文对照：讲故事 vs 单纯记录(documenting)。"
+    },
+    "q-960d0f8d-053": {
+      "blankId": "blank-960d0f8d-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "引语是给他人的建议“just start / Go to a place...”，属于鼓励催促的口吻，she __ 用 urges（敦促、力劝）最贴合这种建议语气，故选 A。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "B", "optionText": "recalls", "meaning": "回忆" },
+        { "optionLabel": "C", "optionText": "sighs", "meaning": "叹息" },
+        { "optionLabel": "D", "optionText": "admits", "meaning": "承认" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "advice to others is to just start", "signalSide": "context-before", "targetText": "she urges", "relation": "前文点明这是“给他人的建议”，与表敦促的 urges 搭配。" },
+        { "type": "affective-cue", "signalText": "Go to a place that calls to you", "signalSide": "context-before", "relation": "祈使句式的鼓励口吻属于“力劝”，指向 urges。" }
+      ],
+      "teachingNote": "引述动词看引语口吻：鼓励他人行动用 urge。"
+    },
+    "q-960d0f8d-054": {
+      "blankId": "blank-960d0f8d-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "“If you __ with the place, it will show in your photos” 需要与介词 with 搭配的动词，connect with（与……产生连结）最自然，且与下文石头有“个性、能量、记忆”的情感连结一致，故选 B。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "part", "meaning": "分开、分别" },
+        { "optionLabel": "C", "optionText": "help", "meaning": "帮助" },
+        { "optionLabel": "D", "optionText": "come", "meaning": "来、到来" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "with the place", "signalSide": "context-after", "targetText": "connect with the place", "relation": "connect with 是固定搭配，表示与某地产生连结。" },
+        { "type": "semantic-field", "signalText": "its own energy or ‘memory’", "signalSide": "context-after", "relation": "石头有个性、能量与记忆，呼应与之“connect”的情感连结。" }
+      ],
+      "teachingNote": "动词后跟 with 时优先想固定搭配，connect with 表“产生连结”。"
+    },
+    "q-960d0f8d-055": {
+      "blankId": "blank-960d0f8d-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "她想在照片里 __ 每块石头的个性、能量与记忆，capture（捕捉、记录下无形之物）与 personality、energy、memory 搭配最贴切；capture sth in photos 是常见表达，故选 D。"
+      },
+      "distractorGlosses": [
+        { "optionLabel": "A", "optionText": "make", "meaning": "制造、做出" },
+        { "optionLabel": "B", "optionText": "avoid", "meaning": "避免" },
+        { "optionLabel": "C", "optionText": "evaluate", "meaning": "评估" }
+      ],
+      "evidence": [
+        { "type": "collocation-partner", "signalText": "in my photos", "signalSide": "context-after", "targetText": "capture in my photos", "relation": "capture ... in photos 表示用照片捕捉某种无形特质。" },
+        { "type": "semantic-field", "signalText": "its own personality, its own energy or ‘memory’", "signalSide": "context-before", "relation": "个性、能量、记忆都是可被“捕捉”的无形特质，指向 capture。" }
+      ],
+      "teachingNote": "宾语为个性、能量等无形之物时，用 capture 表“捕捉、定格”。"
+    }
+  }
+}

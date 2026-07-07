@@ -30,11 +30,11 @@ Last updated: 2026-07-07（process-slim）
 
 - UI 烂点清单：`docs/cuts/ui-facade/ui-blemish-list.md`（owner 曾圈
   「按顺序全做」，剩余项待核对）。
-- 数据孤儿清理（新，2026-07-07 摸底 + 生产核实发现）：
-  `paper-2024-jslk-english`（磁盘孤儿、不在 DB、每天污染生产 R2 备份
-  报 501）、`paper-fe8e7a65` / `paper-ee10da87`（DB 标 published 但
-  assets 缺失）。建议 small cut：清理 + 加 DB↔paper-assets 一致性
-  verify 挂 CI。
+- ~~数据孤儿清理~~（2026-07-07 data-orphan-cleanup 刀完成：jslk 删除、
+  fe8e7a65/ee10da87 DB 购清（SQL 在 `data/sql/cleanup-2026-07-orphan-papers.sql`，
+  生产复用）、paper-960d0f8d 缺 latest/ 已修复、
+  `verify-paper-assets-consistency.mjs` 挂 CI。生产侧待 deploy + 跑同一份
+  购清 SQL 后彻底关账）。
 - launch-deploy 挂账：DOCX/讲义版接 Draft Paper 工作台（server 能力
   现成，small cut）；难度维度重建（依赖 reading signals join，
   ADR-0015 已把假 medium 下线）。（topic label 已实测 273/273 全覆盖，

@@ -74,6 +74,7 @@ const registry = {
   'scripts/verify-classic-retire-2.mjs',
   'scripts/verify-classic-retire-3.mjs',
   'scripts/verify-launch-deploy.mjs',
+  'scripts/verify-paper-assets-consistency.mjs',
   ],
 }
 
