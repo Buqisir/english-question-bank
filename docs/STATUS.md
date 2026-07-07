@@ -23,8 +23,10 @@ Last updated: 2026-07-07（process-slim）
 
 ## 主线焦点
 
-- 2026-07-07：小川接管（owner 全权委托）。本刀 process-slim =
-  交接体检修正（过时事实 / 文档矛盾 / 残留），之后回主线体验打磨。
+- 2026-07-07：小川接管（owner 全权委托）。process-slim + data-orphan-cleanup
+  两刀已收官。**当前主线 = UI 大改（目标：全站协调一致）**：审计完成
+  （27/40，`docs/cuts/ui-coherence/audit.md`，分刀清单 ①-⑥ 待 owner 圈），
+  绿色方向沿用 DESIGN.md 墨绿章程不变。
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
