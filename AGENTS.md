@@ -339,8 +339,12 @@ Pocock「AI 协作准则」在本项目的特化落地(且更细)。通用底座
   plan. Under Claude Code the core contract subset (domain / schema /
   Adapter / PaperSurface) is additionally hard-guarded by a `PreToolUse`
   hook (`.claude/hooks/guard-contract-files.mjs`, wired in
-  `.claude/settings.json`) that asks for confirmation before such a write;
-  other harnesses still rely on this rule as written.
+  `.claude/settings.json`) that **denies** such a write — deny survives
+  bypassPermissions mode (upgraded from ask 2026-07-07 when the owner
+  enabled bypass). When a committed `plan.md` assigns contract scope,
+  the orchestrator unlocks with `touch .claude/contract-unlock`
+  (gitignored) and removes it at cut closeout. Other harnesses still
+  rely on this rule as written.
 - Grey-zone files such as `SevenChoicesAnalysisPanel.tsx`,
   `DraftPaperWorkbench.tsx`, and
   `PaperIntelligencePaperSurfaceHarness.tsx` may receive display-only UI

@@ -66,3 +66,6 @@ models/
 
 # Rendered/generated document previews
 docs/rendered-*/
+
+# Contract-file hook unlock marker (per-cut, never committed)
+.claude/contract-unlock
