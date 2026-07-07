@@ -113,7 +113,9 @@ passages, or private student data to any memory system.
   **launched** at eqbank.cc — invite-only login (ADR-0012), owner /
   member roles (ADR-0013), per-user data isolation (ADR-0014), global
   AI daily limit (M0-5), single HK host + R2 backup (launch-deploy;
-  server facts in `docs/cuts/launch-deploy/go-live-record.md`). Do not
+  server facts in `docs/cuts/launch-deploy/go-live-record.md` — until
+  that record is filled in, do not run `scripts/pull-run-push.mjs`
+  against the server or change production config). Do not
   reintroduce local-only assumptions (e.g. localStorage as the only
   persistence for user-facing state, absolute local paths in product
   code).
