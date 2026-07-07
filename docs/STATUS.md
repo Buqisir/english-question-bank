@@ -47,6 +47,12 @@ Last updated: 2026-07-07（process-slim）
   现成，small cut）；难度维度重建（依赖 reading signals join，
   ADR-0015 已把假 medium 下线）。（topic label 已实测 273/273 全覆盖，
   从账本移除。）
+- 导题管线 agent 化（owner 2026-07-07 提出，**排在 UI 大改之后**）：
+  目标是「跟 Agent 说导这套题，它识别格式 → 按标准做解析 → 导入」。
+  要件：给 Agent 的导题入口（现有 `scripts/import-pipeline/` 是底子）+
+  导题标准/要求文档化（格式识别、解析配方、质量 gate）。附带评估：要不要
+  一个 owner 看「导了什么/值得看什么」的面板——注意 ADR-0015 网站只消费
+  的边界，若做属 owner-only 纠错运维档或后台产物报告，不进网站主面。
 - 备份可恢复性演练：R2 有对象但未做过 restore 演练，上线级别应补一次。
 - PaperSurface watch ledger：`docs/paper-surface-watch-ledger.md`。
 
