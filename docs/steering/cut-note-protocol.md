@@ -6,12 +6,11 @@ inclusion: auto
 
 Scope: applies to large product / UI / architecture cuts in the
 `Buqisir/english-question-bank` repository. This protocol exists so
-the daily product log does not depend on long chat history or fragile
+product memory does not depend on long chat history or fragile
 memory after context compaction.
 
 Authoritative rule: after every large cut, record a short Cut Note
-immediately. The 22:30 daily product log should summarize the day's
-Cut Notes instead of reconstructing everything from memory.
+immediately, while the detail is still fresh.
 
 ---
 
@@ -27,7 +26,7 @@ Write a Cut Note immediately after any of these events:
 - a visual / interaction decision is settled after peer feedback
 - a bug is discovered that should appear in the daily retrospective
 
-Do not wait until the 22:30 daily log. Waiting loses detail.
+Do not defer the note to a later retrospective. Waiting loses detail.
 
 ## 2. Cut Note format
 
@@ -66,37 +65,21 @@ For large cuts, include the process lesson when there was one:
 
 ## 3. Where the note lives
 
-Default behavior:
+Default behavior (aligned with the RM artifact gate in
+`docs/steering/cut-workflow-protocol.md` §2.5):
 
-- Put the Cut Note in the conversation immediately, so the user can
-  confirm or correct it.
-- If a daily product-log file already exists for the day, append or
-  fold the Cut Note into that file when the user asks to "落文档",
-  "记一下", "写进日志", or equivalent.
-- If no daily product-log file exists, create one under
-  `docs/product/` only when the user asks for a document.
+- Large cuts: commit `docs/cuts/<CUT>/cut-note.md` before closeout —
+  the RM gate blocks the merge without it.
+- Medium cuts: write `cut-note.md` when the cut changed a recurring
+  product rule, exposed a repeated bug pattern, or left follow-up
+  risk; otherwise the PR description / final summary is enough.
+- Surface the note's key points in the conversation as well, so the
+  owner can confirm or correct them.
 
-Do not silently edit documentation after every tiny task. The immediate
-conversation note is mandatory; file persistence is user-driven unless
-the task explicitly asks for documentation.
+Do not create cut-note files for tiny tasks; the gate exists to
+preserve decisions, not to add ceremony.
 
-## 4. Relationship to the daily 22:30 log
-
-The daily 22:30 summary should use the day's Cut Notes as source
-material and then produce:
-
-1. today's progress
-2. merged / reviewed / blocked PRs
-3. important bugs
-4. pitfalls and wrong assumptions
-5. good decisions
-6. process improvements
-7. tomorrow's priorities
-
-If the daily summary has no Cut Notes and the chat context is thin,
-ask the user for a quick recap instead of inventing details.
-
-## 5. What counts as a large cut
+## 4. What counts as a large cut
 
 Usually yes:
 
@@ -116,7 +99,7 @@ Usually no:
 If unsure, write a tiny Cut Note. A small note is cheaper than losing
 the decision.
 
-## 6. Tone and content
+## 5. Tone and content
 
 Cut Notes should be honest and useful for future retrospectives:
 

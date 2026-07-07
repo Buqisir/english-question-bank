@@ -14,9 +14,10 @@ Actions template lives at `docs/ci/verify-workflow-template.yml`; installing it 
 To inspect the stable verify registry without running it, use
 `node scripts/verify-ci.mjs --list-json`.
 
-Current install state: the workflow is not installed under `.github/workflows/`
-because the available GitHub token has `repo` scope but not `workflow` scope.
-See `docs/ci/verify-workflow-install.md`.
+Current install state: the workflow is installed at
+`.github/workflows/verify.yml` and runs on pushes and PRs. Before any
+merge to `main` the run must be green, and the post-merge `main` run
+must be confirmed green (AGENTS.md RM gate).
 
 ## Stable CI entrypoint
 
@@ -147,11 +148,20 @@ See `docs/ci/verify-workflow-install.md`.
 | `verify-reading-analysis-linking.mjs` | Reading-analysis linking |
 | `verify-reading-analysis-annotation.mjs` | Reading-analysis annotation behavior |
 
+## Process / workflow gates
+
+| Script | Scope |
+| --- | --- |
+| `verify-cut-artifacts.mjs` | RM artifact gate: `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>` checks required cut artifacts exist non-empty before medium / large merges |
+| `verify-c8-forbidden-scope.mjs` | C8 cut-specific forbidden-scope audit (historical) |
+
 ## Miscellaneous / older Paper Intelligence cuts
 
 | Script | Scope |
 | --- | --- |
 | `verify-dev-completion-report-contract.mjs` | DEV completion report contract (steering ↔ template consistency) |
+| `verify-i0c-seven-choices-analysis-v1.mjs` | I0-C 七选五 analysis v1 asset contract |
+| `verify-i0d-seven-choices-surface.mjs` | I0-D 七选五 surface render contract |
 | `verify-paper-intelligence-cut-d1.mjs` | Older Paper Intelligence D1 contract |
 | `verify-paper-intelligence-preview.mjs` | Paper Intelligence preview |
 | `verify-paper-intelligence-interactive-preview.mjs` | Interactive preview |

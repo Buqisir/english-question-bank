@@ -27,6 +27,13 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 
 ## Levels
 
+These L levels classify the **change type** to pick gates; they map onto
+the small / medium / large cut tiers in
+`docs/steering/cut-workflow-protocol.md` roughly as L0–L1 ≈ small,
+L2–L3 ≈ medium, L3–L4 ≈ large. Tier (from the protocol) decides process
+ceremony; the L row decides which gates the change type needs. When in
+doubt, the protocol's tier rules win.
+
 | Level | Change Type | Required Gates | QA? | Examples |
 | --- | --- | --- | --- | --- |
 | L0 | Pure record: inventory, checklist, sidecar doc that does not make product decisions | DEV completion + RM sanity check | No | sidecar inventory docs, QA checklist docs |
