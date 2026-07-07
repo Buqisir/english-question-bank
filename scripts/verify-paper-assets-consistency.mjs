@@ -128,6 +128,13 @@ db.close()
 
 const dbPaperIds = new Set([...publishedIds, ...fileRefIds])
 
+// paper-2024-jslk-english is NOT product content: it is the flat-legacy
+// test fixture consumed in place by ~25 verify scripts (verify-h1d,
+// verify-i0e, verify-c6a*, ...), so it legitimately has no DB rows.
+// Relocating it out of the served paper-assets path is its own cut
+// (see docs/STATUS.md ledger); until then it is allowlisted here.
+const KNOWN_FIXTURES = new Set(['paper-2024-jslk-english'])
+
 for (const paperId of dbPaperIds) {
   assert(
     `DB→disk ${paperId}: assets renderable on disk`,
@@ -137,10 +144,11 @@ for (const paperId of dbPaperIds) {
 }
 
 for (const paperId of diskPaperIds) {
+  if (KNOWN_FIXTURES.has(paperId)) continue
   assert(
     `disk→DB ${paperId}: known to the DB`,
     dbPaperIds.has(paperId),
-    'disk orphan — dir exists but no DB row references it (jslk class)',
+    'disk orphan — dir exists but no DB row references it',
   )
 }
 
