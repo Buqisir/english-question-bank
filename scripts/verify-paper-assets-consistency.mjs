@@ -1,0 +1,160 @@
+#!/usr/bin/env node
+/**
+ * Verification: DB ↔ paper-assets consistency (data-orphan-cleanup cut).
+ *
+ * Guards the invariant that broke three papers before 2026-07:
+ *   - a paper dir on disk that the web cannot render (no latest/ and no
+ *     legacy flat paper-asset.json) — e.g. paper-960d0f8d before repair;
+ *   - a paper dir unknown to the DB — e.g. paper-2024-jslk-english,
+ *     which polluted every production R2 backup run;
+ *   - DB rows whose assets are gone — e.g. paper-fe8e7a65 /
+ *     paper-ee10da87, searchable but 404 on click-through.
+ *
+ * Phase 1 (always runs, CI-safe — paper-assets latest/ is git-tracked):
+ *   every dir under app/public/paper-assets/ must be renderable by the
+ *   frontend contract (latest/paper-asset.json, or legacy flat
+ *   paper-asset.json), the JSON must parse, and paper.paperId must match
+ *   the dir name. Stale .latest-tmp-* / .latest-prev-* swap residue fails.
+ *
+ * Phase 2 (only when data/question-bank.sqlite exists — local/production):
+ *   every published paper_asset_versions row and every sources.file_ref
+ *   paper id must have a renderable dir, and every disk dir must be known
+ *   to the DB. When the DB is absent (clean CI checkout), phase 2 is
+ *   skipped via exit code 2 per the verify-ci.mjs skip convention.
+ */
+
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const rootDir = path.resolve(__dirname, '..')
+const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
+const dbPath = path.join(rootDir, 'data', 'question-bank.sqlite')
+
+let passed = 0
+let failed = 0
+
+function assert(name, condition, detail = '') {
+  if (condition) {
+    passed++
+    console.log(`PASS ${name}`)
+  } else {
+    failed++
+    console.error(`FAIL ${name}${detail ? `\n  ${detail}` : ''}`)
+  }
+}
+
+// Renderable per the frontend contract in
+// PaperIntelligencePaperSurfaceHarness: /paper-assets/<id>/latest/paper-asset.json,
+// falling back to legacy flat /paper-assets/<id>/paper-asset.json.
+function renderableAssetPath(paperId) {
+  const latest = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
+  if (existsSync(latest)) return latest
+  const flat = path.join(paperAssetsDir, paperId, 'paper-asset.json')
+  if (existsSync(flat)) return flat
+  return null
+}
+
+console.log('verify: DB ↔ paper-assets consistency')
+console.log()
+
+// ─── Phase 1: disk invariants ────────────────────────────────────────────────
+
+const diskPaperIds = readdirSync(paperAssetsDir, { withFileTypes: true })
+  .filter((e) => e.isDirectory())
+  .map((e) => e.name)
+
+assert('paper-assets dir has at least one paper', diskPaperIds.length > 0)
+
+for (const paperId of diskPaperIds) {
+  const assetPath = renderableAssetPath(paperId)
+  assert(
+    `${paperId}: renderable (latest/ or legacy flat paper-asset.json)`,
+    assetPath !== null,
+    `no latest/paper-asset.json and no flat paper-asset.json under ${paperId}/`,
+  )
+  if (!assetPath) continue
+
+  let asset = null
+  try {
+    asset = JSON.parse(readFileSync(assetPath, 'utf8'))
+  } catch (error) {
+    assert(`${paperId}: paper-asset.json parses`, false, String(error))
+    continue
+  }
+  assert(
+    `${paperId}: paper.paperId matches dir name`,
+    asset?.paper?.paperId === paperId,
+    `paper.paperId=${asset?.paper?.paperId}`,
+  )
+
+  const residue = readdirSync(path.join(paperAssetsDir, paperId), { withFileTypes: true })
+    .filter((e) => e.isDirectory() && /^\.latest-(tmp|prev)-/.test(e.name))
+    .map((e) => e.name)
+  assert(
+    `${paperId}: no stale latest-swap residue`,
+    residue.length === 0,
+    residue.join(', '),
+  )
+}
+
+// ─── Phase 2: DB cross-check (skip on clean CI checkout) ────────────────────
+
+if (!existsSync(dbPath)) {
+  if (failed > 0) {
+    console.error(`\n${failed} failed / ${passed} passed`)
+    process.exit(1)
+  }
+  console.log(`\ndisk invariants: ${passed} passed`)
+  console.log('SKIP: data/question-bank.sqlite absent — DB cross-check not run')
+  process.exit(2)
+}
+
+const { DatabaseSync } = await import('node:sqlite')
+const db = new DatabaseSync(dbPath, { readOnly: true })
+
+const publishedIds = db
+  .prepare(`SELECT DISTINCT paper_id FROM paper_asset_versions WHERE status = 'published'`)
+  .all()
+  .map((r) => r.paper_id)
+
+const fileRefIds = db
+  .prepare(`SELECT DISTINCT file_ref FROM sources WHERE file_ref LIKE 'paper-assets/%'`)
+  .all()
+  .map((r) => r.file_ref.split('/')[1])
+
+db.close()
+
+const dbPaperIds = new Set([...publishedIds, ...fileRefIds])
+
+// paper-2024-jslk-english is NOT product content: it is the flat-legacy
+// test fixture consumed in place by ~25 verify scripts (verify-h1d,
+// verify-i0e, verify-c6a*, ...), so it legitimately has no DB rows.
+// Relocating it out of the served paper-assets path is its own cut
+// (see docs/STATUS.md ledger); until then it is allowlisted here.
+const KNOWN_FIXTURES = new Set(['paper-2024-jslk-english'])
+
+for (const paperId of dbPaperIds) {
+  assert(
+    `DB→disk ${paperId}: assets renderable on disk`,
+    renderableAssetPath(paperId) !== null,
+    'DB references this paper but the web would 404 on it',
+  )
+}
+
+for (const paperId of diskPaperIds) {
+  if (KNOWN_FIXTURES.has(paperId)) continue
+  assert(
+    `disk→DB ${paperId}: known to the DB`,
+    dbPaperIds.has(paperId),
+    'disk orphan — dir exists but no DB row references it',
+  )
+}
+
+console.log()
+if (failed > 0) {
+  console.error(`${failed} failed / ${passed} passed`)
+  process.exit(1)
+}
+console.log(`all ${passed} checks passed`)
