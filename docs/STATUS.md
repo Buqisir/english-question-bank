@@ -15,11 +15,11 @@ Last updated: 2026-07-07（process-slim）
   ✅（2026-07-07 已核实补档，见下）→ **当前处于 M1「owner 独用」阶段**
   → M2 = 邀 2-3 位同事。
 - go-live 已核实（2026-07-07，小川经腾讯云 TAT 只读核实，
-  `docs/cuts/launch-deploy/go-live-record.md`）：生产部署 commit
-  `ec23627`（#261，落后本地 main）、Node v24.18.0 无需
+  `docs/cuts/launch-deploy/go-live-record.md`）：Node v24.18.0 无需
   `--experimental-sqlite`、eqb+Caddy active、enforced 模式（1 owner /
   0 member）、R2 备份 cron 每天成功推送（1016 对象/50MB）。**动生产的
-  红线已解除**（补档前禁跑 pull-run-push 的限制不再适用）。
+  红线已解除**。生产部署 commit 已于同日 data-orphan-cleanup 收尾时
+  推进到 `4ff8c3b`（与 main 同步，含 #263-268）。
 
 ## 主线焦点
 
@@ -30,11 +30,13 @@ Last updated: 2026-07-07（process-slim）
 
 - UI 烂点清单：`docs/cuts/ui-facade/ui-blemish-list.md`（owner 曾圈
   「按顺序全做」，剩余项待核对）。
-- ~~数据孤儿清理~~（2026-07-07 data-orphan-cleanup 刀完成：
-  fe8e7a65/ee10da87 DB 购清（SQL 在 `data/sql/cleanup-2026-07-orphan-papers.sql`，
-  生产复用）、paper-960d0f8d 缺 latest/ 已修复、
-  `verify-paper-assets-consistency.mjs` 挂 CI。生产侧待 deploy + 跑同一份
-  购清 SQL 后彻底关账）。
+- ~~数据孤儿清理~~（2026-07-07 data-orphan-cleanup 刀收官，PR #268 +
+  生产收尾完成：fe8e7a65/ee10da87 本地+生产 DB 均购清（SQL 在
+  `data/sql/cleanup-2026-07-orphan-papers.sql`）、paper-960d0f8d 缺
+  latest/ 已修复、`verify-paper-assets-consistency.mjs` 挂 CI 且在生产
+  实跑 164 checks 全绿。生产同批部署到 `4ff8c3b`（带上 #263-268），
+  eqb+Caddy active、eqbank.cc 200。生产 DB 购清前有
+  `question-bank.sqlite.bak.orphan-cleanup.*` 备份。）
 - 测试夹具漏在生产数据路径（data-orphan-cleanup 刀发现）：
   `paper-2024-jslk-english` 不是垃圾而是 ~25 个 verify 脚本就地消费的
   扁平结构 fixture，但它住在被生产 serve + R2 备份的
