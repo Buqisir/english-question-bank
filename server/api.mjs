@@ -363,40 +363,38 @@ function getPaperAssetPrintReady(asset, group) {
   return { ok: true, reason: null }
 }
 
-export function isGroupPrintReady(db, groupId) {
-  const group = db
-    .prepare(
-      `
-      SELECT
-        qg.id,
-        qg.group_type,
-        qg.instruction,
-        p.material_text,
-        p.summary,
-        COUNT(q.id) AS question_count,
-        SUM(CASE WHEN trim(q.stem) = '' THEN 1 ELSE 0 END) AS missing_stem_count,
-        SUM(CASE WHEN option_counts.option_count IS NULL OR option_counts.option_count = 0 THEN 1 ELSE 0 END) AS missing_option_count
-      FROM question_groups qg
-      JOIN passages p ON p.id = qg.passage_id
-      LEFT JOIN questions q ON q.group_id = qg.id
-      LEFT JOIN (
-        SELECT question_id, COUNT(*) AS option_count
-        FROM options
-        WHERE trim(content) <> ''
-        GROUP BY question_id
-      ) option_counts ON option_counts.question_id = q.id
-      WHERE qg.id = ?
-      GROUP BY qg.id, qg.group_type, qg.instruction, p.material_text, p.summary
-      `,
-    )
-    .get(groupId)
+const PRINT_READY_AGGREGATE_SQL = `
+  SELECT
+    qg.id,
+    qg.group_type,
+    qg.instruction,
+    p.material_text,
+    p.summary,
+    COUNT(q.id) AS question_count,
+    SUM(CASE WHEN trim(q.stem) = '' THEN 1 ELSE 0 END) AS missing_stem_count,
+    SUM(CASE WHEN option_counts.option_count IS NULL OR option_counts.option_count = 0 THEN 1 ELSE 0 END) AS missing_option_count
+  FROM question_groups qg
+  JOIN passages p ON p.id = qg.passage_id
+  LEFT JOIN questions q ON q.group_id = qg.id
+  LEFT JOIN (
+    SELECT question_id, COUNT(*) AS option_count
+    FROM options
+    WHERE trim(content) <> ''
+    GROUP BY question_id
+  ) option_counts ON option_counts.question_id = q.id
+`
 
+// Perf cut (docs/cuts/list-groups-perf/plan.md): pure judgment shared by the
+// single-row path (isGroupPrintReady) and the batch path (getPrintReadyByGroupId)
+// so the two never drift. `group` is one row of PRINT_READY_AGGREGATE_SQL (or
+// null/undefined when the group doesn't exist); `paperAssetMatch` is the
+// { asset, group } pair from a paper-asset scan, or null/undefined when absent.
+function computePrintReadyJudgment(group, paperAssetMatch) {
   if (!group) return { ok: false, reason: '题组不存在' }
   if (!PRINT_READY_GROUP_TYPES.has(group.group_type)) {
     if (group.group_type === 'listening') return { ok: false, reason: '听力题组暂不支持打印' }
     return { ok: false, reason: '题型暂不支持打印' }
   }
-  const paperAssetMatch = findPaperAssetGroup(groupId)
   if (paperAssetMatch) return getPaperAssetPrintReady(paperAssetMatch.asset, paperAssetMatch.group)
 
   if (Number(group.question_count || 0) <= 0) return { ok: false, reason: '题组没有小题' }
@@ -410,6 +408,65 @@ export function isGroupPrintReady(db, groupId) {
   }
 
   return { ok: true, reason: null }
+}
+
+export function isGroupPrintReady(db, groupId) {
+  const group = db
+    .prepare(
+      `${PRINT_READY_AGGREGATE_SQL} WHERE qg.id = ? GROUP BY qg.id, qg.group_type, qg.instruction, p.material_text, p.summary`,
+    )
+    .get(groupId)
+  const paperAssetMatch = findPaperAssetGroup(groupId)
+  return computePrintReadyJudgment(group, paperAssetMatch)
+}
+
+// Batch counterpart of isGroupPrintReady (perf cut list-groups-perf): one SQL
+// call for all groupIds' aggregate rows + one paper-asset directory scan,
+// instead of N+1 SQL calls and N full paper-asset scans each. Returns
+// Map<groupId, { ok, reason }> with judgments identical to calling
+// isGroupPrintReady(db, id) for each id (parity proven by
+// scripts/verify-list-groups-perf.mjs).
+function selectPrintReadyAggregateRows(db, groupIds) {
+  if (groupIds.length === 0) return new Map()
+  const placeholders = groupIds.map(() => '?').join(', ')
+  const rows = db
+    .prepare(
+      `${PRINT_READY_AGGREGATE_SQL} WHERE qg.id IN (${placeholders}) GROUP BY qg.id, qg.group_type, qg.instruction, p.material_text, p.summary`,
+    )
+    .all(...groupIds)
+  return new Map(rows.map((row) => [row.id, row]))
+}
+
+function buildPaperAssetGroupIndex() {
+  const index = new Map()
+  if (!existsSync(paperAssetsDir)) return index
+  for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
+    if (!existsSync(assetPath)) continue
+    try {
+      const asset = readJsonFile(assetPath)
+      const groups = asset?.content?.groups
+      if (!groups || typeof groups !== 'object') continue
+      for (const [groupId, group] of Object.entries(groups)) {
+        if (group && !index.has(groupId)) index.set(groupId, { asset, group, paperId: entry.name })
+      }
+    } catch {
+      // Ignore invalid paper-asset files; import validation owns that error.
+    }
+  }
+  return index
+}
+
+export function getPrintReadyByGroupId(db, groupIds) {
+  const ids = Array.from(new Set(groupIds))
+  const aggregateById = selectPrintReadyAggregateRows(db, ids)
+  const paperAssetIndex = buildPaperAssetGroupIndex()
+  const result = new Map()
+  for (const id of ids) {
+    result.set(id, computePrintReadyJudgment(aggregateById.get(id), paperAssetIndex.get(id)))
+  }
+  return result
 }
 
 const draftPaperStore = createDraftPaperStore({
@@ -1536,9 +1593,13 @@ function selectQuestionGroupCards(db, whereClause = '', params = [], draftContex
     rows.map((row) => row.id),
   )
   const paperSurfaceAnalysisAvailabilityByGroupId = getPaperSurfaceAnalysisAvailabilityByGroupId()
+  const printReadyByGroupId = getPrintReadyByGroupId(
+    db,
+    rows.map((row) => row.id),
+  )
 
   const cards = rows.map((row) => {
-    const printReady = isGroupPrintReady(db, row.id)
+    const printReady = printReadyByGroupId.get(row.id)
     return rowToQuestionGroupCard({
       ...row,
       topicLabels: topicLabelsByGroupId.get(row.id) || [],
