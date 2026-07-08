@@ -61,6 +61,12 @@ Last updated: 2026-07-07（process-slim）
   一个 owner 看「导了什么/值得看什么」的面板——注意 ADR-0015 网站只消费
   的边界，若做属 owner-only 纠错运维档或后台产物报告，不进网站主面。
 - 备份可恢复性演练：R2 有对象但未做过 restore 演练，上线级别应补一次。
+- UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
+  `.impeccable/critique/`）。剩余：[P1] 两个未迁移解析孪生面
+  （`?view=reading-analysis` 暖色孤岛 + PI 默认 Preview 面含 backstage
+  AI 标，URL 直达可见）——**归 reading-analysis 孤儿支退役刀一并收**；
+  [P2] 效率轴（键盘捷径/批量加卷）owner 圈了再动；[P3] 返回措辞一主
+  两例外。
 - PaperSurface watch ledger：`docs/paper-surface-watch-ledger.md`。
 
 ## 更新纪律
