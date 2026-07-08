@@ -53,7 +53,7 @@ not mass-rename history.
 
 | Role | Tier | Effort |
 | --- | --- | --- |
-| Orchestrator (PM + acceptance) | main agent | — (dispatch & verify only) |
+| Orchestrator (PM + acceptance) | main agent | medium (escalation rule below) |
 | PA | Opus | high (xhigh only for large / contract / irreversible cuts) |
 | DEV | Sonnet | medium (high only when the implementation is gnarly) |
 | CR + RM | Opus | high |
@@ -61,6 +61,20 @@ not mass-rename history.
 `high` is the default ceiling; `max` / `xhigh` is by exception, not
 standing. Do not run DEV on Opus-max, or PA / CR on Sonnet-low, and never
 let a subagent default to the main-agent model.
+
+Main-agent effort escalation (owner 2026-07-08): daily default is
+medium. Effort is owner-controlled, so when the main agent detects the
+session has entered a High-trigger situation it MUST proactively remind
+the owner to switch up — it may not silently continue on medium. The
+three High triggers: (1) production-irreversible operations; (2) writing
+a contract-level plan with no PA backstop; (3) route / direction-level
+discussion (which cut to open, milestone ordering, architecture
+direction — no process gate catches a wrong answer and the error cost is
+measured in weeks). Suggest xhigh only for one-way-door decisions
+(changing data-contract semantics, overturning an ADR); max has no
+standing use for the main agent. Rollback gauge for the medium default:
+if CR Must Fix items of the "plan factual error" kind rise, move the
+daily default back to high.
 
 ### RM gate
 
