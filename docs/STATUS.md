@@ -23,6 +23,33 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
+- 2026-07-09（UI 整改日második波：owner 边用边报，五刀+一事故）：
+  - **生产导出 PDF 事故闭环**：根因=生产机从未装 zip/LibreOffice/CJK 字体
+    （DOCX→PDF 线自 go-live 起断路，E2E 走 vivliostyle 线未暴露）。已装
+    +QA 实测 200/%PDF/中文正常，依赖清单入 go-live-record 追记。挂账：
+    health 暴露导出线就绪状态。
+  - **解析卡信息分层三连**（owner 逐层拍板，主代理直修 small）：考点框架
+    折叠（3f97eab）→ 解题提示完形/语法双砍（数据保留）→ 匿名「展开细节」
+    抽屉退役，证据定位改命名折叠（7dfd55b）。设计原则落地：**折叠条必须
+    有名字**。挂账：M2 邀同事前给考点框架加一行白话导语。
+  - **seven-options-on-paper**（合并 9d75efb，CR APPROVE 纯加零删）：
+    七选五卷面正文后渲染 A-G 选项池（纯展示零交互），PaperSurface 层
+    实现→整卷页自动继承。DEV 顺手实证一个**既有**导出 bug：print/DOCX
+    七选五把 A-G 池按小题重复 5 遍（挂账另刀）。
+  - **add-to-draft-feel**（合并 f8e03b3，CR APPROVE）：owner 报障加题
+    1-2s 才反馈→乐观翻转+失败回滚+后台对账；draftPaperStore 注入批量
+    print-ready（5 题 81ms→27ms）。销 #276 旧账（详情按钮不刷新）。
+    CR Should Watch：快速分次连点+GET 乱序的自愈型瞬时闪回。
+  - **section-chrome-on-solo-surface**（合并 27d06cb，CR-lite）：解析页
+    单题组卷面回溯渲染节标题+指导语（全题型统一，writing 走既有机制），
+    治"纸空落落"。owner 同议题裁定：语法填空不撑 A4 高度（屏幕面高度
+    随内容，A4 归导出面）。
+  - **流程事故落账**：七选五 DEV 在主树建分支污染主代理提交（已复位，
+    文件零写入）；后续派工 prompt 已写死 worktree 纪律（pwd 确认+禁碰
+    主树路径），AGENTS 待补硬条款。主代理同款教训：合并必须在主树执行。
+  - 队列next：草稿卷工作台+个人空间 UI 一致性（owner 报"很丑很割裂"，
+    先审计后派工）。
+
 - 2026-07-08（UI 整改日，四刀+基建，性能/入口/精美化三刀并行 worktree）：
   - **幽灵样例题组**（7e56e30）：硬编码 sample 不再混入正式列表，仅留
     离线兜底；库内 48 个 0 题题组全为写作类（按设计），无脏数据。
