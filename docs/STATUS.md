@@ -61,6 +61,12 @@ Last updated: 2026-07-07（process-slim）
   一个 owner 看「导了什么/值得看什么」的面板——注意 ADR-0015 网站只消费
   的边界，若做属 owner-only 纠错运维档或后台产物报告，不进网站主面。
 - 备份可恢复性演练：R2 有对象但未做过 restore 演练，上线级别应补一次。
+- **member 详情再收一档（owner 2026-07-08 QA 后拍板，下一把 small 刀）**：
+  题组详情对 member 连「答案对比统计」（answer-compare-summary）与
+  「AI 答案验证 verify-list」也一并隐藏（owner 保留）——推翻 C2 时代
+  「member 可见」旧口径，属 ADR-0015 精神延续。做法同刀④（isOwnerView
+  gate），`verify-classic-retire-2.mjs` 的三条旧 member-visible 断言
+  同刀改为 owner-gated 真检查。其余生产 QA owner 已过，无别的问题。
 - UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
   `.impeccable/critique/`）。剩余：[P1] 两个未迁移解析孪生面
   （`?view=reading-analysis` 暖色孤岛 + PI 默认 Preview 面含 backstage
