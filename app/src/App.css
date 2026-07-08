@@ -4460,6 +4460,67 @@ button:disabled {
   cursor: progress;
 }
 
+/* ── ui-search-feel 刀⑤ #1 — dataLoading skeleton ──────────────────────
+ * Chip row + 3 feed-group placeholders shown while the local SQLite bank
+ * is still connecting, so the first paint isn't a blank page. Reuses the
+ * existing `.concierge-skeleton-line` shimmer gradient (neutral
+ * surface/border grays, already reduced-motion-safe via the blanket
+ * `@media (prefers-reduced-motion: reduce)` rule above).
+ */
+.concierge-skeleton-chip-row {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.concierge-skeleton-chip {
+  width: 76px;
+  height: 24px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #F6F6F4 0%, #EDEDEA 50%, #F6F6F4 100%);
+  background-size: 200% 100%;
+  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+.concierge-skeleton-chip:nth-child(2) { width: 96px; }
+.concierge-skeleton-chip:nth-child(3) { width: 64px; }
+.concierge-skeleton-chip:nth-child(4) { width: 108px; }
+.concierge-skeleton-chip:nth-child(5) { width: 84px; }
+.concierge-skeleton-chip:nth-child(6) { width: 70px; }
+
+.concierge-skeleton-feed {
+  margin-top: 20px;
+  border: 1px solid #D8D8D2;
+  border-radius: 8px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.concierge-skeleton-feed-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 14px;
+}
+
+.concierge-skeleton-feed-group + .concierge-skeleton-feed-group {
+  border-top: 1px solid rgba(30, 30, 28, 0.06);
+}
+
+.concierge-skeleton-feed-title {
+  width: 220px;
+  height: 14px;
+}
+
+.concierge-skeleton-feed-row {
+  width: 85%;
+  height: 12px;
+}
+
 /* ========================================================================
    Concierge V1.1 — paper-bucket rows + inline group cards.
    Reuses neutral paper / ink palette from the V1 stream.
@@ -4489,7 +4550,13 @@ button:disabled {
 /* Paper-level row */
 .concierge-paper-row {
   display: grid;
-  grid-template-columns: minmax(160px, 220px) 1fr auto;
+  /* ui-search-feel 刀⑤ #3 — title column used to be capped narrow
+     (minmax(160,220)) while the meta column took the leftover 1fr and sat
+     mostly empty (audit: long headlines ellipsis while the right side is
+     blank). Flip the share: headline flexes with the row, meta gets a
+     modest cap since its content (hitcount/grouptypes/topics) rarely
+     needs more than that. */
+  grid-template-columns: minmax(240px, 1fr) minmax(160px, 340px) auto;
   align-items: center;
   gap: 16px;
   padding: 16px 14px;
