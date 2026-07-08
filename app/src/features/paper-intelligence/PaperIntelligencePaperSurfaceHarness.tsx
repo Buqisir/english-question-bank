@@ -1286,6 +1286,10 @@ export function PaperIntelligencePaperSurfaceHarness({
       annotations={[]}
       evidence={surfaceData.evidence}
       questions={surfaceData.questions}
+      // seven-options-on-paper: the 七选五 A-G pool, display-only.
+      // `undefined` for every other source (reading/cloze/grammarFill/
+      // writing) — zero render-path change for them.
+      optionBank={sevenChoicesModel?.options}
       mode="lecture"
       lectureFocus={lectureFocus}
       readingFocusBySection={{}}

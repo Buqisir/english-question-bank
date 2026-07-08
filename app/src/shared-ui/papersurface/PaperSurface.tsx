@@ -83,6 +83,7 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
     annotations,
     evidence,
     questions,
+    optionBank,
     mode,
     lectureFocus,
     // readingFocusBySection is accepted but not rendered in B3.
@@ -230,6 +231,17 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
             blankFocus={blankFocus}
           />
         ))}
+        {/* seven-options-on-paper: the 七选五 A-G candidate-sentence
+            pool, printed once after the passage (real exam papers print
+            this pool once under the blanked passage, not per blank).
+            Display-only — no anchor attrs, no click handler, never
+            wired into onFocusIntent. Every current adapter feeds exactly
+            one section per PaperSurface mount, so rendering this once
+            here (rather than per-section) matches "right after the
+            passage" without a risk of duplicating it across sections. */}
+        {optionBank && optionBank.length > 0 && (
+          <PaperSurfaceOptionBank options={optionBank} />
+        )}
         {/* Render global questions (no section). I15: the rail is
             suppressed in 'in-passage' mode (blankFocus non-null). */}
         {questionsBySection.has('__global__') && !blankFocus && (
@@ -727,6 +739,37 @@ function PaperSurfaceOptionList({
         >
           <span className="ps-option-label">{opt.label}.</span>
           <span className="ps-option-text">{opt.text}</span>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+/* ─── Option bank renderer (seven-options-on-paper) ────────────── */
+
+/**
+ * Static A-G candidate-sentence pool for 七选五, printed once after the
+ * passage. Deliberately the ONLY option renderer in this file with:
+ *   - no `paperSurfaceAnchorAttrs` (no `data-paper-*` anchor of any kind),
+ *   - no `onClick` / focus wiring of any kind.
+ * It is pure display, mirroring the docx handout export's deduped
+ * "选项" block (single column, `A. ` prefix) — see
+ * `docs/cuts/seven-options-on-paper/plan.md` for the format-language
+ * source. PaperSurface stays dumb: this never calls back into the host.
+ */
+type PaperSurfaceOptionBankProps = {
+  options: ReadonlyArray<PaperQuestionOption>
+}
+
+function PaperSurfaceOptionBank({
+  options,
+}: PaperSurfaceOptionBankProps): ReactNode {
+  return (
+    <ol className="ps-option-bank">
+      {options.map((opt) => (
+        <li key={opt.label} className="ps-option-bank-item">
+          <span className="ps-option-label">{opt.label}.</span>
+          <span className="ps-option-bank-text">{opt.text}</span>
         </li>
       ))}
     </ol>
