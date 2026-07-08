@@ -640,13 +640,26 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
         // Questions
         detail.questions.forEach((question) => {
-          body.push(
-            paragraph(
-              [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`, { size: 21 })],
-              { before: 60, after: 50 },
-            ),
-          )
-          renderOptionsExam(body, question.options, detail.groupType)
+          const stemText = String(question.stem || '').trim()
+          const hasOptions = Array.isArray(question.options) && question.options.length > 0
+          // 与 print-renderer 同策（owner QA 2026-07-08）:空题干时挖空题号已在文中。
+          // 有选项 → 题号与选项同行(真卷完形形态);无选项且学生版 → 整行不出。
+          if (!stemText && !hasOptions && versionType !== 'teacher') {
+            questionNum++
+            return
+          }
+          if (!stemText && hasOptions) {
+            const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('    ')
+            body.push(paragraph([run(`${questionNum}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
+          } else {
+            body.push(
+              paragraph(
+                [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`, { size: 21 })],
+                { before: 60, after: 50 },
+              ),
+            )
+            renderOptionsExam(body, question.options, detail.groupType)
+          }
 
           // Teacher version: compact answer
           if (versionType === 'teacher') {

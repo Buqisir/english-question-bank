@@ -161,8 +161,21 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
         }
 
         for (const question of detail.questions) {
-          groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
-          groupHtml += renderOptions(question.options, detail.groupType)
+          const stemText = String(question.stem || '').trim()
+          const hasOptions = Array.isArray(question.options) && question.options.length > 0
+          // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
+          // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
+          if (!stemText && !hasOptions && !isTeacher) {
+            questionNum += 1
+            continue
+          }
+          if (!stemText && hasOptions) {
+            // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
+            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${question.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
+          } else {
+            groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
+            groupHtml += renderOptions(question.options, detail.groupType)
+          }
           if (isTeacher) {
             groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(question.answer || '待补')}</p>`
             const rawExplanation = question.explanation || question.note || ''
@@ -335,6 +348,10 @@ body {
 
 .options-inline span {
   margin-right: 2em;
+}
+
+.options-inline--numbered .qnum {
+  margin-right: 0.6em;
 }
 
 .answer {
