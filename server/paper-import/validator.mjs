@@ -232,8 +232,9 @@ function classifyFile(file) {
     return { kind: 'rejected', fileName, reason: '文件名不能包含路径。' }
   }
   if (ext === '.docx') return { kind: 'docx', fileName }
+  if (ext === '.pdf') return { kind: 'pdf', fileName }
   if (ext === '.json') return { kind: 'json', fileName }
-  return { kind: 'rejected', fileName, reason: '只允许 .docx 和 .json。' }
+  return { kind: 'rejected', fileName, reason: '只允许 .docx、.pdf 和 .json。' }
 }
 
 function validateReadingAnalysisBundle({ asset, answerKey, analyses, blockingIssues, warnings }) {
@@ -598,7 +599,7 @@ export function validatePaperImportPackage(files, options = {}) {
       continue
     }
     acceptedFiles.push({ fileName: file.fileName, size, kind: classified.kind })
-    if (classified.kind === 'docx') docxFiles.push(file)
+    if (classified.kind === 'docx' || classified.kind === 'pdf') docxFiles.push({ ...file, kind: classified.kind })
     if (classified.kind === 'json') jsonFiles.push(file)
   }
 
@@ -606,12 +607,19 @@ export function validatePaperImportPackage(files, options = {}) {
     blockingIssues.push(issue('blocking', 'limits.packageTooLarge', '试卷包总大小超过 20MB。'))
   }
   if (docxFiles.length !== 1) {
-    blockingIssues.push(issue('blocking', 'package.docxCount', '必须且只能上传 1 个 DOCX 源文件。', {
-      suggestedFix: '保留一份试题正文 DOCX。',
+    blockingIssues.push(issue('blocking', 'package.docxCount', '必须且只能上传 1 个源文档文件（.docx 或 .pdf）。', {
+      suggestedFix: '保留一份试题正文源文件（.docx 或 .pdf）。',
     }))
   }
   const sourceDocx = docxFiles[0] || null
-  if (sourceDocx && sourceDocx.buffer.subarray(0, 2).toString('utf8') !== 'PK') {
+  if (sourceDocx && sourceDocx.kind === 'pdf') {
+    if (sourceDocx.buffer.subarray(0, 4).toString('utf8') !== '%PDF') {
+      blockingIssues.push(issue('blocking', 'docx.invalidMagic', `${sourceDocx.fileName} 不是有效 PDF 文件。`, {
+        fileName: sourceDocx.fileName,
+        suggestedFix: '上传真实 .pdf 文件，不要改后缀。',
+      }))
+    }
+  } else if (sourceDocx && sourceDocx.buffer.subarray(0, 2).toString('utf8') !== 'PK') {
     blockingIssues.push(issue('blocking', 'docx.invalidMagic', `${sourceDocx.fileName} 不是有效 DOCX/ZIP 容器。`, {
       fileName: sourceDocx.fileName,
       suggestedFix: '上传真实 .docx 文件，不要改后缀。',

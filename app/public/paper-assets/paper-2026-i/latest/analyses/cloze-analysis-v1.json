@@ -1,0 +1,672 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2026-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2026-i-cloze": {
+      "overview": "记叙文（夹叙夹议）：作者回忆家乡俄亥俄小镇，从被同学视为“异世界”的尴尬，到长大后越发感激小镇根基、懂得珍惜的心路历程。",
+      "affectiveArc": "情感先抑后扬：起初对小镇不以为然、抱怨无聊，随着离开与成长转为感激、热爱与珍视，结尾坚信家乡会指引方向。"
+    }
+  },
+  "blanks": {
+    "q-2026-i-041": {
+      "blankId": "blank-2026-i-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "realization 作主语，与 of how little people knew 搭配，指“意识到人们对俄亥俄了解如此之少”这一认识，且该认识“came quickly”，语义连贯。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fantasy",
+          "meaning": "幻想"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "prejudice",
+          "meaning": "偏见"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "expectation",
+          "meaning": "期望"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of how little people knew",
+          "signalSide": "context-after",
+          "targetText": "The realization of how little people knew",
+          "relation": "realization of ... 后接同位从句，构成“意识到……”的固定搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "came quickly",
+          "signalSide": "context-after",
+          "targetText": "The realization ... came quickly",
+          "relation": "谓语 came quickly 以这一“认识”为主语，认识很快到来。"
+        }
+      ],
+      "teachingNote": "抽象名词空要看它作主语时与后面从句和谓语能否构成一个可陈述的“认识/意识”。"
+    },
+    "q-2026-i-042": {
+      "blankId": "blank-2026-i-042",
+      "blankNo": 42,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "only 修饰 three and a half hours away，强调距离之近（仅三个半小时），与后文同学却把俄亥俄当作“完全不同的世界”形成反差。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "indeed",
+          "meaning": "确实"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "still",
+          "meaning": "仍然"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "even",
+          "meaning": "甚至"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "three and a half hours away",
+          "signalSide": "context-after",
+          "targetText": "only three and a half hours away",
+          "relation": "only 直接修饰距离短语，凸显“仅仅”这么近。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "a whole different world",
+          "signalSide": "context-after",
+          "targetText": "thought of Ohio as a whole different world",
+          "relation": "后句的强烈反差要求前面用 only 强调其实距离很近。"
+        }
+      ],
+      "teachingNote": "副词空结合上下文反差判断，only 常用来凸显数量/距离之“少/近”。"
+    },
+    "q-2026-i-043": {
+      "blankId": "blank-2026-i-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前文两句“Do you have to fly home? Do you live on a farm?”即同学们提出的问题，故用 questions 回指，且 were never-ending 说明问题层出不穷。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tests",
+          "meaning": "测验"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "games",
+          "meaning": "游戏"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "debates",
+          "meaning": "辩论"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "were never-ending",
+          "signalSide": "context-after",
+          "targetText": "The questions were never-ending",
+          "relation": "questions 作主语与 were never-ending 搭配，指问题没完没了。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Do you live on a farm?",
+          "signalSide": "context-before",
+          "targetText": "Do you have to fly home? Do you live on a farm?",
+          "relation": "前面两个疑问句正是这些“问题”的具体内容，回指为 questions。"
+        }
+      ],
+      "teachingNote": "名词空回指前文时，先找它在上文对应的具体内容（此处即两句发问）。"
+    },
+    "q-2026-i-044": {
+      "blankId": "blank-2026-i-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "同学把俄亥俄当作“完全不同的世界”，故“我”在他们眼中是个 novelty（新奇的人/事物）；in their eyes 点明这是他人视角下的印象。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "success",
+          "meaning": "成功"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "victim",
+          "meaning": "受害者"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "problem",
+          "meaning": "问题"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in their eyes",
+          "signalSide": "context-after",
+          "targetText": "a novelty in their eyes",
+          "relation": "in their eyes 表“在他们看来”，与 novelty 搭配指他人眼中的新奇形象。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a whole different world",
+          "signalSide": "context-before",
+          "targetText": "thought of Ohio as a whole different world",
+          "relation": "把家乡视为“异世界”的语义场呼应“我”是个新鲜稀奇的存在。"
+        }
+      ],
+      "teachingNote": "名词空可借同段的话题词（此处 different world）确定语义场，锁定“新奇”之意。"
+    },
+    "q-2026-i-045": {
+      "blankId": "blank-2026-i-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "be thankful for 固定搭配，thankful for my small town roots 表“对小镇根基心怀感激”，与全文感激家乡的情感基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hopeful",
+          "meaning": "满怀希望的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suitable",
+          "meaning": "合适的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reliable",
+          "meaning": "可靠的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for my small town roots",
+          "signalSide": "context-after",
+          "targetText": "thankful for my small town roots",
+          "relation": "thankful for 后接感激的对象 my small town roots，搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "grateful",
+          "signalSide": "context-after",
+          "targetText": "I am grateful for the",
+          "relation": "下文 grateful 复现同一“感激”情感，锁定 thankful 与全文情感一致。"
+        }
+      ],
+      "teachingNote": "形容词空看介词搭配（thankful for）并核对是否与全文情感主线一致。"
+    },
+    "q-2026-i-046": {
+      "blankId": "blank-2026-i-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "complain about 固定搭配，complain about how bored we were 表“抱怨我们有多无聊”，与当时对小镇的不满情绪一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dream",
+          "meaning": "梦想；幻想"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "lie",
+          "meaning": "躺；说谎"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hear",
+          "meaning": "听见"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "about how bored we were",
+          "signalSide": "context-after",
+          "targetText": "complain about how bored we were",
+          "relation": "complain about 后接抱怨内容，how bored we were 正是抱怨的对象。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "bored",
+          "signalSide": "context-after",
+          "targetText": "how bored we were",
+          "relation": "bored（无聊）确定当时的负面情绪，与“抱怨”动作吻合。"
+        }
+      ],
+      "teachingNote": "动词空先验证介词搭配（complain about），再核对动作所带情绪是否合上下文。"
+    },
+    "q-2026-i-047": {
+      "blankId": "blank-2026-i-047",
+      "blankNo": 47,
+      "pos": "other",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前句让步承认曾抱怨无聊（Sure ...），后句却表明如今确信深爱家乡，前后语义相反，用 however 表转折。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "therefore",
+          "meaning": "因此"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "instead",
+          "meaning": "反而；代替"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "otherwise",
+          "meaning": "否则"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "Sure",
+          "signalSide": "context-before",
+          "targetText": "Sure, my friends and I loved to",
+          "relation": "Sure 引出让步（承认曾抱怨），预示后面要用转折词接真实态度。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "convinced that it took",
+          "signalSide": "context-after",
+          "targetText": "I'm convinced that it took",
+          "relation": "however 引出的分句表达与前句相反的现今看法（确信深爱家乡）。"
+        }
+      ],
+      "teachingNote": "连接词空抓“让步—转折”结构：先承认(Sure)后反转，选 however。"
+    },
+    "q-2026-i-048": {
+      "blankId": "blank-2026-i-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "leaving our small town 表“离开小镇”，正是“离开后才意识到有多爱它”这一先离开再醒悟的逻辑，动宾搭配 leave the town 成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "touring",
+          "meaning": "游览"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "changing",
+          "meaning": "改变"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "protecting",
+          "meaning": "保护"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "our small town",
+          "signalSide": "context-after",
+          "targetText": "leaving our small town",
+          "relation": "leaving 的宾语是 our small town，动宾“离开小镇”搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "to realize how much we actually love it",
+          "signalSide": "context-after",
+          "targetText": "it took leaving our small town to realize",
+          "relation": "it took ... to realize 表“正是离开才让我们醒悟”，锁定 leaving。"
+        }
+      ],
+      "teachingNote": "动名词空结合 it took ... to 结构，判断先做哪个动作才引出后面的“意识到”。"
+    },
+    "q-2026-i-049": {
+      "blankId": "blank-2026-i-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "value connecting to each other 表“重视彼此的联系”，与“生活节奏慢、邻里往来密切”的语境一致，动宾搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "admit",
+          "meaning": "承认"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fear",
+          "meaning": "害怕"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "remember",
+          "meaning": "记得"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "connecting to each other",
+          "signalSide": "context-after",
+          "targetText": "value connecting to each other",
+          "relation": "value 的宾语是动名词 connecting to each other，表“看重彼此联系”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "The pace of life is slow",
+          "signalSide": "context-before",
+          "targetText": "The pace of life is slow and people",
+          "relation": "慢节奏的语境支持人们“看重”而非“害怕/承认”彼此联系。"
+        }
+      ],
+      "teachingNote": "动词空先定动宾搭配，再用同句语境情感筛掉不合基调的选项。"
+    },
+    "q-2026-i-050": {
+      "blankId": "blank-2026-i-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "an extension of your family 表“家庭的延伸”，承接前句“不仅仅是跟邻居聊天”，说明邻里亲如家人，extension of 搭配成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "advantage",
+          "meaning": "优势"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "example",
+          "meaning": "例子"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honor",
+          "meaning": "荣誉"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of your family",
+          "signalSide": "context-after",
+          "targetText": "an extension of your family",
+          "relation": "extension of your family 构成“家庭的延伸”这一搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "more than just talk to your neighbors",
+          "signalSide": "context-before",
+          "targetText": "You do more than just talk to your neighbors",
+          "relation": "“不止是跟邻居聊天”铺垫邻里是家人的延伸。"
+        }
+      ],
+      "teachingNote": "名词空看它与 of 后名词的搭配意义，并核对是否承接前句的递进关系。"
+    },
+    "q-2026-i-051": {
+      "blankId": "blank-2026-i-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "this lifestyle 回指前文所述慢节奏、重邻里往来的生活方式，且 centers around being outside 描述其内容，故用 lifestyle。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "landscape",
+          "meaning": "风景"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "procedure",
+          "meaning": "程序；步骤"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "personality",
+          "meaning": "个性"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "centers around being outside",
+          "signalSide": "context-after",
+          "targetText": "this lifestyle centers around being outside",
+          "relation": "this lifestyle 作主语与 centers around 搭配，指这种生活方式以户外为中心。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "The pace of life is slow",
+          "signalSide": "context-before",
+          "targetText": "The pace of life is slow and people",
+          "relation": "前文“生活节奏慢、重联系”的语义场对应 this lifestyle 的回指。"
+        }
+      ],
+      "teachingNote": "指代性名词空要用 this 回指上文话题（此处即前面描述的生活方式）。"
+    },
+    "q-2026-i-052": {
+      "blankId": "blank-2026-i-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "be mindful of your surroundings 表“留心周遭环境”，与前文“到户外、熟悉小镇的里里外外”呼应，surroundings 契合“在场且用心感知环境”的文化。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "findings",
+          "meaning": "发现；结果"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "belongings",
+          "meaning": "财物"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "greetings",
+          "meaning": "问候"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "mindful of your",
+          "signalSide": "context-before",
+          "targetText": "mindful of your surroundings",
+          "relation": "be mindful of one's surroundings 固定搭配，指留意周围环境。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "knowing the ins and outs of the town",
+          "signalSide": "context-before",
+          "targetText": "being outside and knowing the ins and outs of the town",
+          "relation": "户外、熟悉小镇的语义场呼应“周遭环境”surroundings。"
+        }
+      ],
+      "teachingNote": "名词空用同段户外/环境类话题词判定语义场，锁定 surroundings。"
+    },
+    "q-2026-i-053": {
+      "blankId": "blank-2026-i-053",
+      "blankNo": 53,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "look forward to 后接 the visits to my little hometown，表“盼望回家乡探望”，与结尾感激、热爱家乡的积极情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "give up",
+          "meaning": "放弃"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "put off",
+          "meaning": "推迟"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "face up to",
+          "meaning": "勇敢面对"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the visits to my little hometown",
+          "signalSide": "context-after",
+          "targetText": "look forward to the visits to my little hometown",
+          "relation": "look forward to 后接名词短语 the visits，构成“盼望这些探访”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "forward",
+          "signalSide": "option",
+          "targetText": "look forward to",
+          "relation": "forward 表“向前”，look forward to 合成“向前期待→盼望”之意。"
+        }
+      ],
+      "teachingNote": "短语空可拆解构词义（forward=向前）合成“盼望”，再核对情感是否积极。"
+    },
+    "q-2026-i-054": {
+      "blankId": "blank-2026-i-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "the experience that I had growing up 表“成长过程中的经历”，grateful for the experience 表达对这些经历的感激，定语从句 that I had 与 experience 搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confidence",
+          "meaning": "自信"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reputation",
+          "meaning": "名声"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "opportunity",
+          "meaning": "机会"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that I had growing up",
+          "signalSide": "context-after",
+          "targetText": "the experience that I had growing up",
+          "relation": "have experience 搭配，定语从句 that I had growing up 修饰 experience。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "grateful",
+          "signalSide": "context-before",
+          "targetText": "I am grateful for the",
+          "relation": "grateful for the experience 表对成长经历心怀感激，情感一致。"
+        }
+      ],
+      "teachingNote": "名词空看定语从句与谓语搭配（have experience），并核对感激对象是否合理。"
+    },
+    "q-2026-i-055": {
+      "blankId": "blank-2026-i-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "trust ... to lead me in the right direction 表“相信家乡根基会指引我走向正确方向”，trust sth to do 搭配成立，与结尾对家乡的信赖之情吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "inspire",
+          "meaning": "激励"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remind",
+          "meaning": "提醒"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "challenge",
+          "meaning": "挑战"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to lead me in the right direction",
+          "signalSide": "context-after",
+          "targetText": "trust my small town roots to lead me in the right direction",
+          "relation": "trust sth to do sth 搭配，宾语 roots 后接 to lead me，表“信赖它去指引方向”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "my small town roots",
+          "signalSide": "context-after",
+          "targetText": "trust my small town roots",
+          "relation": "小镇根基作 trust 的宾语，呼应全文对家乡的信赖与依托。"
+        }
+      ],
+      "teachingNote": "动词空抓 trust sth to do 结构，判断主语对宾语所寄托的“信赖”关系。"
+    }
+  }
+}

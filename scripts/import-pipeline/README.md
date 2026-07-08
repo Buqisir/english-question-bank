@@ -4,9 +4,18 @@ Claude-driven、确定性切卷 + AI 解析 + 原子发布的离线工具。**�
 
 > 来历:本管线先在 `.scratch/import-pilot/`(gitignored)成型,#188 用它导了 12 套新课标真题、#190 用 `topic-driver` 点亮主题维度。本目录是从那个沼泽里**挑出的耐用子集,原样固化**(唯一改动:`gen-configs.mjs` 的 papers 路径从 cwd 字面量改成 import.meta 相对)。**`lib.mjs` 的格式启发式只在 2 种新课标格式上验证过**——导新格式的卷时按需硬化,别当它已通用。
 
-## 已导入(12 套,paperId `paper-<year>-{i,ii}`)
+## Agent 执行入口
 
-2020–2025 全国新课标 Ⅰ+Ⅱ。每套 9 题组(reading a–d / cloze / grammar-fill / seven-choices / writing application+continuation)。`real_exam` 出处,标准题号。
+任何 agent 要导一套新卷,先读 `docs/import/agent-runbook.md`(自足的执行契约,
+含解析扇出派发模板)——本 README 只是它引用的机械工序参考,不重复讲工序。
+数据契约(结构/题号/分值/答案红线/听力与图文原料条款)权威见
+`docs/product/nck1-paper-standard.md`。
+
+## 已导入(13 套,paperId `paper-<year>-{i,ii}`)
+
+2020–2025 全国新课标 Ⅰ+Ⅱ(12 套,DOCX 答案版格式)+ 2026 新课标 Ⅰ
+(PDF 试题卷+独立答案 PDF 格式,首套见 `pdf-extract.mjs` + `docs/import-ledger.md`)。
+每套 9 题组(reading a–d / cloze / grammar-fill / seven-choices / writing application+continuation),听力原料另存(`listening/` 原料区,不建题组)。
 
 ## 源 DOCX(off-repo,gitignored)
 
@@ -19,6 +28,27 @@ Claude-driven、确定性切卷 + AI 解析 + 原子发布的离线工具。**�
 3. **解析扇出 = ad-hoc Workflow**(不在本目录;每次现写):一组一 Opus agent,喂 `analyze-<key>-combined.txt`,产 `analysis-<key>.json`,用 `validate-one.mjs` 自校验 + 重试。**解析用 Opus**(高阶题陷阱分型/技能标签更准);切卷机械活 Sonnet 够。
 4. **`validate-one.mjs <config> <key>`** — 单组校验(注入 shipped `analyze*ImportCandidate`)。
 5. **`02-publish.mjs <config> [--publish]`** — 校验全组 → 打包(shipped `buildPaperImportAiPackageFiles`)→ **产包后改写 import-meta 出处**(sourceType/region/paperName/year/tags)→ `--publish` 走 shipped `publishPaperImportPackage` 入库。**未改任何契约代码**。
+
+### 格式②:PDF 试题卷 + 独立答案 PDF(2026 起)
+
+不走 `gen-configs.mjs`/`01-split.mjs`(那是 DOCX 答案版专属)。改用:
+
+- **`pdf-extract.mjs <paperId>`** — 取代 `01-split.mjs` 的角色,但不复用
+  `lib.mjs` 的正则切卷(源排版是全新的试题卷视觉约定,详见
+  `docs/import/agent-runbook.md` §2 的理由)。改为读脚本内 `CONTENT` 登记表
+  (agent 直读源 PDF 手工转录,一 paperId 一条目,先例同
+  `zj-inject-answers.mjs` 的 `KEYS` 表)→ 组装候选结构 → 过同一套 shipped
+  shape-gate(`build*AnalysisMessages`)→ 产 `groups.json` +
+  `analyze-<key>-combined.txt`(与 `01-split.mjs` 产物同形状,下游
+  `validate-one.mjs`/`02-publish.mjs` 零改动直接吃)。
+- **`verify-nck1-standard.mjs <paperId>`** — 标准 §6 全量校验(9 题组/题号段/
+  分值前置条件/客观题答案数量/听力原料/figures 双存一致性),发布前后同一条
+  命令自动识别模式。
+- **`attach-paper-assets-extras.mjs <paperId>`** — 发布后把 staging 的
+  `listening/`+`figures/` 拷进 `app/public/paper-assets/<id>/{latest,versions/vN}/`
+  (纯文件拷贝,不碰 shipped 发布/回滚逻辑)。
+
+完整流程(前置检查→…→台账)见 `docs/import/agent-runbook.md`,不在此重复。
 
 ## 派生维度 backfill(导入后,走 Claude)
 

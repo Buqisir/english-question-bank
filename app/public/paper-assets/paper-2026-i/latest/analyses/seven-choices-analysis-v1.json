@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2026-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "opus",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "external-ai",
+    "reviewedAt": "2026-07-07",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2026-i-seven-choices": {
+      "overview": "本文说明 AI（机器学习与算法）如何全方位重塑博物馆：从个性化参观、文物保护、儿童教育到未来的伦理与隐私挑战。七选五五空分别落在首段总起句、第一段虚拟导览衔接、第二段修复能力衔接、第三段分龄教育概述与末段隐私议题。",
+      "discourseStructure": {
+        "summary": "文章总—分—展望结构：首段引出 AI 让博物馆焕新并给出总起，中间三段依次展开个性化互动、文物保护、教育价值三大应用，末段展望未来的伦理与隐私挑战。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "AI 重塑博物馆",
+            "paragraphIds": [
+              "para-2026-i-seven-title"
+            ],
+            "summary": "指出博物馆已充满数字活力，AI 在个性化、保护、揭示故事三方面发力，并以总起句收束。"
+          },
+          {
+            "unitId": "unit-visitor",
+            "heading": "个性化互动体验",
+            "paragraphIds": [
+              "para-2026-i-seven-p1"
+            ],
+            "summary": "AI 推荐引擎与虚拟导览把普通参观变成个性化互动之旅。"
+          },
+          {
+            "unitId": "unit-preserve",
+            "heading": "文物保护",
+            "paragraphIds": [
+              "para-2026-i-seven-p2"
+            ],
+            "summary": "AI 及早发现细微破损并预测衰变，助力及时修复与预防性保护。"
+          },
+          {
+            "unitId": "unit-education",
+            "heading": "教育价值",
+            "paragraphIds": [
+              "para-2026-i-seven-p3"
+            ],
+            "summary": "AI 按年龄与学习风格量身定制学习体验，让复杂历史概念易于理解。"
+          },
+          {
+            "unitId": "unit-future",
+            "heading": "伦理与隐私展望",
+            "paragraphIds": [
+              "para-2026-i-seven-p4"
+            ],
+            "summary": "展望 AI 带来的伦理挑战，尤其是数据采集引发的隐私问题，需制定严格政策。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2026-i-036": {
+      "blankId": "blank-2026-i-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "digital excitement",
+        "personalized visitor journeys",
+        "protecting delicate collections",
+        "revealing hidden stories"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2026-i-seven-title",
+        "beforeQuote": "revealing hidden stories."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "In short",
+          "signalSide": "option",
+          "targetText": "personalized visitor journeys / protecting delicate collections / revealing hidden stories",
+          "relation": "In short 是总结性连接词，收束前文并列的三项 AI 作用，构成总起—概括关系。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in all respects",
+          "signalSide": "option",
+          "targetText": "personalized visitor journeys, protecting delicate collections, revealing hidden stories",
+          "relation": "in all respects（全方位）对应前文列举的多个方面，概括 AI 对博物馆的整体重塑。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "revealing hidden stories",
+          "signalSide": "context-before",
+          "targetText": "in all respects",
+          "relation": "空前并列项之一，被选项 in all respects 一并概括。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "首段列举 AI 在个性化参观、文物保护、揭示故事等多方面的作用，C 用 In short 与 in all respects 对这些方面作总起式概括，正是段末总结句。",
+        "matchedClues": [
+          {
+            "contextSide": "personalized visitor journeys / protecting delicate collections / revealing hidden stories",
+            "optionSide": "redefining the museum in all respects",
+            "relation": "前文并列的多方面作用被 in all respects 概括为全方位重塑。"
+          }
+        ]
+      },
+      "teachingNote": "段末总起句要找能用总结连接词概括前文并列信息的选项。"
+    },
+    "q-2026-i-037": {
+      "blankId": "blank-2026-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Smart recommendation engines",
+        "personalized and interactive adventure",
+        "engage visitors in dynamic conversations",
+        "context-sensitive insights"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2026-i-seven-p1",
+        "beforeQuote": "making each visit unique and surprising.",
+        "afterQuote": "These digital assistants engage visitors in dynamic conversations"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "These digital assistants",
+          "signalSide": "context-after",
+          "targetText": "virtual guides",
+          "relation": "空后 These digital assistants 回指选项中新引入的 virtual guides，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "virtual guides",
+          "signalSide": "option",
+          "targetText": "These digital assistants",
+          "relation": "选项引入 virtual guides 作为空后 These digital assistants 的先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Furthermore",
+          "signalSide": "option",
+          "targetText": "Smart recommendation engines",
+          "relation": "Furthermore 在推荐引擎之外递进补充虚拟导览这一新应用。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空后 These digital assistants 需要一个先行词，F 引入的 AI-powered virtual guides 正好被其回指，且 Furthermore 与前句推荐引擎递进衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "These digital assistants engage visitors in dynamic conversations",
+            "optionSide": "AI-powered virtual guides are replacing traditional tour guides",
+            "relation": "virtual guides 即 These digital assistants 的指代对象。"
+          }
+        ]
+      },
+      "teachingNote": "空后出现 These/This 等指代词时，选能提供其先行词的选项。"
+    },
+    "q-2026-i-038": {
+      "blankId": "blank-2026-i-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "signs of decay",
+        "cracks or discoloration",
+        "invisible to the human eye",
+        "early detection is vital",
+        "preserving priceless artworks"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2026-i-seven-p2",
+        "beforeQuote": "which are often invisible to the human eye.",
+        "afterQuote": "Moreover, by predicting future decay patterns"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This capability",
+          "signalSide": "option",
+          "targetText": "identify the slightest signs of decay",
+          "relation": "选项 This capability 回指空前 AI 识别细微破损的能力，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "identify the slightest signs of decay",
+          "signalSide": "context-before",
+          "targetText": "This capability",
+          "relation": "空前描述的识别能力正是 This capability 所指代的内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Moreover",
+          "signalSide": "context-after",
+          "targetText": "timely restoration",
+          "relation": "空后 Moreover 再补充另一好处，说明本空承接的是 AI 识别带来的又一益处——及时修复。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前讲 AI 能识别肉眼难见的破损迹象，A 用 This capability 回指该能力并指出其带来及时修复，随后 Moreover 再递进补充，衔接自然。",
+        "matchedClues": [
+          {
+            "contextSide": "identify the slightest signs of decay",
+            "optionSide": "This capability allows for timely restoration",
+            "relation": "This capability 指代前句的识别能力，restoration 承接 preservation 话题场。"
+          }
+        ]
+      },
+      "teachingNote": "选项以 This + 名词回指前句能力时，看前文是否提供了对应的能力描述。"
+    },
+    "q-2026-i-039": {
+      "blankId": "blank-2026-i-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "educational value of museums",
+        "children and families",
+        "adjust their content and difficulty level",
+        "complex historical concepts become accessible",
+        "young minds"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2026-i-seven-p3",
+        "beforeQuote": "particularly for children and families.",
+        "afterQuote": "For instance, interactive exhibits powered by AI"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "For instance",
+          "signalSide": "context-after",
+          "targetText": "tailors learning experiences to different age groups and learning styles",
+          "relation": "空后 For instance 引出的例子正是对选项 D 一般性论断（分龄定制学习）的举例支撑。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "adjust their content and difficulty level",
+          "signalSide": "context-after",
+          "targetText": "tailors learning experiences",
+          "relation": "空后按用户调整内容与难度，与选项 tailors learning experiences 属同一定制化话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "tailors learning experiences",
+          "signalSide": "option",
+          "targetText": "adjust their content and difficulty level",
+          "relation": "选项的量身定制正被空后调整内容与难度的例子具体化。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前提出 AI 提升教育价值，D 概述其按年龄和学习风格量身定制，空后 For instance 给出调整内容与难度的例子加以说明，构成总—例衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "adjust their content and difficulty level based on the user",
+            "optionSide": "tailors learning experiences to different age groups and learning styles",
+            "relation": "空后的例子是对选项量身定制学习论断的具体举例。"
+          }
+        ]
+      },
+      "teachingNote": "空后 For instance 举例时，选一个能被该例子印证的一般性论断句。"
+    },
+    "q-2026-i-040": {
+      "blankId": "blank-2026-i-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "ethical challenges",
+        "AI ethicists",
+        "fair algorithms",
+        "Strict policies",
+        "protect visitors"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2026-i-seven-p4",
+        "beforeQuote": "Museums are working together with AI ethicists to develop fair algorithms.",
+        "afterQuote": "Strict policies should be established"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "privacy issues",
+          "signalSide": "option",
+          "targetText": "Strict policies should be established to protect",
+          "relation": "选项 privacy issues 与空后要制定严格政策保护访客信息属同一隐私/信息保护话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Strict policies should be established",
+          "signalSide": "context-after",
+          "targetText": "privacy issues",
+          "relation": "空后制定严格政策的举措正是针对选项提出的隐私问题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "ethical challenges",
+          "relation": "also 在前文伦理挑战之外追加数据采集引发的隐私问题，构成并列递进。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空后强调要制定严格政策保护访客信息，B 提出数据采集引发隐私问题，正好引出这一保护措施，并用 also 与前文伦理挑战并列。",
+        "matchedClues": [
+          {
+            "contextSide": "Strict policies should be established to protect visitors",
+            "optionSide": "Visitor data collection also raises privacy issues",
+            "relation": "隐私问题与制定政策保护信息构成问题—对策的话题呼应。"
+          }
+        ]
+      },
+      "teachingNote": "空后给出对策时，选出正对应该对策所解决问题的选项。"
+    }
+  }
+}

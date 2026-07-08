@@ -113,11 +113,46 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
 甲卷 / 乙卷 / 浙江卷接入时,每格式一节:结构差异、题号映射表、
 缺失槽位处理、多余题型(如短文改错)处置。当前为空。
 
-## 待刀②确认的开放项
+## 刀②回填:开放项定案(2026-07-08,首导 paper-2026-i 落地)
 
-- 写作评分细则 / 下水文在 paper-assets 里的具体文件约定。
-- 听力原料区 `listening/` 的 JSON schema。
-- `figures/` 原料区的文件命名与图-题关联记录格式(§8)。
-- PDF 源的文本提取工序与独立答案注入工序
-  (有 `zj-inject-answers.mjs` 先例)。
-- 发布闸现状盘点与补锁清单(§6)。
+以下开放项由 `nck1-import-runbook` 刀执行时定案,细节与派发模板见
+`docs/import/agent-runbook.md`;本节只记结论,不重复工序。
+
+- **写作评分细则 / 下水文**:存法与答案 PDF 一致——评分细则、下水文
+  属于卷级"评分参考"整体,不拆分单独存文件,只保留在 `source/answers.pdf`
+  原件里(该 PDF 已在 `papers/<paperId>/source/` 下,随卷归档、不会丢失)。
+  若某卷答案 PDF 缺下水文(如本卷读后续写无下水文),按"源没有就不编"处理,
+  不得由 AI 代写充数。
+- **听力原料区 `listening/` JSON schema**(三件套,不含音频):
+  - `listening/questions.json`——`{ section1: { title, instruction, questions:[{no,stem,options:{A,B,C}}] }, section2: { title, instruction, questions:[{no,textRef,stem,options}] } }`(第一节 5 题 A-B-C 三选项;第二节 15 题按 `textRef` 关联到对应听力材料段)。
+  - `listening/answers.json`——`{ answers: { "1":"C", ..., "20":"B" } }`。
+  - `listening/transcript.json`——`{ texts:[{textId,label,timeRange,coversQuestions,lines:[{speaker,line}]}], broadcastEnd, timingTable:[{text,time,durationSeconds,wordCount,wordsPerMinute}], notes:[] }`(时长/语速表逐字照抄源 PDF,不重算)。
+  - 三个文件均为原料,不建 DB 记录、不被任何网站消费面读取(§4)。
+- **`figures/` 命名与图-题关联记录格式**(§8 双存桥):
+  - 文件名:`<groupId 去 group- 前缀>-table-<序号>.png`(如
+    `reading-a-table-1.png`),同目录下 `figures/manifest.json` 登记每张图的
+    `{figureId, groupId, kind, file, caption, sourceDocument, sourcePage, placeholderMarker}`。
+  - 关联记录:图/表位置在 `materialText`(即 groups.json 对应 group 的段落
+    文本)里嵌入与 manifest 完全一致的 `placeholderMarker` 文本(如
+    `[表: fig-paper-2026-i-reading-a-table-1]`,注意冒号后的空格是
+    `normalizePassageText` 标点规则的产物,占位符必须按标准化后的实际字符
+    登记,不能想当然按肉眼原文抄)。`verify-nck1-standard.mjs` 强校验两边
+    一致,防止双存桥其中一侧漏更新。
+- **PDF 源的文本提取工序**:不复用 `lib.mjs` 的正则切卷(它是为
+  "答案版 DOCX 内嵌【答案】"约定设计的,新格式的试题卷排版——选项列在
+  段落下方、无内嵌答案——是完全不同的视觉约定,现改造正则风险高于手工核对)。
+  改为:agent 直读 `source/paper.pdf` + `source/answers.pdf`,原样转录进
+  `scripts/import-pipeline/pdf-extract.mjs` 的 `CONTENT` 登记表(与
+  `zj-inject-answers.mjs` 的 `KEYS` 表同一先例套路),再用 shipped 的
+  `build*AnalysisMessages` 校验形状——不新增 PDF 解析依赖,`pdfjs-dist`
+  预批未实际使用(留作将来真正需要程序化提取时的选项)。
+  **独立答案注入**:不做文本层面"marry"(如 `zj-inject-answers.mjs`
+  对 DOCX 文本做的字符串缝合),而是在 `CONTENT` 登记表里直接把
+  `source/answers.pdf` 的客观题答案抄成每题的 `answerKey` 字段——两份源
+  PDF 都由 agent 直接读,答案红线(§3)由"抄录忠实度"保证,由完成报告的
+  21-65 抽查表交叉核验。
+- **发布闸现状盘点**:`scripts/import-pipeline/verify-nck1-standard.mjs`
+  补齐 §6 全部条目(9 题组/题号段/分值前置条件/客观题答案数量/听力原料/
+  figures 双存一致性),支持发布前(仅查 staging)与发布后(另查
+  `app/public/paper-assets/<id>/latest` 里 listening/figures 是否已用
+  `attach-paper-assets-extras.mjs` 落地)两种模式,同一条命令自动识别。
