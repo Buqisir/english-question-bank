@@ -14,6 +14,17 @@ export type WritingPageModel = {
   blocks: WritingChromeBlock[]
 }
 
+export type WritingBlockRange = {
+  startIdx: number
+  endIdx: number
+  groupIdx: number
+}
+
+export function findWritingBlockRange(
+  asset: PaperAssetV1,
+  group: PaperAssetV1['content']['groups'][string],
+): WritingBlockRange | null
+
 export function buildWritingPageModel(
   asset: PaperAssetV1,
   group: PaperAssetV1['content']['groups'][string],

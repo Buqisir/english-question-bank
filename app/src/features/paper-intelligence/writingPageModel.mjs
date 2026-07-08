@@ -7,13 +7,20 @@
 // `sectionHeading` (plus an adjacent `partHeading`) through the `answerBox`. The
 // continuation starter instruction is folded into the box (rendered as the box's
 // given lines), not emitted as a standalone instruction.
-export function buildWritingPageModel(asset, group, task) {
+
+// Locate the run of `asset.content.blocks` indices a writing group's page
+// chrome consumes: from the nearest preceding `sectionHeading` (plus an
+// adjacent `partHeading`) through the group's `answerBox`. Pure index lookup,
+// no `task` needed — shared by `buildWritingPageModel` and by callers (e.g.
+// PaperBrowsePage) that need to know which top-level blocks a writing page
+// model has already rendered, so they don't render them a second time.
+export function findWritingBlockRange(asset, group) {
   const allBlocks = (asset && asset.content && asset.content.blocks) || []
   const groupId = group.groupId
   const writingTaskId = group.writingTaskId
 
   const gIdx = allBlocks.findIndex((b) => b.type === 'group' && b.groupId === groupId)
-  if (gIdx < 0) return { blocks: [] }
+  if (gIdx < 0) return null
   const aIdx = writingTaskId
     ? allBlocks.findIndex((b) => b.type === 'answerBox' && b.writingTaskId === writingTaskId)
     : -1
@@ -28,9 +35,34 @@ export function buildWritingPageModel(asset, group, task) {
   while (p >= 0 && allBlocks[p].type === 'pageBreakHint') p -= 1
   if (p >= 0 && allBlocks[p].type === 'partHeading') startIdx = p
 
+  return { startIdx, endIdx, groupIdx: gIdx }
+}
+
+// Collapse an accidentally doubled "Paragraph N: Paragraph N: " prefix that
+// may already be baked into a stale imported instruction block's text (seen
+// on the 960d0f8d-era import, before this guard existed) so that block is
+// still recognized below as *the* starter instruction and folded into the
+// answer box, instead of falling through and rendering a second time with
+// the doubled prefix intact.
+function collapseDoubledParagraphPrefix(text) {
+  return text.replace(/(Paragraph \d+:\s*)\1+/g, '$1')
+}
+
+export function buildWritingPageModel(asset, group, task) {
+  const allBlocks = (asset && asset.content && asset.content.blocks) || []
+  const groupId = group.groupId
+
+  const range = findWritingBlockRange(asset, group)
+  if (!range) return { blocks: [] }
+  const { startIdx, endIdx } = range
+
   const starters = (task && task.continuationStarters) || []
+  // Guard: a starter may already carry its own "Paragraph N:" prefix (stored
+  // data) — don't prefix it a second time.
   const starterText = starters.length >= 2
-    ? `Paragraph 1: ${starters[0]}\n\nParagraph 2: ${starters[1]}`
+    ? [starters[0], starters[1]]
+        .map((s, i) => (/^Paragraph \d+:/.test(s) ? s : `Paragraph ${i + 1}: ${s}`))
+        .join('\n\n')
     : ''
   // Answer-box given content: continuation → starters as givenTop; application →
   // its captured 上下格式 (top/bottom). Continuation never routes via applicationGiven.
@@ -45,7 +77,7 @@ export function buildWritingPageModel(asset, group, task) {
     else if (b.type === 'sectionHeading') blocks.push({ kind: 'sectionHeading', text: b.text })
     else if (b.type === 'instruction') {
       // The starter instruction is rendered inside the answer box, not standalone.
-      if (starterText && b.text === starterText) continue
+      if (starterText && collapseDoubledParagraphPrefix(b.text) === starterText) continue
       blocks.push({ kind: 'instruction', text: b.text })
     } else if (b.type === 'group') {
       if (b.groupId === groupId) blocks.push({ kind: 'passage' })

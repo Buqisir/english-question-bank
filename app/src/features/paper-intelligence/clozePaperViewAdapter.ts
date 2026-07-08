@@ -48,12 +48,17 @@ export function buildClozePaperView(input: {
 
   const questions = questionIds.map((qid, order) => {
     const q = asset.content.questions[qid]
+    const questionNo = String(q?.questionNo ?? '')
+    const rawStem = q?.stem ?? ''
     return {
       id: qid,
       section: CLOZE_SECTION,
       order,
-      questionNo: String(q?.questionNo ?? ''),
-      stem: q?.stem ?? '',
+      questionNo,
+      // Defensive: a cloze/grammar-fill stem that is just the bare question
+      // number (matches its own questionNo) duplicates the rendered "56."
+      // label — suppress it instead of showing "56. 56".
+      stem: rawStem.trim() === questionNo && /^\d+$/.test(rawStem.trim()) ? '' : rawStem,
       options: q?.options ?? [],
     }
   })
