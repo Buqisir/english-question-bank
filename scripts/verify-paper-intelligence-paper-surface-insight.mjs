@@ -62,9 +62,11 @@
  *        - 6c: PR #52 PA must-fix — right-panel ::before bleed
  *          reaches viewport edge via `100vw` / `calc(...)`, content
  *          inner wrapper max-width is 380-420px, the right-panel
- *          inner wrapper is rendered by TSX, warm cream tokens
- *          (#f7f4ee / #f6f3ec) are declared, and stacked mode
- *          disables both the bleed and the rail.
+ *          inner wrapper is rendered by TSX, the assistant-layer bleed
+ *          tokens are declared (delegating to the shared true-neutral
+ *          `--eqb-color-bg` token as of ui-panel-reunify, 2026-07-07 —
+ *          superseding the earlier warm-cream direction), and stacked
+ *          mode disables both the bleed and the rail.
  *        - 6d: PR #52 PA must-fix — rail/chip palette discipline.
  *          No support green, no trap amber, no red, no bright blue,
  *          no brand purple, no gradient inside rail / chip rules.
@@ -115,6 +117,7 @@ const ANCHORED_POPOVER_PATH = join(
 const INSIGHT_DIR = join(APP, 'features', 'paper-intelligence', 'insight')
 const INSIGHT_LABEL_PATH = join(INSIGHT_DIR, 'insightChipLabel.ts')
 const INSIGHT_PANEL_PATH = join(INSIGHT_DIR, 'HarnessInsightPanelContent.tsx')
+const TOKENS_CSS_PATH = join(APP, 'shared-ui', 'tokens.css')
 
 let passes = 0
 let failures = 0
@@ -131,6 +134,17 @@ function assert(condition, message) {
 
 function readFile(path) {
   return readFileSync(path, 'utf-8')
+}
+
+// ui-panel-reunify: resolve a root-level `--eqb-*` token's literal hex
+// value from tokens.css so assertions on harness vars that now delegate
+// to shared tokens (e.g. `--pi-ps-assistant-bg: var(--eqb-color-bg)`)
+// can still check the resolved color instead of a hardcoded harness hex.
+function resolveEqbToken(name) {
+  const tokensCss = readFile(TOKENS_CSS_PATH)
+  const re = new RegExp(`--${name}\\s*:\\s*(#[0-9a-fA-F]{6})\\b`)
+  const m = tokensCss.match(re)
+  return m ? m[1].toLowerCase() : ''
 }
 
 function stripComments(src) {
@@ -1059,21 +1073,23 @@ assert(
   "harness TSX renders the .pi-ps-harness-right-inner wrapper around AnalysisPanel",
 )
 
-// 6c.5 Bleed uses warm cream / paper tone (not cool SaaS off-white).
+// 6c.5 Bleed uses the shared true-neutral token (not cool SaaS off-white).
 {
-  // Pull the warm cream tokens out of the .pi-ps-harness root rule.
+  // Pull the assistant-layer token out of the .pi-ps-harness root rule.
   // The palette is exposed as CSS custom properties so callers can
-  // see a single source of truth for "the warm tone is X".
+  // see a single source of truth for "the neutral tone is X".
   const rootMatch = harnessCssDesktopOnly.match(
     /\.pi-ps-harness\s*\{([\s\S]*?)\}/,
   )
   const rootBody = rootMatch ? rootMatch[1] : ''
-  // PR #52 retune: --pi-ps-assistant-bg is the unified token.
+  // ui-panel-reunify (2026-07-07, owner-approved): the PR #52
+  // "warm pencil + ink" direction is superseded — the assistant-layer
+  // token now delegates to the shared neutral `--eqb-color-bg` token
+  // instead of a bespoke warm-cream hex.
   // The bleed start/end tokens now reference it via var().
   assert(
-    /--pi-ps-assistant-bg\s*:\s*#f8f6f1\b/i.test(rootBody) ||
-      /--pi-ps-assistant-bg\s*:\s*#f7f4ee\b/i.test(rootBody),
-    "unified assistant-layer token (--pi-ps-assistant-bg) is warm white (#f8f6f1 or #f7f4ee)",
+    /--pi-ps-assistant-bg\s*:\s*var\(\s*--eqb-color-bg\s*\)/.test(rootBody),
+    "unified assistant-layer token (--pi-ps-assistant-bg) delegates to the shared neutral token (var(--eqb-color-bg))",
   )
   assert(
     /--pi-ps-paper-bleed-start\s*:/.test(rootBody),
@@ -1523,27 +1539,32 @@ assert(
 }
 
 /*
- * R-14. The assistant-layer color is warm white / soft paper, not cool
- *       slate and not saturated yellow/brown.
+ * R-14. The assistant-layer color resolves to a true neutral (root
+ * DESIGN.md charter), not cool slate, not saturated yellow/brown, and
+ * not the retired warm-cream tint.
+ *
+ * ui-panel-reunify (2026-07-07): superseded from "warm white" to
+ * "true neutral" — the harness now delegates to the shared
+ * `--eqb-color-bg` token (app/src/shared-ui/tokens.css) instead of a
+ * bespoke warm-cream hex, so the color under test is resolved from
+ * tokens.css rather than parsed out of the harness CSS directly.
  */
 {
-  const rootMatch = harnessCssDesktopOnly.match(
-    /\.pi-ps-harness\s*\{([\s\S]*?)\}/,
-  )
-  const rootBody = rootMatch ? rootMatch[1] : ''
-  const assistantBgMatch = rootBody.match(
-    /--pi-ps-assistant-bg\s*:\s*(#[0-9a-fA-F]{6})\b/,
-  )
-  const hex = assistantBgMatch ? assistantBgMatch[1].toLowerCase() : ''
-  // Parse to RGB and ensure it's warm white (high lightness, slight warm tint).
+  const hex = resolveEqbToken('eqb-color-bg')
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
   const b = parseInt(hex.slice(5, 7), 16)
-  const isWarmWhite =
-    r >= 240 && g >= 240 && b >= 230 && r >= b && (r - b) <= 15
+  // True neutral: channels within a couple points of each other and
+  // high lightness (not a warm-tinted cream, not cool slate).
+  const isTrueNeutral =
+    Number.isFinite(r) &&
+    r >= 240 &&
+    g >= 240 &&
+    b >= 235 &&
+    Math.max(r, g, b) - Math.min(r, g, b) <= 4
   assert(
-    isWarmWhite,
-    `R-14: --pi-ps-assistant-bg (${hex}) is warm white / soft paper (RGB: ${r},${g},${b})`,
+    isTrueNeutral,
+    `R-14: --eqb-color-bg (${hex}) is a true neutral background (RGB: ${r},${g},${b})`,
   )
 }
 
