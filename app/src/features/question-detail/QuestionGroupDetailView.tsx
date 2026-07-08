@@ -36,6 +36,7 @@ import type {
 } from '../../domain/questionBank'
 import { sourceTypeLabel, verdictLabel } from '../../domain/questionBank'
 import { labelOf } from '../../workbench/detail/readingProfileLabels'
+import { AnalysisDisclosure } from './AnalysisDisclosure'
 import { compactGroupMeta, getParseSavedAt } from './detailHelpers'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
@@ -312,25 +313,27 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                       : ''}
                   </p>
                   {readingParseResult.articleAnalysis && (
-                    <p className="detail-message" style={{ marginBottom: 12 }}>
-                      脉络：{readingParseResult.articleAnalysis.framework || '待补'} ·{' '}
-                      {readingParseResult.articleAnalysis.summary || '待补'}
-                    </p>
-                  )}
-                  {readingParseResult.articleAnalysis?.keyChunks && readingParseResult.articleAnalysis.keyChunks.length > 0 && (
-                    <div className="parse-mapping" style={{ marginBottom: 12 }}>
-                      <strong>重要词块</strong>
-                      <ul>
-                        {readingParseResult.articleAnalysis.keyChunks.map((chunk) => (
-                          <li key={`${chunk.chunk}-${chunk.pos || ''}`}>
-                            {chunk.chunk}
-                            {chunk.phonetic ? ` (${chunk.phonetic})` : ''}
-                            {chunk.pos ? `·${chunk.pos}` : ''}
-                            {chunk.reason ? `：${chunk.reason}` : ''}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <AnalysisDisclosure label="脉络与重要词块">
+                      <p className="detail-message" style={{ marginBottom: 12 }}>
+                        脉络：{readingParseResult.articleAnalysis.framework || '待补'} ·{' '}
+                        {readingParseResult.articleAnalysis.summary || '待补'}
+                      </p>
+                      {readingParseResult.articleAnalysis.keyChunks && readingParseResult.articleAnalysis.keyChunks.length > 0 && (
+                        <div className="parse-mapping" style={{ marginBottom: 12 }}>
+                          <strong>重要词块</strong>
+                          <ul>
+                            {readingParseResult.articleAnalysis.keyChunks.map((chunk) => (
+                              <li key={`${chunk.chunk}-${chunk.pos || ''}`}>
+                                {chunk.chunk}
+                                {chunk.phonetic ? ` (${chunk.phonetic})` : ''}
+                                {chunk.pos ? `·${chunk.pos}` : ''}
+                                {chunk.reason ? `：${chunk.reason}` : ''}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </AnalysisDisclosure>
                   )}
                 </>
               )}
@@ -361,16 +364,20 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                     {clozeParseResult.parsedCount} / {clozeParseResult.questionCount} 题已解析
                     {clozeParseResult.answerLine ? ` · ${clozeParseResult.answerLine}` : ''}
                   </p>
-                  {clozeParseResult.storySummary && (
-                    <p className="detail-message" style={{ marginBottom: 12 }}>
-                      故事大意：{clozeParseResult.storySummary}
-                    </p>
-                  )}
-                  {clozeParseResult.condensedStory && (
-                    <div className="parse-mapping" style={{ marginBottom: 12 }}>
-                      <strong>串词成篇</strong>
-                      <p>{clozeParseResult.condensedStory}</p>
-                    </div>
+                  {(clozeParseResult.storySummary || clozeParseResult.condensedStory) && (
+                    <AnalysisDisclosure label="故事大意与串词成篇">
+                      {clozeParseResult.storySummary && (
+                        <p className="detail-message" style={{ marginBottom: 12 }}>
+                          故事大意：{clozeParseResult.storySummary}
+                        </p>
+                      )}
+                      {clozeParseResult.condensedStory && (
+                        <div className="parse-mapping" style={{ marginBottom: 12 }}>
+                          <strong>串词成篇</strong>
+                          <p>{clozeParseResult.condensedStory}</p>
+                        </div>
+                      )}
+                    </AnalysisDisclosure>
                   )}
                 </>
               )}
@@ -394,9 +401,11 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                     {sevenChoicesParseResult.answerLine ? ` · ${sevenChoicesParseResult.answerLine}` : ''}
                   </p>
                   {sevenChoicesParseResult.articleSummary && (
-                    <p className="detail-message" style={{ marginBottom: 12 }}>
-                      文章主旨：{sevenChoicesParseResult.articleSummary}
-                    </p>
+                    <AnalysisDisclosure label="文章主旨">
+                      <p className="detail-message" style={{ marginBottom: 12 }}>
+                        文章主旨：{sevenChoicesParseResult.articleSummary}
+                      </p>
+                    </AnalysisDisclosure>
                   )}
                 </>
               )}
@@ -497,168 +506,176 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
 
                     {showAi && readingParseItem && (
                       <div className="question-ai-block">
-                        <div className="question-ai-parse">
-                          <div className="question-ai-section-title">
-                            <span>AI 阅读解析</span>
-                          </div>
-                          <p>
-                            <strong>题目翻译：</strong>
-                            {readingParseItem.questionTranslation || '未返回'}
+                        {readingParseItem.answer && (
+                          <p className="question-ai-answer-line">
+                            <strong>AI 推荐答案：</strong>
+                            {readingParseItem.answer}
                           </p>
-                          <p>
-                            <strong>题型策略：</strong>
-                            {readingParseItem.strategy || '待返回'}
-                          </p>
-                          {readingParseItem.locationSentence && (
-                            <p>
-                              <strong>定位句：</strong>
-                              {readingParseItem.locationSentence}
-                              {readingParseItem.locationSentenceTranslation
-                                ? ` / ${readingParseItem.locationSentenceTranslation}`
-                                : ''}
-                            </p>
-                          )}
-                          {readingParseItem.answerSentence && (
-                            <p>
-                              <strong>答案句：</strong>
-                              {readingParseItem.answerSentence}
-                            </p>
-                          )}
-                          <p>
-                            <strong>AI 解析：</strong>
-                            {readingParseItem.explanation || '未返回'}
-                          </p>
-                          {readingParseItem.languageFeatures && (
-                            <p>
-                              <strong>语言特征：</strong>
-                              {readingParseItem.languageFeatures}
-                            </p>
-                          )}
-                          {readingParseItem.answer && (
-                            <p>
-                              <strong>AI 推荐答案：</strong>
-                              {readingParseItem.answer}
-                            </p>
-                          )}
-                                {readingParseItem.synonymMappings && readingParseItem.synonymMappings.length > 0 && (
-                                  <div className="parse-mapping">
-                                    <strong>同义替换</strong>
-                                    <ul>
-                                      {readingParseItem.synonymMappings.map((mapping) => (
-                                  <li key={`${question.questionNo}-${mapping.text}`}>
-                                    <span>{mapping.text}</span>
-                                    <b>=</b>
-                                    <span>{mapping.replacement}</span>
-                                  </li>
-                                ))}
-                              </ul>
+                        )}
+                        <AnalysisDisclosure>
+                          <div className="question-ai-parse">
+                            <div className="question-ai-section-title">
+                              <span>AI 阅读解析</span>
                             </div>
-                          )}
-                          {readingParseItem.distractorAnalysis && readingParseItem.distractorAnalysis.length > 0 && (
-                            <div className="parse-mapping">
-                              <strong>干扰项分析</strong>
-                              <ul>
-                                {readingParseItem.distractorAnalysis.map((item) => (
-                                  <li key={`${question.questionNo}-${item.option}`}>
-                                    {item.option}（{labelOf(readingDistractorTypeLabel, item.type)}）：{item.reason}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
+                            <p>
+                              <strong>题目翻译：</strong>
+                              {readingParseItem.questionTranslation || '未返回'}
+                            </p>
+                            <p>
+                              <strong>题型策略：</strong>
+                              {readingParseItem.strategy || '待返回'}
+                            </p>
+                            {readingParseItem.locationSentence && (
+                              <p>
+                                <strong>定位句：</strong>
+                                {readingParseItem.locationSentence}
+                                {readingParseItem.locationSentenceTranslation
+                                  ? ` / ${readingParseItem.locationSentenceTranslation}`
+                                  : ''}
+                              </p>
+                            )}
+                            {readingParseItem.answerSentence && (
+                              <p>
+                                <strong>答案句：</strong>
+                                {readingParseItem.answerSentence}
+                              </p>
+                            )}
+                            <p>
+                              <strong>AI 解析：</strong>
+                              {readingParseItem.explanation || '未返回'}
+                            </p>
+                            {readingParseItem.languageFeatures && (
+                              <p>
+                                <strong>语言特征：</strong>
+                                {readingParseItem.languageFeatures}
+                              </p>
+                            )}
+                            {readingParseItem.synonymMappings && readingParseItem.synonymMappings.length > 0 && (
+                              <div className="parse-mapping">
+                                <strong>同义替换</strong>
+                                <ul>
+                                  {readingParseItem.synonymMappings.map((mapping) => (
+                                    <li key={`${question.questionNo}-${mapping.text}`}>
+                                      <span>{mapping.text}</span>
+                                      <b>=</b>
+                                      <span>{mapping.replacement}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {readingParseItem.distractorAnalysis && readingParseItem.distractorAnalysis.length > 0 && (
+                              <div className="parse-mapping">
+                                <strong>干扰项分析</strong>
+                                <ul>
+                                  {readingParseItem.distractorAnalysis.map((item) => (
+                                    <li key={`${question.questionNo}-${item.option}`}>
+                                      {item.option}（{labelOf(readingDistractorTypeLabel, item.type)}）：{item.reason}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
                           </div>
+                        </AnalysisDisclosure>
                       </div>
                     )}
                     {showClozeAi && clozeParseItem && (
                       <div className="question-ai-block">
-                        <div className="question-ai-parse">
-                          <div className="question-ai-section-title">
-                            <span>AI 完形填空解析</span>
-                          </div>
-                          <p>
-                            <strong>AI 推荐答案：</strong>
-                            {clozeParseItem.answer || '未返回'}
-                            {clozeParseItem.answerText ? ` · ${clozeParseItem.answerText}` : ''}
-                            {clozeParseItem.answerMeaning ? `（${clozeParseItem.answerMeaning}）` : ''}
-                          </p>
-                          <p>
-                            <strong>AI 解析：</strong>
-                            {clozeParseItem.analysis || '未返回'}
-                          </p>
-                          {clozeParseItem.distractorAnalysis && clozeParseItem.distractorAnalysis.length > 0 && (
-                            <div className="parse-mapping">
-                              <strong>干扰项分析</strong>
-                              <ul>
-                                {clozeParseItem.distractorAnalysis.map((item) => (
-                                  <li key={`${question.questionNo}-${item.option || item.text}`}>
-                                    {item.option ? `${item.option}. ` : ''}
-                                    {item.text ? `${item.text}：` : ''}
-                                    {item.reason}
-                                  </li>
-                                ))}
-                              </ul>
+                        <p className="question-ai-answer-line">
+                          <strong>AI 推荐答案：</strong>
+                          {clozeParseItem.answer || '未返回'}
+                          {clozeParseItem.answerText ? ` · ${clozeParseItem.answerText}` : ''}
+                          {clozeParseItem.answerMeaning ? `（${clozeParseItem.answerMeaning}）` : ''}
+                        </p>
+                        <AnalysisDisclosure>
+                          <div className="question-ai-parse">
+                            <div className="question-ai-section-title">
+                              <span>AI 完形填空解析</span>
                             </div>
-                          )}
-                        </div>
+                            <p>
+                              <strong>AI 解析：</strong>
+                              {clozeParseItem.analysis || '未返回'}
+                            </p>
+                            {clozeParseItem.distractorAnalysis && clozeParseItem.distractorAnalysis.length > 0 && (
+                              <div className="parse-mapping">
+                                <strong>干扰项分析</strong>
+                                <ul>
+                                  {clozeParseItem.distractorAnalysis.map((item) => (
+                                    <li key={`${question.questionNo}-${item.option || item.text}`}>
+                                      {item.option ? `${item.option}. ` : ''}
+                                      {item.text ? `${item.text}：` : ''}
+                                      {item.reason}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        </AnalysisDisclosure>
                       </div>
                     )}
                     {showSevenChoicesAi && sevenChoicesParseItem && (
                       <div className="question-ai-block">
-                        <div className="question-ai-parse">
-                          <div className="question-ai-section-title">
-                            <span>AI 七选五解析</span>
+                        <p className="question-ai-answer-line">
+                          <strong>AI 推荐答案：</strong>
+                          {sevenChoicesParseItem.answer || '未返回'}
+                          {sevenChoicesParseItem.optionText ? ` · ${sevenChoicesParseItem.optionText}` : ''}
+                        </p>
+                        <AnalysisDisclosure>
+                          <div className="question-ai-parse">
+                            <div className="question-ai-section-title">
+                              <span>AI 七选五解析</span>
+                            </div>
+                            {sevenChoicesParseItem.optionTranslation && (
+                              <p>
+                                <strong>选项翻译：</strong>
+                                {sevenChoicesParseItem.optionTranslation}
+                              </p>
+                            )}
+                            {sevenChoicesParseItem.positionContext && (
+                              <p>
+                                <strong>位置与上下文：</strong>
+                                {sevenChoicesParseItem.positionContext}
+                              </p>
+                            )}
+                            <p>
+                              <strong>AI 解析：</strong>
+                              {sevenChoicesParseItem.analysis || '未返回'}
+                            </p>
                           </div>
-                          <p>
-                            <strong>AI 推荐答案：</strong>
-                            {sevenChoicesParseItem.answer || '未返回'}
-                            {sevenChoicesParseItem.optionText ? ` · ${sevenChoicesParseItem.optionText}` : ''}
-                          </p>
-                          {sevenChoicesParseItem.optionTranslation && (
-                            <p>
-                              <strong>选项翻译：</strong>
-                              {sevenChoicesParseItem.optionTranslation}
-                            </p>
-                          )}
-                          {sevenChoicesParseItem.positionContext && (
-                            <p>
-                              <strong>位置与上下文：</strong>
-                              {sevenChoicesParseItem.positionContext}
-                            </p>
-                          )}
-                          <p>
-                            <strong>AI 解析：</strong>
-                            {sevenChoicesParseItem.analysis || '未返回'}
-                          </p>
-                        </div>
+                        </AnalysisDisclosure>
                       </div>
                     )}
                     {showGrammarAi && grammarParseItem && (
                       <div className="question-ai-block">
-                        <div className="question-ai-parse">
-                          <div className="question-ai-section-title">
-                            <span>AI 语法填空解析</span>
+                        <p className="question-ai-answer-line">
+                          <strong>AI 推荐答案：</strong>
+                          {grammarParseItem.answer || '未返回'}
+                        </p>
+                        <AnalysisDisclosure>
+                          <div className="question-ai-parse">
+                            <div className="question-ai-section-title">
+                              <span>AI 语法填空解析</span>
+                            </div>
+                            {grammarParseItem.hintMeaning && (
+                              <p>
+                                <strong>提示词意思：</strong>
+                                {grammarParseItem.hintMeaning}
+                              </p>
+                            )}
+                            <p>
+                              <strong>AI 解析：</strong>
+                              {grammarParseItem.analysis || '未返回'}
+                            </p>
+                            {grammarParseItem.sentenceTranslation && (
+                              <p>
+                                <strong>挖空句翻译：</strong>
+                                {grammarParseItem.sentenceTranslation}
+                              </p>
+                            )}
                           </div>
-                          <p>
-                            <strong>AI 推荐答案：</strong>
-                            {grammarParseItem.answer || '未返回'}
-                          </p>
-                          {grammarParseItem.hintMeaning && (
-                            <p>
-                              <strong>提示词意思：</strong>
-                              {grammarParseItem.hintMeaning}
-                            </p>
-                          )}
-                          <p>
-                            <strong>AI 解析：</strong>
-                            {grammarParseItem.analysis || '未返回'}
-                          </p>
-                          {grammarParseItem.sentenceTranslation && (
-                            <p>
-                              <strong>挖空句翻译：</strong>
-                              {grammarParseItem.sentenceTranslation}
-                            </p>
-                          )}
-                        </div>
+                        </AnalysisDisclosure>
                       </div>
                     )}
                   </article>
@@ -717,10 +734,12 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                     {grammarParseResult.parsedCount} / {grammarParseResult.questionCount} 空已解析
                   </p>
                   {grammarParseResult.fullTranslation && (
-                    <div className="parse-mapping" style={{ marginBottom: 12 }}>
-                      <strong>全文翻译</strong>
-                      <p>{grammarParseResult.fullTranslation}</p>
-                    </div>
+                    <AnalysisDisclosure label="全文翻译">
+                      <div className="parse-mapping" style={{ marginBottom: 12 }}>
+                        <strong>全文翻译</strong>
+                        <p>{grammarParseResult.fullTranslation}</p>
+                      </div>
+                    </AnalysisDisclosure>
                   )}
                 </>
               )}
