@@ -184,6 +184,17 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
   'app/src/features/paper-intelligence/paperSurfacePrototype/paperSurfacePrototype.css',
 ])
 
+// 刀⑤ render-fidelity Chunk B (PA-reviewed docs/cuts/render-fidelity/pa.md,
+// F2 disposition): server/print-renderer.mjs is explicitly, plan-authorized
+// to consume shared/papersurface/tokens.mjs + blankPattern.mjs and gain
+// blank-marker / writing-box rendering. This is the FIRST authorized
+// crossing of the historical "PaperSurface module never touches server/"
+// boundary — narrowly scoped to this one file, not a blanket lift of the
+// `^server\/` forbidden pattern.
+const ALLOWED_DOWNSTREAM_SERVER_FILES = new Set([
+  'server/print-renderer.mjs',
+])
+
 const FORBIDDEN_PATHS = [
   /^app\/src\/features\/paper-intelligence\//,
   /^app\/src\/features\/reading-analysis\//,
@@ -202,6 +213,9 @@ for (const re of FORBIDDEN_PATHS) {
       re.source === '^app\\/src\\/features\\/paper-intelligence\\/' &&
       ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES.has(p)
     ) {
+      return false
+    }
+    if (re.source === '^server\\/' && ALLOWED_DOWNSTREAM_SERVER_FILES.has(p)) {
       return false
     }
     return re.test(p)
