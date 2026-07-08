@@ -67,10 +67,16 @@ equivalent yet — that script only scans a local DOCX folder):
 ```
 
 The field is literally named `docxPath` (existing shipped `02-publish.mjs`
-contract, untouched by this cut) but points at the PDF — `02-publish.mjs`
-only does `readFileSync` + sha256 on it for archival storage, it never
-checks the extension. This is a known naming quirk, not a bug; do not try to
-rename the field (that would mean editing `02-publish.mjs`, out of scope).
+contract) but points at the PDF for this format — this is a known naming
+quirk, not a bug; do not try to rename the field. `02-publish.mjs`'s own
+top-level code (loading this file) only does `readFileSync` + sha256 on it
+and never checks the extension — but the file still flows into the shipped
+publish path and, at `--publish` time (step 8), is checked by
+`validatePaperImportPackage` (`server/paper-import/validator.mjs`): the
+package must contain exactly 1 source document that is either `.docx` (PK
+magic bytes) or `.pdf` (`%PDF` magic bytes). Both formats are accepted by
+design (§2 whitelist format ②) — a real, unmodified PDF here will pass; only
+a wrong extension or a corrupted/renamed file gets rejected there.
 
 **Done when:** `node -e "console.log(JSON.parse(require('fs').readFileSync('scripts/import-pipeline/papers/<paperId>/config.json')))"` parses cleanly and both source PDFs exist on disk.
 
@@ -285,6 +291,13 @@ production; there is no production flag here, this only ever targets the
 local dev DB path baked into `02-publish.mjs`.
 
 **Done when:** console prints `status: published` and `paperId: <paperId>`.
+
+**If it fails instead** (`status: validation_failed`): `02-publish.mjs`
+prints the validator's `rejectedFiles` and `blockingIssues` right below the
+status line — read those first, they name the exact file and error code
+(e.g. `package.docxCount`, `docx.invalidMagic`, `package.rejectedFileType`).
+Do not go spelunking in `validator.mjs` or write a throwaway diagnostic
+script; the printed list is the diagnosis.
 
 ## 9. Attach listening + figures to the published asset tree
 
