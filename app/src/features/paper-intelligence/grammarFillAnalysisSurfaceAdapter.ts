@@ -115,6 +115,8 @@ export type GrammarFillEvidenceRowView = {
   /** Unique id for data-pi-evidence-id; drives cross-column line. */
   evidenceId: string
   type: GrammarFillEvidenceType
+  /** 2-4 字教学用语（cloze-panel-polish）；未映射的 type 原样兜底。 */
+  typeLabel: string
   signalSide: GrammarFillSignalSide
   signalText: string
   relation: string
@@ -169,6 +171,23 @@ const PATH_LABELS: Record<GrammarFillPath, string> = {
 
 // Exported for use in panel rendering.
 export { ROLE_LABELS, PATH_LABELS }
+
+// cloze-panel-polish: 2-4 字教学用语，供折叠区证据类型 chip 显示。
+// 映射不到的 type 原样兜底显示（见 buildAnalysisViews 的 ?? 回退）。
+const GRAMMAR_FILL_EVIDENCE_TYPE_LABELS: Record<GrammarFillEvidenceType, string> = {
+  subject: '主语线索',
+  'time-marker': '时间标志',
+  antecedent: '先行词',
+  'modified-word': '被修饰词',
+  'governing-word': '支配词',
+  collocation: '搭配',
+  comparison: '比较结构',
+  parallel: '并列结构',
+  connector: '连接词',
+  'clause-frame': '从句框架',
+  'of-phrase': 'of短语',
+  determiner: '限定词',
+}
 
 const GRAMMAR_FILL_SECTION = '语法填空'
 
@@ -344,6 +363,7 @@ function buildAnalysisViews(
     const evidenceRows: GrammarFillEvidenceRowView[] = blankAnalysis.evidence.map((item, i) => ({
       evidenceId: `${questionId}-evidence-${i + 1}`,
       type: item.type,
+      typeLabel: GRAMMAR_FILL_EVIDENCE_TYPE_LABELS[item.type] ?? item.type,
       signalSide: item.signalSide,
       signalText: item.signalText,
       relation: item.relation,
