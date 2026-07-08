@@ -1,6 +1,11 @@
 import type { ReactNode } from 'react'
 import { Archive, ArrowLeft, LogOut, Tag } from 'lucide-react'
 
+/* ui-shell-unify CR MF-1 disposition: the topbar deliberately does NOT
+   carry page workspace tools. Tool-heavy pages (draft workbench) keep
+   their own sticky tool card below the shell bar so tools stay near the
+   content while scrolling; the shell bar stays uniform across pages. */
+
 export type AppTopbarNav = {
   user: { username: string } | null
   onLogout: () => void
@@ -19,7 +24,6 @@ export type AppTopbarProps = AppTopbarNav & {
      fixed to 返回找题 across the whole app; the wordmark uses the same
      handler. */
   onBack?: () => void
-  children?: ReactNode
 }
 
 export function AppTopbar(props: AppTopbarProps): ReactNode {
@@ -51,7 +55,6 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           </div>
         )}
       </div>
-      {props.children && <div className="topbar-tools">{props.children}</div>}
       <div className="topbar-actions">
         {props.onOpenMySpace && (
           <button className="ghost-button" type="button" onClick={props.onOpenMySpace}>

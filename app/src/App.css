@@ -17,9 +17,8 @@
 
 /* ui-shell-unify: unified AppTopbar vocabulary. `.topbar-sub` is the
    compact sub-page form (wordmark + page title instead of the full
-   brand block); `.topbar-tools` is the page-context tool slot, which
-   drops onto its own row on narrow widths instead of stacking the
-   whole bar. */
+   brand block). Workspace tools stay in per-page sticky tool cards
+   (CR MF-1 disposition), not in the shell bar. */
 .topbar-sub {
   padding: 10px 24px;
 }
@@ -70,22 +69,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-}
-
-.topbar-tools {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-@media (max-width: 1160px) {
-  .topbar-tools {
-    order: 3;
-    flex-basis: 100%;
-  }
 }
 
 @media (max-width: 960px) {

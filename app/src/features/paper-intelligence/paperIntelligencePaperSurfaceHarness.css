@@ -96,6 +96,12 @@
  *   --pi-ps-paper-bleed-end       slightly darker cream toward the
  *                                 viewport right edge
  */
+/* ui-shell-unify SW-4: the shared shell bar must not be squashed by the
+   100vh flex column on short viewports. */
+.pi-ps-harness > .topbar {
+  flex-shrink: 0;
+}
+
 .pi-ps-harness {
   --pi-ps-assistant-bg: #f8f6f1;
   --pi-ps-insight-ink: #2f2923;
