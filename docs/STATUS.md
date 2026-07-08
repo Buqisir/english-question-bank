@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-08（analysis-layering + paper-browse 双刀并行）
+Last updated: 2026-07-08（surface-question-policy + detail-slim 第二轮并行）
 
 ## 现在是什么
 
@@ -40,6 +40,30 @@ Last updated: 2026-07-08（analysis-layering + paper-browse 双刀并行）
   - 新跟进项（均为存量债，非两刀引入）：route-integration 16 项 main
     同挂旧断言、module-v1 的 App.tsx 冻结断言过宽（均不在 CI）、路由层
     无 popstate 处理（Back 键 URL 变视图不变，与 draft/mySpace 同病）。
+- 2026-07-08 深夜：**第二轮双刀并行收官**（#282 surface-question-policy +
+  #283 detail-slim，均 fresh CR with-MF 全闭环 + DOM 级目检）：
+  - #282：PaperSurface 题列表空题干策略对齐刀⑤导出面（完形题号选项
+    同行/语法文后零空行）+ 应用文 Dear/Yours 脚手架进答题框（规则抽取，
+    read-time，全卷通用）+ 语法 rail 假 prompt 选项退役。PaperSurface
+    高危面首次受控修改（dev-hard + 白名单窄化）。
+  - #283：详情页瘦身成**决策速览卡**——答案对比框/AI验证列表/置信度%
+    生产脚手架退役（ADR-0015 执行，owner 确认永不再用，净 -103 行）+
+    「看解析」直达解析面（CR MF 抓到误接整卷路由，已修+导航断言）。
+  - **页谱定型**（owner 2026-07-08）：详情页=无卷语境决策速览卡 /
+    整卷页=卷语境挑题 / 解析页=深读讲评 / 工作台=产出。
+  - **删卷议题关闭**：owner 提议删模拟卷防毛边→库存实查仅 1 套 mock
+    （巴蜀=960d0f8d）→裁定**一套不删**（毛边病根在老管线不在卷种，
+    渲染层已全兜，删除理由应是内容差而非格式脏）→改为**全库体检
+    sweep**（只读，进行中，产出 docs/import/data-health-sweep-*.md
+    毛边清单→分批数据修复）。
+  - 并行规则教训：两刀同碰 verify-paper-browse.mjs——公共 verify 脚本
+    算共享面，派工时须单独点名（补进 AGENTS 并行三条的执行细则）。
+  - owner 定调：**UI 全部磨顺前不开新功能**。UI 轨队列：flow-hover
+    （流式化+悬浮显形+rail联动+触屏兜底+尾部解析杆[解析两语境：详情/
+    整卷=决策场景默认收起，解析页=深读]）→popstate→导出面段首语→
+    工作台实测一轮。之后：配相似→练习纸→超纲词（+词汇预习单）。
+    体检报告/班级错题标记出局（owner：考点覆盖无好坏标准/一对一无班级）；
+    答题卡待 owner 模板文档。
 - 2026-07-08 晚：**paper-browse-polish 收官**（PR #281，small，owner 实测
   960d0f8d 报障→当晚修复：题号重复/旧格式挖空归一/写作 block 双渲/
   段首语双前缀）。同晚 **High 档构思定向**：产品三主打改为
