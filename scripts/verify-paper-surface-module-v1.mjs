@@ -513,6 +513,10 @@ for (const re of FORBIDDEN_CSS_LITERALS) {
 const tokensSrc = readSrc('shared/papersurface/tokens.mjs')
 const tokensDtsSrc = readSrc('shared/papersurface/tokens.d.ts')
 const tokensDmtsSrc = readSrc('shared/papersurface/tokens.d.mts')
+// 刀⑤ render-fidelity Chunk B: paperBlankPattern moved out of
+// PaperSurface.tsx into shared/papersurface/blankPattern.mjs (server reuse,
+// PA F2 / SW-3) — the literal now lives there, PaperSurface.tsx only imports it.
+const blankPatternMjsSrc = readSrc('shared/papersurface/blankPattern.mjs')
 const paperBlankRule = readCssRuleBody(cssSrc, '.ps-paper-blank')
 
 assert(
@@ -532,8 +536,13 @@ assert(
   'PaperSurface.tsx does not inject --ps-paper-blank-width',
 )
 assert(
-  'Paper blank renderer uses relaxed pattern (I10)',
-  /const\s+paperBlankPattern\s*=\s*\/\(\?:_\{2,\}\|\[\\u0020\\u00A0\]\{2,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{2,\}\|\[\\u0020\\u00A0\]\{2,\}\)\/g/.test(tsxSrc),
+  'PaperSurface.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs (刀⑤ Chunk B)',
+  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(tsxSrc),
+  'PaperSurface.tsx must import the shared paperBlankPattern, not redeclare it locally',
+)
+assert(
+  'Paper blank renderer uses relaxed pattern (I10) — shared/papersurface/blankPattern.mjs',
+  /export\s+const\s+paperBlankPattern\s*=\s*\/\(\?:_\{2,\}\|\[\\u0020\\u00A0\]\{2,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{2,\}\|\[\\u0020\\u00A0\]\{2,\}\)\/g/.test(blankPatternMjsSrc),
   'paperBlankPattern must match _{2,} or [\\u0020\\u00A0]{2,} around 1-3 digit number',
 )
 assert(

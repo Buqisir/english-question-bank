@@ -24,6 +24,7 @@ import { useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
+import { paperBlankPattern } from '../../../../shared/papersurface/blankPattern.mjs'
 import { grammarFillBlankPattern } from './grammarFillBlank.ts'
 import type {
   PaperSurfaceProps,
@@ -61,8 +62,6 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
-
-const paperBlankPattern = /(?:_{2,}|[\u0020\u00A0]{2,})\s*(\d{1,3})\s*(?:_{2,}|[\u0020\u00A0]{2,})/g
 
 /**
  * I15 — focus context for clickable in-passage grammar-fill blanks.

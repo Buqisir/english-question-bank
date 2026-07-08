@@ -85,8 +85,14 @@ assert('Step 2: multi-blank paragraph captures all in order',
   JSON.stringify(findGrammarFillBlankNumbers('the 60._____(recommend) amount that 61._____(be) present')) === JSON.stringify(['60', '61']))
 
 // paperBlankPattern literal MUST be byte-unchanged (regression guard).
+// 刀⑤ render-fidelity Chunk B moved the literal out of PaperSurface.tsx into
+// shared/papersurface/blankPattern.mjs (server reuse, PA F2 / SW-3) —
+// PaperSurface.tsx now only imports it.
+const blankPatternSrc = readSrc('shared/papersurface/blankPattern.mjs')
+assert('Step 2: PaperSurface.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs',
+  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(psSrc))
 assert('Step 2: paperBlankPattern literal unchanged (regression guard)',
-  psSrc.includes('const paperBlankPattern = /(?:_{2,}|[\\u0020\\u00A0]{2,})\\s*(\\d{1,3})\\s*(?:_{2,}|[\\u0020\\u00A0]{2,})/g'))
+  blankPatternSrc.includes('export const paperBlankPattern = /(?:_{2,}|[\\u0020\\u00A0]{2,})\\s*(\\d{1,3})\\s*(?:_{2,}|[\\u0020\\u00A0]{2,})/g'))
 
 // In-passage blank renders a wired <button>; unmatched → non-interactive span (SW-2).
 assert('Step 2: in-passage blank is a <button> with aria-label 聚焦第',
