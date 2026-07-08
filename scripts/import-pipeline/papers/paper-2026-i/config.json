@@ -1,5 +1,5 @@
 {
-  "docxPath": "/Users/huangxuewei/Projects/english-question-bank/scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf",
+  "docxPath": "source/paper.pdf",
   "paperId": "paper-2026-i",
   "provenance": {
     "sourceType": "真题",
@@ -12,5 +12,5 @@
       "新课标Ⅰ卷"
     ]
   },
-  "note": "docxPath 字段名沿用现有 02-publish.mjs 契约（未改动该脚本），实际指向 source/paper.pdf——02-publish.mjs 仅对该路径做 readFileSync+sha256，不校验扩展名，故可安全复用。见 docs/import/agent-runbook.md 的格式②说明。"
+  "note": "docxPath 字段名沿用 02-publish.mjs 契约,实际指向 source/paper.pdf;相对路径按本 config 所在目录解析(2026-07-08 生产同步实证绝对路径不可移植后修正)。发布链路会在 validatePaperImportPackage 校验源文件类型与魔数(.docx=PK / .pdf=%PDF)。见 docs/import/agent-runbook.md 格式②说明。"
 }

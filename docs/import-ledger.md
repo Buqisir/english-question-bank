@@ -21,3 +21,13 @@ anything worth a human's attention.
   - Listening transcript (Text 9, source `answers.pdf`): the source's own dialogue text has an apparently dropped subject in "...until French author Jean Poteau. In the 1980s, was asked to write..." and spells the name "Jean Poteau" where the printed question (Q16) asks about "Jean Bottero" — copied verbatim into `listening/transcript.json`, not corrected (listening content never reaches any analysis/consumption surface per §4, so this has zero downstream risk, but flagging for anyone reading the raw file).
   - Reading A contains the paper's only table (SoFi Stadium football schedule) — handled via the §8 dual-store bridge: flattened text stays in `groups.json`'s materialText, full-table screenshot + manifest are staged under `figures/`. Per §8 this group cannot be added to a draft paper set until the render-fidelity cut lands; the current app was not verified by this DEV cut to actually enforce that gate (out of scope — flagged for whoever owns that follow-up).
   - `figures/manifest.json`'s `placeholderMarker` string had to be updated once to match `normalizePassageText`'s punctuation-spacing output (a space gets inserted after `:` before a letter) — see runbook step 5's note; this is a generic gotcha for any future figure, not specific to this paper.
+
+### paper-2026-i 生产同步(2026-07-08)
+
+- 生产机按 runbook 步骤 8-10 发布:`status: published`、attach extras 4 项、
+  `verify-nck1-standard` **17/17 POST-PUBLISH 全绿**;生产 DB 9 题组入库,
+  eqbank.cc 200,前端已重建。
+- 实证一个可移植性 bug:config.json 的 docxPath 曾是本地绝对路径,生产
+  发布时源文件找不到 → 包内空条目崩溃。已修:02-publish.mjs 对相对
+  docxPath 按 config 所在目录解析,config.json 改为 `source/paper.pdf`
+  (本 commit)。生产当次以临时 sed 方式完成,树已还原干净。

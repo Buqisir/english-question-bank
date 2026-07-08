@@ -36,7 +36,12 @@ if (!configPath) {
 }
 
 const config = JSON.parse(readFileSync(configPath, 'utf8'))
-const { docxPath, paperId, provenance } = config
+const { paperId, provenance } = config
+// Relative docxPath resolves against the config file's directory, so the
+// same committed config works on any machine (laptop / prod server).
+const docxPath = path.isAbsolute(config.docxPath)
+  ? config.docxPath
+  : path.resolve(path.dirname(configPath), config.docxPath)
 const outDir = path.join(__dirname, 'papers', paperId)
 
 // ---- Load groups ----
