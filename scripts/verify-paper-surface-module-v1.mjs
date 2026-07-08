@@ -182,6 +182,13 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
   // referencing prototype folder + its stale verify script).
   'app/src/features/paper-intelligence/paperSurfacePrototype/PaperSurfacePrototype.tsx',
   'app/src/features/paper-intelligence/paperSurfacePrototype/paperSurfacePrototype.css',
+  // surface-question-policy cut (committed plan.md): application-letter
+  // scaffold extraction (Dear.../Yours... → answer-box given top/bottom),
+  // read-time-only, no import-pipeline / stored-asset changes.
+  'app/src/features/paper-intelligence/writingPageModel.mjs',
+  'app/src/features/paper-intelligence/writingPageModel.d.ts',
+  'app/src/features/paper-intelligence/writingPageModel.d.mts',
+  'app/src/features/paper-intelligence/writingPaperViewAdapter.ts',
 ])
 
 // 刀⑤ render-fidelity Chunk B (PA-reviewed docs/cuts/render-fidelity/pa.md,

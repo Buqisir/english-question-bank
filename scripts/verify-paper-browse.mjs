@@ -62,6 +62,24 @@
  *     14. starter no-double-prefix — buildWritingPageModel does not
  *         re-prefix a continuation starter that already carries its own
  *         "Paragraph N:" prefix (960d0f8d's stored continuationStarters).
+ * 15-17. surface-question-policy (owner 验收三反馈修复):
+ *     15. PaperSurface.tsx source carries the empty-stem policy (options
+ *         collapse onto one line; empty-stem-no-options renders nothing),
+ *         plus the real 960d0f8d/2026-i cloze fixtures still produce the
+ *         {stem: '', options: [...]} shape that triggers the one-line
+ *         branch (the adapter-level half of "source-level ok + adapter-
+ *         fed behavioral" per the cut's verify contract).
+ *     16. grammar rows suppressed — a real grammarFill question with an
+ *         empty stem AND no options (no stored blank.prompt) exists in
+ *         the 960d0f8d/2026-i fixtures, the exact data shape that hits
+ *         PaperSurface's "return null" branch.
+ *     17. Application-letter scaffold — 960d0f8d's real Dear Chris/Yours
+ *         paragraphs extract into the answer box's given top/bottom and
+ *         are stripped from the passage textMap; 2026-i's application
+ *         task has no Dear paragraph at all (an opinion-column submission,
+ *         not a letter) — corrects the "2026-i also has a Dear Kate
+ *         scaffold" premise floated at cut kickoff, and proves current
+ *         (empty-box) behavior is preserved for that shape.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -386,8 +404,11 @@ const { buildClozePaperView } = await import(
 const { buildGrammarFillPaperView } = await import(
   '../app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts'
 )
-const { buildWritingPageModel } = await import(
+const { buildWritingPageModel, extractApplicationScaffold } = await import(
   '../app/src/features/paper-intelligence/writingPageModel.mjs'
+)
+const { buildWritingPaperView } = await import(
+  '../app/src/features/paper-intelligence/writingPaperViewAdapter.ts'
 )
 
 const asset960d0f8d = JSON.parse(
@@ -518,6 +539,134 @@ assert(
     (b) => b.kind === 'instruction' && /Paragraph \d+:\s*Paragraph \d+:/.test(b.text),
   ),
   JSON.stringify(continuationPageModel960.blocks.filter((b) => b.kind === 'instruction').map((b) => b.text)),
+)
+
+// ─── 15. surface-question-policy: cloze one-line policy ───
+
+const paperSurfaceSrc = read('app/src/shared-ui/papersurface/PaperSurface.tsx')
+const paperSurfaceCssSrc = read('app/src/shared-ui/papersurface/PaperSurface.css')
+
+assert(
+  'PaperSurface.tsx: empty stem + options collapses onto one line (ps-question-options-inline)',
+  /!trimmedStem\s*&&\s*hasOptions/.test(paperSurfaceSrc) &&
+    paperSurfaceSrc.includes('ps-question-options-inline'),
+  'missing the empty-stem + options one-line branch',
+)
+assert(
+  'PaperSurface.css declares .ps-question-options-inline',
+  paperSurfaceCssSrc.includes('.ps-question-options-inline'),
+  'missing .ps-question-options-inline rule',
+)
+
+for (const [label, model] of [
+  ['960d0f8d', clozeModel960],
+  ['2026-i', buildClozePaperView({ asset, groupId: 'group-2026-i-cloze' })],
+]) {
+  assert(
+    `${label} cloze: every question has empty stem + non-empty options (triggers the one-line branch)`,
+    model.surfaceData.questions.length > 0 &&
+      model.surfaceData.questions.every((q) => q.stem === '' && q.options.length > 0),
+    JSON.stringify(model.surfaceData.questions.map((q) => ({ stem: q.stem, n: q.options.length }))),
+  )
+}
+
+// ─── 16. surface-question-policy: grammar rows suppressed ───
+
+assert(
+  'PaperSurface.tsx: empty stem + no options renders nothing (return null)',
+  /!trimmedStem\s*&&\s*!hasOptions[\s\S]{0,40}return null/.test(paperSurfaceSrc),
+  'missing the empty-stem + no-options suppression branch',
+)
+
+const grammarFillModel2026i = buildGrammarFillPaperView({
+  asset,
+  groupId: 'group-2026-i-grammar-fill',
+})
+const suppressedQuestions2026i = grammarFillModel2026i.surfaceData.questions.filter(
+  (q) => q.stem === '' && q.options.length === 0,
+)
+assert(
+  '2026-i grammarFill fixture: at least one real question has empty stem + no options (no stored blank.prompt) — the exact shape PaperSurface suppresses',
+  suppressedQuestions2026i.length > 0,
+  JSON.stringify(grammarFillModel2026i.surfaceData.questions.map((q) => ({ no: q.questionNo, stem: q.stem, n: q.options.length }))),
+)
+const suppressedQuestions960 = grammarFillModel960.surfaceData.questions.filter(
+  (q) => q.stem === '' && q.options.length === 0,
+)
+assert(
+  '960d0f8d grammarFill fixture: every question has empty stem + no options (no stored blank.prompt anywhere in this paper)',
+  suppressedQuestions960.length === grammarFillModel960.surfaceData.questions.length,
+  JSON.stringify(grammarFillModel960.surfaceData.questions.map((q) => ({ no: q.questionNo, stem: q.stem, n: q.options.length }))),
+)
+
+// ─── 17. surface-question-policy: application-letter scaffold ───
+
+// 960d0f8d: real Dear Chris / Yours, Li Hua paragraphs.
+const appGroup960 = asset960d0f8d.content.groups['group-960d0f8d-writing-application']
+const appTask960 = asset960d0f8d.content.writingTasks[appGroup960.writingTaskId]
+assert(
+  '960d0f8d fixture sanity: application task has a "Dear Chris," paragraph (proves the scaffold has real data to trigger on)',
+  (appGroup960.passage?.paragraphs ?? []).some((p) => /^Dear\b.*,?\s*$/.test(p.text.trim())),
+)
+
+const scaffold960 = extractApplicationScaffold(appGroup960.passage?.paragraphs ?? [])
+assert(
+  '960d0f8d application scaffold extracts givenTop = ["Dear Chris,", opening sentence]',
+  Boolean(scaffold960) &&
+    scaffold960.top.length === 2 &&
+    scaffold960.top[0] === 'Dear Chris,' &&
+    /^I.m Li Hua/.test(scaffold960.top[1]),
+  JSON.stringify(scaffold960?.top),
+)
+assert(
+  '960d0f8d application scaffold extracts givenBottom = ["Yours,", "Li Hua"]',
+  Boolean(scaffold960) &&
+    scaffold960.bottom.length === 2 &&
+    scaffold960.bottom[0] === 'Yours,' &&
+    scaffold960.bottom[1] === 'Li Hua',
+  JSON.stringify(scaffold960?.bottom),
+)
+
+const appPageModel960 = buildWritingPageModel(asset960d0f8d, appGroup960, appTask960)
+const appBox960 = appPageModel960.blocks.find((b) => b.kind === 'answerBox')
+assert(
+  '960d0f8d application answerBox: givenTop/givenBottom carry the extracted scaffold (routed through the existing applicationGiven top/bottom mechanism)',
+  Boolean(appBox960) &&
+    JSON.stringify(appBox960.givenTop) === JSON.stringify(scaffold960.top) &&
+    JSON.stringify(appBox960.givenBottom) === JSON.stringify(scaffold960.bottom),
+  JSON.stringify(appBox960),
+)
+
+const appPaperView960 = buildWritingPaperView({ asset: asset960d0f8d, groupId: 'group-960d0f8d-writing-application' })
+const appPassageText960 = appPaperView960.surfaceData.textMap.paragraphs
+  .flatMap((p) => p.sentences.map((s) => s.text))
+  .join(' ')
+assert(
+  '960d0f8d application: "Dear Chris" / "Yours," no longer appear in the passage textMap (scaffold routed into the answer box instead of duplicating in the passage)',
+  !/Dear Chris/.test(appPassageText960) && !/\bYours,/.test(appPassageText960),
+  appPassageText960,
+)
+
+// 2026-i: no Dear paragraph at all — this is an opinion-column submission,
+// NOT a letter (corrects the "2026-i also has a Dear Kate scaffold" premise
+// floated at cut kickoff). Current (empty-box) behavior must be preserved.
+const appGroup2026i = asset.content.groups['group-2026-i-writing-application']
+const appTask2026i = asset.content.writingTasks[appGroup2026i.writingTaskId]
+assert(
+  '2026-i fixture sanity: application task has NO "Dear" paragraph (it is an opinion-column submission, not a letter)',
+  !(appGroup2026i.passage?.paragraphs ?? []).some((p) => /^Dear\b/.test(p.text.trim())),
+  JSON.stringify((appGroup2026i.passage?.paragraphs ?? []).map((p) => p.text)),
+)
+assert(
+  '2026-i application scaffold extraction returns null (no Dear paragraph to extract)',
+  extractApplicationScaffold(appGroup2026i.passage?.paragraphs ?? []) === null,
+)
+const appPageModel2026i = buildWritingPageModel(asset, appGroup2026i, appTask2026i)
+const appBox2026i = appPageModel2026i.blocks.find((b) => b.kind === 'answerBox')
+assert(
+  '2026-i application answerBox: givenBottom stays empty (current behavior preserved — no scaffold to route)',
+  Boolean(appBox2026i) && appBox2026i.givenBottom.length === 0,
+  JSON.stringify(appBox2026i),
 )
 
 if (failed > 0) {

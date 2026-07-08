@@ -48,6 +48,39 @@ function collapseDoubledParagraphPrefix(text) {
   return text.replace(/(Paragraph \d+:\s*)\1+/g, '$1')
 }
 
+// surface-question-policy cut (owner 验收反馈): an application-letter
+// group's passage.paragraphs stores the given greeting/opening and
+// closing/signature as plain paragraphs (e.g. 960d0f8d: "Dear Chris," /
+// an opening sentence / "Yours," / "Li Hua") rather than as a structured
+// `task.applicationGiven.{top,bottom}` — the import pipeline never
+// populated that field for any paper seen so far. Derive the scaffold
+// at read time instead of touching the import pipeline / stored assets
+// (both out of scope for this cut).
+//
+// Matches a whole paragraph that opens with "Dear" (the greeting line)
+// through the end of the paragraph list; splits at the first paragraph
+// opening with "Yours" into `top` (greeting + given opening) and
+// `bottom` (closing + signature). Returns null when no paragraph opens
+// with "Dear" — e.g. paper-2026-i's application task is an opinion-
+// column submission with no letter scaffold at all; callers keep their
+// current (empty-box) behavior in that case.
+const DEAR_LINE_RE = /^Dear\b.*,?\s*$/
+const YOURS_LINE_RE = /^Yours\b/i
+
+export function extractApplicationScaffold(paragraphs) {
+  const list = paragraphs || []
+  const dearIdx = list.findIndex((p) => DEAR_LINE_RE.test(String((p && p.text) || '').trim()))
+  if (dearIdx < 0) return null
+  const scaffold = list.slice(dearIdx)
+  const yoursIdx = scaffold.findIndex((p) => YOURS_LINE_RE.test(String((p && p.text) || '').trim()))
+  const splitAt = yoursIdx >= 0 ? yoursIdx : scaffold.length
+  return {
+    top: scaffold.slice(0, splitAt).map((p) => p.text),
+    bottom: scaffold.slice(splitAt).map((p) => p.text),
+    paragraphIds: new Set(scaffold.map((p) => p.paragraphId)),
+  }
+}
+
 export function buildWritingPageModel(asset, group, task) {
   const allBlocks = (asset && asset.content && asset.content.blocks) || []
   const groupId = group.groupId
@@ -65,10 +98,16 @@ export function buildWritingPageModel(asset, group, task) {
         .join('\n\n')
     : ''
   // Answer-box given content: continuation → starters as givenTop; application →
-  // its captured 上下格式 (top/bottom). Continuation never routes via applicationGiven.
+  // its captured 上下格式 (top/bottom), derived at read time from the group's
+  // own Dear.../Yours... passage paragraphs when present (surface-question-
+  // policy cut), falling back to task.applicationGiven / empty when the
+  // group has no letter scaffold. Continuation never routes via either.
+  const scaffold = task && task.taskType === 'application'
+    ? extractApplicationScaffold(group.passage && group.passage.paragraphs)
+    : null
   const appGiven = (task && task.applicationGiven) || null
-  const givenTop = appGiven ? (appGiven.top || []) : starters
-  const givenBottom = appGiven ? (appGiven.bottom || []) : []
+  const givenTop = scaffold ? scaffold.top : appGiven ? (appGiven.top || []) : starters
+  const givenBottom = scaffold ? scaffold.bottom : appGiven ? (appGiven.bottom || []) : []
 
   const blocks = []
   for (let i = startIdx; i <= endIdx; i += 1) {

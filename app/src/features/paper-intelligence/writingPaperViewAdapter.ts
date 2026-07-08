@@ -1,6 +1,6 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
-import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
+import type { PaperAssetV1, PaperParagraph } from '../../domain/paperAsset.ts'
 import type { PaperSurfaceData } from './adapter/index.ts'
 import type {
   AiInitialBand,
@@ -12,7 +12,7 @@ import type {
 } from './paperIntelligenceTypes.ts'
 
 export type { WritingChromeBlock, WritingPageModel } from './writingPageModel'
-import { buildWritingPageModel } from './writingPageModel.mjs'
+import { buildWritingPageModel, extractApplicationScaffold } from './writingPageModel.mjs'
 import type { WritingPageModel } from './writingPageModel'
 
 export type WritingPaperViewModel = {
@@ -45,10 +45,21 @@ export function buildWritingPaperView(input: {
 
   const pageModel = buildWritingPageModel(asset, group, task ?? null)
 
-  const textMap = buildWritingTextMap(asset, group, section)
+  // Application-letter scaffold paragraphs (Dear.../Yours...) are routed
+  // into the answer box's given top/bottom by buildWritingPageModel above
+  // instead — strip them from the passage before the textMap / structure
+  // below are built, so the scaffold doesn't also duplicate in the
+  // rendered passage (surface-question-policy cut).
+  const rawParagraphs = group.passage?.paragraphs ?? []
+  const scaffold = taskType === 'application' ? extractApplicationScaffold(rawParagraphs) : null
+  const paragraphs = scaffold
+    ? rawParagraphs.filter((p) => !scaffold.paragraphIds.has(p.paragraphId))
+    : rawParagraphs
+
+  const textMap = buildWritingTextMap(paragraphs, asset.paper.paperId, section)
   const passageStructure: PassageStructure = {
     section,
-    paragraphs: (group.passage?.paragraphs ?? []).map((p, i) => ({
+    paragraphs: paragraphs.map((p, i) => ({
       id: p.paragraphId,
       label: i === 0 ? '标题' : `P${i}`,
       text: p.text,
@@ -103,17 +114,16 @@ export function buildWritingPaperView(input: {
 }
 
 function buildWritingTextMap(
-  asset: PaperAssetV1,
-  group: PaperAssetV1['content']['groups'][string],
+  paragraphs: ReadonlyArray<PaperParagraph>,
+  paperId: string,
   section: string,
 ): PaperTextMap {
-  const rawParagraphs = group.passage?.paragraphs ?? []
-  const paragraphs: PaperTextMap['paragraphs'] = rawParagraphs.length > 0
-    ? segmentPaperText(rawParagraphs.map((p) => p.text).join('\n\n'), { sectionId: section }).paragraphs
+  const mapped: PaperTextMap['paragraphs'] = paragraphs.length > 0
+    ? segmentPaperText(paragraphs.map((p) => p.text).join('\n\n'), { sectionId: section }).paragraphs
         .map((p) => ({ id: p.id, section, sentences: p.sentences }))
     : []
   return {
-    paperId: asset.paper.paperId,
-    paragraphs,
+    paperId,
+    paragraphs: mapped,
   }
 }

@@ -101,9 +101,12 @@
   min-height: 7rem;
 }
 
-/* Application closing/signature (givenBottom): pinned to the box bottom, tight. */
+/* Application closing/signature (givenBottom): pinned to the box bottom,
+   tight, and right-aligned — real letter closing/signature convention
+   (surface-question-policy cut: "下半贴框底右对齐"). */
 .pi-writing-answer-bottom {
   margin-top: auto;
+  text-align: right;
 }
 
 .pi-writing-answer-given--tight {
