@@ -8,10 +8,73 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 20px;
   padding: 14px 24px;
   border-bottom: 1px solid var(--line);
   background: var(--panel);
+}
+
+/* ui-shell-unify: unified AppTopbar vocabulary. `.topbar-sub` is the
+   compact sub-page form (wordmark + page title instead of the full
+   brand block). Workspace tools stay in per-page sticky tool cards
+   (CR MF-1 disposition), not in the shell bar. */
+.topbar-sub {
+  padding: 10px 24px;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.topbar-back {
+  flex-shrink: 0;
+}
+
+.topbar-brand-compact {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
+.topbar-wordmark {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-strong);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.topbar-wordmark:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.topbar-wordmark:disabled {
+  cursor: default;
+}
+
+.topbar-page-title {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  .topbar-username {
+    display: none;
+  }
 }
 
 .topbar h1,

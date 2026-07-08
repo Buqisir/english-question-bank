@@ -1,9 +1,6 @@
 import {
-  Archive,
   BookOpen,
   ClipboardList,
-  LogOut,
-  Tag,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
@@ -42,6 +39,7 @@ import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intellige
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
+import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
@@ -746,6 +744,19 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     })
   }, [])
 
+  const handleLogout = useCallback(() => {
+    void logout().finally(() => window.location.reload())
+  }, [])
+
+  // Shared shell navigation for the unified AppTopbar (ui-shell-unify).
+  // 管理 stays home-only: it is a mode toggle wired to the home shell's
+  // adminRouteActive state, not cross-view navigation.
+  const shellNav: AppTopbarNav = {
+    user: currentUser,
+    onLogout: handleLogout,
+    onOpenMySpace: openMySpace,
+  }
+
   // ─── Paper Intelligence route rendering ───
   if (draftPaperRoute.active) {
     return (
@@ -754,7 +765,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         focusGroupId={draftPaperRoute.focusGroupId}
         onBackToWorkbench={draftPaperOnBackToWorkbench}
         onDraftChanged={() => void refreshQuestionGroups()}
-        onOpenMySpace={openMySpace}
+        shellNav={shellNav}
       />
     )
   }
@@ -764,6 +775,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       <MySpacePage
         onBackToWorkbench={mySpaceOnBackToWorkbench}
         onOpenDraft={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
+        shellNav={{ ...shellNav, onOpenMySpace: undefined }}
       />
     )
   }
@@ -784,6 +796,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           questionId={currentPiRoute.questionId}
           version={currentPiRoute.version}
           onBackToWorkbench={piOnBackToWorkbench}
+          shellNav={shellNav}
         />
       )
     }
@@ -802,44 +815,15 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
 
   return (
     <div className="app-shell home-mode-ai">
-      <header className="topbar">
-        <div>
-          <p className="eyebrow">English Question Bank</p>
-          <h1>英语题库工作台</h1>
-        </div>
-        <div className="topbar-actions">
-          <button className="ghost-button" type="button" onClick={openMySpace}>
-            <Archive size={16} />
-            个人空间
-          </button>
-          {isOwnerView && (
-            <button
-              className="ghost-button"
-              type="button"
-              onClick={toggleAdminRoute}
-              aria-pressed={adminRouteActive}
-            >
-              <Tag size={16} />
-              {adminRouteActive ? '退出管理' : '管理'}
-            </button>
-          )}
-          {currentUser && (
-            <span className="topbar-user-group">
-              <span className="topbar-username">{currentUser.username}</span>
-              <button
-                className="ghost-button"
-                type="button"
-                onClick={() => {
-                  void logout().finally(() => window.location.reload())
-                }}
-              >
-                <LogOut size={16} />
-                退出
-              </button>
-            </span>
-          )}
-        </div>
-      </header>
+      <AppTopbar
+        variant="home"
+        user={currentUser}
+        onLogout={handleLogout}
+        onOpenMySpace={openMySpace}
+        showAdmin={isOwnerView}
+        adminActive={adminRouteActive}
+        onToggleAdmin={toggleAdminRoute}
+      />
 
       {adminRouteActive && (
         <AdminWorkbench

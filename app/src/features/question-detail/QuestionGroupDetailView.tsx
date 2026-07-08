@@ -162,7 +162,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     <div className="detail-view">
       <button className="back-button" type="button" onClick={onBack}>
         <ArrowLeft size={16} />
-        返回列表
+        返回找题
       </button>
 
       {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}

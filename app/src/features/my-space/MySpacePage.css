@@ -5,30 +5,26 @@
   padding: 18px 22px 32px;
 }
 
-.my-space-toolbar {
-  align-items: center;
-  background: #F6F6F4;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
-  display: flex;
-  gap: 14px;
-  padding: 12px;
+.my-space-heading {
+  margin: 0 0 14px;
 }
 
-.my-space-toolbar p,
+.my-space-heading h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
 .my-space-section-head p {
   color: #6A6A64;
   font-size: 12px;
   margin: 0 0 3px;
 }
 
-.my-space-toolbar h1,
 .my-space-section-head h2 {
   font-size: 20px;
   margin: 0;
 }
 
-.my-space-back,
 .my-space-folders button,
 .my-space-new-folder button,
 .my-space-folder-row button,

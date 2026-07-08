@@ -120,6 +120,7 @@ import {
   type RefObject,
 } from 'react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
+import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from './WritingPaperPage'
 import { buildPaperSurfaceDataFromPi } from './adapter/index.ts'
 import {
@@ -199,6 +200,7 @@ type Props = {
   /** C7: optional immutable paper-asset version, e.g. v1. Missing means latest. */
   version?: string | null
   onBackToWorkbench: () => void
+  shellNav: AppTopbarNav
 }
 
 /**
@@ -221,8 +223,10 @@ export function PaperIntelligencePaperSurfaceHarness({
   questionId: initialQuestionId,
   version: initialVersion = null,
   onBackToWorkbench,
+  shellNav,
 }: Props): ReactNode {
   const [report, setReport] = useState<PaperIntelligenceReport | null>(null)
+  const [shellTitle, setShellTitle] = useState<string | null>(null)
   const [paperAssetModel, setPaperAssetModel] = useState<PaperAssetSurfaceModel | null>(null)
   const [sevenChoicesModel, setSevenChoicesModel] = useState<SevenChoicesSurfaceModel | null>(null)
   const [clozeModel, setClozeModel] = useState<ClozePaperViewModel | null>(null)
@@ -300,6 +304,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       setLoading(true)
       setError(null)
       setReport(null)
+      setShellTitle(null)
       setPaperAssetModel(null)
       setSevenChoicesModel(null)
       setClozeAnalysisModel(null)
@@ -332,6 +337,9 @@ export function PaperIntelligencePaperSurfaceHarness({
           let group = asset.content.groups[initialGroupId]
           if (!group) {
             throw new Error(`未找到题组：${initialGroupId}`)
+          }
+          if (!cancelled) {
+            setShellTitle([asset.paper.title, group.title].filter(Boolean).join(' · ') || null)
           }
           // Cloze: fetch analysis → dispatch ClozeAnalysisPanel; fallback to plain view.
           if (group.groupType === 'cloze') {
@@ -1249,15 +1257,12 @@ export function PaperIntelligencePaperSurfaceHarness({
     )
   }
 
+  const pageTitle = shellTitle ?? report?.sourcePaper?.paperName ?? undefined
+
   if (loading) {
     return (
       <div className="pi-ps-harness">
-        <div className="pi-ps-harness-topbar">
-          <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
-            <span aria-hidden="true">←</span> 返回工作台
-          </button>
-          <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
-        </div>
+        <AppTopbar {...shellNav} pageTitle={pageTitle} onBack={onBackToWorkbench} />
         <div className="pi-ps-harness-loading">加载中…</div>
       </div>
     )
@@ -1266,11 +1271,7 @@ export function PaperIntelligencePaperSurfaceHarness({
   if (error || !report || !surfaceData) {
     return (
       <div className="pi-ps-harness">
-        <div className="pi-ps-harness-topbar">
-          <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
-            <span aria-hidden="true">←</span> 返回工作台
-          </button>
-        </div>
+        <AppTopbar {...shellNav} pageTitle={pageTitle} onBack={onBackToWorkbench} />
         <div className="pi-ps-harness-error">
           <h2>未找到 Paper Intelligence 报告</h2>
           <p>{error || '报告数据为空。'}</p>
@@ -1295,14 +1296,9 @@ export function PaperIntelligencePaperSurfaceHarness({
 
   return (
     <div className="pi-ps-harness">
-      <div className="pi-ps-harness-topbar">
-        <button type="button" className="pi-ps-harness-back" onClick={onBackToWorkbench}>
-          <span aria-hidden="true">←</span> 返回工作台
-        </button>
-        {/* C4 PA-approved: insight entry always lives on the left rail.
-           No topbar insight row at any breakpoint. */}
-        <span className="pi-ps-harness-tagline">Paper Surface (C4)</span>
-      </div>
+      {/* C4 PA-approved: insight entry always lives on the left rail.
+         No topbar insight row at any breakpoint. */}
+      <AppTopbar {...shellNav} pageTitle={pageTitle} onBack={onBackToWorkbench} />
       <div
         className="pi-ps-harness-shell"
         ref={shellRef}
