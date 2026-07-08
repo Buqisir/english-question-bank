@@ -471,6 +471,7 @@ export function getPrintReadyByGroupId(db, groupIds) {
 
 const draftPaperStore = createDraftPaperStore({
   exportDir,
+  getPrintReadyByGroupId,
   getQuestionGroupDetail,
   groupTypeLabels,
   isGroupPrintReady,
