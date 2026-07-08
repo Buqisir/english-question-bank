@@ -61,12 +61,33 @@ function fail(name, details = '') {
 function startProcess(command, args, options) {
   const child = spawn(command, args, {
     ...options,
+    // detached: true puts the child in its own process group. On Linux, `npm
+    // run dev:vite` spawns vite as a grandchild; a plain SIGTERM to the npm
+    // wrapper does not reach that grandchild, and its still-open stdio pipes
+    // keep our event loop alive even after main() has returned (CI
+    // hang/timeout observed on PR #276 — did not repro on macOS, where the
+    // wrapper happens to forward the signal). Killing the whole group with
+    // `-pid` in cleanup() below is what actually reaps the grandchild too.
+    detached: true,
     stdio: ['ignore', 'pipe', 'pipe'],
   })
   children.push(child)
   child.stdout.on('data', (chunk) => process.stdout.write(`[${options.name}] ${chunk}`))
   child.stderr.on('data', (chunk) => process.stderr.write(`[${options.name}] ${chunk}`))
   return child
+}
+
+function cleanup() {
+  for (const child of children.reverse()) {
+    try {
+      // Negative pid targets the whole process group created by detached: true,
+      // which is what reaches grandchildren (e.g. vite under `npm run dev:vite`).
+      process.kill(-child.pid, 'SIGTERM')
+    } catch {
+      // Process (group) may already be gone — nothing to do.
+    }
+  }
+  if (existsSync(tempRoot)) rmSync(tempRoot, { recursive: true, force: true })
 }
 
 async function waitForHttp(url, timeoutMs = 20_000) {
@@ -230,6 +251,9 @@ async function runOwnerFlow(browser) {
     pass('Owner basket-chip opens the draft workbench with the added group in the outline')
 
     // C3: export PDF — fetch bytes directly from the page (plan.md 参考实现).
+    // CI has confirmed vivliostyle is available in Actions (PR #276), so the
+    // pre-approved 503 degrade path is no longer needed — this is a hard
+    // requirement for 200 + %PDF in every environment.
     const draftInfo = await page.evaluate(async () => {
       const response = await fetch('/api/draft-papers/current')
       return response.json()
@@ -242,32 +266,15 @@ async function runOwnerFlow(browser) {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ versionType: 'student' }),
       })
-      const contentType = response.headers.get('content-type') || ''
-      if (contentType.includes('application/json')) {
-        const json = await response.json()
-        return { status: response.status, json }
-      }
       const buffer = await response.arrayBuffer()
       const head = new TextDecoder('latin1').decode(new Uint8Array(buffer).slice(0, 4))
       return { status: response.status, head, byteLength: buffer.byteLength }
     }, draftPaperId)
 
-    if (pdfResult.status === 200 && pdfResult.head === '%PDF') {
-      pass(`Owner PDF export returns 200 with a %PDF body (${pdfResult.byteLength} bytes)`)
-    } else if (
-      // pre-approved CI degrade path (plan.md 参考实现 / 已知风险): vivliostyle
-      // unavailable in CI is tolerated ONLY if the 503 body is the precise
-      // "精排 PDF 不可用" envelope. This branch must NOT be reachable locally
-      // (asserted separately below) — see completion report if this triggers.
-      pdfResult.status === 503 &&
-      typeof pdfResult.json?.error === 'string' &&
-      pdfResult.json.error.startsWith('精排 PDF 不可用')
-    ) {
-      pass('CI degrade path: PDF export returned the pre-approved 503 精排 PDF 不可用 envelope — see completion report')
-      console.log('DEGRADE: owner PDF export fell back to 503 in CI', JSON.stringify(pdfResult))
-    } else {
-      fail('Owner PDF export should return 200 with a %PDF body (or the pre-approved 503 envelope)', JSON.stringify(pdfResult))
+    if (pdfResult.status !== 200 || pdfResult.head !== '%PDF') {
+      fail('Owner PDF export should return 200 with a %PDF body', JSON.stringify(pdfResult))
     }
+    pass(`Owner PDF export returns 200 with a %PDF body (${pdfResult.byteLength} bytes)`)
 
     if (pageErrors.length > 0) {
       fail('No browser page errors expected in owner flow', pageErrors.join('\n'))
@@ -416,8 +423,11 @@ main()
     process.exitCode = 1
   })
   .finally(() => {
-    for (const child of children.reverse()) {
-      child.kill('SIGTERM')
-    }
-    if (existsSync(tempRoot)) rmSync(tempRoot, { recursive: true, force: true })
+    cleanup()
+    // Explicit exit is the actual fix for the CI hang (PR #276): detached
+    // process groups can still leave dangling fds/handles referenced by this
+    // process even after every child is killed, which keeps Node's event loop
+    // alive indefinitely instead of returning from main(). Don't rely on
+    // natural process exit — force it with the exit code already computed above.
+    process.exit(process.exitCode || 0)
   })
