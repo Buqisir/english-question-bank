@@ -255,7 +255,7 @@ if (doPublish) {
   try {
     const result = publishPaperImportPackage({ files, db, paperAssetsDir })
     console.log(`   status: ${result.status}`)
-    if (result.paperId) console.log(`   paperId: ${result.paperId}`)
+    if (result.publish?.paperId) console.log(`   paperId: ${result.publish.paperId}`)
     if (result.status === 'validation_failed' && result.validation) {
       const { blockingIssues, rejectedFiles } = result.validation
       if (Array.isArray(rejectedFiles) && rejectedFiles.length > 0) {

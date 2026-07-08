@@ -290,7 +290,9 @@ This is the ONLY step that writes to `data/question-bank.sqlite` and
 production; there is no production flag here, this only ever targets the
 local dev DB path baked into `02-publish.mjs`.
 
-**Done when:** console prints `status: published` and `paperId: <paperId>`.
+**Done when:** console prints `status: published` followed by `paperId: <paperId>`
+(the second line only appears on this success path — `02-publish.mjs` prints
+`result.publish.paperId`, not a top-level `result.paperId`).
 
 **If it fails instead** (`status: validation_failed`): `02-publish.mjs`
 prints the validator's `rejectedFiles` and `blockingIssues` right below the

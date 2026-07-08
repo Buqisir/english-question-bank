@@ -28,6 +28,12 @@
  * check table, not by this generic script (a future paper's source PDF is
  * not available to this script to diff against).
  *
+ * Also runs (as check S0, folded into this script's PASS/FAIL count) the
+ * standalone `verify-source-doc-types.mjs` subprocess — the C9 validator
+ * docx/pdf magic-byte accept/reject regression — so it is re-asserted on
+ * every "standard verify" run, not only when someone remembers to invoke it
+ * by hand.
+ *
  * Usage: node scripts/import-pipeline/verify-nck1-standard.mjs <paperId>
  * Exit: 0 all green, 1 any FAIL.
  */
@@ -35,6 +41,7 @@
 import { existsSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { spawnSync } from 'node:child_process'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -72,6 +79,19 @@ if (!existsSync(groupsPath)) {
 }
 const groups = JSON.parse(readFileSync(groupsPath, 'utf8'))
 const { readingGroups, seven, cloze, grammar, application, continuation } = groups
+
+// ---- 0. C9 validator source-doc-type regression (docx/pdf magic-byte accept/reject) ----
+// Folds scripts/import-pipeline/verify-source-doc-types.mjs's H1/H2/H3 assertions
+// into this gate's PASS/FAIL count so the C9 behavior contract is re-run every
+// time someone runs "the standard verify", not only by hand once.
+check('S0 verify-source-doc-types.mjs (H1/H2/H3 docx/pdf magic-byte accept/reject) subprocess all green', () => {
+  const scriptPath = path.join(__dirname, 'verify-source-doc-types.mjs')
+  const result = spawnSync(process.execPath, [scriptPath], { encoding: 'utf8' })
+  if (result.status !== 0) {
+    fail(`verify-source-doc-types.mjs exited ${result.status}\n${result.stdout}${result.stderr}`)
+  }
+  return 'H1/H2/H3 subprocess exit 0'
+})
 
 // ---- A. 9 groups present, correct types/counts ----
 const READING_EXPECTED_COUNTS = { a: 3, b: 4, c: 4, d: 4 }
