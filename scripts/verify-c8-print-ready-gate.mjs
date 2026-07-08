@@ -42,7 +42,12 @@ assert('print-ready validates writing material', /group\.group_type === 'writing
 assert('print-ready validates continuation material', /group\.group_type === 'continuation'[\s\S]{0,220}缺少材料/.test(server))
 assert('print-ready validates paper-asset dangling questionIds', server.includes('paper-asset 引用了不存在的小题'))
 assert('print-ready validates paper-asset source groups', server.includes('getPaperAssetPrintReady'))
-assert('paper-asset groups bypass DB-only option rows', /const paperAssetMatch = findPaperAssetGroup\(groupId\)[\s\S]{0,120}getPaperAssetPrintReady/.test(server))
+// list-groups-perf (docs/cuts/list-groups-perf/plan.md): the paper-asset-bypass
+// check moved into the shared computePrintReadyJudgment (used by both the
+// single-row isGroupPrintReady and the batch getPrintReadyByGroupId), so it no
+// longer sits directly under the findPaperAssetGroup(groupId) call site.
+assert('isGroupPrintReady looks up a paper-asset match', /const paperAssetMatch = findPaperAssetGroup\(groupId\)/.test(server))
+assert('paper-asset groups bypass DB-only option rows', /if \(paperAssetMatch\) return getPaperAssetPrintReady/.test(server))
 assert('search derives print-ready field canAddToDraftPaper', server.includes('canAddToDraftPaper: printReady.ok'))
 assert('search derives draftPaperButtonState', server.includes('draftPaperButtonState'))
 assert('search derives currentDraftPaperId', server.includes('currentDraftPaperId: draftContext.currentDraftPaperId'))

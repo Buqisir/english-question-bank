@@ -78,6 +78,7 @@ const registry = {
   'scripts/verify-launch-deploy.mjs',
   'scripts/verify-paper-assets-consistency.mjs',
   'scripts/verify-paper-browse.mjs',
+  'scripts/verify-list-groups-perf.mjs',
   ],
 }
 
