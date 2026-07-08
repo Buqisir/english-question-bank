@@ -354,6 +354,21 @@ body {
   margin-right: 0.6em;
 }
 
+/* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;
+   标题不落页尾;写作框整框不拆。 */
+.question {
+  break-inside: avoid;
+}
+
+.section-header,
+.group-meta {
+  break-after: avoid;
+}
+
+.writing-answer-box {
+  break-inside: avoid;
+}
+
 .answer {
   margin: 0.2em 0 0.2em 2em;
   font-size: 9.5pt;
