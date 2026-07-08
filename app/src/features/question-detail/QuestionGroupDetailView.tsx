@@ -210,8 +210,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               {selectedDetail.hasPaperSurfaceAnalysis &&
                 selectedDetail.paperSurfaceHref &&
                 selectedDetail.paperSurfaceLabel && (
-                // 直达解析面（paperSurfaceHref = view=paper-intelligence&surface=paper），
-                // 与搜索卡同款 <a href> 直链——勿接 onOpenPaperBrowse（那是看整卷）
+                // 直达解析面：与搜索卡同款 href 直链（导航目标由 classic-retire-2 断言把守）
                 <a
                   className="detail-button"
                   href={selectedDetail.paperSurfaceHref}
