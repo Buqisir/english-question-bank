@@ -64,7 +64,7 @@ Last updated: 2026-07-07（process-slim）
 - member 详情再收一档：**已收（PR #275，2026-07-08）**。答案对比统计 +
   verify-list 对 member 隐藏（isOwnerView gate，同刀④），
   `verify-classic-retire-2.mjs` 三条断言改 owner-gated 真检查（63/63）。
-  其余生产 QA owner 已过，无别的问题。**待生产同步部署。**
+  其余生产 QA owner 已过，无别的问题。生产已同步（2026-07-08）。
 - UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
   `.impeccable/critique/`）。剩余：[P1] 两个未迁移解析孪生面
   （`?view=reading-analysis` 暖色孤岛 + PI 默认 Preview 面含 backstage
