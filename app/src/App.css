@@ -642,50 +642,8 @@ button:disabled {
 
 .instruction-summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) max-content;
   gap: 16px;
   align-items: center;
-}
-
-.answer-compare-summary {
-  display: grid;
-  grid-template-columns: max-content max-content max-content;
-  gap: 8px 10px;
-  align-items: center;
-  justify-content: start;
-  justify-self: start;
-  min-width: 230px;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
-.answer-compare-summary > span {
-  grid-column: 1 / -1;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.answer-compare-summary div {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  color: var(--ink-strong);
-}
-
-.answer-compare-summary strong {
-  font-size: 22px;
-  line-height: 1;
-}
-
-.answer-compare-summary em,
-.answer-compare-summary small {
-  color: var(--muted);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 800;
 }
 
 .topic-label-header {
@@ -854,15 +812,6 @@ button:disabled {
 }
 
 @media (max-width: 760px) {
-  .instruction-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .answer-compare-summary {
-    justify-content: start;
-    min-width: 0;
-  }
-
   .topic-label-header {
     grid-template-columns: 1fr;
   }
@@ -957,16 +906,6 @@ button:disabled {
   color: var(--ink-strong);
 }
 
-.answer-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.answer-grid-single {
-  grid-template-columns: minmax(0, 1fr);
-}
-
 .answer-box {
   display: grid;
   gap: 5px;
@@ -983,41 +922,6 @@ button:disabled {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
-}
-
-.answer-compare-box {
-  border: 1px solid var(--line);
-}
-
-.answer-compare-compact {
-  place-items: center;
-}
-
-.answer-compare-compact .verify-badge {
-  font-size: 16px;
-}
-
-.answer-compare-box.correct {
-  border-color: var(--eqb-color-success);
-  background: var(--mint-soft);
-}
-
-.answer-compare-box.answer_wrong,
-.answer-compare-box.explanation_wrong,
-.answer-compare-box.both_wrong {
-  border-color: #c4543e;
-  background: var(--coral-soft);
-}
-
-.answer-compare-box.uncertain,
-.answer-compare-box.pending {
-  border-color: var(--eqb-color-warning);
-  background: var(--amber-soft);
-}
-
-.answer-compare-box.skipped {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
 }
 
 .teacher-difficulty-card {
@@ -2320,7 +2224,6 @@ button:disabled {
   .library-header,
   .group-card,
   .detail-hero,
-  .answer-grid,
   .workflow-overview,
   .workflow-stage-grid,
   .paper-options {
@@ -2380,90 +2283,6 @@ button:disabled {
     grid-column: 2 / -1;
     justify-self: start;
   }
-}
-
-.verify-list {
-  display: grid;
-  gap: 10px;
-}
-
-.verify-item {
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
-.verify-item.correct {
-  border-color: var(--eqb-color-success);
-  background: var(--mint-soft);
-}
-
-.verify-item.answer_wrong,
-.verify-item.explanation_wrong,
-.verify-item.both_wrong {
-  border-color: #c4543e;
-  background: var(--coral-soft);
-}
-
-.verify-item.uncertain {
-  border-color: var(--eqb-color-warning);
-  background: var(--amber-soft);
-}
-
-.verify-item-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
-}
-
-.verify-item-head strong {
-  font-size: 14px;
-}
-
-.verify-item p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.verify-correct {
-  margin-top: 6px;
-  color: var(--ink-strong);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.verify-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.verify-badge.correct {
-  color: var(--mint-text);
-  background: var(--mint-soft);
-}
-
-.verify-badge.answer_wrong,
-.verify-badge.explanation_wrong,
-.verify-badge.both_wrong {
-  color: var(--coral-text);
-  background: var(--coral-soft);
-}
-
-.verify-badge.uncertain,
-.verify-badge.pending,
-.verify-badge.skipped {
-  color: var(--amber-text);
-  background: var(--amber-soft);
 }
 
 .parse-mapping {
@@ -3876,15 +3695,6 @@ button:disabled {
      cold blue. C1 (tokens.css) + C2 (index.css) now make :root/index.css
      themselves neutral + teal, so the detail view inherits the new palette
      directly — these per-subtree color remaps are gone. */
-}
-
-/* In the compact answer-compare layout the state badge sits inside a box
-   that already carries the same `.pending` / `.correct` / `.wrong` tint, so
-   the badge stacking its own tint doubled the wash and crushed the label
-   (e.g. 待对比) below AA. Drop the inner tint — the box already conveys the
-   state — so the label reads on a single tint. */
-.app-shell.home-mode-ai .detail-view .answer-compare-compact .verify-badge {
-  background: transparent;
 }
 
 /* ── Basket: lightweight floating chip + slide-in drawer in AI mode ────── */

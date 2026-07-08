@@ -7,14 +7,7 @@
  * so they live here as a single definition that both App.tsx and the new
  * component import — no duplicated copies.
  */
-import type {
-  ClozeParseQuestionGroupResult,
-  GrammarParseQuestionGroupResult,
-  GroupType,
-  QuestionGroupDetail,
-  ReadingParseQuestionGroupResult,
-  SevenChoicesParseQuestionGroupResult,
-} from '../../domain/questionBank'
+import type { GroupType, QuestionGroupDetail } from '../../domain/questionBank'
 import { groupTypeLabel } from '../../domain/questionBank'
 
 export type DifficultyRatingDraft = {
@@ -75,18 +68,4 @@ export function formatSavedAt(value?: string) {
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return value
   return date.toLocaleString('zh-CN', { hour12: false })
-}
-
-export function getParseSavedAt(
-  groupType: GroupType,
-  readingParseResult: ReadingParseQuestionGroupResult | null,
-  clozeParseResult: ClozeParseQuestionGroupResult | null,
-  sevenChoicesParseResult: SevenChoicesParseQuestionGroupResult | null,
-  grammarParseResult: GrammarParseQuestionGroupResult | null,
-) {
-  if (groupType === 'reading') return readingParseResult?.savedAt
-  if (groupType === 'cloze') return clozeParseResult?.savedAt
-  if (groupType === 'seven_choices') return sevenChoicesParseResult?.savedAt
-  if (groupType === 'grammar_cloze') return grammarParseResult?.savedAt
-  return null
 }

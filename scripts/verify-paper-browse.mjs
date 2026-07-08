@@ -24,7 +24,8 @@
  *  7. QuestionGroupDetailView.tsx: exactly one new prop
  *     (onOpenPaperBrowse) and one new button ("看整卷"), gated on
  *     `selectedDetail.paperSurfaceHref`; existing detail-page markers
- *     (编辑/删除/加入草稿卷/答案对比统计) are untouched.
+ *     (编辑/删除/加入草稿卷) are untouched. (答案对比统计 dropped from this
+ *     list by detail-slim, owner 2026-07-08 — see verify-classic-retire-2.mjs.)
  *  8. PaperBrowsePage.tsx: imports PaperSurface from shared-ui/papersurface
  *     and the five paper-intelligence adapters; renders content.blocks in
  *     document order (no sort/reverse); handles every block type
@@ -273,7 +274,10 @@ assert(
 )
 // Existing detail-page surfaces this cut must not disturb (classic-retire-2
 // contract; this is a light re-check, not a duplicate of that verify).
-for (const marker of ['编辑', '删除', '加入草稿卷', 'answerCompareStats']) {
+// 'answerCompareStats' dropped from this list — detail-slim (owner
+// 2026-07-08) deletes that surface entirely; verify-classic-retire-2.mjs
+// now owns the absence guard for it.
+for (const marker of ['编辑', '删除', '加入草稿卷']) {
   assert(
     `QuestionGroupDetailView still contains "${marker}" (untouched by this cut)`,
     detailViewSrc.includes(marker),
