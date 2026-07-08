@@ -1320,6 +1320,62 @@ button:disabled {
   line-height: 1.55;
 }
 
+.question-ai-answer-line {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.analysis-disclosure {
+  display: grid;
+  gap: 8px;
+}
+
+.analysis-disclosure-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.analysis-disclosure-toggle:hover {
+  color: var(--ink);
+  background: var(--surface-strong);
+  border-color: var(--line-strong);
+}
+
+.analysis-disclosure-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
+}
+
+.analysis-disclosure-toggle-label {
+  color: var(--ink-strong);
+}
+
+.analysis-disclosure-chevron {
+  transition: transform 0.15s ease;
+}
+
+.analysis-disclosure-toggle[aria-expanded='true'] .analysis-disclosure-chevron {
+  transform: rotate(180deg);
+}
+
+.analysis-disclosure-body {
+  display: grid;
+  gap: 8px;
+}
+
 .paper-page {
   display: grid;
   gap: 22px;
