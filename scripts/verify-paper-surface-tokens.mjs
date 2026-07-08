@@ -27,9 +27,11 @@
  *      variables via `var(--ps-...)` instead of hardcoding the canonical
  *      token values directly for the shared fields.
  *
- * NOT yet asserted here (deliberately, per the render-fidelity plan):
- *   - Server consumption (`server/print-renderer.mjs` /
- *     `server/exports/docxRenderer.mjs`) — that lands in Chunk B/C.
+ * Server consumption (刀⑤ Chunk B, 2026-07-08): `server/print-renderer.mjs`
+ * now imports this same module and consumes `paperLineHeight` + the font
+ * stacks for PDF output. The former "server/ untouched" diff-freeze
+ * assertion is retired below in favor of a positive behavioral check —
+ * Chunk B is an authorized consumer, not a violation.
  *
  * The script is cloud-safe:
  *   - never spawns a browser,
@@ -470,7 +472,6 @@ const FORBIDDEN_PATHS = [
   /^package\.json$/,
   /^package-lock\.json$/,
   /^pnpm-lock\.yaml$/,
-  /^server\//,
   /^app\/src\/features\/reading-analysis\//,
   /^docs\/product\//,
 ]
@@ -482,6 +483,29 @@ for (const re of FORBIDDEN_PATHS) {
     `offenders: ${offenders.join(', ')}`,
   )
 }
+
+/* server/ is no longer a blanket freeze: 刀⑤ Chunk B (authorized by
+ * the render-fidelity plan) makes `server/print-renderer.mjs` a
+ * consumer of this same token module. Assert the consumption is real
+ * and behavioral instead of asserting server/ is untouched. */
+const printRendererSrc = readSrc('server/print-renderer.mjs')
+assert(
+  'server/print-renderer.mjs imports paperSurfaceTokens from shared/papersurface/tokens.mjs (Chunk B consumption)',
+  /import\s*\{\s*paperSurfaceTokens\s*\}\s*from\s*['"][^'"]*shared\/papersurface\/tokens\.mjs['"]/.test(
+    printRendererSrc,
+  ),
+  'shared tokens import missing from server/print-renderer.mjs',
+)
+assert(
+  'server/print-renderer.mjs uses paperSurfaceTokens.paperLineHeight',
+  /paperSurfaceTokens\.paperLineHeight\b/.test(printRendererSrc),
+  'paperLineHeight usage missing from server/print-renderer.mjs',
+)
+assert(
+  'server/print-renderer.mjs uses a font stack from paperSurfaceTokens (paperFontStack or paperFontStackHeading)',
+  /paperSurfaceTokens\.paperFontStack(Heading)?\b/.test(printRendererSrc),
+  'font stack usage missing from server/print-renderer.mjs',
+)
 
 /* ─── 9. Vite fs.allow is narrow (PR #32 review fix) ─────────────── */
 
