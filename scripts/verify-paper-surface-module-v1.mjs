@@ -193,6 +193,7 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
 // `^server\/` forbidden pattern.
 const ALLOWED_DOWNSTREAM_SERVER_FILES = new Set([
   'server/print-renderer.mjs',
+  'server/exports/docxRenderer.mjs',
 ])
 
 const FORBIDDEN_PATHS = [
