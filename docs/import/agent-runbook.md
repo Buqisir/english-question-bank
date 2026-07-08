@@ -126,8 +126,18 @@ NOT let any AI "solve" the questions to produce or cross-check answers
 (§3 hard redline: AI-derived answers may never become the stored answer,
 regardless of confidence).
 
+**Mandatory high-DPI answer cross-check** (added after the paper-2026-i
+CR round): the automated gates only count answers — they cannot tell a
+wrong answer from a right one. Before moving on, render the answer page
+at ≥300 DPI (e.g. `pdftoppm -r 300`, or a full-page visual Read — never
+a low-resolution thumbnail or text extraction, both have produced real
+misreads) and confirm every single objective answerKey against the
+rendered page, cell by cell. A transcription slip here publishes a wrong
+answer that every gate will wave through.
+
 **Done when:** you have a complete `CONTENT[paperId]` entry with all 6 group
-shapes filled and every objective answer copied from `answers.pdf`.
+shapes filled, and every objective answer both copied from `answers.pdf`
+and re-confirmed against the ≥300 DPI render.
 
 ## 3. Build + shape-gate
 
