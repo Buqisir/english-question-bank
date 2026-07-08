@@ -40,6 +40,16 @@ Last updated: 2026-07-08（surface-question-policy + detail-slim 第二轮并行
   - 新跟进项（均为存量债，非两刀引入）：route-integration 16 项 main
     同挂旧断言、module-v1 的 App.tsx 冻结断言过宽（均不在 CI）、路由层
     无 popstate 处理（Back 键 URL 变视图不变，与 draft/mySpace 同病）。
+- 2026-07-08 深夜：**生产部署完成**——prod e33483b → b5db37c（一次带上
+  刀⑤渲染保真 #278 + 解析分层 #279 + 整卷预览页 #280 + polish #281 +
+  卷面策略 #282 + 详情瘦身 #283 + 排版标准 v2 + 相似题维度标准 +
+  2026 卷 docxPath fix）。分步流程（pull→eqb-build.sh→restart）；
+  eqb+caddy active、health 200、eqbank.cc 200、
+  verify-paper-assets-consistency 生产实跑 169/169 绿。
+  下一会话：**UI 整改**（队列见下方 owner 定调条），施工清单另有
+  `docs/import/data-health-sweep-2026-07-08.md`（33 卷毛边三桶；
+  注意：七选五 A-G 实测 33/33 齐全，此前"2026-i 缺失"判断需在数据刀
+  复核后销账）。
 - 2026-07-08 深夜：**第二轮双刀并行收官**（#282 surface-question-policy +
   #283 detail-slim，均 fresh CR with-MF 全闭环 + DOM 级目检）：
   - #282：PaperSurface 题列表空题干策略对齐刀⑤导出面（完形题号选项
