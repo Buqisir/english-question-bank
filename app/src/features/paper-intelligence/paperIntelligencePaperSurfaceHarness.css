@@ -2305,3 +2305,17 @@ button.pi-ps-analysis-distractor--selected {
     width: 100%;
   }
 }
+
+/* 考点框架 collapsed summary — same quiet one-line idiom as the
+   文章简介 summary above; the framework body inherits its existing
+   steps/table/notes styling once expanded. */
+.pi-gf-framework-summary {
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--pi-ps-insight-muted-ink, #8a8177);
+  user-select: none;
+}
+
+.pi-gf-framework[open] .pi-gf-framework-summary {
+  margin-bottom: 6px;
+}

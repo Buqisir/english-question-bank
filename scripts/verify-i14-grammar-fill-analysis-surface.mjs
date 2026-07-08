@@ -346,9 +346,14 @@ try {
   assert('Step 2: panel renders answer', panelSrc.includes('analysis.answer'))
   assert('Step 2: panel renders framework steps', panelSrc.includes('framework.steps'))
   assert('Step 2: panel renders framework table', panelSrc.includes('framework.table'))
+  // 2026-07-08 owner 拍板：考点框架折叠（通用讲义不占卡面），解题提示
+  // 不渲染（每次都是代入的换句话说；数据字段保留）。
+  assert('Step 2: framework is folded into a native <details>',
+    /<details className="pi-gf-framework"/.test(panelSrc))
   assert('Step 2: panel renders 代入 reason', panelSrc.includes('analysis.reason'))
   assert('Step 2: panel renders role/path badges', panelSrc.includes('ROLE_LABELS') && panelSrc.includes('PATH_LABELS'))
-  assert('Step 2: panel renders teachingNote', panelSrc.includes('teachingNote'))
+  assert('Step 2: panel does NOT render teachingNote (owner cut, data kept)',
+    !panelSrc.includes('{analysis.teachingNote}'))
   assert('Step 2: panel renders group overview', panelSrc.includes('groupView') && panelSrc.includes('overview'))
   assert('Step 2: evidence buttons carry data-pi-evidence-id', panelSrc.includes('data-pi-evidence-id={row.evidenceId}'))
   assert('Step 2: evidence buttons carry data-pi-question-id', panelSrc.includes('data-pi-question-id={analysis.questionId}'))

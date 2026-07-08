@@ -6,15 +6,16 @@
  *     - Header: 第 N 题 + blankType tag (有提示词 / 无提示词, chip) + hint (if given)
  *               + 考点 labelZh (chip)
  *     - 答案: answer badge
- *     - 考点框架: framework.steps (ordered list) + framework.table (non-finite only)
- *                + framework.notes (muted lines)
  *     - 代入: reason
  *     - Non-finite badges: role (成分中文) + path (快路/慢路) when present
- *   Collapsed by default (「展开细节」toggle, mirrors SevenChoicesAnalysisPanel):
- *     - 证据定位: evidence rows as clickable buttons with data-pi-evidence-id,
+ *   Collapsed by default:
+ *     - 考点框架 (native <details>): generic per-facet framework — identical
+ *       for every blank of the facet, so it folds to one line
+ *     - 证据定位 (「展开细节」toggle, mirrors SevenChoicesAnalysisPanel):
+ *                evidence rows as clickable buttons with data-pi-evidence-id,
  *                data-pi-evidence-kind="support", data-pi-question-id
  *                (no option-side branch — grammar fill has no options)
- *     - teachingNote
+ *   Not rendered: teachingNote (restates 代入; owner cut 2026-07-08 — data kept)
  *
  * Collapse state is a local `Set<questionId>` — the simplest implementation:
  * a newly focused blank is absent from the set, so it naturally starts
@@ -105,9 +106,13 @@ export function GrammarFillAnalysisPanel({
             <span className="pi-gf-answer-badge">{analysis.answer}</span>
           </div>
 
-          {/* 考点框架 */}
-          <div className="pi-gf-framework">
-            <h4 className="pi-gf-section-title">考点框架</h4>
+          {/* 考点框架 — generic per-facet teaching framework, identical for
+              every blank of the same facet, so it must not occupy the card
+              by default (owner decision 2026-07-08: fold, keep reachable for
+              mid-lesson walkthroughs). key resets the native open state when
+              focus moves to another blank. */}
+          <details className="pi-gf-framework" key={analysis.questionId}>
+            <summary className="pi-gf-framework-summary">考点框架</summary>
             {analysis.framework.steps.length > 0 && (
               <ol className="pi-gf-framework-steps">
                 {analysis.framework.steps.map((step, i) => (
@@ -157,7 +162,7 @@ export function GrammarFillAnalysisPanel({
                 ))}
               </ul>
             )}
-          </div>
+          </details>
 
           {/* 代入 */}
           <div className="pi-gf-reason">
@@ -181,8 +186,8 @@ export function GrammarFillAnalysisPanel({
             </div>
           )}
 
-          {/* Details toggle — evidence + teaching note stay collapsed by default. */}
-          {(analysis.evidenceRows.length > 0 || analysis.teachingNote) && (
+          {/* Details toggle — evidence stays collapsed by default. */}
+          {analysis.evidenceRows.length > 0 && (
             <button
               type="button"
               className="pi-gf-details-toggle"
@@ -224,13 +229,10 @@ export function GrammarFillAnalysisPanel({
                 </div>
               )}
 
-              {/* Teaching note */}
-              {analysis.teachingNote && (
-                <div className="pi-gf-teaching-note">
-                  <h4 className="pi-gf-section-title">解题提示</h4>
-                  <p>{analysis.teachingNote}</p>
-                </div>
-              )}
+              {/* 解题提示 (teachingNote) is deliberately NOT rendered for
+                  grammar fill — it restates 代入 in different words every
+                  time (owner decision 2026-07-08). The field stays in the
+                  data/adapter; only the presentation drops it. */}
             </div>
           )}
         </div>
