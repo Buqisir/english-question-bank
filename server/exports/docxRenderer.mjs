@@ -109,7 +109,9 @@ function paragraph(content = '', options = {}) {
     options.before || options.after
       ? `<w:spacing${options.before ? ` w:before="${options.before}"` : ''}${options.after ? ` w:after="${options.after}"` : ''}/>`
       : '',
-    options.indentLeft ? `<w:ind w:left="${options.indentLeft}"/>` : '',
+    options.indentLeft || options.firstLineIndent
+      ? `<w:ind${options.indentLeft ? ` w:left="${options.indentLeft}"` : ''}${options.firstLineIndent ? ` w:firstLine="${options.firstLineIndent}"` : ''}/>`
+      : '',
     options.keepNext ? '<w:keepNext/>' : '',
     options.shading ? `<w:shd w:val="clear" w:color="auto" w:fill="${options.shading}"/>` : '',
   ].join('')
@@ -627,7 +629,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         // Passage text
         if (passageLines.length > 0 && passageLines[0]) {
           passageLines.forEach((line) => {
-            body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60 }))
+            body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60, firstLineIndent: 420 }))
           })
           body.push(paragraph('', { after: 80 }))
         }
@@ -667,7 +669,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
       if (passageLines.length > 0 && passageLines[0]) {
         passageLines.forEach((line) => {
-          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60 }))
+          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60, firstLineIndent: 420 }))
         })
         body.push(paragraph('', { after: 80 }))
       }
@@ -769,7 +771,7 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         }
         body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
         passageLines.forEach((line) => {
-          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240 }))
+          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240, firstLineIndent: 420 }))
         })
 
         if (isWritingGroupType(detail.groupType)) {
@@ -839,7 +841,7 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
       body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
 
       passageLines.forEach((line) => {
-        body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240 }))
+        body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240, firstLineIndent: 420 }))
       })
 
       if (isWritingGroupType(detail.groupType)) {

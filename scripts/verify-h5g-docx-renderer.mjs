@@ -322,6 +322,8 @@ function assertExamRenderByteStable() {
   assert('exam render emits compact 【答案】 marker verbatim', exam.includes('【答案】'))
   assert('exam render emits the page-break run verbatim', exam.includes('<w:p><w:r><w:br w:type="page"/></w:r></w:p>'))
   assert('exam render carries the same sectPr literal (shared docxSectPr, Chunk C)', exam.includes('<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="11906" w:h="16838"/>'))
+  // owner QA 2026-07-08：正文段落须带段首缩进 2 字符（10.5pt 下 = 420 twips，标准 §3）
+  assert('passage paragraphs carry w:firstLine="420" first-line indent (standard §3)', exam.includes('w:firstLine="420"'), 'first-line indent missing')
 
   // exam differs from handout (proves the branch actually routed).
   const handout = renderer.buildDocumentXml({ title: '测试卷', versionType: 'teacher', items: ITEMS, blocks: BLOCKS, questionNumberStart: 21, printStyle: 'handout' })
