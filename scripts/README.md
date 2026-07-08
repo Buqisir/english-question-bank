@@ -136,7 +136,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-export-flow.mjs` | Export flow | no |
 | `verify-paper-export-payload.mjs` | Export payload | no |
 | `verify-exam-export.mjs` | Exam export | no |
-| `verify-print-renderer.mjs` | Print renderer；刀⑤ Chunk B 起含 @page 边距/页脚页码/行距/字体栈 token 化断言 + paperBlankPattern 挖空样式与写作答题区断言 + 真实 paper-2026-i 资产行为级挖空计数与真 PDF 字节冒烟（PA F2，非合成样例） | no |
+| `verify-print-renderer.mjs` | Print renderer；刀⑤ Chunk B 起含 @page 边距/页脚页码/行距/字体栈 token 化断言 + paperBlankPattern 挖空样式与写作答题区断言 + 真实 paper-2026-i 资产行为级挖空计数与真 PDF 字节冒烟（PA F2，非合成样例） | yes |
 | `verify-print-pdf-export-flow.mjs` | Print PDF export flow | no |
 
 ## Concierge and reading-analysis legacy
