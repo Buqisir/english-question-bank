@@ -25,8 +25,11 @@
  * ui-boundary-trim (ADR-0015 UI 收尾, owner 2026-07-07, audit Q2): the
  * per-question answer-compare box (`showCompareBox`) and the topic-label
  * confidence percentage are now owner-only (member 隐藏 AI 内部数据, owner
- * 保留) — `answer-compare-summary` and `verify-list` remain member-visible
- * (C2 decision unchanged).
+ * 保留).
+ *
+ * member-detail-gate (owner 2026-07-08 decision): the `answer-compare-summary`
+ * block and the AI 验证 `verify-list` section are ALSO now owner-only —
+ * this retires the C2-era "member-visible" call for both.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -107,8 +110,9 @@ for (const [label, pattern] of traceFieldClusters) {
   assert(`AI ops trace field retired: ${label}`, !pattern.test(detailView), 'pattern still matched detailView')
 }
 assert(
-  'member-visible verifyResult.totalLatencyMs summary line stays present (C2, not an ops-trace field)',
-  /全量耗时: \{verifyResult\.totalLatencyMs\} ms · 全量调度完成/.test(detailView),
+  'verifyResult.totalLatencyMs summary line stays present, now behind the owner gate (owner 2026-07-08, retires the C2-era member-visible call)',
+  /全量耗时: \{verifyResult\.totalLatencyMs\} ms · 全量调度完成/.test(detailView) &&
+    /isOwnerView && selectedDetail\.groupType !== 'reading' \? \(/.test(detailView),
 )
 
 // Member-visible surfaces (kept, C2/C3) must remain unconditional / present.
@@ -129,12 +133,13 @@ assert(
   /selectedDetail\.topicLabels\?\.length/.test(detailView),
 )
 assert(
-  '答案对比统计 (answerCompareStats) stays present (member-visible, C2)',
-  /answerCompareStats/.test(detailView),
+  '答案对比统计 (answerCompareStats) is now owner-gated (owner 2026-07-08, retires the C2-era member-visible call)',
+  /isOwnerView && answerCompareStats && \(/.test(detailView),
 )
 assert(
-  'AI 答案验证 verify-list stays present (member-visible, C2)',
-  /className="verify-list"/.test(detailView),
+  'AI 答案验证 verify-list is now owner-gated (owner 2026-07-08, retires the C2-era member-visible call)',
+  /isOwnerView && selectedDetail\.groupType !== 'reading' \? \(\s*\n\s*verifyResult \? \(/.test(detailView) &&
+    /className="verify-list"/.test(detailView),
 )
 assert(
   'answer-compare per-question box is owner-gated (ADR-0015 UI 收尾, owner 2026-07-07)',
