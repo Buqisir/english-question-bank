@@ -140,6 +140,11 @@ passages, or private student data to any memory system.
   import UI is retired; the backend analyzers stay alive as library
   functions. Do not add production entry points back to the web
   surface.
+- Paper import (导题): any agent asked to import a paper starts at
+  `docs/import/agent-runbook.md` (blind-run-validated procedure) and
+  obeys `docs/product/nck1-paper-standard.md` (owner-ratified data
+  contract: structure / numbering / scores / answer redline / listening
+  & figures raw-material rules). Do not improvise an import path.
 - Open Design is for visual prototyping only. Production code belongs under `app/`.
 
 ## Project Steering
