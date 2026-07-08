@@ -24,6 +24,9 @@ export function AdminWorkbench({
             <h2>数据维护</h2>
           </div>
         </div>
+        <p className="admin-panel-note">
+          内容生产在后台 Agent 完成，这里只放低频维护工具。
+        </p>
         <div className="admin-action-row">
           <button
             className="ghost-button"

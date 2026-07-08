@@ -128,7 +128,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           if (!detail) {
             setDetailCache((prev) => ({
               ...prev,
-              [groupId]: { status: 'error', error: '题组详情未找到。' },
+              [groupId]: { status: 'error', error: '没找到这个题组，可能已被移除。刷新试试，或换一组。' },
             }))
             return
           }
