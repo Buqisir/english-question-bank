@@ -2,6 +2,7 @@ import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperTe
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import type { PaperSurfaceData } from './adapter/index.ts'
+import { grammarFillBlankPattern } from '../../shared-ui/papersurface/grammarFillBlank.ts'
 import type {
   AiInitialBand,
   LoadBar,
@@ -49,12 +50,17 @@ export function buildGrammarFillPaperView(input: {
   const questions = questionIds.map((qid, order) => {
     const q = asset.content.questions[qid]
     const blank = asset.content.blanks?.[q?.blankId ?? '']
+    const questionNo = String(q?.questionNo ?? '')
+    const rawStem = q?.stem ?? ''
     return {
       id: qid,
       section: GRAMMAR_FILL_SECTION,
       order,
-      questionNo: String(q?.questionNo ?? ''),
-      stem: q?.stem ?? '',
+      questionNo,
+      // Defensive: a grammar-fill stem that is just the bare question
+      // number (matches its own questionNo) duplicates the rendered "56."
+      // label — suppress it instead of showing "56. 56".
+      stem: rawStem.trim() === questionNo && /^\d+$/.test(rawStem.trim()) ? '' : rawStem,
       options: blank?.prompt
         ? [{ label: 'prompt', text: blank.prompt }]
         : [],
@@ -107,11 +113,30 @@ export function buildGrammarFillPaperView(input: {
   }
 }
 
+// Display-only normalization: some stored grammar-fill passages carry the
+// I15 in-passage-editor blank form (`56._____`, `57._____(absorb)`) instead
+// of the `__NN__ (hint)` form `paperBlankPattern` (the rail-mode blank
+// stylist shared with server/print-renderer.mjs) matches. This ONLY feeds
+// the rail/lecture-mode textMap below — I15's clickable in-passage blank
+// path (`blankFocusMode: 'in-passage'`) is built by a separate adapter
+// (grammarFillAnalysisSurfaceAdapter.ts's buildGrammarFillAnalysisSurfaceModel)
+// that never calls this function, so normalizing here cannot break it.
+// Storage is untouched — this only reshapes the string fed to the renderer.
+function normalizeGrammarFillBlanksForRail(text: string): string {
+  grammarFillBlankPattern.lastIndex = 0
+  return text.replace(grammarFillBlankPattern, (full, num: string) => {
+    const hintMatch = full.match(/\(([^)]*)\)\s*$/)
+    return hintMatch ? `__${num}__ (${hintMatch[1]})` : `__${num}__`
+  })
+}
+
 function buildGrammarFillTextMap(asset: PaperAssetV1, group: PaperAssetV1['content']['groups'][string]): PaperTextMap {
   const rawParagraphs = (group.passage?.paragraphs ?? [])
   const paragraphs: PaperTextMap['paragraphs'] = rawParagraphs.length > 0
-    ? segmentPaperText(rawParagraphs.map((p) => p.text).join('\n\n'), { sectionId: GRAMMAR_FILL_SECTION }).paragraphs
-        .map((p) => ({ id: p.id, section: GRAMMAR_FILL_SECTION, sentences: p.sentences }))
+    ? segmentPaperText(
+        normalizeGrammarFillBlanksForRail(rawParagraphs.map((p) => p.text).join('\n\n')),
+        { sectionId: GRAMMAR_FILL_SECTION },
+      ).paragraphs.map((p) => ({ id: p.id, section: GRAMMAR_FILL_SECTION, sentences: p.sentences }))
     : []
   return {
     paperId: asset.paper.paperId,

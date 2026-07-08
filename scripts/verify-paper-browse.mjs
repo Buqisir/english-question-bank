@@ -42,10 +42,31 @@
  * 10. Housekeeping: this script is registered in verify-ci.mjs and marked
  *     `yes` in scripts/README.md (paired, per verify-architecture-
  *     housekeeping.mjs's CI-table / registry-parity guard).
+ * 11-14. paper-browse-polish (owner 实测 4 病根修复), anchored on the REAL
+ *     paper-960d0f8d fixture (the actual asset the owner play-tested):
+ *     11. numeric-stem suppression — a cloze/grammar-fill question whose
+ *         stored stem is just its bare questionNo (e.g. stem "56" for
+ *         questionNo 56) renders as "" instead of duplicating the "56."
+ *         label ("56. 56").
+ *     12. old-form grammar-fill blank normalization — 960d0f8d's stored
+ *         grammar-fill passage uses the I15 in-passage-editor form
+ *         (`56._____`, `57._____(absorb)`); buildGrammarFillPaperView's
+ *         rail-mode textMap normalizes it to the `__NN__ (hint)` form
+ *         `paperBlankPattern` (shared/papersurface/blankPattern.mjs)
+ *         matches, without touching the harness's separate I15 in-passage
+ *         adapter (grammarFillAnalysisSurfaceAdapter.ts).
+ *     13. writing-block dedup — PaperBrowsePage computes a writingSkipIndices
+ *         set (via writingPageModel.mjs's findWritingBlockRange) and does
+ *         not render a writing group's own chrome blocks (part/section
+ *         heading, instruction, answerBox) a second time at the top level.
+ *     14. starter no-double-prefix — buildWritingPageModel does not
+ *         re-prefix a continuation starter that already carries its own
+ *         "Paragraph N:" prefix (960d0f8d's stored continuationStarters).
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { findWritingBlockRange } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -354,6 +375,149 @@ assert(
   'scripts/README.md documents verify-paper-browse.mjs as yes',
   /`verify-paper-browse\.mjs`[^\n]*\|\s*yes\s*\|/.test(readmeSrc),
   'missing or not marked yes in scripts/README.md',
+)
+
+// ─── 11-12. Real paper-960d0f8d fixture: numeric-stem suppression +
+//            old-form grammar-fill blank normalization ───
+
+const { buildClozePaperView } = await import(
+  '../app/src/features/paper-intelligence/clozePaperViewAdapter.ts'
+)
+const { buildGrammarFillPaperView } = await import(
+  '../app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts'
+)
+const { buildWritingPageModel } = await import(
+  '../app/src/features/paper-intelligence/writingPageModel.mjs'
+)
+
+const asset960d0f8d = JSON.parse(
+  read('app/public/paper-assets/paper-960d0f8d/latest/paper-asset.json'),
+)
+
+// 960d0f8d's real stored data has bare-numeric stems ("56" for questionNo
+// 56) — the exact shape that produced the owner-observed "56. 56" bug.
+const rawGrammarFillQ56Stem = asset960d0f8d.content.questions['q-960d0f8d-056']?.stem
+assert(
+  '960d0f8d fixture sanity: stored grammarFill stem is bare numeric "56" (proves the bug had real data to trigger on)',
+  rawGrammarFillQ56Stem === '56',
+  `got: ${JSON.stringify(rawGrammarFillQ56Stem)}`,
+)
+
+const clozeModel960 = buildClozePaperView({
+  asset: asset960d0f8d,
+  groupId: 'group-960d0f8d-cloze',
+})
+assert(
+  '960d0f8d cloze: numeric-only stems are suppressed to "" (no "41. 41" duplicate)',
+  clozeModel960.surfaceData.questions.length > 0 &&
+    clozeModel960.surfaceData.questions.every((q) => q.stem === ''),
+  JSON.stringify(clozeModel960.surfaceData.questions.map((q) => q.stem)),
+)
+
+const grammarFillModel960 = buildGrammarFillPaperView({
+  asset: asset960d0f8d,
+  groupId: 'group-960d0f8d-grammar-fill',
+})
+assert(
+  '960d0f8d grammarFill: numeric-only stems are suppressed to "" (no "56. 56" duplicate)',
+  grammarFillModel960.surfaceData.questions.length > 0 &&
+    grammarFillModel960.surfaceData.questions.every((q) => q.stem === ''),
+  JSON.stringify(grammarFillModel960.surfaceData.questions.map((q) => q.stem)),
+)
+
+const grammarFillParagraphText960 = grammarFillModel960.surfaceData.textMap.paragraphs
+  .flatMap((p) => p.sentences.map((s) => s.text))
+  .join(' ')
+assert(
+  '960d0f8d grammarFill: stored old-form blank "56._____" is gone from the rail-mode textMap',
+  !/\d{1,3}\._{2,}/.test(grammarFillParagraphText960),
+  grammarFillParagraphText960.slice(0, 120),
+)
+assert(
+  '960d0f8d grammarFill: rail-mode textMap now carries __56__ (paperBlankPattern form)',
+  /__56__/.test(grammarFillParagraphText960),
+  grammarFillParagraphText960.slice(0, 120),
+)
+assert(
+  '960d0f8d grammarFill: normalized blank keeps its (hint) — "__57__ (absorb)"',
+  /__57__\s*\(absorb\)/.test(grammarFillParagraphText960),
+  grammarFillParagraphText960.slice(0, 120),
+)
+
+// The harness's clickable I15 in-passage path is built by a *different*
+// adapter (grammarFillAnalysisSurfaceAdapter.ts) that never calls
+// buildGrammarFillPaperView, so normalizing this textMap cannot break it.
+assert(
+  "grammarFillAnalysisSurfaceAdapter.ts (harness's I15 in-passage adapter) does not import buildGrammarFillPaperView — the normalize-for-rail transform is isolated to the rail path",
+  !read('app/src/features/paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts').includes(
+    'buildGrammarFillPaperView',
+  ),
+)
+
+// ─── 13. Real paper-960d0f8d fixture: writing-block dedup ───
+
+const writingGroupBlocks960 = asset960d0f8d.content.blocks
+  .map((b, i) => ({ b, i }))
+  .filter(({ b }) => b.type === 'group' && asset960d0f8d.content.groups[b.groupId]?.groupType === 'writing')
+assert(
+  '960d0f8d fixture has two writing groups (application + continuation) to prove dedup against',
+  writingGroupBlocks960.length === 2,
+  `found ${writingGroupBlocks960.length}`,
+)
+const writingSkip960 = new Set()
+for (const { b } of writingGroupBlocks960) {
+  const group = asset960d0f8d.content.groups[b.groupId]
+  const range = findWritingBlockRange(asset960d0f8d, group)
+  assert(`960d0f8d writing group ${b.groupId}: findWritingBlockRange resolves a range`, Boolean(range))
+  for (let i = range.startIdx; i <= range.endIdx; i += 1) {
+    if (i !== range.groupIdx) writingSkip960.add(i)
+  }
+}
+assert(
+  "PaperBrowsePage.tsx computes a writingSkipIndices set from findWritingBlockRange and skips those indices in the top-level render",
+  /findWritingBlockRange/.test(pageSrc) &&
+    /writingSkipIndices/.test(pageSrc) &&
+    /writingSkipIndices\.has\(index\)/.test(pageSrc),
+  'missing writingSkipIndices wiring in PaperBrowsePage.tsx',
+)
+assert(
+  "960d0f8d fixture: writingSkipIndices covers each writing group's answerBox block (no top-level double-render of the answer box)",
+  writingGroupBlocks960.every(({ b }) => {
+    const idx = asset960d0f8d.content.blocks.findIndex(
+      (bl) => bl.type === 'answerBox' && bl.writingTaskId === asset960d0f8d.content.groups[b.groupId].writingTaskId,
+    )
+    return idx >= 0 && writingSkip960.has(idx)
+  }),
+)
+assert(
+  "960d0f8d fixture: writingSkipIndices never includes a writing group's own block index (still rendered once, via the group card)",
+  writingGroupBlocks960.every(({ i }) => !writingSkip960.has(i)),
+)
+
+// ─── 14. Real paper-960d0f8d fixture: starter no-double-prefix ───
+
+const continuationGroup960 = Object.values(asset960d0f8d.content.groups).find(
+  (g) => g.groupType === 'writing' && asset960d0f8d.content.writingTasks?.[g.writingTaskId]?.taskType === 'continuation',
+)
+const continuationTask960 = asset960d0f8d.content.writingTasks[continuationGroup960.writingTaskId]
+assert(
+  '960d0f8d fixture sanity: stored continuationStarters already carry their own "Paragraph N:" prefix (the exact shape that used to double-prefix)',
+  continuationTask960.continuationStarters.every((s) => /^Paragraph \d+:/.test(s)),
+  JSON.stringify(continuationTask960.continuationStarters),
+)
+const continuationPageModel960 = buildWritingPageModel(asset960d0f8d, continuationGroup960, continuationTask960)
+const continuationBox960 = continuationPageModel960.blocks.find((b) => b.kind === 'answerBox')
+assert(
+  '960d0f8d continuation: answerBox givenTop is NOT double-prefixed ("Paragraph 1: Paragraph 1:")',
+  Boolean(continuationBox960) && continuationBox960.givenTop.every((line) => !/^Paragraph \d+:\s*Paragraph \d+:/.test(line)),
+  JSON.stringify(continuationBox960?.givenTop),
+)
+assert(
+  '960d0f8d continuation: the stale doubled-prefix instruction block (960d0f8d storage bug) is folded into the answer box, not rendered a second time as a standalone instruction',
+  !continuationPageModel960.blocks.some(
+    (b) => b.kind === 'instruction' && /Paragraph \d+:\s*Paragraph \d+:/.test(b.text),
+  ),
+  JSON.stringify(continuationPageModel960.blocks.filter((b) => b.kind === 'instruction').map((b) => b.text)),
 )
 
 if (failed > 0) {

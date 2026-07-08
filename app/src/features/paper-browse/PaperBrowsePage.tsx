@@ -51,6 +51,7 @@ import {
   buildWritingPaperView,
   type WritingPaperViewModel,
 } from '../paper-intelligence/writingPaperViewAdapter.ts'
+import { findWritingBlockRange } from '../paper-intelligence/writingPageModel.mjs'
 import type { PaperAssetV1, PaperContentBlock } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import './paperBrowsePage.css'
@@ -235,6 +236,30 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     focusAppliedRef.current = true
     target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
   }, [focusGroupId, loading, asset])
+
+  // Block indices already consumed by a writing group's own pageModel (part/
+  // section heading, prompt instruction, 注意 instruction, answerBox — the
+  // full run WritingPaperPage renders around the passage) — the top-level
+  // loop below must not render them a second time. The group's own block
+  // index is excluded from the skip set: that one still renders via
+  // renderGroupCard (the card that mounts WritingPaperPage in the first
+  // place).
+  const writingSkipIndices = useMemo(() => {
+    const skip = new Set<number>()
+    if (!asset) return skip
+    for (const block of asset.content.blocks) {
+      if (block.type !== 'group') continue
+      if (groupModels[block.groupId]?.kind !== 'writing') continue
+      const group = asset.content.groups[block.groupId]
+      if (!group) continue
+      const range = findWritingBlockRange(asset, group)
+      if (!range) continue
+      for (let i = range.startIdx; i <= range.endIdx; i += 1) {
+        if (i !== range.groupIdx) skip.add(i)
+      }
+    }
+    return skip
+  }, [asset, groupModels])
 
   const railItems = useMemo(() => {
     if (!asset) return []
@@ -428,7 +453,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           ))}
         </nav>
         <div className="paper-browse-content" ref={scrollerRef}>
-          {asset.content.blocks.map((block, index) => renderBlock(block, index))}
+          {asset.content.blocks.map((block, index) =>
+            writingSkipIndices.has(index) ? null : renderBlock(block, index),
+          )}
         </div>
       </div>
       <button

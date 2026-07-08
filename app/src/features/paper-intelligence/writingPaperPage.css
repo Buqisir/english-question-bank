@@ -13,6 +13,15 @@
    .ps-page card), so headings / prompt / 注意 / answer box all sit on the page —
    not floating on the grey harness background. */
 .pi-writing-page {
+  /* Lock the same 794px A4 width as the reading/cloze/grammar-fill cards
+     (PaperSurface.css's .ps-surface --ps-page-width), centered — otherwise
+     this card stretches to its full-width container while its own nested
+     PaperSurface passage (which already sets --ps-page-width on .ps-surface)
+     stays at 794px, producing a width mismatch. */
+  --ps-page-width: 794px;
+  width: var(--ps-page-width);
+  max-width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -23,6 +32,7 @@
   line-height: var(--ps-line-height);
   padding: var(--ps-page-margin-top) var(--ps-page-margin-x);
   box-shadow: rgba(0, 0, 0, 0.063) 0 1px 0 0, rgba(0, 0, 0, 0.08) 0 12px 32px 0;
+  box-sizing: border-box;
 }
 
 /* The passage's own PaperSurface card blends into the single sheet (display-only
