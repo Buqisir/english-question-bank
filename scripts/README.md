@@ -168,6 +168,5 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-intelligence-interactive-preview.mjs` | Interactive preview |
 | `verify-paper-intelligence-evidence-audit.mjs` | Evidence audit |
 | `verify-paper-surface-interaction-model-doc.mjs` | PaperSurface interaction model doc |
-| `verify-paper-surface-prototype.mjs` | PaperSurface prototype |
 | `verify-paper-surface-textmap-adapter-plan.mjs` | Text-map adapter plan |
 | `verify-paper-surface-tokens.mjs` | Token contract |

@@ -52,12 +52,14 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-ink': paperSurfaceTokens.paperInk,
   '--ps-muted': paperSurfaceTokens.paperMuted,
   '--ps-rule': paperSurfaceTokens.paperRule,
-  '--ps-passage-line-height': paperSurfaceTokens.passageLineHeight,
-  '--ps-question-line-height': paperSurfaceTokens.questionLineHeight,
+  '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
+  '--ps-line-height': paperSurfaceTokens.paperLineHeight,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
   '--ps-paper-blank-width': paperSurfaceTokens.paperBlankWidth,
+  '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
+  '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
 
 const paperBlankPattern = /(?:_{2,}|[\u0020\u00A0]{2,})\s*(\d{1,3})\s*(?:_{2,}|[\u0020\u00A0]{2,})/g

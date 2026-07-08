@@ -1,7 +1,13 @@
 /* Writing section A4 page chrome — I6-writing-render.
    Normalizes toward docs/product/exam-paper-format-reference page-11/12:
    part/section headings, prompt/material, 注意, bordered answer box. Visual
-   tone is intentionally quiet and paper-like, not a diagnostic panel. */
+   tone is intentionally quiet and paper-like, not a diagnostic panel.
+
+   刀⑤ render-fidelity Chunk A: typography values consume the shared
+   `shared/papersurface/tokens.mjs` primitives via CSS custom properties
+   injected by WritingPaperPage.tsx (`--ps-*`, same mechanism as
+   PaperSurface.tsx) — no value here is hardcoded independently of the
+   token source. See docs/product/exam-paper-format-standards.md v2. */
 
 /* The whole writing section is ONE white A4 sheet (matching the PaperSurface
    .ps-page card), so headings / prompt / 注意 / answer box all sit on the page —
@@ -12,10 +18,10 @@
   gap: 0.75rem;
   background: #fff;
   color: #111;
-  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
-  font-size: 16px;
-  line-height: 1.6;
-  padding: 56px;
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+  padding: var(--ps-page-margin-top) var(--ps-page-margin-x);
   box-shadow: rgba(0, 0, 0, 0.063) 0 1px 0 0, rgba(0, 0, 0, 0.08) 0 12px 32px 0;
 }
 
@@ -37,15 +43,20 @@
   box-shadow: none;
 }
 
+/* 部标题 (第X部分…): standard §2/§4 — 中黑加粗, 10.5pt (不放大, same size as
+   body). Uses the heading (Hei) stack, not the body serif stack. */
 .pi-writing-part {
   margin: 0;
-  font-size: 1.05rem;
+  font-family: var(--ps-font-stack-heading);
+  font-size: var(--ps-font-size);
   font-weight: 700;
 }
 
+/* 节标题 (第X节…): standard §4 — 书宋, 10.5pt (不放大). Keeps the body serif
+   stack (inherited from .pi-writing-page). */
 .pi-writing-section {
   margin: 0.25rem 0 0;
-  font-size: 1rem;
+  font-size: var(--ps-font-size);
   font-weight: 700;
 }
 
@@ -59,12 +70,15 @@
   margin: 0;
 }
 
-/* Bordered answer box, sized to mimic the gold reference (page-11/12): a
-   generous write-here region. An empty box (应用文) stays a tall blank; a box
-   with given starters (读后续写) grows so each starter has writing room below. */
+/* Bordered answer box, sized per standard §8: 读后续写 ≈145×57mm — this base
+   class also covers a non-signature 应用文 box (no dedicated taskType class
+   exists at this DOM layer; --letter below covers the signature 应用文 case
+   precisely). 57mm @ 794px/210mm (≈3.781px/mm) ≈216px. An empty box (应用文)
+   stays a tall blank; a box with given starters (读后续写) grows so each
+   starter has writing room below. */
 .pi-writing-answer-box {
   border: 1px solid #1a1a1a;
-  min-height: 12rem;
+  min-height: 216px;
   padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -86,11 +100,14 @@
   min-height: 0;
 }
 
-/* Letter shape (has a signature): keep the salutation + opening lines TIGHT at
+/* Letter shape (has a signature — always 应用文, per WritingPaperPage.tsx: the
+   --letter modifier is applied only when givenBottom is non-empty, and
+   continuation never routes a givenBottom). Sized per standard §8: 应用文
+   ≈144×65mm ≈246px @ 794px/210mm. Keep the salutation + opening lines TIGHT at
    the top like a real letter, push the signature to the bottom, and let the box
    height itself be the writing space between them. */
 .pi-writing-answer-box--letter {
-  min-height: 22rem;
+  min-height: 246px;
 }
 
 .pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
