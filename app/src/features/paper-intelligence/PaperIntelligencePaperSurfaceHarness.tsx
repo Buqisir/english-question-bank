@@ -331,12 +331,12 @@ export function PaperIntelligencePaperSurfaceHarness({
             resolvedAssetBase = `/paper-assets/${paperId}`
             assetRes = await fetch(`${resolvedAssetBase}/paper-asset.json`)
           }
-          if (!assetRes.ok) throw new Error(`未找到 Paper Asset：${paperId}`)
+          if (!assetRes.ok) throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
 
           let asset = (await assetRes.json()) as PaperAssetV1
           let group = asset.content.groups[initialGroupId]
           if (!group) {
-            throw new Error(`未找到题组：${initialGroupId}`)
+            throw new Error(`没找到这个题组（${initialGroupId}），可能已被移除。回到找题页重新打开吧。`)
           }
           if (!cancelled) {
             setShellTitle([asset.paper.title, group.title].filter(Boolean).join(' · ') || null)
@@ -496,7 +496,7 @@ export function PaperIntelligencePaperSurfaceHarness({
               asset = (await legacyAssetRes.json()) as PaperAssetV1
               group = asset.content.groups[initialGroupId]
               if (!group) {
-                throw new Error(`未找到题组：${initialGroupId}`)
+                throw new Error(`没找到这个题组（${initialGroupId}），可能已被移除。回到找题页重新打开吧。`)
               }
               analysisFile =
                 group.groupType === 'sevenChoices'
@@ -626,7 +626,7 @@ export function PaperIntelligencePaperSurfaceHarness({
         setLoading(false)
       } catch (e) {
         if (cancelled) return
-        const msg = e instanceof Error ? e.message : `未找到 Paper Intelligence 报告：${paperId}`
+        const msg = e instanceof Error ? e.message : `没找到这份报告（${paperId}），可能已被删除。回到找题页重新打开吧。`
         setError(msg)
         setLoading(false)
       }
@@ -1273,8 +1273,8 @@ export function PaperIntelligencePaperSurfaceHarness({
       <div className="pi-ps-harness">
         <AppTopbar {...shellNav} pageTitle={pageTitle} onBack={onBackToWorkbench} />
         <div className="pi-ps-harness-error">
-          <h2>未找到 Paper Intelligence 报告</h2>
-          <p>{error || '报告数据为空。'}</p>
+          <h2>没找到这份卷面</h2>
+          <p>{error || '报告数据为空，回到找题页重新打开吧。'}</p>
         </div>
       </div>
     )

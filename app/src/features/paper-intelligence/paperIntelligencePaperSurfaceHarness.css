@@ -411,7 +411,7 @@
   overflow: hidden;
   border: 1px solid rgba(30, 30, 28, 0.14);
   border-radius: 6px;
-  background: rgba(255, 252, 247, 0.62);
+  background: rgba(255, 255, 255, 0.62);
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 
@@ -845,7 +845,7 @@ button.pi-ps-analysis-distractor--selected {
   width: 160px;
   background: var(--pi-ps-insight-rail-bg);
   border-right-color: var(--pi-ps-insight-hairline);
-  box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.04);
 }
 
 /* State 3: active detail open — viewport-clamped structure detail
@@ -871,7 +871,7 @@ button.pi-ps-analysis-distractor--selected {
     width: clamp(200px, calc(100vw - 1230px), 300px);
     background: var(--pi-ps-insight-rail-bg);
     border-right-color: var(--pi-ps-insight-hairline);
-    box-shadow: 0 1px 2px rgba(47, 41, 35, 0.04);
+    box-shadow: 0 1px 2px rgba(30, 30, 28, 0.04);
   }
 }
 
@@ -902,13 +902,13 @@ button.pi-ps-analysis-distractor--selected {
   .pi-ps-insight-rail[data-rail-locked='true'] {
     width: 200px;
     background: var(--pi-ps-insight-rail-bg);
-    box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
+    box-shadow: 2px 0 8px rgba(30, 30, 28, 0.08);
   }
 
   .pi-ps-insight-rail[data-rail-detail-open='true'] {
     width: 260px;
     background: var(--pi-ps-insight-rail-bg);
-    box-shadow: 2px 0 8px rgba(47, 41, 35, 0.08);
+    box-shadow: 2px 0 8px rgba(30, 30, 28, 0.08);
   }
 }
 
@@ -1419,14 +1419,14 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-structure-btn--active {
-  background: rgba(47, 41, 35, 0.1);
-  border-color: rgba(47, 41, 35, 0.35);
+  background: rgba(30, 30, 28, 0.1);
+  border-color: rgba(30, 30, 28, 0.35);
   color: #1f2937;
   font-weight: 600;
 }
 
 .pi-ps-structure-btn--active:hover {
-  background: rgba(47, 41, 35, 0.15);
+  background: rgba(30, 30, 28, 0.15);
 }
 
 /* ─── C5b: Inline clickable structure rows ─── */
@@ -1491,13 +1491,13 @@ button.pi-ps-analysis-distractor--selected {
   line-height: 1.4;
   text-align: center;
   color: var(--pi-ps-insight-muted-ink, #6a6a64);
-  background: rgba(47, 41, 35, 0.06);
+  background: rgba(30, 30, 28, 0.06);
   border-radius: 3px;
 }
 
 .pi-ps-structure-row--active .pi-ps-structure-row-badge {
   color: var(--pi-ps-insight-ink, #1e1e1c);
-  background: rgba(47, 41, 35, 0.08);
+  background: rgba(30, 30, 28, 0.08);
 }
 
 .pi-ps-structure-row-text {
@@ -1640,7 +1640,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-jump-chip[data-active='true'] {
-  background: var(--seven-strong, rgba(47, 41, 35, 0.12));
+  background: var(--seven-strong, rgba(30, 30, 28, 0.12));
   color: #221b15;
   box-shadow: inset 0 0 0 1px var(--seven-border, rgba(122, 106, 88, 0.34));
 }
@@ -1732,12 +1732,12 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 12px;
   font-weight: 700;
   color: #5f554a;
-  background: rgba(47, 41, 35, 0.07);
+  background: rgba(30, 30, 28, 0.07);
 }
 
 .pi-seven-option-card--open .pi-seven-option-label {
   color: #221b15;
-  background: var(--seven-strong, rgba(47, 41, 35, 0.12));
+  background: var(--seven-strong, rgba(30, 30, 28, 0.12));
 }
 
 .pi-seven-option-text {
@@ -1750,7 +1750,7 @@ button.pi-ps-analysis-distractor--selected {
   align-self: start;
   padding: 2px 7px;
   border-radius: 999px;
-  background: var(--seven-strong, rgba(47, 41, 35, 0.12));
+  background: var(--seven-strong, rgba(30, 30, 28, 0.12));
   color: #221b15;
   font-size: 12px;
   font-weight: 700;

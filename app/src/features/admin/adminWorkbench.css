@@ -12,6 +12,13 @@
   padding: 18px 20px;
 }
 
+.admin-panel-note {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .admin-action-row {
   display: flex;
   flex-wrap: wrap;

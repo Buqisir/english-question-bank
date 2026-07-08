@@ -406,7 +406,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
         <div className="draft-workbench-shell">
-          <p className="draft-error">{loadError || '草稿卷未找到。'}</p>
+          <p className="draft-error">{loadError || '没找到这份草稿卷，可能已被删除。回到找题页重新组一份吧。'}</p>
         </div>
       </>
     )

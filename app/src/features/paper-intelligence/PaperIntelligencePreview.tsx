@@ -213,7 +213,7 @@ export function PaperIntelligencePreview({
         setLoading(false)
       } catch {
         if (cancelled) return
-        setError(`未找到 Paper Intelligence 报告：${paperId}`)
+        setError(`没找到这份报告（${paperId}），可能已被删除。回到找题页重新打开吧。`)
         setLoading(false)
       }
     }
@@ -309,8 +309,8 @@ export function PaperIntelligencePreview({
           onBackToWorkbench={onBackToWorkbench}
         />
         <div className="pi-error">
-          <h2>未找到 Paper Intelligence 报告</h2>
-          <p>{error || '报告数据为空。'}</p>
+          <h2>没找到这份报告</h2>
+          <p>{error || '报告数据为空，回到找题页重新打开吧。'}</p>
         </div>
       </div>
     )
