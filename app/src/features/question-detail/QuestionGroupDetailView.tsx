@@ -1,26 +1,31 @@
 /**
- * QuestionGroupDetailView — detail-consume-only cut.
+ * QuestionGroupDetailView — decision quick-look card.
  *
  * Retired the "网站现场生产" surface (跑 AI 解析/保存、主题划分/绑定、难度
- * 标定、AI ops-trace) per ADR-0015. This is now a read-only 看题页: passage,
- * questions, already-saved parse/verify results, already-bound topic labels,
- * 加入草稿卷, and (owner-only) 编辑/删除 as low-frequency correction tools.
+ * 标定、AI ops-trace) per ADR-0015. detail-slim (owner 2026-07-08) then
+ * retired the remaining C2-era production scaffolding — the per-question
+ * answer-compare mini-box, its summary stats, and the AI answer-verification
+ * results section — because production verification now runs in the import
+ * pipeline, not on this page. This is now a pure read-only 决策速览卡:
+ * passage, questions, already-saved parse results (layered behind
+ * AnalysisDisclosure), bound topic labels, 加入草稿卷, whole-paper /
+ * per-group analysis entry points, and (owner-only) 编辑/删除 as
+ * low-frequency correction tools.
  *
  * Pure props-driven, zero internal useState — App.tsx keeps the READ-only
  * state (populated by `openDetail`'s回填 + the AI Enhancement panel's
  * sync-into-open-detail branch) and passes it down.
  *
  * Owner gating: when `isOwnerView` is false (member), the hidden — not
- * disabled — surfaces are: 编辑/删除, the per-question answer-compare box
- * (`showCompareBox`), the topic-label confidence percentage
- * (ui-boundary-trim, owner 2026-07-07 / audit Q2), the answer-compare stats
- * summary (`answerCompareStats`), and the AI 验证 verify-list section
- * (owner 2026-07-08 decision — retires the C2-era "member-visible" call).
- * Everything else (passage, questions, saved parse displays, bound topic
- * labels + reason, 加入草稿卷) stays visible to both member and owner.
+ * disabled — surfaces are: 编辑/删除 and the topic-label confidence
+ * percentage (ui-boundary-trim, owner 2026-07-07 / audit Q2). Everything
+ * else (passage, questions, saved parse displays, bound topic labels +
+ * reason, 加入草稿卷, the whole-paper preview entry, and the per-group
+ * analysis entry) stays visible to both member and owner.
  */
 import {
   ArrowLeft,
+  BookOpen,
   Eye,
   Pencil,
   Plus,
@@ -35,10 +40,10 @@ import type {
   SevenChoicesParseQuestionGroupResult,
   VerifyQuestionGroupResult,
 } from '../../domain/questionBank'
-import { sourceTypeLabel, verdictLabel } from '../../domain/questionBank'
+import { sourceTypeLabel } from '../../domain/questionBank'
 import { labelOf } from '../../workbench/detail/readingProfileLabels'
 import { AnalysisDisclosure } from './AnalysisDisclosure'
-import { compactGroupMeta, getParseSavedAt } from './detailHelpers'
+import { compactGroupMeta } from './detailHelpers'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
@@ -152,22 +157,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     })
     return map
   })()
-  const verifyByQuestionNo = (() => {
-    const map = new Map<string, VerifyQuestionGroupResult['results'][number]>()
-    verifyResult?.results.forEach((result) => {
-      map.set(String(result.questionNo).trim(), result)
-    })
-    return map
-  })()
-  const answerCompareStats = (() => {
-    if (!verifyResult?.results.length) return null
-    const comparedResults = verifyResult.results.filter((result) => result.verdict !== 'skipped')
-    return {
-      correct: comparedResults.filter((result) => result.verdict === 'correct').length,
-      incorrect: comparedResults.filter((result) => result.verdict !== 'correct').length,
-      total: comparedResults.length,
-    }
-  })()
 
   return (
     <div className="detail-view">
@@ -218,6 +207,18 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   看整卷
                 </button>
               )}
+              {selectedDetail.hasPaperSurfaceAnalysis &&
+                selectedDetail.paperSurfaceHref &&
+                selectedDetail.paperSurfaceLabel && (
+                <button
+                  className="detail-button"
+                  type="button"
+                  onClick={() => onOpenPaperBrowse(selectedDetail)}
+                >
+                  <BookOpen size={16} />
+                  {selectedDetail.paperSurfaceLabel}
+                </button>
+              )}
               <button
                 className="add-button"
                 type="button"
@@ -261,20 +262,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             </div>
             <div className="instruction-summary">
               <p className="detail-copy">{selectedDetail.instruction || '暂无题组说明。'}</p>
-              {isOwnerView && answerCompareStats && (
-                <div className="answer-compare-summary" aria-label="答案对比统计">
-                  <span>答案对比</span>
-                  <div>
-                    <strong>{answerCompareStats.correct}</strong>
-                    <em>正确</em>
-                  </div>
-                  <div>
-                    <strong>{answerCompareStats.incorrect}</strong>
-                    <em>不正确</em>
-                  </div>
-                  <small>共 {answerCompareStats.total} 题</small>
-                </div>
-              )}
             </div>
             <div className="tag-row">
               {selectedDetail.tags.map((tag) => (
@@ -301,9 +288,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                       <span>{topicLabel.label}</span>
                       {topicLabel.reason ? <small>{topicLabel.reason}</small> : null}
                     </div>
-                    {isOwnerView && topicLabel.confidence !== undefined && topicLabel.confidence > 0 ? (
-                      <em>{Math.round(topicLabel.confidence * 100)}%</em>
-                    ) : null}
                   </div>
                 ))}
               </div>
@@ -433,7 +417,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           <section className="detail-section" aria-label="小题列表">
             <div className="detail-section-title">
               <span>Questions</span>
-              <h3>小题与答案对比</h3>
+              <h3>小题与答案</h3>
             </div>
 
             <div className="question-list">
@@ -443,50 +427,10 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 const clozeParseItem = clozeParseByQuestionNo.get(questionNo)
                 const sevenChoicesParseItem = sevenChoicesParseByQuestionNo.get(questionNo)
                 const grammarParseItem = grammarParseByQuestionNo.get(questionNo)
-                const verifyItem = verifyByQuestionNo.get(questionNo)
                 const showAi = selectedDetail.groupType === 'reading'
                 const showClozeAi = selectedDetail.groupType === 'cloze'
                 const showSevenChoicesAi = selectedDetail.groupType === 'seven_choices'
                 const showGrammarAi = selectedDetail.groupType === 'grammar_cloze'
-                const savedParseAt = getParseSavedAt(
-                  selectedDetail.groupType,
-                  readingParseResult,
-                  clozeParseResult,
-                  sevenChoicesParseResult,
-                  grammarParseResult,
-                )
-                const hasSavedParse = Boolean(savedParseAt)
-                const hasSavedParseWithoutVerify = hasSavedParse && !verifyItem && verifyStatus !== 'loading'
-                const showCompareBox = isOwnerView && (Boolean(verifyItem) || verifyStatus === 'loading' || !hasSavedParse || hasSavedParseWithoutVerify)
-                const compareStatus =
-                  verifyItem?.verdict ||
-                  (verifyStatus === 'loading'
-                    ? 'pending'
-                    : hasSavedParseWithoutVerify
-                      ? 'uncertain'
-                      : question.answer
-                        ? 'pending'
-                        : 'skipped')
-                const compareLabel = verifyItem
-                  ? verifyItem.verdict === 'correct'
-                    ? '录入答案正确'
-                    : verdictLabel[verifyItem.verdict]
-                  : verifyStatus === 'loading'
-                    ? '对比中'
-                    : hasSavedParseWithoutVerify
-                      ? '状态未保存'
-                    : question.answer
-                      ? '待对比'
-                      : '缺答案'
-                const compareReason = verifyItem
-                  ? verifyItem.reason || '未返回对比说明。'
-                  : verifyStatus === 'loading'
-                    ? '正在调用 AI 对比当前答案。'
-                    : hasSavedParseWithoutVerify
-                      ? '这份 AI 解析已保存，但旧记录里没有保存对比状态；重新运行 AI解析并保存后会保留原状态。'
-                    : question.answer
-                        ? '点击 AI解析后显示校验结论。'
-                      : '当前小题还没有答案，暂不能对比。'
 
                 return (
                   <article className="question-item" id={`question-${question.id}`} key={question.id}>
@@ -506,18 +450,8 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                         ))}
                       </div>
                     )}
-                    <div className={`answer-grid${showCompareBox ? '' : ' answer-grid-single'}`}>
-                      <div className="answer-box">
-                        <p>答案：{question.answer || '待补'}</p>
-                      </div>
-                      {showCompareBox && (
-                        <div
-                          className={`answer-box answer-compare-box answer-compare-compact ${compareStatus}`}
-                          title={compareReason}
-                        >
-                          <span className={`verify-badge ${compareStatus}`}>{compareLabel}</span>
-                        </div>
-                      )}
+                    <div className="answer-box">
+                      <p>答案：{question.answer || '待补'}</p>
                     </div>
 
                     {showAi && readingParseItem && (
@@ -699,43 +633,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               })}
             </div>
           </section>
-
-          {isOwnerView && selectedDetail.groupType !== 'reading' ? (
-            verifyResult ? (
-              <section className="detail-section" aria-label="AI 验证结果">
-                <div className="detail-section-title">
-                  <span>AI Verification</span>
-                  <h3>AI 答案验证</h3>
-                </div>
-                <p className="detail-message" style={{ marginBottom: 12 }}>
-                    {verifyResult.verifiedCount} 题已验证，{verifyResult.results.filter((r) => r.verdict === 'correct').length} 题正确
-                  {verifyStatus === 'loading' && ' · 验证中...'}
-                </p>
-                {verifyResult.allApiCalled !== undefined && verifyResult.totalLatencyMs !== undefined && (
-                  <p className="detail-message" style={{ marginBottom: 12 }}>
-                    全量耗时: {verifyResult.totalLatencyMs} ms · 全量调度完成
-                  </p>
-                )}
-                {verifyStatus === 'error' && <p className="form-error">{verifyError}</p>}
-                <div className="verify-list">
-                  {verifyResult.results.map((r) => {
-                    return (
-                      <div className={`verify-item ${r.verdict}`} key={r.questionNo}>
-                        <div className="verify-item-head">
-                          <strong>第 {r.questionNo} 题</strong>
-                          <span className={`verify-badge ${r.verdict}`}>
-                            {verdictLabel[r.verdict]}
-                          </span>
-                        </div>
-                        <p>{r.reason}</p>
-                        {r.correctAnswer && <p className="verify-correct">建议答案：{r.correctAnswer}</p>}
-                      </div>
-                    )
-                  })}
-                </div>
-              </section>
-            ) : null
-          ) : null}
 
           {selectedDetail.groupType === 'grammar_cloze' && (grammarParseResult || grammarParseStatus === 'error') && (
             <section className="detail-section" aria-label="AI 语法填空解析">

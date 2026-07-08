@@ -22,14 +22,14 @@
  *      ConciergePaperRow x1) plus App.tsx's instantiation — unaffected by
  *      this cut, kept green.
  *
- * ui-boundary-trim (ADR-0015 UI 收尾, owner 2026-07-07, audit Q2): the
- * per-question answer-compare box (`showCompareBox`) and the topic-label
- * confidence percentage are now owner-only (member 隐藏 AI 内部数据, owner
- * 保留).
- *
- * member-detail-gate (owner 2026-07-08 decision): the `answer-compare-summary`
- * block and the AI 验证 `verify-list` section are ALSO now owner-only —
- * this retires the C2-era "member-visible" call for both.
+ * detail-slim (owner 2026-07-08, retires the remaining C2-era production
+ * scaffolding per ADR-0015): the per-question answer-compare box
+ * (`showCompareBox`), the `answer-compare-summary` stats block, the AI 验证
+ * `verify-list` section, and the topic-label confidence percentage are no
+ * longer owner-gated — they are DELETED entirely (production verification
+ * now runs in the import pipeline, not on this page). This script's
+ * assertions for those four surfaces are REVERSED again: they now assert
+ * ABSENCE (not "owner-gated presence") to guard against regression.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -110,9 +110,9 @@ for (const [label, pattern] of traceFieldClusters) {
   assert(`AI ops trace field retired: ${label}`, !pattern.test(detailView), 'pattern still matched detailView')
 }
 assert(
-  'verifyResult.totalLatencyMs summary line stays present, now behind the owner gate (owner 2026-07-08, retires the C2-era member-visible call)',
-  /全量耗时: \{verifyResult\.totalLatencyMs\} ms · 全量调度完成/.test(detailView) &&
-    /isOwnerView && selectedDetail\.groupType !== 'reading' \? \(/.test(detailView),
+  'AI 验证结果 section (verifyResult.totalLatencyMs / verifyResult.verifiedCount summary) is gone (detail-slim, owner 2026-07-08)',
+  !/全量耗时: \{verifyResult\.totalLatencyMs\} ms · 全量调度完成/.test(detailView) &&
+    !/AI 答案验证/.test(detailView),
 )
 
 // Member-visible surfaces (kept, C2/C3) must remain unconditional / present.
@@ -132,30 +132,42 @@ assert(
   '已绑定话题标签展示 stays unconditional (member-visible, C2)',
   /selectedDetail\.topicLabels\?\.length/.test(detailView),
 )
+// detail-slim (owner 2026-07-08): these four production-scaffolding
+// surfaces are fully DELETED (not just owner-gated) — absence guards
+// prevent regression back into a "gate it again" half-measure.
 assert(
-  '答案对比统计 (answerCompareStats) is now owner-gated (owner 2026-07-08, retires the C2-era member-visible call)',
-  /isOwnerView && answerCompareStats && \(/.test(detailView),
+  '答案对比统计 (answerCompareStats) is gone — no dangling computed var or summary block',
+  !/answerCompareStats/.test(detailView),
 )
 assert(
-  'AI 答案验证 verify-list is now owner-gated (owner 2026-07-08, retires the C2-era member-visible call)',
-  /isOwnerView && selectedDetail\.groupType !== 'reading' \? \(\s*\n\s*verifyResult \? \(/.test(detailView) &&
-    /className="verify-list"/.test(detailView),
+  'AI 答案验证 verify-list section is gone (no verify-list class, no verify-item rendering)',
+  !/verify-list/.test(detailView) && !/verify-item/.test(detailView),
 )
 assert(
-  'answer-compare per-question box is owner-gated (ADR-0015 UI 收尾, owner 2026-07-07)',
-  /const showCompareBox = isOwnerView && \(/.test(detailView),
+  'per-question answer-compare box is gone (no showCompareBox, no 待对比/状态未保存 labels)',
+  !/showCompareBox/.test(detailView) && !/待对比/.test(detailView) && !/状态未保存/.test(detailView),
 )
 assert(
-  'topic-label confidence percentage (<em>%) is owner-gated (ADR-0015 UI 收尾, owner 2026-07-07)',
-  /isOwnerView && topicLabel\.confidence !== undefined/.test(detailView),
+  'topic-label confidence percentage is gone (labels themselves still render, just no %)',
+  !/topicLabel\.confidence/.test(detailView) &&
+    /selectedDetail\.topicLabels\?\.length/.test(detailView),
+)
+assert(
+  '看解析 entry (paperSurfaceLabel-driven) is present, gated on hasPaperSurfaceAnalysis + paperSurfaceHref + paperSurfaceLabel (detail-slim add)',
+  /selectedDetail\.hasPaperSurfaceAnalysis[\s\S]{0,80}selectedDetail\.paperSurfaceHref[\s\S]{0,80}selectedDetail\.paperSurfaceLabel/.test(detailView) &&
+    /\{selectedDetail\.paperSurfaceLabel\}/.test(detailView),
 )
 
 // ------------------------------------------------------------------ 2. detailHelpers + App.tsx extraction
 
 const detailHelpers = read('app/src/features/question-detail/detailHelpers.ts')
-for (const fn of ['getParseSavedAt', 'compactGroupMeta', 'formatSavedAt']) {
+for (const fn of ['compactGroupMeta', 'formatSavedAt']) {
   assert(`detailHelpers.ts defines ${fn} (single definition)`, new RegExp(`export function ${fn}\\(`).test(detailHelpers))
 }
+assert(
+  'detailHelpers.ts no longer defines getParseSavedAt (detail-slim: lost its last caller when the per-question compare box was deleted)',
+  !/export function getParseSavedAt\(/.test(detailHelpers),
+)
 
 const appTsx = read('app/src/App.tsx')
 assert(
