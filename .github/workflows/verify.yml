@@ -38,3 +38,38 @@ jobs:
       - name: Run app build and core verify scripts
         run: pnpm run verify:all
         working-directory: app
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+
+      - name: Install app dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: app
+
+      - name: Install server dependencies
+        run: npm ci
+        working-directory: server
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+        working-directory: app
+
+      - name: Run golden path E2E smoke
+        run: node scripts/smoke-golden-path.mjs
