@@ -35,8 +35,13 @@ function requireUserId(userId) {
   return userId
 }
 
+// Perf cut (docs/cuts/add-to-draft-feel/plan.md): getPrintReadyByGroupId is
+// the batch counterpart of isGroupPrintReady used by getDraftPaperItems below
+// so a draft with N items does one paper-asset scan instead of N. Optional —
+// callers/tests that never exercise getDraftPaperItems may omit it.
 export function createDraftPaperStore({
   exportDir,
+  getPrintReadyByGroupId,
   getQuestionGroupDetail,
   groupTypeLabels,
   isGroupPrintReady,
@@ -282,6 +287,14 @@ export function createDraftPaperStore({
   // with groupMissing: true and a null questionGroup, instead of crashing. This is the
   // single point where orphaned items are detected; print/export filtering downstream
   // (buildDraftPaperExportInput / buildDraftPaperBlocks) relies on this flag.
+  // Perf cut (docs/cuts/add-to-draft-feel/plan.md): this used to call
+  // selectQuestionGroupCards(...WHERE id = ?...) + isGroupPrintReady(...) once
+  // PER ROW — each call re-scans the full paper-asset directory (34 dirs,
+  // ~11MB JSON) from scratch, so an N-item draft did 2N full scans. Batched to
+  // one selectQuestionGroupCards(...WHERE id IN (...)...) call + one
+  // getPrintReadyByGroupId call for the whole draft (2 scans total, regardless
+  // of N). Per-row judgment semantics are unchanged — only the fetch shape
+  // changed from N+1 to batch.
   function getDraftPaperItems({ userDb, bankDb }, draftPaperId) {
     const rows = userDb
       .prepare(
@@ -294,12 +307,23 @@ export function createDraftPaperStore({
       )
       .all(draftPaperId)
 
+    if (rows.length === 0) return []
+
+    const groupIds = Array.from(new Set(rows.map((row) => row.group_id)))
+    const placeholders = groupIds.map(() => '?').join(', ')
+    const cardByGroupId = new Map(
+      selectQuestionGroupCards(bankDb, `WHERE id IN (${placeholders})`, groupIds).map((card) => [card.id, card]),
+    )
+    const printReadyByGroupId = getPrintReadyByGroupId
+      ? getPrintReadyByGroupId(bankDb, groupIds)
+      : new Map(groupIds.map((groupId) => [groupId, isGroupPrintReady(bankDb, groupId)]))
+
     return rows.map((row) => {
-      const questionGroup = selectQuestionGroupCards(bankDb, 'WHERE id = ?', [row.group_id])[0] || null
+      const questionGroup = cardByGroupId.get(row.group_id) || null
       const groupMissing = !questionGroup
       const printReady = groupMissing
         ? { ok: false, reason: '题组不存在' }
-        : isGroupPrintReady(bankDb, row.group_id)
+        : printReadyByGroupId.get(row.group_id) || { ok: false, reason: '题组不存在' }
       return {
         id: row.id,
         draftPaperId: row.draft_paper_id,

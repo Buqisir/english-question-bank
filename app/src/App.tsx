@@ -403,6 +403,18 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // QuestionGroupDetailView (classic-retire-2-detail-view, PA MF-2) — recomputed
   // there from the same parse/verify results instead of being passed as props.
 
+  // Patch draftPaperButtonState/currentDraftPaperId in place on both the list
+  // (questionGroups) and the open detail view (selectedDetail), if it happens
+  // to be one of the affected groups. This is the only surface the
+  // add-to-draft optimistic-feedback cut is allowed to touch — no other
+  // QuestionGroupCard field is ever patched this way.
+  function patchDraftButtonState(patchesByGroupId: Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'>>) {
+    setQuestionGroups((groups) =>
+      groups.map((group) => (patchesByGroupId.has(group.id) ? { ...group, ...patchesByGroupId.get(group.id) } : group)),
+    )
+    setSelectedDetail((detail) => (detail && patchesByGroupId.has(detail.id) ? { ...detail, ...patchesByGroupId.get(detail.id) } : detail))
+  }
+
   async function addGroupsToBasket(groups: QuestionGroupCard[]) {
     const addableGroups = groups.filter((group) => group.draftPaperButtonState === 'add' && group.canAddToDraftPaper)
     if (addableGroups.length === 0) {
@@ -417,14 +429,57 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       }
       return
     }
-    try {
-      for (const group of addableGroups) {
-        await addGroupToCurrentDraftPaperRequest(group.id)
+
+    // Optimistic feedback (docs/cuts/add-to-draft-feel/plan.md): flip each
+    // group's button state immediately instead of waiting on the full
+    // questionGroups refetch (504KB payload — measured 1-2s on the prod
+    // network path, the reported "加题按钮卡顿" root cause). The add request
+    // itself still confirms/rolls back per group below; refreshQuestionGroups
+    // only runs afterward, in the background, to reconcile the rest of the
+    // list — it never blocks the button feedback.
+    const previousStateByGroupId = new Map(
+      addableGroups.map((group) => [group.id, { draftPaperButtonState: group.draftPaperButtonState, currentDraftPaperId: group.currentDraftPaperId }]),
+    )
+    patchDraftButtonState(
+      new Map(
+        addableGroups.map((group) => [group.id, { draftPaperButtonState: 'in_current_draft' as const, currentDraftPaperId }]),
+      ),
+    )
+
+    const outcomes = await Promise.all(
+      addableGroups.map(async (group) => {
+        try {
+          const draftPaper = await addGroupToCurrentDraftPaperRequest(group.id)
+          return { group, ok: true as const, draftPaperId: draftPaper.id }
+        } catch (error) {
+          return { group, ok: false as const, error }
+        }
+      }),
+    )
+
+    const confirmedPatches = new Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'>>()
+    const rollbackPatches = new Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'>>()
+    let firstError: unknown = null
+    for (const outcome of outcomes) {
+      if (outcome.ok) {
+        confirmedPatches.set(outcome.group.id, { draftPaperButtonState: 'in_current_draft', currentDraftPaperId: outcome.draftPaperId })
+      } else {
+        rollbackPatches.set(
+          outcome.group.id,
+          previousStateByGroupId.get(outcome.group.id) || { draftPaperButtonState: 'add', currentDraftPaperId: null },
+        )
+        firstError = firstError ?? outcome.error
       }
-      await refreshQuestionGroups()
-    } catch (error) {
-      window.alert(error instanceof Error ? error.message : String(error))
     }
+    if (confirmedPatches.size) patchDraftButtonState(confirmedPatches)
+    if (rollbackPatches.size) {
+      patchDraftButtonState(rollbackPatches)
+      window.alert(firstError instanceof Error ? firstError.message : String(firstError))
+    }
+
+    // Background reconciliation only (fire-and-forget) — must not block the
+    // button feedback applied above.
+    void refreshQuestionGroups()
   }
 
   function addToBasket(group: QuestionGroupCard) {
