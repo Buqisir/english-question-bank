@@ -1914,3 +1914,29 @@ button.pi-ps-analysis-distractor--selected {
   --seven-mark-signal: rgba(225, 111, 86, 0.34);
   --seven-mark-context: rgba(225, 111, 86, 0.11);
 }
+
+/* ─── Cloze / GrammarFill group intro (collapsible) ───
+   The passage-level intro (overview + affective arc) renders as a native
+   <details>: open in the empty state, collapsed to this one summary line
+   once a blank is focused. Only the summary line is styled here — the
+   full pi-cloze / pi-gf panel styling pass is a separate cut. */
+.pi-cloze-group-overview,
+.pi-gf-group-overview {
+  margin-bottom: 12px;
+}
+
+.pi-cloze-group-overview-summary,
+.pi-gf-group-overview-summary {
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--pi-ps-insight-muted-ink, #8a8177);
+  user-select: none;
+}
+
+.pi-cloze-group-overview-text,
+.pi-cloze-group-arc,
+.pi-gf-group-overview-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 8px 0 0;
+}

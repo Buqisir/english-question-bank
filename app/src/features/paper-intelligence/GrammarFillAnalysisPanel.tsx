@@ -44,9 +44,12 @@ export function GrammarFillAnalysisPanel({
   return (
     <div className="pi-gf-panel">
       {groupView && (
-        <div className="pi-gf-group-overview">
+        // Same intro-collapse behavior as ClozeAnalysisPanel: open in the
+        // empty state, one collapsed line once a blank is focused.
+        <details className="pi-gf-group-overview" open={!hasActiveQuestion}>
+          <summary className="pi-gf-group-overview-summary">文章简介</summary>
           <p className="pi-gf-group-overview-text">{groupView.overview}</p>
-        </div>
+        </details>
       )}
 
       {!hasActiveQuestion && (

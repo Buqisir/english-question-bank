@@ -38,12 +38,16 @@ export function ClozeAnalysisPanel({
   return (
     <div className="pi-cloze-panel">
       {groupView && (
-        <div className="pi-cloze-group-overview">
+        // Passage-level intro: open while no blank is focused (the natural
+        // read-the-arc moment), auto-collapses to one line once a blank is
+        // selected so per-blank reading never re-scrolls through it.
+        <details className="pi-cloze-group-overview" open={!hasActiveQuestion}>
+          <summary className="pi-cloze-group-overview-summary">文章简介</summary>
           <p className="pi-cloze-group-overview-text">{groupView.overview}</p>
           {groupView.affectiveArc && (
             <p className="pi-cloze-group-arc">{groupView.affectiveArc}</p>
           )}
-        </div>
+        </details>
       )}
 
       {!hasActiveQuestion && (
