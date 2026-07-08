@@ -12,11 +12,12 @@
  *
  * Owner gating: when `isOwnerView` is false (member), the hidden — not
  * disabled — surfaces are: 编辑/删除, the per-question answer-compare box
- * (`showCompareBox`), and the topic-label confidence percentage
- * (ui-boundary-trim, owner 2026-07-07 / audit Q2). Everything else
- * (passage, questions, saved parse displays, answer-compare stats summary,
- * AI verification list, bound topic labels + reason, 加入草稿卷) stays
- * visible to both member and owner.
+ * (`showCompareBox`), the topic-label confidence percentage
+ * (ui-boundary-trim, owner 2026-07-07 / audit Q2), the answer-compare stats
+ * summary (`answerCompareStats`), and the AI 验证 verify-list section
+ * (owner 2026-07-08 decision — retires the C2-era "member-visible" call).
+ * Everything else (passage, questions, saved parse displays, bound topic
+ * labels + reason, 加入草稿卷) stays visible to both member and owner.
  */
 import {
   ArrowLeft,
@@ -243,7 +244,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             </div>
             <div className="instruction-summary">
               <p className="detail-copy">{selectedDetail.instruction || '暂无题组说明。'}</p>
-              {answerCompareStats && (
+              {isOwnerView && answerCompareStats && (
                 <div className="answer-compare-summary" aria-label="答案对比统计">
                   <span>答案对比</span>
                   <div>
@@ -666,7 +667,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             </div>
           </section>
 
-          {selectedDetail.groupType !== 'reading' ? (
+          {isOwnerView && selectedDetail.groupType !== 'reading' ? (
             verifyResult ? (
               <section className="detail-section" aria-label="AI 验证结果">
                 <div className="detail-section-title">
