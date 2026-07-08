@@ -25,8 +25,10 @@ Last updated: 2026-07-07（process-slim）
 
 - 2026-07-07：小川接管（owner 全权委托）。process-slim + data-orphan-cleanup
   两刀已收官。**当前主线 = UI 大改（目标：全站协调一致）**：审计完成
-  （27/40，`docs/cuts/ui-coherence/audit.md`，分刀清单 ①-⑥ 待 owner 圈），
-  绿色方向沿用 DESIGN.md 墨绿章程不变。
+  （26/40，`docs/cuts/ui-coherence/audit.md`），owner 圈定 ①-⑥ 按序全做 +
+  两口径（解析面板归队墨绿 / AI 内部数据 member 隐藏 owner 保留）。
+  刀① ui-shell-unify 已合并（PR #269：AppTopbar 归一、返回统一、去 C4）。
+  下一刀 = ② 解析面板归队。绿色方向沿用 DESIGN.md 墨绿章程不变。
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
