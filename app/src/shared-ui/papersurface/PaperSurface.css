@@ -358,6 +358,24 @@
   font-weight: 700;
 }
 
+/* ─── Question options inline (empty-stem policy) ──────────────── */
+/* surface-question-policy cut: mirrors the print/docx export policy
+   (server/print-renderer.mjs's `.options-inline--numbered`) — an empty
+   stem + options collapses onto the SAME line as the question number,
+   real-paper cloze form ("41. A. xx  B. xx  C. xx  D. xx"). */
+.ps-question-options-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.ps-question-options-inline-item {
+  display: inline-flex;
+  gap: 4px;
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+}
+
 /* ─── Reading mode placeholder (B3) ───────────────────────────── */
 
 .ps-reading-placeholder {

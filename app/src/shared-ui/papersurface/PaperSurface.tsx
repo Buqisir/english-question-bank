@@ -638,26 +638,69 @@ function PaperSurfaceQuestionItem({
   //   - Options remain plain <li> rows. They are NOT buttons and they
   //     do NOT carry answer-selection semantics — they are just hit
   //     surface for the question's focus delegate.
+  const trimmedStem = question.stem.trim()
+  const hasOptions = question.options.length > 0
+
+  // Empty-stem policy (surface-question-policy cut) — mirrors the
+  // print/docx export policy (server/print-renderer.mjs's empty-stem
+  // branch): the question number is already inline in the passage
+  // (cloze `__41__` / grammar-fill `56._____`), so a stem that carries
+  // no information collapses instead of rendering a blank/duplicate row.
+  //   - empty stem + no options → nothing to render (grammar-fill: the
+  //     blank already carries the number in the passage).
+  //   - empty stem + options → number + options collapse onto ONE line
+  //     (real-paper cloze form "41. A. xx  B. xx  C. xx  D. xx").
+  // PI analysis surfaces (I9 cloze-analysis-v1 etc.) pass a numeric,
+  // non-empty stem — their adapters never suppress it — so they never
+  // hit either branch here; this policy is a no-op for them.
+  if (!trimmedStem && !hasOptions) {
+    return null
+  }
+
   return (
     <li
       className={isActive ? 'ps-question ps-question--active' : 'ps-question'}
       {...{ [paperSurfaceAnchorAttrs.questionId]: question.id }}
       onClick={() => onQuestionClick(question.id)}
     >
-      <button
-        type="button"
-        className="ps-question-stem-button"
-        aria-pressed={isActive}
-        aria-label={`Focus question ${question.questionNo}`}
-      >
-        <span className="ps-question-no">{question.questionNo}.</span>
-        <span className="ps-question-stem">{question.stem}</span>
-      </button>
-      {question.options.length > 0 && (
-        <PaperSurfaceOptionList
-          questionId={question.id}
-          options={question.options}
-        />
+      {!trimmedStem && hasOptions ? (
+        <button
+          type="button"
+          className="ps-question-stem-button"
+          aria-pressed={isActive}
+          aria-label={`Focus question ${question.questionNo}`}
+        >
+          <span className="ps-question-no">{question.questionNo}.</span>
+          <span className="ps-question-options-inline">
+            {question.options.map((opt) => (
+              <span
+                key={`${question.id}-${opt.label}`}
+                className="ps-question-options-inline-item"
+                {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
+              >
+                <span className="ps-option-label">{opt.label}.</span> {opt.text}
+              </span>
+            ))}
+          </span>
+        </button>
+      ) : (
+        <>
+          <button
+            type="button"
+            className="ps-question-stem-button"
+            aria-pressed={isActive}
+            aria-label={`Focus question ${question.questionNo}`}
+          >
+            <span className="ps-question-no">{question.questionNo}.</span>
+            <span className="ps-question-stem">{question.stem}</span>
+          </button>
+          {hasOptions && (
+            <PaperSurfaceOptionList
+              questionId={question.id}
+              options={question.options}
+            />
+          )}
+        </>
       )}
     </li>
   )

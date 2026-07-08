@@ -165,6 +165,8 @@ const baseRef = (() => {
 const changed = safeGitDiffNames(`${baseRef}...HEAD`)
 
 const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
+  // surface-question-policy 24ec75f: 语法 rail 假 prompt 选项退役（read-time adapter）
+  'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
   'app/src/features/paper-intelligence/adapter/index.ts',
   'app/src/features/paper-intelligence/adapter/piToPaperTextMap.ts',
@@ -182,6 +184,13 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
   // referencing prototype folder + its stale verify script).
   'app/src/features/paper-intelligence/paperSurfacePrototype/PaperSurfacePrototype.tsx',
   'app/src/features/paper-intelligence/paperSurfacePrototype/paperSurfacePrototype.css',
+  // surface-question-policy cut (committed plan.md): application-letter
+  // scaffold extraction (Dear.../Yours... → answer-box given top/bottom),
+  // read-time-only, no import-pipeline / stored-asset changes.
+  'app/src/features/paper-intelligence/writingPageModel.mjs',
+  'app/src/features/paper-intelligence/writingPageModel.d.ts',
+  'app/src/features/paper-intelligence/writingPageModel.d.mts',
+  'app/src/features/paper-intelligence/writingPaperViewAdapter.ts',
 ])
 
 // 刀⑤ render-fidelity Chunk B (PA-reviewed docs/cuts/render-fidelity/pa.md,

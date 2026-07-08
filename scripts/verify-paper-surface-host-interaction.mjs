@@ -388,6 +388,17 @@ assert(
 
 section('forbidden runtime scopes unchanged')
 
+// surface-question-policy cut (2026-07-08, committed plan.md): narrowly
+// authorized to edit PaperSurface.tsx/.css in ONE place (the question-list
+// empty-stem policy). This was a blanket freeze written for the earlier
+// host-interaction-reducer extraction PR; extend it the same way
+// verify-paper-surface-module-v1.mjs's ALLOWED_DOWNSTREAM_* sets do,
+// rather than loosen the whole `app/src/shared-ui/papersurface/` prefix.
+const ALLOWED_PAPERSURFACE_FILES = new Set([
+  'app/src/shared-ui/papersurface/PaperSurface.tsx',
+  'app/src/shared-ui/papersurface/PaperSurface.css',
+])
+
 const forbidden = [
   'app/src/shared-ui/papersurface/',
   'shared/papersurface/',
@@ -400,7 +411,12 @@ const forbidden = [
 ]
 
 for (const path of forbidden) {
-  assert(!touchesAny(files, [path]), `${path} not modified`)
+  const offenders =
+    path === 'app/src/shared-ui/papersurface/'
+      ? files.filter((f) => touchesAny([f], [path]) && !ALLOWED_PAPERSURFACE_FILES.has(f))
+      : files.filter((f) => touchesAny([f], [path]))
+  const label = offenders.length > 0 ? `${path} not modified (offenders: ${offenders.join(', ')})` : `${path} not modified`
+  assert(offenders.length === 0, label)
 }
 
 summary()
