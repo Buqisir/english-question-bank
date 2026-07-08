@@ -21,6 +21,12 @@
  *      prop is threaded through all three render points (ConciergeDesk x2,
  *      ConciergePaperRow x1) plus App.tsx's instantiation — unaffected by
  *      this cut, kept green.
+ *
+ * ui-boundary-trim (ADR-0015 UI 收尾, owner 2026-07-07, audit Q2): the
+ * per-question answer-compare box (`showCompareBox`) and the topic-label
+ * confidence percentage are now owner-only (member 隐藏 AI 内部数据, owner
+ * 保留) — `answer-compare-summary` and `verify-list` remain member-visible
+ * (C2 decision unchanged).
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -129,6 +135,14 @@ assert(
 assert(
   'AI 答案验证 verify-list stays present (member-visible, C2)',
   /className="verify-list"/.test(detailView),
+)
+assert(
+  'answer-compare per-question box is owner-gated (ADR-0015 UI 收尾, owner 2026-07-07)',
+  /const showCompareBox = isOwnerView && \(/.test(detailView),
+)
+assert(
+  'topic-label confidence percentage (<em>%) is owner-gated (ADR-0015 UI 收尾, owner 2026-07-07)',
+  /isOwnerView && topicLabel\.confidence !== undefined/.test(detailView),
 )
 
 // ------------------------------------------------------------------ 2. detailHelpers + App.tsx extraction

@@ -280,7 +280,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                       <span>{topicLabel.label}</span>
                       {topicLabel.reason ? <small>{topicLabel.reason}</small> : null}
                     </div>
-                    {topicLabel.confidence !== undefined && topicLabel.confidence > 0 ? (
+                    {isOwnerView && topicLabel.confidence !== undefined && topicLabel.confidence > 0 ? (
                       <em>{Math.round(topicLabel.confidence * 100)}%</em>
                     ) : null}
                   </div>
@@ -428,7 +428,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 )
                 const hasSavedParse = Boolean(savedParseAt)
                 const hasSavedParseWithoutVerify = hasSavedParse && !verifyItem && verifyStatus !== 'loading'
-                const showCompareBox = Boolean(verifyItem) || verifyStatus === 'loading' || !hasSavedParse || hasSavedParseWithoutVerify
+                const showCompareBox = isOwnerView && (Boolean(verifyItem) || verifyStatus === 'loading' || !hasSavedParse || hasSavedParseWithoutVerify)
                 const compareStatus =
                   verifyItem?.verdict ||
                   (verifyStatus === 'loading'
