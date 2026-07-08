@@ -165,6 +165,8 @@ const baseRef = (() => {
 const changed = safeGitDiffNames(`${baseRef}...HEAD`)
 
 const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
+  // surface-question-policy 24ec75f: 语法 rail 假 prompt 选项退役（read-time adapter）
+  'app/src/features/paper-intelligence/grammarFillPaperViewAdapter.ts',
   'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx',
   'app/src/features/paper-intelligence/adapter/index.ts',
   'app/src/features/paper-intelligence/adapter/piToPaperTextMap.ts',

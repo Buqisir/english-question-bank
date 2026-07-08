@@ -30,6 +30,13 @@ applicationGiven top/bottom 位；正文 textMap 构建前剔除这些段
 框内脚手架排版：上半贴框顶左对齐，下半贴框底右对齐（信件格式），
 CSS 在 writingPaperPage.css。
 
+## 3. 语法 rail 假选项退役（施工中发现，追认入契约）
+
+`grammarFillPaperViewAdapter.ts` 为带提示词的空造 `label:'prompt'` 假选项，
+在空题干同行策略下渲成「56. prompt. hold」噪音行。提示词已随挖空渲在
+文中（`__56__ (hold)`），rail 假选项退役（options 恒 []），语法填空
+rail 行整体消失。消费方仅 browse 页 + harness 无解析兜底，两处同愿。
+
 ## Forbidden
 
 - `shared/papersurface/**`（tokens/blankPattern 不动）；server/**；
