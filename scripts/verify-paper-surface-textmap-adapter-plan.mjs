@@ -44,7 +44,6 @@
 
 import { readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
 
 const HERE = path.dirname(new URL(import.meta.url).pathname)
 const ROOT = path.resolve(HERE, '..')
@@ -629,103 +628,24 @@ assert(
   'unexpected server/ import in types.d.ts',
 )
 
-/* ─── 12. Forbidden scope: no runtime / app / server / CSS / route diff */
-
-console.log('\nTest 12: forbidden runtime scope untouched')
-
-function safeGitDiffNames(args) {
-  try {
-    const out = execSync(`git diff --name-only ${args}`, {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-    return out ? out.split('\n') : []
-  } catch {
-    return []
-  }
-}
-
-const baseRef = (() => {
-  try {
-    return execSync('git merge-base HEAD origin/main', {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-  } catch {
-    try {
-      return execSync('git merge-base HEAD main', {
-        cwd: ROOT,
-        stdio: ['ignore', 'pipe', 'pipe'],
-      })
-        .toString()
-        .trim()
-    } catch {
-      return 'HEAD'
-    }
-  }
-})()
-
-const changed = safeGitDiffNames(`${baseRef}...HEAD`)
-
-const FORBIDDEN_PATHS = [
-  /^app\/src\//,
-  /^server\//,
-  /^app\/package\.json$/,
-  /^app\/pnpm-lock\.yaml$/,
-  /^package\.json$/,
-  /^package-lock\.json$/,
-  /^pnpm-lock\.yaml$/,
-  /\.css$/,
-]
-for (const re of FORBIDDEN_PATHS) {
-  const offenders = changed.filter((p) => re.test(p))
-  assert(
-    `No edits under ${re.source}`,
-    offenders.length === 0,
-    `offenders: ${offenders.join(', ')}`,
-  )
-}
-
-/* Forbid touching specific runtime files even if they happen to be
- * outside the broad path filters above (e.g. the prototype's TSX
- * lives under app/src/, but the explicit name guard documents the
- * intent). */
-const FORBIDDEN_NAMED = [
-  /paperIntelligenceRoute\.ts$/,
-  /PaperIntelligencePreview\.tsx$/,
-  /PaperSurfacePrototype\.tsx$/,
-  /^app\/src\/features\/reading-analysis\//,
-]
-for (const re of FORBIDDEN_NAMED) {
-  const offenders = changed.filter((p) => re.test(p))
-  assert(
-    `No edits under explicit runtime guard ${re.source}`,
-    offenders.length === 0,
-    `offenders: ${offenders.join(', ')}`,
-  )
-}
-
-const ALLOWED_PATTERNS = [
-  /^docs\/paper-surface-textmap-adapter-plan\.md$/,
-  /^docs\/adr\/0003-paper-surface-interaction-model\.md$/,
-  /^scripts\/verify-paper-surface-textmap-adapter-plan\.mjs$/,
-  /^scripts\/verify-paper-surface-interaction-model-doc\.mjs$/,
-  /^shared\/papersurface\/types\.d\.ts$/,
-  /^shared\/papersurface\/anchorKeys\.mjs$/,
-  /^shared\/papersurface\/anchorKeys\.d\.ts$/,
-]
-const unexpected = changed.filter(
-  (p) => !ALLOWED_PATTERNS.some((re) => re.test(p)),
-)
-assert(
-  'PR diff contains only the B2 plan + verify + types refinement (no runtime expansion)',
-  unexpected.length === 0,
-  `unexpected files in diff: ${unexpected.join(', ')}`,
-)
+/* ─── 12. [retired] branch-diff-freeze section ───────────────────────
+ *
+ * Retired 2026-07-08 by 刀⑤ render-fidelity.
+ *
+ * This section originally froze the #21-B2 PR's own diff (against
+ * whatever main was at merge time) to "only the B2 plan files touched,
+ * nothing under app/src or server/ or *.css". That PR merged long ago.
+ * On any later feature branch, `git diff <merge-base>...HEAD` naturally
+ * includes every commit since the branch point — not just the commits
+ * that originally shipped B2 — so this section could never pass again
+ * once a later authorized cut (e.g. render-fidelity Chunk A/B/C, which
+ * legitimately touches app/src/**, server/**, and *.css per its plan)
+ * landed on top. Per repo convention (AGENTS.md): behavioral asserts
+ * are preferred over diff-freeze guards, and a freeze guard retires by
+ * natural turnover once a later authorized cut supersedes it. The
+ * doc/types content assertions above (Tests 1-11) are unaffected and
+ * remain the live contract for this file.
+ */
 
 /* ─── Summary ────────────────────────────────────────────────────── */
 

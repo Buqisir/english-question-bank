@@ -23,6 +23,18 @@
  * outer-only sheet shadow), and keeps the C1 surface / route / scope /
  * adapter / behavior contract assertions unchanged.
  *
+ * 刀⑤ render-fidelity retirement (2026-07-08): standard v2 authorized
+ * the screen body baseline to regress 16px → 14px and the page margin
+ * to move from a fixed --ps-page-padding literal to margin tokens
+ * (Chunk A), and authorized server/print-renderer.mjs +
+ * server/exports/docxRenderer.mjs to consume shared/papersurface/
+ * tokens.mjs (Chunk B/C). The pinned-16px / pinned-56px / server-
+ * untouched / tokens.mjs-untouched / prototype-still-exists assertions
+ * below were updated or retired accordingly — see inline comments at
+ * each site. The structural invariants untouched by this cut (grid
+ * layout, no border-radius, gradient scoping, box-shadow, adapter
+ * boundaries, behavior contract, H3 panel locality) are unchanged.
+ *
  * Asserts:
  *   Route / surface:
  *     - surface=paper still exists
@@ -118,7 +130,6 @@ const PAPER_SURFACE_DIR = join(APP, 'shared-ui', 'papersurface')
 const PAPER_SURFACE_CSS = join(PAPER_SURFACE_DIR, 'PaperSurface.css')
 const PAPER_SURFACE_TSX = join(PAPER_SURFACE_DIR, 'PaperSurface.tsx')
 const SHARED_PAPER_SURFACE = join(ROOT, 'shared', 'papersurface')
-const PROTOTYPE_DIR = join(APP, 'features', 'paper-intelligence', 'paperSurfacePrototype')
 
 let failures = 0
 let passes = 0
@@ -178,10 +189,19 @@ assert(
   /--ps-page-width\s*:\s*794px\b/.test(paperSurfaceCss),
   "PaperSurface.css declares --ps-page-width: 794px"
 )
-assert(
-  /--ps-page-padding\s*:\s*56px\b/.test(paperSurfaceCss),
-  "PaperSurface.css declares --ps-page-padding: 56px"
-)
+// 刀⑤ Chunk A (2026-07-08, authorized): the fixed --ps-page-padding:
+// 56px custom property was retired in favor of the standard v2 margin
+// tokens (--ps-page-margin-x / --ps-page-margin-top, injected from
+// shared/papersurface/tokens.mjs). Assert the .ps-page rule now
+// consumes those margin tokens instead of pinning the retired literal.
+{
+  const match = paperSurfaceCss.match(/\.ps-page\s*\{([\s\S]*?)\}/)
+  const body = match ? match[1] : ''
+  assert(
+    /padding\s*:\s*var\(\s*--ps-page-margin-top\s*\)\s+var\(\s*--ps-page-margin-x\s*\)\s*;/.test(body),
+    ".ps-page consumes var(--ps-page-margin-top) / var(--ps-page-margin-x) (retired --ps-page-padding: 56px, 刀⑤ Chunk A)"
+  )
+}
 
 // .ps-surface padding: 16px 32px (Issue #43 final tune — symmetric
 // matte: vertical matte 16px stays, horizontal matte is 32px so the
@@ -195,22 +215,28 @@ assert(
   )
 }
 
-// Body font sizes: 16px on .ps-passage-body / .ps-question-no / .ps-question-stem.
+// 刀⑤ Chunk A (2026-07-08, authorized): the body baseline hardcoded at
+// 16px was retired — standard v2 fixes body copy at 10.5pt/14px, and
+// PaperSurface.css now consumes that value via var(--ps-font-size)
+// instead of duplicating the literal per-selector. Body font sizes:
+// var(--ps-font-size) on .ps-passage-body / .ps-question-no /
+// .ps-question-stem.
 for (const selector of ['.ps-passage-body', '.ps-question-no', '.ps-question-stem']) {
   const escaped = selector.replace(/\./g, '\\.')
-  const re = new RegExp(`${escaped}\\s*\\{[^}]*?font-size\\s*:\\s*16px\\b`, 's')
+  const re = new RegExp(`${escaped}\\s*\\{[^}]*?font-size\\s*:\\s*var\\(\\s*--ps-font-size\\s*\\)`, 's')
   assert(
     re.test(paperSurfaceCss),
-    `${selector} declares font-size: 16px`
+    `${selector} declares font-size: var(--ps-font-size) (retired hardcoded 16px, 刀⑤ Chunk A)`
   )
 }
 
-// Option font size: 16px (matched to body baseline in the C2 follow-up).
+// Option font size: var(--ps-font-size) (matched to the body baseline,
+// same token consumption as above; retired hardcoded 16px).
 {
-  const re = /\.ps-option\s*\{[^}]*?font-size\s*:\s*16px\b/s
+  const re = /\.ps-option\s*\{[^}]*?font-size\s*:\s*var\(\s*--ps-font-size\s*\)/s
   assert(
     re.test(paperSurfaceCss),
-    ".ps-option declares font-size: 16px"
+    ".ps-option declares font-size: var(--ps-font-size) (retired hardcoded 16px, 刀⑤ Chunk A)"
   )
 }
 
@@ -477,10 +503,14 @@ try {
   // ignore
 }
 
-assert(
-  !changedFiles.some(f => f.startsWith('server/')),
-  "server/ remains untouched"
-)
+// server/ blanket freeze retired 2026-07-08 by 刀⑤ render-fidelity
+// Chunk B/C (authorized): `server/print-renderer.mjs` and
+// `server/exports/docxRenderer.mjs` now consume
+// `shared/papersurface/tokens.mjs` for PDF/DOCX typography. That
+// consumption's behavioral contract lives in
+// `verify-paper-surface-tokens.mjs`; this harness script's job is the
+// PI-surface harness UI/adapter boundary, not a repo-wide server/
+// freeze that a later authorized cut would inevitably break.
 assert(
   !changedFiles.some(f =>
     f === 'package.json' ||
@@ -529,10 +559,13 @@ assert(
 // `verify-paper-intelligence-paper-surface-evidence.mjs`.
 
 // Shared papersurface primitives must remain untouched.
-assert(
-  !changedFiles.some(f => f === 'shared/papersurface/tokens.mjs' || f === 'shared/papersurface/tokens.d.ts'),
-  "shared/papersurface/tokens.mjs remains untouched"
-)
+//
+// tokens.mjs untouched-freeze retired 2026-07-08 by 刀⑤ render-fidelity
+// Chunk A (authorized): the typography primitives required by standard
+// v2 (font size / line height / margins / EN-ZH-heading font stacks)
+// were added to this same module, with `.d.ts`/`.d.mts` parity. The
+// live contract for tokens.mjs's shape now lives in
+// `verify-paper-surface-tokens.mjs`.
 assert(
   !changedFiles.some(f => f === 'shared/papersurface/segmentPaperText.mjs' || f === 'shared/papersurface/segmentPaperText.d.ts'),
   "shared/papersurface/segmentPaperText.mjs remains untouched"
@@ -542,22 +575,15 @@ assert(
   "shared/papersurface/anchorKeys.mjs remains untouched"
 )
 
-// Prototype files must still exist (they were not deleted).
-assert(
-  fileExists(join(PROTOTYPE_DIR, 'PaperSurfacePrototype.tsx')),
-  "prototype PaperSurfacePrototype.tsx still exists (not deleted)"
-)
-assert(
-  fileExists(join(PROTOTYPE_DIR, 'paperSurfacePrototype.css')),
-  "prototype paperSurfacePrototype.css still exists (not deleted)"
-)
-assert(
-  !changedFiles.some(f =>
-    f.includes('paperSurfacePrototype/PaperSurfacePrototype.tsx') ||
-    f.includes('paperSurfacePrototype/paperSurfacePrototype.css')
-  ),
-  "prototype files not modified"
-)
+// Prototype-must-still-exist assertions retired 2026-07-08 by 刀⑤
+// render-fidelity Chunk E (authorized): `paperSurfacePrototype/`
+// (854-line TSX + 462-line CSS, unreachable dead code — no route ever
+// mounted it, only self-referencing) was deleted per the render-
+// fidelity plan, along with its own now-defunct
+// `scripts/verify-paper-surface-prototype.mjs`. A "must still exist"
+// assertion for deleted-on-purpose dead code can never pass again;
+// retiring it here rather than asserting a falsehood as a permanent
+// regression guard.
 
 // ─── Adapter boundaries ───
 

@@ -2,7 +2,24 @@
  * Print Renderer — generates semantic HTML + CSS for Vivliostyle PDF.
  * Input: same shape as exportDocx (title, versionType, printStyle, items, blocks, questionNumberStart).
  * Output: complete HTML string ready for Vivliostyle or browser print.
+ *
+ * 刀⑤ render-fidelity Chunk B: page margins / line-height / font stacks now
+ * consume `shared/papersurface/tokens.mjs` (the single typography-primitive
+ * source shared with the screen PaperSurface / writing page — Chunk A).
+ * The `@page` box model, footer page-number, and blank/writing-box mm
+ * values are page-layer concepts specific to the print face and are NOT
+ * added to `tokens.mjs` (out of scope there — see that file's header).
+ *
+ * Blank-marker styling reuses `shared/papersurface/blankPattern.mjs`
+ * (`paperBlankPattern`, the SAME pattern the screen PaperSurface uses) —
+ * per PA F2, NOT I15's `grammarFillBlankPattern` (that one matches
+ * `NN._____`, which does not appear in stored paper-asset text; stored
+ * grammar-fill blanks use the `__NN__` form, same family as cloze /
+ * 七选五).
  */
+
+import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
+import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
 
 const groupTypeLabels = {
   reading: '阅读理解',
@@ -34,6 +51,66 @@ function isShortOptions(options) {
 // tracking metadata as if it were teacher analysis.
 function isMetaStub(text) {
   return /^paperId=.*assetVersion=/.test(String(text || ''))
+}
+
+/**
+ * Renders one passage line, escaping prose text and replacing every
+ * `paperBlankPattern` match (`__41__` / `_____36_____` / `__56__`) with a
+ * styled underline + centered-number span — standard §6.
+ *
+ * Escape order matters (PA F2): only the PROSE slices around a match are
+ * HTML-escaped; the blank's own markup is injected separately so the
+ * underscore/space delimiters are never mangled by `escapeHtml`.
+ *
+ * `seven_choices` gets the longer (≈4.6em) underline; cloze / grammar_cloze
+ * get the shorter (≈3.3em) underline (standard §6, 3+3 vs 2+2 whitespace
+ * calibration).
+ */
+function renderPassageLineWithBlanks(line, groupType) {
+  const text = String(line ?? '')
+  paperBlankPattern.lastIndex = 0
+  if (!paperBlankPattern.test(text)) return escapeHtml(text)
+  paperBlankPattern.lastIndex = 0
+
+  const blankWidthClass = groupType === 'seven_choices' ? 'print-blank--seven' : 'print-blank--short'
+  let out = ''
+  let cursor = 0
+  let match
+  while ((match = paperBlankPattern.exec(text)) !== null) {
+    if (match.index > cursor) {
+      out += escapeHtml(text.slice(cursor, match.index))
+    }
+    out += `<span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${escapeHtml(match[1])}</span></span>`
+    cursor = match.index + match[0].length
+  }
+  if (cursor < text.length) {
+    out += escapeHtml(text.slice(cursor))
+  }
+  return out
+}
+
+/** standard §8: 写作题组 (应用文 / 读后续写) get a bordered blank answer box. */
+function isWritingGroupType(groupType) {
+  return groupType === 'writing' || groupType === 'continuation'
+}
+
+/**
+ * 应用文 vs 读后续写 sizing (standard §8: 144×65mm vs 145×57mm). The
+ * paper-asset schema stores both task types under the single `writing`
+ * groupType (only the legacy DB-only `continuation` groupType is already
+ * distinct) — distinguish by title text, which import publishes verbatim
+ * from the writing task title ("应用文写作" / "读后续写").
+ */
+function isContinuationWriting(detail) {
+  if (detail.groupType === 'continuation') return true
+  return /续写/.test(String(detail.title || detail.passage?.title || ''))
+}
+
+function renderWritingAnswerBox(detail) {
+  const continuation = isContinuationWriting(detail)
+  const widthMm = continuation ? 145 : 144
+  const heightMm = continuation ? 57 : 65
+  return `<div class="writing-answer-box" style="width:${widthMm}mm;height:${heightMm}mm;"></div>`
 }
 
 export function buildPrintHtml({ title, versionType, printStyle, items, blocks, questionNumberStart }) {
@@ -76,12 +153,29 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
         }
 
         if (passage) {
-          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => `<p>${escapeHtml(line)}</p>`).join('')}</div>`
+          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => `<p>${renderPassageLineWithBlanks(line, detail.groupType)}</p>`).join('')}</div>`
+        }
+
+        if (isWritingGroupType(detail.groupType)) {
+          groupHtml += renderWritingAnswerBox(detail)
         }
 
         for (const question of detail.questions) {
-          groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
-          groupHtml += renderOptions(question.options, detail.groupType)
+          const stemText = String(question.stem || '').trim()
+          const hasOptions = Array.isArray(question.options) && question.options.length > 0
+          // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
+          // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
+          if (!stemText && !hasOptions && !isTeacher) {
+            questionNum += 1
+            continue
+          }
+          if (!stemText && hasOptions) {
+            // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
+            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${question.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
+          } else {
+            groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
+            groupHtml += renderOptions(question.options, detail.groupType)
+          }
           if (isTeacher) {
             groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(question.answer || '待补')}</p>`
             const rawExplanation = question.explanation || question.note || ''
@@ -107,7 +201,10 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
       const passage = (detail.passage.materialText || detail.passage.summary || '').trim()
       let groupHtml = '<section class="question-group">'
       if (passage) {
-        groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => `<p>${escapeHtml(line)}</p>`).join('')}</div>`
+        groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => `<p>${renderPassageLineWithBlanks(line, detail.groupType)}</p>`).join('')}</div>`
+      }
+      if (isWritingGroupType(detail.groupType)) {
+        groupHtml += renderWritingAnswerBox(detail)
       }
       for (const question of detail.questions) {
         groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
@@ -132,15 +229,31 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
 <meta charset="UTF-8">
 <title>${escapeHtml(title || '英语试题')}</title>
 <style>
+/* 刀⑤ render-fidelity Chunk B — standard §1: 左右 24mm / 上 ≈21mm.
+   Bottom margin is 24mm (not standard-mandated directly) so the §1 footer
+   distance (页码距底 ≈17.5mm) falls out of an exact, documented sum:
+   24mm margin-bottom - 6.5mm @bottom-center padding-bottom = 17.5mm. */
 @page {
   size: A4;
-  margin: 20mm 18mm 20mm 18mm;
+  margin: 21mm 24mm 24mm 24mm;
+
+  @bottom-center {
+    content: "英语试题 第" counter(page) "页(共" counter(pages) "页)";
+    font-family: ${paperSurfaceTokens.paperFontStack};
+    font-size: 9pt;
+    color: #000;
+    vertical-align: bottom;
+    padding-bottom: 6.5mm;
+  }
 }
 
 body {
-  font-family: "Times New Roman", "SimSun", "Songti SC", serif;
+  font-family: ${paperSurfaceTokens.paperFontStack};
   font-size: 10.5pt;
-  line-height: 1.6;
+  /* standard §3: line-height is a FIXED 18pt baseline — same
+     paperLineHeight token the screen PaperSurface / writing page consume
+     (Chunk A), ≈1.714 at 10.5pt body text. */
+  line-height: ${paperSurfaceTokens.paperLineHeight};
   color: #000;
   margin: 0;
   padding: 0;
@@ -152,6 +265,7 @@ body {
 }
 
 .paper-header h1 {
+  font-family: ${paperSurfaceTokens.paperFontStackHeading};
   font-size: 18pt;
   font-weight: bold;
   margin: 0 0 0.3em;
@@ -163,6 +277,7 @@ body {
 }
 
 .section-header {
+  font-family: ${paperSurfaceTokens.paperFontStackHeading};
   font-size: 12pt;
   font-weight: bold;
   margin: 1.2em 0 0.6em;
@@ -235,6 +350,25 @@ body {
   margin-right: 2em;
 }
 
+.options-inline--numbered .qnum {
+  margin-right: 0.6em;
+}
+
+/* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;
+   标题不落页尾;写作框整框不拆。 */
+.question {
+  break-inside: avoid;
+}
+
+.section-header,
+.group-meta {
+  break-after: avoid;
+}
+
+.writing-answer-box {
+  break-inside: avoid;
+}
+
 .answer {
   margin: 0.2em 0 0.2em 2em;
   font-size: 9.5pt;
@@ -247,6 +381,32 @@ body {
 
 .explanation {
   color: #555;
+}
+
+/* standard §6 — 挖空: 定长下划线 + 题号居中于线上, 线不得跨行断开.
+   七选五 ≈4.6em (10.5pt 下 ≈48pt/17mm); 完形/语法填空 ≈3.3em (≈35pt/12mm). */
+.print-blank {
+  display: inline-block;
+  white-space: nowrap;
+  border-bottom: 0.48pt solid #000;
+  text-align: center;
+  vertical-align: baseline;
+  margin: 0 0.15em;
+  /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */
+  text-indent: 0;
+}
+
+.print-blank--short { width: 3.3em; }
+.print-blank--seven { width: 4.6em; }
+
+.print-blank-num {
+  display: inline-block;
+}
+
+/* standard §8 — 写作答题区: 应用文/读后续写各一个细边框素框, 框内无横线/提示行. */
+.writing-answer-box {
+  border: 0.48pt solid #000;
+  margin: 1em auto 0;
 }
 
 /* Exam density: tighter */

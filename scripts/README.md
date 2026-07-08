@@ -66,12 +66,12 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-i7-application-given.mjs` | I7 应用文给定上下格式解析：末尾纯英文 + 正向信号守卫切给定骨架（信件/标题/无给定/负向守卫/称呼型），情境剔除、夹注不误判 | yes |
 | `verify-i8-cloze-analysis.mjs` | I8 完形填空 AI 解析生成：prompt 合约、validate 校验器成功与阻断用例（stub provider）、路由 + 包构建 + 存储接线、磁盘 latest/analyses/cloze-analysis-v1.json 断言 | yes |
 | `verify-i9-cloze-analysis-surface.mjs` | I9 完形填空解析 render 面：adapter 映射 + 多次出现证据 + 空白标记排除 + option-side 标记；panel 必要结构；harness fetch→fallback dispatch；availability 完整性 vs 不完整（blanks 键） | yes |
-| `verify-i10-blank-rendering.mjs` | I10 空格渲染：paperBlankPattern 提取 + 行为测试（完形 `__41__` / 七选五 `_____36_____` / 语法填空 2空格变体）；重命名符号存在 + 旧名称不存在；MF-3 已接受误匹配记录 | yes |
+| `verify-i10-blank-rendering.mjs` | I10 空格渲染：paperBlankPattern 提取（刀⑤ Chunk B 起从 `shared/papersurface/blankPattern.mjs` 提取，PaperSurface.tsx 只 import）+ 行为测试（完形 `__41__` / 七选五 `_____36_____` / 语法填空 2空格变体）；重命名符号存在 + 旧名称不存在；MF-3 已接受误匹配记录 | yes |
 | `verify-relay-json-format.mjs` | Chat-completions request body sends response_format json_object on every provider (incl. openai-compatible gpt relay); `thinking` stays native-only | yes |
 | `verify-i11-symbol-normalization.mjs` | I11 符号归一 2a：normalizePassageText 纯函数表驱动用例（规则 1 半角化 / 规则 2 标点后空格 / 规则 3 生词括号空格）；mixed seam 边界；C2 空格标记字节完整哨兵；语法填空两阶段 compose 顺序；完整幂等性 | yes |
 | `verify-i13-grammar-fill-analysis.mjs` | I13 语法填空 AI 解析生成（第一刀）：prompt + 16 叶 facet 注册表合约；validateGrammarFillShape 成功与所有阻断用例（stub provider）；C1 冻结 4-op 归一化（whether/if✓、worn-for-wore✗、were worn 多词✓）；C2 16 叶成员、父节点拒绝、blank_type 不匹配、role/path 条件约束；C3 evidence 精确子串 + SW-2 空格标记排除（  56   + (wear)）；MF-2 发布后磁盘 analyses/grammar-fill-analysis-v1.json 存在；MF-3 强制发布 guard | yes |
 | `verify-i14-grammar-fill-analysis-surface.mjs` | I14 语法填空解析 render 面 + 入口（第二刀）：Step 0 facet 框架注册表漂移守卫（16 key == 服务端 JSON）+ non-finite 形变表；Step 1 GATE-1 空白容差匹配（plain indexOf 失败但容差命中、偏移映射回存储字节、3+空格折叠）+ MF-1 每个 range.sentenceId 存在于 textMap + 多次出现 + 空白标记排除 + 10 空映射 + framework/labelZh 解析 + role/path 仅 non-finite + unknown facetKey/schemaVersion 抛错；Step 2 panel 必要结构；Step 3 harness fetch→fallback dispatch + 各 cloze 触点镜像；Step 4 availability 完整 vs 不完整（blanks 键，语法解析） | yes |
-| `verify-i15-grammar-fill-blank-focus.mjs` | I15 语法填空点正文空格聚焦 + 退数字排（第三刀）：blankFocusMode 在 types.d.ts 声明（默认 rail）；rail 两处渲染点被 !blankFocus 门控；grammarFillBlankPattern 必需点号区分（匹配 56._____ / 57._____(absorb)，排除 cloze __41__ / 七选五 _____36_____ / 数字噪声 2026·800g·3-5g·25-30g；64._____ 3-5g→["64"] 不取 3）；paperBlankPattern 字面量零改动守卫；空格渲染为带 aria-label/aria-pressed 的 <button>、未匹配→非交互 span（SW-2）；harness 仅 grammarFillAnalysisModel 时传 in-passage | yes |
+| `verify-i15-grammar-fill-blank-focus.mjs` | I15 语法填空点正文空格聚焦 + 退数字排（第三刀）：blankFocusMode 在 types.d.ts 声明（默认 rail）；rail 两处渲染点被 !blankFocus 门控；grammarFillBlankPattern 必需点号区分（匹配 56._____ / 57._____(absorb)，排除 cloze __41__ / 七选五 _____36_____ / 数字噪声 2026·800g·3-5g·25-30g；64._____ 3-5g→["64"] 不取 3）；paperBlankPattern 字面量零改动守卫（刀⑤ Chunk B 起指向 `shared/papersurface/blankPattern.mjs`）；空格渲染为带 aria-label/aria-pressed 的 <button>、未匹配→非交互 span（SW-2）；harness 仅 grammarFillAnalysisModel 时传 in-passage | yes |
 | `verify-i16a-teaching-dimension-search.mjs` | I16·A 教学维度检索层：extractor 四类（语法/七选五/完形/阅读）真实 960d0f8d 样本断言；MF-1 完形 signatureFacet 稀疏（13/15 缺失不崩）；reading 多组 join 3+4+4+4 无孤儿；MF-2 未解析题组（jslk grammar-fill/cloze）缺席索引；查询行为（bridge/noun/skill/多维 AND）；MF-3 路由注册 + invalidate 清缓存 | yes |
 | `verify-i16b-theme-labels-backfill.mjs` | I16·B 主题标签批量回填：注入 mock 编排（全标/跳过/容错/摘要计数）；MF-2 diff 围栏（reading-choice-analysis-v1.md/topicTaxonomy.mjs/analyzeReading/packageBuilder 未耦合）；路由经工厂注册；前端 service 调 /api/topic-labels/backfill | yes |
 | `verify-i16c-grammar-verb-axes.mjs` | I16·C 语法填空动词维度（时态/语态/主谓一致）：确定性分类器各形态 + AI 兜底；MF-1 sidecar 落在 resolved baseDir（versions/v1，不造 latest/）；MF-2 索引合并保留现有 grammarFill facet+groupType+跨类阅读、新增三轴；MF-4 主谓一致从主语上下文判（have-led→AI，prompt 携带 subjectSignals）；编排幂等/容错；endpoint filter；frozen 契约围栏（facets 注册表/validator/schema/deepseek.mjs 未动）| yes |
@@ -119,7 +119,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-concierge-desk.mjs` | Concierge desk behavior used by draft entry points | yes |
 | `verify-c8-draft-paper-contracts.mjs` | C8 draft-paper API/search/workbench contract | yes |
 | `verify-c8-my-space-contracts.mjs` | C8 PR B My Space storage/API/UI contract; cut-specific | no |
-| `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model | yes |
+| `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model；print-renderer.mjs 曾冻结 rendering logic（H9/C8），restart-cut-③ 与刀⑤ render-fidelity Chunk B 是已授权的两次例外，diff 级冻结校验已随刀⑤ Chunk B 退役（见脚本内注释） | yes |
 | `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |
 | `verify-error-copy-mainline.mjs` | Cut ⑧ error-copy-mainline: `describeError` human-copy helper contract, MySpacePage + DraftPaperWorkbench zero raw `error.message`/`String(error)` residue, my-space failure-state retry button + single-render de-dup, draft-paper workbench errors don't clear in-progress work | yes |
 | `verify-ai-server-key-fallback.mjs` | Cut ai-key-server-fallback: `runConciergeSearch` gate matrix (no key+no server→local `missing-api-key`; no key+server available→steward call with `apiKey===''`; key present→steward, no regression; steward throws→`api-error` fallback), timeout selection (default 20000ms / thinking 60000ms / explicit `stewardTimeoutMs` wins), `GET /api/ai/status` route shape + MF-3 key-leak negative test (sentinel absent from response body AND all console output), `api.mjs` MF-1 TDZ guard (`serverContext.serverKeyAvailable` assigned post-hoc, not in the `:93` literal) | yes |
@@ -136,7 +136,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-export-flow.mjs` | Export flow | no |
 | `verify-paper-export-payload.mjs` | Export payload | no |
 | `verify-exam-export.mjs` | Exam export | no |
-| `verify-print-renderer.mjs` | Print renderer | no |
+| `verify-print-renderer.mjs` | Print renderer；刀⑤ Chunk B 起含 @page 边距/页脚页码/行距/字体栈 token 化断言 + paperBlankPattern 挖空样式与写作答题区断言 + 真实 paper-2026-i 资产行为级挖空计数与真 PDF 字节冒烟（PA F2，非合成样例） | yes |
 | `verify-print-pdf-export-flow.mjs` | Print PDF export flow | no |
 
 ## Concierge and reading-analysis legacy
@@ -168,6 +168,5 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-intelligence-interactive-preview.mjs` | Interactive preview |
 | `verify-paper-intelligence-evidence-audit.mjs` | Evidence audit |
 | `verify-paper-surface-interaction-model-doc.mjs` | PaperSurface interaction model doc |
-| `verify-paper-surface-prototype.mjs` | PaperSurface prototype |
 | `verify-paper-surface-textmap-adapter-plan.mjs` | Text-map adapter plan |
 | `verify-paper-surface-tokens.mjs` | Token contract |

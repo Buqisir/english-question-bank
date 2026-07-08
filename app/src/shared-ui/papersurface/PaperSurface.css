@@ -1,16 +1,20 @@
 /*
  * PaperSurface.css — Production paper surface styles (Issue #21-B3).
  *
- * Visual requirements (from docs/paper-surface-guangdong-visual-qa-checklist.md):
- *   - Paper width: 794px (A4 @ 96dpi)
- *   - Padding: 56px all sides
+ * Visual requirements (docs/product/exam-paper-format-standards.md v2,
+ *   刀⑤ render-fidelity Chunk A — supersedes the retired
+ *   paper-surface-guangdong-visual-qa-checklist.md numbers):
+ *   - Paper width: 794px (A4 @ 96dpi) — screen-only, not a shared token
+ *   - Page margins: left/right ≈24mm / top ≈21mm via shared tokens
+ *     (--ps-page-margin-x / --ps-page-margin-top), applied symmetrically
+ *     top+bottom on screen (no distinct print-footer allowance here)
  *   - Serif font stack via shared token (--ps-font-stack)
- *   - Body: 16px (Issue #41 C2 polish — bumped from 14.5px; follow-up
- *     bumped from 15px to 16px to match 小四 ≈ 12pt for realistic A4 feel)
- *   - Option: 16px (Issue #41 C2 polish — bumped from 14px; follow-up
- *     bumped from 14.5px to 16px to match body baseline)
- *   - Passage line-height: 1.85 via token
- *   - Question line-height: 1.7 via token
+ *   - Body / option font-size: 10.5pt ≈ 14px via shared token
+ *     (--ps-font-size) — standard §2, replacing the former 16px
+ *   - Line-height: fixed 18pt baseline ≈1.714 via shared token
+ *     (--ps-line-height) — standard §3, replacing the former
+ *     passage 1.85 / question 1.7 split (and the .ps-option 1.6
+ *     hardcode)
  *   - Paragraph indent: 2em via token
  *   - 2-column options grid via tokens
  *   - Seven-choices blank line: 72px via token
@@ -31,7 +35,6 @@
 
 .ps-surface {
   --ps-page-width: 794px;
-  --ps-page-padding: 56px;
   /* Active-question rail + focus outline. Teal signature #2C6E56 echoes
      the shell (Green-Pen active marker); a 2px line stays quiet by area.
      Screen-only, NOT a shared token — see the header note above. */
@@ -100,7 +103,7 @@
   background: #fff;
   width: var(--ps-page-width);
   max-width: 100%;
-  padding: var(--ps-page-padding);
+  padding: var(--ps-page-margin-top) var(--ps-page-margin-x);
   box-sizing: border-box;
   /* Subtle outer shadow to separate from desk — allowed per QA checklist */
   box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
@@ -123,8 +126,8 @@
 /* ─── Passage body ─────────────────────────────────────────────── */
 
 .ps-passage-body {
-  font-size: 16px;
-  line-height: var(--ps-passage-line-height);
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
   text-align: justify;
   hyphens: auto;
 }
@@ -316,12 +319,12 @@
 
 .ps-question-no {
   font-weight: 700;
-  font-size: 16px;
+  font-size: var(--ps-font-size);
 }
 
 .ps-question-stem {
-  font-size: 16px;
-  line-height: var(--ps-question-line-height);
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
 }
 
 /* ─── Option list ──────────────────────────────────────────────── */
@@ -347,8 +350,8 @@
   display: flex;
   gap: 6px;
   align-items: baseline;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
 }
 
 .ps-option-label {
@@ -361,6 +364,6 @@
   padding: 48px 24px;
   text-align: center;
   color: var(--ps-muted);
-  font-size: 16px;
+  font-size: var(--ps-font-size);
   font-style: italic;
 }

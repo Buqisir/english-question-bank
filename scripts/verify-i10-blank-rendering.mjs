@@ -42,6 +42,11 @@ const cssSrc = readSrc('app/src/shared-ui/papersurface/PaperSurface.css')
 const tokensMjsSrc = readSrc('shared/papersurface/tokens.mjs')
 const tokensDtsSrc = readSrc('shared/papersurface/tokens.d.ts')
 const tokensDmtsSrc = readSrc('shared/papersurface/tokens.d.mts')
+// 刀⑤ render-fidelity Chunk B: paperBlankPattern moved out of
+// PaperSurface.tsx into shared/papersurface/blankPattern.mjs so
+// server/print-renderer.mjs (plain Node ESM, cannot import .tsx) can
+// reuse the SAME literal instead of a server-side copy (PA F2 / SW-3).
+const blankPatternMjsSrc = readSrc('shared/papersurface/blankPattern.mjs')
 
 /* ─── 1. Renamed symbols present ──────────────────────────────────── */
 
@@ -51,6 +56,11 @@ assert(
   'PaperSurface.tsx contains paperBlankPattern',
   tsxSrc.includes('paperBlankPattern'),
   'paperBlankPattern not found in PaperSurface.tsx',
+)
+assert(
+  'PaperSurface.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs (刀⑤ Chunk B)',
+  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(tsxSrc),
+  'PaperSurface.tsx must import the shared paperBlankPattern, not redeclare it locally',
 )
 assert(
   'PaperSurface.tsx contains renderTextWithPaperBlanks',
@@ -157,12 +167,14 @@ assert(
 
 console.log('\nTest 3: paperBlankPattern behavioral tests')
 
-// SW-1: anchor extraction to "paperBlankPattern =" and fail loudly if not found.
-const patternMatch = tsxSrc.match(/const\s+paperBlankPattern\s*=\s*(\/(?:[^/\\]|\\.)*\/g)/)
+// SW-1 / 刀⑤ Chunk B SW-3: anchor extraction to "export const paperBlankPattern ="
+// in the shared module (the single source of truth post-move) and fail loudly
+// if not found.
+const patternMatch = blankPatternMjsSrc.match(/export\s+const\s+paperBlankPattern\s*=\s*(\/(?:[^/\\]|\\.)*\/g)/)
 assert(
-  'paperBlankPattern literal found in source (SW-1 extraction anchor)',
+  'paperBlankPattern literal found in shared/papersurface/blankPattern.mjs (SW-1 extraction anchor)',
   patternMatch !== null,
-  'Could not find "const paperBlankPattern = /.../" in PaperSurface.tsx — extraction failed',
+  'Could not find "export const paperBlankPattern = /.../" in shared/papersurface/blankPattern.mjs — extraction failed',
 )
 
 if (!patternMatch) {
@@ -171,7 +183,7 @@ if (!patternMatch) {
 }
 
 // Reconstruct the RegExp from the ACTUAL extracted source literal (MF-CR-1).
-// Behavioral tests below MUST run against the real PaperSurface.tsx pattern, not a
+// Behavioral tests below MUST run against the real shared blankPattern.mjs pattern, not a
 // hardcoded copy -- otherwise a source regression (e.g. \\d{1,3} -> \\d{1,4}) would
 // pass green. The literal is "/<body>/<flags>"; the \\u0020 / \\u00A0 escape text in
 // the source string is interpreted by the RegExp constructor exactly as in the .tsx.

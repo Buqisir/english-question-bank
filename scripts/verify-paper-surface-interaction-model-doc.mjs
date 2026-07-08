@@ -100,7 +100,6 @@
 
 import { readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
 
 const HERE = path.dirname(new URL(import.meta.url).pathname)
 const ROOT = path.resolve(HERE, '..')
@@ -646,100 +645,23 @@ assert(
   'Verify section / self-reference missing',
 )
 
-/* ─── 16. Forbidden scope: no runtime / app / server diff ────────── */
-
-console.log('\nTest 16: forbidden runtime scope untouched')
-
-function safeGitDiffNames(args) {
-  try {
-    const out = execSync(`git diff --name-only ${args}`, {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-    return out ? out.split('\n') : []
-  } catch {
-    return []
-  }
-}
-
-const baseRef = (() => {
-  try {
-    return execSync('git merge-base HEAD origin/main', {
-      cwd: ROOT,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    })
-      .toString()
-      .trim()
-  } catch {
-    try {
-      return execSync('git merge-base HEAD main', {
-        cwd: ROOT,
-        stdio: ['ignore', 'pipe', 'pipe'],
-      })
-        .toString()
-        .trim()
-    } catch {
-      return 'HEAD'
-    }
-  }
-})()
-
-const changed = safeGitDiffNames(`${baseRef}...HEAD`)
-
-const FORBIDDEN_PATHS = [
-  /^app\//,
-  /^server\//,
-  /^app\/package\.json$/,
-  /^app\/pnpm-lock\.yaml$/,
-  /^package\.json$/,
-  /^package-lock\.json$/,
-  /^pnpm-lock\.yaml$/,
-]
-for (const re of FORBIDDEN_PATHS) {
-  const offenders = changed.filter((p) => re.test(p))
-  assert(
-    `No edits under ${re.source}`,
-    offenders.length === 0,
-    `offenders: ${offenders.join(', ')}`,
-  )
-}
-
-/* `shared/` is allowed for the three B1.5 protocol files only.
- * Any other shared/ change would be a runtime expansion this PR is
- * not authorised to make. */
-const SHARED_ALLOWED = new Set([
-  'shared/papersurface/anchorKeys.mjs',
-  'shared/papersurface/anchorKeys.d.ts',
-  'shared/papersurface/types.d.ts',
-])
-const sharedOffenders = changed.filter(
-  (p) => p.startsWith('shared/') && !SHARED_ALLOWED.has(p),
-)
-assert(
-  'shared/ changes restricted to anchorKeys + types-only files',
-  sharedOffenders.length === 0,
-  `offenders: ${sharedOffenders.join(', ')}`,
-)
-
-const ALLOWED_PATTERNS = [
-  /^docs\/adr\/0003-paper-surface-interaction-model\.md$/,
-  /^docs\/paper-surface-textmap-adapter-plan\.md$/,
-  /^scripts\/verify-paper-surface-interaction-model-doc\.mjs$/,
-  /^scripts\/verify-paper-surface-textmap-adapter-plan\.mjs$/,
-  /^shared\/papersurface\/anchorKeys\.mjs$/,
-  /^shared\/papersurface\/anchorKeys\.d\.ts$/,
-  /^shared\/papersurface\/types\.d\.ts$/,
-]
-const unexpected = changed.filter(
-  (p) => !ALLOWED_PATTERNS.some((re) => re.test(p)),
-)
-assert(
-  'PR diff contains only the ADR + verify + B1.5 protocol files (no runtime expansion)',
-  unexpected.length === 0,
-  `unexpected files in diff: ${unexpected.join(', ')}`,
-)
+/* ─── 16. [retired] branch-diff-freeze section ───────────────────────
+ *
+ * Retired 2026-07-08 by 刀⑤ render-fidelity.
+ *
+ * This section originally froze the #21-B1.5 PR's own diff to "only
+ * the ADR + verify + B1.5 protocol files, nothing under app/ or
+ * server/". That PR merged long ago. On any later feature branch,
+ * `git diff <merge-base>...HEAD` naturally includes every commit
+ * since the branch point, so this section could never pass again once
+ * a later authorized cut (e.g. render-fidelity Chunk A/B/C, which
+ * legitimately touches app/**, server/**, and shared/papersurface/**
+ * per its plan) landed on top. Per repo convention (AGENTS.md):
+ * behavioral asserts are preferred over diff-freeze guards, and a
+ * freeze guard retires by natural turnover once a later authorized
+ * cut supersedes it. The ADR/doc-content assertions above (Tests
+ * 1-15) are unaffected and remain the live contract for this file.
+ */
 
 /* ─── 17. Anchor namespace decision (Must Fix 1) ─────────────────── */
 

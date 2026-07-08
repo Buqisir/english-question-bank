@@ -173,6 +173,27 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
   'app/src/features/paper-intelligence/insight/insightChipShortLabel.ts',
   'app/src/features/paper-intelligence/paperIntelligenceTypes.ts',
   'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
+  // 刀⑤ render-fidelity Chunk A: the writing page mirrors PaperSurface's
+  // own token-injection mechanism (it wraps PaperSurface as a child, so
+  // it needs its own `--ps-*` CSS var injection — see tokens.mjs header).
+  'app/src/features/paper-intelligence/WritingPaperPage.tsx',
+  'app/src/features/paper-intelligence/writingPaperPage.css',
+  // 刀⑤ render-fidelity Chunk E: dead-code removal (no route, self-only
+  // referencing prototype folder + its stale verify script).
+  'app/src/features/paper-intelligence/paperSurfacePrototype/PaperSurfacePrototype.tsx',
+  'app/src/features/paper-intelligence/paperSurfacePrototype/paperSurfacePrototype.css',
+])
+
+// 刀⑤ render-fidelity Chunk B (PA-reviewed docs/cuts/render-fidelity/pa.md,
+// F2 disposition): server/print-renderer.mjs is explicitly, plan-authorized
+// to consume shared/papersurface/tokens.mjs + blankPattern.mjs and gain
+// blank-marker / writing-box rendering. This is the FIRST authorized
+// crossing of the historical "PaperSurface module never touches server/"
+// boundary — narrowly scoped to this one file, not a blanket lift of the
+// `^server\/` forbidden pattern.
+const ALLOWED_DOWNSTREAM_SERVER_FILES = new Set([
+  'server/print-renderer.mjs',
+  'server/exports/docxRenderer.mjs',
 ])
 
 const FORBIDDEN_PATHS = [
@@ -193,6 +214,9 @@ for (const re of FORBIDDEN_PATHS) {
       re.source === '^app\\/src\\/features\\/paper-intelligence\\/' &&
       ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES.has(p)
     ) {
+      return false
+    }
+    if (re.source === '^server\\/' && ALLOWED_DOWNSTREAM_SERVER_FILES.has(p)) {
       return false
     }
     return re.test(p)
@@ -453,15 +477,21 @@ assert(
 )
 
 // CSS must use var() for the shared token values.
+// 刀⑤ render-fidelity Chunk A: --ps-passage-line-height / --ps-question-line-height
+// are retired in favor of one unified --ps-line-height (standard v2 §3 fixed
+// 18pt baseline, no passage/question split); --ps-font-size and the page
+// margin vars are new consumers of the token migration.
 const REQUIRED_CSS_VARS = [
   '--ps-font-stack',
   '--ps-ink',
-  '--ps-passage-line-height',
-  '--ps-question-line-height',
+  '--ps-font-size',
+  '--ps-line-height',
   '--ps-passage-indent',
   '--ps-options-grid-columns',
   '--ps-options-grid-gap-x',
   '--ps-paper-blank-width',
+  '--ps-page-margin-x',
+  '--ps-page-margin-top',
 ]
 
 for (const v of REQUIRED_CSS_VARS) {
@@ -482,6 +512,9 @@ const FORBIDDEN_CSS_LITERALS = [
   /"STSong"/,
   /line-height\s*:\s*1\.85\b/,
   /line-height\s*:\s*1\.7\b/,
+  /line-height\s*:\s*1\.6\b/,
+  /font-size\s*:\s*16px\b/,
+  /padding\s*:\s*56px\b/,
 ]
 
 for (const re of FORBIDDEN_CSS_LITERALS) {
@@ -495,6 +528,10 @@ for (const re of FORBIDDEN_CSS_LITERALS) {
 const tokensSrc = readSrc('shared/papersurface/tokens.mjs')
 const tokensDtsSrc = readSrc('shared/papersurface/tokens.d.ts')
 const tokensDmtsSrc = readSrc('shared/papersurface/tokens.d.mts')
+// 刀⑤ render-fidelity Chunk B: paperBlankPattern moved out of
+// PaperSurface.tsx into shared/papersurface/blankPattern.mjs (server reuse,
+// PA F2 / SW-3) — the literal now lives there, PaperSurface.tsx only imports it.
+const blankPatternMjsSrc = readSrc('shared/papersurface/blankPattern.mjs')
 const paperBlankRule = readCssRuleBody(cssSrc, '.ps-paper-blank')
 
 assert(
@@ -514,8 +551,13 @@ assert(
   'PaperSurface.tsx does not inject --ps-paper-blank-width',
 )
 assert(
-  'Paper blank renderer uses relaxed pattern (I10)',
-  /const\s+paperBlankPattern\s*=\s*\/\(\?:_\{2,\}\|\\[\\u0020\\u00A0\]\{2,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{2,\}\|\\[\\u0020\\u00A0\]\{2,\}\)\/g/.test(tsxSrc),
+  'PaperSurface.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs (刀⑤ Chunk B)',
+  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(tsxSrc),
+  'PaperSurface.tsx must import the shared paperBlankPattern, not redeclare it locally',
+)
+assert(
+  'Paper blank renderer uses relaxed pattern (I10) — shared/papersurface/blankPattern.mjs',
+  /export\s+const\s+paperBlankPattern\s*=\s*\/\(\?:_\{2,\}\|\[\\u0020\\u00A0\]\{2,\}\)\\s\*\(\\d\{1,3\}\)\\s\*\(\?:_\{2,\}\|\[\\u0020\\u00A0\]\{2,\}\)\/g/.test(blankPatternMjsSrc),
   'paperBlankPattern must match _{2,} or [\\u0020\\u00A0]{2,} around 1-3 digit number',
 )
 assert(
@@ -547,10 +589,25 @@ assert(
   '794px not found',
 )
 
+// 刀⑤ render-fidelity Chunk A: page padding is no longer a hardcoded 56px —
+// it consumes the standard v2 §1 margin tokens (24mm/91px left-right,
+// ≈21mm/79px top) via var(--ps-page-margin-x) / var(--ps-page-margin-top).
 assert(
-  'CSS sets page padding 56px',
-  /56px/.test(cssNoComments),
-  '56px not found',
+  'CSS sets page padding from the margin tokens (var(--ps-page-margin-top) var(--ps-page-margin-x))',
+  /padding\s*:\s*var\(\s*--ps-page-margin-top\s*\)\s*var\(\s*--ps-page-margin-x\s*\)/.test(
+    cssNoComments,
+  ),
+  'expected .ps-page padding to read var(--ps-page-margin-top) var(--ps-page-margin-x)',
+)
+assert(
+  'tokens.mjs pins pageMarginX to 91px (24mm @ 794px/210mm)',
+  /pageMarginX:\s*['"]91px['"]/.test(tokensSrc),
+  'pageMarginX must be 91px per standard v2 §1',
+)
+assert(
+  'tokens.mjs pins pageMarginTop to 79px (≈21mm @ 794px/210mm)',
+  /pageMarginTop:\s*['"]79px['"]/.test(tokensSrc),
+  'pageMarginTop must be 79px per standard v2 §1',
 )
 
 // No border-radius inside the paper page.

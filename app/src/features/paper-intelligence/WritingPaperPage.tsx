@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { WritingPageModel } from './writingPageModel'
+import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import './writingPaperPage.css'
 
 // Renders the writing section's A4 page chrome (part/section headings, 注意,
@@ -9,6 +10,29 @@ import './writingPaperPage.css'
 //
 // The answer box renders its border + any given lines (continuation starters);
 // the empty writing space inside is intentionally not sized in this cut.
+
+/**
+ * Extended CSSProperties to allow CSS custom properties on the root.
+ */
+type WritingPageStyle = CSSProperties & Record<`--${string}`, string | number>
+
+/**
+ * Inject shared paper-surface tokens as CSS custom properties, same
+ * mechanism as `PaperSurface.tsx`. This page wraps PaperSurface as a
+ * child, so it cannot read PaperSurface's own `--ps-*` custom properties
+ * (CSS custom properties inherit down the tree, not up) — it needs its
+ * own injection to drive `writingPaperPage.css` (刀⑤ render-fidelity
+ * Chunk A).
+ */
+const writingPageTokenStyle: WritingPageStyle = {
+  '--ps-font-stack': paperSurfaceTokens.paperFontStack,
+  '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
+  '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
+  '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
+  '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
+}
+
 export function WritingPaperPage({
   pageModel,
   children,
@@ -17,7 +41,7 @@ export function WritingPaperPage({
   children: ReactNode
 }) {
   return (
-    <div className="pi-writing-page" data-pi-writing-page="">
+    <div className="pi-writing-page" data-pi-writing-page="" style={writingPageTokenStyle}>
       {pageModel.blocks.map((block, index) => {
         switch (block.kind) {
           case 'partHeading':
