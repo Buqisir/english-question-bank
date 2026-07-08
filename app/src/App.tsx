@@ -36,6 +36,7 @@ import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/
 // branch for the legacy `surface=print` value — it falls back to
 // default like any other unknown surface.
 import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
+import { PaperBrowsePage } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
@@ -245,6 +246,19 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return {
       active: params.get('view') === 'draft-paper',
       draftPaperId: params.get('draftPaperId'),
+      focusGroupId: params.get('focusGroupId'),
+    }
+  })
+  // 刀B 整卷预览页 (paper-browse): `?view=paper-browse&paperId=<id>[&focusGroupId=<gid>]`.
+  // Same boot-read-URL-once pattern as draftPaperRoute/mySpaceRouteActive above.
+  const [paperBrowseRoute, setPaperBrowseRoute] = useState(() => {
+    if (typeof window === 'undefined') {
+      return { active: false, paperId: null as string | null, focusGroupId: null as string | null }
+    }
+    const params = new URLSearchParams(window.location.search)
+    return {
+      active: params.get('view') === 'paper-browse',
+      paperId: params.get('paperId'),
       focusGroupId: params.get('focusGroupId'),
     }
   })
@@ -664,6 +678,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null })
     setDraftPaperRoute({
       active: true,
       draftPaperId: draftPaperId || null,
@@ -689,6 +704,63 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
 
+  // 刀B: open the whole-paper preview page. `focusGroupId`, when given,
+  // scrolls the page to that group's card on load.
+  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null) => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'paper-browse')
+      url.searchParams.set('paperId', paperId)
+      if (focusGroupId) {
+        url.searchParams.set('focusGroupId', focusGroupId)
+      } else {
+        url.searchParams.delete('focusGroupId')
+      }
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setMySpaceRouteActive(false)
+    setCurrentPiRoute({ kind: 'none' })
+    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null })
+  }, [])
+
+  // Detail-page "看整卷" entry point: derives paperId (and the group to
+  // focus) from the group's paperSurfaceHref
+  // (`?view=paper-intelligence&...&paperId=<id>&groupId=<gid>`) instead of
+  // a new server field — the href already carries what we need.
+  const openPaperBrowseFromDetail = useCallback(
+    (detail: QuestionGroupDetail) => {
+      if (!detail.paperSurfaceHref) return
+      try {
+        const [, query = ''] = detail.paperSurfaceHref.split('?')
+        const params = new URLSearchParams(query)
+        const paperId = params.get('paperId')
+        if (!paperId) return
+        openPaperBrowse(paperId, params.get('groupId') || detail.id)
+      } catch {
+        /* malformed href — no-op, the button simply does nothing */
+      }
+    },
+    [openPaperBrowse],
+  )
+
+  const paperBrowseOnBackToWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        for (const param of ['view', 'paperId', 'focusGroupId']) {
+          url.searchParams.delete(param)
+        }
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null })
+  }, [])
+
   const openMySpace = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
       const url = new URL(window.location.href)
@@ -698,6 +770,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null })
     setMySpaceRouteActive(true)
     setCurrentPiRoute({ kind: 'none' })
   }, [])
@@ -776,6 +849,22 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         onBackToWorkbench={mySpaceOnBackToWorkbench}
         onOpenDraft={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
         shellNav={{ ...shellNav, onOpenMySpace: undefined }}
+      />
+    )
+  }
+
+  if (paperBrowseRoute.active && paperBrowseRoute.paperId) {
+    return (
+      <PaperBrowsePage
+        paperId={paperBrowseRoute.paperId}
+        focusGroupId={paperBrowseRoute.focusGroupId}
+        questionGroupById={questionGroupById}
+        onAddGroupsToBasket={(groups) => void addGroupsToBasket(groups)}
+        currentDraftPaperId={currentDraftPaperId}
+        currentDraftGroupCount={currentDraftGroupCount}
+        onOpenDraftPaperWorkbench={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
+        onBackToWorkbench={paperBrowseOnBackToWorkbench}
+        shellNav={shellNav}
       />
     )
   }
@@ -906,6 +995,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               onEdit={openEditEntry}
               onDelete={handleDeleteQuestionGroup}
               onAddToBasket={addToBasket}
+              onOpenPaperBrowse={openPaperBrowseFromDetail}
             />
           ) : null}
         </section>
