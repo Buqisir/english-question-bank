@@ -21,6 +21,7 @@
  */
 import {
   ArrowLeft,
+  Eye,
   Pencil,
   Plus,
   Tag,
@@ -94,6 +95,10 @@ export type QuestionGroupDetailViewProps = {
   onEdit: (detail: QuestionGroupDetail) => void
   onDelete: (detail: QuestionGroupDetail) => void
   onAddToBasket: (detail: QuestionGroupDetail) => void
+  /** 刀B: opens the whole-paper preview page (paper-browse), scrolled to
+   * this group. Only rendered when the group has a paperSurfaceHref (its
+   * paper has a paper-asset). */
+  onOpenPaperBrowse: (detail: QuestionGroupDetail) => void
 }
 
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
@@ -113,6 +118,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onEdit,
     onDelete,
     onAddToBasket,
+    onOpenPaperBrowse,
   } = props
 
   // These useMemos previously lived in App.tsx (App.tsx:1261-1293 pre-cut);
@@ -200,6 +206,16 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 >
                   <Trash2 size={16} />
                   删除
+                </button>
+              )}
+              {selectedDetail.paperSurfaceHref && (
+                <button
+                  className="detail-button"
+                  type="button"
+                  onClick={() => onOpenPaperBrowse(selectedDetail)}
+                >
+                  <Eye size={16} />
+                  看整卷
                 </button>
               )}
               <button

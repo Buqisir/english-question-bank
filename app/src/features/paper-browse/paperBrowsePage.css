@@ -1,0 +1,154 @@
+/**
+ * PaperBrowsePage — layout CSS (刀B v1).
+ *
+ * PaperSurface internals (PaperSurface.css / shared/papersurface/**) are
+ * untouched; this file only styles the page shell, the left 目录 rail,
+ * and the group-card chrome that wraps each PaperSurface mount.
+ */
+
+.paper-browse-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f4f1ea;
+}
+
+.paper-browse-shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.paper-browse-rail {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.paper-browse-rail-item {
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #4a4438;
+  cursor: pointer;
+}
+
+.paper-browse-rail-item:hover {
+  background: rgba(74, 68, 56, 0.08);
+}
+
+.paper-browse-rail-item--part {
+  font-weight: 700;
+  margin-top: 12px;
+  color: #2c2820;
+}
+
+.paper-browse-rail-item--part:first-child {
+  margin-top: 0;
+}
+
+.paper-browse-rail-item--section {
+  font-weight: 600;
+  padding-left: 16px;
+}
+
+.paper-browse-rail-item--group {
+  padding-left: 26px;
+  color: #6b6455;
+}
+
+.paper-browse-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.paper-browse-part-heading {
+  margin: 24px 0 4px;
+  font-size: 20px;
+  color: #2c2820;
+}
+
+.paper-browse-part-heading:first-child {
+  margin-top: 0;
+}
+
+.paper-browse-section-heading {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: #4a4438;
+}
+
+.paper-browse-instruction {
+  margin: 0;
+  font-size: 13px;
+  color: #6b6455;
+}
+
+.paper-browse-pagebreak {
+  height: 1px;
+  border-top: 1px dashed rgba(74, 68, 56, 0.25);
+  margin: 8px 0;
+}
+
+.paper-browse-group-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(44, 40, 32, 0.08);
+  overflow: hidden;
+}
+
+.paper-browse-group-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(74, 68, 56, 0.1);
+}
+
+.paper-browse-group-card-header h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #2c2820;
+}
+
+.paper-browse-loading,
+.paper-browse-error {
+  padding: 48px 24px;
+  text-align: center;
+  color: #6b6455;
+}
+
+.paper-browse-placeholder {
+  padding: 24px;
+  font-size: 13px;
+  color: #8a8272;
+}
+
+@media (max-width: 900px) {
+  .paper-browse-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .paper-browse-rail {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: none;
+  }
+}

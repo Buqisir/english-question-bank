@@ -77,6 +77,7 @@ const registry = {
   'scripts/verify-analysis-layering.mjs',
   'scripts/verify-launch-deploy.mjs',
   'scripts/verify-paper-assets-consistency.mjs',
+  'scripts/verify-paper-browse.mjs',
   ],
 }
 
