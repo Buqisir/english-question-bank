@@ -23,12 +23,15 @@ Last updated: 2026-07-07（process-slim）
 
 ## 主线焦点
 
-- 2026-07-07：小川接管（owner 全权委托）。process-slim + data-orphan-cleanup
-  两刀已收官。**当前主线 = UI 大改（目标：全站协调一致）**：审计完成
-  （26/40，`docs/cuts/ui-coherence/audit.md`），owner 圈定 ①-⑥ 按序全做 +
-  两口径（解析面板归队墨绿 / AI 内部数据 member 隐藏 owner 保留）。
-  刀① ui-shell-unify 已合并（PR #269：AppTopbar 归一、返回统一、去 C4）。
-  下一刀 = ② 解析面板归队。绿色方向沿用 DESIGN.md 墨绿章程不变。
+- 2026-07-07/08：**UI 一致性系列六刀全部收官**（PR #269-#274，均经
+  Sonnet DEV + fresh Opus CR + CI；4 个 CR Must Fix 全部闭环）：
+  ① 外壳统一（AppTopbar/返回统一/去 C4）② 解析面板归队墨绿（作废
+  PR #52 warm-pencil）③ token 大扫除（焦点环/圆角/阴影/语义色/AA）
+  ④ AI 内部数据 member 隐藏 ⑤ 找题体验（loading 骨架/标题列宽；烂点#4
+  经实证已不存在）⑥ 打磨杂项（死 CSS 六组/口吻人话化/思考开关/焦点环
+  家族/overlay 归中性/分类色豁免落档 DESIGN.md）。烂点清单 6 项全清。
+  审计基线 26/40（`docs/cuts/ui-coherence/audit.md`）；生产部署与复评
+  见 go-live 记录后续。此前收官：process-slim、data-orphan-cleanup。
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
