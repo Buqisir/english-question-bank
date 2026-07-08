@@ -210,14 +210,17 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               {selectedDetail.hasPaperSurfaceAnalysis &&
                 selectedDetail.paperSurfaceHref &&
                 selectedDetail.paperSurfaceLabel && (
-                <button
+                // 直达解析面（paperSurfaceHref = view=paper-intelligence&surface=paper），
+                // 与搜索卡同款 <a href> 直链——勿接 onOpenPaperBrowse（那是看整卷）
+                <a
                   className="detail-button"
-                  type="button"
-                  onClick={() => onOpenPaperBrowse(selectedDetail)}
+                  href={selectedDetail.paperSurfaceHref}
+                  data-ra-entry="detail-view"
+                  data-ra-group-id={selectedDetail.id}
                 >
                   <BookOpen size={16} />
                   {selectedDetail.paperSurfaceLabel}
-                </button>
+                </a>
               )}
               <button
                 className="add-button"

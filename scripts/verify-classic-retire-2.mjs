@@ -157,6 +157,13 @@ assert(
   /selectedDetail\.hasPaperSurfaceAnalysis[\s\S]{0,80}selectedDetail\.paperSurfaceHref[\s\S]{0,80}selectedDetail\.paperSurfaceLabel/.test(detailView) &&
     /\{selectedDetail\.paperSurfaceLabel\}/.test(detailView),
 )
+assert(
+  '看解析 entry navigates to the ANALYSIS surface via href={selectedDetail.paperSurfaceHref} (CR MF-1: must NOT reuse onOpenPaperBrowse, which is 看整卷)',
+  /href=\{selectedDetail\.paperSurfaceHref\}/.test(detailView) &&
+    !/paperSurfaceLabel[\s\S]{0,200}onOpenPaperBrowse/.test(
+      detailView.slice(detailView.indexOf('hasPaperSurfaceAnalysis')),
+    ),
+)
 
 // ------------------------------------------------------------------ 2. detailHelpers + App.tsx extraction
 
