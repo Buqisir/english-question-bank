@@ -178,6 +178,12 @@ import {
   paperSurfaceHostInitialState,
   paperSurfaceHostInteractionReducer,
 } from './paperSurfaceHostInteraction'
+import {
+  resolveGroupChromeBlocks,
+  EMPTY_GROUP_CHROME,
+  type GroupChromeBlocks,
+} from './groupChromeBlocks.ts'
+import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import type {
   PaperIntelligenceReport,
   PassageReport,
@@ -187,7 +193,21 @@ import type {
 import type { PaperAssetV1, WritingAnalysis } from '../../domain/paperAsset.ts'
 import type { PaperIntelligenceSource } from './paperIntelligenceRoute.ts'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
+import type { CSSProperties } from 'react'
 import './paperIntelligencePaperSurfaceHarness.css'
+
+/** Extended CSSProperties to allow the CSS custom property this chrome uses. */
+type GroupChromeStyle = CSSProperties & Record<`--${string}`, string | number>
+
+/**
+ * Same token-injection mechanism as `WritingPaperPage.tsx` / `PaperSurface.tsx`
+ * — the chrome sits outside `.ps-surface` (a sibling above it), so it cannot
+ * read PaperSurface's own `--ps-font-stack` (custom properties inherit down
+ * the tree, not across siblings) and needs its own injection.
+ */
+const groupChromeTokenStyle: GroupChromeStyle = {
+  '--ps-font-stack': paperSurfaceTokens.paperFontStack,
+}
 
 type Props = {
   paperId: string | null
@@ -235,6 +255,13 @@ export function PaperIntelligencePaperSurfaceHarness({
   const [grammarFillModel, setGrammarFillModel] = useState<GrammarFillPaperViewModel | null>(null)
   const [writingModel, setWritingModel] = useState<WritingPaperViewModel | null>(null)
   const [writingAnalysisModel, setWritingAnalysisModel] = useState<WritingAnalysis | null>(null)
+  // section-chrome-on-solo-surface: sectionHeading/instruction blocks
+  // immediately preceding the current group in the paper-asset's flat
+  // block stream (see groupChromeBlocks.ts). Writing groups render their
+  // own equivalent chrome via WritingPageModel already, so this stays
+  // EMPTY_GROUP_CHROME (unset) whenever writingModel is active — the
+  // render below gates on `!writingModel` to avoid a double heading.
+  const [groupChrome, setGroupChrome] = useState<GroupChromeBlocks>(EMPTY_GROUP_CHROME)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const [bodies, setBodies] = useState<Record<string, string>>({})
   const [inputOptions, setInputOptions] = useState<Record<string, QuestionOption[]>>({})
@@ -311,6 +338,7 @@ export function PaperIntelligencePaperSurfaceHarness({
       setGrammarFillAnalysisModel(null)
       setWritingModel(null)
       setWritingAnalysisModel(null)
+      setGroupChrome(EMPTY_GROUP_CHROME)
       setOpenSevenChoiceQuestionIds([])
       setBodies({})
       setInputOptions({})
@@ -341,6 +369,11 @@ export function PaperIntelligencePaperSurfaceHarness({
           if (!cancelled) {
             setShellTitle([asset.paper.title, group.title].filter(Boolean).join(' · ') || null)
           }
+          // section-chrome-on-solo-surface: resolved once against the asset
+          // as first loaded; the reading/sevenChoices branch below may
+          // reload `asset` off a legacy fallback base and recomputes it
+          // against the final asset there.
+          let groupChromeBlocks = resolveGroupChromeBlocks(asset, initialGroupId)
           // Cloze: fetch analysis → dispatch ClozeAnalysisPanel; fallback to plain view.
           if (group.groupType === 'cloze') {
             let clozeAnalysisRes: Response | null = null
@@ -368,6 +401,7 @@ export function PaperIntelligencePaperSurfaceHarness({
                 setGrammarFillModel(null)
                 setWritingModel(null)
                 setWritingAnalysisModel(null)
+                setGroupChrome(groupChromeBlocks)
                 setReport(analysisModel.report)
                 setPassageStructures(analysisModel.passageStructures)
                 setLoading(false)
@@ -386,6 +420,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             setGrammarFillModel(null)
             setWritingModel(null)
             setWritingAnalysisModel(null)
+            setGroupChrome(groupChromeBlocks)
             setReport(model.report)
             setPassageStructures(model.passageStructures)
             setLoading(false)
@@ -420,6 +455,7 @@ export function PaperIntelligencePaperSurfaceHarness({
                 setPaperAssetModel(null)
                 setWritingModel(null)
                 setWritingAnalysisModel(null)
+                setGroupChrome(groupChromeBlocks)
                 setReport(analysisModel.report)
                 setPassageStructures(analysisModel.passageStructures)
                 setLoading(false)
@@ -439,6 +475,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             setPaperAssetModel(null)
             setWritingModel(null)
             setWritingAnalysisModel(null)
+            setGroupChrome(groupChromeBlocks)
             setReport(model.report)
             setPassageStructures(model.passageStructures)
             setLoading(false)
@@ -503,6 +540,8 @@ export function PaperIntelligencePaperSurfaceHarness({
                   ? 'seven-choices-analysis-v1.json'
                   : 'reading-choice-analysis-v1.json'
               analysisRes = await fetch(`${resolvedAssetBase}/analyses/${analysisFile}`)
+              // Re-resolve against the reloaded legacy asset.
+              groupChromeBlocks = resolveGroupChromeBlocks(asset, initialGroupId)
             }
           }
           if (!analysisRes.ok) {
@@ -533,6 +572,7 @@ export function PaperIntelligencePaperSurfaceHarness({
             setPaperAssetModel(model as PaperAssetSurfaceModel)
             setSevenChoicesModel(null)
           }
+          setGroupChrome(groupChromeBlocks)
           setReport(model.report)
           setPassageStructures(model.passageStructures)
           setLoading(false)
@@ -1408,7 +1448,24 @@ export function PaperIntelligencePaperSurfaceHarness({
           {writingModel ? (
             <WritingPaperPage pageModel={writingModel.pageModel}>{paperSurfaceEl}</WritingPaperPage>
           ) : (
-            paperSurfaceEl
+            <>
+              {/* section-chrome-on-solo-surface: the sectionHeading/instruction
+                 blocks immediately preceding this group in the paper-asset's
+                 content.blocks flow (writing groups already render their own
+                 equivalent chrome via WritingPageModel above, so groupChrome
+                 stays empty and this never double-renders for them). */}
+              {(groupChrome.sectionHeading || groupChrome.instruction) && (
+                <div className="pi-ps-group-chrome" style={groupChromeTokenStyle}>
+                  {groupChrome.sectionHeading && (
+                    <h3 className="pi-ps-group-chrome-section-heading">{groupChrome.sectionHeading}</h3>
+                  )}
+                  {groupChrome.instruction && (
+                    <p className="pi-ps-group-chrome-instruction">{groupChrome.instruction}</p>
+                  )}
+                </div>
+              )}
+              {paperSurfaceEl}
+            </>
           )}
           {sevenChoicesModel && sevenChoiceOverlay.marks.length > 0 && (
             <div className="pi-seven-blank-overlay" aria-hidden="true">
