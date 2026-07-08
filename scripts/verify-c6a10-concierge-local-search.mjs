@@ -169,16 +169,19 @@ assert('local-direct fallback reason is encoded', source.includes("fallbackReaso
 assert('single-letter Latin token comment explains C/D labels', source.includes('Single-letter Latin tokens'))
 assert('Reading C/D aliases are explicit', source.includes('`reading ${readingSection}`'))
 
-console.log('\n-- 6. Runtime API data is merged with repo samples --')
+console.log('\n-- 6. Repo samples are offline fallback only, never merged into API data --')
 const appSource = read('app/src/App.tsx')
-assert('App defines sample/API merge helper', appSource.includes('function mergeQuestionGroupsWithSamples'))
-// 大重构后初始加载与所有刷新路径收敛进单一的 refreshQuestionGroups——
-// 不再数文本 call-site（旧断言在 main 上长红），改钉真不变量：
-// 合并调用必须住在 refreshQuestionGroups 内，且该函数被 ≥2 处调用
-// （挂载 effect + 各刷新点），保证初始与刷新都走 sample 合并。
+// 2026-07-08 起：样例不再与后端数据合并（硬编码样例会在正式列表里
+// 冒出"点进去 404"的幽灵题组）。新不变量：取数成功 → 只用真实数据；
+// 样例只在 fetch 失败且手上没有任何数据时兜底。
+assert('sample/API merge helper is gone', !appSource.includes('mergeQuestionGroupsWithSamples'))
 assert(
-  'API loads merge samples inside the single refreshQuestionGroups choke point',
-  /const refreshQuestionGroups = useCallback[\s\S]{0,400}setQuestionGroups\(mergeQuestionGroupsWithSamples\(groups\)\)/.test(appSource),
+  'fetch success sets API groups directly inside refreshQuestionGroups',
+  /const refreshQuestionGroups = useCallback[\s\S]{0,400}setQuestionGroups\(groups\)/.test(appSource),
+)
+assert(
+  'samples only appear as the offline fallback when nothing is loaded',
+  /catch[\s\S]{0,400}current\.length \? current : sampleQuestionGroups/.test(appSource),
 )
 assert(
   'initial mount and refresh paths both route through refreshQuestionGroups',

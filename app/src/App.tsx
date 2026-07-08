@@ -64,12 +64,6 @@ function normalizeAiModel(value: string) {
   return DEEPSEEK_MODEL_ALIASES[normalized] || DEEPSEEK_MODELS[0].value
 }
 
-function mergeQuestionGroupsWithSamples(groups: QuestionGroupCard[]): QuestionGroupCard[] {
-  const seen = new Set(groups.map((group) => group.id))
-  const missingSamples = sampleQuestionGroups.filter((group) => !seen.has(group.id))
-  return [...groups, ...missingSamples]
-}
-
 const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 
 function buildGrammarVerifyResult(
@@ -262,7 +256,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       focusGroupId: params.get('focusGroupId'),
     }
   })
-  const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>(sampleQuestionGroups)
+  const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>([])
   const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
   // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
   // hook can be created BEFORE paperExports / saveStatus / previewStatus
@@ -326,10 +320,13 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     try {
       const groups = await fetchQuestionGroups()
       if (ignore?.()) return
-      setQuestionGroups(mergeQuestionGroupsWithSamples(groups))
+      setQuestionGroups(groups)
       setDataStatus('sqlite')
     } catch {
       if (ignore?.()) return
+      // Offline fallback only: keep any real data already loaded; show repo
+      // samples only when we have nothing at all to render.
+      setQuestionGroups((current) => (current.length ? current : sampleQuestionGroups))
       setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
     }
   }, [])
@@ -372,11 +369,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     let ignore = false
 
     refreshQuestionGroups(() => ignore)
-      .catch(() => {
-        if (ignore) return
-        setQuestionGroups(sampleQuestionGroups)
-        setDataStatus('sample')
-      })
 
     return () => {
       ignore = true
