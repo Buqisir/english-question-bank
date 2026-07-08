@@ -54,7 +54,10 @@ not mass-rename history.
   ② 每个 DEV 独立 git worktree（严禁两个 DEV 共用一个工作目录——
   刀⑤ B/C 撞车教训）；③ 施工并行、收口串行：CR → rebase → 合并 → CI
   逐把收，后合并者负责 rebase。DEV prompt 中禁用 `git stash`（主树可能
-  有他人未提交内容）。
+  有他人未提交内容）。worktree DEV 开工第一步跑
+  `bash scripts/setup-worktree.sh`（装 app/server 依赖 + 从主树复制
+  gitignored 的本地库；幂等），不要即兴自装——server 用 npm 不用 pnpm，
+  装错会产出不该存在的 lockfile。
 - CR-lite（主代理直接冷读 diff）适用于 small 刀与低风险 polish；CR 只
   复核未证实项，已被 CI/verify 证实的不重跑（范围纪律，#275/#276 试跑）。
 
