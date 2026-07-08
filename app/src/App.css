@@ -388,13 +388,13 @@ button:disabled {
   background: var(--panel);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .group-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   border-color: var(--accent);
 }
 
@@ -987,7 +987,7 @@ button:disabled {
 }
 
 .answer-compare-box.correct {
-  border-color: #16a264;
+  border-color: var(--eqb-color-success);
   background: var(--mint-soft);
 }
 
@@ -1000,7 +1000,7 @@ button:disabled {
 
 .answer-compare-box.uncertain,
 .answer-compare-box.pending {
-  border-color: #c49b2a;
+  border-color: var(--eqb-color-warning);
   background: var(--amber-soft);
 }
 
@@ -1150,7 +1150,7 @@ button:disabled {
   gap: 2px;
   padding: 7px 8px;
   border: 1px solid var(--line);
-  border-radius: 7px;
+  border-radius: 6px;
   background: var(--surface);
   color: var(--ink);
   font-size: 12px;
@@ -1601,7 +1601,7 @@ button:disabled {
   width: min(780px, 100vw);
   height: 100vh;
   background: var(--panel);
-  box-shadow: -12px 0 40px rgba(30, 30, 28, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .entry-header {
@@ -2328,7 +2328,7 @@ button:disabled {
 }
 
 .verify-item.correct {
-  border-color: #16a264;
+  border-color: var(--eqb-color-success);
   background: var(--mint-soft);
 }
 
@@ -2340,7 +2340,7 @@ button:disabled {
 }
 
 .verify-item.uncertain {
-  border-color: #c49b2a;
+  border-color: var(--eqb-color-warning);
   background: var(--amber-soft);
 }
 
@@ -2446,7 +2446,7 @@ button:disabled {
   align-items: center;
   gap: 10px;
   padding: 9px 10px;
-  border-radius: 7px;
+  border-radius: 6px;
   color: var(--ink);
   background: var(--surface-strong);
   font-size: 14px;
@@ -3054,7 +3054,7 @@ button:disabled {
 .paper-canvas-block {
   position: relative;
   border: 1px solid var(--line);
-  border-radius: 7px;
+  border-radius: 6px;
   padding: 14px 16px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -3157,7 +3157,7 @@ button:disabled {
   min-height: 26px;
   padding: 0 8px;
   border: 1px solid var(--line);
-  border-radius: 5px;
+  border-radius: 6px;
   background: var(--surface-strong);
   color: var(--muted);
   font-size: 11px;
@@ -3321,7 +3321,7 @@ button:disabled {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 10;
   white-space: nowrap;
 }
@@ -3330,7 +3330,7 @@ button:disabled {
   min-height: 26px;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 5px;
+  border-radius: 6px;
   background: var(--surface-strong);
   color: var(--ink);
   font-size: 12px;
@@ -3405,7 +3405,7 @@ button:disabled {
   align-items: stretch;
   background: #FFFFFF;
   border: 1px solid #D8D8D2;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8px 8px 8px 18px;
   min-height: 56px;
   transition: border-color 0.15s, box-shadow 0.15s;
@@ -3463,8 +3463,8 @@ button:disabled {
 }
 
 .concierge-intent-submit:focus-visible {
-  outline: 2px solid rgba(44, 110, 86, 0.6);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 .concierge-intent-submit:disabled {
@@ -3488,8 +3488,8 @@ button:disabled {
 }
 
 .concierge-thinking-toggle input[type='checkbox']:focus-visible {
-  outline: 2px solid rgba(44, 110, 86, 0.6);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 .concierge-thinking-toggle label {
@@ -3608,7 +3608,7 @@ button:disabled {
   flex-direction: column;
   gap: 0;
   border: 1px solid #D8D8D2;
-  border-radius: 16px;
+  border-radius: 8px;
   background: #FFFFFF;
   overflow: visible;
 }
@@ -3647,7 +3647,7 @@ button:disabled {
 }
 
 .concierge-row:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(44, 110, 86, 0.6);
+  box-shadow: inset 0 0 0 3px rgba(44, 110, 86, 0.35);
 }
 
 .concierge-row-anchor {
@@ -3759,7 +3759,7 @@ button:disabled {
 .concierge-action:focus-visible {
   outline: none;
   border-color: #2C6E56;
-  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 .concierge-action:disabled {
@@ -3784,7 +3784,7 @@ button:disabled {
 
 .concierge-action-add:focus-visible {
   border-color: #2C6E56;
-  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 /* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
@@ -4022,7 +4022,7 @@ button:disabled {
   margin: 4px 0 0;
   font-size: 11.5px;
   line-height: 1.45;
-  color: #9A9A93;
+  color: var(--eqb-color-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -4094,6 +4094,7 @@ button:disabled {
   outline: none;
   border-color: #2C6E56;
   color: #1E1E1C;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 /* In AI mode, keep the hint and chips centered with the intent bar. */
@@ -4279,7 +4280,7 @@ button:disabled {
 .concierge-row-expand:focus-visible {
   outline: none;
   background: #EDEDEA;
-  box-shadow: 0 0 0 2px rgba(44, 110, 86, 0.6);
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 .concierge-row-expand.open {
@@ -4376,7 +4377,7 @@ button:disabled {
   scroll-snap-align: start;
   background: #FFFFFF;
   border: 1px solid #D8D8D2;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 12px;
   display: flex;
   flex-direction: column;
@@ -4472,7 +4473,7 @@ button:disabled {
   flex-direction: column;
   gap: 0;
   border: 1px solid #D8D8D2;
-  border-radius: 16px;
+  border-radius: 8px;
   background: #FFFFFF;
   overflow: visible;
 }
@@ -4507,7 +4508,7 @@ button:disabled {
 }
 
 .concierge-paper-row:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(44, 110, 86, 0.6);
+  box-shadow: inset 0 0 0 3px rgba(44, 110, 86, 0.35);
 }
 
 .concierge-paper-row.is-expanded {
@@ -4682,7 +4683,7 @@ button:disabled {
 .concierge-group-card {
   background: #FFFFFF;
   border: 1px solid #D8D8D2;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
