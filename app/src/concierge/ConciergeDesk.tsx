@@ -248,9 +248,29 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       </div>
 
       {dataLoading && (
-        <p className="concierge-data-loading" role="status">
-          正在连接本地题库，稍候即可搜索。
-        </p>
+        <>
+          <p className="concierge-data-loading" role="status">
+            正在连接本地题库，稍候即可搜索。
+          </p>
+          {/* ui-search-feel 刀⑤ #1 — dataLoading skeleton. The status line
+              above carries the a11y state; these blocks are pure visual
+              placeholders (aria-hidden) so the first paint isn't a blank
+              page while the local SQLite connects. */}
+          <ul className="concierge-skeleton-chip-row" aria-hidden="true">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <li key={index} className="concierge-skeleton-chip" />
+            ))}
+          </ul>
+          <div className="concierge-skeleton-feed" aria-hidden="true">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="concierge-skeleton-feed-group">
+                <div className="concierge-skeleton-line concierge-skeleton-feed-title" />
+                <div className="concierge-skeleton-line concierge-skeleton-feed-row" />
+                <div className="concierge-skeleton-line concierge-skeleton-feed-row short" />
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Cut ai-mode-filter-chips (C5): structured filter row replaces the
