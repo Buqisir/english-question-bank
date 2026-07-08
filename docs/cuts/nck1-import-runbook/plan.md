@@ -69,6 +69,28 @@ Touches schema, data contract, product boundary, or teaching interpretation:
 - C8 本地库直写纪律遵守(README 硬纪律:停 API → 发布 → 重启);
   **不碰生产**——生产同步方案在完成报告里给建议,由 PM 另拍。
 
+### 修订(2026-07-08,酸测试第 1 轮发现,PM 拍板)
+
+酸测试实证:`server/paper-import/validator.mjs` 写死「必须且只能
+1 个 DOCX(PK 魔数)」,格式② PDF 源在 `--publish` 被硬拒——
+owner 已拍板的白名单格式②在契约层无入口。增补:
+
+- C9 validator 扩展(**最小增量**):源文档仍恰好 1 个,类型放宽为
+  `.docx`(PK 魔数)**或** `.pdf`(`%PDF` 魔数),各查各的魔数;
+  其余全部校验、错误信封、DB/资产写入路径一字不动。行为断言
+  进 `verify-nck1-standard.mjs` 或新 verify(起真模块验两种源
+  + 一种伪造魔数被拒),不改现有 verify-*.mjs。
+- C10 `02-publish.mjs` 发布失败时打印 validator 的
+  blockingIssues/rejectedFiles 详情(酸测试实证的诊断盲区)。
+- C11 runbook 步骤 1/8 同步修正(「不查扩展名」的误导句删除,
+  写清发布链路的校验点);酸测试重跑步骤 8-11 直至全绿。
+
+File Set 相应扩大:`server/paper-import/validator.mjs`(契约文件,
+改前 `touch .claude/contract-unlock`,commit 后删除)、
+`scripts/import-pipeline/02-publish.mjs`。PA-lite 降格理由更新:
+C9 为纯增量放宽(新增可接受源类型 + 同等强度魔数校验),发布
+产物形状与所有消费方零变化;CR 必须专项复核此降格。
+
 ## 参考实现(可偏离,偏离须在完成报告里说明)
 
 - PDF → 文本:优先 agent 直读 PDF 产出结构化文本喂
