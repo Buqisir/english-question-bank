@@ -185,6 +185,38 @@
 }
 
 /*
+ * section-chrome-on-solo-surface: the 节标题/指导语 that sit just above this
+ * group in the paper-asset's document-order block stream — the same two
+ * block types PaperBrowsePage already renders (`.paper-browse-section-heading`
+ * / `.paper-browse-instruction`), reused here at solo-group scale. Sits on
+ * the harness's desk background as a sibling above the PaperSurface card,
+ * width-locked to the same 794px page track so it reads as that page's own
+ * header rather than a floating harness label.
+ */
+.pi-ps-group-chrome {
+  width: var(--ps-page-width, 794px);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 0 0.5rem;
+  box-sizing: border-box;
+}
+
+.pi-ps-group-chrome-section-heading {
+  margin: 0;
+  font-family: var(--ps-font-stack);
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c2820;
+}
+
+.pi-ps-group-chrome-instruction {
+  margin: 4px 0 0;
+  font-family: var(--ps-font-stack);
+  font-size: 13px;
+  color: #4a4438;
+}
+
+/*
  * Right analysis column.
  *
  * The analysis track stays column 3 (~380px), so content measure is

@@ -79,6 +79,7 @@ const registry = {
   'scripts/verify-paper-assets-consistency.mjs',
   'scripts/verify-paper-browse.mjs',
   'scripts/verify-list-groups-perf.mjs',
+  'scripts/verify-section-chrome-on-solo-surface.mjs',
   ],
 }
 
