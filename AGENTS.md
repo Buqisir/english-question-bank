@@ -48,6 +48,15 @@ not mass-rename history.
   downgrade reason goes in the plan header and CR must review it.
 - Workflows (deterministic multi-agent fan-out) are allowed for parallel
   work; each `agent()` call sets `model` explicitly per the tier table.
+- **Parallel cut pipeline**（固化 2026-07-08，两轮实战：#279/#280 与
+  surface-question-policy/detail-slim）：多把刀可并行施工，硬条件三条——
+  ① 派工前主代理核对文件面零交集，有交点必须在两边 plan 里钉死边界；
+  ② 每个 DEV 独立 git worktree（严禁两个 DEV 共用一个工作目录——
+  刀⑤ B/C 撞车教训）；③ 施工并行、收口串行：CR → rebase → 合并 → CI
+  逐把收，后合并者负责 rebase。DEV prompt 中禁用 `git stash`（主树可能
+  有他人未提交内容）。
+- CR-lite（主代理直接冷读 diff）适用于 small 刀与低风险 polish；CR 只
+  复核未证实项，已被 CI/verify 证实的不重跑（范围纪律，#275/#276 试跑）。
 
 ### Tier / effort defaults
 
