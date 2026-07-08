@@ -586,8 +586,8 @@ const suppressedQuestions2026i = grammarFillModel2026i.surfaceData.questions.fil
   (q) => q.stem === '' && q.options.length === 0,
 )
 assert(
-  '2026-i grammarFill fixture: at least one real question has empty stem + no options (no stored blank.prompt) — the exact shape PaperSurface suppresses',
-  suppressedQuestions2026i.length > 0,
+  '2026-i grammarFill fixture: EVERY question has empty stem + no options (synthetic prompt option retired — hints render in-passage; all rail rows suppressed)',
+  suppressedQuestions2026i.length === grammarFillModel2026i.surfaceData.questions.length && grammarFillModel2026i.surfaceData.questions.length > 0,
   JSON.stringify(grammarFillModel2026i.surfaceData.questions.map((q) => ({ no: q.questionNo, stem: q.stem, n: q.options.length }))),
 )
 const suppressedQuestions960 = grammarFillModel960.surfaceData.questions.filter(

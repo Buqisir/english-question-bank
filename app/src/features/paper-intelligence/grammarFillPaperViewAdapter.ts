@@ -49,7 +49,6 @@ export function buildGrammarFillPaperView(input: {
 
   const questions = questionIds.map((qid, order) => {
     const q = asset.content.questions[qid]
-    const blank = asset.content.blanks?.[q?.blankId ?? '']
     const questionNo = String(q?.questionNo ?? '')
     const rawStem = q?.stem ?? ''
     return {
@@ -61,9 +60,10 @@ export function buildGrammarFillPaperView(input: {
       // number (matches its own questionNo) duplicates the rendered "56."
       // label — suppress it instead of showing "56. 56".
       stem: rawStem.trim() === questionNo && /^\d+$/.test(rawStem.trim()) ? '' : rawStem,
-      options: blank?.prompt
-        ? [{ label: 'prompt', text: blank.prompt }]
-        : [],
+      // 提示词已随挖空渲在文中（`__56__ (hold)`），rail 里不再造
+      // `label:'prompt'` 假选项——否则空题干同行策略会渲出「56. prompt. hold」
+      // 噪音行（owner QA 2026-07-08）。语法填空的 rail 行应整体消失。
+      options: [],
     }
   })
 
