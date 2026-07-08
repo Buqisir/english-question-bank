@@ -15,6 +15,24 @@
 // The factory returns the 3 entry fns api.mjs re-injects into createExportImplementation:
 // buildDocumentXml / writeDocxPackage / convertDocxToPdf. The other 23 docx helpers +
 // readingDistractorTypeLabel stay file-private.
+//
+// 刀⑤ render-fidelity Chunk C: DOCX 归标 to standard v2 (§1/§2/§3/§6/§8).
+// rFonts (Times New Roman EN / 宋体 ZH, Hei family for 部标题/卷名 headings),
+// explicit size:21 (10.5pt) on the student-paper BODY runs (passage / stem /
+// options / writing-answer-box) in BOTH document builders below — NOT on the
+// teacher-analysis chrome (pushDocxReadingAnalysis / pushDocxGrammarAnalysis /
+// pushDocxClozeAnalysis / pushDocxSevenChoicesAnalysis / pushDocxAnswerArea,
+// ≈L289-379), which is out of the exam-format standard's scope (PA F3) and is
+// left untouched. Page margins (24mm left/right, 21mm top) and a footer page
+// number ("英语试题 第X页(共Y页)") land on BOTH sectPr builders (the exam
+// builder's ≈L571 and the handout builder's ≈L755, PA F3). Blank-marker
+// styling reuses `shared/papersurface/blankPattern.mjs` (`paperBlankPattern`,
+// the SAME pattern the screen PaperSurface / Chunk B print-renderer use) —
+// per PA F2, NOT I15's `grammarFillBlankPattern`. DOCX has no CSS underline
+// span, so the marker is rendered as the standard §6-documented Word-side
+// convention: an underlined run of padding spaces + centered number (2+2 for
+// cloze/grammar_cloze, 3+3 for seven_choices) — the "Word 授课/命题场景按
+// 空格法" note in the standard, mirroring Chunk B's HTML widths.
 
 import { execFileSync } from 'node:child_process'
 import {
@@ -28,6 +46,8 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+
+import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
 
 let groupTypeLabels
 let optionalString
@@ -55,10 +75,22 @@ function escapeXml(value) {
     .replaceAll("'", '&apos;')
 }
 
+// 刀⑤ render-fidelity Chunk C — standard §2: DOCX 导出必须显式设置 rFonts.
+// Default body rFonts = Times New Roman (EN) / 宋体 (ZH); `options.heading`
+// switches to the 中黑/黑体 family used by 部标题「第X部分…」and the 卷名
+// title (standard §2 — 节标题/篇章标题 stay in the default serif family).
+function docxRFonts(options) {
+  const asciiFamily = options.heading ? 'SimHei' : 'Times New Roman'
+  const eastAsiaFamily = options.heading ? '黑体' : '宋体'
+  return `<w:rFonts w:ascii="${asciiFamily}" w:hAnsi="${asciiFamily}" w:eastAsia="${eastAsiaFamily}"/>`
+}
+
 function run(text, options = {}) {
   const runProperties = [
+    docxRFonts(options),
     options.bold ? '<w:b/>' : '',
     options.italic ? '<w:i/>' : '',
+    options.underline ? '<w:u w:val="single"/>' : '',
     options.size ? `<w:sz w:val="${options.size}"/>` : '',
     options.color ? `<w:color w:val="${options.color}"/>` : '',
   ].join('')
@@ -67,11 +99,11 @@ function run(text, options = {}) {
     .map((part, index) => `${index > 0 ? '<w:br/>' : ''}<w:t xml:space="preserve">${escapeXml(part)}</w:t>`)
     .join('')
 
-  return `<w:r>${runProperties ? `<w:rPr>${runProperties}</w:rPr>` : ''}${textXml}</w:r>`
+  return `<w:r><w:rPr>${runProperties}</w:rPr>${textXml}</w:r>`
 }
 
 function paragraph(content = '', options = {}) {
-  const children = Array.isArray(content) ? content.join('') : run(content)
+  const children = Array.isArray(content) ? content.join('') : run(content, options.size ? { size: options.size } : {})
   const properties = [
     options.align ? `<w:jc w:val="${options.align}"/>` : '',
     options.before || options.after
@@ -130,6 +162,80 @@ function normalizeDocxLines(text) {
 
 function stripTrailingSpaces(line) {
   return line.replace(/[^\S\u3000]+$/, '').replace(/^[^\S\u3000]+/, '')
+}
+
+// \u5200\u2464 render-fidelity Chunk C \u2014 standard \u00a76 \u6316\u7a7a, Word-side convention:
+// "\u7a7a\u683c+\u4e0b\u5212\u7ebf\u6784\u9020,\u4e03\u9009\u4e94 3+3\u3001\u5b8c\u5f62/\u8bed\u6cd5\u586b\u7a7a 2+2 \u4e2a\u7a7a\u683c" \u2014 the number sits
+// centered inside an underlined run of padding spaces on each side.
+function docxBlankPaddingSpaces(groupType) {
+  return groupType === 'seven_choices' ? '   ' : '  '
+}
+
+/**
+ * Renders one passage line as an array of `run()` calls (paragraph()'s
+ * array-content branch), replacing every `paperBlankPattern` match
+ * (`__41__` / `_____36_____` / `__56__`) with an underlined
+ * padding+number+padding run \u2014 standard \u00a76. Prose runs get the student-paper
+ * body size (21 = 10.5pt); PA F2: same shared pattern as screen/print, same
+ * escape-then-inject order (prose text escaped via `run()`'s own
+ * `escapeXml`, the blank's own text is a separate run so its spaces are
+ * never collapsed by escaping).
+ */
+function docxPassageLineRuns(line, groupType) {
+  const text = String(line ?? '')
+  paperBlankPattern.lastIndex = 0
+  if (!paperBlankPattern.test(text)) {
+    return [run(text, { size: 21 })]
+  }
+  paperBlankPattern.lastIndex = 0
+
+  const padding = docxBlankPaddingSpaces(groupType)
+  const runs = []
+  let cursor = 0
+  let match
+  while ((match = paperBlankPattern.exec(text)) !== null) {
+    if (match.index > cursor) {
+      runs.push(run(text.slice(cursor, match.index), { size: 21 }))
+    }
+    runs.push(run(`${padding}${match[1]}${padding}`, { size: 21, underline: true }))
+    cursor = match.index + match[0].length
+  }
+  if (cursor < text.length) {
+    runs.push(run(text.slice(cursor), { size: 21 }))
+  }
+  return runs
+}
+
+/** standard \u00a78: \u5199\u4f5c\u9898\u7ec4 (\u5e94\u7528\u6587 / \u8bfb\u540e\u7eed\u5199) get a bordered blank answer box. */
+function isWritingGroupType(groupType) {
+  return groupType === 'writing' || groupType === 'continuation'
+}
+
+/**
+ * \u5e94\u7528\u6587 vs \u8bfb\u540e\u7eed\u5199 sizing (standard \u00a78: 144\u00d765mm vs 145\u00d757mm). Mirrors
+ * `server/print-renderer.mjs`'s `isContinuationWriting` title-text
+ * heuristic (both task types share the single `writing` groupType; only the
+ * legacy DB-only `continuation` groupType is already distinct).
+ */
+function isContinuationWriting(detail) {
+  if (detail.groupType === 'continuation') return true
+  return /\u7eed\u5199/.test(String(detail.title || detail.passage?.title || ''))
+}
+
+// mm -> twips (1440 twips/inch, 25.4mm/inch).
+function mmToTwips(mm) {
+  return Math.round((mm * 1440) / 25.4)
+}
+
+/** standard \u00a78: \u5355\u683c\u8fb9\u6846\u8868\u683c (0.48pt \u7ec6\u8fb9\u6846\u7d20\u6846, \u6846\u5185\u65e0\u6a2a\u7ebf/\u63d0\u793a\u884c). */
+function docxWritingAnswerBox(detail) {
+  const continuation = isContinuationWriting(detail)
+  const widthMm = continuation ? 145 : 144
+  const heightMm = continuation ? 57 : 65
+  const widthTwips = mmToTwips(widthMm)
+  const heightTwips = mmToTwips(heightMm)
+
+  return `<w:tbl><w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid><w:tr><w:trPr><w:trHeight w:val="${heightTwips}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr><w:p/></w:tc></w:tr></w:tbl>`
 }
 
 function docxQuestionStem(detail, question) {
@@ -433,6 +539,18 @@ function pushDocxAnswerArea(body, detail, question, versionType) {
   body.push(paragraph(`解析：${docxQuestionExplanation(detail, question)}`, { after: 120, shading: 'EEF2F4' }))
 }
 
+// 刀⑤ render-fidelity Chunk C — standard §1: 左右 24mm=1361 twips /
+// 上 21mm=1191 twips; footer 页码距底 ≈17.5mm=992 twips (both live inside
+// the 24mm=1361-twip bottom margin — same box-model relationship
+// print-renderer.mjs's `@page` comment documents: margin - inner offset =
+// distance to the footer text). Applied identically to BOTH sectPr builders
+// (PA F3: the exam builder below and the handout builder further down).
+const DOCX_FOOTER_RELATIONSHIP_ID = 'rIdFooter1'
+
+function docxSectPr() {
+  return `<w:sectPr><w:footerReference w:type="default" r:id="${DOCX_FOOTER_RELATIONSHIP_ID}"/><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1191" w:right="1361" w:bottom="1361" w:left="1361" w:header="708" w:footer="992" w:gutter="0"/></w:sectPr>`
+}
+
 // --- Exam-style renderer: formal Gaokao-style paper layout ---
 function buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart }) {
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
@@ -459,7 +577,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
     if (groupType === 'cloze') {
       // Cloze: inline
       const inlineText = options.map((o) => `${o.label}. ${o.content}`).join('    ')
-      body.push(paragraph(inlineText, { after: 50, indentLeft: 420 }))
+      body.push(paragraph(inlineText, { after: 50, indentLeft: 420, size: 21 }))
       return
     }
     if (isShortOptions(options) && options.length === 4) {
@@ -476,7 +594,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
     } else {
       // Single-column
       options.forEach((option) => {
-        body.push(paragraph(`${option.label}. ${option.content}`, { after: 30, indentLeft: 420 }))
+        body.push(paragraph(`${option.label}. ${option.content}`, { after: 30, indentLeft: 420, size: 21 }))
       })
     }
   }
@@ -487,7 +605,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
-        body.push(paragraph([run(block.title, { bold: true, size: 24 })], { before: 280, after: 120, keepNext: true }))
+        body.push(paragraph([run(block.title, { bold: true, size: 24, heading: true })], { before: 280, after: 120, keepNext: true }))
       } else if (block.type === 'page_break') {
         body.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -509,16 +627,20 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         // Passage text
         if (passageLines.length > 0 && passageLines[0]) {
           passageLines.forEach((line) => {
-            body.push(paragraph(line, { after: 60 }))
+            body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60 }))
           })
           body.push(paragraph('', { after: 80 }))
+        }
+
+        if (isWritingGroupType(detail.groupType)) {
+          body.push(docxWritingAnswerBox(detail))
         }
 
         // Questions
         detail.questions.forEach((question) => {
           body.push(
             paragraph(
-              [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`)],
+              [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`, { size: 21 })],
               { before: 60, after: 50 },
             ),
           )
@@ -545,14 +667,18 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
       if (passageLines.length > 0 && passageLines[0]) {
         passageLines.forEach((line) => {
-          body.push(paragraph(line, { after: 60 }))
+          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60 }))
         })
         body.push(paragraph('', { after: 80 }))
       }
 
+      if (isWritingGroupType(detail.groupType)) {
+        body.push(docxWritingAnswerBox(detail))
+      }
+
       detail.questions.forEach((question) => {
         body.push(
-          paragraph([run(`${questionNum}.  ${docxQuestionStem(detail, question)}`)], { before: 60, after: 50 }),
+          paragraph([run(`${questionNum}.  ${docxQuestionStem(detail, question)}`, { size: 21 })], { before: 60, after: 50 }),
         )
         renderOptionsExam(body, question.options, detail.groupType)
         if (versionType === 'teacher') {
@@ -563,16 +689,13 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
     })
   }
 
-  // TODO: Footer with page numbers (英语试题 第 PAGE 页（共 NUMPAGES 页）) requires
-  // header/footer parts in the DOCX package. Skipped in V1 to avoid destabilizing
-  // the zip package structure. Can be added by creating word/footer1.xml and
-  // referencing it in sectPr with <w:footerReference>.
-  body.push(
-    `<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr>`,
-  )
+  // Footer with page numbers (英语试题 第 PAGE 页(共 NUMPAGES 页)) — 刀⑤
+  // render-fidelity Chunk C resolves this V1 TODO: word/footer1.xml is
+  // written by writeDocxPackage and wired here via w:footerReference.
+  body.push(docxSectPr())
 
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
   <w:body>${body.join('')}</w:body>
 </w:document>`
 }
@@ -582,7 +705,7 @@ function examOptionTable(rows) {
   const colWidth = 4500
   const rowXml = rows.map((cells) => {
     const cellsXml = cells.map((cell) =>
-      `<w:tc><w:tcPr><w:tcW w:w="${colWidth}" w:type="dxa"/><w:tcBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tcBorders></w:tcPr>${paragraph(cell, { after: 30 })}</w:tc>`
+      `<w:tc><w:tcPr><w:tcW w:w="${colWidth}" w:type="dxa"/><w:tcBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tcBorders></w:tcPr>${paragraph(cell, { after: 30, size: 21 })}</w:tc>`
     ).join('')
     return `<w:tr>${cellsXml}</w:tr>`
   }).join('')
@@ -599,10 +722,11 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
   const totalScore = items.reduce((sum, item) => sum + item.detail.questions.length * item.score, 0)
   const body = [
     paragraph([run('ENGLISH QUESTION SET', { bold: true, size: 20, color: '6D737B' })], { align: 'center', after: 80 }),
-    paragraph([run(title, { bold: true, size: 32 })], { align: 'center', after: 100 }),
+    paragraph([run(title, { bold: true, size: 32, heading: true })], { align: 'center', after: 100 }),
     paragraph(`${versionLabel} · ${items.length} 题组 · ${totalQuestions} 小题 · ${totalScore.toFixed(1)} 分`, {
       align: 'center',
       after: 260,
+      size: 21,
     }),
   ]
 
@@ -616,7 +740,7 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
         body.push(
-          paragraph([run(block.title, { bold: true, size: 28 })], { before: 300, after: 120, keepNext: true }),
+          paragraph([run(block.title, { bold: true, size: 28, heading: true })], { before: 300, after: 120, keepNext: true }),
         )
       } else if (block.type === 'page_break') {
         body.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
@@ -637,22 +761,27 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           ),
           paragraph(`${detail.title} · ${detail.source} · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分`, {
             after: 120,
+            size: 21,
           }),
         )
         if (versionType === 'teacher' && note) {
-          body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4' }))
+          body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4', size: 21 }))
         }
         body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
         passageLines.forEach((line) => {
-          body.push(paragraph(line, { after: 80, indentLeft: 240 }))
+          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240 }))
         })
+
+        if (isWritingGroupType(detail.groupType)) {
+          body.push(docxWritingAnswerBox(detail))
+        }
 
         if (detail.groupType === 'seven_choices') {
           const sharedOptions = uniqueDocxOptions(detail.questions)
           if (sharedOptions.length > 0) {
-            body.push(paragraph([run('选项', { bold: true })], { before: 80, after: 50, keepNext: true }))
+            body.push(paragraph([run('选项', { bold: true, size: 21 })], { before: 80, after: 50, keepNext: true }))
             sharedOptions.forEach((option) => {
-              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360, size: 21 }))
             })
           }
         }
@@ -661,8 +790,8 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           body.push(
             paragraph(
               [
-                run(`${questionNum}. `, { bold: true }),
-                run(docxQuestionStem(detail, question), { bold: true }),
+                run(`${questionNum}. `, { bold: true, size: 21 }),
+                run(docxQuestionStem(detail, question), { bold: true, size: 21 }),
               ],
               { before: 90, after: 70, keepNext: true },
             ),
@@ -670,10 +799,10 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           if (detail.groupType !== 'seven_choices') {
             if (detail.groupType === 'cloze' && question.options.length > 0) {
               const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
-              body.push(paragraph(inlineText, { after: 60, indentLeft: 360 }))
+              body.push(paragraph(inlineText, { after: 60, indentLeft: 360, size: 21 }))
             } else {
               question.options.forEach((option) => {
-                body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+                body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360, size: 21 }))
               })
             }
           }
@@ -701,24 +830,29 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         ),
         paragraph(`${detail.title} · ${detail.source} · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分`, {
           after: 120,
+          size: 21,
         }),
       )
       if (versionType === 'teacher' && note) {
-        body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4' }))
+        body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4', size: 21 }))
       }
       body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
 
       passageLines.forEach((line) => {
-        body.push(paragraph(line, { after: 80, indentLeft: 240 }))
+        body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240 }))
       })
+
+      if (isWritingGroupType(detail.groupType)) {
+        body.push(docxWritingAnswerBox(detail))
+      }
 
       if (detail.groupType === 'seven_choices') {
         const sharedOptions = uniqueDocxOptions(detail.questions)
 
         if (sharedOptions.length > 0) {
-          body.push(paragraph([run('选项', { bold: true })], { before: 80, after: 50, keepNext: true }))
+          body.push(paragraph([run('选项', { bold: true, size: 21 })], { before: 80, after: 50, keepNext: true }))
           sharedOptions.forEach((option) => {
-            body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+            body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360, size: 21 }))
           })
         }
       }
@@ -727,8 +861,8 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         body.push(
           paragraph(
             [
-              run(`${legacyQuestionNum}. `, { bold: true }),
-              run(docxQuestionStem(detail, question), { bold: true }),
+              run(`${legacyQuestionNum}. `, { bold: true, size: 21 }),
+              run(docxQuestionStem(detail, question), { bold: true, size: 21 }),
             ],
             { before: 90, after: 70, keepNext: true },
           ),
@@ -737,10 +871,10 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         if (detail.groupType !== 'seven_choices') {
           if (detail.groupType === 'cloze' && question.options.length > 0) {
             const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
-            body.push(paragraph(inlineText, { after: 60, indentLeft: 360 }))
+            body.push(paragraph(inlineText, { after: 60, indentLeft: 360, size: 21 }))
           } else {
             question.options.forEach((option) => {
-              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360 }))
+              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360, size: 21 }))
             })
           }
         }
@@ -751,15 +885,23 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
     })
   }
 
-  body.push(
-    `<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr>`,
-  )
+  body.push(docxSectPr())
 
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
   <w:body>${body.join('')}</w:body>
 </w:document>`
 }
+
+// 刀⑤ render-fidelity Chunk C — standard §1 footer page number
+// ("英语试题 第X页(共Y页)"), wired via w:footerReference in BOTH sectPr
+// builders (docxSectPr, shared by exam + handout). PAGE/NUMPAGES field codes
+// via w:fldSimple (Word recalculates on open; the cached run text is a
+// placeholder). Body rFonts match the standard §2 body faces.
+const DOCX_FOOTER_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:ftr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">英语试题 第</w:t></w:r><w:fldSimple w:instr=" PAGE "><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">页(共</w:t></w:r><w:fldSimple w:instr=" NUMPAGES "><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">页)</w:t></w:r></w:p>
+</w:ftr>`
 
 function writeDocxPackage({ documentXml, outputPath, title }) {
   const tempDir = mkdtempSync(path.join(tmpdir(), 'question-bank-docx-'))
@@ -768,6 +910,7 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
     mkdirSync(path.join(tempDir, '_rels'), { recursive: true })
     mkdirSync(path.join(tempDir, 'docProps'), { recursive: true })
     mkdirSync(path.join(tempDir, 'word'), { recursive: true })
+    mkdirSync(path.join(tempDir, 'word/_rels'), { recursive: true })
 
     writeFileSync(
       path.join(tempDir, '[Content_Types].xml'),
@@ -776,6 +919,7 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>
   <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
   <Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
 </Types>`,
@@ -812,6 +956,14 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
     )
 
     writeFileSync(path.join(tempDir, 'word/document.xml'), documentXml)
+    writeFileSync(path.join(tempDir, 'word/footer1.xml'), DOCX_FOOTER_XML)
+    writeFileSync(
+      path.join(tempDir, 'word/_rels/document.xml.rels'),
+      `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="${DOCX_FOOTER_RELATIONSHIP_ID}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>
+</Relationships>`,
+    )
     execFileSync('zip', ['-qr', outputPath, '.'], { cwd: tempDir })
     return readFileSync(outputPath)
   } finally {

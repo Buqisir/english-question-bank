@@ -276,8 +276,12 @@ function assertHandoutRenderByteStable() {
 
   // WordprocessingML envelope markers (byte-sensitive moved strings).
   assert('documentXml has the exact XML declaration', a.startsWith('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'))
-  assert('documentXml has the w:document namespace decl', a.includes('<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'))
-  assert('documentXml has the sectPr page-size literal verbatim', a.includes('<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr>'))
+  // 刀⑤ render-fidelity Chunk C: xmlns:r added for w:footerReference's r:id attribute.
+  assert('documentXml has the w:document namespace decl (w: + r:, Chunk C footer)', a.includes('<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'))
+  // 刀⑤ render-fidelity Chunk C — standard §1: 24mm=1361 twips left/right,
+  // 21mm=1191 twips top, footer 17.5mm=992 twips, plus the footerReference
+  // that resolves the old V1 TODO.
+  assert('documentXml has the sectPr page-size + margin + footer literal verbatim', a.includes('<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1191" w:right="1361" w:bottom="1361" w:left="1361" w:header="708" w:footer="992" w:gutter="0"/></w:sectPr>'))
   assert('handout header banner literal present', a.includes('ENGLISH QUESTION SET'))
 
   // groupTypeLabels output verbatim (injected dep flows through the meta line).
@@ -317,7 +321,7 @@ function assertExamRenderByteStable() {
   assert('exam render uses buildExamDocumentXml header note', exam.includes('（教师版 含答案解析）'))
   assert('exam render emits compact 【答案】 marker verbatim', exam.includes('【答案】'))
   assert('exam render emits the page-break run verbatim', exam.includes('<w:p><w:r><w:br w:type="page"/></w:r></w:p>'))
-  assert('exam render carries the same sectPr literal', exam.includes('<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>'))
+  assert('exam render carries the same sectPr literal (shared docxSectPr, Chunk C)', exam.includes('<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="11906" w:h="16838"/>'))
 
   // exam differs from handout (proves the branch actually routed).
   const handout = renderer.buildDocumentXml({ title: '测试卷', versionType: 'teacher', items: ITEMS, blocks: BLOCKS, questionNumberStart: 21, printStyle: 'handout' })
@@ -374,8 +378,11 @@ function assertSourceGuards() {
   assert('escapeXml lives at module indent 0', /\nfunction escapeXml\(value\) \{/.test(src))
   assert('buildDocumentXml lives at module indent 0', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle \}\) \{/.test(src))
   assert('writeDocxPackage lives at module indent 0', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title \}\) \{/.test(src))
-  // V1 footer TODO comment preserved verbatim.
-  assert('V1 footer TODO comment preserved verbatim', src.includes('// TODO: Footer with page numbers (英语试题 第 PAGE 页（共 NUMPAGES 页）) requires'))
+  // 刀⑤ render-fidelity Chunk C resolves the V1 footer TODO — assert it's
+  // actually gone and the real footer wiring (docxSectPr + footerReference)
+  // is in its place, not that the TODO is still there.
+  assert('V1 footer TODO comment is gone (Chunk C resolved it)', !src.includes('// TODO: Footer with page numbers'))
+  assert('docxSectPr wires w:footerReference (V1 TODO resolution)', src.includes('w:footerReference w:type="default" r:id="${DOCX_FOOTER_RELATIONSHIP_ID}"'))
 }
 
 function assertApiIntegration() {
@@ -397,6 +404,75 @@ function assertApiIntegration() {
   assert('api.mjs still defines timestampPrefix (STAY)', /\nfunction timestampPrefix\(\) \{/.test(apiSrc))
 }
 
+// ------------------------------------------------------------------
+// 刀⑤ render-fidelity Chunk C / PA F2 — REAL paper-2026-i asset payload,
+// no synthetic-only fixtures for the blank-count claim (I10 fake-green
+// lesson). Mirrors verify-print-renderer.mjs's Test 8: renders the actual
+// stored paper-2026-i groups through the SAME `paperAssetParagraphText`
+// transform server/api.mjs applies, feeds that real text through the REAL
+// buildDocumentXml, and counts styled blank runs (the underlined
+// padding+number runs docxPassageLineRuns emits) against an independently
+// computed expected count (paperBlankPattern run directly over the same
+// real text).
+// ------------------------------------------------------------------
+async function assertRealAssetBlankCounts() {
+  const assetPath = path.join(repoRoot, 'app/public/paper-assets/paper-2026-i/latest/paper-asset.json')
+
+  if (!existsSync(assetPath)) {
+    console.log(`  ⊘ SKIP: paper-2026-i asset not found at ${assetPath}`)
+    return
+  }
+
+  const asset = JSON.parse(readFileSync(assetPath, 'utf8'))
+  const groups = asset.content.groups
+
+  // Mirrors server/api.mjs `paperAssetParagraphText(group)` exactly.
+  function paperAssetParagraphText(group) {
+    const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
+    return paragraphs.map((p) => String(p?.text || '').trim()).filter(Boolean).join('\n\n')
+  }
+
+  const { paperBlankPattern } = await import('../shared/papersurface/blankPattern.mjs')
+  function countBlanks(text) {
+    paperBlankPattern.lastIndex = 0
+    let count = 0
+    while (paperBlankPattern.exec(text) !== null) count++
+    return count
+  }
+
+  const realGroupSpecs = [
+    { id: 'group-2026-i-seven-choices', groupType: 'seven_choices', expected: 5 },
+    { id: 'group-2026-i-cloze', groupType: 'cloze', expected: 15 },
+    { id: 'group-2026-i-grammar-fill', groupType: 'grammar_cloze', expected: 10 },
+  ]
+
+  const renderer = makeRenderer()
+
+  for (const spec of realGroupSpecs) {
+    const group = groups[spec.id]
+    const materialText = paperAssetParagraphText(group)
+    const expected = countBlanks(materialText)
+    assert(`${spec.id}: real materialText blank count matches the 2026-07-08 measured value`, expected === spec.expected, `expected=${spec.expected} got=${expected}`)
+
+    const detail = {
+      id: spec.id,
+      title: group.title,
+      source: '2026 新课标 I',
+      groupType: spec.groupType,
+      passage: { title: group.passage?.title || '', materialText, summary: materialText },
+      questions: [],
+    }
+    const items = [{ detail, note: '', score: 1, sectionTitle: group.title }]
+    const blocks = [{ type: 'question_group', questionGroupId: spec.id, score: 1 }]
+
+    for (const printStyle of ['exam', 'handout']) {
+      const xml = renderer.buildDocumentXml({ title: '2026 新课标 I', versionType: 'student', items, blocks, questionNumberStart: 1, printStyle })
+      const styledCount = (xml.match(/<w:u w:val="single"\/>/g) || []).length
+      assert(`${spec.id} (${printStyle}): real payload styled blank runs (${expected}) all emitted in document.xml`, styledCount === expected, `expected=${expected} styled=${styledCount}`)
+    }
+  }
+}
+
 // ============================================================
 // Main
 // ============================================================
@@ -408,6 +484,7 @@ async function main() {
   assertUsedButUndefinedRejects()
   assertSourceGuards()
   assertApiIntegration()
+  await assertRealAssetBlankCounts()
 
   console.log(`\nH5-G docx-renderer verify PASSED: ${passed} checks`)
 }
