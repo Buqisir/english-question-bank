@@ -321,6 +321,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         annotations={[]}
         evidence={entry.model.surfaceData.evidence}
         questions={entry.model.surfaceData.questions}
+        // seven-options-on-paper: the 七选五 A-G pool, display-only.
+        // `entry.model.options` (SevenChoicesOptionView[]) is structurally
+        // compatible with PaperQuestionOption ({label, text, translation?}
+        // vs {label, text, chain}) — no adapter change needed.
+        optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
         mode="lecture"
         lectureFocus={null}
         readingFocusBySection={{}}

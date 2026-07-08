@@ -81,6 +81,25 @@
  *         not a letter) — corrects the "2026-i also has a Dear Kate
  *         scaffold" premise floated at cut kickoff, and proves current
  *         (empty-box) behavior is preserved for that shape.
+ * 18-21. seven-options-on-paper (owner 2026-07-08 拍板): 七选五卷面在正文
+ *        之后渲染 A-G 选项池，纯展示、不参与交互（see
+ *        docs/cuts/seven-options-on-paper/plan.md）:
+ *     18. `PaperSurfaceProps.optionBank` exists in shared/papersurface/
+ *         types.d.ts, and PaperSurface.tsx reads it + renders it ONLY
+ *         when non-empty (C1/C2) — source-level checks, plus the new
+ *         `PaperSurfaceOptionBank` renderer carries no anchor attribute
+ *         and no click handler (C3).
+ *     19. Both real PaperSurface mount points (PaperBrowsePage.tsx /
+ *         PaperIntelligencePaperSurfaceHarness.tsx) wire `optionBank=`
+ *         from the sevenChoices model's existing `.options` field — no
+ *         adapter change — and every other groupType/source passes
+ *         `undefined` (C4/C5).
+ *     20. Real paper-2026-i fixture: `buildSevenChoicesSurfaceModel`'s
+ *         `.options` has all 7 A-G entries with non-empty label/text —
+ *         proves the non-empty render branch has real data to trigger on.
+ *     21. QuestionGroupDetailView.tsx does not import PaperSurface (C6 —
+ *         confirms the detail page is genuinely out of this cut's scope,
+ *         not just "happens to look unaffected").
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -680,6 +699,85 @@ assert(
   '2026-i application answerBox: givenBottom stays empty (current behavior preserved — no scaffold to route)',
   Boolean(appBox2026i) && appBox2026i.givenBottom.length === 0,
   JSON.stringify(appBox2026i),
+)
+
+// ─── 18-21. seven-options-on-paper: 七选五 A-G option pool on screen ───
+
+const harnessSrc = read('app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
+const paperSurfaceTypesSrc = read('shared/papersurface/types.d.ts')
+const detailViewSrcForOptionBank = detailViewSrc
+
+assert(
+  'shared/papersurface/types.d.ts: PaperSurfaceProps declares optionBank',
+  /readonly optionBank\?:\s*ReadonlyArray<PaperQuestionOption>/.test(paperSurfaceTypesSrc),
+  'missing optionBank field on PaperSurfaceProps',
+)
+assert(
+  'PaperSurface.tsx destructures optionBank from props',
+  /const\s*\{[\s\S]{0,400}\boptionBank\b[\s\S]{0,400}\}\s*=\s*props/.test(paperSurfaceSrc),
+  'optionBank is not destructured from props',
+)
+assert(
+  'PaperSurface.tsx renders the option bank only when non-empty (C1/C2)',
+  /\{optionBank\s*&&\s*optionBank\.length\s*>\s*0\s*&&\s*\(/.test(paperSurfaceSrc) &&
+    /<PaperSurfaceOptionBank\s+options=\{optionBank\}\s*\/>/.test(paperSurfaceSrc),
+  'missing the optionBank && optionBank.length > 0 render guard',
+)
+
+const optionBankFnBody =
+  paperSurfaceSrc.match(/function PaperSurfaceOptionBank\([\s\S]*?\n\}/)?.[0] || ''
+assert('PaperSurfaceOptionBank function body extracted', optionBankFnBody.length > 0)
+assert(
+  'PaperSurfaceOptionBank carries no data-paper-*/data-pi-* anchor attribute (C3)',
+  !optionBankFnBody.includes('paperSurfaceAnchorAttrs') && !/data-p[ai]-/.test(optionBankFnBody),
+  optionBankFnBody,
+)
+assert(
+  'PaperSurfaceOptionBank has no onClick / focus wiring (C3)',
+  !/onClick|onFocusIntent/.test(optionBankFnBody),
+  optionBankFnBody,
+)
+assert(
+  'PaperSurface.css declares .ps-option-bank / .ps-option-bank-item',
+  paperSurfaceCssSrc.includes('.ps-option-bank') && paperSurfaceCssSrc.includes('.ps-option-bank-item'),
+  'missing .ps-option-bank rules',
+)
+
+assert(
+  "PaperBrowsePage.tsx wires optionBank from entry.model.options for sevenChoices, undefined otherwise (C4/C5)",
+  /optionBank=\{entry\.kind === 'sevenChoices' \? entry\.model\.options : undefined\}/.test(pageSrc),
+  'missing optionBank wiring in PaperBrowsePage.tsx',
+)
+assert(
+  "PaperIntelligencePaperSurfaceHarness.tsx wires optionBank from sevenChoicesModel?.options (C4/C5)",
+  /optionBank=\{sevenChoicesModel\?\.options\}/.test(harnessSrc),
+  'missing optionBank wiring in PaperIntelligencePaperSurfaceHarness.tsx',
+)
+
+assert(
+  'QuestionGroupDetailView.tsx does not import PaperSurface (C6 — detail page stays out of scope)',
+  !/from\s*['"][^'"]*shared-ui\/papersurface\/PaperSurface['"]/.test(detailViewSrcForOptionBank),
+  'QuestionGroupDetailView.tsx unexpectedly imports PaperSurface',
+)
+
+const { buildSevenChoicesSurfaceModel } = await import(
+  '../app/src/features/paper-intelligence/sevenChoicesSurfaceAdapter.ts'
+)
+const sevenChoicesAnalysis2026i = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json'),
+)
+const sevenChoicesModel2026i = buildSevenChoicesSurfaceModel({
+  asset,
+  analysis: sevenChoicesAnalysis2026i,
+  groupId: 'group-2026-i-seven-choices',
+})
+assert(
+  'paper-2026-i sevenChoices model: .options has all 7 A-G entries with non-empty label/text',
+  sevenChoicesModel2026i.options.length === 7 &&
+    ['A', 'B', 'C', 'D', 'E', 'F', 'G'].every((label, i) =>
+      sevenChoicesModel2026i.options[i]?.label === label && Boolean(sevenChoicesModel2026i.options[i]?.text),
+    ),
+  JSON.stringify(sevenChoicesModel2026i.options.map((o) => o.label)),
 )
 
 if (failed > 0) {

@@ -358,6 +358,30 @@
   font-weight: 700;
 }
 
+/* ─── Option bank (seven-options-on-paper) ─────────────────────── */
+/* 七选五 A-G candidate-sentence pool, printed once after the passage.
+   Single-column (unlike the 2-col `.ps-option-list` grid used for short
+   4-option MC options) — mirrors the docx handout export's deduped
+   "选项" block, and print-renderer.mjs's single-column `.options-list`
+   fallback for >4-option groups. Indent reuses `.ps-option-list`'s
+   existing 22px left padding — no new spacing/color/size values. */
+.ps-option-bank {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ps-option-bank-item {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+}
+
 /* ─── Question options inline (empty-stem policy) ──────────────── */
 /* surface-question-policy cut: mirrors the print/docx export policy
    (server/print-renderer.mjs's `.options-inline--numbered`) — an empty

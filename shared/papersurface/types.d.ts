@@ -496,6 +496,20 @@ export type PaperSurfaceProps = {
   /** Question metadata in document order. */
   readonly questions: ReadonlyArray<PaperQuestion>
 
+  /**
+   * seven-options-on-paper (2026-07-08): the 七选五 A-G option pool,
+   * printed once after the passage — NOT per-question options. Real
+   * exam papers print the candidate sentence pool once under the
+   * blanked passage; PaperSurface renders it purely for paper fidelity.
+   *
+   * Optional — omitted (or empty) for every group type except
+   * 七选五, and silently renders nothing when empty/undefined (no
+   * placeholder). PaperSurface attaches NO anchor attributes and NO
+   * click handler to this block: it is display-only and never
+   * participates in `onFocusIntent` / evidence / annotation wiring.
+   */
+  readonly optionBank?: ReadonlyArray<PaperQuestionOption>
+
   /** ============ controlled-component props (host-owned) ============ */
 
   /** Current surface mode. Host-owned. PaperSurface MUST NOT
