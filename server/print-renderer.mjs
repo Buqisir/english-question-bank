@@ -360,6 +360,8 @@ body {
   text-align: center;
   vertical-align: baseline;
   margin: 0 0.15em;
+  /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */
+  text-indent: 0;
 }
 
 .print-blank--short { width: 3.3em; }

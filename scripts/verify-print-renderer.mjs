@@ -133,6 +133,10 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   assert('blank number 56 rendered inside print-blank-num', html.includes('<span class="print-blank-num">56</span>'), '')
   assert('blank number 36 rendered inside print-blank-num', html.includes('<span class="print-blank-num">36</span>'), '')
   assert('prose text around blanks still HTML-escaped correctly (no literal double underscores leak)', !html.includes('__56__') && !html.includes('_____36_____'), '')
+  // owner QA 2026-07-08：inline-block 继承段落 text-indent 2em 会把题号推出横线
+  // 压住后文（撞字），.print-blank 必须显式归零缩进。
+  const blankCssRule = html.match(/\.print-blank \{[^}]*\}/)?.[0] || ''
+  assert('.print-blank rule resets text-indent to 0 (title-indent inheritance bug)', /text-indent:\s*0/.test(blankCssRule), blankCssRule.slice(0, 120))
 }
 
 // --- Test 7: Writing answer box (standard §8) ---
