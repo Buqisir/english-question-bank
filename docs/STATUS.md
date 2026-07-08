@@ -39,9 +39,18 @@ Last updated: 2026-07-08（analysis-layering + paper-browse 双刀并行）
     密码）；本地库无解析数据时造 [QA夹具] 数据验分层。
   - 新跟进项（均为存量债，非两刀引入）：route-integration 16 项 main
     同挂旧断言、module-v1 的 App.tsx 冻结断言过宽（均不在 CI）、路由层
-    无 popstate 处理（Back 键 URL 变视图不变，与 draft/mySpace 同病）；
-    屏幕 PaperSurface 完形空题干显示「55. 55」重复（导出面已修，屏幕面
-    小刀候选）。
+    无 popstate 处理（Back 键 URL 变视图不变，与 draft/mySpace 同病）。
+- 2026-07-08 晚：**paper-browse-polish 收官**（PR #281，small，owner 实测
+  960d0f8d 报障→当晚修复：题号重复/旧格式挖空归一/写作 block 双渲/
+  段首语双前缀）。同晚 **High 档构思定向**：产品三主打改为
+  **时效/解析/相似题**（原创生产线降级——owner 实测出题差强人意）；
+  《相似题维度标准 v1》定稿
+  （`docs/product/similar-question-dimensions.md`，六题型维度表 +
+  配相似宪法「只有配一个动词」+ 语法单空整段上下文铁律 + 分期点亮，
+  Phase 1 靠现有 topic label 即可上线）。下一刀序（owner 已认）：
+  flow-hover（整卷页流式化+悬浮显形）→ 配相似动线 → 练习纸 →
+  用过标记/「我考过的卷」→ 时效流；数据轨=导题管线加考点标注工序。
+  存量数据账：960d0f8d 段首语双前缀、七选五 A-G 缺失同批清洗。
 - 2026-07-08：**刀⑤渲染保真收官**（PR #278，large，PA+CR+owner-QA 三审）。
   四套渲染面（屏幕 PaperSurface/写作页/PDF/DOCX）归排版标准 v2 单一权威：
   token 单源化（Issue #30 Gate 2 关门）、屏幕 16px→14px、PDF/DOCX 补挖空
