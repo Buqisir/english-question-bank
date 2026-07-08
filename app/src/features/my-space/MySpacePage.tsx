@@ -1,4 +1,5 @@
-import { ArrowLeft, Download, FileText, Folder, FolderPlus, Pencil, Trash2 } from 'lucide-react'
+import { Download, FileText, Folder, FolderPlus, Pencil, Trash2 } from 'lucide-react'
+import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import {
@@ -15,6 +16,7 @@ import './MySpacePage.css'
 export type MySpacePageProps = {
   onBackToWorkbench: () => void
   onOpenDraft: (draftPaperId: string) => void
+  shellNav: AppTopbarNav
 }
 
 type LoadState = 'loading' | 'loaded' | 'error'
@@ -30,7 +32,7 @@ function folderLabel(folder: MySpaceFolder) {
   return `${folder.name} · ${folder.artifactCount}`
 }
 
-export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps): ReactNode {
+export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpacePageProps): ReactNode {
   const [folders, setFolders] = useState<MySpaceFolder[]>([])
   const [artifacts, setArtifacts] = useState<MySpaceArtifact[]>([])
   const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null)
@@ -157,15 +159,11 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
   }
 
   return (
+    <>
+    <AppTopbar {...shellNav} pageTitle="个人空间" onBack={onBackToWorkbench} />
     <div className="my-space-shell">
-      <header className="my-space-toolbar">
-        <button className="my-space-back" type="button" onClick={onBackToWorkbench}>
-          <ArrowLeft size={16} /> 返回取题台
-        </button>
-        <div>
-          <p>个人空间</p>
-          <h1>已保存的草稿卷</h1>
-        </div>
+      <header className="my-space-heading">
+        <h1>已保存的草稿卷</h1>
       </header>
 
       {message && loadState !== 'error' && <p className="my-space-message" role="status">{message}</p>}
@@ -283,5 +281,6 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft }: MySpacePageProps
         </section>
       </main>
     </div>
+    </>
   )
 }

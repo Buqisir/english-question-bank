@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, FileDown, FolderPlus, Printer, RotateCcw } from 'lucide-react'
+import { Archive, FileDown, FolderPlus, Printer, RotateCcw } from 'lucide-react'
+import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
 import {
   deleteDraftPaperItem,
@@ -33,7 +34,7 @@ export type DraftPaperWorkbenchProps = {
   focusGroupId?: string | null
   onBackToWorkbench: () => void
   onDraftChanged?: () => void
-  onOpenMySpace?: () => void
+  shellNav: AppTopbarNav
 }
 
 type RemovedDraftItem = {
@@ -76,7 +77,7 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
-  const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, onOpenMySpace } = props
+  const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, shellNav } = props
   const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
@@ -392,28 +393,30 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }
 
   if (loadStatus === 'loading') {
-    return <div className="draft-workbench-shell"><p className="draft-loading">正在打开草稿卷...</p></div>
+    return (
+      <>
+        <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
+        <div className="draft-workbench-shell"><p className="draft-loading">正在打开草稿卷...</p></div>
+      </>
+    )
   }
 
   if (loadStatus === 'error' || !draftPaper) {
     return (
-      <div className="draft-workbench-shell">
-        <button className="draft-back-button" type="button" onClick={onBackToWorkbench}>
-          <ArrowLeft size={16} /> 返回
-        </button>
-        <p className="draft-error">{loadError || '草稿卷未找到。'}</p>
-      </div>
+      <>
+        <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
+        <div className="draft-workbench-shell">
+          <p className="draft-error">{loadError || '草稿卷未找到。'}</p>
+        </div>
+      </>
     )
   }
 
   return (
+    <>
+    <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
     <div className="draft-workbench-shell">
       <header className="draft-toolbar">
-        <div className="draft-toolbar-group draft-toolbar-group-nav">
-          <button className="draft-back-button" type="button" onClick={onBackToWorkbench}>
-            <ArrowLeft size={16} /> 返回取题台
-          </button>
-        </div>
         <div className="draft-toolbar-group draft-toolbar-group-doc">
           <label className="draft-title-field">
             <span>草稿卷标题</span>
@@ -477,11 +480,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               <Archive size={15} /> 保存到个人空间
             </button>
           </details>
-          {onOpenMySpace && (
-            <button className="draft-my-space-link" type="button" onClick={onOpenMySpace}>
-              个人空间
-            </button>
-          )}
         </div>
       </header>
 
@@ -577,8 +575,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             {spaceStatus === 'saved' && (
               <p className="draft-success">
                 {spaceMessage}
-                {onOpenMySpace && (
-                  <button type="button" onClick={onOpenMySpace}>查看个人空间</button>
+                {shellNav.onOpenMySpace && (
+                  <button type="button" onClick={shellNav.onOpenMySpace}>查看个人空间</button>
                 )}
               </p>
             )}
@@ -592,5 +590,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         </div>
       )}
     </div>
+    </>
   )
 }
