@@ -1601,9 +1601,6 @@ button.pi-ps-analysis-distractor--selected {
   font: inherit;
   font-size: 12px;
   cursor: pointer;
-  /* Touch target parity with pi-seven's own details toggle (plan requirement:
-     mobile touch targets no smaller than the pi-seven standard). */
-  min-height: 30px;
 }
 
 .pi-seven-panel-actions button:disabled {
@@ -2178,6 +2175,11 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-details-toggle {
   margin-top: 2px;
   margin-bottom: 8px;
+  /* Touch target parity with pi-seven's details toggle (plan requirement:
+     mobile touch targets no smaller than the pi-seven standard). Kept in
+     this cloze/gf-only block so the shared pi-seven selector above stays
+     byte-identical to its pre-cut behavior (CR should-fix). */
+  min-height: 30px;
 }
 
 .pi-cloze-details,
