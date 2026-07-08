@@ -23,6 +23,15 @@ Last updated: 2026-07-07（process-slim）
 
 ## 主线焦点
 
+- 2026-07-08：**黄金路径 E2E 收官**（PR #276，medium，Sonnet DEV +
+  fresh Opus CR APPROVE，SF1 已收）：`scripts/smoke-golden-path.mjs`
+  在 enforced 登录态下 owner/member 双视角各走一遍
+  登录→找题→详情→加草稿卷→组卷→导出 PDF（真 vivliostyle %PDF 字节），
+  18 项检查；CI 新增独立 e2e job（~1.5min），每个 PR 自动跑。这是
+  2.6 万行零单测前端的第一条行为级防线（此前 61 个 verify 全是源码
+  grep）。member-detail-gate 五面隐藏也从 grep 断言升级为浏览器真断言。
+  DEV 上报待议：详情页「加入草稿卷」按钮文案加入后不刷新（功能正确，
+  内联反馈缺失，小刀候选）。下一把：导题管线 agent 化（owner 圈了再动）。
 - 2026-07-07/08：**UI 一致性系列六刀全部收官**（PR #269-#274，均经
   Sonnet DEV + fresh Opus CR + CI；4 个 CR Must Fix 全部闭环）：
   ① 外壳统一（AppTopbar/返回统一/去 C4）② 解析面板归队墨绿（作废
