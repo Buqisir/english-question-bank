@@ -55,46 +55,47 @@
  */
 
 /*
- * ─── C4 PaperSurface Insight Layout (PR #52 PA Must Fix) ─────────
+ * ─── C4 PaperSurface Insight Layout ──────────────────────────────
  *
  * Palette tokens for the harness insight rail and the right analysis
- * full-bleed background. PA review explicitly steered C4's insight
- * surface away from the C3.6 evidence palette (mint green for
- * support, amber for trap) so the insight rail does NOT visually
- * compete with the meaning of the evidence line.
+ * full-bleed background.
  *
- * Aesthetic north star (locked by PR #52 PA review):
- *   - Teacher-facing paper workbench: A4 paper on a slate-gray mat,
- *     a quiet pencil-holder rail on the left, a warm notebook-like
- *     analysis surface on the right.
- *   - NOT cool slate / blue admin dashboard.
- *   - NOT generic SaaS card.
- *   - NOT AI toy.
+ * Superseded (owner, 2026-07-07): the "warm pencil + ink" direction
+ * below, originally suggested by PR #52 PA review, is retired. The
+ * harness rail/chip/bleed palette is now the neutral + single-teal
+ * accent system defined by the root DESIGN.md charter (see
+ * `docs/cuts/ui-panel-reunify/plan.md`), sourced from the shared
+ * `--eqb-*` tokens in `app/src/shared-ui/tokens.css` rather than a
+ * bespoke warm-cream scale.
  *
- * Reserved palettes (do NOT use anywhere on the rail or chips):
- *   - Mint green (#10b981, rgba(16,185,129,...), #2a7c4f) — reserved
- *     for answer evidence on the C3.6 line and right-panel rows.
- *   - Trap amber (#f59e0b, rgba(245,158,11,...)) — reserved for
- *     distractor source on the C3.6 line and right-panel rows.
- *   - Red — reserved for future "student got the question wrong"
- *     semantics.
+ * The one principle PR #52 established that still holds: the
+ * insight rail's semantic colors (support / trap) must not compete
+ * with or duplicate the meaning of the C3.6 evidence-line palette.
+ * That principle now lives as token discipline instead of a
+ * separate hue family — support uses the shared `success` token,
+ * trap uses the shared `warning` token, both defined once in
+ * `tokens.css` and reused everywhere (evidence line, right-panel
+ * rows, and this rail).
  *
- * Rail / chip palette (warm pencil + ink, suggested by PR #52 user
- * decision):
- *   --pi-ps-insight-ink           charcoal text for active state
- *   --pi-ps-insight-muted-ink     pencil-gray text for inactive state
+ * Rail / chip palette (token-backed):
+ *   --pi-ps-insight-ink           primary text (var(--eqb-color-text))
+ *   --pi-ps-insight-muted-ink     muted text (var(--eqb-color-text-muted))
  *   --pi-ps-insight-rail-bg       expanded rail panel background
  *   --pi-ps-insight-chip-bg       inactive chip hover background
  *   --pi-ps-insight-chip-border   inactive chip border
- *   --pi-ps-insight-active-bg     active chip background (warm tan)
- *   --pi-ps-insight-active-border active chip border (warm umber)
+ *   --pi-ps-insight-active-bg     active chip background (teal-50)
+ *   --pi-ps-insight-active-border active chip border (teal-200)
  *   --pi-ps-insight-hairline      light hairline for the right-panel
  *                                 content edge
  *
  * Right analysis bleed palette:
- *   --pi-ps-paper-bleed-start     warm cream at the content edge
- *   --pi-ps-paper-bleed-end       slightly darker cream toward the
+ *   --pi-ps-paper-bleed-start     neutral bg at the content edge
+ *   --pi-ps-paper-bleed-end       same neutral bg toward the
  *                                 viewport right edge
+ *
+ * Not changed by this pass: `shared/papersurface/**` and
+ * `shared-ui/papersurface/**` (the in-paper evidence highlight
+ * mint/amber palette) — that is a separately locked contract.
  */
 /* ui-shell-unify SW-4: the shared shell bar must not be squashed by the
    100vh flex column on short viewports. */
@@ -103,16 +104,16 @@
 }
 
 .pi-ps-harness {
-  --pi-ps-assistant-bg: #f8f6f1;
-  --pi-ps-insight-ink: #2f2923;
-  --pi-ps-insight-muted-ink: #6f665a;
+  --pi-ps-assistant-bg: var(--eqb-color-bg);
+  --pi-ps-insight-ink: var(--eqb-color-text);
+  --pi-ps-insight-muted-ink: var(--eqb-color-text-muted);
   --pi-ps-insight-rail-bg: var(--pi-ps-assistant-bg);
-  --pi-ps-insight-chip-bg: #f3f0e8;
-  --pi-ps-insight-chip-border: #e3ddd3;
-  --pi-ps-insight-active-bg: #f0ebe2;
-  --pi-ps-insight-active-border: #7a6a58;
-  --pi-ps-insight-hairline: #e3ddd3;
-  --pi-ps-insight-detail-bg: #f5f1ea;
+  --pi-ps-insight-chip-bg: var(--eqb-color-surface-2, #ededea);
+  --pi-ps-insight-chip-border: var(--eqb-color-border, #d8d8d2);
+  --pi-ps-insight-active-bg: #eaf1ed;
+  --pi-ps-insight-active-border: #a5cdbd;
+  --pi-ps-insight-hairline: var(--eqb-color-border-subtle, #e8e8e4);
+  --pi-ps-insight-detail-bg: var(--eqb-color-surface-2, #ededea);
   --pi-ps-paper-bleed-start: var(--pi-ps-assistant-bg);
   --pi-ps-paper-bleed-end: var(--pi-ps-assistant-bg);
 
@@ -120,7 +121,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: inherit;
 }
 
 /*
@@ -346,7 +347,7 @@
 .pi-ps-analysis-answer {
   margin-left: auto;
   font-weight: 600;
-  color: #2a7c4f;
+  color: var(--eqb-color-success, #059669);
 }
 
 .pi-ps-analysis-stem {
@@ -374,7 +375,7 @@
 }
 
 .pi-ps-analysis-option--correct {
-  background: #e8f5e9;
+  background: var(--eqb-color-success-soft, rgba(16, 185, 129, 0.08));
   font-weight: 500;
 }
 
@@ -391,12 +392,12 @@
 }
 
 .pi-ps-analysis-option-zh {
-  color: #6f7b8f;
+  color: var(--eqb-color-text-muted, #6a6a64);
   font-size: 0.8125rem;
 }
 
 .pi-ps-analysis-option-trap {
-  color: #7a5a2b;
+  color: var(--eqb-color-warning, #d97706);
   font-size: 0.75rem;
 }
 
@@ -408,7 +409,7 @@
 
 .pi-ps-analysis-option-section {
   overflow: hidden;
-  border: 1px solid rgba(92, 82, 70, 0.14);
+  border: 1px solid rgba(30, 30, 28, 0.14);
   border-radius: 6px;
   background: rgba(255, 252, 247, 0.62);
   transition: background-color 120ms ease, border-color 120ms ease;
@@ -420,8 +421,8 @@
 }
 
 .pi-ps-analysis-option-section--correct.pi-ps-analysis-option-section--active {
-  border-color: rgba(42, 124, 79, 0.30);
-  background: rgba(232, 245, 233, 0.72);
+  border-color: rgba(5, 150, 105, 0.3);
+  background: var(--eqb-color-success-soft, rgba(16, 185, 129, 0.08));
 }
 
 button.pi-ps-analysis-option-row {
@@ -454,16 +455,16 @@ button.pi-ps-analysis-option-row:focus-visible {
 }
 
 .pi-ps-analysis-option-badge--correct {
-  color: #1f6f47;
+  color: var(--eqb-color-success, #059669);
 }
 
 .pi-ps-analysis-option-badge--trap {
-  background: rgba(245, 158, 11, 0.13);
-  color: #7a5a2b;
+  background: var(--eqb-color-warning-soft, rgba(245, 158, 11, 0.08));
+  color: var(--eqb-color-warning, #d97706);
 }
 
 .pi-ps-analysis-option-detail {
-  border-top: 1px solid rgba(92, 82, 70, 0.12);
+  border-top: 1px solid rgba(30, 30, 28, 0.12);
   padding: 0.625rem 0.75rem 0.75rem 1.75rem;
 }
 
@@ -713,7 +714,7 @@ button.pi-ps-analysis-distractor {
 
 button.pi-ps-analysis-evidence:focus-visible,
 button.pi-ps-analysis-distractor:focus-visible {
-  outline: 2px solid #2a7c4f;
+  outline: 2px solid var(--eqb-color-success, #059669);
   outline-offset: 2px;
 }
 
@@ -728,7 +729,9 @@ button.pi-ps-analysis-distractor:focus-visible {
  * the visual stays in the attention/caution amber family.
  */
 .pi-ps-analysis-evidence--selected blockquote {
-  border-left-color: rgba(16, 185, 129, 0.65);
+  /* ui-panel-reunify: audit-flagged emerald excursion — collapsed
+     onto the shared success token instead of a bespoke mint value. */
+  border-left-color: rgba(5, 150, 105, 0.65);
   border-left-width: 4px;
 }
 
@@ -829,8 +832,10 @@ button.pi-ps-analysis-distractor--selected {
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 25;
-  transition: width 160ms ease-out, background 160ms ease-out,
-    border-color 160ms ease-out;
+  /* ui-panel-reunify: width is a layout property (triggers reflow on
+     every animated frame); only the visual properties animate. Width
+     now changes instantly on state change. */
+  transition: background 160ms ease-out, border-color 160ms ease-out;
 }
 
 /* State 2: hover / focus-within — short labels visible, 160px */
@@ -887,7 +892,7 @@ button.pi-ps-analysis-distractor--selected {
     width: 40px;
     z-index: 25;
     padding: 8px 2px;
-    background: rgba(248, 246, 241, 0.92);
+    background: rgba(246, 246, 244, 0.92);
     border-right: 1px solid var(--pi-ps-insight-hairline);
     backdrop-filter: blur(4px);
   }
@@ -1149,7 +1154,7 @@ button.pi-ps-analysis-distractor--selected {
   width: var(--anchored-popover-width, 360px);
   min-width: 320px;
   max-width: min(420px, calc(100vw - 32px));
-  border: 1px solid #e2e2e2;
+  border: 1px solid var(--eqb-color-border-subtle, #e8e8e4);
   border-radius: 8px;
   background: #ffffff;
   padding: 12px 16px;
@@ -1207,7 +1212,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-insight-panel-close:focus-visible {
-  outline: 2px solid #2a7c4f;
+  outline: 2px solid var(--eqb-color-success, #059669);
   outline-offset: 1px;
 }
 
@@ -1298,7 +1303,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-insight-load-cell[data-filled="true"] {
-  background: #2a7c4f;
+  background: var(--eqb-color-success, #059669);
 }
 
 .pi-ps-insight-load-cell[data-filled="true"][data-high="true"] {
@@ -1409,7 +1414,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-structure-btn:focus-visible {
-  outline: 2px solid var(--pi-ps-insight-active-border, #7a6a58);
+  outline: 2px solid var(--pi-ps-insight-active-border, #a5cdbd);
   outline-offset: 1px;
 }
 
@@ -1447,7 +1452,7 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 14px;
   line-height: 1.6;
   text-align: left;
-  color: var(--pi-ps-insight-muted-ink, #6f665a);
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -1457,17 +1462,17 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-ps-structure-row:hover {
   background: transparent;
-  color: var(--pi-ps-insight-ink, #2f2923);
+  color: var(--pi-ps-insight-ink, #1e1e1c);
 }
 
 .pi-ps-structure-row:focus-visible {
-  outline: 2px solid var(--pi-ps-insight-active-border, #7a6a58);
+  outline: 2px solid var(--pi-ps-insight-active-border, #a5cdbd);
   outline-offset: 2px;
 }
 
 .pi-ps-structure-row--active {
   background: transparent;
-  color: var(--pi-ps-insight-ink, #2f2923);
+  color: var(--pi-ps-insight-ink, #1e1e1c);
 }
 
 .pi-ps-structure-row--active:hover {
@@ -1485,13 +1490,13 @@ button.pi-ps-analysis-distractor--selected {
   font-weight: 600;
   line-height: 1.4;
   text-align: center;
-  color: var(--pi-ps-insight-muted-ink, #6f665a);
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
   background: rgba(47, 41, 35, 0.06);
   border-radius: 3px;
 }
 
 .pi-ps-structure-row--active .pi-ps-structure-row-badge {
-  color: var(--pi-ps-insight-ink, #2f2923);
+  color: var(--pi-ps-insight-ink, #1e1e1c);
   background: rgba(47, 41, 35, 0.08);
 }
 
@@ -1537,7 +1542,7 @@ button.pi-ps-analysis-distractor--selected {
 /* ─── I0-D Seven Choices option-pool panel ─── */
 
 .pi-seven-panel {
-  color: #2f2923;
+  color: var(--pi-ps-insight-ink, #1e1e1c);
 }
 
 @media (max-width: 1199px) {
@@ -1559,7 +1564,7 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0;
-  color: #7a6a58;
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
 }
 
 .pi-seven-panel h2 {
@@ -1572,8 +1577,8 @@ button.pi-ps-analysis-distractor--selected {
   flex-shrink: 0;
   padding: 3px 7px;
   font-size: 12px;
-  color: #6f665a;
-  border: 1px solid #e3ddd3;
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  border: 1px solid var(--pi-ps-insight-hairline, #e8e8e4);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.45);
 }
@@ -1641,7 +1646,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-jump-chip:focus-visible {
-  outline: 2px solid var(--seven-border, #7a6a58);
+  outline: 2px solid var(--seven-border, #a5cdbd);
   outline-offset: 2px;
 }
 
@@ -1713,7 +1718,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-main:focus-visible {
-  outline: 2px solid var(--seven-border, #7a6a58);
+  outline: 2px solid var(--seven-border, #a5cdbd);
   outline-offset: 2px;
 }
 
