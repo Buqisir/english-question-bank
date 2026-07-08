@@ -21,6 +21,7 @@ import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
 import { groupTypeLabel, type QuestionGroupCard } from '../domain/questionBank.ts'
 import type { PaperHitContext, PaperResult } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
+import { parsePaperIdFromHref } from './paperSurfaceHref.ts'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
   real_exam: '真题',
@@ -83,6 +84,23 @@ function badgeSuffix(scope: PaperHitContext['scope']): string {
   return ' 个篇章'
 }
 
+/**
+ * paper-row-browse-entry — the row-level "看整卷" button only appears when at
+ * least one group in this bucket actually has a paper-browse asset to jump
+ * to. We take the first group with `hasPaperSurfaceAnalysis` and a
+ * `paperSurfaceHref` that parses to a paperId (same eligibility check as
+ * ConciergeGroupCard's own per-group link, ConciergeGroupCard.tsx:91) —
+ * no eligible group means no button, never a disabled one.
+ */
+function findRowPaperId(paper: PaperResult): string | null {
+  for (const { group } of paper.groups) {
+    if (!group.hasPaperSurfaceAnalysis || !group.paperSurfaceHref) continue
+    const paperId = parsePaperIdFromHref(group.paperSurfaceHref)
+    if (paperId) return paperId
+  }
+  return null
+}
+
 export type ConciergePaperRowProps = {
   paper: PaperResult
   expanded: boolean
@@ -92,6 +110,8 @@ export type ConciergePaperRowProps = {
   onSimilar: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
+  /** paper-row-browse-entry — opens the whole-paper preview page for this row's paperId (no focusGroupId — from the paper's start). */
+  onOpenPaperBrowse?: (paperId: string) => void
   /**
    * 'search' rows describe a query outcome（命中）；'feed' rows are plain
    * browsing — nothing was searched, so the badge must not claim a hit.
@@ -100,7 +120,8 @@ export type ConciergePaperRowProps = {
 }
 
 export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
-  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar, onOpenDetail, variant = 'search' } = props
+  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar, onOpenDetail, onOpenPaperBrowse, variant = 'search' } = props
+  const rowPaperId = onOpenPaperBrowse ? findRowPaperId(paper) : null
 
   const headline = buildHeadline(paper)
   const sourceTypeLabel = buildSourceTypeLabel(paper)
@@ -213,6 +234,15 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
         >
           {expanded ? '收起' : '展开题组'}
         </button>
+        {rowPaperId && (
+          <button
+            type="button"
+            className="concierge-action"
+            onClick={() => onOpenPaperBrowse?.(rowPaperId)}
+          >
+            看整卷
+          </button>
+        )}
       </div>
 
       {expanded && (

@@ -19,6 +19,7 @@ import {
 import { usePaperDraft } from './paperAssembly/usePaperDraft'
 import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
 import { ConciergeDesk } from './concierge/ConciergeDesk'
+import { parsePaperIdFromHref } from './concierge/paperSurfaceHref'
 import { useConciergeDesk } from './concierge/useConciergeDesk'
 import { usePaperExports } from './paperAssembly/usePaperExports'
 import {
@@ -722,16 +723,11 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // a new server field — the href already carries what we need.
   const openPaperBrowseFromDetail = useCallback(
     (detail: QuestionGroupDetail) => {
-      if (!detail.paperSurfaceHref) return
-      try {
-        const [, query = ''] = detail.paperSurfaceHref.split('?')
-        const params = new URLSearchParams(query)
-        const paperId = params.get('paperId')
-        if (!paperId) return
-        openPaperBrowse(paperId, params.get('groupId') || detail.id)
-      } catch {
-        /* malformed href — no-op, the button simply does nothing */
-      }
+      const paperId = parsePaperIdFromHref(detail.paperSurfaceHref)
+      if (!paperId) return
+      const [, query = ''] = (detail.paperSurfaceHref || '').split('?')
+      const groupId = new URLSearchParams(query).get('groupId') || detail.id
+      openPaperBrowse(paperId, groupId)
     },
     [openPaperBrowse],
   )
@@ -941,6 +937,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                 basketIds={new Set(basket.map((item) => item.id))}
                 onAdd={(group) => addToBasket(group)}
                 onOpenDetail={(group) => openDetail(group.id)}
+                onOpenPaperBrowse={(paperId) => openPaperBrowse(paperId)}
                 questionGroups={questionGroups}
                 dataStatus={dataStatus}
                 thinkingMode={aiThinkingMode}
