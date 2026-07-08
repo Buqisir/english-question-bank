@@ -1590,7 +1590,9 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-panel-actions button,
-.pi-seven-details-toggle {
+.pi-seven-details-toggle,
+.pi-cloze-details-toggle,
+.pi-gf-details-toggle {
   padding: 5px 9px;
   border: 1px solid #d8d0c4;
   border-radius: 5px;
@@ -1918,8 +1920,7 @@ button.pi-ps-analysis-distractor--selected {
 /* ─── Cloze / GrammarFill group intro (collapsible) ───
    The passage-level intro (overview + affective arc) renders as a native
    <details>: open in the empty state, collapsed to this one summary line
-   once a blank is focused. Only the summary line is styled here — the
-   full pi-cloze / pi-gf panel styling pass is a separate cut. */
+   once a blank is focused. */
 .pi-cloze-group-overview,
 .pi-gf-group-overview {
   margin-bottom: 12px;
@@ -1939,4 +1940,368 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 0.875rem;
   line-height: 1.6;
   margin: 8px 0 0;
+}
+
+/* ─── cloze-panel-polish: Cloze / GrammarFill blank-card panel ───
+ * Same warm notebook idiom as .pi-seven-panel / .pi-ps-analysis: cream
+ * chip backgrounds (rgba(30,30,28,0.07-0.12)), muted ink for secondary
+ * text, hairline borders from --pi-ps-insight-hairline. No new design
+ * system — every rule below reuses a pi-seven or pi-ps token/pattern.
+ */
+
+.pi-cloze-panel,
+.pi-gf-panel {
+  color: var(--pi-ps-insight-ink, #1e1e1c);
+}
+
+.pi-cloze-blank-card,
+.pi-gf-blank-card {
+  padding: 10px 12px;
+  border: 1px solid rgba(122, 106, 88, 0.24);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Header row: blank-no + pos/type tag + optional signature/hint tag.
+   Fixes the old "第 41 题noun" bare-concat layout with real chip spacing. */
+.pi-cloze-blank-header,
+.pi-gf-blank-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.pi-cloze-blank-no,
+.pi-gf-blank-no {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pi-cloze-tag,
+.pi-gf-tag,
+.pi-gf-blank-hint {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(30, 30, 28, 0.07);
+  color: #5f554a;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.pi-cloze-tag--sig,
+.pi-gf-tag--facet {
+  background: rgba(30, 30, 28, 0.12);
+  color: #221b15;
+}
+
+.pi-gf-blank-hint {
+  background: transparent;
+  border: 1px solid rgba(122, 106, 88, 0.24);
+  font-weight: 500;
+  color: #67594b;
+}
+
+.pi-cloze-section-title,
+.pi-gf-section-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+}
+
+.pi-cloze-correct-fit,
+.pi-gf-answer,
+.pi-cloze-distractors,
+.pi-gf-framework,
+.pi-gf-reason {
+  margin-bottom: 10px;
+}
+
+/* Answer badge — same "circle of weight" idiom as pi-seven's option-label
+   badge / pi-ps's correct checkmark, just carrying the answer letter. */
+.pi-cloze-answer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pi-cloze-answer-badge,
+.pi-gf-answer-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(30, 30, 28, 0.12);
+  color: #221b15;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pi-cloze-fit-reason,
+.pi-gf-reason-text {
+  margin: 0;
+  color: #4b4035;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Distractor gloss list — compact, muted, not competing with the answer. */
+.pi-cloze-distractor-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pi-cloze-distractor-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #756a5f;
+}
+
+.pi-cloze-distractor-label {
+  font-weight: 700;
+  color: #5f554a;
+}
+
+.pi-cloze-distractor-text {
+  color: #5f554a;
+}
+
+.pi-cloze-distractor-dash {
+  color: #a49a8e;
+}
+
+.pi-cloze-distractor-meaning {
+  color: #756a5f;
+}
+
+/* 考点框架 (grammar fill only): steps / table / notes. */
+.pi-gf-framework-steps {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.pi-gf-framework-step {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b4035;
+}
+
+.pi-gf-framework-table-wrapper {
+  margin-top: 6px;
+}
+
+.pi-gf-framework-table-caption {
+  margin: 0 0 4px;
+  font-size: 11px;
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+}
+
+.pi-gf-framework-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.pi-gf-framework-table-th,
+.pi-gf-framework-table-td {
+  padding: 4px 6px;
+  border: 1px solid rgba(122, 106, 88, 0.2);
+  text-align: left;
+}
+
+.pi-gf-framework-table-th {
+  background: rgba(30, 30, 28, 0.06);
+  font-weight: 600;
+}
+
+.pi-gf-framework-notes {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 2px;
+}
+
+.pi-gf-framework-note {
+  font-size: 12px;
+  color: #756a5f;
+  line-height: 1.5;
+}
+
+/* Non-finite role/path badges. */
+.pi-gf-nonfinite-badges {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.pi-gf-badge {
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pi-gf-badge--role {
+  background: rgba(30, 30, 28, 0.1);
+  color: #5f554a;
+}
+
+.pi-gf-badge--path {
+  background: rgba(122, 106, 88, 0.14);
+  color: #67594b;
+}
+
+/* Details toggle spacing (button visual shared with .pi-seven-details-toggle
+   via the combined selector declared earlier in this file). */
+.pi-cloze-details-toggle,
+.pi-gf-details-toggle {
+  margin-top: 2px;
+  margin-bottom: 8px;
+  /* Touch target parity with pi-seven's details toggle (plan requirement:
+     mobile touch targets no smaller than the pi-seven standard). Kept in
+     this cloze/gf-only block so the shared pi-seven selector above stays
+     byte-identical to its pre-cut behavior (CR should-fix). */
+  min-height: 30px;
+}
+
+.pi-cloze-details,
+.pi-gf-details {
+  display: grid;
+  gap: 8px;
+}
+
+.pi-cloze-evidence-block,
+.pi-gf-evidence-block {
+  padding: 8px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.pi-cloze-evidence-block .pi-cloze-section-title,
+.pi-gf-evidence-block .pi-gf-section-title {
+  margin-bottom: 8px;
+}
+
+/* Evidence buttons — same quote-card idiom as pi-seven's detail block /
+   pi-ps's evidence blockquote button. */
+.pi-cloze-evidence,
+.pi-gf-evidence,
+.pi-cloze-evidence-option {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px 9px;
+  border: 1px solid rgba(122, 106, 88, 0.2);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.55);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-height: 30px;
+}
+
+.pi-cloze-evidence-option {
+  cursor: default;
+}
+
+.pi-cloze-evidence:last-child,
+.pi-gf-evidence:last-child,
+.pi-cloze-evidence-option:last-child {
+  margin-bottom: 0;
+}
+
+.pi-cloze-evidence:focus-visible,
+.pi-gf-evidence:focus-visible {
+  outline: 2px solid var(--seven-border, #a5cdbd);
+  outline-offset: 2px;
+}
+
+.pi-cloze-evidence--selected,
+.pi-gf-evidence--selected {
+  border-color: rgba(122, 106, 88, 0.5);
+  background: rgba(30, 30, 28, 0.08);
+}
+
+.pi-cloze-evidence-type-label,
+.pi-gf-evidence-type-label {
+  display: inline-block;
+  margin-bottom: 3px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(30, 30, 28, 0.08);
+  color: #67594b;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.pi-cloze-evidence-quote,
+.pi-gf-evidence-quote {
+  margin: 0;
+  color: #4b4035;
+  font-size: 13px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.pi-cloze-evidence-relation,
+.pi-gf-evidence-relation {
+  margin: 4px 0 0;
+  color: #756a5f;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.pi-cloze-evidence-option-text {
+  display: block;
+  color: #4b4035;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pi-cloze-option-signal {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: rgba(247, 196, 83, 0.32);
+  color: inherit;
+}
+
+.pi-cloze-teaching-note,
+.pi-gf-teaching-note {
+  padding: 8px 9px;
+  border-radius: 5px;
+  background: rgba(30, 30, 28, 0.05);
+  color: #67594b;
+}
+
+.pi-cloze-teaching-note p,
+.pi-gf-teaching-note p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1199px) {
+  .pi-cloze-blank-card,
+  .pi-gf-blank-card {
+    width: 100%;
+  }
 }

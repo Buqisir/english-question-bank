@@ -1,19 +1,25 @@
 /**
  * I9 Cloze Analysis Panel — right pad card for one focused blank.
  *
- * Layout (per locked decisions in plan.md):
- *   - Header: blank no + pos + optional signature label
- *   - Correct fit: optionLabel + reason
- *   - Distractor gloss list (label + optionText + meaning; NOT evidence buttons)
- *   - Evidence rows (buttons with data-pi-evidence-id / data-pi-question-id)
- *     * Passage-side (signalSide != 'option'): evidence button → highlights passage
- *     * Option-side (signalSide === 'option'): in-card <mark> via renderOptionTextWithMark
- *   - teachingNote
+ * Layout (per locked decisions in plan.md, cloze-panel-polish info layering):
+ *   Always-visible:
+ *     - Header: blank no + pos/考点 tag (chip) + optional signature label (chip)
+ *     - Answer: optionLabel badge + one-line reason
+ *     - Distractor gloss list (label + optionText + meaning; compact, muted)
+ *   Collapsed by default (「展开细节」toggle, mirrors SevenChoicesAnalysisPanel):
+ *     - Evidence rows (buttons with data-pi-evidence-id / data-pi-question-id)
+ *       * Passage-side (signalSide != 'option'): evidence button → highlights passage
+ *       * Option-side (signalSide === 'option'): in-card <mark> via renderOptionTextWithMark
+ *     - teachingNote
  *
  * Group overview / affectiveArc is rendered above the card when provided.
+ *
+ * Collapse state is a local `Set<questionId>` — the simplest implementation:
+ * a newly focused blank is absent from the set, so it naturally starts
+ * collapsed without any explicit reset-on-switch logic.
  */
 
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import type {
   ClozeBlankAnalysisView,
   ClozeGroupView,
@@ -35,6 +41,22 @@ export function ClozeAnalysisPanel({
   groupView,
   onSelectEvidence,
 }: ClozeAnalysisPanelProps): ReactNode {
+  const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
+
+  const toggleDetails = (questionId: string): void => {
+    setExpandedDetails((prev) => {
+      const next = new Set(prev)
+      if (next.has(questionId)) {
+        next.delete(questionId)
+      } else {
+        next.add(questionId)
+      }
+      return next
+    })
+  }
+
+  const detailsOpen = analysis ? expandedDetails.has(analysis.questionId) : false
+
   return (
     <div className="pi-cloze-panel">
       {groupView && (
@@ -67,24 +89,26 @@ export function ClozeAnalysisPanel({
           {/* Header */}
           <div className="pi-cloze-blank-header">
             <span className="pi-cloze-blank-no">第 {analysis.blankNo} 题</span>
-            <span className="pi-cloze-blank-pos">{analysis.pos}</span>
+            <span className="pi-cloze-tag pi-cloze-tag--pos">{analysis.pos}</span>
             {analysis.signatureLabel && (
-              <span className="pi-cloze-blank-sig">{analysis.signatureLabel}</span>
+              <span className="pi-cloze-tag pi-cloze-tag--sig">{analysis.signatureLabel}</span>
             )}
           </div>
 
-          {/* Correct fit */}
+          {/* Answer (always visible) */}
           <div className="pi-cloze-correct-fit">
             <h4 className="pi-cloze-section-title">答案解析</h4>
-            {analysis.correctFit.optionLabel && (
-              <span className="pi-cloze-answer-badge">
-                {analysis.correctFit.optionLabel}
-              </span>
-            )}
-            <p className="pi-cloze-fit-reason">{analysis.correctFit.reason}</p>
+            <div className="pi-cloze-answer-row">
+              {analysis.correctFit.optionLabel && (
+                <span className="pi-cloze-answer-badge">
+                  {analysis.correctFit.optionLabel}
+                </span>
+              )}
+              <p className="pi-cloze-fit-reason">{analysis.correctFit.reason}</p>
+            </div>
           </div>
 
-          {/* Distractor glosses */}
+          {/* Distractor glosses (always visible, compact) */}
           {analysis.distractorGlosses.length > 0 && (
             <div className="pi-cloze-distractors">
               <h4 className="pi-cloze-section-title">干扰项释义</h4>
@@ -93,6 +117,7 @@ export function ClozeAnalysisPanel({
                   <li key={gloss.optionLabel} className="pi-cloze-distractor-item">
                     <span className="pi-cloze-distractor-label">{gloss.optionLabel}.</span>
                     <span className="pi-cloze-distractor-text">{gloss.optionText}</span>
+                    <span className="pi-cloze-distractor-dash" aria-hidden="true">—</span>
                     <span className="pi-cloze-distractor-meaning">{gloss.meaning}</span>
                   </li>
                 ))}
@@ -100,61 +125,77 @@ export function ClozeAnalysisPanel({
             </div>
           )}
 
-          {/* Evidence rows */}
-          {analysis.evidenceRows.length > 0 && (
-            <div className="pi-cloze-evidence-block">
-              <h4 className="pi-cloze-section-title">证据定位</h4>
-              {analysis.evidenceRows.map((row) =>
-                row.isOptionSide ? (
-                  // Option-side: in-card <mark>, no passage anchor button.
-                  <div
-                    key={row.evidenceId}
-                    className="pi-cloze-evidence-option"
-                    data-evidence-type={row.type}
-                  >
-                    <span className="pi-cloze-evidence-type-label">{row.type}</span>
-                    <span className="pi-cloze-evidence-option-text">
-                      {renderOptionTextWithMark(
-                        row.signalText,
-                        getOptionTextForSignal(row.signalText, analysis.optionTextByLabel),
-                      )}
-                    </span>
-                    {row.relation && (
-                      <p className="pi-cloze-evidence-relation">{row.relation}</p>
-                    )}
-                  </div>
-                ) : (
-                  // Passage-side: clickable button that drives cross-column line.
-                  <button
-                    key={row.evidenceId}
-                    type="button"
-                    className={
-                      row.evidenceId === activeEvidenceId
-                        ? 'pi-cloze-evidence pi-cloze-evidence--selected'
-                        : 'pi-cloze-evidence'
-                    }
-                    data-pi-evidence-id={row.evidenceId}
-                    data-pi-evidence-kind="support"
-                    data-pi-question-id={analysis.questionId}
-                    aria-pressed={row.evidenceId === activeEvidenceId}
-                    onClick={() => onSelectEvidence(row.evidenceId)}
-                  >
-                    <span className="pi-cloze-evidence-type-label">{row.type}</span>
-                    <blockquote className="pi-cloze-evidence-quote">{row.signalText}</blockquote>
-                    {row.relation && (
-                      <p className="pi-cloze-evidence-relation">{row.relation}</p>
-                    )}
-                  </button>
-                ),
-              )}
-            </div>
+          {/* Details toggle — evidence + teaching note stay collapsed by default. */}
+          {(analysis.evidenceRows.length > 0 || analysis.teachingNote) && (
+            <button
+              type="button"
+              className="pi-cloze-details-toggle"
+              onClick={() => toggleDetails(analysis.questionId)}
+              aria-expanded={detailsOpen}
+            >
+              {detailsOpen ? '收起细节' : '展开细节'}
+            </button>
           )}
 
-          {/* Teaching note */}
-          {analysis.teachingNote && (
-            <div className="pi-cloze-teaching-note">
-              <h4 className="pi-cloze-section-title">解题提示</h4>
-              <p>{analysis.teachingNote}</p>
+          {detailsOpen && (
+            <div className="pi-cloze-details">
+              {/* Evidence rows */}
+              {analysis.evidenceRows.length > 0 && (
+                <div className="pi-cloze-evidence-block">
+                  <h4 className="pi-cloze-section-title">证据定位</h4>
+                  {analysis.evidenceRows.map((row) =>
+                    row.isOptionSide ? (
+                      // Option-side: in-card <mark>, no passage anchor button.
+                      <div
+                        key={row.evidenceId}
+                        className="pi-cloze-evidence-option"
+                        data-evidence-type={row.type}
+                      >
+                        <span className="pi-cloze-evidence-type-label">{row.typeLabel}</span>
+                        <span className="pi-cloze-evidence-option-text">
+                          {renderOptionTextWithMark(
+                            row.signalText,
+                            getOptionTextForSignal(row.signalText, analysis.optionTextByLabel),
+                          )}
+                        </span>
+                        {row.relation && (
+                          <p className="pi-cloze-evidence-relation">{row.relation}</p>
+                        )}
+                      </div>
+                    ) : (
+                      // Passage-side: clickable button that drives cross-column line.
+                      <button
+                        key={row.evidenceId}
+                        type="button"
+                        className={
+                          row.evidenceId === activeEvidenceId
+                            ? 'pi-cloze-evidence pi-cloze-evidence--selected'
+                            : 'pi-cloze-evidence'
+                        }
+                        data-pi-evidence-id={row.evidenceId}
+                        data-pi-evidence-kind="support"
+                        data-pi-question-id={analysis.questionId}
+                        aria-pressed={row.evidenceId === activeEvidenceId}
+                        onClick={() => onSelectEvidence(row.evidenceId)}
+                      >
+                        <span className="pi-cloze-evidence-type-label">{row.typeLabel}</span>
+                        <blockquote className="pi-cloze-evidence-quote">{row.signalText}</blockquote>
+                        {row.relation && (
+                          <p className="pi-cloze-evidence-relation">{row.relation}</p>
+                        )}
+                      </button>
+                    ),
+                  )}
+                </div>
+              )}
+
+              {/* Teaching note */}
+              {analysis.teachingNote && (
+                <div className="pi-cloze-teaching-note">
+                  <h4 className="pi-cloze-section-title">解题提示</h4>
+                  <p>{analysis.teachingNote}</p>
+                </div>
+              )}
             </div>
           )}
         </div>

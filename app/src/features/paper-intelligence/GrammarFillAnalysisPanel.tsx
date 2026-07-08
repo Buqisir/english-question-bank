@@ -1,24 +1,29 @@
 /**
  * I14 Grammar-Fill Analysis Panel — right pad card for one focused blank.
  *
- * Layout (per locked decisions in plan.md):
- *   - Group overview above the card (grammar-fill has no affectiveArc)
- *   - Header: 第 N 题 + blankType tag (有提示词 / 无提示词) + hint (if given)
- *             + 考点 label (labelZh)
- *   - 答案: answer
- *   - 考点框架: framework.steps (ordered list) + framework.table (non-finite only)
- *              + framework.notes (muted lines)
- *   - 代入: reason
- *   - Non-finite badges: role (成分中文) + path (快路/慢路) when present
- *   - 证据定位: evidence rows as clickable buttons with data-pi-evidence-id,
- *              data-pi-evidence-kind="support", data-pi-question-id
- *              (no option-side branch — grammar fill has no options)
- *   - teachingNote
+ * Layout (per locked decisions in plan.md, cloze-panel-polish info layering):
+ *   Always-visible:
+ *     - Header: 第 N 题 + blankType tag (有提示词 / 无提示词, chip) + hint (if given)
+ *               + 考点 labelZh (chip)
+ *     - 答案: answer badge
+ *     - 考点框架: framework.steps (ordered list) + framework.table (non-finite only)
+ *                + framework.notes (muted lines)
+ *     - 代入: reason
+ *     - Non-finite badges: role (成分中文) + path (快路/慢路) when present
+ *   Collapsed by default (「展开细节」toggle, mirrors SevenChoicesAnalysisPanel):
+ *     - 证据定位: evidence rows as clickable buttons with data-pi-evidence-id,
+ *                data-pi-evidence-kind="support", data-pi-question-id
+ *                (no option-side branch — grammar fill has no options)
+ *     - teachingNote
+ *
+ * Collapse state is a local `Set<questionId>` — the simplest implementation:
+ * a newly focused blank is absent from the set, so it naturally starts
+ * collapsed without any explicit reset-on-switch logic.
  *
  * Mirrors ClozeAnalysisPanel.tsx pattern for harness integration.
  */
 
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import type {
   GrammarFillBlankAnalysisView,
   GrammarFillGroupView,
@@ -41,6 +46,22 @@ export function GrammarFillAnalysisPanel({
   groupView,
   onSelectEvidence,
 }: GrammarFillAnalysisPanelProps): ReactNode {
+  const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
+
+  const toggleDetails = (questionId: string): void => {
+    setExpandedDetails((prev) => {
+      const next = new Set(prev)
+      if (next.has(questionId)) {
+        next.delete(questionId)
+      } else {
+        next.add(questionId)
+      }
+      return next
+    })
+  }
+
+  const detailsOpen = analysis ? expandedDetails.has(analysis.questionId) : false
+
   return (
     <div className="pi-gf-panel">
       {groupView && (
@@ -69,19 +90,19 @@ export function GrammarFillAnalysisPanel({
           {/* Header */}
           <div className="pi-gf-blank-header">
             <span className="pi-gf-blank-no">第 {analysis.blankNo} 题</span>
-            <span className="pi-gf-blank-type-tag">
+            <span className="pi-gf-tag pi-gf-tag--type">
               {analysis.blankType === 'given' ? '有提示词' : '无提示词'}
             </span>
             {analysis.blankType === 'given' && analysis.hint && (
               <span className="pi-gf-blank-hint">提示词：{analysis.hint}</span>
             )}
-            <span className="pi-gf-blank-facet-label">{analysis.labelZh}</span>
+            <span className="pi-gf-tag pi-gf-tag--facet">{analysis.labelZh}</span>
           </div>
 
           {/* Answer */}
           <div className="pi-gf-answer">
             <h4 className="pi-gf-section-title">答案</h4>
-            <span className="pi-gf-answer-text">{analysis.answer}</span>
+            <span className="pi-gf-answer-badge">{analysis.answer}</span>
           </div>
 
           {/* 考点框架 */}
@@ -160,40 +181,56 @@ export function GrammarFillAnalysisPanel({
             </div>
           )}
 
-          {/* Evidence rows — all passage-side (grammar fill has no options) */}
-          {analysis.evidenceRows.length > 0 && (
-            <div className="pi-gf-evidence-block">
-              <h4 className="pi-gf-section-title">证据定位</h4>
-              {analysis.evidenceRows.map((row) => (
-                <button
-                  key={row.evidenceId}
-                  type="button"
-                  className={
-                    row.evidenceId === activeEvidenceId
-                      ? 'pi-gf-evidence pi-gf-evidence--selected'
-                      : 'pi-gf-evidence'
-                  }
-                  data-pi-evidence-id={row.evidenceId}
-                  data-pi-evidence-kind="support"
-                  data-pi-question-id={analysis.questionId}
-                  aria-pressed={row.evidenceId === activeEvidenceId}
-                  onClick={() => onSelectEvidence(row.evidenceId)}
-                >
-                  <span className="pi-gf-evidence-type-label">{row.type}</span>
-                  <blockquote className="pi-gf-evidence-quote">{row.signalText}</blockquote>
-                  {row.relation && (
-                    <p className="pi-gf-evidence-relation">{row.relation}</p>
-                  )}
-                </button>
-              ))}
-            </div>
+          {/* Details toggle — evidence + teaching note stay collapsed by default. */}
+          {(analysis.evidenceRows.length > 0 || analysis.teachingNote) && (
+            <button
+              type="button"
+              className="pi-gf-details-toggle"
+              onClick={() => toggleDetails(analysis.questionId)}
+              aria-expanded={detailsOpen}
+            >
+              {detailsOpen ? '收起细节' : '展开细节'}
+            </button>
           )}
 
-          {/* Teaching note */}
-          {analysis.teachingNote && (
-            <div className="pi-gf-teaching-note">
-              <h4 className="pi-gf-section-title">解题提示</h4>
-              <p>{analysis.teachingNote}</p>
+          {detailsOpen && (
+            <div className="pi-gf-details">
+              {/* Evidence rows — all passage-side (grammar fill has no options) */}
+              {analysis.evidenceRows.length > 0 && (
+                <div className="pi-gf-evidence-block">
+                  <h4 className="pi-gf-section-title">证据定位</h4>
+                  {analysis.evidenceRows.map((row) => (
+                    <button
+                      key={row.evidenceId}
+                      type="button"
+                      className={
+                        row.evidenceId === activeEvidenceId
+                          ? 'pi-gf-evidence pi-gf-evidence--selected'
+                          : 'pi-gf-evidence'
+                      }
+                      data-pi-evidence-id={row.evidenceId}
+                      data-pi-evidence-kind="support"
+                      data-pi-question-id={analysis.questionId}
+                      aria-pressed={row.evidenceId === activeEvidenceId}
+                      onClick={() => onSelectEvidence(row.evidenceId)}
+                    >
+                      <span className="pi-gf-evidence-type-label">{row.typeLabel}</span>
+                      <blockquote className="pi-gf-evidence-quote">{row.signalText}</blockquote>
+                      {row.relation && (
+                        <p className="pi-gf-evidence-relation">{row.relation}</p>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Teaching note */}
+              {analysis.teachingNote && (
+                <div className="pi-gf-teaching-note">
+                  <h4 className="pi-gf-section-title">解题提示</h4>
+                  <p>{analysis.teachingNote}</p>
+                </div>
+              )}
             </div>
           )}
         </div>

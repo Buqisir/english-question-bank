@@ -93,6 +93,8 @@ export type ClozeEvidenceRowView = {
   /** Unique id for data-pi-evidence-id; drives cross-column line. */
   evidenceId: string
   type: ClozeEvidenceType
+  /** 2-4 字教学用语（cloze-panel-polish）；未映射的 type 原样兜底。 */
+  typeLabel: string
   signalSide: ClozeSignalSide
   signalText: string
   targetText?: string
@@ -137,6 +139,16 @@ const SIGNATURE_LABELS: Record<string, string> = {
   'cloze.signature.adjective.affective-consistency': '情感一致',
   'cloze.signature.adverb.affective-consistency': '情感一致',
   'cloze.signature.phrase.contextual-composition': '语境合成义',
+}
+
+// cloze-panel-polish: 2-4 字教学用语，供折叠区证据类型 chip 显示。
+// 映射不到的 type 原样兜底显示（见 buildAnalysisViews 的 ?? 回退）。
+const CLOZE_EVIDENCE_TYPE_LABELS: Record<ClozeEvidenceType, string> = {
+  'collocation-partner': '搭配线索',
+  'repetition-echo': '复现呼应',
+  'semantic-field': '语义场',
+  'affective-cue': '情感线索',
+  'logical-connector': '逻辑连接',
 }
 
 const CLOZE_SECTION = '完形填空'
@@ -298,6 +310,7 @@ function buildAnalysisViews(
       return {
         evidenceId,
         type: item.type,
+        typeLabel: CLOZE_EVIDENCE_TYPE_LABELS[item.type] ?? item.type,
         signalSide: item.signalSide,
         signalText: item.signalText,
         targetText: item.targetText,
