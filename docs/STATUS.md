@@ -43,7 +43,7 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
   - 基建：`scripts/setup-worktree.sh` worktree 一键预热（入 AGENTS
     并行段）。流程教训：DEV 自报 verify 绿需主代理复核证据；verify
     命令禁 `| tail` 吞退出码。
-  - **生产部署待 owner 拍**（2026卷+刀⑤+刀A/B+本日四刀均未上生产）。
+  - **生产已部署 b391f20**（2026-07-08 晚，owner 拍板：2026卷+刀⑤+刀A/B+本日四刀一次上线）：prod 三重验证绿（login 200、question-groups ttfb 6.0s→0.14s、homepage 200）。遗留 worktree 大清理同日完成（9 worktree+合并分支全删，3 份未落账 cr.md 已抢救归档；31 个含未合并提交的老分支留待逐判）。
 
 ## 上一轮
 
