@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-07（process-slim）
+Last updated: 2026-07-08（render-fidelity）
 
 ## 现在是什么
 
@@ -23,6 +23,20 @@ Last updated: 2026-07-07（process-slim）
 
 ## 主线焦点
 
+- 2026-07-08：**刀⑤渲染保真收官**（PR #278，large，PA+CR+owner-QA 三审）。
+  四套渲染面（屏幕 PaperSurface/写作页/PDF/DOCX）归排版标准 v2 单一权威：
+  token 单源化（Issue #30 Gate 2 关门）、屏幕 16px→14px、PDF/DOCX 补挖空
+  样式+写作框+页脚页码+rFonts、§3b 分页纪律入标准、PaperSurfacePrototype
+  死码清除、4 个过期 PR 冻结 verify 退役。Chunk D（I10 句首挖空）经 PA
+  实证真资产不复现，剔刀挂账。owner-QA 实卷目检抓到 3 个 verify 数不出的
+  视觉 bug（text-indent 撞字/DOCX 缺缩进/空题干渲染），已修——**渲染刀
+  收官必须过实卷目检**成为流程教训（cut-note 有 QA 生成脚本）。
+  新账：①**七选五 A-G 候选句未入库**（paper-2026-i 数据缺口，导题工序洞，
+  补数据+validator 强制字段）②写作框段首语（需动 api.mjs，小刀）
+  ③heading 字号归一（CR SW-B）。生产部署待 owner 拍板。
+  候选新刀（owner 方向已聊）：解析分层微调（小刀）→ 整卷预览页
+  （新东方式流式挑题+题组量子操作，medium）→ 超纲词入导题管线；
+  练习模式（流式+可起标题，区别于真题卷面）挂账。
 - 2026-07-08：**导题 agent 化前两刀收官**。刀①《新课标一卷标准》v1
   （`docs/product/nck1-paper-standard.md`，owner 终审：结构/题号/
   分值/答案红线/听力原料先存/图文条款+保真分级）。刀②
