@@ -8,23 +8,19 @@
  *     - 答案: answer badge
  *     - 代入: reason
  *     - Non-finite badges: role (成分中文) + path (快路/慢路) when present
- *   Collapsed by default:
+ *   Collapsed by default — NAMED folds only, no anonymous「展开细节」drawer
+ *   (owner decision 2026-07-08: every fold says what it holds):
  *     - 考点框架 (native <details>): generic per-facet framework — identical
  *       for every blank of the facet, so it folds to one line
- *     - 证据定位 (「展开细节」toggle, mirrors SevenChoicesAnalysisPanel):
- *                evidence rows as clickable buttons with data-pi-evidence-id,
- *                data-pi-evidence-kind="support", data-pi-question-id
- *                (no option-side branch — grammar fill has no options)
+ *     - 证据定位 (native <details>): evidence rows as clickable buttons with
+ *       data-pi-evidence-id, data-pi-evidence-kind="support",
+ *       data-pi-question-id (no option-side branch — grammar fill has no options)
  *   Not rendered: teachingNote (restates 代入; owner cut 2026-07-08 — data kept)
- *
- * Collapse state is a local `Set<questionId>` — the simplest implementation:
- * a newly focused blank is absent from the set, so it naturally starts
- * collapsed without any explicit reset-on-switch logic.
  *
  * Mirrors ClozeAnalysisPanel.tsx pattern for harness integration.
  */
 
-import { useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import type {
   GrammarFillBlankAnalysisView,
   GrammarFillGroupView,
@@ -47,22 +43,6 @@ export function GrammarFillAnalysisPanel({
   groupView,
   onSelectEvidence,
 }: GrammarFillAnalysisPanelProps): ReactNode {
-  const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
-
-  const toggleDetails = (questionId: string): void => {
-    setExpandedDetails((prev) => {
-      const next = new Set(prev)
-      if (next.has(questionId)) {
-        next.delete(questionId)
-      } else {
-        next.add(questionId)
-      }
-      return next
-    })
-  }
-
-  const detailsOpen = analysis ? expandedDetails.has(analysis.questionId) : false
-
   return (
     <div className="pi-gf-panel">
       {groupView && (
@@ -186,25 +166,15 @@ export function GrammarFillAnalysisPanel({
             </div>
           )}
 
-          {/* Details toggle — evidence stays collapsed by default. */}
+          {/* 证据定位 — NAMED fold, same idiom as 文章简介/考点框架 (owner
+              decision 2026-07-08: no anonymous「展开细节」drawer). All rows
+              are passage-side (grammar fill has no options); the fold's real
+              value is the click-to-highlight interaction. */}
           {analysis.evidenceRows.length > 0 && (
-            <button
-              type="button"
-              className="pi-gf-details-toggle"
-              onClick={() => toggleDetails(analysis.questionId)}
-              aria-expanded={detailsOpen}
-            >
-              {detailsOpen ? '收起细节' : '展开细节'}
-            </button>
-          )}
-
-          {detailsOpen && (
-            <div className="pi-gf-details">
-              {/* Evidence rows — all passage-side (grammar fill has no options) */}
-              {analysis.evidenceRows.length > 0 && (
-                <div className="pi-gf-evidence-block">
-                  <h4 className="pi-gf-section-title">证据定位</h4>
-                  {analysis.evidenceRows.map((row) => (
+            <details className="pi-gf-evidence-fold" key={`ev-${analysis.questionId}`}>
+              <summary className="pi-gf-evidence-summary">证据定位</summary>
+              <div className="pi-gf-evidence-block">
+                {analysis.evidenceRows.map((row) => (
                     <button
                       key={row.evidenceId}
                       type="button"
@@ -226,15 +196,14 @@ export function GrammarFillAnalysisPanel({
                       )}
                     </button>
                   ))}
-                </div>
-              )}
-
-              {/* 解题提示 (teachingNote) is deliberately NOT rendered for
-                  grammar fill — it restates 代入 in different words every
-                  time (owner decision 2026-07-08). The field stays in the
-                  data/adapter; only the presentation drops it. */}
-            </div>
+              </div>
+            </details>
           )}
+
+          {/* 解题提示 (teachingNote) is deliberately NOT rendered for
+              grammar fill — it restates 代入 in different words every
+              time (owner decision 2026-07-08). The field stays in the
+              data/adapter; only the presentation drops it. */}
         </div>
       )}
     </div>

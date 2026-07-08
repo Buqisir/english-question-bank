@@ -1590,9 +1590,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-panel-actions button,
-.pi-seven-details-toggle,
-.pi-cloze-details-toggle,
-.pi-gf-details-toggle {
+.pi-seven-details-toggle {
   padding: 5px 9px;
   border: 1px solid #d8d0c4;
   border-radius: 5px;
@@ -2169,23 +2167,28 @@ button.pi-ps-analysis-distractor--selected {
   color: #67594b;
 }
 
-/* Details toggle spacing (button visual shared with .pi-seven-details-toggle
-   via the combined selector declared earlier in this file). */
-.pi-cloze-details-toggle,
-.pi-gf-details-toggle {
-  margin-top: 2px;
-  margin-bottom: 8px;
-  /* Touch target parity with pi-seven's details toggle (plan requirement:
-     mobile touch targets no smaller than the pi-seven standard). Kept in
-     this cloze/gf-only block so the shared pi-seven selector above stays
-     byte-identical to its pre-cut behavior (CR should-fix). */
+/* 证据定位 named fold — same quiet one-line summary idiom as
+   文章简介/考点框架 (no anonymous「展开细节」drawer, owner 2026-07-08).
+   min-height keeps the tap target at the pi-seven touch standard. */
+.pi-cloze-evidence-summary,
+.pi-gf-evidence-summary {
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--pi-ps-insight-muted-ink, #8a8177);
+  user-select: none;
   min-height: 30px;
+  display: flex;
+  align-items: center;
 }
 
-.pi-cloze-details,
-.pi-gf-details {
-  display: grid;
-  gap: 8px;
+.pi-cloze-evidence-fold,
+.pi-gf-evidence-fold {
+  margin-top: 2px;
+}
+
+.pi-cloze-evidence-fold[open] .pi-cloze-evidence-summary,
+.pi-gf-evidence-fold[open] .pi-gf-evidence-summary {
+  margin-bottom: 6px;
 }
 
 .pi-cloze-evidence-block,

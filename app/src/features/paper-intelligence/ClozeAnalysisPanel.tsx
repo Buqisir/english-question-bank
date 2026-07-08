@@ -6,20 +6,17 @@
  *     - Header: blank no + pos/考点 tag (chip) + optional signature label (chip)
  *     - Answer: optionLabel badge + one-line reason
  *     - Distractor gloss list (label + optionText + meaning; compact, muted)
- *   Collapsed by default (「展开细节」toggle, mirrors SevenChoicesAnalysisPanel):
- *     - Evidence rows (buttons with data-pi-evidence-id / data-pi-question-id)
+ *   Collapsed by default — NAMED folds only, no anonymous「展开细节」drawer
+ *   (owner decision 2026-07-08: every fold says what it holds):
+ *     - 证据定位 (native <details>): evidence rows
  *       * Passage-side (signalSide != 'option'): evidence button → highlights passage
  *       * Option-side (signalSide === 'option'): in-card <mark> via renderOptionTextWithMark
- *     - teachingNote
+ *   Not rendered: teachingNote (restates the reason; owner cut — data kept)
  *
  * Group overview / affectiveArc is rendered above the card when provided.
- *
- * Collapse state is a local `Set<questionId>` — the simplest implementation:
- * a newly focused blank is absent from the set, so it naturally starts
- * collapsed without any explicit reset-on-switch logic.
  */
 
-import { useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import type {
   ClozeBlankAnalysisView,
   ClozeGroupView,
@@ -41,22 +38,6 @@ export function ClozeAnalysisPanel({
   groupView,
   onSelectEvidence,
 }: ClozeAnalysisPanelProps): ReactNode {
-  const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
-
-  const toggleDetails = (questionId: string): void => {
-    setExpandedDetails((prev) => {
-      const next = new Set(prev)
-      if (next.has(questionId)) {
-        next.delete(questionId)
-      } else {
-        next.add(questionId)
-      }
-      return next
-    })
-  }
-
-  const detailsOpen = analysis ? expandedDetails.has(analysis.questionId) : false
-
   return (
     <div className="pi-cloze-panel">
       {groupView && (
@@ -125,25 +106,16 @@ export function ClozeAnalysisPanel({
             </div>
           )}
 
-          {/* Details toggle — evidence + teaching note stay collapsed by default. */}
-          {(analysis.evidenceRows.length > 0 || analysis.teachingNote) && (
-            <button
-              type="button"
-              className="pi-cloze-details-toggle"
-              onClick={() => toggleDetails(analysis.questionId)}
-              aria-expanded={detailsOpen}
-            >
-              {detailsOpen ? '收起细节' : '展开细节'}
-            </button>
-          )}
-
-          {detailsOpen && (
-            <div className="pi-cloze-details">
-              {/* Evidence rows */}
-              {analysis.evidenceRows.length > 0 && (
-                <div className="pi-cloze-evidence-block">
-                  <h4 className="pi-cloze-section-title">证据定位</h4>
-                  {analysis.evidenceRows.map((row) =>
+          {/* 证据定位 — a NAMED fold (owner decision 2026-07-08: no anonymous
+              「展开细节」drawer; every fold says what it holds, same idiom as
+              文章简介/考点框架). Evidence text restates the answer reason —
+              the fold's real value is the click-to-highlight interaction.
+              key resets the open state when focus moves to another blank. */}
+          {analysis.evidenceRows.length > 0 && (
+            <details className="pi-cloze-evidence-fold" key={`ev-${analysis.questionId}`}>
+              <summary className="pi-cloze-evidence-summary">证据定位</summary>
+              <div className="pi-cloze-evidence-block">
+                {analysis.evidenceRows.map((row) =>
                     row.isOptionSide ? (
                       // Option-side: in-card <mark>, no passage anchor button.
                       <div
@@ -186,18 +158,14 @@ export function ClozeAnalysisPanel({
                       </button>
                     ),
                   )}
-                </div>
-              )}
-
-              {/* Teaching note */}
-              {analysis.teachingNote && (
-                <div className="pi-cloze-teaching-note">
-                  <h4 className="pi-cloze-section-title">解题提示</h4>
-                  <p>{analysis.teachingNote}</p>
-                </div>
-              )}
-            </div>
+              </div>
+            </details>
           )}
+
+          {/* 解题提示 (teachingNote) is deliberately NOT rendered — it
+              restates the answer reason in different words every time
+              (owner decision 2026-07-08, same call as grammar fill).
+              The field stays in the data/adapter. */}
         </div>
       )}
     </div>
