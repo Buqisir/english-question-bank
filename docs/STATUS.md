@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-08（render-fidelity）
+Last updated: 2026-07-08（analysis-layering + paper-browse 双刀并行）
 
 ## 现在是什么
 
@@ -23,6 +23,25 @@ Last updated: 2026-07-08（render-fidelity）
 
 ## 主线焦点
 
+- 2026-07-08：**双刀并行收官**（首次并行流水线试跑成功，worktree 隔离，
+  各自 PA-lite/plan→Sonnet DEV→fresh Opus CR→浏览器 QA→独立 PR）：
+  - **刀A 解析分层**（PR #279）：详情页解析两层披露——答案行常显，其余
+    收进默认折叠「展开解析」，组级四大块各自带标题折叠；新组件
+    AnalysisDisclosure 自持状态，QuestionGroupDetailView 零 useState
+    护栏原样保住。「一句话考点」中间层不做客户端假货，字段留给导题
+    管线产真数据（挂账，与超纲词同轨）。
+  - **刀B 整卷预览页**（PR #280）：`?view=paper-browse&paperId=...`，
+    整卷按 asset content.blocks 流式渲题组卡（复用 PI adapter 喂只读
+    PaperSurface，本体零字节改动）+ 部/节/题组目录锚点 + 加入草稿卷
+    （复用状态机）；入口=详情页「看整卷」。两皮结构第一皮；第二皮
+    （成卷 A4 预览切换）另刀。刻意不做：移出/整卷加入/试卷列表页。
+  - QA 方法沉淀：本地 QA fixture 用户脚本化登录（cookie 注入，代理不碰
+    密码）；本地库无解析数据时造 [QA夹具] 数据验分层。
+  - 新跟进项（均为存量债，非两刀引入）：route-integration 16 项 main
+    同挂旧断言、module-v1 的 App.tsx 冻结断言过宽（均不在 CI）、路由层
+    无 popstate 处理（Back 键 URL 变视图不变，与 draft/mySpace 同病）；
+    屏幕 PaperSurface 完形空题干显示「55. 55」重复（导出面已修，屏幕面
+    小刀候选）。
 - 2026-07-08：**刀⑤渲染保真收官**（PR #278，large，PA+CR+owner-QA 三审）。
   四套渲染面（屏幕 PaperSurface/写作页/PDF/DOCX）归排版标准 v2 单一权威：
   token 单源化（Issue #30 Gate 2 关门）、屏幕 16px→14px、PDF/DOCX 补挖空
