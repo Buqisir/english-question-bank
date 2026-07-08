@@ -86,6 +86,15 @@ Last updated: 2026-07-07（process-slim）
   verify-list 对 member 隐藏（isOwnerView gate，同刀④），
   `verify-classic-retire-2.mjs` 三条断言改 owner-gated 真检查（63/63）。
   其余生产 QA owner 已过，无别的问题。生产已同步（2026-07-08）。
+- **《试卷排版标准》v2 定稿（owner 2026-07-08 终审）**：
+  `docs/product/exam-paper-format-standards.md` 重写为带数值的唯一
+  权威（金样卷 NEEA + 2026 卷双源实测 + 命题人社区共识互证；
+  2026 PDF 实为 WPS 仿制件——骨架可信、字符级不可信；七选五挖空
+  线长于完形 3:2 实测定谳）。广东 QA 单数值口径废止。**刀⑤渲染
+  保真施工图就绪**（四渲染面收拢/PDF·DOCX 补挖空与写作框/DOCX
+  补字体/屏幕 16px→14px 等比/I10/死码清理/Issue#30 Gate2 关门），
+  owner 圈了即立刀。三项低置信待 owner 实物复核（题号句点/语法
+  空线长/边距名义值），不阻塞。
 - UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
   `.impeccable/critique/`）。剩余：[P1] 两个未迁移解析孪生面
   （`?view=reading-analysis` 暖色孤岛 + PI 默认 Preview 面含 backstage

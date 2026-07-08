@@ -1,80 +1,175 @@
-# Exam Paper Formatting Standards
+# 试卷排版标准(Exam Paper Typography Standard)v2(owner 2026-07-08 终审拍板)
 
-These are hard standards for teacher-authored or app-rendered English exam
-papers. They apply across Reading, 七选五, 完形填空, 语法填空, writing tasks,
-PaperSurface, print/export, and future paper-authoring workflows unless a
-specific cut explicitly records an exception.
+**效力:一切渲染、打印、显示均以本标准为准**(owner 原话拍板)。
 
-The visual reference set lives in:
+v2(2026-07-08)取代 v1 文字版,并吸收双权威源实测数值与命题人社区
+共识(含纠错)。数据契约(题号/分值/洗卷)另见
+`docs/product/nck1-paper-standard.md`,两者互补:它管数据,本标准管视觉。
 
-```text
-docs/product/exam-paper-format-reference/
-```
+## 0. 原则与权威源(owner 2026-07-08 拍板)
 
-## Import Normalization Principle
+- **一个标准**:无论卷源是什么(真题/模拟/校本),渲染一律按本标准,
+  排版与卷源无关。呈现基准 = A4。
+- **权威源(等权,分工取值)**:
+  - **NEEA 金样卷**(`docs/product/exam-paper-format-reference/images/`
+    12 张,带 NEEA 水印)——**标点与字符级规则以它为准**(图为裁切件,
+    绝对尺寸不可测);
+  - **2026 新课标 I 卷 PDF**(`scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf`)
+    ——经实测确认为 WPS 复刻件(非官方原版):**版式骨架数值精确可用**
+    (矢量,实测精度 0.01pt),**标点细节不作依据**。
+  - 佛山模拟卷、广东一模不作为标准依据(owner 拍板剔除);
+    `docs/paper-surface-guangdong-visual-qa-checklist.md` 的数值口径
+    自 v2 起**废止**,仅作历史 QA 记录。
+- 实测报告:2026-07-08 双源 12 项测量(会话交付,数值已固化入本文)。
+- **保真分级**(nck1-paper-standard.md §8):试卷面(A4 组卷预览/
+  打印/PDF/DOCX 导出)必须达到本标准;网站详情页语义完整、阅读
+  友好即可,不要求仿真卷版式。
 
-Imported real papers are not formatting authority.
+## 1. 页面(A4)
 
-When importing real or mock papers, preserve semantic content: original passage
-text, question meaning, option content, answer keys, and writing prompts. But
-normalize formatting toward Gaokao-style exam standards.
+| 项 | 值 | 来源 |
+| --- | --- | --- |
+| 页面 | A4(210×297mm;595.3×841.9pt) | 实测 |
+| 左右边距 | 各 24mm(正文左缘 68pt) | 实测(高置信) |
+| 上边距 | ≈21mm(至首行字顶) | 实测(中高) |
+| 页脚 | 页码行「英语试题 第X页(共Y页)」距底 ≈17.5mm,居中 | 实测 |
+| 正文栏宽 | ≈162mm(459.3pt),单栏,两端对齐 | 实测 |
 
-If a source paper is visually sloppy, inconsistent, or non-standard, the app
-should not reproduce that sloppiness. It should repair spacing, punctuation,
-blank style, option alignment, quote style, dash style, and answer-box layout
-where doing so does not change meaning.
+封面页(如需)边距 35mm、内容居中;组卷产物默认不含封面。
 
-If normalization may change meaning, stop and surface the ambiguity for human
-review.
+## 2. 字体与字号
 
-## Global Typography
+| 用途 | 字体 | 字号 |
+| --- | --- | --- |
+| 英文正文/题干/选项 | Times New Roman(粗/斜体用其变体) | **10.5pt(五号)** |
+| 中文正文/说明/注释 | 书宋(方正书宋/华文宋体族) | 10.5pt(与英文同号) |
+| 部标题(第X部分…) | 中黑(黑体族)加粗 | 10.5pt(**不放大**) |
+| 节标题(第X节…) | 书宋常规 | 10.5pt |
+| 阅读篇章标题 A/B/C/D 及副标题 | Times New Roman Bold | 10.5pt(不放大),居中 |
+| 卷名「英 语」 | 中黑,字距拉开,居中 | 20pt |
 
-- Use English half-width punctuation in English text.
-- After English punctuation, add one space. This includes punctuation after
-  question-number dots and option-label dots, for example `21. ` and `A. `.
-- English quotation marks and apostrophes must be English curly marks, not
-  copied Chinese/full-width or straight marks from web text.
-- English em dashes must use the correct English dash glyph, not three hyphens
-  and not a Chinese dash.
-- When adding a Chinese gloss for a word outside the curriculum, the Chinese
-  text goes inside English parentheses. Add spaces around the parentheses so
-  they do not stick to neighboring English words, for example
-  `photosynthesis (光合作用) process`.
-- Page breaks must protect readability. Avoid splitting a reading question so
-  the stem is on one page and all options are on the next. Avoid splitting a
-  cloze passage onto one page and its option block onto another when possible.
+Web 字体栈映射(token 层):英文 `"Times New Roman", Times, serif`;
+中文正文接宋体族(`"SimSun", "Songti SC", "STSong"`),标题接黑体族。
+**DOCX 导出必须显式设置 rFonts**(现状缺失,刀⑤修)。
+px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
-## Reading Choice
+## 3. 行距
 
-- Reading A-D option blocks align to the wh-word / stem text, not to the
-  question number.
-- If Reading options are short enough to use a two-line layout, align A/C in
-  one vertical column and B/D in one vertical column.
-- Guess-word and attitude questions often use one-word options, but each option
-  functions as an elliptical sentence. Capitalize the first letter and end with
-  a period.
+- **基准 18 磅(固定值)**;10.5pt 正文下 ≈1.714 倍。
+- 真卷存在按整页纵向撑满的弹性(实测 18–23 磅,两源同现"B 篇最松");
+  本产品渲染**统一取 18 磅,不实现撑满**(有意简化)。
+- 选项列表区(听力/完形/语法填空选项列)可放宽至 20 磅(实测 20.3pt)。
+- 段落首行缩进 2em;题组之间留约 2 行(≈37pt)。
 
-## 七选五
+## 4. 层级与标题
 
-- Seven-choices blanks use three spaces before and after the blank number.
-- Punctuation placement depends on what was blanked:
-  - If the blank removes a half sentence or heading, punctuation stays in the
-    passage after the blank.
-  - If all five blanks remove complete sentences, punctuation belongs in the
-    A-G options. The passage blank should not carry duplicate punctuation.
+- **部标题**:中黑加粗,**左顶格**,分值信息内嵌同行——
+  「第二部分 阅读(共两节,满分50分)」。
+- **节标题**:书宋常规,**缩进 2 字符**(x≈89pt),分值内嵌——
+  「第一节(共15小题;每小题2.5分,满分37.5分)」。分值不另起行。
+- 层级靠**字重与缩进**区分,一律不放大字号。
+- 篇章标题 A/B/C/D:加粗居中,与上下正文各空一行;篇内副标题
+  (文章原标题)同样加粗居中。
 
-## 完形填空
+## 5. 题号与选项排布
 
-- Cloze blanks use two spaces before and after the blank number.
-- A-D options should be aligned with keyboard Tab stops so every A, B, C, and D
-  column lines up even when option lengths differ.
+- 题号悬挂于正文左缘(68pt),题干首词起于缩进位(89pt,2 字符);
+  **选项块与题干首词对齐,不与题号对齐**(wh-word 对齐规则)。
+- 题号/选项字母标点:英文句点 + 一个空格(`21. ` / `A. `)。
+  (2026 复刻件用全角「．」属仿制偏差,不采;金样卷倾向英文句点,
+  中低置信,待 owner 实物复核。)
+- 阅读短选项两行排布:A/C 一列(题干缘),B/D 一列(近页心 ≈290pt)。
+- 完形选项四列:等距网格 ≈37mm(104pt),所有 A/B/C/D 各成一线
+  (Word 侧即 Tab 制表位对齐)。
+- 听力选项三列:等距 ≈150pt。
+- 1–9 题与 10+ 题的题干起点差异是题号左对齐的自然结果,
+  **不是独立缩进规则**(实测澄清社区说法)。
 
-## 语法填空
+## 6. 挖空(七选五/完形/语法填空)
 
-- Grammar-fill blanks use two spaces before and after the blank number.
-- Prompt words in parentheses should stay visually attached to the blank while
-  preserving English spacing rules.
+真卷构造 = **定长下划线 + 题号居中于线上**(非空格字符拼接)。
+线长以金样卷专项实测为准(2026-07-08,30 条线全样本;仿制件此项
+失真不采),与社区共识「七选五 3+3、完形/语填 2+2」精确互证
+(留白比实测 3:2):
 
-## Writing
+- **七选五**:下划线长 ≈**4.6em**(10.5pt 下 ≈48pt/17mm),
+  数字两侧各约 3 字符位留白;
+- **完形填空 / 语法填空**:下划线长 ≈**3.3em**(≈35pt/12mm),
+  数字两侧各约 2 字符位留白;
+- 线粗 0.48pt,题号严格居中(实测偏差 ≤0.12em),**题号无尾点**,
+  句读标点排在线外;
+- 横线**不得跨行断开**;行首/行尾必须完整显示(watch-ledger I10 的
+  句首挖空 bug 属此条,刀⑤收);
+- 横线与前后单词之间各留一个空格宽,不得粘连;
+- 挖空数字不得写成裸数字(如 `57 countries` 样式),防止被误读为
+  数据(student-friendly 原则)。
+- 教师 Word 侧复现法(附注):空格+下划线构造,七选五 3+3、
+  完形/语法填空 2+2 个空格——与金样卷实测留白精确一致;渲染实现
+  以定长线为准,Word 授课/命题场景按空格法。
+- 七选五标点归属:挖半句/小标题 → 标点留在文中横线后;五空全挖
+  整句 → 标点在 A–G 选项内,文中横线后不带标点,不得重复。
+- 语法填空提示词:紧随横线的英文括号 `(hold)`,与横线视觉相连,
+  遵守英文空格规则。
 
-- 应用文写作 and 读后续写 both use two answer boxes.
+## 7. 标点与字符(以金样卷为准)
+
+- 英文文本一律英文半角标点;**英文标点后接一个空格**。
+- 引号/撇号必须是英文弯引号,禁止直引号或中文引号。
+- **英文破折号 = en-dash「–」,前后各一个空格**(金样卷实证;
+  v1 的 em-dash 表述废止;社区"左右各 2 空格"说法不采)。
+  中文注释文本内的破折号用全角「—」无空格。
+- 超纲词中文加注:汉字置于**半角括号**内,括号外侧与相邻英文单词
+  各留一个空格:`photosynthesis (光合作用) process`。
+  (2026 复刻件的全角括号属仿制偏差,不采。)
+- 整卷拼写体系统一(英式或美式选一,不混用)。
+
+## 8. 写作答题区
+
+- 应用文与读后续写**各配一个答题框,共两框**;细边框(0.48pt)
+  素框,框内无横线、无提示行。
+- 实测尺寸:应用文 ≈144×65mm;读后续写 ≈145×57mm。
+- 读后续写的两个段首语**印在框内**(各段起笔位置),学生续写于其后。
+- 词数提示等说明行:书宋 10.5pt,全角括号编号「(1)…」,缩进列表。
+
+## 9. 分页保护
+
+- 题干与其选项不得分离两页;完形文章与其选项块尽量同页;
+  阅读设问不得与正答/干扰项跨页。学生不应为答一题来回翻页。
+
+## 10. 命题文本规范(附则,authoring 层)
+
+- 猜词题/态度题的单词选项是省略句:首字母大写,末尾加句号。
+- 设问不用缩写:`What is ...?`,不写 `What's ...?`。
+  `What is the text mainly about?` 配名词短语选项;
+  `What is the main idea ...?` 配完整句选项。
+
+## Import Normalization Principle(承自 v1,继续有效)
+
+导入的真题/模拟卷**不是排版权威**。导入时保语义(原文、题意、
+选项、答案、写作题干),排版一律向本标准归一:间距、标点、挖空
+样式、选项对齐、引号、破折号、答题框。源卷排版邋遢的,产品不得
+复刻其邋遢。归一化可能改变语义时,停下来交人裁。
+(实例:paper-2026-i 正文里复刻件的 `--`/`-` 破折号,按本条应
+归一为「 – 」——列为待办小刀,见执行与迁移。)
+
+## 执行与迁移
+
+- 本标准是四套渲染面(屏幕 PaperSurface / 写作页 / PDF 导出 /
+  DOCX 导出)的唯一权威;现状四面数值各异(2026-07-08 盘点在案),
+  收拢工作 = **渲染保真刀(刀⑤)**,含:token 单源化(关掉
+  Issue #30 Gate 2 那道欠了 52 天的门)、PDF/DOCX 补挖空样式与
+  写作框、DOCX 补字体、字号回归 10.5pt 等比(屏幕纸面 794px 下
+  由 16px 调整为 ≈14px)、I10 句首挖空修复、死码
+  PaperSurfacePrototype 清理。
+- 已入库内容的标点归一(如 paper-2026-i 的破折号)单独小刀。
+- 本标准修改须 owner 拍板(同 nck1-paper-standard.md §7 变更纪律)。
+
+## 待 owner 实物复核项(低置信,不阻塞)
+
+- 题号句点样式(英文 `.` + 空格 vs 全角「．」)——金样卷分辨率不足,
+  建议对照纸质真题定谳;v2 暂按英文句点 + 空格执行。
+- **语法填空作答线是否加长**:金样卷 = 与完形等长(≈3.3em,未
+  加长);2026 仿制件 = 加长至 6em。两源冲突、单卷样本,v2 暂按
+  金样卷(不加长),建议拿多套纸质真题确认是否随年份浮动。
+- 上/下边距的"名义设定值"(实测为 21mm/页脚 17.5mm,系至字面
+  距离,非排版软件对话框值)。
