@@ -239,10 +239,19 @@ assert(
   /detail\.paperSurfaceHref/.test(openFromDetailBody),
   'does not reference detail.paperSurfaceHref',
 )
+// paper-row-browse-entry 起，href→paperId 解析收敛进共享的
+// parsePaperIdFromHref（concierge/paperSurfaceHref.ts），详情页入口与
+// 首页卷行入口共用。断言改钉两段：入口调用共享解析 + 共享解析真的取 paperId。
 assert(
-  'openPaperBrowseFromDetail parses paperId out of the href query string',
-  /params\.get\(\s*['"]paperId['"]\s*\)/.test(openFromDetailBody),
-  'does not parse paperId from the href',
+  'openPaperBrowseFromDetail parses paperId via the shared helper',
+  /parsePaperIdFromHref\s*\(\s*detail\.paperSurfaceHref\s*\)/.test(openFromDetailBody),
+  'does not call parsePaperIdFromHref on the href',
+)
+const hrefHelperSrc = read('app/src/concierge/paperSurfaceHref.ts')
+assert(
+  'shared href helper parses paperId out of the query string',
+  /params\.get\(\s*['"]paperId['"]\s*\)/.test(hrefHelperSrc),
+  'paperSurfaceHref.ts does not parse paperId',
 )
 assert(
   'App.tsx wires onOpenPaperBrowse={openPaperBrowseFromDetail} into QuestionGroupDetailView',
