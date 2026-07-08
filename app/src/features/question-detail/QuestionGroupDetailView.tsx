@@ -10,10 +10,13 @@
  * state (populated by `openDetail`'s回填 + the AI Enhancement panel's
  * sync-into-open-detail branch) and passes it down.
  *
- * Owner gating: when `isOwnerView` is false (member), 编辑/删除 are hidden —
- * not disabled. Everything else (passage, questions, saved parse displays,
- * answer-compare stats, AI verification list, bound topic labels, 加入草稿卷)
- * is visible to both member and owner.
+ * Owner gating: when `isOwnerView` is false (member), the hidden — not
+ * disabled — surfaces are: 编辑/删除, the per-question answer-compare box
+ * (`showCompareBox`), and the topic-label confidence percentage
+ * (ui-boundary-trim, owner 2026-07-07 / audit Q2). Everything else
+ * (passage, questions, saved parse displays, answer-compare stats summary,
+ * AI verification list, bound topic labels + reason, 加入草稿卷) stays
+ * visible to both member and owner.
  */
 import {
   ArrowLeft,
@@ -280,7 +283,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                       <span>{topicLabel.label}</span>
                       {topicLabel.reason ? <small>{topicLabel.reason}</small> : null}
                     </div>
-                    {topicLabel.confidence !== undefined && topicLabel.confidence > 0 ? (
+                    {isOwnerView && topicLabel.confidence !== undefined && topicLabel.confidence > 0 ? (
                       <em>{Math.round(topicLabel.confidence * 100)}%</em>
                     ) : null}
                   </div>
@@ -428,7 +431,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 )
                 const hasSavedParse = Boolean(savedParseAt)
                 const hasSavedParseWithoutVerify = hasSavedParse && !verifyItem && verifyStatus !== 'loading'
-                const showCompareBox = Boolean(verifyItem) || verifyStatus === 'loading' || !hasSavedParse || hasSavedParseWithoutVerify
+                const showCompareBox = isOwnerView && (Boolean(verifyItem) || verifyStatus === 'loading' || !hasSavedParse || hasSavedParseWithoutVerify)
                 const compareStatus =
                   verifyItem?.verdict ||
                   (verifyStatus === 'loading'
