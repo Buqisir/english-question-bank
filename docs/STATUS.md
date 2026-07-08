@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-08（surface-question-policy + detail-slim 第二轮并行）
+Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree）
 
 ## 现在是什么
 
@@ -22,6 +22,30 @@ Last updated: 2026-07-08（surface-question-policy + detail-slim 第二轮并行
   推进到 `4ff8c3b`（与 main 同步，含 #263-268）。
 
 ## 主线焦点
+
+- 2026-07-08（UI 整改日，四刀+基建，性能/入口/精美化三刀并行 worktree）：
+  - **幽灵样例题组**（7e56e30）：硬编码 sample 不再混入正式列表，仅留
+    离线兜底；库内 48 个 0 题题组全为写作类（按设计），无脏数据。
+  - **list-groups-perf**（合并 1a8438f，CR APPROVE）：/api/question-groups
+    3.9s→55ms——print-ready 批量化（一条 IN SQL + 一次资产扫描），杀掉
+    N+1 与每请求 ~3GB 的 paper-asset 重复解析；parity 273/273 挂 CI
+    （verify-list-groups-perf）。剩余卡顿=owner 至香港节点线路波动，
+    代码无可治。
+  - **简介折叠**（2134e3e）：完形/语法填空解析面板篇章简介 details 化，
+    聚焦空后自动收起。
+  - **paper-row-browse-entry**（合并 a5e7d8a）：首页卷行「看整卷」入口，
+    href→paperId 解析收敛 concierge/paperSurfaceHref.ts。
+  - **cloze-panel-polish**（合并 53b77f0，CR APPROVE+should-fix 已修）：
+    pi-cloze/pi-gf 从零补全 CSS 对齐七选五 idiom；信息分层（证据+提示
+    折进「展开细节」）；证据类型中文 chip 映射（cloze 5/gf 12，owner
+    可复核文案）。解析内容层复读（同一考点三遍）属导题 prompt 层，
+    另立刀。
+  - 基建：`scripts/setup-worktree.sh` worktree 一键预热（入 AGENTS
+    并行段）。流程教训：DEV 自报 verify 绿需主代理复核证据；verify
+    命令禁 `| tail` 吞退出码。
+  - **生产部署待 owner 拍**（2026卷+刀⑤+刀A/B+本日四刀均未上生产）。
+
+## 上一轮
 
 - 2026-07-08：**双刀并行收官**（首次并行流水线试跑成功，worktree 隔离，
   各自 PA-lite/plan→Sonnet DEV→fresh Opus CR→浏览器 QA→独立 PR）：
