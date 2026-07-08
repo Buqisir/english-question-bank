@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "paper-figures-manifest-v1",
+  "paperId": "paper-2026-i",
+  "figures": [
+    {
+      "figureId": "fig-paper-2026-i-reading-a-table-1",
+      "groupId": "group-2026-i-reading-a",
+      "kind": "table",
+      "file": "reading-a-table-1.png",
+      "caption": "SoFi Stadium Upcoming Football Events schedule (Reading A, source paper.pdf p.4)",
+      "sourceDocument": "source/paper.pdf",
+      "sourcePage": 4,
+      "placeholderMarker": "[表: fig-paper-2026-i-reading-a-table-1]",
+      "note": "表格双存桥(标准 §8)：本文件是整表截图原料；对应的拍平文本已同时保留在 groups.json 的 group-2026-i-reading-a materialText 段落中（同一处占位标记之后），发布后两者一起搬进 paper-assets。"
+    }
+  ]
+}
