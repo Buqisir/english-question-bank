@@ -75,3 +75,22 @@
 2. **备份可恢复性未演练**：R2 有对象不等于能恢复。上线级别应做一次
    restore 演练（拉一份备份到临时库跑 `PRAGMA integrity_check` +
    起服务验证），再把这条勾掉。
+
+## 追记 2026-07-09：导出线运行时系统依赖（事故补档）
+
+owner 实测「导出 PDF」在生产 500（前端只显示"没成功，可以再试一次"，
+服务端日志无痕迹）。根因：DOCX/PDF 导出线依赖两个**系统级**外部命令，
+生产机从未安装过——这条路自 go-live 起就不通，E2E 冒烟走的是
+vivliostyle print-pdf 线所以未暴露。
+
+- `zip`（`server/exports/docxRenderer.mjs` 打包 .docx 用）→ `spawnSync zip ENOENT`
+- `soffice`（LibreOffice，DOCX→PDF 转换）→ `LibreOffice soffice not found`
+- 中文渲染还需 CJK 字体，否则导出成功但中文成方块
+
+已装（2026-07-09，apt）：`zip unzip libreoffice-writer fonts-noto-cjk`
+（--no-install-recommends）。QA 账号实测 `/api/exports/pdf` 200、
+61KB、%PDF-1.7、中文正常、单题组 ~2.2s（soffice 冷转换）。
+
+**重建服务器 checklist 必带**：`apt-get install -y --no-install-recommends
+zip unzip libreoffice-writer fonts-noto-cjk`。候选改进（挂账）：启动时
+预检 zip/soffice 并在 /api/health 暴露导出线就绪状态，避免静默断路。
