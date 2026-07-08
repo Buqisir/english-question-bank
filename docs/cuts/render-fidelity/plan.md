@@ -56,6 +56,11 @@
   +居中题号；语法填空 `NN._____` 同理（复用 `grammarFillBlank.ts` pattern，
   必要时把两个 pattern 一起上移到 `shared/papersurface/`）。
 - 补写作框：writing/continuation 题组输出边框答题框（标准 §8 尺寸 mm 值）。
+- **挖空 pattern 契约钉死（PA F2）**：server 侧用 `paperBlankPattern`
+  （`__NN__` / 双空格形态），**不是** I15 的 `grammarFillBlankPattern`
+  （后者匹配 `NN._____`，与库内真存储形态不符）。verify 必须行为级：
+  渲染真实 `paperAssetParagraphText(group)` payload 并清点 styled 挖空数，
+  禁止合成样例充数（I10 假绿教训）。
 - 验收：`verify-print-renderer` / `verify-print-pdf-export-flow` 绿 +
   真 PDF 字节级冒烟（走现有 export flow 脚本）；一张含完形+语法填空+写作的
   卷导出 PDF 人工/截图核对挖空与写作框。
@@ -70,10 +75,22 @@
     补页脚页码 part（现 `docxRenderer.mjs:563-566` TODO 处）。
   - 挖空样式：passage 行发出前做同源 pattern 替换 → 下划线 run + 题号；
     写作题组补边框答题框（单格表格实现即可）。
+  - **范围钉死（PA F3）**：文件里有两个 sectPr builder（≈L571 / L755），
+    边距/rFonts/页脚两处都要覆盖；「size 21」只扫学生卷面 body，教师
+    解析区（同义替换/选项分析 ≈L289-379）不属试卷面，不动。
+  - 挖空 verify 同 Chunk B 口径：真 payload 行为级清点。
 - 验收：`verify-h5g-docx-renderer` / `verify-exam-export` 绿；LibreOffice
   转 PDF 冒烟确认字体/字号/挖空/写作框（repo 已有 LO 转换链路）。
 
-### Chunk D：I10 句首挖空修复（独立）
+### Chunk D：I10 句首挖空修复（独立）——**PA F1：暂缓，待 owner 拍板**
+
+> PA 实证：真资产不复现。paper-2026-i（及全部 `papers/*/groups.json`）的
+> 语法填空挖空存的都是 `__NN__ (hint)` 双侧下划线形态，句首也能正常渲染；
+> 出 bug 的 2-空格 `  NN  ` 形态只在 I10 当年的合成 QA 数据里出现过
+> （cut-note 确认已回退）。且真正修复位点在共享的 `segmentPaperText.mjs`
+> （完形/七选五/阅读同用），风险面比 plan 原估大。
+> **主代理建议：本刀剔除 D**，watch-ledger 继续挂账，触发条件改为
+> 「真资产出现 2-空格句首挖空」。
 
 - Bug：`PaperSurface.tsx:63` pattern 要求数字两侧都有定界符；分句把句首
   挖空的前导双空格切给了上一句 → 语法填空句首挖空渲染成裸数字。
