@@ -69,6 +69,21 @@ grep `scripts/verify-*.mjs` 中上述所有旧字面量（`0.6)` 环、`#16a264`
 排除清单文件；TSX 一律不动；不加 token 定义（用现有）；不顺手做刀④⑤⑥
 范围（骨架、hover 按钮、口吻、死 CSS 清扫——遇到只记录）。
 
+## CR Follow-Up（2026-07-08，PM 处置 MF-1）
+
+- **MF-1（验证与记账缺陷）闭环**：主代理补跑 §5/验收4 的实证断言——
+  Playwright 遍历 home 与 my-space 全部可见文字节点，计算色为 #9a9a93 的
+  仅剩 home 的 `.concierge-intent-submit`（`:disabled` 态，WCAG 豁免），
+  my-space 零命中。**账目更正**：本刀真实的可见正文 AA 修复只有登录页
+  `.eyebrow` + `.login-footer-hint` 两处；审计点名的 home/my-space 两实例
+  经查分别为「本已合格（真实 reason 行早是 #6A6A64）」与「:disabled
+  豁免」——原始审计的 2.4:1/2.8:1 读数来自禁用态元素，探测器不识别豁免。
+  DEV 改的 `.concierge-reason-line` 系死 CSS 上的 no-op（无渲染影响），
+  该死规则连同 3 处自引用移交刀⑥死 CSS 清扫。
+- SW-1（group-card:hover 阴影属 plan 外收敛）：接受，交 PO 视觉 QA。
+- SW-2（ghost-button 家族无章程焦点环，靠原生 outline 兜底、无回归）：
+  归后续刀（并入刀⑤/⑥的按钮家族打磨时机）。
+
 ## 验收
 
 1. `npm run build --prefix app` 绿。
