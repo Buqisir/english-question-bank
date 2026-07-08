@@ -23,6 +23,18 @@ Last updated: 2026-07-07（process-slim）
 
 ## 主线焦点
 
+- 2026-07-08：**导题 agent 化前两刀收官**。刀①《新课标一卷标准》v1
+  （`docs/product/nck1-paper-standard.md`，owner 终审：结构/题号/
+  分值/答案红线/听力原料先存/图文条款+保真分级）。刀②
+  nck1-import-runbook（PR #277，medium）：`docs/import/agent-runbook.md`
+  工序书 + 首导 **paper-2026-i**（PDF 格式②首通，听力/figures 原料
+  齐，45 答案 DEV+CR 300DPI 双核），`verify-nck1-standard.mjs`
+  17 项 gate；validator 最小放宽（.pdf 源，PA-lite 经 CR 认可）；
+  酸测试两轮制（fresh Sonnet 盲跑，第 1 轮抓到 validator 契约空档）；
+  CR MF1 为误报（RM 一手证据裁决，CR 自行更正，记录在 cr.md）。
+  台账 `docs/import-ledger.md` 建立。**2026 卷仅在本地库，生产同步
+  待 owner 拍板**。后续刀：③听力入库（PA）④图表契约+提取
+  ⑤渲染保真（PA，PaperSurface 高危）；甲/乙/浙旧格式按需接入。
 - 2026-07-08：**黄金路径 E2E 收官**（PR #276，medium，Sonnet DEV +
   fresh Opus CR APPROVE，SF1 已收）：`scripts/smoke-golden-path.mjs`
   在 enforced 登录态下 owner/member 双视角各走一遍
