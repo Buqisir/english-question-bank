@@ -94,3 +94,27 @@ vivliostyle print-pdf 线所以未暴露。
 **重建服务器 checklist 必带**：`apt-get install -y --no-install-recommends
 zip unzip libreoffice-writer fonts-noto-cjk`。候选改进（挂账）：启动时
 预检 zip/soffice 并在 /api/health 暴露导出线就绪状态，避免静默断路。
+
+## 追记 2026-07-09（二）：精排 PDF 线（vivliostyle）的 Chromium 系统库
+
+owner 复报导出仍失败——上一条追记修的是 DOCX→LibreOffice 线（组卷篮
+「导出 PDF」），owner 点的是**草稿卷工作台「精排 PDF」**（vivliostyle→
+无头 Chromium），另一条线另一个断点：playwright 的 chromium-1194 二进制
+在 /home/eqb/.cache/ms-playwright，但 9 个系统共享库缺失，浏览器 exit 127。
+
+`ldd chrome | grep "not found"` 精确清单已装（apt，--no-install-recommends）：
+libxcomposite1 libxdamage1 libxfixes3 libasound2t64 libatk1.0-0t64
+libatk-bridge2.0-0t64 libatspi2.0-0t64 libgbm1 libpango-1.0-0
+
+QA 实测 owner 原路径（建草稿→加题→POST /api/draft-papers/:id/print-pdf）
+200、80KB %PDF、拉回目检版式正常。**流程教训：验修复必须走用户报障的
+原按钮路径——两条 PDF 线各有断点，修一条测一条会漏。**
+
+重建服务器 checklist（合并两条追记）：
+`apt-get install -y --no-install-recommends zip unzip libreoffice-writer
+fonts-noto-cjk libxcomposite1 libxdamage1 libxfixes3 libasound2t64
+libatk1.0-0t64 libatk-bridge2.0-0t64 libatspi2.0-0t64 libgbm1 libpango-1.0-0`
+
+挂账不变：health 暴露两条导出线的就绪状态（zip/soffice/chromium 预检）。
+新挂账：print-pdf 面的空题干渲染成「1. 56」裸题号行（屏幕面已治，打印
+面未同步，小刀）。
