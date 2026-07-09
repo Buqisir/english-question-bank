@@ -35,8 +35,12 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
   竞态抑制/窄屏空态文案）。老解析页 URL 直达保留，页内入口已全迁，
   退役与 reading-analysis 孤儿支同刀（挂账）。CR Should Watch 挂账：
   ① verify-c6a3 一条断言基线已 stale 且未注册 CI（tiny fix 另刀）；
-  ② 七选五深链只预选不展开手风琴（owner 定夺）；③ owner PO QA 建议
-  覆盖窄屏抽屉+触屏。flow-panel 三刀全收，owner 实测待过。
+  ~~② 七选五深链只预选不展开手风琴~~（owner QA 后拍板即修，追刀
+  00c6f13：选中七选五题自动展开该题衔接链，append-only 手动开合照旧，
+  页面外控 state 面板零触碰，Playwright 4/4+截图）；③ owner PO QA 建议
+  覆盖窄屏抽屉+触屏。**flow-panel 三刀全收，owner QA 过**。事实澄清：
+  卷面上七选五的空本不可点（无 stem/空为纯 span），七选五选题入口
+  =深链+面板内开合，深链修复即闭合全部缺口。
 - 2026-07-09：**双刀收官——flow-panel 刀 2 + home-editorial**（owner PO QA
   「过」，merge bb1ac30+e07f755，verify:all 71 绿，CI 待确认后此条销）：
   - **flow-panel 刀 2**：讲评栏=解析页五面板真身搬家+点题联动（点卷面
