@@ -1443,6 +1443,52 @@ assert(
   'selectLectureQuestion does not seed openSevenChoiceQuestionIds for sevenChoices groups',
 )
 
+// ─── paper-passage-letter: screen-face passage-letter derivation ───
+//
+// PaperSurfaceSection derives the A/B/C/D passage letter from its
+// `section` prop via /([A-D])$/ (app/src/shared-ui/papersurface/
+// PaperSurface.tsx). `section` is exactly what these real adapters put
+// on the surface model's textMap.paragraphs (PaperSurface's own
+// `sections` memo is `Array.from(new Set(paragraphs.map(p => p.section)))`).
+// This behaviorally exercises the SAME real adapters + real paper-2026-i
+// asset PaperBrowsePage feeds into PaperSurface, rather than re-deriving
+// the regex in the test.
+{
+  const readingAnalysis2026i = JSON.parse(
+    read('app/public/paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json'),
+  )
+  for (const [groupId, expectedLetter] of [
+    ['group-2026-i-reading-a', 'A'],
+    ['group-2026-i-reading-b', 'B'],
+    ['group-2026-i-reading-c', 'C'],
+    ['group-2026-i-reading-d', 'D'],
+  ]) {
+    const model = buildPaperAssetSurfaceModel({ asset, analysis: readingAnalysis2026i, groupId })
+    const sections = new Set(model.surfaceData.textMap.paragraphs.map((p) => p.section))
+    assert(
+      `paper-passage-letter: ${groupId}'s real surface-model section ("${[...sections].join(',')}") matches /([A-D])$/ as "${expectedLetter}" (screen-face passage-letter derivation input)`,
+      sections.size === 1 && /([A-D])$/.exec([...sections][0])?.[1] === expectedLetter,
+      `sections=${JSON.stringify([...sections])}`,
+    )
+  }
+
+  const clozeModel = buildClozePaperView({ asset, groupId: 'group-2026-i-cloze' })
+  const clozeSections = new Set(clozeModel.surfaceData.textMap.paragraphs.map((p) => p.section))
+  assert(
+    'paper-passage-letter: real 完形填空 (cloze) group section never matches /([A-D])$/ (non-reading groups render no passage letter)',
+    [...clozeSections].every((s) => !/([A-D])$/.test(s)),
+    `sections=${JSON.stringify([...clozeSections])}`,
+  )
+
+  const grammarFillModel = buildGrammarFillPaperView({ asset, groupId: 'group-2026-i-grammar-fill' })
+  const grammarFillSections = new Set(grammarFillModel.surfaceData.textMap.paragraphs.map((p) => p.section))
+  assert(
+    'paper-passage-letter: real 语法填空 (grammarFill) group section never matches /([A-D])$/ (non-reading groups render no passage letter)',
+    [...grammarFillSections].every((s) => !/([A-D])$/.test(s)),
+    `sections=${JSON.stringify([...grammarFillSections])}`,
+  )
+}
+
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)
   process.exit(1)
