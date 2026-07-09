@@ -74,13 +74,65 @@ Forbidden（碰到即违规）：`app/src/shared-ui/papersurface/**`、
   paper-2026-i 实卷走 hover 显形/rail 联动/触屏模拟（DevTools 触屏仿真
   或 Playwright `hasTouch`），截图留档在 DEV 报告里。
 
-## Chunk B — 尾部解析杆（预告，暂不施工）
+## Chunk B — 尾部解析杆（DEV 执行契约）
 
-每题组尾部一根默认收起的解析杆（复用
-`app/src/features/question-detail/AnalysisDisclosure.tsx` 的模式），
-展开显示详情页同款解析块；解析两语境：整卷/详情=决策场景默认收起，
-解析页=深读不动。数据源倾向复用 `questionGroupById`（详情页同源）。
-细节待 Chunk A 收口后由 PM 补章再派。
+> 前置：Chunk A 已合并（93bc7d4，CR APPROVE，main CI 绿）。
+
+### Scope
+
+允许修改的文件（白名单，出界即停）：
+
+- `app/src/features/paper-browse/PaperBrowsePage.tsx`
+- `app/src/features/paper-browse/paperBrowsePage.css`
+- `scripts/verify-paper-browse.mjs` —— 授权两件事：① 必要断言窄改；
+  ② **补轻量断言**覆盖本刀新行为（CR Should Watch 销账：解析杆存在且
+  默认收起、悬浮操作簇 CSS、rail aria-current——source-level 即可）。
+
+Forbidden 同 Chunk A（PaperSurface / adapter / server / domain /
+App.tsx / print/export / 其他页面）。允许 **import**
+`app/src/features/question-detail/AnalysisDisclosure.tsx`（只 import
+不修改；其样式在全局 `App.css` 已加载，浏览页皮肤差异用自己的
+className 叠加，不改 App.css）。
+
+### 交互规格
+
+每题组 section 尾部（卷面之后）挂一根解析杆，用 AnalysisDisclosure
+默认形态（「展开解析」/「收起」，默认收起，不持久化、不进 URL）。
+这是**决策语境速览**，不是深读——展开内容三件：
+
+1. **答案行**：数据取整卷页已加载的 `asset.answerKey.answers`（零新增
+   请求），过滤本组 `questionIds`、按 `questionNo` 排序，紧凑排版
+   （如 `21. B　22. A　…`）。`groupType === 'writing'` 不渲染答案行；
+   其他题型 answerKey 无命中时显示「答案未入库」。
+2. **每题一句聚焦**（仅限已有数据的题型，零新增请求）：reading 用已
+   加载 reading-choice-analysis 里每题的 `questionFocus`；sevenChoices
+   若已加载 analysis 有等价字段则同样一句，没有就整段省略。
+   cloze / grammarFill / writing 不做 digest、不新增 fetch。
+3. **「深读解析」链接**：与详情页同款守卫与形态——
+   `card.hasPaperSurfaceAnalysis && card.paperSurfaceHref` 时渲
+   `<a href={card.paperSurfaceHref}>`（card 来自 `questionGroupById`），
+   文案 `card.paperSurfaceLabel ?? '深读解析'`。无 card 或无解析时
+   整个链接不渲染。
+
+不变量：Chunk A 的悬浮显形 / scrollspy / 触屏兜底不回归；数据加载
+路径零新增请求；PaperSurface 挂载不动。
+
+### 验收标准
+
+- 默认收起：浏览态卷面尾部只有一根杆，无解析正文。
+- 展开：答案行与 `answer-key` 实卷比对一致；reading 每题一句聚焦；
+  writing 无答案行；深读链接落到解析页并锚定该题组。
+- 收起/展开可反复；触屏下可点；Tab 可达（AnalysisDisclosure 自带
+  button + aria-expanded）。
+- `node scripts/verify-paper-browse.mjs` 绿（含新补断言）；
+  `pnpm -C app run verify:all` 或 CI 绿。
+- 真点浏览器 QA 必做：paper-2026-i 实卷，覆盖上述各条 + Chunk A 交互
+  抽查（hover 显形、rail 联动），截图入 `docs/cuts/flow-hover/qa/`。
+
+### DEV 汇报要求
+
+同 Chunk A：改动文件、verify 摘要、浏览器 QA 状态+截图路径、
+Self-Review Blind Spots、越界/契约冲突声明。
 
 ## DEV 汇报要求
 
