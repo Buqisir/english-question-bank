@@ -210,7 +210,11 @@ assert('preview builds paginated long-scroll A4 pages', previewHtml.includes('pa
 assert('preview iframe does not add a second mat color', previewHtml.includes('html {\n    background: transparent') && previewHtml.includes('body {\n    background: transparent') && workbenchCss.includes('.draft-a4-sheet iframe {\n  background: transparent'))
 // teal-repaint C1/C7: mat 渐变从暖纸 #FAFAF7/#F4F2EC 改为中性 #F6F6F4/#EDEDEA
 // （owner 墨绿契约 — bg/surface-2 新值），断言同步。
-assert('preview outer desk keeps subtle paper mat', workbenchCss.includes('linear-gradient(180deg, #F6F6F4 0%, #EDEDEA 100%)'))
+// draft-workbench-visual-unify (D8): the gradient mat was replaced with a
+// flat surface-strong token per DESIGN.md's Flat-By-Default rule — the
+// desk keeps its nested-layer identity via a solid `var(--surface-strong)`
+// fill instead of a two-stop gradient.
+assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^}]*background:\s*var\(--surface-strong\)/.test(workbenchCss))
 assert('preview iframe is tall enough to show a full A4 page', workbenchCss.includes('height: 1188px'))
 assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
