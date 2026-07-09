@@ -47,8 +47,20 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
   - **流程事故落账**：七选五 DEV 在主树建分支污染主代理提交（已复位，
     文件零写入）；后续派工 prompt 已写死 worktree 纪律（pwd 确认+禁碰
     主树路径），AGENTS 待补硬条款。主代理同款教训：合并必须在主树执行。
-  - 队列next：草稿卷工作台+个人空间 UI 一致性（owner 报"很丑很割裂"，
-    先审计后派工）。
+  - **UI 一致性双刀收官+部署 455fc16**：impeccable 双路审计（26/40，
+    快照 .impeccable/critique/）→ owner 三板（个人空间=备课成果卡片架/
+    暖纸边界入 DESIGN.md/P0+P1 全做）→ 并行双刀均 CR APPROVE：
+    ① draft-workbench-visual-unify（A4 纸 Resting 阴影、保存主按钮
+    墨绿、hex 51→3、导出菜单浮层化）② my-space-shelf（网盘→卡片架、
+    文件夹降 filter chips、danger 语义+自定义 alertdialog、hex 归零；
+    弹窗键盘 should-fix 主代理收）。两刀各挂 palette-hex=0 CI 护栏。
+    prod 三重验证绿。挂账：paper-browse 壳层暖米收编、smoke-c8-my-space
+    孤儿脚本、faint-ink token 缺位、rename/deleteMySpaceFolder 孤儿
+    export。纪律：my-space DEV 违规自 push+开 PR（#284，代码无碍已
+    合并收编）——派工 prompt 约束再加固。
+  - **1.0 盘点+方向讨论**（owner 发起）：主线四步（找题→看题→组卷→
+    导出）全部闭环。小川建议 M2（邀同事）提前于配相似，owner 未拍板，
+    待 High 档深聊。
 
 - 2026-07-08（UI 整改日，四刀+基建，性能/入口/精美化三刀并行 worktree）：
   - **幽灵样例题组**（7e56e30）：硬编码 sample 不再混入正式列表，仅留
