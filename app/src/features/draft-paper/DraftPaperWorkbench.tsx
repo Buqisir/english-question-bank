@@ -98,10 +98,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [versionType, setVersionType] = useState<DraftVersionType>('student')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
+  const [exportMenuOpen, setExportMenuOpen] = useState(false)
   const titleSaveTimerRef = useRef<number | null>(null)
   const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
+  const exportMenuRef = useRef<HTMLDivElement | null>(null)
   const [previewScale, setPreviewScale] = useState(1)
 
   const loadRecentDrafts = useCallback(() => {
@@ -170,6 +172,26 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   useEffect(() => {
     focusedOnceRef.current = false
   }, [draftPaperId, focusGroupId])
+
+  // D5: close the export menu on outside click or Escape, mirroring the
+  // dismiss behavior native disclosure widgets give you for free.
+  useEffect(() => {
+    if (!exportMenuOpen) return
+    function handlePointerDown(event: MouseEvent) {
+      if (exportMenuRef.current && !exportMenuRef.current.contains(event.target as Node)) {
+        setExportMenuOpen(false)
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setExportMenuOpen(false)
+    }
+    document.addEventListener('mousedown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [exportMenuOpen])
 
   useEffect(() => {
     if (!draftPaper || !focusGroupId || focusedOnceRef.current) return
@@ -468,18 +490,54 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               教师版
             </button>
           </div>
-          <details className="draft-export-menu">
-            <summary>导出</summary>
-            <button type="button" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={exportPdf}>
-              <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+          <div className="draft-export-menu" ref={exportMenuRef}>
+            <button
+              type="button"
+              className="draft-export-menu-trigger"
+              aria-haspopup="true"
+              aria-expanded={exportMenuOpen}
+              onClick={() => setExportMenuOpen((open) => !open)}
+            >
+              导出
             </button>
-            <button type="button" disabled={draftPaper.items.length === 0} onClick={browserPrint}>
-              <Printer size={15} /> 浏览器打印
-            </button>
-            <button type="button" disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'} onClick={openSpaceDialog}>
-              <Archive size={15} /> 保存到个人空间
-            </button>
-          </details>
+            {exportMenuOpen && (
+              <div className="draft-export-menu-panel" role="menu">
+                <button
+                  type="button"
+                  role="menuitem"
+                  disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+                  onClick={() => {
+                    setExportMenuOpen(false)
+                    void exportPdf()
+                  }}
+                >
+                  <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  disabled={draftPaper.items.length === 0}
+                  onClick={() => {
+                    setExportMenuOpen(false)
+                    browserPrint()
+                  }}
+                >
+                  <Printer size={15} /> 浏览器打印
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'}
+                  onClick={() => {
+                    setExportMenuOpen(false)
+                    void openSpaceDialog()
+                  }}
+                >
+                  <Archive size={15} /> 保存到个人空间
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -582,7 +640,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             )}
             <div className="draft-dialog-actions">
               <button type="button" onClick={() => setSpaceDialogOpen(false)}>取消</button>
-              <button type="submit" disabled={spaceStatus === 'saving' || draftPaper.items.length === 0}>
+              <button
+                type="submit"
+                className="primary-button"
+                disabled={spaceStatus === 'saving' || draftPaper.items.length === 0}
+              >
                 {spaceStatus === 'saving' ? '保存中...' : '保存'}
               </button>
             </div>

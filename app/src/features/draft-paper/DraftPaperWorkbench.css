@@ -1,14 +1,14 @@
 .draft-workbench-shell {
   min-height: 100vh;
-  background: #EDEDEA;
-  color: #1E1E1C;
+  background: var(--surface);
+  color: var(--ink);
   padding: 18px 22px 28px;
 }
 
 .draft-toolbar {
   align-items: center;
-  background: #F6F6F4;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 8px;
   display: flex;
   flex-wrap: wrap;
@@ -32,26 +32,26 @@
   flex: 1 1 auto;
   min-width: 260px;
   padding-left: 20px;
-  border-left: 1px solid #D8D8D2;
+  border-left: 1px solid var(--line);
 }
 
 .draft-toolbar-group-output {
   padding-left: 20px;
-  border-left: 1px solid #D8D8D2;
+  border-left: 1px solid var(--line);
 }
 
-.draft-export-menu button,
+.draft-export-menu-panel button,
 .draft-outline-actions button,
 .draft-suggestions button,
 .draft-undo-toast button,
-.draft-dialog-actions button,
+.draft-dialog-actions button:not(.primary-button),
 .draft-new-folder-row button,
 .draft-dialog-head button {
   align-items: center;
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 6px;
-  color: #1E1E1C;
+  color: var(--ink);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
@@ -60,8 +60,8 @@
   padding: 7px 10px;
 }
 
-.draft-export-menu button:disabled {
-  color: #9A9A93;
+.draft-export-menu-panel button:disabled {
+  color: var(--muted);
   cursor: not-allowed;
 }
 
@@ -71,16 +71,16 @@
 }
 
 .draft-title-field span {
-  color: #6A6A64;
+  color: var(--muted);
   font-size: 12px;
 }
 
 .draft-title-field input,
 .draft-recent-select {
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 6px;
-  color: #1E1E1C;
+  color: var(--ink);
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;
@@ -92,32 +92,32 @@
 }
 
 .draft-recent-select-field > span {
-  color: #6A6A64;
+  color: var(--muted);
   font-size: 12px;
 }
 
 .draft-save-status {
-  color: #6A6A64;
+  color: var(--muted);
   font-size: 13px;
   white-space: nowrap;
 }
 
 .draft-save-status.saving {
-  color: #d97706;
+  color: var(--eqb-color-warning);
 }
 
 .draft-save-status.saved {
-  color: #059669;
+  color: var(--eqb-color-success);
 }
 
 .draft-save-status.error,
 .draft-error {
-  color: #dc2626;
+  color: var(--eqb-color-danger);
 }
 
 .draft-version-toggle {
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 6px;
   display: inline-flex;
   overflow: hidden;
@@ -126,7 +126,7 @@
 .draft-version-toggle button {
   background: transparent;
   border: none;
-  color: #6A6A64;
+  color: var(--muted);
   cursor: pointer;
   font: inherit;
   min-height: 34px;
@@ -134,44 +134,60 @@
 }
 
 .draft-version-toggle button.active {
-  background: #2C6E56;
-  color: #FFFFFF;
+  background: var(--accent);
+  color: #ffffff;
 }
 
+/* D5: custom floating export menu replacing native <details>/<summary> —
+   anchored to the trigger's right edge so the panel never grows past the
+   viewport's right side, with a Floating-tier shadow per DESIGN.md. */
 .draft-export-menu {
   position: relative;
 }
 
-.draft-export-menu summary {
-  background: #2C6E56;
+.draft-export-menu-trigger {
+  align-items: center;
+  background: var(--accent);
   border-radius: 6px;
-  color: #FFFFFF;
-  cursor: pointer;
-  list-style: none;
+  color: #ffffff;
+  display: inline-flex;
+  gap: 6px;
   min-height: 36px;
   padding: 8px 14px;
 }
 
-.draft-export-menu[open] {
+.draft-export-menu-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+  max-width: calc(100vw - 32px);
+  min-width: 200px;
+  padding: 6px;
+  position: absolute;
+  right: 0;
+  top: 100%;
   z-index: 20;
 }
 
-.draft-export-menu[open] > button {
-  display: flex;
-  margin-top: 6px;
+.draft-export-menu-panel button {
   min-width: 132px;
+  width: 100%;
 }
 
 .draft-loading,
 .draft-empty-export,
 .draft-success,
 .draft-warning {
-  color: #6A6A64;
+  color: var(--muted);
   margin: 14px 0 0;
 }
 
 .draft-warning {
-  color: #d97706;
+  color: var(--eqb-color-warning);
 }
 
 .draft-workbench-layout {
@@ -182,9 +198,8 @@
 }
 
 .draft-preview-desk {
-  background:
-    linear-gradient(180deg, #F6F6F4 0%, #EDEDEA 100%);
-  border: 1px solid #D8D8D2;
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
   border-radius: 8px;
   min-width: 0;
   overflow: auto;
@@ -192,7 +207,7 @@
 }
 
 .draft-preview-meta {
-  color: #6A6A64;
+  color: var(--muted);
   display: flex;
   gap: 14px;
   margin: 0 auto 12px;
@@ -202,7 +217,9 @@
 .draft-a4-sheet {
   background: transparent;
   border: 0;
-  box-shadow: none;
+  /* D1: Resting-tier shadow (DESIGN.md §4 Elevation) so the A4 sheet reads
+     as paper resting on the desk instead of blending into the background. */
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   margin: 0 auto;
   max-width: min(100%, 820px);
   overflow: hidden;
@@ -219,7 +236,7 @@
 
 .draft-a4-empty {
   align-items: center;
-  color: #6A6A64;
+  color: var(--muted);
   display: flex;
   min-height: 420px;
   justify-content: center;
@@ -227,8 +244,8 @@
 
 .draft-outline-panel {
   align-self: start;
-  background: #F6F6F4;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 12px;
   position: sticky;
@@ -245,7 +262,7 @@
 .draft-outline-item span,
 .draft-outline-item em,
 .draft-outline-item small {
-  color: #6A6A64;
+  color: var(--muted);
   display: block;
   font-style: normal;
   font-size: 12px;
@@ -253,7 +270,7 @@
 }
 
 .draft-suggestions {
-  background: #EDEDEA;
+  background: var(--surface-strong);
   border-radius: 6px;
   display: grid;
   gap: 6px;
@@ -268,25 +285,27 @@
 }
 
 .draft-outline-item {
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 10px;
 }
 
 .draft-outline-item.has-break {
-  border-color: #d97706;
+  border-color: var(--eqb-color-warning);
 }
 
 .draft-outline-item.is-group-missing {
-  background: rgba(217, 119, 6, 0.08);
-  border-color: #d97706;
+  background: color-mix(in srgb, var(--eqb-color-warning) 8%, transparent);
+  border-color: var(--eqb-color-warning);
 }
 
 .draft-break-marker {
-  background: rgba(217, 119, 6, 0.16);
+  background: color-mix(in srgb, var(--eqb-color-warning) 16%, transparent);
   border-radius: 999px;
-  color: #92400e;
+  /* No deep-amber token exists in tokens.css for the #92400e original —
+     residual: falls back to the standard warning tone (see plan.md). */
+  color: var(--eqb-color-warning);
   display: inline-flex;
   font-size: 12px;
   margin-bottom: 8px;
@@ -308,15 +327,15 @@
 }
 
 .draft-outline-empty {
-  color: #6A6A64;
+  color: var(--muted);
 }
 
 .draft-undo-toast {
   align-items: center;
-  background: #1E1E1C;
+  background: var(--ink);
   border-radius: 8px;
   bottom: 22px;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   gap: 12px;
   left: 50%;
@@ -338,10 +357,12 @@
 }
 
 .draft-save-space-dialog {
-  background: #F6F6F4;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* Floating-tier shadow (DESIGN.md §4), ink-tinted per plan special case
+     rather than the literal rgba(0,0,0,0.12) in the shadow vocabulary. */
+  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
   display: grid;
   gap: 12px;
   max-width: 440px;
@@ -363,16 +384,16 @@
 
 .draft-save-space-dialog label span,
 .draft-dialog-note {
-  color: #6A6A64;
+  color: var(--muted);
   font-size: 12px;
 }
 
 .draft-save-space-dialog input,
 .draft-save-space-dialog select {
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 6px;
-  color: #1E1E1C;
+  color: var(--ink);
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;
