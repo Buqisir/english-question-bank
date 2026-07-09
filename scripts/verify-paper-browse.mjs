@@ -183,11 +183,46 @@
  *         one chain with non-empty `leftHighlights` — proves the
  *         highlight hook has real geometry data to render against, not
  *         just an always-empty no-op.
+ * 39-43. flow-panel 刀 2 修复轮 ③ (阅读跨栏证据动线 — the third dao2-fix
+ *        layer, owner 2026-07-09 实测拍板):
+ *     39. PaperBrowsePage imports `PaperIntelligenceEvidenceLine` from
+ *         `paper-intelligence/preview/paperIntelligenceEvidenceLine`
+ *         (import-only contract — the component + its geometry helper
+ *         module are never edited by this cut).
+ *     40. The component mounts only when 讲评开 AND the current讲评栏
+ *         target题组 is a reading group (`lectureOpen && panelGroupModel
+ *         ?.kind === 'reading'`) — 卷面显影原则: 完形/语法填空(原位型)只给
+ *         证据高亮, 七选五(混血)只给衔接句高亮 (item 34), 写作无证据概念;
+ *         none of them mount the cross-column line.
+ *     41. Wiring: `containerRef={shellRef}` / `leftScrollerRef={scrollerRef}`
+ *         / `rightPanelRef={rightPanelRef}` / `leftSelectorPreset="paper-
+ *         surface"` — the shellRef is attached to `.paper-browse-shell`
+ *         (already `position: relative`) and rightPanelRef to the 讲评栏
+ *         `<aside>`, mirroring the harness's shellRef/leftScrollerRef/
+ *         rightPanelRef triple exactly.
+ *     42. paperBrowsePage.css hand-copies ONLY the support/trap stroke
+ *         palette (grep-confirmed to exist solely in the Forbidden
+ *         `paperIntelligencePaperSurfaceHarness.css:684-691`, renamed from
+ *         `.pi-ps-harness-shell` to `.paper-browse-shell`) — the base
+ *         `.pi-line-overlay`/`.pi-line-path` rules are NOT duplicated
+ *         because they already exist unscoped in the already-imported
+ *         `paperIntelligence.css`. Neither `PaperBrowsePage.tsx` nor
+ *         `paperBrowsePage.css` references the Forbidden harness
+ *         stylesheet. A `max-width: 1199.98px` rule hides the line
+ *         (owner-authorized narrowing: the 讲评栏 drawer at that breakpoint
+ *         detaches from the grid and floats over the卷面, so cross-column
+ *         geometry stops making visual sense).
+ *     43. Real paper-2026-i fixture: the reading group's
+ *         `evidenceKindById` has both 'support' and 'trap' entries —
+ *         proves the activeEvidenceKind derivation (which drives the
+ *         palette split in item 42) has real data on both branches to
+ *         exercise, not just an always-'support' no-op.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findWritingBlockRange } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
+import { buildPaperAssetSurfaceModel } from '../app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -1117,6 +1152,79 @@ assert(
     pageCssSrc,
   ) && pageCssSrc.includes('.paper-browse-lecture-backdrop'),
   'missing the narrow-viewport fixed-drawer + backdrop rule',
+)
+
+// ─── 39-43. flow-panel 刀 2 修复轮 ③: 阅读跨栏证据动线 ───
+
+assert(
+  'PaperBrowsePage imports PaperIntelligenceEvidenceLine (only-import contract — component + geometry untouched)',
+  /import\s*\{\s*PaperIntelligenceEvidenceLine\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/preview\/paperIntelligenceEvidenceLine['"]/.test(
+    pageSrc,
+  ),
+  'missing the PaperIntelligenceEvidenceLine import',
+)
+assert(
+  'PaperIntelligenceEvidenceLine mounts only when 讲评开 AND the panel目标题组是阅读题组 (卷面显影原则: 完形/语法填空/七选五/写作 do not get the motion line)',
+  /\{lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]reading['"]\s*&&\s*\(\s*\n\s*<PaperIntelligenceEvidenceLine/.test(
+    pageSrc,
+  ),
+  'evidence line render condition is missing or not gated to lectureOpen+reading',
+)
+assert(
+  'PaperIntelligenceEvidenceLine wired with shellRef/scrollerRef/rightPanelRef + leftSelectorPreset="paper-surface"',
+  /containerRef=\{shellRef\}/.test(pageSrc) &&
+    /leftScrollerRef=\{scrollerRef\}/.test(pageSrc) &&
+    /rightPanelRef=\{rightPanelRef\}/.test(pageSrc) &&
+    /leftSelectorPreset="paper-surface"/.test(pageSrc),
+  'missing one or more of the containerRef/leftScrollerRef/rightPanelRef/leftSelectorPreset props',
+)
+assert(
+  '.paper-browse-shell carries ref={shellRef} and the 讲评栏 <aside> carries ref={rightPanelRef}',
+  /className=\{`paper-browse-shell[\s\S]{0,120}`\}\s*\n\s*ref=\{shellRef\}/.test(pageSrc) &&
+    /<aside className="paper-browse-lecture-panel" aria-label="讲评" ref=\{rightPanelRef\}>/.test(pageSrc),
+  'shellRef or rightPanelRef is not attached to the expected DOM node',
+)
+assert(
+  'PaperBrowsePage.tsx does not import the Forbidden paperIntelligencePaperSurfaceHarness.css (no such import statement)',
+  !/import\s*['"][^'"]*paperIntelligencePaperSurfaceHarness\.css['"]/.test(pageSrc),
+  'a Forbidden stylesheet import leaked into PaperBrowsePage.tsx',
+)
+assert(
+  'paperBrowsePage.css does not @import the Forbidden paperIntelligencePaperSurfaceHarness.css (a plain source-comment citation of the file as a hand-copy origin is fine)',
+  !/@import[^;]*paperIntelligencePaperSurfaceHarness\.css/.test(pageCssSrc),
+  'a Forbidden stylesheet @import leaked into paperBrowsePage.css',
+)
+assert(
+  'paperBrowsePage.css hand-copies the support/trap stroke palette scoped to .paper-browse-shell (not .pi-ps-harness-shell)',
+  /\.paper-browse-shell \.pi-line-path--support[\s\S]{0,120}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
+    pageCssSrc,
+  ) &&
+    /\.paper-browse-shell \.pi-line-path--trap[\s\S]{0,120}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
+      pageCssSrc,
+    ),
+  'missing the hand-copied support/trap palette rules',
+)
+assert(
+  'paperBrowsePage.css hides the evidence line below the 1200px docked-三栏 breakpoint (drawer geometry is not meaningful)',
+  /@media \(max-width: 1199\.98px\)\s*\{\s*\.paper-browse-shell \.pi-line-overlay\s*\{\s*display:\s*none/.test(
+    pageCssSrc,
+  ),
+  'missing the narrow-viewport display:none rule for .paper-browse-shell .pi-line-overlay',
+)
+assert(
+  'paper-2026-i reading group evidenceKindById has both support and trap entries (real data for the activeEvidenceKind palette split)',
+  (() => {
+    const readingModel2026i = buildPaperAssetSurfaceModel({
+      asset,
+      analysis: JSON.parse(
+        read('app/public/paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json'),
+      ),
+      groupId: 'group-2026-i-reading-a',
+    })
+    const kinds = new Set(Object.values(readingModel2026i.evidenceKindById))
+    return kinds.has('support') && kinds.has('trap')
+  })(),
+  'reading group evidenceKindById does not exercise both support and trap kinds',
 )
 
 if (failed > 0) {

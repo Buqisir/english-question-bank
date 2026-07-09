@@ -426,3 +426,42 @@
     max-height: none;
   }
 }
+
+/* ─── 刀 2 修复轮 ③: 阅读跨栏证据动线 ───
+ *
+ * `PaperIntelligenceEvidenceLine`（import-only, geometry+组件零修改）emits
+ * unnamespaced `.pi-line-overlay` / `.pi-line-path` classes. The BASE
+ * overlay/path/animation rules already come for free — `paperIntelligence.css`
+ * (already imported above for the five解析面板) declares them unscoped
+ * (paperIntelligence.css:623-712), so this page inherits the green dashed
+ * line + draw-in animation without any duplication here.
+ *
+ * What's missing: the support/trap stroke-color palette
+ * (Issue #21-C3.6). That override ONLY exists scoped to
+ * `.pi-ps-harness-shell` inside the Forbidden
+ * `paperIntelligencePaperSurfaceHarness.css` (grep-confirmed — not present
+ * in paperIntelligence.css). Hand-copied here, renamed to scope under
+ * `.paper-browse-shell` instead of `.pi-ps-harness-shell`, source:
+ * paperIntelligencePaperSurfaceHarness.css:684-691 (read-only reference,
+ * not imported, not modified).
+ */
+.paper-browse-shell .pi-line-path--support,
+.paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'] {
+  stroke: rgba(16, 185, 129, 0.65);
+}
+
+.paper-browse-shell .pi-line-path--trap,
+.paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'] {
+  stroke: rgba(245, 158, 11, 0.85);
+}
+
+/* <1200px: 讲评栏离开文档流变成 `position:fixed` 抽屉，叠在卷面上而不是
+ * 与之并排（见上方讲评栏抽屉断点）——跨栏几何在这个断点下失去意义（source
+ * 锚点漂在 fixed 抽屉里，target 锚点可能滚出视口之外）。owner 授权的取舍：
+ * 收紧到 ≥1200px 常驻三栏态才画线，同断点也与讲评栏本身从"并排列"变成
+ * "浮层"的断点一致。 */
+@media (max-width: 1199.98px) {
+  .paper-browse-shell .pi-line-overlay {
+    display: none;
+  }
+}

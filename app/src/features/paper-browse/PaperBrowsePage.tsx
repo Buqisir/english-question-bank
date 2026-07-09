@@ -98,6 +98,11 @@ import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysi
 import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
 import { GrammarFillAnalysisPanel } from '../paper-intelligence/GrammarFillAnalysisPanel'
 import { WritingAnalysisPanel } from '../paper-intelligence/WritingAnalysisPanel'
+// 刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness 同款
+// 组件（见 PaperIntelligencePaperSurfaceHarness.tsx ~1567 行的接线），零
+// 修改。只对阅读题组接入（卷面显影原则：完形/语法填空原位型只给证据高亮，
+// 七选五混血用衔接句高亮，均不做动线——见 plan.md「卷面显影原则」）。
+import { PaperIntelligenceEvidenceLine } from '../paper-intelligence/preview/paperIntelligenceEvidenceLine'
 import '../paper-intelligence/paperIntelligence.css'
 import type {
   AnswerKeyEntry,
@@ -220,6 +225,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
   const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
+  // 刀 2 修复轮 ③: 阅读跨栏证据动线的容器/左栏/右栏 refs —— shellRef 是
+  // `.paper-browse-shell`（已是 position:relative，卷面+讲评栏共同的祖先，
+  // 镜像 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套）。
+  // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
+  const shellRef = useRef<HTMLDivElement | null>(null)
+  const rightPanelRef = useRef<HTMLElement | null>(null)
 
   // CR should-fix（同 my-space 先例）：讲评栏开着时文档级 Esc 关闭并还焦
   // 到把手，补齐窄屏抽屉的模态语义。
@@ -638,6 +649,27 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     chains: panelGroupModel?.kind === 'sevenChoices' ? panelGroupModel.model.chains : [],
   })
 
+  // 刀 2 修复轮 ③: 阅读跨栏证据动线的选中态 —— 只在讲评开+当前讲评栏目标
+  // 题组是阅读题组时给非空值；activeEvidenceKind 镜像 harness「Derive
+  // activeEvidenceKind」的 paper-asset 分支（evidenceKindById 查表），支撑
+  // /干扰两色分档在浏览器侧与解析页一致。其余题型（完形/语法填空/七选五/
+  // 写作）永远拿 questionId=null，PaperIntelligenceEvidenceLine 内部的硬门
+  // 控（activeQuestionId && activeEvidenceId 双非空）自然不画线——不需要额外
+  // 判断 groupType 来阻止它们，双重保险。
+  const readingEvidenceLineContext = useMemo((): {
+    questionId: string | null
+    evidenceId: string | null
+    kind: 'support' | 'trap' | null
+  } => {
+    if (!lectureOpen) return { questionId: null, evidenceId: null, kind: null }
+    if (!lectureSelection) return { questionId: null, evidenceId: null, kind: null }
+    if (panelGroupId !== lectureSelection.groupId) return { questionId: null, evidenceId: null, kind: null }
+    if (panelGroupModel?.kind !== 'reading') return { questionId: null, evidenceId: null, kind: null }
+    const evidenceId = lectureSelection.evidenceId
+    const kind = evidenceId ? panelGroupModel.model.evidenceKindById[evidenceId] ?? null : null
+    return { questionId: lectureSelection.questionId, evidenceId, kind }
+  }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
+
   function scrollToAnchor(anchor: string): void {
     const scroller = scrollerRef.current
     if (!scroller) return
@@ -1010,6 +1042,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
         }`}
+        ref={shellRef}
       >
         <nav
           className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
@@ -1065,9 +1098,32 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           )}
         </div>
         {lectureOpen && (
-          <aside className="paper-browse-lecture-panel" aria-label="讲评">
+          <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>
             {renderLecturePanel()}
           </aside>
+        )}
+        {/*
+          刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness
+          同款 `PaperIntelligenceEvidenceLine`（geometry 只 import 不改）。
+          只在讲评开+当前讲评栏目标题组是阅读题组时挂载（卷面显影原则：
+          完形/语法填空原位型只给证据高亮不做动线，七选五混血用衔接句高亮，
+          写作无证据概念——均不接线）。containerRef 用 `.paper-browse-shell`
+          （本就是 position:relative，卷面+讲评栏共同祖先），
+          leftScrollerRef 复用卷面容器 scrollerRef，rightPanelRef 指向讲评栏
+          aside，与 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套
+          一一对应。抽屉态（<1200px）几何意义不大——讲评栏离开文档流叠在
+          卷面上，见 paperBrowsePage.css 里同断点的 display:none 收紧。
+        */}
+        {lectureOpen && panelGroupModel?.kind === 'reading' && (
+          <PaperIntelligenceEvidenceLine
+            containerRef={shellRef}
+            leftScrollerRef={scrollerRef}
+            rightPanelRef={rightPanelRef}
+            activeQuestionId={readingEvidenceLineContext.questionId}
+            activeEvidenceId={readingEvidenceLineContext.evidenceId}
+            activeEvidenceKind={readingEvidenceLineContext.kind}
+            leftSelectorPreset="paper-surface"
+          />
         )}
       </div>
       {/*
