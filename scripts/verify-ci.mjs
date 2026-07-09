@@ -81,6 +81,7 @@ const registry = {
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-section-chrome-on-solo-surface.mjs',
+  'scripts/verify-my-space-shelf.mjs',
   ],
 }
 

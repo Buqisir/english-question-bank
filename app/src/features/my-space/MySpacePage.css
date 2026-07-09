@@ -1,220 +1,307 @@
+/* my-space-shelf: "已组卷子成果" card shelf. Every color is a var(--eqb-*)
+   token (tokens.css) or a color-mix() wash built from one, matching the
+   token-only precedent in shared-ui/papersurface/PaperSurface.css — no
+   hardcoded palette hex in this file (allowlist is empty; see
+   scripts/verify-my-space-shelf.mjs). */
+
 .my-space-shell {
-  background: #EDEDEA;
-  color: #1E1E1C;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
   min-height: 100vh;
-  padding: 18px 22px 32px;
+  padding: 18px 22px 40px;
 }
 
 .my-space-heading {
-  margin: 0 0 14px;
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  margin: 0;
 }
 
 .my-space-heading h1 {
-  font-size: 20px;
+  font-size: var(--eqb-font-size-lg);
   margin: 0;
 }
 
-.my-space-section-head p {
-  color: #6A6A64;
-  font-size: 12px;
-  margin: 0 0 3px;
-}
-
-.my-space-section-head h2 {
-  font-size: 20px;
+.my-space-count {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
   margin: 0;
 }
 
-.my-space-folders button,
-.my-space-new-folder button,
-.my-space-folder-row button,
-.my-space-artifact-actions button {
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
-  border-radius: 6px;
-  color: #1E1E1C;
-  cursor: pointer;
-  display: inline-flex;
-  font: inherit;
-  gap: 6px;
-  min-height: 34px;
-  padding: 7px 10px;
-}
-
-.my-space-folders button:disabled,
-.my-space-new-folder button:disabled,
-.my-space-folder-row button:disabled,
-.my-space-artifact-actions button:disabled {
-  color: #9A9A93;
-  cursor: not-allowed;
-}
-
-.my-space-message,
-.my-space-empty {
-  color: #6A6A64;
+.my-space-message {
+  color: var(--eqb-color-text-muted);
   margin: 14px 0 0;
 }
 
-.my-space-empty-state {
+.my-space-main {
   display: grid;
-  gap: 10px;
-  justify-items: start;
+  gap: var(--eqb-space-4);
+  margin-top: var(--eqb-space-5);
+}
+
+/* Filter chips — same pill language as the home page's Concierge chips
+   (App.css .concierge-starter-chip): pill radius, muted at rest, teal wash
+   when selected (Green-Pen Rule: green marks selection only). */
+.my-space-folders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.my-space-chip {
+  background: transparent;
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 999px;
+  color: var(--eqb-color-text-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12.5px;
+  padding: 5px 12px;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.my-space-chip:hover {
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-border-strong);
+  color: var(--eqb-color-text);
+}
+
+.my-space-chip.is-selected {
+  background: color-mix(in srgb, var(--eqb-color-primary) 10%, transparent);
+  border-color: var(--eqb-color-primary);
+  color: var(--eqb-color-primary-text);
+  font-weight: 500;
+}
+
+.my-space-empty {
+  color: var(--eqb-color-text-muted);
+  margin: 0;
+}
+
+.my-space-error {
+  color: var(--eqb-color-danger);
+  margin: 0;
+}
+
+.my-space-empty-state {
+  align-items: center;
+  color: var(--eqb-color-text-muted);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  padding: 56px 20px;
+  text-align: center;
 }
 
 .my-space-empty-cta {
   align-items: center;
-  background: #2C6E56;
-  border: 1px solid #2C6E56;
+  background: var(--eqb-color-primary);
+  border: 1px solid var(--eqb-color-primary);
   border-radius: 6px;
-  color: #FFFFFF;
+  color: var(--eqb-color-paper);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
   font-weight: 600;
   min-height: 36px;
-  padding: 7px 14px;
-  transition: background 0.15s ease;
+  padding: 7px 16px;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .my-space-empty-cta:hover {
-  background: #1E4A3A;
+  background: var(--eqb-color-primary-text);
+  border-color: var(--eqb-color-primary-text);
 }
 
-.my-space-error {
-  color: #dc2626;
-}
-
-.my-space-layout {
+/* Card shelf — visually matches App.css's .concierge-group-card family
+   (same radius/padding/gap rhythm), rebuilt here with tokens only. */
+.my-space-grid {
   display: grid;
-  gap: 18px;
-  grid-template-columns: 280px minmax(0, 1fr);
-  margin-top: 18px;
+  gap: var(--eqb-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-.my-space-folders,
-.my-space-artifacts {
-  background: #F6F6F4;
-  border: 1px solid #D8D8D2;
+.my-space-card {
+  background: var(--eqb-color-paper);
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  padding: 12px;
-}
-
-.my-space-folders {
-  align-self: start;
-  display: grid;
-  gap: 8px;
-  position: sticky;
-  top: 18px;
-}
-
-.my-space-folders > button,
-.my-space-folder-row > button:first-child {
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.my-space-folders > button.active,
-.my-space-folder-row.active > button:first-child {
-  background: #EAF1ED;
-  border-color: #2C6E56;
-}
-
-.my-space-folder-row {
-  display: grid;
-  gap: 6px;
-  grid-template-columns: 1fr auto auto;
-}
-
-.my-space-folder-row input,
-.my-space-new-folder input {
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
-  border-radius: 6px;
-  color: #1E1E1C;
-  font: inherit;
-  min-height: 34px;
-  min-width: 0;
-  padding: 6px 9px;
-}
-
-.my-space-new-folder {
-  border-top: 1px solid #D8D8D2;
-  display: grid;
-  gap: 8px;
-  margin-top: 8px;
-  padding-top: 12px;
-}
-
-.my-space-section-head {
-  align-items: center;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.my-space-artifact-list {
-  display: grid;
-  gap: 10px;
-}
-
-.my-space-artifact-row {
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: minmax(0, 1fr) auto;
-  padding: 12px;
-}
-
-.my-space-artifact-main {
-  align-items: start;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: auto 1fr;
+  flex-direction: column;
+  gap: 8px;
   min-width: 0;
+  padding: 14px;
 }
 
-.my-space-artifact-main strong,
-.my-space-artifact-main span {
-  display: block;
-}
-
-.my-space-artifact-main strong {
+.my-space-card-title {
+  color: var(--eqb-color-text-strong);
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.my-space-artifact-main span {
-  color: #6A6A64;
-  font-size: 12px;
-  margin-top: 4px;
+.my-space-card-meta {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  margin: 0;
 }
 
-.my-space-artifact-actions {
+.my-space-card-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.my-space-card-actions button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 6px;
+  color: var(--eqb-color-text);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 12.5px;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 10px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.my-space-card-actions button:disabled {
+  color: var(--eqb-color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Below: every variant is qualified with the `.my-space-card-actions`
+   parent (2 classes) so it reliably outranks the plain-element
+   `.my-space-card-actions button` reset above (1 class + 1 element) — a
+   bare `.my-space-card-primary` (1 class) loses that specificity fight and
+   silently renders as the neutral reset. */
+
+.my-space-card-actions .my-space-card-ghost:hover:not(:disabled) {
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-border-strong);
+}
+
+/* Primary action: 下载 PDF — the one solid-green action on the card. */
+.my-space-card-actions .my-space-card-primary {
+  background: var(--eqb-color-primary);
+  border-color: var(--eqb-color-primary);
+  color: var(--eqb-color-paper);
+  font-weight: 600;
+}
+
+.my-space-card-actions .my-space-card-primary:hover:not(:disabled) {
+  background: var(--eqb-color-primary-text);
+  border-color: var(--eqb-color-primary-text);
+  color: var(--eqb-color-paper);
+}
+
+.my-space-card-actions .my-space-card-primary:disabled {
+  background: var(--eqb-color-border);
+  border-color: var(--eqb-color-border);
+  color: var(--eqb-color-text-muted);
+}
+
+/* Danger action: 删除 — red text ghost at rest, red-soft fill on hover
+   (plan.md: "红字 ghost，hover 红浅底" — text reads red at rest, unlike
+   App.css's .detail-button.danger quiet-until-hover pattern). */
+.my-space-card-actions .my-space-card-danger {
+  border-color: var(--eqb-color-border);
+  color: var(--eqb-color-danger);
+}
+
+.my-space-card-actions .my-space-card-danger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--eqb-color-danger) 8%, transparent);
+  border-color: color-mix(in srgb, var(--eqb-color-danger) 35%, transparent);
+  color: var(--eqb-color-danger);
+}
+
+.my-space-card-actions .my-space-card-danger:disabled {
+  color: var(--eqb-color-text-muted);
+}
+
+/* Delete confirmation modal — self-built equivalent of DraftPaperWorkbench's
+   draft-modal-backdrop/draft-save-space-dialog pair (window.confirm is not
+   used here). */
+.my-space-modal-backdrop {
+  align-items: center;
+  background: color-mix(in srgb, var(--eqb-color-text-strong) 45%, transparent);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 50;
+}
+
+.my-space-confirm-dialog {
+  background: var(--eqb-color-paper);
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--eqb-color-text-strong) 22%, transparent);
+  display: grid;
+  gap: 16px;
+  max-width: 360px;
+  padding: 20px;
+  width: 100%;
+}
+
+.my-space-confirm-dialog p {
+  color: var(--eqb-color-text);
+  font-size: var(--eqb-font-size-sm);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.my-space-confirm-actions {
+  display: flex;
+  gap: 8px;
   justify-content: flex-end;
 }
 
-@media (max-width: 920px) {
-  .my-space-layout {
+.my-space-confirm-actions button {
+  background: transparent;
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 6px;
+  color: var(--eqb-color-text);
+  cursor: pointer;
+  font: inherit;
+  min-height: 34px;
+  padding: 7px 14px;
+}
+
+.my-space-confirm-actions button:hover {
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-border-strong);
+}
+
+.my-space-confirm-actions .my-space-card-danger {
+  border-color: var(--eqb-color-danger);
+  color: var(--eqb-color-danger);
+}
+
+.my-space-confirm-actions .my-space-card-danger:hover {
+  background: color-mix(in srgb, var(--eqb-color-danger) 8%, transparent);
+  border-color: var(--eqb-color-danger);
+}
+
+@media (max-width: 560px) {
+  .my-space-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .my-space-grid {
     grid-template-columns: 1fr;
-  }
-
-  .my-space-folders {
-    position: static;
-  }
-
-  .my-space-artifact-row {
-    grid-template-columns: 1fr;
-  }
-
-  .my-space-artifact-actions {
-    justify-content: flex-start;
   }
 }
