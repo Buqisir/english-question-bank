@@ -83,7 +83,14 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
 
   const mySpaceCount = (mySpaceSrc.match(/describeError\(/g) || []).length
   const workbenchCount = (workbenchSrc.match(/describeError\(/g) || []).length
-  assert('MySpacePage.tsx uses describeError at all 6 former call sites', mySpaceCount === 6, `found ${mySpaceCount}`)
+  // my-space-shelf (docs/cuts/my-space-shelf/plan.md JC-1): the folder
+  // create/rename/delete UI (3 of the original 6 call sites) was dropped
+  // from MySpacePage in favor of select-only filter chips — folder
+  // creation still lives in DraftPaperWorkbench's save dialog. The
+  // remaining 3 sites (load/download/delete-artifact) still route every
+  // catch block through describeError; the negative-regex assertion above
+  // is the actual safety property and is unchanged.
+  assert('MySpacePage.tsx uses describeError at all 3 remaining call sites', mySpaceCount === 3, `found ${mySpaceCount}`)
   assert('DraftPaperWorkbench.tsx uses describeError at all 10 former call sites', workbenchCount === 10, `found ${workbenchCount}`)
 }
 

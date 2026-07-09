@@ -119,6 +119,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-concierge-desk.mjs` | Concierge desk behavior used by draft entry points | yes |
 | `verify-c8-draft-paper-contracts.mjs` | C8 draft-paper API/search/workbench contract | yes |
 | `verify-c8-my-space-contracts.mjs` | C8 PR B My Space storage/API/UI contract; cut-specific | no |
+| `verify-my-space-shelf.mjs` | my-space-shelf: MySpacePage rebuilt as a token-only card shelf — zero hardcoded palette hex in MySpacePage.css (empty allowlist), no `window.confirm` (custom `role="alertdialog"` confirm modal instead), `.my-space-grid` card grid (`repeat(auto-fill, minmax(280px, 1fr))`), primary action class filled with `var(--eqb-color-primary)`, danger action class referencing `var(--eqb-color-danger)`, old triple-heading text gone, folder filter chips gated on `folders.length > 0` | yes |
 | `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model；print-renderer.mjs 曾冻结 rendering logic（H9/C8），restart-cut-③ 与刀⑤ render-fidelity Chunk B 是已授权的两次例外，diff 级冻结校验已随刀⑤ Chunk B 退役（见脚本内注释） | yes |
 | `verify-c8-print-ready-gate.mjs` | C8 print-ready gate | yes |
 | `verify-error-copy-mainline.mjs` | Cut ⑧ error-copy-mainline: `describeError` human-copy helper contract, MySpacePage + DraftPaperWorkbench zero raw `error.message`/`String(error)` residue, my-space failure-state retry button + single-render de-dup, draft-paper workbench errors don't clear in-progress work | yes |

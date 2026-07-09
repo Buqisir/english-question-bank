@@ -82,6 +82,7 @@ const registry = {
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-section-chrome-on-solo-surface.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
+  'scripts/verify-my-space-shelf.mjs',
   ],
 }
 
