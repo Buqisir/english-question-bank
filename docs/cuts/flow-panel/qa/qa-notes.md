@@ -58,3 +58,19 @@ worktree 复制出的本地 sqlite，不触碰生产）。
 narrow-closed / narrow-open / touch-drawer-open / desktop-bottom-scroll.png。
 CR Should Fix 同步收口（f654137）：文档级 Esc 关讲评+还焦把手，Playwright
 实测 open/escClosed/focusReturned 全 true。
+
+## 刀 2 收口补记（2026-07-09）
+
+- 主代理补验：桌面三栏 12/12（含把手首点 5 连测未复现 DEV 报的偶发）+
+  窄屏/触屏 7/7（蒙层 pointer-events:none 后隔蒙层点题成功；390px 手机宽
+  流程=关抽屉选题→开抽屉看解析，面板 scrollspy 跟随）。截图 dao2-*.png。
+- owner 实测两轮修复：①七选五衔接句高亮（hook 未接线）②阅读证据滚动
+  ③阅读跨栏虚线（PaperIntelligenceEvidenceLine，含干扰项琥珀线）。
+  显影原则落 plan。
+- 挂账：七选五高亮+连线的样式为 Forbidden harness css 手抄改名副本
+  （paperBrowsePage.css 内注明出处），刀 3 统一抽共享治漂移；
+  paper-2026-i 语法填空 `__NN__` 空格点不着（与解析页共享的数据形状
+  限制）入数据健康清单；scrollspy 跨组临界抖动（刀 1 既有）刀 3 顺手。
+- 教训：「面板内容逐字比对」兜不住「卷面显影层」缺失——层级 parity
+  要列显式验收项；source-grep 断言可固化错误行为（M1 同课），数据
+  真实性优先用行为/夹具断言。
