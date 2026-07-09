@@ -205,8 +205,13 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
   assert('feed rows pass variant="feed"', /variant="feed"/.test(feedBlockMatch), '')
   const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
   assert(
-    'ConciergePaperRow renders a hit-free badge for the feed variant',
-    /variant === 'feed'\s*\?\s*`\$\{paper\.hitCount\} 个篇章`/.test(paperRow),
+    'ConciergePaperRow renders the 全卷 badge for the feed variant (single count, no double-reporting)',
+    /variant === 'feed'\s*\?\s*`全卷 · \$\{paper\.hitCount\} 篇章`/.test(paperRow),
+    '',
+  )
+  assert(
+    'retired grouptypes span stays retired (no second count element)',
+    !/concierge-paper-grouptypes/.test(paperRow),
     '',
   )
   assert(
@@ -295,7 +300,7 @@ console.log('\nTest 21: home-editorial — row-first year column + retired group
   assert('ConciergePaperRow renders a concierge-paper-year column', /concierge-paper-year/.test(paperRow), '')
   assert(
     'groupType strip replaced by fixed "全卷 · N 篇章" (N = paper.hitCount)',
-    /全卷 · \{paper\.hitCount\} 篇章/.test(paperRow),
+    /全卷 · \$\{paper\.hitCount\} 篇章/.test(paperRow),
     '',
   )
   assert(

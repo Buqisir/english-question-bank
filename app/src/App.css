@@ -4432,13 +4432,6 @@ button:disabled {
   color: #1E1E1C;
 }
 
-/* home-editorial — 题型串退役: fixed "全卷 · N 篇章" replaces the old
-   groupType strip, ink-faint + tabular-nums (no per-groupType text). */
-.concierge-paper-grouptypes {
-  color: #9A9A93;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
 
 .concierge-paper-reason {
   margin: 0;

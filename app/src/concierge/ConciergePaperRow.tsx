@@ -278,15 +278,17 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
 
       <div className="concierge-paper-body">
         <p className="concierge-paper-meta">
+          {/* feed=库存事实「全卷 · N 篇章」；搜索=命中语义。二者互斥不叠报
+              （曾双渲重复报数），且搜索场景 hitCount 是命中数≠篇章总数，
+              不得冠「全卷」。 */}
           <span
             className="concierge-paper-hitcount"
             data-ra-hit-scope={paper.hitContext.scope}
           >
             {variant === 'feed'
-              ? `${paper.hitCount} 个篇章`
+              ? `全卷 · ${paper.hitCount} 篇章`
               : `${badgePrefix(paper.hitContext.scope)}${paper.hitCount}${badgeSuffix(paper.hitContext.scope)}`}
           </span>
-          <span className="concierge-paper-grouptypes">全卷 · {paper.hitCount} 篇章</span>
         </p>
         {paper.hitContext.displayReason && (
           <p
