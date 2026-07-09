@@ -1,6 +1,6 @@
 import { Download, FileText, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
 import { describeError } from '../shared/errorCopy'
@@ -85,6 +85,26 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   function requestDeleteArtifact(artifact: MySpaceArtifact) {
     setConfirmTarget(artifact)
   }
+
+  // CR should-fix: the dialog must own the keyboard. Focus moves to 取消 on
+  // open (so Esc works without a Tab first), Esc listens at document level
+  // (the trigger button keeps focus otherwise and keydown never reaches the
+  // backdrop), and focus returns to the trigger on close.
+  const cancelButtonRef = useRef<HTMLButtonElement | null>(null)
+  const restoreFocusRef = useRef<HTMLElement | null>(null)
+  useEffect(() => {
+    if (!confirmTarget) return
+    restoreFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    cancelButtonRef.current?.focus()
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setConfirmTarget(null)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      restoreFocusRef.current?.focus()
+    }
+  }, [confirmTarget])
 
   async function confirmDeleteArtifact() {
     const artifact = confirmTarget
@@ -197,19 +217,13 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     </div>
 
     {confirmTarget && (
-      <div
-        className="my-space-modal-backdrop"
-        role="presentation"
-        onKeyDown={(event) => {
-          if (event.key === 'Escape') setConfirmTarget(null)
-        }}
-      >
+      <div className="my-space-modal-backdrop" role="presentation">
         <div className="my-space-confirm-dialog" role="alertdialog" aria-modal="true" aria-label="确认删除文件">
           <p>
             删除「{confirmTarget.fileName}」？PDF 文件也会删除。
           </p>
           <div className="my-space-confirm-actions">
-            <button type="button" onClick={() => setConfirmTarget(null)}>
+            <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>
               取消
             </button>
             <button type="button" className="my-space-card-danger" onClick={() => void confirmDeleteArtifact()}>
