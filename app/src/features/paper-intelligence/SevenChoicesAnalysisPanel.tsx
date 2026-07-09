@@ -200,9 +200,9 @@ export function SevenChoicesAnalysisPanel({
                           </ul>
                         </DetailBlock>
                       )}
-                      <DetailBlock title="讲题提示">
-                        <p>{chain.teachingNote}</p>
-                      </DetailBlock>
+                      {/* 「讲题提示」display retired (owner 2026-07-09: 衔接链
+                          讲解已足够，提示属重复噪音)。teachingNote stays in the
+                          adapter/data contract — display-only removal. */}
                     </div>
                   )}
                 </div>
