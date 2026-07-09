@@ -852,11 +852,12 @@ assert(
   'missing showDeepLink guard in the lecture panel',
 )
 
-// Behavioral proof against the real paper-2026-i fixture: run
-// buildAnswerRowText/buildGroupRangeLabel logic directly (source-level
-// checks above prove the branches exist; this proves they produce the
-// right shape against real data) by re-deriving the same computation the
-// component performs, using the already-loaded fixture + adapter.
+// Fixture-shape checks against the real paper-2026-i asset. NOTE (CR
+// 刀1): this does NOT execute buildAnswerRowText/buildGroupRangeLabel
+// (they are not exported) — it only proves the fixture data the source
+// branches consume is present and well-formed. Output-level evidence
+// comes from browser QA; an execution-level regression test would need
+// the helpers exported first.
 const readingGroup2026i = asset.content.groups['group-2026-i-reading-a']
 assert(
   '2026-i fixture sanity: a reading group with answerKey entries exists',

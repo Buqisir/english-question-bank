@@ -137,6 +137,22 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [lectureOpen, setLectureOpen] = useState(false)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
+  const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
+
+  // CR should-fix（同 my-space 先例）：讲评栏开着时文档级 Esc 关闭并还焦
+  // 到把手，补齐窄屏抽屉的模态语义。
+  useEffect(() => {
+    if (!lectureOpen) return
+    function onKeyDown(event: KeyboardEvent): void {
+      if (event.key !== 'Escape') return
+      setLectureOpen(false)
+      lectureHandleRef.current?.focus()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return (): void => {
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [lectureOpen])
 
   useEffect(() => {
     let cancelled = false
@@ -587,6 +603,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       )}
       <button
         type="button"
+        ref={lectureHandleRef}
         className={`paper-browse-lecture-handle${
           lectureOpen ? ' paper-browse-lecture-handle--open' : ''
         }`}
