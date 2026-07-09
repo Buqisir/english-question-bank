@@ -151,3 +151,23 @@ worktree 复制出的本地 sqlite，不触碰生产）；浏览器 session 实�
 - 浏览器截图未能另存为本 worktree 内的 PNG 文件（`save_to_disk` 在本
   sandbox 里同刀 1/刀 2 一样没有暴露可访问的文件系统路径）；上述每一步
   验证都在会话内以内联截图逐条肉眼核对过，未留 PNG 文件在这个目录里。
+
+## 刀 3 主代理补验（2026-07-09，Playwright，闭合 DEV 沙箱缺口）
+
+DEV 沙箱缩不了视口（同刀1/2），主代理 Playwright 补验 13/13 全过
+（临时 USER_DATA_DB + create-user，API 9897 / vite 5197，真库 paper-2026-i）：
+
+- 桌面 1440 深链 `questionId=q-2026-i-024&lecture=1`：讲评态初始即开、
+  锚定 Reading B、24 题预选、右栏真面板、卷面衔接句高亮+跨栏虚线就位；
+  关讲评 URL 清 lecture/questionId。
+- 窄屏 1000×800：抽屉 fixed+backdrop、**空态新文案上屏**（「滚动卷面或
+  点选题目后，这里显示讲评」）、把手开合、cloze 深链走 lazy-fetch 支线
+  抽屉即开、**隔蒙层点题**（点 24 题）联动+URL 同步（跨组 cloze→reading）。
+- 触屏 390×844(hasTouch)：tap 把手开合、关抽屉滚动→开抽屉面板跟随
+  scrollspy（dao2 定的手机流程）、七选五深链抽屉开+URL 保留。
+- 截图：dao3-desktop-deeplink-reading / dao3-narrow-drawer-empty /
+  dao3-narrow-deeplink-cloze / dao3-touch-panel /
+  dao3-touch-deeplink-seven.png。
+- 交互模型确认：390px 手机宽抽屉盖满卷面，点题联动的载体是 1000px 级
+  窄屏（抽屉 380px 卷面可见）；手机宽走关抽屉滚动+组级跟随，与 dao2
+  裁定一致，非本刀回归。
