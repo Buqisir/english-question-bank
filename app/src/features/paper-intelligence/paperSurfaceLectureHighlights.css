@@ -1,0 +1,121 @@
+/**
+ * paperSurfaceLectureHighlights.css — flow-panel 刀 3: shared source for
+ * two "看整卷"/解析页 consumers that each render their own passage overlay
+ * marks with different class prefixes, previously hand-copied twice:
+ *
+ *   - PaperBrowsePage.tsx renders `.paper-browse-seven-*` marks (own JSX,
+ *     driven by `useSevenChoicesPaperHighlights` — import-only, hook
+ *     itself unmodified) and scopes the 阅读跨栏证据动线 support/trap
+ *     stroke palette under `.paper-browse-shell`.
+ *   - PaperIntelligencePaperSurfaceHarness.tsx (Forbidden — read-only
+ *     reference, never edited by this cut) renders the equivalent
+ *     `.pi-seven-*` marks and scopes the same palette under
+ *     `.pi-ps-harness-shell`.
+ *
+ * Before 刀 3 both class families carried duplicate declarations (same
+ * color values, different selectors) in paperBrowsePage.css and
+ * paperIntelligencePaperSurfaceHarness.css. This file collapses them into
+ * one source; both stylesheets `@import` it. Selectors are grouped
+ * (`.pi-seven-x, .paper-browse-seven-x { ... }`) rather than declared
+ * twice — DEV's chosen organization for "single source of truth" (plan
+ * leaves the selector shape to DEV, constraint is single-source).
+ *
+ * NOT included here: `.pi-seven-option-card` / `.pi-seven-option-jump-chip`
+ * (SevenChoicesAnalysisPanel.tsx's own option-pool chip styling — a
+ * separate concern that happens to share the same `--seven-soft` /
+ * `--seven-strong` / `--seven-border` custom-property NAMES via a combined
+ * selector in the harness stylesheet). Those two selectors stay in
+ * paperIntelligencePaperSurfaceHarness.css untouched; only the
+ * `.pi-seven-clue-mark[data-seven-color='N']` alternative was removed from
+ * that combined selector list (its declarations otherwise unchanged, so
+ * the option-card/jump-chip variables are unaffected).
+ */
+
+.pi-seven-blank-overlay,
+.paper-browse-seven-blank-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.pi-seven-clue-mark,
+.paper-browse-seven-clue-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 3px;
+  background: var(--seven-mark-topic, rgba(231, 171, 86, 0.18));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.pi-seven-clue-mark--signal,
+.paper-browse-seven-clue-mark--signal {
+  background: var(--seven-mark-signal, rgba(231, 171, 86, 0.34));
+  box-shadow: inset 0 -2px 0 var(--seven-border, rgba(122, 106, 88, 0.45));
+}
+
+.pi-seven-clue-mark--context,
+.paper-browse-seven-clue-mark--context {
+  background: var(--seven-mark-context, rgba(231, 171, 86, 0.12));
+}
+
+.pi-seven-clue-mark[data-seven-color='0'],
+.paper-browse-seven-clue-mark[data-seven-color='0'] {
+  --seven-mark-topic: rgba(231, 171, 86, 0.18);
+  --seven-mark-signal: rgba(231, 171, 86, 0.34);
+  --seven-mark-context: rgba(231, 171, 86, 0.11);
+  --seven-border: rgba(173, 113, 41, 0.46);
+}
+
+.pi-seven-clue-mark[data-seven-color='1'],
+.paper-browse-seven-clue-mark[data-seven-color='1'] {
+  --seven-mark-topic: rgba(103, 174, 150, 0.18);
+  --seven-mark-signal: rgba(103, 174, 150, 0.34);
+  --seven-mark-context: rgba(103, 174, 150, 0.11);
+  --seven-border: rgba(50, 128, 102, 0.46);
+}
+
+.pi-seven-clue-mark[data-seven-color='2'],
+.paper-browse-seven-clue-mark[data-seven-color='2'] {
+  --seven-mark-topic: rgba(123, 151, 210, 0.18);
+  --seven-mark-signal: rgba(123, 151, 210, 0.34);
+  --seven-mark-context: rgba(123, 151, 210, 0.11);
+  --seven-border: rgba(76, 101, 166, 0.46);
+}
+
+.pi-seven-clue-mark[data-seven-color='3'],
+.paper-browse-seven-clue-mark[data-seven-color='3'] {
+  --seven-mark-topic: rgba(192, 130, 175, 0.18);
+  --seven-mark-signal: rgba(192, 130, 175, 0.34);
+  --seven-mark-context: rgba(192, 130, 175, 0.11);
+  --seven-border: rgba(139, 79, 123, 0.46);
+}
+
+.pi-seven-clue-mark[data-seven-color='4'],
+.paper-browse-seven-clue-mark[data-seven-color='4'] {
+  --seven-mark-topic: rgba(225, 111, 86, 0.18);
+  --seven-mark-signal: rgba(225, 111, 86, 0.34);
+  --seven-mark-context: rgba(225, 111, 86, 0.11);
+  --seven-border: rgba(176, 72, 54, 0.48);
+}
+
+/* ─── 阅读跨栏证据动线 support/trap stroke palette ───
+ * Origin: paperIntelligencePaperSurfaceHarness.css (pre-刀3 lines 684-691),
+ * scoped to `.pi-ps-harness-shell`; hand-copied by paper-browse 刀 2 修复轮
+ * ③, scoped to `.paper-browse-shell`. Both scopes collapse here.
+ */
+.pi-ps-harness-shell .pi-line-path--support,
+.pi-ps-harness-shell .pi-line-path[data-pi-evidence-kind='support'],
+.paper-browse-shell .pi-line-path--support,
+.paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'] {
+  stroke: rgba(16, 185, 129, 0.65);
+}
+
+.pi-ps-harness-shell .pi-line-path--trap,
+.pi-ps-harness-shell .pi-line-path[data-pi-evidence-kind='trap'],
+.paper-browse-shell .pi-line-path--trap,
+.paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'] {
+  stroke: rgba(245, 158, 11, 0.85);
+}

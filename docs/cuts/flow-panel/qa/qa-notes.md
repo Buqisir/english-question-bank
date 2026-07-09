@@ -74,3 +74,80 @@ CR Should Fix 同步收口（f654137）：文档级 Esc 关讲评+还焦把手�
 - 教训：「面板内容逐字比对」兜不住「卷面显影层」缺失——层级 parity
   要列显式验收项；source-grep 断言可固化错误行为（M1 同课），数据
   真实性优先用行为/夹具断言。
+
+# flow-panel 刀 3 — 浏览器 QA 记录
+
+日期：2026-07-09　执行：DEV 子代理（Sonnet, dev-hard）
+本地 dev server：`QUESTION_BANK_API_PORT=8799 PORT=5199`，账号 `qa-local-owner`
+（本地库密码经 `node scripts/create-user.mjs --reset-password` 临时重置，仅影响本
+worktree 复制出的本地 sqlite，不触碰生产）；浏览器 session 实际以已有 cookie
+的 `qa-local`（owner）身份登录，无需再手动登录。
+
+## 已用真点浏览器验证（claude-in-chrome，逐条截图肉眼核对，内联于会话中）
+
+- **入口带态 · 搜索卡「阅读解析」**：workbench 找题页展开「全国新课标I」→
+  hover Reading A 行 → 点「阅读解析」→ 落地
+  `?view=paper-browse&paperId=paper-2026-i&focusGroupId=group-2026-i-reading-a
+  &lecture=1&questionId=q-2026-i-021`，讲评态已开、锚定 Reading A、第 21 题
+  预选（右栏解析 + 答案依据 + 跨栏虚线连到原文证据句）。此入口保持
+  `<a href>` 原生导航（未做 SPA 拦截——ConciergeDesk/ConciergePaperRow 不在
+  本刀 Scope 白名单内，见 ConciergeGroupCard.tsx 内注释）。
+- **入口带态 · 详情页「阅读解析」SPA 快路径**：workbench → 详情（Reading A）
+  → 点「阅读解析」→ 无整页刷新，直接落地同一姿态（讲评开+锚定+第 21 题
+  预选+右栏解析+显影层），URL 与上面一致。
+- **入口带态 · 详情页「看整卷」**：点「看整卷」→ 挑题态，URL
+  `?view=paper-browse&paperId=paper-2026-i&focusGroupId=group-2026-i-reading-a`
+  （无 `lecture`/`questionId`），右缘只有讲评把手，无解析噪音。
+- **URL 还原**：直接用浏览器地址栏打开完整讲评态 URL（含
+  `lecture=1&focusGroupId=...&questionId=...`）→ 新页面加载后立即讲评态+
+  锚定+预选，与从入口点进来的姿态一致。完形填空组同款深链
+  （`focusGroupId=group-2026-i-cloze&questionId=q-2026-i-041&lecture=1`）
+  也验证过——需要等 `lectureAnalysisFetched` 落地的分支正确工作，第 41 题
+  预选、证据高亮、右栏解析全部正确渲染，无崩溃、控制台无报错。
+- **关讲评态**：点讲评把手关闭 → 挑题态恢复，URL 的 `lecture`/`questionId`
+  被 replaceState 剔除（`focusGroupId` 保留，属设计内——不影响验收标准
+  "关讲评后 URL 无 lecture/questionId"）。
+- **Back / Forward**：workbench → 详情 → 点「阅读解析」（pushState）→
+  浏览器 Back → 回到详情页（viewMode 状态保留，URL 回到 workbench 根）→
+  浏览器 Forward → 回到讲评态，姿态与选题与去程一致。
+- **popstate 兜底 reload**：构造 workbench → PI 独立路由（
+  `?view=paper-intelligence&surface=paper&...`）→ paper-browse 三段历史，
+  从 paper-browse Back 到 PI URL → 确认发生了整页 reload（PI harness 独立
+  路由正确接管渲染，显示其自身的"未指定 groupId"错误态而不是卡在旧的
+  paper-browse React 树上）；再 Forward 回 paper-browse → popstate 正确
+  重放 boot-read，挑题态正常恢复。
+- **小尾巴①②（scrollspy clear-effect 修复 + 去抖）**：讲评开着选中完形
+  填空第 41 题后，手动滚动卷面到 Reading C（跨越多个题组边界）→ 面板短暂
+  仍显示旧选中（去抖窗口内属预期），~2s 后正确切换到 Reading C · 28-31
+  的组级速览、URL 的 `questionId` 同步被清掉——确认 clear-effect 只在
+  activeAnchor 变成另一个真实题组时才清、且能正确落地，未卡死在旧选中态。
+- **小尾巴③（空态文案）**：讲评开着但未点选、scrollspy 落在无对应题组的
+  位置时，右栏显示新文案「滚动卷面或点选题目后，这里显示讲评」（旧文案
+  「滚动到题组查看速览」已确认不再出现于源码）。
+- **挑题态零解析请求回归**：`read_network_requests` 过滤 `analyses` 只
+  看到 `reading-choice-analysis-v1.json` / `seven-choices-analysis-v1.json`
+  （刀 1 既有的无条件拉取，非本刀新增），无 cloze/grammar-fill/writing
+  的懒加载请求——不变量未被破坏。
+- 全程 `read_console_messages`（`onlyErrors: true`）无报错。
+
+## 未能完成的部分（工具限制，如实记录，与刀 1/刀 2 同款已知限制）
+
+- **窄屏（<1200px）抽屉浮层 + 触屏仿真**：本 sandbox 的 `resize_window` 对
+  这个 Chrome 标签页的 `window.innerWidth` 无效（同刀 1 记录的限制，试过
+  1000×800，`window.innerWidth` 回读仍是 1470），无法真实点击验证窄屏
+  抽屉/触屏交互。风险已知收窄：本刀未新增窄屏专属 CSS 行为（七选五高亮/
+  证据线断点规则原样搬进共享文件，`verify-paper-browse.mjs` 源码级断言
+  钉死 `@media (min-width:1200px)`/`(max-width:1199.98px)` 两条规则内容
+  未变；讲评栏抽屉开合/Esc/背景蒙层是刀 1/刀 2 已 QA 过的既有行为，本刀
+  未触碰）；空态新文案本身宽窄屏通用（同一字符串，非断点条件渲染）。
+  建议下一次有真实窄视口能力时补验（或 owner 手机/平板实测），标记为
+  已知缺口，不构成本刀验收阻塞。
+- **深链竞态的精确亚 100ms 时序**（cr.md 244-252 描述的"深链滚动沉降期间
+  立刻点另一题"竞态）：已用离散工具调用验证了"正常（非竞态）流程下
+  clear-effect + 去抖端到端工作正确"（见上），但无法用截图型工具精确
+  复现毫秒级竞态窗口本身。修复的正确性以源码路径验证为主：
+  `suppressScrollspyClear()` 在三处程序化滚动（rail 点击/深链聚焦/证据
+  滚动）+ 深链选题落地前均调用，clear-effect 读同一个 suppress ref。
+- 浏览器截图未能另存为本 worktree 内的 PNG 文件（`save_to_disk` 在本
+  sandbox 里同刀 1/刀 2 一样没有暴露可访问的文件系统路径）；上述每一步
+  验证都在会话内以内联截图逐条肉眼核对过，未留 PNG 文件在这个目录里。

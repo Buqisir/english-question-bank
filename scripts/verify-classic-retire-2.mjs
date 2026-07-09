@@ -157,10 +157,19 @@ assert(
   /selectedDetail\.hasPaperSurfaceAnalysis[\s\S]{0,80}selectedDetail\.paperSurfaceHref[\s\S]{0,80}selectedDetail\.paperSurfaceLabel/.test(detailView) &&
     /\{selectedDetail\.paperSurfaceLabel\}/.test(detailView),
 )
+// flow-panel 刀 3 narrows this assertion (plan-authorized, docs/cuts/
+// flow-panel/plan.md 刀 3 Scope): 看解析 no longer links straight to the
+// raw analysis href — it now navigates to the整卷页讲评态 via the shared
+// buildPaperBrowseLectureHref helper (server href unmodified; the
+// conversion is a pure front-end transform, see
+// app/src/concierge/paperSurfaceHref.ts). The original MF-1 intent is kept
+// intact: 看解析 must NOT literally call onOpenPaperBrowse(selectedDetail),
+// which is 看整卷's own handler — a separate onOpenPaperBrowseLecture
+// handler now backs the SPA fast-path instead.
 assert(
-  '看解析 entry navigates to the ANALYSIS surface via href={selectedDetail.paperSurfaceHref} (CR MF-1: must NOT reuse onOpenPaperBrowse, which is 看整卷)',
-  /href=\{selectedDetail\.paperSurfaceHref\}/.test(detailView) &&
-    !/paperSurfaceLabel[\s\S]{0,200}onOpenPaperBrowse/.test(
+  '看解析 entry navigates to the paper-browse 讲评态 via buildPaperBrowseLectureHref(selectedDetail.paperSurfaceHref) (flow-panel 刀 3 migration; CR MF-1 intent preserved — does not call onOpenPaperBrowse(selectedDetail), which is 看整卷)',
+  /href=\{buildPaperBrowseLectureHref\(selectedDetail\.paperSurfaceHref\)/.test(detailView) &&
+    !/paperSurfaceLabel[\s\S]{0,300}onOpenPaperBrowse\(selectedDetail\)/.test(
       detailView.slice(detailView.indexOf('hasPaperSurfaceAnalysis')),
     ),
 )
