@@ -23,6 +23,14 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
+- 2026-07-09：**flow-panel 刀 1 收官**（merge 7c89222，CR APPROVE，main CI
+  绿）。整卷页一页两姿态骨架落地：rail 贴左+卷面居中+右缘讲评把手+右栏
+  组级速览（scrollspy 跟随答案行/深读链接），窄屏抽屉+触屏主代理
+  Playwright 补验 11/11（DEV 沙箱缩不了视口，QA 记录в qa-notes.md）；
+  CR should-fix 主代理直收（Esc 关讲评+还焦，f654137）。**待 owner 实测
+  手感后再开刀 2**（点题联动+五面板搬家）。并行新刀 **home-editorial**
+  方向已过（找题页试卷行+展开态卷面目录化，方向稿 artifact v2），卷种
+  标注三候选待 owner 拍板后写 plan；「UI 刀先装审美 skill」入记忆与惯例。
 - 2026-07-09：**flow-hover Chunk A 收官 + Chunk B 撤刀改道 flow-panel**。
   - Chunk A（整卷页流式化+悬浮显形+rail scrollspy+触屏兜底）合并
     93bc7d4，CR APPROVE，main CI 绿。题组卡头部退役，卷面连续。
