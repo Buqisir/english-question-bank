@@ -91,8 +91,12 @@
  *         return `null` (no answer row at all), no-answerKey-hit groups
  *         fall back to "答案未入库", and matched entries are sorted by
  *         questionNo before joining.
- *     24. The 讲评栏 deep-link guard matches the detail page's own guard
- *         shape: `card.hasPaperSurfaceAnalysis && card.paperSurfaceHref`.
+ *     24. [RETIRED by flow-panel 刀 2 — see 26-33 below] The 讲评栏
+ *         deep-link ("深读解析" → old解析页) that used to gate on
+ *         `card.hasPaperSurfaceAnalysis && card.paperSurfaceHref` is gone;
+ *         the 讲评栏 body now renders the full解析面板 in place instead of
+ *         linking out. The assertion for this item was removed, not left
+ *         red — the behavior it proved no longer exists by design.
  *     25. paperBrowsePage.css: `.paper-browse-shell` no longer centers
  *         itself with `max-width` + `margin: 0 auto` (rail glued to the
  *         viewport edge instead of a centered shell), and a `min-width:
@@ -117,6 +121,39 @@
  *     21. QuestionGroupDetailView.tsx does not import PaperSurface (C6 —
  *         confirms the detail page is genuinely out of this cut's scope,
  *         not just "happens to look unaffected").
+ * 26-33. flow-panel 刀 2（点题联动 + 五解析面板搬家统一宽度）:
+ *     26. PaperBrowsePage imports the five paper-intelligence解析面板
+ *         (SevenChoicesAnalysisPanel / PaperAssetAnalysisPanel /
+ *         ClozeAnalysisPanel / GrammarFillAnalysisPanel /
+ *         WritingAnalysisPanel), the two analysis adapters
+ *         (buildClozeAnalysisSurfaceModel / buildGrammarFillAnalysisSurfaceModel),
+ *         and `paperIntelligence.css` (随面板 import 生效, unmodified).
+ *     27. `onFocusIntent`/`lectureFocus` on each group's PaperSurface mount
+ *         are conditioned on `lectureOpen`: 挑题态 keeps the 刀 1 shape
+ *         exactly (`onFocusIntent={... : () => {}}`, `lectureFocus={... :
+ *         null}` — the no-op/null branch of the ternary), so PaperSurface
+ *         stays read-only/silent whenever the handle is collapsed.
+ *     28. The cloze/grammar-fill/writing lecture-analysis fetch effect is
+ *         gated on `lectureOpen` (`if (!lectureOpen) return`) — 挑题态 全程
+ *         零新增请求 is a source-level invariant, not just a runtime one.
+ *     29. `selectLectureQuestion` seeds `evidenceId`/`optionLabel` from the
+ *         active group's analysis model (cloze → first non-option-side
+ *         evidence row, grammarFill → first evidence row, reading →
+ *         supportEvidenceId + answer) — mirrors
+ *         `PaperIntelligencePaperSurfaceHarness`'s `request-lecture-focus`
+ *         branch.
+ *     30. A missing/failed cloze/grammarFill/writing analysis renders
+ *         "解析未发布" in the 讲评栏 instead of crashing (graceful
+ *         degradation string present in source).
+ *     31. The retired 深读解析 deep-link is gone: no `paperSurfaceHref` or
+ *         「深读解析」 string remains in PaperBrowsePage.tsx.
+ *     32. `paperBrowsePage.css` scopes the五面板 width-normalization to a
+ *         `.paper-browse-lecture-analysis` container selector — `pi-*`
+ *         rules in `paperIntelligence.css` are not edited by this cut.
+ *     33. Real paper-2026-i fixture: `buildClozeAnalysisSurfaceModel` /
+ *         `buildGrammarFillAnalysisSurfaceModel` each resolve against the
+ *         fixture's cloze/grammar-fill analysis files without throwing —
+ *         proves the 按需补拉 adapter calls have real data to run against.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -370,15 +407,20 @@ assert(
   /default:[\s\S]{0,200}placeholder/.test(pageSrc),
   'missing default placeholder branch',
 )
+// flow-panel 刀 2: PaperSurface is now interactive in 讲评态 (lectureOpen),
+// but 挑题态 must keep the exact 刀 1 read-only shape — the false branch of
+// each ternary is still a static no-op/null, not a real handler/focus.
 assert(
-  'PaperSurface is mounted read-only: lectureFocus is always null',
-  /lectureFocus=\{null\}/.test(pageSrc),
-  'lectureFocus is not a static null — page may be wiring interactive focus',
+  'PaperSurface lectureFocus falls back to a static null when the group is not the 讲评栏 target',
+  /lectureFocus=\{isPanelGroup\s*\?\s*lectureFocusForSelection\s*:\s*null\}/.test(pageSrc),
+  'lectureFocus does not have a static-null fallback branch — 挑题态/non-target groups may leak focus',
 )
 assert(
-  'PaperSurface onFocusIntent is a no-op',
-  /onFocusIntent=\{\(\)\s*=>\s*\{\}\}/.test(pageSrc),
-  'onFocusIntent is not a no-op — page may be wiring evidence/annotation interaction',
+  'PaperSurface onFocusIntent falls back to a static no-op when lectureOpen is false',
+  /onFocusIntent=\{lectureOpen\s*\?\s*\(intent\)\s*=>\s*handleGroupFocusIntent\(groupId,\s*intent\)\s*:\s*\(\)\s*=>\s*\{\}\}/.test(
+    pageSrc,
+  ),
+  'onFocusIntent does not have a static no-op fallback branch — 挑题态 may be wiring interaction',
 )
 assert(
   'PaperBrowsePage has no "移出" (remove-from-basket) affordance',
@@ -846,11 +888,113 @@ assert(
   buildAnswerRowFnBody,
 )
 
+// ─── 26-32. flow-panel 刀 2: 点题联动 + 五解析面板搬家 ───
+
 assert(
-  '讲评栏 deep-link guard matches the detail page shape (hasPaperSurfaceAnalysis && paperSurfaceHref)',
-  /card\?\.hasPaperSurfaceAnalysis\s*&&\s*card\?\.paperSurfaceHref/.test(pageSrc),
-  'missing showDeepLink guard in the lecture panel',
+  'PaperBrowsePage imports the five paper-intelligence解析面板',
+  [
+    /import\s*\{\s*SevenChoicesAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/SevenChoicesAnalysisPanel['"]/,
+    /import\s*\{\s*PaperAssetAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/PaperAssetAnalysisPanel['"]/,
+    /import\s*\{\s*ClozeAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/ClozeAnalysisPanel['"]/,
+    /import\s*\{\s*GrammarFillAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/GrammarFillAnalysisPanel['"]/,
+    /import\s*\{\s*WritingAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/WritingAnalysisPanel['"]/,
+  ].every((re) => re.test(pageSrc)),
+  'missing one or more of the five analysis panel imports',
 )
+assert(
+  'PaperBrowsePage imports the cloze/grammar-fill analysis adapters + paperIntelligence.css',
+  /buildClozeAnalysisSurfaceModel/.test(pageSrc) &&
+    /buildGrammarFillAnalysisSurfaceModel/.test(pageSrc) &&
+    /import\s*['"]\.\.\/paper-intelligence\/paperIntelligence\.css['"]/.test(pageSrc),
+  'missing analysis adapter imports or the paperIntelligence.css import',
+)
+assert(
+  'lecture-analysis fetch effect is gated on lectureOpen (zero new requests in 挑题态)',
+  /if\s*\(!lectureOpen\)\s*return/.test(pageSrc),
+  'missing the lectureOpen early-return guard on the lazy analysis fetch effect',
+)
+assert(
+  'selectLectureQuestion seeds cloze/grammarFill/reading evidence, mirroring the harness request-lecture-focus branch',
+  /lectureEntry\?\.kind\s*===\s*['"]cloze['"]/.test(pageSrc) &&
+    /lectureEntry\?\.kind\s*===\s*['"]grammarFill['"]/.test(pageSrc) &&
+    /plainEntry\?\.kind\s*===\s*['"]reading['"]/.test(pageSrc) &&
+    /supportEvidenceId/.test(pageSrc),
+  'missing one or more of the seed branches in selectLectureQuestion',
+)
+assert(
+  '讲评栏 shows "解析未发布" when a cloze/grammarFill/writing analysis is missing/unavailable',
+  (pageSrc.match(/解析未发布/g) || []).length >= 3,
+  'expected the "解析未发布" fallback string on all three lazily-fetched group types',
+)
+assert(
+  '深读解析 deep-link is fully retired — no paperSurfaceHref/深读解析 reference remains',
+  !/paperSurfaceHref/.test(pageSrc) && !/深读解析/.test(pageSrc),
+  'a retired deep-link reference is still present',
+)
+assert(
+  'paperBrowsePage.css normalizes 五面板 width via a .paper-browse-lecture-analysis container selector',
+  /\.paper-browse-lecture-analysis\b/.test(pageCssSrc),
+  'missing the .paper-browse-lecture-analysis container selector',
+)
+
+// Behavioral: the cloze/grammar-fill analysis adapters this cut newly
+// wires into the lecture panel actually resolve against the real
+// paper-2026-i analysis fixtures (proves the 按需补拉 call has real data
+// to run against, not just a source-shape match).
+const cloze2026iAsset = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
+)
+const cloze2026iAnalysis = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json'),
+)
+const grammarFill2026iAnalysis = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'),
+)
+try {
+  const { buildClozeAnalysisSurfaceModel } = await import(
+    path.join(rootDir, 'app', 'src', 'features', 'paper-intelligence', 'clozeAnalysisSurfaceAdapter.ts')
+  )
+  const clozeModel = buildClozeAnalysisSurfaceModel({
+    asset: cloze2026iAsset,
+    analysis: cloze2026iAnalysis,
+    groupId: 'group-2026-i-cloze',
+  })
+  assert(
+    'buildClozeAnalysisSurfaceModel resolves against the real paper-2026-i cloze-analysis-v1 fixture',
+    Object.keys(clozeModel.analysisByQuestionId).length > 0,
+    'analysisByQuestionId is empty',
+  )
+} catch (e) {
+  assert('buildClozeAnalysisSurfaceModel resolves against the real paper-2026-i fixture', false, String(e))
+}
+try {
+  const { buildGrammarFillAnalysisSurfaceModel } = await import(
+    path.join(
+      rootDir,
+      'app',
+      'src',
+      'features',
+      'paper-intelligence',
+      'grammarFillAnalysisSurfaceAdapter.ts',
+    )
+  )
+  const grammarFillModel = buildGrammarFillAnalysisSurfaceModel({
+    asset: cloze2026iAsset,
+    analysis: grammarFill2026iAnalysis,
+    groupId: 'group-2026-i-grammar-fill',
+  })
+  assert(
+    'buildGrammarFillAnalysisSurfaceModel resolves against the real paper-2026-i grammar-fill-analysis-v1 fixture',
+    Object.keys(grammarFillModel.analysisByQuestionId).length > 0,
+    'analysisByQuestionId is empty',
+  )
+} catch (e) {
+  assert(
+    'buildGrammarFillAnalysisSurfaceModel resolves against the real paper-2026-i fixture',
+    false,
+    String(e),
+  )
+}
 
 // Fixture-shape checks against the real paper-2026-i asset. NOTE (CR
 // 刀1): this does NOT execute buildAnswerRowText/buildGroupRangeLabel

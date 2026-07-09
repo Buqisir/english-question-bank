@@ -284,15 +284,27 @@
   color: #4a4438;
 }
 
-.paper-browse-deep-link {
-  align-self: flex-start;
-  font-size: 13px;
-  color: #2c6e56;
-  text-decoration: none;
+/* ─── 讲评栏身体 — 解析面板容器（刀 2）───
+ *
+ * 五个面板（pi-cloze、pi-gf、pi-asset、pi-seven、pi-writing 各自的类名
+ * 前缀，来自 paperIntelligence.css，随面板 import 生效）默认按更宽的
+ * 解析页/harness 栏位排版；这里只用容器选择器把它们收进讲评栏的 380px
+ * （小于 1200px 视口的抽屉里是 min(380px, 92vw)）宽度内，不改 pi css
+ * 本身。逐面板过一遍见 docs/cuts/flow-panel/qa/。
+ */
+.paper-browse-lecture-analysis {
+  min-width: 0;
+  width: 100%;
 }
 
-.paper-browse-deep-link:hover {
-  text-decoration: underline;
+.paper-browse-lecture-analysis * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.paper-browse-lecture-analysis table {
+  display: block;
+  overflow-x: auto;
 }
 
 .paper-browse-lecture-backdrop {
@@ -313,6 +325,8 @@
     overflow-y: auto;
   }
 
+  /* 刀 2: 纯视觉暗化，不拦截点击 —— 讲评态下卷面题目/rail 仍要能点
+     （见 PaperBrowsePage.tsx 里这枚 div 的注释）。关闭抽屉走把手/Esc。 */
   .paper-browse-lecture-backdrop {
     display: block;
     position: fixed;
@@ -321,7 +335,7 @@
     padding: 0;
     background: rgba(30, 30, 28, 0.18);
     z-index: 29;
-    cursor: pointer;
+    pointer-events: none;
   }
 }
 
