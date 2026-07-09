@@ -309,3 +309,44 @@ DEV 把窄屏抽屉 backdrop 从「全屏可点关闭 `<button>`」改为「`poi
 合并前须闭合一条 Follow-up Gate：窄屏抽屉点题联动 + 触屏 + 桌面五题型逐字比对 QA 截图落盘
 （plan 验收明列，主代理已认领 Playwright 补验）。蒙层 `pointer-events:none` 取舍裁定**正确**。
 点题×scrollspy 竞态根因已定位，建议刀 3 收拾，不阻断本刀。
+
+## 刀 3 CR
+
+独立冷读 CR（fresh context，未参与实现）。Diff `7d36bdc..462aa5c`（单 commit），worktree `agent-af93cd5fb58cb3a1d`。
+
+### Changed Scope（越界检查：通过）
+改动 11 文件，全部落在白名单内；Forbidden 面零触碰（探针 `server/` `shared-ui/papersurface` `paperIntelligence.css` `PaperIntelligencePaperSurfaceHarness.tsx` 五面板/adapter `draft-paper/my-space/admin` `domain` `print/export` 均为 NONE）。`QuestionGroupDetailView.tsx`（灰区）仅加了一个新回调 prop + 链接形态 + onClick 拦截，未动数据获取/状态契约。harness css 仅样式抽共享（加 @import + 删被搬走的块），无其他改动。
+
+### PA-lite 降档复核：成立
+- ① 方向 owner High 档已拍板 — 与 plan「方向」节一致。
+- ② 完全可逆 — server 零改动（diff 无 `server/**`），`buildPaperBrowseLectureHref` 是纯前端 string transform，老解析页 URL 直达保留（popstate reload 兜底已 QA 证明其独立路由能接管），回滚=revert 前端 diff。成立。
+- ③ 无 schema/数据契约触碰 — 确认。
+- verify 断言迁移未丢 MF 意图 — `verify-classic-retire-2.mjs` 新断言仍钉死 `!onOpenPaperBrowse(selectedDetail)`（且带实参，比原断言更严）并要求走 `buildPaperBrowseLectureHref` href，「看解析≠看整卷」原 MF-1 完整保留。
+- 不可逆面复核：URL 契约是对外形态，但本刀对 `?view=paper-browse` 只做**加参**（questionId/lecture 可选），向后兼容，无害。降档判断无被低估的不可逆面。
+
+### Findings
+
+**Must Fix：无。**
+
+**Should Watch（均不阻塞本刀合并）**
+1. **verify-c6a3 acceptance line 失真（pre-existing）**：plan 验收列了「verify-c6a3-reading-analysis-bridge.mjs 绿」，但该脚本在**基线 7d36bdc 上已同样红**（断言 grep 卡片里的 `阅读解析` 字面量，卡片早在 03158a8 就改用动态 `paperSurfaceLabel`），且它**未注册进 verify-ci**（CI 从不跑它，一直静默腐烂）。本刀的 href 迁移**未**触发任何 c6a3 断言失配（"consumes API-provided PaperSurface href" 断言仍 grep `group.paperSurfaceHref`，仍在），所以 DEV 无需按 plan 的条件窄改它——非本刀回归。建议单独一个 tiny fix 更新/恢复这条 stale 断言并把 c6a3 注册进 verify-ci。
+2. **dao3-* 截图缺失 + 窄屏/触屏未验**：qa/ 目录只有 dao2-*，无 dao3-*（sandbox `save_to_disk` 无路径，DEV 如实记录）；窄屏抽屉 + 触屏因 `resize_window` 无效未能真点。owner PO QA 需覆盖窄屏抽屉空态新文案 + 触屏点题联动。
+3. **七选五深链不展开手风琴（DEV blind spot #3）**：`selectLectureQuestion` 对 sevenChoices 只 set `lectureSelection`，不加入 `openSevenChoiceQuestionIds`。深链一个七选五题 → 预选高亮就位但对应 chain 手风琴仍收起，右栏该题解析需再点一下才可见——对该题型部分未满足"右栏为其解析"。功能可达，非数据/正确性缺陷。owner 定是否要自动展开。
+4. **深链亚 100ms 竞态仅源码级验证（DEV blind spot #1/#2）**：`suppressScrollspyClear`（700ms）+ real-group 守卫 + 迟到选题落地前二次抑制的机制读来自洽，正常流已真点 QA；毫秒级竞态窗口本身未端到端复现。机制稳健，接受。
+5. **lecture 态无显式选题时 focusGroupId 留 stale**：URL-sync 在 `!lectureSelection` 时不改 focusGroupId，刷新会锚到略偏的组。DEV 已在 qa-notes 声明为设计内，不影响验收标准。轻微。
+
+### Self-Review Blind Spots（供后续 Big CR 优先复查）
+- **CSS 级联**：抽出的规则现经 `@import` 进入两个大 stylesheet 顶部（原先在文件中后段）。我逐值比对了 color-0 的 clue-mark（`--seven-mark-*`+`--seven-border` 与 option-card 的 `--seven-soft/strong/border` 正确分离，零视觉变化），并确认这些选择器在各自 stylesheet 内是唯一定义（源序前移无级联风险），但**未穷举** color 1–4 的每个值、也未穷举两个大 css 里是否存在等特异性、依赖"后出现"的隐藏覆盖规则。
+- **popstate 同页边界**：paper-browse↔paper-browse 相邻历史条目（不同 lecture/questionId）若不经卸载 popstate，`lectureOpen`（lazy init 仅 mount 生效）与 `deepLinkQuestionAppliedRef` 不会重置 → UI 与 URL 失同步。当前入口点（详情/搜索卡→paper-browse，中间必经 workbench/detail 卸载）**产生不了**相邻 paper-browse 条目，故实际不可达；但未来若新增"paper-browse 内直接换卷/换题"的 push 入口会踩到。
+- 未跑完整 `pnpm verify:all`/全 CI（只重跑了本刀相关且注册在 verify-ci 的两个 gate + tsc）。
+
+### Failure / Attack Angle
+- 若未来有人在 paper-browse 页内新增一个 pushState 入口（换卷/换题不卸载组件），`lectureOpen` lazy-init 只在 mount 生效的假设会破，popstate 回该条目时姿态与 URL 脱节——现在无 Must Fix 是因为入口链恰好挡住了它。
+- source-grep 型断言（本刀新增 13 条大多是形状断言）无法捕获逻辑回归；本刀的行为正确性靠 DEV 内联真点 QA + 我的源码判读兜底，注册 gate 里没有一条真跑浏览器。
+- c6a3 静默红是本仓"unregistered script 从不进 CI"陷阱的活样本：任何后续人若照抄"acceptance 说要绿"而不查注册状态，会被误导。
+
+### Residual Risk
+低。核心正确性（popstate 四路由同步无环、reload 兜底触发面正确、deep-link 预选与 clear-effect 抑制协同、入口两路 href/SPA 带态一致、守卫与 member 可见性无泄漏、CSS 抽取值保真）均已判读通过；剩余风险集中在未真验的窄屏/触屏与七选五深链手风琴 UX，属 owner PO QA 与后续小刀范围。
+
+### Recommendation
+**APPROVE with should-fix**（无 Must Fix，可合并）。5 条 Should Watch 均不阻塞；其中 #1（c6a3 stale 断言 + 未注册 CI）和 #2（owner 窄屏/触屏 PO QA）建议尽快另刀处置。
