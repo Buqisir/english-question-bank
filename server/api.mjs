@@ -1584,7 +1584,16 @@ function selectQuestionGroupCards(db, whereClause = '', params = [], draftContex
           tags
         FROM v_question_group_cards
         ${whereClause}
-        ORDER BY year DESC, region, paper_name, section, title
+        -- Within one paper, order groups by their true paper position
+        -- (question_groups.display_order). The previous ORDER BY sorted the
+        -- section TEXT, and Chinese numerals sort by codepoint (三 < 二), so
+        -- 第三部分 came before 第二部分 in the find-page paper directory.
+        ORDER BY
+          year DESC,
+          region,
+          paper_name,
+          (SELECT qg.display_order FROM question_groups qg WHERE qg.id = v_question_group_cards.id),
+          title
       `,
     )
     .all(...params)
