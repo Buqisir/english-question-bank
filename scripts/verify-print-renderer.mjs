@@ -294,6 +294,70 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
     assert('cloze real blank count is 15 (2026-07-08 measured)', countBlanks(realItems[1].__materialText) === 15, `got ${countBlanks(realItems[1].__materialText)}`)
     assert('grammar_cloze real blank count is 10 (2026-07-08 measured)', countBlanks(realItems[2].__materialText) === 10, `got ${countBlanks(realItems[2].__materialText)}`)
 
+    // --- Test 8b: real paper-2026-i reading groups — passage-letter row
+    // (paper-passage-letter cut, docs/cuts/paper-passage-letter/plan.md
+    // decision 2). No sectionTitle is supplied on either the item or the
+    // block — DEV empirically confirmed (real server, real draft-paper +
+    // basket export calls) that both current caller flows leave
+    // sectionTitle unable to carry a trailing A-D letter by default, so
+    // the `detail.title` fallback ("Reading A") is what actually fires in
+    // practice; this fixture matches that real-world shape instead of a
+    // synthetic sectionTitle that would mask the fallback not firing. ---
+    console.log('\nTest 8b: Real paper-2026-i reading groups — passage-letter row')
+    {
+      const readingLetterSpecs = [
+        ['group-2026-i-reading-a', 'A'],
+        ['group-2026-i-reading-b', 'B'],
+        ['group-2026-i-reading-c', 'C'],
+        ['group-2026-i-reading-d', 'D'],
+      ]
+      for (const [groupId, letter] of readingLetterSpecs) {
+        const group = groups[groupId]
+        const readingItem = {
+          detail: {
+            id: groupId,
+            title: group.title,
+            groupType: 'reading',
+            passage: { materialText: paperAssetParagraphText(group) },
+            questions: [],
+          },
+          score: 2.5,
+        }
+        const readingHtml = buildPrintHtml({
+          title: '2026 新课标 I',
+          versionType: 'student',
+          printStyle: 'exam',
+          items: [readingItem],
+          blocks: [{ type: 'question_group', questionGroupId: groupId, score: 2.5 }],
+          questionNumberStart: 1,
+        })
+        assert(
+          `${groupId}: passage-letter row "${letter}" present before the passage (real asset, no sectionTitle supplied — detail.title fallback)`,
+          readingHtml.includes(`<div class="passage-letter">${letter}</div><div class="passage">`),
+          readingHtml.slice(readingHtml.indexOf('<section class="question-group">'), readingHtml.indexOf('<section class="question-group">') + 200),
+        )
+      }
+      // Non-reading real groups (already built above as realItems) must NOT
+      // gain a passage-letter row — their detail.title ('完形填空' /
+      // '语法填空' / the seven_choices group's Chinese title) never ends in
+      // A-D, so the same detail.title fallback correctly stays inert.
+      assert(
+        'non-reading real groups (seven_choices/cloze/grammar_cloze) never render .passage-letter',
+        !html.includes('class="passage-letter"'),
+        html.includes('class="passage-letter"') ? 'found an unexpected passage-letter row' : '',
+      )
+      // CSS contract: 10.5pt bold centered (standard §83-84 / print-renderer
+      // body is already 10.5pt, so no separate font-size override needed).
+      const passageLetterCssRule = readingLetterSpecs.length > 0
+        ? buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).match(/\.passage-letter \{[^}]*\}/)?.[0] || ''
+        : ''
+      assert(
+        '.passage-letter CSS rule is bold + centered (standard §83-84)',
+        /font-weight:\s*bold/.test(passageLetterCssRule) && /text-align:\s*center/.test(passageLetterCssRule),
+        passageLetterCssRule,
+      )
+    }
+
     // --- Test 9: real-PDF byte-level smoke from the REAL payload HTML ---
     console.log('\nTest 9: Real paper-2026-i payload → Vivliostyle PDF byte smoke')
     const vivliostylePaths = [

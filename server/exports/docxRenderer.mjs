@@ -617,8 +617,15 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
 
-        // Extract passage label (A/B/C/D) from sectionTitle if possible
-        const sectionTitle = block.sectionTitle || item.sectionTitle || ''
+        // Extract passage label (A/B/C/D) from sectionTitle if possible.
+        // paper-passage-letter (docs/cuts/paper-passage-letter/plan.md
+        // decision 2): DEV empirically confirmed neither current caller
+        // (draft-paper hardcodes '', the classic basket sets the Chinese
+        // groupTypeLabel) ever leaves sectionTitle ending in A-D, so the
+        // `|| detail.title` fallback ("Reading A") is what actually
+        // supplies the letter in practice. print-renderer.mjs gets the
+        // identical fallback in the same cut so DOCX and PDF stay in parity.
+        const sectionTitle = block.sectionTitle || item.sectionTitle || detail.title || ''
         const passageLabelMatch = sectionTitle.match(/([A-D])$/)
         const passageLabel = passageLabelMatch ? passageLabelMatch[1] : ''
 

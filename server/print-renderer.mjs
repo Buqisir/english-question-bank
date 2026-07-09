@@ -146,10 +146,30 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passage = (detail.passage.materialText || detail.passage.summary || '').trim()
 
+        // paper-passage-letter (docs/cuts/paper-passage-letter/plan.md
+        // decision 2): same passage-label derivation docxRenderer.mjs
+        // uses for parity, `block.sectionTitle || item.sectionTitle`,
+        // plus a `|| detail.title` fallback. DEV empirically confirmed
+        // (real server, real draft-paper + basket export calls) that
+        // both current caller flows leave sectionTitle unable to carry
+        // a trailing A-D letter — draft-paper hardcodes '', the classic
+        // basket sets the Chinese groupTypeLabel — so without the
+        // fallback this never fires for reading groups in practice.
+        // detail.title ("Reading A") is what actually supplies the
+        // letter. docxRenderer.mjs gets the identical one-line fallback
+        // in the same cut so DOCX and PDF stay in parity.
+        const sectionTitle = block.sectionTitle || item.sectionTitle || detail.title || ''
+        const passageLabelMatch = sectionTitle.match(/([A-D])$/)
+        const passageLabel = passageLabelMatch ? passageLabelMatch[1] : ''
+
         let groupHtml = '<section class="question-group">'
 
         if (!isExam) {
           groupHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
+        }
+
+        if (passageLabel) {
+          groupHtml += `<div class="passage-letter">${escapeHtml(passageLabel)}</div>`
         }
 
         if (passage) {
@@ -298,6 +318,20 @@ body {
   margin-bottom: 0.5em;
   border-bottom: 1px solid #ddd;
   padding-bottom: 0.3em;
+}
+
+/* standard §83-84: 篇章标题 A/B/C/D — Times New Roman Bold 10.5pt
+   (不放大 — body is already 10.5pt, so no separate font-size here),
+   centered, one blank line above and below. One blank line at this
+   line-height is paperFontSizePt * paperLineHeight (10.5pt * 1.714 —
+   the same fixed 18pt baseline standard §3 mandates), matching the
+   screen PaperSurface's --ps-passage-letter margin (paper-passage-letter
+   cut, both faces derive from the same tokens.mjs values). */
+.passage-letter {
+  font-weight: bold;
+  text-align: center;
+  break-after: avoid;
+  margin: ${(paperSurfaceTokens.paperFontSizePt * paperSurfaceTokens.paperLineHeight).toFixed(2)}pt 0;
 }
 
 .passage {
