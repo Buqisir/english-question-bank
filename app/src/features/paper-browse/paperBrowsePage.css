@@ -109,6 +109,81 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  /* 刀 2 修复轮 ②: 七选五衔接句高亮覆盖层的绝对定位锚点。整卷页是
+     document 级滚动（这个容器本身不滚动），useSevenChoicesPaperHighlights
+     算的是 viewport-relative 差值，与容器是否自身滚动无关——只要覆盖层是
+     这个容器的直接子元素、容器建立 position:relative，坐标就能对齐。 */
+  position: relative;
+}
+
+/*
+ * 刀 2 修复轮 ②: 七选五原文衔接句高亮 —— 样式从
+ * paperIntelligencePaperSurfaceHarness.css 的 .pi-seven-blank-overlay /
+ * .pi-seven-clue-mark* 原样复制改名（那份 css 是 Forbidden 文件，不能
+ * import 也不能改；useSevenChoicesPaperHighlights hook 本身只 import 不改，
+ * 见 PaperBrowsePage.tsx 里的调用）。色值与 data-seven-color 分档逻辑与解析页
+ * harness 保持一致，換皮不换配方，讲评栏里的 SevenChoicesAnalysisPanel 选项
+ * 卡同款配色不受影响（那是另一份未被这次改动触碰的样式）。
+ */
+.paper-browse-seven-blank-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.paper-browse-seven-clue-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 3px;
+  background: var(--seven-mark-topic, rgba(231, 171, 86, 0.18));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.paper-browse-seven-clue-mark--signal {
+  background: var(--seven-mark-signal, rgba(231, 171, 86, 0.34));
+  box-shadow: inset 0 -2px 0 var(--seven-border, rgba(122, 106, 88, 0.45));
+}
+
+.paper-browse-seven-clue-mark--context {
+  background: var(--seven-mark-context, rgba(231, 171, 86, 0.12));
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='0'] {
+  --seven-mark-topic: rgba(231, 171, 86, 0.18);
+  --seven-mark-signal: rgba(231, 171, 86, 0.34);
+  --seven-mark-context: rgba(231, 171, 86, 0.11);
+  --seven-border: rgba(173, 113, 41, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='1'] {
+  --seven-mark-topic: rgba(103, 174, 150, 0.18);
+  --seven-mark-signal: rgba(103, 174, 150, 0.34);
+  --seven-mark-context: rgba(103, 174, 150, 0.11);
+  --seven-border: rgba(50, 128, 102, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='2'] {
+  --seven-mark-topic: rgba(123, 151, 210, 0.18);
+  --seven-mark-signal: rgba(123, 151, 210, 0.34);
+  --seven-mark-context: rgba(123, 151, 210, 0.11);
+  --seven-border: rgba(76, 101, 166, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='3'] {
+  --seven-mark-topic: rgba(192, 130, 175, 0.18);
+  --seven-mark-signal: rgba(192, 130, 175, 0.34);
+  --seven-mark-context: rgba(192, 130, 175, 0.11);
+  --seven-border: rgba(139, 79, 123, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='4'] {
+  --seven-mark-topic: rgba(225, 111, 86, 0.18);
+  --seven-mark-signal: rgba(225, 111, 86, 0.34);
+  --seven-mark-context: rgba(225, 111, 86, 0.11);
+  --seven-border: rgba(176, 72, 54, 0.48);
 }
 
 .paper-browse-part-heading {
@@ -284,15 +359,27 @@
   color: #4a4438;
 }
 
-.paper-browse-deep-link {
-  align-self: flex-start;
-  font-size: 13px;
-  color: #2c6e56;
-  text-decoration: none;
+/* ─── 讲评栏身体 — 解析面板容器（刀 2）───
+ *
+ * 五个面板（pi-cloze、pi-gf、pi-asset、pi-seven、pi-writing 各自的类名
+ * 前缀，来自 paperIntelligence.css，随面板 import 生效）默认按更宽的
+ * 解析页/harness 栏位排版；这里只用容器选择器把它们收进讲评栏的 380px
+ * （小于 1200px 视口的抽屉里是 min(380px, 92vw)）宽度内，不改 pi css
+ * 本身。逐面板过一遍见 docs/cuts/flow-panel/qa/。
+ */
+.paper-browse-lecture-analysis {
+  min-width: 0;
+  width: 100%;
 }
 
-.paper-browse-deep-link:hover {
-  text-decoration: underline;
+.paper-browse-lecture-analysis * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.paper-browse-lecture-analysis table {
+  display: block;
+  overflow-x: auto;
 }
 
 .paper-browse-lecture-backdrop {
@@ -313,6 +400,8 @@
     overflow-y: auto;
   }
 
+  /* 刀 2: 纯视觉暗化，不拦截点击 —— 讲评态下卷面题目/rail 仍要能点
+     （见 PaperBrowsePage.tsx 里这枚 div 的注释）。关闭抽屉走把手/Esc。 */
   .paper-browse-lecture-backdrop {
     display: block;
     position: fixed;
@@ -321,7 +410,7 @@
     padding: 0;
     background: rgba(30, 30, 28, 0.18);
     z-index: 29;
-    cursor: pointer;
+    pointer-events: none;
   }
 }
 
@@ -335,5 +424,44 @@
     flex-direction: row;
     flex-wrap: wrap;
     max-height: none;
+  }
+}
+
+/* ─── 刀 2 修复轮 ③: 阅读跨栏证据动线 ───
+ *
+ * `PaperIntelligenceEvidenceLine`（import-only, geometry+组件零修改）emits
+ * unnamespaced `.pi-line-overlay` / `.pi-line-path` classes. The BASE
+ * overlay/path/animation rules already come for free — `paperIntelligence.css`
+ * (already imported above for the five解析面板) declares them unscoped
+ * (paperIntelligence.css:623-712), so this page inherits the green dashed
+ * line + draw-in animation without any duplication here.
+ *
+ * What's missing: the support/trap stroke-color palette
+ * (Issue #21-C3.6). That override ONLY exists scoped to
+ * `.pi-ps-harness-shell` inside the Forbidden
+ * `paperIntelligencePaperSurfaceHarness.css` (grep-confirmed — not present
+ * in paperIntelligence.css). Hand-copied here, renamed to scope under
+ * `.paper-browse-shell` instead of `.pi-ps-harness-shell`, source:
+ * paperIntelligencePaperSurfaceHarness.css:684-691 (read-only reference,
+ * not imported, not modified).
+ */
+.paper-browse-shell .pi-line-path--support,
+.paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'] {
+  stroke: rgba(16, 185, 129, 0.65);
+}
+
+.paper-browse-shell .pi-line-path--trap,
+.paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'] {
+  stroke: rgba(245, 158, 11, 0.85);
+}
+
+/* <1200px: 讲评栏离开文档流变成 `position:fixed` 抽屉，叠在卷面上而不是
+ * 与之并排（见上方讲评栏抽屉断点）——跨栏几何在这个断点下失去意义（source
+ * 锚点漂在 fixed 抽屉里，target 锚点可能滚出视口之外）。owner 授权的取舍：
+ * 收紧到 ≥1200px 常驻三栏态才画线，同断点也与讲评栏本身从"并排列"变成
+ * "浮层"的断点一致。 */
+@media (max-width: 1199.98px) {
+  .paper-browse-shell .pi-line-overlay {
+    display: none;
   }
 }

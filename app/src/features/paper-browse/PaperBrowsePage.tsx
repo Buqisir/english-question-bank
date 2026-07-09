@@ -1,5 +1,5 @@
 /**
- * PaperBrowsePage — 刀B 整卷预览页 v1.
+ * PaperBrowsePage — 刀B 整卷预览页 v1 → flow-panel 刀 2（点题联动 + 五解析面板搬家）。
  *
  * Route: `?view=paper-browse&paperId=<id>[&focusGroupId=<gid>]`.
  *
@@ -8,9 +8,39 @@
  * per-groupType adapters the Paper Intelligence harness uses
  * (`buildPaperAssetSurfaceModel` / `buildSevenChoicesSurfaceModel` /
  * `buildClozePaperView` / `buildGrammarFillPaperView` /
- * `buildWritingPaperView`). This page is READ-ONLY:
- *   - `onFocusIntent` is a no-op, `lectureFocus` is always `null` — no
- *     evidence/annotation interaction, no active-question highlight.
+ * `buildWritingPaperView`).
+ *
+ * 挑题态（讲评关）is READ-ONLY, unchanged from 刀 1: every group's
+ * `onFocusIntent` is a no-op, `lectureFocus` is always `null` — zero
+ * evidence/annotation interaction, zero new network requests.
+ *
+ * 讲评态（讲评开）adds real point-and-focus wiring (刀 2), reusing the
+ * exact five解析面板 + adapters the Paper Intelligence harness
+ * (`PaperIntelligencePaperSurfaceHarness.tsx`, read-only reference) uses:
+ *   - Clicking a question on any group's PaperSurface fires
+ *     `onFocusIntent('request-lecture-focus')`; the page becomes the
+ *     single writer of `lectureSelection` (which group + question + seeded
+ *     evidence/option is active) and makes that group the 讲评栏 target —
+ *     including cross-group clicks.
+ *   - The 讲评栏 body renders the解析面板 matching the active group's
+ *     `groupType` (SevenChoicesAnalysisPanel / PaperAssetAnalysisPanel /
+ *     ClozeAnalysisPanel / GrammarFillAnalysisPanel / WritingAnalysisPanel),
+ *     fed by the SAME adapters the解析页 harness uses — "整卷看的和单个题组
+ *     点进去看的是一个东西，只统一了宽度" (owner).
+ *   - `cloze-analysis-v1` / `grammar-fill-analysis-v1` / `writing-analysis-v1`
+ *     are fetched once, lazily, the first time 讲评态 opens (reading /
+ *     sevenChoices analyses are already fetched unconditionally at page
+ *     load, unchanged from 刀 1). A missing/failed analysis degrades that
+ *     group's 讲评栏 to "解析未发布" without crashing or blocking other
+ *     groups; the group's卷面 PaperSurface mount keeps rendering its plain
+ *     (non-analysis) view.
+ *   - Panel-triggered `onSelectOption` / `onSelectEvidence` write back into
+ *     `lectureSelection`, which becomes the active group's `lectureFocus`
+ *     prop — PaperSurface paints the matching evidence highlight itself.
+ *   - When 讲评态 is closed, or for any group that isn't the current 讲评栏
+ *     target, `onFocusIntent`/`lectureFocus` revert to the 刀 1 no-op/null
+ *     shape — no cross-group highlight leakage, and 挑题态 stays exactly
+ *     as before (`onFocusIntent={() => {}}`, `lectureFocus={null}`).
  *   - PaperSurface itself is untouched (zero modification); all card
  *     chrome and the 加入草稿卷 action bar live in this page.
  *   - Unknown/unsupported block or group types render a placeholder row
@@ -51,14 +81,38 @@ import {
   buildWritingPaperView,
   type WritingPaperViewModel,
 } from '../paper-intelligence/writingPaperViewAdapter.ts'
+import {
+  buildClozeAnalysisSurfaceModel,
+  type ClozeAnalysisSurfaceModel,
+  type ReviewedClozeAnalysisV1,
+} from '../paper-intelligence/clozeAnalysisSurfaceAdapter.ts'
+import {
+  buildGrammarFillAnalysisSurfaceModel,
+  type GrammarFillAnalysisSurfaceModel,
+  type ReviewedGrammarFillAnalysisV1,
+} from '../paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts'
 import { findWritingBlockRange } from '../paper-intelligence/writingPageModel.mjs'
+import { useSevenChoicesPaperHighlights } from '../paper-intelligence/useSevenChoicesPaperHighlights.ts'
+import { SevenChoicesAnalysisPanel } from '../paper-intelligence/SevenChoicesAnalysisPanel'
+import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysisPanel'
+import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
+import { GrammarFillAnalysisPanel } from '../paper-intelligence/GrammarFillAnalysisPanel'
+import { WritingAnalysisPanel } from '../paper-intelligence/WritingAnalysisPanel'
+// 刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness 同款
+// 组件（见 PaperIntelligencePaperSurfaceHarness.tsx ~1567 行的接线），零
+// 修改。只对阅读题组接入（卷面显影原则：完形/语法填空原位型只给证据高亮，
+// 七选五混血用衔接句高亮，均不做动线——见 plan.md「卷面显影原则」）。
+import { PaperIntelligenceEvidenceLine } from '../paper-intelligence/preview/paperIntelligenceEvidenceLine'
+import '../paper-intelligence/paperIntelligence.css'
 import type {
   AnswerKeyEntry,
   PaperAssetV1,
   PaperContentBlock,
   PaperContentGroup,
+  WritingAnalysis,
 } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
+import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -69,6 +123,29 @@ type GroupModel =
   | { kind: 'writing'; model: WritingPaperViewModel }
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
+
+// 讲评态按需补拉的 cloze/grammarFill/writing 解析——reading/sevenChoices 的
+// 解析已在挑题态初次加载时无条件拉取（刀 1 遗留行为，不变）。'unavailable'
+// = 拉取过但没有（404/解析失败），讲评栏据此显「解析未发布」而不是一直显
+// 「加载中」。
+type LectureAnalysisEntry =
+  | { kind: 'cloze'; model: ClozeAnalysisSurfaceModel }
+  | { kind: 'grammarFill'; model: GrammarFillAnalysisSurfaceModel }
+  | { kind: 'writing'; analysis: WritingAnalysis }
+  | { kind: 'unavailable' }
+
+type WritingAnalysisFilePayload = {
+  groups?: Record<string, { writing?: WritingAnalysis } | undefined>
+}
+
+// 讲评态下的显式点题选择——哪个题组的哪道题当前在讲评栏里，以及种下的
+// 证据/选项高亮。清空(null)时讲评栏跟随 scrollspy 显示当前题组的组级概览。
+type LectureSelection = {
+  groupId: string
+  questionId: string
+  evidenceId: string | null
+  optionLabel: string | null
+}
 
 export type PaperBrowsePageProps = {
   paperId: string
@@ -128,6 +205,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   } = props
 
   const [asset, setAsset] = useState<PaperAssetV1 | null>(null)
+  const [assetBase, setAssetBase] = useState<string | null>(null)
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -135,9 +213,24 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 讲评态开关 — 挑题态(默认收起)/讲评态(展开). State only, per 刀 1 契约;
   // URL 承载留给刀 3。
   const [lectureOpen, setLectureOpen] = useState(false)
+  // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
+  const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
+    Record<string, LectureAnalysisEntry>
+  >({})
+  const [lectureAnalysisFetched, setLectureAnalysisFetched] = useState(false)
+  const [lectureAnalysisLoading, setLectureAnalysisLoading] = useState(false)
+  // 刀 2: 讲评态下的显式点题选择；null = 跟随 scrollspy 显示组级概览。
+  const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
+  const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
   const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
+  // 刀 2 修复轮 ③: 阅读跨栏证据动线的容器/左栏/右栏 refs —— shellRef 是
+  // `.paper-browse-shell`（已是 position:relative，卷面+讲评栏共同的祖先，
+  // 镜像 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套）。
+  // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
+  const shellRef = useRef<HTMLDivElement | null>(null)
+  const rightPanelRef = useRef<HTMLElement | null>(null)
 
   // CR should-fix（同 my-space 先例）：讲评栏开着时文档级 Esc 关闭并还焦
   // 到把手，补齐窄屏抽屉的模态语义。
@@ -160,7 +253,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setLoading(true)
     setError(null)
     setAsset(null)
+    setAssetBase(null)
     setGroupModels({})
+    setLectureAnalysisByGroupId({})
+    setLectureAnalysisFetched(false)
+    setLectureAnalysisLoading(false)
+    setLectureSelection(null)
+    setOpenSevenChoiceQuestionIds([])
 
     async function load(): Promise<void> {
       try {
@@ -257,6 +356,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
         if (cancelled) return
         setAsset(loadedAsset)
+        setAssetBase(resolvedBase)
         setGroupModels(models)
         setLoading(false)
       } catch (e) {
@@ -271,6 +371,103 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       cancelled = true
     }
   }, [paperId])
+
+  // 刀 2: 讲评态首次打开时按需补拉本卷缺的 cloze/grammar-fill/writing 解析
+  // （一次性；reading/sevenChoices 已在挑题态无条件拉取，不重复）。挑题态
+  // 全程不进这个 effect —— 零新增请求。
+  useEffect(() => {
+    if (!lectureOpen) return
+    if (lectureAnalysisFetched) return
+    if (!asset || !assetBase) return
+    let cancelled = false
+    setLectureAnalysisLoading(true)
+
+    async function loadLectureAnalyses(): Promise<void> {
+      const loadedAsset = asset as PaperAssetV1
+      const base = assetBase as string
+      const groupBlocks = loadedAsset.content.blocks.filter(
+        (block): block is Extract<PaperContentBlock, { type: 'group' }> => block.type === 'group',
+      )
+      const groupIdsByType = (groupType: string): string[] =>
+        groupBlocks
+          .map((block) => block.groupId)
+          .filter((groupId) => loadedAsset.content.groups[groupId]?.groupType === groupType)
+
+      const entries: Record<string, LectureAnalysisEntry> = {}
+
+      const clozeGroupIds = groupIdsByType('cloze')
+      if (clozeGroupIds.length > 0) {
+        try {
+          const res = await fetch(`${base}/analyses/cloze-analysis-v1.json`)
+          const raw = res.ok ? ((await res.json()) as ReviewedClozeAnalysisV1) : null
+          for (const groupId of clozeGroupIds) {
+            if (!raw) {
+              entries[groupId] = { kind: 'unavailable' }
+              continue
+            }
+            try {
+              entries[groupId] = {
+                kind: 'cloze',
+                model: buildClozeAnalysisSurfaceModel({ asset: loadedAsset, analysis: raw, groupId }),
+              }
+            } catch {
+              entries[groupId] = { kind: 'unavailable' }
+            }
+          }
+        } catch {
+          for (const groupId of clozeGroupIds) entries[groupId] = { kind: 'unavailable' }
+        }
+      }
+
+      const grammarFillGroupIds = groupIdsByType('grammarFill')
+      if (grammarFillGroupIds.length > 0) {
+        try {
+          const res = await fetch(`${base}/analyses/grammar-fill-analysis-v1.json`)
+          const raw = res.ok ? ((await res.json()) as ReviewedGrammarFillAnalysisV1) : null
+          for (const groupId of grammarFillGroupIds) {
+            if (!raw) {
+              entries[groupId] = { kind: 'unavailable' }
+              continue
+            }
+            try {
+              entries[groupId] = {
+                kind: 'grammarFill',
+                model: buildGrammarFillAnalysisSurfaceModel({ asset: loadedAsset, analysis: raw, groupId }),
+              }
+            } catch {
+              entries[groupId] = { kind: 'unavailable' }
+            }
+          }
+        } catch {
+          for (const groupId of grammarFillGroupIds) entries[groupId] = { kind: 'unavailable' }
+        }
+      }
+
+      const writingGroupIds = groupIdsByType('writing')
+      if (writingGroupIds.length > 0) {
+        try {
+          const res = await fetch(`${base}/analyses/writing-analysis-v1.json`)
+          const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
+          for (const groupId of writingGroupIds) {
+            const writing = raw?.groups?.[groupId]?.writing
+            entries[groupId] = writing ? { kind: 'writing', analysis: writing } : { kind: 'unavailable' }
+          }
+        } catch {
+          for (const groupId of writingGroupIds) entries[groupId] = { kind: 'unavailable' }
+        }
+      }
+
+      if (cancelled) return
+      setLectureAnalysisByGroupId(entries)
+      setLectureAnalysisFetched(true)
+      setLectureAnalysisLoading(false)
+    }
+
+    void loadLectureAnalyses()
+    return (): void => {
+      cancelled = true
+    }
+  }, [lectureOpen, lectureAnalysisFetched, asset, assetBase])
 
   // Scroll to the requested group once the page has finished loading.
   useEffect(() => {
@@ -348,6 +545,37 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return (): void => observer.disconnect()
   }, [asset, loading])
 
+  // 刀 2: 无点选时右栏跟随 scrollspy 显示组级概览；点题后进题级
+  // （见 selectLectureQuestion）。滚动离开当前选中题所在的题组时清空显式
+  // 选择，讲评栏回落到新滚到题组的组级概览 —— 不让上一题的选中态跨组残留。
+  useEffect(() => {
+    setLectureSelection((prev) => (prev && prev.groupId !== activeAnchor ? null : prev))
+  }, [activeAnchor])
+
+  // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
+  // 镜像 PaperIntelligencePaperSurfaceHarness.tsx 的 "Auto-scroll active
+  // evidence into the PaperSurface scroller" effect（activeEvidenceId 变化
+  // 即滚动 `[data-paper-evidence-id]` 锚点入视野）。只对阅读组做这个动线：
+  // 完形/语法填空是"原位型"，空即位置，只给证据高亮不做滚动（见 plan
+  // 「卷面显影原则」）；七选五"混血"用衔接句高亮（下方另一处修复），同样
+  // 不做阅读式动线。
+  useEffect(() => {
+    if (!lectureOpen) return
+    if (!lectureSelection?.evidenceId) return
+    if (groupModels[lectureSelection.groupId]?.kind !== 'reading') return
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    const target = scroller.querySelector<HTMLElement>(
+      `[data-paper-evidence-id="${cssAttr(lectureSelection.evidenceId)}"]`,
+    )
+    if (!target) return
+    const reduced =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduced ? 'auto' : 'smooth' })
+  }, [lectureOpen, lectureSelection, groupModels])
+
   const railItems = useMemo(() => {
     if (!asset) return []
     const items: Array<{
@@ -385,6 +613,63 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return items
   }, [asset])
 
+  // 刀 2: 讲评栏的目标题组 —— 显式点题选中的题组优先，否则退回 scrollspy
+  // 当前锚点(仅当锚点本身就是一个题组 id 时)。
+  const panelGroupId = useMemo(() => {
+    if (lectureSelection) return lectureSelection.groupId
+    if (activeAnchor && asset?.content.groups[activeAnchor]) return activeAnchor
+    return null
+  }, [lectureSelection, activeAnchor, asset])
+
+  // 刀 2: 当前显式选中题的 lectureFocus —— 只喂给 panelGroupId 对应那组的
+  // PaperSurface 挂载，其余题组永远拿 null（讲评开着也不跨组高亮）。
+  const lectureFocusForSelection: LectureFocus | null = useMemo(() => {
+    if (!lectureSelection) return null
+    return lectureSelection.evidenceId
+      ? {
+          kind: 'question',
+          questionId: lectureSelection.questionId,
+          activeEvidenceId: lectureSelection.evidenceId,
+        }
+      : { kind: 'question', questionId: lectureSelection.questionId }
+  }, [lectureSelection])
+
+  // 刀 2 修复轮 ②: 七选五原文高亮 —— 讲评栏当前面板组是七选五时接入解析页
+  // harness 同款 useSevenChoicesPaperHighlights，随链条手风琴（
+  // openSevenChoiceQuestionIds）在整卷页卷面容器上亮衔接句。scroller ref
+  // 用整卷页卷面容器（`scrollerRef` → `.paper-browse-content`），不是某一
+  // 题组的局部容器 —— 该 hook 的坐标算法基于 rect 差值，document 级滚动
+  // 下与题组容器同款效果（两者都是 viewport-relative，差值不受页面滚动
+  // 影响，只随 hook 自身的 resize/effect-dep 重算刷新，见 hook 内部）。
+  const panelGroupModel = panelGroupId ? groupModels[panelGroupId] : undefined
+  const sevenChoiceOverlay = useSevenChoicesPaperHighlights({
+    enabled: lectureOpen && panelGroupModel?.kind === 'sevenChoices',
+    leftScrollerRef: scrollerRef,
+    openQuestionIds: openSevenChoiceQuestionIds,
+    chains: panelGroupModel?.kind === 'sevenChoices' ? panelGroupModel.model.chains : [],
+  })
+
+  // 刀 2 修复轮 ③: 阅读跨栏证据动线的选中态 —— 只在讲评开+当前讲评栏目标
+  // 题组是阅读题组时给非空值；activeEvidenceKind 镜像 harness「Derive
+  // activeEvidenceKind」的 paper-asset 分支（evidenceKindById 查表），支撑
+  // /干扰两色分档在浏览器侧与解析页一致。其余题型（完形/语法填空/七选五/
+  // 写作）永远拿 questionId=null，PaperIntelligenceEvidenceLine 内部的硬门
+  // 控（activeQuestionId && activeEvidenceId 双非空）自然不画线——不需要额外
+  // 判断 groupType 来阻止它们，双重保险。
+  const readingEvidenceLineContext = useMemo((): {
+    questionId: string | null
+    evidenceId: string | null
+    kind: 'support' | 'trap' | null
+  } => {
+    if (!lectureOpen) return { questionId: null, evidenceId: null, kind: null }
+    if (!lectureSelection) return { questionId: null, evidenceId: null, kind: null }
+    if (panelGroupId !== lectureSelection.groupId) return { questionId: null, evidenceId: null, kind: null }
+    if (panelGroupModel?.kind !== 'reading') return { questionId: null, evidenceId: null, kind: null }
+    const evidenceId = lectureSelection.evidenceId
+    const kind = evidenceId ? panelGroupModel.model.evidenceKindById[evidenceId] ?? null : null
+    return { questionId: lectureSelection.questionId, evidenceId, kind }
+  }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
+
   function scrollToAnchor(anchor: string): void {
     const scroller = scrollerRef.current
     if (!scroller) return
@@ -395,7 +680,62 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' })
   }
 
-  function renderGroupBody(entry: GroupModel | undefined): ReactNode {
+  // 刀 2: 点题选中 —— 种下的 evidenceId/optionLabel 逻辑镜像
+  // PaperIntelligencePaperSurfaceHarness 的 request-lecture-focus 分支
+  // （cloze/grammarFill 取首条证据行，reading 取 supportEvidenceId+answer，
+  // 其余(sevenChoices/writing/未发布解析)不种子，面板自行走空态）。
+  function selectLectureQuestion(groupId: string, questionId: string): void {
+    const lectureEntry = lectureAnalysisByGroupId[groupId]
+    const plainEntry = groupModels[groupId]
+    if (lectureEntry?.kind === 'cloze') {
+      const blankView = lectureEntry.model.analysisByQuestionId[questionId] ?? null
+      const firstPassageEvidence = blankView?.evidenceRows.find((row) => !row.isOptionSide) ?? null
+      setLectureSelection({
+        groupId,
+        questionId,
+        evidenceId: firstPassageEvidence?.evidenceId ?? null,
+        optionLabel: null,
+      })
+      return
+    }
+    if (lectureEntry?.kind === 'grammarFill') {
+      const blankView = lectureEntry.model.analysisByQuestionId[questionId] ?? null
+      const firstEvidence = blankView?.evidenceRows[0] ?? null
+      setLectureSelection({
+        groupId,
+        questionId,
+        evidenceId: firstEvidence?.evidenceId ?? null,
+        optionLabel: null,
+      })
+      return
+    }
+    if (plainEntry?.kind === 'reading') {
+      const analysis = plainEntry.model.analysisByQuestionId[questionId] ?? null
+      setLectureSelection({
+        groupId,
+        questionId,
+        evidenceId: analysis?.supportEvidenceId ?? null,
+        optionLabel: analysis?.answer ?? null,
+      })
+      return
+    }
+    setLectureSelection({ groupId, questionId, evidenceId: null, optionLabel: null })
+  }
+
+  function handleGroupFocusIntent(groupId: string, intent: PaperSurfaceFocusIntent): void {
+    if (intent.kind !== 'request-lecture-focus') return
+    selectLectureQuestion(groupId, intent.questionId)
+  }
+
+  function handleLectureSelectEvidence(evidenceId: string): void {
+    setLectureSelection((prev) => (prev ? { ...prev, evidenceId } : prev))
+  }
+
+  function handleLectureSelectOption(optionLabel: string, evidenceId: string | null): void {
+    setLectureSelection((prev) => (prev ? { ...prev, optionLabel, evidenceId } : prev))
+  }
+
+  function renderGroupBody(groupId: string, entry: GroupModel | undefined): ReactNode {
     if (!entry) {
       return <div className="paper-browse-placeholder">加载中…</div>
     }
@@ -409,21 +749,39 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         </div>
       )
     }
+
+    // 刀 2: 讲评态里，cloze/grammarFill 若已成功拉到解析，卷面挂载切到
+    // analysis-based surfaceData（证据/高亮数据源），镜像 harness 的
+    // clozeAnalysisModel/grammarFillAnalysisModel 覆盖 plain 模型的做法。
+    // 挑题态(!lectureOpen)永远用 plain surfaceData —— 零解析噪音不变量。
+    const lectureEntry = lectureAnalysisByGroupId[groupId]
+    let surfaceData = entry.model.surfaceData
+    let blankFocusMode: 'rail' | 'in-passage' | undefined
+    if (lectureOpen && entry.kind === 'cloze' && lectureEntry?.kind === 'cloze') {
+      surfaceData = lectureEntry.model.surfaceData
+    } else if (lectureOpen && entry.kind === 'grammarFill' && lectureEntry?.kind === 'grammarFill') {
+      surfaceData = lectureEntry.model.surfaceData
+      blankFocusMode = 'in-passage'
+    }
+
+    const isPanelGroup = lectureOpen && panelGroupId === groupId
+
     const surfaceEl = (
       <PaperSurface
-        textMap={entry.model.surfaceData.textMap}
+        textMap={surfaceData.textMap}
         annotations={[]}
-        evidence={entry.model.surfaceData.evidence}
-        questions={entry.model.surfaceData.questions}
+        evidence={surfaceData.evidence}
+        questions={surfaceData.questions}
         // seven-options-on-paper: the 七选五 A-G pool, display-only.
         // `entry.model.options` (SevenChoicesOptionView[]) is structurally
         // compatible with PaperQuestionOption ({label, text, translation?}
         // vs {label, text, chain}) — no adapter change needed.
         optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
         mode="lecture"
-        lectureFocus={null}
+        lectureFocus={isPanelGroup ? lectureFocusForSelection : null}
         readingFocusBySection={{}}
-        onFocusIntent={() => {}}
+        onFocusIntent={lectureOpen ? (intent) => handleGroupFocusIntent(groupId, intent) : () => {}}
+        blankFocusMode={blankFocusMode}
       />
     )
     if (entry.kind === 'writing') {
@@ -465,24 +823,133 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             </button>
           </div>
         )}
-        {renderGroupBody(entry)}
+        {renderGroupBody(groupId, entry)}
       </section>
     )
   }
 
-  // 讲评栏内容 — 组级速览，跟随 scrollspy 的 activeAnchor。activeAnchor 落
-  // 在 part/section 标题上时（不是一个 groupId）没有对应题组，走空态，
-  // 实现从简（刀 1 契约允许）。
+  // 刀 2: 讲评栏身体 —— 当前题组 groupType 对应的解析面板，复用解析页
+  // harness 同款五面板 + adapter。旧的"跳解析页"深读链接已退役（入口带态
+  // 迁移是刀 3），身体不再只是速览+跳转，而是完整解析内容。
+  function renderLectureAnalysisPanel(ctx: {
+    groupId: string
+    group: PaperContentGroup
+    hasActiveQuestion: boolean
+    activeQuestionId: string | null
+    activeEvidenceId: string | null
+    activeOptionLabel: string | null
+  }): ReactNode {
+    const { groupId, group, hasActiveQuestion, activeQuestionId, activeEvidenceId, activeOptionLabel } = ctx
+    const entry = groupModels[groupId]
+    const lectureEntry = lectureAnalysisByGroupId[groupId]
+
+    if (group.groupType === 'sevenChoices' && entry?.kind === 'sevenChoices') {
+      const chains = entry.model.chains
+      return (
+        <SevenChoicesAnalysisPanel
+          options={entry.model.options}
+          chains={chains}
+          openQuestionIds={openSevenChoiceQuestionIds}
+          onToggleChain={(questionId) => {
+            setOpenSevenChoiceQuestionIds((prev) =>
+              prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
+            )
+            setLectureSelection(null)
+          }}
+          onShowAll={() => {
+            setOpenSevenChoiceQuestionIds(chains.map((chain) => chain.questionId))
+            setLectureSelection(null)
+          }}
+          onHideAll={() => {
+            setOpenSevenChoiceQuestionIds([])
+            setLectureSelection(null)
+          }}
+        />
+      )
+    }
+
+    if (group.groupType === 'reading' && entry?.kind === 'reading') {
+      const analysis = activeQuestionId ? entry.model.analysisByQuestionId[activeQuestionId] ?? null : null
+      return (
+        <PaperAssetAnalysisPanel
+          analysis={analysis}
+          hasActiveQuestion={hasActiveQuestion}
+          activeOptionLabel={activeOptionLabel}
+          activeEvidenceId={activeEvidenceId}
+          onSelectOption={handleLectureSelectOption}
+          onSelectEvidence={handleLectureSelectEvidence}
+        />
+      )
+    }
+
+    if (group.groupType === 'cloze') {
+      if (lectureEntry?.kind === 'cloze') {
+        const analysis = activeQuestionId
+          ? lectureEntry.model.analysisByQuestionId[activeQuestionId] ?? null
+          : null
+        return (
+          <ClozeAnalysisPanel
+            analysis={analysis}
+            hasActiveQuestion={hasActiveQuestion}
+            activeEvidenceId={activeEvidenceId}
+            groupView={lectureEntry.model.groupView}
+            onSelectEvidence={handleLectureSelectEvidence}
+          />
+        )
+      }
+      return (
+        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+      )
+    }
+
+    if (group.groupType === 'grammarFill') {
+      if (lectureEntry?.kind === 'grammarFill') {
+        const analysis = activeQuestionId
+          ? lectureEntry.model.analysisByQuestionId[activeQuestionId] ?? null
+          : null
+        return (
+          <GrammarFillAnalysisPanel
+            analysis={analysis}
+            hasActiveQuestion={hasActiveQuestion}
+            activeEvidenceId={activeEvidenceId}
+            groupView={lectureEntry.model.groupView}
+            onSelectEvidence={handleLectureSelectEvidence}
+          />
+        )
+      }
+      return (
+        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+      )
+    }
+
+    if (group.groupType === 'writing') {
+      if (lectureEntry?.kind === 'writing') {
+        return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
+      }
+      return (
+        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+      )
+    }
+
+    return <p className="paper-browse-lecture-empty">解析未发布</p>
+  }
+
+  // 讲评栏内容 — 头部沿用刀 1 的组级速览，跟随 scrollspy/点题共同决定的
+  // panelGroupId；activeAnchor 落在 part/section 标题上（没有对应题组）时
+  // 走空态，实现从简（刀 1 契约允许）。
   function renderLecturePanel(): ReactNode {
     if (!asset) return null
-    const group = activeAnchor ? asset.content.groups[activeAnchor] : undefined
-    if (!activeAnchor || !group) {
+    const groupId = panelGroupId
+    const group = groupId ? asset.content.groups[groupId] : undefined
+    if (!groupId || !group) {
       return <p className="paper-browse-lecture-empty">滚动到题组查看速览</p>
     }
     const range = buildGroupRangeLabel(asset, group)
     const answerRow = buildAnswerRowText(asset, group)
-    const card = questionGroupById.get(activeAnchor)
-    const showDeepLink = Boolean(card?.hasPaperSurfaceAnalysis && card?.paperSurfaceHref)
+    const hasActiveQuestion = Boolean(lectureSelection && lectureSelection.groupId === groupId)
+    const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
+    const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
+    const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
     return (
       <div className="paper-browse-lecture-body">
         <h4 className="paper-browse-lecture-title">
@@ -490,11 +957,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           {range && <span className="paper-browse-lecture-range"> · {range}</span>}
         </h4>
         {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
-        {showDeepLink && card && (
-          <a className="paper-browse-deep-link" href={card.paperSurfaceHref ?? undefined}>
-            {card.paperSurfaceLabel ?? '深读解析'}
-          </a>
-        )}
+        <div className="paper-browse-lecture-analysis">
+          {renderLectureAnalysisPanel({
+            groupId,
+            group,
+            hasActiveQuestion,
+            activeQuestionId,
+            activeEvidenceId,
+            activeOptionLabel,
+          })}
+        </div>
       </div>
     )
   }
@@ -570,6 +1042,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
         }`}
+        ref={shellRef}
       >
         <nav
           className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
@@ -600,21 +1073,68 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           {asset.content.blocks.map((block, index) =>
             writingSkipIndices.has(index) ? null : renderBlock(block, index),
           )}
+          {/*
+            刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
+            `enabled` 同款门控（panelGroupModel?.kind === 'sevenChoices'）
+            而不只看 marks.length —— 讲评栏切到别的题组时 hook 内部不会
+            主动清空 marks（只在 enabled 时才 setOverlay），若只看
+            marks.length 会露出上一个七选五题组的残影。
+          */}
+          {lectureOpen && panelGroupModel?.kind === 'sevenChoices' && sevenChoiceOverlay.marks.length > 0 && (
+            <div className="paper-browse-seven-blank-overlay" aria-hidden="true">
+              {sevenChoiceOverlay.marks.map((mark) => (
+                <span
+                  key={mark.id}
+                  className={`paper-browse-seven-clue-mark paper-browse-seven-clue-mark--${mark.kind}`}
+                  data-seven-color={mark.colorIndex}
+                  style={{
+                    transform: `translate(${mark.left}px, ${mark.top}px)`,
+                    width: `${mark.width}px`,
+                    height: `${mark.height}px`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
         {lectureOpen && (
-          <aside className="paper-browse-lecture-panel" aria-label="讲评">
+          <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>
             {renderLecturePanel()}
           </aside>
         )}
+        {/*
+          刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness
+          同款 `PaperIntelligenceEvidenceLine`（geometry 只 import 不改）。
+          只在讲评开+当前讲评栏目标题组是阅读题组时挂载（卷面显影原则：
+          完形/语法填空原位型只给证据高亮不做动线，七选五混血用衔接句高亮，
+          写作无证据概念——均不接线）。containerRef 用 `.paper-browse-shell`
+          （本就是 position:relative，卷面+讲评栏共同祖先），
+          leftScrollerRef 复用卷面容器 scrollerRef，rightPanelRef 指向讲评栏
+          aside，与 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套
+          一一对应。抽屉态（<1200px）几何意义不大——讲评栏离开文档流叠在
+          卷面上，见 paperBrowsePage.css 里同断点的 display:none 收紧。
+        */}
+        {lectureOpen && panelGroupModel?.kind === 'reading' && (
+          <PaperIntelligenceEvidenceLine
+            containerRef={shellRef}
+            leftScrollerRef={scrollerRef}
+            rightPanelRef={rightPanelRef}
+            activeQuestionId={readingEvidenceLineContext.questionId}
+            activeEvidenceId={readingEvidenceLineContext.evidenceId}
+            activeEvidenceKind={readingEvidenceLineContext.kind}
+            leftSelectorPreset="paper-surface"
+          />
+        )}
       </div>
-      {lectureOpen && (
-        <button
-          type="button"
-          className="paper-browse-lecture-backdrop"
-          aria-label="关闭讲评栏"
-          onClick={() => setLectureOpen(false)}
-        />
-      )}
+      {/*
+        刀 2: 窄屏抽屉的背景蒙层只做视觉暗化，不再拦截点击 —— 刀 1 时
+        PaperSurface 全程只读，"点蒙层关闭"和"点卷面"从不冲突；刀 2 卷面
+        题目在讲评态下真的可点了，蒙层若继续吞掉点击，窄屏用户就永远点不到
+        题（讲评栏只能停在滚动带出的组级概览）。关闭抽屉改由把手（z-index
+        更高，讲评态下常驻可点）和文档级 Esc（见上方 effect）兜底，两条
+        路径都不受蒙层影响。
+      */}
+      {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
       <button
         type="button"
         ref={lectureHandleRef}

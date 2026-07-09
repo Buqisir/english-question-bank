@@ -91,8 +91,12 @@
  *         return `null` (no answer row at all), no-answerKey-hit groups
  *         fall back to "答案未入库", and matched entries are sorted by
  *         questionNo before joining.
- *     24. The 讲评栏 deep-link guard matches the detail page's own guard
- *         shape: `card.hasPaperSurfaceAnalysis && card.paperSurfaceHref`.
+ *     24. [RETIRED by flow-panel 刀 2 — see 26-33 below] The 讲评栏
+ *         deep-link ("深读解析" → old解析页) that used to gate on
+ *         `card.hasPaperSurfaceAnalysis && card.paperSurfaceHref` is gone;
+ *         the 讲评栏 body now renders the full解析面板 in place instead of
+ *         linking out. The assertion for this item was removed, not left
+ *         red — the behavior it proved no longer exists by design.
  *     25. paperBrowsePage.css: `.paper-browse-shell` no longer centers
  *         itself with `max-width` + `margin: 0 auto` (rail glued to the
  *         viewport edge instead of a centered shell), and a `min-width:
@@ -117,11 +121,108 @@
  *     21. QuestionGroupDetailView.tsx does not import PaperSurface (C6 —
  *         confirms the detail page is genuinely out of this cut's scope,
  *         not just "happens to look unaffected").
+ * 26-33. flow-panel 刀 2（点题联动 + 五解析面板搬家统一宽度）:
+ *     26. PaperBrowsePage imports the five paper-intelligence解析面板
+ *         (SevenChoicesAnalysisPanel / PaperAssetAnalysisPanel /
+ *         ClozeAnalysisPanel / GrammarFillAnalysisPanel /
+ *         WritingAnalysisPanel), the two analysis adapters
+ *         (buildClozeAnalysisSurfaceModel / buildGrammarFillAnalysisSurfaceModel),
+ *         and `paperIntelligence.css` (随面板 import 生效, unmodified).
+ *     27. `onFocusIntent`/`lectureFocus` on each group's PaperSurface mount
+ *         are conditioned on `lectureOpen`: 挑题态 keeps the 刀 1 shape
+ *         exactly (`onFocusIntent={... : () => {}}`, `lectureFocus={... :
+ *         null}` — the no-op/null branch of the ternary), so PaperSurface
+ *         stays read-only/silent whenever the handle is collapsed.
+ *     28. The cloze/grammar-fill/writing lecture-analysis fetch effect is
+ *         gated on `lectureOpen` (`if (!lectureOpen) return`) — 挑题态 全程
+ *         零新增请求 is a source-level invariant, not just a runtime one.
+ *     29. `selectLectureQuestion` seeds `evidenceId`/`optionLabel` from the
+ *         active group's analysis model (cloze → first non-option-side
+ *         evidence row, grammarFill → first evidence row, reading →
+ *         supportEvidenceId + answer) — mirrors
+ *         `PaperIntelligencePaperSurfaceHarness`'s `request-lecture-focus`
+ *         branch.
+ *     30. A missing/failed cloze/grammarFill/writing analysis renders
+ *         "解析未发布" in the 讲评栏 instead of crashing (graceful
+ *         degradation string present in source).
+ *     31. The retired 深读解析 deep-link is gone: no `paperSurfaceHref` or
+ *         「深读解析」 string remains in PaperBrowsePage.tsx.
+ *     32. `paperBrowsePage.css` scopes the五面板 width-normalization to a
+ *         `.paper-browse-lecture-analysis` container selector — `pi-*`
+ *         rules in `paperIntelligence.css` are not edited by this cut.
+ *     33. Real paper-2026-i fixture: `buildClozeAnalysisSurfaceModel` /
+ *         `buildGrammarFillAnalysisSurfaceModel` each resolve against the
+ *         fixture's cloze/grammar-fill analysis files without throwing —
+ *         proves the 按需补拉 adapter calls have real data to run against.
+ * 34-38. flow-panel 刀 2 修复轮 (dao2-fix, owner 2026-07-09 实测拍板的两个
+ *        卷面显影 parity 缺口):
+ *     34. 七选五原文高亮: PaperBrowsePage imports (only-import contract)
+ *         `useSevenChoicesPaperHighlights`, wires it with `enabled:
+ *         lectureOpen && panelGroupModel?.kind === 'sevenChoices'` and
+ *         `leftScrollerRef: scrollerRef` (the whole-paper 卷面容器, per
+ *         plan — not a per-group local container).
+ *     35. The overlay's render condition mirrors the hook's `enabled` gate
+ *         exactly (`panelGroupModel?.kind === 'sevenChoices'`, not just
+ *         `marks.length > 0`) — the hook does not clear `marks` on
+ *         disable, so a looser render guard would flash a previous 题组's
+ *         stale marks when 讲评栏 switches away from 七选五.
+ *     36. paperBrowsePage.css never imports the Forbidden
+ *         `paperIntelligencePaperSurfaceHarness.css` (where the source
+ *         `.pi-seven-blank-overlay`/`.pi-seven-clue-mark*` rules live);
+ *         the highlight colors are a hand-copied local rule set under
+ *         `.paper-browse-seven-*` class names instead, anchored by
+ *         `position: relative` on `.paper-browse-content`.
+ *     37. 阅读动线: an effect scrolls the active `[data-paper-evidence-id]`
+ *         anchor into view (mirrors
+ *         `PaperIntelligencePaperSurfaceHarness.tsx`'s "Auto-scroll active
+ *         evidence" effect), gated to `groupModels[...]?.kind ===
+ *         'reading'` only — 完形/语法填空 stay "原位型" (证据高亮, no
+ *         scroll) and 七选五 stays "混血" (衔接句高亮 via item 34, no
+ *         阅读式动线), per the plan's 卷面显影原则.
+ *     38. Real paper-2026-i fixture: the sevenChoices model has at least
+ *         one chain with non-empty `leftHighlights` — proves the
+ *         highlight hook has real geometry data to render against, not
+ *         just an always-empty no-op.
+ * 39-43. flow-panel 刀 2 修复轮 ③ (阅读跨栏证据动线 — the third dao2-fix
+ *        layer, owner 2026-07-09 实测拍板):
+ *     39. PaperBrowsePage imports `PaperIntelligenceEvidenceLine` from
+ *         `paper-intelligence/preview/paperIntelligenceEvidenceLine`
+ *         (import-only contract — the component + its geometry helper
+ *         module are never edited by this cut).
+ *     40. The component mounts only when 讲评开 AND the current讲评栏
+ *         target题组 is a reading group (`lectureOpen && panelGroupModel
+ *         ?.kind === 'reading'`) — 卷面显影原则: 完形/语法填空(原位型)只给
+ *         证据高亮, 七选五(混血)只给衔接句高亮 (item 34), 写作无证据概念;
+ *         none of them mount the cross-column line.
+ *     41. Wiring: `containerRef={shellRef}` / `leftScrollerRef={scrollerRef}`
+ *         / `rightPanelRef={rightPanelRef}` / `leftSelectorPreset="paper-
+ *         surface"` — the shellRef is attached to `.paper-browse-shell`
+ *         (already `position: relative`) and rightPanelRef to the 讲评栏
+ *         `<aside>`, mirroring the harness's shellRef/leftScrollerRef/
+ *         rightPanelRef triple exactly.
+ *     42. paperBrowsePage.css hand-copies ONLY the support/trap stroke
+ *         palette (grep-confirmed to exist solely in the Forbidden
+ *         `paperIntelligencePaperSurfaceHarness.css:684-691`, renamed from
+ *         `.pi-ps-harness-shell` to `.paper-browse-shell`) — the base
+ *         `.pi-line-overlay`/`.pi-line-path` rules are NOT duplicated
+ *         because they already exist unscoped in the already-imported
+ *         `paperIntelligence.css`. Neither `PaperBrowsePage.tsx` nor
+ *         `paperBrowsePage.css` references the Forbidden harness
+ *         stylesheet. A `max-width: 1199.98px` rule hides the line
+ *         (owner-authorized narrowing: the 讲评栏 drawer at that breakpoint
+ *         detaches from the grid and floats over the卷面, so cross-column
+ *         geometry stops making visual sense).
+ *     43. Real paper-2026-i fixture: the reading group's
+ *         `evidenceKindById` has both 'support' and 'trap' entries —
+ *         proves the activeEvidenceKind derivation (which drives the
+ *         palette split in item 42) has real data on both branches to
+ *         exercise, not just an always-'support' no-op.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findWritingBlockRange } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
+import { buildPaperAssetSurfaceModel } from '../app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -370,15 +471,20 @@ assert(
   /default:[\s\S]{0,200}placeholder/.test(pageSrc),
   'missing default placeholder branch',
 )
+// flow-panel 刀 2: PaperSurface is now interactive in 讲评态 (lectureOpen),
+// but 挑题态 must keep the exact 刀 1 read-only shape — the false branch of
+// each ternary is still a static no-op/null, not a real handler/focus.
 assert(
-  'PaperSurface is mounted read-only: lectureFocus is always null',
-  /lectureFocus=\{null\}/.test(pageSrc),
-  'lectureFocus is not a static null — page may be wiring interactive focus',
+  'PaperSurface lectureFocus falls back to a static null when the group is not the 讲评栏 target',
+  /lectureFocus=\{isPanelGroup\s*\?\s*lectureFocusForSelection\s*:\s*null\}/.test(pageSrc),
+  'lectureFocus does not have a static-null fallback branch — 挑题态/non-target groups may leak focus',
 )
 assert(
-  'PaperSurface onFocusIntent is a no-op',
-  /onFocusIntent=\{\(\)\s*=>\s*\{\}\}/.test(pageSrc),
-  'onFocusIntent is not a no-op — page may be wiring evidence/annotation interaction',
+  'PaperSurface onFocusIntent falls back to a static no-op when lectureOpen is false',
+  /onFocusIntent=\{lectureOpen\s*\?\s*\(intent\)\s*=>\s*handleGroupFocusIntent\(groupId,\s*intent\)\s*:\s*\(\)\s*=>\s*\{\}\}/.test(
+    pageSrc,
+  ),
+  'onFocusIntent does not have a static no-op fallback branch — 挑题态 may be wiring interaction',
 )
 assert(
   'PaperBrowsePage has no "移出" (remove-from-basket) affordance',
@@ -846,11 +952,113 @@ assert(
   buildAnswerRowFnBody,
 )
 
+// ─── 26-32. flow-panel 刀 2: 点题联动 + 五解析面板搬家 ───
+
 assert(
-  '讲评栏 deep-link guard matches the detail page shape (hasPaperSurfaceAnalysis && paperSurfaceHref)',
-  /card\?\.hasPaperSurfaceAnalysis\s*&&\s*card\?\.paperSurfaceHref/.test(pageSrc),
-  'missing showDeepLink guard in the lecture panel',
+  'PaperBrowsePage imports the five paper-intelligence解析面板',
+  [
+    /import\s*\{\s*SevenChoicesAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/SevenChoicesAnalysisPanel['"]/,
+    /import\s*\{\s*PaperAssetAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/PaperAssetAnalysisPanel['"]/,
+    /import\s*\{\s*ClozeAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/ClozeAnalysisPanel['"]/,
+    /import\s*\{\s*GrammarFillAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/GrammarFillAnalysisPanel['"]/,
+    /import\s*\{\s*WritingAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/WritingAnalysisPanel['"]/,
+  ].every((re) => re.test(pageSrc)),
+  'missing one or more of the five analysis panel imports',
 )
+assert(
+  'PaperBrowsePage imports the cloze/grammar-fill analysis adapters + paperIntelligence.css',
+  /buildClozeAnalysisSurfaceModel/.test(pageSrc) &&
+    /buildGrammarFillAnalysisSurfaceModel/.test(pageSrc) &&
+    /import\s*['"]\.\.\/paper-intelligence\/paperIntelligence\.css['"]/.test(pageSrc),
+  'missing analysis adapter imports or the paperIntelligence.css import',
+)
+assert(
+  'lecture-analysis fetch effect is gated on lectureOpen (zero new requests in 挑题态)',
+  /if\s*\(!lectureOpen\)\s*return/.test(pageSrc),
+  'missing the lectureOpen early-return guard on the lazy analysis fetch effect',
+)
+assert(
+  'selectLectureQuestion seeds cloze/grammarFill/reading evidence, mirroring the harness request-lecture-focus branch',
+  /lectureEntry\?\.kind\s*===\s*['"]cloze['"]/.test(pageSrc) &&
+    /lectureEntry\?\.kind\s*===\s*['"]grammarFill['"]/.test(pageSrc) &&
+    /plainEntry\?\.kind\s*===\s*['"]reading['"]/.test(pageSrc) &&
+    /supportEvidenceId/.test(pageSrc),
+  'missing one or more of the seed branches in selectLectureQuestion',
+)
+assert(
+  '讲评栏 shows "解析未发布" when a cloze/grammarFill/writing analysis is missing/unavailable',
+  (pageSrc.match(/解析未发布/g) || []).length >= 3,
+  'expected the "解析未发布" fallback string on all three lazily-fetched group types',
+)
+assert(
+  '深读解析 deep-link is fully retired — no paperSurfaceHref/深读解析 reference remains',
+  !/paperSurfaceHref/.test(pageSrc) && !/深读解析/.test(pageSrc),
+  'a retired deep-link reference is still present',
+)
+assert(
+  'paperBrowsePage.css normalizes 五面板 width via a .paper-browse-lecture-analysis container selector',
+  /\.paper-browse-lecture-analysis\b/.test(pageCssSrc),
+  'missing the .paper-browse-lecture-analysis container selector',
+)
+
+// Behavioral: the cloze/grammar-fill analysis adapters this cut newly
+// wires into the lecture panel actually resolve against the real
+// paper-2026-i analysis fixtures (proves the 按需补拉 call has real data
+// to run against, not just a source-shape match).
+const cloze2026iAsset = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
+)
+const cloze2026iAnalysis = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json'),
+)
+const grammarFill2026iAnalysis = JSON.parse(
+  read('app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'),
+)
+try {
+  const { buildClozeAnalysisSurfaceModel } = await import(
+    path.join(rootDir, 'app', 'src', 'features', 'paper-intelligence', 'clozeAnalysisSurfaceAdapter.ts')
+  )
+  const clozeModel = buildClozeAnalysisSurfaceModel({
+    asset: cloze2026iAsset,
+    analysis: cloze2026iAnalysis,
+    groupId: 'group-2026-i-cloze',
+  })
+  assert(
+    'buildClozeAnalysisSurfaceModel resolves against the real paper-2026-i cloze-analysis-v1 fixture',
+    Object.keys(clozeModel.analysisByQuestionId).length > 0,
+    'analysisByQuestionId is empty',
+  )
+} catch (e) {
+  assert('buildClozeAnalysisSurfaceModel resolves against the real paper-2026-i fixture', false, String(e))
+}
+try {
+  const { buildGrammarFillAnalysisSurfaceModel } = await import(
+    path.join(
+      rootDir,
+      'app',
+      'src',
+      'features',
+      'paper-intelligence',
+      'grammarFillAnalysisSurfaceAdapter.ts',
+    )
+  )
+  const grammarFillModel = buildGrammarFillAnalysisSurfaceModel({
+    asset: cloze2026iAsset,
+    analysis: grammarFill2026iAnalysis,
+    groupId: 'group-2026-i-grammar-fill',
+  })
+  assert(
+    'buildGrammarFillAnalysisSurfaceModel resolves against the real paper-2026-i grammar-fill-analysis-v1 fixture',
+    Object.keys(grammarFillModel.analysisByQuestionId).length > 0,
+    'analysisByQuestionId is empty',
+  )
+} catch (e) {
+  assert(
+    'buildGrammarFillAnalysisSurfaceModel resolves against the real paper-2026-i fixture',
+    false,
+    String(e),
+  )
+}
 
 // Fixture-shape checks against the real paper-2026-i asset. NOTE (CR
 // 刀1): this does NOT execute buildAnswerRowText/buildGroupRangeLabel
@@ -869,6 +1077,60 @@ const writingGroup2026i = Object.values(asset.content.groups).find((g) => g.grou
 assert(
   '2026-i fixture: a writing group exists to prove the no-answer-row branch',
   Boolean(writingGroup2026i),
+)
+
+// ─── 34-38. flow-panel 刀 2 修复轮 (dao2-fix): 七选五原文高亮接线 +
+//     阅读动线 parity — owner 2026-07-09 实测抓到的两个卷面显影缺口 ───
+
+assert(
+  'PaperBrowsePage imports useSevenChoicesPaperHighlights (only-import contract — the hook file itself is untouched)',
+  /import\s*\{\s*useSevenChoicesPaperHighlights\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/useSevenChoicesPaperHighlights\.ts['"]/.test(
+    pageSrc,
+  ),
+  'missing the useSevenChoicesPaperHighlights import',
+)
+assert(
+  'useSevenChoicesPaperHighlights is enabled only when 讲评栏当前面板组是七选五, scoped to the whole-paper scroller',
+  /enabled:\s*lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]sevenChoices['"]/.test(pageSrc) &&
+    /leftScrollerRef:\s*scrollerRef/.test(pageSrc),
+  'missing the lectureOpen+sevenChoices enabled gate or the scrollerRef wiring',
+)
+assert(
+  '七选五高亮覆盖层的渲染门控与 hook 的 enabled 同款 (panelGroupModel?.kind, not just marks.length) — avoids a stale-marks ghost overlay after switching to another 题组',
+  /lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]sevenChoices['"]\s*&&\s*sevenChoiceOverlay\.marks\.length\s*>\s*0/.test(
+    pageSrc,
+  ),
+  'overlay render condition does not match the enabled gate — risk of ghost marks from a previous group',
+)
+assert(
+  'paperBrowsePage.css never imports the Forbidden paperIntelligencePaperSurfaceHarness.css (colors are a hand-copied local rule set instead)',
+  !/paperIntelligencePaperSurfaceHarness\.css/.test(pageSrc),
+  'PaperBrowsePage.tsx imports the harness-only stylesheet — Forbidden scope violation',
+)
+assert(
+  'paperBrowsePage.css defines its own .paper-browse-seven-blank-overlay / .paper-browse-seven-clue-mark rules, and .paper-browse-content establishes position: relative for them to anchor against',
+  /\.paper-browse-seven-blank-overlay\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
+    /\.paper-browse-seven-clue-mark\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
+    /\.paper-browse-content\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
+  'missing the overlay/mark CSS rules or the position: relative anchor on .paper-browse-content',
+)
+assert(
+  'paper-2026-i sevenChoices model: at least one chain has non-empty leftHighlights ranges (proves the highlight hook has real geometry data to consume, not just an empty-marks no-op)',
+  sevenChoicesModel2026i.chains.length > 0 &&
+    sevenChoicesModel2026i.chains.some((chain) => chain.leftHighlights.length > 0),
+  'no chain has leftHighlights — useSevenChoicesPaperHighlights would always render zero marks for this fixture',
+)
+assert(
+  '阅读动线: an effect scrolls the active [data-paper-evidence-id] anchor into view, gated to reading groups only (完形/语法填空/七选五 stay 原位/混血 per 卷面显影原则, no scroll)',
+  /data-paper-evidence-id/.test(pageSrc) &&
+    /groupModels\[lectureSelection\.groupId\]\?\.kind\s*!==\s*['"]reading['"]\)\s*return/.test(pageSrc),
+  'missing the evidence-scroll effect, or it is not gated to reading-only groups',
+)
+assert(
+  '阅读动线 effect honors prefers-reduced-motion (smooth by default, auto when reduced)',
+  /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(pageSrc) &&
+    /reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(pageSrc),
+  'missing the reduced-motion branch on the evidence-scroll effect',
 )
 
 assert(
@@ -890,6 +1152,79 @@ assert(
     pageCssSrc,
   ) && pageCssSrc.includes('.paper-browse-lecture-backdrop'),
   'missing the narrow-viewport fixed-drawer + backdrop rule',
+)
+
+// ─── 39-43. flow-panel 刀 2 修复轮 ③: 阅读跨栏证据动线 ───
+
+assert(
+  'PaperBrowsePage imports PaperIntelligenceEvidenceLine (only-import contract — component + geometry untouched)',
+  /import\s*\{\s*PaperIntelligenceEvidenceLine\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/preview\/paperIntelligenceEvidenceLine['"]/.test(
+    pageSrc,
+  ),
+  'missing the PaperIntelligenceEvidenceLine import',
+)
+assert(
+  'PaperIntelligenceEvidenceLine mounts only when 讲评开 AND the panel目标题组是阅读题组 (卷面显影原则: 完形/语法填空/七选五/写作 do not get the motion line)',
+  /\{lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]reading['"]\s*&&\s*\(\s*\n\s*<PaperIntelligenceEvidenceLine/.test(
+    pageSrc,
+  ),
+  'evidence line render condition is missing or not gated to lectureOpen+reading',
+)
+assert(
+  'PaperIntelligenceEvidenceLine wired with shellRef/scrollerRef/rightPanelRef + leftSelectorPreset="paper-surface"',
+  /containerRef=\{shellRef\}/.test(pageSrc) &&
+    /leftScrollerRef=\{scrollerRef\}/.test(pageSrc) &&
+    /rightPanelRef=\{rightPanelRef\}/.test(pageSrc) &&
+    /leftSelectorPreset="paper-surface"/.test(pageSrc),
+  'missing one or more of the containerRef/leftScrollerRef/rightPanelRef/leftSelectorPreset props',
+)
+assert(
+  '.paper-browse-shell carries ref={shellRef} and the 讲评栏 <aside> carries ref={rightPanelRef}',
+  /className=\{`paper-browse-shell[\s\S]{0,120}`\}\s*\n\s*ref=\{shellRef\}/.test(pageSrc) &&
+    /<aside className="paper-browse-lecture-panel" aria-label="讲评" ref=\{rightPanelRef\}>/.test(pageSrc),
+  'shellRef or rightPanelRef is not attached to the expected DOM node',
+)
+assert(
+  'PaperBrowsePage.tsx does not import the Forbidden paperIntelligencePaperSurfaceHarness.css (no such import statement)',
+  !/import\s*['"][^'"]*paperIntelligencePaperSurfaceHarness\.css['"]/.test(pageSrc),
+  'a Forbidden stylesheet import leaked into PaperBrowsePage.tsx',
+)
+assert(
+  'paperBrowsePage.css does not @import the Forbidden paperIntelligencePaperSurfaceHarness.css (a plain source-comment citation of the file as a hand-copy origin is fine)',
+  !/@import[^;]*paperIntelligencePaperSurfaceHarness\.css/.test(pageCssSrc),
+  'a Forbidden stylesheet @import leaked into paperBrowsePage.css',
+)
+assert(
+  'paperBrowsePage.css hand-copies the support/trap stroke palette scoped to .paper-browse-shell (not .pi-ps-harness-shell)',
+  /\.paper-browse-shell \.pi-line-path--support[\s\S]{0,120}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
+    pageCssSrc,
+  ) &&
+    /\.paper-browse-shell \.pi-line-path--trap[\s\S]{0,120}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
+      pageCssSrc,
+    ),
+  'missing the hand-copied support/trap palette rules',
+)
+assert(
+  'paperBrowsePage.css hides the evidence line below the 1200px docked-三栏 breakpoint (drawer geometry is not meaningful)',
+  /@media \(max-width: 1199\.98px\)\s*\{\s*\.paper-browse-shell \.pi-line-overlay\s*\{\s*display:\s*none/.test(
+    pageCssSrc,
+  ),
+  'missing the narrow-viewport display:none rule for .paper-browse-shell .pi-line-overlay',
+)
+assert(
+  'paper-2026-i reading group evidenceKindById has both support and trap entries (real data for the activeEvidenceKind palette split)',
+  (() => {
+    const readingModel2026i = buildPaperAssetSurfaceModel({
+      asset,
+      analysis: JSON.parse(
+        read('app/public/paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json'),
+      ),
+      groupId: 'group-2026-i-reading-a',
+    })
+    const kinds = new Set(Object.values(readingModel2026i.evidenceKindById))
+    return kinds.has('support') && kinds.has('trap')
+  })(),
+  'reading group evidenceKindById does not exercise both support and trap kinds',
 )
 
 if (failed > 0) {
