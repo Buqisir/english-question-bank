@@ -240,7 +240,9 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
   return (
     <article
       className={`concierge-paper-row${expanded ? ' is-expanded' : ''}`}
-      aria-label={headline}
+      // CR should-watch 收口：年份列 aria-hidden 后，行级 label 补回年份，
+      // 屏幕阅读器才能区分同名不同年卷。
+      aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
       onClick={handleRowClick}
     >
       <div className="concierge-paper-year" aria-hidden="true">
