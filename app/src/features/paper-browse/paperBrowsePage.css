@@ -50,6 +50,12 @@
   background: rgba(74, 68, 56, 0.08);
 }
 
+.paper-browse-rail-item--active {
+  background: rgba(74, 68, 56, 0.12);
+  color: #2c2820;
+  font-weight: 600;
+}
+
 .paper-browse-rail-item--part {
   font-weight: 700;
   margin-top: 12px;
@@ -106,25 +112,49 @@
 }
 
 .paper-browse-group-card {
-  background: #ffffff;
+  position: relative;
   border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(44, 40, 32, 0.08);
-  overflow: hidden;
+  transition: background-color 0.15s ease;
 }
 
-.paper-browse-group-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 20px;
-  border-bottom: 1px solid rgba(74, 68, 56, 0.1);
+.paper-browse-group-card:hover,
+.paper-browse-group-card:focus-within {
+  background: rgba(74, 68, 56, 0.04);
 }
 
-.paper-browse-group-card-header h4 {
-  margin: 0;
-  font-size: 15px;
-  color: #2c2820;
+.paper-browse-group-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.paper-browse-group-card:hover .paper-browse-group-actions,
+.paper-browse-group-card:focus-within .paper-browse-group-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.paper-browse-group-actions .add-button {
+  box-shadow: 0 1px 4px rgba(44, 40, 32, 0.18);
+}
+
+@media (hover: none) {
+  .paper-browse-group-actions {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px 0;
+  }
+
+  .paper-browse-group-actions .add-button {
+    box-shadow: none;
+  }
 }
 
 .paper-browse-loading,
