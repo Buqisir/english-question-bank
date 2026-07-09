@@ -53,6 +53,25 @@ domain、schema、asset 数据、其他题型渲染路径、面板组件。
 - 真点浏览器 QA：整卷页截图（含字母）入 `docs/cuts/paper-passage-letter/`；
   print-pdf 实导一份目检。
 
+## DEV 侦查后的 PM 裁定（2026-07-09，首派 DEV 环境事故撤回但侦查有效）
+
+1. **屏幕面派生点**：PaperSurface 拿不到 group.title，但
+   `paperAssetSurfaceAdapter` 给 reading 组的 `section` 恰好就是裸字母
+   （"A"/"B"/"C"/"D"，其他题型均为中文节名、永不匹配 `/([A-D])$/`）。
+   裁定：屏幕面在 PaperSurfaceSection 内对 `section` 应用同一正则派生，
+   等价于 plan 原意，附代码注释说明。adapter/types 仍 Forbidden。
+   样式复用 `--ps-font-size`（已是 10.5pt 等比 token）+ bold + 居中，
+   上下留白 `calc(var(--ps-font-size) * var(--ps-line-height))`。
+2. **购物车路径 sectionTitle 空洞**：draftPaperStore 两处 item 均
+   硬编码 `sectionTitle: ''`，docxRenderer 按 sectionTitle 派生 →
+   购物车组卷的 DOCX 可能本来就无字母（疑似既有缺口）。裁定：DEV 先
+   起本地 server 实测确认；若确认，print-renderer 与 docxRenderer
+   **同时**加同一最小 fallback（`…|| item.detail?.title`，reading 组
+   detail.title 即 "Reading A"）——docxRenderer 为此从 Forbidden 局部
+   放行**仅此一行 fallback**，保持四面 parity 而不是让 PDF 单面超前。
+   若实测 DOCX 购物车路径本有字母，则维持原 Forbidden，print-renderer
+   照抄其派生源。
+
 ## DEV 纪律
 
 同 flow-panel 各刀：worktree 内施工（先 pwd 自证 + setup-worktree.sh，
