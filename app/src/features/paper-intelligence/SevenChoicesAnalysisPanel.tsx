@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type {
   SevenChoicesChainView,
   SevenChoicesMechanismSignal,
@@ -66,12 +66,38 @@ export function SevenChoicesAnalysisPanel({
 
   const jumpToOption = (label: string, chain: SevenChoicesChainView | undefined): void => {
     if (chain) {
+      // Expand-driven scrolling now lives in the open-transition effect below
+      // (fires for chip clicks, card-header clicks, and page-driven selection
+      // alike — 点谁看谁). Collapsing via chip no longer scrolls.
       onToggleChain(chain.questionId)
-      window.setTimeout(() => scrollToOption(label), 0)
       return
     }
     scrollToOption(label)
   }
+
+  // 点谁看谁 (owner 2026-07-09): whenever exactly ONE chain transitions
+  // closed→open — chip click, card-header click, paper click / deep-link
+  // seeding openQuestionIds from the page — scroll that card into view with
+  // the same center+flash treatment the jump chips always had. Bulk opens
+  // (全部显示) don't scroll: there is no single card the teacher asked for.
+  const prevOpenRef = useRef<Set<string> | null>(null)
+  useEffect(() => {
+    const prev = prevOpenRef.current
+    prevOpenRef.current = openSet
+    if (!prev) {
+      // First render: scroll only when the panel mounts with a single
+      // pre-seeded open chain (deep-link 预选), not on a plain cold mount.
+      if (openSet.size !== 1) return
+    }
+    const newlyOpened = [...openSet].filter((id) => !prev?.has(id))
+    if (newlyOpened.length !== 1) return
+    const chain = chains.find((c) => c.questionId === newlyOpened[0])
+    if (!chain) return
+    scrollToOption(chain.correctOptionLabel)
+    // scrollToOption reads refs + mutates DOM attributes only — safe in an
+    // effect; smooth behavior is inherited from the existing implementation.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openSet, chains])
 
   const toggleDetails = (questionId: string): void => {
     setExpandedDetails((prev) => {
