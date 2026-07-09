@@ -118,3 +118,28 @@ libatk1.0-0t64 libatk-bridge2.0-0t64 libatspi2.0-0t64 libgbm1 libpango-1.0-0`
 挂账不变：health 暴露两条导出线的就绪状态（zip/soffice/chromium 预检）。
 新挂账：print-pdf 面的空题干渲染成「1. 56」裸题号行（屏幕面已治，打印
 面未同步，小刀）。
+
+## 追记 2026-07-09（三）：导出字体保真（owner 报「PDF 字体不对」）
+
+症状：print-pdf 导出的 PDF 英文是 DejaVu Serif（非 Times 形制）、中文
+回落不定（宋体名全部 miss）。根因：排版标准字体栈里的名字
+（Times New Roman / SimSun / Songti SC / STSong / SimHei）在 Ubuntu 上
+一个都不存在，fc-match 全部落到 DejaVu（无汉字字形，中文字形按 glyph
+级随机回落）。
+
+已修（2026-07-09）：
+- `apt-get install -y fonts-liberation`——fontconfig 标准
+  30-metric-aliases 自动把 Times New Roman 映射到 Liberation Serif
+  （公认等宽度替身）。
+- 新增 `/etc/fonts/conf.d/65-eqb-paper-fonts.conf`：宋体族名
+  （SimSun/宋体/Songti SC/STSong）→ Noto Serif CJK SC（思源宋体，
+  fonts-noto-cjk 自带）；黑体族（SimHei/黑体/Heiti SC/STHeiti）→
+  Noto Sans CJK SC。`fc-cache -f`。
+- 验证：同一草稿卷 before/after 导出对比，嵌入字体
+  DejaVu* → LiberationSerif*，目检版面与真题气质一致。vivliostyle
+  按次启动读 fontconfig，无需重启服务；LibreOffice（DOCX→PDF 线）
+  同样受益于别名。
+
+**重建服务器 checklist 必带**：`apt-get install -y fonts-liberation` +
+恢复 `/etc/fonts/conf.d/65-eqb-paper-fonts.conf`（内容见本仓
+`deploy/` 若已收编，或按上述别名重写）。
