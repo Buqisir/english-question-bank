@@ -93,6 +93,71 @@ Forbidden：`useConciergeDesk.ts`、`conciergeSearch.ts`、`filters.ts`、
   搜索命中 + 触屏仿真 + 键盘 Tab 走行），截图入
   `docs/cuts/home-editorial/qa/`。
 
+## 第二轮 — 方向 C「开门见卷」（owner 2026-07-09 认可方向后追加）
+
+> 第一轮（试卷行编辑化+目录化）已施工+CR APPROVE+主代理三笔收口
+> （分支 e686d63）。owner 实测仍觉 AI 感，定位到页面上半身
+> （居中大搜索框+AI 开关+三排筛选药丸=品类模板脸）与大数字年份列
+> （重复数字=零信息高视觉重量）。方向 C 经 mock v4 认可。
+
+### 审美章程（三把 skill 综合，违者 CR 打回）
+
+- **签名唯一**：宋体「真题/模拟」是整页唯一的文化记号与唯一衬线；
+  不新增任何强调色/装饰/图形记号。墨绿只出现在可点动作与选中态。
+- **结构编码真相**：年份组头是真序列（带「N 套」真实计数）；除此
+  之外不加编号/eyebrow/分割装饰。
+- **好默认**：筛选默认收起；档案开屏即见。
+- 动效按 emil 处方：hover 显形 140ms 纯 opacity、展开 200ms
+  ease-out、:active scale(0.97)、hover:none 常显、reduced-motion
+  全退化。零新增 hex。
+
+### Scope（白名单）
+
+- `app/src/concierge/ConciergeDesk.tsx`（本轮升为正式白名单：命令行
+  重排/筛选折叠/年份分组都在这层；**搜索提交、思考模式、筛选逻辑的
+  行为一行不改**，只动布局与呈现）
+- `app/src/concierge/ConciergePaperRow.tsx`
+- `app/src/App.css`（.concierge-* 段）
+- `scripts/verify-home-default-feed.mjs` / `verify-concierge-filters.mjs`
+  / `verify-search-thinking-toggle.mjs`（断言窄改+新结构轻量断言）
+
+Forbidden 不变：useConciergeDesk.ts、conciergeSearch/filters/
+aggregate/reason/defaultFeed/paperSurfaceHref（逻辑七件全只读）、
+ConciergeGroupCard.tsx（第一轮成果，本轮不碰）、server/domain/
+其他页面。
+
+### 交互规格
+
+1. **命令行**：页面顶部一行——搜索输入（占满）+ 思考模式紧凑开关
+   （收进行内，说明句转 title/aria-describedby）+「筛选」按钮 +
+   「34 套卷 · 278 篇章」计数（ink-faint）。大标题区/示例大留白退役；
+   搜索提交、防抖、思考模式行为零改动。
+2. **筛选折叠**：默认收起。点「筛选」展开现有三组 chip 行（chip 本体
+   与计数、点击行为不变——药丸留给可点筛选正是形状纪律）；再点收起。
+   有任何激活筛选时：收起态在命令行下方显示激活 chip（可单个移除，
+   复用现有交互）+「筛选」按钮带激活计数。aria-expanded 齐。
+3. **年份分组（feed 态）**：按 paper.year 降序分组，组头
+   「2026」15px/650 + 「N 套」12px ink-faint，样式对齐展开态的
+   `.concierge-group-index` 组头。行改方向 B 形：卷名打头（600）+
+   宋体卷种 + 主题同行（ellipsis）+「全卷 · N 篇章」+ hover
+   「展开题组 ↓」。**每行的年份列退役**。year 为 null 的卷归入
+   尾部「其他」组。
+4. **搜索命中态不分组**：variant='search' 时保持现有相关性排序的
+   平铺列表与命中语义（相关性优先于年代，分组只属于翻卷场景）。
+5. 不变量：行点击展开、展开态卷面目录（第一轮成果）、四条 handler
+   通路、data-ra-* 埋点、键盘可达全部不回归。
+
+### 验收标准
+
+- 开屏（feed）：命令行一行 + 年份分组档案即见；无三排药丸、无大
+  数字列；筛选可开合、激活筛选收起态可见可移除。
+- 搜索/筛选行为与改造前完全一致（含思考模式），仅呈现变化。
+- 三个 verify 脚本绿（含新断言）+ tsc 绿 + verify:all/CI 绿。
+- 真点浏览器 QA：feed 分组、筛选开合+激活态、真搜索命中平铺、
+  展开题组回归、触屏仿真、键盘走查。截图入 docs/cuts/home-editorial/qa/
+  （c-round2-* 命名，用 Playwright page.screenshot 落盘，禁
+  screencapture）。
+
 ## DEV 汇报要求
 
 改动文件清单 / verify 摘要 / 浏览器 QA 状态+截图路径 /
