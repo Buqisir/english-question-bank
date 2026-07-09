@@ -57,7 +57,14 @@ not mass-rename history.
   有他人未提交内容）。worktree DEV 开工第一步跑
   `bash scripts/setup-worktree.sh`（装 app/server 依赖 + 从主树复制
   gitignored 的本地库；幂等），不要即兴自装——server 用 npm 不用 pnpm，
-  装错会产出不该存在的 lockfile。
+  装错会产出不该存在的 lockfile。**worktree 越界血书（2026-07-09，两次
+  实撞）**：① DEV 的一切操作（git/编辑/构建/verify）只许发生在自己的
+  worktree 目录，动手前先 `pwd` 自证；严禁对主仓库路径跑任何写命令
+  （含 `git -C <主树>`）——曾有 DEV 在主树 `checkout -b` 把主代理的
+  提交带进野分支；② 主代理侧同款：**合并永远在主树执行**——在 worktree
+  里 merge 自己分支只会得到 "Already up to date" 的假成功；③ DEV 直接
+  用 worktree 自带分支干活即可，不必另建品牌分支，收口命名由主代理在
+  merge message 里处理。
 - CR-lite（主代理直接冷读 diff）适用于 small 刀与低风险 polish；CR 只
   复核未证实项，已被 CI/verify 证实的不重跑（范围纪律，#275/#276 试跑）。
 
