@@ -109,11 +109,23 @@
 .paper-browse-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   min-width: 0;
   width: 100%;
-  max-width: 900px;
+  max-width: var(--ps-page-width, 794px);
   margin: 0 auto;
+  box-sizing: border-box;
+  /* one-sheet-paper (毛边⑤): 单一白纸容器——part/节标题/节指导语/题组卡
+   * 全部是这一个盒子的直接（或近直接）子元素，共享同一份左右内边距
+   * （--ps-page-margin-x/-top，同 PaperSurface 页边距 token），阴影只打
+   * 这一次。每个题组自己的 PaperSurface（`.ps-surface`/`.ps-page`）/
+   * 写作组的 `.pi-writing-page` 各自的桌面纹理+白纸+阴影在下方全部拆掉
+   * （scoped 覆盖，不改那些文件本身），退化成纯内容，融进这一张纸。 */
+  background: #fff;
+  color: var(--ps-ink, #111);
+  font-family: var(--ps-font-stack);
+  padding: var(--ps-page-margin-top, 79px) var(--ps-page-margin-x, 91px);
+  box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
   /* 刀 2 修复轮 ②: 七选五衔接句高亮覆盖层的绝对定位锚点。整卷页是
      document 级滚动（这个容器本身不滚动），useSevenChoicesPaperHighlights
      算的是 viewport-relative 差值，与容器是否自身滚动无关——只要覆盖层是
@@ -121,15 +133,51 @@
   position: relative;
 }
 
+/* 单一纸内挂载的 PaperSurface / WritingPaperPage 各自退役自己的桌面纹理+
+ * 白纸+阴影+页宽/页边距——同一份内容现在直接躺在 .paper-browse-content
+ * 这一张纸里，边距已经在纸的容器上给过一次，不需要每个题组再给一次。
+ * 手法与 writingPaperPage.css 里 `.pi-writing-page .ps-surface/.ps-page`
+ * 的既有 scoped 覆盖完全一致（只是把作用域从"一个写作题组卡内部"扩到
+ * "整卷页所有题组卡"），PaperSurface.css / writingPaperPage.css 本身零
+ * 改动。 */
+.paper-browse-content .ps-surface {
+  min-height: 0;
+  padding: 0;
+  background: none;
+}
+
+.paper-browse-content .ps-page {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.paper-browse-content .pi-writing-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 /* flow-panel 刀 3: 七选五原文衔接句高亮 (.paper-browse-seven-blank-overlay /
  * .paper-browse-seven-clue-mark*) moved to the shared
  * paperSurfaceLectureHighlights.css (@import above) — single source with
  * the harness's equivalent `.pi-seven-*` marks, hand-copy retired. */
 
+/* ─── 部/节标题、指导语 — 卷面字体体系（docs/product/
+ * exam-paper-format-standards.md §2/§4，one-sheet-paper 决策2）───
+ * 部标题=中黑加粗·左顶格·不放大；节标题=书宋常规（不加粗）·缩进2字符；
+ * 指导语=书宋正文。三者与正文同一份左右页边距（继承 .paper-browse-content
+ * 的 padding，不再单独设左右 margin），退役此前的 UI sans + 米棕配色。 */
 .paper-browse-part-heading {
   margin: 24px 0 4px;
-  font-size: 20px;
-  color: #2c2820;
+  font-family: var(--ps-font-stack-heading);
+  font-size: var(--ps-font-size);
+  font-weight: 700;
+  color: inherit;
 }
 
 .paper-browse-part-heading:first-child {
@@ -137,21 +185,41 @@
 }
 
 .paper-browse-section-heading {
-  margin: 8px 0 0;
-  font-size: 16px;
-  color: #4a4438;
+  margin: 16px 0 0;
+  margin-left: var(--ps-passage-indent, 2em);
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  font-weight: 400;
+  color: inherit;
 }
 
 .paper-browse-instruction {
-  margin: 0;
-  font-size: 13px;
-  color: #6b6455;
+  margin: 4px 0 0;
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  font-weight: 400;
+  color: inherit;
+  white-space: pre-line;
+}
+
+.paper-browse-instruction--merged {
+  margin: 0 0 8px;
 }
 
 .paper-browse-pagebreak {
   height: 1px;
   border-top: 1px dashed rgba(74, 68, 56, 0.25);
   margin: 8px 0;
+}
+
+/* ─── 剪刀线 — 虚线=题组可搬走内容的起点，提亮范围=剪走范围
+ * （docs/cuts/one-sheet-paper/plan.md「剪刀线语义」）。左右各缩进，不通
+ * 纸边；无编号标签；只活在屏幕整卷页，print/PDF/DOCX 零影响（这份 css
+ * 只被 PaperBrowsePage.tsx 引入）。 ─── */
+.paper-browse-scissor-line {
+  height: 0;
+  border-top: 1px dashed rgba(74, 68, 56, 0.28);
+  margin: 20px 24px 16px;
 }
 
 .paper-browse-group-card {
@@ -198,6 +266,44 @@
   .paper-browse-group-actions .add-button {
     box-shadow: none;
   }
+}
+
+/* ─── 写作题组（应用文/续写）的剪刀线 — CSS-only ───
+ *
+ * WritingPaperPage.tsx / writingPageModel.mjs 是 Forbidden 范围
+ * （paper-intelligence/**），改不了：它们自己已经把节标题+指导语圈进
+ * pageModel，在 `.pi-writing-page` 内部渲染自己的 `.pi-writing-part` /
+ * `.pi-writing-section` / `.pi-writing-instruction`（PaperBrowsePage.tsx
+ * 的 writingSkipIndices 早在刀 1 就已经跳过顶层重渲染这段——本刀不改这段
+ * 消费逻辑）。剪刀线（节标题之后、指导语/正文之前）改用纯 CSS 兄弟选择器
+ * 在这些既有元素上画：`.pi-writing-section` 后紧跟的第一个兄弟元素（可能
+ * 是指导语，也可能是没有指导语的应用文节直接跟着 passage）顶部加虚线，
+ * 效果同「线在节标题之后」。
+ *
+ * 已知取舍（Known trade-off，见完工报告）：hover 提亮范围对非写作题组严格
+ * 等于剪走范围（节标题是卡外的顶层 sibling，见上方 .paper-browse-group-card
+ * 规则天然生效）；写作题组的节标题是 pageModel 圈出来、渲在卡内的，
+ * `.paper-browse-group-card:hover` 的整卡背景会连带盖住节标题这一行。用
+ * 纯 CSS 精确抠掉这一小块会在指导语/正文/答题框之间的 flex gap 处露出
+ * 没有背景色的缝隙（不连续，比现状更难看），综合判断保留整卡提亮，不做
+ * 这个二级修饰——线本身（剪的位置）依然精确对齐 plan 语义。 */
+.paper-browse-content .pi-writing-section + * {
+  position: relative;
+  padding-top: 16px;
+}
+
+/* Pseudo-element instead of a plain border-top so the dashed line can
+ * inset 24px from each side (matching .paper-browse-scissor-line) without
+ * shrinking the real content box (the writing answer box / passage must
+ * keep the page's own left/right text margin, not an extra 24px). */
+.paper-browse-content .pi-writing-section + *::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  border-top: 1px dashed rgba(74, 68, 56, 0.28);
 }
 
 .paper-browse-loading,

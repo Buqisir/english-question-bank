@@ -217,6 +217,33 @@
  *         proves the activeEvidenceKind derivation (which drives the
  *         palette split in item 42) has real data on both branches to
  *         exercise, not just an always-'support' no-op.
+ * 44-52. one-sheet-paper (毛边⑤ — 整卷页「一张连续卷」，
+ *        docs/cuts/one-sheet-paper/plan.md):
+ *     44. PaperBrowsePage computes a `scissorPlan` (useMemo) purely from
+ *         per-section group counts (multi-group section → each group gets
+ *         its own line; single-group section → its leading 指导语 merges
+ *         into the group card) — no hardcoded groupType list.
+ *     45. Writing groups are excluded from the DOM scissor-line/merge
+ *         machinery (they get a CSS-only sibling-selector line instead,
+ *         since their section heading/instruction are already claimed by
+ *         the Forbidden `findWritingBlockRange`/WritingPaperPage chrome).
+ *     46. `renderGroupCard` renders the `.paper-browse-scissor-line` div
+ *         sibling + folds a merged 指导语 in as the card's own first child.
+ *     47-48. `.paper-browse-content` is the single sheet (one background/
+ *         box-shadow/page-margin padding via the shared --ps-* tokens);
+ *         nested PaperSurface/WritingPaperPage chrome (`.ps-surface`/
+ *         `.ps-page`/`.pi-writing-page`) is retired (scoped overrides,
+ *         source files untouched).
+ *     49-50. The dashed scissor-line rule exists; the writing-section line
+ *         is CSS-only (sibling selector + `::before` on the Forbidden
+ *         `.pi-writing-section` element, no edit to that file).
+ *     51-52. Real paper-2026-i fixture: re-running the scissorPlan
+ *         algorithm against the real blocks array confirms all four
+ *         reading groups get a standalone line each (①-④, before each
+ *         article's letter) and the three single-group non-writing
+ *         sections (七选五/完形/语法填空) merge their 指导语 into the group
+ *         card instead (⑤-⑦; ⑧-⑨ are the two writing sections, covered by
+ *         the CSS-only path in items 49-50).
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -1486,6 +1513,123 @@ assert(
     'paper-passage-letter: real 语法填空 (grammarFill) group section never matches /([A-D])$/ (non-reading groups render no passage letter)',
     [...grammarFillSections].every((s) => !/([A-D])$/.test(s)),
     `sections=${JSON.stringify([...grammarFillSections])}`,
+  )
+}
+
+// ─── 44-52. one-sheet-paper (毛边⑤): single-sheet layout + 剪刀线语义 ───
+//
+// docs/cuts/one-sheet-paper/plan.md. Source-level checks on the scissor-line
+// computation (`scissorPlan`) plus the single-sheet CSS shell, then a
+// behavioral re-run of the SAME算法（sectionGroupCounts → scissorGroupIndices
+// / mergedGroupByInstructionIndex）against the real paper-2026-i blocks array
+// — proves the 9-line plan (4 reading + 5 single-group sections, 2 of which
+// render via the writing CSS-sibling path instead of a DOM div) has real
+// data landing in each bucket, not just a source-level pattern match.
+
+assert(
+  '44. PaperBrowsePage computes a scissorPlan (useMemo) keyed off per-section group counts (not a hardcoded groupType list)',
+  /const scissorPlan = useMemo\(/.test(pageSrc) &&
+    /sectionGroupCounts/.test(pageSrc) &&
+    /scissorGroupIndices/.test(pageSrc) &&
+    /mergedGroupByInstructionIndex/.test(pageSrc),
+  'missing the scissorPlan useMemo / sectionGroupCounts derivation',
+)
+assert(
+  '45. scissorPlan excludes writing groups from the DOM scissor-line + merge machinery (writing gets a CSS-only sibling-selector line instead — see item 50)',
+  /group\.groupType === 'writing'\) continue/.test(pageSrc),
+  'missing the writing-group exclusion in the scissorPlan group loop',
+)
+assert(
+  '46. renderGroupCard renders a .paper-browse-scissor-line sibling before the card when showScissorLine is set, and folds a merged 指导语 in as the card\'s first child',
+  /showScissorLine && <div className="paper-browse-scissor-line"/.test(pageSrc) &&
+    /options\?\.mergedInstructionText &&/.test(pageSrc),
+  'missing the scissor-line render or merged-instruction render in renderGroupCard',
+)
+
+assert(
+  '47. paperBrowsePage.css: .paper-browse-content is the single sheet — one background + one box-shadow, page-margin padding driven by the shared --ps-page-margin tokens',
+  /\.paper-browse-content \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
+    /\.paper-browse-content \{[^}]*box-shadow:/.test(pageCssSrc) &&
+    /\.paper-browse-content \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
+  'missing the single-sheet background/box-shadow/padding on .paper-browse-content',
+)
+assert(
+  '48. paperBrowsePage.css retires each nested PaperSurface/WritingPaperPage\'s own texture+shadow+padding when mounted inside the one sheet (.ps-surface / .ps-page / .pi-writing-page all zeroed, scoped under .paper-browse-content)',
+  /\.paper-browse-content \.ps-surface \{/.test(pageCssSrc) &&
+    /\.paper-browse-content \.ps-page \{/.test(pageCssSrc) &&
+    /\.paper-browse-content \.pi-writing-page \{/.test(pageCssSrc),
+  'missing the scoped retirement rules for nested PaperSurface/WritingPaperPage chrome',
+)
+assert(
+  '49. paperBrowsePage.css declares the dashed .paper-browse-scissor-line rule (1px dashed, inset margin, screen-only — this stylesheet is never consumed by print/export)',
+  /\.paper-browse-scissor-line \{[^}]*border-top:\s*1px dashed/.test(pageCssSrc),
+  'missing .paper-browse-scissor-line dashed rule',
+)
+assert(
+  '50. paperBrowsePage.css draws the writing-section scissor line via a CSS-only sibling selector on the Forbidden .pi-writing-section element (no edit to writingPageModel.mjs/WritingPaperPage.tsx) instead of a DOM div',
+  /\.paper-browse-content \.pi-writing-section \+ \*/.test(pageCssSrc) &&
+    /\.paper-browse-content \.pi-writing-section \+ \*::before/.test(pageCssSrc),
+  'missing the CSS-only writing-section scissor line sibling-selector rules',
+)
+
+// ─── 51-52. Real paper-2026-i fixture: re-run the scissorPlan algorithm ───
+
+{
+  const blocks = asset.content.blocks
+  const sectionGroupCounts = new Map()
+  let sectionId = null
+  for (const block of blocks) {
+    if (block.type === 'sectionHeading') {
+      sectionId = block.sectionId
+      if (!sectionGroupCounts.has(sectionId)) sectionGroupCounts.set(sectionId, 0)
+    } else if (block.type === 'group' && sectionId) {
+      sectionGroupCounts.set(sectionId, (sectionGroupCounts.get(sectionId) ?? 0) + 1)
+    }
+  }
+
+  const scissorGroupIds = new Set()
+  const mergedGroupIds = new Set()
+  sectionId = null
+  for (let i = 0; i < blocks.length; i += 1) {
+    const block = blocks[i]
+    if (block.type === 'sectionHeading') {
+      sectionId = block.sectionId
+      continue
+    }
+    if (block.type !== 'group') continue
+    const group = asset.content.groups[block.groupId]
+    if (!group || group.groupType === 'writing') continue
+    const count = sectionId ? sectionGroupCounts.get(sectionId) ?? 0 : 0
+    if (count > 1) {
+      scissorGroupIds.add(block.groupId)
+      continue
+    }
+    if (count === 1) {
+      const prev = blocks[i - 1]
+      if (prev && prev.type === 'instruction') {
+        mergedGroupIds.add(block.groupId)
+      } else {
+        scissorGroupIds.add(block.groupId)
+      }
+    }
+  }
+
+  assert(
+    '51. paper-2026-i: all four reading groups (multi-group section) get a standalone scissor line each — line sits at the group card itself, i.e. right before each article\'s letter',
+    ['group-2026-i-reading-a', 'group-2026-i-reading-b', 'group-2026-i-reading-c', 'group-2026-i-reading-d'].every(
+      (id) => scissorGroupIds.has(id),
+    ),
+    `scissorGroupIds=${JSON.stringify([...scissorGroupIds])}`,
+  )
+  assert(
+    '52. paper-2026-i: the three single-group non-writing sections (七选五/完形/语法填空) each fold their leading 指导语 into the group card (merged unit) instead of getting a standalone pre-card line',
+    ['group-2026-i-seven-choices', 'group-2026-i-cloze', 'group-2026-i-grammar-fill'].every((id) =>
+      mergedGroupIds.has(id),
+    ) &&
+      !['group-2026-i-seven-choices', 'group-2026-i-cloze', 'group-2026-i-grammar-fill'].some((id) =>
+        scissorGroupIds.has(id),
+      ),
+    `mergedGroupIds=${JSON.stringify([...mergedGroupIds])}, scissorGroupIds=${JSON.stringify([...scissorGroupIds])}`,
   )
 }
 

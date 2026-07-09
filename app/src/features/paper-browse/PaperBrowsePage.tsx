@@ -54,9 +54,14 @@
  * no remove action and no whole-paper "整卷加入" action (aggregate add is
  * out of scope per aggregatePaperResults.ts:8-11).
  */
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ClipboardList } from 'lucide-react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
+// one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
+// WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
+// ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
+// 内部文件，纯数据 primitives，import-only 零改动。
+import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
@@ -171,6 +176,27 @@ function cssAttr(value: string): string {
     return CSS.escape(value)
   }
   return value.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
+}
+
+// one-sheet-paper: single-sheet typography tokens, injected on
+// `.paper-browse-content` (the shared ancestor of every block — headings,
+// instructions, and every group card). CSS custom properties only cascade
+// down the tree, so this is the one place they need to land for
+// paperBrowsePage.css's heading/instruction rules AND the nested
+// PaperSurface/WritingPaperPage mounts (which redeclare their own copies on
+// their own roots already) to read the same `var(--ps-*)` names. Mirrors
+// the identical injection pattern in PaperSurface.tsx / WritingPaperPage.tsx
+// — a third read-only consumer of the same shared primitives, not a new
+// source of truth.
+type PaperBrowseContentStyle = CSSProperties & Record<`--${string}`, string | number>
+const paperBrowseContentStyle: PaperBrowseContentStyle = {
+  '--ps-font-stack': paperSurfaceTokens.paperFontStack,
+  '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
+  '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
+  '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-passage-indent': paperSurfaceTokens.passageIndent,
+  '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
+  '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
 
 // 讲评栏 — 答案行. `null` means "don't render an answer row at all"
@@ -621,6 +647,70 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return skip
   }, [asset, groupModels])
 
+  // one-sheet-paper: 剪刀线判定——虚线=题组可搬走内容的起点，见
+  // docs/cuts/one-sheet-paper/plan.md「剪刀线语义」。判定规则纯粹按「节下
+  // 有几个题组」（不 hardcode groupType，天然覆盖阅读的 4-题组节 vs 其余
+  // 单题组节）：
+  //   - 节下多个题组（阅读第一节）：每个题组卡自己前面一条线——每张卡本来
+  //     就精确等于该题组的剪走范围（字母+文章+题目，节标题/节指导语都是
+  //     节层的独立 sibling，不在卡内），不需要合并任何东西。
+  //   - 节下仅一个题组：线在节标题之后、指导语之前——若该题组紧邻的上一个
+  //     block 恰好是 instruction，把这条 instruction 并入题组卡（同一个
+  //     hover/剪走单元，「指导语跟题走」），题组卡自身的顶层 index 位置就
+  //     不再单独渲染（改在 instruction 的 index 位置一次性连着渲染）；没有
+  //     紧邻 instruction 的单题组节（目前没有这种数据，留通用兜底）则直接
+  //     在题组卡自己位置前插线。
+  //   - writing 题组（应用文/续写）整段排除在外：它们的节标题/指导语已经
+  //     被 findWritingBlockRange 圈进 WritingPaperPage 自己的 pageModel
+  //     （forbidden，paper-intelligence/**，不可改），线/hover 范围改用纯
+  //     CSS 兄弟选择器在 paperBrowsePage.css 里对 .pi-writing-section 之后
+  //     的内容画（见该文件注释）。
+  const scissorPlan = useMemo(() => {
+    const scissorGroupIndices = new Set<number>()
+    const mergedGroupByInstructionIndex = new Map<number, { groupId: string; instructionText: string }>()
+    const skipIndices = new Set<number>()
+    if (!asset) return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices }
+    const blocks = asset.content.blocks
+
+    const sectionGroupCounts = new Map<string, number>()
+    let sectionId: string | null = null
+    for (const block of blocks) {
+      if (block.type === 'sectionHeading') {
+        sectionId = block.sectionId
+        if (!sectionGroupCounts.has(sectionId)) sectionGroupCounts.set(sectionId, 0)
+      } else if (block.type === 'group' && sectionId) {
+        sectionGroupCounts.set(sectionId, (sectionGroupCounts.get(sectionId) ?? 0) + 1)
+      }
+    }
+
+    sectionId = null
+    for (let i = 0; i < blocks.length; i += 1) {
+      const block = blocks[i]
+      if (block.type === 'sectionHeading') {
+        sectionId = block.sectionId
+        continue
+      }
+      if (block.type !== 'group') continue
+      const group = asset.content.groups[block.groupId]
+      if (!group || group.groupType === 'writing') continue
+      const count = sectionId ? sectionGroupCounts.get(sectionId) ?? 0 : 0
+      if (count > 1) {
+        scissorGroupIndices.add(i)
+        continue
+      }
+      if (count === 1) {
+        const prev = blocks[i - 1]
+        if (prev && prev.type === 'instruction') {
+          mergedGroupByInstructionIndex.set(i - 1, { groupId: block.groupId, instructionText: prev.text })
+          skipIndices.add(i)
+        } else {
+          scissorGroupIndices.add(i)
+        }
+      }
+    }
+    return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices }
+  }, [asset])
+
   // rail scrollspy — highlight the topmost anchor currently visible in the
   // scroll container. Simple ordering-based arbitration (no pixel-level
   // tie-breaking): among all anchors the observer currently reports as
@@ -929,41 +1019,59 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return surfaceEl
   }
 
-  function renderGroupCard(groupId: string, index: number): ReactNode {
+  // one-sheet-paper: `mergedInstructionText` folds a single-group section's
+  // leading 指导语 into this same hover/剪走 unit (owner-ratified rule:
+  // 「指导语跟题走」) — rendered as the card's own first child, inside the
+  // same hover-highlight boundary as the group's surface. `showScissorLine`
+  // renders the dashed 剪刀线 sibling immediately above the card — every
+  // non-writing group gets exactly one (either here, standalone, or via the
+  // merged-instruction render path below which passes it too).
+  function renderGroupCard(
+    groupId: string,
+    index: number,
+    options?: { mergedInstructionText?: string; showScissorLine?: boolean },
+  ): ReactNode {
     const group = asset?.content.groups[groupId]
     const entry = groupModels[groupId]
     const card = questionGroupById.get(groupId)
 
     return (
-      <section
-        key={`group-${index}`}
-        className="paper-browse-group-card"
-        data-paper-browse-anchor={groupId}
-        aria-label={group?.title || groupId}
-      >
-        {card && (
-          <div className="paper-browse-group-actions">
-            <button
-              type="button"
-              className="add-button"
-              onClick={() => onAddGroupsToBasket([card])}
-              disabled={card.draftPaperButtonState === 'disabled'}
-              title={
-                card.draftPaperButtonState === 'disabled'
-                  ? card.printUnavailableReason || '暂不可组卷'
-                  : undefined
-              }
-            >
-              {card.draftPaperButtonState === 'in_current_draft'
-                ? '已在草稿卷中'
-                : card.draftPaperButtonState === 'disabled'
-                  ? '暂不可组卷'
-                  : '加入草稿卷'}
-            </button>
-          </div>
-        )}
-        {renderGroupBody(groupId, entry)}
-      </section>
+      <Fragment key={`group-${index}`}>
+        {options?.showScissorLine && <div className="paper-browse-scissor-line" aria-hidden="true" />}
+        <section
+          className="paper-browse-group-card"
+          data-paper-browse-anchor={groupId}
+          aria-label={group?.title || groupId}
+        >
+          {options?.mergedInstructionText && (
+            <p className="paper-browse-instruction paper-browse-instruction--merged">
+              {options.mergedInstructionText}
+            </p>
+          )}
+          {card && (
+            <div className="paper-browse-group-actions">
+              <button
+                type="button"
+                className="add-button"
+                onClick={() => onAddGroupsToBasket([card])}
+                disabled={card.draftPaperButtonState === 'disabled'}
+                title={
+                  card.draftPaperButtonState === 'disabled'
+                    ? card.printUnavailableReason || '暂不可组卷'
+                    : undefined
+                }
+              >
+                {card.draftPaperButtonState === 'in_current_draft'
+                  ? '已在草稿卷中'
+                  : card.draftPaperButtonState === 'disabled'
+                    ? '暂不可组卷'
+                    : '加入草稿卷'}
+              </button>
+            </div>
+          )}
+          {renderGroupBody(groupId, entry)}
+        </section>
+      </Fragment>
     )
   }
 
@@ -1135,14 +1243,29 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             {block.text}
           </h3>
         )
-      case 'instruction':
+      case 'instruction': {
+        // one-sheet-paper: a single-group section's leading 指导语 gets
+        // folded into that group's own hover/剪走 unit (scissorPlan,
+        // computed above) instead of rendering standalone here — the
+        // scissor line renders as part of that merged unit, not as a
+        // separate sibling before this paragraph.
+        const merged = scissorPlan.mergedGroupByInstructionIndex.get(index)
+        if (merged) {
+          return renderGroupCard(merged.groupId, index, {
+            mergedInstructionText: merged.instructionText,
+            showScissorLine: true,
+          })
+        }
         return (
           <p key={`instruction-${index}`} className="paper-browse-instruction">
             {block.text}
           </p>
         )
+      }
       case 'group':
-        return renderGroupCard(block.groupId, index)
+        return renderGroupCard(block.groupId, index, {
+          showScissorLine: scissorPlan.scissorGroupIndices.has(index),
+        })
       case 'pageBreakHint':
         return <div key={`pagebreak-${index}`} className="paper-browse-pagebreak" aria-hidden="true" />
       default:
@@ -1211,9 +1334,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             )
           })}
         </nav>
-        <div className="paper-browse-content" ref={scrollerRef}>
+        <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
           {asset.content.blocks.map((block, index) =>
-            writingSkipIndices.has(index) ? null : renderBlock(block, index),
+            writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index)
+              ? null
+              : renderBlock(block, index),
           )}
           {/*
             刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
