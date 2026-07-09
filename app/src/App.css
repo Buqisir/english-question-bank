@@ -3540,6 +3540,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* home-editorial — emil-processing: primary/secondary press feedback. */
+.concierge-action:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
 /* Primary CTA: 加入草稿卷 — teal-filled, matches DraftPaperWorkbench's
    export button so the same action reads the same everywhere. */
 .concierge-action-add {
@@ -4299,7 +4304,7 @@ button:disabled {
      blank). Flip the share: headline flexes with the row, meta gets a
      modest cap since its content (hitcount/grouptypes/topics) rarely
      needs more than that. */
-  grid-template-columns: minmax(240px, 1fr) minmax(160px, 340px) auto;
+  grid-template-columns: 64px minmax(220px, 1fr) minmax(160px, 320px) auto;
   align-items: center;
   gap: 16px;
   padding: 16px 14px;
@@ -4329,14 +4334,30 @@ button:disabled {
    命中信息整行铺下方 */
 @media (max-width: 640px) {
   .concierge-paper-row {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 40px 1fr auto;
     gap: 8px 12px;
+  }
+  .concierge-paper-row .concierge-paper-year {
+    font-size: 17px;
   }
   .concierge-paper-row .concierge-paper-body {
     grid-column: 1 / -1;
     grid-row: 2;
     min-width: 0;
   }
+}
+
+/* home-editorial — row-first year column (行首独立列). Kept aria-hidden on
+   the element itself; the article's aria-label already carries the full
+   headline text a screen reader needs (year not repeated there either —
+   Should Watch, see buildHeadline / stripLeadingYearToken). */
+.concierge-paper-year {
+  font-size: 24px;
+  font-weight: 300;
+  color: #1E1E1C;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  line-height: 1;
 }
 
 .concierge-paper-anchor {
@@ -4353,6 +4374,13 @@ button:disabled {
   min-width: 0;
 }
 
+.concierge-paper-title-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
 .concierge-paper-headline {
   font-size: 13.5px;
   font-weight: 600;
@@ -4361,11 +4389,25 @@ button:disabled {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
+/* home-editorial — 卷种标注 C·宋体墨字 (owner 2026-07-09 拍板): 真题/模拟
+   render in a serif face, ink-muted, wide tracking, no border/fill. */
 .concierge-paper-sourcetype {
-  font-size: 11px;
-  color: #6A6A64; /* 真题/模拟题是选题判断信息，非装饰标注 */
+  flex: 0 0 auto;
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: 12.5px;
+  color: #6A6A64; /* 真题/模拟 是选题判断信息，非装饰标注 */
+  letter-spacing: 0.2em;
+}
+
+/* home-editorial — 主题升位: plain text line under the headline, replacing
+   the retired pill chips. */
+.concierge-paper-topics-line {
+  margin: 0;
+  font-size: 13px;
+  color: #6A6A64;
 }
 
 .concierge-paper-body {
@@ -4390,26 +4432,11 @@ button:disabled {
   color: #1E1E1C;
 }
 
+/* home-editorial — 题型串退役: fixed "全卷 · N 篇章" replaces the old
+   groupType strip, ink-faint + tabular-nums (no per-groupType text). */
 .concierge-paper-grouptypes {
-  color: #6A6A64;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 320px;
-}
-
-.concierge-paper-topics {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.concierge-paper-topic-chip {
-  font-size: 11px;
-  color: #6A6A64;
-  background: #EDEDEA;
-  border-radius: 999px;
-  padding: 2px 8px;
+  color: #9A9A93;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
@@ -4426,7 +4453,30 @@ button:disabled {
 .concierge-paper-actions {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 10px;
+}
+
+/* home-editorial — the explicit "展开题组"/"收起" button is retired; the
+   whole row stays clickable (unchanged handler) and this text hint reveals
+   at the row's trailing edge on hover/focus instead. Pure opacity, no
+   layout shift — emil hover-显形 prescription. */
+.concierge-row-expand-hint {
+  font-size: 12px;
+  color: #2C6E56;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.concierge-paper-row:hover .concierge-row-expand-hint,
+.concierge-paper-row:focus-within .concierge-row-expand-hint {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .concierge-row-expand-hint {
+    opacity: 1;
+  }
 }
 
 .concierge-paper-detail {
@@ -4436,135 +4486,123 @@ button:disabled {
   border-top: 1px solid rgba(30, 30, 28, 0.06);
 }
 
-/* Group cards inside the expanded paper area */
-.concierge-group-card-list {
+/* home-editorial — 卷面目录 inside the expanded paper area. Replaces the
+   retired 9-card grid with a 部分-grouped index list (denser, no green-tint
+   hit gradient, no side-stripe accent). */
+.concierge-group-index {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 10px;
-}
-
-/*
- * Cut 6 — search-hit highlight on inner passage cards.
- *
- * `<li class="concierge-group-card-li is-hit" data-hit="true">` marks the
- * passage cards (Question Group cards) that the source-paper bucket actually
- * hit. The visual is intentionally restrained — a 2px warm-amber left rule
- * plus a barely-perceptible cream-amber tint — so it never competes with
- * the "已加入草稿卷" disabled state on the primary action button.
- *
- * `data-primary-hit="true"` is the single passage the row scrolled into
- * view on expand; we leave it visually identical to other hits for now
- * (the scroll itself is the primary-hit affordance).
- *
- * NOTE: the `<li>` itself stays as a default grid item — the grid columns
- * on `.concierge-group-card-list` rely on each `<li>` taking one cell.
- * Hit visuals live on the inner `.concierge-group-card`.
- */
-.concierge-group-card-li.is-hit > .concierge-group-card {
-  position: relative;
-  background: linear-gradient(0deg, rgba(44, 110, 86, 0.06), rgba(44, 110, 86, 0.06)), #FFFFFF;
-  border-color: rgba(44, 110, 86, 0.35);
-}
-/*
- * The 2px teal accent rule below is positioned via `::before { position:
- * absolute }`, which requires a non-static positioning context. That
- * context comes from the `position: relative` on the rule above, NOT
- * from `.concierge-group-card-li` (the <li> stays as a default grid
- * item — see note above). If `.concierge-group-card`'s `position:
- * relative` is removed in a future refactor, the rule will jump to the
- * nearest positioned ancestor (likely the `<article class="concierge-
- * paper-row">`) and the highlight will visually break. Keep them
- * paired.
- */
-.concierge-group-card-li.is-hit > .concierge-group-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 2px;
-  border-radius: 2px;
-  background: #2C6E56;
-}
-
-.concierge-group-card {
-  background: #FFFFFF;
   border: 1px solid #D8D8D2;
   border-radius: 8px;
-  padding: 12px 14px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.concierge-group-index-bucket + .concierge-group-index-bucket {
+  border-top: 1px solid #E8E8E4;
+}
+
+/* 组头: 第X部分 语言运用 etc, parsed best-effort from group.section. */
+.concierge-group-section-head {
+  padding: 8px 12px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9A9A93;
+  border-bottom: 1px solid #E8E8E4;
+}
+
+.concierge-group-index-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.concierge-group-index-rows > li + li {
+  border-top: 1px solid #E8E8E4;
+}
+
+/*
+ * home-editorial — one 题组/篇章 row. Search-hit rows render at full ink;
+ * non-hit rows (`.is-dim`, computed from the retired is-hit highlight's same
+ * hitIds set) dim to ink-faint instead of the retired green-tint + teal
+ * side-stripe (impeccable absolute ban: no >1px accent bars).
+ */
+.concierge-group-row {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 40px;
+}
+
+.concierge-group-row-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 9px 12px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+
+.concierge-group-row-main {
+  display: flex;
+  align-items: baseline;
   gap: 8px;
-  min-height: 120px;
-}
-
-.concierge-group-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.concierge-group-head-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
   min-width: 0;
 }
 
-.concierge-group-section {
-  font-size: 11.5px;
-  color: #6A6A64;
+.concierge-group-row-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1E1E1C;
+  /* home-editorial QA fix — flex-shrink:1 with overflow:hidden lets the
+     automatic min-width drop to 0, so at narrow widths this was losing the
+     flex-basis fight against `.concierge-group-row-summary`'s flex:1 and
+     collapsing to a near-invisible sliver ("Reading A" rendering at 2.5px).
+     flex-shrink:0 + a fixed max-width keeps the title legible at any row
+     width; summary (which already owns its own ellipsis) absorbs the
+     squeeze instead. */
+  flex: 0 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
 }
 
-.concierge-group-title {
-  font-size: 13.5px;
+.concierge-group-row-count {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: #6A6A64;
+  font-variant-numeric: tabular-nums;
+}
+
+.concierge-group-row-summary {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12.5px;
   color: #1E1E1C;
-  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.concierge-group-summary {
-  margin: 0;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: #1E1E1C;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.concierge-group-row-topic {
+  flex: 0 0 auto;
+  font-size: 11.5px;
+  color: #9A9A93;
+  white-space: nowrap;
 }
 
-.concierge-group-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.concierge-group-pill {
-  font-size: 11px;
-  color: #6A6A64;
-  background: #EDEDEA;
-  border-radius: 999px;
-  padding: 2px 8px;
-}
-
-.concierge-group-reason {
+.concierge-group-row-reason {
   margin: 0;
   font-size: 11.5px;
   color: #6A6A64;
-  line-height: 1.45;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .concierge-group-reason-label {
@@ -4572,11 +4610,49 @@ button:disabled {
   margin-right: 4px;
 }
 
-.concierge-group-actions {
-  display: flex;
-  flex-wrap: wrap;
+/* 非命中行整体降灰 — plain ink-faint, no side-stripe/no gradient tint. */
+.concierge-group-row.is-dim .concierge-group-row-title,
+.concierge-group-row.is-dim .concierge-group-row-count,
+.concierge-group-row.is-dim .concierge-group-row-summary,
+.concierge-group-row.is-dim .concierge-group-row-topic {
+  color: #9A9A93;
+}
+
+/* 操作簇 — hover/focus-within reveal, pure opacity, surface-2 backdrop
+   covers the row-body tail per plan. Touch devices show it always
+   (@media hover:none) as a compact row with the summary hidden. */
+.concierge-group-row-actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
-  margin-top: auto;
+  padding: 0 12px;
+  background: #EDEDEA;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.concierge-group-row:hover .concierge-group-row-actions,
+.concierge-group-row:focus-within .concierge-group-row-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (hover: none) {
+  .concierge-group-row-actions {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    background: transparent;
+    padding: 6px 12px 6px 0;
+  }
+  .concierge-group-row-summary {
+    display: none;
+  }
 }
 
 /* ─────────────────────────── Recent imports — quiet workbench overrides ───

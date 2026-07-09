@@ -1,17 +1,20 @@
 /**
- * ConciergeGroupCard — a single 题组/篇章 card rendered INSIDE the expanded
- * area of a paper bucket row. Carries the per-group reason and the two
- * teacher-facing actions (加入草稿卷, 找类似), plus a lightweight PaperSurface
- * entry (Cut 3) for groups that are eligible.
+ * ConciergeGroupCard — one 题组/篇章 row inside the expanded 卷面目录
+ * (home-editorial cut retired the old nine-card grid; this component now
+ * renders a dense index row, not a card — the file name is kept unchanged
+ * per the cut's contract even though the visual is a list row).
+ *
+ * Carries the per-group reason and the teacher-facing actions (加入草稿卷,
+ * 找类似, 详情), plus a lightweight PaperSurface entry (Cut 3) for groups
+ * that are eligible. The action cluster reveals on row hover/focus-within;
+ * clicking the row body (outside the action cluster) opens the same detail
+ * view as the explicit 详情 button, for mouse convenience.
  *
  * Smallest add unit is still QuestionGroup. There is no per-question add UI.
  */
 
-import { type ReactNode } from 'react'
-import {
-  groupTypeLabel,
-  type QuestionGroupCard,
-} from '../domain/questionBank.ts'
+import { type MouseEvent, type ReactNode } from 'react'
+import { type QuestionGroupCard } from '../domain/questionBank.ts'
 
 function isDisplayTag(tag: string | undefined): tag is string {
   const value = (tag || '').trim()
@@ -19,15 +22,6 @@ function isDisplayTag(tag: string | undefined): tag is string {
   if (/^[a-z0-9]+(?:[-_][a-z0-9]+)+$/i.test(value)) return false
   if (/^[\x21-\x7E]+$/.test(value) && value.length > 16) return false
   return !/(deepseek|steward|parse|eval|import|reading-parse|source-gap|gap-fill|导入草稿|管家规则|待审阅)/i.test(value)
-}
-
-function compactSection(group: QuestionGroupCard): string | null {
-  const section = (group.section || '').trim()
-  if (!section) return null
-  return section
-    .replace(/阅读理解\s*/g, '阅读 ')
-    .replace(/\s+/g, ' ')
-    .trim()
 }
 
 function compactPassageTitle(group: QuestionGroupCard): string {
@@ -44,8 +38,8 @@ function compactSummary(group: QuestionGroupCard): string {
 
 /**
  * Topic labels are stored as a full `theme-themeGroup-subtopic` path (e.g.
- * "人与自然-自然生态-生态环境"). A card pill shows only the leaf subtopic —
- * the specific, teacher-recognizable phrase — not the whole path.
+ * "人与自然-自然生态-生态环境"). The row shows only the leaf subtopic — the
+ * specific, teacher-recognizable phrase — not the whole path.
  */
 function topicLeafLabel(group: QuestionGroupCard): string | null {
   const first = group.topicLabels?.[0]
@@ -54,21 +48,12 @@ function topicLeafLabel(group: QuestionGroupCard): string | null {
   return leaf || null
 }
 
-function buildTagPills(group: QuestionGroupCard): string[] {
-  const pills: string[] = []
-  const type = groupTypeLabel[group.groupType]
-  if (type) pills.push(type)
-  if (Number.isFinite(group.questionCount) && group.questionCount > 0) {
-    pills.push(`${group.questionCount} 题`)
-  }
+/** Falls back to the first display-worthy free tag when no topic leaf is usable. */
+function buildTopicText(group: QuestionGroupCard): string | null {
   const topic = topicLeafLabel(group)
-  if (topic && isDisplayTag(topic)) {
-    pills.push(topic)
-  } else {
-    const t = group.tags?.find(isDisplayTag)
-    if (t) pills.push(t)
-  }
-  return pills
+  if (topic && isDisplayTag(topic)) return topic
+  const tag = group.tags?.find(isDisplayTag)
+  return tag || null
 }
 
 export type ConciergeGroupCardProps = {
@@ -79,14 +64,20 @@ export type ConciergeGroupCardProps = {
   onSimilar: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for this group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
+  /**
+   * home-editorial — search-hit rows render at full ink; non-hit rows inside
+   * an expanded search result dim to ink-faint instead of the retired
+   * green-tint/teal-stripe treatment. Feed rows (browsing, no search) never
+   * pass true here — every group in a browse feed is trivially "hit".
+   */
+  dimmed?: boolean
 }
 
 export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
-  const { group, reason, alreadyInBasket, onAdd, onSimilar, onOpenDetail } = props
-  const section = compactSection(group)
+  const { group, reason, alreadyInBasket, onAdd, onSimilar, onOpenDetail, dimmed } = props
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
-  const pills = buildTagPills(group)
+  const topicText = buildTopicText(group)
   const paperSurfaceAnalysisHref =
     group.hasPaperSurfaceAnalysis && group.paperSurfaceHref && group.paperSurfaceLabel
       ? group.paperSurfaceHref
@@ -105,39 +96,40 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         ? '打开当前草稿卷并定位到该题组'
         : '加入当前草稿卷'
 
+  const handleRowBodyClick = (event: MouseEvent<HTMLElement>) => {
+    if (!onOpenDetail) return
+    const target = event.target as HTMLElement
+    if (target.closest('button, a, input, textarea, select, [role="button"]')) return
+    onOpenDetail(group)
+  }
+
   return (
-    <article
-      className="concierge-group-card"
+    <div
+      className={`concierge-group-row${dimmed ? ' is-dim' : ''}`}
       data-group-id={group.id}
-      aria-label={`${section || groupTypeLabel[group.groupType]} ${passageTitle}`}
     >
-      <header className="concierge-group-head">
-        <div className="concierge-group-head-text">
-          {section && <span className="concierge-group-section">{section}</span>}
-          <strong className="concierge-group-title" title={passageTitle}>{passageTitle}</strong>
+      <div className="concierge-group-row-body" onClick={handleRowBodyClick}>
+        <div className="concierge-group-row-main">
+          <strong className="concierge-group-row-title" title={passageTitle}>
+            {passageTitle}
+          </strong>
+          <span className="concierge-group-row-count">{group.questionCount} 题</span>
+          {summary && (
+            <span className="concierge-group-row-summary" title={summary}>
+              {summary}
+            </span>
+          )}
+          {topicText && <span className="concierge-group-row-topic">{topicText}</span>}
         </div>
-      </header>
-
-      {summary && (
-        <p className="concierge-group-summary" title={summary}>
-          {summary}
-        </p>
-      )}
-
-      <div className="concierge-group-pills" aria-label="题组标签">
-        {pills.map((pill, idx) => (
-          <span className="concierge-group-pill" key={`${pill}-${idx}`}>{pill}</span>
-        ))}
+        {reason && (
+          <p className="concierge-group-row-reason" title={reason}>
+            <span className="concierge-group-reason-label">推荐理由：</span>
+            {reason}
+          </p>
+        )}
       </div>
 
-      {reason && (
-        <p className="concierge-group-reason" title={reason}>
-          <span className="concierge-group-reason-label">推荐理由：</span>
-          <span>{reason}</span>
-        </p>
-      )}
-
-      <div className="concierge-group-actions" aria-label="题组操作">
+      <div className="concierge-group-row-actions" aria-label="题组操作">
         <button
           type="button"
           className="concierge-action concierge-action-add"
@@ -179,6 +171,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           </a>
         )}
       </div>
-    </article>
+    </div>
   )
 }

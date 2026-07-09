@@ -3,7 +3,9 @@
  *
  * Each row represents a 来源卷/原卷 (one bucket of question groups grouped by
  * paperName + year + region + source signature). Click to expand/collapse;
- * inside, render one ConciergeGroupCard per matching question group.
+ * inside, render one ConciergeGroupCard per matching question group, grouped
+ * by 部分 header into a 卷面目录 list (home-editorial cut — the old 9-card
+ * grid is retired).
  *
  * No fetch happens on expand — we render what we already have from the search
  * hits.
@@ -15,17 +17,30 @@
  *   - On expand, if a `primaryGroupId` is known, the row scrolls that
  *     `<li>` into view with a single smooth `scrollIntoView` call. The
  *     scroll runs once per expand (gated by a ref) — never on every render.
+ *
+ * home-editorial additions:
+ *   - A dedicated year column (行首独立列) replaces the year prefix that used
+ *     to live inside the headline text.
+ *   - The five-groupType strip is retired in favor of a fixed "全卷 · N 篇章"
+ *     line (N = paper.hitCount, which already equals paper.groups.length).
+ *   - Topic chips move from pill badges to a plain text line under the
+ *     headline.
+ *   - The explicit "展开题组"/"收起" button is retired; the whole row stays
+ *     clickable (unchanged handler) and a hover/focus-reveal text hint
+ *     replaces the button at the row's trailing edge.
+ *   - Groups inside the expanded detail are bucketed by a best-effort "部分"
+ *     header parsed from `group.section` (see `parseSectionGroupLabel`).
  */
 
 import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
-import { groupTypeLabel, type QuestionGroupCard } from '../domain/questionBank.ts'
-import type { PaperHitContext, PaperResult } from './aggregatePaperResults.ts'
+import { type QuestionGroupCard } from '../domain/questionBank.ts'
+import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
 import { parsePaperIdFromHref } from './paperSurfaceHref.ts'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
   real_exam: '真题',
-  mock_exam: '模拟题',
+  mock_exam: '模拟',
   self_made: '自建',
   other: '其他',
 }
@@ -35,11 +50,29 @@ function buildSourceTypeLabel(paper: PaperResult): string {
   return SOURCE_TYPE_LABEL[paper.sourceType] || ''
 }
 
+/**
+ * home-editorial — the year now renders in its own column, so the headline
+ * should not repeat it. `paperName` occasionally carries its own leading
+ * year token (e.g. "26.3 广东深圳..."); we strip that best-effort so it
+ * doesn't visually double up with the year column. Not a hard guarantee —
+ * a paperName that embeds the year in an unrecognized shape will still show
+ * it once in the headline (Should Watch, not hard-scrubbed per plan).
+ */
+function stripLeadingYearToken(paperName: string, year: number | null): string {
+  if (!year) return paperName
+  const full = String(year)
+  const short = full.slice(2)
+  const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const pattern = new RegExp(`^\\s*(?:${escape(full)}|${escape(short)})[.\\-年\\s]*`)
+  const stripped = paperName.replace(pattern, '').trim()
+  return stripped || paperName
+}
+
 function buildHeadline(paper: PaperResult): string {
   if (paper.isFallback) return '其他来源'
-  const yearText = paper.year ? `${paper.year} 年` : ''
-  const region = paper.region ? `· ${paper.region} ` : ''
-  return `${yearText}${region}${paper.paperName}`.trim()
+  const region = paper.region ? `${paper.region} ` : ''
+  const name = stripLeadingYearToken(paper.paperName, paper.year)
+  return `${region}${name}`.trim()
 }
 
 /**
@@ -101,6 +134,47 @@ function findRowPaperId(paper: PaperResult): string | null {
   return null
 }
 
+/**
+ * home-editorial — best-effort "部分" header parsed from `group.section`
+ * (e.g. "第三部分 语言运用/完形填空" → "第三部分 语言运用"). Unparseable
+ * sections return null and their groups fall into a header-less bucket
+ * rendered inline (never crash, never render an empty catalog).
+ */
+function parseSectionGroupLabel(section: string | undefined): string | null {
+  const raw = (section || '').trim()
+  if (!raw) return null
+  const partMatch = raw.match(/^(第[一二三四五六七八九十百]+部分[^/]*)/)
+  if (partMatch) return partMatch[1].trim()
+  const slashIndex = raw.indexOf('/')
+  if (slashIndex > 0) return raw.slice(0, slashIndex).trim()
+  return null
+}
+
+type GroupBucket = {
+  label: string | null
+  rows: PaperResultGroup[]
+}
+
+/**
+ * Groups stay in their original (search-hit / feed) order; a new bucket
+ * starts only when the parsed section label changes from the previous row,
+ * so consecutive header-less rows collapse into one flat, header-less
+ * bucket instead of one bucket per row.
+ */
+function bucketGroupsBySection(groups: PaperResultGroup[]): GroupBucket[] {
+  const buckets: GroupBucket[] = []
+  for (const item of groups) {
+    const label = parseSectionGroupLabel(item.group.section)
+    const last = buckets[buckets.length - 1]
+    if (last && last.label === label) {
+      last.rows.push(item)
+    } else {
+      buckets.push({ label, rows: [item] })
+    }
+  }
+  return buckets
+}
+
 export type ConciergePaperRowProps = {
   paper: PaperResult
   expanded: boolean
@@ -125,10 +199,8 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
 
   const headline = buildHeadline(paper)
   const sourceTypeLabel = buildSourceTypeLabel(paper)
-  const groupTypeStrip = paper.groupTypes
-    .map((g) => groupTypeLabel[g as keyof typeof groupTypeLabel] || g)
-    .join(' · ')
   const topicChips = buildTopicChips(paper)
+  const groupBuckets = bucketGroupsBySection(paper.groups)
 
   const handleRowClick = (event: MouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement
@@ -171,6 +243,10 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       aria-label={headline}
       onClick={handleRowClick}
     >
+      <div className="concierge-paper-year" aria-hidden="true">
+        {paper.year ?? '—'}
+      </div>
+
       <div className="concierge-paper-anchor">
         <button
           type="button"
@@ -184,9 +260,16 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           {expanded ? '▾' : '▸'}
         </button>
         <div className="concierge-paper-anchor-text">
-          <strong className="concierge-paper-headline" title={headline}>{headline}</strong>
-          {sourceTypeLabel && (
-            <span className="concierge-paper-sourcetype">{sourceTypeLabel}</span>
+          <div className="concierge-paper-title-line">
+            <strong className="concierge-paper-headline" title={headline}>{headline}</strong>
+            {sourceTypeLabel && (
+              <span className="concierge-paper-sourcetype">{sourceTypeLabel}</span>
+            )}
+          </div>
+          {topicChips.length > 0 && (
+            <p className="concierge-paper-topics-line" aria-label="题组主题">
+              {topicChips.join(' · ')}
+            </p>
           )}
         </div>
       </div>
@@ -201,18 +284,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
               ? `${paper.hitCount} 个篇章`
               : `${badgePrefix(paper.hitContext.scope)}${paper.hitCount}${badgeSuffix(paper.hitContext.scope)}`}
           </span>
-          {groupTypeStrip && (
-            <span className="concierge-paper-grouptypes" title={groupTypeStrip}>
-              {groupTypeStrip}
-            </span>
-          )}
-          {topicChips.length > 0 && (
-            <span className="concierge-paper-topics" aria-label="题组主题">
-              {topicChips.map((topic) => (
-                <span className="concierge-paper-topic-chip" key={topic}>{topic}</span>
-              ))}
-            </span>
-          )}
+          <span className="concierge-paper-grouptypes">全卷 · {paper.hitCount} 篇章</span>
         </p>
         {paper.hitContext.displayReason && (
           <p
@@ -226,14 +298,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       </div>
 
       <div className="concierge-paper-actions" aria-label="来源卷操作">
-        <button
-          type="button"
-          className="concierge-action"
-          onClick={() => onTogglePaper(paper.key)}
-          aria-pressed={expanded}
-        >
-          {expanded ? '收起' : '展开题组'}
-        </button>
         {rowPaperId && (
           <button
             type="button"
@@ -243,6 +307,9 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
             看整卷
           </button>
         )}
+        <span className="concierge-row-expand-hint" aria-hidden="true">
+          {expanded ? '收起 ↑' : '展开题组 ↓'}
+        </span>
       </div>
 
       {expanded && (
@@ -251,34 +318,39 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           id={`concierge-paper-detail-${paper.key}`}
           aria-live="polite"
         >
-          <ul className="concierge-group-card-list" aria-label={variant === 'feed' ? '该卷的题组' : '该卷命中的题组'}>
-            {paper.groups.map(({ group, reason }) => {
-              const isHit = hitIds.has(group.id)
-              const isPrimaryHit =
-                isHit && group.id === paper.hitContext.primaryGroupId
-              return (
-                <li
-                  key={group.id}
-                  className={
-                    isHit
-                      ? 'concierge-group-card-li is-hit'
-                      : 'concierge-group-card-li'
-                  }
-                  data-hit={isHit ? 'true' : undefined}
-                  data-primary-hit={isPrimaryHit ? 'true' : undefined}
-                  ref={isPrimaryHit ? primaryHitRef : null}
-                >
-                  <ConciergeGroupCard
-                    group={group}
-                    reason={reason}
-                    alreadyInBasket={basketIds.has(group.id)}
-                    onAdd={onAdd}
-                    onSimilar={onSimilar}
-                    onOpenDetail={onOpenDetail}
-                  />
-                </li>
-              )
-            })}
+          <ul className="concierge-group-index" aria-label={variant === 'feed' ? '该卷的题组' : '该卷命中的题组'}>
+            {groupBuckets.map((bucket, bucketIndex) => (
+              <li key={bucket.label ?? `flat-${bucketIndex}`} className="concierge-group-index-bucket">
+                {bucket.label && (
+                  <div className="concierge-group-section-head">{bucket.label}</div>
+                )}
+                <ul className="concierge-group-index-rows">
+                  {bucket.rows.map(({ group, reason }) => {
+                    const isHit = hitIds.has(group.id)
+                    const isPrimaryHit =
+                      isHit && group.id === paper.hitContext.primaryGroupId
+                    return (
+                      <li
+                        key={group.id}
+                        data-hit={isHit ? 'true' : undefined}
+                        data-primary-hit={isPrimaryHit ? 'true' : undefined}
+                        ref={isPrimaryHit ? primaryHitRef : null}
+                      >
+                        <ConciergeGroupCard
+                          group={group}
+                          reason={reason}
+                          onOpenDetail={onOpenDetail}
+                          alreadyInBasket={basketIds.has(group.id)}
+                          dimmed={!isHit}
+                          onAdd={onAdd}
+                          onSimilar={onSimilar}
+                        />
+                      </li>
+                    )
+                  })}
+                </ul>
+              </li>
+            ))}
           </ul>
         </section>
       )}

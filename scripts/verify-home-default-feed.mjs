@@ -288,5 +288,36 @@ console.log('\nTest 13: forbidden-scope guard — conciergeSearch.ts / aggregate
   )
 }
 
+// ------------------------------------------------------------------ Test 21
+console.log('\nTest 21: home-editorial — row-first year column + retired groupType strip')
+{
+  const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
+  assert('ConciergePaperRow renders a concierge-paper-year column', /concierge-paper-year/.test(paperRow), '')
+  assert(
+    'groupType strip replaced by fixed "全卷 · N 篇章" (N = paper.hitCount)',
+    /全卷 · \{paper\.hitCount\} 篇章/.test(paperRow),
+    '',
+  )
+  assert(
+    '卷种标注 uses the Songti serif token (owner 2026-07-09 拍板)',
+    /"Songti SC",\s*"SimSun",\s*serif/.test(readSrc('app/src/App.css')),
+    '',
+  )
+}
+
+// ------------------------------------------------------------------ Test 22
+console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid, no green-tint/side-stripe hit highlight')
+{
+  const css = readSrc('app/src/App.css')
+  assert('.concierge-group-index (目录列表) rule exists', /\.concierge-group-index\s*\{/.test(css), '')
+  assert(
+    'retired concierge-group-card-li.is-hit gradient/side-stripe rule is gone',
+    !/concierge-group-card-li\.is-hit/.test(css),
+    '',
+  )
+  const groupCard = readSrc('app/src/concierge/ConciergeGroupCard.tsx')
+  assert('ConciergeGroupCard accepts a dimmed prop for non-hit rows (is-dim, no side-stripe)', /dimmed\?\s*:\s*boolean/.test(groupCard), '')
+}
+
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)
