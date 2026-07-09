@@ -152,15 +152,13 @@ console.log('\nTest 6: 8-paper default cap + "显示全部 N 套卷" expander')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert('DEFAULT_FEED_PAGE_SIZE constant is 8', /const DEFAULT_FEED_PAGE_SIZE\s*=\s*8/.test(desk), '')
-  assert(
-    'visibleFeed slices to the page size unless expanded',
-    /feedExpanded\s*\?\s*defaultFeed\s*:\s*defaultFeed\.slice\(0,\s*DEFAULT_FEED_PAGE_SIZE\)/.test(desk),
-    '',
-  )
+  // CR round-2 M1 rewrite: the collapsed feed no longer slices raw papers —
+  // it takes whole year groups until the cumulative count reaches the page
+  // size (see Test 24), so the old slice assertion is retired.
   assert('expander button text renders 显示全部 {feedPaperCount} 套卷', /显示全部\s*\{feedPaperCount\}\s*套卷/.test(desk), '')
   assert(
-    'expander only shown when not already expanded and paper count exceeds the page size',
-    /!feedExpanded\s*&&\s*feedPaperCount\s*>\s*DEFAULT_FEED_PAGE_SIZE/.test(desk),
+    'expander only shown when not already expanded and more papers exist than visible',
+    /!feedExpanded\s*&&\s*feedPaperCount\s*>\s*visiblePaperCount/.test(desk),
     '',
   )
   assert('clicking expander sets feedExpanded true', /onClick=\{\(\)\s*=>\s*setFeedExpanded\(true\)\}/.test(desk), '')
@@ -205,8 +203,13 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
   assert('feed rows pass variant="feed"', /variant="feed"/.test(feedBlockMatch), '')
   const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
   assert(
-    'ConciergePaperRow renders a hit-free badge for the feed variant',
-    /variant === 'feed'\s*\?\s*`\$\{paper\.hitCount\} 个篇章`/.test(paperRow),
+    'ConciergePaperRow renders the 全卷 badge for the feed variant (single count, no double-reporting)',
+    /variant === 'feed'\s*\?\s*`全卷 · \$\{paper\.hitCount\} 篇章`/.test(paperRow),
+    '',
+  )
+  assert(
+    'retired grouptypes span stays retired (no second count element)',
+    !/concierge-paper-grouptypes/.test(paperRow),
     '',
   )
   assert(
@@ -286,6 +289,100 @@ console.log('\nTest 13: forbidden-scope guard — conciergeSearch.ts / aggregate
     /export function aggregatePaperResults\(hits: ConciergeSearchHit\[\]\)/.test(aggregate),
     '',
   )
+}
+
+// ------------------------------------------------------------------ Test 21
+console.log('\nTest 21: home-editorial — row-first year column + retired groupType strip')
+{
+  const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
+  assert('ConciergePaperRow renders a concierge-paper-year column', /concierge-paper-year/.test(paperRow), '')
+  assert(
+    'groupType strip replaced by fixed "全卷 · N 篇章" (N = paper.hitCount)',
+    /全卷 · \$\{paper\.hitCount\} 篇章/.test(paperRow),
+    '',
+  )
+  assert(
+    '卷种标注 uses the Songti serif token (owner 2026-07-09 拍板)',
+    /"Songti SC",\s*"SimSun",\s*serif/.test(readSrc('app/src/App.css')),
+    '',
+  )
+}
+
+// ------------------------------------------------------------------ Test 23
+console.log('\nTest 23: home-editorial round 2 (方向 C) — feed rows drop the per-row year column (year group head carries it), search rows keep it')
+{
+  const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
+  assert(
+    'year column conditionally rendered only for variant !== feed',
+    /variant !== ['"]feed['"] && \([\s\S]{0,120}concierge-paper-year/.test(paperRow),
+    '',
+  )
+  assert('article carries data-variant={variant} for CSS gating', /data-variant=\{variant\}/.test(paperRow), '')
+
+  const css = readSrc('app/src/App.css')
+  assert(
+    "feed-variant row overrides grid-template-columns (year track dropped)",
+    /\.concierge-paper-row\[data-variant='feed'\]\s*\{[^}]*grid-template-columns/.test(css),
+    '',
+  )
+}
+
+// ------------------------------------------------------------------ Test 24
+console.log('\nTest 24: home-editorial round 2 — year-grouped feed archive (组头「2026」+「N 套」, null-year → 其他 tail)')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert('groupFeedByYear helper defined', /function groupFeedByYear/.test(desk), '')
+  assert(
+    'null-year papers labelled 其他',
+    /label:\s*year !== null \? String\(year\) : ['"]其他['"]/.test(desk),
+    '',
+  )
+  // CR round-2 M1: year groups must be built from the FULL defaultFeed and
+  // paginated by whole year groups — slicing papers before grouping made the
+  // collapsed view lie about a year's 套数.
+  assert(
+    'year groups built from the full defaultFeed (not a sliced visibleFeed)',
+    /useMemo\(\(\) => groupFeedByYear\(defaultFeed\), \[defaultFeed\]\)/.test(desk),
+    '',
+  )
+  assert(
+    'collapsed feed paginates by whole year groups (cumulative page-size cut)',
+    /shown >= DEFAULT_FEED_PAGE_SIZE/.test(desk) && /shown \+= yearGroup\.papers\.length/.test(desk),
+    '',
+  )
+  assert('sliced visibleFeed grouping is retired', !/groupFeedByYear\(visibleFeed\)/.test(desk), '')
+  assert('feed renders concierge-feed-year-head with the group label', /concierge-feed-year-label[\s\S]{0,40}\{yearGroup\.label\}/.test(desk), '')
+  assert('feed renders the "N 套" true count next to the year head', /concierge-feed-year-count[\s\S]{0,60}\{yearGroup\.papers\.length\}\s*套/.test(desk), '')
+}
+
+// ------------------------------------------------------------------ Test 25
+console.log('\nTest 25: home-editorial round 2 — 命令行一行 (search + thinking toggle + filter toggle + inventory count) + 筛选默认收起')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert('concierge-command-bar wraps the intent bar', /concierge-command-bar/.test(desk), '')
+  assert('filter panel state defaults collapsed', /const \[filterPanelExpanded, setFilterPanelExpanded\] = useState\(false\)/.test(desk), '')
+  assert(
+    'filter row additionally gated on filterPanelExpanded (好默认: default collapsed)',
+    /state\.kind === ['"]results['"]\) && filterPanelExpanded && \(/.test(desk),
+    '',
+  )
+  assert('command-line filter toggle carries aria-expanded={filterPanelExpanded}', /aria-expanded=\{filterPanelExpanded\}/.test(desk), '')
+  assert('active-filter collapsed summary only shown when !filterPanelExpanded && hasActiveFilters', /!filterPanelExpanded &&\s*\n\s*hasActiveFilters/.test(desk), '')
+  assert('command-line inventory count renders 套卷 · … 篇章', /concierge-command-count[\s\S]{0,80}套卷 · \{catalogGroupCount\} 篇章/.test(desk), '')
+}
+
+// ------------------------------------------------------------------ Test 22
+console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid, no green-tint/side-stripe hit highlight')
+{
+  const css = readSrc('app/src/App.css')
+  assert('.concierge-group-index (目录列表) rule exists', /\.concierge-group-index\s*\{/.test(css), '')
+  assert(
+    'retired concierge-group-card-li.is-hit gradient/side-stripe rule is gone',
+    !/concierge-group-card-li\.is-hit/.test(css),
+    '',
+  )
+  const groupCard = readSrc('app/src/concierge/ConciergeGroupCard.tsx')
+  assert('ConciergeGroupCard accepts a dimmed prop for non-hit rows (is-dim, no side-stripe)', /dimmed\?\s*:\s*boolean/.test(groupCard), '')
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)

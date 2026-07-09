@@ -15,7 +15,7 @@
 
 import { useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
-import { aggregatePaperResults } from './aggregatePaperResults.ts'
+import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
 import { buildDefaultFeed } from './defaultFeed.ts'
@@ -108,12 +108,42 @@ function isVacuumResultsState(state: ConciergeRetrievalView['state']): boolean {
   return state.kind === 'results' && state.hits.length === 0
 }
 
+/**
+ * home-editorial round 2 (方向 C) — 年份分组（feed 态 only）.
+ *
+ * `buildDefaultFeed` already returns papers sorted year DESC with null-year
+ * papers sorted last (see defaultFeed.ts). Grouping here is therefore just
+ * "start a new bucket whenever the year changes from the previous row" —
+ * no re-sorting, no re-bucketing of papers within a year. A null year
+ * becomes the tail "其他" bucket, which falls out naturally from the sort.
+ */
+type FeedYearGroup = {
+  year: number | null
+  label: string
+  papers: PaperResult[]
+}
+
+function groupFeedByYear(papers: PaperResult[]): FeedYearGroup[] {
+  const groups: FeedYearGroup[] = []
+  for (const paper of papers) {
+    const year = typeof paper.year === 'number' ? paper.year : null
+    const last = groups[groups.length - 1]
+    if (last && last.year === year) {
+      last.papers.push(paper)
+    } else {
+      groups.push({ year, label: year !== null ? String(year) : '其他', papers: [paper] })
+    }
+  }
+  return groups
+}
+
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { retrieval, actions, basketIds, onAdd, onOpenDetail, onOpenPaperBrowse, questionGroups, dataStatus, thinkingMode, onThinkingModeChange } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, triggerSimilar, togglePaper } = actions
   const inputId = useId()
   const thinkingToggleId = useId()
+  const thinkingHintId = useId()
   const dataLoading = dataStatus === 'loading'
   const [feedExpanded, setFeedExpanded] = useState(false)
 
@@ -154,6 +184,39 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       return next
     })
   }
+  function removeFilter(key: keyof ConciergeFilters) {
+    setFilters((prev) => {
+      const next = { ...prev }
+      delete next[key]
+      return next
+    })
+  }
+
+  // home-editorial round 2 (方向 C) — 好默认: the whole structured filter
+  // panel starts collapsed. This is a separate toggle from `filtersExpanded`
+  // above (which only governs the nested 地区/来源 progressive disclosure
+  // once the panel itself is open).
+  const [filterPanelExpanded, setFilterPanelExpanded] = useState(false)
+  const filterPanelId = useId()
+  const activeFilterCount = [
+    filters.groupType,
+    filters.year,
+    filters.region,
+    filters.sourceType,
+    filters.topicGroup,
+  ].filter((value) => value !== undefined).length
+  // Collapsed-state active chip summary — reuses the same faceted option
+  // labels the open filter panel already computes, just picked out for the
+  // currently-active dimensions.
+  const activeFilterEntries = useMemo(() => {
+    const dims = ['groupType', 'year', 'region', 'sourceType', 'topicGroup'] as const
+    return dims
+      .filter((dim) => filters[dim] !== undefined)
+      .map((dim) => {
+        const option = filterOptions[dim].find((candidate) => candidate.value === String(filters[dim]))
+        return { key: dim, text: option?.label ?? String(filters[dim]) }
+      })
+  }, [filters, filterOptions])
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -178,11 +241,46 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     () => (showFeed ? buildDefaultFeed(filteredQuestionGroups) : []),
     [showFeed, filteredQuestionGroups],
   )
-  const visibleFeed = feedExpanded ? defaultFeed : defaultFeed.slice(0, DEFAULT_FEED_PAGE_SIZE)
   const feedPaperCount = defaultFeed.length
   const feedGroupCount = useMemo(
     () => defaultFeed.reduce((sum, paper) => sum + paper.groups.length, 0),
     [defaultFeed],
+  )
+  // home-editorial round 2 — feed rows group by year (组头「2026」+「N 套」);
+  // defaultFeed is already year-DESC + null-last sorted (buildDefaultFeed),
+  // so grouping only needs to bucket consecutive same-year runs.
+  //
+  // CR round-2 M1: group over the FULL feed and paginate by WHOLE year
+  // groups — never slice papers mid-year. Slicing first made the collapsed
+  // view show "2024 · 2 套" while the library holds 4 (组头计数失真，违反
+  // 「N 套」真实计数章程). Collapsed view takes whole year groups until the
+  // cumulative paper count reaches DEFAULT_FEED_PAGE_SIZE, so every header
+  // it shows carries that year's true total.
+  const feedByYear = useMemo(() => groupFeedByYear(defaultFeed), [defaultFeed])
+  const visibleFeedByYear = useMemo(() => {
+    if (feedExpanded) return feedByYear
+    const visible: FeedYearGroup[] = []
+    let shown = 0
+    for (const yearGroup of feedByYear) {
+      if (shown >= DEFAULT_FEED_PAGE_SIZE) break
+      visible.push(yearGroup)
+      shown += yearGroup.papers.length
+    }
+    return visible
+  }, [feedByYear, feedExpanded])
+  const visiblePaperCount = useMemo(
+    () => visibleFeedByYear.reduce((sum, yearGroup) => sum + yearGroup.papers.length, 0),
+    [visibleFeedByYear],
+  )
+
+  // Command-line inventory count — always the FULL, unfiltered corpus (not
+  // narrowed by search/chip filters), so "34 套卷 · 278 篇章" reads as a
+  // constant fact about the library, not a moving search-result count.
+  const catalogFeed = useMemo(() => buildDefaultFeed(questionGroups), [questionGroups])
+  const catalogPaperCount = catalogFeed.length
+  const catalogGroupCount = useMemo(
+    () => catalogFeed.reduce((sum, paper) => sum + paper.groups.length, 0),
+    [catalogFeed],
   )
 
   // C2: search-result rows narrow the same way, but by construction from
@@ -212,42 +310,87 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
   return (
     <section className="concierge-desk" aria-label="题库取题流">
-      {/* Search input is the first focal element — no landing hero. */}
-      <form className="concierge-intent-bar" onSubmit={handleSubmit}>
-        <label htmlFor={inputId} className="visually-hidden">
-          自然语言搜索
-        </label>
-        <input
-          id={inputId}
-          className="concierge-intent-input"
-          value={intent}
-          onChange={(event) => setIntent(event.target.value)}
-          placeholder={placeholder}
-          autoComplete="off"
-          disabled={dataLoading}
-          aria-busy={dataLoading || undefined}
-        />
-        <button
-          type="submit"
-          className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
-          disabled={submitDisabled}
-          aria-label="开始取题"
-          title="开始取题"
-        >
-          {state.kind === 'loading' || dataLoading ? '取题中…' : '→'}
-        </button>
-      </form>
+      {/* home-editorial round 2 (方向 C) — 命令行一行: search input flexes,
+          thinking toggle + filter toggle + inventory count ride along
+          inline. No landing hero, no centered hero search box. */}
+      <div className="concierge-command-bar">
+        <form className="concierge-intent-bar" onSubmit={handleSubmit}>
+          <label htmlFor={inputId} className="visually-hidden">
+            自然语言搜索
+          </label>
+          <input
+            id={inputId}
+            className="concierge-intent-input"
+            value={intent}
+            onChange={(event) => setIntent(event.target.value)}
+            placeholder={placeholder}
+            autoComplete="off"
+            disabled={dataLoading}
+            aria-busy={dataLoading || undefined}
+          />
+          <button
+            type="submit"
+            className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
+            disabled={submitDisabled}
+            aria-label="开始取题"
+            title="开始取题"
+          >
+            {state.kind === 'loading' || dataLoading ? '取题中…' : '→'}
+          </button>
+        </form>
 
-      <div className="concierge-thinking-toggle">
-        <input
-          type="checkbox"
-          id={thinkingToggleId}
-          checked={thinkingMode ?? false}
-          onChange={(event) => onThinkingModeChange?.(event.target.checked)}
-        />
-        <label htmlFor={thinkingToggleId}>思考模式</label>
-        <span className="concierge-thinking-hint">用 AI 理解你的描述，更准但稍慢</span>
+        <div className="concierge-thinking-toggle" title="用 AI 理解你的描述，更准但稍慢">
+          <input
+            type="checkbox"
+            id={thinkingToggleId}
+            checked={thinkingMode ?? false}
+            onChange={(event) => onThinkingModeChange?.(event.target.checked)}
+            aria-describedby={thinkingHintId}
+          />
+          <label htmlFor={thinkingToggleId}>思考模式</label>
+          <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
+        </div>
+
+        {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && (
+          <button
+            type="button"
+            className="concierge-command-filter-toggle"
+            aria-expanded={filterPanelExpanded}
+            aria-controls={filterPanelId}
+            onClick={() => setFilterPanelExpanded((value) => !value)}
+          >
+            筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
+          </button>
+        )}
+
+        {!dataLoading && (
+          <span className="concierge-command-count">
+            {catalogPaperCount} 套卷 · {catalogGroupCount} 篇章
+          </span>
+        )}
       </div>
+
+      {/* 好默认: 筛选默认收起。收起态下若有激活筛选，命令行下方露出可移除的
+          激活 chip 摘要，替代整块筛选面板。 */}
+      {!dataLoading &&
+        (state.kind === 'empty' || state.kind === 'results') &&
+        !filterPanelExpanded &&
+        hasActiveFilters && (
+          <ul className="concierge-active-filter-chips" aria-label="已激活筛选">
+            {activeFilterEntries.map((entry) => (
+              <li key={entry.key}>
+                <button
+                  type="button"
+                  className="concierge-active-filter-chip"
+                  onClick={() => removeFilter(entry.key)}
+                >
+                  {FILTER_DIM_LABEL[entry.key]}：{entry.text}
+                  <span aria-hidden="true"> ×</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
 
       {dataLoading && (
         <>
@@ -278,9 +421,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       {/* Cut ai-mode-filter-chips (C5): structured filter row replaces the
           retired STARTER_CHIPS. Shown for 'empty', 'results', and the true
           vacuum ('results' + zero hits); NOT during 'loading' or
-          'clarification' (existing region left untouched per plan C5). */}
-      {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && (
-        <div className="concierge-filter-row" aria-label="结构化筛选">
+          'clarification' (existing region left untouched per plan C5).
+          home-editorial round 2 — 好默认: additionally gated on the
+          command-line "筛选" toggle (`filterPanelExpanded`), default
+          collapsed. */}
+      {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterPanelExpanded && (
+        <div className="concierge-filter-row" id={filterPanelId} aria-label="结构化筛选">
           {visibleFilterDims.map((dimension) => (
             <div key={dimension} className="concierge-filter-dim-row">
               <span className="concierge-filter-dim-label">{FILTER_DIM_LABEL[dimension]}</span>
@@ -424,25 +570,40 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 题库里现有 {feedPaperCount} 套卷 · {feedGroupCount} 个篇章。可以直接翻，或用一句话描述你要的题。
                 {hasActiveFilters && <span className="concierge-feed-filtered-tag">（已筛选）</span>}
               </p>
-              <ul className="concierge-paper-list">
-                {visibleFeed.map((paper) => (
-                  <li key={paper.key}>
-                    <ConciergePaperRow
-                      paper={paper}
-                      variant="feed"
-                      expanded={expandedPaperKey === paper.key}
-                      basketIds={basketIds}
-                      onTogglePaper={togglePaper}
-                      onAdd={onAdd}
-                      onSimilar={(group) => {
-                        void triggerSimilar(group)
-                      }}
-                      onOpenDetail={onOpenDetail}
-                    />
-                  </li>
+              {/* home-editorial round 2 — 年份分组档案: consecutive same-year
+                  runs from the already year-DESC-sorted visibleFeed become
+                  one group with a "2026 · N 套" head. Null-year papers land
+                  in the trailing "其他" group (defaultFeed.ts sorts them
+                  last already). */}
+              <div className="concierge-feed-groups">
+                {visibleFeedByYear.map((yearGroup) => (
+                  <div key={yearGroup.label} className="concierge-feed-year-group">
+                    <div className="concierge-feed-year-head">
+                      <span className="concierge-feed-year-label">{yearGroup.label}</span>
+                      <span className="concierge-feed-year-count">{yearGroup.papers.length} 套</span>
+                    </div>
+                    <ul className="concierge-paper-list">
+                      {yearGroup.papers.map((paper) => (
+                        <li key={paper.key}>
+                          <ConciergePaperRow
+                            paper={paper}
+                            variant="feed"
+                            expanded={expandedPaperKey === paper.key}
+                            basketIds={basketIds}
+                            onTogglePaper={togglePaper}
+                            onAdd={onAdd}
+                            onSimilar={(group) => {
+                              void triggerSimilar(group)
+                            }}
+                            onOpenDetail={onOpenDetail}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
-              {!feedExpanded && feedPaperCount > DEFAULT_FEED_PAGE_SIZE && (
+              </div>
+              {!feedExpanded && feedPaperCount > visiblePaperCount && (
                 <button
                   type="button"
                   className="concierge-feed-expand"
