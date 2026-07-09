@@ -821,6 +821,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   function selectLectureQuestion(groupId: string, questionId: string): void {
     const lectureEntry = lectureAnalysisByGroupId[groupId]
     const plainEntry = groupModels[groupId]
+    // 选中七选五题时自动展开该题的衔接链手风琴（openQuestionIds 是本页
+    // 外控 state，面板零改动）。只追加不收起：手动开合与「全部收起」照旧。
+    if (asset?.content.groups[groupId]?.groupType === 'sevenChoices') {
+      setOpenSevenChoiceQuestionIds((prev) => (prev.includes(questionId) ? prev : [...prev, questionId]))
+    }
     if (lectureEntry?.kind === 'cloze') {
       const blankView = lectureEntry.model.analysisByQuestionId[questionId] ?? null
       const firstPassageEvidence = blankView?.evidenceRows.find((row) => !row.isOptionSide) ?? null

@@ -1434,6 +1434,14 @@ assert(
   !/滚动到题组查看速览/.test(pageSrc) && /滚动卷面或点选题目后，这里显示讲评/.test(pageSrc),
   'empty-state copy was not updated',
 )
+assert(
+  '刀 3 追刀 (owner QA): selecting a sevenChoices question auto-expands its accordion chain — selectLectureQuestion seeds openSevenChoiceQuestionIds (append-only, manual toggles untouched)',
+  /groupType\s*===\s*'sevenChoices'/.test(pageSrc) &&
+    /setOpenSevenChoiceQuestionIds\(\(prev\)\s*=>\s*\(prev\.includes\(questionId\)\s*\?\s*prev\s*:\s*\[\.\.\.prev,\s*questionId\]\)\)/.test(
+      pageSrc,
+    ),
+  'selectLectureQuestion does not seed openSevenChoiceQuestionIds for sevenChoices groups',
+)
 
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)
