@@ -102,6 +102,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
 
@@ -261,6 +262,44 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return skip
   }, [asset, groupModels])
 
+  // rail scrollspy — highlight the topmost anchor currently visible in the
+  // scroll container. Simple ordering-based arbitration (no pixel-level
+  // tie-breaking): among all anchors the observer currently reports as
+  // intersecting, pick the first one in document order.
+  //
+  // root is the browser viewport (null), not the scroller ref: the page
+  // scrolls at the document level (.paper-browse-content itself has no
+  // overflow/height constraint — it grows to full content height), so a
+  // percentage rootMargin must be computed against the viewport, not
+  // against the ~9000px-tall content element (which would make the
+  // margin thousands of pixels and break the "topmost visible" signal).
+  useEffect(() => {
+    if (loading || !asset) return
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    const anchorEls = Array.from(
+      scroller.querySelectorAll<HTMLElement>('[data-paper-browse-anchor]'),
+    )
+    if (anchorEls.length === 0) return
+    const order = anchorEls.map((el) => el.getAttribute('data-paper-browse-anchor') || '')
+    const visible = new Set<string>()
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const anchor = (entry.target as HTMLElement).getAttribute('data-paper-browse-anchor')
+          if (!anchor) continue
+          if (entry.isIntersecting) visible.add(anchor)
+          else visible.delete(anchor)
+        }
+        const current = order.find((anchor) => visible.has(anchor))
+        if (current) setActiveAnchor(current)
+      },
+      { root: null, rootMargin: '0px 0px -70% 0px', threshold: 0 },
+    )
+    for (const el of anchorEls) observer.observe(el)
+    return (): void => observer.disconnect()
+  }, [asset, loading])
+
   const railItems = useMemo(() => {
     if (!asset) return []
     const items: Array<{ anchor: string; label: string; kind: 'part' | 'section' | 'group' }> = []
@@ -350,9 +389,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         data-paper-browse-anchor={groupId}
         aria-label={group?.title || groupId}
       >
-        <div className="paper-browse-group-card-header">
-          <h4>{group?.title || groupId}</h4>
-          {card && (
+        {card && (
+          <div className="paper-browse-group-actions">
             <button
               type="button"
               className="add-button"
@@ -370,8 +408,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   ? '暂不可组卷'
                   : '加入草稿卷'}
             </button>
-          )}
-        </div>
+          </div>
+        )}
         {renderGroupBody(entry)}
       </section>
     )
@@ -446,16 +484,22 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       <AppTopbar {...shellNav} pageTitle={asset.paper.title} onBack={onBackToWorkbench} />
       <div className="paper-browse-shell">
         <nav className="paper-browse-rail" aria-label="目录">
-          {railItems.map((item) => (
-            <button
-              key={item.anchor}
-              type="button"
-              className={`paper-browse-rail-item paper-browse-rail-item--${item.kind}`}
-              onClick={() => scrollToAnchor(item.anchor)}
-            >
-              {item.label}
-            </button>
-          ))}
+          {railItems.map((item) => {
+            const isActive = item.anchor === activeAnchor
+            return (
+              <button
+                key={item.anchor}
+                type="button"
+                className={`paper-browse-rail-item paper-browse-rail-item--${item.kind}${
+                  isActive ? ' paper-browse-rail-item--active' : ''
+                }`}
+                aria-current={isActive ? 'true' : undefined}
+                onClick={() => scrollToAnchor(item.anchor)}
+              >
+                {item.label}
+              </button>
+            )
+          })}
         </nav>
         <div className="paper-browse-content" ref={scrollerRef}>
           {asset.content.blocks.map((block, index) =>
