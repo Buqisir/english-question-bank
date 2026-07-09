@@ -1,9 +1,16 @@
 /**
- * PaperBrowsePage — layout CSS (刀B v1).
+ * PaperBrowsePage — layout CSS (刀B v1 → flow-panel 刀 1: 一页两姿态).
  *
  * PaperSurface internals (PaperSurface.css / shared/papersurface/**) are
  * untouched; this file only styles the page shell, the left 目录 rail,
- * and the group-card chrome that wraps each PaperSurface mount.
+ * the right 讲评栏, and the group-card chrome that wraps each PaperSurface
+ * mount.
+ *
+ * Layout model: 挑题态(默认) = rail 贴视口左缘 + 卷面居中，右缘只有一枚
+ * 「讲评」把手。讲评态(把手点开) = 三栏并存（rail / 卷面 / 讲评栏），卷面
+ * 在 rail 与讲评栏之间重新居中。讲评栏固定宽度 380px，≥1200px 视口时是
+ * 常驻第三栏（独立滚动）；<1200px 视口时改为右侧抽屉浮层（覆盖卷面，带
+ * 背景蒙层可点击关闭）。
  */
 
 .paper-browse-page {
@@ -17,11 +24,17 @@
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 24px;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 24px 24px 96px;
   width: 100%;
+  padding: 24px 24px 96px;
   box-sizing: border-box;
+  position: relative;
+  transition: grid-template-columns 0.2s ease;
+}
+
+@media (min-width: 1200px) {
+  .paper-browse-shell--lecture-open {
+    grid-template-columns: 220px 1fr 380px;
+  }
 }
 
 .paper-browse-rail {
@@ -81,6 +94,9 @@
   flex-direction: column;
   gap: 16px;
   min-width: 0;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .paper-browse-part-heading {
@@ -168,6 +184,133 @@
   padding: 24px;
   font-size: 13px;
   color: #8a8272;
+}
+
+/* ─── 讲评把手 ─── */
+
+.paper-browse-lecture-handle {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  padding: 14px 8px;
+  border: 1px solid #d8d8d2;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: #ffffff;
+  color: #1e1e1c;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  z-index: 31;
+  box-shadow: -1px 1px 4px rgba(30, 30, 28, 0.08);
+  transition: background 0.12s, right 0.2s ease;
+}
+
+.paper-browse-lecture-handle:hover {
+  background: #ededea;
+}
+
+@media (min-width: 1200px) {
+  .paper-browse-lecture-handle--open {
+    right: 380px;
+  }
+}
+
+/* ─── 讲评栏（组级速览） ─── */
+
+.paper-browse-lecture-panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e6e2d7;
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1200px) {
+  .paper-browse-lecture-panel {
+    position: sticky;
+    top: 24px;
+    height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+}
+
+.paper-browse-lecture-empty {
+  margin: 0;
+  font-size: 13px;
+  color: #8a8272;
+}
+
+.paper-browse-lecture-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paper-browse-lecture-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2c2820;
+}
+
+.paper-browse-lecture-range {
+  font-weight: 400;
+  color: #6b6455;
+}
+
+.paper-browse-answer-row {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #4a4438;
+}
+
+.paper-browse-deep-link {
+  align-self: flex-start;
+  font-size: 13px;
+  color: #2c6e56;
+  text-decoration: none;
+}
+
+.paper-browse-deep-link:hover {
+  text-decoration: underline;
+}
+
+.paper-browse-lecture-backdrop {
+  display: none;
+}
+
+/* <1200px: 讲评栏改抽屉浮层，覆盖卷面，带可点击关闭的背景蒙层。 */
+@media (max-width: 1199.98px) {
+  .paper-browse-lecture-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(380px, 92vw);
+    height: 100vh;
+    z-index: 30;
+    border-radius: 0;
+    box-shadow: -4px 0 16px rgba(30, 30, 28, 0.18);
+    overflow-y: auto;
+  }
+
+  .paper-browse-lecture-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background: rgba(30, 30, 28, 0.18);
+    z-index: 29;
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 900px) {
