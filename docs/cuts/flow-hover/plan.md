@@ -74,7 +74,15 @@ Forbidden（碰到即违规）：`app/src/shared-ui/papersurface/**`、
   paper-2026-i 实卷走 hover 显形/rail 联动/触屏模拟（DevTools 触屏仿真
   或 Playwright `hasTouch`），截图留档在 DEV 报告里。
 
-## Chunk B — 尾部解析杆（DEV 执行契约）
+## Chunk B — 尾部解析杆（已撤刀，2026-07-08 owner 定向）
+
+> **撤刀记录**：Chunk B 施工完成（分支
+> `worktree-agent-a23d35ce234711510` @ 7c13124，DEV 验收全绿）后、CR
+> 完成前，owner 定向改道：尾部解析杆每组一根，会把 Chunk A 刚磨平的卷面
+> 重新切回卡片感，且"解析进整卷页"应以**右栏整条讲评面板**（一页两姿态）
+> 的形态实现。方案移交新刀 `docs/cuts/flow-panel/plan.md`。
+> 分支保留作参考（答案行/深读链接取数逻辑将在 flow-panel 刀 1 复用），
+> flow-panel 刀 1 合并后删除。本节以下契约仅存档，不再执行。
 
 > 前置：Chunk A 已合并（93bc7d4，CR APPROVE，main CI 绿）。
 

@@ -23,6 +23,17 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
+- 2026-07-09：**flow-hover Chunk A 收官 + Chunk B 撤刀改道 flow-panel**。
+  - Chunk A（整卷页流式化+悬浮显形+rail scrollspy+触屏兜底）合并
+    93bc7d4，CR APPROVE，main CI 绿。题组卡头部退役，卷面连续。
+  - Chunk B（尾部解析杆）施工完成后 owner High 档定向**撤刀**：每组
+    一根杆重新切碎卷面。分支 7c13124 留档（答案行逻辑供移植）。
+  - 新方向 **flow-panel 三刀**（owner 拍板，`docs/cuts/flow-panel/plan.md`）：
+    整卷页一页两姿态——挑题态（rail 贴左+卷面居中）/讲评态（右栏解析
+    整条，宽度恒定，复用解析页五面板）。开关选姿态、点题选内容；
+    刀 3 入口带态（详情/搜索「看解析」→讲评态锚定），链接迁移后老
+    解析页退役（备用牌：聚焦态）。刀 3 顺路承载 popstate/URL 债。
+    UI 轨队列相应更新：flow-panel 刀 1→2→3 替代原 flow-hover 后续。
 - 2026-07-09（UI 整改日második波：owner 边用边报，五刀+一事故）：
   - **生产导出 PDF 事故闭环**：根因=生产机从未装 zip/LibreOffice/CJK 字体
     （DOCX→PDF 线自 go-live 起断路，E2E 走 vivliostyle 线未暴露）。已装
