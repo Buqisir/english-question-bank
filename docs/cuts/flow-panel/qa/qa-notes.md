@@ -49,3 +49,12 @@ worktree 复制出的本地 sqlite，不触碰生产）。
   `save_to_disk` 在本 sandbox 里没有暴露可访问的文件系统路径）；上述每一步
   验证都在会话内以内联截图的方式逐条肉眼核对过，但没有 PNG 文件留痕在这个
   目录里。
+
+## 主代理补验（2026-07-09，Playwright，闭合 CR Follow-up Gate）
+
+窄屏 1000×800 / 触屏 390×844(hasTouch) / 桌面 1440×900 极端滚动，11/11 全过：
+抽屉 fixed 浮层+backdrop 显示、backdrop 点击关闭、卷面保宽（708px）、触屏 tap
+开合、Chunk A 操作簇常显回归、chip 与讲评栏底部滚动无重叠。截图：
+narrow-closed / narrow-open / touch-drawer-open / desktop-bottom-scroll.png。
+CR Should Fix 同步收口（f654137）：文档级 Esc 关讲评+还焦把手，Playwright
+实测 open/escClosed/focusReturned 全 true。
