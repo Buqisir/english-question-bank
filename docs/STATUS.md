@@ -41,6 +41,12 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
   覆盖窄屏抽屉+触屏。**flow-panel 三刀全收，owner QA 过**。事实澄清：
   卷面上七选五的空本不可点（无 stem/空为纯 span），七选五选题入口
   =深链+面板内开合，深链修复即闭合全部缺口。
+  - **生产已部署 d2194d8**（owner 拍板，2026-07-09）：pull→装依赖+build
+    →restart 分步流程；eqb+caddy active、health 200、eqbank.cc 200
+    （服务器侧+本地双测，新 bundle hash 已上线）、
+    verify-paper-assets-consistency 生产实跑 169/169 绿。带上=刀3+
+    七选五追刀+CI paths-ignore。当日 GitHub runner 饿死三连均为假红
+    （签名：runner=none 零步骤 15min 超时，rerun --failed 单踢即绿）。
 - 2026-07-09：**双刀收官——flow-panel 刀 2 + home-editorial**（owner PO QA
   「过」，merge bb1ac30+e07f755，verify:all 71 绿，CI 待确认后此条销）：
   - **flow-panel 刀 2**：讲评栏=解析页五面板真身搬家+点题联动（点卷面
