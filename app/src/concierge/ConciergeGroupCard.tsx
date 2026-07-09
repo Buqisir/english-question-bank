@@ -33,7 +33,11 @@ function compactPassageTitle(group: QuestionGroupCard): string {
 }
 
 function compactSummary(group: QuestionGroupCard): string {
-  return (group.summary || '').trim()
+  const summary = (group.summary || '').trim()
+  // 无真摘要的题组（完形/语法常见）summary 就是题组名本身——同词复读
+  // 不渲，目录行只留名称+题数。
+  if (summary === compactPassageTitle(group)) return ''
+  return summary
 }
 
 /**
