@@ -32,9 +32,21 @@
 }
 
 @media (min-width: 1200px) {
+  /* 讲评态：rail 收紧凑档给卷面让宽（owner 2026-07-09：卷面不许被挤，
+     导航可以做小）。紧凑 rail 只渲染题组项，见 PaperBrowsePage.tsx。 */
   .paper-browse-shell--lecture-open {
-    grid-template-columns: 220px 1fr 380px;
+    grid-template-columns: 88px 1fr 380px;
   }
+}
+
+.paper-browse-rail--compact .paper-browse-rail-item {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .paper-browse-rail {

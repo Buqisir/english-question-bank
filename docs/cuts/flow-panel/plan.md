@@ -32,6 +32,92 @@
 
 刀 2/刀 3 细节在前一刀收口后由 PM 补写成执行契约再派工。
 
+> 刀 1 收官后 owner 实测反馈（2026-07-09，已处置）：① 讲评态挤压卷面
+> →已修（b325b0b，讲评态 rail 收 88px 紧凑档，只留题号项）；② 右栏只有
+> 跳老解析页的链接≠预期——确认为刀 2 范围本身，即刻开工（下方契约）。
+
+## 刀 2 — 点题联动 + 五解析面板搬家（DEV 执行契约）
+
+> 前置：刀 1 已合并（7c89222 + 紧凑 rail b325b0b，main CI 绿）。
+> 派 **dev-hard**（五题型面板 × 焦点状态机，wiring 密集）。
+
+### 目标（owner 原话级）
+
+讲评栏里放的是**解析页同款真面板**——"单个题组点进去看的和整卷看的是
+一个东西，只不过统一了宽度"。刀 2 之后右栏不再是答案行+跳转链接的
+速览，而是完整解析内容；「深读解析」跳转链接退役（入口带态迁移是刀 3）。
+
+### Scope
+
+白名单：
+- `app/src/features/paper-browse/PaperBrowsePage.tsx`
+- `app/src/features/paper-browse/paperBrowsePage.css`
+- `scripts/verify-paper-browse.mjs`（断言窄改+新行为轻量断言）
+
+**允许 import、严禁修改**：`app/src/features/paper-intelligence/**` 的
+五个面板组件（PaperAssetAnalysisPanel / SevenChoicesAnalysisPanel /
+ClozeAnalysisPanel / GrammarFillAnalysisPanel / WritingAnalysisPanel）、
+相应 analysis adapter、`paperIntelligence.css`（随面板 import 生效，
+不改其内容；宽度适配一律在 paperBrowsePage.css 里用容器上下文覆盖）。
+参考实现=`PaperIntelligencePaperSurfaceHarness.tsx`（fetch→adapter→
+panel 的接线和 lectureFocus/onFocusIntent 协议都在里面，只读参考）。
+
+Forbidden：`shared-ui/papersurface/**`（PaperSurface 通过**现有 props**
+接入焦点，零修改）、harness 与解析页任何行为改动、server/domain/
+App.tsx、print/export、其他页面。
+
+### 行为规格
+
+1. **数据**：讲评态首次打开时按需补拉本卷缺的 analyses
+   （cloze-analysis-v1 / grammar-fill-analysis-v1 / writing-analysis-v1；
+   reading/sevenChoices 页面已有）。拉取失败/文件缺失→该组讲评栏显
+   「解析未发布」，不崩、不阻塞其他组。挑题态（讲评关）**零新增请求**。
+2. **右栏结构**（讲评开）：
+   - 头部保留刀 1 的组级速览：题组名+题号范围+答案行（writing 无答案行）。
+   - 身体=当前题组 groupType 对应的解析面板，数据经与 harness 同款
+     adapter 构建；未点题时面板走自身空态（「点击左侧题目查看解析」）。
+   - 「深读解析」链接退役。
+3. **点题联动**：讲评态下 PaperSurface 传真 `onFocusIntent`
+   （'request-lecture-focus'，协议同 harness），点卷面上的题→右栏
+   选中该题并显示其解析；面板内 onSelectOption/onSelectEvidence 回传
+   的 activeEvidenceId 经 `lectureFocus` 传回 PaperSurface 高亮证据。
+   跨组点题→右栏切到该组+该题。挑题态（讲评关）维持现状
+   （onFocusIntent no-op、lectureFocus null），卷面无讲评噪音。
+4. **统一宽度**：五面板在 380px 栏内正常排版；pi-* 样式的硬宽度/溢出
+   问题在 paperBrowsePage.css 用容器选择器覆盖（不改 pi css）。逐面板
+   过一遍（阅读证据链/七选五选项池/完形选项格/语法 facet/写作条目）。
+5. **不变量**：刀 1 交互（把手/Esc 还焦/窄屏抽屉/紧凑 rail/scrollspy）
+   不回归；解析页与详情页行为零变化；PaperSurface 零修改。
+
+### 验收标准
+
+- 讲评开：五种题组滚动/点题各验一遍——面板内容与解析页同组内容一致
+  （抽 2 题逐字比对）；点卷面题号右栏跟随；点面板证据卷面高亮。
+- 讲评关：卷面纯净，零解析请求、零焦点噪音。
+- 缺 analysis 的组显「解析未发布」（可用 QA 夹具或临时改名文件验证）。
+- `node scripts/verify-paper-browse.mjs` 绿（含新断言）；tsc 绿；
+  `pnpm -C app run verify:all` 或 CI 绿。
+- **真点浏览器 QA 必做**：paper-2026-i 全五题型 + 窄屏抽屉里点题联动 +
+  触屏仿真，截图入 `docs/cuts/flow-panel/qa/`（命名 dao2-*）。
+
+### 卷面显影原则（owner 2026-07-09 实测后拍板，刀 2 修复轮依据）
+
+看"题长在哪里"定显影层级：
+- **阅读（定位型，题在文外）**：给**动线**——从题干回原文定位是教学
+  内容本身，与解析页同款层级必须齐。
+- **完形/语法填空（原位型，空即位置）**：只给**证据高亮**（点空亮
+  线索句/呼应词），不做动线。完形若日后实测出现"跨段串线索"动作
+  再议升级。
+- **七选五（混血）**：衔接链在右栏手风琴里讲，原文恢复**衔接句高亮**
+  （`useSevenChoicesPaperHighlights` 层），不加阅读式动线。
+
+owner 实测抓到的两个 parity 缺口（修复轮范围）：①七选五高亮 hook
+未接线；②阅读动线层缺失（对照解析页排查补齐）。
+
+### DEV 汇报要求
+
+同刀 1：文件清单 / verify 摘要 / QA 状态+截图 / Blind Spots / 越界声明。
+
 ## 刀 1 — DEV 执行契约
 
 ### Scope
