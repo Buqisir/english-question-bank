@@ -42,8 +42,13 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
     空态文案。**教训**：显影层 parity 须列显式验收项；source-grep
     断言可固化错误行为，数据真实性优先行为/夹具断言。
   - 下一刀：flow-panel 刀 3（入口带态+链接迁移+URL/popstate+样式
-    抽共享+小尾巴清单）。**生产部署待 owner 拍**（flow 系列+found 页
-    全在 main 未上生产）。
+    抽共享+小尾巴清单），owner 定下会话做。
+  - **生产已部署 95dffc5**（owner 拍板，2026-07-09）：pull→eqb-build→
+    restart 分步流程；eqb+caddy active、health 200、eqbank.cc 200
+    （服务器侧+本地双测）、verify-paper-assets-consistency 生产实跑
+    169/169 绿。CI 插曲两则记录在案：e2e 冒烟没跟上悬浮显形（修=先
+    hover）；GitHub runner 饿死致 e2e 15min 超时假红（rerun 即绿，
+    诊断依据=job runner_id:0 零步骤执行）。
 - 2026-07-09：**flow-panel 刀 1 收官**（merge 7c89222，CR APPROVE，main CI
   绿）。整卷页一页两姿态骨架落地：rail 贴左+卷面居中+右缘讲评把手+右栏
   组级速览（scrollspy 跟随答案行/深读链接），窄屏抽屉+触屏主代理
