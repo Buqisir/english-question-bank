@@ -52,7 +52,12 @@ import {
   type WritingPaperViewModel,
 } from '../paper-intelligence/writingPaperViewAdapter.ts'
 import { findWritingBlockRange } from '../paper-intelligence/writingPageModel.mjs'
-import type { PaperAssetV1, PaperContentBlock } from '../../domain/paperAsset.ts'
+import type {
+  AnswerKeyEntry,
+  PaperAssetV1,
+  PaperContentBlock,
+  PaperContentGroup,
+} from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import './paperBrowsePage.css'
 
@@ -85,6 +90,30 @@ function cssAttr(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
 }
 
+// 讲评栏 — 答案行. `null` means "don't render an answer row at all"
+// (groupType === 'writing'); an empty-but-non-null case renders the
+// 答案未入库 fallback below. Logic moved from the撤刀 flow-hover Chunk B
+// (7c13124) — answerKey is already loaded on `asset`, zero new fetches.
+function buildAnswerRowText(asset: PaperAssetV1, group: PaperContentGroup): string | null {
+  if (group.groupType === 'writing') return null
+  const entries = group.questionIds
+    .map((qid) => asset.answerKey.answers[qid])
+    .filter((entry): entry is AnswerKeyEntry => Boolean(entry))
+    .sort((a, b) => a.questionNo - b.questionNo)
+  if (entries.length === 0) return '答案未入库'
+  return entries.map((entry) => `${entry.questionNo}. ${entry.answer}`).join('　')
+}
+
+function buildGroupRangeLabel(asset: PaperAssetV1, group: PaperContentGroup): string {
+  const questionNos = group.questionIds
+    .map((qid) => asset.content.questions[qid]?.questionNo)
+    .filter((no): no is number => typeof no === 'number')
+    .sort((a, b) => a - b)
+  if (questionNos.length === 0) return ''
+  if (questionNos.length === 1) return `${questionNos[0]}`
+  return `${questionNos[0]}-${questionNos[questionNos.length - 1]}`
+}
+
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
@@ -103,8 +132,27 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
+  // 讲评态开关 — 挑题态(默认收起)/讲评态(展开). State only, per 刀 1 契约;
+  // URL 承载留给刀 3。
+  const [lectureOpen, setLectureOpen] = useState(false)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
+  const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
+
+  // CR should-fix（同 my-space 先例）：讲评栏开着时文档级 Esc 关闭并还焦
+  // 到把手，补齐窄屏抽屉的模态语义。
+  useEffect(() => {
+    if (!lectureOpen) return
+    function onKeyDown(event: KeyboardEvent): void {
+      if (event.key !== 'Escape') return
+      setLectureOpen(false)
+      lectureHandleRef.current?.focus()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return (): void => {
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [lectureOpen])
 
   useEffect(() => {
     let cancelled = false
@@ -415,6 +463,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     )
   }
 
+  // 讲评栏内容 — 组级速览，跟随 scrollspy 的 activeAnchor。activeAnchor 落
+  // 在 part/section 标题上时（不是一个 groupId）没有对应题组，走空态，
+  // 实现从简（刀 1 契约允许）。
+  function renderLecturePanel(): ReactNode {
+    if (!asset) return null
+    const group = activeAnchor ? asset.content.groups[activeAnchor] : undefined
+    if (!activeAnchor || !group) {
+      return <p className="paper-browse-lecture-empty">滚动到题组查看速览</p>
+    }
+    const range = buildGroupRangeLabel(asset, group)
+    const answerRow = buildAnswerRowText(asset, group)
+    const card = questionGroupById.get(activeAnchor)
+    const showDeepLink = Boolean(card?.hasPaperSurfaceAnalysis && card?.paperSurfaceHref)
+    return (
+      <div className="paper-browse-lecture-body">
+        <h4 className="paper-browse-lecture-title">
+          {group.title}
+          {range && <span className="paper-browse-lecture-range"> · {range}</span>}
+        </h4>
+        {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
+        {showDeepLink && card && (
+          <a className="paper-browse-deep-link" href={card.paperSurfaceHref ?? undefined}>
+            {card.paperSurfaceLabel ?? '深读解析'}
+          </a>
+        )}
+      </div>
+    )
+  }
+
   function renderBlock(block: PaperContentBlock, index: number): ReactNode {
     switch (block.type) {
       case 'partHeading':
@@ -482,7 +559,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   return (
     <div className="paper-browse-page">
       <AppTopbar {...shellNav} pageTitle={asset.paper.title} onBack={onBackToWorkbench} />
-      <div className="paper-browse-shell">
+      <div
+        className={`paper-browse-shell${
+          lectureOpen ? ' paper-browse-shell--lecture-open' : ''
+        }`}
+      >
         <nav className="paper-browse-rail" aria-label="目录">
           {railItems.map((item) => {
             const isActive = item.anchor === activeAnchor
@@ -506,7 +587,32 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             writingSkipIndices.has(index) ? null : renderBlock(block, index),
           )}
         </div>
+        {lectureOpen && (
+          <aside className="paper-browse-lecture-panel" aria-label="讲评">
+            {renderLecturePanel()}
+          </aside>
+        )}
       </div>
+      {lectureOpen && (
+        <button
+          type="button"
+          className="paper-browse-lecture-backdrop"
+          aria-label="关闭讲评栏"
+          onClick={() => setLectureOpen(false)}
+        />
+      )}
+      <button
+        type="button"
+        ref={lectureHandleRef}
+        className={`paper-browse-lecture-handle${
+          lectureOpen ? ' paper-browse-lecture-handle--open' : ''
+        }`}
+        onClick={() => setLectureOpen((open) => !open)}
+        aria-pressed={lectureOpen}
+        aria-expanded={lectureOpen}
+      >
+        讲评
+      </button>
       <button
         type="button"
         className="basket-chip"
