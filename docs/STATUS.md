@@ -23,6 +23,20 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
+- 2026-07-09：**flow-panel 刀 3 收官**（merge 2c42e29，fresh Opus CR
+  APPROVE with should-fix 零 Must Fix，verify:all 70 绿 + 主代理
+  Playwright 补验 13/13，main CI 绿 run 29013048718）：入口带态（详情/搜索卡
+  「看解析」→整卷页讲评态+锚定+预选题，`buildPaperBrowseLectureHref`
+  前端换算，server 零改动）+ URL 契约（lecture/questionId 进 URL，
+  replaceState 同步，刷新/分享还原姿态）+ App 级 popstate 落地
+  （Back/Forward 四路由同步，PI/reading-analysis 走 reload 兜底）+
+  七选五高亮/证据连线样式抽共享（paperSurfaceLectureHighlights.css
+  单源，手抄副本销）+ 小尾巴三清（scrollspy 临界去抖/深链沉降期点题
+  竞态抑制/窄屏空态文案）。老解析页 URL 直达保留，页内入口已全迁，
+  退役与 reading-analysis 孤儿支同刀（挂账）。CR Should Watch 挂账：
+  ① verify-c6a3 一条断言基线已 stale 且未注册 CI（tiny fix 另刀）；
+  ② 七选五深链只预选不展开手风琴（owner 定夺）；③ owner PO QA 建议
+  覆盖窄屏抽屉+触屏。flow-panel 三刀全收，owner 实测待过。
 - 2026-07-09：**双刀收官——flow-panel 刀 2 + home-editorial**（owner PO QA
   「过」，merge bb1ac30+e07f755，verify:all 71 绿，CI 待确认后此条销）：
   - **flow-panel 刀 2**：讲评栏=解析页五面板真身搬家+点题联动（点卷面
