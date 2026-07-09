@@ -350,7 +350,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   const railItems = useMemo(() => {
     if (!asset) return []
-    const items: Array<{ anchor: string; label: string; kind: 'part' | 'section' | 'group' }> = []
+    const items: Array<{
+      anchor: string
+      label: string
+      /** 讲评态紧凑 rail 用的短标签：题号区间，无题号时退回题组名。 */
+      compactLabel?: string
+      kind: 'part' | 'section' | 'group'
+    }> = []
     for (const block of asset.content.blocks) {
       if (block.type === 'partHeading') {
         items.push({ anchor: block.partId, label: block.text, kind: 'part' })
@@ -371,6 +377,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         items.push({
           anchor: block.groupId,
           label: range ? `${group.title} · ${range}` : group.title,
+          compactLabel: range || group.title,
           kind: 'group',
         })
       }
@@ -564,8 +571,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
         }`}
       >
-        <nav className="paper-browse-rail" aria-label="目录">
+        <nav
+          className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
+          aria-label="目录"
+        >
           {railItems.map((item) => {
+            // 讲评态 rail 收窄给卷面让宽：只留题组项（题号区间），部分/节
+            // 标题隐去；完整名走 title tooltip。
+            if (lectureOpen && item.kind !== 'group') return null
             const isActive = item.anchor === activeAnchor
             return (
               <button
@@ -575,9 +588,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   isActive ? ' paper-browse-rail-item--active' : ''
                 }`}
                 aria-current={isActive ? 'true' : undefined}
+                title={lectureOpen ? item.label : undefined}
                 onClick={() => scrollToAnchor(item.anchor)}
               >
-                {item.label}
+                {lectureOpen ? item.compactLabel || item.label : item.label}
               </button>
             )
           })}
