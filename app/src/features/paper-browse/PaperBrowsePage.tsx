@@ -92,6 +92,7 @@ import {
   type ReviewedGrammarFillAnalysisV1,
 } from '../paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts'
 import { findWritingBlockRange } from '../paper-intelligence/writingPageModel.mjs'
+import { useSevenChoicesPaperHighlights } from '../paper-intelligence/useSevenChoicesPaperHighlights.ts'
 import { SevenChoicesAnalysisPanel } from '../paper-intelligence/SevenChoicesAnalysisPanel'
 import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysisPanel'
 import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
@@ -540,6 +541,30 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setLectureSelection((prev) => (prev && prev.groupId !== activeAnchor ? null : prev))
   }, [activeAnchor])
 
+  // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
+  // 镜像 PaperIntelligencePaperSurfaceHarness.tsx 的 "Auto-scroll active
+  // evidence into the PaperSurface scroller" effect（activeEvidenceId 变化
+  // 即滚动 `[data-paper-evidence-id]` 锚点入视野）。只对阅读组做这个动线：
+  // 完形/语法填空是"原位型"，空即位置，只给证据高亮不做滚动（见 plan
+  // 「卷面显影原则」）；七选五"混血"用衔接句高亮（下方另一处修复），同样
+  // 不做阅读式动线。
+  useEffect(() => {
+    if (!lectureOpen) return
+    if (!lectureSelection?.evidenceId) return
+    if (groupModels[lectureSelection.groupId]?.kind !== 'reading') return
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    const target = scroller.querySelector<HTMLElement>(
+      `[data-paper-evidence-id="${cssAttr(lectureSelection.evidenceId)}"]`,
+    )
+    if (!target) return
+    const reduced =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduced ? 'auto' : 'smooth' })
+  }, [lectureOpen, lectureSelection, groupModels])
+
   const railItems = useMemo(() => {
     if (!asset) return []
     const items: Array<{
@@ -597,6 +622,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         }
       : { kind: 'question', questionId: lectureSelection.questionId }
   }, [lectureSelection])
+
+  // 刀 2 修复轮 ②: 七选五原文高亮 —— 讲评栏当前面板组是七选五时接入解析页
+  // harness 同款 useSevenChoicesPaperHighlights，随链条手风琴（
+  // openSevenChoiceQuestionIds）在整卷页卷面容器上亮衔接句。scroller ref
+  // 用整卷页卷面容器（`scrollerRef` → `.paper-browse-content`），不是某一
+  // 题组的局部容器 —— 该 hook 的坐标算法基于 rect 差值，document 级滚动
+  // 下与题组容器同款效果（两者都是 viewport-relative，差值不受页面滚动
+  // 影响，只随 hook 自身的 resize/effect-dep 重算刷新，见 hook 内部）。
+  const panelGroupModel = panelGroupId ? groupModels[panelGroupId] : undefined
+  const sevenChoiceOverlay = useSevenChoicesPaperHighlights({
+    enabled: lectureOpen && panelGroupModel?.kind === 'sevenChoices',
+    leftScrollerRef: scrollerRef,
+    openQuestionIds: openSevenChoiceQuestionIds,
+    chains: panelGroupModel?.kind === 'sevenChoices' ? panelGroupModel.model.chains : [],
+  })
 
   function scrollToAnchor(anchor: string): void {
     const scroller = scrollerRef.current
@@ -999,6 +1039,29 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         <div className="paper-browse-content" ref={scrollerRef}>
           {asset.content.blocks.map((block, index) =>
             writingSkipIndices.has(index) ? null : renderBlock(block, index),
+          )}
+          {/*
+            刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
+            `enabled` 同款门控（panelGroupModel?.kind === 'sevenChoices'）
+            而不只看 marks.length —— 讲评栏切到别的题组时 hook 内部不会
+            主动清空 marks（只在 enabled 时才 setOverlay），若只看
+            marks.length 会露出上一个七选五题组的残影。
+          */}
+          {lectureOpen && panelGroupModel?.kind === 'sevenChoices' && sevenChoiceOverlay.marks.length > 0 && (
+            <div className="paper-browse-seven-blank-overlay" aria-hidden="true">
+              {sevenChoiceOverlay.marks.map((mark) => (
+                <span
+                  key={mark.id}
+                  className={`paper-browse-seven-clue-mark paper-browse-seven-clue-mark--${mark.kind}`}
+                  data-seven-color={mark.colorIndex}
+                  style={{
+                    transform: `translate(${mark.left}px, ${mark.top}px)`,
+                    width: `${mark.width}px`,
+                    height: `${mark.height}px`,
+                  }}
+                />
+              ))}
+            </div>
           )}
         </div>
         {lectureOpen && (

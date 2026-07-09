@@ -109,6 +109,81 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  /* 刀 2 修复轮 ②: 七选五衔接句高亮覆盖层的绝对定位锚点。整卷页是
+     document 级滚动（这个容器本身不滚动），useSevenChoicesPaperHighlights
+     算的是 viewport-relative 差值，与容器是否自身滚动无关——只要覆盖层是
+     这个容器的直接子元素、容器建立 position:relative，坐标就能对齐。 */
+  position: relative;
+}
+
+/*
+ * 刀 2 修复轮 ②: 七选五原文衔接句高亮 —— 样式从
+ * paperIntelligencePaperSurfaceHarness.css 的 .pi-seven-blank-overlay /
+ * .pi-seven-clue-mark* 原样复制改名（那份 css 是 Forbidden 文件，不能
+ * import 也不能改；useSevenChoicesPaperHighlights hook 本身只 import 不改，
+ * 见 PaperBrowsePage.tsx 里的调用）。色值与 data-seven-color 分档逻辑与解析页
+ * harness 保持一致，換皮不换配方，讲评栏里的 SevenChoicesAnalysisPanel 选项
+ * 卡同款配色不受影响（那是另一份未被这次改动触碰的样式）。
+ */
+.paper-browse-seven-blank-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.paper-browse-seven-clue-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 3px;
+  background: var(--seven-mark-topic, rgba(231, 171, 86, 0.18));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.paper-browse-seven-clue-mark--signal {
+  background: var(--seven-mark-signal, rgba(231, 171, 86, 0.34));
+  box-shadow: inset 0 -2px 0 var(--seven-border, rgba(122, 106, 88, 0.45));
+}
+
+.paper-browse-seven-clue-mark--context {
+  background: var(--seven-mark-context, rgba(231, 171, 86, 0.12));
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='0'] {
+  --seven-mark-topic: rgba(231, 171, 86, 0.18);
+  --seven-mark-signal: rgba(231, 171, 86, 0.34);
+  --seven-mark-context: rgba(231, 171, 86, 0.11);
+  --seven-border: rgba(173, 113, 41, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='1'] {
+  --seven-mark-topic: rgba(103, 174, 150, 0.18);
+  --seven-mark-signal: rgba(103, 174, 150, 0.34);
+  --seven-mark-context: rgba(103, 174, 150, 0.11);
+  --seven-border: rgba(50, 128, 102, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='2'] {
+  --seven-mark-topic: rgba(123, 151, 210, 0.18);
+  --seven-mark-signal: rgba(123, 151, 210, 0.34);
+  --seven-mark-context: rgba(123, 151, 210, 0.11);
+  --seven-border: rgba(76, 101, 166, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='3'] {
+  --seven-mark-topic: rgba(192, 130, 175, 0.18);
+  --seven-mark-signal: rgba(192, 130, 175, 0.34);
+  --seven-mark-context: rgba(192, 130, 175, 0.11);
+  --seven-border: rgba(139, 79, 123, 0.46);
+}
+
+.paper-browse-seven-clue-mark[data-seven-color='4'] {
+  --seven-mark-topic: rgba(225, 111, 86, 0.18);
+  --seven-mark-signal: rgba(225, 111, 86, 0.34);
+  --seven-mark-context: rgba(225, 111, 86, 0.11);
+  --seven-border: rgba(176, 72, 54, 0.48);
 }
 
 .paper-browse-part-heading {

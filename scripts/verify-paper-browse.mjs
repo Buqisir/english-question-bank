@@ -154,6 +154,35 @@
  *         `buildGrammarFillAnalysisSurfaceModel` each resolve against the
  *         fixture's cloze/grammar-fill analysis files without throwing —
  *         proves the 按需补拉 adapter calls have real data to run against.
+ * 34-38. flow-panel 刀 2 修复轮 (dao2-fix, owner 2026-07-09 实测拍板的两个
+ *        卷面显影 parity 缺口):
+ *     34. 七选五原文高亮: PaperBrowsePage imports (only-import contract)
+ *         `useSevenChoicesPaperHighlights`, wires it with `enabled:
+ *         lectureOpen && panelGroupModel?.kind === 'sevenChoices'` and
+ *         `leftScrollerRef: scrollerRef` (the whole-paper 卷面容器, per
+ *         plan — not a per-group local container).
+ *     35. The overlay's render condition mirrors the hook's `enabled` gate
+ *         exactly (`panelGroupModel?.kind === 'sevenChoices'`, not just
+ *         `marks.length > 0`) — the hook does not clear `marks` on
+ *         disable, so a looser render guard would flash a previous 题组's
+ *         stale marks when 讲评栏 switches away from 七选五.
+ *     36. paperBrowsePage.css never imports the Forbidden
+ *         `paperIntelligencePaperSurfaceHarness.css` (where the source
+ *         `.pi-seven-blank-overlay`/`.pi-seven-clue-mark*` rules live);
+ *         the highlight colors are a hand-copied local rule set under
+ *         `.paper-browse-seven-*` class names instead, anchored by
+ *         `position: relative` on `.paper-browse-content`.
+ *     37. 阅读动线: an effect scrolls the active `[data-paper-evidence-id]`
+ *         anchor into view (mirrors
+ *         `PaperIntelligencePaperSurfaceHarness.tsx`'s "Auto-scroll active
+ *         evidence" effect), gated to `groupModels[...]?.kind ===
+ *         'reading'` only — 完形/语法填空 stay "原位型" (证据高亮, no
+ *         scroll) and 七选五 stays "混血" (衔接句高亮 via item 34, no
+ *         阅读式动线), per the plan's 卷面显影原则.
+ *     38. Real paper-2026-i fixture: the sevenChoices model has at least
+ *         one chain with non-empty `leftHighlights` — proves the
+ *         highlight hook has real geometry data to render against, not
+ *         just an always-empty no-op.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -1013,6 +1042,60 @@ const writingGroup2026i = Object.values(asset.content.groups).find((g) => g.grou
 assert(
   '2026-i fixture: a writing group exists to prove the no-answer-row branch',
   Boolean(writingGroup2026i),
+)
+
+// ─── 34-38. flow-panel 刀 2 修复轮 (dao2-fix): 七选五原文高亮接线 +
+//     阅读动线 parity — owner 2026-07-09 实测抓到的两个卷面显影缺口 ───
+
+assert(
+  'PaperBrowsePage imports useSevenChoicesPaperHighlights (only-import contract — the hook file itself is untouched)',
+  /import\s*\{\s*useSevenChoicesPaperHighlights\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/useSevenChoicesPaperHighlights\.ts['"]/.test(
+    pageSrc,
+  ),
+  'missing the useSevenChoicesPaperHighlights import',
+)
+assert(
+  'useSevenChoicesPaperHighlights is enabled only when 讲评栏当前面板组是七选五, scoped to the whole-paper scroller',
+  /enabled:\s*lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]sevenChoices['"]/.test(pageSrc) &&
+    /leftScrollerRef:\s*scrollerRef/.test(pageSrc),
+  'missing the lectureOpen+sevenChoices enabled gate or the scrollerRef wiring',
+)
+assert(
+  '七选五高亮覆盖层的渲染门控与 hook 的 enabled 同款 (panelGroupModel?.kind, not just marks.length) — avoids a stale-marks ghost overlay after switching to another 题组',
+  /lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]sevenChoices['"]\s*&&\s*sevenChoiceOverlay\.marks\.length\s*>\s*0/.test(
+    pageSrc,
+  ),
+  'overlay render condition does not match the enabled gate — risk of ghost marks from a previous group',
+)
+assert(
+  'paperBrowsePage.css never imports the Forbidden paperIntelligencePaperSurfaceHarness.css (colors are a hand-copied local rule set instead)',
+  !/paperIntelligencePaperSurfaceHarness\.css/.test(pageSrc),
+  'PaperBrowsePage.tsx imports the harness-only stylesheet — Forbidden scope violation',
+)
+assert(
+  'paperBrowsePage.css defines its own .paper-browse-seven-blank-overlay / .paper-browse-seven-clue-mark rules, and .paper-browse-content establishes position: relative for them to anchor against',
+  /\.paper-browse-seven-blank-overlay\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
+    /\.paper-browse-seven-clue-mark\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
+    /\.paper-browse-content\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
+  'missing the overlay/mark CSS rules or the position: relative anchor on .paper-browse-content',
+)
+assert(
+  'paper-2026-i sevenChoices model: at least one chain has non-empty leftHighlights ranges (proves the highlight hook has real geometry data to consume, not just an empty-marks no-op)',
+  sevenChoicesModel2026i.chains.length > 0 &&
+    sevenChoicesModel2026i.chains.some((chain) => chain.leftHighlights.length > 0),
+  'no chain has leftHighlights — useSevenChoicesPaperHighlights would always render zero marks for this fixture',
+)
+assert(
+  '阅读动线: an effect scrolls the active [data-paper-evidence-id] anchor into view, gated to reading groups only (完形/语法填空/七选五 stay 原位/混血 per 卷面显影原则, no scroll)',
+  /data-paper-evidence-id/.test(pageSrc) &&
+    /groupModels\[lectureSelection\.groupId\]\?\.kind\s*!==\s*['"]reading['"]\)\s*return/.test(pageSrc),
+  'missing the evidence-scroll effect, or it is not gated to reading-only groups',
+)
+assert(
+  '阅读动线 effect honors prefers-reduced-motion (smooth by default, auto when reduced)',
+  /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(pageSrc) &&
+    /reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(pageSrc),
+  'missing the reduced-motion branch on the evidence-scroll effect',
 )
 
 assert(
