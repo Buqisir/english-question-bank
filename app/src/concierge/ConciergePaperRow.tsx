@@ -21,6 +21,13 @@
  * home-editorial additions:
  *   - A dedicated year column (行首独立列) replaces the year prefix that used
  *     to live inside the headline text.
+ *   - round 2 (方向 C): for `variant='feed'` the year column retires again —
+ *     the desk now groups feed rows under a year group head ("2026 · N 套"),
+ *     so repeating the year per-row would be redundant weight. The column
+ *     stays for `variant='search'` (flat, ungrouped results list). Gated via
+ *     a `data-variant` attribute rather than an extra class on the row's own
+ *     className (verify-concierge-desk.mjs pins that template literal to
+ *     exactly `concierge-paper-row${expanded ? ' is-expanded' : ''}`).
  *   - The five-groupType strip is retired in favor of a fixed "全卷 · N 篇章"
  *     line (N = paper.hitCount, which already equals paper.groups.length).
  *   - Topic chips move from pill badges to a plain text line under the
@@ -240,14 +247,17 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
   return (
     <article
       className={`concierge-paper-row${expanded ? ' is-expanded' : ''}`}
+      data-variant={variant}
       // CR should-watch 收口：年份列 aria-hidden 后，行级 label 补回年份，
       // 屏幕阅读器才能区分同名不同年卷。
       aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
       onClick={handleRowClick}
     >
-      <div className="concierge-paper-year" aria-hidden="true">
-        {paper.year ?? '—'}
-      </div>
+      {variant !== 'feed' && (
+        <div className="concierge-paper-year" aria-hidden="true">
+          {paper.year ?? '—'}
+        </div>
+      )}
 
       <div className="concierge-paper-anchor">
         <button

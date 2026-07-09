@@ -310,6 +310,56 @@ console.log('\nTest 21: home-editorial — row-first year column + retired group
   )
 }
 
+// ------------------------------------------------------------------ Test 23
+console.log('\nTest 23: home-editorial round 2 (方向 C) — feed rows drop the per-row year column (year group head carries it), search rows keep it')
+{
+  const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
+  assert(
+    'year column conditionally rendered only for variant !== feed',
+    /variant !== ['"]feed['"] && \([\s\S]{0,120}concierge-paper-year/.test(paperRow),
+    '',
+  )
+  assert('article carries data-variant={variant} for CSS gating', /data-variant=\{variant\}/.test(paperRow), '')
+
+  const css = readSrc('app/src/App.css')
+  assert(
+    "feed-variant row overrides grid-template-columns (year track dropped)",
+    /\.concierge-paper-row\[data-variant='feed'\]\s*\{[^}]*grid-template-columns/.test(css),
+    '',
+  )
+}
+
+// ------------------------------------------------------------------ Test 24
+console.log('\nTest 24: home-editorial round 2 — year-grouped feed archive (组头「2026」+「N 套」, null-year → 其他 tail)')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert('groupFeedByYear helper defined', /function groupFeedByYear/.test(desk), '')
+  assert(
+    'null-year papers labelled 其他',
+    /label:\s*year !== null \? String\(year\) : ['"]其他['"]/.test(desk),
+    '',
+  )
+  assert('visibleFeedByYear derived from visibleFeed via useMemo', /useMemo\(\(\) => groupFeedByYear\(visibleFeed\), \[visibleFeed\]\)/.test(desk), '')
+  assert('feed renders concierge-feed-year-head with the group label', /concierge-feed-year-label[\s\S]{0,40}\{yearGroup\.label\}/.test(desk), '')
+  assert('feed renders the "N 套" true count next to the year head', /concierge-feed-year-count[\s\S]{0,60}\{yearGroup\.papers\.length\}\s*套/.test(desk), '')
+}
+
+// ------------------------------------------------------------------ Test 25
+console.log('\nTest 25: home-editorial round 2 — 命令行一行 (search + thinking toggle + filter toggle + inventory count) + 筛选默认收起')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert('concierge-command-bar wraps the intent bar', /concierge-command-bar/.test(desk), '')
+  assert('filter panel state defaults collapsed', /const \[filterPanelExpanded, setFilterPanelExpanded\] = useState\(false\)/.test(desk), '')
+  assert(
+    'filter row additionally gated on filterPanelExpanded (好默认: default collapsed)',
+    /state\.kind === ['"]results['"]\) && filterPanelExpanded && \(/.test(desk),
+    '',
+  )
+  assert('command-line filter toggle carries aria-expanded={filterPanelExpanded}', /aria-expanded=\{filterPanelExpanded\}/.test(desk), '')
+  assert('active-filter collapsed summary only shown when !filterPanelExpanded && hasActiveFilters', /!filterPanelExpanded &&\s*\n\s*hasActiveFilters/.test(desk), '')
+  assert('command-line inventory count renders 套卷 · … 篇章', /concierge-command-count[\s\S]{0,80}套卷 · \{catalogGroupCount\} 篇章/.test(desk), '')
+}
+
 // ------------------------------------------------------------------ Test 22
 console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid, no green-tint/side-stripe hit highlight')
 {

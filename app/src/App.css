@@ -3156,9 +3156,22 @@ button:disabled {
   color: #6A6A64;
 }
 
+/* home-editorial round 2 (方向 C) — 命令行一行. Search input flexes; the
+   thinking toggle / filter toggle / inventory count ride inline instead of
+   the old centered hero search box + separate toggle row underneath. */
+.concierge-command-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  width: 100%;
+}
+
 /* Intent bar */
 .concierge-intent-bar {
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
   gap: 8px;
   align-items: stretch;
   background: #FFFFFF;
@@ -3167,6 +3180,20 @@ button:disabled {
   padding: 8px 8px 8px 18px;
   min-height: 56px;
   transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* 窄屏：五个命令行元素挤在一行会互相重叠。搜索框独占一行，思考模式/筛选/
+   计数换到第二行——沿用 .concierge-paper-row 已定的 640px 断点。 */
+@media (max-width: 640px) {
+  .concierge-command-bar {
+    gap: 8px 10px;
+  }
+  .concierge-intent-bar {
+    flex-basis: 100%;
+  }
+  .concierge-command-count {
+    margin-left: 0;
+  }
 }
 
 .concierge-intent-bar:focus-within {
@@ -3231,11 +3258,15 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* home-editorial round 2 — rides inline in .concierge-command-bar now
+   (was its own row below the intent bar with a hint sentence visible next
+   to it; the hint moved to title/aria-describedby, see ConciergeDesk.tsx). */
 .concierge-thinking-toggle {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: -6px;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .concierge-thinking-toggle input[type='checkbox'] {
@@ -3366,6 +3397,39 @@ button:disabled {
   font-size: 13px;
   color: #6A6A64;
   padding: 6px 4px;
+}
+
+/* home-editorial round 2 (方向 C) — 年份分组档案. 组头是真序列 + 真计数
+   (结构编码真相: 除年份和「N 套」外不加编号/eyebrow/分割装饰). */
+.concierge-feed-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.concierge-feed-year-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.concierge-feed-year-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.concierge-feed-year-label {
+  font-size: 15px;
+  font-weight: 650;
+  color: #1E1E1C;
+  font-variant-numeric: tabular-nums;
+}
+
+.concierge-feed-year-count {
+  font-size: 12px;
+  color: #9A9A93;
 }
 
 .concierge-feed-expand {
@@ -3669,17 +3733,17 @@ button:disabled {
   text-align: center;
 }
 
-.app-shell.home-mode-ai .concierge-intent-bar {
-  max-width: 820px;
+/* home-editorial round 2 — 命令行退役居中大搜索框: the command bar (search
+   input + toggle + filter + count) now spans the full library-panel width
+   instead of a narrow 820px hero box. */
+.app-shell.home-mode-ai .concierge-command-bar {
   width: 100%;
-  margin: 0 auto;
 }
 
 .app-shell.home-mode-ai .concierge-clarification,
 .app-shell.home-mode-ai .concierge-notice,
 .app-shell.home-mode-ai .concierge-assistant,
-.app-shell.home-mode-ai .concierge-error,
-.app-shell.home-mode-ai .concierge-filter-row {
+.app-shell.home-mode-ai .concierge-error {
   max-width: 820px;
   width: 100%;
   margin-left: auto;
@@ -3862,6 +3926,21 @@ button:disabled {
   align-items: flex-start;
   gap: 8px;
   margin: 16px 0 0;
+  /* home-editorial round 2 — emil 展开处方: 200ms ease-out on mount (the
+     panel is conditionally rendered, not height-transitioned; the global
+     prefers-reduced-motion reset already covers this animation). */
+  animation: concierge-filter-panel-in 200ms ease-out;
+}
+
+@keyframes concierge-filter-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .concierge-filter-dim-row {
@@ -3984,6 +4063,91 @@ button:disabled {
 
 .concierge-filter-more[aria-expanded='true']::after {
   transform: translateY(1px) rotate(-135deg);
+}
+
+/* home-editorial round 2 (方向 C) — command-line filter toggle + inventory
+   count. Quiet, no border chrome except a hairline (the search input is the
+   one framed control on this row — 结构编码真相: don't invent a second
+   frame that competes with it). */
+.concierge-command-filter-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid #D8D8D2;
+  border-radius: 8px;
+  color: #1E1E1C;
+  font-family: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.concierge-command-filter-toggle:hover {
+  background: #EDEDEA;
+  border-color: #C6C6C0;
+}
+
+.concierge-command-filter-toggle:active {
+  transform: scale(0.97);
+}
+
+.concierge-command-filter-toggle[aria-expanded='true'] {
+  border-color: #2C6E56;
+  color: #1E4A3A;
+}
+
+.concierge-command-filter-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+}
+
+.concierge-command-count {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: 12.5px;
+  color: #9A9A93;
+  white-space: nowrap;
+}
+
+/* Collapsed-state active-filter summary — removable chips reusing the same
+   selected-chip visual language as the open filter panel (single teal
+   accent, no new hue). */
+.concierge-active-filter-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.concierge-active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(44, 110, 86, 0.10);
+  border: 1px solid #2C6E56;
+  color: #1E4A3A;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.concierge-active-filter-chip:hover {
+  background: rgba(44, 110, 86, 0.16);
+}
+
+.concierge-active-filter-chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
 }
 
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
@@ -4330,12 +4494,23 @@ button:disabled {
   background: #FFFFFF;
 }
 
+/* home-editorial round 2 (方向 C) — feed rows drop the leading year column
+   (the year group head above them already carries it); the first grid
+   track disappears rather than sitting empty. Search rows (variant=search,
+   ungrouped) keep the year column exactly as round 1 shipped it. */
+.concierge-paper-row[data-variant='feed'] {
+  grid-template-columns: minmax(220px, 1fr) minmax(160px, 320px) auto;
+}
+
 /* 窄屏：三列 grid 会把中列挤成 0 宽（文字竖排溢出），改为标题+操作一行、
    命中信息整行铺下方 */
 @media (max-width: 640px) {
   .concierge-paper-row {
     grid-template-columns: 40px 1fr auto;
     gap: 8px 12px;
+  }
+  .concierge-paper-row[data-variant='feed'] {
+    grid-template-columns: 1fr auto;
   }
   .concierge-paper-row .concierge-paper-year {
     font-size: 17px;
