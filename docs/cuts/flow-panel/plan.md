@@ -36,6 +36,139 @@
 > →已修（b325b0b，讲评态 rail 收 88px 紧凑档，只留题号项）；② 右栏只有
 > 跳老解析页的链接≠预期——确认为刀 2 范围本身，即刻开工（下方契约）。
 
+## 刀 3 — 入口带态 + 链接迁移 + URL/popstate + 样式抽共享（DEV 执行契约）
+
+> 前置：刀 1（7c89222）/刀 2（bb1ac30）已合并，owner PO QA 过，
+> 生产已部署 95dffc5。派 **dev-hard**（history/popstate 状态机 +
+> 入口穿线 + verify 断言迁移，时序敏感）。
+
+- Cut line: medium; touches schema / data contract: no; touches
+  product boundary: **yes——PA-lite 降档**。降档理由（CR 须复核）：
+  ① 方向（入口带态+链接迁移+老解析页过渡期保留）owner 2026-07-08
+  High 档已拍板，本契约仅为既定方向的执行压缩；② 完全可逆——
+  server 零改动（`buildPaperSurfaceHref` 原样），迁移是纯前端 href
+  换算，老解析页 URL 直达保留，回滚=revert 前端 diff；③ 无 schema/
+  数据契约触碰。
+
+### 目标
+
+1. **入口带态**：详情页/搜索卡「看解析」改为进整卷页**讲评态**并
+   锚定题组+预选题；「看整卷」维持挑题态现状。老解析页
+   （`?view=paper-intelligence&surface=paper`）URL 直达保留，
+   页内不再有入口指向它（退役另刀，与 reading-analysis 孤儿支同收）。
+2. **URL 状态承载**：`?view=paper-browse&paperId=<id>
+   [&focusGroupId=<gid>][&questionId=<qid>][&lecture=1]`——讲评开合、
+   点题选择随时同步进 URL（replaceState，不 push 历史）；刷新/分享
+   该 URL 能还原同一姿态。
+3. **popstate**：App 级 popstate 监听落地，Back/Forward 在
+   workbench ↔ paper-browse 间正确进退。
+4. **样式抽共享**：七选五高亮+证据连线的手抄副本收敛为单一来源。
+5. **小尾巴**：scrollspy 跨组临界抖动、深链沉降期首点竞态、
+   窄屏抽屉空态文案。
+
+### Scope
+
+白名单：
+
+- `app/src/App.tsx`（路由参数扩展 + popstate 监听 + openPaperBrowse
+  扩展；只动路由/导航层，不碰其他编排逻辑）
+- `app/src/features/paper-browse/PaperBrowsePage.tsx`
+- `app/src/features/paper-browse/paperBrowsePage.css`
+- `app/src/concierge/paperSurfaceHref.ts`（新增 href 换算 helper）
+- `app/src/concierge/ConciergeGroupCard.tsx`（仅「看解析」链接形态）
+- `app/src/features/question-detail/QuestionGroupDetailView.tsx`
+  （仅「看解析」链接形态；灰区文件，严禁动数据获取/状态契约）
+- `app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css`
+  （**仅限**样式抽共享：删被搬走的块 + 引入共享文件，无其他改动）
+- 新建共享样式文件（建议
+  `app/src/features/paper-intelligence/paperSurfaceLectureHighlights.css`）
+- `scripts/verify-paper-browse.mjs`（新行为断言）
+- `scripts/verify-classic-retire-2.mjs`（156-164 行「看解析」href
+  硬断言随迁移窄改，保住原 MF 意图：看解析≠看整卷）
+- `scripts/verify-c6a3-reading-analysis-bridge.mjs`（若卡片消费形态
+  变化导致 grep 断言失配，窄改；server 侧 href 形态断言不许动）
+
+Forbidden：`server/**`（`buildPaperSurfaceHref` 零修改，换算全在
+前端）、`shared-ui/papersurface/**`、五个解析面板组件与 adapter
+（import-only 同刀 2）、`paperIntelligence.css`、
+`PaperIntelligencePaperSurfaceHarness.tsx`（行为零变化）、
+print/export、draft-paper/my-space/admin 各页、domain。
+
+### 行为规格
+
+1. **URL 契约**（paper-browse 页内状态同步）：
+   - 讲评开合、点题（groupId+questionId）变化时 `replaceState` 同步
+     URL；关讲评清 `lecture`/`questionId` 参数。页内状态变化一律
+     replaceState（不产生历史条目）；进入/离开页面维持现有
+     pushState/replaceState 语义。
+   - 带 `lecture=1` 进页：讲评栏初始即开；带 `questionId`：asset
+     加载完成后预选该题（走 `selectLectureQuestion` 同款路径，右栏
+     显示该题解析、卷面显影层就位），并滚动锚定其题组
+     （focusGroupId 缺省时由 questionId 推导所属组）。深链预选须与
+     沉降期 clear 竞态修复（规格 5）协同，不得被 scrollspy 清掉。
+2. **入口带态**：
+   - `paperSurfaceHref.ts` 新增换算 helper：由服务端
+     `paperSurfaceHref`（`?view=paper-intelligence&...`）构造
+     `?view=paper-browse&paperId&focusGroupId&questionId&lecture=1`
+     形态 href（groupId→focusGroupId；questionId 有则带）。
+   - 详情页「直达解析面」与搜索卡解析直链改用该 helper 的 href，
+     保持 `<a href>`（中键/新标签可用）；主点击可拦截走 SPA
+     `openPaperBrowse` 扩展（带 questionId+lecture），DEV 择简但
+     两种进入方式都必须正确带态。
+   - 守卫不变：`hasPaperSurfaceAnalysis && paperSurfaceHref` 才渲染。
+3. **popstate**：App.tsx 挂一个 popstate 监听，重放 boot-read 解析
+   逻辑同步 admin / mySpace / draftPaper / paperBrowse 四个路由
+   state；目标 URL 是 SPA 未承载的视图（`view=paper-intelligence`、
+   `view=reading-analysis`）时允许 `window.location.reload()` 兜底。
+   验收焦点是 paper-browse 相关进退；其余视图 Back/Forward 不回归
+   现状即可（其页内状态债不在本刀）。
+4. **样式抽共享**：七选五衔接句高亮（paperBrowsePage.css 119-187 ↔
+   harness css 1869-1948）与证据连线色（430-467 ↔ 684-692）收敛进
+   共享文件，双方 import；删除手抄副本；**两页视觉零变化**（QA 逐项
+   对照）。选择器组织方式 DEV 定，约束＝单一来源、不改
+   `paperIntelligence.css`、harness 页行为零变化。
+5. **小尾巴**：
+   - 深链/程序化滚动沉降期，scrollspy 清 `lectureSelection` 的
+     effect（PaperBrowsePage 551-553）按刀 2 cr.md 250-252 建议修：
+     仅当 `activeAnchor` 变为**另一个真实题组 id** 时才清；
+     part/section 锚不清；程序化滚动期间抑制清除。
+   - scrollspy 跨组临界抖动：仲裁去抖（迟滞/稳定帧/像素 tie-break
+     任选），慢滚临界处 `activeAnchor` 不得来回横跳。
+   - 窄屏抽屉空态文案：`滚动到题组查看速览` 在窄屏语境失真（抽屉
+     盖在卷面上），改为可操作指引（如「滚动卷面或点选题目后，这里
+     显示讲评」，宽窄屏可同文案，以窄屏读得通为准）。
+6. **不变量**：刀 1/刀 2 全部交互（把手/Esc/抽屉/紧凑 rail/点题联动/
+   显影层）不回归；挑题态零解析请求不变；PaperSurface 与五面板零
+   修改；老解析页、详情页其余行为、草稿卷动线零变化。
+
+### 验收标准
+
+- 详情页「看解析」→ 整卷页讲评态开、锚定该组、该题预选、右栏为其
+  解析、卷面显影就位；搜索卡解析直链同款；中键新标签打开同款。
+- 「看整卷」→ 挑题态，无 lecture 参数、零解析请求。
+- URL 还原：讲评态下复制 URL 新标签打开 → 同姿态同选题；关讲评后
+  URL 无 lecture/questionId。
+- Back/Forward：workbench→详情看解析→Back 回 workbench→Forward 回
+  讲评态，视图与 URL 同步；页内开关讲评/点题不产生历史条目。
+- 样式抽共享后：整卷页与老解析页七选五高亮、证据连线逐项目检零
+  视觉差；两 css 内手抄副本已删。
+- 小尾巴三项各自复验：深链进页立即点题不丢选、慢滚临界不抖、
+  窄屏空态文案新文案上屏。
+- `node scripts/verify-paper-browse.mjs` 绿（含 URL 契约/popstate/
+  入口带态新断言）；`verify-classic-retire-2.mjs`、
+  `verify-c6a3-reading-analysis-bridge.mjs` 绿；tsc 绿；
+  `pnpm -C app run verify:all` 或 CI 绿。
+- **真点浏览器 QA 必做**：paper-2026-i 走完上述验收各条 + 窄屏
+  抽屉 + 触屏仿真，截图入 `docs/cuts/flow-panel/qa/`（命名 dao3-*）。
+
+### DEV 汇报要求
+
+同刀 1/刀 2：文件清单 / verify 摘要 / QA 状态+截图 / Blind Spots /
+越界声明。worktree 纪律：开工先 `pwd` 自证 + 跑
+`bash scripts/setup-worktree.sh`；一切操作只在自己 worktree；禁
+`git stash`；禁对主树路径跑任何写命令；用 worktree 自带分支，
+不自行 push/开 PR。
+
 ## 刀 2 — 点题联动 + 五解析面板搬家（DEV 执行契约）
 
 > 前置：刀 1 已合并（7c89222 + 紧凑 rail b325b0b，main CI 绿）。
