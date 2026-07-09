@@ -241,17 +241,37 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     () => (showFeed ? buildDefaultFeed(filteredQuestionGroups) : []),
     [showFeed, filteredQuestionGroups],
   )
-  const visibleFeed = feedExpanded ? defaultFeed : defaultFeed.slice(0, DEFAULT_FEED_PAGE_SIZE)
   const feedPaperCount = defaultFeed.length
   const feedGroupCount = useMemo(
     () => defaultFeed.reduce((sum, paper) => sum + paper.groups.length, 0),
     [defaultFeed],
   )
   // home-editorial round 2 — feed rows group by year (组头「2026」+「N 套」);
-  // visibleFeed is already year-DESC + null-last sorted (buildDefaultFeed),
-  // so grouping only needs to bucket consecutive same-year runs, never
-  // re-sort or re-bucket papers within a year.
-  const visibleFeedByYear = useMemo(() => groupFeedByYear(visibleFeed), [visibleFeed])
+  // defaultFeed is already year-DESC + null-last sorted (buildDefaultFeed),
+  // so grouping only needs to bucket consecutive same-year runs.
+  //
+  // CR round-2 M1: group over the FULL feed and paginate by WHOLE year
+  // groups — never slice papers mid-year. Slicing first made the collapsed
+  // view show "2024 · 2 套" while the library holds 4 (组头计数失真，违反
+  // 「N 套」真实计数章程). Collapsed view takes whole year groups until the
+  // cumulative paper count reaches DEFAULT_FEED_PAGE_SIZE, so every header
+  // it shows carries that year's true total.
+  const feedByYear = useMemo(() => groupFeedByYear(defaultFeed), [defaultFeed])
+  const visibleFeedByYear = useMemo(() => {
+    if (feedExpanded) return feedByYear
+    const visible: FeedYearGroup[] = []
+    let shown = 0
+    for (const yearGroup of feedByYear) {
+      if (shown >= DEFAULT_FEED_PAGE_SIZE) break
+      visible.push(yearGroup)
+      shown += yearGroup.papers.length
+    }
+    return visible
+  }, [feedByYear, feedExpanded])
+  const visiblePaperCount = useMemo(
+    () => visibleFeedByYear.reduce((sum, yearGroup) => sum + yearGroup.papers.length, 0),
+    [visibleFeedByYear],
+  )
 
   // Command-line inventory count — always the FULL, unfiltered corpus (not
   // narrowed by search/chip filters), so "34 套卷 · 278 篇章" reads as a
@@ -583,7 +603,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   </div>
                 ))}
               </div>
-              {!feedExpanded && feedPaperCount > DEFAULT_FEED_PAGE_SIZE && (
+              {!feedExpanded && feedPaperCount > visiblePaperCount && (
                 <button
                   type="button"
                   className="concierge-feed-expand"

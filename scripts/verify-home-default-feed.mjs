@@ -152,15 +152,13 @@ console.log('\nTest 6: 8-paper default cap + "显示全部 N 套卷" expander')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert('DEFAULT_FEED_PAGE_SIZE constant is 8', /const DEFAULT_FEED_PAGE_SIZE\s*=\s*8/.test(desk), '')
-  assert(
-    'visibleFeed slices to the page size unless expanded',
-    /feedExpanded\s*\?\s*defaultFeed\s*:\s*defaultFeed\.slice\(0,\s*DEFAULT_FEED_PAGE_SIZE\)/.test(desk),
-    '',
-  )
+  // CR round-2 M1 rewrite: the collapsed feed no longer slices raw papers —
+  // it takes whole year groups until the cumulative count reaches the page
+  // size (see Test 24), so the old slice assertion is retired.
   assert('expander button text renders 显示全部 {feedPaperCount} 套卷', /显示全部\s*\{feedPaperCount\}\s*套卷/.test(desk), '')
   assert(
-    'expander only shown when not already expanded and paper count exceeds the page size',
-    /!feedExpanded\s*&&\s*feedPaperCount\s*>\s*DEFAULT_FEED_PAGE_SIZE/.test(desk),
+    'expander only shown when not already expanded and more papers exist than visible',
+    /!feedExpanded\s*&&\s*feedPaperCount\s*>\s*visiblePaperCount/.test(desk),
     '',
   )
   assert('clicking expander sets feedExpanded true', /onClick=\{\(\)\s*=>\s*setFeedExpanded\(true\)\}/.test(desk), '')
@@ -339,7 +337,20 @@ console.log('\nTest 24: home-editorial round 2 — year-grouped feed archive (�
     /label:\s*year !== null \? String\(year\) : ['"]其他['"]/.test(desk),
     '',
   )
-  assert('visibleFeedByYear derived from visibleFeed via useMemo', /useMemo\(\(\) => groupFeedByYear\(visibleFeed\), \[visibleFeed\]\)/.test(desk), '')
+  // CR round-2 M1: year groups must be built from the FULL defaultFeed and
+  // paginated by whole year groups — slicing papers before grouping made the
+  // collapsed view lie about a year's 套数.
+  assert(
+    'year groups built from the full defaultFeed (not a sliced visibleFeed)',
+    /useMemo\(\(\) => groupFeedByYear\(defaultFeed\), \[defaultFeed\]\)/.test(desk),
+    '',
+  )
+  assert(
+    'collapsed feed paginates by whole year groups (cumulative page-size cut)',
+    /shown >= DEFAULT_FEED_PAGE_SIZE/.test(desk) && /shown \+= yearGroup\.papers\.length/.test(desk),
+    '',
+  )
+  assert('sliced visibleFeed grouping is retired', !/groupFeedByYear\(visibleFeed\)/.test(desk), '')
   assert('feed renders concierge-feed-year-head with the group label', /concierge-feed-year-label[\s\S]{0,40}\{yearGroup\.label\}/.test(desk), '')
   assert('feed renders the "N 套" true count next to the year head', /concierge-feed-year-count[\s\S]{0,60}\{yearGroup\.papers\.length\}\s*套/.test(desk), '')
 }
