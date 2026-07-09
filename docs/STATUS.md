@@ -23,6 +23,23 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
+- 2026-07-09：**one-sheet-paper 收官（毛边⑤）**（merge 8388b4d，fresh CR
+  APPROVE 0 MF，verify-paper-browse 177 绿 + 主树 verify:all 71 绿均主代理
+  亲跑复核，owner 实测待做）：整卷页卷面合成单一白纸容器（题组独立白卡
+  退役，阴影只打整纸一次），节标题/指导语进纸内换卷面字体；九道剪刀线
+  语义落地（阅读四篇每篇字母前一条、单组节在节标题后指导语前且指导语
+  并入题组 hover/剪走单元、writing 组走 CSS 兄弟选择器零碰 forbidden）。
+  判定纯按「节下题组数」不 hardcode groupType。QA 截图 6 张入 cut 目录。
+  插曲：DEV 中途机器死机重启，worktree 半成品完整存活，续派 DEV 补
+  verify 断言 44-52 收尾。CR Should Watch 挂账：① --ps-page-width/--ps-ink
+  两 var 未注入恒走兜底（视觉对但非 token 驱动）；② 指导语并组依赖
+  「紧邻」，新卷导入若夹入其他 block 会退化（当前数据无此形态）；
+  ③ 写作组 hover 提亮含节标题行（已披露取舍）。
+  - 新方向讨论中：**草稿卷去篇章字母**（owner 提议，2026-07-09）——草稿卷
+    =练习单非仿真卷，A/B/C/D 是源卷结构属性不该带走；改大题号徽标+题型
+    标签。小川同意方向；编号语义 owner 已拍板=**大题序号连续 1、2、3…**
+    （小题号全卷另行连续），七选五 A-G 选项字母与整卷页居中字母不在
+    范围。排队在 UI 队列后，待写 plan 开刀。
 - 2026-07-09：**flow-panel 刀 3 收官**（merge 2c42e29，fresh Opus CR
   APPROVE with should-fix 零 Must Fix，verify:all 70 绿 + 主代理
   Playwright 补验 13/13，main CI 绿 run 29013048718）：入口带态（详情/搜索卡
