@@ -150,6 +150,12 @@ type LectureSelection = {
 export type PaperBrowsePageProps = {
   paperId: string
   focusGroupId?: string | null
+  /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
+   * selectLectureQuestion 同款路径），groupId 缺省时用来推导所属题组。 */
+  questionId?: string | null
+  /** flow-panel 刀 3: 入口带态——true 时讲评栏初始即开（URL 的
+   * `lecture=1`）。挑题态入口（看整卷）不传/传 false，行为同刀 1/刀 2。 */
+  lecture?: boolean
   /** App's loaded questionGroups, keyed by id (== paper-asset groupId). */
   questionGroupById: Map<string, QuestionGroupCard>
   onAddGroupsToBasket: (groups: QuestionGroupCard[]) => void
@@ -195,6 +201,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
     focusGroupId,
+    questionId,
+    lecture,
     questionGroupById,
     onAddGroupsToBasket,
     currentDraftPaperId,
@@ -210,9 +218,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
-  // 讲评态开关 — 挑题态(默认收起)/讲评态(展开). State only, per 刀 1 契约;
-  // URL 承载留给刀 3。
-  const [lectureOpen, setLectureOpen] = useState(false)
+  // 讲评态开关 — 挑题态(默认收起)/讲评态(展开)。刀 3: 入口带态的 `lecture`
+  // prop（URL 的 lecture=1）种下初始值——lazy initializer 而非
+  // useState(false) 是因为它必须在首次渲染就反映入口态，不能等一拍 effect
+  // 才翻开（会闪一下挑题态）。
+  const [lectureOpen, setLectureOpen] = useState(() => Boolean(lecture))
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -224,13 +234,48 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
+  // 刀 3: 入口带态的 questionId 预选只应用一次（asset 首次加载完成后）；
+  // 与 focusAppliedRef 分开计——预选可能比滚动多等一拍（cloze/grammarFill
+  // 需要 lectureAnalysisFetched 先到位，见下方 effect）。
+  const deepLinkQuestionAppliedRef = useRef(false)
   const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
+  // 刀 3 小尾巴 ①: 程序化滚动（rail 点击/深链/证据滚动）沉降期标记——期间
+  // activeAnchor 的 clear effect 抑制清除，避免深链/rail 点击刚选中的题
+  // 被沉降过程中途经的中间锚点误清（cr.md 244-252 根因）。
+  const isProgrammaticScrollRef = useRef(false)
+  const programmaticScrollTimeoutRef = useRef<number | null>(null)
+  // 刀 3: 讲评开合/点题选择的 URL replaceState 同步跳过 mount 的第一次
+  // commit——初始态已经是 URL boot-read 的镜像，不需要立刻再写一次。
+  const urlSyncMountedRef = useRef(false)
   // 刀 2 修复轮 ③: 阅读跨栏证据动线的容器/左栏/右栏 refs —— shellRef 是
   // `.paper-browse-shell`（已是 position:relative，卷面+讲评栏共同的祖先，
   // 镜像 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套）。
   // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
   const shellRef = useRef<HTMLDivElement | null>(null)
   const rightPanelRef = useRef<HTMLElement | null>(null)
+
+  // 刀 3 小尾巴 ①: 标记程序化滚动即将发生，抑制 scrollspy 的 clear effect
+  // 一段沉降窗口（覆盖 smooth 滚动动画时长；深链的 auto 滚动虽然瞬时，仍给
+  // 同款窗口——IntersectionObserver 的 entries 回调本身是异步的，即使跳转
+  // 本身不animate,首次 observer 回调也可能落在同一个窗口内到达）。
+  function suppressScrollspyClear(durationMs = 700): void {
+    isProgrammaticScrollRef.current = true
+    if (programmaticScrollTimeoutRef.current != null) {
+      window.clearTimeout(programmaticScrollTimeoutRef.current)
+    }
+    programmaticScrollTimeoutRef.current = window.setTimeout(() => {
+      isProgrammaticScrollRef.current = false
+      programmaticScrollTimeoutRef.current = null
+    }, durationMs)
+  }
+
+  useEffect(() => {
+    return (): void => {
+      if (programmaticScrollTimeoutRef.current != null) {
+        window.clearTimeout(programmaticScrollTimeoutRef.current)
+      }
+    }
+  }, [])
 
   // CR should-fix（同 my-space 先例）：讲评栏开着时文档级 Esc 关闭并还焦
   // 到把手，补齐窄屏抽屉的模态语义。
@@ -247,9 +292,46 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }, [lectureOpen])
 
+  // 刀 3: 讲评开合 / 点题选择 → URL replaceState 同步（不产生历史条目——
+  // App.tsx 的 pushState 只发生在 openPaperBrowse 本身，页内互动一律
+  // replaceState）。关讲评清 lecture/questionId；讲评开着且有显式选题时把
+  // focusGroupId/questionId 写成当前选中的题组/题，让「复制 URL 分享/刷新」
+  // 落回同一姿态同选题。跳过 mount 的第一次 commit——初始态已经是 URL
+  // boot-read 的镜像（含入口带态的 lecture/questionId），不需要立刻覆盖。
+  useEffect(() => {
+    if (!urlSyncMountedRef.current) {
+      urlSyncMountedRef.current = true
+      return
+    }
+    if (typeof window === 'undefined' || !window.history || typeof window.history.replaceState !== 'function') {
+      return
+    }
+    try {
+      const url = new URL(window.location.href)
+      if (!lectureOpen) {
+        url.searchParams.delete('lecture')
+        url.searchParams.delete('questionId')
+      } else {
+        url.searchParams.set('lecture', '1')
+        if (lectureSelection) {
+          url.searchParams.set('focusGroupId', lectureSelection.groupId)
+          url.searchParams.set('questionId', lectureSelection.questionId)
+        } else {
+          url.searchParams.delete('questionId')
+        }
+      }
+      const nextSearch = url.searchParams.toString()
+      const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+      window.history.replaceState(window.history.state, '', nextUrl)
+    } catch {
+      /* URL sync is best-effort — state above is the authoritative UI change. */
+    }
+  }, [lectureOpen, lectureSelection])
+
   useEffect(() => {
     let cancelled = false
     focusAppliedRef.current = false
+    deepLinkQuestionAppliedRef.current = false
     setLoading(true)
     setError(null)
     setAsset(null)
@@ -470,18 +552,50 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   }, [lectureOpen, lectureAnalysisFetched, asset, assetBase])
 
   // Scroll to the requested group once the page has finished loading.
+  // 刀 3: focus target falls back to the group derived from `questionId`
+  // when `focusGroupId` isn't given (e.g. an old-form href that only carried
+  // groupId gets the group either way; this covers the case where only
+  // questionId is present).
   useEffect(() => {
     if (focusAppliedRef.current) return
-    if (!focusGroupId || loading || !asset) return
+    if (loading || !asset) return
+    const targetGroupId = focusGroupId || (questionId ? asset.content.questions[questionId]?.groupId ?? null : null)
+    if (!targetGroupId) return
     const scroller = scrollerRef.current
     if (!scroller) return
     const target = scroller.querySelector<HTMLElement>(
-      `[data-paper-browse-anchor="${cssAttr(focusGroupId)}"]`,
+      `[data-paper-browse-anchor="${cssAttr(targetGroupId)}"]`,
     )
     if (!target) return
     focusAppliedRef.current = true
+    suppressScrollspyClear()
     target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
-  }, [focusGroupId, loading, asset])
+  }, [focusGroupId, questionId, loading, asset])
+
+  // 刀 3: 入口带态的 questionId 预选——asset 加载完成后走
+  // selectLectureQuestion 同款路径（镜像点题联动）。仅在讲评态下预选（挑题
+  // 态没有讲评栏可显示选中结果）；cloze/grammarFill/writing 组需要等
+  // lectureAnalysisFetched 落地才能种下正确的 evidenceId，否则先跳过，等
+  // 该 dep 变化后重新判定一次（不会重复选——deepLinkQuestionAppliedRef 只在
+  // 真正调用 selectLectureQuestion 后才置位）。
+  useEffect(() => {
+    if (deepLinkQuestionAppliedRef.current) return
+    if (!questionId || !lectureOpen || loading || !asset) return
+    const targetGroupId = focusGroupId || (asset.content.questions[questionId]?.groupId ?? null)
+    if (!targetGroupId) return
+    const group = asset.content.groups[targetGroupId]
+    if (!group) return
+    const needsLectureAnalysis =
+      group.groupType === 'cloze' || group.groupType === 'grammarFill' || group.groupType === 'writing'
+    if (needsLectureAnalysis && !lectureAnalysisFetched) return
+    deepLinkQuestionAppliedRef.current = true
+    // cloze/grammarFill/writing 组等 lectureAnalysisFetched 落地时，可能已
+    // 比初始滚动（上面那个 effect 里的 suppressScrollspyClear）晚了不止一拍
+    // ——那个窗口早关了。这里再补一次抑制，保证选中落地那一刻不会被
+    // 恰好同一拍触发的 scrollspy clear effect 抹掉。
+    suppressScrollspyClear()
+    selectLectureQuestion(targetGroupId, questionId)
+  }, [questionId, focusGroupId, lectureOpen, loading, asset, lectureAnalysisFetched])
 
   // Block indices already consumed by a writing group's own pageModel (part/
   // section heading, prompt instruction, 注意 instruction, answerBox — the
@@ -528,6 +642,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (anchorEls.length === 0) return
     const order = anchorEls.map((el) => el.getAttribute('data-paper-browse-anchor') || '')
     const visible = new Set<string>()
+    // 刀 3 小尾巴 ②: 慢滚跨组临界处，entries 会在相邻两个 anchor 之间连续
+    // 抖动几帧——去抖到 120ms 稳定窗口再提交 setActiveAnchor，activeAnchor
+    // 不来回横跳。窗口足够短，不影响正常滚动下的响应感。
+    let debounceTimer: number | null = null
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -537,20 +655,34 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           else visible.delete(anchor)
         }
         const current = order.find((anchor) => visible.has(anchor))
-        if (current) setActiveAnchor(current)
+        if (!current) return
+        if (debounceTimer != null) window.clearTimeout(debounceTimer)
+        debounceTimer = window.setTimeout(() => {
+          debounceTimer = null
+          setActiveAnchor(current)
+        }, 120)
       },
       { root: null, rootMargin: '0px 0px -70% 0px', threshold: 0 },
     )
     for (const el of anchorEls) observer.observe(el)
-    return (): void => observer.disconnect()
+    return (): void => {
+      observer.disconnect()
+      if (debounceTimer != null) window.clearTimeout(debounceTimer)
+    }
   }, [asset, loading])
 
   // 刀 2: 无点选时右栏跟随 scrollspy 显示组级概览；点题后进题级
   // （见 selectLectureQuestion）。滚动离开当前选中题所在的题组时清空显式
   // 选择，讲评栏回落到新滚到题组的组级概览 —— 不让上一题的选中态跨组残留。
+  // 刀 3 小尾巴 ①: 只在 activeAnchor 变成"另一个真实题组 id"时才清
+  // （part/section 锚没有对应题组，不清）；程序化滚动沉降期内（rail 点击/
+  // 深链/证据滚动，见 suppressScrollspyClear）抑制清除——避免深链/点击刚
+  // 选中的题被沉降过程中途经的中间锚点误清（cr.md 244-252 根因）。
   useEffect(() => {
+    if (isProgrammaticScrollRef.current) return
+    if (!activeAnchor || !asset?.content.groups[activeAnchor]) return
     setLectureSelection((prev) => (prev && prev.groupId !== activeAnchor ? null : prev))
-  }, [activeAnchor])
+  }, [activeAnchor, asset])
 
   // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
   // 镜像 PaperIntelligencePaperSurfaceHarness.tsx 的 "Auto-scroll active
@@ -573,6 +705,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       typeof window !== 'undefined' &&
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    suppressScrollspyClear()
     target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduced ? 'auto' : 'smooth' })
   }, [lectureOpen, lectureSelection, groupModels])
 
@@ -677,6 +810,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       `[data-paper-browse-anchor="${cssAttr(anchor)}"]`,
     )
     if (!target) return
+    suppressScrollspyClear()
     target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' })
   }
 
@@ -942,7 +1076,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const groupId = panelGroupId
     const group = groupId ? asset.content.groups[groupId] : undefined
     if (!groupId || !group) {
-      return <p className="paper-browse-lecture-empty">滚动到题组查看速览</p>
+      // 刀 3 小尾巴 ③: 刀 1 的旧空态文案在窄屏抽屉语境下失真——抽屉盖在
+      // 卷面上，不是并排布局，"滚动"这个动作在那个视觉框架里读不通。改成
+      // 宽窄屏通用的可操作指引；宽屏下依然是"滚动卷面"这个动作，语义没变。
+      return <p className="paper-browse-lecture-empty">滚动卷面或点选题目后，这里显示讲评</p>
     }
     const range = buildGroupRangeLabel(asset, group)
     const answerRow = buildAnswerRowText(asset, group)

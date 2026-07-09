@@ -208,6 +208,12 @@ function buildSevenChoicesVerifyResult(
   }
 }
 
+// flow-panel 刀 3: openPaperBrowse's入口带态 options bag. A named type (not
+// an inline `{ }` literal in the callback's parameter list) — an inline
+// literal would put a `{` before the callback body and break
+// verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
+type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean }
+
 function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // ─── Cut C: in-app PI ↔ workbench navigation ───
   // main.tsx parses the URL once at boot and passes the result in via the
@@ -244,17 +250,29 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       focusGroupId: params.get('focusGroupId'),
     }
   })
-  // 刀B 整卷预览页 (paper-browse): `?view=paper-browse&paperId=<id>[&focusGroupId=<gid>]`.
-  // Same boot-read-URL-once pattern as draftPaperRoute/mySpaceRouteActive above.
+  // 刀B 整卷预览页 (paper-browse): `?view=paper-browse&paperId=<id>
+  // [&focusGroupId=<gid>][&questionId=<qid>][&lecture=1]`. Same
+  // boot-read-URL-once pattern as draftPaperRoute/mySpaceRouteActive above.
+  // flow-panel 刀 3 adds questionId/lecture — carries the入口带态 (讲评态
+  // open + predetermined 题) through a full page load, and is also what the
+  // popstate handler below replays on Back/Forward.
   const [paperBrowseRoute, setPaperBrowseRoute] = useState(() => {
     if (typeof window === 'undefined') {
-      return { active: false, paperId: null as string | null, focusGroupId: null as string | null }
+      return {
+        active: false,
+        paperId: null as string | null,
+        focusGroupId: null as string | null,
+        questionId: null as string | null,
+        lecture: false,
+      }
     }
     const params = new URLSearchParams(window.location.search)
     return {
       active: params.get('view') === 'paper-browse',
       paperId: params.get('paperId'),
       focusGroupId: params.get('focusGroupId'),
+      questionId: params.get('questionId'),
+      lecture: params.get('lecture') === '1',
     }
   })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>([])
@@ -726,7 +744,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false })
     setDraftPaperRoute({
       active: true,
       draftPaperId: draftPaperId || null,
@@ -753,8 +771,14 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   }, [refreshQuestionGroups])
 
   // 刀B: open the whole-paper preview page. `focusGroupId`, when given,
-  // scrolls the page to that group's card on load.
-  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null) => {
+  // scrolls the page to that group's card on load. flow-panel 刀 3 adds an
+  // options bag (a named type, not an inline `{ }` literal — an inline type
+  // would introduce a `{` before the callback body and break
+  // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex) for入口带态:
+  // questionId预选 + lecture(讲评态) open-on-load.
+  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null, options?: OpenPaperBrowseOptions) => {
+    const questionId = options?.questionId || null
+    const lecture = Boolean(options?.lecture)
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
       const url = new URL(window.location.href)
       url.searchParams.set('view', 'paper-browse')
@@ -764,18 +788,29 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       } else {
         url.searchParams.delete('focusGroupId')
       }
+      if (questionId) {
+        url.searchParams.set('questionId', questionId)
+      } else {
+        url.searchParams.delete('questionId')
+      }
+      if (lecture) {
+        url.searchParams.set('lecture', '1')
+      } else {
+        url.searchParams.delete('lecture')
+      }
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null })
+    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture })
   }, [])
 
   // Detail-page "看整卷" entry point: derives paperId (and the group to
   // focus) from the group's paperSurfaceHref
   // (`?view=paper-intelligence&...&paperId=<id>&groupId=<gid>`) instead of
-  // a new server field — the href already carries what we need.
+  // a new server field — the href already carries what we need. 挑题态, no
+  // lecture — unchanged by 刀 3.
   const openPaperBrowseFromDetail = useCallback(
     (detail: QuestionGroupDetail) => {
       const paperId = parsePaperIdFromHref(detail.paperSurfaceHref)
@@ -787,11 +822,26 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     [openPaperBrowse],
   )
 
+  // flow-panel 刀 3: detail-page "看解析" SPA fast-path — same href parsing
+  // as 看整卷 above, plus questionId, opened into 讲评态 (not 挑题态).
+  const openPaperBrowseLectureFromDetail = useCallback(
+    (detail: QuestionGroupDetail) => {
+      const paperId = parsePaperIdFromHref(detail.paperSurfaceHref)
+      if (!paperId) return
+      const [, query = ''] = (detail.paperSurfaceHref || '').split('?')
+      const params = new URLSearchParams(query)
+      const groupId = params.get('groupId') || detail.id
+      const questionId = params.get('questionId') || null
+      openPaperBrowse(paperId, groupId, { questionId, lecture: true })
+    },
+    [openPaperBrowse],
+  )
+
   const paperBrowseOnBackToWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
         const url = new URL(window.location.href)
-        for (const param of ['view', 'paperId', 'focusGroupId']) {
+        for (const param of ['view', 'paperId', 'focusGroupId', 'questionId', 'lecture']) {
           url.searchParams.delete(param)
         }
         const nextSearch = url.searchParams.toString()
@@ -801,8 +851,52 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         // State flip below is the authoritative UI change.
       }
     }
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false })
   }, [])
+
+  // flow-panel 刀 3: Back/Forward support. Every `open*`/`*OnBackToWorkbench`
+  // callback above already writes the URL via pushState/replaceState — this
+  // is the other half, replaying the same boot-read parse (main.tsx /
+  // this component's four useState initializers above) whenever the user
+  // navigates via the browser's own Back/Forward instead of an in-app
+  // callback. `view=paper-intelligence` and `view=reading-analysis` are NOT
+  // routes this component can render from state — main.tsx picks between
+  // <App> and <ReadingAnalysisDemoRoute> at boot, and currentPiRoute is only
+  // ever populated from the `piRoute` prop main.tsx passes in at that same
+  // boot moment (see the comment on the `currentPiRoute` useState above) —
+  // so landing on either of those two URLs via popstate falls back to a full
+  // reload instead of assembling a route this component has no state path
+  // for. Verified surface is paper-browse Back/Forward (per plan); the other
+  // three routes (admin/my-space/draft-paper) are synced too but their
+  // in-page state debt is out of this cut's scope.
+  useEffect(() => {
+    function onPopState(): void {
+      if (typeof window === 'undefined') return
+      const params = new URLSearchParams(window.location.search)
+      const view = params.get('view')
+      if (view === 'paper-intelligence' || view === 'reading-analysis') {
+        window.location.reload()
+        return
+      }
+      setAdminRouteActive(isOwnerView && view === 'admin')
+      setMySpaceRouteActive(view === 'my-space')
+      setDraftPaperRoute({
+        active: view === 'draft-paper',
+        draftPaperId: params.get('draftPaperId'),
+        focusGroupId: params.get('focusGroupId'),
+      })
+      setPaperBrowseRoute({
+        active: view === 'paper-browse',
+        paperId: params.get('paperId'),
+        focusGroupId: params.get('focusGroupId'),
+        questionId: params.get('questionId'),
+        lecture: params.get('lecture') === '1',
+      })
+      setCurrentPiRoute({ kind: 'none' })
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [isOwnerView])
 
   const openMySpace = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
@@ -813,7 +907,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false })
     setMySpaceRouteActive(true)
     setCurrentPiRoute({ kind: 'none' })
   }, [])
@@ -901,6 +995,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       <PaperBrowsePage
         paperId={paperBrowseRoute.paperId}
         focusGroupId={paperBrowseRoute.focusGroupId}
+        questionId={paperBrowseRoute.questionId}
+        lecture={paperBrowseRoute.lecture}
         questionGroupById={questionGroupById}
         onAddGroupsToBasket={(groups) => void addGroupsToBasket(groups)}
         currentDraftPaperId={currentDraftPaperId}
@@ -1040,6 +1136,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               onDelete={handleDeleteQuestionGroup}
               onAddToBasket={addToBasket}
               onOpenPaperBrowse={openPaperBrowseFromDetail}
+              onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
             />
           ) : null}
         </section>

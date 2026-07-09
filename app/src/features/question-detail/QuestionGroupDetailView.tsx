@@ -23,6 +23,7 @@
  * reason, 加入草稿卷, the whole-paper preview entry, and the per-group
  * analysis entry) stays visible to both member and owner.
  */
+import type { MouseEvent } from 'react'
 import {
   ArrowLeft,
   BookOpen,
@@ -44,6 +45,7 @@ import { sourceTypeLabel } from '../../domain/questionBank'
 import { labelOf } from '../../workbench/detail/readingProfileLabels'
 import { AnalysisDisclosure } from './AnalysisDisclosure'
 import { compactGroupMeta } from './detailHelpers'
+import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
@@ -101,9 +103,15 @@ export type QuestionGroupDetailViewProps = {
   onDelete: (detail: QuestionGroupDetail) => void
   onAddToBasket: (detail: QuestionGroupDetail) => void
   /** 刀B: opens the whole-paper preview page (paper-browse), scrolled to
-   * this group. Only rendered when the group has a paperSurfaceHref (its
-   * paper has a paper-asset). */
+   * this group — 挑题态, no lecture. Only rendered when the group has a
+   * paperSurfaceHref (its paper has a paper-asset). */
   onOpenPaperBrowse: (detail: QuestionGroupDetail) => void
+  /** flow-panel 刀 3: opens the whole-paper preview page in 讲评态,
+   * anchored to this group with its first analyzed question预选 — the SPA
+   * fast-path for「看解析」(plain left-click). The `<a href>` fallback
+   * (buildPaperBrowseLectureHref) still lands on the same state via a full
+   * navigation, so 中键/新标签 stays correct even without this handler. */
+  onOpenPaperBrowseLecture: (detail: QuestionGroupDetail) => void
 }
 
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
@@ -124,6 +132,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onDelete,
     onAddToBasket,
     onOpenPaperBrowse,
+    onOpenPaperBrowseLecture,
   } = props
 
   // These useMemos previously lived in App.tsx (App.tsx:1261-1293 pre-cut);
@@ -210,12 +219,23 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               {selectedDetail.hasPaperSurfaceAnalysis &&
                 selectedDetail.paperSurfaceHref &&
                 selectedDetail.paperSurfaceLabel && (
-                // 直达解析面：与搜索卡同款 href 直链（导航目标由 classic-retire-2 断言把守）
+                // flow-panel 刀 3: 直达解析面迁移进整卷页讲评态（不再是老
+                // 解析页 ?view=paper-intelligence&surface=paper 直链——
+                // 导航目标由 classic-retire-2 断言把守，本条与上方的挑题态
+                // 入口是两个不同目的地）。href 走共享换算 helper 保持中键/
+                // 新标签可用；主点击拦截走 SPA openPaperBrowseLecture
+                // （带 questionId+lecture，同页内导航，不整页刷新）。
                 <a
                   className="detail-button"
-                  href={selectedDetail.paperSurfaceHref}
+                  href={buildPaperBrowseLectureHref(selectedDetail.paperSurfaceHref) || selectedDetail.paperSurfaceHref}
                   data-ra-entry="detail-view"
                   data-ra-group-id={selectedDetail.id}
+                  onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+                    if (event.defaultPrevented || event.button !== 0) return
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                    event.preventDefault()
+                    onOpenPaperBrowseLecture(selectedDetail)
+                  }}
                 >
                   <BookOpen size={16} />
                   {selectedDetail.paperSurfaceLabel}

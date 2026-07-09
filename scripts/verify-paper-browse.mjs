@@ -249,6 +249,7 @@ console.log('paper-browse verify: whole-paper preview page (刀B v1)')
 const appSrc = read('app/src/App.tsx')
 const detailViewSrc = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 const pageSrc = read('app/src/features/paper-browse/PaperBrowsePage.tsx')
+const conciergeGroupCardSrc = read('app/src/concierge/ConciergeGroupCard.tsx')
 const verifyCiSrc = read('scripts/verify-ci.mjs')
 const readmeSrc = read('scripts/README.md')
 const asset = JSON.parse(
@@ -908,11 +909,15 @@ assert(
 const pageCssSrc = read('app/src/features/paper-browse/paperBrowsePage.css')
 
 assert(
-  'PaperBrowsePage declares lectureOpen state defaulting to false',
-  /const\s*\[\s*lectureOpen\s*,\s*setLectureOpen\s*\]\s*=\s*useState\s*\(\s*false\s*\)/.test(
+  // flow-panel 刀 3 narrows this from a literal `useState(false)`: the
+  // initial value now seeds from the `lecture` prop (入口带态 lecture=1
+  // opens 讲评态 on load) via a lazy initializer, defaulting to false when
+  // the prop is absent/falsy — same net default, new source.
+  'PaperBrowsePage seeds lectureOpen from the lecture prop (defaults to false when absent)',
+  /const\s*\[\s*lectureOpen\s*,\s*setLectureOpen\s*\]\s*=\s*useState\s*\(\s*\(\)\s*=>\s*Boolean\(lecture\)\s*\)/.test(
     pageSrc,
   ),
-  'missing lectureOpen useState(false)',
+  'missing lectureOpen useState(() => Boolean(lecture))',
 )
 assert(
   'PaperBrowsePage renders a 讲评 handle button unconditionally (always visible)',
@@ -1103,16 +1108,48 @@ assert(
   'overlay render condition does not match the enabled gate — risk of ghost marks from a previous group',
 )
 assert(
-  'paperBrowsePage.css never imports the Forbidden paperIntelligencePaperSurfaceHarness.css (colors are a hand-copied local rule set instead)',
+  'paperBrowsePage.css never imports the Forbidden paperIntelligencePaperSurfaceHarness.css (colors come from the shared paperSurfaceLectureHighlights.css instead — flow-panel 刀 3)',
   !/paperIntelligencePaperSurfaceHarness\.css/.test(pageSrc),
   'PaperBrowsePage.tsx imports the harness-only stylesheet — Forbidden scope violation',
 )
+// flow-panel 刀 3: the .paper-browse-seven-blank-overlay / .paper-browse-
+// seven-clue-mark rules moved out of paperBrowsePage.css into the shared
+// paperSurfaceLectureHighlights.css (single source with the harness's
+// equivalent .pi-seven-* marks) — check the shared file directly, plus
+// that paperBrowsePage.css actually @imports it. .paper-browse-content's
+// own position:relative anchor stays page-local (not part of the shared
+// file) and is still checked against pageCssSrc.
+const lectureHighlightsCssSrc = read(
+  'app/src/features/paper-intelligence/paperSurfaceLectureHighlights.css',
+)
+const harnessCssSrc = read(
+  'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
+)
 assert(
-  'paperBrowsePage.css defines its own .paper-browse-seven-blank-overlay / .paper-browse-seven-clue-mark rules, and .paper-browse-content establishes position: relative for them to anchor against',
-  /\.paper-browse-seven-blank-overlay\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
-    /\.paper-browse-seven-clue-mark\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
-    /\.paper-browse-content\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
-  'missing the overlay/mark CSS rules or the position: relative anchor on .paper-browse-content',
+  'paperBrowsePage.css @imports the shared paperSurfaceLectureHighlights.css',
+  /@import\s*["']\.\.\/paper-intelligence\/paperSurfaceLectureHighlights\.css["']/.test(pageCssSrc),
+  'missing the @import of the shared highlights stylesheet',
+)
+assert(
+  'shared paperSurfaceLectureHighlights.css defines the .pi-seven-blank-overlay / .paper-browse-seven-blank-overlay + .pi-seven-clue-mark / .paper-browse-seven-clue-mark rules (grouped selectors, single source for both consumers)',
+  /\.pi-seven-blank-overlay,[\s\S]{0,40}\.paper-browse-seven-blank-overlay\s*\{[^}]*position:\s*absolute/.test(
+    lectureHighlightsCssSrc,
+  ) &&
+    /\.pi-seven-clue-mark,[\s\S]{0,40}\.paper-browse-seven-clue-mark\s*\{[^}]*position:\s*absolute/.test(
+      lectureHighlightsCssSrc,
+    ),
+  'missing the grouped overlay/mark rules in the shared stylesheet',
+)
+assert(
+  'paperBrowsePage.css no longer hand-copies .paper-browse-seven-blank-overlay / .paper-browse-seven-clue-mark itself (moved to the shared file, not duplicated)',
+  !/\.paper-browse-seven-blank-overlay\s*\{/.test(pageCssSrc) &&
+    !/\.paper-browse-seven-clue-mark\s*\{/.test(pageCssSrc),
+  'paperBrowsePage.css still declares these rules locally — not a single source',
+)
+assert(
+  '.paper-browse-content establishes position: relative for the shared overlay to anchor against (page-local, stays in paperBrowsePage.css)',
+  /\.paper-browse-content\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
+  'missing the position: relative anchor on .paper-browse-content',
 )
 assert(
   'paper-2026-i sevenChoices model: at least one chain has non-empty leftHighlights ranges (proves the highlight hook has real geometry data to consume, not just an empty-marks no-op)',
@@ -1194,15 +1231,48 @@ assert(
   !/@import[^;]*paperIntelligencePaperSurfaceHarness\.css/.test(pageCssSrc),
   'a Forbidden stylesheet @import leaked into paperBrowsePage.css',
 )
+// flow-panel 刀 3: the .paper-browse-shell-scoped support/trap stroke
+// palette moved out of paperBrowsePage.css into the shared
+// paperSurfaceLectureHighlights.css (single source with the harness's
+// .pi-ps-harness-shell-scoped copy) — check the shared file, plus that
+// pageCssSrc no longer duplicates it.
 assert(
-  'paperBrowsePage.css hand-copies the support/trap stroke palette scoped to .paper-browse-shell (not .pi-ps-harness-shell)',
-  /\.paper-browse-shell \.pi-line-path--support[\s\S]{0,120}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
-    pageCssSrc,
+  'shared paperSurfaceLectureHighlights.css carries the support/trap stroke palette for BOTH .paper-browse-shell and .pi-ps-harness-shell scopes (grouped selectors, single source)',
+  /\.paper-browse-shell \.pi-line-path--support[\s\S]{0,200}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
+    lectureHighlightsCssSrc,
   ) &&
-    /\.paper-browse-shell \.pi-line-path--trap[\s\S]{0,120}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
-      pageCssSrc,
+    /\.pi-ps-harness-shell \.pi-line-path--support[\s\S]{0,200}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
+      lectureHighlightsCssSrc,
+    ) &&
+    /\.paper-browse-shell \.pi-line-path--trap[\s\S]{0,200}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
+      lectureHighlightsCssSrc,
+    ) &&
+    /\.pi-ps-harness-shell \.pi-line-path--trap[\s\S]{0,200}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
+      lectureHighlightsCssSrc,
     ),
-  'missing the hand-copied support/trap palette rules',
+  'missing one or more of the support/trap palette rules in the shared stylesheet',
+)
+assert(
+  'paperBrowsePage.css no longer hand-copies the support/trap stroke palette itself (moved to the shared file, not duplicated)',
+  !/\.paper-browse-shell \.pi-line-path--support/.test(pageCssSrc) &&
+    !/\.paper-browse-shell \.pi-line-path--trap/.test(pageCssSrc),
+  'paperBrowsePage.css still declares the support/trap palette locally — not a single source',
+)
+assert(
+  'paperIntelligencePaperSurfaceHarness.css @imports the shared paperSurfaceLectureHighlights.css and no longer hand-copies the support/trap palette or the seven-choices overlay/mark base rules itself',
+  /@import\s*["']\.\/paperSurfaceLectureHighlights\.css["']/.test(harnessCssSrc) &&
+    !/\.pi-ps-harness-shell \.pi-line-path--support/.test(harnessCssSrc) &&
+    !/\.pi-ps-harness-shell \.pi-line-path--trap/.test(harnessCssSrc) &&
+    !/\.pi-seven-blank-overlay\s*\{/.test(harnessCssSrc) &&
+    !/\.pi-seven-clue-mark\s*\{/.test(harnessCssSrc),
+  'harness stylesheet missing the shared-file @import, or still hand-copies rules that should have moved',
+)
+assert(
+  'paperIntelligencePaperSurfaceHarness.css still declares .pi-seven-option-card[data-seven-color] (untouched consumer, not accidentally deleted with the clue-mark selector it used to share a rule with)',
+  /\.pi-seven-option-card\[data-seven-color='0'\][\s\S]{0,20}\.pi-seven-option-jump-chip\[data-seven-color='0'\]\s*\{/.test(
+    harnessCssSrc,
+  ),
+  'option-card/jump-chip color-variant rule is missing — may have been deleted along with the clue-mark extraction',
 )
 assert(
   'paperBrowsePage.css hides the evidence line below the 1200px docked-三栏 breakpoint (drawer geometry is not meaningful)',
@@ -1225,6 +1295,144 @@ assert(
     return kinds.has('support') && kinds.has('trap')
   })(),
   'reading group evidenceKindById does not exercise both support and trap kinds',
+)
+
+// ─── 44-56. flow-panel 刀 3: 入口带态 + 链接迁移 + URL/popstate + 样式抽
+//     共享 + 小尾巴 ───
+
+console.log('\n-- 44-56. flow-panel 刀 3 --')
+
+// 44-46. App.tsx: paperBrowseRoute URL contract extended with
+// questionId/lecture; openPaperBrowse takes an options bag; popstate
+// listener replays the boot-read parse.
+assert(
+  'App.tsx boot-reads questionId/lecture into paperBrowseRoute (刀 3 URL contract extension)',
+  /questionId:\s*params\.get\(\s*['"]questionId['"]\s*\)/.test(appSrc) &&
+    /lecture:\s*params\.get\(\s*['"]lecture['"]\s*\)\s*===\s*['"]1['"]/.test(appSrc),
+  'missing questionId/lecture boot-read on paperBrowseRoute',
+)
+assert(
+  'openPaperBrowse accepts an options bag (questionId/lecture) and writes both into the URL + paperBrowseRoute',
+  /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[^{]*options\?\s*:\s*OpenPaperBrowseOptions[^{]*\{/.test(
+    appSrc,
+  ) &&
+    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*lecture\s*\}\)/.test(
+      appSrc,
+    ),
+  'openPaperBrowse does not accept/thread the options bag',
+)
+assert(
+  'App.tsx defines openPaperBrowseLectureFromDetail (detail-page 看解析 SPA fast-path, opens 讲评态 with questionId)',
+  /const openPaperBrowseLectureFromDetail\s*=\s*useCallback/.test(appSrc) &&
+    /openPaperBrowse\(paperId,\s*groupId,\s*\{\s*questionId,\s*lecture:\s*true\s*\}\)/.test(appSrc),
+  'missing openPaperBrowseLectureFromDetail or it does not open 讲评态',
+)
+assert(
+  'App.tsx wires onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail} into QuestionGroupDetailView',
+  /onOpenPaperBrowseLecture=\{openPaperBrowseLectureFromDetail\}/.test(appSrc),
+  'missing onOpenPaperBrowseLecture prop wiring',
+)
+assert(
+  'App.tsx passes questionId/lecture through to <PaperBrowsePage>',
+  /questionId=\{paperBrowseRoute\.questionId\}/.test(appSrc) &&
+    /lecture=\{paperBrowseRoute\.lecture\}/.test(appSrc),
+  'missing questionId/lecture prop pass-through to PaperBrowsePage',
+)
+assert(
+  'App.tsx registers a popstate listener that replays the four-route boot-read parse',
+  /window\.addEventListener\(\s*['"]popstate['"]\s*,\s*onPopState\s*\)/.test(appSrc) &&
+    /setAdminRouteActive\(isOwnerView\s*&&\s*view\s*===\s*['"]admin['"]\)/.test(appSrc) &&
+    /setMySpaceRouteActive\(view\s*===\s*['"]my-space['"]\)/.test(appSrc) &&
+    /setDraftPaperRoute\(\{\s*\n\s*active:\s*view\s*===\s*['"]draft-paper['"]/.test(appSrc) &&
+    /setPaperBrowseRoute\(\{\s*\n\s*active:\s*view\s*===\s*['"]paper-browse['"]/.test(appSrc),
+  'missing the popstate listener or it does not sync all four route states',
+)
+assert(
+  'popstate handler falls back to a full reload for view=paper-intelligence / view=reading-analysis (routes this component cannot assemble from state)',
+  /view\s*===\s*['"]paper-intelligence['"]\s*\|\|\s*view\s*===\s*['"]reading-analysis['"][\s\S]{0,80}window\.location\.reload\(\)/.test(
+    appSrc,
+  ),
+  'missing the reload fallback for SPA-uncarried views',
+)
+assert(
+  'paperBrowseOnBackToWorkbench strips questionId/lecture from the URL alongside view/paperId/focusGroupId',
+  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]lecture['"]\s*\]\)/.test(
+    appSrc,
+  ),
+  'paperBrowseOnBackToWorkbench does not strip the new params — stale questionId/lecture would leak into the workbench URL',
+)
+
+// 47-48. ConciergeGroupCard.tsx / QuestionGroupDetailView.tsx: 看解析 href
+// migration to buildPaperBrowseLectureHref.
+assert(
+  "ConciergeGroupCard imports buildPaperBrowseLectureHref and uses it to build the 看解析 href (search-card entry, plain <a href> — no SPA intercept, ConciergeDesk/ConciergePaperRow are out of this cut's Scope whitelist)",
+  /import\s*\{\s*buildPaperBrowseLectureHref\s*\}\s*from\s*['"]\.\/paperSurfaceHref\.ts['"]/.test(
+    conciergeGroupCardSrc,
+  ) &&
+    /buildPaperBrowseLectureHref\(group\.paperSurfaceHref\)/.test(conciergeGroupCardSrc),
+  'missing the import or the href-building call',
+)
+assert(
+  'paperSurfaceHref.ts exports buildPaperBrowseLectureHref, converting the server paper-intelligence href into a paper-browse 讲评态 href (view/paperId/focusGroupId/questionId/lecture=1)',
+  /export function buildPaperBrowseLectureHref/.test(hrefHelperSrc) &&
+    /nextParams\.set\(\s*['"]view['"]\s*,\s*['"]paper-browse['"]\s*\)/.test(hrefHelperSrc) &&
+    /nextParams\.set\(\s*['"]lecture['"]\s*,\s*['"]1['"]\s*\)/.test(hrefHelperSrc),
+  'buildPaperBrowseLectureHref missing or does not build a paper-browse&lecture=1 href',
+)
+assert(
+  'QuestionGroupDetailView 看解析 entry uses buildPaperBrowseLectureHref for its href and intercepts plain left-clicks via onOpenPaperBrowseLecture (SPA fast-path); the <a href> fallback keeps 中键/新标签 working',
+  /href=\{buildPaperBrowseLectureHref\(selectedDetail\.paperSurfaceHref\)/.test(detailViewSrc) &&
+    /onOpenPaperBrowseLecture\(selectedDetail\)/.test(detailViewSrc) &&
+    /event\.metaKey\s*\|\|\s*event\.ctrlKey\s*\|\|\s*event\.shiftKey\s*\|\|\s*event\.altKey/.test(detailViewSrc),
+  'missing the migrated href, the SPA click-intercept, or the modifier-key bailout',
+)
+assert(
+  'QuestionGroupDetailView props type declares onOpenPaperBrowseLecture, separate from onOpenPaperBrowse (看解析 ≠ 看整卷)',
+  /onOpenPaperBrowseLecture:\s*\(detail:\s*QuestionGroupDetail\)\s*=>\s*void/.test(detailViewSrc),
+  'missing onOpenPaperBrowseLecture in props type',
+)
+
+// 49-53. PaperBrowsePage.tsx: questionId deep-link selection, URL
+// replaceState sync, scrollspy-clear race fix, cross-group jitter debounce,
+// narrow-drawer empty-state copy.
+assert(
+  'PaperBrowsePage declares questionId/lecture props and seeds a deep-link selection effect that calls selectLectureQuestion once asset (and, for cloze/grammarFill/writing, lectureAnalysisFetched) are ready',
+  /questionId\?:\s*string\s*\|\s*null/.test(pageSrc) &&
+    /lecture\?:\s*boolean/.test(pageSrc) &&
+    /deepLinkQuestionAppliedRef/.test(pageSrc) &&
+    /selectLectureQuestion\(targetGroupId,\s*questionId\)/.test(pageSrc),
+  'missing the questionId/lecture props or the deep-link selection effect',
+)
+assert(
+  'PaperBrowsePage replaceState-syncs lectureOpen/lectureSelection into the URL (lecture=1 + focusGroupId/questionId when selected; both cleared when 讲评关)',
+  /\}, \[lectureOpen, lectureSelection\]\)/.test(pageSrc) &&
+    /window\.history\.replaceState\(window\.history\.state,\s*['"]['"],\s*nextUrl\)/.test(pageSrc) &&
+    /urlSyncMountedRef/.test(pageSrc),
+  'missing the URL-sync effect, or it does not skip the first mount commit',
+)
+assert(
+  '刀 3 小尾巴 ①: the scrollspy clear-effect only clears when activeAnchor is a real group id (asset.content.groups[activeAnchor]) AND is not suppressed during programmatic scroll',
+  /isProgrammaticScrollRef\.current\)\s*return/.test(pageSrc) &&
+    /!activeAnchor\s*\|\|\s*!asset\?\.content\.groups\[activeAnchor\]\)\s*return/.test(pageSrc) &&
+    /suppressScrollspyClear/.test(pageSrc),
+  'missing the real-group guard, the suppression-ref check, or suppressScrollspyClear is not wired into the programmatic scroll call sites',
+)
+assert(
+  'suppressScrollspyClear is called before every programmatic scrollIntoView (rail click / deep-link focus / evidence scroll) so the clear-effect race cannot wipe a just-made selection mid-settle',
+  (pageSrc.match(/suppressScrollspyClear\(\)/g) || []).length >= 3,
+  'expected suppressScrollspyClear() at all three programmatic-scroll call sites',
+)
+assert(
+  '刀 3 小尾巴 ②: the scrollspy IntersectionObserver debounces setActiveAnchor (slow cross-group scroll should not flicker)',
+  /debounceTimer\s*=\s*window\.setTimeout\(\s*\(\)\s*=>\s*\{\s*\n\s*debounceTimer\s*=\s*null\s*\n\s*setActiveAnchor\(current\)/.test(
+    pageSrc,
+  ),
+  'missing the debounced setActiveAnchor commit in the scrollspy observer',
+)
+assert(
+  '刀 3 小尾巴 ③: the narrow-drawer empty-state copy is actionable copy, not "滚动到题组查看速览" (fails to read in the drawer-over-content context)',
+  !/滚动到题组查看速览/.test(pageSrc) && /滚动卷面或点选题目后，这里显示讲评/.test(pageSrc),
+  'empty-state copy was not updated',
 )
 
 if (failed > 0) {

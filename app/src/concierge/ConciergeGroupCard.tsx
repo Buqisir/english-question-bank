@@ -15,6 +15,7 @@
 
 import { type MouseEvent, type ReactNode } from 'react'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
+import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 
 function isDisplayTag(tag: string | undefined): tag is string {
   const value = (tag || '').trim()
@@ -82,9 +83,17 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
   const topicText = buildTopicText(group)
+  // flow-panel 刀 3: 看解析 entry migrates from the old解析页
+  // (?view=paper-intelligence&surface=paper...) to the整卷页讲评态
+  // (?view=paper-browse&...&lecture=1) via the shared href helper. Stays a
+  // plain `<a href>` (native navigation — 中键/新标签可用); no SPA
+  // click-intercept here because threading a paper-browse-lecture opener
+  // through ConciergeDesk/ConciergePaperRow is out of this cut's Scope
+  // whitelist (only ConciergeGroupCard.tsx itself is in-scope for this
+  // entry's link shape).
   const paperSurfaceAnalysisHref =
     group.hasPaperSurfaceAnalysis && group.paperSurfaceHref && group.paperSurfaceLabel
-      ? group.paperSurfaceHref
+      ? buildPaperBrowseLectureHref(group.paperSurfaceHref)
       : null
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
   const draftButtonLabel =
