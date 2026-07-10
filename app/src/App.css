@@ -3536,7 +3536,10 @@ button:disabled {
 }
 
 .concierge-row:focus-visible {
-  box-shadow: inset 0 0 0 3px rgba(44, 110, 86, 0.35);
+  /* ui-p1-shell CR SW-1: rows join the same --focus-ring token as buttons;
+     -2px offset keeps the ring inside the row (inset replacement). */
+  outline: var(--focus-ring);
+  outline-offset: -2px;
 }
 
 .concierge-row-anchor {
@@ -4527,7 +4530,9 @@ button:disabled {
 }
 
 .concierge-paper-row:focus-visible {
-  box-shadow: inset 0 0 0 3px rgba(44, 110, 86, 0.35);
+  /* ui-p1-shell CR SW-1: same token as .concierge-row above. */
+  outline: var(--focus-ring);
+  outline-offset: -2px;
 }
 
 .concierge-paper-row.is-expanded {
