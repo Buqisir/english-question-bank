@@ -17,7 +17,7 @@ export function AdminWorkbench({
 }: AdminWorkbenchProps) {
   return (
     <main className="admin-workbench" aria-label="管理台">
-      <section className="library-panel admin-panel" aria-label="数据维护">
+      <section className="admin-panel" aria-label="数据维护">
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Admin</p>
@@ -29,7 +29,7 @@ export function AdminWorkbench({
         </p>
         <div className="admin-action-row">
           <button
-            className="ghost-button"
+            className="primary-button"
             type="button"
             disabled={backfillStatus === 'loading'}
             onClick={onBackfillTopicLabels}

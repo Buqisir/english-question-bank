@@ -1172,6 +1172,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       </main>
       )}
 
+      {!adminRouteActive && (
       <button
         type="button"
         className="basket-chip"
@@ -1182,6 +1183,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         <ClipboardList size={15} />
         <span>草稿卷 · {currentDraftGroupCount} 题组</span>
       </button>
+      )}
 
       {isEntryOpen && (
         <EntryModal

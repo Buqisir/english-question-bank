@@ -6,6 +6,13 @@
 }
 
 .admin-panel {
+  /* ui-p1-shell C3: no longer borrows .library-panel (its home-mode-ai
+     `margin: 0 auto` rule triggers flexbox auto-margin sizing inside the
+     .admin-workbench column, shrinking this panel to ~310px of content
+     width instead of filling the page). Owns its own full-width sizing. */
+  width: 100%;
+  max-width: 1160px;
+  min-width: 0;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;

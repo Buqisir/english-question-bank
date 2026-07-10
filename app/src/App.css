@@ -1,3 +1,11 @@
+/* ui-p1-shell C1: single-point focus ring token (audit P1 #1 — 全站焦点环形同虚设).
+   2px solid outline + 2px offset replaces the old 0 0 0 3px low-alpha glow
+   box-shadow (~1.2:1 contrast). Change this one declaration to move every
+   :focus-visible ring below in one place. */
+:root {
+  --focus-ring: 2px solid var(--accent, #2C6E56);
+}
+
 .app-shell {
   min-height: 100vh;
   background: var(--surface);
@@ -210,8 +218,8 @@ button:disabled {
 .back-button:focus-visible,
 .save-button:focus-visible,
 .export-button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .detail-button:hover,
@@ -287,7 +295,8 @@ button:disabled {
 
 .search-field:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-glow);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .search-field input,
@@ -315,7 +324,8 @@ button:disabled {
 .field select:focus,
 .field textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-glow);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .field input,
@@ -1291,8 +1301,8 @@ button:disabled {
 }
 
 .analysis-disclosure-toggle:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .analysis-disclosure-toggle-label {
@@ -2242,11 +2252,8 @@ button:disabled {
   }
 
   .topbar-actions {
-    width: 100%;
-  }
-
-  .topbar-actions button {
-    flex: 1;
+    justify-content: flex-end;
+    align-self: stretch;
   }
 
   .workbench {
@@ -3280,8 +3287,8 @@ button:disabled {
 }
 
 .concierge-intent-submit:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .concierge-intent-submit:disabled {
@@ -3337,8 +3344,8 @@ button:disabled {
 }
 
 .concierge-thinking-toggle input[type='checkbox']:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .concierge-thinking-toggle label {
@@ -3461,7 +3468,7 @@ button:disabled {
 
 .concierge-feed-year-count {
   font-size: 12px;
-  color: #9A9A93;
+  color: #6A6A64;
 }
 
 .concierge-feed-expand {
@@ -3626,9 +3633,9 @@ button:disabled {
 }
 
 .concierge-action:focus-visible {
-  outline: none;
   border-color: #2C6E56;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .concierge-action:disabled {
@@ -3658,7 +3665,8 @@ button:disabled {
 
 .concierge-action-add:focus-visible {
   border-color: #2C6E56;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
@@ -3935,10 +3943,10 @@ button:disabled {
 }
 
 .concierge-starter-chip:focus-visible {
-  outline: none;
   border-color: #2C6E56;
   color: #1E1E1C;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* In AI mode, keep the hint and chips centered with the intent bar. */
@@ -4133,15 +4141,15 @@ button:disabled {
 }
 
 .concierge-command-filter-toggle:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .concierge-command-count {
   flex: 0 0 auto;
   margin-left: auto;
   font-size: 12.5px;
-  color: #9A9A93;
+  color: #6A6A64;
   white-space: nowrap;
 }
 
@@ -4178,8 +4186,8 @@ button:disabled {
 }
 
 .concierge-active-filter-chip:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
@@ -4222,9 +4230,9 @@ button:disabled {
 }
 
 .concierge-row-expand:focus-visible {
-  outline: none;
   background: #EDEDEA;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.20);
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .concierge-row-expand.open {
@@ -4708,7 +4716,7 @@ button:disabled {
   padding: 8px 12px 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #9A9A93;
+  color: #6A6A64;
   border-bottom: 1px solid #E8E8E4;
 }
 
@@ -4791,7 +4799,7 @@ button:disabled {
 .concierge-group-row-topic {
   flex: 0 0 auto;
   font-size: 11.5px;
-  color: #9A9A93;
+  color: #6A6A64;
   white-space: nowrap;
 }
 
@@ -4815,7 +4823,7 @@ button:disabled {
 .concierge-group-row.is-dim .concierge-group-row-count,
 .concierge-group-row.is-dim .concierge-group-row-summary,
 .concierge-group-row.is-dim .concierge-group-row-topic {
-  color: #9A9A93;
+  color: #6A6A64;
 }
 
 /* 操作簇 — hover/focus-within reveal, pure opacity, surface-2 backdrop
