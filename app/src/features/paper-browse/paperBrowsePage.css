@@ -554,3 +554,221 @@
     display: none;
   }
 }
+
+/* ─── similar-rail (E2) — 讲评栏「配相似」CTA + 结果态 ───
+ *
+ * Colors traced from docs/cuts/similar-questions/prototype.html (owner
+ * 拍板 2026-07-10): teal-600 #2C6E56 (primary), teal-50 #EAF1ED (checked
+ * card fill), neutral chip #EDEDEA. Scoped to `.similar-*` class names only
+ * — no shared token/variable introduced (this cut's whitelist doesn't touch
+ * shared/papersurface/tokens.mjs).
+ */
+
+.similar-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px dashed #d8d8d2;
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
+.similar-cta-why {
+  font-size: 12px;
+  color: #6a6a64;
+  flex: 1;
+}
+
+.similar-btn {
+  font: 600 12.5px/1 -apple-system, 'PingFang SC', sans-serif;
+  border-radius: 8px;
+  padding: 9px 14px;
+  cursor: pointer;
+  border: 1px solid #d8d8d2;
+  background: #ffffff;
+  color: #1e1e1c;
+}
+
+.similar-btn:hover {
+  background: #ededea;
+}
+
+.similar-btn--primary {
+  background: #2c6e56;
+  border-color: #2c6e56;
+  color: #ffffff;
+}
+
+.similar-btn--primary:hover {
+  background: #1e4a3a;
+}
+
+.similar-btn[disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.similar-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.similar-rail-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.similar-rail-head .paper-browse-lecture-title {
+  flex: 1;
+}
+
+.similar-backlink {
+  font-size: 12px;
+  color: #2c6e56;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.similar-seed-line {
+  font-size: 12px;
+  color: #6a6a64;
+  margin: 0;
+}
+
+.similar-seed-line b {
+  color: #1e1e1c;
+}
+
+.similar-rail-error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.similar-rcard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.similar-rcard {
+  border: 1px solid #e8e8e4;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.similar-rcard:hover {
+  border-color: #a5cdbd;
+}
+
+.similar-rcard--checked {
+  border-color: #2c6e56;
+  background: #eaf1ed;
+}
+
+.similar-rcard input[type='checkbox'] {
+  margin-top: 3px;
+  accent-color: #2c6e56;
+  width: 15px;
+  height: 15px;
+}
+
+.similar-rcard input[type='checkbox'][disabled] {
+  cursor: not-allowed;
+}
+
+.similar-rcard-body {
+  min-width: 0;
+}
+
+.similar-rcard-title {
+  font-weight: 600;
+  font-size: 13px;
+  color: #1e1e1c;
+}
+
+.similar-rcard-source {
+  font-size: 11.5px;
+  color: #6a6a64;
+  margin: 1px 0 6px;
+}
+
+.similar-rcard-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.similar-chip {
+  font-size: 11px;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: #ededea;
+  color: #6a6a64;
+}
+
+.similar-chip--hit {
+  background: #eaf1ed;
+  color: #1e4a3a;
+  border: 1px solid #cfe4da;
+}
+
+.similar-pool-note {
+  font-size: 12px;
+  color: #6a6a64;
+  text-align: center;
+  padding: 6px 0 2px;
+  margin: 0;
+}
+
+.similar-rail-foot {
+  border-top: 1px solid #e8e8e4;
+  padding-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.similar-count {
+  font-size: 12.5px;
+  color: #6a6a64;
+  flex: 1;
+}
+
+.similar-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%) translateY(8px);
+  background: #1e1e1c;
+  color: #ffffff;
+  font-size: 12.5px;
+  border-radius: 8px;
+  padding: 9px 16px;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+  z-index: 32;
+}
+
+.similar-toast--on {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .similar-rcard,
+  .similar-toast {
+    transition: none !important;
+  }
+}

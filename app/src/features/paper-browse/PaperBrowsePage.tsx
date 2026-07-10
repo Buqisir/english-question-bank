@@ -118,6 +118,11 @@ import type {
 } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
+import { fetchSimilarQuestions } from '../../services/similarQuestions.ts'
+import {
+  SimilarQuestionsRailView,
+  type SimilarRailRequestState,
+} from './SimilarQuestionsRailView'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -150,6 +155,18 @@ type LectureSelection = {
   questionId: string
   evidenceId: string | null
   optionLabel: string | null
+}
+
+// similar-rail (E2): a snapshot of the seed that a fetch was made for,
+// captured at CTA-click time — kept separate from the live `lectureSelection`
+// so the result view (and its retry button) survives the "scroll away clears
+// lectureSelection" effect (:771-775) untouched.
+type SimilarSeedSnapshot = {
+  questionId: string
+  groupTitle: string
+  questionNo: number | null
+  groupTypeLabel: string
+  recipeSummary: string
 }
 
 export type PaperBrowsePageProps = {
@@ -223,6 +240,29 @@ function buildGroupRangeLabel(asset: PaperAssetV1, group: PaperContentGroup): st
   return `${questionNos[0]}-${questionNos[questionNos.length - 1]}`
 }
 
+// similar-rail (E2): the four groupTypes E1's engine supports (program.md
+// Q5 — writing excluded, no facet). Keys are the paper-asset (camelCase)
+// groupType — the value the CTA gate already has on hand, decoupling
+// display text from the API response's DB-style (snake_case) groupType.
+const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'sevenChoices', 'grammarFill'])
+
+const SIMILAR_GROUP_TYPE_LABEL: Record<string, string> = {
+  reading: '阅读理解',
+  cloze: '完形填空',
+  sevenChoices: '七选五',
+  grammarFill: '语法填空',
+}
+
+// program.md Q2/Q4 配方表——one-line summary per groupType, purely
+// presentational (real ordering/scoring lives server-side in
+// similarQuestions.mjs RECIPES; this FE table never drives logic).
+const SIMILAR_RECIPE_SUMMARY: Record<string, string> = {
+  reading: '同题型 → 小题题型密度 → 篇位相当 → 话题不同优先',
+  cloze: '同题型 → 话题重合 → 同词性密度',
+  sevenChoices: '同题型 → 功能句角色+位置密度 → 衔接机制 → 话题重合',
+  grammarFill: '同题型 → 同考点密度 → 提示词类型',
+}
+
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
@@ -258,6 +298,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 刀 2: 讲评态下的显式点题选择；null = 跟随 scrollspy 显示组级概览。
   const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
+  // similar-rail (E2): 讲评栏 body 的视图态 — 'analysis'(解析)/'similar'
+  // (配相似结果列表)。只在 selectLectureQuestion 换题或用户点「返回解析」
+  // 时回落到 'analysis'——滚动离开选中题清空 lectureSelection 的那条 effect
+  // (:771-775) 不触碰这个态，结果列表保持到用户主动返回/换题。
+  const [similarView, setSimilarView] = useState<'analysis' | 'similar'>('analysis')
+  const [similarSeed, setSimilarSeed] = useState<SimilarSeedSnapshot | null>(null)
+  const [similarRequest, setSimilarRequest] = useState<SimilarRailRequestState>({ status: 'loading' })
+  const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
+  const [similarToast, setSimilarToast] = useState<string | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const focusAppliedRef = useRef(false)
   // 刀 3: 入口带态的 questionId 预选只应用一次（asset 首次加载完成后）；
@@ -279,6 +328,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
   const shellRef = useRef<HTMLDivElement | null>(null)
   const rightPanelRef = useRef<HTMLElement | null>(null)
+  // similar-rail (E2): toast fade timer — the parent is the single owner of
+  // the show/clear clock (see SimilarQuestionsRailView's toastMessage doc).
+  const similarToastTimeoutRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return (): void => {
+      if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
+    }
+  }, [])
 
   // 刀 3 小尾巴 ①: 标记程序化滚动即将发生，抑制 scrollspy 的 clear effect
   // 一段沉降窗口（覆盖 smooth 滚动动画时长；深链的 auto 滚动虽然瞬时，仍给
@@ -909,6 +967,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // （cloze/grammarFill 取首条证据行，reading 取 supportEvidenceId+answer，
   // 其余(sevenChoices/writing/未发布解析)不种子，面板自行走空态）。
   function selectLectureQuestion(groupId: string, questionId: string): void {
+    // similar-rail (E2): 换到新题时讲评栏 body 回落到解析态——「配相似」
+    // 结果列表只在同一道题上跨滚动/跨面板持续，换题就该重新走 CTA。不清
+    // similarRequest/selection 本身，只切视图态：这样若用户误点又点回原题
+    // （极少见）也不会丢已经取到的结果。
+    setSimilarView('analysis')
     const lectureEntry = lectureAnalysisByGroupId[groupId]
     const plainEntry = groupModels[groupId]
     // 选中七选五题时自动展开该题的衔接链手风琴（openQuestionIds 是本页
@@ -962,6 +1025,54 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   function handleLectureSelectOption(optionLabel: string, evidenceId: string | null): void {
     setLectureSelection((prev) => (prev ? { ...prev, optionLabel, evidenceId } : prev))
+  }
+
+  // similar-rail (E2): loads once per CTA click / retry — 请求纪律 (plan
+  // point 6): never on selection, never prefetched.
+  async function loadSimilarQuestions(questionId: string): Promise<void> {
+    setSimilarRequest({ status: 'loading' })
+    try {
+      const data = await fetchSimilarQuestions(questionId)
+      setSimilarRequest({ status: 'ready', data })
+    } catch (error) {
+      setSimilarRequest({
+        status: 'error',
+        message: error instanceof Error ? error.message : '加载相似题失败，请重试',
+      })
+    }
+  }
+
+  function handleSimilarCtaClick(seed: SimilarSeedSnapshot): void {
+    setSimilarSeed(seed)
+    setSimilarView('similar')
+    setSimilarSelectedGroupIds(new Set())
+    void loadSimilarQuestions(seed.questionId)
+  }
+
+  function handleSimilarRetry(): void {
+    if (!similarSeed) return
+    void loadSimilarQuestions(similarSeed.questionId)
+  }
+
+  function handleSimilarToggleGroup(groupId: string): void {
+    setSimilarSelectedGroupIds((prev) => {
+      const next = new Set(prev)
+      if (next.has(groupId)) next.delete(groupId)
+      else next.add(groupId)
+      return next
+    })
+  }
+
+  function handleSimilarAddToDraft(): void {
+    const cards = [...similarSelectedGroupIds]
+      .map((groupId) => questionGroupById.get(groupId))
+      .filter((card): card is QuestionGroupCard => Boolean(card))
+    if (cards.length === 0) return
+    onAddGroupsToBasket(cards)
+    setSimilarSelectedGroupIds(new Set())
+    if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
+    setSimilarToast(`已加入草稿卷 · ${cards.length} 篇（含各自题目）`)
+    similarToastTimeoutRef.current = window.setTimeout(() => setSimilarToast(null), 2200)
   }
 
   function renderGroupBody(groupId: string, entry: GroupModel | undefined): ReactNode {
@@ -1198,6 +1309,30 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 走空态，实现从简（刀 1 契约允许）。
   function renderLecturePanel(): ReactNode {
     if (!asset) return null
+    // similar-rail (E2): once a fetch has been made, the result view is
+    // rendered independent of panelGroupId/scrollspy — persists across
+    // scroll-away (which only clears lectureSelection, not similarView) until
+    // the user explicitly returns or selects a new question (selectLectureQuestion).
+    if (similarView === 'similar' && similarSeed) {
+      return (
+        <SimilarQuestionsRailView
+          seed={{
+            groupTitle: similarSeed.groupTitle,
+            questionNo: similarSeed.questionNo,
+            groupTypeLabel: similarSeed.groupTypeLabel,
+            recipeSummary: similarSeed.recipeSummary,
+          }}
+          request={similarRequest}
+          questionGroupById={questionGroupById}
+          selectedGroupIds={similarSelectedGroupIds}
+          onToggleGroup={handleSimilarToggleGroup}
+          onBack={() => setSimilarView('analysis')}
+          onRetry={handleSimilarRetry}
+          onAddToDraft={handleSimilarAddToDraft}
+          toastMessage={similarToast}
+        />
+      )
+    }
     const groupId = panelGroupId
     const group = groupId ? asset.content.groups[groupId] : undefined
     if (!groupId || !group) {
@@ -1229,6 +1364,30 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             activeOptionLabel,
           })}
         </div>
+        {/* similar-rail (E2), 已拍板设计 1: 当前选中题的解析下方「配相似」
+            CTA——无选中题不渲染；只对 E1 引擎支持的四个题型(program.md Q5)
+            渲染，写作/听力题组即便被选中也不出现这个按钮。 */}
+        {hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
+          <div className="similar-cta">
+            <span className="similar-cta-why">从库里配同配方的相似题——</span>
+            <button
+              type="button"
+              className="similar-btn similar-btn--primary"
+              onClick={() => {
+                const questionNo = asset.content.questions[activeQuestionId]?.questionNo ?? null
+                handleSimilarCtaClick({
+                  questionId: activeQuestionId,
+                  groupTitle: group.title,
+                  questionNo,
+                  groupTypeLabel: SIMILAR_GROUP_TYPE_LABEL[group.groupType] ?? group.groupType,
+                  recipeSummary: SIMILAR_RECIPE_SUMMARY[group.groupType] ?? '',
+                })
+              }}
+            >
+              🔁 配相似
+            </button>
+          </div>
+        )}
       </div>
     )
   }
