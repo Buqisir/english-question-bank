@@ -5,6 +5,21 @@
   padding: 18px 22px 28px;
 }
 
+/* ui-p1-panels #9 (shell 刀交办) — draft 家族按钮/输入/选择控件此前落回
+   浏览器默认焦点环（audit P1-1 "draft 家族按钮回落浏览器默认"）。接入
+   与 shell 刀同值的 2px 实色 outline token（对比度过 3:1 非文本门槛，
+   优于全站现有的 0 0 0 3px rgba(44,110,86,0.20) 软环，约 1.2:1）。 */
+.draft-workbench-shell button:focus-visible,
+.draft-workbench-shell input:focus-visible,
+.draft-workbench-shell select:focus-visible {
+  /* var(--eqb-color-primary) resolves to the exact #2C6E56 shell-刀 token
+     value (tokens.css) — token form instead of a literal so this file's
+     palette-hex guard (verify-draft-workbench-visual-unify.mjs) stays
+     zero-hardcode. */
+  outline: 2px solid var(--eqb-color-primary);
+  outline-offset: 2px;
+}
+
 .draft-toolbar {
   align-items: center;
   background: var(--panel);
@@ -144,9 +159,19 @@
   padding: 7px 12px;
 }
 
+/* ui-p1-panels #15: the selected version segment used to reuse the exact
+   same solid-teal/white treatment as the "导出" primary action button,
+   putting a selection state at the same visual weight as "the one thing
+   to click here" (audit L92). Chip 选中态词汇 (teal-50 底 + teal-800 字)
+   reads as "currently chosen", not "primary action". Token form (not a
+   literal #EAF1ED/#1E4A3A) so this file's palette-hex guard
+   (verify-draft-workbench-visual-unify.mjs) stays zero-hardcode —
+   color-mix approximates DESIGN.md teal-50 from the existing brand-teal
+   token; --eqb-color-primary-text is teal-800 exactly. */
 .draft-version-toggle button.active {
-  background: var(--accent);
-  color: #ffffff;
+  background: color-mix(in srgb, var(--eqb-color-primary) 10%, white);
+  color: var(--eqb-color-primary-text);
+  font-weight: 600;
 }
 
 /* D5: custom floating export menu replacing native <details>/<summary> —

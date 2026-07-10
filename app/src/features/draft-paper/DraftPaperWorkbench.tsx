@@ -95,6 +95,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [spaceNewFolderName, setSpaceNewFolderName] = useState('')
   const [spaceStatus, setSpaceStatus] = useState<'idle' | 'loading' | 'saving' | 'saved' | 'error'>('idle')
   const [spaceMessage, setSpaceMessage] = useState('')
+  // ui-p1-panels #14: the save dialog used to stay open after a successful
+  // save, with the success text squeezed into the form body and "保存"
+  // still clickable (repeat-save risk, "取消" reading oddly once already
+  // saved). It now closes on success and hands off to this toast — same
+  // pattern as `draft-undo-toast` below.
+  const [savedToastMessage, setSavedToastMessage] = useState<string | null>(null)
+  const savedToastTimerRef = useRef<number | null>(null)
   const [migrationNotice, setMigrationNotice] = useState('')
   const [versionType, setVersionType] = useState<DraftVersionType>('student')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
@@ -153,6 +160,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => {
       if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
       if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
+      if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
     }
   }, [loadDraft])
 
@@ -374,7 +382,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSpaceDialogOpen(true)
     setSpaceStatus('loading')
     setSpaceMessage('')
-    setSpaceFileName(`${draftPaper.title || '英语草稿卷'}-学生卷.pdf`)
+    setSpaceFileName(`${draftPaper.title || '英语草稿卷'}-学生版.pdf`)
     try {
       const snapshot = await fetchMySpace()
       setSpaceFolders(snapshot.folders)
@@ -413,8 +421,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         fileName: spaceFileName,
         folderId: spaceFolderId || null,
       })
-      setSpaceStatus('saved')
-      setSpaceMessage('已保存到个人空间。')
+      // #14: collapse the dialog immediately on success — no lingering
+      // "saved, but still open with a live 保存 button" state.
+      setSpaceDialogOpen(false)
+      setSpaceStatus('idle')
+      if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
+      setSavedToastMessage('已保存到个人空间。')
+      savedToastTimerRef.current = window.setTimeout(() => setSavedToastMessage(null), 6000)
     } catch (error) {
       setSpaceStatus('error')
       setSpaceMessage(describeError('保存到个人空间', error))
@@ -586,7 +599,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <div className="draft-preview-meta">
             <span>{draftPaper.items.length} 题组</span>
             <span>{totalQuestions} 小题</span>
-            <span>{versionType === 'teacher' ? '教师卷' : '学生卷'}</span>
+            <span>{versionType === 'teacher' ? '教师版' : '学生版'}</span>
           </div>
           <div
             className="draft-a4-sheet"
@@ -622,6 +635,22 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button type="button" onClick={undoDelete}>
             <RotateCcw size={14} /> 撤销
           </button>
+        </div>
+      )}
+      {savedToastMessage && (
+        <div className="draft-undo-toast" role="status">
+          <span>{savedToastMessage}</span>
+          {shellNav.onOpenMySpace && (
+            <button
+              type="button"
+              onClick={() => {
+                setSavedToastMessage(null)
+                shellNav.onOpenMySpace?.()
+              }}
+            >
+              查看个人空间
+            </button>
+          )}
         </div>
       )}
       {spaceDialogOpen && (
@@ -663,14 +692,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             </div>
             {spaceStatus === 'loading' && <p className="draft-dialog-note">正在读取文件夹...</p>}
             {spaceStatus === 'error' && <p className="draft-error">{spaceMessage}</p>}
-            {spaceStatus === 'saved' && (
-              <p className="draft-success">
-                {spaceMessage}
-                {shellNav.onOpenMySpace && (
-                  <button type="button" onClick={shellNav.onOpenMySpace}>查看个人空间</button>
-                )}
-              </p>
-            )}
             <div className="draft-dialog-actions">
               <button type="button" onClick={() => setSpaceDialogOpen(false)}>取消</button>
               <button

@@ -88,7 +88,14 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // convention App.css's `.primary-button` hardcodes (`color: #ffffff`).
 // There is no DESIGN.md token for "foreground-on-accent"; App.css itself
 // treats it as a neutral utility value, not a palette color choice.
-const WHITELISTED_LINES = new Set([149, 163, 349])
+//
+// ui-p1-panels #15/#9: line numbers re-pinned after this cut inserted the
+// draft-family :focus-visible block (item #9) above the toolbar rules and
+// converted `.draft-version-toggle button.active`'s own `#ffffff` to a
+// token (item #15's teal-50/teal-800 chip 选中态, no longer white-on-
+// solid-teal at all) — that state's whitelist slot is retired, not
+// re-pinned, since the declaration itself is gone.
+const WHITELISTED_LINES = new Set([188, 374])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

@@ -61,6 +61,8 @@ import {
 } from './preview/paperIntelligencePreviewModel'
 import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEvidenceLine'
 import { AnchoredPopover } from './preview/AnchoredPopover'
+import { useIsOwnerView } from '../../auth/AuthGate.tsx'
+import { distractorCategoryLabel, distractorSubtypeLabel } from './distractorLabels.ts'
 import './paperIntelligence.css'
 
 /**
@@ -604,16 +606,24 @@ function formatBasketScore(score: number): string {
 
 function ReportHeader({ report }: { report: PaperIntelligenceReport }): ReactNode {
   const { sourcePaper, generator, schemaVersion } = report
+  const isOwnerView = useIsOwnerView()
   return (
     <header className="pi-header">
       <h1>{sourcePaper.paperName}</h1>
       <div className="pi-header-meta">
         <span>{sourcePaper.year} · {sourcePaper.region}</span>
         <span>{sourcePaper.section}</span>
-        <span>schema {schemaVersion}</span>
-        <span>prompt {generator.promptVersion}</span>
-        <span>model {generator.modelId || '—'}</span>
       </div>
+      {isOwnerView && (
+        <details className="pi-owner-meta">
+          <summary>AI 生成信息</summary>
+          <div className="pi-owner-meta-body">
+            <span>schema {schemaVersion}</span>
+            <span>prompt {generator.promptVersion}</span>
+            <span>model {generator.modelId || '—'}</span>
+          </div>
+        </details>
+      )}
       <div className="pi-disclaimer">AI 初判，需教研复核 — 不作为权威结论</div>
     </header>
   )
@@ -930,7 +940,7 @@ function PassageAddAction(props: {
         aria-label="本地题库未找到绑定题组"
         data-pi-add-state={addState}
       >
-        题组未找到
+        本地暂缺此题组
       </button>
     )
   }
@@ -1133,6 +1143,7 @@ function AnalysisPanel(props: {
   onSelectEvidence: (evidenceId: string) => void
 }): ReactNode {
   const { analysis, activeEvidenceId, onSelectEvidence } = props
+  const isOwnerView = useIsOwnerView()
   if (!analysis) {
     return <div className="pi-analysis-empty">点击左侧题目查看解析</div>
   }
@@ -1241,11 +1252,11 @@ function AnalysisPanel(props: {
                 <span className="pi-option-block-label pi-option-block-label--wrong">{label}</span>
                 {distractor.category && (
                   <span className="pi-option-block-cat">
-                    {distractor.category}
-                    {distractor.subtype ? ` / ${distractor.subtype}` : ''}
+                    {distractorCategoryLabel(distractor.category)}
+                    {distractor.subtype ? ` · ${distractorSubtypeLabel(distractor.subtype)}` : ''}
                   </span>
                 )}
-                <span className="pi-option-block-text-only">text-only</span>
+                <span className="pi-option-block-text-only">文中未引用原句</span>
               </div>
               <div className="pi-option-block-content">{optionContentMap.get(label) || '—'}</div>
               <div className="pi-option-block-explanation">
@@ -1276,8 +1287,8 @@ function AnalysisPanel(props: {
               <span className="pi-option-block-label pi-option-block-label--wrong">{label}</span>
               {distractor.category && (
                 <span className="pi-option-block-cat">
-                  {distractor.category}
-                  {distractor.subtype ? ` / ${distractor.subtype}` : ''}
+                  {distractorCategoryLabel(distractor.category)}
+                  {distractor.subtype ? ` · ${distractorSubtypeLabel(distractor.subtype)}` : ''}
                 </span>
               )}
             </div>
@@ -1290,10 +1301,10 @@ function AnalysisPanel(props: {
       })}
 
       <div className="pi-analysis-backstage">
-        <span className="pi-analysis-backstage-tag">{analysis.tCard}</span>
-        {analysis.confidence != null && (
+        {isOwnerView && <span className="pi-analysis-backstage-tag">{analysis.tCard}</span>}
+        {isOwnerView && analysis.confidence != null && (
           <span className="pi-analysis-backstage-tag">
-            confidence {analysis.confidence.toFixed(2)}
+            AI 把握度 {Math.round(analysis.confidence * 100)}%
           </span>
         )}
         {analysis.reviewNeeded && (

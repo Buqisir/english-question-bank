@@ -30,6 +30,7 @@ import type {
   ConciergeRetrievalActions,
   ConciergeRetrievalView,
 } from './useConciergeDesk.ts'
+import './ConciergeDesk.css'
 
 export type ConciergeDeskProps = {
   retrieval: ConciergeRetrievalView
@@ -330,6 +331,17 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             disabled={dataLoading}
             aria-busy={dataLoading || undefined}
           />
+          {intent.length > 0 && !dataLoading && (
+            <button
+              type="button"
+              className="concierge-intent-clear"
+              onClick={() => actions.reset()}
+              aria-label="清除搜索"
+              title="清除搜索"
+            >
+              ×
+            </button>
+          )}
           <button
             type="submit"
             className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
@@ -353,17 +365,24 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
         </div>
 
-        {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && (
-          <button
-            type="button"
-            className="concierge-command-filter-toggle"
-            aria-expanded={filterPanelExpanded}
-            aria-controls={filterPanelId}
-            onClick={() => setFilterPanelExpanded((value) => !value)}
-          >
-            筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
-          </button>
-        )}
+        {/* ui-p1-panels #7: this button used to unmount entirely while a
+            search was in flight (state.kind === 'loading'), yanking the
+            command bar's width around (audit 62 "筛选按钮被条件卸载
+            ConciergeDesk.tsx:354"). It now stays mounted through the same
+            states plus 'loading', going `disabled` instead. */}
+        {!dataLoading &&
+          (state.kind === 'empty' || state.kind === 'results' || state.kind === 'loading') && (
+            <button
+              type="button"
+              className="concierge-command-filter-toggle"
+              aria-expanded={filterPanelExpanded}
+              aria-controls={filterPanelId}
+              disabled={state.kind === 'loading'}
+              onClick={() => setFilterPanelExpanded((value) => !value)}
+            >
+              筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
+            </button>
+          )}
 
         {!dataLoading && (
           <span className="concierge-command-count">
@@ -506,11 +525,35 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       <div className="concierge-results" aria-live="polite">
         {state.kind === 'loading' && (
-          <p className="concierge-loading">正在为「{state.query}」找题…</p>
+          <>
+            <p className="concierge-loading">正在为「{state.query}」找题…</p>
+            {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
+                used to blank straight to this one line with nothing else
+                on screen (audit 62 "取题中整屏白屏"). Reuse the same
+                skeleton placeholder the dataLoading (SQLite connect) path
+                already shows, instead of introducing a second loading
+                idiom — verify-home-default-feed.mjs locks the feed block
+                itself to `showFeed` only, so this is a sibling skeleton,
+                not a faded copy of the feed. */}
+            <div className="concierge-skeleton-feed" aria-hidden="true">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="concierge-skeleton-feed-group">
+                  <div className="concierge-skeleton-line concierge-skeleton-feed-title" />
+                  <div className="concierge-skeleton-line concierge-skeleton-feed-row" />
+                  <div className="concierge-skeleton-line concierge-skeleton-feed-row short" />
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {state.kind === 'results' && paperResults.length === 0 && (
-          <p className="concierge-empty">没找到匹配。可以换个说法，或在经典模式里精筛。</p>
+          <p className="concierge-empty">
+            没找到匹配。可以换个说法，或
+            <button type="button" className="concierge-filter-clear-inline" onClick={() => actions.reset()}>
+              返回浏览全部 {catalogPaperCount} 套卷
+            </button>
+          </p>
         )}
 
         {/* C4: honest empty handling — when the search itself found hits but
