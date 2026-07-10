@@ -26,8 +26,8 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 - 2026-07-09：**scissor-select-feel 收官**（merge 066c5e2，CR APPROVE 0 MF，
   worktree 复核 177+70 绿）：剪刀线零占位（16px 标准节奏回归+静息减墨
   0.18）、hover=通宽墨·淡选区罩（teal-600 2%，owner 原型四裁点拍板，
-  prototype.html 入档）、操作簇 sticky 跟随。Should Watch 交 owner 实测：
-  高单元上半段 sticky 初始位、窄屏 band 贴边。详见 cut 目录。
+  prototype.html 入档）、操作簇 sticky 跟随。**owner QA 过**（2026-07-09，
+  含 Should Watch 两项：高单元 sticky 初始位、窄屏 band 贴边）。详见 cut 目录。
 - 2026-07-09：**one-sheet-paper 收官（毛边⑤）**（merge 8388b4d，fresh CR
   APPROVE 0 MF，verify-paper-browse 177 绿 + 主树 verify:all 71 绿均主代理
   亲跑复核，owner 实测待做）：整卷页卷面合成单一白纸容器（题组独立白卡
