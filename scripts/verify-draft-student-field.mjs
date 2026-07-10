@@ -59,6 +59,18 @@ assert(
   'print-renderer.mjs (untouched by this cut) has no studentLabel/student_label reference',
   !/student_?[Ll]abel/.test(printRendererSrc),
 )
+// CR SW: cover the actual print entry point too, not just its two helpers —
+// a future edit injecting the name directly into buildDraftPrintHtml must trip CI.
+const printHtmlStart = storeSrc.indexOf('function buildDraftPrintHtml(')
+const printHtmlEnd = storeSrc.indexOf('\n  function ', printHtmlStart + 1)
+assert(
+  'buildDraftPrintHtml found in draftPaperStore.mjs',
+  printHtmlStart !== -1 && printHtmlEnd > printHtmlStart,
+)
+assert(
+  'buildDraftPrintHtml never reads studentLabel/student_label (paper-face hard boundary)',
+  !/student_?[Ll]abel/.test(storeSrc.slice(printHtmlStart, printHtmlEnd)),
+)
 
 // --- behavioral: real ensureUserDatabaseShape user DB + real store ---
 const { createDraftPaperStore } = await import(path.join(rootDir, 'server/draft-paper/draftPaperStore.mjs'))
