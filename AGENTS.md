@@ -64,7 +64,12 @@ not mass-rename history.
   提交带进野分支；② 主代理侧同款：**合并永远在主树执行**——在 worktree
   里 merge 自己分支只会得到 "Already up to date" 的假成功；③ DEV 直接
   用 worktree 自带分支干活即可，不必另建品牌分支，收口命名由主代理在
-  merge message 里处理。
+  merge message 里处理。④ **断点锚（2026-07-09 死机接续实证）**：DEV 在
+  实现完成、进入自验前先打一个 checkpoint commit（如
+  `wip(<cut>): impl complete, pre-QA`）——会话中断后接手者凭它定位断点，
+  不必通读全 diff 自证完整性；最终收口 commit 照常。崩溃遗留的 locked
+  worktree 处置：`git worktree unlock` → 抢救分支（续派 DEV 或合并）→
+  收口后 `git worktree remove`。
 - CR-lite（主代理直接冷读 diff）适用于 small 刀与低风险 polish；CR 只
   复核未证实项，已被 CI/verify 证实的不重跑（范围纪律，#275/#276 试跑）。
 
@@ -107,10 +112,24 @@ cut's neighboring scripts. New verify scripts marked `yes` in
 `scripts/README.md` must be added to `scripts/verify-ci.mjs` in the same
 cut (the housekeeping guard enforces this). After merging, confirm the
 `main` CI run is green before reporting the cut closed, and refresh
-`docs/STATUS.md` at medium / large cut closeout (a few lines, not a
-report).
+`docs/STATUS.md` at medium / large cut closeout (**hard cap ~5 lines per
+cut — merge hash, verdict, one-line scope, 挂账 pointers; detail lives in
+the cut dir**. Entries older than ~two weeks roll into
+`docs/status-archive/` so every session's mandatory STATUS read stays
+cheap; the sweep itself is a queued tiny cut).
 (2026-07-03 incident: 11 consecutive red CI runs from a narrow verify
 list + unwatched Actions.)
+
+复核纪律（codified 2026-07-09; the lesson previously lived only in
+session memory）: **DEV self-reported green is never accepted at face
+value.** The main agent re-runs verification itself, with real exit
+codes (never piped through anything that swallows them). Division of
+labor to avoid duplicate full runs: main agent runs the cut's narrow
+verify script(s) + `tsc` **and one full `verify:all`** in the DEV
+worktree pre-merge (this replaces the DEV claim); post-merge proof of
+the combined tree is the watched `main` CI run — do not re-run the full
+suite locally in the main tree unless the merge had file overlap with
+interim main commits.
 
 Verify convention: new contracts prefer behavioral assertions (start
 the server / call the real API or import the real module) over
@@ -200,7 +219,10 @@ passages, or private student data to any memory system.
   `cr-prompt.md` only when a prompt must be archived, and
   `cut-note.md` for large-cut closeout. Historical cuts may use the
   legacy `goal.md` name; do not rename historical artifacts only to match
-  this convention. The names `goal` and `loop` are reserved for run-mode
+  this convention. Prototype artifacts that drove owner 拍板 (interactive
+  HTML mockups, Artifact pages) are decision records: snapshot the final
+  version into `docs/cuts/<CUT>/prototype.html` with the plan commit —
+  session scratchpads and artifact URLs do not survive handoffs. The names `goal` and `loop` are reserved for run-mode
   commands and must not be used as document names in new cuts.
 - Small cuts should not create `docs/cuts/<CUT>/` ceremony. Medium cuts
   require a committed `plan.md` before DEV. Large cuts require committed
@@ -274,6 +296,15 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   separate times.
 - Do not treat "static verify passed" as "browser QA passed" for
   user-visible changes.
+- Local browser QA logs in with the local QA account (`qa-local-owner`;
+  reset via `node scripts/create-user.mjs --reset-password` against the
+  worktree's own gitignored sqlite copy — convention formerly buried in
+  `docs/cuts/flow-panel/qa/qa-notes.md`). Never hardcode production
+  `.env.qa` credentials into QA scripts. Throwaway QA scripts live in the
+  session scratchpad, not `app/` or the repo root, and must not use
+  another session's absolute scratchpad paths (2026-07-09 crash-resume
+  cost: successor DEV spent cycles fixing stale paths + dead creds).
+  Archival QA evidence goes to `docs/cuts/<CUT>/qa/`.
 
 ## AI 协作准则底座(Matt 外脑)
 

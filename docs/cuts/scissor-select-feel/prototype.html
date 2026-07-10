@@ -1,0 +1,342 @@
+<title>剪刀线选中手感 · 原型</title>
+<style>
+  :root {
+    --desk: #EDEDEA;
+    --panel: #FFFFFF;
+    --panel-ink: #1E1E1C;
+    --panel-muted: #6B6B66;
+    --panel-line: #D8D8D2;
+    --accent: #2C6E56;
+    --accent-deep: #1E4A3A;
+    --band-rgb: 44, 110, 86; /* teal-600 墨·淡档（owner 终选，2026-07-09） */
+    --band-a: 0.02;
+    /* paper tokens (shared/papersurface/tokens.mjs) */
+    --ps-font-stack: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+    --ps-font-stack-zh: "SimSun", "Songti SC", "STSong", serif;
+    --ps-font-stack-heading: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+    --ps-ink: #111111;
+    --ps-page-margin-x: 91px;
+    --ps-page-margin-top: 79px;
+    --block-gap: 16px; /* 标准排版节奏：块间距，线零占位 */
+    --line-ink: rgba(74, 68, 56, 0.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --desk:#232322; --panel:#2B2B2A; --panel-ink:#E8E8E5; --panel-muted:#9B9B94; --panel-line:#45453F; }
+  }
+  :root[data-theme="dark"] { --desk:#232322; --panel:#2B2B2A; --panel-ink:#E8E8E5; --panel-muted:#9B9B94; --panel-line:#45453F; }
+  :root[data-theme="light"] { --desk:#EDEDEA; --panel:#FFFFFF; --panel-ink:#1E1E1C; --panel-muted:#6B6B66; --panel-line:#D8D8D2; }
+
+  body { background: var(--desk); margin: 0; }
+
+  .stage { max-width: 900px; margin: 0 auto; padding: 28px 16px 96px; }
+  .stage-caption {
+    font: 12.5px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    color: var(--panel-muted); text-align: center; margin: 0 0 18px;
+  }
+  .stage-caption b { color: var(--panel-ink); font-weight: 600; }
+
+  /* ── 纸 ─────────────────────────────────────────── */
+  .paper {
+    width: 794px; max-width: 100%; box-sizing: border-box;
+    margin: 0 auto;
+    background: #fff; color: var(--ps-ink);
+    font-family: var(--ps-font-stack);
+    font-size: 14px; line-height: 1.714;
+    padding: var(--ps-page-margin-top) var(--ps-page-margin-x);
+    box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
+    display: flex; flex-direction: column; gap: var(--block-gap);
+  }
+  .paper p { margin: 0; text-align: justify; }
+  .paper .indent { text-indent: 2em; }
+
+  .p-part {
+    font-family: var(--ps-font-stack-heading);
+    font-weight: 700; text-align: center; margin: 0;
+  }
+  .p-section { font-family: var(--ps-font-stack-zh); font-weight: 700; margin: 0; }
+  .p-guide { font-family: var(--ps-font-stack-zh); margin: 0; }
+  .p-letter { text-align: center; font-weight: 700; margin: 0; }
+
+  .q { margin: 0; }
+  .q-opts {
+    display: grid; grid-template-columns: 1fr 1fr; column-gap: 2em; row-gap: 2px;
+    margin: 0; padding-left: 2em;
+  }
+  .q-opts span { display: block; }
+  .blank {
+    display: inline-block; width: 72px;
+    border-bottom: 1px solid #111; height: 1em;
+    vertical-align: baseline;
+  }
+  .g-blank { display: inline-block; min-width: 52px; border-bottom: 1px solid #111; text-align: center; font-size: 12px; }
+  .seven-opts { display: flex; flex-direction: column; gap: 2px; padding-left: 2em; }
+
+  /* ── 题组单元 + 剪刀线 + 选中态 ───────────────────── */
+  .unit { position: relative; }
+  .unit-body { display: flex; flex-direction: column; gap: var(--block-gap); }
+
+  /* 静息剪刀线：零占位，画在块间隙正中（gap 16px → 线在 -8px） */
+  .cutline {
+    position: absolute; top: calc(var(--block-gap) / -2);
+    left: 24px; right: 24px; height: 0;
+    border-top: 1px dashed var(--line-ink);
+    pointer-events: none;
+  }
+
+  /* 悬停显影：通宽"待剪纸条"——淡墨绿选区罩，直角，延伸到纸的物理边缘 */
+  .band {
+    position: absolute;
+    top: calc(var(--block-gap) / -2); bottom: calc(var(--block-gap) / -2);
+    left: calc(var(--ps-page-margin-x) * -1); right: calc(var(--ps-page-margin-x) * -1);
+    background: rgba(var(--band-rgb), var(--band-a));
+    opacity: 0; transition: opacity 0.15s ease;
+    pointer-events: none;
+  }
+  .band::before, .band::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 0;
+    border-top: 1px dashed rgba(44, 110, 86, 0.55);
+  }
+  .band::before { top: 0; }
+  .band::after { bottom: 0; }
+  /* 边界线缩进模式：hover 边界与静息线同缩进（24px，相对文字栏） */
+  .edges-inset .band::before, .edges-inset .band::after {
+    left: calc(var(--ps-page-margin-x) + 24px);
+    right: calc(var(--ps-page-margin-x) + 24px);
+  }
+
+  .mode-new .unit:hover .band,
+  .mode-new .unit:focus-within .band { opacity: 1; }
+  .mode-new .unit:hover > .cutline,
+  .mode-new .unit:focus-within > .cutline { opacity: 0; }
+
+  /* 对照：已上线的灰面 */
+  .mode-old .band { display: none; }
+  .mode-old .unit { border-radius: 12px; transition: background-color 0.15s ease; }
+  .mode-old .unit:hover, .mode-old .unit:focus-within { background: rgba(74, 68, 56, 0.04); }
+
+  /* 操作簇 */
+  .actions-rail {
+    position: absolute; top: 8px; right: 0; height: 0; z-index: 3;
+    display: flex; justify-content: flex-end;
+    opacity: 0; transition: opacity 0.15s ease; pointer-events: none;
+  }
+  .sticky-actions .actions-rail { position: sticky; top: 16px; }
+  .unit:hover .actions-rail, .unit:focus-within .actions-rail { opacity: 1; pointer-events: auto; }
+  .add-btn {
+    font: 600 12.5px/1 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    color: #fff; background: var(--accent); border: 0; border-radius: 8px;
+    padding: 8px 12px; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(44, 40, 32, 0.18);
+  }
+  .add-btn:hover { background: var(--accent-deep); }
+  .add-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(44,110,86,0.20), 0 1px 4px rgba(44,40,32,0.18); }
+
+  /* ── 控制面板 ───────────────────────────────────── */
+  .panel {
+    position: fixed; right: 16px; bottom: 16px; z-index: 50; width: 240px;
+    background: var(--panel); color: var(--panel-ink);
+    border: 1px solid var(--panel-line); border-radius: 12px;
+    padding: 14px 14px 12px;
+    font: 12.5px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    box-shadow: 0 8px 28px rgba(20, 20, 18, 0.14);
+  }
+  .panel h2 { font-size: 12px; font-weight: 700; margin: 0 0 10px; letter-spacing: 0.02em; }
+  .panel .grp { margin-bottom: 10px; }
+  .panel .grp:last-child { margin-bottom: 0; }
+  .panel .lbl {
+    display: block; font-size: 11px; color: var(--panel-muted);
+    letter-spacing: 0.05em; margin-bottom: 5px;
+  }
+  .seg { display: flex; gap: 4px; flex-wrap: wrap; }
+  .seg label {
+    flex: 1; text-align: center; padding: 5px 6px; border-radius: 7px;
+    border: 1px solid var(--panel-line); cursor: pointer; user-select: none;
+    white-space: nowrap;
+  }
+  .seg input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .dot {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    vertical-align: -1px; margin-right: 4px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .seg label:has(input:checked) {
+    border-color: var(--accent); color: var(--accent); font-weight: 600;
+    background: rgba(44, 110, 86, 0.06);
+  }
+  .seg label:has(input:focus-visible) { box-shadow: 0 0 0 3px rgba(44,110,86,0.20); }
+  .panel .note { font-size: 11px; color: var(--panel-muted); margin: 10px 0 0; line-height: 1.55; }
+
+  @media (max-width: 900px) {
+    .panel { position: static; width: auto; margin: 0 auto 18px; max-width: 794px; box-sizing: border-box; }
+    .stage { display: flex; flex-direction: column; }
+    .panel { order: -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="stage">
+  <p class="stage-caption"><b>剪刀线选中手感 · 原型</b> — 排版为标准 16px 节奏、线零占位。悬停任意题组感受选中态，右下角切换方案对比。示意文本非真题。</p>
+
+  <div class="paper" id="paper">
+    <p class="p-part">第二部分 阅读理解（共两节，满分50分）</p>
+    <p class="p-section">第一节（共15小题；每小题2.5分，满分37.5分）</p>
+    <p class="p-guide">阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项，并在答题卡上将该项涂黑。</p>
+
+    <!-- 阅读 A -->
+    <div class="unit">
+      <span class="cutline" aria-hidden="true"></span>
+      <div class="band" aria-hidden="true"></div>
+      <div class="actions-rail"><button class="add-btn">＋ 加入草稿卷</button></div>
+      <div class="unit-body">
+        <p class="p-letter">A</p>
+        <p class="indent">Andretta Pool, located next to Dietz Stadium in uptown Kingston, offers lap swimming, swim lessons, and other water activities throughout the summer months. Andretta Pool is free for City of Kingston residents.</p>
+        <p class="indent">The pool is open daily from late June to the end of August. Morning sessions are reserved for lap swimmers, while afternoons welcome families. Visitors from outside the city may purchase a day pass at the front desk for a small fee.</p>
+        <p class="q">21. What can visitors do at Andretta Pool in the morning?</p>
+        <p class="q-opts"><span>A. Take swim lessons.</span><span>B. Swim laps.</span><span>C. Join family games.</span><span>D. Buy a season pass.</span></p>
+        <p class="q">22. How can non-residents use the pool?</p>
+        <p class="q-opts"><span>A. By paying for a day pass.</span><span>B. By booking online.</span><span>C. By joining a swim club.</span><span>D. By showing a student card.</span></p>
+      </div>
+    </div>
+
+    <!-- 阅读 B（较长，用来体会"单元比屏幕高"时的手感） -->
+    <div class="unit">
+      <span class="cutline" aria-hidden="true"></span>
+      <div class="band" aria-hidden="true"></div>
+      <div class="actions-rail"><button class="add-btn">＋ 加入草稿卷</button></div>
+      <div class="unit-body">
+        <p class="p-letter">B</p>
+        <p class="indent">When Maya Chen planted her first rooftop garden in downtown Chicago, her neighbors doubted anything could grow twelve floors above the street. Three summers later, her tomatoes and beans feed a dozen families in the building, and the garden has become the most popular gathering place in the neighborhood.</p>
+        <p class="indent">Chen's project is part of a wider movement. Researchers who followed forty city gardens over five years found that the benefits go far beyond fresh food. Gardeners reported stronger friendships with neighbors they had barely greeted before, and children who helped with planting were more willing to try vegetables they had once refused. The study also recorded cooler rooftop temperatures in summer, which lowered the buildings' energy use.</p>
+        <p class="indent">Not every attempt succeeds. Soil must be light enough for the roof to bear, and water has to be carried up or collected from rain. "The first year is mostly failure," Chen admits. "But failure on a rooftop is very public, and that turns out to be a gift — everyone who sees it wants to help you fix it." City officials, encouraged by such stories, now offer small grants to residents who turn unused roofs into green space.</p>
+        <p class="q">24. Why did Chen's neighbors doubt her plan at first?</p>
+        <p class="q-opts"><span>A. The roof was too small.</span><span>B. The site seemed unfit for growing.</span><span>C. The building banned gardens.</span><span>D. The soil was too heavy.</span></p>
+        <p class="q">25. What did the five-year study find about city gardens?</p>
+        <p class="q-opts"><span>A. They mainly benefit children.</span><span>B. They raise building energy use.</span><span>C. They strengthen community ties.</span><span>D. They require public funding.</span></p>
+        <p class="q">26. What does Chen think of her first-year failure?</p>
+        <p class="q-opts"><span>A. It drew others in to help.</span><span>B. It nearly ended the project.</span><span>C. It was hidden from neighbors.</span><span>D. It cost the city a grant.</span></p>
+      </div>
+    </div>
+
+    <!-- 阅读 C -->
+    <div class="unit">
+      <span class="cutline" aria-hidden="true"></span>
+      <div class="band" aria-hidden="true"></div>
+      <div class="actions-rail"><button class="add-btn">＋ 加入草稿卷</button></div>
+      <div class="unit-body">
+        <p class="p-letter">C</p>
+        <p class="indent">For forty years, Hiroshi Tanaka has repaired broken pottery with seams of gold, an old craft known as kintsugi. Where most people see damage, he sees a record worth keeping. "A crack is part of the object's life," he says. "To hide it is to tell a lie about the thing you love."</p>
+        <p class="indent">His workshop now draws visitors from abroad, many of whom bring pieces that have travelled generations in their families. Tanaka never promises perfection; the repaired bowl will not look new, and that is the point. What he offers instead is continuity — the object leaves his bench carrying both its history and its scars, made visible and, in his word, honest.</p>
+        <p class="q">28. What does Tanaka think of the cracks in old pottery?</p>
+        <p class="q-opts"><span>A. They should be disguised.</span><span>B. They lower an object's value.</span><span>C. They deserve to be preserved.</span><span>D. They show poor craftsmanship.</span></p>
+        <p class="q">29. What do visitors get from Tanaka's repair?</p>
+        <p class="q-opts"><span>A. A bowl that looks brand new.</span><span>B. An honest continuation of the object.</span><span>C. A copy of the original piece.</span><span>D. A lesson in making pottery.</span></p>
+      </div>
+    </div>
+
+    <!-- 阅读 D -->
+    <div class="unit">
+      <span class="cutline" aria-hidden="true"></span>
+      <div class="band" aria-hidden="true"></div>
+      <div class="actions-rail"><button class="add-btn">＋ 加入草稿卷</button></div>
+      <div class="unit-body">
+        <p class="p-letter">D</p>
+        <p class="indent">We tend to assume that attention is a fixed resource, drained by every notification and refilled only by rest. New work in cognitive science suggests a different picture: attention behaves less like a fuel tank and more like a muscle that responds to how it is used. Subjects who practised sustained focus on a single demanding task showed measurable gains within weeks, while those who habitually split their attention performed worse even on simple tests.</p>
+        <p class="q">32. What is the main idea of the paragraph?</p>
+        <p class="q-opts"><span>A. Attention can be trained by use.</span><span>B. Notifications improve focus.</span><span>C. Rest is the only cure for fatigue.</span><span>D. Simple tests measure attention best.</span></p>
+      </div>
+    </div>
+
+    <p class="p-section">第二节（共5小题；每小题2.5分，满分12.5分）</p>
+
+    <!-- 七选五：线在节标题之后、指导语之前——指导语跟题走 -->
+    <div class="unit">
+      <span class="cutline" aria-hidden="true"></span>
+      <div class="band" aria-hidden="true"></div>
+      <div class="actions-rail"><button class="add-btn">＋ 加入草稿卷</button></div>
+      <div class="unit-body">
+        <p class="p-guide">阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。</p>
+        <p class="indent">Keeping a journal is one of the oldest tools for thinking clearly, and it costs almost nothing. <span class="blank"></span> 36. Some people write every morning; others only when a problem refuses to leave them alone. The habit matters more than the schedule. <span class="blank"></span> 37. Over months, the notebook becomes a record of how your thinking has changed — often the most convincing evidence of progress you will ever own.</p>
+        <div class="seven-opts">
+          <span>A. There is no single right way to begin.</span>
+          <span>B. Paper journals are better than digital ones.</span>
+          <span>C. What counts is returning to the page regularly.</span>
+          <span>D. Few people can keep the habit for a full year.</span>
+          <span>E. Reading old entries can be uncomfortable at first.</span>
+          <span>F. A journal is also a place to practise honesty.</span>
+          <span>G. Writing quickly keeps the inner critic quiet.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="p-part">第三部分 语言运用（共两节，满分30分）</p>
+    <p class="p-section">第一节（共10小题；每小题1.5分，满分15分）</p>
+
+    <!-- 语法填空：同为单组节，指导语并入题组 -->
+    <div class="unit">
+      <span class="cutline" aria-hidden="true"></span>
+      <div class="band" aria-hidden="true"></div>
+      <div class="actions-rail"><button class="add-btn">＋ 加入草稿卷</button></div>
+      <div class="unit-body">
+        <p class="p-guide">阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。</p>
+        <p class="indent">The Dragon Boat Festival, <span class="g-blank">41</span> falls on the fifth day of the fifth lunar month, has been celebrated in China for over two thousand years. Families gather to make zongzi, <span class="g-blank">42</span> (wrap) rice dumplings in bamboo leaves, and crowds line the rivers to watch the boat races. In recent years the festival <span class="g-blank">43</span> (grow) into an international event, with teams <span class="g-blank">44</span> (compete) in cities far beyond Asia. For many overseas participants, the race is <span class="g-blank">45</span> introduction not only to a sport but to a living tradition.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel" role="group" aria-label="原型开关">
+  <h2>选中手感 · 三个裁点</h2>
+  <div class="grp">
+    <span class="lbl">悬停方案</span>
+    <div class="seg">
+      <label><input type="radio" name="mode" value="new" checked>提案：纸条显影</label>
+      <label><input type="radio" name="mode" value="old">现状：灰面</label>
+    </div>
+  </div>
+  <div class="grp">
+    <span class="lbl">边界虚线（hover 时）</span>
+    <div class="seg">
+      <label><input type="radio" name="edges" value="full" checked>通宽到纸边</label>
+      <label><input type="radio" name="edges" value="inset">缩进 24px</label>
+    </div>
+  </div>
+  <div class="grp">
+    <span class="lbl">「加入」按钮</span>
+    <div class="seg">
+      <label><input type="radio" name="actions" value="fixed">固定右上</label>
+      <label><input type="radio" name="actions" value="sticky" checked>跟随滚动</label>
+    </div>
+  </div>
+  <div class="grp">
+    <span class="lbl">选区罩 · 青 ⇄ 墨（同一墨绿色阶梯子）</span>
+    <div class="seg">
+      <label><input type="radio" name="tint" value="165,205,189|0.12"><span class="dot" style="background:#A5CDBD"></span>青浅</label>
+      <label><input type="radio" name="tint" value="165,205,189|0.08"><span class="dot" style="background:#A5CDBD"></span>青淡</label>
+      <label><input type="radio" name="tint" value="92,156,131|0.05"><span class="dot" style="background:#5C9C83"></span>青微</label>
+    </div>
+    <div class="seg" style="margin-top:4px">
+      <label><input type="radio" name="tint" value="44,110,86|0.03"><span class="dot" style="background:#2C6E56"></span>墨·原</label>
+      <label><input type="radio" name="tint" value="44,110,86|0.02" checked><span class="dot" style="background:#2C6E56"></span>墨·淡</label>
+    </div>
+  </div>
+  <p class="note">「青浅/青淡」= teal-200，「青微」= teal-400（推荐起点），「墨」= 原提案 teal-600。B 篇故意做得比一屏高——悬停它的下半段，对比「固定右上」和「跟随滚动」的够不够得着。</p>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const paper = document.getElementById('paper');
+  function apply() {
+    const v = (name) => document.querySelector(`input[name="${name}"]:checked`).value;
+    paper.classList.toggle('mode-new', v('mode') === 'new');
+    paper.classList.toggle('mode-old', v('mode') === 'old');
+    paper.classList.toggle('edges-inset', v('edges') === 'inset');
+    paper.classList.toggle('sticky-actions', v('actions') === 'sticky');
+    const [rgb, a] = v('tint').split('|');
+    root.style.setProperty('--band-rgb', rgb);
+    root.style.setProperty('--band-a', a);
+  }
+  document.querySelectorAll('.panel input').forEach((el) => el.addEventListener('change', apply));
+  apply();
+</script>
