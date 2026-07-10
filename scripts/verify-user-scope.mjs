@@ -137,7 +137,15 @@ function seedBankDatabaseWithPrintableGroup(dbPath, groupId) {
       'passage-user-scope-verify',
       'src-user-scope-verify',
       'User scope verify passage',
-      'This passage exists only to make ${groupId} print-ready for the verify-user-scope hermetic fixture.',
+      -- draft-numbering-style: 'cloze' is a BLANK_BEARING_GROUP_TYPE — the
+      -- renderer's hard consistency assertion (in-text blank count === question
+      -- count) now fires whenever a draft-paper route builds print HTML
+      -- (getDraftPaper defaults includePrintHtml:true), which addGroupToCurrentDraftPaper
+      -- / updateDraftPaper / etc. all do after every mutation. 5 real
+      -- paperBlankPattern markers here match the 5 seeded questions below
+      -- (shared by BOTH groups this fixture seeds, since they share this one
+      -- passage row) so this fixture stays print-ready under the new contract.
+      'This passage exists only to make the group print-ready. __1__ __2__ __3__ __4__ __5__ for the verify-user-scope hermetic fixture.',
       'User scope verify passage',
       '人与自我',
       'cloze',

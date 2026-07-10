@@ -51,6 +51,28 @@ import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 
+// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): the
+// three group types whose passage text carries literal in-text blank
+// markers that must stay numerically in lockstep with the small-question
+// list below them — mirrors server/print-renderer.mjs's identically-named
+// constant (empirically verified, 2026-07-10, against all 174 non-target-
+// type groups in data/question-bank.sqlite: zero paperBlankPattern matches
+// in reading/writing passages).
+const BLANK_BEARING_GROUP_TYPES = new Set(['cloze', 'grammar_cloze', 'seven_choices'])
+
+// draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题头改数字
+// 「n、」为汉字「n、」(一、二、三…) — mirrors server/print-renderer.mjs's
+// identically-named helper. 一~二十够用; 超出回退阿拉伯数字并在此注释存档
+// (YAGNI — 没有真实卷子会有 20+ 个大题).
+const CHINESE_DIGITS = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+function chineseNumeral(n) {
+  if (!Number.isInteger(n) || n < 1) return String(n)
+  if (n <= 10) return n === 10 ? '十' : CHINESE_DIGITS[n]
+  if (n < 20) return `十${CHINESE_DIGITS[n - 10]}`
+  if (n === 20) return '二十'
+  return String(n) // fallback: no real paper has 20+ 大题 (see comment above)
+}
+
 let groupTypeLabels
 let optionalString
 // figure-render cut (fig-token P0): optional, defaults to null so every
@@ -194,8 +216,25 @@ function docxBlankPaddingSpaces(groupType) {
  * escape-then-inject order (prose text escaped via `run()`'s own
  * `escapeXml`, the blank's own text is a separate run so its spaces are
  * never collapsed by escaping).
+ *
+ * draft-numbering-style v2 (owner \u62cd\u677f 2026-07-10 \u4e8c\u8f6e\u6539\u5224): `blankCounter`
+ * is an OPTIONAL `{ next }` ref. When the caller supplies one (the
+ * exam-style builder, `buildExamDocumentXml`), the displayed number is the
+ * WHOLE-PAPER-continuous small-question number by order of appearance
+ * within the passage \u2014 plain `n`, no parens, matching the small-question
+ * list format exactly, same order-of-appearance rule as print-renderer.
+ * mjs's identical mechanism (round-1's group-local `(n)` form is retired \u2014
+ * owner QA verdict B). When omitted (`null`, the default), behavior is
+ * BYTE-IDENTICAL to pre-cut: the literal captured marker value is shown
+ * bare \u2014 this is deliberate, not an oversight: the non-exam handout builder
+ * (`buildDocumentXml`'s printStyle!=='exam' branch) never resets its
+ * question numbering per group (draft-depassage-letter cut's SW-2 already
+ * documented this exam/handout asymmetry as intentional \u2014 handout DOCX has
+ * no UI path today), so remapping its blanks there would touch an unrelated
+ * code path this cut doesn't need to fix. See callers below for which
+ * branch passes what.
  */
-function docxPassageLineRuns(line, groupType) {
+function docxPassageLineRuns(line, groupType, blankCounter = null) {
   const text = String(line ?? '')
   paperBlankPattern.lastIndex = 0
   if (!paperBlankPattern.test(text)) {
@@ -211,7 +250,8 @@ function docxPassageLineRuns(line, groupType) {
     if (match.index > cursor) {
       runs.push(run(text.slice(cursor, match.index), { size: 21 }))
     }
-    runs.push(run(`${padding}${match[1]}${padding}`, { size: 21, underline: true }))
+    const displayNum = blankCounter ? String(blankCounter.next++) : match[1]
+    runs.push(run(`${padding}${displayNum}${padding}`, { size: 21, underline: true }))
     cursor = match.index + match[0].length
   }
   if (cursor < text.length) {
@@ -637,9 +677,10 @@ let docxFigureDocPrCounter = 0
  * it. Falls through to the pre-cut `docxPassageLineRuns` text path,
  * unchanged, when `figuresInfo` is null (no paperAssetsDir configured, or
  * this group isn't paper-asset sourced / has no manifest) or the line
- * carries no marker.
+ * carries no marker. `blankCounter` (optional) is forwarded verbatim to
+ * `docxPassageLineRuns` — see that function's doc comment.
  */
-function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textParagraphOptions) {
+function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textParagraphOptions, blankCounter = null) {
   const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
   if (resolved?.kind === 'figure') {
     const absoluteFilePath = path.join(figuresInfo.baseDir, 'figures', resolved.figure.file)
@@ -675,7 +716,7 @@ function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textPar
     body.push(docxFigurePlaceholderParagraph())
     return
   }
-  body.push(paragraph(docxPassageLineRuns(line, groupType), textParagraphOptions))
+  body.push(paragraph(docxPassageLineRuns(line, groupType, blankCounter), textParagraphOptions))
 }
 
 // --- Exam-style renderer: formal Gaokao-style paper layout ---
@@ -686,6 +727,10 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
     return figuresCache.get(groupId)
   }
+  // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
+  // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
+  // (round-1's per-group reset to `(1)` is retired — owner QA verdict B).
+  // `startNum` seeds it, same as pre-round1 draft-depassage-letter form.
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const body = []
 
@@ -752,23 +797,53 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         // draft-depassage-letter (docs/cuts/draft-depassage-letter/plan.md):
         // retires the paper-passage-letter cut's A-D letter derivation —
         // 草稿卷是练习单非仿真卷, A/B/C/D 是源卷结构属性不该带走。取而代之
-        // 渲染大题号徽标+题型标签 (owner 拍板 2026-07-09): `n、题型` 全卷
-        // 连续编号, 跨 section_header 不重置。size 22 (11pt) — 半级低于
-        // section_header 的 24 (12pt), 与 print-renderer.mjs 的 .group-header
-        // (11pt) 同规格。
+        // 渲染大题号徽标+题型标签, 跨 section_header 不重置。size 22 (11pt) —
+        // 半级低于 section_header 的 24 (12pt), 与 print-renderer.mjs 的
+        // .group-header (11pt) 同规格。
+        // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题号
+        // 由阿拉伯数字改汉字, 避免与全卷连续的小题阿拉伯号同型撞层级。
         groupNum += 1
         const hasBlockScore = Number.isFinite(Number(block.score))
         const groupHeaderScoreSuffix = hasBlockScore ? `（每题 ${score} 分）` : ''
         const groupHeaderLabel = groupTypeLabels[detail.groupType] || detail.groupType
-        body.push(paragraph([run(`${groupNum}、${groupHeaderLabel}${groupHeaderScoreSuffix}`, { bold: true, size: 22, heading: true })], { before: 160, after: 80, keepNext: true }))
+        body.push(paragraph([run(`${chineseNumeral(groupNum)}、${groupHeaderLabel}${groupHeaderScoreSuffix}`, { bold: true, size: 22, heading: true })], { before: 160, after: 80, keepNext: true }))
+
+        // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判):
+        // small-question numbering is whole-paper continuous (`questionNum`,
+        // declared outside this per-group block, never reset). `blankCounter`
+        // is seeded to THIS group's first continuous number so every in-text
+        // blank marker found in the passage below gets the SAME number as
+        // the corresponding small-question list entry — see
+        // `docxPassageLineRuns`'s doc comment.
+        const blankCounter = { next: questionNum }
 
         // Passage text
         if (passageLines.length > 0 && passageLines[0]) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
-            pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 })
+            pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 }, blankCounter)
           })
           body.push(paragraph('', { after: 80 }))
+        }
+
+        // Hard consistency assertion (plan.md 连带硬需求) — same rationale
+        // as print-renderer.mjs's identical check: fail LOUD rather than
+        // emit a DOCX where the in-text number and the question-list number
+        // do not refer to the same blank. Base is `questionNum` (this
+        // group's first continuous number, captured BEFORE the assertion —
+        // blankCounter was seeded to it), not the round-1 constant `1`.
+        if (BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
+          const blanksFound = blankCounter.next - questionNum
+          if (blanksFound !== detail.questions.length) {
+            throw new Error(
+              `draft-numbering-style: in-text blank count (${blanksFound}) does not match question count `
+              + `(${detail.questions.length}) for question_group "${block.questionGroupId}" (${detail.groupType}) `
+              + `— refusing to render a paper where the passage blanks and the question list would not line up. `
+              + `Likely cause: source materialText has extra/missing paperBlankPattern-shaped markers (stray `
+              + `numbers, OCR noise, or an unsupported blank format like "NN._____") — check the source text for `
+              + `this group.`,
+            )
+          }
         }
 
         if (isWritingGroupType(detail.groupType)) {
@@ -875,6 +950,19 @@ function examOptionTable(rows) {
 // header comment above `buildExamDocumentXml`. Defaults to a throwaway
 // array so a caller that doesn't need image bytes (e.g. an existing test
 // stub) can still call this with the exact pre-cut argument shape.
+// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): everything
+// BELOW this line (the printStyle!=='exam' "Handout style" branch and its
+// own legacy items-array fallback) is DELIBERATELY left untouched — no
+// group-local numbering reset, no `(n)` format, no blank remap. This mirrors
+// draft-depassage-letter cut's SW-2 finding (docs/cuts/draft-depassage-letter/
+// cr.md): this handout DOCX path has no UI-reachable caller today
+// (`usePaperDraft.ts` defaults `paperExportStyle` to 'exam' and no component
+// ever calls `setPaperExportStyle('handout')`), and unlike the exam builder
+// it was never given the `n、题型` 大题头 either — extending THIS cut's
+// group-local-reset + blank-remap to a numbering scheme that stays globally
+// continuous would introduce a NEW mismatch instead of fixing one. If this
+// path ever gains a real caller, it needs its own numbering-parity pass —
+// not a silent side effect of a different builder's blocks-branch.
 function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [] }) {
   if (printStyle === 'exam') {
     return buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart, images })

@@ -131,7 +131,12 @@ const GRAMMAR_DETAIL = {
   source: '2024 测试卷',
   groupType: 'grammar_cloze',
   defaultScore: 15,
-  passage: passage('Grammar Passage', 'There ____ a book on the desk.'),
+  // draft-numbering-style: needs a REAL paperBlankPattern-shaped marker
+  // (`__56__`, matching the single question's questionNo below) — a bare
+  // `____` with no digit never matched paperBlankPattern even pre-cut, and
+  // the new hard consistency assertion (blank count === question count for
+  // BLANK_BEARING_GROUP_TYPES) now requires exactly 1 real blank here.
+  passage: passage('Grammar Passage', 'There __56__ a book on the desk.'),
   questions: [
     {
       questionNo: '56',
@@ -160,7 +165,9 @@ const CLOZE_DETAIL = {
   source: '2024 测试卷',
   groupType: 'cloze',
   defaultScore: 30,
-  passage: passage('Cloze Passage', 'The boy was very ____ that day.'),
+  // draft-numbering-style: see GRAMMAR_DETAIL's comment above — real marker
+  // matching the single question's questionNo (41).
+  passage: passage('Cloze Passage', 'The boy was very __41__ that day.'),
   questions: [
     {
       questionNo: '41',
@@ -195,7 +202,10 @@ const SEVEN_DETAIL = {
   source: '2024 测试卷',
   groupType: 'seven_choices',
   defaultScore: 10,
-  passage: passage('Seven Passage', 'Reading is important. ____'),
+  // draft-numbering-style: see GRAMMAR_DETAIL's comment above — real marker
+  // matching the single question's questionNo (36), seven_choices' longer
+  // 5-underscore delimiter shape.
+  passage: passage('Seven Passage', 'Reading is important. _____36_____'),
   questions: [
     {
       questionNo: '36',
@@ -328,6 +338,48 @@ function assertExamRenderByteStable() {
   // exam differs from handout (proves the branch actually routed).
   const handout = renderer.buildDocumentXml({ title: '测试卷', versionType: 'teacher', items: ITEMS, blocks: BLOCKS, questionNumberStart: 21, printStyle: 'handout' })
   assert('exam render differs from handout render (branch routed)', exam !== handout)
+}
+
+// draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
+// numbering in the exam-style builder is WHOLE-PAPER continuous again
+// (round-1's per-group reset to `(1)` is retired — owner QA verdict B), and
+// in-text blank markers remap to that SAME whole-paper continuous number,
+// no parens — while the non-exam handout builder is DELIBERATELY unchanged
+// (module header comment above `buildDocumentXml`, mirrors draft-depassage-
+// letter's SW-2). BLOCKS has 4 question_group blocks, each with exactly ONE
+// question (READING / GRAMMAR / CLOZE / SEVEN), questionNumberStart:21 →
+// 21, 22, 23, 24 continuous.
+function assertNumberingResetAndBlankRemap() {
+  const renderer = makeRenderer()
+
+  const exam = renderer.buildDocumentXml({ title: '测试卷', versionType: 'teacher', items: ITEMS, blocks: BLOCKS, questionNumberStart: 21, printStyle: 'exam' })
+
+  // Question-list format: `n.  ` no parens, whole-paper continuous — reading
+  // 21, grammar 22, cloze 23, seven 24 (never reset to 1).
+  assert('exam: question 21 present (g-reading)', exam.includes('<w:t xml:space="preserve">21.  '))
+  assert('exam: question 22 present (g-grammar, continues past g-reading)', exam.includes('<w:t xml:space="preserve">22.  '))
+  assert('exam: question 23 present (g-cloze, continues past g-grammar)', exam.includes('<w:t xml:space="preserve">23.  '))
+  assert('exam: question 24 present (g-seven, continues past g-cloze)', exam.includes('<w:t xml:space="preserve">24.  '))
+  assert('exam: round-1 group-local "(1)" numbering format is absent', !/<w:t xml:space="preserve">\(\d+\)  /.test(exam))
+
+  // In-text blank remap: each of grammar/cloze/seven has exactly 1 blank,
+  // remapped to its OWN group's whole-paper continuous number (22/23/24 —
+  // matching each group's single question-list entry above), same padding
+  // convention (`docxBlankPaddingSpaces`: 2-space for grammar/cloze, 3-space
+  // for seven), no parens.
+  assert('exam: grammar_cloze in-text blank remapped to "  22  " (2-space padding, was literal 56)', exam.includes('  22  '))
+  assert('exam: cloze in-text blank remapped to "  23  " (2-space padding, was literal 41)', exam.includes('  23  '))
+  assert('exam: seven_choices in-text blank remapped to "   24   " (3-space padding, was literal 36)', exam.includes('   24   '))
+  assert('exam: literal blank marker digits 56/41/36 no longer shown padded-bare (all remapped)', !exam.includes('  56  ') && !exam.includes('  41  ') && !exam.includes('   36   '))
+  assert('exam: no bracketed in-text blank remap anywhere (round-1 "(n)" form retired)', !/  \(\d+\)  /.test(exam) && !/   \(\d+\)   /.test(exam))
+
+  // Handout builder stays byte-for-byte on the OLD contract: continuous
+  // numbering (still seeded by questionNumberStart) + raw literal blank
+  // marker digits, no parens anywhere.
+  const handout = renderer.buildDocumentXml({ title: '测试卷', versionType: 'teacher', items: ITEMS, blocks: BLOCKS, questionNumberStart: 21, printStyle: 'handout' })
+  assert('handout: numbering still continuous from questionNumberStart (21. present, NOT reset)', handout.includes('21. '))
+  assert('handout: grammar_cloze/cloze in-text blank markers still show the RAW literal digit "  56  " (SW-2 asymmetry preserved)', handout.includes('  56  '))
+  assert('handout: seven_choices in-text blank marker still shows the RAW literal digit "   36   "', handout.includes('   36   '))
 }
 
 function assertWriteDocxPackage(documentXml) {
@@ -463,13 +515,21 @@ async function assertRealAssetBlankCounts() {
     const expected = countBlanks(materialText)
     assert(`${spec.id}: real materialText blank count matches the 2026-07-08 measured value`, expected === spec.expected, `expected=${spec.expected} got=${expected}`)
 
+    // draft-numbering-style: seven_choices/cloze/grammar_cloze are
+    // BLANK_BEARING_GROUP_TYPES — the exam-style builder's hard consistency
+    // assertion (blank count === question count) requires `questions` to be
+    // sized to the REAL, independently-measured blank count. Content is
+    // unused by this test (only checks styled-run count in the XML).
+    const questions = Array.from({ length: expected }, (_, i) => ({
+      id: `${spec.id}-q${i + 1}`, questionNo: String(i + 1), stem: '', answer: '', explanation: '', options: [],
+    }))
     const detail = {
       id: spec.id,
       title: group.title,
       source: '2026 新课标 I',
       groupType: spec.groupType,
       passage: { title: group.passage?.title || '', materialText, summary: materialText },
-      questions: [],
+      questions,
     }
     const items = [{ detail, note: '', score: 1, sectionTitle: group.title }]
     const blocks = [{ type: 'question_group', questionGroupId: spec.id, score: 1 }]
@@ -556,12 +616,44 @@ async function main() {
   assertExportSurface()
   const handoutXml = assertHandoutRenderByteStable()
   assertExamRenderByteStable()
+  assertNumberingResetAndBlankRemap()
   await assertWriteDocxPackage(handoutXml)
   assertUsedButUndefinedRejects()
   assertSourceGuards()
   assertApiIntegration()
   await assertRealAssetBlankCounts()
   assertRealAssetFigureEmbed()
+
+  // draft-numbering-style cr.md MF-1: negative case — the exam-style DOCX
+  // path must REJECT a blank/question count mismatch (2 in-text blanks vs 3
+  // questions), proving the hard consistency assertion's throw path, not
+  // only its happy path.
+  {
+    const renderer = makeRenderer()
+    const badItems = [
+      {
+        detail: {
+          id: 'g-bad', title: 'Bad', groupType: 'grammar_cloze',
+          passage: { materialText: 'It is common __56__ (hold) and __59__ (be) here.' },
+          questions: [
+            { id: 'q-1', questionNo: 1, stem: '', answer: '', explanation: '', note: '', options: [] },
+            { id: 'q-2', questionNo: 2, stem: '', answer: '', explanation: '', note: '', options: [] },
+            { id: 'q-3', questionNo: 3, stem: '', answer: '', explanation: '', note: '', options: [] },
+          ],
+        },
+        score: 1.5,
+      },
+    ]
+    const badBlocks = [{ type: 'question_group', questionGroupId: 'g-bad', score: 1.5 }]
+    let thrown = null
+    try {
+      renderer.buildDocumentXml({ title: 'Bad', versionType: 'student', items: badItems, blocks: badBlocks, questionNumberStart: 1, printStyle: 'exam' })
+    } catch (error) {
+      thrown = error
+    }
+    assert('MF-1 negative: docx blank count (2) ≠ question count (3) throws', thrown !== null, 'buildDocumentXml did NOT throw')
+    assert('MF-1 negative: docx error names draft-numbering-style assertion', /draft-numbering-style/.test(thrown && thrown.message ? thrown.message : ''), thrown && thrown.message ? thrown.message.slice(0, 120) : '')
+  }
 
   console.log(`\nH5-G docx-renderer verify PASSED: ${passed} checks`)
 }

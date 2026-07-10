@@ -543,14 +543,31 @@ export function createDraftPaperStore({
     return itemId
   }
 
+  // ROLLBACK-after-COMMIT fix (draft-numbering-style QA finding): the
+  // post-COMMIT getDraftPaper(...) call below (which re-renders print HTML)
+  // must sit OUTSIDE the BEGIN/COMMIT try-block. Before this fix it lived
+  // INSIDE that try-block, so a render failure there (e.g. a print-renderer
+  // consistency assertion) was caught by the surrounding `catch` and turned
+  // into a second `userDb.exec('ROLLBACK')` call — but the transaction was
+  // already committed, so sqlite throws "cannot rollback - no transaction is
+  // active", masking the real render error AND leaving the already-committed
+  // mutation in place with no accurate error surfaced to the caller. Moving
+  // the read/render call after the try-block means: the mutation still
+  // commits (correct — it succeeded), and if the subsequent render throws,
+  // that real error propagates as-is to the route layer (existing error
+  // convention: caught there and mapped to 4xx, or — for routes with no
+  // local catch — the router's top-level handler at the bottom of
+  // server/api.mjs turns it into a 500 with the real message). No rollback
+  // is attempted after a commit, and no error is swallowed.
   function addGroupToCurrentDraftPaper(userId, groupId) {
     requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
+      let current
       userDb.exec('BEGIN')
       try {
-        let current = getCurrentDraftPaperRow(userDb, userId)
+        current = getCurrentDraftPaperRow(userDb, userId)
         if (!current) {
           createDraftPaper({ userDb, bankDb }, userId)
           current = getCurrentDraftPaperRow(userDb, userId)
@@ -558,11 +575,11 @@ export function createDraftPaperStore({
         addGroupToDraftPaper({ userDb, bankDb }, userId, current.id, groupId)
         markCurrentDraftPaper(userDb, userId, current.id)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, userId, current.id)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
       }
+      return getDraftPaper({ userDb, bankDb }, userId, current.id)
     } finally {
       userDb.close()
       bankDb.close()
@@ -609,11 +626,14 @@ export function createDraftPaperStore({
         }
         markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
       }
+      // Post-COMMIT render call moved outside the try/catch above — see the
+      // doc comment on addGroupToCurrentDraftPaper for why (no rollback
+      // attempted after a successful commit, no swallowed render error).
+      return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
     } finally {
       userDb.close()
       bankDb.close()
@@ -646,11 +666,14 @@ export function createDraftPaperStore({
         touchDraftPaper(userDb, userId, draftPaperId)
         markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
       }
+      // Post-COMMIT render call moved outside the try/catch above — see the
+      // doc comment on addGroupToCurrentDraftPaper for why (no rollback
+      // attempted after a successful commit, no swallowed render error).
+      return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
     } finally {
       userDb.close()
       bankDb.close()
@@ -669,6 +692,7 @@ export function createDraftPaperStore({
     requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
+    let row
     try {
       userDb.exec('BEGIN')
       try {
@@ -676,7 +700,7 @@ export function createDraftPaperStore({
           .prepare("SELECT id FROM draft_papers WHERE id = ? AND user_id = ? AND status = 'active'")
           .get(draftPaperId, userId)
         if (!ownedDraft) throw new Error('Draft paper not found')
-        const row = userDb
+        row = userDb
           .prepare(
             `
             SELECT *
@@ -691,18 +715,21 @@ export function createDraftPaperStore({
         touchDraftPaper(userDb, userId, draftPaperId)
         markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return {
-          draftPaper: getDraftPaper({ userDb, bankDb }, userId, draftPaperId),
-          removed: {
-            itemId: row.id,
-            groupId: row.group_id,
-            orderIndex: Number(row.order_index || 1),
-            pageBreakBefore: Number(row.page_break_before || 0) === 1,
-          },
-        }
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
+      }
+      // Post-COMMIT render call moved outside the try/catch above — see the
+      // doc comment on addGroupToCurrentDraftPaper for why (no rollback
+      // attempted after a successful commit, no swallowed render error).
+      return {
+        draftPaper: getDraftPaper({ userDb, bankDb }, userId, draftPaperId),
+        removed: {
+          itemId: row.id,
+          groupId: row.group_id,
+          orderIndex: Number(row.order_index || 1),
+          pageBreakBefore: Number(row.page_break_before || 0) === 1,
+        },
       }
     } finally {
       userDb.close()
@@ -726,11 +753,14 @@ export function createDraftPaperStore({
         })
         markCurrentDraftPaper(userDb, userId, draftPaperId)
         userDb.exec('COMMIT')
-        return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
       }
+      // Post-COMMIT render call moved outside the try/catch above — see the
+      // doc comment on addGroupToCurrentDraftPaper for why (no rollback
+      // attempted after a successful commit, no swallowed render error).
+      return getDraftPaper({ userDb, bankDb }, userId, draftPaperId)
     } finally {
       userDb.close()
       bankDb.close()
@@ -743,29 +773,46 @@ export function createDraftPaperStore({
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
+      // ROLLBACK-after-COMMIT fix (draft-numbering-style, same pattern as
+      // d51eab2's fix to this file's five sibling functions): both
+      // post-COMMIT getDraftPaper calls below (which re-render print HTML,
+      // and can throw — e.g. the print-renderer consistency assertion) must
+      // sit OUTSIDE the BEGIN/COMMIT try-block, or a render failure there
+      // would be caught by this try-block's own catch and attempt a SECOND
+      // ROLLBACK on an already-committed transaction ("cannot rollback - no
+      // transaction is active"), masking the real error. `outcome` captures
+      // which branch committed so the deferred getDraftPaper call can run
+      // against the right draft id with the right counts.
+      let outcome
       userDb.exec('BEGIN')
       try {
         let current = getCurrentDraftPaperRow(userDb, userId)
         if (current) {
           userDb.exec('COMMIT')
-          return { draftPaper: getDraftPaper({ userDb, bankDb }, userId, current.id), migratedCount: 0, skippedCount: groupIds.length }
-        }
-        const draft = createDraftPaper({ userDb, bankDb }, userId)
-        let migratedCount = 0
-        let skippedCount = 0
-        for (const groupId of groupIds) {
-          try {
-            addGroupToDraftPaper({ userDb, bankDb }, userId, draft.id, groupId)
-            migratedCount += 1
-          } catch {
-            skippedCount += 1
+          outcome = { draftPaperId: current.id, migratedCount: 0, skippedCount: groupIds.length }
+        } else {
+          const draft = createDraftPaper({ userDb, bankDb }, userId)
+          let migratedCount = 0
+          let skippedCount = 0
+          for (const groupId of groupIds) {
+            try {
+              addGroupToDraftPaper({ userDb, bankDb }, userId, draft.id, groupId)
+              migratedCount += 1
+            } catch {
+              skippedCount += 1
+            }
           }
+          userDb.exec('COMMIT')
+          outcome = { draftPaperId: draft.id, migratedCount, skippedCount }
         }
-        userDb.exec('COMMIT')
-        return { draftPaper: getDraftPaper({ userDb, bankDb }, userId, draft.id), migratedCount, skippedCount }
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
+      }
+      return {
+        draftPaper: getDraftPaper({ userDb, bankDb }, userId, outcome.draftPaperId),
+        migratedCount: outcome.migratedCount,
+        skippedCount: outcome.skippedCount,
       }
     } finally {
       userDb.close()

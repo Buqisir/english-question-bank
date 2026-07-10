@@ -120,15 +120,27 @@ export function createDraftPaperRoutes() {
         const draftPaperId = decodeURIComponent(match[1])
         userDb.exec('BEGIN')
         try {
-          context.draftPaperStore.addGroupToDraftPaper({ userDb, bankDb }, userId, draftPaperId, String(input.groupId || ''), {
-            insertIndex: input.insertIndex,
-            pageBreakBefore: input.pageBreakBefore === true,
-          })
-          context.draftPaperStore.markCurrentDraftPaper(userDb, userId, draftPaperId)
-          userDb.exec('COMMIT')
+          try {
+            context.draftPaperStore.addGroupToDraftPaper({ userDb, bankDb }, userId, draftPaperId, String(input.groupId || ''), {
+              insertIndex: input.insertIndex,
+              pageBreakBefore: input.pageBreakBefore === true,
+            })
+            context.draftPaperStore.markCurrentDraftPaper(userDb, userId, draftPaperId)
+            userDb.exec('COMMIT')
+          } catch (error) {
+            userDb.exec('ROLLBACK')
+            throw error
+          }
+          // ROLLBACK-after-COMMIT fix (draft-numbering-style, same pattern as
+          // d51eab2's fix to draftPaperStore.mjs's five sibling functions):
+          // this post-COMMIT getDraftPaper call re-renders print HTML and can
+          // throw (e.g. the print-renderer consistency assertion) — it must
+          // sit OUTSIDE the BEGIN/COMMIT try-block above, or a render failure
+          // here would hit the outer catch below and attempt a SECOND
+          // ROLLBACK on an already-committed transaction ("cannot rollback -
+          // no transaction is active"), masking the real error.
           context.sendJson(response, 201, { draftPaper: context.draftPaperStore.getDraftPaper({ userDb, bankDb }, userId, draftPaperId) })
         } catch (error) {
-          userDb.exec('ROLLBACK')
           sendDraftMutationError(response, context, error)
         }
       } finally {

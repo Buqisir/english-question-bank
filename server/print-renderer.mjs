@@ -47,6 +47,30 @@ const groupTypeLabels = {
   other: '其他',
 }
 
+// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): the three
+// group types whose passage text carries literal in-text blank markers
+// (`__41__` / `_____36_____` / `__56__`, matched by `paperBlankPattern`)
+// that must stay numerically in lockstep with the small-question list below
+// them. `reading` / `writing` never carry these markers in real data
+// (verified empirically against all 174 non-target-type groups in
+// data/question-bank.sqlite, 2026-07-10 — zero paperBlankPattern matches),
+// so the hard consistency assertion below is scoped to only these three.
+const BLANK_BEARING_GROUP_TYPES = new Set(['cloze', 'grammar_cloze', 'seven_choices'])
+
+// draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题头改数字
+// 「n、」为汉字「n、」(一、二、三…), 避免与小题阿拉伯号同型撞层级 —
+// 中文试卷惯例。 一~二十够用 (真实草稿卷大题数远小于 20); 超出该表回退
+// 阿拉伯数字并在此注释存档, 不做通用中文数字算法 (YAGNI — 没有真实卷子
+// 会有 20+ 个大题).
+const CHINESE_DIGITS = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+function chineseNumeral(n) {
+  if (!Number.isInteger(n) || n < 1) return String(n)
+  if (n <= 10) return n === 10 ? '十' : CHINESE_DIGITS[n]
+  if (n < 20) return `十${CHINESE_DIGITS[n - 10]}`
+  if (n === 20) return '二十'
+  return String(n) // fallback: no real paper has 20+ 大题 (see comment above)
+}
+
 function escapeHtml(text) {
   return String(text ?? '')
     .replace(/&/g, '&amp;')
@@ -80,8 +104,24 @@ function isMetaStub(text) {
  * `seven_choices` gets the longer (≈4.6em) underline; cloze / grammar_cloze
  * get the shorter (≈3.3em) underline (standard §6, 3+3 vs 2+2 whitespace
  * calibration).
+ *
+ * draft-numbering-style (owner 拍板 v2, 2026-07-10 二轮改判): the DISPLAYED
+ * number is no longer the literal captured marker (`match[1]`, e.g. "41")
+ * — it is the WHOLE-PAPER-continuous small-question number, assigned
+ * strictly by ORDER OF APPEARANCE within the passage via `blankCounter`
+ * (a `{ next }` ref the caller seeds to that group's FIRST continuous
+ * question number and threads through every line of that one passage —
+ * never reset per line, since a blank can be the Nth in the group
+ * regardless of which line it lands on). This is deliberately NOT a lookup
+ * keyed by the original marker value: order-of-appearance is the only
+ * signal that stays correct even if the source text has skipped/out-of-
+ * order literal numbers (plan.md: "顺序即真相"). Format matches the
+ * small-question list format exactly: plain `n`, no parens — v2 supersedes
+ * the round-1 `(n)` form (owner QA: bracket read as visually odd against a
+ * real exam's plain blank number, and per-group reset caused multiple
+ * `(1)`s on one paper).
  */
-function renderPassageLineWithBlanks(line, groupType) {
+function renderPassageLineWithBlanks(line, groupType, blankCounter) {
   const text = String(line ?? '')
   paperBlankPattern.lastIndex = 0
   if (!paperBlankPattern.test(text)) return escapeHtml(text)
@@ -95,7 +135,8 @@ function renderPassageLineWithBlanks(line, groupType) {
     if (match.index > cursor) {
       out += escapeHtml(text.slice(cursor, match.index))
     }
-    out += `<span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${escapeHtml(match[1])}</span></span>`
+    const localNum = blankCounter.next++
+    out += `<span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${localNum}</span></span>`
     cursor = match.index + match[0].length
   }
   if (cursor < text.length) {
@@ -164,7 +205,7 @@ function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode, images) {
  * — never rendered on this or any student/试卷 surface (plan.md rule 2 /
  * PA SW-4).
  */
-function renderPassageLine(line, groupType, figuresInfo, imageMode, images) {
+function renderPassageLine(line, groupType, figuresInfo, imageMode, images, blankCounter) {
   const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
   if (resolved?.kind === 'figure') {
     const src = figureImageSrc(
@@ -177,7 +218,7 @@ function renderPassageLine(line, groupType, figuresInfo, imageMode, images) {
   if (resolved?.kind === 'placeholder') {
     return `<p class="print-figure-placeholder">${escapeHtml(PRINT_FIGURE_PLACEHOLDER_TEXT)}</p>`
   }
-  return `<p>${renderPassageLineWithBlanks(line, groupType)}</p>`
+  return `<p>${renderPassageLineWithBlanks(line, groupType, blankCounter)}</p>`
 }
 
 /**
@@ -218,6 +259,10 @@ export function buildPrintHtml({
   imageMode = 'web',
   images = [],
 }) {
+  // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
+  // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
+  // (round-1's per-group reset to `(1)` is retired — owner QA verdict B).
+  // `startNum` seeds it, same as pre-round1 draft-depassage-letter form.
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
@@ -268,8 +313,9 @@ export function buildPrintHtml({
         // draft-depassage-letter (docs/cuts/draft-depassage-letter/plan.md):
         // retires the paper-passage-letter cut's A-D letter derivation —
         // 草稿卷是练习单非仿真卷, A/B/C/D 是源卷结构属性不该带走。取而代之
-        // 渲染大题号徽标+题型标签 (owner 拍板 2026-07-09): `n、题型` 全卷
-        // 连续编号, 跨 section_header 不重置。
+        // 渲染大题号徽标+题型标签, 跨 section_header 不重置。
+        // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题号
+        // 由阿拉伯数字改汉字, 避免与全卷连续的小题阿拉伯号同型撞层级。
         groupNum += 1
         const hasBlockScore = Number.isFinite(Number(block.score))
         const groupHeaderScoreSuffix = hasBlockScore ? `（每题 ${score} 分）` : ''
@@ -277,15 +323,50 @@ export function buildPrintHtml({
 
         let groupHtml = '<section class="question-group">'
 
-        groupHtml += `<div class="group-header">${groupNum}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
+        groupHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
 
         if (!isExam) {
           groupHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
 
+        // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判):
+        // small-question numbering is whole-paper continuous (`questionNum`,
+        // declared outside this per-group block, never reset). `blankCounter`
+        // is seeded to THIS group's first continuous number so every in-text
+        // blank marker found in the passage below gets the SAME number as
+        // the corresponding small-question list entry — see
+        // `renderPassageLineWithBlanks`'s doc comment.
+        const blankCounter = { next: questionNum }
+
         if (passage) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
-          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images)).join('')}</div>`
+          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images, blankCounter)).join('')}</div>`
+        }
+
+        // Hard consistency assertion (plan.md 连带硬需求): the count of
+        // in-text blank markers found in this group's passage MUST equal
+        // the count of small questions in the group — otherwise the number
+        // shown in-text and the number shown in the question list would not
+        // refer to the same blank, and a student could not match them up.
+        // Fail LOUD (throw, aborting the whole export) rather than emit a
+        // silently-misaligned paper — plan.md: "宁可导出红也不出对不上的卷子".
+        // Scoped to the three blank-bearing group types only (reading /
+        // writing never carry these markers — see BLANK_BEARING_GROUP_TYPES).
+        // v2: base is `questionNum` (this group's first continuous number,
+        // captured BEFORE the assertion — blankCounter was seeded to it),
+        // not the round-1 constant `1`.
+        if (BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
+          const blanksFound = blankCounter.next - questionNum
+          if (blanksFound !== detail.questions.length) {
+            throw new Error(
+              `draft-numbering-style: in-text blank count (${blanksFound}) does not match question count `
+              + `(${detail.questions.length}) for question_group "${block.questionGroupId}" (${detail.groupType}) `
+              + `— refusing to render a paper where the passage blanks and the question list would not line up. `
+              + `Likely cause: source materialText has extra/missing paperBlankPattern-shaped markers (stray `
+              + `numbers, OCR noise, or an unsupported blank format like "NN._____") — check the source text for `
+              + `this group.`,
+            )
+          }
         }
 
         if (isWritingGroupType(detail.groupType)) {
