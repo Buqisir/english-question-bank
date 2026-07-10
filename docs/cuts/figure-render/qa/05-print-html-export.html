@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>QA print test</title>
+<style>
+/* 刀⑤ render-fidelity Chunk B — standard §1: 左右 24mm / 上 ≈21mm.
+   Bottom margin is 24mm (not standard-mandated directly) so the §1 footer
+   distance (页码距底 ≈17.5mm) falls out of an exact, documented sum:
+   24mm margin-bottom - 6.5mm @bottom-center padding-bottom = 17.5mm. */
+@page {
+  size: A4;
+  margin: 21mm 24mm 24mm 24mm;
+
+  @bottom-center {
+    content: "英语试题 第" counter(page) "页(共" counter(pages) "页)";
+    font-family: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+    font-size: 9pt;
+    color: #000;
+    vertical-align: bottom;
+    padding-bottom: 6.5mm;
+  }
+}
+
+body {
+  font-family: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+  font-size: 10.5pt;
+  /* standard §3: line-height is a FIXED 18pt baseline — same
+     paperLineHeight token the screen PaperSurface / writing page consume
+     (Chunk A), ≈1.714 at 10.5pt body text. */
+  line-height: 1.714;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.paper-header {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.paper-header h1 {
+  font-family: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 0 0 0.3em;
+}
+
+.paper-header .version-label {
+  font-size: 11pt;
+  color: #555;
+}
+
+.section-header {
+  font-family: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 1.2em 0 0.6em;
+  text-indent: 0;
+}
+
+.page-break {
+  break-before: page;
+}
+
+.question-group {
+  margin-bottom: 1em;
+}
+
+.group-meta {
+  font-size: 9pt;
+  color: #666;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.3em;
+}
+
+/* standard §83-84: 篇章标题 A/B/C/D — Times New Roman Bold 10.5pt
+   (不放大 — body is already 10.5pt, so no separate font-size here),
+   centered, one blank line above and below. One blank line at this
+   line-height is paperFontSizePt * paperLineHeight (10.5pt * 1.714 —
+   the same fixed 18pt baseline standard §3 mandates), matching the
+   screen PaperSurface's --ps-passage-letter margin (paper-passage-letter
+   cut, both faces derive from the same tokens.mjs values). */
+.passage-letter {
+  font-weight: bold;
+  text-align: center;
+  break-after: avoid;
+  margin: 18.00pt 0;
+}
+
+.passage {
+  margin: 0.5em 0;
+  text-indent: 2em;
+}
+
+.passage p {
+  margin: 0 0 0.3em;
+  text-indent: 2em;
+}
+
+/* figure-render cut — SW-2: figures never exceed the passage's own
+   content width (already ≤162mm/版心, exam-paper-format-standards §1 —
+   page margins already cap it, this is just belt-and-suspenders), and
+   never split across a page break (§3b 阅读原子不跨页). */
+.print-figure {
+  margin: 0.5em 0;
+  text-align: center;
+  text-indent: 0;
+  break-inside: avoid;
+}
+
+.print-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.print-figure-placeholder {
+  text-align: center;
+  text-indent: 0;
+  color: #555;
+  border: 1px dashed #999;
+  padding: 0.6em 0;
+  margin: 0.5em 0 0.3em;
+  break-inside: avoid;
+}
+
+.question {
+  margin: 0.6em 0;
+}
+
+.stem {
+  margin: 0 0 0.2em;
+  text-indent: 0;
+}
+
+.qnum {
+  font-weight: bold;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2em;
+  margin: 0.2em 0 0.2em 2em;
+}
+
+.options-grid span {
+  display: block;
+}
+
+.options-list {
+  margin: 0.2em 0 0.2em 2em;
+}
+
+.options-list p {
+  margin: 0.1em 0;
+}
+
+.options-inline {
+  margin: 0.2em 0 0.2em 2em;
+}
+
+.options-inline span {
+  margin-right: 2em;
+}
+
+.options-inline--numbered .qnum {
+  margin-right: 0.6em;
+}
+
+/* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;
+   标题不落页尾;写作框整框不拆。 */
+.question {
+  break-inside: avoid;
+}
+
+.section-header,
+.group-meta {
+  break-after: avoid;
+}
+
+.writing-answer-box {
+  break-inside: avoid;
+}
+
+.answer {
+  margin: 0.2em 0 0.2em 2em;
+  font-size: 9.5pt;
+  color: #333;
+}
+
+.answer p {
+  margin: 0.1em 0;
+}
+
+.explanation {
+  color: #555;
+}
+
+/* standard §6 — 挖空: 定长下划线 + 题号居中于线上, 线不得跨行断开.
+   七选五 ≈4.6em (10.5pt 下 ≈48pt/17mm); 完形/语法填空 ≈3.3em (≈35pt/12mm). */
+.print-blank {
+  display: inline-block;
+  white-space: nowrap;
+  border-bottom: 0.48pt solid #000;
+  text-align: center;
+  vertical-align: baseline;
+  margin: 0 0.15em;
+  /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */
+  text-indent: 0;
+}
+
+.print-blank--short { width: 3.3em; }
+.print-blank--seven { width: 4.6em; }
+
+.print-blank-num {
+  display: inline-block;
+}
+
+/* standard §8 — 写作答题区: 应用文/读后续写各一个细边框素框, 框内无横线/提示行. */
+.writing-answer-box {
+  border: 0.48pt solid #000;
+  margin: 1em auto 0;
+}
+
+/* Exam density: tighter */
+.exam .passage p { margin-bottom: 0.2em; }
+.exam .question { margin: 0.4em 0; }
+.exam .group-meta { display: none; }
+
+/* Handout density: more spacing */
+.handout .passage p { margin-bottom: 0.4em; }
+.handout .question { margin: 0.8em 0; }
+</style>
+</head>
+<body class="exam">
+<div class="paper-header">
+  <h1>QA print test</h1>
+  
+</div>
+<section class="question-group"><div class="passage-letter">A</div><div class="passage"><p>SoFi Stadium is the go-to destination in the heart of Los Angeles for sports fans. Its calendar is always packed with headline-grabbing events.</p><p></p><p>Upcoming Football Events</p><p></p><figure class="print-figure"><img src="/paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png" alt="fig-paper-2026-i-reading-a-table-1"></figure><p></p><p>Nearby Hotels</p><p></p><p>When attending an event at SoFi Stadium, you’re just a short walk or ride from several comfortable and classy hotels. Right across the street, Sonder Lim Hotel offers spacious rooms and a rooftop pool. A mile away, the H Hotel Los Angeles, with its stylish design, is ideal for a nice stay between events. For those seeking both comfort and convenience, the Renaissance Los Angeles Airport Hotel is just a short drive away. If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities- perfect for turning a game day into a great weekend escape.</p><p></p><p>Parking</p><p></p><p>SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass. If you enter through the wrong access point, you’ll be turned around and redirected-so plan ahead. Each parking zone consists of multiple lots, designed to efficiently manage traffic across the venue’s network. Make sure to download your parking pass to your smartphone before arrival. Upon entering the correct zone, parking staff will guide you directly to a space. For those wishing to park near friends, all vehicles must have passes for the same zone and arrive together--spaces cannot be saved.</p></div><div class="question"><p class="stem"><span class="qnum">1.</span> Which team will play the most games at the stadium this month?</p><div class="options-list"><p>A. Washington Commanders.</p><p>B. Los Angeles Rams.</p><p>C. Los Angeles Chargers.</p><p>D. New Orleans Saints.</p></div></div><div class="question"><p class="stem"><span class="qnum">2.</span> Which hotel is nearest to the stadium?</p><div class="options-list"><p>A. Sonder Lüm Hotel.</p><p>B. The Ritz-Carlton Los Angeles.</p><p>C. The H Hotel Los Angeles.</p><p>D. The Renaissance LA Airport Hotel.</p></div></div><div class="question"><p class="stem"><span class="qnum">3.</span> What do you need to do if you want to park at the stadium?</p><div class="options-list"><p>A. Call the parking staff.</p><p>B. Prepay the parking fee.</p><p>C. Obtain a parking pass.</p><p>D. Choose a parking zone.</p></div></div></section>
+</body>
+</html>
