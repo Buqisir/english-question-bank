@@ -29,7 +29,7 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
   P1×11 落地（焦点环/窄屏/admin/黑话/侧条/字体lane/找题态/弹窗/选中态/
   遮挡/低对比）。basket-chip-tick 签名微动效（5ac4ea8+6c05815，owner
   实报基线 bug 即修：clip-path 替 overflow 保基线）。两刀 CI 绿；
-  **owner QA 待做**；qa 截图证据不全（panels SW-5，owner 实测补）。
+  **owner QA 过（2026-07-10，五面对照单全过）**。
   下一刀 lecture-rail 已解锁（rail 不滚 + 点空显解析需求）。
 - 2026-07-10：**draft-depassage-letter 收官**（merge 720f82a，CR APPROVE
   0 MF + PA-lite 降档获认可，main CI 绿）：草稿卷导出五面去 A-D 篇章
@@ -337,6 +337,19 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
+- **下会话 High 档议程（owner 备案 2026-07-10，三条，开场先聊这个）**：
+  1. **草稿卷页 + 个人空间页与全站 UI 割裂**（owner 复述：QA 过后仍觉
+     两页跟其他页面不是一家人；my-space 网盘套壳=审计 P1#8 已挂
+     卷宗柜刀，草稿卷工作台的割裂感是新点名——方向级，High 聊透
+     再动，勿直接开工）。
+  2. **分页 + 智能题型分布建议**：通过**改变题组顺序**让 A3 打印时
+     学生阅读友好（题型分布建议=排序建议，不是自动重排；注意
+     Super Teacher Boundary——建议+老师确认）。全新方向，先 grilling。
+  3. **草稿卷 A4 预览的页面背景灰怪**（owner 截图在案）：建议改成
+     讲评页同款暖纸背景。小刀级，但和 1 同属工作台观感，可并议。
+- 数据健康追记（2026-07-10 owner QA 截图顺带发现）：某完形组指导语
+  「从每题所给的A、B、C、D四个选项」被数据内换行截断成「…A / D…」
+  且吞字——入 data-health 清单，随脏数据批修。
 - **motion-pass（owner 已圈，2026-07-10，排 P1 两刀 + lecture-rail 刀
   之后）**：全站动效统一 pass——装 emil-design-eng skill 定方向 →
   动效时长/缓动收 token（DESIGN.md 150-250ms 规矩落地）→ 补缺口
