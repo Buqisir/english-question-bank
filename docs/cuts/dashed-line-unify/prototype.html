@@ -1,0 +1,150 @@
+<title>剪刀线不变量原型 · 现状 vs 提案</title>
+<style>
+  :root {
+    --desk: #F0EFEC;
+    --paper: #FDFCFA;
+    --ink: #1E1E1C;
+    --ink-soft: #6A6A64;
+    --rule-rest: rgba(74, 68, 56, 0.30);
+    --teal: #2C6E56;
+    --teal-line: rgba(44, 110, 86, 0.60);
+    --teal-wash: rgba(44, 110, 86, 0.035);
+    --warn: #B4540A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --desk: #232321; --paper: #2C2B28; --ink: #E8E6E1; --ink-soft: #A6A49C;
+      --rule-rest: rgba(214, 205, 186, 0.30); --teal-line: rgba(94, 176, 146, 0.7);
+      --teal-wash: rgba(94, 176, 146, 0.06); --teal: #5EB092; --warn: #E08B45; }
+  }
+  :root[data-theme="dark"] { --desk: #232321; --paper: #2C2B28; --ink: #E8E6E1; --ink-soft: #A6A49C;
+    --rule-rest: rgba(214, 205, 186, 0.30); --teal-line: rgba(94, 176, 146, 0.7);
+    --teal-wash: rgba(94, 176, 146, 0.06); --teal: #5EB092; --warn: #E08B45; }
+  :root[data-theme="light"] { --desk: #F0EFEC; --paper: #FDFCFA; --ink: #1E1E1C; --ink-soft: #6A6A64;
+    --rule-rest: rgba(74, 68, 56, 0.30); --teal-line: rgba(44, 110, 86, 0.60);
+    --teal-wash: rgba(44, 110, 86, 0.035); --teal: #2C6E56; --warn: #B4540A; }
+
+  body { background: var(--desk); color: var(--ink); margin: 0;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 64px; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .lede { color: var(--ink-soft); font-size: 14px; line-height: 1.8; max-width: 640px; margin: 0 0 12px; }
+  .lede strong { color: var(--ink); }
+  .hint { font-size: 13px; color: var(--teal); margin: 0 0 28px; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+  .col-title { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+  .col-sub { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 12px; min-height: 3.4em; }
+
+  .paper { background: var(--paper); padding: 34px 30px 26px;
+    box-shadow: 0 1px 0 #00000010, 0 10px 26px #00000012;
+    font-family: "Times New Roman", "Songti SC", SimSun, serif; }
+
+  .block { position: relative; padding: 14px 4px; cursor: default; }
+  .g-title { font-weight: 700; font-size: 14px; margin: 0 0 6px; }
+  .g-body { font-size: 12.5px; line-height: 1.75; color: var(--ink); opacity: 0.82; margin: 0; }
+  .pool { font-size: 12px; line-height: 1.9; margin: 8px 0 0; opacity: 0.82; }
+
+  .part-heading { font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 13px; font-weight: 700; padding: 16px 4px 2px; }
+
+  /* 静息剪刀线：块顶界，画在块间隙正中 */
+  .cut { position: absolute; left: 20px; right: 20px; top: -1px; height: 0;
+    border-top: 1px dashed var(--rule-rest); pointer-events: none;
+    transition: opacity 0.25s; }
+  .cut--bottom { top: auto; bottom: -1px; }
+  .block:hover > .cut { opacity: 0; }
+
+  /* 选中罩：通宽 teal 罩 + 上下缘虚线（与产品同机制，动画放慢到 0.35s 便于看清） */
+  .block::after { content: ''; position: absolute; inset: -1px -30px;
+    background: var(--teal-wash);
+    border-top: 1px dashed var(--teal-line); border-bottom: 1px dashed var(--teal-line);
+    opacity: 0; transition: opacity 0.35s; pointer-events: none; }
+  .block:hover::after { opacity: 1; }
+
+  /* 标注气泡 */
+  .note { position: absolute; right: -8px; font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 11.5px; padding: 3px 9px; border-radius: 3px; color: #fff;
+    opacity: 0; transition: opacity 0.35s; pointer-events: none; z-index: 2; }
+  .block:hover .note { opacity: 1; }
+  .note--bad { background: var(--warn); bottom: -12px; }
+  .note--good { background: var(--teal); bottom: -12px; }
+  .note--rest { opacity: 1; background: none; color: var(--ink-soft);
+    border: 1px solid var(--rule-rest); bottom: -12px; }
+  .block:hover .note--rest { opacity: 0; }
+
+  @media (prefers-reduced-motion: reduce) { .cut, .block::after, .note { transition: none; } }
+
+  .legend { margin-top: 30px; font-size: 13px; color: var(--ink-soft); line-height: 2; }
+  .legend b { color: var(--ink); font-weight: 600; }
+  .swatch { display: inline-block; width: 26px; height: 0; vertical-align: middle;
+    margin: 0 6px 3px 0; }
+  .swatch--rest { border-top: 1px dashed var(--rule-rest); }
+  .swatch--sel { border-top: 1px dashed var(--teal-line); }
+</style>
+
+<div class="wrap">
+  <h1>剪刀线不变量 · 你缺的是哪条线</h1>
+  <p class="lede">规则一句话：<strong>静息时虚线在哪，选中时虚线就只能在哪</strong>——选中只把淡墨换成墨绿加重，绝不多画一条。阅读 A→B 之间天然满足（A 的底就是 B 的顶）；<strong>节末题组</strong>（七选五、完形这种后面跟标题的）静息时底部没有线，选中罩的下缘就成了"凭空出现"。提案 = 给节末补上那条静息淡线。</p>
+  <p class="hint">↓ 把鼠标悬到两边的「七选五」上，盯着它<b>下边缘</b>对比；再悬「阅读 A」感受正常形态。</p>
+
+  <div class="cols">
+    <div>
+      <p class="col-title">现状</p>
+      <p class="col-sub">阅读 A/B 正常：底线由下一组的顶线垫着，选中像"覆盖"。七选五静息时底部无线 → 选中时下缘虚线<b>凭空出现</b>。</p>
+      <div class="paper">
+        <div class="block">
+          <div class="cut"></div>
+          <p class="g-title">A</p>
+          <p class="g-body">SoFi Stadium is the go-to destination in the heart of Los Angeles for sports fans…</p>
+        </div>
+        <div class="block">
+          <div class="cut"></div>
+          <p class="g-title">B</p>
+          <p class="g-body">Kevin had never used a paper dictionary before. His father still remembers his first one…</p>
+        </div>
+        <div class="block">
+          <div class="cut"></div>
+          <p class="g-title">第二节 七选五</p>
+          <p class="g-body">Museums are changing fast. ______ New tech helps a lot…</p>
+          <p class="pool">A. It is not only about technology.&ensp;B. Visitors can now design their own tours.&ensp;C. …</p>
+          <span class="note note--bad">⚠ 这条线静息时不存在——凭空出现</span>
+        </div>
+        <div class="part-heading">第三部分 语言运用</div>
+      </div>
+    </div>
+
+    <div>
+      <p class="col-title">提案</p>
+      <p class="col-sub">唯一改动：七选五（节末组）静息时<b>多一条淡淡的底界线</b>（下方常驻那条）。选中时它跟顶线一样——只是换成墨绿加重。</p>
+      <div class="paper">
+        <div class="block">
+          <div class="cut"></div>
+          <p class="g-title">A</p>
+          <p class="g-body">SoFi Stadium is the go-to destination in the heart of Los Angeles for sports fans…</p>
+        </div>
+        <div class="block">
+          <div class="cut"></div>
+          <p class="g-title">B</p>
+          <p class="g-body">Kevin had never used a paper dictionary before. His father still remembers his first one…</p>
+        </div>
+        <div class="block">
+          <div class="cut"></div>
+          <div class="cut cut--bottom"></div>
+          <p class="g-title">第二节 七选五</p>
+          <p class="g-body">Museums are changing fast. ______ New tech helps a lot…</p>
+          <p class="pool">A. It is not only about technology.&ensp;B. Visitors can now design their own tours.&ensp;C. …</p>
+          <span class="note note--rest">静息就有这条淡线（新补的）</span>
+          <span class="note note--good">✓ 同一条线，只是加重了</span>
+        </div>
+        <div class="part-heading">第三部分 语言运用</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="legend">
+    <span class="swatch swatch--rest"></span><b>静息剪刀线</b>：淡暖墨，语义=「这个题组可以从这里剪走」<br>
+    <span class="swatch swatch--sel"></span><b>选中态边界</b>：墨绿加重 + 通宽淡罩，永远画在静息线的同一位置<br>
+    另：你报的"包住选项池的两条"是两件历史遗物（v1 节尾分隔线 + 分页标记线），已按拍板退役，本原型里没有它们。
+  </p>
+</div>

@@ -810,7 +810,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const scissorGroupIndices = new Set<number>()
     const mergedGroupByInstructionIndex = new Map<number, { groupId: string; instructionText: string }>()
     const skipIndices = new Set<number>()
-    if (!asset) return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices }
+    // dashed-line-unify (owner 拍板 2026-07-10，原型入档 prototype.html):
+    // 不变量「静息线集合 == 选中线集合」——节末题组（下一块不是可剪题组
+    // 单元）的选中罩下缘在静息时必须有对应淡线，否则选中线凭空出现。
+    const bottomLineGroupIndices = new Set<number>()
+    if (!asset) return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
     const blocks = asset.content.blocks
 
     const sectionGroupCounts = new Map<string, number>()
@@ -849,7 +853,23 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         }
       }
     }
-    return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices }
+
+    // 节末判定：题组的下一块若是「instruction」（并入下一组的卡，顶线在）
+    // 或「非写作 group」（其顶线即本组底界），底界有静息线可循；其余
+    // （标题/分页/卷末/写作组——写作组无顶部剪刀线）都算节末，补底线。
+    for (let i = 0; i < blocks.length; i += 1) {
+      const block = blocks[i]
+      if (block.type !== 'group') continue
+      const isScissorUnit = scissorGroupIndices.has(i) || skipIndices.has(i)
+      if (!isScissorUnit) continue
+      const next = blocks[i + 1]
+      const nextHasRestingTopLine =
+        next != null &&
+        (next.type === 'instruction' ||
+          (next.type === 'group' && asset.content.groups[next.groupId]?.groupType !== 'writing'))
+      if (!nextHasRestingTopLine) bottomLineGroupIndices.add(i)
+    }
+    return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
   }, [asset])
 
   // rail scrollspy — highlight the topmost anchor currently visible in the
@@ -1233,7 +1253,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   function renderGroupCard(
     groupId: string,
     index: number,
-    options?: { mergedInstructionText?: string; showScissorLine?: boolean },
+    options?: { mergedInstructionText?: string; showScissorLine?: boolean; showBottomScissorLine?: boolean },
   ): ReactNode {
     const group = asset?.content.groups[groupId]
     const entry = groupModels[groupId]
@@ -1269,6 +1289,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           )}
           {options?.showScissorLine && (
             <div className="paper-browse-scissor-line" aria-hidden="true" />
+          )}
+          {options?.showBottomScissorLine && (
+            <div className="paper-browse-scissor-line paper-browse-scissor-line--bottom" aria-hidden="true" />
           )}
           {options?.mergedInstructionText && (
             <p className="paper-browse-instruction paper-browse-instruction--merged">
@@ -1509,6 +1532,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           return renderGroupCard(merged.groupId, index, {
             mergedInstructionText: merged.instructionText,
             showScissorLine: true,
+            // 并组卡渲染在 instruction 的 index 上，节末集合按 group 块
+            // 自己的 index（本卡的下一块）记账。
+            showBottomScissorLine: scissorPlan.bottomLineGroupIndices.has(index + 1),
           })
         }
         return (
@@ -1520,6 +1546,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       case 'group':
         return renderGroupCard(block.groupId, index, {
           showScissorLine: scissorPlan.scissorGroupIndices.has(index),
+          showBottomScissorLine: scissorPlan.bottomLineGroupIndices.has(index),
         })
       case 'pageBreakHint':
         return <div key={`pagebreak-${index}`} className="paper-browse-pagebreak" aria-hidden="true" />

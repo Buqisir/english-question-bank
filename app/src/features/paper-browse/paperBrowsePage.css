@@ -220,10 +220,12 @@
   margin: 0 0 8px;
 }
 
+/* dashed-line-unify: 屏幕卷面是连续流，「分页」是纸的语义——线退役
+   （导出面分页纪律零触碰），元素保留为零高度锚免动 TSX 结构。此前这
+   条 0.25 暖墨虚线会冒充剪刀线（owner 报障：七选五选项池被夹）。 */
 .paper-browse-pagebreak {
-  height: 1px;
-  border-top: 1px dashed rgba(74, 68, 56, 0.25);
-  margin: 8px 0;
+  height: 0;
+  margin: 0;
 }
 
 /* ─── 剪刀线 + 选中态 — scissor-select-feel（owner 拍板 2026-07-09，原型
@@ -257,6 +259,15 @@
 .paper-browse-group-card:hover > .paper-browse-scissor-line,
 .paper-browse-group-card:focus-within > .paper-browse-scissor-line {
   opacity: 0;
+}
+
+/* dashed-line-unify（owner 拍板 2026-07-10，原型 docs/cuts/dashed-line-unify/
+ * prototype.html）：节末题组的静息底界线——不变量「静息线集合 == 选中
+ * 线集合」，选中罩下缘永远落在一条既有淡线上，不再凭空出现。样式与
+ * 顶线同款，仅定位翻到底缘；hover 隐去规则由同类名共享。 */
+.paper-browse-scissor-line--bottom {
+  top: auto;
+  bottom: calc(var(--pb-block-gap) / -2);
 }
 
 /* hover = 纸条显影：选区罩上下缘在块间隙正中（±gap/2），左右通宽到纸的

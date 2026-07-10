@@ -111,14 +111,16 @@
 
 /* ─── Section ──────────────────────────────────────────────────── */
 
+/* dashed-line-unify (owner 报障 2026-07-10): the v1 dashed section
+   divider is retired — a real exam sheet separates sections with white
+   space, not rules, and on the browse surface every dashed line must
+   read as a scissor line (one identity). The 26+18px rhythm stays. */
 .ps-section {
   margin-bottom: 26px;
   padding-bottom: 18px;
-  border-bottom: 1px dashed var(--ps-rule);
 }
 
 .ps-section:last-child {
-  border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
