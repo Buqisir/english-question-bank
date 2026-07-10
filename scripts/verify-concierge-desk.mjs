@@ -8,7 +8,9 @@
  *   3. needsClarification: stub returns clarification → outcome.kind='clarification'.
  *   4. API key missing: keyword fallback runs without calling steward.
  *   5. API failure: steward throws → keyword fallback runs.
- *   6. Similar-intent builder includes title + tags.
+ *   6. (retired — similar-entrypoints E3 retired the buildSimilarIntent
+ *      text-search-fill hack; 配相似 is now a plain deep-link, see
+ *      verify-paper-browse.mjs items 47-48 + ConciergeGroupCard's own href.)
  *   7. Pending-query merging produces "原 query；补充说明：new" format.
  *
  * Pure-function-level test; does NOT spin up React.
@@ -17,7 +19,6 @@
 import {
   rankByKeywords,
   runConciergeSearch,
-  buildSimilarIntent,
 } from '../app/src/concierge/conciergeSearch.ts'
 import { cleanReason } from '../app/src/concierge/reason.ts'
 import { pickClarificationLine } from '../app/src/concierge/clarificationCopy.ts'
@@ -261,13 +262,10 @@ console.log('\nTest 7: rankByKeywords matches across title / summary / tags')
 }
 
 // ------------------------------------------------------------------ Test 8
-console.log('\nTest 8: buildSimilarIntent uses title + summary + tags')
-{
-  const intent = buildSimilarIntent(sampleGroups[0])
-  assert('mentions 找类似', intent.startsWith('找类似这道题'), `got: ${intent}`)
-  assert('contains title fragment', intent.includes('写作教师'), '')
-  assert('contains a tag', intent.includes('写作教育'), '')
-}
+// (retired — similar-entrypoints E3 retired buildSimilarIntent along with
+// the whole triggerSimilar/onSimilar text-search-fill flow. 配相似 is now a
+// plain deep-link — see verify-paper-browse.mjs items 47-48 and
+// ConciergeGroupCard.tsx's own `similarHref`.)
 
 // ------------------------------------------------------------------ Test 9
 console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onPreview gone')
@@ -292,8 +290,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     /basketIds\s*:\s*Set<string>/.test(deskSource) && /onAdd\s*:\s*\(group\s*:\s*QuestionGroupCard\)\s*=>\s*void/.test(deskSource), '')
   assert('Desk destructures intent/state/paperResults/expandedPaperKey from retrieval',
     /const\s*\{\s*intent,\s*state,\s*paperResults,\s*expandedPaperKey\s*\}\s*=\s*retrieval/.test(deskSource), '')
-  assert('Desk destructures setIntent/submit/triggerSimilar/togglePaper from actions',
-    /const\s*\{\s*setIntent,\s*submit,\s*triggerSimilar,\s*togglePaper\s*\}\s*=\s*actions/.test(deskSource), '')
+  // similar-entrypoints (E3): triggerSimilar retired along with the whole
+  // text-search-fill 找类似 flow — Desk no longer destructures it.
+  assert('Desk destructures setIntent/submit/togglePaper from actions',
+    /const\s*\{\s*setIntent,\s*submit,\s*togglePaper\s*\}\s*=\s*actions/.test(deskSource), '')
 
   // 9.2 Old V1 + Step-1 flat props are gone from the Desk surface.
   for (const removed of [
@@ -332,8 +332,12 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   // Inner action wiring goes through the actions object, not stale prop names.
   assert('Desk wires onTogglePaper to actions.togglePaper',
     /onTogglePaper=\{togglePaper\}/.test(deskSource), '')
-  assert('Desk wires onSimilar to actions.triggerSimilar',
-    /onSimilar=\{\(group\)\s*=>\s*\{\s*void triggerSimilar\(group\)\s*\}\}/.test(deskSource), '')
+  // similar-entrypoints (E3): 找类似/onSimilar/triggerSimilar retired — Desk
+  // no longer wires a similar-trigger callback into ConciergePaperRow at all
+  // (配相似 is a plain deep-link owned by ConciergeGroupCard, see
+  // verify-paper-browse.mjs items 47-48).
+  assert('Desk does not wire onSimilar anywhere (retired flow)',
+    !/onSimilar=/.test(deskSource), '')
   assert('Desk submit handler uses actions.submit',
     /void submit\(\)/.test(deskSource), '')
   assert('Desk input onChange wires to actions.setIntent',
@@ -364,7 +368,7 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
 
   // ConciergeRetrievalActions fields.
   const actionsDecl = hookSource.match(/export type ConciergeRetrievalActions\s*=\s*\{([\s\S]*?)\n\}/)?.[1] || ''
-  for (const member of ['setIntent', 'submit', 'triggerSimilar', 'togglePaper', 'retryGroupDetail', 'reset']) {
+  for (const member of ['setIntent', 'submit', 'togglePaper', 'retryGroupDetail', 'reset']) {
     assert(`actions contains ${member}`, new RegExp(`\\b${member}\\s*:`).test(actionsDecl), `actions decl:\n${actionsDecl}`)
   }
 
@@ -454,7 +458,15 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
   assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
   assert('Group card disables only unavailable draft state', /disabled=\{draftState === ['"]disabled['"]\}/.test(groupCardSource), '')
-  assert('Group card 找类似 button (no bare 类似)', />\s*找类似\s*<\/button>/.test(groupCardSource), '')
+  // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——now a plain
+  // <a href> deep-link (same family as 看解析), not a <button onClick>.
+  assert('Group card has no 找类似 <button> (retired text-search-fill flow)',
+    !/>\s*找类似\s*<\/button>/.test(groupCardSource), '')
+  assert('Group card renders a 配相似 deep-link (no bare 相似)',
+    />\s*配相似\s*<\/a>/.test(groupCardSource), '')
+  assert('Group card gates 配相似 on the four E1-supported groupTypes + a computable similar href',
+    /buildPaperBrowseSimilarHref\(group\.paperSurfaceHref\)/.test(groupCardSource) &&
+      /SIMILAR_SUPPORTED_GROUP_TYPES/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
 
@@ -768,12 +780,14 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
 }
 
 // ------------------------------------------------------------------ Test 16
-console.log('\nTest 16: 找类似 round-trips through paper aggregation')
+console.log('\nTest 16: paperResults aggregation (找类似/triggerSimilar retired by similar-entrypoints E3)')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const hook = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'useConciergeDesk.ts'), 'utf8')
-  // triggerSimilar must call runSearch (not skip aggregation).
-  assert('triggerSimilar uses runSearch', /const triggerSimilar = useCallback[\s\S]{0,600}await runSearch\(similarIntent, null\)/.test(hook), '')
+  // similar-entrypoints (E3): triggerSimilar/buildSimilarIntent retired —
+  // 配相似 is now a plain deep-link, not a search round-trip through this hook.
+  assert('hook does not declare triggerSimilar (retired)', !/triggerSimilar/.test(hook), '')
+  assert('hook does not import buildSimilarIntent (retired)', !/buildSimilarIntent/.test(hook), '')
   // paperResults memo derives from state.hits and then swaps in live group
   // card data so C8 draft-button state can update without a new search.
   assert(

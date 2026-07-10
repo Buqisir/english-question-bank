@@ -30,6 +30,7 @@ import {
   Eye,
   Pencil,
   Plus,
+  Repeat,
   Tag,
   Trash2,
 } from 'lucide-react'
@@ -45,10 +46,16 @@ import { sourceTypeLabel } from '../../domain/questionBank'
 import { labelOf } from '../../workbench/detail/readingProfileLabels'
 import { AnalysisDisclosure } from './AnalysisDisclosure'
 import { compactGroupMeta } from './detailHelpers'
-import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
+import { buildPaperBrowseLectureHref, buildPaperBrowseSimilarHref } from '../../concierge/paperSurfaceHref'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
+
+// similar-entrypoints (E3): the four groupTypes E1's similar-questions engine
+// supports (program.md Q5 — writing excluded, no facet). `GroupType`'s
+// DB-style values (domain/questionBank.ts) — this file is not the domain
+// schema, just a display-gate reading the type's existing string values.
+const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
 
 export type QuestionGroupDetailViewProps = {
   isOwnerView: boolean
@@ -112,6 +119,11 @@ export type QuestionGroupDetailViewProps = {
    * (buildPaperBrowseLectureHref) still lands on the same state via a full
    * navigation, so 中键/新标签 stays correct even without this handler. */
   onOpenPaperBrowseLecture: (detail: QuestionGroupDetail) => void
+  /** similar-entrypoints (E3): 详情页次入口「配相似」— SPA fast-path,
+   * mirrors onOpenPaperBrowseLecture. Only rendered when the group has a
+   * paperSurfaceHref that converts to a similar-href AND its groupType is
+   * one of the four E1-supported types. */
+  onOpenPaperBrowseSimilar: (detail: QuestionGroupDetail) => void
 }
 
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
@@ -133,6 +145,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onAddToBasket,
     onOpenPaperBrowse,
     onOpenPaperBrowseLecture,
+    onOpenPaperBrowseSimilar,
   } = props
 
   // These useMemos previously lived in App.tsx (App.tsx:1261-1293 pre-cut);
@@ -239,6 +252,29 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 >
                   <BookOpen size={16} />
                   {selectedDetail.paperSurfaceLabel}
+                </a>
+              )}
+              {/* similar-entrypoints (E3): 详情页次入口「配相似」— 只有配方
+                  收录的四类题型(program.md Q5)才渲染，写作组/无 href 组隐藏
+                  式降级（与「看解析」一致，不做 disabled 态）。href 走共享
+                  换算 helper 保持中键/新标签可用；主点击拦截走 SPA
+                  openPaperBrowseSimilar（同页内导航，不整页刷新）。 */}
+              {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) &&
+                buildPaperBrowseSimilarHref(selectedDetail.paperSurfaceHref) && (
+                <a
+                  className="detail-button"
+                  href={buildPaperBrowseSimilarHref(selectedDetail.paperSurfaceHref) || undefined}
+                  data-ra-entry="detail-view-similar"
+                  data-ra-group-id={selectedDetail.id}
+                  onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+                    if (event.defaultPrevented || event.button !== 0) return
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                    event.preventDefault()
+                    onOpenPaperBrowseSimilar(selectedDetail)
+                  }}
+                >
+                  <Repeat size={16} />
+                  配相似
                 </a>
               )}
               <button

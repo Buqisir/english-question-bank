@@ -188,7 +188,6 @@ export type ConciergePaperRowProps = {
   basketIds: Set<string>
   onTogglePaper: (key: string) => void
   onAdd: (group: QuestionGroupCard) => void
-  onSimilar: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /** paper-row-browse-entry — opens the whole-paper preview page for this row's paperId (no focusGroupId — from the paper's start). */
@@ -201,7 +200,7 @@ export type ConciergePaperRowProps = {
 }
 
 export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
-  const { paper, expanded, basketIds, onTogglePaper, onAdd, onSimilar, onOpenDetail, onOpenPaperBrowse, variant = 'search' } = props
+  const { paper, expanded, basketIds, onTogglePaper, onAdd, onOpenDetail, onOpenPaperBrowse, variant = 'search' } = props
   const rowPaperId = onOpenPaperBrowse ? findRowPaperId(paper) : null
 
   const headline = buildHeadline(paper)
@@ -357,7 +356,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
                           alreadyInBasket={basketIds.has(group.id)}
                           dimmed={!isHit}
                           onAdd={onAdd}
-                          onSimilar={onSimilar}
                         />
                       </li>
                     )

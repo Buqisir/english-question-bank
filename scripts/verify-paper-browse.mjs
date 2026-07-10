@@ -1351,11 +1351,13 @@ assert(
   'missing questionId/lecture boot-read on paperBrowseRoute',
 )
 assert(
-  'openPaperBrowse accepts an options bag (questionId/lecture) and writes both into the URL + paperBrowseRoute',
+  // similar-entrypoints (E3) adds `similar` alongside `questionId`/`lecture`
+  // in the same options-bag → URL/state pipeline.
+  'openPaperBrowse accepts an options bag (questionId/lecture/similar) and writes them into the URL + paperBrowseRoute',
   /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[^{]*options\?\s*:\s*OpenPaperBrowseOptions[^{]*\{/.test(
     appSrc,
   ) &&
-    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*lecture\s*\}\)/.test(
+    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*lecture,\s*similar\s*\}\)/.test(
       appSrc,
     ),
   'openPaperBrowse does not accept/thread the options bag',
@@ -1394,18 +1396,22 @@ assert(
   'missing the reload fallback for SPA-uncarried views',
 )
 assert(
-  'paperBrowseOnBackToWorkbench strips questionId/lecture from the URL alongside view/paperId/focusGroupId',
-  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]lecture['"]\s*\]\)/.test(
+  // similar-entrypoints (E3) adds `similar` to the stripped-param list too —
+  // otherwise a stale similar=1 would leak into the workbench URL.
+  'paperBrowseOnBackToWorkbench strips questionId/lecture/similar from the URL alongside view/paperId/focusGroupId',
+  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]lecture['"]\s*,\s*['"]similar['"]\s*\]\)/.test(
     appSrc,
   ),
-  'paperBrowseOnBackToWorkbench does not strip the new params — stale questionId/lecture would leak into the workbench URL',
+  'paperBrowseOnBackToWorkbench does not strip the new params — stale questionId/lecture/similar would leak into the workbench URL',
 )
 
 // 47-48. ConciergeGroupCard.tsx / QuestionGroupDetailView.tsx: 看解析 href
 // migration to buildPaperBrowseLectureHref.
 assert(
+  // similar-entrypoints (E3) adds a second named import (buildPaperBrowseSimilarHref)
+  // to the same import statement, for the sibling 配相似 entry.
   "ConciergeGroupCard imports buildPaperBrowseLectureHref and uses it to build the 看解析 href (search-card entry, plain <a href> — no SPA intercept, ConciergeDesk/ConciergePaperRow are out of this cut's Scope whitelist)",
-  /import\s*\{\s*buildPaperBrowseLectureHref\s*\}\s*from\s*['"]\.\/paperSurfaceHref\.ts['"]/.test(
+  /import\s*\{\s*buildPaperBrowseLectureHref[\s\S]{0,80}\}\s*from\s*['"]\.\/paperSurfaceHref\.ts['"]/.test(
     conciergeGroupCardSrc,
   ) &&
     /buildPaperBrowseLectureHref\(group\.paperSurfaceHref\)/.test(conciergeGroupCardSrc),
@@ -1443,8 +1449,10 @@ assert(
   'missing the questionId/lecture props or the deep-link selection effect',
 )
 assert(
-  'PaperBrowsePage replaceState-syncs lectureOpen/lectureSelection into the URL (lecture=1 + focusGroupId/questionId when selected; both cleared when 讲评关)',
-  /\}, \[lectureOpen, lectureSelection\]\)/.test(pageSrc) &&
+  // similar-entrypoints (E3) extends this effect's deps with
+  // similarView/similarSeed so it can also sync `similar=1` in/out of the URL.
+  'PaperBrowsePage replaceState-syncs lectureOpen/lectureSelection/similarView/similarSeed into the URL (lecture=1 + focusGroupId/questionId when selected, similar=1 when the CTA result is open; all cleared when 讲评关)',
+  /\}, \[lectureOpen, lectureSelection, similarView, similarSeed\]\)/.test(pageSrc) &&
     /window\.history\.replaceState\(window\.history\.state,\s*['"]['"],\s*nextUrl\)/.test(pageSrc) &&
     /urlSyncMountedRef/.test(pageSrc),
   'missing the URL-sync effect, or it does not skip the first mount commit',

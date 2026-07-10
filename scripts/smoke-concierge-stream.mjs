@@ -7,7 +7,9 @@
  *   2. No row leaks internal slugs.
  *   3. Paper-level row shows 命中 N 个篇章 (no 共 N 组), and a 展开题组 button.
  *   4. Clicking the row body expands it; only one paper row expanded at a time.
- *   5. Inside expanded paper, group cards expose 加入草稿卷 + 找类似.
+ *   5. Inside expanded paper, group cards expose 加入草稿卷 + 配相似
+ *      (similar-entrypoints E3 — 找类似 retired, 配相似 is now a plain
+ *      <a> deep-link, rendered for the four E1-supported groupTypes).
  *   6. Clicking 加入草稿卷 flips that group card to 已加入 (and disables it).
  *   7. There is no 预览 / 加入小题 / 加入单题 / "+" button anywhere visible.
  *   8. 草稿卷 chip aria-label is present.
@@ -256,17 +258,22 @@ async function main() {
   }
   await shot(page, '04-paper-expanded')
 
-  // ── Step 5: group cards inside expanded paper expose 加入草稿卷 + 找类似
-  console.log('\nStep 5: group cards expose 加入草稿卷 + 找类似')
+  // ── Step 5: group cards inside expanded paper expose 加入草稿卷 + 配相似
+  console.log('\nStep 5: group cards expose 加入草稿卷 + 配相似')
   const firstGroupCard = page
     .locator('.concierge-paper-list > li:first-child .concierge-group-card-list > li')
     .first()
   step('group card 加入草稿卷 button visible',
     await firstGroupCard.locator('button.concierge-action', { hasText: '加入草稿卷' }).first().isVisible().catch(() => false))
-  step('group card 找类似 button visible',
-    await firstGroupCard.locator('button.concierge-action', { hasText: '找类似' }).first().isVisible().catch(() => false))
-  step('no bare 类似 button (only 找类似)',
-    !(await firstGroupCard.locator('button.concierge-action', { hasText: /^类似$/ }).first().isVisible().catch(() => false)))
+  // similar-entrypoints (E3): 找类似 button retired — 配相似 is now a plain
+  // <a> deep-link, only rendered for the four E1-supported groupTypes
+  // (阅读 is one of them, so the 广东一模 阅读 fixture keeps this visible).
+  step('group card 配相似 link visible',
+    await firstGroupCard.locator('a.concierge-action', { hasText: '配相似' }).first().isVisible().catch(() => false))
+  step('no bare 相似 link (only 配相似)',
+    !(await firstGroupCard.locator('a.concierge-action', { hasText: /^相似$/ }).first().isVisible().catch(() => false)))
+  step('no retired 找类似 button anywhere in the card',
+    !(await firstGroupCard.locator('button.concierge-action', { hasText: '找类似' }).first().isVisible().catch(() => false)))
 
   // ── Step 6: 加入草稿卷 → 已加入
   console.log('\nStep 6: 加入草稿卷 → 已加入')

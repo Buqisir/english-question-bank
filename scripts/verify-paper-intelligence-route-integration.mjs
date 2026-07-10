@@ -852,10 +852,11 @@ assert(
 // Reviewer P0 watch from PR #16: when the App shell renders PI, it still
 // calls useConciergeDesk (the hook is composed unconditionally). Cut C
 // requirement: useConciergeDesk must NOT fire network / SSE / fetch on
-// mount; AI calls only happen via user-initiated submit / triggerSimilar /
-// retryGroupDetail. We verify this statically: no useEffect inside the
-// hook references runConciergeSearch / fetchQuestionGroupDetail (the two
-// network seams).
+// mount; AI calls only happen via user-initiated submit / retryGroupDetail
+// (similar-entrypoints E3 retired triggerSimilar — 配相似 is now a plain
+// deep-link with zero network round-trip through this hook). We verify this
+// statically: no useEffect inside the hook references runConciergeSearch /
+// fetchQuestionGroupDetail (the two network seams).
 
 console.log('\nTest 13: useConciergeDesk does NOT auto-fire network on mount')
 
@@ -889,11 +890,13 @@ for (const effect of conciergeEffects) {
 }
 
 assert(
-  'useConciergeDesk only invokes search via user-driven submit/triggerSimilar',
+  // similar-entrypoints (E3): triggerSimilar retired — search is now only
+  // ever user-driven via submit.
+  'useConciergeDesk only invokes search via user-driven submit (triggerSimilar retired)',
   /const\s+submit\s*=\s*useCallback/.test(conciergeSrc) &&
-    /const\s+triggerSimilar\s*=\s*useCallback/.test(conciergeSrc) &&
+    !/triggerSimilar/.test(conciergeSrc) &&
     /await\s+runSearch\s*\(/.test(conciergeSrc),
-  'submit/triggerSimilar flow not detected',
+  'submit flow not detected, or triggerSimilar still present',
 )
 
 // ─── Summary ───

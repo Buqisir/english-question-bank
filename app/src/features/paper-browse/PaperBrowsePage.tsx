@@ -178,6 +178,11 @@ export type PaperBrowsePageProps = {
   /** flow-panel 刀 3: 入口带态——true 时讲评栏初始即开（URL 的
    * `lecture=1`）。挑题态入口（看整卷）不传/传 false，行为同刀 1/刀 2。 */
   lecture?: boolean
+  /** similar-entrypoints (E3): 入口带态——true 时（连同 lecture+questionId）
+   * 一旦入口预选的题真正落地讲评栏，自动走与 CTA 相同的路径打开配相似结果
+   * （URL 的 `similar=1`）。不支持题型/查无此题时静默降级为普通讲评态深链，
+   * 不报错。 */
+  similar?: boolean
   /** App's loaded questionGroups, keyed by id (== paper-asset groupId). */
   questionGroupById: Map<string, QuestionGroupCard>
   onAddGroupsToBasket: (groups: QuestionGroupCard[]) => void
@@ -269,6 +274,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     focusGroupId,
     questionId,
     lecture,
+    similar,
     questionGroupById,
     onAddGroupsToBasket,
     currentDraftPaperId,
@@ -313,6 +319,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 与 focusAppliedRef 分开计——预选可能比滚动多等一拍（cloze/grammarFill
   // 需要 lectureAnalysisFetched 先到位，见下方 effect）。
   const deepLinkQuestionAppliedRef = useRef(false)
+  // similar-entrypoints (E3): 入口带态 `similar=1` 自动打开配相似只应用一次
+  // （一旦真正触发或判定静默降级即置位）——用户点「返回解析」后不得被这个
+  // effect 再顶回相似态。与 deepLinkQuestionAppliedRef 分开计：必须等
+  // lectureSelection 真正落到入口预选的题上（deepLinkQuestionAppliedRef 那
+  // 条 effect 落地）才能构造种子，时序天然晚一拍。
+  const similarDeepLinkAppliedRef = useRef(false)
   const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
   // 刀 3 小尾巴 ①: 程序化滚动（rail 点击/深链/证据滚动）沉降期标记——期间
   // activeAnchor 的 clear effect 抑制清除，避免深链/rail 点击刚选中的题
@@ -395,6 +407,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       if (!lectureOpen) {
         url.searchParams.delete('lecture')
         url.searchParams.delete('questionId')
+        url.searchParams.delete('similar')
       } else {
         url.searchParams.set('lecture', '1')
         if (lectureSelection) {
@@ -403,6 +416,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         } else {
           url.searchParams.delete('questionId')
         }
+        // similar-entrypoints (E3): similarView === 'similar' 且有 seed 时写
+        // similar=1（questionId 与 seed 对齐——换题会先把 similarView 落回
+        // 'analysis'，见 selectLectureQuestion，所以对齐检查这里只是双重
+        // 保险）；回到解析态/关讲评时删掉。
+        if (similarView === 'similar' && similarSeed && lectureSelection?.questionId === similarSeed.questionId) {
+          url.searchParams.set('similar', '1')
+        } else {
+          url.searchParams.delete('similar')
+        }
       }
       const nextSearch = url.searchParams.toString()
       const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
@@ -410,12 +432,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     } catch {
       /* URL sync is best-effort — state above is the authoritative UI change. */
     }
-  }, [lectureOpen, lectureSelection])
+  }, [lectureOpen, lectureSelection, similarView, similarSeed])
 
   useEffect(() => {
     let cancelled = false
     focusAppliedRef.current = false
     deepLinkQuestionAppliedRef.current = false
+    similarDeepLinkAppliedRef.current = false
     setLoading(true)
     setError(null)
     setAsset(null)
@@ -680,6 +703,43 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     suppressScrollspyClear()
     selectLectureQuestion(targetGroupId, questionId)
   }, [questionId, focusGroupId, lectureOpen, loading, asset, lectureAnalysisFetched])
+
+  // similar-entrypoints (E3): 入口带态 `similar=1` 自动打开配相似——一次性
+  // （ref guard），且必须等上面那条 effect 把 lectureSelection 真正落到入口
+  // 预选的题上才触发（种子快照需要 lectureSelection.groupId 对应的 group 才
+  // 能构造，与「换题时讲评栏 body 回落到解析态」的既有联动天然对齐）。走与
+  // CTA 完全相同的路径（handleSimilarCtaClick 本身），不另写一份种子构造。
+  // 不支持题型 / questionId 查无此题：静默降级——标记一次性已处理但不触发，
+  // 讲评态照常打开，URL 的 `similar` 参数会在下面 replaceState effect 首次
+  // 提交时被清掉（不写 similar=1，因为 similarView 从未变成 'similar'）。
+  useEffect(() => {
+    if (similarDeepLinkAppliedRef.current) return
+    if (!similar || !lecture || !questionId) return
+    if (loading || !asset) return
+    const questionMeta = asset.content.questions[questionId]
+    if (!questionMeta) {
+      similarDeepLinkAppliedRef.current = true // 查无此题 — 静默降级
+      return
+    }
+    const targetGroupId = focusGroupId || questionMeta.groupId
+    const group = targetGroupId ? asset.content.groups[targetGroupId] : undefined
+    if (!group || !SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)) {
+      similarDeepLinkAppliedRef.current = true // 不支持题型 — 静默降级
+      return
+    }
+    // 等选中真正落到这道题（deepLinkQuestionAppliedRef 那条 effect 落地）。
+    if (!lectureSelection || lectureSelection.groupId !== targetGroupId || lectureSelection.questionId !== questionId) {
+      return
+    }
+    similarDeepLinkAppliedRef.current = true
+    handleSimilarCtaClick({
+      questionId,
+      groupTitle: group.title,
+      questionNo: questionMeta.questionNo ?? null,
+      groupTypeLabel: SIMILAR_GROUP_TYPE_LABEL[group.groupType] ?? group.groupType,
+      recipeSummary: SIMILAR_RECIPE_SUMMARY[group.groupType] ?? '',
+    })
+  }, [similar, lecture, questionId, focusGroupId, loading, asset, lectureSelection])
 
   // Block indices already consumed by a writing group's own pageModel (part/
   // section heading, prompt instruction, 注意 instruction, answerBox — the

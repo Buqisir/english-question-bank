@@ -185,7 +185,7 @@ async function searchAndOpenGroupCard(page, searchText, groupId) {
   // effect and could toggle it back closed).
   const card = page.locator(`[data-group-id="${groupId}"]`).first()
   await card.waitFor({ timeout: 15_000 })
-  // home-editorial: row actions (详情/找类似/加入草稿卷) reveal on
+  // home-editorial: row actions (详情/配相似/加入草稿卷) reveal on
   // hover/:focus-within — hover the row first, like a real user, so the
   // buttons are visible and clickable.
   await card.hover()
