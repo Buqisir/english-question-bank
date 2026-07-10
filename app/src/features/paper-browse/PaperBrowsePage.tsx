@@ -856,7 +856,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     // 节末判定：题组的下一块若是「instruction」（并入下一组的卡，顶线在）
     // 或「非写作 group」（其顶线即本组底界），底界有静息线可循；其余
-    // （标题/分页/卷末/写作组——写作组无顶部剪刀线）都算节末，补底线。
+    // （标题/分页/卷末）算节末，补底线。**写作例外**（owner 拍板
+    // 2026-07-10 追加）：紧随其后的下一个题组若是写作，不补——写作的
+    // 剪走单元从提示语起（pi-writing 内线的老语义），此处补线会落在
+    // 「第X部分 写作」标题上方，误读成"连标题剪走"。
     for (let i = 0; i < blocks.length; i += 1) {
       const block = blocks[i]
       if (block.type !== 'group') continue
@@ -867,7 +870,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         next != null &&
         (next.type === 'instruction' ||
           (next.type === 'group' && asset.content.groups[next.groupId]?.groupType !== 'writing'))
-      if (!nextHasRestingTopLine) bottomLineGroupIndices.add(i)
+      if (nextHasRestingTopLine) continue
+      let nextGroupIsWriting = false
+      for (let j = i + 1; j < blocks.length; j += 1) {
+        const later = blocks[j]
+        if (later.type !== 'group') continue
+        nextGroupIsWriting = asset.content.groups[later.groupId]?.groupType === 'writing'
+        break
+      }
+      if (!nextGroupIsWriting) bottomLineGroupIndices.add(i)
     }
     return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
   }, [asset])
