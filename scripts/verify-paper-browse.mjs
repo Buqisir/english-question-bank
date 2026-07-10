@@ -1540,10 +1540,10 @@ assert(
   'missing the writing-group exclusion in the scissorPlan group loop',
 )
 assert(
-  '46. renderGroupCard renders a .paper-browse-scissor-line sibling before the card when showScissorLine is set, and folds a merged 指导语 in as the card\'s first child',
-  /showScissorLine && <div className="paper-browse-scissor-line"/.test(pageSrc) &&
+  '46. renderGroupCard renders .paper-browse-scissor-line as a zero-footprint overlay child of the card (scissor-select-feel: no longer a flow sibling before it) when showScissorLine is set, and folds a merged 指导语 in as well',
+  /showScissorLine && \(\s*<div className="paper-browse-scissor-line"/.test(pageSrc) &&
     /options\?\.mergedInstructionText &&/.test(pageSrc),
-  'missing the scissor-line render or merged-instruction render in renderGroupCard',
+  'missing the scissor-line overlay render or merged-instruction render in renderGroupCard',
 )
 
 assert(
@@ -1561,9 +1561,10 @@ assert(
   'missing the scoped retirement rules for nested PaperSurface/WritingPaperPage chrome',
 )
 assert(
-  '49. paperBrowsePage.css declares the dashed .paper-browse-scissor-line rule (1px dashed, inset margin, screen-only — this stylesheet is never consumed by print/export)',
-  /\.paper-browse-scissor-line \{[^}]*border-top:\s*1px dashed/.test(pageCssSrc),
-  'missing .paper-browse-scissor-line dashed rule',
+  '49. paperBrowsePage.css declares the dashed .paper-browse-scissor-line rule as a zero-footprint overlay (position: absolute, no margin — scissor-select-feel retired the flow-affecting margin so the line never doubles up the block gap; screen-only, this stylesheet is never consumed by print/export) plus the hover selection band on .paper-browse-group-card::after',
+  /\.paper-browse-scissor-line \{[^}]*position:\s*absolute[^}]*border-top:\s*1px dashed/.test(pageCssSrc) &&
+    /\.paper-browse-group-card::after \{[^}]*border-top:\s*1px dashed/.test(pageCssSrc),
+  'missing .paper-browse-scissor-line overlay rule or .paper-browse-group-card::after hover band rule',
 )
 assert(
   '50. paperBrowsePage.css draws the writing-section scissor line via a CSS-only sibling selector on the Forbidden .pi-writing-section element (no edit to writingPageModel.mjs/WritingPaperPage.tsx) instead of a DOM div',

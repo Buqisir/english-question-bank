@@ -1021,11 +1021,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   // one-sheet-paper: `mergedInstructionText` folds a single-group section's
   // leading 指导语 into this same hover/剪走 unit (owner-ratified rule:
-  // 「指导语跟题走」) — rendered as the card's own first child, inside the
-  // same hover-highlight boundary as the group's surface. `showScissorLine`
-  // renders the dashed 剪刀线 sibling immediately above the card — every
-  // non-writing group gets exactly one (either here, standalone, or via the
-  // merged-instruction render path below which passes it too).
+  // 「指导语跟题走」) — rendered inside the card, in the same hover-highlight
+  // boundary as the group's surface.
+  //
+  // scissor-select-feel: `showScissorLine` no longer renders a flow sibling
+  // before the card — the dashed 剪刀线 is a zero-footprint overlay
+  // (`.paper-browse-scissor-line`, `position: absolute`) rendered as the
+  // card's own child, painted at the block-gap midpoint above the card (see
+  // paperBrowsePage.css). Every non-writing group still gets exactly one
+  // (either here, standalone, or via the merged-instruction render path
+  // below which passes it too) — only *where it paints* changed, not *which
+  // groups get one* (that's still scissorPlan, untouched). The hover
+  // selection band + boundary rules live purely in CSS on
+  // `.paper-browse-group-card::after` and apply to every card uniformly
+  // (including writing groups, whose own internal cutline stays a separate
+  // CSS-only sibling-selector rule — see paperBrowsePage.css).
   function renderGroupCard(
     groupId: string,
     index: number,
@@ -1037,17 +1047,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     return (
       <Fragment key={`group-${index}`}>
-        {options?.showScissorLine && <div className="paper-browse-scissor-line" aria-hidden="true" />}
         <section
           className="paper-browse-group-card"
           data-paper-browse-anchor={groupId}
           aria-label={group?.title || groupId}
         >
-          {options?.mergedInstructionText && (
-            <p className="paper-browse-instruction paper-browse-instruction--merged">
-              {options.mergedInstructionText}
-            </p>
-          )}
           {card && (
             <div className="paper-browse-group-actions">
               <button
@@ -1068,6 +1072,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                     : '加入草稿卷'}
               </button>
             </div>
+          )}
+          {options?.showScissorLine && (
+            <div className="paper-browse-scissor-line" aria-hidden="true" />
+          )}
+          {options?.mergedInstructionText && (
+            <p className="paper-browse-instruction paper-browse-instruction--merged">
+              {options.mergedInstructionText}
+            </p>
           )}
           {renderGroupBody(groupId, entry)}
         </section>
