@@ -34,6 +34,7 @@ import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromR
 import { createAuthRoutes } from './auth/authRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
+import { createSimilarQuestionsStore, createSimilarQuestionsRoutes } from './search/similarQuestions.mjs'
 import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
 import { createVerbProfileBackfillRoutes } from './grammar-verb-profile/verbProfileBackfillRoutes.mjs'
 import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
@@ -58,6 +59,7 @@ const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.lo
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
 const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
+const similarQuestionsStore = createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssetsDir })
 const exportImplementation = createExportImplementation({
   rootDir,
   exportDir,
@@ -92,6 +94,7 @@ const serverContext = {
   getTeachingFacetIndex,
   invalidatePaperSurfaceAnalysisAvailability,
   invalidateTeachingFacetIndex,
+  similarQuestionsStore,
   listPaperSets,
   listQuestionGroups,
   listUnlabeledGroupIds,
@@ -498,6 +501,7 @@ const serverRoutes = [
   ...createPaperSetRoutes(),
   ...createAiProxyRoutes(),
   ...createTeachingFacetRoutes(),
+  ...createSimilarQuestionsRoutes(),
   ...createTopicLabelBackfillRoutes(),
   ...createVerbProfileBackfillRoutes(),
 ]
