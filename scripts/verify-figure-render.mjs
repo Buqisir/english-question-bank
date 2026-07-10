@@ -48,7 +48,7 @@
  *     see AGENTS.md "do not duplicate verification").
  */
 
-import { existsSync, readFileSync, readdirSync, mkdtempSync, rmSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -173,8 +173,14 @@ section('3. Client — detail-page passage (<pre> path, passageFigureSegments.ts
         !segments.some((s) => s.kind === 'text' && s.text.includes(entry.placeholderMarker)),
         `${paperId}/${entry.groupId}: no text segment contains the raw marker`,
       )
-      // PO-2: the flattened text is preserved (kept below the image), not dropped.
-      assert(figureSegment?.flattenedText?.includes(entry.placeholderMarker), `${paperId}/${entry.groupId}: figure segment's flattenedText still carries the marker (PO-2 double-store)`)
+      // PO-2: the flattened TABLE TEXT is preserved (kept below the image),
+      // not dropped — but the marker itself (import-time locator metadata,
+      // not table content) is stripped from it (browser-QA finding: a raw
+      // "[表: fig-...]" prefix in the double-store sidecar still reads as
+      // a leaked token to the teacher, even on this one surface that keeps
+      // flattened text at all).
+      assert(!!figureSegment?.flattenedText && figureSegment.flattenedText.length > 0, `${paperId}/${entry.groupId}: figure segment's flattenedText is non-empty (PO-2 double-store)`)
+      assert(!figureSegment?.flattenedText?.includes(entry.placeholderMarker), `${paperId}/${entry.groupId}: figure segment's flattenedText has the marker stripped (no leaked token in the double-store sidecar)`)
 
       // Backward-compat: figures: [] degrades to ONE unsplit text segment,
       // byte-identical to the pre-cut single-<pre> render.
@@ -201,14 +207,71 @@ section('4. Server — print-renderer.mjs (web + file imageMode)')
       const items = [{ detail, note: '', score: 1, sectionTitle: '' }]
       const blocks = [{ type: 'question_group', questionGroupId: entry.groupId, score: 1 }]
 
-      for (const imageMode of ['web', 'file']) {
-        const html = buildPrintHtml({ title: 'T', versionType: 'student', printStyle: 'exam', items, blocks, questionNumberStart: 1, paperAssetsDir, imageMode })
-        assert(!FIGURE_TOKEN_ANYWHERE.test(html), `${paperId}/${entry.groupId} (${imageMode}): print HTML has zero raw figure tokens`)
-        const expectedSrc = imageMode === 'file'
-          ? `file://${path.join(paperAssetsDir, paperId, 'latest', 'figures', entry.file)}`
-          : `/paper-assets/${paperId}/latest/figures/${entry.file}`
-        assert(html.includes(`<img src="${expectedSrc}"`), `${paperId}/${entry.groupId} (${imageMode}): print HTML <img> src is the expected ${imageMode === 'file' ? 'file://' : 'web-relative'} path`)
-        assert(!html.includes(entry.caption || ' '), `${paperId}/${entry.groupId} (${imageMode}): print HTML never renders manifest caption (PA SW-4)`)
+      {
+        const html = buildPrintHtml({ title: 'T', versionType: 'student', printStyle: 'exam', items, blocks, questionNumberStart: 1, paperAssetsDir, imageMode: 'web' })
+        assert(!FIGURE_TOKEN_ANYWHERE.test(html), `${paperId}/${entry.groupId} (web): print HTML has zero raw figure tokens`)
+        assert(html.includes(`<img src="/paper-assets/${paperId}/latest/figures/${entry.file}"`), `${paperId}/${entry.groupId} (web): print HTML <img> src is the expected web-relative path`)
+        assert(!html.includes(entry.caption || 'no-caption-sentinel'), `${paperId}/${entry.groupId} (web): print HTML never renders manifest caption (PA SW-4)`)
+      }
+
+      // imageMode:'file' — browser-QA finding: an ABSOLUTE file:// URL
+      // across directories renders a BROKEN IMAGE ICON in the actual PDF
+      // (headless Chromium blocks cross-directory file:// resource
+      // loading by default) even though the HTML string itself looks
+      // correct — a text-only assertion on the <img src> would NEVER have
+      // caught this. Fixed design: buildPrintHtml emits a bare relative
+      // filename + populates `images` so the caller copies the real PNG
+      // into the SAME directory as the HTML. This check re-derives that
+      // exact caller contract and proves the PDF that comes out the other
+      // end actually embeds the image — not just that the HTML text looks
+      // plausible.
+      {
+        const images = []
+        const html = buildPrintHtml({ title: 'T', versionType: 'student', printStyle: 'exam', items, blocks, questionNumberStart: 1, paperAssetsDir, imageMode: 'file', images })
+        assert(!FIGURE_TOKEN_ANYWHERE.test(html), `${paperId}/${entry.groupId} (file): print HTML has zero raw figure tokens`)
+        assert(images.length === 1, `${paperId}/${entry.groupId} (file): images out-parameter collected exactly 1 image (got ${images.length})`)
+        assert(!images[0]?.relativeName?.includes('/') && !images[0]?.relativeName?.startsWith('file:'), `${paperId}/${entry.groupId} (file): the collected image's relativeName is a bare filename, not a path`)
+        assert(html.includes(`<img src="${images[0]?.relativeName}"`), `${paperId}/${entry.groupId} (file): print HTML <img> src matches the collected relativeName exactly`)
+        assert(images[0]?.absoluteSourcePath === path.join(paperAssetsDir, paperId, 'latest', 'figures', entry.file), `${paperId}/${entry.groupId} (file): the collected image's absoluteSourcePath points at the real on-disk PNG`)
+
+        // Real end-to-end: build the PDF the way exportPrintPdf/
+        // exportDraftPaperPdf actually do (copy the image into the SAME
+        // tempdir as the HTML, THEN run Vivliostyle), and compare against
+        // a CONTROL run that skips the copy (reproducing the exact broken
+        // case this check exists to catch). The real PDF must come out
+        // meaningfully larger — proof the PNG's bytes are actually
+        // embedded, not just referenced by a src string that resolves to
+        // nothing.
+        const vivliostyleBin = [
+          path.join(root, 'node_modules/.bin/vivliostyle'),
+          path.join(root, 'server/node_modules/.bin/vivliostyle'),
+          path.join(root, 'app/node_modules/.bin/vivliostyle'),
+        ].find((p) => existsSync(p))
+        if (!vivliostyleBin) {
+          console.log(`  ⋆ SKIP: vivliostyle CLI not found -- real end-to-end PDF-embed check skipped for ${paperId}/${entry.groupId} (verify-print-renderer.mjs's own Vivliostyle smoke test already requires it elsewhere; not re-asserting the dependency here)`)
+        } else {
+          const buildPdf = ({ copyImage }) => {
+            const dir = mkdtempSync(path.join(tmpdir(), 'verify-figure-render-pdf-'))
+            try {
+              const htmlPath = path.join(dir, 'paper.html')
+              const pdfPath = path.join(dir, 'paper.pdf')
+              writeFileSync(htmlPath, html)
+              if (copyImage) {
+                writeFileSync(path.join(dir, images[0].relativeName), readFileSync(images[0].absoluteSourcePath))
+              }
+              execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
+              return readFileSync(pdfPath).length
+            } finally {
+              rmSync(dir, { recursive: true, force: true })
+            }
+          }
+          const realPdfSize = buildPdf({ copyImage: true })
+          const brokenControlPdfSize = buildPdf({ copyImage: false })
+          assert(
+            realPdfSize > brokenControlPdfSize + 20000,
+            `${paperId}/${entry.groupId} (file): PDF with the image actually copied in is meaningfully larger than the broken-reference control (real=${realPdfSize} control=${brokenControlPdfSize}) -- proves the PNG bytes are really embedded`,
+          )
+        }
       }
 
       // SW-2: figure sizing rules present in the emitted <style> block.
@@ -290,7 +353,7 @@ section('5. Server — docxRenderer.mjs (exam/handout × blocks/legacy = 4 emit 
           assert(xml.includes('<w:drawing>'), `${label}: documentXml embeds a <w:drawing>`)
           assert(images.length === 1, `${label}: images out-parameter collected exactly 1 image (got ${images.length})`)
           assert(xml.includes(`r:embed="${images[0]?.rId}"`), `${label}: documentXml references the collected image's rId`)
-          assert(!xml.includes(entry.caption || ' '), `${label}: documentXml never renders manifest caption (PA SW-4)`)
+          assert(!xml.includes(entry.caption || ' '), `${label}: documentXml never renders manifest caption (PA SW-4)`)
 
           // Real zip: media part + relationship actually present.
           const outDir = mkdtempSync(path.join(tmpdir(), 'verify-figure-render-docx-'))

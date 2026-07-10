@@ -197,12 +197,13 @@ assert('draft render keeps footer title and page counter', draftHtml.includes('H
 assert('footer is injected outside print renderer body', draftStore.includes('addDraftFooterCss'))
 assert('footer contains title and page counter', /counter\(page\)/.test(draftStore))
 // figure-render cut: exportDraftPaperPdf's buildDraftPrintHtml call gained
-// `imageMode: 'file'` (Vivliostyle CLI converts this HTML from a scratch
-// tempdir — see draftPaperStore.mjs's comment above this call) — natural
-// turnover of the exact-source-text regex, not a change to what the
-// assertion actually proves (the PDF endpoint still calls the shared
+// `imageMode: 'file'` + `images: printImages` (Vivliostyle CLI converts
+// this HTML from a scratch tempdir, and needs the real PNGs copied in
+// alongside it — see draftPaperStore.mjs's comment above this call) —
+// natural turnover of the exact-source-text regex, not a change to what
+// the assertion actually proves (the PDF endpoint still calls the shared
 // builder rather than duplicating it).
-assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper, \{ versionType: normalizedVersionType, imageMode: 'file' \}\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
+assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper, \{ versionType: normalizedVersionType, imageMode: 'file', images: printImages \}\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
 assert('empty export uses Chinese reason', draftStore.includes('请先添加题组') || draftRoutes.includes('请先添加题组'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')

@@ -215,6 +215,12 @@ export function createExportImplementation({
   // export HTTP input) — 'web' (default) for the browser-rendered preview
   // route, 'file' only from exportPrintPdf's internal call below. See
   // print-renderer.mjs's `figureImageSrc` doc comment.
+  // figure-render cut: `images` is an out-parameter buildPrintHtml
+  // populates ONLY in imageMode:'file' (see print-renderer.mjs's
+  // figureImageSrc doc comment) — exportPrintHtml returns it so
+  // exportPrintPdf can copy the real PNGs into the SAME tempdir as the
+  // HTML before invoking Vivliostyle. Destructuring callers (sendHtml
+  // picks only `{ body, fileName }`) safely ignore the extra field.
   function exportPrintHtml(input, { imageMode = 'web' } = {}) {
     const title = requiredString(input.title, 'title')
     const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
@@ -223,11 +229,12 @@ export function createExportImplementation({
     const questionNumberStart = normalizedQuestionNumberStart(input)
     const blocks = Array.isArray(input.blocks) ? input.blocks : null
 
-    const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart, paperAssetsDir, imageMode })
+    const images = []
+    const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart, paperAssetsDir, imageMode, images })
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
     const fileName = `${title}-${versionLabel}-精排.html`
 
-    return { body: html, fileName }
+    return { body: html, fileName, images }
   }
 
   function exportPrintPdf(input) {
@@ -243,6 +250,14 @@ export function createExportImplementation({
 
     try {
       writeFileSync(htmlPath, htmlResult.body)
+      // figure-render cut: copy each referenced PNG into the SAME tempdir
+      // as paper.html, using the relative filename buildPrintHtml already
+      // baked into the <img src> — same-directory file:// resource
+      // loading works with headless Chromium; cross-directory does not
+      // (browser-QA finding, see print-renderer.mjs's figureImageSrc doc).
+      for (const image of htmlResult.images) {
+        copyFileSync(image.absoluteSourcePath, path.join(tempDir, image.relativeName))
+      }
       renderPrintPdf({ html: htmlResult.body, htmlPath, pdfPath, rootDir })
       const fileName = `${title}-${versionLabel}-精排.pdf`
       const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)

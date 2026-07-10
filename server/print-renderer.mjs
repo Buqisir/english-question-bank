@@ -119,8 +119,8 @@ const PRINT_FIGURE_PLACEHOLDER_TEXT = '〔表格：见原卷〕'
 /**
  * Resolves a figure's `<img>` src for the print/PDF/A4-preview HTML.
  *
- * TWO consumers share `buildPrintHtml`'s output and need DIFFERENT URL
- * schemes for the SAME figure file:
+ * TWO consumers share `buildPrintHtml`'s output and need DIFFERENT
+ * strategies for the SAME figure file:
  *   - 'web' (default): the browser-rendered surfaces (print-preview page,
  *     工作台 A4 预览, 草稿卷预览 — all served through the app's own origin,
  *     which already exposes `/paper-assets/**` as a static route). A
@@ -129,15 +129,24 @@ const PRINT_FIGURE_PLACEHOLDER_TEXT = '〔表格：见原卷〕'
  *     origin) or fetched directly.
  *   - 'file': the Vivliostyle-CLI PDF path (`exportPrintPdf` /
  *     `exportDraftPaperPdf`) writes this HTML to a scratch tempdir and
- *     converts it OFFLINE — a root-relative `/paper-assets/...` path would
- *     resolve against the tempdir's filesystem root (wrong / nonexistent).
- *     An absolute `file://` URL to the real on-disk PNG works regardless
- *     of whether a web server is even running.
+ *     converts it OFFLINE with headless Chromium. An absolute
+ *     `file://<real path>` URL does NOT work here — Chromium's default
+ *     file:// security policy blocks a file:// page from loading a
+ *     resource OUTSIDE its own directory (browser-QA finding: the PDF
+ *     rendered a broken-image icon, not the table). The fix is the
+ *     standard workaround: emit a bare RELATIVE filename as `src`, and
+ *     have the caller physically copy the real PNG into the SAME tempdir
+ *     as the HTML before invoking Vivliostyle (same-directory file://
+ *     resource loading is unrestricted) — see `images`, the out-parameter
+ *     this function populates with `{ relativeName, absoluteSourcePath }`
+ *     so the caller knows what to copy where.
  */
-function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode) {
+function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode, images) {
   const absolutePath = path.join(baseDir, 'figures', file)
   if (imageMode === 'file') {
-    return `file://${absolutePath}`
+    const relativeName = `fig-${images.length + 1}${path.extname(file) || '.png'}`
+    images.push({ relativeName, absoluteSourcePath: absolutePath })
+    return relativeName
   }
   const relativeFromRoot = path.relative(paperAssetsDir, absolutePath).split(path.sep).join('/')
   return `/paper-assets/${relativeFromRoot}`
@@ -155,12 +164,13 @@ function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode) {
  * — never rendered on this or any student/试卷 surface (plan.md rule 2 /
  * PA SW-4).
  */
-function renderPassageLine(line, groupType, figuresInfo, imageMode) {
+function renderPassageLine(line, groupType, figuresInfo, imageMode, images) {
   const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
   if (resolved?.kind === 'figure') {
     const src = figureImageSrc(
       { paperAssetsDir: figuresInfo.paperAssetsDir, baseDir: figuresInfo.baseDir, file: resolved.figure.file },
       imageMode,
+      images,
     )
     return `<figure class="print-figure"><img src="${escapeHtml(src)}" alt="${escapeHtml(resolved.figure.figureId)}"></figure>`
   }
@@ -196,10 +206,17 @@ export function buildPrintHtml({
   items,
   blocks,
   questionNumberStart,
-  // figure-render cut — both optional, both default to pre-cut behavior
+  // figure-render cut — all optional, all default to pre-cut behavior
   // (see the module header comment + renderPassageLine's doc comment).
+  // `images` is an OUT-PARAMETER (like docxRenderer.mjs's identically-
+  // named param) populated ONLY in imageMode:'file' — the caller must
+  // copy each entry's file into the SAME directory as the written HTML
+  // before invoking Vivliostyle (same-directory file:// resource loading
+  // is unrestricted; cross-directory is not — see figureImageSrc's doc
+  // comment for the browser-QA finding that drove this design).
   paperAssetsDir = null,
   imageMode = 'web',
+  images = [],
 }) {
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
@@ -275,7 +292,7 @@ export function buildPrintHtml({
 
         if (passage) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
-          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode)).join('')}</div>`
+          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images)).join('')}</div>`
         }
 
         if (isWritingGroupType(detail.groupType)) {
@@ -324,7 +341,7 @@ export function buildPrintHtml({
       let groupHtml = '<section class="question-group">'
       if (passage) {
         const figuresInfo = getFiguresInfo(detail.id)
-        groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode)).join('')}</div>`
+        groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images)).join('')}</div>`
       }
       if (isWritingGroupType(detail.groupType)) {
         groupHtml += renderWritingAnswerBox(detail)

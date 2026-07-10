@@ -56,7 +56,14 @@ export function buildPassageSegments(
     const resolved = resolveFigureMarker(paragraph, figures)
     if (resolved?.kind === 'figure') {
       flushTextBuffer()
-      segments.push({ kind: 'figure', flattenedText: paragraph, figure: resolved.figure })
+      // Browser QA finding: the marker itself is import-time locator
+      // metadata, not table content — showing "[表: fig-...]" verbatim in
+      // the flattened-text sidecar (even though it's the ONE surface that
+      // keeps flattened text, PO-2) still reads as a leaked internal
+      // token to the teacher. Strip the marker + immediately-following
+      // whitespace so the double-store text is clean table content only.
+      const flattenedText = paragraph.trim().slice(resolved.figure.placeholderMarker.length).trimStart()
+      segments.push({ kind: 'figure', flattenedText, figure: resolved.figure })
     } else if (resolved?.kind === 'placeholder') {
       flushTextBuffer()
       segments.push({ kind: 'placeholder', flattenedText: paragraph })
