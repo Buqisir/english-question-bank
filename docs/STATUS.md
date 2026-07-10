@@ -23,6 +23,14 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
 
 ## 主线焦点
 
+- 2026-07-10：**draft-depassage-letter 收官**（merge 720f82a，CR APPROVE
+  0 MF + PA-lite 降档获认可，main CI 绿）：草稿卷导出五面去 A-D 篇章
+  字母，换全卷连续大题头「n、题型（每题 N 分）」；小题号连续系现状
+  零改动。挂账（cr.md SW）：DOCX 大题头缺提交级断言。**owner QA 待做**。
+  同日并行：ui-p1-shell / ui-p1-panels 两刀施工中（审计 P1×11）；
+  lecture-rail-scroll-fix 已 triage 升级（rail 不滚=真回归 + owner 新
+  需求：七选五/完形点空显解析，串行排队）；审计 #6③/#9 owner 拍板
+  闭环入 DESIGN.md（892b606）。
 - 2026-07-10：**similar-entrypoints（E3）收官**（merge 5de239e，CR APPROVE
   0 MF，主代理复核 verify:all 72 绿+tsc+浏览器 QA 四类真点击/写作隐藏/
   返回不回弹，main CI 绿）：详情页+concierge「配相似」深链入口
