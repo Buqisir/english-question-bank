@@ -24,7 +24,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createTeachingFacetIndex } from '../server/search/teachingFacets.mjs'
+import { createTeachingFacetIndex, analysisConfigs } from '../server/search/teachingFacets.mjs'
 import {
   createSimilarQuestionsStore,
   createSimilarQuestionsRoutes,
@@ -359,15 +359,19 @@ assert(
   readmeSource.includes('verify-similar-questions.mjs'),
 )
 
-// ─── i16a parity: teaching-facets endpoint behavior must stay untouched ────
+// ─── i16a parity: teaching-facets export used read-only, index behavior
+// untouched (real behavioral check, not source-regex: import the real
+// exported analysisConfigs and the real /api/teaching-facets route text). ──
+assert(
+  'analysisConfigs (real export) still has exactly the 4 known groupTypes',
+  analysisConfigs.length === 4 &&
+    ['reading', 'sevenChoices', 'cloze', 'grammarFill'].every((t) => analysisConfigs.some((c) => c.groupType === t)),
+  JSON.stringify(analysisConfigs.map((c) => c.groupType)),
+)
 const teachingFacetsSource = read('server/search/teachingFacets.mjs')
 assert(
-  'teachingFacets.mjs still has exactly 4 analysisConfigs entries (untouched shape)',
-  (teachingFacetsSource.match(/groupType:\s*'(grammarFill|sevenChoices|cloze|reading)'/g) || []).length === 4,
-)
-assert(
   'teachingFacets.mjs GET /api/teaching-facets route text is unchanged',
-  teachingFacetsSource.includes("defineRoute('GET', /^\\/api\\/teaching-facets\\$/"),
+  teachingFacetsSource.includes("defineRoute('GET', /^\\/api\\/teaching-facets$/"),
 )
 
 db.close()

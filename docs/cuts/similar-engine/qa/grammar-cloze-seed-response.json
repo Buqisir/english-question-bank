@@ -1,0 +1,137 @@
+{
+  "seedProfile": {
+    "groupType": "grammar_cloze",
+    "facets": [
+      {
+        "key": "facetKey",
+        "values": [
+          "grammar-fill.given.verb.non-finite"
+        ]
+      },
+      {
+        "key": "blankType",
+        "values": [
+          "given"
+        ]
+      }
+    ],
+    "topicLabels": [
+      "人与自然-环境保护-人类生存与环境的关系"
+    ]
+  },
+  "results": [
+    {
+      "groupId": "group-2020-bing-grammar-fill",
+      "paperId": "paper-2020-bing",
+      "title": "语法填空",
+      "sourceLabel": "2020 全国丙卷 2020年全国丙卷",
+      "score": 179900,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "同考点密度 1/6"
+        },
+        {
+          "kind": "secondary",
+          "label": "同为有提示词"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-2020-bing-067",
+        "q-2020-bing-069"
+      ]
+    },
+    {
+      "groupId": "group-2024-ii-grammar-fill",
+      "paperId": "paper-2024-ii",
+      "title": "语法填空",
+      "sourceLabel": "2024 全国新课标Ⅱ 2024年新课标Ⅱ卷",
+      "score": 149900,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "同考点密度 1/7"
+        },
+        {
+          "kind": "secondary",
+          "label": "同为有提示词"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-2024-ii-060",
+        "q-2024-ii-063",
+        "q-2024-ii-064"
+      ]
+    },
+    {
+      "groupId": "group-2023-i-grammar-fill",
+      "paperId": "paper-2023-i",
+      "title": "语法填空",
+      "sourceLabel": "2023 全国新课标Ⅰ 2023年新课标Ⅰ卷",
+      "score": 149900,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "同考点密度 1/7"
+        },
+        {
+          "kind": "secondary",
+          "label": "同为有提示词"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-2023-i-057",
+        "q-2023-i-059",
+        "q-2023-i-061",
+        "q-2023-i-065"
+      ]
+    },
+    {
+      "groupId": "group-2023-yi-grammar-fill",
+      "paperId": "paper-2023-yi",
+      "title": "语法填空",
+      "sourceLabel": "2023 全国乙卷 2023年全国乙卷",
+      "score": 149900,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "同考点密度 1/7"
+        },
+        {
+          "kind": "secondary",
+          "label": "同为有提示词"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-2023-yi-062",
+        "q-2023-yi-066",
+        "q-2023-yi-068"
+      ]
+    },
+    {
+      "groupId": "group-zj-2021-jan-grammar-fill",
+      "paperId": "paper-zj-2021-jan",
+      "title": "语法填空",
+      "sourceLabel": "2021 浙江 2021年1月浙江卷",
+      "score": 149900,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "同考点密度 1/7"
+        },
+        {
+          "kind": "secondary",
+          "label": "同为有提示词"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-zj-2021-jan-062",
+        "q-zj-2021-jan-064"
+      ]
+    }
+  ],
+  "poolStats": {
+    "totalInPool": 32,
+    "returned": 5
+  }
+}

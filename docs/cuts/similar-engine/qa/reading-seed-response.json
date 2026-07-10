@@ -1,0 +1,155 @@
+{
+  "seedProfile": {
+    "groupType": "reading",
+    "facets": [
+      {
+        "key": "skill",
+        "values": [
+          "inference"
+        ]
+      },
+      {
+        "key": "wordCount",
+        "values": [
+          289
+        ]
+      },
+      {
+        "key": "discourseType",
+        "values": [
+          "reading"
+        ]
+      }
+    ],
+    "topicLabels": [
+      "人与社会-历史、社会与文化-重大历史事件",
+      "人与社会-科学与技术-科技发展"
+    ]
+  },
+  "results": [
+    {
+      "groupId": "group-2023-yi-reading-c",
+      "paperId": "paper-2023-yi",
+      "title": "Reading C",
+      "sourceLabel": "2023 全国乙卷 2023年全国乙卷",
+      "score": 509920,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "小题题型密度 1/2"
+        },
+        {
+          "kind": "position-proxy",
+          "label": "篇位相当，词数相近(±0)，体裁一致"
+        },
+        {
+          "kind": "topic-diff",
+          "label": "话题不同，可拓展语境"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-2023-yi-031"
+      ]
+    },
+    {
+      "groupId": "group-2021-i-reading-a",
+      "paperId": "paper-2021-i",
+      "title": "Reading A",
+      "sourceLabel": "2021 全国新课标Ⅰ 2021年新课标Ⅰ卷",
+      "score": 509920,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "小题题型密度 1/2"
+        },
+        {
+          "kind": "position-proxy",
+          "label": "篇位相当，词数相近(±6)，体裁一致"
+        },
+        {
+          "kind": "topic-diff",
+          "label": "话题不同，可拓展语境"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-2021-i-021"
+      ]
+    },
+    {
+      "groupId": "group-zj-2021-jun-reading-a",
+      "paperId": "paper-zj-2021-jun",
+      "title": "Reading A",
+      "sourceLabel": "2021 浙江 2021年6月浙江卷",
+      "score": 509920,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "小题题型密度 1/2"
+        },
+        {
+          "kind": "position-proxy",
+          "label": "篇位相当，词数相近(±1)，体裁一致"
+        },
+        {
+          "kind": "topic-diff",
+          "label": "话题不同，可拓展语境"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-zj-2021-jun-023"
+      ]
+    },
+    {
+      "groupId": "group-zj-2020-jan-reading-a",
+      "paperId": "paper-zj-2020-jan",
+      "title": "Reading A",
+      "sourceLabel": "2020 浙江 2020年1月浙江卷",
+      "score": 509920,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "小题题型密度 1/2"
+        },
+        {
+          "kind": "position-proxy",
+          "label": "篇位相当，词数相近(±5)，体裁一致"
+        },
+        {
+          "kind": "topic-diff",
+          "label": "话题不同，可拓展语境"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-zj-2020-jan-023"
+      ]
+    },
+    {
+      "groupId": "group-zj-2020-jul-reading-b",
+      "paperId": "paper-zj-2020-jul",
+      "title": "Reading B",
+      "sourceLabel": "2020 浙江 2020年7月浙江卷",
+      "score": 509820,
+      "reasons": [
+        {
+          "kind": "facet-density",
+          "label": "小题题型密度 1/2"
+        },
+        {
+          "kind": "position-proxy",
+          "label": "篇位相当，词数相近(±8)，体裁一致"
+        },
+        {
+          "kind": "topic-diff",
+          "label": "话题不同，可拓展语境"
+        }
+      ],
+      "matchedQuestionIds": [
+        "q-zj-2020-jul-027"
+      ]
+    }
+  ],
+  "poolStats": {
+    "totalInPool": 127,
+    "returned": 5
+  }
+}
