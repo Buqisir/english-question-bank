@@ -28,9 +28,10 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
   相似题引擎 API 落地（零 AI 确定性配方打分，复用 i16a）；草稿卷
   student_label 种子字段（懒 ALTER 迁移，卷面硬边界双层封锁+CR SW 直收
   扩 backstop，owner QA 过 2026-07-10）。CI 插曲：新 verify 缺 off-repo fixture 守卫致一次真红，
-  已补 exit-2 SKIP 惯例（5ee053b）。E2 讲评栏 UI 刀 plan 待写（吃 CR 两条
-  硬交接：体裁 chip 恒亮空洞勿渲染、matchedQuestionIds 可空）。
-  program：docs/cuts/similar-questions/（七问 grilling 全落锤，原型入档）。（merge 066c5e2，CR APPROVE 0 MF，
+  已补 exit-2 SKIP 惯例（5ee053b）。E2 plan 已就位（e2e38ad，吸收 CR 三条
+  硬交接），owner 拍板开刀施工中。
+  program：docs/cuts/similar-questions/（七问 grilling 全落锤，原型入档）。
+- 2026-07-09：**scissor-select-feel 收官**（merge 066c5e2，CR APPROVE 0 MF，
   worktree 复核 177+70 绿）：剪刀线零占位（16px 标准节奏回归+静息减墨
   0.18）、hover=通宽墨·淡选区罩（teal-600 2%，owner 原型四裁点拍板，
   prototype.html 入档）、操作簇 sticky 跟随。**owner QA 过**（2026-07-09，
