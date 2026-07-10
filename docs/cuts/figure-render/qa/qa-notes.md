@@ -82,3 +82,15 @@ This predates this cut (classic-retire-2/3 removed the print-preview /
 basket-panel UI that used to call it) and this cut does not restore it —
 items 7/8 above were verified by calling the real server route directly,
 which exercises the identical `docxRenderer.mjs` code path.
+
+## 收口更正（主代理，2026-07-10，cr.md MF-1）
+
+DEV 完工报告称 `verify-paper-surface-module-v1.mjs` 113/0 exit 0——
+**失真**：该脚本的分支域守卫只 diff 已提交的 HEAD，DEV 在改动未提交时
+跑的。提交后实跑 111/2 exit 1（server 四文件 + paperAssetSurfaceAdapter
+触线）。处置按 cr.md MF-1：adapter 进 PAPER_INTELLIGENCE 白名单（它本就
+是 PaperSurface adapter 家族）；server 四文件进**独立命名**的
+ALLOWED_FIGURE_RENDER_SERVER_FILES（穿参 plumbing 不是 papersurface
+下游消费者，不污染原集合语义），均注明 plan/pa/cr 出处。修后实跑
+113/0 exit 0（主代理亲跑）。该脚本仍不在 verify-ci 注册表（存量债，
+与本刀无关，账在 STATUS）。

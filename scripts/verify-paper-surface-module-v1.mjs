@@ -191,6 +191,12 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
   'app/src/features/paper-intelligence/writingPageModel.d.ts',
   'app/src/features/paper-intelligence/writingPageModel.d.mts',
   'app/src/features/paper-intelligence/writingPaperViewAdapter.ts',
+  // figure-render (docs/cuts/figure-render/plan.md, PA-reviewed pa.md +
+  // cr.md MF-1 disposition): the paper-asset adapter gained the optional
+  // figures input that lets PaperSurface swap a marker-initial paragraph
+  // for the real figure — it sits alongside the other PaperSurface
+  // adapters this set already names.
+  'app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts',
 ])
 
 // 刀⑤ render-fidelity Chunk B (PA-reviewed docs/cuts/render-fidelity/pa.md,
@@ -203,6 +209,20 @@ const ALLOWED_DOWNSTREAM_PAPER_INTELLIGENCE_FILES = new Set([
 const ALLOWED_DOWNSTREAM_SERVER_FILES = new Set([
   'server/print-renderer.mjs',
   'server/exports/docxRenderer.mjs',
+])
+
+// figure-render (docs/cuts/figure-render/plan.md, PA-reviewed pa.md; cr.md
+// MF-1 disposition, 2026-07-10): server-side figure embedding needs
+// parameter plumbing through these files (paperAssetsDir / imageMode /
+// images threading) plus the new manifest-lookup helper. They are NOT
+// consumers of shared/papersurface tokens — hence a separately-named set
+// instead of polluting ALLOWED_DOWNSTREAM_SERVER_FILES, so each exemption
+// stays truthfully attributed and independently auditable.
+const ALLOWED_FIGURE_RENDER_SERVER_FILES = new Set([
+  'server/api.mjs',
+  'server/draft-paper/draftPaperStore.mjs',
+  'server/exports/exportImplementation.mjs',
+  'server/figures/paperFigures.mjs',
 ])
 
 const FORBIDDEN_PATHS = [
@@ -225,7 +245,10 @@ for (const re of FORBIDDEN_PATHS) {
     ) {
       return false
     }
-    if (re.source === '^server\\/' && ALLOWED_DOWNSTREAM_SERVER_FILES.has(p)) {
+    if (
+      re.source === '^server\\/' &&
+      (ALLOWED_DOWNSTREAM_SERVER_FILES.has(p) || ALLOWED_FIGURE_RENDER_SERVER_FILES.has(p))
+    ) {
       return false
     }
     return re.test(p)
