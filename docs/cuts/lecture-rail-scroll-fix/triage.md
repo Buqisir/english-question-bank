@@ -1,25 +1,30 @@
-# lecture-rail-scroll-fix — 审计 P1#2 复测定性（2026-07-10，主代理亲测）
+# lecture-rail-scroll-fix — 审计 P1#2 复测定性 + 需求扩充（2026-07-10）
 
 审计条目：`.impeccable/critique/2026-07-10T05-30-00Z__full-project.md` L79
 （讲评导航失灵，审计自标「疑似回归，需复测定性」）。
 
-## 定性结论
+## 定性结论（主代理亲测，main figure-render 合并后）
 
-- **① rail 点击不滚动 = 真缺陷，已复现**：main（figure-render 合并后）
-  本地 dev，`?view=paper-browse&paperId=paper-2026-i&lecture=1`，点
-  rail「36-40」→ rail 高亮切换、**卷面不滚动**（仍停 Reading A 顶部）。
-  挑题态/讲评态审计称同样复现。修复面：PaperBrowsePage.tsx 的 rail
-  锚点滚动目标容器（audit 刀法：滚动目标容器错了）。
-- **② 七选五点空面板空态 = 审计误报**：STATUS 2026-07-09 事实澄清
-  在案——卷面七选五的空为纯 span 不可点是**设计**，选题入口=深链+
-  面板内开合。不立修。但审计同条附带的「挑题态加入草稿卷悬浮钮
-  入侵讲评态」是真问题，与 ui-p1-panels #3 悬浮层条目同族，若
-  panels 刀未覆盖则归本刀。
+- **① rail 点击不滚动 = 真缺陷，已复现**：本地 dev，
+  `?view=paper-browse&paperId=paper-2026-i&lecture=1`，点 rail「36-40」
+  → rail 高亮切换、**卷面不滚动**（仍停 Reading A 顶部）。修复面：
+  PaperBrowsePage.tsx 的 rail 锚点滚动目标容器。
+- **② 点空无反应 → 需求拍板（owner 2026-07-10 会话原话：「七选五
+  点击空格还是要显示解析。完形填空也是。」）**：旧「空不可点是设计」
+  澄清（STATUS 2026-07-09）**作废**。新需求：讲评态下，卷面上
+  **七选五与完形**的空可点，点空 → 右栏讲评面板显示该空/该题解析
+  （等价于点题联动的空粒度版）。实现要点：空目前是纯 span 无
+  stem——要给空挂 questionId 映射与点击目标（PaperSurface 层受控
+  改动或外层事件委托，plan 时定切口）；语法填空的 `__NN__` 点空
+  不着是另一桩数据形状旧账（STATUS 在案），是否同刀顺收 plan 时评估。
 - **③ scrollspy 高亮漂移**（视口 36-40 高亮 56-65）：待 ① 修复后
-  复测——很可能是同一滚动容器错位的副产物。
+  复测——可能是同一滚动容器错位的副产物。
+- 审计同条附带「挑题态加入草稿卷悬浮钮入侵讲评态」：若 ui-p1-panels
+  #3 未覆盖则归本刀。
 
 ## 排队
 
-- 修复面 PaperBrowsePage.tsx（+可能 paperBrowsePage.css）与
-  ui-p1-panels 刀的 css 所有权冲突 → **串行于 ui-p1-panels 收口后**，
-  small/medium 视诊断深度。
+- 修复面 PaperBrowsePage.tsx（+可能 paperBrowsePage.css、PaperSurface
+  受控改动）与 ui-p1-panels 刀 css 所有权冲突 → **串行于 ui-p1-panels
+  收口后**。因 ② 升级为需求（可能碰 PaperSurface 契约面），刀级
+  medium 起步，plan 时判 PA 档位。
