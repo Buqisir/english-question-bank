@@ -126,6 +126,10 @@ export type DraftPaperSummary = {
   createdAt: string
   updatedAt: string
   lastPrintedAt: string | null
+  // draft-student-field (E4): optional owner-facing "whose one-on-one session"
+  // metadata. Free text, nullable, never renders onto the paper face (print/DOCX
+  // never read this field — see docs/cuts/draft-student-field/plan.md).
+  studentLabel: string | null
 }
 
 export type DraftPaperItem = {
@@ -173,6 +177,9 @@ export type MySpaceArtifact = {
   artifactType: 'student-paper'
   sourceDraftPaperId: string
   sourceDraftTitle: string
+  // draft-student-field (E4): live-joined from the source draft's studentLabel;
+  // empty string once the source draft is gone or was never labeled.
+  sourceDraftStudentLabel: string
   sourceDraftExists: boolean
   pageCount: number
   generatedAt: string

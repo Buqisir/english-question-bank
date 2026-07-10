@@ -84,6 +84,7 @@ const registry = {
   'scripts/verify-section-chrome-on-solo-surface.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
   'scripts/verify-my-space-shelf.mjs',
+  'scripts/verify-draft-student-field.mjs',
   ],
 }
 

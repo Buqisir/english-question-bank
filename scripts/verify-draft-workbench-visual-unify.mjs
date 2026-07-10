@@ -88,7 +88,7 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // convention App.css's `.primary-button` hardcodes (`color: #ffffff`).
 // There is no DESIGN.md token for "foreground-on-accent"; App.css itself
 // treats it as a neutral utility value, not a palette color choice.
-const WHITELISTED_LINES = new Set([138, 152, 338])
+const WHITELISTED_LINES = new Set([149, 163, 349])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

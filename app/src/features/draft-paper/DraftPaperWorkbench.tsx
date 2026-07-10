@@ -81,6 +81,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
+  const [studentLabelDraft, setStudentLabelDraft] = useState('')
   const [loadStatus, setLoadStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
   const [loadError, setLoadError] = useState('')
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
@@ -137,6 +138,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       }
       setDraftPaper(next)
       setTitleDraft(next.title)
+      setStudentLabelDraft(next.studentLabel || '')
       setVersionType('student')
       setLoadStatus('loaded')
       loadRecentDrafts()
@@ -261,6 +263,27 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         setSaveError(describeError('保存标题', error))
       }
     }, 450)
+  }
+
+  // draft-student-field (E4): blur-save (not debounce-on-keystroke like the
+  // title field above) — a name is typically typed once and left, so there is
+  // no need for the extra network chatter a 450ms debounce would add here.
+  async function saveStudentLabel(nextValue: string) {
+    if (!draftPaper) return
+    const trimmed = nextValue.trim()
+    if ((draftPaper.studentLabel || '') === trimmed) return
+    setSaveStatus('saving')
+    setSaveError('')
+    try {
+      const next = await updateDraftPaper(draftPaper.id, { studentLabel: trimmed })
+      setDraftPaper(next)
+      setStudentLabelDraft(next.studentLabel || '')
+      setSaveStatus('saved')
+      onDraftChanged?.()
+    } catch (error) {
+      setSaveStatus('error')
+      setSaveError(describeError('保存学生', error))
+    }
   }
 
   function moveItem(itemId: string, direction: -1 | 1) {
@@ -444,6 +467,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             <span>草稿卷标题</span>
             <input value={titleDraft} onChange={(event) => updateTitle(event.target.value)} />
           </label>
+          <label className="draft-student-field">
+            <span>学生（可选）</span>
+            <input
+              value={studentLabelDraft}
+              placeholder="未填写"
+              onChange={(event) => setStudentLabelDraft(event.target.value)}
+              onBlur={(event) => void saveStudentLabel(event.target.value)}
+            />
+          </label>
           <span className={`draft-save-status ${saveStatus}`}>
             {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
           </span>
@@ -462,6 +494,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 void fetchDraftPaper(id).then((next) => {
                   setDraftPaper(next)
                   setTitleDraft(next.title)
+                  setStudentLabelDraft(next.studentLabel || '')
                 })
               }}
             >

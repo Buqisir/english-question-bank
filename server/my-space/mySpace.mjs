@@ -94,12 +94,32 @@ function rowToArtifact(row) {
     artifactType: row.artifact_type,
     sourceDraftPaperId: row.source_draft_paper_id,
     sourceDraftTitle: row.source_draft_title || '',
+    // draft-student-field (E4): live-joined from the source draft (not
+    // denormalized onto the artifact row) — same pattern as sourceDraftTitle
+    // above. Null once the source draft is gone, matching sourceDraftExists.
+    sourceDraftStudentLabel: row.source_draft_student_label || '',
     sourceDraftExists: Number(row.source_draft_exists || 0) === 1,
     pageCount: Number(row.page_count || 0),
     generatedAt: row.generated_at,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   }
+}
+
+// draft-student-field (E4): draft_papers.student_label is added lazily by
+// server/draft-paper/draftPaperStore.mjs's own idempotent guard (this module
+// has no writable-connection guarantee here — my-space routes mostly open
+// readOnly — and no dependency on that store, so it does not attempt the
+// ALTER itself). Until some draft-paper write has run at least once against
+// this database file, the column may not exist yet; select a SQL NULL in its
+// place rather than referencing a possibly-missing column. Once the column is
+// added (by any draft-paper create/update, anywhere in the process), this
+// check goes true and every my-space chip lookup after that sees real values —
+// no caching here, since callers only need behavioral idempotency, not a hot
+// path.
+function studentLabelSelectExpr(db) {
+  const hasColumn = db.prepare('PRAGMA table_info(draft_papers)').all().some((row) => row.name === 'student_label')
+  return hasColumn ? 'dp.student_label' : 'NULL'
 }
 
 export function listMySpace(db, userId, { folderId = null } = {}) {
@@ -137,6 +157,7 @@ export function listMySpace(db, userId, { folderId = null } = {}) {
       SELECT
         a.*,
         dp.title AS source_draft_title,
+        ${studentLabelSelectExpr(db)} AS source_draft_student_label,
         CASE WHEN dp.id IS NULL THEN 0 ELSE 1 END AS source_draft_exists
       FROM my_space_artifacts a
       LEFT JOIN draft_papers dp ON dp.id = a.source_draft_paper_id AND dp.status = 'active' AND dp.user_id = a.user_id
@@ -250,6 +271,7 @@ export function saveMySpaceArtifact(db, userId, {
         SELECT
           a.*,
           dp.title AS source_draft_title,
+          ${studentLabelSelectExpr(db)} AS source_draft_student_label,
           CASE WHEN dp.id IS NULL THEN 0 ELSE 1 END AS source_draft_exists
         FROM my_space_artifacts a
         LEFT JOIN draft_papers dp ON dp.id = a.source_draft_paper_id AND dp.status = 'active' AND dp.user_id = a.user_id

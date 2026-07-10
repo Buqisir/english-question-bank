@@ -53,6 +53,45 @@ export function createDraftPaperStore({
 }) {
   const recentDraftPdfExports = new Map()
 
+  // draft-student-field (E4): draft_papers.student_label is additive, nullable,
+  // free-text metadata (one-on-one owner attribution — no student entity, no FK).
+  // The shared schema-evolution mechanism for the user database lives in
+  // server/api.mjs's ensureUserDatabaseShape, which this cut's Forbidden list
+  // (mounting boundary shared with a parallel cut) does not permit touching, so
+  // this store carries its own idempotent, PRAGMA-guarded ALTER instead — same
+  // pattern (existence check before ALTER), just scoped to this one column and
+  // this one store. Guarded by a module-level flag so the PRAGMA check only runs
+  // once per process after the column is confirmed present.
+  let studentLabelColumnReady = false
+  function ensureStudentLabelColumn(userDb) {
+    if (studentLabelColumnReady) return
+    const hasStudentLabelColumn = (db) =>
+      db.prepare('PRAGMA table_info(draft_papers)').all().some((row) => row.name === 'student_label')
+    if (hasStudentLabelColumn(userDb)) {
+      studentLabelColumnReady = true
+      return
+    }
+    try {
+      userDb.exec('ALTER TABLE draft_papers ADD COLUMN student_label TEXT')
+    } catch (error) {
+      // userDb may be a read-only connection (routes/list open readOnly for GET
+      // paths) — ALTER requires a writable one. Fall back to a short-lived
+      // writable connection just for the migration; the read-only caller's own
+      // SELECT (which runs right after this call returns) sees the new column
+      // because it is the same underlying sqlite file.
+      if (!/readonly|read-only/i.test(String(error?.message || error))) throw error
+      const migrationDb = openUserDatabase({ readOnly: false })
+      try {
+        if (!hasStudentLabelColumn(migrationDb)) {
+          migrationDb.exec('ALTER TABLE draft_papers ADD COLUMN student_label TEXT')
+        }
+      } finally {
+        migrationDb.close()
+      }
+    }
+    studentLabelColumnReady = true
+  }
+
   function getCurrentDraftPaperRow(userDb, userId) {
     requireUserId(userId)
     return userDb
@@ -75,8 +114,13 @@ export function createDraftPaperStore({
     return `${month}${day} 英语草稿卷`
   }
 
+  // student_label is deliberately not a create-time parameter here (production
+  // never sets it at creation — the workbench's optional "学生" field is set via
+  // updateDraftPaper after the draft already exists, same as the title field's
+  // own auto-save). New rows leave it column-default NULL.
   function createDraftPaper({ userDb, bankDb }, userId, title = makeDraftPaperTitle()) {
     requireUserId(userId)
+    ensureStudentLabelColumn(userDb)
     const id = `draft-paper-${randomUUID()}`
     userDb.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1 AND user_id = ?').run(userId)
     userDb.prepare(
@@ -279,6 +323,11 @@ export function createDraftPaperStore({
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       lastPrintedAt: row.last_printed_at || null,
+      // draft-student-field (E4): owner-facing "whose one-on-one session is this
+      // draft for" metadata. Free text, nullable, never joins into print/export
+      // (buildDraftPaperExportInput below never reads it) — see plan.md's hard
+      // boundary: this field must never render onto the paper face.
+      studentLabel: row.student_label || null,
     }
   }
 
@@ -343,10 +392,11 @@ export function createDraftPaperStore({
 
   function getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml = true, versionType = 'student' } = {}) {
     requireUserId(userId)
+    ensureStudentLabelColumn(userDb)
     const row = userDb
       .prepare(
         `
-        SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
+        SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at, student_label
         FROM draft_papers
         WHERE id = ? AND user_id = ? AND status = 'active'
         `,
@@ -374,10 +424,11 @@ export function createDraftPaperStore({
     const userDb = openUserDatabase({ readOnly: true })
     const bankDb = openDatabase()
     try {
+      ensureStudentLabelColumn(userDb)
       const rows = userDb
         .prepare(
           `
-          SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at
+          SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at, student_label
           FROM draft_papers
           WHERE status = 'active' AND user_id = ?
           ORDER BY updated_at DESC, created_at DESC
@@ -513,6 +564,13 @@ export function createDraftPaperStore({
         if (Object.prototype.hasOwnProperty.call(input, 'title')) {
           const title = String(input.title || '').trim() || makeDraftPaperTitle()
           userDb.prepare('UPDATE draft_papers SET title = ?, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(title, draftPaperId, userId)
+        }
+        // draft-student-field (E4): optional, free text, blur-save from the
+        // workbench — empty string normalizes to NULL (space-only names must not
+        // stick around and stringify as a chip).
+        if (Object.prototype.hasOwnProperty.call(input, 'studentLabel')) {
+          const studentLabel = String(input.studentLabel || '').trim() || null
+          userDb.prepare('UPDATE draft_papers SET student_label = ?, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(studentLabel, draftPaperId, userId)
         }
         if (Array.isArray(input.items)) {
           const knownItems = new Set(

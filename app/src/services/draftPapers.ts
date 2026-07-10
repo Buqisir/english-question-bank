@@ -76,7 +76,7 @@ export async function migrateAssemblyBasketToDraftPaper(groupIds: string[]): Pro
 
 export async function updateDraftPaper(
   id: string,
-  input: Partial<Pick<DraftPaper, 'title'>> & {
+  input: Partial<Pick<DraftPaper, 'title' | 'studentLabel'>> & {
     items?: Array<{ id: string; pageBreakBefore: boolean }>
   },
 ): Promise<DraftPaper> {

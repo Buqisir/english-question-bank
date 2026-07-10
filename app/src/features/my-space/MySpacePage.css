@@ -148,6 +148,19 @@
   margin: 0;
 }
 
+/* draft-student-field (E4): attribution metadata, not emphasis — neutral
+   border-only chip, never the Green-Pen primary wash used for selection
+   state elsewhere on this page. */
+.my-space-student-chip {
+  background: var(--eqb-color-desk);
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 999px;
+  color: var(--eqb-color-text-muted);
+  font-size: 11px;
+  padding: 2px 9px;
+  width: fit-content;
+}
+
 .my-space-card-actions {
   display: flex;
   flex-wrap: wrap;

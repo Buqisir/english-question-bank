@@ -188,6 +188,9 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                 <p className="my-space-card-meta">
                   {formatDate(artifact.generatedAt)} · {artifact.pageCount || 1} 页 · {sourceLabel(artifact)}
                 </p>
+                {artifact.sourceDraftStudentLabel && (
+                  <span className="my-space-student-chip">{artifact.sourceDraftStudentLabel}</span>
+                )}
                 <div className="my-space-card-actions">
                   <button
                     type="button"

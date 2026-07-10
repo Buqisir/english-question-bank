@@ -70,12 +70,19 @@
   gap: 4px;
 }
 
-.draft-title-field span {
+.draft-title-field span,
+.draft-student-field span {
   color: var(--muted);
   font-size: 12px;
 }
 
+.draft-student-field {
+  display: grid;
+  gap: 4px;
+}
+
 .draft-title-field input,
+.draft-student-field input,
 .draft-recent-select {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -84,6 +91,10 @@
   font: inherit;
   min-height: 36px;
   padding: 6px 9px;
+}
+
+.draft-student-field input {
+  width: 120px;
 }
 
 .draft-recent-select-field {
