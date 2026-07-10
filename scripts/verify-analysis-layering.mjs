@@ -142,11 +142,21 @@ assert(
   !/<AnalysisDisclosure[^>]*>[\s\S]{0,600}verify-list/.test(detailView),
 )
 
-// ------------------------------------------------------------------ 3. zero-useState guardrail re-asserted here too
+// ------------------------------------------------------------------ 3. useState guardrail re-asserted here too
 
+// figure-render cut (fig-token P0): the canonical version of this
+// guardrail (scripts/verify-classic-retire-2.mjs) now allows exactly ONE
+// internal useState — the detail-page figure manifest fetch (see that
+// script's comment for the full "why" and the App.tsx-out-of-scope
+// reasoning). Mirrored here so the two guardrails stay in sync. The old
+// regex (`\buseState\s*\(`) never matched a generic-typed call
+// (`useState<T>(...)`), so it was accidentally still "passing" without
+// re-asserting anything — fixed to count all useState calls.
+const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
 assert(
-  'QuestionGroupDetailView still has zero internal useState (guardrail not relaxed by this cut)',
-  !/\buseState\s*\(/.test(detailView),
+  'QuestionGroupDetailView still has at most the one figure-render internal useState (guardrail not further relaxed by this cut)',
+  useStateCallCount === 1,
+  `found ${useStateCallCount} useState call(s)`,
 )
 
 if (failed > 0) {
