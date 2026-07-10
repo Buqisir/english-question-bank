@@ -23,13 +23,18 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
-- 2026-07-10：**similar-rail（E2）收官**（merge cb35cd3，CR APPROVE 0 MF，
-  主代理复核 184+72 绿）：讲评栏「配相似」CTA + 右栏原地结果态 + 勾选
-  乐观入草稿卷，主打功能一条龙首次可用。CR 亮点：SW-1 用 label 黑名单
-  优于 plan 的 kind 白名单（裁定入 cr.md）。SW 挂账：新 reason kind 默认
-  渲染、FE 配方文案表可漂移、DEV 未打 checkpoint（流程提醒）。owner QA
-  待做。下一步：E3 次入口+concierge 换引擎；fig-token P0 / 解析字段
-  roadmap 待 owner 拍板。
+- 2026-07-10：**similar-rail（E2）收官 + 生产部署 5caf263**（merge cb35cd3，
+  CR APPROVE 0 MF，主代理复核 184+72 绿，**owner QA 过**含三笔实测 polish：
+  讲评栏底部 72px chip 净空、CTA 钮居左文案随右）。主打功能一条龙上线：
+  讲评态点题→配相似→勾选→乐观入草稿卷。**生产已部署**（owner 拍板）：
+  pull→eqb-build→restart 分步；eqb+caddy active、health 200、eqbank.cc
+  200、生产实跑 169/169 + 相似引擎 29/29 绿。SW 挂账：新 reason kind
+  默认渲染、FE 配方文案表可漂移。下一步：E3 次入口+concierge 换引擎；
+  fig-token P0（审计唯一 P0，卷面直出内部 token）/ 解析字段 roadmap
+  （难度补标/干扰项机制/写作双 facet/体裁补真值）**均待 owner 拍板**。
+  全站 UI 审计报告：.impeccable/critique/2026-07-10T05-30-00Z__full-project.md
+  （20/40，P0×1 P1×15 P2×18）。本地 dev QA 账号 qa-local-owner（密码本地
+  已重置，见会话记录；生产 .env.qa 未动）。
   （merge 3871421/efcc40e，双 CR APPROVE 0 MF，主代理复核 29+20+73 绿）：
   相似题引擎 API 落地（零 AI 确定性配方打分，复用 i16a）；草稿卷
   student_label 种子字段（懒 ALTER 迁移，卷面硬边界双层封锁+CR SW 直收
