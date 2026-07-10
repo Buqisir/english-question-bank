@@ -30,15 +30,14 @@ const SUBTYPE_LABELS: Record<string, string> = {
   cause_effect_shift: '因果错位',
 }
 
-/** Humanize an unrecognized snake_case token so nothing renders raw. */
-function humanizeUnknown(value: string): string {
-  return value.trim().replace(/_/g, ' ')
-}
-
+/* cr.md SW-1: an unshipped future enum value must never surface English on
+ * a teacher-facing card — fall back to a generic Chinese label instead of a
+ * de-underscored raw token. The raw value stays in the title attribute at
+ * the call site for owner debugging. */
 export function distractorCategoryLabel(category: string): string {
-  return CATEGORY_LABELS[category] ?? humanizeUnknown(category)
+  return CATEGORY_LABELS[category] ?? '其他干扰类型'
 }
 
 export function distractorSubtypeLabel(subtype: string): string {
-  return SUBTYPE_LABELS[subtype] ?? humanizeUnknown(subtype)
+  return SUBTYPE_LABELS[subtype] ?? '其他干扰机制'
 }

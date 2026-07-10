@@ -17,7 +17,9 @@
  * figure-render manifest-fetch exception is the only one), so an
  * expand/collapse toggle would need state this file isn't allowed to add.
  */
-.detail-passage-text {
+/* cr.md SW-2: double-class beats App.css's single-class .passage-text
+   regardless of stylesheet load order (was source-order-dependent). */
+.passage-text.detail-passage-text {
   font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
   font-size: 16px;
   line-height: 1.7;
