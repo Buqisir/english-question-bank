@@ -136,7 +136,7 @@ function seedSmokeDatabase() {
       'passage-golden-path',
       'src-golden-path',
       '黄金路径E2E测试篇章',
-      'This passage exists purely to support the golden-path-e2e smoke test and has no pedagogical content of its own.',
+      'This passage exists purely to support the golden-path-e2e smoke test and has no pedagogical content beyond its one __41__ marker.',
       '黄金路径E2E测试篇章',
       '人与自我',
       'cloze',
