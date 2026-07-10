@@ -3840,6 +3840,55 @@ button:disabled {
   opacity: 0.55;
 }
 
+/* basket-chip-tick（签名微动效，owner 拍板 2026-07-10）：计数变化时数字
+   滑入（加题从下来，减题从上来），配合 App.tsx 里 WAAPI 的 chip 脉冲。
+   窗口 overflow:hidden 裁掉滑动过程；时长压在 180ms 内，连点时 key
+   重挂载天然打断上一次。 */
+.basket-chip-count-window {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.basket-chip-count {
+  display: inline-block;
+  min-width: 1ch;
+  text-align: center;
+}
+
+.basket-chip-count--up {
+  animation: basket-count-in-up 0.18s ease-out;
+}
+
+.basket-chip-count--down {
+  animation: basket-count-in-down 0.18s ease-out;
+}
+
+@keyframes basket-count-in-up {
+  from {
+    transform: translateY(0.9em);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes basket-count-in-down {
+  from {
+    transform: translateY(-0.9em);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* reduced-motion：滑入动画由文件尾部的全局 * 重置（animation-duration
+   0.01ms）覆盖，无需专属块；WAAPI 脉冲在 App.tsx 里 matchMedia 自查。 */
+
 .basket-drawer-backdrop {
   position: fixed;
   inset: 0;

@@ -297,6 +297,22 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     versionType,
   } = paperDraft
   const [isEntryOpen, setEntryOpen] = useState(false)
+  // basket-chip-tick (owner call 2026-07-10, the one signature motion moment):
+  // seq keys the count span so a change remounts it (CSS slide-in); dir picks
+  // the slide direction (add → up, remove → down). seq 0 = initial mount,
+  // which must NOT animate. The chip pulse itself runs via WAAPI in the
+  // effect below — el.animate() restarts on every call, so rapid add-clicks
+  // interrupt cleanly instead of queuing.
+  // active 只存活 ~250ms：动画类若持久挂着，chip 每次随视图重挂载都会
+  // 重播滑入（CSS animation 对新挂载元素总是播放），签名时刻会贬值成
+  // 路过就动。
+  const [chipTick, setChipTick] = useState<{ seq: number; dir: 'up' | 'down'; active: boolean }>({
+    seq: 0,
+    dir: 'up',
+    active: false,
+  })
+  const chipRef = useRef<HTMLButtonElement | null>(null)
+  const prevDraftCountRef = useRef<number | null>(null)
   const [entryInitialDetail, setEntryInitialDetail] = useState<QuestionGroupDetail | null>(null)
   const [viewMode, setViewMode] = useState<'list' | 'detail'>('list')
   const [selectedDetail, setSelectedDetail] = useState<QuestionGroupDetail | null>(null)
@@ -727,6 +743,30 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     () => questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length,
     [questionGroups],
   )
+
+  // basket-chip-tick: fire the count slide + chip pulse whenever the draft
+  // count actually changes (never on first mount — prev starts null).
+  useEffect(() => {
+    const prev = prevDraftCountRef.current
+    prevDraftCountRef.current = currentDraftGroupCount
+    if (prev === null || prev === currentDraftGroupCount) return
+    setChipTick((t) => ({ seq: t.seq + 1, dir: currentDraftGroupCount > prev ? 'up' : 'down', active: true }))
+    const timer = window.setTimeout(() => {
+      setChipTick((t) => ({ ...t, active: false }))
+    }, 250)
+    const el = chipRef.current
+    if (
+      el &&
+      typeof el.animate === 'function' &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      el.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }],
+        { duration: 180, easing: 'ease-out' },
+      )
+    }
+    return () => window.clearTimeout(timer)
+  }, [currentDraftGroupCount])
 
   const openDraftPaperWorkbench = useCallback((draftPaperId?: string | null, focusGroupId?: string | null) => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
@@ -1175,13 +1215,27 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       {!adminRouteActive && (
       <button
         type="button"
+        ref={chipRef}
         className="basket-chip"
         onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
         aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
         disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
       >
         <ClipboardList size={15} />
-        <span>草稿卷 · {currentDraftGroupCount} 题组</span>
+        {/* 计数窗：key 换值时 span 重挂载触发滑入；按钮 aria-label 已带全文，
+            内部结构对读屏透明。 */}
+        <span>
+          草稿卷 ·{' '}
+          <span className="basket-chip-count-window">
+            <span
+              key={chipTick.seq}
+              className={`basket-chip-count${chipTick.active ? ` basket-chip-count--${chipTick.dir}` : ''}`}
+            >
+              {currentDraftGroupCount}
+            </span>
+          </span>{' '}
+          题组
+        </span>
       </button>
       )}
 
