@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>0709 英语草稿卷</title>
+<style>
+/* 刀⑤ render-fidelity Chunk B — standard §1: 左右 24mm / 上 ≈21mm.
+   Bottom margin is 24mm (not standard-mandated directly) so the §1 footer
+   distance (页码距底 ≈17.5mm) falls out of an exact, documented sum:
+   24mm margin-bottom - 6.5mm @bottom-center padding-bottom = 17.5mm. */
+@page {
+  size: A4;
+  margin: 21mm 24mm 24mm 24mm;
+
+  @bottom-center {
+    content: "英语试题 第" counter(page) "页(共" counter(pages) "页)";
+    font-family: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+    font-size: 9pt;
+    color: #000;
+    vertical-align: bottom;
+    padding-bottom: 6.5mm;
+  }
+}
+
+body {
+  font-family: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+  font-size: 10.5pt;
+  /* standard §3: line-height is a FIXED 18pt baseline — same
+     paperLineHeight token the screen PaperSurface / writing page consume
+     (Chunk A), ≈1.714 at 10.5pt body text. */
+  line-height: 1.714;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.paper-header {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.paper-header h1 {
+  font-family: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 0 0 0.3em;
+}
+
+.paper-header .version-label {
+  font-size: 11pt;
+  color: #555;
+}
+
+.section-header {
+  font-family: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 1.2em 0 0.6em;
+  text-indent: 0;
+}
+
+.page-break {
+  break-before: page;
+}
+
+.question-group {
+  margin-bottom: 1em;
+}
+
+.group-meta {
+  font-size: 9pt;
+  color: #666;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.3em;
+}
+
+/* draft-depassage-letter cut (owner 拍板 2026-07-09): 大题号徽标+题型标签
+   ("N、题型（每题 N 分）") — 练习单气质, 与 .section-header (12pt)
+   区分字号半级, 比 .group-meta 更醒目 (它是主标, group-meta 是源卷归属
+   附注)。 */
+.group-header {
+  font-family: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 0.6em 0 0.4em;
+}
+
+.passage {
+  margin: 0.5em 0;
+  text-indent: 2em;
+}
+
+.passage p {
+  margin: 0 0 0.3em;
+  text-indent: 2em;
+}
+
+/* figure-render cut — SW-2: figures never exceed the passage's own
+   content width (already ≤162mm/版心, exam-paper-format-standards §1 —
+   page margins already cap it, this is just belt-and-suspenders), and
+   never split across a page break (§3b 阅读原子不跨页). */
+.print-figure {
+  margin: 0.5em 0;
+  text-align: center;
+  text-indent: 0;
+  break-inside: avoid;
+}
+
+.print-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.print-figure-placeholder {
+  text-align: center;
+  text-indent: 0;
+  color: #555;
+  border: 1px dashed #999;
+  padding: 0.6em 0;
+  margin: 0.5em 0 0.3em;
+  break-inside: avoid;
+}
+
+.question {
+  margin: 0.6em 0;
+}
+
+.stem {
+  margin: 0 0 0.2em;
+  text-indent: 0;
+}
+
+.qnum {
+  font-weight: bold;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2em;
+  margin: 0.2em 0 0.2em 2em;
+}
+
+.options-grid span {
+  display: block;
+}
+
+.options-list {
+  margin: 0.2em 0 0.2em 2em;
+}
+
+.options-list p {
+  margin: 0.1em 0;
+}
+
+.options-inline {
+  margin: 0.2em 0 0.2em 2em;
+}
+
+.options-inline span {
+  margin-right: 2em;
+}
+
+.options-inline--numbered .qnum {
+  margin-right: 0.6em;
+}
+
+/* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;
+   标题不落页尾;写作框整框不拆。 */
+.question {
+  break-inside: avoid;
+}
+
+.section-header,
+.group-meta,
+.group-header {
+  break-after: avoid;
+}
+
+.writing-answer-box {
+  break-inside: avoid;
+}
+
+.answer {
+  margin: 0.2em 0 0.2em 2em;
+  font-size: 9.5pt;
+  color: #333;
+}
+
+.answer p {
+  margin: 0.1em 0;
+}
+
+.explanation {
+  color: #555;
+}
+
+/* standard §6 — 挖空: 定长下划线 + 题号居中于线上, 线不得跨行断开.
+   七选五 ≈4.6em (10.5pt 下 ≈48pt/17mm); 完形/语法填空 ≈3.3em (≈35pt/12mm). */
+.print-blank {
+  display: inline-block;
+  white-space: nowrap;
+  border-bottom: 0.48pt solid #000;
+  text-align: center;
+  vertical-align: baseline;
+  margin: 0 0.15em;
+  /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */
+  text-indent: 0;
+}
+
+.print-blank--short { width: 3.3em; }
+.print-blank--seven { width: 4.6em; }
+
+.print-blank-num {
+  display: inline-block;
+}
+
+/* standard §8 — 写作答题区: 应用文/读后续写各一个细边框素框, 框内无横线/提示行. */
+.writing-answer-box {
+  border: 0.48pt solid #000;
+  margin: 1em auto 0;
+}
+
+/* Exam density: tighter */
+.exam .passage p { margin-bottom: 0.2em; }
+.exam .question { margin: 0.4em 0; }
+.exam .group-meta { display: none; }
+
+/* Handout density: more spacing */
+.handout .passage p { margin-bottom: 0.4em; }
+.handout .question { margin: 0.8em 0; }
+
+@page {
+  @bottom-center {
+    content: "0709 英语草稿卷 · " counter(page);
+    font-size: 9pt;
+    color: #666;
+  }
+}
+
+</style>
+</head>
+<body class="exam">
+<div class="paper-header">
+  <h1>0709 英语草稿卷</h1>
+  
+</div>
+<h2 class="section-header">第一部分 语法填空</h2>
+<section class="question-group"><div class="group-header">1、语法填空（每题 1.5 分）</div><div class="passage"><p>Daji, or big open-air fairs, typically take place on specific dates of the lunar calendar, for example, on dates with five or seven as the last digit. It is also common for them <span class="print-blank print-blank--short"><span class="print-blank-num">(1)</span></span> (hold) during traditional Chinese holidays such as the Spring Festival and the Mid-Autumn Festival, as well as other local festivals. The exact dates and <span class="print-blank print-blank--short"><span class="print-blank-num">(2)</span></span> (frequent) of daji vary from region to region.</p><p></p><p>Daji originated from the ancient folk custom of trading goods, which dates back to <span class="print-blank print-blank--short"><span class="print-blank-num">(3)</span></span> Han Dynasty. As transportation and communication <span class="print-blank print-blank--short"><span class="print-blank-num">(4)</span></span> (be) underdeveloped at that time, it was very difficult for households to obtain daily <span class="print-blank print-blank--short"><span class="print-blank-num">(5)</span></span> (necessity) . As a solution, people gathered at specific locations on set days to trade their surplus (剩余的) items <span class="print-blank print-blank--short"><span class="print-blank-num">(6)</span></span> what they needed.</p><p></p><p>In addition to being venues for buying and selling, daji are occasions for socializing and entertainment. People from near and far crowd into these markets on daji days. <span class="print-blank print-blank--short"><span class="print-blank-num">(7)</span></span> (draw) by the aroma (香味) of street food, they line up in front of stands <span class="print-blank print-blank--short"><span class="print-blank-num">(8)</span></span> are selling dumplings and hot noodle soup. While eating and enjoying street performances, they chat with each other and share stories of their daily lives. Before <span class="print-blank print-blank--short"><span class="print-blank-num">(9)</span></span> (head) home, they fill their shopping bags with fresh fruit and vegetables from local farmers, at prices significantly <span class="print-blank print-blank--short"><span class="print-blank-num">(10)</span></span> (cheap) than those found in supermarkets.</p></div><div class="question"><p class="stem"><span class="qnum">(1)</span> 56</p></div><div class="question"><p class="stem"><span class="qnum">(2)</span> 57</p></div><div class="question"><p class="stem"><span class="qnum">(3)</span> 58</p></div><div class="question"><p class="stem"><span class="qnum">(4)</span> 59</p></div><div class="question"><p class="stem"><span class="qnum">(5)</span> 60</p></div><div class="question"><p class="stem"><span class="qnum">(6)</span> 61</p></div><div class="question"><p class="stem"><span class="qnum">(7)</span> 62</p></div><div class="question"><p class="stem"><span class="qnum">(8)</span> 63</p></div><div class="question"><p class="stem"><span class="qnum">(9)</span> 64</p></div><div class="question"><p class="stem"><span class="qnum">(10)</span> 65</p></div></section>
+<h2 class="section-header">第二部分 完形填空</h2>
+<section class="question-group"><div class="group-header">2、完形填空（每题 1 分）</div><div class="passage"><p>I grew up in a little town in northeast Ohio. The <span class="print-blank print-blank--short"><span class="print-blank-num">(1)</span></span> of how little people knew about Ohio came quickly after I went to school in central Pennsylvania. Though I lived <span class="print-blank print-blank--short"><span class="print-blank-num">(2)</span></span> three and a half hours away, most of my classmates thought of Ohio as a whole different world. “Do you have to fly home? Do you live on a farm?” The <span class="print-blank print-blank--short"><span class="print-blank-num">(3)</span></span> were never-ending. I was a <span class="print-blank print-blank--short"><span class="print-blank-num">(4)</span></span> in their eyes.</p><p></p><p>As I grow older, I’m more and more <span class="print-blank print-blank--short"><span class="print-blank-num">(5)</span></span> for my small town roots. Sure, my friends and I loved to <span class="print-blank print-blank--short"><span class="print-blank-num">(6)</span></span> about how bored we were in the middle of nowhere; <span class="print-blank print-blank--short"><span class="print-blank-num">(7)</span></span>, as I finish up my junior year of college, I’m convinced that it took <span class="print-blank print-blank--short"><span class="print-blank-num">(8)</span></span> our small town to realize how much we actually love it and what exactly we loved about it.</p><p></p><p>The pace of life is slow and people <span class="print-blank print-blank--short"><span class="print-blank-num">(9)</span></span> connecting to each other. You do more than just talk to your neighbors-in a lot of cases, they’re truly an <span class="print-blank print-blank--short"><span class="print-blank-num">(10)</span></span> of your family. Much of this <span class="print-blank print-blank--short"><span class="print-blank-num">(11)</span></span> centers around being outside and knowing the ins and outs of the town; being present and mindful of your <span class="print-blank print-blank--short"><span class="print-blank-num">(12)</span></span> is a critical part of the culture.</p><p></p><p>As I move through my college years, I <span class="print-blank print-blank--short"><span class="print-blank-num">(13)</span></span> the visits to my little hometown. I am grateful for the <span class="print-blank print-blank--short"><span class="print-blank-num">(14)</span></span> that I had growing up and know that wherever my next adventure takes me, I can <span class="print-blank print-blank--short"><span class="print-blank-num">(15)</span></span> my small town roots to lead me in the right direction.</p></div><div class="question"><p class="stem"><span class="qnum">(1)</span> 41</p><p class="options-inline"><span>A. fantasy</span><span>B. prejudice</span><span>C. realization</span><span>D. expectation</span></p></div><div class="question"><p class="stem"><span class="qnum">(2)</span> 42</p><p class="options-inline"><span>A. only</span><span>B. indeed</span><span>C. still</span><span>D. even</span></p></div><div class="question"><p class="stem"><span class="qnum">(3)</span> 43</p><p class="options-inline"><span>A. tests</span><span>B. questions</span><span>C. games</span><span>D. debates</span></p></div><div class="question"><p class="stem"><span class="qnum">(4)</span> 44</p><p class="options-inline"><span>A. success</span><span>B. victim</span><span>C. novelty</span><span>D. problem</span></p></div><div class="question"><p class="stem"><span class="qnum">(5)</span> 45</p><p class="options-inline"><span>A. thankful</span><span>B. hopeful</span><span>C. suitable</span><span>D. reliable</span></p></div><div class="question"><p class="stem"><span class="qnum">(6)</span> 46</p><p class="options-inline"><span>A. dream</span><span>B. lie</span><span>C. hear</span><span>D. complain</span></p></div><div class="question"><p class="stem"><span class="qnum">(7)</span> 47</p><p class="options-inline"><span>A. therefore</span><span>B. however</span><span>C. instead</span><span>D. otherwise</span></p></div><div class="question"><p class="stem"><span class="qnum">(8)</span> 48</p><p class="options-inline"><span>A. touring</span><span>B. changing</span><span>C. leaving</span><span>D. protecting</span></p></div><div class="question"><p class="stem"><span class="qnum">(9)</span> 49</p><p class="options-inline"><span>A. value</span><span>B. admit</span><span>C. fear</span><span>D. remember</span></p></div><div class="question"><p class="stem"><span class="qnum">(10)</span> 50</p><p class="options-inline"><span>A. advantage</span><span>B. example</span><span>C. honor</span><span>D. extension</span></p></div><div class="question"><p class="stem"><span class="qnum">(11)</span> 51</p><p class="options-inline"><span>A. lifestyle</span><span>B. landscape</span><span>C. procedure</span><span>D. personality</span></p></div><div class="question"><p class="stem"><span class="qnum">(12)</span> 52</p><p class="options-inline"><span>A. findings</span><span>B. surroundings</span><span>C. belongings</span><span>D. greetings</span></p></div><div class="question"><p class="stem"><span class="qnum">(13)</span> 53</p><p class="options-inline"><span>A. give up</span><span>B. put off</span><span>C. face up to</span><span>D. look forward to</span></p></div><div class="question"><p class="stem"><span class="qnum">(14)</span> 54</p><p class="options-inline"><span>A. confidence</span><span>B. reputation</span><span>C. experience</span><span>D. opportunity</span></p></div><div class="question"><p class="stem"><span class="qnum">(15)</span> 55</p><p class="options-inline"><span>A. inspire</span><span>B. trust</span><span>C. remind</span><span>D. challenge</span></p></div></section>
+<h2 class="section-header">第三部分 七选五</h2>
+<section class="question-group"><div class="group-header">3、七选五（每题 2.5 分）</div><div class="passage"><p>Museums, once quiet places filled with history, are now full of digital excitement. By using machine learning and advanced algorithms (算法) , these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories. <span class="print-blank print-blank--seven"><span class="print-blank-num">(1)</span></span></p><p></p><p>AI transforms a standard museum trip into a personalized and interactive adventure. Smart recommendation engines analyze data such as exhibit popularity and visitors’ past behavior to suggest specific exhibits and events, making each visit unique and surprising. <span class="print-blank print-blank--seven"><span class="print-blank-num">(2)</span></span> These digital assistants engage visitors in dynamic conversations and offer context-sensitive insights that deepen understanding and satisfy curiosity.</p><p></p><p>Beyond visitor interaction, AI plays a crucial role in preserving priceless artworks. Since the exhibits in museums sustain natural decay (破损) over time, early detection is vital. AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye. <span class="print-blank print-blank--seven"><span class="print-blank-num">(3)</span></span> Moreover, by predicting future decay patterns, AI helps museums take preventive measures and improve preservation strategies.</p><p></p><p>AI also significantly enhances the educational value of museums, particularly for children and families. <span class="print-blank print-blank--seven"><span class="print-blank-num">(4)</span></span> For instance, interactive exhibits powered by AI can adjust their content and difficulty level based on the user’s preferences and responses. This adaptability ensures that complex historical concepts become accessible and engaging for young minds.</p><p></p><p>Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges. Museums are working together with AI ethicists to develop fair algorithms. <span class="print-blank print-blank--seven"><span class="print-blank-num">(5)</span></span> Strict policies should be established to protect visitors’ information.</p></div><div class="question"><p class="stem"><span class="qnum">(1)</span> 36</p><div class="options-list"><p>A. This capability allows for timely restoration.</p><p>B. Visitor data collection also raises privacy issues.</p><p>C. In short, AI is redefining the museum in all respects.</p><p>D. It tailors learning experiences to different age groups and learning styles.</p><p>E. Museums are not only places to store artworks, but also spaces for learning.</p><p>F. Furthermore, AI-powered virtual guides are replacing traditional tour guides.</p><p>G. AI is changing this by using image recognition technology to analyze exhibits.</p></div></div><div class="question"><p class="stem"><span class="qnum">(2)</span> 37</p><div class="options-list"><p>A. This capability allows for timely restoration.</p><p>B. Visitor data collection also raises privacy issues.</p><p>C. In short, AI is redefining the museum in all respects.</p><p>D. It tailors learning experiences to different age groups and learning styles.</p><p>E. Museums are not only places to store artworks, but also spaces for learning.</p><p>F. Furthermore, AI-powered virtual guides are replacing traditional tour guides.</p><p>G. AI is changing this by using image recognition technology to analyze exhibits.</p></div></div><div class="question"><p class="stem"><span class="qnum">(3)</span> 38</p><div class="options-list"><p>A. This capability allows for timely restoration.</p><p>B. Visitor data collection also raises privacy issues.</p><p>C. In short, AI is redefining the museum in all respects.</p><p>D. It tailors learning experiences to different age groups and learning styles.</p><p>E. Museums are not only places to store artworks, but also spaces for learning.</p><p>F. Furthermore, AI-powered virtual guides are replacing traditional tour guides.</p><p>G. AI is changing this by using image recognition technology to analyze exhibits.</p></div></div><div class="question"><p class="stem"><span class="qnum">(4)</span> 39</p><div class="options-list"><p>A. This capability allows for timely restoration.</p><p>B. Visitor data collection also raises privacy issues.</p><p>C. In short, AI is redefining the museum in all respects.</p><p>D. It tailors learning experiences to different age groups and learning styles.</p><p>E. Museums are not only places to store artworks, but also spaces for learning.</p><p>F. Furthermore, AI-powered virtual guides are replacing traditional tour guides.</p><p>G. AI is changing this by using image recognition technology to analyze exhibits.</p></div></div><div class="question"><p class="stem"><span class="qnum">(5)</span> 40</p><div class="options-list"><p>A. This capability allows for timely restoration.</p><p>B. Visitor data collection also raises privacy issues.</p><p>C. In short, AI is redefining the museum in all respects.</p><p>D. It tailors learning experiences to different age groups and learning styles.</p><p>E. Museums are not only places to store artworks, but also spaces for learning.</p><p>F. Furthermore, AI-powered virtual guides are replacing traditional tour guides.</p><p>G. AI is changing this by using image recognition technology to analyze exhibits.</p></div></div></section>
+<h2 class="section-header">第四部分 阅读理解</h2>
+<section class="question-group"><div class="group-header">4、阅读理解（每题 2.5 分）</div><div class="passage"><p>SoFi Stadium is the go-to destination in the heart of Los Angeles for sports fans. Its calendar is always packed with headline-grabbing events.</p><p></p><p>Upcoming Football Events</p><p></p><figure class="print-figure"><img src="/paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png" alt="fig-paper-2026-i-reading-a-table-1"></figure><p></p><p>Nearby Hotels</p><p></p><p>When attending an event at SoFi Stadium, you’re just a short walk or ride from several comfortable and classy hotels. Right across the street, Sonder Lim Hotel offers spacious rooms and a rooftop pool. A mile away, the H Hotel Los Angeles, with its stylish design, is ideal for a nice stay between events. For those seeking both comfort and convenience, the Renaissance Los Angeles Airport Hotel is just a short drive away. If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities- perfect for turning a game day into a great weekend escape.</p><p></p><p>Parking</p><p></p><p>SoFi Stadium requires you to park strictly in your assigned zone, and guests must enter through the exact gate indicated on their color-coded digital parking pass. If you enter through the wrong access point, you’ll be turned around and redirected-so plan ahead. Each parking zone consists of multiple lots, designed to efficiently manage traffic across the venue’s network. Make sure to download your parking pass to your smartphone before arrival. Upon entering the correct zone, parking staff will guide you directly to a space. For those wishing to park near friends, all vehicles must have passes for the same zone and arrive together--spaces cannot be saved.</p></div><div class="question"><p class="stem"><span class="qnum">(1)</span> Which team will play the most games at the stadium this month?</p><div class="options-list"><p>A. Washington Commanders.</p><p>B. Los Angeles Rams.</p><p>C. Los Angeles Chargers.</p><p>D. New Orleans Saints.</p></div></div><div class="question"><p class="stem"><span class="qnum">(2)</span> Which hotel is nearest to the stadium?</p><div class="options-list"><p>A. Sonder Lüm Hotel.</p><p>B. The Ritz-Carlton Los Angeles.</p><p>C. The H Hotel Los Angeles.</p><p>D. The Renaissance LA Airport Hotel.</p></div></div><div class="question"><p class="stem"><span class="qnum">(3)</span> What do you need to do if you want to park at the stadium?</p><div class="options-list"><p>A. Call the parking staff.</p><p>B. Prepay the parking fee.</p><p>C. Obtain a parking pass.</p><p>D. Choose a parking zone.</p></div></div></section>
+</body>
+</html>
