@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-10（E3 收官；figure-render 施工中）
+Last updated: 2026-07-10（E3 + figure-render 双刀收官）
 
 ## 现在是什么
 
@@ -27,9 +27,15 @@ Last updated: 2026-07-10（E3 收官；figure-render 施工中）
   0 MF，主代理复核 verify:all 72 绿+tsc+浏览器 QA 四类真点击/写作隐藏/
   返回不回弹，main CI 绿）：详情页+concierge「配相似」深链入口
   （`similar=1` URL 契约），找类似文本回填 hack 退役。相似题 v1 四刀
-  全收；**owner QA 待做，生产部署待拍板**。同日 figure-render
-  （fig-token P0）开刀：formal PA 4 MF 已回填 plan（详情页 `<pre>` 漏
-  面/DOCX 4 发射点+降级红线/段落粒度替换防吞正文），串行施工中。
+  全收。
+- 2026-07-10：**figure-render 收官（审计 P0 销账）**（merge 6fecb76，
+  formal PA 4 MF 回填 + fresh CR APPROVE 1 MF 主代理直收（module-v1
+  守卫白名单独立命名集+DEV 假绿更正），main CI 绿）：`[表: fig-…]`
+  token 八处渲染面全灭，四路径共用 shared/figures/resolveFigureMarker
+  单源；DOCX 嵌 PNG 实证成功（PO-1 未触发）；QA 抓到并修掉 Vivliostyle
+  file:// 裂图 + 详情页 marker 泄漏两真 bug（回归断言已补）。挂账：
+  docxRenderer 模块级单例（cr.md SW）、详情页头注释失真。**E3+
+  figure-render 两刀 owner QA 待做，生产部署待拍板**。
 - 2026-07-10：**similar-rail（E2）收官 + 生产部署 5caf263**（merge cb35cd3，
   CR APPROVE 0 MF，主代理复核 184+72 绿，**owner QA 过**含三笔实测 polish：
   讲评栏底部 72px chip 净空、CTA 钮居左文案随右）。主打功能一条龙上线：
