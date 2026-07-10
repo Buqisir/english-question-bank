@@ -413,7 +413,11 @@
   background: #ffffff;
   border: 1px solid #e6e2d7;
   border-radius: 12px;
-  padding: 16px;
+  /* 底部 72px 净空：全局草稿卷 chip（App.css .basket-chip，fixed
+   * right:20/bottom:20）永久压住本栏底缘——栏内最后一个元素（配相似
+   * CTA / 结果底栏 / 面板尾巴）必须能滚到 chip 上方（owner QA 两报，
+   * 2026-07-10）。 */
+  padding: 16px 16px 72px;
   box-sizing: border-box;
 }
 
@@ -737,10 +741,6 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  /* 全局草稿卷 chip 固定在 right:20/bottom:20（App.css .basket-chip），
-   * 正落在讲评栏底缘——给「加入草稿卷」按钮留出 chip 的净空，
-   * 否则 chip 盖住主按钮（owner QA 实测，2026-07-10）。 */
-  margin-bottom: 64px;
 }
 
 .similar-count {
