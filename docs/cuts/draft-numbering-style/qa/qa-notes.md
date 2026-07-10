@@ -118,3 +118,89 @@ affected): `group-960d0f8d-grammar-fill`, `group-2024-ii-seven-choices`,
 This is a genuine, live, production-reachable severity issue this cut's
 required hard assertion exposes. It cannot be fixed within this cut's
 granted file scope. See Completion Report for the recommendation.
+
+## BLOCKING fix follow-up (2026-07-10, continuation DEV) — RESOLVED
+
+Fixed in `server/draft-paper/draftPaperStore.mjs` (only file touched — this
+cut's granted `server/print-renderer.mjs` + `server/exports/docxRenderer.mjs`
+scope is unrelated and untouched by this follow-up; also outside this cut's
+own scope on paper, done as an explicitly-assigned blocking-fix continuation).
+All 5 named functions (`addGroupToCurrentDraftPaper`, `updateDraftPaper`,
+`patchDraftPaperItem`, `deleteDraftPaperItem`, `restoreDraftPaperItem`) now
+call `getDraftPaper(...)` (the print-rendering read) AFTER the inner
+`BEGIN`/`COMMIT`/`catch{ROLLBACK}` try-block has fully exited, not inside it.
+A render failure can therefore never trigger a second `ROLLBACK` on an
+already-committed transaction — the mutation's COMMIT stands, the real render
+error propagates unmasked to the route layer (existing convention: local
+route `catch` maps it to 4xx, or — for routes with no local catch, e.g.
+`GET /api/draft-papers/current` — `server/api.mjs`'s top-level request-handler
+`catch` turns it into a 500 with the real message, same pattern already used
+for every other uncaught store error).
+
+### Live re-repro against the SAME real data (worktree's own sqlite copy,
+isolated port 8797, `qa-owner` re-created via `scripts/create-user.mjs`
+against the worktree DB — not the shared 8787 instance)
+
+1. `POST /api/draft-papers/current/items { groupId: "group-960d0f8d-grammar-fill" }`
+   → **400** with the REAL assertion message (`"...in-text blank count (0)
+   does not match question count (10)..."`) — no more "cannot rollback - no
+   transaction is active" masking it.
+2. Direct sqlite read (`draft_paper_items`) confirms the mutation **did**
+   commit — the item is present in the table, exactly as before (this is
+   correct: the write succeeded, the write must not be rolled back just
+   because the read-time render afterward failed).
+3. `GET /api/draft-papers/current` (twice, to confirm it's stable, not a
+   one-off) → **500** with the SAME real assertion message both times — a
+   clear, honest, repeatable error, not a crash-loop and not a silent 200
+   with corrupted data. (500 here is because this specific route has no
+   local `try/catch`, so it falls through to `server/api.mjs`'s top-level
+   handler — same behavior every other uncaught store error already gets on
+   this route; still a "明确错误", not a stuck 502/hang.)
+4. `DELETE /api/draft-papers/:draftPaperId/items/:itemId` on the bad item →
+   **200**, item removed, draft returns to `itemCount: 0`. This is the
+   self-service recovery path the QA notes above said did NOT exist before
+   this fix (deleteDraftPaperItem itself had the same COMMIT-then-throw
+   pattern — removing the bad item used to 400 with the same masked
+   "cannot rollback" error, closing off recovery without a raw SQL
+   statement). Confirmed fixed: no raw SQL was used for this recovery.
+5. `GET /api/draft-papers/current` after the delete → **200**, healthy empty
+   draft, printHtml `""`. Draft fully recovered through the API alone.
+6. Server stdout/stderr log across the whole sequence: zero occurrences of
+   "cannot rollback" (`grep -i "cannot rollback" <log>` → no match).
+
+### Same-pattern scan (report-only, NOT fixed — outside this follow-up's
+5-named-function scope)
+
+`grep -rn "exec('COMMIT')" server/ --include="*.mjs"` plus manual read of
+each call site found two more occurrences of the identical
+COMMIT-then-throwable-post-commit-call-inside-catch(ROLLBACK) shape:
+
+- `server/draft-paper/draftPaperStore.mjs`, `migrateAssemblyBasketToDraftPaper`
+  — TWO instances inside the same function: the early-return branch
+  (`if (current) { userDb.exec('COMMIT'); return { draftPaper:
+  getDraftPaper(...), ... } }`) and the main-path return
+  (`userDb.exec('COMMIT'); return { draftPaper: getDraftPaper(...), ... }`).
+  Both call `getDraftPaper` (print render) after `COMMIT`, still inside the
+  try whose `catch` does `userDb.exec('ROLLBACK')`.
+- `server/draft-paper/draftPaperRoutes.mjs`, the
+  `POST /api/draft-papers/:id/items` route handler (not the store) —
+  `userDb.exec('COMMIT')` immediately followed by
+  `context.draftPaperStore.getDraftPaper({ userDb, bankDb }, ...)` (print
+  render) still inside the route's own `try { ... } catch (error) {
+  userDb.exec('ROLLBACK'); ... }` block.
+
+Everything else found by the same grep (6 spots in `server/api.mjs`, 1 in
+`server/paper-import/publisher.mjs`) does NOT match the bug shape: each
+either has no throwable call after its `COMMIT` (just returns an
+already-computed plain value), or — `publisher.mjs`'s `swapPaperImportLatest`
+call after `COMMIT` — already wraps its own post-commit `ROLLBACK` attempt
+in a nested `try { db.exec('ROLLBACK') } catch { /* may already be rolled
+back */ }` that swallows the rollback failure without overwriting the real
+error, so it does not exhibit this masking bug.
+
+### verify
+
+- `node scripts/verify-c8-draft-paper-render-model.mjs` — pass
+- `node scripts/verify-print-renderer.mjs` — pass
+- `node scripts/verify-h5g-docx-renderer.mjs` — pass
+- `pnpm -C app run verify:all` — pass (full run, real exit code 0)
