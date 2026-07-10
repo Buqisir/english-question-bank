@@ -1,0 +1,208 @@
+<title>配相似 · 一条龙原型</title>
+<style>
+  :root {
+    --bg: #F6F6F4; --surface: #fff; --surface2: #EDEDEA;
+    --ink: #1E1E1C; --muted: #6A6A64; --line: #D8D8D2; --line-soft: #E8E8E4;
+    --teal: #2C6E56; --teal-deep: #1E4A3A; --teal-50: #EAF1ED; --teal-100: #CFE4DA; --teal-200: #A5CDBD;
+    --danger: #dc2626;
+    --ps-font: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+  }
+  body { background: var(--bg); color: var(--ink); margin: 0;
+    font: 13.5px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; }
+
+  .hint { max-width: 1180px; margin: 14px auto 0; padding: 0 16px; color: var(--muted); font-size: 12.5px; }
+  .hint b { color: var(--ink); }
+
+  .stage { max-width: 1180px; margin: 12px auto 60px; padding: 0 16px;
+    display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 16px; align-items: start; }
+
+  /* ── 左：卷面（讲评态，简化示意） ── */
+  .paper { background: #fff; border-radius: 2px; box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
+    padding: 48px 56px; font-family: var(--ps-font); font-size: 14px; line-height: 1.714; }
+  .paper .letter { text-align: center; font-weight: 700; margin: 0 0 10px; }
+  .paper p { margin: 0 0 10px; text-align: justify; }
+  .paper .ind { text-indent: 2em; }
+  .pq { padding: 6px 8px; margin: 0 -8px; border-radius: 6px; }
+  .pq.wrong { background: rgba(220, 38, 38, 0.05); }
+  .pq .qhead { display: flex; align-items: baseline; gap: 8px; }
+  .pq .wrong-mark { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 11px; color: var(--danger);
+    border: 1px solid rgba(220,38,38,.35); border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+  .pq .opts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2em; padding-left: 2em; }
+
+  /* ── 右：讲评栏 ── */
+  .rail { position: sticky; top: 12px; background: var(--surface); border: 1px solid var(--line-soft);
+    border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; max-height: calc(100vh - 24px); }
+  .rail-head { padding: 12px 16px; border-bottom: 1px solid var(--line-soft); display: flex; align-items: center; gap: 8px; }
+  .rail-head .crumb { font-size: 12px; color: var(--muted); }
+  .rail-head h2 { font-size: 13.5px; font-weight: 700; margin: 0; flex: 1; }
+  .rail-body { padding: 14px 16px; overflow-y: auto; }
+
+  .panel-block { margin-bottom: 14px; }
+  .panel-block .lbl { font-size: 11px; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
+  .panel-block .box { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
+
+  .btn { font: 600 12.5px/1 -apple-system, "PingFang SC", sans-serif; border-radius: 8px; padding: 9px 14px;
+    cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+  .btn.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .btn.primary:hover { background: var(--teal-deep); }
+  .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(44,110,86,.2); }
+  .btn[disabled] { opacity: .45; cursor: default; }
+
+  .similar-cta { display: flex; align-items: center; gap: 10px; border-top: 1px dashed var(--line);
+    margin-top: 14px; padding-top: 14px; }
+  .similar-cta .why { font-size: 12px; color: var(--muted); flex: 1; }
+
+  /* 结果态 */
+  .backlink { font-size: 12px; color: var(--teal); cursor: pointer; background: none; border: none; padding: 0; }
+  .seed-line { font-size: 12px; color: var(--muted); margin: 2px 0 12px; }
+  .seed-line b { color: var(--ink); }
+
+  .rcard { border: 1px solid var(--line-soft); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px;
+    display: flex; gap: 10px; align-items: flex-start; transition: border-color .12s ease, background-color .12s ease; }
+  .rcard:hover { border-color: var(--teal-200); }
+  .rcard.checked { border-color: var(--teal); background: var(--teal-50); }
+  .rcard input[type="checkbox"] { margin-top: 3px; accent-color: var(--teal); width: 15px; height: 15px; }
+  .rcard .t { font-weight: 600; font-size: 13px; }
+  .rcard .src { font-size: 11.5px; color: var(--muted); margin: 1px 0 6px; }
+  .whychips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 11px; border-radius: 999px; padding: 2px 8px; background: var(--surface2); color: var(--muted); }
+  .chip.hit { background: var(--teal-50); color: var(--teal-deep); border: 1px solid var(--teal-100); }
+  .rcard .peek { font-size: 11.5px; color: var(--teal); margin-top: 6px; cursor: pointer; }
+
+  .pool-note { font-size: 12px; color: var(--muted); text-align: center; padding: 6px 0 2px; }
+
+  .rail-foot { border-top: 1px solid var(--line-soft); padding: 10px 16px; display: flex; gap: 10px; align-items: center;
+    background: var(--surface); }
+  .rail-foot .count { font-size: 12.5px; color: var(--muted); flex: 1; }
+  .toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(8px);
+    background: var(--ink); color: #fff; font-size: 12.5px; border-radius: 8px; padding: 9px 16px;
+    opacity: 0; transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .hidden { display: none !important; }
+  @media (max-width: 960px) { .stage { grid-template-columns: 1fr; } .rail { position: static; max-height: none; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<p class="hint"><b>配相似 · 一条龙原型</b> — 场景：讲评 2025·新课标I D 篇，学生错了第 32 题（推断题）。在右栏点「配相似」走完整条龙。内容为示意。</p>
+
+<div class="stage">
+  <!-- 左：卷面 -->
+  <div class="paper">
+    <p class="letter">D</p>
+    <p class="ind">We tend to assume that attention is a fixed resource, drained by every notification and refilled only by rest. New work in cognitive science suggests a different picture: attention behaves less like a fuel tank and more like a muscle that responds to how it is used. Subjects who practised sustained focus on a single demanding task showed measurable gains within weeks, while those who habitually split their attention performed worse even on simple tests.</p>
+    <p class="ind">The researchers are careful not to overstate the case. "Training is not a cure-all," the lead author notes. "But the assumption that our capacity is fixed has quietly shaped how offices, schools and even homes are designed — and that assumption now looks wrong."</p>
+    <div class="pq">
+      <div class="qhead"><span>31. What does the fuel-tank comparison illustrate?</span></div>
+      <p class="opts"><span>A. A common belief.</span><span>B. A research method.</span><span>C. A design principle.</span><span>D. A training goal.</span></p>
+    </div>
+    <div class="pq wrong">
+      <div class="qhead"><span>32. What can be inferred about the design of modern offices?</span><span class="wrong-mark">学生错选 C</span></div>
+      <p class="opts"><span>A. It assumed attention cannot grow.</span><span>B. It was tested by the researchers.</span><span>C. It improves sustained focus.</span><span>D. It follows the muscle model.</span></p>
+    </div>
+    <div class="pq">
+      <div class="qhead"><span>33. What is the author's attitude toward the new findings?</span></div>
+      <p class="opts"><span>A. Cautiously positive.</span><span>B. Openly doubtful.</span><span>C. Purely neutral.</span><span>D. Strongly critical.</span></p>
+    </div>
+  </div>
+
+  <!-- 右：讲评栏 -->
+  <div class="rail">
+    <!-- 态一：解析面板 -->
+    <div id="view-analysis">
+      <div class="rail-head"><h2>第 32 题 · 解析</h2><span class="crumb">讲评态</span></div>
+      <div class="rail-body">
+        <div class="panel-block">
+          <div class="lbl">题型</div>
+          <div class="box">推理判断（inference）——由第二段 "quietly shaped how offices … are designed" 反推设计前提。</div>
+        </div>
+        <div class="panel-block">
+          <div class="lbl">证据定位</div>
+          <div class="box">§2："the assumption that our capacity is fixed has quietly shaped how offices, schools and even homes are designed"。正确项 A 是该句的同义改写；学生错选 C 属"就近词面匹配"。</div>
+        </div>
+        <div class="similar-cta">
+          <span class="why">这题错在推断，库里配同款——</span>
+          <button class="btn primary" id="go-similar">🔁 配相似</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 态二：配相似结果 -->
+    <div id="view-similar" class="hidden">
+      <div class="rail-head">
+        <h2>配相似 · 推理判断</h2>
+        <button class="backlink" id="back">← 返回解析</button>
+      </div>
+      <div class="rail-body">
+        <p class="seed-line">种子：<b>2025·新课标I · D篇 · 第32题（推断）</b>　配方：同题型 → 含推断题密度 → 篇位相当 → 话题不同优先　<span style="white-space:nowrap">已排除本卷</span></p>
+
+        <label class="rcard"><input type="checkbox" data-t="Attention in the Wild">
+          <div><div class="t">Why Forests Make Us Sharper</div>
+            <div class="src">2024·新课标II · D篇 · 论述文 · 356 词</div>
+            <div class="whychips"><span class="chip hit">含 3 题 · 推断</span><span class="chip hit">篇位相当 · D</span><span class="chip hit">话题不同 ✓</span></div>
+            <div class="peek">展开预览 ▾</div></div>
+        </label>
+        <label class="rcard"><input type="checkbox" data-t="The Myth of Multitasking">
+          <div><div class="t">The Myth of Multitasking</div>
+            <div class="src">2023·全国甲 · C篇 · 论述文 · 331 词</div>
+            <div class="whychips"><span class="chip hit">含 2 题 · 推断</span><span class="chip hit">篇位相当 · C/D</span><span class="chip">话题相近</span></div>
+            <div class="peek">展开预览 ▾</div></div>
+        </label>
+        <label class="rcard"><input type="checkbox" data-t="What Maps Leave Out">
+          <div><div class="t">What Maps Leave Out</div>
+            <div class="src">2024·九省联考 · D篇 · 论述文 · 362 词</div>
+            <div class="whychips"><span class="chip hit">含 2 题 · 推断</span><span class="chip hit">篇位相当 · D</span><span class="chip hit">话题不同 ✓</span></div>
+            <div class="peek">展开预览 ▾</div></div>
+        </label>
+        <label class="rcard"><input type="checkbox" data-t="A Second Life for Old Ideas">
+          <div><div class="t">A Second Life for Old Ideas</div>
+            <div class="src">2023·新课标II · C篇 · 说明文 · 318 词</div>
+            <div class="whychips"><span class="chip hit">含 1 题 · 推断</span><span class="chip">篇位略浅 · C</span><span class="chip hit">话题不同 ✓</span></div>
+            <div class="peek">展开预览 ▾</div></div>
+        </label>
+
+        <p class="pool-note">库内含推断题的阅读组还剩 9 组 · 按配方已排序</p>
+      </div>
+      <div class="rail-foot">
+        <span class="count" id="count">未选择</span>
+        <button class="btn" id="also-preview" disabled>预览所选</button>
+        <button class="btn primary" id="add-draft" disabled>加入草稿卷</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const $ = (s) => document.querySelector(s);
+  const boxes = () => Array.from(document.querySelectorAll('.rcard input'));
+
+  $('#go-similar').addEventListener('click', () => {
+    $('#view-analysis').classList.add('hidden');
+    $('#view-similar').classList.remove('hidden');
+  });
+  $('#back').addEventListener('click', () => {
+    $('#view-similar').classList.add('hidden');
+    $('#view-analysis').classList.remove('hidden');
+  });
+
+  function sync() {
+    const n = boxes().filter(b => b.checked).length;
+    boxes().forEach(b => b.closest('.rcard').classList.toggle('checked', b.checked));
+    $('#count').textContent = n ? `已选 ${n} 篇` : '未选择';
+    $('#add-draft').disabled = !n;
+    $('#also-preview').disabled = !n;
+  }
+  boxes().forEach(b => b.addEventListener('change', sync));
+
+  $('#add-draft').addEventListener('click', () => {
+    const n = boxes().filter(b => b.checked).length;
+    const t = $('#toast');
+    t.textContent = `已加入草稿卷 · ${n} 篇（含各自题目）`;
+    t.classList.add('on');
+    setTimeout(() => t.classList.remove('on'), 2200);
+    boxes().forEach(b => { b.checked = false; });
+    sync();
+  });
+</script>
