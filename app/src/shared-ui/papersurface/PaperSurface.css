@@ -158,6 +158,28 @@
   margin-bottom: 12px;
 }
 
+/* figure-render cut (fig-token P0). Paper-sheet visual rules (see file
+   header) still apply inside a figure paragraph: no border-radius, no
+   box-shadow, no gradient, no card-like UI — the placeholder is a plain
+   dashed-rule note, not a chrome card. */
+.ps-paragraph-figure {
+  margin: 0 0 8px;
+  text-indent: 0;
+  text-align: center;
+}
+
+.ps-figure-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.ps-figure-placeholder {
+  display: inline-block;
+  color: var(--ps-muted);
+  border: 1px dashed var(--ps-rule);
+  padding: 0.6em 1em;
+}
+
 /* ─── Sentence ─────────────────────────────────────────────────── */
 
 .ps-sentence {

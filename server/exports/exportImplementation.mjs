@@ -140,6 +140,17 @@ export function createExportImplementation({
   convertDocxToPdf,
   renderPrintPdf = renderPrintPdfWithVivliostyle,
   timestampPrefix = defaultTimestampPrefix,
+  // figure-render cut (fig-token P0): optional — a caller/test that omits
+  // it (every existing one does) gets pre-cut byte-identical output, since
+  // buildDocumentXml/buildPrintHtml never even look up figures without a
+  // real paperAssetsDir. Used to resolve each group's figures/manifest.json
+  // for DOCX embedding (exportDocx) and to pick the right <img> URL scheme
+  // for print/PDF (exportPrintHtml uses web-relative paths for the
+  // browser-rendered preview; exportPrintPdf overrides to absolute file://
+  // paths since Vivliostyle CLI converts the HTML from a scratch tempdir
+  // with no web server underneath it — see print-renderer.mjs's
+  // `figureImageSrc` doc comment for the full "why two modes" story).
+  paperAssetsDir = null,
 }) {
   if (typeof getQuestionGroupDetail !== 'function') {
     throw new Error('getQuestionGroupDetail is required')
@@ -168,8 +179,12 @@ export function createExportImplementation({
     const fileName = docxFileName(title, versionType)
     const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
     const printStyle = input.printStyle === 'exam' ? 'exam' : 'handout'
-    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle })
-    const body = writeDocxPackage({ documentXml, outputPath, title })
+    // figure-render cut: `images` is an out-parameter buildDocumentXml
+    // populates while walking the passage — see docxRenderer.mjs's header
+    // comment above buildExamDocumentXml for why it isn't a return value.
+    const images = []
+    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle, paperAssetsDir, images })
+    const body = writeDocxPackage({ documentXml, images, outputPath, title })
 
     return {
       body,
@@ -195,7 +210,18 @@ export function createExportImplementation({
     }
   }
 
-  function exportPrintHtml(input) {
+  // figure-render cut: `imageMode` is an internal option (never taken from
+  // `input`, so it isn't attacker/caller controllable over the public
+  // export HTTP input) — 'web' (default) for the browser-rendered preview
+  // route, 'file' only from exportPrintPdf's internal call below. See
+  // print-renderer.mjs's `figureImageSrc` doc comment.
+  // figure-render cut: `images` is an out-parameter buildPrintHtml
+  // populates ONLY in imageMode:'file' (see print-renderer.mjs's
+  // figureImageSrc doc comment) — exportPrintHtml returns it so
+  // exportPrintPdf can copy the real PNGs into the SAME tempdir as the
+  // HTML before invoking Vivliostyle. Destructuring callers (sendHtml
+  // picks only `{ body, fileName }`) safely ignore the extra field.
+  function exportPrintHtml(input, { imageMode = 'web' } = {}) {
     const title = requiredString(input.title, 'title')
     const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
     const exportItems = resolveExportItems(input, getQuestionGroupDetail)
@@ -203,15 +229,16 @@ export function createExportImplementation({
     const questionNumberStart = normalizedQuestionNumberStart(input)
     const blocks = Array.isArray(input.blocks) ? input.blocks : null
 
-    const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart })
+    const images = []
+    const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart, paperAssetsDir, imageMode, images })
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
     const fileName = `${title}-${versionLabel}-精排.html`
 
-    return { body: html, fileName }
+    return { body: html, fileName, images }
   }
 
   function exportPrintPdf(input) {
-    const htmlResult = exportPrintHtml(input)
+    const htmlResult = exportPrintHtml(input, { imageMode: 'file' })
     const title = requiredString(input.title, 'title')
     const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
@@ -223,6 +250,14 @@ export function createExportImplementation({
 
     try {
       writeFileSync(htmlPath, htmlResult.body)
+      // figure-render cut: copy each referenced PNG into the SAME tempdir
+      // as paper.html, using the relative filename buildPrintHtml already
+      // baked into the <img src> — same-directory file:// resource
+      // loading works with headless Chromium; cross-directory does not
+      // (browser-QA finding, see print-renderer.mjs's figureImageSrc doc).
+      for (const image of htmlResult.images) {
+        copyFileSync(image.absoluteSourcePath, path.join(tempDir, image.relativeName))
+      }
       renderPrintPdf({ html: htmlResult.body, htmlPath, pdfPath, rootDir })
       const fileName = `${title}-${versionLabel}-精排.pdf`
       const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)

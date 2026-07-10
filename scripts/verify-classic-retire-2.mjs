@@ -58,9 +58,28 @@ function read(relPath) {
 
 const detailView = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 
+// figure-render cut (fig-token P0): this component's "props-driven, zero
+// internal useState" invariant gets its ONE deliberate, narrow exception
+// here — the detail-page figure manifest fetch (see the file's own
+// header comment + the useEffect immediately above `figuresState`'s
+// declaration; App.tsx is out of this cut's Allowed scope, so there is
+// no host-level fetch to piggyback on the way every other render surface
+// this cut touches does). The old regex (`\buseState\s*\(`) had a blind
+// spot — it never matched a generic-typed call (`useState<T>(...)`), so
+// it would have silently kept "passing" without actually re-asserting
+// the invariant boundary. Fixed to count ALL useState calls (with or
+// without a generic) and assert there is EXACTLY the one figure-render
+// exception, by exact declaration text — any OTHER internal state still
+// fails this check.
+const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
 assert(
-  'QuestionGroupDetailView has zero internal useState (props-driven, AdminWorkbench precedent)',
-  !/\buseState\s*\(/.test(detailView),
+  'QuestionGroupDetailView has exactly one internal useState (the figure-render manifest-fetch exception; props-driven otherwise)',
+  useStateCallCount === 1,
+  `found ${useStateCallCount} useState call(s)`,
+)
+assert(
+  'the one useState is the figure-render figuresState declaration (not some other/future state)',
+  /const \[figuresState, setFiguresState\] = useState</.test(detailView),
 )
 
 assert(
@@ -120,9 +139,20 @@ assert(
   '加入草稿卷 button stays visible to member (not gated by isOwnerView)',
   /<button\s*\n\s*className="add-button"\s*\n\s*type="button"\s*\n\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(detailView),
 )
+// figure-render cut: the passage `<pre>` is no longer a single static
+// element — it is one branch of `buildPassageSegments(...).map(...)`
+// (figure paragraphs render an <img> + a differently-classed <pre>
+// instead). Widened the literal match to `className="passage-text`
+// (prefix, so it also catches the figure-segment's
+// `"passage-text passage-figure-flattened-text"` compound class) and the
+// "not owner-gated" window from 40 to 1000 chars — the real nearest
+// `isOwnerView` in the file sits ~5500 chars before the passage section
+// (an unrelated owner-only button in detail-actions), so 1000 stays
+// comfortably below any real false-negative risk while accommodating the
+// segment-map wrapper this cut introduced.
 assert(
   'passage text section is unconditional (member-visible)',
-  /<pre className="passage-text">/.test(detailView) && !/isOwnerView[\s\S]{0,40}<pre className="passage-text">/.test(detailView),
+  /<pre[^>]*className="passage-text/.test(detailView) && !/isOwnerView[\s\S]{0,1000}<pre[^>]*className="passage-text/.test(detailView),
 )
 assert(
   '删除 button stays owner-gated (kept, C3)',

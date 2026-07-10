@@ -851,6 +851,38 @@ button:disabled {
   white-space: pre-wrap;
 }
 
+/* figure-render cut (fig-token P0). §8 网站面: image present, flattened
+   table text kept below it (PO-2, 做题-safe double-store) — the ONE
+   surface that keeps the flattened text; every print/export surface
+   replaces the marker paragraph/line wholesale with no text. */
+.passage-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.passage-figure-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.passage-figure-flattened-text {
+  max-height: 160px;
+}
+
+.passage-figure-placeholder {
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 14px;
+}
+
 .question-list {
   display: grid;
   gap: 12px;

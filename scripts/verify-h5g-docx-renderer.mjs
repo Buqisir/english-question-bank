@@ -27,7 +27,7 @@
  *  - timestampPrefix is NOT in the docx module (it stayed in api.mjs).
  */
 
-import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -378,8 +378,13 @@ function assertSourceGuards() {
   assert('timestampPrefix is NOT declared in the docx module', !/\n(?:function|const|let)\s+timestampPrefix\b/.test(src))
   // Moved fns live at module indent 0 (function decl at col 0), so the multiline XML templates are not re-indented.
   assert('escapeXml lives at module indent 0', /\nfunction escapeXml\(value\) \{/.test(src))
-  assert('buildDocumentXml lives at module indent 0', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle \}\) \{/.test(src))
-  assert('writeDocxPackage lives at module indent 0', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title \}\) \{/.test(src))
+  // figure-render cut: buildDocumentXml / writeDocxPackage gained an
+  // `images` out-parameter (default `[]`) — see the header comment above
+  // `buildExamDocumentXml` in docxRenderer.mjs. The exact-signature regex
+  // below is updated to match (natural turnover per AGENTS.md's verify
+  // convention: a source-contract change this cut makes, not bulk cleanup).
+  assert('buildDocumentXml lives at module indent 0', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images = \[\] \}\) \{/.test(src))
+  assert('writeDocxPackage lives at module indent 0', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title, images = \[\] \}\) \{/.test(src))
   // 刀⑤ render-fidelity Chunk C resolves the V1 footer TODO — assert it's
   // actually gone and the real footer wiring (docxSectPr + footerReference)
   // is in its place, not that the TODO is still there.
@@ -394,9 +399,11 @@ function assertApiIntegration() {
   for (const seam of ['buildDocumentXml', 'writeDocxPackage', 'convertDocxToPdf']) {
     assert(`api.mjs destructures ${seam}Impl from the factory`, apiSrc.includes(`${seam}: ${seam}Impl`))
   }
-  // Hoisted forwarding wrappers preserve the exact signatures.
-  assert('buildDocumentXml wrapper preserves signature', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle \}\) \{\n\s*return buildDocumentXmlImpl\(\{ title, versionType, items, blocks, questionNumberStart, printStyle \}\)/.test(apiSrc))
-  assert('writeDocxPackage wrapper preserves signature', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title \}\) \{\n\s*return writeDocxPackageImpl\(\{ documentXml, outputPath, title \}\)/.test(apiSrc))
+  // Hoisted forwarding wrappers preserve the exact signatures. figure-render
+  // cut: both gained the same `images = []` out-parameter as the docxRenderer
+  // functions above (natural turnover, see that assertion's comment).
+  assert('buildDocumentXml wrapper preserves signature', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images = \[\] \}\) \{\n\s*return buildDocumentXmlImpl\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images \}\)/.test(apiSrc))
+  assert('writeDocxPackage wrapper preserves signature', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title, images = \[\] \}\) \{\n\s*return writeDocxPackageImpl\(\{ documentXml, outputPath, title, images \}\)/.test(apiSrc))
   assert('convertDocxToPdf wrapper preserves signature', /\nfunction convertDocxToPdf\(docxPath, outputPath\) \{\n\s*return convertDocxToPdfImpl\(docxPath, outputPath\)/.test(apiSrc))
   // The heavy moved bodies are gone from api.mjs.
   assert('api.mjs no longer defines escapeXml', !/\nfunction escapeXml\(/.test(apiSrc))
@@ -475,6 +482,73 @@ async function assertRealAssetBlankCounts() {
   }
 }
 
+// ------------------------------------------------------------------
+// figure-render cut (fig-token P0) — real paper-2026-i reading-a table
+// figure, through the FACTORY path (createDocxRenderer({ paperAssetsDir }),
+// same wiring api.mjs uses), covering BOTH document builders (exam +
+// handout printStyle — MF-3's "all 4 emit sites" requirement: this asset
+// only has a `blocks`-driven item, so each printStyle exercises 2 of the 4
+// sites; the legacy (no-blocks) sites are covered by the synthetic
+// assertLegacyFigureEmbed below using the SAME real PNG).
+// ------------------------------------------------------------------
+function assertRealAssetFigureEmbed() {
+  const assetPath = path.join(repoRoot, 'app/public/paper-assets/paper-2026-i/latest/paper-asset.json')
+  if (!existsSync(assetPath)) {
+    console.log(`  ⊘ SKIP: paper-2026-i asset not found at ${assetPath}`)
+    return
+  }
+
+  const paperAssetsDir = path.join(repoRoot, 'app/public/paper-assets')
+  const renderer = createDocxRenderer({ groupTypeLabels, optionalString, paperAssetsDir })
+
+  const asset = JSON.parse(readFileSync(assetPath, 'utf8'))
+  const group = asset.content.groups['group-2026-i-reading-a']
+  const materialText = (group.passage?.paragraphs || [])
+    .map((p) => String(p?.text || '').trim())
+    .filter(Boolean)
+    .join('\n\n')
+  assert('real paper-2026-i reading-a materialText carries the raw figure marker (fixture sanity)', materialText.includes('[表: fig-paper-2026-i-reading-a-table-1]'))
+
+  const detail = {
+    id: 'group-2026-i-reading-a',
+    title: group.title,
+    source: '2026 新课标 I',
+    groupType: 'reading',
+    passage: { title: group.passage?.title || group.title, materialText, summary: materialText },
+    questions: [],
+  }
+  const items = [{ detail, note: '', score: 3, sectionTitle: '' }]
+  const blocks = [{ type: 'question_group', questionGroupId: 'group-2026-i-reading-a', score: 3 }]
+
+  for (const printStyle of ['exam', 'handout']) {
+    const images = []
+    const documentXml = renderer.buildDocumentXml({ title: '2026 新课标 I', versionType: 'student', items, blocks, questionNumberStart: 1, printStyle, images })
+    assert(`${printStyle}: real figure marker resolves to an embedded image, not the raw token`, !documentXml.includes('[表: fig-') && documentXml.includes('<w:drawing>'))
+    assert(`${printStyle}: images out-parameter collected exactly 1 image`, images.length === 1, `got ${images.length}`)
+    assert(`${printStyle}: documentXml references the collected image's rId`, documentXml.includes(`r:embed="${images[0]?.rId}"`))
+
+    const outDir = mkdtempSync(path.join(tmpdir(), `h5g-docx-figure-${process.pid}-`))
+    try {
+      const outputPath = path.join(outDir, 'out.docx')
+      const body = renderer.writeDocxPackage({ documentXml, images, outputPath, title: '2026 新课标 I' })
+      assert(`${printStyle}: writeDocxPackage embeds the media part + PK zip`, Buffer.isBuffer(body) && body[0] === 0x50 && body[1] === 0x4b)
+    } finally {
+      rmSync(outDir, { recursive: true, force: true })
+    }
+  }
+
+  // No-figures control: a paperAssetsDir IS configured, but this groupId
+  // isn't paper-asset sourced at all — resolveGroupFigures returns null,
+  // so the passage text (no marker) renders through the unchanged path.
+  const noFigureDetail = { ...READING_DETAIL, id: 'g-reading-no-figure' }
+  const noFigureItems = [{ detail: noFigureDetail, note: '', score: 1, sectionTitle: '' }]
+  const noFigureBlocks = [{ type: 'question_group', questionGroupId: 'g-reading-no-figure', score: 1 }]
+  const noFigureImages = []
+  const noFigureXml = renderer.buildDocumentXml({ title: 'T', versionType: 'student', items: noFigureItems, blocks: noFigureBlocks, questionNumberStart: 1, printStyle: 'exam', images: noFigureImages })
+  assert('a group with no paper-asset match renders with zero images collected', noFigureImages.length === 0)
+  assert('a group with no paper-asset match never emits a <w:drawing>', !noFigureXml.includes('<w:drawing>'))
+}
+
 // ============================================================
 // Main
 // ============================================================
@@ -487,6 +561,7 @@ async function main() {
   assertSourceGuards()
   assertApiIntegration()
   await assertRealAssetBlankCounts()
+  assertRealAssetFigureEmbed()
 
   console.log(`\nH5-G docx-renderer verify PASSED: ${passed} checks`)
 }

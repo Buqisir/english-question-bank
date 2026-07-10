@@ -376,6 +376,29 @@ function PaperSurfaceParagraph({
   activeEvidenceId,
   blankFocus,
 }: PaperSurfaceParagraphProps): ReactNode {
+  // figure-render cut (fig-token P0): `paragraph.figure` is set ONLY by
+  // the adapter when this paragraph's WHOLE text is a manifest marker
+  // (paragraph-granular, PA MF-4 — never a substring hide inside a mixed
+  // paragraph). PaperSurface does no marker detection of its own (I12: no
+  // fetch, no model) — it only branches on this pre-resolved field. Every
+  // pre-cut paragraph (and every non-figure paragraph post-cut) has
+  // `figure` undefined and renders through the unchanged sentence path
+  // below, byte-for-byte (PA SW-3 additivity).
+  if (paragraph.figure) {
+    return (
+      <div
+        className="ps-paragraph ps-paragraph-figure"
+        {...{ [paperSurfaceAnchorAttrs.paragraphId]: paragraph.id }}
+      >
+        {paragraph.figure.kind === 'figure' ? (
+          <img className="ps-figure-image" src={paragraph.figure.src} alt={paragraph.figure.alt} />
+        ) : (
+          <div className="ps-figure-placeholder">〔表格：见原卷〕</div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <p
       className="ps-paragraph"

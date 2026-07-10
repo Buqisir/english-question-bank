@@ -147,6 +147,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-exam-export.mjs` | Exam export | no |
 | `verify-print-renderer.mjs` | Print renderer；刀⑤ Chunk B 起含 @page 边距/页脚页码/行距/字体栈 token 化断言 + paperBlankPattern 挖空样式与写作答题区断言 + 真实 paper-2026-i 资产行为级挖空计数与真 PDF 字节冒烟（PA F2，非合成样例） | yes |
 | `verify-print-pdf-export-flow.mjs` | Print PDF export flow | no |
+| `verify-figure-render.mjs` | figure-render cut (fig-token P0): manifest-driven (zero hardcoded figure id), scans every published `figures/manifest.json` and exercises all four render paths on real paper-2026-i data — paperAssetSurfaceAdapter.ts textMap figure resolution + PaperSurface.tsx source-structure branch, the detail-page `<pre>` path (`passageFigureSegments.ts`, extracted so this script can import it — a `.tsx` component can't be loaded by Node's TS type-stripping), print-renderer.mjs (`imageMode: 'web'`/`'file'`) covering PDF/A4 预览/草稿卷预览 in one call, and docxRenderer.mjs's all 4 passage-emit sites (exam/handout × blocks/legacy) including a real unzip-and-inspect of the embedded PNG media part + relationship. Plus: MF-4 paragraph-initial invariant re-asserted against published data, a whole-library anti-pattern sweep (all 33 papers, zero raw `[表: fig-`/`[图: fig-` in any rendered output), the "no manifest hit → placeholder card" path on a real no-manifest paper-asset group, and backward-compat controls (omitting the new optional params reproduces pre-cut byte-identical output) | yes |
 
 ## Concierge and reading-analysis legacy
 

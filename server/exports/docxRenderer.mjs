@@ -48,9 +48,20 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
+import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
+import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 
 let groupTypeLabels
 let optionalString
+// figure-render cut (fig-token P0): optional, defaults to null so every
+// caller that omits it (existing tests, any future stub) keeps pre-cut
+// documentXml byte-for-byte — mirrors print-renderer.mjs's identical
+// default-null story for the same config value. Injected once at factory
+// time (like groupTypeLabels/optionalString above) rather than threaded
+// through every buildDocumentXml call, since it never changes at runtime
+// and this keeps buildDocumentXml's/writeDocxPackage's own call signatures
+// untouched except for the new `images` out-parameter (see below).
+let paperAssetsDir = null
 
 export function createDocxRenderer(deps = {}) {
   if (!deps.groupTypeLabels || typeof deps.groupTypeLabels !== 'object') {
@@ -62,6 +73,7 @@ export function createDocxRenderer(deps = {}) {
 
   groupTypeLabels = deps.groupTypeLabels
   optionalString = deps.optionalString
+  paperAssetsDir = deps.paperAssetsDir ?? null
 
   return { buildDocumentXml, writeDocxPackage, convertDocxToPdf }
 }
@@ -553,8 +565,127 @@ function docxSectPr() {
   return `<w:sectPr><w:footerReference w:type="default" r:id="${DOCX_FOOTER_RELATIONSHIP_ID}"/><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1191" w:right="1361" w:bottom="1361" w:left="1361" w:header="708" w:footer="992" w:gutter="0"/></w:sectPr>`
 }
 
+// ─── figure-render cut (fig-token P0) — DOCX image embedding ──────────
+//
+// docxRenderer.mjs hand-rolls OOXML (no `docx` npm package — see the file
+// header); `writeDocxPackage` shells out to the system `zip` binary over a
+// plain tempdir tree rather than a JS zip library. That turns out to make
+// image embedding tractable: a PNG just needs to land at
+// `word/media/imageN.png` inside that same tempdir before `zip -qr` runs,
+// with a matching `<Relationship>` in `word/_rels/document.xml.rels` and a
+// `Default Extension="png"` entry in `[Content_Types].xml` (both added in
+// `writeDocxPackage` below, conditional on `images.length > 0` so a
+// figure-less export's package bytes are unchanged).
+//
+// `images` is an OUT-PARAMETER, not a return value: `buildDocumentXml` /
+// `buildExamDocumentXml` PUSH `{ rId, buffer, extension }` entries into the
+// caller-owned array as they walk the passage lines, and still RETURN a
+// plain XML string exactly as before (so every existing byte-comparison
+// assertion on `buildDocumentXml`'s return value — see
+// verify-h5g-docx-renderer.mjs — keeps working unchanged). The caller then
+// hands the same array to `writeDocxPackage({ ..., images })` to copy the
+// bytes in. This is the smallest change that lets both functions keep
+// their pre-cut return-type contract.
+
+const DOCX_EMU_PER_INCH = 914400
+const DOCX_DEFAULT_IMAGE_DPI = 96
+// exam-paper-format-standards §1: 版心宽 162mm — same content-width cap
+// print-renderer.mjs's `.print-figure img { max-width: 100% }` achieves on
+// the HTML side; DOCX has no CSS, so the EMU extent is capped explicitly.
+const DOCX_MAX_FIGURE_WIDTH_EMU = 162 * 36000
+const DOCX_FIGURE_PLACEHOLDER_TEXT = '〔表格：见原卷〕'
+
+/** Reads width/height (pixels) straight out of a PNG's IHDR chunk. Returns null for anything that isn't a valid PNG (defensive — never throws into the render path). */
+function readPngPixelSize(buffer) {
+  if (!Buffer.isBuffer(buffer) || buffer.length < 24) return null
+  const isPngSignature = buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47
+  if (!isPngSignature) return null
+  return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) }
+}
+
+/** Native size at DOCX_DEFAULT_IMAGE_DPI, scaled down (aspect-preserving) to DOCX_MAX_FIGURE_WIDTH_EMU when the native width would exceed the 162mm content width. Never scales UP — a small source image stays small rather than being blown up to full width. */
+function resolveDocxFigureExtentEmu(pixelWidth, pixelHeight) {
+  const nativeWidthEmu = Math.round((pixelWidth / DOCX_DEFAULT_IMAGE_DPI) * DOCX_EMU_PER_INCH)
+  const nativeHeightEmu = Math.round((pixelHeight / DOCX_DEFAULT_IMAGE_DPI) * DOCX_EMU_PER_INCH)
+  if (nativeWidthEmu <= DOCX_MAX_FIGURE_WIDTH_EMU) {
+    return { widthEmu: nativeWidthEmu, heightEmu: nativeHeightEmu }
+  }
+  const scale = DOCX_MAX_FIGURE_WIDTH_EMU / nativeWidthEmu
+  return { widthEmu: DOCX_MAX_FIGURE_WIDTH_EMU, heightEmu: Math.round(nativeHeightEmu * scale) }
+}
+
+/** Standard OOXML inline-picture-in-run markup (`<w:drawing>`), centered in its own paragraph. `rId` must match a `<Relationship>` id `writeDocxPackage` writes for this same image. */
+function docxFigureDrawingParagraph({ rId, docPrId, widthEmu, heightEmu, name }) {
+  const safeName = escapeXml(name)
+  return `<w:p><w:pPr><w:jc w:val="center"/><w:keepLines/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"><wp:extent cx="${widthEmu}" cy="${heightEmu}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="${docPrId}" name="${safeName}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="${docPrId}" name="${safeName}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="${rId}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${widthEmu}" cy="${heightEmu}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`
+}
+
+/** "〔表格：见原卷〕" fallback card (plan.md rule 3 — never a raw token, never silently hidden) for a `[表:`/`[图:` token with no manifest hit, or a manifest hit whose PNG can't be read/parsed. */
+function docxFigurePlaceholderParagraph() {
+  return paragraph([run(DOCX_FIGURE_PLACEHOLDER_TEXT, { italic: true, color: '666666', size: 21 })], { align: 'center', after: 80 })
+}
+
+let docxFigureDocPrCounter = 0
+
+/**
+ * Renders ONE passage line into `body` (mutates), substituting a figure or
+ * placeholder when the TRIMMED line starts with a manifest marker /
+ * bracket token — never a substring hide (shared `resolveFigureMarker`,
+ * same rule print-renderer.mjs and paperAssetSurfaceAdapter.ts enforce).
+ * `images` is the caller-owned out-parameter array (see the header
+ * comment above); a figure line PUSHES `{ rId, buffer, extension }` into
+ * it. Falls through to the pre-cut `docxPassageLineRuns` text path,
+ * unchanged, when `figuresInfo` is null (no paperAssetsDir configured, or
+ * this group isn't paper-asset sourced / has no manifest) or the line
+ * carries no marker.
+ */
+function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textParagraphOptions) {
+  const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
+  if (resolved?.kind === 'figure') {
+    const absoluteFilePath = path.join(figuresInfo.baseDir, 'figures', resolved.figure.file)
+    let buffer = null
+    try {
+      buffer = readFileSync(absoluteFilePath)
+    } catch {
+      buffer = null
+    }
+    const pixelSize = buffer ? readPngPixelSize(buffer) : null
+    if (buffer && pixelSize) {
+      const { widthEmu, heightEmu } = resolveDocxFigureExtentEmu(pixelSize.width, pixelSize.height)
+      const imageIndex = images.length + 1
+      const rId = `rIdImage${imageIndex}`
+      images.push({ rId, buffer, extension: 'png' })
+      docxFigureDocPrCounter += 1
+      body.push(docxFigureDrawingParagraph({
+        rId,
+        docPrId: 900 + docxFigureDocPrCounter,
+        widthEmu,
+        heightEmu,
+        name: resolved.figure.figureId,
+      }))
+      return
+    }
+    // Manifest matched, but the PNG couldn't be read/parsed — degrade to
+    // the placeholder card rather than throwing or silently dropping the
+    // line (plan.md rule 3: never silently hidden).
+    body.push(docxFigurePlaceholderParagraph())
+    return
+  }
+  if (resolved?.kind === 'placeholder') {
+    body.push(docxFigurePlaceholderParagraph())
+    return
+  }
+  body.push(paragraph(docxPassageLineRuns(line, groupType), textParagraphOptions))
+}
+
 // --- Exam-style renderer: formal Gaokao-style paper layout ---
-function buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart }) {
+function buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart, images }) {
+  const figuresCache = new Map()
+  function getFiguresInfo(groupId) {
+    if (!paperAssetsDir) return null
+    if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
+    return figuresCache.get(groupId)
+  }
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const body = []
 
@@ -635,8 +766,9 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
         // Passage text
         if (passageLines.length > 0 && passageLines[0]) {
+          const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
-            body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60, firstLineIndent: 420 }))
+            pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 })
           })
           body.push(paragraph('', { after: 80 }))
         }
@@ -688,8 +820,9 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
       const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
 
       if (passageLines.length > 0 && passageLines[0]) {
+        const figuresInfo = getFiguresInfo(detail.id)
         passageLines.forEach((line) => {
-          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 60, firstLineIndent: 420 }))
+          pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 })
         })
         body.push(paragraph('', { after: 80 }))
       }
@@ -734,9 +867,19 @@ function examOptionTable(rows) {
   return `<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${colWidth}"/><w:gridCol w:w="${colWidth}"/></w:tblGrid>${rowXml}</w:tbl>`
 }
 
-function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle }) {
+// figure-render cut: `images` is an OPTIONAL out-parameter array — see the
+// header comment above `buildExamDocumentXml`. Defaults to a throwaway
+// array so a caller that doesn't need image bytes (e.g. an existing test
+// stub) can still call this with the exact pre-cut argument shape.
+function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [] }) {
   if (printStyle === 'exam') {
-    return buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart })
+    return buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart, images })
+  }
+  const figuresCache = new Map()
+  function getFiguresInfo(groupId) {
+    if (!paperAssetsDir) return null
+    if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
+    return figuresCache.get(groupId)
   }
   // Handout style (original behavior)
   const versionLabel = versionType === 'student' ? '学生版' : '教师版'
@@ -790,9 +933,12 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4', size: 21 }))
         }
         body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
-        passageLines.forEach((line) => {
-          body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240, firstLineIndent: 420 }))
-        })
+        {
+          const figuresInfo = getFiguresInfo(block.questionGroupId)
+          passageLines.forEach((line) => {
+            pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 80, indentLeft: 240, firstLineIndent: 420 })
+          })
+        }
 
         if (isWritingGroupType(detail.groupType)) {
           body.push(docxWritingAnswerBox(detail))
@@ -860,9 +1006,12 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
       }
       body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
 
-      passageLines.forEach((line) => {
-        body.push(paragraph(docxPassageLineRuns(line, detail.groupType), { after: 80, indentLeft: 240, firstLineIndent: 420 }))
-      })
+      {
+        const figuresInfo = getFiguresInfo(detail.id)
+        passageLines.forEach((line) => {
+          pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 80, indentLeft: 240, firstLineIndent: 420 })
+        })
+      }
 
       if (isWritingGroupType(detail.groupType)) {
         body.push(docxWritingAnswerBox(detail))
@@ -925,7 +1074,13 @@ const DOCX_FOOTER_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">英语试题 第</w:t></w:r><w:fldSimple w:instr=" PAGE "><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">页(共</w:t></w:r><w:fldSimple w:instr=" NUMPAGES "><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="宋体"/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">页)</w:t></w:r></w:p>
 </w:ftr>`
 
-function writeDocxPackage({ documentXml, outputPath, title }) {
+// figure-render cut: `images` is the OUT-PARAMETER array `buildDocumentXml`
+// / `buildExamDocumentXml` populated with `{ rId, buffer, extension }`
+// entries while walking the passage. Defaults to `[]` so every existing
+// caller that doesn't pass it produces the EXACT pre-cut package bytes —
+// the `[Content_Types].xml` PNG default and the media-part relationship
+// block below are both conditional on `images.length > 0`.
+function writeDocxPackage({ documentXml, outputPath, title, images = [] }) {
   const tempDir = mkdtempSync(path.join(tmpdir(), 'question-bank-docx-'))
 
   try {
@@ -933,13 +1088,16 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
     mkdirSync(path.join(tempDir, 'docProps'), { recursive: true })
     mkdirSync(path.join(tempDir, 'word'), { recursive: true })
     mkdirSync(path.join(tempDir, 'word/_rels'), { recursive: true })
+    if (images.length > 0) {
+      mkdirSync(path.join(tempDir, 'word/media'), { recursive: true })
+    }
 
     writeFileSync(
       path.join(tempDir, '[Content_Types].xml'),
       `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-  <Default Extension="xml" ContentType="application/xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>${images.length > 0 ? '\n  <Default Extension="png" ContentType="image/png"/>' : ''}
   <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
   <Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>
   <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
@@ -979,12 +1137,24 @@ function writeDocxPackage({ documentXml, outputPath, title }) {
 
     writeFileSync(path.join(tempDir, 'word/document.xml'), documentXml)
     writeFileSync(path.join(tempDir, 'word/footer1.xml'), DOCX_FOOTER_XML)
+
+    // figure-render cut: one media part + one relationship per embedded
+    // image, filename `imageN.<ext>` keyed to the SAME index as the rId
+    // (`rIdImageN`) buildDocumentXml allocated.
+    const imageRelationships = images
+      .map((image, index) => {
+        const fileName = `image${index + 1}.${image.extension}`
+        writeFileSync(path.join(tempDir, 'word/media', fileName), image.buffer)
+        return `  <Relationship Id="${image.rId}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/${fileName}"/>`
+      })
+      .join('\n')
+
     writeFileSync(
       path.join(tempDir, 'word/_rels/document.xml.rels'),
       `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="${DOCX_FOOTER_RELATIONSHIP_ID}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>
-</Relationships>`,
+${imageRelationships ? `${imageRelationships}\n` : ''}</Relationships>`,
     )
     execFileSync('zip', ['-qr', outputPath, '.'], { cwd: tempDir })
     return readFileSync(outputPath)

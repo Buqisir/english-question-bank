@@ -93,7 +93,26 @@ export type PaperTextParagraph = {
 
   /** Sentences in document order. Always closed. */
   readonly sentences: ReadonlyArray<PaperTextSentence>
+
+  /**
+   * figure-render cut (fig-token P0). OPTIONAL, undefined for every
+   * paragraph pre-cut and for every non-figure paragraph post-cut — a
+   * paragraph carries `figure` ONLY when its whole text is a manifest
+   * `[表:`/`[图:` marker (paragraph-granular substitution, PA MF-4: never
+   * a substring hide inside a mixed paragraph). When present, PaperSurface
+   * renders the figure/placeholder INSTEAD OF `sentences` for this
+   * paragraph — `sentences` still carries the raw marker text (the
+   * adapter's normal segmentation output, unchanged) but is not rendered
+   * for a figure paragraph. Producing this field is the adapter's job
+   * (`paperAssetSurfaceAdapter.ts`) — PaperSurface itself does no marker
+   * detection, no fetch, no manifest knowledge (I12 unchanged).
+   */
+  readonly figure?: PaperTextFigure
 }
+
+export type PaperTextFigure =
+  | { readonly kind: 'figure'; readonly src: string; readonly alt: string }
+  | { readonly kind: 'placeholder' }
 
 export type PaperTextSentence = {
   /** Stable id, unique within the paper. Matches the
