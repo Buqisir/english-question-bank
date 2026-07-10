@@ -308,3 +308,13 @@ grammarFillBlank.ts`) — the REQUIRED dot distinguishes `56._____` from cloze `
 `_____36_____`; `paperBlankPattern` untouched. PA + CR (mutation-tested verifier) APPROVE; browser QA +
 PO QA passed. NOTE: global (all-surface) in-passage click was deliberately NOT done — reading/七选五/
 cloze rails carry real question content and stay.
+
+## fig-token 残口：老解析页 harness 卷面（2026-07-10，owner QA 布点时主代理目击）
+
+`?view=paper-intelligence&source=paper-asset&surface=paper` 的卷面正文
+仍直出 `[表: fig-paper-2026-i-reading-a-table-1]` 裸 token + 拍平文本。
+根因：该页卷面文本走 PI 报告数据 → `piToPaperTextMap` adapter，不经
+figure-render 刀修的 `paperAssetSurfaceAdapter` 四路径。补刀方向：给
+harness 路径同样穿 figures/manifest（或该页随 reading-analysis 孤儿支
+退役刀一并处置——它已非页内入口可达，仅 URL 直达）。P0 同类，但面
+是半退役页，优先级由 owner 定。
