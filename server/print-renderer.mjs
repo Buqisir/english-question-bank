@@ -252,6 +252,7 @@ export function buildPrintHtml({
 
   if (Array.isArray(blocks) && blocks.length > 0) {
     let questionNum = startNum
+    let groupNum = 0
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
         sections.push(`<h2 class="section-header">${escapeHtml(block.title)}</h2>`)
@@ -264,30 +265,22 @@ export function buildPrintHtml({
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passage = (detail.passage.materialText || detail.passage.summary || '').trim()
 
-        // paper-passage-letter (docs/cuts/paper-passage-letter/plan.md
-        // decision 2): same passage-label derivation docxRenderer.mjs
-        // uses for parity, `block.sectionTitle || item.sectionTitle`,
-        // plus a `|| detail.title` fallback. DEV empirically confirmed
-        // (real server, real draft-paper + basket export calls) that
-        // both current caller flows leave sectionTitle unable to carry
-        // a trailing A-D letter — draft-paper hardcodes '', the classic
-        // basket sets the Chinese groupTypeLabel — so without the
-        // fallback this never fires for reading groups in practice.
-        // detail.title ("Reading A") is what actually supplies the
-        // letter. docxRenderer.mjs gets the identical one-line fallback
-        // in the same cut so DOCX and PDF stay in parity.
-        const sectionTitle = block.sectionTitle || item.sectionTitle || detail.title || ''
-        const passageLabelMatch = sectionTitle.match(/([A-D])$/)
-        const passageLabel = passageLabelMatch ? passageLabelMatch[1] : ''
+        // draft-depassage-letter (docs/cuts/draft-depassage-letter/plan.md):
+        // retires the paper-passage-letter cut's A-D letter derivation —
+        // 草稿卷是练习单非仿真卷, A/B/C/D 是源卷结构属性不该带走。取而代之
+        // 渲染大题号徽标+题型标签 (owner 拍板 2026-07-09): `n、题型` 全卷
+        // 连续编号, 跨 section_header 不重置。
+        groupNum += 1
+        const hasBlockScore = Number.isFinite(Number(block.score))
+        const groupHeaderScoreSuffix = hasBlockScore ? `（每题 ${score} 分）` : ''
+        const groupHeaderLabel = groupTypeLabels[detail.groupType] || detail.groupType
 
         let groupHtml = '<section class="question-group">'
 
+        groupHtml += `<div class="group-header">${groupNum}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
+
         if (!isExam) {
           groupHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
-        }
-
-        if (passageLabel) {
-          groupHtml += `<div class="passage-letter">${escapeHtml(passageLabel)}</div>`
         }
 
         if (passage) {
@@ -333,7 +326,13 @@ export function buildPrintHtml({
       }
     }
   } else {
-    // Legacy: render by items
+    // Legacy: render by items. draft-depassage-letter cut: never had
+    // passage-letter rendering (nothing to retire) and is not given the new
+    // .group-header 大题头 — every current export caller (paperExportPayload.ts
+    // buildDocxPayload/buildPdfPayload) always sends a non-empty `blocks`
+    // array (usePaperDraft.ts invariant 2: every basket item has exactly one
+    // question_group block), so this branch has no real product consumer.
+    // Left mechanically unchanged; recorded as fact per plan.md step 2.
     let questionNum = startNum
     for (const item of items) {
       const { detail } = item
@@ -440,18 +439,15 @@ body {
   padding-bottom: 0.3em;
 }
 
-/* standard §83-84: 篇章标题 A/B/C/D — Times New Roman Bold 10.5pt
-   (不放大 — body is already 10.5pt, so no separate font-size here),
-   centered, one blank line above and below. One blank line at this
-   line-height is paperFontSizePt * paperLineHeight (10.5pt * 1.714 —
-   the same fixed 18pt baseline standard §3 mandates), matching the
-   screen PaperSurface's --ps-passage-letter margin (paper-passage-letter
-   cut, both faces derive from the same tokens.mjs values). */
-.passage-letter {
+/* draft-depassage-letter cut (owner 拍板 2026-07-09): 大题号徽标+题型标签
+   ("N、题型（每题 N 分）") — 练习单气质, 与 .section-header (12pt)
+   区分字号半级, 比 .group-meta 更醒目 (它是主标, group-meta 是源卷归属
+   附注)。 */
+.group-header {
+  font-family: ${paperSurfaceTokens.paperFontStackHeading};
+  font-size: 11pt;
   font-weight: bold;
-  text-align: center;
-  break-after: avoid;
-  margin: ${(paperSurfaceTokens.paperFontSizePt * paperSurfaceTokens.paperLineHeight).toFixed(2)}pt 0;
+  margin: 0.6em 0 0.4em;
 }
 
 .passage {
@@ -541,7 +537,8 @@ body {
 }
 
 .section-header,
-.group-meta {
+.group-meta,
+.group-header {
   break-after: avoid;
 }
 
