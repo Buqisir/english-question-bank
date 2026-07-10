@@ -1,0 +1,49 @@
+/**
+ * ConciergeDesk.css — ui-p1-panels 刀 #7 additive rules only.
+ *
+ * ConciergeDesk's existing chrome (.concierge-desk / .concierge-intent-bar /
+ * .concierge-command-filter-toggle / etc.) lives in App.css, which this cut
+ * is Forbidden from touching (App.css is ui-p1-shell's exclusive file per
+ * docs/cuts/ui-p1-panels/plan.md 并行边界). Rather than editing that file,
+ * this sheet holds only the NEW selectors item #7 introduces — the intent
+ * input's × clear button, and a `:disabled` treatment for the 筛选 toggle
+ * (now stays mounted-but-disabled through the search-loading state instead
+ * of unmounting, so it needs a visible disabled look App.css never had to
+ * define before) — kept visually consistent with the existing App.css
+ * tokens by hand (this file has no App.css custom properties in scope to
+ * reuse). The 找题中 loading state itself reuses the existing
+ * `.concierge-skeleton-feed` classes (App.css) rather than a new faded-feed
+ * treatment — see ConciergeDesk.tsx's `state.kind === 'loading'` branch.
+ */
+
+.concierge-intent-clear {
+  align-self: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #6A6A64;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.concierge-intent-clear:hover {
+  background: #EDEDEA;
+  color: #1E1E1C;
+}
+
+.concierge-intent-clear:focus-visible {
+  outline: 2px solid #2C6E56;
+  outline-offset: 2px;
+}
+
+.concierge-command-filter-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

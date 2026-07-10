@@ -756,18 +756,22 @@ button.pi-ps-analysis-distractor:focus-visible {
 /*
  * Selected-row visual cue.
  *
- * Issue #21-C3.6: the support row keeps its mint-green left bar; the
+ * Issue #21-C3.6: the support row keeps its mint-green tint; the
  * distractor row uses an amber tint that pairs with the amber dotted
  * line and the amber inline left highlight on PaperSurface. Red is
  * intentionally NOT used here — the distractor source on the page is
  * a misleading or confusable text fragment, not a wrong answer, so
  * the visual stays in the attention/caution amber family.
+ *
+ * ui-p1-panels #12 side-tab ban: the "selected" cue is now a background
+ * fill, not a thickened left bar — border-left-width stays at the base
+ * 3px quote-indent value.
  */
 .pi-ps-analysis-evidence--selected blockquote {
   /* ui-panel-reunify: audit-flagged emerald excursion — collapsed
      onto the shared success token instead of a bespoke mint value. */
   border-left-color: rgba(5, 150, 105, 0.65);
-  border-left-width: 4px;
+  background: rgba(5, 150, 105, 0.08);
 }
 
 /*
@@ -788,7 +792,7 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
   border-left-color: rgba(245, 158, 11, 0.85);
-  border-left-width: 4px;
+  background: rgba(245, 158, 11, 0.08);
 }
 
 
@@ -1226,7 +1230,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-panel-title {
   font-size: 13px;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--eqb-color-text-strong, #141412);
 }
 
 .pi-ps-insight-panel-close {
@@ -1242,8 +1246,8 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-ps-insight-panel-close:hover {
-  background: #f3f4f6;
-  color: #1f2937;
+  background: var(--eqb-color-desk, #ededea);
+  color: var(--eqb-color-text-strong, #141412);
 }
 
 .pi-ps-insight-panel-close:focus-visible {
@@ -1297,14 +1301,14 @@ button.pi-ps-analysis-distractor--selected {
  */
 .pi-ps-insight-loads {
   padding: 8px 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--eqb-color-border-subtle, #e8e8e4);
 }
 
 .pi-ps-insight-loads-title {
   margin: 0 0 8px;
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--eqb-color-text-muted, #6a6a64);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -1321,7 +1325,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-insight-load-label {
   width: 72px;
   flex-shrink: 0;
-  color: #6b7280;
+  color: var(--eqb-color-text-muted, #6a6a64);
   font-size: 12px;
 }
 
@@ -1334,7 +1338,7 @@ button.pi-ps-analysis-distractor--selected {
   width: 16px;
   height: 9px;
   border-radius: 2px;
-  background: #e5e7eb;
+  background: var(--eqb-color-border-subtle, #e8e8e4);
 }
 
 .pi-ps-insight-load-cell[data-filled="true"] {
@@ -1347,12 +1351,12 @@ button.pi-ps-analysis-distractor--selected {
 
 .pi-ps-insight-load-score {
   font-size: 12px;
-  color: #6b7280;
+  color: var(--eqb-color-text-muted, #6a6a64);
   min-width: 24px;
 }
 
 .pi-ps-insight-load-reason {
-  color: #1f2937;
+  color: var(--eqb-color-text-strong, #141412);
   font-size: 12px;
   flex: 1;
   min-width: 0;
@@ -1367,14 +1371,14 @@ button.pi-ps-analysis-distractor--selected {
   margin: 0 0 8px;
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--eqb-color-text-muted, #6a6a64);
 }
 
 .pi-ps-insight-outline-idea {
   margin: 0 0 8px;
   font-size: 13px;
   font-weight: 500;
-  color: #111827;
+  color: var(--eqb-color-text-strong, #141412);
   overflow-wrap: break-word;
 }
 
@@ -1382,7 +1386,7 @@ button.pi-ps-analysis-distractor--selected {
   margin: 0;
   padding: 0 0 0 18px;
   font-size: 12px;
-  color: #6b7280;
+  color: var(--eqb-color-text-muted, #6a6a64);
   line-height: 1.6;
   overflow-wrap: break-word;
 }
@@ -1399,7 +1403,7 @@ button.pi-ps-analysis-distractor--selected {
   margin: 0;
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--eqb-color-text-muted, #6a6a64);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -1437,7 +1441,7 @@ button.pi-ps-analysis-distractor--selected {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.6);
-  color: #4b5563;
+  color: var(--eqb-color-text-muted, #6a6a64);
   cursor: pointer;
   transition: background 0.1s, border-color 0.1s, color 0.1s;
 }
@@ -1445,7 +1449,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-structure-btn:hover {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(0, 0, 0, 0.2);
-  color: #1f2937;
+  color: var(--eqb-color-text-strong, #141412);
 }
 
 .pi-ps-structure-btn:focus-visible {
@@ -1456,7 +1460,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-ps-structure-btn--active {
   background: rgba(30, 30, 28, 0.1);
   border-color: rgba(30, 30, 28, 0.35);
-  color: #1f2937;
+  color: var(--eqb-color-text-strong, #141412);
   font-weight: 600;
 }
 
@@ -1943,7 +1947,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-group-overview-summary {
   cursor: pointer;
   font-size: 0.8125rem;
-  color: var(--pi-ps-insight-muted-ink, #8a8177);
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
   user-select: none;
 }
 
@@ -2189,7 +2193,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-evidence-summary {
   cursor: pointer;
   font-size: 0.8125rem;
-  color: var(--pi-ps-insight-muted-ink, #8a8177);
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
   user-select: none;
   min-height: 30px;
   display: flex;
@@ -2330,7 +2334,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-framework-summary {
   cursor: pointer;
   font-size: 0.8125rem;
-  color: var(--pi-ps-insight-muted-ink, #8a8177);
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
   user-select: none;
 }
 

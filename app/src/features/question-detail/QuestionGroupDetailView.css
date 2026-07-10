@@ -1,0 +1,32 @@
+/**
+ * QuestionGroupDetailView.css — ui-p1-panels 刀 #5 additive rules only.
+ *
+ * QuestionGroupDetailView's existing chrome (.detail-view / .passage-text /
+ * .question-stem / etc.) lives in App.css, which this cut is Forbidden from
+ * touching (App.css is ui-p1-shell's exclusive file per
+ * docs/cuts/ui-p1-panels/plan.md 并行边界). Rather than editing that file,
+ * this sheet holds only the modifier classes item #5 introduces — the
+ * Two-Font-Lanes serif treatment for passage/stem text (DESIGN.md
+ * typography.paper) — layered on top of the existing `.passage-text` /
+ * `.question-stem` box via an additional class, so the border/background/
+ * spacing App.css already defines keeps working unchanged.
+ *
+ * "340px 滚动小盒放开或加「展开全文」" (plan #5) — took the 放开 (unclamp)
+ * branch, not a toggle button: this component carries a locked
+ * "exactly one internal useState" invariant (classic-retire-2, the
+ * figure-render manifest-fetch exception is the only one), so an
+ * expand/collapse toggle would need state this file isn't allowed to add.
+ */
+.detail-passage-text {
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  max-height: none;
+  overflow: visible;
+}
+
+.detail-question-stem-serif {
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+  line-height: 1.7;
+}

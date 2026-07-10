@@ -86,6 +86,15 @@
   font-weight: 600;
 }
 
+/* ui-p1-panels #13半: .paper-browse-rail-item--group's own `color` (below)
+   has equal specificity and used to win by source order whenever both
+   classes land on the same element, making the *selected* rail item read
+   dimmer than an unselected one (audit L90 "选中反而比未选中难读"). This
+   higher-specificity combo rule guarantees --active always wins. */
+.paper-browse-rail-item--group.paper-browse-rail-item--active {
+  color: #2c2820;
+}
+
 .paper-browse-rail-item--part {
   font-weight: 700;
   margin-top: 12px;
@@ -103,7 +112,7 @@
 
 .paper-browse-rail-item--group {
   padding-left: 26px;
-  color: #6b6455;
+  color: var(--eqb-color-text-muted, #6a6a64);
 }
 
 .paper-browse-content {
@@ -288,6 +297,12 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 8px;
+  /* ui-p1-panels #3半: flex-end inside `.paper-browse-content`'s own
+     padding-box lands the button at the TEXT column's right edge, on top
+     of the last word of each line (audit L80 "27 按钮压住七选五指导语").
+     Pull it back out into the page's own white gutter margin
+     (--ps-page-margin-x) so it never sits over text. */
+  margin-right: calc(-1 * (var(--ps-page-margin-x, 91px) - 8px));
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.12s ease;
@@ -311,6 +326,7 @@
     display: flex;
     justify-content: flex-end;
     padding: 4px 0;
+    margin-right: 0;
   }
 
   .paper-browse-group-actions .add-button {
@@ -362,13 +378,13 @@
 .paper-browse-error {
   padding: 48px 24px;
   text-align: center;
-  color: #6b6455;
+  color: var(--eqb-color-text-muted, #6a6a64);
 }
 
 .paper-browse-placeholder {
   padding: 24px;
   font-size: 13px;
-  color: #8a8272;
+  color: var(--eqb-color-text-muted, #6a6a64);
 }
 
 /* ─── 讲评把手 ─── */
@@ -433,7 +449,7 @@
 .paper-browse-lecture-empty {
   margin: 0;
   font-size: 13px;
-  color: #8a8272;
+  color: var(--eqb-color-text-muted, #6a6a64);
 }
 
 .paper-browse-lecture-body {
@@ -451,7 +467,7 @@
 
 .paper-browse-lecture-range {
   font-weight: 400;
-  color: #6b6455;
+  color: var(--eqb-color-text-muted, #6a6a64);
 }
 
 .paper-browse-answer-row {

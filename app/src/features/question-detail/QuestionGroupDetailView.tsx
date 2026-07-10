@@ -56,6 +56,7 @@ import {
   FIGURE_PLACEHOLDER_TEXT,
   type PaperFigureManifestEntry,
 } from './passageFigureSegments'
+import './QuestionGroupDetailView.css'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
@@ -372,7 +373,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                       src={`${activeFiguresAssetBase}/figures/${segment.figure.file}`}
                       alt={segment.figure.figureId}
                     />
-                    <pre className="passage-text passage-figure-flattened-text">{segment.flattenedText}</pre>
+                    <pre className="passage-text passage-figure-flattened-text detail-passage-text">
+                      {segment.flattenedText}
+                    </pre>
                   </div>
                 )
               }
@@ -384,7 +387,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 )
               }
               return (
-                <pre key={index} className="passage-text">
+                <pre key={index} className="passage-text detail-passage-text">
                   {segment.text || '暂无完整原文。后续导入 DOCX/PDF/OCR 时会补到这里。'}
                 </pre>
               )
@@ -575,7 +578,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                       <span>{question.questionType}</span>
                       <span>{question.score} 分</span>
                     </div>
-                    <p className="question-stem">{question.stem}</p>
+                    <p className="question-stem detail-question-stem-serif">{question.stem}</p>
                     {question.options.length > 0 && (
                       <div className="option-list">
                         {question.options.map((option) => (
