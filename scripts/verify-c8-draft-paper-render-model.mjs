@@ -63,7 +63,10 @@ function createDraftPaperRenderFixture() {
       title: 'Cloze A',
       groupType: 'cloze',
       defaultScore: 3,
-      passage: { materialText: 'Beta passage.', summary: '' },
+      // draft-numbering-style: 'cloze' is a BLANK_BEARING_GROUP_TYPE — the
+      // renderer's hard consistency assertion requires in-text blank count
+      // to equal question count (1 blank __41__ == the 1 question below).
+      passage: { materialText: 'Beta passage. __41__ more text.', summary: '' },
       questions: [
         {
           stem: 'Question B?',
@@ -187,7 +190,14 @@ const secondSection = draftBody.indexOf('第二部分 完形填空')
 const thirdSection = draftBody.indexOf('第三部分 阅读理解')
 
 assert('draft render produces printable HTML via buildDraftPrintHtml', draftHtml.includes('<!DOCTYPE html>') && draftHtml.includes('H9 Draft'))
-assert('draft render starts numbering at 1', /<span class="qnum">1\.<\/span>/.test(draftBody))
+// draft-numbering-style (owner 拍板 2026-07-10): small-question numbering
+// resets to (1) — half-width parens, not "N." — for EVERY question_group,
+// not just the first. All 3 groups here (reading-a / cloze-a / reading-b)
+// have exactly 1 question each, so every one of them independently shows
+// (1) — never a continuous 1/2/3 across the whole draft paper.
+const qnumOneMatches = draftBody.match(/<span class="qnum">\(1\)<\/span>/g) || []
+assert('draft render resets small-question numbering to (1) per group (3 groups × 1 question, not continuous 1/2/3)', qnumOneMatches.length === 3, `got ${qnumOneMatches.length}`)
+assert('draft render never emits the old continuous dot-format numbering (2. / 3.)', !draftBody.includes('<span class="qnum">2.</span>') && !draftBody.includes('<span class="qnum">3.</span>'))
 assert('draft render uses exam print style', !draftBody.includes('group-meta'))
 assert('draft render uses student version only', !draftBody.includes('【答案】') && !draftBody.includes('【解析】'))
 assert('draft render emits section headers in type order', firstSection >= 0 && secondSection > firstSection && thirdSection > secondSection)

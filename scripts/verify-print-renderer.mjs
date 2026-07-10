@@ -34,7 +34,10 @@ const items = [
   {
     detail: {
       id: 'g2', title: '2025 七选五', groupType: 'seven_choices',
-      passage: { title: 'Seven', materialText: 'Life skills passage.' },
+      // draft-numbering-style: seven_choices is a BLANK_BEARING_GROUP_TYPE —
+      // the hard consistency assertion requires in-text blank count to equal
+      // question count (1 blank == 1 question here).
+      passage: { title: 'Seven', materialText: 'Life skills passage. __36__ more text.' },
       questions: [
         { id: 'q3', questionNo: '3', stem: 'Fill blank 1', answer: 'E', explanation: 'Context.', note: '', options: [] },
       ],
@@ -61,18 +64,34 @@ console.log('Test 1: HTML generation - blocks, numbering, structure')
   assert('section_header 1 present', html.includes('第一部分 阅读理解'), '')
   assert('section_header 2 present', html.includes('第二节 七选五'), '')
   assert('page_break present', html.includes('class="page-break"'), '')
-  assert('question 21 present', html.includes('>21.</span>'), '')
-  assert('question 22 present', html.includes('>22.</span>'), '')
-  assert('question 23 present (continuous after page_break)', html.includes('>23.</span>'), '')
+
+  // draft-numbering-style (owner 拍板 2026-07-10): small-question numbering
+  // resets to (1) for EVERY question_group — NOT continuous across the
+  // whole paper, and NOT seeded by questionNumberStart (21 here, deliberately
+  // set to a value that would ONLY appear if the old continuous-numbering
+  // behavior regressed back in). Group 1 (阅读理解) has 2 questions → (1)(2).
+  // Group 2 (七选五) has 1 question → (1) again (reset, not 3).
+  const qnumOneCount = (html.match(/class="qnum">\(1\)<\/span>/g) || []).length
+  assert('question (1) present exactly twice — once per group (reset, not continuous)', qnumOneCount === 2, `got ${qnumOneCount}`)
+  assert('question (2) present in group 1 (阅读理解, 2nd of 2 questions)', html.includes('class="qnum">(2)</span>'), '')
+  assert('no (3) anywhere (group 2 has only 1 question, reset wiped any continuation)', !html.includes('class="qnum">(3)</span>'), '')
+  assert('questionNumberStart (21) no longer seeds blocks-path numbering (old dot-format absent)', !html.includes('class="qnum">21.</span>') && !html.includes('class="qnum">(21)</span>'), '')
   assert('passage text present', html.includes('The fox jumps.'), '')
   assert('options present', html.includes('A. Sleep'), '')
   assert('no answer in student', !html.includes('【答案】'), '')
 
   // draft-depassage-letter cut (owner 拍板 2026-07-09): 大题号徽标+题型标签
   // replaces the retired A-D passage letter — continuous across section_header
-  // / page_break (not reset per section).
+  // / page_break (not reset per section). draft-numbering-style does NOT
+  // change this — 大题头 stays whole-paper-continuous (only 小题号 resets).
   assert('group-header 1 present (阅读理解, score suffix)', html.includes('<div class="group-header">1、阅读理解（每题 2.5 分）</div>'), '')
   assert('group-header 2 present (七选五, continuous — not reset by section_header/page_break)', html.includes('<div class="group-header">2、七选五（每题 2 分）</div>'), '')
+  // draft-numbering-style: the seven_choices in-text blank __36__ must be
+  // remapped to the group-local (1) — matching the (1) question-list entry
+  // for the SAME group (both reset independently to 1, but by construction
+  // stay in lockstep via the hard consistency assertion).
+  assert('seven_choices in-text blank __36__ remapped to (1) (matches its group-local question number)', html.includes('<span class="print-blank-num">(1)</span>'), '')
+  assert('literal blank marker 36 no longer shown bare in print-blank-num', !html.includes('<span class="print-blank-num">36</span>'), '')
   assert('no A-D passage-letter row anywhere', !html.includes('class="passage-letter"'), '')
 }
 
@@ -109,12 +128,21 @@ console.log('\nTest 3: CSS contract checks')
 // --- Test 6: Blank-marker styling (刀⑤ render-fidelity Chunk B / PA F2) ---
 console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shapes)')
 {
+  // draft-numbering-style: BLANK_BEARING_GROUP_TYPES (grammar_cloze /
+  // seven_choices here) now hard-assert in-text blank count === question
+  // count, so `questions` can no longer be `[]` when the passage has real
+  // markers — dummy question stubs (content unused by this test, which only
+  // checks blank-span styling) keep the count matched: 2 blanks → 2
+  // questions for grammar, 1 blank → 1 question for seven.
+  function dummyBlankQuestion(id) {
+    return { id, questionNo: id, stem: '', answer: '', explanation: '', note: '', options: [] }
+  }
   const blankItems = [
     {
       detail: {
         id: 'g-grammar', title: 'Grammar', groupType: 'grammar_cloze',
         passage: { materialText: 'It is common for them __56__ (hold) during festivals.\nTransportation __59__ (be) underdeveloped then.' },
-        questions: [],
+        questions: [dummyBlankQuestion('q-56'), dummyBlankQuestion('q-59')],
       },
       score: 1.5,
     },
@@ -122,7 +150,7 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
       detail: {
         id: 'g-seven', title: 'Seven', groupType: 'seven_choices',
         passage: { materialText: 'Museums are changing fast. _____36_____ New tech helps a lot.' },
-        questions: [],
+        questions: [dummyBlankQuestion('q-36')],
       },
       score: 2,
     },
@@ -137,8 +165,13 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   const sevenBlankCount = (html.match(/class="print-blank print-blank--seven"/g) || []).length
   assert('grammar_cloze __56__/__59__ styled with print-blank--short (2 blanks)', shortBlankCount === 2, `got ${shortBlankCount}`)
   assert('seven_choices _____36_____ styled with print-blank--seven (1 blank)', sevenBlankCount === 1, `got ${sevenBlankCount}`)
-  assert('blank number 56 rendered inside print-blank-num', html.includes('<span class="print-blank-num">56</span>'), '')
-  assert('blank number 36 rendered inside print-blank-num', html.includes('<span class="print-blank-num">36</span>'), '')
+  // draft-numbering-style: displayed number is the group-LOCAL sequence
+  // (1..n by order of appearance), not the literal captured marker — group
+  // g-grammar has 2 blanks → (1)(2); group g-seven resets independently → (1).
+  assert('grammar_cloze first blank remapped to group-local (1) (was literal 56)', html.includes('<span class="print-blank-num">(1)</span>'), '')
+  assert('grammar_cloze second blank remapped to group-local (2) (was literal 59)', html.includes('<span class="print-blank-num">(2)</span>'), '')
+  assert('seven_choices blank remapped to its OWN group-local (1) (was literal 36; reset, not continuing grammar_cloze\'s count)', (html.match(/<span class="print-blank-num">\(1\)<\/span>/g) || []).length === 2, `expected 2 occurrences of (1) (one per group)`)
+  assert('literal marker values 56/59/36 no longer shown bare in print-blank-num', !html.includes('<span class="print-blank-num">56</span>') && !html.includes('<span class="print-blank-num">59</span>') && !html.includes('<span class="print-blank-num">36</span>'), '')
   assert('prose text around blanks still HTML-escaped correctly (no literal double underscores leak)', !html.includes('__56__') && !html.includes('_____36_____'), '')
   // owner QA 2026-07-08：inline-block 继承段落 text-indent 2em 会把题号推出横线
   // 压住后文（撞字），.print-blank 必须显式归零缩进。
@@ -247,23 +280,6 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
       { id: 'group-2026-i-grammar-fill', groupType: 'grammar_cloze', blankClass: 'print-blank--short' },
     ]
 
-    const realItems = realGroupSpecs.map((spec) => {
-      const group = groups[spec.id]
-      const materialText = paperAssetParagraphText(group)
-      return {
-        detail: {
-          id: spec.id,
-          title: group.title,
-          groupType: spec.groupType,
-          passage: { materialText },
-          questions: [],
-        },
-        score: 1,
-        // Keep the real text around so we can independently count expected blanks.
-        __materialText: materialText,
-      }
-    })
-
     // Independent expected count: run paperBlankPattern directly over the
     // SAME real text (not a re-derived copy of the renderer's own logic).
     const { paperBlankPattern } = await import('../shared/papersurface/blankPattern.mjs')
@@ -273,6 +289,33 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
       while (paperBlankPattern.exec(text) !== null) count++
       return count
     }
+
+    // draft-numbering-style: these three real groups are all
+    // BLANK_BEARING_GROUP_TYPES — the hard consistency assertion requires
+    // question count === in-text blank count, so `questions` can no longer
+    // be `[]`. Build dummy question stubs (content unused by this test,
+    // which only checks blank-span styling / group-header text) sized to
+    // the REAL, independently-measured blank count for each group.
+    const realItems = realGroupSpecs.map((spec) => {
+      const group = groups[spec.id]
+      const materialText = paperAssetParagraphText(group)
+      const blankCount = countBlanks(materialText)
+      const questions = Array.from({ length: blankCount }, (_, i) => ({
+        id: `${spec.id}-q${i + 1}`, questionNo: String(i + 1), stem: '', answer: '', explanation: '', note: '', options: [],
+      }))
+      return {
+        detail: {
+          id: spec.id,
+          title: group.title,
+          groupType: spec.groupType,
+          passage: { materialText },
+          questions,
+        },
+        score: 1,
+        // Keep the real text around so we can independently count expected blanks.
+        __materialText: materialText,
+      }
+    })
 
     const realBlocks = realItems.map((item) => ({ type: 'question_group', questionGroupId: item.detail.id, score: 1 }))
     const html = buildPrintHtml({

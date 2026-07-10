@@ -47,6 +47,16 @@ const groupTypeLabels = {
   other: '其他',
 }
 
+// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): the three
+// group types whose passage text carries literal in-text blank markers
+// (`__41__` / `_____36_____` / `__56__`, matched by `paperBlankPattern`)
+// that must stay numerically in lockstep with the small-question list below
+// them. `reading` / `writing` never carry these markers in real data
+// (verified empirically against all 174 non-target-type groups in
+// data/question-bank.sqlite, 2026-07-10 — zero paperBlankPattern matches),
+// so the hard consistency assertion below is scoped to only these three.
+const BLANK_BEARING_GROUP_TYPES = new Set(['cloze', 'grammar_cloze', 'seven_choices'])
+
 function escapeHtml(text) {
   return String(text ?? '')
     .replace(/&/g, '&amp;')
@@ -80,8 +90,21 @@ function isMetaStub(text) {
  * `seven_choices` gets the longer (≈4.6em) underline; cloze / grammar_cloze
  * get the shorter (≈3.3em) underline (standard §6, 3+3 vs 2+2 whitespace
  * calibration).
+ *
+ * draft-numbering-style (owner 拍板 2026-07-10): the DISPLAYED number is no
+ * longer the literal captured marker (`match[1]`, e.g. "41") — it is the
+ * question_group-LOCAL sequence number, assigned strictly by ORDER OF
+ * APPEARANCE across the whole passage via `blankCounter` (a `{ next }` ref
+ * the caller creates once per question_group and threads through every
+ * line of that one passage — never reset per line, since a blank can be the
+ * Nth in the group regardless of which line it lands on). This is
+ * deliberately NOT a lookup keyed by the original marker value: order-of-
+ * appearance is the only signal that stays correct even if the source text
+ * has skipped/out-of-order literal numbers (plan.md: "顺序即真相"). Format
+ * matches the new small-question list format exactly: `(n)`, English
+ * half-width parens.
  */
-function renderPassageLineWithBlanks(line, groupType) {
+function renderPassageLineWithBlanks(line, groupType, blankCounter) {
   const text = String(line ?? '')
   paperBlankPattern.lastIndex = 0
   if (!paperBlankPattern.test(text)) return escapeHtml(text)
@@ -95,7 +118,8 @@ function renderPassageLineWithBlanks(line, groupType) {
     if (match.index > cursor) {
       out += escapeHtml(text.slice(cursor, match.index))
     }
-    out += `<span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${escapeHtml(match[1])}</span></span>`
+    const localNum = blankCounter.next++
+    out += `<span class="print-blank ${blankWidthClass}"><span class="print-blank-num">(${localNum})</span></span>`
     cursor = match.index + match[0].length
   }
   if (cursor < text.length) {
@@ -164,7 +188,7 @@ function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode, images) {
  * — never rendered on this or any student/试卷 surface (plan.md rule 2 /
  * PA SW-4).
  */
-function renderPassageLine(line, groupType, figuresInfo, imageMode, images) {
+function renderPassageLine(line, groupType, figuresInfo, imageMode, images, blankCounter) {
   const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
   if (resolved?.kind === 'figure') {
     const src = figureImageSrc(
@@ -177,7 +201,7 @@ function renderPassageLine(line, groupType, figuresInfo, imageMode, images) {
   if (resolved?.kind === 'placeholder') {
     return `<p class="print-figure-placeholder">${escapeHtml(PRINT_FIGURE_PLACEHOLDER_TEXT)}</p>`
   }
-  return `<p>${renderPassageLineWithBlanks(line, groupType)}</p>`
+  return `<p>${renderPassageLineWithBlanks(line, groupType, blankCounter)}</p>`
 }
 
 /**
@@ -218,6 +242,15 @@ export function buildPrintHtml({
   imageMode = 'web',
   images = [],
 }) {
+  // draft-numbering-style (owner 拍板 2026-07-10): small-question numbering
+  // in the `blocks`-array path (the only path any real caller uses — see
+  // the "Legacy" comment on the else-branch below) no longer starts from
+  // `startNum` — it resets to 1 per question_group instead (plan.md: "小题
+  // 号从全卷连续改为大题内重计"). `questionNumberStart` / `startNum` is kept
+  // (not deleted — still a documented input param) because the LEGACY
+  // items-array branch below still reads it; that branch has no real
+  // product consumer today (draft-depassage-letter cut's finding, still
+  // true), so this is a compatibility retention, not a live numbering input.
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
@@ -251,7 +284,6 @@ export function buildPrintHtml({
   }
 
   if (Array.isArray(blocks) && blocks.length > 0) {
-    let questionNum = startNum
     let groupNum = 0
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
@@ -283,9 +315,41 @@ export function buildPrintHtml({
           groupHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
 
+        // draft-numbering-style (owner 拍板 2026-07-10): small-question
+        // numbering resets to (1) for EVERY question_group (was: continuous
+        // across the whole paper via `startNum`). `blankCounter` assigns
+        // the SAME 1..n local sequence to every in-text blank marker found
+        // in THIS group's passage, by order of appearance — see
+        // `renderPassageLineWithBlanks`'s doc comment.
+        let questionNum = 1
+        const blankCounter = { next: 1 }
+
         if (passage) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
-          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images)).join('')}</div>`
+          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images, blankCounter)).join('')}</div>`
+        }
+
+        // Hard consistency assertion (plan.md 连带硬需求): the count of
+        // in-text blank markers found in this group's passage MUST equal
+        // the count of small questions in the group — otherwise the (n)
+        // shown in-text and the (n) shown in the question list would not
+        // refer to the same blank, and a student could not match them up.
+        // Fail LOUD (throw, aborting the whole export) rather than emit a
+        // silently-misaligned paper — plan.md: "宁可导出红也不出对不上的卷子".
+        // Scoped to the three blank-bearing group types only (reading /
+        // writing never carry these markers — see BLANK_BEARING_GROUP_TYPES).
+        if (BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
+          const blanksFound = blankCounter.next - 1
+          if (blanksFound !== detail.questions.length) {
+            throw new Error(
+              `draft-numbering-style: in-text blank count (${blanksFound}) does not match question count `
+              + `(${detail.questions.length}) for question_group "${block.questionGroupId}" (${detail.groupType}) `
+              + `— refusing to render a paper where the passage blanks and the question list would not line up. `
+              + `Likely cause: source materialText has extra/missing paperBlankPattern-shaped markers (stray `
+              + `numbers, OCR noise, or an unsupported blank format like "NN._____") — check the source text for `
+              + `this group.`,
+            )
+          }
         }
 
         if (isWritingGroupType(detail.groupType)) {
@@ -302,10 +366,10 @@ export function buildPrintHtml({
             continue
           }
           if (!stemText && hasOptions) {
-            // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
-            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${question.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
+            // 真卷完形形态:题号与选项同一行「(1) A. xxx B. xxx C. xxx D. xxx」
+            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">(${questionNum})</span>${question.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
           } else {
-            groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
+            groupHtml += `<div class="question"><p class="stem"><span class="qnum">(${questionNum})</span> ${escapeHtml(question.stem)}</p>`
             groupHtml += renderOptions(question.options, detail.groupType)
           }
           if (isTeacher) {

@@ -51,6 +51,15 @@ import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 
+// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): the
+// three group types whose passage text carries literal in-text blank
+// markers that must stay numerically in lockstep with the small-question
+// list below them — mirrors server/print-renderer.mjs's identically-named
+// constant (empirically verified, 2026-07-10, against all 174 non-target-
+// type groups in data/question-bank.sqlite: zero paperBlankPattern matches
+// in reading/writing passages).
+const BLANK_BEARING_GROUP_TYPES = new Set(['cloze', 'grammar_cloze', 'seven_choices'])
+
 let groupTypeLabels
 let optionalString
 // figure-render cut (fig-token P0): optional, defaults to null so every
@@ -194,8 +203,24 @@ function docxBlankPaddingSpaces(groupType) {
  * escape-then-inject order (prose text escaped via `run()`'s own
  * `escapeXml`, the blank's own text is a separate run so its spaces are
  * never collapsed by escaping).
+ *
+ * draft-numbering-style (owner \u62cd\u677f 2026-07-10): `blankCounter` is an
+ * OPTIONAL `{ next }` ref. When the caller supplies one (the exam-style
+ * builder, `buildExamDocumentXml`, whose small-question numbering resets
+ * per question_group), the displayed number is the group-LOCAL sequence by
+ * order of appearance \u2014 `(n)`, matching the small-question list format
+ * exactly, same order-of-appearance rule as print-renderer.mjs's identical
+ * mechanism. When omitted (`null`, the default), behavior is BYTE-IDENTICAL
+ * to pre-cut: the literal captured marker value is shown bare, no parens \u2014
+ * this is deliberate, not an oversight: the non-exam handout builder
+ * (`buildDocumentXml`'s printStyle!=='exam' branch) never resets its
+ * question numbering per group (draft-depassage-letter cut's SW-2 already
+ * documented this exam/handout asymmetry as intentional \u2014 handout DOCX has
+ * no UI path today), so remapping its blanks to a group-local (n) while its
+ * question list stays globally continuous would create a NEW mismatch
+ * instead of fixing one. See callers below for which branch passes what.
  */
-function docxPassageLineRuns(line, groupType) {
+function docxPassageLineRuns(line, groupType, blankCounter = null) {
   const text = String(line ?? '')
   paperBlankPattern.lastIndex = 0
   if (!paperBlankPattern.test(text)) {
@@ -211,7 +236,8 @@ function docxPassageLineRuns(line, groupType) {
     if (match.index > cursor) {
       runs.push(run(text.slice(cursor, match.index), { size: 21 }))
     }
-    runs.push(run(`${padding}${match[1]}${padding}`, { size: 21, underline: true }))
+    const displayNum = blankCounter ? `(${blankCounter.next++})` : match[1]
+    runs.push(run(`${padding}${displayNum}${padding}`, { size: 21, underline: true }))
     cursor = match.index + match[0].length
   }
   if (cursor < text.length) {
@@ -637,9 +663,10 @@ let docxFigureDocPrCounter = 0
  * it. Falls through to the pre-cut `docxPassageLineRuns` text path,
  * unchanged, when `figuresInfo` is null (no paperAssetsDir configured, or
  * this group isn't paper-asset sourced / has no manifest) or the line
- * carries no marker.
+ * carries no marker. `blankCounter` (optional) is forwarded verbatim to
+ * `docxPassageLineRuns` — see that function's doc comment.
  */
-function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textParagraphOptions) {
+function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textParagraphOptions, blankCounter = null) {
   const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
   if (resolved?.kind === 'figure') {
     const absoluteFilePath = path.join(figuresInfo.baseDir, 'figures', resolved.figure.file)
@@ -675,7 +702,7 @@ function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textPar
     body.push(docxFigurePlaceholderParagraph())
     return
   }
-  body.push(paragraph(docxPassageLineRuns(line, groupType), textParagraphOptions))
+  body.push(paragraph(docxPassageLineRuns(line, groupType, blankCounter), textParagraphOptions))
 }
 
 // --- Exam-style renderer: formal Gaokao-style paper layout ---
@@ -686,6 +713,14 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
     return figuresCache.get(groupId)
   }
+  // draft-numbering-style (owner 拍板 2026-07-10): the `blocks`-array path
+  // below (the only path any real caller uses — see the "Legacy fallback"
+  // comment on its else-branch) no longer seeds numbering from `startNum` —
+  // each question_group resets to 1 (plan.md: "小题号从全卷连续改为大题内
+  // 重计"). `questionNumberStart` / `startNum` is kept (not deleted) because
+  // the LEGACY items-array branch still reads it; that branch has no real
+  // product consumer today (draft-depassage-letter cut's finding, still
+  // true) — this is a compatibility retention, not a live numbering input.
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const body = []
 
@@ -734,7 +769,6 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
   // Render blocks or legacy items
   if (Array.isArray(blocks) && blocks.length > 0) {
-    let questionNum = startNum
     let groupNum = 0
 
     for (const block of blocks) {
@@ -762,13 +796,40 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         const groupHeaderLabel = groupTypeLabels[detail.groupType] || detail.groupType
         body.push(paragraph([run(`${groupNum}、${groupHeaderLabel}${groupHeaderScoreSuffix}`, { bold: true, size: 22, heading: true })], { before: 160, after: 80, keepNext: true }))
 
+        // draft-numbering-style (owner 拍板 2026-07-10): small-question
+        // numbering resets to (1) for EVERY question_group (was: continuous
+        // across the whole paper via `startNum`). `blankCounter` assigns the
+        // SAME 1..n local sequence to every in-text blank marker found in
+        // THIS group's passage, by order of appearance — see
+        // `docxPassageLineRuns`'s doc comment.
+        let questionNum = 1
+        const blankCounter = { next: 1 }
+
         // Passage text
         if (passageLines.length > 0 && passageLines[0]) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
-            pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 })
+            pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 }, blankCounter)
           })
           body.push(paragraph('', { after: 80 }))
+        }
+
+        // Hard consistency assertion (plan.md 连带硬需求) — same rationale
+        // as print-renderer.mjs's identical check: fail LOUD rather than
+        // emit a DOCX where the in-text (n) and the question-list (n) do
+        // not refer to the same blank.
+        if (BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
+          const blanksFound = blankCounter.next - 1
+          if (blanksFound !== detail.questions.length) {
+            throw new Error(
+              `draft-numbering-style: in-text blank count (${blanksFound}) does not match question count `
+              + `(${detail.questions.length}) for question_group "${block.questionGroupId}" (${detail.groupType}) `
+              + `— refusing to render a paper where the passage blanks and the question list would not line up. `
+              + `Likely cause: source materialText has extra/missing paperBlankPattern-shaped markers (stray `
+              + `numbers, OCR noise, or an unsupported blank format like "NN._____") — check the source text for `
+              + `this group.`,
+            )
+          }
         }
 
         if (isWritingGroupType(detail.groupType)) {
@@ -787,11 +848,11 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
           }
           if (!stemText && hasOptions) {
             const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('    ')
-            body.push(paragraph([run(`${questionNum}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
+            body.push(paragraph([run(`(${questionNum})  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
           } else {
             body.push(
               paragraph(
-                [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`, { size: 21 })],
+                [run(`(${questionNum})  ${docxQuestionStem(detail, question)}`, { size: 21 })],
                 { before: 60, after: 50 },
               ),
             )
@@ -875,6 +936,19 @@ function examOptionTable(rows) {
 // header comment above `buildExamDocumentXml`. Defaults to a throwaway
 // array so a caller that doesn't need image bytes (e.g. an existing test
 // stub) can still call this with the exact pre-cut argument shape.
+// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): everything
+// BELOW this line (the printStyle!=='exam' "Handout style" branch and its
+// own legacy items-array fallback) is DELIBERATELY left untouched — no
+// group-local numbering reset, no `(n)` format, no blank remap. This mirrors
+// draft-depassage-letter cut's SW-2 finding (docs/cuts/draft-depassage-letter/
+// cr.md): this handout DOCX path has no UI-reachable caller today
+// (`usePaperDraft.ts` defaults `paperExportStyle` to 'exam' and no component
+// ever calls `setPaperExportStyle('handout')`), and unlike the exam builder
+// it was never given the `n、题型` 大题头 either — extending THIS cut's
+// group-local-reset + blank-remap to a numbering scheme that stays globally
+// continuous would introduce a NEW mismatch instead of fixing one. If this
+// path ever gains a real caller, it needs its own numbering-parity pass —
+// not a silent side effect of a different builder's blocks-branch.
 function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [] }) {
   if (printStyle === 'exam') {
     return buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart, images })
