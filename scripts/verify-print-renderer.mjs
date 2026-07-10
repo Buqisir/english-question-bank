@@ -182,6 +182,32 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   assert('§3b: section-header break-after: avoid (标题不落页尾)', /\.section-header,\s*\.group-meta,\s*\.group-header \{\s*break-after:\s*avoid/.test(html), '')
   const boxBreakRule = html.match(/\.writing-answer-box \{\s*break-inside[^}]*\}/)?.[0] || (html.includes('.writing-answer-box {\n  break-inside: avoid;') ? 'ok' : '')
   assert('§3b: writing-answer-box break-inside: avoid (写作框整框不拆)', html.match(/\.writing-answer-box \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r)) === true, '')
+
+  // draft-numbering-style cr.md MF-1: the hard consistency assertion must be
+  // proven to REJECT, not only to admit matched fixtures — otherwise deleting
+  // the throw keeps every verify green. Negative case: 2 in-text blanks vs 3
+  // listed questions → buildPrintHtml must throw the assertion error.
+  {
+    const badItems = [
+      {
+        detail: {
+          id: 'g-bad', title: 'Bad', groupType: 'grammar_cloze',
+          passage: { materialText: 'It is common __56__ (hold) and __59__ (be) here.' },
+          questions: [dummyBlankQuestion('q-1'), dummyBlankQuestion('q-2'), dummyBlankQuestion('q-3')],
+        },
+        score: 1.5,
+      },
+    ]
+    const badBlocks = [{ type: 'question_group', questionGroupId: 'g-bad', score: 1.5 }]
+    let thrown = null
+    try {
+      buildPrintHtml({ title: 'Bad', versionType: 'student', printStyle: 'exam', items: badItems, blocks: badBlocks, questionNumberStart: 1 })
+    } catch (error) {
+      thrown = error
+    }
+    assert('MF-1 negative: blank count (2) ≠ question count (3) throws', thrown !== null, 'buildPrintHtml did NOT throw')
+    assert('MF-1 negative: error message names draft-numbering-style assertion', /draft-numbering-style/.test(thrown?.message || ''), thrown?.message?.slice(0, 120) || '')
+  }
 }
 
 // --- Test 7: Writing answer box (standard §8) ---

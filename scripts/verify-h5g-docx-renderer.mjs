@@ -624,6 +624,37 @@ async function main() {
   await assertRealAssetBlankCounts()
   assertRealAssetFigureEmbed()
 
+  // draft-numbering-style cr.md MF-1: negative case — the exam-style DOCX
+  // path must REJECT a blank/question count mismatch (2 in-text blanks vs 3
+  // questions), proving the hard consistency assertion's throw path, not
+  // only its happy path.
+  {
+    const renderer = makeRenderer()
+    const badItems = [
+      {
+        detail: {
+          id: 'g-bad', title: 'Bad', groupType: 'grammar_cloze',
+          passage: { materialText: 'It is common __56__ (hold) and __59__ (be) here.' },
+          questions: [
+            { id: 'q-1', questionNo: 1, stem: '', answer: '', explanation: '', note: '', options: [] },
+            { id: 'q-2', questionNo: 2, stem: '', answer: '', explanation: '', note: '', options: [] },
+            { id: 'q-3', questionNo: 3, stem: '', answer: '', explanation: '', note: '', options: [] },
+          ],
+        },
+        score: 1.5,
+      },
+    ]
+    const badBlocks = [{ type: 'question_group', questionGroupId: 'g-bad', score: 1.5 }]
+    let thrown = null
+    try {
+      renderer.buildDocumentXml({ title: 'Bad', versionType: 'student', items: badItems, blocks: badBlocks, questionNumberStart: 1, printStyle: 'exam' })
+    } catch (error) {
+      thrown = error
+    }
+    assert('MF-1 negative: docx blank count (2) ≠ question count (3) throws', thrown !== null, 'buildDocumentXml did NOT throw')
+    assert('MF-1 negative: docx error names draft-numbering-style assertion', /draft-numbering-style/.test(thrown && thrown.message ? thrown.message : ''), thrown && thrown.message ? thrown.message.slice(0, 120) : '')
+  }
+
   console.log(`\nH5-G docx-renderer verify PASSED: ${passed} checks`)
 }
 
