@@ -34,8 +34,11 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
   token 八处渲染面全灭，四路径共用 shared/figures/resolveFigureMarker
   单源；DOCX 嵌 PNG 实证成功（PO-1 未触发）；QA 抓到并修掉 Vivliostyle
   file:// 裂图 + 详情页 marker 泄漏两真 bug（回归断言已补）。挂账：
-  docxRenderer 模块级单例（cr.md SW）、详情页头注释失真。**E3+
-  figure-render 两刀 owner QA 待做，生产部署待拍板**。
+  docxRenderer 模块级单例（cr.md SW）、详情页头注释失真。owner QA 过
+  （Chrome 三标签页实看）。**生产已部署 02308a4**（owner 拍板，
+  2026-07-10）：pull→install→build→restart 分步；eqb+caddy active、
+  health 200、eqbank.cc 200、生产实跑 169+29+81 三本全绿（含
+  figure-render 在生产机真建 PDF 的断言）。
 - 2026-07-10：**similar-rail（E2）收官 + 生产部署 5caf263**（merge cb35cd3，
   CR APPROVE 0 MF，主代理复核 184+72 绿，**owner QA 过**含三笔实测 polish：
   讲评栏底部 72px chip 净空、CTA 钮居左文案随右）。主打功能一条龙上线：
