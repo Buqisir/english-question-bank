@@ -23,7 +23,7 @@
  * reason, 加入草稿卷, the whole-paper preview entry, and the per-group
  * analysis entry) stays visible to both member and owner.
  */
-import type { MouseEvent } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
 import {
   ArrowLeft,
   BookOpen,
@@ -46,7 +46,16 @@ import { sourceTypeLabel } from '../../domain/questionBank'
 import { labelOf } from '../../workbench/detail/readingProfileLabels'
 import { AnalysisDisclosure } from './AnalysisDisclosure'
 import { compactGroupMeta } from './detailHelpers'
-import { buildPaperBrowseLectureHref, buildPaperBrowseSimilarHref } from '../../concierge/paperSurfaceHref'
+import {
+  buildPaperBrowseLectureHref,
+  buildPaperBrowseSimilarHref,
+  parsePaperIdFromHref,
+} from '../../concierge/paperSurfaceHref'
+import {
+  buildPassageSegments,
+  FIGURE_PLACEHOLDER_TEXT,
+  type PaperFigureManifestEntry,
+} from './passageFigureSegments'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
@@ -147,6 +156,52 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onOpenPaperBrowseLecture,
     onOpenPaperBrowseSimilar,
   } = props
+
+  // figure-render cut (fig-token P0): the ONE deliberate, narrow exception
+  // to this component's "Pure props-driven, zero internal useState" header
+  // invariant (see file header comment). Every other render surface this
+  // cut touches (PaperSurface, print/PDF, DOCX) resolves its figures from
+  // data already threaded in by its host; the detail page has no such host
+  // fetch to piggyback on within this cut's Allowed scope (App.tsx is out
+  // of scope — see the completion report's "beyond the plan's literal
+  // Allowed list" note). Best-effort: any fetch/parse failure, or a group
+  // with no paperSurfaceHref to derive a paperId from, silently degrades
+  // to `figures: []` — buildPassageSegments then short-circuits to the
+  // EXACT pre-cut single-`<pre>` render (raw marker text, unchanged).
+  const paperId = parsePaperIdFromHref(selectedDetail?.paperSurfaceHref)
+  const [figuresState, setFiguresState] = useState<{
+    paperId: string | null
+    assetBase: string
+    figures: PaperFigureManifestEntry[]
+  }>({ paperId: null, assetBase: '', figures: [] })
+  useEffect(() => {
+    if (!paperId) return
+    let cancelled = false
+    async function loadManifest(): Promise<void> {
+      let assetBase = `/paper-assets/${paperId}/latest`
+      let figures: PaperFigureManifestEntry[] = []
+      try {
+        let res = await fetch(`${assetBase}/figures/manifest.json`)
+        if (!res.ok) {
+          assetBase = `/paper-assets/${paperId}`
+          res = await fetch(`${assetBase}/figures/manifest.json`)
+        }
+        if (res.ok) {
+          const manifest = (await res.json()) as { figures?: PaperFigureManifestEntry[] }
+          figures = Array.isArray(manifest.figures) ? manifest.figures : []
+        }
+      } catch {
+        /* graceful degradation — figures stays [] */
+      }
+      if (!cancelled) setFiguresState({ paperId, assetBase, figures })
+    }
+    void loadManifest()
+    return (): void => {
+      cancelled = true
+    }
+  }, [paperId])
+  const activeFigures = figuresState.paperId === paperId ? figuresState.figures : []
+  const activeFiguresAssetBase = figuresState.paperId === paperId ? figuresState.assetBase : ''
 
   // These useMemos previously lived in App.tsx (App.tsx:1261-1293 pre-cut);
   // per PA MF-2 they are NOT props — recomputed here from the passed-in
@@ -308,9 +363,32 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               {selectedDetail.passage.discourseType && <span>语篇：{selectedDetail.passage.discourseType}</span>}
               {selectedDetail.passage.wordCount ? <span>词数：{selectedDetail.passage.wordCount}</span> : null}
             </div>
-            <pre className="passage-text">
-              {selectedDetail.passage.materialText || '暂无完整原文。后续导入 DOCX/PDF/OCR 时会补到这里。'}
-            </pre>
+            {buildPassageSegments(selectedDetail.passage.materialText, activeFigures).map((segment, index) => {
+              if (segment.kind === 'figure') {
+                return (
+                  <div key={index} className="passage-figure">
+                    <img
+                      className="passage-figure-image"
+                      src={`${activeFiguresAssetBase}/figures/${segment.figure.file}`}
+                      alt={segment.figure.figureId}
+                    />
+                    <pre className="passage-text passage-figure-flattened-text">{segment.flattenedText}</pre>
+                  </div>
+                )
+              }
+              if (segment.kind === 'placeholder') {
+                return (
+                  <div key={index} className="passage-figure-placeholder">
+                    {FIGURE_PLACEHOLDER_TEXT}
+                  </div>
+                )
+              }
+              return (
+                <pre key={index} className="passage-text">
+                  {segment.text || '暂无完整原文。后续导入 DOCX/PDF/OCR 时会补到这里。'}
+                </pre>
+              )
+            })}
           </section>
 
           <section className="detail-section" aria-label="题组说明">

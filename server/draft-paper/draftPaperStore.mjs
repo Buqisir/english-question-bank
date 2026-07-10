@@ -207,6 +207,14 @@ export function createDraftPaperStore({
     return html.replace('</style>', `${footerCss}\n</style>`)
   }
 
+  // figure-render cut (fig-token P0): `imageMode` defaults to 'web' — the
+  // A4 preview + print-preview route are both browser-rendered, served
+  // through the app's own origin (`/paper-assets/**` static route), so a
+  // root-relative <img> src resolves correctly. `exportDraftPaperPdf`
+  // below is the ONE caller that overrides to 'file' — it writes this same
+  // HTML to a scratch tempdir and converts it OFFLINE via Vivliostyle CLI,
+  // which needs an absolute file:// path instead (see print-renderer.mjs's
+  // `figureImageSrc` doc comment for the full "why two modes" story).
   function buildDraftPrintHtml(draftPaper, exportOptions = {}) {
     if (!draftPaper.items.length) return ''
     const input = buildDraftPaperExportInput(draftPaper, exportOptions)
@@ -246,6 +254,8 @@ export function createDraftPaperStore({
         items: exportItems,
         blocks: input.blocks,
         questionNumberStart: input.questionNumberStart,
+        paperAssetsDir,
+        imageMode: exportOptions.imageMode === 'file' ? 'file' : 'web',
       }),
       input.title,
     )
@@ -784,7 +794,12 @@ export function createDraftPaperStore({
         userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
         return { body: readFileSync(recent.outputPath), fileName: recent.fileName, outputPath: recent.outputPath, draftPaper, reusedRecent: true }
       }
-      const html = buildDraftPrintHtml(draftPaper, { versionType: normalizedVersionType })
+      // figure-render cut: this is the ONE buildDraftPrintHtml call whose
+      // output gets written to a scratch tempdir and converted OFFLINE via
+      // Vivliostyle CLI below — imageMode: 'file' so any figure <img> src
+      // is an absolute file:// path, not the web-relative default the
+      // other two callers (preview fetch, print-preview route) need.
+      const html = buildDraftPrintHtml(draftPaper, { versionType: normalizedVersionType, imageMode: 'file' })
       if (!html) throw new Error('请先添加题组')
       const vivliostylePaths = [
         path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),

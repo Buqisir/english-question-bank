@@ -69,6 +69,10 @@ import {
   type PaperAssetSurfaceModel,
   type ReviewedReadingChoiceAnalysisV1,
 } from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
+// figure-render cut: separate import line (not folded into the block
+// above) so verify-paper-browse.mjs's `buildPaperAssetSurfaceModel...from
+// '../paper-intelligence/'` proximity regex keeps matching unchanged.
+import type { PaperFigureManifestEntry } from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
 import {
   buildSevenChoicesSurfaceModel,
   type SevenChoicesSurfaceModel,
@@ -489,6 +493,23 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
         }
 
+        // figure-render cut (fig-token P0): best-effort fetch — most papers
+        // have no figures/manifest.json at all, a 404/parse failure just
+        // means figures stays empty (matches "零图卷零断言" — no error, no
+        // placeholder, the raw marker paragraph would only ever appear if
+        // a paper HAS a manifest that doesn't cover it, which is exactly
+        // the "no manifest hit" placeholder-card case the adapter handles).
+        let loadedFigures: PaperFigureManifestEntry[] = []
+        try {
+          const res = await fetch(`${resolvedBase}/figures/manifest.json`)
+          if (res.ok) {
+            const manifest = (await res.json()) as { figures?: PaperFigureManifestEntry[] }
+            loadedFigures = Array.isArray(manifest.figures) ? manifest.figures : []
+          }
+        } catch {
+          /* graceful degradation — figures stays [] */
+        }
+
         const models: Record<string, GroupModel> = {}
         for (const block of groupBlocks) {
           const group = loadedAsset.content.groups[block.groupId]
@@ -505,6 +526,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   asset: loadedAsset,
                   analysis: readingAnalysis,
                   groupId: block.groupId,
+                  figures: loadedFigures,
+                  assetBase: resolvedBase,
                 }),
               }
             } else if (group.groupType === 'sevenChoices') {

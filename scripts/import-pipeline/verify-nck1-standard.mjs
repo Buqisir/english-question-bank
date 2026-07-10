@@ -231,6 +231,46 @@ check('F1 figures/manifest.json: every entry has an existing non-empty file + va
   return `${manifest.figures.length} figure(s) OK`
 })
 
+// ---- F1b. MF-4 invariant (figure-render cut, fig-token P0) ----
+// The figure-render cut's render-time substitution (shared
+// `resolveFigureMarker.mjs`, consumed by paperAssetSurfaceAdapter.ts /
+// print-renderer.mjs / docxRenderer.mjs) replaces a WHOLE paragraph/line
+// whenever its TRIMMED text STARTS WITH a manifest placeholderMarker —
+// never a substring hide. That is only safe if every marker is genuinely
+// paragraph-initial and appears in exactly one paragraph; this check
+// enforces that structural precondition at import time so a future paper
+// can never silently ship a marker that violates it (PA MF-4: "sooner a
+// red import than a renderer that silently eats prose"). It is a
+// STRUCTURAL check, not a semantic one — it cannot tell "flattened table
+// text" apart from unrelated prose sharing the marker's paragraph; that
+// judgment call stays with the importer/reviewer.
+check('F1b MF-4: every placeholderMarker is paragraph-initial and appears in exactly one paragraph (figure-render cut)', () => {
+  const manifestPath = path.join(figuresDir, 'manifest.json')
+  if (!existsSync(manifestPath)) fail('figures/manifest.json missing')
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
+  if (!Array.isArray(manifest.figures) || manifest.figures.length === 0) fail('manifest.figures is empty')
+  let checked = 0
+  for (const entry of manifest.figures) {
+    if (!entry.placeholderMarker) continue
+    const group = [...readingGroups, seven, cloze, grammar, application, continuation].find((g) => g.groupId === entry.groupId)
+    if (!group) fail(`figure ${entry.figureId} references unknown groupId ${entry.groupId}`)
+    const paragraphs = Array.isArray(group.paragraphs) ? group.paragraphs : []
+    const matchingParagraphs = paragraphs.filter((p) => String(p?.text || '').includes(entry.placeholderMarker))
+    if (matchingParagraphs.length === 0) {
+      fail(`placeholderMarker "${entry.placeholderMarker}" not found in any ${entry.groupId} paragraph`)
+    }
+    if (matchingParagraphs.length > 1) {
+      fail(`placeholderMarker "${entry.placeholderMarker}" appears in ${matchingParagraphs.length} paragraphs of ${entry.groupId} — must be exactly one (MF-4)`)
+    }
+    const paragraphText = String(matchingParagraphs[0].text || '')
+    if (!paragraphText.trim().startsWith(entry.placeholderMarker)) {
+      fail(`placeholderMarker "${entry.placeholderMarker}" is not paragraph-initial in ${entry.groupId} (marker must start the trimmed paragraph text, MF-4) — got: "${paragraphText.trim().slice(0, 60)}..."`)
+    }
+    checked += 1
+  }
+  return `${checked} marker(s) paragraph-initial + single-paragraph OK`
+})
+
 // ---- G. Post-publish progressive check ----
 const published = existsSync(liveLatestDir)
 if (published) {

@@ -13,10 +13,13 @@
  */
 
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
+import { resolveFigureMarker } from '../../../../shared/figures/resolveFigureMarker.mjs'
 import type {
   PaperEvidence,
   PaperQuestion,
+  PaperTextFigure,
   PaperTextMap,
+  PaperTextParagraph,
 } from '../../../../shared/papersurface/types'
 import type {
   PaperAssetV1,
@@ -100,10 +103,43 @@ export type PaperAssetSurfaceModel = {
   defaultQuestionId: string | null
 }
 
+/**
+ * figure-render cut (fig-token P0) — one entry of a paper's
+ * figures/manifest.json (app/public/paper-assets/<paperId>/latest/figures/
+ * manifest.json). Read-only data the adapter consumes; never written here.
+ */
+export type PaperFigureManifestEntry = {
+  figureId: string
+  groupId?: string
+  kind?: string
+  file: string
+  caption?: string
+  placeholderMarker: string
+}
+
 export type BuildPaperAssetSurfaceModelInput = {
   asset: PaperAssetV1
   analysis: ReviewedReadingChoiceAnalysisV1
   groupId: string
+  /**
+   * figure-render cut: OPTIONAL, defaults to `[]` — every existing caller
+   * that omits it keeps byte-identical `textMap.paragraphs[].text`
+   * behavior (no paragraph ever gets a `figure` field, PA SW-3 additivity
+   * discipline mirroring I15's blankFocusMode gating). The paper's
+   * figures/manifest.json `figures` array, fetched by the caller
+   * (PaperBrowsePage.tsx) — this adapter stays pure (no fetch, I12).
+   */
+  figures?: ReadonlyArray<PaperFigureManifestEntry>
+  /**
+   * figure-render cut: OPTIONAL — the resolved asset base
+   * (`/paper-assets/<paperId>/latest`) used to build each figure's `<img>`
+   * src (`${assetBase}/figures/<file>`). Required for a manifest match to
+   * actually resolve to a renderable image; omitting it while `figures` is
+   * non-empty degrades a matched figure to the placeholder card rather
+   * than emitting a broken/empty `src` (never silently broken, plan.md
+   * rule 3).
+   */
+  assetBase?: string
 }
 
 const SECTION_BY_READING_GROUP_ID: Record<string, string> = {
@@ -135,7 +171,7 @@ const trapLabels: Record<string, string> = {
 export function buildPaperAssetSurfaceModel(
   input: BuildPaperAssetSurfaceModelInput,
 ): PaperAssetSurfaceModel {
-  const { asset, analysis, groupId } = input
+  const { asset, analysis, groupId, figures = [], assetBase } = input
   if (asset.schemaVersion !== 'paper-asset-v1') {
     throw new Error('[C6a-4] paper asset schemaVersion must be paper-asset-v1.')
   }
@@ -173,7 +209,7 @@ export function buildPaperAssetSurfaceModel(
   }
 
   const questions = buildQuestions(asset, analysis, group, paperSection)
-  const textMap = buildTextMap(asset, group, paperSection)
+  const textMap = buildTextMap(asset, group, paperSection, figures, assetBase)
   const evidence = buildEvidence(analysis, group, textMap)
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, group, evidence)
   const evidenceKindById = Object.fromEntries(
@@ -205,15 +241,48 @@ function buildTextMap(
   asset: PaperAssetV1,
   group: PaperContentGroup,
   paperSection: string,
+  figures: ReadonlyArray<PaperFigureManifestEntry>,
+  assetBase: string | undefined,
 ): PaperTextMap {
   return {
     paperId: asset.paper.paperId,
-    paragraphs: (group.passage?.paragraphs ?? []).map((paragraph) => ({
-      id: paragraph.paragraphId,
-      section: paperSection,
-      sentences: segmentSentencesForParagraph(paragraph.text, paragraph.paragraphId),
-    })),
+    paragraphs: (group.passage?.paragraphs ?? []).map((paragraph): PaperTextParagraph => {
+      const figure = resolveParagraphFigure(paragraph.text, figures, assetBase)
+      return {
+        id: paragraph.paragraphId,
+        section: paperSection,
+        sentences: segmentSentencesForParagraph(paragraph.text, paragraph.paragraphId),
+        ...(figure ? { figure } : {}),
+      }
+    }),
   }
+}
+
+/**
+ * figure-render cut — paragraph-granular figure resolution (plan.md
+ * behavior rule 1 / PA MF-4): the paragraph's WHOLE text must start with a
+ * manifest marker for this to fire; a marker mid-paragraph, or a paragraph
+ * that also carries real prose alongside the marker, is deliberately left
+ * as `undefined` here (renders as normal text, marker and all — the same
+ * "don't silently eat prose" discipline `resolveFigureMarker` documents).
+ * `figures` empty (paper has no manifest, or caller omitted it) always
+ * short-circuits to `undefined` — zero behavior change from pre-cut.
+ */
+function resolveParagraphFigure(
+  text: string,
+  figures: ReadonlyArray<PaperFigureManifestEntry>,
+  assetBase: string | undefined,
+): PaperTextFigure | undefined {
+  if (figures.length === 0) return undefined
+  const resolved = resolveFigureMarker(text, figures)
+  if (!resolved) return undefined
+  if (resolved.kind === 'placeholder') return { kind: 'placeholder' }
+  // resolved.kind === 'figure' — a manifest match with no assetBase to
+  // resolve a real `src` degrades to the placeholder card rather than
+  // emitting a broken/empty image src (plan.md rule 3: never silently
+  // broken).
+  if (!assetBase) return { kind: 'placeholder' }
+  return { kind: 'figure', src: `${assetBase}/figures/${resolved.figure.file}`, alt: resolved.figure.figureId }
 }
 
 function segmentSentencesForParagraph(

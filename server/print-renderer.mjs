@@ -16,10 +16,25 @@
  * `NN._____`, which does not appear in stored paper-asset text; stored
  * grammar-fill blanks use the `__NN__` form, same family as cloze /
  * 七选五).
+ *
+ * figure-render cut (fig-token P0): covers ALL THREE print/A4 surfaces in
+ * one place (plan.md render-face #3) — export print HTML/PDF, 工作台 A4
+ * 预览, and 草稿卷预览 all wrap THIS module's output (`draftPaperPreviewHtml.
+ * ts` / `DraftPaperWorkbench.tsx` only pretty-print + paginate it, no token
+ * logic of their own). `buildPrintHtml` takes two new OPTIONAL, defaulted
+ * params — `paperAssetsDir` and `imageMode` — so every existing caller that
+ * omits them keeps byte-identical output (no figures/manifest.json lookup
+ * happens at all unless a caller opts in). Line-granular marker replacement
+ * (never substring) via the shared `resolveFigureMarker` — same rule
+ * `paperAssetSurfaceAdapter.ts` and `docxRenderer.mjs` enforce, so the three
+ * surfaces can never drift on which unit counts as "this line IS a figure".
  */
 
+import path from 'node:path'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
+import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
+import { resolveGroupFigures } from './figures/paperFigures.mjs'
 
 const groupTypeLabels = {
   reading: '阅读理解',
@@ -94,6 +109,67 @@ function isWritingGroupType(groupType) {
   return groupType === 'writing' || groupType === 'continuation'
 }
 
+// figure-render cut — exam-paper-format-standards §1: 版心宽 = A4(210mm) -
+// 24mm*2 页边距 = 162mm. Figures never exceed the passage's own content
+// width, so a plain `max-width: 100%` on `.print-figure img` (§ below in
+// the <style> block) already caps at 162mm — this constant exists only so
+// the number is named once, matching PaperSurface.css's identical citation.
+const PRINT_FIGURE_PLACEHOLDER_TEXT = '〔表格：见原卷〕'
+
+/**
+ * Resolves a figure's `<img>` src for the print/PDF/A4-preview HTML.
+ *
+ * TWO consumers share `buildPrintHtml`'s output and need DIFFERENT URL
+ * schemes for the SAME figure file:
+ *   - 'web' (default): the browser-rendered surfaces (print-preview page,
+ *     工作台 A4 预览, 草稿卷预览 — all served through the app's own origin,
+ *     which already exposes `/paper-assets/**` as a static route). A
+ *     root-relative path resolves correctly regardless of whether the HTML
+ *     is injected via `srcDoc` (which inherits the parent document's
+ *     origin) or fetched directly.
+ *   - 'file': the Vivliostyle-CLI PDF path (`exportPrintPdf` /
+ *     `exportDraftPaperPdf`) writes this HTML to a scratch tempdir and
+ *     converts it OFFLINE — a root-relative `/paper-assets/...` path would
+ *     resolve against the tempdir's filesystem root (wrong / nonexistent).
+ *     An absolute `file://` URL to the real on-disk PNG works regardless
+ *     of whether a web server is even running.
+ */
+function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode) {
+  const absolutePath = path.join(baseDir, 'figures', file)
+  if (imageMode === 'file') {
+    return `file://${absolutePath}`
+  }
+  const relativeFromRoot = path.relative(paperAssetsDir, absolutePath).split(path.sep).join('/')
+  return `/paper-assets/${relativeFromRoot}`
+}
+
+/**
+ * Renders ONE passage line (print/docx grain is line, `\n`-split — plan.md
+ * 行为规则 1). `figuresInfo` is null when the caller omitted
+ * `paperAssetsDir` (default, byte-identical to pre-cut output) or when this
+ * group isn't paper-asset sourced / its paper has no manifest — in every
+ * one of those cases `resolveFigureMarker` is never even called, so a
+ * non-figure line renders through the EXACT unchanged `<p>` + blanks path.
+ *
+ * caption is operational metadata (manifest note: "source paper.pdf p.4")
+ * — never rendered on this or any student/试卷 surface (plan.md rule 2 /
+ * PA SW-4).
+ */
+function renderPassageLine(line, groupType, figuresInfo, imageMode) {
+  const resolved = figuresInfo ? resolveFigureMarker(line, figuresInfo.figures) : null
+  if (resolved?.kind === 'figure') {
+    const src = figureImageSrc(
+      { paperAssetsDir: figuresInfo.paperAssetsDir, baseDir: figuresInfo.baseDir, file: resolved.figure.file },
+      imageMode,
+    )
+    return `<figure class="print-figure"><img src="${escapeHtml(src)}" alt="${escapeHtml(resolved.figure.figureId)}"></figure>`
+  }
+  if (resolved?.kind === 'placeholder') {
+    return `<p class="print-figure-placeholder">${escapeHtml(PRINT_FIGURE_PLACEHOLDER_TEXT)}</p>`
+  }
+  return `<p>${renderPassageLineWithBlanks(line, groupType)}</p>`
+}
+
 /**
  * 应用文 vs 读后续写 sizing (standard §8: 144×65mm vs 145×57mm). The
  * paper-asset schema stores both task types under the single `writing`
@@ -113,11 +189,36 @@ function renderWritingAnswerBox(detail) {
   return `<div class="writing-answer-box" style="width:${widthMm}mm;height:${heightMm}mm;"></div>`
 }
 
-export function buildPrintHtml({ title, versionType, printStyle, items, blocks, questionNumberStart }) {
+export function buildPrintHtml({
+  title,
+  versionType,
+  printStyle,
+  items,
+  blocks,
+  questionNumberStart,
+  // figure-render cut — both optional, both default to pre-cut behavior
+  // (see the module header comment + renderPassageLine's doc comment).
+  paperAssetsDir = null,
+  imageMode = 'web',
+}) {
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
   const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
+
+  // figure-render cut: per-call cache so a multi-group paper doesn't
+  // rescan paperAssetsDir once per passage LINE — resolveGroupFigures does
+  // a directory scan, so it's memoized per groupId for the life of this
+  // one buildPrintHtml call (never persisted across calls/requests).
+  const figuresCache = new Map()
+  function getFiguresInfo(groupId) {
+    if (!paperAssetsDir) return null
+    if (!figuresCache.has(groupId)) {
+      const resolved = resolveGroupFigures(paperAssetsDir, groupId)
+      figuresCache.set(groupId, resolved ? { ...resolved, paperAssetsDir } : null)
+    }
+    return figuresCache.get(groupId)
+  }
 
   const sections = []
 
@@ -173,7 +274,8 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
         }
 
         if (passage) {
-          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => `<p>${renderPassageLineWithBlanks(line, detail.groupType)}</p>`).join('')}</div>`
+          const figuresInfo = getFiguresInfo(block.questionGroupId)
+          groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode)).join('')}</div>`
         }
 
         if (isWritingGroupType(detail.groupType)) {
@@ -221,7 +323,8 @@ export function buildPrintHtml({ title, versionType, printStyle, items, blocks, 
       const passage = (detail.passage.materialText || detail.passage.summary || '').trim()
       let groupHtml = '<section class="question-group">'
       if (passage) {
-        groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => `<p>${renderPassageLineWithBlanks(line, detail.groupType)}</p>`).join('')}</div>`
+        const figuresInfo = getFiguresInfo(detail.id)
+        groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode)).join('')}</div>`
       }
       if (isWritingGroupType(detail.groupType)) {
         groupHtml += renderWritingAnswerBox(detail)
@@ -342,6 +445,32 @@ body {
 .passage p {
   margin: 0 0 0.3em;
   text-indent: 2em;
+}
+
+/* figure-render cut — SW-2: figures never exceed the passage's own
+   content width (already ≤162mm/版心, exam-paper-format-standards §1 —
+   page margins already cap it, this is just belt-and-suspenders), and
+   never split across a page break (§3b 阅读原子不跨页). */
+.print-figure {
+  margin: 0.5em 0;
+  text-align: center;
+  text-indent: 0;
+  break-inside: avoid;
+}
+
+.print-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.print-figure-placeholder {
+  text-align: center;
+  text-indent: 0;
+  color: #555;
+  border: 1px dashed #999;
+  padding: 0.6em 0;
+  margin: 0.5em 0 0.3em;
+  break-inside: avoid;
 }
 
 .question {

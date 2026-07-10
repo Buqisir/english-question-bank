@@ -68,6 +68,10 @@ const exportImplementation = createExportImplementation({
   writeDocxPackage,
   buildPrintHtml,
   convertDocxToPdf,
+  // figure-render cut: threaded through so exportDocx/exportPrintHtml/
+  // exportPrintPdf can resolve each group's figures/manifest.json —
+  // optional, defaults to null in createExportImplementation.
+  paperAssetsDir,
 })
 const serverContext = {
   rootDir,
@@ -3570,20 +3574,29 @@ async function parseSevenChoicesByQuestionGroup(questionGroupId, apiKey, model, 
 // wrappers (all 3 sync, exact original signatures) so createExportImplementation@~62 keeps injecting the
 // hoisted wrappers unchanged (it only STORES them; they run at export time after init). timestampPrefix
 // STAYS in api.mjs (not docx rendering); the renderer never calls it.
+// figure-render cut (fig-token P0): paperAssetsDir is injected so
+// docxRenderer.mjs can resolve a group's figures/manifest.json + embed the
+// PNG (optional — the factory defaults it to null, matching every other
+// caller/test that omits it). buildDocumentXml/writeDocxPackage both gained
+// an `images` out-parameter for the same reason (see docxRenderer.mjs's
+// header comment above buildExamDocumentXml) — forwarded through here
+// unchanged so the wrappers stay "exact original signatures" plus the one
+// new param.
 const docxRenderer = createDocxRenderer({
   groupTypeLabels,
   optionalString,
+  paperAssetsDir,
 })
 const {
   buildDocumentXml: buildDocumentXmlImpl,
   writeDocxPackage: writeDocxPackageImpl,
   convertDocxToPdf: convertDocxToPdfImpl,
 } = docxRenderer
-function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle }) {
-  return buildDocumentXmlImpl({ title, versionType, items, blocks, questionNumberStart, printStyle })
+function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [] }) {
+  return buildDocumentXmlImpl({ title, versionType, items, blocks, questionNumberStart, printStyle, images })
 }
-function writeDocxPackage({ documentXml, outputPath, title }) {
-  return writeDocxPackageImpl({ documentXml, outputPath, title })
+function writeDocxPackage({ documentXml, outputPath, title, images = [] }) {
+  return writeDocxPackageImpl({ documentXml, outputPath, title, images })
 }
 function convertDocxToPdf(docxPath, outputPath) {
   return convertDocxToPdfImpl(docxPath, outputPath)
