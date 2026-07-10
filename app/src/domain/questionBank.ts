@@ -608,3 +608,48 @@ export const verdictLabel: Record<VerifyVerdict, string> = {
   uncertain: '不确定',
   skipped: '已跳过',
 }
+
+// ─── similar-rail (E2) — response types for POST /api/similar-questions,
+// consumed read-only by app/src/services/similarQuestions.ts. Shape mirrors
+// server/search/similarQuestions.mjs's findSimilar() return value verbatim
+// (see docs/cuts/similar-engine/qa/*-seed-response.json for real examples).
+
+/** Every `reason.kind` the engine currently emits (similarQuestions.mjs
+ * RECIPES). Not all kinds are rendered as chips — see SimilarQuestionsRailView
+ * for the SW-1 constant-discourse suppression. */
+export type SimilarQuestionReasonKind =
+  | 'facet-density'
+  | 'topic-match'
+  | 'pos-density'
+  | 'secondary'
+  | 'position-proxy'
+  | 'topic-diff'
+
+export type SimilarQuestionReason = {
+  kind: SimilarQuestionReasonKind
+  label: string
+}
+
+export type SimilarQuestionResult = {
+  groupId: string
+  paperId: string | null
+  title: string
+  sourceLabel: string
+  score: number
+  reasons: SimilarQuestionReason[]
+  /** SW-2 (E1 CR): may be empty even for a highly-ranked candidate — never
+   * assume non-empty. */
+  matchedQuestionIds: string[]
+}
+
+export type SimilarQuestionsSeedProfile = {
+  groupType: string
+  facets: Array<{ key: string; values: Array<string | number> }>
+  topicLabels: string[]
+}
+
+export type SimilarQuestionsResponse = {
+  seedProfile: SimilarQuestionsSeedProfile
+  results: SimilarQuestionResult[]
+  poolStats: { totalInPool: number; returned: number }
+}

@@ -33,7 +33,10 @@
  *     default placeholder for anything else; PaperSurface is mounted
  *     read-only (`lectureFocus={null}`, `onFocusIntent={() => {}}`); no
  *     "移出" affordance; exactly one addGroupsToBasket call site (per-card
- *     `[card]`, i.e. no whole-paper aggregate add).
+ *     `[card]`, i.e. no whole-paper aggregate add). [updated by similar-rail
+ *     (E2), see item 53+: a second, plan-authorized call site was added for
+ *     the 配相似 result list's multi-select "加入草稿卷" — still not a
+ *     whole-paper aggregate add, see that item's assertion comment.]
  *  9. Real paper-2026-i paper-asset fixture: every groupType present in
  *     the fixture (reading, sevenChoices, cloze, grammarFill, writing) is
  *     handled by PaperBrowsePage.tsx, and the fixture's block-type
@@ -279,6 +282,8 @@ const pageSrc = read('app/src/features/paper-browse/PaperBrowsePage.tsx')
 const conciergeGroupCardSrc = read('app/src/concierge/ConciergeGroupCard.tsx')
 const verifyCiSrc = read('scripts/verify-ci.mjs')
 const readmeSrc = read('scripts/README.md')
+const railViewSrc = read('app/src/features/paper-browse/SimilarQuestionsRailView.tsx')
+const similarServiceSrc = read('app/src/services/similarQuestions.ts')
 const asset = JSON.parse(
   read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
 )
@@ -520,10 +525,17 @@ assert(
   '移出 affordance found — out of scope per plan',
 )
 assert(
-  'PaperBrowsePage calls onAddGroupsToBasket exactly once (per-card [card], no whole-paper aggregate add)',
-  (pageSrc.match(/onAddGroupsToBasket\(/g) || []).length === 1 &&
-    /onAddGroupsToBasket\(\[card\]\)/.test(pageSrc),
-  'expected exactly one onAddGroupsToBasket([card]) call site',
+  // similar-rail (E2) adds a second, plan-authorized call site (plan point
+  // 5: reuse App.addGroupsToBasket for the multi-select "加入草稿卷" in the
+  // 配相似 result list). Still no whole-paper aggregate add: the per-card
+  // site stays [card] (single group) and the new site is a user-picked
+  // subset (`cards`, built from a Set of checkbox selections), never "every
+  // group on the page".
+  'PaperBrowsePage calls onAddGroupsToBasket at exactly two call sites (per-card [card] + similar-rail user-picked subset), no whole-paper aggregate add',
+  (pageSrc.match(/onAddGroupsToBasket\(/g) || []).length === 2 &&
+    /onAddGroupsToBasket\(\[card\]\)/.test(pageSrc) &&
+    /onAddGroupsToBasket\(cards\)/.test(pageSrc),
+  'expected exactly two onAddGroupsToBasket call sites: [card] (per-card) and (cards) (similar-rail multi-select)',
 )
 
 // ─── 9. Real paper-2026-i fixture structural check ───
@@ -1633,6 +1645,60 @@ assert(
     `mergedGroupIds=${JSON.stringify([...mergedGroupIds])}, scissorGroupIds=${JSON.stringify([...scissorGroupIds])}`,
   )
 }
+
+// ─── 53-59. similar-rail (E2 — 讲评栏「配相似」UI, docs/cuts/similar-rail/plan.md) ───
+
+assert(
+  '53. PaperBrowsePage declares a similarView view state (\'analysis\'|\'similar\') and the CTA only renders when a question is selected AND its groupType is one of the four E1-supported types (program.md Q5 — writing/listening excluded)',
+  /const\s*\[\s*similarView\s*,\s*setSimilarView\s*\]\s*=\s*useState<'analysis' \| 'similar'>/.test(pageSrc) &&
+    /hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES\.has\(group\.groupType\)/.test(pageSrc) &&
+    /SIMILAR_SUPPORTED_GROUP_TYPES = new Set\(\['reading', 'cloze', 'sevenChoices', 'grammarFill'\]\)/.test(pageSrc),
+  'missing similarView state, the CTA gate, or the 4-groupType whitelist',
+)
+assert(
+  '54. selectLectureQuestion (换题) resets similarView back to \'analysis\' on every call; the separate scroll-away-clears-lectureSelection effect does NOT touch similarView (结果列表 persists across scroll, only resets on explicit换题/返回)',
+  /function selectLectureQuestion\([\s\S]*?setSimilarView\('analysis'\)/.test(pageSrc) &&
+    !/setLectureSelection\(\(prev\) => \(prev && prev\.groupId !== activeAnchor \? null : prev\)\)\)[\s\S]{0,80}setSimilarView/.test(
+      pageSrc,
+    ),
+  'similarView is not reset inside selectLectureQuestion, or is wrongly coupled to the scroll-away clear effect',
+)
+assert(
+  '55. SimilarQuestionsRailView suppresses the SW-1 constant-discourse reason (cloze secondary term, label starts with "同体裁" — DB discourse_type ≡ group_type in the same pool, zero区分度) before rendering chips',
+  /function isConstantDiscourseReason[\s\S]*?reason\.kind === 'secondary' && reason\.label\.startsWith\('同体裁'\)/.test(
+    railViewSrc,
+  ) && /visibleReasons = reasons\.filter\(\(reason\) => !isConstantDiscourseReason\(reason\)\)/.test(railViewSrc),
+  'missing the SW-1 constant-discourse reason filter',
+)
+assert(
+  '56. SW-2: the "含 N 题" matchedQuestionIds chip only renders when matchedQuestionIds.length > 0 — no assumption of non-empty',
+  /matchedQuestionIds\.length > 0 &&[\s\S]{0,120}含 \{matchedQuestionIds\.length\} 题/.test(railViewSrc),
+  'missing the matchedQuestionIds.length > 0 guard around the "含 N 题" chip',
+)
+assert(
+  '57. SW-3: a thin candidate (questionGroupById has no card for result.groupId) disables its checkbox and carries an explanatory title, but the card itself still renders (池子诚实, not hidden)',
+  /const isThin = !card/.test(railViewSrc) &&
+    /disabled=\{isThin\}/.test(railViewSrc) &&
+    /title=\{isThin \? '该卷未入库存，暂不能加入' : undefined\}/.test(railViewSrc),
+  'missing the thin-candidate disabled checkbox + title, or the card is conditionally hidden instead',
+)
+assert(
+  '58. similarQuestions.ts POSTs `{ seeds: [{ questionId }] }` to /api/similar-questions (E1 contract, server/search/similarQuestions.mjs parseSeedQuestionIds) and reuses the shared errorMessageFromResponse convention (draftPapers.ts pattern)',
+  /apiPath\('\/api\/similar-questions'\)/.test(similarServiceSrc) &&
+    /seeds:\s*\[\{\s*questionId:\s*seedQuestionId\s*\}\]/.test(similarServiceSrc) &&
+    /errorMessageFromResponse as readError/.test(similarServiceSrc),
+  'similarQuestions.ts request shape or error-handling convention drifted from the E1 contract / draftPapers.ts pattern',
+)
+const handleSimilarAddToDraftBody =
+  pageSrc.match(/function handleSimilarAddToDraft\(\): void \{([\s\S]*?)\n  \}\n/)?.[1] || ''
+assert(
+  '59. handleSimilarAddToDraft reuses App.addGroupsToBasket (no new draft-add endpoint/path) and clears the selection Set after adding, without closing the result list (view stays \'similar\')',
+  handleSimilarAddToDraftBody.length > 0 &&
+    /onAddGroupsToBasket\(cards\)/.test(handleSimilarAddToDraftBody) &&
+    /setSimilarSelectedGroupIds\(new Set\(\)\)/.test(handleSimilarAddToDraftBody) &&
+    !handleSimilarAddToDraftBody.includes('setSimilarView'),
+  'handleSimilarAddToDraft does not reuse onAddGroupsToBasket(cards), does not clear selection, or wrongly closes the result list',
+)
 
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)
