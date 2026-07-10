@@ -51,3 +51,23 @@ export function buildPaperBrowseLectureHref(href: string | null | undefined): st
   nextParams.set('lecture', '1')
   return `?${nextParams.toString()}`
 }
+
+/**
+ * buildPaperBrowseSimilarHref — similar-entrypoints (E3) 次入口带态换算.
+ *
+ * `buildPaperBrowseLectureHref` result plus `similar=1` — the整卷页讲评态
+ * href that also auto-triggers「配相似」(E2's `SimilarQuestionsRailView`) on
+ * arrival, for the group's first analyzed question (the questionId the
+ * source href already carries). Reuses `buildPaperBrowseLectureHref` instead
+ * of duplicating the paperId/groupId/questionId parsing — same null-safety:
+ * returns `null` when the source href doesn't carry a paperId, so callers
+ * fall back to hiding the entry.
+ */
+export function buildPaperBrowseSimilarHref(href: string | null | undefined): string | null {
+  const lectureHref = buildPaperBrowseLectureHref(href)
+  if (!lectureHref) return null
+  const [path, query = ''] = lectureHref.split('?')
+  const params = new URLSearchParams(query)
+  params.set('similar', '1')
+  return `${path}?${params.toString()}`
+}

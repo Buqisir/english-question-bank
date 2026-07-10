@@ -4,7 +4,9 @@
  * Stateless wrapper over state owned by useConciergeDesk. Receives the
  * Retrieval Module surface as `retrieval` (view) + `actions` (commands), so
  * App.tsx no longer needs to know about paperResults / expandedPaperKey /
- * triggerSimilar / etc.
+ * etc. (similar-entrypoints E3 retired the old「找类似」text-search-fill
+ * hack — 配相似 is now a plain deep-link, same family as 看解析, owned by
+ * ConciergeGroupCard itself.)
  *
  * The primary list maps over retrieval.paperResults (one row per source paper),
  * and clicking expands the paper to show its matching question groups.
@@ -140,7 +142,7 @@ function groupFeedByYear(papers: PaperResult[]): FeedYearGroup[] {
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { retrieval, actions, basketIds, onAdd, onOpenDetail, onOpenPaperBrowse, questionGroups, dataStatus, thinkingMode, onThinkingModeChange } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
-  const { setIntent, submit, triggerSimilar, togglePaper } = actions
+  const { setIntent, submit, togglePaper } = actions
   const inputId = useId()
   const thinkingToggleId = useId()
   const thinkingHintId = useId()
@@ -536,9 +538,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   basketIds={basketIds}
                   onTogglePaper={togglePaper}
                   onAdd={onAdd}
-                  onSimilar={(group) => {
-                    void triggerSimilar(group)
-                  }}
                   onOpenDetail={onOpenDetail}
                   onOpenPaperBrowse={onOpenPaperBrowse}
                 />
@@ -592,9 +591,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                             basketIds={basketIds}
                             onTogglePaper={togglePaper}
                             onAdd={onAdd}
-                            onSimilar={(group) => {
-                              void triggerSimilar(group)
-                            }}
                             onOpenDetail={onOpenDetail}
                           />
                         </li>

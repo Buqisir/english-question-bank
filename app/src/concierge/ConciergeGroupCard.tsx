@@ -5,7 +5,7 @@
  * per the cut's contract even though the visual is a list row).
  *
  * Carries the per-group reason and the teacher-facing actions (加入草稿卷,
- * 找类似, 详情), plus a lightweight PaperSurface entry (Cut 3) for groups
+ * 配相似, 详情), plus a lightweight PaperSurface entry (Cut 3) for groups
  * that are eligible. The action cluster reveals on row hover/focus-within;
  * clicking the row body (outside the action cluster) opens the same detail
  * view as the explicit 详情 button, for mouse convenience.
@@ -15,7 +15,14 @@
 
 import { type MouseEvent, type ReactNode } from 'react'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
-import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
+import { buildPaperBrowseLectureHref, buildPaperBrowseSimilarHref } from './paperSurfaceHref.ts'
+
+// similar-entrypoints (E3): the four groupTypes E1's similar-questions engine
+// supports (program.md Q5 — writing excluded, no facet). `QuestionGroupCard`'s
+// `groupType` is DB-style (domain/questionBank.ts GroupType) — this file is
+// not the domain schema, just a display-gate reading the type's existing
+// string values.
+const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
 
 function isDisplayTag(tag: string | undefined): tag is string {
   const value = (tag || '').trim()
@@ -66,7 +73,6 @@ export type ConciergeGroupCardProps = {
   reason: string
   alreadyInBasket: boolean
   onAdd: (group: QuestionGroupCard) => void
-  onSimilar: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for this group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /**
@@ -79,7 +85,7 @@ export type ConciergeGroupCardProps = {
 }
 
 export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
-  const { group, reason, alreadyInBasket, onAdd, onSimilar, onOpenDetail, dimmed } = props
+  const { group, reason, alreadyInBasket, onAdd, onOpenDetail, dimmed } = props
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
   const topicText = buildTopicText(group)
@@ -95,6 +101,14 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
     group.hasPaperSurfaceAnalysis && group.paperSurfaceHref && group.paperSurfaceLabel
       ? buildPaperBrowseLectureHref(group.paperSurfaceHref)
       : null
+  // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——退役了那条
+  // 填搜索框跑文本搜索的旧 hack，改为与上面 看解析 同款的深链导航（同一个
+  // <a href> 家族，不是 SPA 拦截）。
+  // 渲染条件同详情页：只有配方收录的四类题型才出现，写作组隐藏（换引擎的
+  // 代价，池子诚实）。
+  const similarHref = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
+    ? buildPaperBrowseSimilarHref(group.paperSurfaceHref)
+    : null
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
   const draftButtonLabel =
     draftState === 'in_current_draft'
@@ -153,13 +167,16 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         >
           {draftButtonLabel}
         </button>
-        <button
-          type="button"
-          className="concierge-action"
-          onClick={() => onSimilar(group)}
-        >
-          找类似
-        </button>
+        {similarHref && (
+          <a
+            className="concierge-action"
+            href={similarHref}
+            data-ra-entry="group-card-similar"
+            data-ra-group-id={group.id}
+          >
+            配相似
+          </a>
+        )}
         {onOpenDetail && (
           <button
             type="button"

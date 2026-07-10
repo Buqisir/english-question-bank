@@ -1203,15 +1203,3 @@ export async function runConciergeSearch(
     }
   }
 }
-
-/**
- * Build a "find similar" intent string for a known group.
- * Uses title / summary / tags so users see why the new search is relevant.
- */
-export function buildSimilarIntent(group: QuestionGroupCard): string {
-  const tags = (group.tags || []).slice(0, 3)
-  const tagText = tags.length > 0 ? `；标签 ${tags.join('、')}` : ''
-  const summary = (group.summary || '').trim()
-  const summaryText = summary ? `；主题接近「${summary.slice(0, 40)}」` : ''
-  return `找类似这道题：${group.title}${summaryText}${tagText}`
-}

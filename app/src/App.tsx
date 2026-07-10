@@ -212,7 +212,7 @@ function buildSevenChoicesVerifyResult(
 // an inline `{ }` literal in the callback's parameter list) — an inline
 // literal would put a `{` before the callback body and break
 // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
-type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean }
+type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean; similar?: boolean }
 
 function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // ─── Cut C: in-app PI ↔ workbench navigation ───
@@ -264,6 +264,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         focusGroupId: null as string | null,
         questionId: null as string | null,
         lecture: false,
+        similar: false,
       }
     }
     const params = new URLSearchParams(window.location.search)
@@ -273,6 +274,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       focusGroupId: params.get('focusGroupId'),
       questionId: params.get('questionId'),
       lecture: params.get('lecture') === '1',
+      similar: params.get('similar') === '1',
     }
   })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>([])
@@ -744,7 +746,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setDraftPaperRoute({
       active: true,
       draftPaperId: draftPaperId || null,
@@ -779,6 +781,9 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null, options?: OpenPaperBrowseOptions) => {
     const questionId = options?.questionId || null
     const lecture = Boolean(options?.lecture)
+    // similar-entrypoints (E3): 只有讲评态深链才携带 similar — 挑题态入口
+    // 永远拿 false（镜像 lecture 的同款收窄，避免无意义的 URL 组合）。
+    const similar = lecture && Boolean(options?.similar)
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
       const url = new URL(window.location.href)
       url.searchParams.set('view', 'paper-browse')
@@ -798,12 +803,17 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       } else {
         url.searchParams.delete('lecture')
       }
+      if (similar) {
+        url.searchParams.set('similar', '1')
+      } else {
+        url.searchParams.delete('similar')
+      }
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setMySpaceRouteActive(false)
     setCurrentPiRoute({ kind: 'none' })
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture })
+    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture, similar })
   }, [])
 
   // Detail-page "看整卷" entry point: derives paperId (and the group to
@@ -837,11 +847,27 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     [openPaperBrowse],
   )
 
+  // similar-entrypoints (E3): detail-page "配相似" SPA fast-path — same href
+  // parsing as 看解析 above, plus `similar: true` so the page auto-opens the
+  // 配相似 result for the group's first analyzed question on arrival.
+  const openPaperBrowseSimilarFromDetail = useCallback(
+    (detail: QuestionGroupDetail) => {
+      const paperId = parsePaperIdFromHref(detail.paperSurfaceHref)
+      if (!paperId) return
+      const [, query = ''] = (detail.paperSurfaceHref || '').split('?')
+      const params = new URLSearchParams(query)
+      const groupId = params.get('groupId') || detail.id
+      const questionId = params.get('questionId') || null
+      openPaperBrowse(paperId, groupId, { questionId, lecture: true, similar: true })
+    },
+    [openPaperBrowse],
+  )
+
   const paperBrowseOnBackToWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
         const url = new URL(window.location.href)
-        for (const param of ['view', 'paperId', 'focusGroupId', 'questionId', 'lecture']) {
+        for (const param of ['view', 'paperId', 'focusGroupId', 'questionId', 'lecture', 'similar']) {
           url.searchParams.delete(param)
         }
         const nextSearch = url.searchParams.toString()
@@ -851,7 +877,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         // State flip below is the authoritative UI change.
       }
     }
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
   }, [])
 
   // flow-panel 刀 3: Back/Forward support. Every `open*`/`*OnBackToWorkbench`
@@ -891,6 +917,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         focusGroupId: params.get('focusGroupId'),
         questionId: params.get('questionId'),
         lecture: params.get('lecture') === '1',
+        similar: params.get('similar') === '1',
       })
       setCurrentPiRoute({ kind: 'none' })
     }
@@ -907,7 +934,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setMySpaceRouteActive(true)
     setCurrentPiRoute({ kind: 'none' })
   }, [])
@@ -997,6 +1024,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         focusGroupId={paperBrowseRoute.focusGroupId}
         questionId={paperBrowseRoute.questionId}
         lecture={paperBrowseRoute.lecture}
+        similar={paperBrowseRoute.similar}
         questionGroupById={questionGroupById}
         onAddGroupsToBasket={(groups) => void addGroupsToBasket(groups)}
         currentDraftPaperId={currentDraftPaperId}
@@ -1137,6 +1165,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               onAddToBasket={addToBasket}
               onOpenPaperBrowse={openPaperBrowseFromDetail}
               onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
+              onOpenPaperBrowseSimilar={openPaperBrowseSimilarFromDetail}
             />
           ) : null}
         </section>

@@ -18,7 +18,10 @@
  *
  * App.tsx wires `retrieval` + `actions` straight through to ConciergeDesk and
  * never reads the internal flat fields. This keeps the Retrieval Module's
- * internals (paper buckets, expansion key, similar-trigger flow) opaque to App.
+ * internals (paper buckets, expansion key) opaque to App. (similar-entrypoints
+ * E3 retired the old text-search-fill 找类似 flow that used to live here —
+ * 配相似 is now a plain deep-link owned by ConciergeGroupCard, not a hook
+ * action.)
  *
  * Important: this hook owns its own detailCache, separate from App.tsx's
  * previewDetails / loadPreviewForBasketItems. They are NOT shared.
@@ -29,7 +32,6 @@ import type { QuestionGroupCard, QuestionGroupDetail } from '../domain/questionB
 import { fetchQuestionGroupDetail } from '../services/questionGroups.ts'
 import { fetchAiStatus } from '../services/aiStatus.ts'
 import {
-  buildSimilarIntent,
   runConciergeSearch,
   type ConciergeSearchHit,
   type ConciergeSearchOutcome,
@@ -78,7 +80,6 @@ export type ConciergeRetrievalView = {
 export type ConciergeRetrievalActions = {
   setIntent: (value: string) => void
   submit: (intentOverride?: string) => Promise<void>
-  triggerSimilar: (group: QuestionGroupCard) => Promise<void>
   togglePaper: (paperKey: string) => void
   retryGroupDetail: (groupId: string) => void
   reset: () => void
@@ -277,21 +278,6 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     [intent, runSearch, state],
   )
 
-  const triggerSimilar = useCallback(
-    async (group: QuestionGroupCard) => {
-      const similarIntent = buildSimilarIntent(group)
-      // Cut ⑥: fill the input with the generated similar-intent query
-      // instead of clearing it, so 找类似 leaves a visible, editable query
-      // like any other submit.
-      setIntent(similarIntent)
-      // Same pipeline as ordinary submit — results land back into runSearch,
-      // which feeds aggregatePaperResults via state.hits. So 找类似 always
-      // surfaces back as paper rows, never as a flat group list.
-      await runSearch(similarIntent, null)
-    },
-    [runSearch],
-  )
-
   const reset = useCallback(() => {
     setIntent('')
     setState({ kind: 'empty' })
@@ -315,12 +301,11 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     () => ({
       setIntent,
       submit,
-      triggerSimilar,
       togglePaper,
       retryGroupDetail,
       reset,
     }),
-    [setIntent, submit, triggerSimilar, togglePaper, retryGroupDetail, reset],
+    [setIntent, submit, togglePaper, retryGroupDetail, reset],
   )
 
   return {

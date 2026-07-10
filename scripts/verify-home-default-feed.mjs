@@ -14,8 +14,9 @@
  *   3. STARTER_CHIPS retired (cut ai-mode-filter-chips, C7) — the structured
  *      filter row replaces the three hardcoded example chips; submit()'s
  *      intentOverride parameter stays available in the code path.
- *   4. submit() / triggerSimilar() no longer clear intent after firing
- *      (P1 same-face fix — the query stays editable after a search).
+ *   4. submit() no longer clears intent after firing (P1 same-face fix — the
+ *      query stays editable after a search). triggerSimilar is retired
+ *      (similar-entrypoints E3 — 配相似 is now a plain deep-link).
  *
  * Source-level checks (regex over the .ts/.tsx source), consistent with the
  * existing concierge verify suite's style — no React runtime needed for the
@@ -194,9 +195,13 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
   assert('feed block renders <ConciergePaperRow', /<ConciergePaperRow/.test(feedBlockMatch), '')
   assert('feed rows wire onTogglePaper={togglePaper}', /onTogglePaper=\{togglePaper\}/.test(feedBlockMatch), '')
   assert('feed rows wire onAdd={onAdd}', /onAdd=\{onAdd\}/.test(feedBlockMatch), '')
+  // similar-entrypoints (E3): 找类似/onSimilar/triggerSimilar retired — feed
+  // rows no longer wire a similar-trigger callback at all (配相似 is a plain
+  // deep-link owned by ConciergeGroupCard, see verify-paper-browse.mjs
+  // items 47-48).
   assert(
-    'feed rows wire onSimilar to triggerSimilar (same as search results)',
-    /onSimilar=\{\(group\)\s*=>\s*\{\s*void triggerSimilar\(group\)\s*\}\}/.test(feedBlockMatch),
+    'feed block does not wire onSimilar (retired flow)',
+    !/onSimilar=/.test(feedBlockMatch),
     '',
   )
   // 浏览态不是搜索结果——feed 行禁用「命中」措辞（QA 抓出的搜索腔）。
@@ -241,19 +246,17 @@ console.log('\nTest 10: STARTER_CHIPS retired (cut ai-mode-filter-chips, C7) —
 }
 
 // ------------------------------------------------------------------ Test 11
-console.log('\nTest 11: submit / triggerSimilar keep the query after firing (P1 same-face fix)')
+console.log('\nTest 11: submit keeps the query after firing (P1 same-face fix); triggerSimilar retired (similar-entrypoints E3)')
 {
   const hook = readSrc('app/src/concierge/useConciergeDesk.ts')
   const submitMatch = hook.match(/const submit = useCallback[\s\S]*?\n  \)/)?.[0] || ''
   assert('submit() does not clear intent to empty string after firing', !/setIntent\(''\)/.test(submitMatch), submitMatch)
   assert('submit() sets intent to the resolved value (kept, not cleared)', /setIntent\(value\)/.test(submitMatch), submitMatch)
 
-  const triggerMatch = hook.match(/const triggerSimilar = useCallback[\s\S]*?\n  \)/)?.[0] || ''
-  assert(
-    'triggerSimilar() fills intent with the generated similar-intent query (not empty)',
-    /setIntent\(similarIntent\)/.test(triggerMatch) && !/setIntent\(''\)/.test(triggerMatch),
-    triggerMatch,
-  )
+  // similar-entrypoints (E3): triggerSimilar's whole "fill intent with a
+  // generated query" flow is retired — 配相似 is now a plain deep-link, no
+  // search round-trip through this hook.
+  assert('hook does not declare triggerSimilar (retired)', !/triggerSimilar/.test(hook), '')
 }
 
 // ------------------------------------------------------------------ Test 12
