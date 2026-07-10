@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-10（E3 + figure-render 双刀收官）
+Last updated: 2026-07-10（全天八刀收官；六刀待部署，下会话 High 三议题）
 
 ## 现在是什么
 
@@ -23,6 +23,19 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
 
 ## 主线焦点
 
+- 2026-07-10：**draft-numbering-style 收官（三轮 DEV）+ dashed-line-unify
+  收官**（merge dfa42c1 / 968d810，均 main CI 绿）：① B 形态编号
+  （owner QA 二轮改判）——汉字大题头「一、二…」+ 小题 1-N 全卷连续
+  无括号 + 文内空号重映射同序 + 一致性硬断言（负例已测）；顺带修
+  存量事务 bug（COMMIT 后假 ROLLBACK，store 六函数+路由+migrate，
+  坏组可 API 自愈）；5 个空号不健康组入数据健康账；CR 提醒：本刀
+  实际份量超 PA-lite 前提，下不为例。② 虚线语义统一（owner 报障
+  当场诊断+原型拍板入档）：v1 节尾线+屏幕分页线退役、节末补静息
+  底线，不变量「静息线集合==选中线集合」。e2e 夹具插曲：golden-path
+  完形夹具无空标记被新断言正确拒绝，修夹具非放断言（数据真实性
+  教训再证）。挂账：老解析页 harness 卷面 fig-token 残口（watch
+  ledger，随孤儿支退役刀收）。**六刀攒待部署，owner 下会话 High 档
+  三议题后一起上**（议程见开放账本）。
 - 2026-07-10：**UI P1 双刀收官 + 签名微动效**：ui-p1-shell（merge
   e7f1dff，CR 0 MF，SW-1 两处行级焦点收口闭）+ ui-p1-panels（merge
   228e653，CR 0 MF，SW-1/2 收口闭：枚举中文兜底/选择器加固）——审计
