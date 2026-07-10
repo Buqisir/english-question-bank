@@ -23,6 +23,14 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
 
 ## 主线焦点
 
+- 2026-07-10：**UI P1 双刀收官 + 签名微动效**：ui-p1-shell（merge
+  e7f1dff，CR 0 MF，SW-1 两处行级焦点收口闭）+ ui-p1-panels（merge
+  228e653，CR 0 MF，SW-1/2 收口闭：枚举中文兜底/选择器加固）——审计
+  P1×11 落地（焦点环/窄屏/admin/黑话/侧条/字体lane/找题态/弹窗/选中态/
+  遮挡/低对比）。basket-chip-tick 签名微动效（5ac4ea8+6c05815，owner
+  实报基线 bug 即修：clip-path 替 overflow 保基线）。两刀 CI 绿；
+  **owner QA 待做**；qa 截图证据不全（panels SW-5，owner 实测补）。
+  下一刀 lecture-rail 已解锁（rail 不滚 + 点空显解析需求）。
 - 2026-07-10：**draft-depassage-letter 收官**（merge 720f82a，CR APPROVE
   0 MF + PA-lite 降档获认可，main CI 绿）：草稿卷导出五面去 A-D 篇章
   字母，换全卷连续大题头「n、题型（每题 N 分）」；小题号连续系现状
