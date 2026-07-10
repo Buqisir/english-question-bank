@@ -109,7 +109,12 @@
 .paper-browse-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* scissor-select-feel: 标准排版节奏回 16px（one-sheet 落地时的 20px 与
+   * 剪刀线自带 margin 一并退役——线已改为零占位 overlay，见下方剪刀线
+   * 规则）；--pb-block-gap 同时喂给剪刀线/选区罩的 ±gap/2 定位算式，两处
+   * 单一来源，不会各改各的。 */
+  --pb-block-gap: 16px;
+  gap: var(--pb-block-gap);
   min-width: 0;
   width: 100%;
   max-width: var(--ps-page-width, 794px);
@@ -212,32 +217,77 @@
   margin: 8px 0;
 }
 
-/* ─── 剪刀线 — 虚线=题组可搬走内容的起点，提亮范围=剪走范围
- * （docs/cuts/one-sheet-paper/plan.md「剪刀线语义」）。左右各缩进，不通
- * 纸边；无编号标签；只活在屏幕整卷页，print/PDF/DOCX 零影响（这份 css
+/* ─── 剪刀线 + 选中态 — scissor-select-feel（owner 拍板 2026-07-09，原型
+ * v3 终选，docs/cuts/scissor-select-feel/plan.md）。线和选中态都是画在纸
+ * 上的批注层，排版本身不动：卷面块间距回标准 16px 节奏
+ * （--pb-block-gap），线/选区罩都退出布局流，画在块间隙正中
+ * （top/bottom: calc(--pb-block-gap / -2) overlay，随卡定位，不是流内
+ * div——流内零高度元素会吃 flex gap 槽位造成双倍间隙）。加不加线，纸的
+ * 排版逐像素一致。只活在屏幕整卷页，print/PDF/DOCX 零影响（这份 css
  * 只被 PaperBrowsePage.tsx 引入）。 ─── */
+
+/* 静息剪刀线：虚线=题组可搬走内容的起点，零占位，画在块间隙正中。
+ * 左右缩进 24px 不变（静=铅笔参考线，减墨 0.28→0.18）。hover 时该单元
+ * 自身的静息线隐去，同位改画选区罩的边界虚线，避免同位双线。 */
 .paper-browse-scissor-line {
+  position: absolute;
+  top: calc(var(--pb-block-gap) / -2);
+  left: 24px;
+  right: 24px;
   height: 0;
-  border-top: 1px dashed rgba(74, 68, 56, 0.28);
-  margin: 20px 24px 16px;
+  border-top: 1px dashed rgba(74, 68, 56, 0.18);
+  opacity: 1;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
 }
 
 .paper-browse-group-card {
   position: relative;
-  border-radius: 12px;
-  transition: background-color 0.15s ease;
 }
 
-.paper-browse-group-card:hover,
-.paper-browse-group-card:focus-within {
-  background: rgba(74, 68, 56, 0.04);
+.paper-browse-group-card:hover > .paper-browse-scissor-line,
+.paper-browse-group-card:focus-within > .paper-browse-scissor-line {
+  opacity: 0;
 }
 
-.paper-browse-group-actions {
+/* hover = 纸条显影：选区罩上下缘在块间隙正中（±gap/2），左右通宽到纸的
+ * 物理边缘（± --ps-page-margin-x，剪刀剪的是整张纸宽），直角。罩色取自
+ * teal-600「墨·淡」档（owner 终选）——DESIGN.md 签名色「当前选中」本职，
+ * 色值全部取自 teal 梯子，单色相/绿笔原则不破。边界虚线各一条，通宽。
+ * 单个伪元素同时画罩色 fill + 上下边界虚线，避免额外 DOM 节点。整卡显影
+ * （含写作组自己的节标题行）沿用 one-sheet-paper 的既有取舍，写作组的
+ * 内部剪刀线另见下方 CSS-only sibling-selector 规则。 */
+.paper-browse-group-card::after {
+  content: '';
   position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 1;
+  top: calc(var(--pb-block-gap) / -2);
+  bottom: calc(var(--pb-block-gap) / -2);
+  left: calc(var(--ps-page-margin-x, 91px) * -1);
+  right: calc(var(--ps-page-margin-x, 91px) * -1);
+  background: rgba(44, 110, 86, 0.02); /* teal-600「墨·淡」— owner 终选 v3 */
+  border-top: 1px dashed rgba(44, 110, 86, 0.55);
+  border-bottom: 1px dashed rgba(44, 110, 86, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.paper-browse-group-card:hover::after,
+.paper-browse-group-card:focus-within::after {
+  opacity: 1;
+}
+
+/* 操作簇跟随滚动：零占位 sticky rail（height:0，first child，取代绝对定位
+ * 右上）——高单元（阅读 B 类）hover 到下半段时「加入草稿卷」仍在视口内、
+ * 手边可点；不影响静息布局（height:0 不吃 flow）。 */
+.paper-browse-group-actions {
+  position: sticky;
+  top: 16px;
+  z-index: 2;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 8px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.12s ease;
@@ -283,10 +333,12 @@
  * 已知取舍（Known trade-off，见完工报告）：hover 提亮范围对非写作题组严格
  * 等于剪走范围（节标题是卡外的顶层 sibling，见上方 .paper-browse-group-card
  * 规则天然生效）；写作题组的节标题是 pageModel 圈出来、渲在卡内的，
- * `.paper-browse-group-card:hover` 的整卡背景会连带盖住节标题这一行。用
+ * `.paper-browse-group-card::after` 的整卡选区罩会连带盖住节标题这一行。用
  * 纯 CSS 精确抠掉这一小块会在指导语/正文/答题框之间的 flex gap 处露出
- * 没有背景色的缝隙（不连续，比现状更难看），综合判断保留整卡提亮，不做
- * 这个二级修饰——线本身（剪的位置）依然精确对齐 plan 语义。 */
+ * 没有罩色的缝隙（不连续，比现状更难看），综合判断保留整卡显影，不做
+ * 这个二级修饰——线本身（剪的位置）依然精确对齐 plan 语义。这条内部线
+ * 与整卡罩的上下边界不同位（线在节标题之后，罩边界在卡的上下端），不存在
+ * 同位双线，hover 时不隐去，只随 scissor-select-feel 统一减墨到 0.18。 */
 .paper-browse-content .pi-writing-section + * {
   position: relative;
   padding-top: 16px;
@@ -303,7 +355,7 @@
   top: 0;
   left: 24px;
   right: 24px;
-  border-top: 1px dashed rgba(74, 68, 56, 0.28);
+  border-top: 1px dashed rgba(74, 68, 56, 0.18);
 }
 
 .paper-browse-loading,
