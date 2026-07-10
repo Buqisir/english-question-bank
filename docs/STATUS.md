@@ -329,6 +329,12 @@ Last updated: 2026-07-10（E3 + figure-render 双刀收官）
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
+- **motion-pass（owner 已圈，2026-07-10，排 P1 两刀 + lecture-rail 刀
+  之后）**：全站动效统一 pass——装 emil-design-eng skill 定方向 →
+  动效时长/缓动收 token（DESIGN.md 150-250ms 规矩落地）→ 补缺口
+  （值得动的时刻清单：讲评栏开合/配相似入场/加卷乐观翻转/toast/
+  折叠/悬浮显形）→ 统一曲线 + 补 prefers-reduced-motion 退化。
+  一刀收口，small/medium。**不做全站动效化**，只做统一与补缺。
 - UI 烂点清单：`docs/cuts/ui-facade/ui-blemish-list.md`（owner 曾圈
   「按顺序全做」，剩余项待核对）。
 - ~~数据孤儿清理~~（2026-07-07 data-orphan-cleanup 刀收官，PR #268 +
