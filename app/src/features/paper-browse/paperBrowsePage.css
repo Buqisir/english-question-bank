@@ -737,6 +737,10 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  /* 全局草稿卷 chip 固定在 right:20/bottom:20（App.css .basket-chip），
+   * 正落在讲评栏底缘——给「加入草稿卷」按钮留出 chip 的净空，
+   * 否则 chip 盖住主按钮（owner QA 实测，2026-07-10）。 */
+  margin-bottom: 64px;
 }
 
 .similar-count {
