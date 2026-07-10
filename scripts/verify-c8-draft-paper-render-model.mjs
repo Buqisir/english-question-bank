@@ -190,14 +190,18 @@ const secondSection = draftBody.indexOf('第二部分 完形填空')
 const thirdSection = draftBody.indexOf('第三部分 阅读理解')
 
 assert('draft render produces printable HTML via buildDraftPrintHtml', draftHtml.includes('<!DOCTYPE html>') && draftHtml.includes('H9 Draft'))
-// draft-numbering-style (owner 拍板 2026-07-10): small-question numbering
-// resets to (1) — half-width parens, not "N." — for EVERY question_group,
-// not just the first. All 3 groups here (reading-a / cloze-a / reading-b)
-// have exactly 1 question each, so every one of them independently shows
-// (1) — never a continuous 1/2/3 across the whole draft paper.
-const qnumOneMatches = draftBody.match(/<span class="qnum">\(1\)<\/span>/g) || []
-assert('draft render resets small-question numbering to (1) per group (3 groups × 1 question, not continuous 1/2/3)', qnumOneMatches.length === 3, `got ${qnumOneMatches.length}`)
-assert('draft render never emits the old continuous dot-format numbering (2. / 3.)', !draftBody.includes('<span class="qnum">2.</span>') && !draftBody.includes('<span class="qnum">3.</span>'))
+// draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
+// numbering is WHOLE-PAPER continuous, "N." no parens (round-1's per-group
+// reset to `(1)` is retired — owner QA verdict B). All 3 groups here
+// (reading-a / cloze-a / reading-b) have exactly 1 question each, so they
+// number 1, 2, 3 continuously across the whole draft paper.
+assert('draft render numbers group 1 (reading-a) as 1.', draftBody.includes('<span class="qnum">1.</span>'))
+assert('draft render numbers group 2 (cloze-a) as 2. (continues, not reset)', draftBody.includes('<span class="qnum">2.</span>'))
+assert('draft render numbers group 3 (reading-b) as 3. (continues, not reset)', draftBody.includes('<span class="qnum">3.</span>'))
+assert('draft render never emits the round-1 group-local "(1)" numbering format', !/<span class="qnum">\(\d+\)<\/span>/.test(draftBody))
+// draft-numbering-style v2: 大题头由阿拉伯数字改汉字 (一、二、三…) —
+// this fixture has 2 reading groups + 1 cloze group in that order.
+assert('draft render 大题头 uses Chinese numerals (一/二/三), not Arabic digits', draftBody.includes('<div class="group-header">一、') && draftBody.includes('<div class="group-header">二、') && draftBody.includes('<div class="group-header">三、'))
 assert('draft render uses exam print style', !draftBody.includes('group-meta'))
 assert('draft render uses student version only', !draftBody.includes('【答案】') && !draftBody.includes('【解析】'))
 assert('draft render emits section headers in type order', firstSection >= 0 && secondSection > firstSection && thirdSection > secondSection)

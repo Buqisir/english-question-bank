@@ -204,3 +204,98 @@ error, so it does not exhibit this masking bug.
 - `node scripts/verify-print-renderer.mjs` — pass
 - `node scripts/verify-h5g-docx-renderer.mjs` — pass
 - `pnpm -C app run verify:all` — pass (full run, real exit code 0)
+
+## Round 2 (2026-07-10, owner QA verdict B — 三号 DEV) — B形态改号 + 两处同款事务残留修复
+
+Owner QA 二轮证伪一轮的 (1)(2) 组内重计形态（空线上印括号观感怪 +
+组内重计=一张卷多个 (1) 变相撞号）。改判为 **B 案**：大题头汉字连续
+（一、二、三…）+ 小题号阿拉伯全卷连续无括号（回归 draft-depassage 形态）+
+文内空号重映射到全卷连续号（无括号）。同一轮授权修复两处 d51eab2 报告
+但未修的 ROLLBACK-after-COMMIT 残留（POST 路由 + migrateAssemblyBasket）。
+
+### 环境
+
+Worktree 自己的 sqlite 副本（`data/question-bank.sqlite` +
+`data/user-data.sqlite`，与共享 8787/5173 实例隔离），服务起在隔离端口
+8797。`qa-owner`（既有账号）通过
+`USER_DATA_DB=$(pwd)/data/user-data.sqlite node scripts/create-user.mjs
+--reset-password --username qa-owner --password ...` 重置密码后登录（本
+worktree DB 里该账号密码与 .env.qa 记录的生产密码不同，随即改用新密码，
+未改动 .env.qa / 生产密码）。复用该账号既有的空草稿卷
+`draft-paper-34efa37b-e1a8-4947-87ca-502447cf5d64`（`0710 英语草稿卷`），
+通过 `POST /api/draft-papers/current/items` 依次加入真实
+paper-2026-i 四组：`group-2026-i-seven-choices`（七选五 5题）、
+`group-2026-i-grammar-fill`（语法填空 10题）、`group-2026-i-cloze`
+（完形填空 15题）、`group-2026-i-reading-a`（阅读理解 3题）——
+`itemCount:4, totalQuestions:33`。
+
+### 真草稿卷五面复检
+
+1. **A4 预览 / print HTML**（`GET /api/draft-papers/:id?versionType=student|teacher`
+   的 `printHtml` 字段，等价于工作台 A4 预览与浏览器打印用的同一份 HTML）——
+   落盘为 `v2-draft-student-print.html` / `v2-draft-teacher-print.html`，并用
+   claude-in-chrome 打开本地静态服务截图（三屏滚动）肉眼核对：
+   - 大题头：`一、七选五（每题 2.5 分）` → `二、语法填空（每题 1.5 分）` →
+     `三、完形填空（每题 1 分）` → `四、阅读理解（每题 2.5 分）` — 汉字连续，
+     无阿拉伯数字残留。
+   - 小题号：脚本核对 `<span class="qnum">N.</span>` 序列为 `1..33` 连续
+     （`node` 脚本正则提取，见下），全卷无一处 `(n)` 括号形态。
+   - 完形填空文中空号：脚本按 section 切片核对 `print-blank-num` 序列与
+     该组 `qnum` 序列逐空一致 —— 七选五 `1,2,3,4,5` == 列表 `1-5`；语法填空
+     `6..15` == 列表 `6-15`；完形填空 `16..30` == 列表 `16-30`；阅读理解组
+     无文内空号（reading 非 BLANK_BEARING_GROUP_TYPES，符合预期）。
+   - A-G 选项池：七选五 5 道小题每题下方原样重复完整 A-G 七项（本刀未触碰
+     此逻辑，回归确认无变化）。
+   - 教师版答案随号：`grep -c '【答案】'` == 33（每小题一个答案块，紧跟在
+     对应 `N.` 题干之后，同一循环内天然一致）。
+2. **PDF**（`POST /api/draft-papers/:id/print-pdf`，body `{versionType}`——
+   注意该路由的 versionType 是 JSON body 字段，不是 query string，首次误用
+   query string 时两份 PDF 字节数完全相同（501 KB student 复用了默认
+   student 渲染两次），改用 body 字段后 student 204790 字节 / teacher
+   451676 字节（含答案更大，符合预期）——落盘为 `v2-draft-student.pdf` /
+   `v2-draft-teacher.pdf`。`pdftotext` 抽取文本核对：`一、七选五（每题 2.5
+   分）` 与文内空号 `1 2 3 4 5`、列表 `1. 36` `2. 37`... 均出现，与 HTML 一致。
+3. **DOCX**（草稿卷本身无 DOCX 导出入口——`app/src/features/draft-paper/`
+   全目录 grep 零 docx 引用；改用通用 `POST /api/exports/docx`，同样驱动
+   `server/exports/docxRenderer.mjs`，用同一组真实 paper-2026-i 四组构造
+   等价 `items`+`blocks`）——落盘为 `v2-draft-student.docx` /
+   `v2-draft-teacher.docx`。Python `zipfile` 解包 `word/document.xml`
+   抽取 `<w:t>` 文本核对：
+   - 大题头正则 `[一二三四五六七八九十]+、...（每题...）` 命中 4 处，
+     依次为一/二/三/四。
+   - `qnum` 正则 `(\d+)\.  ` 命中 33 处，序列 `1..33` 连续。
+   - teacher 版 `【答案】` 出现 33 次。
+
+### 路由残留修复回归（`POST /api/draft-papers/:id/items`）
+
+用同一台隔离服务，对既有草稿卷加入已知会触发一致性断言的坏组
+`group-960d0f8d-grammar-fill`（语法填空，文中 0 个真实挖空标记 vs 10 道
+小题，是 d51eab2 QA 记录里 5 个已知问题组之一）：
+
+1. `POST /api/draft-papers/draft-paper-34efa37b.../items { groupId:
+   "group-960d0f8d-grammar-fill" }` → **400**，body 是真实的一致性断言
+   消息（`"...in-text blank count (0) does not match question count
+   (10)..."`），不是被吞掉的 "cannot rollback - no transaction is active"。
+2. 直接读 worktree sqlite 的 `draft_paper_items` 表：坏 item
+   （`draft-item-4fef869f-...`）**确实已提交**（写入生效，符合修复意图——
+   写操作本身成功，不该因为后续渲染失败被回滚）。
+3. 服务器 stdout/stderr（`/tmp/eqb-draft-numbering-server.log`）全程
+   `grep -i "cannot rollback"` → 零命中。
+4. `DELETE /api/draft-papers/:id/items/:itemId`（坏 item）→ **200**，
+   `GET /api/draft-papers/current` 之后 `itemCount` 回到 4（自愈，纯 API
+   操作，未借助任何裸 SQL）。
+
+### verify（本轮，真实 exit code）
+
+- `node scripts/verify-print-renderer.mjs` → 75 passed, 0 failed, exit 0
+- `node scripts/verify-h5g-docx-renderer.mjs` → 110 checks passed, exit 0
+- `node scripts/verify-c8-draft-paper-render-model.mjs` → 34 passed, 0
+  failed, exit 0
+- `node scripts/verify-figure-render.mjs` → 81 passed, 0 failed, exit 0
+- `node scripts/verify-c8-draft-paper-contracts.mjs` → 50 passed, 0
+  failed, exit 0
+- `node scripts/verify-paper-surface-module-v1.mjs` → 113 passed, 0
+  failed, exit 0
+- `pnpm -C app run verify:all` → `PASS 73 / SKIP 1 / FAIL 0`（SKIP 是既有
+  离仓 fixture 缺失项 `verify-i16a-teaching-dimension-search.mjs`，与本刀
+  无关）exit 0

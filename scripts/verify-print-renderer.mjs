@@ -65,33 +65,31 @@ console.log('Test 1: HTML generation - blocks, numbering, structure')
   assert('section_header 2 present', html.includes('第二节 七选五'), '')
   assert('page_break present', html.includes('class="page-break"'), '')
 
-  // draft-numbering-style (owner 拍板 2026-07-10): small-question numbering
-  // resets to (1) for EVERY question_group — NOT continuous across the
-  // whole paper, and NOT seeded by questionNumberStart (21 here, deliberately
-  // set to a value that would ONLY appear if the old continuous-numbering
-  // behavior regressed back in). Group 1 (阅读理解) has 2 questions → (1)(2).
-  // Group 2 (七选五) has 1 question → (1) again (reset, not 3).
-  const qnumOneCount = (html.match(/class="qnum">\(1\)<\/span>/g) || []).length
-  assert('question (1) present exactly twice — once per group (reset, not continuous)', qnumOneCount === 2, `got ${qnumOneCount}`)
-  assert('question (2) present in group 1 (阅读理解, 2nd of 2 questions)', html.includes('class="qnum">(2)</span>'), '')
-  assert('no (3) anywhere (group 2 has only 1 question, reset wiped any continuation)', !html.includes('class="qnum">(3)</span>'), '')
-  assert('questionNumberStart (21) no longer seeds blocks-path numbering (old dot-format absent)', !html.includes('class="qnum">21.</span>') && !html.includes('class="qnum">(21)</span>'), '')
+  // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
+  // numbering is WHOLE-PAPER continuous again, seeded by questionNumberStart
+  // (21 here) — round-1's per-group reset to (1) is retired (owner QA
+  // verdict B). Group 1 (阅读理解) has 2 questions → 21, 22. Group 2
+  // (七选五) has 1 question → 23 (continues, does not reset).
+  assert('question 21 present (group 1, 1st of 2 questions)', html.includes('class="qnum">21.</span>'), '')
+  assert('question 22 present (group 1, 2nd of 2 questions)', html.includes('class="qnum">22.</span>'), '')
+  assert('question 23 present (group 2, continues past group 1 — not reset)', html.includes('class="qnum">23.</span>'), '')
+  assert('no bracketed qnum anywhere (round-1 "(n)" form retired)', !/class="qnum">\(\d+\)<\/span>/.test(html), '')
   assert('passage text present', html.includes('The fox jumps.'), '')
   assert('options present', html.includes('A. Sleep'), '')
   assert('no answer in student', !html.includes('【答案】'), '')
 
-  // draft-depassage-letter cut (owner 拍板 2026-07-09): 大题号徽标+题型标签
-  // replaces the retired A-D passage letter — continuous across section_header
-  // / page_break (not reset per section). draft-numbering-style does NOT
-  // change this — 大题头 stays whole-paper-continuous (only 小题号 resets).
-  assert('group-header 1 present (阅读理解, score suffix)', html.includes('<div class="group-header">1、阅读理解（每题 2.5 分）</div>'), '')
-  assert('group-header 2 present (七选五, continuous — not reset by section_header/page_break)', html.includes('<div class="group-header">2、七选五（每题 2 分）</div>'), '')
-  // draft-numbering-style: the seven_choices in-text blank __36__ must be
-  // remapped to the group-local (1) — matching the (1) question-list entry
-  // for the SAME group (both reset independently to 1, but by construction
-  // stay in lockstep via the hard consistency assertion).
-  assert('seven_choices in-text blank __36__ remapped to (1) (matches its group-local question number)', html.includes('<span class="print-blank-num">(1)</span>'), '')
+  // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题头由
+  // 阿拉伯数字改汉字 (一、二、三…) — continuous across section_header /
+  // page_break (unchanged from draft-depassage-letter, only the numeral
+  // form changed).
+  assert('group-header 一 present (阅读理解, score suffix, Chinese numeral)', html.includes('<div class="group-header">一、阅读理解（每题 2.5 分）</div>'), '')
+  assert('group-header 二 present (七选五, continuous — not reset by section_header/page_break)', html.includes('<div class="group-header">二、七选五（每题 2 分）</div>'), '')
+  // draft-numbering-style v2: the seven_choices in-text blank __36__ must be
+  // remapped to the WHOLE-PAPER continuous number 23 — matching the
+  // question-list entry for the SAME group (23), no parens.
+  assert('seven_choices in-text blank __36__ remapped to 23 (matches its whole-paper continuous question number, no parens)', html.includes('<span class="print-blank-num">23</span>'), '')
   assert('literal blank marker 36 no longer shown bare in print-blank-num', !html.includes('<span class="print-blank-num">36</span>'), '')
+  assert('no bracketed print-blank-num anywhere (round-1 "(n)" form retired)', !/class="print-blank-num">\(\d+\)<\/span>/.test(html), '')
   assert('no A-D passage-letter row anywhere', !html.includes('class="passage-letter"'), '')
 }
 
@@ -165,13 +163,15 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   const sevenBlankCount = (html.match(/class="print-blank print-blank--seven"/g) || []).length
   assert('grammar_cloze __56__/__59__ styled with print-blank--short (2 blanks)', shortBlankCount === 2, `got ${shortBlankCount}`)
   assert('seven_choices _____36_____ styled with print-blank--seven (1 blank)', sevenBlankCount === 1, `got ${sevenBlankCount}`)
-  // draft-numbering-style: displayed number is the group-LOCAL sequence
-  // (1..n by order of appearance), not the literal captured marker — group
-  // g-grammar has 2 blanks → (1)(2); group g-seven resets independently → (1).
-  assert('grammar_cloze first blank remapped to group-local (1) (was literal 56)', html.includes('<span class="print-blank-num">(1)</span>'), '')
-  assert('grammar_cloze second blank remapped to group-local (2) (was literal 59)', html.includes('<span class="print-blank-num">(2)</span>'), '')
-  assert('seven_choices blank remapped to its OWN group-local (1) (was literal 36; reset, not continuing grammar_cloze\'s count)', (html.match(/<span class="print-blank-num">\(1\)<\/span>/g) || []).length === 2, `expected 2 occurrences of (1) (one per group)`)
+  // draft-numbering-style v2: displayed number is the WHOLE-PAPER continuous
+  // sequence (order of appearance), not the literal captured marker, no
+  // parens — g-grammar (2 blanks, questionNumberStart:1) → 1, 2; g-seven
+  // (1 blank) continues past g-grammar → 3 (not reset to 1).
+  assert('grammar_cloze first blank remapped to 1 (was literal 56, no parens)', html.includes('<span class="print-blank-num">1</span>'), '')
+  assert('grammar_cloze second blank remapped to 2 (was literal 59, no parens)', html.includes('<span class="print-blank-num">2</span>'), '')
+  assert('seven_choices blank remapped to 3 (was literal 36; continues past grammar_cloze\'s count, not reset)', html.includes('<span class="print-blank-num">3</span>'), '')
   assert('literal marker values 56/59/36 no longer shown bare in print-blank-num', !html.includes('<span class="print-blank-num">56</span>') && !html.includes('<span class="print-blank-num">59</span>') && !html.includes('<span class="print-blank-num">36</span>'), '')
+  assert('no bracketed print-blank-num anywhere (round-1 "(n)" form retired)', !/class="print-blank-num">\(\d+\)<\/span>/.test(html), '')
   assert('prose text around blanks still HTML-escaped correctly (no literal double underscores leak)', !html.includes('__56__') && !html.includes('_____36_____'), '')
   // owner QA 2026-07-08：inline-block 继承段落 text-indent 2em 会把题号推出横线
   // 压住后文（撞字），.print-blank 必须显式归零缩进。
@@ -379,8 +379,8 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
           questionNumberStart: 1,
         })
         assert(
-          `${groupId}: group-header "1、阅读理解（每题 2.5 分）" present before the passage (single-group block list, n starts at 1)`,
-          readingHtml.includes('<div class="group-header">1、阅读理解（每题 2.5 分）</div><div class="passage">'),
+          `${groupId}: group-header "一、阅读理解（每题 2.5 分）" present before the passage (single-group block list, n starts at 1 → Chinese numeral 一)`,
+          readingHtml.includes('<div class="group-header">一、阅读理解（每题 2.5 分）</div><div class="passage">'),
           readingHtml.slice(readingHtml.indexOf('<section class="question-group">'), readingHtml.indexOf('<section class="question-group">') + 200),
         )
         assert(
@@ -398,9 +398,9 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
         !html.includes('class="passage-letter"'),
         html.includes('class="passage-letter"') ? 'found an unexpected passage-letter row' : '',
       )
-      assert('group-header 1、七选五 present (real seven_choices group)', html.includes('<div class="group-header">1、七选五（每题 1 分）</div>'), '')
-      assert('group-header 2、完形填空 present (real cloze group)', html.includes('<div class="group-header">2、完形填空（每题 1 分）</div>'), '')
-      assert('group-header 3、语法填空 present (real grammar_cloze group)', html.includes('<div class="group-header">3、语法填空（每题 1 分）</div>'), '')
+      assert('group-header 一、七选五 present (real seven_choices group, Chinese numeral)', html.includes('<div class="group-header">一、七选五（每题 1 分）</div>'), '')
+      assert('group-header 二、完形填空 present (real cloze group, Chinese numeral)', html.includes('<div class="group-header">二、完形填空（每题 1 分）</div>'), '')
+      assert('group-header 三、语法填空 present (real grammar_cloze group, Chinese numeral)', html.includes('<div class="group-header">三、语法填空（每题 1 分）</div>'), '')
       // CSS contract: .group-header is bold, visually lighter than .section-header.
       const groupHeaderCssRule = buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).match(/\.group-header \{[^}]*\}/)?.[0] || ''
       assert(

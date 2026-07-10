@@ -340,32 +340,38 @@ function assertExamRenderByteStable() {
   assert('exam render differs from handout render (branch routed)', exam !== handout)
 }
 
-// draft-numbering-style (owner 拍板 2026-07-10): small-question numbering in
-// the exam-style builder resets to (1) per question_group AND remaps
-// in-text blank markers to the SAME group-local (1..n) sequence — while the
-// non-exam handout builder is DELIBERATELY unchanged (module header comment
-// above `buildDocumentXml`, mirrors draft-depassage-letter's SW-2). BLOCKS
-// has 4 question_group blocks, each with exactly ONE question (READING /
-// GRAMMAR / CLOZE / SEVEN) — under group-local reset every one of them
-// independently starts its single question at (1).
+// draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
+// numbering in the exam-style builder is WHOLE-PAPER continuous again
+// (round-1's per-group reset to `(1)` is retired — owner QA verdict B), and
+// in-text blank markers remap to that SAME whole-paper continuous number,
+// no parens — while the non-exam handout builder is DELIBERATELY unchanged
+// (module header comment above `buildDocumentXml`, mirrors draft-depassage-
+// letter's SW-2). BLOCKS has 4 question_group blocks, each with exactly ONE
+// question (READING / GRAMMAR / CLOZE / SEVEN), questionNumberStart:21 →
+// 21, 22, 23, 24 continuous.
 function assertNumberingResetAndBlankRemap() {
   const renderer = makeRenderer()
 
   const exam = renderer.buildDocumentXml({ title: '测试卷', versionType: 'teacher', items: ITEMS, blocks: BLOCKS, questionNumberStart: 21, printStyle: 'exam' })
 
-  // Question-list format: `(n)` half-width parens, reset per group — all 4
-  // groups' single question independently lands on (1), never 21-24.
-  const qnumOneCount = (exam.match(/<w:t xml:space="preserve">\(1\)  /g) || []).length
-  assert('exam: small-question numbering resets to (1) once per group (4 groups × 1 question each)', qnumOneCount === 4, `got ${qnumOneCount}`)
-  assert('exam: old continuous dot-format numbering (21./22./23./24.) is absent', !/\(?21\)?\. {2}/.test(exam) && !exam.includes('22.  ') && !exam.includes('23.  ') && !exam.includes('24.  '))
+  // Question-list format: `n.  ` no parens, whole-paper continuous — reading
+  // 21, grammar 22, cloze 23, seven 24 (never reset to 1).
+  assert('exam: question 21 present (g-reading)', exam.includes('<w:t xml:space="preserve">21.  '))
+  assert('exam: question 22 present (g-grammar, continues past g-reading)', exam.includes('<w:t xml:space="preserve">22.  '))
+  assert('exam: question 23 present (g-cloze, continues past g-grammar)', exam.includes('<w:t xml:space="preserve">23.  '))
+  assert('exam: question 24 present (g-seven, continues past g-cloze)', exam.includes('<w:t xml:space="preserve">24.  '))
+  assert('exam: round-1 group-local "(1)" numbering format is absent', !/<w:t xml:space="preserve">\(\d+\)  /.test(exam))
 
   // In-text blank remap: each of grammar/cloze/seven has exactly 1 blank,
-  // remapped to its own group-local (1) — same padding convention
-  // (`docxBlankPaddingSpaces`: 2-space for grammar/cloze, 3-space for
-  // seven), display swaps the literal captured digit (56/41/36) for "(1)".
-  assert('exam: grammar_cloze/cloze in-text blank remapped to "  (1)  " (2-space padding)', exam.includes('  (1)  '))
-  assert('exam: seven_choices in-text blank remapped to "   (1)   " (3-space padding)', exam.includes('   (1)   '))
-  assert('exam: literal blank marker digits 56/41/36 no longer shown padded-bare (all remapped to parens)', !exam.includes('  56  ') && !exam.includes('  41  ') && !exam.includes('   36   '))
+  // remapped to its OWN group's whole-paper continuous number (22/23/24 —
+  // matching each group's single question-list entry above), same padding
+  // convention (`docxBlankPaddingSpaces`: 2-space for grammar/cloze, 3-space
+  // for seven), no parens.
+  assert('exam: grammar_cloze in-text blank remapped to "  22  " (2-space padding, was literal 56)', exam.includes('  22  '))
+  assert('exam: cloze in-text blank remapped to "  23  " (2-space padding, was literal 41)', exam.includes('  23  '))
+  assert('exam: seven_choices in-text blank remapped to "   24   " (3-space padding, was literal 36)', exam.includes('   24   '))
+  assert('exam: literal blank marker digits 56/41/36 no longer shown padded-bare (all remapped)', !exam.includes('  56  ') && !exam.includes('  41  ') && !exam.includes('   36   '))
+  assert('exam: no bracketed in-text blank remap anywhere (round-1 "(n)" form retired)', !/  \(\d+\)  /.test(exam) && !/   \(\d+\)   /.test(exam))
 
   // Handout builder stays byte-for-byte on the OLD contract: continuous
   // numbering (still seeded by questionNumberStart) + raw literal blank
@@ -374,7 +380,6 @@ function assertNumberingResetAndBlankRemap() {
   assert('handout: numbering still continuous from questionNumberStart (21. present, NOT reset)', handout.includes('21. '))
   assert('handout: grammar_cloze/cloze in-text blank markers still show the RAW literal digit "  56  " (SW-2 asymmetry preserved)', handout.includes('  56  '))
   assert('handout: seven_choices in-text blank marker still shows the RAW literal digit "   36   "', handout.includes('   36   '))
-  assert('handout: no (1) small-question / blank-remap format leaked in from the exam-only remap', !handout.includes('(1)'))
 }
 
 function assertWriteDocxPackage(documentXml) {
