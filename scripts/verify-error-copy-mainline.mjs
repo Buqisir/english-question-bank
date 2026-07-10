@@ -91,7 +91,10 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
   // catch block through describeError; the negative-regex assertion above
   // is the actual safety property and is unchanged.
   assert('MySpacePage.tsx uses describeError at all 3 remaining call sites', mySpaceCount === 3, `found ${mySpaceCount}`)
-  assert('DraftPaperWorkbench.tsx uses describeError at all 10 former call sites', workbenchCount === 10, `found ${workbenchCount}`)
+  // draft-student-field (E4) added an 11th call site: saveStudentLabel's catch
+  // block routes its failure through describeError, same as every other
+  // workbench mutation (updateTitle, persistItems, etc.).
+  assert('DraftPaperWorkbench.tsx uses describeError at all 11 call sites', workbenchCount === 11, `found ${workbenchCount}`)
 }
 
 console.log('== MySpacePage failure-state recovery + de-duplication ==')
@@ -120,7 +123,7 @@ console.log('== DraftPaperWorkbench: errors do not clear work in progress ==')
   // the only setDraftPaper calls with a null/empty-reset payload appear
   // outside error handling.
   const catchBlocks = src.match(/catch \(error\) \{[\s\S]*?\n {4}\}/g) || []
-  assert('found catch(error) blocks to inspect', catchBlocks.length === 10, `found ${catchBlocks.length}`)
+  assert('found catch(error) blocks to inspect', catchBlocks.length === 11, `found ${catchBlocks.length}`)
   const clearsState = catchBlocks.filter((block) => /setDraftPaper\(null\)|setTitleDraft\(''\)/.test(block))
   assert('no catch(error) block clears draftPaper or titleDraft', clearsState.length === 0, `${clearsState.length} block(s) clear state`)
 }
