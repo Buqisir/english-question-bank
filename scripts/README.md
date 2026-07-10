@@ -75,6 +75,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-i16a-teaching-dimension-search.mjs` | I16·A 教学维度检索层：extractor 四类（语法/七选五/完形/阅读）真实 960d0f8d 样本断言；MF-1 完形 signatureFacet 稀疏（13/15 缺失不崩）；reading 多组 join 3+4+4+4 无孤儿；MF-2 未解析题组（jslk grammar-fill/cloze）缺席索引；查询行为（bridge/noun/skill/多维 AND）；MF-3 路由注册 + invalidate 清缓存 | yes |
 | `verify-i16b-theme-labels-backfill.mjs` | I16·B 主题标签批量回填：注入 mock 编排（全标/跳过/容错/摘要计数）；MF-2 diff 围栏（reading-choice-analysis-v1.md/topicTaxonomy.mjs/analyzeReading/packageBuilder 未耦合）；路由经工厂注册；前端 service 调 /api/topic-labels/backfill | yes |
 | `verify-i16c-grammar-verb-axes.mjs` | I16·C 语法填空动词维度（时态/语态/主谓一致）：确定性分类器各形态 + AI 兜底；MF-1 sidecar 落在 resolved baseDir（versions/v1，不造 latest/）；MF-2 索引合并保留现有 grammarFill facet+groupType+跨类阅读、新增三轴；MF-4 主谓一致从主语上下文判（have-led→AI，prompt 携带 subjectSignals）；编排幂等/容错；endpoint filter；frozen 契约围栏（facets 注册表/validator/schema/deepseek.mjs 未动）| yes |
+| `verify-similar-questions.mjs` | E1 相似题引擎：真库真资产行为级——语法填空非谓语空种子（facet-density + 种子组/同passage/同source卷排除）；阅读推断题种子（全 reading 组 + skill 密度 + word_count 邻域排序）；多种子并集 facet + 两次跑逐字节确定性；错误语义（写作种子/未知questionId/空数组 400，写作用隔离内存库跑真 SQL 因为写作组在本数据无可寻址 questionId）；poolStats 独立重算比对；AI 日限额计数零增长；路由真实 request/response 往返；api.mjs 接线 + verify-ci/README 注册 housekeeping | yes |
 | `verify-search-thinking-toggle.mjs` | AI 搜索 thinking 开关：askQuestionBankSteward 第三参 thinkingMode 进请求体；questionBankStewardSearch 形参含 thinkingMode 且传给 plan + semantic；steward 路由 forwards input.thinkingMode；ConciergeDesk 渲染 thinking toggle | yes |
 
 ## PaperSurface and Paper Intelligence

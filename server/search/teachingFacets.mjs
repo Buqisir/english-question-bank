@@ -23,7 +23,11 @@ import {
  */
 
 // ─── Analysis configs (mirrors paperSurfaceAvailability.mjs) ─────────────────
-const analysisConfigs = [
+// Exported (minimal, zero logic change) so server/search/similarQuestions.mjs
+// can walk the same analysis files for per-question raw facet entries — this
+// index only stores per-GROUP aggregated Sets, which similar-question scoring
+// isn't enough for (it needs the seed's own specific blank/question value).
+export const analysisConfigs = [
   {
     schemaVersion: 'reading-choice-analysis-v1',
     fileName: 'reading-choice-analysis-v1.json',
