@@ -23,7 +23,13 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
 
 ## 主线焦点
 
-- 2026-07-10：**similar-engine（E1）+ draft-student-field（E4）双刀收官**
+- 2026-07-10：**similar-rail（E2）收官**（merge cb35cd3，CR APPROVE 0 MF，
+  主代理复核 184+72 绿）：讲评栏「配相似」CTA + 右栏原地结果态 + 勾选
+  乐观入草稿卷，主打功能一条龙首次可用。CR 亮点：SW-1 用 label 黑名单
+  优于 plan 的 kind 白名单（裁定入 cr.md）。SW 挂账：新 reason kind 默认
+  渲染、FE 配方文案表可漂移、DEV 未打 checkpoint（流程提醒）。owner QA
+  待做。下一步：E3 次入口+concierge 换引擎；fig-token P0 / 解析字段
+  roadmap 待 owner 拍板。
   （merge 3871421/efcc40e，双 CR APPROVE 0 MF，主代理复核 29+20+73 绿）：
   相似题引擎 API 落地（零 AI 确定性配方打分，复用 i16a）；草稿卷
   student_label 种子字段（懒 ALTER 迁移，卷面硬边界双层封锁+CR SW 直收
