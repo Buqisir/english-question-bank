@@ -27,7 +27,7 @@ Last updated: 2026-07-08（UI 整改日：四刀+基建，三刀并行 worktree�
   （merge 3871421/efcc40e，双 CR APPROVE 0 MF，主代理复核 29+20+73 绿）：
   相似题引擎 API 落地（零 AI 确定性配方打分，复用 i16a）；草稿卷
   student_label 种子字段（懒 ALTER 迁移，卷面硬边界双层封锁+CR SW 直收
-  扩 backstop）。CI 插曲：新 verify 缺 off-repo fixture 守卫致一次真红，
+  扩 backstop，owner QA 过 2026-07-10）。CI 插曲：新 verify 缺 off-repo fixture 守卫致一次真红，
   已补 exit-2 SKIP 惯例（5ee053b）。E2 讲评栏 UI 刀 plan 待写（吃 CR 两条
   硬交接：体裁 chip 恒亮空洞勿渲染、matchedQuestionIds 可空）。
   program：docs/cuts/similar-questions/（七问 grilling 全落锤，原型入档）。（merge 066c5e2，CR APPROVE 0 MF，
