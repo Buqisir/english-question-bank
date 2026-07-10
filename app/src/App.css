@@ -3846,8 +3846,10 @@ button:disabled {
    重挂载天然打断上一次。 */
 .basket-chip-count-window {
   display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
+  /* 裁剪滑入过程用 clip-path 而非 overflow:hidden——inline-block 一旦
+     overflow 非 visible，基线会掉到盒底边，数字比汉字矮半截（owner
+     2026-07-10 实报）。clip-path 不改变基线。 */
+  clip-path: inset(0);
 }
 
 .basket-chip-count {
