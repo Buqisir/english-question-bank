@@ -67,6 +67,13 @@ console.log('Test 1: HTML generation - blocks, numbering, structure')
   assert('passage text present', html.includes('The fox jumps.'), '')
   assert('options present', html.includes('A. Sleep'), '')
   assert('no answer in student', !html.includes('【答案】'), '')
+
+  // draft-depassage-letter cut (owner 拍板 2026-07-09): 大题号徽标+题型标签
+  // replaces the retired A-D passage letter — continuous across section_header
+  // / page_break (not reset per section).
+  assert('group-header 1 present (阅读理解, score suffix)', html.includes('<div class="group-header">1、阅读理解（每题 2.5 分）</div>'), '')
+  assert('group-header 2 present (七选五, continuous — not reset by section_header/page_break)', html.includes('<div class="group-header">2、七选五（每题 2 分）</div>'), '')
+  assert('no A-D passage-letter row anywhere', !html.includes('class="passage-letter"'), '')
 }
 
 // --- Test 2: Teacher version ---
@@ -139,7 +146,7 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   assert('.print-blank rule resets text-indent to 0 (title-indent inheritance bug)', /text-indent:\s*0/.test(blankCssRule), blankCssRule.slice(0, 120))
   // standard §3b 分页纪律(owner 2026-07-08):小题不拆、标题不落页尾、写作框不拆
   assert('§3b: .question is break-inside: avoid (单个小题不可拆)', html.match(/\.question \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r)) === true, '')
-  assert('§3b: section-header break-after: avoid (标题不落页尾)', /\.section-header,\s*\.group-meta \{\s*break-after:\s*avoid/.test(html), '')
+  assert('§3b: section-header break-after: avoid (标题不落页尾)', /\.section-header,\s*\.group-meta,\s*\.group-header \{\s*break-after:\s*avoid/.test(html), '')
   const boxBreakRule = html.match(/\.writing-answer-box \{\s*break-inside[^}]*\}/)?.[0] || (html.includes('.writing-answer-box {\n  break-inside: avoid;') ? 'ok' : '')
   assert('§3b: writing-answer-box break-inside: avoid (写作框整框不拆)', html.match(/\.writing-answer-box \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r)) === true, '')
 }
@@ -294,24 +301,21 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
     assert('cloze real blank count is 15 (2026-07-08 measured)', countBlanks(realItems[1].__materialText) === 15, `got ${countBlanks(realItems[1].__materialText)}`)
     assert('grammar_cloze real blank count is 10 (2026-07-08 measured)', countBlanks(realItems[2].__materialText) === 10, `got ${countBlanks(realItems[2].__materialText)}`)
 
-    // --- Test 8b: real paper-2026-i reading groups — passage-letter row
-    // (paper-passage-letter cut, docs/cuts/paper-passage-letter/plan.md
-    // decision 2). No sectionTitle is supplied on either the item or the
-    // block — DEV empirically confirmed (real server, real draft-paper +
-    // basket export calls) that both current caller flows leave
-    // sectionTitle unable to carry a trailing A-D letter by default, so
-    // the `detail.title` fallback ("Reading A") is what actually fires in
-    // practice; this fixture matches that real-world shape instead of a
-    // synthetic sectionTitle that would mask the fallback not firing. ---
-    console.log('\nTest 8b: Real paper-2026-i reading groups — passage-letter row')
+    // --- Test 8b: real paper-2026-i reading groups — group-header row
+    // (draft-depassage-letter cut, docs/cuts/draft-depassage-letter/plan.md).
+    // The paper-passage-letter cut's A-D letter (via detail.title fallback,
+    // e.g. "Reading A") is retired; every question_group block now gets a
+    // continuous `${n}、${题型}` group-header instead, regardless of
+    // sectionTitle/detail.title contents. ---
+    console.log('\nTest 8b: Real paper-2026-i reading groups — group-header row (大题头)')
     {
-      const readingLetterSpecs = [
-        ['group-2026-i-reading-a', 'A'],
-        ['group-2026-i-reading-b', 'B'],
-        ['group-2026-i-reading-c', 'C'],
-        ['group-2026-i-reading-d', 'D'],
+      const readingGroupIds = [
+        'group-2026-i-reading-a',
+        'group-2026-i-reading-b',
+        'group-2026-i-reading-c',
+        'group-2026-i-reading-d',
       ]
-      for (const [groupId, letter] of readingLetterSpecs) {
+      for (const [index, groupId] of readingGroupIds.entries()) {
         const group = groups[groupId]
         const readingItem = {
           detail: {
@@ -332,30 +336,36 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
           questionNumberStart: 1,
         })
         assert(
-          `${groupId}: passage-letter row "${letter}" present before the passage (real asset, no sectionTitle supplied — detail.title fallback)`,
-          readingHtml.includes(`<div class="passage-letter">${letter}</div><div class="passage">`),
+          `${groupId}: group-header "1、阅读理解（每题 2.5 分）" present before the passage (single-group block list, n starts at 1)`,
+          readingHtml.includes('<div class="group-header">1、阅读理解（每题 2.5 分）</div><div class="passage">'),
           readingHtml.slice(readingHtml.indexOf('<section class="question-group">'), readingHtml.indexOf('<section class="question-group">') + 200),
         )
+        assert(
+          `${groupId}: no A-D passage-letter row (detail.title "${group.title}" ends in a letter but is no longer consumed)`,
+          !readingHtml.includes('class="passage-letter"'),
+          '',
+        )
       }
-      // Non-reading real groups (already built above as realItems) must NOT
-      // gain a passage-letter row — their detail.title ('完形填空' /
-      // '语法填空' / the seven_choices group's Chinese title) never ends in
-      // A-D, so the same detail.title fallback correctly stays inert.
+      // Non-reading real groups (already built above as realItems, blocks
+      // realBlocks) must never render .passage-letter (fully retired) and
+      // must each carry their own group-header (n continuous across the
+      // 3-group blocks list: seven_choices=1, cloze=2, grammar_cloze=3).
       assert(
         'non-reading real groups (seven_choices/cloze/grammar_cloze) never render .passage-letter',
         !html.includes('class="passage-letter"'),
         html.includes('class="passage-letter"') ? 'found an unexpected passage-letter row' : '',
       )
-      // CSS contract: 10.5pt bold centered (standard §83-84 / print-renderer
-      // body is already 10.5pt, so no separate font-size override needed).
-      const passageLetterCssRule = readingLetterSpecs.length > 0
-        ? buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).match(/\.passage-letter \{[^}]*\}/)?.[0] || ''
-        : ''
+      assert('group-header 1、七选五 present (real seven_choices group)', html.includes('<div class="group-header">1、七选五（每题 1 分）</div>'), '')
+      assert('group-header 2、完形填空 present (real cloze group)', html.includes('<div class="group-header">2、完形填空（每题 1 分）</div>'), '')
+      assert('group-header 3、语法填空 present (real grammar_cloze group)', html.includes('<div class="group-header">3、语法填空（每题 1 分）</div>'), '')
+      // CSS contract: .group-header is bold, visually lighter than .section-header.
+      const groupHeaderCssRule = buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).match(/\.group-header \{[^}]*\}/)?.[0] || ''
       assert(
-        '.passage-letter CSS rule is bold + centered (standard §83-84)',
-        /font-weight:\s*bold/.test(passageLetterCssRule) && /text-align:\s*center/.test(passageLetterCssRule),
-        passageLetterCssRule,
+        '.group-header CSS rule is bold, font-size 11pt (half-step below .section-header 12pt)',
+        /font-weight:\s*bold/.test(groupHeaderCssRule) && /font-size:\s*11pt/.test(groupHeaderCssRule),
+        groupHeaderCssRule,
       )
+      assert('.passage-letter CSS rule retired (no longer emitted)', !buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).includes('.passage-letter {'), '')
     }
 
     // --- Test 9: real-PDF byte-level smoke from the REAL payload HTML ---

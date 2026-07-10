@@ -735,6 +735,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
   // Render blocks or legacy items
   if (Array.isArray(blocks) && blocks.length > 0) {
     let questionNum = startNum
+    let groupNum = 0
 
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
@@ -748,21 +749,18 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
 
-        // Extract passage label (A/B/C/D) from sectionTitle if possible.
-        // paper-passage-letter (docs/cuts/paper-passage-letter/plan.md
-        // decision 2): DEV empirically confirmed neither current caller
-        // (draft-paper hardcodes '', the classic basket sets the Chinese
-        // groupTypeLabel) ever leaves sectionTitle ending in A-D, so the
-        // `|| detail.title` fallback ("Reading A") is what actually
-        // supplies the letter in practice. print-renderer.mjs gets the
-        // identical fallback in the same cut so DOCX and PDF stay in parity.
-        const sectionTitle = block.sectionTitle || item.sectionTitle || detail.title || ''
-        const passageLabelMatch = sectionTitle.match(/([A-D])$/)
-        const passageLabel = passageLabelMatch ? passageLabelMatch[1] : ''
-
-        if (passageLabel) {
-          body.push(paragraph([run(passageLabel, { bold: true, size: 22 })], { align: 'center', before: 160, after: 80, keepNext: true }))
-        }
+        // draft-depassage-letter (docs/cuts/draft-depassage-letter/plan.md):
+        // retires the paper-passage-letter cut's A-D letter derivation —
+        // 草稿卷是练习单非仿真卷, A/B/C/D 是源卷结构属性不该带走。取而代之
+        // 渲染大题号徽标+题型标签 (owner 拍板 2026-07-09): `n、题型` 全卷
+        // 连续编号, 跨 section_header 不重置。size 22 (11pt) — 半级低于
+        // section_header 的 24 (12pt), 与 print-renderer.mjs 的 .group-header
+        // (11pt) 同规格。
+        groupNum += 1
+        const hasBlockScore = Number.isFinite(Number(block.score))
+        const groupHeaderScoreSuffix = hasBlockScore ? `（每题 ${score} 分）` : ''
+        const groupHeaderLabel = groupTypeLabels[detail.groupType] || detail.groupType
+        body.push(paragraph([run(`${groupNum}、${groupHeaderLabel}${groupHeaderScoreSuffix}`, { bold: true, size: 22, heading: true })], { before: 160, after: 80, keepNext: true }))
 
         // Passage text
         if (passageLines.length > 0 && passageLines[0]) {
@@ -813,7 +811,13 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
       }
     }
   } else {
-    // Legacy fallback for exam style
+    // Legacy fallback for exam style. draft-depassage-letter cut: never had
+    // passage-letter rendering (nothing to retire) and is not given the new
+    // 大题头 group-header — every current export caller (paperExportPayload.ts
+    // buildDocxPayload/buildPdfPayload) always sends a non-empty `blocks`
+    // array (usePaperDraft.ts invariant 2: every basket item has exactly one
+    // question_group block), so this branch has no real product consumer.
+    // Left mechanically unchanged; recorded as fact per plan.md step 2.
     let questionNum = startNum
     items.forEach((item) => {
       const { detail } = item
