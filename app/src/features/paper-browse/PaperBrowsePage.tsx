@@ -1369,7 +1369,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             渲染，写作/听力题组即便被选中也不出现这个按钮。 */}
         {hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
           <div className="similar-cta">
-            <span className="similar-cta-why">从库里配同配方的相似题——</span>
+            {/* owner 拍板 2026-07-10：按钮在最左，说明文字跟在右边 */}
             <button
               type="button"
               className="similar-btn similar-btn--primary"
@@ -1386,6 +1386,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             >
               🔁 配相似
             </button>
+            <span className="similar-cta-why">——从库里配同配方的相似题</span>
           </div>
         )}
       </div>
