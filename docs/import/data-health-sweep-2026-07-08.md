@@ -271,3 +271,15 @@ block 的 groupId 都能在 `content.groups` 里找到对应项，反向也成�
 
 *本报告由 READ-ONLY 普查脚本 + 人工复核生成，未修改任何 asset/DB/仓库
 文件（除本报告本身）。*
+
+## 追记（2026-07-10，draft-numbering-style 刀硬断言实测产出）
+
+空号一致性硬断言对全库 99 个完形/语法/七选五组扫描，5 组不健康
+（加入草稿卷导出会 fail loud，属预期防线；修复前这 5 组别进草稿卷）：
+
+- `group-960d0f8d-grammar-fill`：`NN._____` 空形不被 paperBlankPattern
+  捕获（PA F2 历史决定的洞；治本=动 shared blankPattern，牵屏幕
+  PaperSurface，独立刀）。
+- `group-2024-ii-seven-choices` / `group-2025-ii-seven-choices` /
+  `group-zj-2024-jan-seven-choices` / `group-2024-jia-seven-choices`：
+  真空之后混入游离的段落序号数字（数据噪音，数据修复批处理）。
