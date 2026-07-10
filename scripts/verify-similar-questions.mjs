@@ -37,6 +37,14 @@ const rootDir = path.resolve(__dirname, '..')
 const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
 const dbPath = path.join(rootDir, 'data/question-bank.sqlite')
 
+// Off-repo fixture guard (verify-ci convention: exit 2 = SKIP). The engine
+// assertions run against the real local DB + real paper-assets; CI has
+// neither, same as verify-list-groups-perf / verify-paper-assets-consistency.
+if (!existsSync(dbPath) || !existsSync(paperAssetsDir)) {
+  console.log(`SKIP: off-repo fixture absent (db: ${dbPath}, assets: ${paperAssetsDir})`)
+  process.exit(2)
+}
+
 let passed = 0
 let failed = 0
 
