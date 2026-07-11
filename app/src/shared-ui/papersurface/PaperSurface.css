@@ -249,6 +249,10 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   margin: 0;
   padding: 0;
   border: none;
+  /* CR S1: buttons keep UA `buttontext` color (global button rule only
+     inherits font) — inherit so the number + currentColor underline
+     follow the surface ink, same as I15's grammar-fill button. */
+  color: inherit;
   border-bottom: 1px solid currentColor;
   border-radius: 0;
   background: transparent;
