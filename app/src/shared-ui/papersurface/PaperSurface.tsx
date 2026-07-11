@@ -99,6 +99,17 @@ type BlankFocusContext = {
 type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
 type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
+  /**
+   * lecture-rail-scroll-fix QA fix: supplemental blank-number →
+   * questionId entries for surfaces whose `questions` prop is
+   * intentionally empty (七选五 renders its A-G pool via `optionBank`,
+   * never per-question rows — so the blankFocus map derived from
+   * `questions` alone would be empty and every blank would fall back
+   * to the non-interactive span). Entries only fill numbers missing
+   * from the `questions`-derived map; they never override it. Ignored
+   * in 'rail' mode.
+   */
+  readonly blankQuestionIdByNo?: Record<string, string>
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
@@ -115,6 +126,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     readingFocusBySection: _readingFocusBySection,
     onFocusIntent,
     blankFocusMode = 'rail',
+    blankQuestionIdByNo,
   } = props
 
   const handleQuestionClick = useCallback(
@@ -155,13 +167,20 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
       const no = String(q.questionNo ?? '')
       if (no && !questionIdByNo.has(no)) questionIdByNo.set(no, q.id)
     }
+    // Supplemental entries (see prop doc) fill gaps only — the
+    // `questions`-derived mapping always wins on conflict.
+    if (blankQuestionIdByNo) {
+      for (const [no, id] of Object.entries(blankQuestionIdByNo)) {
+        if (no && id && !questionIdByNo.has(no)) questionIdByNo.set(no, id)
+      }
+    }
     return {
       renderer: blankFocusMode === 'paper-blank' ? 'paper-blank' : 'grammar-fill',
       questionIdByNo,
       activeQuestionId: lectureFocus?.questionId ?? null,
       onQuestionClick: handleQuestionClick,
     }
-  }, [blankFocusMode, questions, lectureFocus, handleQuestionClick])
+  }, [blankFocusMode, questions, blankQuestionIdByNo, lectureFocus, handleQuestionClick])
 
   // Group evidence by section for neutral anchor emission.
   const evidenceBySection = useMemo(() => {

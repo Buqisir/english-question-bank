@@ -1770,6 +1770,34 @@ assert(
   'missing the 讲评态 group-actions hide rule (base + hover + focus-within)',
 )
 
+// ─── 68-70. lecture-rail-scroll-fix QA round（真机 QA 抓出的两笔）───
+
+assert(
+  '68. PaperBrowsePage: 七选五 blank→questionId 映射从 asset 补喂（sevenChoices 的 surfaceData.questions 有意为空——A-G 池走 optionBank——不补喂则所有空降级为不可点 span），且 prop 已传入 PaperSurface',
+  /blankFocusMode === 'paper-blank' && entry\.kind === 'sevenChoices'/.test(pageSrc) &&
+    /blankQuestionIdByNo\[String\(no\)\] = questionId/.test(pageSrc) &&
+    /blankQuestionIdByNo=\{blankQuestionIdByNo\}/.test(pageSrc),
+  'missing the sevenChoices blankQuestionIdByNo supplemental mapping or the prop wiring',
+)
+assert(
+  '69. PaperSurface: blankQuestionIdByNo 补充映射只填缺口、从不覆盖 questions 派生条目（questions-derived wins on conflict）',
+  /readonly blankQuestionIdByNo\?: Record<string, string>/.test(paperSurfaceSrc) &&
+    /if \(no && id && !questionIdByNo\.has\(no\)\) questionIdByNo\.set\(no, id\)/.test(paperSurfaceSrc),
+  'missing the fill-gaps-only supplemental blankQuestionIdByNo merge',
+)
+assert(
+  '70. scrollToAnchor 沉降巡检修（留观① QA 定性归刀）：setTimeout 驱动（遮挡态 rAF 冻结时 smooth 动画走不完，定时器照跑）、每拍重查询锚点（detached 节点防御）、静止 ≥3 拍且偏离 >4px 才 behavior:auto 硬校准、wheel/touchstart/keydown 立即取消、5s 到点退出',
+  /stillChecks >= 3 && Math\.abs\(top\) > 4/.test(pageSrc) &&
+    /timer = setTimeout\(settle, 150\)/.test(pageSrc) &&
+    /scrollerRef\.current\?\.querySelector<HTMLElement>/.test(pageSrc) &&
+    /window\.addEventListener\('wheel', cancel, \{ passive: true \}\)/.test(pageSrc) &&
+    /window\.addEventListener\('touchstart', cancel, \{ passive: true \}\)/.test(pageSrc) &&
+    /window\.addEventListener\('keydown', cancel\)/.test(pageSrc) &&
+    /performance\.now\(\) > deadline/.test(pageSrc) &&
+    !/requestAnimationFrame\(settle\)/.test(pageSrc),
+  'missing the setTimeout-driven settle loop (re-query, still-checks gate, user-input cancel, deadline) or a leftover rAF-driven variant',
+)
+
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)
   process.exit(1)
