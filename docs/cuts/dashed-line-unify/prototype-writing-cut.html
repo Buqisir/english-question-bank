@@ -1,0 +1,200 @@
+<title>写作组切口原型 · 现状 vs 从提示语切 vs 从节标题切</title>
+<!-- PROTOTYPE — throwaway.
+     问题：写作组选中罩的上缘应该落在哪里？（owner QA 2026-07-10：
+     "不应该是写作的提示起始线开始切吗？"）
+     三方案 hover 对比，答案拍板后此文件留档、结论进 plan.md。 -->
+<style>
+  :root {
+    --desk: #F0EFEC;
+    --paper: #FDFCFA;
+    --ink: #1E1E1C;
+    --ink-soft: #6A6A64;
+    --rule-rest: rgba(74, 68, 56, 0.30);
+    --teal: #2C6E56;
+    --teal-line: rgba(44, 110, 86, 0.60);
+    --teal-wash: rgba(44, 110, 86, 0.035);
+    --warn: #B4540A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --desk: #232321; --paper: #2C2B28; --ink: #E8E6E1; --ink-soft: #A6A49C;
+      --rule-rest: rgba(214, 205, 186, 0.30); --teal-line: rgba(94, 176, 146, 0.7);
+      --teal-wash: rgba(94, 176, 146, 0.06); --teal: #5EB092; --warn: #E08B45; }
+  }
+  :root[data-theme="dark"] { --desk: #232321; --paper: #2C2B28; --ink: #E8E6E1; --ink-soft: #A6A49C;
+    --rule-rest: rgba(214, 205, 186, 0.30); --teal-line: rgba(94, 176, 146, 0.7);
+    --teal-wash: rgba(94, 176, 146, 0.06); --teal: #5EB092; --warn: #E08B45; }
+  :root[data-theme="light"] { --desk: #F0EFEC; --paper: #FDFCFA; --ink: #1E1E1C; --ink-soft: #6A6A64;
+    --rule-rest: rgba(74, 68, 56, 0.30); --teal-line: rgba(44, 110, 86, 0.60);
+    --teal-wash: rgba(44, 110, 86, 0.035); --teal: #2C6E56; --warn: #B4540A; }
+
+  body { background: var(--desk); color: var(--ink); margin: 0;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .wrap { max-width: 1360px; margin: 0 auto; padding: 40px 24px 64px; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .lede { color: var(--ink-soft); font-size: 14px; line-height: 1.8; max-width: 760px; margin: 0 0 12px; }
+  .lede strong { color: var(--ink); }
+  .hint { font-size: 13px; color: var(--teal); margin: 0 0 28px; }
+
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1100px) { .cols { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; } }
+  .col-title { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+  .col-title .tag { font-size: 11px; font-weight: 500; color: var(--teal);
+    border: 1px solid var(--teal-line); border-radius: 3px; padding: 1px 6px;
+    vertical-align: 1px; margin-left: 6px; }
+  .col-title .tag--warn { color: var(--warn); border-color: var(--warn); }
+  .col-sub { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 12px; min-height: 5.2em; }
+  .col-sub b { color: var(--ink); }
+
+  .paper { background: var(--paper); padding: 30px 30px 26px;
+    box-shadow: 0 1px 0 #00000010, 0 10px 26px #00000012;
+    font-family: "Times New Roman", "Songti SC", SimSun, serif; }
+
+  /* ── 普通题组（语法填空，节末） ── */
+  .block { position: relative; padding: 13px 4px; cursor: default; }
+  .g-title { font-weight: 700; font-size: 13.5px; margin: 0 0 6px; }
+  .g-body { font-size: 12.5px; line-height: 1.8; margin: 0; opacity: 0.82; }
+  .blank { border-bottom: 1px solid currentColor; padding: 0 14px; font-size: 10px; }
+
+  /* 静息剪刀线（画在块界，hover 本单元时隐去，由选区罩边界接管） */
+  .cut { position: absolute; left: 20px; right: 20px; top: -1px; height: 0;
+    border-top: 1px dashed var(--rule-rest); pointer-events: none; transition: opacity 0.25s; }
+  .cut--bottom { top: auto; bottom: -1px; }
+  .block:hover > .cut { opacity: 0; }
+
+  .block::after { content: ''; position: absolute; inset: -1px -30px;
+    background: var(--teal-wash);
+    border-top: 1px dashed var(--teal-line); border-bottom: 1px dashed var(--teal-line);
+    opacity: 0; transition: opacity 0.35s; pointer-events: none; }
+  .block:hover::after { opacity: 1; }
+
+  /* ── 写作区（part 标题 + 节标题 + 提示语 + 答题框，同一 hover 单元） ── */
+  .wblock { position: relative; cursor: default; }
+  .part-heading { font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 13px; font-weight: 700; padding: 15px 4px 2px; position: relative; }
+  .sec-heading { font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 12.5px; font-weight: 600; padding: 8px 4px 2px; position: relative; }
+  .prompt { font-size: 12.5px; line-height: 1.8; margin: 0; padding: 12px 4px 4px;
+    opacity: 0.82; position: relative; }
+  .ansbox { margin: 10px 4px 4px; padding: 10px 12px 4px; }
+  .ansline { height: 24px; border-bottom: 1px solid rgba(120, 114, 100, 0.35); }
+
+  /* 写作内部的提示起始线（pi-writing 老语义：节标题之后、提示语之前） */
+  .wcutline { position: absolute; top: 0; left: 20px; right: 20px; height: 0;
+    border-top: 1px dashed var(--rule-rest); pointer-events: none; transition: opacity 0.25s; }
+
+  /* 写作选区罩：一个绝对定位层，各方案给不同的 top（用 wrapper 结构控制） */
+  .wcut { position: absolute; left: -30px; right: -30px; top: 0; bottom: -1px;
+    background: var(--teal-wash);
+    border-top: 1px dashed var(--teal-line); border-bottom: 1px dashed var(--teal-line);
+    opacity: 0; transition: opacity 0.35s; pointer-events: none; }
+  .wblock:hover .wcut { opacity: 1; }
+  /* 方案A/B：罩的上缘与内部静息线同位，hover 时静息线隐去避免同位双线 */
+  .wblock:hover .wcutline--takeover { opacity: 0; }
+
+  /* 罩的定位锚：从某个元素起到底 */
+  .cutrange { position: relative; }
+
+  /* 标注气泡 */
+  .note { position: absolute; right: -8px; font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 11.5px; padding: 3px 9px; border-radius: 3px; color: #fff;
+    opacity: 0; transition: opacity 0.35s; pointer-events: none; z-index: 2; white-space: nowrap; }
+  .block:hover .note, .wblock:hover .note { opacity: 1; }
+  .note--bad { background: var(--warn); }
+  .note--good { background: var(--teal); }
+  .note--rest { opacity: 1; background: none; color: var(--ink-soft);
+    border: 1px solid var(--rule-rest); }
+  .block:hover .note--rest, .wblock:hover .note--rest { opacity: 0; }
+
+  @media (prefers-reduced-motion: reduce) { .cut, .wcut, .wcutline, .block::after, .note { transition: none; } }
+
+  .legend { margin-top: 30px; font-size: 13px; color: var(--ink-soft); line-height: 2; max-width: 760px; }
+  .legend b { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <h1>写作组的切口在哪 · 三方案</h1>
+  <p class="lede">QA 发现的矛盾：上一刀说「写作的剪走单元从<strong>提示语</strong>起」，所以撤了标题上方的静息线；但写作组 hover 时的选区罩还是<strong>整卡显影</strong>——罩子上缘仍在「第四部分 写作」标题上方，且那条上缘静息时没有线（不变量破了）。真正要改的可能是<strong>切口本身</strong>。</p>
+  <p class="hint">↓ 每张纸上，先悬「语法填空」看它的下缘，再悬写作区看罩的上缘落在哪。</p>
+
+  <div class="cols">
+    <!-- ════════ 现状 ════════ -->
+    <div>
+      <p class="col-title">现状<span class="tag tag--warn">35cd609 之后</span></p>
+      <p class="col-sub">写作罩=整卡，上缘罩住「第四部分」标题，读作<b>连标题剪走</b>；且这条上缘静息无线，凭空出现。语法填空的下缘也凭空出现（静息线被撤了）。内部提示起始线常驻但和罩不同位——一个单元两套话。</p>
+      <div class="paper">
+        <div class="block">
+          <div class="cut"></div>
+          <p class="g-title">第二节 语法填空</p>
+          <p class="g-body">China's giant pandas have long been <span class="blank">61</span> (love) by people around the world. Their success <span class="blank">62</span> a result of decades of careful protection…</p>
+          <span class="note note--bad" style="bottom:-12px">⚠ 下缘凭空出现（静息线昨天撤了）</span>
+        </div>
+        <div class="wblock">
+          <div class="cutrange">
+            <div class="wcut"></div>
+            <div class="part-heading">第四部分 写作（共两节，满分 40 分）</div>
+            <div class="sec-heading">第一节（满分 15 分）</div>
+            <p class="prompt"><span class="wcutline"></span>假定你是李华，你校英文报正在开展"科技与生活"主题征文活动。请你投稿，内容包括：1. 你的观点；2. 具体事例…</p>
+            <div class="ansbox"><div class="ansline"></div><div class="ansline"></div><div class="ansline"></div></div>
+            <span class="note note--bad" style="top:-12px">⚠ 罩住标题＝"连标题剪走"，上缘也凭空</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ 方案 A ════════ -->
+    <div>
+      <p class="col-title">方案 A · 从提示语切<span class="tag">你的 QA 提议</span></p>
+      <p class="col-sub">罩的上缘下移到<b>提示起始线</b>（写作内部那条既有的线），两部标题留在素纸上不入选区。语法填空的静息底线<b>回归</b>——写作的切口已经明确在下面，这条线不再有歧义，就是上一组的底界。不变量全站成立。</p>
+      <div class="paper">
+        <div class="block">
+          <div class="cut"></div>
+          <div class="cut cut--bottom"></div>
+          <p class="g-title">第二节 语法填空</p>
+          <p class="g-body">China's giant pandas have long been <span class="blank">61</span> (love) by people around the world. Their success <span class="blank">62</span> a result of decades of careful protection…</p>
+          <span class="note note--good" style="bottom:-12px">✓ 同一条线，加重而已</span>
+          <span class="note note--rest" style="bottom:-12px">静息就有（回归）</span>
+        </div>
+        <div class="wblock">
+          <div class="part-heading">第四部分 写作（共两节，满分 40 分）</div>
+          <div class="sec-heading">第一节（满分 15 分）</div>
+          <div class="cutrange">
+            <div class="wcut"></div>
+            <p class="prompt" style="padding-top:12px"><span class="wcutline wcutline--takeover"></span>假定你是李华，你校英文报正在开展"科技与生活"主题征文活动。请你投稿，内容包括：1. 你的观点；2. 具体事例…</p>
+            <div class="ansbox"><div class="ansline"></div><div class="ansline"></div><div class="ansline"></div></div>
+            <span class="note note--good" style="top:-12px">✓ 切口＝提示起始线，标题留在纸上</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ 方案 B ════════ -->
+    <div>
+      <p class="col-title">方案 B · 从节标题切<span class="tag">对照项</span></p>
+      <p class="col-sub">罩的上缘落在<b>「第一节」节标题之前</b>——类比其他题型「指导语跟题走」的规则，把节标题也当作跟题走（part 标题仍留纸上）。静息线相应上移到节标题前。剪下来的纸条自带"第一节（满分15分）"。</p>
+      <div class="paper">
+        <div class="block">
+          <div class="cut"></div>
+          <div class="cut cut--bottom"></div>
+          <p class="g-title">第二节 语法填空</p>
+          <p class="g-body">China's giant pandas have long been <span class="blank">61</span> (love) by people around the world. Their success <span class="blank">62</span> a result of decades of careful protection…</p>
+          <span class="note note--good" style="bottom:-12px">✓ 同 A</span>
+        </div>
+        <div class="wblock">
+          <div class="part-heading">第四部分 写作（共两节，满分 40 分）</div>
+          <div class="cutrange">
+            <div class="wcut"></div>
+            <div class="sec-heading" style="padding-top:12px"><span class="wcutline wcutline--takeover"></span>第一节（满分 15 分）</div>
+            <p class="prompt">假定你是李华，你校英文报正在开展"科技与生活"主题征文活动。请你投稿，内容包括：1. 你的观点；2. 具体事例…</p>
+            <div class="ansbox"><div class="ansline"></div><div class="ansline"></div><div class="ansline"></div></div>
+            <span class="note note--good" style="top:-12px">切口在节标题前，节标题随纸条走</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="legend">
+    <b>判断口径</b>：不变量「静息线在哪，选中缘就在哪」三案里只有 A、B 成立。A 忠实于既有拍板（提示起始线=pi-writing 老语义，上一刀 commit 里也是这么说的，只是罩没跟上）；B 是换语义（节标题跟题走），剪出的纸条带节名，但和其他题型「节标题留纸上」不一致。<br>
+    <b>实现提示（选 A/B 后）</b>：写作卡的罩是 <code>::after</code> 从卡顶画起，标题高度不定，纯 CSS 抠不动（one-sheet 时已知取舍）——落地时在 PaperBrowsePage 量一下标题区高度写进 CSS 变量（<code>--writing-cut-top</code>），罩用它定位；Forbidden 范围（paper-intelligence/**）零触碰。
+  </p>
+</div>

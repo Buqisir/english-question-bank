@@ -39,3 +39,26 @@
   与解析页卷面去节尾线后目检不破排版；④ 阅读组间共享线行为不变。
 - 主代理直修（small 快路径 + CR-lite 冷读自查记录在 commit message），
   owner QA 终审。
+
+## QA round 2 追记（2026-07-10，owner 拍板方案A）
+
+owner QA 抓到 35cd609「写作例外」只做了半截：静息线撤了，但写作卡的
+选中罩仍整卡显影——罩上缘在「第X部分 写作」标题上方，既与「剪走单元
+从提示语起」的语义矛盾，又是一条静息无对应的选中缘（破本刀不变量）。
+原型 `prototype-writing-cut.html` 三案对比（现状 / A 从提示语切 /
+B 从节标题切），owner 拍板 **方案A**：
+
+- 写作卡选中罩上缘下移到**提示起始线**（`.pi-writing-section` 下一
+  兄弟的顶，即 pi-writing 既有内线），标题留素纸；标题区高度不定，
+  由 PaperBrowsePage 量偏移写进 `--pb-writing-cut-top`（ResizeObserver
+  跟重排），`::after` 用它画上缘；内线 hover 隐去（同位双线规避，
+  one-sheet「整卡显影 + 内线不隐去」取舍作废）。
+- 35cd609 写作例外撤销：切口明确下移后，标题上方的线不再有歧义
+  （就是上一组底界），语法填空等前组的静息底线回归。
+- 写作组自身同为剪走单元，底界一并记账（应用文底=第二节标题前、
+  续写底=卷末；下一块按 findWritingBlockRange 的 range 之后算）。
+  不变量全站成立。
+
+QA：verify-paper-browse 184 绿 + tsc 干净 + 一次性 Playwright 实跑
+13/13（960d0f8d 真卷：量高变量与实测同位 ±1px、罩缘在节标题下方、
+hover 内线隐去、前组/写作组底线齐），截图 `qa-writing-cut-hover.png`。

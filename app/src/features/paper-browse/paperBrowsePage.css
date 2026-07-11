@@ -274,9 +274,8 @@
  * 物理边缘（± --ps-page-margin-x，剪刀剪的是整张纸宽），直角。罩色取自
  * teal-600「墨·淡」档（owner 终选）——DESIGN.md 签名色「当前选中」本职，
  * 色值全部取自 teal 梯子，单色相/绿笔原则不破。边界虚线各一条，通宽。
- * 单个伪元素同时画罩色 fill + 上下边界虚线，避免额外 DOM 节点。整卡显影
- * （含写作组自己的节标题行）沿用 one-sheet-paper 的既有取舍，写作组的
- * 内部剪刀线另见下方 CSS-only sibling-selector 规则。 */
+ * 单个伪元素同时画罩色 fill + 上下边界虚线，避免额外 DOM 节点。写作卡的
+ * 罩上缘另行定位（--pb-writing-cut-top，见下方写作段），不再整卡显影。 */
 .paper-browse-group-card::after {
   content: '';
   position: absolute;
@@ -357,15 +356,12 @@
  * 是指导语，也可能是没有指导语的应用文节直接跟着 passage）顶部加虚线，
  * 效果同「线在节标题之后」。
  *
- * 已知取舍（Known trade-off，见完工报告）：hover 提亮范围对非写作题组严格
- * 等于剪走范围（节标题是卡外的顶层 sibling，见上方 .paper-browse-group-card
- * 规则天然生效）；写作题组的节标题是 pageModel 圈出来、渲在卡内的，
- * `.paper-browse-group-card::after` 的整卡选区罩会连带盖住节标题这一行。用
- * 纯 CSS 精确抠掉这一小块会在指导语/正文/答题框之间的 flex gap 处露出
- * 没有罩色的缝隙（不连续，比现状更难看），综合判断保留整卡显影，不做
- * 这个二级修饰——线本身（剪的位置）依然精确对齐 plan 语义。这条内部线
- * 与整卡罩的上下边界不同位（线在节标题之后，罩边界在卡的上下端），不存在
- * 同位双线，hover 时不隐去，只随 scissor-select-feel 统一减墨到 0.18。 */
+ * dashed-line-unify QA round 2（owner 拍板方案A 2026-07-10，原型
+ * prototype-writing-cut.html）：写作卡不再整卡显影——选中罩的上缘下移到
+ * 这条提示起始线（one-sheet 的已知取舍作废）。标题区高度不定，纯 CSS
+ * 定不了罩的 top，由 PaperBrowsePage 量出偏移写进 `--pb-writing-cut-top`
+ * （ResizeObserver 跟重排），罩用它画上缘；于是这条内部线与罩上缘同位，
+ * hover 时按全站规则隐去、由罩的墨绿边界接管（不再是"不隐去"的例外）。 */
 .paper-browse-content .pi-writing-section + * {
   position: relative;
   padding-top: 16px;
@@ -383,6 +379,19 @@
   left: 24px;
   right: 24px;
   border-top: 1px dashed rgba(74, 68, 56, 0.18);
+  transition: opacity 0.15s ease;
+}
+
+/* 切口=提示起始线：罩上缘用量好的偏移；量不到时兜底回卡顶（等同旧行为，
+ * 只在 JS 未跑到的瞬间可见）。 */
+.paper-browse-group-card--writing::after {
+  top: var(--pb-writing-cut-top, calc(var(--pb-block-gap) / -2));
+}
+
+/* 同位双线规避：hover 本卡时内部静息线隐去，罩的上缘虚线接管。 */
+.paper-browse-group-card--writing:hover .pi-writing-section + *::before,
+.paper-browse-group-card--writing:focus-within .pi-writing-section + *::before {
+  opacity: 0;
 }
 
 .paper-browse-loading,

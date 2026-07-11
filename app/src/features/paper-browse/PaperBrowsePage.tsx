@@ -54,7 +54,7 @@
  * no remove action and no whole-paper "整卷加入" action (aggregate add is
  * out of scope per aggregatePaperResults.ts:8-11).
  */
-import { Fragment, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ClipboardList } from 'lucide-react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
@@ -788,6 +788,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return skip
   }, [asset, groupModels])
 
+  // dashed-line-unify QA round 2（owner 拍板方案A 2026-07-10，原型
+  // prototype-writing-cut.html）：写作卡的选中罩上缘=提示起始线（pi-writing
+  // 老语义，即 `.pi-writing-section` 下一个兄弟的顶），标题（第X部分/
+  // 第X节）留在素纸上不入选区。标题区高度不定（窄屏换行、字体加载），
+  // 纯 CSS 定不了这个 top（one-sheet 已知取舍的根因）——这里量出偏移写进
+  // 卡上的 CSS 变量 `--pb-writing-cut-top`，`::after` 用它画上缘（见
+  // paperBrowsePage.css）。ResizeObserver 盯卡的尺寸变化重量。
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    const measure = () => {
+      const cards = scroller.querySelectorAll<HTMLElement>('.paper-browse-group-card--writing')
+      for (const card of cards) {
+        const section = card.querySelector<HTMLElement>('.pi-writing-section')
+        const target = section?.nextElementSibling
+        if (!(target instanceof HTMLElement)) continue
+        const offset = target.getBoundingClientRect().top - card.getBoundingClientRect().top
+        card.style.setProperty('--pb-writing-cut-top', `${offset}px`)
+      }
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(scroller)
+    for (const card of scroller.querySelectorAll('.paper-browse-group-card--writing')) {
+      observer.observe(card)
+    }
+    return () => observer.disconnect()
+  }, [asset, groupModels])
+
   // one-sheet-paper: 剪刀线判定——虚线=题组可搬走内容的起点，见
   // docs/cuts/one-sheet-paper/plan.md「剪刀线语义」。判定规则纯粹按「节下
   // 有几个题组」（不 hardcode groupType，天然覆盖阅读的 4-题组节 vs 其余
@@ -856,29 +885,31 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     // 节末判定：题组的下一块若是「instruction」（并入下一组的卡，顶线在）
     // 或「非写作 group」（其顶线即本组底界），底界有静息线可循；其余
-    // （标题/分页/卷末）算节末，补底线。**写作例外**（owner 拍板
-    // 2026-07-10 追加）：紧随其后的下一个题组若是写作，不补——写作的
-    // 剪走单元从提示语起（pi-writing 内线的老语义），此处补线会落在
-    // 「第X部分 写作」标题上方，误读成"连标题剪走"。
+    // （标题/分页/卷末/写作——写作的静息顶线在其内部提示起始线，不在卡的
+    // 上边界）算节末，补底线。QA round 2（owner 拍板方案A 2026-07-10，
+    // 原型 prototype-writing-cut.html）：写作卡的选中罩上缘随之下移到
+    // 提示起始线（见 paperBrowsePage.css），标题上方的底线不再有歧义——
+    // 就是上一组的底界；35cd609 的写作例外撤销。写作组自身同为剪走单元，
+    // 底界一并记账（下一块按 findWritingBlockRange 圈完的 range 之后算，
+    // 卡内尾随的 instruction/answerBox 不是别人的顶线）。
     for (let i = 0; i < blocks.length; i += 1) {
       const block = blocks[i]
       if (block.type !== 'group') continue
-      const isScissorUnit = scissorGroupIndices.has(i) || skipIndices.has(i)
-      if (!isScissorUnit) continue
-      const next = blocks[i + 1]
+      const group = asset.content.groups[block.groupId]
+      const isWriting = group?.groupType === 'writing'
+      const isCutUnit = scissorGroupIndices.has(i) || skipIndices.has(i) || isWriting
+      if (!isCutUnit) continue
+      let afterIdx = i + 1
+      if (isWriting && group) {
+        const range = findWritingBlockRange(asset, group)
+        if (range) afterIdx = range.endIdx + 1
+      }
+      const next = blocks[afterIdx]
       const nextHasRestingTopLine =
         next != null &&
         (next.type === 'instruction' ||
           (next.type === 'group' && asset.content.groups[next.groupId]?.groupType !== 'writing'))
-      if (nextHasRestingTopLine) continue
-      let nextGroupIsWriting = false
-      for (let j = i + 1; j < blocks.length; j += 1) {
-        const later = blocks[j]
-        if (later.type !== 'group') continue
-        nextGroupIsWriting = asset.content.groups[later.groupId]?.groupType === 'writing'
-        break
-      }
-      if (!nextGroupIsWriting) bottomLineGroupIndices.add(i)
+      if (!nextHasRestingTopLine) bottomLineGroupIndices.add(i)
     }
     return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
   }, [asset])
@@ -1269,11 +1300,17 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const group = asset?.content.groups[groupId]
     const entry = groupModels[groupId]
     const card = questionGroupById.get(groupId)
+    // 写作卡的选中罩上缘另行定位（--pb-writing-cut-top，见上方量高 effect
+    // 与 paperBrowsePage.css），用 modifier class 圈出来。
+    const cardClassName =
+      entry?.kind === 'writing'
+        ? 'paper-browse-group-card paper-browse-group-card--writing'
+        : 'paper-browse-group-card'
 
     return (
       <Fragment key={`group-${index}`}>
         <section
-          className="paper-browse-group-card"
+          className={cardClassName}
           data-paper-browse-anchor={groupId}
           aria-label={group?.title || groupId}
         >
