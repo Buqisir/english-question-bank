@@ -23,6 +23,15 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
 
 ## 主线焦点
 
+- 2026-07-11：**warm-paper-promotion 收官 + Workflow 流水线试点首跑通过**
+  （merge faeafea，CR APPROVE 0 MF + SW×2 直收，main CI 绿）：--paper-*
+  token 家族（整卷/讲评零视觉转正，QA computed-style 14 选择器
+  diffCount=0 铁证）+ 工作台暖纸桌/纸影（审计 P0-D1 灰怪闭环）+
+  DESIGN.md 色温法/命名法条文（删除法已在档）。**试点账单**：
+  DEV→verify→CR 三步脚本串行一次通过，子代理计 241k tok/13.4min，
+  主代理仅头尾 2 次出场（对照 lecture-rail 常规管线：子代理 4 轮 387k
+  + 主代理步间出场 ≥6 次全会话重放）——省的全在主循环重放，工钱不省；
+  详见 cut 目录。**owner 观感/部署待拍板**。
 - 2026-07-11：**lecture-rail-scroll-fix 收官**（merge 9d67880，CR 两轮
   APPROVE（base 0MF + delta D-MF1 已修销账），main CI 绿）：讲评态
   七选五/完形点空显解析（PaperSurface 'paper-blank' 模式，rail/选项池
