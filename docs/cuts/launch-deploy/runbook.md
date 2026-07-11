@@ -168,6 +168,11 @@ After first provision, use `scripts/deploy.sh` (pull → install → build →
 restart → health smoke) for every subsequent code update. It's idempotent
 and safe to re-run.
 
+2026-07-10 追记：on-server `deploy.sh` 整跑会卡 root/git 所有权；日常
+重部署从本机跑 `scripts/deploy-remote.sh`（同一分步流程的一键封装：
+push 校验 → pull → install → build → restart → health + 公网检查；
+host/key 从 gitignored `.env.deploy` 读，真实 IP 不入库）。
+
 ## Backup + import (Slice 3 landed; Slice 4 — not yet landed in this cut)
 
 ### Daily backup to R2 (Slice 3)
