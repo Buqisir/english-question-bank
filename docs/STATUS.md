@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题全部 grilling 闭环，暖纸转正小刀新立，刀B 扩容+刀E 新立）
+Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+解析字段路线图全部 grilling 闭环；新立：暖纸转正小刀、刀E、analysis-fields 四轨）
 
 ## 现在是什么
 
@@ -82,8 +82,8 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题全
   pull→eqb-build→restart 分步；eqb+caddy active、health 200、eqbank.cc
   200、生产实跑 169/169 + 相似引擎 29/29 绿。SW 挂账：新 reason kind
   默认渲染、FE 配方文案表可漂移。下一步：E3 次入口+concierge 换引擎；
-  fig-token P0（审计唯一 P0，卷面直出内部 token）/ 解析字段 roadmap
-  （难度补标/干扰项机制/写作双 facet/体裁补真值）**均待 owner 拍板**。
+  fig-token P0（审计唯一 P0，卷面直出内部 token）**待 owner 拍板**；
+  ~~解析字段 roadmap~~ 已于 2026-07-10 grilling 闭环（见开放账本）。
   全站 UI 审计报告：.impeccable/critique/2026-07-10T05-30-00Z__full-project.md
   （20/40，P0×1 P1×15 P2×18）。本地 dev QA 账号 qa-local-owner（密码本地
   已重置，见会话记录；生产 .env.qa 未动）。
@@ -369,6 +369,15 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题全
   讲评暖色值收编 `--paper-*` token（纯等值替换零视觉变化）②工作台
   预览换暖纸桌+纸面 Resting 阴影（收专项审计 P0-D1，owner 议题3 灰怪
   即此闭环）③色温法/命名法/删除法三条入 DESIGN.md。
+- **解析字段路线图（2026-07-10 拍板闭环，program 档案
+  `docs/cuts/analysis-fields/program.md`）**：四轨 R1 体裁补真值（先行，
+  discourse_type 实测=题型名假货，引擎两处配方空转；词表记叙/说明/
+  议论/应用/新闻）→ R2 干扰项（机审 1395 条→owner 判例→返修→才索引；
+  抽检基线 21 条在档）→ R3 写作双 facet（应用文功能型+续写情节型）→
+  R4 难度压轴不立项。附带拍板：阅读次序 proxy 换真篇位+词数细排、
+  话题三台阶阶梯（原子→课标条目[alias 表现成]→主题群，一级不看）、
+  生态环境归自然生态、宇宙探索=选材缺口。共创分工=小川机审/owner
+  判例裁决。后台跑批不占 UI 刀队列，可与现队列并行。
 - 数据健康追记（2026-07-10 owner QA 截图顺带发现）：某完形组指导语
   「从每题所给的A、B、C、D四个选项」被数据内换行截断成「…A / D…」
   且吞字——入 data-health 清单，随脏数据批修。

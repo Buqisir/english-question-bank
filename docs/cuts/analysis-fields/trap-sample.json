@@ -1,0 +1,233 @@
+[
+ {
+  "paper": "paper-2020-jia",
+  "qid": "q-2020-jia-030",
+  "stem": "这部纪录片主要讲的是什么？",
+  "focus": "考查纪录片主要内容/主题。",
+  "label": "B",
+  "optZh": "穿山甲鳞片的医药功能。",
+  "type": "sourceLexicalTrap",
+  "quote": "their scales, which are used for traditional medicine",
+  "expl": "原文 traditional medicine 只是说明鳞片被非法猎杀的用途，与 medical（medicine 的同词族）形成词钩干扰，但鳞片的医药功能并非纪录片的主要内容。"
+ },
+ {
+  "paper": "paper-2024-ii",
+  "qid": "q-2024-ii-026",
+  "stem": "Trost 最近一直在做什么？",
+  "focus": "考查 Trost 近期在做的事情，需定位 as of right now 等时间标志相关的细节。",
+  "label": "C",
+  "optZh": "选择一家印刷出版商。",
+  "type": "sourceLexicalTrap",
+  "quote": "you would be a published artist",
+  "expl": "原文 published 与选项 publisher 同源，但原文说的是获奖者将成为已出版的艺术家，并非 Trost 在挑选印刷出版商；选项借同词族设钩误导。"
+ },
+ {
+  "paper": "paper-2022-ii",
+  "qid": "q-2022-ii-029",
+  "stem": "Textalyzer 能帮助警察查明什么？",
+  "focus": "考查细节定位：Textalyzer 能帮助警察查明什么——即是否使用过手机。",
+  "label": "D",
+  "optZh": "司机何时到达现场。",
+  "type": "sourceLexicalTrap",
+  "quote": "An officer arriving at the scene of a crash",
+  "expl": "选项借用原文 arriving at the scene 的同族词 arrived at the scene 设钩；但原文中“到达现场”的是 officer（警察），且讲的是查手机活动，并非用 Textalyzer 确定司机到达时间。"
+ },
+ {
+  "paper": "paper-2021-yi",
+  "qid": "q-2021-yi-024",
+  "stem": "第二段主要告诉我们关于手机的什么信息？",
+  "focus": "考查对第二段段落主旨的概括——该段主要讲手机的什么。",
+  "label": "C",
+  "optZh": "它们的主要功能。",
+  "type": "sourceLexicalTrap",
+  "quote": "Practically everyone can make and receive calls anywhere, anytime.",
+  "expl": "原文出现“make and receive calls（打/接电话）”这一功能性表述，诱使考生误选“主要功能”，但该句意在说明人人都能用，落点仍是普及而非介绍功能。"
+ },
+ {
+  "paper": "paper-2022-jia",
+  "qid": "q-2022-jia-034",
+  "stem": "Shirley Fitzgerald 怎么看待悉尼？",
+  "focus": "考查历史学家 Shirley Fitzgerald 对悉尼的观点，关键在她对传统流失的忧虑。",
+  "label": "B",
+  "optZh": "它应当加快自身的进步。",
+  "type": "polarityReversal",
+  "quote": "Sydney swept aside much of its past, including many of its finest buildings",
+  "expl": "Shirley 对急于现代化、抛弃过去持批评态度，惋惜传统流失；选项却主张“加快进步”，与她的立场相反。"
+ },
+ {
+  "paper": "paper-2022-yi",
+  "qid": "q-2022-yi-031",
+  "stem": "哪个是本文最合适的标题？",
+  "focus": "考查全文标题，需概括「无人机将如何改变铁路未来」这一主旨，避免以偏概全。",
+  "label": "C",
+  "optZh": "无人机研发将面临什么困难",
+  "type": "polarityReversal",
+  "quote": "That is the very likely future of applying today′s “eyes in the sky” technology",
+  "expl": "全文持乐观前景态度（very likely future、higher-value services），并未聚焦「研发困难」；以「面临什么困难」为题与原文积极基调相反。"
+ },
+ {
+  "paper": "paper-2022-i",
+  "qid": "q-2022-i-029",
+  "stem": "这个项目对 Ruth Xavier 产生了怎样的影响？",
+  "focus": "考查项目对 Ruth Xavier 的影响，需定位她本人对参与项目感受的表述。",
+  "label": "A",
+  "optZh": "她学到了新的生活技能。",
+  "type": "polarityReversal",
+  "quote": "I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.",
+  "expl": "原文说她年轻时就养过鸡，养鸡对她是旧技能而非新技能，与选项 learned new life skills 相反。"
+ },
+ {
+  "paper": "paper-2023-jia",
+  "qid": "q-2023-jia-033",
+  "stem": "是什么帮助了灰熊数量的增长？",
+  "focus": "考查对第三、四段灰熊种群增长原因的理解，即什么帮助了其数量回升。",
+  "label": "A",
+  "optZh": "欧洲定居者的行为。",
+  "type": "polarityReversal",
+  "quote": "after centuries of cruel and continuous hunting by settlers, 600 to 800 grizzlies remained on a mere 2 percent of their former range in the Northern Rockies",
+  "expl": "原文说定居者数百年残酷而持续的猎杀使灰熊数量锐减，定居者的行为是导致灰熊濒危的原因，而非帮助其数量增长，二者作用相反。"
+ },
+ {
+  "paper": "paper-zj-2026-jan",
+  "qid": "q-zj-2026-jan-022",
+  "stem": "公共艺术标牌将展示多长时间？",
+  "focus": "考查公共艺术标牌展示时长，需在时间线中定位展示区间并计算其跨度。",
+  "label": "C",
+  "optZh": "一个月。",
+  "type": "scopeShift",
+  "quote": "September 23~October 13",
+  "expl": "9 月 23 日至 10 月 13 日约三周，并不足一个月，选项夸大了时长。"
+ },
+ {
+  "paper": "paper-2024-i",
+  "qid": "q-2024-i-027",
+  "stem": "作者为什么提到美国整体兽医医学协会？",
+  "focus": "考查作者提及美国整体兽医医学协会的写作意图，需结合第四段会员增长数据与 Farber 的观点之间的论证关系。",
+  "label": "B",
+  "optZh": "为了强调它的重要性。",
+  "type": "scopeShift",
+  "quote": "membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700",
+  "expl": "作者提协会是借其会员增长来佐证整体疗法日益流行，目的不是强调协会本身的重要性，选项偷换了写作目的。"
+ },
+ {
+  "paper": "paper-2021-ii",
+  "qid": "q-2021-ii-023",
+  "stem": "下列哪项活动开始得最早？",
+  "focus": "比较四项活动的起始日期，找出最早开始的活动，需对各活动的Dates起始日进行比对。",
+  "label": "B",
+  "optZh": "Jodie健身夏季课程。",
+  "type": "scopeShift",
+  "quote": "Dates: 23 May—11 July",
+  "expl": "健身课程5月23日开始，晚于数学展览的5月7日，并非最早。"
+ },
+ {
+  "paper": "paper-2023-ii",
+  "qid": "q-2023-ii-034",
+  "stem": "我们能从第五段所举的例子中得知什么？",
+  "focus": "考查对第5段例子的理解与推断，需把握“同一自然体验可在不同情境下以不同形式呈现”这一要点。",
+  "label": "A",
+  "optZh": "步行是接触自然的最佳方式。",
+  "type": "scopeShift",
+  "quote": "the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park",
+  "expl": "原文只是举例说步行体验“可能令人满意（might be satisfying）”，并未断言步行是接触自然的“最佳方式（the best way）”，选项以偏概全、过度拔高。"
+ },
+ {
+  "paper": "paper-2025-ii",
+  "qid": "q-2025-ii-024",
+  "stem": "Ho 在 LPCH 教的是哪些人？",
+  "focus": "考查 Ho 在 LPCH 教授的对象是谁，需定位到对学生身份的描述。",
+  "label": "C",
+  "optZh": "医学院学生。",
+  "type": "entityMismatch",
+  "quote": "where each year, about 500 LPCH patients also become students",
+  "expl": "原文的 students 指成为学生的住院患儿，并非医学院学生，对象错配。"
+ },
+ {
+  "paper": "paper-2020-bing",
+  "qid": "q-2020-bing-021",
+  "stem": "游客在经典普罗旺斯和西班牙南部都能看到什么？",
+  "focus": "考查跨段对比细节：普罗旺斯与西班牙南部两条线路共同能看到的事物。",
+  "label": "D",
+  "optZh": "希腊建筑。",
+  "type": "entityMismatch",
+  "quote": "including the cities left by the Greeks, Romans and Arabs",
+  "expl": "希腊人留下的城市只在西班牙南部段提及，普罗旺斯段并未提到希腊建筑，不满足两地共有的条件。"
+ },
+ {
+  "paper": "paper-2026-i",
+  "qid": "q-2026-i-034",
+  "stem": "为什么要测量参与者的情绪状态？",
+  "focus": "考查测量参与者情绪状态的目的，需理解该测量用于排除/确定影响测试结果的因素。",
+  "label": "B",
+  "optZh": "为了识别他们具体的思维模式。",
+  "type": "entityMismatch",
+  "quote": "Emotional states of participants were also measured by asking about their feelings while completing the gallery task",
+  "expl": "情绪状态测量的是感受（feelings），思维方式则由另外的认知测试考查，二者对象错配。"
+ },
+ {
+  "paper": "paper-zj-2020-jan",
+  "qid": "q-zj-2020-jan-022",
+  "stem": "最后一段中划线词 “this feeling” 指的是什么？",
+  "focus": "考查对指代词 this feeling 的回指理解，需结合末段及前文判断“这种情感”具体指什么。",
+  "label": "D",
+  "optZh": "对图书馆规则的畏惧。",
+  "type": "entityMismatch",
+  "quote": "My mother shared this feeling of mine.",
+  "expl": "this feeling 是母亲“共有（shared）”的一份正面情感——对阅读的热爱；而“对图书馆规则的畏惧”是负面情感，且母亲恰恰“不怕（was not afraid）”，二者指代对象与情感性质都不符。"
+ },
+ {
+  "paper": "paper-zj-2021-jun",
+  "qid": "q-zj-2021-jun-026",
+  "stem": "下列哪一项可以替换第二段中画线的单词“charts”？",
+  "focus": "考查根据语境推测第二段画线词 charts 的词义。",
+  "label": "C",
+  "optZh": "推迟",
+  "type": "unsupportedClaim",
+  "quote": "",
+  "expl": "原文未提及推迟Wild Network的诞生，与上下文“记录其诞生”的语义无关，属无中生有。"
+ },
+ {
+  "paper": "paper-zj-2022-jan",
+  "qid": "q-zj-2022-jan-022",
+  "stem": "第二段中的 wanderlust 一词意为一种……的渴望。",
+  "focus": "考查第二段 wanderlust 一词的词义推测，需结合该段对其旅行行为的具体描述及上下文复现。",
+  "label": "A",
+  "optZh": "赚钱",
+  "type": "unsupportedClaim",
+  "quote": "",
+  "expl": "收入信息出现在第四段（税前年约 3 万），与第二段 wanderlust 的语境无关；该段通篇讲她到处旅行，未涉及赚钱欲望，属无中生有。"
+ },
+ {
+  "paper": "paper-2025-i",
+  "qid": "q-2025-i-021",
+  "stem": "2018年道路车辆占全球交通运输排放的百分比是多少？",
+  "focus": "考查对2018年各运输方式排放占比图表中道路车辆（公路运输）占比这一具体数据的读取与定位。",
+  "label": "D",
+  "optZh": "86.1%。",
+  "type": "unsupportedClaim",
+  "quote": "",
+  "expl": "原文图表显示道路车辆占比为74.5%，86.1%并非该项数据，原文未支持该数值对应道路车辆。"
+ },
+ {
+  "paper": "paper-zj-2024-jan",
+  "qid": "q-zj-2024-jan-025",
+  "stem": "作者在2006年为什么使用那个电话亭？",
+  "focus": "考查2006年作者使用电话亭的原因这一细节，需定位被锁门外后打电话求助的具体情节。",
+  "label": "B",
+  "optZh": "为了张贴一则通知。",
+  "type": "unsupportedClaim",
+  "quote": "",
+  "expl": "原文未提及作者在电话亭张贴任何通知，他使用电话亭是为了打电话求助配钥匙，属无中生有。"
+ },
+ {
+  "paper": "paper-2023-i",
+  "qid": "q-2023-i-025",
+  "stem": "John 为什么把污泥放入水箱？",
+  "focus": "考查 John 把污泥放入水箱这一行为目的的细节理解。",
+  "label": "B",
+  "optZh": "为了建立一个生态系统。",
+  "type": "timeOrderReversal",
+  "quote": "these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge.",
+  "expl": "原文是先形成生态系统、之后才加入污泥，建立生态系统是加污泥之前已完成的步骤，而非加污泥的目的，选项颠倒了先后关系。"
+ }
+]

@@ -1,0 +1,253 @@
+<title>相似标签现状清单 · 按题型</title>
+<style>
+  :root{
+    --desk:#F1EDE4; --paper:#FBF9F3; --ink:#26251F; --ink-soft:#6B675C;
+    --green:#3F5D4C; --green-soft:#E4EAE4; --line:#D9D2C2; --danger:#B3563E;
+    --danger-soft:#F6E7E1; --amber:#9A6B2F; --amber-soft:#F3EAD9; --chip:#EFEAE0;
+    --shadow:0 1px 2px rgba(38,37,31,.08),0 4px 14px rgba(38,37,31,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --desk:#211F1B; --paper:#2C2A24; --ink:#EAE6DC; --ink-soft:#A39E90;
+      --green:#8FB39C; --green-soft:#37423A; --line:#4A463C; --danger:#D98A72;
+      --danger-soft:#4A342C; --amber:#D9B36A; --amber-soft:#453A28; --chip:#3A372F;
+      --shadow:0 1px 2px rgba(0,0,0,.4); }
+  }
+  :root[data-theme="light"]{ --desk:#F1EDE4; --paper:#FBF9F3; --ink:#26251F; --ink-soft:#6B675C;
+      --green:#3F5D4C; --green-soft:#E4EAE4; --line:#D9D2C2; --danger:#B3563E;
+      --danger-soft:#F6E7E1; --amber:#9A6B2F; --amber-soft:#F3EAD9; --chip:#EFEAE0;
+      --shadow:0 1px 2px rgba(38,37,31,.08),0 4px 14px rgba(38,37,31,.06); }
+  :root[data-theme="dark"]{ --desk:#211F1B; --paper:#2C2A24; --ink:#EAE6DC; --ink-soft:#A39E90;
+      --green:#8FB39C; --green-soft:#37423A; --line:#4A463C; --danger:#D98A72;
+      --danger-soft:#4A342C; --amber:#D9B36A; --amber-soft:#453A28; --chip:#3A372F;
+      --shadow:0 1px 2px rgba(0,0,0,.4); }
+
+  body{ background:var(--desk); color:var(--ink); font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.65; margin:0; padding:36px 18px 80px; }
+  main{ max-width:900px; margin:0 auto; }
+  .eyebrow{ font-size:12px; letter-spacing:.18em; color:var(--green); font-weight:600; margin-bottom:6px; }
+  h1{ font-family:"Songti SC","STSong",serif; font-size:28px; margin:0 0 8px; }
+  .sub{ color:var(--ink-soft); margin:0 0 8px; max-width:46em; }
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:12.5px; margin:0 0 24px; color:var(--ink-soft); }
+
+  section{ background:var(--paper); box-shadow:var(--shadow); border-radius:12px; padding:20px 24px; margin:0 0 18px; }
+  h2{ font-family:"Songti SC","STSong",serif; font-size:20px; margin:0; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  h2 .cnt{ font-size:13px; color:var(--ink-soft); font-weight:400; }
+  table{ border-collapse:collapse; width:100%; margin:12px 0 4px; font-size:13.5px; }
+  th{ text-align:left; font-size:12px; color:var(--ink-soft); font-weight:600; letter-spacing:.05em;
+    border-bottom:1.5px solid var(--line); padding:6px 10px 6px 0; }
+  td{ border-bottom:1px solid var(--line); padding:8px 10px 8px 0; vertical-align:top; }
+  tr:last-child td{ border-bottom:0; }
+  td.role{ white-space:nowrap; font-weight:600; width:64px; }
+  td.field{ white-space:nowrap; width:150px; }
+  td.field small{ color:var(--ink-soft); display:block; font-weight:400; }
+  .tag{ display:inline-block; font-size:11px; border-radius:9px; padding:1px 9px; margin-left:6px; vertical-align:1px; font-weight:600; }
+  .t-ok{ background:var(--green-soft); color:var(--green); }
+  .t-bad{ background:var(--danger-soft); color:var(--danger); }
+  .t-idle{ background:var(--amber-soft); color:var(--amber); }
+  .t-miss{ background:var(--chip); color:var(--ink-soft); }
+  .chips{ display:flex; flex-wrap:wrap; gap:5px; }
+  .chip{ background:var(--chip); border-radius:5px; padding:2px 8px; font-size:12.5px; white-space:nowrap; }
+  .chip b{ color:var(--green); font-weight:600; font-variant-numeric:tabular-nums; }
+  .chip.dead{ background:var(--danger-soft); color:var(--danger); text-decoration:line-through; }
+  details{ margin:4px 0 0; }
+  summary{ cursor:pointer; font-size:13px; color:var(--green); font-weight:600; }
+  summary:focus-visible{ outline:2px solid var(--green); outline-offset:2px; }
+  details .chips{ margin-top:8px; }
+  .foot{ font-size:12.5px; color:var(--ink-soft); margin-top:8px; }
+</style>
+
+<main>
+  <div class="eyebrow">解析路线图 · 相似标签库存盘点</div>
+  <h1>每个题型现在的相似标签</h1>
+  <p class="sub">数据来源：i16a 检索索引（引擎读的真相）+ 话题标签表 + passages 表，2026-07-10 实测本地库。「N 组」= 库里带该值的题组数。</p>
+  <div class="legend">
+    <span><span class="tag t-ok">在用</span> 引擎配方正在消费</span>
+    <span><span class="tag t-bad">假货</span> 字段有值但内容是错的（空转）</span>
+    <span><span class="tag t-idle">闲置</span> 数据在库/索引里，配方还没用</span>
+    <span><span class="tag t-miss">缺失</span> 还没有这个数据</span>
+  </div>
+
+  <section style="border-left:4px solid var(--green)">
+    <h2>讨论后的目标配方 <span class="cnt">R1 体裁 / R2 干扰项 / R3 写作 落地后</span></h2>
+    <table>
+      <tr><th>题型</th><th>硬池</th><th>主序</th><th>次序</th><th>加分</th><th>动到什么</th></tr>
+      <tr><td class="field"><b>语法填空</b></td><td>同题型</td><td>考点(密度)</td><td>提示词形态</td><td><b style="color:var(--green)">＋动词三轴 / 句法角色</b>（激活闲置）</td><td>纯引擎配置，零数据生产。体裁不进配方——考点主导，体裁是噪声</td></tr>
+      <tr><td class="field"><b>完形</b></td><td>同题型</td><td>话题</td><td><b style="color:var(--green)">体裁真值</b>（R1 修假货）</td><td>错题词性 ＋<b style="color:var(--green)">签名细分</b>（稀疏弱加分）</td><td>次序从空转变真匹配</td></tr>
+      <tr><td class="field"><b>七选五</b></td><td>同题型</td><td>功能句＋位置(密度)</td><td>衔接机制</td><td>话题 ＋<b style="color:var(--green)">体裁真值</b>（弱加分）</td><td>本来就满血，只添弱加分</td></tr>
+      <tr><td class="field"><b>阅读</b></td><td>同题型</td><td>小题题型(密度)</td><td><b style="color:var(--green)">篇位满血</b>＝词数＋体裁真值（R1）</td><td>话题 ＋<b style="color:var(--green)">干扰项机制</b>（R2 返修后接，"同款干扰再练"）</td><td>次序恢复满血＋新加分轴</td></tr>
+      <tr><td class="field"><b>写作·应用文</b></td><td><b style="color:var(--green)">同小类</b>（R3 标注）</td><td><b style="color:var(--green)">功能型</b>（建议信/邀请信…）</td><td>话题</td><td>—</td><td>R3 后解锁进相似题</td></tr>
+      <tr><td class="field"><b>写作·续写</b></td><td><b style="color:var(--green)">同小类</b>（R3 标注）</td><td><b style="color:var(--green)">情节型</b>（困境成长/救援互助…）</td><td>话题</td><td>—</td><td>R3 后解锁进相似题</td></tr>
+      <tr><td class="field" style="color:var(--ink-soft)">（远期）难度</td><td colspan="4" style="color:var(--ink-soft)">「份量相当」加分轴，全题型通用——R4 有真信号才议，虚线预留</td><td style="color:var(--ink-soft)">不承诺</td></tr>
+    </table>
+    <p class="foot">共同底线不变：排除同篇/同卷/种子组；每条带"为什么相似"注解；纯确定性零 AI；写作硬池按小类分（应用文/续写不互配）——48 组的小类标注随 R3 一并做（可从指导语/分值确定性推导）。</p>
+  </section>
+
+  <section>
+    <h2>语法填空 <span class="cnt">33 组 · 配方：考点(密度) → 有/无提示词</span></h2>
+    <table>
+      <tr><th>配方角色</th><th>标签字段</th><th>词表</th></tr>
+      <tr><td class="role">主序</td><td class="field">考点 facetKey<span class="tag t-ok">在用</span><small>17 类 · 按密度排序</small></td><td>
+        <div class="chips">
+          <span class="chip">给词·非谓语 <b>32</b></span><span class="chip">给词·谓语 <b>29</b></span>
+          <span class="chip">无提示·介词 <b>28</b></span><span class="chip">无提示·并列连词 <b>24</b></span>
+          <span class="chip">无提示·冠词 <b>23</b></span><span class="chip">给词·形容词 <b>21</b></span>
+          <span class="chip">无提示·定语从句词 <b>20</b></span><span class="chip">给词·名词 <b>20</b></span>
+          <span class="chip">派生·名→形 <b>16</b></span><span class="chip">派生·动→名 <b>15</b></span>
+          <span class="chip">给词·代词 <b>9</b></span><span class="chip">无提示·名词性从句词 <b>8</b></span>
+          <span class="chip">派生·动→形 <b>8</b></span><span class="chip">无提示·状语从句词 <b>4</b></span>
+          <span class="chip">给词·数词 <b>2</b></span><span class="chip">无提示·代词 <b>1</b></span>
+          <span class="chip">派生·形→名 <b>1</b></span>
+        </div>
+        <p class="foot">注：「非谓语」没分 doing/done/to do——盲区7 已挂账。</p>
+      </td></tr>
+      <tr><td class="role">次序</td><td class="field">提示词形态 blankType<span class="tag t-ok">在用</span></td><td>
+        <div class="chips"><span class="chip">无提示词 <b>33</b></span><span class="chip">给词填空 <b>32</b></span></div>
+      </td></tr>
+      <tr><td class="role">闲置</td><td class="field">动词三轴 + 句法角色<span class="tag t-idle">闲置</span><small>verb-profile 侧车</small></td><td>
+        <div class="chips">
+          <span class="chip">时态：过去 <b>7</b></span><span class="chip">现在 <b>6</b></span><span class="chip">进行 <b>1</b></span>
+          <span class="chip">语态：主动 <b>11</b></span><span class="chip">被动 <b>4</b></span>
+          <span class="chip">一致：单数 <b>9</b></span><span class="chip">复数 <b>5</b></span>
+          <span class="chip">角色：状语 <b>20</b></span><span class="chip">定语 <b>14</b></span><span class="chip">宾语 <b>12</b></span><span class="chip">…共6类</span>
+        </div>
+      </td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>完形填空 <span class="cnt">33 组 · 配方：话题 → 体裁 → 错题词性加分</span></h2>
+    <table>
+      <tr><th>配方角色</th><th>标签字段</th><th>词表</th></tr>
+      <tr><td class="role">主序</td><td class="field">话题<span class="tag t-ok">在用</span><small>28 类（课标三级）</small></td><td>
+        <div class="chips">
+          <span class="chip">良好的人际关系 <b>8</b></span><span class="chip">个人生活 <b>6</b></span>
+          <span class="chip">优秀品行 <b>6</b></span><span class="chip">积极的生活态度 <b>5</b></span>
+          <span class="chip">正确的人生态度 <b>5</b></span><span class="chip">人与动植物 <b>4</b></span>
+        </div>
+        <details><summary>展开全部 28 类</summary><div class="chips">
+          <span class="chip">家庭生活 <b>3</b></span><span class="chip">健康的生活方式 <b>3</b></span><span class="chip">劳动实践 <b>3</b></span>
+          <span class="chip">人与环境 <b>2</b></span><span class="chip">社会交往 <b>2</b></span><span class="chip">志愿服务 <b>2</b></span>
+          <span class="chip">认识自我 <b>1</b></span><span class="chip">乐于学习 <b>1</b></span><span class="chip">丰富自我 <b>1</b></span>
+          <span class="chip">社会责任 <b>1</b></span><span class="chip">劳动价值 <b>1</b></span><span class="chip">创业意识 <b>1</b></span>
+          <span class="chip">科技发展 <b>1</b></span><span class="chip">科学精神 <b>1</b></span><span class="chip">跨文化沟通 <b>1</b></span>
+          <span class="chip">公益事业 <b>1</b></span><span class="chip">绘画作品与人物 <b>1</b></span><span class="chip">体育精神 <b>1</b></span>
+          <span class="chip">社会热点问题 <b>1</b></span><span class="chip">文化习俗 <b>1</b></span><span class="chip">突出贡献人物 <b>1</b></span>
+          <span class="chip">乡村振兴 <b>1</b></span>
+        </div></details>
+      </td></tr>
+      <tr><td class="role">次序</td><td class="field">体裁 discourse_type<span class="tag t-bad">假货</span></td><td>
+        <div class="chips"><span class="chip dead">cloze × 33（题型名，恒真空转）</span></div>
+        <p class="foot">R1 补真值后应为：记叙 / 说明 / 议论 / 应用 / 新闻。</p>
+      </td></tr>
+      <tr><td class="role">加分</td><td class="field">错题词性 pos<span class="tag t-ok">在用</span><small>6 类</small></td><td>
+        <div class="chips">
+          <span class="chip">名词 <b>33</b></span><span class="chip">动词 <b>33</b></span><span class="chip">形容词 <b>33</b></span>
+          <span class="chip">短语 <b>31</b></span><span class="chip">副词 <b>20</b></span><span class="chip">其他 <b>6</b></span>
+        </div>
+      </td></tr>
+      <tr><td class="role">闲置</td><td class="field">签名细分 signatureFacet<span class="tag t-idle">闲置</span><small>稀疏（约 2/15 空有标）</small></td><td>
+        <div class="chips">
+          <span class="chip">名词·语义场 <b>30</b></span><span class="chip">短语·语境搭配 <b>28</b></span>
+          <span class="chip">形容词·情感一致 <b>26</b></span><span class="chip">动词·动作链 <b>2</b></span><span class="chip">副词·情感一致 <b>1</b></span>
+        </div>
+      </td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>七选五 <span class="cnt">34 组 · 配方：功能句+位置(密度) → 衔接机制 → 话题加分</span></h2>
+    <table>
+      <tr><th>配方角色</th><th>标签字段</th><th>词表</th></tr>
+      <tr><td class="role">主序</td><td class="field">功能句角色 roleFacet<span class="tag t-ok">在用</span><small>4 类 · 按密度</small></td><td>
+        <div class="chips">
+          <span class="chip">衔接句 <b>33</b></span><span class="chip">主题句 <b>31</b></span>
+          <span class="chip">过渡句 <b>17</b></span><span class="chip">总结句 <b>15</b></span>
+        </div>
+      </td></tr>
+      <tr><td class="role">主序</td><td class="field">空位位置 positionFacet<span class="tag t-ok">在用</span><small>3 类</small></td><td>
+        <div class="chips">
+          <span class="chip">段中 <b>34</b></span><span class="chip">段首 <b>29</b></span><span class="chip">段尾 <b>28</b></span>
+        </div>
+      </td></tr>
+      <tr><td class="role">次序</td><td class="field">衔接机制 mechanismFacet<span class="tag t-ok">在用</span><small>3 类</small></td><td>
+        <div class="chips">
+          <span class="chip">词汇·话题场呼应 <b>33</b></span><span class="chip">语法·指代衔接 <b>28</b></span><span class="chip">语法·逻辑连接词 <b>21</b></span>
+        </div>
+      </td></tr>
+      <tr><td class="role">加分</td><td class="field">话题<span class="tag t-ok">在用</span><small>26 类</small></td><td>
+        <div class="chips">
+          <span class="chip">健康的生活方式 <b>7</b></span><span class="chip">善于学习 <b>5</b></span>
+          <span class="chip">语言学习的方法 <b>4</b></span><span class="chip">积极的生活态度 <b>4</b></span>
+          <span class="chip">完善自我 <b>4</b></span><span class="chip">个人生活 <b>4</b></span><span class="chip">社会交往 <b>4</b></span>
+          <span class="chip">…其余 19 类各 1-2 组</span>
+        </div>
+      </td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>阅读理解 <span class="cnt">130 组 · 配方：小题题型(密度) → 篇位 proxy → 话题加分</span></h2>
+    <table>
+      <tr><th>配方角色</th><th>标签字段</th><th>词表</th></tr>
+      <tr><td class="role">主序</td><td class="field">小题题型 skill<span class="tag t-ok">在用</span><small>8 类 · 按密度</small></td><td>
+        <div class="chips">
+          <span class="chip">细节 <b>126</b></span><span class="chip">推断 <b>56</b></span><span class="chip">主旨 <b>29</b></span>
+          <span class="chip">词义猜测 <b>29</b></span><span class="chip">标题 <b>24</b></span><span class="chip">态度 <b>18</b></span>
+          <span class="chip">写作意图 <b>18</b></span><span class="chip">篇章结构 <b>5</b></span>
+          <span class="chip">副技能：推断 <b>57</b></span>
+        </div>
+      </td></tr>
+      <tr><td class="role">次序</td><td class="field">篇位 proxy<small>词数 60% + 体裁 40%</small><span class="tag t-bad">半假</span></td><td>
+        <div class="chips">
+          <span class="chip">词数邻域（真，在用）</span>
+          <span class="chip dead">体裁 reading × 126（恒真空转）</span>
+        </div>
+        <p class="foot">40% 的权重形同虚设——篇位判断实际只靠词数。R1 补真值后恢复满血。</p>
+      </td></tr>
+      <tr><td class="role">加分</td><td class="field">话题<span class="tag t-ok">在用</span><small>52 类</small></td><td>
+        <div class="chips">
+          <span class="chip">科技发展 <b>25</b></span><span class="chip">人与环境 <b>17</b></span>
+          <span class="chip">人与动植物 <b>16</b></span><span class="chip">健康的生活方式 <b>15</b></span>
+          <span class="chip">个人生活 <b>12</b></span><span class="chip">社会热点问题 <b>11</b></span>
+        </div>
+        <details><summary>展开全部 52 类</summary><div class="chips">
+          <span class="chip">学校生活 <b>8</b></span><span class="chip">自然科学研究成果 <b>6</b></span><span class="chip">积极的生活态度 <b>6</b></span>
+          <span class="chip">家庭生活 <b>6</b></span><span class="chip">正确的人生态度 <b>6</b></span><span class="chip">科学精神 <b>6</b></span>
+          <span class="chip">绘画作品与人物 <b>6</b></span><span class="chip">发展与环境 <b>5</b></span><span class="chip">突出贡献人物 <b>5</b></span>
+          <span class="chip">自然环境 <b>4</b></span><span class="chip">认识自我 <b>4</b></span><span class="chip">社会交往 <b>4</b></span>
+          <span class="chip">公益事业 <b>4</b></span><span class="chip">乐于学习 <b>3</b></span><span class="chip">优秀品行 <b>3</b></span>
+          <span class="chip">信息技术创新 <b>3</b></span><span class="chip">音乐 <b>3</b></span><span class="chip">日常体育活动 <b>3</b></span>
+          <span class="chip">戏剧 <b>3</b></span><span class="chip">影视 <b>3</b></span><span class="chip">小说 <b>3</b></span>
+          <span class="chip">社会进步 <b>3</b></span><span class="chip">文化习俗 <b>3</b></span>
+          <span class="chip">…其余 29 类各 1-2 组</span>
+        </div></details>
+      </td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>写作 <span class="cnt">48 组 · 不在相似题 v1（Q5 拍板）</span></h2>
+    <table>
+      <tr><th>配方角色</th><th>标签字段</th><th>词表</th></tr>
+      <tr><td class="role">—</td><td class="field">功能型（应用文）<span class="tag t-miss">缺失</span></td><td><p class="foot" style="margin:0">R3 补：建议信 / 邀请信 / 申请信 / 通知 / 演讲稿…（词表待拟草案）</p></td></tr>
+      <tr><td class="role">—</td><td class="field">情节型（读后续写）<span class="tag t-miss">缺失</span></td><td><p class="foot" style="margin:0">R3 补：困境成长 / 救援互助 / 比赛挫折 / 亲情和解…（词表待拟草案）</p></td></tr>
+      <tr><td class="role">闲置</td><td class="field">话题<span class="tag t-idle">闲置</span><small>25 类</small></td><td>
+        <div class="chips">
+          <span class="chip">学校生活 <b>22</b></span><span class="chip">优秀品行 <b>11</b></span>
+          <span class="chip">跨文化沟通 <b>8</b></span><span class="chip">家庭生活 <b>7</b></span>
+          <span class="chip">人与动植物 <b>5</b></span><span class="chip">…其余 20 类</span>
+        </div>
+      </td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>全题型潜伏资产 <span class="cnt">数据在库，配方未用</span></h2>
+    <table>
+      <tr><th>字段</th><th>现状</th></tr>
+      <tr><td class="field">干扰项 trap<span class="tag t-idle">闲置</span></td><td>阅读 1395 条错误选项诊断，受控五类 + 1 条野类型。R2 轨道：机审 → 返修 → 索引。</td></tr>
+      <tr><td class="field">难度 difficulty<span class="tag t-bad">假货</span></td><td>全库假 medium，已从 UI 下线（ADR-0015）。R4 压轴：等真信号再议。</td></tr>
+      <tr><td class="field">主题 theme<span class="tag t-miss">缺失</span></td><td>passages.theme 空（0/273）。话题标签表已覆盖同语义，暂无补的必要。</td></tr>
+    </table>
+  </section>
+</main>
