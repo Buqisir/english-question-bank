@@ -1,0 +1,229 @@
+<title>打印形态裁点原型 · 分页与排序建议</title>
+<style>
+  :root{
+    --desk:#F1EDE4; --paper:#FBF9F3; --ink:#26251F; --ink-soft:#6B675C;
+    --green:#3F5D4C; --green-soft:#E4EAE4; --line:#D9D2C2; --danger:#B3563E;
+    --danger-soft:#F6E7E1; --chip:#EFEAE0; --shadow:0 1px 2px rgba(38,37,31,.08),0 4px 14px rgba(38,37,31,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --desk:#211F1B; --paper:#2C2A24; --ink:#EAE6DC; --ink-soft:#A39E90;
+      --green:#8FB39C; --green-soft:#37423A; --line:#4A463C; --danger:#D98A72;
+      --danger-soft:#4A342C; --chip:#3A372F; --shadow:0 1px 2px rgba(0,0,0,.4); }
+  }
+  :root[data-theme="light"]{ --desk:#F1EDE4; --paper:#FBF9F3; --ink:#26251F; --ink-soft:#6B675C;
+      --green:#3F5D4C; --green-soft:#E4EAE4; --line:#D9D2C2; --danger:#B3563E;
+      --danger-soft:#F6E7E1; --chip:#EFEAE0; --shadow:0 1px 2px rgba(38,37,31,.08),0 4px 14px rgba(38,37,31,.06); }
+  :root[data-theme="dark"]{ --desk:#211F1B; --paper:#2C2A24; --ink:#EAE6DC; --ink-soft:#A39E90;
+      --green:#8FB39C; --green-soft:#37423A; --line:#4A463C; --danger:#D98A72;
+      --danger-soft:#4A342C; --chip:#3A372F; --shadow:0 1px 2px rgba(0,0,0,.4); }
+
+  body{ background:var(--desk); color:var(--ink); font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7; margin:0; padding:40px 20px 80px; }
+  main{ max-width:960px; margin:0 auto; }
+  .eyebrow{ font-size:12px; letter-spacing:.18em; color:var(--green); font-weight:600; margin-bottom:6px; }
+  h1{ font-family:"Songti SC","STSong",serif; font-size:30px; margin:0 0 8px; text-wrap:balance; }
+  h2{ font-family:"Songti SC","STSong",serif; font-size:21px; margin:48px 0 4px; }
+  .sub{ color:var(--ink-soft); margin:0 0 24px; max-width:42em; }
+  section p{ max-width:42em; }
+
+  /* mini paper faces */
+  .faces{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; }
+  .face{ width:118px; }
+  .sheet-wrap{ display:flex; gap:26px; flex-wrap:wrap; }
+  .sheet{ background:transparent; border:1.5px dashed var(--line); border-radius:8px; padding:12px 12px 8px; }
+  .sheet-label{ font-size:12px; color:var(--ink-soft); margin-bottom:8px; }
+  .sheet .faces{ gap:10px; }
+  .page{ background:var(--paper); box-shadow:var(--shadow); border-radius:2px; aspect-ratio:210/297;
+    display:flex; flex-direction:column; overflow:hidden; padding:7px 8px; gap:3px; }
+  .face-cap{ text-align:center; font-size:11px; color:var(--ink-soft); margin-top:6px; }
+  .blk{ border-radius:2px; font-size:9.5px; line-height:1.25; padding:3px 5px; color:var(--ink);
+    display:flex; align-items:flex-start; background:var(--chip); position:relative; }
+  .blk small{ opacity:.65; }
+  .b-cloze{ background:var(--green-soft); }
+  .b-seven{ background:var(--chip); }
+  .b-read{ background:color-mix(in srgb, var(--green-soft) 55%, var(--paper)); }
+  .b-gram{ background:var(--chip); }
+  .b-writ{ background:var(--green-soft); }
+  .b-cut{ outline:2px dashed var(--danger); outline-offset:-2px; }
+  .b-ok{ outline:2px dashed var(--green); outline-offset:-2px; }
+  .cutbadge{ position:absolute; right:-6px; top:-9px; background:var(--danger); color:#fff; font-size:8.5px;
+    padding:1px 5px; border-radius:8px; white-space:nowrap; z-index:1; }
+  .cutbadge.ok{ background:var(--green); }
+  .blank{ flex:1; border:1px dashed var(--line); border-radius:2px; display:flex; align-items:center;
+    justify-content:center; color:var(--ink-soft); font-size:9px; }
+
+  /* legend */
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; margin:14px 0 0; font-size:12.5px; color:var(--ink-soft); }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:2px; margin-right:5px; vertical-align:-1px; }
+
+  /* tabs */
+  .tabs{ display:flex; gap:8px; margin:18px 0 0; flex-wrap:wrap; }
+  .tab{ border:1px solid var(--line); background:var(--paper); color:var(--ink); padding:8px 18px;
+    border-radius:20px; font-size:14px; cursor:pointer; }
+  .tab[aria-selected="true"]{ background:var(--green); border-color:var(--green); color:#fff; font-weight:600; }
+  .tab:focus-visible{ outline:2px solid var(--green); outline-offset:2px; }
+  .panel{ display:none; background:var(--paper); box-shadow:var(--shadow); border-radius:10px;
+    padding:22px 26px; margin-top:14px; }
+  .panel.on{ display:block; }
+  .panel h3{ margin:0 0 2px; font-size:17px; }
+  .panel .verdict{ font-size:13px; color:var(--ink-soft); margin:0 0 18px; }
+
+  /* mock workbench bits */
+  .mockbar{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:var(--desk);
+    border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:13.5px; margin:10px 0 16px; }
+  .mockbar .t{ font-weight:600; }
+  .seg{ display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .seg button{ border:0; background:var(--paper); padding:5px 14px; font-size:13px; cursor:pointer; color:var(--ink); }
+  .seg button[aria-pressed="true"]{ background:var(--green); color:#fff; font-weight:600; }
+  .pillbtn{ border:1px solid var(--line); border-radius:8px; background:var(--paper); color:var(--ink);
+    padding:5px 14px; font-size:13px; }
+  .primary{ background:var(--green); color:#fff; border:0; border-radius:8px; padding:6px 16px; font-size:13px; }
+  .sugg{ border-left:3px solid var(--green); background:var(--green-soft); border-radius:0 8px 8px 0;
+    padding:10px 14px; font-size:13.5px; margin:8px 0; }
+  .sugg b{ color:var(--green); }
+  .sugg.warn{ border-left-color:var(--danger); background:var(--danger-soft); }
+  .sugg .act{ margin-left:10px; font-size:12.5px; color:var(--green); font-weight:600; white-space:nowrap; }
+  .menu{ border:1px solid var(--line); border-radius:8px; background:var(--paper); box-shadow:var(--shadow);
+    width:240px; padding:6px; font-size:13.5px; }
+  .menu div{ padding:7px 10px; border-radius:6px; }
+  .menu div:hover{ background:var(--chip); }
+  .menu .new{ color:var(--green); font-weight:600; }
+  .cost{ display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; font-size:13px; }
+  .cost div{ flex:1 1 220px; background:var(--desk); border-radius:8px; padding:10px 14px; }
+  .cost b{ display:block; margin-bottom:2px; font-size:12px; letter-spacing:.08em; color:var(--ink-soft); }
+
+  .reco{ margin-top:44px; background:var(--paper); border-left:4px solid var(--green); border-radius:0 10px 10px 0;
+    box-shadow:var(--shadow); padding:18px 24px; }
+  .reco h2{ margin:0 0 6px; }
+  @media (max-width:640px){ .face{ width:96px; } body{ padding:24px 12px 60px; } }
+</style>
+
+<main>
+  <div class="eyebrow">DRAFT-DESK · 议题2 裁点原型</div>
+  <h1>「打印形态」要不要成为一个选项？</h1>
+  <p class="sub">先看清一个底层事实，再对比三个方案。图里是同一张 35 小题的草稿卷：完形、七选五、阅读B、阅读C、语法填空、写作。</p>
+
+  <h2>底层事实一：排版的原子单位是「A4 版面」</h2>
+  <p class="sub">A4 双面散页打，阅读B（版2→版3）和阅读C（版3→版4）都要翻纸找下文——<b style="color:var(--danger)">两处都算断篇</b>。</p>
+
+  <div class="faces" id="a4row"></div>
+  <div class="legend">
+    <span><i style="background:var(--green-soft)"></i>题组</span>
+    <span><i style="outline:2px dashed var(--danger); outline-offset:-2px; background:var(--paper)"></i>断篇（要翻纸才能读完）</span>
+    <span><i style="outline:2px dashed var(--green); outline-offset:-2px; background:var(--paper)"></i>跨版但同面可见 · 不算断</span>
+    <span><i style="border:1px dashed var(--line); background:var(--paper)"></i>页尾留白</span>
+  </div>
+
+  <h2>底层事实二（owner 改判）：装进 A3，同一道口子判决就变了</h2>
+  <p class="sub">A3 背面上版3、版4 <b>并排同时可见</b>——阅读C 跨了版面却不用翻纸，<b style="color:var(--green)">不算断</b>；真正断的是阅读B：版2 在正面、版3 在背面，读到一半要翻面。<b>同一道断口，A4 判断、A3 判不断——建议引擎必须知道这卷怎么打，否则会报假警、漏真警。</b></p>
+  <div class="sheet-wrap" id="a3row"></div>
+
+  <h2>三个方案：选项放哪里（点着看）</h2>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-p="p1">方案一 · 不加选项</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p2">方案二 · 卷头切换</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p3">方案三 · 只在导出时选</button>
+  </div>
+
+  <div class="panel on" id="p1">
+    <h3>不加选项，引擎装作不知道你怎么打</h3>
+    <p class="verdict" style="color:var(--danger)">被 owner 改判否掉的方案：它只能按「所有跨版都算断」从严处理——对 A3 用户报假警（阅读C 明明不断却催你调序），还分不清哪个断口才要紧。</p>
+    <div class="mockbar"><span class="t">0709 英语草稿卷</span><span style="color:var(--ink-soft)">6 题组 · 35 小题</span>
+      <span style="flex:1"></span><button class="pillbtn">学生版</button><button class="primary">导出</button></div>
+    <div class="sugg warn">建议：把「语法填空」和「阅读C」调换顺序，避免断篇。<b>（A3 打印时这是假警报）</b></div>
+    <div class="cost">
+      <div><b>好处</b>零配置；刀最小。</div>
+      <div><b>代价</b>判据错位：A3 下报假警、抓不住「翻面断」这个真痛点，建议失去可信度——Super Teacher Boundary 最忌讳的就是不可信的建议。</div>
+    </div>
+  </div>
+
+  <div class="panel" id="p2">
+    <h3>草稿卷头部加 A4 / A3 切换，建议判据随之变（推荐）</h3>
+    <p class="verdict">轻量版：切换只改变<b>建议的判据</b>和「共 N 版 · M 张」的计数文案，不另做一套按张分组的预览视图（那个将来真需要再说）。</p>
+    <div class="mockbar"><span class="t">0709 英语草稿卷</span>
+      <span class="seg"><button aria-pressed="false">A4 散页</button><button aria-pressed="true">A3 对折</button></span>
+      <span style="color:var(--ink-soft)">共 6 版 · 2 张 A3</span>
+      <span style="flex:1"></span><button class="primary">导出</button></div>
+    <div class="sugg warn">提醒：「阅读B」<b>要翻面才能读完</b>（版2 正面 → 版3 背面）。把「七选五」和「阅读B」调换顺序即可消除。<span class="act">调整顺序 →</span></div>
+    <div class="sugg">「阅读C」跨版但同面并排可见，<b>不算断</b>——不打扰。</div>
+    <div class="cost">
+      <div><b>好处</b>判据正确，建议可信；一对一场景里你自己打什么选什么，同事来了也各选各的。</div>
+      <div><b>代价</b>多一个设置（但语义是老师本来就懂的「怎么打」）；引擎要懂「面对」的概念——刀B 范围加一条，趁还没施工加进去最便宜。</div>
+    </div>
+  </div>
+
+  <div class="panel" id="p3">
+    <h3>导出菜单加一项 A3 拼版 PDF（兼容追加项）</h3>
+    <p class="verdict">与方案二不冲突：形态选了 A3 的卷，导出时顺手给一份拼好版、打印店直接双面打的 PDF。</p>
+    <div class="mockbar"><span class="t">0709 英语草稿卷</span><span style="color:var(--ink-soft)">6 题组 · 35 小题</span>
+      <span style="flex:1"></span><button class="pillbtn">学生版</button><button class="primary">导出 ▾</button></div>
+    <div class="menu">
+      <div>打印 / 另存 PDF（A4）</div>
+      <div>下载 DOCX</div>
+      <div class="new">A3 对折 PDF（自动 2-up 拼版）→</div>
+    </div>
+    <div class="cost">
+      <div><b>好处</b>解决「打印店不会拼版」的实操痛；跟方案二叠加成完整闭环。</div>
+      <div><b>代价</b>新的导出面要保真；排在刀B/导出保真刀之后做。</div>
+    </div>
+  </div>
+
+  <div class="reco">
+    <h2>小川的推荐（owner 改判后修订）</h2>
+    <p style="margin:0;max-width:42em">你的改判证明了打印形态是建议引擎的<b>必要输入</b>，不是可省的配置——所以推荐从方案一改为<b>方案二（轻量版）</b>：卷头 A4/A3 切换，只影响建议判据与版/张计数，不做按张预览。<b>方案三</b>作为兼容追加项排在刀B 与导出保真之后。原方案一作废。</p>
+  </div>
+</main>
+
+<script>
+  // 数据：6 个 A4 版面，每面若干块（h = 占版面高度百分比）
+  // A4 双面散页视角：跨版面 = 要翻纸 → 阅读B、阅读C 都断
+  const facesA4 = [
+    [{t:'一、完形填空',c:'b-cloze',h:78},{t:'',c:'blank',h:16}],
+    [{t:'二、七选五',c:'b-seven',h:60},{t:'三、阅读B',c:'b-read b-cut',h:34}],
+    [{t:'三、阅读B（续）',c:'b-read b-cut',h:22,badge:'✂ 断篇'},{t:'四、阅读C',c:'b-read b-cut',h:72,badge:'✂ 断篇'}],
+    [{t:'四、阅读C（续）',c:'b-read b-cut',h:30},{t:'五、语法填空',c:'b-gram',h:58},{t:'',c:'blank',h:6}],
+    [{t:'六、写作',c:'b-writ',h:46},{t:'',c:'blank',h:48}],
+    [{t:'（答题卡 / 装订预留）',c:'blank',h:88}],
+  ];
+  // A3 对折视角（owner 改判）：版3+版4 同面并排可见 → 阅读C 不算断；
+  // 阅读B 版2(正面)→版3(背面) 要翻面 → 才是真断篇
+  const facesA3 = [
+    facesA4[0],
+    [{t:'二、七选五',c:'b-seven',h:60},{t:'三、阅读B',c:'b-read b-cut',h:34}],
+    [{t:'三、阅读B（续）',c:'b-read b-cut',h:22,badge:'✂ 断篇 · 要翻面'},{t:'四、阅读C',c:'b-read b-ok',h:72}],
+    [{t:'四、阅读C（续）',c:'b-read b-ok',h:30,badge:'同面可见 · 不断',ok:true},{t:'五、语法填空',c:'b-gram',h:58},{t:'',c:'blank',h:6}],
+    facesA4[4],
+    facesA4[5],
+  ];
+  function renderFace(blocks, cap){
+    const f=document.createElement('div'); f.className='face';
+    const p=document.createElement('div'); p.className='page';
+    for(const b of blocks){
+      const d=document.createElement('div');
+      d.className = b.c==='blank' ? 'blank' : 'blk '+b.c;
+      d.style.height=b.h+'%'; d.style.flex='none';
+      d.innerHTML = b.c==='blank' ? (b.t||'留白') : '<span>'+b.t+'</span>';
+      if(b.badge){ const s=document.createElement('span'); s.className='cutbadge'+(b.ok?' ok':''); s.textContent=b.badge; d.appendChild(s); }
+      p.appendChild(d);
+    }
+    const c=document.createElement('div'); c.className='face-cap'; c.textContent=cap;
+    f.appendChild(p); f.appendChild(c); return f;
+  }
+  const a4=document.getElementById('a4row');
+  facesA4.forEach((b,i)=>a4.appendChild(renderFace(b,'版面 '+(i+1))));
+  const a3=document.getElementById('a3row');
+  const sheets=[{label:'第 1 张 A3（正面：版1+版2 · 背面：版3+版4）',idx:[0,1,2,3]},
+                {label:'第 2 张 A3（正面：版5+版6）',idx:[4,5]}];
+  for(const s of sheets){
+    const w=document.createElement('div'); w.className='sheet';
+    const l=document.createElement('div'); l.className='sheet-label'; l.textContent=s.label;
+    const row=document.createElement('div'); row.className='faces';
+    s.idx.forEach(i=>row.appendChild(renderFace(facesA3[i],'版面 '+(i+1))));
+    w.appendChild(l); w.appendChild(row); a3.appendChild(w);
+  }
+  // tabs
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id===t.dataset.p));
+  }));
+</script>

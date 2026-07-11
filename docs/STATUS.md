@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-10（八刀收官并已全部部署生产 e6644e2；High 议题1+3 grilling 闭环，暖纸转正小刀新立，议题2 待专场）
+Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题全部 grilling 闭环，暖纸转正小刀新立，刀B 扩容+刀E 新立）
 
 ## 现在是什么
 
@@ -357,15 +357,14 @@ Last updated: 2026-07-10（八刀收官并已全部部署生产 e6644e2；High �
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
-- **High 三议题进展（2026-07-10 grilling）**：议题 1+3 已聊透闭环
-  （五裁点入 `docs/cuts/draft-desk/program.md` 关联决策：病根=纸不像纸、
-  色温法「纸页入暖工具页中性」、命名统一「个人空间」、删除分两档、
-  排期=部署六刀→lecture-rail→**暖纸转正小刀**→刀A+卷宗柜原型并行→
-  motion-pass）。剩：
-  2. **分页 + 智能题型分布建议**：通过**改变题组顺序**让 A3 打印时
-     学生阅读友好（题型分布建议=排序建议，不是自动重排；注意
-     Super Teacher Boundary——建议+老师确认）。全新方向，先 grilling
-     （与刀B 真分页引擎有纠缠，约专场，不插队）。
+- **High 三议题全部闭环（2026-07-10 两场 grilling）**：议题 1+3 五裁点、
+  议题 2 六裁点均入 `docs/cuts/draft-desk/program.md` 关联决策。
+  议题 2 要点：断篇判决随打印形态变（owner 改判：A3 同面并排可见
+  不算断）→ 卷头 A4/A3 切换（轻量版，默认 A4 记住上次）→ 刀B 扩容
+  （形态字段+同面判据）+ 新立刀E「排序建议」排 C 后（任意序、一键
+  应用可撤销、永不自动重排）；原型 `prototype-print-form-v2.html`
+  入 draft-desk 目录。排期不变：lecture-rail → 暖纸转正小刀 →
+  刀A+卷宗柜 → motion-pass → B → C → E。
 - **暖纸转正小刀（新立，grilling 产物，排 lecture-rail 后）**：①整卷/
   讲评暖色值收编 `--paper-*` token（纯等值替换零视觉变化）②工作台
   预览换暖纸桌+纸面 Resting 阴影（收专项审计 P0-D1，owner 议题3 灰怪
