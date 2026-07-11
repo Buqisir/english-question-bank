@@ -233,9 +233,14 @@ assert('preview iframe does not add a second mat color', previewHtml.includes('h
 // （owner 墨绿契约 — bg/surface-2 新值），断言同步。
 // draft-workbench-visual-unify (D8): the gradient mat was replaced with a
 // flat surface-strong token per DESIGN.md's Flat-By-Default rule — the
-// desk keeps its nested-layer identity via a solid `var(--surface-strong)`
-// fill instead of a two-stop gradient.
-assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^}]*background:\s*var\(--surface-strong\)/.test(workbenchCss))
+// desk keeps its nested-layer identity via a solid fill instead of a
+// two-stop gradient.
+// warm-paper-promotion (色温法, owner 拍板 2026-07-10): the desk goes warm
+// again — `--paper-desk-bg` (index.css, reuses paper-browse's `--paper-bg`
+// warm cream) instead of the neutral `--surface-strong` — but it is STILL a
+// flat token fill, never a gradient (去渐变桌 constraint carried forward
+// from D8 unchanged).
+assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^}]*background:\s*var\(--paper-desk-bg\)/.test(workbenchCss))
 assert('preview iframe is tall enough to show a full A4 page', workbenchCss.includes('height: 1188px'))
 assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))

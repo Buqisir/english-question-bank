@@ -95,7 +95,12 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // token (item #15's teal-50/teal-800 chip 选中态, no longer white-on-
 // solid-teal at all) — that state's whitelist slot is retired, not
 // re-pinned, since the declaration itself is gone.
-const WHITELISTED_LINES = new Set([188, 374])
+// warm-paper-promotion: re-pinned again — .draft-preview-desk's 暖纸桌 token
+// comment (+4 lines) and .draft-a4-sheet's Resting-shadow confirmation
+// comment (+3 lines) push the second #ffffff (.draft-undo-toast color) from
+// L374 to L381; the first (.draft-export-menu-trigger color) at L188 sits
+// above both edits and is unaffected.
+const WHITELISTED_LINES = new Set([188, 381])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
