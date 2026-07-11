@@ -1241,12 +1241,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     // 挑题态(!lectureOpen)永远用 plain surfaceData —— 零解析噪音不变量。
     const lectureEntry = lectureAnalysisByGroupId[groupId]
     let surfaceData = entry.model.surfaceData
-    let blankFocusMode: 'rail' | 'in-passage' | undefined
+    let blankFocusMode: 'rail' | 'in-passage' | 'paper-blank' | undefined
     if (lectureOpen && entry.kind === 'cloze' && lectureEntry?.kind === 'cloze') {
       surfaceData = lectureEntry.model.surfaceData
     } else if (lectureOpen && entry.kind === 'grammarFill' && lectureEntry?.kind === 'grammarFill') {
       surfaceData = lectureEntry.model.surfaceData
       blankFocusMode = 'in-passage'
+    }
+    // lecture-rail-scroll-fix: cloze / 七选五 blanks become clickable
+    // focus buttons in lecture mode — independent of whether
+    // lectureEntry has resolved (点空即联动右栏, the panel's own
+    // analysis fetch is a separate concern). 挑题态(!lectureOpen) never
+    // sets this — blanks stay non-interactive, zero click-noise
+    // invariant unchanged.
+    if (lectureOpen && (entry.kind === 'cloze' || entry.kind === 'sevenChoices')) {
+      blankFocusMode = 'paper-blank'
     }
 
     const isPanelGroup = lectureOpen && panelGroupId === groupId

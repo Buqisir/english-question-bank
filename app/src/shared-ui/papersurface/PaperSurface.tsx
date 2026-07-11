@@ -65,10 +65,21 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
 
 /**
  * I15 — focus context for clickable in-passage grammar-fill blanks.
- * Non-null ONLY in 'in-passage' mode; `null` means the historical
- * rail-driven span renderer (other surfaces are unaffected).
+ * Non-null ONLY in 'in-passage' or 'paper-blank' mode; `null` means
+ * the historical rail-driven span renderer (other surfaces are
+ * unaffected).
+ *
+ * lecture-rail-scroll-fix: `renderer` discriminates which blank
+ * pattern/markup the clickable form uses — 'grammar-fill' is I15's
+ * original `NN._____` in-passage button (rail suppressed);
+ * 'paper-blank' is the new cloze/七选五 `__NN__` button (rail and
+ * `__global__` option pool NOT suppressed — every consumer of this
+ * field must branch on `renderer`, not mere non-nullness, to decide
+ * suppression).
  */
 type BlankFocusContext = {
+  /** Which blank pattern this focus context renders as buttons. */
+  renderer: 'grammar-fill' | 'paper-blank'
   /** PaperQuestion.questionNo (as string) → questionId. */
   questionIdByNo: Map<string, string>
   /** The currently focused questionId, for the active blank state. */
@@ -77,7 +88,20 @@ type BlankFocusContext = {
   onQuestionClick: (questionId: string) => void
 } | null
 
-export function PaperSurface(props: PaperSurfaceProps): ReactNode {
+/**
+ * lecture-rail-scroll-fix: `blankFocusMode` gains a third value,
+ * 'paper-blank', LOCAL to this component wrapper — the shared contract
+ * type (`shared/papersurface/types.d.ts`, PaperSurfaceProps) is out of
+ * this cut's scope and stays `'rail' | 'in-passage'` unchanged. This
+ * extended prop type is a superset accepted at the JSX boundary only;
+ * every internal use of the original two values is untouched.
+ */
+type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
+type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
+  readonly blankFocusMode?: PaperSurfaceBlankFocusMode
+}
+
+export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
   const {
     textMap,
     annotations,
@@ -116,18 +140,23 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
     return map
   }, [questions])
 
-  // I15: in-passage blank focus context. Non-null ONLY in 'in-passage'
-  // mode (grammar fill); null in 'rail' mode so the historical path is
-  // untouched. Resolves a clicked blank number → questionId by
-  // PaperQuestion.questionNo string-equality.
+  // I15 / lecture-rail-scroll-fix: blank focus context. Non-null in
+  // 'in-passage' (grammar fill) OR 'paper-blank' (cloze/七选五) mode;
+  // null in 'rail' mode so the historical path is untouched. Resolves
+  // a clicked blank number → questionId by PaperQuestion.questionNo
+  // string-equality. `renderer` is byte-identical to `blankFocusMode`
+  // for the two clickable modes — kept as its own field (rather than
+  // re-deriving from blankFocusMode) so downstream renderers only ever
+  // need `blankFocus`, not a second threaded prop.
   const blankFocus = useMemo<BlankFocusContext>(() => {
-    if (blankFocusMode !== 'in-passage') return null
+    if (blankFocusMode !== 'in-passage' && blankFocusMode !== 'paper-blank') return null
     const questionIdByNo = new Map<string, string>()
     for (const q of questions) {
       const no = String(q.questionNo ?? '')
       if (no && !questionIdByNo.has(no)) questionIdByNo.set(no, q.id)
     }
     return {
+      renderer: blankFocusMode === 'paper-blank' ? 'paper-blank' : 'grammar-fill',
       questionIdByNo,
       activeQuestionId: lectureFocus?.questionId ?? null,
       onQuestionClick: handleQuestionClick,
@@ -243,8 +272,10 @@ export function PaperSurface(props: PaperSurfaceProps): ReactNode {
           <PaperSurfaceOptionBank options={optionBank} />
         )}
         {/* Render global questions (no section). I15: the rail is
-            suppressed in 'in-passage' mode (blankFocus non-null). */}
-        {questionsBySection.has('__global__') && !blankFocus && (
+            suppressed ONLY in 'in-passage' mode (blankFocus.renderer
+            === 'grammar-fill') — lecture-rail-scroll-fix's 'paper-blank'
+            mode (cloze/七选五) keeps the rail AND this __global__ pool. */}
+        {questionsBySection.has('__global__') && blankFocus?.renderer !== 'grammar-fill' && (
           <PaperSurfaceQuestionList
             questions={questionsBySection.get('__global__')!}
             lectureFocus={lectureFocus}
@@ -346,9 +377,12 @@ function PaperSurfaceSection({
           />
         ))}
       </div>
-      {/* I15: the rail is suppressed in 'in-passage' mode (blankFocus
-          non-null) — the in-passage blank buttons are the focus target. */}
-      {questions.length > 0 && !blankFocus && (
+      {/* I15: the rail is suppressed ONLY in 'in-passage' mode
+          (blankFocus.renderer === 'grammar-fill') — the in-passage
+          blank buttons are the focus target. lecture-rail-scroll-fix's
+          'paper-blank' mode keeps the rail as an additional focus
+          target alongside the clickable blanks. */}
+      {questions.length > 0 && blankFocus?.renderer !== 'grammar-fill' && (
         <PaperSurfaceQuestionList
           questions={questions}
           lectureFocus={lectureFocus}
@@ -537,12 +571,19 @@ function renderTextWithPaperBlanks(
   keyPrefix: string,
   blankFocus: BlankFocusContext = null,
 ): ReactNode {
-  // I15: in 'in-passage' mode (blankFocus non-null) grammar-fill blanks
-  // become clickable focus buttons. The 'rail'/omitted path (blankFocus
-  // null) is the historical span renderer, byte-for-byte unchanged.
-  if (blankFocus) {
+  // I15: in 'in-passage' mode (blankFocus.renderer === 'grammar-fill')
+  // grammar-fill blanks become clickable focus buttons.
+  if (blankFocus?.renderer === 'grammar-fill') {
     return renderTextWithGrammarFillBlanks(text, keyPrefix, blankFocus)
   }
+  // lecture-rail-scroll-fix: in 'paper-blank' mode cloze/七选五 blanks
+  // become clickable focus buttons (own branch, own pattern — the
+  // `paperBlankPattern` single source of truth, not grammarFillBlankPattern).
+  if (blankFocus?.renderer === 'paper-blank') {
+    return renderTextWithClickablePaperBlanks(text, keyPrefix, blankFocus)
+  }
+  // The 'rail'/omitted path (blankFocus null) is the historical static
+  // span renderer, byte-for-byte unchanged.
   if (!paperBlankPattern.test(text)) return text
   paperBlankPattern.lastIndex = 0
   const nodes: ReactNode[] = []
@@ -558,6 +599,71 @@ function renderTextWithPaperBlanks(
         {match[1]}
       </span>,
     )
+    cursor = match.index + match[0].length
+    index += 1
+  }
+  if (cursor < text.length) {
+    nodes.push(text.slice(cursor))
+  }
+  return nodes
+}
+
+/**
+ * lecture-rail-scroll-fix — render cloze (`__41__`) / 七选五
+ * (`_____36_____`) paper blanks as clickable focus buttons in
+ * 'paper-blank' mode. Uses the SAME `paperBlankPattern` (single source
+ * of truth, `shared/papersurface/blankPattern.mjs` — untouched) as the
+ * static renderer above, and the same visible content (`match[1]`, the
+ * bare blank number) so the button's rendered text is byte-identical
+ * to the static span it replaces.
+ *
+ * A blank whose number resolves to no question (defensive — should not
+ * happen given the page-layer's lectureOpen gating) falls back to the
+ * existing static `.ps-paper-blank` span — never a dead button.
+ */
+function renderTextWithClickablePaperBlanks(
+  text: string,
+  keyPrefix: string,
+  blankFocus: NonNullable<BlankFocusContext>,
+): ReactNode {
+  if (!paperBlankPattern.test(text)) return text
+  paperBlankPattern.lastIndex = 0
+  const nodes: ReactNode[] = []
+  let cursor = 0
+  let match: RegExpExecArray | null
+  let index = 0
+  while ((match = paperBlankPattern.exec(text)) !== null) {
+    if (match.index > cursor) {
+      nodes.push(text.slice(cursor, match.index))
+    }
+    const blankNo = match[1]
+    const questionId = blankFocus.questionIdByNo.get(blankNo) ?? null
+    const key = `${keyPrefix}-paper-blank-${index}`
+    if (questionId) {
+      const isActive = blankFocus.activeQuestionId === questionId
+      nodes.push(
+        <button
+          key={key}
+          type="button"
+          className={
+            isActive
+              ? 'ps-paper-blank ps-paper-blank--clickable ps-paper-blank--active'
+              : 'ps-paper-blank ps-paper-blank--clickable'
+          }
+          aria-pressed={isActive}
+          aria-label={`聚焦第 ${blankNo} 题`}
+          onClick={() => blankFocus.onQuestionClick(questionId)}
+        >
+          {blankNo}
+        </button>,
+      )
+    } else {
+      nodes.push(
+        <span key={key} className="ps-paper-blank">
+          {blankNo}
+        </span>,
+      )
+    }
     cursor = match.index + match[0].length
     index += 1
   }

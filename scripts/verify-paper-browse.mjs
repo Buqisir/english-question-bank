@@ -1708,6 +1708,68 @@ assert(
   'handleSimilarAddToDraft does not reuse onAddGroupsToBasket(cards), does not clear selection, or wrongly closes the result list',
 )
 
+// ─── 60-67. lecture-rail-scroll-fix (讲评态 cloze/七选五 点空显解析) ───
+
+assert(
+  "60. PaperBrowsePage: blankFocusMode local type widened to include 'paper-blank'",
+  /let blankFocusMode:\s*'rail'\s*\|\s*'in-passage'\s*\|\s*'paper-blank'\s*\|\s*undefined/.test(pageSrc),
+  "missing the widened blankFocusMode local type",
+)
+assert(
+  "61. PaperBrowsePage: 讲评态 cloze/sevenChoices wire blankFocusMode='paper-blank', independent of whether lectureEntry has resolved",
+  /if \(lectureOpen && \(entry\.kind === 'cloze' \|\| entry\.kind === 'sevenChoices'\)\) \{\s*\n\s*blankFocusMode = 'paper-blank'/.test(
+    pageSrc,
+  ),
+  "missing the lectureOpen-gated, lectureEntry-independent 'paper-blank' wiring",
+)
+assert(
+  '62. PaperBrowsePage: every blankFocusMode assignment is gated on lectureOpen (挑题态 stays undefined — no click-noise)',
+  (pageSrc.match(/blankFocusMode = /g) || []).length === 2 &&
+    /lectureOpen && entry\.kind === 'grammarFill'[\s\S]{0,160}blankFocusMode = 'in-passage'/.test(pageSrc) &&
+    /if \(lectureOpen && \(entry\.kind === 'cloze'[\s\S]{0,120}blankFocusMode = 'paper-blank'/.test(pageSrc),
+  'a blankFocusMode assignment is not lectureOpen-gated, or the count drifted',
+)
+assert(
+  "63. PaperSurface.tsx: the __global__ option-pool and rail suppression conditions are narrowed to blankFocus?.renderer !== 'grammar-fill' (was bare !blankFocus) — 'paper-blank' mode no longer suppresses either",
+  (paperSurfaceSrc.match(/blankFocus\?\.renderer !== 'grammar-fill'/g) || []).length === 2 &&
+    !/&&\s*!blankFocus\s*&&/.test(paperSurfaceSrc),
+  "expected exactly 2 occurrences of the narrowed condition and zero remaining bare '!blankFocus' suppression checks",
+)
+assert(
+  "64. PaperSurface.tsx: 'paper-blank' mode has its own clickable-blank renderer (renderTextWithClickablePaperBlanks) isolated from I15's grammar-fill renderer, with a defensive static-span fallback when a blank number resolves to no question",
+  /function renderTextWithClickablePaperBlanks/.test(paperSurfaceSrc) &&
+    /blankFocus\?\.renderer === 'paper-blank'[\s\S]{0,40}renderTextWithClickablePaperBlanks/.test(paperSurfaceSrc) &&
+    /if \(questionId\) \{[\s\S]{0,700}\} else \{[\s\S]{0,120}<span key=\{key\} className="ps-paper-blank">/.test(
+      paperSurfaceSrc,
+    ),
+  'missing the isolated paper-blank renderer or its non-interactive fallback span',
+)
+assert(
+  "65. PaperSurface.tsx: 'rail'/'in-passage' behavior is untouched — the historical static span renderer (paperBlankPattern loop, {match[1]} content, .ps-paper-blank class) and renderTextWithGrammarFillBlanks both still exist byte-for-byte",
+  /paperBlankPattern\.exec\(text\)\) !== null\) \{[\s\S]{0,200}\{match\[1\]\}/.test(paperSurfaceSrc) &&
+    /function renderTextWithGrammarFillBlanks/.test(paperSurfaceSrc),
+  'the historical rail-mode static renderer or the grammar-fill renderer appears to have been disturbed',
+)
+assert(
+  '66. PaperSurface.css declares a clickable paper-blank button variant that keeps the .ps-paper-blank box (button.ps-paper-blank.ps-paper-blank--clickable) plus hover/focus-visible affordance and an --active focused state',
+  /button\.ps-paper-blank\.ps-paper-blank--clickable/.test(paperSurfaceCssSrc) &&
+    /\.ps-paper-blank--clickable:hover/.test(paperSurfaceCssSrc) &&
+    /\.ps-paper-blank--clickable:focus-visible/.test(paperSurfaceCssSrc) &&
+    /\.ps-paper-blank--active/.test(paperSurfaceCssSrc),
+  'missing the paper-blank clickable button CSS variant',
+)
+assert(
+  '67. paperBrowsePage.css: 讲评态 (.paper-browse-shell--lecture-open) hides .paper-browse-group-actions — base state AND the :hover/:focus-within reveal rules (paper-blank buttons trigger :focus-within on click, which must not resurface the 加入草稿卷 button)',
+  /\.paper-browse-shell--lecture-open \.paper-browse-group-actions,/.test(pageCssSrc) &&
+    /\.paper-browse-shell--lecture-open \.paper-browse-group-card:hover \.paper-browse-group-actions,/.test(
+      pageCssSrc,
+    ) &&
+    /\.paper-browse-shell--lecture-open \.paper-browse-group-card:focus-within \.paper-browse-group-actions \{\s*\n\s*display:\s*none;/.test(
+      pageCssSrc,
+    ),
+  'missing the 讲评态 group-actions hide rule (base + hover + focus-within)',
+)
+
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)
   process.exit(1)
