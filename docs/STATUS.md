@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-10（八刀收官；六刀待部署；High 议题1+3 grilling 闭环，暖纸转正小刀新立，议题2 待专场）
+Last updated: 2026-07-10（八刀收官并已全部部署生产 e6644e2；High 议题1+3 grilling 闭环，暖纸转正小刀新立，议题2 待专场）
 
 ## 现在是什么
 
@@ -38,8 +38,11 @@ Last updated: 2026-07-10（八刀收官；六刀待部署；High 议题1+3 grill
   写作卡选中罩上缘下移到提示起始线（量高 --pb-writing-cut-top），
   写作例外撤销、前组底线回归、写作组自身入底线账——不变量全站成立，
   写作不再例外。挂账：老解析页 harness 卷面 fig-token 残口（watch
-  ledger，随孤儿支退役刀收）。**六刀攒待部署，owner 下会话 High 档
-  三议题后一起上**（议程见开放账本）。
+  ledger，随孤儿支退役刀收）。**六刀已于 2026-07-10 部署生产**
+  （e6644e2，分步流程：pull→install→build→restart，health ok、
+  eqbank.cc 200；draft-depassage-letter owner QA 本地已过——QA 中撞上
+  草稿卷含空号坏组 group-960d0f8d-grammar-fill 被新硬断言正确拒渲，
+  QA 草稿卷已摘除该组，坏组本体仍在数据健康账）。
 - 2026-07-10：**UI P1 双刀收官 + 签名微动效**：ui-p1-shell（merge
   e7f1dff，CR 0 MF，SW-1 两处行级焦点收口闭）+ ui-p1-panels（merge
   228e653，CR 0 MF，SW-1/2 收口闭：枚举中文兜底/选择器加固）——审计
