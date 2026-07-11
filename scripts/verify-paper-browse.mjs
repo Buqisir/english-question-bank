@@ -1797,6 +1797,13 @@ assert(
     !/requestAnimationFrame\(settle\)/.test(pageSrc),
   'missing the setTimeout-driven settle loop (re-query, still-checks gate, user-input cancel, deadline) or a leftover rAF-driven variant',
 )
+assert(
+  '71. scrollToAnchor 重入防护（CR D-MF1）：retire-then-replace——入口先退掉上一轮巡检（scrollSettleCancelRef），cancel 自清把手（仅当把手仍指向自己），杜绝连点 rail 项时双循环互抢滚动',
+  /scrollSettleCancelRef\.current\?\.\(\)/.test(pageSrc) &&
+    /scrollSettleCancelRef\.current = cancel/.test(pageSrc) &&
+    /if \(scrollSettleCancelRef\.current === cancel\) scrollSettleCancelRef\.current = null/.test(pageSrc),
+  'missing the retire-then-replace reentry guard on the settle loop',
+)
 
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)

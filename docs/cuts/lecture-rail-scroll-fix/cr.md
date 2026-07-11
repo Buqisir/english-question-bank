@@ -167,3 +167,75 @@ agent's browser QA (per plan's acceptance), which is the correct owner for that 
 右栏解析；语法填空回归；挑题态无 affordance；讲评态加卷钮不再出现；冷加载+立点 rail
 留观①/scrollspy 留观③) is signed off and main CI is green. Consider folding S1
 (`color: inherit`) into this cut or the next PaperSurface刀 for I15 parity.
+
+---
+
+# Delta CR — QA round + S1 fix (2026-07-11)
+
+Scope: only the two new commits `b56a230` (S1) + `cf9d557` (QA round).
+`git diff HEAD~2..HEAD -- app scripts` — 4 files (PaperBrowsePage.tsx,
+PaperSurface.tsx, PaperSurface.css, verify-paper-browse.mjs). No forbidden surface,
+no `types.d.ts` (blankQuestionIdByNo added to the LOCAL wrapper type only — consistent
+with S2). Re-ran: verify-paper-browse **195/0**, app tsc **0**. Assertions 68-70 read
+and confirmed to track the real new strings (incl. the `!requestAnimationFrame(settle)`
+guard against a leftover rAF variant — not fake-green).
+
+## Delta Findings
+
+### Must Fix
+
+**D-MF1 — scroll-patrol reentrancy: consecutive rail clicks spawn competing patrol
+loops that can yank the viewport back to a stale anchor (`scrollToAnchor`,
+PaperBrowsePage ~L1099).** The `settle` loop keeps ALL state in function-local
+closure (`cancelled`, `timer`, the three window listeners). There is no ref /
+module-level handle to the active patrol, so a second `scrollToAnchor(B)` call does
+**not** retire the patrol still running for anchor A — the two loops coexist for up
+to 5s each. The cancel set is `wheel` / `touchstart` / `keydown` only; a **mouse
+click** on another rail item fires none of these, so on desktop (the owner's primary
+device) clicking rail B while A's patrol is live leaves both running. Failure mode:
+after B's smooth-scroll settles, loop A re-queries anchor A (now scrolled off-screen,
+`|top| > 4`), sees it stationary for ≥3 ticks (~450ms), and hard-`scrollIntoView`s
+back to A — then loop B corrects to B — ping-pong until the deadlines expire. This
+directly regresses the scroll behavior this commit exists to fix, and is reachable by
+ordinary multi-item lecture navigation (it was NOT in the single-click QA that passed).
+Note: touch devices self-heal (the new tap's `touchstart` cancels prior loops before
+the click creates the new one) — desktop mouse does not.
+Fix (cheap, DEV's call): stash the active patrol's `cancel` in a ref and invoke the
+previous one at the top of `scrollToAnchor` before starting a new patrol (retire-then-
+replace); a fresh programmatic navigation should supersede, not race, the prior one.
+
+### Should Watch
+
+**D-SW1 — `blankQuestionIdByNo` is a fresh object literal every render (churns the
+sevenChoices surface's blankFocus memo).** It is built inside `renderGroupBody`
+(a plain per-render function, not memoized), so each PaperBrowsePage render — including
+every scrollspy `activeAnchor` update during a scroll — produces a new object identity,
+which is in `PaperSurface`'s `blankFocus` `useMemo` deps, forcing that memo to recompute
+and the sevenChoices surface subtree to re-render. Cost is O(questions) per rebuild and
+only affects sevenChoices groups (cloze/others pass `undefined`, a stable identity, so
+they are unaffected). On single-teacher small papers this is negligible, so it does not
+block; if it ever shows up, memoize `blankQuestionIdByNo` keyed on `asset`/`groupId`.
+The merge itself (fill-gaps-only, `questions`-derived wins on conflict; for sevenChoices
+`questions` is `[]` so no conflict; ignored in rail mode) is logically correct and
+browser-QA-proven to resolve the blank→panel联动.
+
+**D-SW2 — patrol runs ~33 idle ticks (`getBoundingClientRect` every 150ms for 5s) even
+on the happy single-click path.** Harmless (self-cancels at deadline, listeners removed),
+noted only as the tail cost of the setTimeout approach; no action needed.
+
+## S1 verification (no omission)
+
+`color: inherit` added to `button.ps-paper-blank.ps-paper-blank--clickable` — the base
+clickable rule. The number text now inherits surface ink and the `currentColor`
+border-bottom underline + `:focus-visible` outline follow it; the `--clickable:hover`
+and `--active` rules set only `background-color`, so they inherit the same color. The
+static-fallback `<span>.ps-paper-blank` inherits naturally. No state left on UA
+`buttontext`. S1 fully closed.
+
+## Delta Verdict
+
+**APPROVE WITH MUST FIX.** S1 is closed and the sevenChoices mapping fix is correct and
+QA-proven. The single blocker is D-MF1: the scroll patrol must retire its prior loop on
+a new invocation before merge, otherwise normal desktop multi-click navigation can
+yank the viewport back to a stale anchor for up to 5s. D-SW1/D-SW2 do not block.
+Prior (base) CR verdict and its S1-S3 stand; S1 is now resolved.

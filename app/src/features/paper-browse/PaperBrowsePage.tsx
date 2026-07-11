@@ -318,6 +318,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
   const [similarToast, setSimilarToast] = useState<string | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
+  // CR D-MF1：活跃沉降巡检的退场把手——scrollToAnchor 重入时先退旧循环
+  // 再起新的（桌面端连点 rail 项不触发 wheel/touch/keydown，若无此把手
+  // 两个循环并存互抢滚动打 ping-pong）。
+  const scrollSettleCancelRef = useRef<(() => void) | null>(null)
   const focusAppliedRef = useRef(false)
   // 刀 3: 入口带态的 questionId 预选只应用一次（asset 首次加载完成后）；
   // 与 focusAppliedRef 分开计——预选可能比滚动多等一拍（cloze/grammarFill
@@ -1105,6 +1109,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       scrollerRef.current?.querySelector<HTMLElement>(
         `[data-paper-browse-anchor="${cssAttr(anchor)}"]`,
       ) ?? null
+    // CR D-MF1：retire-then-replace——先退掉仍在跑的上一轮巡检。
+    scrollSettleCancelRef.current?.()
     const target = queryTarget()
     suppressScrollspyClear()
     target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' })
@@ -1126,7 +1132,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       window.removeEventListener('wheel', cancel)
       window.removeEventListener('touchstart', cancel)
       window.removeEventListener('keydown', cancel)
+      if (scrollSettleCancelRef.current === cancel) scrollSettleCancelRef.current = null
     }
+    scrollSettleCancelRef.current = cancel
     window.addEventListener('wheel', cancel, { passive: true })
     window.addEventListener('touchstart', cancel, { passive: true })
     window.addEventListener('keydown', cancel)
