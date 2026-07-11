@@ -23,6 +23,15 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
 
 ## 主线焦点
 
+- 2026-07-11：**lecture-rail-scroll-fix 收官**（merge 9d67880，CR 两轮
+  APPROVE（base 0MF + delta D-MF1 已修销账），main CI 绿）：讲评态
+  七选五/完形点空显解析（PaperSurface 'paper-blank' 模式，rail/选项池
+  不压）；QA 实抓七选五 adapter questions 有意为空致映射全空（asset
+  补喂修）；rail 不滚定性=遮挡态 rAF 冻结致 smooth 动画走不完+冷加载
+  内容推移，sTimeout 沉降巡检双收（retire-then-replace 防重入）；讲评态
+  悬浮加卷钮隐藏。**owner QA 待做**（重点：真机聚焦窗口 rail 高亮跟手）。
+  挂账 cr.md SW×4；机会：'paper-blank' 渲染器天然认 `__NN__`，语法填空
+  点空旧账或一行可销（归 data-health 批评估）。**生产未部署**。
 - 2026-07-10：**draft-numbering-style 收官（三轮 DEV）+ dashed-line-unify
   收官**（merge dfa42c1 / 968d810，均 main CI 绿）：① B 形态编号
   （owner QA 二轮改判）——汉字大题头「一、二…」+ 小题 1-N 全卷连续
