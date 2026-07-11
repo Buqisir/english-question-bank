@@ -233,8 +233,12 @@
   margin-top: 18px;
 }
 
+/* 暖纸转正（owner 拍板 2026-07-10，色温法）：预览桌换暖纸桌 token（复用
+ * paperBrowsePage 页基底同一色温，见 index.css --paper-desk-bg 注释），
+ * 收专项审计 P0-D1「纸背糊死」/ owner 议题3「A4 预览背景灰怪」——桌面
+ * 是纯色暖调，不引入渐变。 */
 .draft-preview-desk {
-  background: var(--surface-strong);
+  background: var(--paper-desk-bg);
   border: 1px solid var(--line);
   border-radius: 8px;
   min-width: 0;
@@ -254,7 +258,10 @@
   background: transparent;
   border: 0;
   /* D1: Resting-tier shadow (DESIGN.md §4 Elevation) so the A4 sheet reads
-     as paper resting on the desk instead of blending into the background. */
+     as paper resting on the desk instead of blending into the background.
+     暖纸转正 confirms this exact 0 1px 2px rgba(30,30,28,.06) 量级 against
+     the now-warm .draft-preview-desk — no change needed, value already
+     matches plan.md's spec. */
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   margin: 0 auto;
   max-width: min(100%, 820px);
