@@ -66,7 +66,19 @@ Use these to prevent review from expanding forever.
 - No blocking user-visible experience issue remains.
 - Polish items are recorded as follow-up, not absorbed into the current cut.
 
-## Finding Semantics
+## Hit-Rate Adaptive Depth（命中率降档，owner 拍板 2026-07-10）
+
+评审深度跟实测命中率走，不跟焦虑走：
+
+- **降档**：同一刀类（如纯 UI polish / 纯 docs / 纯 CSS token 替换）连续
+  **3 把** fresh CR 均 0 Must Fix，则该类默认降为 CR-lite（主代理冷读
+  diff），并保留**随机抽查**：每 3-4 把该类刀抽 1 把仍走 fresh CR。
+- **回升**：抽查或任何渠道在该类命中 1 个 Must Fix，该类**立即**回到
+  fresh CR 默认档，重新累计。
+- **不适用**：L4 高危面（数据/迁移/导出/print）、首次触碰的新面、以及
+  AGENTS 不可逆触发器覆盖的刀——这些永不降档。
+- 判断依据就是 STATUS 收官行里的 CR 结论记录（"CR APPROVE 0 MF"），
+  不另建表。降档决定由主代理在派工时一句话记录在 plan/派工 prompt 里。
 
 - **Must Fix**: blocks the current PR.
 - **Should Watch**: record and monitor; do not automatically turn it into a task.
