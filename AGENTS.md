@@ -48,6 +48,20 @@ not mass-rename history.
   downgrade reason goes in the plan header and CR must review it.
 - Workflows (deterministic multi-agent fan-out) are allowed for parallel
   work; each `agent()` call sets `model` explicitly per the tier table.
+- **Routine-cut Workflow pipeline**（固化 2026-07-11，owner 拍板；首跑
+  实证 warm-paper-promotion，账单
+  `docs/cuts/warm-paper-promotion/pilot-token-bill.md`）：**例行刀默认走
+  Workflow 三步流水线**——DEV → verify 复核 → fresh CR 脚本串行。适用
+  判据（三条全满足）：plan 预写充分、预期一次通过、不碰契约面/不可逆
+  面。硬纪律四条：① 每个 `agent()` 显式钉 model+effort（DEV=Sonnet/
+  medium、verify=Sonnet/low、CR=Opus/high），严禁默认继承；② 1:1 不
+  扇出（每步单代理，不加验证票评审票）；③ verify 复核代理是主代理
+  亲跑的等价替身，回执必须带**原始退出码**，verify 红或工作树有残留
+  即中止返回；④ 主代理只出现在裁决点（MF 判定、QA、merge）。契约面
+  / 高返工风险 / 需要步间判断的刀保留常规管线（主代理逐步编排）。
+  worktree 由主代理预建并在三个 agent prompt 里传同一路径（脚本内
+  无 shell，不用 `isolation:'worktree'`——那会给每个代理开独立副本，
+  断掉流水线的文件传递）。
 - **Parallel cut pipeline**（固化 2026-07-08，两轮实战：#279/#280 与
   surface-question-policy/detail-slim）：多把刀可并行施工，硬条件三条——
   ① 派工前主代理核对文件面零交集，有交点必须在两边 plan 里钉死边界；
