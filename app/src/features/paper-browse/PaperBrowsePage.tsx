@@ -318,6 +318,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
   const [similarToast, setSimilarToast] = useState<string | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
+  // CR D-MF1：活跃沉降巡检的退场把手——scrollToAnchor 重入时先退旧循环
+  // 再起新的（桌面端连点 rail 项不触发 wheel/touch/keydown，若无此把手
+  // 两个循环并存互抢滚动打 ping-pong）。
+  const scrollSettleCancelRef = useRef<(() => void) | null>(null)
   const focusAppliedRef = useRef(false)
   // 刀 3: 入口带态的 questionId 预选只应用一次（asset 首次加载完成后）；
   // 与 focusAppliedRef 分开计——预选可能比滚动多等一拍（cloze/grammarFill
@@ -1099,12 +1103,65 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   function scrollToAnchor(anchor: string): void {
     const scroller = scrollerRef.current
     if (!scroller) return
-    const target = scroller.querySelector<HTMLElement>(
-      `[data-paper-browse-anchor="${cssAttr(anchor)}"]`,
-    )
-    if (!target) return
+    // 每次都从 ref 取活节点：冷加载沉降期 scroller 容器本身也可能被
+    // 替换，闭包捕获的旧节点 detached 后 querySelector 永远查空。
+    const queryTarget = () =>
+      scrollerRef.current?.querySelector<HTMLElement>(
+        `[data-paper-browse-anchor="${cssAttr(anchor)}"]`,
+      ) ?? null
+    // CR D-MF1：retire-then-replace——先退掉仍在跑的上一轮巡检。
+    scrollSettleCancelRef.current?.()
+    const target = queryTarget()
     suppressScrollspyClear()
-    target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' })
+    target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' })
+    // 留观① QA 定性后按实修（triage 拍板「再现按竞态修」）：两种真实
+    // 失效都收——① 冷加载沉降期题组模型异步落地，scrollIntoView 只按
+    // 当下位置算一次，目标被后续布局推走；② smooth 滚动动画由渲染帧
+    // 驱动，窗口被遮挡/后台时 rAF 冻结，动画永远走不完（QA 实测
+    // rafRan=false，正是「高亮动了、卷面不动」的机制）。故沉降循环用
+    // setTimeout（遮挡态照跑）每 150ms 巡检 5s：位置静止 ≥3 拍仍明显
+    // 偏离才用 behavior:'auto' 硬校准（不打断进行中的 smooth 动画）；
+    // 用户 wheel/touchstart/keydown 立即让位；每拍重查询锚点（沉降期
+    // 节点可能尚未挂载或被替换，捕获引用会拿到 detached 节点）。
+    const deadline = performance.now() + 5000
+    let cancelled = false
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const cancel = () => {
+      cancelled = true
+      if (timer !== undefined) clearTimeout(timer)
+      window.removeEventListener('wheel', cancel)
+      window.removeEventListener('touchstart', cancel)
+      window.removeEventListener('keydown', cancel)
+      if (scrollSettleCancelRef.current === cancel) scrollSettleCancelRef.current = null
+    }
+    scrollSettleCancelRef.current = cancel
+    window.addEventListener('wheel', cancel, { passive: true })
+    window.addEventListener('touchstart', cancel, { passive: true })
+    window.addEventListener('keydown', cancel)
+    let lastTop = Number.NaN
+    let stillChecks = 0
+    const settle = () => {
+      if (cancelled) return
+      if (performance.now() > deadline) {
+        cancel()
+        return
+      }
+      const el = queryTarget()
+      if (!el) {
+        lastTop = Number.NaN
+        stillChecks = 0
+      } else {
+        const top = el.getBoundingClientRect().top
+        stillChecks = Math.abs(top - lastTop) < 1 ? stillChecks + 1 : 0
+        lastTop = top
+        if (stillChecks >= 3 && Math.abs(top) > 4) {
+          el.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
+          stillChecks = 0
+        }
+      }
+      timer = setTimeout(settle, 150)
+    }
+    timer = setTimeout(settle, 150)
   }
 
   // 刀 2: 点题选中 —— 种下的 evidenceId/optionLabel 逻辑镜像
@@ -1241,12 +1298,38 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     // 挑题态(!lectureOpen)永远用 plain surfaceData —— 零解析噪音不变量。
     const lectureEntry = lectureAnalysisByGroupId[groupId]
     let surfaceData = entry.model.surfaceData
-    let blankFocusMode: 'rail' | 'in-passage' | undefined
+    let blankFocusMode: 'rail' | 'in-passage' | 'paper-blank' | undefined
     if (lectureOpen && entry.kind === 'cloze' && lectureEntry?.kind === 'cloze') {
       surfaceData = lectureEntry.model.surfaceData
     } else if (lectureOpen && entry.kind === 'grammarFill' && lectureEntry?.kind === 'grammarFill') {
       surfaceData = lectureEntry.model.surfaceData
       blankFocusMode = 'in-passage'
+    }
+    // lecture-rail-scroll-fix: cloze / 七选五 blanks become clickable
+    // focus buttons in lecture mode — independent of whether
+    // lectureEntry has resolved (点空即联动右栏, the panel's own
+    // analysis fetch is a separate concern). 挑题态(!lectureOpen) never
+    // sets this — blanks stay non-interactive, zero click-noise
+    // invariant unchanged.
+    if (lectureOpen && (entry.kind === 'cloze' || entry.kind === 'sevenChoices')) {
+      blankFocusMode = 'paper-blank'
+    }
+    // QA fix: 七选五 surfaceData.questions is intentionally [] (the A-G
+    // pool renders via optionBank, never per-question rows), so the
+    // blank → questionId map derived inside PaperSurface would be empty
+    // and every blank would fall back to the non-interactive span. Feed
+    // the mapping from the asset itself. Cloze needs nothing — its
+    // adapter emits real per-question rows.
+    let blankQuestionIdByNo: Record<string, string> | undefined
+    if (blankFocusMode === 'paper-blank' && entry.kind === 'sevenChoices') {
+      const group = asset?.content.groups[groupId]
+      if (group) {
+        blankQuestionIdByNo = {}
+        for (const questionId of group.questionIds) {
+          const no = asset?.content.questions[questionId]?.questionNo
+          if (no !== undefined && no !== null) blankQuestionIdByNo[String(no)] = questionId
+        }
+      }
     }
 
     const isPanelGroup = lectureOpen && panelGroupId === groupId
@@ -1267,6 +1350,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         readingFocusBySection={{}}
         onFocusIntent={lectureOpen ? (intent) => handleGroupFocusIntent(groupId, intent) : () => {}}
         blankFocusMode={blankFocusMode}
+        blankQuestionIdByNo={blankQuestionIdByNo}
       />
     )
     if (entry.kind === 'writing') {

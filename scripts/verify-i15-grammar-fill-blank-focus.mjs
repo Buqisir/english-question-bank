@@ -7,8 +7,13 @@
  *  Step 1 — prop + rail suppression:
  *    - shared/papersurface/types.d.ts declares blankFocusMode (PA MF-2)
  *    - PaperSurface destructures blankFocusMode default 'rail'
- *    - rail (PaperSurfaceQuestionList) is gated by `!blankFocus` (both the
- *      section list and the global list)
+ *    - rail (PaperSurfaceQuestionList) is gated by
+ *      `blankFocus?.renderer !== 'grammar-fill'` (both the section list and
+ *      the global list) — [lecture-rail-scroll-fix, 2026-07-11] narrowed
+ *      from the original bare `!blankFocus` guard so a second clickable
+ *      mode ('paper-blank', cloze/七选五) can share the same BlankFocusContext
+ *      without also suppressing the rail; the 'in-passage' (grammar-fill)
+ *      suppression behavior itself is unchanged.
  *
  *  Step 2 — clickable in-passage blanks (GATE: isolation + SW-1):
  *    - grammarFillBlankPattern matches `56._____` / `57._____(absorb)`,
@@ -56,10 +61,12 @@ const PS = 'app/src/shared-ui/papersurface/PaperSurface.tsx'
 const psSrc = readSrc(PS)
 assert('Step 1: PaperSurface destructures blankFocusMode default rail',
   /blankFocusMode\s*=\s*'rail'/.test(psSrc))
-// Rail suppressed when blankFocus is set (both list sites gated by !blankFocus).
-const railGuards = (psSrc.match(/&&\s*!blankFocus\s*&&/g) || []).length
-assert('Step 1: both rail render sites gated by !blankFocus', railGuards >= 2,
-  `found ${railGuards} !blankFocus guards`)
+// Rail suppressed ONLY in 'in-passage' mode (both list sites gated by
+// blankFocus?.renderer !== 'grammar-fill' — see lecture-rail-scroll-fix
+// header note above for why this narrowed from the original !blankFocus).
+const railGuards = (psSrc.match(/blankFocus\?\.renderer !== 'grammar-fill'/g) || []).length
+assert("Step 1: both rail render sites gated by blankFocus?.renderer !== 'grammar-fill'", railGuards >= 2,
+  `found ${railGuards} narrowed guards`)
 
 // ============================================================
 // Step 2 — pattern isolation + SW-1 (real exported helper)
@@ -101,9 +108,12 @@ assert('Step 2: button active state from lectureFocus via activeQuestionId (SW-3
   psSrc.includes('blankFocus.activeQuestionId === questionId') && psSrc.includes('aria-pressed={isActive}'))
 assert('Step 2 SW-2: unmatched blank → non-interactive span (no dead button)',
   psSrc.includes("className=\"ps-paper-blank-text\""))
-// 'rail' path: renderer falls through to the historical span path (zero new behavior).
-assert('Step 2: rail path falls through when blankFocus null',
-  /if \(blankFocus\)\s*\{\s*return renderTextWithGrammarFillBlanks/.test(psSrc))
+// 'rail' path: renderer falls through to the historical span path (zero new
+// behavior) — dispatch narrowed to the 'grammar-fill' renderer specifically
+// [lecture-rail-scroll-fix, 2026-07-11] so a second clickable mode
+// ('paper-blank') can share BlankFocusContext without hijacking this branch.
+assert("Step 2: rail path falls through when blankFocus is null or renderer !== 'grammar-fill'",
+  /if \(blankFocus\?\.renderer === 'grammar-fill'\)\s*\{\s*return renderTextWithGrammarFillBlanks/.test(psSrc))
 
 // ============================================================
 // Step 3 — harness wiring (source)

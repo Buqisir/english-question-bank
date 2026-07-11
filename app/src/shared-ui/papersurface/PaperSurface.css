@@ -238,6 +238,42 @@
   font-weight: 600;
 }
 
+/* ─── lecture-rail-scroll-fix: clickable cloze/七选五 paper blank ── *
+ * 'paper-blank' focus mode only. Keeps `.ps-paper-blank`'s fixed-width
+ * box / underline / centered-number visual byte-identical to the
+ * static span (same base class), layering hover/active clickability
+ * affordance + an `--active` focused state — same tokens/pattern as
+ * I15's grammar-fill blank button above. */
+button.ps-paper-blank.ps-paper-blank--clickable {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  /* CR S1: buttons keep UA `buttontext` color (global button rule only
+     inherits font) — inherit so the number + currentColor underline
+     follow the surface ink, same as I15's grammar-fill button. */
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ps-paper-blank--clickable:hover {
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.ps-paper-blank--clickable:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+.ps-paper-blank--active {
+  background-color: color-mix(in srgb, currentColor 16%, transparent);
+  font-weight: 600;
+}
+
 /* ─── Evidence anchors (neutral, invisible in B3) ──────────────── */
 
 .ps-evidence-anchor {

@@ -344,6 +344,17 @@
   }
 }
 
+/* lecture-rail-scroll-fix: 讲评态隐藏「加入草稿卷」悬浮钮——挑题态专属
+ * 操作，讲评态入侵是审计条目（ui-p1-panels #3 未覆盖，归本刀）。
+ * paper-blank 按钮化后点空会把 `.paper-browse-group-card` 的
+ * `:focus-within` 点亮，若不一并覆盖会连带把这枚钮误弹出来——三条选择器
+ * 都要收（基础态 + hover + focus-within），specificity 高于原规则。 */
+.paper-browse-shell--lecture-open .paper-browse-group-actions,
+.paper-browse-shell--lecture-open .paper-browse-group-card:hover .paper-browse-group-actions,
+.paper-browse-shell--lecture-open .paper-browse-group-card:focus-within .paper-browse-group-actions {
+  display: none;
+}
+
 /* ─── 写作题组（应用文/续写）的剪刀线 — CSS-only ───
  *
  * WritingPaperPage.tsx / writingPageModel.mjs 是 Forbidden 范围
