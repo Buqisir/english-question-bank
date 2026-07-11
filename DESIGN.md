@@ -21,6 +21,11 @@ colors:
   success: "#059669"
   warning: "#d97706"
   danger: "#dc2626"
+  paper-bg: "#f4f1ea"
+  paper-desk-bg: "var(--paper-bg)" # 复用 --paper-bg，勿写死字面值
+  paper-ink: "#4a4438"
+  paper-ink-strong: "#2c2820"
+  paper-border: "#e6e2d7"
 typography:
   ui:
     fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
@@ -130,15 +135,24 @@ components:
 
 语义色取成熟的中性专业工具惯用值（与"专业工具台"方向自洽），非旧暖纸方向的暖化值。它们作 chip 底 / 边 / 图标 / 大字（≥3:1）合格；**作小正文文字对浅底仅约 3–4.5:1，是跨文件语义色统一 + AA 达标的既有债**，留待独立刀，不在配色刀内落地。
 
+### Paper（暖纸系，色温法专属 token 家族 — 仅纸页壳，见下方 The Warm-Paper Boundary）
+- **Paper Bg 纸页底** (#F4F1EA): 整卷/讲评页页基底暖米、工作台预览暖纸桌（`--paper-desk-bg` 复用同值）。
+- **Paper Ink 暖墨** (#4A4438): 纸页壳次级正文/rail 项/答案行文字。
+- **Paper Ink Strong 暖墨·强** (#2C2820): 纸页壳标题、选中态文字。
+- **Paper Border 暖边** (#E6E2D7): 讲评栏面板边线。
+- 收编自 paper-browse/讲评页历史暖色硬编码的**等值转正**（零视觉变化），不是新配色决策；实现见 `app/src/index.css` `--paper-*` 定义 + `paperBrowsePage.css` / `DraftPaperWorkbench.css` 引用。
+
 ### Named Rules
 
 **The Green-Pen Rule（绿笔原则）.** 墨绿是签名，不是壁纸。强调色（墨绿任一档）合计占任一屏 ≤10%；它的稀有正是其分量所在。要铺面，铺中性，不铺墨绿。所有绿只取自上面这条色阶梯子（色相锁定 H≈166），**不掺任何别的色相的绿**（不掺青、不掺草绿、不掺 emerald 亮绿）。
 
 **The True-Neutral Rule（中性底原则）.** 底与面是真中性（chroma≈0，#F6F6F4 / #FFFFFF / #EDEDEA），既不偏冷 slate 蓝，也不偏暖米黄。"温度"由墨绿签名、排版、留白和文案口吻承载，不由背景染色承载。（历史上的"配色锁定/禁改 token"铁律已随墨绿方向作废：token 现在是一套可维护的设计系统，改色是正当的设计决策，但**必须同步更新钉死颜色的 CI 断言**，否则回归护栏会误报。）
 
-**The Warm-Paper Boundary（暖纸边界，owner 拍板 2026-07-09）.** 「纸面内容」与「页面壳」适用两套规则：**卷面本体**（PaperSurface 及其内的试卷正文、题目、答题区——模拟真实试卷纸的那一层）允许保留暖纸质感（暖米底、暖墨字），那是内容的物理隐喻；**页面壳**（页基底、顶栏、工具栏、侧栏、面板、按钮、chip 等一切 chrome）必须走本文件的中性 token 体系 + 墨绿签名，无例外。壳层出现暖米色即违规。现存 paper-browse 壳层的暖米硬编码是待收编的历史债（2026-07-10 审计实测 18 处 + harness 讲评面板 41 处，独立刀：收编为 token 或归中性），新代码不得效仿。`readingAnalysis.css` 整页暖系**不豁免也不整改**（owner 拍板 2026-07-10）：该页是待退役孤儿支（flow-panel 刀 3 挂账），随退役刀一并销账，不作为暖纸边界的合法例外先例。
+**The Warm-Paper Boundary / 色温法（暖纸边界，owner 拍板 2026-07-09，割裂议题 grilling 落锤 2026-07-10 改判——docs/cuts/draft-desk/program.md 关联决策）.** 病根是「纸不像纸」：纸页要读出"纸"的物理隐喻，工具页要读出"工具"的中性专业感——两套色温是设计意图，不是分裂事故。**纸页入暖**：整卷页 / 讲评页 / 工作台预览（桌 + A4 纸面）统一走 `--paper-*` token 家族（见上方 Paper 小节）；**工具页中性**：home / 找题 / admin / my-space 等一切工具 chrome 仍走本文件的中性 token 体系 + 墨绿签名，无例外。纸页现存的暖色硬编码是**等值转正**为 `--paper-*` token（暖纸转正小刀，零视觉变化），不是新引入的颜色——新代码在纸页范围内可以直接用 `--paper-*`，在工具页范围内仍不得出现暖米色。`readingAnalysis.css` 整页暖系**不豁免也不整改**（owner 拍板 2026-07-10）：该页是待退役孤儿支（flow-panel 刀 3 挂账），随退役刀一并销账，不作为色温法的合法例外先例；my-space 微缩 A4 卡＝暖纸卡浮中性页（卡本身可暖，卡外的 my-space 页壳仍中性）。
 
 **The Deletion-Cost Rule（成本定交互，owner 拍板 2026-07-10）.** 删除交互不追求全站同一形态，追求同一**规则**：**可恢复的删除**（对象还在库里/可轻易重建，如工作台移除题组）= 即删 + toast 撤销，不设确认弹窗（低成本操作的确认弹窗只会训练确认盲点）；**不可逆的删除**（永久删除 + 有陪葬物，如个人空间删卷及其 PDF）= 具名确认模态（alertdialog，标题写明删什么、陪葬什么）。两处现状（工作台即删撤销 / my-space 模态确认）均符合本规则，2026-07-10 审计 P1#9「双标」判定以本规则闭环——差异是故意的、由删除成本决定。若未来某面要从确认模态改为即删撤销，先做软删除/回收站兜底。
+
+**The Personal-Space Naming Rule（命名法，owner 拍板 2026-07-10，割裂议题 grilling 落锤——docs/cuts/draft-desk/program.md 关联决策）.** 对外统一叫「个人空间」，页题弃用「已保存的草稿卷」；页内分区仍叫「草稿卷」（个人空间内部按草稿卷分组，不是同义重复）。本条只入条文——顶栏/页题/保存弹窗措辞的实施归卷宗柜刀。
 
 **The Single-Hue Rule（单色相强调）.** 全站强调只有墨绿一个色相（OKLCH H≈166）。**禁止**引入：SaaS 蓝（#3b82f6 / #2563eb 及一切 slate/blue，H≈250，是被淘汰的老经典模式）、科技紫（#6366f1 靛紫及一切 purple/violet）、赭红暖金红笔（旧"批注卷子"方向的遗留强调）。墨绿不是蓝——蓝在 H≈250，墨绿在 H≈166，色相边界清晰。语义色（success 绿 / warning 琥珀 / danger 红）是独立的状态语义，各守其位，不算强调色、不受墨绿预算约束。功能性分类色板（数据语义：如七选五线索组 data-seven-color 五色系、卷面证据色）不算强调色，不受单色相约束；新增分类色板需 UI direction 批准（本条 2026-07-08，小川/owner 委托）。
 

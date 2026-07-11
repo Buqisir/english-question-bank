@@ -21,6 +21,20 @@
   --coral-soft: var(--eqb-color-danger-soft);
   --coral-text: var(--eqb-color-danger);
 
+  /* ─── Paper family（暖纸系，色温法 — owner 拍板 2026-07-10，
+   * docs/cuts/draft-desk/program.md 关联决策「割裂议题 grilling 落锤」
+   * §2）: 纸页入暖（整卷/讲评/工作台预览=暖纸桌+暖纸），工具页仍走上方
+   * 中性 token。这组值是 paper-browse/讲评页历史暖色硬编码的等值转正
+   * （零视觉变化），供 paperBrowsePage.css / DraftPaperWorkbench.css
+   * 引用，条文见 DESIGN.md §2「The Warm-Paper Boundary」。 */
+  --paper-bg: #f4f1ea; /* 整卷/讲评页页基底暖米 */
+  --paper-desk-bg: var(--paper-bg); /* 工作台预览暖纸桌，复用同一色温 */
+  --paper-ink: #4a4438; /* 暖纸系正文/次级墨色（rail 项、答案行） */
+  --paper-ink-rgb: 74, 68, 56; /* 与 --paper-ink 同值，供 rgba() alpha 叠层复用 */
+  --paper-ink-strong: #2c2820; /* 暖纸系强调墨色（标题、选中态） */
+  --paper-ink-strong-rgb: 44, 40, 32; /* 与 --paper-ink-strong 同值 */
+  --paper-border: #e6e2d7; /* 暖纸系边线（讲评栏面板边） */
+
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
