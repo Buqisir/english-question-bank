@@ -239,3 +239,25 @@ QA-proven. The single blocker is D-MF1: the scroll patrol must retire its prior 
 a new invocation before merge, otherwise normal desktop multi-click navigation can
 yank the viewport back to a stale anchor for up to 5s. D-SW1/D-SW2 do not block.
 Prior (base) CR verdict and its S1-S3 stand; S1 is now resolved.
+
+---
+
+# Delta CR — D-MF1 fix (2026-07-11, commit e5972c5)
+
+Cold-read `git diff HEAD~1..HEAD`. `scrollSettleCancelRef` (useRef, L321) stores the
+active patrol's `cancel`; `scrollToAnchor` entry calls `scrollSettleCancelRef.current?.()`
+to retire the prior loop before starting a new one, then sets the ref to the new
+`cancel`. The self-clean `if (scrollSettleCancelRef.current === cancel) ... = null`
+only clears the ref when it still points to itself — so a stale/late cancel cannot
+wipe a newer patrol's handle. Retire happens before the ref is reassigned, so exactly
+one patrol runs at a time; the desktop multi-click ping-pong path is closed. Ref is a
+proper mutable useRef (no stale-closure). Assertion 71 tracks the three real strings.
+Re-ran independently: verify-paper-browse **196/0**, app tsc **0**. **D-MF1 closed.**
+
+## Final Verdict
+
+**APPROVE.** All Must Fix closed (base S1 fixed in b56a230; D-MF1 fixed in e5972c5).
+Remaining non-blocking Should Watch: S2 (local prop-type widening vs shared 2-value
+contract), S3 (verify-i15 co-change — justified/necessary), D-SW1 (blankQuestionIdByNo
+object identity churns the sevenChoices blankFocus memo — negligible at owner scale),
+D-SW2 (patrol idle ticks — harmless). Mergeable once main CI is green.
