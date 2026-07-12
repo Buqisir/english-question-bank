@@ -88,7 +88,8 @@ rise, move the daily default back to high.
   (housekeeping guard enforces this). After merging, confirm the `main` CI
   run is green before reporting the cut closed; refresh `docs/STATUS.md` at
   medium / large closeout (**hard cap ~5 lines per cut** — merge hash,
-  verdict, one-line scope, 挂账 pointers; detail lives in the cut dir;
+  verdict, one-line scope, **token 账单**(子代理 tok + 主代理出场次数,
+  owner 2026-07-12), 挂账 pointers; detail lives in the cut dir;
   entries older than ~two weeks roll into `docs/status-archive/`).
 - 复核纪律:**DEV self-reported green is never accepted at face value.**
   The main agent re-runs verification itself, with real exit codes (never
