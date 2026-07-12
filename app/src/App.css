@@ -396,7 +396,7 @@ button:disabled {
   background: transparent;
   font-size: 13px;
   font-weight: 500;
-  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
 }
 
 .version-toggle .active {
