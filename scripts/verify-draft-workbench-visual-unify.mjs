@@ -106,7 +106,12 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // lines, pushing the second #ffffff (.draft-undo-toast color) from L381 to
 // L451; the first (.draft-export-menu-trigger color) at L188 sits above the
 // edited region and is unaffected.
-const WHITELISTED_LINES = new Set([188, 451])
+// motion-pass: re-pinned again — the `.draft-undo-toast` entrance-animation
+// `animation:` declaration was inserted one line above `color: #ffffff`
+// (motion-pass plan.md #6, audit #5), pushing it from L451 to L452; the
+// trailing @keyframes block lands after this rule and does not affect
+// either whitelisted line.
+const WHITELISTED_LINES = new Set([188, 452])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
