@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-12（刀A+卷宗柜双刀收官；owner 观感 QA 过；生产已部署 6509829）
+Last updated: 2026-07-12（motion-pass 收官合并 ecbf0c1；owner PO QA 待做）
 
 ## 现在是什么
 
@@ -23,6 +23,15 @@ Last updated: 2026-07-12（刀A+卷宗柜双刀收官；owner 观感 QA 过；�
 
 ## 主线焦点
 
+- 2026-07-12：**motion-pass 收官**（merge ecbf0c1，CR APPROVE 0 MF，
+  verify:all 74/0 + main CI 绿）：五档时长+三曲线 token 收编全站 65 条
+  动效（含 DESIGN.md 条款改 token 制）、ease-in/9×transition:all 修正、
+  undo-toast 入场补缺、verify-motion-tokens 守门进 CI。cut-pipeline
+  Workflow 首跑实测过（args 需真 JSON 对象，脚本已加字符串解析兜底）。
+  **账单**：子代理 254k tok（DEV+verify 192k、CR 62k），主代理出场 4。
+  挂账：owner PO QA（qa-checklist.md，重点讲评栏开合手感+reduced-motion
+  观感）、「折叠」时刻待 owner 指认另立 small 刀、CR SW×2（多行续行门孔/
+  harness:874 曲线重判）见 cr.md、生产部署待 owner QA 后。
 - 2026-07-12：**刀A 备课桌骨架 + 卷宗柜双刀收官**（worktree 并行施工，
   merge 后 main verify 74/74 绿 + CI 绿；双 fresh CR APPROVE 0 MF）：
   ① 刀A（原型三裁点全落地）——暖纸桌满幅+纸居中 820px、右 rail 整卷页
@@ -164,7 +173,7 @@ Last updated: 2026-07-12（刀A+卷宗柜双刀收官；owner 观感 QA 过；�
   （形态字段+同面判据）+ 新立刀E「排序建议」排 C 后（任意序、一键
   应用可撤销、永不自动重排）；原型 `prototype-print-form-v2.html`
   入 draft-desk 目录。排期：lecture-rail ✅ → 暖纸转正 ✅ →
-  刀A+卷宗柜 ✅（2026-07-12）→ motion-pass → B → C → E。
+  刀A+卷宗柜 ✅（2026-07-12）→ motion-pass ✅（2026-07-12）→ B → C → E。
   **motion-pass 开工约定（owner 2026-07-12）**：下一会话即开；工具已
   备齐——Emil 全套 5 skill 已装（improve-animations 开场出审计路线图、
   review-animations 当验收尺、apple-design 处方库；上游 clone 在
@@ -186,12 +195,8 @@ Last updated: 2026-07-12（刀A+卷宗柜双刀收官；owner 观感 QA 过；�
 - 数据健康追记（2026-07-10 owner QA 截图顺带发现）：某完形组指导语
   「从每题所给的A、B、C、D四个选项」被数据内换行截断成「…A / D…」
   且吞字——入 data-health 清单，随脏数据批修。
-- **motion-pass（owner 已圈，2026-07-10，排 P1 两刀 + lecture-rail 刀
-  之后）**：全站动效统一 pass——装 emil-design-eng skill 定方向 →
-  动效时长/缓动收 token（DESIGN.md 150-250ms 规矩落地）→ 补缺口
-  （值得动的时刻清单：讲评栏开合/配相似入场/加卷乐观翻转/toast/
-  折叠/悬浮显形）→ 统一曲线 + 补 prefers-reduced-motion 退化。
-  一刀收口，small/medium。**不做全站动效化**，只做统一与补缺。
+- ~~motion-pass~~（2026-07-12 收官，见主线焦点；「折叠」时刻待 owner
+  指认另立 small 刀）。
 - UI 烂点清单：`docs/cuts/ui-facade/ui-blemish-list.md`（owner 曾圈
   「按顺序全做」，剩余项待核对）。
 - ~~数据孤儿清理~~（2026-07-07 data-orphan-cleanup 刀收官，PR #268 +
