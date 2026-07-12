@@ -23,6 +23,12 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
 
 ## 主线焦点
 
+- 2026-07-12：**Workflow 路由极致化收官**：路由决策卡（开刀 10 秒走完，
+  dispatch-protocols 首屏）+ 命名工作流 `cut-pipeline`
+  （.claude/workflows/，DEV→verify→CR 参数化一行派工，四硬纪律/收口
+  schema/token 账单内置，`cr:'lite'` 接命中率降档）。语法已验（运行时
+  包装），**首跑 = 下一把符合判据的例行刀**（记出场次数×会话规模，攒
+  实测判例）。母版已回流 v1.4。
 - 2026-07-12：**project-os skill 蒸馏收官**（用户级资产
   `~/.claude/skills/project-os/`，自带 git v1.1）：本项目协作 OS 母版化
   ——填槽宪法+templates 12 件+agent 四件套+hook/script 空槽版+普适血书

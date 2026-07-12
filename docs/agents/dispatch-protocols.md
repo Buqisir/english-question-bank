@@ -12,6 +12,21 @@
 **主代理重放税 + 上下文折损**(占用推迟 compaction);子代理工钱两边
 一样(warm-paper 账单判例)。
 
+**路由决策卡(开刀 10 秒走完):**
+
+1. 单动作 small?→ 主代理直接干,完。
+2. 步间有"要读内容才能下"的判断?→ 有:标裁决点切段,段内 ≥2 连续
+   agent 步走脚本、单步直接派;全无 → 3。
+3. 碰契约面 / 不可逆面?→ 是:常规管线;否 → 4。
+4. plan 预写充分?→ 否:先补 plan;是 → 5。
+5. 预建 worktree(`git worktree add ../wt-<cut> <branch>` → worktree 内
+   `bash scripts/setup-worktree.sh`)→ **一行派工**:
+   `Workflow({name:'cut-pipeline', args:{cut, worktree, verifyCmds, cr}})`
+   ——标准脚本 `.claude/workflows/cut-pipeline.js`,四硬纪律、DEV/verify/
+   CR 三 prompt、收口 schema、token 账单全部内置;该刀类已命中率降档时
+   传 `cr:'lite'`(跳 CR 步,主代理自己冷读收口)。
+6. 批量跑批?→ 走第二适用类(小切片试跑 → 报量 → 全量分批落盘,见文末)。
+
 **路由方法:裁决点切段。**开刀时列出步骤,标出哪几步之间需要主代理 /
 owner 的**语义判断**(= 裁决点),其余为确定段:
 
