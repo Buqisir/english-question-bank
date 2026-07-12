@@ -1,8 +1,11 @@
-/* my-space-shelf: "已组卷子成果" card shelf. Every color is a var(--eqb-*)
-   token (tokens.css) or a color-mix() wash built from one, matching the
-   token-only precedent in shared-ui/papersurface/PaperSurface.css — no
-   hardcoded palette hex in this file (allowlist is empty; see
-   scripts/verify-my-space-shelf.mjs). */
+/* dossier-cabinet: "个人空间" card shelf, grouped by month. Every color is
+   a var(--eqb-*) token (tokens.css) or a color-mix() wash built from one,
+   matching the token-only precedent in shared-ui/papersurface/PaperSurface.css
+   — no hardcoded palette hex in this file (allowlist is empty; see
+   scripts/verify-my-space-shelf.mjs). The one sanctioned exception is the
+   miniature card thumbnail below: it is a warm-paper artifact preview and
+   uses var(--paper-*) tokens (index.css), per DESIGN.md 色温法 — the page
+   chrome around it stays --eqb-* neutral. */
 
 .my-space-shell {
   background: var(--eqb-color-desk);
@@ -114,29 +117,136 @@
   border-color: var(--eqb-color-primary-text);
 }
 
-/* Card shelf — visually matches App.css's .concierge-group-card family
-   (same radius/padding/gap rhythm), rebuilt here with tokens only. */
+/* Section head — "草稿卷" / "导出保存的 PDF 成品", sits above the month
+   groups (naming-law: retires the old "已保存的草稿卷" page title). */
+.my-space-section-head {
+  align-items: baseline;
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.my-space-section-head h2 {
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 650;
+  margin: 0;
+}
+
+.my-space-section-head span {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+}
+
+/* Month archive groups — same "real sequence + real count" head language as
+   the home page's year archive groups (App.css .concierge-feed-year-head). */
+.my-space-month-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.my-space-month-head {
+  align-items: baseline;
+  display: flex;
+  gap: 8px;
+  padding: 0 2px;
+}
+
+.my-space-month-label {
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.my-space-month-count {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+}
+
+/* Card shelf — miniature-A4 cards floated on the neutral page shell. */
 .my-space-grid {
   display: grid;
-  gap: var(--eqb-space-4);
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .my-space-card {
-  background: var(--eqb-color-paper);
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 0;
-  padding: 14px;
+}
+
+/* Miniature A4 thumbnail — the one place on this page that floats on the
+   warm-paper token family instead of --eqb-* neutral (DESIGN.md 色温法
+   exception). It is a schematic layout (real title + name/class/score
+   placeholder + neutral filler lines) — artifact metadata carries no
+   question-group structure, so no section-header text is fabricated here. */
+.my-space-card-thumb {
+  aspect-ratio: 210 / 260;
+  background: var(--paper-bg);
+  border: 1px solid var(--paper-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .my-space-card-thumb:hover {
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--eqb-color-text-strong) 12%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+.my-space-card-thumb-mini {
+  color: var(--paper-ink-strong);
+  height: 520px;
+  inset: 0;
+  padding: 34px 38px;
+  pointer-events: none;
+  position: absolute;
+  text-align: left;
+  transform: scale(0.62);
+  transform-origin: 0 0;
+  width: 420px;
+}
+
+.my-space-card-thumb-title {
+  color: var(--paper-ink-strong);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 3px;
+  text-align: center;
+}
+
+.my-space-card-thumb-sub {
+  color: var(--paper-ink);
+  font-size: 9px;
+  margin: 0 0 14px;
+  text-align: center;
+}
+
+.my-space-card-thumb-line {
+  background: var(--paper-border);
+  border-radius: 2px;
+  height: 5px;
+  margin: 7px 0;
+  width: 100%;
+}
+
+.my-space-card-thumb-line-short {
+  width: 62%;
 }
 
 .my-space-card-title {
   color: var(--eqb-color-text-strong);
   font-size: var(--eqb-font-size-sm);
   font-weight: 600;
+  margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -227,6 +337,7 @@
 .my-space-card-actions .my-space-card-danger {
   border-color: var(--eqb-color-border);
   color: var(--eqb-color-danger);
+  margin-left: auto;
 }
 
 .my-space-card-actions .my-space-card-danger:hover:not(:disabled) {
@@ -268,9 +379,15 @@
   width: 100%;
 }
 
-.my-space-confirm-dialog p {
-  color: var(--eqb-color-text);
+.my-space-confirm-dialog h3 {
+  color: var(--eqb-color-text-strong);
   font-size: var(--eqb-font-size-sm);
+  margin: 0;
+}
+
+.my-space-confirm-dialog p {
+  color: var(--eqb-color-text-muted);
+  font-size: 13.5px;
   line-height: 1.5;
   margin: 0;
 }
