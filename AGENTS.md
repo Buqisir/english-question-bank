@@ -287,10 +287,11 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   browser QA status, forbidden scopes, known risks, and the PO QA
   checklist link when applicable
   (对照单模板 `docs/cuts/_templates/qa-checklist.md`).
-- Remote GitHub `main` and PR heads are the shared source of truth. Before
-  PA, CR, QA, and RM, the responsible hat must fetch and confirm local /
-  remote state — never treat a report as truth until the baseline, diff,
-  and pushed commits are verified.
+- Remote GitHub `main` and PR heads are the shared source of truth.
+  **The remote is named `github`, not `origin`** (`git push github main`);
+  do not assume `origin`. Before PA, CR, QA, and RM, the responsible hat
+  must fetch and confirm local / remote state — never treat a report as
+  truth until the baseline, diff, and pushed commits are verified.
 - External-agent rules are dormant (小川-only); archived in
   `docs/agents/external-agents.md`. Re-activate from there if reintroduced.
 

@@ -7,6 +7,16 @@
 
 条目格式:日期 → 事故 / 出处 → **固化法条位置**。按日期倒序。
 
+## 2026-07-12
+
+- **push 用错 remote 名**:H10 收官 push `origin` 失败——本仓库 remote
+  名是 `github`,且"几乎每个 agent 都犯过一次"(owner 证言,高频重复
+  事故)。→ **Collaboration Workflow**「The remote is named `github`」。
+  owner 同时拍板普适元规则:**环境事实只排查一次**——项目环境事实
+  (remote 名、包管理器、run/build 命令、部署通道)第一次排查确认后,
+  立刻固化进该项目的 agent 规则文件,下一个 agent 直接复用;已写入
+  用户级 `~/.claude/CLAUDE.md` 编码纪律。
+
 ## 2026-07-11
 
 - **记忆快照一天漂移**:主代理持久记忆存了"生产 e6644e2"状态快照,次日
