@@ -1,0 +1,316 @@
+<title>卷宗柜原型 · 个人空间</title>
+<style>
+  /* 单主题原型：忠实复刻产品实际观感（工具中性壳 + 暖纸卡浮中性页） */
+  :root {
+    --bg: #F6F6F4; --surface: #FFFFFF; --surface-2: #EDEDEA;
+    --ink: #1E1E1C; --muted: #6A6A64; --faint: #9A9A93;
+    --line-subtle: #E8E8E4; --line: #D8D8D2; --line-strong: #C6C6C0;
+    --teal: #2C6E56; --teal-800: #1E4A3A; --teal-50: #EAF1ED;
+    --danger: #dc2626;
+    --paper-bg: #f4f1ea; --paper-ink: #4a4438; --paper-ink-strong: #2c2820;
+    --paper-border: #e6e2d7;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px; line-height: 1.5; color: var(--ink); background: var(--bg);
+  }
+  button { font: inherit; cursor: pointer; }
+
+  .topbar {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border-bottom: 1px solid var(--line-subtle);
+    padding: 10px 22px; position: sticky; top: 0; z-index: 30;
+  }
+  .topbar .brand { font-weight: 650; font-size: 15px; }
+  .topbar .crumb { color: var(--muted); font-size: 13px; }
+
+  .shell { padding: 18px 22px 60px; max-width: 1180px; margin: 0 auto; }
+  .heading { display: flex; align-items: baseline; gap: 10px; }
+  .heading h1 { font-size: 19px; margin: 0; }
+  .heading .count { color: var(--muted); font-size: 12px; }
+
+  .folders { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    background: transparent; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--muted); font-size: 12.5px; padding: 5px 12px;
+    transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+  }
+  .chip:hover { background: var(--bg); border-color: var(--line-strong); color: var(--ink); }
+  .chip.on {
+    background: color-mix(in srgb, var(--teal) 10%, transparent);
+    border-color: var(--teal); color: var(--teal-800); font-weight: 500;
+  }
+
+  .section-head { display: flex; align-items: baseline; gap: 8px; margin: 26px 0 0; }
+  .section-head h2 { font-size: 15px; margin: 0; font-weight: 650; }
+  .section-head span { color: var(--muted); font-size: 12px; }
+
+  /* 年份档案分组语言（沿用首页 concierge-feed-year-group：真序列 + 真计数） */
+  .month-group { margin-top: 20px; }
+  .month-head { display: flex; align-items: baseline; gap: 8px; padding: 0 2px; margin-bottom: 10px; }
+  .month-label { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .month-count { font-size: 12px; color: var(--muted); }
+
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+  /* 微缩 A4 卡：卡=自己首页的微缩暖纸，浮在中性页上 */
+  .doc { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .doc-thumb {
+    position: relative; aspect-ratio: 210 / 260; overflow: hidden;
+    background: #fffdf8; border: 1px solid var(--paper-border); border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+    cursor: pointer; padding: 0;
+    transition: box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .doc-thumb:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); transform: translateY(-2px); }
+  }
+  .doc-thumb:active { transform: scale(0.985); }
+  .mini {
+    position: absolute; inset: 0; width: 420px; height: 520px;
+    transform: scale(0.62); transform-origin: 0 0;
+    padding: 34px 38px; text-align: left;
+    font-family: "Times New Roman", Times, SimSun, "Songti SC", STSong, serif;
+    color: #1a1a18; pointer-events: none;
+  }
+  @container (min-width: 0px) { /* no-op, keeps mini scale simple */ }
+  .mini h4 { text-align: center; font-size: 15px; margin: 0 0 3px; font-weight: 700; }
+  .mini .sub { text-align: center; font-size: 9px; color: #55503f; margin: 0 0 14px; }
+  .mini .ph { font-size: 10.5px; font-weight: 700; margin: 8px 0 4px; }
+  .mini .l { height: 5px; background: #e9e4d8; border-radius: 2px; margin: 5px 0; }
+  .mini .l.s { width: 62%; }
+  .doc-title {
+    font-size: 13.5px; font-weight: 600; color: var(--ink);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0;
+  }
+  .doc-meta { font-size: 12px; color: var(--muted); margin: 0; }
+  .student {
+    align-self: flex-start; font-size: 11.5px; color: var(--teal-800);
+    background: var(--teal-50); border-radius: 999px; padding: 1px 8px;
+  }
+  .doc-acts { display: flex; gap: 6px; }
+  .doc-acts button {
+    border-radius: 6px; font-size: 12px; padding: 4px 9px;
+    transition: transform 160ms var(--ease-out), background 150ms ease;
+  }
+  .doc-acts button:active { transform: scale(0.96); }
+  .act-primary { background: var(--teal); border: 1px solid var(--teal); color: #fff; font-weight: 600; }
+  .act-primary:hover { background: var(--teal-800); }
+  .act-ghost { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+  .act-ghost:hover { color: var(--ink); border-color: var(--line-strong); }
+  .act-danger { background: transparent; border: 1px solid transparent; color: var(--faint); margin-left: auto; }
+  .act-danger:hover { color: var(--danger); border-color: #eacaca; }
+
+  /* 不可逆删除：具名确认模态（Deletion-Cost Rule 原样保留，措辞升级） */
+  .backdrop {
+    position: fixed; inset: 0; background: rgba(30, 30, 28, 0.32);
+    display: none; align-items: center; justify-content: center; z-index: 50;
+  }
+  .backdrop.open { display: flex; }
+  .dialog {
+    background: var(--surface); border-radius: 10px; padding: 20px 22px;
+    width: min(92vw, 400px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  .dialog h3 { margin: 0 0 6px; font-size: 15px; }
+  .dialog p { margin: 0 0 16px; color: var(--muted); font-size: 13.5px; }
+  .dialog .acts { display: flex; justify-content: flex-end; gap: 8px; }
+  .dialog .acts .cancel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 14px; }
+  .dialog .acts .confirm {
+    background: var(--danger); border: 1px solid var(--danger); color: #fff;
+    border-radius: 6px; padding: 6px 14px; font-weight: 600;
+  }
+
+  .decide {
+    position: fixed; right: 18px; bottom: 18px; z-index: 40;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; width: 252px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 12.5px;
+  }
+  .decide h3 { margin: 0 0 8px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .decide .row { display: flex; gap: 6px; margin-bottom: 6px; }
+  .decide .row button {
+    flex: 1; border: 1px solid var(--line); background: var(--surface);
+    border-radius: 6px; padding: 4px 6px; font-size: 12px; color: var(--muted);
+  }
+  .decide .row button.on { background: var(--teal-50); border-color: var(--teal); color: var(--teal-800); font-weight: 600; }
+  .decide p { margin: 6px 0 0; color: var(--faint); font-size: 11.5px; line-height: 1.45; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="topbar">
+  <span class="brand">英语题库</span><span class="crumb">/ 个人空间</span>
+</div>
+
+<div class="shell">
+  <header class="heading">
+    <h1>个人空间</h1>
+    <span class="count">共 5 份</span>
+  </header>
+
+  <div class="folders" role="group" aria-label="按文件夹筛选">
+    <button class="chip on">全部</button>
+    <button class="chip">高三一轮</button>
+    <button class="chip">完形专练</button>
+  </div>
+
+  <div class="section-head">
+    <h2>草稿卷</h2><span>导出保存的 PDF 成品</span>
+  </div>
+
+  <div id="grouped">
+    <div class="month-group">
+      <div class="month-head"><span class="month-label">2026 年 7 月</span><span class="month-count">3 份</span></div>
+      <div class="grid">
+        <article class="doc">
+          <button class="doc-thumb" aria-label="预览 高三英语·阅读综合练">
+            <div class="mini">
+              <h4>高三英语 · 阅读综合练</h4>
+              <div class="sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</div>
+              <div class="ph">一、阅读理解（共 4 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l"></div><div class="l s"></div>
+              <div class="l"></div><div class="l"></div><div class="l s"></div>
+              <div class="ph">二、七选五（共 5 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l s"></div>
+            </div>
+          </button>
+          <p class="doc-title">高三英语 · 阅读综合练</p>
+          <p class="doc-meta">7月10日 · 3 页</p>
+          <span class="student">陈雨桐</span>
+          <div class="doc-acts">
+            <button class="act-primary">下载 PDF</button>
+            <button class="act-ghost">打开原草稿</button>
+            <button class="act-danger" data-del="高三英语 · 阅读综合练">删除</button>
+          </div>
+        </article>
+        <article class="doc">
+          <button class="doc-thumb" aria-label="预览 完形填空强化 · 第 4 组">
+            <div class="mini">
+              <h4>完形填空强化 · 第 4 组</h4>
+              <div class="sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</div>
+              <div class="ph">一、完形填空（共 15 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l"></div>
+              <div class="l"></div><div class="l s"></div>
+              <div class="l"></div><div class="l"></div><div class="l"></div><div class="l s"></div>
+            </div>
+          </button>
+          <p class="doc-title">完形填空强化 · 第 4 组</p>
+          <p class="doc-meta">7月8日 · 2 页</p>
+          <div class="doc-acts">
+            <button class="act-primary">下载 PDF</button>
+            <button class="act-ghost">打开原草稿</button>
+            <button class="act-danger" data-del="完形填空强化 · 第 4 组">删除</button>
+          </div>
+        </article>
+        <article class="doc">
+          <button class="doc-thumb" aria-label="预览 语法填空周练 · 中国茶">
+            <div class="mini">
+              <h4>语法填空周练 · 中国茶</h4>
+              <div class="sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</div>
+              <div class="ph">一、语法填空（共 10 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l"></div>
+              <div class="l"></div><div class="l"></div><div class="l s"></div>
+              <div class="l"></div><div class="l s"></div>
+            </div>
+          </button>
+          <p class="doc-title">语法填空周练 · 中国茶</p>
+          <p class="doc-meta">7月3日 · 1 页</p>
+          <span class="student">李知远</span>
+          <div class="doc-acts">
+            <button class="act-primary">下载 PDF</button>
+            <button class="act-ghost">打开原草稿</button>
+            <button class="act-danger" data-del="语法填空周练 · 中国茶">删除</button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-head"><span class="month-label">2026 年 6 月</span><span class="month-count">2 份</span></div>
+      <div class="grid">
+        <article class="doc">
+          <button class="doc-thumb" aria-label="预览 期末模拟 · 阅读全套">
+            <div class="mini">
+              <h4>期末模拟 · 阅读全套</h4>
+              <div class="sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</div>
+              <div class="ph">一、阅读理解 A（共 3 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l s"></div>
+              <div class="ph">二、阅读理解 B（共 4 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l"></div><div class="l s"></div>
+            </div>
+          </button>
+          <p class="doc-title">期末模拟 · 阅读全套</p>
+          <p class="doc-meta">6月28日 · 6 页</p>
+          <div class="doc-acts">
+            <button class="act-primary">下载 PDF</button>
+            <button class="act-ghost">打开原草稿</button>
+            <button class="act-danger" data-del="期末模拟 · 阅读全套">删除</button>
+          </div>
+        </article>
+        <article class="doc">
+          <button class="doc-thumb" aria-label="预览 七选五专项 · 第 2 辑">
+            <div class="mini">
+              <h4>七选五专项 · 第 2 辑</h4>
+              <div class="sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</div>
+              <div class="ph">一、七选五（共 5 小题）</div>
+              <div class="l"></div><div class="l"></div><div class="l"></div>
+              <div class="l s"></div><div class="l"></div><div class="l s"></div>
+            </div>
+          </button>
+          <p class="doc-title">七选五专项 · 第 2 辑</p>
+          <p class="doc-meta">6月15日 · 2 页</p>
+          <div class="doc-acts">
+            <button class="act-primary">下载 PDF</button>
+            <button class="act-ghost">打开原草稿</button>
+            <button class="act-danger" data-del="七选五专项 · 第 2 辑">删除</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop" role="presentation">
+  <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="del-title">
+    <h3 id="del-title">删除草稿卷 PDF</h3>
+    <p id="del-body">删除「——」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。</p>
+    <div class="acts">
+      <button class="cancel" id="del-cancel">取消</button>
+      <button class="confirm">删除 PDF</button>
+    </div>
+  </div>
+</div>
+
+<aside class="decide" aria-label="裁点开关">
+  <h3>裁点 · 档案分组</h3>
+  <div class="row">
+    <button id="g-month" class="on">按月分组</button>
+    <button id="g-flat">平铺不分组</button>
+  </div>
+  <p>分组头沿用首页年份档案语言（真序列+真计数）。点缩略图 hover 看纸感、点「删除」看具名确认弹窗措辞。</p>
+</aside>
+
+<script>
+  const backdrop = document.getElementById('backdrop');
+  const body = document.getElementById('del-body');
+  document.querySelectorAll('[data-del]').forEach(b => b.onclick = () => {
+    body.textContent = '删除「' + b.dataset.del + '」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。';
+    backdrop.classList.add('open');
+    document.getElementById('del-cancel').focus();
+  });
+  document.getElementById('del-cancel').onclick = () => backdrop.classList.remove('open');
+  document.querySelector('.dialog .confirm').onclick = () => backdrop.classList.remove('open');
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
+
+  const gm = document.getElementById('g-month'), gf = document.getElementById('g-flat');
+  function setGroup(on) {
+    gm.classList.toggle('on', on); gf.classList.toggle('on', !on);
+    document.querySelectorAll('.month-head').forEach(h => h.style.display = on ? '' : 'none');
+    document.querySelectorAll('.month-group').forEach(g => g.style.marginTop = on ? '' : '18px');
+  }
+  gm.onclick = () => setGroup(true);
+  gf.onclick = () => setGroup(false);
+</script>

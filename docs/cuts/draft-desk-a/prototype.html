@@ -1,0 +1,323 @@
+<title>刀A 原型 · 备课桌骨架</title>
+<style>
+  /* 单主题原型：忠实复刻产品实际观感（工具中性壳 + 暖纸桌），不做暗色适配 */
+  :root {
+    --bg: #F6F6F4; --surface: #FFFFFF; --surface-2: #EDEDEA;
+    --ink: #1E1E1C; --muted: #6A6A64; --faint: #9A9A93;
+    --line-subtle: #E8E8E4; --line: #D8D8D2; --line-strong: #C6C6C0;
+    --teal: #2C6E56; --teal-800: #1E4A3A; --teal-50: #EAF1ED;
+    --danger: #dc2626;
+    --paper-bg: #f4f1ea; --paper-ink: #4a4438; --paper-ink-rgb: 74, 68, 56;
+    --paper-ink-strong: #2c2820; --paper-border: #e6e2d7;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px; line-height: 1.5; color: var(--ink); background: var(--bg);
+  }
+  button { font: inherit; cursor: pointer; }
+
+  /* ── 工具 chrome（中性，照抄现网语言） ─────────────── */
+  .topbar {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border-bottom: 1px solid var(--line-subtle);
+    padding: 10px 22px; position: sticky; top: 0; z-index: 30;
+  }
+  .topbar .brand { font-weight: 650; font-size: 15px; }
+  .topbar .crumb { color: var(--muted); font-size: 13px; }
+  .topbar .spacer { flex: 1; }
+  .toolbar {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    background: var(--surface); border-bottom: 1px solid var(--line-subtle);
+    padding: 10px 22px; position: sticky; top: 45px; z-index: 29;
+  }
+  .draft-title { font-weight: 650; font-size: 16px; }
+  .draft-sub { color: var(--muted); font-size: 12.5px; }
+  .autosave { color: var(--faint); font-size: 12px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .seg button {
+    border: none; background: var(--surface); color: var(--muted);
+    padding: 5px 12px; font-size: 12.5px;
+  }
+  .seg button.on { background: var(--teal-50); color: var(--teal-800); font-weight: 600; }
+  .btn-primary {
+    background: var(--teal); color: #fff; border: 1px solid var(--teal);
+    border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 600;
+    transition: background 150ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .btn-primary:hover { background: var(--teal-800); }
+  .btn-primary:active { transform: scale(0.97); }
+
+  /* ── 暖纸桌（满幅，纸是主体） ─────────────────────── */
+  .desk {
+    background: var(--paper-bg);
+    display: grid; grid-template-columns: 224px minmax(0, 1fr);
+    gap: 24px; padding: 24px 24px 96px; align-items: start;
+  }
+  /* 裁点0：目录贴右（默认，推荐）——调序动线终点是右上导出 */
+  body[data-side="right"] .desk { grid-template-columns: minmax(0, 1fr) 224px; }
+  body[data-side="right"] .rail { order: 2; }
+  @media (max-width: 900px) { .desk { grid-template-columns: 1fr !important; } }
+
+  /* rail：整卷页目录语言（暖墨、无边框、缩进层级） */
+  .rail { position: sticky; top: 104px; display: flex; flex-direction: column; gap: 4px;
+          max-height: calc(100vh - 128px); overflow-y: auto; }
+  @media (max-width: 900px) { .rail { display: none; } }
+  .rail-item {
+    display: flex; align-items: center; gap: 6px;
+    border: none; background: transparent; text-align: left;
+    padding: 6px 10px; border-radius: 8px; font-size: 13px;
+    color: var(--paper-ink); transition: background 150ms var(--ease-out);
+    cursor: pointer; user-select: none;
+  }
+  .rail-item:focus-visible, .rail-acts button:focus-visible, .gp-acts button:focus-visible {
+    outline: 2px solid var(--teal); outline-offset: 1px;
+  }
+  .rail-item:hover { background: rgba(var(--paper-ink-rgb), 0.08); }
+  .rail-item.active { background: rgba(var(--paper-ink-rgb), 0.12); color: var(--paper-ink-strong); font-weight: 600; }
+  .rail-item .no { font-variant-numeric: tabular-nums; min-width: 1.4em; }
+  .rail-item .label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rail-item .count { font-size: 11.5px; color: rgba(var(--paper-ink-rgb), 0.65); }
+  .rail-item .grip { opacity: 0; cursor: grab; color: rgba(var(--paper-ink-rgb), 0.5); font-size: 12px; }
+  .rail-item:hover .grip { opacity: 1; }
+  /* 裁点1「动作贴目录」模式：rail 项 hover 露操作 */
+  body[data-actions="rail"] .rail-item:hover .rail-acts { display: inline-flex; }
+  .rail-acts { display: none; gap: 2px; }
+  .rail-acts button {
+    border: none; background: transparent; color: rgba(var(--paper-ink-rgb), 0.75);
+    border-radius: 5px; padding: 1px 4px; font-size: 11px; line-height: 1.4;
+  }
+  .rail-acts button:hover { background: rgba(var(--paper-ink-rgb), 0.12); color: var(--paper-ink-strong); }
+  .rail-acts button.del:hover { color: var(--danger); }
+  .rail-hint {
+    margin-top: 14px; padding: 6px 10px; font-size: 11.5px;
+    color: rgba(var(--paper-ink-rgb), 0.65);
+  }
+
+  /* ── 真纸（分页多页 + 页码 + 页数常驻） ───────────── */
+  .paper-col { min-width: 0; max-width: 820px; margin: 0 auto; width: 100%; }
+  .paper-meta {
+    text-align: center; color: rgba(var(--paper-ink-rgb), 0.72); font-size: 12.5px;
+    margin: 0 0 14px; font-variant-numeric: tabular-nums;
+  }
+  .sheet {
+    background: #fff; width: 100%; min-height: 1050px;
+    box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+    margin: 0 auto 22px; padding: 56px 64px 48px; position: relative;
+    font-family: "Times New Roman", Times, SimSun, "Songti SC", STSong, serif;
+    font-size: 15px; line-height: 1.7; color: #1a1a18;
+    display: flex; flex-direction: column;
+  }
+  .sheet .foot {
+    margin-top: auto; padding-top: 24px; text-align: center;
+    font-size: 12px; color: #8a857a; font-variant-numeric: tabular-nums;
+  }
+  .paper-h1 { text-align: center; font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+  .paper-h2 { text-align: center; font-size: 13px; color: #55503f; margin: 0 0 26px; font-weight: 400; }
+  .part-head { font-weight: 700; font-size: 15.5px; margin: 20px 0 10px; }
+  .gp { position: relative; border-radius: 4px; margin: 0 -14px; padding: 6px 14px; }
+  .gp p { margin: 0 0 10px; }
+  .gp .q { margin: 6px 0 2px; }
+  .gp .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; padding-left: 1.5em; margin: 0 0 8px; }
+  .gp .opts span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* 裁点1「动作贴纸」模式：hover 题组块，右缘浮出操作条 */
+  body[data-actions="paper"] .gp:hover { background: rgba(var(--paper-ink-rgb), 0.035); }
+  .gp-acts {
+    position: absolute; top: 6px; right: -46px; display: none;
+    flex-direction: column; gap: 4px;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  }
+  body[data-actions="paper"] .gp:hover .gp-acts { display: flex; }
+  .gp-acts button {
+    width: 34px; height: 30px; border-radius: 7px;
+    border: 1px solid var(--paper-border); background: #fff;
+    color: var(--paper-ink); font-size: 13px;
+    box-shadow: 0 1px 2px rgba(30, 30, 28, 0.08);
+    transition: transform 160ms var(--ease-out), color 150ms var(--ease-out);
+  }
+  .gp-acts button:hover { color: var(--paper-ink-strong); border-color: var(--line-strong); }
+  .gp-acts button:active { transform: scale(0.94); }
+  .gp-acts button.del:hover { color: var(--danger); border-color: #eacaca; }
+  @media (max-width: 1180px) { .gp-acts { right: 6px; flex-direction: row; top: -8px; } }
+
+  /* 分页建议：安静标注（刀C 完整版之前的占位形态） */
+  .break-hint {
+    display: flex; align-items: center; gap: 8px; margin: 4px 0 10px;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: 11.5px; color: #a09a8a;
+  }
+  .break-hint::before, .break-hint::after { content: ""; flex: 1; border-top: 1px dashed #d8d2c2; }
+
+  /* ── 裁点面板 ─────────────────────────────────────── */
+  .decide {
+    position: fixed; right: 18px; bottom: 18px; z-index: 40;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; width: 252px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    font-size: 12.5px;
+  }
+  .decide h3 { margin: 0 0 8px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .decide .row { display: flex; gap: 6px; margin-bottom: 6px; }
+  .decide .row button {
+    flex: 1; border: 1px solid var(--line); background: var(--surface);
+    border-radius: 6px; padding: 4px 6px; font-size: 12px; color: var(--muted);
+  }
+  .decide .row button.on { background: var(--teal-50); border-color: var(--teal); color: var(--teal-800); font-weight: 600; }
+  .decide p { margin: 6px 0 0; color: var(--faint); font-size: 11.5px; line-height: 1.45; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="topbar">
+  <span class="brand">英语题库</span><span class="crumb">/ 草稿卷工作台</span>
+  <span class="spacer"></span>
+  <span class="crumb">个人空间</span>
+</div>
+<div class="toolbar">
+  <div>
+    <div class="draft-title">高三英语 · 阅读综合练（自编）</div>
+    <div class="draft-sub">学生：陈雨桐 · 3 个题组</div>
+  </div>
+  <span class="spacer" style="flex:1"></span>
+  <span class="autosave">已自动保存 · 刚刚</span>
+  <span class="seg"><button class="on">学生版</button><button>教师版</button></span>
+  <button class="btn-primary">导出 PDF</button>
+</div>
+
+<div class="desk">
+  <nav class="rail" aria-label="卷面目录">
+    <div class="rail-item active" role="button" tabindex="0" data-go="g1">
+      <span class="grip">⠿</span><span class="no">一</span>
+      <span class="label">阅读理解 · The Quiet Power of Walking</span><span class="count">4 题</span>
+      <span class="rail-acts"><button title="上移">↑</button><button title="下移">↓</button><button class="del" title="移除">✕</button></span>
+    </div>
+    <div class="rail-item" role="button" tabindex="0" data-go="g2">
+      <span class="grip">⠿</span><span class="no">二</span>
+      <span class="label">七选五 · How to Build a Reading Habit</span><span class="count">5 题</span>
+      <span class="rail-acts"><button title="上移">↑</button><button title="下移">↓</button><button class="del" title="移除">✕</button></span>
+    </div>
+    <div class="rail-item" role="button" tabindex="0" data-go="g3">
+      <span class="grip">⠿</span><span class="no">三</span>
+      <span class="label">语法填空 · Tea Culture Along the Silk Road</span><span class="count">10 题</span>
+      <span class="rail-acts"><button title="上移">↑</button><button title="下移">↓</button><button class="del" title="移除">✕</button></span>
+    </div>
+    <div class="rail-hint">拖动目录项调整题序</div>
+  </nav>
+
+  <div class="paper-col">
+    <p class="paper-meta">共 3 页 · 双面 2 张 · A4</p>
+
+    <section class="sheet">
+      <h1 class="paper-h1">高三英语 · 阅读综合练</h1>
+      <p class="paper-h2">姓名：＿＿＿＿＿＿　班级：＿＿＿＿＿＿　成绩：＿＿＿＿＿＿</p>
+
+      <article class="gp" id="g1">
+        <div class="gp-acts">
+          <button title="上移">↑</button><button title="下移">↓</button><button class="del" title="移除">✕</button>
+        </div>
+        <div class="part-head">一、阅读理解（共 4 小题；每小题 2.5 分，满分 10 分）</div>
+        <p>When Sarah Mitchell lost her job as a marketing director, she began walking. Not for exercise, she insists, but "to think without a screen in front of me." What started as an hour around her neighborhood in Bristol grew into a 630-mile journey along England's South West Coast Path. Along the way, she slept in a tent, lived on simple meals, and discovered that the rhythm of walking loosened problems that months of worry had failed to solve.</p>
+        <p>Scientists would not be surprised. Research at Stanford University found that walking increases creative output by an average of 60 percent, whether the walk happens on a treadmill facing a blank wall or outdoors. The act of putting one foot in front of the other, it seems, occupies just enough of the brain to quiet its anxious chatter, while leaving the rest free to wander.</p>
+        <div class="q">1. Why did Sarah Mitchell start walking?</div>
+        <div class="opts"><span>A. To recover from an illness.</span><span>B. To train for a long journey.</span><span>C. To clear her mind after losing her job.</span><span>D. To raise money for charity.</span></div>
+        <div class="q">2. What did the Stanford research find about walking?</div>
+        <div class="opts"><span>A. It works only outdoors.</span><span>B. It boosts creative thinking.</span><span>C. It cures anxiety completely.</span><span>D. It improves physical fitness most.</span></div>
+        <div class="q">3. The underlined phrase "anxious chatter" in Paragraph 2 refers to ______.</div>
+        <div class="opts"><span>A. noisy street traffic</span><span>B. restless worrying thoughts</span><span>C. casual talk with friends</span><span>D. constant phone notifications</span></div>
+        <div class="q">4. What can be a suitable title for the text?</div>
+        <div class="opts"><span>A. The Quiet Power of Walking</span><span>B. A Guide to Coastal Paths</span><span>C. How to Change Careers</span><span>D. Exercise Beats Technology</span></div>
+      </article>
+
+      <div class="foot">第 1 页 · 共 3 页</div>
+    </section>
+
+    <section class="sheet">
+      <article class="gp" id="g2">
+        <div class="gp-acts">
+          <button title="上移">↑</button><button title="下移">↓</button><button class="del" title="移除">✕</button>
+        </div>
+        <div class="part-head">二、七选五（共 5 小题；每小题 2 分，满分 10 分）</div>
+        <p>Reading is one of the cheapest ways to travel, yet many of us finish fewer books each year than we would like. The good news is that a reading habit is built, not born. <b>5. ＿＿＿</b> Start with ten pages a night, or one chapter with your morning tea.</p>
+        <p>Choose books you actually enjoy. <b>6. ＿＿＿</b> If a novel bores you after fifty pages, put it down without guilt; the goal is momentum, not medals. Keep your current book where you can see it — on your pillow, in your bag, beside the kettle. <b>7. ＿＿＿</b></p>
+        <p>Some readers track their progress in a notebook. <b>8. ＿＿＿</b> Others join a small reading group, where a fixed meeting date quietly does the work of discipline. Whichever method you choose, protect the habit for thirty days. <b>9. ＿＿＿</b> After that, you will no longer need to protect it; it will protect itself.</p>
+        <div class="q" style="margin-top:10px">A. Visibility is half the battle.</div>
+        <div class="q">B. Small, regular doses beat heroic weekend marathons.</div>
+        <div class="q">C. Reading speed matters less than people think.</div>
+        <div class="q">D. Duty is a poor engine for a lifelong habit.</div>
+        <div class="q">E. Seeing a finished list grow is its own reward.</div>
+        <div class="q">F. That is roughly how long a routine takes to root.</div>
+        <div class="q">G. Libraries remain the best free resource for readers.</div>
+      </article>
+
+      <div class="break-hint">建议在此前分页 · 语法填空篇幅较长</div>
+
+      <div class="foot">第 2 页 · 共 3 页</div>
+    </section>
+
+    <section class="sheet">
+      <article class="gp" id="g3">
+        <div class="gp-acts">
+          <button title="上移">↑</button><button title="下移">↓</button><button class="del" title="移除">✕</button>
+        </div>
+        <div class="part-head">三、语法填空（共 10 小题；每小题 1.5 分，满分 15 分）</div>
+        <p>Tea has travelled further than almost any other drink in history. It began <b>10. ＿＿＿</b> (grow) in the hills of southwest China more than two thousand years ago, and by the Tang Dynasty it had become part of daily life. Merchants carried pressed tea bricks along the Silk Road, exchanging them for horses, silver and wool. In this way, tea <b>11. ＿＿＿</b> (gradual) reached Central Asia and beyond.</p>
+        <p>The habit changed as it moved. In Tibet, tea was churned with butter and salt to fight the cold; in Russia, it was brewed strong in a samovar and softened with jam. Britain, <b>12. ＿＿＿</b> tea arrived in the seventeenth century, turned it into a social ceremony complete with milk, sugar and gossip. Each culture, it seems, poured <b>13. ＿＿＿</b> (it) own character into the same leaves.</p>
+        <p>Today China still produces nearly half of the world's tea, and young people <b>14. ＿＿＿</b> (rediscover) the old craft in new forms — cold brews, tea bars, even tea-flavoured desserts. What began as medicine has become, quite simply, <b>15. ＿＿＿</b> way of sitting down together.</p>
+        <p style="color:#8a857a; font-size:12.5px">（其余 4 空略 · 原型示意）</p>
+      </article>
+
+      <div class="foot">第 3 页 · 共 3 页</div>
+    </section>
+  </div>
+</div>
+
+<aside class="decide" aria-label="裁点开关">
+  <h3>裁点 0 · 目录贴哪边</h3>
+  <div class="row">
+    <button id="s-right" class="on">右（近导出）</button>
+    <button id="s-left">左（同整卷页）</button>
+  </div>
+  <h3>裁点 1 · 调整动作放哪</h3>
+  <div class="row">
+    <button id="m-paper" class="on">贴纸（悬停题组）</button>
+    <button id="m-rail">贴目录（悬停 rail）</button>
+  </div>
+  <p>切换后把鼠标悬到纸上题组 / 目录项试手感。拖拽排序两案都保留在目录上。</p>
+</aside>
+
+<script>
+  const items = document.querySelectorAll('.rail-item');
+  const groups = ['g1', 'g2', 'g3'].map(id => document.getElementById(id));
+  items.forEach(it => it.addEventListener('click', e => {
+    if (e.target.closest('.rail-acts')) return;
+    document.getElementById(it.dataset.go).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  const spy = new IntersectionObserver(entries => {
+    const vis = entries.filter(e => e.isIntersecting).map(e => e.target.id);
+    if (!vis.length) return;
+    items.forEach(it => it.classList.toggle('active', it.dataset.go === vis[0]));
+  }, { rootMargin: '0px 0px -60% 0px' });
+  groups.forEach(g => spy.observe(g));
+
+  const mp = document.getElementById('m-paper'), mr = document.getElementById('m-rail');
+  function setMode(m) {
+    document.body.dataset.actions = m;
+    mp.classList.toggle('on', m === 'paper');
+    mr.classList.toggle('on', m === 'rail');
+  }
+  mp.onclick = () => setMode('paper');
+  mr.onclick = () => setMode('rail');
+  setMode('paper');
+
+  const sr = document.getElementById('s-right'), sl = document.getElementById('s-left');
+  function setSide(s) {
+    document.body.dataset.side = s;
+    sr.classList.toggle('on', s === 'right');
+    sl.classList.toggle('on', s === 'left');
+  }
+  sr.onclick = () => setSide('right');
+  sl.onclick = () => setSide('left');
+  setSide('right');
+</script>
