@@ -23,6 +23,11 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
 
 ## 主线焦点
 
+- 2026-07-12：**H10-agents-constitution 收官**（b674b1b+收口 commit，CR
+  APPROVE 0 MF/SW×2 直收，housekeeping 73/73 绿）：AGENTS 宪法化 469→330
+  行，叙事入判例库 case-law.md（血书元规则成文），派工/UI 规程按需加载；
+  五新法：记忆禁快照/commit 一行/裁决点清单（PM 断点锚）/owner QA 命中率
+  降档/外脑仅本机；模板新增 case-ruling+qa-checklist。出处：07-11 协作复盘。
 - 2026-07-11：**warm-paper-promotion 收官 + Workflow 流水线试点首跑通过**
   （merge faeafea，CR APPROVE 0 MF + SW×2 直收，main CI 绿）：--paper-*
   token 家族（整卷/讲评零视觉转正，QA computed-style 14 选择器
