@@ -25,6 +25,7 @@ const registry = {
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
+  'scripts/verify-motion-tokens.mjs',
   'scripts/verify-h1-router-skeleton.mjs',
   'scripts/verify-h1d-analysis-availability.mjs',
   'scripts/verify-i0e-seven-choices-entry.mjs',

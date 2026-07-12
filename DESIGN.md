@@ -228,7 +228,9 @@ components:
 - **Do** 让正文与占位符对比度 ≥ 4.5:1（WCAG AA 上线标准）；极弱墨 #9A9A93 只用于非正文。
 - **Do** 所有绿取自同一条墨绿色阶梯子（H≈166），跨界面一致。
 - **Do** 把筛选 chip 升级为真结构化的深教学维度（考点/承上启下/题型/词性/主题），让"内容是主角"。
-- **Do** 给每个动效配 `prefers-reduced-motion` 退化；交互态 150–250ms。
+- **Do** 给每个动效配 `prefers-reduced-motion` 退化（App.css 全局重置已兜底）；时长走五档
+  motion token（micro 80 / fast 120 / base 160 / slow 220 / entrance 260ms），曲线走
+  `--ease-hover` / `--ease-out` / `--ease-in-out` 三 token，UI 动效不超过 300ms；签名时刻豁免需注释。
 - **Do** 改颜色 token 时同步更新钉死该颜色的 CI 断言（否则回归护栏误报）。
 
 ### Don't:

@@ -189,7 +189,7 @@ button:disabled {
   color: #ffffff;
   background: var(--accent);
   font-weight: 600;
-  transition: all var(--motion-slow) var(--ease-out);
+  transition: filter var(--motion-slow) var(--ease-hover), box-shadow var(--motion-slow) var(--ease-hover), transform var(--motion-slow) var(--ease-out);
   box-shadow: 0 1px 2px var(--accent-glow);
 }
 
@@ -206,7 +206,7 @@ button:disabled {
   color: var(--ink);
   background: var(--surface-strong);
   border: 1px solid var(--line);
-  transition: all var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
 }
 
 .ghost-button:hover {
@@ -219,7 +219,7 @@ button:disabled {
   color: var(--muted);
   background: transparent;
   border: 1px solid var(--line);
-  transition: all var(--motion-base) var(--ease-hover);
+  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
 }
 
 .primary-button:focus-visible,
@@ -396,7 +396,7 @@ button:disabled {
   background: transparent;
   font-size: 13px;
   font-weight: 500;
-  transition: all var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
 }
 
 .version-toggle .active {
@@ -1302,7 +1302,7 @@ button:disabled {
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: all var(--motion-base) var(--ease-hover);
+  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
 }
 
 .analysis-disclosure-toggle:hover {
@@ -1668,7 +1668,7 @@ button:disabled {
   border-radius: 6px;
   color: var(--muted);
   background: transparent;
-  transition: all var(--motion-base) var(--ease-hover);
+  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
 }
 
 .icon-button:hover {
@@ -2970,7 +2970,7 @@ button:disabled {
   color: var(--muted);
   font-size: 11px;
   font-weight: 700;
-  transition: all var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), background var(--motion-fast) var(--ease-hover);
 }
 
 .paper-canvas-actions button:hover {
@@ -3103,7 +3103,7 @@ button:disabled {
   line-height: 1;
   cursor: pointer;
   z-index: 2;
-  transition: all var(--motion-fast) var(--ease-hover);
+  transition: border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), background var(--motion-fast) var(--ease-hover);
 }
 
 .paper-insertion-seam:hover .paper-insertion-trigger,
@@ -3143,7 +3143,7 @@ button:disabled {
   color: var(--ink);
   font-size: 12px;
   font-weight: 700;
-  transition: all var(--motion-fast) var(--ease-hover);
+  transition: border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
 .paper-insertion-menu button:hover:not(:disabled) {

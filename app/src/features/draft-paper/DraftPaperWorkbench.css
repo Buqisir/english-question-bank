@@ -445,6 +445,7 @@
 
 .draft-undo-toast {
   align-items: center;
+  animation: draft-undo-toast-in var(--motion-base) var(--ease-out);
   background: var(--ink);
   border-radius: 8px;
   bottom: 22px;
@@ -456,6 +457,11 @@
   position: fixed;
   transform: translateX(-50%);
   z-index: 30;
+}
+
+@keyframes draft-undo-toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 .draft-modal-backdrop {
