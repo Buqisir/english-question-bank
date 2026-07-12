@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-12（刀A+卷宗柜双刀收官合入 main；生产部署与 owner 观感 QA 待做）
+Last updated: 2026-07-12（刀A+卷宗柜双刀收官；owner 观感 QA 过；生产已部署 6509829）
 
 ## 现在是什么
 
@@ -35,10 +35,12 @@ Last updated: 2026-07-12（刀A+卷宗柜双刀收官合入 main；生产部署�
   三路径全验、「个人空间/共 N 份/草稿卷」命名法落地。CR SW 挂账见两刀
   cr.md（刀A×4：陈旧 previewScale 锚点/组标记位置耦合/沉降监听有界
   泄漏/拖拽未真拖；卷宗柜×4）。**账单**：DEV 续做 162k + CR 49k+66k
-  tok；本会话为死机接手（刀A 半成品由 DEV 审读续建）。**owner QA 待做**
-  （观感+顺手拖一把 rail 排序）；**生产未部署，owner 拍板后
-  deploy-remote.sh 一键**。插曲入档：本机重启后 shell 残留死代理变量
-  致 Vivliostyle 502 假红（unset 即愈，两 worktree+main 均复验）。
+  tok；本会话为死机接手（刀A 半成品由 DEV 审读续建）。**owner 观感 QA
+  过（2026-07-12，Chrome 实看两页面）**；**生产已部署 6509829**
+  （deploy-remote.sh 一键，eqb+caddy active、health ok、eqbank.cc 200；
+  顺带捎上刀B 建议引擎改真分页衍生的 program 拍板行）。插曲入档：本机
+  重启后 shell 残留死代理变量致 Vivliostyle 502 假红（unset 即愈，已存
+  记忆 env-dead-proxy-502）。
 - 2026-07-12：**Workflow 路由极致化收官**：路由决策卡（开刀 10 秒走完，
   dispatch-protocols 首屏）+ 命名工作流 `cut-pipeline`
   （.claude/workflows/，DEV→verify→CR 参数化一行派工，四硬纪律/收口
