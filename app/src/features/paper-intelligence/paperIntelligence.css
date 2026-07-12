@@ -400,7 +400,7 @@
   font: inherit;
   color: inherit;
   cursor: pointer;
-  transition: border-color 80ms ease, background 80ms ease;
+  transition: border-color var(--motion-micro) var(--ease-hover), background var(--motion-micro) var(--ease-hover);
 }
 
 .pi-question-card:hover {
@@ -717,7 +717,7 @@
 }
 
 .pi-line-path--animated {
-  animation: pi-line-draw 280ms ease-out;
+  animation: pi-line-draw var(--motion-entrance) var(--ease-out);
 }
 
 /*
@@ -848,7 +848,7 @@ button.pi-analysis-distractor:hover {
   border-radius: 6px;
   padding: 4px 10px;
   cursor: pointer;
-  transition: border-color 80ms ease, background 80ms ease, color 80ms ease;
+  transition: border-color var(--motion-micro) var(--ease-hover), background var(--motion-micro) var(--ease-hover), color var(--motion-micro) var(--ease-hover);
   white-space: nowrap;
 }
 
@@ -921,7 +921,7 @@ button.pi-analysis-distractor:hover {
   pointer-events: none;
   max-width: calc(100vw - 32px);
   text-align: center;
-  animation: pi-toast-fade-in 160ms ease-out;
+  animation: pi-toast-fade-in var(--motion-base) var(--ease-out);
 }
 
 @keyframes pi-toast-fade-in {
@@ -983,7 +983,7 @@ button.pi-analysis-distractor:hover {
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
-  transition: border-color 80ms ease, background 80ms ease, color 80ms ease;
+  transition: border-color var(--motion-micro) var(--ease-hover), background var(--motion-micro) var(--ease-hover), color var(--motion-micro) var(--ease-hover);
   white-space: nowrap;
   flex: 0 0 auto;
 }
@@ -1037,7 +1037,7 @@ button.pi-analysis-distractor:hover {
    * the new interactivity. The `--open` modifier inverts the fill while
    * the popover is mounted so the trigger reads as "active".
    */
-  transition: background 80ms ease, border-color 80ms ease, color 80ms ease;
+  transition: background var(--motion-micro) var(--ease-hover), border-color var(--motion-micro) var(--ease-hover), color var(--motion-micro) var(--ease-hover);
 }
 
 .pi-topbar-basket:hover {
@@ -1095,7 +1095,7 @@ button.pi-analysis-distractor:hover {
   padding: 12px 16px;
   max-height: 60vh;
   overflow-y: auto;
-  animation: pi-basket-preview-fade-in 120ms ease-out;
+  animation: pi-basket-preview-fade-in var(--motion-fast) var(--ease-out);
   font-size: 13px;
   color: var(--ink);
 }
@@ -1241,7 +1241,7 @@ button.pi-analysis-distractor:hover {
   padding: 3px 10px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 80ms ease, border-color 80ms ease;
+  transition: background var(--motion-micro) var(--ease-hover), border-color var(--motion-micro) var(--ease-hover);
 }
 
 .pi-insight-chip:hover {
@@ -1293,7 +1293,7 @@ button.pi-analysis-distractor:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   max-height: 60vh;
   overflow-y: auto;
-  animation: pi-insight-fade-in 120ms ease-out;
+  animation: pi-insight-fade-in var(--motion-fast) var(--ease-out);
 }
 
 @keyframes pi-insight-fade-in {
@@ -1391,7 +1391,7 @@ button.pi-analysis-distractor:hover {
   padding: 8px 10px;
   margin-bottom: 8px;
   cursor: pointer;
-  transition: border-color 80ms ease, box-shadow 80ms ease;
+  transition: border-color var(--motion-micro) var(--ease-hover), box-shadow var(--motion-micro) var(--ease-hover);
 }
 
 .pi-option-block:hover {

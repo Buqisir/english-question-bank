@@ -4,6 +4,17 @@
    :focus-visible ring below in one place. */
 :root {
   --focus-ring: 2px solid var(--accent, #2C6E56);
+
+  /* Motion tokens（motion-pass 2026-07-12）。五档时长 + 三曲线；
+     签名时刻（七选五 0.9s 跳卡、skeleton 1.6s shimmer）豁免留字面值。 */
+  --motion-micro: 80ms;     /* 高频密集微反馈（pi chip 类） */
+  --motion-fast: 120ms;     /* hover / 颜色 / 小反馈 */
+  --motion-base: 160ms;     /* toast、显形、小入场 */
+  --motion-slow: 220ms;     /* 面板 / rail / 抽屉级 */
+  --motion-entrance: 260ms; /* 页面级入场（fadeInUp、画线） */
+  --ease-hover: ease;                             /* 颜色/hover */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 入场/位移（强） */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 在屏形变（强） */
 }
 
 .app-shell {
@@ -178,7 +189,7 @@ button:disabled {
   color: #ffffff;
   background: var(--accent);
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: all var(--motion-slow) var(--ease-out);
   box-shadow: 0 1px 2px var(--accent-glow);
 }
 
@@ -195,7 +206,7 @@ button:disabled {
   color: var(--ink);
   background: var(--surface-strong);
   border: 1px solid var(--line);
-  transition: all 0.15s ease;
+  transition: all var(--motion-base) var(--ease-hover);
 }
 
 .ghost-button:hover {
@@ -208,7 +219,7 @@ button:disabled {
   color: var(--muted);
   background: transparent;
   border: 1px solid var(--line);
-  transition: all 0.15s ease;
+  transition: all var(--motion-base) var(--ease-hover);
 }
 
 .primary-button:focus-visible,
@@ -290,7 +301,7 @@ button:disabled {
   border-radius: 6px;
   background: var(--surface-strong);
   color: var(--muted);
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-base) var(--ease-hover);
 }
 
 .search-field:focus-within {
@@ -317,7 +328,7 @@ button:disabled {
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--surface-strong);
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-base) var(--ease-hover);
 }
 
 .field input:focus,
@@ -385,7 +396,7 @@ button:disabled {
   background: transparent;
   font-size: 13px;
   font-weight: 500;
-  transition: all 0.15s ease;
+  transition: all var(--motion-base) var(--ease-hover);
 }
 
 .version-toggle .active {
@@ -410,7 +421,7 @@ button:disabled {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform var(--motion-slow) var(--ease-out), box-shadow var(--motion-slow) var(--ease-hover), border-color var(--motion-slow) var(--ease-hover);
 }
 
 .group-card:hover {
@@ -1291,7 +1302,7 @@ button:disabled {
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--motion-base) var(--ease-hover);
 }
 
 .analysis-disclosure-toggle:hover {
@@ -1310,7 +1321,7 @@ button:disabled {
 }
 
 .analysis-disclosure-chevron {
-  transition: transform 0.15s ease;
+  transition: transform var(--motion-base) var(--ease-out);
 }
 
 .analysis-disclosure-toggle[aria-expanded='true'] .analysis-disclosure-chevron {
@@ -1657,7 +1668,7 @@ button:disabled {
   border-radius: 6px;
   color: var(--muted);
   background: transparent;
-  transition: all 0.15s ease;
+  transition: all var(--motion-base) var(--ease-hover);
 }
 
 .icon-button:hover {
@@ -2362,7 +2373,7 @@ button:disabled {
 .detail-hero,
 .detail-section,
 .basket-item {
-  animation: fadeInUp 0.35s ease both;
+  animation: fadeInUp var(--motion-entrance) var(--ease-out) both;
 }
 
 .group-card:nth-child(1) { animation-delay: 0s; }
@@ -2667,7 +2678,7 @@ button:disabled {
   text-decoration: none;
   color: inherit;
   font-size: 12px;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-base) var(--ease-hover);
 }
 
 .calibration-report-watch-item:hover {
@@ -2868,7 +2879,7 @@ button:disabled {
   padding: 14px 16px;
   margin-bottom: 10px;
   cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
 }
 
 .paper-canvas-block:hover {
@@ -2959,7 +2970,7 @@ button:disabled {
   color: var(--muted);
   font-size: 11px;
   font-weight: 700;
-  transition: all 0.12s ease;
+  transition: all var(--motion-fast) var(--ease-hover);
 }
 
 .paper-canvas-actions button:hover {
@@ -3069,7 +3080,7 @@ button:disabled {
   top: 50%;
   height: 0;
   border-top: 1px solid transparent;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-base) var(--ease-hover);
 }
 
 .paper-insertion-seam:hover::before,
@@ -3092,7 +3103,7 @@ button:disabled {
   line-height: 1;
   cursor: pointer;
   z-index: 2;
-  transition: all 0.12s ease;
+  transition: all var(--motion-fast) var(--ease-hover);
 }
 
 .paper-insertion-seam:hover .paper-insertion-trigger,
@@ -3132,7 +3143,7 @@ button:disabled {
   color: var(--ink);
   font-size: 12px;
   font-weight: 700;
-  transition: all 0.12s ease;
+  transition: all var(--motion-fast) var(--ease-hover);
 }
 
 .paper-insertion-menu button:hover:not(:disabled) {
@@ -3218,7 +3229,7 @@ button:disabled {
   border-radius: 8px;
   padding: 8px 8px 8px 18px;
   min-height: 56px;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
 }
 
 /* 窄屏：五个命令行元素挤在一行会互相重叠。搜索框独占一行，思考模式/筛选/
@@ -3270,7 +3281,7 @@ button:disabled {
   line-height: 1;
   font-family: inherit;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
   box-shadow: none;
   display: inline-flex;
   align-items: center;
@@ -3318,7 +3329,7 @@ button:disabled {
   border-radius: 999px;
   background: var(--surface-strong, #EDEDEA);
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color var(--motion-slow) var(--ease-hover), border-color var(--motion-slow) var(--ease-hover);
 }
 
 .concierge-thinking-toggle input[type='checkbox']::before {
@@ -3331,7 +3342,7 @@ button:disabled {
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.2);
-  transition: transform 0.2s ease;
+  transition: transform var(--motion-slow) var(--ease-out);
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked {
@@ -3524,7 +3535,7 @@ button:disabled {
   background: #FFFFFF;
   outline: none;
   border-radius: 6px;
-  transition: background 120ms ease, box-shadow 120ms ease;
+  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
   cursor: pointer;
 }
 
@@ -3627,7 +3638,7 @@ button:disabled {
   padding: 4px 10px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
 }
 
 .concierge-action:hover:not(:disabled) {
@@ -3827,7 +3838,7 @@ button:disabled {
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   z-index: 22;
-  transition: background 0.12s, border-color 0.12s;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 
 .basket-chip:hover {
@@ -3859,11 +3870,11 @@ button:disabled {
 }
 
 .basket-chip-count--up {
-  animation: basket-count-in-up 0.18s ease-out;
+  animation: basket-count-in-up var(--motion-base) var(--ease-out);
 }
 
 .basket-chip-count--down {
-  animation: basket-count-in-down 0.18s ease-out;
+  animation: basket-count-in-down var(--motion-base) var(--ease-out);
 }
 
 @keyframes basket-count-in-up {
@@ -3912,7 +3923,7 @@ button:disabled {
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   z-index: 26;
   transform: translateX(100%);
-  transition: transform 0.18s ease;
+  transition: transform var(--motion-base) var(--ease-out);
   overflow-y: auto;
   padding: 48px 16px 24px;
 }
@@ -3987,7 +3998,7 @@ button:disabled {
   padding: 4px 10px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
 .concierge-starter-chip:hover {
@@ -4023,7 +4034,7 @@ button:disabled {
   /* home-editorial round 2 — emil 展开处方: 200ms ease-out on mount (the
      panel is conditionally rendered, not height-transitioned; the global
      prefers-reduced-motion reset already covers this animation). */
-  animation: concierge-filter-panel-in 200ms ease-out;
+  animation: concierge-filter-panel-in var(--motion-slow) var(--ease-out);
 }
 
 @keyframes concierge-filter-panel-in {
@@ -4177,7 +4188,7 @@ button:disabled {
   font-size: 13px;
   white-space: nowrap;
   cursor: pointer;
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 
 .concierge-command-filter-toggle:hover {
@@ -4232,7 +4243,7 @@ button:disabled {
   padding: 4px 10px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.12s;
+  transition: background var(--motion-fast) var(--ease-hover);
 }
 
 .concierge-active-filter-chip:hover {
@@ -4271,7 +4282,7 @@ button:disabled {
   line-height: 1;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 120ms ease, color 120ms ease;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4328,7 +4339,7 @@ button:disabled {
   border-radius: 6px;
   background: linear-gradient(90deg, #F6F6F4 0%, #EDEDEA 50%, #F6F6F4 100%);
   background-size: 200% 100%;
-  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite;
+  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite; /* signature, token-exempt */
 }
 
 .concierge-skeleton-line.short {
@@ -4489,7 +4500,7 @@ button:disabled {
   border-radius: 999px;
   background: linear-gradient(90deg, #F6F6F4 0%, #EDEDEA 50%, #F6F6F4 100%);
   background-size: 200% 100%;
-  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite;
+  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite; /* signature, token-exempt */
 }
 
 .concierge-skeleton-chip:nth-child(2) { width: 96px; }
@@ -4569,7 +4580,7 @@ button:disabled {
   background: #FFFFFF;
   outline: none;
   border-radius: 6px;
-  transition: background 120ms ease, box-shadow 120ms ease;
+  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
   cursor: pointer;
 }
 
@@ -4729,7 +4740,7 @@ button:disabled {
   color: #2C6E56;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 140ms ease;
+  transition: opacity var(--motion-fast) var(--ease-out);
 }
 
 .concierge-paper-row:hover .concierge-row-expand-hint,
@@ -4897,7 +4908,7 @@ button:disabled {
   background: #EDEDEA;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 140ms ease;
+  transition: opacity var(--motion-fast) var(--ease-out);
 }
 
 .concierge-group-row:hover .concierge-group-row-actions,
