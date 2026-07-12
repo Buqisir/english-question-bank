@@ -17,7 +17,9 @@ export const meta = {
 //   cr         可选 — 'fresh'(默认,Opus 冷读)| 'lite'(命中率降档类:跳过
 //              CR 步,返回 needsCrLite=true,主代理自己冷读收口)
 //   notes      可选 — 给 DEV 的一句补充(不能替代 plan;plan 不足先补 plan)
-const { cut, worktree, verifyCmds = [], cr = 'fresh', notes = '' } = args || {}
+// 兜底:部分 harness 把 args 序列化成 JSON 字符串传入(motion-pass 首跑实撞)
+const _args = typeof args === 'string' ? JSON.parse(args) : (args || {})
+const { cut, worktree, verifyCmds = [], cr = 'fresh', notes = '' } = _args
 if (!cut || !worktree) {
   throw new Error('args.cut 与 args.worktree 必填;worktree 由主代理预建后传入')
 }
