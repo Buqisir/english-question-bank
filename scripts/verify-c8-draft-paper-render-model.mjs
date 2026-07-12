@@ -221,7 +221,15 @@ assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPr
 assert('empty export uses Chinese reason', draftStore.includes('请先添加题组') || draftRoutes.includes('请先添加题组'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')
-const outline = read('app/src/features/draft-paper/DraftPaperOutline.tsx')
+// draft-desk-a: DraftPaperOutline.tsx retired (plan.md target form 3) —
+// its aggregated-list rendering (drag/reorder + per-item source metadata +
+// page-break controls) is replaced by DraftPaperRail.tsx (整卷页目录语言:
+// title + count only, no source metadata) plus the paper-hover sticker
+// (裁点1, rendered inline in DraftPaperWorkbench.tsx) for move/page-break/
+// delete actions. Assertions below updated in lockstep; see draft-desk-a's
+// plan.md Forbidden clause (verify assertions may be updated同刀 when they
+// directly conflict with the assigned refactor).
+const rail = read('app/src/features/draft-paper/DraftPaperRail.tsx')
 const workbenchCss = read('app/src/features/draft-paper/DraftPaperWorkbench.css')
 const previewHtml = read('app/src/features/draft-paper/draftPaperPreviewHtml.ts')
 assert('preview uses iframe srcDoc from A4 preview HTML', /<iframe[\s\S]{0,120}srcDoc=\{previewHtml\}/.test(workbench))
@@ -241,13 +249,21 @@ assert('preview iframe does not add a second mat color', previewHtml.includes('h
 // flat token fill, never a gradient (去渐变桌 constraint carried forward
 // from D8 unchanged).
 assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^}]*background:\s*var\(--paper-desk-bg\)/.test(workbenchCss))
-assert('preview iframe is tall enough to show a full A4 page', workbenchCss.includes('height: 1188px'))
+// draft-desk-a: the iframe no longer pins a fixed 1188px CSS height — it
+// grows to its rendered content's real height (multi-page drafts now scroll
+// via the desk itself, not a fixed single-page window; see plan.md's
+// technical constraint + DraftPaperWorkbench.tsx's nativeContentHeight
+// state, read from the loaded iframe's own contentDocument).
+assert('preview iframe height is driven by measured content, not a fixed CSS pin', !workbenchCss.includes('height: 1188px') && workbench.includes('nativeContentHeight'))
 assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
-assert('outline extraction lives in its own component', workbench.includes("from './DraftPaperOutline'") && workbench.includes('<DraftPaperOutline'))
-assert('outline component shows source metadata outside preview', outline.includes('compactSource(item)'))
-assert('outline component hides page-break control for first group', outline.includes('const canPageBreakBefore = index > 0'))
-assert('outline component only shows page-break marker when page break is allowed', /canPageBreakBefore && item\.pageBreakBefore && <div className="draft-break-marker">分页<\/div>/.test(outline))
+assert('rail extraction lives in its own component', workbench.includes("from './DraftPaperRail'") && workbench.includes('<DraftPaperRail'))
+// 裁点1 (plan.md): the rail is a pure list (title + count, no source
+// metadata) — move/page-break/delete now live on the paper-hover sticker in
+// Workbench.tsx itself, not on a per-row outline control.
+assert('rail component is a pure list (no per-row source metadata)', !rail.includes('compactSource'))
+assert('workbench gates the page-break sticker action on non-first items (mirrors the old canPageBreakBefore = index > 0 rule)', workbench.includes('canPageBreakBefore = fullIndex > 0'))
+assert('page-break suggestions render as an in-paper quiet annotation, not an outline marker', previewHtml.includes('break-hint') && !workbench.includes('draft-break-marker'))
 assert('workbench no longer owns outline rendering details', !workbench.includes('compactSource(item)') && !workbench.includes('draft-outline-panel'))
 assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench exposes browser print', workbench.includes('浏览器打印'))

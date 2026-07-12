@@ -226,32 +226,42 @@
   color: var(--eqb-color-warning);
 }
 
-.draft-workbench-layout {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: minmax(0, 1fr) 330px;
-  margin-top: 18px;
-}
-
-/* 暖纸转正（owner 拍板 2026-07-10，色温法）：预览桌换暖纸桌 token（复用
- * paperBrowsePage 页基底同一色温，见 index.css --paper-desk-bg 注释），
- * 收专项审计 P0-D1「纸背糊死」/ owner 议题3「A4 预览背景灰怪」——桌面
- * 是纯色暖调，不引入渐变。 */
+/* draft-desk-a: 备课桌骨架重构（docs/cuts/draft-desk-a/plan.md，原型
+ * prototype.html 拍板）。`.draft-preview-desk` 从"左侧预览卡片"升格为
+ * 满幅暖纸桌本体——纸列 + 右侧目录 rail 都在桌面网格内，删除旧的卡片
+ * 边框/圆角/内部滚动（overflow:auto 退役，改由桌面随页面自然滚动承载
+ * 翻页，见 DraftPaperWorkbench.tsx 的 iframe 自适应高度实现）。暖纸桌
+ * token（--paper-desk-bg）不变，仍是本页唯一暖色边界（色温法：暖只在
+ * 桌+纸，rail 借用 paperBrowsePage 的 --paper-ink 系暖墨，工具 chrome
+ * 维持中性）。 */
 .draft-preview-desk {
+  align-items: start;
   background: var(--paper-desk-bg);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) 224px;
+  margin-top: 18px;
   min-width: 0;
-  overflow: auto;
-  padding: 14px 16px 28px;
+  padding: 24px 24px 96px;
 }
 
-.draft-preview-meta {
-  color: var(--muted);
-  display: flex;
-  gap: 14px;
-  margin: 0 auto 12px;
+.draft-paper-col {
+  margin: 0 auto;
   max-width: 820px;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+}
+
+/* 页数徽标「共 N 页 · 双面 M 张 · A4」常驻纸顶（plan.md 技术约束：N 从
+   预览分页脚本产出后由父层读取真值，见 DraftPaperWorkbench.tsx 的
+   iframe onLoad 处理）。 */
+.draft-paper-meta {
+  color: rgba(var(--paper-ink-rgb), 0.72);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 14px;
+  text-align: center;
 }
 
 .draft-a4-sheet {
@@ -265,7 +275,6 @@
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   margin: 0 auto;
   max-width: min(100%, 820px);
-  overflow: hidden;
   width: 100%;
 }
 
@@ -273,7 +282,6 @@
   background: transparent;
   border: 0;
   display: block;
-  height: 1188px;
   width: 100%;
 }
 
@@ -285,92 +293,154 @@
   justify-content: center;
 }
 
-.draft-outline-panel {
+/* 裁点1「调整动作贴纸」：悬停纸上题组块，父层 overlay 在纸的右白边内
+   浮出 上移/下移/前置分页/移除。锚点由 DraftPaperWorkbench.tsx 用
+   iframe/元素 getBoundingClientRect 换算到 .draft-paper-col 坐标系，
+   只随命中题组变化，不随桌面滚动重算（两者的视口位移量相同，相对差
+   不变）。 */
+.draft-group-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: absolute;
+  right: 10px;
+  z-index: 5;
+}
+
+.draft-group-actions button {
+  align-items: center;
+  background: var(--eqb-color-paper);
+  border: 1px solid var(--paper-border);
+  border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.08);
+  color: var(--paper-ink);
+  display: flex;
+  height: 28px;
+  justify-content: center;
+  transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  width: 30px;
+}
+
+.draft-group-actions button:hover {
+  border-color: var(--line-strong);
+  color: var(--paper-ink-strong);
+}
+
+.draft-group-actions button:active {
+  transform: scale(0.94);
+}
+
+.draft-group-actions button[aria-pressed='true'] {
+  border-color: var(--eqb-color-primary);
+  color: var(--eqb-color-primary);
+}
+
+.draft-group-actions button.danger:hover {
+  border-color: color-mix(in srgb, var(--eqb-color-danger) 35%, var(--paper-border));
+  color: var(--eqb-color-danger);
+}
+
+/* 右 rail = 整卷页目录语言（参照 paperBrowsePage.css 的
+   .paper-browse-rail-item 族：暖墨、无边框、hover 洗底、active 加深），
+   sticky top 值沿用本文件既有的 .draft-outline-panel 先例。 */
+.draft-paper-rail {
   align-self: start;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: calc(100vh - 108px);
+  overflow-y: auto;
   position: sticky;
   top: 88px;
 }
 
-.draft-outline-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.draft-outline-head span,
-.draft-outline-item span,
-.draft-outline-item em,
-.draft-outline-item small {
-  color: var(--muted);
-  display: block;
-  font-style: normal;
-  font-size: 12px;
-  margin-top: 3px;
-}
-
-.draft-suggestions {
-  background: var(--surface-strong);
-  border-radius: 6px;
-  display: grid;
-  gap: 6px;
-  margin: 12px 0;
-  padding: 10px;
-}
-
-.draft-outline-list {
-  display: grid;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.draft-outline-item {
-  background: var(--panel);
-  border: 1px solid var(--line);
+.draft-paper-rail-item {
+  align-items: center;
   border-radius: 8px;
-  padding: 10px;
-}
-
-.draft-outline-item.has-break {
-  border-color: var(--eqb-color-warning);
-}
-
-.draft-outline-item.is-group-missing {
-  background: color-mix(in srgb, var(--eqb-color-warning) 8%, transparent);
-  border-color: var(--eqb-color-warning);
-}
-
-.draft-break-marker {
-  background: color-mix(in srgb, var(--eqb-color-warning) 16%, transparent);
-  border-radius: 999px;
-  /* No deep-amber token exists in tokens.css for the #92400e original —
-     residual: falls back to the standard warning tone (see plan.md). */
-  color: var(--eqb-color-warning);
-  display: inline-flex;
-  font-size: 12px;
-  margin-bottom: 8px;
-  padding: 2px 8px;
-}
-
-.draft-outline-item-main {
-  align-items: start;
-  display: grid;
-  gap: 8px;
-  grid-template-columns: auto 1fr;
-}
-
-.draft-outline-actions {
+  color: var(--paper-ink);
+  cursor: pointer;
   display: flex;
-  flex-wrap: wrap;
   gap: 6px;
-  margin-top: 10px;
+  padding: 6px 10px;
+  user-select: none;
 }
 
-.draft-outline-empty {
-  color: var(--muted);
+.draft-paper-rail-item:hover {
+  background: rgba(var(--paper-ink-rgb), 0.08);
+}
+
+.draft-paper-rail-item.active {
+  background: rgba(var(--paper-ink-rgb), 0.12);
+  color: var(--paper-ink-strong);
+  font-weight: 600;
+}
+
+.draft-paper-rail-item.is-missing {
+  cursor: default;
+}
+
+.draft-paper-rail-item.is-missing .draft-paper-rail-label {
+  color: var(--eqb-color-warning);
+  font-style: italic;
+}
+
+.draft-paper-rail-grip {
+  color: rgba(var(--paper-ink-rgb), 0.5);
+  cursor: grab;
+  flex-shrink: 0;
+  opacity: 0;
+}
+
+.draft-paper-rail-item:hover .draft-paper-rail-grip {
+  opacity: 1;
+}
+
+.draft-paper-rail-no {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  min-width: 1.4em;
+}
+
+.draft-paper-rail-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draft-paper-rail-count {
+  color: rgba(var(--paper-ink-rgb), 0.65);
+  flex-shrink: 0;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.draft-paper-rail-acts {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.draft-paper-rail-acts button {
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  color: rgba(var(--paper-ink-rgb), 0.75);
+  padding: 1px 4px;
+}
+
+.draft-paper-rail-acts button:hover {
+  background: rgba(var(--paper-ink-rgb), 0.12);
+  color: var(--paper-ink-strong);
+}
+
+.draft-paper-rail-acts button.danger:hover {
+  color: var(--eqb-color-danger);
+}
+
+.draft-paper-rail-empty {
+  color: rgba(var(--paper-ink-rgb), 0.65);
+  padding: 6px 10px;
 }
 
 .draft-undo-toast {
@@ -475,29 +545,29 @@
     flex-wrap: wrap;
   }
 
-  .draft-workbench-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .draft-outline-panel {
-    position: static;
-  }
-
-  .draft-preview-desk {
-    padding: 12px 10px 18px;
-  }
-
-  .draft-a4-sheet {
-    max-height: none;
-    width: 100%;
-  }
-
   /* When JS computes a scale < 1 (native A4 width no longer fits), the
      iframe is transform-scaled from its fixed native size instead of being
      stretched to 100% — stretching alone would clip the page's right edge
-     because the rendered content inside keeps a fixed 210mm layout. */
+     because the rendered content inside keeps a fixed 210mm layout. Height
+     is no longer pinned here — draft-desk-a made it dynamic (measured from
+     the loaded iframe's own content, see DraftPaperWorkbench.tsx's
+     nativeContentHeight state), since the desk now lets a multi-page draft
+     grow to its full height instead of scrolling a fixed 1188px window. */
   .draft-a4-sheet iframe {
-    height: 1188px;
     width: 794px;
+  }
+}
+
+/* draft-desk-a: rail 退化 + 纸单列断点，对齐 prototype.html 拍板的 900px
+   （与上面工具栏折叠的 980px 是两回事，未强行合并——那条断点是既有的、
+   与本刀无关的工具栏堆叠行为）。 */
+@media (max-width: 900px) {
+  .draft-preview-desk {
+    grid-template-columns: 1fr;
+    padding: 12px 10px 18px;
+  }
+
+  .draft-paper-rail {
+    display: none;
   }
 }

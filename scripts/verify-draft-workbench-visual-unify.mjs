@@ -100,7 +100,13 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // comment (+3 lines) push the second #ffffff (.draft-undo-toast color) from
 // L374 to L381; the first (.draft-export-menu-trigger color) at L188 sits
 // above both edits and is unaffected.
-const WHITELISTED_LINES = new Set([188, 381])
+// draft-desk-a: re-pinned again — the outline→rail restructure (retired
+// .draft-outline-*/.draft-workbench-layout, added the desk/rail/overlay
+// block) sits entirely between the two whitelisted lines and is net +70
+// lines, pushing the second #ffffff (.draft-undo-toast color) from L381 to
+// L451; the first (.draft-export-menu-trigger color) at L188 sits above the
+// edited region and is unaffected.
+const WHITELISTED_LINES = new Set([188, 451])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
