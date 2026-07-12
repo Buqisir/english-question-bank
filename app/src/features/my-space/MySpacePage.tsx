@@ -14,15 +14,55 @@ export type MySpacePageProps = {
 
 type LoadState = 'loading' | 'loaded' | 'error'
 
-function formatDate(value: string) {
+function formatMonthDay(value: string) {
   if (!value) return ''
   const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return value
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+  if (Number.isNaN(date.getTime())) return ''
+  return `${date.getMonth() + 1}月${date.getDate()}日`
 }
 
-function sourceLabel(artifact: MySpaceArtifact) {
-  return artifact.sourceDraftExists ? artifact.sourceDraftTitle || '原草稿卷' : '原草稿卷已删除'
+const OTHER_MONTH_GROUP_KEY = 'other'
+
+type MonthGroup = {
+  key: string
+  label: string
+  artifacts: MySpaceArtifact[]
+}
+
+function monthGroupKey(generatedAt: string): string {
+  if (!generatedAt) return OTHER_MONTH_GROUP_KEY
+  const date = new Date(generatedAt)
+  if (Number.isNaN(date.getTime())) return OTHER_MONTH_GROUP_KEY
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+}
+
+function monthGroupLabel(key: string): string {
+  if (key === OTHER_MONTH_GROUP_KEY) return '其他'
+  const [year, month] = key.split('-')
+  return `${year} 年 ${Number(month)} 月`
+}
+
+// dossier-cabinet: group artifacts by generatedAt month, newest month first;
+// artifacts without a usable date fall into a trailing "其他" group. Purely
+// client-side — does not change the fetchMySpace API shape.
+function groupArtifactsByMonth(items: MySpaceArtifact[]): MonthGroup[] {
+  const buckets = new Map<string, MySpaceArtifact[]>()
+  for (const artifact of items) {
+    const key = monthGroupKey(artifact.generatedAt)
+    const bucket = buckets.get(key)
+    if (bucket) bucket.push(artifact)
+    else buckets.set(key, [artifact])
+  }
+  const keys = Array.from(buckets.keys()).sort((a, b) => {
+    if (a === OTHER_MONTH_GROUP_KEY) return 1
+    if (b === OTHER_MONTH_GROUP_KEY) return -1
+    return b.localeCompare(a)
+  })
+  return keys.map((key) => ({
+    key,
+    label: monthGroupLabel(key),
+    artifacts: (buckets.get(key) ?? []).slice().sort((a, b) => (b.generatedAt || '').localeCompare(a.generatedAt || '')),
+  }))
 }
 
 export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpacePageProps): ReactNode {
@@ -38,6 +78,8 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     () => folders.find((folder) => folder.id === selectedFolderId) || null,
     [folders, selectedFolderId],
   )
+
+  const monthGroups = useMemo(() => groupArtifactsByMonth(artifacts), [artifacts])
 
   const load = useCallback(async (folderId = selectedFolderId) => {
     setLoadState('loading')
@@ -128,7 +170,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     <AppTopbar {...shellNav} pageTitle="个人空间" onBack={onBackToWorkbench} />
     <div className="my-space-shell">
       <header className="my-space-heading">
-        <h1>已保存的草稿卷</h1>
+        <h1>个人空间</h1>
         <p className="my-space-count">共 {artifacts.length} 份</p>
       </header>
 
@@ -179,58 +221,97 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
         )}
 
         {loadState === 'loaded' && artifacts.length > 0 && (
-          <div className="my-space-grid" aria-label={selectedFolder ? selectedFolder.name : '全部保存文件'}>
-            {artifacts.map((artifact) => (
-              <article className="my-space-card" key={artifact.id}>
-                <strong className="my-space-card-title" title={artifact.title || artifact.fileName}>
-                  {artifact.title || artifact.fileName}
-                </strong>
-                <p className="my-space-card-meta">
-                  {formatDate(artifact.generatedAt)} · {artifact.pageCount || 1} 页 · {sourceLabel(artifact)}
-                </p>
-                {artifact.sourceDraftStudentLabel && (
-                  <span className="my-space-student-chip">{artifact.sourceDraftStudentLabel}</span>
-                )}
-                <div className="my-space-card-actions">
-                  <button
-                    type="button"
-                    className="my-space-card-primary"
-                    disabled={busyId === artifact.id}
-                    onClick={() => void downloadArtifact(artifact)}
-                  >
-                    <Download size={14} /> 下载 PDF
-                  </button>
-                  <button type="button" className="my-space-card-ghost" onClick={() => openSourceDraft(artifact)}>
-                    打开原草稿
-                  </button>
-                  <button
-                    type="button"
-                    className="my-space-card-danger"
-                    disabled={busyId === artifact.id}
-                    onClick={() => requestDeleteArtifact(artifact)}
-                  >
-                    <Trash2 size={14} /> 删除
-                  </button>
+          <>
+            <div className="my-space-section-head">
+              <h2>草稿卷</h2>
+              <span>导出保存的 PDF 成品</span>
+            </div>
+            {monthGroups.map((group) => (
+              <section className="my-space-month-group" key={group.key} aria-label={group.label}>
+                <div className="my-space-month-head">
+                  <span className="my-space-month-label">{group.label}</span>
+                  <span className="my-space-month-count">{group.artifacts.length} 份</span>
                 </div>
-              </article>
+                <div className="my-space-grid" aria-label={selectedFolder ? selectedFolder.name : '全部保存文件'}>
+                  {group.artifacts.map((artifact) => {
+                    const title = artifact.title || artifact.fileName
+                    const dateLabel = formatMonthDay(artifact.generatedAt)
+                    return (
+                      <article className="my-space-card" key={artifact.id}>
+                        <div className="my-space-card-thumb" aria-hidden="true">
+                          <div className="my-space-card-thumb-mini">
+                            <h4 className="my-space-card-thumb-title">{title}</h4>
+                            <p className="my-space-card-thumb-sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</p>
+                            <div className="my-space-card-thumb-line" />
+                            <div className="my-space-card-thumb-line" />
+                            <div className="my-space-card-thumb-line my-space-card-thumb-line-short" />
+                            <div className="my-space-card-thumb-line" />
+                            <div className="my-space-card-thumb-line" />
+                            <div className="my-space-card-thumb-line my-space-card-thumb-line-short" />
+                            <div className="my-space-card-thumb-line" />
+                            <div className="my-space-card-thumb-line my-space-card-thumb-line-short" />
+                          </div>
+                        </div>
+                        <p className="my-space-card-title" title={title}>
+                          {title}
+                        </p>
+                        <p className="my-space-card-meta">
+                          {dateLabel ? `${dateLabel} · ` : ''}
+                          {artifact.pageCount || 1} 页
+                        </p>
+                        {artifact.sourceDraftStudentLabel && (
+                          <span className="my-space-student-chip">{artifact.sourceDraftStudentLabel}</span>
+                        )}
+                        <div className="my-space-card-actions">
+                          <button
+                            type="button"
+                            className="my-space-card-primary"
+                            disabled={busyId === artifact.id}
+                            onClick={() => void downloadArtifact(artifact)}
+                          >
+                            <Download size={14} /> 下载 PDF
+                          </button>
+                          <button type="button" className="my-space-card-ghost" onClick={() => openSourceDraft(artifact)}>
+                            打开原草稿
+                          </button>
+                          <button
+                            type="button"
+                            className="my-space-card-danger"
+                            disabled={busyId === artifact.id}
+                            onClick={() => requestDeleteArtifact(artifact)}
+                          >
+                            <Trash2 size={14} /> 删除
+                          </button>
+                        </div>
+                      </article>
+                    )
+                  })}
+                </div>
+              </section>
             ))}
-          </div>
+          </>
         )}
       </main>
     </div>
 
     {confirmTarget && (
       <div className="my-space-modal-backdrop" role="presentation">
-        <div className="my-space-confirm-dialog" role="alertdialog" aria-modal="true" aria-label="确认删除文件">
+        <div
+          className="my-space-confirm-dialog"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="my-space-confirm-dialog-title"
+        >
+          <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
           <p>
-            删除「{confirmTarget.fileName}」？PDF 文件也会删除。
+            删除「{confirmTarget.title || confirmTarget.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。
           </p>
           <div className="my-space-confirm-actions">
             <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>
               取消
             </button>
             <button type="button" className="my-space-card-danger" onClick={() => void confirmDeleteArtifact()}>
-              确认删除
+              删除 PDF
             </button>
           </div>
         </div>

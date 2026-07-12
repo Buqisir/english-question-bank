@@ -3,20 +3,24 @@
  * my-space-shelf verify: MySpacePage rebuilt as a token-only card shelf
  * (docs/cuts/my-space-shelf/plan.md), replacing the admin-file-manager
  * two-column layout (folder tree + file rows + triple heading + hardcoded
- * palette).
+ * palette). Updated in docs/cuts/dossier-cabinet/plan.md for the month-
+ * archive-group + miniature-A4-card + upgraded delete-dialog-copy form.
  *
  * Asserts:
  *   1. MySpacePage.css carries zero hardcoded palette hex (allowlist is
- *      empty — every color is var(--eqb-*) or color-mix() built from one).
+ *      empty — every color is var(--eqb-*)/var(--paper-*) or color-mix()
+ *      built from one).
  *   2. MySpacePage.tsx contains no window.confirm; the delete flow uses a
- *      custom confirm dialog instead.
+ *      custom confirm dialog instead, with dossier-cabinet's upgraded copy
+ *      ("删除草稿卷 PDF" title, "删除 PDF" confirm action).
  *   3. Card grid class exists with the auto-fill/minmax track from the
- *      plan.
+ *      plan (minmax(200px, 1fr), per dossier-cabinet's miniature-A4 cards).
  *   4. Primary action class (solid var(--eqb-color-primary)) and danger
  *      action class (var(--eqb-color-danger)) both exist.
  *   5. The old triple-heading ("N 个 PDF") text is gone.
  *   6. Folder filter chips are conditional on folders.length > 0 (renders
  *      nothing for 0/1 folders, per plan.md Locked Decision 2).
+ *   7. Artifacts are grouped into month-archive sections (dossier-cabinet).
  */
 
 import { readFileSync } from 'node:fs'
@@ -62,15 +66,16 @@ assert(
   unexpectedHex.join(', '),
 )
 
-// 2. No window.confirm — delete uses a custom modal.
+// 2. No window.confirm — delete uses a custom modal with dossier-cabinet's
+// upgraded copy (title + "删除 PDF" confirm action, cancel-then-confirm order).
 assert('MySpacePage.tsx does not use window.confirm', !tsx.includes('window.confirm'))
 assert(
   'MySpacePage.tsx renders a custom confirm dialog (role="alertdialog")',
   tsx.includes('role="alertdialog"') && tsx.includes('my-space-confirm-dialog'),
 )
 assert(
-  'confirm dialog has a cancel + confirm action pair',
-  /取消/.test(tsx) && /确认删除/.test(tsx),
+  'confirm dialog has the upgraded title + cancel + confirm action copy',
+  /删除草稿卷 PDF/.test(tsx) && /取消/.test(tsx) && /删除 PDF/.test(tsx),
 )
 
 // 3. Card grid.
@@ -78,10 +83,16 @@ assert('MySpacePage.tsx renders a card grid container', tsx.includes('my-space-g
 const gridRuleMatch = css.match(/\.my-space-grid\s*\{[^}]*\}/)
 assert('MySpacePage.css defines .my-space-grid', Boolean(gridRuleMatch))
 assert(
-  '.my-space-grid uses the auto-fill/minmax(280px, 1fr) track',
-  Boolean(gridRuleMatch) && /repeat\(auto-fill,\s*minmax\(280px,\s*1fr\)\)/.test(gridRuleMatch[0]),
+  '.my-space-grid uses the auto-fill/minmax(200px, 1fr) track',
+  Boolean(gridRuleMatch) && /repeat\(auto-fill,\s*minmax\(200px,\s*1fr\)\)/.test(gridRuleMatch[0]),
 )
 assert('MySpacePage.tsx renders card elements with the card class', tsx.includes('my-space-card'))
+
+// 7. Month-archive grouping (dossier-cabinet).
+assert(
+  'MySpacePage.tsx groups artifacts into month-archive sections',
+  tsx.includes('my-space-month-group') && tsx.includes('my-space-month-head'),
+)
 
 // 4. Primary + danger action classes.
 const primaryRuleMatch = css.match(/\.my-space-card-primary\s*\{[^}]*\}/)
