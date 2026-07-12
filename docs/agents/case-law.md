@@ -14,6 +14,12 @@
 
 ## 2026-07-12
 
+- **Workflow 路由入法**(owner 拍板;背书 = warm-paper 账单判例 + 官方
+  文档核查:token 4-7x 是"多代理 vs 单代理"的膨胀、"大多数编码工作
+  高度顺序依赖"官方原话、多 workflow 串联 + 阶段间拍板是官方姿势):
+  同样的 agent 序列,常规管线每步派工/回执进主上下文且每次出场全会话
+  重放;脚本化后主上下文只留发起 + 结果。→ dispatch-protocols
+  「Workflow 路由:裁决点切段」+「批量机械扇出」。
 - **push 用错 remote 名**:H10 收官 push `origin` 失败——本仓库 remote
   名是 `github`,且"几乎每个 agent 都犯过一次"(owner 证言,高频重复
   事故)。→ **Collaboration Workflow**「The remote is named `github`」。

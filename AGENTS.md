@@ -43,10 +43,10 @@ CR / RM); do not mass-rename history.
   closeout. Purely additive schema touches and reversible product-surface
   work may downgrade to PA-lite — the downgrade reason goes in the plan
   header and CR must review whether it still holds.
-- 例行刀默认 Workflow 三步流水线(DEV → verify 复核 → fresh CR);并行刀
-  硬条件三条;worktree 纪律(含断点锚):细则全文在
-  `docs/agents/dispatch-protocols.md`,开流水线 / 并行 / worktree DEV 前
-  必读,不得凭记忆派工。
+- Workflow 路由(裁决点切段:确定段进脚本、裁决点回主代理;例行刀整刀
+  流水线;批量机械扇出);并行刀硬条件三条;worktree 纪律(含断点锚):
+  细则全文在 `docs/agents/dispatch-protocols.md`,派工前必读,不得凭
+  记忆派工。
 - CR-lite(主代理直接冷读 diff)适用于 small 刀与低风险 polish;CR 只
   复核未证实项,已被 CI / verify 证实的不重跑。
 
