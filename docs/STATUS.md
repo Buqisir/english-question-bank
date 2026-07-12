@@ -23,6 +23,12 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
 
 ## 主线焦点
 
+- 2026-07-12：**project-os skill 蒸馏收官**（用户级资产
+  `~/.claude/skills/project-os/`，自带 git v1.1）：本项目协作 OS 母版化
+  ——填槽宪法+templates 12 件+agent 四件套+hook/script 空槽版+普适血书
+  12 条随行+休眠件 7 节；fresh CR 4 MF 已修（悬空引用×3+60分档自洽）。
+  回流纪律双向挂钩（本项目 case-law 序言 ↔ 母版）。开新项目说「按
+  project-os 开」即用。
 - 2026-07-12：**H10-agents-constitution 收官**（b674b1b+收口 commit，CR
   APPROVE 0 MF/SW×2 直收，housekeeping 73/73 绿）：AGENTS 宪法化 469→330
   行，叙事入判例库 case-law.md（血书元规则成文），派工/UI 规程按需加载；

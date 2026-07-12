@@ -7,6 +7,11 @@
 
 条目格式:日期 → 事故 / 出处 → **固化法条位置**。按日期倒序。
 
+**回流纪律**:普适级判例(换个项目还会撞的:工具机制 / agent 天性 /
+协作形态)在入本库的同时,回流母版
+`~/.claude/skills/project-os/assets/case-law-universal.md`(仅本机;
+该 skill 目录自带 git,回流后一行 commit)。项目特有判例不回流。
+
 ## 2026-07-12
 
 - **push 用错 remote 名**:H10 收官 push `origin` 失败——本仓库 remote
