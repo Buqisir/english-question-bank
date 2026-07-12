@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+解析字段路线图全部 grilling 闭环；新立：暖纸转正小刀、刀E、analysis-fields 四轨）
+Last updated: 2026-07-12（刀A+卷宗柜双刀收官合入 main；生产部署与 owner 观感 QA 待做）
 
 ## 现在是什么
 
@@ -23,6 +23,22 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
 
 ## 主线焦点
 
+- 2026-07-12：**刀A 备课桌骨架 + 卷宗柜双刀收官**（worktree 并行施工，
+  merge 后 main verify 74/74 绿 + CI 绿；双 fresh CR APPROVE 0 MF）：
+  ① 刀A（原型三裁点全落地）——暖纸桌满幅+纸居中 820px、右 rail 整卷页
+  目录语言（点击滚动+scrollspy 双向、拖拽通道保留）、贴纸操作条
+  上移/下移/前置分页/移除（PATCH 落库实测）、分页建议安静标注点击
+  生效（徽标 8页→9页联动）、页数徽标「共 N 页 · 双面 M 张 · A4」真值、
+  删除即删+toast 撤销复原、窄屏 rail 退化；DraftPaperOutline 退役。
+  ② 卷宗柜——月度档案分组（组头真计数、筛选如实、空组头随删消失）、
+  微缩 A4 暖纸卡（hover 抬起 computed-style 铁证）、删除弹窗措辞升级
+  三路径全验、「个人空间/共 N 份/草稿卷」命名法落地。CR SW 挂账见两刀
+  cr.md（刀A×4：陈旧 previewScale 锚点/组标记位置耦合/沉降监听有界
+  泄漏/拖拽未真拖；卷宗柜×4）。**账单**：DEV 续做 162k + CR 49k+66k
+  tok；本会话为死机接手（刀A 半成品由 DEV 审读续建）。**owner QA 待做**
+  （观感+顺手拖一把 rail 排序）；**生产未部署，owner 拍板后
+  deploy-remote.sh 一键**。插曲入档：本机重启后 shell 残留死代理变量
+  致 Vivliostyle 502 假红（unset 即愈，两 worktree+main 均复验）。
 - 2026-07-12：**Workflow 路由极致化收官**：路由决策卡（开刀 10 秒走完，
   dispatch-protocols 首屏）+ 命名工作流 `cut-pipeline`
   （.claude/workflows/，DEV→verify→CR 参数化一行派工，四硬纪律/收口
@@ -145,8 +161,8 @@ Last updated: 2026-07-10（八刀收官已全部部署生产；High 三议题+�
   不算断）→ 卷头 A4/A3 切换（轻量版，默认 A4 记住上次）→ 刀B 扩容
   （形态字段+同面判据）+ 新立刀E「排序建议」排 C 后（任意序、一键
   应用可撤销、永不自动重排）；原型 `prototype-print-form-v2.html`
-  入 draft-desk 目录。排期不变：lecture-rail → 暖纸转正小刀 →
-  刀A+卷宗柜 → motion-pass → B → C → E。
+  入 draft-desk 目录。排期：lecture-rail ✅ → 暖纸转正 ✅ →
+  刀A+卷宗柜 ✅（2026-07-12）→ motion-pass → B → C → E。
 - **暖纸转正小刀（新立，grilling 产物，排 lecture-rail 后）**：①整卷/
   讲评暖色值收编 `--paper-*` token（纯等值替换零视觉变化）②工作台
   预览换暖纸桌+纸面 Resting 阴影（收专项审计 P0-D1，owner 议题3 灰怪
