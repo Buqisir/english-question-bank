@@ -37,6 +37,12 @@ PM 层交接无落点;评审/判例产物未复利化。
 - C3 节名 `Current Operating Reality` 保留(被 .claude/agents/*.md ×4、
   pa/cr-persona、review-levels、cut-workflow-protocol 共 8 处引用,不翻新)。
 - C4 宪法本体目标 ≤180 行(实际行数如实报告,不为凑数删法条)。
+  **施工中修订(2026-07-12)**:零丢条约束下实测法条本体体量,宪法落地
+  330 行(469 → 330,-30%;已二次下放 dispatch-protocols.md /
+  ui-collaboration.md 并对 review-levels 去重)。180 不可达:产品法
+  (Posture / Steering / Teacher ~95 行)与核心流程法(Current Operating
+  Reality 95 行)均为现行有效法条,继续压只能删法条或玩排版。偏离
+  交 CR 审计表态。
 - C5 新增模板三件:_templates/plan.md 增"裁决点清单"节;新建 _templates/case-ruling.md、
   _templates/qa-checklist.md;_templates/README.md 登记。
 - C6 review-levels.md「Hit-Rate Adaptive Depth」扩展 owner QA 降档段,标注 owner

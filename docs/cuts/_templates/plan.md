@@ -70,6 +70,15 @@ Sonnet DEV 可以给到清单级；Opus/Fable 档 DEV 只留意图与边界，
 - Step 1 可以立即开始。
 - Step N 依赖 Step N-1 的 verifier 通过。
 
+## 裁决点清单(主代理出场点;施工中勾选)
+
+<仅 medium / large 且主代理有步间裁决点时填写(MF 判定、owner 拍板转达、
+QA 闸、merge)。这是 PM 层的断点锚:会话中断后接手者凭它定位 PM 走到了
+哪个裁决点,不必重放长会话。裁决结论写进本目录文件,不塞 commit message>
+
+- [ ] <裁决点 1>
+- [ ] <裁决点 2>
+
 ## PA Follow-Up Decisions
 
 <仅当本 cut 经过了 PA 且有 Must Fix 或 PO 决策时填写。记录 PA 发现的问题和 PM/PO 的处置>

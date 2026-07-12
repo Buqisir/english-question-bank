@@ -80,10 +80,25 @@ Use these to prevent review from expanding forever.
 - 判断依据就是 STATUS 收官行里的 CR 结论记录（"CR APPROVE 0 MF"），
   不另建表。降档决定由主代理在派工时一句话记录在 plan/派工 prompt 里。
 
+同法理扩展到 **owner PO QA**（owner 拍板 2026-07-11）：
+
+- 同一刀类 owner QA 连续 **3 把**零发现，该类降为**抽查**：每 3-4 把抽
+  1 把仍请 owner 实点，其余由主代理浏览器 QA 代位、对照单归档。
+- 任何渠道（抽查 / 使用中发现 / 生产事故）命中 1 个 owner 级发现，该类
+  **立即**回到每把必 QA，重新累计。
+- 不适用面同上（L4 高危面 / 首次触碰的新面 / 不可逆触发器覆盖的刀）
+  永不降档。
+- QA 请求默认附对照单（`docs/cuts/_templates/qa-checklist.md`，3-5 项
+  操作 + 预期），把 owner QA 从自由探索变成 ≤5 分钟的对照验收。
+
 - **Must Fix**: blocks the current PR.
 - **Should Watch**: record and monitor; do not automatically turn it into a task.
 - **Follow-up Gate**: must be resolved before a named future stage.
 - **Nice-to-have**: do not schedule unless PO explicitly asks.
+- **Self-Review Blind Spots**: when CR-lite feeds a later Big CR, CR-lite must
+  list the places the implementer / reviewer suspects are weak but cannot
+  confidently judge; Big CR inspects those first, then continues normal
+  risk-based review.
 
 ## Operating Notes
 

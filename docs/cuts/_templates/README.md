@@ -30,6 +30,15 @@ docs/cuts/<cut-id>/
   handoff.md    # only when work crosses agent/session/day boundaries
 ```
 
+Optional files by work type:
+
+```text
+  qa-checklist.md  # owner PO QA 对照单(user-visible cuts;3-5 项操作+预期,
+                   # 模板 _templates/qa-checklist.md)
+  rulings.md       # 判例裁决战役的判例集(数据质量类;模板
+                   # _templates/case-ruling.md)
+```
+
 Optional prompt archive files:
 
 ```text
