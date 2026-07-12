@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, FileDown, FolderPlus, Printer, RotateCcw } from 'lucide-react'
+import { Archive, ArrowDown, ArrowUp, FileDown, FolderPlus, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
 import {
@@ -23,8 +23,8 @@ import {
   parseAssemblyBasket,
 } from '../../paperAssembly/basketPersistence'
 import { describeError } from '../shared/errorCopy'
-import { DraftPaperOutline } from './DraftPaperOutline'
-import { buildA4PreviewHtml } from './draftPaperPreviewHtml'
+import { DraftPaperRail } from './DraftPaperRail'
+import { buildA4PreviewHtml, type DraftPaperPreviewSuggestion } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
 
 type DraftVersionType = 'student' | 'teacher'
@@ -113,6 +113,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
   const exportMenuRef = useRef<HTMLDivElement | null>(null)
   const [previewScale, setPreviewScale] = useState(1)
+  // draft-desk-a: iframe now grows to its full rendered height (read from
+  // contentDocument after load) instead of a fixed 1188px single-page guess
+  // — the desk's own scroll carries multi-page drafts (plan.md technical
+  // constraint). 1200 is a placeholder for the first paint before the first
+  // onLoad tick; it snaps to the real value almost immediately since srcDoc
+  // content has no network round-trip.
+  const iframeRef = useRef<HTMLIFrameElement | null>(null)
+  const paperColRef = useRef<HTMLDivElement | null>(null)
+  const scrollSettleCancelRef = useRef<(() => void) | null>(null)
+  const [nativeContentHeight, setNativeContentHeight] = useState(1200)
+  const [pageCount, setPageCount] = useState(1)
+  const [previewReady, setPreviewReady] = useState(false)
+  const [hoveredGroupId, setHoveredGroupId] = useState<string | null>(null)
+  const [hoverAnchorTop, setHoverAnchorTop] = useState<number | null>(null)
+  const [activeRailGroupId, setActiveRailGroupId] = useState<string | null>(null)
 
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
@@ -203,21 +218,213 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }, [exportMenuOpen])
 
+  // draft-desk-a: previously scrolled the retired outline panel's own row
+  // into view (`[data-draft-group-id]` lived only there). The rail keeps
+  // that same attribute (so existing deep-link selectors still resolve),
+  // but the scroll target is now the actual paper block via
+  // scrollToGroupInPaper — a more useful "focus" now that the paper itself
+  // is directly reachable, and it needs the preview iframe to have finished
+  // loading + tagging its groups first (previewReady), not just draftPaper.
   useEffect(() => {
-    if (!draftPaper || !focusGroupId || focusedOnceRef.current) return
+    if (!draftPaper || !focusGroupId || !previewReady || focusedOnceRef.current) return
     const timer = window.setTimeout(() => {
-      const target = document.querySelector(`[data-draft-group-id="${CSS.escape(focusGroupId)}"]`)
-      target?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+      scrollToGroupInPaper(focusGroupId)
       focusedOnceRef.current = true
     }, 180)
     return () => window.clearTimeout(timer)
-  }, [draftPaper, focusGroupId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [draftPaper, focusGroupId, previewReady])
 
-  const totalQuestions = useMemo(
-    () => draftPaper?.items.reduce((sum, item) => sum + Number(item.questionGroup?.questionCount || 0), 0) || 0,
-    [draftPaper],
+  // draft-desk-a: only non-groupMissing items ever reach a `.question-group`
+  // section in printHtml (server/draft-paper/draftPaperStore.mjs's
+  // buildDraftPaperBlocks skips groupMissing entirely — see
+  // draftPaperPreviewHtml.ts's tagGroupSections comment) — this is the same
+  // filtered, ordered list the preview script positionally tags sections
+  // with, so it must be passed to buildA4PreviewHtml in lockstep.
+  const nonMissingItems = useMemo(() => draftPaper?.items.filter((item) => !item.groupMissing) ?? [], [draftPaper])
+
+  const previewSuggestions = useMemo<DraftPaperPreviewSuggestion[]>(
+    () => (draftPaper?.pageBreakSuggestions ?? []).map((suggestion) => ({ groupId: suggestion.groupId, reason: suggestion.reason })),
+    [draftPaper?.pageBreakSuggestions],
   )
-  const previewHtml = useMemo(() => buildA4PreviewHtml(draftPaper?.printHtml || ''), [draftPaper?.printHtml])
+
+  const previewHtml = useMemo(
+    () => buildA4PreviewHtml(draftPaper?.printHtml || '', nonMissingItems.map((item) => item.groupId), previewSuggestions),
+    [draftPaper?.printHtml, nonMissingItems, previewSuggestions],
+  )
+
+  // The iframe re-navigates (srcDoc changes → full document reload) whenever
+  // previewHtml changes; scrollspy/hover-sticker/page-badge reads must wait
+  // for the *new* document's onLoad tick rather than trusting stale data
+  // tagged by the previous one. Adjusted during render (React's documented
+  // "adjusting state when a prop changes" pattern) rather than in an effect,
+  // to avoid the extra render-then-effect-then-render round trip.
+  const previousPreviewHtmlRef = useRef(previewHtml)
+  if (previousPreviewHtmlRef.current !== previewHtml) {
+    previousPreviewHtmlRef.current = previewHtml
+    if (previewReady) setPreviewReady(false)
+  }
+
+  function getGroupIframeOffsetTop(groupId: string): number | null {
+    const doc = iframeRef.current?.contentDocument
+    if (!doc) return null
+    const el = doc.querySelector(`[data-group-id="${CSS.escape(groupId)}"]`)
+    if (!el) return null
+    return (el as HTMLElement).getBoundingClientRect().top
+  }
+
+  // Anchor position for the hover sticker (裁点1), expressed relative to
+  // `.draft-paper-col` (its `position: relative` offset parent — see
+  // DraftPaperWorkbench.css). Computed once per hover, not re-derived on
+  // scroll: iframeRect.top and colRect.top shift by the same amount as the
+  // desk scrolls, so their difference is scroll-invariant (see the CSS
+  // comment on `.draft-group-actions`).
+  function computeGroupAnchorTop(groupId: string): number | null {
+    const iframeEl = iframeRef.current
+    const colEl = paperColRef.current
+    if (!iframeEl || !colEl) return null
+    const offsetTop = getGroupIframeOffsetTop(groupId)
+    if (offsetTop == null) return null
+    const iframeRect = iframeEl.getBoundingClientRect()
+    const colRect = colEl.getBoundingClientRect()
+    return iframeRect.top - colRect.top + offsetTop * previewScale
+  }
+
+  function handleIframeLoad() {
+    const doc = iframeRef.current?.contentDocument
+    if (!doc) return
+    const pages = doc.querySelectorAll('.preview-page')
+    setPageCount(pages.length || 1)
+    const height = doc.documentElement?.scrollHeight || doc.body?.scrollHeight || 1200
+    setNativeContentHeight(height)
+
+    // draft-desk-a 裁点1: hovering any flattened child of a `.question-group`
+    // (each carries `data-group-id`, see draftPaperPreviewHtml.ts's
+    // tagGroupSections/flatten) drives the parent-rendered overlay sticker.
+    // The break-hint's click is the only interaction handled inside the
+    // iframe document itself — both are delegated on the fresh
+    // contentDocument so they are rewired every reload without leaking
+    // listeners onto discarded docs.
+    doc.addEventListener('mouseover', (event) => {
+      const target = (event.target as HTMLElement).closest?.('[data-group-id]')
+      const groupId = target?.getAttribute('data-group-id') || null
+      if (!groupId) return
+      setHoveredGroupId(groupId)
+      setHoverAnchorTop(computeGroupAnchorTop(groupId))
+    })
+
+    doc.addEventListener('click', (event) => {
+      const hint = (event.target as HTMLElement).closest?.('.break-hint')
+      if (!hint) return
+      const groupId = hint.getAttribute('data-break-hint-group-id')
+      if (!groupId) return
+      const item = draftPaper?.items.find((entry) => entry.groupId === groupId)
+      if (item) void togglePageBreak(item, true)
+    })
+
+    setPreviewReady(true)
+  }
+
+  // scrollspy: highlight the rail item whose group has scrolled past a fixed
+  // trigger line near the top of the viewport. Recomputed on every scroll
+  // tick (rAF-throttled) rather than cached, since the desk (not the iframe)
+  // owns the scroll — see plan.md's technical constraint on the srcDoc
+  // same-origin iframe growing to its content height.
+  useEffect(() => {
+    if (!previewReady || nonMissingItems.length === 0) return
+    let ticking = false
+    function updateActive() {
+      ticking = false
+      const iframeEl = iframeRef.current
+      if (!iframeEl) return
+      const iframeRect = iframeEl.getBoundingClientRect()
+      const TRIGGER_Y = 160
+      let candidate: string | null = null
+      let candidateTop = -Infinity
+      for (const item of nonMissingItems) {
+        const offsetTop = getGroupIframeOffsetTop(item.groupId)
+        if (offsetTop == null) continue
+        const clientTop = iframeRect.top + offsetTop * previewScale
+        if (clientTop <= TRIGGER_Y && clientTop > candidateTop) {
+          candidate = item.groupId
+          candidateTop = clientTop
+        }
+      }
+      setActiveRailGroupId(candidate || nonMissingItems[0].groupId)
+    }
+    function handleScroll() {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(updateActive)
+    }
+    updateActive()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [previewReady, nonMissingItems, previewScale])
+
+  // Rail click / focus-deep-link target. Mirrors PaperBrowsePage.scrollToAnchor's
+  // settle-loop (lecture-rail-scroll-fix, STATUS 2026-07-11): a plain
+  // scrollIntoView-once misses two real failure modes — (a) the desk's
+  // content can still be settling (async printHtml/pagination) and push the
+  // target after the first measurement, and (b) `smooth` scrolling is
+  // rAF-driven and freezes if the tab is backgrounded/occluded. So: scroll
+  // once, then poll every 150ms for 5s; if the target's computed position
+  // holds still for 3 ticks but the page hasn't actually reached it, force a
+  // `behavior:'auto'` correction. Any user scroll/keyboard input cancels the
+  // watch immediately.
+  function scrollToGroupInPaper(groupId: string) {
+    scrollSettleCancelRef.current?.()
+    const computeTarget = () => {
+      const iframeEl = iframeRef.current
+      if (!iframeEl) return null
+      const offsetTop = getGroupIframeOffsetTop(groupId)
+      if (offsetTop == null) return null
+      const iframeRect = iframeEl.getBoundingClientRect()
+      return window.scrollY + iframeRect.top + offsetTop * previewScale - 96
+    }
+    const initial = computeTarget()
+    if (initial == null) return
+    window.scrollTo({ top: Math.max(0, initial), behavior: 'smooth' })
+
+    const deadline = performance.now() + 5000
+    let cancelled = false
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const cancel = () => {
+      cancelled = true
+      if (timer !== undefined) clearTimeout(timer)
+      window.removeEventListener('wheel', cancel)
+      window.removeEventListener('touchstart', cancel)
+      window.removeEventListener('keydown', cancel)
+      if (scrollSettleCancelRef.current === cancel) scrollSettleCancelRef.current = null
+    }
+    scrollSettleCancelRef.current = cancel
+    window.addEventListener('wheel', cancel, { passive: true })
+    window.addEventListener('touchstart', cancel, { passive: true })
+    window.addEventListener('keydown', cancel)
+    let lastTarget = Number.NaN
+    let stillChecks = 0
+    const settle = () => {
+      if (cancelled) return
+      if (performance.now() > deadline) {
+        cancel()
+        return
+      }
+      const desired = computeTarget()
+      if (desired == null) {
+        lastTarget = Number.NaN
+        stillChecks = 0
+      } else {
+        stillChecks = Math.abs(desired - lastTarget) < 1 ? stillChecks + 1 : 0
+        lastTarget = desired
+        if (stillChecks >= 3 && Math.abs(window.scrollY - desired) > 4) {
+          window.scrollTo({ top: Math.max(0, desired), behavior: 'auto' })
+          stillChecks = 0
+        }
+      }
+      timer = setTimeout(settle, 150)
+    }
+    timer = setTimeout(settle, 150)
+  }
 
   // A4 page renders at a fixed native width (210mm ≈ 794px). On narrow
   // viewports the sheet no longer fits its container; scale it down to fit
@@ -596,37 +803,92 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
       <main className="draft-workbench-layout">
         <section className="draft-preview-desk" aria-label="A4 预览">
-          <div className="draft-preview-meta">
-            <span>{draftPaper.items.length} 题组</span>
-            <span>{totalQuestions} 小题</span>
-            <span>{versionType === 'teacher' ? '教师版' : '学生版'}</span>
-          </div>
-          <div
-            className="draft-a4-sheet"
-            ref={a4SheetRef}
-            style={previewScale < 1 ? { height: `${1188 * previewScale}px` } : undefined}
-          >
-            {previewHtml ? (
-              <iframe
-                title="草稿卷 A4 预览"
-                srcDoc={previewHtml}
-                style={previewScale < 1 ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' } : undefined}
-              />
-            ) : (
-              <div className="draft-a4-empty">请先添加题组</div>
-            )}
-          </div>
-        </section>
+          <div className="draft-paper-col" ref={paperColRef}>
+            <p className="draft-paper-meta">
+              共 {pageCount} 页 · 双面 {Math.ceil(pageCount / 2)} 张 · A4
+            </p>
+            <div className="draft-a4-sheet" ref={a4SheetRef} style={{ height: `${nativeContentHeight * previewScale}px` }}>
+              {previewHtml ? (
+                <iframe
+                  ref={iframeRef}
+                  title="草稿卷 A4 预览"
+                  srcDoc={previewHtml}
+                  onLoad={handleIframeLoad}
+                  onMouseLeave={() => {
+                    setHoveredGroupId(null)
+                    setHoverAnchorTop(null)
+                  }}
+                  style={{
+                    height: `${nativeContentHeight}px`,
+                    ...(previewScale < 1 ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' } : null),
+                  }}
+                />
+              ) : (
+                <div className="draft-a4-empty">请先添加题组</div>
+              )}
+            </div>
 
-        <DraftPaperOutline
-          items={draftPaper.items}
-          pageBreakSuggestions={draftPaper.pageBreakSuggestions}
-          onDragStart={(itemId) => setDraggedItemId(itemId)}
-          onDrop={handleDrop}
-          onMoveItem={moveItem}
-          onTogglePageBreak={togglePageBreak}
-          onDeleteItem={deleteItem}
-        />
+            {hoveredGroupId && hoverAnchorTop != null && (() => {
+              const hoveredItem = draftPaper.items.find((item) => item.groupId === hoveredGroupId)
+              if (!hoveredItem) return null
+              const fullIndex = draftPaper.items.findIndex((item) => item.id === hoveredItem.id)
+              const canPageBreakBefore = fullIndex > 0
+              return (
+                <div
+                  className="draft-group-actions"
+                  style={{ top: `${hoverAnchorTop}px` }}
+                  onMouseLeave={() => {
+                    setHoveredGroupId(null)
+                    setHoverAnchorTop(null)
+                  }}
+                >
+                  <button
+                    type="button"
+                    aria-label="上移"
+                    title="上移"
+                    disabled={fullIndex <= 0}
+                    onClick={() => moveItem(hoveredItem.id, -1)}
+                  >
+                    <ArrowUp size={14} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="下移"
+                    title="下移"
+                    disabled={fullIndex >= draftPaper.items.length - 1}
+                    onClick={() => moveItem(hoveredItem.id, 1)}
+                  >
+                    <ArrowDown size={14} />
+                  </button>
+                  {canPageBreakBefore && (
+                    <button
+                      type="button"
+                      aria-label={hoveredItem.pageBreakBefore ? '取消分页' : '前置分页'}
+                      title={hoveredItem.pageBreakBefore ? '取消分页' : '前置分页'}
+                      aria-pressed={hoveredItem.pageBreakBefore}
+                      onClick={() => void togglePageBreak(hoveredItem, !hoveredItem.pageBreakBefore)}
+                    >
+                      <SeparatorHorizontal size={14} />
+                    </button>
+                  )}
+                  <button type="button" className="danger" aria-label="移除" title="移除" onClick={() => void deleteItem(hoveredItem)}>
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              )
+            })()}
+          </div>
+
+          <DraftPaperRail
+            items={draftPaper.items}
+            activeGroupId={activeRailGroupId}
+            onItemClick={scrollToGroupInPaper}
+            onDragStart={(itemId) => setDraggedItemId(itemId)}
+            onDrop={handleDrop}
+            onMoveItem={moveItem}
+            onDeleteItem={deleteItem}
+          />
+        </section>
       </main>
 
       {removedItem && (
