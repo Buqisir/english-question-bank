@@ -165,6 +165,11 @@ Last updated: 2026-07-12（刀A+卷宗柜双刀收官；owner 观感 QA 过；�
   应用可撤销、永不自动重排）；原型 `prototype-print-form-v2.html`
   入 draft-desk 目录。排期：lecture-rail ✅ → 暖纸转正 ✅ →
   刀A+卷宗柜 ✅（2026-07-12）→ motion-pass → B → C → E。
+  **motion-pass 开工约定（owner 2026-07-12）**：下一会话即开；工具已
+  备齐——Emil 全套 5 skill 已装（improve-animations 开场出审计路线图、
+  review-animations 当验收尺、apple-design 处方库；上游 clone 在
+  ~/.claude/vendor/emilkowalski-skills，开工前跑 sync 脚本拉新）+
+  impeccable v3.9.1（自带升级自检）。
 - **暖纸转正小刀（新立，grilling 产物，排 lecture-rail 后）**：①整卷/
   讲评暖色值收编 `--paper-*` token（纯等值替换零视觉变化）②工作台
   预览换暖纸桌+纸面 Resting 阴影（收专项审计 P0-D1，owner 议题3 灰怪
