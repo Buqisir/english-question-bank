@@ -741,7 +741,10 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // Paper row CSS exists with cursor: pointer + soft hover.
   const paperRowRule = css.match(/^\.concierge-paper-row\s*\{[\s\S]*?\}/m)?.[0] || ''
   assert('paper-row uses cursor: pointer', /cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
-  assert('paper-row has soft transition (no transform)', /transition:\s*background\s*120ms\s*ease,\s*box-shadow\s*120ms\s*ease/.test(paperRowRule), `got: ${paperRowRule}`)
+  // motion-pass: transition duration/curve literals were collected into
+  // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
+  // token form on the same background+box-shadow pair, still no transform.
+  assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-fast\)\s*var\(--ease-hover\),\s*box-shadow\s*var\(--motion-fast\)\s*var\(--ease-hover\)/.test(paperRowRule), `got: ${paperRowRule}`)
   const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]*?\.concierge-paper-row:focus-visible\s*\{[^}]*\}/)?.[0] || ''
   assert('paper-row hover uses neutral #EDEDEA', /background:\s*#EDEDEA/i.test(hoverRule), '')
 

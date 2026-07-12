@@ -33,7 +33,7 @@
   padding: 24px 24px 96px;
   box-sizing: border-box;
   position: relative;
-  transition: grid-template-columns 0.2s ease;
+  transition: grid-template-columns var(--motion-slow) var(--ease-in-out);
 }
 
 @media (min-width: 1200px) {
@@ -248,7 +248,7 @@
   height: 0;
   border-top: 1px dashed rgba(var(--paper-ink-rgb), 0.18);
   opacity: 1;
-  transition: opacity 0.15s ease;
+  transition: opacity var(--motion-base) var(--ease-out);
   pointer-events: none;
 }
 
@@ -288,7 +288,7 @@
   border-bottom: 1px dashed rgba(44, 110, 86, 0.55);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease;
+  transition: opacity var(--motion-base) var(--ease-out);
 }
 
 .paper-browse-group-card:hover::after,
@@ -315,7 +315,7 @@
   margin-right: calc(-1 * (var(--ps-page-margin-x, 91px) - 8px));
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.12s ease;
+  transition: opacity var(--motion-fast) var(--ease-out);
 }
 
 .paper-browse-group-card:hover .paper-browse-group-actions,
@@ -390,7 +390,7 @@
   left: 24px;
   right: 24px;
   border-top: 1px dashed rgba(var(--paper-ink-rgb), 0.18);
-  transition: opacity 0.15s ease;
+  transition: opacity var(--motion-base) var(--ease-out);
 }
 
 /* 切口=提示起始线：罩上缘用量好的偏移；量不到时兜底回卡顶（等同旧行为，
@@ -438,7 +438,7 @@
   cursor: pointer;
   z-index: 31;
   box-shadow: -1px 1px 4px rgba(30, 30, 28, 0.08);
-  transition: background 0.12s, right 0.2s ease;
+  transition: background var(--motion-fast) var(--ease-hover), right var(--motion-slow) var(--ease-out);
 }
 
 .paper-browse-lecture-handle:hover {
@@ -717,7 +717,7 @@
   gap: 10px;
   align-items: flex-start;
   cursor: pointer;
-  transition: border-color 0.12s ease, background-color 0.12s ease;
+  transition: border-color var(--motion-fast) var(--ease-hover), background-color var(--motion-fast) var(--ease-hover);
 }
 
 .similar-rcard:hover {
@@ -809,7 +809,7 @@
   border-radius: 8px;
   padding: 9px 16px;
   opacity: 0;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition: opacity var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out);
   pointer-events: none;
   z-index: 32;
 }

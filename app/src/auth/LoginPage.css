@@ -98,7 +98,7 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--motion-base) var(--ease-hover);
 }
 
 .login-submit:hover:not(:disabled) {

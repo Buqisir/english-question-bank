@@ -186,7 +186,7 @@
   cursor: pointer;
   font: inherit;
   color: inherit;
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 
 .ra-question-stem:hover {
@@ -235,7 +235,7 @@
   cursor: pointer;
   font: inherit;
   color: inherit;
-  transition: background 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 
 .ra-option:hover {
@@ -333,7 +333,7 @@
 }
 
 .ra-link-overlay path.ra-link-animate {
-  animation: ra-link-draw 260ms ease-out both;
+  animation: ra-link-draw var(--motion-entrance) var(--ease-out) both;
   /* Keep transform origin at the start of the path so the slide reads as
    * "coming from the option badge". */
   transform-origin: 100% 50%;

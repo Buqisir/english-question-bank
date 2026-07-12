@@ -451,7 +451,7 @@
   border: 1px solid rgba(30, 30, 28, 0.14);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.62);
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: background-color var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 
 .pi-ps-analysis-option-section--active {
@@ -706,7 +706,7 @@ button.pi-ps-analysis-option-row:focus-visible {
 }
 
 .pi-ps-harness-shell .pi-line-path--animated {
-  animation: pi-ps-harness-line-draw 280ms ease-out;
+  animation: pi-ps-harness-line-draw var(--motion-entrance) var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -874,7 +874,7 @@ button.pi-ps-analysis-distractor--selected {
   /* ui-panel-reunify: width is a layout property (triggers reflow on
      every animated frame); only the visual properties animate. Width
      now changes instantly on state change. */
-  transition: background 160ms ease-out, border-color 160ms ease-out;
+  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
 }
 
 /* State 2: hover / focus-within — short labels visible, 160px */
@@ -1070,8 +1070,8 @@ button.pi-ps-analysis-distractor--selected {
   border-radius: 8px;
   cursor: pointer;
   overflow: hidden;
-  transition: background 80ms ease, border-color 80ms ease,
-    color 80ms ease;
+  transition: background var(--motion-micro) var(--ease-hover), border-color var(--motion-micro) var(--ease-hover),
+    color var(--motion-micro) var(--ease-hover);
 }
 
 .pi-ps-insight-chip:hover {
@@ -1200,7 +1200,7 @@ button.pi-ps-analysis-distractor--selected {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   max-height: 60vh;
   overflow-y: auto;
-  animation: pi-ps-insight-fade-in 120ms ease-out;
+  animation: pi-ps-insight-fade-in var(--motion-fast) var(--ease-out);
 }
 
 @keyframes pi-ps-insight-fade-in {
@@ -1443,7 +1443,7 @@ button.pi-ps-analysis-distractor--selected {
   background: rgba(255, 255, 255, 0.6);
   color: var(--eqb-color-text-muted, #6a6a64);
   cursor: pointer;
-  transition: background 0.1s, border-color 0.1s, color 0.1s;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
 .pi-ps-structure-btn:hover {
@@ -1496,7 +1496,7 @@ button.pi-ps-analysis-distractor--selected {
   border: 0;
   border-radius: 0;
   cursor: pointer;
-  transition: color 0.1s;
+  transition: color var(--motion-fast) var(--ease-hover);
 }
 
 .pi-ps-structure-row:hover {
@@ -1550,7 +1550,7 @@ button.pi-ps-analysis-distractor--selected {
   z-index: 3;
   /* Transition for subtle fade-in per PA decision */
   opacity: 1;
-  transition: opacity 0.15s ease-in;
+  transition: opacity var(--motion-base) var(--ease-out);
 }
 
 /* .pi-ps-harness-left needs position: relative so the brace
@@ -1712,7 +1712,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 
 .pi-seven-option-card[data-jumped='true'] {
-  animation: pi-seven-card-jump 0.9s ease-out;
+  animation: pi-seven-card-jump 0.9s ease-out; /* signature, token-exempt */
 }
 
 @keyframes pi-seven-card-jump {
