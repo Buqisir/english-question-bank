@@ -14,6 +14,12 @@
 
 ## 2026-07-12
 
+- **前置踏实则后置降档**(owner 拍板"铺得踏实后面大概率不会错"):
+  ①原型已 owner 逐裁点拍板的刀,formal PA 默认降 PA-lite(draft-desk
+  系列实证:原型拍板流零方向事故);②流水线 verify 步含全套时即主代理
+  复核本身,收口只盯 CI;③批量跑批加第零问"这批活需要 AI 吗"——纯
+  规则活用 node 脚本零 token,扇出条文压缩、待 R1/R2 首战后按实修订。
+  → Dispatch map / Gates / dispatch-protocols。
 - **Workflow 路由入法**(owner 拍板;背书 = warm-paper 账单判例 + 官方
   文档核查:token 4-7x 是"多代理 vs 单代理"的膨胀、"大多数编码工作
   高度顺序依赖"官方原话、多 workflow 串联 + 阶段间拍板是官方姿势):

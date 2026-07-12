@@ -42,7 +42,9 @@ CR / RM); do not mass-rename history.
   add a fresh Opus PA before DEV; committed `plan.md`; `cut-note.md` at
   closeout. Purely additive schema touches and reversible product-surface
   work may downgrade to PA-lite — the downgrade reason goes in the plan
-  header and CR must review whether it still holds.
+  header and CR must review whether it still holds. 原型已 owner 逐裁点
+  拍板的刀同此:方向审查已由原型过程完成,formal PA 默认降 PA-lite
+  (owner, 2026-07-12)。
 - Workflow 路由(裁决点切段:确定段进脚本、裁决点回主代理;例行刀整刀
   流水线;批量机械扇出);并行刀硬条件三条;worktree 纪律(含断点锚):
   细则全文在 `docs/agents/dispatch-protocols.md`,派工前必读,不得凭
@@ -95,6 +97,9 @@ rise, move the daily default back to high.
   `verify:all`** in the DEV worktree pre-merge; post-merge proof of the
   combined tree is the watched `main` CI run — no local full re-run in the
   main tree unless the merge overlapped interim main commits.
+  cut-pipeline 流水线刀:verify 步的 verifyCmds 含 narrow + full 全套时,
+  该步即此复核本身,主代理收口不再本地重跑,只盯 main CI
+  (owner, 2026-07-12)。
 - Verify convention: new contracts prefer behavioral assertions (start the
   server / call the real API / import the real module) over source-regex
   assertions. A behavioral assertion may retire the matching regex
