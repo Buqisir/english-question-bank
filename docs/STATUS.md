@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-12（motion-pass 收官合并 ecbf0c1；owner PO QA 待做）
+Last updated: 2026-07-12（motion-pass 收官；owner QA 过；生产已部署 62c8998）
 
 ## 现在是什么
 
@@ -29,9 +29,10 @@ Last updated: 2026-07-12（motion-pass 收官合并 ecbf0c1；owner PO QA 待做
   undo-toast 入场补缺、verify-motion-tokens 守门进 CI。cut-pipeline
   Workflow 首跑实测过（args 需真 JSON 对象，脚本已加字符串解析兜底）。
   **账单**：子代理 254k tok（DEV+verify 192k、CR 62k），主代理出场 4。
-  挂账：owner PO QA（qa-checklist.md，重点讲评栏开合手感+reduced-motion
-  观感）、「折叠」时刻待 owner 指认另立 small 刀、CR SW×2（多行续行门孔/
-  harness:874 曲线重判）见 cr.md、生产部署待 owner QA 后。
+  **owner QA 过（2026-07-12，Chrome 实看）**；**生产已部署 62c8998**
+  （deploy-remote.sh 一键，eqb+caddy active、health ok、eqbank.cc 200）。
+  挂账：「折叠」时刻待 owner 指认另立 small 刀、CR SW×2（多行续行门孔/
+  harness:874 曲线重判）见 cr.md。
 - 2026-07-12：**刀A 备课桌骨架 + 卷宗柜双刀收官**（worktree 并行施工，
   merge 后 main verify 74/74 绿 + CI 绿；双 fresh CR APPROVE 0 MF）：
   ① 刀A（原型三裁点全落地）——暖纸桌满幅+纸居中 820px、右 rail 整卷页
