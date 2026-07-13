@@ -50,11 +50,17 @@ scratchpad 脚本：服务器端 headless Chromium 跑 **paged.js**，喂真实�
 - 验收：交互回归 QA 全绿（hover/点按钮/scrollspy/rail 跳转/**多页锚点 SW-3**）。
 
 ### 步4 — PDF 换引擎收口 + Vivliostyle 草稿卷退役（MF-2/MF-7）
-- `exportDraftPaperPdf` 走新出片路径（同源 `page.pdf()`）；迁移 30s 签名缓存（SW-5）；**旧孤儿路由不动**。
-- 验收：`verify-print-pdf-export-flow` + parity 肉眼 QA。
+（**2026-07-12 主代理 xhigh 复审修订，owner 拍板**——原 Opus plan 两处升级：SW-5 由「迁移」改「退役」；浏览器打印并入。）
+- `exportDraftPaperPdf` 改为消费 `getDraftPaperPagination()` 的 `pdfBytes`（同一次 paged.js 渲染的字节，parity 是构造保证）。**退役 `recentDraftPdfExports` 30s TTL 缓存与草稿线 `draftPaperPrintSignature`，不迁移**——SW-5 的真实关切（导出不重渲）被分页签名缓存满足得更好（预览过即命中、零渲染；TTL 反而过期强制重渲）；两套缓存=两个失效时机=DP-title 同族静默失真面，不留。老线磁盘路径 / `preferRecent` / My Space 存档（`saveMySpaceArtifact` 前置调用、artifact 删除时的缓存失效钩子）的交互由 DEV 逐一映射到新形态，报告说明。
+- **浏览器打印换吃分页 HTML**（owner 拍板 2026-07-12 并入）：`printWindow.write(draftPaper.printHtml)` 改写分页 HTML——否则它是第三台分页引擎、最后一个 parity 洞（DP-1 验收 (d) 已证序列化分页 DOM 打印一致）。
+- **前置修 SW-D**：`verify-print-pdf-export-flow.mjs` 在 main 上就崩（cloze fixture 缺挖空标记），先修 fixture 再开工；其断言对象随换线更新。
+- **旧孤儿路由（`exportImplementation.mjs` paperAssembly Vivliostyle 线）不动**。
+- 验收：`verify-print-pdf-export-flow`（修复后）绿 + parity 肉眼 QA 覆盖**三出口**（预览 / PDF / 浏览器打印）。
 
-### 步5 — Forbidden/门复核 + 上线【DP-3】
-- 全 verify 绿（含既有门回归：`verify-c8-draft-paper-contracts` / `-render-model` / `-print-pdf-export-flow` / `-forbidden-scope`；**render-model 门可能被退役客户端分页触及，预判并同刀更新**）。
+### 步5 — Forbidden/门复核 + 上线前置 + 终审【DP-3】
+- 全 verify 绿（含既有门回归：`verify-c8-draft-paper-contracts` / `-render-model` / `-print-pdf-export-flow` / `-forbidden-scope`；render-model 门已随步3 同刀更新✅）。SW-E：forbidden-scope 门的过期 allowlist 处置（更新或明确历史门定位，不留静默红）。
+- SW-B 拍定（预定答案，2026-07-12 复审）：三个 Chromium verify **挪进 e2e job**（它本就装浏览器，verify job 零新增安装成本）；实测后入 `verify-ci` 名单纪律照 housekeeping 守卫。
+- **上线前置（2026-07-12 复审补漏——本地全绿≠HK 单机扛得住常驻浏览器）**：生产机 chromium 安装步入部署流程；常驻 Chromium 内存占用 vs 服务器规格实测；生产硬件暖延迟实测（预算 ≤1s，本地 ~700-800ms，SW-C 收口）；全部落 `docs/cuts/launch-deploy/go-live-record.md`。
 - 浏览器 QA matrix（pa.md 8 场景）走完；owner 产品 QA。
 
 ## Forbidden（本刀不许动）
