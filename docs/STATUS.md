@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-13（a3-imposition 收官未部署；engine-rewire +
-print-form 已部署 48a3a80，owner DP-3 待做；早间双刀部署 2c01e2b +
-真值同步生产 + R2 restore 演练销账）
+Last updated: 2026-07-13（a3-imposition 部署生产 67fc324；三刀 DP-3
+owner 同场过（qa-dp3.md）；早间双刀部署 2c01e2b + 真值同步生产 +
+R2 restore 演练销账）
 
 ## 现在是什么
 
@@ -31,21 +31,23 @@ print-form 已部署 48a3a80，owner DP-3 待做；早间双刀部署 2c01e2b +
   议题2裁点2「不做按张视图」的改判落地，原型四裁点在 cut 目录。a4 路径
   构造性零变化。**账单**：流水线(DEV+verify) 321k + CR 92k；主代理出场 5。
   挂账 SW-1 无牙断言/SW-4 测试进程泄漏硬化（chromiumPool 信号收尾）见
-  cr.md；**未部署**，owner DP-3 待做。cut-pipeline 判例：resume 缓存会原样
+  cr.md；**生产已部署 67fc324**（2026-07-13，health ok、eqbank.cc 200），
+  owner DP-3 过（本地部署前验，`docs/cuts/a3-imposition/qa/qa-dp3.md`，
+  同场覆盖 engine-rewire/print-form 三刀销账）。cut-pipeline 判例：resume 缓存会原样
   回放失败回执（verify 步不重跑），断点恢复走主代理亲跑更顺。
 - 2026-07-13：**engine-rewire 收官**（merge edcf777，fresh Opus CR APPROVE
   0MF/2SW，verify:all 绿 + main CI 绿）：阅读次序换真篇位（同字母70/相邻35/
   词数细排+29 档间不翻转，同卷键=(年,区,卷名) CR 亲验零碰撞）、完形体裁数据
   自愈、七选五体裁弱加分+8、前端恒真过滤器退役。DP-2 QA 过（qa-dp2.md）。
   **账单**：DEV 170k + CR 55k；主代理出场 4。**生产已部署 48a3a80**
-  （2026-07-13，health ok），owner DP-3 待做。
+  （2026-07-13，health ok），owner DP-3 过（qa-dp3.md 同场）。
 - 2026-07-13：**print-form 收官（draft-desk 队列刀C）**（merge ac05962，
   fresh Opus CR APPROVE 0MF/3SW，verify:all 绿 + main CI 绿）：打印形态
   A4/A3 字段（懒 ALTER+记住上次）、词数启发式魔法数字整套退役→真分页衍生
   建议、同面判据（A3 版3/4 同面不算断实证）、计数徽标随形态、PO-1 建议显示
   收账（安静徽标一键生效）。类型收正回 domain 真源。DP-2 QA 过。
   **账单**：DEV 257k + CR 67k；主代理出场 5（含类型收正亲改）。**生产已
-  部署 48a3a80**（同上），owner DP-3 待做。插曲入档：并行自验撞端口留下 3 个残留测试服务，污染后续
+  部署 48a3a80**（同上），owner DP-3 过（qa-dp3.md 同场）。插曲入档：并行自验撞端口留下 3 个残留测试服务，污染后续
   verify:all 假红两轮（清残留即愈）——并行刀自验错峰或差异化端口，候选改进。
 - 2026-07-13：**双刀部署生产 2c01e2b**（deploy-remote.sh + 部署节点两动作）：
   ①体裁真值同步生产库（停服 apply 273 条带备份，生产 verify-genre-truth
