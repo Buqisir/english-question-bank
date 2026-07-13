@@ -84,6 +84,8 @@
 ## 裁决点清单(PM 断点锚)
 1. 【R1-DP1】decisions 产物就绪 → **owner 抽检 gate**(抽检页,判例裁决制);
    不过 → 按新判例返工重批。
+   **✅ R1-DP1 过 2026-07-13**:owner 26 条盲审通过(含「议论」4 条——判窄
+   口径获认可,3.3% 稀疏为语料真实分布);无新判例,decisions 定稿。
 2. 【R1-DP2】gate 过 → apply 落库 + verify 全绿 + CR-lite → 合并。
    收口串行:draft-desk-b 若先合,本刀 rebase(verify-ci/README 追加行冲突
    预期内)。
