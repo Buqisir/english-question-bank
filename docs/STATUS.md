@@ -35,6 +35,8 @@ R2 restore 演练销账）
   owner DP-3 过（本地部署前验，`docs/cuts/a3-imposition/qa/qa-dp3.md`，
   同场覆盖 engine-rewire/print-form 三刀销账）。cut-pipeline 判例：resume 缓存会原样
   回放失败回执（verify 步不重跑），断点恢复走主代理亲跑更顺。
+  **刀E（真 2-up 拼版 PDF）取消**（owner 拍板 2026-07-13，判例入
+  case-law）：驱动「一面两页+短边翻转」已覆盖执行，预览管规划即闭环。
 - 2026-07-13：**engine-rewire 收官**（merge edcf777，fresh Opus CR APPROVE
   0MF/2SW，verify:all 绿 + main CI 绿）：阅读次序换真篇位（同字母70/相邻35/
   词数细排+29 档间不翻转，同卷键=(年,区,卷名) CR 亲验零碰撞）、完形体裁数据
