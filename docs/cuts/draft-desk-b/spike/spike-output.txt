@@ -1,0 +1,117 @@
+Geometry: content box 612px wide x 952.4px tall (96dpi CSS px)
+
+Loading "26.3重庆市巴蜀中学高三月考（七）英语试卷" question groups from DB...
+  9 groups
+  Longest reading passage: "Reading D" (2297 chars, group id group-960d0f8d-reading-d)
+
+Building print HTML (buildPrintHtml, same call as print-visual-qa-guangdong.mjs)...
+  HTML written: /var/folders/x6/sssfzp3x1xdfbr7bz3p_v7s40000gn/T/spike-pagination-HEGVsC/paper.html (23.6 KB)
+
+=== Question 4: launching chromium (timed) ===
+  chromium.launch(): 61ms
+
+--- Run 1/3 ---
+  render+load: 33ms | extract-pagination: 9ms | page.pdf(): 79ms | total(excl launch): 121ms
+  doc height: 6670px | extracted max page: 7 | PDF actual page count: 9
+
+--- Run 2/3 ---
+  render+load: 40ms | extract-pagination: 14ms | page.pdf(): 70ms | total(excl launch): 124ms
+  doc height: 6670px | extracted max page: 7 | PDF actual page count: 9
+
+--- Run 3/3 ---
+  render+load: 27ms | extract-pagination: 13ms | page.pdf(): 69ms | total(excl launch): 109ms
+  doc height: 6670px | extracted max page: 7 | PDF actual page count: 9
+
+=== Question 4: determinism across 3 runs ===
+  Run1 vs Run2: IDENTICAL
+  Run1 vs Run3: IDENTICAL
+  PDF page counts across runs: 9, 9, 9
+
+=== Question 1: extracted pagination structure (run 1) ===
+  Page 1: [GROUP] 一、阅读理解（每题 2.5 分） | [Q] #1. | [Q] #2.
+  Page 2: [Q] #3. | [GROUP] 二、阅读理解（每题 2.5 分） | [Q] #4.
+  Page 3: [Q] #5. | [Q] #6. | [Q] #7. | [GROUP] 三、阅读理解（每题 2.5 分）
+  Page 4: [Q] #8. | [Q] #9. | [Q] #10. | [Q] #11. | [GROUP] 四、阅读理解（每题 2.5 分）
+  Page 5: [Q] #12. | [Q] #13. | [Q] #14. | [Q] #15.
+  Page 6: [GROUP] 五、七选五（每题 2.5 分） | [Q] #16. | [Q] #17. | [Q] #18. | [Q] #19. | [Q] #20.
+  Page 7: [GROUP] 六、写作（每题 0 分） | [GROUP] 七、写作（每题 0 分）
+
+=== Question 2: extracted pagination vs actual PDF pages ===
+  PDF actual page count: 9
+  Extracted max page number: 7
+  Page count match: NO — pdf-lib gives no per-page text extraction, need pdftoppm/pdftotext for content check below
+
+  --- PDF page 1 actual text (first 300 chars) ---
+  2026年广东省高三一模英语试卷 第一部分 阅读理解 一、阅读理解（每题 2.5 分） Urgent: Special Summer Driving Notice To some, sunglasses are a fashion accessory... But When Driving, These Sunglasses May Save Your Life! Many drivers find themselves temporarily blinded while driving directly into the glare of the
+  --- Our extraction says page 1 has: [GROUP] 一、阅读理解（每题 2.5 分） | [Q] #1. | [Q] #2.
+
+  --- PDF page 2 actual text (first 300 chars) ---
+  2. What is promised to customers within 30 days of purchase? A. A replacement for both pairs. B. A free upgrade to a new model. C. A full refund for one returned pair. D. A store credit for future purchases. 3. What must customers do to get the “special price”? A. Buy at a 
+  --- Our extraction says page 2 has: [Q] #3. | [GROUP] 二、阅读理解（每题 2.5 分） | [Q] #4.
+
+  --- PDF page 3 actual text (first 300 chars) ---
+  4. What do we know about The Campus Lantern? A. It was restarted through a CEL project. B. It was designed to be a journalism course. C. It was launched as a Middle School project. D. It was set up to replace Spark and The Torch. 5. Which word best describes Greenberg’s guest le
+  --- Our extraction says page 3 has: [Q] #5. | [Q] #6. | [Q] #7. | [GROUP] 三、阅读理解（每题 2.5 分）
+
+  --- PDF page 4 actual text (first 300 chars) ---
+  How enthusiastically consumers turn to AI for shopping may also depend on how much chatbot-makers embrace ads to make money. Google has reportedly told marketers that it will integrate ads into its Gemini chatbot next year. That could weaken the perceived objectivity of these tools, and thus turn of
+  --- Our extraction says page 4 has: [Q] #8. | [Q] #9. | [Q] #10. | [Q] #11. | [GROUP] 四、阅读理解（每题 2.5 分）
+
+  --- PDF page 5 actual text (first 300 chars) ---
+  customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary. Customers with batteries can typically reserve some battery capacity just for their personal use or even opt out of VPP events entirely. 
+  --- Our extraction says page 5 has: [Q] #12. | [Q] #13. | [Q] #14. | [Q] #15.
+
+  --- PDF page 6 actual text (first 300 chars) ---
+  15. What will still be needed for VPPs to grow further? A. Policy support. B. More pilot programs. C. Technical improvements. D. Stronger customer interest. 英语试题 第6页(共9页)
+  --- Our extraction says page 6 has: [GROUP] 五、七选五（每题 2.5 分） | [Q] #16. | [Q] #17. | [Q] #18. | [Q] #19. | [Q] #20.
+
+  --- PDF page 7 actual text (first 300 chars) ---
+  第二节 七选五 五、七选五（每题 2.5 分） Growing up, I avoided team sports at all costs. 16 And I tend to take competition too far. Pair the two together and sports became a source of frustration. But recent studies are making me rethink that attitude. It turns out that group exercise, especially
+  --- Our extraction says page 7 has: [GROUP] 六、写作（每题 0 分） | [GROUP] 七、写作（每题 0 分）
+
+  --- PDF page 8 actual text (first 300 chars) ---
+  writing 六、写作（每题 0 分） 假定你是校报记者李华，在上周五的“校园开放日”(Open Day), 外教Chris承担了英语示范课教 学。为准确报道该活动，请你给Chris写一封邮件，内容包括： (1)询问示范课的内容与亮点； (2)征求其出镜照片使用授权。 (2)可适当增加细节，使内容充实、行文连贯。 Dear Chris, I’m Li Hua, a student reporter for our school newspaper. Yours, Li Hua 七、写作（每题 0 分）
+  --- Our extraction says page 8 has: (none)
+
+  --- PDF page 9 actual text (first 300 chars) ---
+  The Boys and Girls Club has a great nurse’s room. I know because I spent more time in there than on the court. The nurse was a Vietnamese lady, and because none of the kids could pronounce her name, they called her Skimmy. Skimmy didn’t know anything about basketball or any other American sports, bu
+  --- Our extraction says page 9 has: (none)
+
+=== Question 3: long reading passage paragraph-level pagination ===
+  Passage: "Reading D" — 17 paragraphs
+  -- page 4 --
+    "The electric grid（电网）is under growing pressure. En..."
+    "..."
+    "One emerging solution could provide some relief. V..."
+    "..."
+    "In places where VPP programs are available through..."
+    "..."
+    "To send energy from a VPP to the grid, a central c..."
+  -- page 5 --
+    "..."
+    "How Virtual Power Plants Work..."
+    "..."
+    "Consumers’ energy resources help power the grid..."
+    "..."
+    "VPPs help ensure “resource adequacy,” a term exper..."
+    "..."
+    "◎2026The Pew Charitable Trusts..."
+    "..."
+    "VPPs have scaled beyond the pilot stage and increa..."
+  Paragraphs span 2 page(s) PER OUR NAIVE EXTRACTION: [4, 5]
+  CAVEAT: per Question 2 above, our naive extraction has already drifted ~2 pages behind
+  the actual PDF by this point in the document, so these page NUMBERS are not to be
+  trusted — only usable as "ground truth below, verified independently via pdftotext".
+
+  --- Ground truth (searched actual pdftotext output per PDF page) ---
+    chunk 1/6 ("The electric grid（电网）is under ...") -> PDF page 4
+    chunk 2/6 ("rgy solutions such as solar an...") -> PDF page 4
+    chunk 3/6 ("eir utility bill—in return for...") -> PDF page 5
+    chunk 4/6 ("d, generate a large amount of ...") -> PDF page 5
+    chunk 5/6 (" more diverse set of generatio...") -> PDF page 5
+    chunk 6/6 ("ograms to be created and grow....") -> PDF page 5
+    Ground-truth: passage content found spanning PDF page(s) [4, 5]
+    CONFIRMED (ground truth): the passage DOES auto-split across multiple real PDF pages, mid-paragraph even (see raw pdftotext dump above for pages 4-5).
+
+Artifacts kept in: /var/folders/x6/sssfzp3x1xdfbr7bz3p_v7s40000gn/T/spike-pagination-HEGVsC
+(HTML: paper.html, PDF: run1.pdf — inspect manually if needed)

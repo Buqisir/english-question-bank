@@ -1,0 +1,30 @@
+=== (b-fix) PDF footer per page (pdftotext, last line of each page) ===
+  page 1: "2026年广东省高三一模英语试卷 · 1" OK
+  page 2: "2026年广东省高三一模英语试卷 · 2" OK
+  page 3: "2026年广东省高三一模英语试卷 · 3" OK
+  page 4: "2026年广东省高三一模英语试卷 · 4" OK
+  page 5: "2026年广东省高三一模英语试卷 · 5" OK
+  page 6: "2026年广东省高三一模英语试卷 · 6" OK
+  page 7: "2026年广东省高三一模英语试卷 · 7" OK
+  page 8: "2026年广东省高三一模英语试卷 · 8" OK
+  page 9: "2026年广东省高三一模英语试卷 · 9" OK
+  ALL 9 PDF pages footer "2026年广东省高三一模英语试卷 · <n>": PASS
+
+=== (d-fix) Script-stripped replay of serialized DOM ===
+  scripts removed: 921381 bytes of <script> content
+  .pagedjs_page count: 9 (immediately) / 9 (after 1.5s) — expect 9/9
+
+=== (b-fix) Live-DOM footer via getComputedStyle(::after) per page ===
+  page 1: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 2: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 3: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 4: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 5: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 6: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 7: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 8: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+  page 9: box::after=none box.content=normal inner::after="2026年广东省高三一模英语试卷 · " counter(page)
+
+  screenshots: stripped-dom-page-01.png / stripped-dom-page-06.png (compare vs pdf-page-1/6.png)
+
+Artifacts dir: /var/folders/x6/sssfzp3x1xdfbr7bz3p_v7s40000gn/T/spike-pagedjs-5ZevN7

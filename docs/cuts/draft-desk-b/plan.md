@@ -8,6 +8,7 @@
 
 ## 裁决点清单（PM 断点锚）
 1. **【DP-1｜步0 spike gating】** paged.js 四条硬验收：全过→引擎选定、继续步1；任一不过→**引擎翻案**，停，回 owner/PM 重议。主代理判定。
+   **✅ 2026-07-12 判定：四条全过，引擎选定 paged.js（`spike-gate-dp1.md`；DEV 必读其「三个实操发现」）。**
 2. **【DP-2｜步1-4 步间闸】** 每步 narrow verify + CR-lite 主代理复核绿才进下一步。
 3. **【DP-3｜终审】** 全 verify + 浏览器 QA matrix + owner 产品 QA（parity 肉眼 + 交互回归）。
 

@@ -1,0 +1,197 @@
+Loading "26.3重庆市巴蜀中学高三月考（七）英语试卷" question groups from DB...
+  9 groups
+  Longest reading passage: "Reading D" (2297 chars, group id group-960d0f8d-reading-d)
+
+Building print HTML (buildPrintHtml)...
+  HTML written: /var/folders/x6/sssfzp3x1xdfbr7bz3p_v7s40000gn/T/spike-pagedjs-5ZevN7/paper.html (23.7 KB)
+  Artifacts dir: /var/folders/x6/sssfzp3x1xdfbr7bz3p_v7s40000gn/T/spike-pagedjs-5ZevN7
+
+=== Launching chromium ===
+  chromium.launch(): 120ms
+
+=== (c) Latency: 3 renders on a warm/reused browser instance ===
+
+--- run 1/3 ---
+  [run1] baseLoad=72ms scriptInject=113ms pagination=125ms serialize=36ms pdf=155ms TOTAL(excl launch)=502ms
+  [run1] timedOut=false pagedFlow={"pageCount":9,"performanceMs":129.29999999701977} pdfPageCount=9 pdfError=null
+
+--- run 2/3 ---
+  [run2] baseLoad=52ms scriptInject=115ms pagination=129ms serialize=35ms pdf=155ms TOTAL(excl launch)=486ms
+  [run2] timedOut=false pagedFlow={"pageCount":9,"performanceMs":132.29999999701977} pdfPageCount=9 pdfError=null
+
+--- run 3/3 ---
+  [run3] baseLoad=54ms scriptInject=115ms pagination=133ms serialize=35ms pdf=154ms TOTAL(excl launch)=491ms
+  [run3] timedOut=false pagedFlow={"pageCount":9,"performanceMs":136.39999999850988} pdfPageCount=9 pdfError=null
+
+=== Determinism across 3 runs ===
+  PDF page counts: 9, 9, 9
+  Serialized DOM byte lengths: 1053183, 1053183, 1053183
+
+=== (b) Footer / page-number evidence (per .pagedjs_page, from serialized DOM) ===
+  page 1: footer = ""
+  page 2: footer = ""
+  page 3: footer = ""
+  page 4: footer = ""
+  page 5: footer = ""
+  page 6: footer = ""
+  page 7: footer = ""
+  page 8: footer = ""
+  page 9: footer = ""
+  page 10: footer = ""
+  page 11: footer = ""
+
+=== (a) Long reading passage paragraph-boundary evidence ===
+  passage snippet found in serialized DOM: true
+  passage-related fragments across pages (each row = one <p>/.passage fragment paged.js emitted):
+    page 1 [DIV] len=1826 START="Urgent: Special Summer Driving NoticeTo some, sunglasses are" END="19. 90Special Price: $49+S&H Save $70. 90Call 1-800-333-2045"
+    page 1 [P] len=37 START="Urgent: Special Summer Driving Notice" END="Urgent: Special Summer Driving Notice"
+    page 1 [P] len=46 START="To some, sunglasses are a fashion accessory..." END="To some, sunglasses are a fashion accessory..."
+    page 1 [P] len=54 START="But When Driving, These Sunglasses May Save Your Life!" END="But When Driving, These Sunglasses May Save Your Life!"
+    page 1 [P] len=206 START="Many drivers find themselves temporarily blinded while drivi" END="orists struggle on despite being blinded by the sun’s glare."
+    page 1 [P] len=254 START="Not all sunglasses are created equal. Protecting your eyes i" END="did our research and looked to the most advanced technology."
+    page 1 [P] len=476 START="Sometimes it does take a NASA rocket scientist. Some ordinar" END="This discovery resulted in what is now known as Eagle Eyes®."
+    page 1 [P] len=253 START="The only Sunglass Technology Certified by the Space Foundati" END="and UVB—plus the added benefit of blue-light eye protection."
+    page 1 [P] len=248 START="The finest optics: And buy one, get one FREE! Your satisfact" END="fund of the purchase price. The other pair is yours to keep."
+    page 1 [P] len=34 START="Your Insider Offer Code: ENS245-01" END="Your Insider Offer Code: ENS245-01"
+    page 1 [P] len=109 START="Special price only for customers using the offer code versus" END="code versus the price on Stauer.com without your offer code."
+    page 1 [P] len=36 START="Two Pairs of Eagle Eyes® NavigatorTM" END="Two Pairs of Eagle Eyes® NavigatorTM"
+    page 1 [P] len=19 START="Sunglasses $119. 90" END="Sunglasses $119. 90"
+    page 1 [P] len=35 START="Special Price: $49+S&H Save $70. 90" END="Special Price: $49+S&H Save $70. 90"
+    page 1 [P] len=19 START="Call 1-800-333-2045" END="Call 1-800-333-2045"
+    page 2 [DIV] len=2258 START="At Springside Chestnut Hill Academy (SCH), journalism isn’t " END="Lantern,” he says, “is too big, too bright to turn off now.”"
+    page 2 [P] len=619 START="At Springside Chestnut Hill Academy (SCH), journalism isn’t " END="“journalism track” also emphasizes new media and technology."
+    page 2 [P] len=521 START="SCH’s interdisciplinary nature, the revival of The Campus La" END="ds of stories in print and online from over 70 contributors."
+    page 2 [P] len=647 START="As part of the track, students at every level develop newsro" END="s to analyze these dilemmas and explore potential solutions."
+    page 2 [P] len=314 START="“If we want to equip students for an uncertain future and pr" END="ly matter,” says Ed Glassman, executive director of the CEL."
+    page 2 [P] len=157 START="The faint flicker（闪烁）of Whitman’s idea for a newspaper, two " END="Lantern,” he says, “is too big, too bright to turn off now.”"
+    page 3 [DIV] len=1393 START="Chatbots offer a personal shopper for all. They can listen t" END="ut in deeply personal areas, such as fashion, most struggle."
+    page 3 [P] len=215 START="Chatbots offer a personal shopper for all. They can listen t" END="onsumers can even make purchases directly through a chatbot."
+    page 3 [P] len=352 START="AI firms are betting that their technology will disrupt shop" END="le is also eyeing the market for so-called agentic commerce."
+    page 3 [P] len=490 START="Retailers（零售商）, however, are not sitting back. Many e-commer" END=" such bots over third-party ones like ChatGPT when shopping."
+    page 3 [P] len=336 START="Julie Bornstein, founder of Daydream, an AI fashion-shopping" END="ut in deeply personal areas, such as fashion, most struggle."
+    page 4 [DIV] len=825 START="How enthusiastically consumers turn to AI for shopping may a" END="e high street offers a chance to soak up some festive cheer."
+    page 4 [P] len=311 START="How enthusiastically consumers turn to AI for shopping may a" END="ived objectivity of these tools, and thus turn off shoppers."
+    page 4 [P] len=514 START="As AI upends online shopping, physical stores gain renewed i" END="e high street offers a chance to soak up some festive cheer."
+    page 4 [DIV] len=835 START="The electric grid（电网）is under growing pressure. Energy deman" END="sinesses can enroll their devices into these programs. These"
+    page 4 [P] len=227 START="The electric grid（电网）is under growing pressure. Energy deman" END=" grid disruptions-are increasing in frequency and intensity."
+    page 4 [P] len=411 START="One emerging solution could provide some relief. Virtual pow" END="inesses—that can help balance electricity demand and supply."
+    page 4 [P] len=197 START="In places where VPP programs are available through a utility" END="sinesses can enroll their devices into these programs. These"
+    page 5 [DIV] len=1445 START="customers are then rewarded—usually in the form of a credit " END="e necessary to enable these programs to be created and grow."
+    page 5 [P] len=297 START="customers are then rewarded—usually in the form of a credit " END="r their personal use or even opt out of VPP events entirely."
+    page 5 [P] len=309 START="To send energy from a VPP to the grid, a central controller " END="energy at one site and inject it onto the transmission grid."
+    page 5 [P] len=29 START="How Virtual Power Plants Work" END="How Virtual Power Plants Work"
+    page 5 [P] len=47 START="Consumers’ energy resources help power the grid" END="Consumers’ energy resources help power the grid"
+    page 5 [P] len=486 START="VPPs help ensure “resource adequacy,” a term experts use to " END="ds of high demand, thereby reducing electricity consumption."
+    page 5 [P] len=30 START="◎2026The Pew Charitable Trusts" END="◎2026The Pew Charitable Trusts"
+    page 5 [P] len=247 START="VPPs have scaled beyond the pilot stage and increasing energ" END="e necessary to enable these programs to be created and grow."
+    page 7 [DIV] len=1402 START="Growing up, I avoided team sports at all costs. 16 And I ten" END="at may be just what I need to help me cross the finish line."
+    page 7 [P] len=322 START="Growing up, I avoided team sports at all costs. 16 And I ten" END="sports, may be better for our health than working out alone."
+    page 7 [P] len=227 START="A 2023 analysis found that participating in sports is linked" END=" of exercise, regardless of the amount of physical activity."
+    page 7 [P] len=451 START="18 For one, exercising with others increases the likelihood " END="ound that those running with friends and family were faster."
+    page 7 [P] len=216 START="While we don’t know exactly why this is, it probably relates" END=" environment, allowing us to avoid fatigue for a bit longer."
+    page 7 [P] len=186 START="I find this comforting. 20 I am running a half-marathon with" END="at may be just what I need to help me cross the finish line."
+    page 8 [DIV] len=212 START="假定你是校报记者李华，在上周五的“校园开放日”(Open Day), 外教Chris承担了英语示范课教学。为准确报道该活" END="ua, a student reporter for our school newspaper.Yours,Li Hua"
+    page 8 [P] len=81 START="假定你是校报记者李华，在上周五的“校园开放日”(Open Day), 外教Chris承担了英语示范课教学。为准确报道该活" END="日”(Open Day), 外教Chris承担了英语示范课教学。为准确报道该活动，请你给Chris写一封邮件，内容包括："
+    page 8 [P] len=15 START="(1)询问示范课的内容与亮点；" END="(1)询问示范课的内容与亮点；"
+    page 8 [P] len=15 START="(2)征求其出镜照片使用授权。" END="(2)征求其出镜照片使用授权。"
+    page 8 [P] len=22 START="(2)可适当增加细节，使内容充实、行文连贯。" END="(2)可适当增加细节，使内容充实、行文连贯。"
+    page 8 [P] len=11 START="Dear Chris," END="Dear Chris,"
+    page 8 [P] len=56 START="I’m Li Hua, a student reporter for our school newspaper." END="I’m Li Hua, a student reporter for our school newspaper."
+    page 8 [P] len=6 START="Yours," END="Yours,"
+    page 8 [P] len=6 START="Li Hua" END="Li Hua"
+    page 8 [DIV] len=1013 START="My name is Shaquille O’Neal, but no, I am not the legendary " END="gest kid on the other team, and ended up with a bloody nose."
+    page 8 [P] len=351 START="My name is Shaquille O’Neal, but no, I am not the legendary " END=" boy who can barely dribble（运球）the ball without dropping it."
+    page 8 [P] len=432 START="Every Saturday, the Central District's Boys and Girls Club s" END="rt for the team instead of just watching from the sidelines."
+    page 8 [P] len=230 START="Last November, I got to play, thanks to Thanksgiving trips a" END="gest kid on the other team, and ended up with a bloody nose."
+    page 9 [DIV] len=673 START="The Boys and Girls Club has a great nurse’s room. I know bec" END=". You are speedier than a meteor. Why don’t you get faster?”"
+    page 9 [P] len=338 START="The Boys and Girls Club has a great nurse’s room. I know bec" END="er American sports, but she was nice and had a pretty smile."
+    page 9 [P] len=335 START="By my twelfth nosebleed, Skimmy was my friend. It was she wh" END=". You are speedier than a meteor. Why don’t you get faster?”"
+    page 10 [DIV] len=1826 START="Urgent: Special Summer Driving NoticeTo some, sunglasses are" END="19. 90Special Price: $49+S&H Save $70. 90Call 1-800-333-2045"
+    page 10 [P] len=37 START="Urgent: Special Summer Driving Notice" END="Urgent: Special Summer Driving Notice"
+    page 10 [P] len=46 START="To some, sunglasses are a fashion accessory..." END="To some, sunglasses are a fashion accessory..."
+    page 10 [P] len=54 START="But When Driving, These Sunglasses May Save Your Life!" END="But When Driving, These Sunglasses May Save Your Life!"
+    page 10 [P] len=206 START="Many drivers find themselves temporarily blinded while drivi" END="orists struggle on despite being blinded by the sun’s glare."
+    page 10 [P] len=254 START="Not all sunglasses are created equal. Protecting your eyes i" END="did our research and looked to the most advanced technology."
+    page 10 [P] len=476 START="Sometimes it does take a NASA rocket scientist. Some ordinar" END="This discovery resulted in what is now known as Eagle Eyes®."
+    page 10 [P] len=253 START="The only Sunglass Technology Certified by the Space Foundati" END="and UVB—plus the added benefit of blue-light eye protection."
+    page 10 [P] len=248 START="The finest optics: And buy one, get one FREE! Your satisfact" END="fund of the purchase price. The other pair is yours to keep."
+    page 10 [P] len=34 START="Your Insider Offer Code: ENS245-01" END="Your Insider Offer Code: ENS245-01"
+    page 10 [P] len=109 START="Special price only for customers using the offer code versus" END="code versus the price on Stauer.com without your offer code."
+    page 10 [P] len=36 START="Two Pairs of Eagle Eyes® NavigatorTM" END="Two Pairs of Eagle Eyes® NavigatorTM"
+    page 10 [P] len=19 START="Sunglasses $119. 90" END="Sunglasses $119. 90"
+    page 10 [P] len=35 START="Special Price: $49+S&H Save $70. 90" END="Special Price: $49+S&H Save $70. 90"
+    page 10 [P] len=19 START="Call 1-800-333-2045" END="Call 1-800-333-2045"
+    page 11 [DIV] len=2258 START="At Springside Chestnut Hill Academy (SCH), journalism isn’t " END="Lantern,” he says, “is too big, too bright to turn off now.”"
+    page 11 [P] len=619 START="At Springside Chestnut Hill Academy (SCH), journalism isn’t " END="“journalism track” also emphasizes new media and technology."
+    page 11 [P] len=521 START="SCH’s interdisciplinary nature, the revival of The Campus La" END="ds of stories in print and online from over 70 contributors."
+    page 11 [P] len=647 START="As part of the track, students at every level develop newsro" END="s to analyze these dilemmas and explore potential solutions."
+    page 11 [P] len=314 START="“If we want to equip students for an uncertain future and pr" END="ly matter,” says Ed Glassman, executive director of the CEL."
+    page 11 [P] len=157 START="The faint flicker（闪烁）of Whitman’s idea for a newspaper, two " END="Lantern,” he says, “is too big, too bright to turn off now.”"
+
+=== (d) Parity: serialized paged.js DOM vs page.pdf(), page-by-page ===
+  serialized DOM .pagedjs_page count: 12
+  rendered PDF page PNGs: pdf-page-1.png, pdf-page-2.png, pdf-page-3.png, pdf-page-4.png, pdf-page-5.png, pdf-page-6.png, pdf-page-7.png, pdf-page-8.png, pdf-page-9.png
+
+  Page-by-page label comparison (DOM extraction vs PDF pdftotext) — 11 DOM pages / 9 PDF pages:
+
+  --- page 1 ---
+    DOM headers/qnums: ["第一部分 阅读理解","一、阅读理解（每题 2.5 分）"] / ["1."]
+    DOM textStart: 2026年广东省高三一模英语试卷第一部分 阅读理解一、阅读理解（每题 2.5 分）Urgent: Special Summer Driving NoticeTo some, sunglasses are a fashion accessory...But When Driving, These Sunglasses May Save Your Life!Many drivers find them
+    PDF textStart: 2026年广东省高三一模英语试卷 第一部分 阅读理解 一、阅读理解（每题 2.5 分） Urgent: Special Summer Driving Notice To some, sunglasses are a fashion accessory... But When Driving, These Sunglasses May Save Your Life! Many drivers fin
+
+  --- page 2 ---
+    DOM headers/qnums: ["二、阅读理解（每题 2.5 分）"] / ["2.","3."]
+    DOM textStart: 2. What is promised to customers within 30 days of purchase?A. A replacement for both pairs.B. A free upgrade to a new model.C. A full refund for one returned pair.D. A store credit for future purchas
+    PDF textStart: 2. What is promised to customers within 30 days of purchase? A. A replacement for both pairs. B. A free upgrade to a new model. C. A full refund for one returned pair. D. A store credit for future pur
+
+  --- page 3 ---
+    DOM headers/qnums: ["三、阅读理解（每题 2.5 分）"] / ["4.","5.","6.","7."]
+    DOM textStart: 4. What do we know about The Campus Lantern?A. It was restarted through a CEL project.B. It was designed to be a journalism course.C. It was launched as a Middle School project.D. It was set up to rep
+    PDF textStart: 4. What do we know about The Campus Lantern? A. It was restarted through a CEL project. B. It was designed to be a journalism course. C. It was launched as a Middle School project. D. It was set up to
+
+  --- page 4 ---
+    DOM headers/qnums: ["四、阅读理解（每题 2.5 分）"] / ["8.","9.","10.","11."]
+    DOM textStart: How enthusiastically consumers turn to AI for shopping may also depend on how much chatbot-makers embrace ads to make money. Google has reportedly told marketers that it will integrate ads into its Ge
+    PDF textStart: How enthusiastically consumers turn to AI for shopping may also depend on how much chatbot-makers embrace ads to make money. Google has reportedly told marketers that it will integrate ads into its Ge
+
+  --- page 5 ---
+    DOM headers/qnums: [] / ["12.","13.","14."]
+    DOM textStart: customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary. Customers with batteries can typically 
+    PDF textStart: customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary. Customers with batteries can typically 
+
+  --- page 6 ---
+    DOM headers/qnums: [] / ["15."]
+    DOM textStart: 15. What will still be needed for VPPs to grow further?A. Policy support.B. More pilot programs.C. Technical improvements.D. Stronger customer interest.
+    PDF textStart: 15. What will still be needed for VPPs to grow further? A. Policy support. B. More pilot programs. C. Technical improvements. D. Stronger customer interest. 2026年广东省高三一模英语试卷 · 6
+
+  --- page 7 ---
+    DOM headers/qnums: ["第二节 七选五","五、七选五（每题 2.5 分）"] / ["16.","17.","18.","19.","20."]
+    DOM textStart: 第二节 七选五五、七选五（每题 2.5 分）Growing up, I avoided team sports at all costs. 16 And I tend to take competition too far. Pair the two together and sports became a source of frustration. But recent studies are
+    PDF textStart: 第二节 七选五 五、七选五（每题 2.5 分） Growing up, I avoided team sports at all costs. 16 And I tend to take competition too far. Pair the two together and sports became a source of frustration. But recent studies a
+
+  --- page 8 ---
+    DOM headers/qnums: ["writing","六、写作（每题 0 分）","七、写作（每题 0 分）"] / []
+    DOM textStart: writing六、写作（每题 0 分）假定你是校报记者李华，在上周五的“校园开放日”(Open Day), 外教Chris承担了英语示范课教学。为准确报道该活动，请你给Chris写一封邮件，内容包括：(1)询问示范课的内容与亮点；(2)征求其出镜照片使用授权。(2)可适当增加细节，使内容充实、行文连贯。Dear Chris,I’m Li Hua, a student reporter for ou
+    PDF textStart: writing 六、写作（每题 0 分） 假定你是校报记者李华，在上周五的“校园开放日”(Open Day), 外教Chris承担了英语示范课教 学。为准确报道该活动，请你给Chris写一封邮件，内容包括： (1)询问示范课的内容与亮点； (2)征求其出镜照片使用授权。 (2)可适当增加细节，使内容充实、行文连贯。 Dear Chris, I’m Li Hua, a student reporte
+
+  --- page 9 ---
+    DOM headers/qnums: [] / []
+    DOM textStart: The Boys and Girls Club has a great nurse’s room. I know because I spent more time in there than on the court. The nurse was a Vietnamese lady, and because none of the kids could pronounce her name, t
+    PDF textStart: The Boys and Girls Club has a great nurse’s room. I know because I spent more time in there than on the court. The nurse was a Vietnamese lady, and because none of the kids could pronounce her name, t
+
+  --- page 10 ---
+    DOM headers/qnums: ["第一部分 阅读理解","一、阅读理解（每题 2.5 分）"] / ["1."]
+    DOM textStart: 2026年广东省高三一模英语试卷第一部分 阅读理解一、阅读理解（每题 2.5 分）Urgent: Special Summer Driving NoticeTo some, sunglasses are a fashion accessory...But When Driving, These Sunglasses May Save Your Life!Many drivers find them
+    PDF textStart: (none — PDF ran out of pages)
+
+  --- page 11 ---
+    DOM headers/qnums: ["二、阅读理解（每题 2.5 分）"] / ["2.","3."]
+    DOM textStart: 2. What is promised to customers within 30 days of purchase?A. A replacement for both pairs.B. A free upgrade to a new model.C. A full refund for one returned pair.D. A store credit for future purchas
+    PDF textStart: (none — PDF ran out of pages)
+
+=== paged.js DOM structure sample (first .pagedjs_page, truncated) ===
+<div>
+<div class="paper-header" data-ref="5759fd72-7efe-450d-aee1-c01e88eb9a12"><h1 data-ref="bf60d05b-fa36-4f0a-b77a-df68c502dfad">2026年广东省高三一模英语试卷</h1></div><h2 class="section-header" data-ref="15eac9a1-057e-4ba8-8d76-edf05301fd3c" data-break-after="avoid">第一部分 阅读理解</h2><section class="question-group" data-ref="78f088da-9d57-41ac-8a65-55cd610e613b" data-previous-break-after="avoid" data-split-to="78f088da-9d57-41ac-8a65-55cd610e613b" data-split-original="true" data-last-split-element="true" data-align-last-split-element="auto"><div class="group-header" data-ref="d90f26da-c648-49f4-9dd8-9a1def13c544" data-break-after="avoid">一、阅读理解（每题 2.5 分）</div><div class="passage" data-ref="b944fc8d-8eac-469a-8331-7e5f7a603760" data-previous-break-after="avoid"><p data-ref="89d32037-cb82-4acb-bd9b-f578e9c27633">Urgent: Special Summer Driving Notice</p><p data-ref="71d09769-e245-4766-bf8b-5f2f0149a9fa"></p><p data-ref="e4a0d7a0-2081-4519-a3d1-e99f6af952bf">To some, sunglasses are a fashion accessory...</p><p data-ref="4803168c-79a6-4d40-bfa4-c8029fd95075"></p><p data-ref="cfb6e8bd-b3ca-48ba-b068-3cd0d360fb7d">But When Driving, These Sunglasses May Save Your Life!</p><p data-ref="97fac3d8-6491-4324-a2c4-d5bbf6464efc"></p><p data-ref="ee0b9b03-cf05-43a3-8b81-ecedf8a0330a">Many drivers find themselves temporarily blinded while driving directly into the glare of the sun. Deadly accidents are regularly caused. Yet, motorists struggle on despite being blinded by the sun’s glare.</p><p data-ref="cc668c60-abc6-465e-807b-d9873b466b87"></p><p data-ref="6b17ab9a-11c5-414c-b1a7-604e96f00fc2">Not all sunglasses are created equal. Protecting your eyes is serious business. With all the fancy fashion frames out there, it can be easy to overlook what really matters—the lenses（镜片）. So we did our research and looked to the most advanced technology.</p><p data-ref="d8310749-d5e6-4e31-af19-da1d8e93ecff"></p><p data-ref="ce649e4e-476a-4003-806a-a780582e8a66">Sometimes it does take a NASA rocket scient
+
+Artifacts kept in: /var/folders/x6/sssfzp3x1xdfbr7bz3p_v7s40000gn/T/spike-pagedjs-5ZevN7
+  run1-serialized.html / run1.pdf / dom-page-NN.png / pdf-page-N.png
