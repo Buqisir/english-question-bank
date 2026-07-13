@@ -275,7 +275,31 @@
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   margin: 0 auto;
   max-width: min(100%, 820px);
+  /* draft-desk-b step3: offset parent for .draft-a4-repaginating below
+     (was static before — no absolutely-positioned child existed here yet). */
+  position: relative;
   width: 100%;
+}
+
+/* draft-desk-b step3 (PO-2 简单版): the only visible sign a server
+   re-render is in flight — the previous preview stays fully visible/
+   interactive underneath (see DraftPaperWorkbench.tsx's paginationStatus
+   effect doc comment), this is just a quiet top-of-sheet badge, not a
+   blocking overlay (pointer-events: none so it never eats a click meant for
+   the paper/buttons beneath it). */
+.draft-a4-repaginating {
+  background: var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
+  color: #ffffff;
+  font-size: 12.5px;
+  left: 50%;
+  padding: 6px 14px;
+  pointer-events: none;
+  position: absolute;
+  top: 12px;
+  transform: translateX(-50%);
+  z-index: 6;
 }
 
 .draft-a4-sheet iframe {

@@ -1,22 +1,23 @@
 #!/usr/bin/env node
-// draft-desk-b step2 (MF-4, plan.md "步2 — DOM 契约 + 缓存解耦"): trigger-timing
-// verify for the new pagination cache — "仅布局编辑(增删/reorder/toggle
-// page_break)使签名变化触发重渲;非布局编辑(标题/studentLabel/列表这类)绝不触发".
-// Behavioral, no browser (plan.md step2's own parenthetical: "行为断言,不用
-// 浏览器") — the cache-hit/miss decision inside getDraftPaperPagination
-// (draftPaperStore.mjs) is a single equality check
+// draft-desk-b step2/3 (MF-4 / DP-title, plan.md "步2 — DOM 契约 + 缓存解耦" /
+// "DP-title 拍板 2026-07-12"): trigger-timing verify for the new pagination cache —
+// "布局编辑(增删/reorder/toggle page_break)与标题编辑均使签名变化触发重渲;
+// 非布局编辑(studentLabel/列表这类)绝不触发". Behavioral, no browser (plan.md
+// step2's own parenthetical: "行为断言,不用浏览器") — the cache-hit/miss decision
+// inside getDraftPaperPagination (draftPaperStore.mjs) is a single equality check
 // `cached.signature === draftPaperPaginationSignature(draftPaper, versionType)`,
 // so proving draftPaperPaginationSignature's field sensitivity IS proving the
 // trigger timing; no Chromium render is needed to observe that decision.
 //
-// KNOWN, DISCLOSED CONFLICT (see draftPaperPaginationSignature's doc comment in
-// draftPaperStore.mjs and this cut's completion report): `title` is excluded from
-// this signature per plan.md step2's literal Must-Do text and Verify line
-// ("改标题不触发 render"), even though title demonstrably feeds every page's
-// footer via addDraftFooterCss — a title-only edit is confirmed to leave a STALE
-// cache hit. This script asserts the SHIPPED behavior (title excluded), not a
-// judgment that it is correct; it exists so a future change to this trade-off
-// shows up as a diff here, not a silent regression either way.
+// DP-title REVERSAL (step3, owner ruling 2026-07-12, Option B — cr-step2-lite.md):
+// step2 originally shipped with `title` EXCLUDED from this signature per plan.md
+// step2's then-literal Must-Do text ("改标题不触发 render"), even though title
+// demonstrably feeds every page's footer via addDraftFooterCss — a title-only edit
+// was confirmed to leave a STALE cache hit (old footer text). The owner ratified
+// Option B: title is now INCLUDED, so a title-only edit DOES trigger a re-render.
+// The assertion below was flipped in this same step to match — see
+// draftPaperPaginationSignature's doc comment in draftPaperStore.mjs for the full
+// writeup.
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -85,6 +86,19 @@ assert(
   'versionType change (student -> teacher) changes the signature',
   draftPaperPaginationSignature(base, 'teacher') !== draftPaperPaginationSignature(base, 'student'),
 )
+{
+  // DP-title Option B (owner ruling 2026-07-12): title now counts as a "layout"-ish
+  // edit for cache-invalidation purposes, even though it isn't item order/grouping —
+  // it feeds every page's printed footer (addDraftFooterCss), so a stale cache hit
+  // would show the wrong title on the paper.
+  const retitled = baseDraftPaper()
+  retitled.title = 'A Completely Different Title'
+  assert(
+    'changing title DOES change the signature (DP-title Option B, owner ruling 2026-07-12 — ' +
+      'title is baked into every page\'s printed footer, see this script\'s header)',
+    draftPaperPaginationSignature(retitled, 'student') !== baseSig,
+  )
+}
 
 // --- non-layout edits: MUST NOT change the signature ---
 {
@@ -98,15 +112,6 @@ assert(
   assert(
     'an item updatedAt-only change (e.g. a bump from an unrelated write) does NOT change the signature',
     draftPaperPaginationSignature(untouchedTimestamp, 'student') === baseSig,
-  )
-}
-{
-  const retitled = baseDraftPaper()
-  retitled.title = 'A Completely Different Title'
-  assert(
-    'changing title does NOT change the signature (shipped per plan.md step2 literal Must-Do/Verify text — ' +
-      'see this script\'s header + the completion report for the disclosed parity conflict)',
-    draftPaperPaginationSignature(retitled, 'student') === baseSig,
   )
 }
 {

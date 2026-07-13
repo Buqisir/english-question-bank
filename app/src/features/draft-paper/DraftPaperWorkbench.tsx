@@ -7,6 +7,7 @@ import {
   downloadDraftPaperPdf,
   fetchCurrentDraftPaper,
   fetchDraftPaper,
+  fetchDraftPaperPagination,
   fetchDraftPapers,
   migrateAssemblyBasketToDraftPaper,
   patchDraftPaperItem,
@@ -24,7 +25,7 @@ import {
 } from '../../paperAssembly/basketPersistence'
 import { describeError } from '../shared/errorCopy'
 import { DraftPaperRail } from './DraftPaperRail'
-import { buildA4PreviewHtml, type DraftPaperPreviewSuggestion } from './draftPaperPreviewHtml'
+import { buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
 
 type DraftVersionType = 'student' | 'teacher'
@@ -125,9 +126,25 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [nativeContentHeight, setNativeContentHeight] = useState(1200)
   const [pageCount, setPageCount] = useState(1)
   const [previewReady, setPreviewReady] = useState(false)
-  const [hoveredGroupId, setHoveredGroupId] = useState<string | null>(null)
-  const [hoverAnchorTop, setHoverAnchorTop] = useState<number | null>(null)
   const [activeRailGroupId, setActiveRailGroupId] = useState<string | null>(null)
+  // draft-desk-b step3 (MF-3, plan.md "步3"): server-rendered pagination HTML
+  // (raw, before buildA4PreviewHtml's thin screen-CSS wrap) + its fetch status.
+  // PO-2 简单版: the previous `paginatedHtml` value is intentionally left in
+  // place while a new fetch is in flight (no local fake repagination) — only
+  // `paginationStatus` flips to 'loading', driving a "重新排版中…" indicator
+  // layered over the still-visible old preview.
+  const [paginatedHtml, setPaginatedHtml] = useState('')
+  const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
+  const [paginationError, setPaginationError] = useState('')
+  const paginationRequestIdRef = useRef(0)
+  const paginationDebounceRef = useRef<number | null>(null)
+  // draft-desk-b step3 (MF-5, plan.md "步3"): per-group persistent overlay
+  // button anchors — replaces the retired hover-only sticker (裁点1 in
+  // draft-desk-a) with one always-visible button per question group. Keyed by
+  // groupId, computed for every non-groupMissing item after each preview load
+  // (see the effect below) — same computeGroupAnchorTop math the old hover
+  // sticker used, just evaluated for every group instead of one at a time.
+  const [groupAnchors, setGroupAnchors] = useState<Record<string, number>>({})
 
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
@@ -236,26 +253,77 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }, [draftPaper, focusGroupId, previewReady])
 
   // draft-desk-a: only non-groupMissing items ever reach a `.question-group`
-  // section in printHtml (server/draft-paper/draftPaperStore.mjs's
-  // buildDraftPaperBlocks skips groupMissing entirely — see
-  // draftPaperPreviewHtml.ts's tagGroupSections comment) — this is the same
-  // filtered, ordered list the preview script positionally tags sections
-  // with, so it must be passed to buildA4PreviewHtml in lockstep.
+  // section in the printed/paginated output (server/draft-paper/
+  // draftPaperStore.mjs's buildDraftPaperBlocks skips groupMissing entirely)
+  // — the same filtered, ordered list server/draft-paper/
+  // paginationDomContract.mjs positionally tags `data-group-id` with.
   const nonMissingItems = useMemo(() => draftPaper?.items.filter((item) => !item.groupMissing) ?? [], [draftPaper])
 
-  const previewSuggestions = useMemo<DraftPaperPreviewSuggestion[]>(
-    () => (draftPaper?.pageBreakSuggestions ?? []).map((suggestion) => ({ groupId: suggestion.groupId, reason: suggestion.reason })),
-    [draftPaper?.pageBreakSuggestions],
+  // draft-desk-b step3 (MF-3): the exact fields draftPaperPaginationSignature
+  // (server/draft-paper/draftPaperStore.mjs) treats as layout — item identity/
+  // order/page-break-before. Memoized to a stable string so the pagination-fetch
+  // effect below only re-triggers when this actually changes content-wise, not
+  // merely because `draftPaper` got a new object identity from an unrelated
+  // field (e.g. studentLabel, itemCount) — mirrors the server's own signature
+  // field set so client fetch-triggering and server cache-invalidation agree on
+  // "what counts as a layout edit".
+  const itemsLayoutKey = useMemo(
+    () => JSON.stringify((draftPaper?.items ?? []).map((item) => [item.id, item.groupId, item.orderIndex, item.pageBreakBefore])),
+    [draftPaper?.items],
   )
 
-  const previewHtml = useMemo(
-    () => buildA4PreviewHtml(draftPaper?.printHtml || '', nonMissingItems.map((item) => item.groupId), previewSuggestions),
-    [draftPaper?.printHtml, nonMissingItems, previewSuggestions],
-  )
+  // draft-desk-b step3 (MF-3, PO-2 简单版, DP-title Option B): fetches the
+  // server-rendered pagination whenever a layout edit, a title edit, or the
+  // student/teacher toggle changes it — debounced so a burst of edits
+  // coalesces into one request, with no local fake repagination shown in
+  // between (the previously fetched `paginatedHtml` just stays on screen,
+  // `paginationStatus` alone flips to 'loading'). `paginationRequestIdRef`
+  // discards a stale response that resolves after a newer request already
+  // started (e.g. two edits in quick succession, both past the debounce).
+  useEffect(() => {
+    if (paginationDebounceRef.current) window.clearTimeout(paginationDebounceRef.current)
+    // Named inner function (not a bare top-level setState call) so this reset
+    // reads as the same "callback reacting to an external condition" shape
+    // eslint-plugin-react-hooks's set-state-in-effect rule already accepts
+    // elsewhere in this file (see the scrollspy effect's updateActive below).
+    function resetPagination() {
+      paginationRequestIdRef.current += 1
+      setPaginatedHtml('')
+      setPaginationStatus('idle')
+      setPaginationError('')
+    }
+    if (!draftPaper || draftPaper.items.length === 0) {
+      resetPagination()
+      return
+    }
+    const draftPaperId = draftPaper.id
+    paginationDebounceRef.current = window.setTimeout(() => {
+      const requestId = (paginationRequestIdRef.current += 1)
+      setPaginationStatus('loading')
+      fetchDraftPaperPagination(draftPaperId, versionType)
+        .then((result) => {
+          if (paginationRequestIdRef.current !== requestId) return
+          setPaginatedHtml(result.paginatedHtml)
+          setPaginationStatus('ready')
+          setPaginationError('')
+        })
+        .catch((error) => {
+          if (paginationRequestIdRef.current !== requestId) return
+          setPaginationStatus('error')
+          setPaginationError(describeError('生成分页预览', error))
+        })
+    }, 400)
+    return () => {
+      if (paginationDebounceRef.current) window.clearTimeout(paginationDebounceRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType])
+
+  const previewHtml = useMemo(() => buildA4PreviewHtml(paginatedHtml), [paginatedHtml])
 
   // The iframe re-navigates (srcDoc changes → full document reload) whenever
-  // previewHtml changes; scrollspy/hover-sticker/page-badge reads must wait
-  // for the *new* document's onLoad tick rather than trusting stale data
+  // previewHtml changes; scrollspy/persistent-button/page-badge reads must
+  // wait for the *new* document's onLoad tick rather than trusting stale data
   // tagged by the previous one. Adjusted during render (React's documented
   // "adjusting state when a prop changes" pattern) rather than in an effect,
   // to avoid the extra render-then-effect-then-render round trip.
@@ -273,12 +341,25 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return (el as HTMLElement).getBoundingClientRect().top
   }
 
-  // Anchor position for the hover sticker (裁点1), expressed relative to
-  // `.draft-paper-col` (its `position: relative` offset parent — see
-  // DraftPaperWorkbench.css). Computed once per hover, not re-derived on
-  // scroll: iframeRect.top and colRect.top shift by the same amount as the
-  // desk scrolls, so their difference is scroll-invariant (see the CSS
-  // comment on `.draft-group-actions`).
+  // Anchor position for a group's persistent overlay button (draft-desk-b
+  // step3, MF-5 — retired the draft-desk-a hover-only sticker), expressed
+  // relative to `.draft-paper-col` (its `position: relative` offset parent —
+  // see DraftPaperWorkbench.css). iframeRect.top and colRect.top shift by the
+  // same amount as the desk scrolls, so their difference is scroll-invariant
+  // (see the CSS comment on `.draft-group-actions`) — this is why the anchor
+  // effect below only needs to recompute on preview-load/scale changes, never
+  // on scroll.
+  //
+  // SW-3 (multi-page anchor correctness): `getGroupIframeOffsetTop` resolves
+  // via `doc.querySelector('[data-group-id="..."]')` — the FIRST matching
+  // element in document order. For a group paged.js split across pages
+  // (server/draft-paper/paginationDomContract.mjs tags every split fragment,
+  // including the fragment inside paged.js's own hidden `<template>` master
+  // copy, with the SAME data-group-id — see that module's header comment),
+  // `<template>` content is an inert DocumentFragment that `querySelector`
+  // never descends into, so the first match found here is always the first
+  // RENDERED fragment — i.e. the page the group actually starts on. A button
+  // for a group that starts on page 3 anchors to page 3, not page 1.
   function computeGroupAnchorTop(groupId: string): number | null {
     const iframeEl = iframeRef.current
     const colEl = paperColRef.current
@@ -297,31 +378,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setPageCount(pages.length || 1)
     const height = doc.documentElement?.scrollHeight || doc.body?.scrollHeight || 1200
     setNativeContentHeight(height)
-
-    // draft-desk-a 裁点1: hovering any flattened child of a `.question-group`
-    // (each carries `data-group-id`, see draftPaperPreviewHtml.ts's
-    // tagGroupSections/flatten) drives the parent-rendered overlay sticker.
-    // The break-hint's click is the only interaction handled inside the
-    // iframe document itself — both are delegated on the fresh
-    // contentDocument so they are rewired every reload without leaking
-    // listeners onto discarded docs.
-    doc.addEventListener('mouseover', (event) => {
-      const target = (event.target as HTMLElement).closest?.('[data-group-id]')
-      const groupId = target?.getAttribute('data-group-id') || null
-      if (!groupId) return
-      setHoveredGroupId(groupId)
-      setHoverAnchorTop(computeGroupAnchorTop(groupId))
-    })
-
-    doc.addEventListener('click', (event) => {
-      const hint = (event.target as HTMLElement).closest?.('.break-hint')
-      if (!hint) return
-      const groupId = hint.getAttribute('data-break-hint-group-id')
-      if (!groupId) return
-      const item = draftPaper?.items.find((entry) => entry.groupId === groupId)
-      if (item) void togglePageBreak(item, true)
-    })
-
     setPreviewReady(true)
   }
 
@@ -360,6 +416,31 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     updateActive()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [previewReady, nonMissingItems, previewScale])
+
+  // draft-desk-b step3 (MF-5): persistent per-group overlay button anchors —
+  // recomputed whenever the preview finishes (re)loading or the fit-to-width
+  // scale changes (same dependency shape as the scrollspy effect above, for
+  // the same reason: previewScale changes the offsetTop*previewScale term in
+  // computeGroupAnchorTop). Not scroll-driven (see computeGroupAnchorTop's own
+  // comment on scroll-invariance).
+  useEffect(() => {
+    // Named inner function (matches the scrollspy effect's updateActive shape
+    // above) rather than a bare top-level setState call.
+    function updateAnchors() {
+      if (!previewReady || nonMissingItems.length === 0) {
+        setGroupAnchors({})
+        return
+      }
+      const next: Record<string, number> = {}
+      for (const item of nonMissingItems) {
+        const top = computeGroupAnchorTop(item.groupId)
+        if (top != null) next[item.groupId] = top
+      }
+      setGroupAnchors(next)
+    }
+    updateAnchors()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewReady, nonMissingItems, previewScale])
 
   // Rail click / focus-deep-link target. Mirrors PaperBrowsePage.scrollToAnchor's
@@ -808,46 +889,53 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               共 {pageCount} 页 · 双面 {Math.ceil(pageCount / 2)} 张 · A4
             </p>
             <div className="draft-a4-sheet" ref={a4SheetRef} style={{ height: `${nativeContentHeight * previewScale}px` }}>
-              {previewHtml ? (
-                <iframe
-                  ref={iframeRef}
-                  title="草稿卷 A4 预览"
-                  srcDoc={previewHtml}
-                  onLoad={handleIframeLoad}
-                  onMouseLeave={() => {
-                    setHoveredGroupId(null)
-                    setHoverAnchorTop(null)
-                  }}
-                  style={{
-                    height: `${nativeContentHeight}px`,
-                    ...(previewScale < 1 ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' } : null),
-                  }}
-                />
-              ) : (
+              {draftPaper.items.length === 0 ? (
                 <div className="draft-a4-empty">请先添加题组</div>
+              ) : previewHtml ? (
+                <>
+                  <iframe
+                    ref={iframeRef}
+                    title="草稿卷 A4 预览"
+                    srcDoc={previewHtml}
+                    onLoad={handleIframeLoad}
+                    style={{
+                      height: `${nativeContentHeight}px`,
+                      ...(previewScale < 1 ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' } : null),
+                    }}
+                  />
+                  {/* draft-desk-b step3 (PO-2 简单版): the old preview stays fully
+                      visible/interactive while a re-render is in flight — this is
+                      the only visible sign a repagination is happening. */}
+                  {paginationStatus === 'loading' && (
+                    <div className="draft-a4-repaginating" role="status">重新排版中…</div>
+                  )}
+                </>
+              ) : (
+                <div className="draft-a4-empty">
+                  {paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览...'}
+                </div>
               )}
             </div>
 
-            {hoveredGroupId && hoverAnchorTop != null && (() => {
-              const hoveredItem = draftPaper.items.find((item) => item.groupId === hoveredGroupId)
-              if (!hoveredItem) return null
-              const fullIndex = draftPaper.items.findIndex((item) => item.id === hoveredItem.id)
+            {/* draft-desk-b step3 (裁点1 retirement, MF-5): one ALWAYS-VISIBLE
+                overlay button cluster per question group, replacing the old
+                hover-only sticker — anchored via the groupAnchors effect above
+                (computeGroupAnchorTop), same up/down/page-break/delete actions
+                the rail's own buttons call (moveItem/togglePageBreak/deleteItem
+                below — one shared handler set, not a second implementation). */}
+            {nonMissingItems.map((item) => {
+              const anchorTop = groupAnchors[item.groupId]
+              if (anchorTop == null) return null
+              const fullIndex = draftPaper.items.findIndex((entry) => entry.id === item.id)
               const canPageBreakBefore = fullIndex > 0
               return (
-                <div
-                  className="draft-group-actions"
-                  style={{ top: `${hoverAnchorTop}px` }}
-                  onMouseLeave={() => {
-                    setHoveredGroupId(null)
-                    setHoverAnchorTop(null)
-                  }}
-                >
+                <div key={item.id} className="draft-group-actions" style={{ top: `${anchorTop}px` }}>
                   <button
                     type="button"
                     aria-label="上移"
                     title="上移"
                     disabled={fullIndex <= 0}
-                    onClick={() => moveItem(hoveredItem.id, -1)}
+                    onClick={() => moveItem(item.id, -1)}
                   >
                     <ArrowUp size={14} />
                   </button>
@@ -856,27 +944,27 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     aria-label="下移"
                     title="下移"
                     disabled={fullIndex >= draftPaper.items.length - 1}
-                    onClick={() => moveItem(hoveredItem.id, 1)}
+                    onClick={() => moveItem(item.id, 1)}
                   >
                     <ArrowDown size={14} />
                   </button>
                   {canPageBreakBefore && (
                     <button
                       type="button"
-                      aria-label={hoveredItem.pageBreakBefore ? '取消分页' : '前置分页'}
-                      title={hoveredItem.pageBreakBefore ? '取消分页' : '前置分页'}
-                      aria-pressed={hoveredItem.pageBreakBefore}
-                      onClick={() => void togglePageBreak(hoveredItem, !hoveredItem.pageBreakBefore)}
+                      aria-label={item.pageBreakBefore ? '取消分页' : '前置分页'}
+                      title={item.pageBreakBefore ? '取消分页' : '前置分页'}
+                      aria-pressed={item.pageBreakBefore}
+                      onClick={() => void togglePageBreak(item, !item.pageBreakBefore)}
                     >
                       <SeparatorHorizontal size={14} />
                     </button>
                   )}
-                  <button type="button" className="danger" aria-label="移除" title="移除" onClick={() => void deleteItem(hoveredItem)}>
+                  <button type="button" className="danger" aria-label="移除" title="移除" onClick={() => void deleteItem(item)}>
                     <Trash2 size={14} />
                   </button>
                 </div>
               )
-            })()}
+            })}
           </div>
 
           <DraftPaperRail

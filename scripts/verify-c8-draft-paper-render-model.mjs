@@ -234,8 +234,28 @@ const workbenchCss = read('app/src/features/draft-paper/DraftPaperWorkbench.css'
 const previewHtml = read('app/src/features/draft-paper/draftPaperPreviewHtml.ts')
 assert('preview uses iframe srcDoc from A4 preview HTML', /<iframe[\s\S]{0,120}srcDoc=\{previewHtml\}/.test(workbench))
 assert('preview HTML generation lives outside workbench', workbench.includes("from './draftPaperPreviewHtml'") && !/function buildA4PreviewHtml/.test(workbench))
-assert('preview injects screen-only A4 dimensions', previewHtml.includes('buildA4PreviewHtml') && previewHtml.includes('width: 210mm') && previewHtml.includes('padding: 20mm 18mm'))
-assert('preview builds paginated long-scroll A4 pages', previewHtml.includes('paginateA4Preview') && previewHtml.includes('preview-page') && previewHtml.includes("'第 ' + pageNumber + ' 页'"))
+// draft-desk-b step3 (MF-3, plan.md "步3 — 前端吃分页 HTML + 常驻叠按钮"):
+// server/draft-paper/paginationRenderer.mjs + paginationDomContract.mjs is now
+// the SOLE pagination source (tech-recon.md "屏幕分页管线" / "parity 现状判断"
+// — this cut exists specifically to retire the client's own independent
+// pagination guess). buildA4PreviewHtml no longer paginates or owns page
+// sizing (210mm/20mm padding were client-computed page-box dimensions that
+// paged.js now owns server-side) — it only layers a thin screen-only card
+// stylesheet on top of the already-paginated, already-contract-tagged HTML.
+// Assertions updated in the same step per plan.md's step5 prediction ("门可能
+// 被退役客户端分页触及，预判并同刀更新该门").
+assert(
+  'preview no longer owns page sizing/padding (paged.js computes this server-side now)',
+  !previewHtml.includes('width: 210mm') && !previewHtml.includes('padding: 20mm 18mm'),
+)
+assert(
+  'preview no longer re-paginates client-side (the retired paginateA4Preview greedy box-measuring pagination is gone)',
+  !previewHtml.includes('paginateA4Preview') && !previewHtml.includes('function flatten('),
+)
+assert(
+  'preview still hooks its screen card styling onto the server DOM contract\'s .preview-page class',
+  previewHtml.includes('buildA4PreviewHtml') && previewHtml.includes('.preview-page'),
+)
 assert('preview iframe does not add a second mat color', previewHtml.includes('html {\n    background: transparent') && previewHtml.includes('body {\n    background: transparent') && workbenchCss.includes('.draft-a4-sheet iframe {\n  background: transparent'))
 // teal-repaint C1/C7: mat 渐变从暖纸 #FAFAF7/#F4F2EC 改为中性 #F6F6F4/#EDEDEA
 // （owner 墨绿契约 — bg/surface-2 新值），断言同步。
@@ -263,7 +283,13 @@ assert('rail extraction lives in its own component', workbench.includes("from '.
 // Workbench.tsx itself, not on a per-row outline control.
 assert('rail component is a pure list (no per-row source metadata)', !rail.includes('compactSource'))
 assert('workbench gates the page-break sticker action on non-first items (mirrors the old canPageBreakBefore = index > 0 rule)', workbench.includes('canPageBreakBefore = fullIndex > 0'))
-assert('page-break suggestions render as an in-paper quiet annotation, not an outline marker', previewHtml.includes('break-hint') && !workbench.includes('draft-break-marker'))
+// draft-desk-b step3 (PO-1, plan.md "PO 决策"): page-break suggestion display
+// is DEFERRED this cut (owner 2026-07-12) — pageBreakSuggestions stays on the
+// DraftPaper API response/type but is not read or rendered anywhere in the
+// workbench or the preview wrapper (no `.break-hint` markup). Previously this
+// assertion required the client's own `insertBreakHints` injection, which is
+// part of the retired client-side pagination this step removes.
+assert('page-break suggestions are NOT rendered this cut (PO-1 延后)', !previewHtml.includes('break-hint') && !workbench.includes('draft-break-marker'))
 assert('workbench no longer owns outline rendering details', !workbench.includes('compactSource(item)') && !workbench.includes('draft-outline-panel'))
 assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench exposes browser print', workbench.includes('浏览器打印'))

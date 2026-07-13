@@ -64,25 +64,24 @@ function inlineFigureImages(html, images) {
 // which stays exactly as-is for exportDraftPaperPdf's existing 30s Vivliostyle-line
 // cache (step4/SW-5 migrates that caller, untouched here).
 //
-// Fields included are exactly the ones plan.md step2 calls "布局编辑": item
-// identity/order/page-break-before. `title` is DELIBERATELY EXCLUDED — plan.md's
-// step2 Must-Do text and its own Verify line ("改标题不触发 render") both say a
-// title edit must not invalidate this cache.
-//
-// KNOWN CONFLICT — flagged, not resolved here (plan.md step2 explicitly reserves
-// this as a decision point, "停下来...不要自作主张选一边"): draftPaperStore.mjs's
+// Fields included are the plan.md step2 "布局编辑" set (item identity/order/
+// page-break-before) PLUS `title` (draft-desk-b step3, DP-title owner ruling
+// 2026-07-12, Option B — see cr-step2-lite.md "DP-title" and plan.md's step2 Must-Do
+// revision note). Step2 originally shipped with `title` EXCLUDED per plan.md's then-
+// literal Must-Do text ("改标题不触发 render") — but draftPaperStore.mjs's own
 // addDraftFooterCss() unconditionally bakes `title` into the CSS `@page
-// @bottom-center` footer text of EVERY page (confirmed: DP-1 acceptance check (b)
-// already required this exact footer to render correctly). That means excluding
-// `title` here is a REAL, confirmed parity gap, not a hypothetical one: after a
-// title-only edit, a cache hit will keep serving pagination/PDF output with the OLD
-// footer text until the next LAYOUT edit invalidates it — teacher sees new title in
-// the title field, but the printed/paginated footer still says the old one. See this
-// cut's completion report for the two-option writeup + recommendation; this is
-// shipped per the literal plan.md acceptance text, not because it is judged correct.
+// @bottom-center` footer text of EVERY page (DP-1 acceptance check (b) required this
+// exact footer to render correctly), so excluding it left a confirmed parity gap: a
+// title-only edit would keep serving a cache hit with the OLD footer text until the
+// next layout edit. The owner ratified Option B (title IN the signature, a title edit
+// triggers a real re-render) precisely because parity is this whole cut's reason to
+// exist and PO-2's "重新排版中…" loading state already absorbs the extra ~700-800ms
+// render this adds on a title edit. studentLabel and the item list view stay excluded
+// — neither ever reaches the printed page.
 export function draftPaperPaginationSignature(draftPaper, versionType) {
   return JSON.stringify({
     id: draftPaper.id,
+    title: draftPaper.title,
     versionType,
     items: draftPaper.items.map((item) => ({
       id: item.id,
@@ -135,13 +134,50 @@ export function createDraftPaperStore({
   // draft-desk-b step2 (MF-4): separate from recentDraftPdfExports above — that one
   // is exportDraftPaperPdf's existing 30s Vivliostyle-line cache (untouched by this
   // step; step4/SW-5 migrates it). This cache holds the NEW paged.js pipeline's
-  // render products (renderPaginatedPaper output, DOM-contract applied), keyed by
-  // draftPaperId, no TTL — a signature mismatch (draftPaperPaginationSignature) is
-  // the only invalidation trigger, not elapsed time (unlike recentDraftPdfExports,
-  // which additionally re-renders after 30s even with an unchanged signature — this
-  // cache never does that: pagedjs render output for the same layout signature never
-  // becomes stale on its own).
+  // render products (renderPaginatedPaper output, DOM-contract applied), no TTL — a
+  // signature mismatch (draftPaperPaginationSignature) is the only invalidation
+  // trigger, not elapsed time (unlike recentDraftPdfExports, which additionally
+  // re-renders after 30s even with an unchanged signature — this cache never does
+  // that: pagedjs render output for the same layout signature never becomes stale on
+  // its own).
+  //
+  // draft-desk-b step3 SW-F (cr-step2-lite.md): entries hold pdfBytes + paginatedHtml
+  // (~1MB+/draft) with no cap — a multi-draft, long-running server process would grow
+  // this unbounded. Bounded to a simple LRU of DRAFT_PAGINATION_CACHE_MAX_ENTRIES
+  // (8 — "保 8 卷即可" per plan.md, not a tuned figure) via Map's insertion-order
+  // iteration: a hit re-inserts its key (moves it to most-recently-used), and a set
+  // that pushes size past the cap evicts the map's first (least-recently-used) key.
+  //
+  // draft-desk-b step3 SW-G (cr-step2-lite.md): keyed by `${draftPaperId}::
+  // ${versionType}`, not draftPaperId alone — the workbench's 学生版/教师版 preview
+  // toggle (DraftPaperWorkbench.tsx) now also drives THIS cache (previously only
+  // exportDraftPaperPdf's separate line), and draftPaperPaginationSignature already
+  // includes versionType, so a single-keyed cache would have the two versions evict
+  // each other on every toggle (wasteful re-render, never wrong — same class of bug
+  // as SW-G originally described, now actually reachable through this route).
+  const DRAFT_PAGINATION_CACHE_MAX_ENTRIES = 8
   const draftPaginationCache = new Map()
+  function draftPaginationCacheKey(draftPaperId, versionType) {
+    return `${draftPaperId}::${versionType}`
+  }
+  function draftPaginationCacheGet(key) {
+    const entry = draftPaginationCache.get(key)
+    if (!entry) return undefined
+    // Touch: re-insert so this key becomes the most-recently-used for eviction
+    // ordering purposes (Map preserves insertion order; delete+set moves it to the
+    // end without changing the stored value).
+    draftPaginationCache.delete(key)
+    draftPaginationCache.set(key, entry)
+    return entry
+  }
+  function draftPaginationCacheSet(key, entry) {
+    draftPaginationCache.delete(key)
+    draftPaginationCache.set(key, entry)
+    while (draftPaginationCache.size > DRAFT_PAGINATION_CACHE_MAX_ENTRIES) {
+      const oldestKey = draftPaginationCache.keys().next().value
+      draftPaginationCache.delete(oldestKey)
+    }
+  }
 
   // draft-student-field (E4): draft_papers.student_label is additive, nullable,
   // free-text metadata (one-on-one owner attribution — no student entity, no FK).
@@ -1001,23 +1037,23 @@ export function createDraftPaperStore({
     }
   }
 
-  // draft-desk-b step2 (MF-3/MF-4, plan.md "步2 — DOM 契约 + 缓存解耦"): renders (or
-  // reuses a cached render of) draftPaper through the new paged.js pipeline
-  // (paginationRenderer.mjs) and applies the DOM contract
-  // (paginationDomContract.mjs) before returning. NOT wired to a route yet — step3
-  // (front-end iframe consumption) and step4 (PDF export cutover) do that; this
-  // function only needs to exist and be correct for this step.
+  // draft-desk-b step2/3 (MF-3/MF-4/MF-3-step3, plan.md "步2 — DOM 契约 + 缓存解耦" /
+  // "步3 — 前端吃分页 HTML + 常驻叠按钮"): renders (or reuses a cached render of)
+  // draftPaper through the new paged.js pipeline (paginationRenderer.mjs) and applies
+  // the DOM contract (paginationDomContract.mjs) before returning. Wired to
+  // GET /api/draft-papers/:id/pagination (draftPaperRoutes.mjs) as of step3.
   //
-  // No dedup lock across concurrent calls for the SAME draftPaperId: two
+  // No dedup lock across concurrent calls for the SAME draftPaperId+versionType: two
   // overlapping cache-miss calls will both render (chromiumPool.mjs's own internal
   // queue still serializes the actual Chromium work, so this is wasteful, not
   // unsafe — the second render simply overwrites the cache entry with an
-  // identical-signature result). A single-flight lock is out of this step's scope;
-  // revisit only if it shows up as a real problem once step3 wires concurrent
-  // requests.
+  // identical-signature result). SW-H (cr-step2-lite.md): a single-flight lock is
+  // still out of scope — revisit only if it shows up as a real cost now that step3
+  // actually wires concurrent requests through the route.
   async function getDraftPaperPagination(userId, draftPaperId, { versionType = 'student' } = {}) {
     requireUserId(userId)
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
+    const cacheKey = draftPaginationCacheKey(draftPaperId, normalizedVersionType)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
@@ -1026,7 +1062,7 @@ export function createDraftPaperStore({
       if (!draftPaper.items.length) throw new Error('请先添加题组')
 
       const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
-      const cached = draftPaginationCache.get(draftPaperId)
+      const cached = draftPaginationCacheGet(cacheKey)
       if (cached && cached.signature === signature) {
         return { paginatedHtml: cached.paginatedHtml, pdfBytes: cached.pdfBytes, pageCount: cached.pageCount, draftPaper, reused: true }
       }
@@ -1040,7 +1076,7 @@ export function createDraftPaperStore({
       const groupIds = draftPaper.items.filter((item) => !item.groupMissing).map((item) => item.groupId)
       const paginatedHtml = applyPaginationDomContract(rendered.paginatedHtml, { groupIds, pageCount: rendered.pageCount })
 
-      draftPaginationCache.set(draftPaperId, { signature, paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount })
+      draftPaginationCacheSet(cacheKey, { signature, paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount })
       return { paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount, draftPaper, reused: false }
     } finally {
       userDb.close()
