@@ -39,6 +39,11 @@ Optional files by work type:
                    # _templates/case-ruling.md)
 ```
 
+Multi-cut programs (拆刀成序列的大 effort) keep one map file at
+`docs/cuts/<program>/program.md`(模板 `_templates/program.md`)。两条硬纪律:
+**尚未成形区**只收「问题还提不精确」的迷雾,能问精确就立刀,不许预切;
+**明确出界区**永不毕业——被裁出目的地的事只能重划目的地另立 effort。
+
 Optional prompt archive files:
 
 ```text
