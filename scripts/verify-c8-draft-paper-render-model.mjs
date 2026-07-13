@@ -299,12 +299,17 @@ assert('rail extraction lives in its own component', workbench.includes("from '.
 assert('rail component is a pure list (no per-row source metadata)', !rail.includes('compactSource'))
 assert('workbench gates the page-break sticker action on non-first items (mirrors the old canPageBreakBefore = index > 0 rule)', workbench.includes('canPageBreakBefore = fullIndex > 0'))
 // draft-desk-b step3 (PO-1, plan.md "PO 决策"): page-break suggestion display
-// is DEFERRED this cut (owner 2026-07-12) — pageBreakSuggestions stays on the
-// DraftPaper API response/type but is not read or rendered anywhere in the
-// workbench or the preview wrapper (no `.break-hint` markup). Previously this
-// assertion required the client's own `insertBreakHints` injection, which is
-// part of the retired client-side pagination this step removes.
-assert('page-break suggestions are NOT rendered this cut (PO-1 延后)', !previewHtml.includes('break-hint') && !workbench.includes('draft-break-marker'))
+// was DEFERRED that cut (owner 2026-07-12) — collected by print-form
+// (docs/cuts/print-form/plan.md Must Do 5): pageBreakSuggestions now comes
+// from the `/pagination` route response (real, pagination-derived, not the
+// old DraftPaper.pageBreakSuggestions heuristic field) and renders as a quiet
+// annotation badge (`.draft-group-suggestion`) inside the workbench's
+// persistent per-group action cluster — never injected into the preview
+// iframe's own HTML string (draftPaperPreviewHtml.ts stays a thin,
+// presentational wrapper; see that module's own updated doc comment).
+assert('page-break suggestions render as a quiet annotation badge in the workbench (PO-1 收账)', workbench.includes('draft-group-suggestion') && workbench.includes('建议前置分页'))
+assert('suggestion badge click reuses the existing 前置分页 PATCH, not a second implementation', /draft-group-suggestion[\s\S]{0,200}togglePageBreak\(item, true\)/.test(workbench))
+assert('the preview iframe HTML itself still carries no suggestion markup (draftPaperPreviewHtml.ts stays presentational-only)', !previewHtml.includes('break-hint') && !previewHtml.includes('draft-group-suggestion'))
 assert('workbench no longer owns outline rendering details', !workbench.includes('compactSource(item)') && !workbench.includes('draft-outline-panel'))
 assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench exposes browser print', workbench.includes('浏览器打印'))

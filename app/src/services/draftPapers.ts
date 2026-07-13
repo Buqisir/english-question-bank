@@ -1,5 +1,10 @@
-import type { DraftPaper, DraftPaperSummary } from '../domain/questionBank'
+import type { DraftPaper, DraftPaperSummary, DraftPrintForm } from '../domain/questionBank'
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readError } from './httpClient.ts'
+
+// print-form 收口（plan.md Forbidden 追授）：printForm 已并入 domain 的
+// DraftPaperSummary（engine-rewire 合并后并行锁解除），施工期的交叉类型
+// 绕行（DraftPaper & { printForm }）已退役——单一类型真源回归 questionBank.ts。
+export type { DraftPrintForm } from '../domain/questionBank'
 
 function downloadBlob(blob: Blob, fileName: string) {
   const url = URL.createObjectURL(blob)
@@ -80,22 +85,36 @@ export async function migrateAssemblyBasketToDraftPaper(groupIds: string[]): Pro
 // directly instead of building its own client-side pagination.
 // pdfBytes is deliberately not part of this response shape (PDF export stays
 // on its own route/pipeline until step4).
+// print-form (plan.md Must Do 2/6): `pageBreakSuggestions` here is the real,
+// pagination-derived replacement for the retired draftPaper.pageBreakSuggestions
+// heuristic — see server/draft-paper/draftPaperStore.mjs's derivePageBreakSuggestions.
 export async function fetchDraftPaperPagination(
   id: string,
   versionType: 'student' | 'teacher' = 'student',
-): Promise<{ paginatedHtml: string; pageCount: number; reused: boolean }> {
+): Promise<{
+  paginatedHtml: string
+  pageCount: number
+  reused: boolean
+  pageBreakSuggestions: Array<{ itemId: string; groupId: string; reason: string }>
+}> {
   const response = await fetch(
     apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pagination?versionType=${versionType}`),
   )
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to load draft paper pagination: ${response.status}`))
   }
-  return (await response.json()) as { paginatedHtml: string; pageCount: number; reused: boolean }
+  return (await response.json()) as {
+    paginatedHtml: string
+    pageCount: number
+    reused: boolean
+    pageBreakSuggestions: Array<{ itemId: string; groupId: string; reason: string }>
+  }
 }
 
 export async function updateDraftPaper(
   id: string,
   input: Partial<Pick<DraftPaper, 'title' | 'studentLabel'>> & {
+    printForm?: DraftPrintForm
     items?: Array<{ id: string; pageBreakBefore: boolean }>
   },
 ): Promise<DraftPaper> {

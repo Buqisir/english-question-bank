@@ -75,7 +75,11 @@
 - `server/search/**`、`app/src/features/paper-browse/**`、
   `scripts/verify-similar-questions.mjs`、`scripts/verify-paper-browse.mjs`
   （engine-rewire 在飞面）
-- `app/src/domain/questionBank.ts`（engine-rewire 契约点）
+- ~~`app/src/domain/questionBank.ts`（engine-rewire 契约点）~~ **收口追授
+  （PM 2026-07-13，engine-rewire 已合并、并行锁解除）**：允许且仅允许
+  ①`DraftPaperSummary` 追加 `printForm: DraftPrintForm`（+类型定义一行）
+  ②`DraftPaper` 摘除死字段 `pageBreakSuggestions`——替换 DEV 施工期的
+  service 层交叉类型绕行（DraftPaperWithForm），恢复单一类型真源。
 - 分页渲染器本体 `paginationRenderer.mjs` / `chromiumPool.mjs` / DOM 契约
   `paginationDomContract.mjs`（消费其产物，不改契约本身）
 - PDF/打印出口的 A3 拼版（刀E 后续兼容追加）；按张分组预览视图（裁点2 明拒）

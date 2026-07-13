@@ -127,7 +127,15 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // only pushes `.draft-undo-toast`'s `color: #ffffff` from L476 to L486; the
 // other two whitelisted lines (L188, L294) sit above the edited region and are
 // unaffected.
-const WHITELISTED_LINES = new Set([188, 294, 486])
+// print-form: re-pinned again — the `.draft-paper-meta-row`/`.draft-form-toggle`
+// rules (Must Do 3, +16 lines) were inserted above `.draft-a4-repaginating`,
+// pushing its `#ffffff` from L294 to L310; the `.draft-group-actions
+// .draft-group-suggestion` rules (Must Do 5, +22 lines, no new hex literal —
+// its own colors are all token references) were inserted above
+// `.draft-undo-toast`, pushing its `#ffffff` from L486 to L524.
+// `.draft-export-menu-trigger`'s at L188 sits above both edited regions and
+// is unaffected.
+const WHITELISTED_LINES = new Set([188, 310, 524])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
