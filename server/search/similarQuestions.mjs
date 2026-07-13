@@ -177,6 +177,53 @@ function fetchGroupDbMeta(db, groupIds) {
   return byId
 }
 
+// 阅读篇位真值（R1-genre-truth 落库后）：DB 里一个 source 行 == 一篇独立
+// passage（source_id 对每篇阅读文章各自成行，不是"一张试卷一个 source_id"），
+// 所以"同卷"不能按 source_id 分组——同一张试卷的四篇阅读文章共享
+// (year, region, paper_name) 三元组，这才是真正的"同卷"分组键（DEV 侦察时
+// 对照真库验证：如 2020 新课标Ⅰ卷的 reading-a/b/c/d 四个 source_id 各不相同，
+// 但 year/region/paper_name 三者全同）。窗口函数按这个键分区、display_order
+// 排序出名次（1..n，对应 A..D），只在候选/种子确有 group_type='reading' 时
+// 才需要这份数据。
+function fetchReadingSlots(db, groupIds) {
+  const ids = Array.from(new Set(groupIds)).filter(Boolean)
+  const byId = new Map()
+  if (ids.length === 0) return byId
+
+  const placeholders = ids.map(() => '?').join(', ')
+  const rows = db
+    .prepare(
+      `
+      WITH reading_groups AS (
+        SELECT qg.id AS group_id, qg.display_order, s.year, s.region, s.paper_name
+        FROM question_groups qg
+        JOIN passages p ON p.id = qg.passage_id
+        JOIN sources s ON s.id = p.source_id
+        WHERE qg.group_type = 'reading'
+      ),
+      ranked AS (
+        SELECT group_id,
+          ROW_NUMBER() OVER (
+            PARTITION BY year, region, paper_name ORDER BY display_order
+          ) AS slot
+        FROM reading_groups
+      )
+      SELECT group_id, slot FROM ranked WHERE group_id IN (${placeholders})
+      `,
+    )
+    .all(...ids)
+
+  for (const row of rows) {
+    byId.set(row.group_id, row.slot)
+  }
+  return byId
+}
+
+// 篇位名次 → 字母（1 → A, 2 → B, ...），只用于 chip 文案展示。
+function slotLetter(slot) {
+  return slot == null ? null : String.fromCharCode(64 + slot)
+}
+
 function fetchTopicLabels(db, groupIds) {
   const ids = Array.from(new Set(groupIds)).filter(Boolean)
   const byId = new Map(ids.map((id) => [id, new Set()]))
@@ -329,15 +376,32 @@ const RECIPES = {
       const matched = hasOverlap(seedTargets.mechanismFacets, candidate.facets.mechanismFacets)
       return booleanTerm({ matched, kind: 'secondary', label: '同衔接机制' })
     },
+    // 加分 = 话题密度 + 体裁弱加分（program.md 拍板）：体裁命中固定 +8，
+    // 8 是严格 tie-break 权重——低于任何现实话题密度台阶（density 最小非零
+    // 台阶取决于候选话题标签总数，实测从未低到 8 以内），所以体裁永远只是
+    // "同话题密度时的加分项"，绝不会盖过话题密度本身的排序。
     bonus(seedTargets, candidate) {
       const matched = intersectSize(seedTargets.topicLabels, candidate.topicLabels)
       const total = Math.max(seedTargets.topicLabels.size, 1)
-      return densityTerm({
+      const topic = densityTerm({
         matched,
         total,
         kind: 'topic-match',
         label: `话题重合 ${matched}/${seedTargets.topicLabels.size}`,
       })
+      const discourseMatch =
+        Boolean(candidate.dbMeta.discourseType) && seedTargets.discourseTypes.has(candidate.dbMeta.discourseType)
+      const value = Math.min(99, topic.value + (discourseMatch ? 8 : 0))
+      if (value <= 0) return { value: 0, reason: null }
+
+      const discourseLabel = `同体裁${candidate.dbMeta.discourseType}`
+      const label =
+        topic.value > 0 && discourseMatch
+          ? `${topic.reason.label} · ${discourseLabel}`
+          : discourseMatch
+            ? discourseLabel
+            : topic.reason.label
+      return { value, reason: { kind: 'topic-match', label } }
     },
   },
 
@@ -352,11 +416,30 @@ const RECIPES = {
         label: `小题题型密度 ${matched}/${total}`,
       })
     },
-    // 篇位 proxy = word_count 邻域(60%) + discourse_type 匹配(40%)。
-    // 邻域：|candidateWordCount - seedWordCount| 线性衰减到 READING_WORD_COUNT_DECAY_WINDOW
-    // （300 词）为 0；60/40 是因为词数是连续量、能细分排出先后，discourse_type
-    // 目前只有寥寥几个离散类目，权重相同会让"体裁一撞就赢"盖过词数差异。
+    // 篇位真值（R1-genre-truth 落库后，fetchReadingSlots 换真篇位名次）：
+    // 分层为 tier（同篇位/相邻篇位/无关系），tier 决定 base 分，同 tier 内再用
+    // word_count 邻域细排——tier 之间永不翻转（同篇位 [70,99] / 相邻 [35,64] /
+    // 无 [0,29]，档间留有余量，任何一档的顶都压不过下一档的底减一）。
+    // 体裁已彻底挪出阅读配方（program.md 拍板）：真值落库后体裁类目仍然
+    // 稀疏、区分度不如篇位名次，阅读改用篇位真值作分层主轴。
     secondary(seedTargets, candidate) {
+      const candidateSlot = candidate.dbMeta.readingSlot ?? null
+      const seedSlots = seedTargets.readingSlots
+
+      let tier = 'none'
+      if (candidateSlot != null && seedSlots.size > 0) {
+        if (seedSlots.has(candidateSlot)) {
+          tier = 'same'
+        } else {
+          let minDiff = Infinity
+          for (const slot of seedSlots) {
+            const diff = Math.abs(candidateSlot - slot)
+            if (diff < minDiff) minDiff = diff
+          }
+          if (minDiff === 1) tier = 'adjacent'
+        }
+      }
+
       const seedWordCount = seedTargets.wordCounts.length
         ? seedTargets.wordCounts.reduce((sum, value) => sum + value, 0) / seedTargets.wordCounts.length
         : null
@@ -367,23 +450,26 @@ const RECIPES = {
         const delta = Math.abs(candidateWordCount - seedWordCount)
         proximity = Math.max(0, 1 - delta / READING_WORD_COUNT_DECAY_WINDOW)
       }
-      const discourseMatch = Boolean(candidate.dbMeta.discourseType) && seedTargets.discourseTypes.has(candidate.dbMeta.discourseType)
 
-      const density = proximity * 0.6 + (discourseMatch ? 1 : 0) * 0.4
-      const value = Math.min(99, Math.round(density * 100))
+      const base = tier === 'same' ? 70 : tier === 'adjacent' ? 35 : 0
+      const value = Math.min(99, base + Math.round(proximity * 29))
       if (value <= 0) return { value: 0, reason: null }
 
       const wordCountLabel =
         seedWordCount != null && candidateWordCount != null
           ? `词数相近(±${Math.round(Math.abs(candidateWordCount - seedWordCount))})`
           : '词数未知'
-      return {
-        value,
-        reason: {
-          kind: 'position-proxy',
-          label: `篇位相当，${wordCountLabel}${discourseMatch ? '，体裁一致' : ''}`,
-        },
+
+      let label
+      if (tier === 'same') {
+        label = `同为${slotLetter(candidateSlot)}篇 · ${wordCountLabel}`
+      } else if (tier === 'adjacent') {
+        label = `篇位相邻 · ${wordCountLabel}`
+      } else {
+        label = wordCountLabel
       }
+
+      return { value, reason: { kind: 'position-slot', label } }
     },
     // 加分项方向与其余三型相反：话题**不同**加分（program.md 拍板 —— 阅读练习
     // 不需要复用同一话题，反而希望学生接触不同语境）。只在双方都有话题标签、
@@ -469,16 +555,17 @@ function buildSeedTargets(facetType, seedRows, rawIndex, dbMetaByGroupId, topicL
       positionFacets: unionInto(new Set(), seedRawEntries.map((e) => e.positionFacet)),
       mechanismFacets: unionInto(new Set(), seedRawEntries.map((e) => e.primaryMechanismFacet)),
       topicLabels,
+      discourseTypes,
     }
   }
-  // reading
+  // reading — 体裁彻底挪出阅读配方（program.md 拍板），改用篇位真值分层。
   return {
     skills: unionInto(new Set(), seedRawEntries.map((e) => e.skill?.primary)),
-    discourseTypes,
     topicLabels,
     wordCounts: seedGroupIds
       .map((gid) => dbMetaByGroupId.get(gid)?.wordCount)
       .filter((value) => value != null),
+    readingSlots: unionInto(new Set(), seedGroupIds.map((gid) => dbMetaByGroupId.get(gid)?.readingSlot)),
   }
 }
 
@@ -497,7 +584,7 @@ function buildSeedProfileFacets(facetType, seedTargets) {
   } else if (facetType === 'reading') {
     if (seedTargets.skills.size) facets.push({ key: 'skill', values: [...seedTargets.skills] })
     if (seedTargets.wordCounts.length) facets.push({ key: 'wordCount', values: seedTargets.wordCounts })
-    if (seedTargets.discourseTypes.size) facets.push({ key: 'discourseType', values: [...seedTargets.discourseTypes] })
+    if (seedTargets.readingSlots.size) facets.push({ key: 'readingSlot', values: [...seedTargets.readingSlots] })
   }
   return facets
 }
@@ -596,6 +683,14 @@ export function createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssets
     const allGroupIds = [...new Set([...seedGroupIds, ...poolEntries.map((entry) => entry.groupId)])]
     const dbMetaByGroupId = fetchGroupDbMeta(db, allGroupIds)
     const topicLabelsByGroupId = fetchTopicLabels(db, allGroupIds)
+
+    if (facetType === 'reading') {
+      const readingSlotByGroupId = fetchReadingSlots(db, allGroupIds)
+      for (const [groupId, slot] of readingSlotByGroupId) {
+        const meta = dbMetaByGroupId.get(groupId)
+        if (meta) meta.readingSlot = slot
+      }
+    }
 
     const seedTargets = buildSeedTargets(facetType, seedRows, rawIndex, dbMetaByGroupId, topicLabelsByGroupId)
 

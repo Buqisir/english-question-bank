@@ -198,18 +198,176 @@ if (readingResult.results.length > 1 && readingSeedMeta?.word_count != null) {
   }
   const topDelta = deltaFor(readingResult.results[0].groupId)
   const tailDelta = deltaFor(readingResult.results[readingResult.results.length - 1].groupId)
-  // Word-count neighborhood is only one component (60%) of the reading
-  // secondary term, blended with skill-density primary + topic-diff bonus,
-  // so this is a soft assertion: the *combined* score, not word-count
-  // alone, drives the final order. We assert the top result isn't worse
-  // positioned on word-count than the tail by an unreasonable margin is
-  // too weak to be meaningful; instead assert the literal plan wording:
-  // top word-count delta < tail word-count delta, using the widest
-  // available result set to reduce ties.
+  // Word-count neighborhood is one sub-component of the reading secondary
+  // term (engine-rewire: tier base + word-count proximity within the tier),
+  // blended with skill-density primary + topic-diff bonus, so this is a
+  // soft assertion: the *combined* score, not word-count alone, drives the
+  // final order. Assert the literal plan wording: top word-count delta <=
+  // tail word-count delta, using the widest available result set to reduce
+  // ties.
   assert(
     'reading seed: word-count neighborhood ordering holds (top closer than tail)',
     topDelta == null || tailDelta == null || topDelta <= tailDelta,
     `top=${topDelta} tail=${tailDelta}`,
+  )
+}
+
+// ═══ Criterion 7: reading 篇位真值 + tier 不翻转（engine-rewire, plan Must Do
+// #1）═══════════════════════════════════════════════════════════════════════
+console.log('=== Criterion 7: 阅读篇位真值 + tier 分层不翻转 ===')
+
+// Independent recompute of the production fetchReadingSlots derivation
+// (server/search/similarQuestions.mjs). DEV confirmed against the real DB:
+// a `sources` row is one row PER READING PASSAGE, not one row per exam
+// paper (e.g. 2020 新课标Ⅰ卷's four reading passages each have a distinct
+// source_id) — so "同卷" cannot be grouped by source_id. (year, region,
+// paper_name) is the real "同卷" key, verified by hand to be collision-free
+// across the whole reading pool (33 papers, group sizes cleanly 3 or 4).
+function computeReadingSlotMap() {
+  const rows = db
+    .prepare(
+      `
+      SELECT qg.id AS group_id, qg.display_order, s.year, s.region, s.paper_name
+      FROM question_groups qg
+      JOIN passages p ON p.id = qg.passage_id
+      JOIN sources s ON s.id = p.source_id
+      WHERE qg.group_type = 'reading'
+      `,
+    )
+    .all()
+  const byPaperKey = new Map()
+  for (const row of rows) {
+    const key = `${row.year}|${row.region}|${row.paper_name}`
+    if (!byPaperKey.has(key)) byPaperKey.set(key, [])
+    byPaperKey.get(key).push(row)
+  }
+  const slotByGroupId = new Map()
+  for (const groupRows of byPaperKey.values()) {
+    groupRows.sort((a, b) => a.display_order - b.display_order)
+    groupRows.forEach((row, index) => slotByGroupId.set(row.group_id, index + 1))
+  }
+  return slotByGroupId
+}
+const readingSlotMap = computeReadingSlotMap()
+
+assert(
+  'reading slot: group-zj-2022-jan-reading-c independently recomputes to slot 3 (C 篇, real display_order 排序)',
+  readingSlotMap.get('group-zj-2022-jan-reading-c') === 3,
+  `got slot=${readingSlotMap.get('group-zj-2022-jan-reading-c')}`,
+)
+
+const readingSeedSlot = readingSlotMap.get(READING_SEED_GROUP)
+assert(
+  'reading slot: seed group (group-zj-2022-jan-reading-b) resolves to slot 2 (B 篇)',
+  readingSeedSlot === 2,
+  `got slot=${readingSeedSlot}`,
+)
+
+// Tier invariant checked against the WHOLE real result set (not just top/
+// tail): decode each candidate's secondary component out of the combined
+// score (score = primary*10000 + secondary*100 + bonus, each term 0-99 by
+// construction — see similarQuestions.mjs scoreCandidate) and assert it
+// falls in the tier's documented range.
+{
+  const wideReadingResult = store.findSimilar(db, { seeds: [{ questionId: READING_SEED_QID }], limit: 50 })
+  let mismatch = null
+  let checked = 0
+  for (const result of wideReadingResult.results) {
+    const candidateSlot = readingSlotMap.get(result.groupId) ?? null
+    let expectedTier = 'none'
+    if (candidateSlot != null && readingSeedSlot != null) {
+      if (candidateSlot === readingSeedSlot) expectedTier = 'same'
+      else if (Math.abs(candidateSlot - readingSeedSlot) === 1) expectedTier = 'adjacent'
+    }
+    const secondary = Math.floor((result.score % 10000) / 100)
+    const inRange =
+      expectedTier === 'same'
+        ? secondary >= 70 && secondary <= 99
+        : expectedTier === 'adjacent'
+          ? secondary >= 35 && secondary <= 64
+          : secondary >= 0 && secondary <= 29
+    checked += 1
+    if (!inRange && !mismatch) {
+      mismatch = `groupId=${result.groupId} tier=${expectedTier} secondary=${secondary} candidateSlot=${candidateSlot} seedSlot=${readingSeedSlot}`
+    }
+  }
+  assert(
+    "reading tier: every candidate's decoded secondary value falls in its slot tier's documented range (同篇位[70,99] / 相邻[35,64] / 无[0,29]) — 档间永不翻转, checked across the whole real result set",
+    checked > 0 && !mismatch,
+    mismatch || 'no candidates to check',
+  )
+
+  const secondaryOf = (r) => Math.floor((r.score % 10000) / 100)
+  const sameSlotSecondaries = wideReadingResult.results
+    .filter((r) => readingSlotMap.get(r.groupId) === readingSeedSlot)
+    .map(secondaryOf)
+  const adjacentSlotSecondaries = wideReadingResult.results
+    .filter((r) => Math.abs((readingSlotMap.get(r.groupId) ?? -99) - readingSeedSlot) === 1)
+    .map(secondaryOf)
+  if (sameSlotSecondaries.length > 0 && adjacentSlotSecondaries.length > 0) {
+    assert(
+      'reading tier: worst real same-slot secondary value still outranks the best real adjacent-slot secondary value (a far-word-count same-篇位 candidate beats a near-word-count adjacent-篇位 candidate)',
+      Math.min(...sameSlotSecondaries) > Math.max(...adjacentSlotSecondaries),
+      `min(same)=${Math.min(...sameSlotSecondaries)} max(adjacent)=${Math.max(...adjacentSlotSecondaries)}`,
+    )
+  }
+}
+
+// ═══ Criterion 8: cloze secondary is no longer constant (engine-rewire —
+// 真值落库后 discourse_type 不再恒真) ════════════════════════════════════════
+console.log('=== Criterion 8: 完形次序 discourse_type 非恒真 ===')
+
+{
+  const CLOZE_SEED_QID = 'q-2020-i-041' // group-2020-i-cloze, discourse_type 记叙
+  const clozeResult = store.findSimilar(db, { seeds: [{ questionId: CLOZE_SEED_QID }], limit: 50 })
+  const withSecondary = clozeResult.results.filter((r) => r.reasons.some((reason) => reason.kind === 'secondary'))
+  const withoutSecondary = clozeResult.results.filter((r) => !r.reasons.some((reason) => reason.kind === 'secondary'))
+  assert(
+    'cloze seed: candidate pool has BOTH matched (同体裁) and unmatched candidates — proves discourse_type is a real, non-constant signal post genre-truth landing',
+    withSecondary.length > 0 && withoutSecondary.length > 0,
+    `matched=${withSecondary.length} unmatched=${withoutSecondary.length} total=${clozeResult.results.length}`,
+  )
+}
+
+// ═══ Criterion 9: sevenChoices bonus = topic density + 8 discourse tie-break
+// (engine-rewire, plan Must Do #3), never crossing a topic-density step ════
+console.log('=== Criterion 9: 七选五体裁弱加分恰为 8 ===')
+
+{
+  const SEVEN_SEED_QID = 'q-2020-bing-036'
+  const sevenResult = store.findSimilar(db, { seeds: [{ questionId: SEVEN_SEED_QID }], limit: 50 })
+
+  function topicLabelSet(groupId) {
+    const rows = db
+      .prepare('SELECT label FROM question_group_topic_labels WHERE question_group_id = ?')
+      .all(groupId)
+    return new Set(rows.map((row) => row.label))
+  }
+  const seedGroupId = db.prepare('SELECT group_id FROM questions WHERE id = ?').get(SEVEN_SEED_QID).group_id
+  const seedTopicLabels = topicLabelSet(seedGroupId)
+  const seedMeta = dbMeta(seedGroupId)
+  const seedDiscourseTypes = new Set(seedMeta?.discourse_type ? [seedMeta.discourse_type] : [])
+
+  let mismatch = null
+  let checked = 0
+  for (const result of sevenResult.results) {
+    const candidateTopicLabels = topicLabelSet(result.groupId)
+    const candidateMeta = dbMeta(result.groupId)
+    const matched = [...candidateTopicLabels].filter((label) => seedTopicLabels.has(label)).length
+    const total = Math.max(seedTopicLabels.size, 1)
+    const topicDensity = matched > 0 ? Math.min(99, Math.round((matched / total) * 100)) : 0
+    const discourseMatch = Boolean(candidateMeta?.discourse_type) && seedDiscourseTypes.has(candidateMeta.discourse_type)
+    const expectedBonus = Math.min(99, topicDensity + (discourseMatch ? 8 : 0))
+    const actualBonus = result.score % 100
+    checked += 1
+    if (actualBonus !== expectedBonus && !mismatch) {
+      mismatch = `groupId=${result.groupId} expected=${expectedBonus} actual=${actualBonus} topicDensity=${topicDensity} discourseMatch=${discourseMatch}`
+    }
+  }
+  assert(
+    'sevenChoices bonus: every real candidate\'s decoded bonus component equals min(99, 话题密度 + 8*体裁命中) — independently recomputed from raw topic-label + discourse_type DB rows, checked across the whole real result set',
+    checked > 0 && !mismatch,
+    mismatch || 'no candidates to check',
   )
 }
 
