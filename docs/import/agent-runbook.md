@@ -294,6 +294,14 @@ node scripts/import-pipeline/02-publish.mjs papers/<paperId>/config.json --publi
 nohup node --env-file-if-exists=.env server/api.mjs &
 ```
 
+**New卷须带五类体裁**（r1-genre-truth）: publish leaves `passages.discourse_type`
+NULL for brand-new passages — it is real genre truth (记叙/说明/议论/应用/新闻),
+not the group's question-type name, and the publisher no longer writes a
+question-type-name placeholder into it. After publishing a new paper, run a
+genre-truth classification pass over its passages (see
+`scripts/genre-truth-classify.mjs` / `scripts/genre-truth-apply.mjs`) before
+the paper is considered import-complete.
+
 This is the ONLY step that writes to `data/question-bank.sqlite` and
 `app/public/paper-assets/<paperId>/**`. It calls shipped
 `publishPaperImportPackage` — untouched by this cut. Never run this against

@@ -1,0 +1,141 @@
+<meta charset="utf-8">
+<title>体裁真值抽检 · 26 条盲审</title>
+<style>
+  :root{
+    --desk:#F1EDE4; --paper:#FBF9F3; --ink:#26251F; --ink-soft:#6B675C;
+    --green:#3F5D4C; --green-soft:#E4EAE4; --line:#D9D2C2; --danger:#B3563E;
+    --danger-soft:#F6E7E1; --amber:#9A6B2F; --amber-soft:#F3EAD9; --chip:#EFEAE0;
+    --shadow:0 1px 2px rgba(38,37,31,.08),0 4px 14px rgba(38,37,31,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --desk:#211F1B; --paper:#2C2A24; --ink:#EAE6DC; --ink-soft:#A39E90;
+      --green:#8FB39C; --green-soft:#37423A; --line:#4A463C; --danger:#D98A72;
+      --danger-soft:#4A342C; --amber:#D9B36A; --amber-soft:#453A28; --chip:#3A372F;
+      --shadow:0 1px 2px rgba(0,0,0,.4); }
+  }
+  :root[data-theme="light"]{ --desk:#F1EDE4; --paper:#FBF9F3; --ink:#26251F; --ink-soft:#6B675C;
+      --green:#3F5D4C; --green-soft:#E4EAE4; --line:#D9D2C2; --danger:#B3563E;
+      --danger-soft:#F6E7E1; --amber:#9A6B2F; --amber-soft:#F3EAD9; --chip:#EFEAE0;
+      --shadow:0 1px 2px rgba(38,37,31,.08),0 4px 14px rgba(38,37,31,.06); }
+  :root[data-theme="dark"]{ --desk:#211F1B; --paper:#2C2A24; --ink:#EAE6DC; --ink-soft:#A39E90;
+      --green:#8FB39C; --green-soft:#37423A; --line:#4A463C; --danger:#D98A72;
+      --danger-soft:#4A342C; --amber:#D9B36A; --amber-soft:#453A28; --chip:#3A372F;
+      --shadow:0 1px 2px rgba(0,0,0,.4); }
+
+  body{ background:var(--desk); color:var(--ink); font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.65; margin:0; padding:36px 18px 120px; }
+  main{ max-width:820px; margin:0 auto; }
+  .eyebrow{ font-size:12px; letter-spacing:.18em; color:var(--green); font-weight:600; margin-bottom:6px; }
+  h1{ font-family:"Songti SC","STSong",serif; font-size:28px; margin:0 0 8px; text-wrap:balance; }
+  .sub{ color:var(--ink-soft); margin:0 0 20px; max-width:44em; }
+  .stats{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 8px; }
+  .stat{ background:var(--paper); box-shadow:var(--shadow); border-radius:8px; padding:8px 14px; font-size:13px; }
+  .stat b{ font-size:16px; font-variant-numeric:tabular-nums; }
+  .note{ font-size:13px; color:var(--ink-soft); max-width:44em; }
+  .note b{ color:var(--danger); }
+
+  h2{ font-family:"Songti SC","STSong",serif; font-size:19px; margin:40px 0 2px; }
+  .typedef{ font-size:13px; color:var(--ink-soft); margin:0 0 12px; max-width:44em; }
+
+  .card{ background:var(--paper); box-shadow:var(--shadow); border-radius:10px; padding:16px 20px; margin:0 0 12px; }
+  .meta{ font-size:12px; color:var(--ink-soft); display:flex; gap:10px; flex-wrap:wrap; margin-bottom:6px; align-items:center; }
+  .meta .idx{ font-weight:700; color:var(--green); }
+  .tag{ background:var(--chip); border-radius:10px; padding:1px 8px; font-size:11px; }
+  .tag.precedent{ background:var(--green-soft); color:var(--green); font-weight:600; }
+  .tag.needs-ruling{ background:var(--amber-soft); color:var(--amber); font-weight:600; }
+  .tag.conf-low{ background:var(--danger-soft); color:var(--danger); }
+  .stem{ font-weight:600; margin:0 0 2px; }
+  .quote{ font-family:Georgia,"Songti SC",serif; font-size:13.5px; background:var(--chip); border-left:3px solid var(--line);
+    padding:6px 12px; border-radius:0 6px 6px 0; margin:8px 0; overflow-x:auto; white-space:pre-wrap; }
+  .expl{ font-size:14px; margin:8px 0 12px; }
+  .expl b{ color:var(--green); }
+  .verdicts{ display:flex; gap:8px; }
+  .verdicts button{ border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    border-radius:16px; padding:5px 16px; font-size:13px; cursor:pointer; }
+  .verdicts button:focus-visible{ outline:2px solid var(--green); outline-offset:2px; }
+  .verdicts button[data-v="ok"].on{ background:var(--green); border-color:var(--green); color:#fff; font-weight:600; }
+  .verdicts button[data-v="bad"].on{ background:var(--danger); border-color:var(--danger); color:#fff; font-weight:600; }
+  .verdicts button[data-v="hmm"].on{ background:var(--amber); border-color:var(--amber); color:#fff; font-weight:600; }
+
+  .tally{ position:fixed; left:0; right:0; bottom:0; background:var(--paper); box-shadow:0 -2px 12px rgba(38,37,31,.12);
+    padding:12px 18px; }
+  .tally-in{ max-width:820px; margin:0 auto; display:flex; gap:16px; align-items:center; font-size:14px; flex-wrap:wrap; }
+  .tally b{ font-variant-numeric:tabular-nums; }
+  .t-ok b{ color:var(--green); } .t-bad b{ color:var(--danger); } .t-hmm b{ color:var(--amber); }
+  .t-left{ color:var(--ink-soft); margin-left:auto; }
+</style>
+
+<main>
+  <div class="eyebrow">r1-genre-truth · owner 抽检 gate（R1-DP1）</div>
+  <h1>26 条体裁真值判定，你来判「味」</h1>
+  <p class="sub">全库 273 篇 passages 体裁真值判定（记叙/说明/议论/应用/新闻，覆写 <code>discourse_type</code>）。分层抽样：五类各 4-6 条 + 4 条判例源样本（核对判例是否被真正遵守）+ 全部 2 条低置信 needs-ruling。每条看完点一个判决：<b>对味</b>=类型判得准、依据站得住；<b>不对</b>=类型贴错；<b>存疑</b>=说不上错但别扭，需要补判例。</p>
+  <div class="stats">
+    <span class="stat">记叙 <b>101</b></span>
+    <span class="stat">说明 <b>116</b></span>
+    <span class="stat">议论 <b>9</b></span>
+    <span class="stat">应用 <b>31</b></span>
+    <span class="stat">新闻 <b>16</b></span>
+  </div>
+  <p class="note">「议论」全量仅 9/273（3.3%）——15 篇试跑 0 命中，全量后非零但依然稀疏，符合 plan 预告的验收关注项，请重点看下面「议论」四条是否真的够格论说文，还是被判宽了/判窄了。</p>
+  <div id="list"></div>
+</main>
+
+<div class="tally"><div class="tally-in">
+  <span class="t-ok">对味 <b id="c-ok">0</b></span>
+  <span class="t-bad">不对 <b id="c-bad">0</b></span>
+  <span class="t-hmm">存疑 <b id="c-hmm">0</b></span>
+  <span class="t-left"><span id="c-done">0</span> / 26 已审</span>
+</div></div>
+
+<script>
+const TYPEINFO = {
+  '记叙':{def:'以人物经历或事件发展的时间线/情节为骨架的叙事文本（含游记、随笔、故事、第一人称体验）。判例：第一人称体验/感受为主线、纪实文以人物经历时间线为骨架，即使有报道背景/时效性引子也不改判记叙。'},
+  '说明':{def:'以解释事物、原理、数据、现象、操作方法为目的的客观介绍文本（含说明书、指南、贴士攻略、数据解读）。判例：解释因果/分析数据为主体、贴士指南体即使带劝导语气，也不改判说明。'},
+  '议论':{def:'提出明确论点，并通过论证逐层推进、层层证明该论点的说理文——收窄词表，不是"泛泛发表看法"就算议论。'},
+  '应用':{def:'具有固定实用格式与明确交际目的的应用型文本（书信、通知、演讲稿、广告、公告等）。写作组「应用文写作」按规则直判此类。'},
+  '新闻':{def:'以具体日期 + 机构/官员引语 + 第三人称播报腔为骨架的事件播报体——收窄词表，报道背景/时效性引子不足以单独定性为新闻，必须真有播报腔骨架。'},
+};
+const DATA = [{"passageId": "passage-2020-bing-cloze", "groupType": "cloze", "decision": "记叙", "confidence": "high", "rationale": "以第一人称叙述个人经历和感悟，按时间顺序讲述与顾客的故事，结构骨架为叙事。", "batch": "cloze", "title": "完形填空", "wordCount": 262, "excerpt": "As s businesswoman, I care deeply about my customers. But like anyone for whom you feel affection, __41__ can also drive you mad. They’ll come rushing in, __42__ their handbag’s been stolen. They’ll __43__ that they left it in the changing room, create havoc (混乱) and then __44__ it had been in their car all the time. They’ll have out half the __45__ in the shop, and want the only style you don’t have left in a __46__…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-i-reading-c", "groupType": "reading", "decision": "记叙", "confidence": "high", "rationale": "以作者旅行经历的时间线和见闻为骨架，属第一人称游记式叙事。", "batch": "reading-1", "title": "Reading C", "wordCount": 299, "excerpt": "In the mid-1990s, Toni Bissell taught English as a volunteer in Uzbekistan. He left after seven months, physically broken and having lost his mind. A few years later, still attracted to the country, he returned to Uzbekistan to write an article about the disappearance of the Aral Sea.\n\nHis visit, however, ended up involving a lot more than that. Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Cen…", "isPrecedent": true, "isNeedsRuling": false}, {"passageId": "passage-2022-i-reading-c", "groupType": "reading", "decision": "记叙", "confidence": "high", "rationale": "以项目缘起、老人参与体验、他人引语为时间线展开叙事，属事件报道式记叙。", "batch": "reading-1", "title": "Reading C", "wordCount": 290, "excerpt": "The elderly residents (居民) in care homes in London are being given hens to look after to stop them feeling lonely.\n\nThe project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing. It is also being used to help patients suffering dementia, a serious illness of the mind. Staff in care homes have reported a reduction in the use of medicine where hens are in use.\n\nAmong t…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2023-i-grammar-fill", "groupType": "grammar_cloze", "decision": "记叙", "confidence": "high", "rationale": "以第一人称体验小笼包为主线，按品尝感受、历史渊源、品质评价、个人习惯展开，属典型美食随笔/记叙文。", "batch": "grammar-fill", "title": "语法填空", "wordCount": 204, "excerpt": "Xiao long bao (soup dumplings) , those amazing constructions of delicate dumpling wrappers, encasing hot,  __56__ (taste) soup and sweet, fresh meat, are far and away my favorite Chinese street food. The dumplings arrive steaming and dangerously hot. To eat one, you have to decide whether  __57__ (bite) a small hole in it first, releasing the stream and risking a spill (溢出) ,  __58__to put the whole dumpling in your …", "isPrecedent": true, "isNeedsRuling": false}, {"passageId": "passage-2024-i-writing-continuation", "groupType": "writing", "decision": "记叙", "confidence": "high", "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。", "batch": "rule-writing", "title": "读后续写", "wordCount": 323, "excerpt": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nI met Gunter on a cold, wet and unforgettable evening in September. I had planned to fly to Vienna and take a bus to Prague for a conference. Due to a big storm, my flight had been delayed by an hour and a half. I touched down in Vienna just 30 minutes before the departure of the last bus to Prague. The moment I got off the plane, I ran like crazy through the airport building an…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-zj-2020-jul-writing-continuation", "groupType": "writing", "decision": "记叙", "confidence": "high", "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。", "batch": "rule-writing", "title": "读后续写", "wordCount": 316, "excerpt": "阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。\n\nOne fall, my wife Elli and I had a single goal: to photograph polar bears. We were staying at a research camp outside “the polar bear capital of the world”—the town of Churchill in Manitoba, Canada.\n\nTaking pictures of polar bears is amazing but also dangerous. Polar bears—like all wild animals—should be photographed from a safe distance. When I’m face to face with a polar bear, I like…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-bing-reading-a", "groupType": "reading", "decision": "说明", "confidence": "high", "rationale": "以客观介绍四个旅行线路的行程、景点和特色为主体，属于旅游产品说明文本。", "batch": "reading-1", "title": "Reading A", "wordCount": 231, "excerpt": "Journey Back in Time with Scholars\n Classical Provence (13 days)\n\nJourney through the beautiful countryside of Provence, France, with Prof. Ori Z. Soltes. We will visit some of the best-preserved Roman monuments in the world. Our tour also includes a chance to walk in the footsteps of Van Gogh and Gauguin. Fields of flowers, tile-roofed (瓦屋顶) villages and tasty meals enrich this wonderful experience.\n Southern Spain …", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-jia-seven-choices", "groupType": "seven_choices", "decision": "说明", "confidence": "high", "rationale": "以统计数据、专家引语和科学报告解释塑料污染现状与危害，结构为客观介绍而非叙事或论证。", "batch": "seven-choices", "title": "七选五", "wordCount": 331, "excerpt": "If you take a look around your kitchen or office right now chances are that you’ll notice you’re surrounded by plastic- water bottles, to-go coffee cups, straws, plastic grocery bags, food wrappers, take-out containers single-serve coffee pods and produce bags. __36__\n\nIt’s certainly not realistic to remove all plastic from your life, but let’s examine some statistics that may encourage you to reduce your single-use …", "isPrecedent": true, "isNeedsRuling": false}, {"passageId": "passage-2022-ii-cloze", "groupType": "cloze", "decision": "说明", "confidence": "high", "rationale": "以解释房屋看管交换住宿这一新型经济模式为核心，客观介绍其运作方式与特点，结构为说明文。", "batch": "cloze", "title": "完形填空", "wordCount": 209, "excerpt": "Like many young people, Jessica wants to travel the globe. Unlike most of them, this 25-year-old is doing it __41__ . She and her husband have spent the last two years traveling the world, stopping everywhere from Paris to Singapore. It might sound like one long, expensive __42__ , but the couple has an unusual way to make their travel __43__ .\n\nThey’re part of a new form of the __44__ economy: an online group of hou…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2022-yi-reading-d", "groupType": "reading", "decision": "说明", "confidence": "high", "rationale": "以解释糖税政策、数据、影响和行业反应为主体，结构为客观介绍而非事件播报或论证推进。", "batch": "reading-2", "title": "Reading D", "wordCount": 317, "excerpt": "The Government’s sugar tax on soft drinks has brought in half as much money as Ministers first predicted it would generate, the first official data on the policy has shown.\n\nFirst announced in April, 2016, the tax which applies to soft drinks containing more than 5 g of sugar per 100 ml, was introduced to help reduce childhood obesity (肥胖) . It is believed that today’s children and teenagers are consuming three times…", "isPrecedent": true, "isNeedsRuling": false}, {"passageId": "passage-2024-i-reading-d", "groupType": "reading", "decision": "说明", "confidence": "high", "rationale": "以研究结果解释数据偏差问题为核心，客观介绍研究发现与改进建议，属说明文体。", "batch": "reading-2", "title": "Reading D", "wordCount": 359, "excerpt": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records. Today, most records of biodiversity are often in the form of photos, videos, and other digital records. Though they are useful for detecting shifts in the number and variety of species in an area, a new Stanford study has found that this type of record is not perfect.\n\n“With the …", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-zj-2020-jan-reading-c", "groupType": "reading", "decision": "说明", "confidence": "high", "rationale": "以研究结果解释父亲对青少年毅力培养的作用，客观介绍研究发现与教养方式，结构为说明因果与特征。", "batch": "reading-3", "title": "Reading C", "wordCount": 252, "excerpt": "Today’s world is not an easy adjustment for young adults. A key skill set for success is persistence (毅力) , a characteristic that researchers say is heavily influenced by fathers. Researchers from Brigham Young University discovered that fathers are in a unique position to help their adolescent children learn persistence.\n\nBYU professors Laura PadillaWalker and Randal Day arrived at these findings after following 325…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-jia-grammar-fill", "groupType": "grammar_cloze", "decision": "议论", "confidence": "high", "rationale": "全文围绕“努力的价值”提出论点，并通过因果论证、条件分析层层推进，结构为典型说理文。", "batch": "grammar-fill", "title": "语法填空", "wordCount": 239, "excerpt": "Everyone would have success if it __61__ (be) free. But there are few successful individuals and each of them had put in enough productive work __62__they received anything in retum. While working hard on what you believe in, you’re understanding its true value. You begin to respect the work itself, to build some __63__ (exception) qualities along the way, and to leam important life lessons during it.\n\nThere is a pop…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2021-jia-reading-d", "groupType": "reading", "decision": "议论", "confidence": "high", "rationale": "开篇设问引出论点，通过研究证据和逻辑推理层层论证社会因素不应限制天才的认定，结构为典型说理文。", "batch": "reading-1", "title": "Reading D", "wordCount": 292, "excerpt": "Who is a genius? This question has greatly interested humankind for centuries.\n\nLet’s state clearly: Einstein was a genius. His face is almost the international symbol for genius. But we want to go beyond one man and explore the nature of genius itself. Why is it that some people are so much more intelligent or creative than the rest of us? And who are they?\n\nIn the sciences and arts, those praised as geniuses were m…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2025-i-reading-c", "groupType": "reading", "decision": "议论", "confidence": "high", "rationale": "文章提出明确论点（需重新思考街道角色），通过历史案例、数据对比和反问论证层层推进，结构为说理文骨架。", "batch": "reading-2", "title": "Reading C", "wordCount": 317, "excerpt": "While safety improvements might have been made to our streets in recent years, transport studies also show declines in pedestrian (行人) mobility, especially among young children. Many parents say there’s too much traffic on the roads for their children to walk safely to school, so they pack them into the car instead.\n\nDutch authors Thalia Verkade and Marco te Brömmelstroet are bothered by facts like these. In their ne…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-zj-2022-jun-reading-c", "groupType": "reading", "decision": "议论", "confidence": "high", "rationale": "开篇提出论点“适度工作也能成功”，随后通过研究、专家引语和论证层层推进，结构为典型说理文。", "batch": "reading-3", "title": "Reading C", "wordCount": 298, "excerpt": "Many people believe that working to the maximum is the secret to success, but research has found that moderation (适度) also gets results on the job.\n\nIn a study led by Ellen Langer of Harvard University, researchers asked people to translate sentences into a new made-up language. Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all. High levels …", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-i-reading-a", "groupType": "reading", "decision": "应用", "confidence": "high", "rationale": "文本为诗歌比赛公告，包含奖项、规则等固定格式，具有明确的交际目的，属于应用文体。", "batch": "reading-1", "title": "Reading A", "wordCount": 189, "excerpt": "POETRY CHALLENGE\n\nWrite a poem about how courage, determination, and strength have helped you face challenges in your life. \n Prizes\n\n3 Grand Prizes: Trip to Washington, D. C. for each of three winners, a parent and one other person of the winner’s choice. Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World.\n\n6 Fir…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2022-yi-reading-a", "groupType": "reading", "decision": "应用", "confidence": "high", "rationale": "文本为展览公告，包含展览介绍、讲座安排、开放时间、票价等实用信息，具有固定格式和明确交际目的。", "batch": "reading-2", "title": "Reading A", "wordCount": 189, "excerpt": "Henry  Raeburn(1756—1823)\n\nThe Exhibition\n\nThis exhibition of some sixty masterpieces celebrating the life and work of Scotland’s best loved painter, Sir Henry Raeburn, comes to London. Selected from collections throughout the world, it is the first major exhibition of his work to be held in over forty years.\n\nLecture Series\n\nScottish National Portrait (肖像画) Gallery presents a series of lectures for the general publi…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2024-jia-reading-a", "groupType": "reading", "decision": "应用", "confidence": "high", "rationale": "文本为活动通知，包含邀请、活动介绍和参与方式，具有明确的交际目的和实用格式。", "batch": "reading-2", "title": "Reading A", "wordCount": 224, "excerpt": "Each ARTS FIRST festival is a unique annual celebration of the Harvard community’s artistic creativity. We invite you to join us for the coming ARTS FIRST. We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities. The festival is a public event for Harvard and community members of all ages.\n\nLight Awash in Watercolor\n\n…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-zj-2020-jul-writing-application", "groupType": "writing", "decision": "应用", "confidence": "high", "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。", "batch": "rule-writing", "title": "应用文写作", "wordCount": 1, "excerpt": "假定你是李华，你校来自爱尔兰的外教Peter因病回国休假。请给他写一封电子邮件，内容包括：(1)询问近况；(2)分享班级最新消息；(3)表达祝愿。注意：(1)词数80左右；(2)可适当增加细节，以使行文连贯。", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-bing-reading-b", "groupType": "reading", "decision": "新闻", "confidence": "high", "rationale": "以具体事件（首映抗议）为引，引用机构数据（非营利组织监控2000多部制作）和活动人士言论，采用第三人称播报腔，符合事件播报体骨架。", "batch": "reading-1", "title": "Reading B", "wordCount": 239, "excerpt": "When Rise of the Planet of the Apes was first shown to the public last month, a group of excited animal activists gathered on Hollywood Boulevard. But they weren’t there to throw red paint on fur—coat—wearing film stars. Instead, one activist, dressed in a full—body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”\n\nThe creative team behind Apes used motion—capture (动…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2020-bing-reading-c", "groupType": "reading", "decision": "新闻", "confidence": "low", "rationale": "以具体数据、研究报告和家庭案例为骨架，呈现多代同堂趋势，但缺乏明确日期和机构引语，结构介于新闻播报与说明之间。", "batch": "reading-1", "title": "Reading C", "wordCount": 318, "excerpt": "With the young unable to afford to leave home and the old at risk of isolation (孤独) , more families are choosing to live together.\n\nThe doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law: she lives on the ground floor, while he lives upstairs with his wife and their two daughters.\n\nFour years ago they all moved into a three-storey Victorian house in Bristol—one of a growing numb…", "isPrecedent": false, "isNeedsRuling": true}, {"passageId": "passage-2020-jia-reading-c", "groupType": "reading", "decision": "新闻", "confidence": "high", "rationale": "以具体时间（2019年5月、2019年4月）、机构引语（新加坡海关）和第三人称播报腔为骨架，报道纪录片发布与穿山甲贩卖事件。", "batch": "reading-1", "title": "Reading C", "wordCount": 311, "excerpt": "Pangolins (穿山甲) are the most trafficked (被贩卖的) mammals in the world and are facing extinction. To draw attention to these scaly (有鳞片的) , anteater-like-animals, a new wildlife documentary, Eye of the Pangolin, is attempting a unique way to inspire action and conservation. Partnering with the non-profit organization Pangolin Africa, the documentary was made available on YouTube in May 2019. The intention is to reach co…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2022-ii-reading-c", "groupType": "reading", "decision": "新闻", "confidence": "high", "rationale": "以具体日期/引语（Mark Rosekind、Félix W. Ortiz）和第三人称播报腔为骨架，报道分心驾驶问题及Textalyzer立法动态。", "batch": "reading-1", "title": "Reading C", "wordCount": 283, "excerpt": "Over the last seven years, most states have banned texting by drivers, and public service campaigns have tried a wide range of methods to persuade people to put down their phones when they are behind the wheel.\n\nYet the problem, by just about any measure, appears to be getting worse. Americans are still texting while driving, as well as using social networks and taking photos. Road accidents, which had fallen for yea…", "isPrecedent": false, "isNeedsRuling": false}, {"passageId": "passage-2023-ii-reading-b", "groupType": "reading", "decision": "新闻", "confidence": "low", "rationale": "以具体项目为线索，包含直接引语和评价，但缺乏具体日期和机构播报腔，结构介于新闻特写与说明之间。", "batch": "reading-2", "title": "Reading B", "wordCount": 273, "excerpt": "Turning soil, pulling weeds, and harvesting cabbage sound like tough work for middle and high school kids. And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools. The program aims to help students develop science skills, environmental awareness, and healthy lifestyles.\n\nJaramillo’s students live in neighborhoods where fresh food and …", "isPrecedent": false, "isNeedsRuling": true}, {"passageId": "passage-zj-2021-jan-reading-c", "groupType": "reading", "decision": "新闻", "confidence": "high", "rationale": "以研究结果播报为骨架，包含具体机构/人物引语和第三人称报道腔，符合事件播报体特征。", "batch": "reading-3", "title": "Reading C", "wordCount": 334, "excerpt": "Researchers say they have translated the meaning of gestures that wild chimpanzees (黑猩猩) use to communicate. They say wild chimps communicate 19 specific messages to one another with a “vocabulary” of 66 gestures. The scientists discovered this by following and filming groups of chimps in Uganda, and examining more than 5,000 incidents of these meaningful exchanges.\n\nDr. Catherine Hobaiter, who led the research, said…", "isPrecedent": false, "isNeedsRuling": false}];
+const list=document.getElementById('list');
+const ORDER=['记叙','说明','议论','应用','新闻'];
+let idx=0;
+for(const t of ORDER){
+  const items=DATA.filter(d=>d.decision===t);
+  if(!items.length) continue;
+  const h=document.createElement('h2'); h.textContent=t+'（'+items.length+' 条）'; list.appendChild(h);
+  const p=document.createElement('p'); p.className='typedef'; p.textContent=TYPEINFO[t].def; list.appendChild(p);
+  for(const d of items){
+    idx++;
+    const c=document.createElement('div'); c.className='card';
+    const tags=[
+      d.isPrecedent?'<span class="tag precedent">判例源</span>':'',
+      d.isNeedsRuling?'<span class="tag needs-ruling">needs-ruling</span>':'',
+      d.confidence==='low'?'<span class="tag conf-low">置信 low</span>':'',
+    ].join('');
+    c.innerHTML=
+      '<div class="meta"><span class="idx">#'+idx+'</span><span>'+d.passageId+'</span><span>'+d.groupType+'</span><span>'+d.wordCount+' 词</span>'+tags+'</div>'+
+      '<p class="stem">'+d.title+'</p>'+
+      '<div class="quote">'+d.excerpt+'</div>'+
+      '<p class="expl"><b>AI 判定：</b>'+d.decision+'　<b>依据：</b>'+d.rationale+'</p>';
+    const v=document.createElement('div'); v.className='verdicts';
+    for(const [key,label] of [['ok','对味'],['bad','不对'],['hmm','存疑']]){
+      const b=document.createElement('button'); b.dataset.v=key; b.textContent=label;
+      b.addEventListener('click',()=>{
+        if(c.dataset.v===key){ delete c.dataset.v; b.classList.remove('on'); }
+        else { c.dataset.v=key; v.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); }
+        tally();
+      });
+      v.appendChild(b);
+    }
+    c.appendChild(v); list.appendChild(c);
+  }
+}
+function tally(){
+  const cards=[...document.querySelectorAll('.card')];
+  const n=k=>cards.filter(c=>c.dataset.v===k).length;
+  document.getElementById('c-ok').textContent=n('ok');
+  document.getElementById('c-bad').textContent=n('bad');
+  document.getElementById('c-hmm').textContent=n('hmm');
+  document.getElementById('c-done').textContent=cards.filter(c=>c.dataset.v).length;
+}
+</script>

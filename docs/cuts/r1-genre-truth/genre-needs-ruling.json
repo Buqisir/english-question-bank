@@ -1,0 +1,16 @@
+[
+  {
+    "passageId": "passage-2020-bing-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "rationale": "以具体数据、研究报告和家庭案例为骨架，呈现多代同堂趋势，但缺乏明确日期和机构引语，结构介于新闻播报与说明之间。",
+    "batch": "reading-1"
+  },
+  {
+    "passageId": "passage-2023-ii-reading-b",
+    "groupType": "reading",
+    "decision": "新闻",
+    "rationale": "以具体项目为线索，包含直接引语和评价，但缺乏具体日期和机构播报腔，结构介于新闻特写与说明之间。",
+    "batch": "reading-2"
+  }
+]
