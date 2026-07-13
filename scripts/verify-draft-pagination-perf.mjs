@@ -12,18 +12,18 @@
 //       render is in flight (`await`ed, not synchronous)
 //
 // NOT registered in verify-ci.mjs (see scripts/README.md "Runs in CI?" =
-// no), for two independent reasons:
-//   - same environment gap as verify-draft-pagination-renderer.mjs: the
-//     main `verify` CI job never installs a Chromium binary (only the
-//     separate `e2e` job does, and only for app/'s `playwright`) — `npm ci`
-//     alone does not provision one for server's `playwright-core`.
-//   - even with Chromium available, an absolute-latency assertion against a
-//     real headless-Chromium render on a shared, unpredictably-loaded CI
-//     runner is exactly the kind of check plan.md's own Verify 要求 flags
-//     as "易抖动可标非 CI" — a fixed 1000ms ceiling would either be loose
-//     enough to stop meaning anything or tight enough to flake on a noisy
-//     runner. This script is the source of truth for the LOCAL number to
-//     watch; it is not a merge gate.
+// no), and — draft-desk-b step5 (SW-B) — deliberately kept OUT of the `e2e`
+// job too, even though that job now installs server's playwright-core
+// Chromium (step4) and does run this script's two siblings
+// (verify-draft-pagination-renderer.mjs / verify-draft-pagination-dom-contract.mjs).
+// The reason is specific to this script, not an environment gap:
+//   - an absolute-latency assertion against a real headless-Chromium render
+//     on a shared, unpredictably-loaded CI runner is exactly the kind of
+//     check plan.md's own Verify 要求 flags as "易抖动可标非 CI" — a fixed
+//     1000ms ceiling would either be loose enough to stop meaning anything
+//     or tight enough to flake on a noisy runner. This script is local-only
+//     by design: the source of truth for the LOCAL number to watch, not a
+//     merge gate.
 
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'

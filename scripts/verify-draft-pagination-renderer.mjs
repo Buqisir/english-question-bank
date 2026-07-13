@@ -11,17 +11,20 @@
 // this script launches a real headless Chromium instance (playwright-core,
 // `channel: 'chromium'`, see chromiumPool.mjs). The main `verify` CI job
 // (`docs/ci/verify-workflow-template.yml` / `.github/workflows/verify.yml`)
-// only runs `npm ci` in server/ — it does NOT install a Chromium binary
-// (only the separate `e2e` job's "Install Playwright Chromium" step does,
-// and only for app/'s `playwright`, not server's `playwright-core`).
+// only runs `npm ci` in server/ — it does NOT install a Chromium binary.
 // `npm ci` alone never downloads a browser for `playwright-core` (unlike the
 // full `playwright` package, it ships no postinstall browser download) — a
 // clean CI checkout of the `verify` job has no Chromium to launch, so this
 // script would fail there for an environment reason, not a code reason.
-// Wiring a Chromium install step into the main verify job (or moving this
-// check into the e2e job) is a CI-infra decision out of this self-contained
-// step's scope — flagged as a Should-Watch for whoever wires step1 into the
-// rest of draft-desk-b's CI story.
+//
+// draft-desk-b step5 (SW-B): runs as a dedicated step in the `e2e` job
+// instead, after its "Install server pagination Chromium (playwright-core)"
+// step (added step4, `.github/workflows/verify.yml`) — that job already pays
+// the Chromium-install cost for both app/'s `playwright` and server/'s
+// `playwright-core`, so this is zero incremental install cost there. It
+// stays out of verify-ci.mjs / the `verify` job on purpose (no browser
+// there); "Runs in CI?" = no in scripts/README.md tracks verify-ci.mjs
+// membership specifically, not "runs in some GitHub Actions job".
 //
 // KNOWN, EXPECTED non-determinism (confirmed locally, not a defect): pagedjs
 // assigns a fresh random UUID to `data-ref` (and `data-split-to` /

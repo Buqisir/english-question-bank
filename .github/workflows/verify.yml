@@ -93,5 +93,18 @@ jobs:
         run: npx playwright-core install --with-deps chromium
         working-directory: server
 
+      # draft-desk-b step5 (SW-B): these two need a real server-side Chromium
+      # (installed above) that the main verify job's `npm ci` never
+      # provisions — the e2e job is the only place that cost is already paid.
+      # verify-draft-pagination-perf.mjs deliberately stays out of CI: its
+      # absolute-latency assertions are exactly the "易抖动" case plan.md's
+      # own Verify 要求 flags as CI-exempt on a shared runner (see
+      # scripts/README.md).
+      - name: Run draft pagination renderer verify
+        run: node scripts/verify-draft-pagination-renderer.mjs
+
+      - name: Run draft pagination DOM contract verify
+        run: node scripts/verify-draft-pagination-dom-contract.mjs
+
       - name: Run golden path E2E smoke
         run: node scripts/smoke-golden-path.mjs

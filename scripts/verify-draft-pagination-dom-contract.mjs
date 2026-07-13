@@ -10,9 +10,12 @@
 // scripts/verify-draft-pagination-perf.mjs: this launches a real headless
 // Chromium instance (playwright-core, channel:'chromium') and the main `verify`
 // CI job's `npm ci` never installs a Chromium binary for server/'s
-// playwright-core (only the e2e job installs one, for app/'s playwright). See
-// those two scripts' headers for the full explanation; SW-B (cr-step1-lite.md)
-// tracks the CI-wiring decision for step5.
+// playwright-core. See scripts/verify-draft-pagination-renderer.mjs's header
+// for the full explanation.
+//
+// draft-desk-b step5 (SW-B): runs as a dedicated step in the `e2e` job
+// instead (see scripts/verify-draft-pagination-renderer.mjs header) — that
+// job already installs server's playwright-core Chromium (step4).
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
