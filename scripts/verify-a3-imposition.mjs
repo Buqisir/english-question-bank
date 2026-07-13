@@ -31,12 +31,13 @@
 // mutation response or an actual measured DOM/scroll position, never a
 // source-only assertion.
 //
-// Requires a real Chromium binary (`app`'s playwright) — same CI-provisioning
-// gap as scripts/verify-draft-pagination-*.mjs (see scripts/README.md): not
-// registered in verify-ci.mjs's `scripts` array; runs as its own step in the
-// `e2e` job (.github/workflows/verify.yml), right after "Install Playwright
-// Chromium" (app's browser, not server's playwright-core — this script never
-// touches server/draft-paper/chromiumPool.mjs).
+// Requires TWO real Chromium binaries (CR SW-3 correction — the original
+// claim "never touches server's playwright-core" was wrong): Phase A/B's own
+// clicks drive `app`'s Playwright Chromium, but Phase B boots server/api.mjs,
+// whose pagination render path spawns server/draft-paper/chromiumPool.mjs
+// (server's playwright-core Chromium). In CI both are provisioned by earlier
+// `e2e` job steps — do not reorder this step above either install step. Same
+// verify-ci.mjs non-registration convention as verify-draft-pagination-*.mjs.
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
