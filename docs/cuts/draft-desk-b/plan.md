@@ -11,6 +11,7 @@
    **✅ 2026-07-12 判定：四条全过，引擎选定 paged.js（`spike-gate-dp1.md`；DEV 必读其「三个实操发现」）。**
 2. **【DP-2｜步1-4 步间闸】** 每步 narrow verify + CR-lite 主代理复核绿才进下一步。
    **✅ 步1 过闸 2026-07-12**（PR #285 @ b0d9f34,CI 双绿,主代理亲手复跑 25+2+50 全绿;0 MF、5 挂账见 `cr-step1-lite.md`——其中 SW-A(figure 图)步2/4 必验、SW-D(export-flow verify 在 main 上就崩)步4 前置修。
+   **✅ 步2 过闸 2026-07-12**（86cf1df,复跑 14+32+25 绿,SW-A 实锤已修/data URI 内联;0 MF、新挂账 SW-F/G/H 见 `cr-step2-lite.md`)。**⚖️ 步3 开工前 owner 拍 DP-title**:改标题触不触发重排(页脚含标题,不触发=页脚陈旧;PM+DEV 均推荐 Option B「触发」,详见 cr-step2-lite.md)。
 3. **【DP-3｜终审】** 全 verify + 浏览器 QA matrix + owner 产品 QA（parity 肉眼 + 交互回归）。
 
 ## PO 决策（owner 2026-07-12）
