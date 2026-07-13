@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Archive, ArrowDown, ArrowUp, FileDown, FolderPlus, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
-import type { DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
+import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, MySpaceFolder } from '../../domain/questionBank'
 import {
   deleteDraftPaperItem,
   downloadDraftPaperPdf,
@@ -13,8 +13,6 @@ import {
   patchDraftPaperItem,
   restoreDraftPaperItem,
   updateDraftPaper,
-  type DraftPaperWithForm,
-  type DraftPrintForm,
 } from '../../services/draftPapers'
 import {
   createMySpaceFolder,
@@ -81,7 +79,7 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
   const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, shellNav } = props
-  const [draftPaper, setDraftPaper] = useState<DraftPaperWithForm | null>(null)
+  const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
   const [studentLabelDraft, setStudentLabelDraft] = useState('')
@@ -162,7 +160,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setLoadError('')
     setMigrationNotice('')
     try {
-      let next: DraftPaperWithForm
+      let next: DraftPaper
       if (draftPaperId) {
         next = await fetchDraftPaper(draftPaperId)
       } else {

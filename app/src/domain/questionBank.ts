@@ -115,6 +115,10 @@ export type BasketItem = QuestionGroupCard & {
   note: string
 }
 
+// print-form: 打印形态（'a4' 散页 / 'a3' 对折 2-up）。只影响断篇判据与
+// 「共 N 版 · M 张」计数，不改变分页排版本身（docs/cuts/print-form/plan.md）。
+export type DraftPrintForm = 'a4' | 'a3'
+
 export type DraftPaperSummary = {
   id: string
   title: string
@@ -130,6 +134,7 @@ export type DraftPaperSummary = {
   // metadata. Free text, nullable, never renders onto the paper face (print/DOCX
   // never read this field — see docs/cuts/draft-student-field/plan.md).
   studentLabel: string | null
+  printForm: DraftPrintForm
 }
 
 export type DraftPaperItem = {
@@ -150,13 +155,10 @@ export type DraftPaperItem = {
   updatedAt: string
 }
 
+// print-form: 词数启发式建议已退役；分页建议改由 /pagination 响应携带
+// （真分页衍生），draft GET 不再返回 pageBreakSuggestions。
 export type DraftPaper = DraftPaperSummary & {
   items: DraftPaperItem[]
-  pageBreakSuggestions: Array<{
-    itemId: string
-    groupId: string
-    reason: string
-  }>
   printHtml: string
 }
 

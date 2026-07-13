@@ -1,18 +1,10 @@
-import type { DraftPaper, DraftPaperSummary } from '../domain/questionBank'
+import type { DraftPaper, DraftPaperSummary, DraftPrintForm } from '../domain/questionBank'
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readError } from './httpClient.ts'
 
-// print-form (docs/cuts/print-form/plan.md): `printForm` is additive server
-// state (draft_papers.print_form) this cut's Forbidden list does not permit
-// adding to the shared `DraftPaper`/`DraftPaperSummary` domain type
-// (`app/src/domain/questionBank.ts` is an engine-rewire contract point another
-// cut is editing concurrently in a sibling worktree) — so it is layered on
-// locally here as an intersection type instead of a source edit to that file.
-// Every service function below that returns a full draft-paper record now
-// returns this widened shape; DraftPaperWorkbench.tsx imports it from here
-// rather than importing the bare `DraftPaper` type for its own state.
-export type DraftPrintForm = 'a4' | 'a3'
-export type DraftPaperWithForm = DraftPaper & { printForm: DraftPrintForm }
-export type DraftPaperSummaryWithForm = DraftPaperSummary & { printForm: DraftPrintForm }
+// print-form 收口（plan.md Forbidden 追授）：printForm 已并入 domain 的
+// DraftPaperSummary（engine-rewire 合并后并行锁解除），施工期的交叉类型
+// 绕行（DraftPaper & { printForm }）已退役——单一类型真源回归 questionBank.ts。
+export type { DraftPrintForm } from '../domain/questionBank'
 
 function downloadBlob(blob: Blob, fileName: string) {
   const url = URL.createObjectURL(blob)
@@ -34,27 +26,27 @@ export async function fetchDraftPapers(): Promise<DraftPaperSummary[]> {
   return data.draftPapers
 }
 
-export async function fetchCurrentDraftPaper(create = true): Promise<DraftPaperWithForm> {
+export async function fetchCurrentDraftPaper(create = true): Promise<DraftPaper> {
   const response = await fetch(apiPath(`/api/draft-papers/current${create ? '?create=1' : ''}`))
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to load current draft paper: ${response.status}`))
   }
-  const data = (await response.json()) as { draftPaper: DraftPaperWithForm }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
   return data.draftPaper
 }
 
-export async function fetchDraftPaper(id: string, versionType: 'student' | 'teacher' = 'student'): Promise<DraftPaperWithForm> {
+export async function fetchDraftPaper(id: string, versionType: 'student' | 'teacher' = 'student'): Promise<DraftPaper> {
   const response = await fetch(
     apiPath(`/api/draft-papers/${encodeURIComponent(id)}?versionType=${versionType}`),
   )
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to load draft paper: ${response.status}`))
   }
-  const data = (await response.json()) as { draftPaper: DraftPaperWithForm }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
   return data.draftPaper
 }
 
-export async function addGroupToCurrentDraftPaper(groupId: string): Promise<DraftPaperWithForm> {
+export async function addGroupToCurrentDraftPaper(groupId: string): Promise<DraftPaper> {
   const response = await fetch(apiPath('/api/draft-papers/current/items'), {
     body: JSON.stringify({ groupId }),
     headers: { 'content-type': 'application/json' },
@@ -63,12 +55,12 @@ export async function addGroupToCurrentDraftPaper(groupId: string): Promise<Draf
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to add group to draft paper: ${response.status}`))
   }
-  const data = (await response.json()) as { draftPaper: DraftPaperWithForm }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
   return data.draftPaper
 }
 
 export async function migrateAssemblyBasketToDraftPaper(groupIds: string[]): Promise<{
-  draftPaper: DraftPaperWithForm
+  draftPaper: DraftPaper
   migratedCount: number
   skippedCount: number
 }> {
@@ -81,7 +73,7 @@ export async function migrateAssemblyBasketToDraftPaper(groupIds: string[]): Pro
     throw new Error(await readError(response, `Failed to migrate assembly basket: ${response.status}`))
   }
   return (await response.json()) as {
-    draftPaper: DraftPaperWithForm
+    draftPaper: DraftPaper
     migratedCount: number
     skippedCount: number
   }
@@ -125,7 +117,7 @@ export async function updateDraftPaper(
     printForm?: DraftPrintForm
     items?: Array<{ id: string; pageBreakBefore: boolean }>
   },
-): Promise<DraftPaperWithForm> {
+): Promise<DraftPaper> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(id)}`), {
     body: JSON.stringify(input),
     headers: { 'content-type': 'application/json' },
@@ -134,7 +126,7 @@ export async function updateDraftPaper(
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to update draft paper: ${response.status}`))
   }
-  const data = (await response.json()) as { draftPaper: DraftPaperWithForm }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
   return data.draftPaper
 }
 
@@ -142,7 +134,7 @@ export async function patchDraftPaperItem(
   draftPaperId: string,
   itemId: string,
   input: { pageBreakBefore: boolean },
-): Promise<DraftPaperWithForm> {
+): Promise<DraftPaper> {
   const response = await fetch(
     apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/items/${encodeURIComponent(itemId)}`),
     {
@@ -154,12 +146,12 @@ export async function patchDraftPaperItem(
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to update draft item: ${response.status}`))
   }
-  const data = (await response.json()) as { draftPaper: DraftPaperWithForm }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
   return data.draftPaper
 }
 
 export async function deleteDraftPaperItem(draftPaperId: string, itemId: string): Promise<{
-  draftPaper: DraftPaperWithForm
+  draftPaper: DraftPaper
   removed: { itemId: string; groupId: string; orderIndex: number; pageBreakBefore: boolean }
 }> {
   const response = await fetch(
@@ -170,7 +162,7 @@ export async function deleteDraftPaperItem(draftPaperId: string, itemId: string)
     throw new Error(await readError(response, `Failed to delete draft item: ${response.status}`))
   }
   return (await response.json()) as {
-    draftPaper: DraftPaperWithForm
+    draftPaper: DraftPaper
     removed: { itemId: string; groupId: string; orderIndex: number; pageBreakBefore: boolean }
   }
 }
@@ -178,7 +170,7 @@ export async function deleteDraftPaperItem(draftPaperId: string, itemId: string)
 export async function restoreDraftPaperItem(
   draftPaperId: string,
   input: { groupId: string; orderIndex: number; pageBreakBefore: boolean },
-): Promise<DraftPaperWithForm> {
+): Promise<DraftPaper> {
   const response = await fetch(
     apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/items/restore`),
     {
@@ -190,7 +182,7 @@ export async function restoreDraftPaperItem(
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to restore draft item: ${response.status}`))
   }
-  const data = (await response.json()) as { draftPaper: DraftPaperWithForm }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
   return data.draftPaper
 }
 
