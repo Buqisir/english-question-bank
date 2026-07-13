@@ -1,7 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-13（双刀已部署生产 2c01e2b + 体裁真值同步生产库；
-engine-rewire 开工）
+Last updated: 2026-07-13（engine-rewire + print-form 双刀并行收官，均未部署；
+另：双刀部署 2c01e2b + 真值同步生产 + R2 restore 演练销账）
 
 ## 现在是什么
 
@@ -24,6 +24,19 @@ engine-rewire 开工）
 
 ## 主线焦点
 
+- 2026-07-13：**engine-rewire 收官**（merge edcf777，fresh Opus CR APPROVE
+  0MF/2SW，verify:all 绿 + main CI 绿）：阅读次序换真篇位（同字母70/相邻35/
+  词数细排+29 档间不翻转，同卷键=(年,区,卷名) CR 亲验零碰撞）、完形体裁数据
+  自愈、七选五体裁弱加分+8、前端恒真过滤器退役。DP-2 QA 过（qa-dp2.md）。
+  **账单**：DEV 170k + CR 55k；主代理出场 4。**未部署**，owner DP-3 待做。
+- 2026-07-13：**print-form 收官（draft-desk 队列刀C）**（merge ac05962，
+  fresh Opus CR APPROVE 0MF/3SW，verify:all 绿 + main CI 绿）：打印形态
+  A4/A3 字段（懒 ALTER+记住上次）、词数启发式魔法数字整套退役→真分页衍生
+  建议、同面判据（A3 版3/4 同面不算断实证）、计数徽标随形态、PO-1 建议显示
+  收账（安静徽标一键生效）。类型收正回 domain 真源。DP-2 QA 过。
+  **账单**：DEV 257k + CR 67k；主代理出场 5（含类型收正亲改）。**未部署**，
+  owner DP-3 待做。插曲入档：并行自验撞端口留下 3 个残留测试服务，污染后续
+  verify:all 假红两轮（清残留即愈）——并行刀自验错峰或差异化端口，候选改进。
 - 2026-07-13：**双刀部署生产 2c01e2b**（deploy-remote.sh + 部署节点两动作）：
   ①体裁真值同步生产库（停服 apply 273 条带备份，生产 verify-genre-truth
   12/12 绿）②刀B前置（playwright-core chromium 装毕；实测冷 2.54s/
@@ -192,7 +205,8 @@ engine-rewire 开工）
   （形态字段+同面判据）+ 新立刀E「排序建议」排 C 后（任意序、一键
   应用可撤销、永不自动重排）；原型 `prototype-print-form-v2.html`
   入 draft-desk 目录。排期：lecture-rail ✅ → 暖纸转正 ✅ →
-  刀A+卷宗柜 ✅（2026-07-12）→ motion-pass ✅（2026-07-12）→ B → C → E。
+  刀A+卷宗柜 ✅（2026-07-12）→ motion-pass ✅（2026-07-12）→ B ✅ → C ✅
+  （print-form，2026-07-13）→ E（排序建议，下一把）。
   **motion-pass 开工约定（owner 2026-07-12）**：下一会话即开；工具已
   备齐——Emil 全套 5 skill 已装（improve-animations 开场出审计路线图、
   review-animations 当验收尺、apple-design 处方库；上游 clone 在
@@ -204,8 +218,10 @@ engine-rewire 开工）
   即此闭环）③色温法/命名法/删除法三条入 DESIGN.md。
 - **解析字段路线图（2026-07-10 拍板闭环，program 档案
   `docs/cuts/analysis-fields/program.md`）**：~~R1 体裁补真值~~ ✅
-  2026-07-13 收官（见主线焦点）→ **engine-rewire 刀可开工**（目标配方表在
-  program.md）→ R2 干扰项。原文：四轨 R1 体裁补真值（先行，
+  2026-07-13 收官（见主线焦点）→ ~~engine-rewire~~ ✅ 2026-07-13 收官（见
+  主线焦点）→ **R2 干扰项可开工**。新立刀候选：taxonomy 从 api.mjs 模块化
+  抽出（防循环依赖，解锁阅读跨主题群收紧+话题阶梯接线，engine-rewire
+  deferred 交接）。原文：四轨 R1 体裁补真值（先行，
   discourse_type 实测=题型名假货，引擎两处配方空转；词表记叙/说明/
   议论/应用/新闻）→ R2 干扰项（机审 1395 条→owner 判例→返修→才索引；
   抽检基线 21 条在档）→ R3 写作双 facet（应用文功能型+续写情节型）→
