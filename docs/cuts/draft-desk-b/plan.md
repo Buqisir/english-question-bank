@@ -15,6 +15,7 @@
    **✅ 步3 过闸 2026-07-12**(950c296+d32eb4e,主代理复跑 14+32+25+50+35+20+tsc 全绿,CI 双绿;0 MF、新挂账 SW-I 见 `cr-step3-lite.md`。CI 首跑抓到 error-copy 门计数过期,同刀修。DEV 真 Chrome QA 过含 SW-3 多页锚点与 DP-title 页脚实测)。
    **✅ 步4 过闸 2026-07-13**(8600564+c45f533+d32cf31,主代理复跑 12 本 verify+tsc 全绿,CI 双绿;0 MF、新挂账 SW-J/K 见 `cr-step4-lite.md`。CI 首跑抓到 e2e 缺 server 侧 chromium(playwright-core rev 各锁各的),已修——连续第二次 CI-only 捕获。三出口 parity 实证:PDF /Type /Page=7 与预览一致、打印 HTML 截获验明同源)。
 3. **【DP-3｜终审】** 全 verify + 浏览器 QA matrix + owner 产品 QA（parity 肉眼 + 交互回归）。
+   **✅ DP-3 过 2026-07-13**：QA matrix 9/9（qa/qa-step5-matrix.md）+ fresh Opus CR APPROVE 0MF（cr.md）+ **owner 产品 QA 过**（parity 肉眼 + 编辑手感 + 叠按钮，Chrome 实点）。
 
 ## PO 决策（owner 2026-07-12）
 - **PO-1 建议显示 = 延后**：本刀**不显示**分页建议（break-hint）；`pageBreakSuggestions` 字段保留但**暂不消费**；随后续「建议引擎改真分页衍生」刀恢复。（落 MF-5——明确带走，非静默丢）
