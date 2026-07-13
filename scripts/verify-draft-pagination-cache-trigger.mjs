@@ -120,11 +120,18 @@ assert(
 }
 
 // --- wiring backstop: getDraftPaperPagination must actually consult this exact
-// function (not draftPaperPrintSignature, which stays reserved for
-// exportDraftPaperPdf's separate 30s cache) for its cache-hit decision. Source
-// assertion is a deliberate belt-and-suspenders supplement here, not the primary
-// proof (draftPaperPaginationSignature's behavior above is) — see AGENTS.md
+// function for its cache-hit decision. Source assertion is a deliberate belt-
+// and-suspenders supplement here, not the primary proof
+// (draftPaperPaginationSignature's behavior above is) — see AGENTS.md
 // "Verify convention".
+//
+// draft-desk-b step4 (SW-5 retirement): `draftPaperPrintSignature` — the OLD
+// Vivliostyle-line signature this comment used to say getDraftPaperPagination
+// must never call — no longer exists at all (retired along with the 30s-TTL
+// cache it served; exportDraftPaperPdf now goes through getDraftPaperPagination
+// and this same draftPaperPaginationSignature too). The negative assertion below
+// still holds (trivially — the function it names is gone), kept as a low-cost
+// tripwire against the two signature concepts ever being re-merged incorrectly.
 {
   const storeSrc = readFileSync(path.join(rootDir, 'server/draft-paper/draftPaperStore.mjs'), 'utf8')
   const fnStart = storeSrc.indexOf('async function getDraftPaperPagination(')
@@ -133,7 +140,7 @@ assert(
   const fnSrc = storeSrc.slice(fnStart, fnEnd)
   assert('getDraftPaperPagination computes its signature via draftPaperPaginationSignature', /const signature = draftPaperPaginationSignature\(/.test(fnSrc))
   assert('getDraftPaperPagination compares against a cached signature before re-rendering', /cached\.signature === signature/.test(fnSrc))
-  assert('getDraftPaperPagination does NOT use draftPaperPrintSignature (that stays exportDraftPaperPdf-only)', !/draftPaperPrintSignature\(/.test(fnSrc))
+  assert('getDraftPaperPagination does NOT use draftPaperPrintSignature (retired in step4, see comment above)', !/draftPaperPrintSignature\(/.test(fnSrc))
 }
 
 console.log(`\n${passed} passed, ${failed} failed`)

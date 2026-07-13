@@ -267,7 +267,11 @@ export function createDraftPaperRoutes() {
         const versionType = input.versionType === undefined
           ? 'student'
           : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-        const result = context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
+        // draft-desk-b step4 (MF-2/MF-7): exportDraftPaperPdf is now async (it
+        // renders through the same Chromium/paged.js pipeline as the pagination
+        // route, via getDraftPaperPagination — see draftPaperStore.mjs) where the
+        // old Vivliostyle CLI line was synchronous (execFileSync).
+        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
         const message = routeError(error)

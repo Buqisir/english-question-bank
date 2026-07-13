@@ -302,6 +302,16 @@
   z-index: 6;
 }
 
+/* draft-desk-b step4 (SW-I, cr-step3-lite.md): the repagination-FAILURE variant
+   of the badge above — same shell (shape/position/pointer-events), just a
+   danger-tinted background instead of --ink so a stale preview during an error
+   reads as "something went wrong" rather than "still working". Uses the
+   existing --eqb-color-danger token (a var(), not a literal hex) — no new entry
+   needed in this file's palette-hardcode whitelist below. */
+.draft-a4-repaginating--error {
+  background: var(--eqb-color-danger);
+}
+
 .draft-a4-sheet iframe {
   background: transparent;
   border: 0;

@@ -144,9 +144,23 @@ export function createMySpaceRoutes() {
       const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request, { maxBytes: 500_000 })
       const draftPaperId = String(input.draftPaperId || '').trim()
-      let result = null
       try {
-        result = context.draftPaperStore.exportDraftPaperPdf(userId, draftPaperId, { preferRecent: true })
+        // draft-desk-b step4 (SW-5 retirement, plan.md "步4"): exportDraftPaperPdf no
+        // longer takes `preferRecent` (the option only ever governed the retired
+        // recentDraftPdfExports 30s-TTL cache) and is now async — see
+        // draftPaperStore.mjs's doc comment on exportDraftPaperPdf for the full
+        // writeup. Its real intent ("a PDF just rendered for export/preview
+        // shouldn't force a second render when saved to My Space moments later") is
+        // now satisfied by getDraftPaperPagination's own signature cache (no TTL)
+        // that exportDraftPaperPdf itself goes through. There is also no more
+        // clearRecentDraftPdfExport cleanup call here — that function existed only
+        // to delete the old cache's scratch PDF file from `exportDir` after
+        // saveMySpaceArtifact copied its bytes elsewhere; the new pipeline never
+        // writes a staging file to begin with (pdfBytes come straight out of
+        // Playwright's page.pdf() as an in-memory Buffer), so there is nothing to
+        // clean up. `result` no longer needs to be declared outside this try block
+        // either — the old catch block's cleanup call was its only outside-try use.
+        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, draftPaperId)
         const db = context.openUserDatabase({ readOnly: false })
         try {
           const artifact = saveMySpaceArtifact(db, userId, {
@@ -157,13 +171,11 @@ export function createMySpaceRoutes() {
             folderId: input.folderId,
             fileName: input.fileName,
           })
-          context.draftPaperStore.clearRecentDraftPdfExport(draftPaperId, result.outputPath)
           context.sendJson(response, 201, { artifact, reusedRecentPdf: result.reusedRecent === true })
         } finally {
           db.close()
         }
       } catch (error) {
-        context.draftPaperStore.clearRecentDraftPdfExport(draftPaperId, result?.outputPath)
         const message = routeError(error)
         // M0-4 (PA MF-3 / plan.md verification 2): check draft-not-found/not-owned
         // BEFORE the generic 'not found' substring match — otherwise B borrowing A's

@@ -119,7 +119,15 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // this insertion (+24 lines) also pushes `.draft-undo-toast`'s own `color:
 // #ffffff` from L452 to L476; `.draft-export-menu-trigger`'s at L188 sits
 // above the edited region and is unaffected.
-const WHITELISTED_LINES = new Set([188, 294, 476])
+// draft-desk-b step4 (SW-I): re-pinned again — `.draft-a4-repaginating--error`
+// (the error-state sibling of the L294 badge) was inserted directly below
+// `.draft-a4-repaginating`'s closing brace; it introduces NO new hex literal
+// (its own `background` is `var(--eqb-color-danger)`, a token reference, not a
+// literal) so the whitelist itself doesn't grow — the insertion (+10 lines)
+// only pushes `.draft-undo-toast`'s `color: #ffffff` from L476 to L486; the
+// other two whitelisted lines (L188, L294) sit above the edited region and are
+// unaffected.
+const WHITELISTED_LINES = new Set([188, 294, 486])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

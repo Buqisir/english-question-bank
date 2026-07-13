@@ -722,8 +722,24 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
+  // draft-desk-b step4 (owner 拍板 2026-07-12, plan.md "步4" — 浏览器打印并入):
+  // prints the same server-rendered, DOM-contract-tagged pagination HTML the A4
+  // preview iframe already shows (the `paginatedHtml` state this component fetches
+  // via fetchDraftPaperPagination — see the pagination-fetch effect above), not the
+  // old draftPaper.printHtml (a THIRD, independently-rendered HTML string built by
+  // server/print-renderer.mjs's buildPrintHtml, never run through paged.js). That
+  // old field was the last remaining "third pagination engine" parity gap this cut
+  // exists to close — this browser-print path, the on-screen preview, and the PDF
+  // download now all trace back to the SAME single paged.js render (paged.js's own
+  // @page rules + already-computed page boxes govern the print output; the
+  // `@media screen` card styling this component layers onto `paginatedHtml` for the
+  // on-screen iframe never applies during print — DP-1 acceptance check (d) already
+  // proved a serialized paged.js DOM prints consistently with what it displays).
+  // `draftPaper.printHtml` itself stays on the DraftPaper API/domain type (API
+  // surface unchanged) even though this was its last client-side consumer — see
+  // this cut's completion report.
   function browserPrint() {
-    if (!draftPaper?.printHtml) return
+    if (!paginatedHtml) return
     const printWindow = window.open('', '_blank')
     if (!printWindow) {
       setExportStatus('error')
@@ -732,7 +748,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
     printWindow.opener = null
     printWindow.document.open()
-    printWindow.document.write(draftPaper.printHtml)
+    printWindow.document.write(paginatedHtml)
     printWindow.document.close()
     printWindow.focus()
     printWindow.setTimeout(() => printWindow.print(), 250)
@@ -908,6 +924,20 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       the only visible sign a repagination is happening. */}
                   {paginationStatus === 'loading' && (
                     <div className="draft-a4-repaginating" role="status">重新排版中…</div>
+                  )}
+                  {/* draft-desk-b step4 (SW-I, cr-step3-lite.md): a repagination
+                      FAILURE while a stale preview is still on screen previously left
+                      no visible sign at all — the error copy only rendered in the
+                      empty-state branch below, which this branch (previewHtml
+                      truthy) never reaches, so the user silently kept looking at
+                      outdated content with no indication anything had gone wrong.
+                      Reuses the exact same badge shell as the loading state above
+                      (position/shape/pointer-events unchanged, "别过度设计") — only
+                      the copy and an added modifier class (background color) differ. */}
+                  {paginationStatus === 'error' && (
+                    <div className="draft-a4-repaginating draft-a4-repaginating--error" role="status">
+                      {paginationError || '重新排版失败，当前显示旧版预览'}
+                    </div>
                   )}
                 </>
               ) : (

@@ -210,14 +210,21 @@ assert('draft render reopens a new section when group type returns later', third
 assert('draft render keeps footer title and page counter', draftHtml.includes('H9 Draft · ') && draftHtml.includes('counter(page)'))
 assert('footer is injected outside print renderer body', draftStore.includes('addDraftFooterCss'))
 assert('footer contains title and page counter', /counter\(page\)/.test(draftStore))
-// figure-render cut: exportDraftPaperPdf's buildDraftPrintHtml call gained
-// `imageMode: 'file'` + `images: printImages` (Vivliostyle CLI converts
-// this HTML from a scratch tempdir, and needs the real PNGs copied in
-// alongside it — see draftPaperStore.mjs's comment above this call) —
-// natural turnover of the exact-source-text regex, not a change to what
-// the assertion actually proves (the PDF endpoint still calls the shared
-// builder rather than duplicating it).
-assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper, \{ versionType: normalizedVersionType, imageMode: 'file', images: printImages \}\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
+// draft-desk-b step4 (MF-2/MF-7, plan.md "步4 — PDF 换引擎收口 + Vivliostyle
+// 草稿卷退役"): exportDraftPaperPdf no longer calls buildDraftPrintHtml +
+// Vivliostyle CLI directly (that whole line, including `imageMode: 'file'` +
+// `images: printImages`, is retired — see draftPaperStore.mjs's doc comment on
+// exportDraftPaperPdf). It now consumes getDraftPaperPagination's pdfBytes — the
+// SAME paged.js render that produced the on-screen paginated HTML — so parity is
+// a construction guarantee. Natural turnover of the exact-source-text regex, not
+// a change to what the assertion actually proves (the PDF endpoint still routes
+// through the shared pipeline rather than rendering its own copy).
+assert(
+  'draft PDF endpoint consumes getDraftPaperPagination\'s pdfBytes (paged.js pipeline, Vivliostyle CLI line retired)',
+  /const pagination = await getDraftPaperPagination\(userId, draftPaperId, \{ versionType: normalizedVersionType \}\)/.test(draftStore)
+    && /body: pagination\.pdfBytes/.test(draftStore)
+    && draftRoutes.includes('exportDraftPaperPdf'),
+)
 assert('empty export uses Chinese reason', draftStore.includes('请先添加题组') || draftRoutes.includes('请先添加题组'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')
@@ -275,7 +282,15 @@ assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^
 // technical constraint + DraftPaperWorkbench.tsx's nativeContentHeight
 // state, read from the loaded iframe's own contentDocument).
 assert('preview iframe height is driven by measured content, not a fixed CSS pin', !workbenchCss.includes('height: 1188px') && workbench.includes('nativeContentHeight'))
-assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
+// draft-desk-b step4 (owner 拍板 2026-07-12, plan.md "步4" — 浏览器打印并入):
+// browser print now writes the same server-paginated `paginatedHtml` state the A4
+// preview iframe already renders (fetched via fetchDraftPaperPagination), not the
+// old `draftPaper.printHtml` — a third, independently-rendered HTML string that
+// never went through paged.js. That was the last remaining parity gap between
+// "what the teacher sees" / "what downloads as PDF" / "what prints" this whole
+// cut exists to close (DP-1 acceptance check (d) already proved a serialized
+// paged.js DOM prints consistently with what it displays).
+assert('browser print writes the server-paginated HTML (paged.js parity — draft-desk-b step4)', /document\.write\(paginatedHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
 assert('rail extraction lives in its own component', workbench.includes("from './DraftPaperRail'") && workbench.includes('<DraftPaperRail'))
 // 裁点1 (plan.md): the rail is a pure list (title + count, no source
