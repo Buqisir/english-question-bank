@@ -25,7 +25,7 @@ import {
 } from '../../paperAssembly/basketPersistence'
 import { describeError } from '../shared/errorCopy'
 import { DraftPaperRail } from './DraftPaperRail'
-import { buildA4PreviewHtml } from './draftPaperPreviewHtml'
+import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
 
 type DraftVersionType = 'student' | 'teacher'
@@ -150,6 +150,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // (see the effect below) — same computeGroupAnchorTop math the old hover
   // sticker used, just evaluated for every group instead of one at a time.
   const [groupAnchors, setGroupAnchors] = useState<Record<string, number>>({})
+  // a3-imposition (plan.md Must Do 3, 裁点2): keyed by suggestion groupId
+  // (not item id) — one anchor per `[data-seam-before-group]` marker the a3
+  // wrapper (draftPaperPreviewHtml.ts's applyA3Imposition) tags into the
+  // iframe DOM, computed the same way groupAnchors is (same anchor math,
+  // different query target). Only populated in A3 mode; a4 keeps the
+  // suggestion pill inside draft-group-actions exactly as before (裁点4).
+  const [seamAnchors, setSeamAnchors] = useState<Record<string, number>>({})
 
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
@@ -331,7 +338,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType, draftPaper?.printForm])
 
-  const previewHtml = useMemo(() => buildA4PreviewHtml(paginatedHtml), [paginatedHtml])
+  // a3-imposition (plan.md Must Do 1, 裁点4): the a4 branch is the exact
+  // same call this useMemo made before this cut — applyA3Imposition only
+  // ever runs when printForm==='a3', so a4 output is byte-identical to
+  // pre-cut (zero-diff hard断言, verify-a3-imposition.mjs asserts this).
+  const previewHtml = useMemo(() => {
+    const base = buildA4PreviewHtml(paginatedHtml)
+    return draftPaper?.printForm === 'a3' ? applyA3Imposition(base) : base
+  }, [paginatedHtml, draftPaper?.printForm])
 
   // The iframe re-navigates (srcDoc changes → full document reload) whenever
   // previewHtml changes; scrollspy/persistent-button/page-badge reads must
@@ -372,15 +386,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // never descends into, so the first match found here is always the first
   // RENDERED fragment — i.e. the page the group actually starts on. A button
   // for a group that starts on page 3 anchors to page 3, not page 1.
-  function computeGroupAnchorTop(groupId: string): number | null {
+  function computeAnchorTopFromOffset(offsetTop: number | null): number | null {
     const iframeEl = iframeRef.current
     const colEl = paperColRef.current
-    if (!iframeEl || !colEl) return null
-    const offsetTop = getGroupIframeOffsetTop(groupId)
-    if (offsetTop == null) return null
+    if (!iframeEl || !colEl || offsetTop == null) return null
     const iframeRect = iframeEl.getBoundingClientRect()
     const colRect = colEl.getBoundingClientRect()
     return iframeRect.top - colRect.top + offsetTop * previewScale
+  }
+
+  function computeGroupAnchorTop(groupId: string): number | null {
+    return computeAnchorTopFromOffset(getGroupIframeOffsetTop(groupId))
+  }
+
+  // a3-imposition (plan.md Must Do 3): mirrors getGroupIframeOffsetTop, but
+  // resolves the seam marker applyA3Imposition tags with
+  // `data-seam-before-group="<groupId>"` instead of a `.question-group`
+  // section — see draftPaperPreviewHtml.ts's applyA3Imposition doc comment
+  // for why that groupId is the right key to look a suggestion up by.
+  function getSeamIframeOffsetTop(groupId: string): number | null {
+    const doc = iframeRef.current?.contentDocument
+    if (!doc) return null
+    const el = doc.querySelector(`[data-seam-before-group="${CSS.escape(groupId)}"]`)
+    if (!el) return null
+    return (el as HTMLElement).getBoundingClientRect().top
+  }
+
+  function computeSeamAnchorTop(groupId: string): number | null {
+    return computeAnchorTopFromOffset(getSeamIframeOffsetTop(groupId))
   }
 
   function handleIframeLoad() {
@@ -455,6 +488,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewReady, nonMissingItems, previewScale])
 
+  // a3-imposition (plan.md Must Do 3, 裁点2): recomputed on the same
+  // triggers as groupAnchors above, plus pageBreakSuggestions itself (a
+  // suggestion set can change — e.g. after a PATCH resolves — without the
+  // preview reloading). Only ever non-empty in A3 mode; A4 renders the
+  // suggestion pill inline in draft-group-actions instead (unchanged).
+  useEffect(() => {
+    function updateSeamAnchors() {
+      if (!previewReady || draftPaper?.printForm !== 'a3' || pageBreakSuggestions.length === 0) {
+        setSeamAnchors({})
+        return
+      }
+      const next: Record<string, number> = {}
+      for (const suggestion of pageBreakSuggestions) {
+        const top = computeSeamAnchorTop(suggestion.groupId)
+        if (top != null) next[suggestion.groupId] = top
+      }
+      setSeamAnchors(next)
+    }
+    updateSeamAnchors()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewReady, draftPaper?.printForm, pageBreakSuggestions, previewScale])
+
   // Rail click / focus-deep-link target. Mirrors PaperBrowsePage.scrollToAnchor's
   // settle-loop (lecture-rail-scroll-fix, STATUS 2026-07-11): a plain
   // scrollIntoView-once misses two real failure modes — (a) the desk's
@@ -525,7 +580,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   useEffect(() => {
     const node = a4SheetRef.current
     if (!node || typeof ResizeObserver === 'undefined') return
-    const NATIVE_WIDTH_PX = 794
+    // a3-imposition (plan.md Must Do 2, 裁点1 方案C): a3's native content
+    // width is a whole face (two 794px pages side by side + the fold gap —
+    // A3_FACE_NATIVE_WIDTH_PX, kept in draftPaperPreviewHtml.ts next to the
+    // CSS that actually sizes `.a3-face` so the two never drift apart), not
+    // a single page. Same fit-to-container math either way — never scale
+    // up past 1 — so a3 naturally lands around 80-85% on a `min(94vw,
+    // 1440px)` container (1440/1612 ≈ 0.89), shrinking further on narrower
+    // viewports exactly like the a4 case already does.
+    const NATIVE_WIDTH_PX = draftPaper?.printForm === 'a3' ? A3_FACE_NATIVE_WIDTH_PX : 794
     const updateScale = () => {
       const containerWidth = node.clientWidth
       if (!containerWidth) return
@@ -535,7 +598,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const observer = new ResizeObserver(updateScale)
     observer.observe(node)
     return () => observer.disconnect()
-  }, [previewHtml])
+  }, [previewHtml, draftPaper?.printForm])
 
   async function persistItems(nextItems: DraftPaperItem[]) {
     if (!draftPaper) return
@@ -936,7 +999,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
       <main className="draft-workbench-layout">
         <section className="draft-preview-desk" aria-label="A4 预览">
-          <div className="draft-paper-col" ref={paperColRef}>
+          <div className={`draft-paper-col${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`} ref={paperColRef}>
             <div className="draft-paper-meta-row">
               <p className="draft-paper-meta">
                 {draftPaper.printForm === 'a3'
@@ -965,7 +1028,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 </button>
               </div>
             </div>
-            <div className="draft-a4-sheet" ref={a4SheetRef} style={{ height: `${nativeContentHeight * previewScale}px` }}>
+            <div
+              className={`draft-a4-sheet${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`}
+              ref={a4SheetRef}
+              style={{ height: `${nativeContentHeight * previewScale}px` }}
+            >
               {draftPaper.items.length === 0 ? (
                 <div className="draft-a4-empty">请先添加题组</div>
               ) : previewHtml ? (
@@ -977,7 +1044,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     onLoad={handleIframeLoad}
                     style={{
                       height: `${nativeContentHeight}px`,
-                      ...(previewScale < 1 ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' } : null),
+                      // a3-imposition (plan.md Must Do 2): the iframe's own
+                      // CSS width is fixed to the imposition's native
+                      // (unscaled) face width — see draftPaperPreviewHtml.ts's
+                      // A3_FACE_NATIVE_WIDTH_PX doc comment — so the SAME
+                      // transform:scale mechanism the a4 branch already uses
+                      // (never touched below) also shrinks a3's wider content
+                      // to fit. a4 branch is byte-identical to before this cut.
+                      ...(draftPaper.printForm === 'a3'
+                        ? { width: `${A3_FACE_NATIVE_WIDTH_PX}px`, transform: `scale(${previewScale})`, transformOrigin: 'top left' }
+                        : previewScale < 1
+                          ? { transform: `scale(${previewScale})`, transformOrigin: 'top left' }
+                          : null),
                     }}
                   />
                   {/* draft-desk-b step3 (PO-2 简单版): the old preview stays fully
@@ -1025,7 +1103,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               // its own once the next pagination fetch resolves (signature change ->
               // real re-render -> group no longer spans a page boundary). Never
               // auto-applied (裁点5).
-              const suggestion = canPageBreakBefore
+              // a3-imposition (plan.md Must Do 3, 裁点2): in A3 mode the
+              // suggestion pill moves to the face/sheet seam it actually
+              // belongs to (rendered separately below, anchored via
+              // seamAnchors) — suppressed here so it doesn't also show
+              // pinned to the group's own action cluster. A4 keeps the
+              // exact pre-cut behavior (裁点4).
+              const suggestion = canPageBreakBefore && draftPaper.printForm !== 'a3'
                 ? pageBreakSuggestions.find((entry) => entry.groupId === item.groupId)
                 : undefined
               return (
@@ -1075,6 +1159,31 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 </div>
               )
             })}
+
+            {/* a3-imposition (plan.md Must Do 3, 裁点2): the suggestion pill's
+                A3 home — anchored to the face/sheet seam it belongs to
+                (seamAnchors, keyed by the same suggestion.groupId
+                applyA3Imposition tagged the seam with), same click behavior
+                (前置分页 PATCH) as the A4 per-group pill above. */}
+            {draftPaper.printForm === 'a3' &&
+              pageBreakSuggestions.map((suggestion) => {
+                const anchorTop = seamAnchors[suggestion.groupId]
+                if (anchorTop == null) return null
+                const item = nonMissingItems.find((entry) => entry.groupId === suggestion.groupId)
+                if (!item) return null
+                return (
+                  <button
+                    key={`seam-${suggestion.groupId}`}
+                    type="button"
+                    className="draft-seam-suggestion"
+                    style={{ top: `${anchorTop}px` }}
+                    title={suggestion.reason}
+                    onClick={() => void togglePageBreak(item, true)}
+                  >
+                    {suggestion.reason} · 建议前置分页
+                  </button>
+                )
+              })}
           </div>
 
           <DraftPaperRail

@@ -106,5 +106,12 @@ jobs:
       - name: Run draft pagination DOM contract verify
         run: node scripts/verify-draft-pagination-dom-contract.mjs
 
+      # a3-imposition (plan.md Must Do 5): uses app's own Playwright browser
+      # (installed above), not server's playwright-core — doesn't need the
+      # "Install server pagination Chromium" step at all, but sits after it
+      # anyway to keep this job's Chromium-dependent steps grouped together.
+      - name: Run a3 imposition verify
+        run: node scripts/verify-a3-imposition.mjs
+
       - name: Run golden path E2E smoke
         run: node scripts/smoke-golden-path.mjs

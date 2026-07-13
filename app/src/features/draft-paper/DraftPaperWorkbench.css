@@ -253,6 +253,16 @@
   width: 100%;
 }
 
+/* a3-imposition (plan.md Must Do 2, 裁点1 方案C — owner 2026-07-13): A3 態
+   breaks the 820px centered-narrow-column language and uses most of the
+   available width within the grid's `minmax(0, 1fr)` first column — rail
+   stays put in the second column (裁点3, unchanged). Ceiling
+   `min(94vw, 1440px)` keeps this from ballooning on ultra-wide screens;
+   A4 (no `.is-a3` class ever applied) is completely untouched (裁点4). */
+.draft-paper-col.is-a3 {
+  max-width: min(94vw, 1440px);
+}
+
 /* 页数徽标「共 N 页 · 双面 M 张 · A4」常驻纸顶（plan.md 技术约束：N 从
    预览分页脚本产出后由父层读取真值，见 DraftPaperWorkbench.tsx 的
    iframe onLoad 处理）。 */
@@ -295,6 +305,13 @@
      (was static before — no absolutely-positioned child existed here yet). */
   position: relative;
   width: 100%;
+}
+
+/* a3-imposition: the sheet's own max-width cap is redundant once
+   `.draft-paper-col.is-a3` already governs the outer width — this just lets
+   it fill that parent instead of re-imposing the 820px a4 cap. */
+.draft-a4-sheet.is-a3 {
+  max-width: 100%;
 }
 
 /* draft-desk-b step3 (PO-2 简单版) + step5 QA-1: the only visible sign a
@@ -409,6 +426,29 @@
 }
 
 .draft-group-actions .draft-group-suggestion:hover {
+  border-color: var(--eqb-color-primary);
+}
+
+/* a3-imposition (plan.md Must Do 3, 裁点2): the A3-only seam-anchored
+   sibling of .draft-group-suggestion above — same pill treatment, but
+   centered on the paper column (the seam it sits on spans the full face
+   width) instead of right-aligned in a per-group action column. */
+.draft-seam-suggestion {
+  background: color-mix(in srgb, var(--eqb-color-primary) 12%, var(--eqb-color-paper));
+  border: 1px solid color-mix(in srgb, var(--eqb-color-primary) 35%, var(--paper-border));
+  border-radius: 999px;
+  color: var(--eqb-color-primary-text);
+  cursor: pointer;
+  font-size: 11.5px;
+  left: 50%;
+  padding: 4px 12px;
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.draft-seam-suggestion:hover {
   border-color: var(--eqb-color-primary);
 }
 
