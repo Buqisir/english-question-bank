@@ -12,6 +12,7 @@
 2. **【DP-2｜步1-4 步间闸】** 每步 narrow verify + CR-lite 主代理复核绿才进下一步。
    **✅ 步1 过闸 2026-07-12**（PR #285 @ b0d9f34,CI 双绿,主代理亲手复跑 25+2+50 全绿;0 MF、5 挂账见 `cr-step1-lite.md`——其中 SW-A(figure 图)步2/4 必验、SW-D(export-flow verify 在 main 上就崩)步4 前置修。
    **✅ 步2 过闸 2026-07-12**（86cf1df,复跑 14+32+25 绿,SW-A 实锤已修/data URI 内联;0 MF、新挂账 SW-F/G/H 见 `cr-step2-lite.md`)。**✅ DP-title 拍板 2026-07-12(owner)**:Option B——title 入分页签名,改标题触发重排(loading 态兜住);修复随步3落地(一行改动 + verify 断言反转)。
+   **✅ 步3 过闸 2026-07-12**(950c296+d32eb4e,主代理复跑 14+32+25+50+35+20+tsc 全绿,CI 双绿;0 MF、新挂账 SW-I 见 `cr-step3-lite.md`。CI 首跑抓到 error-copy 门计数过期,同刀修。DEV 真 Chrome QA 过含 SW-3 多页锚点与 DP-title 页脚实测)。
 3. **【DP-3｜终审】** 全 verify + 浏览器 QA matrix + owner 产品 QA（parity 肉眼 + 交互回归）。
 
 ## PO 决策（owner 2026-07-12）
