@@ -1,6 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-12（motion-pass 收官；owner QA 过；生产已部署 62c8998）
+Last updated: 2026-07-13（draft-desk-b + r1-genre-truth 双刀收官；**均未部署生产**，
+刀B 部署带上线前置：生产机装 playwright-core chromium）
 
 ## 现在是什么
 
@@ -23,6 +24,18 @@ Last updated: 2026-07-12（motion-pass 收官；owner QA 过；生产已部署 6
 
 ## 主线焦点
 
+- 2026-07-13：**draft-desk-b 收官**（merge f597611，fresh Opus CR APPROVE 0MF/4SW，
+  main CI 绿）：草稿卷三分页引擎收敛为一次 paged.js 渲染，预览/PDF/打印三出口
+  同源 parity（Chromium 常驻池+DOM 契约+签名缓存 LRU8）；owner DP-3 过。
+  **账单**：子代理 ~721k tok（DEV 597k+CR 124k；步0-2 见前会话），主代理出场 5 闸+QA 亲驱。
+  挂账 SW-J/K/H+CR-new×2 见 cut-note.md；**上线前置未做：生产机 `npx playwright-core
+  install --with-deps chromium` + 内存/延迟实测**（部署=owner 拍板节点）。
+- 2026-07-13：**r1-genre-truth 收官**（merge 6facb6f，CR-lite 0MF，verify:all
+  77/0/0 + main CI 绿）：273 篇 discourse_type 题型名假货→五类真值落库（记叙
+  101/说明116/议论9/应用31/新闻16），publisher 源头防回归（重导不再冲真值），
+  owner 26 条盲审 gate 过（判例 4 条入 plan）。**账单**：子代理 ~301k tok
+  （侦察 90k+DEV 211k）+DeepSeek 225 调用几元。生产库同步随下次部署；
+  下一刀 engine-rewire（两处恒真配方接真值）具备开工条件。
 - 2026-07-12：**motion-pass 收官**（merge ecbf0c1，CR APPROVE 0 MF，
   verify:all 74/0 + main CI 绿）：五档时长+三曲线 token 收编全站 65 条
   动效（含 DESIGN.md 条款改 token 制）、ease-in/9×transition:all 修正、
@@ -185,7 +198,9 @@ Last updated: 2026-07-12（motion-pass 收官；owner QA 过；生产已部署 6
   预览换暖纸桌+纸面 Resting 阴影（收专项审计 P0-D1，owner 议题3 灰怪
   即此闭环）③色温法/命名法/删除法三条入 DESIGN.md。
 - **解析字段路线图（2026-07-10 拍板闭环，program 档案
-  `docs/cuts/analysis-fields/program.md`）**：四轨 R1 体裁补真值（先行，
+  `docs/cuts/analysis-fields/program.md`）**：~~R1 体裁补真值~~ ✅
+  2026-07-13 收官（见主线焦点）→ **engine-rewire 刀可开工**（目标配方表在
+  program.md）→ R2 干扰项。原文：四轨 R1 体裁补真值（先行，
   discourse_type 实测=题型名假货，引擎两处配方空转；词表记叙/说明/
   议论/应用/新闻）→ R2 干扰项（机审 1395 条→owner 判例→返修→才索引；
   抽检基线 21 条在档）→ R3 写作双 facet（应用文功能型+续写情节型）→
