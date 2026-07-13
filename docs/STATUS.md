@@ -1,7 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-13（draft-desk-b + r1-genre-truth 双刀收官；**均未部署生产**，
-刀B 部署带上线前置：生产机装 playwright-core chromium）
+Last updated: 2026-07-13（双刀已部署生产 2c01e2b + 体裁真值同步生产库；
+engine-rewire 开工）
 
 ## 现在是什么
 
@@ -24,18 +24,23 @@ Last updated: 2026-07-13（draft-desk-b + r1-genre-truth 双刀收官；**均未
 
 ## 主线焦点
 
+- 2026-07-13：**双刀部署生产 2c01e2b**（deploy-remote.sh + 部署节点两动作）：
+  ①体裁真值同步生产库（停服 apply 273 条带备份，生产 verify-genre-truth
+  12/12 绿）②刀B前置（playwright-core chromium 装毕；实测冷 2.54s/
+  **暖 2.12s 超 ≤1s 预算**/缓存命中 0.41s，常驻 Chromium ~590MB RSS——
+  两项入 watch，详见 go-live-record.md 追记）。health ok、eqbank.cc 200。
 - 2026-07-13：**draft-desk-b 收官**（merge f597611，fresh Opus CR APPROVE 0MF/4SW，
   main CI 绿）：草稿卷三分页引擎收敛为一次 paged.js 渲染，预览/PDF/打印三出口
   同源 parity（Chromium 常驻池+DOM 契约+签名缓存 LRU8）；owner DP-3 过。
   **账单**：子代理 ~721k tok（DEV 597k+CR 124k；步0-2 见前会话），主代理出场 5 闸+QA 亲驱。
-  挂账 SW-J/K/H+CR-new×2 见 cut-note.md；**上线前置未做：生产机 `npx playwright-core
-  install --with-deps chromium` + 内存/延迟实测**（部署=owner 拍板节点）。
+  挂账 SW-J/K/H+CR-new×2 见 cut-note.md；~~上线前置未做~~ ✅ 2026-07-13
+  部署时已做（见上）。
 - 2026-07-13：**r1-genre-truth 收官**（merge 6facb6f，CR-lite 0MF，verify:all
   77/0/0 + main CI 绿）：273 篇 discourse_type 题型名假货→五类真值落库（记叙
   101/说明116/议论9/应用31/新闻16），publisher 源头防回归（重导不再冲真值），
   owner 26 条盲审 gate 过（判例 4 条入 plan）。**账单**：子代理 ~301k tok
-  （侦察 90k+DEV 211k）+DeepSeek 225 调用几元。生产库同步随下次部署；
-  下一刀 engine-rewire（两处恒真配方接真值）具备开工条件。
+  （侦察 90k+DEV 211k）+DeepSeek 225 调用几元。~~生产库同步随下次部署~~
+  ✅ 2026-07-13 已同步（见上）；engine-rewire 已开工。
 - 2026-07-12：**motion-pass 收官**（merge ecbf0c1，CR APPROVE 0 MF，
   verify:all 74/0 + main CI 绿）：五档时长+三曲线 token 收编全站 65 条
   动效（含 DESIGN.md 条款改 token 制）、ease-in/9×transition:all 修正、

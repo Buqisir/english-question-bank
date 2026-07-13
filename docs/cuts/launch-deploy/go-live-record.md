@@ -143,3 +143,27 @@ libatk1.0-0t64 libatk-bridge2.0-0t64 libatspi2.0-0t64 libgbm1 libpango-1.0-0`
 **重建服务器 checklist 必带**：`apt-get install -y fonts-liberation` +
 恢复 `/etc/fonts/conf.d/65-eqb-paper-fonts.conf`（内容见本仓
 `deploy/` 若已收编，或按上述别名重写）。
+
+## 追记 2026-07-13：draft-desk-b + r1-genre-truth 部署（含刀B上线前置实测）
+
+部署 `2c01e2b`（deploy-remote.sh 一键，eqb+caddy active、health ok、
+eqbank.cc 200），随后两项部署节点动作：
+
+- **r1 体裁真值同步生产库**：停服 → `node scripts/genre-truth-apply.mjs
+  --write`（dry-run 先行 273 changed/0 missing；自动备份
+  `question-bank.sqlite.bak.genre-r1`）→ 起服 → 生产跑
+  `verify-genre-truth.mjs` **12/12 绿**。分布与本地一致：记叙101/说明116/
+  议论9/应用31/新闻16。
+- **刀B Chromium 前置**：`cd server && npx playwright-core install chromium`
+  （eqb 用户）+ `sudo npx playwright-core install-deps chromium`。注意：
+  池子 `channel:'chromium'` 实际用**全量 chromium-1194**（vivliostyle 线
+  已装过、rev 恰好相同，进程路径实证）；headless_shell-1194 本次新下载
+  但未被池子使用。**重建 checklist**：两个 install 命令都跑（rev 由
+  server/ 的 playwright-core 锁定）。
+- **刀B 实测（重启后干净测，QA 走临时 session、测毕销毁）**：
+  冷启动（spawn+5页渲染）**2.54s**；暖渲染（常驻浏览器、9页教师卷）
+  **2.12s——超 ≤1s 预算约 2 倍**（本地 ~700-800ms，2核 VM 差距合理）；
+  缓存命中 0.41s。常驻 Chromium **~590MB RSS**（7 进程），机器
+  available ~1.3GB。**两项均入 watch**：延迟超预算如实报 owner（编辑
+  触发重渲 ~2s，重复查看走缓存 0.4s，可用不丝滑）；内存占 2GB 机 30%，
+  若出现压力候选换 headless_shell 或按需启动。
