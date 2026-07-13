@@ -11,7 +11,7 @@
    **✅ 2026-07-12 判定：四条全过，引擎选定 paged.js（`spike-gate-dp1.md`；DEV 必读其「三个实操发现」）。**
 2. **【DP-2｜步1-4 步间闸】** 每步 narrow verify + CR-lite 主代理复核绿才进下一步。
    **✅ 步1 过闸 2026-07-12**（PR #285 @ b0d9f34,CI 双绿,主代理亲手复跑 25+2+50 全绿;0 MF、5 挂账见 `cr-step1-lite.md`——其中 SW-A(figure 图)步2/4 必验、SW-D(export-flow verify 在 main 上就崩)步4 前置修。
-   **✅ 步2 过闸 2026-07-12**（86cf1df,复跑 14+32+25 绿,SW-A 实锤已修/data URI 内联;0 MF、新挂账 SW-F/G/H 见 `cr-step2-lite.md`)。**⚖️ 步3 开工前 owner 拍 DP-title**:改标题触不触发重排(页脚含标题,不触发=页脚陈旧;PM+DEV 均推荐 Option B「触发」,详见 cr-step2-lite.md)。
+   **✅ 步2 过闸 2026-07-12**（86cf1df,复跑 14+32+25 绿,SW-A 实锤已修/data URI 内联;0 MF、新挂账 SW-F/G/H 见 `cr-step2-lite.md`)。**✅ DP-title 拍板 2026-07-12(owner)**:Option B——title 入分页签名,改标题触发重排(loading 态兜住);修复随步3落地(一行改动 + verify 断言反转)。
 3. **【DP-3｜终审】** 全 verify + 浏览器 QA matrix + owner 产品 QA（parity 肉眼 + 交互回归）。
 
 ## PO 决策（owner 2026-07-12）
@@ -38,8 +38,9 @@ scratchpad 脚本：服务器端 headless Chromium 跑 **paged.js**，喂真实�
 ### 步2 — DOM 契约 + 缓存解耦（MF-3/MF-4）
 - **分页 DOM 稳定契约**：保留 `.preview-page` 页容器 + 每题组 `data-group-id`。在**下游 wrapper** 位置性补 `data-group-id`（照抄客户端 `tagGroupSections` 顺序）、映射 paged.js 页容器到 `.preview-page`——**不改 `print-renderer.mjs`**（护 `verify-c8-forbidden-scope.mjs:60`）。
 - 分页产物按 `draftPaperPrintSignature` 缓存，**仅布局编辑**（增删/reorder/toggle page_break）触发 render；**非布局编辑（标题/studentLabel/列表）绝不触发**。
+  （**DP-title 拍板修订 2026-07-12**：title 因印在每页页脚，入签名、改标题**触发**重排；studentLabel/列表仍不触发。修复落步3。）
 - 编辑刷新 UX = PO-2 简单版（loading + debounce）。
-- 验收：DOM 契约 verify 绿；改标题不触发 render（QA）。
+- 验收：DOM 契约 verify 绿；改标题不触发 render（QA）→ **DP-title 后修订：改标题触发重排，verify 断言随步3反转**。
 
 ### 步3 — 前端吃分页 HTML + 常驻叠按钮（MF-3/MF-5）
 - iframe 换吃服务器分页 HTML；hover sticker → **常驻叠按钮**（每组一枚），复用 `computeGroupAnchorTop` 锚点数学；**卷子按钮与 rail 同一套操作逻辑**。
