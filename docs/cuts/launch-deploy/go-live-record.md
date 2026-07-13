@@ -72,9 +72,12 @@
    备份报错和 DB↔assets 不一致。属独立 small cut，owner 拍板后做。
    另有 `paper-fe8e7a65` / `paper-ee10da87` 两个 DB 标 published 但
    assets 缺失的孤儿，需一并核实。
-2. **备份可恢复性未演练**：R2 有对象不等于能恢复。上线级别应做一次
-   restore 演练（拉一份备份到临时库跑 `PRAGMA integrity_check` +
-   起服务验证），再把这条勾掉。
+2. ~~备份可恢复性未演练~~ **✅ 已演练（2026-07-13）**：最新前缀
+   `20260712T193001Z/` 两库拉回 /tmp → `PRAGMA integrity_check` 双 ok →
+   临时端口 18787 用恢复库起服务 health ok + auth/me 401 正常 → 清理。
+   恢复库 273/273 篇、users/sessions/drafts 3/25/3 与生产吻合；体裁列
+   仍旧题型名（快照早于当日真值同步，时点正确）。R2 现存 10 个日期前缀
+   （retention 14）。
 
 ## 追记 2026-07-09：导出线运行时系统依赖（事故补档）
 
