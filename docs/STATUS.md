@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-13（engine-rewire + print-form 双刀收官并**已部署生产
-48a3a80**，owner DP-3 待做；另：早间双刀部署 2c01e2b + 真值同步生产 +
-R2 restore 演练销账）
+Last updated: 2026-07-13（a3-imposition 收官未部署；engine-rewire +
+print-form 已部署 48a3a80，owner DP-3 待做；早间双刀部署 2c01e2b +
+真值同步生产 + R2 restore 演练销账）
 
 ## 现在是什么
 
@@ -25,6 +25,14 @@ R2 restore 演练销账）
 
 ## 主线焦点
 
+- 2026-07-13：**a3-imposition 收官**（merge dbfb472，CR APPROVE 0MF/4SW，
+  verify:all + main CI 绿含新 e2e Phase B 真点步）：A3 态预览按面拼版
+  （方案C 满幅、面标签/对折线/翻面⟲换张✂缝、缝上建议徽标）——owner 对
+  议题2裁点2「不做按张视图」的改判落地，原型四裁点在 cut 目录。a4 路径
+  构造性零变化。**账单**：流水线(DEV+verify) 321k + CR 92k；主代理出场 5。
+  挂账 SW-1 无牙断言/SW-4 测试进程泄漏硬化（chromiumPool 信号收尾）见
+  cr.md；**未部署**，owner DP-3 待做。cut-pipeline 判例：resume 缓存会原样
+  回放失败回执（verify 步不重跑），断点恢复走主代理亲跑更顺。
 - 2026-07-13：**engine-rewire 收官**（merge edcf777，fresh Opus CR APPROVE
   0MF/2SW，verify:all 绿 + main CI 绿）：阅读次序换真篇位（同字母70/相邻35/
   词数细排+29 档间不翻转，同卷键=(年,区,卷名) CR 亲验零碰撞）、完形体裁数据
