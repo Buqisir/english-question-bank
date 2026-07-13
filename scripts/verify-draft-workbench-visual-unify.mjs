@@ -111,7 +111,23 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // (motion-pass plan.md #6, audit #5), pushing it from L451 to L452; the
 // trailing @keyframes block lands after this rule and does not affect
 // either whitelisted line.
-const WHITELISTED_LINES = new Set([188, 452])
+// draft-desk-b step3: added a THIRD whitelisted line — `.draft-a4-repaginating`
+// (the "重新排版中…" badge, PO-2 简单版) is `background: var(--ink); color:
+// #ffffff;`, the exact same "opaque white foreground on a dark/ink surface"
+// convention as the other two whitelisted declarations, now at L294. Its rule
+// block sits between `.draft-a4-sheet` and `.draft-undo-toast` in the file, so
+// this insertion (+24 lines) also pushes `.draft-undo-toast`'s own `color:
+// #ffffff` from L452 to L476; `.draft-export-menu-trigger`'s at L188 sits
+// above the edited region and is unaffected.
+// draft-desk-b step4 (SW-I): re-pinned again — `.draft-a4-repaginating--error`
+// (the error-state sibling of the L294 badge) was inserted directly below
+// `.draft-a4-repaginating`'s closing brace; it introduces NO new hex literal
+// (its own `background` is `var(--eqb-color-danger)`, a token reference, not a
+// literal) so the whitelist itself doesn't grow — the insertion (+10 lines)
+// only pushes `.draft-undo-toast`'s `color: #ffffff` from L476 to L486; the
+// other two whitelisted lines (L188, L294) sit above the edited region and are
+// unaffected.
+const WHITELISTED_LINES = new Set([188, 294, 486])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

@@ -74,6 +74,25 @@ export async function migrateAssemblyBasketToDraftPaper(groupIds: string[]): Pro
   }
 }
 
+// draft-desk-b step3 (MF-3, plan.md "步3 — 前端吃分页 HTML + 常驻叠按钮"): the
+// server-rendered (paged.js), DOM-contract-tagged (`.preview-page` +
+// `data-group-id`) pagination the workbench's A4 preview iframe now consumes
+// directly instead of building its own client-side pagination.
+// pdfBytes is deliberately not part of this response shape (PDF export stays
+// on its own route/pipeline until step4).
+export async function fetchDraftPaperPagination(
+  id: string,
+  versionType: 'student' | 'teacher' = 'student',
+): Promise<{ paginatedHtml: string; pageCount: number; reused: boolean }> {
+  const response = await fetch(
+    apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pagination?versionType=${versionType}`),
+  )
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to load draft paper pagination: ${response.status}`))
+  }
+  return (await response.json()) as { paginatedHtml: string; pageCount: number; reused: boolean }
+}
+
 export async function updateDraftPaper(
   id: string,
   input: Partial<Pick<DraftPaper, 'title' | 'studentLabel'>> & {

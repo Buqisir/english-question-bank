@@ -21,6 +21,7 @@ const registry = {
   'scripts/verify-concierge-desk.mjs',
   'scripts/verify-c8-draft-paper-contracts.mjs',
   'scripts/verify-c8-draft-paper-render-model.mjs',
+  'scripts/verify-draft-pagination-cache-trigger.mjs',
   'scripts/verify-c8-print-ready-gate.mjs',
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',

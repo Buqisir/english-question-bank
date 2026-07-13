@@ -1,18 +1,96 @@
-import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs'
-import { execFileSync } from 'node:child_process'
+// draft-desk-b step4 (SW-5 retirement, plan.md "步4"): the Vivliostyle CLI
+// export line that used to live in exportDraftPaperPdf below (execFileSync +
+// mkdtempSync + copyFileSync + a scratch tempdir under `exportDir`) is gone —
+// exportDraftPaperPdf now consumes getDraftPaperPagination's in-memory
+// pdfBytes directly (see that function's own doc comment). readFileSync
+// stays; it is still used by inlineFigureImages below.
+import { readFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
-import { tmpdir } from 'node:os'
 import { buildPrintHtml } from '../print-renderer.mjs'
 import { loadGroupAnalysisTexts } from './analysisText.mjs'
+import { renderPaginatedPaper } from './paginationRenderer.mjs'
+import { applyPaginationDomContract } from './paginationDomContract.mjs'
+
+// draft-desk-b step2 (SW-A, cr-step1-lite.md — "步2/4 必验"): confirmed empirically
+// (this cut's dev probe against a real figure-bearing paper-asset group, not checked
+// in) that renderPaginatedPaper's page.setContent() loads printHtml against an inert
+// `about:blank` document — a root-relative <img src="/paper-assets/..."> (the
+// imageMode:'web' default every OTHER buildDraftPrintHtml caller uses) never even
+// generates a network request under that base (zero Playwright 'request' events
+// fire; the <img> reports naturalWidth/naturalHeight 0 despite `complete: true`) —
+// there is nothing for a path-absolute reference to resolve against. The existing
+// Vivliostyle export line below (exportDraftPaperPdf) sidesteps the identical
+// problem with imageMode:'file' (bare relative filename src) PLUS copying the real
+// PNG into the SAME directory as a temp HTML FILE it then feeds to Vivliostyle via a
+// real file:// load — that trick only works for an on-disk HTML file, not an
+// in-memory string handed to page.setContent(). inlineFigureImages takes the SAME
+// imageMode:'file' output (bare filename src + collected
+// {relativeName, absoluteSourcePath} entries) and inlines each image as a base64
+// data: URI directly into the HTML string instead — data: URIs resolve under ANY
+// base (including about:blank), so the resulting HTML is fully self-contained and
+// safe to hand to page.setContent() with no dependency on a live static file route
+// or a temp directory on disk.
+const FIGURE_IMAGE_MIME_TYPES = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+}
+
+function inlineFigureImages(html, images) {
+  let result = html
+  for (const image of images) {
+    const ext = path.extname(image.relativeName).toLowerCase()
+    const mime = FIGURE_IMAGE_MIME_TYPES[ext] || 'application/octet-stream'
+    const dataUri = `data:${mime};base64,${readFileSync(image.absoluteSourcePath).toString('base64')}`
+    // `images` entries come from figureImageSrc's sequential `fig-${n}${ext}` naming
+    // (print-renderer.mjs) — unique per buildDraftPrintHtml call, so a plain
+    // split/join (not a regex) is safe and avoids escaping the filename as a pattern.
+    result = result.split(`src="${image.relativeName}"`).join(`src="${dataUri}"`)
+  }
+  return result
+}
+
+// draft-desk-b step2 (MF-4, plan.md "步2 — DOM 契约 + 缓存解耦"): a DECOUPLED
+// signature for the new paged.js pagination cache (getDraftPaperPagination below).
+// step2/3 deliberately kept this separate from `draftPaperPrintSignature` (the old
+// Vivliostyle-line signature) rather than unifying them, because the two caches'
+// invalidation rules briefly disagreed on `title` (DP-title, see below) — step4
+// retired `draftPaperPrintSignature` and the 30s-TTL cache it served entirely
+// (SW-5, owner ruling 2026-07-12: 退役不迁移) once exportDraftPaperPdf itself
+// switched to consuming this cache via getDraftPaperPagination, so there is now
+// only ONE pagination cache and ONE signature function in this module.
+//
+// Fields included are the plan.md step2 "布局编辑" set (item identity/order/
+// page-break-before) PLUS `title` (draft-desk-b step3, DP-title owner ruling
+// 2026-07-12, Option B — see cr-step2-lite.md "DP-title" and plan.md's step2 Must-Do
+// revision note). Step2 originally shipped with `title` EXCLUDED per plan.md's then-
+// literal Must-Do text ("改标题不触发 render") — but draftPaperStore.mjs's own
+// addDraftFooterCss() unconditionally bakes `title` into the CSS `@page
+// @bottom-center` footer text of EVERY page (DP-1 acceptance check (b) required this
+// exact footer to render correctly), so excluding it left a confirmed parity gap: a
+// title-only edit would keep serving a cache hit with the OLD footer text until the
+// next layout edit. The owner ratified Option B (title IN the signature, a title edit
+// triggers a real re-render) precisely because parity is this whole cut's reason to
+// exist and PO-2's "重新排版中…" loading state already absorbs the extra ~700-800ms
+// render this adds on a title edit. studentLabel and the item list view stay excluded
+// — neither ever reaches the printed page.
+export function draftPaperPaginationSignature(draftPaper, versionType) {
+  return JSON.stringify({
+    id: draftPaper.id,
+    title: draftPaper.title,
+    versionType,
+    items: draftPaper.items.map((item) => ({
+      id: item.id,
+      groupId: item.groupId,
+      orderIndex: item.orderIndex,
+      pageBreakBefore: item.pageBreakBefore,
+    })),
+  })
+}
 
 // M0-1 user-data split: draft_papers / draft_paper_items now live in the user database
 // (userDb), while question groups / print-readiness live in the shared bank database
@@ -40,7 +118,6 @@ function requireUserId(userId) {
 // so a draft with N items does one paper-asset scan instead of N. Optional —
 // callers/tests that never exercise getDraftPaperItems may omit it.
 export function createDraftPaperStore({
-  exportDir,
   getPrintReadyByGroupId,
   getQuestionGroupDetail,
   groupTypeLabels,
@@ -48,10 +125,55 @@ export function createDraftPaperStore({
   openDatabase,
   openUserDatabase,
   paperAssetsDir,
-  rootDir,
   selectQuestionGroupCards,
 }) {
-  const recentDraftPdfExports = new Map()
+  // draft-desk-b step4 (SW-5 retirement): `exportDir` and `rootDir` used to be
+  // required here — the old exportDraftPaperPdf wrote a Vivliostyle-built PDF to a
+  // scratch tempdir and copied it into `exportDir`, and located the vivliostyle CLI
+  // binary under `rootDir`'s node_modules. Neither is needed anymore (pdfBytes now
+  // come straight out of Playwright's page.pdf() as an in-memory Buffer — see
+  // exportDraftPaperPdf below). Dropped from this destructure rather than left as
+  // unused bindings; server/api.mjs and the verify scripts that construct this store
+  // may keep passing them in their options object harmlessly (plain JS object
+  // destructuring ignores extra properties) — no caller update required.
+  //
+  // draft-desk-b step3 SW-F (cr-step2-lite.md): entries hold pdfBytes + paginatedHtml
+  // (~1MB+/draft) with no cap — a multi-draft, long-running server process would grow
+  // this unbounded. Bounded to a simple LRU of DRAFT_PAGINATION_CACHE_MAX_ENTRIES
+  // (8 — "保 8 卷即可" per plan.md, not a tuned figure) via Map's insertion-order
+  // iteration: a hit re-inserts its key (moves it to most-recently-used), and a set
+  // that pushes size past the cap evicts the map's first (least-recently-used) key.
+  //
+  // draft-desk-b step3 SW-G (cr-step2-lite.md): keyed by `${draftPaperId}::
+  // ${versionType}`, not draftPaperId alone — the workbench's 学生版/教师版 preview
+  // toggle (DraftPaperWorkbench.tsx) drives this cache, and step4 (SW-5) means
+  // exportDraftPaperPdf now drives it too (see below) — draftPaperPaginationSignature
+  // already includes versionType, so a single-keyed cache would have the two
+  // versions evict each other on every toggle (wasteful re-render, never wrong —
+  // same class of bug as SW-G originally described).
+  const DRAFT_PAGINATION_CACHE_MAX_ENTRIES = 8
+  const draftPaginationCache = new Map()
+  function draftPaginationCacheKey(draftPaperId, versionType) {
+    return `${draftPaperId}::${versionType}`
+  }
+  function draftPaginationCacheGet(key) {
+    const entry = draftPaginationCache.get(key)
+    if (!entry) return undefined
+    // Touch: re-insert so this key becomes the most-recently-used for eviction
+    // ordering purposes (Map preserves insertion order; delete+set moves it to the
+    // end without changing the stored value).
+    draftPaginationCache.delete(key)
+    draftPaginationCache.set(key, entry)
+    return entry
+  }
+  function draftPaginationCacheSet(key, entry) {
+    draftPaginationCache.delete(key)
+    draftPaginationCache.set(key, entry)
+    while (draftPaginationCache.size > DRAFT_PAGINATION_CACHE_MAX_ENTRIES) {
+      const oldestKey = draftPaginationCache.keys().next().value
+      draftPaginationCache.delete(oldestKey)
+    }
+  }
 
   // draft-student-field (E4): draft_papers.student_label is additive, nullable,
   // free-text metadata (one-on-one owner attribution — no student entity, no FK).
@@ -268,34 +390,17 @@ export function createDraftPaperStore({
     )
   }
 
-  function clearRecentDraftPdfExport(draftPaperId, outputPath) {
-    const cached = recentDraftPdfExports.get(draftPaperId)
-    if (!outputPath || cached?.outputPath === outputPath) recentDraftPdfExports.delete(draftPaperId)
-    if (!outputPath) return
-
-    const resolvedOutputPath = path.resolve(outputPath)
-    const resolvedExportDir = path.resolve(exportDir)
-    if (resolvedOutputPath === resolvedExportDir || !resolvedOutputPath.startsWith(`${resolvedExportDir}${path.sep}`)) return
-    try {
-      rmSync(resolvedOutputPath, { force: true })
-    } catch {
-      // Best-effort cleanup for staging PDFs; the My Space copy is already persisted.
-    }
-  }
-
-  function draftPaperPrintSignature(draftPaper, versionType) {
-    return JSON.stringify({
-      id: draftPaper.id,
-      title: draftPaper.title,
-      versionType,
-      items: draftPaper.items.map((item) => ({
-        id: item.id,
-        groupId: item.groupId,
-        orderIndex: item.orderIndex,
-        pageBreakBefore: item.pageBreakBefore,
-        updatedAt: item.updatedAt,
-      })),
-    })
+  // draft-desk-b step2 (SW-A fix): same buildDraftPrintHtml output the old
+  // Vivliostyle export line used to build directly, but self-contained (data: URI
+  // images) instead of "copy real files into a tempdir" — see inlineFigureImages'
+  // doc comment above for why renderPaginatedPaper's page.setContent() needs this.
+  // Callers of getDraftPaperPagination below (which, as of step4, now includes
+  // exportDraftPaperPdf) always go through this, never buildDraftPrintHtml directly.
+  function buildDraftPaginationPrintHtml(draftPaper, exportOptions = {}) {
+    const images = []
+    const html = buildDraftPrintHtml(draftPaper, { ...exportOptions, imageMode: 'file', images })
+    if (!html || images.length === 0) return html
+    return inlineFigureImages(html, images)
   }
 
   function estimateEnglishWords(text) {
@@ -820,78 +925,120 @@ export function createDraftPaperStore({
     }
   }
 
-  // M0-4 (plan.md decision 3 + PA MF-3): getDraftPaper below already gates on
-  // (id, user_id) and returns null for an unowned draft — this is the entry point
-  // that keeps "B borrows A's draftId through the export route" from being an
+  // M0-4 (plan.md decision 3 + PA MF-3): getDraftPaper (called inside
+  // getDraftPaperPagination below, via that function's own ownership-gated lookup)
+  // already gates on (id, user_id) and throws before this function — or the
+  // draftPaginationCache it shares with the preview route — ever gets touched. That
+  // keeps "B borrows A's draftId through the export route" from being an
   // exfiltration vector (server/my-space/mySpaceRoutes.mjs POST /api/my-space/artifacts
-  // calls this before saveMySpaceArtifact). recentDraftPdfExports cache keys stay
-  // unscoped (plan.md decision 9 — upstream ownership check already runs before any
-  // cache read/write here, so there is no leak path through the cache).
-  function exportDraftPaperPdf(userId, draftPaperId, { preferRecent = false, versionType = 'student' } = {}) {
+  // calls this before saveMySpaceArtifact); draftPaginationCache keys stay unscoped
+  // by user (plan.md decision 9 — upstream ownership check already runs before any
+  // cache read/write, so there is no leak path through the shared cache).
+  //
+  // draft-desk-b step4 (MF-2/MF-7, plan.md "步4 — PDF 换引擎收口 + Vivliostyle
+  // 草稿卷退役"): PDF export now consumes getDraftPaperPagination's pdfBytes
+  // directly — the SAME paged.js render (renderPaginatedPaper, one Chromium page,
+  // one page.pdf() call — see paginationRenderer.mjs's module-header contract) that
+  // produced the on-screen paginated HTML, so preview/PDF parity is a construction
+  // guarantee here, not something this function has to separately verify. This
+  // retires the old Vivliostyle CLI pipeline that used to live in this function body
+  // (execFileSync + a scratch tempdir + a real `vivliostyle build` subprocess — see
+  // git history for that shape) and, with it, `recentDraftPdfExports` (the 30s-TTL
+  // cache that line kept) and `draftPaperPrintSignature` (its signature function) —
+  // WITHOUT migrating either (owner ruling 2026-07-12, "SW-5 由「迁移」改「退役」"):
+  // draftPaginationCache (getDraftPaperPagination's own signature cache, no TTL)
+  // already satisfies the real concern behind that old cache ("导出不重渲": a preview
+  // fetched moments ago, or a just-completed export, hits this cache with zero
+  // re-render) strictly better than a 30s TTL ever did — a TTL forces a re-render
+  // after 30s even when nothing about the draft changed; a signature mismatch is the
+  // only invalidation this cache needs. Running two independently-invalidated caches
+  // side by side was flagged (SW-5, cr-step1-lite.md) as exactly the kind of silent-
+  // staleness risk DP-title's cache-miss bug (cr-step2-lite.md) already proved this
+  // cut needs to guard against — not repeated here.
+  //
+  // `preferRecent` is dropped from the option bag: it only ever governed
+  // recentDraftPdfExports' 30s window (mySpaceRoutes.mjs's POST /api/my-space/
+  // artifacts call site is updated in lockstep to stop passing it). `outputPath` on
+  // the returned object is now always '' — the old value only ever pointed at a
+  // scratch file THIS function wrote to `exportDir` (the Vivliostyle CLI needs a
+  // real file to convert); pdfBytes now come straight out of Playwright's
+  // page.pdf() as an in-memory Buffer, so there is no file for it to point at.
+  // sendPdf's 'x-output-path' response header (outputPath's only consumer) has
+  // always been purely informational — nothing in this repo's client code reads it
+  // (confirmed by source search; see this cut's completion report) — and
+  // saveMySpaceArtifact (server/my-space/mySpace.mjs) already prefers a Buffer
+  // `pdfBody` over reading `sourcePdfPath` from disk, so it is unaffected by
+  // outputPath going empty. `reusedRecent` on the return value now reflects
+  // getDraftPaperPagination's own `reused` flag (a draftPaginationCache hit) instead
+  // of a recentDraftPdfExports hit — same external meaning ("we didn't have to
+  // re-render"), different (better) source.
+  //
+  // Async now (getDraftPaperPagination is async — it renders through Chromium) where
+  // the old Vivliostyle line was synchronous (execFileSync). Both call sites
+  // (draftPaperRoutes.mjs's POST .../print-pdf, mySpaceRoutes.mjs's POST
+  // /api/my-space/artifacts) are updated in lockstep to await this.
+  async function exportDraftPaperPdf(userId, draftPaperId, { versionType = 'student' } = {}) {
     requireUserId(userId)
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
+    const pagination = await getDraftPaperPagination(userId, draftPaperId, { versionType: normalizedVersionType })
+    const draftPaper = pagination.draftPaper
+    const safeTitle = String(draftPaper.title || '英语草稿卷').replace(/[\\/:*?"<>|]/g, '-')
+    const versionLabel = normalizedVersionType === 'teacher' ? '教师卷' : '学生卷'
+    const fileName = `${safeTitle}-${versionLabel}.pdf`
+    // last_printed_at only ever bumps on an actual export (never on a bare preview
+    // fetch) — kept as its own short-lived userDb connection here rather than folded
+    // into getDraftPaperPagination, which the preview route also calls and which
+    // must NOT bump this column.
+    const userDb = openUserDatabase({ readOnly: false })
+    try {
+      userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
+    } finally {
+      userDb.close()
+    }
+    return { body: pagination.pdfBytes, fileName, outputPath: '', draftPaper, reusedRecent: pagination.reused === true }
+  }
+
+  // draft-desk-b step2/3 (MF-3/MF-4/MF-3-step3, plan.md "步2 — DOM 契约 + 缓存解耦" /
+  // "步3 — 前端吃分页 HTML + 常驻叠按钮"): renders (or reuses a cached render of)
+  // draftPaper through the new paged.js pipeline (paginationRenderer.mjs) and applies
+  // the DOM contract (paginationDomContract.mjs) before returning. Wired to
+  // GET /api/draft-papers/:id/pagination (draftPaperRoutes.mjs) as of step3.
+  //
+  // No dedup lock across concurrent calls for the SAME draftPaperId+versionType: two
+  // overlapping cache-miss calls will both render (chromiumPool.mjs's own internal
+  // queue still serializes the actual Chromium work, so this is wasteful, not
+  // unsafe — the second render simply overwrites the cache entry with an
+  // identical-signature result). SW-H (cr-step2-lite.md): a single-flight lock is
+  // still out of scope — revisit only if it shows up as a real cost now that step3
+  // actually wires concurrent requests through the route.
+  async function getDraftPaperPagination(userId, draftPaperId, { versionType = 'student' } = {}) {
+    requireUserId(userId)
+    const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
+    const cacheKey = draftPaginationCacheKey(draftPaperId, normalizedVersionType)
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
       const draftPaper = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
       if (!draftPaper) throw new Error('Draft paper not found')
       if (!draftPaper.items.length) throw new Error('请先添加题组')
-      const signature = draftPaperPrintSignature(draftPaper, normalizedVersionType)
-      const recent = recentDraftPdfExports.get(draftPaperId)
-      if (
-        preferRecent &&
-        recent &&
-        recent.signature === signature &&
-        Date.now() - recent.createdAt <= 30_000 &&
-        existsSync(recent.outputPath)
-      ) {
-        userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
-        return { body: readFileSync(recent.outputPath), fileName: recent.fileName, outputPath: recent.outputPath, draftPaper, reusedRecent: true }
-      }
-      // figure-render cut: this is the ONE buildDraftPrintHtml call whose
-      // output gets written to a scratch tempdir and converted OFFLINE via
-      // Vivliostyle CLI below — imageMode: 'file' so any figure <img> src
-      // is a relative filename (not the web-relative /paper-assets/...
-      // default the other two callers need), and `images` collects which
-      // real PNGs to copy into that SAME tempdir before Vivliostyle runs
-      // (see print-renderer.mjs's figureImageSrc doc comment).
-      const printImages = []
-      const html = buildDraftPrintHtml(draftPaper, { versionType: normalizedVersionType, imageMode: 'file', images: printImages })
-      if (!html) throw new Error('请先添加题组')
-      const vivliostylePaths = [
-        path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
-        path.join(rootDir, 'server', 'node_modules', '.bin', 'vivliostyle'),
-        path.join(rootDir, 'app', 'node_modules', '.bin', 'vivliostyle'),
-      ]
-      let vivliostyleBin = null
-      for (const p of vivliostylePaths) {
-        if (existsSync(p)) { vivliostyleBin = p; break }
-      }
-      if (!vivliostyleBin) {
-        throw new Error('vivliostyle CLI not found. Install with: npm install @vivliostyle/cli')
+
+      const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
+      const cached = draftPaginationCacheGet(cacheKey)
+      if (cached && cached.signature === signature) {
+        return { paginatedHtml: cached.paginatedHtml, pdfBytes: cached.pdfBytes, pageCount: cached.pageCount, draftPaper, reused: true }
       }
 
-      mkdirSync(exportDir, { recursive: true })
-      const tempDir = mkdtempSync(path.join(tmpdir(), 'draft-paper-print-'))
-      const htmlPath = path.join(tempDir, 'draft-paper.html')
-      const pdfPath = path.join(tempDir, 'draft-paper.pdf')
-      try {
-        writeFileSync(htmlPath, html)
-        for (const image of printImages) {
-          copyFileSync(image.absoluteSourcePath, path.join(tempDir, image.relativeName))
-        }
-        execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
-        const safeTitle = String(draftPaper.title || '英语草稿卷').replace(/[\\/:*?"<>|]/g, '-')
-        const versionLabel = normalizedVersionType === 'teacher' ? '教师卷' : '学生卷'
-        const fileName = `${safeTitle}-${versionLabel}.pdf`
-        const outputPath = path.join(exportDir, `${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${fileName}`)
-        copyFileSync(pdfPath, outputPath)
-        userDb.prepare('UPDATE draft_papers SET last_printed_at = datetime(\'now\'), updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(draftPaperId, userId)
-        recentDraftPdfExports.set(draftPaperId, { signature, fileName, outputPath, createdAt: Date.now() })
-        return { body: readFileSync(outputPath), fileName, outputPath, draftPaper, reusedRecent: false }
-      } finally {
-        rmSync(tempDir, { recursive: true, force: true })
-      }
+      const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: normalizedVersionType })
+      if (!html) throw new Error('请先添加题组')
+      const rendered = await renderPaginatedPaper(html)
+      // Same non-groupMissing, item-order group id list buildDraftPaperBlocks derives
+      // its question_group blocks from (see buildDraftPaperBlocks above) — this is the
+      // positional contract applyPaginationDomContract's header comment documents.
+      const groupIds = draftPaper.items.filter((item) => !item.groupMissing).map((item) => item.groupId)
+      const paginatedHtml = applyPaginationDomContract(rendered.paginatedHtml, { groupIds, pageCount: rendered.pageCount })
+
+      draftPaginationCacheSet(cacheKey, { signature, paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount })
+      return { paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount, draftPaper, reused: false }
     } finally {
       userDb.close()
       bankDb.close()
@@ -902,11 +1049,11 @@ export function createDraftPaperStore({
     addGroupToCurrentDraftPaper,
     addGroupToDraftPaper,
     buildDraftPrintHtml,
-    clearRecentDraftPdfExport,
     deleteDraftPaperItem,
     exportDraftPaperPdf,
     getCurrentDraftPaperRow,
     getDraftPaper,
+    getDraftPaperPagination,
     getOrCreateCurrentDraftPaper,
     listDraftPapers,
     markCurrentDraftPaper,

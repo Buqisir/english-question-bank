@@ -83,5 +83,28 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
         working-directory: app
 
+      # draft-desk-b step4: the draft-paper pagination/PDF pipeline
+      # (server/draft-paper/chromiumPool.mjs) launches through server/'s own
+      # playwright-core with channel 'chromium'. The app-side install above
+      # provisions app's pinned browser revision, which playwright-core does
+      # not necessarily share — the smoke's PDF-export step needs the revision
+      # server/'s playwright-core resolves.
+      - name: Install server pagination Chromium (playwright-core)
+        run: npx playwright-core install --with-deps chromium
+        working-directory: server
+
+      # draft-desk-b step5 (SW-B): these two need a real server-side Chromium
+      # (installed above) that the main verify job's `npm ci` never
+      # provisions — the e2e job is the only place that cost is already paid.
+      # verify-draft-pagination-perf.mjs deliberately stays out of CI: its
+      # absolute-latency assertions are exactly the "易抖动" case plan.md's
+      # own Verify 要求 flags as CI-exempt on a shared runner (see
+      # scripts/README.md).
+      - name: Run draft pagination renderer verify
+        run: node scripts/verify-draft-pagination-renderer.mjs
+
+      - name: Run draft pagination DOM contract verify
+        run: node scripts/verify-draft-pagination-dom-contract.mjs
+
       - name: Run golden path E2E smoke
         run: node scripts/smoke-golden-path.mjs

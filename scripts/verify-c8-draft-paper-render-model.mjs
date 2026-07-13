@@ -210,14 +210,21 @@ assert('draft render reopens a new section when group type returns later', third
 assert('draft render keeps footer title and page counter', draftHtml.includes('H9 Draft · ') && draftHtml.includes('counter(page)'))
 assert('footer is injected outside print renderer body', draftStore.includes('addDraftFooterCss'))
 assert('footer contains title and page counter', /counter\(page\)/.test(draftStore))
-// figure-render cut: exportDraftPaperPdf's buildDraftPrintHtml call gained
-// `imageMode: 'file'` + `images: printImages` (Vivliostyle CLI converts
-// this HTML from a scratch tempdir, and needs the real PNGs copied in
-// alongside it — see draftPaperStore.mjs's comment above this call) —
-// natural turnover of the exact-source-text regex, not a change to what
-// the assertion actually proves (the PDF endpoint still calls the shared
-// builder rather than duplicating it).
-assert('draft PDF endpoint uses buildDraftPrintHtml', /const html = buildDraftPrintHtml\(draftPaper, \{ versionType: normalizedVersionType, imageMode: 'file', images: printImages \}\)/.test(draftStore) && draftRoutes.includes('exportDraftPaperPdf'))
+// draft-desk-b step4 (MF-2/MF-7, plan.md "步4 — PDF 换引擎收口 + Vivliostyle
+// 草稿卷退役"): exportDraftPaperPdf no longer calls buildDraftPrintHtml +
+// Vivliostyle CLI directly (that whole line, including `imageMode: 'file'` +
+// `images: printImages`, is retired — see draftPaperStore.mjs's doc comment on
+// exportDraftPaperPdf). It now consumes getDraftPaperPagination's pdfBytes — the
+// SAME paged.js render that produced the on-screen paginated HTML — so parity is
+// a construction guarantee. Natural turnover of the exact-source-text regex, not
+// a change to what the assertion actually proves (the PDF endpoint still routes
+// through the shared pipeline rather than rendering its own copy).
+assert(
+  'draft PDF endpoint consumes getDraftPaperPagination\'s pdfBytes (paged.js pipeline, Vivliostyle CLI line retired)',
+  /const pagination = await getDraftPaperPagination\(userId, draftPaperId, \{ versionType: normalizedVersionType \}\)/.test(draftStore)
+    && /body: pagination\.pdfBytes/.test(draftStore)
+    && draftRoutes.includes('exportDraftPaperPdf'),
+)
 assert('empty export uses Chinese reason', draftStore.includes('请先添加题组') || draftRoutes.includes('请先添加题组'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')
@@ -234,8 +241,28 @@ const workbenchCss = read('app/src/features/draft-paper/DraftPaperWorkbench.css'
 const previewHtml = read('app/src/features/draft-paper/draftPaperPreviewHtml.ts')
 assert('preview uses iframe srcDoc from A4 preview HTML', /<iframe[\s\S]{0,120}srcDoc=\{previewHtml\}/.test(workbench))
 assert('preview HTML generation lives outside workbench', workbench.includes("from './draftPaperPreviewHtml'") && !/function buildA4PreviewHtml/.test(workbench))
-assert('preview injects screen-only A4 dimensions', previewHtml.includes('buildA4PreviewHtml') && previewHtml.includes('width: 210mm') && previewHtml.includes('padding: 20mm 18mm'))
-assert('preview builds paginated long-scroll A4 pages', previewHtml.includes('paginateA4Preview') && previewHtml.includes('preview-page') && previewHtml.includes("'第 ' + pageNumber + ' 页'"))
+// draft-desk-b step3 (MF-3, plan.md "步3 — 前端吃分页 HTML + 常驻叠按钮"):
+// server/draft-paper/paginationRenderer.mjs + paginationDomContract.mjs is now
+// the SOLE pagination source (tech-recon.md "屏幕分页管线" / "parity 现状判断"
+// — this cut exists specifically to retire the client's own independent
+// pagination guess). buildA4PreviewHtml no longer paginates or owns page
+// sizing (210mm/20mm padding were client-computed page-box dimensions that
+// paged.js now owns server-side) — it only layers a thin screen-only card
+// stylesheet on top of the already-paginated, already-contract-tagged HTML.
+// Assertions updated in the same step per plan.md's step5 prediction ("门可能
+// 被退役客户端分页触及，预判并同刀更新该门").
+assert(
+  'preview no longer owns page sizing/padding (paged.js computes this server-side now)',
+  !previewHtml.includes('width: 210mm') && !previewHtml.includes('padding: 20mm 18mm'),
+)
+assert(
+  'preview no longer re-paginates client-side (the retired paginateA4Preview greedy box-measuring pagination is gone)',
+  !previewHtml.includes('paginateA4Preview') && !previewHtml.includes('function flatten('),
+)
+assert(
+  'preview still hooks its screen card styling onto the server DOM contract\'s .preview-page class',
+  previewHtml.includes('buildA4PreviewHtml') && previewHtml.includes('.preview-page'),
+)
 assert('preview iframe does not add a second mat color', previewHtml.includes('html {\n    background: transparent') && previewHtml.includes('body {\n    background: transparent') && workbenchCss.includes('.draft-a4-sheet iframe {\n  background: transparent'))
 // teal-repaint C1/C7: mat 渐变从暖纸 #FAFAF7/#F4F2EC 改为中性 #F6F6F4/#EDEDEA
 // （owner 墨绿契约 — bg/surface-2 新值），断言同步。
@@ -255,7 +282,15 @@ assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^
 // technical constraint + DraftPaperWorkbench.tsx's nativeContentHeight
 // state, read from the loaded iframe's own contentDocument).
 assert('preview iframe height is driven by measured content, not a fixed CSS pin', !workbenchCss.includes('height: 1188px') && workbench.includes('nativeContentHeight'))
-assert('browser print writes same printHtml', /document\.write\(draftPaper\.printHtml\)/.test(workbench))
+// draft-desk-b step4 (owner 拍板 2026-07-12, plan.md "步4" — 浏览器打印并入):
+// browser print now writes the same server-paginated `paginatedHtml` state the A4
+// preview iframe already renders (fetched via fetchDraftPaperPagination), not the
+// old `draftPaper.printHtml` — a third, independently-rendered HTML string that
+// never went through paged.js. That was the last remaining parity gap between
+// "what the teacher sees" / "what downloads as PDF" / "what prints" this whole
+// cut exists to close (DP-1 acceptance check (d) already proved a serialized
+// paged.js DOM prints consistently with what it displays).
+assert('browser print writes the server-paginated HTML (paged.js parity — draft-desk-b step4)', /document\.write\(paginatedHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
 assert('rail extraction lives in its own component', workbench.includes("from './DraftPaperRail'") && workbench.includes('<DraftPaperRail'))
 // 裁点1 (plan.md): the rail is a pure list (title + count, no source
@@ -263,7 +298,13 @@ assert('rail extraction lives in its own component', workbench.includes("from '.
 // Workbench.tsx itself, not on a per-row outline control.
 assert('rail component is a pure list (no per-row source metadata)', !rail.includes('compactSource'))
 assert('workbench gates the page-break sticker action on non-first items (mirrors the old canPageBreakBefore = index > 0 rule)', workbench.includes('canPageBreakBefore = fullIndex > 0'))
-assert('page-break suggestions render as an in-paper quiet annotation, not an outline marker', previewHtml.includes('break-hint') && !workbench.includes('draft-break-marker'))
+// draft-desk-b step3 (PO-1, plan.md "PO 决策"): page-break suggestion display
+// is DEFERRED this cut (owner 2026-07-12) — pageBreakSuggestions stays on the
+// DraftPaper API response/type but is not read or rendered anywhere in the
+// workbench or the preview wrapper (no `.break-hint` markup). Previously this
+// assertion required the client's own `insertBreakHints` injection, which is
+// part of the retired client-side pagination this step removes.
+assert('page-break suggestions are NOT rendered this cut (PO-1 延后)', !previewHtml.includes('break-hint') && !workbench.includes('draft-break-marker'))
 assert('workbench no longer owns outline rendering details', !workbench.includes('compactSource(item)') && !workbench.includes('draft-outline-panel'))
 assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench exposes browser print', workbench.includes('浏览器打印'))

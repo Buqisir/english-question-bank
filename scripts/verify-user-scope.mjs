@@ -402,8 +402,10 @@ async function verifyTwoUserIsolation() {
     assert('2. B DELETE A\'s artifact -> 404', deleteArtifactByB.status === 404, `status=${deleteArtifactByB.status}`)
 
     // PA MF-3: B borrows A's draftId through the export/save-to-space route. This
-    // 404s inside exportDraftPaperPdf's ownership check, BEFORE vivliostyle is ever
-    // invoked — safe to exercise as a real HTTP call in this hermetic script.
+    // 404s inside exportDraftPaperPdf's ownership check (via getDraftPaperPagination
+    // -> getDraftPaper, both gated on (id, user_id) — draft-desk-b step4), BEFORE
+    // the paged.js/Chromium pipeline is ever invoked — safe to exercise as a real
+    // HTTP call in this hermetic script.
     const borrowByB = await req('/api/my-space/artifacts', { method: 'POST', body: { draftPaperId: draftIdA }, cookie: cookieB })
     assert('2. B borrows A\'s draftId via POST /api/my-space/artifacts -> 404 (PA MF-3)', borrowByB.status === 404, `status=${borrowByB.status} body=${JSON.stringify(borrowByB.json)}`)
 

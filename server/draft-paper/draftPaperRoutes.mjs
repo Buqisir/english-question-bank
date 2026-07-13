@@ -190,6 +190,36 @@ export function createDraftPaperRoutes() {
       }
     }),
 
+    // draft-desk-b step3 (MF-3, plan.md "步3 — 前端吃分页 HTML + 常驻叠按钮"):
+    // exposes draftPaperStore.getDraftPaperPagination (added step2, unwired until
+    // now) so the workbench's A4 preview iframe can consume server-rendered,
+    // DOM-contract-tagged (`.preview-page` + `data-group-id`) paginated HTML instead
+    // of building its own client-side pagination. Same read-then-render shape as the
+    // print-html route below, but async (getDraftPaperPagination self-opens/closes
+    // its own db connections — see draftPaperStore.mjs) and never returns pdfBytes
+    // (that stays PDF-export-only, step4 scope) — only what the iframe needs.
+    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/pagination$/, async ({ response, url, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const draftPaperId = decodeURIComponent(match[1])
+      let versionType
+      try {
+        versionType = versionTypeFromQuery(url)
+      } catch (error) {
+        context.sendJson(response, 400, { error: routeError(error) })
+        return
+      }
+      try {
+        const result = await context.draftPaperStore.getDraftPaperPagination(userId, draftPaperId, { versionType })
+        context.sendJson(response, 200, {
+          paginatedHtml: result.paginatedHtml,
+          pageCount: result.pageCount,
+          reused: result.reused,
+        })
+      } catch (error) {
+        sendDraftMutationError(response, context, error)
+      }
+    }),
+
     defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, url, match, context }) => {
       const userId = context.resolveDataUserId(context)
       const userDb = context.openUserDatabase({ readOnly: true })
@@ -237,7 +267,11 @@ export function createDraftPaperRoutes() {
         const versionType = input.versionType === undefined
           ? 'student'
           : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-        const result = context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
+        // draft-desk-b step4 (MF-2/MF-7): exportDraftPaperPdf is now async (it
+        // renders through the same Chromium/paged.js pipeline as the pagination
+        // route, via getDraftPaperPagination — see draftPaperStore.mjs) where the
+        // old Vivliostyle CLI line was synchronous (execFileSync).
+        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
         const message = routeError(error)

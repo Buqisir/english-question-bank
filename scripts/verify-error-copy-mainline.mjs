@@ -94,7 +94,11 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
   // draft-student-field (E4) added an 11th call site: saveStudentLabel's catch
   // block routes its failure through describeError, same as every other
   // workbench mutation (updateTitle, persistItems, etc.).
-  assert('DraftPaperWorkbench.tsx uses describeError at all 11 call sites', workbenchCount === 11, `found ${workbenchCount}`)
+  // draft-desk-b step3 added a 12th: the server-pagination fetch effect's
+  // promise .catch routes through describeError('生成分页预览', error) — same
+  // pattern this gate exists to enforce. (Promise-style .catch((error) =>
+  // does not match the try/catch regex below, so that count stays 11.)
+  assert('DraftPaperWorkbench.tsx uses describeError at all 12 call sites', workbenchCount === 12, `found ${workbenchCount}`)
 }
 
 console.log('== MySpacePage failure-state recovery + de-duplication ==')

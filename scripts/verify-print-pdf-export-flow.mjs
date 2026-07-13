@@ -92,7 +92,20 @@ const items = [
       id: 'g-cloze',
       title: 'Cloze',
       groupType: 'cloze',
-      passage: { title: 'P2', materialText: 'Cloze passage with __ blanks __.' },
+      // draft-desk-b step4 (SW-D, cr-step1-lite.md): 'cloze' is a
+      // BLANK_BEARING_GROUP_TYPE (server/print-renderer.mjs) — its hard
+      // consistency assertion (print-renderer.mjs:361-ish, "宁可导出红也不
+      // 出对不上的卷子") requires the in-text `paperBlankPattern` marker
+      // count to equal this group's question count (3). The previous
+      // fixture text ('Cloze passage with __ blanks __.') had zero real
+      // markers (no digits between the underscores, so paperBlankPattern
+      // never matched) against 3 questions — that mismatch threw and
+      // crashed this whole script on main, before this cut ever touched
+      // anything. The displayed number is order-of-appearance, not the
+      // literal digit (renderPassageLineWithBlanks's doc comment), but 25/
+      // 26/27 (this group's continuous numbering, starting after the 4
+      // reading questions numbered 21-24) keeps the fixture text realistic.
+      passage: { title: 'P2', materialText: 'Cloze passage with __25__ one __26__ two __27__ three blanks.' },
       questions: [1, 2, 3].map((i) => ({
         id: `q-c-${i}`, questionNo: String(i), stem: `Cloze ${i}`, answer: 'B', explanation: '', note: '',
         options: [{ label: 'A', content: 'one' }, { label: 'B', content: 'two' }, { label: 'C', content: 'three' }, { label: 'D', content: 'four' }],

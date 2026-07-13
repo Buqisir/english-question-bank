@@ -106,7 +106,17 @@ assert('server exposes artifacts list alias', mySpaceRoutes.includes('/api\\/my-
 assert('server exposes static user-space route', mySpaceRoutes.includes('/user-space\\/files\\/[^/]+\\.pdf'))
 assert('static route requires pdf suffix', mySpaceRoutes.includes('^\\/user-space\\/files\\/([^/]+)\\.pdf$'))
 assert('static route rejects invalid artifact id', mySpaceRoutes.includes("Invalid artifact id"))
-assert('save-to-space reuses recent PDF path', mySpaceRoutes.includes('preferRecent: true') && mySpaceRoutes.includes('reusedRecentPdf'))
+// draft-desk-b step4 (SW-5 retirement, plan.md "步4"): save-to-space no longer
+// passes `preferRecent: true` to exportDraftPaperPdf — that option only ever
+// governed the now-retired recentDraftPdfExports 30s-TTL cache. The underlying
+// behavior this assertion originally cared about ("saving to My Space right
+// after an export/preview shouldn't force a second render") still holds — it is
+// now satisfied by exportDraftPaperPdf itself routing through
+// getDraftPaperPagination's own signature cache (see draftPaperStore.mjs's doc
+// comment on exportDraftPaperPdf) — so this checks for that call instead, and
+// `reusedRecentPdf` (the response field surfacing whether that cache was hit)
+// stays exactly as-is (API surface unchanged).
+assert('save-to-space exports via exportDraftPaperPdf and surfaces reuse status', mySpaceRoutes.includes('exportDraftPaperPdf(userId, draftPaperId)') && mySpaceRoutes.includes('reusedRecentPdf'))
 
 const moduleSource = read('server/my-space/mySpace.mjs')
 assert('My Space module writes PDF to disk', moduleSource.includes('writeFileSync(filePath, body)'))

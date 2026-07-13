@@ -17,6 +17,12 @@
 
 确定性附验：同卷 3 次渲染 PDF 页数 9/9/9、序列化 DOM 字节数逐字节一致（1053183×3）。
 
+> **步1 勘误（2026-07-12,cr-step1-lite.md）**:①上表 (c) 的 ~490ms 是 spike 误用轻量
+> `chromium_headless_shell` build 测得;生产只装全量 chromium build(`channel:'chromium'`),
+> 真实暖延迟 ~700-800ms,仍在 1s 预算内但余量收窄。②"逐字节一致"实为字节**长度**一致;
+> pagedjs 每次渲染给 `data-ref`/`data-split-*` 发随机 UUID,归一后才真正逐字节一致
+> (verify-draft-pagination-renderer.mjs 已按此断言;不影响步2 单次渲染内的 data-ref 归并)。
+
 ## DEV 必须吃进去的三个实操发现
 
 1. **序列化前必须剥掉 `<script>`**（步1）：`page.content()` 会把注入的 paged.js polyfill

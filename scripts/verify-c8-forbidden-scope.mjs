@@ -1,6 +1,29 @@
 #!/usr/bin/env node
+// C8 verify: forbidden scope
+//
+// History: born for the C8-PR-A cut (`docs/cuts/C8-draft-paper-composer/`)
+// to (1) fence off unrelated domains that PR's diff must never touch, and
+// (2) assert the diff's file set matched a hardcoded C8-PR-A `allowedPrefixes`
+// enumeration, plus temporal product-scope checks ("My Space" / answer-version
+// export don't exist yet in this PR).
+//
+// Retired 2026-07-13 (draft-desk-b step5, SW-E — see cr-step1-lite.md): the
+// `allowedPrefixes` enumeration and the My-Space/answer-version temporal
+// checks are permanently expired. My Space and answer-version export have
+// long since shipped as real product features (server/my-space/,
+// scripts/verify-c8-my-space-contracts.mjs, verify-user-scope.mjs all exist
+// and are green), and every subsequent large cut legitimately touches files
+// outside the C8-PR-A file list. Keeping either check made this gate fail red
+// on essentially every non-C8-PR-A diff (including pure-docs changes),
+// training reviewers to ignore it rather than read it.
+//
+// What survives: the cross-domain forbidden-prefix fence below. Those
+// prefixes/files (papersurface/, reading-analysis/, paper-intelligence/,
+// public/reports/, public/paper-assets/, server/print-renderer.mjs, imported
+// fixture binaries) protect real architectural boundaries that no
+// draft-paper-family cut should cross. That fence is not specific to C8-PR-A
+// — it stays live and general-purpose for this and future cuts.
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -58,58 +81,6 @@ for (const prefix of forbiddenPrefixes) {
 
 assert('no imported fixture changes', !changedFiles.some((file) => /app\/public\/.*\.(json|docx|pdf)$/.test(file)))
 assert('print renderer file untouched', !changedFiles.includes('server/print-renderer.mjs'))
-assert('no My Space route files', !changedFiles.some((file) => file.includes('my-space') || file.includes('user-space')))
-
-const implementationText = changedFiles
-  .filter((file) => !/\.(png|jpg|jpeg|gif|pdf|docx|sqlite)$/.test(file))
-  .filter((file) => /^(app\/src|server\/|data\/sql|scripts\/)/.test(file))
-  .map((file) => {
-    try {
-      return readFileSync(path.join(rootDir, file), 'utf8')
-    } catch {
-      return ''
-    }
-  })
-  .join('\n')
-const appAndServerText = changedFiles
-  .filter((file) => /^(app\/src|server\/api\.mjs|data\/sql)/.test(file))
-  .map((file) => readFileSync(path.join(rootDir, file), 'utf8'))
-  .join('\n')
-
-assert('no personal-space view implementation', !implementationText.includes(`view=${'my'}-space`))
-assert('no user-space route implementation', !implementationText.includes(`/${'user'}-space`))
-const personalSpacePattern = new RegExp(`保存到个人空间|加入个人空间|${'My'} Space|${'my'} space`, 'i')
-const answerVersionPattern = new RegExp(`${'答案'}版|${'解析'}版`)
-const draftUiText = readFileSync(path.join(rootDir, 'app/src/features/draft-paper/DraftPaperWorkbench.tsx'), 'utf8')
-assert('no save-to-personal-space label', !personalSpacePattern.test(appAndServerText))
-assert('no answer-version export in C8 PR A', !answerVersionPattern.test(draftUiText))
-
-const allowedPrefixes = [
-  'app/src/App.tsx',
-  'app/src/concierge/',
-  'app/src/data/sampleQuestionGroups.ts',
-  'app/src/domain/questionBank.ts',
-  'app/src/features/draft-paper/',
-  'app/src/paperAssembly/basketPersistence.ts',
-  'app/src/paperAssembly/usePaperDraft.ts',
-  'app/src/services/draftPapers.ts',
-  'app/src/services/questionGroups.ts',
-  'data/sql/schema.sql',
-  'docs/cuts/C8-draft-paper-composer/big-cr-report-opus.md',
-  'server/api.mjs',
-  'scripts/verify-basket-persistence.mjs',
-  'scripts/verify-concierge-desk.mjs',
-  'scripts/verify-paper-draft.mjs',
-  'scripts/verify-c8-',
-  'scripts/smoke-c8-',
-]
-
-for (const file of changedFiles) {
-  assert(
-    `changed file is expected C8 PR A scope: ${file}`,
-    allowedPrefixes.some((prefix) => file.startsWith(prefix) || file === prefix),
-  )
-}
 
 if (failed > 0) {
   console.error(`\nC8 forbidden scope verify FAILED: ${passed} passed, ${failed} failed`)
