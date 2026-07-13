@@ -10,6 +10,7 @@
 1. **【DP-1｜步0 spike gating】** paged.js 四条硬验收：全过→引擎选定、继续步1；任一不过→**引擎翻案**，停，回 owner/PM 重议。主代理判定。
    **✅ 2026-07-12 判定：四条全过，引擎选定 paged.js（`spike-gate-dp1.md`；DEV 必读其「三个实操发现」）。**
 2. **【DP-2｜步1-4 步间闸】** 每步 narrow verify + CR-lite 主代理复核绿才进下一步。
+   **✅ 步1 过闸 2026-07-12**（PR #285 @ b0d9f34,CI 双绿,主代理亲手复跑 25+2+50 全绿;0 MF、5 挂账见 `cr-step1-lite.md`——其中 SW-A(figure 图)步2/4 必验、SW-D(export-flow verify 在 main 上就崩)步4 前置修。
 3. **【DP-3｜终审】** 全 verify + 浏览器 QA matrix + owner 产品 QA（parity 肉眼 + 交互回归）。
 
 ## PO 决策（owner 2026-07-12）
