@@ -83,5 +83,15 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
         working-directory: app
 
+      # draft-desk-b step4: the draft-paper pagination/PDF pipeline
+      # (server/draft-paper/chromiumPool.mjs) launches through server/'s own
+      # playwright-core with channel 'chromium'. The app-side install above
+      # provisions app's pinned browser revision, which playwright-core does
+      # not necessarily share — the smoke's PDF-export step needs the revision
+      # server/'s playwright-core resolves.
+      - name: Install server pagination Chromium (playwright-core)
+        run: npx playwright-core install --with-deps chromium
+        working-directory: server
+
       - name: Run golden path E2E smoke
         run: node scripts/smoke-golden-path.mjs

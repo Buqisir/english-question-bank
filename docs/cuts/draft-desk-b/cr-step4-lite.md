@@ -11,7 +11,17 @@ print-pdf-export-flow 37 · cache-trigger 14 · dom-contract 32 · renderer 25 �
 perf 2(暖 ~690-740ms)· c8-contracts 50 · render-model 35 · error-copy 18
 (describeError 计数稳在 12,SW-I 复用既有错误状态未加调用点)· my-space 84 ·
 user-scope 50(真 HTTP 跨用户 404,含 B 借 A draftId 走 my-space 存档路)·
-visual-unify 20 · tsc 0 错。PR CI:push 后主代理确认双绿再宣过闸。
+visual-unify 20 · tsc 0 错。
+- PR CI 首跑:verify 绿、e2e 红——golden-path 冒烟的 PDF 导出 400。根因:
+  换线后导出走 server `playwright-core`(chromium rev 1194/v141),而 e2e job
+  只为 app 的 playwright 装浏览器(headless-shell v1223)——**两包各锁各的
+  revision,app 装的喂不饱 server**(SW-B 预判的坑提前到步4 引爆,顺带证明
+  SW-J 的错误映射不精确:渲染基建缺失落了 generic 400)。修复:e2e job 增
+  `npx playwright-core install --with-deps chromium`(server 目录,本地
+  --dry-run 验证过 CLI 与 revision 解析)。这是步3 error-copy 门之后**连续第
+  二次 CI-only 捕获**——「全套只信 CI」纪律再次兑现。重推后 CI 双绿见 commit log。
+- 步5 SW-B 预答随之修正:三个 Chromium verify 挪 e2e job 时,用的就是这一步
+  装好的 server 侧浏览器,不是 app 侧的。
 
 ## 冷读判定
 
