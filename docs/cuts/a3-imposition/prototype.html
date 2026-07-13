@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>原型 · A3 拼版预览 v1（裁点拍板用）</title>
+<style>
+  :root {
+    --desk: #edeae0;
+    --paper: #fffdf8;
+    --ink: #2c2a26;
+    --muted: #8a857a;
+    --green: #3d6b50;
+    --green-soft: #e6efe9;
+    --fold: #c9c2b2;
+    --amber: #9a6a1f;
+    --amber-bg: #f7efdd;
+    --line: #e3ded2;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--desk); color: var(--ink); font: 14px/1.6 -apple-system, "PingFang SC", sans-serif; padding-bottom: 80px; }
+
+  /* ── 顶部：仿工作台卷头 + 裁点开关 ── */
+  .bar { position: sticky; top: 0; z-index: 9; background: #faf8f2; border-bottom: 1px solid var(--line); padding: 10px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .bar h1 { font-size: 14px; font-weight: 600; margin-right: 8px; }
+  .badge { color: var(--muted); font-size: 13px; }
+  .toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+  .toggle button { border: 0; background: transparent; padding: 5px 14px; font-size: 13px; cursor: pointer; color: var(--muted); }
+  .toggle button.on { background: var(--green-soft); color: var(--green); font-weight: 600; }
+  .dp { margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 12px; color: var(--muted); }
+  .dp b { color: var(--amber); font-weight: 600; }
+
+  main { max-width: 1080px; margin: 28px auto; padding: 0 24px; }
+  .note { font-size: 13px; color: var(--muted); margin: 0 0 20px; }
+  .note b { color: var(--ink); }
+
+  /* ── 版（A4 页）── */
+  .page { background: var(--paper); box-shadow: 0 1px 2px rgba(60,50,30,.10), 0 6px 18px rgba(60,50,30,.08); border-radius: 2px; padding: 7% 8%; position: relative; }
+  .page .pno { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 10px; color: var(--muted); }
+  /* 假内容块 */
+  .g { border-left: 3px solid transparent; padding: 6px 8px; margin-bottom: 10px; border-radius: 2px; }
+  .g h4 { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+  .ln { height: 6px; border-radius: 3px; background: #eae5d8; margin: 5px 0; }
+  .ln.s { width: 62%; }
+  .g1 { border-color: #7f9e8d; } .g2 { border-color: #b08d57; } .g3 { border-color: #8d86b0; } .g4 { border-color: #a0788a; } .g5 { border-color: #6f94ad; }
+
+  /* ── A4 散页态（现状对照）── */
+  #modeA4 .page { width: 340px; margin: 0 auto 26px; height: 480px; overflow: hidden; }
+
+  /* ── A3 拼版态 ── */
+  .sheet { margin: 0 auto 40px; }
+  .sheet-label { text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 10px; letter-spacing: .05em; }
+  .face { margin: 0 auto 18px; }
+  .face-label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .face-label .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; font-size: 11px; }
+  .face-paper { display: flex; background: var(--paper); box-shadow: 0 1px 2px rgba(60,50,30,.10), 0 8px 22px rgba(60,50,30,.10); border-radius: 2px; position: relative; }
+  .face-paper .half { flex: 1 1 50%; padding: 4.5% 5%; position: relative; min-height: 0; }
+  .face-paper .half + .half { border-left: 1px dashed var(--fold); }
+  .foldtag { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--desk); color: var(--muted); font-size: 10px; padding: 0 8px; border-radius: 999px; border: 1px solid var(--line); }
+  .half .pno { position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; font-size: 9px; color: var(--muted); }
+  .half.blank { display: flex; align-items: center; justify-content: center; color: #c6c0b2; font-size: 12px; background: repeating-linear-gradient(45deg, transparent 0 10px, rgba(0,0,0,.015) 10px 20px); }
+  /* 翻面缝 */
+  .flip-seam { display: flex; align-items: center; gap: 10px; margin: 4px 0 14px; color: var(--muted); font-size: 11px; }
+  .flip-seam::before, .flip-seam::after { content: ""; flex: 1; border-top: 1px dotted var(--fold); }
+
+  /* 真字样张（三方案对照可读性） */
+  .tx { color: #3a372f; margin: 4px 0; }
+  .tx.en { font-family: "Times New Roman", serif; }
+  /* 方案A：适宽缩排（面宽=现纸面宽 760px，一版约 55%） */
+  .planA .face { width: 760px; max-width: 100%; }
+  .planA .half { aspect-ratio: 210/297; overflow: hidden; }
+  .planA .g h4 { font-size: 10px; } .planA .ln { height: 5px; }
+  .planA .tx { font-size: 8.5px; line-height: 1.5; }
+  /* 方案C：满幅拼版（面宽=屏宽，一版约 80-85%，字可读）——整区破容器满幅 */
+  .planC, .planB { width: 100vw; margin-left: calc(50% - 50vw); padding: 0 2vw; }
+  .planC .face { width: min(94vw, 1440px); margin-left: auto; margin-right: auto; }
+  .planC .half { aspect-ratio: 210/297; overflow: hidden; }
+  .planC .g h4 { font-size: 12.5px; }
+  .planC .tx { font-size: 12.5px; line-height: 1.6; }
+  /* 方案B：原大横滚 */
+  .planB .face { width: 1660px; }
+  .planB .half { aspect-ratio: 210/297; overflow: hidden; }
+  .planB .g h4 { font-size: 15px; }
+  .planB .tx { font-size: 15px; line-height: 1.65; }
+  .planB-scroller { overflow-x: auto; padding-bottom: 8px; }
+
+  /* ── 建议徽标（安静标注，沿产品语言）── */
+  .sugg { display: inline-flex; align-items: center; gap: 5px; background: var(--amber-bg); color: var(--amber); border: 1px solid #e8d9b8; border-radius: 999px; padding: 2px 10px; font-size: 11px; cursor: pointer; margin: 2px 0 8px; }
+  .sugg::before { content: "◌"; font-size: 12px; }
+  .straddle-note { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  /* 裁点标牌 */
+  .dp-card { background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 6px; padding: 12px 16px; margin: 26px 0 18px; font-size: 13px; }
+  .dp-card b { color: var(--amber); }
+  .dp-card p { color: var(--muted); margin-top: 4px; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <h1>草稿卷工作台 · 预览区</h1>
+  <span class="badge" id="countBadge">共 7 版 · 对折 2 张 · A3</span>
+  <span class="toggle">
+    <button id="btnA4" onclick="setMode('a4')">A4 散页</button>
+    <button id="btnA3" class="on" onclick="setMode('a3')">A3 对折</button>
+  </span>
+  <span class="toggle" id="planToggle">
+    <button id="btnPlanA" onclick="setPlan('A')">裁点1·A 适宽缩排</button>
+    <button id="btnPlanC" class="on" onclick="setPlan('C')">C 满幅拼版</button>
+    <button id="btnPlanB" onclick="setPlan('B')">B 原大横滚</button>
+  </span>
+  <span class="dp"><b>◌</b> 琥珀圈 = 分页建议徽标（沿现产品交互，点击即前置分页）</span>
+</div>
+
+<main>
+  <p class="note"><b>看什么：</b>A3 对折态下，预览按「面」显示——两版并排 + 中缝折线，面与面之间标「翻面」。
+  同面并排的断篇（版3→版4）<b>没有徽标</b>，翻面/换张的断篇才有——判据从徽标文案变成看得见的版面事实。
+  切回「A4 散页」可对照现状。分页引擎零改动：拼版只是展示层重组。</p>
+
+  <!-- ═══ A4 散页态（现状对照，简化 3 版示意） ═══ -->
+  <section id="modeA4" class="hidden">
+    <div class="page">
+      <div class="g g1"><h4>一、Reading A（阅读理解 · 4 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln s"></div></div>
+      <div class="g g2"><h4>二、完形填空（15 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+      <div class="pno">版 1</div>
+    </div>
+    <div class="page">
+      <span class="sugg">跨页断篇（第2/3页）· 建议前置分页</span>
+      <div class="g g2"><h4>二、完形填空（续）</h4><div class="ln"></div><div class="ln"></div><div class="ln s"></div></div>
+      <div class="g g3"><h4>三、Reading B（阅读理解 · 4 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+      <div class="pno">版 2</div>
+    </div>
+    <div class="page">
+      <span class="sugg">跨页断篇（第3/4页）· 建议前置分页</span>
+      <div class="g g3"><h4>三、Reading B（续）</h4><div class="ln"></div><div class="ln s"></div></div>
+      <div class="g g4"><h4>四、Reading C（阅读理解 · 3 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+      <div class="pno">版 3 ……（余版略）</div>
+    </div>
+  </section>
+
+  <!-- ═══ A3 拼版态 ═══ -->
+  <section id="modeA3" class="planC">
+    <div id="a3wrap">
+
+    <div class="sheet">
+      <div class="sheet-label">─── 第 1 张 A3 ───</div>
+      <div class="face">
+        <div class="face-label"><span class="chip">第 1 张 · 正面</span><span>版 1 + 版 2</span></div>
+        <div class="face-paper">
+          <div class="foldtag">对折线</div>
+          <div class="half">
+            <div class="g g1"><h4>一、Reading A（阅读理解 · 4 题）</h4>
+              <p class="tx en">In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year. They provide shade, lower surface temperatures, absorb a surprising amount of airborne carbon, and provide wildlife habitat along with just plain beauty.</p>
+              <p class="tx en">1. What does the new study imply regarding oaks and sweetgums?<br>A. They affect the growth of other trees.&nbsp;&nbsp;B. They absorb less carbon than expected.</p>
+              <div class="ln"></div><div class="ln s"></div></div>
+            <div class="g g2"><h4>二、完形填空（15 题）</h4>
+              <p class="tx en">Jennifer Mauer has needed more willpower than the typical college student to <u>&nbsp;41&nbsp;</u> her goal of earning a nursing degree...</p>
+              <div class="ln"></div><div class="ln"></div></div>
+            <div class="pno">版 1</div>
+          </div>
+          <div class="half">
+            <div class="g g2"><h4>二、完形填空（续）</h4>
+              <p class="tx en">41. A. pursue&nbsp;&nbsp;B. abandon&nbsp;&nbsp;C. describe&nbsp;&nbsp;D. question</p>
+              <div class="ln"></div><div class="ln s"></div></div>
+            <div class="g g3"><h4>三、Reading B（阅读理解 · 4 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+            <div class="pno">版 2</div>
+            <div class="straddle-note">▲ 完形跨版1→版2：同面并排，<b>不算断，无徽标</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-seam">翻面 ⟲ <span class="sugg" style="margin:0">跨页断篇（第2/3版，翻面）· 建议前置分页</span></div>
+
+      <div class="face">
+        <div class="face-label"><span class="chip">第 1 张 · 背面</span><span>版 3 + 版 4</span></div>
+        <div class="face-paper">
+          <div class="foldtag">对折线</div>
+          <div class="half">
+            <div class="g g3"><h4>三、Reading B（续）</h4><div class="ln"></div><div class="ln s"></div></div>
+            <div class="g g4"><h4>四、Reading C（阅读理解 · 3 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+            <div class="pno">版 3</div>
+          </div>
+          <div class="half">
+            <div class="g g4"><h4>四、Reading C（续）</h4><div class="ln"></div><div class="ln"></div></div>
+            <div class="g g5"><h4>五、Reading D（阅读理解 · 4 题）</h4><div class="ln"></div><div class="ln"></div><div class="ln s"></div></div>
+            <div class="pno">版 4</div>
+            <div class="straddle-note">▲ Reading C 跨版3→版4：同面并排，<b>不算断，无徽标</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-seam">换张 ✂ <span class="sugg" style="margin:0">跨页断篇（第4/5版，换张）· 建议前置分页</span></div>
+
+    <div class="sheet">
+      <div class="sheet-label">─── 第 2 张 A3 ───</div>
+      <div class="face">
+        <div class="face-label"><span class="chip">第 2 张 · 正面</span><span>版 5 + 版 6</span></div>
+        <div class="face-paper">
+          <div class="foldtag">对折线</div>
+          <div class="half">
+            <div class="g g5"><h4>五、Reading D（续）</h4><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+            <div class="pno">版 5</div>
+          </div>
+          <div class="half">
+            <div class="g g5"><h4>五、Reading D（续）</h4><div class="ln"></div><div class="ln s"></div></div>
+            <div class="pno">版 6</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-seam">翻面 ⟲ <span class="sugg" style="margin:0">跨页断篇（第6/7版，翻面）· 建议前置分页</span></div>
+
+      <div class="face">
+        <div class="face-label"><span class="chip">第 2 张 · 背面</span><span>版 7 + 留白</span></div>
+        <div class="face-paper">
+          <div class="foldtag">对折线</div>
+          <div class="half">
+            <div class="g g5"><h4>五、Reading D（续 · 末段）</h4><div class="ln"></div><div class="ln s"></div></div>
+            <div class="pno">版 7</div>
+          </div>
+          <div class="half blank">（此半面留白）</div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+  <div class="dp-card"><b>裁点 1 · 缩放策略</b>（顶栏可切）
+    <p>方案A 适宽缩排：面宽=现纸面宽，每版约 55%——看结构不看字。
+    <b>方案C 满幅拼版（owner 提出，改为默认推荐）</b>：拼版态突破居中窄容器、
+    用满屏宽，每版约 80-85% 原大——字可读、无横滚；窗口越窄字越小（笔记本
+    半屏时接近方案A）。方案B 原大横滚：字最大但要横向滚动。</p></div>
+  <div class="dp-card"><b>裁点 2 · 面语言</b>
+    <p>面标签「第 N 张 · 正面/背面」+ 中缝「对折线」虚线 + 面间「翻面 ⟲ / 换张 ✂」缝——建议徽标从版右上挪到它真正属于的位置：<b>断点所在的缝上</b>。措辞照现产品（跨页断篇…翻面/换张）。</p></div>
+  <div class="dp-card"><b>裁点 3 · 贴纸操作条与 rail</b>
+    <p>题组叠按钮（上移/下移/前置分页/移除）在拼版态照常挂在题组上（缩小随版）；右侧 rail 目录点击滚动到题组所在的<b>面</b>。本原型未画 rail，交互语言不变。</p></div>
+  <div class="dp-card"><b>裁点 4 · 适用范围</b>
+    <p>拼版只在 A3 对折态出现；A4 散页态维持现状单版大图。导出 PDF 仍按 A4 版序出（真 2-up 拼版 PDF 归刀E 后续，预览先行）。</p></div>
+</main>
+
+<script>
+  function setMode(m) {
+    document.getElementById('modeA4').classList.toggle('hidden', m !== 'a4');
+    document.getElementById('modeA3').classList.toggle('hidden', m !== 'a3');
+    document.getElementById('btnA4').classList.toggle('on', m === 'a4');
+    document.getElementById('btnA3').classList.toggle('on', m === 'a3');
+    document.getElementById('planToggle').style.visibility = m === 'a3' ? 'visible' : 'hidden';
+    document.getElementById('countBadge').textContent = m === 'a3' ? '共 7 版 · 对折 2 张 · A3' : '共 7 页 · 双面 4 张 · A4';
+  }
+  function setPlan(p) {
+    const s = document.getElementById('modeA3');
+    s.classList.toggle('planA', p === 'A');
+    s.classList.toggle('planC', p === 'C');
+    s.classList.toggle('planB', p === 'B');
+    document.getElementById('btnPlanA').classList.toggle('on', p === 'A');
+    document.getElementById('btnPlanC').classList.toggle('on', p === 'C');
+    document.getElementById('btnPlanB').classList.toggle('on', p === 'B');
+    const wrap = document.getElementById('a3wrap');
+    if (p === 'B' && !wrap.parentElement.classList.contains('planB-scroller')) {
+      const sc = document.createElement('div'); sc.className = 'planB-scroller';
+      wrap.parentElement.insertBefore(sc, wrap); sc.appendChild(wrap);
+    }
+  }
+</script>
+</body>
+</html>
