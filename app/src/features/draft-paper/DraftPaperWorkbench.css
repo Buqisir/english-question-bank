@@ -256,12 +256,28 @@
 /* 页数徽标「共 N 页 · 双面 M 张 · A4」常驻纸顶（plan.md 技术约束：N 从
    预览分页脚本产出后由父层读取真值，见 DraftPaperWorkbench.tsx 的
    iframe onLoad 处理）。 */
+/* print-form (plan.md Must Do 3): wraps the page-count badge + the A4/A3
+   segmented toggle on one row, centered together — 轻量版卷头切换 (no
+   settings page). */
+.draft-paper-meta-row {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 0 14px;
+}
+
 .draft-paper-meta {
   color: rgba(var(--paper-ink-rgb), 0.72);
   font-size: 12.5px;
   font-variant-numeric: tabular-nums;
-  margin: 0 0 14px;
+  margin: 0;
   text-align: center;
+}
+
+.draft-form-toggle button {
+  min-height: 26px;
+  padding: 4px 10px;
 }
 
 .draft-a4-sheet {
@@ -372,6 +388,28 @@
 .draft-group-actions button.danger:hover {
   border-color: color-mix(in srgb, var(--eqb-color-danger) 35%, var(--paper-border));
   color: var(--eqb-color-danger);
+}
+
+/* print-form (plan.md Must Do 5, PO-1 收账): quiet annotation pill, sits above
+   the icon-button cluster in the same absolutely-positioned column — width
+   grows to fit its own text since the column has no explicit width. Reuses
+   the primary token (not a hardcoded hex) so it stays green/teal in both
+   themes without a new palette entry. */
+.draft-group-actions .draft-group-suggestion {
+  background: color-mix(in srgb, var(--eqb-color-primary) 12%, var(--eqb-color-paper));
+  border: 1px solid color-mix(in srgb, var(--eqb-color-primary) 35%, var(--paper-border));
+  border-radius: 999px;
+  color: var(--eqb-color-primary-text);
+  cursor: pointer;
+  font-size: 11px;
+  height: auto;
+  padding: 4px 9px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.draft-group-actions .draft-group-suggestion:hover {
+  border-color: var(--eqb-color-primary);
 }
 
 /* 右 rail = 整卷页目录语言（参照 paperBrowsePage.css 的

@@ -92,6 +92,112 @@ export function draftPaperPaginationSignature(draftPaper, versionType) {
   })
 }
 
+// print-form (plan.md Must Do 2, owner 必答题拍板 2026-07-12: 魔法数字整套删除
+// — the word-count heuristic that used to live in this module
+// (buildPageBreakSuggestions/estimateEnglishWords, retired) is replaced by a
+// judgment derived from the ACTUAL rendered page layout instead of guessing
+// ahead of time. Two pure, independently-testable pieces:
+//
+//   1. evaluatePageBreakAcrossPages(firstPage, printForm) — the judgment
+//      function itself (owner-ratified semantics, 议题2 六裁点 +
+//      prototype-print-form-v2.html): given the earlier of two pages a
+//      question-group spans (`firstPage`), decide whether that specific
+//      page boundary is a REAL break for the given print form.
+//        - a4 (single-sided loose sheets): every page boundary is a break.
+//        - a3 (folded, double-sided, 2-up — 面对 = 版(1,2)/(3,4)/…, i.e. every
+//          physical A3 sheet holds 4 logical pages: 版(4k+1,4k+2) on its front
+//          face, 版(4k+3,4k+4) on its back face): a boundary is a break only
+//          when `firstPage` is even — odd->even (版1→版2, 版3→版4, …) is the
+//          SAME face, side by side, never a break. firstPage%4===2 (版2→版3,
+//          版6→版7, …) flips the same physical sheet over ("翻面");
+//          firstPage%4===0 (版4→版5, 版8→版9, …) moves to a new physical
+//          sheet ("换张").
+//   2. derivePageBreakSuggestions(paginatedHtml, {...}) — parses the ALREADY
+//      server-rendered, DOM-contract-tagged HTML (paginationDomContract.mjs's
+//      frozen `.preview-page` / `data-group-id` output — this function only
+//      ever consumes that finished contract, it never re-implements or
+//      second-guesses it) to find which question-groups actually span a page
+//      boundary, then applies (1) to each boundary.
+//
+// print_form deliberately never enters draftPaperPaginationSignature (plan.md
+// 裁点2: "A4/A3 不改排版，只改判据与计数") — suggestions are cheaply re-derived
+// from the cached paginatedHtml on every call, so a print-form toggle alone
+// never invalidates the render cache.
+export function evaluatePageBreakAcrossPages(firstPage, printForm) {
+  if (printForm === 'a3') {
+    if (firstPage % 4 === 2) {
+      return { broken: true, reason: `跨页断篇（第${firstPage}/${firstPage + 1}版，翻面）` }
+    }
+    if (firstPage % 4 === 0) {
+      return { broken: true, reason: `跨页断篇（第${firstPage}/${firstPage + 1}版，换张）` }
+    }
+    return { broken: false, reason: '' }
+  }
+  return { broken: true, reason: `跨页断篇（第${firstPage}/${firstPage + 1}页）` }
+}
+
+// Maps each `data-group-id` found in `paginatedHtml` to the ordered, unique
+// list of 1-based page numbers it appears on. Page boundaries are found the
+// same way paginationDomContract.mjs's own sanity check does (a plain
+// `.preview-page` container match, not a full DOM parse — this module never
+// re-parses the contract, only scans its already-frozen output), and content
+// is chunked between consecutive container matches (page N's chunk runs from
+// its own container's start to the next container's start, or end-of-string
+// for the last page) — page containers are top-level siblings in document
+// order, so this chunking is exact regardless of nested markup depth.
+// `<template>` blocks (paged.js's own inert "master copy" of every group,
+// tagged with the same data-group-id per paginationDomContract.mjs's own doc
+// comment) are stripped first so they can never be mistaken for a real page.
+function extractGroupPageSpans(paginatedHtml) {
+  const withoutTemplates = paginatedHtml.replace(/<template[^>]*>[\s\S]*?<\/template>/gi, '')
+  const pageStarts = []
+  const pageContainerRegex = /<div class="[^"]*\bpreview-page\b[^"]*"/g
+  let containerMatch
+  while ((containerMatch = pageContainerRegex.exec(withoutTemplates))) {
+    pageStarts.push(containerMatch.index)
+  }
+  const spans = new Map()
+  pageStarts.forEach((start, index) => {
+    const end = index + 1 < pageStarts.length ? pageStarts[index + 1] : withoutTemplates.length
+    const chunk = withoutTemplates.slice(start, end)
+    const pageNumber = index + 1
+    const groupIdsOnPage = new Set()
+    const groupIdRegex = /data-group-id="([^"]+)"/g
+    let groupMatch
+    while ((groupMatch = groupIdRegex.exec(chunk))) {
+      groupIdsOnPage.add(groupMatch[1])
+    }
+    for (const groupId of groupIdsOnPage) {
+      if (!spans.has(groupId)) spans.set(groupId, [])
+      spans.get(groupId).push(pageNumber)
+    }
+  })
+  return spans
+}
+
+// `itemsByGroupId` must be a Map<groupId, itemId> (non-groupMissing draft
+// items — the same filtered set the contract HTML's `data-group-id`s are
+// drawn from). Returns at most one suggestion per group (the first real
+// break it spans), matching the retired heuristic's one-suggestion-per-item
+// shape.
+export function derivePageBreakSuggestions(paginatedHtml, { itemsByGroupId, printForm } = {}) {
+  if (typeof paginatedHtml !== 'string' || !paginatedHtml) return []
+  const spans = extractGroupPageSpans(paginatedHtml)
+  const suggestions = []
+  for (const [groupId, pages] of spans) {
+    for (let i = 0; i < pages.length - 1; i += 1) {
+      if (pages[i + 1] !== pages[i] + 1) continue
+      const judged = evaluatePageBreakAcrossPages(pages[i], printForm)
+      if (judged.broken) {
+        const itemId = itemsByGroupId?.get(groupId)
+        if (itemId) suggestions.push({ itemId, groupId, reason: judged.reason })
+        break
+      }
+    }
+  }
+  return suggestions
+}
+
 // M0-1 user-data split: draft_papers / draft_paper_items now live in the user database
 // (userDb), while question groups / print-readiness live in the shared bank database
 // (bankDb). Methods that touch both sides receive `{ userDb, bankDb }` from their caller
@@ -214,6 +320,51 @@ export function createDraftPaperStore({
     studentLabelColumnReady = true
   }
 
+  // print-form (plan.md "Must Do 1"): same additive, lazy-ALTER pattern as
+  // student_label above — NULL reads as 'a4' (rowToDraftPaperSummary below is
+  // the single place that applies that default), and a new draft inherits the
+  // creating user's most-recently-updated draft's print_form (mostRecentPrintForm
+  // below), falling back to 'a4' when the user has no prior draft.
+  let printFormColumnReady = false
+  function ensurePrintFormColumn(userDb) {
+    if (printFormColumnReady) return
+    const hasPrintFormColumn = (db) =>
+      db.prepare('PRAGMA table_info(draft_papers)').all().some((row) => row.name === 'print_form')
+    if (hasPrintFormColumn(userDb)) {
+      printFormColumnReady = true
+      return
+    }
+    try {
+      userDb.exec('ALTER TABLE draft_papers ADD COLUMN print_form TEXT')
+    } catch (error) {
+      if (!/readonly|read-only/i.test(String(error?.message || error))) throw error
+      const migrationDb = openUserDatabase({ readOnly: false })
+      try {
+        if (!hasPrintFormColumn(migrationDb)) {
+          migrationDb.exec('ALTER TABLE draft_papers ADD COLUMN print_form TEXT')
+        }
+      } finally {
+        migrationDb.close()
+      }
+    }
+    printFormColumnReady = true
+  }
+
+  function normalizePrintForm(value) {
+    return value === 'a3' ? 'a3' : 'a4'
+  }
+
+  // "记住上次" (plan.md 裁点3): the newest-updated active draft belonging to
+  // this user, if any, donates its print_form to a freshly created draft.
+  function mostRecentPrintForm(userDb, userId) {
+    const row = userDb
+      .prepare(
+        `SELECT print_form FROM draft_papers WHERE user_id = ? AND status = 'active' ORDER BY updated_at DESC LIMIT 1`,
+      )
+      .get(userId)
+    return row ? normalizePrintForm(row.print_form) : 'a4'
+  }
+
   function getCurrentDraftPaperRow(userDb, userId) {
     requireUserId(userId)
     return userDb
@@ -243,14 +394,16 @@ export function createDraftPaperStore({
   function createDraftPaper({ userDb, bankDb }, userId, title = makeDraftPaperTitle()) {
     requireUserId(userId)
     ensureStudentLabelColumn(userDb)
+    ensurePrintFormColumn(userDb)
     const id = `draft-paper-${randomUUID()}`
+    const printForm = mostRecentPrintForm(userDb, userId)
     userDb.prepare('UPDATE draft_papers SET current_marker = 0 WHERE current_marker = 1 AND user_id = ?').run(userId)
     userDb.prepare(
       `
-      INSERT INTO draft_papers (id, user_id, title, subject, status, current_marker)
-      VALUES (?, ?, ?, 'english', 'active', 1)
+      INSERT INTO draft_papers (id, user_id, title, subject, status, current_marker, print_form)
+      VALUES (?, ?, ?, 'english', 'active', 1, ?)
       `,
-    ).run(id, userId, String(title || '').trim() || makeDraftPaperTitle())
+    ).run(id, userId, String(title || '').trim() || makeDraftPaperTitle(), printForm)
     return getDraftPaper({ userDb, bankDb }, userId, id)
   }
 
@@ -403,36 +556,6 @@ export function createDraftPaperStore({
     return inlineFigureImages(html, images)
   }
 
-  function estimateEnglishWords(text) {
-    return String(text || '').match(/[A-Za-z]+(?:['-][A-Za-z]+)?/g)?.length || 0
-  }
-
-  function buildPageBreakSuggestions(items) {
-    const suggestions = []
-    let previousEstimate = 0
-    for (const [index, item] of items.entries()) {
-      if (item.groupMissing) continue
-      const detail = getQuestionGroupDetail(item.groupId)
-      if (!detail) continue
-      const materialWords = estimateEnglishWords(`${detail.passage.materialText || ''}\n${detail.passage.summary || ''}`)
-      const optionCount = detail.questions.reduce((sum, question) => sum + question.options.length, 0)
-      const estimate = materialWords * 1.2 + detail.questions.length * 80 + optionCount * 12
-      let reason = ''
-      if ((detail.groupType === 'reading' || detail.groupType === 'seven_choices') && materialWords > 600) {
-        reason = '长篇材料超过 600 词'
-      } else if (detail.questions.length > 4 && optionCount > 16) {
-        reason = '题量和选项较多'
-      } else if (previousEstimate > 0 && estimate > 700 && previousEstimate + estimate > 1000) {
-        reason = '预计会超过当前 A4 页面 70%'
-      }
-      if (index > 0 && reason && !item.pageBreakBefore) {
-        suggestions.push({ itemId: item.id, groupId: item.groupId, reason })
-      }
-      previousEstimate = estimate
-    }
-    return suggestions
-  }
-
   function rowToDraftPaperSummary(row, itemRows = []) {
     return {
       id: row.id,
@@ -450,6 +573,9 @@ export function createDraftPaperStore({
       // (buildDraftPaperExportInput below never reads it) — see plan.md's hard
       // boundary: this field must never render onto the paper face.
       studentLabel: row.student_label || null,
+      // print-form (plan.md Must Do 1): 'a4' | 'a3', NULL (pre-migration rows,
+      // or a row inserted before this cut's default logic ever ran) reads as 'a4'.
+      printForm: normalizePrintForm(row.print_form),
     }
   }
 
@@ -515,10 +641,11 @@ export function createDraftPaperStore({
   function getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml = true, versionType = 'student' } = {}) {
     requireUserId(userId)
     ensureStudentLabelColumn(userDb)
+    ensurePrintFormColumn(userDb)
     const row = userDb
       .prepare(
         `
-        SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at, student_label
+        SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at, student_label, print_form
         FROM draft_papers
         WHERE id = ? AND user_id = ? AND status = 'active'
         `,
@@ -530,10 +657,14 @@ export function createDraftPaperStore({
     // below is safe to run unscoped (PA SW-2 — do not add user_id here, there is no
     // such column and it would be a no-op-shaped bug).
     const items = getDraftPaperItems({ userDb, bankDb }, draftPaperId)
+    // print-form (plan.md Must Do 2): the word-count heuristic that used to live
+    // here (buildPageBreakSuggestions) is retired — pageBreakSuggestions is no
+    // longer part of the draft GET response (it had zero front-end consumers;
+    // see plan.md 侦察事实). The real, pagination-derived replacement is computed
+    // in getDraftPaperPagination below, from the actual rendered page layout.
     const draftPaper = {
       ...rowToDraftPaperSummary(row, items),
       items,
-      pageBreakSuggestions: buildPageBreakSuggestions(items),
     }
     return {
       ...draftPaper,
@@ -547,10 +678,11 @@ export function createDraftPaperStore({
     const bankDb = openDatabase()
     try {
       ensureStudentLabelColumn(userDb)
+      ensurePrintFormColumn(userDb)
       const rows = userDb
         .prepare(
           `
-          SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at, student_label
+          SELECT id, title, subject, status, current_marker, last_printed_at, created_at, updated_at, student_label, print_form
           FROM draft_papers
           WHERE status = 'active' AND user_id = ?
           ORDER BY updated_at DESC, created_at DESC
@@ -710,6 +842,14 @@ export function createDraftPaperStore({
         if (Object.prototype.hasOwnProperty.call(input, 'studentLabel')) {
           const studentLabel = String(input.studentLabel || '').trim() || null
           userDb.prepare('UPDATE draft_papers SET student_label = ?, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(studentLabel, draftPaperId, userId)
+        }
+        // print-form (plan.md Must Do 1): 卷级 PATCH 白名单. Workbench header
+        // toggle only ever sends 'a4'/'a3' — anything else is a caller bug, fail
+        // loud rather than silently coercing (matches this store's other input
+        // validation style, e.g. addGroupToDraftPaper's ready.ok check).
+        if (Object.prototype.hasOwnProperty.call(input, 'printForm')) {
+          if (input.printForm !== 'a4' && input.printForm !== 'a3') throw new Error('printForm is invalid')
+          userDb.prepare('UPDATE draft_papers SET print_form = ?, updated_at = datetime(\'now\') WHERE id = ? AND user_id = ?').run(input.printForm, draftPaperId, userId)
         }
         if (Array.isArray(input.items)) {
           const knownItems = new Set(
@@ -1022,10 +1162,20 @@ export function createDraftPaperStore({
       if (!draftPaper) throw new Error('Draft paper not found')
       if (!draftPaper.items.length) throw new Error('请先添加题组')
 
+      // print-form (plan.md 裁点2): itemsByGroupId is built fresh from this call's
+      // own draftPaper read regardless of cache hit/miss — printForm never enters
+      // the signature below, so a print-form toggle alone must never invalidate
+      // (or need to invalidate) the render cache; suggestions are cheaply
+      // re-derived from whatever paginatedHtml this call ends up using.
+      const itemsByGroupId = new Map(
+        draftPaper.items.filter((item) => !item.groupMissing).map((item) => [item.groupId, item.id]),
+      )
+
       const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
       const cached = draftPaginationCacheGet(cacheKey)
       if (cached && cached.signature === signature) {
-        return { paginatedHtml: cached.paginatedHtml, pdfBytes: cached.pdfBytes, pageCount: cached.pageCount, draftPaper, reused: true }
+        const pageBreakSuggestions = derivePageBreakSuggestions(cached.paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm })
+        return { paginatedHtml: cached.paginatedHtml, pdfBytes: cached.pdfBytes, pageCount: cached.pageCount, draftPaper, pageBreakSuggestions, reused: true }
       }
 
       const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: normalizedVersionType })
@@ -1038,7 +1188,8 @@ export function createDraftPaperStore({
       const paginatedHtml = applyPaginationDomContract(rendered.paginatedHtml, { groupIds, pageCount: rendered.pageCount })
 
       draftPaginationCacheSet(cacheKey, { signature, paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount })
-      return { paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount, draftPaper, reused: false }
+      const pageBreakSuggestions = derivePageBreakSuggestions(paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm })
+      return { paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount, draftPaper, pageBreakSuggestions, reused: false }
     } finally {
       userDb.close()
       bankDb.close()

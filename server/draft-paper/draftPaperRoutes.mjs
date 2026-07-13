@@ -214,6 +214,9 @@ export function createDraftPaperRoutes() {
           paginatedHtml: result.paginatedHtml,
           pageCount: result.pageCount,
           reused: result.reused,
+          // print-form (plan.md Must Do 2): additive — real, pagination-derived
+          // replacement for the retired draftPaper.pageBreakSuggestions heuristic.
+          pageBreakSuggestions: result.pageBreakSuggestions,
         })
       } catch (error) {
         sendDraftMutationError(response, context, error)

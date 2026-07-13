@@ -59,14 +59,17 @@ assert('disabled state comes from print-ready failure', /if \(!printReady\.ok\) 
 assert('paper-asset detail feeds draft preview', server.includes('applyPaperAssetToQuestionGroupDetail'))
 assert('paper-asset detail maps options into print detail', server.includes('buildQuestionDetailsFromPaperAsset') && server.includes('option?.text'))
 
-const decisions = read('docs/cuts/C8-draft-paper-composer/decisions.md')
-const serverHeuristic = draftStore.slice(draftStore.indexOf('function buildPageBreakSuggestions'))
-assert('heuristic checks reading/seven choices 600 words', /reading[\s\S]{0,120}seven_choices[\s\S]{0,240}600/.test(serverHeuristic))
-assert('heuristic checks more than 4 questions and option count over 16', /questions\.length > 4[\s\S]{0,120}optionCount > 16/.test(serverHeuristic))
-assert('heuristic checks estimated block over 70 percent after previous estimate', /estimate > 700[\s\S]{0,160}previousEstimate/.test(serverHeuristic))
-assert('decisions define same 600-word rule', decisions.includes('over 600 English words'))
-assert('decisions define same option-count rule', decisions.includes('more than 4 questions') && decisions.includes('16'))
-assert('decisions define same 70 percent rule', decisions.includes('70% of one A4 page'))
+// print-form (docs/cuts/print-form/plan.md Must Do 2, owner 必答题拍板
+// 2026-07-12 "魔法数字整套删除"): the word-count heuristic this block used to
+// pin down (buildPageBreakSuggestions/estimateEnglishWords — 600/700/1000
+// magic numbers) is retired outright, replaced by a real pagination-derived
+// judgment (derivePageBreakSuggestions/evaluatePageBreakAcrossPages — see
+// scripts/verify-print-form.mjs for that contract's own behavioral coverage).
+// Assert the retirement is real and clean, not just renamed.
+assert('word-count heuristic function is gone', !draftStore.includes('function buildPageBreakSuggestions'))
+assert('word-count estimator helper is gone', !draftStore.includes('function estimateEnglishWords'))
+assert('no residual magic-number heuristic thresholds (600/700/1000 words) in draftPaperStore.mjs', !/materialWords > 600|estimate > 700|previousEstimate \+ estimate > 1000/.test(draftStore))
+assert('real pagination-derived suggestion judgment is present instead', draftStore.includes('function evaluatePageBreakAcrossPages') && draftStore.includes('function derivePageBreakSuggestions'))
 
 if (failed > 0) {
   console.error(`\nC8 print-ready gate verify FAILED: ${passed} passed, ${failed} failed`)

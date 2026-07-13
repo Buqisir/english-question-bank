@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Archive, ArrowDown, ArrowUp, FileDown, FolderPlus, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
-import type { DraftPaper, DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
+import type { DraftPaperItem, DraftPaperSummary, MySpaceFolder } from '../../domain/questionBank'
 import {
   deleteDraftPaperItem,
   downloadDraftPaperPdf,
@@ -13,6 +13,8 @@ import {
   patchDraftPaperItem,
   restoreDraftPaperItem,
   updateDraftPaper,
+  type DraftPaperWithForm,
+  type DraftPrintForm,
 } from '../../services/draftPapers'
 import {
   createMySpaceFolder,
@@ -79,7 +81,7 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
   const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, shellNav } = props
-  const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
+  const [draftPaper, setDraftPaper] = useState<DraftPaperWithForm | null>(null)
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
   const [studentLabelDraft, setStudentLabelDraft] = useState('')
@@ -136,6 +138,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [paginatedHtml, setPaginatedHtml] = useState('')
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [paginationError, setPaginationError] = useState('')
+  // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
+  // page-break suggestions, refreshed on every pagination fetch (including a
+  // print-form toggle alone — see the pagination-fetch effect's dependency
+  // list below). Quiet annotation only — never auto-applied (裁点5).
+  const [pageBreakSuggestions, setPageBreakSuggestions] = useState<Array<{ itemId: string; groupId: string; reason: string }>>([])
   const paginationRequestIdRef = useRef(0)
   const paginationDebounceRef = useRef<number | null>(null)
   // draft-desk-b step3 (MF-5, plan.md "步3"): per-group persistent overlay
@@ -155,7 +162,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setLoadError('')
     setMigrationNotice('')
     try {
-      let next: DraftPaper
+      let next: DraftPaperWithForm
       if (draftPaperId) {
         next = await fetchDraftPaper(draftPaperId)
       } else {
@@ -291,6 +298,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setPaginatedHtml('')
       setPaginationStatus('idle')
       setPaginationError('')
+      setPageBreakSuggestions([])
     }
     if (!draftPaper || draftPaper.items.length === 0) {
       resetPagination()
@@ -306,6 +314,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           setPaginatedHtml(result.paginatedHtml)
           setPaginationStatus('ready')
           setPaginationError('')
+          setPageBreakSuggestions(result.pageBreakSuggestions)
         })
         .catch((error) => {
           if (paginationRequestIdRef.current !== requestId) return
@@ -316,8 +325,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => {
       if (paginationDebounceRef.current) window.clearTimeout(paginationDebounceRef.current)
     }
+    // print-form (plan.md Must Do 3): a print-form toggle alone must still
+    // refresh pageBreakSuggestions (the a4/a3 判据 differs) even though it
+    // never changes paginatedHtml itself (server-side cache hit — printForm
+    // is deliberately excluded from the render signature, see
+    // draftPaperStore.mjs's getDraftPaperPagination doc comment).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType])
+  }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType, draftPaper?.printForm])
 
   const previewHtml = useMemo(() => buildA4PreviewHtml(paginatedHtml), [paginatedHtml])
 
@@ -579,6 +593,30 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       setSaveStatus('error')
       setSaveError(describeError('保存学生', error))
+    }
+  }
+
+  // print-form (plan.md Must Do 3, 裁点3): optimistic — the count-badge text
+  // and suggestion judgment both depend only on `draftPaper.printForm`, so
+  // flipping it locally first makes the badge switch format instantly (no
+  // paginated HTML re-render needed, only the interpretation changes); the
+  // pagination-fetch effect above still re-fetches to get fresh, server-derived
+  // pageBreakSuggestions for the new form. Reverts on a failed PATCH.
+  async function setPrintForm(nextForm: DraftPrintForm) {
+    if (!draftPaper || draftPaper.printForm === nextForm) return
+    const previous = draftPaper
+    setDraftPaper({ ...draftPaper, printForm: nextForm })
+    setSaveStatus('saving')
+    setSaveError('')
+    try {
+      const next = await updateDraftPaper(draftPaper.id, { printForm: nextForm })
+      setDraftPaper(next)
+      setSaveStatus('saved')
+      onDraftChanged?.()
+    } catch (error) {
+      setDraftPaper(previous)
+      setSaveStatus('error')
+      setSaveError(describeError('切换打印形态', error))
     }
   }
 
@@ -901,9 +939,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       <main className="draft-workbench-layout">
         <section className="draft-preview-desk" aria-label="A4 预览">
           <div className="draft-paper-col" ref={paperColRef}>
-            <p className="draft-paper-meta">
-              共 {pageCount} 页 · 双面 {Math.ceil(pageCount / 2)} 张 · A4
-            </p>
+            <div className="draft-paper-meta-row">
+              <p className="draft-paper-meta">
+                {draftPaper.printForm === 'a3'
+                  ? `共 ${pageCount} 版 · 对折 ${Math.ceil(pageCount / 4)} 张 · A3`
+                  : `共 ${pageCount} 页 · 双面 ${Math.ceil(pageCount / 2)} 张 · A4`}
+              </p>
+              {/* print-form (plan.md Must Do 3, 裁点3): 轻量版卷头切换— no
+                  settings page, no按张分组预览视图 (plan.md 裁点2 明拒). Same
+                  segmented-control language as the 学生版/教师版 toggle above. */}
+              <div className="draft-version-toggle draft-form-toggle" role="group" aria-label="打印形态">
+                <button
+                  type="button"
+                  className={draftPaper.printForm === 'a4' ? 'active' : ''}
+                  aria-pressed={draftPaper.printForm === 'a4'}
+                  onClick={() => void setPrintForm('a4')}
+                >
+                  A4 散页
+                </button>
+                <button
+                  type="button"
+                  className={draftPaper.printForm === 'a3' ? 'active' : ''}
+                  aria-pressed={draftPaper.printForm === 'a3'}
+                  onClick={() => void setPrintForm('a3')}
+                >
+                  A3 对折
+                </button>
+              </div>
+            </div>
             <div className="draft-a4-sheet" ref={a4SheetRef} style={{ height: `${nativeContentHeight * previewScale}px` }}>
               {draftPaper.items.length === 0 ? (
                 <div className="draft-a4-empty">请先添加题组</div>
@@ -958,8 +1021,27 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               if (anchorTop == null) return null
               const fullIndex = draftPaper.items.findIndex((entry) => entry.id === item.id)
               const canPageBreakBefore = fullIndex > 0
+              // print-form (plan.md Must Do 5, PO-1 收账): quiet annotation only —
+              // clicking applies the SAME PATCH the manual 前置分页 button below
+              // already sends (pageBreakBefore: true); the suggestion disappears on
+              // its own once the next pagination fetch resolves (signature change ->
+              // real re-render -> group no longer spans a page boundary). Never
+              // auto-applied (裁点5).
+              const suggestion = canPageBreakBefore
+                ? pageBreakSuggestions.find((entry) => entry.groupId === item.groupId)
+                : undefined
               return (
                 <div key={item.id} className="draft-group-actions" style={{ top: `${anchorTop}px` }}>
+                  {suggestion && (
+                    <button
+                      type="button"
+                      className="draft-group-suggestion"
+                      title={suggestion.reason}
+                      onClick={() => void togglePageBreak(item, true)}
+                    >
+                      建议前置分页 · 跨页断篇
+                    </button>
+                  )}
                   <button
                     type="button"
                     aria-label="上移"

@@ -24,12 +24,15 @@
 // paged.js already computed server-side and which this module must not
 // second-guess.
 //
-// PO-1 (owner 2026-07-12, plan.md "PO 决策"): page-break suggestions display is
-// DEFERRED this cut — `pageBreakSuggestions` is not read or injected here (no
-// quiet-annotation markup, named "break" + "-hint" in the retired client
-// pagination, split here for the same source-scan reason as above). The field
-// stays on the DraftPaper domain type/API response, just unconsumed by this
-// screen wrapper.
+// PO-1 (owner 2026-07-12, plan.md "PO 决策") — collected by the print-form cut
+// (docs/cuts/print-form/plan.md Must Do 5): page-break suggestions now render
+// as a quiet annotation badge, but NOT here — this module stays a thin,
+// purely presentational screen-CSS wrapper around the server's already-final
+// paginatedHtml string. The badge lives in DraftPaperWorkbench.tsx instead
+// (a React overlay anchored via the same groupAnchors mechanism the persistent
+// per-group action buttons already use), fed by `pageBreakSuggestions` on the
+// `/pagination` route response (server/draft-paper/draftPaperStore.mjs's
+// derivePageBreakSuggestions) — never injected into this HTML string.
 export function buildA4PreviewHtml(paginatedHtml: string): string {
   if (!paginatedHtml) return ''
   const previewCss = `
