@@ -135,7 +135,15 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // `.draft-undo-toast`, pushing its `#ffffff` from L486 to L524.
 // `.draft-export-menu-trigger`'s at L188 sits above both edited regions and
 // is unaffected.
-const WHITELISTED_LINES = new Set([188, 310, 524])
+// a3-imposition: re-pinned again — `.draft-paper-col.is-a3` and
+// `.draft-a4-sheet.is-a3` (both no new hex literal — no `#ffffff` in either)
+// were inserted above `.draft-a4-repaginating`, pushing its `#ffffff` from
+// L310 to L327; `.draft-seam-suggestion`/`.draft-seam-suggestion:hover`
+// (also no new hex literal — token references only) were inserted above
+// `.draft-undo-toast`, pushing its `#ffffff` from L524 to L564.
+// `.draft-export-menu-trigger`'s at L188 sits above every edited region and
+// is unaffected.
+const WHITELISTED_LINES = new Set([188, 327, 564])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
