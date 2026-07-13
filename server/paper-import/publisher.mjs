@@ -207,7 +207,6 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
         material_text = excluded.material_text,
         summary = excluded.summary,
         theme = excluded.theme,
-        discourse_type = excluded.discourse_type,
         word_count = excluded.word_count,
         difficulty = excluded.difficulty,
         note = excluded.note,
@@ -220,7 +219,14 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
       materialText,
       summary,
       '',
-      group.groupType,
+      // r1-genre-truth: discourse_type is real five-class genre truth (记叙/说明/
+      // 议论/应用/新闻), not the group's question-type name. New passages get NULL
+      // here (never group.groupType — that was the bug: it collided with the
+      // group_type column and got overwritten as fake genre data); the ON CONFLICT
+      // branch above no longer touches discourse_type at all, so re-publishing an
+      // existing passage never stomps its real genre classification. New passages
+      // need a genre-truth backfill pass (see docs/import/agent-runbook.md).
+      null,
       materialText.split(/\s+/).filter(Boolean).length,
       difficulty,
       `paperId=${paper.paperId}; groupId=${group.groupId}; assetVersion=${version}`,

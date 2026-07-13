@@ -1,0 +1,2459 @@
+[
+  {
+    "passageId": "passage-2020-bing-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称叙述个人经历和感悟，按时间顺序讲述与顾客的故事，结构骨架为叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-bing-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以艺术家经历的时间线为骨架，讲述其从骄傲到谦卑的转变过程，属典型叙事文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-bing-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍四个旅行线路的行程、景点和特色为主体，属于旅游产品说明文本。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-bing-reading-b",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体事件（首映抗议）为引，引用机构数据（非营利组织监控2000多部制作）和活动人士言论，采用第三人称播报腔，符合事件播报体骨架。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-bing-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "low",
+    "rationale": "以具体数据、研究报告和家庭案例为骨架，呈现多代同堂趋势，但缺乏明确日期和机构引语，结构介于新闻播报与说明之间。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-bing-reading-d",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体日期（On Thursday）+ 机构/研究人员引语 + 第三人称播报腔为骨架，报道新研究发现的进化适应事件。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-bing-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以客观介绍乔迁派对的定义、习俗、礼物建议和名称由来为主，结构为说明性解释，无时间线叙事或论点论证。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物Molai的成长经历和植树事件的时间线为骨架，属典型叙事文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "客观介绍博物馆的收藏、展示、功能与运营，以解释事物和现象为骨架，无时间线叙事或论点论证。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "文本为诗歌比赛公告，包含奖项、规则等固定格式，具有明确的交际目的，属于应用文体。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以Jennifer Mauer求学经历的时间线为骨架，叙述其克服困难最终毕业的故事，属典型人物经历叙事。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-reading-c",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以作者旅行经历的时间线和见闻为骨架，属第一人称游记式叙事。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究实验过程与数据解释社会影响对食量的作用，结构为客观介绍研究发现，属说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以提供公开演讲的原则和技巧为主体，结构为分点建议，属指南/贴士类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2020-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2020-ii-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历的时间线为骨架，按事件发展顺序叙述Grant救人过程，属典型叙事文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍《数字世界》丛书的内容、目的和结构为主体，属于百科式介绍文本。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍四个夏令营项目的内容与特色为骨架，属于说明文体。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称叙述教师生涯中处理学生违禁物品的经历，按时间顺序展开，有情节发展和情感变化，属典型叙事文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以介绍书籍内容、作者观点和工程失败案例为主，结构为客观说明，非事件播报或叙事。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍雨林物种、生态功能、降水数据为主，结构为解释事物与现象，无叙事时间线或论点论证。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分点建议形式解释如何与医生沟通，属于操作指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-ii-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2020-ii-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2020-jia-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物Scott Poore的经历和事件发展（搬进犬舍帮助狗被领养）为时间线骨架的叙事文本。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-jia-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "全文围绕“努力的价值”提出论点，并通过因果论证、条件分析层层推进，结构为典型说理文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-jia-reading-a",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以书评形式概述小说情节，但骨架是主人公James寻母的完整经历时间线，属人物经历叙事。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-jia-reading-b",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体事件播报为骨架，包含机构（报社）和官员/编辑引语，第三人称叙述，符合新闻文体特征。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-jia-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体时间（2019年5月、2019年4月）、机构引语（新加坡海关）和第三人称播报腔为骨架，报道纪录片发布与穿山甲贩卖事件。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-jia-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释研究结果、分析数据与假说为主体，客观介绍身心关联的科学发现，结构骨架为说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2020-jia-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以统计数据、专家引语和科学报告解释塑料污染现状与危害，结构为客观介绍而非叙事或论证。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述个人在工厂打工的经历与感悟，结构骨架为事件发展时间线。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称游览体验为主线，按登山过程展开，属游记/随笔类记叙文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍罗马旅社的设施、位置、价格等实用信息为主体，属指南/攻略类说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历和事件发展为骨架，按时间线叙述律师兼职翻谱员的故事，含具体事例和引语。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释鸭票法案的由来、运作机制和成效为主体，属客观介绍事物与数据的说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-reading-d",
+    "groupType": "reading",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "全文围绕对情商概念的澄清与评价展开，提出论点并逐层论证，结构为典型说理文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称叙述巴黎旅行经历，按时间线和见闻展开，属游记式记叙文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2021-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2021-ii-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历的时间线为骨架，叙述王警官伪装侦查的典型事件，属人物纪实叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历的时间线为骨架，讲述从七年级到后续的环保行动，属典型叙事文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍四个暑期活动的时间、内容、票价等实用信息为主体，结构为并列说明，无叙事或论证骨架。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述照顾幼虎的经历和感受，结构骨架为事件发展时间线。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体事件（获奖）为引，通过机构/人物引语（教师、艺术家、历史学家）和第三人称播报腔组织全文，符合新闻事件播报体骨架。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释机器人监测牛群健康的功能、原理和各方观点为目的，结构为客观介绍，无时间线叙事或明确论点论证。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分点建议形式介绍提高阅读速度的方法，属于操作指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-ii-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2021-ii-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2021-jia-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历的时间线为骨架，叙述Burchill因辣香肠引来海鸥导致被酒店禁入的事件，属典型叙事文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-jia-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称游览经历为时间线骨架，按访问、登墙、租车、骑行、停留的顺序叙事，属游记体记叙文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-jia-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "客观介绍摄影奖项的起源、地位与参赛范围，属于百科式说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-jia-reading-b",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体日期、机构官员引语和第三人称播报腔为骨架，报道犀牛幼崽诞生事件。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-jia-reading-c",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称按时间顺序叙述个人经历与情感变化，结构骨架为叙事线。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-jia-reading-d",
+    "groupType": "reading",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "开篇设问引出论点，通过研究证据和逻辑推理层层论证社会因素不应限制天才的认定，结构为典型说理文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-jia-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以操作指南/贴士为骨架，分步骤说明如何组织衣物交换活动，属说明文体。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述医院工作经历和患者故事，结构骨架为事件发展情节。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释生态旅游的定义、原则和实例为主体，结构为客观介绍，符合说明文体骨架。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍世界最大体育场的数据、容量和背景信息为主，结构为说明性列举，无时间线叙事或论点论证。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以调查数据为骨架，客观解释澳大利亚家庭仍保留座机的现象及原因，属说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以艺术家作品为例，客观介绍塑料污染数据与雕塑创作目的，结构为解释现象与数据，非事件播报或叙事。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究过程、数据分析和原理解释为主体，客观介绍噪声对创造性思维的影响，属说明文体。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2021-yi-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以引用专家观点开头，分点提供社交技巧与建议，结构为指南式说明，无时间线叙事或论点论证。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以家庭露营经历的时间线和具体事件为骨架，讲述过去发生的趣事和冒险，属于典型的叙事文本。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍大熊猫国家公园的规划、目标与功能为主体，属百科式说明文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍课程评分政策为目的，分项说明评分比例和规则，结构为说明文典型骨架。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-reading-b",
+    "groupType": "reading",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "以个人经历引出食物浪费问题，通过引用、数据论证其道德与环境影响，并提出解决方案，结构为论点+论证+建议。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-reading-c",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以项目缘起、老人参与体验、他人引语为时间线展开叙事，属事件报道式记叙。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究过程与因果解释为骨架，客观介绍饮食、咬合变化与语音演变的关系，属说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释如何寻找健身伙伴的方法和步骤为主体，属于操作指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2022-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2022-ii-cloze",
+    "groupType": "cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释房屋看管交换住宿这一新型经济模式为核心，客观介绍其运作方式与特点，结构为说明文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以Henry救人事件的时间线为骨架，按起因、经过、结果叙述，属典型叙事文本。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分项条目客观介绍博物馆团体游玩的规则、费用、流程等信息，属指南/说明性文本。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角叙述个人经历与感悟，按时间顺序展开事件，结构骨架为叙事。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体日期/引语（Mark Rosekind、Félix W. Ortiz）和第三人称播报腔为骨架，报道分心驾驶问题及Textalyzer立法动态。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究过程、数据对比和专家解释为主体，客观介绍运动对心脏健康的影响，属说明文结构。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释三种写作技巧为目的，按步骤分点说明操作方法，结构为客观介绍文本。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-ii-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2022-ii-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2022-jia-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称按时间顺序叙述与Steve因狗结缘的恋爱经历，事件发展为主线。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-jia-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物曹晟康徒步经历的时间线和事件发展为骨架，属典型人物经历叙事。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-jia-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍四个剧院的位置、特色、演出类型为主，结构为并列说明，无时间线叙事或论点论证。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-jia-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以实验过程与认知能力解释为主体，客观介绍凤头鹦鹉的形状识别能力，属百科式说明文。",
+    "batch": "reading-1",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-jia-reading-c",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历的时间线为骨架，从抵达南极、童年热爱旅行、职业生涯到2008年南极之旅的叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-jia-reading-d",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述在悉尼的见闻和对话，结构骨架为个人经历和事件发展。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-jia-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分点贴士形式客观介绍各国餐饮礼仪规则，属指南/攻略类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-cloze",
+    "groupType": "cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以实验过程与结果解释儿童捉迷藏行为背后的心理机制，结构为客观介绍研究发现，属说明文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体日期、机构引语和第三人称播报腔为骨架的事件播报体，符合新闻定义。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "文本为展览公告，包含展览介绍、讲座安排、开放时间、票价等实用信息，具有固定格式和明确交际目的。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以两位女孩1916年赴落基山脉支教的经历为时间线，叙述其动机、生活细节与结局，属人物经历叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释无人机在铁路巡检中的应用、原理和优势为主体，属客观介绍技术方案的说明文。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释糖税政策、数据、影响和行业反应为主体，结构为客观介绍而非事件播报或论证推进。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2022-yi-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分点贴士形式介绍保持远距离友谊的方法，结构为客观指导性说明，无叙事或论证骨架。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以时间线为骨架叙述Bailey帮助受伤跑者完成比赛的事件，属典型叙事文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称体验小笼包为主线，按品尝感受、历史渊源、品质评价、个人习惯展开，属典型美食随笔/记叙文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以介绍自行车租赁服务、价格和导览游信息为目的，结构为客观说明，无叙事或论点推进。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以John Todd从童年到成年的经历时间线为骨架，叙述其探索自然、构建生态机器的过程，属人物经历叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以介绍书籍结构、内容和操作方法为目的，客观说明各部分功能，无时间线叙事、无明确论点论证、无固定应用格式、无新闻事件播报。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释“群体智慧”现象、原理及新研究发现为主体，客观介绍实验与结论，属说明文结构。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以操作步骤和解释为主，提供通过写作练习实现自我原谅的方法指南，属于说明文体。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2023-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2023-ii-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述帮助运送宠物狗的经历，结构骨架为事件发展过程。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历和时间线（Since June 2017）为骨架，讲述作者在动物园教英语的故事，属典型记叙文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍黄石公园夏季护林员项目为目的，按项目分条说明时间、地点、内容，属指南/攻略体说明文。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-reading-b",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "low",
+    "rationale": "以具体项目为线索，包含直接引语和评价，但缺乏具体日期和机构播报腔，结构介于新闻特写与说明之间。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍书籍主题艺术展的选材、主题与象征意义为主，结构为解释性说明，无时间线叙事或论点论证。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究过程、数据分析和概念解释为骨架，客观介绍‘自然语言’编码及其意义，属说明文体。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以贴士/指南结构为主体，分点提供开始艺术之旅的建议，属于操作指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-ii-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2023-ii-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2023-jia-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称回忆购房后与邻居Mario的初次相遇及赠礼经历，按时间顺序展开叙事，结构骨架为事件发展。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-jia-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "文章客观介绍寓言形式的特点及卡森作品的风格与主题，结构为解释性说明，非叙事、议论或应用文体。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-jia-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍曼谷餐厅信息为目的，结构为分点推荐说明，无时间线叙事、无明确论点论证、无固定应用格式、无新闻播报体。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-jia-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以Terri Bolton的个人经历和时间线为骨架，讲述她学习DIY技能的过程和故事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-jia-reading-c",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历（13岁读哲学书、大学失去兴趣、重燃热爱）为时间线骨架，属个人体验叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-jia-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以灰熊种群数量变化、保护现状及预防措施为骨架，客观介绍事实与数据，属说明文。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-jia-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分点贴士/技巧为主体结构，解释如何培养耐心，属客观介绍方法的说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以Gabby Douglas的个人经历和时间线为骨架，叙述她为成为奥运冠军所做的牺牲与成功过程。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称摄影师视角叙述十年间多次访问北京的体验与感受，结构骨架为个人经历与观察的时间线。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍四位女医生生平事迹为骨架，按人物分条陈述事实，无时间线叙事或论点论证。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称叙述个人摄影经历与具体事件（如魔鬼湖拍摄），按时间顺序展开，结构骨架为叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以数据和研究结果解释英国烹饪习惯变化的现象，结构为客观介绍，非叙事或论证。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释历史研究方法为核心，客观阐述文本与实物结合的史学理念，结构为说明性论述，非叙事、议论或应用文体。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2023-yi-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以问答形式客观介绍室内植物的定义、益处和种植建议，属于解释事物和提供信息的说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历的时间线为骨架，叙述因他人成就而尝试跑步、骑行并最终领悟的过程。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "客观介绍温室建筑结构、功能及丝绸之路花园的植物与路径，以解释事物和展示信息为骨架，无时间线叙事或论点论证。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "志愿者招募告示，含分组、年龄、携带物品等实用信息和活动日程表，具有明确交际目的和固定格式。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以Farber医生从接触针灸到将其应用于动物的个人经历为时间线骨架，属人物经历叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释研究结论、分析原因和比较不同媒介学习效果为主体，属客观介绍与因果说明，无叙事时间线或论点论证推进。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究结果解释数据偏差问题为核心，客观介绍研究发现与改进建议，属说明文体。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以介绍词典使用方法和功能为主，结构为客观说明，无时间线叙事或论点论证。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2024-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2024-ii-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历时间线为骨架，讲述定居意大利的体验与感受，属典型记叙文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释汤显祖文化元素在莎士比亚故乡的展示与关联为主体，客观介绍事实与引语，无时间线叙事或论点论证。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "文本为活动日程公告，以分项列出时间、地点、时长等实用信息，具有固定格式和明确的告知目的。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-reading-b",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体项目启动时间、机构官员引语和第三人称播报腔为骨架，属于事件播报体。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文客观介绍BMF室内种植系统的功能、技术原理与环保优势，属百科式说明文。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以介绍书籍内容、作者背景和核心观点为主，属于客观介绍文本，结构为说明而非议论或记叙。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释问题、提供贴士/建议为骨架，属于客观介绍与操作指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-ii-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2024-ii-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2024-jia-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以祖母童年经历的时间线为骨架，通过第一人称视角叙述家庭晚餐时的回忆故事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-jia-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以1870年四人篝火夜谈的具体事件为时间线骨架，叙述黄石国家公园的起源故事。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-jia-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "文本为活动通知，包含邀请、活动介绍和参与方式，具有明确的交际目的和实用格式。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-jia-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释猫的叫声、嗅觉、送礼行为等习性为目的，客观介绍动物行为特征，结构为并列说明，无时间线或论点推进。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-jia-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍圣卢卡斯医疗列车的功能、运营方式、背景和现状为主，结构为说明事物，非事件播报或叙事。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-jia-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以个人经历引入后，主体转为介绍《Writer's Digest》杂志如何帮助作者写好结尾，属于客观介绍指南/攻略类文本。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2024-jia-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以解释适度饮食概念和提供具体操作方法为骨架，属于客观介绍与指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述搬家处理物品的经历，结构骨架为事件发展过程。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以客观介绍围棋文化展览为核心，解释围棋哲学、规则与艺术灵感，属说明文体。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分类解释不同交通工具的绿色燃料方案和排放数据为主体，属客观介绍，无时间线叙事或论点论证。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述教学经历与感悟，结构骨架为事件发展线。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-reading-c",
+    "groupType": "reading",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "文章提出明确论点（需重新思考街道角色），通过历史案例、数据对比和反问论证层层推进，结构为说理文骨架。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释研究方法和数据为主体，客观介绍煮沸过滤去除微塑料的原理与效果，属说明文。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历和日常细节为骨架，按时间线展开叙事，属人物特写类记叙文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2025-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2025-ii-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历时间线为骨架，讲述Evelyn Donohue从健康危机到健身转变的故事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历和感受为主线，按时间顺序叙述从美国到中国乡村的生活适应过程，属典型记叙文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍四个英国集镇特色与游览信息为主体，属百科式介绍文本。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物Kathy Ho的经历和引语为主线，按时间/场景展开叙事，结构骨架为人物故事而非说明或议论。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究引语和数据解释植物对身心健康的益处，结构为客观介绍现象与原理，属说明文。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释食物浪费现象、介绍wastED餐厅实验及数据为主体，结构为客观介绍而非事件播报或论点论证。",
+    "batch": "reading-2",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分点列举方式客观介绍志愿服务对家庭的益处，结构为说明性指南而非叙事或论证。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2025-ii-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2025-ii-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2026-i-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称成长经历和时间线为骨架，叙述对家乡认知的变化，属典型记叙文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释大集的时间、起源、功能等客观信息为主体，结构为百科式介绍，无叙事时间线或论点论证。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍场馆活动、酒店、停车规则为目的，结构为信息罗列与操作说明，无叙事时间线或论点论证。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以母子对话和词典经历为时间线，第一人称叙事，属人物经历记叙文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释树木释放异戊二烯导致臭氧污染的科学原理和数据分析为主体，属客观介绍现象与因果的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍心理学实验设计、数据结果与结论为主体，属解释现象与数据的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释AI在博物馆的应用功能（个性化、保护、教育）为骨架，客观介绍技术原理与作用，属说明文体。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-2026-i-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-2026-i-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-960d0f8d-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以摄影师个人经历、感受和创作过程的时间线为骨架，属第一人称体验式叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释纤维益处、摄入建议和注意事项为核心，属客观介绍知识的说明文结构。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "文本为促销广告，具有固定格式（标题、优惠码、价格、联系方式）和明确交际目的（推销产品），符合应用文体特征。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历（Griffy Whitman复兴校报）和时间线为骨架，属叙事文本。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍聊天机器人购物现状、各方反应和影响因素为主体，结构为现象解释与趋势分析，非事件播报或论点推进。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释VPP定义、工作原理、作用及现状的客观介绍为骨架，属百科式说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究数据解释团队运动对健康的益处，结构为客观介绍现象与原因，属说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-960d0f8d-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-960d0f8d-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称童年经历为时间线骨架，通过具体事件展开叙事，结尾引出感悟，符合记叙文特征。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以数据解释人口老龄化现象及其驱动因素，结构为客观介绍因果，符合说明文体骨架。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-reading-a",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称回忆童年图书馆经历，按时间线叙述人物互动与事件，结构骨架为叙事。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释奶酪盐水融冰的原理、优势与缺点为主体，属客观介绍事物的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究结果解释父亲对青少年毅力培养的作用，客观介绍研究发现与教养方式，结构为说明因果与特征。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释水资源重要性、现状问题及世界水日活动为目的，客观介绍事实与数据，结构为说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2020-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述牧羊人、羊和狗的一次意外事件，结构骨架为情节发展。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以时间顺序客观介绍农业技术发展及其影响，结构为解释事物演变，无情节或论点推进。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以编者身份客观介绍选编目的、剧作类型、剧作家信息及阅读建议，结构为说明性介绍，无叙事时间线或论点论证。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释自适应信号灯原理、效果及专家观点为主体，属客观介绍事物机制的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究数据解释认知刺激工作与大脑衰老的关系，结构为客观介绍研究发现与机制，非事件播报或论点论证。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称童年经历的时间线为骨架，叙述孤独、阅读、手工、户外活动等个人成长事件。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2020-jul-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称按时间顺序叙述志愿者经历，从决定、出发、工作到感悟，事件发展为主线。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究数据解释BMI趋势及城乡差异，结构为客观介绍现象与原因，属说明文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-reading-a",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以Saroo Brierley走失、被收养、寻亲到重逢的完整时间线为骨架，属典型人物经历叙事。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以数据、原因分析和建议为主体，解释儿童步行减少的现象与对策，属客观介绍与指南式说明。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以研究结果播报为骨架，包含具体机构/人物引语和第三人称报道腔，符合事件播报体特征。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释排队现象、概率和蛇形线原理为主体，属客观介绍因果与操作方法的说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2021-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以母亲购物经历的时间线为骨架，叙述事件经过与人物反应，属典型叙事文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以林肯故居的历史事实、建筑变迁和家庭生活为骨架，客观介绍其背景与细节，属说明文体。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-reading-a",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历时间线为骨架，按童年、早期奋斗、转折、晚年顺序叙述Nielsen的演艺生涯。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以David Bond的个人经历和时间线为骨架，讲述他如何发起Project Wild Thing的故事。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以研究结果播报为骨架，含具体研究机构引语和第三人称报道腔，属事件播报体。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物Paulo的经历、爱好发展及引语为主线，按时间顺序叙事，属人物经历记叙文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2021-jun-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历时间线为骨架，讲述Burdeyney从患病到筹款的过程，属第一人称体验叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体人物引语和事件播报为骨架，包含时间节点和第三人称叙述，符合新闻文体特征。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-reading-a",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历时间线为骨架，讲述Merebeth从失业到成为宠物运输专家的过程及个人感受。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以时间线为骨架，叙述蒸汽与电力革命的历史进程，并采用小说化叙事手法，符合记叙文体特征。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究数据、方法、结论解释运动与失智症关联，结构为客观介绍，非事件播报或论点论证。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以提建议、给方法为骨架，分点介绍如何高效利用时间，属指南/贴士类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2022-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-cloze",
+    "groupType": "cloze",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "以亲子信任为引子，提出论点并层层论证信任在亲子与职场关系中的重要性，结构为明确论点加论证推进的说理文。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释触觉绘画原理、神经可塑性研究和3D模型制作为主体，属客观介绍事物与现象的说明文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-reading-a",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述个人经历与感悟，结构骨架为人物经历时间线。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释微型森林的概念、起源、运作方式与益处为主体，属客观介绍事物原理的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-reading-c",
+    "groupType": "reading",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "开篇提出论点“适度工作也能成功”，随后通过研究、专家引语和论证层层推进，结构为典型说理文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "以写信引出论点“写作有目的”，并论证根据受众调整语言的重要性，结构为论点+论证推进。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2022-jun-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称视角按时间顺序叙述一次采蜜经历，结构骨架为事件发展过程。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以客观介绍胡同的历史、布局、社会阶层差异和文化意义为主体，属于百科式说明文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以分项说明营地时间、费用、结构、内容、人员等客观信息，属指南/告示类说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-reading-b",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以个人经历为引子，主体是提供在非支持家庭中践行零废弃生活的方法和建议，结构为指南/贴士体。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-reading-c",
+    "groupType": "reading",
+    "decision": "议论",
+    "confidence": "high",
+    "rationale": "以机器辩论为引，提出并论证“意义源于社会互动”的核心论点，层层推进说理。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释低影响太阳能开发策略、传粉昆虫栖息地等概念和现状为主体，属客观介绍文本。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以提供乘火车旅行建议为目的，采用分点贴士结构，属于操作指南类说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2023-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称旅行经历为时间线，叙述与当地人相遇、交流的过程和感悟，结构骨架为叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释超市促销策略对单人顾客的影响及包装趋势为主体，客观介绍现象与原因，属说明文结构。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-reading-a",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体演出信息、演员背景和机构引语为骨架，属事件播报体。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称经历的时间线为骨架，讲述电话亭的两次使用和社区图书馆的发现，属典型叙事文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-reading-c",
+    "groupType": "reading",
+    "decision": "新闻",
+    "confidence": "high",
+    "rationale": "以具体日期+机构/官员引语+第三人称播报腔为骨架，报道人工消雹争议事件。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以棉花糖实验为引，解释信息诱惑的机制与应对，结构为因果解释与类比说明，非叙事或论证推进。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释在线学习的注意事项和提供建议为主体，结构为分点说明，符合说明文体特征。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2024-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历时间线为骨架，讲述Ribeiro从决定到实践的过程，属第一人称体验叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释服装租赁服务的兴起、运作模式及社会背景为主，结构为客观介绍现象与趋势，属说明文体。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-reading-a",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以客观介绍馆际互借服务的规则、流程、费用等为目的，结构为分点说明，无时间线叙事、论点论证或事件播报。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称童年经历和育儿体验的时间线为骨架，属个人叙事文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "全文以解释矩阵园艺的概念、起源、设计原则和生态效益为主体，属于客观介绍事物的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究结果和数据解释性别化产品对用户依恋的影响，结构为客观介绍研究发现，非叙事或论证。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以提供沟通技巧和贴士为主体，结构为分点建议，属说明文中的指南/攻略体。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2025-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-cloze",
+    "groupType": "cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以人物经历时间线为骨架，讲述Ursula从求职受挫到创业成功的故事，属典型人物经历叙事。",
+    "batch": "cloze",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-grammar-fill",
+    "groupType": "grammar_cloze",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称回忆童年与母亲互动的具体事件为时间线骨架，属典型记叙文。",
+    "batch": "grammar-fill",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-reading-a",
+    "groupType": "reading",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "文本为公开征集艺术家的公告，包含项目说明、时间线、申请要求等实用信息，具有明确的交际目的和固定格式。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-reading-b",
+    "groupType": "reading",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "以第一人称叙述个人教学经历与感悟，按时间顺序展开，结构骨架为叙事而非说理或说明。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-reading-c",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以研究结果和数据解释虚假评论现象及消费者心理，结构为客观介绍研究发现，属说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-reading-d",
+    "groupType": "reading",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释SLEAP工具原理、应用及植物根系表型分析流程为核心，属客观介绍科技方法的说明文。",
+    "batch": "reading-3",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-seven-choices",
+    "groupType": "seven_choices",
+    "decision": "说明",
+    "confidence": "high",
+    "rationale": "以解释回归现象、原因及应对方法为主体，属客观介绍与指导，结构为说明文。",
+    "batch": "seven-choices",
+    "source": "ai"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-writing-application",
+    "groupType": "writing",
+    "decision": "应用",
+    "confidence": "high",
+    "rationale": "规则批：title=应用文写作 → 应用（写作材料本身的体裁，非答题体裁）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  },
+  {
+    "passageId": "passage-zj-2026-jan-writing-continuation",
+    "groupType": "writing",
+    "decision": "记叙",
+    "confidence": "high",
+    "rationale": "规则批：title=读后续写 → 记叙（续写材料延续故事情节骨架）。",
+    "batch": "rule-writing",
+    "source": "rule"
+  }
+]

@@ -241,7 +241,6 @@ const TOPIC_LABEL_TAXONOMY = [
   ...makeTopicLabels('人与自然', '环境保护', [
     '自然遗产保护',
     '人与环境',
-    '生态环境',
     '国土安全',
     '人类生存与环境的关系',
     '社会发展与环境的关系',
@@ -595,8 +594,8 @@ TOPIC_SUBTOPIC_ALIASES.set(topicSubtopicAliasKey('人与自然', '自然环境�
   ...makeTopicAliasTargets('人与自然', '环境保护', ['自然遗产保护']),
 ])
 TOPIC_SUBTOPIC_ALIASES.set(topicSubtopicAliasKey('人与自然', '人与环境、人与动植物、生态环境、国土安全'), [
-  ...makeTopicAliasTargets('人与自然', '自然生态', ['人与动植物']),
-  ...makeTopicAliasTargets('人与自然', '环境保护', ['人与环境', '生态环境', '国土安全']),
+  ...makeTopicAliasTargets('人与自然', '自然生态', ['人与动植物', '生态环境']),
+  ...makeTopicAliasTargets('人与自然', '环境保护', ['人与环境', '国土安全']),
 ])
 addTopicSubtopicAlias('人与自然', '自然灾害与防范，安全常识与自我保护', '灾害防范', ['自然灾害与防范', '安全常识', '自我保护'])
 addTopicSubtopicAlias('人与自然', '人类生存、社会发展与环境的关系', '环境保护', ['人类生存与环境的关系', '社会发展与环境的关系'])
