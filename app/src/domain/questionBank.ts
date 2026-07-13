@@ -622,7 +622,7 @@ export type SimilarQuestionReasonKind =
   | 'topic-match'
   | 'pos-density'
   | 'secondary'
-  | 'position-proxy'
+  | 'position-slot'
   | 'topic-diff'
 
 export type SimilarQuestionReason = {

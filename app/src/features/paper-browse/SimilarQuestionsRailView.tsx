@@ -8,11 +8,10 @@
  * (docs/cuts/similar-questions/prototype.html, owner 拍板 2026-07-10).
  *
  * CR 硬交接 (docs/cuts/similar-engine/cr.md) 处置 — 落在这个文件里:
- *   - SW-1: 恒真 reason 不渲染。`discourse_type` 在真实数据里 ≡
- *     `group_type`（同池恒定），引擎对 cloze 候选恒发 `同体裁 X`
- *     （kind: 'secondary', label 以 "同体裁" 开头）——白名单渲染时按这个
- *     label 前缀过滤掉，其余 kind 一律照渲染（含 reading 的
- *     position-proxy，那个 label 混了词数邻近度，不是纯常量）。
+ *   - SW-1（engine-rewire 撤刀，2026-07-13）: 曾经按 "同体裁" label 前缀过滤
+ *     cloze secondary reason 的恒真过滤器函数已摘除。真值落库后
+ *     `discourse_type` 不再 ≡ `group_type`（不再恒定），cloze 的 `同体裁 X`
+ *     chip 重新变成有效信号，reasons 全量渲染。
  *   - SW-2: `matchedQuestionIds` 可能为空——"含 N 题" 前缀 chip 只在非空时
  *     渲染，不假设非空。
  *   - SW-3: `questionGroupById` 查不到的候选 = thin（paper-asset 已解析、
@@ -49,22 +48,13 @@ export type SimilarQuestionsRailViewProps = {
   toastMessage: string | null
 }
 
-// SW-1: the one constant-discourse reason shape the E1 CR flagged (cloze's
-// `secondary` term — DB discourse_type ≡ group_type in the same pool, so
-// this reads "同体裁" on every candidate, zero区分度). Everything else the
-// engine emits is a real signal and renders as a chip.
-function isConstantDiscourseReason(reason: SimilarQuestionReason): boolean {
-  return reason.kind === 'secondary' && reason.label.startsWith('同体裁')
-}
-
 function renderChips(matchedQuestionIds: string[], reasons: SimilarQuestionReason[]): ReactNode {
-  const visibleReasons = reasons.filter((reason) => !isConstantDiscourseReason(reason))
   return (
     <div className="similar-rcard-chips">
       {matchedQuestionIds.length > 0 && (
         <span className="similar-chip similar-chip--hit">含 {matchedQuestionIds.length} 题</span>
       )}
-      {visibleReasons.map((reason, index) => (
+      {reasons.map((reason, index) => (
         <span key={`${reason.kind}-${index}`} className="similar-chip similar-chip--hit">
           {reason.label}
         </span>

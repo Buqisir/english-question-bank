@@ -1672,11 +1672,9 @@ assert(
   'similarView is not reset inside selectLectureQuestion, or is wrongly coupled to the scroll-away clear effect',
 )
 assert(
-  '55. SimilarQuestionsRailView suppresses the SW-1 constant-discourse reason (cloze secondary term, label starts with "同体裁" — DB discourse_type ≡ group_type in the same pool, zero区分度) before rendering chips',
-  /function isConstantDiscourseReason[\s\S]*?reason\.kind === 'secondary' && reason\.label\.startsWith\('同体裁'\)/.test(
-    railViewSrc,
-  ) && /visibleReasons = reasons\.filter\(\(reason\) => !isConstantDiscourseReason\(reason\)\)/.test(railViewSrc),
-  'missing the SW-1 constant-discourse reason filter',
+  '55. (engine-rewire 撤刀) SimilarQuestionsRailView no longer suppresses the SW-1 constant-discourse reason — 真值落库后 discourse_type 不再恒真, isConstantDiscourseReason is fully removed and reasons render unfiltered',
+  !/isConstantDiscourseReason/.test(railViewSrc) && /\{reasons\.map\(\(reason, index\) =>/.test(railViewSrc),
+  'expected isConstantDiscourseReason to be removed and reasons.map to render the full reasons array unfiltered',
 )
 assert(
   '56. SW-2: the "含 N 题" matchedQuestionIds chip only renders when matchedQuestionIds.length > 0 — no assumption of non-empty',
