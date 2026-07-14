@@ -62,7 +62,7 @@ const DEEPSEEK_SEMANTIC_RERANK_PROMPT = `你是高中英语题库语义检索重
 规则：
 1. 优先理解语义，不要只看字面词。
 2. 重点看题组标题、篇章标题、摘要、命中题干、答案提示、标签、话题标签。
-3. 候选都不匹配时，也必须返回最相关的候选。
+3. 只返回与检索意图真正相关的候选；候选都不相关时返回空 rankings []，不要为凑数返回无关候选。
 4. score 是 0 到 1 之间的小数，越大越相关。
 5. reason 控制在 30 字以内，说明最关键的匹配点。
 6. 只返回 JSON 对象，不要 markdown 代码块，不要额外说明。
@@ -123,7 +123,15 @@ function normalizeSemanticSearchRankings(payload) {
     .filter(Boolean)
 }
 
-function buildSemanticSearchMatchesFromRankings(candidates, rankings, candidateById, scoreFromRanking) {
+// C1b/C1c (trust-cracks plan): when the LLM response has a rankings shape (even an empty
+// array), that response is trusted completely — unranked candidates are NOT appended back
+// (appendUnranked: false) and entries whose normalized rankingScore falls below the 0.25
+// floor are dropped outright (scoreFloor), so an all-irrelevant candidate pool collapses to
+// an honest empty matches array. When the LLM response failed to parse into a rankings shape,
+// the caller passes appendUnranked: true / scoreFloor: null — the pre-cut "candidates appended
+// in prefilter order" fallback behavior, unchanged.
+function buildSemanticSearchMatchesFromRankings(candidates, rankings, candidateById, scoreFromRanking, options = {}) {
+  const { appendUnranked = true, scoreFloor = null } = options
   const seenIds = new Set()
   const rankedMatches = []
 
@@ -135,6 +143,8 @@ function buildSemanticSearchMatchesFromRankings(candidates, rankings, candidateB
     const rankingScore =
       ranking.score === null ? defaultRankScore : clamp01(ranking.score > 1 ? ranking.score / 100 : ranking.score)
 
+    if (scoreFloor !== null && rankingScore < scoreFloor) return
+
     seenIds.add(candidate.group.id)
     rankedMatches.push({
       ...candidate,
@@ -144,11 +154,13 @@ function buildSemanticSearchMatchesFromRankings(candidates, rankings, candidateB
     })
   })
 
-  candidates.forEach((candidate) => {
-    if (!seenIds.has(candidate.group.id)) {
-      rankedMatches.push(candidate)
-    }
-  })
+  if (appendUnranked) {
+    candidates.forEach((candidate) => {
+      if (!seenIds.has(candidate.group.id)) {
+        rankedMatches.push(candidate)
+      }
+    })
+  }
 
   return rankedMatches
 }
@@ -443,6 +455,19 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMo
     maxTokens: 1800,
     thinkingMode: thinkingMode,
   })
+  // C1b: trust the LLM response completely when it parsed into a rankings shape (including
+  // an empty array — that's an honest "nothing relevant"). Only fall back to appending
+  // unranked candidates when the response failed to parse at all (no rankings/matches/results
+  // array field, and not itself an array).
+  const parsedPayload = deepSeekResult.parsed
+  const hasRankingsShape =
+    parsedPayload !== null &&
+    parsedPayload !== undefined &&
+    (Array.isArray(parsedPayload) ||
+      Array.isArray(parsedPayload.rankings) ||
+      Array.isArray(parsedPayload.matches) ||
+      Array.isArray(parsedPayload.results))
+
   const deepSeekRankings = normalizeSemanticSearchRankings(deepSeekResult.parsed)
   const candidateById = new Map(candidatePool.map((candidate) => [candidate.group.id, candidate]))
   const matches = buildSemanticSearchMatchesFromRankings(
@@ -450,6 +475,7 @@ async function semanticSearchQuestionGroups(query, apiKey, requestId, thinkingMo
     deepSeekRankings,
     candidateById,
     (candidate, rankingScore) => clamp01(0.35 * candidate.score + 0.65 * rankingScore),
+    { appendUnranked: !hasRankingsShape, scoreFloor: hasRankingsShape ? 0.25 : null },
   ).slice(0, SEMANTIC_SEARCH_TOP_K)
 
   return {

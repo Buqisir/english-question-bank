@@ -284,6 +284,12 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // setters exist in this scope. The ref is wired up below as soon as the
   // dependent state is in place.
   const draftEditedHandlerRef = useRef<(reason: PaperDraftEditReason) => void>(() => {})
+  // C3a (trust-cracks) — `openDetail` is a plain function redeclared every
+  // render (not a useCallback), so the boot mount-effect and the popstate
+  // handler below reach it through this always-current ref instead of
+  // listing it as a hook dependency (which would either resubscribe on
+  // every render or go stale).
+  const openDetailRef = useRef<(id: string, opts?: { writeUrl?: boolean }) => void>(() => {})
   const paperDraft = usePaperDraft({
     onDraftEdited: (reason) => draftEditedHandlerRef.current(reason),
   })
@@ -526,7 +532,29 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     void addGroupsToBasket([group])
   }
 
-  async function openDetail(id: string) {
+  // C3a (trust-cracks) — 详情进 URL: `?view=detail&groupId=<id>` via
+  // pushState (a real navigation — Back should retreat to the list), mirrors
+  // `openPaperBrowse`'s pattern. `opts.writeUrl` defaults to true for normal
+  // in-app calls (ConciergeGroupCard's 详情 link/click, App's own onOpenDetail
+  // wiring); boot (mount effect below) and the popstate replay both pass
+  // `writeUrl: false` so they don't push a second, redundant history entry
+  // for a navigation the browser itself already recorded.
+  async function openDetail(id: string, opts?: { writeUrl?: boolean }) {
+    const writeUrl = opts?.writeUrl !== false
+    if (writeUrl && typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.set('view', 'detail')
+        url.searchParams.set('groupId', id)
+        for (const param of ['draftPaperId', 'focusGroupId', 'paperId', 'questionId', 'lecture', 'similar']) {
+          url.searchParams.delete(param)
+        }
+        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+      } catch {
+        // URL rewrite is best-effort; the state flip below is what actually
+        // shows the detail view.
+      }
+    }
     aiRunIdRef.current += 1
     setViewMode('detail')
     setDetailStatus('loading')
@@ -595,9 +623,44 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
+  // C3a — leaving the detail view is likewise a real URL transition: strip
+  // `view`+`groupId` via replaceState (a precision revert, not a new history
+  // entry — the pushState from openDetail is what Back should already
+  // retreat through).
   function backToList() {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('view')
+        url.searchParams.delete('groupId')
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
     setViewMode('list')
   }
+
+  // Keep the ref pointed at this render's openDetail closure (see the ref's
+  // declaration comment above).
+  useEffect(() => {
+    openDetailRef.current = openDetail
+  })
+
+  // C3a — boot auto-open: if the page loaded directly on `?view=detail
+  // &groupId=<id>` (a refresh, a shared link, a new tab from a mid-click),
+  // replay that into the detail view once at mount. `writeUrl: false` — the
+  // URL already says this, so don't push a second history entry for it.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('view') !== 'detail') return
+    const groupId = params.get('groupId')
+    if (!groupId) return
+    openDetailRef.current(groupId, { writeUrl: false })
+  }, [])
 
   async function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
     if (!window.confirm(`删除「${detail.title}」？题组会从题库和草稿卷里移除，不可恢复。`)) return
@@ -772,6 +835,9 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
       const url = new URL(window.location.href)
       url.searchParams.set('view', 'draft-paper')
+      // C3b — clear groupId when navigating away from the detail view so it
+      // doesn't linger as an orphan param on an unrelated route.
+      url.searchParams.delete('groupId')
       if (draftPaperId) {
         url.searchParams.set('draftPaperId', draftPaperId)
       } else {
@@ -828,6 +894,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       const url = new URL(window.location.href)
       url.searchParams.set('view', 'paper-browse')
       url.searchParams.set('paperId', paperId)
+      // C3b — clear groupId when navigating away from the detail view.
+      url.searchParams.delete('groupId')
       if (focusGroupId) {
         url.searchParams.set('focusGroupId', focusGroupId)
       } else {
@@ -960,6 +1028,20 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         similar: params.get('similar') === '1',
       })
       setCurrentPiRoute({ kind: 'none' })
+      // C3a — replay the detail view the same way boot does (writeUrl:
+      // false — the browser already owns this history entry). Any other
+      // `view` value (including none, i.e. back to the plain list) falls
+      // through to 'list'; the routes set above already take render
+      // precedence over viewMode when one of them is active.
+      if (view === 'detail') {
+        const groupId = params.get('groupId')
+        setViewMode('detail')
+        if (groupId) {
+          openDetailRef.current(groupId, { writeUrl: false })
+        }
+      } else {
+        setViewMode('list')
+      }
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
@@ -971,6 +1053,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       url.searchParams.set('view', 'my-space')
       url.searchParams.delete('draftPaperId')
       url.searchParams.delete('focusGroupId')
+      // C3b — clear groupId when navigating away from the detail view.
+      url.searchParams.delete('groupId')
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })

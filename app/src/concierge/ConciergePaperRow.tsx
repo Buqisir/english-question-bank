@@ -65,22 +65,47 @@ function buildSourceTypeLabel(paper: PaperResult): string {
  * doesn't visually double up with the year column. Not a hard guarantee —
  * a paperName that embeds the year in an unrecognized shape will still show
  * it once in the headline (Should Watch, not hard-scrubbed per plan).
+ *
+ * C5a (trust-cracks) — the year token is sometimes followed by a `.M` month
+ * digit ("26.3重庆市…"), which the old separator-only strip left as a bare
+ * leading digit ("3重庆市…", read as a stray "3"). We now capture that month
+ * digit explicitly and rewrite it as "M月" instead of dropping or leaving it
+ * bare — "26.3重庆市…" → "3月重庆市…".
  */
 function stripLeadingYearToken(paperName: string, year: number | null): string {
   if (!year) return paperName
   const full = String(year)
   const short = full.slice(2)
   const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const pattern = new RegExp(`^\\s*(?:${escape(full)}|${escape(short)})[.\\-年\\s]*`)
-  const stripped = paperName.replace(pattern, '').trim()
-  return stripped || paperName
+  const pattern = new RegExp(`^\\s*(?:${escape(full)}|${escape(short)})(?:\\.(\\d{1,2}))?[.\\-年\\s]*`)
+  const match = paperName.match(pattern)
+  if (!match) return paperName
+  const month = match[1]
+  const rest = paperName.slice(match[0].length).trim()
+  if (!rest) return paperName
+  return month ? `${Number(month)}月${rest}` : rest
 }
 
+/**
+ * C5b (trust-cracks) — 卷名结巴: dedupe `region` against the (year-stripped)
+ * `paperName` before joining them. Real卷名 frequently already embed the
+ * region ("全国甲卷" paperName + "全国甲卷" region, or "新课标Ⅰ卷" paperName +
+ * "全国新课标Ⅰ" region) — prefixing region again reads as a stutter
+ * ("全国甲卷 全国甲卷"). We compare `name` (with a trailing "卷" stripped, so
+ * "新课标Ⅰ卷" contributes its "新课标Ⅰ" core) against `region` in both
+ * directions: either containing the other counts as overlap, and when it
+ * does we show only the paperName. No overlap → keep the existing
+ * "region 卷名" shape.
+ */
 function buildHeadline(paper: PaperResult): string {
   if (paper.isFallback) return '其他来源'
-  const region = paper.region ? `${paper.region} ` : ''
-  const name = stripLeadingYearToken(paper.paperName, paper.year)
-  return `${region}${name}`.trim()
+  const name = stripLeadingYearToken(paper.paperName, paper.year).trim()
+  const region = (paper.region || '').trim()
+  if (!region) return name
+  if (!name) return region
+  const core = name.endsWith('卷') ? name.slice(0, -1) : name
+  const overlaps = core.length > 0 && (name.includes(region) || region.includes(core))
+  return overlaps ? name : `${region} ${name}`.trim()
 }
 
 /**
@@ -198,10 +223,20 @@ export type ConciergePaperRowProps = {
    * browsing — nothing was searched, so the badge must not claim a hit.
    */
   variant?: 'search' | 'feed'
+  /**
+   * C7 (trust-cracks) — 搜索结果年份列去复读: when this row directly follows
+   * another row with the same year in a flat search list, the desk passes
+   * `hideYear` so the year column renders blank instead of repeating the
+   * digits down the column. The row's aria-label always carries the year
+   * regardless (see below), so a screen reader loses nothing. Ignored for
+   * `variant='feed'` (feed rows already don't render the year column at all —
+   * they're grouped under a year head instead).
+   */
+  hideYear?: boolean
 }
 
 export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
-  const { paper, expanded, basketIds, onTogglePaper, onAdd, onOpenDetail, onOpenPaperBrowse, variant = 'search' } = props
+  const { paper, expanded, basketIds, onTogglePaper, onAdd, onOpenDetail, onOpenPaperBrowse, variant = 'search', hideYear = false } = props
   const rowPaperId = onOpenPaperBrowse ? findRowPaperId(paper) : null
 
   const headline = buildHeadline(paper)
@@ -255,7 +290,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     >
       {variant !== 'feed' && (
         <div className="concierge-paper-year" aria-hidden="true">
-          {paper.year ?? '—'}
+          {hideYear ? '' : paper.year ?? '—'}
         </div>
       )}
 

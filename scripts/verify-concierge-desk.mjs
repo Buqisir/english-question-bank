@@ -329,7 +329,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   // `filteredPaperResults` (paperResults narrowed by the chip filter layer,
   // see filters.ts) instead of `paperResults` directly — same underlying
   // PaperResult[] shape, filtered client-side before render.
-  assert('Desk maps (filtered)paperResults', /[Pp]aperResults\.map\(\(paper\)/.test(deskSource), '')
+  // C7 (trust-cracks): the search-results map callback now also takes an
+  // `index` (to compute hideYear for consecutive same-year rows) — the
+  // assertion tolerates an optional `, index`.
+  assert('Desk maps (filtered)paperResults', /[Pp]aperResults\.map\(\(paper(?:,\s*index)?\)/.test(deskSource), '')
   assert('Desk does NOT map state.hits directly', !/state\.hits\.map\(/.test(deskSource), '')
   assert('Desk uses ConciergePaperRow', /<ConciergePaperRow\b/.test(deskSource), '')
   assert('Desk passes basketIds to row', /basketIds=\{basketIds\}/.test(deskSource), '')
@@ -908,6 +911,178 @@ console.log('\nTest 20: filters.ts topicGroup — 多值 distinct 计数 + OR �
   const faceted = buildFacetedFilterOptions(groups, { groupType: 'reading' })
   const fSci = faceted.topicGroup.find((o) => o.value === '科学技术')
   assert('faceted 多值不重复计：科学技术仍=2', Boolean(fSci) && fSci.count === 2, `got ${fSci && fSci.count}`)
+}
+
+// ------------------------------------------------------------------ Test 23
+console.log('\nTest 23: C4 筛选进 URL — Desk reads f.* on mount, writes back via replaceState')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const deskSource = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+
+  assert('Desk imports useEffect (needed for the URL-write effect)', /import\s*\{[^}]*\buseEffect\b[^}]*\}\s*from\s*['"]react['"]/.test(deskSource), '')
+  assert(
+    'filters initializer reads f.groupType from URL',
+    /params\.get\(['"]f\.groupType['"]\)/.test(deskSource),
+    '',
+  )
+  assert(
+    'filters initializer reads f.year and guards with Number.isFinite (illegal year ignored, not crashed)',
+    /params\.get\(['"]f\.year['"]\)/.test(deskSource) && /Number\.isFinite\(year\)/.test(deskSource),
+    '',
+  )
+  for (const dim of ['f.region', 'f.sourceType', 'f.topicGroup']) {
+    assert(`filters initializer reads ${dim} from URL`, deskSource.includes(`params.get('${dim}')`), '')
+  }
+  assert(
+    'URL-write effect uses replaceState (refinement, not a new history entry)',
+    /window\.history\.replaceState\(window\.history\.state,\s*''/.test(deskSource),
+    '',
+  )
+  assert(
+    'URL-write effect only touches the five f.* keys (FILTER_PARAM_BY_DIM), not other params',
+    /const FILTER_PARAM_BY_DIM = \{[\s\S]{0,300}f\.groupType[\s\S]{0,300}f\.year[\s\S]{0,300}f\.region[\s\S]{0,300}f\.sourceType[\s\S]{0,300}f\.topicGroup/.test(
+      deskSource,
+    ),
+    '',
+  )
+  assert('URL-write effect depends on filters', /\},\s*\[filters\]\)/.test(deskSource), '')
+}
+
+// ------------------------------------------------------------------ Test 21
+// C5 卷名结巴 fix — stripLeadingYearToken / buildHeadline changes live in
+// ConciergePaperRow.tsx (JSX), which this hermetic node script cannot import
+// directly (no .tsx type-stripping loader here — see the other source-scan
+// tests in this file for the same constraint). We inline-reproduce the two
+// pure functions byte-for-byte from the component source and run them here,
+// so a future edit to either function must be applied in both places or this
+// test drifts and fails loudly — same contract as Test 20's copy-in-verify
+// pattern used elsewhere in this repo for .tsx-only pure helpers.
+console.log('\nTest 21: C5 卷名结巴 fix — stripLeadingYearToken month form + buildHeadline dedup')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const paperRowSource = readFileSync(
+    path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergePaperRow.tsx'),
+    'utf8',
+  )
+
+  function stripLeadingYearToken(paperName, year) {
+    if (!year) return paperName
+    const full = String(year)
+    const short = full.slice(2)
+    const escape = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const pattern = new RegExp(`^\\s*(?:${escape(full)}|${escape(short)})(?:\\.(\\d{1,2}))?[.\\-年\\s]*`)
+    const match = paperName.match(pattern)
+    if (!match) return paperName
+    const month = match[1]
+    const rest = paperName.slice(match[0].length).trim()
+    if (!rest) return paperName
+    return month ? `${Number(month)}月${rest}` : rest
+  }
+
+  function buildHeadline(paper) {
+    if (paper.isFallback) return '其他来源'
+    const name = stripLeadingYearToken(paper.paperName, paper.year).trim()
+    const region = (paper.region || '').trim()
+    if (!region) return name
+    if (!name) return region
+    const core = name.endsWith('卷') ? name.slice(0, -1) : name
+    const overlaps = core.length > 0 && (name.includes(region) || region.includes(core))
+    return overlaps ? name : `${region} ${name}`.trim()
+  }
+
+  // Sanity: the inline copy above must actually match the component source
+  // (same regex + same overlap logic), so this test can't silently drift
+  // from the real implementation.
+  assert(
+    'component source contains the month-capturing strip pattern',
+    paperRowSource.includes('(?:\\\\.(\\\\d{1,2}))?'),
+    '',
+  )
+  assert(
+    'component source contains the region/core overlap dedup check',
+    /name\.includes\(region\)\s*\|\|\s*region\.includes\(core\)/.test(paperRowSource),
+    '',
+  )
+
+  // C5a — YY.M month form: year token stripped, month rewritten as "M月",
+  // no bare leading digit left over.
+  assert(
+    'stripLeadingYearToken("26.3重庆市巴蜀中学...", 2026) → "3月重庆市巴蜀中学..."',
+    stripLeadingYearToken('26.3重庆市巴蜀中学...', 2026) === '3月重庆市巴蜀中学...',
+    `got: ${stripLeadingYearToken('26.3重庆市巴蜀中学...', 2026)}`,
+  )
+  assert(
+    'stripLeadingYearToken full YYYY.M form also converts month',
+    stripLeadingYearToken('2026.3重庆市', 2026) === '3月重庆市',
+    `got: ${stripLeadingYearToken('2026.3重庆市', 2026)}`,
+  )
+  // Pre-cut plain year-strip (no month digit) behavior unchanged.
+  assert(
+    'stripLeadingYearToken plain year strip unchanged',
+    stripLeadingYearToken('2023-01', 2023) === '01',
+    `got: ${stripLeadingYearToken('2023-01', 2023)}`,
+  )
+
+  const mk = (paperName, region, year = 2024) => ({
+    isFallback: false,
+    paperName,
+    region,
+    year,
+  })
+
+  // C5b — real結巴 fixtures named in the plan: dedup collapses to paperName only.
+  assert(
+    '全国甲卷 region + 全国甲卷 paperName → "全国甲卷" (no stutter)',
+    buildHeadline(mk('全国甲卷', '全国甲卷')) === '全国甲卷',
+    `got: ${buildHeadline(mk('全国甲卷', '全国甲卷'))}`,
+  )
+  assert(
+    '全国新课标Ⅰ region + 新课标Ⅰ卷 paperName → "新课标Ⅰ卷" (no stutter)',
+    buildHeadline(mk('新课标Ⅰ卷', '全国新课标Ⅰ')) === '新课标Ⅰ卷',
+    `got: ${buildHeadline(mk('新课标Ⅰ卷', '全国新课标Ⅰ'))}`,
+  )
+  assert(
+    '浙江 region + 1月浙江卷 paperName (post year-strip) → "1月浙江卷" (no stutter)',
+    buildHeadline(mk('26.1浙江卷', '浙江', 2026)) === '1月浙江卷',
+    `got: ${buildHeadline(mk('26.1浙江卷', '浙江', 2026))}`,
+  )
+  // No overlap → existing "region 卷名" shape preserved.
+  assert(
+    'no region/paperName overlap keeps "region 卷名"',
+    buildHeadline(mk('一模', '北京')) === '北京 一模',
+    `got: ${buildHeadline(mk('一模', '北京'))}`,
+  )
+}
+
+// ------------------------------------------------------------------ Test 22
+console.log('\nTest 22: C7 搜索结果年份列去复读 — Desk computes hideYear for consecutive same-year rows')
+{
+  const here = path.dirname(new URL(import.meta.url).pathname)
+  const srcRoot = path.resolve(here, '..', 'app', 'src')
+  const deskSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+  const paperRowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
+  assert(
+    'Desk computes hideYear from consecutive same non-null year rows',
+    /const hideYear =\s*\n?\s*index > 0 && paper\.year !== null && previous !== undefined && paper\.year === previous\.year/.test(
+      deskSource,
+    ),
+    '',
+  )
+  assert('Desk passes hideYear to ConciergePaperRow in the search list', /hideYear=\{hideYear\}/.test(deskSource), '')
+
+  // ConciergePaperRow itself: hideYear blanks the year column but the row's
+  // accessible name (aria-label) still always carries the year.
+  const paperRowRuleSource = paperRowSource
+  assert(
+    'ConciergePaperRow year column honors hideYear (blank, not the digits)',
+    /\{hideYear \? '' : paper\.year \?\? '—'\}/.test(paperRowRuleSource),
+    '',
+  )
+  assert(
+    'ConciergePaperRow aria-label always carries the year regardless of hideYear',
+    /aria-label=\{paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline\}/.test(paperRowRuleSource),
+    '',
+  )
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)

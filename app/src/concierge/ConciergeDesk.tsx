@@ -15,7 +15,7 @@
  * the Assembly Basket layer, not Retrieval.
  */
 
-import { useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -155,7 +155,65 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // produced. Lives at this component's local state, same layer as
   // `feedExpanded` (participants agreed a hook migration isn't needed —
   // see plan.md 参考实现).
-  const [filters, setFilters] = useState<ConciergeFilters>({})
+  //
+  // C4 (trust-cracks) — 筛选进 URL: read `f.groupType` / `f.year` /
+  // `f.region` / `f.sourceType` / `f.topicGroup` once at mount (same
+  // boot-read-URL-once initializer pattern App.tsx already uses for its own
+  // routes). An illegal `f.year` (non-finite after Number()) is ignored for
+  // that one dimension rather than crashing or defaulting the whole filter
+  // set. Re-mounting this component (e.g. after returning from the detail
+  // view) re-reads the URL, so filters survive that round-trip too.
+  const [filters, setFilters] = useState<ConciergeFilters>(() => {
+    if (typeof window === 'undefined') return {}
+    const params = new URLSearchParams(window.location.search)
+    const next: ConciergeFilters = {}
+    const groupType = params.get('f.groupType')
+    if (groupType) next.groupType = groupType
+    const yearRaw = params.get('f.year')
+    if (yearRaw !== null) {
+      const year = Number(yearRaw)
+      if (Number.isFinite(year)) next.year = year
+    }
+    const region = params.get('f.region')
+    if (region) next.region = region
+    const sourceType = params.get('f.sourceType')
+    if (sourceType) next.sourceType = sourceType
+    const topicGroup = params.get('f.topicGroup')
+    if (topicGroup) next.topicGroup = topicGroup
+    return next
+  })
+
+  // C4 — write filters back to the URL on every change via replaceState (a
+  // refinement, not a new navigation — no history entry). Only the `f.*`
+  // keys are touched; every other param already in the URL (view, groupId,
+  // search intent, …) survives untouched.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (typeof window.history?.replaceState !== 'function') return
+    try {
+      const url = new URL(window.location.href)
+      const FILTER_PARAM_BY_DIM = {
+        groupType: 'f.groupType',
+        year: 'f.year',
+        region: 'f.region',
+        sourceType: 'f.sourceType',
+        topicGroup: 'f.topicGroup',
+      } as const
+      for (const [dim, param] of Object.entries(FILTER_PARAM_BY_DIM)) {
+        const value = filters[dim as keyof ConciergeFilters]
+        if (value === undefined) {
+          url.searchParams.delete(param)
+        } else {
+          url.searchParams.set(param, String(value))
+        }
+      }
+      const nextSearch = url.searchParams.toString()
+      const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+      window.history.replaceState(window.history.state, '', nextUrl)
+    } catch {
+      // URL rewrite is best-effort; filter state itself is unaffected.
+    }
+  }, [filters])
   const filterOptions = useMemo(
     () => buildFacetedFilterOptions(questionGroups, filters),
     [questionGroups, filters],
@@ -515,7 +573,15 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         </p>
       )}
 
-      {state.kind === 'results' && !state.usedFallback && state.assistantMessage && (
+      {/* C2 (trust-cracks) — 前端空态一个声音: a steward-source (non-fallback)
+          result with zero hits is the honest empty state (concierge_search
+          returned honest empty matches, C1). Don't also narrate an
+          assistantMessage paragraph here — the true vacuum is carried by the
+          `concierge-empty` block below ("没找到匹配…返回浏览全部 N 套卷") +
+          the default feed, a single voice instead of two. Local fallback
+          paths (state.usedFallback) are untouched — this only gates the
+          steward-source paragraph. */}
+      {state.kind === 'results' && !state.usedFallback && state.hits.length > 0 && state.assistantMessage && (
         <p className="concierge-assistant">{state.assistantMessage}</p>
       )}
 
@@ -573,19 +639,28 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
         {state.kind === 'results' && filteredPaperResults.length > 0 && (
           <ul className="concierge-paper-list">
-            {filteredPaperResults.map((paper) => (
-              <li key={paper.key}>
-                <ConciergePaperRow
-                  paper={paper}
-                  expanded={expandedPaperKey === paper.key}
-                  basketIds={basketIds}
-                  onTogglePaper={togglePaper}
-                  onAdd={onAdd}
-                  onOpenDetail={onOpenDetail}
-                  onOpenPaperBrowse={onOpenPaperBrowse}
-                />
-              </li>
-            ))}
+            {filteredPaperResults.map((paper, index) => {
+              // C7 (trust-cracks) — search-result year column: only the first
+              // of a run of consecutive same-year rows shows the year digits;
+              // a null year never counts as a repeat (each "—" stays its own).
+              const previous = filteredPaperResults[index - 1]
+              const hideYear =
+                index > 0 && paper.year !== null && previous !== undefined && paper.year === previous.year
+              return (
+                <li key={paper.key}>
+                  <ConciergePaperRow
+                    paper={paper}
+                    expanded={expandedPaperKey === paper.key}
+                    basketIds={basketIds}
+                    onTogglePaper={togglePaper}
+                    onAdd={onAdd}
+                    onOpenDetail={onOpenDetail}
+                    onOpenPaperBrowse={onOpenPaperBrowse}
+                    hideYear={hideYear}
+                  />
+                </li>
+              )
+            })}
           </ul>
         )}
       </div>
