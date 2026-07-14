@@ -24,6 +24,8 @@ import {
   parseAssemblyBasket,
 } from '../../paperAssembly/basketPersistence'
 import { describeError } from '../shared/errorCopy'
+import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
+import { useToastPresence, usePresence } from '../shared/useToastPresence.ts'
 import { DraftPaperRail } from './DraftPaperRail'
 import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
@@ -90,6 +92,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
   const [exportError, setExportError] = useState('')
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
+  // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
+  const spaceDialogPresence = usePresence(spaceDialogOpen, 120)
   const [spaceFolders, setSpaceFolders] = useState<MySpaceFolder[]>([])
   const [spaceFolderId, setSpaceFolderId] = useState('')
   const [spaceFileName, setSpaceFileName] = useState('')
@@ -106,6 +110,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [migrationNotice, setMigrationNotice] = useState('')
   const [versionType, setVersionType] = useState<DraftVersionType>('student')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
+  // motion-press-exit #3: toast keyframe→transition — 退出前保持挂载
+  // var(--motion-fast)(120ms)播完退出再真卸载。
+  const removedItemToast = useToastPresence(removedItem, 120)
+  const savedToastPresence = useToastPresence(savedToastMessage, 120)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
   const [exportMenuOpen, setExportMenuOpen] = useState(false)
   const titleSaveTimerRef = useRef<number | null>(null)
@@ -532,7 +540,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
     const initial = computeTarget()
     if (initial == null) return
-    window.scrollTo({ top: Math.max(0, initial), behavior: 'smooth' })
+    window.scrollTo({ top: Math.max(0, initial), behavior: scrollBehavior() })
 
     const deadline = performance.now() + 5000
     let cancelled = false
@@ -1198,17 +1206,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         </section>
       </main>
 
-      {removedItem && (
-        <div className="draft-undo-toast" role="status">
+      {removedItemToast.rendered && (
+        <div className="draft-undo-toast" role="status" data-visible={removedItemToast.visible}>
           <span>题组已删除</span>
           <button type="button" onClick={undoDelete}>
             <RotateCcw size={14} /> 撤销
           </button>
         </div>
       )}
-      {savedToastMessage && (
-        <div className="draft-undo-toast" role="status">
-          <span>{savedToastMessage}</span>
+      {savedToastPresence.rendered && (
+        <div className="draft-undo-toast" role="status" data-visible={savedToastPresence.visible}>
+          <span>{savedToastPresence.rendered}</span>
           {shellNav.onOpenMySpace && (
             <button
               type="button"
@@ -1222,11 +1230,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           )}
         </div>
       )}
-      {spaceDialogOpen && (
-        <div className="draft-modal-backdrop" role="presentation">
+      {spaceDialogPresence.mounted && (
+        <div className="draft-modal-backdrop" role="presentation" data-visible={spaceDialogPresence.visible}>
           <form
             aria-label="保存到个人空间"
             className="draft-save-space-dialog"
+            data-visible={spaceDialogPresence.visible}
             onSubmit={(event) => {
               event.preventDefault()
               void saveToMySpace()

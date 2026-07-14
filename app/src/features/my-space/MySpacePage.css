@@ -292,7 +292,12 @@
   gap: 6px;
   min-height: 32px;
   padding: 6px 10px;
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+}
+
+/* emil-processing: press feedback — 全无 :active（findings 表条目）。 */
+.my-space-card-actions button:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .my-space-card-actions button:disabled {
@@ -353,6 +358,9 @@
 /* Delete confirmation modal — self-built equivalent of DraftPaperWorkbench's
    draft-modal-backdrop/draft-save-space-dialog pair (window.confirm is not
    used here). */
+/* emil-processing: modal 入退场，与 DraftPaperWorkbench 的
+   draft-modal-backdrop/draft-save-space-dialog 同配方（usePresence 保持
+   挂载播完 exit 再卸载；退出 motion-fast 快于入场 motion-base）。 */
 .my-space-modal-backdrop {
   align-items: center;
   background: color-mix(in srgb, var(--eqb-color-text-strong) 45%, transparent);
@@ -365,6 +373,13 @@
   right: 0;
   top: 0;
   z-index: 50;
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-out);
+}
+
+.my-space-modal-backdrop[data-visible='true'] {
+  opacity: 1;
+  transition-duration: var(--motion-base);
 }
 
 .my-space-confirm-dialog {
@@ -377,6 +392,15 @@
   max-width: 360px;
   padding: 20px;
   width: 100%;
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+}
+
+.my-space-confirm-dialog[data-visible='true'] {
+  opacity: 1;
+  transform: scale(1);
+  transition-duration: var(--motion-base);
 }
 
 .my-space-confirm-dialog h3 {
@@ -407,11 +431,17 @@
   font: inherit;
   min-height: 34px;
   padding: 7px 14px;
+  /* emil-processing: 补全站标准 hover/press transition（findings 表条目）。 */
+  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .my-space-confirm-actions button:hover {
   background: var(--eqb-color-desk);
   border-color: var(--eqb-color-border-strong);
+}
+
+.my-space-confirm-actions button:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .my-space-confirm-actions .my-space-card-danger {

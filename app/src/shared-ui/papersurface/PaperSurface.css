@@ -363,7 +363,9 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   margin-bottom: 14px;
   padding-left: 6px;
   border-left: 2px solid transparent;
-  transition: border-color 80ms ease;
+  /* emil-processing: token 泄漏归队 —— verify-motion-tokens.mjs 排除本文件
+     不扫，但硬编码值仍是一处漂移源，归队到全站 motion token 词汇表。 */
+  transition: border-color var(--motion-micro) var(--ease-hover);
 }
 
 .ps-question--active {
