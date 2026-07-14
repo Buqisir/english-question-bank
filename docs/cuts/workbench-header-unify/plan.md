@@ -75,6 +75,8 @@ worktree `../wt-header-unify`（开工时建）；断点锚 wip commit；完成�
 ## 裁决点清单
 
 - [x] DP-1a 方向拍板（owner 三轮 mock 实点「没问题」，2026-07-14）
-- [ ] DP-1b 纸列宽度定值（owner Chrome 现场调，起点 870px）
+- [x] DP-1b 纸列宽度 = **870px 暂定**（owner 委托主代理判，2026-07-14；
+  mock 实测 iframe 初渲锁宽演示不了，真刀 DP-2 出真截图、DP-3 owner
+  可微调终值）
 - [ ] DP-2 CR verdict 处置 + 主代理复核
 - [ ] DP-3 owner 生产实用一轮（组卷→改题→导出全流程手感）
