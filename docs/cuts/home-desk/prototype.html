@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>主页原型 · 检索台上是书桌</title>
+<style>
+  :root {
+    --brand-teal: #2C6E56; --teal-50: #EAF1ED; --teal-100: #CFE4DA;
+    --teal-200: #A5CDBD; --teal-800: #1E4A3A;
+    --bg: #F6F6F4; --surface: #FFFFFF; --surface-2: #EDEDEA;
+    --ink: #1E1E1C; --ink-muted: #6A6A64; --ink-faint: #9A9A93;
+    --border-subtle: #E8E8E4; --border: #D8D8D2;
+    --paper-bg: #f4f1ea; --paper-ink: #4a4438; --paper-border: #e6e2d7;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px; line-height: 1.5;
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px; border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface);
+  }
+  .topbar-brand { font-size: 15px; font-weight: 600; letter-spacing: 0.01em; }
+  .topbar-brand span { color: var(--brand-teal); }
+  .topbar-nav { display: flex; gap: 4px; }
+  .topbar-nav a {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    padding: 6px 12px; border-radius: 6px; transition: background 120ms ease, color 120ms ease;
+  }
+  .topbar-nav a:hover { background: var(--surface-2); color: var(--ink); }
+  .topbar-nav a.active { color: var(--brand-teal); font-weight: 500; background: var(--teal-50); }
+
+  .hero { max-width: 720px; margin: 0 auto; padding: 56px 24px 0; }
+  .hero-search {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 16px 20px;
+    box-shadow: 0 1px 2px rgba(30,30,28,0.04);
+    transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+  }
+  .hero-search:focus-within {
+    border-color: var(--brand-teal);
+    box-shadow: 0 0 0 3px var(--teal-50), 0 1px 2px rgba(30,30,28,0.04);
+  }
+  .hero-search input {
+    flex: 1; border: none; outline: none; background: none;
+    font-size: 17px; color: var(--ink); font-family: inherit;
+  }
+  .hero-search input::placeholder { color: var(--ink-faint); }
+  .hero-search button {
+    background: var(--brand-teal); color: #fff; border: none;
+    width: 36px; height: 36px; border-radius: 8px; font-size: 16px;
+    cursor: pointer; transition: background 120ms ease, transform 120ms var(--ease-out);
+  }
+  .hero-search button:hover { background: var(--teal-800); }
+  .hero-search button:active { transform: scale(0.95); }
+  .hero-doorways { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .doorway {
+    font-size: 13px; color: var(--ink-muted); background: var(--surface);
+    border: 1px solid var(--border-subtle); border-radius: 999px;
+    padding: 5px 14px; cursor: pointer;
+    transition: all 120ms ease;
+  }
+  .doorway:hover { border-color: var(--teal-200); color: var(--teal-800); background: var(--teal-50); }
+  .doorway b { font-weight: 500; color: var(--ink); }
+  .doorway:hover b { color: var(--teal-800); }
+  .doorway .count { color: var(--ink-faint); font-size: 12px; margin-left: 4px; }
+
+  .desk { max-width: 960px; margin: 40px auto 0; padding: 0 24px; }
+  .desk-label {
+    font-size: 12px; font-weight: 500; color: var(--ink-faint);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .desk-label::after { content: ""; flex: 1; height: 1px; background: var(--border-subtle); }
+  .desk-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; }
+
+  .draft-card {
+    display: flex; gap: 16px; align-items: stretch;
+    background: var(--surface); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 16px; cursor: pointer;
+    transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out), border-color 160ms ease;
+  }
+  .draft-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30,30,28,0.08);
+    border-color: var(--border);
+  }
+  .mini-paper {
+    width: 64px; min-height: 88px; background: var(--paper-bg);
+    border: 1px solid var(--paper-border); border-radius: 3px;
+    padding: 8px 7px; flex-shrink: 0; position: relative;
+    font-family: "Times New Roman", SimSun, serif;
+  }
+  .mini-paper::before {
+    content: ""; display: block; height: 4px; width: 70%;
+    background: var(--paper-ink); opacity: 0.55; margin: 0 auto 5px; border-radius: 1px;
+  }
+  .mini-paper i {
+    display: block; height: 2px; background: var(--paper-ink); opacity: 0.22;
+    margin-bottom: 3px; border-radius: 1px;
+  }
+  .mini-paper i:nth-child(3n) { width: 82%; }
+  .draft-meta { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+  .draft-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .draft-sub { font-size: 12.5px; color: var(--ink-muted); margin-top: 2px; }
+  .draft-time { font-size: 12px; color: var(--ink-faint); }
+  .draft-cta {
+    font-size: 13px; color: var(--brand-teal); font-weight: 500; margin-top: 8px;
+  }
+  .draft-card:hover .draft-cta { text-decoration: underline; }
+
+  .desk-side {
+    background: var(--surface); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .desk-side h4 { font-size: 12px; font-weight: 500; color: var(--ink-faint); margin-bottom: 10px; }
+  .side-item {
+    display: block; font-size: 13px; color: var(--ink); text-decoration: none;
+    padding: 6px 8px; margin: 0 -8px; border-radius: 6px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transition: background 120ms ease;
+  }
+  .side-item:hover { background: var(--surface-2); }
+  .side-item .tag { font-size: 11.5px; color: var(--ink-faint); margin-right: 6px; }
+
+  .feed { max-width: 960px; margin: 48px auto 80px; padding: 0 24px; }
+  .feed-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .feed-head h3 { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .feed-filters { display: flex; gap: 6px; }
+  .ffilter {
+    font-size: 12px; color: var(--ink-muted); background: none;
+    border: 1px solid var(--border-subtle); border-radius: 999px; padding: 3px 10px; cursor: pointer;
+  }
+  .ffilter:hover { border-color: var(--teal-200); color: var(--teal-800); }
+  .year-head { font-size: 12px; font-weight: 500; color: var(--ink-faint); margin: 20px 0 8px; }
+  .row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border: 1px solid var(--border-subtle);
+    border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; cursor: pointer;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .row:hover { border-color: var(--teal-200); background: #FDFDFC; }
+  .row-type {
+    font-size: 11.5px; font-weight: 500; color: var(--teal-800);
+    background: var(--teal-50); border-radius: 4px; padding: 2px 8px; flex-shrink: 0;
+  }
+  .row-title { font-size: 13.5px; color: var(--ink); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row-meta { font-size: 12px; color: var(--ink-faint); flex-shrink: 0; }
+  .row-in { font-size: 11.5px; color: var(--brand-teal); flex-shrink: 0; }
+
+  .toggles {
+    position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 7px;
+    background: var(--ink); border-radius: 10px; padding: 12px 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 10; min-width: 200px;
+  }
+  .toggles label { font-size: 12px; color: #ddd; display: flex; gap: 8px; align-items: center; cursor: pointer; }
+  .toggles .t-head { font-size: 11px; color: #999; font-weight: 500; margin-top: 4px; }
+  .toggles .t-head:first-child { margin-top: 0; }
+  .presets { display: flex; gap: 5px; flex-wrap: wrap; }
+  .presets button {
+    font-size: 11.5px; background: #333; color: #ddd; border: 1px solid #555;
+    border-radius: 6px; padding: 4px 9px; cursor: pointer;
+  }
+  .presets button:hover { background: #444; }
+  .presets button.on { background: var(--brand-teal); border-color: var(--brand-teal); color: #fff; }
+
+  /* 减法开关：hide-* 类逐件摘除 */
+  body.hide-doorways .hero-doorways { display: none; }
+  body.hide-recent .desk-side.s-recent { display: none; }
+  body.hide-exports .desk-side.s-exports { display: none; }
+  body.hide-recent.hide-exports .desk-row { grid-template-columns: minmax(0, 480px); justify-content: center; }
+  body.hide-desk .desk { display: none; }
+  body.hide-feed .feed { display: none; }
+  body.hide-feed .page-flow { min-height: calc(100vh - 120px); display: flex; flex-direction: column; justify-content: center; }
+  body.hide-feed .hero { padding-top: 0; }
+  body.hide-feed .desk { margin-top: 36px; }
+
+  body.desk-above .hero { display: flex; flex-direction: column; }
+  body.desk-above .page-flow { display: flex; flex-direction: column; }
+  body.desk-above .desk { order: -1; margin-top: 36px; }
+  body.desk-above .hero { padding-top: 36px; }
+
+  body.rows-hover-actions .row-actions {
+    display: flex; gap: 6px; opacity: 0; transition: opacity 120ms ease;
+  }
+  .row-actions { display: none; }
+  body.rows-hover-actions .row:hover .row-actions { opacity: 1; }
+  .row-actions button {
+    font-size: 11.5px; border: 1px solid var(--border); background: var(--surface);
+    border-radius: 5px; padding: 3px 8px; cursor: pointer; color: var(--ink-muted);
+  }
+  .row-actions button:hover { border-color: var(--teal-200); color: var(--teal-800); }
+
+  /* ── 脑洞 1：今日一篇 ── */
+  .daily { display: none; max-width: 720px; margin: 36px auto 0; padding: 0 24px; }
+  body.show-daily .daily { display: block; }
+  .daily-card {
+    background: var(--paper-bg); border: 1px solid var(--paper-border);
+    border-radius: 10px; padding: 22px 26px; cursor: pointer;
+    transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+  }
+  .daily-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(74,68,56,0.12); }
+  .daily-label { font-size: 12px; font-weight: 500; color: #8a857a; margin-bottom: 10px; }
+  .daily-card blockquote {
+    font-family: "Times New Roman", Times, SimSun, "Songti SC", serif;
+    font-size: 19px; line-height: 1.55; color: #2c2820; font-style: italic;
+  }
+  .daily-src { margin-top: 12px; font-size: 12.5px; color: var(--paper-ink); }
+  .daily-cta { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--brand-teal); font-weight: 500; }
+
+  /* ── 脑洞 2：暖纸桌面 ── */
+  body.warm-desk { background: #F0ECE3; }
+  body.warm-desk .topbar { background: #FBFAF7; }
+  body.warm-desk .doorway { background: #FBFAF7; }
+  body.warm-desk .row:hover { background: #FFFFFF; }
+
+  /* ── 脑洞 3：聚焦抽屉（静时藏，点搜索框展开）── */
+  body.focus-drawer .hero-doorways,
+  body.focus-drawer .desk {
+    opacity: 0; transform: translateY(-6px); pointer-events: none;
+    transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+  }
+  body.focus-drawer.drawer-open .hero-doorways,
+  body.focus-drawer.drawer-open .desk {
+    opacity: 1; transform: none; pointer-events: auto;
+  }
+
+  @media (max-width: 768px) {
+    .desk-row { grid-template-columns: 1fr; }
+    .topbar { padding: 10px 16px; }
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">英语题库<span>工作台</span></div>
+    <nav class="topbar-nav">
+      <a class="active" href="#">找题</a>
+      <a href="#">草稿卷</a>
+      <a href="#">个人空间</a>
+    </nav>
+  </header>
+
+  <div class="page-flow">
+  <section class="hero">
+    <div class="hero-search">
+      <input type="text" placeholder="找题：试试「2024 新课标的 D 篇」或「科技类完形」" />
+      <button title="搜索">→</button>
+    </div>
+    <div class="hero-doorways">
+      <button class="doorway"><b>阅读 B/C/D</b><span class="count">128</span></button>
+      <button class="doorway"><b>完形填空</b><span class="count">42</span></button>
+      <button class="doorway"><b>七选五</b><span class="count">37</span></button>
+      <button class="doorway"><b>语法填空</b><span class="count">45</span></button>
+      <button class="doorway"><b>写作</b><span class="count">18</span></button>
+    </div>
+  </section>
+
+  <section class="daily">
+    <div class="daily-card">
+      <div class="daily-label">今日一篇</div>
+      <blockquote>"The gardens did not just grow vegetables; they grew neighbors."</blockquote>
+      <div class="daily-src">The Quiet Power of Urban Gardens · 2024 新课标Ⅰ · D 篇 · 4 题</div>
+      <div class="daily-cta">读读看 →</div>
+    </div>
+  </section>
+
+  <section class="desk">
+    <div class="desk-label">接着干</div>
+    <div class="desk-row">
+      <div class="draft-card">
+        <div class="mini-paper"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="draft-meta">
+          <div>
+            <div class="draft-title">0709 英语草稿卷 · 张同学</div>
+            <div class="draft-sub">5 题组 · 共 9 版 · A3 对折 2 张</div>
+            <div class="draft-time">昨天 21:40 自动保存</div>
+          </div>
+          <div class="draft-cta">回到工作台 →</div>
+        </div>
+      </div>
+      <div class="desk-side s-recent">
+        <h4>最近看过</h4>
+        <a class="side-item" href="#"><span class="tag">D 篇</span>The Quiet Power of Urban Gardens</a>
+        <a class="side-item" href="#"><span class="tag">完形</span>A Lesson from My First Marathon</a>
+        <a class="side-item" href="#"><span class="tag">七选五</span>How to Build a Reading Habit</a>
+      </div>
+      <div class="desk-side s-exports">
+        <h4>最近导出</h4>
+        <a class="side-item" href="#"><span class="tag">PDF</span>0706 阅读专练 · 学生版</a>
+        <a class="side-item" href="#"><span class="tag">PDF</span>0706 阅读专练 · 教师版</a>
+        <a class="side-item" href="#"><span class="tag">PDF</span>0701 完形＋语填 · 李同学</a>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <section class="feed">
+    <div class="feed-head">
+      <h3>馆藏 · 最近入库</h3>
+      <div class="feed-filters">
+        <button class="ffilter">全部题型</button>
+        <button class="ffilter">全部年份</button>
+        <button class="ffilter">主题</button>
+      </div>
+    </div>
+
+    <div class="year-head">2026</div>
+    <div class="row">
+      <span class="row-type">D 篇</span>
+      <span class="row-title">Why Handwriting Still Matters in a Digital Age</span>
+      <span class="row-in">✓ 已在草稿卷</span>
+      <span class="row-meta">新课标Ⅰ · 4 题</span>
+      <div class="row-actions"><button>加入草稿卷</button><button>详情</button></div>
+    </div>
+    <div class="row">
+      <span class="row-type">七选五</span>
+      <span class="row-title">The Science of Taking Better Breaks</span>
+      <span class="row-meta">新课标Ⅱ · 5 题</span>
+      <div class="row-actions"><button>加入草稿卷</button><button>详情</button></div>
+    </div>
+    <div class="row">
+      <span class="row-type">完形</span>
+      <span class="row-title">An Unexpected Friendship on the Night Train</span>
+      <span class="row-meta">全国甲 · 15 题</span>
+      <div class="row-actions"><button>加入草稿卷</button><button>详情</button></div>
+    </div>
+
+    <div class="year-head">2025</div>
+    <div class="row">
+      <span class="row-type">C 篇</span>
+      <span class="row-title">Rewilding Cities: When Nature Moves Back In</span>
+      <span class="row-meta">新课标Ⅰ · 4 题</span>
+      <div class="row-actions"><button>加入草稿卷</button><button>详情</button></div>
+    </div>
+    <div class="row">
+      <span class="row-type">语法填空</span>
+      <span class="row-title">The Chinese Tea House That Time Forgot</span>
+      <span class="row-meta">北京 · 10 空</span>
+      <div class="row-actions"><button>加入草稿卷</button><button>详情</button></div>
+    </div>
+    <div class="row">
+      <span class="row-type">B 篇</span>
+      <span class="row-title">Meet the Teen Inventors Solving Everyday Problems</span>
+      <span class="row-meta">浙江 · 4 题</span>
+      <div class="row-actions"><button>加入草稿卷</button><button>详情</button></div>
+    </div>
+  </section>
+
+  <div class="toggles">
+    <div class="t-head">一键预设</div>
+    <div class="presets">
+      <button data-preset="minimal">极简</button>
+      <button data-preset="paper">一张纸</button>
+      <button data-preset="desk" class="on">书桌</button>
+      <button data-preset="today">现状式</button>
+    </div>
+    <div class="t-head">减法（逐件摘）</div>
+    <label><input type="checkbox" class="sub" data-c="hide-doorways"> 摘掉题型门</label>
+    <label><input type="checkbox" class="sub" data-c="hide-recent"> 摘掉「最近看过」</label>
+    <label><input type="checkbox" class="sub" data-c="hide-exports"> 摘掉「最近导出」</label>
+    <label><input type="checkbox" class="sub" data-c="hide-desk"> 摘掉整个工作现场</label>
+    <label><input type="checkbox" class="sub" data-c="hide-feed"> 摘掉馆藏 feed</label>
+    <div class="t-head">脑洞（可叠加）</div>
+    <label><input type="checkbox" class="brain" data-c="show-daily"> 今日一篇</label>
+    <label><input type="checkbox" class="brain" data-c="warm-desk"> 暖纸桌面</label>
+    <label><input type="checkbox" class="brain" data-c="focus-drawer"> 聚焦抽屉（点搜索框才展开）</label>
+    <div class="t-head">位置/行为</div>
+    <label><input type="checkbox" id="t1"> 工作现场挪到搜索上方</label>
+    <label><input type="checkbox" id="t2"> feed 行保留 hover 操作栏</label>
+  </div>
+
+<script>
+  const subs = [...document.querySelectorAll('.sub')];
+  const apply = () => subs.forEach(cb => document.body.classList.toggle(cb.dataset.c, cb.checked));
+  subs.forEach(cb => cb.addEventListener('change', () => { markPreset(null); apply(); }));
+
+  const PRESETS = {
+    minimal: ['hide-recent', 'hide-exports', 'hide-desk', 'hide-feed'],
+    paper:   ['hide-recent', 'hide-exports', 'hide-feed'],
+    desk:    [],
+    today:   ['hide-desk'],
+  };
+  const btns = [...document.querySelectorAll('.presets button')];
+  function markPreset(name) { btns.forEach(b => b.classList.toggle('on', b.dataset.preset === name)); }
+  btns.forEach(b => b.addEventListener('click', () => {
+    const on = PRESETS[b.dataset.preset];
+    subs.forEach(cb => { cb.checked = on.includes(cb.dataset.c); });
+    if (b.dataset.preset === 'today') document.getElementById('t2').checked = true;
+    else document.getElementById('t2').checked = false;
+    document.body.classList.toggle('rows-hover-actions', document.getElementById('t2').checked);
+    markPreset(b.dataset.preset); apply();
+  }));
+
+  document.getElementById('t1').addEventListener('change', e =>
+    document.body.classList.toggle('desk-above', e.target.checked));
+  document.getElementById('t2').addEventListener('change', e =>
+    document.body.classList.toggle('rows-hover-actions', e.target.checked));
+
+  // 脑洞开关（独立于预设，可叠加）
+  document.querySelectorAll('.brain').forEach(cb =>
+    cb.addEventListener('change', () => document.body.classList.toggle(cb.dataset.c, cb.checked)));
+
+  // 聚焦抽屉行为
+  const heroInput = document.querySelector('.hero-search input');
+  heroInput.addEventListener('focus', () => document.body.classList.add('drawer-open'));
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.hero-search') && !e.target.closest('.hero-doorways')
+        && !e.target.closest('.desk') && !e.target.closest('.toggles'))
+      document.body.classList.remove('drawer-open');
+  });
+</script>
+</body>
+</html>

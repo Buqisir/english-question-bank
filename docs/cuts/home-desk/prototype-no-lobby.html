@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>推翻版原型 · 取消主页，开门即书桌</title>
+<style>
+  :root {
+    --brand-teal: #2C6E56; --teal-50: #EAF1ED; --teal-100: #CFE4DA;
+    --teal-200: #A5CDBD; --teal-800: #1E4A3A;
+    --bg: #F6F6F4; --surface: #FFFFFF; --surface-2: #EDEDEA;
+    --ink: #1E1E1C; --ink-muted: #6A6A64; --ink-faint: #9A9A93;
+    --border-subtle: #E8E8E4; --border: #D8D8D2;
+    --desk: #F0ECE3; --paper: #FFFEFB; --paper-edge: #E6E2D7;
+    --paper-ink: #2c2820; --paper-ink-soft: #4a4438;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--desk); color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px; line-height: 1.5;
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px; border-bottom: 1px solid rgba(30,30,28,0.07);
+    background: #FBFAF7; position: sticky; top: 0; z-index: 5;
+  }
+  .topbar-brand { font-size: 15px; font-weight: 600; }
+  .topbar-brand span { color: var(--brand-teal); }
+  .topbar-mid { font-size: 13px; color: var(--ink-muted); }
+  .topbar-mid b { color: var(--ink); font-weight: 500; }
+  .topbar-nav { display: flex; gap: 4px; align-items: center; }
+  .topbar-nav a, .topbar-nav button {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none; background: none;
+    border: none; cursor: pointer; padding: 6px 12px; border-radius: 6px; font-family: inherit;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .topbar-nav a:hover, .topbar-nav button:hover { background: rgba(30,30,28,0.05); color: var(--ink); }
+  .find-btn {
+    display: flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border) !important; background: var(--surface) !important;
+  }
+  .find-btn kbd {
+    font-size: 11px; color: var(--ink-faint); background: var(--surface-2);
+    border-radius: 4px; padding: 1px 6px; font-family: inherit;
+  }
+
+  /* ── 书桌 + 纸 ── */
+  .desk-area { padding: 40px 24px 80px; display: flex; justify-content: center; gap: 28px; }
+  .paper {
+    width: min(680px, 92vw); background: var(--paper);
+    border: 1px solid var(--paper-edge); border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(74,68,56,0.10), 0 12px 32px rgba(74,68,56,0.10);
+    padding: 48px 56px 56px; position: relative;
+  }
+  .paper-head { text-align: center; margin-bottom: 8px; }
+  .paper-head h1 {
+    font-family: "Times New Roman", SimSun, "Songti SC", serif;
+    font-size: 22px; font-weight: 700; color: var(--paper-ink);
+  }
+  .paper-head .sub { font-size: 12.5px; color: var(--ink-faint); margin-top: 6px; }
+  .paper-badge {
+    position: absolute; top: 14px; right: 14px;
+    font-size: 11.5px; color: var(--teal-800); background: var(--teal-50);
+    border-radius: 999px; padding: 3px 10px;
+  }
+  .pgroup {
+    margin-top: 28px; font-family: "Times New Roman", SimSun, "Songti SC", serif;
+    color: var(--paper-ink-soft);
+  }
+  .pgroup h3 { font-size: 15px; color: var(--paper-ink); margin-bottom: 8px; }
+  .pgroup p { font-size: 14.5px; line-height: 1.7; }
+  .pgroup .qs { margin-top: 10px; font-size: 13.5px; color: var(--paper-ink-soft); }
+  .page-cut {
+    margin: 30px -56px 0; border: none; border-top: 1.5px dashed var(--teal-200);
+    position: relative;
+  }
+  .page-cut::after {
+    content: "第 1 / 2 版"; position: absolute; right: 18px; top: -9px;
+    font-family: Inter, sans-serif; font-size: 11px; color: var(--ink-faint);
+    background: var(--paper); padding: 0 8px;
+  }
+
+  /* ── 右 rail ── */
+  .rail { width: 200px; flex-shrink: 0; position: sticky; top: 76px; align-self: flex-start; }
+  .rail h4 { font-size: 12px; color: var(--ink-faint); font-weight: 500; margin-bottom: 8px; }
+  .rail a {
+    display: flex; justify-content: space-between; gap: 8px;
+    font-size: 12.5px; color: var(--ink-muted); text-decoration: none;
+    padding: 6px 10px; border-radius: 6px; margin-bottom: 2px;
+    transition: background 120ms ease;
+  }
+  .rail a:hover { background: rgba(30,30,28,0.05); }
+  .rail a.on { background: var(--teal-50); color: var(--teal-800); font-weight: 500; }
+  .rail .add {
+    margin-top: 10px; font-size: 12.5px; color: var(--brand-teal); font-weight: 500;
+    padding: 6px 10px; cursor: pointer; border-radius: 6px;
+  }
+  .rail .add:hover { background: var(--teal-50); }
+
+  /* ── 找题抽屉 ── */
+  .drawer-backdrop {
+    position: fixed; inset: 0; background: rgba(30,30,28,0.28);
+    opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease-out); z-index: 20;
+  }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(460px, 94vw);
+    background: var(--bg); border-left: 1px solid var(--border-subtle);
+    box-shadow: -12px 0 40px rgba(30,30,28,0.14);
+    transform: translateX(102%); transition: transform 240ms var(--ease-out);
+    z-index: 21; padding: 20px; overflow-y: auto;
+  }
+  body.drawer-open .drawer { transform: none; }
+  body.drawer-open .drawer-backdrop { opacity: 1; pointer-events: auto; }
+  .drawer-search {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .drawer-search:focus-within { border-color: var(--brand-teal); box-shadow: 0 0 0 3px var(--teal-50); }
+  .drawer-search input { flex: 1; border: none; outline: none; font-size: 15px; font-family: inherit; background: none; color: var(--ink); }
+  .drawer-search input::placeholder { color: var(--ink-faint); }
+  .drawer-doorways { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .doorway {
+    font-size: 12.5px; color: var(--ink-muted); background: var(--surface);
+    border: 1px solid var(--border-subtle); border-radius: 999px; padding: 4px 12px; cursor: pointer;
+    transition: all 120ms ease;
+  }
+  .doorway:hover { border-color: var(--teal-200); color: var(--teal-800); background: var(--teal-50); }
+  .drawer h5 { font-size: 12px; color: var(--ink-faint); font-weight: 500; margin: 18px 0 8px; }
+  .drow {
+    background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 8px;
+    padding: 10px 12px; margin-bottom: 6px; cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: border-color 120ms ease;
+  }
+  .drow:hover { border-color: var(--teal-200); }
+  .drow .t {
+    font-size: 11px; font-weight: 500; color: var(--teal-800);
+    background: var(--teal-50); border-radius: 4px; padding: 2px 7px; flex-shrink: 0;
+  }
+  .drow .n { font-size: 13px; color: var(--ink); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .drow .add-mini {
+    font-size: 12px; color: var(--brand-teal); border: 1px solid var(--teal-200);
+    background: none; border-radius: 6px; padding: 3px 9px; cursor: pointer; flex-shrink: 0;
+    font-family: inherit; transition: background 120ms ease, transform 120ms var(--ease-out);
+  }
+  .drow .add-mini:hover { background: var(--teal-50); }
+  .drow .add-mini:active { transform: scale(0.95); }
+
+  /* ── 空桌态 ── */
+  .empty-desk {
+    display: none; min-height: calc(100vh - 53px);
+    flex-direction: column; align-items: center; justify-content: center; padding: 24px;
+  }
+  body.empty .desk-area { display: none; }
+  body.empty .empty-desk { display: flex; }
+  body.empty .topbar-mid { visibility: hidden; }
+  .empty-desk .hint { font-size: 13.5px; color: var(--ink-muted); margin-bottom: 20px; }
+  .empty-search {
+    display: flex; align-items: center; gap: 12px; width: min(640px, 92vw);
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 16px 20px; box-shadow: 0 1px 2px rgba(30,30,28,0.04);
+  }
+  .empty-search:focus-within { border-color: var(--brand-teal); box-shadow: 0 0 0 3px var(--teal-50); }
+  .empty-search input { flex: 1; border: none; outline: none; background: none; font-size: 17px; font-family: inherit; color: var(--ink); }
+  .empty-search input::placeholder { color: var(--ink-faint); }
+  .empty-doorways { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
+  .empty-or { margin-top: 28px; font-size: 13px; color: var(--ink-faint); }
+  .empty-new {
+    margin-top: 10px; font-size: 14px; color: var(--brand-teal); font-weight: 500;
+    background: none; border: 1px solid var(--teal-200); border-radius: 8px;
+    padding: 8px 18px; cursor: pointer; font-family: inherit;
+    transition: background 120ms ease, transform 120ms var(--ease-out);
+  }
+  .empty-new:hover { background: var(--teal-50); }
+  .empty-new:active { transform: scale(0.97); }
+
+  .demo-panel {
+    position: fixed; bottom: 20px; right: 20px; z-index: 30;
+    background: var(--ink); border-radius: 10px; padding: 12px 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25); color: #ddd; font-size: 12px;
+    display: flex; flex-direction: column; gap: 8px; max-width: 240px;
+  }
+  .demo-panel label { display: flex; gap: 8px; cursor: pointer; align-items: center; }
+  .demo-panel .tip { color: #999; font-size: 11.5px; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">英语题库<span>工作台</span></div>
+    <div class="topbar-mid">0709 英语草稿卷 · <b>张同学</b> · 昨天 21:40 自动保存</div>
+    <nav class="topbar-nav">
+      <button class="find-btn" id="openDrawer">🔍 找题 <kbd>/</kbd></button>
+      <a href="#">个人空间</a>
+      <a href="#">导出</a>
+    </nav>
+  </header>
+
+  <main class="desk-area">
+    <div class="paper">
+      <span class="paper-badge">共 9 版 · 对折 2 张 · A3</span>
+      <div class="paper-head">
+        <h1>英 语 练 习</h1>
+        <div class="sub">0709 · 张同学 · 阅读专练</div>
+      </div>
+      <div class="pgroup">
+        <h3>Reading A</h3>
+        <p>The community garden on Maple Street did not look like much at first — a vacant lot, a few raised beds, a hand-painted sign. But over one summer, it became the busiest corner of the neighborhood…</p>
+        <div class="qs">21. What was the lot like before the garden was built? &nbsp;&nbsp; 22. …</div>
+      </div>
+      <div class="pgroup">
+        <h3>Reading B</h3>
+        <p>When Maya signed up for her first marathon, she thought the hardest part would be the running. She was wrong. The hardest part, it turned out, was learning to rest…</p>
+        <div class="qs">24. Why did Maya find resting difficult? &nbsp;&nbsp; 25. …</div>
+      </div>
+      <hr class="page-cut">
+      <div class="pgroup">
+        <h3>完形填空</h3>
+        <p>On the night train to Chengdu, I found myself seated across from an old man with a wooden box…</p>
+        <div class="qs">41-55（15 题）</div>
+      </div>
+    </div>
+    <aside class="rail">
+      <h4>本卷 · 5 题组</h4>
+      <a class="on" href="#"><span>Reading A</span><span>4 题</span></a>
+      <a href="#"><span>Reading B</span><span>4 题</span></a>
+      <a href="#"><span>完形填空</span><span>15 题</span></a>
+      <a href="#"><span>语法填空</span><span>10 空</span></a>
+      <a href="#"><span>写作</span><span>1 题</span></a>
+      <div class="add" id="railFind">＋ 找题加进来</div>
+    </aside>
+  </main>
+
+  <section class="empty-desk">
+    <div class="hint">桌上还没有草稿卷。找到第一道题，卷子就开始了。</div>
+    <div class="empty-search">
+      <input type="text" placeholder="找题：试试「2024 新课标的 D 篇」或「科技类完形」">
+      <span style="color:var(--brand-teal);font-size:18px;">→</span>
+    </div>
+    <div class="empty-doorways">
+      <button class="doorway">阅读 B/C/D</button>
+      <button class="doorway">完形填空</button>
+      <button class="doorway">七选五</button>
+      <button class="doorway">语法填空</button>
+      <button class="doorway">写作</button>
+    </div>
+    <div class="empty-or">或者</div>
+    <button class="empty-new">开一份空白草稿卷</button>
+  </section>
+
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer">
+    <div class="drawer-search">
+      <input type="text" id="drawerInput" placeholder="找题：题型、年份、话题，或随便描述">
+    </div>
+    <div class="drawer-doorways">
+      <button class="doorway">阅读 B/C/D <span style="color:var(--ink-faint)">128</span></button>
+      <button class="doorway">完形 <span style="color:var(--ink-faint)">42</span></button>
+      <button class="doorway">七选五 <span style="color:var(--ink-faint)">37</span></button>
+      <button class="doorway">语法填空 <span style="color:var(--ink-faint)">45</span></button>
+      <button class="doorway">写作 <span style="color:var(--ink-faint)">18</span></button>
+    </div>
+    <h5>最近入库</h5>
+    <div class="drow"><span class="t">D 篇</span><span class="n">Why Handwriting Still Matters in a Digital Age</span><button class="add-mini">加入</button></div>
+    <div class="drow"><span class="t">七选五</span><span class="n">The Science of Taking Better Breaks</span><button class="add-mini">加入</button></div>
+    <div class="drow"><span class="t">完形</span><span class="n">An Unexpected Friendship on the Night Train</span><button class="add-mini">加入</button></div>
+    <h5>最近看过</h5>
+    <div class="drow"><span class="t">D 篇</span><span class="n">The Quiet Power of Urban Gardens</span><button class="add-mini">加入</button></div>
+    <div class="drow"><span class="t">语填</span><span class="n">The Chinese Tea House That Time Forgot</span><button class="add-mini">加入</button></div>
+  </aside>
+
+  <div class="demo-panel">
+    <label><input type="checkbox" id="emptyToggle"> 预览「空桌态」（无草稿卷时）</label>
+    <div class="tip">按 <b>/</b> 或点顶栏「🔍 找题」呼出找题抽屉；Esc 或点暗处收回。</div>
+  </div>
+
+<script>
+  const open = () => { document.body.classList.add('drawer-open'); setTimeout(() => document.getElementById('drawerInput').focus(), 240); };
+  const close = () => document.body.classList.remove('drawer-open');
+  document.getElementById('openDrawer').addEventListener('click', open);
+  document.getElementById('railFind').addEventListener('click', open);
+  document.getElementById('backdrop').addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && !e.target.matches('input')) { e.preventDefault(); open(); }
+    if (e.key === 'Escape') close();
+  });
+  document.getElementById('emptyToggle').addEventListener('change', e =>
+    document.body.classList.toggle('empty', e.target.checked));
+</script>
+</body>
+</html>

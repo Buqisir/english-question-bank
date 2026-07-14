@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-13（a3-imposition 部署生产 67fc324；三刀 DP-3
-owner 同场过（qa-dp3.md）；早间双刀部署 2c01e2b + 真值同步生产 +
-R2 restore 演练销账）
+Last updated: 2026-07-13（motion-press-exit 收官 merge 0dcaec7，三路
+UI 评审刀1，CR APPROVE 0MF/4SW、main CI 绿、未部署；a3-imposition 部署
+生产 67fc324 + 三刀 DP-3 同场过）
 
 ## 现在是什么
 
@@ -25,6 +25,29 @@ R2 restore 演练销账）
 
 ## 主线焦点
 
+- 2026-07-13：**全站 UI 三路评审 + motion-press-exit 收官（刀1）**
+  （merge 0dcaec7，CR APPROVE 0MF/4SW，DP-2 契约全绿+A3零回归，main CI 绿）：
+  评审用 impeccable 三路独立合成（A 设计总监实点 28/40，较 07-10 的 20 升；
+  B detect.mjs 394 命中大半文档缺口；C Emil 工艺账）——快照
+  `.impeccable/critique/2026-07-13T15-58-11Z__full-project.md`。刀1 清 Emil
+  工艺账：全站按压反馈（7 selector `:active` scale + transform 补齐）、弹层
+  入退场（2 模态/2 菜单/2 toast，transition 制、退出快于入场、可打断）、
+  reduced-motion scroll helper（4 call site）、rail/toggle 过渡、B 路 CSS
+  小账。**账单**：流水线 132k（DEV+verify+CR）+ 评审三子代理 ~464k；主代理
+  出场多（含亲驱 DP-2）。**未部署**，DP-3 待 owner。QA 判例入档：**Browser
+  面板/后台 Chrome 标签 visibilityState=hidden 会节流 rAF，rAF 门控的入场
+  动画逐帧手感眼看不了**——DP-2 改确定性 CSS 契约验证替代（强制翻
+  data-visible/样式表遍历），SW-1（单 rAF 塌帧）移交 owner DP-3 前台复核。
+  **待办**：
+  - **刀2 信任裂缝（未开）**：搜索诚实空态(P1)、详情/筛选进 URL(P1)、
+    卷名结巴、rail "Reading…"截断、年份头重复、"已删除"→"已移出"措辞。
+  - **主页方向（原型探索中，未拍板）**：owner 长期觉主页"不够 feel"。
+    评审证实"没有锚"（美学 4/4 但每行两意图竞争 + hover 藏操作）。原型在
+    `docs/cuts/home-desk/`：prototype.html（书桌版，减法开关+3 脑洞可叠加）、
+    **prototype-no-lobby.html（推翻版：取消主页=开门即当前草稿卷工作台，
+    找题降级为侧滑抽屉，空桌态才显极简大搜索框）**。owner 三次纠结(空/杂/
+    没锚)后主代理判"主页是错问题"→推翻版待 owner 实点定夺。**未定方向前
+    不要动生产主页代码。**
 - 2026-07-13：**a3-imposition 收官**（merge dbfb472，CR APPROVE 0MF/4SW，
   verify:all + main CI 绿含新 e2e Phase B 真点步）：A3 态预览按面拼版
   （方案C 满幅、面标签/对折线/翻面⟲换张✂缝、缝上建议徽标）——owner 对
