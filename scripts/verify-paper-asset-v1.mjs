@@ -132,7 +132,7 @@ function normalizeForSourceMatch(s) {
 
 // ─── Load fixture ───────────────────────────────────────────────────────────────
 
-const fixturePath = resolve(ROOT, 'app/public/paper-assets/paper-2024-jslk-english/paper-asset.json');
+const fixturePath = resolve(ROOT, 'test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json');
 assert(existsSync(fixturePath), 'Fixture file exists');
 
 let asset;

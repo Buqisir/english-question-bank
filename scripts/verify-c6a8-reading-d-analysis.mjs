@@ -90,7 +90,7 @@ const allowedFiles = new Set([
   'app/src/data/sampleQuestionGroups.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'data/sql/seed-v0.sql',
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
   'scripts/verify-c6a4-paper-asset-analysis-loader.mjs',
   'scripts/verify-c6a5-search-entry-e2e.mjs',
   'scripts/verify-c6a6a-reading-b-analysis.mjs',
@@ -104,7 +104,7 @@ for (const file of changedFiles) {
   assert(`changed file allowed: ${file}`, allowedFiles.has(file), 'unexpected C6a-8 file')
 }
 
-assert('paper-asset source fixture unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
+assert('paper-asset source fixture unchanged', !changedFiles.includes('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('PaperSurface renderer unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
 assert('shared/papersurface unchanged', !changedFiles.some((file) => file.startsWith('shared/papersurface/')))
 assert('server unchanged', !changedFiles.some((file) => file.startsWith('server/')))
@@ -112,8 +112,8 @@ assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(p
 
 console.log('\n-- 2. Fixture shape --')
 
-const asset = readJson('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json')
-const analysisText = read('app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json')
+const asset = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json')
+const analysisText = read('test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json')
 const analysis = JSON.parse(analysisText)
 const groupId = 'group-2024-jslk-reading-d'
 const questionIds = ['q-2024-jslk-032', 'q-2024-jslk-033', 'q-2024-jslk-034', 'q-2024-jslk-035']

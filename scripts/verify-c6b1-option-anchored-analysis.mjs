@@ -168,9 +168,9 @@ const adapterModulePath = path.join(
   'paperAssetSurfaceAdapter.ts',
 )
 const { buildPaperAssetSurfaceModel } = await import(adapterModulePath)
-const asset = readJson('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json')
+const asset = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json')
 const analysis = readJson(
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 )
 const model = buildPaperAssetSurfaceModel({
   asset,

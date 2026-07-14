@@ -51,7 +51,7 @@ function writeJson(filePath, value) {
 }
 
 function copyFixturePaperAsset(tempRoot) {
-  const sourceDir = path.join(rootDir, 'app/public/paper-assets', paperId)
+  const sourceDir = path.join(rootDir, 'test-fixtures/paper-assets', paperId)
   const targetDir = path.join(tempRoot, paperId)
   mkdirSync(path.join(targetDir, 'analyses'), { recursive: true })
   copyFileSync(path.join(sourceDir, 'paper-asset.json'), path.join(targetDir, 'paper-asset.json'))
@@ -104,7 +104,7 @@ assert('api appends paper-asset analysis cards to question group list', apiSourc
 assert('api only appends paper-asset cards with analysis href and label', apiSource.includes('!paperSurfaceAnalysis?.href || !paperSurfaceAnalysis?.label'))
 assert('api paper-asset cards consume availability label', apiSource.includes('paperSurfaceLabel: paperSurfaceAnalysis?.label || null'))
 
-const liveAvailability = availabilityFor(path.join(rootDir, 'app/public/paper-assets'))
+const liveAvailability = availabilityFor(path.join(rootDir, 'test-fixtures/paper-assets'))
 const sevenChoices = liveAvailability.get(sevenChoicesGroupId)
 assert('live fixture exposes 七选五 availability', Boolean(sevenChoices?.href))
 assert('七选五 label is server-provided', sevenChoices?.label === '七选五解析')
@@ -127,8 +127,8 @@ for (const groupId of readingGroupIds) {
   assert(`${groupId} href does not include analysisOpen`, !params.has('analysisOpen'))
 }
 
-const asset = readJson(`app/public/paper-assets/${paperId}/paper-asset.json`)
-const sevenAnalysis = readJson(`app/public/paper-assets/${paperId}/analyses/seven-choices-analysis-v1.json`)
+const asset = readJson(`test-fixtures/paper-assets/${paperId}/paper-asset.json`)
+const sevenAnalysis = readJson(`test-fixtures/paper-assets/${paperId}/analyses/seven-choices-analysis-v1.json`)
 const sevenQuestionIds = asset.content.groups[sevenChoicesGroupId].questionIds
 assert(
   'fixture 七选五 analysis is complete for every group question',

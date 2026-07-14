@@ -250,8 +250,8 @@ assert(
 const dataFiles = [
   targetReportPath,
   targetInputPath,
-  'app/public/paper-assets/paper-2024-jslk-english/paper-asset.json',
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ]
 
 for (const file of dataFiles) {

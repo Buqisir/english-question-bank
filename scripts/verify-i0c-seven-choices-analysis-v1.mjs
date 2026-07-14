@@ -5,8 +5,8 @@ import { resolve } from 'node:path'
 const ROOT = process.cwd()
 const PAPER_ID = 'paper-2024-jslk-english'
 const GROUP_ID = 'group-2024-jslk-seven-choices'
-const DEFAULT_ANALYSIS_PATH = `app/public/paper-assets/${PAPER_ID}/analyses/seven-choices-analysis-v1.json`
-const ASSET_PATH = `app/public/paper-assets/${PAPER_ID}/paper-asset.json`
+const DEFAULT_ANALYSIS_PATH = `test-fixtures/paper-assets/${PAPER_ID}/analyses/seven-choices-analysis-v1.json`
+const ASSET_PATH = `test-fixtures/paper-assets/${PAPER_ID}/paper-asset.json`
 
 const expectedAnswers = {
   'q-2024-jslk-036': 'B',
