@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原型 T · 空白态↔搜索态 切换节拍 A/B/C</title>
+<style>
+  :root {
+    --brand-teal: #2C6E56; --teal-50: #EAF1ED; --teal-100: #CFE4DA;
+    --teal-200: #A5CDBD; --teal-800: #1E4A3A;
+    --bg: #F6F6F4; --surface: #FFFFFF; --surface-2: #EDEDEA;
+    --ink: #1E1E1C; --ink-muted: #6A6A64; --ink-faint: #9A9A93;
+    --border-subtle: #E8E8E4; --border: #D8D8D2; --border-strong: #C6C6C0;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px; line-height: 1.5;
+    display: flex; flex-direction: column;
+  }
+
+  .topbar { display: flex; justify-content: flex-end; gap: 4px; padding: 14px 24px; }
+  .topbar a {
+    font-size: 13px; color: var(--ink-muted); text-decoration: none;
+    padding: 5px 10px; border-radius: 6px;
+    transition: background 140ms ease, color 140ms ease;
+  }
+  .topbar a:hover { background: rgba(30,30,28,0.05); color: var(--ink); }
+
+  .stage {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    padding: 0 24px 120px;
+  }
+  .stage-inner {
+    width: 100%; max-width: 720px; margin-top: 26vh;
+    transition: margin-top 340ms var(--ease-out);
+  }
+  body[data-searching] .stage-inner { margin-top: 9vh; }
+
+  .wordmark {
+    text-align: center; margin-bottom: 26px;
+    font-size: 21px; font-weight: 600; letter-spacing: 0.01em;
+  }
+  .wordmark span { color: var(--brand-teal); }
+
+  .searchbox {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface); border: 1px solid var(--border-strong);
+    border-radius: 14px; padding: 0 10px 0 22px; height: 66px;
+    box-shadow: 0 1px 2px rgba(30,30,28,0.04), 0 16px 40px -16px rgba(30,30,28,0.12);
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms var(--ease-out);
+  }
+  .searchbox:focus-within {
+    border-color: var(--brand-teal); transform: translateY(-1px);
+    box-shadow: 0 0 0 3px var(--teal-50), 0 20px 48px -18px rgba(44,110,86,0.22);
+  }
+  .searchbox svg { flex: none; color: var(--ink-faint); }
+  .searchbox input {
+    flex: 1; border: none; outline: none; background: none;
+    font: inherit; font-size: 18px; color: var(--ink); min-width: 0;
+  }
+  .searchbox input::placeholder { color: var(--ink-muted); }
+  .search-go {
+    flex: none; width: 46px; height: 46px; border: none; border-radius: 10px;
+    background: var(--brand-teal); color: #fff; font-size: 18px; cursor: pointer;
+    transition: background 140ms ease, transform 100ms ease, opacity 140ms ease;
+  }
+  .search-go:hover { background: var(--teal-800); }
+  .search-go:active { transform: scale(0.96); }
+  .search-go:disabled { opacity: 0.55; cursor: default; }
+
+  .whisper {
+    text-align: center; margin-top: 18px;
+    font-size: 13px; color: var(--ink-muted);
+    transition: opacity 200ms ease;
+  }
+  body[data-searching] .whisper { opacity: 0; pointer-events: none; }
+  .whisper .browse-link {
+    color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong);
+    cursor: pointer;
+  }
+  .whisper .browse-link:hover { color: var(--brand-teal); border-bottom-color: var(--teal-200); }
+
+  /* ── 提交后：loading ── */
+  .loading-line {
+    display: none; text-align: center; margin-top: 26px;
+    font-size: 13.5px; color: var(--ink-muted);
+  }
+  body[data-phase="loading"] .loading-line { display: block; animation: rise 200ms var(--ease-out); }
+  .loading-line .dots::after {
+    content: ''; display: inline-block; width: 1.2em; text-align: left;
+    animation: dots 1.2s steps(4) infinite;
+  }
+  @keyframes dots { 0% { content: ''; } 25% { content: '·'; } 50% { content: '··'; } 75% { content: '···'; } }
+
+  /* ── 结果区 ── */
+  .results { width: 100%; max-width: 720px; margin: 40px auto 60px; display: none; }
+  body[data-phase="results"] .results, body[data-phase="empty"] .results { display: block; animation: rise 220ms var(--ease-out); }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .results-note { font-size: 13.5px; color: var(--ink-muted); margin: 0 4px 14px; }
+  .result-row {
+    display: flex; align-items: baseline; gap: 16px;
+    background: var(--surface); border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+  }
+  .result-row:hover { border-color: var(--teal-200); box-shadow: 0 4px 16px -8px rgba(30,30,28,0.10); }
+  .result-year { font-size: 19px; font-weight: 300; font-variant-numeric: tabular-nums; }
+  .result-main { flex: 1; }
+  .result-title { font-size: 15px; font-weight: 600; }
+  .result-reason { font-size: 13px; color: var(--ink-muted); margin-top: 2px; }
+  .result-hit { font-size: 12.5px; color: var(--teal-800); background: var(--teal-50); border-radius: 999px; padding: 3px 10px; }
+
+  /* ── 诚实空态 ── */
+  .empty-state { display: none; text-align: center; padding: 34px 0 8px; }
+  body[data-phase="empty"] .empty-state { display: block; }
+  body[data-phase="empty"] .result-list, body[data-phase="empty"] .results-note { display: none; }
+  .empty-state .empty-main { font-size: 15px; color: var(--ink); }
+  .empty-state .empty-sub { font-size: 13px; color: var(--ink-muted); margin-top: 6px; }
+  .empty-state .empty-sub a { color: var(--brand-teal); text-decoration: none; }
+  .empty-state .empty-sub a:hover { text-decoration: underline; }
+
+  /* ── C 档：本地速搜面板 ── */
+  .local-panel { width: 100%; max-width: 720px; margin: 34px auto 0; display: none; }
+  body[data-variant="c"][data-phase="typing"] .local-panel { display: block; animation: rise 180ms var(--ease-out); }
+  .local-label {
+    font-size: 11.5px; letter-spacing: 0.08em; color: var(--ink-faint);
+    margin: 0 4px 10px; text-transform: uppercase;
+  }
+  .local-row {
+    display: flex; align-items: baseline; gap: 14px;
+    background: none; border: 1px dashed var(--border);
+    border-radius: 10px; padding: 11px 16px; margin-bottom: 8px; cursor: pointer;
+    transition: border-color 140ms ease, background 140ms ease;
+  }
+  .local-row:hover { border-color: var(--teal-200); background: var(--surface); }
+  .local-year { font-size: 16px; font-weight: 300; font-variant-numeric: tabular-nums; color: var(--ink-muted); }
+  .local-title { flex: 1; font-size: 14px; }
+  .local-why { font-size: 12px; color: var(--ink-faint); }
+  .local-none { font-size: 13px; color: var(--ink-muted); padding: 8px 4px; }
+  .local-hint { font-size: 12.5px; color: var(--ink-faint); margin: 12px 4px 0; }
+  .local-hint kbd {
+    font: inherit; border: 1px solid var(--border); border-bottom-width: 2px;
+    border-radius: 4px; padding: 0 5px; background: var(--surface);
+  }
+
+  /* ── 档位切换 ── */
+  .variant-bar {
+    position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 10;
+  }
+  .variant-desc { font-size: 12px; color: var(--ink-muted); text-align: center; max-width: 560px;
+    background: color-mix(in srgb, var(--bg) 82%, transparent); border-radius: 6px; padding: 2px 10px; }
+  .variant-pills {
+    display: flex; gap: 4px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px;
+    box-shadow: 0 8px 28px -12px rgba(30,30,28,0.22);
+  }
+  .variant-pills button {
+    border: none; background: none; font: inherit; font-size: 13px; cursor: pointer;
+    color: var(--ink-muted); padding: 6px 14px; border-radius: 999px;
+    transition: background 140ms ease, color 140ms ease;
+  }
+  .variant-pills button:hover { color: var(--ink); }
+  .variant-pills button.active { background: var(--brand-teal); color: #fff; }
+
+  .proto-tag {
+    position: fixed; left: 14px; bottom: 12px; font-size: 11px; color: var(--ink-faint);
+    background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 3px 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body data-variant="a" data-phase="idle">
+  <header class="topbar">
+    <a href="#">个人空间</a><a href="#">管理</a><a href="#">qa-local-owner</a><a href="#">退出</a>
+  </header>
+
+  <main class="stage">
+    <div class="stage-inner">
+      <h1 class="wordmark">英语题库<span>工作台</span></h1>
+      <div class="searchbox">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="text" placeholder="找一篇讲生态恢复的阅读 C，主旨概括" autocomplete="off" autofocus>
+        <button class="search-go" id="go" aria-label="开始取题">→</button>
+      </div>
+      <p class="whisper"><span class="browse-link" title="点开进浏览态（已另拍板，本原型不含）">34 套卷 · 278 篇章</span>，一句话描述你要的题</p>
+      <p class="loading-line">正在按你的描述找题<span class="dots"></span></p>
+
+      <section class="local-panel" aria-live="polite">
+        <p class="local-label">本地精确匹配 · 即时</p>
+        <div id="localList"></div>
+        <p class="local-hint">按 <kbd>回车</kbd> 让 AI 按整句描述理解你要的题</p>
+      </section>
+    </div>
+
+    <section class="results" aria-live="polite">
+      <p class="results-note">已按你的描述在本地题库匹配。</p>
+      <div class="result-list" id="resultList"></div>
+      <div class="empty-state">
+        <p class="empty-main" id="emptyMain">按你的描述没有找到合适的题。</p>
+        <p class="empty-sub">换个说法试试，或从 <a href="#" onclick="return false">题库浏览</a> 进去看看。</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="variant-bar">
+    <p class="variant-desc" id="variantDesc"></p>
+    <div class="variant-pills" role="tablist">
+      <button data-v="a" class="active">A · 提交拍切换</button>
+      <button data-v="b">B · 打字即上移</button>
+      <button data-v="c">C · 本地速搜</button>
+    </div>
+  </div>
+
+  <span class="proto-tag">原型 T · 切换节拍对比 · 2026-07-14 · 1/2/3 换档 · esc 清空</span>
+
+<script>
+  const q = document.getElementById('q');
+  const go = document.getElementById('go');
+  const body = document.body;
+  const resultList = document.getElementById('resultList');
+  const localList = document.getElementById('localList');
+  const emptyMain = document.getElementById('emptyMain');
+  const variantDesc = document.getElementById('variantDesc');
+
+  const DESCS = {
+    a: 'A：打字纹丝不动，按回车那一拍才上移 + 找题；esc 清空回落纯空白。',
+    b: 'B：一打字就上移腾位（原型 D 的手感），但 AI 没跑——底下是空的，回车才有内容。',
+    c: 'C：打字先出「本地精确匹配」（卷名/年份/题型），回车才让 AI 按整句描述找。',
+  };
+
+  const CORPUS = [
+    { year: 2025, name: '新课标Ⅰ卷', type: '阅读 C', topic: '生态恢复' },
+    { year: 2025, name: '新课标Ⅱ卷', type: '七选五', topic: '学习方法' },
+    { year: 2024, name: '新课标Ⅰ卷', type: '七选五', topic: '城市徒步' },
+    { year: 2024, name: '新课标Ⅱ卷', type: '阅读 D', topic: '生态环境' },
+    { year: 2024, name: '全国甲卷', type: '完形填空', topic: '人物记叙' },
+    { year: 2023, name: '全国乙卷', type: '阅读 C', topic: '人与自然' },
+    { year: 2023, name: '新课标Ⅰ卷', type: '语法填空', topic: '传统文化' },
+    { year: 2022, name: '全国甲卷', type: '阅读 B', topic: '校园生活' },
+  ];
+
+  const AI_SETS = [
+    { match: /生态|自然|环境/, rows: [
+      { year: 2025, title: '新课标Ⅰ卷 · Reading C', reason: '推荐理由：讲生态恢复的 C 篇 · 主旨概括 T10' },
+      { year: 2024, title: '新课标Ⅱ卷 · Reading D', reason: '推荐理由：可能与生态环境相关的 D 篇' },
+      { year: 2023, title: '全国乙卷 · Reading C', reason: '推荐理由：讲人与自然的 C 篇' },
+    ]},
+    { match: /七选五/, rows: [
+      { year: 2025, title: '新课标Ⅱ卷 · 七选五', reason: '推荐理由：学习方法主题，段中题 2 空' },
+      { year: 2024, title: '新课标Ⅰ卷 · 七选五', reason: '推荐理由：城市徒步，标准五空结构' },
+    ]},
+    { match: /202[2-5]/, rowsByYear: true },
+  ];
+
+  let timer = null;
+
+  function setPhase(phase) { body.dataset.phase = phase; }
+  function setSearching(on) { body.toggleAttribute('data-searching', on); }
+
+  function reset() {
+    clearTimeout(timer); timer = null;
+    q.value = '';
+    setSearching(false);
+    setPhase('idle');
+    resultList.innerHTML = '';
+    localList.innerHTML = '';
+  }
+
+  function switchVariant(v) {
+    body.dataset.variant = v;
+    document.querySelectorAll('.variant-pills button').forEach(
+      (b) => b.classList.toggle('active', b.dataset.v === v));
+    variantDesc.textContent = DESCS[v];
+    reset();
+    q.focus();
+  }
+
+  function renderLocal(query) {
+    const tokens = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const hits = CORPUS.filter((p) => tokens.some((t) =>
+      String(p.year).includes(t) || p.name.toLowerCase().includes(t) || p.type.toLowerCase().includes(t)));
+    if (!hits.length) {
+      localList.innerHTML = '<p class="local-none">卷名 / 年份 / 题型无精确匹配。</p>';
+      return;
+    }
+    localList.innerHTML = hits.slice(0, 4).map((p) => `
+      <div class="local-row">
+        <span class="local-year">${p.year}</span>
+        <span class="local-title">${p.name} · ${p.type}</span>
+        <span class="local-why">字段命中</span>
+      </div>`).join('');
+  }
+
+  function aiRows(query) {
+    for (const set of AI_SETS) {
+      const m = query.match(set.match);
+      if (!m) continue;
+      if (set.rowsByYear) {
+        const year = Number(m[0]);
+        return CORPUS.filter((p) => p.year === year).map((p) => ({
+          year: p.year, title: `${p.name} · ${p.type}`,
+          reason: `推荐理由：${year} 年的卷 · ${p.topic}`,
+        }));
+      }
+      return set.rows;
+    }
+    return [];
+  }
+
+  function submit() {
+    const query = q.value.trim();
+    if (!query || body.dataset.phase === 'loading') return;
+    setSearching(true);
+    setPhase('loading');
+    resultList.innerHTML = '';
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const rows = aiRows(query);
+      if (!rows.length) {
+        emptyMain.textContent = `按「${query}」没有找到合适的题。`;
+        setPhase('empty');
+        return;
+      }
+      resultList.innerHTML = rows.map((r) => `
+        <div class="result-row">
+          <span class="result-year">${r.year}</span>
+          <span class="result-main">
+            <span class="result-title">${r.title}</span>
+            <div class="result-reason">${r.reason}</div>
+          </span>
+          <span class="result-hit">命中 1 个篇章</span>
+        </div>`).join('');
+      setPhase('results');
+    }, 1300);
+  }
+
+  function onInput() {
+    const has = q.value.trim().length > 0;
+    const v = body.dataset.variant;
+    if (body.dataset.phase === 'loading') return;
+    if (!has) {
+      setSearching(false); setPhase('idle'); localList.innerHTML = '';
+      return;
+    }
+    if (v === 'a') {
+      // 打字不动；已有结果时继续留在结果态，等下一次提交刷新
+      if (body.dataset.phase === 'idle') setPhase('typing');
+    } else if (v === 'b') {
+      setSearching(true);
+      if (body.dataset.phase !== 'results' && body.dataset.phase !== 'empty') setPhase('typing');
+    } else {
+      setSearching(true); setPhase('typing'); renderLocal(q.value);
+    }
+  }
+
+  q.addEventListener('input', onInput);
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submit();
+    if (e.key === 'Escape') reset();
+  });
+  go.addEventListener('click', submit);
+
+  document.querySelectorAll('.variant-pills button').forEach(
+    (b) => b.addEventListener('click', () => switchVariant(b.dataset.v)));
+  document.addEventListener('keydown', (e) => {
+    if (e.target === q) return;
+    if (e.key === '1') switchVariant('a');
+    if (e.key === '2') switchVariant('b');
+    if (e.key === '3') switchVariant('c');
+  });
+
+  switchVariant('a');
+</script>
+</body>
+</html>
