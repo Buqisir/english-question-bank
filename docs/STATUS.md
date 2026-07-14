@@ -302,8 +302,8 @@ motion-press-exit 刀1；CI 吞码事故判例入 case-law）
 - 数据健康追记（2026-07-10 owner QA 截图顺带发现）：某完形组指导语
   「从每题所给的A、B、C、D四个选项」被数据内换行截断成「…A / D…」
   且吞字——入 data-health 清单，随脏数据批修。
-- ~~motion-pass~~（2026-07-12 收官，见主线焦点；「折叠」时刻待 owner
-  指认另立 small 刀）。
+- ~~motion-pass~~（2026-07-12 收官，见主线焦点；「折叠」时刻 owner 拍板
+  不做，2026-07-14，不立刀）。
 - UI 烂点清单：`docs/cuts/ui-facade/ui-blemish-list.md`（owner 曾圈
   「按顺序全做」，剩余项待核对）。
 - ~~数据孤儿清理~~（2026-07-07 data-orphan-cleanup 刀收官，PR #268 +
