@@ -20,6 +20,7 @@ import { mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { proxyFreeEnv } from './lib/proxyFreeEnv.mjs'
 
 const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const dbPath = path.join(rootDir, 'data', 'question-bank.sqlite')
@@ -174,6 +175,7 @@ try {
   execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], {
     timeout: 120000,
     stdio: 'pipe',
+    env: proxyFreeEnv(),
   })
 } catch (err) {
   console.error('Vivliostyle build failed:', err.stderr?.toString() || err.message)

@@ -9,6 +9,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { proxyFreeEnv } from './lib/proxyFreeEnv.mjs'
 
 let passed = 0, failed = 0
 function assert(name, condition, detail) {
@@ -260,7 +261,7 @@ console.log('\nTest 5: Vivliostyle CLI smoke test')
     const pdfPath = path.join(tempDir, 'test.pdf')
     writeFileSync(htmlPath, html)
     try {
-      execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
+      execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, env: proxyFreeEnv() })
       const pdfBytes = readFileSync(pdfPath)
       assert('PDF generated', pdfBytes.length > 0, `size: ${pdfBytes.length}`)
       assert('PDF starts with %PDF', pdfBytes.slice(0, 4).toString() === '%PDF', '')
@@ -455,7 +456,7 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
       const pdfPath = path.join(tempDir, 'real.pdf')
       try {
         writeFileSync(htmlPath, html)
-        execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, stdio: 'pipe' })
+        execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, stdio: 'pipe', env: proxyFreeEnv() })
         const pdfBytes = readFileSync(pdfPath)
         assert('real-asset PDF generated', pdfBytes.length > 0, `size: ${pdfBytes.length}`)
         assert('real-asset PDF starts with %PDF', pdfBytes.slice(0, 4).toString() === '%PDF', '')

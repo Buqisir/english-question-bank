@@ -20,6 +20,7 @@ import path from 'node:path'
 import { buildDocxPayload } from '../app/src/paperAssembly/paperExportPayload.ts'
 import { mapPrintPdfError } from '../app/src/services/questionGroups.ts'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { proxyFreeEnv } from './lib/proxyFreeEnv.mjs'
 
 let passed = 0, failed = 0
 function assert(name, condition, detail) {
@@ -170,7 +171,7 @@ if (vivliostyleBin) {
   const pdfPath = path.join(tempDir, 'paper.pdf')
   try {
     writeFileSync(htmlPath, html)
-    execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, stdio: 'pipe' })
+    execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, stdio: 'pipe', env: proxyFreeEnv() })
     const pdfBytes = readFileSync(pdfPath)
     assert('student PDF generated', pdfBytes.length > 0, `size: ${pdfBytes.length}`)
     assert('student PDF starts with %PDF', pdfBytes.slice(0, 4).toString() === '%PDF', '')
@@ -186,7 +187,7 @@ if (vivliostyleBin) {
     })
     assert('teacher HTML contains 【答案】', teacherHtml.includes('【答案】'), '')
     writeFileSync(htmlPath, teacherHtml)
-    execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, stdio: 'pipe' })
+    execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, stdio: 'pipe', env: proxyFreeEnv() })
     const teacherPdf = readFileSync(pdfPath)
     assert('teacher PDF starts with %PDF', teacherPdf.slice(0, 4).toString() === '%PDF', '')
   } finally {

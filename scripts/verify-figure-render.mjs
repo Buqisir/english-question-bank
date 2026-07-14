@@ -53,6 +53,7 @@ import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { createVerifier, repoRootFrom } from './lib/verifyScope.mjs'
+import { proxyFreeEnv } from './lib/proxyFreeEnv.mjs'
 
 const root = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('figure-render (fig-token P0)')
@@ -259,7 +260,7 @@ section('4. Server — print-renderer.mjs (web + file imageMode)')
               if (copyImage) {
                 writeFileSync(path.join(dir, images[0].relativeName), readFileSync(images[0].absoluteSourcePath))
               }
-              execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
+              execFileSync(vivliostyleBin, ['build', htmlPath, '-o', pdfPath], { timeout: 60000, env: proxyFreeEnv() })
               return readFileSync(pdfPath).length
             } finally {
               rmSync(dir, { recursive: true, force: true })
