@@ -75,10 +75,12 @@ motion-press-exit 刀1；CI 吞码事故判例入 case-law）
     (标志/固定形象)填空"；"公仔"需过反卡通宪法→走社标/藏书票档位(企鹅
     社标先例)。原型集已扩至 5：+C 搜索主角+脚下现场、+D 纯空白、
     +**D+ 大搜索框×品牌符号 4 档切换(印章墨绿/朱砂/书猫线描/纯字标)**，
-    全部已开 owner Chrome 实点。**品牌符号 owner 拍板亲定**(2026-07-14：
-    "我想自己定一个品牌符号"——owner 供稿(口述/草图/参考图任一)，小川只
-    做实现与工艺把关(16px/单色/剪影三底线)，D+ 切换器承接候选实点)。
-    拍板前 grilling + High。
+    全部已开 owner Chrome 实点。**owner 拍板(2026-07-14 深夜)：主页方向
+    = 原型 D 纯空白大搜索框；品牌符号(满分猫标)搁置**——素材已档
+    (brand-mark-brief.md：特征速记+owner 自生成插画 4 张+双层制方案)，
+    复活时从 brief 接。**下一步：home-blank 刀**——开工前 grilling 拷问
+    plan(feed 退场后浏览入口/新同事首跑/真空态衔接) + 提醒 owner 切
+    High；未过 grilling 不动生产主页代码。
 - 2026-07-13：**a3-imposition 收官**（merge dbfb472，CR APPROVE 0MF/4SW，
   verify:all + main CI 绿含新 e2e Phase B 真点步）：A3 态预览按面拼版
   （方案C 满幅、面标签/对折线/翻面⟲换张✂缝、缝上建议徽标）——owner 对
