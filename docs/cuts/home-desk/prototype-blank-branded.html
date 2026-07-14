@@ -96,6 +96,16 @@
 
   .results { width: 100%; max-width: 720px; margin: 44px auto 60px; display: none; }
   body[data-searching] .results { display: block; animation: rise 220ms var(--ease-out); }
+  body[data-empty] .results { display: none; }
+
+  /* ── 空态：满分住屋里（双层制演示——门面正装，猫在软时刻出场）── */
+  .empty-state { width: 100%; max-width: 720px; margin: 52px auto 60px; display: none; text-align: center; }
+  body[data-empty] .empty-state { display: block; animation: rise 220ms var(--ease-out); }
+  .empty-state svg { display: block; margin: 0 auto 14px; }
+  .empty-line { font-size: 15px; color: var(--ink); }
+  .empty-sub { font-size: 13.5px; color: var(--ink-muted); margin-top: 6px; }
+  .empty-sub a { color: var(--brand-teal); text-decoration: none; font-weight: 500; }
+  .empty-sub a:hover { text-decoration: underline; }
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   .results-note { font-size: 13.5px; color: var(--ink-muted); margin: 0 4px 14px; }
   .result-row {
@@ -220,6 +230,30 @@
       <p class="whisper">34 套卷 · 278 篇章，一句话描述你要的题</p>
     </div>
 
+    <section class="empty-state" aria-live="polite">
+      <!-- 满分蜷睡：线描，只在"没找到"这样的软时刻出场 -->
+      <svg width="92" height="60" viewBox="0 0 120 78" fill="none" aria-hidden="true">
+        <!-- 蜷成一团的身体 -->
+        <path d="M18 58 C 12 44, 22 28, 42 24 C 66 19, 92 26, 98 42 C 103 55, 94 64, 78 66 C 55 69, 26 68, 18 58 Z"
+              stroke="#1E1E1C" stroke-width="1.8" stroke-linejoin="round"/>
+        <!-- 头埋在身侧：耳朵一橘线一实黑 -->
+        <path d="M78 44 C 90 42, 97 48, 96 56 C 95 62, 88 66, 80 65 C 72 64, 68 58, 70 51 C 71 47, 74 45, 78 44 Z"
+              stroke="#1E1E1C" stroke-width="1.8"/>
+        <path d="M80 44.5 L 77.5 37.5 L 85 40.5 Z" stroke="#1E1E1C" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M90 46 L 94.5 40 L 96.5 47.5 Z" fill="#1E1E1C" stroke="#1E1E1C" stroke-width="1.6" stroke-linejoin="round"/>
+        <!-- 闭眼 + 鼻 -->
+        <path d="M81 54 q 2.4 2 4.8 0" stroke="#1E1E1C" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M90 57.5 c 1 0, 1.8 0.8, 1.8 1.6" stroke="#1E1E1C" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- 盘尾 -->
+        <path d="M18 58 C 24 66, 40 70, 52 68 M 52 68 C 44 72, 28 72, 20 66"
+              stroke="#1E1E1C" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- zzz -->
+        <path d="M103 30 h7 l-7 7 h7 M108 18 h5 l-5 5 h5" stroke="#9A9A93" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="empty-line">满分也没找到这道题。</p>
+      <p class="empty-sub">可以换个说法，或 <a href="#">翻翻馆藏 34 套卷 →</a></p>
+    </section>
+
     <section class="results" aria-live="polite">
       <p class="results-note">已按本地题库精确信息匹配。</p>
       <div class="result-row">
@@ -264,7 +298,11 @@
 <script>
   const q = document.getElementById('q');
   function sync() {
-    document.body.toggleAttribute('data-searching', q.value.trim().length > 0);
+    const value = q.value.trim();
+    // 原型演示：搜"量子"走空态（满分出场的软时刻），其余非空走结果态。
+    const isEmptyDemo = value.includes('量子');
+    document.body.toggleAttribute('data-searching', value.length > 0);
+    document.body.toggleAttribute('data-empty', isEmptyDemo);
   }
   q.addEventListener('input', sync);
   q.addEventListener('keydown', (e) => { if (e.key === 'Escape') { q.value = ''; sync(); } });
