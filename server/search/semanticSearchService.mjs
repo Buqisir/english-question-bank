@@ -63,15 +63,17 @@ const DEEPSEEK_SEMANTIC_RERANK_PROMPT = `你是高中英语题库语义检索重
 1. 优先理解语义，不要只看字面词。
 2. 重点看题组标题、篇章标题、摘要、命中题干、答案提示、标签、话题标签。
 3. 只返回与检索意图真正相关的候选；候选都不相关时返回空 rankings []，不要为凑数返回无关候选。
-4. score 是 0 到 1 之间的小数，越大越相关。
-5. reason 控制在 30 字以内，说明最关键的匹配点。
-6. 只返回 JSON 对象，不要 markdown 代码块，不要额外说明。
+4. 每个候选必须带 relevant 布尔字段：与检索意图真正相关才是 true；"主题接近但内容不相关""同类体裁但讲别的东西"一律 relevant=false。宁可返回空数组，不要用最接近的候选凑数。
+5. score 是 0 到 1 之间的小数，越大越相关。
+6. reason 控制在 30 字以内，说明最关键的匹配点。
+7. 只返回 JSON 对象，不要 markdown 代码块，不要额外说明。
 
 返回格式：
 {
   "rankings": [
     {
       "questionGroupId": "题组 ID",
+      "relevant": true,
       "score": 0.96,
       "reason": "匹配点说明"
     }
@@ -116,6 +118,9 @@ function normalizeSemanticSearchRankings(payload) {
       return {
         questionGroupId,
         score: Number.isFinite(rawScore) ? rawScore : null,
+        // DP-3 补刀（trust-cracks）：显式 relevant 布尔。缺省按 true——旧响应
+        // 形状（无此字段）与既有 stub 用例行为不变，只有 LLM 明说 false 才丢。
+        relevant: item?.relevant === false ? false : true,
         reason: optionalString(item?.reason || item?.explanation || item?.analysis),
         index,
       }
@@ -138,6 +143,12 @@ function buildSemanticSearchMatchesFromRankings(candidates, rankings, candidateB
   rankings.forEach((ranking) => {
     const candidate = candidateById.get(ranking.questionGroupId)
     if (!candidate || seenIds.has(candidate.group.id)) return
+
+    // DP-3 补刀：LLM 自己标了 relevant=false 的候选无条件丢弃。生产实测
+    // （"量子对撞机"）证明只靠"不相关就别返回"的指令拦不住 LLM 的凑数
+    // 倾向——它会返回"最接近的"并在 reason 里自招"不相关"。显式布尔
+    // 比"自觉省略"可靠；分数地板继续兜 relevant 缺省的旧形状。
+    if (ranking.relevant === false) return
 
     const defaultRankScore = clamp01(1 - rankedMatches.length / Math.max(rankings.length - 1, 1))
     const rankingScore =

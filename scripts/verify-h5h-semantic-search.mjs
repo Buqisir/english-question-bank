@@ -315,6 +315,53 @@ verifier.section('C1 honest empty state — trusted rankings shape')
     partialRankingsResult.matches[0]?.questionGroupId === 'g-alpha',
     'the one trusted match is g-alpha',
   )
+
+  // ④DP-3 补刀：relevant:false 无条件丢弃——生产实测（"量子对撞机"）LLM 会
+  // 无视"不相关就别返回"，返回"最接近的"候选并在 reason 自招不相关；显式
+  // 布尔是硬闸。混合榜单只留 relevant:true；全 false 塌成诚实空。
+  const makeRelevantFlagImpl = (rankings) =>
+    createSemanticSearchImplementation({
+      openDatabase: () => makeFixtureDb(),
+      selectQuestionGroupCards: () => CARDS,
+      getDraftSearchContext: () => ({ currentDraftPaperId: null, groupIds: new Set() }),
+      callDeepSeekWithFallback: async () => ({ parsed: { rankings }, rawText: '{}', latencyMs: 5 }),
+      describeKeySource: () => ({ source: 'env', provider: 'deepseek' }),
+      optionalString: (v) => (v == null ? '' : String(v).trim()),
+      objectValue: (v) => (v && typeof v === 'object' && !Array.isArray(v) ? v : {}),
+      parseSavedJson: (raw) => {
+        try {
+          return JSON.parse(raw)
+        } catch {
+          return null
+        }
+      },
+      normalizeSynonymCardId: (v) => (v == null ? '' : String(v).trim().toUpperCase()),
+      maskApiKey: () => '***',
+      elapsedMs: () => 1,
+      groupTypeLabels: { reading: '阅读', cloze: '完形填空' },
+      SEMANTIC_SEARCH_PREFILTER_TOP_K: 72,
+      SEMANTIC_SEARCH_TOP_K: 12,
+      DEFAULT_DEEPSEEK_MODEL: 'deepseek-v4-flash',
+      DEEPSEEK_API_KEY: 'env-key',
+    })
+
+  const mixedRelevantResult = await makeRelevantFlagImpl([
+    { questionGroupId: 'g-alpha', relevant: false, score: 0.9, reason: '科技说明文，但主题不相关' },
+    { questionGroupId: 'g-beta', relevant: true, score: 0.6, reason: '主题命中' },
+  ]).semanticSearchQuestionGroups('climate science inference', 'caller-key', 'trace-mixed-relevant', false, 'local')
+  verifier.assert(
+    mixedRelevantResult.matches.length === 1 && mixedRelevantResult.matches[0]?.questionGroupId === 'g-beta',
+    'relevant:false entry dropped even with high score; only relevant:true survives',
+  )
+
+  const allIrrelevantResult = await makeRelevantFlagImpl([
+    { questionGroupId: 'g-alpha', relevant: false, score: 0.9, reason: '最接近但不相关' },
+    { questionGroupId: 'g-beta', relevant: false, score: 0.8, reason: '同为科技但讲别的' },
+  ]).semanticSearchQuestionGroups('climate science inference', 'caller-key', 'trace-all-irrelevant', false, 'local')
+  verifier.assert(
+    Array.isArray(allIrrelevantResult.matches) && allIrrelevantResult.matches.length === 0,
+    'all rankings relevant:false => honest empty matches (no fallback append)',
+  )
 }
 
 verifier.section('Prompt-content integrity — rerank prompt NOT over-indented (frozen AI contract)')
@@ -323,6 +370,7 @@ verifier.assert(sysPrompt.startsWith('你是高中英语题库语义检索重排
 verifier.assert(sysPrompt.includes('\n规则：') && !sysPrompt.includes('\n  规则：'), 'rerank prompt 规则 line is NOT over-indented')
 verifier.assert(sysPrompt.includes('\n返回格式：') && !sysPrompt.includes('\n  返回格式：'), 'rerank prompt 返回格式 line is NOT over-indented')
 verifier.assert(sysPrompt.includes('\n{\n  "rankings": [') && !sysPrompt.includes('\n  {\n'), 'rerank prompt JSON example block keeps its original 0/2-space structure')
+verifier.assert(sysPrompt.includes('"relevant": true,') && sysPrompt.includes('relevant 布尔字段'), 'rerank prompt carries the explicit relevant-flag contract (DP-3 补刀)')
 
 verifier.section('Extraction seam')
 const apiSource = readText(root, 'server/api.mjs')
