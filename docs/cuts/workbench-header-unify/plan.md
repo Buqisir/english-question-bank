@@ -32,8 +32,18 @@ v2.2 纸列加宽）；fresh CR 冷读。
    同构。
 4. **头-纸垂直节奏对齐解析页**（owner 2026-07-14 改判：撤回纸列加宽，
    纸维持 820px；真病灶是头到卷子的距离太高把头衬细了）：
-   `.draft-preview-desk` padding-top 24→10px、`.draft-paper-meta-row`
-   margin-bottom 14→10px（v2.3 mock 实点方向认可，终值 DP-3 可微调）。
+   `.draft-preview-desk` padding-top 24→10px（v2.3 实点认可，终值
+   DP-3 可微调）。
+5. **分页信息条整条退役**（owner 指令 + v2.4 实点，2026-07-14）：
+   - `A4 散页/A3 对折` 形态切换（`.draft-form-toggle`）移入头行右侧、
+     紧邻 学生版/教师版（同为卷级输出开关，逻辑零改动——print-form
+     的记住上次/同面判据原样）；
+   - 「共 N 页 · 双面 M 张 · A4」真值文本（`.draft-paper-meta`）移到
+     右栏目录顶部作安静小注（12px 暖墨，tabular-nums 保留）；
+   - `.draft-paper-meta-row` 容器退役；PO-1 建议徽标（若在此行附近
+     渲染）随迁不丢——DEV 核实其锚点后就近安置并在完成报告注明。
+   - 窄屏退化补充：≤980px 时 A4/A3 与版本切换一并被「⋯」吸收，
+     导出永远可见。
 
 ## 硬契约
 
