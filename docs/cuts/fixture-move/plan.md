@@ -42,10 +42,17 @@ product boundary / teaching interpretation: **no**。PA 不设（侦察已把
 - consistency：**先搬后删白名单**（同一 commit 内完成即可）——删
   `KNOWN_FIXTURES`（:136）与 `continue` 分支（:147），恢复「任何磁盘
   孤儿目录都 FAIL」严格语义。
-- **i16a 换锚**：jslk 断言重锚到真生产卷（候选 `paper-960d0f8d`，其
-  versions/v1 含解析），不变量 = 断言语义与两侧覆盖（有解析→进索引 /
-  无解析→不进）原样保留，只换锚卷；若找不到能同时覆盖两侧的真卷，
-  **停手 blocked 上报**，不许放宽断言。
+- **i16a 负样本保留 jslk 本体（2026-07-14 修订）**：换真卷已实证不可行
+  ——DEV 盘点全部 31 个真卷解析全覆盖，jslk 是全仓唯一「声明组但缺
+  解析」负样本（当初 MF-2 选它做锚正因于此）。修订后的梯子：
+  1. **首选**：i16a 的扫描 corpus 在临时目录拼装（真 assets + 从新家
+     `test-fixtures/paper-assets/` 取的 jslk），或索引构建入口参数化
+     扫描根——4 条断言语义与条数原样保留；
+  2. **次选**（仅当①必须动 app/server 契约面才可达时）：构造最小合成
+     负样本（声明组但缺 analysis 的 minimal paper-asset.json，放
+     `test-fixtures/paper-assets/_synthetic-i16a/`）拼进 corpus——
+     「缺解析不进索引」的语义本质不依赖样本是否真卷；
+  3. **禁止**：放宽/删除这 4 条断言，或逆转搬家顺序。
 - **基线纪律**：动手前先在 worktree 实跑全部 17 个受影响脚本记录基线
   （i16a 需先从主树复制 `app/public/paper-assets/paper-960d0f8d/versions/`
    到 worktree 同位置——gitignored 内容，只为自验，不入 git）；施工后
