@@ -84,9 +84,6 @@ const serverContext = {
   openUserDatabase,
   readJsonBody,
   sendPdf: exportImplementation.sendPdf,
-  // draft-docx cut: same sendDocx the integral-paper /api/exports/docx route
-  // uses — reused for the new draft-paper docx route's response headers.
-  sendDocx: exportImplementation.sendDocx,
   sendJson,
   bindTopicLabelsToQuestionGroup,
   createPaperSet,
@@ -479,10 +476,7 @@ export function getPrintReadyByGroupId(db, groupIds) {
 }
 
 const draftPaperStore = createDraftPaperStore({
-  // draft-docx cut: same exportImplementation.exportDocx the integral-paper
-  // /api/exports/docx route consumes (createExportRoutes(exportImplementation)
-  // below) — threaded in, not re-instantiated.
-  exportDocx: exportImplementation.exportDocx,
+  exportImplementation,
   exportDir,
   getPrintReadyByGroupId,
   getQuestionGroupDetail,
@@ -500,6 +494,11 @@ serverContext.draftPaperStore = draftPaperStore
 // without importing auth.mjs directly (same post-hoc pattern as draftPaperStore above,
 // since resolveDataUserId is destructured/used before serverContext's later fields exist).
 serverContext.resolveDataUserId = resolveDataUserId
+// draft-docx cut: same exportImplementation.sendDocx the integral-paper
+// /api/exports/docx route consumes — post-hoc assignment (same pattern as
+// draftPaperStore/resolveDataUserId above) so the new draft-paper docx route
+// can send its response with the shared helper.
+serverContext.sendDocx = exportImplementation.sendDocx
 
 const serverRoutes = [
   ...h1Routes,

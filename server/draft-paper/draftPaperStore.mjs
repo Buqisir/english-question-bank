@@ -224,11 +224,7 @@ function requireUserId(userId) {
 // so a draft with N items does one paper-asset scan instead of N. Optional —
 // callers/tests that never exercise getDraftPaperItems may omit it.
 export function createDraftPaperStore({
-  // draft-docx cut: the already-instantiated exportImplementation.exportDocx
-  // (server/api.mjs) — reused as-is, never re-instantiated here (plan.md
-  // Forbidden: docxRenderer.mjs/exportImplementation.mjs stay untouched,
-  // only consumed).
-  exportDocx,
+  exportImplementation,
   getPrintReadyByGroupId,
   getQuestionGroupDetail,
   groupTypeLabels,
@@ -1169,7 +1165,7 @@ export function createDraftPaperStore({
     if (!draftPaper) throw new Error('Draft paper not found')
     if (!draftPaper.items.length) throw new Error('请先添加题组')
     const input = buildDraftPaperExportInput(draftPaper, { versionType: normalizedVersionType })
-    const result = exportDocx(input)
+    const result = exportImplementation.exportDocx(input)
     return { ...result, draftPaper }
   }
 

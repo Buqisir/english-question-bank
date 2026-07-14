@@ -102,7 +102,10 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
   // failure through describeError('切换打印形态', error) — same pattern. This
   // one IS a real try/catch (not a promise .catch), so it also bumps the
   // catchBlocks count below from 11 to 12.
-  assert('DraftPaperWorkbench.tsx uses describeError at all 13 call sites', workbenchCount === 13, `found ${workbenchCount}`)
+  // draft-docx added a 14th: exportDocx's try/catch block routes its
+  // failure through describeError('导出 DOCX', error), mirroring exportPdf's
+  // existing catch — also bumps catchBlocks below from 12 to 13.
+  assert('DraftPaperWorkbench.tsx uses describeError at all 14 call sites', workbenchCount === 14, `found ${workbenchCount}`)
 }
 
 console.log('== MySpacePage failure-state recovery + de-duplication ==')
@@ -133,7 +136,9 @@ console.log('== DraftPaperWorkbench: errors do not clear work in progress ==')
   const catchBlocks = src.match(/catch \(error\) \{[\s\S]*?\n {4}\}/g) || []
   // print-form added a 12th real try/catch block: setPrintForm — see the
   // describeError call-site comment above.
-  assert('found catch(error) blocks to inspect', catchBlocks.length === 12, `found ${catchBlocks.length}`)
+  // draft-docx added a 13th: exportDocx — see the describeError call-site
+  // comment above.
+  assert('found catch(error) blocks to inspect', catchBlocks.length === 13, `found ${catchBlocks.length}`)
   const clearsState = catchBlocks.filter((block) => /setDraftPaper\(null\)|setTitleDraft\(''\)/.test(block))
   assert('no catch(error) block clears draftPaper or titleDraft', clearsState.length === 0, `${clearsState.length} block(s) clear state`)
 }
