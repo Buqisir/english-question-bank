@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-14（trust-cracks 收官 merge 98d708d + **生产已部署
-8696eda**（owner 拍板"部署"，health ok、eqbank.cc 200，同发带上
-motion-press-exit 刀1）；DP-3 前台复核改在生产做，清单见 qa-dp2.md 文末）
+Last updated: 2026-07-14（trust-cracks 收官 + owner DP-3 打回一项→
+relevant 布尔补刀→**生产 9517085** 机验双证过；同发带上
+motion-press-exit 刀1；CI 吞码事故判例入 case-law）
 
 ## 现在是什么
 
@@ -33,10 +33,15 @@ motion-press-exit 刀1）；DP-3 前台复核改在生产做，清单见 qa-dp2.
   月份形裸"3"）、rail 计数 "N 题"、搜索年份列同年只显首行、"已删除"→
   "已移出"。**账单**：流水线 315k（DEV+verify；verify 步 502 死代理假红
   中止→主代理亲跑复核，a3 判例二证：断点不走 resume）+ CR 77k；主代理
-  出场 5（含 DP-2 亲驱）。**生产已部署 8696eda**（2026-07-14 owner 拍板，
-  health ok、eqbank.cc 200，同发带上刀1）；owner DP-3 改在生产前台做
-  （清单 `docs/cuts/trust-cracks/qa/qa-dp2.md` 文末）；挂账 SW-1~5
-  见 cr.md。QA 判例入档：**面板 CDP 合成点击对部分 React 控件（表单
+  出场 5（含 DP-2 亲驱）。**生产 9517085**（同发带上刀1）：首发 8696eda
+  后 owner DP-3 实点打回诚实空态（LLM 无视省略指令仍凑 3 条自招无关）→
+  补刀 relevant 显式布尔+无条件丢弃（460ed4c）+ 金路径 e2e 断言跟刀
+  （9517085，button→link），qa-owner 生产回放双证：无关查询 0 条诚实
+  文案/相关查询（猫）恰 1 条零误杀（`qa/qa-dp3.md`）。**事故自省入
+  case-law**：CI watch 管道吞码把红 run 报绿并部署（e2e 旧断言红，
+  产品未伤）——退出码消费不接管道+conclusion 双证；LLM"自觉省略"不可
+  依赖（两条普适级已回流母版）。挂账 SW-1~5 见 cr.md；owner 前台余项：
+  中键/toast 顺手点 + 刀1 手感。QA 判例入档：**面板 CDP 合成点击对部分 React 控件（表单
   submit/hover 显隐链接/浮动按钮）不触发 onClick**——确定性 DOM/URL 断言
   面板做，点击全覆盖走 DP-3 前台真鼠标。
 - 2026-07-13：**全站 UI 三路评审 + motion-press-exit 收官（刀1）**

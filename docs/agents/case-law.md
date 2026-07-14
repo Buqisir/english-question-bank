@@ -12,6 +12,28 @@
 `~/.claude/skills/project-os/assets/case-law-universal.md`(仅本机;
 该 skill 目录自带 git,回流后一行 commit)。项目特有判例不回流。
 
+## 2026-07-14
+
+- **CI watch 管道吞码事故（trust-cracks 收口实撞）**：主代理
+  `gh run watch --exit-status | tail` 盯 merge CI——管道让 bash 退出码
+  变成 tail 的 0，红 run 被报成绿，随即部署了 CI 红的提交（红因是 e2e
+  断言未跟刀：详情 button→link，产品行为本身正确，万幸）。宪法本有
+  「verify 亲跑不得管道吞码」，本案证明**同款纪律覆盖一切退出码消费**
+  （CI watch / 部署脚本 / 任何 gate）：要么不接管道，要么 `pipestatus`
+  取真码，且报绿前另读 `gh run view --json conclusion` 双证。→
+  **Gates**「exit codes never piped through anything that swallows
+  them」的 CI 侧同款；普适级，回流母版。
+- **e2e 跟刀纪律（同案衍生）**：改交互元素的角色/语义（button→link）
+  时，DEV/主代理都没想起金路径 e2e 不在 `verify:all` 里（它是 CI 独立
+  job）——本地全绿 ≠ CI 全绿。改动用户可见交互时，收口前把
+  `scripts/smoke-golden-path.mjs` 也过一遍 grep。→ **Gates** 提醒项。
+- **LLM"自觉省略"不可依赖（trust-cracks DP-3 打回补刀）**：重排 prompt
+  写明「都不相关时返回空 rankings」，生产实测 DeepSeek 仍返回"最接近
+  的"3 条并在 reason 里自招"不相关"。修法：契约加**显式 relevant 布尔**
+  （缺省 true 保兼容），服务端无条件丢 false——让诚实成为结构化字段，
+  不是省略行为。生产双证：无关查询 0 条诚实文案 / 相关查询（猫）恰 1 条
+  精准。→ 普适级（LLM 契约设计），回流母版。
+
 ## 2026-07-13
 
 - **刀E（真 2-up A3 拼版 PDF 导出）取消**（owner 拍板）：owner 实际
