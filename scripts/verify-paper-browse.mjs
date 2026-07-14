@@ -279,6 +279,7 @@ console.log('paper-browse verify: whole-paper preview page (刀B v1)')
 const appSrc = read('app/src/App.tsx')
 const detailViewSrc = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 const pageSrc = read('app/src/features/paper-browse/PaperBrowsePage.tsx')
+const reducedMotionScrollSrc = read('app/src/features/shared/reducedMotionScroll.ts')
 const conciergeGroupCardSrc = read('app/src/concierge/ConciergeGroupCard.tsx')
 const verifyCiSrc = read('scripts/verify-ci.mjs')
 const readmeSrc = read('scripts/README.md')
@@ -1202,10 +1203,16 @@ assert(
     /groupModels\[lectureSelection\.groupId\]\?\.kind\s*!==\s*['"]reading['"]\)\s*return/.test(pageSrc),
   'missing the evidence-scroll effect, or it is not gated to reading-only groups',
 )
+// motion-press-exit: the inline matchMedia/reduced ternary that used to
+// live directly in this effect was pulled into a shared helper
+// (`features/shared/reducedMotionScroll.ts`, reused by 4 call sites incl.
+// this one) — check the reduced-motion branch lives in the helper AND this
+// page's effect actually calls it, instead of requiring the pattern inline.
 assert(
   '阅读动线 effect honors prefers-reduced-motion (smooth by default, auto when reduced)',
-  /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(pageSrc) &&
-    /reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(pageSrc),
+  /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(reducedMotionScrollSrc) &&
+    /reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(reducedMotionScrollSrc) &&
+    /scrollIntoView\(\{[^}]*behavior:\s*scrollBehavior\(\)/.test(pageSrc),
   'missing the reduced-motion branch on the evidence-scroll effect',
 )
 

@@ -63,6 +63,7 @@ import { PaperIntelligenceEvidenceLine } from './preview/paperIntelligenceEviden
 import { AnchoredPopover } from './preview/AnchoredPopover'
 import { useIsOwnerView } from '../../auth/AuthGate.tsx'
 import { distractorCategoryLabel, distractorSubtypeLabel } from './distractorLabels.ts'
+import { useToastPresence } from '../shared/useToastPresence.ts'
 import './paperIntelligence.css'
 
 /**
@@ -127,6 +128,8 @@ export function PaperIntelligencePreview({
   const [activeQuestionId, setActiveQuestionId] = useState<string | null>(null)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const toastTimerRef = useRef<number | null>(null)
+  // motion-press-exit #3: 保持挂载到 exit transition 播完（见 useToastPresence）。
+  const toastPresence = useToastPresence(toastMessage, 120)
 
   /**
    * SECONDARY state: which evidence row the cross-column dotted line
@@ -398,9 +401,9 @@ export function PaperIntelligencePreview({
           activeEvidenceId={activeEvidenceId}
         />
       </div>
-      {toastMessage !== null && (
-        <div className="pi-toast" role="status" aria-live="polite">
-          {toastMessage}
+      {toastPresence.rendered !== null && (
+        <div className="pi-toast" role="status" aria-live="polite" data-visible={toastPresence.visible}>
+          {toastPresence.rendered}
         </div>
       )}
     </div>

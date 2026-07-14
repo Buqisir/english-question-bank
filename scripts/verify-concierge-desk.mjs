@@ -276,6 +276,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const deskSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeDesk.tsx'), 'utf8')
   const hookSource = readFileSync(path.join(srcRoot, 'concierge', 'useConciergeDesk.ts'), 'utf8')
   const paperRowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
+  const reducedMotionScrollSource = readFileSync(
+    path.join(srcRoot, 'features', 'shared', 'reducedMotionScroll.ts'),
+    'utf8',
+  )
   const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
@@ -450,7 +454,16 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Paper row does NOT say 共 N 组', !/共\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
   assert('Paper row does NOT use the old "命中 N 组" template (Cut 6 dropped it)', !/命中\s*\{paper\.hitCount\}\s*组(?!\w)/.test(paperRowSource), '')
   assert('Paper row reads paper.hitContext.scope for badge wording', /paper\.hitContext\.scope/.test(paperRowSource), '')
-  assert('Paper row scrolls primary hit into view on expand', /scrollIntoView\(\{\s*behavior:\s*['"]smooth['"]\s*,\s*block:\s*['"]nearest['"]\s*\}\)/.test(paperRowSource), '')
+  // motion-press-exit: the hardcoded `behavior: 'smooth'` now routes through
+  // a shared reduced-motion-aware helper (features/shared/reducedMotionScroll.ts,
+  // reused by 3 other call sites) instead of a literal — check the call site
+  // uses the helper and the helper itself honors prefers-reduced-motion.
+  assert(
+    'Paper row scrolls primary hit into view on expand',
+    /scrollIntoView\(\{\s*behavior:\s*scrollBehavior\(\)\s*,\s*block:\s*['"]nearest['"]\s*\}\)/.test(paperRowSource) &&
+      /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(reducedMotionScrollSource),
+    '',
+  )
   assert('Paper row tags hit <li> with data-hit', /data-hit=\{isHit\s*\?\s*['"]true['"]\s*:\s*undefined\}/.test(paperRowSource), '')
   assert('Paper row does NOT call fetchQuestionGroupDetail', !/fetchQuestionGroupDetail/.test(paperRowSource), '')
 

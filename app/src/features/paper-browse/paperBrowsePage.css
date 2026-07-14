@@ -438,7 +438,10 @@
   cursor: pointer;
   z-index: 31;
   box-shadow: -1px 1px 4px rgba(30, 30, 28, 0.08);
-  transition: background var(--motion-fast) var(--ease-hover), right var(--motion-slow) var(--ease-out);
+  /* emil-processing: `right` 是布局属性，380px 面板入场时逐帧
+     layout+paint；transform 走合成器（findings 表条目）。`right` 静态化，
+     open 态改用 translateX 叠加在既有 translateY(-50%) 垂直居中之上。 */
+  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-slow) var(--ease-out);
 }
 
 .paper-browse-lecture-handle:hover {
@@ -447,7 +450,7 @@
 
 @media (min-width: 1200px) {
   .paper-browse-lecture-handle--open {
-    right: 380px;
+    transform: translateY(-50%) translateX(-380px);
   }
 }
 

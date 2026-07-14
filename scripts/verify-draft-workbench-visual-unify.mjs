@@ -143,7 +143,16 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // `.draft-undo-toast`, pushing its `#ffffff` from L524 to L564.
 // `.draft-export-menu-trigger`'s at L188 sits above every edited region and
 // is unaffected.
-const WHITELISTED_LINES = new Set([188, 327, 564])
+// motion-press-exit: re-pinned again — three separate insertions, none
+// containing a new `#ffffff` literal, land between the whitelisted lines:
+// (a) a press-feedback `transition`/comment above `.draft-export-menu-trigger`
+// pushes it from L188 to L190; (b) the export-menu press/entrance rules +
+// keyframe (all token/var-based) sit between it and `.draft-a4-repaginating`,
+// pushing that one from L327 to L352; (c) the rail-item transition +
+// draft-version-toggle transition (both token-based) plus the
+// draft-undo-toast keyframe→transition rewrite (same property count, no new
+// hex) push `.draft-undo-toast`'s own `#ffffff` from L564 to L593.
+const WHITELISTED_LINES = new Set([190, 352, 593])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

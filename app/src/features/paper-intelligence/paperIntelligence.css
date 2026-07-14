@@ -905,11 +905,14 @@ button.pi-analysis-distractor:hover {
  * 3-second auto-dismiss is owned by the React component (timer ref);
  * this CSS only sets visual styling and a fade-in keyframe.
  */
+/* emil-processing: keyframe→transition (findings 表条目3, 与
+   .draft-undo-toast 同配方). 退出前保持挂载把 exit transition 播完再真
+   卸载（见 useToastPresence）；退出（本规则 motion-fast）快于入场
+   ([data-visible="true"] 覆盖成 motion-base）。 */
 .pi-toast {
   position: fixed;
   left: 50%;
   bottom: 24px;
-  transform: translateX(-50%);
   z-index: 100;
   background: rgba(17, 24, 39, 0.92);
   color: #fff;
@@ -921,24 +924,15 @@ button.pi-analysis-distractor:hover {
   pointer-events: none;
   max-width: calc(100vw - 32px);
   text-align: center;
-  animation: pi-toast-fade-in var(--motion-base) var(--ease-out);
+  opacity: 0;
+  transform: translate(-50%, 6px);
+  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
 }
 
-@keyframes pi-toast-fade-in {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 6px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pi-toast {
-    animation: none;
-  }
+.pi-toast[data-visible='true'] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-duration: var(--motion-base);
 }
 
 

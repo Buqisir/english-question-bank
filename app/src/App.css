@@ -88,6 +88,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
+  /* B路小账: paper-intelligence 视图页标题溢出容器 39px——flex 子项
+     min-width:0 允许收缩，但没有硬上限时长标题仍会撑出可视边界；补一个
+     具体上限让 ellipsis 稳定触发。 */
+  max-width: 320px;
 }
 
 @media (max-width: 960px) {
@@ -254,7 +258,10 @@ button:disabled {
   height: 36px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--mint-soft);
+  /* B路小账: 这里是通用工具 chrome，不是成功态——之前借用了 --mint-soft
+     (emerald)，与 --mint-text 配对的真成功态用法混色相。换成 accent 系
+     (teal) 软底，单色相法归队。 */
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
   color: var(--muted);
   font-size: 13px;
   flex-shrink: 0;
@@ -2370,10 +2377,15 @@ button:disabled {
 }
 
 .group-card,
-.detail-hero,
-.detail-section,
 .basket-item {
   animation: fadeInUp var(--motion-entrance) var(--ease-out) both;
+}
+
+/* emil-processing: 详情打开一天开几十次（高频档）——原 260ms 整块
+   fadeInUp 无级联，付了入场档成本却零级联收益。降到 motion-base(160ms)，
+   sections 不再单独入场（findings 表条目）。 */
+.detail-hero {
+  animation: fadeInUp var(--motion-base) var(--ease-out) both;
 }
 
 .group-card:nth-child(1) { animation-delay: 0s; }
@@ -3117,6 +3129,20 @@ button:disabled {
   background: var(--surface-strong);
 }
 
+/* emil-processing: menu entrance — mirrors pi-basket-preview-popover's
+   mount-only keyframe convention (element fully unmounts/remounts via
+   `{isOpen && ...}`, so a fire-once animation is enough, no exit needed). */
+@keyframes paper-insertion-menu-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-2px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
 .paper-insertion-menu {
   display: flex;
   gap: 4px;
@@ -3124,6 +3150,7 @@ button:disabled {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
+  transform-origin: top center;
   margin-top: 4px;
   padding: 4px 6px;
   border: 1px solid var(--line);
@@ -3132,6 +3159,7 @@ button:disabled {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 10;
   white-space: nowrap;
+  animation: paper-insertion-menu-in var(--motion-fast) var(--ease-out);
 }
 
 .paper-insertion-menu button {
@@ -3168,6 +3196,8 @@ button:disabled {
   margin-top: 0;
   box-shadow: none;
   border: 1px dashed var(--line-strong);
+  /* 静态内联布局，非浮层弹出，不套用浮层入场动效 */
+  animation: none;
 }
 
 /* ========================================================================
@@ -3281,7 +3311,7 @@ button:disabled {
   line-height: 1;
   font-family: inherit;
   cursor: pointer;
-  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
   box-shadow: none;
   display: inline-flex;
   align-items: center;
@@ -3297,6 +3327,11 @@ button:disabled {
   background: #1E4A3A;
 }
 
+/* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
+.concierge-intent-submit:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
 .concierge-intent-submit:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
@@ -3304,7 +3339,8 @@ button:disabled {
 
 .concierge-intent-submit:disabled {
   background: #EDEDEA;
-  color: #9A9A93;
+  /* B路小账: ink-muted，原 #9A9A93 on #EDEDEA 仅 2.4:1 对比度 */
+  color: #6A6A64;
   cursor: not-allowed;
 }
 
@@ -3638,7 +3674,7 @@ button:disabled {
   padding: 4px 10px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .concierge-action:hover:not(:disabled) {
@@ -3838,12 +3874,17 @@ button:disabled {
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   z-index: 22;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .basket-chip:hover {
   background: #EDEDEA;
   border-color: #2C6E56;
+}
+
+/* emil-processing: shared pressable convention (scale 0.97 on press). */
+.basket-chip:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .basket-chip:disabled {
@@ -4188,7 +4229,7 @@ button:disabled {
   font-size: 13px;
   white-space: nowrap;
   cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .concierge-command-filter-toggle:hover {

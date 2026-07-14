@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
 import { describeError } from '../shared/errorCopy'
+import { useToastPresence } from '../shared/useToastPresence.ts'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -73,6 +74,8 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   const [message, setMessage] = useState('')
   const [busyId, setBusyId] = useState<string | null>(null)
   const [confirmTarget, setConfirmTarget] = useState<MySpaceArtifact | null>(null)
+  // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
+  const confirmPresence = useToastPresence(confirmTarget, 120)
 
   const selectedFolder = useMemo(
     () => folders.find((folder) => folder.id === selectedFolderId) || null,
@@ -240,7 +243,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                       <article className="my-space-card" key={artifact.id}>
                         <div className="my-space-card-thumb" aria-hidden="true">
                           <div className="my-space-card-thumb-mini">
-                            <h4 className="my-space-card-thumb-title">{title}</h4>
+                            <h3 className="my-space-card-thumb-title">{title}</h3>
                             <p className="my-space-card-thumb-sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</p>
                             <div className="my-space-card-thumb-line" />
                             <div className="my-space-card-thumb-line" />
@@ -294,17 +297,18 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
       </main>
     </div>
 
-    {confirmTarget && (
-      <div className="my-space-modal-backdrop" role="presentation">
+    {confirmPresence.rendered && (
+      <div className="my-space-modal-backdrop" role="presentation" data-visible={confirmPresence.visible}>
         <div
           className="my-space-confirm-dialog"
           role="alertdialog"
           aria-modal="true"
           aria-labelledby="my-space-confirm-dialog-title"
+          data-visible={confirmPresence.visible}
         >
           <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
           <p>
-            删除「{confirmTarget.title || confirmTarget.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。
+            删除「{confirmPresence.rendered.title || confirmPresence.rendered.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。
           </p>
           <div className="my-space-confirm-actions">
             <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>

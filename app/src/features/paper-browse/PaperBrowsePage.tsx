@@ -123,6 +123,7 @@ import type {
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import { fetchSimilarQuestions } from '../../services/similarQuestions.ts'
+import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
@@ -998,12 +999,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       `[data-paper-evidence-id="${cssAttr(lectureSelection.evidenceId)}"]`,
     )
     if (!target) return
-    const reduced =
-      typeof window !== 'undefined' &&
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
     suppressScrollspyClear()
-    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduced ? 'auto' : 'smooth' })
+    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: scrollBehavior() })
   }, [lectureOpen, lectureSelection, groupModels])
 
   const railItems = useMemo(() => {
@@ -1113,7 +1110,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     scrollSettleCancelRef.current?.()
     const target = queryTarget()
     suppressScrollspyClear()
-    target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' })
+    target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: scrollBehavior() })
     // 留观① QA 定性后按实修（triage 拍板「再现按竞态修」）：两种真实
     // 失效都收——① 冷加载沉降期题组模型异步落地，scrollIntoView 只按
     // 当下位置算一次，目标被后续布局推走；② smooth 滚动动画由渲染帧
