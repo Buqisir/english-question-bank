@@ -30,8 +30,10 @@ v2.2 纸列加宽）；fresh CR 冷读。
 3. **暖桌通铺到顶**：`.draft-preview-desk` 的 `margin-top: 18px` 去掉
    （v2.1 实证「小灰」即此缝漏出的冷底），白顶栏直接落暖桌，与解析页
    同构。
-4. **纸列加宽**：`.draft-paper-col` max-width 820px → **[待 owner 现场
-   定值，v2.2 起点 870px]**（本 plan 唯一悬点，DP-1b）。
+4. **头-纸垂直节奏对齐解析页**（owner 2026-07-14 改判：撤回纸列加宽，
+   纸维持 820px；真病灶是头到卷子的距离太高把头衬细了）：
+   `.draft-preview-desk` padding-top 24→10px、`.draft-paper-meta-row`
+   margin-bottom 14→10px（v2.3 mock 实点方向认可，终值 DP-3 可微调）。
 
 ## 硬契约
 
@@ -75,8 +77,8 @@ worktree `../wt-header-unify`（开工时建）；断点锚 wip commit；完成�
 ## 裁决点清单
 
 - [x] DP-1a 方向拍板（owner 三轮 mock 实点「没问题」，2026-07-14）
-- [x] DP-1b 纸列宽度 = **870px 暂定**（owner 委托主代理判，2026-07-14；
-  mock 实测 iframe 初渲锁宽演示不了，真刀 DP-2 出真截图、DP-3 owner
-  可微调终值）
+- [x] DP-1b 头-纸垂直节奏（owner 2026-07-14 v2.3 实点：撤回纸宽 870，
+  改压头到纸距离对齐解析页——desk padding-top 10px + meta-row
+  margin-bottom 10px 暂定，DP-3 微调终值）
 - [ ] DP-2 CR verdict 处置 + 主代理复核
 - [ ] DP-3 owner 生产实用一轮（组卷→改题→导出全流程手感）
