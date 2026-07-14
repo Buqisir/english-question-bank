@@ -1,7 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上线，
-**生产 da4c49a**，owner DP-3 全过闭环；verify 死代理假红根修 81d9fd0）
+Last updated: 2026-07-14（draft-docx + fixture-move 双刀并行收官，
+**生产 022c634**；同日 home-blank 收官闭环、假红根修、R2 恢复演练全绿）
 
 ## 现在是什么
 
@@ -24,6 +24,16 @@ Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上
 
 ## 主线焦点
 
+- 2026-07-14：**draft-docx + fixture-move 双刀并行收官**（merge 4a54315/
+  022c634，双 fresh CR APPROVE 0MF，verify:all 78/0/0 + main CI 双证）：
+  ①草稿卷「下载 DOCX」（学生/教师版，复用整卷 exportDocx；handout 维持
+  死码；行为 verify 16 断言入册）②jslk 夹具搬 test-fixtures/（18 消费方
+  改径、一致性白名单退役恢复严格语义、i16a 拼装 corpus 换锚）。**生产
+  022c634**：jslk 已离 serve 路径=备份 501 绝根（次日备份日志终证）。
+  **账单**：docx 流水线 277k；fixture 两轮流水线+CR ~376k（首轮 DEV 在
+  停手条件正确刹车→契约修订判例）；主代理出场 ~8。**owner DP-3 待做
+  （生产导 DOCX 双版本）**；13 个 c6a*/c6b* 僵尸 smoke 主线即红已实证
+  →随 reading-analysis 退役刀处决。
 - 2026-07-14：**home-blank 收官（主页纯空白大搜索框）**（merge da4c49a，
   fresh CR APPROVE 0MF/3SW 当场收，DP-2 五幕 37 断言全绿 + verify:all 77
   绿 + main CI 双证）：静止态=居中词标+大框+真值 whisper（原型 D）、提交
@@ -323,16 +333,12 @@ Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上
   实跑 164 checks 全绿。生产同批部署到 `4ff8c3b`（带上 #263-268），
   eqb+Caddy active、eqbank.cc 200。生产 DB 购清前有
   `question-bank.sqlite.bak.orphan-cleanup.*` 备份。）
-- 测试夹具漏在生产数据路径（data-orphan-cleanup 刀发现）：
-  `paper-2024-jslk-english` 不是垃圾而是 ~25 个 verify 脚本就地消费的
-  扁平结构 fixture，但它住在被生产 serve + R2 备份的
-  `app/public/paper-assets/` 里（生产备份对它天天报 501）。独立刀：搬去
-  `test-fixtures/` + 批量改脚本路径 + 生产侧清残留；一致性 verify 里的
-  KNOWN_FIXTURES 白名单同刀移除。
-- launch-deploy 挂账：DOCX/讲义版接 Draft Paper 工作台（server 能力
-  现成，small cut）；难度维度重建（依赖 reading signals join，
-  ADR-0015 已把假 medium 下线）。（topic label 已实测 273/273 全覆盖，
-  从账本移除。）
+- ~~测试夹具漏在生产数据路径~~ ✅ 2026-07-14 fixture-move 收官（见主线
+  焦点）。
+- launch-deploy 挂账：~~DOCX 接工作台~~ ✅ 2026-07-14 draft-docx 收官
+  （见主线焦点）；难度维度重建（依赖 reading signals join，ADR-0015
+  已把假 medium 下线）。（topic label 已实测 273/273 全覆盖，从账本
+  移除。）
 - 导题管线 agent 化（owner 2026-07-07 提出，**排在 UI 大改之后**）：
   目标是「跟 Agent 说导这套题，它识别格式 → 按标准做解析 → 导入」。
   要件：给 Agent 的导题入口（现有 `scripts/import-pipeline/` 是底子）+
