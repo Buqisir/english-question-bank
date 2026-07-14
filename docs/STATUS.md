@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-14（trust-cracks 收官 merge 98d708d，三路 UI 评审
-刀2，CR APPROVE 0MF/5SW、main CI 绿、未部署——与 motion-press-exit 同场
-待 owner DP-3+部署）
+Last updated: 2026-07-14（trust-cracks 收官 merge 98d708d + **生产已部署
+8696eda**（owner 拍板"部署"，health ok、eqbank.cc 200，同发带上
+motion-press-exit 刀1）；DP-3 前台复核改在生产做，清单见 qa-dp2.md 文末）
 
 ## 现在是什么
 
@@ -33,8 +33,9 @@ Last updated: 2026-07-14（trust-cracks 收官 merge 98d708d，三路 UI 评审
   月份形裸"3"）、rail 计数 "N 题"、搜索年份列同年只显首行、"已删除"→
   "已移出"。**账单**：流水线 315k（DEV+verify；verify 步 502 死代理假红
   中止→主代理亲跑复核，a3 判例二证：断点不走 resume）+ CR 77k；主代理
-  出场 5（含 DP-2 亲驱）。**未部署**，DP-3 与 motion-press-exit 同场待
-  owner（清单 `docs/cuts/trust-cracks/qa/qa-dp2.md` 文末）；挂账 SW-1~5
+  出场 5（含 DP-2 亲驱）。**生产已部署 8696eda**（2026-07-14 owner 拍板，
+  health ok、eqbank.cc 200，同发带上刀1）；owner DP-3 改在生产前台做
+  （清单 `docs/cuts/trust-cracks/qa/qa-dp2.md` 文末）；挂账 SW-1~5
   见 cr.md。QA 判例入档：**面板 CDP 合成点击对部分 React 控件（表单
   submit/hover 显隐链接/浮动按钮）不触发 onClick**——确定性 DOM/URL 断言
   面板做，点击全覆盖走 DP-3 前台真鼠标。
@@ -47,7 +48,8 @@ Last updated: 2026-07-14（trust-cracks 收官 merge 98d708d，三路 UI 评审
   入退场（2 模态/2 菜单/2 toast，transition 制、退出快于入场、可打断）、
   reduced-motion scroll helper（4 call site）、rail/toggle 过渡、B 路 CSS
   小账。**账单**：流水线 132k（DEV+verify+CR）+ 评审三子代理 ~464k；主代理
-  出场多（含亲驱 DP-2）。**未部署**，DP-3 待 owner。QA 判例入档：**Browser
+  出场多（含亲驱 DP-2）。**生产已部署 8696eda**（2026-07-14 随刀2 同发），
+  DP-3 生产前台待 owner。QA 判例入档：**Browser
   面板/后台 Chrome 标签 visibilityState=hidden 会节流 rAF，rAF 门控的入场
   动画逐帧手感眼看不了**——DP-2 改确定性 CSS 契约验证替代（强制翻
   data-visible/样式表遍历），SW-1（单 rAF 塌帧）移交 owner DP-3 前台复核。
