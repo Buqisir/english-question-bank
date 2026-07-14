@@ -192,6 +192,6 @@ key 的环境可补一条真查询人证，无 key 不阻塞。）
 ## 裁决点清单(主代理出场点;施工中勾选)
 
 - [x] 裁决点0：plan 拍板 commit（PM，本文件）
-- [ ] 裁决点1：流水线回执收口（verify 原始退出码 + CR verdict；MF 处置）
-- [ ] 裁决点2：merge 到 main + main CI 绿 + STATUS 更新
-- [ ] 裁决点3：DP-3 owner 前台 QA（与 motion-press-exit 待部署项同场）+ 部署
+- [x] 裁决点1：流水线回执收口（CR APPROVE 0MF/5SW；verify 假红主代理亲跑复核 PASS77）
+- [x] 裁决点2：merge 98d708d + main CI 绿（经 e2e 跟刀修复后 9517085 success）+ STATUS
+- [x] 裁决点3：DP-3 owner 前台 QA 全过（诚实空态打回→relevant 补刀→生产双证；中键/toast owner 确认 2026-07-14）+ 生产 9517085

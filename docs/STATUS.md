@@ -40,8 +40,8 @@ motion-press-exit 刀1；CI 吞码事故判例入 case-law）
   文案/相关查询（猫）恰 1 条零误杀（`qa/qa-dp3.md`）。**事故自省入
   case-law**：CI watch 管道吞码把红 run 报绿并部署（e2e 旧断言红，
   产品未伤）——退出码消费不接管道+conclusion 双证；LLM"自觉省略"不可
-  依赖（两条普适级已回流母版）。挂账 SW-1~5 见 cr.md；owner 前台余项：
-  中键/toast 顺手点 + 刀1 手感。QA 判例入档：**面板 CDP 合成点击对部分 React 控件（表单
+  依赖（两条普适级已回流母版）。挂账 SW-1~5 见 cr.md；**owner DP-3 全过**（2026-07-14
+  "中键和 toast 撤销没问题"，四裁决点全勾，本刀闭环）。QA 判例入档：**面板 CDP 合成点击对部分 React 控件（表单
   submit/hover 显隐链接/浮动按钮）不触发 onClick**——确定性 DOM/URL 断言
   面板做，点击全覆盖走 DP-3 前台真鼠标。
 - 2026-07-13：**全站 UI 三路评审 + motion-press-exit 收官（刀1）**
