@@ -339,7 +339,8 @@ Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上
   导题标准/要求文档化（格式识别、解析配方、质量 gate）。附带评估：要不要
   一个 owner 看「导了什么/值得看什么」的面板——注意 ADR-0015 网站只消费
   的边界，若做属 owner-only 纠错运维档或后台产物报告，不进网站主面。
-- 备份可恢复性演练：R2 有对象但未做过 restore 演练，上线级别应补一次。
+- ~~备份可恢复性演练~~ ✅ 2026-07-14 已做（restore→integrity ok→行数
+  逐表对帐一致→抽样字节级一致，记录在 go-live-record.md 追记）。
 - member 详情再收一档：**已收（PR #275，2026-07-08）**。答案对比统计 +
   verify-list 对 member 隐藏（isOwnerView gate，同刀④），
   `verify-classic-retire-2.mjs` 三条断言改 owner-gated 真检查（63/63）。

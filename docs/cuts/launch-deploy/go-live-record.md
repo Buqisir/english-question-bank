@@ -170,3 +170,17 @@ eqbank.cc 200），随后两项部署节点动作：
   available ~1.3GB。**两项均入 watch**：延迟超预算如实报 owner（编辑
   触发重渲 ~2s，重复查看走缓存 0.4s，可用不丝滑）；内存占 2GB 机 30%，
   若出现压力候选换 headless_shell 或按需启动。
+
+## R2 恢复演练（2026-07-14，小川执行，全程只读+/tmp 自清扫）
+
+- 档位：`r2:eqb-backup/20260713T193001Z`（每日 cron 03:30 北京准点，
+  近四天档齐全，单档 289 对象）。
+- 双库 rclone 拉回 /tmp → `PRAGMA integrity_check` 双双 **ok**；
+  行数与生产实库**逐表一致**（sources/passages/question_groups =
+  273×3，questions = 1530；user-data users = 3）。
+- 抽样资产（paper-2026-i/latest/paper-asset.json）与生产磁盘
+  **字节级一致**（cmp）。
+- 结论：**备份可恢复性已机器证明**。附注：最新档含 jslk 夹具 3 对象
+  （历史留存无害）；fixture-move 刀清掉生产源目录后，后续档自然不含，
+  501 报错随之消失。演练脚本模式：restore→integrity→对帐→抽样→trap
+  自清，可复用。
