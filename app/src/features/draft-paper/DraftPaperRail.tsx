@@ -60,6 +60,13 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
         const label = isMissing
           ? '题组已从题库中移除'
           : item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId
+        // C6 (trust-cracks) — rail 行尾计数改为 "N 题"（去题型词）：题型已经在
+        // 同一行的 groupTypeLabel 里显示过一次，行尾再复读一遍对阅读四项
+        // (A/B/C/D 都读 "阅读") 尤其重复。`title` 补回 label · 题型 · N 题的
+        // 全文，鼠标悬停/长按仍能看到被截断的完整信息。
+        const groupTypeText = groupTypeLabel[item.questionGroup?.groupType || 'other']
+        const questionCount = item.questionGroup?.questionCount || 0
+        const rowTitle = isMissing ? undefined : `${label} · ${groupTypeText} · ${questionCount} 题`
 
         return (
           <div
@@ -74,14 +81,13 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
             onKeyDown={(event) => handleKeyDown(event, item.groupId, isMissing)}
             role="button"
             tabIndex={0}
+            title={rowTitle}
           >
             <GripVertical aria-hidden="true" className="draft-paper-rail-grip" size={13} />
             {!isMissing && <span className="draft-paper-rail-no">{chineseNumeral(printableRank ?? 0)}</span>}
             <span className="draft-paper-rail-label">{label}</span>
             {!isMissing && (
-              <span className="draft-paper-rail-count">
-                {groupTypeLabel[item.questionGroup?.groupType || 'other']} · {item.questionGroup?.questionCount || 0} 题
-              </span>
+              <span className="draft-paper-rail-count">{questionCount} 题</span>
             )}
             {/* draft-desk-a scope note: the plan retires per-item action buttons from
                 the rail in favor of the paper-hover sticker (裁点1) — but a groupMissing

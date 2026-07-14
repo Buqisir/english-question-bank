@@ -194,6 +194,129 @@ verifier.section('M0-4 user data isolation — userId is required, not silently 
   verifier.assert(threw, 'missing userId throws instead of silently falling back')
 }
 
+verifier.section('C1 honest empty state — trusted rankings shape')
+{
+  // ①rankings:[] → matches:[] (LLM says nothing is relevant; trusted completely, no fallback append).
+  const emptyRankingsImpl = createSemanticSearchImplementation({
+    openDatabase: () => makeFixtureDb(),
+    selectQuestionGroupCards: () => CARDS,
+    getDraftSearchContext: () => ({ currentDraftPaperId: null, groupIds: new Set() }),
+    callDeepSeekWithFallback: async () => ({ parsed: { rankings: [] }, rawText: '{}', latencyMs: 5 }),
+    describeKeySource: () => ({ source: 'env', provider: 'deepseek' }),
+    optionalString: (v) => (v == null ? '' : String(v).trim()),
+    objectValue: (v) => (v && typeof v === 'object' && !Array.isArray(v) ? v : {}),
+    parseSavedJson: (raw) => {
+      try {
+        return JSON.parse(raw)
+      } catch {
+        return null
+      }
+    },
+    normalizeSynonymCardId: (v) => (v == null ? '' : String(v).trim().toUpperCase()),
+    maskApiKey: () => '***',
+    elapsedMs: () => 1,
+    groupTypeLabels: { reading: '阅读', cloze: '完形填空' },
+    SEMANTIC_SEARCH_PREFILTER_TOP_K: 72,
+    SEMANTIC_SEARCH_TOP_K: 12,
+    DEFAULT_DEEPSEEK_MODEL: 'deepseek-v4-flash',
+    DEEPSEEK_API_KEY: 'env-key',
+  })
+  const emptyRankingsResult = await emptyRankingsImpl.semanticSearchQuestionGroups(
+    'something totally unrelated',
+    'caller-key',
+    'trace-empty-rankings',
+    false,
+    'local',
+  )
+  verifier.assert(
+    Array.isArray(emptyRankingsResult.matches) && emptyRankingsResult.matches.length === 0,
+    'rankings:[] => matches:[] (honest empty, no fallback append of unranked candidates)',
+  )
+
+  // ②parsed:null → parse failure ≠ no matches; pre-cut "predfilter candidates appended in
+  // order" fallback stays non-empty.
+  const parseFailedImpl = createSemanticSearchImplementation({
+    openDatabase: () => makeFixtureDb(),
+    selectQuestionGroupCards: () => CARDS,
+    getDraftSearchContext: () => ({ currentDraftPaperId: null, groupIds: new Set() }),
+    callDeepSeekWithFallback: async () => ({ parsed: null, rawText: 'not json', latencyMs: 5 }),
+    describeKeySource: () => ({ source: 'env', provider: 'deepseek' }),
+    optionalString: (v) => (v == null ? '' : String(v).trim()),
+    objectValue: (v) => (v && typeof v === 'object' && !Array.isArray(v) ? v : {}),
+    parseSavedJson: (raw) => {
+      try {
+        return JSON.parse(raw)
+      } catch {
+        return null
+      }
+    },
+    normalizeSynonymCardId: (v) => (v == null ? '' : String(v).trim().toUpperCase()),
+    maskApiKey: () => '***',
+    elapsedMs: () => 1,
+    groupTypeLabels: { reading: '阅读', cloze: '完形填空' },
+    SEMANTIC_SEARCH_PREFILTER_TOP_K: 72,
+    SEMANTIC_SEARCH_TOP_K: 12,
+    DEFAULT_DEEPSEEK_MODEL: 'deepseek-v4-flash',
+    DEEPSEEK_API_KEY: 'env-key',
+  })
+  const parseFailedResult = await parseFailedImpl.semanticSearchQuestionGroups(
+    'climate science inference',
+    'caller-key',
+    'trace-parse-failed',
+    false,
+    'local',
+  )
+  verifier.assert(
+    Array.isArray(parseFailedResult.matches) && parseFailedResult.matches.length > 0,
+    'parsed:null => LLM parse failure keeps pre-cut prefilter-fallback non-empty (not treated as no matches)',
+  )
+
+  // ③rankings 只含 1/2 候选 → 未入榜者不追加 (matches.length === 1).
+  const partialRankingsImpl = createSemanticSearchImplementation({
+    openDatabase: () => makeFixtureDb(),
+    selectQuestionGroupCards: () => CARDS,
+    getDraftSearchContext: () => ({ currentDraftPaperId: null, groupIds: new Set() }),
+    callDeepSeekWithFallback: async () => ({
+      parsed: { rankings: [{ questionGroupId: 'g-alpha', score: 0.9, reason: '主题命中 climate' }] },
+      rawText: '{}',
+      latencyMs: 5,
+    }),
+    describeKeySource: () => ({ source: 'env', provider: 'deepseek' }),
+    optionalString: (v) => (v == null ? '' : String(v).trim()),
+    objectValue: (v) => (v && typeof v === 'object' && !Array.isArray(v) ? v : {}),
+    parseSavedJson: (raw) => {
+      try {
+        return JSON.parse(raw)
+      } catch {
+        return null
+      }
+    },
+    normalizeSynonymCardId: (v) => (v == null ? '' : String(v).trim().toUpperCase()),
+    maskApiKey: () => '***',
+    elapsedMs: () => 1,
+    groupTypeLabels: { reading: '阅读', cloze: '完形填空' },
+    SEMANTIC_SEARCH_PREFILTER_TOP_K: 72,
+    SEMANTIC_SEARCH_TOP_K: 12,
+    DEFAULT_DEEPSEEK_MODEL: 'deepseek-v4-flash',
+    DEEPSEEK_API_KEY: 'env-key',
+  })
+  const partialRankingsResult = await partialRankingsImpl.semanticSearchQuestionGroups(
+    'climate science inference',
+    'caller-key',
+    'trace-partial-rankings',
+    false,
+    'local',
+  )
+  verifier.assert(
+    Array.isArray(partialRankingsResult.matches) && partialRankingsResult.matches.length === 1,
+    'rankings with only 1/2 candidates ranked => unranked candidate NOT appended (matches.length === 1)',
+  )
+  verifier.assert(
+    partialRankingsResult.matches[0]?.questionGroupId === 'g-alpha',
+    'the one trusted match is g-alpha',
+  )
+}
+
 verifier.section('Prompt-content integrity — rerank prompt NOT over-indented (frozen AI contract)')
 const sysPrompt = fallbackCalls[0].messages[0].content
 verifier.assert(sysPrompt.startsWith('你是高中英语题库语义检索重排助手。'), 'rerank prompt starts at column 0 (no leading indent)')

@@ -178,13 +178,21 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           </a>
         )}
         {onOpenDetail && (
-          <button
-            type="button"
+          // C3c (trust-cracks) — 详情进 URL: same family as 看解析/配相似
+          // above — a real `<a href>` so 中键/新标签 work, with an
+          // onClick preventDefault SPA fast-path so the common left-click
+          // case stays instant (no full navigation/reload). Accessible name
+          // and visible text are unchanged.
+          <a
             className="concierge-action"
-            onClick={() => onOpenDetail(group)}
+            href={`?view=detail&groupId=${encodeURIComponent(group.id)}`}
+            onClick={(event) => {
+              event.preventDefault()
+              onOpenDetail(group)
+            }}
           >
             详情
-          </button>
+          </a>
         )}
         {paperSurfaceAnalysisHref && (
           // Lightweight link, NOT a button — opens the analysis route in

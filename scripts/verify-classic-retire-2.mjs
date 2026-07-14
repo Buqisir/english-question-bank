@@ -294,9 +294,19 @@ assert(
   'ConciergeGroupCard accepts onOpenDetail prop',
   /onOpenDetail\?\s*:\s*\(group: QuestionGroupCard\) => void/.test(conciergeGroupCard),
 )
+// C3c (trust-cracks): the 详情 entry moved from a <button onClick> to a real
+// <a href="?view=detail&groupId=…"> with an onClick preventDefault SPA
+// fast-path (same family as 看解析/配相似 — 中键/新标签 now work). Assert
+// the anchor form + the SPA fast-path still calls onOpenDetail(group).
 assert(
-  'ConciergeGroupCard renders a 详情 button wired to onOpenDetail',
-  /onClick=\{\(\) => onOpenDetail\(group\)\}[\s\S]{0,40}详情/.test(conciergeGroupCard),
+  'ConciergeGroupCard renders a 详情 <a href> wired to onOpenDetail via preventDefault',
+  /href=\{`\?view=detail&groupId=\$\{encodeURIComponent\(group\.id\)\}`\}[\s\S]{0,200}onOpenDetail\(group\)[\s\S]{0,40}详情/.test(
+    conciergeGroupCard,
+  ),
+)
+assert(
+  'ConciergeGroupCard 详情 is no longer a <button> (C3c: real link)',
+  !/<button[\s\S]{0,80}onClick=\{\(\) => onOpenDetail\(group\)\}/.test(conciergeGroupCard),
 )
 assert(
   'ConciergeGroupCard no longer shows a difficulty dot (D3/D4 全站难度下线)',

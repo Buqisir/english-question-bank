@@ -297,6 +297,22 @@ assert('rail extraction lives in its own component', workbench.includes("from '.
 // metadata) — move/page-break/delete now live on the paper-hover sticker in
 // Workbench.tsx itself, not on a per-row outline control.
 assert('rail component is a pure list (no per-row source metadata)', !rail.includes('compactSource'))
+// C6 (trust-cracks) — rail 行尾计数改为 "N 题"（去题型词，避免题型与同行
+// groupTypeLabel 逐字复读；四个阅读项此前都读 "Reading…" 四行）。行上补一个
+// title 提示全文（label · 题型 · N 题）。
+assert(
+  'rail row-end count is bare "N 题" (groupType word dropped from the trailing count span)',
+  rail.includes('<span className="draft-paper-rail-count">{questionCount} 题</span>'),
+)
+assert(
+  'rail row does NOT repeat groupTypeLabel inside the trailing count span (old complaint: 题型 X 阅读 X 4 行复读)',
+  !/draft-paper-rail-count[^<]*groupTypeLabel/.test(rail),
+)
+assert(
+  'rail row carries a title tooltip with the full label · 题型 · N 题',
+  rail.includes('const rowTitle = isMissing ? undefined : `${label} · ${groupTypeText} · ${questionCount} 题`') &&
+    rail.includes('title={rowTitle}'),
+)
 assert('workbench gates the page-break sticker action on non-first items (mirrors the old canPageBreakBefore = index > 0 rule)', workbench.includes('canPageBreakBefore = fullIndex > 0'))
 // draft-desk-b step3 (PO-1, plan.md "PO 决策"): page-break suggestion display
 // was DEFERRED that cut (owner 2026-07-12) — collected by print-form
@@ -315,6 +331,10 @@ assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench exposes browser print', workbench.includes('浏览器打印'))
 assert('workbench has no answer export label', !workbench.includes('答案版'))
 assert('workbench has no explanation export label', !workbench.includes('解析版'))
+// C8 (trust-cracks) — undo toast 措辞: "题组已删除" → "题组已移出" (the remove
+// action button is itself called 移除; the group stays in the question bank,
+// undo only reverts this draft's removal, so "删除" over-claimed destruction).
+assert('undo toast reads 题组已移出 (not 题组已删除)', workbench.includes('<span>题组已移出</span>') && !workbench.includes('题组已删除'))
 
 if (failed > 0) {
   console.error(`\nC8 draft paper render model verify FAILED: ${passed} passed, ${failed} failed`)

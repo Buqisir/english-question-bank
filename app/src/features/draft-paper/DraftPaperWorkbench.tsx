@@ -1208,7 +1208,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
       {removedItemToast.rendered && (
         <div className="draft-undo-toast" role="status" data-visible={removedItemToast.visible}>
-          <span>题组已删除</span>
+          {/* C8 (trust-cracks) — 措辞更新: 动作按钮本就叫"移除"；题组仍在
+              题库里，undo 只是撤回本卷的移出动作，旧文案"删除"二字读起来
+              像题目本身被销毁了，故改为下面这句。 */}
+          <span>题组已移出</span>
           <button type="button" onClick={undoDelete}>
             <RotateCcw size={14} /> 撤销
           </button>
