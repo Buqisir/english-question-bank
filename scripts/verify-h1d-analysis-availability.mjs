@@ -47,7 +47,7 @@ assert('api no longer owns PaperSurface href builder', !api.includes('function b
 assert('api getter delegates to availability owner', /function getPaperSurfaceAnalysisAvailabilityByGroupId\(\)[\s\S]{0,80}paperSurfaceAnalysisAvailability\.getByGroupId\(\)/.test(api))
 assert('api invalidator delegates to availability owner', /function invalidatePaperSurfaceAnalysisAvailability\(\)[\s\S]{0,80}paperSurfaceAnalysisAvailability\.invalidate\(\)/.test(api))
 
-const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
+const paperAssetsDir = path.join(rootDir, 'test-fixtures/paper-assets')
 const availability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn: () => {} })
 const firstMap = availability.getByGroupId()
 assert('fixture exposes Reading A analysis href', firstMap.get('group-2024-jslk-reading-a')?.href?.includes('group-2024-jslk-reading-a'))

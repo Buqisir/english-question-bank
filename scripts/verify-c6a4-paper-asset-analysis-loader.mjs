@@ -96,7 +96,7 @@ const allowed = new Set([
   'scripts/verify-c6a9-open-reading-cd-analysis-entry.mjs',
   'scripts/verify-c6b1-option-anchored-analysis.mjs',
   'scripts/verify-c6b2-analysis-entry-gate.mjs',
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 
 for (const file of changedFiles) {
@@ -117,7 +117,7 @@ assert(
 )
 assert(
   'paper-asset source fixture unchanged',
-  !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'),
+  !changedFiles.includes('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json'),
 )
 assert(
   'legacy PI report fixture unchanged',
@@ -264,9 +264,9 @@ assert(
 
 console.log('\n-- 5. Fixture compatibility --')
 
-const asset = readJson('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json')
+const asset = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json')
 const analysis = readJson(
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 )
 const group = asset.content.groups['group-2024-jslk-reading-a']
 

@@ -91,16 +91,16 @@ for (const file of changedFiles) {
   assert(`changed file allowed: ${file}`, allowedFiles.has(file), 'unexpected C6a-9 file')
 }
 
-assert('analysis JSON unchanged in this cut', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json'))
-assert('paper-asset source unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
+assert('analysis JSON unchanged in this cut', !changedFiles.includes('test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json'))
+assert('paper-asset source unchanged', !changedFiles.includes('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('PaperSurface renderer unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
 assert('shared/papersurface unchanged', !changedFiles.some((file) => file.startsWith('shared/papersurface/')))
 assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(package(-lock)?\.json|pnpm-lock\.yaml)$/.test(file)))
 
 console.log('\n-- 2. Reviewed data prerequisites --')
 
-const asset = readJson('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json')
-const analysis = readJson('app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json')
+const asset = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json')
+const analysis = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json')
 
 const targets = [
   {

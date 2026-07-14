@@ -78,13 +78,13 @@ const allowed = new Set([
   'scripts/verify-c6a10-concierge-local-search.mjs',
   'scripts/verify-c6b1-option-anchored-analysis.mjs',
   'scripts/verify-c6b2-analysis-entry-gate.mjs',
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 ])
 for (const file of changedFiles) {
   assert(`changed file allowed: ${file}`, allowed.has(file), 'unexpected C6a-5 file')
 }
 assert('PaperSurface unchanged', !changedFiles.some((file) => file.startsWith('app/src/shared-ui/papersurface/')))
-assert('paper-asset source fixture unchanged', !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'))
+assert('paper-asset source fixture unchanged', !changedFiles.includes('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json'))
 assert('reports unchanged', !changedFiles.some((file) => file.startsWith('app/public/reports/')))
 assert('package and lockfiles unchanged', !changedFiles.some((file) => /(^|\/)(package(-lock)?\.json|pnpm-lock\.yaml)$/.test(file)))
 

@@ -93,7 +93,7 @@ console.log('=== C6a-6a: Reading B reviewed analysis import ===\n')
 console.log('-- 1. Scope --')
 
 const allowedFiles = new Set([
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
   'app/src/data/sampleQuestionGroups.ts',
   'app/src/features/paper-intelligence/paperIntelligenceRoute.ts',
   'data/sql/seed-v0.sql',
@@ -113,7 +113,7 @@ for (const file of changedFiles) {
 
 assert(
   'paper-asset source fixture unchanged',
-  !changedFiles.includes('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'),
+  !changedFiles.includes('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json'),
 )
 assert(
   'PaperSurface renderer unchanged',
@@ -122,9 +122,9 @@ assert(
 
 console.log('\n-- 2. Fixture shape --')
 
-const asset = readJson('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json')
+const asset = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json')
 const analysis = readJson(
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 )
 const groupId = 'group-2024-jslk-reading-b'
 const group = asset.content.groups[groupId]

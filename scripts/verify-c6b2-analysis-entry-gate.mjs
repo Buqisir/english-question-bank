@@ -133,8 +133,8 @@ assert('server writes hasPaperSurfaceAnalysis field', serverSource.includes('has
 assert('server writes paperSurfaceHref field', serverSource.includes('paperSurfaceHref: paperSurfaceAnalysis?.href'))
 assert('availability owner builds paper-asset hrefs, not legacy-report hrefs', availabilitySource.includes("source: 'paper-asset'"))
 
-const assetRelPath = 'app/public/paper-assets/paper-2024-jslk-english/paper-asset.json'
-const analysisRelPath = 'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json'
+const assetRelPath = 'test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json'
+const analysisRelPath = 'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json'
 assert('paper asset fixture exists', existsSync(path.join(rootDir, assetRelPath)))
 assert('reading choice analysis fixture exists', existsSync(path.join(rootDir, analysisRelPath)))
 

@@ -19,7 +19,8 @@
  *   7. verify-ci.mjs and scripts/README.md registration.
  */
 
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, symlinkSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
@@ -31,6 +32,35 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
+
+// jslk moved out of the served paper-assets path (fixture-move cut) to
+// test-fixtures/paper-assets/. The teaching-facet index still needs jslk in
+// its scan corpus for Req 4/5's "declared group but no analysis file stays
+// absent" assertions, so splice a temp dir: every real paper under
+// app/public/paper-assets/ plus jslk from its new home. buildIndex()'s
+// top-level scan calls entry.isDirectory() on each paperAssetsDir child,
+// which lies for symlinked entries (Dirent type reflects the symlink, not
+// its target), so each paper gets a *real* directory here with its contents
+// symlinked in one level down — mid-path symlinks resolve transparently for
+// every readdir/existsSync call deeper in the tree. Cleaned up via
+// process.on('exit') so it's removed on every exit path (pass/fail/skip).
+const corpusDir = mkdtempSync(path.join(tmpdir(), 'eqb-i16a-corpus-'))
+process.on('exit', () => rmSync(corpusDir, { recursive: true, force: true }))
+function spliceCorpusPaper(sourceDir, paperId) {
+  const targetDir = path.join(corpusDir, paperId)
+  mkdirSync(targetDir)
+  for (const child of readdirSync(sourceDir)) {
+    symlinkSync(path.join(sourceDir, child), path.join(targetDir, child))
+  }
+}
+for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue
+  spliceCorpusPaper(path.join(paperAssetsDir, entry.name), entry.name)
+}
+spliceCorpusPaper(
+  path.join(rootDir, 'test-fixtures/paper-assets/paper-2024-jslk-english'),
+  'paper-2024-jslk-english',
+)
 
 let passed = 0
 let failed = 0
@@ -297,7 +327,7 @@ console.log()
 // ─── Requirement 4: MF-2 coverage honesty (full index) ───────────────────────
 console.log('=== Req 4: MF-2 coverage honesty — unanalyzed groups absent ===')
 
-const index = createTeachingFacetIndex({ paperAssetsDir })
+const index = createTeachingFacetIndex({ paperAssetsDir: corpusDir })
 const indexMap = index.getIndex()
 
 // jslk has grammar-fill and cloze groups in content.groups but NO analysis files

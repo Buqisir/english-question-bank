@@ -59,9 +59,9 @@ function quoteExistsInAnyParagraph(quote, paragraphsById) {
   return Object.values(paragraphsById).some((paragraph) => paragraph.includes(quote));
 }
 
-const asset = readJson('app/public/paper-assets/paper-2024-jslk-english/paper-asset.json');
+const asset = readJson('test-fixtures/paper-assets/paper-2024-jslk-english/paper-asset.json');
 const analysis = readJson(
-  'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+  'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
 );
 const readingGroup = asset.content.groups['group-2024-jslk-reading-a'];
 const paragraphs = readingGroup.passage.paragraphs;
@@ -313,7 +313,7 @@ try {
     .map((line) => line.trim())
     .filter(Boolean);
   const allowedFiles = new Set([
-    'app/public/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
+    'test-fixtures/paper-assets/paper-2024-jslk-english/analyses/reading-choice-analysis-v1.json',
     'prompts/reading-choice-analysis-v1.md',
     'scripts/verify-c6a-2-reading-a-analysis.mjs',
     'scripts/verify-c6a6a-reading-b-analysis.mjs',
