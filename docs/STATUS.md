@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-13（motion-press-exit 收官 merge 0dcaec7，三路
-UI 评审刀1，CR APPROVE 0MF/4SW、main CI 绿、未部署；a3-imposition 部署
-生产 67fc324 + 三刀 DP-3 同场过）
+Last updated: 2026-07-14（trust-cracks 收官 merge 98d708d，三路 UI 评审
+刀2，CR APPROVE 0MF/5SW、main CI 绿、未部署——与 motion-press-exit 同场
+待 owner DP-3+部署）
 
 ## 现在是什么
 
@@ -25,6 +25,19 @@ UI 评审刀1，CR APPROVE 0MF/4SW、main CI 绿、未部署；a3-imposition 部
 
 ## 主线焦点
 
+- 2026-07-14：**trust-cracks 收官（三路评审刀2 信任裂缝）**（merge 98d708d，
+  fresh CR APPROVE 0MF/5SW，verify:all PASS77 主代理亲验 + main CI 绿）：
+  AI 搜索诚实空态（重排 prompt 允许返回空 + rankings 信任分支不再兜底追加
+  + 0.25 地板；解析失败仍保预筛兜底）、详情 `?view=detail&groupId` 与筛选
+  `f.*` 进 URL（刷新/Back/中键不丢态，详情改真链接）、卷名去结巴（含 26.3
+  月份形裸"3"）、rail 计数 "N 题"、搜索年份列同年只显首行、"已删除"→
+  "已移出"。**账单**：流水线 315k（DEV+verify；verify 步 502 死代理假红
+  中止→主代理亲跑复核，a3 判例二证：断点不走 resume）+ CR 77k；主代理
+  出场 5（含 DP-2 亲驱）。**未部署**，DP-3 与 motion-press-exit 同场待
+  owner（清单 `docs/cuts/trust-cracks/qa/qa-dp2.md` 文末）；挂账 SW-1~5
+  见 cr.md。QA 判例入档：**面板 CDP 合成点击对部分 React 控件（表单
+  submit/hover 显隐链接/浮动按钮）不触发 onClick**——确定性 DOM/URL 断言
+  面板做，点击全覆盖走 DP-3 前台真鼠标。
 - 2026-07-13：**全站 UI 三路评审 + motion-press-exit 收官（刀1）**
   （merge 0dcaec7，CR APPROVE 0MF/4SW，DP-2 契约全绿+A3零回归，main CI 绿）：
   评审用 impeccable 三路独立合成（A 设计总监实点 28/40，较 07-10 的 20 升；
@@ -39,8 +52,7 @@ UI 评审刀1，CR APPROVE 0MF/4SW、main CI 绿、未部署；a3-imposition 部
   动画逐帧手感眼看不了**——DP-2 改确定性 CSS 契约验证替代（强制翻
   data-visible/样式表遍历），SW-1（单 rAF 塌帧）移交 owner DP-3 前台复核。
   **待办**：
-  - **刀2 信任裂缝（未开）**：搜索诚实空态(P1)、详情/筛选进 URL(P1)、
-    卷名结巴、rail "Reading…"截断、年份头重复、"已删除"→"已移出"措辞。
+  - ~~刀2 信任裂缝~~ ✅ 2026-07-14 收官（见上 trust-cracks 条）。
   - **主页方向（原型探索中，未拍板）**：owner 长期觉主页"不够 feel"。
     评审证实"没有锚"（美学 4/4 但每行两意图竞争 + hover 藏操作）。原型在
     `docs/cuts/home-desk/`：prototype.html（书桌版，减法开关+3 脑洞可叠加）、
