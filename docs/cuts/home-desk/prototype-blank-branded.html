@@ -51,6 +51,8 @@
   body[data-emblem="seal-red"] .emblem-seal .seal-body { fill: var(--seal-red); }
 
   body[data-emblem="cat"] .emblem-cat { display: block; }
+  body[data-emblem="cathead-color"] .emblem-cathead-color { display: block; }
+  body[data-emblem="cathead-line"] .emblem-cathead-line { display: block; }
 
   .wordmark { font-size: 22px; font-weight: 600; letter-spacing: 0.01em; }
   .wordmark span { color: var(--brand-teal); }
@@ -134,7 +136,7 @@
   }
 </style>
 </head>
-<body data-emblem="seal-teal">
+<body data-emblem="cathead-color">
   <header class="topbar">
     <a href="#">个人空间</a><a href="#">管理</a><a href="#">qa-local-owner</a><a href="#">退出</a>
   </header>
@@ -167,6 +169,43 @@
             <!-- 闭眼 -->
             <path d="M51.5 29.5 q 1.2 1 2.4 0 M 55.6 29.5 q 1.2 1 2.4 0"
                   stroke="#1E1E1C" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <!-- 猫头标（owner 的猫）：三花，黑耳为第一辨识点，额中白闪电 -->
+        <div class="emblem emblem-cathead-color">
+          <svg width="72" height="72" viewBox="0 0 96 96" aria-hidden="true">
+            <!-- 耳 -->
+            <path d="M27 39 C 24 30, 23 22, 25 17 C 31 18, 37 24, 40 30 Z" fill="#D98A3D" stroke="#1E1E1C" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M69 39 C 72 30, 73 22, 71 17 C 65 18, 59 24, 56 30 Z" fill="#1E1E1C" stroke="#1E1E1C" stroke-width="1.8" stroke-linejoin="round"/>
+            <!-- 头 -->
+            <path d="M20 56 C 20 38, 32 30, 48 30 C 64 30, 76 38, 76 56 C 76 72, 63 80, 48 80 C 33 80, 20 72, 20 56 Z"
+                  fill="#FFFFFF" stroke="#1E1E1C" stroke-width="1.8"/>
+            <!-- 额头橘斑 ×2，中间留白闪电 -->
+            <path d="M28 42 C 26.5 35, 33 31.5, 38.5 33 C 42.5 36, 43.5 42, 41 46.5 C 35.5 48.5, 29.5 47, 28 42 Z" fill="#D98A3D"/>
+            <path d="M68 42 C 69.5 35, 63 31.5, 57.5 33 C 53.5 36, 52.5 42, 55 46.5 C 60.5 48.5, 66.5 47, 68 42 Z" fill="#D98A3D"/>
+            <!-- 鼻梁橘面罩 + 粉鼻 -->
+            <path d="M42.5 58.5 C 43 53.5, 53 53.5, 53.5 58.5 C 53.5 62.5, 49.5 64.5, 48 64.5 C 46.5 64.5, 42.5 62.5, 42.5 58.5 Z" fill="#D98A3D"/>
+            <path d="M44.5 60.5 C 46 59, 50 59, 51.5 60.5 C 51 63.5, 49.5 65, 48 65 C 46.5 65, 45 63.5, 44.5 60.5 Z" fill="#E8A79B"/>
+            <!-- 闭眼 + 嘴 + 唇边小黑痣 -->
+            <path d="M32.5 52 C 35 54.6, 39.5 54.6, 42 52" stroke="#1E1E1C" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M54 52 C 56.5 54.6, 61 54.6, 63.5 52" stroke="#1E1E1C" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M48 65 C 48 67.6, 46.2 69.2, 44.2 68.8 M48 65 C 48 67.6, 49.8 69.2, 51.8 68.8" stroke="#1E1E1C" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            <circle cx="53.2" cy="70.6" r="1.2" fill="#1E1E1C"/>
+          </svg>
+        </div>
+        <div class="emblem emblem-cathead-line">
+          <svg width="72" height="72" viewBox="0 0 96 96" aria-hidden="true">
+            <path d="M27 39 C 24 30, 23 22, 25 17 C 31 18, 37 24, 40 30 Z" fill="none" stroke="#1E1E1C" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M69 39 C 72 30, 73 22, 71 17 C 65 18, 59 24, 56 30 Z" fill="#1E1E1C" stroke="#1E1E1C" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 56 C 20 38, 32 30, 48 30 C 64 30, 76 38, 76 56 C 76 72, 63 80, 48 80 C 33 80, 20 72, 20 56 Z"
+                  fill="none" stroke="#1E1E1C" stroke-width="2"/>
+            <path d="M28 42 C 26.5 35, 33 31.5, 38.5 33 C 42.5 36, 43.5 42, 41 46.5 C 35.5 48.5, 29.5 47, 28 42 Z" fill="none" stroke="#1E1E1C" stroke-width="1.4"/>
+            <path d="M68 42 C 69.5 35, 63 31.5, 57.5 33 C 53.5 36, 52.5 42, 55 46.5 C 60.5 48.5, 66.5 47, 68 42 Z" fill="none" stroke="#1E1E1C" stroke-width="1.4"/>
+            <path d="M44.5 60.5 C 46 59, 50 59, 51.5 60.5 C 51 63.5, 49.5 65, 48 65 C 46.5 65, 45 63.5, 44.5 60.5 Z" fill="#1E1E1C"/>
+            <path d="M32.5 52 C 35 54.6, 39.5 54.6, 42 52" stroke="#1E1E1C" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M54 52 C 56.5 54.6, 61 54.6, 63.5 52" stroke="#1E1E1C" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M48 65 C 48 67.6, 46.2 69.2, 44.2 68.8 M48 65 C 48 67.6, 49.8 69.2, 51.8 68.8" stroke="#1E1E1C" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            <circle cx="53.2" cy="70.6" r="1.2" fill="#1E1E1C"/>
           </svg>
         </div>
         <h1 class="wordmark">英语题库<span>工作台</span></h1>
@@ -212,7 +251,9 @@
 
   <div class="switcher" role="group" aria-label="符号档位切换">
     <span>符号</span>
-    <button data-set="seal-teal" aria-pressed="true">印章 · 墨绿</button>
+    <button data-set="cathead-color" aria-pressed="true">猫头 · 彩</button>
+    <button data-set="cathead-line">猫头 · 线</button>
+    <button data-set="seal-teal">印章 · 墨绿</button>
     <button data-set="seal-red">印章 · 朱砂</button>
     <button data-set="cat">书猫 · 线描</button>
     <button data-set="none">纯字标</button>
