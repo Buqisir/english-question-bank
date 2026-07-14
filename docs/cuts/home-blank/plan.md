@@ -132,6 +132,7 @@ workspace：worktree `../wt-home-blank`；开工第一步
 ## 裁决点清单（主代理出场点；施工中勾选）
 
 - [x] DP-1 方向 + 四裁点 owner 拍板（grilling 2026-07-14，本 plan 即记录）
-- [ ] DP-2 CR verdict / MF 处置 + 主代理真鼠标 QA（narrow + full 复核由
-  verify 步承担，收口只盯 main CI）
-- [ ] DP-3 owner 生产前台 QA（部署后）
+- [x] DP-2 CR verdict 处置（APPROVE 0MF，3 SW 当场收）+ 主代理浏览器 QA
+  （headless Playwright 五幕 37 断言全绿，2026-07-14；verify 步复核 +
+  main CI 双证）
+- [x] DP-3 owner 生产前台 QA（2026-07-14「全过」，本刀闭环）

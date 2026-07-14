@@ -1,7 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
 Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上线，
-**生产 da4c49a**；owner DP-3 待做，对照单在 cut 目录）
+**生产 da4c49a**，owner DP-3 全过闭环；verify 死代理假红根修 81d9fd0）
 
 ## 现在是什么
 
@@ -30,9 +30,11 @@ Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上
   拍切换（原型 T 档 A）、feed+chips 原样退进 `?view=browse`（`f.*` 深链落
   浏览态）、主页 list 态顶栏 brand 隐去。**账单**：流水线 292k（DEV+verify；
   verify 步 502 死代理假红中止→主代理亲跑，判例三证）+ CR 独立会话；主代理
-  出场 5。**生产已部署 da4c49a**；owner DP-3 对照单 `qa-checklist.md`（含
-  思考开关藏空白态一条顺手拍板项）。QA 脚本入档可重跑（`qa/dp2-five-acts.mjs`，
-  mini-app-spec 讨论采纳项①之示范）。
+  出场 5。**生产已部署 da4c49a**，**owner DP-3 全过**（2026-07-14 生产前台
+  Chrome 实点五项，「全过」，思考开关藏空白态一并默认通过，本刀闭环）。
+  QA 脚本入档可重跑（`qa/dp2-five-acts.mjs`）。同日附带：verify 死代理
+  502 假红根修（81d9fd0，lib/proxyFreeEnv 六处接线，死代理实测 81/81 绿+
+  CI 双证）。
 - 2026-07-14：**trust-cracks 收官（三路评审刀2 信任裂缝）**（merge 98d708d，
   fresh CR APPROVE 0MF/5SW，verify:all PASS77 主代理亲验 + main CI 绿）：
   AI 搜索诚实空态（重排 prompt 允许返回空 + rankings 信任分支不再兜底追加
