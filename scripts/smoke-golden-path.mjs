@@ -221,9 +221,10 @@ async function runOwnerFlow(browser) {
     await waitForConciergeDeskReady(page)
     pass('Correct password logs owner in and lands on the 找题面')
 
-    // C3: find -> expand -> detail.
+    // C3: find -> expand -> detail. trust-cracks C3c: 详情 is a real link
+    // (?view=detail&groupId=…) now, role=link not button — 中键/新标签可用.
     const ownerCard = await searchAndOpenGroupCard(page, OWNER_GROUP_TITLE, 'g-golden-owner')
-    await ownerCard.getByRole('button', { name: '详情' }).click()
+    await ownerCard.getByRole('link', { name: '详情' }).click()
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Owner opens 题组详情 from the card')
 
@@ -332,7 +333,7 @@ async function runMemberFlow(browser, ownerDraftPaperId) {
 
     // C4: member walks find -> detail -> add -> workbench with their own group.
     const memberCard = await searchAndOpenGroupCard(page, MEMBER_GROUP_TITLE, 'g-golden-member')
-    await memberCard.getByRole('button', { name: '详情' }).click()
+    await memberCard.getByRole('link', { name: '详情' }).click()
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Member opens 题组详情 from the card')
 
