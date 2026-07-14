@@ -24,6 +24,11 @@ export type AppTopbarProps = AppTopbarNav & {
      fixed to 返回找题 across the whole app; the wordmark uses the same
      handler. */
   onBack?: () => void
+  /* home-blank 硬契约 — 词标: the home list view (静止/浏览态, both) moves
+     the wordmark into ConciergeDesk's centered stage and hides this bar's
+     left brand block instead. Detail view and every sub page pass this as
+     false/undefined — zero visual change there. */
+  hideBrand?: boolean
 }
 
 export function AppTopbar(props: AppTopbarProps): ReactNode {
@@ -37,10 +42,12 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           </button>
         )}
         {variant === 'home' ? (
-          <div>
-            <p className="eyebrow">English Question Bank</p>
-            <h1>英语题库工作台</h1>
-          </div>
+          !props.hideBrand && (
+            <div>
+              <p className="eyebrow">English Question Bank</p>
+              <h1>英语题库工作台</h1>
+            </div>
+          )
         ) : (
           <div className="topbar-brand-compact">
             <button

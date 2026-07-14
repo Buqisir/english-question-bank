@@ -3236,6 +3236,98 @@ button:disabled {
   color: #6A6A64;
 }
 
+/* home-blank — the stage wrapper (原型 D + 节拍 A). `.concierge-stage-inner`
+   is a centered narrow column (wordmark + searchbox + whisper) in the pure
+   -blank static state; `--risen` widens it back to the full command-bar row
+   once showListSurface flips true (submit / browse / active filters), per
+   plan.md 硬契约 "切换节拍 = 提交拍". margin-top is the one moving property —
+   token-driven (--motion-entrance + --ease-out), no bare ms values. */
+.concierge-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.concierge-stage-inner {
+  width: 100%;
+  max-width: 720px;
+  margin: 26vh auto 0;
+  transition: margin-top var(--motion-entrance) var(--ease-out), max-width var(--motion-entrance) var(--ease-out);
+}
+
+.concierge-stage-inner--risen {
+  max-width: none;
+  margin-top: 0;
+}
+
+.concierge-wordmark {
+  display: block;
+  margin: 0 auto 26px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: #1E1E1C;
+  font: inherit;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-hover);
+}
+
+.concierge-wordmark:hover {
+  background: rgba(30, 30, 28, 0.05);
+}
+
+.concierge-wordmark:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.concierge-wordmark span {
+  color: var(--accent, #2C6E56);
+}
+
+.concierge-whisper {
+  margin: 18px 0 0;
+  padding: 0 4px;
+  font-size: 13px;
+  color: #6A6A64;
+  text-align: center;
+}
+
+.concierge-whisper-browse {
+  border: none;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--motion-fast) var(--ease-hover);
+}
+
+.concierge-whisper-browse:hover {
+  color: var(--accent, #2C6E56);
+}
+
+.concierge-whisper-browse:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.concierge-list-surface {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 44px;
+}
+
 /* home-editorial round 2 (方向 C) — 命令行一行. Search input flexes; the
    thinking toggle / filter toggle / inventory count ride inline instead of
    the old centered hero search box + separate toggle row underneath. */

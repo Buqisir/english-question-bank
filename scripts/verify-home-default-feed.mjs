@@ -388,5 +388,116 @@ console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid
   assert('ConciergeGroupCard accepts a dimmed prop for non-hit rows (is-dim, no side-stripe)', /dimmed\?\s*:\s*boolean/.test(groupCard), '')
 }
 
+// ------------------------------------------------------------------ Test 26
+console.log('\nTest 26: home-blank — showListSurface invariant (硬契约: browseActive || anyFilterActive || state.kind !== \'empty\')')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert(
+    'browseSurfaceActive = browseActive || hasActiveFilters',
+    /const browseSurfaceActive = Boolean\(browseActive\) \|\| hasActiveFilters/.test(desk),
+    '',
+  )
+  assert(
+    "showListSurface = browseSurfaceActive || state.kind !== 'empty'",
+    /const showListSurface = browseSurfaceActive \|\| state\.kind !== ['"]empty['"]/.test(desk),
+    '',
+  )
+  assert(
+    'section root carries data-surface reflecting showListSurface (blank vs list)',
+    /data-surface=\{showListSurface \? ['"]list['"] : ['"]blank['"]\}/.test(desk),
+    '',
+  )
+}
+
+// ------------------------------------------------------------------ Test 27
+console.log('\nTest 27: home-blank — feed gate moves from bare state.kind===\'empty\' to browseSurfaceActive-gated (真空态 unaffected)')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  const showFeedMatch = desk.match(/const showFeed =\s*[\s\S]{0,220}/)?.[0] || ''
+  assert(
+    "showFeed's empty-state branch requires browseSurfaceActive (not bare state.kind==='empty')",
+    /browseSurfaceActive && state\.kind === ['"]empty['"]/.test(showFeedMatch),
+    showFeedMatch,
+  )
+  assert(
+    'true-vacuum branch (isVacuumResultsState) still shows the feed regardless of browse/filter state',
+    /isVacuumResultsState\(state\)/.test(showFeedMatch),
+    showFeedMatch,
+  )
+}
+
+// ------------------------------------------------------------------ Test 28
+console.log('\nTest 28: home-blank — pure-blank stage markup: no feed/chip DOM at all when !showListSurface (list surface is a whole conditionally-mounted block, not a CSS hide)')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert('renders a centered concierge-wordmark button', /className="concierge-wordmark"/.test(desk), '')
+  assert('wordmark click resets intent + clears filters + exits browse', /const handleWordmarkClick = \(\) => \{[\s\S]{0,120}actions\.reset\(\)[\s\S]{0,60}clearFilters\(\)[\s\S]{0,60}onExitBrowse\?\.\(\)/.test(desk), '')
+  assert('whisper block only renders when !showListSurface', /\{!showListSurface && \(\s*<p className="concierge-whisper">/.test(desk), '')
+  assert('whisper count is real (catalogPaperCount / catalogGroupCount), clickable, entering browse', /catalogPaperCount\} 套卷 · \{catalogGroupCount\}[\s\S]{0,40}<\/button>/.test(desk) && /className="concierge-whisper-browse"[\s\S]{0,60}onClick=\{handleEnterBrowse\}/.test(desk), '')
+  assert(
+    'list surface (feed/chips/results container) is itself gated on {showListSurface && (',
+    /\{showListSurface && \(\s*<div className="concierge-list-surface">/.test(desk),
+    '',
+  )
+  assert('filter toggle button additionally requires showListSurface (筛选 chips 只活在列表面)', /showListSurface &&\s*\n\s*!dataLoading &&\s*\n\s*\(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]results['"] \|\| state\.kind === ['"]loading['"]\)/.test(desk), '')
+  assert('inline catalog count span also requires showListSurface', /\{showListSurface && !dataLoading && \(\s*<span className="concierge-command-count">/.test(desk), '')
+}
+
+// ------------------------------------------------------------------ Test 29
+console.log('\nTest 29: home-blank — browseActive/onEnterBrowse/onExitBrowse prop threading')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  assert('ConciergeDeskProps declares browseActive?: boolean', /browseActive\?:\s*boolean/.test(desk), '')
+  assert('ConciergeDeskProps declares onEnterBrowse?: () => void', /onEnterBrowse\?:\s*\(\) => void/.test(desk), '')
+  assert('ConciergeDeskProps declares onExitBrowse?: () => void', /onExitBrowse\?:\s*\(\) => void/.test(desk), '')
+
+  const app = readSrc('app/src/App.tsx')
+  assert('App.tsx boot-reads view=browse into browseRouteActive (same pattern as its sibling routes)', /new URLSearchParams\(window\.location\.search\)\.get\(['"]view['"]\) === ['"]browse['"]/.test(app), '')
+  assert('App.tsx popstate handler syncs browseRouteActive', /setBrowseRouteActive\(view === ['"]browse['"]\)/.test(app), '')
+  assert('ConciergeDesk receives browseActive={browseRouteActive}', /browseActive=\{browseRouteActive\}/.test(app), '')
+  assert('ConciergeDesk receives onEnterBrowse={enterBrowse}', /onEnterBrowse=\{enterBrowse\}/.test(app), '')
+  assert('ConciergeDesk receives onExitBrowse={exitBrowse}', /onExitBrowse=\{exitBrowse\}/.test(app), '')
+}
+
+// ------------------------------------------------------------------ Test 30
+console.log('\nTest 30: home-blank — AppTopbar hides the left brand block for the home list view only (detail/sub pages untouched)')
+{
+  const topbar = readSrc('app/src/components/AppTopbar.tsx')
+  assert('AppTopbarProps declares hideBrand?: boolean', /hideBrand\?:\s*boolean/.test(topbar), '')
+  assert('home-variant brand block is gated on !props.hideBrand', /variant === ['"]home['"] \? \(\s*!props\.hideBrand &&/.test(topbar), '')
+
+  const app = readSrc('app/src/App.tsx')
+  assert(
+    "App.tsx passes hideBrand only for the list view (not detail, not admin)",
+    /hideBrand=\{!adminRouteActive && viewMode === ['"]list['"]\}/.test(app),
+    '',
+  )
+}
+
+// ------------------------------------------------------------------ Test 31
+console.log('\nTest 31: home-blank — rotating placeholder examples all carry the "比如：" prefix, gated to the static blank stage only')
+{
+  const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
+  const arrayMatch = desk.match(/const ROTATING_PLACEHOLDERS = \[([\s\S]*?)\] as const/)?.[1] || ''
+  const entries = [...arrayMatch.matchAll(/'([^']*)'/g)].map((m) => m[1])
+  assert('at least 2 rotating placeholder examples defined', entries.length >= 2, JSON.stringify(entries))
+  assert(
+    'every rotating placeholder starts with 比如：',
+    entries.length > 0 && entries.every((line) => line.startsWith('比如：')),
+    JSON.stringify(entries),
+  )
+  assert(
+    'rotation effect gated on !showListSurface && !dataLoading && !inputFocused',
+    /if \(showListSurface \|\| dataLoading \|\| inputFocused\) return/.test(desk),
+    '',
+  )
+  assert(
+    'rotation stops under prefers-reduced-motion',
+    /window\.matchMedia\(['"]\(prefers-reduced-motion: reduce\)['"]\)\.matches\) return/.test(desk),
+    '',
+  )
+  assert('dataLoading placeholder text "正在连接本地题库…" preserved', /if \(dataLoading\) return ['"]正在连接本地题库…['"]/.test(desk), '')
+}
+
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)
