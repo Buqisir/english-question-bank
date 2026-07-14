@@ -84,6 +84,9 @@ const serverContext = {
   openUserDatabase,
   readJsonBody,
   sendPdf: exportImplementation.sendPdf,
+  // draft-docx cut: same sendDocx the integral-paper /api/exports/docx route
+  // uses — reused for the new draft-paper docx route's response headers.
+  sendDocx: exportImplementation.sendDocx,
   sendJson,
   bindTopicLabelsToQuestionGroup,
   createPaperSet,
@@ -476,6 +479,10 @@ export function getPrintReadyByGroupId(db, groupIds) {
 }
 
 const draftPaperStore = createDraftPaperStore({
+  // draft-docx cut: same exportImplementation.exportDocx the integral-paper
+  // /api/exports/docx route consumes (createExportRoutes(exportImplementation)
+  // below) — threaded in, not re-instantiated.
+  exportDocx: exportImplementation.exportDocx,
   exportDir,
   getPrintReadyByGroupId,
   getQuestionGroupDetail,

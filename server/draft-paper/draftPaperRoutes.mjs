@@ -292,5 +292,24 @@ export function createDraftPaperRoutes() {
         }
       }
     }),
+
+    // draft-docx cut (plan.md 硬契约): mirrors print-pdf above for auth/ownership/
+    // error semantics via the same sendDraftMutationError helper other draft
+    // mutation routes use (404 for not-found/not-owned, 400 otherwise) — no
+    // vivliostyle-unavailable branch since exportDraftPaperDocx never touches
+    // vivliostyle.
+    defineRoute('POST', /^\/api\/draft-papers\/([^/]+)\/docx$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const input = await context.readJsonBody(request)
+        const versionType = input.versionType === undefined
+          ? 'student'
+          : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
+        const result = context.draftPaperStore.exportDraftPaperDocx(userId, decodeURIComponent(match[1]), { versionType })
+        context.sendDocx(response, result.body, result.fileName, result.outputPath)
+      } catch (error) {
+        sendDraftMutationError(response, context, error)
+      }
+    }),
   ]
 }

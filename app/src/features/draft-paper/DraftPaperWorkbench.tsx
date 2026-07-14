@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowUp, FileDown, FolderPlus, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
+import { Archive, ArrowDown, ArrowUp, FileDown, FileText, FolderPlus, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, MySpaceFolder } from '../../domain/questionBank'
 import {
   deleteDraftPaperItem,
+  downloadDraftPaperDocx,
   downloadDraftPaperPdf,
   fetchCurrentDraftPaper,
   fetchDraftPaper,
@@ -772,6 +773,19 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
+  async function exportDocx() {
+    if (!draftPaper || draftPaper.items.length === 0) return
+    setExportStatus('exporting')
+    setExportError('')
+    try {
+      await downloadDraftPaperDocx(draftPaper.id, versionType)
+      setExportStatus('exported')
+    } catch (error) {
+      setExportStatus('error')
+      setExportError(describeError('导出 DOCX', error))
+    }
+  }
+
   async function openSpaceDialog() {
     if (!draftPaper || draftPaper.items.length === 0) return
     setSpaceDialogOpen(true)
@@ -969,6 +983,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                   }}
                 >
                   <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+                  onClick={() => {
+                    setExportMenuOpen(false)
+                    void exportDocx()
+                  }}
+                >
+                  <FileText size={15} /> 下载 DOCX（{versionType === 'teacher' ? '教师版' : '学生版'}）
                 </button>
                 <button
                   type="button"

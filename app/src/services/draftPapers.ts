@@ -203,3 +203,21 @@ export async function downloadDraftPaperPdf(
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
   downloadBlob(blob, fileName)
 }
+
+export async function downloadDraftPaperDocx(
+  draftPaperId: string,
+  versionType: 'student' | 'teacher' = 'student',
+): Promise<void> {
+  const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/docx`), {
+    body: JSON.stringify({ versionType }),
+    headers: { 'content-type': 'application/json' },
+    method: 'POST',
+  })
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to export draft paper DOCX: ${response.status}`))
+  }
+  const blob = await response.blob()
+  const defaultFileName = versionType === 'teacher' ? '英语草稿卷-教师卷.docx' : '英语草稿卷-学生卷.docx'
+  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
+  downloadBlob(blob, fileName)
+}
