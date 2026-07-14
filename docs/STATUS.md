@@ -1,8 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-14（trust-cracks 收官 + owner DP-3 打回一项→
-relevant 布尔补刀→**生产 9517085** 机验双证过；同发带上
-motion-press-exit 刀1；CI 吞码事故判例入 case-law）
+Last updated: 2026-07-14（home-blank 收官——主页纯空白大搜索框上线，
+**生产 da4c49a**；owner DP-3 待做，对照单在 cut 目录）
 
 ## 现在是什么
 
@@ -25,6 +24,15 @@ motion-press-exit 刀1；CI 吞码事故判例入 case-law）
 
 ## 主线焦点
 
+- 2026-07-14：**home-blank 收官（主页纯空白大搜索框）**（merge da4c49a，
+  fresh CR APPROVE 0MF/3SW 当场收，DP-2 五幕 37 断言全绿 + verify:all 77
+  绿 + main CI 双证）：静止态=居中词标+大框+真值 whisper（原型 D）、提交
+  拍切换（原型 T 档 A）、feed+chips 原样退进 `?view=browse`（`f.*` 深链落
+  浏览态）、主页 list 态顶栏 brand 隐去。**账单**：流水线 292k（DEV+verify；
+  verify 步 502 死代理假红中止→主代理亲跑，判例三证）+ CR 独立会话；主代理
+  出场 5。**生产已部署 da4c49a**；owner DP-3 对照单 `qa-checklist.md`（含
+  思考开关藏空白态一条顺手拍板项）。QA 脚本入档可重跑（`qa/dp2-five-acts.mjs`，
+  mini-app-spec 讨论采纳项①之示范）。
 - 2026-07-14：**trust-cracks 收官（三路评审刀2 信任裂缝）**（merge 98d708d，
   fresh CR APPROVE 0MF/5SW，verify:all PASS77 主代理亲验 + main CI 绿）：
   AI 搜索诚实空态（重排 prompt 允许返回空 + rankings 信任分支不再兜底追加
@@ -78,9 +86,9 @@ motion-press-exit 刀1；CI 吞码事故判例入 case-law）
     全部已开 owner Chrome 实点。**owner 拍板(2026-07-14 深夜)：主页方向
     = 原型 D 纯空白大搜索框；品牌符号(满分猫标)搁置**——素材已档
     (brand-mark-brief.md：特征速记+owner 自生成插画 4 张+双层制方案)，
-    复活时从 brief 接。**下一步：home-blank 刀**——开工前 grilling 拷问
-    plan(feed 退场后浏览入口/新同事首跑/真空态衔接) + 提醒 owner 切
-    High；未过 grilling 不动生产主页代码。
+    复活时从 brief 接。~~下一步：home-blank 刀~~ ✅ 2026-07-14
+    grilling 三问收敛（浏览入口=whisper 可点/首跑零添加/提交拍）+ 收官
+    （见上 home-blank 条）。
 - 2026-07-13：**a3-imposition 收官**（merge dbfb472，CR APPROVE 0MF/4SW，
   verify:all + main CI 绿含新 e2e Phase B 真点步）：A3 态预览按面拼版
   （方案C 满幅、面标签/对折线/翻面⟲换张✂缝、缝上建议徽标）——owner 对
