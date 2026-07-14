@@ -239,6 +239,16 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'my-space'
   })
+  // home-blank — `?view=browse`: the home list surface's browse mode. Unlike
+  // its sibling routes above this does NOT swap out a top-level component —
+  // it's a boolean handed straight into ConciergeDesk (still viewMode
+  // 'list'), which combines it with its own `f.*`-derived hasActiveFilters
+  // into the showListSurface invariant (plan.md 硬契约). Same
+  // boot-read-URL-once + popstate-sync pattern as the routes above.
+  const [browseRouteActive, setBrowseRouteActive] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'browse'
+  })
   const [draftPaperRoute, setDraftPaperRoute] = useState(() => {
     if (typeof window === 'undefined') {
       return { active: false, draftPaperId: null as string | null, focusGroupId: null as string | null }
@@ -1014,6 +1024,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       }
       setAdminRouteActive(isOwnerView && view === 'admin')
       setMySpaceRouteActive(view === 'my-space')
+      setBrowseRouteActive(view === 'browse')
       setDraftPaperRoute({
         active: view === 'draft-paper',
         draftPaperId: params.get('draftPaperId'),
@@ -1046,6 +1057,41 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [isOwnerView])
+
+  // home-blank — whisper click: push `?view=browse`. A real navigation (Back
+  // retreats out of browse), mirroring openDetail/openMySpace's pushState
+  // pattern; only the `view` param is touched here (f.* / other params, if
+  // any, survive untouched).
+  const enterBrowse = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.set('view', 'browse')
+        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setBrowseRouteActive(true)
+  }, [])
+
+  // home-blank — 词标 click (logo=home semantics): clears the `view=browse`
+  // param via replaceState (a precision revert of this one param, not a new
+  // navigation — Back is the other, separate way out of browse per plan.md).
+  const exitBrowse = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('view')
+        const nextSearch = url.searchParams.toString()
+        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
+        window.history.replaceState(window.history.state, '', nextUrl)
+      } catch {
+        // State flip below is the authoritative UI change.
+      }
+    }
+    setBrowseRouteActive(false)
+  }, [])
 
   const openMySpace = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
@@ -1203,6 +1249,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         showAdmin={isOwnerView}
         adminActive={adminRouteActive}
         onToggleAdmin={toggleAdminRoute}
+        hideBrand={!adminRouteActive && viewMode === 'list'}
       />
 
       {adminRouteActive && (
@@ -1248,6 +1295,9 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
                   setAiThinkingMode(value)
                   localStorage.setItem('ai-thinking-mode', value ? 'on' : 'off')
                 }}
+                browseActive={browseRouteActive}
+                onEnterBrowse={enterBrowse}
+                onExitBrowse={exitBrowse}
               />
           ) : viewMode === 'detail' ? (
             <QuestionGroupDetailView

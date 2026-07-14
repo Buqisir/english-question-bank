@@ -62,7 +62,31 @@ export type ConciergeDeskProps = {
   thinkingMode?: boolean
   /** Called when the user toggles thinking mode. */
   onThinkingModeChange?: (value: boolean) => void
+
+  /**
+   * home-blank — whether `?view=browse` is active (owned by App.tsx, same
+   * boot-read-URL-once + popstate pattern as its sibling routes). Feeds the
+   * `showListSurface` invariant below; App.tsx is the only writer.
+   */
+  browseActive?: boolean
+  /** home-blank — whisper click: pushes `?view=browse`. */
+  onEnterBrowse?: () => void
+  /** home-blank — wordmark click (logo=home semantics): clears the browse param. */
+  onExitBrowse?: () => void
 }
+
+/**
+ * home-blank — rotating placeholder examples for the pure-blank static
+ * stage only (硬契约: 仅静止态 + 未聚焦 + 非 dataLoading 时轮换). Every entry
+ * must start with "比如：" — golden-path's locator regex
+ * (smoke-golden-path.mjs `/找一道|正在连接|比如/`) and the clarification-state
+ * placeholder both already rely on that substring being present.
+ */
+const ROTATING_PLACEHOLDERS = [
+  '比如：找一道讲生态恢复的阅读 C，主旨概括',
+  '比如：2024 新课标Ⅰ 的七选五',
+  '比如：讲 AI 的说明文，高难',
+] as const
 
 /** Default feed shows this many papers before the "显示全部" expander. */
 const DEFAULT_FEED_PAGE_SIZE = 8
@@ -141,7 +165,21 @@ function groupFeedByYear(papers: PaperResult[]): FeedYearGroup[] {
 }
 
 export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
-  const { retrieval, actions, basketIds, onAdd, onOpenDetail, onOpenPaperBrowse, questionGroups, dataStatus, thinkingMode, onThinkingModeChange } = props
+  const {
+    retrieval,
+    actions,
+    basketIds,
+    onAdd,
+    onOpenDetail,
+    onOpenPaperBrowse,
+    questionGroups,
+    dataStatus,
+    thinkingMode,
+    onThinkingModeChange,
+    browseActive,
+    onEnterBrowse,
+    onExitBrowse,
+  } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, togglePaper } = actions
   const inputId = useId()
@@ -149,6 +187,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const thinkingHintId = useId()
   const dataLoading = dataStatus === 'loading'
   const [feedExpanded, setFeedExpanded] = useState(false)
+  // home-blank — rotation gating state: the input's own focus, so typing (or
+  // just focusing) stops the placeholder from changing under the caret.
+  const [inputFocused, setInputFocused] = useState(false)
+  const [placeholderIndex, setPlaceholderIndex] = useState(0)
 
   // Cut ai-mode-filter-chips (C1/C2): structured chip filters — a pure
   // client-side AND layer on top of whatever the search/feed already
@@ -224,6 +266,15 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     filters.region !== undefined ||
     filters.sourceType !== undefined ||
     filters.topicGroup !== undefined
+  // home-blank 硬契约 — showListSurface invariant:
+  //   showListSurface = browseActive || anyFilterActive || state.kind !== 'empty'
+  // !showListSurface ⇔ the pure-blank static stage (no feed, no chips, no
+  // results DOM at all — not just visually hidden). A `f.*` deep link sets
+  // hasActiveFilters at mount, which alone flips this true without App.tsx
+  // needing to also know about filters — "带 f.* ... 深链落浏览态" falls out
+  // of this formula for free.
+  const browseSurfaceActive = Boolean(browseActive) || hasActiveFilters
+  const showListSurface = browseSurfaceActive || state.kind !== 'empty'
   // Progressive disclosure: collapse 地区/来源 by default. A hidden-dim filter
   // being active pins the full set open (never hide a live selection); the
   // toggle is suppressed in that case since 清除筛选 is the way back.
@@ -285,12 +336,39 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     void submit()
   }
 
-  // Default feed — the browse-the-bank content shown when there is no
-  // active search. Only computed when it can actually be shown (empty state
-  // or the honest-vacuum "results but zero hits" state); loading / results /
-  // clarification / error never render it.
+  // home-blank 硬契约 — 回落条件: query 空 && state.kind==='empty' && 无激活
+  // f.* && 非 browse 态 ⇔ 纯空白. Clicking the centered wordmark is the
+  // explicit "logo=home" reset: clear the query, clear filters, and exit
+  // browse — the showListSurface formula above then lands on blank on its
+  // own, no separate "force blank" flag needed.
+  const handleWordmarkClick = () => {
+    actions.reset()
+    clearFilters()
+    onExitBrowse?.()
+  }
+
+  const handleEnterBrowse = () => {
+    onEnterBrowse?.()
+  }
+
+  // home-blank 硬契约 — esc 只清 query（不清筛选/不退浏览态）. Named handlers
+  // (not inline arrows) keep the <input> tag itself short — a verify-
+  // concierge-desk.mjs regex windows the span between `className=` and
+  // `disabled={dataLoading}` on that element.
+  const handleInputKeyDown = (event: { key: string }) => {
+    if (event.key === 'Escape') actions.reset()
+  }
+  const handleInputFocus = () => setInputFocused(true)
+  const handleInputBlur = () => setInputFocused(false)
+
+  // Default feed — home-blank 硬契约: feed 显示条件从「state.kind === 'empty'」
+  // 改为「browseSurfaceActive && state.kind === 'empty'」(浏览态里发起搜索后
+  // 结果列表取代 feed，同今天行为); 诚实真空态 (isVacuumResultsState — a
+  // search actually ran and found nothing) still shows the feed regardless
+  // of browse/filter state, exactly as before this cut.
   const showFeed =
-    !dataLoading && (state.kind === 'empty' || isVacuumResultsState(state))
+    !dataLoading &&
+    ((browseSurfaceActive && state.kind === 'empty') || isVacuumResultsState(state))
   // C2: filters narrow the corpus BEFORE it goes into buildDefaultFeed, so
   // paper-bucketing/sorting rules stay exactly as buildDefaultFeed already
   // defines them — this cut only narrows the input set.
@@ -361,94 +439,163 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     return aggregatePaperResults(filteredHits)
   }, [paperResults, filters, hasActiveFilters, state])
 
+  // home-blank 硬契约 — placeholder 轮换: only in the pure-blank static stage
+  // (!showListSurface), only while the input isn't focused, only outside
+  // dataLoading, and stopped entirely under prefers-reduced-motion. List
+  // surface (typing/browsing/results) keeps the first rotating string as a
+  // static default — rotation would be a distraction once the teacher is
+  // already mid-flow.
+  useEffect(() => {
+    if (showListSurface || dataLoading || inputFocused) return
+    if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      setPlaceholderIndex((index) => (index + 1) % ROTATING_PLACEHOLDERS.length)
+    }, 4000)
+    return () => window.clearInterval(timer)
+  }, [showListSurface, dataLoading, inputFocused])
+
   const placeholder = useMemo(() => {
     if (dataLoading) return '正在连接本地题库…'
     if (state.kind === 'clarification') return '换个说法，比如：偏说明文 / 主旨概括'
-    return '比如：找一道讲生态恢复的阅读 C，主旨概括'
-  }, [dataLoading, state])
+    if (!showListSurface) return ROTATING_PLACEHOLDERS[placeholderIndex]
+    return ROTATING_PLACEHOLDERS[0]
+  }, [dataLoading, state, showListSurface, placeholderIndex])
 
   const submitDisabled = dataLoading || state.kind === 'loading' || intent.trim().length === 0
 
   return (
-    <section className="concierge-desk" aria-label="题库取题流">
-      {/* home-editorial round 2 (方向 C) — 命令行一行: search input flexes,
-          thinking toggle + filter toggle + inventory count ride along
-          inline. No landing hero, no centered hero search box. */}
-      <div className="concierge-command-bar">
-        <form className="concierge-intent-bar" onSubmit={handleSubmit}>
-          <label htmlFor={inputId} className="visually-hidden">
-            自然语言搜索
-          </label>
-          <input
-            id={inputId}
-            className="concierge-intent-input"
-            value={intent}
-            onChange={(event) => setIntent(event.target.value)}
-            placeholder={placeholder}
-            autoComplete="off"
-            disabled={dataLoading}
-            aria-busy={dataLoading || undefined}
-          />
-          {intent.length > 0 && !dataLoading && (
-            <button
-              type="button"
-              className="concierge-intent-clear"
-              onClick={() => actions.reset()}
-              aria-label="清除搜索"
-              title="清除搜索"
-            >
-              ×
-            </button>
-          )}
-          <button
-            type="submit"
-            className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
-            disabled={submitDisabled}
-            aria-label="开始取题"
-            title="开始取题"
-          >
-            {state.kind === 'loading' || dataLoading ? '取题中…' : '→'}
+    <section className="concierge-desk" aria-label="题库取题流" data-surface={showListSurface ? 'list' : 'blank'}>
+      {/* home-blank — the stage wrapper holds wordmark + searchbox + whisper.
+          `concierge-stage-inner` stays centered/narrow in the pure-blank
+          static state and widens back to the full command-bar row (the
+          pre-cut layout) once showListSurface flips true — the "提交那一拍
+          stage 上移" beat is the margin-top transition below, token-driven
+          per DESIGN.md (--motion-entrance + --ease-out). */}
+      <div className="concierge-stage">
+        <div className={`concierge-stage-inner${showListSurface ? ' concierge-stage-inner--risen' : ''}`}>
+          {/* 词标: centered in the stage (topbar's brand block hides for the
+              home list view — see AppTopbar's hideBrand prop). Click = 清空
+              回纯空白 (logo=home semantics): reset() + clearFilters() +
+              exitBrowse, letting the showListSurface formula land on blank
+              on its own. */}
+          <button type="button" className="concierge-wordmark" onClick={handleWordmarkClick}>
+            英语题库<span>工作台</span>
           </button>
-        </form>
 
-        <div className="concierge-thinking-toggle" title="用 AI 理解你的描述，更准但稍慢">
-          <input
-            type="checkbox"
-            id={thinkingToggleId}
-            checked={thinkingMode ?? false}
-            onChange={(event) => onThinkingModeChange?.(event.target.checked)}
-            aria-describedby={thinkingHintId}
-          />
-          <label htmlFor={thinkingToggleId}>思考模式</label>
-          <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
+          {/* home-editorial round 2 (方向 C) — 命令行一行: search input flexes,
+              thinking toggle + filter toggle + inventory count ride along
+              inline. No landing hero, no centered hero search box. */}
+          <div className="concierge-command-bar">
+            <form className="concierge-intent-bar" onSubmit={handleSubmit}>
+              <label htmlFor={inputId} className="visually-hidden">
+                自然语言搜索
+              </label>
+              <input
+                id={inputId}
+                className="concierge-intent-input"
+                value={intent}
+                onChange={(event) => setIntent(event.target.value)}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                onKeyDown={handleInputKeyDown}
+                placeholder={placeholder}
+                autoComplete="off"
+                autoFocus={!showListSurface}
+                disabled={dataLoading}
+                aria-busy={dataLoading || undefined}
+              />
+              {intent.length > 0 && !dataLoading && (
+                <button
+                  type="button"
+                  className="concierge-intent-clear"
+                  onClick={() => actions.reset()}
+                  aria-label="清除搜索"
+                  title="清除搜索"
+                >
+                  ×
+                </button>
+              )}
+              <button
+                type="submit"
+                className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
+                disabled={submitDisabled}
+                aria-label="开始取题"
+                title="开始取题"
+              >
+                {state.kind === 'loading' || dataLoading ? '取题中…' : '→'}
+              </button>
+            </form>
+
+            {/* home-blank CR SW-1: the pure-blank static stage is wordmark +
+                searchbox + whisper only (owner-ratified prototype D baseline)
+                — the thinking toggle rides the command bar on the list
+                surface, same gate as the filter toggle / count below. */}
+            {showListSurface && (
+              <div className="concierge-thinking-toggle" title="用 AI 理解你的描述，更准但稍慢">
+                <input
+                  type="checkbox"
+                  id={thinkingToggleId}
+                  checked={thinkingMode ?? false}
+                  onChange={(event) => onThinkingModeChange?.(event.target.checked)}
+                  aria-describedby={thinkingHintId}
+                />
+                <label htmlFor={thinkingToggleId}>思考模式</label>
+                <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
+              </div>
+            )}
+
+            {/* ui-p1-panels #7: this button used to unmount entirely while a
+                search was in flight (state.kind === 'loading'), yanking the
+                command bar's width around (audit 62 "筛选按钮被条件卸载
+                ConciergeDesk.tsx:354"). It now stays mounted through the same
+                states plus 'loading', going `disabled` instead. home-blank —
+                additionally gated on showListSurface: 筛选 chips 只活在列表面,
+                静止态零 chips (硬契约 4). */}
+            {showListSurface &&
+              !dataLoading &&
+              (state.kind === 'empty' || state.kind === 'results' || state.kind === 'loading') && (
+                <button
+                  type="button"
+                  className="concierge-command-filter-toggle"
+                  aria-expanded={filterPanelExpanded}
+                  aria-controls={filterPanelId}
+                  disabled={state.kind === 'loading'}
+                  onClick={() => setFilterPanelExpanded((value) => !value)}
+                >
+                  筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
+                </button>
+              )}
+
+            {showListSurface && !dataLoading && (
+              <span className="concierge-command-count">
+                {catalogPaperCount} 套卷 · {catalogGroupCount} 篇章
+              </span>
+            )}
+          </div>
+
+          {/* home-blank — whisper: only in the pure-blank static stage. A
+              real, clickable count (硬契约: 计数真值 — catalogPaperCount /
+              catalogGroupCount, no digits while dataLoading to avoid a 0
+              flash) that pushes `?view=browse` on click. */}
+          {!showListSurface && (
+            <p className="concierge-whisper">
+              {dataLoading ? (
+                '正在连接本地题库，稍候即可搜索。'
+              ) : (
+                <>
+                  <button type="button" className="concierge-whisper-browse" onClick={handleEnterBrowse}>
+                    {catalogPaperCount} 套卷 · {catalogGroupCount} 篇章
+                  </button>
+                  ，一句话描述你要的题
+                </>
+              )}
+            </p>
+          )}
         </div>
 
-        {/* ui-p1-panels #7: this button used to unmount entirely while a
-            search was in flight (state.kind === 'loading'), yanking the
-            command bar's width around (audit 62 "筛选按钮被条件卸载
-            ConciergeDesk.tsx:354"). It now stays mounted through the same
-            states plus 'loading', going `disabled` instead. */}
-        {!dataLoading &&
-          (state.kind === 'empty' || state.kind === 'results' || state.kind === 'loading') && (
-            <button
-              type="button"
-              className="concierge-command-filter-toggle"
-              aria-expanded={filterPanelExpanded}
-              aria-controls={filterPanelId}
-              disabled={state.kind === 'loading'}
-              onClick={() => setFilterPanelExpanded((value) => !value)}
-            >
-              筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
-            </button>
-          )}
-
-        {!dataLoading && (
-          <span className="concierge-command-count">
-            {catalogPaperCount} 套卷 · {catalogGroupCount} 篇章
-          </span>
-        )}
-      </div>
-
+        {showListSurface && (
+          <div className="concierge-list-surface">
       {/* 好默认: 筛选默认收起。收起态下若有激活筛选，命令行下方露出可移除的
           激活 chip 摘要，替代整块筛选面板。 */}
       {!dataLoading &&
@@ -730,6 +877,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           )}
         </div>
       )}
+          </div>
+        )}
+      </div>
     </section>
   )
 }
