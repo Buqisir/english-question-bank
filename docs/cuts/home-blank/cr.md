@@ -93,3 +93,23 @@ Test 5 应一并更新，此处以「新增 Test 27 已补真门控」认定覆�
   本 APPROVE 的行为面即无证。
 - 未逐字节比对 risen 态与 pre-cut 全宽布局的间距（44px/20px 静态值是否复现原观感），
   归入 SW-3 的 QA 视觉判断。
+
+---
+
+## SW Dispositions（主代理 DP-2 收账，2026-07-14）
+
+- **SW-1 已修**：思考开关加 `showListSurface` 门控（与筛选钮/计数同款），
+  纯空白态按 owner 拍板的原型 D 基准只剩词标+框+whisper；DP-2 断言
+  「A1 no thinking toggle」实证。owner DP-3 若要开关常驻，一行可回。
+- **SW-2 已修**：Test 5 标签与断言窗口改为新门控
+  （`browseSurfaceActive && kind==='empty'`），narrow verify 88 项全绿。
+- **SW-3 半修半裁**：`max-width` 移出 transition 列表（不可插值项不再
+  假装动画）；上移落点 `margin-top: 0` 经 DP-2 截图复核观感自然（词标
+  随列顶到页首、命令行满幅回归旧版面），保留；最终手感 owner DP-3 定夺。
+- **APPROVE 前置条件已清**：五幕矩阵以 headless Playwright 真点击执行
+  （AGENTS Browser Verification 认可通道），**37/37 全绿、零 pageerror**，
+  覆盖：空白态九断言（含 feed/chips/开关/顶栏 brand 全隐）、打字零位移、
+  esc 回落、提交拍上移+结果、诚实空态、浏览态全矩阵（feed/chips/计数/
+  年份组头/Back 退出/URL 清净）、`f.year` 深链落筛后列表、`view=detail`
+  深链零回归、词标回落、reduced-motion 停轮换。脚本+日志+三截图入档
+  `qa/`（`dp2-five-acts.mjs` 可按需重跑——行为 spec 常驻）。

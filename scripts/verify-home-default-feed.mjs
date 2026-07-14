@@ -128,15 +128,17 @@ console.log('\nTest 4: buildDefaultFeed — real_exam and mock_exam both include
 }
 
 // ------------------------------------------------------------------ Test 5
-console.log('\nTest 5: ConciergeDesk renders the feed only for empty / true-vacuum states')
+console.log('\nTest 5: ConciergeDesk renders the feed only on the browse surface (empty kind) / true-vacuum states')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert('imports buildDefaultFeed', /import\s*\{\s*buildDefaultFeed\s*\}\s*from\s*['"]\.\/defaultFeed\.ts['"]/.test(desk), '')
   const showFeedMatch = desk.match(/const showFeed\s*=\s*[\s\S]{0,200}/)?.[0] || ''
   assert('showFeed guards on !dataLoading', /!dataLoading/.test(showFeedMatch), showFeedMatch)
   assert(
-    "showFeed is true for state.kind === 'empty'",
-    /state\.kind === ['"]empty['"]/.test(showFeedMatch),
+    // home-blank: the empty-kind branch is additionally gated on the browse
+    // surface — feed no longer renders on the pure-blank static home.
+    "showFeed empty-kind branch requires browseSurfaceActive && state.kind === 'empty'",
+    /browseSurfaceActive\s*&&\s*state\.kind === ['"]empty['"]/.test(showFeedMatch),
     showFeedMatch,
   )
   assert(

@@ -527,17 +527,23 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               </button>
             </form>
 
-            <div className="concierge-thinking-toggle" title="用 AI 理解你的描述，更准但稍慢">
-              <input
-                type="checkbox"
-                id={thinkingToggleId}
-                checked={thinkingMode ?? false}
-                onChange={(event) => onThinkingModeChange?.(event.target.checked)}
-                aria-describedby={thinkingHintId}
-              />
-              <label htmlFor={thinkingToggleId}>思考模式</label>
-              <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
-            </div>
+            {/* home-blank CR SW-1: the pure-blank static stage is wordmark +
+                searchbox + whisper only (owner-ratified prototype D baseline)
+                — the thinking toggle rides the command bar on the list
+                surface, same gate as the filter toggle / count below. */}
+            {showListSurface && (
+              <div className="concierge-thinking-toggle" title="用 AI 理解你的描述，更准但稍慢">
+                <input
+                  type="checkbox"
+                  id={thinkingToggleId}
+                  checked={thinkingMode ?? false}
+                  onChange={(event) => onThinkingModeChange?.(event.target.checked)}
+                  aria-describedby={thinkingHintId}
+                />
+                <label htmlFor={thinkingToggleId}>思考模式</label>
+                <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
+              </div>
+            )}
 
             {/* ui-p1-panels #7: this button used to unmount entirely while a
                 search was in flight (state.kind === 'loading'), yanking the

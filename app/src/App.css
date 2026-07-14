@@ -3253,7 +3253,10 @@ button:disabled {
   width: 100%;
   max-width: 720px;
   margin: 26vh auto 0;
-  transition: margin-top var(--motion-entrance) var(--ease-out), max-width var(--motion-entrance) var(--ease-out);
+  /* CR SW-3: max-width stays OUT of the transition list — 720px↔none cannot
+     interpolate (the width snaps on the frame the list surface mounts);
+     margin-top is the one animated property (提交拍上移). */
+  transition: margin-top var(--motion-entrance) var(--ease-out);
 }
 
 .concierge-stage-inner--risen {
