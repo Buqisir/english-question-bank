@@ -90,6 +90,7 @@ const registry = {
   'scripts/verify-my-space-shelf.mjs',
   'scripts/verify-draft-student-field.mjs',
   'scripts/verify-genre-truth.mjs',
+  'scripts/verify-draft-paper-docx.mjs',
   ],
 }
 

@@ -224,6 +224,7 @@ function requireUserId(userId) {
 // so a draft with N items does one paper-asset scan instead of N. Optional —
 // callers/tests that never exercise getDraftPaperItems may omit it.
 export function createDraftPaperStore({
+  exportImplementation,
   getPrintReadyByGroupId,
   getQuestionGroupDetail,
   groupTypeLabels,
@@ -1138,6 +1139,36 @@ export function createDraftPaperStore({
     return { body: pagination.pdfBytes, fileName, outputPath: '', draftPaper, reusedRecent: pagination.reused === true }
   }
 
+  // draft-docx cut (plan.md 硬契约): sibling of exportDraftPaperPdf above, but a
+  // separate straight-line path — does NOT go through getDraftPaperPagination's
+  // paged.js/Chromium pipeline (that's the print-form/PDF-specific pagination
+  // concern; DOCX has no page layout to reconcile). Reuses
+  // buildDraftPaperExportInput (unchanged, per Forbidden) to shape the same
+  // ExportDocxInput the integral-paper `/api/exports/docx` route already
+  // consumes, then hands it to the already-instantiated exportDocx
+  // (server/api.mjs's exportImplementation, threaded in via createDraftPaperStore
+  // above) — no new renderer instance, no vivliostyle involvement, no
+  // last_printed_at bump (that column's semantics are print-pipeline-specific;
+  // see exportDraftPaperPdf's comment above — DOCX export never touches it).
+  function exportDraftPaperDocx(userId, draftPaperId, { versionType = 'student' } = {}) {
+    requireUserId(userId)
+    const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
+    const userDb = openUserDatabase({ readOnly: true })
+    const bankDb = openDatabase()
+    let draftPaper
+    try {
+      draftPaper = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
+    } finally {
+      userDb.close()
+      bankDb.close()
+    }
+    if (!draftPaper) throw new Error('Draft paper not found')
+    if (!draftPaper.items.length) throw new Error('请先添加题组')
+    const input = buildDraftPaperExportInput(draftPaper, { versionType: normalizedVersionType })
+    const result = exportImplementation.exportDocx(input)
+    return { ...result, draftPaper }
+  }
+
   // draft-desk-b step2/3 (MF-3/MF-4/MF-3-step3, plan.md "步2 — DOM 契约 + 缓存解耦" /
   // "步3 — 前端吃分页 HTML + 常驻叠按钮"): renders (or reuses a cached render of)
   // draftPaper through the new paged.js pipeline (paginationRenderer.mjs) and applies
@@ -1201,6 +1232,7 @@ export function createDraftPaperStore({
     addGroupToDraftPaper,
     buildDraftPrintHtml,
     deleteDraftPaperItem,
+    exportDraftPaperDocx,
     exportDraftPaperPdf,
     getCurrentDraftPaperRow,
     getDraftPaper,
