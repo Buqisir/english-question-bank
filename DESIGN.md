@@ -245,3 +245,13 @@ components:
 - **Don't** 用 `border-left/right` 粗于 1px 的色条做卡片/列表/提示的强调（宜用整边/底色/前置图标）。
 - **Don't** 在工具界面乱用衬线，或在卷面正文用无衬线（The Two-Font-Lanes Rule）。
 - **Don't** 把"不空"做成"堆筛选控件" — 用内容（题库本身）填空，用 AI 口吻 chip 收窄（已验证的方向教训）。
+
+## 7. Agent Authoring Discipline（agent 施工纪律，design-canon 立项 2026-07-14，出处：poolside / StyleX / vibe-designing-playbook 三址调研）
+
+本节不是视觉规范，是 agent 写 CSS/token 时的行为纪律——防止「token 覆盖不到就现场编字面量」「叠加样式谁赢全靠猜」「把留白当缺陷填满」这三类会悄悄侵蚀设计系统的坏习惯。
+
+**The No-Literal-Fallback Rule（禁止现场兜底）.** agent 遇到 token 体系覆盖不到的取值（既有 token 不合适、又没有对应新 token），**禁止**现场拼一个字面量颜色/间距/时长顶上。正确做法：显式记一条缺口到 `docs/design-gaps.md`（格式：日期 / 位置 / 想要的值 / 临时方案），攒批等 owner 拍板收编成正式 token 或既有 token 的扩展用法。临时方案本身仍要写清楚落在哪一行、用了什么权宜值，方便日后订正。
+
+**The Explicit-Cascade Rule（覆盖顺序显式化）.** 同一元素上多个 class 叠加、容易产生覆盖冲突的组合样式，后写的那条样式规则必须在注释里说明「本条覆盖 X，因 Y」——写清楚覆盖了谁、为什么该它赢。这是 agent 写 CSS 的纪律条款，不做 lint/构建期强制，全靠自觉与 code review 抓。
+
+**The Generous-Whitespace Rule（留白法）.** 空态与低密度界面（浏览态组头、空态提示、卡片内部）允许且鼓励奢侈留白——留白是克制专业气质的组成部分，不是「没做完」的信号，更不是后来者「顺手填满」的候选位。要不空，用内容和结构去填（见 §6 Don't 最后一条），不要用留白去填。
