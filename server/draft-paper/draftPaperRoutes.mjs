@@ -240,7 +240,7 @@ export function createDraftPaperRoutes() {
       }
       try {
         const result = await context.draftPaperStore.getReorderSuggestion(userId, draftPaperId, { versionType })
-        context.sendJson(response, 200, { suggestion: result.suggestion })
+        context.sendJson(response, 200, { suggestion: result.suggestion, reused: result.reused === true })
       } catch (error) {
         sendDraftMutationError(response, context, error)
       }

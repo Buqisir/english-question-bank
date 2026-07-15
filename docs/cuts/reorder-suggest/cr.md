@@ -105,3 +105,13 @@ plan 以「议题2 grilling 六裁点 + print-form-v2 原型 owner 拍板」为�
 - `node scripts/verify-draft-workbench-visual-unify.mjs` → 25 passed, 0 failed。
 - `node scripts/verify-draft-pagination-cache-trigger.mjs` → 14 passed, 0 failed。
 - `pnpm -C app exec tsc -b` → EXIT 0。
+
+## MF/SW 处置（主代理收账 2026-07-14）
+
+- **MF-1 已修**：`reorderSuggestionCacheGet` 改 `has()` 判存在性，null 裁决
+  命中缓存；端点回 `reused` 字段（与分页端点同款语义）作可断言面；verify
+  补两条断言（第二次 GET reused=true 含 null 裁决 + 结果字节一致）。
+- **SW-1 已收**：verify ⑦b 确定性路由 mock 点击流（真 draft/真 PATCH/真
+  撤销，仅 mock 建议响应；引擎真值仍由 Phase A 真函数钉死），每跑必点，
+  出卡断言无逃生舱；⑦ 真数据段保留为机会性加验。30/30 绿。
+- SW-2 留观（MF-1 修后服务端缓存吸收重拉代价）；SW-3 交 owner DP-3 实点。

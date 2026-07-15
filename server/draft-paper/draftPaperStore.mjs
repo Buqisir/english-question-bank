@@ -299,8 +299,10 @@ export function createDraftPaperStore({
     return `${draftPaperId}::${printForm}::${signature}`
   }
   function reorderSuggestionCacheGet(key) {
+    // has() 判存在性：null 是合法裁决（无候选可消断），必须命中缓存，
+    // 否则 A4 常见路径每次调用都重跑最多 6 次 Chromium dry-run（CR MF-1）。
+    if (!reorderSuggestionCache.has(key)) return undefined
     const entry = reorderSuggestionCache.get(key)
-    if (!entry) return undefined
     reorderSuggestionCache.delete(key)
     reorderSuggestionCache.set(key, entry)
     return entry
@@ -1271,13 +1273,14 @@ export function createDraftPaperStore({
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
     const pagination = await getDraftPaperPagination(userId, draftPaperId, { versionType: normalizedVersionType })
     if (!pagination.pageBreakSuggestions || pagination.pageBreakSuggestions.length === 0) {
-      return { suggestion: null }
+      return { suggestion: null, reused: false }
     }
     const { draftPaper } = pagination
     const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
     const cacheKey = reorderSuggestionCacheKey(draftPaperId, draftPaper.printForm, signature)
+    // reused 与分页端点同款语义（CR MF-1 的可断言面）：null 裁决同样必须命中。
     const cached = reorderSuggestionCacheGet(cacheKey)
-    if (cached !== undefined) return { suggestion: cached }
+    if (cached !== undefined) return { suggestion: cached, reused: true }
 
     const suggestion = await proposeReorder(draftPaper, pagination.pageBreakSuggestions, draftPaper.printForm, {
       buildDraftPaginationPrintHtml,
@@ -1287,7 +1290,7 @@ export function createDraftPaperStore({
       versionType: normalizedVersionType,
     })
     reorderSuggestionCacheSet(cacheKey, suggestion)
-    return { suggestion }
+    return { suggestion, reused: false }
   }
 
   return {

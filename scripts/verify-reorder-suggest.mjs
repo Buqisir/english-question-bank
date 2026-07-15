@@ -400,6 +400,22 @@ async function runPhaseB(browser) {
       paginationAfter.paginatedHtml === paginationBefore.paginatedHtml,
     )
 
+    // CR MF-1 回归钉：第二次调用必须命中缓存（reused: true），null 裁决
+    // 也一样——否则 A4 常见路径每次调用都重跑最多 6 次 Chromium dry-run。
+    const reorderSecond = await page.evaluate(
+      async (id) => (await fetch(`/api/draft-papers/${id}/reorder-suggestion`)).json(),
+      draftId,
+    )
+    assert(
+      'a second reorder-suggestion GET hits the LRU cache (reused: true) — null verdicts included (CR MF-1)',
+      reorderSecond.reused === true,
+      JSON.stringify({ reused: reorderSecond.reused, suggestionIsNull: reorderSecond.suggestion === null }),
+    )
+    assert(
+      'the cached verdict is byte-identical to the first response',
+      JSON.stringify(reorderSecond.suggestion) === JSON.stringify(reorderResponse.body.suggestion),
+    )
+
     const suggestion = reorderResponse.body.suggestion
     if (suggestion !== null) {
       const nonMissingItemIds = await page.evaluate(async (id) => {
@@ -443,7 +459,7 @@ async function runPhaseB(browser) {
       .then(() => true)
       .catch(() => false)
 
-    if (cardAppeared) {
+    async function assertClickFlow(label) {
       const orderBeforeClick = await page.evaluate(async (id) => {
         const response = await fetch(`/api/draft-papers/${id}`)
         const data = await response.json()
@@ -456,14 +472,14 @@ async function runPhaseB(browser) {
       )
       await page.locator('.draft-reorder-suggestion-act').first().click()
       const applyResponse = await applyMutation
-      assert('real click on 调整顺序 → triggers a successful PATCH', applyResponse.ok(), String(applyResponse.status()))
+      assert(`real click on 调整顺序 → triggers a successful PATCH [${label}]`, applyResponse.ok(), String(applyResponse.status()))
 
       const orderAfterClick = await page.evaluate(async (id) => {
         const response = await fetch(`/api/draft-papers/${id}`)
         const data = await response.json()
         return data.draftPaper.items.map((item) => item.id)
       }, draftId)
-      assert('applying the suggestion actually changed the item order', JSON.stringify(orderAfterClick) !== JSON.stringify(orderBeforeClick))
+      assert(`applying the suggestion actually changed the item order [${label}]`, JSON.stringify(orderAfterClick) !== JSON.stringify(orderBeforeClick))
 
       await page.locator('.draft-undo-toast').filter({ hasText: '顺序已调整' }).waitFor({ timeout: 5000 })
       const undoMutation = page.waitForResponse(
@@ -472,17 +488,55 @@ async function runPhaseB(browser) {
       )
       await page.locator('.draft-undo-toast').filter({ hasText: '顺序已调整' }).getByRole('button', { name: /撤销/ }).click()
       const undoResponse = await undoMutation
-      assert('real click on 撤销 triggers a successful PATCH', undoResponse.ok(), String(undoResponse.status()))
+      assert(`real click on 撤销 triggers a successful PATCH [${label}]`, undoResponse.ok(), String(undoResponse.status()))
 
       const orderAfterUndo = await page.evaluate(async (id) => {
         const response = await fetch(`/api/draft-papers/${id}`)
         const data = await response.json()
         return data.draftPaper.items.map((item) => item.id)
       }, draftId)
-      assert('undo restores the exact original item order', JSON.stringify(orderAfterUndo) === JSON.stringify(orderBeforeClick), JSON.stringify({ orderAfterUndo, orderBeforeClick }))
-    } else {
-      console.log('  (no reorder-suggestion card rendered for this fixture run — click-flow assertions skipped, same escape hatch as verify-a3-imposition.mjs\'s seam-suggestion click)')
+      assert(`undo restores the exact original item order [${label}]`, JSON.stringify(orderAfterUndo) === JSON.stringify(orderBeforeClick), JSON.stringify({ orderAfterUndo, orderBeforeClick }))
     }
+
+    if (cardAppeared) {
+      await assertClickFlow('real-data')
+    } else {
+      console.log('  (real-data pass produced no card this run — the deterministic routed-mock pass below still proves the click flow)')
+    }
+
+    // ─── ⑦b deterministic click flow (routed mock — always runs; CR SW-1 收账) ───
+    // Engine truth (调换顺序真的能消断) is pinned by Phase A with the real
+    // derive/evaluate functions. Here only the suggestion RESPONSE is routed to
+    // a fixed swap of the draft's real item ids — the card, the apply PATCH
+    // payload, the toast, and the undo are all real FE behavior, every run.
+    const realIds = await page.evaluate(async (id) => {
+      const response = await fetch(`/api/draft-papers/${id}`)
+      const data = await response.json()
+      return data.draftPaper.items.filter((item) => !item.groupMissing).map((item) => item.id)
+    }, draftId)
+    const realSuggestions = await page.evaluate(async (id) => {
+      const response = await fetch(`/api/draft-papers/${id}/pagination`)
+      const data = await response.json()
+      return data.pageBreakSuggestions || []
+    }, draftId)
+    const mockedOrder = [realIds[1], realIds[0], ...realIds.slice(2)]
+    const mockedSuggestion = {
+      order: mockedOrder,
+      move: { kind: 'swap', itemId: realIds[0], otherItemId: realIds[1] },
+      brokenGroupId: realSuggestions[0]?.groupId ?? null,
+    }
+    await page.route('**/reorder-suggestion*', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ suggestion: mockedSuggestion, reused: false }) }),
+    )
+    await page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'networkidle' })
+    await page.locator('.draft-a4-sheet iframe').waitFor({ timeout: 15_000 })
+    const mockCard = await page
+      .waitForSelector('.draft-reorder-suggestion', { timeout: 15_000 })
+      .then(() => true)
+      .catch(() => false)
+    assert('routed-mock pass: the quiet reorder card renders (deterministic, no escape hatch)', mockCard)
+    if (mockCard) await assertClickFlow('routed-mock')
+    await page.unroute('**/reorder-suggestion*')
 
     if (pageErrors.length > 0) {
       failed += 1
