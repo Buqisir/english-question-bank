@@ -25,6 +25,15 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
 
 ## 主线焦点
 
+- 2026-07-15：**reorder-suggest 收官（draft-desk 刀E 排序建议消断篇）**
+  （merge 0b76558，fresh CR APPROVE 1MF 当场修+SW-1 当场收，verify:all 78
+  绿 + main CI 双证）：启发式候选 ≤6 + 单次 dry-run 真值门槛（断篇归零才
+  亮卡，宁缺勿假）、安静卡+应用（persistItems 复用）+toast 撤销；MF-1=null
+  裁决进缓存（has 判存在+reused 可断言面）；SW-1 收账=verify ⑦b 确定性
+  mock 点击流（30/30 绿，逃生舱退役）。**生产已部署 0b76558**。**账单**：
+  流水线 441k + 侦察 117k；主代理出场 ~5。**owner DP-3 待做**（生产 A3
+  断篇卷：看安静卡→应用→撤销）。draft-desk 队列 D/A/B/C/A3拼版/E 至此
+  全收官。
 - 2026-07-14：**workbench-header-unify + design-canon 双刀并行收官**
   （merge e728b30/b67793d，fresh CR APPROVE 0MF/3SW 当场收 + CR-lite，
   verify:all 78 绿×2 + main CI 双证）：①工作台头部统一解析页语言——
@@ -301,6 +310,15 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
+- **相似题配方重铸（方向讨论中，2026-07-14 起）**：机审实锤——①全部
+  「密度」被实现成种类密度（Set 去重），拍板意图是空数/题数密度（含 N 题
+  chip 已算真值但不打分）；②恒真维度四处（语法填空提示词 32/33、完形
+  体裁 91% 记叙、完形词性加分每组 4-6 种全含、七选五组级衔接机制 32/33
+  含词汇复现）；③阅读词数=proxy 残余（owner 已点名删）。手术三刀归一：
+  空数密度+恒真清场+层级复位。**三裁决点待 owner**：完形主序对调（词性↔
+  话题）？阅读「话题不同+20」留否？七选五衔接机制改题级还是删？拍板后
+  建议 formal PA 不降档（配方语义变更）。
+
 - **High 三议题全部闭环（2026-07-10 两场 grilling）**：议题 1+3 五裁点、
   议题 2 六裁点均入 `docs/cuts/draft-desk/program.md` 关联决策。
   议题 2 要点：断篇判决随打印形态变（owner 改判：A3 同面并排可见
@@ -309,7 +327,7 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
   应用可撤销、永不自动重排）；原型 `prototype-print-form-v2.html`
   入 draft-desk 目录。排期：lecture-rail ✅ → 暖纸转正 ✅ →
   刀A+卷宗柜 ✅（2026-07-12）→ motion-pass ✅（2026-07-12）→ B ✅ → C ✅
-  （print-form，2026-07-13）→ E（排序建议，下一把）。
+  （print-form，2026-07-13）→ E ✅ 2026-07-15 收官（见主线焦点，队列全清）。
   **motion-pass 开工约定（owner 2026-07-12）**：下一会话即开；工具已
   备齐——Emil 全套 5 skill 已装（improve-animations 开场出审计路线图、
   review-animations 当验收尺、apple-design 处方库；上游 clone 在
