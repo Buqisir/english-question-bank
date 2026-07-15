@@ -128,4 +128,10 @@ verify-draft-pagination-dom-contract。
 - [x] plan 拍定并 commit（本文件；方向免议——原型拍板在案）
 - [ ] 流水线收口：CR verdict + MF 处置（主代理）
 - [ ] merge → main CI 绿（主代理）
-- [ ] owner DP-3（生产实点：A3 断篇卷看建议→应用→撤销）
+- [x] owner DP-3（生产实点：A3 断篇卷看建议→应用→撤销）——2026-07-15
+  过，owner 原话「QA过关」。现场：owner 真卷（做的都对，考的都对）两处断篇
+  均无一步可救、卡如实不亮（宁缺勿假在生产实证）；改用临时瘦身局
+  （Reading A 手动分页 + Reading C 坏序）真值亮卡，owner 实点
+  看卡→应用→撤销全过。卷已按备份恢复原状（5 题组/42 题/A3/完形 pb）。
+  顺带生产实证：null 裁决缓存 reused:true 命中（MF-1 活的）。
+  遗留疑点→ STATUS.md 开放账本「分页渲染不确定」。

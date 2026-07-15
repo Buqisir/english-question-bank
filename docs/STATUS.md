@@ -31,9 +31,10 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
   亮卡，宁缺勿假）、安静卡+应用（persistItems 复用）+toast 撤销；MF-1=null
   裁决进缓存（has 判存在+reused 可断言面）；SW-1 收账=verify ⑦b 确定性
   mock 点击流（30/30 绿，逃生舱退役）。**生产已部署 0b76558**。**账单**：
-  流水线 441k + 侦察 117k；主代理出场 ~5。**owner DP-3 待做**（生产 A3
-  断篇卷：看安静卡→应用→撤销）。draft-desk 队列 D/A/B/C/A3拼版/E 至此
-  全收官。
+  流水线 441k + 侦察 117k；主代理出场 ~5。**owner DP-3 全过（2026-07-15
+  「QA过关」，生产 A3 断篇卷看安静卡→应用→撤销，本刀闭环）**；现场细节
+  与两条生产实证（宁缺勿假如实不亮/null 裁决缓存命中）见 plan.md 收口清单。
+  draft-desk 队列 D/A/B/C/A3拼版/E 至此全收官。
 - 2026-07-14：**workbench-header-unify + design-canon 双刀并行收官**
   （merge e728b30/b67793d，fresh CR APPROVE 0MF/3SW 当场收 + CR-lite，
   verify:all 78 绿×2 + main CI 双证）：①工作台头部统一解析页语言——
@@ -310,6 +311,12 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
+- **分页渲染不确定（疑点，2026-07-15 DP-3 现场发现）**：同一草稿卷同一
+  序（做的都对考的都对，5 题组 A3），页面首载渲染 6 版，随后同签名重渲
+  变 7 版（断篇集合也随之变）。建议缓存按内容签名存裁决，若渲染真不
+  确定则裁决可能陈旧（当场实测：pagination 报 7 版带断篇，suggestion
+  仍命中旧 null 裁决 reused:true）。候选小刀：定位不确定根（字体加载/
+  图片尺寸/Chromium 池状态）+ 评估签名缓存要不要吃渲染指纹。
 - **相似题配方重铸（方向讨论中，2026-07-14 起）**：机审实锤——①全部
   「密度」被实现成种类密度（Set 去重），拍板意图是空数/题数密度（含 N 题
   chip 已算真值但不打分）；②恒真维度四处（语法填空提示词 32/33、完形
