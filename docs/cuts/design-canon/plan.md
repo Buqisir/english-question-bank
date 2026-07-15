@@ -53,4 +53,4 @@ CR-lite（主代理冷读）。
 
 - [x] DP-1 立项（owner 2026-07-14「立项一下」；采纳清单出自当日调研
   报告，owner 已阅）
-- [ ] DP-2 主代理 CR-lite 冷读 + 体检打架项（如有）交 owner 裁决
+- [x] DP-2 主代理 CR-lite 冷读 APPROVE + 体检 0 条打架（2026-07-14，merge b67793d + CI 绿）

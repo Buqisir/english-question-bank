@@ -82,5 +82,5 @@ workspace：worktree `/Users/huangxuewei/Projects/wt-docx-draft`（已建好，
 ## 裁决点清单
 
 - [x] DP-1 立刀授权（owner「发车」2026-07-14；本 plan 即记录）
-- [ ] DP-2 CR verdict 处置 + 主代理复核（verify 步承担 narrow+full）
+- [x] DP-2 CR verdict 处置（APPROVE 0MF/2SW：error-copy 连锁判正当收下、handout 无断言挂 watch）+ 复核全绿（2026-07-14）
 - [ ] DP-3 owner 生产实导一份 DOCX 打开看（部署后）

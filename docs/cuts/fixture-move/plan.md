@@ -91,7 +91,5 @@ workspace：worktree `/Users/huangxuewei/Projects/wt-fixture-move`（已建，
 ## 裁决点清单
 
 - [x] DP-1 立刀授权（owner「发车」2026-07-14；本 plan 即记录）
-- [ ] DP-2 CR verdict 处置 + 主代理复核（verify 步承担）
-- [ ] DP-3 生产清残留（主代理 SSH 删
-  `/opt/eqb/english-question-bank/app/public/paper-assets/paper-2024-jslk-english/`
-  + 次日确认备份 501 消失）——**生产操作，强制回主代理**
+- [x] DP-2 CR verdict 处置（APPROVE 0MF/3SW；11 红 smoke 主代理主线对照定性为既有烂账）+ 复核全绿（2026-07-14）
+- [x] DP-3 生产清残留 ✅ 2026-07-14 部署 022c634 时 git pull 自动迁移，主代理 SSH 实证 serve 路径零 jslk、新家 2 条目（见 STATUS）

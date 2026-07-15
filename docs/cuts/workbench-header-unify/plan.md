@@ -91,5 +91,5 @@ worktree `../wt-header-unify`（开工时建）；断点锚 wip commit；完成�
 - [x] DP-1b 头-纸垂直节奏（owner 2026-07-14 v2.3 实点：撤回纸宽 870，
   改压头到纸距离对齐解析页——desk padding-top 10px + meta-row
   margin-bottom 10px 暂定，DP-3 微调终值）
-- [ ] DP-2 CR verdict 处置 + 主代理复核
+- [x] DP-2 CR verdict 处置（APPROVE 0MF/3SW 当场收：错误显形+锚断言×4+SW-3 照录）+ 复核（verify 步全绿 + main CI 双证，2026-07-14）
 - [ ] DP-3 owner 生产实用一轮（组卷→改题→导出全流程手感）
