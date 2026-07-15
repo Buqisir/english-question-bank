@@ -166,7 +166,10 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // `.draft-a4-repaginating`'s `#ffffff` from L373 to L394 and
 // `.draft-undo-toast`'s from L630 to L651; `.draft-export-menu-trigger`'s
 // at L161 sits above the edited region and is unaffected.
-const WHITELISTED_LINES = new Set([161, 394, 651])
+// header-unify DP-3 收账: the shell 冷缝 fix (+4 comment lines inside the
+// `.draft-workbench-shell` block at the top of the file, no new hex)
+// pushes all three pins down by 4: L161→165, L394→398, L651→655.
+const WHITELISTED_LINES = new Set([165, 398, 655])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
@@ -214,9 +217,17 @@ const shellBlockMatch = cssSrc.match(/\.draft-workbench-shell\s*\{([^}]*)\}/)
 assert('.draft-workbench-shell rule block found', Boolean(shellBlockMatch), 'selector not found')
 if (shellBlockMatch) {
   const block = shellBlockMatch[1]
+  // header-unify DP-3 收账（owner 面板实指 2026-07-14）: shell 即桌——
+  // 冷灰 --surface + 18px padding 的框是「头下灰缝」病灶，契约翻转为
+  // 暖桌底 + 零内边距（与解析页 paper-browse-shell 同构）。
   assert(
-    '.draft-workbench-shell background uses var(--surface)',
-    /background\s*:\s*var\(\s*--surface\s*\)/.test(block),
+    '.draft-workbench-shell background uses var(--paper-desk-bg) (DP-3: shell 即桌)',
+    /background\s*:\s*var\(\s*--paper-desk-bg\s*\)/.test(block),
+    `block: ${block.trim()}`,
+  )
+  assert(
+    '.draft-workbench-shell has zero padding (DP-3: 头下无冷缝)',
+    /padding\s*:\s*0\s*;/.test(block),
     `block: ${block.trim()}`,
   )
 }

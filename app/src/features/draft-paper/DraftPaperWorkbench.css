@@ -1,8 +1,12 @@
 .draft-workbench-shell {
   min-height: 100vh;
-  background: var(--surface);
+  /* header-unify DP-3 打回收账（owner 面板选取器实指 2026-07-14）：
+     shell 的冷灰 padding 框是「头下灰缝」的另一半病灶（plan 只删了
+     desk 的 margin-top）——shell 即桌：零内边距 + 暖桌底，头/纸之间
+     只剩 desk 自己的 24px 暖纸带，与解析页 paper-browse-shell 同构。 */
+  background: var(--paper-desk-bg);
   color: var(--ink);
-  padding: 18px 22px 28px;
+  padding: 0;
 }
 
 /* ui-p1-panels #9 (shell 刀交办) — draft 家族按钮/输入/选择控件此前落回
