@@ -213,13 +213,14 @@
   <div class="variant-bar">
     <p class="variant-desc" id="variantDesc"></p>
     <div class="variant-pills" role="tablist">
-      <button data-v="a" class="active">A · 提交拍切换</button>
-      <button data-v="b">B · 打字即上移</button>
-      <button data-v="c">C · 本地速搜</button>
+      <button data-v="a" class="active">A · 提交拍切换 ✓中选</button>
+      <button data-v="b" class="rejected">B · 打字即上移 ✗</button>
+      <button data-v="c" class="rejected">C · 本地速搜 ✗</button>
     </div>
   </div>
 
-  <span class="proto-tag">原型 T · 切换节拍对比 · 2026-07-14 · 1/2/3 换档 · esc 清空</span>
+  <span class="proto-tag">原型 T · 切换节拍对比 · 2026-07-14 · <b>拍板：A 中选（owner「第一个」，同日）</b> · B/C 落选存档 · 1/2/3 换档</span>
+  <style>.variant-pills button.rejected { opacity: 0.5; }</style>
 
 <script>
   const q = document.getElementById('q');

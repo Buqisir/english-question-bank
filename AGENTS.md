@@ -180,7 +180,9 @@ any memory system.
   (`plan.md` / `pa.md` / `cr.md` / `cut-note.md` / prompt archives; small
   cuts create no ceremony; `goal` / `loop` are reserved names). Prototype
   artifacts that drove owner 拍板 are decision records — snapshot into
-  `docs/cuts/<CUT>/prototype.html` with the plan commit. Chat only routes
+  `docs/cuts/<CUT>/prototype.html` with the plan commit; 拍板后回原型就地
+  标注中选/落选档，让决策记录自带结论（owner 采纳 2026-07-14，出处
+  mini-app-spec 讨论）. Chat only routes
   agents to those files and states the next action.
 - Agent entrypoints split reading into `Must Read` (cut-specific, short)
   and `Background` (skippable when already loaded in the same session).
@@ -234,7 +236,9 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   credentials into QA scripts. Throwaway QA scripts live in the session
   scratchpad — not `app/` or the repo root — and must not reference another
   session's absolute scratchpad paths. Archival QA evidence goes to
-  `docs/cuts/<CUT>/qa/`.
+  `docs/cuts/<CUT>/qa/`. DP-2 级行为 QA 脚本不算 throwaway——随刀入档
+  `docs/cuts/<CUT>/qa/` 且可按需重跑（它是该刀行为契约的可执行形态；
+  owner 采纳 2026-07-14，首例 home-blank `qa/dp2-five-acts.mjs`）.
 
 ## AI 协作准则底座(Matt 外脑)
 
