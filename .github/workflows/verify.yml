@@ -113,5 +113,12 @@ jobs:
       - name: Run a3 imposition verify
         run: node scripts/verify-a3-imposition.mjs
 
+      # reorder-suggest (docs/cuts/reorder-suggest/plan.md): same Chromium
+      # requirements as the two steps above (getDraftPaperPagination via
+      # getReorderSuggestion, plus app's Playwright for the click phase) —
+      # sits after both, same wiring.
+      - name: Run reorder suggest verify
+        run: node scripts/verify-reorder-suggest.mjs
+
       - name: Run golden path E2E smoke
         run: node scripts/smoke-golden-path.mjs

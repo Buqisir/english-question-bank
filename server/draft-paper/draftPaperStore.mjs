@@ -11,6 +11,7 @@ import { buildPrintHtml } from '../print-renderer.mjs'
 import { loadGroupAnalysisTexts } from './analysisText.mjs'
 import { renderPaginatedPaper } from './paginationRenderer.mjs'
 import { applyPaginationDomContract } from './paginationDomContract.mjs'
+import { proposeReorder } from './reorderSuggestion.mjs'
 
 // draft-desk-b step2 (SW-A, cr-step1-lite.md — "步2/4 必验"): confirmed empirically
 // (this cut's dev probe against a real figure-bearing paper-asset group, not checked
@@ -279,6 +280,37 @@ export function createDraftPaperStore({
     while (draftPaginationCache.size > DRAFT_PAGINATION_CACHE_MAX_ENTRIES) {
       const oldestKey = draftPaginationCache.keys().next().value
       draftPaginationCache.delete(oldestKey)
+    }
+  }
+
+  // reorder-suggest (plan.md 施工契约 1 "proposeReorder(...) 编排"): a SEPARATE
+  // LRU from draftPaginationCache above — different value shape (a
+  // `{ order, move, brokenGroupId } | null` verdict, not paginatedHtml/pdfBytes)
+  // and a different key (includes printForm — draftPaginationCache deliberately
+  // excludes it, plan.md 裁点2, because printForm never changes the render;
+  // this cache's verdict DOES depend on printForm, since evaluateCandidateOrder
+  // dry-runs derivePageBreakSuggestions under the current print form). Keyed by
+  // `${draftPaperId}::${printForm}::${分页签名}` (plan.md) so any layout edit
+  // (which already changes draftPaperPaginationSignature) or a print-form
+  // toggle invalidates it — same bounded-to-8 LRU shape as draftPaginationCache.
+  const REORDER_SUGGESTION_CACHE_MAX_ENTRIES = 8
+  const reorderSuggestionCache = new Map()
+  function reorderSuggestionCacheKey(draftPaperId, printForm, signature) {
+    return `${draftPaperId}::${printForm}::${signature}`
+  }
+  function reorderSuggestionCacheGet(key) {
+    const entry = reorderSuggestionCache.get(key)
+    if (!entry) return undefined
+    reorderSuggestionCache.delete(key)
+    reorderSuggestionCache.set(key, entry)
+    return entry
+  }
+  function reorderSuggestionCacheSet(key, entry) {
+    reorderSuggestionCache.delete(key)
+    reorderSuggestionCache.set(key, entry)
+    while (reorderSuggestionCache.size > REORDER_SUGGESTION_CACHE_MAX_ENTRIES) {
+      const oldestKey = reorderSuggestionCache.keys().next().value
+      reorderSuggestionCache.delete(oldestKey)
     }
   }
 
@@ -1227,6 +1259,37 @@ export function createDraftPaperStore({
     }
   }
 
+  // reorder-suggest (plan.md 施工契约 1/2): `GET /:id/reorder-suggestion`'s
+  // store entry point. Deliberately reuses getDraftPaperPagination's own
+  // cached pageBreakSuggestions for "当前分页(走现有缓存路径)" instead of
+  // re-deriving them here — this call never triggers a second real render for
+  // the CURRENT order, only (on a cache miss) for the bounded candidate set a
+  // broken current order produces. Zero-breakage or a cache hit both return
+  // fast with no dry-run at all.
+  async function getReorderSuggestion(userId, draftPaperId, { versionType = 'student' } = {}) {
+    requireUserId(userId)
+    const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
+    const pagination = await getDraftPaperPagination(userId, draftPaperId, { versionType: normalizedVersionType })
+    if (!pagination.pageBreakSuggestions || pagination.pageBreakSuggestions.length === 0) {
+      return { suggestion: null }
+    }
+    const { draftPaper } = pagination
+    const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
+    const cacheKey = reorderSuggestionCacheKey(draftPaperId, draftPaper.printForm, signature)
+    const cached = reorderSuggestionCacheGet(cacheKey)
+    if (cached !== undefined) return { suggestion: cached }
+
+    const suggestion = await proposeReorder(draftPaper, pagination.pageBreakSuggestions, draftPaper.printForm, {
+      buildDraftPaginationPrintHtml,
+      renderPaginatedPaper,
+      applyPaginationDomContract,
+      derivePageBreakSuggestions,
+      versionType: normalizedVersionType,
+    })
+    reorderSuggestionCacheSet(cacheKey, suggestion)
+    return { suggestion }
+  }
+
   return {
     addGroupToCurrentDraftPaper,
     addGroupToDraftPaper,
@@ -1238,6 +1301,7 @@ export function createDraftPaperStore({
     getDraftPaper,
     getDraftPaperPagination,
     getOrCreateCurrentDraftPaper,
+    getReorderSuggestion,
     listDraftPapers,
     markCurrentDraftPaper,
     migrateAssemblyBasketToDraftPaper,
