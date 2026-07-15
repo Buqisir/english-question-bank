@@ -152,7 +152,15 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // draft-version-toggle transition (both token-based) plus the
 // draft-undo-toast keyframe→transition rewrite (same property count, no new
 // hex) push `.draft-undo-toast`'s own `#ffffff` from L564 to L593.
-const WHITELISTED_LINES = new Set([190, 352, 593])
+// workbench-header-unify: re-pinned again — `.draft-toolbar` and its group
+// clusters retired (net -34 lines incl. the replacement comment), and new
+// blocks were inserted (`.draft-more-menu*`/`.draft-topbar-wide-toggle`
+// above `.draft-loading`, the rail sticky-offset/meta comment above
+// `.draft-paper-rail`) — none of the new blocks introduce a hex literal
+// (all token/var-based). Net effect: `.draft-export-menu-trigger`'s
+// `#ffffff` moves from L190 to L161, `.draft-a4-repaginating`'s from L352
+// to L373, `.draft-undo-toast`'s from L593 to L630.
+const WHITELISTED_LINES = new Set([161, 373, 630])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
