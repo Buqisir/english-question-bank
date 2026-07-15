@@ -35,8 +35,8 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
   （禁兜底/显式覆盖/留白法）+ token 反向注释 + design-gaps.md；同日
   mini-app-spec 两采纳入宪（原型拍板水印/QA 脚本入档）。**生产已部署
   e728b30**。**账单**：unify 流水线 413k + canon 123k；主代理出场 ~6。
-  **owner DP-3 归并待做**：生产实用一轮（新头全流程+断网存标题看红点+
-  Enter 提交）+ 导 DOCX 双版本（draft-docx 连带）。
+  **owner DP-3 全过（2026-07-14 归并场：生产实用新头全流程+断网红点+
+  Enter 提交，连带 draft-docx 导 DOCX 双版本），本刀闭环**。
 - 2026-07-14：**draft-docx + fixture-move 双刀并行收官**（merge 4a54315/
   022c634，双 fresh CR APPROVE 0MF，verify:all 78/0/0 + main CI 双证）：
   ①草稿卷「下载 DOCX」（学生/教师版，复用整卷 exportDocx；handout 维持
@@ -44,9 +44,9 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
   改径、一致性白名单退役恢复严格语义、i16a 拼装 corpus 换锚）。**生产
   022c634**：jslk 已离 serve 路径=备份 501 绝根（次日备份日志终证）。
   **账单**：docx 流水线 277k；fixture 两轮流水线+CR ~376k（首轮 DEV 在
-  停手条件正确刹车→契约修订判例）；主代理出场 ~8。**owner DP-3 待做
-  （生产导 DOCX 双版本）**；13 个 c6a*/c6b* 僵尸 smoke 主线即红已实证
-  →随 reading-analysis 退役刀处决。
+  停手条件正确刹车→契约修订判例）；主代理出场 ~8。**owner DP-3 全过（2026-07-14
+  归并场，生产导 DOCX 双版本），本刀闭环**；13 个 c6a*/c6b* 僵尸 smoke
+  主线即红已实证→随 reading-analysis 退役刀处决。
 - 2026-07-14：**home-blank 收官（主页纯空白大搜索框）**（merge da4c49a，
   fresh CR APPROVE 0MF/3SW 当场收，DP-2 五幕 37 断言全绿 + verify:all 77
   绿 + main CI 双证）：静止态=居中词标+大框+真值 whisper（原型 D）、提交
