@@ -7,14 +7,14 @@
 
   /* Motion tokens（motion-pass 2026-07-12）。五档时长 + 三曲线；
      签名时刻（七选五 0.9s 跳卡、skeleton 1.6s shimmer）豁免留字面值。 */
-  --motion-micro: 80ms;     /* 高频密集微反馈（pi chip 类） */
-  --motion-fast: 120ms;     /* hover / 颜色 / 小反馈 */
-  --motion-base: 160ms;     /* toast、显形、小入场 */
-  --motion-slow: 220ms;     /* 面板 / rail / 抽屉级 */
-  --motion-entrance: 260ms; /* 页面级入场（fadeInUp、画线） */
-  --ease-hover: ease;                             /* 颜色/hover */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 入场/位移（强） */
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 在屏形变（强） */
+  --motion-micro: 80ms;     /* 高频密集微反馈（pi chip 类）；不用于面板/抽屉级过渡（那用 --motion-slow） */
+  --motion-fast: 120ms;     /* hover / 颜色 / 小反馈；不用于页面级入场（那用 --motion-entrance） */
+  --motion-base: 160ms;     /* toast、显形、小入场；不用于高频密集反馈（那用 --motion-micro） */
+  --motion-slow: 220ms;     /* 面板 / rail / 抽屉级；不用于常规 hover（那用 --motion-fast） */
+  --motion-entrance: 260ms; /* 页面级入场（fadeInUp、画线）；不用于常规 hover/toast（那用 --motion-fast/--motion-base） */
+  --ease-hover: ease;                             /* 颜色/hover；不用于位移类入场（那用 --ease-out） */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 入场/位移（强）；不用于纯颜色过渡（那用 --ease-hover） */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 在屏形变（强）；不用于一次性入场（那用 --ease-out） */
 }
 
 .app-shell {
