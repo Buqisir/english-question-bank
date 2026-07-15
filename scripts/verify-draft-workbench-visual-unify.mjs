@@ -152,7 +152,21 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // draft-version-toggle transition (both token-based) plus the
 // draft-undo-toast keyframe→transition rewrite (same property count, no new
 // hex) push `.draft-undo-toast`'s own `#ffffff` from L564 to L593.
-const WHITELISTED_LINES = new Set([190, 352, 593])
+// workbench-header-unify: re-pinned again — `.draft-toolbar` and its group
+// clusters retired (net -34 lines incl. the replacement comment), and new
+// blocks were inserted (`.draft-more-menu*`/`.draft-topbar-wide-toggle`
+// above `.draft-loading`, the rail sticky-offset/meta comment above
+// `.draft-paper-rail`) — none of the new blocks introduce a hex literal
+// (all token/var-based). Net effect: `.draft-export-menu-trigger`'s
+// `#ffffff` moves from L190 to L161, `.draft-a4-repaginating`'s from L352
+// to L373, `.draft-undo-toast`'s from L593 to L630.
+// header-unify CR SW-1 收账: the `.draft-more-menu-trigger.has-save-error`
+// dot rules (+21 lines, token-based `--eqb-color-danger` only, no new hex)
+// were inserted below the trigger hover block (~L236), pushing
+// `.draft-a4-repaginating`'s `#ffffff` from L373 to L394 and
+// `.draft-undo-toast`'s from L630 to L651; `.draft-export-menu-trigger`'s
+// at L161 sits above the edited region and is unaffected.
+const WHITELISTED_LINES = new Set([161, 394, 651])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
@@ -277,6 +291,37 @@ assert(
   'the shared ghost-button selector explicitly excludes .primary-button (so specificity does not clobber it)',
   Boolean(dialogActionsSelectorMatch) && /:not\(\.primary-button\)/.test(dialogActionsSelectorMatch[0]),
   `selector: ${dialogActionsSelectorMatch ? dialogActionsSelectorMatch[0] : 'not found'}`,
+)
+
+/* ─── 6. workbench-header-unify: Locked Decision 锚断言（CR SW-2 收账） ── */
+
+console.log('\nTest 6: header-unify locked decisions stay locked (CR SW-2)')
+
+{
+  const cssNoComments = cssSrc.replace(/\/\*[\s\S]*?\*\//g, '')
+  assert(
+    'the retired .draft-toolbar rule block stays out of the CSS (LD1/2)',
+    !/\.draft-toolbar[\s,{.]/.test(cssNoComments),
+    'a .draft-toolbar selector re-appeared',
+  )
+}
+assert(
+  'no draft-toolbar className mounts in the workbench (LD2)',
+  !/className="draft-toolbar/.test(tsxSrc),
+  'draft-toolbar className re-appeared',
+)
+{
+  const deskBlock = cssSrc.match(/\.draft-preview-desk\s*\{[^}]*\}/)?.[0] || ''
+  assert(
+    'the desk block carries no margin-top (LD3 — the 18px gray sliver stays dead)',
+    deskBlock.length > 0 && !/margin-top/.test(deskBlock),
+    deskBlock || '.draft-preview-desk block not found',
+  )
+}
+assert(
+  'workbench drives AppTopbar via pageTitleEditable + actionsSlot (LD2)',
+  /pageTitleEditable/.test(tsxSrc) && /actionsSlot=/.test(tsxSrc),
+  'AppTopbar wiring props missing from DraftPaperWorkbench.tsx',
 )
 
 /* ─── Summary ─────────────────────────────────────────────────────── */

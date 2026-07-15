@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowUp, FileDown, FileText, FolderPlus, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
+import { Archive, ArrowDown, ArrowUp, FileDown, FileText, FolderPlus, MoreHorizontal, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, MySpaceFolder } from '../../domain/questionBank'
 import {
@@ -117,11 +117,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const savedToastPresence = useToastPresence(savedToastMessage, 120)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
   const [exportMenuOpen, setExportMenuOpen] = useState(false)
+  // workbench-header-unify Locked Decision 2: the retired `.draft-toolbar`'s
+  // 学生（可选）/ 最近草稿卷 / 自动保存状态 三项 now live behind this quiet
+  // "⋯" menu in the head row — same disclosure pattern as exportMenuOpen
+  // above (outside-click + Escape dismiss effect below).
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const titleSaveTimerRef = useRef<number | null>(null)
   const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
   const exportMenuRef = useRef<HTMLDivElement | null>(null)
+  const moreMenuRef = useRef<HTMLDivElement | null>(null)
   const [previewScale, setPreviewScale] = useState(1)
   // draft-desk-a: iframe now grows to its full rendered height (read from
   // contentDocument after load) instead of a fixed 1188px single-page guess
@@ -255,6 +261,26 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [exportMenuOpen])
+
+  // workbench-header-unify: same dismiss pattern as the export menu effect
+  // above, for the "⋯" menu.
+  useEffect(() => {
+    if (!moreMenuOpen) return
+    function handlePointerDown(event: MouseEvent) {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
+        setMoreMenuOpen(false)
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setMoreMenuOpen(false)
+    }
+    document.addEventListener('mousedown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [moreMenuOpen])
 
   // draft-desk-a: previously scrolled the retired outline panel's own row
   // into view (`[data-draft-group-id]` lived only there). The rail keeps
@@ -895,134 +921,201 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     )
   }
 
+  // workbench-header-unify Locked Decision 2/5: 学生版/教师版 and A4/A3 render
+  // twice — once as the wide head-row controls (hidden ≤980px), once inside
+  // the "⋯" panel (shown only ≤980px, plan.md's 窄屏退化补充) — same handlers
+  // both places, just two visibility-toggled mounts of the identical control,
+  // so there is exactly one source of truth for versionType/printForm state.
+  const versionToggleControl = (
+    <div className="draft-version-toggle" role="group" aria-label="导出版本">
+      <button
+        type="button"
+        className={versionType === 'student' ? 'active' : ''}
+        aria-pressed={versionType === 'student'}
+        onClick={() => setVersionType('student')}
+      >
+        学生版
+      </button>
+      <button
+        type="button"
+        className={versionType === 'teacher' ? 'active' : ''}
+        aria-pressed={versionType === 'teacher'}
+        onClick={() => setVersionType('teacher')}
+      >
+        教师版
+      </button>
+    </div>
+  )
+
+  const formToggleControl = (
+    <div className="draft-version-toggle draft-form-toggle" role="group" aria-label="打印形态">
+      <button
+        type="button"
+        className={draftPaper.printForm === 'a4' ? 'active' : ''}
+        aria-pressed={draftPaper.printForm === 'a4'}
+        onClick={() => void setPrintForm('a4')}
+      >
+        A4 散页
+      </button>
+      <button
+        type="button"
+        className={draftPaper.printForm === 'a3' ? 'active' : ''}
+        aria-pressed={draftPaper.printForm === 'a3'}
+        onClick={() => void setPrintForm('a3')}
+      >
+        A3 对折
+      </button>
+    </div>
+  )
+
+  const exportMenuControl = (
+    <div className="draft-export-menu" ref={exportMenuRef}>
+      <button
+        type="button"
+        className="draft-export-menu-trigger"
+        aria-haspopup="true"
+        aria-expanded={exportMenuOpen}
+        onClick={() => setExportMenuOpen((open) => !open)}
+      >
+        导出
+      </button>
+      {exportMenuOpen && (
+        <div className="draft-export-menu-panel" role="menu">
+          <button
+            type="button"
+            role="menuitem"
+            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+            onClick={() => {
+              setExportMenuOpen(false)
+              void exportPdf()
+            }}
+          >
+            <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+            onClick={() => {
+              setExportMenuOpen(false)
+              void exportDocx()
+            }}
+          >
+            <FileText size={15} /> 下载 DOCX（{versionType === 'teacher' ? '教师版' : '学生版'}）
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            disabled={draftPaper.items.length === 0}
+            onClick={() => {
+              setExportMenuOpen(false)
+              browserPrint()
+            }}
+          >
+            <Printer size={15} /> 浏览器打印
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'}
+            onClick={() => {
+              setExportMenuOpen(false)
+              void openSpaceDialog()
+            }}
+          >
+            <Archive size={15} /> 保存到个人空间
+          </button>
+        </div>
+      )}
+    </div>
+  )
+
+  const pagesMetaText = draftPaper.printForm === 'a3'
+    ? `共 ${pageCount} 版 · 对折 ${Math.ceil(pageCount / 4)} 张 · A3`
+    : `共 ${pageCount} 页 · 双面 ${Math.ceil(pageCount / 2)} 张 · A4`
+
   return (
     <>
-    <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
-    <div className="draft-workbench-shell">
-      <header className="draft-toolbar">
-        <div className="draft-toolbar-group draft-toolbar-group-doc">
-          <label className="draft-title-field">
-            <span>草稿卷标题</span>
-            <input value={titleDraft} onChange={(event) => updateTitle(event.target.value)} />
-          </label>
-          <label className="draft-student-field">
-            <span>学生（可选）</span>
-            <input
-              value={studentLabelDraft}
-              placeholder="未填写"
-              onChange={(event) => setStudentLabelDraft(event.target.value)}
-              onBlur={(event) => void saveStudentLabel(event.target.value)}
-            />
-          </label>
-          <span className={`draft-save-status ${saveStatus}`}>
-            {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
-          </span>
-          <label className="draft-recent-select-field">
-            <span>最近草稿卷</span>
-            <select
-              className="draft-recent-select"
-              value={draftPaper.id}
-              onChange={(event) => {
-                const id = event.target.value
-                const url = new URL(window.location.href)
-                url.searchParams.set('view', 'draft-paper')
-                url.searchParams.set('draftPaperId', id)
-                window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
-                setVersionType('student')
-                void fetchDraftPaper(id).then((next) => {
-                  setDraftPaper(next)
-                  setTitleDraft(next.title)
-                  setStudentLabelDraft(next.studentLabel || '')
-                })
-              }}
-            >
-              {recentDrafts.map((draft) => (
-                <option key={draft.id} value={draft.id}>{draft.title}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div className="draft-toolbar-group draft-toolbar-group-output">
-          <div className="draft-version-toggle" role="group" aria-label="导出版本">
+    <AppTopbar
+      {...props.shellNav}
+      pageTitle={titleDraft || draftPaper.title}
+      pageTitleEditable
+      onPageTitleChange={updateTitle}
+      onBack={onBackToWorkbench}
+      actionsSlot={
+        <>
+          {/* workbench-header-unify Locked Decision 2: 学生（可选）/ 最近草稿卷
+              / 自动保存状态 三项降级收进这枚安静「⋯」菜单——字段行为原样
+              (学生 blur 保存、最近切换走现有 pushState 逻辑、保存状态实时显示)。 */}
+          <div className="draft-more-menu" ref={moreMenuRef}>
             <button
               type="button"
-              className={versionType === 'student' ? 'active' : ''}
-              aria-pressed={versionType === 'student'}
-              onClick={() => setVersionType('student')}
-            >
-              学生版
-            </button>
-            <button
-              type="button"
-              className={versionType === 'teacher' ? 'active' : ''}
-              aria-pressed={versionType === 'teacher'}
-              onClick={() => setVersionType('teacher')}
-            >
-              教师版
-            </button>
-          </div>
-          <div className="draft-export-menu" ref={exportMenuRef}>
-            <button
-              type="button"
-              className="draft-export-menu-trigger"
+              // CR SW-1: save errors must stay visible with the menu closed —
+              // the trigger wears a danger dot while saveStatus is 'error'.
+              className={`draft-more-menu-trigger${saveStatus === 'error' ? ' has-save-error' : ''}`}
               aria-haspopup="true"
-              aria-expanded={exportMenuOpen}
-              onClick={() => setExportMenuOpen((open) => !open)}
+              aria-expanded={moreMenuOpen}
+              aria-label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
+              title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷 / 保存状态'}
+              onClick={() => setMoreMenuOpen((open) => !open)}
             >
-              导出
+              <MoreHorizontal size={16} />
             </button>
-            {exportMenuOpen && (
-              <div className="draft-export-menu-panel" role="menu">
-                <button
-                  type="button"
-                  role="menuitem"
-                  disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
-                  onClick={() => {
-                    setExportMenuOpen(false)
-                    void exportPdf()
-                  }}
-                >
-                  <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
-                  onClick={() => {
-                    setExportMenuOpen(false)
-                    void exportDocx()
-                  }}
-                >
-                  <FileText size={15} /> 下载 DOCX（{versionType === 'teacher' ? '教师版' : '学生版'}）
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  disabled={draftPaper.items.length === 0}
-                  onClick={() => {
-                    setExportMenuOpen(false)
-                    browserPrint()
-                  }}
-                >
-                  <Printer size={15} /> 浏览器打印
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'}
-                  onClick={() => {
-                    setExportMenuOpen(false)
-                    void openSpaceDialog()
-                  }}
-                >
-                  <Archive size={15} /> 保存到个人空间
-                </button>
+            {moreMenuOpen && (
+              <div className="draft-more-menu-panel" role="menu">
+                <label className="draft-student-field">
+                  <span>学生（可选）</span>
+                  <input
+                    value={studentLabelDraft}
+                    placeholder="未填写"
+                    onChange={(event) => setStudentLabelDraft(event.target.value)}
+                    onBlur={(event) => void saveStudentLabel(event.target.value)}
+                  />
+                </label>
+                <label className="draft-recent-select-field">
+                  <span>最近草稿卷</span>
+                  <select
+                    className="draft-recent-select"
+                    value={draftPaper.id}
+                    onChange={(event) => {
+                      const id = event.target.value
+                      const url = new URL(window.location.href)
+                      url.searchParams.set('view', 'draft-paper')
+                      url.searchParams.set('draftPaperId', id)
+                      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
+                      setVersionType('student')
+                      void fetchDraftPaper(id).then((next) => {
+                        setDraftPaper(next)
+                        setTitleDraft(next.title)
+                        setStudentLabelDraft(next.studentLabel || '')
+                      })
+                    }}
+                  >
+                    {recentDrafts.map((draft) => (
+                      <option key={draft.id} value={draft.id}>{draft.title}</option>
+                    ))}
+                  </select>
+                </label>
+                <span className={`draft-save-status ${saveStatus}`}>
+                  {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
+                </span>
+                {/* Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3 与版本切换
+                    一并被「⋯」吸收——duplicated mounts of the same controls,
+                    shown only at that breakpoint (see CSS). */}
+                <div className="draft-more-menu-narrow-controls">
+                  {versionToggleControl}
+                  {formToggleControl}
+                </div>
               </div>
             )}
           </div>
-        </div>
-      </header>
-
+          <span className="draft-topbar-wide-toggle">{versionToggleControl}</span>
+          <span className="draft-topbar-wide-toggle">{formToggleControl}</span>
+          {exportMenuControl}
+        </>
+      }
+    />
+    <div className="draft-workbench-shell">
       {draftPaper.items.length === 0 && (
         <p className="draft-empty-export" role="status">请先添加题组，再导出 PDF 或打印。</p>
       )}
@@ -1033,34 +1126,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       <main className="draft-workbench-layout">
         <section className="draft-preview-desk" aria-label="A4 预览">
           <div className={`draft-paper-col${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`} ref={paperColRef}>
-            <div className="draft-paper-meta-row">
-              <p className="draft-paper-meta">
-                {draftPaper.printForm === 'a3'
-                  ? `共 ${pageCount} 版 · 对折 ${Math.ceil(pageCount / 4)} 张 · A3`
-                  : `共 ${pageCount} 页 · 双面 ${Math.ceil(pageCount / 2)} 张 · A4`}
-              </p>
-              {/* print-form (plan.md Must Do 3, 裁点3): 轻量版卷头切换— no
-                  settings page, no按张分组预览视图 (plan.md 裁点2 明拒). Same
-                  segmented-control language as the 学生版/教师版 toggle above. */}
-              <div className="draft-version-toggle draft-form-toggle" role="group" aria-label="打印形态">
-                <button
-                  type="button"
-                  className={draftPaper.printForm === 'a4' ? 'active' : ''}
-                  aria-pressed={draftPaper.printForm === 'a4'}
-                  onClick={() => void setPrintForm('a4')}
-                >
-                  A4 散页
-                </button>
-                <button
-                  type="button"
-                  className={draftPaper.printForm === 'a3' ? 'active' : ''}
-                  aria-pressed={draftPaper.printForm === 'a3'}
-                  onClick={() => void setPrintForm('a3')}
-                >
-                  A3 对折
-                </button>
-              </div>
-            </div>
             <div
               className={`draft-a4-sheet${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`}
               ref={a4SheetRef}
@@ -1227,6 +1292,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             onDrop={handleDrop}
             onMoveItem={moveItem}
             onDeleteItem={deleteItem}
+            metaText={pagesMetaText}
           />
         </section>
       </main>

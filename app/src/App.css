@@ -94,6 +94,71 @@
   max-width: 320px;
 }
 
+/* workbench-header-unify Locked Decision 2: click-to-edit hint. Pencil is
+   quiet (not always-on) — reveals on hover/focus of the title button, same
+   restraint as the wordmark's own hover-only accent color above. */
+.topbar-page-title-editable {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 14px;
+  gap: 6px;
+  max-width: 320px;
+  overflow: hidden;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar-page-title-editable:hover,
+.topbar-page-title-editable:focus-visible {
+  color: var(--ink-strong);
+}
+
+.topbar-page-title-pencil {
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-hover);
+}
+
+.topbar-page-title-editable:hover .topbar-page-title-pencil,
+.topbar-page-title-editable:focus-visible .topbar-page-title-pencil {
+  opacity: 1;
+}
+
+.topbar-page-title-input {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink-strong);
+  font: inherit;
+  font-size: 14px;
+  max-width: 320px;
+  min-width: 160px;
+  padding: 3px 8px;
+}
+
+/* workbench-header-unify Locked Decision 2/5: page-owned actions injected
+   before the global action group, separated by a thin vertical divider —
+   same visual language the retired `.draft-toolbar-group` border-left used. */
+.topbar-actions-page {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.topbar-actions-divider {
+  align-self: stretch;
+  background: var(--line);
+  flex-shrink: 0;
+  width: 1px;
+}
+
 @media (max-width: 960px) {
   .topbar-username {
     display: none;

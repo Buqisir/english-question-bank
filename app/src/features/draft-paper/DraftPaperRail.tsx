@@ -10,6 +10,12 @@ export type DraftPaperRailProps = {
   onDrop: (targetId: string) => void
   onMoveItem: (itemId: string, direction: -1 | 1) => void
   onDeleteItem: (item: DraftPaperItem) => void
+  /* workbench-header-unify Locked Decision 5: the "共 N 页 · 双面 M 张 · A4"
+     真值 text retired from `.draft-paper-meta-row` (which retired along with
+     it) and relocates here as a quiet annotation at the rail's top —
+     DraftPaperWorkbench.tsx still owns the pageCount/printForm math, this
+     component only renders the finished string. */
+  metaText?: string
 }
 
 const CHINESE_DIGITS = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
@@ -29,7 +35,7 @@ function chineseNumeral(n: number): string {
 }
 
 export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
-  const { items, activeGroupId, onItemClick, onDragStart, onDrop, onMoveItem, onDeleteItem } = props
+  const { items, activeGroupId, onItemClick, onDragStart, onDrop, onMoveItem, onDeleteItem, metaText } = props
 
   // Precompute the printable (Chinese-numeral) rank per item ahead of the
   // render loop below, instead of mutating a counter from inside the .map()
@@ -54,6 +60,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
 
   return (
     <nav className="draft-paper-rail" aria-label="卷面目录">
+      {metaText && <p className="draft-paper-rail-meta">{metaText}</p>}
       {items.map((item) => {
         const isMissing = item.groupMissing
         const printableRank = printableRankByItemId.get(item.id)
