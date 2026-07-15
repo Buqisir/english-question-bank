@@ -379,6 +379,13 @@ Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
   AI 标，URL 直达可见）——**归 reading-analysis 孤儿支退役刀一并收**；
   [P2] 效率轴（键盘捷径/批量加卷）owner 圈了再动；[P3] 返回措辞一主
   两例外。
+- branch-audit 小活候选：仓库存 33 根**未合并**历史分支（I16-*/c6a-*/
+  codex/* 时代遗留，2026-07-14 悬空扫描时清点）——删除会丢提交，需逐支
+  核对后清理；owner 圈了再动。
+- 圈点注解工具（不立刀，复活条件钉死 2026-07-14）：Claude Code 面板
+  选取器已覆盖当前打回需求（首战：header-unify shell 冷缝，owner 实指
+  →零猜图定位）；仅当 单次 DP-3 打回≥半打条目 或 M2 同事开始给反馈
+  时才考虑自建结构化收件箱。
 - PaperSurface watch ledger：`docs/paper-surface-watch-ledger.md`。
 
 ## 更新纪律
