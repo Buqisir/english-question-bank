@@ -1,7 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-14（draft-docx + fixture-move 双刀并行收官，
-**生产 022c634**；同日 home-blank 收官闭环、假红根修、R2 恢复演练全绿）
+Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
+收官，**生产 e728b30**；同日 home-blank/draft-docx/fixture-move 三刀
+闭环、假红根修、R2 演练、三址调研落宪——单日六刀）
 
 ## 现在是什么
 
@@ -24,6 +25,18 @@ Last updated: 2026-07-14（draft-docx + fixture-move 双刀并行收官，
 
 ## 主线焦点
 
+- 2026-07-14：**workbench-header-unify + design-canon 双刀并行收官**
+  （merge e728b30/b67793d，fresh CR APPROVE 0MF/3SW 当场收 + CR-lite，
+  verify:all 78 绿×2 + main CI 双证）：①工作台头部统一解析页语言——
+  表单工具条退役、一行头（标题点击可编辑入顶栏/学生·最近·保存态收
+  「⋯」/版本+A4A3+导出入头行）、暖桌通铺 24px 同解析页、非跟随；owner
+  五轮 Chrome 注入 mock 实点拍板（v2→v2.5，「哪里磨哪里」现场会首例）；
+  SW 收账：保存错误危险点显形+拍板锚断言×4。②DESIGN.md §7 三纪律
+  （禁兜底/显式覆盖/留白法）+ token 反向注释 + design-gaps.md；同日
+  mini-app-spec 两采纳入宪（原型拍板水印/QA 脚本入档）。**生产已部署
+  e728b30**。**账单**：unify 流水线 413k + canon 123k；主代理出场 ~6。
+  **owner DP-3 归并待做**：生产实用一轮（新头全流程+断网存标题看红点+
+  Enter 提交）+ 导 DOCX 双版本（draft-docx 连带）。
 - 2026-07-14：**draft-docx + fixture-move 双刀并行收官**（merge 4a54315/
   022c634，双 fresh CR APPROVE 0MF，verify:all 78/0/0 + main CI 双证）：
   ①草稿卷「下载 DOCX」（学生/教师版，复用整卷 exportDocx；handout 维持
