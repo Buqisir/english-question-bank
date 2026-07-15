@@ -1003,20 +1003,34 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: scrollBehavior() })
   }, [lectureOpen, lectureSelection, groupModels])
 
-  const railItems = useMemo(() => {
+  // rail-panel（owner 拍板 2026-07-15，原型 B「分段面板」胜出——四变体实拍
+  // 对比后选定）：目录 rail 两级化，节层并入部分。sectionHeading 不再进
+  // rail（「第二节 (共5小题；每小题2.5分，满分12.5分)」整串换行是原版的
+  // 病根），部分行只留洗出来的部分名 + 右侧「满分N分」小字；题组行 = 题组
+  // 名 + 题号胶囊章。卷面里的节标题块照渲染不受影响——只是导航不再逐节。
+  const railParts = useMemo(() => {
     if (!asset) return []
-    const items: Array<{
-      anchor: string
-      label: string
-      /** 讲评态紧凑 rail 用的短标签：题号区间，无题号时退回题组名。 */
-      compactLabel?: string
-      kind: 'part' | 'section' | 'group'
-    }> = []
+    type RailGroup = { anchor: string; title: string; range: string }
+    const parts: Array<{ anchor: string; name: string; score: string | null; groups: RailGroup[] }> = []
+    // 部分标题原文形如「第三部分 语言运用(共两节，满分30分)」：括号段只留
+    // 满分数字，前缀「第X部分」剥掉——分值/序数是卷面措辞，不是导航信息。
+    const stripParens = (s: string) => s.replace(/[（(][^（()）]*[）)]/g, '').trim()
+    const partNameOf = (text: string) => {
+      const m = stripParens(text).match(/^第[一二三四五六七八九十百]+部分\s*(.*)$/)
+      return m && m[1] ? m[1] : stripParens(text)
+    }
+    const scoreOf = (text: string) => {
+      const m = text.match(/满分\s*([\d.]+)\s*分/)
+      return m ? `满分${m[1]}分` : null
+    }
     for (const block of asset.content.blocks) {
       if (block.type === 'partHeading') {
-        items.push({ anchor: block.partId, label: block.text, kind: 'part' })
-      } else if (block.type === 'sectionHeading') {
-        items.push({ anchor: block.sectionId, label: block.text, kind: 'section' })
+        parts.push({
+          anchor: block.partId,
+          name: partNameOf(block.text),
+          score: scoreOf(block.text),
+          groups: [],
+        })
       } else if (block.type === 'group') {
         const group = asset.content.groups[block.groupId]
         if (!group) continue
@@ -1029,16 +1043,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             ? `${questionNos[0]}`
             : `${questionNos[0]}-${questionNos[questionNos.length - 1]}`
           : ''
-        items.push({
-          anchor: block.groupId,
-          label: range ? `${group.title} · ${range}` : group.title,
-          compactLabel: range || group.title,
-          kind: 'group',
-        })
+        let part = parts[parts.length - 1]
+        if (!part) {
+          // 数据以题组开头（无部分标题）的防御桶：无名部分，不渲染头行
+          part = { anchor: block.groupId, name: '', score: null, groups: [] }
+          parts.push(part)
+        }
+        part.groups.push({ anchor: block.groupId, title: group.title, range })
       }
+      // sectionHeading: 不进 rail（见上方拍板注释）
     }
-    return items
+    return parts
   }, [asset])
+
+  // 讲评态紧凑 rail 的扁平题组表：题号区间当短标签，无题号退回题组名。
+  const railGroups = useMemo(() => railParts.flatMap((part) => part.groups), [railParts])
 
   // 刀 2: 讲评栏的目标题组 —— 显式点题选中的题组优先，否则退回 scrollspy
   // 当前锚点(仅当锚点本身就是一个题组 id 时)。
@@ -1724,26 +1743,69 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
           aria-label="目录"
         >
-          {railItems.map((item) => {
-            // 讲评态 rail 收窄给卷面让宽：只留题组项（题号区间），部分/节
-            // 标题隐去；完整名走 title tooltip。
-            if (lectureOpen && item.kind !== 'group') return null
-            const isActive = item.anchor === activeAnchor
-            return (
-              <button
-                key={item.anchor}
-                type="button"
-                className={`paper-browse-rail-item paper-browse-rail-item--${item.kind}${
-                  isActive ? ' paper-browse-rail-item--active' : ''
-                }`}
-                aria-current={isActive ? 'true' : undefined}
-                title={lectureOpen ? item.label : undefined}
-                onClick={() => scrollToAnchor(item.anchor)}
-              >
-                {lectureOpen ? item.compactLabel || item.label : item.label}
-              </button>
-            )
-          })}
+          {lectureOpen ? (
+            // 讲评态 rail 收窄给卷面让宽：只留题组项（题号区间），部分头
+            // 隐去；完整名走 title tooltip。卡片语言与挑题态同款（owner
+            // 2026-07-15「按完讲评之后也是一块卡片」）：同一张浅纸面板，
+            // 整行即题号章，选中翻实心。
+            <div className="paper-browse-rail-panel paper-browse-rail-panel--compact">
+              {railGroups.map((g) => {
+                const isActive = g.anchor === activeAnchor
+                return (
+                  <button
+                    key={g.anchor}
+                    type="button"
+                    className={`paper-browse-rail-group paper-browse-rail-group--compact${
+                      isActive ? ' paper-browse-rail-group--active' : ''
+                    }`}
+                    aria-current={isActive ? 'true' : undefined}
+                    title={g.range ? `${g.title} · ${g.range}` : g.title}
+                    onClick={() => scrollToAnchor(g.anchor)}
+                  >
+                    {g.range || g.title}
+                  </button>
+                )
+              })}
+            </div>
+          ) : (
+            // 挑题态分段面板（rail-panel，owner 拍板 2026-07-15）：rail 是
+            // 一张浅纸面板，部分之间淡线分段，题号做胶囊章、选中翻实心。
+            <div className="paper-browse-rail-panel">
+              {railParts.map((part) => (
+                <div key={part.anchor} className="paper-browse-rail-part">
+                  {part.name && (
+                    <div className="paper-browse-rail-part-head">
+                      <button
+                        type="button"
+                        className="paper-browse-rail-part-name"
+                        onClick={() => scrollToAnchor(part.anchor)}
+                      >
+                        {part.name}
+                      </button>
+                      {part.score && <span className="paper-browse-rail-part-score">{part.score}</span>}
+                    </div>
+                  )}
+                  {part.groups.map((g) => {
+                    const isActive = g.anchor === activeAnchor
+                    return (
+                      <button
+                        key={g.anchor}
+                        type="button"
+                        className={`paper-browse-rail-group${
+                          isActive ? ' paper-browse-rail-group--active' : ''
+                        }`}
+                        aria-current={isActive ? 'true' : undefined}
+                        onClick={() => scrollToAnchor(g.anchor)}
+                      >
+                        <span className="paper-browse-rail-group-title">{g.title}</span>
+                        {g.range && <span className="paper-browse-rail-group-chip">{g.range}</span>}
+                      </button>
+                    )
+                  })}
+                </div>
+              ))}
+            </div>
+          )}
         </nav>
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
           {asset.content.blocks.map((block, index) =>

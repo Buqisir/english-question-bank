@@ -36,22 +36,24 @@
   transition: grid-template-columns var(--motion-slow) var(--ease-in-out);
 }
 
+/* 挑题态卷面视口居中（owner 2026-07-15「卷子在视觉中心不够居中」）：
+ * 两列布局下卷面只在 rail 右侧的剩余空间里居中，视觉重心整体右偏
+ * rail 的半宽。宽屏时给右侧配一根与 rail 等宽的对称空列，卷面回到
+ * 视口正中；1360px（= 220×2 + 794 卷面 + 两道 24 gap + 48 padding）
+ * 以下空间不够摆对称列，保持上面的两列布局不挤卷面。讲评态经
+ * :not 互斥完全不受本条影响。 */
+@media (min-width: 1360px) {
+  .paper-browse-shell:not(.paper-browse-shell--lecture-open) {
+    grid-template-columns: 220px 1fr 220px;
+  }
+}
+
 @media (min-width: 1200px) {
   /* 讲评态：rail 收紧凑档给卷面让宽（owner 2026-07-09：卷面不许被挤，
      导航可以做小）。紧凑 rail 只渲染题组项，见 PaperBrowsePage.tsx。 */
   .paper-browse-shell--lecture-open {
     grid-template-columns: 88px 1fr 380px;
   }
-}
-
-.paper-browse-rail--compact .paper-browse-rail-item {
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 8px;
-  padding-right: 8px;
 }
 
 .paper-browse-rail {
@@ -63,56 +65,166 @@
   gap: 4px;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
+  /* 讲评开关的列宽过渡期间，面板钉最终宽（见下方 min-1200 规则）会短暂
+   * 超出/不满列宽——横向裁掉，读成「列边缘滑过面板」的揭示感，不出横条。 */
+  overflow-x: hidden;
 }
 
-.paper-browse-rail-item {
-  border: none;
-  background: transparent;
-  text-align: left;
-  padding: 6px 10px;
+/* ─── 目录分段面板（rail-panel，owner 拍板 2026-07-15）───
+ *
+ * 原版扁平三级列表（部分/节/题组全是缩进按钮，.paper-browse-rail-item*）
+ * 退役：节标题带整串分值长句会换行发毛、层级只靠缩进、选中灰块突兀。
+ * B 案「分段面板」胜出——rail 自己成一张浅纸浮在暖纸桌上，部分之间淡线
+ * 分段，部分行右侧收「满分N分」小字，题号做胶囊章、选中翻实心墨底。
+ * 讲评态紧凑 rail 同一张卡片语言（--compact 档：整行即题号章）。 */
+
+.paper-browse-rail-panel {
+  /* 半透明白：读作「桌上又一张纸」，与卷面 A4 白同族。--paper-* 家族
+   * 暂无 surface 档，字面量缺口已记 docs/design-gaps.md 攒批收编。 */
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--paper-border);
   border-radius: 8px;
+  padding: 8px;
+  /* 讲评开关时面板整树重挂（挑题全档 ↔ 紧凑档是两棵子树），列宽的
+   * grid 过渡在滑而内容瞬换会「跳一跳」（owner 2026-07-15）——新内容
+   * 以同节奏淡入，宽度滑动期间的换装/重排被盖在渐显里。挑题态首载
+   * 也会淡入一次，与页面入场观感一致，无需另开关。reduced-motion
+   * 由 App.css 全局重置兜底。 */
+  animation: paper-browse-rail-swap-in var(--motion-slow) var(--ease-in-out);
+  box-sizing: border-box;
+}
+
+@keyframes paper-browse-rail-swap-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 面板宽度钉死在各自的最终列宽（owner 2026-07-15「先变长再缩短」修）：
+ * 若面板跟列宽 width:100%，讲评开关时新内容会在还没滑完的旧列宽里
+ * 摆出来再跟着缩放变形（紧凑章被拉成长条）。钉最终宽后，列宽过渡只
+ * 负责揭开/盖上空间，内容从第一帧起就是最终形状。只在 ≥1200px 生效
+ * ——那是唯一有 88px 紧凑列的档位；<1200px 讲评是抽屉，列宽不变。 */
+@media (min-width: 1200px) {
+  .paper-browse-rail-panel {
+    width: 220px;
+  }
+
+  .paper-browse-rail-panel--compact {
+    width: 88px;
+  }
+}
+
+.paper-browse-rail-part + .paper-browse-rail-part {
+  border-top: 1px solid var(--paper-border);
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.paper-browse-rail-part-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px 6px;
+}
+
+.paper-browse-rail-part-name {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--paper-ink-strong);
+}
+
+.paper-browse-rail-part-score {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: rgba(var(--paper-ink-rgb), 0.72);
+}
+
+.paper-browse-rail-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 8px;
   font-size: 13px;
   color: var(--paper-ink);
   cursor: pointer;
+  text-align: left;
+  transition: background var(--motion-fast) var(--ease-hover);
 }
 
-.paper-browse-rail-item:hover {
+.paper-browse-rail-group:hover {
+  background: rgba(var(--paper-ink-rgb), 0.05);
+}
+
+.paper-browse-rail-group--active {
   background: rgba(var(--paper-ink-rgb), 0.08);
-}
-
-.paper-browse-rail-item--active {
-  background: rgba(var(--paper-ink-rgb), 0.12);
   color: var(--paper-ink-strong);
   font-weight: 600;
 }
 
-/* ui-p1-panels #13半: .paper-browse-rail-item--group's own `color` (below)
-   has equal specificity and used to win by source order whenever both
-   classes land on the same element, making the *selected* rail item read
-   dimmer than an unselected one (audit L90 "选中反而比未选中难读"). This
-   higher-specificity combo rule guarantees --active always wins. */
-.paper-browse-rail-item--group.paper-browse-rail-item--active {
-  color: var(--paper-ink-strong);
+.paper-browse-rail-group-chip {
+  font-size: 10.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: rgba(var(--paper-ink-rgb), 0.78);
+  border: 1px solid var(--paper-border);
+  border-radius: 999px;
+  padding: 1px 7px;
+  transition:
+    background var(--motion-fast) var(--ease-hover),
+    color var(--motion-fast) var(--ease-hover);
 }
 
-.paper-browse-rail-item--part {
-  font-weight: 700;
-  margin-top: 12px;
-  color: var(--paper-ink-strong);
+/* 本条覆盖上面 .paper-browse-rail-group-chip 的空心底/字色：选中行的
+ * 题号章翻实心墨底反白，选中锚点要一眼锁定（Explicit-Cascade 备案）。 */
+.paper-browse-rail-group--active .paper-browse-rail-group-chip {
+  background: var(--paper-ink-strong);
+  border-color: var(--paper-ink-strong);
+  color: var(--paper-bg);
 }
 
-.paper-browse-rail-item--part:first-child {
-  margin-top: 0;
+/* 讲评态紧凑档：88px 窄栏里没地方摆「题组名 + 章」两件，整行自己就是
+ * 题号章——居中、等宽数字、溢出省略（写作组无题号退回题组名）。 */
+.paper-browse-rail-panel--compact {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.paper-browse-rail-item--section {
-  font-weight: 600;
-  padding-left: 16px;
+.paper-browse-rail-group--compact {
+  display: block;
+  text-align: center;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 999px;
 }
 
-.paper-browse-rail-item--group {
-  padding-left: 26px;
-  color: var(--eqb-color-text-muted, #6a6a64);
+/* 本条覆盖 .paper-browse-rail-group--active 的浅墨底：紧凑档整行即章，
+ * 选中翻实心墨底反白——与挑题态章的选中语言同款（Explicit-Cascade 备案）。 */
+.paper-browse-rail-group--compact.paper-browse-rail-group--active {
+  background: var(--paper-ink-strong);
+  color: var(--paper-bg);
 }
 
 .paper-browse-content {
@@ -576,6 +688,25 @@
     flex-direction: row;
     flex-wrap: wrap;
     max-height: none;
+  }
+
+  /* 窄屏 rail 横排：面板内各部分改并列成小分栏，分段线相应从「上边线」
+   * 换成不画（并列时画竖线反而乱），面板边框继续圈住整体。 */
+  .paper-browse-rail-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .paper-browse-rail-part {
+    flex: 1 1 200px;
+  }
+
+  .paper-browse-rail-part + .paper-browse-rail-part {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
   }
 }
 

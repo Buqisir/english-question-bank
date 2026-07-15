@@ -21,4 +21,10 @@ token 的扩展用法。
 
 ## 条目
 
-（暂无条目——本文件随 design-canon 刀新建，供后续 agent 记录。）
+## 2026-07-15 paperBrowsePage.css `.paper-browse-rail-panel`（整卷预览目录 rail 面板底）
+
+- **想要的值**：暖纸系的「纸面 surface」档——一张浮在暖纸桌（--paper-bg
+  #f4f1ea）上的浅纸面板底色，与卷面 A4 白同族但略低一级；--paper-* 家族现
+  只有 bg/ink/ink-strong/border 四档，没有 surface 档。
+- **临时方案**：字面量 `rgba(255, 255, 255, 0.6)`（半透明白叠暖纸底），落在
+  `.paper-browse-rail-panel` 的 background。若日后收编，候选名 `--paper-surface`。
