@@ -1050,11 +1050,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <div className="draft-more-menu" ref={moreMenuRef}>
             <button
               type="button"
-              className="draft-more-menu-trigger"
+              // CR SW-1: save errors must stay visible with the menu closed —
+              // the trigger wears a danger dot while saveStatus is 'error'.
+              className={`draft-more-menu-trigger${saveStatus === 'error' ? ' has-save-error' : ''}`}
               aria-haspopup="true"
               aria-expanded={moreMenuOpen}
-              aria-label="草稿卷更多信息"
-              title="学生 / 最近草稿卷 / 保存状态"
+              aria-label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
+              title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷 / 保存状态'}
               onClick={() => setMoreMenuOpen((open) => !open)}
             >
               <MoreHorizontal size={16} />

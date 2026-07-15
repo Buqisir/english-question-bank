@@ -104,3 +104,18 @@ DraftPaperWorkbench.{css,tsx} / plan.md / verify-draft-workbench-visual-unify.mj
   / 739-751（≤980px 退化）
 - App.css:97-159（editable/input/actions-page/divider）
 - 对照 paperBrowsePage.css:33（shell padding 24px）/ 57-66（rail top:24px + max-height）
+
+---
+
+## SW Dispositions（主代理 DP-2 收账，2026-07-14）
+
+- **SW-1 已修**：保存错误不再静默——`saveStatus==='error'` 时「⋯」触发器
+  戴危险色圆点+描边（token `--eqb-color-danger`，§7 禁兜底合规），
+  aria-label/title 同步携带错误文案；菜单关着也看得见。DP-3 保留
+  「断网存标题」亲历项复核观感。
+- **SW-2 已修**：visual-unify 脚本新增 Test 6 锚断言×4（.draft-toolbar
+  规则块/挂载双灭、desk 无 margin-top、AppTopbar 接线 props 在位），
+  改回 sticky/复活工具条即红；hex 白名单随行号重钉（24/0 绿）。
+- **SW-3 照单收录**：双挂 aria group 与 Enter/blur 二次提交守卫为低危
+  记录项；Enter 键提交的合成键派发未获浏览器实证（CDP 怪癖类），
+  blur 提交已端到端实证——DP-3 owner 自然按键即为终证。

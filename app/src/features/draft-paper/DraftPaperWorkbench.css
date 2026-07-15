@@ -238,6 +238,27 @@
   color: var(--ink-strong);
 }
 
+/* workbench-header-unify CR SW-1: autosave/save errors must not go silent
+   now that save-status lives inside the "⋯" panel — while saveStatus is
+   'error' the trigger wears a danger dot + border so the failure is
+   visible without opening the menu. */
+.draft-more-menu-trigger.has-save-error {
+  border-color: var(--eqb-color-danger);
+  color: var(--eqb-color-danger);
+  position: relative;
+}
+
+.draft-more-menu-trigger.has-save-error::after {
+  background: var(--eqb-color-danger);
+  border-radius: 50%;
+  content: '';
+  height: 8px;
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  width: 8px;
+}
+
 .draft-more-menu-panel {
   background: var(--panel);
   border: 1px solid var(--line);
