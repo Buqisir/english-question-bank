@@ -223,6 +223,29 @@ export function createDraftPaperRoutes() {
       }
     }),
 
+    // reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 2): same
+    // auth / user-isolation / versionType shape as the pagination route right
+    // above — a bare read-only GET, no request body, versionType optional
+    // (defaults 'student'). Never mutates anything (getReorderSuggestion's own
+    // dry-run path is zero-write, see draftPaperStore.mjs's doc comment).
+    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/reorder-suggestion$/, async ({ response, url, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const draftPaperId = decodeURIComponent(match[1])
+      let versionType
+      try {
+        versionType = versionTypeFromQuery(url)
+      } catch (error) {
+        context.sendJson(response, 400, { error: routeError(error) })
+        return
+      }
+      try {
+        const result = await context.draftPaperStore.getReorderSuggestion(userId, draftPaperId, { versionType })
+        context.sendJson(response, 200, { suggestion: result.suggestion, reused: result.reused === true })
+      } catch (error) {
+        sendDraftMutationError(response, context, error)
+      }
+    }),
+
     defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, url, match, context }) => {
       const userId = context.resolveDataUserId(context)
       const userDb = context.openUserDatabase({ readOnly: true })

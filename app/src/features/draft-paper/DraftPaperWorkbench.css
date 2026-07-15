@@ -309,6 +309,48 @@
   color: var(--eqb-color-warning);
 }
 
+/* reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 3 "卡"): 卷级
+   单卡, quiet + real-verified only (安静常驻, 真值验证过才亮) — same visual
+   family as prototype-print-form-v2.html's `.sugg.warn` (left danger bar +
+   danger-soft fill, since the card only ever shows a REAL, still-uncorrected
+   跨页断篇), all via existing danger/primary tokens (no new palette entry).
+   Sits in the same notices slot as .draft-warning/.draft-error above (卷头行
+   之下、纸面之上), not anchored to any one group's action cluster like
+   .draft-group-suggestion/.draft-seam-suggestion (those are per-seam quiet
+   annotations; this is the one whole-draft verdict). */
+.draft-reorder-suggestion {
+  align-items: center;
+  background: color-mix(in srgb, var(--eqb-color-danger) 8%, var(--eqb-color-paper));
+  border-left: 3px solid var(--eqb-color-danger);
+  border-radius: 0 8px 8px 0;
+  color: var(--paper-ink);
+  display: flex;
+  font-size: 13.5px;
+  gap: 14px;
+  justify-content: space-between;
+  line-height: 1.5;
+  margin: 14px 0 0;
+  padding: 10px 14px;
+}
+
+.draft-reorder-suggestion-act {
+  background: none;
+  border: 0;
+  color: var(--eqb-color-primary-text);
+  cursor: pointer;
+  flex: none;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 0;
+  transition: color var(--motion-fast) var(--ease-hover);
+  white-space: nowrap;
+}
+
+.draft-reorder-suggestion-act:hover {
+  color: var(--eqb-color-primary);
+}
+
 /* draft-desk-a: 备课桌骨架重构（docs/cuts/draft-desk-a/plan.md，原型
  * prototype.html 拍板）。`.draft-preview-desk` 从"左侧预览卡片"升格为
  * 满幅暖纸桌本体——纸列 + 右侧目录 rail 都在桌面网格内，删除旧的卡片

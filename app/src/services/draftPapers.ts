@@ -111,6 +111,35 @@ export async function fetchDraftPaperPagination(
   }
 }
 
+// reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 2/3): the
+// verified-order verdict `getReorderSuggestion` (draftPaperStore.mjs)
+// produces — null means "no candidate order zeroed out every 跨页断篇",
+// never a false-positive placeholder. `order` is the full item-id sequence
+// to PATCH via updateDraftPaper's existing `items` field (persistItems in
+// DraftPaperWorkbench.tsx reuses that same PATCH, never a bespoke reorder
+// endpoint). Kept local to this service file rather than domain/questionBank.ts
+// (this cut's Forbidden list keeps `domain` out of scope) — the shape is a
+// server-response DTO, not a shared domain concept.
+export type ReorderSuggestion = {
+  order: string[]
+  move: { kind: 'swap' | 'front' | 'end'; itemId: string; otherItemId?: string }
+  brokenGroupId: string
+} | null
+
+export async function fetchReorderSuggestion(
+  id: string,
+  versionType: 'student' | 'teacher' = 'student',
+): Promise<ReorderSuggestion> {
+  const response = await fetch(
+    apiPath(`/api/draft-papers/${encodeURIComponent(id)}/reorder-suggestion?versionType=${versionType}`),
+  )
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to load reorder suggestion: ${response.status}`))
+  }
+  const data = (await response.json()) as { suggestion: ReorderSuggestion }
+  return data.suggestion
+}
+
 export async function updateDraftPaper(
   id: string,
   input: Partial<Pick<DraftPaper, 'title' | 'studentLabel'>> & {
