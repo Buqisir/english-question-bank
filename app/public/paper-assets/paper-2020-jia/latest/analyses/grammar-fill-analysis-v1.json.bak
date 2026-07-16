@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2020-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-jia-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-jia-grammar-fill": {
+      "overview": "议论文：论述努力工作（hard work）的价值与意义，强调成功需付出汗水与代价。"
+    }
+  },
+  "blanks": {
+    "q-2020-jia-061": {
+      "blankId": "blank-2020-jia-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were",
+      "role": null,
+      "path": null,
+      "reason": "if 引导的从句表示与现在事实相反的虚拟语气，be 动词在虚拟条件句中一律用 were。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "would have success if it",
+          "signalSide": "passage",
+          "relation": "主句用 would have 表示虚拟，if 从句须用过去式 were 与之呼应（与现在事实相反）。"
+        }
+      ],
+      "teachingNote": "见 would + 动词原形 + if 从句，判定虚拟语气，be 一律改 were。"
+    },
+    "q-2020-jia-062": {
+      "blankId": "blank-2020-jia-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "answer": "before",
+      "role": null,
+      "path": null,
+      "reason": "空格前后是两个结构完整的句子，需要状语连词连接，按逻辑（先付出努力，后得到回报）填表时间的 before。",
+      "evidence": [
+        {
+          "type": "connector",
+          "signalText": "they received anything in retum",
+          "signalSide": "passage",
+          "relation": "后接完整主谓的新分句，且语义是「在……之前」，定时间状语连词 before。"
+        }
+      ],
+      "teachingNote": "两套主谓 + 时间先后语义 → 填时间状语连词 before。"
+    },
+    "q-2020-jia-063": {
+      "blankId": "blank-2020-jia-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "exception",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "exceptional",
+      "role": null,
+      "path": null,
+      "reason": "提示词 exception 是名词，但空格后接名词 qualities，需要形容词作定语，故派生为 exceptional。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "qualities along the way",
+          "signalSide": "passage",
+          "relation": "空格修饰其后名词 qualities，应用形容词，名词 exception 派生为 exceptional。"
+        }
+      ],
+      "teachingNote": "提示词是名词、后接名词被修饰 → 名词派生为形容词作定语。"
+    },
+    "q-2020-jia-064": {
+      "blankId": "blank-2020-jia-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "believe",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "belief",
+      "role": null,
+      "path": null,
+      "reason": "空格前有冠词 a 和形容词 popular，需名词作中心词，动词 believe 派生为名词 belief。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "a popular",
+          "signalSide": "passage",
+          "relation": "冠词 a + 形容词 popular 之后需名词中心词，动词 believe 派生为 belief。"
+        }
+      ],
+      "teachingNote": "冠词 + 形容词之后需名词 → 动词派生为名词。"
+    },
+    "q-2020-jia-065": {
+      "blankId": "blank-2020-jia-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "prepare",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "prepares",
+      "role": null,
+      "path": null,
+      "reason": "本句缺谓语，主语为动名词短语 earning it with sweat and sacrifices（视为单数），一般现在时陈述事实，用第三人称单数 prepares。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "eaming it with sweat and sacrifices",
+          "signalSide": "passage",
+          "relation": "动名词短语作主语视为单数，谓语用一般现在时第三人称单数 prepares。"
+        }
+      ],
+      "teachingNote": "动名词短语作主语 → 谓语用第三人称单数。"
+    },
+    "q-2020-jia-066": {
+      "blankId": "blank-2020-jia-066",
+      "blankNo": 66,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "path": null,
+      "reason": "must 在此作可数名词（必须做的事/必备之物），首次泛指、辅音音素开头，用不定冠词 a。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "is",
+          "signalSide": "passage",
+          "relation": "系动词后接名词性表语 must，可数名词单数泛指需不定冠词 a。"
+        }
+      ],
+      "teachingNote": "must 用作可数名词表语、首次泛指 → 加不定冠词 a。"
+    },
+    "q-2020-jia-067": {
+      "blankId": "blank-2020-jia-067",
+      "blankNo": 67,
+      "blankType": "given",
+      "hint": "live",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to live",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "句子已有谓语 makes，空格处动词作目的状语（为了过上更好的生活），用不定式 to live。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the better life that’s waiting for you",
+          "signalSide": "passage",
+          "relation": "空后接宾语 the better life，表「为了过上」的目的，用不定式 to live 作目的状语。"
+        }
+      ],
+      "teachingNote": "主句已有谓语、表目的 → 动词用不定式 to do 作目的状语。"
+    },
+    "q-2020-jia-068": {
+      "blankId": "blank-2020-jia-068",
+      "blankNo": 68,
+      "blankType": "given",
+      "hint": "mere",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "merely",
+      "role": null,
+      "path": null,
+      "reason": "空格修饰动词 waiting，应用副词，形容词 mere 变副词 merely。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "waiting",
+          "signalSide": "passage",
+          "relation": "修饰动词 waiting 须用副词，形容词 mere 变 merely。"
+        }
+      ],
+      "teachingNote": "修饰动词 → 形容词变副词。"
+    },
+    "q-2020-jia-069": {
+      "blankId": "blank-2020-jia-069",
+      "blankNo": 69,
+      "blankType": "given",
+      "hint": "question",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "question",
+      "role": null,
+      "path": null,
+      "reason": "never 引导否定祈使句，谓语用动词原形 question（质疑），构成 never question its power。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "never",
+          "signalSide": "passage",
+          "relation": "never 置于句首构成否定祈使句，谓语用动词原形 question。"
+        }
+      ],
+      "teachingNote": "never + 动词 构成否定祈使句 → 用动词原形。"
+    },
+    "q-2020-jia-070": {
+      "blankId": "blank-2020-jia-070",
+      "blankNo": 70,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "without",
+      "role": null,
+      "path": null,
+      "reason": "空格与 doubt 构成介词短语作状语，without doubt 意为「毫无疑问」（亦可 beyond doubt）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "doubt pay off",
+          "signalSide": "passage",
+          "relation": "与 doubt 搭配构成 without/beyond doubt「毫无疑问」的介词短语。"
+        }
+      ],
+      "teachingNote": "「毫无疑问」固定搭配 without/beyond doubt → 填介词。"
+    }
+  }
+}

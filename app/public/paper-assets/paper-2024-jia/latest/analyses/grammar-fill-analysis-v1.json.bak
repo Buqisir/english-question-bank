@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2024-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-jia-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-jia-grammar-fill": {
+      "overview": "说明文：介绍美国国家公园体系的由来，以黄石公园成为世界第一个国家公园的故事为线索。"
+    }
+  },
+  "blanks": {
+    "q-2024-jia-061": {
+      "blankId": "blank-2024-jia-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "catch",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to catch",
+      "role": "object",
+      "path": "fast",
+      "reason": "tend 后接动词不定式构成固定搭配 tend to do（倾向于做），且谓语已由 tend 占据，故 catch 用非谓语 to 不定式形式。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "tend",
+          "signalSide": "passage",
+          "relation": "tend to do 固定搭配，锁定后接动词不定式 to catch。"
+        }
+      ],
+      "teachingNote": "看到 tend / want / hope 等后接动作时，先想固定搭配 tend to do，动词用 to 不定式。"
+    },
+    "q-2024-jia-062": {
+      "blankId": "blank-2024-jia-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "treasure",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "treasures",
+      "role": null,
+      "path": null,
+      "reason": "They are __ of American heritage 中空格作系动词 are 的表语名词，主语 They 为复数，可数名词 treasure 用复数 treasures 与之呼应。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "They are",
+          "signalSide": "passage",
+          "relation": "主语 They 为复数，表语可数名词须用复数 treasures。"
+        }
+      ],
+      "teachingNote": "提示词是可数名词且作复数主语的表语时，名词用复数。"
+    },
+    "q-2024-jia-063": {
+      "blankId": "blank-2024-jia-063",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "what",
+      "role": null,
+      "path": null,
+      "reason": "in __ is now northwestern Wyoming 中介词 in 后接名词性从句作宾语，从句缺主语且无先行词，用连接代词 what 充当主语兼引导词。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "in",
+          "signalSide": "passage",
+          "relation": "介词 in 后须接名词性从句作宾语，从句缺主语无先行词，用 what。"
+        }
+      ],
+      "teachingNote": "介词后从句缺主语/宾语又无先行词，用 what 引导名词性从句。"
+    },
+    "q-2024-jia-064": {
+      "blankId": "blank-2024-jia-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "be",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were",
+      "role": null,
+      "path": null,
+      "reason": "They __ part of a 15-member exploring party 中本句缺谓语，主语 They 为复数，结合上文 in mid-September 1870 等过去时间背景，be 动词用过去时复数 were。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "They",
+          "signalSide": "passage",
+          "relation": "主语 They 为复数第三人称，be 动词作谓语需用复数形式。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "in mid-September 1870",
+          "signalSide": "passage",
+          "relation": "全文叙事时间为 1870 年，过去时语境锁定 be 用过去式 were。"
+        }
+      ],
+      "teachingNote": "缺谓语时定主语数 + 定时态：复数主语 + 过去语境 = were。"
+    },
+    "q-2024-jia-065": {
+      "blankId": "blank-2024-jia-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "do",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "be done",
+      "role": null,
+      "path": null,
+      "reason": "What should __ with such a beautiful place 中情态动词 should 后须用动词原形，主语 What（指代地点这件事）与 do 是被动关系，故用被动原形 be done。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "should",
+          "signalSide": "passage",
+          "relation": "情态动词 should 后接动词原形，构成 should + be done 被动结构。"
+        }
+      ],
+      "teachingNote": "情态动词后用原形；主语承受动作时用被动 be + 过去分词。"
+    },
+    "q-2024-jia-066": {
+      "blankId": "blank-2024-jia-066",
+      "blankNo": 66,
+      "blankType": "given",
+      "hint": "it",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "its",
+      "role": null,
+      "path": null,
+      "reason": "with __ unique and breathtaking natural beauty 中空格后接名词短语，需用形容词性物主代词修饰名词，指代上文 This area，故用 its。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "unique and breathtaking natural beauty",
+          "signalSide": "passage",
+          "relation": "其后为名词短语，须用形容词性物主代词 its 限定修饰。"
+        }
+      ],
+      "teachingNote": "代词后紧跟名词作定语时，用形容词性物主代词 its / his / their。"
+    },
+    "q-2024-jia-067": {
+      "blankId": "blank-2024-jia-067",
+      "blankNo": 67,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "path": null,
+      "reason": "must be well preserved __ all people of the nation to enjoy 中空格引出不定式 to enjoy 的逻辑主语，构成 for sb. to do 结构，用介词 for。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "to enjoy",
+          "signalSide": "passage",
+          "relation": "for sb. to do 结构中，for 引出不定式 to enjoy 的逻辑主语 all people。"
+        }
+      ],
+      "teachingNote": "不定式有自己的逻辑主语时，用 for + 名词 + to do 结构。"
+    },
+    "q-2024-jia-068": {
+      "blankId": "blank-2024-jia-068",
+      "blankNo": 68,
+      "blankType": "given",
+      "hint": "complete",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "completion",
+      "role": null,
+      "path": null,
+      "reason": "at the __ of their journey 中空格前有冠词 the、后有 of 短语，需名词作介词 at 的宾语，故将动词 complete 派生为名词 completion。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "at the",
+          "signalSide": "passage",
+          "relation": "冠词 the 后须接名词，提示动词 complete 须派生为名词。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "of their journey",
+          "signalSide": "passage",
+          "relation": "of 短语修饰前面的名词中心词，确认空格须为名词 completion。"
+        }
+      ],
+      "teachingNote": "the + 空格 + of 结构里空格必为名词，把动词派生成名词。"
+    },
+    "q-2024-jia-069": {
+      "blankId": "blank-2024-jia-069",
+      "blankNo": 69,
+      "blankType": "given",
+      "hint": "large",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "largest",
+      "role": null,
+      "path": null,
+      "reason": "the __ United States national park 中形容词 large 前有定冠词 the，且语境为曾是最大的国家公园，用最高级 largest。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "the",
+          "signalSide": "passage",
+          "relation": "定冠词 the + 形容词最高级，提示 large 须变为 largest。"
+        }
+      ],
+      "teachingNote": "the + 形容词 表唯一之最时用最高级 the largest。"
+    },
+    "q-2024-jia-070": {
+      "blankId": "blank-2024-jia-070",
+      "blankNo": 70,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "path": null,
+      "reason": "Wrangell-Saint Elias …, __ became a national monument in 1978 中先行词为物 Wrangell-Saint Elias，引导非限制性定语从句并在从句中作主语，用关系代词 which。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "Wrangell-Saint Elias",
+          "signalSide": "passage",
+          "relation": "先行词为地点（物），从句缺主语，用关系代词 which 引导定语从句。"
+        }
+      ],
+      "teachingNote": "先行词为物且从句缺主语时，用 which 引导（非限制性从句）定语从句。"
+    }
+  }
+}

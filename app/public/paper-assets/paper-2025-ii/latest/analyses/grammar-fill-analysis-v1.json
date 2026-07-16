@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2025-ii",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -48,7 +48,7 @@
       "blankNo": 57,
       "blankType": "given",
       "hint": "center",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "central",
       "role": null,
       "path": null,
@@ -141,7 +141,10 @@
           "relation": "主语为第三人称单数，谓语用 is。"
         }
       ],
-      "teachingNote": "缺谓语时按主语数与时态定 be 动词形式（单数现在→is）。"
+      "teachingNote": "缺谓语时按主语数与时态定 be 动词形式（单数现在→is）。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2025-ii-062": {
       "blankId": "blank-2025-ii-062",
@@ -161,14 +164,15 @@
           "relation": "被修饰名词 chance 后接不定式作定语，故用 to discover。"
         }
       ],
-      "teachingNote": "chance/opportunity 等名词后用 to do 作定语表“做某事的机会”。"
+      "teachingNote": "chance/opportunity 等名词后用 to do 作定语表“做某事的机会”。",
+      "form": "to-do"
     },
     "q-2025-ii-063": {
       "blankId": "blank-2025-ii-063",
       "blankNo": 63,
       "blankType": "given",
       "hint": "absent",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "absence",
       "role": null,
       "path": null,
@@ -188,7 +192,7 @@
       "blankNo": 64,
       "blankType": "given",
       "hint": "afternoon",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "afternoons",
       "role": null,
       "path": null,
@@ -221,7 +225,8 @@
           "relation": "被修饰名词与 leave 为被动关系，用过去分词 left 作定语。"
         }
       ],
-      "teachingNote": "被修饰名词与动词为被动关系时，用过去分词作后置定语。"
+      "teachingNote": "被修饰名词与动词为被动关系时，用过去分词作后置定语。",
+      "form": "done"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2023-jia",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -35,7 +35,8 @@
           "relation": "并列的 to pass on 是 to 不定式作目的状语，呼应锁定本空也用 to teach。"
         }
       ],
-      "teachingNote": "句子已有谓语、表“为了…”的目的，且与后文 to 不定式并列时，用 to do 作目的状语。"
+      "teachingNote": "句子已有谓语、表“为了…”的目的，且与后文 to 不定式并列时，用 to do 作目的状语。",
+      "form": "to-do"
     },
     "q-2023-jia-062": {
       "blankId": "blank-2023-jia-062",
@@ -127,7 +128,8 @@
           "relation": "逻辑主语 her fable 主动“借用”词句，主动关系用现在分词 borrowing 作伴随状语。"
         }
       ],
-      "teachingNote": "句子已有谓语、与逻辑主语为主动关系时，伴随状语用 doing。"
+      "teachingNote": "句子已有谓语、与逻辑主语为主动关系时，伴随状语用 doing。",
+      "form": "doing"
     },
     "q-2023-jia-066": {
       "blankId": "blank-2023-jia-066",
@@ -147,14 +149,15 @@
           "relation": "被修饰的 message 与 intend 是被动关系，用过去分词 intended 作后置定语。"
         }
       ],
-      "teachingNote": "名词与动词为被动关系的后置定语，用 done。"
+      "teachingNote": "名词与动词为被动关系的后置定语，用 done。",
+      "form": "done"
     },
     "q-2023-jia-067": {
       "blankId": "blank-2023-jia-067",
       "blankNo": 67,
       "blankType": "given",
       "hint": "difference",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "Different",
       "role": null,
       "path": null,
@@ -194,7 +197,7 @@
       "blankNo": 69,
       "blankType": "given",
       "hint": "warn",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "warning",
       "role": null,
       "path": null,
@@ -233,7 +236,10 @@
           "relation": "主语 form 是被传承、被运用的对象，与 employ 为被动关系，用 be employed。"
         }
       ],
-      "teachingNote": "情态动词 + 被动，用 can be done。"
+      "teachingNote": "情态动词 + 被动，用 can be done。",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2020-bing",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -48,7 +48,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "fine",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "finest",
       "role": null,
       "path": null,
@@ -93,14 +93,17 @@
           "relation": "情态动词 would 后跟动词原形，被动语态作 be done。"
         }
       ],
-      "teachingNote": "情态动词后判语态：主语是动作承受者时用 be+过去分词。"
+      "teachingNote": "情态动词后判语态：主语是动作承受者时用 be+过去分词。",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
     },
     "q-2020-bing-064": {
       "blankId": "blank-2020-bing-064",
       "blankNo": 64,
       "blankType": "given",
       "hint": "curious",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "curiosity",
       "role": null,
       "path": null,
@@ -159,7 +162,10 @@
           "relation": "and 并列谓语，smiled 为过去式，point 须呼应为 pointed。"
         }
       ],
-      "teachingNote": "and 并列谓语时态保持一致，前一动词过去式则后一也用过去式。"
+      "teachingNote": "and 并列谓语时态保持一致，前一动词过去式则后一也用过去式。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     },
     "q-2020-bing-067": {
       "blankId": "blank-2020-bing-067",
@@ -179,14 +185,15 @@
           "relation": "set out 后接不定式表目的，find 须用 to find。"
         }
       ],
-      "teachingNote": "句子已有谓语且表目的时，动词用 to do 作目的状语。"
+      "teachingNote": "句子已有谓语且表目的时，动词用 to do 作目的状语。",
+      "form": "to-do"
     },
     "q-2020-bing-068": {
       "blankId": "blank-2020-bing-068",
       "blankNo": 68,
       "blankType": "given",
       "hint": "gentle",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "gently",
       "role": null,
       "path": null,
@@ -225,7 +232,8 @@
           "relation": "surround 带宾语 mountain tops，主动进行，用 surrounding。"
         }
       ],
-      "teachingNote": "名词与动词为主动关系且后置修饰，用现在分词作定语。"
+      "teachingNote": "名词与动词为主动关系且后置修饰，用现在分词作定语。",
+      "form": "doing"
     },
     "q-2020-bing-070": {
       "blankId": "blank-2020-bing-070",

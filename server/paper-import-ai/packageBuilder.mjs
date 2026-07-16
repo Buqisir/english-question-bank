@@ -656,18 +656,23 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   }
   const gfMeta = grammarFillAnalysis.meta || {}
   const gfAnalysisOutput = {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    // D1 (grammar-facets-v2): bumped to v2 — new imports must never write v1
+    // (validator.mjs's PAPER_IMPORT_SCHEMA_VERSIONS no longer accepts it).
+    schemaVersion: 'grammar-fill-analysis-v2',
     paperId,
     sourceAssetVersion: 1,
     targetGroups: grammarFillAnalysis.targetGroups || [grammarFillGroup.groupId],
     meta: {
       ...gfMeta,
       generatedBy: 'external-ai',
-      promptVersion: 'grammar-fill-analysis-v1',
+      promptVersion: 'grammar-fill-analysis-v2',
       reviewStatus: 'reviewed',
       importMode: 'paper-import-ai',
     },
     groups: grammarFillAnalysis.groups || {},
+    // blanks carries the AI's facetKey/role/answer/evidence/... plus the
+    // server-stamped tense/voice/agreementSensitive/form (analyzeGrammarFill.mjs
+    // stampVerbAxes) verbatim.
     blanks: grammarFillAnalysis.blanks || {},
   }
 

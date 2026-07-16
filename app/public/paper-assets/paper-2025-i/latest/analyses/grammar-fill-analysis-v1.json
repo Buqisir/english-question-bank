@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2025-i",
   "sourceAssetVersion": 3,
   "targetGroups": [
@@ -87,14 +87,15 @@
           "relation": "hope 后接 to do 不定式作宾语，锁定 to present"
         }
       ],
-      "teachingNote": "hope/want/decide 等动词后接 to do，固定搭配直接锁不定式。"
+      "teachingNote": "hope/want/decide 等动词后接 to do，固定搭配直接锁不定式。",
+      "form": "to-do"
     },
     "q-2025-i-059": {
       "blankId": "blank-2025-i-059",
       "blankNo": 59,
       "blankType": "given",
       "hint": "guide",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "guidance",
       "role": null,
       "path": null,
@@ -133,7 +134,10 @@
           "relation": "陈述一般情形，用一般现在时被动"
         }
       ],
-      "teachingNote": "先认主语数与语态：复数+被动用 are + 过去分词。"
+      "teachingNote": "先认主语数与语态：复数+被动用 are + 过去分词。",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-2025-i-061": {
       "blankId": "blank-2025-i-061",
@@ -153,7 +157,10 @@
           "relation": "第三人称单数主语 + always，一般现在时谓语用 tries"
         }
       ],
-      "teachingNote": "第三人称单数 + 一般现在时，动词加 -s/-es。"
+      "teachingNote": "第三人称单数 + 一般现在时，动词加 -s/-es。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2025-i-062": {
       "blankId": "blank-2025-i-062",
@@ -186,7 +193,7 @@
       "blankNo": 63,
       "blankType": "given",
       "hint": "strategy",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "strategic",
       "role": null,
       "path": null,
@@ -226,7 +233,7 @@
       "blankNo": 65,
       "blankType": "given",
       "hint": "digital",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "digitally",
       "role": null,
       "path": null,

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2026-i",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -41,14 +41,15 @@
           "relation": "daji 是被举办的对象，逻辑上为被动，故用 to be held。"
         }
       ],
-      "teachingNote": "见 It is + adj + for sb 结构先补不定式，再据逻辑主语判主动/被动。"
+      "teachingNote": "见 It is + adj + for sb 结构先补不定式，再据逻辑主语判主动/被动。",
+      "form": "to-do"
     },
     "q-2026-i-057": {
       "blankId": "blank-2026-i-057",
       "blankNo": 57,
       "blankType": "given",
       "hint": "frequent",
-      "facetKey": "grammar-fill.given.derivation.adjective-to-noun",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "frequency",
       "role": null,
       "path": null,
@@ -113,14 +114,17 @@
           "relation": "at that time 指过去，锁定一般过去时 → were。"
         }
       ],
-      "teachingNote": "谓语空先认主语数与时间标志词，再定 be 的形态。"
+      "teachingNote": "谓语空先认主语数与时间标志词，再定 be 的形态。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2026-i-060": {
       "blankId": "blank-2026-i-060",
       "blankNo": 60,
       "blankType": "given",
       "hint": "necessity",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "necessities",
       "role": null,
       "path": null,
@@ -179,7 +183,8 @@
           "relation": "主句主语 they 是被吸引者，与 draw 为被动关系 → Drawn 作状语。"
         }
       ],
-      "teachingNote": "句首状语先判逻辑主语与动词的主被动，被动用过去分词。"
+      "teachingNote": "句首状语先判逻辑主语与动词的主被动，被动用过去分词。",
+      "form": "done"
     },
     "q-2026-i-063": {
       "blankId": "blank-2026-i-063",
@@ -225,14 +230,15 @@
           "relation": "Before 作介词，后接动名词作宾语 → heading。"
         }
       ],
-      "teachingNote": "介词后动词一律用动名词形式。"
+      "teachingNote": "介词后动词一律用动名词形式。",
+      "form": "doing"
     },
     "q-2026-i-065": {
       "blankId": "blank-2026-i-065",
       "blankNo": 65,
       "blankType": "given",
       "hint": "cheap",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "cheaper",
       "role": null,
       "path": null,

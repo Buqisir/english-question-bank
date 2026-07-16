@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2020-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -41,7 +41,10 @@
           "relation": "主语核心 age 为单数第三人称，过去式单数用 was。"
         }
       ],
-      "teachingNote": "谓语动词先认主语数与人称，再用时间标志词定时态。"
+      "teachingNote": "谓语动词先认主语数与人称，再用时间标志词定时态。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2020-jan-057": {
       "blankId": "blank-zj-2020-jan-057",
@@ -61,14 +64,15 @@
           "relation": "be expected to do 固定搭配，被动 expect 后接动词不定式作主语补足语。"
         }
       ],
-      "teachingNote": "be expected/asked/allowed to do 这类被动后必跟不定式，认搭配直接锁行。"
+      "teachingNote": "be expected/asked/allowed to do 这类被动后必跟不定式，认搭配直接锁行。",
+      "form": "to-do"
     },
     "q-zj-2020-jan-058": {
       "blankId": "blank-zj-2020-jan-058",
       "blankNo": 58,
       "blankType": "given",
       "hint": "number",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "numbers",
       "role": null,
       "path": null,
@@ -121,14 +125,15 @@
           "relation": "与后面 to 构成 compared to“与……相比”固定搭配，作状语。"
         }
       ],
-      "teachingNote": "compared to/with“与……相比”是常考固定状语结构，记牢即可锁过去分词。"
+      "teachingNote": "compared to/with“与……相比”是常考固定状语结构，记牢即可锁过去分词。",
+      "form": "done"
     },
     "q-zj-2020-jan-061": {
       "blankId": "blank-zj-2020-jan-061",
       "blankNo": 61,
       "blankType": "given",
       "hint": "old",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "older",
       "role": null,
       "path": null,
@@ -148,7 +153,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "particular",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "particularly",
       "role": null,
       "path": null,
@@ -207,7 +212,10 @@
           "relation": "情态动词 should 后接动词原形，被动结构为 should be placed。"
         }
       ],
-      "teachingNote": "情态动词后判主谓语态：主语是动作承受者就用 modal + be + 过去分词。"
+      "teachingNote": "情态动词后判主谓语态：主语是动作承受者就用 modal + be + 过去分词。",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
     },
     "q-zj-2020-jan-065": {
       "blankId": "blank-zj-2020-jan-065",

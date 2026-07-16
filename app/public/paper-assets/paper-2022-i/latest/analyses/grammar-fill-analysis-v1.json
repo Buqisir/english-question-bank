@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2022-i",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -35,7 +35,8 @@
           "signalSide": "passage",
           "relation": "主句主语 the GPNP 主动发出 cover 的动作，逻辑主语主动→现在分词 Covering。"
         }
-      ]
+      ],
+      "form": "doing"
     },
     "q-2022-i-057": {
       "blankId": "blank-2022-i-057",
@@ -81,7 +82,10 @@
           "signalSide": "passage",
           "relation": "previously 表过去，锁定一般过去时 were。"
         }
-      ]
+      ],
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2022-i-059": {
       "blankId": "blank-2022-i-059",
@@ -107,7 +111,8 @@
           "signalSide": "passage",
           "relation": "与 reduce 并列同为目的动作，确认用不定式 to increase。"
         }
-      ]
+      ],
+      "form": "to-do"
     },
     "q-2022-i-060": {
       "blankId": "blank-2022-i-060",
@@ -127,7 +132,10 @@
           "signalSide": "passage",
           "relation": "GPNP 是被设计的对象，主语承受动作→被动 is designed。"
         }
-      ]
+      ],
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-2022-i-061": {
       "blankId": "blank-2022-i-061",
@@ -154,7 +162,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "population",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "populations",
       "role": null,
       "path": null,
@@ -174,7 +182,7 @@
       "blankNo": 63,
       "blankType": "given",
       "hint": "eventual",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "eventually",
       "role": null,
       "path": null,

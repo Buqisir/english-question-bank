@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2023-i",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -22,7 +22,7 @@
       "blankNo": 56,
       "blankType": "given",
       "hint": "taste",
-      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
       "answer": "tasty",
       "role": null,
       "path": null,
@@ -55,7 +55,8 @@
           "relation": "whether + to do 为固定搭配，锁定非谓语用不定式 to bite。"
         }
       ],
-      "teachingNote": "疑问词（whether/how/where 等）后接动词常用不定式 to do。"
+      "teachingNote": "疑问词（whether/how/where 等）后接动词常用不定式 to do。",
+      "form": "to-do"
     },
     "q-2023-i-058": {
       "blankId": "blank-2023-i-058",
@@ -95,7 +96,8 @@
           "relation": "空格修饰其后名词 home，且 home 与 recognize 为被动关系，故用过去分词 recognized 作定语。"
         }
       ],
-      "teachingNote": "名词前作定语且与提示动词为被动关系时，用过去分词 -ed。"
+      "teachingNote": "名词前作定语且与提示动词为被动关系时，用过去分词 -ed。",
+      "form": "done"
     },
     "q-2023-i-060": {
       "blankId": "blank-2023-i-060",
@@ -135,7 +137,8 @@
           "relation": "allow sb to do 锁定不定式；them 与 lift 为被动关系，故用被动不定式 to be lifted。"
         }
       ],
-      "teachingNote": "allow sb to do，逻辑宾语为被动时用 to be done。"
+      "teachingNote": "allow sb to do，逻辑宾语为被动时用 to be done。",
+      "form": "to-do"
     },
     "q-2023-i-062": {
       "blankId": "blank-2023-i-062",
@@ -182,7 +185,7 @@
       "blankNo": 64,
       "blankType": "given",
       "hint": "rare",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "rarely",
       "role": null,
       "path": null,
@@ -215,7 +218,8 @@
           "relation": "be left + doing 表主语处于某种持续状态；I 与 want 为主动关系，故用现在分词 wanting。"
         }
       ],
-      "teachingNote": "be left doing，逻辑主语主动时用现在分词 -ing。"
+      "teachingNote": "be left doing，逻辑主语主动时用现在分词 -ing。",
+      "form": "doing"
     }
   }
 }

@@ -2,10 +2,6 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { defineRoute } from '../router/index.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
-import {
-  VERB_PROFILE_SCHEMA_VERSION,
-  VERB_PROFILE_SIDECAR_FILENAME,
-} from '../grammar-verb-profile/verbProfileSidecar.mjs'
 
 /**
  * Teaching-dimension retrieval layer (I16·A).
@@ -48,7 +44,10 @@ export const analysisConfigs = [
     entryMapKey: 'blanks',
   },
   {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    // D1 (grammar-facets-v2): schemaVersion bumped to v2, on-disk fileName
+    // unchanged (33 real files rewritten in place, same commit). Walker
+    // authenticates v2, rejects v1 — never reads old/new mixed.
+    schemaVersion: 'grammar-fill-analysis-v2',
     fileName: 'grammar-fill-analysis-v1.json',
     groupType: 'grammarFill',
     // Grammar-fill analysis keys per-blank entries under 'blanks' (I14).
@@ -133,7 +132,8 @@ function createEmptyFacetBucket() {
     // reading
     skills: new Set(),
     secondarySkills: new Set(),
-    // grammarFill verb axes (I16·C) — merged in from the verb-profile sidecar
+    // grammarFill verb axes (I16·C, D1 folded onto the analysis-v2 blank
+    // entry itself — no sidecar, see extractGrammarFillFacets below)
     tenses: new Set(),
     voices: new Set(),
     agreements: new Set(),
@@ -150,6 +150,19 @@ function extractGrammarFillFacets(bucket, entry) {
   const role = entry?.role
   // role is null for most blanks — only add if truthy string
   if (role && typeof role === 'string') bucket.roles.add(role)
+
+  // D1 (grammar-facets-v2): tense/voice/agreementSensitive live directly on
+  // the finite-verb blank entry (grammar-fill-analysis-v2) — this is the
+  // single read path (I16·C sidecar retired, PA MF-1). agreementSensitive
+  // is a bool (owner 2026-07-15 answer-surface definition); exposed on the
+  // 'agreement' axis as the string 'true'/'false' so the external filter
+  // param name/shape is unchanged from the old i16a `?agreement=` contract
+  // (value domain is new, per plan).
+  const tense = entry?.tense
+  if (tense && typeof tense === 'string') bucket.tenses.add(tense)
+  const voice = entry?.voice
+  if (voice && typeof voice === 'string') bucket.voices.add(voice)
+  if (typeof entry?.agreementSensitive === 'boolean') bucket.agreements.add(String(entry.agreementSensitive))
 }
 
 function extractSevenChoicesFacets(bucket, entry) {
@@ -187,41 +200,6 @@ function extractReadingFacets(bucket, entry) {
 
   const secondary = skill.secondary
   if (secondary && typeof secondary === 'string') bucket.secondarySkills.add(secondary)
-}
-
-/**
- * I16·C — merge verb-profile sidecar axes into EXISTING grammarFill buckets.
- *
- * Deliberately NOT a parallel analysisConfig: a second config for the same
- * groupId would clobber the grammarFill bucket via the per-config index.set
- * below. Instead this augments the bucket the grammar-fill-analysis config
- * already built — so existing facetKeys/blankTypes/roles/groupType are preserved
- * by construction (MF-2), and only the 3 axes are added.
- *
- * @param {Map<string, object>} index - groupId → bucket (already populated)
- * @param {object} sidecarJson - parsed grammar-fill-verb-profile-v1.json
- * @param {Map<string, {groupId, groupType}>} questionToGroup
- */
-function mergeVerbProfileAxes(index, sidecarJson, questionToGroup) {
-  const blanks = sidecarJson?.blanks
-  if (!blanks || typeof blanks !== 'object') return
-
-  for (const [questionId, profile] of Object.entries(blanks)) {
-    const groupEntry = questionToGroup.get(String(questionId))
-    if (!groupEntry) continue
-    // verb profiles only belong to grammarFill groups
-    if (groupEntry.groupType !== 'grammarFill') continue
-
-    // Augment ONLY an existing bucket (built from the main grammar-fill analysis).
-    // A sidecar without its main analysis is an orphan — skip, never create a
-    // bucket that would lack groupType/facetKeys.
-    const bucket = index.get(groupEntry.groupId)
-    if (!bucket) continue
-
-    if (profile?.tense && typeof profile.tense === 'string') bucket.tenses.add(profile.tense)
-    if (profile?.voice && typeof profile.voice === 'string') bucket.voices.add(profile.voice)
-    if (profile?.agreement && typeof profile.agreement === 'string') bucket.agreements.add(profile.agreement)
-  }
 }
 
 // ─── Step 2: Full index over paper-assets ─────────────────────────────────────
@@ -286,16 +264,6 @@ export function createTeachingFacetIndex({ paperAssetsDir, warn = console.warn }
           for (const [groupId, facets] of groupFacets) {
             // Tag with groupType for query filtering
             index.set(groupId, { ...facets, groupType: config.groupType })
-          }
-        }
-
-        // I16·C: merge verb-profile axes into the grammarFill buckets built above.
-        // Not a parallel config (would clobber); augments the existing bucket.
-        const verbProfilePath = path.join(baseDir, 'analyses', VERB_PROFILE_SIDECAR_FILENAME)
-        if (existsSync(verbProfilePath)) {
-          const sidecar = readJsonFile(verbProfilePath)
-          if (sidecar?.schemaVersion === VERB_PROFILE_SCHEMA_VERSION && sidecar?.paperId === paperId) {
-            mergeVerbProfileAxes(index, sidecar, questionToGroup)
           }
         }
       } catch (error) {

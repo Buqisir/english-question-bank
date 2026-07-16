@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2021-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -74,7 +74,7 @@
       "blankNo": 58,
       "blankType": "given",
       "hint": "person",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.genitive",
       "answer": "person's",
       "role": null,
       "path": null,
@@ -119,7 +119,10 @@
           "relation": "前一并列分句用一般现在时被动 is calculated，呼应本空同样用一般现在时被动。"
         }
       ],
-      "teachingNote": "判谓语动词三步：认主语数→主语是动作承受者用被动→陈述事实用一般现在时。"
+      "teachingNote": "判谓语动词三步：认主语数→主语是动作承受者用被动→陈述事实用一般现在时。",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-zj-2021-jan-060": {
       "blankId": "blank-zj-2021-jan-060",
@@ -171,7 +174,10 @@
           "relation": "段首过去时段状语统领全段，定一般过去时，be 用 was。"
         }
       ],
-      "teachingNote": "判谓语先认主语数，再用时间状语锁时态：过去时段用一般过去时。"
+      "teachingNote": "判谓语先认主语数，再用时间状语锁时态：过去时段用一般过去时。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2021-jan-062": {
       "blankId": "blank-zj-2021-jan-062",
@@ -197,14 +203,15 @@
           "relation": "本分句已有谓语 had，study 不能再作谓语，只能用非谓语形式作定语。"
         }
       ],
-      "teachingNote": "句中已有谓语时，修饰名词的动词作非谓语；与被修饰名词是被动关系用过去分词。"
+      "teachingNote": "句中已有谓语时，修饰名词的动词作非谓语；与被修饰名词是被动关系用过去分词。",
+      "form": "done"
     },
     "q-zj-2021-jan-063": {
       "blankId": "blank-zj-2021-jan-063",
       "blankNo": 63,
       "blankType": "given",
       "hint": "sharp",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "sharply",
       "role": null,
       "path": null,
@@ -243,14 +250,15 @@
           "relation": "主句已有谓语 may be，live 只能作非谓语修饰 people。"
         }
       ],
-      "teachingNote": "已有谓语时修饰名词的动词作非谓语；与名词是主动关系用现在分词。"
+      "teachingNote": "已有谓语时修饰名词的动词作非谓语；与名词是主动关系用现在分词。",
+      "form": "doing"
     },
     "q-zj-2021-jan-065": {
       "blankId": "blank-zj-2021-jan-065",
       "blankNo": 65,
       "blankType": "given",
       "hint": "low",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "lower",
       "role": null,
       "path": null,

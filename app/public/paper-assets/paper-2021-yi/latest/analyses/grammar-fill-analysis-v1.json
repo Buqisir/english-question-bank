@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2021-yi",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -22,7 +22,7 @@
       "blankNo": 61,
       "blankType": "given",
       "hint": "educate",
-      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
       "answer": "educated",
       "role": null,
       "path": null,
@@ -48,7 +48,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "develop",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "development",
       "role": null,
       "path": null,
@@ -179,14 +179,15 @@
           "relation": "介词 of 支配该动词，后接动名词作宾语。"
         }
       ],
-      "teachingNote": "介词后接动词一律用动名词 -ing 形式作宾语。"
+      "teachingNote": "介词后接动词一律用动名词 -ing 形式作宾语。",
+      "form": "doing"
     },
     "q-2021-yi-068": {
       "blankId": "blank-2021-yi-068",
       "blankNo": 68,
       "blankType": "given",
       "hint": "finance",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "financial",
       "role": null,
       "path": null,
@@ -206,7 +207,7 @@
       "blankNo": 69,
       "blankType": "given",
       "hint": "activity",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "Activities",
       "role": null,
       "path": null,
@@ -239,7 +240,8 @@
           "relation": "动词 aim 后接动词不定式 to do，构成 aim to have。"
         }
       ],
-      "teachingNote": "aim/intend/plan 等动词后接动词用不定式 to do。"
+      "teachingNote": "aim/intend/plan 等动词后接动词用不定式 to do。",
+      "form": "to-do"
     }
   }
 }

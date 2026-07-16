@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2024-i",
   "sourceAssetVersion": 5,
   "targetGroups": [
@@ -22,7 +22,7 @@
       "blankNo": 56,
       "blankType": "given",
       "hint": "engineer",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "engineering",
       "role": null,
       "path": null,
@@ -48,7 +48,7 @@
       "blankNo": 57,
       "blankType": "given",
       "hint": "function",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "functional",
       "role": null,
       "path": null,
@@ -81,7 +81,8 @@
           "relation": "主句已有谓语 open，空处表打开的目的，用 to-inf 作目的状语。"
         }
       ],
-      "teachingNote": "句子已有谓语、空处表目的时，非谓语用 to do 作目的状语。"
+      "teachingNote": "句子已有谓语、空处表目的时，非谓语用 to do 作目的状语。",
+      "form": "to-do"
     },
     "q-2024-i-059": {
       "blankId": "blank-2024-i-059",
@@ -90,7 +91,7 @@
       "hint": "close",
       "facetKey": "grammar-fill.given.verb.non-finite",
       "answer": "closed",
-      "role": "subject-complement",
+      "role": "predicative",
       "path": "fast",
       "reason": "stays 为系动词，本空作主语补足语描述 structure 的状态；结构被关闭，用过去分词 closed 表被动/状态（保持关闭着）。",
       "evidence": [
@@ -101,7 +102,8 @@
           "relation": "系动词 stays 后接表语，主语 structure 被关闭，用过去分词 closed。"
         }
       ],
-      "teachingNote": "系动词 stay/remain 后表被动状态时，用过去分词作表语。"
+      "teachingNote": "系动词 stay/remain 后表被动状态时，用过去分词作表语。",
+      "form": "done"
     },
     "q-2024-i-060": {
       "blankId": "blank-2024-i-060",
@@ -121,7 +123,10 @@
           "relation": "主语为第三人称单数，谓语用单数 walks。"
         }
       ],
-      "teachingNote": "整句缺谓语时本空为谓语动词，按主语数与时态确定动词形式。"
+      "teachingNote": "整句缺谓语时本空为谓语动词，按主语数与时态确定动词形式。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2024-i-061": {
       "blankId": "blank-2024-i-061",
@@ -148,7 +153,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "favourite",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "favorites",
       "role": null,
       "path": null,
@@ -220,7 +225,7 @@
       "blankNo": 65,
       "blankType": "given",
       "hint": "rich",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "richness",
       "role": null,
       "path": null,

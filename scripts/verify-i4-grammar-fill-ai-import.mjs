@@ -210,11 +210,11 @@ function gfPackageFixture() {
 function i4MinimalGrammarFillAnalysis(fix) {
   const gf = fix.parseResult.grammarFillGroup
   return {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    schemaVersion: 'grammar-fill-analysis-v2',
     paperId: fix.parseResult.paper.paperId,
     sourceAssetVersion: 1,
     targetGroups: [gf.groupId],
-    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v2', reviewStatus: 'reviewed' },
     groups: { [gf.groupId]: { overview: '语法填空概览。' } },
     blanks: Object.fromEntries(gf.questions.map((q) => [
       q.id,

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2024-jia",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -35,14 +35,15 @@
           "relation": "tend to do 固定搭配，锁定后接动词不定式 to catch。"
         }
       ],
-      "teachingNote": "看到 tend / want / hope 等后接动作时，先想固定搭配 tend to do，动词用 to 不定式。"
+      "teachingNote": "看到 tend / want / hope 等后接动作时，先想固定搭配 tend to do，动词用 to 不定式。",
+      "form": "to-do"
     },
     "q-2024-jia-062": {
       "blankId": "blank-2024-jia-062",
       "blankNo": 62,
       "blankType": "given",
       "hint": "treasure",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "treasures",
       "role": null,
       "path": null,
@@ -101,7 +102,10 @@
           "relation": "全文叙事时间为 1870 年，过去时语境锁定 be 用过去式 were。"
         }
       ],
-      "teachingNote": "缺谓语时定主语数 + 定时态：复数主语 + 过去语境 = were。"
+      "teachingNote": "缺谓语时定主语数 + 定时态：复数主语 + 过去语境 = were。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2024-jia-065": {
       "blankId": "blank-2024-jia-065",
@@ -121,7 +125,10 @@
           "relation": "情态动词 should 后接动词原形，构成 should + be done 被动结构。"
         }
       ],
-      "teachingNote": "情态动词后用原形；主语承受动作时用被动 be + 过去分词。"
+      "teachingNote": "情态动词后用原形；主语承受动作时用被动 be + 过去分词。",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
     },
     "q-2024-jia-066": {
       "blankId": "blank-2024-jia-066",
@@ -168,7 +175,7 @@
       "blankNo": 68,
       "blankType": "given",
       "hint": "complete",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "completion",
       "role": null,
       "path": null,
@@ -194,7 +201,7 @@
       "blankNo": 69,
       "blankType": "given",
       "hint": "large",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "largest",
       "role": null,
       "path": null,

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2024-ii",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -48,7 +48,7 @@
       "blankNo": 57,
       "blankType": "given",
       "hint": "theme",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "themes",
       "role": null,
       "path": null,
@@ -87,7 +87,10 @@
           "relation": "并列语境为过去时，故系动词用过去时 were。"
         }
       ],
-      "teachingNote": "缺谓语时先认主语数与时态，再定系动词形式。"
+      "teachingNote": "缺谓语时先认主语数与时态，再定系动词形式。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2024-ii-059": {
       "blankId": "blank-2024-ii-059",
@@ -127,7 +130,8 @@
           "relation": "被修饰名词 pavilion 与 inspire 是被动关系，用过去分词作定语。"
         }
       ],
-      "teachingNote": "非谓语作定语且与名词为被动关系 → 用过去分词。"
+      "teachingNote": "非谓语作定语且与名词为被动关系 → 用过去分词。",
+      "form": "done"
     },
     "q-2024-ii-061": {
       "blankId": "blank-2024-ii-061",
@@ -153,14 +157,17 @@
           "relation": "时间状语锁定一般过去时，故用 was built。"
         }
       ],
-      "teachingNote": "缺谓语 + 主语被动 + 过去时间 → 一般过去时被动 was built。"
+      "teachingNote": "缺谓语 + 主语被动 + 过去时间 → 一般过去时被动 was built。",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-2024-ii-062": {
       "blankId": "blank-2024-ii-062",
       "blankNo": 62,
       "blankType": "given",
       "hint": "visible",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "visibility",
       "role": null,
       "path": null,
@@ -193,7 +200,8 @@
           "relation": "be amazed to do 固定搭配，需用不定式 to find。"
         }
       ],
-      "teachingNote": "be amazed to do 固定搭配 → 用不定式。"
+      "teachingNote": "be amazed to do 固定搭配 → 用不定式。",
+      "form": "to-do"
     },
     "q-2024-ii-064": {
       "blankId": "blank-2024-ii-064",
@@ -213,7 +221,8 @@
           "relation": "逻辑主语 Edmondson 主动发出 recall 动作，用现在分词作状语。"
         }
       ],
-      "teachingNote": "句首作状语且与逻辑主语为主动关系 → 用现在分词。"
+      "teachingNote": "句首作状语且与逻辑主语为主动关系 → 用现在分词。",
+      "form": "doing"
     },
     "q-2024-ii-065": {
       "blankId": "blank-2024-ii-065",

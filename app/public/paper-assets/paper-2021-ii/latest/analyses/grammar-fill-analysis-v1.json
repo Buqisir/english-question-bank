@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2021-ii",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -61,7 +61,8 @@
           "relation": "逻辑主语 sea animals 主动发出 think 的动作，且主句已有谓语 eat，本空只能用非谓语。"
         }
       ],
-      "teachingNote": "主句已有谓语、再添动作作伴随状语且逻辑主语主动时，用现在分词 -ing。"
+      "teachingNote": "主句已有谓语、再添动作作伴随状语且逻辑主语主动时，用现在分词 -ing。",
+      "form": "doing"
     },
     "q-2021-ii-058": {
       "blankId": "blank-2021-ii-058",
@@ -81,7 +82,8 @@
           "relation": "do something 之后接动作表目的，符合不定式作目的状语的条件。"
         }
       ],
-      "teachingNote": "表\"为了…\"的目的状语，且不定式条件成立时用 to do。"
+      "teachingNote": "表\"为了…\"的目的状语，且不定式条件成立时用 to do。",
+      "form": "to-do"
     },
     "q-2021-ii-059": {
       "blankId": "blank-2021-ii-059",
@@ -134,7 +136,7 @@
       "blankNo": 61,
       "blankType": "given",
       "hint": "harm",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "harmful",
       "role": null,
       "path": null,
@@ -154,7 +156,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "excite",
-      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
       "answer": "excited",
       "role": null,
       "path": null,
@@ -193,14 +195,17 @@
           "relation": "全文用一般过去时叙述，锁定 be 用过去式 was。"
         }
       ],
-      "teachingNote": "找主语中心词定单复数（One of … 谓语随 One），再按语境定时态。"
+      "teachingNote": "找主语中心词定单复数（One of … 谓语随 One），再按语境定时态。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2021-ii-064": {
       "blankId": "blank-2021-ii-064",
       "blankNo": 64,
       "blankType": "given",
       "hint": "represent",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "representative",
       "role": null,
       "path": null,

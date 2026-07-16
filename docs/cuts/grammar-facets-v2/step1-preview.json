@@ -1,0 +1,3298 @@
+{
+  "schemaVersion": "grammar-facets-v2-migrate-preview-v1",
+  "generatedAt": "2026-07-15",
+  "fileCount": 33,
+  "blankCount": 330,
+  "facetDistribution": {
+    "grammar-fill.given.verb.non-finite": 62,
+    "grammar-fill.given.verb.finite": 52,
+    "grammar-fill.no-hint.preposition": 29,
+    "grammar-fill.no-hint.article": 26,
+    "grammar-fill.no-hint.conjunction.coordinating": 25,
+    "grammar-fill.no-hint.conjunction.relative-clause": 20,
+    "grammar-fill.given.noun.number": 17,
+    "grammar-fill.given.conversion.noun-to-adjective": 15,
+    "grammar-fill.given.conversion.verb-to-noun": 14,
+    "grammar-fill.given.conversion.adjective-to-adverb": 13,
+    "grammar-fill.given.adjective.comparison": 12,
+    "grammar-fill.given.pronoun": 9,
+    "grammar-fill.given.conversion.adjective-to-noun": 8,
+    "grammar-fill.no-hint.conjunction.noun-clause": 8,
+    "grammar-fill.given.conversion.verb-to-adjective": 8,
+    "grammar-fill.no-hint.conjunction.adverbial-clause": 5,
+    "grammar-fill.given.noun.genitive": 3,
+    "grammar-fill.given.numeral": 2,
+    "grammar-fill.no-hint.pronoun": 1,
+    "grammar-fill.given.conversion.noun-to-noun": 1
+  },
+  "tenseDistribution": {
+    "other": 7,
+    "past": 25,
+    "present": 14,
+    "progressive": 1,
+    "present-perfect": 4,
+    "past-perfect": 1
+  },
+  "roleDistribution": {
+    "adverbial": 26,
+    "attributive": 17,
+    "object": 11,
+    "subject": 2,
+    "object-complement": 3,
+    "subject-complement": 2,
+    "predicative": 1
+  },
+  "suspectCount": 8,
+  "blanks": {
+    "q-2020-bing-061": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-061",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "whose",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2020-bing-062": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-062",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "fine",
+      "answer": "finest",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-2020-bing-063": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-063",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "choose",
+      "answer": "be chosen",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
+    },
+    "q-2020-bing-064": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-064",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "curious",
+      "answer": "curiosity",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2020-bing-065": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "hint": null,
+      "answer": "When,As",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause"
+    },
+    "q-2020-bing-066": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-066",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "point",
+      "answer": "pointed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2020-bing-067": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-067",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "find",
+      "answer": "to find",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2020-bing-068": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-068",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "gentle",
+      "answer": "gently",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2020-bing-069": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-069",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "surround",
+      "answer": "surrounding",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "doing"
+    },
+    "q-2020-bing-070": {
+      "paperId": "paper-2020-bing",
+      "questionId": "q-2020-bing-070",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "on",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2020-i-056": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-056",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "wealth",
+      "answer": "wealthy",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2020-i-057": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-057",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "or",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2020-i-058": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-058",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "form",
+      "answer": "formed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2020-i-059": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-059",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2020-i-060": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-060",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "call",
+      "answer": "are called",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-2020-i-061": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "is",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2020-i-062": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-062",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "they",
+      "answer": "themselves",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2020-i-063": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "walk",
+      "answer": "walking",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-2020-i-064": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-064",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "accurate",
+      "answer": "accuracy",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2020-i-065": {
+      "paperId": "paper-2020-i",
+      "questionId": "q-2020-i-065",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "for",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2020-ii-056": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "to begin",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2020-ii-057": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-057",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "educational",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2020-ii-058": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-058",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "requirement",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2020-ii-059": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-059",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "professions",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2020-ii-060": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-060",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "that",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2020-ii-061": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-061",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "a",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2020-ii-062": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2020-ii-063": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "hint": null,
+      "answer": "is",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause"
+    },
+    "q-2020-ii-064": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-064",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "hint": null,
+      "answer": "are encouraged",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause"
+    },
+    "q-2020-ii-065": {
+      "paperId": "paper-2020-ii",
+      "questionId": "q-2020-ii-065",
+      "oldFacetKey": "grammar-fill.no-hint.pronoun",
+      "hint": null,
+      "answer": "our",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.pronoun"
+    },
+    "q-2020-jia-061": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "were",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2020-jia-062": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "hint": null,
+      "answer": "before",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause"
+    },
+    "q-2020-jia-063": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-063",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "exception",
+      "answer": "exceptional",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2020-jia-064": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-064",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "believe",
+      "answer": "belief",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2020-jia-065": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-065",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "prepare",
+      "answer": "prepares",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2020-jia-066": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-066",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "a",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2020-jia-067": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-067",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "live",
+      "answer": "to live",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2020-jia-068": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-068",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "mere",
+      "answer": "merely",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2020-jia-069": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-069",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "question",
+      "answer": "question",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2020-jia-070": {
+      "paperId": "paper-2020-jia",
+      "questionId": "q-2020-jia-070",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "without",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2021-i-056": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "What",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-2021-i-057": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-057",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "human",
+      "answer": "humans",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2021-i-058": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-058",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "undoubted",
+      "answer": "undoubtedly",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2021-i-059": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-059",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "hot",
+      "answer": "hotter",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-2021-i-060": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-060",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "astonish",
+      "answer": "astonished",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-2021-i-061": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "was",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2021-i-062": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2021-i-063": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "ache",
+      "answer": "aching",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "doing"
+    },
+    "q-2021-i-064": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-064",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "I",
+      "answer": "mine",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2021-i-065": {
+      "paperId": "paper-2021-i",
+      "questionId": "q-2021-i-065",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "a",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2021-ii-056": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-056",
+      "oldFacetKey": "grammar-fill.given.numeral",
+      "hint": "seven",
+      "answer": "seventh",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.numeral"
+    },
+    "q-2021-ii-057": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-057",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "think",
+      "answer": "thinking",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2021-ii-058": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-058",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "educate",
+      "answer": "to educate",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2021-ii-059": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-059",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2021-ii-060": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-060",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2021-ii-061": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-061",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "harm",
+      "answer": "harmful",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2021-ii-062": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-062",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "excite",
+      "answer": "excited",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-2021-ii-063": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-063",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "was",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2021-ii-064": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-064",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "represent",
+      "answer": "representative",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2021-ii-065": {
+      "paperId": "paper-2021-ii",
+      "questionId": "q-2021-ii-065",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "from",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2021-jia-061": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "build",
+      "answer": "was built",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-2021-jia-062": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-062",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "in",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2021-jia-063": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "walk",
+      "answer": "to walk",
+      "oldRole": "subject",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "subject",
+      "form": "to-do"
+    },
+    "q-2021-jia-064": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-064",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "spend",
+      "answer": "spending",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-2021-jia-065": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "good",
+      "answer": "better",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-2021-jia-066": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-066",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "hire",
+      "answer": "hired",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2021-jia-067": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-067",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "but",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2021-jia-068": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-068",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2021-jia-069": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-069",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "watchtower",
+      "answer": "watchtowers",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2021-jia-070": {
+      "paperId": "paper-2021-jia",
+      "questionId": "q-2021-jia-070",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "day",
+      "answer": "daily",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2021-yi-061": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-061",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "educate",
+      "answer": "educated",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-2021-yi-062": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-062",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "develop",
+      "answer": "development",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2021-yi-063": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-063",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "it",
+      "answer": "its",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2021-yi-064": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-064",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "until",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2021-yi-065": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-065",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2021-yi-066": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-066",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "of",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2021-yi-067": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-067",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "visit",
+      "answer": "visiting",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-2021-yi-068": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-068",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "finance",
+      "answer": "financial",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2021-yi-069": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-069",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "activity",
+      "answer": "Activities",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2021-yi-070": {
+      "paperId": "paper-2021-yi",
+      "questionId": "q-2021-yi-070",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "have",
+      "answer": "to have",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2022-i-056": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-056",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "cover",
+      "answer": "Covering",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2022-i-057": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-057",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2022-i-058": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-058",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "were",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2022-i-059": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-059",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "increase",
+      "answer": "to increase",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2022-i-060": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-060",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "design",
+      "answer": "is designed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-2022-i-061": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-061",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2022-i-062": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-062",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "population",
+      "answer": "populations",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2022-i-063": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-063",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "eventual",
+      "answer": "eventually",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2022-i-064": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-064",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "as",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2022-i-065": {
+      "paperId": "paper-2022-i",
+      "questionId": "q-2022-i-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "that",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2022-ii-056": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-056",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "fall",
+      "answer": "falling",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "doing"
+    },
+    "q-2022-ii-057": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-057",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "The",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2022-ii-058": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-058",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "sleep",
+      "answer": "asleep",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-2022-ii-059": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-059",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "see",
+      "answer": "to see",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2022-ii-060": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-060",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "accidental",
+      "answer": "accidentally",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2022-ii-061": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-061",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2022-ii-062": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-062",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "fix",
+      "answer": "was fixing",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "progressive",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2022-ii-063": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-063",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "throw",
+      "answer": "threw",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2022-ii-064": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-064",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "son",
+      "answer": "son's",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.genitive"
+    },
+    "q-2022-ii-065": {
+      "paperId": "paper-2022-ii",
+      "questionId": "q-2022-ii-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "how",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-2022-jia-061": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-061",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "journey",
+      "answer": "to journey",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "to-do"
+    },
+    "q-2022-jia-062": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "who",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2022-jia-063": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "hold",
+      "answer": "held",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-2022-jia-064": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-064",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "A",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2022-jia-065": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-065",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "protect",
+      "answer": "protection",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2022-jia-066": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-066",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "meaning",
+      "answer": "meaningful",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2022-jia-067": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-067",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "walk",
+      "answer": "has walked",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2022-jia-068": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-068",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "high",
+      "answer": "highest",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-2022-jia-069": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-069",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "from",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2022-jia-070": {
+      "paperId": "paper-2022-jia",
+      "questionId": "q-2022-jia-070",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "plan",
+      "answer": "planning",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2022-yi-061": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-061",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "by",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2022-yi-062": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-062",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2022-yi-063": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-063",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "address",
+      "answer": "addressed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2022-yi-064": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-064",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "large",
+      "answer": "largest",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-2022-yi-065": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "responsible",
+      "answer": "responsibility",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2022-yi-066": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-066",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "share",
+      "answer": "shared",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-2022-yi-067": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-067",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2022-yi-068": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-068",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "strengthen",
+      "answer": "To strengthen",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2022-yi-069": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-069",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "invite",
+      "answer": "inviting",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2022-yi-070": {
+      "paperId": "paper-2022-yi",
+      "questionId": "q-2022-yi-070",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "it",
+      "answer": "its",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2023-i-056": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-056",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "taste",
+      "answer": "tasty",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-2023-i-057": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-057",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "bite",
+      "answer": "to bite",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "to-do"
+    },
+    "q-2023-i-058": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-058",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "or",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2023-i-059": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-059",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "recognize",
+      "answer": "recognized",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-2023-i-060": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-060",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "by",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2023-i-061": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-061",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "lift",
+      "answer": "to be lifted",
+      "oldRole": "object-complement",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object-complement",
+      "form": "to-do"
+    },
+    "q-2023-i-062": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-062",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "they",
+      "answer": "their",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2023-i-063": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-063",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "a",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2023-i-064": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-064",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "rare",
+      "answer": "rarely",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2023-i-065": {
+      "paperId": "paper-2023-i",
+      "questionId": "q-2023-i-065",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "want",
+      "answer": "wanting",
+      "oldRole": "subject-complement",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "subject-complement",
+      "form": "doing"
+    },
+    "q-2023-ii-056": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-056",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "arrive",
+      "answer": "arrival",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2023-ii-057": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-057",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "confidence",
+      "answer": "confident",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2023-ii-058": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-058",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "with",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2023-ii-059": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-059",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2023-ii-060": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-060",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "visit",
+      "answer": "visiting",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "doing"
+    },
+    "q-2023-ii-061": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-061",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "interview",
+      "answer": "interviews",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2023-ii-062": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "why",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-2023-ii-063": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-063",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "basic",
+      "answer": "Basically",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2023-ii-064": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-064",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2023-ii-065": {
+      "paperId": "paper-2023-ii",
+      "questionId": "q-2023-ii-065",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "wish",
+      "answer": "wished",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-2023-jia-061": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-061",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "teach",
+      "answer": "to teach",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2023-jia-062": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-062",
+      "oldFacetKey": "grammar-fill.given.numeral",
+      "hint": "six",
+      "answer": "sixth",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.numeral"
+    },
+    "q-2023-jia-063": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "hint": null,
+      "answer": "as",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.adverbial-clause"
+    },
+    "q-2023-jia-064": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-064",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "where",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2023-jia-065": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-065",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "borrow",
+      "answer": "borrowing",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2023-jia-066": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-066",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "intend",
+      "answer": "intended",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-2023-jia-067": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-067",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "difference",
+      "answer": "Different",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2023-jia-068": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-068",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "for",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2023-jia-069": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-069",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "warn",
+      "answer": "warning",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2023-jia-070": {
+      "paperId": "paper-2023-jia",
+      "questionId": "q-2023-jia-070",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "employ",
+      "answer": "be employed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
+    },
+    "q-2023-yi-061": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-061",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "to",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2023-yi-062": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-062",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "build",
+      "answer": "built",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-2023-yi-063": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2023-yi-064": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-064",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "wonder",
+      "answer": "wonders",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2023-yi-065": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "but",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2023-yi-066": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-066",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "visit",
+      "answer": "Having visited",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "done"
+    },
+    "q-2023-yi-067": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-067",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "amaze",
+      "answer": "was amazed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-2023-yi-068": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-068",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "record",
+      "answer": "recording",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2023-yi-069": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-069",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "remark",
+      "answer": "remarkable",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2023-yi-070": {
+      "paperId": "paper-2023-yi",
+      "questionId": "q-2023-yi-070",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "mean",
+      "answer": "means",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2024-i-056": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-056",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "engineer",
+      "answer": "engineering",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2024-i-057": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-057",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "function",
+      "answer": "functional",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2024-i-058": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-058",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "give",
+      "answer": "to give",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2024-i-059": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-059",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "close",
+      "answer": "closed",
+      "oldRole": "subject-complement",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "predicative",
+      "form": "done"
+    },
+    "q-2024-i-060": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-060",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "walk",
+      "answer": "walks",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2024-i-061": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-061",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2024-i-062": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-062",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "favourite",
+      "answer": "favorites",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2024-i-063": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-063",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "as",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2024-i-064": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-064",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2024-i-065": {
+      "paperId": "paper-2024-i",
+      "questionId": "q-2024-i-065",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "rich",
+      "answer": "richness",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2024-ii-056": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "who",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2024-ii-057": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-057",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "theme",
+      "answer": "themes",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2024-ii-058": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-058",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "were",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2024-ii-059": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-059",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "to",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2024-ii-060": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-060",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "inspire",
+      "answer": "inspired",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-2024-ii-061": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "build",
+      "answer": "was built",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-2024-ii-062": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-062",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "visible",
+      "answer": "visibility",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2024-ii-063": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "find",
+      "answer": "to find",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-2024-ii-064": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-064",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "recall",
+      "answer": "Recalling",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-2024-ii-065": {
+      "paperId": "paper-2024-ii",
+      "questionId": "q-2024-ii-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2024-jia-061": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-061",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "catch",
+      "answer": "to catch",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "to-do"
+    },
+    "q-2024-jia-062": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-062",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "treasure",
+      "answer": "treasures",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2024-jia-063": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "what",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-2024-jia-064": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-064",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "were",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2024-jia-065": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-065",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "do",
+      "answer": "be done",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
+    },
+    "q-2024-jia-066": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-066",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "it",
+      "answer": "its",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2024-jia-067": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-067",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "for",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2024-jia-068": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-068",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "complete",
+      "answer": "completion",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2024-jia-069": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-069",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "large",
+      "answer": "largest",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-2024-jia-070": {
+      "paperId": "paper-2024-jia",
+      "questionId": "q-2024-jia-070",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2025-i-056": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2025-i-057": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-057",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2025-i-058": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-058",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "present",
+      "answer": "to present",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "to-do"
+    },
+    "q-2025-i-059": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-059",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "guide",
+      "answer": "guidance",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-2025-i-060": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-060",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "reveal",
+      "answer": "are revealed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-2025-i-061": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "try",
+      "answer": "tries",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2025-i-062": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-062",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "by",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2025-i-063": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-063",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "strategy",
+      "answer": "strategic",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2025-i-064": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-064",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2025-i-065": {
+      "paperId": "paper-2025-i",
+      "questionId": "q-2025-i-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "digital",
+      "answer": "digitally",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-2025-ii-056": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "where",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2025-ii-057": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-057",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "center",
+      "answer": "central",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-2025-ii-058": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-058",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "for",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2025-ii-059": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-059",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-2025-ii-060": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-060",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "I",
+      "answer": "myself",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-2025-ii-061": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "is",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2025-ii-062": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-062",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "discover",
+      "answer": "to discover",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "to-do"
+    },
+    "q-2025-ii-063": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-063",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "absent",
+      "answer": "absence",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2025-ii-064": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-064",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "afternoon",
+      "answer": "afternoons",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2025-ii-065": {
+      "paperId": "paper-2025-ii",
+      "questionId": "q-2025-ii-065",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "leave",
+      "answer": "left",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-2026-i-056": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-056",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "hold",
+      "answer": "to be held",
+      "oldRole": "subject",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "subject",
+      "form": "to-do"
+    },
+    "q-2026-i-057": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-057",
+      "oldFacetKey": "grammar-fill.given.derivation.adjective-to-noun",
+      "hint": "frequent",
+      "answer": "frequency",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-2026-i-058": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-058",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-2026-i-059": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-059",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "were",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-2026-i-060": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-060",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "necessity",
+      "answer": "necessities",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-2026-i-061": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-061",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "for",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-2026-i-062": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-062",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "draw",
+      "answer": "Drawn",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "done"
+    },
+    "q-2026-i-063": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "that",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-2026-i-064": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-064",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "head",
+      "answer": "heading",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-2026-i-065": {
+      "paperId": "paper-2026-i",
+      "questionId": "q-2026-i-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "cheap",
+      "answer": "cheaper",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-960d0f8d-056": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "or",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-960d0f8d-057": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-057",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "absorb",
+      "answer": "being absorbed",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-960d0f8d-058": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-058",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "study",
+      "answer": "Studies",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-960d0f8d-059": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-059",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "Whether",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-960d0f8d-060": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-060",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "recommend",
+      "answer": "recommended",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-960d0f8d-061": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "are",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-960d0f8d-062": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-062",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "sense",
+      "answer": "sensible",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-960d0f8d-063": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-960d0f8d-064": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-064",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "by",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-960d0f8d-065": {
+      "paperId": "paper-960d0f8d",
+      "questionId": "q-960d0f8d-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "easy",
+      "answer": "easier",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-zj-2020-jan-056": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-056",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "was",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2020-jan-057": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-057",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "increase",
+      "answer": "to increase",
+      "oldRole": "subject-complement",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "subject-complement",
+      "form": "to-do"
+    },
+    "q-zj-2020-jan-058": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-058",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "number",
+      "answer": "numbers",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-zj-2020-jan-059": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-059",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "by",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2020-jan-060": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-060",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "compare",
+      "answer": "compared",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "done"
+    },
+    "q-zj-2020-jan-061": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-061",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "old",
+      "answer": "older",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-zj-2020-jan-062": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-062",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "particular",
+      "answer": "particularly",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-zj-2020-jan-063": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-063",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "a",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2020-jan-064": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-064",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "place",
+      "answer": "be placed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
+    },
+    "q-zj-2020-jan-065": {
+      "paperId": "paper-zj-2020-jan",
+      "questionId": "q-zj-2020-jan-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2020-jul-056": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-056",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "in",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2020-jul-057": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-057",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "what",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-zj-2020-jul-058": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-058",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "than",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2020-jul-059": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-059",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "need",
+      "answer": "was needed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-zj-2020-jul-060": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-060",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "change",
+      "answer": "to change",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "to-do"
+    },
+    "q-zj-2020-jul-061": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "discover",
+      "answer": "had discovered",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past-perfect",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-zj-2020-jul-062": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-062",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "season",
+      "answer": "seasons",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-zj-2020-jul-063": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "make",
+      "answer": "making",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-zj-2020-jul-064": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-064",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2020-jul-065": {
+      "paperId": "paper-zj-2020-jul",
+      "questionId": "q-zj-2020-jul-065",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "mean",
+      "answer": "meant",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-zj-2021-jan-056": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2021-jan-057": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-057",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "that",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-zj-2021-jan-058": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-058",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "person",
+      "answer": "person's",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.genitive"
+    },
+    "q-zj-2021-jan-059": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-059",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "consider",
+      "answer": "is considered",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-zj-2021-jan-060": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-060",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "by",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2021-jan-061": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "was",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2021-jan-062": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-062",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "study",
+      "answer": "studied",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-zj-2021-jan-063": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-063",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "sharp",
+      "answer": "sharply",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-zj-2021-jan-064": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-064",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "live",
+      "answer": "living",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "doing"
+    },
+    "q-zj-2021-jan-065": {
+      "paperId": "paper-zj-2021-jan",
+      "questionId": "q-zj-2021-jan-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "low",
+      "answer": "lower",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-zj-2021-jun-056": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-056",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "prove",
+      "answer": "has proved",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2021-jun-057": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-057",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "for",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2021-jun-058": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-058",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "marry",
+      "answer": "marriage",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-zj-2021-jun-059": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-059",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "small",
+      "answer": "smaller",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-zj-2021-jun-060": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-060",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "paint",
+      "answer": "was painted",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-zj-2021-jun-061": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-061",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "she",
+      "answer": "herself",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-zj-2021-jun-062": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "neither",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2021-jun-063": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "plant",
+      "answer": "to plant",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-zj-2021-jun-064": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-064",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "The",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2021-jun-065": {
+      "paperId": "paper-zj-2021-jun",
+      "questionId": "q-zj-2021-jun-065",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "sell",
+      "answer": "sold",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-zj-2022-jan-056": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "who",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-zj-2022-jan-057": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-057",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "view",
+      "answer": "is viewed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-zj-2022-jan-058": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-058",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "are",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2022-jan-059": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-059",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "change",
+      "answer": "changing",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-zj-2022-jan-060": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-060",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "rough",
+      "answer": "roughly",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-zj-2022-jan-061": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "promise",
+      "answer": "have promised",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2022-jan-062": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-062",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "whether",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-zj-2022-jan-063": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-063",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2022-jan-064": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-064",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "invite",
+      "answer": "invitation",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-zj-2022-jan-065": {
+      "paperId": "paper-zj-2022-jan",
+      "questionId": "q-zj-2022-jan-065",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "continue",
+      "answer": "to continue",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "to-do"
+    },
+    "q-zj-2022-jun-056": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-056",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "appreciate",
+      "answer": "be appreciated",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
+    },
+    "q-zj-2022-jun-057": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-057",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "do",
+      "answer": "to do",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object-complement",
+      "form": "to-do"
+    },
+    "q-zj-2022-jun-058": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-058",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "photograph",
+      "answer": "photographer",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-noun"
+    },
+    "q-zj-2022-jun-059": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-059",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2022-jun-060": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-060",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "hint": "exist",
+      "answer": "existing",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-adjective"
+    },
+    "q-zj-2022-jun-061": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-061",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "sight",
+      "answer": "sighted",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-zj-2022-jun-062": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-062",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "at",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2022-jun-063": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-063",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "notice",
+      "answer": "noticed",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-zj-2022-jun-064": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-064",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "independent",
+      "answer": "independence",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-noun"
+    },
+    "q-zj-2022-jun-065": {
+      "paperId": "paper-zj-2022-jun",
+      "questionId": "q-zj-2022-jun-065",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2023-jan-056": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-056",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2023-jan-057": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-057",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "original",
+      "answer": "originally",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    },
+    "q-zj-2023-jan-058": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-058",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "surround",
+      "answer": "surrounded",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-zj-2023-jan-059": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-059",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "permit",
+      "answer": "were permitted",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
+    },
+    "q-zj-2023-jan-060": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-060",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "feature",
+      "answer": "featured",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
+    },
+    "q-zj-2023-jan-061": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-061",
+      "oldFacetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "hint": "space",
+      "answer": "spacious",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.noun-to-adjective"
+    },
+    "q-zj-2023-jan-062": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-062",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "simple",
+      "answer": "simpler",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.adjective.comparison"
+    },
+    "q-zj-2023-jan-063": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-063",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "as",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2023-jan-064": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-064",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "event",
+      "answer": "events",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-zj-2023-jan-065": {
+      "paperId": "paper-zj-2023-jan",
+      "questionId": "q-zj-2023-jan-065",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2024-jan-056": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-056",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "benefit",
+      "answer": "to benefit",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-zj-2024-jan-057": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-057",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "or",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2024-jan-058": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-058",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "that",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-zj-2024-jan-059": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-059",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "hint": null,
+      "answer": "what",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.noun-clause"
+    },
+    "q-zj-2024-jan-060": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-060",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "criticize",
+      "answer": "criticism",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-zj-2024-jan-061": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-061",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "offer",
+      "answer": "be offered",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
+    },
+    "q-zj-2024-jan-062": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-062",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "start",
+      "answer": "have started",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2024-jan-063": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-063",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "design",
+      "answer": "designed",
+      "oldRole": "attributive",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "attributive",
+      "form": "done"
+    },
+    "q-zj-2024-jan-064": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-064",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2024-jan-065": {
+      "paperId": "paper-zj-2024-jan",
+      "questionId": "q-zj-2024-jan-065",
+      "oldFacetKey": "grammar-fill.given.pronoun",
+      "hint": "one",
+      "answer": "ones",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.pronoun"
+    },
+    "q-zj-2025-jan-056": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-056",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "a",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2025-jan-057": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-057",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "time",
+      "answer": "times",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-zj-2025-jan-058": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-058",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "on",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2025-jan-059": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-059",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2025-jan-060": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-060",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "rent",
+      "answer": "to rent",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "to-do"
+    },
+    "q-zj-2025-jan-061": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-061",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "solve",
+      "answer": "solution",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-zj-2025-jan-062": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-062",
+      "oldFacetKey": "grammar-fill.given.verb.finite",
+      "hint": "be",
+      "answer": "is",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.verb.finite",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
+    },
+    "q-zj-2025-jan-063": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-063",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "which",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-zj-2025-jan-064": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-064",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "people",
+      "answer": "people’s",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.genitive"
+    },
+    "q-zj-2025-jan-065": {
+      "paperId": "paper-zj-2025-jan",
+      "questionId": "q-zj-2025-jan-065",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "return",
+      "answer": "returning",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-zj-2026-jan-056": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-056",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "finish",
+      "answer": "to finish",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object-complement",
+      "form": "to-do"
+    },
+    "q-zj-2026-jan-057": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-057",
+      "oldFacetKey": "grammar-fill.no-hint.preposition",
+      "hint": null,
+      "answer": "in",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.preposition"
+    },
+    "q-zj-2026-jan-058": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-058",
+      "oldFacetKey": "grammar-fill.given.noun",
+      "hint": "number",
+      "answer": "numbers",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.noun.number"
+    },
+    "q-zj-2026-jan-059": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-059",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "watch",
+      "answer": "watching",
+      "oldRole": "adverbial",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "adverbial",
+      "form": "doing"
+    },
+    "q-zj-2026-jan-060": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-060",
+      "oldFacetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "hint": "excite",
+      "answer": "excitement",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.verb-to-noun"
+    },
+    "q-zj-2026-jan-061": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-061",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "hint": null,
+      "answer": "that",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.relative-clause"
+    },
+    "q-zj-2026-jan-062": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-062",
+      "oldFacetKey": "grammar-fill.given.verb.non-finite",
+      "hint": "push",
+      "answer": "being pushed",
+      "oldRole": "object",
+      "newFacetKey": "grammar-fill.given.verb.non-finite",
+      "role": "object",
+      "form": "doing"
+    },
+    "q-zj-2026-jan-063": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-063",
+      "oldFacetKey": "grammar-fill.no-hint.article",
+      "hint": null,
+      "answer": "the",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.article"
+    },
+    "q-zj-2026-jan-064": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-064",
+      "oldFacetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "hint": null,
+      "answer": "and",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.no-hint.conjunction.coordinating"
+    },
+    "q-zj-2026-jan-065": {
+      "paperId": "paper-zj-2026-jan",
+      "questionId": "q-zj-2026-jan-065",
+      "oldFacetKey": "grammar-fill.given.adjective",
+      "hint": "seeming",
+      "answer": "seemingly",
+      "oldRole": null,
+      "newFacetKey": "grammar-fill.given.conversion.adjective-to-adverb"
+    }
+  }
+}

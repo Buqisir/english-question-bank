@@ -27,7 +27,8 @@ const analysisConfigs = [
     entryMapKey: 'blanks',
   },
   {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    // D1 (grammar-facets-v2): schemaVersion bumped to v2, fileName unchanged.
+    schemaVersion: 'grammar-fill-analysis-v2',
     fileName: 'grammar-fill-analysis-v1.json',
     groupType: 'grammarFill',
     label: '语法解析',

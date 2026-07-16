@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2025-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -42,7 +42,7 @@
       "blankNo": 57,
       "blankType": "given",
       "hint": "time",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "times",
       "role": null,
       "path": null,
@@ -115,14 +115,15 @@
           "relation": "rather than 后接原形 purchase，与之并列对比要求不定式 to rent。"
         }
       ],
-      "teachingNote": "rather than 连接对比并列时，前后形式对应，宜用 to do。"
+      "teachingNote": "rather than 连接对比并列时，前后形式对应，宜用 to do。",
+      "form": "to-do"
     },
     "q-zj-2025-jan-061": {
       "blankId": "blank-zj-2025-jan-061",
       "blankNo": 61,
       "blankType": "given",
       "hint": "solve",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "solution",
       "role": null,
       "path": null,
@@ -155,7 +156,10 @@
           "relation": "主语第三人称单数，一般现在时谓语用 is。"
         }
       ],
-      "teachingNote": "找主语数与人称，陈述事实用一般现在时定 be 形式。"
+      "teachingNote": "找主语数与人称，陈述事实用一般现在时定 be 形式。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2025-jan-063": {
       "blankId": "blank-zj-2025-jan-063",
@@ -182,7 +186,7 @@
       "blankNo": 64,
       "blankType": "given",
       "hint": "people",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.genitive",
       "answer": "people’s",
       "role": null,
       "path": null,
@@ -215,7 +219,8 @@
           "relation": "mean doing 表\"意味着\"，支配动名词，故用 returning。"
         }
       ],
-      "teachingNote": "mean doing sth 意为\"意味着…\"，后接动名词。"
+      "teachingNote": "mean doing sth 意为\"意味着…\"，后接动名词。",
+      "form": "doing"
     }
   }
 }

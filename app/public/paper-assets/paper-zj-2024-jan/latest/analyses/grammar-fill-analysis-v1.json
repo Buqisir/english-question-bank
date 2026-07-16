@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2024-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -41,7 +41,8 @@
           "relation": "buying extra 已是动名词主语，空格不再作谓语，只能作目的状语用 to do。"
         }
       ],
-      "teachingNote": "动词前后无谓语缺口、表\"为了…\"目的时，优先用动词不定式 to do 作状语。"
+      "teachingNote": "动词前后无谓语缺口、表\"为了…\"目的时，优先用动词不定式 to do 作状语。",
+      "form": "to-do"
     },
     "q-zj-2024-jan-057": {
       "blankId": "blank-zj-2024-jan-057",
@@ -108,7 +109,7 @@
       "blankNo": 60,
       "blankType": "given",
       "hint": "criticize",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "criticism",
       "role": null,
       "path": null,
@@ -141,7 +142,10 @@
           "relation": "主语 they 指香肠是被提供的对象，could 后接被动 be done，定为 be offered。"
         }
       ],
-      "teachingNote": "情态动词后主语为受动者时用\"情态 + be + 过去分词\"被动式。"
+      "teachingNote": "情态动词后主语为受动者时用\"情态 + be + 过去分词\"被动式。",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
     },
     "q-zj-2024-jan-062": {
       "blankId": "blank-zj-2024-jan-062",
@@ -167,7 +171,10 @@
           "relation": "主语为复数，助动词用 have。"
         }
       ],
-      "teachingNote": "见 over the last … years 等延续标志，谓语用现在完成时。"
+      "teachingNote": "见 over the last … years 等延续标志，谓语用现在完成时。",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2024-jan-063": {
       "blankId": "blank-zj-2024-jan-063",
@@ -187,7 +194,8 @@
           "relation": "被修饰名词 packs 与 design 为被动关系，非谓语作定语用过去分词 designed。"
         }
       ],
-      "teachingNote": "名词后非谓语作定语、且与动词为被动关系时，用过去分词。"
+      "teachingNote": "名词后非谓语作定语、且与动词为被动关系时，用过去分词。",
+      "form": "done"
     },
     "q-zj-2024-jan-064": {
       "blankId": "blank-zj-2024-jan-064",

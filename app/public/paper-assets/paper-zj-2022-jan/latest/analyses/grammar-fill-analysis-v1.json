@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2022-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -67,7 +67,10 @@
           "relation": "view sth as 结构里被看待的对象即主语，故用被动语态。"
         }
       ],
-      "teachingNote": "整句无谓语就让提示动词作谓语；view sb/sth as 中被看待者作主语时用被动。"
+      "teachingNote": "整句无谓语就让提示动词作谓语；view sb/sth as 中被看待者作主语时用被动。",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-zj-2022-jan-058": {
       "blankId": "blank-zj-2022-jan-058",
@@ -93,7 +96,10 @@
           "relation": "now + V-ing 表示现在进行，需现在时 be 助动词。"
         }
       ],
-      "teachingNote": "be 后接 V-ing 构成进行时，be 的形式由主语数和时间状语共同决定。"
+      "teachingNote": "be 后接 V-ing 构成进行时，be 的形式由主语数和时间状语共同决定。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2022-jan-059": {
       "blankId": "blank-zj-2022-jan-059",
@@ -119,14 +125,15 @@
           "relation": "逻辑主语主动改变自己的行为，用主动的现在分词 changing。"
         }
       ],
-      "teachingNote": "and 连接的并列非谓语要前后同形：前面是 V-ing，后面也用 V-ing。"
+      "teachingNote": "and 连接的并列非谓语要前后同形：前面是 V-ing，后面也用 V-ing。",
+      "form": "doing"
     },
     "q-zj-2022-jan-060": {
       "blankId": "blank-zj-2022-jan-060",
       "blankNo": 60,
       "blankType": "given",
       "hint": "rough",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "roughly",
       "role": null,
       "path": null,
@@ -165,7 +172,10 @@
           "relation": "since + 过去时间点，主句须用现在完成时 have promised。"
         }
       ],
-      "teachingNote": "看到 since 引导的时间状语，主句锁定现在完成时；主语复数用 have。"
+      "teachingNote": "看到 since 引导的时间状语，主句锁定现在完成时；主语复数用 have。",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2022-jan-062": {
       "blankId": "blank-zj-2022-jan-062",
@@ -224,7 +234,7 @@
       "blankNo": 64,
       "blankType": "given",
       "hint": "invite",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "invitation",
       "role": null,
       "path": null,
@@ -269,7 +279,8 @@
           "relation": "plan 只接不定式作宾语，锁定 to continue。"
         }
       ],
-      "teachingNote": "plan/decide/hope 等只接不定式作宾语：plan to do sth。"
+      "teachingNote": "plan/decide/hope 等只接不定式作宾语：plan to do sth。",
+      "form": "to-do"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2022-jun",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -41,7 +41,10 @@
           "relation": "by 引出动作发出者，进一步印证谓语为被动语态。"
         }
       ],
-      "teachingNote": "情态动词后若主语是动作承受者，用 can be + 过去分词。"
+      "teachingNote": "情态动词后若主语是动作承受者，用 can be + 过去分词。",
+      "tense": "other",
+      "voice": "passive",
+      "agreementSensitive": false
     },
     "q-zj-2022-jun-057": {
       "blankId": "blank-zj-2022-jun-057",
@@ -50,7 +53,7 @@
       "hint": "do",
       "facetKey": "grammar-fill.given.verb.non-finite",
       "answer": "to do",
-      "role": "object",
+      "role": "object-complement",
       "path": "fast",
       "reason": "tell sb (not) to do sth 为固定搭配，宾语补足语用动词不定式；否定词 not 置于 to 前，故填 to do。",
       "evidence": [
@@ -61,14 +64,15 @@
           "relation": "tell sb (not) to do 固定句型，锁定不定式作宾语补足语。"
         }
       ],
-      "teachingNote": "tell/ask/want sb to do 后接不定式；否定时 not 紧贴 to 之前。"
+      "teachingNote": "tell/ask/want sb to do 后接不定式；否定时 not 紧贴 to 之前。",
+      "form": "to-do"
     },
     "q-zj-2022-jun-058": {
       "blankId": "blank-zj-2022-jun-058",
       "blankNo": 58,
       "blankType": "given",
       "hint": "photograph",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.conversion.noun-to-noun",
       "answer": "photographer",
       "role": null,
       "path": null,
@@ -114,7 +118,7 @@
       "blankNo": 60,
       "blankType": "given",
       "hint": "exist",
-      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
       "answer": "existing",
       "role": null,
       "path": null,
@@ -140,7 +144,7 @@
       "blankNo": 61,
       "blankType": "given",
       "hint": "sight",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "sighted",
       "role": null,
       "path": null,
@@ -205,14 +209,17 @@
           "relation": "全文叙述为过去时（said），印证主句谓语用 noticed。"
         }
       ],
-      "teachingNote": "叙述过去发生的事，主句谓语随上下文用一般过去时。"
+      "teachingNote": "叙述过去发生的事，主句谓语随上下文用一般过去时。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     },
     "q-zj-2022-jun-064": {
       "blankId": "blank-zj-2022-jun-064",
       "blankNo": 64,
       "blankType": "given",
       "hint": "independent",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "independence",
       "role": null,
       "path": null,
