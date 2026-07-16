@@ -84,12 +84,13 @@ const REGISTRY_PATH = 'app/src/features/paper-intelligence/grammarFillFacetRegis
 assert('Step 0: registry file exists', existsSync(path.join(rootDir, REGISTRY_PATH)))
 
 const serverFacets = JSON.parse(
-  readSrc('server/paper-import-ai/grammar-fill-facets-v1.json'),
+  // D1 (grammar-facets-v2): drift guard now compares against the v2 registry (22 leaves).
+  readSrc('server/paper-import-ai/grammar-fill-facets-v2.json'),
 )
 const serverKeys = serverFacets.map((f) => f.facet_key).sort()
 const registryKeys = Object.keys(FACET_FRAMEWORKS).sort()
 
-assert('Step 0: registry has exactly 17 facets', registryKeys.length === 17,
+assert('Step 0: registry has exactly 22 facets', registryKeys.length === 22,
   `found: ${registryKeys.length}`)
 assert('Step 0: drift guard — registry keys EXACTLY equal server JSON keys',
   JSON.stringify(registryKeys) === JSON.stringify(serverKeys),
@@ -236,11 +237,15 @@ try {
     'grammar-fill.no-hint.preposition',
     NON_FINITE,
     'grammar-fill.no-hint.article',
-    'grammar-fill.given.noun',
+    // D1 (grammar-facets-v2): old given.noun/given.adjective/given.derivation.*
+    // retired — swapped to their v2 equivalents (given.noun.number / given.adjective.comparison
+    // / given.conversion.verb-to-noun) so this fixture still exercises a plain
+    // "given" registry lookup with no non-finite specifics.
+    'grammar-fill.given.noun.number',
     'grammar-fill.no-hint.conjunction.relative-clause',
-    'grammar-fill.given.adjective',
+    'grammar-fill.given.adjective.comparison',
     'grammar-fill.no-hint.pronoun',
-    'grammar-fill.given.derivation.verb-to-noun',
+    'grammar-fill.given.conversion.verb-to-noun',
     'grammar-fill.given.pronoun',
   ]
   function blankFor(qid, i) {
@@ -266,7 +271,7 @@ try {
   }
   const completeBlanks = Object.fromEntries(gfQuestionIds.map((qid, i) => [qid, blankFor(qid, i)]))
   const analysisComplete = {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    schemaVersion: 'grammar-fill-analysis-v2',
     paperId: PAPER_ID,
     sourceAssetVersion: 1,
     targetGroups: [GF_GROUP_ID],

@@ -61,20 +61,25 @@ function readRepoFile(relPath) {
 function assertPromptContract() {
   const prompt = readRepoFile('prompts/grammar-fill-analysis-v1.md')
 
-  // schemaVersion constant
-  assert('prompt names schemaVersion grammar-fill-analysis-v1', prompt.includes('grammar-fill-analysis-v1'))
+  // schemaVersion constant (D1 grammar-facets-v2: bumped to v2)
+  assert('prompt names schemaVersion grammar-fill-analysis-v2', prompt.includes('grammar-fill-analysis-v2'))
   // promptVersion
-  assert('prompt names promptVersion grammar-fill-analysis-v1', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v1'))
-  // All 17 leaf facet keys must be named
+  assert('prompt names promptVersion grammar-fill-analysis-v2', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v2'))
+  // All 22 leaf facet keys must be named (D1: 17 v1 leaves -> 22 v2 leaves)
   for (const leaf of [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
-    'grammar-fill.given.noun',
-    'grammar-fill.given.adjective',
-    'grammar-fill.given.derivation.noun-to-adj',
-    'grammar-fill.given.derivation.verb-to-noun',
-    'grammar-fill.given.derivation.verb-to-adj',
-    'grammar-fill.given.derivation.adjective-to-noun',
+    'grammar-fill.given.conversion.noun-to-noun',
+    'grammar-fill.given.conversion.noun-to-adjective',
+    'grammar-fill.given.conversion.noun-to-verb',
+    'grammar-fill.given.conversion.adjective-to-adverb',
+    'grammar-fill.given.conversion.adjective-to-noun',
+    'grammar-fill.given.conversion.verb-to-adjective',
+    'grammar-fill.given.conversion.verb-to-noun',
+    'grammar-fill.given.conversion.verb-to-adverb',
+    'grammar-fill.given.noun.number',
+    'grammar-fill.given.noun.genitive',
+    'grammar-fill.given.adjective.comparison',
     'grammar-fill.given.pronoun',
     'grammar-fill.given.numeral',
     'grammar-fill.no-hint.preposition',
@@ -110,20 +115,26 @@ function assertPromptContract() {
 // ============================================================
 
 function assertRegistryContract() {
-  const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v1.json')
+  // D1 (grammar-facets-v2): registry file bumped v1 (17 leaves) -> v2 (22 leaves).
+  const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json')
   const registry = JSON.parse(raw)
   assert('registry is an array', Array.isArray(registry))
-  assert('registry has exactly 17 leaves', registry.length === 17)
+  assert('registry has exactly 22 leaves', registry.length === 22)
 
   const EXPECTED_LEAVES = [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
-    'grammar-fill.given.noun',
-    'grammar-fill.given.adjective',
-    'grammar-fill.given.derivation.noun-to-adj',
-    'grammar-fill.given.derivation.verb-to-noun',
-    'grammar-fill.given.derivation.verb-to-adj',
-    'grammar-fill.given.derivation.adjective-to-noun',
+    'grammar-fill.given.conversion.noun-to-noun',
+    'grammar-fill.given.conversion.noun-to-adjective',
+    'grammar-fill.given.conversion.noun-to-verb',
+    'grammar-fill.given.conversion.adjective-to-adverb',
+    'grammar-fill.given.conversion.adjective-to-noun',
+    'grammar-fill.given.conversion.verb-to-adjective',
+    'grammar-fill.given.conversion.verb-to-noun',
+    'grammar-fill.given.conversion.verb-to-adverb',
+    'grammar-fill.given.noun.number',
+    'grammar-fill.given.noun.genitive',
+    'grammar-fill.given.adjective.comparison',
     'grammar-fill.given.pronoun',
     'grammar-fill.given.numeral',
     'grammar-fill.no-hint.preposition',
@@ -148,7 +159,7 @@ function assertRegistryContract() {
   assert('all no-hint.* leaves have blank_type no-hint', noHintLeaves.every((f) => f.blank_type === 'no-hint'))
 
   // No parent nodes in registry
-  const PARENT_KEYS = ['grammar-fill', 'grammar-fill.given', 'grammar-fill.given.verb', 'grammar-fill.given.derivation', 'grammar-fill.no-hint', 'grammar-fill.no-hint.conjunction']
+  const PARENT_KEYS = ['grammar-fill', 'grammar-fill.given', 'grammar-fill.given.verb', 'grammar-fill.given.conversion', 'grammar-fill.no-hint', 'grammar-fill.no-hint.conjunction']
   for (const parent of PARENT_KEYS) {
     assert(`parent node "${parent}" NOT in registry`, !registry.some((f) => f.facet_key === parent))
   }
@@ -227,14 +238,14 @@ function validGfAnalysis(input) {
     }
   }
   return {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    schemaVersion: 'grammar-fill-analysis-v2',
     paperId: input.paper.paperId,
     sourceAssetVersion: 1,
     targetGroups: [group.groupId],
     meta: {
       generatedBy: 'external-ai',
       model: 'stub',
-      promptVersion: 'grammar-fill-analysis-v1',
+      promptVersion: 'grammar-fill-analysis-v2',
       reviewStatus: 'reviewed',
     },
     groups: {
@@ -265,7 +276,7 @@ async function assertAnalysisValidation() {
     providerCallers: { deepseek: stubProvider(validGfAnalysis(input)) },
     requestId: 'i13-verify',
   })
-  assert('valid grammar-fill analysis passes', result.analysis.schemaVersion === 'grammar-fill-analysis-v1' && result.requestId === 'i13-verify')
+  assert('valid grammar-fill analysis passes', result.analysis.schemaVersion === 'grammar-fill-analysis-v2' && result.requestId === 'i13-verify')
 
   // --- meta is server-stamped ---
   const bogusMeta = validGfAnalysis(input)
@@ -486,7 +497,7 @@ async function assertAnalysisValidation() {
     const ok = await analyzeGrammarFillImportCandidate(input, {
       providerCallers: { deepseek: stubProvider(good) },
     })
-    assert('C2: non-finite with valid role+path passes', ok.analysis.schemaVersion === 'grammar-fill-analysis-v1')
+    assert('C2: non-finite with valid role+path passes', ok.analysis.schemaVersion === 'grammar-fill-analysis-v2')
   }
 
   // ============================================================
@@ -725,11 +736,11 @@ function gfFixtureClozeAnalysis(parseResult) {
 function gfFixtureGrammarFillAnalysis(parseResult) {
   const gf = parseResult.grammarFillGroup
   return {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    schemaVersion: 'grammar-fill-analysis-v2',
     paperId: parseResult.paper.paperId,
     sourceAssetVersion: 1,
     targetGroups: [gf.groupId],
-    meta: { generatedBy: 'external-ai', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    meta: { generatedBy: 'external-ai', model: 'stub', promptVersion: 'grammar-fill-analysis-v2', reviewStatus: 'reviewed' },
     groups: { [gf.groupId]: { overview: '一篇关于派对的记叙文。' } },
     blanks: Object.fromEntries(gf.questions.map((q) => [
       q.id,
@@ -771,7 +782,7 @@ async function assertPackageBuilder() {
   const gfFile = files.find((f) => f.fileName === 'grammar-fill-analysis-v1.json')
   assert('I13 grammar-fill analysis file is valid JSON', gfFile && gfFile.buffer.length > 10)
   const gfAnalysis = JSON.parse(gfFile.buffer.toString())
-  assert('I13 grammar-fill analysis has correct schemaVersion', gfAnalysis.schemaVersion === 'grammar-fill-analysis-v1')
+  assert('I13 grammar-fill analysis has correct schemaVersion', gfAnalysis.schemaVersion === 'grammar-fill-analysis-v2')
   assert('I13 grammar-fill analysis has 10 blanks', Object.keys(gfAnalysis.blanks).length === 10)
 
   // C7 validator round-trip
@@ -837,7 +848,7 @@ async function assertPackageBuilder() {
 // ============================================================
 
 function assertValidatorAllowlist() {
-  assert('grammar-fill-analysis-v1 in PAPER_IMPORT_SCHEMA_VERSIONS', PAPER_IMPORT_SCHEMA_VERSIONS.has('grammar-fill-analysis-v1'))
+  assert('grammar-fill-analysis-v2 in PAPER_IMPORT_SCHEMA_VERSIONS', PAPER_IMPORT_SCHEMA_VERSIONS.has('grammar-fill-analysis-v2'))
 }
 
 // ============================================================
@@ -896,7 +907,7 @@ function assertStorageDiskWrite() {
 
     // Content check
     const written = JSON.parse(readFileSync(latestGfAnalysisPath, 'utf8'))
-    assert('MF-2: written grammar-fill analysis has correct schemaVersion', written.schemaVersion === 'grammar-fill-analysis-v1')
+    assert('MF-2: written grammar-fill analysis has correct schemaVersion', written.schemaVersion === 'grammar-fill-analysis-v2')
     assert('MF-2: written grammar-fill analysis has 10 blanks', Object.keys(written.blanks || {}).length === 10)
     // sourceAssetVersion is re-stamped
     assert('MF-2: written grammar-fill analysis has sourceAssetVersion = 1', written.sourceAssetVersion === 1)

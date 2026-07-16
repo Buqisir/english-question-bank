@@ -434,11 +434,11 @@ function assertStaticContracts() {
 
 function minimalGrammarFillAnalysis(paperId, grammarFillGroup) {
   return {
-    schemaVersion: 'grammar-fill-analysis-v1',
+    schemaVersion: 'grammar-fill-analysis-v2',
     paperId,
     sourceAssetVersion: 1,
     targetGroups: [grammarFillGroup.groupId],
-    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v1', reviewStatus: 'reviewed' },
+    meta: { generatedBy: 'stub', model: 'stub', promptVersion: 'grammar-fill-analysis-v2', reviewStatus: 'reviewed' },
     groups: { [grammarFillGroup.groupId]: { overview: '语法填空概览。' } },
     blanks: Object.fromEntries(grammarFillGroup.questions.map((q) => [
       q.id,

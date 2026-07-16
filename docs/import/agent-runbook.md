@@ -189,9 +189,17 @@ Per-agent prompt must include, verbatim:
    not reproduced with the slash — the validator splits the *key*, not the
    AI's answer.
 5. For the grammar-fill group specifically: tell the agent to read
-   `server/paper-import-ai/grammar-fill-facets-v1.json` first — every blank's
-   `facetKey` must be a real LEAF key from that registry whose `blank_type`
-   matches the blank's given/no-hint status.
+   `server/paper-import-ai/grammar-fill-facets-v2.json` first — every blank's
+   `facetKey` must be a real LEAF key from that registry (22 leaves, D1
+   grammar-facets-v2, 2026-07-15) whose `blank_type` matches the blank's
+   given/no-hint status. **Hard gate (D1, 挂导入门禁防哑数据)**: the produced
+   analysis file's `schemaVersion` must be `grammar-fill-analysis-v2` — a
+   `v1`-shaped grammar-fill-analysis payload is now rejected outright by
+   `server/paper-import/validator.mjs`'s schema allow-list
+   (`json.schemaVersionUnknown`), so there is no silent fallback to the old
+   17-leaf taxonomy. `tense`/`voice`/`agreementSensitive` (finite verb) and
+   `form` (non-finite verb) are stamped server-side from `answer`,
+   deterministically — do NOT ask the agent to author them.
 6. Any known source quirk relevant to that group (e.g. a name spelled two
    ways) — tell the agent it's a literal source quirk, not to "fix" it.
 
