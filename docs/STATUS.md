@@ -1,14 +1,14 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-15（similar-passages-entry(E6) 收官合入 main：
-篇章相似入口三处 + 讲评 CTA 改指 + 类型收账，**部署门已解**——
-待 owner DP-3（D1/E5/E6 三刀归并实点）后同批部署）
+Last updated: 2026-07-15（similar-passages-entry(E6) 收官 + **D1/E5/E6
+三刀同批部署生产 e0e2315**（owner 拍板）：health ok、eqbank.cc 200、
+生产实跑 verify-similar-v2 83/83 + verify-grammar-facets-v2 67/67 全绿；
+owner DP-3 五项对照单全过（现场打回 1 条当场修，见 E6 条）。部署门关账）
 
-下一步队列（2026-07-15 收状态）：① **owner DP-3 + 部署**（D1/E5/E6
-同批，D1 数据文件走 git 同步无需停服 apply）；② 详情页重设计正式刀——
+下一步队列（2026-07-15 收状态）：① 详情页重设计正式刀——
 spec 已 approved（`docs/specs/2026-07-15-detail-page-redesign-design.md`，
 动作行已补录「相似篇章」，原型 `?detailVariant=paper-peek` DEV-only 在库
-可试）；③ E7 工作台⇄换篇（原型场景 2，独立刀）；④ 挂账：no-hint 3 空
+可试）；② E7 工作台⇄换篇（原型场景 2，独立刀）；③ 挂账：no-hint 3 空
 疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch
 若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
 
