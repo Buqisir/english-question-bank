@@ -37,6 +37,7 @@ import {
 import type {
   ClozeParseQuestionGroupResult,
   GrammarParseQuestionGroupResult,
+  QuestionGroupCard,
   QuestionGroupDetail,
   ReadingParseQuestionGroupResult,
   SevenChoicesParseQuestionGroupResult,
@@ -46,16 +47,17 @@ import { sourceTypeLabel } from '../../domain/questionBank'
 import { labelOf } from '../../workbench/detail/readingProfileLabels'
 import { AnalysisDisclosure } from './AnalysisDisclosure'
 import { compactGroupMeta } from './detailHelpers'
-import {
-  buildPaperBrowseLectureHref,
-  buildPaperBrowseSimilarHref,
-  parsePaperIdFromHref,
-} from '../../concierge/paperSurfaceHref'
+import { buildPaperBrowseLectureHref, parsePaperIdFromHref } from '../../concierge/paperSurfaceHref'
 import {
   buildPassageSegments,
   FIGURE_PLACEHOLDER_TEXT,
   type PaperFigureManifestEntry,
 } from './passageFigureSegments'
+import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
+import {
+  SimilarPassagesPanel,
+  type SimilarPassagesRequestState,
+} from '../similar-passages/SimilarPassagesPanel'
 // PROTOTYPE(detail paper-peek): throwaway 试衣间，赢家折回后整删（含本 import）
 import {
   DetailPaperPeekPrototype,
@@ -67,11 +69,19 @@ import './QuestionGroupDetailView.css'
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
 
-// similar-entrypoints (E3): the four groupTypes E1's similar-questions engine
-// supports (program.md Q5 — writing excluded, no facet). `GroupType`'s
-// DB-style values (domain/questionBank.ts) — this file is not the domain
-// schema, just a display-gate reading the type's existing string values.
+// similar-passages-entry (E6, was similar-entrypoints E3): the four
+// groupTypes the v2 passages recipe supports (program.md Q5 — writing
+// excluded, no facet). `GroupType`'s DB-style values (domain/questionBank.ts)
+// — this file is not the domain schema, just a display-gate reading the
+// type's existing string values.
 const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
+
+// similar-passages-entry (E6): one-line, purely presentational recipe
+// summary for the shared candidate panel — real ordering/scoring lives
+// server-side (server/search/similarQuestions.mjs findSimilarPassages).
+// Same text for all four groupTypes: 篇位 only ever scores for reading, 真题
+// applies to all four, so this covers both without overclaiming per type.
+const SIMILAR_PASSAGES_RECIPE_SUMMARY = '同话题硬门槛 · 池内按篇位/真题优先排序'
 
 export type QuestionGroupDetailViewProps = {
   isOwnerView: boolean
@@ -135,11 +145,15 @@ export type QuestionGroupDetailViewProps = {
    * (buildPaperBrowseLectureHref) still lands on the same state via a full
    * navigation, so 中键/新标签 stays correct even without this handler. */
   onOpenPaperBrowseLecture: (detail: QuestionGroupDetail) => void
-  /** similar-entrypoints (E3): 详情页次入口「配相似」— SPA fast-path,
-   * mirrors onOpenPaperBrowseLecture. Only rendered when the group has a
-   * paperSurfaceHref that converts to a similar-href AND its groupType is
-   * one of the four E1-supported types. */
-  onOpenPaperBrowseSimilar: (detail: QuestionGroupDetail) => void
+  /** similar-passages-entry (E6): full corpus lookup, used to resolve a
+   * 相似篇章 candidate's groupId to a full QuestionGroupCard (for 加入草稿卷
+   * and the SW-3 thin-candidate disabled state) — same map App.tsx already
+   * builds for PaperBrowsePage. */
+  questionGroupById: Map<string, QuestionGroupCard>
+  /** similar-passages-entry (E6): adds one resolved 相似篇章 candidate to the
+   * current draft paper (same basket pipeline as onAddToBasket, just taking
+   * a QuestionGroupCard instead of the loaded QuestionGroupDetail). */
+  onAddSimilarToBasket: (card: QuestionGroupCard) => void
 }
 
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
@@ -161,7 +175,8 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onAddToBasket,
     onOpenPaperBrowse,
     onOpenPaperBrowseLecture,
-    onOpenPaperBrowseSimilar,
+    questionGroupById,
+    onAddSimilarToBasket,
   } = props
 
   // figure-render cut (fig-token P0): the ONE deliberate, narrow exception
@@ -209,6 +224,45 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   }, [paperId])
   const activeFigures = figuresState.paperId === paperId ? figuresState.figures : []
   const activeFiguresAssetBase = figuresState.paperId === paperId ? figuresState.assetBase : ''
+
+  // similar-passages-entry (E6): the SECOND deliberate, narrow exception to
+  // this component's "Pure props-driven, zero internal useState" header
+  // invariant (the figuresState fetch above is the first) — same rationale:
+  // no host fetch to piggyback on for this cut's Scope. "相似篇章" is a
+  // per-group ad hoc fetch (fetch on 展开, not on mount), so it can't live as
+  // a prop the way questionGroupById/onAddSimilarToBasket do (those two ARE
+  // ordinary props — the panel's own request lifecycle is what's local).
+  const [similarPassagesOpen, setSimilarPassagesOpen] = useState(false)
+  const [similarPassagesRequest, setSimilarPassagesRequest] = useState<SimilarPassagesRequestState | null>(null)
+  // 换题（selectedDetail 变化）时收起并清空——不复用别的题组的候选结果。
+  useEffect(() => {
+    setSimilarPassagesOpen(false)
+    setSimilarPassagesRequest(null)
+  }, [selectedDetail?.id])
+
+  async function loadSimilarPassages(groupId: string): Promise<void> {
+    setSimilarPassagesRequest({ status: 'loading' })
+    try {
+      const data = await fetchSimilarPassages(groupId)
+      setSimilarPassagesRequest({ status: 'ready', data })
+    } catch (error) {
+      setSimilarPassagesRequest({
+        status: 'error',
+        message: error instanceof Error ? error.message : '加载相似篇章失败，请重试',
+      })
+    }
+  }
+
+  function handleToggleSimilarPassages(): void {
+    if (!selectedDetail) return
+    if (similarPassagesOpen) {
+      setSimilarPassagesOpen(false)
+      return
+    }
+    setSimilarPassagesOpen(true)
+    // 收起不清结果——只在从未取过（或换了题组，见上面的 reset effect）时才发请求。
+    if (!similarPassagesRequest) void loadSimilarPassages(selectedDetail.id)
+  }
 
   // These useMemos previously lived in App.tsx (App.tsx:1261-1293 pre-cut);
   // per PA MF-2 they are NOT props — recomputed here from the passed-in
@@ -332,28 +386,22 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   {selectedDetail.paperSurfaceLabel}
                 </a>
               )}
-              {/* similar-entrypoints (E3): 详情页次入口「配相似」— 只有配方
-                  收录的四类题型(program.md Q5)才渲染，写作组/无 href 组隐藏
-                  式降级（与「看解析」一致，不做 disabled 态）。href 走共享
-                  换算 helper 保持中键/新标签可用；主点击拦截走 SPA
-                  openPaperBrowseSimilar（同页内导航，不整页刷新）。 */}
-              {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) &&
-                buildPaperBrowseSimilarHref(selectedDetail.paperSurfaceHref) && (
-                <a
+              {/* similar-passages-entry (E6, was similar-entrypoints E3
+                  「配相似」深链): 只有配方收录的四类题型(program.md Q5)且有
+                  paperSurfaceHref 才渲染，写作组/无 href 组隐藏式降级（与
+                  「看解析」一致，不做 disabled 态）。点击 = hero 下方原地
+                  展开候选面板（不再深链讲评态）。 */}
+              {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) && selectedDetail.paperSurfaceHref && (
+                <button
                   className="detail-button"
-                  href={buildPaperBrowseSimilarHref(selectedDetail.paperSurfaceHref) || undefined}
+                  type="button"
                   data-ra-entry="detail-view-similar"
                   data-ra-group-id={selectedDetail.id}
-                  onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-                    if (event.defaultPrevented || event.button !== 0) return
-                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-                    event.preventDefault()
-                    onOpenPaperBrowseSimilar(selectedDetail)
-                  }}
+                  onClick={handleToggleSimilarPassages}
                 >
                   <Repeat size={16} />
-                  配相似
-                </a>
+                  相似篇章
+                </button>
               )}
               <button
                 className="add-button"
@@ -375,6 +423,17 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               </button>
             </div>
           </article>
+
+          {similarPassagesOpen && similarPassagesRequest && (
+            <SimilarPassagesPanel
+              recipeSummary={SIMILAR_PASSAGES_RECIPE_SUMMARY}
+              request={similarPassagesRequest}
+              questionGroupById={questionGroupById}
+              onAdd={onAddSimilarToBasket}
+              onCollapse={() => setSimilarPassagesOpen(false)}
+              onRetry={() => selectedDetail && void loadSimilarPassages(selectedDetail.id)}
+            />
+          )}
 
           <section className="detail-section" aria-label="篇章信息">
             <div className="detail-section-title">

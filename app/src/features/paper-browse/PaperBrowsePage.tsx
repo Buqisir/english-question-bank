@@ -122,7 +122,7 @@ import type {
 } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
-import { fetchSimilarQuestions } from '../../services/similarQuestions.ts'
+import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
 import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import {
   SimilarQuestionsRailView,
@@ -162,12 +162,18 @@ type LectureSelection = {
   optionLabel: string | null
 }
 
-// similar-rail (E2): a snapshot of the seed that a fetch was made for,
+// similar-rail (E2/E6): a snapshot of the seed that a fetch was made for,
 // captured at CTA-click time — kept separate from the live `lectureSelection`
 // so the result view (and its retry button) survives the "scroll away clears
 // lectureSelection" effect (:771-775) untouched.
+//
+// `mode` (E6): cloze/sevenChoices now seed POST /api/similar-passages by
+// `groupId` (篇章相似); reading/grammarFill still seed POST
+// /api/similar-questions by `questionId` (小题相似, unchanged).
 type SimilarSeedSnapshot = {
+  mode: 'questions' | 'passages'
   questionId: string
+  groupId: string
   groupTitle: string
   questionNo: number | null
   groupTypeLabel: string
@@ -263,15 +269,24 @@ const SIMILAR_GROUP_TYPE_LABEL: Record<string, string> = {
   grammarFill: '语法填空',
 }
 
-// program.md Q2/Q4 配方表——one-line summary per groupType, purely
-// presentational (real ordering/scoring lives server-side in
-// similarQuestions.mjs RECIPES; this FE table never drives logic).
+// similar-passages-entry (E6): program.md §配方 v2 表——one-line summary
+// per groupType, purely presentational (real ordering/scoring lives
+// server-side in similarQuestions.mjs). cloze/sevenChoices now describe the
+// 篇章相似 recipe (their small-question recipe retired to passages-only,
+// v2); reading/grammarFill describe the v2 小题相似 recipe (density scoring
+// removed entirely).
 const SIMILAR_RECIPE_SUMMARY: Record<string, string> = {
-  reading: '同题型 → 小题题型密度 → 篇位相当 → 话题不同优先',
-  cloze: '同题型 → 话题重合 → 同词性密度',
-  sevenChoices: '同题型 → 功能句角色+位置密度 → 衔接机制 → 话题重合',
-  grammarFill: '同题型 → 同考点密度 → 提示词类型',
+  reading: '同小题题型命中 → 同话题优先',
+  cloze: '同话题硬门槛 → 真题优先 → 年份新优先',
+  sevenChoices: '同话题硬门槛 → 真题优先 → 年份新优先',
+  grammarFill: '同语法考点命中（谓语相似/非谓语角色/其它考点）→ 同话题优先',
 }
+
+// similar-passages-entry (E6): cloze/sevenChoices retired their
+// small-question recipe entirely (program.md §配方 v2) — the讲评态「配相似」
+// CTA now calls POST /api/similar-passages (seed = the whole group) for
+// these two groupTypes instead of POST /api/similar-questions.
+const SIMILAR_PASSAGES_MODE_GROUP_TYPES = new Set(['cloze', 'sevenChoices'])
 
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const {
@@ -732,14 +747,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     selectLectureQuestion(targetGroupId, questionId)
   }, [questionId, focusGroupId, lectureOpen, loading, asset, lectureAnalysisFetched])
 
-  // similar-entrypoints (E3): 入口带态 `similar=1` 自动打开配相似——一次性
-  // （ref guard），且必须等上面那条 effect 把 lectureSelection 真正落到入口
-  // 预选的题上才触发（种子快照需要 lectureSelection.groupId 对应的 group 才
-  // 能构造，与「换题时讲评栏 body 回落到解析态」的既有联动天然对齐）。走与
-  // CTA 完全相同的路径（handleSimilarCtaClick 本身），不另写一份种子构造。
-  // 不支持题型 / questionId 查无此题：静默降级——标记一次性已处理但不触发，
-  // 讲评态照常打开，URL 的 `similar` 参数会在下面 replaceState effect 首次
-  // 提交时被清掉（不写 similar=1，因为 similarView 从未变成 'similar'）。
+  // similar-entrypoints (E3) / similar-passages-entry (E6): 入口带态
+  // `similar=1` 自动打开配相似——一次性（ref guard），且必须等上面那条
+  // effect 把 lectureSelection 真正落到入口预选的题上才触发（种子快照需要
+  // lectureSelection.groupId 对应的 group 才能构造，与「换题时讲评栏 body
+  // 回落到解析态」的既有联动天然对齐）。走与 CTA 完全相同的路径
+  // （handleSimilarCtaClick 本身），不另写一份种子构造。不支持题型 /
+  // questionId 查无此题：静默降级——标记一次性已处理但不触发，讲评态照常
+  // 打开，URL 的 `similar` 参数会在下面 replaceState effect 首次提交时被
+  // 清掉（不写 similar=1，因为 similarView 从未变成 'similar'）。
+  //
+  // legacy 自愈 (E6 verify ⑤): cloze/sevenChoices 的旧 `similar=1` 深链
+  // （E3 时代由详情页/搜索卡生成，那两处入口已退役自身的深链生成，但已经
+  // 分享/收藏出去的旧链接仍然存在）现在走 passages 模式，而不是命中服务端
+  // 已下线的小题相似 400——CTA 本身已经按 groupType 分流，这里复用同一条
+  // 分流，深链因此天然自愈，不需要专门判断"这是旧链接"。
   useEffect(() => {
     if (similarDeepLinkAppliedRef.current) return
     if (!similar || !lecture || !questionId) return
@@ -761,7 +783,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
     similarDeepLinkAppliedRef.current = true
     handleSimilarCtaClick({
+      mode: SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions',
       questionId,
+      groupId: targetGroupId,
       groupTitle: group.title,
       questionNo: questionMeta.questionNo ?? null,
       groupTypeLabel: SIMILAR_GROUP_TYPE_LABEL[group.groupType] ?? group.groupType,
@@ -1245,13 +1269,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setLectureSelection((prev) => (prev ? { ...prev, optionLabel, evidenceId } : prev))
   }
 
-  // similar-rail (E2): loads once per CTA click / retry — 请求纪律 (plan
-  // point 6): never on selection, never prefetched.
-  async function loadSimilarQuestions(questionId: string): Promise<void> {
+  // similar-rail (E2/E6): loads once per CTA click / retry — 请求纪律 (plan
+  // point 6): never on selection, never prefetched. `seed.mode` picks the
+  // endpoint: cloze/sevenChoices seed POST /api/similar-passages by groupId
+  // (小题相似已下线), reading/grammarFill still seed POST
+  // /api/similar-questions by questionId (unchanged v2 recipe).
+  async function loadSimilar(seed: SimilarSeedSnapshot): Promise<void> {
     setSimilarRequest({ status: 'loading' })
     try {
-      const data = await fetchSimilarQuestions(questionId)
-      setSimilarRequest({ status: 'ready', data })
+      if (seed.mode === 'passages') {
+        const response = await fetchSimilarPassages(seed.groupId)
+        setSimilarRequest({ status: 'ready', data: { kind: 'passages', response } })
+      } else {
+        const response = await fetchSimilarQuestions(seed.questionId)
+        setSimilarRequest({ status: 'ready', data: { kind: 'questions', response } })
+      }
     } catch (error) {
       setSimilarRequest({
         status: 'error',
@@ -1264,12 +1296,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setSimilarSeed(seed)
     setSimilarView('similar')
     setSimilarSelectedGroupIds(new Set())
-    void loadSimilarQuestions(seed.questionId)
+    void loadSimilar(seed)
   }
 
   function handleSimilarRetry(): void {
     if (!similarSeed) return
-    void loadSimilarQuestions(similarSeed.questionId)
+    void loadSimilar(similarSeed)
   }
 
   function handleSimilarToggleGroup(groupId: string): void {
@@ -1571,6 +1603,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       return (
         <SimilarQuestionsRailView
           seed={{
+            mode: similarSeed.mode,
             groupTitle: similarSeed.groupTitle,
             questionNo: similarSeed.questionNo,
             groupTypeLabel: similarSeed.groupTypeLabel,
@@ -1618,9 +1651,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             activeOptionLabel,
           })}
         </div>
-        {/* similar-rail (E2), 已拍板设计 1: 当前选中题的解析下方「配相似」
-            CTA——无选中题不渲染；只对 E1 引擎支持的四个题型(program.md Q5)
-            渲染，写作/听力题组即便被选中也不出现这个按钮。 */}
+        {/* similar-rail (E2/E6), 已拍板设计 1: 当前选中题的解析下方「配相似」
+            /「相似篇章」CTA——无选中题不渲染；只对 v2 引擎支持的四个题型
+            (program.md Q5) 渲染，写作/听力题组即便被选中也不出现这个按钮。
+            E6: cloze/sevenChoices 的小题相似已下线——CTA 保留原位，文案改
+            「相似篇章」，点击改调 /api/similar-passages（种子=当前题组）。 */}
         {hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
           <div className="similar-cta">
             {/* owner 拍板 2026-07-10：按钮在最左，说明文字跟在右边 */}
@@ -1630,7 +1665,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               onClick={() => {
                 const questionNo = asset.content.questions[activeQuestionId]?.questionNo ?? null
                 handleSimilarCtaClick({
+                  mode: SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions',
                   questionId: activeQuestionId,
+                  groupId,
                   groupTitle: group.title,
                   questionNo,
                   groupTypeLabel: SIMILAR_GROUP_TYPE_LABEL[group.groupType] ?? group.groupType,
@@ -1638,7 +1675,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              🔁 配相似
+              🔁 {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
             </button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
           </div>

@@ -1,11 +1,23 @@
 /**
- * SimilarQuestionsRailView — similar-rail (E2) 讲评栏「配相似」结果态。
+ * SimilarQuestionsRailView — similar-rail (E2/E6) 讲评栏「配相似」/
+ * 「相似篇章」结果态。
  *
  * Pure presentational: PaperBrowsePage owns the fetch lifecycle
  * (`similarRequest`), the selection Set, and the toast timer; this
  * component only renders whichever state it's handed and reports user
  * intent back via callbacks. Mirrors prototype.html's `#view-similar`
  * (docs/cuts/similar-questions/prototype.html, owner 拍板 2026-07-10).
+ *
+ * similar-passages-entry (E6): cloze/sevenChoices retired their
+ * small-question recipe (program.md §配方 v2) — the CTA for those two
+ * groupTypes now seeds `POST /api/similar-passages` instead. `request.data`
+ * is therefore a discriminated union (`kind: 'questions' | 'passages'`) so
+ * this one view keeps rendering both shapes: the passages branch has no
+ * `matchedQuestionIds` (normalized to `[]` below, same as SW-2's existing
+ * "may be empty" handling) and carries the server's honest-empty `notice`.
+ * The head-row label ("配相似" vs "相似篇章") and seed-line/recipe text are
+ * decided by the caller (`seed.mode`) at CTA-click time, before the
+ * response arrives.
  *
  * CR 硬交接 (docs/cuts/similar-engine/cr.md) 处置 — 落在这个文件里:
  *   - SW-1（engine-rewire 撤刀，2026-07-13）: 曾经按 "同体裁" label 前缀过滤
@@ -18,19 +30,53 @@
  *     DB 未同步），复选框禁用 + title 提示，仍然渲染（池子诚实，不隐藏）。
  */
 import type { ReactNode } from 'react'
-import type { QuestionGroupCard, SimilarQuestionReason, SimilarQuestionsResponse } from '../../domain/questionBank'
+import type {
+  QuestionGroupCard,
+  SimilarPassagesResponse,
+  SimilarQuestionReason,
+  SimilarQuestionsResponse,
+} from '../../domain/questionBank'
 
 export type SimilarRailSeedInfo = {
+  /** E6: which endpoint this seed was fetched against — drives the head-row
+   * label ("配相似" stays for questions mode; "相似篇章" for passages mode,
+   * per plan §6 "头行文案"). */
+  mode: 'questions' | 'passages'
   groupTitle: string
   questionNo: number | null
   groupTypeLabel: string
   recipeSummary: string
 }
 
+export type SimilarRailData =
+  | { kind: 'questions'; response: SimilarQuestionsResponse }
+  | { kind: 'passages'; response: SimilarPassagesResponse }
+
 export type SimilarRailRequestState =
   | { status: 'loading' }
   | { status: 'error'; message: string }
-  | { status: 'ready'; data: SimilarQuestionsResponse }
+  | { status: 'ready'; data: SimilarRailData }
+
+/** Unified shape both response kinds render through — `matchedQuestionIds`
+ * is a small-question-only concept, normalized to `[]` for passages
+ * results (renderChips already treats an empty array as "no chip", not a
+ * synthesized truth). */
+type UnifiedResult = {
+  groupId: string
+  paperId: string | null
+  title: string
+  sourceLabel: string
+  score: number
+  reasons: SimilarQuestionReason[]
+  matchedQuestionIds: string[]
+}
+
+function toUnifiedResults(data: SimilarRailData): UnifiedResult[] {
+  if (data.kind === 'questions') {
+    return data.response.results
+  }
+  return data.response.results.map((result) => ({ ...result, matchedQuestionIds: [] }))
+}
 
 export type SimilarQuestionsRailViewProps = {
   seed: SimilarRailSeedInfo
@@ -69,11 +115,14 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
 
   const questionLabel = seed.questionNo != null ? `第${seed.questionNo}题` : ''
   const seedLine = [seed.groupTitle, questionLabel].filter(Boolean).join(' · ')
+  const headLabel = seed.mode === 'passages' ? '相似篇章' : '配相似'
 
   return (
     <div className="similar-rail">
       <div className="similar-rail-head">
-        <h4 className="paper-browse-lecture-title">配相似 · {seed.groupTypeLabel}</h4>
+        <h4 className="paper-browse-lecture-title">
+          {headLabel} · {seed.groupTypeLabel}
+        </h4>
         <button type="button" className="similar-backlink" onClick={onBack}>
           ← 返回解析
         </button>
@@ -85,7 +134,7 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </p>
       )}
 
-      {request.status === 'loading' && <p className="paper-browse-lecture-empty">配相似加载中…</p>}
+      {request.status === 'loading' && <p className="paper-browse-lecture-empty">{headLabel}加载中…</p>}
 
       {request.status === 'error' && (
         <div className="similar-rail-error">
@@ -96,43 +145,48 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </div>
       )}
 
-      {request.status === 'ready' && (
-        <>
-          {request.data.results.length === 0 ? (
-            <p className="paper-browse-lecture-empty">库里暂时没有匹配的相似题。</p>
-          ) : (
-            <div className="similar-rcard-list">
-              {request.data.results.map((result) => {
-                const card = questionGroupById.get(result.groupId)
-                const isThin = !card
-                const checked = selectedGroupIds.has(result.groupId)
-                return (
-                  <label
-                    key={result.groupId}
-                    className={`similar-rcard${checked ? ' similar-rcard--checked' : ''}`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      disabled={isThin}
-                      title={isThin ? '该卷未入库存，暂不能加入' : undefined}
-                      onChange={() => onToggleGroup(result.groupId)}
-                    />
-                    <div className="similar-rcard-body">
-                      <div className="similar-rcard-title">{result.title}</div>
-                      <div className="similar-rcard-source">{result.sourceLabel}</div>
-                      {renderChips(result.matchedQuestionIds, result.reasons)}
-                    </div>
-                  </label>
-                )
-              })}
-            </div>
-          )}
-          <p className="similar-pool-note">
-            库内同类还剩 {Math.max(request.data.poolStats.totalInPool - request.data.poolStats.returned, 0)} 组
-          </p>
-        </>
-      )}
+      {request.status === 'ready' && (() => {
+        const results = toUnifiedResults(request.data)
+        const poolStats = request.data.response.poolStats
+        const notice = request.data.kind === 'passages' ? request.data.response.notice : null
+        return (
+          <>
+            {results.length === 0 ? (
+              <p className="paper-browse-lecture-empty">{notice || '库里暂时没有匹配的相似题。'}</p>
+            ) : (
+              <div className="similar-rcard-list">
+                {results.map((result) => {
+                  const card = questionGroupById.get(result.groupId)
+                  const isThin = !card
+                  const checked = selectedGroupIds.has(result.groupId)
+                  return (
+                    <label
+                      key={result.groupId}
+                      className={`similar-rcard${checked ? ' similar-rcard--checked' : ''}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        disabled={isThin}
+                        title={isThin ? '该卷未入库存，暂不能加入' : undefined}
+                        onChange={() => onToggleGroup(result.groupId)}
+                      />
+                      <div className="similar-rcard-body">
+                        <div className="similar-rcard-title">{result.title}</div>
+                        <div className="similar-rcard-source">{result.sourceLabel}</div>
+                        {renderChips(result.matchedQuestionIds, result.reasons)}
+                      </div>
+                    </label>
+                  )
+                })}
+              </div>
+            )}
+            <p className="similar-pool-note">
+              库内同类还剩 {Math.max(poolStats.totalInPool - poolStats.returned, 0)} 组
+            </p>
+          </>
+        )
+      })()}
 
       {request.status === 'ready' && (
         <div className="similar-rail-foot">

@@ -474,15 +474,17 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
   assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
   assert('Group card disables only unavailable draft state', /disabled=\{draftState === ['"]disabled['"]\}/.test(groupCardSource), '')
-  // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——now a plain
-  // <a href> deep-link (same family as 看解析), not a <button onClick>.
+  // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——was a plain
+  // <a href> deep-link. similar-passages-entry (E6) retired that deep-link:
+  // 「配相似」→「相似篇章」, now a <button onClick> that toggles the shared
+  // candidate panel open in place (see ConciergeDesk's
+  // expandedSimilarGroupId/onToggleSimilar).
   assert('Group card has no 找类似 <button> (retired text-search-fill flow)',
     !/>\s*找类似\s*<\/button>/.test(groupCardSource), '')
-  assert('Group card renders a 配相似 deep-link (no bare 相似)',
-    />\s*配相似\s*<\/a>/.test(groupCardSource), '')
-  assert('Group card gates 配相似 on the four E1-supported groupTypes + a computable similar href',
-    /buildPaperBrowseSimilarHref\(group\.paperSurfaceHref\)/.test(groupCardSource) &&
-      /SIMILAR_SUPPORTED_GROUP_TYPES/.test(groupCardSource), '')
+  assert('Group card renders a 相似篇章 toggle button (no deep-link <a>)',
+    />\s*相似篇章\s*<\/button>/.test(groupCardSource), '')
+  assert('Group card gates 相似篇章 on the four v2-supported groupTypes',
+    /SIMILAR_SUPPORTED_GROUP_TYPES/.test(groupCardSource) && /similarEligible/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
 

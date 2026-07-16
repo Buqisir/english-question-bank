@@ -1,4 +1,4 @@
-import type { SimilarQuestionsResponse } from '../domain/questionBank'
+import type { SimilarPassagesResponse, SimilarQuestionsResponse } from '../domain/questionBank'
 import { apiPath, errorMessageFromResponse as readError } from './httpClient.ts'
 
 /**
@@ -25,4 +25,29 @@ export async function fetchSimilarQuestions(
     throw new Error(await readError(response, `Failed to load similar questions: ${response.status}`))
   }
   return (await response.json()) as SimilarQuestionsResponse
+}
+
+/**
+ * similar-passages-entry (E6) — thin fetch wrapper around
+ * `POST /api/similar-passages` (server/search/similarQuestions.mjs, E5,
+ * plan-frozen contract). Same shape/discipline as fetchSimilarQuestions
+ * above: no caching/dedup, fires only on explicit user action (CTA click /
+ * panel expand).
+ */
+export async function fetchSimilarPassages(
+  groupId: string,
+  limit?: number,
+): Promise<SimilarPassagesResponse> {
+  const response = await fetch(apiPath('/api/similar-passages'), {
+    body: JSON.stringify({
+      groupId,
+      ...(limit != null ? { limit } : {}),
+    }),
+    headers: { 'content-type': 'application/json' },
+    method: 'POST',
+  })
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to load similar passages: ${response.status}`))
+  }
+  return (await response.json()) as SimilarPassagesResponse
 }

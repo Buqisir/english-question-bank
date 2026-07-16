@@ -15,14 +15,24 @@
 
 import { type MouseEvent, type ReactNode } from 'react'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
-import { buildPaperBrowseLectureHref, buildPaperBrowseSimilarHref } from './paperSurfaceHref.ts'
+import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
+import {
+  SimilarPassagesPanel,
+  type SimilarPassagesRequestState,
+} from '../features/similar-passages/SimilarPassagesPanel'
 
-// similar-entrypoints (E3): the four groupTypes E1's similar-questions engine
-// supports (program.md Q5 — writing excluded, no facet). `QuestionGroupCard`'s
-// `groupType` is DB-style (domain/questionBank.ts GroupType) — this file is
-// not the domain schema, just a display-gate reading the type's existing
-// string values.
+// similar-passages-entry (E6, was similar-entrypoints E3): the four
+// groupTypes the v2 passages recipe supports (program.md Q5 — writing
+// excluded, no facet). `QuestionGroupCard`'s `groupType` is DB-style
+// (domain/questionBank.ts GroupType) — this file is not the domain schema,
+// just a display-gate reading the type's existing string values.
 const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
+
+// similar-passages-entry (E6): one-line, purely presentational recipe
+// summary for the shared candidate panel — same text used by the detail-page
+// entry (QuestionGroupDetailView), see that file for the "why one string for
+// all four groupTypes" rationale.
+const SIMILAR_PASSAGES_RECIPE_SUMMARY = '同话题硬门槛 · 池内按篇位/真题优先排序'
 
 function isDisplayTag(tag: string | undefined): tag is string {
   const value = (tag || '').trim()
@@ -82,10 +92,36 @@ export type ConciergeGroupCardProps = {
    * pass true here — every group in a browse feed is trivially "hit".
    */
   dimmed?: boolean
+
+  /** similar-passages-entry (E6): full corpus lookup, for resolving a
+   * candidate's groupId to a full QuestionGroupCard (加入草稿卷 + SW-3 thin
+   * disabled state). Owned by ConciergeDesk. */
+  questionGroupById: Map<string, QuestionGroupCard>
+  /** similar-passages-entry (E6): true when THIS card's候选面板 is the one
+   * currently expanded (ConciergeDesk enforces only one at a time —
+   * "切卡自动收起"). */
+  isSimilarPassagesOpen: boolean
+  /** similar-passages-entry (E6): null until `isSimilarPassagesOpen`, then
+   * the shared fetch's request state (owned by ConciergeDesk). */
+  similarPassagesRequest: SimilarPassagesRequestState | null
+  onToggleSimilar: (groupId: string) => void
+  onRetrySimilar: () => void
 }
 
 export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
-  const { group, reason, alreadyInBasket, onAdd, onOpenDetail, dimmed } = props
+  const {
+    group,
+    reason,
+    alreadyInBasket,
+    onAdd,
+    onOpenDetail,
+    dimmed,
+    questionGroupById,
+    isSimilarPassagesOpen,
+    similarPassagesRequest,
+    onToggleSimilar,
+    onRetrySimilar,
+  } = props
   const passageTitle = compactPassageTitle(group)
   const summary = compactSummary(group)
   const topicText = buildTopicText(group)
@@ -101,14 +137,11 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
     group.hasPaperSurfaceAnalysis && group.paperSurfaceHref && group.paperSurfaceLabel
       ? buildPaperBrowseLectureHref(group.paperSurfaceHref)
       : null
-  // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——退役了那条
-  // 填搜索框跑文本搜索的旧 hack，改为与上面 看解析 同款的深链导航（同一个
-  // <a href> 家族，不是 SPA 拦截）。
-  // 渲染条件同详情页：只有配方收录的四类题型才出现，写作组隐藏（换引擎的
-  // 代价，池子诚实）。
-  const similarHref = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
-    ? buildPaperBrowseSimilarHref(group.paperSurfaceHref)
-    : null
+  // similar-passages-entry (E6, was similar-entrypoints E3 深链导航):「配
+  // 相似」→「相似篇章」，深链退役——点击原地展开卡下方的共享候选面板
+  // （ConciergeDesk 拥有 fetch，本组件只切换 isSimilarPassagesOpen）。渲染
+  // 条件同详情页：只有配方收录的四类题型才出现，写作组隐藏（池子诚实）。
+  const similarEligible = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
   const draftButtonLabel =
     draftState === 'in_current_draft'
@@ -167,15 +200,16 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         >
           {draftButtonLabel}
         </button>
-        {similarHref && (
-          <a
+        {similarEligible && (
+          <button
+            type="button"
             className="concierge-action"
-            href={similarHref}
             data-ra-entry="group-card-similar"
             data-ra-group-id={group.id}
+            onClick={() => onToggleSimilar(group.id)}
           >
-            配相似
-          </a>
+            相似篇章
+          </button>
         )}
         {onOpenDetail && (
           // C3c (trust-cracks) — 详情进 URL: same family as 看解析/配相似
@@ -209,6 +243,17 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           </a>
         )}
       </div>
+
+      {isSimilarPassagesOpen && similarPassagesRequest && (
+        <SimilarPassagesPanel
+          recipeSummary={SIMILAR_PASSAGES_RECIPE_SUMMARY}
+          request={similarPassagesRequest}
+          questionGroupById={questionGroupById}
+          onAdd={onAdd}
+          onCollapse={() => onToggleSimilar(group.id)}
+          onRetry={onRetrySimilar}
+        />
+      )}
     </div>
   )
 }

@@ -959,3 +959,43 @@
     transition: none !important;
   }
 }
+
+/* ─── similar-passages-entry (E6) — shared「相似篇章」候选面板 ───
+ *
+ * Consumed by app/src/features/similar-passages/SimilarPassagesPanel.tsx
+ * (mounted from QuestionGroupDetailView + ConciergeGroupCard, not from
+ * this file's own PaperBrowsePage). Kept in this stylesheet — not a new
+ * per-component CSS file — because it's the single existing home for the
+ * `.similar-*` token language (no new color literal introduced here; every
+ * rule below reuses `.similar-rcard` / `.similar-chip` / `.similar-btn` /
+ * `.similar-pool-note` / `.similar-backlink` / `.similar-toast` already
+ * defined above, plus `.paper-browse-lecture-title` /
+ * `.paper-browse-lecture-empty`).
+ */
+
+.similar-passages-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  border-top: 1px dashed #d8d8d2;
+  padding-top: 14px;
+}
+
+.similar-passages-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.similar-passages-sub {
+  flex: 1;
+  font-size: 12px;
+  color: #6a6a64;
+}
+
+.similar-rcard-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

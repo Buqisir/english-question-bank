@@ -71,15 +71,30 @@ const detailView = read('app/src/features/question-detail/QuestionGroupDetailVie
 // without a generic) and assert there is EXACTLY the one figure-render
 // exception, by exact declaration text — any OTHER internal state still
 // fails this check.
+//
+// similar-passages-entry (E6) adds a SECOND deliberate, narrow exception —
+// the detail-page's own「相似篇章」fetch-on-expand panel state
+// (similarPassagesOpen/similarPassagesRequest), same rationale as the
+// figure-render exception (App.tsx is out of this cut's Scope too; no host
+// fetch to piggyback on). Updated from "exactly one" to "exactly three" —
+// still an EXACT count, so any OTHER/future internal state still fails.
 const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
 assert(
-  'QuestionGroupDetailView has exactly one internal useState (the figure-render manifest-fetch exception; props-driven otherwise)',
-  useStateCallCount === 1,
+  'QuestionGroupDetailView has exactly three internal useState calls (figure-render manifest-fetch + similar-passages-entry panel state; props-driven otherwise)',
+  useStateCallCount === 3,
   `found ${useStateCallCount} useState call(s)`,
 )
 assert(
-  'the one useState is the figure-render figuresState declaration (not some other/future state)',
+  'one useState is the figure-render figuresState declaration (not some other/future state)',
   /const \[figuresState, setFiguresState\] = useState</.test(detailView),
+)
+assert(
+  'one useState is the similar-passages-entry similarPassagesOpen declaration',
+  /const \[similarPassagesOpen, setSimilarPassagesOpen\] = useState/.test(detailView),
+)
+assert(
+  'one useState is the similar-passages-entry similarPassagesRequest declaration',
+  /const \[similarPassagesRequest, setSimilarPassagesRequest\] = useState</.test(detailView),
 )
 
 assert(
@@ -328,7 +343,11 @@ assert(
   'ConciergeDesk accepts onOpenDetail prop',
   /onOpenDetail\?\s*:\s*\(group: QuestionGroupCard\) => void/.test(conciergeDesk),
 )
-const conciergePaperRowRenderPoints = [...conciergeDesk.matchAll(/<ConciergePaperRow[\s\S]{0,600}?\/>/g)]
+// similar-passages-entry (E6) threads 5 more props (questionGroupById,
+// expandedSimilarGroupId, similarPassagesRequest, onToggleSimilar,
+// onRetrySimilar) through each render point — widened from 600 to 900 to
+// keep clearing both call sites (measured ~775/816 chars post-cut).
+const conciergePaperRowRenderPoints = [...conciergeDesk.matchAll(/<ConciergePaperRow[\s\S]{0,900}?\/>/g)]
 assert(
   'ConciergeDesk renders exactly 2 ConciergePaperRow instances (search results + feed)',
   conciergePaperRowRenderPoints.length === 2,
