@@ -38,9 +38,10 @@ spec 已 approved（`docs/specs/2026-07-15-detail-page-redesign-design.md`，
   DP-2 20 断言×2 主代理亲跑 + main CI 双证）：共享「相似篇章」候选面板
   挂详情页/搜索卡（原地展开，深链退役）、讲评 CTA 完形/七选五改指
   `/api/similar-passages`（legacy `similar=1` 自愈）、domain 类型收账 v2
-  五 kind、重设计 spec 动作行补录。**部署门已解，D1/E5/E6 同批待
-  owner DP-3 + 部署**（裁5，qa 脚本 `qa/dp2-similar-passages-entry.mjs`
-  可重跑）。**账单**：DEV 320k + CR 69k；主代理出场 ~5。
+  五 kind、重设计 spec 动作行补录。DP-3 现场（owner 旁观小川亲驱）抓到
+  搜索卡面板被 hover 浮层盖住（DOM 断言盲区）→ 当场修+几何回归锚
+  （7693b85，CI 绿）；五项对照单全过。**部署门已解，D1/E5/E6 同批待
+  owner 拍板部署**（裁5）。**账单**：DEV 320k + CR 69k；主代理出场 ~5。
 - 2026-07-15：**reorder-suggest 收官（draft-desk 刀E 排序建议消断篇）**
   （merge 0b76558，fresh CR APPROVE 1MF 当场修+SW-1 当场收，verify:all 78
   绿 + main CI 双证）：启发式候选 ≤6 + 单次 dry-run 真值门槛（断篇归零才
