@@ -4,10 +4,14 @@ Last updated: 2026-07-16（similar-workbench-swap(E7) 收官 + **生产
 部署 2b5c2b0**（owner DP-3 全过后拍板）：health ok、eqbank.cc 200。
 相似题 v2 四刀 D1/E5/E6/E7 全线闭环，全部在生产）
 
-下一步队列（2026-07-16 收状态）：① design-canon-v2（账本详条）；
-② small 挂账：serve 路径 44 个 .bak 清理（账本详条）、no-hint 3 空
-疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch
-若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
+下一步队列（2026-07-16 收状态）：① ~~design-canon-v2~~ ✅ 2026-07-16
+收官（Geist 对照三条入宪：文案法 §9 / 间距节奏法 §8 / 圆角单一家族
+§5 + verify-radius-family 守门挂 CI，32 处族外值祖父化 ratchet；
+plan `docs/cuts/design-canon-v2/`；owner 过目条文待做）；
+② small 挂账：~~serve 路径 44 个 .bak 清理~~ ✅ 2026-07-16（ea6568a，
+44 删 + consistency verify 新增 no-backup-files 断言负例验牙，CI 绿）、
+no-hint 3 空疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、
+CR watch 若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
 
 ## 现在是什么
 
@@ -346,22 +350,8 @@ Last updated: 2026-07-16（similar-workbench-swap(E7) 收官 + **生产
 
 ## 开放账本（立刀候选，owner 圈了再动）
 
-- **serve 路径 .bak 清理（small，2026-07-16 详情页刀顺带发现）**：
-  `app/public/paper-assets/**/analyses/` 里 44 个 git 跟踪的 D1 遗留
-  `.bak`（grammar-fill-analysis/verb-profile 备份）——量小当前无害，但
-  备份文件不该在 public serve 路径（jslk 备份 501 判例的同类）；顺带
-  评估 publisher 是否该有「.bak 不进 assets」门禁。
-
-- **design-canon-v2（owner 已圈 2026-07-15，排详情页重设计刀后）**：读
-  vercel.com/design.md（Geist agent 可读设计系统）对照我们 DESIGN.md 的
-  三条补法——①**文案法立法**（最值：动作命名=动词+名词/错误=发生了什么+
-  下一步/toast 无"成功"无句号/进行态=现在分词+省略号；把卷名去结巴、
-  "已移出"、诚实空态等散装判例收编成文，中文语境改写）②**间距节奏法**
-  补数字（组内/组间/章节三步节奏 + 基础网格，让 DEV 在新面可自行推导）
-  ③**圆角单一家族纪律**（每视图一个圆角家族，进 impeccable detect 机器
-  检查）。明确不学：暗色模式/冷灰审美/P3 广色域。出处：owner 提议对照
-  学习，小川三层评估（第一层验证=我们 repo-routed canon+verify 守门已
-  领先；第二层四块可偷；第三层不学清单）。
+- ~~design-canon-v2~~ ✅ 2026-07-16 收官（见下一步队列①；机器检查按
+  实核从 impeccable detect 改落仓内 verify-radius-family，理由入 plan）。
 
 - **分页渲染不确定（疑点，2026-07-15 DP-3 现场发现）**：同一草稿卷同一
   序（做的都对考的都对，5 题组 A3），页面首载渲染 6 版，随后同签名重渲

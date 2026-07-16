@@ -26,6 +26,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-ci.mjs` | Stable app build/typecheck plus core contracts used by GitHub Actions | yes |
 | `verify-architecture-housekeeping.mjs` | Housekeeping guardrails: CI, code style, tokens, verify index | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, no bare hand-written transition/animation durations outside `token-exempt`-tagged signature moments and the `0.01ms` reduced-motion reset | yes |
+| `verify-radius-family.mjs` | design-canon-v2 gate: every `border-radius` in `app/src/**/*.css` is in the DESIGN.md radius ladder {0, 4, 6, 8, 999px, 50%}; 32 historical off-family literals grandfathered per file×value as a shrink-only ratchet | yes |
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
 | `verify-h1d-analysis-availability.mjs` | H1-D PaperSurface analysis availability owner contract | yes |
 | `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
