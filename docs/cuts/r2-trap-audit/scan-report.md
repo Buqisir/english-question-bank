@@ -16,7 +16,12 @@
 | `structuralIncompleteness` | 0 | row |
 | `evidenceFieldLeak` | 0 | 不摘牌——待第二段 owner 判例 |
 
-「无中生有」懒人桶里实锤贴错占比：**7 / 566 = 1.2%**（labelExplanationContradiction 命中数 / unsupportedClaim 总数）
+「无中生有」懒人桶里**启发式命中占比：7 / 566 = 1.2%（上界，非实锤数）**。
+CR 更正（MF-1，2026-07-16）：引号英文钩正则不验证引号内容是否**原文**词——
+对「选项自身文本被引用」同样命中（实证假阳：`paper-zj-2020-jul` q029 D，
+命中串 "introducing a concept" 即选项文本）。故 7 条是「真贴错 + 假阳 +
+边界」混合，实锤数待 owner 裁4 逐条过目后才定。真机器可证伪的只有
+rogueType 1 条与 structuralIncompleteness 0 条。
 
 ## 判据原文（DEV 按数据实况定义，程序在 `scripts/trap-audit-lib.mjs`）
 
@@ -27,7 +32,11 @@
 
 ## 自动摘牌批（步骤 3，仅 rogueType + labelExplanationContradiction + structuralIncompleteness）
 
-- badge（标签贴错、解释仍显）：**8** 条
+摘牌语义注（随 MF-1 澄清）：摘牌=**预防性撤销定性展示**（宁缺勿假——
+撤掉一个可能对的标签是保守，显示一个可能错的标签才是虚假），不等于
+判定贴错；裁4 owner 逐条裁后，误摘者回牌。
+
+- badge（判据命中即预防性摘牌，解释仍显）：**8** 条
 - row（子结构坏死、整行不显）：**0** 条
 - evidenceFieldLeak 不摘牌，留待第二段 owner 判例：**0** 条
 
