@@ -117,8 +117,9 @@
   DP-2 保持常驻（qa/ 已入档可重跑）。
 - [x] 裁4：merge af21f7c + main CI 绿（watch 退出码 0 + conclusion:
   success 双证，2026-07-16）；worktree/分支/契约锁已清。
-- [ ] 裁5：owner DP-3（QA 表：旧 URL 自愈两条 + 讲评态/详情页回归两条）
-  → 拍板部署生产。
+- [x] 裁5：owner DP-3 全过（2026-07-16「没问题」，四行 QA 表：旧 URL
+  自愈两条 + 讲评态/详情页回归两条，本地实点）→ 生产已部署 c82643f
+  （deploy-remote.sh，health ok、eqbank.cc 200）。本刀闭环。
 
 ## Verify（RM 闸口径）
 

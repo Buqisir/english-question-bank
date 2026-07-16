@@ -43,8 +43,9 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   退出码全 0 + main CI 双证）：RA 全支 + PI 两子面三层退净（122 文件
   净删 3.1 万行），旧 URL 自愈（带 paperId 落讲评态/其余落主页），
   PaperSurfaceData 类型链手术零深耦合；五项挂账销账见各节勾。**账单**：
-  Explore 图谱 149k + DEV 341k + CR 89k；主代理出场 ~6。**待 owner
-  DP-3（裁5）+ 部署**。
+  Explore 图谱 149k + DEV 341k + CR 89k；主代理出场 ~7。**owner DP-3
+  全过（2026-07-16，四行 QA 表本地实点）；生产已部署 c82643f**
+  （health ok、eqbank.cc 200），本刀闭环。
 - 2026-07-16：**similar-workbench-swap（E7）收官**（merge 933711d→main，
   fresh CR APPROVE 1MF/3SW，流水线 verify 四命令真实退出码全 0 + main CI
   双证）：贴纸操作条 ⇄ → rail 目录原地切候选抽屉（替换承位保分页可撤销/
