@@ -1162,7 +1162,12 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "He helped to cook at home.",
-            "explanation": "原文未提及作者早年在家帮忙做饭，第一段只提到\"dinner time\"这一用餐场景词，并无作者下厨的相关信息。"
+            "explanation": "原文未提及作者早年在家帮忙做饭，第一段只提到\"dinner time\"这一用餐场景词，并无作者下厨的相关信息。",
+            "suspension": {
+              "level": "badge",
+              "reason": "labelExplanationContradiction",
+              "suspendedAt": "2026-07-16"
+            }
           }
         }
       ],

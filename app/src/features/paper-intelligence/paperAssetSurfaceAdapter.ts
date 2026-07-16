@@ -28,6 +28,7 @@ import type {
   ReadingChoiceAnalysis,
   OptionAnalysisItem,
   LocationParaphrase,
+  TrapDiagnosis,
 } from '../../domain/paperAsset.ts'
 import type {
   LoadBar,
@@ -78,6 +79,16 @@ export type PaperAssetOptionAnalysisView = {
   trapSubtype: string | null
   trapExplanation: string | null
   trapEvidenceRows: PaperAssetEvidenceRowView[]
+  /**
+   * r2-trap-audit摘牌机制 — true only for `suspension.level === 'row'`
+   * (子结构坏死、无可用解释): the panel renders nothing at all for this
+   * option's trap detail (整行不显), rather than an empty "干扰解析"
+   * section. `badge`-level suspension does not set this — it only hides
+   * the type badge/兼有/细分 above (trapLabel/trapSecondaryLabel/
+   * trapSubtype already come back `null` for it), the explanation still
+   * shows.
+   */
+  trapRowSuspended: boolean
 }
 
 export type PaperAssetQuestionAnalysisView = {
@@ -451,23 +462,29 @@ function buildAnalysisViews(
           },
         )
         const trap = row?.status === 'wrong' ? row.trap : undefined
+        // r2-trap-audit 摘牌门控: `row` 整行不显 (badge/兼有/细分/解释/证据
+        // 一律不透传), `badge` 只隐类型标签与兼有/细分、解释与证据行照旧。
+        const isRowSuspended = trap?.suspension?.level === 'row'
+        const isBadgeSuspended = trap?.suspension?.level === 'badge'
+        const showTypeMeta = Boolean(trap) && !isRowSuspended && !isBadgeSuspended
         return {
           label: option.label,
           text: option.text,
           translationZh: row?.optionTranslationZh ?? '',
           status: row?.status ?? 'wrong',
-          trapLabel: trap
+          trapLabel: showTypeMeta && trap
             ? trapLabels[trap.primaryType] ?? trap.primaryType
             : null,
           trapPrimaryType: trap?.primaryType ?? null,
-          trapSecondaryLabel: trap?.secondaryType
+          trapSecondaryLabel: showTypeMeta && trap?.secondaryType
             ? trapLabels[trap.secondaryType] ?? trap.secondaryType
             : null,
-          trapSubtype: trap && 'subtype' in trap ? formatTrapSubtype(trap.subtype) : null,
-          trapExplanation: row && row.status === 'wrong' && trap
+          trapSubtype: showTypeMeta && trap && 'subtype' in trap ? formatTrapSubtype(trap.subtype) : null,
+          trapExplanation: row && row.status === 'wrong' && trap && !isRowSuspended
             ? describeTrap(row)
             : null,
-          trapEvidenceRows,
+          trapEvidenceRows: isRowSuspended ? [] : trapEvidenceRows,
+          trapRowSuspended: isRowSuspended,
         }
       }),
       locationParaphrases: questionAnalysis.locationParaphrases,
@@ -495,6 +512,16 @@ function formatTrapSubtype(subtype: string): string {
 function describeTrap(option: OptionAnalysisItem): string {
   const trap = option.trap
   if (!trap) return ''
+  // r2-trap-audit `badge`-suspended traps include the one confirmed 野类型
+  // record (`primaryType: 'timeOrderReversal'`, schema gate 漏网) whose
+  // `primaryType` does not match any of the five known variants below — the
+  // exhaustive switch's `assertNever` would throw for it. Badge suspension
+  // means "label wrong, explanation still usable" (plan.md), so read the
+  // explanation field generically instead of switching on the (untrusted)
+  // primaryType — this never runs for the normal, non-suspended path below.
+  if (trap.suspension?.level === 'badge') {
+    return describeTrapFieldsSafe(trap)
+  }
   switch (trap.primaryType) {
     case 'sourceLexicalTrap':
       return trap.relationNote
@@ -506,6 +533,12 @@ function describeTrap(option: OptionAnalysisItem): string {
       return trap.explanation
   }
   return assertNever(trap)
+}
+
+function describeTrapFieldsSafe(trap: TrapDiagnosis): string {
+  if ('relationNote' in trap && trap.relationNote) return trap.relationNote
+  if ('explanation' in trap && trap.explanation) return trap.explanation
+  return ''
 }
 
 function assertNever(value: never): never {

@@ -347,6 +347,21 @@ export type TrapPrimaryType =
   | 'entityMismatch'
   | 'unsupportedClaim'
 
+/**
+ * r2-trap-audit — 摘牌机制（纯增量字段，2026-07-16）。机审判定为
+ * 机器可证伪的坏数据打上的显示门控标记：`badge`＝定性标签贴错但解释
+ * 仍可用（面板隐藏类型徽章/兼有/细分，解释文案照显）；`row`＝子结构
+ * 坏死无可用解释（面板整行不显、讲评文本跳过该项）。本刀只摘牌不改
+ * 判——`primaryType`/解释文本本身绝不因这个字段而改写。
+ */
+export type TrapSuspensionLevel = 'badge' | 'row'
+
+export type TrapSuspension = {
+  level: TrapSuspensionLevel
+  reason: string
+  suspendedAt: string
+}
+
 export type SourceLexicalTrap = {
   primaryType: 'sourceLexicalTrap'
   secondaryType?: Exclude<TrapPrimaryType, 'sourceLexicalTrap'>
@@ -354,6 +369,7 @@ export type SourceLexicalTrap = {
   optionText: string
   matchType: 'exact' | 'wordFamily'
   relationNote: string
+  suspension?: TrapSuspension
 }
 
 export type PolarityReversalSubtype =
@@ -373,6 +389,7 @@ export type PolarityReversal = {
   optionText: string
   optionHighlight: string
   explanation: string
+  suspension?: TrapSuspension
 }
 
 export type ScopeShiftSubtype =
@@ -390,6 +407,7 @@ export type ScopeShift = {
   optionText: string
   optionHighlight: string
   explanation: string
+  suspension?: TrapSuspension
 }
 
 export type EntityMismatch = {
@@ -400,6 +418,7 @@ export type EntityMismatch = {
   optionText: string
   optionEntity: string
   explanation: string
+  suspension?: TrapSuspension
 }
 
 export type UnsupportedClaim = {
@@ -407,6 +426,7 @@ export type UnsupportedClaim = {
   secondaryType?: Exclude<TrapPrimaryType, 'unsupportedClaim'>
   claim: string
   explanation: string
+  suspension?: TrapSuspension
 }
 
 // ─── Trap Evidence ──────────────────────────────────────────────────────────────

@@ -141,7 +141,7 @@ export function PaperAssetAnalysisPanel({
                         </div>
                       )}
                     </>
-                  ) : (
+                  ) : option.trapRowSuspended ? null : (
                     <>
                       <h4>干扰解析</h4>
                       <div className="pi-ps-analysis-trap-meta">

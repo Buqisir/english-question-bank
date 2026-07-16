@@ -709,7 +709,12 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "It runs the risk of expanding too fast.",
-            "explanation": "原文虽说The Lantern“too big, too bright”，但这是积极强调其影响和不可关闭，并未提及扩张过快的风险。"
+            "explanation": "原文虽说The Lantern“too big, too bright”，但这是积极强调其影响和不可关闭，并未提及扩张过快的风险。",
+            "suspension": {
+              "level": "badge",
+              "reason": "labelExplanationContradiction",
+              "suspendedAt": "2026-07-16"
+            }
           }
         },
         {

@@ -180,7 +180,12 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "Mrs. Calloway is humorous.",
-            "explanation": "原文未提及 Mrs. Calloway 有任何幽默之处；文中的幽默情节（扮大灰狼说“The better to eat you with”）属于第四段的“母亲”，与图书管理员无关。"
+            "explanation": "原文未提及 Mrs. Calloway 有任何幽默之处；文中的幽默情节（扮大灰狼说“The better to eat you with”）属于第四段的“母亲”，与图书管理员无关。",
+            "suspension": {
+              "level": "badge",
+              "reason": "labelExplanationContradiction",
+              "suspendedAt": "2026-07-16"
+            }
           }
         },
         {

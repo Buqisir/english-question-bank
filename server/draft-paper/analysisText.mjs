@@ -82,8 +82,13 @@ function formatReadingText(entry) {
       parts.push(`正答依据：${quotes.join('；')}`)
     }
   }
+  // r2-trap-audit: `suspension.level === 'row'` marks a machine-provable
+  // dead trap struct (子结构坏死，无可用解释) — skip it here the same way
+  // the panel shows nothing for it (宁缺勿假). `badge`-level suspension
+  // only hides the type badge in the panel; the explanation text itself is
+  // unaffected and still prints here.
   const traps = options
-    .filter((option) => option?.status === 'wrong' && option?.trap?.explanation)
+    .filter((option) => option?.status === 'wrong' && option?.trap?.explanation && option?.trap?.suspension?.level !== 'row')
     .map((option) => `${option.label}. ${option.trap.explanation}`)
   if (traps.length > 0) {
     parts.push(`干扰项：${traps.join('　')}`)
