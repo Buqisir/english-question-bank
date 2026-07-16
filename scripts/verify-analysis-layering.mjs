@@ -145,17 +145,19 @@ assert(
 // ------------------------------------------------------------------ 3. useState guardrail re-asserted here too
 
 // figure-render cut (fig-token P0): the canonical version of this
-// guardrail (scripts/verify-classic-retire-2.mjs) now allows exactly ONE
-// internal useState — the detail-page figure manifest fetch (see that
-// script's comment for the full "why" and the App.tsx-out-of-scope
-// reasoning). Mirrored here so the two guardrails stay in sync. The old
-// regex (`\buseState\s*\(`) never matched a generic-typed call
+// guardrail (scripts/verify-classic-retire-2.mjs) allowed exactly ONE
+// internal useState — the detail-page figure manifest fetch. similar-
+// passages-entry (E6) added a SECOND deliberate exception (the「相似篇章」
+// fetch-on-expand panel state, two useState calls) — see that script's
+// comment for the full "why" and the App.tsx-out-of-scope reasoning.
+// Mirrored here so the two guardrails stay in sync. The old regex
+// (`\buseState\s*\(`) never matched a generic-typed call
 // (`useState<T>(...)`), so it was accidentally still "passing" without
 // re-asserting anything — fixed to count all useState calls.
 const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
 assert(
-  'QuestionGroupDetailView still has at most the one figure-render internal useState (guardrail not further relaxed by this cut)',
-  useStateCallCount === 1,
+  'QuestionGroupDetailView still has at most the figure-render + similar-passages-entry internal useState calls (guardrail not further relaxed by this cut)',
+  useStateCallCount === 3,
   `found ${useStateCallCount} useState call(s)`,
 )
 

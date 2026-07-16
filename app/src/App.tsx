@@ -965,22 +965,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     [openPaperBrowse],
   )
 
-  // similar-entrypoints (E3): detail-page "配相似" SPA fast-path — same href
-  // parsing as 看解析 above, plus `similar: true` so the page auto-opens the
-  // 配相似 result for the group's first analyzed question on arrival.
-  const openPaperBrowseSimilarFromDetail = useCallback(
-    (detail: QuestionGroupDetail) => {
-      const paperId = parsePaperIdFromHref(detail.paperSurfaceHref)
-      if (!paperId) return
-      const [, query = ''] = (detail.paperSurfaceHref || '').split('?')
-      const params = new URLSearchParams(query)
-      const groupId = params.get('groupId') || detail.id
-      const questionId = params.get('questionId') || null
-      openPaperBrowse(paperId, groupId, { questionId, lecture: true, similar: true })
-    },
-    [openPaperBrowse],
-  )
-
   const paperBrowseOnBackToWorkbench = useCallback(() => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
@@ -1339,7 +1323,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
               onAddToBasket={addToBasket}
               onOpenPaperBrowse={openPaperBrowseFromDetail}
               onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
-              onOpenPaperBrowseSimilar={openPaperBrowseSimilarFromDetail}
+              questionGroupById={questionGroupById}
+              onAddSimilarToBasket={(card) => void addGroupsToBasket([card])}
             />
           ) : null}
         </section>

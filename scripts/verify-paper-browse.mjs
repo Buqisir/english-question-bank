@@ -1415,8 +1415,9 @@ assert(
 // 47-48. ConciergeGroupCard.tsx / QuestionGroupDetailView.tsx: 看解析 href
 // migration to buildPaperBrowseLectureHref.
 assert(
-  // similar-entrypoints (E3) adds a second named import (buildPaperBrowseSimilarHref)
-  // to the same import statement, for the sibling 配相似 entry.
+  // similar-passages-entry (E6): the E3-era sibling import
+  // (buildPaperBrowseSimilarHref) is retired — 相似篇章 opens an in-place
+  // panel now, only the 看解析 lecture href remains.
   "ConciergeGroupCard imports buildPaperBrowseLectureHref and uses it to build the 看解析 href (search-card entry, plain <a href> — no SPA intercept, ConciergeDesk/ConciergePaperRow are out of this cut's Scope whitelist)",
   /import\s*\{\s*buildPaperBrowseLectureHref[\s\S]{0,80}\}\s*from\s*['"]\.\/paperSurfaceHref\.ts['"]/.test(
     conciergeGroupCardSrc,

@@ -45,6 +45,7 @@ import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregate
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
 import { parsePaperIdFromHref } from './paperSurfaceHref.ts'
 import { scrollBehavior } from '../features/shared/reducedMotionScroll.ts'
+import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
   real_exam: '真题',
@@ -233,10 +234,35 @@ export type ConciergePaperRowProps = {
    * they're grouped under a year head instead).
    */
   hideYear?: boolean
+
+  /** similar-passages-entry (E6): full corpus lookup, single expanded-groupId
+   * slot, and its request state — threaded straight through to each row's
+   * ConciergeGroupCard so only one card's候选面板 is open at a time across
+   * the whole desk (owned by ConciergeDesk, see its own doc comment). */
+  questionGroupById: Map<string, QuestionGroupCard>
+  expandedSimilarGroupId: string | null
+  similarPassagesRequest: SimilarPassagesRequestState | null
+  onToggleSimilar: (groupId: string) => void
+  onRetrySimilar: () => void
 }
 
 export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
-  const { paper, expanded, basketIds, onTogglePaper, onAdd, onOpenDetail, onOpenPaperBrowse, variant = 'search', hideYear = false } = props
+  const {
+    paper,
+    expanded,
+    basketIds,
+    onTogglePaper,
+    onAdd,
+    onOpenDetail,
+    onOpenPaperBrowse,
+    variant = 'search',
+    hideYear = false,
+    questionGroupById,
+    expandedSimilarGroupId,
+    similarPassagesRequest,
+    onToggleSimilar,
+    onRetrySimilar,
+  } = props
   const rowPaperId = onOpenPaperBrowse ? findRowPaperId(paper) : null
 
   const headline = buildHeadline(paper)
@@ -392,6 +418,11 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
                           alreadyInBasket={basketIds.has(group.id)}
                           dimmed={!isHit}
                           onAdd={onAdd}
+                          questionGroupById={questionGroupById}
+                          isSimilarPassagesOpen={expandedSimilarGroupId === group.id}
+                          similarPassagesRequest={expandedSimilarGroupId === group.id ? similarPassagesRequest : null}
+                          onToggleSimilar={onToggleSimilar}
+                          onRetrySimilar={onRetrySimilar}
                         />
                       </li>
                     )

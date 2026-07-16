@@ -30,6 +30,8 @@ import type {
   ConciergeRetrievalActions,
   ConciergeRetrievalView,
 } from './useConciergeDesk.ts'
+import { fetchSimilarPassages } from '../services/similarQuestions.ts'
+import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 import './ConciergeDesk.css'
 
 export type ConciergeDeskProps = {
@@ -187,6 +189,43 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const thinkingHintId = useId()
   const dataLoading = dataStatus === 'loading'
   const [feedExpanded, setFeedExpanded] = useState(false)
+
+  // similar-passages-entry (E6): full corpus lookup for resolving a「相似
+  // 篇章」candidate's groupId to a full QuestionGroupCard — same map App.tsx
+  // builds for PaperBrowsePage, recomputed here from the `questionGroups`
+  // prop this component already receives (defaultFeed's data source).
+  const questionGroupById = useMemo(
+    () => new Map(questionGroups.map((group) => [group.id, group])),
+    [questionGroups],
+  )
+  // similar-passages-entry (E6): only one search-card's候选面板 open at a
+  // time across the whole desk（"切卡自动收起"）— a single expanded-groupId
+  // + single request slot (mirrors PaperBrowsePage's similarSeed/similarRequest
+  // single-slot pattern) is sufficient since only one panel is ever visible.
+  const [expandedSimilarGroupId, setExpandedSimilarGroupId] = useState<string | null>(null)
+  const [similarPassagesRequest, setSimilarPassagesRequest] = useState<SimilarPassagesRequestState | null>(null)
+
+  async function loadSimilarPassages(groupId: string): Promise<void> {
+    setSimilarPassagesRequest({ status: 'loading' })
+    try {
+      const data = await fetchSimilarPassages(groupId)
+      setSimilarPassagesRequest({ status: 'ready', data })
+    } catch (error) {
+      setSimilarPassagesRequest({
+        status: 'error',
+        message: error instanceof Error ? error.message : '加载相似篇章失败，请重试',
+      })
+    }
+  }
+
+  function handleToggleSimilar(groupId: string): void {
+    if (expandedSimilarGroupId === groupId) {
+      setExpandedSimilarGroupId(null)
+      return
+    }
+    setExpandedSimilarGroupId(groupId)
+    void loadSimilarPassages(groupId)
+  }
   // home-blank — rotation gating state: the input's own focus, so typing (or
   // just focusing) stops the placeholder from changing under the caret.
   const [inputFocused, setInputFocused] = useState(false)
@@ -804,6 +843,11 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     onOpenDetail={onOpenDetail}
                     onOpenPaperBrowse={onOpenPaperBrowse}
                     hideYear={hideYear}
+                    questionGroupById={questionGroupById}
+                    expandedSimilarGroupId={expandedSimilarGroupId}
+                    similarPassagesRequest={similarPassagesRequest}
+                    onToggleSimilar={handleToggleSimilar}
+                    onRetrySimilar={() => expandedSimilarGroupId && void loadSimilarPassages(expandedSimilarGroupId)}
                   />
                 </li>
               )
@@ -857,6 +901,11 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                             onTogglePaper={togglePaper}
                             onAdd={onAdd}
                             onOpenDetail={onOpenDetail}
+                            questionGroupById={questionGroupById}
+                            expandedSimilarGroupId={expandedSimilarGroupId}
+                            similarPassagesRequest={similarPassagesRequest}
+                            onToggleSimilar={handleToggleSimilar}
+                            onRetrySimilar={() => expandedSimilarGroupId && void loadSimilarPassages(expandedSimilarGroupId)}
                           />
                         </li>
                       ))}

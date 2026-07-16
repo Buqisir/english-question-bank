@@ -611,21 +611,23 @@ export const verdictLabel: Record<VerifyVerdict, string> = {
   skipped: '已跳过',
 }
 
-// ─── similar-rail (E2) — response types for POST /api/similar-questions,
-// consumed read-only by app/src/services/similarQuestions.ts. Shape mirrors
-// server/search/similarQuestions.mjs's findSimilar() return value verbatim
-// (see docs/cuts/similar-engine/qa/*-seed-response.json for real examples).
+// ─── similar-rail (E2/E6) — response types for POST /api/similar-questions
+// and POST /api/similar-passages, consumed read-only by
+// app/src/services/similarQuestions.ts. Shapes mirror
+// server/search/similarQuestions.mjs's findSimilar()/findSimilarPassages()
+// return values verbatim (v2 engine, docs/cuts/similar-v2-engine/plan.md;
+// kind vocabulary single-sourced at
+// docs/cuts/similar-v2-engine/reasons-chips-table.md).
 
-/** Every `reason.kind` the engine currently emits (similarQuestions.mjs
- * RECIPES). Not all kinds are rendered as chips — see SimilarQuestionsRailView
- * for the SW-1 constant-discourse suppression. */
+/** Every `reason.kind` the v2 engine emits, across both endpoints. Rendered
+ * unconditionally (full list, no switch/whitelist) — see
+ * SimilarQuestionsRailView / SimilarPassagesPanel. */
 export type SimilarQuestionReasonKind =
-  | 'facet-density'
   | 'topic-match'
-  | 'pos-density'
-  | 'secondary'
   | 'position-slot'
-  | 'topic-diff'
+  | 'authentic-source'
+  | 'facet-hit'
+  | 'verb-vector'
 
 export type SimilarQuestionReason = {
   kind: SimilarQuestionReasonKind
@@ -654,4 +656,32 @@ export type SimilarQuestionsResponse = {
   seedProfile: SimilarQuestionsSeedProfile
   results: SimilarQuestionResult[]
   poolStats: { totalInPool: number; returned: number }
+}
+
+// similar-passages-entry (E6) — POST /api/similar-passages ("篇章相似",
+// whole-group level, all four non-writing groupTypes). No `matchedQuestionIds`
+// (that's a small-question-only concept) and no `facets` on seedProfile
+// (the passages recipe's only seed-side dimension is topicLabels, used as a
+// hard gate — see server/search/similarQuestions.mjs findSimilarPassages).
+export type SimilarPassageResult = {
+  groupId: string
+  paperId: string | null
+  title: string
+  sourceLabel: string
+  score: number
+  reasons: SimilarQuestionReason[]
+}
+
+export type SimilarPassagesSeedProfile = {
+  groupType: string
+  topicLabels: string[]
+}
+
+export type SimilarPassagesResponse = {
+  seedProfile: SimilarPassagesSeedProfile
+  results: SimilarPassageResult[]
+  poolStats: { totalInPool: number; returned: number }
+  /** Non-null = honest-empty copy (seed has zero topic labels, PA SF-3) —
+   * render verbatim, never synthesize a different empty-state string. */
+  notice: string | null
 }
