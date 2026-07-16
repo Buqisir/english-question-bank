@@ -84,8 +84,11 @@
 
 ## 裁决点清单（PM 断点锚）
 
-- [ ] 裁1 plan 落锤 + commit
-- [ ] 裁2 流水线收口审读（DEV 回执 + verify 步原始退出码 + CR verdict）
-- [ ] 裁3 CR MF 处置
-- [ ] 裁4 merge 主树 + main CI 绿
+- [x] 裁1 plan 落锤 + commit（d60175d）
+- [x] 裁2 流水线收口审读（verify 步四命令真实退出码全 0：build/新 verify
+      15/verify:all 79/DP-2 41 双跑幂等；ABORT 系截图再生成残留，已收
+      74138fe；DEV 盲区四条全数转 CR 裁决）
+- [x] 裁3 fresh CR APPROVE 0MF/3SW（cr.md；盲区四条：接受/接受/复核
+      通过/无误伤；SW1 真值 chips 待后台补数据后 owner 扫一眼闭环）
+- [x] 裁4 merge 主树 + main CI 见 push 后 watch
 - [ ] 裁5 owner DP-3（Chrome 实点四题型 + 边角）→ 部署（强制裁决点）

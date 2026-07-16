@@ -69,7 +69,9 @@
   - 阅读：已存 reading parse 的 per-question `questionType` 计数（原型实测
     该字段部分组缺失——正式刀需先核字段覆盖率，缺失显示「未标注」不造假）。
   - 语法填空：详情页本就要 fetch 该卷 assets 目录，顺手拉
-    `analyses/grammar-fill-analysis-v2.json`（D1 已落库），本组各空
+    `analyses/grammar-fill-analysis-v1.json`（磁盘文件名沿 `-v1` 惯例，
+    内容 schemaVersion 已是 v2——D1 就地重铸不改名；本行原写 "-v2.json"
+    系笔误，2026-07-16 实核更正），本组各空
     `facetKey` → `grammarFillFacetRegistry.ts` 文案 → 计数 chips
     （"谓语·过去时 ×3"粒度沿 registry 22 键）。
   - 完形/七选五：一期**只显示题数不显示分布**（无对应成熟维度，不占位
