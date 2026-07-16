@@ -5005,10 +5005,22 @@ button:disabled {
  * side-stripe (impeccable absolute ban: no >1px accent bars).
  */
 .concierge-group-row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* similar-passages-entry (E6) DP-3 打回修：身体+hover 动作条包进一行
+ * .concierge-group-row-line——动作浮层(absolute top/bottom)锚到这一行，
+ * 「相似篇章」候选面板才能全宽落在行下方而不是被浮层盖在右列。 */
+.concierge-group-row-line {
   position: relative;
   display: flex;
   align-items: stretch;
   min-height: 40px;
+}
+
+.concierge-group-row > .similar-passages-panel {
+  margin: 0 12px 12px;
 }
 
 .concierge-group-row-body {
@@ -5112,8 +5124,8 @@ button:disabled {
   transition: opacity var(--motion-fast) var(--ease-out);
 }
 
-.concierge-group-row:hover .concierge-group-row-actions,
-.concierge-group-row:focus-within .concierge-group-row-actions {
+.concierge-group-row-line:hover .concierge-group-row-actions,
+.concierge-group-row-line:focus-within .concierge-group-row-actions {
   opacity: 1;
   pointer-events: auto;
 }

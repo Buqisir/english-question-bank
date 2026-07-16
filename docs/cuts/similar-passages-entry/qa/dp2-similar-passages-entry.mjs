@@ -38,7 +38,10 @@ import { createRequire } from 'node:module'
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 
-const rootDir = '/Users/huangxuewei/Projects/wt-similar-passages-entry'
+// 仓根从脚本自身位置推导（docs/cuts/<CUT>/qa → 上四级）——可在主树或任意
+// worktree 重跑，不锚死某次会话的绝对路径（DP-3 收账修正：DEV 原稿硬编码
+// 了已删除的 worktree 路径）。
+const rootDir = path.resolve(import.meta.dirname, '..', '..', '..', '..')
 const qaDir = path.join(rootDir, 'docs/cuts/similar-passages-entry/qa')
 const require = createRequire(import.meta.url)
 const playwrightPath = require.resolve('playwright', { paths: [path.join(rootDir, 'app')] })
@@ -268,6 +271,20 @@ async function main() {
     await rowA.locator('[data-ra-entry="group-card-similar"]').click()
     await rowA.locator('.similar-passages-panel').waitFor({ timeout: 15_000 })
     pass('③ 卡 A 候选面板展开')
+    // DP-3 打回回归锚（2026-07-15）：面板曾以 row 的第三个 flex 子项挤进右列、
+    // 被 absolute hover 动作条盖住——DOM 存在但人眼不可见。断言几何：面板
+    // 必须占卡宽的大半（不是右侧窄列）且整体位于 hover 动作条行的下方。
+    {
+      const panelBox = await rowA.locator('.similar-passages-panel').boundingBox()
+      const lineBox = await rowA.locator('.concierge-group-row-line').boundingBox()
+      const rowBox = await rowA.boundingBox()
+      ok('③ 面板可见且近整卡宽（几何回归锚）',
+        panelBox != null && rowBox != null && panelBox.width > rowBox.width * 0.8,
+        `panel=${JSON.stringify(panelBox)} row=${JSON.stringify(rowBox)}`)
+      ok('③ 面板整体位于动作条行下方（不被 hover 浮层遮盖）',
+        panelBox != null && lineBox != null && panelBox.y >= lineBox.y + lineBox.height - 1,
+        `panel.y=${panelBox?.y} lineBottom=${lineBox ? lineBox.y + lineBox.height : null}`)
+    }
     ok('③ 展开时卡 B 无候选面板', (await rowB.locator('.similar-passages-panel').count()) === 0)
     await rowB.locator('[data-ra-entry="group-card-similar"]').click()
     await rowB.locator('.similar-passages-panel').waitFor({ timeout: 15_000 })

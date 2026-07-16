@@ -164,6 +164,9 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       className={`concierge-group-row${dimmed ? ' is-dim' : ''}`}
       data-group-id={group.id}
     >
+      {/* E6 DP-3 打回修：身体+动作条包进一行，hover 动作浮层锚到行内，
+          相似篇章面板才能全宽落在行下方（见 App.css 同名注释） */}
+      <div className="concierge-group-row-line">
       <div className="concierge-group-row-body" onClick={handleRowBodyClick}>
         <div className="concierge-group-row-main">
           <strong className="concierge-group-row-title" title={passageTitle}>
@@ -238,6 +241,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
             {group.paperSurfaceLabel}
           </a>
         )}
+      </div>
       </div>
 
       {isSimilarPassagesOpen && similarPassagesRequest && (

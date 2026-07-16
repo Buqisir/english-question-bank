@@ -110,3 +110,21 @@ diff 无 server/shared.papersurface/schemas/*Adapter/grammarFillFacetRegistry �
 - SW-3 不收：notice + 池子条双显两面一致，诚实冗余，不值一行分支。
 - SW-4 ✅ 面板副标改单源 helper `similarPassagesRecipeSummary(groupType)`，篇位只在 reading 文案出现。
 - 收账后复验：verify:all 78/1/0 exit 0 + DP-2 20 checks exit 0（主代理亲跑）。
+
+## DP-3 现场打回与收账（2026-07-15，owner 旁观小川亲驱 Chrome）
+
+- **打回**：搜索卡「相似篇章」面板 DOM 展开但人眼不可见——面板作为
+  `.concierge-group-row`（横向 flex）第三子项被挤进右列，再被
+  `position:absolute` 的 hover 动作浮层盖住。DP-2 的 DOM 断言（waitFor
+  存在）对此全绿，正是"合成断言看得见、人眼看不见"的盲区；详情页/讲评
+  rail 两处挂载无此问题。
+- **修**：身体+动作条包进 `.concierge-group-row-line`（浮层锚到行内），
+  row 转纵向，面板全宽落行下（App.css + ConciergeGroupCard.tsx）。
+- **DP-2 收账**：③ 新增两条几何回归锚（面板宽 >80% 卡宽、面板位于动作
+  行下方）；修 DEV 原稿 rootDir 硬编码已删 worktree 绝对路径（违反可
+  重跑纪律，主树跑 MODULE_NOT_FOUND 实证）→ 改脚本自身位置推导。
+- **复验**：主树 build exit 0 + verify:all 79/0/0 exit 0 + DP-2 22 checks
+  exit 0（真实退出码，不经管道）。
+- 现场过点：①详情页面板富态（截图）②完形讲评 CTA 改指篇章（含分层制
+  活证：同篇位模拟题排在相邻篇位真题之上）③切卡自动收起 ④加入+toast+
+  计数+1 ⑤similar=1 冷刷新自愈 + 语法填空空态诚实。
