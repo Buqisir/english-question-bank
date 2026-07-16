@@ -1,18 +1,16 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-15（grammar-facets-v2(D1) + similar-v2-engine(E5)
-双刀收官合入 main：语法填空解析 schema v2 落库 + I16·C sidecar 退役 +
-相似引擎 v2 重铸，**部署门：随 E6/E7 同批**——完形/七选五「配相似」CTA
-在新端点语义下是死路，E6 改指前不部署。同日 paper-browse 目录 rail
-分段面板重铸上线，**生产 6b76ec5**）
+Last updated: 2026-07-15（similar-passages-entry(E6) 收官合入 main：
+篇章相似入口三处 + 讲评 CTA 改指 + 类型收账，**部署门已解**——
+待 owner DP-3（D1/E5/E6 三刀归并实点）后同批部署）
 
-下一步队列（2026-07-15 收状态）：① E6/E7——「配相似」CTA 改指篇章相似
-端点 + 前端 reasons 文案表/类型收账（解部署门，D1/E5 随之见生产，D1 数据
-文件走 git 同步无需停服 apply）；② 详情页重设计正式刀——spec 已 approved
-（`docs/specs/2026-07-15-detail-page-redesign-design.md`，原型
-`?detailVariant=paper-peek` DEV-only 在库可试）；③ 挂账：no-hint 3 空疑似
-导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch 若干
-（谓语推导副本收拢、vp-driver README 残句等，见两把刀 cr.md）。
+下一步队列（2026-07-15 收状态）：① **owner DP-3 + 部署**（D1/E5/E6
+同批，D1 数据文件走 git 同步无需停服 apply）；② 详情页重设计正式刀——
+spec 已 approved（`docs/specs/2026-07-15-detail-page-redesign-design.md`，
+动作行已补录「相似篇章」，原型 `?detailVariant=paper-peek` DEV-only 在库
+可试）；③ E7 工作台⇄换篇（原型场景 2，独立刀）；④ 挂账：no-hint 3 空
+疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch
+若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
 
 ## 现在是什么
 
@@ -35,6 +33,14 @@ Last updated: 2026-07-15（grammar-facets-v2(D1) + similar-v2-engine(E5)
 
 ## 主线焦点
 
+- 2026-07-15：**similar-passages-entry（E6）收官**（merge d306b8a，fresh CR
+  APPROVE 0MF/4SW（SW-1/2/4 当场收、SW-3 不收），verify:all 78 绿×2 +
+  DP-2 20 断言×2 主代理亲跑 + main CI 双证）：共享「相似篇章」候选面板
+  挂详情页/搜索卡（原地展开，深链退役）、讲评 CTA 完形/七选五改指
+  `/api/similar-passages`（legacy `similar=1` 自愈）、domain 类型收账 v2
+  五 kind、重设计 spec 动作行补录。**部署门已解，D1/E5/E6 同批待
+  owner DP-3 + 部署**（裁5，qa 脚本 `qa/dp2-similar-passages-entry.mjs`
+  可重跑）。**账单**：DEV 320k + CR 69k；主代理出场 ~5。
 - 2026-07-15：**reorder-suggest 收官（draft-desk 刀E 排序建议消断篇）**
   （merge 0b76558，fresh CR APPROVE 1MF 当场修+SW-1 当场收，verify:all 78
   绿 + main CI 双证）：启发式候选 ≤6 + 单次 dry-run 真值门槛（断篇归零才
