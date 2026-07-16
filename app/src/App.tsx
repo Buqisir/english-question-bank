@@ -9,12 +9,7 @@ import {
   groupTypeLabel,
   type QuestionGroupCard,
   type QuestionGroupDetail,
-  type VerifyQuestionGroupResult,
   type ReadingParseQuestionGroupResult,
-  type ClozeParseQuestionGroupResult,
-  type SevenChoicesParseQuestionGroupResult,
-  type GrammarParseQuestionGroupResult,
-  type VerifyResult,
 } from './domain/questionBank'
 import { usePaperDraft } from './paperAssembly/usePaperDraft'
 import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
@@ -67,146 +62,11 @@ function normalizeAiModel(value: string) {
 
 const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 
-function buildGrammarVerifyResult(
-  detail: QuestionGroupDetail,
-  parseResult: GrammarParseQuestionGroupResult,
-): VerifyQuestionGroupResult {
-  const results: VerifyResult[] = detail.questions.map((question) => {
-    const aiQuestion = parseResult.questions.find((item) => String(item.questionNo).trim() === String(question.questionNo).trim())
-    const aiAnswer = String(aiQuestion?.answer || '').trim().toLowerCase()
-    const storedAnswer = String(question.answer || '').trim().toLowerCase()
-
-    if (!aiQuestion) {
-      return {
-        questionId: question.id,
-        questionNo: question.questionNo,
-        verdict: 'skipped',
-        reason: 'AI 未返回该题解析',
-      }
-    }
-
-    return {
-      questionId: question.id,
-      questionNo: question.questionNo,
-      verdict: aiAnswer && aiAnswer === storedAnswer ? 'correct' : 'answer_wrong',
-      reason: aiAnswer && aiAnswer === storedAnswer
-        ? 'AI 答案与录入一致'
-        : `AI 答案: ${aiQuestion.answer || '未返回'}，录入答案: ${question.answer || '待补'}`,
-      correctAnswer: aiQuestion.answer,
-    }
-  })
-
-  return {
-    questionGroupId: detail.id,
-    title: detail.title,
-    questionCount: detail.questions.length,
-    verifiedCount: results.filter((item) => item.verdict !== 'skipped').length,
-    results,
-    model: parseResult.model,
-    thinkingMode: parseResult.thinkingMode,
-    keySource: parseResult.keySource,
-    keyFingerprint: parseResult.keyFingerprint,
-    keyMask: parseResult.keyMask,
-    requestId: parseResult.requestId,
-    provider: parseResult.provider,
-    totalLatencyMs: parseResult.totalLatencyMs,
-    calledCount: parseResult.parsedCount,
-  }
-}
-
-function buildClozeVerifyResult(
-  detail: QuestionGroupDetail,
-  parseResult: ClozeParseQuestionGroupResult,
-): VerifyQuestionGroupResult {
-  const results: VerifyResult[] = detail.questions.map((question) => {
-    const aiQuestion = parseResult.questions.find((item) => String(item.questionNo).trim() === String(question.questionNo).trim())
-    const aiAnswer = String(aiQuestion?.answer || '').trim().toUpperCase()
-    const storedAnswer = String(question.answer || '').trim().toUpperCase()
-
-    if (!aiQuestion) {
-      return {
-        questionId: question.id,
-        questionNo: question.questionNo,
-        verdict: 'skipped',
-        reason: 'AI 未返回该题解析',
-      }
-    }
-
-    return {
-      questionId: question.id,
-      questionNo: question.questionNo,
-      verdict: aiAnswer && aiAnswer === storedAnswer ? 'correct' : 'answer_wrong',
-      reason: aiAnswer && aiAnswer === storedAnswer
-        ? 'AI 答案与录入一致'
-        : `AI 答案: ${aiQuestion.answer || '未返回'}，录入答案: ${question.answer || '待补'}`,
-      correctAnswer: aiQuestion.answer,
-    }
-  })
-
-  return {
-    questionGroupId: detail.id,
-    title: detail.title,
-    questionCount: detail.questions.length,
-    verifiedCount: results.filter((item) => item.verdict !== 'skipped').length,
-    results,
-    model: parseResult.model,
-    thinkingMode: parseResult.thinkingMode,
-    keySource: parseResult.keySource,
-    keyFingerprint: parseResult.keyFingerprint,
-    keyMask: parseResult.keyMask,
-    requestId: parseResult.requestId,
-    provider: parseResult.provider,
-    totalLatencyMs: parseResult.totalLatencyMs,
-    calledCount: parseResult.parsedCount,
-  }
-}
-
-function buildSevenChoicesVerifyResult(
-  detail: QuestionGroupDetail,
-  parseResult: SevenChoicesParseQuestionGroupResult,
-): VerifyQuestionGroupResult {
-  const results: VerifyResult[] = detail.questions.map((question) => {
-    const aiQuestion = parseResult.questions.find((item) => String(item.questionNo).trim() === String(question.questionNo).trim())
-    const aiAnswer = String(aiQuestion?.answer || '').trim().toUpperCase()
-    const storedAnswer = String(question.answer || '').trim().toUpperCase()
-
-    if (!aiQuestion) {
-      return {
-        questionId: question.id,
-        questionNo: question.questionNo,
-        verdict: 'skipped',
-        reason: 'AI 未返回该题解析',
-      }
-    }
-
-    return {
-      questionId: question.id,
-      questionNo: question.questionNo,
-      verdict: aiAnswer && aiAnswer === storedAnswer ? 'correct' : 'answer_wrong',
-      reason: aiAnswer && aiAnswer === storedAnswer
-        ? 'AI 答案与录入一致'
-        : `AI 答案: ${aiQuestion.answer || '未返回'}，录入答案: ${question.answer || '待补'}`,
-      correctAnswer: aiQuestion.answer,
-    }
-  })
-
-  return {
-    questionGroupId: detail.id,
-    title: detail.title,
-    questionCount: detail.questions.length,
-    verifiedCount: results.filter((item) => item.verdict !== 'skipped').length,
-    results,
-    model: parseResult.model,
-    thinkingMode: parseResult.thinkingMode,
-    keySource: parseResult.keySource,
-    keyFingerprint: parseResult.keyFingerprint,
-    keyMask: parseResult.keyMask,
-    requestId: parseResult.requestId,
-    provider: parseResult.provider,
-    totalLatencyMs: parseResult.totalLatencyMs,
-    calledCount: parseResult.parsedCount,
-  }
-}
+// detail-page-redesign (2026-07-15): buildGrammarVerifyResult /
+// buildClozeVerifyResult / buildSevenChoicesVerifyResult retired — their
+// only call sites were the openDetail backfill's now-deleted
+// setVerifyResult(...) calls (see the retired detail-page AI-analysis
+// sections, spec 负空间①).
 
 // flow-panel 刀 3: openPaperBrowse's入口带态 options bag. A named type (not
 // an inline `{ }` literal in the callback's parameter list) — an inline
@@ -334,29 +194,15 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   const [selectedDetail, setSelectedDetail] = useState<QuestionGroupDetail | null>(null)
   const [detailStatus, setDetailStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
   const [detailError, setDetailError] = useState('')
-  const [verifyResult, setVerifyResult] = useState<VerifyQuestionGroupResult | null>(null)
-  const [verifyStatus, setVerifyStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [verifyError, setVerifyError] = useState('')
-  const [clozeParseResult, setClozeParseResult] = useState<ClozeParseQuestionGroupResult | null>(null)
-  const [clozeParseStatus, setClozeParseStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [clozeParseError, setClozeParseError] = useState('')
-  const [clozeParseSaveStatus, setClozeParseSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const [clozeParseSaveError, setClozeParseSaveError] = useState('')
-  const [sevenChoicesParseResult, setSevenChoicesParseResult] = useState<SevenChoicesParseQuestionGroupResult | null>(null)
-  const [sevenChoicesParseStatus, setSevenChoicesParseStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [sevenChoicesParseError, setSevenChoicesParseError] = useState('')
-  const [sevenChoicesParseSaveStatus, setSevenChoicesParseSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const [sevenChoicesParseSaveError, setSevenChoicesParseSaveError] = useState('')
-  const [grammarParseResult, setGrammarParseResult] = useState<GrammarParseQuestionGroupResult | null>(null)
-  const [grammarParseStatus, setGrammarParseStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [grammarParseError, setGrammarParseError] = useState('')
-  const [grammarParseSaveStatus, setGrammarParseSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const [grammarParseSaveError, setGrammarParseSaveError] = useState('')
+  // detail-page-redesign (2026-07-15): verifyResult/clozeParseResult/
+  // sevenChoicesParseResult/grammarParseResult (+ their status/error/
+  // saveStatus/saveError siblings) retired — they existed solely to feed
+  // the old detail page's per-question AI-analysis sections, which are
+  // now structurally gone (spec 负空间①). readingParseResult is the ONE
+  // survivor: the new 速览头 chips need its per-question `questionType`
+  // (spec data contract, chips 数据源 §阅读). See verify-classic-retire-2.mjs
+  // for the matching anchor update.
   const [readingParseResult, setReadingParseResult] = useState<ReadingParseQuestionGroupResult | null>(null)
-  const [readingParseStatus, setReadingParseStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle')
-  const [readingParseError, setReadingParseError] = useState('')
-  const [readingParseSaveStatus, setReadingParseSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const [readingParseSaveError, setReadingParseSaveError] = useState('')
   const [aiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
   const [aiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
   const [backfillStatus, setBackfillStatus] = useState<'idle' | 'loading'>('idle')
@@ -569,62 +415,13 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setViewMode('detail')
     setDetailStatus('loading')
     setDetailError('')
-    setVerifyResult(null)
-    setVerifyStatus('idle')
-    setVerifyError('')
-    setClozeParseResult(null)
-    setClozeParseStatus('idle')
-    setClozeParseError('')
-    setClozeParseSaveStatus('idle')
-    setClozeParseSaveError('')
-    setSevenChoicesParseResult(null)
-    setSevenChoicesParseStatus('idle')
-    setSevenChoicesParseError('')
-    setSevenChoicesParseSaveStatus('idle')
-    setSevenChoicesParseSaveError('')
     setReadingParseResult(null)
-    setReadingParseStatus('idle')
-    setReadingParseError('')
-    setReadingParseSaveStatus('idle')
-    setReadingParseSaveError('')
-    setGrammarParseResult(null)
-    setGrammarParseStatus('idle')
-    setGrammarParseError('')
-    setGrammarParseSaveStatus('idle')
-    setGrammarParseSaveError('')
 
     try {
       const detail = await fetchQuestionGroupDetail(id)
       setSelectedDetail(detail)
       if (detail.readingParseResult) {
         setReadingParseResult(detail.readingParseResult)
-        setReadingParseStatus('loaded')
-        setReadingParseSaveStatus('saved')
-      }
-      if (detail.readingVerifyResult) {
-        setVerifyResult(detail.readingVerifyResult)
-        setVerifyStatus('loaded')
-      }
-      if (detail.clozeParseResult) {
-        setClozeParseResult(detail.clozeParseResult)
-        setClozeParseStatus('loaded')
-        setClozeParseSaveStatus('saved')
-        setVerifyResult(buildClozeVerifyResult(detail, detail.clozeParseResult))
-        setVerifyStatus('loaded')
-      }
-      if (detail.sevenChoicesParseResult) {
-        setSevenChoicesParseResult(detail.sevenChoicesParseResult)
-        setSevenChoicesParseStatus('loaded')
-        setSevenChoicesParseSaveStatus('saved')
-        setVerifyResult(buildSevenChoicesVerifyResult(detail, detail.sevenChoicesParseResult))
-        setVerifyStatus('loaded')
-      }
-      if (detail.grammarParseResult) {
-        setGrammarParseResult(detail.grammarParseResult)
-        setGrammarParseStatus('loaded')
-        setGrammarParseSaveStatus('saved')
-        setVerifyResult(buildGrammarVerifyResult(detail, detail.grammarParseResult))
-        setVerifyStatus('loaded')
       }
       setDetailStatus('loaded')
     } catch (error) {
@@ -1286,37 +1083,8 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
           ) : viewMode === 'detail' ? (
             <QuestionGroupDetailView
               isOwnerView={isOwnerView}
-              defaultAiModel={DEFAULT_AI_MODEL}
               detail={{ selectedDetail, detailStatus, detailError }}
-              verify={{ verifyResult, verifyStatus, verifyError }}
-              clozeParse={{
-                result: clozeParseResult,
-                status: clozeParseStatus,
-                error: clozeParseError,
-                saveStatus: clozeParseSaveStatus,
-                saveError: clozeParseSaveError,
-              }}
-              sevenChoicesParse={{
-                result: sevenChoicesParseResult,
-                status: sevenChoicesParseStatus,
-                error: sevenChoicesParseError,
-                saveStatus: sevenChoicesParseSaveStatus,
-                saveError: sevenChoicesParseSaveError,
-              }}
-              grammarParse={{
-                result: grammarParseResult,
-                status: grammarParseStatus,
-                error: grammarParseError,
-                saveStatus: grammarParseSaveStatus,
-                saveError: grammarParseSaveError,
-              }}
-              readingParse={{
-                result: readingParseResult,
-                status: readingParseStatus,
-                error: readingParseError,
-                saveStatus: readingParseSaveStatus,
-                saveError: readingParseSaveError,
-              }}
+              readingParse={{ result: readingParseResult }}
               onBack={backToList}
               onEdit={openEditEntry}
               onDelete={handleDeleteQuestionGroup}

@@ -58,35 +58,33 @@ function read(relPath) {
 
 const detailView = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 
-// figure-render cut (fig-token P0): this component's "props-driven, zero
-// internal useState" invariant gets its ONE deliberate, narrow exception
-// here — the detail-page figure manifest fetch (see the file's own
-// header comment + the useEffect immediately above `figuresState`'s
-// declaration; App.tsx is out of this cut's Allowed scope, so there is
-// no host-level fetch to piggyback on the way every other render surface
-// this cut touches does). The old regex (`\buseState\s*\(`) had a blind
-// spot — it never matched a generic-typed call (`useState<T>(...)`), so
-// it would have silently kept "passing" without actually re-asserting
-// the invariant boundary. Fixed to count ALL useState calls (with or
-// without a generic) and assert there is EXACTLY the one figure-render
-// exception, by exact declaration text — any OTHER internal state still
-// fails this check.
-//
-// similar-passages-entry (E6) adds a SECOND deliberate, narrow exception —
-// the detail-page's own「相似篇章」fetch-on-expand panel state
-// (similarPassagesOpen/similarPassagesRequest), same rationale as the
-// figure-render exception (App.tsx is out of this cut's Scope too; no host
-// fetch to piggyback on). Updated from "exactly one" to "exactly three" —
-// still an EXACT count, so any OTHER/future internal state still fails.
+// figure-render cut (fig-token P0) opened this component's "props-driven,
+// zero internal useState" invariant with ONE deliberate exception (the old
+// figure-manifest fetch); similar-passages-entry (E6) added a second pair
+// (similarPassagesOpen/similarPassagesRequest). detail-page-redesign
+// (2026-07-15) rewrote the component around a new async「一张纸」paper
+// mount, which retires the old standalone figuresState fetch (figures are
+// now fetched as part of the same paper-asset load effect that builds the
+// PaperSurface model) and replaces it with two narrow state pairs of its
+// own: `load` (the paper-asset fetch/build result) + `expanded` (露一角 ↔
+// 展开卷面 toggle). Count is still an EXACT assertion (4, not "at least
+// 4") — any OTHER/future internal state still fails this check. The old
+// regex (`\buseState\s*\(`) had a blind spot — it never matched a
+// generic-typed call (`useState<T>(...)`) — kept fixed to count ALL
+// useState calls (with or without a generic).
 const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
 assert(
-  'QuestionGroupDetailView has exactly three internal useState calls (figure-render manifest-fetch + similar-passages-entry panel state; props-driven otherwise)',
-  useStateCallCount === 3,
+  'QuestionGroupDetailView has exactly four internal useState calls (一张纸 load+expanded + similar-passages-entry panel state; props-driven otherwise)',
+  useStateCallCount === 4,
   `found ${useStateCallCount} useState call(s)`,
 )
 assert(
-  'one useState is the figure-render figuresState declaration (not some other/future state)',
-  /const \[figuresState, setFiguresState\] = useState</.test(detailView),
+  'one useState is the 一张纸 load declaration (paper-asset fetch/build result)',
+  /const \[load, setLoad\] = useState<LoadState>/.test(detailView),
+)
+assert(
+  'one useState is the 一张纸 expanded declaration (露一角 ↔ 展开卷面 toggle)',
+  /const \[expanded, setExpanded\] = useState\(false\)/.test(detailView),
 )
 assert(
   'one useState is the similar-passages-entry similarPassagesOpen declaration',
@@ -150,28 +148,36 @@ assert(
 )
 
 // Member-visible surfaces (kept, C2/C3) must remain unconditional / present.
+// detail-page-redesign (2026-07-15): 加入草稿卷 moved from `.add-button` to
+// the new speed-look-head primary action `.peek-btn--primary`, still calling
+// onAddToBasket(selectedDetail), still unconditional (not isOwnerView-gated).
 assert(
   '加入草稿卷 button stays visible to member (not gated by isOwnerView)',
-  /<button\s*\n\s*className="add-button"\s*\n\s*type="button"\s*\n\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(detailView),
+  /<button\s*\n\s*className="peek-btn peek-btn--primary"\s*\n\s*type="button"\s*\n\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(
+    detailView,
+  ),
 )
-// figure-render cut: the passage `<pre>` is no longer a single static
-// element — it is one branch of `buildPassageSegments(...).map(...)`
-// (figure paragraphs render an <img> + a differently-classed <pre>
-// instead). Widened the literal match to `className="passage-text`
-// (prefix, so it also catches the figure-segment's
-// `"passage-text passage-figure-flattened-text"` compound class) and the
-// "not owner-gated" window from 40 to 1000 chars — the real nearest
-// `isOwnerView` in the file sits ~5500 chars before the passage section
-// (an unrelated owner-only button in detail-actions), so 1000 stays
-// comfortably below any real false-negative risk while accommodating the
-// segment-map wrapper this cut introduced.
-assert(
-  'passage text section is unconditional (member-visible)',
-  /<pre[^>]*className="passage-text/.test(detailView) && !/isOwnerView[\s\S]{0,1000}<pre[^>]*className="passage-text/.test(detailView),
-)
+// detail-page-redesign (2026-07-15): the bespoke 语篇渲染 passage section
+// (`<pre className="passage-text">`) is fully retired per spec 退役清单 —
+// replaced by the read-only「一张纸」PaperSurface mount (asserted read-only
+// in verify-detail-redesign.mjs). This check flips from "passage text is
+// member-visible" to "the paper-mount wrapper (`.peek-paper`) is member-
+// visible" — same underlying guarantee (this content surface must not be
+// owner-gated), moved to the new surface that replaced it.
+{
+  const peekPaperIdx = detailView.indexOf('className={`peek-paper')
+  const immediatelyBefore = detailView.slice(0, peekPaperIdx).trimEnd()
+  assert(
+    '一张纸 paper-mount wrapper (.peek-paper) is unconditional (member-visible, not gated by isOwnerView)',
+    peekPaperIdx > -1 && !immediatelyBefore.endsWith('isOwnerView && ('),
+    `preceding token: ...${immediatelyBefore.slice(-40)}`,
+  )
+}
+// detail-page-redesign (2026-07-15): 删除 moved from `.detail-button danger`
+// to the new次位 `.peek-btn--minor.peek-btn--danger`, still isOwnerView-gated.
 assert(
   '删除 button stays owner-gated (kept, C3)',
-  /isOwnerView && \(\s*\n\s*<button\s*\n\s*className="detail-button danger"/.test(detailView),
+  /isOwnerView && \(\s*\n\s*<button\s*\n\s*className="peek-btn peek-btn--minor peek-btn--danger"/.test(detailView),
 )
 assert(
   '已绑定话题标签展示 stays unconditional (member-visible, C2)',
@@ -289,12 +295,21 @@ for (const fn of retiredHandlers) {
   )
 }
 
-// READ-only state populated by openDetail's回填 must still be defined —
-// these are NOT part of the retired surface.
-for (const state of ['readingParseResult', 'clozeParseResult', 'sevenChoicesParseResult', 'grammarParseResult', 'verifyResult']) {
+// READ-only state populated by openDetail's回填. detail-page-redesign
+// (2026-07-15) retires clozeParseResult/sevenChoicesParseResult/
+// grammarParseResult/verifyResult — they existed solely to feed the old
+// detail page's per-question AI-analysis sections, which are now
+// structurally gone (spec 负空间①). readingParseResult is the one
+// survivor: the new 速览头 chips need its per-question `questionType`
+// (spec chips 数据契约 §阅读).
+assert(
+  'App.tsx still defines READ-only state readingParseResult',
+  /\[readingParseResult, setReadingParseResult\]/.test(appTsx),
+)
+for (const retiredState of ['clozeParseResult', 'sevenChoicesParseResult', 'grammarParseResult', 'verifyResult']) {
   assert(
-    `App.tsx still defines READ-only state ${state}`,
-    new RegExp(`\\[${state}, set${state[0].toUpperCase()}${state.slice(1)}\\]`).test(appTsx),
+    `App.tsx no longer defines retired READ-only state ${retiredState} (detail-page-redesign — its only reader was the retired detail-page AI-analysis section)`,
+    !new RegExp(`\\[${retiredState}, set${retiredState[0].toUpperCase()}${retiredState.slice(1)}\\]`).test(appTsx),
   )
 }
 assert(

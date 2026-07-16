@@ -3,16 +3,23 @@
  * Verification: 刀A analysis-layering (docs/cuts/analysis-layering/plan.md).
  *
  * Owner call (2026-07-08): the detail page gave "too much, too flat" analysis
- * per question — everything rendered open at once. This cut adds a two-layer
- * disclosure: the answer line stays always visible, everything else (per
- * question and per group-level block) collapses behind a generic
- * `AnalysisDisclosure` toggle. No new "one-line takeaway" middle layer is
- * invented (data has no such field) and no field content is reworded.
+ * per question — everything rendered open at once. This cut added a
+ * two-layer disclosure: the answer line stays always visible, everything
+ * else (per question and per group-level block) collapses behind a generic
+ * `AnalysisDisclosure` toggle.
  *
- * `QuestionGroupDetailView.tsx` keeps its hard "zero internal useState"
- * guardrail (verify-classic-retire-2.mjs) — this script re-asserts that so
- * a future edit can't quietly reintroduce state there while adding
- * AnalysisDisclosure usage.
+ * detail-page-redesign (2026-07-15, spec docs/specs/2026-07-15-detail-page-
+ * redesign-design.md 负空间①「解析不放」): the entire per-question analysis
+ * surface that section 2 used to assert the layering of — passage,
+ * 逐题题干答案, all four groupType AI-analysis blocks — is now structurally
+ * gone from the detail page (retired wholesale, not re-laid-out), replaced
+ * by 速览头 + a read-only「一张纸」PaperSurface mount. Section 2's
+ * assertions FLIP from "AnalysisDisclosure is wired up N ways" to "zero
+ * AnalysisDisclosure residue" (plan.md §6 authorized anchor move). Section 1
+ * (AnalysisDisclosure.tsx itself — still a live shared component, still used
+ * by verify-detail-redesign.mjs's own retirement check) and section 3 (the
+ * useState guardrail count, now 4 per detail-page-redesign's rewrite) are
+ * re-asserted unchanged in spirit.
  *
  * Source-level checks only (matches the established convention for this
  * repo's `.tsx` verify scripts — no jsdom/testing-library harness exists to
@@ -22,14 +29,13 @@
  *   1. AnalysisDisclosure.tsx exists, owns its own useState, defaults
  *      collapsed, and exposes the accessibility pattern (aria-expanded +
  *      aria-pressed on a <button>) per PaperAssetAnalysisPanel.tsx precedent.
- *   2. QuestionGroupDetailView.tsx imports and uses AnalysisDisclosure for
- *      every per-question AI block (reading/cloze/seven_choices/grammar)
- *      and every group-level block (脉络+重要词块 / 故事大意+串词成篇 /
- *      文章主旨 / 全文翻译), while the AI 推荐答案 line for each group type
- *      stays outside any AnalysisDisclosure (always visible).
- *   3. QuestionGroupDetailView.tsx still has zero internal useState — the
- *      guardrail moved responsibility to the new child component, not
- *      quietly relaxed on the parent.
+ *   2. QuestionGroupDetailView.tsx has zero AnalysisDisclosure import/usage,
+ *      and zero residue of the per-question/group-level analysis surfaces
+ *      the old layering wrapped (question-ai-block, question-ai-parse,
+ *      the four group-level analysis titles).
+ *   3. QuestionGroupDetailView.tsx still has exactly the detail-page-
+ *      redesign useState count (4) — the guardrail is not further relaxed
+ *      by this cut.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -78,86 +84,46 @@ assert(
   /\{expanded\s*&&\s*<div className="analysis-disclosure-body">/.test(disclosure),
 )
 
-// ------------------------------------------------------------------ 2. QuestionGroupDetailView.tsx wiring
+// ------------------------------------------------------------------ 2. QuestionGroupDetailView.tsx: AnalysisDisclosure retired (detail-page-redesign)
 
 const detailView = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 
 assert(
-  "QuestionGroupDetailView imports AnalysisDisclosure from './AnalysisDisclosure'",
-  /import \{ AnalysisDisclosure \} from '\.\/AnalysisDisclosure'/.test(detailView),
+  'QuestionGroupDetailView no longer imports AnalysisDisclosure',
+  !/import \{ AnalysisDisclosure \} from '\.\/AnalysisDisclosure'/.test(detailView),
 )
-
-const analysisDisclosureUsageCount = (detailView.match(/<AnalysisDisclosure[\s>]/g) || []).length
 assert(
-  'QuestionGroupDetailView uses <AnalysisDisclosure> at least 8 times (4 per-question + 4 group-level blocks)',
-  analysisDisclosureUsageCount >= 8,
-  `found ${analysisDisclosureUsageCount}`,
+  'QuestionGroupDetailView mounts zero <AnalysisDisclosure> (spec 负空间① — 解析不放)',
+  !/<AnalysisDisclosure[\s>]/.test(detailView),
 )
 
-// Per-question: each group type's remaining analysis fields collapse behind
-// AnalysisDisclosure, while the AI 推荐答案 line for that group type appears
-// BEFORE the disclosure (always visible) — assert relative ordering via a
-// single regex per group type so a future edit can't silently move the
-// answer line back inside the collapsed body.
-const perQuestionChecks = [
-  [
-    'reading: AI 推荐答案 line precedes AnalysisDisclosure, 题目翻译/干扰项分析 stay inside it',
-    /readingParseItem\.answer[\s\S]{0,80}question-ai-answer-line[\s\S]{0,400}<AnalysisDisclosure>[\s\S]*?题目翻译[\s\S]*?干扰项分析/,
-  ],
-  [
-    'cloze: AI 推荐答案 line precedes AnalysisDisclosure, AI 解析/干扰项分析 stay inside it',
-    /question-ai-answer-line"[\s\S]{0,150}clozeParseItem\.answer[\s\S]{0,400}<AnalysisDisclosure>[\s\S]*?AI 完形填空解析[\s\S]*?干扰项分析/,
-  ],
-  [
-    'seven_choices: AI 推荐答案 line precedes AnalysisDisclosure, 选项翻译/位置与上下文 stay inside it',
-    /question-ai-answer-line"[\s\S]{0,150}sevenChoicesParseItem\.answer[\s\S]{0,400}<AnalysisDisclosure>[\s\S]*?选项翻译[\s\S]*?位置与上下文/,
-  ],
-  [
-    'grammar: AI 推荐答案 line precedes AnalysisDisclosure, 提示词意思/挖空句翻译 stay inside it',
-    /question-ai-answer-line"[\s\S]{0,150}grammarParseItem\.answer[\s\S]{0,400}<AnalysisDisclosure>[\s\S]*?提示词意思[\s\S]*?挖空句翻译/,
-  ],
+// The per-question/group-level analysis surfaces this cut's old layering
+// wrapped are themselves fully retired, not merely un-wrapped — confirm
+// their containing markers are gone too (a future regression re-adding the
+// old analysis blocks WITHOUT AnalysisDisclosure would still be spec
+// non-compliance, and this catches that).
+const retiredAnalysisMarkers = [
+  ['question-ai-block (per-question AI analysis wrapper)', /question-ai-block/],
+  ['question-ai-parse (per-question AI analysis body)', /question-ai-parse/],
+  ['脉络与重要词块 (reading group-level block)', /脉络与重要词块/],
+  ['故事大意与串词成篇 (cloze group-level block)', /故事大意与串词成篇/],
+  ['文章主旨 (seven_choices group-level block, as an AnalysisDisclosure label)', /<AnalysisDisclosure label="文章主旨"/],
+  ['全文翻译 (grammar group-level block, as an AnalysisDisclosure label)', /<AnalysisDisclosure label="全文翻译"/],
 ]
-
-for (const [name, pattern] of perQuestionChecks) {
-  assert(name, pattern.test(detailView))
+for (const [label, pattern] of retiredAnalysisMarkers) {
+  assert(`retired analysis surface absent: ${label}`, !pattern.test(detailView))
 }
-
-// Group-level blocks: each wrapped in its own AnalysisDisclosure with a
-// static `label` matching the block's own title.
-const groupLevelChecks = [
-  ['reading group block: 脉络与重要词块 disclosure wraps 脉络 + 重要词块', /<AnalysisDisclosure label="脉络与重要词块">[\s\S]*?脉络：[\s\S]*?重要词块/],
-  ['cloze group block: 故事大意与串词成篇 disclosure wraps both fields', /<AnalysisDisclosure label="故事大意与串词成篇">[\s\S]*?故事大意：[\s\S]*?串词成篇/],
-  ['seven_choices group block: 文章主旨 disclosure', /<AnalysisDisclosure label="文章主旨">[\s\S]*?文章主旨：/],
-  ['grammar group block: 全文翻译 disclosure', /<AnalysisDisclosure label="全文翻译">[\s\S]*?全文翻译/],
-]
-
-for (const [name, pattern] of groupLevelChecks) {
-  assert(name, pattern.test(detailView))
-}
-
-// Owner-only blocks untouched by this cut — must NOT be wrapped in a new
-// disclosure (verify-list / compareBox / confidence stay as-is).
-assert(
-  'verify-list (AI 答案验证, owner-only) is not touched by AnalysisDisclosure',
-  !/<AnalysisDisclosure[^>]*>[\s\S]{0,600}verify-list/.test(detailView),
-)
 
 // ------------------------------------------------------------------ 3. useState guardrail re-asserted here too
 
-// figure-render cut (fig-token P0): the canonical version of this
-// guardrail (scripts/verify-classic-retire-2.mjs) allowed exactly ONE
-// internal useState — the detail-page figure manifest fetch. similar-
-// passages-entry (E6) added a SECOND deliberate exception (the「相似篇章」
-// fetch-on-expand panel state, two useState calls) — see that script's
-// comment for the full "why" and the App.tsx-out-of-scope reasoning.
-// Mirrored here so the two guardrails stay in sync. The old regex
-// (`\buseState\s*\(`) never matched a generic-typed call
-// (`useState<T>(...)`), so it was accidentally still "passing" without
-// re-asserting anything — fixed to count all useState calls.
+// The canonical version of this guardrail (scripts/verify-classic-retire-2.mjs)
+// is the source of truth for the exact count + which declarations make it
+// up (detail-page-redesign: 一张纸 load/expanded + similar-passages-entry
+// panel state, 4 total). Mirrored here so the two guardrails stay in sync.
 const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
 assert(
-  'QuestionGroupDetailView still has at most the figure-render + similar-passages-entry internal useState calls (guardrail not further relaxed by this cut)',
-  useStateCallCount === 3,
+  'QuestionGroupDetailView still has at most the detail-page-redesign + similar-passages-entry internal useState calls (guardrail not further relaxed by this cut)',
+  useStateCallCount === 4,
   `found ${useStateCallCount} useState call(s)`,
 )
 
