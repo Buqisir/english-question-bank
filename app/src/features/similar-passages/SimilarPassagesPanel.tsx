@@ -98,7 +98,7 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
                 const card = questionGroupById.get(result.groupId)
                 const isThin = !card
                 return (
-                  <div key={result.groupId} className="similar-rcard">
+                  <div key={result.groupId} className="similar-rcard" data-group-id={result.groupId}>
                     <div className="similar-rcard-body">
                       <div className="similar-rcard-title">{result.title}</div>
                       <div className="similar-rcard-source">{result.sourceLabel}</div>
