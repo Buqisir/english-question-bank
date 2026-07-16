@@ -36,6 +36,16 @@ export type SimilarPassagesRequestState =
   | { status: 'error'; message: string }
   | { status: 'ready'; data: SimilarPassagesResponse }
 
+/** Per-groupType one-line recipe description for the panel subtitle —
+ * 篇位 only ever scores for reading (server findSimilarPassages), so only
+ * reading's line mentions it (CR SW-4: no overclaiming for the other three).
+ * Purely presentational — the real ordering/scoring lives server-side. */
+export function similarPassagesRecipeSummary(groupType: string): string {
+  return groupType === 'reading'
+    ? '同话题硬门槛 · 同篇位优先 · 真题优先'
+    : '同话题硬门槛 · 真题优先 · 年份新优先'
+}
+
 export type SimilarPassagesPanelProps = {
   /** One-line recipe description shown next to the panel title. Purely
    * presentational — the real ordering/scoring lives server-side. */

@@ -56,6 +56,7 @@ import {
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
+  similarPassagesRecipeSummary,
   type SimilarPassagesRequestState,
 } from '../similar-passages/SimilarPassagesPanel'
 // PROTOTYPE(detail paper-peek): throwaway 试衣间，赢家折回后整删（含本 import）
@@ -77,12 +78,6 @@ type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
 const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
 
 // similar-passages-entry (E6): one-line, purely presentational recipe
-// summary for the shared candidate panel — real ordering/scoring lives
-// server-side (server/search/similarQuestions.mjs findSimilarPassages).
-// Same text for all four groupTypes: 篇位 only ever scores for reading, 真题
-// applies to all four, so this covers both without overclaiming per type.
-const SIMILAR_PASSAGES_RECIPE_SUMMARY = '同话题硬门槛 · 池内按篇位/真题优先排序'
-
 export type QuestionGroupDetailViewProps = {
   isOwnerView: boolean
   defaultAiModel: string
@@ -426,7 +421,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
 
           {similarPassagesOpen && similarPassagesRequest && (
             <SimilarPassagesPanel
-              recipeSummary={SIMILAR_PASSAGES_RECIPE_SUMMARY}
+              recipeSummary={similarPassagesRecipeSummary(selectedDetail.groupType)}
               request={similarPassagesRequest}
               questionGroupById={questionGroupById}
               onAdd={onAddSimilarToBasket}

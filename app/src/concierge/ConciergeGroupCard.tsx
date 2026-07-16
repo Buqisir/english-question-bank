@@ -18,6 +18,7 @@ import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 import {
   SimilarPassagesPanel,
+  similarPassagesRecipeSummary,
   type SimilarPassagesRequestState,
 } from '../features/similar-passages/SimilarPassagesPanel'
 
@@ -29,11 +30,6 @@ import {
 const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
 
 // similar-passages-entry (E6): one-line, purely presentational recipe
-// summary for the shared candidate panel — same text used by the detail-page
-// entry (QuestionGroupDetailView), see that file for the "why one string for
-// all four groupTypes" rationale.
-const SIMILAR_PASSAGES_RECIPE_SUMMARY = '同话题硬门槛 · 池内按篇位/真题优先排序'
-
 function isDisplayTag(tag: string | undefined): tag is string {
   const value = (tag || '').trim()
   if (!value) return false
@@ -246,7 +242,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
 
       {isSimilarPassagesOpen && similarPassagesRequest && (
         <SimilarPassagesPanel
-          recipeSummary={SIMILAR_PASSAGES_RECIPE_SUMMARY}
+          recipeSummary={similarPassagesRecipeSummary(group.groupType)}
           request={similarPassagesRequest}
           questionGroupById={questionGroupById}
           onAdd={onAdd}

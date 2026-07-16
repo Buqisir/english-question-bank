@@ -782,12 +782,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       return
     }
     similarDeepLinkAppliedRef.current = true
+    const deepLinkMode = SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions'
     handleSimilarCtaClick({
-      mode: SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions',
+      mode: deepLinkMode,
       questionId,
       groupId: targetGroupId,
       groupTitle: group.title,
-      questionNo: questionMeta.questionNo ?? null,
+      // 篇章模式种子=整个题组，不带题号（CR SW-2）
+      questionNo: deepLinkMode === 'passages' ? null : questionMeta.questionNo ?? null,
       groupTypeLabel: SIMILAR_GROUP_TYPE_LABEL[group.groupType] ?? group.groupType,
       recipeSummary: SIMILAR_RECIPE_SUMMARY[group.groupType] ?? '',
     })
@@ -1663,9 +1665,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               type="button"
               className="similar-btn similar-btn--primary"
               onClick={() => {
-                const questionNo = asset.content.questions[activeQuestionId]?.questionNo ?? null
+                const mode = SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions'
+                // 篇章模式种子=整个题组，不带题号（CR SW-2）
+                const questionNo = mode === 'passages' ? null : asset.content.questions[activeQuestionId]?.questionNo ?? null
                 handleSimilarCtaClick({
-                  mode: SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions',
+                  mode,
                   questionId: activeQuestionId,
                   groupId,
                   groupTitle: group.title,
