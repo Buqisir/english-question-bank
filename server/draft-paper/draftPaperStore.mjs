@@ -5,7 +5,7 @@
 // pdfBytes directly (see that function's own doc comment). readFileSync
 // stays; it is still used by inlineFigureImages below.
 import { readFileSync } from 'node:fs'
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { buildPrintHtml } from '../print-renderer.mjs'
 import { loadGroupAnalysisTexts } from './analysisText.mjs'
@@ -295,8 +295,16 @@ export function createDraftPaperStore({
   // toggle invalidates it — same bounded-to-8 LRU shape as draftPaginationCache.
   const REORDER_SUGGESTION_CACHE_MAX_ENTRIES = 8
   const reorderSuggestionCache = new Map()
-  function reorderSuggestionCacheKey(draftPaperId, printForm, signature) {
-    return `${draftPaperId}::${printForm}::${signature}`
+  // pagination-determinism-diag (2026-07-16): the layout signature covers every
+  // live-editable field that reaches the printed page, and renderPaginatedPaper
+  // was measured byte-deterministic (8× identical, cold+warm) — but the key
+  // additionally pins the ACTUAL break set the verdict was computed against, so
+  // if a same-signature render ever yields different breaks (engine bump, font
+  // environment change), the stale verdict self-heals by recompute instead of
+  // being served forever.
+  function reorderSuggestionCacheKey(draftPaperId, printForm, signature, pageBreakSuggestions) {
+    const breaksHash = createHash('md5').update(JSON.stringify(pageBreakSuggestions)).digest('hex').slice(0, 12)
+    return `${draftPaperId}::${printForm}::${signature}::${breaksHash}`
   }
   function reorderSuggestionCacheGet(key) {
     // has() 判存在性：null 是合法裁决（无候选可消断），必须命中缓存，
@@ -1277,7 +1285,7 @@ export function createDraftPaperStore({
     }
     const { draftPaper } = pagination
     const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
-    const cacheKey = reorderSuggestionCacheKey(draftPaperId, draftPaper.printForm, signature)
+    const cacheKey = reorderSuggestionCacheKey(draftPaperId, draftPaper.printForm, signature, pagination.pageBreakSuggestions)
     // reused 与分页端点同款语义（CR MF-1 的可断言面）：null 裁决同样必须命中。
     const cached = reorderSuggestionCacheGet(cacheKey)
     if (cached !== undefined) return { suggestion: cached, reused: true }
