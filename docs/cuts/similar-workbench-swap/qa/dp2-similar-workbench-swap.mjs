@@ -228,7 +228,7 @@ async function main() {
     const drawerHead = await page.locator('.draft-swap-drawer h4').textContent()
     ok('① drawer head names the seed group', (drawerHead || '').includes('相似篇章'), drawerHead)
     pass('① ⇄ 点击后 rail 原地切抽屉，候选卡渲染')
-    await page.screenshot({ path: path.join(qaDir, 'dp2-01-swap-drawer.png') })
+    if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01-swap-drawer.png') }) // 截图门控惯例见 dispatch-protocols.md
 
     // ── ⑤ already-in-draft candidate disabled ──
     const alreadyCard = page.locator(`.draft-swap-drawer .similar-rcard[data-group-id="${ALREADY_CANDIDATE}"]`)
@@ -267,6 +267,46 @@ async function main() {
       ok('② 撤销后复原：items 顺序与总数不变', afterUndo.items.map((i) => i.groupId).join(',') === [READING_GROUP, CLOZE_GROUP, ALREADY_CANDIDATE].join(','))
     }
     pass('② 撤销 → 复原（items 序 + 分页位断言）')
+
+    // ── ⑦ MF-1 回归锚：替换第二跳（移除原篇）失败 → 可见重复而非静默丢失 ──
+    // 先加后删的安全序契约（CR MF-1 修）：DELETE 被拦截强制失败时，卷面
+    // 呈现「候选+原篇相邻并存」的诚实半截态（items +1），原篇零丢失、
+    // 不设撤销快照。route 拦截只杀 DELETE，加入的 POST 照常放行。
+    {
+      await page.locator('.draft-group-actions').nth(0).getByRole('button', { name: '换一篇相似篇章' }).click()
+      await page.locator('.draft-swap-drawer').waitFor({ timeout: 15_000 })
+      const card7 = page.locator(`.draft-swap-drawer .similar-rcard[data-group-id="${REPLACE_CANDIDATE}"]`)
+      await card7.waitFor({ timeout: 15_000 })
+      await page.route('**/api/draft-papers/**/items/**', (route) =>
+        route.request().method() === 'DELETE' ? route.abort() : route.fallback(),
+      )
+      await card7.getByRole('button', { name: '⇄ 替换这篇' }).click()
+      // saveError 呈现面 = 头行「⋯」按钮的 aria-label/title（保存态收
+      // 「⋯」是 header-unify 拍板形态），不在 body 正文——按属性断言。
+      await page.waitForFunction(
+        () => Boolean(document.querySelector('[aria-label*="原篇仍在卷中"], [title*="原篇仍在卷中"]')),
+        { timeout: 15_000 },
+      )
+      pass('⑦ 半截态错误文案如实（含「原篇仍在卷中，可手动移除」指引）')
+      const afterPartial = await getCurrentDraft(cookieHeader)
+      ok('⑦ 卷面呈现可见重复（items +1，非丢失）', afterPartial.items.length === 4, String(afterPartial.items.length))
+      ok('⑦ 候选已入槽位 0', afterPartial.items[0].groupId === REPLACE_CANDIDATE)
+      ok('⑦ 原篇零丢失（仍在卷中）', afterPartial.items.some((i) => i.groupId === READING_GROUP))
+      ok('⑦ 半截态不设撤销快照（无「已替换这篇」toast）',
+        !((await page.locator('.draft-undo-toast').allTextContents()).some((t) => t.includes('已替换这篇'))))
+      await page.unroute('**/api/draft-papers/**/items/**')
+      // 自愈路径 = 手动移除重复项（走真 API 清理，恢复 ⑥ 所需的原三项态）
+      const dupItem = afterPartial.items.find((i) => i.groupId === REPLACE_CANDIDATE)
+      const cleanupResp = await fetch(
+        `http://127.0.0.1:${apiPort}/api/draft-papers/${encodeURIComponent(afterPartial.id)}/items/${encodeURIComponent(dupItem.id)}`,
+        { method: 'DELETE', headers: { cookie: cookieHeader } },
+      )
+      ok('⑦ 自愈：手动移除重复项成功（回到原三项态）', cleanupResp.ok)
+      await page.reload({ waitUntil: 'networkidle' })
+      await page.waitForFunction(() => document.querySelectorAll('.draft-group-actions').length === 3, { timeout: 15_000 })
+      const afterHeal = await getCurrentDraft(cookieHeader)
+      ok('⑦ 自愈后 items 序恢复原状', afterHeal.items.map((i) => i.groupId).join(',') === [READING_GROUP, CLOZE_GROUP, ALREADY_CANDIDATE].join(','))
+    }
 
     // ── ⑥ 替换后做一次其他变更 → 替换撤销快照按纪律失效 ──
     await page.locator('.draft-group-actions').nth(0).getByRole('button', { name: '换一篇相似篇章' }).click()

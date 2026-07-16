@@ -1035,22 +1035,44 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSaveStatus('saving')
     setSaveError('')
     try {
-      const deleteResult = await deleteDraftPaperItem(draftPaper.id, swapSeedItem.id)
+      // CR MF-1：先加后删（两跳非原子的安全序）——加入失败=卷面零变化可
+      // 直接重试；加入成功而删除失败=可见的相邻重复（老师手动移除即自愈），
+      // 绝不静默丢种子。旧的先删后加序在「删成功→加失败」时静默丢种子题、
+      // 且重试因删已删项必然报错，只能刷新才暴露丢失。
       const inserted = await addGroupToDraftPaper(draftPaper.id, candidateGroupId, {
         insertIndex: seedIndex,
         pageBreakBefore,
       })
-      setDraftPaper(inserted)
-      setTitleDraft(inserted.title)
+      let deleteResult
+      try {
+        deleteResult = await deleteDraftPaperItem(draftPaper.id, swapSeedItem.id)
+      } catch (error) {
+        // 半截态如实入面：新篇已在种子旁，种子未删——呈现重复而非丢失，
+        // 不设撤销快照（状态不是一次完整替换）。
+        setDraftPaper(inserted)
+        setTitleDraft(inserted.title)
+        setSaveStatus('error')
+        setSaveError(describeError('替换第二步（移除原篇）', error) + '——新篇已加入，原篇仍在卷中，可手动移除原篇完成替换')
+        onDraftChanged?.()
+        setSwapSeedItemId(null)
+        setSwapRequest(null)
+        return
+      }
+      setDraftPaper(deleteResult.draftPaper)
+      setTitleDraft(deleteResult.draftPaper.title)
       setSaveStatus('saved')
       onDraftChanged?.()
       const addedItem = inserted.items.find((entry) => entry.groupId === candidateGroupId)
       if (addedItem) {
         setReplaceUndoSnapshot({
+          // 撤销坐标用「操作前」的种子 orderIndex（1-based，restore 端点
+          // 语义，store 内 -1 换算 insertIndex）：先加后删序下
+          // deleteResult.removed.orderIndex 已被插入推后一位，按它恢复会
+          // 错一格——撤销路径先删新篇再复原种子，正确落点是操作前原位。
           removed: {
             groupId: deleteResult.removed.groupId,
-            orderIndex: deleteResult.removed.orderIndex,
-            pageBreakBefore: deleteResult.removed.pageBreakBefore,
+            orderIndex: swapSeedItem.orderIndex,
+            pageBreakBefore,
           },
           addedItemId: addedItem.id,
         })
