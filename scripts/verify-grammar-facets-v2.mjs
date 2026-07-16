@@ -19,6 +19,7 @@
  *      的 19-route 列表间接佐证——该路由已从列表移除）
  */
 
+import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -210,33 +211,32 @@ const OLD_KEY_ALLOWLIST_SUFFIXES = [
 
 function grepRepoForOldKeys() {
   const hits = []
-  const skipDirs = new Set(['node_modules', '.git', 'dist', 'build'])
-  function walk(dir) {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      if (entry.isDirectory()) {
-        if (skipDirs.has(entry.name)) continue
-        walk(path.join(dir, entry.name))
-        continue
-      }
-      if (!/\.(mjs|ts|tsx|json|md)$/.test(entry.name)) continue
-      const full = path.join(dir, entry.name)
-      const rel = path.relative(rootDir, full)
-      if (OLD_KEY_ALLOWLIST_SUFFIXES.some((s) => rel.includes(s))) continue
-      if (rel.endsWith('.bak')) continue
-      if (rel === 'scripts/verify-grammar-facets-v2.mjs') continue // this file's own pattern literals
-      if (rel === 'scripts/grammar-facets-v2-migrate.mjs') continue // migrate script's own renamed-away-from literals
-      let content
-      try {
-        content = readFileSync(full, 'utf8')
-      } catch {
-        continue
-      }
-      for (const pattern of OLD_KEY_PATTERNS) {
-        if (pattern.test(content)) hits.push({ rel, pattern: pattern.source })
-      }
+  // 零残留的定义域 = git 跟踪文件（"仓库里零残留"）。递归扫盘会把
+  // gitignored 本地残料（如 .scratch/ 的历史修卷备份）也算进契约面，
+  // 产生环境相关假红——worktree 绿 / 主树红（2026-07-15 D1 收口实撞）。
+  const tracked = execSync('git ls-files', {
+    cwd: rootDir,
+    encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
+  })
+    .split('\n')
+    .filter(Boolean)
+  for (const rel of tracked) {
+    if (!/\.(mjs|ts|tsx|json|md)$/.test(rel)) continue
+    if (OLD_KEY_ALLOWLIST_SUFFIXES.some((s) => rel.includes(s))) continue
+    if (rel.endsWith('.bak')) continue
+    if (rel === 'scripts/verify-grammar-facets-v2.mjs') continue // this file's own pattern literals
+    if (rel === 'scripts/grammar-facets-v2-migrate.mjs') continue // migrate script's own renamed-away-from literals
+    let content
+    try {
+      content = readFileSync(path.join(rootDir, rel), 'utf8')
+    } catch {
+      continue
+    }
+    for (const pattern of OLD_KEY_PATTERNS) {
+      if (pattern.test(content)) hits.push({ rel, pattern: pattern.source })
     }
   }
-  walk(rootDir)
   return hits
 }
 
