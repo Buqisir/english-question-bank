@@ -1,8 +1,10 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-14（workbench-header-unify + design-canon 双刀
-收官，**生产 e728b30**；同日 home-blank/draft-docx/fixture-move 三刀
-闭环、假红根修、R2 演练、三址调研落宪——单日六刀）
+Last updated: 2026-07-15（grammar-facets-v2(D1) + similar-v2-engine(E5)
+双刀收官合入 main：语法填空解析 schema v2 落库 + I16·C sidecar 退役 +
+相似引擎 v2 重铸，**部署门：随 E6/E7 同批**——完形/七选五「配相似」CTA
+在新端点语义下是死路，E6 改指前不部署。同日 paper-browse 目录 rail
+分段面板重铸上线，**生产 6b76ec5**）
 
 ## 现在是什么
 
